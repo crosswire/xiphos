@@ -91,7 +91,7 @@ GtkWidget *gui_create_about_sword(void)
         GtkWidget *label95;
         GtkWidget *href1;
         GtkWidget *dialog_action_area7;
-        GtkWidget *btnabout_swordOK;
+        GtkWidget *button_ok;
         gchar *about = _(
              "The SWORD Project is an effort to create an ever expanding "
              "software package for research and study of God and His Word. "
@@ -133,7 +133,6 @@ GtkWidget *gui_create_about_sword(void)
                                  (GtkDestroyNotify) gtk_widget_unref);
         gtk_widget_show(pixmap1);
         gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 0);
-        gtk_misc_set_padding(GTK_MISC(pixmap1), 4, 4);
 
         version_label = gtk_label_new("Sword-");
         gtk_widget_ref(version_label);
@@ -166,9 +165,10 @@ GtkWidget *gui_create_about_sword(void)
         gtk_container_add(GTK_CONTAINER(scrolledwindow26),
                           txtabout_sword);
         gtk_widget_set_usize(txtabout_sword, -2, 133);
+	gtk_text_set_word_wrap(GTK_TEXT(txtabout_sword), TRUE);	
         gtk_text_insert(GTK_TEXT(txtabout_sword), NULL, NULL, NULL,
                         about, strlen(about));
-
+        
         label95 =
             gtk_label_new(_(
                     "Modules can be downloaded from the Sword Project ")
@@ -201,16 +201,16 @@ GtkWidget *gui_create_about_sword(void)
 
         gnome_dialog_append_button(GNOME_DIALOG(about_sword),
                                    GNOME_STOCK_BUTTON_OK);
-        btnabout_swordOK =
+        button_ok =
             g_list_last(GNOME_DIALOG(about_sword)->buttons)->data;
-        gtk_widget_ref(btnabout_swordOK);
+        gtk_widget_ref(button_ok);
         gtk_object_set_data_full(GTK_OBJECT(about_sword),
-                                 "btnabout_swordOK", btnabout_swordOK,
+                                 "button_ok", button_ok,
                                  (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(btnabout_swordOK);
-        GTK_WIDGET_SET_FLAGS(btnabout_swordOK, GTK_CAN_DEFAULT);
+        gtk_widget_show(button_ok);
+        GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
 
-        gtk_signal_connect(GTK_OBJECT(about_sword_ok), "clicked",
+        gtk_signal_connect(GTK_OBJECT(button_ok), "clicked",
                            GTK_SIGNAL_FUNC
                            (about_sword_ok), NULL);
 

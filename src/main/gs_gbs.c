@@ -694,7 +694,7 @@ void gui_setupGBS(SETTINGS * s)
 	bookname = (gchar *) tmp->data;
 	gbs = g_new(GBS_DATA, 1);
 	gbs->bookName = bookname;
-	gbs->bookDescription = backend_getmodDescriptionSWORD(bookname);
+	gbs->bookDescription = backend_get_module_description(bookname);
 	gbs->searchstring = NULL;
 	gbs->booknum = count;
 	createGBS_Pane(bookname, s, count, gbs);
