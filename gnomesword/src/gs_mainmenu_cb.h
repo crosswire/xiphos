@@ -66,6 +66,8 @@ extern "C" {
 				 	gpointer user_data);
 	void on_morphs_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
+	/*** toogle cantillation marks in main text window ***/
+	void on_cantillation_marks_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 #ifdef __cplusplus
 }
