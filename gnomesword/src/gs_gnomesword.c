@@ -147,8 +147,6 @@ initGnomeSword(SETTINGS *s,
 			sbbiblemods,
 			sbcommods,
 			sbdictmods,
-			sbbookmods,
-			percommods,
 			options);
 	additemstooptionsmenu(options,s);			
 	/* add pages to module notebooks */

@@ -112,8 +112,8 @@ static void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
 /*** bookmark tree popup menu items  ***/
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New SubGroup"),
-				  N_("Add new SubGroup to selected group"),
-				  on_new_activate, NULL),
+	  N_("Add new SubGroup to selected group"),
+	  on_new_activate, NULL),
 	{
 	 GNOME_APP_UI_ITEM, N_("Add New Group"),
 	 N_("Add a new root group and file"),
@@ -161,6 +161,31 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 };
 
 
+
+static void addnewgrouptoMenus(GtkWidget *pmMenu, 
+				GtkCTreeNode *node, 
+				gchar *str) 
+{
+	GtkWidget *menu;
+	GtkWidget *item;
+	
+	menu = lookup_widget(pmMenu,"add_bookmark_menu");
+	if (!node)
+    			return;
+	
+	item = gtk_menu_item_new_with_label(str);
+	gtk_widget_ref(item);
+	gtk_object_set_data_full(GTK_OBJECT(pmMenu), "item",
+				 item,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(item);	
+	gtk_signal_connect(GTK_OBJECT(item), "activate",
+			   GTK_SIGNAL_FUNC
+			   (on_add_bookmark_activate),
+			   (GtkCTreeNode *)node);
+	gtk_container_add(GTK_CONTAINER(menu), item);	
+}
 
 /*
  *****************************************************************************
@@ -308,18 +333,18 @@ static void remove_selection(GtkWidget * widget, GtkCTree * ctree)
 /*
  * called gnome_request_dialog to return information from user
  */
-static void stringCallback(gchar * string, gpointer data)
+static void stringCallback(gchar * str, gpointer data)
 {
 	gchar *text[3];
 	gchar buf[80], buf2[80];
 	gint length, i = 0, j = 0;
 
-	if ((string == NULL) || (strlen(string) == 0)) {
+	if ((str == NULL) || (strlen(str) == 0)) {
 		(gchar *) data = NULL;
 	} else {
 		switch (GPOINTER_TO_INT(data)) {
 		case 0:
-			text[0] = string;
+			text[0] = str;
 			text[1] = "GROUP";
 			text[2] = "GROUP";
 			gtk_ctree_insert_node(p_bmtree->ctree,
@@ -328,8 +353,8 @@ static void stringCallback(gchar * string, gpointer data)
 					      mask2, FALSE, FALSE);
 			break;
 		case 1:
-			sprintf(buf, "%s", string);	  /*** make file name ***/
-			text[0] = string;
+			sprintf(buf, "%s", str);	  /*** make file name ***/
+			text[0] = str;
 			length = strlen(buf);
 			if (length > 29)
 				length = 29;
@@ -350,6 +375,9 @@ static void stringCallback(gchar * string, gpointer data)
 						  NULL, text, 3, pixmap1,
 						  mask1, pixmap2, mask2,
 						  FALSE, FALSE);
+			addnewgrouptoMenus(settings->menuBible, newrootnode, str);
+			addnewgrouptoMenus(settings->menuhtmlcom, newrootnode, str);
+			addnewgrouptoMenus(settings->menuDict, newrootnode, str);
 			break;
 		}
 	}
@@ -452,7 +480,7 @@ static void on_btnEBMcancel_clicked(GtkButton * button, gpointer user_data)
  */
 static void 
 on_add_bookmark_activate(GtkMenuItem * menuitem, 
-					gpointer user_data)
+				gpointer user_data)
 {
 	GtkCTreeNode *node;
 	gchar *modName, *key;
@@ -954,3 +982,5 @@ create_addBookmarkMenuBM(GtkWidget *menu,
 		gtk_container_add(GTK_CONTAINER(bookmark_menu_widget), item);		
 	}	
 }
+
+/******  end of file    ******/
