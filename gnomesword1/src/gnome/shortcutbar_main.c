@@ -95,7 +95,7 @@ static void remove_all_items(gint group_num);
  * Synopsis
  *   #include "shortcutbar_main.h"
  *
- *   void showSBGroup(SETTINGS * s, gint groupnum)	
+ *   void showSBGroup(gint groupnum)	
  *
  * Description
  *   display shortcut bar group - display shortbut bar if not showing
@@ -104,23 +104,23 @@ static void remove_all_items(gint group_num);
  *   void
  */
 
-void showSBGroup(SETTINGS * s, gint groupnum)
+void showSBGroup(gint groupnum)
 {
 	EShortcutBar *bar1;
-	if (!s->showshortcutbar) {
+	if (!settings.showshortcutbar) {
 		gint biblepanesize;
 		biblepanesize =
 		    (settings.gs_width -
 		     settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(s->epaned),
-				     s->shortcutbar_width);
+		e_paned_set_position(E_PANED(settings.epaned),
+				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
-				      (s->app, "hpaned1")),
+				      (settings.app, "hpaned1")),
 				     biblepanesize);
-		s->showshortcutbar = TRUE;
+		settings.showshortcutbar = TRUE;
 	}
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
+	bar1 = E_SHORTCUT_BAR(settings.shortcut_bar);
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 					  groupnum, TRUE);
 }
@@ -132,7 +132,7 @@ void showSBGroup(SETTINGS * s, gint groupnum)
  * Synopsis
  *   #include "shortcutbar_main.h"
  *
- *   void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)	
+ *   void changegroupnameSB(gchar * groupName, gint groupNum)	
  *
  * Description
  *   change group name for group number (used to change viewer name)
@@ -141,12 +141,12 @@ void showSBGroup(SETTINGS * s, gint groupnum)
  *   void
  */
 
-void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)
+void changegroupnameSB(gchar * groupName, gint groupNum)
 {
 	GtkWidget *label;
 	EShortcutBar *bar1;
 
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
+	bar1 = E_SHORTCUT_BAR(settings.shortcut_bar);
 	//g_warning(groupName);
 	label = gtk_label_new(groupName);
 	gtk_widget_show(label);
@@ -1099,7 +1099,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
  * Synopsis
  *   #include "shortcutbar_main.h"
  *
- *   void gui_setup_shortcut_bar(SETTINGS * s)
+ *   void gui_setup_shortcut_bar(void)
  *
  * Description
  *   setup the main shortcut bar
@@ -1108,7 +1108,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
  *   void
  */
 
-void gui_setup_shortcut_bar(SETTINGS * s)
+void gui_setup_shortcut_bar(void)
 {
 	GList *tmp;
 	GtkWidget
@@ -1130,14 +1130,14 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 	shortcut_bar = e_shortcut_bar_new();
 	e_shortcut_bar_set_model(E_SHORTCUT_BAR(shortcut_bar),
 				 shortcut_model);
-	if(s->showshortcutbar)
+	if(settings.showshortcutbar)
 		gtk_widget_show(shortcut_bar);
 	else
 		gtk_widget_hide(shortcut_bar);
 
-	s->shortcut_bar = shortcut_bar;
+	settings.shortcut_bar = shortcut_bar;
 
-	e_paned_pack1(E_PANED(s->epaned), shortcut_bar, FALSE, TRUE);
+	e_paned_pack1(E_PANED(settings.epaned), shortcut_bar, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
 	/*
 	 * end shortcut bar 
@@ -1145,7 +1145,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 	
 
 	tmp = NULL;
-	if (s->showfavoritesgroup) {
+	if (settings.showfavoritesgroup) {
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Favorites"));
@@ -1215,7 +1215,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 	g_list_free(tmp);
 	tmp = NULL;
 	
-	if (s->showtextgroup) {
+	if (settings.showtextgroup) {
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Bible Text"));
@@ -1241,7 +1241,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
-	if (s->showcomgroup) {
+	if (settings.showcomgroup) {
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Commentaries"));
@@ -1267,7 +1267,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
-	if (s->showdictgroup) {
+	if (settings.showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 e_utf8_from_locale_string(_
@@ -1294,8 +1294,9 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
+
 	/* GBS */
-	if (s->showbookgroup) {
+	if (settings.showbookgroup) {
 		groupnum8 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Book"));
@@ -1323,7 +1324,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 	}
 	g_list_free(tmp);
 
-	if (s->showhistorygroup) {
+	if (settings.showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("History"));
@@ -1332,7 +1333,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 	/*** add bookmark group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow1", scrolledwindow1,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1340,7 +1341,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 
 	ctree = gtk_ctree_new(3, 0);
 	gtk_widget_ref(ctree);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "ctree",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "ctree",
 				 ctree, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(ctree);
@@ -1349,11 +1350,11 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 1, 80);
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 2, 80);
 
-	s->ctree_widget = ctree;
+	settings.ctree_widget = ctree;
 
 	button = gtk_button_new_with_label(_("Bookmarks"));
 	gtk_widget_ref(button);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "button",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "button",
 				 button, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(button);
@@ -1365,7 +1366,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "scrolledwindow2", scrolledwindow2,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1373,7 +1374,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 
 	vpSearch = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpSearch);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vpSearch",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vpSearch",
 				 vpSearch, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vpSearch);
@@ -1381,29 +1382,31 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 
 	searchbutton = gtk_button_new_with_label(_("Search"));
 	gtk_widget_ref(searchbutton);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
+	gtk_object_set_data_full(GTK_OBJECT(settings.app),
 				 "searchbutton", searchbutton,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(searchbutton);
 
-	gui_create_shortcutbar_search(vpSearch, &settings);
+	gui_create_shortcutbar_search(vpSearch);
 
 	groupnum6 =
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 				  scrolledwindow2, searchbutton, -1);
-	s->searchbargroup = groupnum6;
-/*************************************************************************************/
+	settings.searchbargroup = groupnum6;
+
+	/*********************************************************************/
+
 	vboxVL = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxVL);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxVL",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vboxVL",
 				 vboxVL, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vboxVL);
 
 	vpVL = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpVL);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vpVL", vpVL,
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vpVL", vpVL,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vpVL);
@@ -1411,7 +1414,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
 
 	VLbutton = gtk_button_new_with_label(_("Verse List"));
 	gtk_widget_ref(VLbutton);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "VLbutton",
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "VLbutton",
 				 VLbutton, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(VLbutton);
@@ -1458,7 +1461,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
  * Synopsis
  *   #include "shortcutbar_main.h"
  *
- *   void gui_update_shortcut_bar(SETTINGS * s)	
+ *   void gui_update_shortcut_bar(void)	
  *
  * Description
  *   called by preferences dialog to update user choices
@@ -1467,7 +1470,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
  *   void
  */
 
-void gui_update_shortcut_bar(SETTINGS * s)
+void gui_update_shortcut_bar(void)
 {
 	gint count, i, large_icons, current_group, sbtype = 0;
 	GList *tmp;
@@ -1496,7 +1499,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
 					      (shortcut_model), i);
 	}
 	tmp = NULL;
-	if (s->showfavoritesgroup) {
+	if (settings.showfavoritesgroup) {
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Favorites"));
@@ -1551,7 +1554,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
-	if (s->showtextgroup) {
+	if (settings.showtextgroup) {
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Bible Text"));
@@ -1577,7 +1580,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
-	if (s->showcomgroup) {
+	if (settings.showcomgroup) {
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Commentaries"));
@@ -1603,7 +1606,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
 			tmp = g_list_next(tmp);
 		}
 	}
-	if (s->showdictgroup) {
+	if (settings.showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 e_utf8_from_locale_string(_
@@ -1632,7 +1635,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
 	}
 
 	/* GBS */
-	if (s->showbookgroup) {
+	if (settings.showbookgroup) {
 		groupnum8 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Book"));
@@ -1659,7 +1662,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
 		}
 	}
 
-	if (s->showhistorygroup) {
+	if (settings.showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("History"));

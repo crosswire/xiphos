@@ -168,10 +168,15 @@ static void applyoptions(SETTINGS * s)
 				   s->comm_tabs);
 
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
-	if (updatehtml)
-		display_new_font_color_and_size(s);
-	if (updateSB)
-		gui_update_shortcut_bar(s);
+
+	if (updatehtml) {
+		display_new_font_color_and_size();
+	}
+	
+	if (updateSB) {
+		gui_update_shortcut_bar();
+	}
+	
 	updatehtml = FALSE;
 	updateSB = FALSE;
 }
@@ -183,7 +188,7 @@ static void applyoptions(SETTINGS * s)
  * Synopsis
  *   #include "preferences_dialog.h"
  *
- *   void on_dock_clicked(GtkButton * button, SETTINGS * s)	
+ *   void on_dock_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   attach or detach shortcut bar
@@ -192,9 +197,9 @@ static void applyoptions(SETTINGS * s)
  *   void
  */
 
-static void on_dock_clicked(GtkButton * button, SETTINGS * s)
+static void on_dock_clicked(GtkButton *button, gpointer user_data)
 {
-	gui_attach_detach_shortcutbar(s);
+	gui_attach_detach_shortcutbar();
 }
 
 /******************************************************************************
@@ -2761,7 +2766,7 @@ static GtkWidget *gui_create_preferences_dialog(SETTINGS * s,
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));			   
 	gtk_signal_connect(GTK_OBJECT(checkbuttonSBDock), "toggled",
-			   GTK_SIGNAL_FUNC(on_dock_clicked), s);			   
+			   GTK_SIGNAL_FUNC(on_dock_clicked), NULL);			   
 	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
