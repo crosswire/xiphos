@@ -133,8 +133,6 @@ void update_statusbar(GSHTMLEditorControlData * ecd);
 GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s);
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
 void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd);
-GtkWidget *gui_create_html_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
-			 SETTINGS * s, GSHTMLEditorControlData * necd);
 void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title);
 
 #endif	/* ___EDITOR_H_ */

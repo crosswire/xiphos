@@ -29,13 +29,13 @@
 #include "_percomm.h"
 #include "_editor.h"
 #include "module_options.h"
+#include "info_box.h"
 
 
 /* main */
 #include "percomm.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
-#include "gs_info_box.h"
 #include "support.h"
 
 /* backend */
@@ -43,20 +43,16 @@
 #include "sword.h"
 
 /******************************************************************************
- * externs
- */
-
-/******************************************************************************
  * globals to this file only 
  */ 
 static GList *percomm_list;
-static gboolean display_change = TRUE;
 static GString *gstr;
 
 /******************************************************************************
  * globals
  */ 
 PC_DATA *cur_p;
+gboolean percomm_display_change = TRUE;
 
 /******************************************************************************
  * Name
@@ -196,123 +192,6 @@ void delete_percomm_note(void)
 	}
 }
 
-/******************************************************************************
- * Name
- *  on_notebook_percomm_switch_page
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   void on_notebook_percomm_switch_page(GtkNotebook * notebook,
- *				  GtkNotebookPage * page,
- *				  gint page_num, GList * pcl)	
- *
- * Description
- *   sets gui to new sword module
- *
- * Return value
- *   void
- */
- 
-void on_notebook_percomm_switch_page(GtkNotebook * notebook,
-				     GtkNotebookPage * page,
-				     gint page_num, GList * pcl)
-{
-	PC_DATA *p, *p_last;
-	/*
-	 * get data structure for new module 
-	 */
-	p_last = (PC_DATA *) g_list_nth_data(pcl, 
-				settings.percomm_last_page);
-	p = (PC_DATA *) g_list_nth_data(pcl, page_num);
-	/*
-	 * do work that's non gui
-	 */
-	percomm_page_changed(page_num, p);
-	/*
-	 * keep showtabs menu item current 
-	 */
-	//GTK_CHECK_MENU_ITEM(p->showtabs)->active = settings.percomm_tabs;
-
-	/*
-	 * set edit mode
-	 */
-	if(GTK_CHECK_MENU_ITEM(p_last->ec->editnote)->active) {
-		gtk_widget_hide(p_last->ec->frame_toolbar);
-		gtk_widget_hide(p_last->ec->handlebox_toolbar);
-	}
-	if(GTK_CHECK_MENU_ITEM(p->ec->editnote)->active){
-		gtk_widget_show(p->ec->frame_toolbar);
-		gtk_widget_show(p->ec->handlebox_toolbar);
-	}
-	settings.html_percomm = p->ec->htmlwidget;
-	
-	GTK_CHECK_MENU_ITEM(p->ec->show_tabs)->active = settings.percomm_tabs;
-	tabs(settings.percomm_tabs);
-}
-
-/******************************************************************************
- * Name
- *  tabs
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   void tabs(gboolean choice)
- *
- * Description
- *    show/hide percomm notebook tabs
- *
- * Return value
- *   void
- */ 
- 
-void tabs(gboolean choice)
-{
-	settings.percomm_tabs = choice;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_percomm),
-				   settings.percomm_tabs);	
-	gui_set_percomm_frame_label(cur_p->ec->frame, cur_p->mod_name);
-}
-
-/******************************************************************************
- * Name
- *  percomm_page_changed
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   void percomm_page_changed(gint page_num, PC_DATA *p)	
- *
- * Description
- *    take care of non gui stuff on notebook page change
- *
- * Return value
- *   void
- */
-
-void percomm_page_changed(gint page_num, PC_DATA * p)
-{
-	/*
-	 * remember new module name
-	 */
-	strcpy(settings.personalcommentsmod, p->mod_name);
-	/*
-	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
-	 */
-	cur_p = p;
-	/*
-	 * remember page number
-	 */
-	settings.percomm_last_page = page_num;
-	/*
-	 * display new module with current verse
-	 */
-	if (display_change) {
-		set_percomm_page_and_key(page_num,
-					 settings.currentverse);
-	}
-}
 
 /******************************************************************************
  * Name
@@ -336,14 +215,14 @@ void set_percomm_page_and_key(gint page_num, gchar * key)
 	 * we don't want backend_dispaly_percomm to be
 	 * called by on_notebook_percomm_switch_page
 	 */
-	display_change = FALSE;
+	percomm_display_change = FALSE;
 	if (settings.text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (settings.notebook_percomm),
 				      page_num);
 	}
 	backend_display_percomm(page_num, key);
-	display_change = TRUE;
+	percomm_display_change = TRUE;
 }
 
 /******************************************************************************

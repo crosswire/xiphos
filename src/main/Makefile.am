@@ -36,8 +36,6 @@ COMMON_SOURCE =  \
     gs_history.h \
     gs_html.c \
     gs_html.h \
-    gs_info_box.c \
-    gs_info_box.h\
     gs_interlinear.c \
     gs_interlinear.h \
     gs_menu.c \
