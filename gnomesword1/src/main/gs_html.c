@@ -177,7 +177,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			tmpbuf[i + 1] = '\0';
 			++url;
 		}
-		showmoduleinfoSWORD(tmpbuf, FALSE);
+		display_about_module_dialog(tmpbuf, FALSE);
 
 	}
 	/*** thml verse reference ***/
