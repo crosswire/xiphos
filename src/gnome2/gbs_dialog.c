@@ -503,10 +503,9 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 				gbs_treekey_has_children(g->offset)) {
 				add_children_to_tree(g, selected, g->offset);
 			}
-			gbs_display(g, offset, tree_level,  
-					gtk_tree_model_iter_has_child(
-						model,
-                                                &selected));
+			g->is_leaf = gtk_tree_model_iter_has_child(model,
+                                                &selected);
+			gbs_display(g, tree_level);
 			g_free(name);
 			g_free(book);
 			g_free(offset);
@@ -727,6 +726,7 @@ void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key)
  */
 static void set_new_globals(GLOBAL_OPS * gops)
 {
+	gops->module_type = 3;
 	gops->words_in_red = TRUE;
 	gops->strongs = TRUE;
 	gops->morphs = TRUE;
@@ -766,8 +766,8 @@ void gui_open_gbs_dialog(gchar * mod_name)
 
 	create_pixbufs();
 	dlg = g_new0(GBS_DATA, 1);
-	dlg->bgo = gui_new_globals();
-	set_new_globals(dlg->bgo);
+	dlg->ops = gui_new_globals();
+	set_new_globals(dlg->ops);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;
 	dlg->is_dialog = TRUE;
@@ -848,6 +848,7 @@ void gui_shutdown_gbs_dialog(void)
 		 */
 		if (dlg->mod_name)
 			g_free(dlg->mod_name);
+		g_free(dlg->ops);
 		g_free((GBS_DATA *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
 	}

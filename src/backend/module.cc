@@ -1025,7 +1025,6 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 		break;
 	case GBS_MGR:
 		mod = sw.gbs_mgr->Modules[module_name];
-		if_true = true;
 		break;
 	case MAIN_MGR:
 		mod = sw.main_mgr->Modules[module_name];

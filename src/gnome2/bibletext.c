@@ -633,6 +633,38 @@ void gui_set_text_frame_label(TEXT_DATA * t)
 		gtk_frame_set_label(GTK_FRAME(t->frame), t->mod_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *  gui_update_text_global_ops
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void gui_update_text_global_ops(gchar * option, gboolean choice)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_update_text_global_ops(gchar * option, gboolean choice)
+{
+	save_module_options(cur_t->mod_name, option, 
+				    choice);
+	if(!cur_t->is_rtol) 
+		chapter_display(cur_t->html, 
+			cur_t->mod_name,
+			cur_t->ops, cur_t->key, TRUE);
+	else
+		chapter_display_textview(cur_t->text, 
+			cur_t->mod_name,
+			cur_t->ops, cur_t->key, TRUE);
+}
+
+
 /******************************************************************************
  * Name
  *  gui_set_text_page_and_key
@@ -674,11 +706,11 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 		if (!cur_t->is_rtol)
 			chapter_display(cur_t->html,
 					cur_t->mod_name,
-					cur_t->tgs, key, TRUE);
+					cur_t->ops, key, TRUE);
 		else
 			chapter_display_textview(cur_t->text,
 						cur_t->mod_name,
-						cur_t->tgs, key, TRUE);
+						cur_t->ops, key, TRUE);
 	}
 	display_change = TRUE;
 	cur_t->key = settings.currentverse;
@@ -706,12 +738,12 @@ void gui_display_text(gchar * key)
 		if (!cur_t->is_rtol)
 			chapter_display(cur_t->html,
 					cur_t->mod_name,
-					cur_t->tgs, key, TRUE);
+					cur_t->ops, key, TRUE);
 		else {
 			/* right to left text */
 			chapter_display_textview(cur_t->text,
 				cur_t->mod_name,
-				cur_t->tgs, key, TRUE);
+				cur_t->ops, key, TRUE);
 		}
 			
 	else if (cur_t->cipher_key) {
@@ -795,6 +827,7 @@ static void add_vbox_to_notebook(TEXT_DATA * t)
 					 (gchar *) t->mod_name);
 }
 
+
 /******************************************************************************
  * Name
  *  gui_setup_text
@@ -824,20 +857,8 @@ void gui_setup_text(GList * mods)
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
 		t = g_new0(TEXT_DATA, 1);
-		t->tgs = g_new0(TEXT_GLOBALS, 1);
-		t->tgs->words_in_red = FALSE;
-		t->tgs->strongs = FALSE;
-		t->tgs->morphs = FALSE;
-		t->tgs->footnotes = FALSE;
-		t->tgs->greekaccents = FALSE;
-		t->tgs->lemmas = FALSE;
-		t->tgs->scripturerefs = FALSE;
-		t->tgs->hebrewpoints = FALSE;
-		t->tgs->hebrewcant = FALSE;
-		t->tgs->headings = FALSE;
-		t->tgs->variants_all = FALSE;
-		t->tgs->variants_primary = FALSE;
-		t->tgs->variants_secondary = FALSE;
+		t->ops = gui_new_globals();
+		//set_new_globals(t->ops);
 		t->mod_name = (gchar *) tmp->data;
 		t->mod_num = count;
 		t->search_string = NULL;
@@ -915,7 +936,7 @@ void gui_shutdown_text(void)
 		/* 
 		 * free global options 
 		 */
-		g_free(t->tgs);
+		g_free(t->ops);
 		/* 
 		 * free each TEXT_DATA item created 
 		 */
