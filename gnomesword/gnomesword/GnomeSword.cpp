@@ -32,6 +32,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <gbfhtml.h>
+#include <plainhtml.h>
 //#include <thmlgbf.h>
 #include <regex.h>
 #include <stdio.h>
@@ -62,6 +63,7 @@ SWDisplay *RWPDisplay; //--- to display Robertson's Word Pictures in the New Tes
 SWDisplay *FPNDisplay; //--- to display formatted personal notes using GtkText
 SWDisplay *GBFDisplay; //--- to display formatted gbf
 SWDisplay *HTMLDisplay; //--- to display formatted html
+SWDisplay *HTMLchapDisplay; //--- to display formatted html
 
 SWMgr *mainMgr; //-- sword mgr for curMod - curcomMod - curdictMod
 SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
@@ -82,6 +84,7 @@ SWModule *curdictMod; //-- module for dict window
 
 SWFilter *gbftoplain;
 SWFilter *gbftohtml;
+SWFilter *plaintohtml;
 
 //---------------------------------------------------------------- GnomeSword global to this file
 
@@ -171,13 +174,14 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					itemNum = 0, //-- for numbering menu items
 					i, //-- counter
 					j; //-- counter
-
+   	gchar *sourceformat;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   GtkWidget *menu_items;
   myset = readsettings();  //-- load settings into structure
   settings = &myset;       //-- set pointer to structure
   gbftoplain	= new GBFPlain(); //-- renderfilter
   gbftohtml		= new GBFHTML(); //-- sword renderfilter gbf to html
+  plaintohtml   = new PLAINHTML(); //-- sword renderfilter plain to html
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -201,13 +205,13 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comp3Display    = 0;// set in create
 	comDisplay      = 0;// set in create
 	dictDisplay     = 0;// set in create
-	GBFcomDisplay   = 0; // set in create
-	
+	GBFcomDisplay   = 0; // set in create 	
 	percomDisplay   = 0;// set in create
 	RWPDisplay			= 0;
 	FPNDisplay			= 0;
 	GBFDisplay			= 0;
 	HTMLDisplay			= 0;
+	HTMLchapDisplay			= 0;	
 //	gtk_rc_parse( "gsword.rc" );
 
   myGreen.red =  settings->currentverse_red; //-- set color for current verse
@@ -230,8 +234,10 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
 	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
 	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
-	GBFDisplay = new GBFentryDisp(lookup_widget(mainform,"textCommentaries"));
+	//GBFDisplay = new GBFentryDisp(lookup_widget(mainform,"textCommentaries"));
 	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));
+	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
+	
 //----------------------------------------------------------------------- set text windows to word warp
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"moduleText")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComp1")) , TRUE );
@@ -271,7 +277,30 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			//---------------------------------------------------------------- add to popup menu
 			additemtopopupmenu(MainFrm, menu1, curMod->Name(), (GtkMenuCallback)on_mainText_activate );
 			//------------------------------------------------------- set GTK display for each module
-			curMod->Disp(chapDisplay); 
+		    sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	        if (sit !=mainMgr->config->Sections.end())
+	        {
+	    	    cit = (*sit).second.find("SourceType");
+					if (cit != (*sit).second.end()) 				
+						 sourceformat = g_strdup((*cit).second.c_str());
+					else
+						sourceformat = "Plain";
+			}
+			//cout << sourceformat << '\n';
+			if (!strcmp(sourceformat, "GBF")) //-- we need gbf to html filter
+			{
+			  curMod->AddRenderFilter(gbftohtml);
+				curMod->Disp(HTMLchapDisplay);
+			}
+			else if (!strcmp(sourceformat, "Plain")) //-- we need gbf to html filter
+			{
+			  curMod->AddRenderFilter(plaintohtml);
+				curMod->Disp(HTMLchapDisplay);
+			}
+			else				
+				curMod->Disp(chapDisplay);
+		
+		
 		}
 		else if (!strcmp((*it).second->Type(), "Commentaries")) //-- set commentary modules and add to notebook
 		{
@@ -281,16 +310,16 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			curcomMod = (*it).second;
 			notebook = lookup_widget(mainform,"notebook1");
 			empty_notebook_page = gtk_vbox_new (FALSE, 0);
-  		gtk_widget_show (empty_notebook_page);
-  		gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
+  		    gtk_widget_show (empty_notebook_page);
+  		    gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
 			label = gtk_label_new (curcomMod->Name());
 			gtk_widget_show (label);
 			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label);
 			additemtognomemenu(MainFrm,curcomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
 			sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
 			
-			gchar *sourceformat;
-			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+		
+		sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	    if (sit !=mainMgr->config->Sections.end())
 	    {
 	    	cit = (*sit).second.find("SourceType");
@@ -299,7 +328,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					else
 						sourceformat = "Plain";
 			}
-			//cout << sourceformat << '\n';
+			cout << sourceformat << '\n';
 			if (!strcmp(sourceformat, "GBF")) //-- we need gbf to html filter
 			{
 			  curcomMod->AddRenderFilter(gbftohtml);
@@ -307,7 +336,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			}
 			else if(!strcmp(sourceformat,"ThML"))
 			{
-				//curcomMod->AddRenderFilter(thmltogbf);
+				//curcomMod->AddRenderFilter();
 			  curcomMod->Disp(HTMLDisplay);
 			}
 			else if(!strcmp(curcomMod->Name(),"RWP"))
@@ -345,7 +374,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") //-- if driver is RawFiles
 			{
 				 	percomMod = (*it).second;
-				 	if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formattec display
+				 	if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formatted display
 				 	else percomMod->Disp(percomDisplay);                     //-- else standard displey
 				 	additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate); //-- add module to popup menu
 				 	usepersonalcomments = true; //-- used by verseChange function (GnomeSword.cpp)
@@ -678,7 +707,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 			}
 		}		
 		gtk_clist_moveto( GTK_CLIST(list), index, 0, 0.5, 0.0 ); //-- move in list to index
-        gtk_clist_select_row(GTK_CLIST(list),index, 0); //-- seletct row 
+        //gtk_clist_select_row(GTK_CLIST(list),index, 0); //-- seletct row
 		mod->SetKey(saveKey);
 	}
 }
@@ -1096,20 +1125,19 @@ changcurcomModSWORD(gchar *modName, gint page_num)  //-- someone changed comment
 
 //-------------------------------------------------------------------------------------------
 void
-navcurcomModSWORD(gint direction)  //--
+navcurcomModSWORD(gint direction)  //-- navigate the current commentary module
 {
-   /*switch(direction)
+   switch(direction)
    {
 		case 0:
-		    curcomMod--;
+		    (*curcomMod)--;
 			break;
 		case 1:
-			curcomMod++;
+			(*curcomMod)++;
 			break;
    }
    curcomMod->Error();
-   //curcomMod->Display();
-   */
+   curcomMod->Display();
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1221,6 +1249,7 @@ dictchangekeySWORD(gint direction)   //-- dict change key up or down -- arrow bu
    curdictMod->Display(); //-- show the changes
 	//-- put new key into dictionary text entry
    gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"dictionarySearchText")), curdictMod->KeyText());
+   dictSearchTextChangedSWORD(g_strdup(curdictMod->KeyText()));
 }
 
 //-------------------------------------------------------------------------------------------
