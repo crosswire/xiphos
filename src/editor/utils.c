@@ -35,7 +35,7 @@
 #include "editor/utils.h"
 #include "editor/properties.h"
 
-#define ICONDIR "./art"
+//#define ICONDIR "./art"
 
 GtkWidget *
 color_table_new (GtkSignalFunc f, gpointer data)
@@ -201,7 +201,7 @@ editor_check_stock ()
 		GdkPixbuf *pixbuf;
 		GError *error = NULL;
 
-		pixbuf = gdk_pixbuf_new_from_file (ICONDIR "/insert-link-16.png", &error);
+		pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/insert-link-16.png", &error);
 		if (!pixbuf) {
 			g_error_free (error);
 		} else {

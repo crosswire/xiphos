@@ -100,7 +100,6 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
-		//keytext = imodule.KeyText();
 	
 	g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -138,32 +137,31 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
-	gchar *buf;
 	gchar *utf8_key;
 	SWMgr *mgr = be->get_main_mgr();
+	
 	SWModule *mod_top = mgr->getModule(imodule.Name());
-		mod_top->setSkipConsecutiveLinks(true);
+	mod_top->setSkipConsecutiveLinks(true);
 	*mod_top = sword::TOP;
+	
 	sword::VerseKey key_top( mod_top->KeyText() );
 	SWModule *mod = mgr->getModule(imodule.Name());
 	mod->setKey(imodule.getKey());
+	
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;	
 	int chapter = key->Chapter();
 	key->Verse(1);
 	
 	if(!key->_compare(key_top)) {
-		buf = g_strdup_printf("<font face=\"%s\" size=\"%s\" color=\"%s\">",
+		swbuf.appendFormatted("<font face=\"%s\" size=\"%s\" color=\"%s\">",
 			(mf->old_font)?mf->old_font:"", 
 			(mf->old_font_size)?mf->old_font_size:"+0", 
 			settings.bible_text_color);
-		str = g_string_append(str, buf);
-		g_free(buf);
-		buf = g_strdup_printf("</font><div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
+		
+		swbuf.appendFormatted("</font><div style=\"text-align: center\"><p>%s</p><b>%s %d</b></div>",
 					mod->Description(),
 					_("Chapter"),
 					chapter);
-		str = g_string_append(str, buf);
-		g_free(buf);
 	} else {
 		(*mod)--;
 				
@@ -174,7 +172,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				     &bytes_read,
 				     &bytes_written,
 				     error);
-		buf = g_strdup_printf("&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+		swbuf.appendFormatted("&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
 				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
 				utf8_key,
 				0, 
@@ -183,25 +181,17 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				:"-2",
 				settings.bible_verse_num_color, 
 				key->Verse());
-		str = g_string_append(str, buf);
-		g_free(utf8_key);
-		g_free(buf);
-				
-			
-		buf = g_strdup_printf(
+		
+		swbuf.appendFormatted(
 				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				(mf->old_font)?mf->old_font:"", 
 				(mf->old_font_size)?mf->old_font_size:"+0", 
-				settings.bible_text_color);
+				settings.bible_text_color);		
 		
-		str = g_string_append(str,buf);
-		g_free(buf);
-		buf = g_strdup_printf("%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
+		swbuf.appendFormatted("%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 					(const char *)*mod,
 					_("Chapter"),
 					chapter);
-		str = g_string_append(str, buf);
-		g_free(buf);	
 	}
 }
 
@@ -210,7 +200,6 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
-	gchar *buf;
 	gchar *utf8_key;
 	SWMgr *mgr = be->get_main_mgr();
 	SWModule *mod_bottom = mgr->getModule(imodule.Name());
@@ -222,27 +211,21 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 	VerseKey *key = (VerseKey *)(SWKey *)*mod;
 	
 	if(key_bottom._compare(key) < 1) {
-		buf = g_strdup_printf(
+		swbuf.appendFormatted(
 			"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 			(mf->old_font)?mf->old_font:"", 
 			(mf->old_font_size)?mf->old_font_size:"+0", 
 			settings.bible_text_color);
-		str = g_string_append(str, buf);
-		g_free(buf);
 		
-		buf = g_strdup_printf("</font><hr><div style=\"text-align: center\"><p>%s</p></div>",
+		swbuf.appendFormatted(
+			"</font><hr><div style=\"text-align: center\"><p>%s</p></div>",
 					mod->Description());
-		str = g_string_append(str, buf);
-		g_free(buf);
 	} else {
 	
-		int chapter = key->Chapter();
-		
-		buf = g_strdup_printf(
+		int chapter = key->Chapter();		
+		swbuf.appendFormatted(
 			"<hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 			_("Chapter"),chapter);
-		str = g_string_append(str, buf);
-		g_free(buf);
 		
 		utf8_key = g_convert((char*)key->getText(),
 				     -1,
@@ -251,7 +234,7 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				     &bytes_read,
 				     &bytes_written,
 				     error);
-		buf = g_strdup_printf( "&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+		swbuf.appendFormatted("&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
 				"<font size=\"%s\" color=\"%s\">%d</font></A> ",
 				utf8_key,
 				0, 
@@ -260,22 +243,14 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 				:"-2",
 				settings.bible_verse_num_color, 
 				key->Verse());
-		g_free(utf8_key);
-		str = g_string_append(str,buf);
-		g_free(buf);			
-		
-		buf = g_strdup_printf(
+				
+		swbuf.appendFormatted(
 				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				(mf->old_font)?mf->old_font:"", 
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				settings.bible_text_color);
-		
-		str = g_string_append(str,buf);
-		g_free(buf);
-		buf = g_strdup_printf("%s</font>",
-					(const char *)*mod);
-		str = g_string_append(str, buf);
-		g_free(buf);	
+		swbuf += (const char *)*mod;
+		swbuf+= "</font>";
 	}
 }
 
@@ -289,6 +264,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 	int curPos = 0;
 	gfloat adjVal;
 	GtkHTML *html = GTK_HTML(gtkText);
+	GtkHTMLStream *stream = gtk_html_begin(html);
+	GtkHTMLStreamStatus status;
 	gchar *utf8_key;
 	gchar *buf;
 	gchar *buf2;
@@ -301,24 +278,22 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GError **error = NULL;	
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	
+	swbuf = "";
 	mf = get_font(imodule.Name());	
-	str = g_string_new(NULL);
 	
 	gboolean newparagraph = FALSE;
 	//gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean was_editable = gtk_html_get_editable(html);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
-	
-	g_string_printf(str,	HTML_START
+	swbuf.appendFormatted(HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
 				settings.bible_text_color,
 				settings.link_color);
-	//if(is_rtol) 
-	//	str = g_string_append(str,"<DIV ALIGN=right>");			
 	
-
+	gtk_html_write(html,stream,swbuf.c_str(), swbuf.length());
+	swbuf = "";
 	main_set_global_options(ops);
 	getVerseBefore(imodule);
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
@@ -328,10 +303,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 		while((preverse 
 			= backend->get_entry_attribute("Heading","Preverse",
 							    heading)) != NULL) {
-			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
-			str = g_string_append(str, buf);
-			g_free(preverse);
-			g_free(buf);						     
+			swbuf.appendFormatted("<br><b>%s</b><br><br>",preverse);
+			g_free(preverse);					     
 			++x;
 			sprintf(heading,"%d",x);
 		}
@@ -342,7 +315,8 @@ char GTKChapDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
-		buf = g_strdup_printf(
+		
+		swbuf.appendFormatted(
 			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
 			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
 			utf8_key,
@@ -350,75 +324,49 @@ char GTKChapDisp::Display(SWModule &imodule)
 			settings.verse_num_font_size,
 			settings.bible_verse_num_color, 
 			key->Verse());
-		g_free(utf8_key);
-		str = g_string_append(str,buf);
-		g_free(buf);
-		buf = g_strdup_printf(
+		
+		swbuf.appendFormatted(
 				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				(mf->old_font)?mf->old_font:"", 
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				(key->Verse() == curVerse)
 				?settings.currentverse_color
 				:settings.bible_text_color);
-		
-		str = g_string_append(str,buf);
-		g_free(buf);	
 
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
-			str = g_string_append(str, paragraphMark);
+			swbuf += paragraphMark;;
 		}
-		
-		str = g_string_append(str, (const char *)imodule);
-		buf = g_strdup_printf("%s",(const char *)imodule);
+		swbuf += (const char *)imodule;
 		
 		if (settings.versestyle) {
-			if ((strstr(buf, "<BR>") == NULL) &&
-			    (strstr(buf, "<br />") == NULL) &&
-			     (strstr(buf, "<!P>") == NULL) &&
-			     (strstr(buf, "<p>") == NULL) &&
-			     (strstr(buf, "</p>") == NULL)  ) {
-				buf2 = g_strdup_printf(" %s", "</font><br>");
-			} else {
-				br = g_strrstr(buf, "<br"); /* last occurance */
-				if(strlen(br) > 6) /* we have a new line that's
-						      not at the end of the string */					
-					buf2 = g_strdup_printf(" %s", 
-								"</font><br>");
-				else
-					buf2 = g_strdup_printf(" %s", "</font>");
-			}
-			if ((strstr(buf, "<!P>") == NULL) &&
-			     (strstr(buf, "<p>") == NULL) ) {
+			if ((strstr(swbuf.c_str(), "<!p>") == NULL) &&
+			     (strstr(swbuf.c_str(), "<p>") == NULL) ) {
 				newparagraph = FALSE;
 			} else {
 				newparagraph = TRUE;
 			}
+			swbuf.append("</font><br>");
 		} else {
-			if (strstr(buf, "<!P>") == NULL)
-				buf2 = g_strdup_printf(" %s", "</font>");
-			else
-				buf2 = g_strdup_printf(" %s", "</font><p>");
+			swbuf.append("</font>");
 		}
-		str = g_string_append(str, buf2);
-		g_free(buf);
-		g_free(buf2);
+		gtk_html_write(html,stream,swbuf.c_str(), swbuf.length());
+		swbuf = "";
 	}
+	swbuf = "";
 	getVerseAfter(imodule);	
-	//if(is_rtol) 
-	//	str = g_string_append(str,"</DIV>");
-	str = g_string_append(str, "</body></html>");
-	if (str->len) {
-		gtk_html_load_from_string(html,str->str,str->len);
+	swbuf += "</body></html>";
+	if (swbuf.length()) {
+		gtk_html_write(html,stream,swbuf.c_str(), swbuf.length());
 	}
+	gtk_html_flush (html); 
+	gtk_html_end(html,stream,status);
 	gtk_html_set_editable(html, was_editable);
 	if(curVerse > 1) {
 		buf = g_strdup_printf("%d", curVerse - 1);
 		gtk_html_jump_to_anchor(html, buf);
 		g_free(buf);
-	}	
-
-	g_string_free(str, TRUE);
+	}
 	key->Verse(1);
 	key->Chapter(1);
 	key->Book(curBook);
@@ -779,7 +727,7 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 				newparagraph = TRUE;
 			}
 		} else {
-			if (strstr(buf, "<!P>") == NULL)
+			if (strstr(buf, "<!p>") == NULL)
 				buf2 = g_strdup_printf(" %s", "</font>");
 			else
 				buf2 = g_strdup_printf(" %s", "</font><p>");
