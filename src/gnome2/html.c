@@ -34,7 +34,7 @@
 #include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/editor.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/parallel_view.h"
 #include "gui/utilities.h"
@@ -505,9 +505,9 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
-			gui_display_dictlex_in_viewer(modbuf, buf);
+			gui_display_dictlex_in_sidebar(modbuf, buf);
 		} else {
-			gui_display_verse_list(settings.currentverse, modbuf, buf);
+			gui_display_verse_list_in_sidebar(settings.currentverse, modbuf, buf);
 		}
 		g_free(buf);
 
@@ -552,7 +552,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			gui_change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modbuf, buf);
+			gui_display_dictlex_in_sidebar(modbuf, buf);
 		g_free(buf);
 		g_free(oldnew);
 	}
@@ -595,7 +595,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			gui_change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modbuf_viewer,
+			gui_display_dictlex_in_sidebar(modbuf_viewer,
 						      buf);
 		g_free(buf);
 	}
@@ -612,7 +612,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gui_change_module_and_key
 						    ("Thayer", buf);
 					if (settings.inViewer)
-						gui_display_dictlex_in_viewer
+						gui_display_dictlex_in_sidebar
 						    ("Thayer", buf);
 					g_free(buf);
 					return;
@@ -630,7 +630,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gui_change_module_and_key
 						    ("BDB", buf);
 					if (settings.inViewer)
-						gui_display_dictlex_in_viewer
+						gui_display_dictlex_in_sidebar
 						    ("BDB", buf);
 					g_free(buf);
 					return;
@@ -651,7 +651,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gui_change_module_and_key
 						    ("Thayer", buf);
 					if (settings.inViewer)
-						gui_display_dictlex_in_viewer
+						gui_display_dictlex_in_sidebar
 						    ("Thayer", buf);
 					g_free(buf);
 					return;
@@ -665,7 +665,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 					gui_change_module_and_key
 					    (settings.lex_greek, buf);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer
+					gui_display_dictlex_in_sidebar
 					    (settings.lex_greek_viewer,
 					     buf);
 				g_free(buf);
@@ -682,7 +682,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gui_change_module_and_key
 						    ("BDB", buf);
 					if (settings.inViewer)
-						gui_display_dictlex_in_viewer
+						gui_display_dictlex_in_sidebar
 						    ("BDB", buf);
 					g_free(buf);
 					return;
@@ -697,7 +697,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 					gui_change_module_and_key
 					    (settings.lex_hebrew, buf);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer
+					gui_display_dictlex_in_sidebar
 					    (settings.lex_hebrew_viewer,
 					     buf);
 				g_free(buf);
@@ -711,7 +711,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			gui_change_module_and_key("Packard", buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer("Packard", buf);
+			gui_display_dictlex_in_sidebar("Packard", buf);
 		g_free(buf);
 	}
 

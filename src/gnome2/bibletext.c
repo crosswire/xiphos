@@ -32,7 +32,7 @@
 #include "gui/bibletext_menu.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/html.h"
 #include "gui/main_menu.h"
@@ -98,7 +98,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name,
+			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
@@ -298,7 +298,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 					    g_strdup(settings.
 						     DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer
+					gui_display_dictlex_in_sidebar
 					    (dict, key);
 				if (settings.inDictpane)
 					gui_change_module_and_key(dict,

@@ -31,7 +31,7 @@
 #include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
@@ -158,7 +158,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 	gchar *dict_key = gui_get_word_or_selection(t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(settings.
+			gui_display_dictlex_in_sidebar(settings.
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)

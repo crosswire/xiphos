@@ -32,7 +32,7 @@
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"

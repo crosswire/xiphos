@@ -27,9 +27,8 @@
 #include <gal/widgets/e-unicode.h>
 #include <regex.h>
 
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_search.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
+#include "gui/search_sidebar.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
@@ -43,10 +42,7 @@
 
 #include "gnome/shortcutbar.h"
 
-#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf-8'></head>"
-
-extern SB_VIEWER sb_v, *sv;
-extern gint groupnum6;
+//extern gint groupnum6;
 
 SEARCH_OPT so, *p_so;
 
@@ -71,7 +67,7 @@ static GtkWidget *radiobutton_search_comm;
 //static GtkWidget *radiobutton_search_book;
 
 
-void gui_search_update(char percent, void *userData)
+void gui_search_update_sidebar(char percent, void *userData)
 {
 	char maxHashes = *((char *) userData);
 	float num;
@@ -107,7 +103,7 @@ void gui_search_update(char percent, void *userData)
  *   void
  */
 
-void gui_set_search_label(void)
+void gui_set_search_label_sidebar(void)
 {
 /*
 	if (GTK_TOGGLE_BUTTON(radiobutton_search_text)->active) {
@@ -175,27 +171,26 @@ static void fill_search_results_clist(int finds)
 
 
 
-	gtk_clist_clear(GTK_CLIST(sv->clist));
+	gtk_clist_clear(GTK_CLIST(sidebar.clist));
 	set_results_position((char) 1);	/* TOP */
 	while ((key_buf = get_next_result_key()) != NULL) {
 		tmpbuf = (gchar *) key_buf;
-		gtk_clist_insert(GTK_CLIST(sv->clist), i++, &tmpbuf);
+		gtk_clist_insert(GTK_CLIST(sidebar.clist), i++, &tmpbuf);
 
 	}
 
 	strcpy(settings.groupName, buf0);
 	sprintf(buf, "%d %s", finds, buf1);
 	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
-	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
-	gui_show_sb_verseList();
-
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 3);
+	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
+					3);
 	/* report results */
 
 	gui_begin_html(widgets.html_search_report, TRUE);
-	sprintf(buf, HTML_START
-		"<body><center>%d %s <br><font color=\"%s\">"
+	sprintf(buf, "<body><center>%d %s <br><font color=\"%s\">"
 		"<b>\"%s\"</b></font><br>%s <font color=\"%s\">"
-		"<b>[%s]</b></font></center></body</html>",
+		"<b>[%s]</b></font></center></body>",
 		finds,
 		buf2,
 		settings.found_color,
@@ -210,18 +205,18 @@ static void fill_search_results_clist(int finds)
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(progressbar_search),
 				0.0);
 	/* display first item in list by selection row 0 */
-	gtk_clist_select_row(GTK_CLIST(sv->clist), 0, 0);
+	gtk_clist_select_row(GTK_CLIST(sidebar.clist), 0, 0);
 }
 
 
 /******************************************************************************
  * Name
- *    on_btnSearch_clicked
+ *    on_search_botton_clicked
  *
  * Synopsis
  *   #include "shortcutbar_search.h"
  *
- *   void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
+ *   void on_search_botton_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *   prepare to begin search
@@ -230,7 +225,7 @@ static void fill_search_results_clist(int finds)
  *   void
  */
 
-static void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
+static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 {
 	GString *str;
 	gint search_params, finds;
@@ -347,7 +342,7 @@ static void on_rrbUseBounds_toggled(GtkToggleButton * togglebutton,
 static void radiobutton_search_toggled(GtkToggleButton * togglebutton,
 				       gpointer user_data)
 {
-	gui_set_search_label();
+	gui_set_search_label_sidebar();
 }
 
 
@@ -367,7 +362,7 @@ static void radiobutton_search_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-void gui_create_shortcutbar_search(GtkWidget * vp)
+void gui_create_search_sidebar(void)
 {
 	GtkWidget *frame1;
 	GtkWidget *vbox1;
@@ -390,15 +385,32 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	GtkWidget *label1;
 	GtkWidget *label2;
 	GtkWidget *frame6;
+	GtkWidget *scrolledwindow_search;
+	GtkWidget *viewport_search;
 	GtkTooltips *tooltips;
 
 	p_so = &so;
 
 	tooltips = gtk_tooltips_new();
 
+	
+	scrolledwindow_search = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow_search);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
+			  scrolledwindow_search);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow_search),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+
+	viewport_search = gtk_viewport_new(NULL, NULL);
+	gtk_widget_show(viewport_search);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow_search),
+			  viewport_search);
+
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_show(frame1);
-	gtk_container_add(GTK_CONTAINER(vp), frame1);
+	gtk_container_add(GTK_CONTAINER(viewport_search), frame1);
 	//gtk_widget_set_usize(frame1, 162, 360);
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
@@ -628,10 +640,10 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 			   G_CALLBACK(on_rrbUseBounds_toggled),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",
-			   G_CALLBACK(on_btnSearch_clicked), NULL);
+			   G_CALLBACK(on_search_botton_clicked), NULL);
 			   
        gtk_signal_connect(GTK_OBJECT(entrySearch), "activate",
-                          G_CALLBACK(on_btnSearch_clicked), NULL);
+                          G_CALLBACK(on_search_botton_clicked), NULL);
 			   
 			   
 	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips",
