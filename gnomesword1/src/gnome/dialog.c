@@ -37,8 +37,11 @@ static GtkWidget *entry5 = NULL;
 static GtkWidget *entry6 = NULL;
 static gint retval = 3;
 
+/*
+gnome_dialog_new();
 
-
+gnome_dialog_run_and_close 
+*/
 
 /******************************************************************************
  * Name
@@ -230,6 +233,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	GtkWidget *pixmap;
 	GtkWidget *vbox84;
 	GtkWidget *label_top;
+	GtkWidget *label_middle;
 	GtkWidget *table14;
 	GtkWidget *label1;
 	GtkWidget *label2;
@@ -305,6 +309,17 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				   TRUE, 0);
 	}
 
+	if (info->label_middle) {
+		label_middle = gtk_label_new(info->label_middle);
+		gtk_widget_ref(label_middle);
+		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
+					 "label_middle", label_middle,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(label_middle);
+		gtk_box_pack_start(GTK_BOX(vbox84), label_middle, TRUE,
+				   TRUE, 0);
+	}
 
 	table14 = gtk_table_new(6, 2, FALSE);
 	gtk_widget_ref(table14);
@@ -618,6 +633,7 @@ GS_DIALOG *gui_new_dialog(void)
 	info->text5 = NULL;
 	info->text6 = NULL;
 	info->label_top = NULL;
+	info->label_middle = NULL;
 	info->label1 = NULL;
 	info->label2 = NULL;
 	info->label3 = NULL;

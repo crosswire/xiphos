@@ -30,13 +30,40 @@
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 
+#include "main/settings.h"
+
 #define BUFFER_SIZE 8192	/* input buffer size */
+
+
+/******************************************************************************
+ * Name
+ *   dialog_destroy
+ *
+ * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
+ *   void dialog_destroy(GtkObject * object, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_destroy(GtkObject * object, gpointer user_data)
+{
+	gtk_main_quit();
+}
+
 
 /******************************************************************************
  * Name
  *   open_ok
  *
  * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
  *   void open_ok(GtkButton *button, GSHTMLEditorControlData ecd);
  *
  * Description
@@ -58,11 +85,14 @@ static void open_ok(GtkButton *button, GSHTMLEditorControlData *ecd)
 	gtk_widget_destroy(filesel);
 }
 
+
 /******************************************************************************
  * Name
  *   open_cancel
  *
  * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
  *   void open_cancel(GtkButton *button, GSHTMLEditorControlData ecd);
  *
  * Description
@@ -77,11 +107,14 @@ static void open_cancel(GtkButton * button, gpointer user_data)
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
+
 /******************************************************************************
  * Name
  *   save_ok
  *
  * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
  *   void save_ok(GtkButton *button, GSHTMLEditorControlData ecd);
  *
  * Description
@@ -98,15 +131,19 @@ static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	sprintf(ecd->filename, "%s", gtk_file_selection_get_filename(
 				GTK_FILE_SELECTION(filesel)));
+	strcpy(settings.studypadfilename, ecd->filename);
 	gtk_widget_destroy(filesel);
 	save_file(ecd->filename, ecd);
 }
+
 
 /******************************************************************************
  * Name
  *   save_cancel
  *
  * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
  *   void save_cancel(GtkButton *button, GSHTMLEditorControlData ecd);
  *
  * Description
@@ -121,12 +158,13 @@ static void save_cancel(GtkButton * button, gpointer user_data)
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
+
 /******************************************************************************
  * Name
  *   gui_fileselection_open
  *
  * Synopsis
- *   #include "fileselection.h"
+ *   #include "gui/fileselection.h"
  *   
  *   void gui_fileselection_open(GSHTMLEditorControlData *ecd);
  *
@@ -144,7 +182,7 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 	GtkWidget *cancel;
 
 	fileselection =
-		gtk_file_selection_new(_("GnomeSword - Open Note File"));
+		gtk_file_selection_new(_("GnomeSword - Open StudyPad File"));
 	gtk_object_set_data(GTK_OBJECT(fileselection), "fileselection",
 			fileselection);
 	gtk_container_set_border_width(GTK_CONTAINER(fileselection), 10);
@@ -169,30 +207,32 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 	return fileselection;
 }
 
+
 /******************************************************************************
  * Name
- *   gui_fileselection_save
+ *   create_fileselection_save
  *
  * Synopsis
- *   #include "fileselection.h"
+ *   #include "gui/fileselection.h"
  *   
- *   void gui_fileselection_save(GSHTMLEditorControlData *ecd);
+ *   void create_fileselection_save(GSHTMLEditorControlData *ecd);
  *
  * Description
- *   Fileselection dialog
+ *   create Fileselection dialog
  *
  * Return value
  *   GtkWidget *
  */
 
-GtkWidget *gui_fileselection_save(GSHTMLEditorControlData *ecd)
+static GtkWidget *create_fileselection_save(
+					GSHTMLEditorControlData *ecd)
 {
 	GtkWidget *fileselection;
 	GtkWidget *ok;
 	GtkWidget *cancel;
 
 	fileselection =
-		gtk_file_selection_new(_("GomeSword - Save Note File"));
+		gtk_file_selection_new(_("GomeSword - Save StudyPad File"));
 	gtk_object_set_data(GTK_OBJECT(fileselection), "fileselection",
 			fileselection);
 	gtk_container_set_border_width(GTK_CONTAINER(fileselection), 10);
@@ -207,10 +247,54 @@ GtkWidget *gui_fileselection_save(GSHTMLEditorControlData *ecd)
 	gtk_widget_show(cancel);
 	GTK_WIDGET_SET_FLAGS(cancel, GTK_CAN_DEFAULT);
 
+	gtk_signal_connect(GTK_OBJECT(fileselection), "destroy",
+			   GTK_SIGNAL_FUNC(dialog_destroy), NULL);
 	gtk_signal_connect(GTK_OBJECT(ok), "clicked",
 			GTK_SIGNAL_FUNC(save_ok), ecd);
 	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
 		       GTK_SIGNAL_FUNC(save_cancel), NULL);
 
+	gtk_widget_show_all(fileselection);
 	return fileselection;
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_fileselection_save
+ *
+ * Synopsis
+ *   #include "gui/fileselection.h"
+ *   
+ *   gint gui_fileselection_save(GSHTMLEditorControlData *ecd);
+ *
+ * Description
+ *   run Fileselection dialog
+ *
+ * Return value
+ *   gint
+ */
+
+gint gui_fileselection_save(GSHTMLEditorControlData *ecd)
+{
+	GtkWidget *window;
+	static gboolean is_running = FALSE;
+	gint retval;
+	
+	if(!is_running) {
+		gchar buf[256];
+		window = create_fileselection_save(ecd);
+		sprintf(buf, "%s/.pad", settings.homedir);
+		gtk_file_selection_set_filename(GTK_FILE_SELECTION
+						(window), buf);
+		retval = 4;
+		is_running = TRUE;
+		gtk_main();
+		g_warning("fileselection dialog closed");
+		is_running = FALSE;
+		return retval;
+	}
+	return 4;
+	
+	
 }
