@@ -90,7 +90,6 @@ module.source.files=\
 	gs_abouts.c\
 	gs_abouts.h\
 	gs_rwphtml.cpp\
-	gs_thmlhtml.cpp\
 	gs_file.h\
 	gs_popup_cb.c\
 	gs_popup_cb.h\

@@ -181,13 +181,13 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	
 	menu2 = create_pmInt(biblelist, "textComp1",
 				(GtkMenuCallback)on_1st_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module2_activate);
+				(GtkMenuCallback)on_about_this_module_activate); /*** not using this callback ***/
 	menu3 =create_pmInt(biblelist, "textComp2",
 				(GtkMenuCallback)on_2nd_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module3_activate); 
+				(GtkMenuCallback)on_about_this_module_activate); /*** not using this callback ***/
 	menu4 =create_pmInt(biblelist, "textComp3",
 				(GtkMenuCallback)on_3rd_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module4_activate); 
+				(GtkMenuCallback)on_about_this_module_activate); /*** not using this callback ***/
 	menu5 = create_pmEditnote(app, percomlist);
 	/* create pop menu for commentaries */
 	menuCom = create_pmComments2(commentarylist);
@@ -553,8 +553,8 @@ static GtkWidget *create_pmComments2(GList * mods)
 			   GTK_SIGNAL_FUNC(on_lookup_selection2_activate),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
-			   GTK_SIGNAL_FUNC(on_about_this_module6_activate),
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
+			   "commentary");
 
 	gtk_signal_connect(GTK_OBJECT(auto_scroll1), "activate",
 			   GTK_SIGNAL_FUNC(on_auto_scroll1_activate),
@@ -710,8 +710,8 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 			   GTK_SIGNAL_FUNC(on_html_goto_reference_activate),
 			   (gchar *) "htmlCommentaries");
 	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
-			   GTK_SIGNAL_FUNC(on_about_this_module6_activate),
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
+			   "commentary");
 	gtk_signal_connect(GTK_OBJECT(auto_scroll1), "activate",
 			   GTK_SIGNAL_FUNC(on_auto_scroll1_activate),
 			   NULL);
@@ -859,8 +859,8 @@ static GtkWidget *create_pmDict(GList * mods)
 			   (gchar *)"htmlDict");                      	          	
 
 	gtk_signal_connect(GTK_OBJECT(about_this_module5), "activate",
-			   GTK_SIGNAL_FUNC(on_about_this_module5_activate),
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
+			   "dictionary");
 	gtk_signal_connect(GTK_OBJECT(view_in_new_window), "activate",
 			   GTK_SIGNAL_FUNC(on_view_in_new_window_activate),
 			   NULL);
@@ -970,8 +970,8 @@ static GtkWidget* create_pmBible(GList *mods)
                       	GTK_SIGNAL_FUNC (on_html_lookup_selection_activate),
                       	(gchar *)"htmlTexts");   
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
-                      	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
-                      	NULL);
+                      	GTK_SIGNAL_FUNC (on_about_this_module_activate),
+                      	"Bible");
 	gtk_signal_connect (GTK_OBJECT (viewtext), "activate",
                       	GTK_SIGNAL_FUNC (on_viewtext_activate),
                       	NULL);
