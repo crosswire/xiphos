@@ -383,9 +383,15 @@ void on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		gtk_widget_show(lookup_widget(MainFrm, (gchar *)user_data));
+		gtk_widget_show(lookup_widget(MainFrm, (gchar *)user_data));		
 	else
 		gtk_widget_hide(lookup_widget(MainFrm, (gchar *)user_data));
+	if(!strcmp((gchar *)user_data, "nbTextMods")) 
+		settings->text_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(!strcmp((gchar *)user_data, "notebook1")) 
+		settings->comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(!strcmp((gchar *)user_data, "notebook4")) 
+		settings->dict_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
 		
 

@@ -1,12 +1,12 @@
 /***************************************************************************
-                                  gs_shordcutbar.h
+                                    sw_shortcutbar.h
                              -------------------
-    begin                : Thu Jun 14 2001
-    copyright            : (C) 2001 by tbiggs
-    email                : tbiggs@users.sf.net
+				    Mon Aug 06 2001
+			       (C) 2001 by Terry Biggs
+			         tbiggs@users.sf.net
  ***************************************************************************/
 
- /*
+/*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -21,39 +21,22 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef __GS_SHORTCUTBAR_H_
-#define __GS_SHORTCUTBAR_H_
+#ifndef __SW_SHORTCUTBAR_H__
+#define __SW_SHORTCUTBAR_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
+	
 #include "gs_gnomesword.h"
+
 	
-	
-void showSBVerseList(SETTINGS *s);
-void on_btnSB_clicked(GtkButton * button, gpointer user_data);
-void setupSB(GList * favoriteslist, 
-					GList *text, 
-					GList *commentary, 
-					GList *dictionary);
-void update_shortcut_bar(SETTINGS *s,
-					GList * favorites,
-					GList *text, 
-					GList *commentary, 
-					GList *dictionary);
-void
-create_modlistmenu_sb(GtkWidget *menu, 
-					GtkWidget *shortcut_menu_widget, 
-					gchar *modtype);		
+GList *loadshortcutbarSW(gchar *filename);
+void saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list);
+GList *getModlistSW(gchar *modtype);
 	
 #ifdef __cplusplus
 }
 #endif
-
-#endif  /* __GS_SHORTCUTBAR_H_ */
-
-
+#endif /* __SW_SHORTCUTBAR_H__ */
 

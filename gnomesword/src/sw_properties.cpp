@@ -1,10 +1,10 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                                 sw_properties.cpp
+                                   sw_properties.cpp
                              -------------------
-     begin                : Sat June 30 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@users.sf.net   
+				  Sat June 30 2001
+			copyright : (C) 2001 by Terry Biggs
+ 				tbiggs@users.sf.net   
  ***************************************************************************/
 
 /*

@@ -82,6 +82,8 @@ COMMON_SOURCE =  \
     sw_latin1utf8.h \
     sw_search.cpp \
     sw_search.h \
+    sw_shortcutbar.cpp \
+    sw_shortcutbar.h \
     sw_verselist_sb.cpp \
     sw_verselist_sb.h
 
