@@ -42,7 +42,7 @@
 #include "support.h"
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
-#include "sw_verselist_dlg.h"
+#include "sw_verselist_sb.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -165,7 +165,7 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			//g_warning("modbuf = %s",modbuf);
 		}
 		buf = g_strdup(newref);
-		getVerseListSWORD(modbuf, buf, settings);
+		getVerseListSBSWORD(modbuf, buf, settings);
 		g_free(buf);
 	}else if (*url == '#') {
 		++url;		/* remove # */
