@@ -20,37 +20,40 @@
 ]>
 
 <!-- =============Document Header ============================= -->
-<book id="index" lang="en">
+<book id="index" lang="fr">
 	<bookinfo>
-		<title>GnomeSword2 Manual</title>
+		<title>Manuel de GnomeSword2</title>
 		<copyright>
 			<year>2003-2005</year>
    	 		<holder>The GnomeSword Team</holder>
   	 	</copyright>
 		<legalnotice>
-   			<para>
-     		Permission is granted to copy, distribute and/or modify this
-     		document under the terms of the <citetitle>GNU Free Documentation
-     		License</citetitle>, Version 1.1 or any later version published
-     		by the Free Software Foundation with no Invariant Sections, no
-     		Front-Cover Texts, and no Back-Cover Texts. You may obtain a copy
-     		of the <citetitle>GNU Free Documentation License</citetitle> from
-     		the Free Software Foundation by visiting <ulink type="http"
-     		url="http://www.fsf.org">their Web site</ulink> or by writing to:
-     		Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-     		Boston, MA 02111-1307, USA.
-   			</para>
-   			<para>
-     		Many of the names used by companies to distinguish their products and
-     		services are claimed as trademarks. Where those names appear in any
-     		GNOME documentation, and those trademarks are made aware to the members
-     		of the GNOME Documentation Project, the names have been printed in caps
-     		or initial caps.
-   			</para>
+			<para>
+	  			L'utilisateur est libre de copier, distribuer et/ou modifier le pr&eacute;sent document 
+				dans les termes de la GFDL (GNU Free Documentation License), Version 1.1 ou toute autre version 
+				ult&eacute;rieure publi&eacute;e par la Free Software Foundation sans section invariante, sans 
+				texte de page de couverture et sans textes de plat verso.  Vous trouverez un exemplaire de la 
+				GFDL au <ulink type="help" url="ghelp:fdl">lien</ulink> suivant ou dans le fichier COPYING-DOCS 
+				fourni avec le pr&eacute;sent manuel.
+      			</para>
+			<para> 
+				Le pr&eacute;sent manuel fait partie d'une collection de manuels GNOME distribu&eacute;s dans 
+				les termes de la GFDL.  Vous pouvez, si vous le souhaitez, le distribuer ind&eacute;pendamment 
+				de la collection en incluant un exemplaire de la licence du manuel, comme le d&eacute;crit la 
+				section 6 de la licence.
+			</para>
+
+			<para>
+	  			La plupart des noms utilis&eacute;s par les entreprises pour leurs produits et leurs services 
+				sont des marques d&eacute;pos&eacute;es. Lorsque ces noms apparaissent dans la documentation 
+				GNOME et que les membres du projet de documentation GNOME sont inform&eacute;s de l'existence 
+				de ces marques d&eacute;pos&eacute;es, ces noms apparaissent en majuscules, ou la premi&egrave;re 
+				lettre en majuscule.
+			</para>
   		</legalnotice>
 <abstract>
 <para>
-Gnomesword is an application to aid in study of the Bible.
+Gnomesword est un logiciel d'aide à l'étude de la Bible..
 
 </para>
 </abstract>
@@ -63,7 +66,7 @@ Gnomesword is an application to aid in study of the Bible.
 <keyword>help dialog</keyword>
 </keywordset>
 <!-- this is the version of manual, not application --> 
-		<releaseinfo>This is version 2.1.1 of the GnomeSword Manual</releaseinfo>
+		<releaseinfo>Ceci est la version 2.1.1 du manuel de GnomeSword</releaseinfo>
  		</bookinfo>
 
 <!-- Document Body -->
