@@ -845,7 +845,7 @@ static gboolean button_release_event(GtkWidget * widget,
 				     (button_one) ? "currentTab" : "newTab",
 				     main_url_encode(key),
 				     main_url_encode(module));
-			main_url_handler(url, FALSE);
+			main_url_handler(url, TRUE);
 			g_free(url);
 
 		}
