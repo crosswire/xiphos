@@ -26,12 +26,8 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-/* frontend */
-#include "_display_info.h"
-
-/* main */ 
-#include "display_info.h"
-
+#include "gui/_display_info.h"
+#include "main/display_info.h"
 
 gboolean gsI_isrunning = FALSE;
 

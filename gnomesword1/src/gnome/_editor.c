@@ -40,26 +40,23 @@
 #include <fcntl.h>
 
 #ifdef USE_SPELL
-#include "spell.h"
-#include "spell_gui.h"
+#include "main/spell.h"
+#include "main/spell_gui.h"
 #endif /* USE_SPELL */
 
+#include "gui/_editor.h"
+#include "gui/editor_menu.h"
+#include "gui/editor_replace.h"
+#include "gui/editor_search.h"
+#include "gui/editor_toolbar.h"
+#include "gui/fileselection.h"
+#include "gui/link_dialog.h"
+#include "gui/studypad.h"
 
-/* gnome */
-#include "_editor.h"
-#include "editor_menu.h"
-#include "editor_replace.h"
-#include "editor_search.h"
-#include "editor_toolbar.h"
-#include "fileselection.h"
-#include "link_dialog.h"
-#include "studypad.h"
-
-/* main */
-#include "percomm.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "settings.h"
+#include "main/percomm.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * much of this code taken form GtkHTML

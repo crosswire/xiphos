@@ -26,21 +26,18 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+#include "gui/bibletext_dialog.h"
+#include "gui/_display_info.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_viewer.h"
 
-/* frontend */
-#include "bibletext_dialog.h"
-#include "_display_info.h"
-#include "shortcutbar_main.h"
-#include "shortcutbar_viewer.h"
-
-/* main */ 
-#include "display_info.h"
-#include "bibletext.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "support.h"
-#include "settings.h"
-#include "lists.h"
+#include "main/display_info.h"
+#include "main/bibletext.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/support.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
 /******************************************************************************
  * globals

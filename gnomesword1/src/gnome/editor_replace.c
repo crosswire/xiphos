@@ -26,10 +26,8 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
 
-/* frontend */
-#include "editor_replace.h"
-#include "_editor.h"
-
+#include "gui/editor_replace.h"
+#include "gui/_editor.h"
 
 struct _GtkHTMLReplaceAskDialog {
 	GnomeDialog *dialog;

@@ -26,16 +26,17 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "commentary_dialog.h"
+#include "gui/commentary_dialog.h"
 
-#include "commentary.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "lists.h"
+#include "main/commentary.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/lists.h"
 
-/****************************************************************************************
- *globals
+/******************************************************************************
+ * globals
  */
+
 gboolean isrunningVC = FALSE;	/* is the view commentary dialog runing */
 
 /****************************************************************************************

@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 
-#include "about_gnomesword.h"
+#include "gui/about_gnomesword.h"
 
 /******************************************************************************
  * public

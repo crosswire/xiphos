@@ -25,14 +25,11 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "interlinear_dialog.h"
+#include "gui/interlinear_dialog.h"
 
-/* main */ 
-#include "gs_gnomesword.h"
-#include "gs_interlinear.h"
-#include "lists.h"
-
+#include "main/gs_gnomesword.h"
+#include "main/gs_interlinear.h"
+#include "main/lists.h"
 
 /******************************************************************************
  * static
