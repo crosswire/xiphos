@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * commentary.h - gui for commentary modules
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,6 +72,7 @@ struct _commdata {
 };
 extern COMM_DATA *cur_c;
 
+void gui_set_comm_frame_label(void);
 void gui_set_commentary_page_and_key(gint page_num,
 				     gchar * key);
 void gui_display_commentary(gchar * key);

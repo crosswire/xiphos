@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * commentary_dialog.h - dialog for a commentary module
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,6 +39,12 @@ struct _viewcomm {
 	GtkWidget *btn_close;
 	GtkWidget *entry_key;
 	GtkWidget *btn_print;
+	
+	GtkWidget *cbe_book;
+	GtkWidget *spb_chapter;
+	GtkWidget *spb_verse;
+	GtkWidget *freeform_lookup;
+	GtkWidget *statusbar;
 	gboolean has_key;
 	GSHTMLEditorControlData *ec;
 	COMM_DATA *c;
