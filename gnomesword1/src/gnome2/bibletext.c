@@ -870,8 +870,16 @@ void gui_setup_text(GList * mods)
 			   (on_notebook_text_switch_page), text_list);
 
 	modbuf = g_strdup(xml_get_value("modules", "bible"));
-
-	set_page_text(modbuf, text_list);
+	if(modbuf) {
+		if(check_for_module(modbuf))
+			set_page_text(modbuf, text_list);
+		else if(check_for_module(t->mod_name))
+			set_page_text(t->mod_name, text_list);
+	}
+	else 
+		if(check_for_module(t->mod_name))
+			set_page_text(t->mod_name, text_list);
+	//set_page_text(modbuf, text_list);
 
 	g_free(modbuf);
 	g_list_free(tmp);

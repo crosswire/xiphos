@@ -961,9 +961,11 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 			   "switch_page",
 			   G_CALLBACK(on_notebook_gbs_switch_page),
 			   gbs_list);
-
-
-	set_gbs_page(settings.BookWindowModule, gbs_list);
+	
+	if(check_for_module(settings.BookWindowModule))
+		set_gbs_page(settings.BookWindowModule, gbs_list);
+	else if(check_for_module(gbs->mod_name))
+		set_gbs_page(gbs->mod_name, gbs_list);
 	g_list_free(tmp);
 }
 
