@@ -23,6 +23,9 @@ GtkWidget* create_aboutmodules (void);
 GtkWidget* create_dlgSettings (void);
 GtkWidget* create_dialog1 (void);
 GtkWidget* create_listeditor (void);
+GtkWidget* create_pmNE (void);
+GtkWidget* create_pmComments (void);
+
 
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -1192,6 +1195,92 @@ on_btnSPnew_clicked                    (GtkButton       *button,
 
 void
 on_cbtnPNformat_toggled                (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+
+gboolean
+on_cbeFreeformLookup_drag_drop         (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data);
+
+void
+on_moduleText_drag_begin               (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data);
+
+void
+on_textCommentaries_drag_begin         (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data);
+
+void
+on_textDict_drag_begin                 (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data);
+                                        
+
+void
+on_boldNE_activate                     (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_italicNE_activate                   (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_referenceNE_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_underlineNE_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_greekNE_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_goto_reference_activate             (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+                                        
+
+void
+on_textComments_drag_begin             (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gpointer         user_data);
+
+void
+on_textComments_drag_data_get          (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        GtkSelectionData *data,
+                                        guint            info,
+                                        guint            time,
+                                        gpointer         user_data);
+
+void
+on_textComments_drag_data_received     (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        GtkSelectionData *data,
+                                        guint            info,
+                                        guint            time,
+                                        gpointer         user_data);
+
+gboolean
+on_textComments_drag_drop              (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data);
+
+gboolean
+on_textComments_key_press_event        (GtkWidget       *widget,
+                                        GdkEventKey     *event,
                                         gpointer         user_data);
 
 
