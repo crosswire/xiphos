@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 	
-void set_commentary_key(char * mod_name, char * key);
+void main_set_commentary_key(char * mod_name, char * key);
 char *get_commentary_key(char *mod_name);	
 char *get_commentary_text(char * mod_name, char * key);
 char *get_book_heading(char * mod_name, char * key);
@@ -38,4 +38,3 @@ char *navigate_commentary(char * mod_name, int direction);
 #endif
 
 #endif
-
