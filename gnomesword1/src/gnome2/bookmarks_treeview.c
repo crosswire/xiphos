@@ -55,6 +55,7 @@
 TreePixbufs *pixbufs;
 GtkTreeStore *model;
 gboolean button_one;
+gboolean button_two;
 gboolean use_dialog;
 GtkTreeSelection *current_selection;
 GtkTreeView *bookmark_tree;
@@ -536,6 +537,11 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 				     &selected) && key != NULL) {
 			if(button_one)
 				goto_bookmark(module, key);
+			else if(button_two) {
+				use_dialog = TRUE; 
+				goto_bookmark(module, key);
+				use_dialog = FALSE; 
+			}
 			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
@@ -777,11 +783,13 @@ static gboolean button_press_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer data)
 {
 	button_one = FALSE;
+	button_two = FALSE;
 	switch(event->button) {
 		case 1:
 			button_one = TRUE;
 			break;
 		case 2:
+			button_two = TRUE;
 			break;
 		case 3:
 			gtk_menu_popup(GTK_MENU(menu.menu),

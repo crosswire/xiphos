@@ -292,6 +292,29 @@ static void on_view_new_activate(GtkMenuItem * menuitem, GBS_DATA * t)
 	gui_open_gbs_dialog(t->mod_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/dictionary_menu.h"
+ *
+ *  void (GtkMenuItem * menuitem, GBS_DATA * t)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_view_current_dict_activate(GtkMenuItem * menuitem, GBS_DATA * t)
+{
+	gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.workbook_lower), 0);
+}
+
 /******************************************************************************
  * Name
  *  gui_unlock_dictionary
@@ -421,6 +444,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	GtkWidget *separator;
 	GtkWidget *file;
 	GtkWidget *file_menu;
+	GtkWidget *current_dict;
 	GtkWidget *print;
 //	GtkWidget *sync_with_main;
 	GtkWidget *close;
@@ -499,6 +523,11 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 					on_new_dialog_activate);
 
 	} else {
+		current_dict =
+		    gtk_menu_item_new_with_label(_("View Current Dict/Lex"));
+		gtk_widget_show(current_dict);
+		gtk_container_add(GTK_CONTAINER(file_menu), current_dict);
+
 		view_text =
 		    gtk_menu_item_new_with_label(_("Open Module"));
 		gtk_widget_show(view_text);
@@ -518,6 +547,9 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		gtk_widget_show(view_new);
 		gtk_container_add(GTK_CONTAINER(file_menu), view_new);
 
+		gtk_signal_connect(GTK_OBJECT(current_dict), "activate",
+				   G_CALLBACK
+				   (on_view_current_dict_activate), t);
 		gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 				   G_CALLBACK
 				   (on_view_new_activate), t);

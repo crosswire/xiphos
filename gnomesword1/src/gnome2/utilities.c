@@ -179,7 +179,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 		
 		gtk_tree_store_append(store, &child_iter, &iter);
 		gtk_tree_store_set(store, &child_iter, 0,
-				   _("Parallel Page"), -1);
+				   _("Parallel View"), -1);
 	}
 	/*  add language folders Biblical Texts folder */
 	tmp = get_list(TEXT_LIST);

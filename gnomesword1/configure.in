@@ -39,7 +39,7 @@ AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
 
-GETTEXT_PACKAGE=gnomesword-2.0
+GETTEXT_PACKAGE=gnomesword2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTTEXT_PACKAGE", [Package name for gettext])
 
@@ -166,6 +166,7 @@ AC_DEFINE_UNQUOTED(PACKAGE_HELP_DIR, "${packageprefix}/${packagehelpdir}",[packa
 AC_DEFINE_UNQUOTED(PACKAGE_MENU_DIR, "${packageprefix}/${packagemenudir}",[package menu directory])
 AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}",[package source directory])
 
+dnl src/gnome/Makefile
 
 AC_OUTPUT([ m4/Makefile 
 Makefile
@@ -174,7 +175,6 @@ doc/Makefile
 doc/help/Makefile
 src/Makefile
 src/backend/Makefile
-src/gnome/Makefile
 src/gnome2/Makefile
 src/main/Makefile
 gnomesword2.desktop
