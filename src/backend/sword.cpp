@@ -461,10 +461,9 @@ GList *backend_get_books(void)
 }
 
 /*** returns the version number of the sword libs ***/
-const char *backend_get_sword_verion(void)
+const char *backend_get_sword_version(void)
 {
 	SWVersion retval;
-
 	retval = SWVersion::currentVersion;
 	return retval;
 }
@@ -524,13 +523,19 @@ void backend_display_devotional(SETTINGS * s)
 	time_t curtime;
 	struct tm *loctime;
 
-	/* Get the current time. */
+	/* 
+	 * Get the current time. 
+	 */
 	curtime = time(NULL);
 
-	/* Convert it to local time representation. */
+	/* 
+	 * Convert it to local time representation. 
+	 */
 	loctime = localtime(&curtime);
 
-	/* Print it out in a nice format. */
+	/* 
+	 * Print it out in a nice format. 
+	 */
 	strftime(buf, 80, "%m.%d", loctime);
 
 	display_dictlex_in_viewer(s->devotionalmod, buf, s);

@@ -296,6 +296,8 @@ void change_module_and_key(gchar *module_name, gchar *key);
 void change_verse(gchar *key);
 void set_verse_style(gboolean choice);
 void save_module_key(gchar * mod_name, gchar * key);
+const char *get_sword_version(void);
+void display_devotional(SETTINGS * s);
 
 #ifdef __cplusplus
 }
