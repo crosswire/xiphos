@@ -307,42 +307,13 @@ void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 //----------------------------------------------------------------------------------------------
 void
-on_about_this_module1_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_about_this_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(getmodnameSWORD(0));
+	if(!strcmp((gchar *)user_data,"Bible")) showmoduleinfoSWORD(getmodnameSWORD(0));
+	else if (!strcmp((gchar *)user_data,"commentary")) showmoduleinfoSWORD(getmodnameSWORD(1));
+	else if (!strcmp((gchar *)user_data,"dictionary")) showmoduleinfoSWORD(getmodnameSWORD(2));	
+	
 }
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(3));
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module3_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(4));
-}		
-
-/*******************************************************************************
- *
- *******************************************************************************/	
-void on_about_this_module4_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(5));
-}
-		
-
-/*******************************************************************************
- *
- *******************************************************************************/	
-void on_about_this_module6_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	showmoduleinfoSWORD(getmodnameSWORD(1));
-}
-		
 
 /*******************************************************************************
  *

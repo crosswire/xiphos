@@ -429,12 +429,15 @@ char InterlinearDisp::Display(SWModule & imodule)
 	//ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
-	GString *strbuf;
+	//GString *strbuf;
 	bool utf = false;
 	gint len;
 	gchar *sourceformat;
-	char *Buf, *modName, *thebuf;	
-		
+	char *Buf, *modName, *thebuf, *encoding;	
+	gchar *utf8str;
+	gint utf8len;
+	
+	encoding = NULL;
 	font = "Roman";
 	buf = (char *) imodule.Description();
 	if ((sit = mainMgr1->config->Sections.find(comp1Mod->Name())) !=
@@ -443,54 +446,71 @@ char InterlinearDisp::Display(SWModule & imodule)
 		    	(*sit).second.end()) {
 				font = (char *) (*eit).second.c_str();				
 		}
+		if ((eit = (*sit).second.find("Encoding")) !=
+		    	(*sit).second.end()) {
+				encoding = (char *) (*eit).second.c_str();	
+				g_warning(encoding);
+		}
 	} 
-	(const char *) imodule;
-	strbuf = g_string_new("");
-	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","3");
-	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
-		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
-	strbuf = g_string_append(strbuf, tmpBuf);
-	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-	g_string_free(strbuf, TRUE);
+	(const char *) imodule;	
+	
+	sprintf(tmpBuf, "<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\"><A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
+		gsfonts->interlinear_font_size,imodule.Name(), buf, imodule.Name(), imodule.KeyText());	
+	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+	utf8len = g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	
 	/* heading */
-	if (font) {		
-		g_warning(font);
+	/*if (font) {		
 		strbuf = g_string_new("");
 		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, gsfonts->interlinear_font_size);
-	} 
+	} */
 	/* body */
-	strbuf = g_string_append(strbuf, (const char *) imodule);
+	//strbuf = g_string_append(strbuf, (const char *) imodule);
 	/* closing */
-	if(font){
-		strbuf = g_string_append(strbuf, "</font><br><hr>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} 
+	/*if(font){
+		strbuf = g_string_append(strbuf, "</font><br><hr>");		
+	} */
+	
+	
+	sprintf(tmpBuf,
+					 "<font size=\"%s\">",
+					 gsfonts->interlinear_font_size);	
+		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+		utf8len = g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	
+	//if(!stricmp(encoding,"UTF-8")){ 		
+		displayHTML(GTK_WIDGET(gtkText), (const char *)imodule, strlen((const char *)imodule) );
+	//} 
+	/*else {
+		utf8str = e_utf8_from_gtk_string (gtkText,(const char *)imodule );
+		displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
+	}
+	*/
+	
+	sprintf(tmpBuf,"%s", "</font><br><hr>");
+	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
+	
+	//g_string_free(strbuf, TRUE);
 	return 0;
 }
 
 /* ***************************************************************************
  * to display Sword module about information
  *****************************************************************************/
-void AboutModsDisplayHTML(GString *text)
+void AboutModsDisplayHTML(char *to, char *text)
 {
-    char *to, *from;
-	int len;
+    	int len,i;
 	bool center = false;
-	int maxlen;
-	
-	maxlen = text->len * 10;
-	len = text->len + 1;						// shift string to right of buffer
-	if (len < maxlen) {
-		memmove(&text->str[maxlen - len], text->str, len);
-		from = &text->str[maxlen - len];
-	}
-	else	from = text->str;							// -------------------------------
-	for (to = text->str; *from; from++) {
-		if (*from == '\\') // a RTF command
+								// shift string to right of buffer
+								// -------------------------------
+	for (i = 0; i < strlen(text) -1; i++) {
+		if (text[i] == '\\') // a RTF command
 		{
-			if ((from[1] == 'p') && (from[2] == 'a') && (from[3] == 'r') && (from[4] == 'd'))
+			if ((text[i+1] == 'p') && (text[i+2] == 'a') && (text[i+3] == 'r') && (text[i+4] == 'd'))
 			{ // switch all modifier off
+				
 				if (center)
 				{
 					*to++ = '<';
@@ -504,24 +524,29 @@ void AboutModsDisplayHTML(GString *text)
 					*to++ = '>';
 					center = false;
 				}
-				from += 4;
+				i += 4;
 				continue;
 			}
-			if ((from[1] == 'p') && (from[2] == 'a') && (from[3] == 'r'))
+			if ((text[i+1] == 'p') && (text[i+2] == 'a') && (text[i+3] == 'r'))
 			{
 				*to++ = '<';
 				*to++ = 'P';
 				*to++ = '>';
 				*to++ = '\n';
-				from += 3;
+				i += 3;
 				continue;
 			}
-			if (from[1] == ' ')
+			if (text[i+1] == ' ')
 			{
-				from += 1;
+				i += 1;
 				continue;
 			}
-			if ((from[1] == 'q') && (from[2] == 'c')) // center on
+			if (text[i+1] == '\n')
+			{
+				i += 1;
+				continue;
+			}			
+			if ((text[i+1] == 'q') && (text[i+2] == 'c')) // center on
 			{
 				if (!center)
 				{
@@ -535,14 +560,15 @@ void AboutModsDisplayHTML(GString *text)
 					*to++ = '>';
 					center = true;
 				}
-				from += 2;
+				i += 2;
 				continue;
 			}
 		}
-
-		*to++ = *from;
+		*to++ = text[i];
 	}
-	*to = 0;
+	*to++ = 0;
+	//return to;
+	
 }
 
 
