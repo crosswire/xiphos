@@ -3133,6 +3133,16 @@ static GtkWidget *create_search_dialog(void)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
 					  (search.treeview), FALSE);
 
+	renderer = gtk_cell_renderer_text_new();
+	column = gtk_tree_view_column_new_with_attributes("Found",
+							     renderer,
+							     "text", 0,
+							     NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(search.treeview),
+					    column);
+	
+
 	search.which_scope = GTK_TOGGLE_BUTTON(search.rb_no_scope);
 
 	/* add html widgets */
