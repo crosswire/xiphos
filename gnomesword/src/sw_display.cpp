@@ -503,12 +503,13 @@ char IntDisplay(SETTINGS *s)
 		
 	SWModule *mod = mainMgr1->Modules[curMod->Name()];
 	
-	tmpkey = g_strdup(s->currentverse);
+	tmpkey = g_strdup(s->cvInterlinear);
 	mod->SetKey(tmpkey);
 	VerseKey *key = (VerseKey *) (SWKey *) *mod;	
 	
 	bgColor = "#f1f1f1";
 	int curVerse = key->Verse();
+	s->intCurVerse = curVerse;
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !mod->Error()); (*mod)++) {
