@@ -26,25 +26,77 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+/* frontend */
+#include "_display_info.h"
+
+/* main */ 
 #include "display_info.h"
 
-#include "_display_info.h"
 
 gboolean gsI_isrunning = FALSE;
 
+/******************************************************************************
+ * Name
+ *   on_dlgInformation_destroy
+ *
+ * Synopsis
+ *   #include "_display_info.h"
+ *
+ *   void on_dlgInformation_destroy(GtkObject * object, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *    shut it down
+ *
+ * Return value
+ *   void
+ */ 
+
 static void on_dlgInformation_destroy(GtkObject * object, 
-                                        gpointer user_data)
+						gpointer user_data)
 {
 	gsI_isrunning = FALSE;
 	dispaly_info_shutdown(); 
 }
+
+/******************************************************************************
+ * Name
+ *   on_btnInfoOK_clicked
+ *
+ * Synopsis
+ *   #include "_display_info.h"
+ *
+ *   void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 static void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
-GtkWidget *create_dlgInformation(void)
+/******************************************************************************
+ * Name
+ *   gui_create_display_informtion_dialog
+ *
+ * Synopsis
+ *   #include "_display_info.h"
+ *
+ *   GtkWidget *gui_create_display_informtion_dialog(void)	
+ *
+ * Description
+ *    create information dialog 
+ *
+ * Return value
+ *   GtkWidget *
+ */ 
+
+GtkWidget *gui_create_display_informtion_dialog(void)
 {
 	GtkWidget *dlgInformation;
 	GtkWidget *dialog_vbox15;

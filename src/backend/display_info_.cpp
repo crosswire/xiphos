@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * display_info_.cpp - About dialogs for GnomeSword
+ * display_info_.cpp - display for view dialogs
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -31,7 +31,6 @@
 #include <versekey.h>
 
 /* main */
-//#include "gs_gnomesword.h"
 #include "settings.h"
 
 /* backend */
@@ -49,9 +48,21 @@ static SWMgr *mgr;
 static SWModule *mod;	
 
 /******************************************************************************
- * backend_dispaly_info_load_modudle - load a module into the 
- * information dialog
- ******************************************************************************/
+ * Name
+ *   backend_dispaly_info_load_modudle
+ *
+ * Synopsis
+ *   #include "display_info_.h"
+ *
+ *   void backend_dispaly_info_load_modudle(gchar * modName, gchar * newkey)	
+ *
+ * Description
+ *    load a module into the information dialog
+ *
+ * Return value
+ *   void
+ */ 
+
 void backend_dispaly_info_load_modudle(gchar * modName, gchar * newkey)
 {
 	ModMap::iterator it;
@@ -65,10 +76,22 @@ void backend_dispaly_info_load_modudle(gchar * modName, gchar * newkey)
 	}
 }
 
-/**************************************************************************
- * backend_display_info_setup - set up the sword stuff for 
- * the information dialog
- **************************************************************************/
+/******************************************************************************
+ * Name
+ *   backend_display_info_setup
+ *
+ * Synopsis
+ *   #include "display_info_.h"
+ *
+ *   void backend_display_info_setup(GtkWidget * text)	
+ *
+ * Description
+ *    set up the sword stuff for the information dialog
+ *
+ * Return value
+ *   void
+ */ 
+
 void backend_display_info_setup(GtkWidget * text)
 {
 	ModMap::iterator it;	//-- iteratior     
@@ -87,8 +110,21 @@ void backend_display_info_setup(GtkWidget * text)
 }
 
 /******************************************************************************
- *backend_dispaly_info_shutdown - called when info dialog is destroyed
- ******************************************************************************/
+ * Name
+ *   backend_dispaly_info_shutdown
+ *
+ * Synopsis
+ *   #include "display_info_.h"
+ *
+ *   void backend_dispaly_info_shutdown(void)	
+ *
+ * Description
+ *    called when info dialog is destroyed
+ *
+ * Return value
+ *   void
+ */ 
+
 void backend_dispaly_info_shutdown(void)
 {
 	delete mgr;
@@ -97,8 +133,21 @@ void backend_dispaly_info_shutdown(void)
 }
 
 /******************************************************************************
- *backend_dispaly_info_change_key - find new key
- ******************************************************************************/
+ * Name
+ *   backend_dispaly_info_change_key
+ *
+ * Synopsis
+ *   #include "display_info_.h"
+ *
+ *   void backend_dispaly_info_change_key(gchar * newkey)	
+ *
+ * Description
+ *    find new key
+ *
+ * Return value
+ *   void
+ */ 
+
 void backend_dispaly_info_change_key(gchar * newkey)
 {
 	mod->SetKey(newkey);
