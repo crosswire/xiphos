@@ -371,7 +371,6 @@ void UpdateChecks(GtkWidget *app)
         /* set Text - apply changes */
         addhistoryitem = FALSE;
         changeVerseSWORD(settings->currentverse);
-        //addHistoryItem(app, lookup_widget(app, "shortcut_bar"), settings->currentverse);
 }
 
 
