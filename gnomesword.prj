@@ -99,6 +99,7 @@ module.include.files=\
 	src/gui/fileselection.h\
 	src/gui/gui.h\
 	src/gui/history.h\
+	src/gui/html.h\
 	src/gui/interlinear.h\
 	src/gui/interlinear_dialog.h\
 	src/gui/info_box.h\
@@ -122,7 +123,6 @@ module.include.files=\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_gnomesword.h\
-	src/main/gs_html.h\
 	src/main/gs_menu.h\
 	src/main/gs_popup_cb.h\
 	src/main/setup.h\
@@ -164,6 +164,7 @@ module.source.files=\
 	src/gnome/_editor.c\
 	src/gnome/gbs.c\
 	src/gnome/history.c\
+	src/gnome/html.c\
 	src/gnome/percomm.c\
 	src/gnome/gbs_find.c\
 	src/gnome/gtkhtml_display.c\
@@ -197,7 +198,6 @@ module.source.files=\
 	src/main/dictlex.c\
 	src/main/gbs.c\
 	src/main/gs_gnomesword.c\
-	src/main/gs_html.c\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
 	src/main/setup.c\

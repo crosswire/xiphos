@@ -36,10 +36,10 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/history.h"
+#include "gui/html.h"
 #include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/bibletext.h"
 #include "main/gs_menu.h"
 #include "gui/about_gnomesword.h"
@@ -325,7 +325,7 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 static void on_bibletext_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
-	gui_open_bibletext_dialog(GPOINTER_TO_INT(user_data));
+	gui_open_bibletext_dialog((gchar*)user_data);
 }
 
 /******************************************************************************
@@ -347,7 +347,7 @@ static void on_bibletext_item_activate(GtkMenuItem * menuitem,
 static void on_commentary_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
-	gui_open_commentary_dialog(GPOINTER_TO_INT(user_data));
+	gui_open_commentary_dialog((gchar *)user_data);
 }
 /******************************************************************************
  * Name
@@ -368,7 +368,7 @@ static void on_commentary_item_activate(GtkMenuItem * menuitem,
 static void on_dictlex_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
-	gui_open_dictlex_dialog(GPOINTER_TO_INT(user_data));
+	gui_open_dictlex_dialog((gchar *)user_data);
 }
 
 /******************************************************************************
@@ -407,7 +407,7 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Copy"),
 	 N_("Copy highlighted text from main window"),
-	 on_copyhtml_activate, "htmlTexts", NULL,
+	 gui_copyhtml_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,

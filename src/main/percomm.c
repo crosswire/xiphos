@@ -29,10 +29,10 @@
 #include "gui/_editor.h"
 #include "backend/module_options.h"
 #include "gui/info_box.h"
+#include "gui/html.h"
 
 #include "main/percomm.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 
 #include "backend/percomm_.h"
 #include "backend/sword.h"

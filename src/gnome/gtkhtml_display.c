@@ -457,7 +457,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		 
 						
 		sprintf(buf,			
-			"&nbsp; <A HREF=\"I%s\" NAME=\"%d\">"
+			"&nbsp; <A HREF=\"*%s\" NAME=\"%d\">"
 			"<font size=\"%s\" color=\"%s\">%d</font></A> ", 
 			tmpkey,
 			i,	

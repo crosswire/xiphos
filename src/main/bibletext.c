@@ -25,21 +25,16 @@
 
 #include <gnome.h>
 
-#include "gui/bibletext.h"
-#include "gui/shortcutbar_main.h"
-#include "gui/cipher_key_dialog.h"
-#include "backend/module_options.h"
 
 #include "main/settings.h"
 #include "main/bibletext.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
-#include "main/settings.h"
 
 #include "backend/bibletext_.h"
 #include "backend/sword.h"
 #include "backend/shortcutbar.h"
 #include "backend/interlinear.h"
+#include "backend/module_options.h"
 
 
 

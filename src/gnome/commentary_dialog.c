@@ -29,10 +29,10 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/commentary_dialog.h"
+#include "gui/html.h"
 
 #include "main/commentary.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/lists.h"
 #include "main/settings.h"
 
@@ -42,6 +42,7 @@
  */
 static GList * dialog_list;
 static VIEW_COMM * cur_vc;
+static gboolean dialog_freed;
 
  
 
@@ -87,38 +88,40 @@ static void display(VIEW_COMM *c, gchar * key)
 	
 }
 
+
 /******************************************************************************
  * Name
- *   on_btnVCClose_clicked
+ *   free_on_destroy
  *
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void on_btnVCClose_clicked(GtkButton * button, 
- *						VIEW_COMM * vc)	
+ *   void free_on_destroy(VIEW_COMM * vc)
  *
  * Description
- *   hide the dialog but do not destroy
+ *   removes dialog from dialog_list when dialog is destroyed other than
+ *   program shut down
  *
  * Return value
  *   void
  */
 
-static void on_btn_close_clicked(GtkButton * button, 
-						VIEW_COMM * vc)
-{
-	gtk_widget_destroy(vc->dialog);
-	vc->dialog = NULL;
+static void free_on_destroy(VIEW_COMM * vc)
+{		
+	dialog_list = g_list_remove(dialog_list, (VIEW_COMM *) vc);
+	g_warning("shuting down %s dialog",vc->mod_name);
+	g_free(vc);	
 }
+
 
 /******************************************************************************
  * Name
- *   on_dlgViewComm_destroy
+ *   on_dialog_destroy
  *
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void on_dlgViewComm_destroy(GtkObject * object, 
+ *   void on_dialog_destroy(GtkObject * object, 
  *						VIEW_COMM * vc)	
  *
  * Description
@@ -131,8 +134,38 @@ static void on_btn_close_clicked(GtkButton * button,
 static void on_dialog_destroy(GtkObject * object, 
 						VIEW_COMM * vc)
 {
-	//shutdown_viewcomm();
+	if(!dialog_freed)
+		free_on_destroy(vc);
+	dialog_freed = FALSE;
 }
+
+
+/******************************************************************************
+ * Name
+ *   on_btn_close_clicked
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_btn_close_clicked(GtkButton * button, 
+ *						VIEW_COMM * vc)	
+ *
+ * Description
+ *   hide the dialog but do not destroy
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btn_close_clicked(GtkButton * button, 
+						VIEW_COMM * vc)
+{
+	if(vc->dialog) {
+		dialog_freed = FALSE;
+		gtk_widget_destroy(vc->dialog);
+	}
+}
+
 
 /******************************************************************************
  * Name
@@ -173,9 +206,9 @@ static void on_btn_sync_clicked(GtkButton * button, VIEW_COMM * vc)
  */
 
 static void module_new_activate(GtkEditable * editable, 
-					gpointer user_data)
+						gpointer user_data)
 {
-	gui_open_commentary_dialog(GPOINTER_TO_INT(user_data));
+	gui_open_commentary_dialog((gchar *)user_data);
 }
 
 /******************************************************************************
@@ -278,7 +311,7 @@ static void on_btn_next_clicked(GtkButton * button, VIEW_COMM * vc)
  */
 
 static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-                      GdkEventMotion  *event, VIEW_COMM * vc)
+                        GdkEventMotion  *event, VIEW_COMM * vc)
 {
 	cur_vc = vc;
 	return TRUE;
@@ -314,16 +347,15 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 
 		/* add module name items to menu */
 		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *) (gchar
-								  *)
-						       tmp->data);
+		    gtk_check_menu_item_new_with_label(
+				(gchar *) (gchar *)tmp->data);
 		sprintf(menuName, "ModuleNum%d", view_number);
 		gtk_object_set_data(GTK_OBJECT(settings.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 				   GTK_SIGNAL_FUNC(module_new_activate),
-				   GINT_TO_POINTER(view_number));
+				   (gchar *)tmp->data);
 		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
 				      GTK_WIDGET(menuChoice), view_number);
 		++view_number;
@@ -331,6 +363,31 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 	}
 	g_list_free(tmp);
 }
+
+/******************************************************************************
+ * Name
+ *   dialog_url
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void dialog_url(GtkHTML * html, const gchar * url, VIEW_COMM * vc)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_url(GtkHTML * html, const gchar * url, 
+						VIEW_COMM * vc)
+{	
+	
+	cur_vc = vc;
+	
+}
+
 
 /******************************************************************************
  * Name
@@ -350,7 +407,6 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 
 static void create_commentary_dialog(VIEW_COMM * vc)
 {
-	GtkWidget *dialog_vbox11;
 	GtkWidget *vbox30;
 	GtkWidget *toolbar;
 	GtkWidget *vseparator;
@@ -361,27 +417,26 @@ static void create_commentary_dialog(VIEW_COMM * vc)
 	GtkAccelGroup *module_new_menu_accels;
 	GtkWidget *frame19;
 	GtkWidget *scrolledwindow38;
-	GtkWidget *dialog_action_area11;
-
-	vc->dialog =
-	    gnome_dialog_new(_("GnomeSword - View Commentary"), NULL);
+	gchar title[256];
+	
+	sprintf(title,"%s - %s",vc->mod_name, _("GnomeSword"));
+	
+	vc->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
+	    
 	gtk_object_set_data(GTK_OBJECT(vc->dialog), "vc->dialog",
 			    vc->dialog);
-	GTK_WINDOW(vc->dialog)->type = GTK_WINDOW_DIALOG;
+	gtk_window_set_title (GTK_WINDOW (vc->dialog), title);
 	gtk_window_set_default_size(GTK_WINDOW(vc->dialog), 462, 280);
-	gtk_window_set_policy(GTK_WINDOW(vc->dialog), TRUE, TRUE, FALSE);
-
-	dialog_vbox11 = GNOME_DIALOG(vc->dialog)->vbox;
-	gtk_object_set_data(GTK_OBJECT(vc->dialog), "dialog_vbox11",
-			    dialog_vbox11);
-	gtk_widget_show(dialog_vbox11);
-
+	gtk_window_set_policy(GTK_WINDOW(vc->dialog), TRUE, TRUE,
+			      FALSE);
+	
 	vbox30 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox30);
 	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vbox30", vbox30,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox30);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox11), vbox30, TRUE, TRUE, 0);
+	
+	gtk_container_add(GTK_CONTAINER(vc->dialog), vbox30);
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
@@ -500,6 +555,33 @@ static void create_commentary_dialog(VIEW_COMM * vc)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vc->btn_next);
 
+	vseparator = gtk_vseparator_new();
+	gtk_widget_ref(vseparator);
+	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
+				 "vseparator", vseparator,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator, 7, 13);
+
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(vc->dialog,
+				      GNOME_STOCK_PIXMAP_EXIT);
+	vc->btn_close =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Close"), _("Close Dialog"),
+				       NULL, tmp_toolbar_icon, NULL,
+				       NULL);
+	gtk_widget_ref(vc->btn_close);
+	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
+				 "vc->btn_close", vc->btn_close,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vc->btn_close);	
+	
+	
 	frame19 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame19);
 	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "frame19",
@@ -528,25 +610,7 @@ static void create_commentary_dialog(VIEW_COMM * vc)
 	gtk_widget_show(vc->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow38), vc->html);
 	gtk_html_load_empty(GTK_HTML(vc->html));
-
-	dialog_action_area11 = GNOME_DIALOG(vc->dialog)->action_area;
-	gtk_object_set_data(GTK_OBJECT(vc->dialog),
-			    "dialog_action_area11", dialog_action_area11);
-	gtk_widget_show(dialog_action_area11);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area11),
-				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area11),
-				   8);
-
-	gnome_dialog_append_button(GNOME_DIALOG(vc->dialog),
-				   GNOME_STOCK_BUTTON_CLOSE);
-	vc->btn_close = g_list_last(GNOME_DIALOG(vc->dialog)->buttons)->data;
-	gtk_widget_ref(vc->btn_close);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vc->btn_close",
-				 vc->btn_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->btn_close);
-	GTK_WIDGET_SET_FLAGS(vc->btn_close, GTK_CAN_DEFAULT);
+	
 	
 	gtk_signal_connect(GTK_OBJECT(vc->dialog), "destroy",
 			   GTK_SIGNAL_FUNC(on_dialog_destroy), 
@@ -570,11 +634,11 @@ static void create_commentary_dialog(VIEW_COMM * vc)
 			   GTK_SIGNAL_FUNC(on_btn_close_clicked), 
 			   vc);
 	gtk_signal_connect(GTK_OBJECT(vc->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), 
+			   GTK_SIGNAL_FUNC(gui_link_clicked), 
 			   vc);			   
 	gtk_signal_connect (GTK_OBJECT (vc->html), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), 
-			    (gpointer)settings.app);
+			    GTK_SIGNAL_FUNC (dialog_url), 
+			    vc);
 	
 	gtk_entry_set_text(GTK_ENTRY(vc->entry_key), settings.currentverse);
 	display(vc, settings.currentverse);
@@ -597,21 +661,19 @@ static void create_commentary_dialog(VIEW_COMM * vc)
  *   void
  */
 
-void gui_open_commentary_dialog(gint mod_num)
+void gui_open_commentary_dialog(gchar * mod_name)
 {		
 	VIEW_COMM * vc; 
 	
-	vc = (VIEW_COMM *) g_list_nth_data(dialog_list, mod_num);	
-	
-	//g_warning(vc->mod_name);
-	if(vc->dialog == NULL){
-		create_commentary_dialog(vc);
-		gtk_widget_show(vc->dialog);
-	}
-	else {
-		gtk_widget_show(vc->dialog);
-		gdk_window_raise(GTK_WIDGET(vc->dialog)->window);
-	}
+	vc = g_new(VIEW_COMM, 1);
+	vc->dialog = NULL;
+	vc->dialog_number = get_module_number(mod_name, COMM_MODS);
+	vc->mod_name = mod_name;
+	vc->book_heading = FALSE;
+	vc->chapter_heading = FALSE;
+	dialog_list = g_list_append(dialog_list, (VIEW_COMM *) vc);	
+	create_commentary_dialog(vc);
+	gtk_widget_show(vc->dialog);
 }
 
 /******************************************************************************
@@ -633,26 +695,9 @@ void gui_open_commentary_dialog(gint mod_num)
  */
 
 void gui_setup_commentary_dialog(GList *mods)
-{
-	VIEW_COMM * vc;
-	GList *tmp = NULL;
-	gint count = 0;
-	
+{	
 	dialog_list = NULL;
-	
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		vc = g_new(VIEW_COMM, 1);
-		vc->dialog = NULL;
-		vc->dialog_number = count;
-		vc->mod_name = (gchar *) tmp->data;
-		vc->book_heading = FALSE;
-		vc->chapter_heading = FALSE;
-		++count;
-		dialog_list = g_list_append(dialog_list, (VIEW_COMM *) vc);
-		tmp = g_list_next(tmp);
-	}
+	dialog_freed = FALSE;
 }
 
 /******************************************************************************
@@ -676,12 +721,13 @@ void gui_shutdown_commentary_dialog(void)
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
 		VIEW_COMM *vc = (VIEW_COMM *) dialog_list->data;
+		dialog_freed = TRUE;
+		g_warning("shuting down %s dialog",vc->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
 		if (vc->dialog)
-			 gtk_widget_destroy(vc->dialog);
-		
+			 gtk_widget_destroy(vc->dialog);		
 		
 		g_free((VIEW_COMM *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);

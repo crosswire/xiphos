@@ -30,11 +30,11 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/dictlex_dialog.h"
+#include "gui/html.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
-#include "main/gs_html.h"
 
 /******************************************************************************
  * externs
@@ -309,7 +309,7 @@ void on_clistDictLex_select_row(GtkCList * clist, gint row,
 
 static void on_copy_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
-	//copyGS_HTML(d->html);
+	//gui_copy_html(d->html);
 }
 
 /******************************************************************************
@@ -398,7 +398,7 @@ static void on_showtabs_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 static void on_view_new_activate(GtkMenuItem *menuitem, DL_DATA * d)
 {
-	gui_open_dictlex_dialog(d->mod_num);
+	gui_open_dictlex_dialog(d->mod_name);
 }
 
 /******************************************************************************
@@ -799,9 +799,9 @@ static void create_dictlex_pane(DL_DATA *dl)
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) settings.app);
+			   GTK_SIGNAL_FUNC(gui_url), (gpointer) settings.app);
 	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
 			   GTK_SIGNAL_FUNC(on_entryDictLookup_changed),
 			   dl);

@@ -36,12 +36,12 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/bookmarks.h"
+#include "gui/html.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/gbs.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 
 /******************************************************************************
  *  externs  
@@ -489,7 +489,7 @@ static void on_lookup_word_activate(GtkMenuItem * menuitem,
 	
 	memset(mod_name, 0, 16);
 	module_name_from_description(mod_name, modDescription);
-	key = get_word_or_selection(cur_g->html, TRUE);
+	key = gui_get_word_or_selection(cur_g->html, TRUE);
 	if (key && mod_name) {
 		gui_display_dictlex_in_viewer(mod_name, key);
 		g_free(key);
@@ -522,7 +522,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	
 	memset(mod_name, 0, 16);
 	module_name_from_description(mod_name, modDescription);	
-	key = get_word_or_selection(cur_g->html, FALSE);
+	key = gui_get_word_or_selection(cur_g->html, FALSE);
 	if (key && mod_name) {
 		gui_display_dictlex_in_viewer(mod_name, key);
 		g_free(key);
@@ -550,7 +550,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_same_lookup_word_activate(GtkMenuItem * menuitem, 
 							GBS_DATA * g)
 {
-	gchar *key = get_word_or_selection(g->html, TRUE);
+	gchar *key = gui_get_word_or_selection(g->html, TRUE);
 	if (key) {
 		gui_display_dictlex_in_viewer(settings.DictWindowModule,
 					  key);
@@ -578,7 +578,7 @@ static void on_same_lookup_word_activate(GtkMenuItem * menuitem,
 static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 							GBS_DATA * g)
 {
-	gchar *key = get_word_or_selection(g->html, FALSE);
+	gchar *key = gui_get_word_or_selection(g->html, FALSE);
 	if (key) {
 		gui_display_dictlex_in_viewer(settings.DictWindowModule,
 					  key);
@@ -640,7 +640,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
-			key = buttonpresslookupGS_HTML(g->html);
+			key = gui_button_press_lookup(g->html);
 			if (key) {
 				gui_display_dictlex_in_viewer(settings.DictWindowModule,
 							  key
@@ -1108,10 +1108,10 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row),
 			   p_gbs);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), 
+			   GTK_SIGNAL_FUNC(gui_link_clicked), 
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), 
+			   GTK_SIGNAL_FUNC(gui_url), 
 			   (gpointer) settings.app);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html),
 			   "button_release_event",
