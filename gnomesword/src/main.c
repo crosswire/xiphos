@@ -172,14 +172,15 @@ int main(int argc, char *argv[])
     /*
      * Set toggle state of buttons and menu items.
      */
-
     UpdateChecks(settings);
+    
     /* showing the devotional must come after the the app is shown or
        it will mess up the shortcut bar display */
     /* FIXME: maybe we need to move the devotional ? */
     if (settings->showdevotional) {
 	displayDevotional();
     }
+    
     gtk_main();
 
     return 0;
