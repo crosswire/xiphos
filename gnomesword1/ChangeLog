@@ -1,3 +1,15 @@
+2004-03-30  Terry <tbiggs@users.sf.net>
+
+	* completely reworked gnome2/commentary_dialog.c
+	* completely reworked gnome2/dictionary_dialog.c
+	* completely reworked gnome2/gbs_dialog.c
+	* removed gui/commentary_menu.h and gnome2/commentary_menu.c
+	* removed gui/dictionary_menu.h and gnome2/dictionary_menu.c
+	* removed gui/gbs_menu.h and gnome2/gbs_menu.c
+	* removed gui/gbs_display.h and gnome2/gbs_display.c
+	* removed main/gbs.h and main/gbs.c
+
+
 2004-03-15  Terry <tbiggs@users.sf.net>
 
 	* completely reworked gnome2/bibletext_dialog.c
