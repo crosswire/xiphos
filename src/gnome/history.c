@@ -188,18 +188,22 @@ void updatehistorymenu(GtkWidget *app)
 void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar)
 {
         gint i;
-
+	GdkPixbuf *icon_pixbuf = NULL;
+	
+	icon_pixbuf = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+			"/book-un.png");
+	
         for(i = historyitems-2; i >= 0; i--) {
                 e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-                                                groupnum4,
-						i);
+                        groupnum4,
+			i);
         }
         for(i=0;i<historyitems;i++) {
 		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						groupnum4, 
-						-1,
-						NULL,
-						historylist[i].verseref,
-						NULL);
+			groupnum4, 
+			-1,
+			historylist[i].verseref,
+			historylist[i].verseref,
+			icon_pixbuf);
         }
 }

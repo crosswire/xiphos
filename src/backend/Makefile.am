@@ -32,6 +32,8 @@ libbackend_a_SOURCES =  \
     gbs_.h \
     interlinear.cpp \
     interlinear.h \
+    module_fonts.cpp \
+    module_fonts.h \
     module_options.cpp \
     module_options.h \
     percomm_.cpp \

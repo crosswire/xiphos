@@ -35,13 +35,49 @@
 #include "main/settings.h"
 
 
+/******************************************************************************
+ * Name
+ *  get_font
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   MOD_FONT * get_font(gchar *mod_name)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static  MOD_FONT * get_font(gchar *mod_name)
+{
+	MOD_FONT *mf;
+
+	mf = g_new(MOD_FONT, 1);
+	mf->mod_name = mod_name;
+	//g_warning(mf->mod_name);
+	mf->old_font = NULL;
+	mf->old_gdk_font = NULL;
+	mf->old_font_size = NULL;
+	mf->new_font = NULL;
+	mf->new_gdk_font = NULL;
+	mf->new_font_size = NULL;
+	mf->no_font = 0;
+	get_font_info(mf);
+	if (strlen(mf->old_font) < 2)
+		mf->old_font = "none";
+	//g_warning("mf->old_font = %s",mf->old_font);
+	return mf;
+}
 
 /******************************************************************************
  * Name
  *  set_gobal_options
  *
  * Synopsis
- *   #include "bibletext.h"
+ *   #include ".h"
  *
  *  void (TEXT_DATA * t)	
  *
@@ -238,23 +274,32 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	GString * str;
 
 	gboolean use_gtkhtml_font = FALSE, was_editable = FALSE;
-
+	MOD_FONT *mf;
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream;
-
-	use_font = get_module_font_name(mod_name);
-	if (use_font)
-		use_gtkhtml_font = FALSE;
-	else
+	
+	mf = get_font(mod_name);
+		
+	use_font = g_strdup(mf->old_font);
+	//g_warning("use_font = %s",use_font);
+	if(use_font) {
+		if(!strncmp(use_font,"none",4))
+			use_gtkhtml_font = TRUE;
+		else
+			use_gtkhtml_font = FALSE;
+		
+	}
+	else {
 		use_gtkhtml_font = TRUE;
-
-	use_font_size = get_module_font_size(mod_name);
-
-	if (!use_font_size) {
-		use_font_size = strdup(settings.bible_font_size);
+		
 	}
 
+	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
+		use_font_size = g_strdup(mf->old_font_size);
+	else
+		use_font_size = g_strdup("+1");
+	
 	/* setup gtkhtml widget */
 	html = GTK_HTML(html_widget);
 	was_editable = gtk_html_get_editable(html);
@@ -351,6 +396,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		free(use_font_size);
 	if (use_font)
 		free(use_font);
+	g_free(mf);
 	g_string_free(str, TRUE);
 }
 
@@ -391,7 +437,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	GString * str;
 	gint utf8len, cur_verse, cur_chapter, i = 1;
 	const char *cur_book;
-
+	MOD_FONT *mf;
+	
 	GtkHTML *html = GTK_HTML(html_widget);
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTMLStream *htmlstream;
@@ -408,19 +455,26 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	
 	str = g_string_new("");
 	
-	use_font = get_module_font_name(mod_name);
-	if (use_font)
-		use_gtkhtml_font = FALSE;	
-	else 
+	mf = get_font(mod_name);
+		
+	use_font = g_strdup(mf->old_font);
+	//g_warning("use_font = %s",use_font);
+	if(use_font) {
+		if(!strncmp(use_font,"none",4))
+			use_gtkhtml_font = TRUE;
+		else
+			use_gtkhtml_font = FALSE;
+		
+	}
+	else {
 		use_gtkhtml_font = TRUE;
 		
-	
-
-	use_font_size = get_module_font_size(mod_name);
-
-	if (!use_font_size) {
-		use_font_size = strdup(settings.bible_font_size);
 	}
+
+	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
+		use_font_size = g_strdup(mf->old_font_size);
+	else
+		use_font_size = g_strdup("+1");
 	
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
@@ -462,7 +516,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			"<font size=\"%s\" color=\"%s\">%d</font></A> ", 
 			tmpkey,
 			i,	
-			settings.bible_font_size,			 
+			settings.verse_num_font_size,			 
 			settings.bible_verse_num_color,
 			i);	
 		
@@ -561,6 +615,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		free(use_font_size);
 	if (use_font)
 		free(use_font);
+	g_free(mf);
 	g_free(tmpkey);
 }
 
