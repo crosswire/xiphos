@@ -2,6 +2,7 @@
 
 	* added get_sword_locale() to backend/sword.cpp to help with the
 	  books of the bible problem.
+	* added de_DE.po and fr_FR.po to gettext happy
 
 
 2003-12-09  Andy <andyp@users.sf.net>
