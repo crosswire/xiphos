@@ -103,6 +103,7 @@ public:
 	char *module_name_from_description(char *description);
 	const char *module_get_language(const char *module_name);
 	int module_has_testament(const char * module_name,  int testament);
+	int module_get_testaments(const char * module_name);
 	const char *get_language_map(const char *language);
 	
 	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);

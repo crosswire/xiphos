@@ -59,6 +59,7 @@ struct _dialog_data {
 	
 	gint mod_num;
 	gint display_level;
+	gint mod_type;
 	unsigned long offset;
 	
 	gboolean is_locked;

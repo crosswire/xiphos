@@ -126,6 +126,11 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	GtkTreeIter iter;
 	int i = 0, j = 0, x = 2;
 	
+	if(navbar.testaments == backend->module_get_testaments(navbar.module_name))
+		return;
+	
+	navbar.testaments = backend->module_get_testaments(navbar.module_name);
+	
 	do_display = FALSE;
 	
 	GtkTreeModel* book_model = gtk_combo_box_get_model(

@@ -72,8 +72,7 @@ using namespace std;
 char GTKEntryDisp::Display(SWModule &imodule) 
 {
 	gchar *keytext = NULL;
-	SWBuf swbuf = "";
-	int curPos = 0;                                         
+	SWBuf swbuf = "";                                        
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
@@ -100,24 +99,24 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_read,
                              &bytes_written,
                              error);
-	
-	swbuf.appendFormatted(HTML_START
-				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
-				"[%s]</font></a>[%s]<br>"
-				"<font face=\"%s\" size=\"%s\">%s"
-				"</font></body></html>",
+	swbuf.append(HTML_START);
+	swbuf.appendFormatted(  "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
 				settings.bible_text_color,
-				settings.link_color,
-				imodule.Description(),
-				imodule.Name(),
-				settings.bible_verse_num_color,
+				settings.link_color);
+	
+	
+	swbuf.appendFormatted(  "<font color=\"%s\">",
+				settings.bible_verse_num_color);
+	
+	swbuf.appendFormatted(	"[*%s*]</font>[%s]<br>"
+				"<font face=\"%s\" size=\"%s\">",
 				imodule.Name(),
 				(gchar*)keytext,
 				(mf->old_font)?mf->old_font:"",
-				(mf->old_font_size)?mf->old_font_size:"+0",
-				(const char *)imodule);	
+				(mf->old_font_size)?mf->old_font_size:"+0");
+	swbuf.append((const char *)imodule);
+	swbuf.append("</font></body></html>");	
 	
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
@@ -186,7 +185,7 @@ void GTKChapDisp::getVerseBefore(SWModule &imodule)
 				(mf->old_font)?mf->old_font:"", 
 				(mf->old_font_size)?mf->old_font_size:"+0", 
 				settings.bible_text_color);		
-		
+		//g_message(mod->getRawEntry());
 		swbuf.appendFormatted("%s</font><br><hr><div style=\"text-align: center\"><b>%s %d</b></div>",
 					(const char *)*mod,
 					_("Chapter"),
@@ -255,19 +254,16 @@ void GTKChapDisp::getVerseAfter(SWModule &imodule)
 
 char GTKChapDisp::Display(SWModule &imodule) 
 {
-	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	int curPos = 0;
-	gfloat adjVal;
 	GtkHTML *html = GTK_HTML(gtkText);
 	GtkHTMLStream *stream = gtk_html_begin(html);
 	GtkHTMLStreamStatus status;
 	gchar *utf8_key;
 	gchar *buf;
-	gchar *buf2;
 	gchar *preverse = NULL;
 	gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
@@ -833,7 +829,7 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 						       "verseNumber"),
 				NULL);
 		
-		g_string_printf(str, " %s", (const char *)imodule);
+		g_string_printf(str, " %s", (const char *)imodule.StripText());
 		
 		if(key->Verse() == curVerse) {
 		        gtk_text_buffer_get_end_iter(buffer, &iter);

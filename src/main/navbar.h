@@ -38,6 +38,7 @@ struct _navbar {
 	gchar *key;
 	gchar *module_name;
 	gboolean is_dialog;
+	int testaments;
 };
 extern NAVBAR navbar_main;
 

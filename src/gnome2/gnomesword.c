@@ -272,6 +272,11 @@ void shutdown_frontend(void)
 	if(pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
 
+	if(navbar_main.module_name) 
+		g_free(navbar_main.module_name);
+	if(navbar_main.key) 
+		g_free(navbar_main.key);
+	
 	/* free verse list used for saving search results */
 	if(list_of_verses) {
 		while(list_of_verses) {
