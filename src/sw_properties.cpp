@@ -97,7 +97,10 @@ gboolean loadconfig(SETTINGS *s)
 		settingsInfo["LEXICONS"]["Greek Viewer"].c_str());
 	sprintf(s->lex_hebrew_viewer, "%s",
 		settingsInfo["LEXICONS"]["Hebrew Viewer"].c_str());
-		
+	/* which dictionary to open in viewer when a word is clicked */
+	sprintf(s->DefaultDict, "%s",
+		settingsInfo["LEXICONS"]["Default Dictionary"].c_str());
+	
 	/* font sizes html widgets */
 	sprintf(s->bible_font_size, "%s",
 		settingsInfo["FontSize"]["BibleWindow"].c_str());
@@ -224,6 +227,8 @@ gboolean loadconfig(SETTINGS *s)
 	    atoi(settingsInfo["User Options"]["InViewer"].c_str());
 	s->inDictpane =
 	    atoi(settingsInfo["User Options"]["InDictPane"].c_str());
+	s->useDefaultDict =
+	    atoi(settingsInfo["User Options"]["UseDefaultDict"].c_str());
 
 
 	return true;
@@ -272,9 +277,11 @@ gboolean saveconfig(SETTINGS *s, gboolean shutdown)
 
 		settingsInfo["LEXICONS"]["Greek"] = s->lex_greek;
 		settingsInfo["LEXICONS"]["Hebrew"] = s->lex_hebrew;
-/* which lexicon to open in viewer when storngs numbers are clicked */
+	/* which lexicon to open in viewer when storngs numbers are clicked */
 		settingsInfo["LEXICONS"]["Greek Viewer"] = s->lex_greek_viewer;
 		settingsInfo["LEXICONS"]["Hebrew Viewer"] = s->lex_hebrew_viewer;
+	/* which dictionary to open in viewer when a word is clicked */
+		settingsInfo["LEXICONS"]["Default Dictionary"] = s->DefaultDict;
 
 		sprintf(buf, "%d", s->notebook3page);
 		settingsInfo["Notebooks"]["notebook3page"] = buf;
@@ -376,6 +383,7 @@ gboolean saveconfig(SETTINGS *s, gboolean shutdown)
 		settingsInfo["User Options"]["DictTabs"] = isON(s->dict_tabs);
 	        settingsInfo["User Options"]["InViewer"] = isON(s->inViewer);
 		settingsInfo["User Options"]["InDictPane"] = isON(s->inDictpane);
+	        settingsInfo["User Options"]["UseDefaultDict"] = isON(s->useDefaultDict);
 	}
 	settingsInfo.Save();
 	return true;
@@ -468,6 +476,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["NoteScroll"] = "1";
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
+	settingsInfo["User Options"]["UseDefaultDict"] = "0";
 	settingsInfo.Save();
 	return true;
 }
@@ -552,6 +561,7 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["NoteScroll"] = "1";
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
+	settingsInfo["User Options"]["UseDefaultDict"] = "0";
 	
 	settingsInfo.Save();
 	return true;
