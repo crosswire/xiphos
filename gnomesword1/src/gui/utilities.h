@@ -29,6 +29,13 @@ extern "C" {
 GtkWidget *gui_lookup_widget(GtkWidget * widget,
 				  const gchar * widget_name);
 
+void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
+     gchar * itemdata, gchar * submenuname, GtkMenuCallback mycallback);
+void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);
+void gui_add_mods_to_menus(GList * modlist, gchar * menu,
+					GtkMenuCallback callback);
+void gui_remove_menu_items(gchar *startitem, gint numberofitems);
+	
 #ifdef __cplusplus
 }
 #endif
