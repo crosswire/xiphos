@@ -97,13 +97,13 @@ void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_help_contents_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-	pid_t pid;
-
-	if ((pid = fork()) == 0) {
-		execlp("gnome-help-browser", "gnome-help-browser",
-		       "ghelp:gnomesword");
-		g_error(_("Cannot launch gnome-help-browser"));
-	}
+	//GError *error = NULL;
+	/*if(!gnome_help_display("",
+				     NULL,
+				     &error)) {
+		fprintf (stderr, "Gnome help error: %s\n", error->message);
+		g_error_free (error);
+	}*/
 }
 
 /******************************************************************************
@@ -767,15 +767,15 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("About GnomeSword..."),
-	 N_("About GnomeSword"),
-	 on_about_gnomesword1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-	 0, 0, NULL},
-	{
 	 GNOME_APP_UI_ITEM, N_("About the Sword Project..."),
 	 N_("Infotmation About The Sword Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("About GnomeSword..."),
+	 N_("About GnomeSword"),
+	 on_about_gnomesword1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
@@ -862,8 +862,9 @@ void gui_create_main_menu(GtkWidget * app)
 				       (widgets.versestyle_item),
 				       settings.versestyle);
 
-	gtk_menu_item_right_justify(GTK_MENU_ITEM
-				    (menubar1_uiinfo[4].widget));
+	/*gtk_menu_item_right_justify(GTK_MENU_ITEM
+				    (menubar1_uiinfo[4].widget));*/
+	gtk_widget_set_sensitive(help1_menu_uiinfo[0].widget, FALSE);
 
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
 			      _
