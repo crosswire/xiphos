@@ -2865,19 +2865,7 @@ Revelation
       </child>
 
       <widget>
-	<class>GtkPixmap</class>
-	<name>pixmap5</name>
-	<filename>GnomeSword.xpm</filename>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<build_insensitive>True</build_insensitive>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
+	<class>Placeholder</class>
       </widget>
 
       <widget>
@@ -3230,7 +3218,7 @@ Revelation
       <widget>
 	<class>GnomeDruidPageStart</class>
 	<name>druidpagestart1</name>
-	<title>Welcome To GnomeSword</title>
+	<title>Welcome To GnomeSword-0.5.0</title>
 	<text>This guide will take you through the initial setup of GnomeSword</text>
 	<title_color>255,255,255</title_color>
 	<text_color>0,0,0</text_color>
@@ -3264,7 +3252,7 @@ Revelation
 	  <widget>
 	    <class>GtkVBox</class>
 	    <name>vbox27</name>
-	    <homogeneous>False</homogeneous>
+	    <homogeneous>True</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
 	      <padding>0</padding>
@@ -3913,10 +3901,11 @@ Revelation
 	<title></title>
 	<text></text>
 	<background_color>25,25,112</background_color>
-	<logo_background_color>255,255,255</logo_background_color>
+	<logo_background_color>25,15,106</logo_background_color>
 	<textbox_color>255,255,255</textbox_color>
 	<text_color>0,0,0</text_color>
 	<title_color>255,255,255</title_color>
+	<logo_image>GnomeSword.png</logo_image>
       </widget>
     </widget>
   </widget>

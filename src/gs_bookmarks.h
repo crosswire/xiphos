@@ -35,7 +35,9 @@ struct _bmtree {
 	GtkWidget *ctree_widget;
 	GtkCTree *ctree;	
 };	
-	
+
+void
+addbookmarktotree(gchar *modName, gchar *verse);
 void
 loadtree(GtkWidget *ctree);
 				

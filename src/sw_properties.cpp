@@ -53,6 +53,8 @@ extern GS_NB_PAGES 	npages,
 					*nbpages;
 extern GS_TABS	tabs,
 				*p_tabs;
+extern GS_LEXICON *p_gslexicon,
+				gslexicon;
 /******************************************************************************
  * load gnomesword configuration - using sword SWConfig
  ******************************************************************************/
@@ -70,7 +72,9 @@ gboolean loadconfig(void)
 	gslayout.biblepane_width = atoi(settingsInfo["LAYOUT"]["BiblePane"].c_str()); 
 	gslayout.gs_width = atoi(settingsInfo["LAYOUT"]["AppWidth"].c_str()); 
 	gslayout.gs_hight = atoi(settingsInfo["LAYOUT"]["AppHight"].c_str()); 
-	
+	/* which lexicon to open when storngs numbers are clicked */
+	sprintf(gslexicon.greek, "%s", settingsInfo["LEXICONS"]["Greek"].c_str()); 
+	sprintf(gslexicon.hebrew, "%s", settingsInfo["LEXICONS"]["Hebrew"].c_str()); 
 	
 	sprintf(mfonts.bible_font_size, "%s", settingsInfo["FontSize"]["BibleWindow"].c_str()); 
 	sprintf(mfonts.commentary_font_size, "%s", settingsInfo["FontSize"]["CommentaryWindow"].c_str()); 
@@ -118,6 +122,7 @@ gboolean loadconfig(void)
 	p_tabs = &tabs;
 	nbpages = &npages;
 	gsfonts = &mfonts;
+	p_gslexicon = &gslexicon;
 	return true;
 }
 
@@ -137,6 +142,10 @@ gboolean saveconfig(void)
 	settingsInfo["Modules"]["Interlinear4"] = settings->Interlinear4Module; 
 	settingsInfo["Modules"]["Interlinear5"] = settings->Interlinear5Module; 
     	settingsInfo["Modules"]["PerComments"] = settings->personalcommentsmod; 
+	
+	settingsInfo["LEXICONS"]["Greek"]=p_gslexicon->greek; 
+	settingsInfo["LEXICONS"]["Hebrew"]=p_gslexicon->hebrew; 
+	
 	
 	sprintf(buf, "%d",nbpages->nbTextModspage);
 	settingsInfo["Notebooks"]["BiblePage"] = buf; //-- commentaries notebook
