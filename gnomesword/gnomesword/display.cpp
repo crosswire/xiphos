@@ -175,7 +175,7 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 	{
 		i=j=0;
 		verseBuf[0]='\0';
-		myverse = (const char *)imodule;
+		myverse = g_strdup((const char *)imodule);
 		len = strlen(myverse);
 		while(i<len)
 		{
@@ -364,7 +364,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		gtk_text_insert(GTK_TEXT(gtkText), versenum_font, &colourBlue, NULL, tmpBuf, -1);
 		i=j=0;
 		verseBuf[0]='\0';
-		myverse = (const char *)imodule;
+		myverse = g_strdup((const char *)imodule);
 		len = strlen(myverse);
 		while(i<len)
 		{
@@ -552,7 +552,6 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 }
-
 
 //-------------------------------------------------------------------------------------------
 void

@@ -259,8 +259,8 @@ print_document (gchar *doc, PrintJobInfo *pji, GnomePrinter *printer)
 	int current_page, current_line;
 	
 	
-	
-	pji->temp = g_malloc( pji->chars_per_line + 2);
+	//pji->chars_per_line = pji->chars_per_line + 2;
+	pji->temp = (guchar *)g_malloc((guint)pji->chars_per_line + 2);
 
 	current_line = 0;
 	
@@ -448,7 +448,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 		return;
 	
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
-	gnome_print_show (pji->pc, pji->temp);
+	gnome_print_show (pji->pc, (gchar *)pji->temp);
 	/* Why is this here ??? Chema. */
 	if ( pji->temp!='\0')
 		gnome_print_stroke (pji->pc);
@@ -476,13 +476,13 @@ print_set_pji (PrintJobInfo * pji, gchar *doc)
 //	pji->view = gedit_view_current();
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(text1));
-	pji->buffer = doc;
+	pji->buffer = (guchar *)doc;
 
 /*	if (doc->filename == NULL)
 		pji->filename = g_strdup (_("Untitled")); 
 	else
 */
-		pji->filename = g_strdup (currentfilename);
+		pji->filename = (guchar *)g_strdup (currentfilename);
 
 	pji->orientation = PRINT_ORIENT_PORTRAIT;
 	if (pji->orientation == PRINT_ORIENT_LANDSCAPE)
@@ -509,14 +509,14 @@ print_set_pji (PrintJobInfo * pji, gchar *doc)
 	pji->printable_height = pji->page_height -
 		                pji->margin_top -
 		                pji->margin_bottom;
-	pji->font_name = "Courier"; /* FIXME: Use courier 10 for now but set to actual font */
+	pji->font_name = (guchar *)"Courier"; /* FIXME: Use courier 10 for now but set to actual font */
 	pji->font_size = 10;
 	pji->font_char_width = 0.0808 * 72;
 	pji->font_char_height = .14 * 72;
 	pji->wrapping = TRUE; //settings->print_wrap_lines;
 	pji->chars_per_line = (gint)(pji->printable_width / pji->font_char_width);
-	pji->lines_per_page = (pji->printable_height -
-			      pji->header_height) /pji->font_char_height -  1;
+	pji->lines_per_page = (guint)(pji->printable_height -
+			      pji->header_height) /(guint)pji->font_char_height -  1;
 	pji->tab_size = 8;
 	pji->total_lines = print_determine_lines(pji, FALSE);
 	pji->total_lines_real = print_determine_lines(pji, TRUE);
@@ -733,8 +733,8 @@ print_set_orientation (PrintJobInfo *pji)
 static void
 print_header (PrintJobInfo *pji, unsigned int page)
 {
-	guchar* text1 = g_strdup (pji->filename);
-	guchar* text2 = g_strdup_printf (_("Page: %i/%i"),page,pji->pages);
+	gchar* text1 = g_strdup((gchar *)pji->filename);
+	gchar* text2 = g_strdup_printf (_("Page: %i/%i"),page,pji->pages);
 	GnomeFont *font;
 	float x,y,len;
 	
@@ -768,11 +768,9 @@ print_header (PrintJobInfo *pji, unsigned int page)
 static void
 print_setfont (PrintJobInfo *pji)
 {
-	GnomeFont *font;
-
+	GnomeFont *font;	
 	
-	
-	font = gnome_font_new (pji->font_name, pji->font_size);
+	font = gnome_font_new ((gchar *)pji->font_name, pji->font_size);
 	gnome_print_setfont (pji->pc, font);
 	gtk_object_unref (GTK_OBJECT(font));
 }
@@ -781,8 +779,6 @@ print_setfont (PrintJobInfo *pji)
 static void
 print_end_page (PrintJobInfo *pji)
 {
-
-
 	gnome_print_showpage (pji->pc);
 	print_set_orientation (pji);
 }
