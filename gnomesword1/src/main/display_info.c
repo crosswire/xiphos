@@ -25,15 +25,9 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "_display_info.h"
-
-/* main */ 
-#include "display_info.h"
-
-/* backend */
-#include "display_info_.h"
-
+#include "gui/_display_info.h"
+#include "main/display_info.h"
+#include "backend/display_info_.h"
 
 /******************************************************************************
  * Name

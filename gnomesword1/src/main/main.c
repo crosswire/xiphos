@@ -25,15 +25,15 @@
 
 #include <glib-1.2/glib.h>
 
-#include "gui.h"
-#include "splash.h"
-#include "sword.h"
-#include "bookmarks.h"
-#include "setup.h"
-#include "properties.h"
-#include "gs_gui.h"
-#include "gs_gnomesword.h"
-#include "settings.h"
+#include "gui/gui.h"
+#include "gui/splash.h"
+#include "backend/sword.h"
+#include "backend/bookmarks.h"
+#include "main/setup.h"
+#include "backend/properties.h"
+#include "main/gs_gui.h"
+#include "main/gs_gnomesword.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * Name

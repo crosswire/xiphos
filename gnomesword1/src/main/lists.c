@@ -25,12 +25,10 @@
 
 #include <gnome.h>
 
-/* main */ 
-#include "lists.h"
-#include "gs_gnomesword.h"
+#include "main/lists.h"
+#include "main/gs_gnomesword.h"
 
-/* backend */
-#include "sword.h"
+#include "backend/sword.h"
 	
 /******************************************************************************
  *  lists to keep for the life of the program

@@ -29,7 +29,7 @@
 
 #include <gnome.h>
 
-#include "support.h"
+#include "main/support.h"
 
 /* This is an internally used function to create pixmaps. */
 static GtkWidget *create_dummy_pixmap(GtkWidget * widget,
