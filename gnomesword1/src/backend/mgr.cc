@@ -292,7 +292,12 @@ void backend_get_global_options_list(GList * list)
 
 char *backend_get_path_to_mods(void)
 {
-	return strdup(sw.main_mgr->prefixPath);
+	char *path = NULL;
+	
+	path = sw.main_mgr->prefixPath;
+	if(path)
+		return strdup(path);
+	return NULL;
 }
 
 
