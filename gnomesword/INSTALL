@@ -6,6 +6,26 @@ You need to have the Sword Project (sword-1.5.0) installed.
 You need at least one each text ,commentary and dictionary module also.
 Sword-1.5.0 and the modules can be found at www.crosswire.org in the Sword Project.
 You need gnome-print-0.20 or later -- http://www.gnome.org/
+You need gdk-pixbuf-0.8 of later -- http://www.gnome.org/
+
+======================================================================
+
+**************************************************************************************************
+If you want to install into the same prefix as the rest of GNOME,
+type:
+
+	gnome-config --prefix
+	gnome-config --sysconfdir
+
+and remember the answers, and pass them to "configure" and "autogen"
+when building gnome-print, gdk-pixbuf and gnomesword. Eg:
+
+	./configure --prefix=/usr --sysconfdir=/etc
+These are the instructions from the Evolution readme.
+
+If you don't use this method you will likely have problems.
+**************************************************************************************************
+======================================================================
 
 ============================================================================
 ========= you need aspell.30 and pspell.10 to compile gnomesword ===========
@@ -26,9 +46,9 @@ libraries are installed and configured properly.
 
 Then do a:
 
-./configure
+./configure --prefix=/usr
 or
-./configure --enable-spellchecking
+./configure --prefix=/usr --enable-spellchecking
 make
 su
 make install
