@@ -299,11 +299,24 @@ void mod_mgr_init_config()
 	backend_init_module_mgr_config();
 }
 
-void mod_mgr_add_source(const char * type, const char * caption,
-				   const char * source, const char * directory)
+void mod_mgr_clear_config(void)
 {
-	backend_module_mgr_add_source(type, caption, source, directory);
+	backend_module_mgr_clear_config();
 }
+
+void mod_mgr_add_source(const char * vtype, 
+			const char * type, 
+			const char * caption, 
+			const char * source, 
+			const char * directory)
+{
+	backend_module_mgr_add_source(vtype, 
+				   type, 
+				   caption, 
+				   source, 
+				   directory);
+}
+
 
 /******************************************************************************
  * Name
