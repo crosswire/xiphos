@@ -24,6 +24,7 @@
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
 #include "gs_viewdict.h"
+#include "gs_viewcomm.h"
 #include "support.h"
 
 
@@ -34,6 +35,7 @@ extern gboolean noteModified;	/* personal comments window changed */
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern gboolean autoscroll;
 extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
+extern gboolean isrunningVC;    /* is the view dictionary dialog runing */
 extern gchar current_verse[80];
 
 //----------------------------------------------------------------------------------------------
@@ -323,25 +325,29 @@ void
 on_about_this_module3_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	showmoduleinfoSWORD(getmodnameSWORD(4));
-}
+}		
 
-
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module4_activate(GtkMenuItem * menuitem, gpointer user_data)
+/*******************************************************************************
+ *
+ *******************************************************************************/	
+void on_about_this_module4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	showmoduleinfoSWORD(getmodnameSWORD(5));
 }
+		
 
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module6_activate(GtkMenuItem * menuitem, gpointer user_data)
+/*******************************************************************************
+ *
+ *******************************************************************************/	
+void on_about_this_module6_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	showmoduleinfoSWORD(getmodnameSWORD(1));
 }
+		
 
-//----------------------------------------------------------------------------------------------
+/*******************************************************************************
+ *
+ *******************************************************************************/	
 void on_auto_scroll1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *toolbar;
@@ -353,10 +359,12 @@ void on_auto_scroll1_activate(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_widget_hide(toolbar);
 	else
 		gtk_widget_show(toolbar);
-
 }
+		
 
-//----------------------------------------------------------------------------------------------
+/*******************************************************************************
+ *
+ *******************************************************************************/	
 void on_lookup_selection4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *entry, *text;
@@ -374,11 +382,12 @@ void on_lookup_selection4_activate(GtkMenuItem * menuitem, gpointer user_data)
 		gtk_entry_set_text(GTK_ENTRY(entry), buf);
 		dictSearchTextChangedSWORD(buf);
 	}
-}
+}		
 
-//----------------------------------------------------------------------------------------------
-void
-on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
+/*******************************************************************************
+ *
+ *******************************************************************************/	
+void on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
 	gchar *buf;
@@ -393,22 +402,24 @@ on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 	
 	changeVerseSWORD(buf);
 }
+		
 
-//----------------------------------------------------------------------------------------------
-void
-//-- show hide commentary notebook tabs - popup menu choice
-on_show_tabs1_activate(GtkMenuItem * menuitem, gpointer user_data)
+/*******************************************************************************
+ * show hide commentary notebook tabs - popup menu choice
+ *******************************************************************************/	
+void on_show_tabs1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
 		gtk_widget_show(lookup_widget(MainFrm, "notebook1"));
 	else
 		gtk_widget_hide(lookup_widget(MainFrm, "notebook1"));
 }
+		
 
-//----------------------------------------------------------------------------------------------
-void
-//-- show hide dict/lex notebook tabs - popup menu choice
-on_show_tabs2_activate(GtkMenuItem * menuitem, gpointer user_data)
+/*******************************************************************************
+ * show hide dict/lex notebook tabs - popup menu choice
+ *******************************************************************************/	
+void on_show_tabs2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
 		gtk_widget_show(lookup_widget(MainFrm, "notebook4"));
@@ -431,10 +442,10 @@ void on_view_in_new_window_activate(GtkMenuItem * menuitem,
 	gdk_window_set_cursor(MainFrm->window,cursor);
 	
 	if(!isrunningSD) {
-		dlg = create_dlgShowDict();
+		dlg = create_dlgViewDict();
 		modName = getdictmodSWORD();
 		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  /* set frame label to current Module name  */				
-		initSD(modName);
+		//initSD(modName);
 		isrunningSD = TRUE;
 	}
 	gtk_widget_show(dlg);
@@ -443,7 +454,32 @@ void on_view_in_new_window_activate(GtkMenuItem * menuitem,
 	gdk_window_set_cursor(MainFrm->window,cursor);
 }
 
-//----------------------------------------------------------------------------------------------
+/*******************************************************************************
+ *
+ *******************************************************************************/
+void on_view_in_new_window2_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	static GtkWidget *dlg;
+        GdkCursor *cursor;	
+	
+	gtk_widget_show(MainFrm);
+	cursor = gdk_cursor_new(GDK_WATCH);
+	gdk_window_set_cursor(MainFrm->window,cursor);
+	
+	if(!isrunningVC) {
+		dlg = create_dlgViewComm(MainFrm);
+		isrunningVC = TRUE;
+	}
+	gtk_widget_show(dlg);
+	gtk_widget_show(MainFrm);
+	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
+	gdk_window_set_cursor(MainFrm->window,cursor);
+}
+
+/*******************************************************************************
+ *
+ *******************************************************************************/
 void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	changepercomModSWORD((gchar *) user_data);
@@ -457,28 +493,45 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 {
 	sprintf(settings->Interlinear1Module,"%s",(gchar *)user_data);
 	changeVerseSWORD(current_verse);
-}		
+}	
+		
+
+/*******************************************************************************
+ *
+ *******************************************************************************/	
 void on_changeint2mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
 	sprintf(settings->Interlinear2Module,"%s",(gchar *)user_data);
 	changeVerseSWORD(current_verse);	
 
-}
+}		
+
+/*******************************************************************************
+ *
+ *******************************************************************************/	
 void on_changeint3mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
 	sprintf(settings->Interlinear3Module,"%s",(gchar *)user_data);
 	changeVerseSWORD(current_verse);
 
-}
+}		
+
+/*******************************************************************************
+ *
+ *******************************************************************************/	
 void on_changeint4mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
 	sprintf(settings->Interlinear4Module,"%s",(gchar *)user_data);
 	changeVerseSWORD(current_verse);
 
-}
+}		
+
+/*******************************************************************************
+ *
+ *******************************************************************************/	
 void on_changeint5mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {

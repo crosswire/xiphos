@@ -63,11 +63,9 @@ void changcurdictModSWORD(gchar * modName,
 void dictSearchTextChangedSWORD(gchar * mytext);
 void dictchangekeySWORD(gint direction);
 void showmoduleinfoSWORD(char *modName);
-void showinfoSWORD(GtkWidget * text, 
-		GtkLabel * label);
+void showinfoSWORD(GtkWidget * text, GtkLabel * label);
 void lookupStrongsSWORD(gint theNumber);
-void setglobalopsSWORD(gchar *option,
-		gchar *yesno);
+void setglobalopsSWORD(gchar *option, gchar *yesno);
 void changepercomModSWORD(gchar * modName);
 void redisplayTextSWORD(void);
 gchar* getmodnameSWORD(gint num);
@@ -80,14 +78,20 @@ void loadSDmodSWORD(GtkWidget *clist,gchar *modName);
 gchar* getdictmodSWORD(void);
 gchar* gettextmodSWORD(void);
 gchar* getcommodSWORD(void);
+gchar* getcommodDescriptionSWORD(void);
 void gotokeySWORD(gchar *newkey);
 void shutdownSDSWORD(void);
 void SDdictSearchTextChangedSWORD(char* newkey);
 gchar *showfirstlineStrongsSWORD(gint theNumber);
 GtkWidget *createSearchDlgSWORD(void);
 void startsearchSWORD(GtkWidget *searchFrm);
-void rlclickedSWORD(GtkWidget *searchFrm);
-
+GList* setupCommSWORD(GtkWidget *text);
+void shutdownVCSWORD(void) ;
+void loadVCmodSWORD(gchar *modName);
+void gotoverseVCSWORD(gchar *newkey);
+void navVCModSWORD(gint direction);
+gchar* getVCmodDescriptionSWORD(void);
+gchar* getSDmodDescriptionSWORD(void);
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }

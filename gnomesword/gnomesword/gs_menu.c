@@ -564,6 +564,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	GtkWidget *about_this_module6;
 	GtkWidget *auto_scroll1;
 	GtkWidget *show_tabs1;
+	GtkWidget *view_in_new_window;
 	GtkWidget *view_module1;
 	GtkWidget *view_module1_menu;
 	GtkAccelGroup *view_module1_menu_accels;
@@ -631,7 +632,24 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), show_tabs1);
 	gtk_tooltips_set_tip(tooltips, show_tabs1, "Show notebook tabs",
 			     NULL);
-
+	view_in_new_window = gtk_menu_item_new_with_label("View in New Window");
+	gtk_widget_ref(view_in_new_window);
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "view_in_new_window",
+				 view_in_new_window,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(view_in_new_window);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), view_in_new_window);
+	gtk_tooltips_set_tip(tooltips, view_in_new_window, "View this module in a new window",
+			     NULL);			     
+	separator22 = gtk_menu_item_new();
+	gtk_widget_ref(separator22);
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "separator22",
+				 separator22,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(separator22);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), separator22);
+	gtk_widget_set_sensitive(separator22, FALSE);
+	
 	view_module1 = gtk_menu_item_new_with_label("View Module");
 	gtk_widget_ref(view_module1);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "view_module1",
@@ -650,18 +668,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 	view_module1_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module1_menu));
 
-	separator22 = gtk_menu_item_new();
-	gtk_widget_ref(separator22);
-	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "separator22",
-				 separator22,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(separator22);
-	gtk_container_add(GTK_CONTAINER(view_module1_menu), separator22);
-	gtk_widget_set_sensitive(separator22, FALSE);
-
-
-	tmp = mods;
-	
+	tmp = mods;	
 	while (tmp != NULL) {
 		item1 = gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item1);
@@ -697,8 +704,11 @@ static GtkWidget *create_pmCommentsHtml(GList * mods)
 			   GTK_SIGNAL_FUNC(on_auto_scroll1_activate),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(show_tabs1), "activate",
-			   GTK_SIGNAL_FUNC(on_show_tabs1_activate), NULL);
-
+			   GTK_SIGNAL_FUNC(on_show_tabs1_activate), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(view_in_new_window), "activate",
+			   GTK_SIGNAL_FUNC(on_view_in_new_window2_activate),
+			   NULL);
 	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "tooltips", tooltips);
 	return pmCommentsHtml;
 }

@@ -53,6 +53,7 @@ GtkWidget *htmlCommentaries;
 GtkWidget *htmlTexts;
 GtkWidget *htmlDict;
 GtkWidget *textDict;
+GtkWidget *htmlComments;
 
 
 extern GtkWidget *MainFrm;
@@ -64,7 +65,7 @@ extern GtkWidget *appbar1;
 /***************************************************************************************************
  *on_url taken form gtkhtml project
  ***************************************************************************************************/
-static void
+void
 on_url (GtkHTML *html, const gchar *url, gpointer data)
 {
 	GnomeApp *app;
@@ -98,7 +99,7 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 /***************************************************************************************************
  *link in commentary module clicked
  ***************************************************************************************************/
-static void
+void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, tmpbuf[255];
@@ -225,7 +226,6 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	GtkWidget *textComp1;
 
 #ifdef USE_GTKHTML
-	GtkWidget *htmlComments;
 
 	htmlTexts = gtk_html_new();
 	gtk_widget_ref(htmlTexts);
@@ -390,3 +390,15 @@ void gotoanchorHTML(gchar * verse)
 	gtk_html_jump_to_anchor(GTK_HTML(htmlTexts), verse);
 #endif				/* GTK_HTML */
 }
+
+/***************************************************************************************************
+ *sethtmltoeditHTML
+ ***************************************************************************************************/
+void sethtmltoeditHTML(gboolean choice)
+{
+#ifdef USE_GTKHTML
+	/* gtk_html_set_default_background_color (GTK_HTML (html_widget), &bgColor); */
+	gtk_html_set_editable (GTK_HTML (htmlComments), choice);
+#endif				/* GTK_HTML */
+}
+
