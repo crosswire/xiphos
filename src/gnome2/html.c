@@ -1157,7 +1157,7 @@ void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 		int result = gnome_print_job_print(print_master);
 
 		if (result == -1)
-			g_warning(_("Printing of document failed"));
+			g_warning(_("Failed to print the document"));
 	}
 
 	g_object_unref(print_master);
