@@ -173,7 +173,7 @@ static void text_page_changed(gint page_num, TEXT_DATA * t)
 	 * remember new module name
 	 */
 	settings.MainWindowModule = t->mod_name;
-	xml_set_value("GnomeSword", "modules", "text", t->mod_name);
+	xml_set_value("GnomeSword", "modules", "bible", t->mod_name);
 
 	/*
 	 * remember page number

@@ -565,7 +565,7 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
-	xml_set_value("GnomeSword", "HTMLcolors", "text", buf);
+	xml_set_value("GnomeSword", "HTMLcolors", "text_fg", buf);
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	g_free(buf);
 
@@ -708,9 +708,9 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	    atoi(xml_get_value("shortcutbar", "favo"));
 
 	if (GTK_TOGGLE_BUTTON(check_button.show_text_group)->active)
-		xml_set_value("GnomeSword", "shortcutbar", "text", "1");
+		xml_set_value("GnomeSword", "shortcutbar", "bible", "1");
 	else
-		xml_set_value("GnomeSword", "shortcutbar", "text", "0");
+		xml_set_value("GnomeSword", "shortcutbar", "bible", "0");
 	settings.showtextgroup =
 	    atoi(xml_get_value("shortcutbar", "bible"));
 
