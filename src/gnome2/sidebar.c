@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlengine.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/shortcut-bar/e-vscrolled-bar.h>
 #include <gal/widgets/e-unicode.h>
@@ -61,7 +62,30 @@ static gchar *buf_module;
 GList *list_of_verses;
 
 
-
+static gchar *get_verse_from_url(const gchar * url)
+{
+	gchar *mybuf = NULL;
+	gchar *retval = NULL;
+	gchar newmod[80];
+	gchar newref[80];
+	gint i = 0;
+	
+	mybuf = strstr(url, "passage=");
+	if(mybuf != NULL) {
+		i = 0;
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			while (i < strlen(mybuf)) {
+				newref[i] = mybuf[i];
+				newref[i + 1] = '\0';
+				++i;
+			}
+		}
+		retval = g_strdup(newref);
+	} 
+	return retval;	
+}
 /******************************************************************************
  * Name
  *   on_close_button_clicked
@@ -895,7 +919,7 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 			//gui_change_module_and_key(settings.sb_search_mod, key);
 			break;
 		case 2:
-			gui_change_module_and_key(settings.sb_search_mod, key);
+			gui_open_verse_in_new_tab(key);
 			break;
 		case 3:
 	
@@ -1158,6 +1182,52 @@ GtkWidget *create_menu_modules(void)
 	return menu_modules;
 }
 
+
+/******************************************************************************
+ * Name
+ *  on_button_release_event
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *  gboolean on_button_release_event(GtkWidget * widget,
+			    GdkEventButton * event, TEXT_DATA * t)	
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
+	
+	gchar *key;
+	const gchar *url;
+	gchar *buf = NULL;
+	
+	switch (event->button) {
+	case 1:		
+		break;
+	case 2:		
+		url = html_engine_get_link_at (GTK_HTML(data)->engine,
+					 event->x,
+					 event->y);		
+		buf = get_verse_from_url(url);
+		if(buf) {
+			gui_open_verse_in_new_tab(buf);
+			g_free(buf);	
+		}			
+		break;
+	case 3:
+		break;
+	}
+	return FALSE;
+}
+
 /******************************************************************************
  * Name
  *   create_search_results_page
@@ -1260,6 +1330,10 @@ static void create_search_results_page(GtkWidget * notebook)
 			 "link_clicked",
 			 G_CALLBACK(link_clicked),
 			 NULL);
+	g_signal_connect((gpointer) sidebar.html_widget,
+			 "button_release_event",
+			 G_CALLBACK(on_button_release_event),
+			 sidebar.html_widget);
 
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "button_release_event",
