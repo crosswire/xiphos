@@ -77,6 +77,8 @@ void addmodstomenus(GtkWidget *app,
 				GList *dictionarylist,
 				GList *dictDescription,
 				GList *percomlist);		
+GtkWidget*
+create_shortcutbarMenu(gint barnum);
 
 		
 #ifdef __cplusplus
