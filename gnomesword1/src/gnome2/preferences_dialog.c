@@ -29,7 +29,6 @@
 #include <unistd.h>
 #include <string.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
-#include <gal/e-paned/e-hpaned.h>
 
 #include <gnome.h>
 #include <gtk/gtk.h>
@@ -387,11 +386,11 @@ static void applyoptions(void)
 				     settings.gs_hight);
 
 		if (settings.showshortcutbar && settings.docked) {
-			e_paned_set_position(E_PANED(widgets.epaned),
+			gtk_paned_set_position(GTK_PANED(widgets.epaned),
 					     settings.
 					     shortcutbar_width);
 		} else {
-			e_paned_set_position(E_PANED(widgets.epaned),
+			gtk_paned_set_position(GTK_PANED(widgets.epaned),
 					     1);
 		}
 		updatelayout = FALSE;

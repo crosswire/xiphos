@@ -24,8 +24,7 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
-#include <gal/e-paned/e-hpaned.h>
+//#include <gtkhtml/gtkhtml.h>
 
 #include "gui/studypad_dialog.h"
 #include "gui/studypad.h"

@@ -24,8 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gal/e-paned/e-hpaned.h>
-#include <gal/e-paned/e-vpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gui/main_window.h"
