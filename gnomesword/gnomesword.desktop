@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Name=Gnomesword
+Comment=Bible Study Tool
+Exec=gnomesword
+Icon=/usr/share/pixmaps/gnomesword/GnomeSword.png
+Terminal=false
+MultipleArgs=false
+Type=Application
+
