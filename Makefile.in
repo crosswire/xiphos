@@ -108,7 +108,7 @@ ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-SUBDIRS = macros 	    src
+SUBDIRS = macros             help 	    src
 
 
 EXTRA_DIST = gnomesword.glade Gnomesword.prj

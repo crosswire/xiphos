@@ -20,7 +20,13 @@
  *
  * Author: Ettore Perazzoli
  */
-
+ 
+/*
+ * added to gnomesword 2001-07-25 by terry
+ * only changed a couple of line of code in e_splash_new
+ * to find splash.png
+ */
+ 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -55,7 +61,7 @@ struct _ESplashPrivate {
 
 /* Layout constants.  These need to be changed if the splash changes.  */
 
-#define ICON_Y    290
+#define ICON_Y    340
 #define ICON_SIZE 32
 
 

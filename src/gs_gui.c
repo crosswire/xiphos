@@ -234,6 +234,12 @@ static GnomeUIInfo about_sword_modules1_menu_uiinfo[] = {
 
 static GnomeUIInfo help1_menu_uiinfo[] = {
 	{
+	 GNOME_APP_UI_ITEM, "Contents",
+	 "Help Contents",
+	 on_help_contents_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_HELP,
+	 0, 0, NULL},	
+	{
 	 GNOME_APP_UI_ITEM, "About the Sword Project...",
 	 "About The Sword Project",
 	 on_about_the_sword_project1_activate, NULL, NULL,
