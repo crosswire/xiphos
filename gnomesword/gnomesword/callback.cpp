@@ -196,6 +196,14 @@ on_mainwindow_destroy                  (GtkObject       *object,
 
 //----------------------------------------------------------------------------------------------
 void
+on_dlgSearch_destroy                  (GtkObject       *object,
+                                        gpointer         user_data)
+{
+ 	firstsearch=true;
+}
+
+//----------------------------------------------------------------------------------------------
+void
 on_btnSearch_clicked                   (GtkButton       *button,
                                         gpointer         user_data)
 {
@@ -204,8 +212,11 @@ on_btnSearch_clicked                   (GtkButton       *button,
 		searchDlg = create_dlgSearch();
 		setupSearchDlg(searchDlg);
 		firstsearch = FALSE;
+		gtk_signal_connect (GTK_OBJECT (searchDlg), "destroy",
+                      GTK_SIGNAL_FUNC (on_dlgSearch_destroy),
+                      NULL);
 	}
-	gtk_widget_show (searchDlg);
+	gtk_widget_show (searchDlg); 	
 }
 
 //----------------------------------------------------------------------------------------------

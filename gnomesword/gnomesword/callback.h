@@ -80,7 +80,9 @@ on_btnOptionsHelp_clicked              (GtkButton       *button,
 void
 on_mainwindow_destroy                  (GtkObject       *object,
                                         gpointer         user_data);
-
+void
+on_dlgSearch_destroy                  	(GtkObject       *object,
+                                        	gpointer         user_data);
 void
 on_btnSearch_clicked                   (GtkButton       *button,
                                         gpointer         user_data);
