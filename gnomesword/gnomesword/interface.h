@@ -158,6 +158,11 @@ extern "C" {
 					     GdkEventButton * event,
 					     gpointer user_data);
 
+	gboolean
+	on_textDict_button_press_event(GtkWidget      *widget,
+					GdkEventButton *event,
+                                        gpointer        user_data);
+
 	void
 	 on_notebook1_switch_page(GtkNotebook * notebook,
 				  GtkNotebookPage * page,
@@ -1119,6 +1124,13 @@ extern "C" {
 	void
 	 on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 				      gpointer user_data);
+	
+	
+        gboolean
+        on_epaned_button_release_event(GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data);
+
 
 
 #ifdef __cplusplus
