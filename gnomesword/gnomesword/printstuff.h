@@ -19,6 +19,10 @@
 #ifndef __PRINTSTUFF_H__
 #define __PRINTSTUFF_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum {
 	PRINT_ORIENT_LANDSCAPE,
 	PRINT_ORIENT_PORTRAIT
@@ -28,5 +32,10 @@ void
 file_print			(GtkWidget *widget,
 					gchar *currentfilename,
 					gint file_printpreview);
+
+
+#ifdef __cplusplus
+}
+#endif
  
 #endif /* __PRINTSTUFF_H__ */

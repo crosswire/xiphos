@@ -56,6 +56,7 @@ SWDisplay *percomDisplay; //--- to display personal comment modules using GtkTex
 SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *GBFcomDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *GBFsearchDisplay; //--- to display modules using GtkText a verse at a time
+SWDisplay *RWPDisplay; //--- to display Robertson's Word Pictures in the New Testament using GtkText
 
 SWMgr *mainMgr; //-- sword mgr for curMod - curcomMod - curdictMod
 SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
@@ -193,7 +194,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	dictDisplay     = 0;// set in create
 	GBFcomDisplay   = 0; // set in create
 	GBFsearchDisplay =0; // set in create
-    percomDisplay    = 0;// set in create
+	percomDisplay   = 0;// set in create
+	RWPDisplay			= 0;
 
 
 //	gtk_rc_parse( "gsword.rc" );
@@ -214,6 +216,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
+	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
 
 //----------------------------------------------------------------------- set text windows to word warp
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"moduleText")) , TRUE );
@@ -267,6 +270,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
 			if(!strcmp(curcomMod->Name(),"Family"))
 				curcomMod->Disp(GBFcomDisplay);
+			else if(!strcmp(curcomMod->Name(),"RWP"))
+			  curcomMod->Disp(RWPDisplay);
 			else
 				curcomMod->Disp(comDisplay); 				
 		}
@@ -1457,4 +1462,18 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
 	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE ); //-- set word wrap to true for text widget
 	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
+}
+
+//-------------------------------------------------------------------------------------------
+void
+newSP(GtkWidget *text) //--  start new file in studypad
+{
+  GtkWidget *statusbar;
+
+  current_filename = NULL;
+  gtk_text_set_point(GTK_TEXT(text), 0);
+	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
+	statusbar = lookup_widget((text),"statusbar2");
+	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
+	file_changed = false;	
 }

@@ -32,7 +32,7 @@ gnomesword_SOURCES = \
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
 	listeditor.cpp listeditor.h\
-	printstuff.cpp printstuff.h
+	printstuff.c printstuff.h
 endif
 
 if SPELLING_PRINTING
@@ -48,7 +48,7 @@ gnomesword_SOURCES = \
 	listeditor.cpp listeditor.h\
 	spellcheck.cpp spellcheck.h\
 	DICTClient.cpp DICTClient.h\
-	printstuff.cpp printstuff.h
+	printstuff.c printstuff.h
 endif
 
 if NO_OPS

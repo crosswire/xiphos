@@ -80,12 +80,20 @@ class GTKPerComDisp : public GTKEntryDisp
 	GTKPerComDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
 	virtual char Display(SWModule &imodule);	
 };
- 
+
 //----------------------------------------------------------------------------------------------
 class GTKChapDisp : public GTKEntryDisp 
 {
   public:
 	GTKChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class GTKRWPDisp : public GTKEntryDisp
+{
+  public:
+	GTKRWPDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
 	virtual char Display(SWModule &imodule);
 };
 
