@@ -76,6 +76,7 @@
 #include "sw_module_options.h"
 #include "gs_editor.h"
 #include "sw_gbs.h"
+#include "gs_gbs.h"
 
 
 typedef map < string, string > modDescMap;
@@ -185,6 +186,15 @@ extern gchar * current_filename,	/* filename for open file in study pad window  
 *mycolor, *mycolor;
 extern HISTORY historylist[];	/* sturcture for storing history items */
 
+gchar *backend_getmodDescriptionSWORD(gchar *modName) {
+	ModMap::iterator it;	//-- iteratior
+	it = mainMgr->Modules.find(modName);
+	if (it != mainMgr->Modules.end()) {
+		return (*it).second->Description();
+	}
+	return NULL;
+	
+}
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -308,7 +318,7 @@ void initSWORD(SETTINGS *s)
 		}
 	}
 	//-- setup Generic Book Support
-	setupSW_GBS(s);
+	backend_setupGBS(s);
 	
 	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin();
@@ -728,7 +738,8 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	g_list_free(options);
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
-	shutdownSW_GBS();
+	gui_shutdownGBS();
+	backend_shutdownGBS();
 
 	//-- delete Sword managers
 	delete mainMgr;
@@ -1484,19 +1495,19 @@ gchar *getcommodDescriptionSWORD(void)
 	return (char *) curcomMod->Description();;
 }
 
-/******************************************************************************
-* returns a list of the books of the Bible
-* GList *list needs to be freed by calling function
-*******************************************************************************/
-GList *getBibleBooksSWORD(void)
+/* GList *backend_getBibleBooksSWORD(void)
+*  returns a list of the books of the Bible
+*  GList *list needs to be freed by calling function
+*/
+GList *backend_getBibleBooksSWORD(void)
 {
-	VerseKey VSKey;
+	VerseKey key;
 	GList *glist = NULL;
 
 	/*** load Bible books ***/
 	for (int i = 0; i <= 1; ++i) {
-		for ( int j = 0; j < VSKey.BMAX[i]; ++j) {
-			glist = g_list_append(glist, (char*)VSKey.books[i][j].name);
+		for ( int j = 0; j < key.BMAX[i]; ++j) {
+			glist = g_list_append(glist, (char*)key.books[i][j].name);
 		}
 	}	
 	return glist;
