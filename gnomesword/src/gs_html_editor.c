@@ -60,6 +60,7 @@
 #include "support.h"
 
 GSHTMLEditorControlData *specd;
+GSHTMLEditorControlData *gbsecd;
 
 extern SETTINGS *settings;
 extern char *homedir;
@@ -119,8 +120,8 @@ static void updatestatusbar(GSHTMLEditorControlData * ecd)
 	if (ecd->personal_comments)
 		buf2 = settings->percomverse;
 	
-	else if(ecd->gbs)
-		buf2 = "";
+	//else if(ecd->gbs)
+	//	buf2 = "";
 	
 	else
 		buf2 = ecd->filename;
@@ -255,6 +256,8 @@ void savenoteEDITOR(GtkWidget * html_widget)
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(html, TRUE);
 }
+
+
 void savebookEDITOR(GtkWidget * html_widget)
 {
 	GtkHTML *html;
@@ -490,7 +493,6 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 		* frame34, 
 		*scrolledwindow17;
 	
-	
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame34", frame34,
@@ -529,6 +531,8 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 	gtk_widget_show(necd->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox), necd->statusbar, FALSE, TRUE, 0);
 
+	 
+	 
 	necd->vbox = vbox;
 	necd->pm = create_pmEditor(necd);
 	gnome_popup_menu_attach(necd->pm, necd->htmlwidget, NULL);
@@ -1503,8 +1507,8 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 {
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
-	GSHTMLEditorControlData *specd =
-	    gs_html_editor_control_data_new(s);
+	//GSHTMLEditorControlData *specd =
+	   // gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
 	
@@ -1585,15 +1589,13 @@ GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 {
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
-	GSHTMLEditorControlData *specd =
-	    gs_html_editor_control_data_new(s);
+	//GSHTMLEditorControlData *gbsecd =
+	   // gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
 	
-	//GtkWidget *htmlwidget;
-	
-	specd = gs_html_editor_control_data_new(s);
-	specd->gbs = TRUE;
+	gbsecd = gs_html_editor_control_data_new(s);
+	gbsecd->gbs = TRUE;
 
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
@@ -1618,7 +1620,7 @@ GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 	gtk_box_pack_start(GTK_BOX(vbox6), vboxSP, TRUE, TRUE, 0);
 
 	htmlwidget = gtk_html_new();
-	create_editor(htmlwidget, vboxSP, s, specd);
+	create_editor(htmlwidget, vboxSP, s, gbsecd);
 
 	return htmlwidget;
 }

@@ -2,7 +2,7 @@
 static char * morphs_xpm[] = {
 "25 25 3 1",
 " 	c None",
-".	c #E5124E",
+".	c #000000",
 "+	c #1B14E0",
 "                         ",
 "                         ",

@@ -32,6 +32,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include "gs_dock_dlg.h"
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 

@@ -244,7 +244,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *toolbarOptions;
 	GtkWidget *tmp_toolbar_icon;
   GtkWidget *btnSBDock;
-	//GtkWidget *btnSearch;
 	GtkWidget *btnStrongs;
 	GtkWidget *btnMorphs;
 	GtkWidget *btnFootnotes;
@@ -261,7 +260,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *btnBack;
 	GtkWidget *btnFoward;
 	GtkWidget *vseparator13;
-	GtkWidget *btnExit;
+//	GtkWidget *btnExit;
 	GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
 	GtkWidget *epaned;
@@ -579,10 +578,11 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarOptions),
 				      GTK_RELIEF_NONE);
 
-
 	tmp_toolbar_icon =
+	    create_pixmap(settings->app, "gnomesword/dock.xpm", TRUE);
+	/*tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
-				      GNOME_STOCK_PIXMAP_HOME);
+				     GNOME_STOCK_PIXMAP_INDEX );*/
 	btnSBDock =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -595,24 +595,14 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnSBDock);
 
-	vseparator13 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator13);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vseparator13",
-				 vseparator13,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator13);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarOptions),
-				  vseparator13, NULL, NULL);
-	gtk_widget_set_usize(vseparator13, 7, 7);
-
-
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
 				      GNOME_STOCK_PIXMAP_INDEX);
 	btnSB =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Shortcut Bar", NULL, NULL,
+				       "Shortcut Bar", 
+				       "Hide/Show Shortcut Bar", NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnSB);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnSB", btnSB,
@@ -671,7 +661,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 btnFootnotes,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnFootnotes);
-
+/*
 	vseparator13 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator13);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vseparator13",
@@ -696,7 +686,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 btnExit,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnExit);
-
+*/
 	 /******************************************************************************************* end options toolbar */
 
 
@@ -1504,8 +1494,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			   GTK_SIGNAL_FUNC(on_btnBack_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnFoward), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnExit), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnExit_clicked), NULL);
+/*	gtk_signal_connect(GTK_OBJECT(btnExit), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnExit_clicked), NULL);*/
 	gtk_signal_connect(GTK_OBJECT(notebook3), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook3_switch_page),
 			   NULL);

@@ -43,9 +43,11 @@
 #include <rawgenbook.h>
 
 #include "gs_gnomesword.h"
+#include "gs_html_editor.h"
 #include "sw_gbs.h"
 
 //extern SETTINGS *settings;
+extern GSHTMLEditorControlData *gbsecd;
 extern GdkPixmap *pixmap1;
 extern GdkPixmap *pixmap2;
 extern GdkPixmap *pixmap3;
@@ -101,6 +103,12 @@ on_ctreeBooks_select_row(GtkCList * clist,
 		it = mainMgr->Modules.find(bookname);	//-- find module (modName)
 		curbookMod = (*it).second;
 		lastbook = bookname;
+		gint context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(gbsecd->statusbar),
+					 "GnomeSWORD");
+		gtk_statusbar_pop(GTK_STATUSBAR(gbsecd->statusbar), context_id2);
+		sprintf(gbsecd->filename,"%s",(gchar*)curbookMod->Name());
+		gtk_statusbar_push(GTK_STATUSBAR(gbsecd->statusbar), context_id2,
+			   gbsecd->filename);
 	}
 	
 	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
@@ -110,7 +118,7 @@ on_ctreeBooks_select_row(GtkCList * clist,
 	/** if not root node display **/
 	if(treenode.getOffset() > 0) {	
 		curbookMod->SetKey(treenode);
-		curbookMod->KeyText(); //snap to entry	
+		curbookMod->KeyText(); //snap to entry
 		curbookMod->Display();
 	}
 	
