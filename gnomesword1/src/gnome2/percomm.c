@@ -108,9 +108,10 @@ void gui_save_note(GSHTMLEditorControlData * e)
 {
 	gtk_html_set_editable(e->html, FALSE);
 	gstr = g_string_new("");
-	if (!gtk_html_save
-	    (e->html, (GtkHTMLSaveReceiverFn) save_note_receiver,
-	     GINT_TO_POINTER(0))) {
+	
+	if (!gtk_html_export (e->html, "text/html",
+		 (GtkHTMLSaveReceiverFn) save_note_receiver,
+		 GINT_TO_POINTER(0)) ){
 		g_warning("file not writen");
 	} else {
 		//change_percomm_module(e->filename);
