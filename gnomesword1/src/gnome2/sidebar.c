@@ -743,6 +743,7 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 	GtkTreeIter selected;
 	gchar *key = NULL;
 	gchar *text = NULL;
+	gchar *url = NULL;
 
 
 	selection =
@@ -763,7 +764,10 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 	if (event) {
 		switch (event->button) {
 		case 1:
-			//gui_change_module_and_key(settings.sb_search_mod, key);
+			/*url = g_strdup_printf("sword://%s/%s", 
+					      settings.sb_search_mod, key);
+			main_url_handler(url,TRUE);
+			g_free(url);*/
 			break;
 		case 2:
 			gui_open_passage_in_new_tab(key);
@@ -779,10 +783,11 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 	    main_get_search_results_text(settings.sb_search_mod, key);
 	if (text) {
 		settings.displaySearchResults = TRUE;
-/*		main_entry_display(sidebar.html_viewer_widget, //sidebar.html_widget,
-			      settings.sb_search_mod, text, key, TRUE);*/
+		main_entry_display(sidebar.html_viewer_widget, //sidebar.html_widget,
+			      settings.sb_search_mod, text, key, TRUE);
 		settings.displaySearchResults = FALSE;
 		free(text);
+		gtk_widget_grab_focus(sidebar.results_list);
 	}
 	free(key);
 	return FALSE;
@@ -1133,15 +1138,23 @@ static gboolean tree_key_press_cb(GtkWidget * widget,
 			break;
 		case 32:
 			gui_open_passage_in_new_tab(key);
+			while (gtk_events_pending()) {
+				gtk_main_iteration();
+			}
 			break;
 			/*case :
 
-			   break; */
+			   break; */	  
 		default:
 			break;
 		}
 	}
 	free(key);
+	
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gtk_widget_grab_focus(sidebar.results_list);
 	return FALSE;
 
 }
