@@ -1,3 +1,10 @@
+2003-12-03  Terry <tbiggs@users.sf.net>
+
+	* added gui_alert_dialog() to gnome2/dialog.c - much closer to HIG 
+	  for alerts than gui_gs_dialog().
+	
+
+
 2003-12-02  Terry <tbiggs@users.sf.net>
 
 	* work in dialog.c 

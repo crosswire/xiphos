@@ -95,6 +95,9 @@ static void on_btn_open_clicked(GtkButton * button,
 {
 	GtkWidget *openFile;
 	gchar buf[255];
+	gchar *tmp_buf = NULL;
+	GString *str;
+	gchar *filename = NULL;
 
 	/* 
 	 * if study pad file has changed let's ask about saving it 
@@ -104,20 +107,26 @@ static void on_btn_open_clicked(GtkButton * button,
 		GS_DIALOG *info;
 
 		info = gui_new_dialog();
-		if (strlen(settings.studypadfilename) > 0)
-			info->label_top = settings.studypadfilename;
+		info->stock_icon = "gtk-dialog-warning";
+		str = g_string_new("");
+		if (settings.studypadfilename)
+			tmp_buf = settings.studypadfilename;
 		else
-			info->label_top = N_("File");
-		info->label_middle = N_("has been modified. ");
-		info->label_bottom = N_("Do you wish to save it?");
+			tmp_buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			tmp_buf,
+			_("has been modified. Do you wish to save it?"));
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
-		test = gui_gs_dialog(info);
+		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			on_btn_save_clicked(NULL, ecd);
 		}
 		g_free(info);
+		g_string_free(str,TRUE);
 	}
 	sprintf(buf, "%s/*.pad", settings.studypaddir);
 	openFile = gui_fileselection_open(ecd);
@@ -185,17 +194,21 @@ static void on_btn_delete_clicked(GtkButton * button,
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
-		//gchar *key;
+		GString *str;
+		
+		str = g_string_new("");
 
-		//key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
-		info->label_top = N_("Are you sure you want");
-		info->label_middle = N_("to delete the note for");
-		info->label_bottom = ecd->key;
+		info->stock_icon = "gtk-dialog-warning";
+		g_string_printf(str,"<span weight=\"bold\">%s</span>\n\n%s %s",
+			_("Delete Note?"), 
+			_("Are you sure you want to delete the note for\n"), 
+			ecd->key);
+		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
-		test = gui_gs_dialog(info);
+		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			delete_percomm_note();
 			if(settings.use_percomm_dialog)
@@ -207,7 +220,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 		g_free(info);
-		//g_free(key);
+		g_string_free(str,TRUE);
 	}
 
 }
