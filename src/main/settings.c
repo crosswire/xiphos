@@ -558,7 +558,7 @@ void load_settings_structure(void)
 	buf = xml_get_value("shortcutbar", "bible");
 	if(buf)
 		settings.showtextgroup = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "text"));
+	    //atoi(xml_get_value("shortcutbar", "bible"));
 	buf = xml_get_value("shortcutbar", "comm");
 	if(buf)
 		settings.showcomgroup = atoi(buf);

@@ -53,10 +53,9 @@
 
 typedef struct _bmtree BM_TREE;
 struct _bmtree {
-	GtkWidget *ctree_widget;
+	GtkWidget *bookmark_tree;
 	GtkCTree *ctree;
 };
-
 
 /******************************************************************************
  * structures
@@ -143,7 +142,6 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 static void add_node(xmlNodePtr cur, GtkCTree * ctree,
 		     GtkCTreeNode * parent);
 
-
 void gui_add_bookmark_to_tree(GtkCTreeNode * node,
 		   gchar * modName, gchar * verse);
 
@@ -157,7 +155,8 @@ void on_delete_item_activate(GtkMenuItem * menuitem,
 void on_allow_reordering_activate(GtkMenuItem * menuitem,
 			      gpointer user_data);
 void gui_create_add_bookmark_menu(GtkWidget * menu,
-			  GtkWidget * bookmark_menu_widget);	
+			  GtkWidget * bookmark_menu_widget);			  
+		   
 
 /******************************************************************************
  * Name
@@ -201,7 +200,7 @@ static void get_node_data(GNode * node)
 
 static xmlNodePtr add_xml_folder_to_parent(xmlNodePtr parent,
 					   BOOKMARK_DATA * es)
-{
+{ 
 	xmlNodePtr cur_node;
 	xmlAttrPtr xml_attr;
 
@@ -446,7 +445,7 @@ static void save_gnode_to_xml_bookmarks(GNode * gnode, gchar * file_buf)
 			}
 		}
 		g_print("\nsaving = %s\n", xml_filename);
-		xmlSaveFormatFile(xml_filename, root_doc, 1);
+		xmlSaveFile(xml_filename, root_doc);
 		xmlFreeDoc(root_doc);
 		g_free(file_buf);
 	}
@@ -719,7 +718,8 @@ static void parse_bookmarks(GtkCTree * ctree, const xmlChar * file,
 			free_bookmark_data(p);
 		} else {
 			get_xml_folder_data(cur, p);
-			node = add_node_to_ctree(ctree, root_node, p);
+			if(p->caption) 
+				node = add_node_to_ctree(ctree, root_node, p);
 			free_bookmark_data(p);
 			add_node(cur, ctree, node);
 		}
@@ -872,7 +872,7 @@ static void addnewgrouptoMenus(GtkWidget * pmMenu,
 	item = gtk_menu_item_new_with_caption(str);
 	gtk_widget_show(item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   G_CALLBACK
+			   GTK_SIGNAL_FUNC
 			   (on_add_bookmark_activate),
 			   (GtkCTreeNode *) node);
 	gtk_container_add(GTK_CONTAINER(menu), item);
@@ -1311,7 +1311,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		node = (GtkCTreeNode *) user_data;
 	else
 		node =
-		    gtk_ctree_node_nth(GTK_CTREE(widgets.ctree_widget),
+		    gtk_ctree_node_nth(GTK_CTREE(widgets.bookmark_tree),
 				       0);
 	mod_name = get_module_name();
 	key = get_module_key();
@@ -1490,6 +1490,7 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
 	bookmarks_changed = TRUE;
 	save_gnode_to_xml_bookmarks(gnode, g_strdup(buf));
 }
+
 
 
 
@@ -1770,10 +1771,10 @@ void on_restore_folder_activate(GtkMenuItem * menuitem,
 	gtk_widget_show(fileselection);
 
 	gtk_signal_connect(GTK_OBJECT(ok), "clicked",
-			   G_CALLBACK(restore_ok),
+			   GTK_SIGNAL_FUNC(restore_ok),
 			   (GtkWidget *) fileselection);
 	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
-			   G_CALLBACK(restore_cancel),
+			   GTK_SIGNAL_FUNC(restore_cancel),
 			   (GtkWidget *) fileselection);
 
 }
@@ -2048,7 +2049,7 @@ void gui_verselist_to_bookmarks(GList * list, gchar * module_name)
 	node = NULL;
 	tmp = list;
 	t = "|";
-	ctree = GTK_CTREE(widgets.ctree_widget);
+	ctree = GTK_CTREE(widgets.bookmark_tree);
 
 	info = gui_new_dialog();
 	info->label_top = N_("Enter Root Group Name - use no \'|\'");
@@ -2113,37 +2114,37 @@ void gui_load_bookmark_tree(void)
 {
 	GtkCTreeNode *node = NULL;
 	gchar *text[3];
-	bmtree.ctree = GTK_CTREE(widgets.ctree_widget);
-	bmtree.ctree_widget = widgets.ctree_widget;
+	bmtree.ctree = GTK_CTREE(widgets.bookmark_tree);
+	bmtree.bookmark_tree = widgets.bookmark_tree;
 	p_bmtree = &bmtree;
 
 
 
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "button_press_event",
-				 G_CALLBACK(button_press_event),
+				 GTK_SIGNAL_FUNC(button_press_event),
 				 NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "button_release_event",
-				 G_CALLBACK(after_press), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+				 GTK_SIGNAL_FUNC(after_press), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "tree_move",
-				 G_CALLBACK(after_move), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+				 GTK_SIGNAL_FUNC(after_move), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "end_selection",
-				 G_CALLBACK(after_press), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+				 GTK_SIGNAL_FUNC(after_press), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "toggle_focus_row",
-				 G_CALLBACK(after_press), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+				 GTK_SIGNAL_FUNC(after_press), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "select_all",
-				 G_CALLBACK(after_press), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+				 GTK_SIGNAL_FUNC(after_press), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "unselect_all",
-				 G_CALLBACK(after_press), NULL);
-	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
+				 GTK_SIGNAL_FUNC(after_press), NULL);
+	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->bookmark_tree),
 				 "scroll_vertical",
-				 G_CALLBACK(after_press), NULL);
+				 GTK_SIGNAL_FUNC(after_press), NULL);
 
 	/* add root node to bookmark ctree */
 	text[0] = "Bookmarks";
@@ -2158,9 +2159,9 @@ void gui_load_bookmark_tree(void)
 
 	gtk_ctree_sort_recursive(bmtree.ctree, node);
 
-	gtk_signal_connect(GTK_OBJECT(widgets.ctree_widget),
+	gtk_signal_connect(GTK_OBJECT(widgets.bookmark_tree),
 			   "tree_select_row",
-			   G_CALLBACK(on_ctree_select_row),
+			   GTK_SIGNAL_FUNC(on_ctree_select_row),
 			   bmtree.ctree);
 	gtk_clist_set_row_height(GTK_CLIST(p_bmtree->ctree), 15);
 	gtk_ctree_set_spacing(p_bmtree->ctree, 3);
@@ -2380,7 +2381,7 @@ void gui_create_add_bookmark_menu(GtkWidget * menu,
 	GtkCTreeNode *node;
 	gboolean is_leaf;
 	gint i;
-	ctree = GTK_CTREE(widgets.ctree_widget);
+	ctree = GTK_CTREE(widgets.bookmark_tree);
 
 	/* collapse tree so we only iterate through the roots */
 	gtk_ctree_collapse_recursive(ctree, NULL);
@@ -2403,7 +2404,7 @@ void gui_create_add_bookmark_menu(GtkWidget * menu,
 						  row.cell[0])->text);
 		gtk_widget_show(item);
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   G_CALLBACK
+				   GTK_SIGNAL_FUNC
 				   (on_add_bookmark_activate),
 				   (GtkCTreeNode *) node);
 		gtk_container_add(GTK_CONTAINER(bookmark_menu_widget),

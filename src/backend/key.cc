@@ -324,7 +324,7 @@ char *backend_get_next_verse_list_element(int count)
  *   char *
  */
 
-char *backend_get_valid_key(char *key)
+char *backend_get_valid_key(const char *key)
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);

@@ -234,7 +234,7 @@ int start_parse_verse_list(char * list)
  *   char *
  */
 
-char *get_valid_key(char *key)
+char *get_valid_key(const char *key)
 {
 	return backend_get_valid_key(key);
 }
@@ -340,5 +340,3 @@ const unsigned int verse_count(char *key)
 {
 	return backend_verse_count(key);
 }
-
-

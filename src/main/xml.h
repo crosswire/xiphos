@@ -35,9 +35,9 @@ char *xml_get_label(void);
 char *xml_get_list(void);
 int xml_create_settings_file(char * file_name);
 int xml_parse_settings_file(char *file_name);
-char *xml_get_value(char *section, char *item);
-void xml_set_value(char *type_doc, char *section, char *item,
-		  char *value);
+char *xml_get_value(char *section, const char *item);
+void xml_set_value(char *type_doc, char *section, const char *item,
+		  const char *value);
 void xml_save_settings_doc(char *file_name);
 void xml_free_settings_doc(void);
 

@@ -59,12 +59,20 @@ static gboolean new_font_set = FALSE;
 
 static gchar *get_html_font_name(gchar *fontname)
 {
-	gchar *token, *retval;
-	++fontname;
-	token = strtok(fontname,"-");
-	token = strtok(NULL,"-");
-	retval = token;
-	return retval;
+	gchar buf[80];
+	gint len, i=0;
+	
+	len = strlen(fontname);
+	for(i=0;(i<79 && i<len-3);i++) {
+		if(!ispunct(fontname[i])) {
+			buf[i] = fontname[i];
+			buf[i+1] = '\0';
+		}
+		else
+			break;
+	}
+	
+	return strdup(buf);
 }
 
 /******************************************************************************
@@ -86,15 +94,17 @@ static gchar *get_html_font_name(gchar *fontname)
 static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 {
 	gchar file[250];
-
+	gchar *new_font = NULL;
+	gchar *font_name = NULL;
+	
 	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 	
 	if (!mf->no_font && new_font_set) {
-		gchar *new_font = g_strdup(mf->new_gdk_font);
-		mf->new_font = g_strdup(get_html_font_name(new_font));
-		g_free(new_font);
+		new_font = g_strdup(mf->new_gdk_font);
+		font_name = get_html_font_name(new_font);
+		mf->new_font = font_name;
 	} else {
-		mf->new_font = g_strdup("none");
+		mf->new_font = "none";
 		mf->new_gdk_font = "none";
 	}
 	mf->new_font_size =
@@ -108,7 +118,8 @@ static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 			mf->new_font_size);
 	
 	gtk_widget_destroy(dlg);
-	g_free(mf->new_font);
+	if(font_name) g_free(font_name);
+	if(new_font) g_free(new_font);
 }
 
 
@@ -181,7 +192,7 @@ static void font_set(GnomeFontPicker * gnomefontpicker,
 {
 	mf->new_gdk_font =
 	    gnome_font_picker_get_font_name((GnomeFontPicker *)
-					    fontpicker);
+					    fontpicker);	
 	new_font_set = 1;
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (checkbutton_no_font), FALSE);
