@@ -262,7 +262,7 @@ int backend_set_range(char * list)
  *   int
  */
 
-int backend_start_parse_verse_list(char * list)
+int backend_start_parse_verse_list(const char * list)
 {
 	VerseKey key;
 	
@@ -349,7 +349,7 @@ char *backend_get_valid_key(const char *key)
  *   char *
  */
 
-const char *backend_get_book_from_key(char *key)
+const char *backend_get_book_from_key(const char *key)
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
@@ -375,7 +375,7 @@ const char *backend_get_book_from_key(char *key)
  *   int
  */
 
-int backend_get_chapter_from_key(char *key)
+int backend_get_chapter_from_key(const char *key)
 {
 	unsigned char chapters;
 	VerseKey vkey;
@@ -401,7 +401,7 @@ int backend_get_chapter_from_key(char *key)
  *   unsigned int
  */
 
-const unsigned int backend_chapter_count(char *key) 
+const unsigned int backend_chapter_count(const char *key) 
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
@@ -429,7 +429,7 @@ const unsigned int backend_chapter_count(char *key)
  *   unsigned int
  */
 
-const unsigned int backend_verse_count(char *key) 
+const unsigned int backend_verse_count(const char *key) 
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
@@ -464,7 +464,7 @@ const unsigned int backend_verse_count(char *key)
  *   int
  */
 
-int backend_get_verse_from_key(char *key)
+int backend_get_verse_from_key(const char *key)
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);

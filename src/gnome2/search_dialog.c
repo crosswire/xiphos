@@ -322,7 +322,7 @@ static void button_clean(GtkButton * button, gpointer user_data)
  *   gchar *
  */
 
-static GList *get_custom_list_from_name(gchar * label)
+static GList *get_custom_list_from_name(const gchar * label)
 {
 	GList *items = NULL;
 	gchar *mod_list = NULL;
@@ -656,7 +656,7 @@ static void fill_group(gchar * folder, GList * mod_lists)
 
 static void set_up_search(void)
 {
-	gchar *label;
+	const gchar *label;
 	gchar *range = NULL;
 
 	gui_begin_html(search.results_html, TRUE);
@@ -760,7 +760,8 @@ static void on_button_begin_search(GtkButton * button,
 				   gpointer user_data)
 {
 	gint search_type, search_params, finds;
-	gchar *search_string, *module;
+	const gchar *search_string;
+	gchar *module;
 	gchar buf[256], *utf8str;
 	gint utf8len;
 	GList *search_mods = NULL;
@@ -803,7 +804,7 @@ static void on_button_begin_search(GtkButton * button,
 	    gtk_entry_get_text(GTK_ENTRY(search.search_entry));
 
 	if (GTK_TOGGLE_BUTTON(search.rb_custom_list)->active) {
-		gchar *name;
+		const gchar *name;
 		name =
 		    gtk_entry_get_text(GTK_ENTRY
 				       (search.combo_entry_list));
@@ -1201,7 +1202,7 @@ static void modules_select_row(GtkCList * clist, gint row,
 static void list_name_changed(GtkEditable * editable,
 			      gpointer user_data)
 {
-	gchar *text;
+	const gchar *text;
 
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
 	gtk_clist_set_text((GtkCList *) search.module_lists,
@@ -1230,7 +1231,7 @@ static void list_name_changed(GtkEditable * editable,
 static void range_name_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
-	gchar *text;
+	const gchar *text;
 
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
 	gtk_clist_set_text((GtkCList *) search.clist_range,
@@ -1261,7 +1262,7 @@ static void range_name_changed(GtkEditable * editable,
 static void range_text_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
-	gchar *entry;
+	const gchar *entry;
 	gchar *buf = NULL;
 	gint count;
 	gint i = 0;
