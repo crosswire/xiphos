@@ -33,8 +33,8 @@
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 #include "e-icon-bar.h"
 #include "e-icon-bar-bg-item.h"
-#include "../e-text/e-text.h"
-#include "e-util/e-canvas-utils.h"
+#include <gal/e-text/e-text.h>
+#include <gal/widgets/e-canvas-utils.h>
 
 /* These are the offsets of the icons & text in both views. Note that the
    shadow around icons is drawn in the space between items (as is the
@@ -127,6 +127,7 @@ static void e_icon_bar_ensure_edited_item_visible (EIconBar *icon_bar);
 static void e_icon_bar_update_highlight (EIconBar *icon_bar);
 static void e_icon_bar_vadjustment_value_changed (GtkAdjustment *adjustment,
 						  EIconBar      *icon_bar);
+static void e_icon_bar_style_set (GtkWidget *widget, GtkStyle *previous_style);
 
 enum
 {
@@ -208,6 +209,7 @@ e_icon_bar_class_init (EIconBarClass *class)
 	widget_class->focus_out_event	 = e_icon_bar_focus_out;
 	widget_class->drag_motion	 = e_icon_bar_drag_motion;
 	widget_class->drag_leave	 = e_icon_bar_drag_leave;
+	widget_class->style_set          = e_icon_bar_style_set;
 
 	ecanvas_class->reflow            = e_icon_bar_reflow;
 
@@ -246,10 +248,6 @@ e_icon_bar_init (EIconBar *icon_bar)
 			       NULL);
 
 	colormap = gtk_widget_get_colormap (GTK_WIDGET (icon_bar));
-
-	icon_bar->colors[E_ICON_BAR_COLOR_TEXT].red   = 65535;
-	icon_bar->colors[E_ICON_BAR_COLOR_TEXT].green = 65535;
-	icon_bar->colors[E_ICON_BAR_COLOR_TEXT].blue  = 65535;
 
 	icon_bar->colors[E_ICON_BAR_COLOR_EDITING_TEXT].red   = 0;
 	icon_bar->colors[E_ICON_BAR_COLOR_EDITING_TEXT].green = 0;
@@ -569,6 +567,46 @@ rgb_from_gdk_color (GdkColor *color)
 	return a;
 }
 
+static void
+e_icon_bar_style_set (GtkWidget *widget, GtkStyle *previous_style) {
+	EIconBar *icon_bar;
+	EIconBarItem *item;
+	gint item_num;	
+	GdkPixbuf *flattened;
+	GtkStyle *style = widget->style;
+	GdkColormap *colormap;
+
+	colormap = gtk_widget_get_colormap (widget);
+	gdk_color_alloc (colormap, &style->fg [GTK_STATE_NORMAL]);
+
+	icon_bar = E_ICON_BAR (widget);
+
+	for (item_num = 0; item_num < icon_bar->items->len; item_num++) {
+
+		item = &g_array_index (icon_bar->items,
+				       EIconBarItem, item_num);
+
+		flattened = flatten_alpha (item->pixbuf,
+					   rgb_from_gdk_color (&style->bg [GTK_STATE_NORMAL]));
+
+		gnome_canvas_item_set(item->image, 				      
+				      "GnomeCanvasPixbuf::pixbuf", flattened ? flattened : item->pixbuf,
+				      NULL);
+		gnome_canvas_item_set (item->text,
+				       "font_gdk", style->font,
+				       "fill_color_gdk", &style->fg [GTK_STATE_NORMAL],
+				       NULL);
+
+		if (flattened)
+			/* the canvas item holds the reference now */
+			gdk_pixbuf_unref (flattened);
+
+	}
+	
+	e_icon_bar_recalc_item_positions (icon_bar);
+}
+
+
 /**
  * e_icon_bar_add_item:
  * @icon_bar: An #EIconBar.
@@ -617,7 +655,7 @@ e_icon_bar_add_item (EIconBar	    *icon_bar,
 	item.text = gnome_canvas_item_new (GNOME_CANVAS_GROUP (GNOME_CANVAS (icon_bar)->root),
 					   e_text_get_type (),
 					   "font_gdk", font,
-					   "fill_color_gdk", &icon_bar->colors[E_ICON_BAR_COLOR_TEXT],
+					   "fill_color_gdk", &style->fg [GTK_STATE_NORMAL],
 					   "use_ellipsis", TRUE,
 					   "anchor", anchor,
 					   "editable", TRUE,
@@ -635,6 +673,9 @@ e_icon_bar_add_item (EIconBar	    *icon_bar,
 	gtk_signal_connect (GTK_OBJECT (item.text), "event",
 			    GTK_SIGNAL_FUNC (e_icon_bar_on_item_event),
 			    icon_bar);
+
+	item.pixbuf = image;
+	gdk_pixbuf_ref (image);
 
 	flattened = flatten_alpha (image,
 				   rgb_from_gdk_color (&style->bg [GTK_STATE_NORMAL]));
@@ -735,6 +776,7 @@ e_icon_bar_remove_item		(EIconBar	  *icon_bar,
 
 	gtk_object_destroy (GTK_OBJECT (item->text));
 	gtk_object_destroy (GTK_OBJECT (item->image));
+	gdk_pixbuf_unref (item->pixbuf);
 
 	g_array_remove_index (icon_bar->items, item_num);
 
@@ -1401,7 +1443,7 @@ e_icon_bar_on_editing_stopped (EIconBar *icon_bar,
 
 	/* Reset the fg & bg colors. */
 	gnome_canvas_item_set (item,
-			       "fill_color_gdk", &icon_bar->colors[E_ICON_BAR_COLOR_TEXT],
+			       "fill_color_gdk", &(GTK_WIDGET(icon_bar)->style->fg [GTK_STATE_NORMAL]),
 			       NULL);
 
 	if (icon_bar->edit_rect_item) {

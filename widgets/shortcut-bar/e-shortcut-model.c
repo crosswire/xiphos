@@ -30,7 +30,7 @@
 
 #include <config.h>
 #include <gtk/gtksignal.h>
-#include <e-util/e-util.h>
+#include <gal/util/e-util.h>
 #include "e-shortcut-model.h"
 
 /* This contains information on one item. */

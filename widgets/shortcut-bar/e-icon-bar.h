@@ -26,7 +26,7 @@
 
 #include <gdk_imlib.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include "../../e-util/e-canvas.h"
+#include <gal/widgets/e-canvas.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,6 +44,10 @@ struct _EIconBarItem
 {
 	GnomeCanvasItem *text;
 	GnomeCanvasItem *image;
+
+	/* This holds the original pixbuf so that we can blend 
+	   to the background if the style changes */
+	GdkPixbuf *pixbuf;
 
 	/* This is user data attached to the item, e.g. a URL. */
 	gpointer data;
@@ -73,7 +77,6 @@ typedef enum
 /* These index our colors array. */
 typedef enum
 {
-	E_ICON_BAR_COLOR_TEXT,
 	E_ICON_BAR_COLOR_EDITING_TEXT,
 	E_ICON_BAR_COLOR_EDITING_RECT,
 	E_ICON_BAR_COLOR_EDITING_RECT_OUTLINE,

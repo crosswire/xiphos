@@ -30,7 +30,7 @@
 
 #include "e-shortcut-bar.h"
 
-#include <widgets/e-paned/e-hpaned.h>
+#include <gal/e-paned/e-hpaned.h>
 
 #define NUM_SHORTCUT_TYPES 5
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
@@ -73,6 +73,8 @@ static void set_large_icons (GtkWidget *menuitem,
 			     EShortcutBar *shortcut_bar);
 static void set_small_icons (GtkWidget *menuitem,
 			     EShortcutBar *shortcut_bar);
+static void add_group (GtkWidget *menuitem,
+		       EShortcutBar *shortcut_bar);
 static void remove_group (GtkWidget *menuitem,
 			  EShortcutBar *shortcut_bar);
 
@@ -94,6 +96,14 @@ static void on_group_added (EShortcutModel *shortcut_model,
 			    gint group_num);
 static void on_group_removed (EShortcutModel *shortcut_model,
 			      gint group_num);
+static void on_shortcut_dragged	(EShortcutBar	*shortcut_bar,
+				 gint		 group_num,
+				 gint		 item_num);
+static void on_shortcut_dropped	(EShortcutBar	*shortcut_bar,
+				 gint		 group_num,
+				 gint		 item_num,
+				 gchar		*url,
+				 gchar		*name);
 
 int
 main (int argc, char *argv[])
@@ -138,6 +148,11 @@ main (int argc, char *argv[])
 			    GTK_SIGNAL_FUNC (on_group_added), NULL);
 	gtk_signal_connect (GTK_OBJECT (shortcut_model), "group_removed",
 			    GTK_SIGNAL_FUNC (on_group_removed), NULL);
+
+	gtk_signal_connect (GTK_OBJECT (shortcut_bar), "shortcut_dragged",
+			    GTK_SIGNAL_FUNC (on_shortcut_dragged), NULL);
+	gtk_signal_connect (GTK_OBJECT (shortcut_bar), "shortcut_dropped",
+			    GTK_SIGNAL_FUNC (on_shortcut_dropped), NULL);
 
 #if 0
 	gtk_container_set_border_width (GTK_CONTAINER (shortcut_bar), 4);
@@ -339,9 +354,10 @@ show_standard_popup (EShortcutBar *shortcut_bar,
 	gtk_menu_append (GTK_MENU (menu), menuitem);
 
 	menuitem = gtk_menu_item_new_with_label ("Add New Group");
-	gtk_widget_set_sensitive (menuitem, FALSE);
 	gtk_widget_show (menuitem);
 	gtk_menu_append (GTK_MENU (menu), menuitem);
+	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
+			    GTK_SIGNAL_FUNC (add_group), shortcut_bar);
 
 	menuitem = gtk_menu_item_new_with_label ("Remove Group");
 	gtk_widget_show (menuitem);
@@ -417,6 +433,14 @@ set_small_icons (GtkWidget *menuitem,
 
 	e_shortcut_bar_set_view_type (shortcut_bar, group_num,
 				      E_ICON_BAR_SMALL_ICONS);
+}
+
+
+static void
+add_group (GtkWidget *menuitem,
+	   EShortcutBar *shortcut_bar)
+{
+	e_shortcut_model_add_group (shortcut_bar->model, 3, "New Group");
 }
 
 
@@ -603,4 +627,32 @@ on_group_removed (EShortcutModel *shortcut_model,
 		  gint group_num)
 {
 	g_print ("In on_group_removed Group:%i\n", group_num);
+}
+
+
+static void
+on_shortcut_dragged	(EShortcutBar	*shortcut_bar,
+			 gint		 group_num,
+			 gint		 item_num)
+{
+	g_print ("In on_shortcut_dragged Group:%i Item:%i\n", group_num,
+		 item_num);
+
+	e_shortcut_model_remove_item (shortcut_bar->model, group_num,
+				      item_num);
+}
+
+
+static void
+on_shortcut_dropped	(EShortcutBar	*shortcut_bar,
+			 gint		 group_num,
+			 gint		 item_num,
+			 gchar		*url,
+			 gchar		*name)
+{
+	g_print ("In on_shortcut_dropped Group:%i Item:%i\n", group_num,
+		 item_num);
+
+	e_shortcut_model_add_item (shortcut_bar->model,
+				   group_num, item_num, url, name);
 }
