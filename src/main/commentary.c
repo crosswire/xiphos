@@ -40,24 +40,12 @@
 #include "backend/commentary_.h"
 #include "backend/viewcomm.h"
 
-/******************************************************************************
- * externs
- */ 
-
-extern gboolean isrunningVC; 
 
 /******************************************************************************
  * globals
  */ 
- 
-COMM_DATA *cur_c;
 gboolean comm_display_change = TRUE;
 
-/******************************************************************************
- * global to this file only 
- */
- 
-static GList *comm_list;
 
 /******************************************************************************
  * Name
@@ -124,74 +112,12 @@ const char* navigate_commentary(gint modnum, gint direction)
 
 /******************************************************************************
  * Name
- *  set_commentary_page_and_key
+ *   display_comm
  *
  * Synopsis
  *   #include "commentary.h"
  *
- *   void set_commentary_page_and_key(gint page_num, gchar *key)	
- *
- * Description
- *   change commentary page and key 
- *
- * Return value
- *   void
- */
- 
-void set_commentary_page_and_key(gint page_num, gchar *key)
-{
-	comm_display_change = FALSE;
-	strcpy(settings.comm_key,key);
-	strcpy(cur_c->key,key);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page_num);
-	backend_display_commentary(page_num,key);
-	comm_display_change = TRUE;
-}
-
-/******************************************************************************
- * Name
- *  set_commentary_page
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void set_commentary_page(gchar * modname, GList * comm_list)	
- *
- * Description
- *    change commentary page without changing key
- *
- * Return value
- *   void
- */
- 
-static void set_commentary_page(gchar * modname, GList * comm_list)
-{
-	gint page = 0;
-	COMM_DATA *c = NULL;
-
-	comm_list = g_list_first(comm_list);
-	while (comm_list != NULL) {
-		c = (COMM_DATA *) comm_list->data;
-		if (!strcmp(c->modName, modname))
-			break;
-		++page;
-		comm_list = g_list_next(comm_list);
-	}
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page);
-	settings.comm_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_comm),
-			settings.comm_tabs);
-}
-
-/******************************************************************************
- * Name
- *   display_commentary
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void display_commentary(gchar * key)	
+ *   void display_comm(gchar * key)	
  *
  * Description
  *    display new key in current commentary
@@ -200,111 +126,30 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
  *   void
  */
  
-void display_commentary(gchar * key)
-{
-        if(!cur_c) return;
-	strcpy(settings.comm_key,key);
-	strcpy(cur_c->key, key);
-	backend_display_commentary(settings.comm_last_page, key);
+void display_comm(gint page_num, gchar * key)
+{        
+	backend_display_commentary(page_num, key);
 }
 
 /******************************************************************************
  * Name
- *  setup_commentary
+ *   new_display_commentary
  *
  * Synopsis
  *   #include "commentary.h"
  *
- *   GList* setup_commentary(void)	
+ *   void new_display_commentary(GtkWidget * html, gchar * modName)	
  *
  * Description
- *    setup gui commentary support and return list on commentary names
+ *    
  *
  * Return value
  *   void
- */
- 
-void setup_commentary(GList *mods)
+ */ 
+
+void new_display_commentary(GtkWidget * html, gchar * modName)
 {
-	GtkWidget *popupmenu;
-	GList *tmp = NULL;
-	gchar *modname;
-	gchar *modbuf;
-	gchar *keybuf;
-	COMM_DATA *c;
-	gint count = 0;
-	extern gboolean comm_find_running;
-	
-	comm_list = NULL;
-	comm_find_running = FALSE;
-	
-	//mods = backend_get_list_of_mods_by_type(COMM_MODS);
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		modname = (gchar *) tmp->data;
-		c = g_new(COMM_DATA, 1);
-		c->modName = modname;
-		c->modnum = count;
-		c->searchstring = NULL;
-		c->key[0] = '\0';
-		c->find_dialog = NULL;		
-		c->has_key = backend_module_is_locked(c->modName);
-		gui_create_commentary_pane(c, count);
-		popupmenu = gui_create_pm(c);
-		gnome_popup_menu_attach(popupmenu, c->html, NULL);
-		backend_new_display_commentary(c->html, c->modName);
-		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
-		++count;
-		tmp = g_list_next(tmp);
-	}
-
-	gtk_signal_connect(GTK_OBJECT(settings.notebook_comm),
-			   "switch_page",
-			   GTK_SIGNAL_FUNC
-			   (on_notebook_comm_switch_page), comm_list);
-
-	modbuf = g_strdup(settings.CommWindowModule);
-	keybuf = g_strdup(settings.currentverse);
-
-	set_commentary_page(modbuf, comm_list);
-
-	g_free(modbuf);
-	g_free(keybuf);
-	g_list_free(tmp);
-}
-
-/******************************************************************************
- * Name
- *   shutdown_commentary
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void shutdown_commentary(void)	
- *
- * Description
- *   shut down and cleanup 
- *
- * Return value
- *   void
- */
- 
-void shutdown_commentary(void)
-{
-	comm_list = g_list_first(comm_list);
-	while (comm_list != NULL) {
-		COMM_DATA *c = (COMM_DATA *) comm_list->data;
-		/* 
-		 * free any find dialogs created 
-		 */
-		if (c->find_dialog)	
-			g_free(c->find_dialog);
-		
-		g_free((COMM_DATA *) comm_list->data);
-		comm_list = g_list_next(comm_list);
-	}
-	g_list_free(comm_list);
+	backend_new_display_commentary(html, modName);
 }
 
 /******************************************************************************

@@ -81,9 +81,9 @@ module.include.files=\
 	src/gui/about_gnomesword.h\
 	src/gui/about_modules.h\
 	src/gui/about_sword.h\
-	src/gui/_bibletext.h\
+	src/gui/bibletext.h\
 	src/gui/bibletext_dialog.h\
-	src/gui/_commentary.h\
+	src/gui/commentary.h\
 	src/gui/commentary_dialog.h\
 	src/gui/commentary_find.h\
 	src/gui/_dictlex.h\
@@ -162,9 +162,9 @@ module.source.files=\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
-	src/gnome/_bibletext.c\
+	src/gnome/bibletext.c\
 	src/gnome/bibletext_dialog.c\
-	src/gnome/_commentary.c\
+	src/gnome/commentary.c\
 	src/gnome/commentary_dialog.c\
 	src/gnome/commentary_find.c\
 	src/gnome/_dictlex.c\

@@ -6,10 +6,10 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=4
-1=40
-2=131
-3=226
+0=6
+1=81
+2=972
+3=28
 4=138
 5=3
 6=1
@@ -39,11 +39,8 @@ ShowLocals=true
 
 [filelist]
 0=/home/terry/Projects/gnomesword1/ChangeLog
-1=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-2=/home/terry/Projects/gnomesword1/src/main/gbs.c
-3=/home/terry/Projects/gnomesword1/src/backend/gbs_.cpp
-4=/home/terry/Projects/gnomesword1/src/gnome/gbs.c
-5=/home/terry/Projects/gnomesword1/src/gui/gbs.h
+1=/home/terry/Projects/gnomesword1/src/gui/bibletext.h
+2=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
 
 [replace_text]
 0=settings.
@@ -56,14 +53,14 @@ ShowLocals=true
 7=workbook_upper_switch_page
 
 [find_text]
-0=g_strdup
-1=gbs_find_running
-2=in_url
-3=pixmap1
-4=cur_g
-5=gbs_list
-6=backend_
-7=s->
+0=comm_display_change
+1=display_commentary
+2=isrunningVC
+3=comm_list
+4=g_strdup
+5=gbs_find_running
+6=in_url
+7=pixmap1
 
 [executer args]
 0=newconfigs

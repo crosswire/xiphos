@@ -209,13 +209,6 @@ struct _settings {
 		modifiedPC, /* personal note modified */
 		modifiedSP; /* studypad file modified */
 		
-	/*
-	 * glist for saveing verse lists - 
-	 * freed in backend_shutdown() gs_sword.cpp
-	 */
-	GList *settingslist;
-	GList *book_items;
-	
 	/* store $home directory */
 	char *homedir;
 
@@ -231,7 +224,7 @@ struct _settings {
 	/* store filename for configure file - options */
 	char *fnconfigure;
 
-	/* apply changes to what? */
+	/* apply changes to what? the text navigation bar*/
 	gboolean apply_change;
 };
 
