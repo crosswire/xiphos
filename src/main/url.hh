@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
+//#include <gnome.h>
 
 enum {
 	TYPE_URI,

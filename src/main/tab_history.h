@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
+//#include <gnome.h>
 
 typedef struct _tab_history TAB_HISTORY;
 struct _tab_history {

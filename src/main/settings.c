@@ -36,7 +36,6 @@
 
 #include "gui/bookmarks.h"
 #include "gui/setup_druid.h"
-#include "gui/tabbed_browser.h"
 
 #include "main/settings.h"
 #include "main/xml.h"
