@@ -28,12 +28,17 @@ extern "C" {
 
 void showSBGroup(gint groupnum);
 void changegroupnameSB(gchar * groupName, gint groupNum);
+gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
+						gint group_num);
+void gui_get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
+    gint group_num, gint item_num, gchar **item_url, gchar **item_name);	
 void gui_setup_shortcut_bar(void);
 void gui_update_shortcut_bar(void);
 void gui_create_mod_list_menu(gint group_num, GtkWidget *menu,
 		GtkWidget *shortcut_menu_widget, gint mod_type);
 void gui_shortcutbar_showhide(void);
-
+void gui_set_shortcutbar_porgram_start(void);
+	
 #ifdef __cplusplus
 }
 #endif

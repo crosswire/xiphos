@@ -81,7 +81,6 @@ bookAbrevMap abrevationMap;
 
 
 gboolean 
- autoSave = true,	/* we want to auto save changes to personal comments */
  havebible = false,	/* do we have at least one bibletext module */
  havedict = false,	/* do we have at least one lex-dict module */
  havecomm = false,	/* do we have at least one commentary module */
@@ -583,12 +582,12 @@ char *backend_get_path_to_mods(void)
 
 /******************************************************************************
  * Name
- *   backend_get_mod_aboutSWORD
+ *   backend_get_mod_about_info
  *
  * Synopsis
  *   #include "sword.h"
  *
- *   gchar *backend_get_mod_aboutSWORD(gchar *modname)
+ *   gchar *backend_get_mod_about_info(gchar *modname)
  *
  * Description
  *   return the about information from the <module>.conf
@@ -596,7 +595,7 @@ char *backend_get_path_to_mods(void)
  * Return value
  *   gchar *
  */
-char *backend_get_mod_aboutSWORD(char * modname)
+char *backend_get_mod_about_info(char * modname)
 {
 	return g_strdup((char *) mainMgr->Modules[modname]->
 			getConfigEntry("About"));

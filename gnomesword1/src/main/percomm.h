@@ -25,14 +25,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "main/settings.h"
 	
 char *get_percomm_key(void);
 char *get_percomm_text(char * key);	
 void set_percomm_key(char * key);
 void change_percomm_module(char * mod_name);
-void save_percomm_note(gchar *note);
+void save_percomm_note(char *note);
 void delete_percomm_note(void);
 
 #ifdef __cplusplus

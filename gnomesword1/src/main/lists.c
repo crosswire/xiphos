@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 
 #include "main/lists.h"
 #include "main/gs_gnomesword.h"

@@ -123,7 +123,6 @@ module.include.files=\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_gnomesword.h\
-	src/main/setup.h\
 	src/main/percomm.h\
 	src/main/lists.h\
 	src/main/settings.h\
@@ -196,7 +195,6 @@ module.source.files=\
 	src/main/dictlex.c\
 	src/main/gbs.c\
 	src/main/gs_gnomesword.c\
-	src/main/setup.c\
 	src/main/lists.c\
 	src/main/main.c\
 	src/main/percomm.c\
