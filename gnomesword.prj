@@ -153,7 +153,8 @@ module.include.files=\
 	src/gui/search_sidebar.h\
 	src/main/search_dialog.h\
 	src/main/search_sidebar.h\
-	src/gui/splash.h
+	src/gui/splash.h\
+	src/main/parallel_view.h
 
 module.source.name=.
 module.source.type=
@@ -242,7 +243,8 @@ module.source.files=\
 	src/gnome2/note_toolbar_edit.c\
 	src/gnome2/note_toolbar_style.c\
 	src/main/search_dialog.cc\
-	src/main/search_sidebar.cc
+	src/main/search_sidebar.cc\
+	src/main/parallel_view.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

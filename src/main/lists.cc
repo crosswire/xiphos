@@ -121,7 +121,7 @@ void main_init_lists(void)
 		backend = new BackEnd();
 	}
 	mods.bible_books = backend->fill_Bible_books(2);
-	backend->get_module_options(mods.options);
+	mods.options = backend->get_module_options();
 	backend->init_lists(mod_lists);
 	if(start_backend)
 		delete backend;

@@ -227,12 +227,15 @@ GList *BackEnd::fill_Bible_books(int testament) {
 }
 
 
-void BackEnd::get_module_options(GList * options) {
+GList *BackEnd::get_module_options(void) {
+	GList *options = NULL;
 	StringList optionslist = main_mgr->getGlobalOptions();	
 	for (StringList::iterator it = optionslist.begin(); 
 				  it != optionslist.end(); it++) {
+		printf("%s\n",(char *) (*it).c_str());
 		options = g_list_append(options, strdup((char *) (*it).c_str()));
 	}
+	return options;
 }
 
 int BackEnd::has_global_option(char * module_name, char * option) {
@@ -274,9 +277,9 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 	SWModule *mod;
 	ModMap::iterator it;	//-- iteratior
 	//-- iterate through the modules until we find modName  
-	it = main_mgr->Modules.find(module_name);
+	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
-	if (it != main_mgr->Modules.end()) {
+	if (it != display_mgr->Modules.end()) {
 		mod = (*it).second;
 		mod->setKey(key);
 		return strdup((char *) mod->RenderText());

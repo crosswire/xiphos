@@ -260,19 +260,12 @@ void backend_delete_module_mgr(void)
  *   void
  */
  
-void backend_get_global_options_list(GList * list)
+/*void backend_get_global_options_list(GList * list)
 {
-	backend->get_module_options(list);
-	/*
-	StringList optionslist = sw.module_mgr->getGlobalOptions();
+	list = backend->get_module_options();
 	
-	for (StringList::iterator it = optionslist.begin(); 
-		it != optionslist.end(); it++) {
-		list = g_list_append(list, strdup((char *) (*it).c_str()));
-	}
-	*/
 }
-
+*/
 
 /******************************************************************************
  * Name

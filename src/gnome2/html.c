@@ -49,6 +49,7 @@
 #include "gui/widgets.h"
 #include "gui/tabbed_browser.h"
 
+#include "main/parallel_view.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/url.h"
@@ -522,7 +523,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	
 	if (*url == '@') {
 		++url;
-		gui_swap_parallel_with_main((gchar *) url);
+		main_swap_parallel_with_main((gchar *) url);
 	} else if (!strncmp(url, "noteID=", 7)) {
 		deal_with_notes(url, TRUE);
 		return;
