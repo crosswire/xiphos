@@ -89,7 +89,7 @@ void backend_newDisplayDL(GtkWidget * html, char *bookname,
 	g_list_free(tmp);
 }
 
-void backend_setupDL(SETTINGS * s)
+void backend_setup_dictlex(SETTINGS * s)
 {
 	ModMap::iterator it;	//-- iteratior
 	gint count = 0;
@@ -114,7 +114,7 @@ void backend_setupDL(SETTINGS * s)
 	}
 }
 
-void backend_shutdownDL(void)
+void backend_shutdown_dictlex(void)
 {
 	delete swmgrDL;
 

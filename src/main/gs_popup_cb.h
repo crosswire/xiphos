@@ -42,14 +42,6 @@ extern "C" {
 	void on_print_item_activate(GtkMenuItem * menuitem, gchar * html);
 	void on_int_global_options_activate(GtkMenuItem * menuitem, 
 				gpointer user_data);
-	void on_goto_reference_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-	void on_goto_reference2_activate(GtkMenuItem * menuitem,
-					 gpointer user_data);
-	void on_lookup_selection2_activate(GtkMenuItem * menuitem,
-					   gpointer user_data);
-	void on_lookup_selection_activate(GtkMenuItem * menuitem,
-					  gpointer user_data);
 	void on_about_this_module5_activate(GtkMenuItem * menuitem,
 					    gpointer user_data);
 	void on_john_3_1_activate(GtkMenuItem * menuitem,

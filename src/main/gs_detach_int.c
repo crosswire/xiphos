@@ -48,9 +48,10 @@ gboolean ApplyChangeBook;
 static gchar *change_verse_interlinear(void)
 {	
 	gchar *retval;
-	gchar *bookname, *newbook, buf[256];
+	gchar *bookname, buf[256];
 	gint chapter, verse;
-
+	const char *newbook;
+	
 	bookname = 
 	    gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
 	chapter =
@@ -75,8 +76,9 @@ static gchar *change_verse_interlinear(void)
 }
 static gchar *update_controls_interlinear(gchar * ref)
 {
-	gchar *bookname, *newbook, buf[256];
+	gchar *bookname, buf[256];
 	gint chapter, verse;
+	const char *newbook;
 				
 	newbook = backend_get_book_from_key(ref);
 	chapter = backend_get_chapter_from_key(ref);
