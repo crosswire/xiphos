@@ -11,6 +11,8 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     gs_abouts.c \
     gs_abouts.h \
+    gs_viewcomm.c \
+    gs_viewcomm.h \
     gs_viewdict.c \
     gs_viewdict.h \
     gs_studypad.c \
