@@ -82,13 +82,20 @@ static void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
+	gchar *mod_desc = NULL;
+	gchar *description = NULL;
 	
 	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
                                              tree_parent);
 	
 	do {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
-			   2, &caption, 3, &key, 4, &module, -1);
+			   		2, &caption, 
+					3, &key, 
+					4, &module, 
+					5, &mod_desc, 
+					6, &description,
+					-1);
 		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
 							&child)) {
 			cur_node = xml_add_folder_to_parent(parent, 
@@ -98,13 +105,16 @@ static void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
 		}
 		else 
 			xml_add_bookmark_to_parent(parent, 
-						caption,
+						description,
 						key,
-						module);
+						module,
+						mod_desc);
 		
 		g_free(caption);
 		g_free(key);
 		g_free(module);	
+		g_free(mod_desc);
+		g_free(description);
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
@@ -192,6 +202,8 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
+	gchar *mod_desc = NULL;
+	gchar *description = NULL;
 	
 	if (!bookmarks_changed) 
 		return;
@@ -210,19 +222,27 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	
 	do {
 		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-			   2, &caption, 3, &key, 4, &module, -1);
+			   		2, &caption, 
+					3, &key, 
+					4, &module, 
+					5, &mod_desc, 
+					6, &description, 
+					-1);
 		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
 			cur_node = xml_add_folder_to_parent(root_node, caption);
 			parse_treeview(cur_node, iter);
 		}
 		else 		
 			xml_add_bookmark_to_parent(root_node,  
-						caption,
+						description,
 						key,
-						module);
+						module,
+						mod_desc);
 		g_free(caption);
 		g_free(key);
 		g_free(module);	
+		g_free(mod_desc);
+		g_free(description);	
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model),iter));
 	
 	xmlSaveFormatFile(xml_filename, root_doc,1);
@@ -253,8 +273,7 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, 
 							BOOKMARK_DATA * data)
 {
-	gtk_tree_store_append(GTK_TREE_STORE(model), iter,
-			      parent);
+	gtk_tree_store_append(GTK_TREE_STORE(model), iter, parent);
 	
 		gtk_tree_store_set(GTK_TREE_STORE(model), iter, 
 			   COL_OPEN_PIXBUF, data->opened,
@@ -262,6 +281,8 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
 			   COL_CAPTION, data->caption, 
 			   COL_KEY, data->key,
 			   COL_MODULE, data->module,
+			   COL_MODULE_DESC, data->module_desc,
+			   COL_DESCRIPTION, data->description,
 			   -1);
 }
 
@@ -528,6 +549,8 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
+	gchar *mod_desc = NULL;
+	gchar *description = NULL;
 	gboolean is_leaf;
 	GString *str;
 	
@@ -538,7 +561,12 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
 		return;	
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   2, &caption, 3, &key, 4, &module, -1);
+					2, &caption, 
+					3, &key, 
+					4, &module, 
+					5, &mod_desc, 
+					6, &description,
+					-1);
 	
 	info = gui_new_dialog();
 	info->title = N_("Bookmark");
@@ -546,8 +574,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
 		info->label1 = N_("Folder name: ");
 		is_leaf = FALSE;		
-	}
-	else {
+	} else {
 		info->label1 = N_("Bookmark name: ");
 		info->text2 = g_strdup(key);
 		info->text3 = g_strdup(module);
@@ -566,15 +593,20 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 		if(is_leaf) {
 			data->opened = pixbufs->pixbuf_helpdoc;
 			data->closed = NULL;
-		}
-		else {				
+		} else {				
 			data->opened = pixbufs->pixbuf_opened;
 			data->closed = pixbufs->pixbuf_closed;	
 		}
+		if((strlen(description) > 1) || (strcmp(caption,info->text1))) {
+			data->description = info->text1;
+		}
+		else 
+			data->description = NULL;
 			
-		data->caption = info->text1;
-		data->key = info->text2; 
+		data->caption = info->text1;	
+		data->key = info->text2; 		
 		data->module = info->text3; 
+		data->module_desc = get_module_description(info->text3);
 		data->is_leaf = TRUE;
 		gtk_tree_store_set(GTK_TREE_STORE(model), &selected, 
 			   COL_OPEN_PIXBUF, data->opened,
@@ -582,6 +614,8 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 			   COL_CAPTION, data->caption, 
 			   COL_KEY, data->key,
 			   COL_MODULE, data->module,
+			   COL_MODULE_DESC, data->module_desc,
+			   COL_DESCRIPTION, data->description,
 			   -1);	
 		bookmarks_changed = TRUE;
 		save_bookmarks(NULL, NULL);
@@ -594,6 +628,8 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(caption);
 	g_free(key);
 	g_free(module);
+	g_free(mod_desc);
+	g_free(description);
 	g_string_free(str,TRUE);
 }
 
@@ -986,6 +1022,11 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		data->caption = info->text1;
 		data->key = info->text2; 
 		data->module = info->text3; 
+		data->module_desc = get_module_description(info->text3);
+		if(!strcmp(data->caption,buf))
+			data->description = NULL;
+		else
+			data->description = info->text1;
 		data->is_leaf = TRUE;
 		data->opened = pixbufs->pixbuf_helpdoc;
 		data->closed = NULL;			
@@ -1078,6 +1119,8 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 		data->caption = g_strdup(buf);
 		data->key = NULL; 
 		data->module = NULL; 
+		data->module_desc = NULL;
+		data->description = NULL;
 		data->is_leaf = FALSE;
 		data->opened = pixbufs->pixbuf_opened;
 		data->closed = pixbufs->pixbuf_closed;			
