@@ -588,6 +588,18 @@ static void create_viewer_page(GtkWidget * vpaned_sidebar)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_viewer_widget));
+	
+	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget), "link_clicked",
+				   G_CALLBACK(gui_link_clicked),
+				   NULL);
+	/*g_signal_connect ((gpointer)widgets.html_text , 
+		    "motion_notify_event",
+                    G_CALLBACK (on_motion_notify_event),
+                    NULL);
+	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget), "on_url",
+				   G_CALLBACK(gui_url),
+				   NULL);*/
+	
 }
 
 
