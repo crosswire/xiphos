@@ -62,8 +62,8 @@ struct _module_lists {
 
 
 GList * get_list(gint type);
-void init_lists(void);
-void shutdown_list(void);
+void main_init_lists(void);
+void main_shutdown_list(void);
 
 #ifdef __cplusplus
 }

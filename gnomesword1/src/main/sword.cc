@@ -224,10 +224,16 @@ void main_display_commentary(void)
 {
 	sw.comm_mod->Display();
 }
-
+void main_display_dictionary(char * mod_name, char * key)
+{
+	backend_set_module(DICT_MGR, mod_name);
+	sw.dict_mod->SetKey(key);
+	sw.dict_mod->Display();
+}
 void main_setup_displays(void)
 {
 	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm);
+	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict);
 }
 
 /******************************************************************************

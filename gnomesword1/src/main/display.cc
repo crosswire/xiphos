@@ -39,7 +39,7 @@ extern "C" {
 #include "main/global_ops.hh"
 
 #include "gui/utilities.h"
-#include "gui/widgets.h"
+//#include "gui/widgets.h"
 
 #include "backend/module.hh"
 #include "backend/tree.hh"
@@ -70,7 +70,8 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	
 	g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<a href=\"about://%s/%s\">[%s]</a>[%s]<br>"
+				"<a href=\"about://%s/%s\"><font color=\"%s\">"
+				"[%s]</font></a>[%s]<br>"
 				"<font face=\"%s\" size=\"%s\">%s"
 				"</font></body></html>",
 				settings.bible_bg_color, 
@@ -78,6 +79,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				settings.link_color,
 				imodule.Name(),
 				imodule.Description(),
+				settings.bible_verse_num_color,
 				imodule.Name(),
 				(gchar*)keytext,
 				(mf->old_font)?mf->old_font:"",
