@@ -137,6 +137,8 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = module_name_from_description(dict_mod_description);
+	if(!mod_name) 
+		return;
 
 	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key && mod_name) {
@@ -1123,6 +1125,8 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 	gchar *module_name = NULL;
 
 	module_name = module_name_from_description((gchar *) user_data);
+	if(!module_name) 
+		return;
 	gui_open_commentary_dialog(module_name);
 	if(module_name) g_free(module_name);
 }

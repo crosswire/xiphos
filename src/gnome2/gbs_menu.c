@@ -240,6 +240,8 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 	gchar *module_name = NULL;
 	
 	module_name = module_name_from_description((gchar *) user_data);
+	if(!module_name) 
+		return;
 	gui_change_module_and_key(module_name, NULL);
 	if(module_name) g_free(module_name);
 }
@@ -393,6 +395,8 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 	gchar *module_name = NULL;
 
 	module_name = module_name_from_description((gchar *) user_data);
+	if(!module_name) 
+		return;
 	gui_open_gbs_dialog(module_name);
 	if(module_name) g_free(module_name);
 }
@@ -446,7 +450,6 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	GtkWidget *file_menu;
 	GtkWidget *current_dict;
 	GtkWidget *print;
-//	GtkWidget *sync_with_main;
 	GtkWidget *close;
 	GtkWidget *show;
 	GtkWidget *show_menu;
@@ -475,9 +478,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 
 	pm_text = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
-/*	pm_text_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));*/
-
+	
 	/*
 	 * file menu
 	 */
@@ -489,24 +490,6 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file), file_menu);
 
 	if (t->is_dialog) {
-		/*
-		sync_with_main =
-		    gtk_menu_item_new_with_label(_
-						 ("Sync with Main Window"));
-		gtk_widget_show(sync_with_main);
-		gtk_container_add(GTK_CONTAINER(file_menu),
-				  sync_with_main);
-
-		gtk_signal_connect(GTK_OBJECT(sync_with_main),
-				   "activate",
-				   G_CALLBACK
-				   (on_sync_activate), t);
-
-		separator = gtk_menu_item_new();
-		gtk_widget_show(separator);
-		gtk_container_add(GTK_CONTAINER(file_menu), separator);
-		gtk_widget_set_sensitive(separator, FALSE);
-*/
 		view_text =
 		    gtk_menu_item_new_with_label(_("Open New Dialog"));
 		gtk_widget_show(view_text);
@@ -515,9 +498,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		view_text_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
 					  view_text_menu);
-/*		view_text_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU
-						      (view_text_menu));*/
+					  
 		gui_add_mods_2_gtk_menu(GBS_DESC_LIST, view_text_menu,
 					(GtkMenuCallback)
 					on_new_dialog_activate);
@@ -537,9 +518,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		view_text_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
 					  view_text_menu);
-/*		view_text_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU
-						      (view_text_menu));*/
+		
 		gui_add_mods_2_gtk_menu(GBS_DESC_LIST, view_text_menu,
 					(GtkMenuCallback)
 					on_view_mod_activate);
@@ -632,9 +611,6 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	lookup_selection_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(lookup_selection),
 				  lookup_selection_menu);
-/*	lookup_selection_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (lookup_selection_menu));*/
 
 	usecurrent =
 	    gtk_menu_item_new_with_label("Use Current Dictionary");

@@ -90,6 +90,8 @@ void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 
 	mod_name = module_name_from_description(dict_mod_description);
+	if(!mod_name) 
+		return;
 
 	dict_key = gui_get_word_or_selection(cur_d->html, FALSE);
 	if (dict_key) {

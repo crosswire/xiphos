@@ -281,7 +281,7 @@ const char *get_module_language(const char *module_name)
  *   get_module_text
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   char *get_module_text(char * mod_name, char * key)	
  *
@@ -325,7 +325,7 @@ char *get_striptext(int manager, char *module_name, char *key)
  *   check_for_module
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   int check_for_module(char * mod_name)
  *
@@ -347,7 +347,7 @@ int check_for_module(char * mod_name)
  *  get_module_number
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   int get_module_number(char *module_name, char *module_type)	
  *
@@ -370,7 +370,7 @@ int get_module_number(const char *module_name, const char *module_type)
  *  get_mod_about_info
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   gchar *get_mod_about_info(char * mod_name)	
  *
@@ -393,7 +393,7 @@ char *get_mod_about_info(char * mod_name)
  *  module_is_locked
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   int module_is_locked(char * mod_name)
  *
@@ -415,7 +415,7 @@ int module_is_locked(char * mod_name)
  *  get_cipher_key
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   char *get_cipher_key(char *mod_name)
  *
@@ -437,7 +437,7 @@ char *get_cipher_key(char *mod_name)
  *  has_cipher_tag
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   int has_cipher_tag(char *mod_name)
  *
@@ -459,7 +459,7 @@ int has_cipher_tag(char *mod_name)
  *  get_mod_type
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/module.h"
  *
  *   int get_mod_type(char * mod_name)
  *
@@ -473,4 +473,24 @@ int has_cipher_tag(char *mod_name)
 int get_mod_type(char * mod_name)
 {
 	return backend_get_mod_type(mod_name);
+}
+/******************************************************************************
+ * Name
+ *  module_name_from_description
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void module_name_from_description(gchar *mod_name, gchar *description)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+char *module_name_from_description(char *description)
+{
+	backend_module_name_from_description(description);
 }
