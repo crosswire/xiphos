@@ -390,7 +390,6 @@ static void set_up_search(void)
 
 	gui_begin_html(search.results_html, TRUE);
 	clear_scope();
-	clear_bounds();
 	if (GTK_TOGGLE_BUTTON(search.rb_custom_range)->active) {
 		clear_search_list();
 		name =
