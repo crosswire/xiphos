@@ -39,12 +39,32 @@ extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
 extern BM_TREE bmtree;
 extern GS_APP gs;
+extern gboolean havedict; /* let us know if we have at least one lex-dict module */
+extern gboolean havecomm; /* let us know if we have at least one commentary module */
+extern gboolean havebible; /* let us know if we have at least one Bible text module */
+extern EShortcutModel *shortcut_model;
 
-gint groupnum1 = 0,
-        groupnum2 = 0,
-        groupnum3 = 0,
-        groupnum4 = 0,
-	groupnum5 = 0;
+gint groupnum1 = -1,
+        groupnum2 = -1,
+        groupnum3 = -1,
+        groupnum4 = -1,
+	groupnum5 = -1;
+
+/******************************************************************************
+ * add_sb_group - add group to shourtcut bar
+ * shortcut_bar - shortcut bar to add group to
+ * group_name - name of the group to be added
+ *****************************************************************************/
+static gint
+add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
+{
+	gint group_num;
+	
+	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
+	e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
+        	return group_num;
+}
+
 
 static void
 on_button_clicked                      (GtkButton       *button,
@@ -70,40 +90,97 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 /*****************************************************************************
  *      for any shortcut bar item clicked
  *****************************************************************************/
-void
+static void
 on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			      GdkEvent * event,
 			      gint group_num, gint item_num)
 {
-	sbchangeModSword(gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar)),
-			GTK_WIDGET(shortcut_bar), group_num, item_num);
+	GtkWidget       
+		*notebook,
+		*app;
+        gchar		
+		*type,
+		*ref;
+	
+	app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));	
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
+						  group_num,
+						  item_num,
+						  &type,
+						  &ref);					  	
+	if(!strcmp(type,"bible:")) {
+		if(havebible){/* let's don't do this if we don't have at least one Bible text */
+			notebook = lookup_widget(app,"nbTextMods"); /* get notebook */
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
+		}
+	}
+	if(!strcmp(type,"commentary:")) {
+		if(havecomm) { /* let's don't do this if we don't have at least one commentary */	           			            	
+			notebook = lookup_widget(app,"notebook1"); /* get notebook */
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
+    		}
+    	}
+	if(!strcmp(type,"dict/lex:")) {
+		if(havedict) { /* let's don't do this if we don't have at least one dictionary / lexicon */	           			            	
+			notebook = lookup_widget(app,"notebook4"); /* get notebook */
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
+  		}
+	}
+	if(!strcmp(type,"history:")) {
+		changeVerseSWORD(ref);
+	}
 }
 
-void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
+void setupSB(GList *textlist, 
+			GList *commentarylist, 
+			GList *dictionarylist)
 {
 	GList *tmp;
-	GtkWidget* treebar,
+	GtkWidget	
+			*treebar,
 			*button,
 			*ctree,
-			*scrolledwindow1;
-//	GtkCTree *ctree;
-	
-	
+			*scrolledwindow1;	
 	
 	tmp = NULL;
 	if(settings->showtextgroup){
 	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
+		tmp = textlist;
+		while (tmp != NULL) {
+		 	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+					groupnum1, -1,
+					shortcut_types[0],
+					(gchar *) tmp->data);
+			tmp = g_list_next(tmp);
+		}	
 	}
 	if(settings->showcomgroup){
 	    	groupnum2 = add_sb_group((EShortcutBar *)shortcut_bar, "Commentaries");
+		tmp = commentarylist;
+	        while (tmp != NULL) {	
+			e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+					groupnum2, -1,
+					shortcut_types[1],
+					(gchar *) tmp->data);
+	                tmp = g_list_next(tmp);
+		}	
 	}
 	if(settings->showdictgroup){
 		groupnum3 = add_sb_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
+		tmp = dictionarylist;
+	        while (tmp != NULL) { 	
+			e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+					groupnum3, -1,
+					shortcut_types[2],
+					(gchar *) tmp->data);
+			tmp = g_list_next(tmp);
+		}
 	}
 	if(settings->showhistorygroup){
 		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	
 	}
-	
+	g_list_free(tmp);
+	/*** add bookmark group to shortcut bar ***/
 	treebar = e_group_bar_new();
 	
 	scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
@@ -134,10 +211,37 @@ void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
 	groupnum5  = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 						 scrolledwindow1,
 						 button,
-						 -1);
-	//--  add modules to shortcut bar
-	if(settings->showtextgroup){ 	
-		tmp = textlist;
+						 -1);        
+	loadtree(gs.ctree_widget);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      	GTK_SIGNAL_FUNC (on_button_clicked),
+                      	NULL);  
+	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
+			GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
+			NULL);
+}
+
+void
+update_shortcut_bar(SETTINGS *s,
+				GList *text, 
+				GList *commentary, 
+				GList *dictionary)
+{
+	gint	count, i,current_group;
+	GList *tmp;
+	EShortcutBar *bar;
+	
+	bar = E_SHORTCUT_BAR(shortcut_bar);	
+	tmp = NULL;
+	current_group = e_group_bar_get_current_group_num(E_GROUP_BAR(bar));
+	count = e_shortcut_model_get_num_groups(E_SHORTCUT_MODEL(shortcut_model));
+	//*** remove shortcutbar groups so we can load the one the user has sellected
+	for(i=count-1; i>-1; i--){
+		e_shortcut_model_remove_group(E_SHORTCUT_MODEL(shortcut_model), i);
+	}	
+	if(s->showtextgroup){
+	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
+		tmp = text;
 		while (tmp != NULL) {
 		 	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 					groupnum1, -1,
@@ -146,49 +250,35 @@ void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
 			tmp = g_list_next(tmp);
 		}	
 	}
-	g_list_free(tmp);	
-	if(settings->showcomgroup){
-	                tmp = commentarylist;
-	                 while (tmp != NULL) {	
+	if(s->showcomgroup){
+	    	groupnum2 = add_sb_group((EShortcutBar *)shortcut_bar, "Commentaries");
+		tmp = commentary;
+	        while (tmp != NULL) {	
 			e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 					groupnum2, -1,
 					shortcut_types[1],
 					(gchar *) tmp->data);
-	                                  tmp = g_list_next(tmp);
+	                tmp = g_list_next(tmp);
 		}	
-	}	
-	g_list_free(tmp);
-	if(settings->showdictgroup){
-	                 tmp = dictionarylist;
-	                 while (tmp != NULL) { 	
+	}
+	if(s->showdictgroup){
+		groupnum3 = add_sb_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
+		 tmp = dictionary;
+	        while (tmp != NULL) { 	
 			e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 					groupnum3, -1,
 					shortcut_types[2],
 					(gchar *) tmp->data);
 			tmp = g_list_next(tmp);
 		}
+	}
+	if(s->showhistorygroup){
+		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	
 	}	
+	e_group_bar_set_current_group_num(E_GROUP_BAR(bar),
+						 current_group,
+						 TRUE);		
         g_list_free(tmp);
-	loadtree(gs.ctree_widget);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-                      GTK_SIGNAL_FUNC (on_button_clicked),
-                      NULL);     
-
-
 }
 
-/******************************************************************************
- * add_sb_group - add group to shourtcut bar
- * shortcut_bar - shortcut bar to add group to
- * group_name - name of the group to be added
- *****************************************************************************/
-gint
-add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
-{
-	gint group_num;
-	
-	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
-	e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
-        	return group_num;
-}
 

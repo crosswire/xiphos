@@ -21,16 +21,14 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
+#ifndef __GNOMESWORD_H__
+#define __GNOMESWORD_H__  
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#ifndef __GNOMESWORD_H__
-#define __GNOMESWORD_H__
-
-
+ 
 #include <gnome.h>
-
 
 void initSWORD(GtkWidget *mainform);
 void updateinterlinearpage(void);
@@ -106,9 +104,9 @@ void loadSDkeysSWORD(GtkWidget *clist);
 void loadpreferencemodsSWORD(void);
 void gs_firstrunSWORD(void);
 void applyfontcolorandsizeSWORD(void);
+void updateshortcutbarSWORD(void);
 
-#endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }
 #endif
-
+#endif	/* __GNOMESWORD_H__ */
