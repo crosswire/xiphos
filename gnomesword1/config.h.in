@@ -136,9 +136,6 @@
 /* Define if you want to use moz_embed */
 #undef USE_MOZILLA
 
-/* Define if you want to use pspell */
-#undef USE_PSPELL
-
 /* Define if you want to spell checking */
 #undef USE_SPELL
 

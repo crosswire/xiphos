@@ -28,10 +28,6 @@ gnomesword2_SOURCES =  \
     dictlex_dialog.c \
     display_info.c \
     dummy.cpp \
-    editor.c \
-    editor_menu.c \
-    editor_replace.c \
-    editor_spell.c \
     fileselection.c \
     find_dialog.c \
     font_dialog.c \
@@ -45,9 +41,6 @@ gnomesword2_SOURCES =  \
     main_menu.c \
     main_window.c \
     mod_mgr.c \
-    note_editor.c \
-    note_toolbar_edit.c \
-    note_toolbar_style.c \
     parallel_view.c \
     parallel_dialog.c \
     preferences_cell_renderer.c \
@@ -58,14 +51,11 @@ gnomesword2_SOURCES =  \
     setup_druid.c \
     sidebar.c \
     sidebar_dialog.c \
-    spell_gnome_spell.c \
     splash.c \
     studypad.c \
     studypad_dialog.c \
-    tabbed_browser.c \
-    toolbar_edit.c \
     toolbar_nav.c \
-    toolbar_style.c \
+    tabbed_browser.c \
     utilities.c
     
 gnomesword2_LDADD = \
@@ -76,6 +66,7 @@ gnomesword2_LDADD = \
     $(GNOME_SPELL_LIBS)\
     $(LIB_SWORD) \
     $(top_builddir)/src/main/libmain.a \
+    $(top_builddir)/src/editor/libeditor.a \
     $(top_builddir)/src/backend/libbackend.a
 
 EXTRA_DIST = \

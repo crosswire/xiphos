@@ -46,12 +46,13 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#include "gui/editor.h"
-#include "gui/note_editor.h"
-#include "gui/note_toolbar_edit.h"
-#include "gui/note_toolbar_style.h"
-#include "gui/editor_replace.h"
-#include "gui/editor_spell.h"
+#include "editor/editor.h"
+#include "editor/note_editor.h"
+#include "editor/note_toolbar_edit.h"
+#include "editor/note_toolbar_style.h"
+#include "editor/editor_replace.h"
+#include "editor/editor_spell.h"
+
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
@@ -64,8 +65,8 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/lists.h"
-#include "main/xml.h"
 #include "main/module_dialogs.h"
+#include "main/xml.h"
 
 
 static GtkWidget *create_menu(DIALOG_DATA * d);
@@ -499,7 +500,6 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * vc)
 			   G_CALLBACK(entry_key_press_event), vc);
 	return toolbar_nav;
 }
-
 
 
 void gui_create_note_editor(DIALOG_DATA * d)

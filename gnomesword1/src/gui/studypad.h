@@ -23,7 +23,7 @@
 #define __STUDYPAD_H_
 
 #include <gnome.h>
-#include "gui/editor.h"
+#include "editor/editor.h"
 
 extern GSHTMLEditorControlData *editor_cd;
 

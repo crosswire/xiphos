@@ -44,11 +44,11 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#include "gui/editor.h"
-#include "gui/editor_menu.h"
-#include "gui/editor_replace.h"
-#include "gui/toolbar_style.h"
-#include "gui/toolbar_edit.h"
+#include "editor/editor.h"
+#include "editor/editor_menu.h"
+#include "editor/editor_replace.h"
+#include "editor/toolbar_style.h"
+#include "editor/toolbar_edit.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
@@ -79,7 +79,8 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 {
 	GSHTMLEditorControlData *necd =
 	    g_new0(GSHTMLEditorControlData, 1);
-
+	necd->htmlwidget = gtk_html_new();
+	necd->html = GTK_HTML(necd->htmlwidget);
 	necd->paragraph_option = NULL;
 	necd->properties_types = NULL;
 	necd->block_font_style_change = FALSE;
@@ -91,10 +92,14 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 	necd->gbs = FALSE;
 	necd->personal_comments = FALSE;
 	necd->studypad = FALSE;
-
-#ifdef USE_GNOME_SPELL	
+	//necd->icon_theme              = gnome_icon_theme_new ();
+	
+	spell_init (necd->html, necd);
 	necd->has_spell_control_set = FALSE;
-#endif
+
+#ifdef DEBUG
+	g_message("gs_html_editor_control_data_new");
+#endif	
 	necd->language = NULL;
 	if(settings.studypadfilename)
 		sprintf(necd->filename, "%s", settings.studypadfilename);

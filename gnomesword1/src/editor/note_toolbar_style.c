@@ -32,7 +32,7 @@
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-#include "gui/toolbar_style.h"
+#include "editor/toolbar_style.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
