@@ -129,13 +129,20 @@ static void set_page_text(gchar * modname, GList * text_list)
 	TEXT_DATA *t = NULL;
 
 	text_list = g_list_first(text_list);
-	while (text_list != NULL) {
-		t = (TEXT_DATA *) text_list->data;
-		if (!strcmp(t->mod_name, modname))
-			break;
-		++page;
-		text_list = g_list_next(text_list);
+	if(modname) {
+		while (text_list != NULL) {
+			t = (TEXT_DATA *) text_list->data;
+			if (!strcmp(t->mod_name, modname))
+				break;
+			++page;
+			text_list = g_list_next(text_list);
+		}
 	}
+	else {
+		t = (TEXT_DATA *) text_list->data;
+		page = 0;
+	}
+	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_text), page);

@@ -704,14 +704,21 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 	GBS_DATA *g = NULL;
 
 	gbs_list = g_list_first(gbs_list);
-	while (gbs_list != NULL) {
-		g = (GBS_DATA *) gbs_list->data;
-		if (!strcmp(g->mod_name, book_name))
-			break;
-		++page;
-		gbs_list = g_list_next(gbs_list);
+	if(book_name) {
+		while (gbs_list != NULL) {
+			g = (GBS_DATA *) gbs_list->data;
+			if (!strcmp(g->mod_name, book_name))
+				break;
+			++page;
+			gbs_list = g_list_next(gbs_list);
+		}
 	}
+	else {
+		g = (GBS_DATA *) gbs_list->data;
+		page = 0;
+	}	
 	cur_g = g;
+	
 	if(page)
 		gtk_notebook_set_page(GTK_NOTEBOOK(
 				  widgets.notebook_gbs), page);

@@ -777,7 +777,7 @@ static void load_xml_bookmarks(GtkCTree * ctree, GtkCTreeNode * node)
  *   gchar *
  */
 
-static gchar *get_module_key(void)
+/*static gchar *get_module_key(void)
 {
 	if (settings.havebible) {
 		switch (settings.whichwindow) {
@@ -800,7 +800,7 @@ static gchar *get_module_key(void)
 	}
 	return NULL;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -818,7 +818,7 @@ static gchar *get_module_key(void)
  *   gchar *
  */
 
-static gchar *get_module_name(void)
+/*static gchar *get_module_name(void)
 {
 	if (settings.havebible) {
 		switch (settings.whichwindow) {
@@ -840,7 +840,7 @@ static gchar *get_module_name(void)
 	}
 	return NULL;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -960,6 +960,9 @@ gboolean button_press_event(GtkWidget * widget,
 void goto_bookmark(gchar * mod_name, gchar * key)
 {
 	gint module_type;
+	
+	if(!check_for_module(mod_name)) 
+		mod_name = settings.MainWindowModule;
 
 	if (use_dialog) {
 		module_type = get_mod_type(mod_name);

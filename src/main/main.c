@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * main.c - In the beginning... ;o)
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 {
 	int newconfigs = FALSE;
 	int newbookmarks = FALSE;
-	
+
 	gui_init(argc, argv);
 	
 	if (argc > 1) {
