@@ -162,7 +162,7 @@ void gui_display_in_hint_window(gchar * note)
 	
 	/* FIXME */
 	size_of_note = strlen(note);
-	size_of_note = ((size_of_note / 24) + 2);
+	size_of_note = ((size_of_note / 24) + 3);
 	size_of_note = size_of_note * 18;
 	
 	hint.hint_window = NULL;
@@ -191,6 +191,12 @@ void gui_display_in_hint_window(gchar * note)
 		}
 		
 		gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
+		if(x < settings.app_x)
+			gtk_window_get_position(GTK_WINDOW(hint.hint_window), 
+						&x, &y);
+		if(y < settings.app_y)
+			gtk_window_get_position(GTK_WINDOW(hint.hint_window), 
+						&x, &y);
 		x += 10;
 		y += 10;
 		
@@ -247,6 +253,6 @@ void gui_open_hint_viewer(void)
 {
 	gtk_option_menu_set_history(GTK_OPTION_MENU
 				    (sidebar.optionmenu1), 4);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      4);
 }

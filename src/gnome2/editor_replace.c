@@ -244,13 +244,13 @@ static GtkHTMLReplaceAskDialog *ask_dialog_new(HTMLEngine * e)
 			  button_cancel_ask);
 	GTK_WIDGET_SET_FLAGS(button_cancel_ask, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button_replace_ask), "clicked",
+	g_signal_connect(GTK_OBJECT(button_replace_ask), "clicked",
 			   G_CALLBACK(replace_cb), d);
-	gtk_signal_connect(GTK_OBJECT(button_all), "clicked",
+	g_signal_connect(GTK_OBJECT(button_all), "clicked",
 			   G_CALLBACK(replace_all_cb), d);
-	gtk_signal_connect(GTK_OBJECT(button_next), "clicked",
+	g_signal_connect(GTK_OBJECT(button_next), "clicked",
 			   G_CALLBACK(next_cb), d);
-	gtk_signal_connect(GTK_OBJECT(button_cancel_ask), "clicked",
+	g_signal_connect(GTK_OBJECT(button_cancel_ask), "clicked",
 			   G_CALLBACK(cancel_cb), d);
 
 	gtk_widget_grab_default(button_replace_ask);
@@ -468,9 +468,9 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_replace);
 	GTK_WIDGET_SET_FLAGS(button_replace, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button_replace), "clicked",
+	g_signal_connect(GTK_OBJECT(button_replace), "clicked",
 			   G_CALLBACK(button_replace_cb), dialog);
-	gtk_signal_connect(GTK_OBJECT(button_cancel), "clicked",
+	g_signal_connect(GTK_OBJECT(button_cancel), "clicked",
 			   G_CALLBACK(button_cancel_clicked),
 			   dialog);
 

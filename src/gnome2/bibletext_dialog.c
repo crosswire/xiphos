@@ -955,19 +955,19 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	gtk_entry_set_text(GTK_ENTRY(vt->freeform_lookup),
 			   _("Romans 8:28"));
 
-	gtk_signal_connect(GTK_OBJECT(vt->cbe_book),
+	g_signal_connect(GTK_OBJECT(vt->cbe_book),
 			   "changed",
 			   G_CALLBACK(book_changed), vt);
 			   
-	gtk_signal_connect(GTK_OBJECT(vt->spb_chapter),
+	g_signal_connect(GTK_OBJECT(vt->spb_chapter),
 			   "button_release_event",
 			   G_CALLBACK
 			   (chapter_button_release_event), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->spb_verse),
+	g_signal_connect(GTK_OBJECT(vt->spb_verse),
 			   "button_release_event",
 			   G_CALLBACK
 			   (verse_button_release_event), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->freeform_lookup),
+	g_signal_connect(GTK_OBJECT(vt->freeform_lookup),
 			   "key_press_event",
 			   G_CALLBACK(entry_key_press_event), vt);
 	return toolbar_nav;
@@ -1341,13 +1341,13 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 		gtk_html_load_empty(GTK_HTML(vt->html));
 		g_signal_connect(G_OBJECT(vt->html), "on_url",
 				   G_CALLBACK(dialog_url), (gpointer) vt);			   
-		gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
+		g_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
-		gtk_signal_connect(GTK_OBJECT(vt->html),
+		g_signal_connect(GTK_OBJECT(vt->html),
 				   "motion_notify_event",
 				   G_CALLBACK
 				   (on_dialog_motion_notify_event), vt);
-		gtk_signal_connect(GTK_OBJECT(vt->html),
+		g_signal_connect(GTK_OBJECT(vt->html),
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_button_release_event),
@@ -1365,7 +1365,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 		create_text_tags(text_buffer, gdk_font);
 		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (vt->text), GTK_WRAP_WORD);
 		/*
-		gtk_signal_connect(GTK_OBJECT(t->text),
+		g_signal_connect(GTK_OBJECT(t->text),
 				   "button_release_event",
 				   G_CALLBACK
 				   (textview_button_release_event),
@@ -1379,12 +1379,12 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
 			   0);
 
-	gtk_signal_connect(GTK_OBJECT(vt->dialog),
+	g_signal_connect(GTK_OBJECT(vt->dialog),
 			   "destroy",
 			   G_CALLBACK(dialog_destroy), vt);
 			   
 			   
-	gtk_signal_connect(GTK_OBJECT(vt->dialog),
+	g_signal_connect(GTK_OBJECT(vt->dialog),
 			   "motion_notify_event",
 			   G_CALLBACK
 			   (on_dialog_motion_notify_event), vt);

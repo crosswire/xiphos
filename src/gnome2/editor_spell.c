@@ -26,7 +26,7 @@
 #ifdef USE_SPELL
 
 #include <glib.h>
-#include <gtk/gtk.h>
+#include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
 #include <gtkhtml/htmlengine-edit-movement.h>
@@ -75,7 +75,7 @@ typedef struct {
 	GtkWidget *insert_button;
 	GtkWidget *ignore_button;
 	GtkWidget *replace_button;
-	GtkWidget *near_misses_clist;
+	GtkWidget *near_misses_list;
 	GtkWidget *near_misses_scrolled_window;
 	gint status_bar_count;
 } Tspc_gui;
@@ -209,12 +209,12 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 
 /******************************************************************************
  * Name
- *   fill_near_misses_clist
+ *   fill_near_misses_list
  *
  * Synopsis
  *   #include "gui/editor_spell.h"
  *
- *   void fill_near_misses_clist(const gchar * word)
+ *   void fill_near_misses_list(const gchar * word)
  *
  * Description
  *   get a list of suggestions for a mispelling
@@ -224,17 +224,23 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
  *   void
  */
 
-static void fill_near_misses_clist(const gchar * word)
+static void fill_near_misses_list(const gchar * word)
 {
 	gchar * buf;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
 	GList * tmp = get_suggest_list(word);
-        
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(spc_gui.near_misses_list));
+	list_store = GTK_LIST_STORE(model);
+	gtk_list_store_clear(list_store);
+	
 	tmp = g_list_first(tmp);
         while ( tmp != NULL ) {
 		buf = (gchar*)tmp->data;
-		gtk_clist_append(GTK_CLIST
-			(spc_gui.near_misses_clist),
-			 &buf);						
+		gtk_list_store_append(list_store, &iter);
+		gtk_list_store_set(list_store, &iter, 0,buf, -1);		
 		g_free(buf);
 		tmp = g_list_next(tmp);
         } 
@@ -302,7 +308,13 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	unsigned int word_count = 0;
 	gint have, end, current;
 	const gchar *utf8str = NULL;
-	gchar *buf = NULL;	
+	gchar *buf = NULL;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(spc_gui.near_misses_list));
+	list_store = GTK_LIST_STORE(model);	
 
 	html_engine_edit_cursor_position_save(ecd->html->engine);
 	html_engine_end_of_document(ecd->html->engine); 
@@ -319,12 +331,14 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 					spc_message = SPC_NONE;
 					have = check_word_spell(utf8str);
 					if (have == 0){
-						fill_near_misses_clist(utf8str);
+						fill_near_misses_list(utf8str);
 						correct_word(utf8str, ecd);
-						gtk_clist_clear(GTK_CLIST(
-						    spc_gui.near_misses_clist));							
+						
+						gtk_list_store_clear(list_store);
+						
 						gtk_entry_set_text(GTK_ENTRY(
 						       spc_gui.word_entry), "");
+						
 						gtk_entry_set_text(GTK_ENTRY(
 						    spc_gui.replace_entry), "");
 					}
@@ -573,33 +587,6 @@ static gboolean delete_event_lcb(GtkButton * button, gpointer user_data)
 	return (spc_is_running);	/* do not call the destroy event */
 }
 
-
-/******************************************************************************
- * Name
- *   on_near_misses_select_row_lcb
- *
- * Synopsis
- *   #include "gui/editor_spell.h"
- *
- *   void on_near_misses_select_row_lcb(GtkWidget * clist, gint row,
- *		gint column, GdkEventButton * event, gpointer data)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_near_misses_select_row_lcb(GtkWidget * clist, gint row,
-		gint column, GdkEventButton * event, gpointer data)
-{
-	gchar *text;
-	gtk_clist_get_text(GTK_CLIST(clist), row, column, &text);
-	gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), text);
-}
-
-
 /******************************************************************************
  * Name
  *   on_cbe_freeform_lookup_changed
@@ -629,6 +616,71 @@ void on_language_entry_changed(GtkEditable * editable, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *  list_button_released
+ *
+ * Synopsis
+ *   #include "gui/editor_spell.h"
+ *
+ *   gint list_button_released(GtkWidget * html, GdkEventButton * event, NULL)	
+ *
+ * Description
+ *    mouse button released in key list
+ *
+ * Return value
+ *   gint
+ */
+static gint list_button_released(GtkWidget * widget, GdkEventButton * event, 
+							gpointer data)
+{
+	GtkTreeSelection* selection;
+	GtkTreeIter selected;
+	gchar *buf = NULL;
+	GtkTreeModel *model ;
+	
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(
+						spc_gui.near_misses_list));
+                        
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+		return;
+	
+	switch (event->button) {
+	case 1:
+		gtk_tree_model_get(model, &selected, 0, &buf, -1);
+		if (buf) {
+			gtk_entry_set_text(GTK_ENTRY(
+					spc_gui.replace_entry), buf);
+			g_free(buf);
+		}	 	
+		break;
+	case 2:
+	case 3:
+	default:
+		break;
+	}
+	
+	return FALSE;
+}
+
+static void add_columns(GtkTreeView * treeview)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+
+	renderer = gtk_cell_renderer_text_new();
+
+	column = gtk_tree_view_column_new_with_attributes("Keys",
+							  renderer,
+							  "text", 0,
+							  NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+
+	gtk_tree_view_append_column(treeview, column);
+}
+
+
+/******************************************************************************
+ * Name
  *   create_spc_window
  *
  * Synopsis
@@ -649,6 +701,7 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	GtkWidget *dialog_vbox;
 	GtkWidget *label;
 	gchar *header;
+	GtkListStore *model;
 	
 	spc_is_running = FALSE;
 	spc_gui.window = gtk_dialog_new(); 
@@ -761,14 +814,23 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 			   0);
 	gtk_container_set_border_width(GTK_CONTAINER(
 				spc_gui.near_misses_scrolled_window), 2);
-
-	spc_gui.near_misses_clist = gtk_clist_new(1);
-	gtk_clist_set_selection_mode(GTK_CLIST(spc_gui.near_misses_clist),
-				     GTK_SELECTION_SINGLE);
-	gtk_widget_show(spc_gui.near_misses_clist);
+		
+	/* create tree model */
+	model = gtk_list_store_new(1, G_TYPE_STRING);
+	
+	spc_gui.near_misses_list = 
+			gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(spc_gui.near_misses_list), 
+					TRUE);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(
+					spc_gui.near_misses_list),
+					FALSE);
+	gtk_widget_set_size_request(spc_gui.near_misses_list, -1, 40);
+	gtk_widget_show(spc_gui.near_misses_list);
 	gtk_container_add(GTK_CONTAINER
 			  (spc_gui.near_misses_scrolled_window),
-			  spc_gui.near_misses_clist);
+			  spc_gui.near_misses_list);
+	add_columns(GTK_TREE_VIEW(spc_gui.near_misses_list));
 			  			  
 
 	spc_gui.progress_frame = gtk_frame_new(NULL);
@@ -828,31 +890,30 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.button_table,
 			   TRUE, TRUE, 0);
 
-	gtk_signal_connect(GTK_OBJECT(spc_gui.window), "delete_event",
+	g_signal_connect(GTK_OBJECT(spc_gui.window), "delete_event",
 			   G_CALLBACK(delete_event_lcb), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(spc_gui.start_button), "clicked",
+	g_signal_connect(GTK_OBJECT(spc_gui.start_button), "clicked",
 			   G_CALLBACK(spc_start_button_clicked_lcb),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.close_button), "clicked",
+	g_signal_connect(GTK_OBJECT(spc_gui.close_button), "clicked",
 			   G_CALLBACK(spc_close_button_clicked_lcb),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.accept_button), "clicked",
+	g_signal_connect(GTK_OBJECT(spc_gui.accept_button), "clicked",
 			   G_CALLBACK(on_spc_accept_button_clicked),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.insert_button), "clicked",
+	g_signal_connect(GTK_OBJECT(spc_gui.insert_button), "clicked",
 			   G_CALLBACK(on_spc_insert_button_clicked),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.ignore_button), "clicked",
+	g_signal_connect(GTK_OBJECT(spc_gui.ignore_button), "clicked",
 			   G_CALLBACK(on_spc_ignore_button_clicked),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.replace_button), "clicked",
+	g_signal_connect(GTK_OBJECT(spc_gui.replace_button), "clicked",
 			   G_CALLBACK(on_spc_replace_button_clicked),
 			   ecd);
-	gtk_signal_connect(GTK_OBJECT(spc_gui.near_misses_clist),
-			   "select_row",
-			   G_CALLBACK(on_near_misses_select_row_lcb),
-			   ecd);
+	g_signal_connect(G_OBJECT(spc_gui.near_misses_list),
+			   "button_release_event",
+			   G_CALLBACK(list_button_released), NULL);
 	return spc_gui.window;
 }
 

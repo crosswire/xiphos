@@ -5,7 +5,8 @@ INCLUDES =  \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
     -DLIBDIR=\""$(libdir)"\" \
-    -DGNOME_DISABLE_DEPRECATED 
+    -DGNOME_DISABLE_DEPRECATED \
+    -DGTK_DISABLE_DEPRECATED
 
 EXTRA_DIST =  \
 	$(top_builddir)/src/gui/*.h 

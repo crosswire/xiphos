@@ -236,7 +236,7 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 	if (settings.use_percomm_dialog)
 		gui_open_commentary_editor((gchar *) user_data);
 	else {
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.workbook_lower),
 				      settings.percomm_page);
 		gui_set_percomm_page((gchar *) user_data);
@@ -687,7 +687,7 @@ static void add_global_option_items(COMM_DATA * c)
 
 		GTK_CHECK_MENU_ITEM(item)->active =
 		    c->cgs->words_in_red;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_red_words), c);
 	}
@@ -707,7 +707,7 @@ static void add_global_option_items(COMM_DATA * c)
 				  item);
 
 		GTK_CHECK_MENU_ITEM(item)->active = c->cgs->strongs;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_strongs), c);
 	}
@@ -727,7 +727,7 @@ static void add_global_option_items(COMM_DATA * c)
 				  item);
 
 		GTK_CHECK_MENU_ITEM(item)->active = c->cgs->morphs;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_morph), c);
 	}
@@ -744,7 +744,7 @@ static void add_global_option_items(COMM_DATA * c)
 				  item);
 
 		GTK_CHECK_MENU_ITEM(item)->active = c->cgs->footnotes;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_footnotes), c);
 	}
@@ -762,7 +762,7 @@ static void add_global_option_items(COMM_DATA * c)
 
 		GTK_CHECK_MENU_ITEM(item)->active =
 		    c->cgs->greekaccents;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_greekaccents), c);
 	}
@@ -777,7 +777,7 @@ static void add_global_option_items(COMM_DATA * c)
 				  item);
 
 		GTK_CHECK_MENU_ITEM(item)->active = c->cgs->lemmas;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_lemmas), c);
 	}
@@ -796,7 +796,7 @@ static void add_global_option_items(COMM_DATA * c)
 
 		GTK_CHECK_MENU_ITEM(item)->active =
 		    c->cgs->scripturerefs;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_scripturerefs), c);
 	}
@@ -815,7 +815,7 @@ static void add_global_option_items(COMM_DATA * c)
 
 		GTK_CHECK_MENU_ITEM(item)->active =
 		    c->cgs->hebrewpoints;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_hebrewpoints), c);
 	}
@@ -833,7 +833,7 @@ static void add_global_option_items(COMM_DATA * c)
 				  item);
 
 		GTK_CHECK_MENU_ITEM(item)->active = c->cgs->hebrewcant;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_hebrewcant), c);
 	}
@@ -849,7 +849,7 @@ static void add_global_option_items(COMM_DATA * c)
 				  item);
 
 		GTK_CHECK_MENU_ITEM(item)->active = c->cgs->headings;
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_headings), c);
 	}
@@ -874,16 +874,16 @@ static void add_global_option_items(COMM_DATA * c)
 		    gtk_radio_menu_item_new_with_label(group,
 						       _
 						       ("All Readings"));
-		group =
+/*		group =
 		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-					      (item));
+					      (item));*/
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		if (c->cgs->variants_all)
 			gtk_check_menu_item_set_active
 			    (GTK_CHECK_MENU_ITEM(item),
 			     c->cgs->variants_all);
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_variants_all), c);
 
@@ -891,16 +891,16 @@ static void add_global_option_items(COMM_DATA * c)
 		    gtk_radio_menu_item_new_with_label(group,
 						       _
 						       ("Primary Readings"));
-		group =
+		/*group =
 		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-					      (item));
+					      (item));*/
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		if (c->cgs->variants_primary)
 			gtk_check_menu_item_set_active
 			    (GTK_CHECK_MENU_ITEM(item),
 			     c->cgs->variants_primary);
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_variants_primary), c);
 
@@ -908,12 +908,12 @@ static void add_global_option_items(COMM_DATA * c)
 		    gtk_radio_menu_item_new_with_label(group,
 						       _
 						       ("Secondary Readings"));
-		group =
+		/*group =
 		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-					      (item));
+					      (item));*/
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
-		gtk_signal_connect(GTK_OBJECT(item), "toggled",
+		g_signal_connect(GTK_OBJECT(item), "toggled",
 				   G_CALLBACK
 				   (global_option_variants_scondary),
 				   c);
@@ -1278,7 +1278,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		sync =
 		    gtk_menu_item_new_with_label(_
 						 ("Sync with Main Window"));
-		gtk_signal_connect(GTK_OBJECT(sync), "activate",
+		g_signal_connect(GTK_OBJECT(sync), "activate",
 				   G_CALLBACK(on_sync_activate),
 				   c);
 	} else {
@@ -1286,7 +1286,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		    gtk_check_menu_item_new_with_label(_
 						       ("Sync with NavBar"));
 		GTK_CHECK_MENU_ITEM(sync)->active = c->sync;
-		gtk_signal_connect(GTK_OBJECT(sync), "toggled",
+		g_signal_connect(GTK_OBJECT(sync), "toggled",
 				   G_CALLBACK(on_sync_toggle), c);
 	}
 	gtk_widget_show(sync);
@@ -1355,7 +1355,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		view_new = gtk_menu_item_new_with_label(buf);
 		gtk_widget_show(view_new);
 		gtk_container_add(GTK_CONTAINER(file_menu), view_new);
-		gtk_signal_connect(GTK_OBJECT(view_new), "activate",
+		g_signal_connect(GTK_OBJECT(view_new), "activate",
 				   G_CALLBACK
 				   (on_view_new_activate), c);
 	}
@@ -1372,7 +1372,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		close = gtk_menu_item_new_with_label(_("Close"));
 		gtk_widget_show(close);
 		gtk_container_add(GTK_CONTAINER(file_menu), close);
-		gtk_signal_connect(GTK_OBJECT(close),
+		g_signal_connect(GTK_OBJECT(close),
 				   "activate",
 				   G_CALLBACK
 				   (on_close_activate), c);
@@ -1401,7 +1401,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		gtk_widget_show(edit_note);
 		gtk_container_add(GTK_CONTAINER(edit_menu), edit_note);
 
-		gtk_signal_connect(GTK_OBJECT(edit_note),
+		g_signal_connect(GTK_OBJECT(edit_note),
 				   "activate",
 				   G_CALLBACK
 				   (edit_percomm), c->mod_name);
@@ -1487,7 +1487,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		gtk_widget_show(add_module_key);
 		gtk_container_add(GTK_CONTAINER(pm), add_module_key);
 
-		gtk_signal_connect(GTK_OBJECT(add_module_key),
+		g_signal_connect(GTK_OBJECT(add_module_key),
 				   "activate",
 				   G_CALLBACK
 				   (gui_unlock_commentary), c);
@@ -1509,38 +1509,38 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		gtk_widget_show(c->showtabs);
 		gtk_container_add(GTK_CONTAINER(show_menu),
 				  c->showtabs);
-		gtk_signal_connect(GTK_OBJECT(c->showtabs), "activate",
+		g_signal_connect(GTK_OBJECT(c->showtabs), "activate",
 				   G_CALLBACK
 				   (on_comm_showtabs_activate), c);
 	}
 	
-	gtk_signal_connect(GTK_OBJECT(about_module), "activate",
+	g_signal_connect(GTK_OBJECT(about_module), "activate",
 			   G_CALLBACK(on_about_module_activate), c);
 
-	gtk_signal_connect(GTK_OBJECT(prev), "activate",
+	g_signal_connect(GTK_OBJECT(prev), "activate",
 			   G_CALLBACK(on_prev_activate), c);
-	gtk_signal_connect(GTK_OBJECT(next), "activate",
+	g_signal_connect(GTK_OBJECT(next), "activate",
 			   G_CALLBACK(on_next_activate), c);
-	gtk_signal_connect(GTK_OBJECT(chapter_heading), "activate",
+	g_signal_connect(GTK_OBJECT(chapter_heading), "activate",
 			   G_CALLBACK
 			   (on_chapter_heading_activate), c);
-	gtk_signal_connect(GTK_OBJECT(book_heading), "activate",
+	g_signal_connect(GTK_OBJECT(book_heading), "activate",
 			   G_CALLBACK
 			   (on_book_heading_activate), c);
 	/*
 	 * for using the current dictionary for lookup 
 	 */
-	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
+	g_signal_connect(GTK_OBJECT(usecurrent), "activate",
 			   G_CALLBACK
 			   (on_same_lookup_selection_activate), c);
 
-	gtk_signal_connect(GTK_OBJECT(copy), "activate",
+	g_signal_connect(GTK_OBJECT(copy), "activate",
 			   G_CALLBACK(on_copy_activate), c);
-	gtk_signal_connect(GTK_OBJECT(print), "activate",
+	g_signal_connect(GTK_OBJECT(print), "activate",
 			   G_CALLBACK(on_print_activate), c);
-	gtk_signal_connect(GTK_OBJECT(find), "activate",
+	g_signal_connect(GTK_OBJECT(find), "activate",
 			   G_CALLBACK(on_find_activate), c);
-	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+	g_signal_connect(GTK_OBJECT(set_font), "activate",
 			   G_CALLBACK(set_module_font_activate),
 			   c);
 

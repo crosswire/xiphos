@@ -229,9 +229,9 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(cancel);
 	GTK_WIDGET_SET_FLAGS(cancel, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+	g_signal_connect(GTK_OBJECT(ok), "clicked",
 			G_CALLBACK(open_ok), ecd);
-	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
+	g_signal_connect(GTK_OBJECT(cancel), "clicked",
 			G_CALLBACK(open_cancel), NULL);
 
 	return fileselection;
@@ -277,16 +277,16 @@ static GtkWidget *create_fileselection_save(GSHTMLEditorControlData *ecd,
 	gtk_widget_show(cancel);
 	GTK_WIDGET_SET_FLAGS(cancel, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(fileselection), "destroy",
+	g_signal_connect(GTK_OBJECT(fileselection), "destroy",
 			   G_CALLBACK(dialog_destroy), NULL);
 	if(to_html)
-		gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+		g_signal_connect(GTK_OBJECT(ok), "clicked",
 						G_CALLBACK(save_ok), ecd);
 	else
-		gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+		g_signal_connect(GTK_OBJECT(ok), "clicked",
 						G_CALLBACK(save_plain_text_ok), ecd);
 		
-	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
+	g_signal_connect(GTK_OBJECT(cancel), "clicked",
 		       G_CALLBACK(save_cancel), NULL);
 
 	gtk_widget_show_all(fileselection);

@@ -226,13 +226,14 @@ static GtkWidget *setup_paragraph_style_option_menu(GtkHTML * html)
 		    (_(paragraph_style_items[i].description));
 		gtk_widget_show(menu_item);
 
-		gtk_menu_append(GTK_MENU(menu), menu_item);
+		gtk_menu_shell_append((GtkMenuShell*)menu, menu_item);
+		//gtk_menu_append(GTK_MENU(menu), menu_item);
 
 		gtk_object_set_data(GTK_OBJECT(menu_item),
 				    "paragraph_style_value",
 				    GINT_TO_POINTER
 				    (paragraph_style_items[i].style));
-		gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		g_signal_connect(GTK_OBJECT(menu_item), "activate",
 				   G_CALLBACK
 				   (paragraph_style_menu_item_activated_cb),
 				   html);
@@ -240,7 +241,7 @@ static GtkWidget *setup_paragraph_style_option_menu(GtkHTML * html)
 
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
 
-	gtk_signal_connect(GTK_OBJECT(html),
+	g_signal_connect(GTK_OBJECT(html),
 			   "current_paragraph_style_changed",
 			   G_CALLBACK(paragraph_style_changed_cb),
 			   option_menu);
@@ -349,18 +350,18 @@ static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
 		menu_item = gtk_menu_item_new_with_label(size);
 		gtk_widget_show(menu_item);
 
-		gtk_menu_append(GTK_MENU(menu), menu_item);
-
+		//gtk_menu_append(GTK_MENU(menu), menu_item);
+		gtk_menu_shell_append((GtkMenuShell*)menu, menu_item);
 		gtk_object_set_data(GTK_OBJECT(menu_item), "size",
 				    GINT_TO_POINTER(i));
-		gtk_signal_connect(GTK_OBJECT(menu_item), "activate",
+		g_signal_connect(GTK_OBJECT(menu_item), "activate",
 				   G_CALLBACK(set_font_size), cd);
 	}
 
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
 	gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), 2);
 
-	gtk_signal_connect(GTK_OBJECT(cd->html),
+	g_signal_connect(GTK_OBJECT(cd->html),
 			   "insertion_font_style_changed",
 			   G_CALLBACK(font_size_changed), cd);
 
@@ -478,8 +479,10 @@ static void set_color_combo(GtkHTML * html,
 static void realize_engine(GtkHTML * html, GSHTMLEditorControlData * cd)
 {
 	set_color_combo(html, cd);
-	gtk_signal_disconnect_by_func(GTK_OBJECT(html),
+	g_signal_handlers_disconnect_by_func(GTK_OBJECT(html),
 				      G_CALLBACK(realize_engine), cd);
+	/*gtk_signal_disconnect_by_func(GTK_OBJECT(html),
+				      G_CALLBACK(realize_engine), cd);*/
 }
 
 /******************************************************************************
@@ -503,7 +506,7 @@ static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
 	if (GTK_WIDGET_REALIZED(cd->html))
 		set_color_combo(html, cd);
 	else
-		gtk_signal_connect(GTK_OBJECT(cd->html), "realize",
+		g_signal_connect(GTK_OBJECT(cd->html), "realize",
 				   G_CALLBACK(realize_engine), cd);
 }
 
@@ -550,9 +553,9 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 	if (GTK_WIDGET_REALIZED(cd->html))
 		html_color_alloc(color, cd->html->engine->painter);
 	else
-		gtk_signal_connect(GTK_OBJECT(cd->html), "realize",
+		g_signal_connect(GTK_OBJECT(cd->html), "realize",
 				   G_CALLBACK(realize_engine), cd);
-	gtk_signal_connect(GTK_OBJECT(cd->html), "load_done",
+	g_signal_connect(GTK_OBJECT(cd->html), "load_done",
 			   G_CALLBACK(load_done), cd);
 
 	cd->combo = color_combo_new(NULL, _("Automatic"), &color->color,
@@ -909,10 +912,21 @@ static void safe_set_active(GtkWidget * widget, gpointer data)
 
 	object = GTK_OBJECT(widget);
 	toggle_button = GTK_TOGGLE_BUTTON(widget);
-
-	gtk_signal_handler_block_by_data(object, data);
-	gtk_toggle_button_set_active(toggle_button, TRUE);
-	gtk_signal_handler_unblock_by_data(object, data);
+	g_signal_handlers_block_matched (object, 
+					G_SIGNAL_MATCH_DATA, 
+					0, 
+					0, 
+					NULL, 
+					NULL, 
+					data);
+	gtk_toggle_button_set_active(toggle_button, TRUE); 
+	g_signal_handlers_unblock_matched (object, 
+					G_SIGNAL_MATCH_DATA, 
+					0, 
+					0, 
+					NULL, 
+					NULL, 
+					data);
 }
 
 /******************************************************************************
@@ -1139,7 +1153,7 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 
 	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), GTK_TOOLBAR_ICONS);
 	
-	gtk_signal_connect(GTK_OBJECT(cd->html),
+	g_signal_connect(GTK_OBJECT(cd->html),
 			   "current_paragraph_alignment_changed",
 			   G_CALLBACK
 			   (paragraph_alignment_changed_cb), cd);

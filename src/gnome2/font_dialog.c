@@ -410,17 +410,17 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	gtk_widget_set_sensitive(button_ok, FALSE);
 	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(dialog_mod_font), "destroy",
+	g_signal_connect(GTK_OBJECT(dialog_mod_font), "destroy",
 			   G_CALLBACK(dialog_destroy), mf);
-	gtk_signal_connect(GTK_OBJECT(fontpicker), "font_set",
+	g_signal_connect(GTK_OBJECT(fontpicker), "font_set",
 			   G_CALLBACK(font_set), mf);
-	gtk_signal_connect(GTK_OBJECT(checkbutton_no_font), "toggled",
+	g_signal_connect(GTK_OBJECT(checkbutton_no_font), "toggled",
 			   G_CALLBACK(no_font_toggled), mf);
-	gtk_signal_connect(GTK_OBJECT(button_ok), "clicked",
+	g_signal_connect(GTK_OBJECT(button_ok), "clicked",
 			   G_CALLBACK(ok_clicked), mf);
-	gtk_signal_connect(GTK_OBJECT(button_cancel), "clicked",
+	g_signal_connect(GTK_OBJECT(button_cancel), "clicked",
 			   G_CALLBACK(cancel_clicked), mf);
-	gtk_signal_connect(GTK_OBJECT(combo_entry_size), "changed",
+	g_signal_connect(GTK_OBJECT(combo_entry_size), "changed",
 			   G_CALLBACK(size_changed), NULL);
 
 	return dialog_mod_font;
