@@ -1,3 +1,11 @@
+2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed gs_mainmenu_cb.* added gnome/main_menu.*
+	  took menu creation from main/gs_gui.* put menu creation
+	  and call backs into gnome/main_menu.*
+	
+
+
 2002-05-02  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* split main/gs_editor into gnome/link_dialog, gnome/_editor, 

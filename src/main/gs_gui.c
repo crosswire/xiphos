@@ -30,31 +30,24 @@
 #endif
 
 #include <gnome.h>
-#include <gtk/gtk.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <string.h>
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
-#include <gal/e-paned/e-vpaned.h>
-#include <gtkhtml/gtkhtml.h>
 
 #include "gs_gui.h"
-#include "gs_html.h"
-#include "gs_mainmenu_cb.h"
 #include "gs_gui_cb.h"
 #include "gs_editor.h"
 #include "gs_gnomesword.h"
 #include "support.h"
+#include "gs_html.h"
 #include "gs_shortcutbar.h"
 #include "sword.h"
-#include "gs_html.h"
 
 
-GtkWidget *appbar1;
-GtkWidget *main_label;
+/*
+ * gnome
+ */
+#include "main_menu.h"
+
 
 
 static char *book_open_xpm[] = {
@@ -137,166 +130,18 @@ GdkBitmap *mask1;
 GdkBitmap *mask2;
 GdkBitmap *mask3;
 
-extern GtkWidget *shortcut_bar;
-extern EShortcutModel *shortcut_model;
-extern SETTINGS *settings;
 
 
-static GnomeUIInfo file1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
-	GNOMEUIINFO_END
-};
+static void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
+{
+	dock_undock(s);
+}
 
-static GnomeUIInfo edit1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Copy"),
-	 N_("Copy highlighted text from main window"),
-	 on_copyhtml_activate, "htmlTexts", NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("Search"),
-	 N_("Open search dialog"),
-	 on_search1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo history1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("C_lear"),
-	 N_("Clear history list"),
-	 on_clear1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo view1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Daily Devotion"),
-	 N_("Show the Daily Devotion for Today"),
-	 (gpointer) on_daily_devotion1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
-
-
-static GnomeUIInfo settings1_menu_uiinfo[] = {
-	
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo bible_texts1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo commentaries1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo dictionaries_lexicons1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo books_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo about_sword_modules1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Bible Texts"),
-	 N_("Information about Bible texts"),
-	 bible_texts1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Commentaries"),
-	 NULL,
-	 commentaries1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Dictionaries-Lexicons"),
-	 NULL,
-	 dictionaries_lexicons1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Books"),
-	 NULL,
-	 books_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo help1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_ITEM, N_("Contents"),
-	 N_("Help Contents"),
-	 on_help_contents_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_HELP,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("About the Sword Project..."),
-	 N_("Infotmation About The Sword Project"),
-	 on_about_the_sword_project1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("About Sword Modules"),
-	 N_("Information about the installed modules"),
-	 about_sword_modules1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("About GnomeSword..."),
-	 N_("About GnomeSword"),
-	 on_about_gnomesword1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo menubar1_uiinfo[] = {
-	GNOMEUIINFO_MENU_FILE_TREE(file1_menu_uiinfo),
-	GNOMEUIINFO_MENU_EDIT_TREE(edit1_menu_uiinfo),
-	/*{
-	 GNOME_APP_UI_SUBTREE, N_("_Quickmarks"),
-	 NULL,
-	 quickmarks_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},*/
-	{
-	 GNOME_APP_UI_SUBTREE, N_("_History"),
-	 NULL,
-	 history1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_MENU_VIEW_TREE(view1_menu_uiinfo),
-	GNOMEUIINFO_MENU_SETTINGS_TREE(settings1_menu_uiinfo),
-	GNOMEUIINFO_MENU_HELP_TREE(help1_menu_uiinfo),
-	GNOMEUIINFO_END
-};
 
 void create_mainwindow(SETTINGS *s)
 {
 	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
-	GtkWidget *hboxToolbar;
 	GtkWidget *handleboxOptionsBar;
 	GtkWidget *toolbarOptions;
 	GtkWidget *tmp_toolbar_icon;
@@ -312,7 +157,6 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *vseparator13;
 	GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
-	GtkWidget *epaned;
 	GtkWidget *vpaned1;
 	GtkWidget *hbox2;
 	GtkWidget *handleboxNavBar;
@@ -331,6 +175,7 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
+	GtkWidget *appbar1;
 	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
@@ -349,156 +194,7 @@ void create_mainwindow(SETTINGS *s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dock1);
 
-	gnome_app_create_menus(GNOME_APP(s->app), menubar1_uiinfo);
-
-	gtk_widget_ref(menubar1_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "file1",
-				 menubar1_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(file1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator4",
-				 file1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(file1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "exit1",
-				 file1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "edit1",
-				 menubar1_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "copy1",
-				 edit1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator3",
-				 edit1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "search1",
-				 edit1_menu_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "quickmarks",
-				 menubar1_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-				 
-	gtk_widget_ref(menubar1_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "history1",
-				 menubar1_uiinfo[3].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(history1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "clear1",
-				 history1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(history1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator5",
-				 history1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "view1",
-				 menubar1_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(view1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "daily_devotion1",
-				 view1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "settings1",
-				 menubar1_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(settings1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "preferences1",
-				 settings1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[5].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "help1",
-				 menubar1_uiinfo[5].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_right_justify(GTK_MENU_ITEM
-				    (menubar1_uiinfo[5].widget));
-
-	gtk_widget_ref(help1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "about_the_sword_project1",
-				 help1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(help1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "about_gnomesword1",
-				 help1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(help1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "about_sword_modules1",
-				 help1_menu_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "bible_texts1",
-				 about_sword_modules1_menu_uiinfo
-				 [0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(bible_texts1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator15",
-				 bible_texts1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "commentaries1",
-				 about_sword_modules1_menu_uiinfo[1].
-				 widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(commentaries1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator16",
-				 commentaries1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "dictionaries_lexicons1",
-				 about_sword_modules1_menu_uiinfo
-				 [2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(dictionaries_lexicons1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator17",
-				 dictionaries_lexicons1_menu_uiinfo
-				 [0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "books",
-				 about_sword_modules1_menu_uiinfo[3].
-				 widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(books_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "separator17",
-				 books_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	gui_create_main_menu(s->app);
 
 
 	vbox_gs = gtk_vbox_new(FALSE, 0);
@@ -594,36 +290,20 @@ void create_mainwindow(SETTINGS *s)
 	gtk_widget_show(hbox25);
 	gtk_box_pack_start(GTK_BOX(vbox_gs), hbox25, TRUE, TRUE, 0);
 
-	epaned = e_hpaned_new();
-	gtk_widget_ref(epaned);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "epaned",
-				 epaned,
+	s->epaned = e_hpaned_new();
+	gtk_widget_ref(s->epaned);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->epaned",
+				 s->epaned,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(epaned);
-	gtk_box_pack_start(GTK_BOX(hbox25), epaned, TRUE, TRUE, 0);
+	gtk_widget_show(s->epaned);
+	gtk_box_pack_start(GTK_BOX(hbox25), s->epaned, TRUE, TRUE, 0);
+	
 	/*
 	 * shortcut bar 
 	 */
-	shortcut_model = e_shortcut_model_new();
-
-	shortcut_bar = e_shortcut_bar_new();
-	e_shortcut_bar_set_model(E_SHORTCUT_BAR(shortcut_bar),
-				 shortcut_model);
-	if(s->showshortcutbar)
-		gtk_widget_show(shortcut_bar);
-	else
-		gtk_widget_hide(shortcut_bar);
-
-	s->shortcut_bar = shortcut_bar;
-
-	e_paned_pack1(E_PANED(epaned), shortcut_bar, FALSE, TRUE);
-	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
-	/*
-	 * end shortcut bar 
-	*/
 
 	mainPanel = gtk_vbox_new(FALSE, 0);
-	e_paned_pack2(E_PANED(epaned), mainPanel, TRUE, TRUE);
+	e_paned_pack2(E_PANED(s->epaned), mainPanel, TRUE, TRUE);
 	gtk_widget_show(mainPanel);
 
 	vboxMain = gtk_vbox_new(FALSE, 0);
@@ -1069,7 +749,8 @@ void create_mainwindow(SETTINGS *s)
 	gnome_app_set_statusbar(GNOME_APP(s->app), appbar1);
 
 	s->appbar = lookup_widget(s->app, "appbar1");
-
+	
+	gui_install_menu_hints(s->app);
         /*
 	 * create pixmaps for ctrees
 	 */
@@ -1093,8 +774,6 @@ void create_mainwindow(SETTINGS *s)
 	gtk_signal_connect(GTK_OBJECT(s->app), "size_allocate",
 			   GTK_SIGNAL_FUNC(on_mainwindow_size_allocate),
 			   NULL);
-	gnome_app_install_menu_hints(GNOME_APP(s->app),
-				     menubar1_uiinfo);
 	gtk_signal_connect(GTK_OBJECT(btnSBDock), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSBDock_clicked),
 			   s);
@@ -1123,7 +802,7 @@ void create_mainwindow(SETTINGS *s)
 			   GTK_SIGNAL_FUNC(on_notebook3_switch_page),
 			   NULL);	   
 			   
-	gtk_signal_connect(GTK_OBJECT(epaned), "button_release_event",
+	gtk_signal_connect(GTK_OBJECT(s->epaned), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
 			   (gchar *) "epaned");
 	gtk_signal_connect(GTK_OBJECT(vpaned1), "button_release_event",

@@ -26,7 +26,7 @@
 #include <gnome.h>
 
 /*
- * frontend
+ * gnome
  */
 #include "_bibletext.h"
 #include "cipher_key_dialog.h"
