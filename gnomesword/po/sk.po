@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-03-21 18:05-0500\n"
+"POT-Creation-Date: 2002-03-23 15:09-0500\n"
 "PO-Revision-Date: 2001-11-02 22:51GMT+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@linux.sk>\n"
@@ -122,26 +122,42 @@ msgstr "Referencia"
 msgid "Module"
 msgstr "Modul"
 
-#: src/gs_detach_int.c:67 src/gs_gui.c:1592 src/gs_gui.c:1603
+#: src/gs_detach_int.c:72 src/gs_gui.c:1592 src/gs_gui.c:1603
 msgid "Interlinear"
 msgstr "Interlineárne"
 
-#: src/gs_detach_int.c:69
+#: src/gs_detach_int.c:74
 #, fuzzy
 msgid "Interlinear Page"
 msgstr "Zobrazi» interlineárnu stránku"
 
-#: src/gs_detach_int.c:169
+#: src/gs_detach_int.c:210
 #, fuzzy
 msgid "GnomeSWORD - Interlinear Page"
 msgstr "Zobrazi» interlineárnu stránku"
 
-#: src/gs_detach_int.c:275 src/gs_viewdict_dlg.c:279
+#: src/gs_detach_int.c:238 src/gs_viewdict_dlg.c:279
 msgid "button6"
 msgstr ""
 
-#: src/gs_detach_int.c:290
-msgid "Attach"
+#: src/gs_detach_int.c:265 src/gs_gui.c:831
+msgid "Romans"
+msgstr "Rimanom"
+
+#: src/gs_detach_int.c:292 src/gs_gnomesword.c:65 src/gs_gui.c:864
+msgid "Romans 8:28"
+msgstr "Rimanom 8:28"
+
+#: src/gs_detach_int.c:298 src/gs_gui.c:872
+msgid "Goto verse"
+msgstr "Ís» na ver¹"
+
+#: src/gs_detach_int.c:299 src/gs_gui.c:874
+msgid "Go to verse in free form lookup and add verse to history"
+msgstr "Ís» na ver¹ vo voµnej forme a prida» ver¹ do histórie"
+
+#: src/gs_detach_int.c:313
+msgid "Dock"
 msgstr ""
 
 #: src/gs_detach_sb.c:56
@@ -455,10 +471,6 @@ msgstr "GnomeSword - Otvori» poznámkový súbor"
 msgid "GomeSword - Save Note File"
 msgstr "GnomeSword - Ulo¾i» poznámkový súbor"
 
-#: src/gs_gnomesword.c:65 src/gs_gui.c:864
-msgid "Romans 8:28"
-msgstr "Rimanom 8:28"
-
 #: src/gs_gnomesword.c:164
 msgid "_Settings/"
 msgstr "_Nastavenia/"
@@ -619,18 +631,6 @@ msgstr "Zobrazi» morfologické príznaky"
 #, fuzzy
 msgid "Toogle Footnotes"
 msgstr "Prenú» poznámky pod èiarov"
-
-#: src/gs_gui.c:831
-msgid "Romans"
-msgstr "Rimanom"
-
-#: src/gs_gui.c:872
-msgid "Goto verse"
-msgstr "Ís» na ver¹"
-
-#: src/gs_gui.c:874
-msgid "Go to verse in free form lookup and add verse to history"
-msgstr "Ís» na ver¹ vo voµnej forme a prida» ver¹ do histórie"
 
 #: src/gs_gui.c:888
 msgid "Back"
@@ -987,7 +987,8 @@ msgid "+4"
 msgstr "+4"
 
 #: src/gs_preferences_dlg.c:880 src/gs_preferences_dlg.c:1006
-msgid "+5"
+#, fuzzy
+msgid "+5\r"
 msgstr "+5"
 
 #: src/gs_preferences_dlg.c:893 src/gs_preferences_dlg.c:1019

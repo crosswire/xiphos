@@ -211,23 +211,25 @@ void initSWORD(SETTINGS *s)
 	curcomMod = NULL;
 	curdictMod = NULL;
 	percomMod = NULL;
-	interlinearMod0 = NULL;			/* module for first interlinear window */
-	interlinearMod1 = NULL;			/* module for first interlinear window */
-	interlinearMod2 = NULL;			/* module for first interlinear window */
-	interlinearMod3 = NULL;			/* module for first interlinear window */
-	interlinearMod4 = NULL;			/* module for first interlinear window */
+	interlinearMod0 = NULL;	//-- module for first interlinear window 
+	interlinearMod1 = NULL;			
+	interlinearMod2 = NULL;			
+	interlinearMod3 = NULL;			
+	interlinearMod4 = NULL;			
 
-	comp1Display = 0;	// set in create
-	dictDisplay = 0;	// set in create   
+	comp1Display = 0;	
+	dictDisplay = 0;	  
 	FPNDisplay = 0;
 	commDisplay = 0;
 	UTF8Display = 0;
-	/* setup versekeys for text and comm windows */
+	
+	//-- setup versekeys for text and comm windows
 	vkText.Persist(1);
 	vkComm.Persist(1);
 	vkText = settings->currentverse;
 	vkComm = settings->currentverse;
-	/* set glist to null */
+	
+	//-- set glist to null 
 	biblemods = NULL;
 	commentarymods = NULL;
 	dictionarymods = NULL;
@@ -301,6 +303,7 @@ void initSWORD(SETTINGS *s)
 			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
 		}
 	}
+	//-- setup Generic Book Support
 	setupSW_GBS(s);
 	
 	//-- set up percom editor module
@@ -394,8 +397,8 @@ void ChangeVerseSWORD(void)
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->dockedInt)
 		updateinterlinearpage();
-	else
-		updateIntDlg(settings);
+	//else
+		//updateIntDlg(settings);
 	
 	//------------------------------- change personal notes editor	 if not in edit mode
 	if (settings->notebook3page == 1) {
@@ -481,19 +484,19 @@ void updateIntDlg(SETTINGS *s)
 		buf[500], 
 		*tmpkey;
 	
-	interlinearMod0 = mainMgr1->Modules[settings->Interlinear1Module];
-	interlinearMod1 = mainMgr1->Modules[settings->Interlinear2Module];
-	interlinearMod2 = mainMgr1->Modules[settings->Interlinear3Module];
-	interlinearMod3 = mainMgr1->Modules[settings->Interlinear4Module];
-	interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
+	interlinearMod0 = mainMgr1->Modules[s->Interlinear1Module];
+	interlinearMod1 = mainMgr1->Modules[s->Interlinear2Module];
+	interlinearMod2 = mainMgr1->Modules[s->Interlinear3Module];
+	interlinearMod3 = mainMgr1->Modules[s->Interlinear4Module];
+	interlinearMod4 = mainMgr1->Modules[s->Interlinear5Module];
 	
 	beginHTML(settings->htmlInterlinear, TRUE);
 	sprintf(buf,
 	 "<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
-			settings->bible_bg_color,
-			settings->bible_text_color, settings->link_color);
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
+			s->bible_bg_color,
+			s->bible_text_color, s->link_color);
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
 
 	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
@@ -511,18 +514,18 @@ void updateIntDlg(SETTINGS *s)
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
 	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
 	sprintf(buf,"%s","</tr>");		
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
 	
 	/******      ******/
-	IntDisplay(settings);
+	IntDisplay(s);
 	
 	sprintf(buf,"%s","</table></body></html>");		
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
-	displayHTML(settings->htmlInterlinear, utf8str, strlen(utf8str));
-	endHTML(settings->htmlInterlinear);	
-	sprintf(buf, "%d", curVerse);
-	gotoanchorHTML(settings->htmlInterlinear, buf);
+	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	endHTML(s->htmlInterlinear);	
+	sprintf(buf, "%d", s->intCurVerse);
+	gotoanchorHTML(s->htmlInterlinear, buf);
 }
 
 /*
@@ -934,6 +937,7 @@ void bookSWORD(void)		//-- someone changed book combo
 	
 	ChangeVerseSWORD();
 }
+
 /*
 //-------------------------------------------------------------------------------------------
 void chapterSWORD(void)		//-- someone clicked the chapter spin button
@@ -988,6 +992,69 @@ void verseSWORD(void)		//-- someone clicked the verse spin button
 	ChangeVerseSWORD();
 	vkText.AutoNormalize(1);
 	vkComm.AutoNormalize(1);
+}
+
+//-------------------------------------------------------------------------------------------
+gchar *intchangeverseSWORD(GtkWidget *book, GtkWidget *chapter, GtkWidget *verse, GtkWidget *entry)		//-- someone clicked the verse spin button
+{
+	VerseKey vkey;
+	gchar *retval;	
+	gchar *bookname, *newbook, buf[256];
+	gint iChap, iVerse;
+	
+	bookname = gtk_entry_get_text(GTK_ENTRY(book));
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(chapter));
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(verse));
+	
+	sprintf(buf,"%s %d:%d", bookname, iChap, iVerse);
+	vkey.AutoNormalize(1);
+	vkey = buf;
+	iChap = vkey.Chapter();
+	iVerse = vkey.Verse();
+	newbook = (gchar*)vkey.books[vkey.Testament()-1][vkey.Book()-1].name;
+	if(strcmp(bookname, newbook))
+		gtk_entry_set_text(GTK_ENTRY(book), newbook);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(chapter), iChap);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(verse), iVerse);
+	strcpy(buf,vkey);
+	gtk_entry_set_text(GTK_ENTRY(entry), buf);
+	retval = buf;
+	return retval;		
+}
+//-------------------------------------------------------------------------------------------
+gchar *intsyncSWORD(GtkWidget *book,  //-- someone clicked the sync button on the interlinary
+			GtkWidget *chapter, 
+			GtkWidget *verse, 
+			GtkWidget *entry,
+			gchar *key)		
+{
+	VerseKey 
+		vkey;	
+	
+	gchar 
+		*bookname, 
+		*newbook,  
+		*retval, 
+		buf[256];
+	
+	gint 
+		iChap, 
+		iVerse;	
+		
+	cout << "key = " << key << "\n";
+	vkey.AutoNormalize(1);
+	vkey = key;
+	iChap = vkey.Chapter();
+	iVerse = vkey.Verse();
+	newbook = (gchar*)vkey.books[vkey.Testament()-1][vkey.Book()-1].name;
+	if(strcmp(bookname, newbook))
+		gtk_entry_set_text(GTK_ENTRY(book), newbook);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(chapter), iChap);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(verse), iVerse);
+	strcpy(buf,vkey);
+	gtk_entry_set_text(GTK_ENTRY(entry), buf);
+	retval = g_strdup(buf);
+	return retval;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1362,10 +1429,10 @@ gchar *getcommodDescriptionSWORD(void)
 * returns a list of the books of the Bible
 * GList *list needs to be freed by calling function
 *******************************************************************************/
-GList *getBibleBooks(void)
+GList *getBibleBooksSWORD(void)
 {
 	VerseKey DefaultVSKey;
-	GList *list = NULL;
+	GList *glist = NULL;
 	GString *s1;
 
 	/*** load Bible books ***/
@@ -1373,11 +1440,11 @@ GList *getBibleBooks(void)
 	while (!DefaultVSKey.Error()) {
 		s1 = g_string_new((const char *) DefaultVSKey);
 		s1 = g_string_truncate(s1, (s1->len - 4));
-		list = g_list_append(list, s1->str);
+		glist = g_list_append(glist, s1->str);
 		DefaultVSKey.Book(DefaultVSKey.Book() + 1);
 		g_string_free(s1, FALSE);
 	}
-	return list;
+	return glist;
 }
 
 /******************************************************************************
