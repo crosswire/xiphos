@@ -100,7 +100,7 @@ gui_create_about_gnomesword(void)
 
   about = gnome_about_new("gnomesword", VERSION, "Copyright 2000-2002",
     authors, _("We would like to thank Troy Griffitts and all the other "
-    "folks who have given us The SWORD Project."), "gnomesword/about.png");
+    "folks who have given us The SWORD Project."), PACKAGE_PIXMAPS_DIR"/about.png");
   gtk_object_set_data(GTK_OBJECT(about), "about", about);
   gtk_container_set_border_width(GTK_CONTAINER(about), 4);
   gtk_window_set_modal(GTK_WINDOW(about), TRUE);

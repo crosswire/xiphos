@@ -438,7 +438,7 @@ void ChangeVerseSWORD(void)
 	}
 	
 	//-- set commentary module to current verse
-	if (settings->notebook3page == 0 && autoscroll) {
+	if (settings->notebook3page == 0 && autoscroll ) {
 		
 		searchresults = settings->displaySearchResults;
 		settings->displaySearchResults = FALSE;
@@ -1198,26 +1198,28 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 
 	if (havecomm) {
 		curcomMod = mainMgr->Modules[modName];
-		cKey = (gchar*)curcomMod->getConfigEntry("CipherKey");
-		//-- change tab label to current commentary name
-		gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook),
-			gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook),0), 
-			(gchar*)curcomMod->Name());
-		
-		if(cKey)
-			gtk_widget_set_sensitive(settings->unlockcommmod_item, TRUE);
-		else
-			gtk_widget_set_sensitive(settings->unlockcommmod_item, FALSE);
-		
 		if(curcomMod) {
-			if (showchange) {
-				if (autoscroll)
-					curcomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
-				curcomMod->Display();	//-- show the change
-				strcpy(settings->CommWindowModule,
-				       curcomMod->Name());
-			}
+			cKey = (gchar*)curcomMod->getConfigEntry("CipherKey");
+			//-- change tab label to current commentary name
+			gtk_notebook_set_tab_label_text(GTK_NOTEBOOK(settings->workbook),
+				gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook),0), 
+				(gchar*)curcomMod->Name());
+		
+			if(cKey)
+				gtk_widget_set_sensitive(settings->unlockcommmod_item, TRUE);
+			else
+				gtk_widget_set_sensitive(settings->unlockcommmod_item, FALSE);
+		
+			if(curcomMod) {
+				if (showchange) {
+					if (autoscroll)
+						curcomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
+					curcomMod->Display();	//-- show the change
+					strcpy(settings->CommWindowModule,
+					       curcomMod->Name());
+				}
 			
+			}
 		}
 		
 	}
@@ -1505,7 +1507,10 @@ void navcurcomModSWORD(gint direction)	//-- navigate the current commentary modu
 /*** returns the name of the current commentary module ***/
 gchar *getcommodSWORD(void)
 {
-	return curcomMod->Name();
+	if(curcomMod)
+		return curcomMod->Name();
+	else 
+		return NULL;
 }
 
 /*** returns the name of the current dict/lex module ***/
@@ -1733,9 +1738,9 @@ void gs_firstrunSWORD(void)
 /*** the changes are already made we just need to show them ***/
 void applyfontcolorandsizeSWORD(void)
 {
-	curMod->Display();
-	curcomMod->Display();
-	curdictMod->Display();
+	if(curMod) curMod->Display();
+	if(curcomMod) curcomMod->Display();
+	if(curdictMod) curdictMod->Display();
 	updateinterlinearpage();
 }
 
