@@ -25,11 +25,11 @@
 
 /*********************************************************************
 **********************************************************************
-**  this code was taken from the Sword Cheatah program      	    **
-**  and modfied to handle some of the GBF stuff. Also added  	    **
-**  suport for the x symbol font when using greek modules.    	    **
-**  2000/07/10 - added some support for the RWP module    	    **
-**  added some support for html                                     ** 
+**  this code was taken from the Sword Cheatah program 	    **
+**  and modfied to handle some of the GBF stuff. Also added **
+**  suport for the x symbol font when using greek modules.    **
+**  2000/07/10 - added some support for the RWP module    **
+**  added some support for html                                         ** 
 **********************************************************************
 *********************************************************************/
 
@@ -125,6 +125,7 @@ ComEntryDisp::Display(SWModule & imodule)
 		g_string_free( strbuf,TRUE);
 	}
 	endHTML(GTK_WIDGET(gtkText));
+	return 0;
 }
 
 /***************************************************************************** 
@@ -176,6 +177,7 @@ GtkHTMLEntryDisp::Display(SWModule & imodule)
 		g_string_free( strbuf,TRUE);
 	}
 	endHTML(GTK_WIDGET(gtkText));
+	return 0;
 }
 
 /***************************************************************************** 
@@ -322,7 +324,7 @@ char GTKEntryDisp::Display(SWModule & imodule)
 			(const char *) imodule, -1);
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
-
+	return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -376,6 +378,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 			(const char *) imodule, -1);
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
+	return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -585,6 +588,7 @@ char GTKInterlinearDisp::Display(SWModule & imodule)
 	/* --------------------------------------------------------------------- */
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
+	return 0;
 }
 
 /* ----------------------------------------------------------------------------------------- */
@@ -634,6 +638,7 @@ char GTKChapDisp::Display(SWModule & imodule)
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
+	return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -861,6 +866,7 @@ char HTMLentryDisp::Display(SWModule & imodule)
 	myverse = NULL;
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
+	return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1511,6 +1517,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
+	return 0;
 }
 
 /********************************************************** 
@@ -2162,3 +2169,4 @@ void interlinearDisplay(GList *mods)
 	}
 	endHTML(GTK_WIDGET(gtkText));
 }
+

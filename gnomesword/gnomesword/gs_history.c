@@ -290,3 +290,5 @@ void updatehistorysidebar(GtkWidget *app)
 
 }
 #endif /* USE_SHORTCUTBAR */	
+
+

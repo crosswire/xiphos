@@ -711,4 +711,5 @@ SearchWindow::create ()
 	return dlgSearch;
 }
 
-/* check to see if we want to set bounds for search */
+
+

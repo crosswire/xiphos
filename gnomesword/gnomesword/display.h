@@ -135,3 +135,4 @@ class GTKInterlinearDisp:public GTKEntryDisp { public:
 void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
 void interlinearDisplay(GList *mods);
 
+

@@ -88,3 +88,4 @@ void SDdictSearchTextChangedSWORD(char* newkey);
 #ifdef __cplusplus
 }
 #endif
+

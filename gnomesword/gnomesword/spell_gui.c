@@ -345,3 +345,4 @@ void spell_check_cb(GtkWidget * w, gpointer data)
 }
 
 #endif
+

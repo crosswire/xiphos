@@ -153,3 +153,4 @@ GdkImlibImage *create_image(const gchar * filename)
 	g_free(pathname);
 	return image;
 }
+
