@@ -9,7 +9,6 @@ INCLUDES =  \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
-    -I$(top_srcdir)/html \
     -I$(top_srcdir)/src/gsdialogs \
     -I$(top_srcdir)/src/gssword \
     -I /usr/include/gtkhtml
@@ -70,7 +69,6 @@ gnomesword_LDADD = \
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS)\
     $(GNOME_APP_LIBS)\
-    $(top_builddir)/html/libhtmleditor.a \
     $(top_builddir)/src/gsdialogs/libgsdialogs.a \
     $(top_builddir)/src/gssword/libgssword.a
     

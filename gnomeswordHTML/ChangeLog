@@ -1,3 +1,10 @@
+2001-06-14 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* hopefully things will be easier to find now
+	* added src/gssword dir for sword backend stuff
+	* added src/gsdialogs dir for gnomesword dialogs
+	* moved code for shortcut bar to /src/gs_shortcutbar.c
+
 2001-05-14 Terry Biggs <tbiggs@users.sourceforge.net>
  
 	* added gs_viewtext_dlg.c and gs_viewtext_dlg.h
@@ -6,7 +13,7 @@
 2001-04-17 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* add html directory with code form the GtkHTML editor-control
-	* 
+	* using html editor for personal comments and studypad
 
 2001-04-13 Terry Biggs <tbiggs@users.sourceforge.net>
 

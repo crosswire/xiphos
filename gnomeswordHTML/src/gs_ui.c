@@ -40,7 +40,7 @@
 
 #include "callback.h"
 #include "gs_studypad.h"
-#include "gs_editor.h"
+//#include "gs_editor.h"
 #include "gs_ui.h"
 #include "gs_html.h"
 #include "support.h"
@@ -341,7 +341,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 
 GtkWidget *create_mainwindow(void)
 {
-	EDITOR ed_sp, ed_pc;
+	//EDITOR ed_sp, ed_pc;
 	GtkWidget *mainwindow;
 	GtkWidget *dock1;
 	GtkWidget *toolbar20;
@@ -1096,7 +1096,9 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vbox8);
 	gtk_box_pack_start(GTK_BOX(hbox11), vbox8, TRUE, TRUE, 0);
 
-	ed_pc.vbox = lookup_widget(mainwindow,"vbox8"); 
+       /***  personal comments editor  ***/
+
+	/*ed_pc.vbox = lookup_widget(mainwindow,"vbox8");
 	ed_pc.htmlwidget = gtk_html_new();
 	ed_pc.text = gtk_text_new(NULL, NULL);
 	ed_pc.statusbar = gtk_statusbar_new();
@@ -1105,7 +1107,7 @@ GtkWidget *create_mainwindow(void)
 	
 	htmlComments = create_editor(mainwindow, ed_pc);	  
 	statusbarNE = ed_pc.statusbar;
-	textComments = ed_pc.text;		
+	textComments = ed_pc.text;	*/	
 
 	label85 = gtk_label_new("Comments Editor");
 	gtk_widget_ref(label85);
@@ -1191,7 +1193,7 @@ GtkWidget *create_mainwindow(void)
 /*************************************************************
 studypad editor
 *************************************************************/
-	ed_sp.vbox = vbox6;
+	/*ed_sp.vbox = vbox6;
 	ed_sp.htmlwidget = gtk_html_new();
 	ed_sp.text = gtk_text_new(NULL, NULL);
 	ed_sp.notebook = gtk_notebook_new();
@@ -1199,7 +1201,7 @@ studypad editor
 	ed_sp.note_editor = FALSE;
 	htmltext3 = create_editor(mainwindow, ed_sp);	  
 	statusbar2 = ed_sp.statusbar;
-	text3 = ed_sp.text;
+	text3 = ed_sp.text;   */
 
 	label41 = gtk_label_new("Study Pad");
 	gtk_widget_ref(label41);
@@ -1397,14 +1399,14 @@ studypad editor
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);		   
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
-
+                 /*
 	gtk_signal_connect(GTK_OBJECT(ed_pc.htmlwidget), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect (GTK_OBJECT (ed_pc.htmlwidget), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);
 	gtk_signal_connect(GTK_OBJECT(ed_pc.htmlwidget), "key_press_event",
 			   GTK_SIGNAL_FUNC(on_htmlComments_key_press_event), NULL);	  
-
+                 */
 	gtk_signal_connect(GTK_OBJECT(mainwindow), "destroy",
 			   GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
 	gnome_app_install_menu_hints(GNOME_APP(mainwindow),

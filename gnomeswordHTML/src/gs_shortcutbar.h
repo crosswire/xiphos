@@ -22,6 +22,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef __GS_SHORTCUTBAR_H_
+#define __GS_SHORTCUTBAR_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -35,6 +38,8 @@ gint add_sb_group(EShortcutBar * shortcut_bar,
 #ifdef __cplusplus
 }
 #endif
+
+#endif  /* __GS_SHORTCUTBAR_H_ */
 
 
 
