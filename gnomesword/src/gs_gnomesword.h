@@ -118,7 +118,8 @@ struct _settings {
 	           	showcomgroup,
 	           	showdictgroup,
 	           	showbookmarksgroup,
-	        	showhistorygroup; 
+	        	showhistorygroup,
+			showsplash; 
 };
 
 typedef struct _gs_app GS_APP;
@@ -148,7 +149,8 @@ void initGnomeSword(GtkWidget *app,
 		GList *biblemods, 
 		GList *commentarymods , 
 		GList *dictionarymods, 
-		GList *percommods);
+		GList *percommods,
+		GtkWidget *splash);
 gint addnotebookpages(GtkWidget *notebook, 
 		GList *list,
 		gchar *modName); 

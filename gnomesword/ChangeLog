@@ -1,3 +1,9 @@
+2001-07-25 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added e-splash.c and e-spalash.h to src from gIDE from evolution
+	* added splash.png to pixmaps
+	* added splash screen
+
 2001-07-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added [view context] link to each interlinear verse that will swap 
