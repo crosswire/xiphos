@@ -10,7 +10,7 @@
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 
-/* Package name for gettext */
+/* Gettext package */
 #undef GETTEXT_PACKAGE
 
 /* Define to 1 if you have the `bind_textdomain_codeset' function. */

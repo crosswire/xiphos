@@ -32,13 +32,13 @@ MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);
 gchar * remove_linefeeds(gchar * buf);	
 void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
-     gchar * itemdata, gchar * submenuname, GtkMenuCallback mycallback);
+     gchar * itemdata, gchar * submenuname, GCallback mycallback);
 void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,
-					GtkMenuCallback callback);
+					GCallback callback);
 void gui_remove_menu_items(gchar *startitem, gint numberofitems);
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
-				GtkMenuCallback callback);
+				GCallback callback);
 GList *gui_fill_count_list(int count);
 void gui_free_count_list(GList *glist);
 	
