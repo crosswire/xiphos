@@ -96,41 +96,66 @@ GNOME_X_CHECKS
 dnl ******************************
 dnl GtkHTML checking
 dnl ******************************
+
 gtkhtml_ok="false"
+gtkhtml1_ok="false"
 AC_MSG_CHECKING(for GtkHTML)
-  if gnome-config --libs gtkhtml > /dev/null 2>&1; then
+if gnome-config --libs gtkhtml > /dev/null 2>&1; then
 	vers=`gnome-config --modversion gtkhtml`
 	case $vers
 	in
-	    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
-	    *) gtkhtml_ok=true ;;
+	    gtkhtml-1.1.[012345678]) gtkhtml1_ok=false ;;
+	    *) gtkhtml1_ok=true ;;
 	esac
-  else
-	gtkhtml_ok=false
-  fi
-
-if $gtkhtml_ok; then
-	AC_MSG_RESULT($vers found)
-else	
-	pkg_modules="gtkhtml-1.1"
-	PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
-	AC_SUBST(PACKAGE_CFLAGS)
-	AC_SUBST(PACKAGE_LIBS)
-	AC_DEFINE(USE_GTKHTML1, 1, [Define if you want to use the GtkHTML-1.1])
+else
+	if gnome-config --libs gtkhtml > /dev/null 2>&1; then
+		vers=`gnome-config --modversion gtkhtml`
+		case $vers
+		in
+		    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
+		    *) gtkhtml_ok=true ;;
+		esac
+	fi
 fi
 
 if $gtkhtml_ok; then
-    PACKAGE_LIBS="`gnome-config --libs gtkhtml ` $THREADS_LIBS `unicode-config --libs`"
-    PACKAGE_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
-    
-	AC_SUBST(PACKAGE_LIBS)
-	AC_SUBST(PACKAGE_CFLAGS)
+	AC_MSG_RESULT($vers found)
+	PACKAGE_LIBS="`gnome-config --libs gtkhtml ` $THREADS_LIBS `unicode-config --libs`"
+    	PACKAGE_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+    	AC_SUBST(PACKAGE_LIBS)
+	AC_SUBST(PACKAGE_CFLAGS)	
+else	
+	if $gtkhtml1_ok; then
+		AC_MSG_RESULT($vers found)
+		PACKAGE_LIBS="`gnome-config --libs gtkhtml ` $THREADS_LIBS `unicode-config --libs`"
+		PACKAGE_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+	        AC_SUBST(PACKAGE_LIBS)
+		AC_SUBST(PACKAGE_CFLAGS)
+		AC_DEFINE(USE_GTKHTML1, 1, [Define if you want to use the GtkHTML-1.1])
+	else
+		pkg_modules="gtkhtml-1.1"
+		PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+		AC_SUBST(PACKAGE_CFLAGS)
+		AC_SUBST(PACKAGE_LIBS)
+		AC_DEFINE(USE_GTKHTML1, 1, [Define if you want to use the GtkHTML-1.1])
+	fi
 fi
 
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
 GS_CHECK_LIB(GAL, gal, 0.18.0.0)
 GS_CHECK_LIB(GnomePrint, print, 0.29.0.0)
+GS_CHECK_LIB(Gnome-xml, xml, 1.8.17.0)
+
+dnl ******************************
+dnl libxml 
+dnl ******************************
+XML_LIBS=`gnome-config --libs xml`
+XML_CFLAGS=`gnome-config --cflags xml`
+AC_SUBST(XML_LIBS)
+AC_SUBST(XML_CFLAGS)
+
+
 
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
