@@ -157,6 +157,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	gchar *tmpbuf;
 	gboolean is_strongsmorph = FALSE;
 
+	
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
@@ -176,24 +177,19 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(buf, _("Show %s in main window"), url);
 		}
 		/***  osis footnote  ***/
-		else if (!strncmp(url, "noteID=", 7)) {
-			//g_warning(url);
+		else if (!strncmp(url, "noteID=", 7)) { /*noteID=Hebrews 1:2.n.1*/
+			//g_warning(url);               /*noteID=I Chronicles 1:7.n.1*/
 			buf1 = strchr(url, '=');
 			++buf1;
 			tmpbuf = get_footnote_body(buf1);
 			if (tmpbuf == NULL)
 				return;
 			else {
-				gnome_appbar_set_status(GNOME_APPBAR
+				/*gnome_appbar_set_status(GNOME_APPBAR
 							(widgets.
 							 appbar),
-							tmpbuf);
-				if (hint.use_hints) {
-					//gui_display_hint_in_viewer(tmpbuf);
-					gui_display_in_hint_window
-					    (tmpbuf);
-				}
-
+							tmpbuf);*/
+				gui_display_in_hint_window(tmpbuf);
 				g_free(tmpbuf);
 				return;
 			}
