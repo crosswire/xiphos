@@ -390,6 +390,19 @@ initSWORD(GtkWidget *mainform)
 
 
 /********************************************************************************************** 
+ * addrenderfilters - 
+ *               
+ * 
+ *********************************************************************************************/
+void 
+addrenderfiltersSWORD(SWModule *module) 
+{
+	
+	
+}
+
+
+/********************************************************************************************** 
  * changeVerse - this function changes all currently used sword Bible and commentary modules 
  *               to (ref)
  * gchar *ref - pointer to new module key (verse)
