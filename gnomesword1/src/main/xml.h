@@ -51,6 +51,7 @@ void xml_set_value(char *type_doc, char *section, const char *item,
 void xml_save_settings_doc(char *file_name);
 void xml_free_settings_doc(void);
 void xml_add_new_item_to_section(char * section, char * item_name, char * value);
+void xml_remove_node(char *section, char *item, char *label);
 
 #ifdef __cplusplus
 }

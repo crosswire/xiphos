@@ -271,7 +271,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	gtk_box_pack_start(GTK_BOX(vbox83), hbox83, TRUE, TRUE, 0);
 
 	pixmap = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-					    "/GnomeSword.xpm");
+					    "/gs2-48x48.png");
 	gtk_widget_show(pixmap);
 	gtk_box_pack_start(GTK_BOX(hbox83), pixmap, TRUE, TRUE, 0);
 
