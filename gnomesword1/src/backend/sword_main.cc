@@ -199,11 +199,11 @@ void BackEnd::init_lists(MOD_LISTS * mods) {
 }
 
 GList *BackEnd::fill_Bible_books(int testament) {
-	VerseKey key;
+	VerseKey key; 
 	GList *retlist = NULL;
 	char *book = NULL;
-	unsigned int bytes_read;
-	unsigned int bytes_written;
+	gsize bytes_read;
+	gsize bytes_written;
 	GError *error = NULL;
 	int i = 0, j = 0, x = 2;
 	
