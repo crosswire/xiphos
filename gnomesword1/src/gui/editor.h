@@ -23,15 +23,19 @@
 #define __EDITOR_H_
 
 #include <gnome.h>
-#include <bonobo.h>
 #ifdef USE_GNOME_SPELL	
+#include <bonobo.h>
 #include "main/Spell.h"
 #endif
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 #include "gui/editor_replace.h"
 
+#ifdef USE_GNOME2
+typedef GtkWidget ** (*DialogCtor)(GtkHTML *html);
+#else
 typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
+#endif
 
 struct _GSHTMLEditorControlData {
 	GtkHTML *html;
