@@ -34,6 +34,9 @@
 
 
 
+#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
+
+
 class GtkHTMLEntryDisp:public SWDisplay {
       protected:
 	GtkWidget * gtkText;
@@ -71,7 +74,8 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 };
 
 
-
+//----------------------------------------------------------------------------------------------
+void AboutModsDisplayHTML(char *to, char *text);
 char IntDisplay(SETTINGS *s);
 
 
