@@ -28,6 +28,7 @@
 #include "gui/interlinear_dialog.h"
 #include "gui/interlinear.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/lists.h"

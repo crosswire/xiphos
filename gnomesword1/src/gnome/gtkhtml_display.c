@@ -34,6 +34,7 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/gnomesword.h"
 #include "gui/utilities.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"
@@ -66,7 +67,7 @@ static void set_global_options(TEXT_GLOBALS * tgs)
 	set_text_module_global_option("Greek Accents",
 				      tgs->greekaccents);
 	set_text_module_global_option("Lemmas", tgs->lemmas);
-	set_text_module_global_option("Scripture Cross-references",
+	set_text_module_global_option("Cross-references",
 				      tgs->scripturerefs);
 	set_text_module_global_option("Hebrew Vowel Points",
 				      tgs->hebrewpoints);

@@ -48,6 +48,7 @@
 #include "gui/search_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/bibletext_dialog.h"
+#include "gui/widgets.h"
 
 WIDGETS widgets;
 

@@ -51,6 +51,7 @@
 #include "gui/bibletext.h"
 #include "gui/commentary_menu.h"
 #include "gui/hints.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/settings.h"

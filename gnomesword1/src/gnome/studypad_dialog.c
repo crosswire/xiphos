@@ -31,6 +31,7 @@
 #include "gui/studypad.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 
@@ -123,4 +124,3 @@ gint gui_open_studypad_dialog(gchar * file_name)
 			   NULL);
 	return TRUE;
 }
-

@@ -32,6 +32,7 @@
 
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/lists.h"
 #include "main/settings.h"

@@ -41,6 +41,7 @@
 #include "gui/fileselection.h"
 #include "gui/editor_menu.h"
 #include "gui/find_dialog.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 #include "main/percomm.h"

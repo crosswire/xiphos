@@ -35,6 +35,7 @@
 #include "main/settings.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 /*****************************************************************************/
 /* FIXME: clean up below */

@@ -25,39 +25,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct _settings_druid SETTINGS_DRUID;
-struct _settings_druid {
-	GtkWidget *combo_entry_text;
-	GtkWidget *combo_entry_int1;
-	GtkWidget *combo_entry_int2;
-	GtkWidget *combo_entry_int3;
-	GtkWidget *combo_entry_int4;
-	GtkWidget *combo_entry_int5;
-	GtkWidget *combo_entry_comm;
-	GtkWidget *combo_entry_gbs;
-	GtkWidget *combo_entry_personal;
-	GtkWidget *combo_entry_dict;
-	GtkWidget *combo_entry;
-	GtkWidget *entry_greek_lex;
-	GtkWidget *entry_hebrew_lex;
-	GtkWidget *combo_entry_devotion;
-	GtkWidget *radiobutton_use_default;
-	GtkWidget *checkbutton_verse_style;
-	GtkWidget *checkbutton_text_tabs;
-	GtkWidget *checkbutton_text_window;
-	GtkWidget *checkbutton_comm_tabs;
-	GtkWidget *checkbutton_upper_workbook;
-	GtkWidget *checkbutton_dict_tabs;
-	GtkWidget *checkbutton_lower_workbook;
-	GtkWidget *checkbutton_book_tabs;
-};
-
-gint gui_first_run(void);
+int gui_first_run(void);
 
 #ifdef __cplusplus
 }
 #endif	
 
 #endif
-
