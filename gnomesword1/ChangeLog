@@ -1,3 +1,11 @@
+2003-02-05  Terry Biggs <tbiggs@users.sf.net>
+
+	* removed the lookup_widget() function from gnome/utilities.c
+	  it is no longer needed.
+	* removed gtk_widget_ref() and gtk_object_set_data_full() 
+	  from gnome/preferences_dialog.c and gnome/main_window.c
+
+
 2003-01-30  Terry Biggs <tbiggs@users.sf.net>
 
 	* in main_menu moved View/New * Dialog to
@@ -716,7 +724,7 @@
 
 	*  Changed Font= and Font size= for module conf files
 	   to GSFont= and GSFont size= to avoid conflicts since we
-	   use different froms.
+	   use different forms.
 	* Fixed not remembered morph tags state bug
 	
 
