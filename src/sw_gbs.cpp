@@ -72,7 +72,7 @@ SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
 list <SWDisplay *> displays;	// so we can delete each display we create
 GList *gbs_data;
-
+bool show_tabs_gbs;
 /***   ***/
 
 static TreeKeyIdx* getTreeKey(SWModule *mod)
@@ -229,7 +229,7 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 		gnome_dialog_close(g_old->find_dialog->dialog);
 		searchGS_FIND_DLG(g, FALSE, settings->findText);
 	}
-	
+	GTK_CHECK_MENU_ITEM (g->showtabs)->active = show_tabs_gbs;
 	settings->gbsLastPage = page_num;
 }
 
@@ -341,6 +341,15 @@ on_button_release_event (GtkWidget *widget,
 	return false;
 }
 
+void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS *s)
+{
+	show_tabs_gbs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(show_tabs_gbs)		
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (s->notebookGBS), true);		
+	else		
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (s->notebookGBS), FALSE);			
+}		
+
 static
 GtkWidget* create_pmGBS(GBS_DATA *gbs)
 {
@@ -363,6 +372,7 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	GtkAccelGroup *view_book_menu_accels;
 	GtkWidget *item6;
 	GtkWidget *find;
+	//GtkWidget *showtabs;
 	GList *tmp;
 	gint i;
 	
@@ -385,6 +395,13 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 			    (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (find);
 	gtk_container_add (GTK_CONTAINER (pmGBS), find);
+
+	gbs->showtabs = gtk_check_menu_item_new_with_label(_("Show Tabs"));
+	gtk_widget_ref (gbs->showtabs);
+	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "gbs->showtabs", gbs->showtabs,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (gbs->showtabs);
+	gtk_container_add (GTK_CONTAINER (pmGBS), gbs->showtabs);
 	
 	separator = gtk_menu_item_new ();
 	gtk_widget_ref (separator);
@@ -517,6 +534,9 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	gtk_signal_connect (GTK_OBJECT (find), "activate",
                       GTK_SIGNAL_FUNC (on_find_activate),
                       gbs);
+	gtk_signal_connect (GTK_OBJECT (gbs->showtabs), "activate",
+                      GTK_SIGNAL_FUNC (on_showtabs_activate),
+                      settings);
   return pmGBS;
 }
 
@@ -616,9 +636,12 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count, GBS_DATA *p_gbs
 	gtk_object_set_data_full (GTK_OBJECT (s->app), "label", label,
 			    (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (label);
-	gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->notebookGBS), 
-		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->notebookGBS), count++), label);
-	
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK (s->notebookGBS), 
+		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->notebookGBS), count), label);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->notebookGBS),
+                        gtk_notebook_get_nth_page(GTK_NOTEBOOK(s->notebookGBS),
+							count), (gchar *) mod->Name());
+							
 	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row), p_gbs);
 	
@@ -641,6 +664,8 @@ void setupSW_GBS(SETTINGS *s)
 		it;	//-- iteratior
 	gint count = 0;
 	
+	show_tabs_gbs = false;
+	
 	swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
 	displays.clear();
 	gbs_data = NULL;
@@ -653,6 +678,7 @@ void setupSW_GBS(SETTINGS *s)
 			createGBS_Pane((*it).second, s, count, gbs) ;
 			gbs_data = g_list_append(gbs_data, (GBS_DATA *) gbs);
 			sprintf(s->BookWindowModule,"%s",gbs->bookName);
+			++count;
 		}
 	}
 	gtk_signal_connect(GTK_OBJECT(s->notebookGBS), "switch_page",

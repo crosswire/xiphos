@@ -2,6 +2,8 @@
 
 	* reworked some of the save and load bookmarks code
 	  to work with Victor's changes	
+	* removed unused button form shortcut bar verse list
+	* added view tab item to gbs popup menu
 	
 2002-03-28  Victor Porton  <porton@localhost>
 
