@@ -108,7 +108,7 @@ static void on_entry_lookup_changed(GtkEditable * editable,
 	static gboolean firsttime = TRUE;
 	
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
-	
+	d->key = g_strdup(key);
 	text = get_dictlex_text(d->mod_name, key);	
 	entry_display(d->html, d->mod_name,
 		   text, key, TRUE);
@@ -503,7 +503,7 @@ void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 	while (tmp != NULL) {
 		DL_DATA *dlg = (DL_DATA *) tmp->data;
 		if(!strcmp(dlg->mod_name, mod_name)) {
-			dlg->key = key;
+			dlg->key = g_strdup(key);
 			gtk_entry_set_text(GTK_ENTRY(dlg->entry),
 								key);
 			gdk_window_raise(dlg->dialog->window);
@@ -512,7 +512,7 @@ void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 		tmp = g_list_next(tmp);
 	}
 	gui_open_dictlex_dialog(mod_name);
-	cur_dlg->key = key;
+	cur_dlg->key = g_strdup(key);
 	gtk_entry_set_text(GTK_ENTRY(cur_dlg->entry),key);
 }
 
@@ -541,7 +541,9 @@ void gui_open_dictlex_dialog(gchar * mod_name)
 	dlg->mod_num = get_module_number(mod_name, DICT_MODS);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;
+	dlg->key = g_strdup(settings.dictkey);
 	dlg->mod_name = g_strdup(mod_name);
+	dlg->is_dialog = TRUE;
 	dialog_list = g_list_append(dialog_list, (DL_DATA*) dlg);
 	create_dictlex_dialog(dlg);
 	if (has_cipher_tag(dlg->mod_name)) {
@@ -553,6 +555,7 @@ void gui_open_dictlex_dialog(gchar * mod_name)
 		dlg->cipher_old = NULL;
 	}
 	cur_dlg = dlg;
+	
 	popupmenu = gui_create_pm_dict(dlg);
 	gnome_popup_menu_attach(popupmenu, dlg->html, NULL);
 	gtk_widget_show(dlg->dialog);
@@ -628,7 +631,8 @@ void gui_shutdown_dictlex_dialog(void)
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
 		DL_DATA *dlg = (DL_DATA *) dialog_list->data;
-		dialog_freed = TRUE;
+		dialog_freed = TRUE;		
+		if(dlg->key) g_free(dlg->key);
 		if(dlg->mod_name)
 			g_free(dlg->mod_name);
 		/* 

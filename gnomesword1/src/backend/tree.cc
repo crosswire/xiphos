@@ -39,6 +39,33 @@ using namespace sword;
 
 
 
+ 
+/******************************************************************************
+ * Name
+ *  backend_treekey_next_sibling
+ *
+ * Synopsis
+ *   #include "backend/tree.hh"
+ *
+ *   int backend_treekey_next_sibling(unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+ 
+int backend_get_parent(unsigned long offset)
+{
+        if (sw.treeKey) {
+                sw.treeKey->setOffset(offset);
+                if(sw.treeKey->parent()) {
+			return true;
+		}	
+        }
+        return 0;
+}
 
  
 /******************************************************************************
@@ -187,12 +214,12 @@ int backend_gbs_treekey_first_child(unsigned long offset)
  *   char * 
  */ 
  
-char * backend_get_text_from_offset(char * module_name, char * offset)
+char * backend_get_text_from_offset(char * module_name, unsigned long offset)
 {        
 	SWModule *mod = sw.gbs_mgr->Modules[module_name];
 	if (sw.treeKey) {
                 TreeKeyIdx treenode = *sw.treeKey;
-                treenode.setOffset(strtoul(offset, NULL, 0));
+                treenode.setOffset(offset);
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
                         mod->SetKey(treenode);

@@ -47,7 +47,7 @@ project.menu.comment=gnomesword Version 0.9.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/terry --enable-gtkembedmoz
+project.configure.options=--prefix=/home/terry --enable-gtkembedmoz 
 anjuta.program.arguments=
 preferences.indent.automatic=1
 preferences.use.tabs=1
@@ -137,7 +137,8 @@ module.include.files=\
 	src/backend/config.hh\
 	src/main/configs.h\
 	src/backend/tree.hh\
-	src/main/xml.h
+	src/main/xml.h\
+	src/gui/gbs_display.h
 
 module.source.name=.
 module.source.type=
@@ -216,7 +217,8 @@ module.source.files=\
 	src/backend/config.cc\
 	src/main/configs.c\
 	src/backend/tree.cc\
-	src/main/xml.c
+	src/main/xml.c\
+	src/gnome/gbs_display.c
 
 module.pixmap.name=.
 module.pixmap.type=
@@ -301,3 +303,4 @@ compiler.options.other.c.flags=
 compiler.options.other.l.flags=
 compiler.options.other.l.libs=
 project.source.paths=
+
