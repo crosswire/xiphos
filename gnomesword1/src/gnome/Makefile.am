@@ -45,7 +45,6 @@ libgui_a_SOURCES =  \
     gui.c \
     history.c \
     html.c \
-    info_box.c \
     interlinear.c \
     interlinear_dialog.c \
     link_dialog.c \

@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.9.99 
+# Anjuta Version 0.9.99 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=0.1.9.99
+anjuta.version=0.9.99
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -107,7 +107,6 @@ module.include.files=\
 	src/gui/html.h\
 	src/gui/interlinear.h\
 	src/gui/interlinear_dialog.h\
-	src/gui/info_box.h\
 	src/gui/link_dialog.h\
 	src/gui/main_menu.h\
 	src/gui/main_window.h\
@@ -184,7 +183,6 @@ module.source.files=\
 	src/gnome/gui.c\
 	src/gnome/interlinear.c\
 	src/gnome/interlinear_dialog.c\
-	src/gnome/info_box.c\
 	src/gnome/main_menu.c\
 	src/gnome/main_window.c\
 	src/gnome/preferences_dialog.c\

@@ -44,7 +44,6 @@
 #include "gui/editor_menu.h"
 #include "gui/editor_spell.h"
 #include "gui/link_dialog.h"
-#include "gui/info_box.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
 
@@ -87,7 +86,8 @@ void gui_studypad_can_close(void)
 			info->label_top = settings.studypadfilename;
 		else
 			info->label_top = N_("File");
-		info->label_middle = N_("in StudyPad is not saved!");
+		info->label_middle = N_("has been modified. ");
+		info->label_bottom = N_("Do you wish to save it?");
 		info->yes = TRUE;
 		info->no = TRUE;
 	
@@ -95,33 +95,9 @@ void gui_studypad_can_close(void)
 		if (test == GS_YES){
 			on_btn_save_clicked(NULL,
 					editor_cd);
-			/*
-			save_file_program_end(widgets.html_studypad,
-					settings.studypadfilename);
-			*/
 		}
 		
 		g_free(info);
-		
-		/*
-		GtkWidget *msgbox;
-		gint answer = 0;
-		
-		msgbox = gui_create_info_box();
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer =
-		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-	
-		switch (answer) {
-		case 0:
-			if (settings.studypadfilename)
-				save_file_program_end(widgets.html_studypad,
-						      settings.studypadfilename);
-			break;
-		default:
-			break;
-		}
-		*/
 	}
 }
 /******************************************************************************
@@ -538,9 +514,6 @@ static gboolean on_html_enter_notify_event(GtkWidget * widget,
 static void on_btn_save_clicked(GtkButton * button,
 					GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *savemyFile;
-	gchar buf[255];
-	
 	if(strlen(settings.studypadfilename) > 0)  {
 		save_file(ecd->filename, ecd);
 	} else {
@@ -570,29 +543,31 @@ static void on_btn_open_clicked(GtkButton * button,
 					GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *openFile;
-	gchar *msg, buf[255];
-	GtkWidget *msgbox;
-	gint answer = 0;
+	gchar buf[255];
+	
 	/* 
 	 * if study pad file has changed let's ask about saving it 
 	 */
 	if (ecd->changed) {
-		msg =
-		    g_strdup_printf(_
-				    ("``%s'' has been modified.  Do you wish to save it?"),
-				    ecd->filename);
-		msgbox = gui_create_info_box();
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer =
-		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		g_free(msg);
-		switch (answer) {
-		case 0:
-			save_file(ecd->filename, ecd);
-			break;
-		default:
-			break;
-		}
+		gint test;
+		GS_DIALOG *info;
+	
+		info = gui_new_dialog();
+		if (strlen(settings.studypadfilename) > 0 )
+			info->label_top = settings.studypadfilename;
+		else
+			info->label_top = N_("File");
+		info->label_middle = N_("has been modified. ");
+		info->label_bottom = N_("Do you wish to save it?");
+		info->yes = TRUE;
+		info->no = TRUE;
+	
+		test = gui_gs_dialog(info);
+		if (test == GS_YES){
+			on_btn_save_clicked(NULL,
+					editor_cd);
+		}		
+		g_free(info);
 	}
 	sprintf(buf, "%s/*.pad", settings.homedir);
 	openFile = gui_fileselection_open(ecd);
