@@ -276,11 +276,7 @@ char *get_footnote_body(char *note)
 		note_number = strdup(token);
 	else 
 		return NULL;
-/*		
-	backend_get_footnote_body_new(
-		xml_get_value("modules", "bible"), 
-		key, note_number);
-*/	
+	
 	buf = backend_get_footnote_body(
 		xml_get_value("modules", "bible"), 
 		key, note_number);		
