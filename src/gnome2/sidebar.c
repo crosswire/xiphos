@@ -493,7 +493,7 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 						     FALSE);
 			    
 		}
-		gui_change_module_and_key(mod, settings. currentverse);
+		gui_change_module_and_key(mod, settings.currentverse);
 		break;
 	case 1:
 		if(button_mod_list == 2) {
