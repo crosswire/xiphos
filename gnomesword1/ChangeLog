@@ -3,6 +3,7 @@
 	* added main/spell_pspell.c and main/spell.h
 	* moved widgets from settings structure to
 	  a widgets structure in gui/gnomesword.h
+	* combined backend_first_init() and backend_init_sword()
 	
 	
 

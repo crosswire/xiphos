@@ -66,8 +66,7 @@ typedef map < string, string > bookAbrevMap;
 
 #define CIPHER_KEY_LEN 16
 
-MANAGERS sw_mgr,
-	 _mgr;
+MANAGERS sw_mgr;
 
 /******************************************************************************
  * static  global to this file only 
@@ -86,12 +85,12 @@ bookAbrevMap abrevationMap;
 
 /******************************************************************************
  * Name
- *   backend_first_init
+ *   backend_init
  *
  * Synopsis
  *   #include "sword.h"
  *
- *   void backend_first_init(void)	
+ *   void backend_init(void)	
  *
  * Description
  *   create swmgrs 
@@ -99,97 +98,29 @@ bookAbrevMap abrevationMap;
  * Return value
  *   void
  */
-void backend_first_init(void)
-{
-	// create sword mgr
-	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	sw_mgr.search = new SWMgr();
-	sw_mgr.results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	
-	init_lists();
-}
-
-/******************************************************************************
- * Name
- *  backend_init_sword 
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void backend_init_sword(void)
- *
- * Description
- *   setup the Sword stuff
- *
- * Return value
- *   void
- */
- 
-void backend_init_sword(void)
-{
-	ModMap::iterator it;
-	
-	gint 
-	 dictpages = 0,		/* number of dictionaries */
-	 compages = 0,			/* number of commentaries */
-	 textpages = 0,			/* number of Bible text */
-	 bookpages = 0,
-	 percommpages = 0;
-	
-		
+void backend_init(void)
+{	
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n", "Initiating Sword\n");		
 	g_print("Sword locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
-	g_print("%s\n", "Check for SWORD Modules");
-	
-
-	for (it = mainMgr->Modules.begin();
-	     it != mainMgr->Modules.end(); it++) {
-		descriptionMap[string
-			       ((char *) (*it).second->Description())] =
-		    string((char *) (*it).second->Name());		
-
-		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
-			settings.havebible = TRUE;
-			++textpages;
-		}
-
-		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
-			if ((*mainMgr->config->Sections[(*it).second->Name()].
-			     find("ModDrv")).second == "RawFiles") {
-				settings.havepercomm = TRUE;
-				++percommpages;
-			}
-			settings.havecomm = TRUE;//-- we have at least one commentay module
-			++compages;	
-		}
-
-		else if (!strcmp
-			 ((*it).second->Type(), DICT_MODS)) {
-			settings.havedict = TRUE;//-- we have at least one lex / dict module
-			++dictpages;	
-
-		}
-
-		else if (!strcmp((*it).second->Type(), BOOK_MODS)) {
-			++bookpages;
-			settings.havebook = TRUE;
-		}
-	}
+	g_print("%s\n", "Checking for SWORD Modules");
 	
 	/*
-	 * report what was found
+	 *create sword mgrs
 	 */
-	g_print("\nNumber of Text modules = %d\n", textpages);
-	g_print("Number of Commentary modules = %d\n", compages);
-	g_print("Number of Personal Commentary modules = %d\n", percommpages);
-	g_print("Number of Dict/Lex modules = %d\n", dictpages);
-	g_print("Number of Book modules = %d\n\n", bookpages);
-
+	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	sw_mgr.search = new SWMgr();
+	sw_mgr.results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
+	
+	/* 
+	 * fill module lists
+	 */
+	init_lists();
+	
 	/*
-	 * setup Commentary, Personal Comments
-	 * Generic Book and Dict/Lex Support
+	 *   setup Commentary, Personal Comments
+	 *   Generic Book and Dict/Lex Support
 	 */
 	if(settings.havebible)
 		backend_setup_bibletext();
@@ -464,6 +395,9 @@ GList *backend_get_list_of_mods_by_type(char *mod_type)
 			    g_list_append(mods,
 				  (gchar *) (*it).second->
 				  Name());
+			descriptionMap[string
+			       ((char *) (*it).second->Description())] =
+				string((char *) (*it).second->Name());
 		}
 	}
 	return mods;
