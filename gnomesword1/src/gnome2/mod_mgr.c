@@ -38,11 +38,13 @@
 #include "gui/dialog.h"
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
+#include "gui/widgets.h"
 
 #include "main/lists.h"
 #include "main/mod_mgr.h"
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/xml.h"
 
 #define GTK_RESPONSE_INSTALL 303
 #define GTK_RESPONSE_REMOVE 302
@@ -621,7 +623,7 @@ on_dialog_response(GtkDialog * dialog, gint response_id, gpointer data)
 	GtkProgressBar *pbar;gint test;
 	GS_DIALOG *yes_no_dialog;
 	GString *str = g_string_new(NULL);
-
+	char *const argv[] = {"gnomesword2"};
 	switch (response_id) {
 	case GTK_RESPONSE_REFRESH:
 		switch(current_page) {
@@ -631,6 +633,9 @@ on_dialog_response(GtkDialog * dialog, gint response_id, gpointer data)
 			case 2:
 				pbar = GTK_PROGRESS_BAR(progressbar);
 				break;
+		}
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
 		}
 		gtk_progress_bar_set_text(pbar, _("Refreshing remote"));
 		while (gtk_events_pending()) {
@@ -648,25 +653,40 @@ on_dialog_response(GtkDialog * dialog, gint response_id, gpointer data)
 	case GTK_RESPONSE_CLOSE:
 		if(have_changes) {
 			yes_no_dialog = gui_new_dialog();
-			yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
+			yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 			g_string_printf(str,
 				"<span weight=\"bold\">%s</span>\n\n%s",
-				_("Please Restart GnomeSword"), 
+				_("Restart GnomeSword?"), 
 				_("The modules are out of sync!"));
 			yes_no_dialog->label_top = str->str;
-			yes_no_dialog->ok = TRUE;
+			yes_no_dialog->yes = TRUE;
+			yes_no_dialog->no = TRUE;
 		
 			test = gui_alert_dialog(yes_no_dialog);
-			if (test != GS_OK) {
-				
+			if (test == GS_YES) { 				
+				gtk_widget_destroy(GTK_WIDGET(dialog));
+				mod_mgr_shut_down();
+				xml_save_settings_doc(settings.fnconfigure);
+				gnome_execute_shell("/home/terry/bin",
+                                             "gnomesword2");
+				gtk_widget_destroy(widgets.app);
 			}
 		}
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		mod_mgr_shut_down();
 		break;
 	case GTK_RESPONSE_INSTALL:
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
 		modules = get_list_mods_to_remove_install(INSTALL);
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
 		remove_install_modules(modules, INSTALL);
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
 		load_module_tree(GTK_TREE_VIEW(treeview), TRUE);
 		break;
 	case GTK_RESPONSE_REMOVE:
