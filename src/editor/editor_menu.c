@@ -53,8 +53,8 @@
 #include "editor/editor.h"
 #include "editor/toolbar_style.h"
 #include "editor/editor_menu.h"
-#include "editor/editor_replace.h"
-#include "editor/editor_spell.h"
+//#include "editor/editor_replace.h"
+//#include "editor/editor_spell.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
@@ -541,9 +541,9 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	info->label3 = N_("Module: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
-	/*
-	 * get selected text  
-	 */
+	
+	 // * get selected text *
+	
 	if (html_engine_is_selection_active(ecd->html->engine)) {
 		gchar *buf;
 		buf =
@@ -552,7 +552,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 		info->text2 = g_strdup(buf);
 	}
 	info->text3 = g_strdup(xml_get_value("modules", "bible"));//settings.MainWindowModule);
-	/*** open dialog to get name for list ***/
+	// *** open dialog to get name for list ***
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
 		if (strlen(info->text1) > 0) {
@@ -567,6 +567,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	g_free(info->text3);
 	g_free(info);
 	g_string_free(str,TRUE);
+
 }
 
 /******************************************************************************
@@ -797,8 +798,8 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			   G_CALLBACK(on_paste_activate), ecd);
 
 #ifdef USE_SPELL
-	g_signal_connect(GTK_OBJECT(spell), "activate",
-			   G_CALLBACK(spell_check_cb), ecd);
+/*	g_signal_connect(GTK_OBJECT(spell), "activate",
+			   G_CALLBACK(spell_check_cb), ecd);*/
 #endif	/* USE_SPELL */
 	g_signal_connect(GTK_OBJECT(undo), "activate",
 			   G_CALLBACK(on_undo_activate), ecd);

@@ -1,3 +1,8 @@
+2005-02-10  terry <tbiggs@users.sf.net>
+
+	* moved editor files to src/editor
+	
+
 2005-02-08  pierre <pierrebenz@users.sf.net>
 	* removed obsolete doc images
 	* added new doc images

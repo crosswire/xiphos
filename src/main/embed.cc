@@ -340,7 +340,9 @@ void embed_link_message_cb (GtkMozEmbed *embed, gpointer data)
 	gchar buf[500];
 	extern gboolean shift_key_presed;
 	gchar *url = gtk_moz_embed_get_link_message (embed);
+#ifdef DEBUG
 	g_message(url);
+#endif
 	if(shift_key_presed)
 		return;
 	

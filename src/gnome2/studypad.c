@@ -25,6 +25,20 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include "gtkhtml/gtkhtml-properties.h"
+#include "gtkhtml/htmlcursor.h"
+#include "gtkhtml/htmlengine.h"
+#include "gtkhtml/htmlengine-edit.h"
+#include "gtkhtml/htmlengine-edit-cut-and-paste.h"
+#include "gtkhtml/htmlengine-edit-movement.h"
+#include "gtkhtml/htmlengine-edit-selection-updater.h"
+#include "gtkhtml/htmlimage.h"
+#include "gtkhtml/htmlinterval.h"
+#include "gtkhtml/htmlselection.h"
+#include "gtkhtml/htmlfontmanager.h"
+#include "gtkhtml/htmlsettings.h"
+#include "gtkhtml/htmlpainter.h"
+#include "gtkhtml/htmlplainpainter.h"
 /*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
@@ -39,15 +53,17 @@
 #include "gui/gnomesword.h"
 #include "gui/studypad.h"
 #include "editor/editor.h"
+#include "editor/popup.h"
 #include "editor/spell.h"
 #include "editor/toolbar_style.h"
 #include "editor/toolbar_edit.h"
 #include "editor/editor_menu.h"
-#include "editor/editor_spell.h"
+//#include "editor/editor_spell.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
 #include "gui/fileselection.h"
 #include "gui/widgets.h"
+//#include "editor/html-stream-mem.h"
 
 #include "main/settings.h"
 #include "main/xml.h"
@@ -618,44 +634,6 @@ static gboolean on_html_enter_notify_event(GtkWidget * widget,
 	return TRUE;
 }
 
-static gboolean
-editor_api_command (GtkHTML *html, GtkHTMLCommandType com_type, gpointer data)
-{
-/*	GtkHTMLControlData *cd = (GtkHTMLControlData *) data;
-	gboolean rv = TRUE;
-
-	switch (com_type) {
-	case GTK_HTML_COMMAND_POPUP_MENU:
-		popup_show_at_cursor (cd);
-		break;
-	case GTK_HTML_COMMAND_PROPERTIES_DIALOG:
-		property_dialog_show (cd);
-		break;
-	case GTK_HTML_COMMAND_TEXT_COLOR_APPLY:
-		toolbar_apply_color (cd);
-		break;
-	default:
-		rv = FALSE;
-	}
-
-	return rv;*/
-}
-
-
-static void
-new_editor_api ()
-{
-	editor_api = g_new (GtkHTMLEditorAPI, 1);
-
-	editor_api->check_word         = spell_check_word;
-	editor_api->suggestion_request = spell_suggestion_request;
-	editor_api->add_to_personal    = spell_add_to_personal;
-	editor_api->add_to_session     = spell_add_to_session;
-	editor_api->set_language       = spell_set_language;
-	editor_api->command            = editor_api_command;
-	//editor_api->event              = editor_api_event;
-	//editor_api->create_input_line  = editor_api_create_input_line;
-}
 
 /******************************************************************************
  * Name
@@ -676,16 +654,18 @@ new_editor_api ()
 GtkWidget *gui_create_studypad_control(GtkWidget * container,
 				gchar * filename)
 {
-	GtkWidget *vbox;
+/*	GtkWidget *vbox;
 	GtkWidget *vboxSP;
 	GtkWidget *hboxstyle;
-	GtkWidget *htmlwidget;
+	//GtkWidget *htmlwidget;
 	GtkWidget *frame34;
 	GtkWidget *scrolledwindow17;
 	GtkWidget *toolbar;
 
+	GtkWidget *htmlwidget = gtk_html_new();
+	vboxSP = gtk_vbox_new(FALSE, 0);
 	GSHTMLEditorControlData *specd =
-	    gs_html_editor_control_data_new();
+	    editor_control_data_new(GTK_HTML(htmlwidget),vboxSP);
 
 #ifdef DEBUG
 	g_message("gui_create_studypad_control");
@@ -695,7 +675,6 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	specd->stylebar = settings.show_style_bar_sp;
 	specd->editbar = settings.show_edit_bar_sp;
 
-	vboxSP = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxSP);
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);
 	
@@ -727,7 +706,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow17,
                                              settings.shadow_type);
 
-	//specd->htmlwidget = htmlwidget;
+	specd->htmlwidget = htmlwidget;
 	//specd->html = GTK_HTML(specd->htmlwidget);
 	gtk_widget_show(specd->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
@@ -739,8 +718,8 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 			   TRUE, 0);
 
 	specd->vbox = vboxSP;
-	specd->pm = gui_create_editor_popup(specd);
-	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
+//	specd->pm = gui_create_editor_popup(specd);
+//	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
 	
 
 	g_signal_connect(GTK_OBJECT
@@ -756,12 +735,18 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	g_signal_connect(G_OBJECT(specd->htmlwidget), "on_url", 
 			G_CALLBACK(gui_url),	
 			   NULL);
-	g_signal_connect(G_OBJECT(specd->htmlwidget),"button_press_event",
+	g_signal_connect (G_OBJECT(specd->htmlwidget), "popup_menu", G_CALLBACK(html_show_popup), specd);
+	g_signal_connect (G_OBJECT(specd->htmlwidget), "button_press_event", G_CALLBACK (html_button_pressed2), specd);
+	g_signal_connect_after (G_OBJECT(specd->htmlwidget), "button_press_event", G_CALLBACK (html_button_pressed_after), specd);
+	
+*/
+
+/*	g_signal_connect(G_OBJECT(specd->htmlwidget),"button_press_event",
 			   G_CALLBACK(html_button_pressed), 
-			   specd);
+			   specd);*/
 
 	/* create toolbars */
-	widgets.toolbar_studypad = gui_toolbar_style(specd);
+/*	widgets.toolbar_studypad = gui_toolbar_style(specd);
 	if (settings.show_style_bar_sp)
 		gtk_widget_show(widgets.toolbar_studypad);
 	else
@@ -776,9 +761,9 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	else
 		gtk_widget_hide(toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, FALSE, 0);
-
+*/
 	/* load last file */
-	if (filename) 
+/*	if (filename) 
 		load_file(filename, specd);
 	else 
 		gtk_html_load_from_string(specd->html,"  ",2);
@@ -794,6 +779,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_html_set_inline_spelling (specd->html, TRUE);
 	//gui_new_editor_api(specd);
 	return specd->htmlwidget;
+*/
 }
 
 
