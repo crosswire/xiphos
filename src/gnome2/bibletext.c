@@ -317,6 +317,30 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+static gboolean textview_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					TEXT_DATA * t)
+{
+	extern gboolean in_url;
+	gchar *key;
+
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	/*
+	 * set program title to current text module name 
+	 */
+	gui_change_window_title(t->mod_name);
+
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+	return FALSE;
+}
+
 
 
 static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
@@ -547,6 +571,12 @@ static void create_pane(TEXT_DATA * t)
 		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (t->text));
 		create_text_tags(text_buffer);
 		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (t->text), GTK_WRAP_WORD);
+		
+		gtk_signal_connect(GTK_OBJECT(t->text),
+				   "button_release_event",
+				   G_CALLBACK
+				   (textview_button_release_event),
+				   (TEXT_DATA *) t);
 	}
 }
 

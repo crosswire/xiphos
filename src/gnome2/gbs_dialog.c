@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gal/e-paned/e-hpaned.h>
 
 #ifdef USE_GTKEMBEDMOZ
 #include <gtkmozembed.h>
@@ -490,14 +489,14 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), frame_gbs, TRUE, TRUE,
 			   0);
 
-	hpaned = e_hpaned_new();
+	hpaned = gtk_hpaned_new();
 	gtk_widget_show(hpaned);
 	gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);
-	e_paned_set_position(E_PANED(hpaned), 190);
+	gtk_paned_set_position(GTK_PANED(hpaned), 190);
 
 	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_ctree);
-	e_paned_pack1(E_PANED(hpaned), scrolledwindow_ctree, FALSE,
+	gtk_paned_pack1(GTK_PANED(hpaned), scrolledwindow_ctree, FALSE,
 		      TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_ctree),
@@ -531,7 +530,7 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 
 		scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 		gtk_widget_show(scrolledwindow_html);
-		e_paned_pack2(E_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
+		gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
 		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 					       (scrolledwindow_html),
 					       GTK_POLICY_NEVER,
@@ -555,13 +554,13 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	else {
 		dlg->html = gtk_moz_embed_new();
 		gtk_widget_show(dlg->html);
-		e_paned_pack2(E_PANED(hpaned), dlg->html, TRUE, TRUE);
+		gtk_paned_pack2(GTK_PANED(hpaned), dlg->html, TRUE, TRUE);
 		gtk_widget_realize(dlg->html);	
 	}
 #else	   
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
-	e_paned_pack2(E_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_html),
 				       GTK_POLICY_NEVER,

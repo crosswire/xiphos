@@ -25,8 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gal/e-paned/e-hpaned.h>
-#include <gal/e-paned/e-vpaned.h>
 #include <gal/widgets/e-unicode.h>
 #include <ctype.h>
 #include <time.h>
@@ -781,16 +779,16 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 	gtk_container_add(GTK_CONTAINER(scrolledwindowRP), widgets.html_search_report);
 	gtk_html_load_empty(GTK_HTML(widgets.html_search_report));
 
-	vpaned_srch_rslt = e_vpaned_new();
+	vpaned_srch_rslt = gtk_vpaned_new();
 	gtk_widget_show(vpaned_srch_rslt);
 	gtk_box_pack_start(GTK_BOX(vbox3), vpaned_srch_rslt, TRUE,
 			   TRUE, 0);
-	e_paned_set_position(E_PANED(vpaned_srch_rslt),
+	gtk_paned_set_position(GTK_PANED(vpaned_srch_rslt),
 				     100);
 
 	frame3 = gtk_frame_new(NULL);
 	gtk_widget_show(frame3);
-	e_paned_pack1(E_PANED(vpaned_srch_rslt), frame3, TRUE, TRUE);
+	gtk_paned_pack1(GTK_PANED(vpaned_srch_rslt), frame3, TRUE, TRUE);
 
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow3);
@@ -810,7 +808,7 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
-	e_paned_pack2(E_PANED(vpaned_srch_rslt), frame4, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), frame4, TRUE, TRUE);
 
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow4);
