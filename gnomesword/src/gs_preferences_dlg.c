@@ -276,9 +276,10 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowHistoryGroup"))->
 	    active;
 	s->formatpercom =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
+	/*    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
 	s->autosavepersonalcomments =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton8"))->active;
+	*/
 	s->showdevotional =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDevotion"))->active;
 	/*** read layout spin buttons ***/
@@ -1310,7 +1311,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnPNformat),
 				     s->formatpercom);
 
-
+/*
 	checkbutton8 = gtk_check_button_new_with_label(_("Auto Save"));
 	gtk_widget_ref(checkbutton8);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "checkbutton8",
@@ -1321,7 +1322,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(checkbutton8, 202, -2);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton8),
 				     s->autosavepersonalcomments);
-
+*/
 	frame27 = gtk_frame_new(_("Layout"));
 	gtk_widget_ref(frame27);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "frame27",
