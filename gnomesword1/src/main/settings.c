@@ -50,7 +50,7 @@
 /******************************************************************************
  * defines
  */
-#define GS_DIR ".gnomesword-1.0"
+#define GS_DIR ".gnomesword-2.0"
 
 
 /******************************************************************************
@@ -99,7 +99,7 @@ int settings_init(int new_configs, int new_bookmarks)
 		exit(0);
 	}
 
-	/* set gSwordDir to $home + .gnomesword-1.0 */
+	/* set gSwordDir to $home + .gnomesword-2.0 */
 	settings.gSwordDir = g_new(char, strlen(settings.homedir) +
 				   strlen(GS_DIR) + 2);
 	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, GS_DIR);
@@ -107,7 +107,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	/* if gSwordDir does not exist create it */
 	if (access(settings.gSwordDir, F_OK) == -1) {
 		if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
-			printf("can not create  .gnomesword-1.0");
+			printf("can not create  .gnomesword-2.0");
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
 		} 
@@ -199,7 +199,7 @@ int init_bookmarks(int new_bookmarks)
 				 strlen("/bookmarks") + 2);
 	sprintf(settings.swbmDir, "%s/%s", settings.gSwordDir, "bookmarks");
 
-	/* if .gnomesword-1.0/bookmarks does not exist create it */
+	/* if .gnomesword-2.0/bookmarks does not exist create it */
 	if (access(settings.swbmDir, F_OK) == -1) {
 		if ((mkdir(settings.swbmDir, S_IRWXU)) == -1) {
 			g_warning("can't create bookmarks dir");
