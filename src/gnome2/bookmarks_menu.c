@@ -1064,7 +1064,7 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 					"newTab",
 					main_url_encode(key), 
 					main_url_encode(module));
-	main_url_handler(url, FALSE);
+	main_url_handler(url,TRUE);
 	g_free(key);
 	g_free(module);
 	g_free(url);
