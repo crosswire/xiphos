@@ -44,9 +44,10 @@
 
 #define BUFFER_SIZE 8192	/* input buffer size */
 
-/*****************************************************************************
+/******************************************************************************
  *globals
-*****************************************************************************/
+ */
+ 
 char
 *homedir,			/* store $home directory */
 *gSwordDir,			/* store GnomeSword directory */
@@ -55,28 +56,6 @@ char
 *fnconfigure;	                /* store filename for configure file - options */
 
 FILE * configfile;		/*  file pointer to configuration file - options */
-
-//gint iquickmarks;		/* number of quickmark menu items */
-
-//gchar remembersubtree[256],	/* we need to use this when add to quickmarks */
- //     rememberlastitem[255];	/* we need to use this when add to quickmarks */
-
-/*LISTITEM 
-	*p_mylistitem,
-	mylistitem,
-	listitem;	*//* structure for ListEditor items
-   (verse lists and bookmarks) */
-/*****************************************************************************
- *externals
-*****************************************************************************/
-
-
-
-/******************************************************************************
-*******************************************************************************
- *callbacks fileselection dialogs
-*******************************************************************************
-******************************************************************************/
 
 /******************************************************************************
  *on_ok_button1_clicked - fileselection dialog

@@ -58,26 +58,6 @@ void gui_set_commentary_page_and_key(gint page_num, gchar *key)
 }
 
 static
-COMM_DATA *get_comm_struct(GList * cl)
-{
-	GList *tmp;
-	COMM_DATA *c = NULL;
-
-	tmp = NULL;
-	tmp = cl;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		c = (COMM_DATA *) tmp->data;
-		if (!strcmp(c->modName, settings->CommWindowModule)) {
-			break;
-		}
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	return c;
-}
-
-static
 void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl)

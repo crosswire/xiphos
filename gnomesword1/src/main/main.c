@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 
 	gui_splash_step3();
 
-	initGnomeSword(settings);
+	init_gnomesword(settings);
 
 	gui_splash_step4();
 	

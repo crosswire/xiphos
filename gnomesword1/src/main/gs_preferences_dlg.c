@@ -102,14 +102,10 @@ static void applyoptions(SETTINGS * s)
 		gtk_widget_set_usize(s->app, s->gs_width, s->gs_hight);
 
 		if (s->showshortcutbar && s->docked) {
-			e_paned_set_position(E_PANED
-					     (lookup_widget
-					      (s->app, "epaned")),
+			e_paned_set_position(E_PANED(s->epaned),
 					     s->shortcutbar_width);
 		} else {
-			e_paned_set_position(E_PANED
-					     (lookup_widget
-					      (s->app, "epaned")), 1);
+			e_paned_set_position(E_PANED(s->epaned), 1);
 		}
 		/* set height of bible and commentary pane */
 		e_paned_set_position(E_PANED
@@ -140,7 +136,11 @@ static void applyoptions(SETTINGS * s)
 	updatehtml = FALSE;
 	updateSB = FALSE;
 }
-
+static void on_dock_clicked(GtkButton * button,
+					SETTINGS * s)
+{
+	dock_undock(s);
+}
 
 static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 {
@@ -2496,9 +2496,9 @@ GtkWidget *gui_create_preferences_dialog(SETTINGS * s,
 			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   GINT_TO_POINTER(0));
+			   GINT_TO_POINTER(0));			   
 	gtk_signal_connect(GTK_OBJECT(checkbuttonSBDock), "toggled",
-			   GTK_SIGNAL_FUNC(on_btnSBDock_clicked), s);
+			   GTK_SIGNAL_FUNC(on_dock_clicked), s);			   
 	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
