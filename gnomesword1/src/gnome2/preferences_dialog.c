@@ -529,6 +529,10 @@ static void on_entry_changed(GtkEditable * editable, gpointer user_data)
 			      buf);
 		settings.verse_num_font_size =
 		    xml_get_value("fontsize", "versenum");
+		url = 
+		     g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
+		main_url_handler(url);
+		g_free(url);
 		break;
 	default:
 		return;
@@ -976,40 +980,40 @@ static GtkTreeModel *create_model(void)
 	//model = gtk_tree_store_new(2, G_TYPE_STRING, G_TYPE_INT);
 
 	gtk_tree_store_append(model, &iter, NULL);
-	gtk_tree_store_set(model, &iter, 0, "Fonts", -1);
+	gtk_tree_store_set(model, &iter, 0, _("Fonts"), -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Color", 1, 1, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Color"), 1, 1, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Special", 1, 0, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Misc"), 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
-	gtk_tree_store_set(model, &iter, 0, "General", -1);
+	gtk_tree_store_set(model, &iter, 0, _("General"), -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Tabs and Panes", 1,
-			   2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Tabs and Panes"), 1,
+			   3, -1);
 
 /*	gtk_tree_store_append(model, &child_iter, &iter);
 	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 3, -1);*/
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Misc"), 1, 4, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
-	gtk_tree_store_set(model, &iter, 0, "Modules", -1);
+	gtk_tree_store_set(model, &iter, 0, _("Modules"), -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Main", 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Main"), 1, 5, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Parallel", 1, 5, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Parallel"), 1, 6, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 6, -1);
+	gtk_tree_store_set(model, &child_iter, 0, _("Misc"), 1, 7, -1);
 
 	return GTK_TREE_MODEL(model);
 }
@@ -1434,52 +1438,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(vbox35), hbox, TRUE, TRUE, 0);
 
-
-	label152 = gtk_label_new(_("Verse number font size"));
-	gtk_widget_show(label152);
-	gtk_box_pack_start(GTK_BOX(hbox), label152, TRUE, TRUE, 6);
-	gtk_label_set_justify(GTK_LABEL(label152), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(label152), 0.05, 0.5);
-
-
-	cmbVerseNumSize = gtk_combo_new();
-	gtk_widget_show(cmbVerseNumSize);
-	gtk_box_pack_start(GTK_BOX(hbox), cmbVerseNumSize, TRUE, TRUE,
-			   6);
-	gtk_combo_set_value_in_list(GTK_COMBO(cmbVerseNumSize), TRUE,
-				    TRUE);
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("-2"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("-1"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+0"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+1"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+2"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+3"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+4"));
-	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+5"));
-	gtk_combo_set_popdown_strings(GTK_COMBO(cmbVerseNumSize),
-				      cmbVerseNumSize_items);
-	g_list_free(cmbVerseNumSize_items);
-
-	entry.verse_number_size = GTK_COMBO(cmbVerseNumSize)->entry;
-	gtk_widget_show(entry.verse_number_size);
-	gtk_tooltips_set_tip(tooltips, entry.verse_number_size,
-			     _
-			     ("Zero is the base font size. Increase or decrease the size."),
-			     NULL);
-	gtk_entry_set_text(GTK_ENTRY(entry.verse_number_size), _("+0"));
-
-	hbox = gtk_hbox_new(TRUE, 0);
-	gtk_widget_show(hbox);
-	gtk_box_pack_start(GTK_BOX(vbox35), hbox, TRUE, TRUE, 0);
-
 	label147 = gtk_label_new(_("Links"));
 	gtk_widget_show(label147);
 	gtk_box_pack_start(GTK_BOX(hbox), label147, TRUE, TRUE, 6);
@@ -1531,11 +1489,81 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   label98);
 /* end font color page */
 
+/* start fonts misc page */
+
+	frame26 = gtk_frame_new(NULL);
+
+	gtk_frame_set_shadow_type(GTK_FRAME(frame26), GTK_SHADOW_NONE);
+
+	label800 = gtk_label_new(NULL);
+
+	header =
+	    g_strdup_printf("<span weight=\"bold\">%s</span>",
+			    _("Font Miscellaneous"));
+	gtk_label_set_markup(GTK_LABEL(label800), header);
+	g_free(header);
+
+	gtk_widget_show(label800);
+	gtk_frame_set_label_widget(GTK_FRAME(frame26), label800);
+	gtk_misc_set_alignment(GTK_MISC(label800), 0, 0);
+
+	gtk_widget_show(frame26);
+	gtk_container_add(GTK_CONTAINER(notebook7), frame26);
+	
+	vbox = gtk_vbox_new(TRUE, 0);
+	gtk_widget_show(vbox);
+	gtk_container_add(GTK_CONTAINER(frame26), vbox);
+	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
 
 
 
+	hbox = gtk_hbox_new(TRUE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 
 
+	label152 = gtk_label_new(_("Verse number font size"));
+	gtk_widget_show(label152);
+	gtk_box_pack_start(GTK_BOX(hbox), label152, TRUE, TRUE, 6);
+	gtk_label_set_justify(GTK_LABEL(label152), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label152), 0.05, 0.5);
+
+
+	cmbVerseNumSize = gtk_combo_new();
+	gtk_widget_show(cmbVerseNumSize);
+	gtk_box_pack_start(GTK_BOX(hbox), cmbVerseNumSize, TRUE, TRUE,
+			   6);
+	gtk_combo_set_value_in_list(GTK_COMBO(cmbVerseNumSize), TRUE,
+				    TRUE);
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("-2"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("-1"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+0"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+1"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+2"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+3"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+4"));
+	cmbVerseNumSize_items =
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+5"));
+	gtk_combo_set_popdown_strings(GTK_COMBO(cmbVerseNumSize),
+				      cmbVerseNumSize_items);
+	g_list_free(cmbVerseNumSize_items);
+
+	entry.verse_number_size = GTK_COMBO(cmbVerseNumSize)->entry;
+	gtk_widget_show(entry.verse_number_size);
+	gtk_tooltips_set_tip(tooltips, entry.verse_number_size,
+			     _
+			     ("Zero is the base font size. Increase or decrease the size."),
+			     NULL);
+	gtk_entry_set_text(GTK_ENTRY(entry.verse_number_size), _("+0"));
+	   
+/* end font misc page */
 
 
 /* start tabs and panes page */
