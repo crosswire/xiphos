@@ -297,7 +297,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
 	int curPos = 0;
-	gint len;
+	int len;
 	char *Buf, *paragraphMark;
 	gchar *utf8str, *use_font, *use_font_size, *token, *bufstr;
 	gint mybuflen, utf8len;
@@ -405,6 +405,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 				sprintf(tmpBuf, " %s", "</font>");
 			else 
 				sprintf(tmpBuf, " %s", "</font><p>");
+			
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);		
 		if (utf8len) {

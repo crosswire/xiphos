@@ -26,9 +26,7 @@
 extern "C" {
 #endif
 
-#include "main/gs_gnomesword.h"
-
-gboolean backend_setup_interlinear(SETTINGS *s);
+int backend_setup_interlinear(void);
 void backend_shutdown_interlinear(void);
 char *backend_get_interlinear_module_text(char *mod_name, char *key);
 void backend_set_interlinear_global_option(char *option, char *yesno);

@@ -6,20 +6,24 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=6
-1=81
-2=972
-3=28
-4=138
-5=3
-6=1
-7=30
-8=1
-9=1
-10=115
-11=103
-12=34
-13=29
+0=171
+1=29
+2=1696
+3=210
+4=58
+5=112
+6=333
+7=1168
+8=28
+9=25
+10=1
+11=131
+12=28
+13=926
+14=1
+15=37
+16=1
+17=1
 
 [filemarkers]
 0=
@@ -36,11 +40,23 @@ ShowLocals=true
 11=
 12=
 13=
+14=
+15=
+16=
+17=
+
+[breakpoints]
+0=4,,1,84,0,,bibletext_.cpp,170,10,0,backend_check_for_global_option,,1024964020,
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/ChangeLog
-1=/home/terry/Projects/gnomesword1/src/gui/bibletext.h
+0=/home/terry/Projects/gnomesword1/src/backend/bibletext_.cpp
+1=/home/terry/Projects/gnomesword1/src/backend/bibletext_.h
 2=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
+3=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+4=/home/terry/Projects/gnomesword1/src/main/main.c
+5=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+6=/home/terry/Projects/gnomesword1/src/main/bibletext.c
+7=/usr/include/g++-3/stl_tree.h
 
 [replace_text]
 0=settings.
@@ -53,14 +69,14 @@ ShowLocals=true
 7=workbook_upper_switch_page
 
 [find_text]
-0=comm_display_change
-1=display_commentary
-2=isrunningVC
-3=comm_list
-4=g_strdup
-5=gbs_find_running
-6=in_url
-7=pixmap1
+0=modname
+1=check_for_global_option
+2=disp
+3=s->
+4=settings
+5=comm_display_change
+6=display_commentary
+7=isrunningVC
 
 [executer args]
 0=newconfigs

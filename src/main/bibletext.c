@@ -43,12 +43,33 @@
 
 /******************************************************************************
  * Name
+ *  get_bibletext_text
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   char *get_bibletext_text(char *mod_name, char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char*
+ */ 
+
+char *get_bibletext_text(char *mod_name, char *key)
+{
+	return backend_get_bibletext_text(mod_name, key);
+}
+
+/******************************************************************************
+ * Name
  *  text_get_description
  *
  * Synopsis
  *   #include "bibletext.h"
  *
- *   const char* text_get_description(int mod_num)	
+ *   const char* text_get_description(char * mod_name)	
  *
  * Description
  *    
@@ -57,9 +78,9 @@
  *   const char*
  */
  
-const char *text_get_description(int mod_num)
+const char *text_get_description(char * mod_name)
 {
-	return backend_get_text_module_description(mod_num);
+	return backend_get_text_module_description(mod_name);
 }
 
 /******************************************************************************
@@ -69,7 +90,7 @@ const char *text_get_description(int mod_num)
  * Synopsis
  *   #include "bibletext.h"
  *
- *  	gint check_for_global_option(gint mod_num, gchar * option)
+ *  	gint check_for_global_option(gchar * mod_name, gchar * option)
  *
  * Description
  *    get global options for a module
@@ -78,9 +99,9 @@ const char *text_get_description(int mod_num)
  *   gint
  */
 
-gint check_for_global_option(gint mod_num, gchar * option)
+gint check_for_global_option(gchar * mod_name, gchar * option)
 {
-	return backend_check_for_global_option(mod_num, option);
+	return backend_check_for_global_option(mod_name, option);
 }
 
 /******************************************************************************
@@ -112,7 +133,7 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 	backend_save_module_options(settings.MainWindowModule,
 				    option, on_off);
 	backend_set_text_global_option(option, on_off);
-	display_text(settings.currentverse);
+	//gui_display_text(settings.currentverse);
 }
 
 /******************************************************************************
@@ -134,48 +155,6 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 void set_text_global_option(gchar * option, gchar * choice)
 {
 	backend_set_text_global_option(option, choice);
-}
-
-/******************************************************************************
- * Name
- *  display_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *   void display_text(gchar * key)
- *  	
- *
- * Description
- *   call backend_display_text and pass module page num and key
- *
- * Return value
- *   void
- */
-
-void display_text(gchar * key) 
-{
-	backend_display_text(settings.text_last_page, key);
-}
-
-/******************************************************************************
- * Name
- *  new_text_display
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void new_text_display(GtkWidget * html, gchar * mod_name)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void new_text_display(GtkWidget * html, gchar * mod_name)
-{
-	backend_new_text_display(html, mod_name);
 }
 
 /******************************************************************************

@@ -79,6 +79,7 @@ struct _text_data {
 
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
+void gui_display_text(gchar * key);
 void gui_setup_text(GList *mods);
 void gui_shutdown_text(void);
 	
