@@ -547,14 +547,12 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
-			//gtk_widget_set_sensitive(menu.point, TRUE);
 			gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 		}
 		else {
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, TRUE);
 			gtk_widget_set_sensitive(menu.insert, TRUE);
-			gtk_widget_set_sensitive(menu.point, FALSE);
 			gtk_widget_set_sensitive(menu.rr_submenu, TRUE);
 		}
 			

@@ -393,69 +393,6 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 		gui_change_module_and_key(mod_name, key);
 }
 
-/******************************************************************************
- * Name
- *   on_point_to_here_activate
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   void on_point_to_here_activate(GtkMenuItem * menuitem,
-				       gpointer user_data)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void on_point_to_here_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
-{
-/*	GS_DIALOG *yes_no_dialog;
-	gint test;
-	gchar *modName, *key;
-	GtkCellPixText *cell1, *cell2;
-	GtkCList *clist;
-	gchar *name_string;
-	GtkCTreeNode *node;
-
-	clist = GTK_CLIST(p_bmtree->ctree);
-	node = clist->selection->data;
-	name_string =
-	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text;
-
-	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->title = N_("Bookmark?");
-	yes_no_dialog->label_top =
-	    N_
-	    ("Make the selected bookmark point to the current Module and Key?");
-	yes_no_dialog->label_bottom = name_string;
-	yes_no_dialog->yes = TRUE;
-	yes_no_dialog->no = TRUE;
-
-	test = gui_gs_dialog(yes_no_dialog);
-	if (test == GS_YES) {
-		modName = get_module_name();
-		key = get_module_key();
-		cell1 =
-		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
-				     cell[1]);
-		cell2 =
-		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
-				     cell[2]);
-		g_free(cell1->text);
-		g_free(cell2->text);
-		cell1->text = g_strdup(key);
-		cell2->text = g_strdup(modName);
-		bookmarks_changed = TRUE;
-		save_bookmarks(NULL, NULL);
-//		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
-	}
-	g_free(yes_no_dialog);
-	*/
-}
 
 /******************************************************************************
  * Name
@@ -1027,8 +964,6 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	str = g_string_new("");
 	info = gui_new_dialog();
 	info->title = N_("Bookmark");
-	//info->stock_icon = "gtk-dialog-info";
-	//info->stock_icon = "gtk-dialog-question";
 	g_string_printf(str, "<span weight=\"bold\">%s</span>", _("Add"));
 	info->label_top = str->str;
 	sprintf(buf, "%s, %s", key, mod_name);
@@ -1207,22 +1142,9 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Add Bookmark at Root"),
-	 N_("Add new bookmark item"),
-	 (gpointer) on_add_bookmark_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
-	 0, (GdkModifierType) 0, NULL},
-	{
 	 GNOME_APP_UI_ITEM, N_("_Edit Item"),
 	 N_("Edit bookmark item"),
 	 (gpointer) on_edit_item_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("Make _Point to New "),
-	 N_
-	 ("Change the bookmark to point to the current reading point"),
-	 (gpointer) on_point_to_here_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 	 0, (GdkModifierType) 0, NULL},
 	{
@@ -1297,17 +1219,15 @@ void gui_create_bookmark_menu(void)
 	menu.in_dialog = pmBookmarkTree_uiinfo[0].widget;
 	menu.new = pmBookmarkTree_uiinfo[1].widget;
 	menu.insert = pmBookmarkTree_uiinfo[2].widget;
-	menu.add = pmBookmarkTree_uiinfo[3].widget;
-	menu.edit = pmBookmarkTree_uiinfo[4].widget;
-	menu.point = pmBookmarkTree_uiinfo[5].widget;
-	menu.delete = pmBookmarkTree_uiinfo[6].widget;
+	menu.edit = pmBookmarkTree_uiinfo[3].widget;
+	menu.delete = pmBookmarkTree_uiinfo[4].widget;
 	
 	
 	
-	menu.reorder = pmBookmarkTree_uiinfo[11].widget;
+	menu.reorder = pmBookmarkTree_uiinfo[9].widget;
 
-	menu.bibletime = pmBookmarkTree_uiinfo[13].widget;
-	menu.rr_submenu = pmBookmarkTree_uiinfo[14].widget;
+	menu.bibletime = pmBookmarkTree_uiinfo[10].widget;
+	menu.rr_submenu = pmBookmarkTree_uiinfo[11].widget;
 
 	menu.remove = rr_menu_uiinfo[0].widget;
 	menu.restore = rr_menu_uiinfo[2].widget;
@@ -1315,9 +1235,7 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 	gtk_widget_set_sensitive(menu.new, FALSE);
 	gtk_widget_set_sensitive(menu.insert, FALSE);
-	gtk_widget_set_sensitive(menu.add, FALSE);
 	gtk_widget_set_sensitive(menu.edit, FALSE);
-	gtk_widget_set_sensitive(menu.point, FALSE);
 	gtk_widget_set_sensitive(menu.delete, FALSE);
 	gtk_widget_set_sensitive(menu.bibletime,
 				 settings.have_bibletime);
