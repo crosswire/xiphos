@@ -67,7 +67,7 @@ struct _settings_druid {
 SETTINGS_DRUID widgets;
 
 /******************************************************************************
- * globals to this file only 
+ * globals to this file only
  */
 static GtkWidget *dialog_setup;
 
@@ -78,10 +78,10 @@ static GtkWidget *dialog_setup;
  * Synopsis
  *   #include "setup_druid.h"
  *
- *   void save_frist_run_settings(SETTINGS_DRUID widgets)	
+ *   void save_frist_run_settings(SETTINGS_DRUID widgets)
  *
  * Description
- *   gets settings from druid widgets and stores them in 
+ *   gets settings from druid widgets and stores them in
  *   the settings struct then calls create_properties_from_setup
  *   to save them
  *
@@ -241,10 +241,10 @@ static void dialog_destroy(GtkObject * object, gpointer user_data)
  *   #include "setup_druid.h"
  *
  *   void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
- *						gpointer user_data)	
+ *						gpointer user_data)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -270,7 +270,7 @@ static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
  *						  gpointer user_data)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -292,11 +292,11 @@ static void on_cancel_clicked(GnomeDialog * gnomedialog, gint arg1,
  * Synopsis
  *   #include "setup_druid.h"
  *
- *   GtkWidget *gui_create_setup_druid(GList *biblemods, 
-				GList *commmods, GList *dictmods)	
+ *   GtkWidget *gui_create_setup_druid(GList *biblemods,
+				GList *commmods, GList *dictmods)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   GtkWidget *
@@ -431,7 +431,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			    dialog_setup);
 	gtk_window_set_title(GTK_WINDOW(dialog_setup), _("Setup"));
 	gtk_window_set_modal(GTK_WINDOW(dialog_setup), TRUE);
-/*
+
 	druid1 = gnome_druid_new();
 	gtk_widget_show(druid1);
 	gtk_container_add(GTK_CONTAINER(dialog_setup), druid1);
@@ -442,34 +442,35 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 				GNOME_DRUID_PAGE(druidpagestart1));
 	gnome_druid_set_page(GNOME_DRUID(druid1),
 			     GNOME_DRUID_PAGE(druidpagestart1));
-	gnome_druid_page_start_set_bg_color(GNOME_DRUID_PAGE_START
+	gnome_druid_page_edge_set_bg_color(GNOME_DRUID_PAGE_EDGE
 					    (druidpagestart1),
 					    &druidpagestart1_bg_color);
-	gnome_druid_page_start_set_textbox_color(GNOME_DRUID_PAGE_START
+	gnome_druid_page_edge_set_textbox_color(GNOME_DRUID_PAGE_EDGE
 						 (druidpagestart1),
 						 &druidpagestart1_textbox_color);
-	gnome_druid_page_start_set_logo_bg_color(GNOME_DRUID_PAGE_START
+	gnome_druid_page_edge_set_logo_bg_color(GNOME_DRUID_PAGE_EDGE
 						 (druidpagestart1),
 						 &druidpagestart1_logo_bg_color);
-	gnome_druid_page_start_set_title_color(GNOME_DRUID_PAGE_START
+	gnome_druid_page_edge_set_title_color(GNOME_DRUID_PAGE_EDGE
 					       (druidpagestart1),
 					       &druidpagestart1_title_color);
-	gnome_druid_page_start_set_title(GNOME_DRUID_PAGE_START
+	gnome_druid_page_edge_set_title(GNOME_DRUID_PAGE_EDGE
 					 (druidpagestart1),
 					 _("Welcome To GnomeSword"));
-	gnome_druid_page_start_set_text(GNOME_DRUID_PAGE_START
+	gnome_druid_page_edge_set_text(GNOME_DRUID_PAGE_EDGE
 					(druidpagestart1),
 					_
 					("This guide will take you through the initial setup of GnomeSword"));
-	gnome_druid_page_start_set_logo(GNOME_DRUID_PAGE_START
+/*
+	gnome_druid_page_edge_set_logo(GNOME_DRUID_PAGE_EDGE
 					(druidpagestart1),
 					gdk_imlib_load_image
 					(PACKAGE_PIXMAPS_DIR
 					 "/GnomeSword.xpm"));
-
+*/
 	druidpagestandard3 =
 	    gnome_druid_page_standard_new ();
-	    
+
 	gtk_widget_show_all(druidpagestandard3);
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagestandard3));
@@ -485,12 +486,13 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
 					    settings.program_title);
+/*
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard3),
 					   gtk_image_new_from_file
 					   (PACKAGE_PIXMAPS_DIR
 					    "/GnomeSword.xpm"));
-
+*/
 	druid_vbox3 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard3)->vbox;
 	gtk_widget_show(druid_vbox3);
@@ -502,12 +504,12 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	label112 = gtk_label_new(_("Your Home Directory:"));
 	gtk_widget_show(label112);
 	gtk_box_pack_start(GTK_BOX(vbox27), label112, FALSE, FALSE, 0);
-*/
 
-	/* 
-	 * get home directory 
+
+	/*
+	 * get home directory
 	 */
-/*
+
 	if ((homedir = getenv("HOME")) == NULL) {
 		g_error("$HOME is not set!");
 	}
@@ -517,11 +519,11 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(label113);
 	gtk_box_pack_start(GTK_BOX(vbox27), label113, FALSE, FALSE, 0);
 
-*/
-	/* 
-	 * get sword version 
+
+	/*
+	 * get sword version
 	 */
-/*	ver = get_sword_version();
+	ver = get_sword_version();
 	sprintf(version, "%s-%s", _("Sword"), ver);
 
 
@@ -584,12 +586,13 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					    (druidpagestandard1),
 					    _
 					    ("Do you want GnomeSword to open with"));
+/*
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard1),
 					   gtk_image_new_from_file
 					   (PACKAGE_PIXMAPS_DIR
 					    "/GnomeSword.xpm"));
-
+*/
 	druid_vbox1 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard1)->vbox;
 	gtk_widget_show(druid_vbox1);
@@ -741,12 +744,13 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					    (druidpagestandard2),
 					    _
 					    ("Choose default Sword modules"));
+/*
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard2),
 					   gtk_image_new_from_file
 					   (PACKAGE_PIXMAPS_DIR
 					    "/GnomeSword.xpm"));
-
+*/
 	druid_vbox2 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard2)->vbox;
 	gtk_widget_show(druid_vbox2);
@@ -1021,31 +1025,32 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(druidpagefinish1);
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagefinish1));
-	gnome_druid_page_finish_set_bg_color(GNOME_DRUID_PAGE_FINISH
+	gnome_druid_page_edge_set_bg_color(GNOME_DRUID_PAGE_EDGE
 					     (druidpagefinish1),
 					     &druidpagefinish1_bg_color);
-	gnome_druid_page_finish_set_textbox_color
-	    (GNOME_DRUID_PAGE_FINISH(druidpagefinish1),
+	gnome_druid_page_edge_set_textbox_color
+	    (GNOME_DRUID_PAGE_EDGE(druidpagefinish1),
 	     &druidpagefinish1_textbox_color);
-	gnome_druid_page_finish_set_logo_bg_color
-	    (GNOME_DRUID_PAGE_FINISH(druidpagefinish1),
+	gnome_druid_page_edge_set_logo_bg_color
+	    (GNOME_DRUID_PAGE_EDGE(druidpagefinish1),
 	     &druidpagefinish1_logo_bg_color);
-	gnome_druid_page_finish_set_title_color(GNOME_DRUID_PAGE_FINISH
+	gnome_druid_page_edge_set_title_color(GNOME_DRUID_PAGE_EDGE
 						(druidpagefinish1),
 						&druidpagefinish1_title_color);
-	gnome_druid_page_finish_set_title(GNOME_DRUID_PAGE_FINISH
+	gnome_druid_page_edge_set_title(GNOME_DRUID_PAGE_EDGE
 					  (druidpagefinish1),
 					  settings.program_title);
-	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
+	gnome_druid_page_edge_set_text(GNOME_DRUID_PAGE_EDGE
 					 (druidpagefinish1),
 					 _
 					 ("            Thank-you for using GnomeSword. \nClick Finish to close this dialog and run GnomeSword."));
-	gnome_druid_page_finish_set_logo(GNOME_DRUID_PAGE_FINISH
+/*
+	gnome_druid_page_edge_set_logo(GNOME_DRUID_PAGE_EDGE
 					 (druidpagefinish1),
 					 gdk_imlib_load_image
 					 (PACKAGE_PIXMAPS_DIR
 					  "/GnomeSword.xpm"));
-
+*/
 	gtk_object_set_data(GTK_OBJECT(dialog_setup), "tooltips",
 			    tooltips);
 
@@ -1060,7 +1065,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			   G_CALLBACK(on_cancel_clicked), NULL);
 
 
-	g_free(pathtomods);*/
+	g_free(pathtomods);
 	return dialog_setup;
 
 }
@@ -1075,9 +1080,9 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
  *   void first_run(void)
  *
  * Description
- *    loads module list and calls 
- *    gui_create_setup_druid(biblemods, commmods, dictmods, 
- *				     percommmods, 
+ *    loads module list and calls
+ *    gui_create_setup_druid(biblemods, commmods, dictmods,
+ *				     percommmods,
  *				     gbsmods,
  *				     devotionmods)
  *
@@ -1109,10 +1114,10 @@ gint gui_first_run(void)
 				     gbsmods, devotionmods);
 
 	/*
-	 * hold util we are done 
+	 * hold util we are done
 	 */
 	gtk_widget_show(dlg);
-	//gtk_main();
+	gtk_main();
 
 	return 1;
 }
