@@ -124,6 +124,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
 	/* setup shortcut bar */
 	setupSB(sbbiblemods, sbcommods ,sbdictmods);
+	settings->settingslist = NULL;
 	/* set current verse color html */
 	mycolor = settings->currentverse_color;	
 	/* add modules to menus -- menu.c */

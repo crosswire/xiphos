@@ -37,7 +37,7 @@ gboolean getVerseListSBSWORD(gchar *modName,
 					SETTINGS *s);
 void setupVerseListSBSWORD(GtkWidget *html_widget);
 void shutdownverselistSBSWORD(void);
-void changeVerseListSBSWORD(gchar *url);
+void changeVerseListSBSWORD(SETTINGS *s, gchar *url);
 	
 
 #ifdef __cplusplus

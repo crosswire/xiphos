@@ -45,14 +45,17 @@ static SWModule
  * parse vlist for verses and
  * display list in Verse List Shortcut bar
  */
-gboolean getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
+gboolean
+getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 {
-	gboolean retval=FALSE;
-	gchar buf[256], firstkey[256];
+	gboolean retval = FALSE;
+	gchar 
+		buf[256], 
+		tmpbuf[256],
+		firstkey[256];
 	ListKey tmpVerseList;
 	VerseKey DefaultVSKey;
 	gint count=0;
-	
 	
 	for(int i=0; i<strlen(vlist); i++){
 		if(vlist[i] == '+') 
@@ -68,21 +71,22 @@ gboolean getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 					(const char *)tmpVerseList,
 					(const char *)tmpVerseList);
 		displayHTML(s->vlsbhtml, buf, strlen(buf));
-		if(!count) sprintf(firstkey,"%s",(const char *)tmpVerseList);
+		if(!count) 
+			sprintf(firstkey,"%s",(const char *)tmpVerseList);
+		retval = TRUE;
 		tmpVerseList++;
 		++count;
 	}
 	endHTML(s->vlsbhtml);
 	if(count>0){ 
 		showSBVerseList(s);
-		retval = TRUE;
 		ModMap::iterator it; 	
 		it = verselistsbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 		if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	
 			verselistsbMod = (*it).second;  //-- change module to new module
 			verselistsbMod->SetKey(firstkey); //-- set key to the first one in the list
 			verselistsbMod->Display(); 
-		}	
+		}
 	}	
 	return retval;
 }
@@ -125,10 +129,12 @@ void shutdownverselistSBSWORD(void)
 }
 
 void
-changeVerseListSBSWORD(gchar *url)
+changeVerseListSBSWORD(SETTINGS *s, gchar *url)
 {
 	verselistsbMod->SetKey(url);
-	verselistsbMod->Display();	
+	verselistsbMod->Display();
+	if(s->showinmain)
+		changeVerseSWORD(url);
 }
 
 
