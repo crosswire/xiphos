@@ -2,6 +2,7 @@
 
 	* Made editors use dialogs - removed options
 	* editors toolbar are shown - removed options
+	* fixed spacing for checkbuttons in setup_druid.
 
 
 2003-12-13  Pierre <pierrebenz@users.sf.net>
