@@ -19,8 +19,7 @@ MACROS=						\
   gnome-vfs.m4					\
   gnome-x-checks.m4				\
   gnome-xml-check.m4				\
-  gnome.m4					\
-  gperf-check.m4				\
+  gnome.m4	\
   linger.m4					\
   need-declaration.m4				
 
