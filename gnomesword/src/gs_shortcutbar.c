@@ -663,7 +663,7 @@ show_context_popup(EShortcutBar * shortcut_bar,
 }
 
 /*****************************************************************************
- *      for any shortcut bar item clicked
+ *      for any shortcut bar item clicked or group button
  *****************************************************************************/
 static void
 on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,

@@ -110,11 +110,18 @@ on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
 	morphsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
-/*** toogle morph tags in main text window ***/
+/*** toogle hebrew points in main text window ***/
 void
 on_hebrew_points_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	hebrewpointsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
+
+/*** toogle cantillation marks in main text window ***/
+void
+on_cantillation_marks_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	cantillationmarksSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 
