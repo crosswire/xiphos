@@ -88,7 +88,7 @@ entry_activate (GtkWidget *entry, GSFindDialog *d)
 }
 
 GSFindDialog *
-gs_find_dialog_new (GtkWidget *htmlwidget)
+gs_find_dialog_new(GtkWidget *htmlwidget)
 {
 	GSFindDialog *dialog = g_new (GSFindDialog, 1); /* must be freed by calling module */
 	GtkWidget *hbox;
@@ -183,5 +183,5 @@ find_dialog(GnomeDialog ***dialog, GtkWidget *html, DialogCtor ctor, const gchar
 	}
 }
 
-/*** end ***/
+/*** end of file ***/
 

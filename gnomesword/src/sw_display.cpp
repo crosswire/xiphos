@@ -49,11 +49,10 @@ extern "C" {
 
 #include "sw_display.h"
 
-
-/***************************************************************************** 
- * EntryDisp - for displaying modules in a GtkHTML widget wo/displaying the key
- * imodule - the Sword module to display
- *****************************************************************************/
+/*
+ *  EntryDisp - for displaying modules in a GtkHTML widget wo/displaying the key
+ *  imodule - the Sword module to display
+ */
 char EntryDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[255], *utf8str;
@@ -93,10 +92,10 @@ char EntryDisp::Display(SWModule & imodule)
 	return 0;
 }
 
-/***************************************************************************** 
+/*
  * GtkHTMLEntryDisp - for displaying dict/lex modules in a GtkHTML 
  * widget the mods need to be filtered to html first
- *****************************************************************************/
+ */
 char GtkHTMLEntryDisp::Display(SWModule & imodule)
 {
 	gchar 
@@ -121,7 +120,15 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	
 	GString 
 		*str;
-	
+		
+	bool 
+		isGBS = false,
+		isPerCom = false;
+		
+	if(!strcmp(imodule.Type(),"Generic Books"))
+		isGBS = true;
+	if(!strcmp((gchar*)imodule.getConfigEntry("ModDrv"),"RawFiles"))
+		isPerCom = true;
 	use_gtkhtml_font = false;
 	use_font = g_strdup(pick_font(imodule));
 	use_font_size = (gchar*)imodule.getConfigEntry("GSFont size");
@@ -165,6 +172,18 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 			strkey);
 	}
 	
+	else if(isGBS) {
+	s->percomverse = (gchar*)imodule.KeyText();
+		g_string_sprintf(str,
+			"<FONT COLOR=\"%s\">[%s]</font>",
+			s->bible_verse_num_color, 
+			strkey);
+	}
+	
+	else if(isPerCom) {
+		s->percomverse = (gchar*)imodule.KeyText();		
+	}
+	
 	else {
 		g_string_sprintf(str,
 			"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
@@ -176,12 +195,14 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	}
 	g_free(strkey);
 	
-	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-	utf8len = strlen(utf8str);	
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
-	}		
-	g_string_free(str,TRUE);
+	if(!isPerCom) {
+		utf8str = e_utf8_from_gtk_string(gtkText, str->str);
+		utf8len = strlen(utf8str);	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}		
+		g_string_free(str,TRUE);
+	}
 	
 	if(use_gtkhtml_font)
 		sprintf(tmpBuf, "<font size=\"%s\">", use_font_size);
@@ -261,12 +282,12 @@ gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 	return retval;
 }
 
-/****************************************************************************** 
- * GTKutf8ChapDisp - for displaying text modules 
+/*
+ * GtkHTMLChapDisp - for displaying text modules 
  * in a GtkHTML widget a chapter at a time 
  * - the mods need to be filtered to html first
  * imodule - the Sword module to display
- ******************************************************************************/
+ */
 char GtkHTMLChapDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[80], *buf, *mybuf, versecolor[80];
@@ -778,9 +799,9 @@ char InterlinearDisp::Display(SWModule & imodule)
 	return 0;
 }
 
-/* ***************************************************************************
+/*
  * to display Sword module about information
- *****************************************************************************/
+ */
 void AboutModsDisplayHTML(char *to, char *text)
 {
 	int len, i;
@@ -847,4 +868,4 @@ void AboutModsDisplayHTML(char *to, char *text)
 	*to++ = 0;
 }
 
-
+/******   end of file   ******/
