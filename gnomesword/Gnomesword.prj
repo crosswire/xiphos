@@ -132,7 +132,9 @@ module.source.files=\
 	gs_information_dlg.c\
 	gs_information_dlg.h\
 	gs_verselist_dlg.c\
-	gs_verselist_dlg.h
+	gs_verselist_dlg.h\
+	gs_setup.c\
+	gs_setup.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
