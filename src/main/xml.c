@@ -485,7 +485,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "UsePercommDialog", "1");
 	xmlNewTextChild(section_node, NULL, "UseStudyPad", "1");
 	xmlNewTextChild(section_node, NULL, "UseStudypadDialog", "1");
-	xmlNewTextChild(section_node, NULL, "spell_language", NULL);
+	xmlNewTextChild(section_node, NULL, "spell_language", "unknown");
 
 
 	section_node = xmlNewChild(root_node, NULL, "fontsize", NULL);
