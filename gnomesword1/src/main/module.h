@@ -45,6 +45,7 @@ char *get_mod_about_info(char * mod_name);
 
 char *get_module_text(int manager, char * module_name, char * key);
 char *get_striptext(int manager, char *module_name, char *key);
+char *module_name_from_description(char *description);
 
 #ifdef __cplusplus
 }

@@ -467,7 +467,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					(druidpagestart1),
 					gdk_pixbuf_new_from_file
 					(PACKAGE_PIXMAPS_DIR
-					 "/GnomeSword.xpm",
+					 "/gs2-48x48.png",
 					 &error));
 
 	druidpagestandard3 =
@@ -493,7 +493,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					   (druidpagestandard3),
 					   gdk_pixbuf_new_from_file
 					   (PACKAGE_PIXMAPS_DIR
-					    "/GnomeSword.xpm",
+					    "/gs2-48x48.png",
 					    &error));
 
 	druid_vbox3 =
@@ -594,7 +594,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					   (druidpagestandard1),
 					   gdk_pixbuf_new_from_file
 					   (PACKAGE_PIXMAPS_DIR
-					    "/GnomeSword.xpm",
+					    "/gs2-48x48.png",
 					    &error));
 
 	druid_vbox1 =
@@ -753,7 +753,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					   (druidpagestandard2),
 					   gdk_pixbuf_new_from_file
 					   (PACKAGE_PIXMAPS_DIR
-					    "/GnomeSword.xpm",
+					    "/gs2-48x48.png",
 					    &error));
 
 	druid_vbox2 =
@@ -1054,7 +1054,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					(druidpagefinish1),
 					gdk_pixbuf_new_from_file
 					(PACKAGE_PIXMAPS_DIR
-					"/GnomeSword.xpm",
+					"/gs2-48x48.png",
 					&error)
 	);
 

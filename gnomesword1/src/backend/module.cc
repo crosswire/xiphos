@@ -48,7 +48,7 @@ using std::map;
 using std::list;
 using namespace sword;
 
-typedef map < SWBuf,  SWBuf> ModLanguageMap;
+typedef map < SWBuf, SWBuf > ModLanguageMap;
 ModLanguageMap languageMap;
 
 #include "backend/mgr.hh"
@@ -92,9 +92,9 @@ extern SWKey *current_scope;
  *   char*
  */
 
-char *backend_get_footnote_body(char * module_name, 
-				char * key, char * note)
-{	
+char *backend_get_footnote_body(char *module_name,
+				char *key, char *note)
+{
 	SWKey *keybuf;
 	SWModule *module = sw.main_mgr->Modules[module_name];
 	module->SetKey(key);
@@ -104,7 +104,7 @@ char *backend_get_footnote_body(char * module_name,
 	    module->getEntryAttributes()["Footnote"][note]["body"].
 	    c_str();
 	module->renderFilter(body, keybuf);
-	if(body)
+	if (body)
 		return strdup(body.c_str());
 	else
 		return NULL;
@@ -186,18 +186,25 @@ int backend_is_module_rtl(char *mod_name)
  *   get mod name from mod description
  *
  * Return value
- *   void
+ *   char*
  */
 
-char * backend_module_name_from_description(char *mod_desc)
+char *backend_module_name_from_description(char *mod_desc)
 {
-	ModMap::iterator it;
 	
-	for (it = sw.main_mgr->Modules.begin(); it != sw.main_mgr->Modules.end(); it++) {
-		if(!strcmp((*it).second->Description(),mod_desc))
-			return strdup((*it).second->Name());
+	ModMap::iterator it;
+	char *retval = NULL;
+	
+	if(!mod_desc)
+		return NULL;
+	backend_new_module_mgr();
+	for (it = sw.module_mgr->Modules.begin();
+	     it != sw.module_mgr->Modules.end(); it++) {
+		  if (!strcmp((*it).second->Description(), mod_desc))
+			retval = strdup((*it).second->Name());
 	}
-	return NULL;
+	backend_delete_module_mgr();
+	return retval;
 }
 
 
@@ -218,8 +225,9 @@ char * backend_module_name_from_description(char *mod_desc)
  *   int
  */
 
-int backend_do_module_search(char *module_name, const char *search_string,
-			     int search_type, int search_params)
+int backend_do_module_search(char *module_name,
+			     const char *search_string, int search_type,
+			     int search_params)
 {
 	char progressunits = 70;
 
@@ -307,14 +315,14 @@ void backend_set_module_iterators(void)
  *   NAME_TYPE
  */
 
-NAME_TYPE *backend_get_next_module_name(NAME_TYPE *nt)
+NAME_TYPE *backend_get_next_module_name(NAME_TYPE * nt)
 {
 	if (begin != end) {
 
 		/*descriptionMap[string
-			       ((char *) (*begin).second->
-				Description())] =
-		    string((char *) (*begin).second->Name());*/
+		   ((char *) (*begin).second->
+		   Description())] =
+		   string((char *) (*begin).second->Name()); */
 
 		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
 			nt->type = TEXT_TYPE;
@@ -359,7 +367,7 @@ NAME_TYPE *backend_get_next_module_name(NAME_TYPE *nt)
  *   NAME_TYPE
  */
 
-NAME_TYPE *backend_get_next_module_description(NAME_TYPE *nt)
+NAME_TYPE *backend_get_next_module_description(NAME_TYPE * nt)
 {
 	if (begin != end) {
 
@@ -678,16 +686,19 @@ char *backend_get_mod_about_info(char *modname)
  *   int
  */
 
-int backend_get_module_page(const char *module_name, const char *module_type)
+int backend_get_module_page(const char *module_name,
+			    const char *module_type)
 {
 	ModMap::iterator it;
 	int module_index = 0;
 
 	for (it = sw.main_mgr->Modules.begin();
 	     it != sw.main_mgr->Modules.end(); it++) {
-		if ((*it).second) { // Sometimes Module is NULL - bug somewhere
+		if ((*it).second) {	// Sometimes Module is NULL - bug somewhere
 			if (!strcmp((*it).second->Type(), module_type)) {
-				if (!strcmp((*it).second->Name(), module_name)) {
+				if (!strcmp
+				    ((*it).second->Name(),
+				     module_name)) {
 					return module_index;
 				}
 				++module_index;
@@ -790,7 +801,7 @@ const char *backend_get_module_language(const char *module_name)
 char *backend_get_module_text(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
-	
+
 	switch (manager) {
 	case TEXT_MGR:
 		mod = sw.text_mgr->Modules[module_name];
@@ -817,10 +828,10 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 	if (mod) {
 		mod->SetKey(key);
 		// work-a-round for bug in thmlhtmlhref filter
-		if((!strcmp(mod->Name(),"AmTract")) || 
-					(!strcmp(mod->Name(),"Scofield")))
+		if ((!strcmp(mod->Name(), "AmTract")) ||
+		    (!strcmp(mod->Name(), "Scofield")))
 			return strdup((char *) mod->getRawEntry());
-		else	
+		else
 			return strdup((char *) mod->RenderText());
 	}
 	return NULL;
@@ -1154,11 +1165,12 @@ char *backend_get_commentary_text(char *mod_name, char *key)
 	if (mod) {
 		versekey.Persist(1);
 		versekey = key;
-		mod->SetKey(versekey);	
+		mod->SetKey(versekey);
 		// work-a-round for bug in thmlhtmlhref filter
-		if((!strcmp(mod->Name(),"AmTract")) || (!strcmp(mod->Name(),"Scofield")))
+		if ((!strcmp(mod->Name(), "AmTract"))
+		    || (!strcmp(mod->Name(), "Scofield")))
 			return strdup(mod->getRawEntry());
-		else	
+		else
 			return strdup(mod->RenderText());
 	}
 	return NULL;
@@ -1203,8 +1215,8 @@ char *backend_get_key_from_module(int manager, char *module_name)
 		mod = sw.main_mgr->Modules[module_name];
 	}
 	if (mod) {
-		(const char *)*mod;
-//		printf("mod->KeyText = %s\n",mod->KeyText());
+		(const char *) *mod;
+//              printf("mod->KeyText = %s\n",mod->KeyText());
 		return strdup(mod->KeyText());
 	}
 	return NULL;
@@ -1379,7 +1391,7 @@ char *backend_get_percomm_text(char *key)
 
 void backend_init_language_map(void)
 {
-	/* --list form Bibletime-1.3--*/
+	/* --list form Bibletime-1.3-- */
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");
 	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 	//languageMap[SWBuf("ae")] = SWBuf("Avestan");
@@ -1415,7 +1427,8 @@ void backend_init_language_map(void)
 	languageMap[SWBuf("el")] = SWBuf("Greek, Modern (1453-)");
 	languageMap[SWBuf("en")] = SWBuf("English");
 	languageMap[SWBuf("en_US")] = SWBuf("American English");
-	languageMap[SWBuf("enm")] = SWBuf("English, Middle (1100-1500)");
+	languageMap[SWBuf("enm")] =
+	    SWBuf("English, Middle (1100-1500)");
 	languageMap[SWBuf("eo")] = SWBuf("Esperanto");
 	languageMap[SWBuf("es")] = SWBuf("Spanish");
 	languageMap[SWBuf("et")] = SWBuf("Estonian");
