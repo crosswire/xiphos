@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * defs.h - backend defs
+ * sword_defs.h - backend defs
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -28,6 +28,13 @@ extern "C" {
 
 #include <swmgr.h>
 	
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+//using namespace sword;
+
+using namespace sword;
 typedef struct _sword_managers MANAGERS;
 struct  _sword_managers {
 	SWMgr * search;

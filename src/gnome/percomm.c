@@ -40,7 +40,7 @@
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/commentary.h"
-
+ 
 /******************************************************************************
  * global to this file only
  */
@@ -411,6 +411,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 					     "button_press_event");
 		break;
 	default:
+		return FALSE;
 	}
 
 	return FALSE;

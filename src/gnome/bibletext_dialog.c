@@ -1566,7 +1566,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator16,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator16, 7, 13);
-	
+
 	
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(vt->dialog,
