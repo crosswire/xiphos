@@ -48,7 +48,7 @@
 #include "gs_viewcomm_dlg.h"
 #include "gs_viewtext_dlg.h"
 #include "gs_bookmarks.h"
-#include "gs_undock_int.h"
+#include "gs_detach_int.h"
 #include "support.h"
 
 

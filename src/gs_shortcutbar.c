@@ -44,13 +44,15 @@
 #include "sw_verselist_sb.h"
 #include "sw_shortcutbar.h"
 #include "sw_gbs.h"
-#include "gs_undock_sb.h"
+#include "gs_detach_sb.h"
 #include "gs_html.h"
 #include "gs_gbs.h"
 
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
 EShortcutModel *shortcut_model;
+SEARCH_OPT so,
+	*p_so;
 
 static char *book_open_xpm[] = {
 	"16 16 4 1",
@@ -218,7 +220,7 @@ on_clistSearchResults_select_row(GtkCList *clist,
 	
 	gtk_clist_get_text(GTK_CLIST(clist), row, 0, &buf);	
 	s->displaySearchResults = TRUE;
-	changesearchresultsSBSW(s, buf);
+	changesearchresultsSW_SEARCH(s, p_so, buf);
 	s->displaySearchResults = FALSE;
 }
 
@@ -962,7 +964,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 {
-	sblist = searchSWORD(s->app, s);
+	sblist = searchSWORD(s, p_so);
 }
 
 /*** save verse list as bookmarks ***/
@@ -1540,9 +1542,6 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	GtkWidget *frame3;
 	GtkWidget *vbox3;
 	GtkWidget *ckbCaseSensitive;
-	GtkWidget *ckbCommentary;
-	GtkWidget *ckbPerCom;
-	//GtkWidget *ckbMarkResults;
 	GtkWidget *frame4;
 	GtkWidget *vbox4;
 	GSList *vbox4_group = NULL;
@@ -1556,7 +1555,9 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	GtkWidget *entryLower;
 	GtkWidget *entryUpper;
 	GtkTooltips *tooltips;
-
+		
+	p_so = &so;
+	
 	tooltips = gtk_tooltips_new();
 
 	frame1 = gtk_frame_new(NULL);
@@ -1684,35 +1685,35 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 			   0);
 	gtk_widget_set_usize(ckbCaseSensitive, -2, 20);
 
-	ckbCommentary =
+	p_so->ckbCommentary =
 	    gtk_check_button_new_with_label(_("Search Commentary"));
-	gtk_widget_ref(ckbCommentary);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "ckbCommentary",
-				 ckbCommentary,
+	gtk_widget_ref(p_so->ckbCommentary);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "p_so->ckbCommentary",
+				 p_so->ckbCommentary,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ckbCommentary);
-	gtk_box_pack_start(GTK_BOX(vbox3), ckbCommentary, FALSE, FALSE, 0);
-	gtk_widget_set_usize(ckbCommentary, -2, 20);
+	gtk_widget_show(p_so->ckbCommentary);
+	gtk_box_pack_start(GTK_BOX(vbox3), p_so->ckbCommentary, FALSE, FALSE, 0);
+	gtk_widget_set_usize(p_so->ckbCommentary, -2, 20);
 
-	ckbPerCom = gtk_check_button_new_with_label(_("Search Personal"));
-	gtk_widget_ref(ckbPerCom);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "ckbPerCom",
-				 ckbPerCom,
+	p_so->ckbPerCom = gtk_check_button_new_with_label(_("Search Personal"));
+	gtk_widget_ref(p_so->ckbPerCom);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "p_so->ckbPerCom",
+				 p_so->ckbPerCom,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ckbPerCom);
-	gtk_box_pack_start(GTK_BOX(vbox3), ckbPerCom, FALSE, FALSE, 0);
-	gtk_widget_set_usize(ckbPerCom, -2, 20);
-/*
-	ckbMarkResults = gtk_check_button_new_with_label(_("Mark Resluts"));
-	gtk_widget_ref(ckbMarkResults);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "ckbMarkResults",
-				 ckbMarkResults,
+	gtk_widget_show(p_so->ckbPerCom);
+	gtk_box_pack_start(GTK_BOX(vbox3), p_so->ckbPerCom, FALSE, FALSE, 0);
+	gtk_widget_set_usize(p_so->ckbPerCom, -2, 20);
+
+	p_so->ckbGBS = gtk_check_button_new_with_label(_("Search Book"));
+	gtk_widget_ref(p_so->ckbGBS);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "p_so->ckbGBS",
+				 p_so->ckbGBS,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(ckbMarkResults);	
-	gtk_tooltips_set_tip (tooltips, ckbMarkResults, _("Marks search words in results - makes search very slow!"), NULL);
-	gtk_box_pack_start(GTK_BOX(vbox3), ckbMarkResults, FALSE, FALSE, 0);
-	gtk_widget_set_usize(ckbMarkResults, -2, 20);
-*/	
+	gtk_widget_show(p_so->ckbGBS);	
+	gtk_tooltips_set_tip (tooltips, p_so->ckbGBS, _("Search Current Book"), NULL);
+	gtk_box_pack_start(GTK_BOX(vbox3), p_so->ckbGBS, FALSE, FALSE, 0);
+	gtk_widget_set_usize(p_so->ckbGBS, -2, 20);
+	
 	frame4 = gtk_frame_new(_("Search Scope"));
 	gtk_widget_ref(frame4);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4", frame4,
@@ -1833,10 +1834,11 @@ void setupSB(SETTINGS * s)
 		*tmplang, 
 		*tmp;
 	GtkWidget
-		* button,
-		* buttonBooks,
+		*button,
+		*buttonBooks,
 		*searchbutton,
 		*ctree,
+		*scrolledwindowGBS,
 		*scrolledwindow1,
 		*scrolledwindow2, 
 		*vpSearch, 
@@ -2007,7 +2009,7 @@ void setupSB(SETTINGS * s)
 	g_list_free(tmplang);
 	
 	/*** add books group to shortcut bar ***/	
-	scrolledwindow1 = setupGBS(s, bookmods);  /* gs_gbs.c */
+	scrolledwindowGBS = setupGBS(s, bookmods);  /* gs_gbs.c */
 	
 	buttonBooks = gtk_button_new_with_label(_("Books"));
 	gtk_widget_ref(buttonBooks);
@@ -2017,7 +2019,7 @@ void setupSB(SETTINGS * s)
 	gtk_widget_show(buttonBooks);
 	
 	groupnum8 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
-					  scrolledwindow1, buttonBooks, -1); 
+					  scrolledwindowGBS, buttonBooks, -1); 
 	
 	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
                       GTK_SIGNAL_FUNC (on_buttonBooks_clicked),

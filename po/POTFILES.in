@@ -2,6 +2,8 @@
 
 src/gs_abouts.c 
 src/gs_bookmarks.c 
+src/gs_detach_int.c 
+src/gs_detach_sb.c 
 src/gs_editor.c 
 src/gs_editor_replace.c 
 src/gs_editor_toolbar.c 
@@ -19,8 +21,6 @@ src/gs_menu.c
 src/gs_preferences_dlg.c 
 src/gs_setup.c 
 src/gs_shortcutbar.c 
-src/gs_undock_int.c 
-src/gs_undock_sb.c 
 src/gs_unlockkey_dlg.c 
 src/gs_viewcomm_dlg.c 
 src/gs_viewdict_dlg.c 

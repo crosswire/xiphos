@@ -1244,7 +1244,7 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
   	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);
 	
-	undockInt = gtk_menu_item_new_with_label ("Undock/Dock");
+	undockInt = gtk_menu_item_new_with_label ("Detach/Attach");
 	gtk_widget_ref (undockInt);
 	gtk_object_set_data_full (GTK_OBJECT (pmInt), "undockInt",undockInt ,
                             (GtkDestroyNotify) gtk_widget_unref);
