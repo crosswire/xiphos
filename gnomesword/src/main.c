@@ -137,6 +137,9 @@ main (int argc, char *argv[])
   	gtk_widget_show(mainwindow);
   	/* set toggle state of buttons and menu items */
   	UpdateChecks(mainwindow);  
+	/* set the main window size */
+	//gtk_window_set_default_size(GTK_WINDOW(settings->app), settings->gs_width, settings->gs_hight);
+	gtk_widget_set_usize(settings->app, settings->gs_width, settings->gs_hight);
 	if(settings->showdevotional) {
 		displayDevotional();	
 	}

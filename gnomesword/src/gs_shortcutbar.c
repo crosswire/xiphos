@@ -43,6 +43,7 @@
 #include "sw_search.h"
 #include "sw_verselist_sb.h"
 #include "sw_shortcutbar.h"
+#include "sw_gbs.h"
 
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
@@ -53,6 +54,13 @@ extern GtkWidget *MainFrm;
 extern gboolean havedict;	/* let us know if we have at least one lex-dict module */
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
+extern GList *bookmods;
+extern GdkPixmap *pixmap1;
+extern GdkPixmap *pixmap2;
+extern GdkPixmap *pixmap3;
+extern GdkBitmap *mask1;
+extern GdkBitmap *mask2;
+extern GdkBitmap *mask3;
 GList *sblist; /* for saving search results to bookmarks  */
 gint groupnum0 = -1,
     groupnum1 = -1,
@@ -61,7 +69,8 @@ gint groupnum0 = -1,
     groupnum4 = -1, 
     groupnum5 = -1, 
     groupnum6 = -1, 
-    groupnum7 = -1;
+    groupnum7 = -1,
+    groupnum8 = -1; /* GBS books tree group */
 
 static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
@@ -101,6 +110,12 @@ static void on_clistSearchResults_select_row(GtkCList *clist,
 static void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data);
 static void remove_all_items(gint group_num);
 
+
+
+static void on_buttonBooks_clicked(GtkButton * button, SETTINGS *s)
+{
+	gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(s->app,"notebookBooksDicts")),1);	
+}
 
 void
 on_clistSearchResults_select_row       (GtkCList        *clist,
@@ -753,7 +768,12 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	GdkPixbuf *icon_pixbuf = NULL;
 	
 	remItemNum = item_num;
-	
+	if(item_num == -1) {
+		if(group_num == groupnum2) /* change work space notebook to commentary page */
+			gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebook3")),0);
+		if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
+			gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(settings->app,"notebookBooksDicts")),0);
+	}
 	
 		if (event->button.button == 1) {
 			if(item_num > -1) {
@@ -1119,7 +1139,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow2);
 	gtk_container_add(GTK_CONTAINER(frame2), scrolledwindow2);
-	gtk_widget_set_usize(scrolledwindow2, -2, 251);
+	//gtk_widget_set_usize(scrolledwindow2, -2, 251);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow2), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -1286,7 +1306,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow5);
 	gtk_container_add(GTK_CONTAINER(frame5), scrolledwindow5);
-	gtk_widget_set_usize(scrolledwindow5, -2, 251);
+	//gtk_widget_set_usize(scrolledwindow5, -2, 251);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow5), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
@@ -1386,7 +1406,7 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame1);
 	gtk_container_add(GTK_CONTAINER(vp), frame1);
-	gtk_widget_set_usize(frame1, 162, 360);
+	//gtk_widget_set_usize(frame1, 162, 360);
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox1);
@@ -1653,6 +1673,7 @@ void setupSB(SETTINGS * s)
 	GList *tmplang, *tmp;
 	GtkWidget
 	    * button,
+	    * buttonBooks,
 	    *searchbutton,
 	    *ctree,
 	    *scrolledwindow1,
@@ -1660,8 +1681,10 @@ void setupSB(SETTINGS * s)
 	gint sbtype = 0, large_icons = 0;
 	gchar *filename, group_name[256], icon_size[10];
 	gchar modName[16], *pathname;
+	gchar *buf[2];
 	GdkPixbuf *icon_pixbuf = NULL;
-
+	GtkCTreeNode *node;
+	
 	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
@@ -1797,8 +1820,37 @@ void setupSB(SETTINGS * s)
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar, _("History"));
 	}
-	g_list_free(tmp);
 	g_list_free(tmplang);
+	
+	/*** add books group to shortcut bar ***/
+	scrolledwindow1 = e_vscrolled_bar_new(NULL);
+	gtk_widget_ref(scrolledwindow1);
+	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "scrolledwindow1",
+				 scrolledwindow1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow1);
+	
+	s->ctree_widget_books = gtk_ctree_new(3, 0);
+	gtk_widget_ref(s->ctree_widget_books);
+	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "s->ctree_widget_books", s->ctree_widget_books,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(s->ctree_widget_books);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow1), s->ctree_widget_books);
+	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 0, 280);
+	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 1, 80);
+	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 2, 280);
+	
+	buttonBooks = gtk_button_new_with_label(_("Books"));
+	gtk_widget_ref(buttonBooks);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "buttonBooks",
+				 buttonBooks,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(buttonBooks);
+	groupnum8 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
+					  scrolledwindow1, buttonBooks, -1);	
+	
+	/*** end books group ***/
+	
 	/*** add bookmark group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow1);
@@ -1829,6 +1881,31 @@ void setupSB(SETTINGS * s)
 
 	loadtree(settings);
 
+	/* load book after bookmarks so pixmap are created */
+	tmp = bookmods;
+	while (tmp != NULL) {
+		buf[0] = (gchar *) tmp->data;
+		buf[1] = (gchar *) tmp->data;
+		buf[2] = "0";
+		
+		g_warning("bookmods = %s", (gchar *) tmp->data);
+		node = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
+				NULL, NULL, buf, 3,
+				pixmap1, mask1, pixmap2,
+				mask2, FALSE, FALSE);
+		load_book_tree(s->ctree_widget_books, node, (gchar *) tmp->data, "root",0);
+		tmp = g_list_next(tmp);
+	}
+	/* end load books */
+	
+	gtk_signal_connect (GTK_OBJECT (s->ctree_widget_books), "select_row",
+                      GTK_SIGNAL_FUNC (on_ctreeBooks_select_row),
+                      s);
+	gtk_signal_connect (GTK_OBJECT (buttonBooks), "clicked",
+                      GTK_SIGNAL_FUNC (on_buttonBooks_clicked),
+                      s);
+	g_list_free(tmp);
+	
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);	//gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow2);
 	gtk_object_set_data_full(GTK_OBJECT(s->app),
@@ -1843,7 +1920,7 @@ void setupSB(SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vpSearch);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), vpSearch);
-	gtk_widget_set_usize(vpSearch, 234, -2);
+//	gtk_widget_set_usize(vpSearch, 234, -2);
 
 	searchbutton = gtk_button_new_with_label(_("Search"));
 	gtk_widget_ref(searchbutton);
@@ -1865,7 +1942,7 @@ void setupSB(SETTINGS * s)
 				 vboxVL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxVL);
-	gtk_widget_set_usize(vboxVL, 160, 160);
+//	gtk_widget_set_usize(vboxVL, 160, 160);
 
 	vpVL = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpVL);
