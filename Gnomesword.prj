@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.8 
+# Anjuta Version 0.1.9-bc 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -22,7 +22,7 @@ Compatibility Level: 1
 
 props.file.type=project
 
-anjuta.version=0.1.8
+anjuta.version=0.1.9-bc
 anjuta.compatibility.level=1
 
 project.name=Gnomesword
@@ -50,10 +50,10 @@ project.config.disable.overwriting=1 1 1 1 1 1 1 1 0
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 
-module.incude.name=include
-module.incude.type=
-module.incude.expanded=0
-module.incude.files=
+module.include.name=include
+module.include.type=
+module.include.expanded=0
+module.include.files=
 
 module.source.name=src
 module.source.type=

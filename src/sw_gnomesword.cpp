@@ -75,6 +75,7 @@
 #include "sw_bookmarks.h"
 #include "sw_verselist_sb.h"
 #include "sw_module_options.h"
+#include "gs_html_editor.h"
 
 
 typedef map < string, string > modDescMap;
@@ -143,11 +144,13 @@ gchar com_key[80] = "Rom 8:28",	/* current commentary key */
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
-extern gboolean changemain,	/* change verse of Bible text window */
+extern gboolean 
+ changemain,	/* change verse of Bible text window */
  addhistoryitem,		/* do we need to add item to history */
  file_changed,			/* set to true if text is study pad has changed - and file is not saved */
  firstsearch;
-extern gint dictpages,		/* number of dictionaries */
+extern gint 
+ dictpages,		/* number of dictionaries */
  compages,			/* number of commentaries */
  textpages,			/* number of Bible text */
  historyitems;			/* number of history items */
@@ -512,7 +515,7 @@ void FillDictKeysSWORD(void)
 //-------------------------------------------------------------------------------------------
 void shutdownSWORD(void)	//-- close down GnomeSword program
 {
-	char *msg;
+	//char *msg;
 	GtkWidget *msgbox;
 	extern gchar
 		*gSwordDir,
@@ -521,21 +524,22 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		*fnconfigure,
 		*swbmDir;
 	
-	sprintf(settings->studypadfilename, "%s", current_filename);	//-- store studypad filename
+	//sprintf(settings->studypadfilename, "%s", current_filename);	//-- store studypad filename
 	savebookmarks(settings->ctree_widget);
 	saveconfig();
-	if (file_changed) {	//-- if study pad file has changed since last save            
-		msg =
-		    g_strdup_printf(_
-				    ("``%s'' has been modified.  Do you wish to save it?"),
-				    current_filename);
+	
+	if (settings->modifiedSP) {	//-- if study pad file has changed since last save  
 		msgbox = create_InfoBox();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		g_free(msg);
+		
 		switch (answer) {
 		case 0:
-			saveFile(current_filename);
+			if (settings->studypadfilename) {
+				save_file_program_end(settings->htmlSP, settings->studypadfilename);			
+			} else {
+				//on_save_activate(NULL, specd); //-- gs_heml_editor.c 
+			}			 
 			break;
 		default:
 			break;

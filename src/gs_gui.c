@@ -1256,7 +1256,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 							     (notebook3),
 							     2), label12);
 
-	studypad_control(notebook3, settings);
+	settings->htmlSP = studypad_control(notebook3, settings);
 
 	label41 = gtk_label_new(_("Study Pad"));
 	gtk_widget_ref(label41);
