@@ -22,12 +22,16 @@ libgssword_a_SOURCES =  \
       gs_sword.h \
       sw_utility.cpp\
       sw_utility.h \
-      gs_gbfhtml.cpp \
-      gs_gbfhtml.h \
       gs_viewtext_sw.cpp \
        gs_viewtext_sw.h \
        gs_information_sw.cpp \
        gs_information_sw.h\
       gs_wgsil.cpp \
-      gs_wgsil.h
+      gs_wgsil.h \
+      sw_gbfhtml.cpp \
+      sw_gbfhtml.h \
+      sw_thmlhtml.cpp \
+      sw_thmlhtml.h 
+
+
 

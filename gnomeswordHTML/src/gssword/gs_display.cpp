@@ -100,7 +100,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 	/* show verse ref in statusbar */	
 	sprintf(sbNoteEditorText, "[%s] [%s]", imodule.Name(), imodule.KeyText());		
 	gtk_statusbar_push(GTK_STATUSBAR(statusbarNE), context_id2, sbNoteEditorText); 
-	beginHTML(GTK_WIDGET(gtkText));	
+	beginHTML(GTK_WIDGET(gtkText),FALSE);	
 	
 	/* show module text for current key */
 	strbuf = g_string_new((const char *) imodule);
@@ -128,7 +128,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	GString *strbuf;
 
 	(const char *) imodule;	/* snap to entry */
-	beginHTML(GTK_WIDGET(gtkText));
+	beginHTML(GTK_WIDGET(gtkText),FALSE);
 	strbuf = g_string_new("");
 	/* show verse ref in text widget  */
 	g_string_sprintf(strbuf,
@@ -182,10 +182,10 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 			font = (char *) (*eit).second.c_str();
 		}
 	}
-	beginHTML(GTK_WIDGET(gtkText));
+	beginHTML(GTK_WIDGET(gtkText),FALSE);
 	strbuf =
 	    g_string_new("");
-	    g_string_sprintf(strbuf,"<HTML><body text=\"#151515\" link=\"#898989\"><font size=\"%s\">",settings->bible_font_size);
+	    g_string_sprintf(strbuf,"<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">",settings->bible_font_size);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 
@@ -326,7 +326,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	bool utf = false;
 	gint len;
 	gchar *sourceformat;
-	char *Buf, *modName;	
+	char *Buf, *modName, *thebuf;	
 		
 	font = "Roman";
 	buf = (char *) imodule.Description();
@@ -347,7 +347,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	g_string_free(strbuf, TRUE);
 	/* heading */
 	if (font) {
-		//g_warning(font);
+		
+		g_warning(font);
 		strbuf = g_string_new("");
 		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, settings->bible_font_size);
 	} 
@@ -357,6 +358,14 @@ char InterlinearDisp::Display(SWModule & imodule)
 		tmpstr = e_utf8_to_gtk_string (gtkText, (const char *) imodule);
 		strbuf = g_string_append(strbuf, tmpstr);
 		g_warning("unicode\\n");
+	} else 
+	if(!stricmp(font,"caslon")){
+			//if(g_utf8_validate((const char *) imodule)){
+			g_warning("caslon is here");
+			thebuf = e_utf8_to_gtk_string (gtkText, (const char *) imodule);
+			strbuf = g_string_append(strbuf, thebuf);	
+			//}
+		
 	} else */
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 	/* closing */

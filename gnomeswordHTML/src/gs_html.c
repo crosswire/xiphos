@@ -459,7 +459,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 /***************************************************************************************************
  *beginHTML - start loading html widget
  ***************************************************************************************************/
-void beginHTML(GtkWidget *html_widget)
+void beginHTML(GtkWidget *html_widget, gboolean isutf8)
 {
 	GtkHTML *html;
 	
@@ -467,7 +467,11 @@ void beginHTML(GtkWidget *html_widget)
 	was_editable = gtk_html_get_editable (html);
 	if (was_editable)
 		gtk_html_set_editable (html, FALSE);
-	htmlstream = gtk_html_begin(html);
+	if(isutf8){
+		gtk_html_begin_content (html, "text/html; charset=utf-8");
+	}else{
+		htmlstream = gtk_html_begin(html);
+	}
 }
 
 /***************************************************************************************************

@@ -5816,4 +5816,497 @@ Revelation
   </widget>
 </widget>
 
+<widget>
+  <class>GtkWindow</class>
+  <name>editor</name>
+  <title>window1</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkFrame</class>
+    <name>frame25</name>
+    <label_xalign>0</label_xalign>
+    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox34</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox35</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox29</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkHandleBox</class>
+	    <name>hboxEDStudyPad</name>
+	    <shadow_type>GTK_SHADOW_OUT</shadow_type>
+	    <handle_position>GTK_POS_LEFT</handle_position>
+	    <snap_edge>GTK_POS_TOP</snap_edge>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkToolbar</class>
+	      <name>toolbarSP</name>
+	      <border_width>2</border_width>
+	      <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+	      <type>GTK_TOOLBAR_ICONS</type>
+	      <space_size>5</space_size>
+	      <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+	      <relief>GTK_RELIEF_NONE</relief>
+	      <tooltips>True</tooltips>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDNew</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDNew_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:04:30 GMT</last_modification_time>
+		</signal>
+		<label>button7</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_NEW</stock_pixmap>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDOpen</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDOpen_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:04:54 GMT</last_modification_time>
+		</signal>
+		<label>button7</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_OPEN</stock_pixmap>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDSave</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDSave_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:05:17 GMT</last_modification_time>
+		</signal>
+		<label>button7</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_SAVE</stock_pixmap>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDSaveAs</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDSaveAs_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:24:52 GMT</last_modification_time>
+		</signal>
+		<label>button10</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_SAVE_AS</stock_pixmap>
+	      </widget>
+
+	      <widget>
+		<class>GtkVSeparator</class>
+		<name>vseparator17</name>
+		<width>7</width>
+		<height>7</height>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDPrint</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDPrint_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:25:48 GMT</last_modification_time>
+		</signal>
+		<label>button11</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_PRINT</stock_pixmap>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkHandleBox</class>
+	    <name>hboxPerCom</name>
+	    <shadow_type>GTK_SHADOW_OUT</shadow_type>
+	    <handle_position>GTK_POS_LEFT</handle_position>
+	    <snap_edge>GTK_POS_TOP</snap_edge>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkToolbar</class>
+	      <name>toolbarPC</name>
+	      <border_width>1</border_width>
+	      <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+	      <type>GTK_TOOLBAR_ICONS</type>
+	      <space_size>5</space_size>
+	      <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+	      <relief>GTK_RELIEF_NONE</relief>
+	      <tooltips>True</tooltips>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDSaveNote</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDSaveNote_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:26:13 GMT</last_modification_time>
+		</signal>
+		<label>button12</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_SAVE</stock_pixmap>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDClearNote</name>
+		<label>button13</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_CLEAR</stock_pixmap>
+	      </widget>
+
+	      <widget>
+		<class>GtkVSeparator</class>
+		<name>vseparator18</name>
+		<width>7</width>
+		<height>7</height>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<child_name>Toolbar:button</child_name>
+		<name>btnEDPrintNote</name>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_btnEDPrintNote_clicked</handler>
+		  <last_modification_time>Mon, 18 Jun 2001 20:26:58 GMT</last_modification_time>
+		</signal>
+		<label>button14</label>
+		<stock_pixmap>GNOME_STOCK_PIXMAP_PRINT</stock_pixmap>
+	      </widget>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkHandleBox</class>
+	  <name>handlebox21</name>
+	  <shadow_type>GTK_SHADOW_OUT</shadow_type>
+	  <handle_position>GTK_POS_LEFT</handle_position>
+	  <snap_edge>GTK_POS_TOP</snap_edge>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkToolbar</class>
+	    <name>toolbarEdit</name>
+	    <border_width>2</border_width>
+	    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+	    <type>GTK_TOOLBAR_ICONS</type>
+	    <space_size>5</space_size>
+	    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+	    <relief>GTK_RELIEF_NONE</relief>
+	    <tooltips>True</tooltips>
+
+	    <widget>
+	      <class>GtkToggleButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>tgbtnEDEdit</name>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_tgbtnEDEdit_toggled</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:07:02 GMT</last_modification_time>
+	      </signal>
+	      <label>togglebutton1</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_PROPERTIES</stock_pixmap>
+	      <active>False</active>
+	    </widget>
+
+	    <widget>
+	      <class>GtkVSeparator</class>
+	      <name>vseparator20</name>
+	      <width>7</width>
+	      <height>7</height>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDCut</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDCut_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:27:23 GMT</last_modification_time>
+	      </signal>
+	      <label>button15</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_CUT</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDCopy</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDCopy_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:27:42 GMT</last_modification_time>
+	      </signal>
+	      <label>button15</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_COPY</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDPaste</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDPaste_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:28:00 GMT</last_modification_time>
+	      </signal>
+	      <label>button15</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_PASTE</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkVSeparator</class>
+	      <name>vseparator19</name>
+	      <width>7</width>
+	      <height>7</height>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDBold</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDBold_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:28:18 GMT</last_modification_time>
+	      </signal>
+	      <label>button15</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_BOLD</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDItalics</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDItalics_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:28:40 GMT</last_modification_time>
+	      </signal>
+	      <label>button15</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_ITALIC</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDUnderline</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDUnderline_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:29:03 GMT</last_modification_time>
+	      </signal>
+	      <label>button15</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_UNDERLINE</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDStriketh</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDStriketh_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:29:37 GMT</last_modification_time>
+	      </signal>
+	      <label>button21</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkVSeparator</class>
+	      <name>vseparator22</name>
+	      <width>7</width>
+	      <height>7</height>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDIndent</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDIndent_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:31:46 GMT</last_modification_time>
+	      </signal>
+	      <label>button22</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_INDENT</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDUnindent</name>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnEDUnindent_clicked</handler>
+		<last_modification_time>Mon, 18 Jun 2001 20:32:04 GMT</last_modification_time>
+	      </signal>
+	      <label>button23</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_UNINDENT</stock_pixmap>
+	    </widget>
+
+	    <widget>
+	      <class>GtkVSeparator</class>
+	      <name>vseparator21</name>
+	      <width>7</width>
+	      <height>7</height>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>btnEDSpell</name>
+	      <label>button7</label>
+	      <stock_pixmap>GNOME_STOCK_PIXMAP_SPELLCHECK</stock_pixmap>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkNotebook</class>
+	<name>nbEditor</name>
+	<signal>
+	  <name>switch_page</name>
+	  <handler>on_nbEditor_switch_page</handler>
+	  <last_modification_time>Mon, 18 Jun 2001 20:03:03 GMT</last_modification_time>
+	</signal>
+	<show_tabs>False</show_tabs>
+	<show_border>False</show_border>
+	<tab_pos>GTK_POS_TOP</tab_pos>
+	<scrollable>False</scrollable>
+	<tab_hborder>2</tab_hborder>
+	<tab_vborder>2</tab_vborder>
+	<popup_enable>False</popup_enable>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>swEditorText</name>
+	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+	  <widget>
+	    <class>GtkText</class>
+	    <name>textedit</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text></text>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <child_name>Notebook:tab</child_name>
+	  <name>label139</name>
+	  <label>label139</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	</widget>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>swEditorHTML</name>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+	  <widget>
+	    <class>Placeholder</class>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <child_name>Notebook:tab</child_name>
+	  <name>label140</name>
+	  <label>label140</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkStatusbar</class>
+	<name>statusbar1</name>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
 </GTK-Interface>

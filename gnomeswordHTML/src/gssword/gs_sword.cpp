@@ -34,19 +34,16 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-//#include <gbfhtml.h>
 #include <rwphtml.h>
-#include <thmlhtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
 
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include <gbfhtml.h> /*** we are using sword filters that we have patched ***/
+//#include <thmlhtml.h> /*** we are using sword filters that we have patched ***/
+#include "sw_thmlhtml.h"
+#include "sw_gbfhtml.h"
 
-
-//#include "gs_rwphtml.h"
-//#include "gs_thmlhtml.h"
-#include "gs_gbfhtml.h"
 #include "gs_wgsil.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
@@ -62,7 +59,6 @@
 #include "gs_html.h"
 #include "gs_search.h"
 #include "gs_abouts.h"
-//#include "gs_editor.h"
 #include "sw_utility.h"
 #include "gsdialogs/gs_viewtext_dlg.h"
 
@@ -172,7 +168,7 @@ extern gchar *gSwordDir,		/* store GnomeSword directory */
 	*fnconfigure;
 //extern EDITOR *ed1;
 extern GList *cbBook_items;
-
+extern GtkWidget *textedit;
 static void addtoModList(SWModule *mod, GList *list);
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -194,9 +190,9 @@ initSWORD(GtkWidget *mainform)
 	GString *s1;
 	
  	plaintohtml   	= new PLAINHTML(); /* sword renderfilter plain to html */
-  	thmltohtml	= new ThMLHTML(); /* sword renderfilter thml to html */	
+  	thmltohtml	= new SW_ThMLHTML(); /* sword renderfilter thml to html */	
         rwptohtml		= new RWPHTML(); /* sword renderfilter rwp to html */	
-        gbftohtml		= new GS_GBFHTML(); /* sword renderfilter gbf to html */	
+        gbftohtml		= new SW_GBFHTML(); /* sword renderfilter gbf to html */	
 	wgreektosil		= new GS_WGSIL(); /* sword renderfilter wingreek to sil galatia */	
 	
 	mainMgr         = new SWMgr();	//-- create sword mgrs
@@ -238,7 +234,7 @@ initSWORD(GtkWidget *mainform)
 	GTKEntryDisp::__initialize();
 	
 	percomDisplay = new  ComEntryDisp(htmlComments);
-	percomtextDisplay = new  GTKPerComDisp(textComments);
+	percomtextDisplay = new  GTKEntryDisp(textedit);
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
@@ -298,9 +294,9 @@ initSWORD(GtkWidget *mainform)
 				percomMod = (*it).second;
 				//percomtextMod = (*it).second;
 				 if(settings->formatpercom) {
-					 percomMod->Disp(percomDisplay);  //-- if TRUE use formatted display
+					 percomMod->Disp(percomtextDisplay);  //-- if TRUE use formatted display
 					// percomtextMod->Disp(percomtextDisplay);
-				 } else percomMod->Disp(percomDisplay);                     //-- else standard display
+				 } else percomMod->Disp(percomtextDisplay);                     //-- else standard display
 				 percommods = g_list_append(percommods,percomMod->Name());
 				 usepersonalcomments = TRUE; //-- used by verseChange function (gs_sword.cpp)
 				 percomMod->SetKey(settings->currentverse);
@@ -606,7 +602,7 @@ changecomp1ModSWORD(gint num)  //-- change sword module for 1st interlinear wind
 	gchar *modName;
 	GString *strbuf;
 	 
-	beginHTML(lookup_widget(MainFrm,"textComp1"));	
+	beginHTML(lookup_widget(MainFrm,"textComp1"),FALSE);	
 	strbuf = g_string_new("<HTML><HEAD></HEAD><BODY>");
 	displayHTML(GTK_WIDGET(lookup_widget(MainFrm,"textComp1")), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
