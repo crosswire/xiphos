@@ -36,6 +36,8 @@ struct _name_type {
 char *backend_get_preverse_header(char * module_name, char * key, int pvHeading);
 char *backend_get_footnote_body(char *module_name, 
 					char *key, char *note);
+/*char *backend_get_footnote_body_new(char *module_name, 
+					char *key, char *note);*/
 int backend_get_display_level(char * module_name);
 int backend_is_module_rtl(char * mod_name);
 char *backend_module_name_from_description(char * mod_desc);
