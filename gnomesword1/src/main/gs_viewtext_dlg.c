@@ -384,7 +384,7 @@ GtkWidget *create_dlgViewText(GList * glist)
 	GtkWidget *dialog_action_area14;
 	GtkWidget *btnVTClose;
 	GList *tmp;
-
+	gchar *listitem;
 	tmp = NULL;
 
 	dlgViewText = gnome_dialog_new(_("GnomeSword"), NULL);
@@ -653,8 +653,28 @@ GtkWidget *create_dlgViewText(GList * glist)
 			   NULL);
 
 	textList = NULL;
-	textList = backend_setup_viewtext(text);
+	listitem = NULL;
+	
+	backend_setup_viewtext(text);
+	
+	listitem = backend_get_first_module_viewtext();
+	if(listitem) {
+		textList = g_list_append(textList, (gchar*)listitem);
+		
+		while((listitem = backend_get_next_module_viewtext()) != NULL) {
+			textList = g_list_append(textList, (gchar*)listitem);
+		}
+	}
+	
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo10), textList);
+	
+	textList = g_list_first(textList);
+	while(textList != NULL) {
+		g_free(textList->data); /* free mem allocated by g_strdup() */
+		textList = g_list_next(textList);
+	}
+	g_list_free(textList);	
+	
 	gtk_entry_set_text(GTK_ENTRY(cbeModule), gettextmodSWORD());
 	cbBook_items = backend_get_books();
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), cbBook_items);

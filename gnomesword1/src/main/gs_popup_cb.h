@@ -71,10 +71,6 @@ extern "C" {
 					   gpointer user_data);
 	void on_show_tabs_activate(GtkMenuItem * menuitem,
 				   gpointer user_data);
-	void on_view_in_new_window_activate(GtkMenuItem * menuitem,
-					    gpointer user_data);
-	void on_view_in_new_window2_activate(GtkMenuItem * menuitem,
-					     gpointer user_data);
 	void on_change_module_activate(GtkMenuItem * menuitem,
 				       gpointer user_data);
 	void on_changeint1mod_activate(GtkMenuItem * menuitem,
