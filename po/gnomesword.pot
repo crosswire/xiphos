@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-07 12:09-0500\n"
+"POT-Creation-Date: 2001-12-12 15:55-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "GnomeSword - Edit Bookmark"
 msgstr ""
 
-#: src/gs_bookmarks.c:949
+#: src/gs_bookmarks.c:949 src/gs_html_editor.c:1590
 msgid "Label"
 msgstr ""
 
@@ -100,48 +100,48 @@ msgstr ""
 msgid "Reference "
 msgstr ""
 
-#: src/gs_bookmarks.c:971
+#: src/gs_bookmarks.c:971 src/gs_html_editor.c:1624
 msgid "Module"
 msgstr ""
 
-#: src/gs_file.c:538
+#: src/gs_file.c:456
 msgid "GnomeSword - Open Note File"
 msgstr ""
 
-#: src/gs_file.c:573
+#: src/gs_file.c:491
 msgid "GomeSword - Save Note File"
 msgstr ""
 
-#: src/gs_gnomesword.c:73 src/gs_gui.c:679
+#: src/gs_gnomesword.c:73 src/gs_gui.c:683
 msgid "Romans 8:28"
 msgstr ""
 
 #. Add options to Options Menu and get toggle item widget
-#: src/gs_gnomesword.c:171 src/gs_gnomesword.c:173 src/gs_gnomesword.c:175
+#: src/gs_gnomesword.c:169 src/gs_gnomesword.c:171 src/gs_gnomesword.c:173
 msgid "_Settings/"
 msgstr ""
 
-#: src/gs_gnomesword.c:171
+#: src/gs_gnomesword.c:169
 msgid "Auto Save Personal Comments"
 msgstr ""
 
-#: src/gs_gnomesword.c:173 src/gs_setup.c:797
+#: src/gs_gnomesword.c:171 src/gs_setup.c:797
 msgid "Show Interlinear Page"
 msgstr ""
 
-#: src/gs_gnomesword.c:175
+#: src/gs_gnomesword.c:173
 msgid "Verse Style"
 msgstr ""
 
-#: src/gs_gnomesword.c:436
+#: src/gs_gnomesword.c:430
 msgid "_Quickmarks/<Separator>"
 msgstr ""
 
-#: src/gs_gnomesword.c:437 src/gs_listeditor.c:248 src/gs_listeditor.c:497
+#: src/gs_gnomesword.c:431 src/gs_listeditor.c:248 src/gs_listeditor.c:497
 msgid "_Quickmarks/"
 msgstr ""
 
-#: src/gs_gui.c:77 src/gs_gui.c:1412
+#: src/gs_gui.c:77 src/gs_html_editor.c:1033
 msgid "Copy"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Information about Bible texts"
 msgstr ""
 
-#: src/gs_gui.c:173 src/gs_gui.c:1008 src/gs_shortcutbar.c:653
+#: src/gs_gui.c:173 src/gs_gui.c:1012 src/gs_shortcutbar.c:653
 #: src/gs_shortcutbar.c:688 src/gs_shortcutbar.c:1748
 msgid "Commentaries"
 msgstr ""
@@ -247,163 +247,113 @@ msgstr ""
 msgid "_History"
 msgstr ""
 
-#: src/gs_gui.c:371
+#: src/gs_gui.c:375
 msgid "GnomeSWORD - Bible Study Software"
 msgstr ""
 
-#: src/gs_gui.c:645
+#: src/gs_gui.c:649
 msgid "Romans"
 msgstr ""
 
-#: src/gs_gui.c:687
+#: src/gs_gui.c:691
 msgid "Goto verse"
 msgstr ""
 
-#: src/gs_gui.c:688
+#: src/gs_gui.c:692
 msgid "Go to verse in free form lookup and add verse to history"
 msgstr ""
 
-#: src/gs_gui.c:702
+#: src/gs_gui.c:706
 msgid "Back"
 msgstr ""
 
-#: src/gs_gui.c:703
+#: src/gs_gui.c:707
 msgid "Go backward through history list"
 msgstr ""
 
-#: src/gs_gui.c:718
+#: src/gs_gui.c:722
 msgid "Foward"
 msgstr ""
 
-#: src/gs_gui.c:719
+#: src/gs_gui.c:723
 msgid "Go foward through history list"
 msgstr ""
 
-#: src/gs_gui.c:744
+#: src/gs_gui.c:748
 msgid "Exit"
 msgstr ""
 
-#: src/gs_gui.c:745
+#: src/gs_gui.c:749
 msgid "Exit GnomeSword"
 msgstr ""
 
-#: src/gs_gui.c:926
+#: src/gs_gui.c:930
 msgid "Synchronize"
 msgstr ""
 
-#: src/gs_gui.c:927
+#: src/gs_gui.c:931
 msgid "Synchronize Commentary with Bible Text"
 msgstr ""
 
-#: src/gs_gui.c:938
+#: src/gs_gui.c:942
 msgid "button2"
 msgstr ""
 
-#: src/gs_gui.c:950
+#: src/gs_gui.c:954
 msgid "button3"
 msgstr ""
 
-#: src/gs_gui.c:970 src/gs_gui.c:1375
+#: src/gs_gui.c:974 src/gs_html_editor.c:998
 msgid "Print"
 msgstr ""
 
-#: src/gs_gui.c:971
+#: src/gs_gui.c:975
 msgid "Print this Comment"
 msgstr ""
 
-#: src/gs_gui.c:1140
+#: src/gs_gui.c:1154
 msgid "Follow Main Text Window"
 msgstr ""
 
-#: src/gs_gui.c:1155
+#: src/gs_gui.c:1169
 msgid "Edit"
 msgstr ""
 
-#: src/gs_gui.c:1155
+#: src/gs_gui.c:1169
 msgid "Edit note"
 msgstr ""
 
-#: src/gs_gui.c:1169 src/gs_gui.c:1337
-msgid "Save"
-msgstr ""
-
-#: src/gs_gui.c:1169
-msgid "Save note"
-msgstr ""
-
-#: src/gs_gui.c:1183
-msgid "Delete"
-msgstr ""
-
-#: src/gs_gui.c:1183
-msgid "Delete note"
-msgstr ""
-
-#: src/gs_gui.c:1197 src/gs_gui.c:1450
+#: src/gs_gui.c:1213
 msgid "Spell Check"
 msgstr ""
 
-#: src/gs_gui.c:1197 src/gs_gui.c:1450
+#: src/gs_gui.c:1213
 msgid "Start Spell Check"
 msgstr ""
 
-#: src/gs_gui.c:1205 src/gs_preferences_dlg.c:1287
+#: src/gs_gui.c:1221 src/gs_preferences_dlg.c:1287
 msgid "Personal Comments"
 msgstr ""
 
-#: src/gs_gui.c:1254
+#: src/gs_gui.c:1270
 msgid "Interlinear"
 msgstr ""
 
-#: src/gs_gui.c:1309
-msgid "New"
-msgstr ""
-
-#: src/gs_gui.c:1309
-msgid "Start new document"
-msgstr ""
-
-#: src/gs_gui.c:1323
-msgid "Open"
-msgstr ""
-
-#: src/gs_gui.c:1323
-msgid "Open File"
-msgstr ""
-
-#: src/gs_gui.c:1351
-msgid "Save As"
-msgstr ""
-
-#: src/gs_gui.c:1351
-msgid "Save as"
-msgstr ""
-
-#: src/gs_gui.c:1375
-msgid "Print current file"
-msgstr ""
-
-#: src/gs_gui.c:1398
-msgid "Cut"
-msgstr ""
-
-#: src/gs_gui.c:1398
-msgid "Cut to clipboard"
-msgstr ""
-
-#: src/gs_gui.c:1412
-msgid "Copy to clipboard"
-msgstr ""
-
-#: src/gs_gui.c:1426
-msgid "Paste"
-msgstr ""
-
-#: src/gs_gui.c:1426
-msgid "Paste from clipborad"
-msgstr ""
-
-#: src/gs_gui.c:1486
+#. *
+#. gtk_container_add(GTK_CONTAINER(scrolledwindow17), text3);
+#. gtk_text_set_editable(GTK_TEXT(text3), TRUE);
+#.
+#.
+#.
+#. statusbar2 = gtk_statusbar_new();
+#. gtk_widget_ref(statusbar2);
+#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "statusbar2",
+#. statusbar2,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(statusbar2);
+#. gtk_box_pack_start(GTK_BOX(vbox6), statusbar2, FALSE, TRUE, 0);
+#.
+#: src/gs_gui.c:1506
 msgid "Study Pad"
 msgstr ""
 
@@ -415,19 +365,209 @@ msgstr ""
 msgid "_History/C_lear"
 msgstr ""
 
-#: src/gs_html.c:91
+#: src/gs_html.c:92
 #, c-format
 msgid "Show %s in main window"
 msgstr ""
 
-#: src/gs_html.c:134
+#: src/gs_html.c:135
 #, c-format
 msgid "Go to Strongs %s"
 msgstr ""
 
-#: src/gs_html.c:153
+#: src/gs_html.c:154
 #, c-format
 msgid "Go to %s"
+msgstr ""
+
+#: src/gs_html_editor.c:432 src/gs_html_editor.c:462
+#, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr ""
+
+#: src/gs_html_editor.c:449
+msgid "-untitled-"
+msgstr ""
+
+#: src/gs_html_editor.c:933
+msgid "File"
+msgstr ""
+
+#: src/gs_html_editor.c:952
+msgid "Save Note"
+msgstr ""
+
+#: src/gs_html_editor.c:959
+msgid "Delete Note"
+msgstr ""
+
+#: src/gs_html_editor.c:968
+msgid "New"
+msgstr ""
+
+#: src/gs_html_editor.c:975
+msgid "Open"
+msgstr ""
+
+#: src/gs_html_editor.c:982
+msgid "Save"
+msgstr ""
+
+#: src/gs_html_editor.c:990
+msgid "Save AS"
+msgstr ""
+
+#: src/gs_html_editor.c:1008
+msgid "_Edit"
+msgstr ""
+
+#: src/gs_html_editor.c:1026
+msgid "Cut"
+msgstr ""
+
+#: src/gs_html_editor.c:1040
+msgid "Paste"
+msgstr ""
+
+#: src/gs_html_editor.c:1047
+msgid "Undo"
+msgstr ""
+
+#: src/gs_html_editor.c:1054
+msgid "Find"
+msgstr ""
+
+#: src/gs_html_editor.c:1061
+msgid "Find Next"
+msgstr ""
+
+#: src/gs_html_editor.c:1068
+msgid "Font Style"
+msgstr ""
+
+#.
+#. plain_text1 = gtk_check_menu_item_new_with_label(_("Plain Text"));
+#. gtk_widget_ref(plain_text1);
+#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "plain_text1",
+#. plain_text1,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(plain_text1);
+#. gtk_container_add(GTK_CONTAINER(font_style1_menu), plain_text1);
+#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
+#. (plain_text1), TRUE);
+#.
+#: src/gs_html_editor.c:1096
+msgid "Bold"
+msgstr ""
+
+#: src/gs_html_editor.c:1105
+msgid "Italic"
+msgstr ""
+
+#: src/gs_html_editor.c:1114
+msgid "Underline"
+msgstr ""
+
+#: src/gs_html_editor.c:1124
+msgid "Strick Out"
+msgstr ""
+
+#: src/gs_html_editor.c:1134
+msgid "Paragraph"
+msgstr ""
+
+#.
+#. ecd->left_align = gtk_check_menu_item_new_with_label(_("Left"));
+#. gtk_widget_ref(ecd->left_align);
+#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->left_align", ecd->left_align,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(ecd->left_align);
+#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->left_align);
+#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->left_align),
+#. TRUE);
+#.
+#: src/gs_html_editor.c:1161
+msgid "Left"
+msgstr ""
+
+#: src/gs_html_editor.c:1171
+msgid "Right"
+msgstr ""
+
+#: src/gs_html_editor.c:1180
+msgid "Center"
+msgstr ""
+
+#: src/gs_html_editor.c:1208
+msgid "Increase Indent"
+msgstr ""
+
+#: src/gs_html_editor.c:1217
+msgid "Decrease Indent"
+msgstr ""
+
+#: src/gs_html_editor.c:1225
+msgid "Link..."
+msgstr ""
+
+#: src/gs_html_editor.c:1233
+msgid "Heading"
+msgstr ""
+
+#: src/gs_html_editor.c:1250
+msgid "Normal"
+msgstr ""
+
+#: src/gs_html_editor.c:1259
+msgid "Roman List"
+msgstr ""
+
+#: src/gs_html_editor.c:1270
+msgid "Alphabetical List"
+msgstr ""
+
+#: src/gs_html_editor.c:1282
+msgid "Numerical List"
+msgstr ""
+
+#: src/gs_html_editor.c:1425
+msgid "GnomeSWORD Search"
+msgstr ""
+
+#: src/gs_html_editor.c:1440
+msgid "Enter Word or Phrase"
+msgstr ""
+
+#: src/gs_html_editor.c:1462 src/gs_shortcutbar.c:1498
+msgid "Case Sensitive"
+msgstr ""
+
+#: src/gs_html_editor.c:1469
+msgid "Foward Search"
+msgstr ""
+
+#: src/gs_html_editor.c:1477
+msgid "Regular Expresion"
+msgstr ""
+
+#: src/gs_html_editor.c:1575
+msgid "GnomeSWORD Add Reference Link"
+msgstr ""
+
+#: src/gs_html_editor.c:1604
+msgid "Text to display in document "
+msgstr ""
+
+#: src/gs_html_editor.c:1609
+msgid "Reference"
+msgstr ""
+
+#: src/gs_html_editor.c:1622
+msgid "Bible Reference or Module key to display when link is clicked"
+msgstr ""
+
+#: src/gs_html_editor.c:1637
+msgid "Name of module to show when link is clicked"
 msgstr ""
 
 #: src/gs_info_box.c:58
@@ -482,7 +622,7 @@ msgstr ""
 msgid "Apply Changes to List"
 msgstr ""
 
-#: src/gs_mainmenu_cb.c:81
+#: src/gs_mainmenu_cb.c:80
 msgid "Cannot launch gnome-help-browser"
 msgstr ""
 
@@ -984,10 +1124,6 @@ msgstr ""
 msgid "Search Options"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1498
-msgid "Case Sensitive"
-msgstr ""
-
 #: src/gs_shortcutbar.c:1509
 msgid "Search Commentary"
 msgstr ""
@@ -1057,24 +1193,6 @@ msgstr ""
 
 #: src/gs_shortcutbar.c:1821
 msgid "Bookmarks"
-msgstr ""
-
-#: src/gs_studypad.c:88 src/gs_studypad.c:215
-#, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr ""
-
-#: src/gs_studypad.c:190
-#, c-format
-msgid "%s - modified."
-msgstr ""
-
-#: src/gs_studypad.c:194
-msgid "modified"
-msgstr ""
-
-#: src/gs_studypad.c:231
-msgid "-untitled-"
 msgstr ""
 
 #: src/gs_unlockkey_dlg.c:83 src/gs_viewtext_dlg.c:373

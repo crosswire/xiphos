@@ -45,7 +45,6 @@
 #include "gs_file.h"
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
-#include "printstuff.h"
 
 /******************************************************************************
  * externals

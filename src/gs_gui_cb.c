@@ -46,7 +46,6 @@
 #include "gs_file.h"
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
-#include "printstuff.h"
 
 
 /******************************************************************************
@@ -69,6 +68,7 @@ extern gboolean
 	ApplyChange,	/* to keep form looping when book combobox is changed */
 	noteModified;	/* personal comments window changed */
 extern GtkWidget 
+	*htmlComments,
 	*NEtext;	/* menu check item (declared in gs_gnomesword.c) */
 extern gint 
 	answer;		/* do we save file on exit */
@@ -231,7 +231,8 @@ on_textComments_button_release_event(GtkWidget * widget,
 void
 on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active);
+	//editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active);
+	gtk_html_set_editable(GTK_HTML(htmlComments), GTK_TOGGLE_BUTTON(togglebutton)->active);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -239,7 +240,7 @@ void on_btnSaveNote_clicked(GtkButton * button, gpointer user_data)
 {
 	if (GTK_TOGGLE_BUTTON
 	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {
-		savenoteSWORD(TRUE);
+		//savenoteSWORD(TRUE);
 	}
 }
 
