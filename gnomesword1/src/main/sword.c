@@ -40,6 +40,18 @@
  
 #include "backend/sword.h"
 
+void set_global_option(int manager, char * option, gboolean choice)
+{
+	char *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+	backend_set_global_option(manager, option, on_off);
+}
+
 void delete_module_mgr(void)
 {
 	backend_delete_module_mgr();
