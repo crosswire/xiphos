@@ -81,21 +81,14 @@ static gboolean local;
 static const gchar *source;
 static gboolean dot_sword;
 static const gchar *destination;
+static gboolean have_configs;
 
-void gui_update_install_status(glong total, glong done, const gchar *message)
+static gboolean mod_mgr_check_for_configs(const gchar *filename)
 {
-	 gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),message);
+	return g_file_test(filename, G_FILE_TEST_EXISTS);
 }
-void gui_update_install_progressbar(gdouble fraction)
-{
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
-	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar), fraction);
-	while (gtk_events_pending()) {
-		gtk_main_iteration();
-	}
-}
+
+
 /******************************************************************************
  * Name
  *   install_modules
@@ -886,6 +879,10 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 				     GtkNotebookPage * page,
 				     guint page_num, gpointer user_data)
 {
+	gint test;
+	GS_DIALOG *yes_no_dialog;
+	GString *str = g_string_new(NULL);
+	
 	switch (page_num) {
 	case 0:
 		break;
@@ -893,6 +890,18 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 
 		break;
 	case 2:
+		yes_no_dialog = gui_new_dialog();
+		yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+		g_string_printf(str,
+				"<span weight=\"bold\">%s</span>\n\n%s",
+				_("Please Refresh"), _("Your module list is not up to date!"));
+		yes_no_dialog->label_top = str->str;
+		yes_no_dialog->ok = TRUE;
+	
+		test = gui_alert_dialog(yes_no_dialog);
+		if (test != GS_OK) {
+			
+		}
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
 			    gtk_label_get_text(GTK_LABEL(label_home));
@@ -1381,15 +1390,23 @@ void gui_open_mod_mgr(void)
 	GList *combo1_items = NULL;
 	MOD_MGR_SOURCE *mms;
 	
+	g_string_printf(str, "%s/%s", settings.homedir, 
+			".sword/InstallMgr/InstallMgr.conf");
+	
+	if(!mod_mgr_check_for_configs(str->str)) {
+		have_configs = FALSE;
+		mod_mgr_init_config();
+	}	
+	have_configs = TRUE;
+	
+	open_config_file(str->str);
 	mod_mgr_init(NULL);
 	dlg = create_dialog();
 
 	g_string_printf(str, "%s/%s", settings.homedir, ".sword");
 	gtk_label_set_text(GTK_LABEL(label_home), str->str);
 	gtk_label_set_text(GTK_LABEL(label_system), get_path_to_mods());
-	g_string_printf(str, "%s/%s", settings.homedir, 
-			".sword/InstallMgr/InstallMgr.conf");
-	open_config_file(str->str);
+	
 	
 	gtk_entry_set_text(GTK_ENTRY(combo_entry1),
 			get_config_value("Sources", "Local"));
@@ -1405,7 +1422,23 @@ void gui_open_mod_mgr(void)
 	g_list_free(combo1_items);
 	g_list_free(tmp);
 
-	
+	close_config_file();
 	gtk_widget_show(dlg);
 	g_string_free(str, TRUE);
+}
+
+void gui_update_install_status(glong total, glong done, const gchar *message)
+{
+	 gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),message);
+}
+
+void gui_update_install_progressbar(gdouble fraction)
+{
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progressbar), fraction);
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
 }
