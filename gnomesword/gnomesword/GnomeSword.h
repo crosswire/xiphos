@@ -106,9 +106,6 @@ addBookmark				(void);
 void
 editbookmarksLoad			(GtkWidget *editdlg);
 
-void
-editbookmarks					(GtkWidget *editdlg);
-
 gchar *
 getlistitem						(GtkWidget *list,
 											gint row);

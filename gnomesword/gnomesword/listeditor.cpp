@@ -21,6 +21,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
 #include <gnome.h>
@@ -28,18 +29,217 @@
 #include <swmodule.h>
 #include <versekey.h>
 
+#include "GnomeSword.h"
 #include "display.h"
 #include "callback.h"
 #include "interface.h"
 #include "support.h"
 #include "listeditor.h"
+#include "filestuff.h"
+#include "menustuff.h"
+
+
+
+typedef struct _listrow LISTROW;
+struct _listrow
+{
+ 	gchar *item;
+	gint 	type;
+	gint  level;  	
+};
+
 
 SWDisplay *GBFlistDisplay; //-- to display modules in list editor
 SWMgr *listMgr;  //-- sword mgr for ListEditor
 SWModule *listMod;	//-- module for ListEditor
 extern SWModule *curMod; //-- module for main text window (GnomeSword.cpp)
-
 extern gint ibookmarks;
+extern gchar *fnbookmarksnew; //-- bookmarks file name - declared and set in filesturr.cpp
+extern gchar rememberlastitem[255];//-- we need to use this when add to bookmarks
+extern GtkWidget *MainFrm; //------------- main form (app)
+extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
+
+LISTITEM mylistitem;
+LISTITEM *p_mylistitem;
+gchar *remfirstsub;
+bool	newsave = true;
+gint 	currentrow;
+static void  setbuttonson(GtkWidget *listeditor, bool choice);
+static void  loadbookmarksnew(GtkWidget *list);
+static gint  findpresubitem(GtkWidget *list, gint row, gint ilevel);
+static gint  findnextsubitem(GtkWidget *list, gint row, gint ilevel);
+static gint  findhowmany(GtkWidget * clist, gint row);
+static void  remove_item_and_children (GtkWidget * clist, LISTROW *items, gint row);
+static void  insert_items (GtkWidget * clist,LISTROW * items, gint howmany, gint row);
+static void  insert_item (GtkCList * clist, LISTROW* item, gint row);
+static void  getitem(gchar *buf[6]);
+
+//-------------------------------------------------------------------------------------------
+void
+setbuttonson(GtkWidget *listeditor, bool choice)  //--------------------------
+{
+	GtkWidget *ok,
+						*apply;
+	
+	ok = lookup_widget(listeditor,"btnLEok");
+	apply = lookup_widget(listeditor,"btnLEapply");
+	gtk_widget_set_sensitive (ok, choice);
+	gtk_widget_set_sensitive (apply, choice);
+}
+
+//-------------------------------------------------------------------------------------------
+void
+editbookmarksSave(GtkWidget *editdlg)  //-------------------------- save bookmarks after edit
+{
+	GtkWidget *list;
+	gint 	i,
+				x;
+	gint 	j=0;
+	gchar *buf[6],
+				*tmpbuf;
+	gint 	flbookmarksnew;
+	newsave = true;
+	flbookmarksnew = open(fnbookmarksnew, O_WRONLY|O_TRUNC);	
+	list = lookup_widget(editdlg,"clLElist");
+	for(i=0;i<GTK_CLIST(list)->rows;i++)   //ibookmarks
+	{
+		getrow(list,i, buf);
+		getitem(buf);
+		strcpy(p_mylistitem->item,buf[0]);
+		p_mylistitem->type = atoi(buf[1]);
+		p_mylistitem->level = atoi(buf[2]);
+		strcpy(p_mylistitem->subitem,buf[3]);
+		strcpy(p_mylistitem->menu,"_Bookmarks/");
+		strcpy(p_mylistitem->preitem,buf[5]);
+		write(flbookmarksnew,(char *)&mylistitem,sizeof(mylistitem));
+	}
+	sprintf(rememberlastitem,"%s",p_mylistitem->item);
+	close(flbookmarksnew);
+	
+}
+
+//-------------------------------------------------------------------------------------------
+void
+getitem(gchar *buf[6])
+{
+	static gchar 	subs[6][80],
+								tmpbuf[255],	
+								*preitem = "",
+								*presubitem = "Edit Bookmarks";
+	static gint		oldlevel = 0;
+	gint					level,
+								type;							
+	static bool		firsttime = true,
+								firstsub  = true,
+								first0item = true;
+	gint					i;
+	gchar					mybuf[80];
+	
+	if(newsave)
+	{
+	  for(i=0; i < 5; i++) sprintf(subs[i], "%s" ,"");
+	  sprintf(tmpbuf, "%s", "");
+		preitem = "";
+		presubitem = "Edit Bookmarks";
+		oldlevel = 0;
+		firsttime = true;
+		firstsub  = true;
+		first0item = true;	
+		newsave = false;
+	}
+	type = atoi(buf[1]);
+	level = atoi(buf[2]);
+	if(type == 1)
+	{  		
+		sprintf(subs[level],"%s/",buf[0]);
+		sprintf(tmpbuf, "%s", subs[level]);
+	  if(level == 0)
+	  {
+	  	buf[3] = g_strdup("");
+	  	buf[5] = g_strdup(presubitem);
+	  	preitem = g_strdup(buf[0]);
+	  	presubitem = g_strdup(buf[0]);
+	  	firstsub = false;
+	  }
+	  if(level > 0)
+	  {
+	  	sprintf(tmpbuf, "%s", "");
+	  	for(i=0; i < level; i++)
+	  	{
+	  		strcat(tmpbuf,subs[i]);
+	  	}
+	  	buf[3] = g_strdup(tmpbuf);
+	  	if(oldlevel == level)	buf[5] = g_strdup(preitem);
+	  	else buf[5] = g_strdup("");
+	  	preitem = g_strdup(buf[0]);
+	  }
+	  firsttime = true;
+	}
+	if(type == 0)							
+	{
+	 	if(level == 0)
+	  {
+	  	buf[3] = g_strdup("");
+	  	if(first0item) buf[5] = g_strdup("<Separator>");
+	  	else buf[5] = g_strdup(preitem);
+	  	preitem = g_strdup(buf[0]);
+	  	firsttime = false;
+	  	first0item = false;
+	  }
+	  if(level > 0)
+	  {
+	  	sprintf(tmpbuf, "%s", "");
+	  	for(i=0; i < level; i++)
+	  	{
+	  		strcat(tmpbuf,subs[i]);
+	  	} 	  	
+	  	buf[3] = g_strdup(tmpbuf);
+	  	if(firsttime)	buf[5] = g_strdup("");
+	  	else buf[5] = g_strdup(preitem);
+	  	preitem = g_strdup(buf[0]);
+	  	firsttime = false;
+	  }
+	}
+	oldlevel = level;	
+}
+
+//-------------------------------------------------------------------------------------------
+void                                                 //-- load bookmarks file into listeditor
+loadbookmarksnew(GtkWidget *list)
+{
+	int flbookmarksnew; //-- file handle	
+	gint i=0;           //-- counter
+	gchar *buf[6],      //-- strings for clist
+				tmpbuf[255];    //-- work buffer
+	struct stat stat_p;
+	long filesize;
+	
+	gtk_clist_clear(GTK_CLIST(list)); //-- clear the list widget
+	stat (fnbookmarksnew, &stat_p);   //-- get file info
+  filesize = stat_p.st_size;        //-- filesize in bytes
+  ibookmarks = (filesize / (sizeof(mylistitem))); //-- find number of records in file (filesize / record size)
+	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);  //-- open bookmarks file
+	while(i < ibookmarks) //-- loop until we have all the records
+	{	
+	  read(flbookmarksnew,(char *)&mylistitem,sizeof(mylistitem));//-- read in one record at a time 	
+	 	p_mylistitem = &mylistitem; //-- set pointer to record	
+	  buf[0] = g_strdup(p_mylistitem->item);
+	  remfirstsub = g_strdup(p_mylistitem->item);
+	  sprintf(tmpbuf,"%d", p_mylistitem->type); 	
+	  buf[1] = g_strdup(tmpbuf);
+	  sprintf(tmpbuf,"%d", p_mylistitem->level);
+	  buf[2] = g_strdup(tmpbuf);
+	  buf[3] = g_strdup(p_mylistitem->subitem);
+	  buf[4] = g_strdup(p_mylistitem->menu);
+	  buf[5] = g_strdup(p_mylistitem->preitem);	
+	  	//if(buf[0][0] == '-') break;	  	
+	  gtk_clist_insert(GTK_CLIST(list), i, buf); //-- insert item in editor list
+	  gtk_clist_set_shift( GTK_CLIST(list), i, 0, 0, (p_mylistitem->level*10)); //-- show level by amount of shift
+		++i;
+	}
+	sprintf(rememberlastitem,"%s",p_mylistitem->item);	
+	close(flbookmarksnew);
+}
 
 //-------------------------------------------------------------------------------------------
 void
@@ -47,7 +247,7 @@ addsubitme(GtkWidget *list, gint row)
 {
   gchar *buf[1][6];
   ++row;
-  buf[0][0] = g_strdup(" ");
+  buf[0][0] = g_strdup("");
   buf[0][1] = g_strdup("1");
   buf[0][2] = g_strdup("0");
   buf[0][3] = g_strdup(" ");
@@ -61,43 +261,47 @@ addsubitme(GtkWidget *list, gint row)
 
 //-------------------------------------------------------------------------------------------
 void
+deleteitem(GtkWidget *list)
+{
+   gtk_clist_remove(GTK_CLIST(list), currentrow); //-- remove current row
+   setbuttonson(list,true);
+}
+
+//-------------------------------------------------------------------------------------------
+void
 addverse(GtkWidget *list, gint row, gchar *item)
 {
-  gchar *buf[1][6],
-  			*tmpbuf;
+  gchar 		*buf[6],
+  					*tmpbuf;
 
-  buf[0][0] = g_strdup(item);
-  buf[0][1] = g_strdup("0");
-  gtk_clist_get_text(GTK_CLIST(list), row, 2, &tmpbuf); //-- get item from list
-  buf[0][2] = g_strdup(tmpbuf);
+	
+  buf[0] = g_strdup(item);  //-- set item to verse
+
+  buf[1] = g_strdup("0");     //-- set type to item (0)
+
+  gtk_clist_get_text(GTK_CLIST(list), row, 2, &tmpbuf); //-- get level from previous item in list
+  buf[2] = g_strdup(tmpbuf);
+
   gtk_clist_get_text(GTK_CLIST(list), row, 3, &tmpbuf); //-- get item from list
-  buf[0][3] = g_strdup(tmpbuf);
+  buf[3] = g_strdup(tmpbuf);
+
   gtk_clist_get_text(GTK_CLIST(list), row, 4, &tmpbuf); //-- get item from list
-  buf[0][4] = g_strdup(tmpbuf);
+  buf[4] = g_strdup(tmpbuf);
+
   gtk_clist_get_text(GTK_CLIST(list), row, 0, &tmpbuf); //-- get item from list
-  buf[0][5] = g_strdup(tmpbuf);
+  buf[5] = g_strdup(tmpbuf);
+
   ++row;
-  gtk_clist_insert(GTK_CLIST(list), row, buf[0]); //-- insert item in new position
-	//gtk_clist_select_row(GTK_CLIST(list), row, 0); //-- seletct row (new item)	
+  gtk_clist_insert(GTK_CLIST(list), row, buf); //-- insert item in new position
 	++ibookmarks;
 	if(row < ibookmarks)
 	{
 		++row;
-		gtk_clist_get_text(GTK_CLIST(list), row, 0, &tmpbuf); //-- get item from list
-  	buf[0][0] = g_strdup(tmpbuf);  	
-  	gtk_clist_get_text(GTK_CLIST(list), row, 1, &tmpbuf); //-- get type from list
-  	buf[0][1] = g_strdup(tmpbuf);
-  	gtk_clist_get_text(GTK_CLIST(list), row, 2, &tmpbuf); //-- get level from list
-  	buf[0][2] = g_strdup(tmpbuf);
-  	gtk_clist_get_text(GTK_CLIST(list), row, 3, &tmpbuf); //-- get subitem from list
-  	buf[0][3] = g_strdup(tmpbuf);
-  	gtk_clist_get_text(GTK_CLIST(list), row, 4, &tmpbuf); //-- get menu from list
-  	buf[0][4] = g_strdup(tmpbuf);   	
-  	buf[0][5] = g_strdup(item); //---------------------- previous item
-  	if(buf[0][1][0] == 0 && buf[0][0][0] != '<') //-- change only if not a subitem and not following a <Separator>
+		getrow(list,row, buf);
+  	tmpbuf = g_strdup(item); //---------------------- previous item
+  	if(buf[1][0] == 0 && buf[0][0] != '<') //-- change only if not a subitem and not following a <Separator>
   	{
-  		gtk_clist_remove(GTK_CLIST(list), row); //-- remove item
-  		gtk_clist_insert(GTK_CLIST(list), row, buf[0]); //-- insert item in new position
+  		gtk_clist_set_text(GTK_CLIST(list), row, 5,tmpbuf);
   	}
   }
 	gtk_clist_select_row(GTK_CLIST(list), row-1, 0); //-- seletct row (new item)	
@@ -118,17 +322,16 @@ GtkWidget *
 createListEditor(void) //-- init ListEditor
 {
 		GtkWidget *ListEditor,
-							*text;
-		
+							*text; 		
 		
 		listMgr					= new SWMgr();
 		listMod					= NULL;
 		
-		
+		p_mylistitem = &mylistitem;
 		ListEditor = create_ListEditor();
 		text = lookup_widget(ListEditor,"text7");
 		ModMap::iterator it;  //-- sword manager iterator
-		//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(searchDlg,"txtSearch")) , TRUE ); //-- set text window to word wrap
+		gtk_text_set_word_wrap(GTK_TEXT (text), TRUE ); //-- set text window to word wrap
 		GBFlistDisplay = new GTKInterlinearDisp(text); //-- set sword display
     	//--------------------------------------------------------------------------------------- searchmodule	
 		for (it = listMgr->Modules.begin(); it != listMgr->Modules.end(); it++) //-- iterator through modules
@@ -152,6 +355,16 @@ createListEditor(void) //-- init ListEditor
 
 //-------------------------------------------------------------------------------------------
 void
+editbookmarks(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
+{
+	GtkWidget *list;
+	
+	list = lookup_widget(editdlg,"clLElist");
+	loadbookmarksnew(list);
+}
+
+//-------------------------------------------------------------------------------------------
+void
 destroyListEditor(void) //-- destroy ListEditor
 {
 	delete listMgr;
@@ -161,29 +374,63 @@ destroyListEditor(void) //-- destroy ListEditor
 
 //-----------------------------------------------------------------------------------------------
 void
+applychanges(GtkWidget *widget)
+{
+  GtkWidget *listeditor,
+  					*list;
+  gchar			tmpbuf[255];
+  					
+  listeditor = lookup_widget(widget, "listeditor");
+  list = lookup_widget(listeditor, "clLElist");
+  editbookmarksSave(listeditor);  //-- save to file so we don't forget -- local
+
+	sprintf(tmpbuf,"%s%s", "_Bookmarks/","What must I do to be saved?");
+	removemenuitems(MainFrm, tmpbuf, ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
+  //sprintf(tmpbuf,"%s%s", "_Bookmarks/",remembersubtree);
+  addseparator(MainFrm, "_Bookmarks/Edit Bookmarks"); //-- add Separator it was deleted with old menus
+  loadbookmarks_programstart(); //-- let's show what we did -- filestuff.cpp
+  loadbookmarksnew(list);
+  setbuttonson(listeditor,false);
+}
+
+//-----------------------------------------------------------------------------------------------
+void
 applylistchanges(GtkWidget *widget, gint row)
 {
   GtkWidget *editor,
   					*entry,
   					*list;
-  gchar			*buf[1][6];  //-- pointer to string storage
+  gchar			*buf[6];  //-- pointer to string storage
+  gint			level;
+
 
   editor = gtk_widget_get_toplevel(widget); //-- set pointer to editor dialog
   list =  lookup_widget(editor,"clLElist");  //-- get item list
+  getrow(list,row,buf);
+
   entry = lookup_widget(editor,"entryListItem");  //-- get item entry
-  buf[0][0]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-  entry = lookup_widget(editor,"entryType");  //-- get item entry
-  buf[0][1]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-  entry = lookup_widget(editor,"entryLevel");  //-- get item entry
-  buf[0][2]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-  entry = lookup_widget(editor,"entrySubitem");  //-- get item entry
-  buf[0][3]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-  entry = lookup_widget(editor,"entryMenu");  //-- get item entry
-  buf[0][4]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
-  entry = lookup_widget(editor,"entryPreitem");  //-- get item entry
-  buf[0][5]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+  buf[0]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+
+  entry = lookup_widget(editor,"entryType");  //-- get type entry
+  buf[1]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+
+  entry = lookup_widget(editor,"entryLevel");  //-- get level entry
+  buf[2]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+  level = atoi(buf[2]);
+  /*
+  entry = lookup_widget(editor,"entrySubitem");  //-- get subitem entry
+  buf[3]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+
+  entry = lookup_widget(editor,"entryMenu");  //-- get menu entry
+  buf[4]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+
+  entry = lookup_widget(editor,"entryPreitem");  //-- get preitem entry
+  buf[5]= g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
+  */
   gtk_clist_remove(GTK_CLIST(list), row); //-- remove item from current position
-	gtk_clist_insert(GTK_CLIST(list), row, buf[0]); //-- insert item in new position
+
+	gtk_clist_insert(GTK_CLIST(list), row, buf); //-- insert item in new position
+	gtk_clist_set_shift( GTK_CLIST(list), row, 0, 0, (level*10)); //-- set indent
 	gtk_clist_select_row(GTK_CLIST(list), row, 0); //-- seletct row (same item)
 }
 //-----------------------------------------------------------------------------------------------
@@ -192,32 +439,83 @@ selectrow(GtkWidget *list, gint row, gint column)
 {
 	GtkWidget *editor,
 						*entry;
-	gchar 		*buf;	
-				
+	gchar 		*buf,
+						*submenu;	
+	gint			level,
+						type;	
+	currentrow = row;	
 	editor = gtk_widget_get_toplevel(list); //-- set pointer to editor dialog
 	entry = lookup_widget(editor,"entryListItem");  //-- get item entry
+	
 	gtk_clist_get_text(GTK_CLIST(list), row, 0, &buf); //-- get item from list
+	submenu = g_strdup(buf);
 	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry
 	
 	entry = lookup_widget(editor,"entryType");  //-- get item entry
 	gtk_clist_get_text(GTK_CLIST(list), row, 1, &buf); //-- get item from list
+	//type = atoi(buf);
 	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry
 	
 	entry = lookup_widget(editor,"entryLevel");  //-- get item entry
 	gtk_clist_get_text(GTK_CLIST(list), row,2, &buf); //-- get item from list
-	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry
-	
+	//level = (atoi(buf)+1);
+	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry 	
+	/*
 	entry = lookup_widget(editor,"entrySubitem");  //-- get item entry
 	gtk_clist_get_text(GTK_CLIST(list), row, 3, &buf); //-- get item from list
 	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry
 	
 	entry = lookup_widget(editor,"entryMenu");  //-- get item entry
-	gtk_clist_get_text(GTK_CLIST(list), row,4, &buf); //-- get item from list
+	gtk_clist_get_text(GTK_CLIST(list), row, 4, &buf); //-- get item from list
 	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry
 	
 	entry = lookup_widget(editor,"entryPreitem");  //-- get item entry
 	gtk_clist_get_text(GTK_CLIST(list), row, 5, &buf); //-- get item from list
 	gtk_entry_set_text(GTK_ENTRY(entry),buf);  	//-- put item into ListItem entry
+	*/
+}
+
+//-----------------------------------------------------------------------------------------------
+gint                 //-- for finding sub items up
+findpresubitem(GtkWidget *list, gint row, gint ilevel)
+{
+  gint 	i,
+  			level;
+  gchar	*buf,
+  			tmpbuf[80];
+
+	for(i=row-1; i > 0; i--)
+	{
+		 gtk_clist_get_text(GTK_CLIST(list), i, 2, &buf);
+		 level = atoi(buf);
+		
+		 if(level == ilevel) return(i);
+	}
+	return(0);
+}
+
+//-----------------------------------------------------------------------------------------------
+gint                 //-- for finding sub items up
+findnextsubitem(GtkWidget *list, gint row, gint ilevel)
+{
+  gint 	i,
+  			level,
+  			howmany;
+  gchar	*buf,
+  			tmpbuf[80];
+
+	for(i=row+1; i < GTK_CLIST(list)->rows; i++)
+	{
+		gtk_clist_get_text(GTK_CLIST(list), i, 2, &buf);
+	 	level = atoi(buf);
+		
+		if(level == ilevel)
+		{
+			howmany = findhowmany(list, i); 			
+			return(i+howmany);
+		}	
+	}
+	return(0);
 }
 
 //-----------------------------------------------------------------------------------------------
@@ -225,700 +523,1676 @@ void                   //-- for moving list items up and down - and adding and r
 movelistitem(GtkWidget *widget, gint direction, gint listrow)
 {
 	GtkWidget *editor, //-- pointer to list editor
-						*list; //-- pointer to list
-	gchar			*buf[1][6],  //-- pointer to string storage
+						*list;						
+	gchar			*buf[6],  //-- pointer to string storage
+						*prebuf[6], //-- item before
+						*nextbuf[6],//-- item after
 						*tmpbuf, //-- pointer to string storage
 						listbuf[255], //-- string storage
-						newbuf[255];  //-- string storage
+						newbuf[255],  //-- string storage
+						mybuf[80];
 	gint 			ilevel, //-- for level item
+						newrow,
 						i;	  //-- for counting
-								
+	LISTROW 	*items;
+//	GList 		*items;
+	
 	editor = gtk_widget_get_toplevel(widget); //-- set pointer to editor dialog
-	list =  lookup_widget(editor,"clLElist");  //-- get item list
-	//---- read items from list so we can move them or show changes
-	gtk_clist_get_text(GTK_CLIST(list), listrow, 0, &tmpbuf); //-- get item from list
-	buf[0][0] = g_strdup(tmpbuf);
-	gtk_clist_get_text(GTK_CLIST(list), listrow, 1, &tmpbuf); //-- get type from list
-	buf[0][1] = g_strdup(tmpbuf);		
-	gtk_clist_get_text(GTK_CLIST(list), listrow, 2, &tmpbuf); //-- get level from list
-	buf[0][2] = g_strdup(tmpbuf);
-	ilevel = atoi(tmpbuf);
-	gtk_clist_get_text(GTK_CLIST(list), listrow, 3, &tmpbuf); //-- get subitem from list
-	buf[0][3] = g_strdup(tmpbuf);
-	gtk_clist_get_text(GTK_CLIST(list), listrow, 4, &tmpbuf); //-- get menu from list
-	buf[0][4] = g_strdup(tmpbuf);
-	gtk_clist_get_text(GTK_CLIST(list), listrow, 5, &tmpbuf); //-- get extra item from list
-	buf[0][5] = g_strdup(tmpbuf);			
+	list = lookup_widget(widget,"clLElist");
+	getrow(list,listrow, buf); //---- read items from list so we can move them or show changes 	
+	ilevel = atoi(buf[2]);	//-- we need to know level so we can add tabs	(increment and deincrement level)
+	if(listrow > 0) getrow(list,listrow-1, prebuf);
+	
+	if(listrow < ibookmarks) getrow(list,listrow+1, nextbuf);
+	
 	switch(direction)  //-- make sure that we want to do something
 	{
-		case	0:    if(listrow > 1)  //-- don't do anything if we are in first row and press up button 	
+		case	0:    //-- up
+								if(listrow >= 1)  //-- don't do anything if we are in first row and press up button 	
 								{
-		            	gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position
-									--listrow;  //-- subtract one form our position
+		            	if(listrow == 1 && (atoi(buf[1]) == 0)) return; //-- if item is not a sumitem (submenu) do nothing
+		            	
+									/*
+									if(listrow == 1 && (atoi(buf[1]) == 1))  //-- if secound item is a sumitem (submenu)
+									{
+									   buf[2] = g_strdup("0");
+									   buf[3] = g_strdup("");
+									   buf[5] = g_strdup("Edit Bookmarks");
+									   tmpbuf = g_strdup(buf[0]);
+									   gtk_clist_set_text(GTK_CLIST(list), 0, 5,tmpbuf);
+									   --listrow; //-- subtract one form our position
+									   break; 									
+									} */
+									if(atoi(buf[1]) == 1) //-- we are moving a sub item
+									{
+										gint 	lrow,
+													howmany;
+										
+										lrow = listrow;																			
+									  newrow = findpresubitem(list, lrow, ilevel);
+									
+									  howmany = findhowmany(list, lrow);
+									 	items = new LISTROW[howmany];
+									 	remove_item_and_children(list, items, lrow);
+									  //sprintf(mybuf,"%d\n",howmany);
+		 								//cout << mybuf;	
+									 	insert_items(list, items, howmany, newrow);
+									 	delete items;
+									  return;
+									}
+									else       //-- we are moving an item
+									{
+										if(atoi(prebuf[1]) == 0) //-- if we jumped an item
+									 	{
+									   	buf[2] = g_strdup(prebuf[2]);
+									   	buf[3] = g_strdup(prebuf[3]);
+									   	buf[5] = g_strdup(prebuf[5]);
+									   	tmpbuf = g_strdup(buf[0]);
+									   	gtk_clist_set_text(GTK_CLIST(list), listrow-1, 5,tmpbuf);
+									  }
+									  else   //-- if we jumped a sub item
+									  {
+									  	getrow(list,listrow-2, prebuf);
+									  	if(atoi(prebuf[1]) == 0) //-- if row we will follow is an item
+									  	{
+									  		buf[2] = g_strdup(prebuf[2]);
+									   		buf[3] = g_strdup(prebuf[3]);
+									   		buf[5] = g_strdup(prebuf[0]);	
+									   								   		
+									   	}
+									   	else   //-- if row we will follow is a sub item
+									   	{
+									   		sprintf(buf[2],"%d",(atoi(prebuf[2])+1)); //-- move one to the right of the sub item
+									   		buf[3] = g_strdup(prebuf[0]);
+									   		buf[5] = g_strdup("");			
+									   	}
+									   	getcolumn(list, listrow, 1, tmpbuf);
+									   	if(atoi(tmpbuf) == 0) //-- what we left behind was an item not a sub item
+									   	{
+									   		tmpbuf = g_strdup("");
+									   		gtk_clist_set_text(GTK_CLIST(list), listrow, 5,tmpbuf); //-- we have already removed our row so listrom now points to the row we left behind
+									   	}			
+									  }
+									}
+									gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position
+									--listrow; //-- subtract one form our position
 								}
 								else return;
 								break;  	
-		case  1:    if(listrow < ibookmarks) //-- don't do anything if we are in last row and press down button
+		case  1:    //-- down
+		 						if(listrow < GTK_CLIST(list)->rows) //-- don't do anything if we are in last row and press down button
 								{
+									if(atoi(buf[1]) == 1) //-- we are moving a sub item
+									{
+										gint 	lrow,
+													howmany;
+										
+										lrow = listrow;																			
+									  newrow = findnextsubitem(list, lrow, ilevel);
+									
+									  howmany = findhowmany(list, lrow);
+									  newrow = newrow - howmany;
+									 	items = new LISTROW[howmany];
+									 	remove_item_and_children(list, items, lrow);
+									  sprintf(mybuf,"howmany = %d\n newrow = %d\n",howmany,newrow);
+		 								cout << mybuf;	
+									 	insert_items(list, items, howmany, newrow);
+									 	delete items;
+									  return;
+									}
+									if(atoi(buf[1]) == 0)
+									{
+										gint l;
+										
+										if(atoi(buf[2])!= atoi(nextbuf[2])) return; //-- do not move item to a new level
+									}
 									gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position
 									++listrow; //-- add one to listrow 																		
 								}
 								else return;
 								break;
 		
-		case  2:		if(buf[0][0][0] == '\t')   //-- don't do anything is there is not a tab
+		case  2:		if(ilevel > 0)
 								{
-	   							for(i=0;i<(strlen(buf[0][0]))-1;i++) //-- remove one tab
-	   							{
-	   	  						listbuf[i] = buf[0][0][i+1];
-	   	  						listbuf[i+1] = '\0';
-	   							}
-									gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position
-									buf[0][0] = g_strdup(listbuf);
 									--ilevel;
-									sprintf(buf[0][2],"%d",ilevel);
-								}
-								else return;
+									sprintf(buf[2],"%d",ilevel);
+									gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position								
+								} else return;								
 								break;
 		
-		case  3:    sprintf(listbuf,"%s",buf[0][0]);
-								if(listbuf[2] == '\t') return; //-- do nothing if we have three tabs
-								newbuf[0] = '\t';
-	
-								for(i=1;i<(strlen(listbuf))+1;i++) //-- add one tab
-								{ 	
-	  							newbuf[i] = listbuf[i-1];
-	  							newbuf[i+1] = '\0';
-								} 	
-								gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position
-								buf[0][0] = g_strdup(newbuf);
-								++ilevel;
-								sprintf(buf[0][2],"%d",ilevel);	
+		case  3:    if(ilevel < 3)
+								{
+									++ilevel;
+									sprintf(buf[2],"%d",ilevel);
+									gtk_clist_remove(GTK_CLIST(list), listrow); //-- remove item from current position								
+								}
+								else return;										
 		 						break;   //-- stay if right button pressed
 		
 		default: 		return;
 	} 	
-	gtk_clist_insert(GTK_CLIST(list), listrow, buf[0]); //-- insert item in new position
+	setbuttonson(editor, true);	
+	gtk_clist_insert(GTK_CLIST(list), listrow, buf); //-- insert item in new position
+	gtk_clist_set_shift( GTK_CLIST(list), listrow, 0, 0, (ilevel*10));
 	gtk_clist_select_row(GTK_CLIST(list), listrow, 0); //-- seletct row (same item)
 }
 
+//-----------------------------------------------------------------------------------------------
+void
+getrow(GtkWidget *list, gint listrow, gchar *buf[6])
+{
+	gchar *tmpbuf;
+	//---- read items from list so we can move them or show changes
+	gtk_clist_get_text(GTK_CLIST(list), listrow, 0, &tmpbuf); //-- get item from list
+	buf[0] = g_strdup(tmpbuf);
+	gtk_clist_get_text(GTK_CLIST(list), listrow, 1, &tmpbuf); //-- get type from list
+	buf[1] = g_strdup(tmpbuf);		
+	gtk_clist_get_text(GTK_CLIST(list), listrow, 2, &tmpbuf); //-- get level from list
+	buf[2] = g_strdup(tmpbuf);	
+	gtk_clist_get_text(GTK_CLIST(list), listrow, 3, &tmpbuf); //-- get subitem from list
+	buf[3] = g_strdup(tmpbuf);
+	gtk_clist_get_text(GTK_CLIST(list), listrow, 4, &tmpbuf); //-- get menu from list
+	buf[4] = g_strdup(tmpbuf);
+	gtk_clist_get_text(GTK_CLIST(list), listrow, 5, &tmpbuf); //-- get extra item from list
+	buf[5] = g_strdup(tmpbuf);
+}
+
+//-----------------------------------------------------------------------------------------------
+void
+getcolumn(GtkWidget *list, gint row, gint column, gchar *buf)
+{
+	//---- read item from list
+	gtk_clist_get_text(GTK_CLIST(list), row, column, &buf); //-- get item from list  	
+}
+
+//--------------------------------------------------------------------------------------------
+//--
+gint
+findhowmany(GtkWidget * clist, gint row)
+{
+  gchar 	*buf[6];
+  gint 		level,
+  				type;
+  gchar tmpbuf[80];
+  gint i=1;
+
+  getrow(clist,row,buf);
+  level = atoi(buf[2]);
+  type =  atoi(buf[1]);
+  ++row;
+  while (row < GTK_CLIST (clist)->rows)
+  {
+      getrow(clist,row,buf);
+  		if (atoi(buf[2]) > level)
+			{
+				++row;
+				++i;			  		
+			}
+      else break;
+  }
+  //delete item;
+  return i;
+}
+
+//--------------------------------------------------------------------------------------------
+//-- This removes an item and its children from the clist, and returns a list of the removed items. (code from glade_menu_editor.c)
+void
+remove_item_and_children (GtkWidget * clist, LISTROW *items, gint row)
+{
+  gchar 	*buf[6];
+  gint 		level,
+  				type;
+  gchar tmpbuf[80];
+  gint i=0;
+
+  getrow(clist,row,buf);
+  level = atoi(buf[2]);
+  type =  atoi(buf[1]);
+  items[i].item = g_strdup(buf[0]);
+  items[i].type = type;
+  items[i].level = level;
+  gtk_clist_remove (GTK_CLIST (clist), row);
+
+  while (row < GTK_CLIST (clist)->rows)
+  {
+      getrow(clist,row,buf);
+      ++i;
+  		if (atoi(buf[2]) > level)
+			{
+			  items[i].item = g_strdup(buf[0]);
+  			items[i].type = atoi(buf[1]);
+  			items[i].level = atoi(buf[2]);
+	  		gtk_clist_remove (GTK_CLIST (clist), row);	  		
+			}
+      else break;
+  }
+  //delete item;
+  return;
+}
+
+//--------------------------------------------------------------------------------------------
+//-- This inserts the given list of items at the given position in the clist. (code from glade_menu_editor.c)
+static void
+insert_items (GtkWidget * clist, LISTROW *items, gint howmany, gint row)
+{
+  LISTROW *item;
+  gint i=0;
+
+  while (i < howmany)
+    {
+    	item = &items[i];
+      insert_item (GTK_CLIST (clist), item, row++);
+      ++i;
+    }
+}
+
+
+/* This adds the item to the clist at the given position. */
+static void
+insert_item (GtkCList * clist, LISTROW *item, gint row)
+{
+  gchar *buf[6],
+  			tmpbuf[80];
+  gint	level;
+  //LISTROW *item;
+
+ // item = &rowitem;
+  /* Empty labels are understood to be separators. */
+
+  buf[0] = g_strdup(item->item);
+  sprintf(tmpbuf, "%d", item->type);
+  buf[1] = g_strdup(tmpbuf);
+  sprintf(tmpbuf, "%d", item->level);
+  buf[2] = g_strdup(tmpbuf);
+  level = item->level;
+  buf[3] = g_strdup("");
+  buf[4] = g_strdup("");
+  buf[5] = g_strdup("");
+  if (row >= 0)
+    gtk_clist_insert (GTK_CLIST (clist), row, buf);
+  else
+    row = gtk_clist_append (GTK_CLIST (clist), buf);
+
+  //gtk_clist_set_row_data (GTK_CLIST (clist), row, item);
+  gtk_clist_set_shift (GTK_CLIST (clist), row, 0, 0,(level * 10));
+}
+
+//====================================== create ListEditor Dialog ===============================
+//-----------------------------------------------------------------------------------------------
+
+static GnomeUIInfo file2_menu_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_NEW_ITEM ("_New", NULL, on_new1_activate, NULL),
+  GNOMEUIINFO_MENU_OPEN_ITEM (on_open1_activate, NULL),
+  GNOMEUIINFO_MENU_SAVE_ITEM (on_save1_activate, NULL),
+  GNOMEUIINFO_MENU_SAVE_AS_ITEM (on_save_as1_activate, NULL),
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_MENU_CLOSE_ITEM (on_close1_activate, NULL),
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_MENU_EXIT_ITEM (on_exit1_activate, NULL),
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo bookmarks1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo menubar1_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_FILE_TREE (file2_menu_uiinfo),
+  {
+    GNOME_APP_UI_SUBTREE, "_Bookmarks",
+    NULL,
+    bookmarks1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  GNOMEUIINFO_END
+};
 
 GtkWidget*
 create_ListEditor (void)
 {
-  GtkWidget *ListEditor;
-  GtkWidget *dialog_vbox5;
-  GtkWidget *frame24;
-  GtkWidget *toolbar26;
+  GtkWidget *listeditor;
+  GtkWidget *dialog_vbox1;
+  GtkWidget *menubar1;
+  GtkWidget *handlebox1;
+  GtkWidget *toolbar3;
   GtkWidget *tmp_toolbar_icon;
-  GtkWidget *btnVerseListNew;
-  GtkWidget *btnVerseListOpen;
-  GtkWidget *btnVerseListSave;
-  GtkWidget *btnVerseListPrint;
-  GtkWidget *hbox22;
-  GtkWidget *vbox26;
-  GtkWidget *scrolledwindow34;
+  GtkWidget *btnLEnew;
+  GtkWidget *btnLEopen;
+  GtkWidget *btnLEclose;
+  GtkWidget *btnLEsave;
+  GtkWidget *vseparator4;
+  GtkWidget *btnLErefresh;
+  GtkWidget *vseparator6;
+  GtkWidget *btnLEprint;
+  GtkWidget *hbox1;
+  GtkWidget *frame3;
+  GtkWidget *vbox1;
+  GtkWidget *scrolledwindow1;
   GtkWidget *clLElist;
-  GtkWidget *label103;
-  GtkWidget *label104;
-  GtkWidget *label105;
-  GtkWidget *label106;
-  GtkWidget *label107;
-  GtkWidget *label108;
-  GtkWidget *toolbar29;
+  GtkWidget *label1;
+  GtkWidget *label2;
+  GtkWidget *label3;
+  GtkWidget *label4;
+  GtkWidget *label5;
+  GtkWidget *toolbar1;
   GtkWidget *btnLEup;
   GtkWidget *btnLEdown;
   GtkWidget *btnLEleft;
   GtkWidget *btnLEright;
-  GtkWidget *vbox27;
-  GtkWidget *frame22;
-  GtkWidget *vbox28;
-  GtkWidget *toolbar31;
+  GtkWidget *vbox3;
+  GtkWidget *frame1;
+  GtkWidget *toolbar4;
   GtkWidget *entryVerseLookup;
-  GtkWidget *btnGotoVerse;
-  GtkWidget *toolbar32;
-  GtkWidget *combo1;
-  GtkWidget *cbLEBook;
-  GtkObject *spLEChapter_adj;
-  GtkWidget *spLEChapter;
-  GtkObject *spLEVerse_adj;
-  GtkWidget *spLEVerse;
-  GtkWidget *frame23;
-  GtkWidget *vbox29;
+  GtkWidget *btnLEgotoverse;
+  GtkWidget *frame2;
+  GtkWidget *vbox4;
+  GtkWidget *hbox2;
+  GtkWidget *label19;
   GtkWidget *entryListItem;
-  GtkWidget *toolbar33;
+  GtkWidget *hbox3;
+  GtkWidget *label20;
+  GtkWidget *entryType;
+  GtkWidget *label21;
+  GtkWidget *entryLevel;
+  GtkWidget *toolbar6;
   GtkWidget *btnLEAddVerse;
   GtkWidget *btnLEAddItem;
-  GtkWidget *btnLEmakesub;
-  GtkWidget *btnLEDelete;
-  GtkWidget *hbox23;
-  GtkWidget *label109;
-  GtkWidget *entryType;
-  GtkWidget *label110;
-  GtkWidget *entryLevel;
-  GtkWidget *table8;
-  GtkWidget *label111;
-  GtkWidget *label112;
-  GtkWidget *entrySubitem;
-  GtkWidget *entryMenu;
-  GtkWidget *label113;
-  GtkWidget *entryPreitem;
-  GtkWidget *hbuttonbox1;
+  GtkWidget *btnLEdelete;
+  GtkWidget *toolbar9;
   GtkWidget *btnLEapplylistchanges;
-  GtkWidget *btnLEcancelistchanges;
-  GtkWidget *scrolledwindow33;
+  GtkWidget *frame4;
+  GtkWidget *scrolledwindow3;
   GtkWidget *text7;
-  GtkWidget *dialog_action_area5;
+  GtkWidget *dialog_action_area1;
   GtkWidget *btnLEok;
   GtkWidget *btnLEapply;
   GtkWidget *btnLEcancel;
 
-  ListEditor = gnome_dialog_new ("GnomeSword - List Editor", NULL);
-  gtk_object_set_data (GTK_OBJECT (ListEditor), "ListEditor", ListEditor);
-  gtk_container_set_border_width (GTK_CONTAINER (ListEditor), 4);
-  gtk_window_set_policy (GTK_WINDOW (ListEditor), FALSE, FALSE, TRUE);
+  listeditor = gnome_dialog_new ("GnomeSword - ListEditor", NULL);
+  gtk_object_set_data (GTK_OBJECT (listeditor), "listeditor", listeditor);
+  gtk_container_set_border_width (GTK_CONTAINER (listeditor), 4);
+  GTK_WINDOW (listeditor)->type = GTK_WINDOW_DIALOG;
+  gtk_window_set_policy (GTK_WINDOW (listeditor), FALSE, FALSE, FALSE);
 
-  dialog_vbox5 = GNOME_DIALOG (ListEditor)->vbox;
-  gtk_object_set_data (GTK_OBJECT (ListEditor), "dialog_vbox5", dialog_vbox5);
-  gtk_widget_show (dialog_vbox5);
+  dialog_vbox1 = GNOME_DIALOG (listeditor)->vbox;
+  gtk_object_set_data (GTK_OBJECT (listeditor), "dialog_vbox1", dialog_vbox1);
+  gtk_widget_show (dialog_vbox1);
 
-  frame24 = gtk_frame_new (NULL);
-  gtk_widget_ref (frame24);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "frame24", frame24,
+  menubar1 = gtk_menu_bar_new ();
+  gtk_widget_ref (menubar1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "menubar1", menubar1,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (frame24);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox5), frame24, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), menubar1, FALSE, FALSE, 0);
+  gnome_app_fill_menu (GTK_MENU_SHELL (menubar1), menubar1_uiinfo,
+                       NULL, FALSE, 0);
 
-  toolbar26 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_widget_ref (toolbar26);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "toolbar26", toolbar26,
+  gtk_widget_ref (menubar1_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "file2",
+                            menubar1_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (toolbar26);
-  gtk_container_add (GTK_CONTAINER (frame24), toolbar26);
-  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar26), GTK_RELIEF_NONE);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_NEW);
-  btnVerseListNew = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar26),
+  gtk_widget_ref (file2_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "new1",
+                            file2_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "open1",
+                            file2_menu_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "save1",
+                            file2_menu_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "save_as1",
+                            file2_menu_uiinfo[3].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "separator2",
+                            file2_menu_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[5].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "close1",
+                            file2_menu_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[6].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "separator3",
+                            file2_menu_uiinfo[6].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[7].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "exit1",
+                            file2_menu_uiinfo[7].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (menubar1_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "bookmarks1",
+                            menubar1_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (bookmarks1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "separator1",
+                            bookmarks1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  handlebox1 = gtk_handle_box_new ();
+  gtk_widget_ref (handlebox1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "handlebox1", handlebox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (handlebox1);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), handlebox1, TRUE, TRUE, 0);
+  gtk_widget_set_usize (handlebox1, -2, 33);
+
+  toolbar3 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar3", toolbar3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar3);
+  gtk_container_add (GTK_CONTAINER (handlebox1), toolbar3);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar3), GTK_RELIEF_NONE);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_NEW);
+  btnLEnew = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "New List",
-                                "Start New Verse List", NULL,
+                                "button18",
+                                NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnVerseListNew);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnVerseListNew", btnVerseListNew,
+  gtk_widget_ref (btnLEnew);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEnew", btnLEnew,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnVerseListNew);
+  gtk_widget_set_sensitive (btnLEnew, FALSE);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_OPEN);
-  btnVerseListOpen = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar26),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_OPEN);
+  btnLEopen = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "Open List",
-                                "Open Verse List", NULL,
+                                "button19",
+                                NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnVerseListOpen);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnVerseListOpen", btnVerseListOpen,
+  gtk_widget_ref (btnLEopen);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEopen", btnLEopen,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnVerseListOpen);
+  gtk_widget_set_sensitive (btnLEopen, FALSE);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_SAVE);
-  btnVerseListSave = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar26),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_CLOSE);
+  btnLEclose = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "Save List",
-                                "Save Verse List", NULL,
+                                "button20",
+                                NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnVerseListSave);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnVerseListSave", btnVerseListSave,
+  gtk_widget_ref (btnLEclose);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEclose", btnLEclose,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnVerseListSave);
+  gtk_widget_set_sensitive (btnLEclose, FALSE);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_PRINT);
-  btnVerseListPrint = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar26),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_SAVE);
+  btnLEsave = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "Print List",
-                                "Print Verse List", NULL,
+                                "button21",
+                                NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnVerseListPrint);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnVerseListPrint", btnVerseListPrint,
+  gtk_widget_ref (btnLEsave);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEsave", btnLEsave,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnVerseListPrint);
-  gtk_widget_set_sensitive (btnVerseListPrint, FALSE);
+  gtk_widget_show (btnLEsave);
 
-  hbox22 = gtk_hbox_new (FALSE, 0);
-  gtk_widget_ref (hbox22);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "hbox22", hbox22,
+  vseparator4 = gtk_vseparator_new ();
+  gtk_widget_ref (vseparator4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vseparator4", vseparator4,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (hbox22);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox5), hbox22, TRUE, TRUE, 0);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar3), vseparator4, NULL, NULL);
+  gtk_widget_set_usize (vseparator4, 5, 7);
 
-  vbox26 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox26);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "vbox26", vbox26,
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_REFRESH);
+  btnLErefresh = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button26",
+                                "Reload menu in ListEditor", NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLErefresh);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLErefresh", btnLErefresh,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox26);
-  gtk_box_pack_start (GTK_BOX (hbox22), vbox26, TRUE, TRUE, 0);
+  gtk_widget_set_sensitive (btnLErefresh, FALSE);
 
-  scrolledwindow34 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_ref (scrolledwindow34);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "scrolledwindow34", scrolledwindow34,
+  vseparator6 = gtk_vseparator_new ();
+  gtk_widget_ref (vseparator6);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vseparator6", vseparator6,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (scrolledwindow34);
-  gtk_box_pack_start (GTK_BOX (vbox26), scrolledwindow34, TRUE, TRUE, 0);
-  gtk_widget_set_usize (scrolledwindow34, 240, 206);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow34), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar3), vseparator6, NULL, NULL);
+  gtk_widget_set_usize (vseparator6, 5, 7);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_PRINT);
+  btnLEprint = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button22",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEprint);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEprint", btnLEprint,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEprint);
+  gtk_widget_set_sensitive (btnLEprint, FALSE);
+
+  hbox1 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox1", hbox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox1);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), hbox1, TRUE, TRUE, 0);
+
+  frame3 = gtk_frame_new ("Bookmarks");
+  gtk_widget_ref (frame3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame3", frame3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame3);
+  gtk_box_pack_start (GTK_BOX (hbox1), frame3, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (frame3), 3);
+
+  vbox1 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vbox1", vbox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox1);
+  gtk_container_add (GTK_CONTAINER (frame3), vbox1);
+
+  scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "scrolledwindow1", scrolledwindow1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow1);
+  gtk_box_pack_start (GTK_BOX (vbox1), scrolledwindow1, TRUE, TRUE, 0);
+  gtk_widget_set_usize (scrolledwindow1, 225, 181);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow1), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+
+  clLElist = gtk_clist_new (5);
+  gtk_widget_ref (clLElist);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "clLElist", clLElist,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (clLElist);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow1), clLElist);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 0, 223);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 1, 80);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 2, 80);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 3, 80);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 4, 80);
+  gtk_clist_column_titles_hide (GTK_CLIST (clLElist));
+
+  label1 = gtk_label_new ("label1");
+  gtk_widget_ref (label1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label1", label1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label1);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 0, label1);
+
+  label2 = gtk_label_new ("label2");
+  gtk_widget_ref (label2);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label2", label2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label2);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 1, label2);
+
+  label3 = gtk_label_new ("label3");
+  gtk_widget_ref (label3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label3", label3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label3);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 2, label3);
+
+  label4 = gtk_label_new ("label4");
+  gtk_widget_ref (label4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label4", label4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label4);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 3, label4);
+
+  label5 = gtk_label_new ("label5");
+  gtk_widget_ref (label5);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label5", label5,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label5);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 4, label5);
+
+  toolbar1 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar1", toolbar1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar1);
+  gtk_box_pack_start (GTK_BOX (vbox1), toolbar1, FALSE, FALSE, 0);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar1), GTK_RELIEF_NONE);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_UP);
+  btnLEup = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button11",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEup);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEup", btnLEup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEup);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_DOWN);
+  btnLEdown = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button12",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEdown);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEdown", btnLEdown,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEdown);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_BACK);
+  btnLEleft = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button23",
+                                "Previous Level", NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEleft);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEleft", btnLEleft,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEleft);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_FORWARD);
+  btnLEright = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button24",
+                                "Next level", NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEright);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEright", btnLEright,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEright);
+  gtk_widget_set_usize (btnLEright, 56, -2);
+
+  vbox3 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vbox3", vbox3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox3);
+  gtk_box_pack_start (GTK_BOX (hbox1), vbox3, FALSE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox3), 3);
+
+  frame1 = gtk_frame_new ("Lookup Verse");
+  gtk_widget_ref (frame1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame1", frame1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame1);
+  gtk_box_pack_start (GTK_BOX (vbox3), frame1, FALSE, TRUE, 0);
+
+  toolbar4 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar4", toolbar4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar4);
+  gtk_container_add (GTK_CONTAINER (frame1), toolbar4);
+  gtk_widget_set_usize (toolbar4, 193, -2);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar4), GTK_RELIEF_NONE);
+
+  entryVerseLookup = gtk_entry_new ();
+  gtk_widget_ref (entryVerseLookup);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryVerseLookup", entryVerseLookup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryVerseLookup);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar4), entryVerseLookup, NULL, NULL);
+  gtk_widget_set_usize (entryVerseLookup, 172, -2);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_JUMP_TO);
+  btnLEgotoverse = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar4),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Go to Verse",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEgotoverse);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEgotoverse", btnLEgotoverse,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEgotoverse);
+
+  frame2 = gtk_frame_new ("Edit items");
+  gtk_widget_ref (frame2);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame2", frame2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame2);
+  gtk_box_pack_start (GTK_BOX (vbox3), frame2, FALSE, TRUE, 0);
+
+  vbox4 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vbox4", vbox4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox4);
+  gtk_container_add (GTK_CONTAINER (frame2), vbox4);
+
+  hbox2 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox2);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox2", hbox2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox2);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox2, FALSE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (hbox2), 2);
+
+  label19 = gtk_label_new ("item");
+  gtk_widget_ref (label19);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label19", label19,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label19);
+  gtk_box_pack_start (GTK_BOX (hbox2), label19, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label19, 46, -2);
+
+  entryListItem = gtk_entry_new ();
+  gtk_widget_ref (entryListItem);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryListItem", entryListItem,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryListItem);
+  gtk_box_pack_start (GTK_BOX (hbox2), entryListItem, TRUE, TRUE, 0);
+
+  hbox3 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox3", hbox3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox3);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox3, FALSE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (hbox3), 2);
+
+  label20 = gtk_label_new ("type");
+  gtk_widget_ref (label20);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label20", label20,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label20);
+  gtk_box_pack_start (GTK_BOX (hbox3), label20, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label20, 45, -2);
+
+  entryType = gtk_entry_new ();
+  gtk_widget_ref (entryType);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryType", entryType,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryType);
+  gtk_box_pack_start (GTK_BOX (hbox3), entryType, TRUE, TRUE, 0);
+  gtk_widget_set_usize (entryType, 47, -2);
+
+  label21 = gtk_label_new ("level");
+  gtk_widget_ref (label21);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label21", label21,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label21);
+  gtk_box_pack_start (GTK_BOX (hbox3), label21, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label21, 45, -2);
+
+  entryLevel = gtk_entry_new ();
+  gtk_widget_ref (entryLevel);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryLevel", entryLevel,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryLevel);
+  gtk_box_pack_start (GTK_BOX (hbox3), entryLevel, TRUE, TRUE, 0);
+  gtk_widget_set_usize (entryLevel, 52, -2);
+
+  toolbar6 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_TEXT);
+  gtk_widget_ref (toolbar6);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar6", toolbar6,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar6);
+  gtk_box_pack_start (GTK_BOX (vbox4), toolbar6, FALSE, FALSE, 0);
+
+  btnLEAddVerse = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar6),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Add Verse",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEAddVerse);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEAddVerse", btnLEAddVerse,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEAddVerse);
+  gtk_widget_set_usize (btnLEAddVerse, 69, -2);
+
+  btnLEAddItem = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar6),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Add Menu",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEAddItem);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEAddItem", btnLEAddItem,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEAddItem);
+
+  btnLEdelete = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar6),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Delete Item",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEdelete);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEdelete", btnLEdelete,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEdelete);
+
+  toolbar9 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_TEXT);
+  gtk_widget_ref (toolbar9);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar9", toolbar9,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar9);
+  gtk_box_pack_start (GTK_BOX (vbox4), toolbar9, FALSE, FALSE, 0);
+
+  btnLEapplylistchanges = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar9),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Apply Changes to List",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEapplylistchanges);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEapplylistchanges", btnLEapplylistchanges,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEapplylistchanges);
+  gtk_widget_set_usize (btnLEapplylistchanges, 207, -2);
+
+  frame4 = gtk_frame_new (NULL);
+  gtk_widget_ref (frame4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame4", frame4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame4);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), frame4, FALSE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (frame4), 3);
+
+  scrolledwindow3 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "scrolledwindow3", scrolledwindow3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow3);
+  gtk_container_add (GTK_CONTAINER (frame4), scrolledwindow3);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow3), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+
+  text7 = gtk_text_new (NULL, NULL);
+  gtk_widget_ref (text7);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "text7", text7,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (text7);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow3), text7);
+
+  dialog_action_area1 = GNOME_DIALOG (listeditor)->action_area;
+  gtk_object_set_data (GTK_OBJECT (listeditor), "dialog_action_area1", dialog_action_area1);
+  gtk_widget_show (dialog_action_area1);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area1), 8);
+
+  gnome_dialog_append_button (GNOME_DIALOG (listeditor), GNOME_STOCK_BUTTON_OK);
+  btnLEok = g_list_last (GNOME_DIALOG (listeditor)->buttons)->data;
+  gtk_widget_ref (btnLEok);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEok", btnLEok,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEok);
+  gtk_widget_set_sensitive (btnLEok, FALSE);
+  GTK_WIDGET_SET_FLAGS (btnLEok, GTK_CAN_DEFAULT);
+
+  gnome_dialog_append_button (GNOME_DIALOG (listeditor), GNOME_STOCK_BUTTON_APPLY);
+  btnLEapply = g_list_last (GNOME_DIALOG (listeditor)->buttons)->data;
+  gtk_widget_ref (btnLEapply);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEapply", btnLEapply,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEapply);
+  gtk_widget_set_sensitive (btnLEapply, FALSE);
+  GTK_WIDGET_SET_FLAGS (btnLEapply, GTK_CAN_DEFAULT);
+
+  gnome_dialog_append_button (GNOME_DIALOG (listeditor), GNOME_STOCK_BUTTON_CANCEL);
+  btnLEcancel = g_list_last (GNOME_DIALOG (listeditor)->buttons)->data;
+  gtk_widget_ref (btnLEcancel);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEcancel", btnLEcancel,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEcancel);
+  GTK_WIDGET_SET_FLAGS (btnLEcancel, GTK_CAN_DEFAULT);
+
+/*
+static GnomeUIInfo file2_menu_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_NEW_ITEM ("_New", NULL, on_new1_activate, NULL),
+  GNOMEUIINFO_MENU_OPEN_ITEM (on_open1_activate, NULL),
+  GNOMEUIINFO_MENU_SAVE_ITEM (on_save1_activate, NULL),
+  GNOMEUIINFO_MENU_SAVE_AS_ITEM (on_save_as1_activate, NULL),
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_MENU_CLOSE_ITEM (on_close1_activate, NULL),
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_MENU_EXIT_ITEM (on_exit1_activate, NULL),
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo bookmarks1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo menubar1_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_FILE_TREE (file2_menu_uiinfo),
+  {
+    GNOME_APP_UI_SUBTREE, "_Bookmarks",
+    NULL,
+    bookmarks1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+GtkWidget*
+create_ListEditor (void)
+{
+  GtkWidget *listeditor;
+  GtkWidget *dialog_vbox1;
+  GtkWidget *menubar1;
+  GtkWidget *handlebox1;
+  GtkWidget *toolbar3;
+  GtkWidget *tmp_toolbar_icon;
+  GtkWidget *btnLEnew;
+  GtkWidget *btnLEopen;
+  GtkWidget *btnLEclose;
+  GtkWidget *btnLEsave;
+  GtkWidget *vseparator4;
+  GtkWidget *btnLErefresh;
+  GtkWidget *vseparator6;
+  GtkWidget *btnLEprint;
+  GtkWidget *hbox1;
+  GtkWidget *frame3;
+  GtkWidget *vbox1;
+  GtkWidget *scrolledwindow1;
+  GtkWidget *clLElist;
+  GtkWidget *label1;
+  GtkWidget *label2;
+  GtkWidget *label3;
+  GtkWidget *label4;
+  GtkWidget *label5;
+  GtkWidget *toolbar1;
+  GtkWidget *btnLEup;
+  GtkWidget *btnLEdown;
+  GtkWidget *btnLEleft;
+  GtkWidget *btnLEright;
+  GtkWidget *vbox3;
+  GtkWidget *frame1;
+  GtkWidget *toolbar4;
+  GtkWidget *entryVerseLookup;
+  GtkWidget *btnLEgotoverse;
+  GtkWidget *frame2;
+  GtkWidget *vbox4;
+  GtkWidget *hbox2;
+  GtkWidget *label19;
+  GtkWidget *entryListItem;
+  GtkWidget *hbox3;
+  GtkWidget *label20;
+  GtkWidget *entryType;
+  GtkWidget *label21;
+  GtkWidget *entryLevel;
+  GtkWidget *hbox4;
+  GtkWidget *label22;
+  GtkWidget *entryPreitem;
+  GtkWidget *hbox5;
+  GtkWidget *label23;
+  GtkWidget *entrySubitem;
+  GtkWidget *hbox6;
+  GtkWidget *label24;
+  GtkWidget *entryMenu;
+  GtkWidget *toolbar6;
+  GtkWidget *btnLEAddVerse;
+  GtkWidget *btnLEAddItem;
+  GtkWidget *btnLEdelete;
+  GtkWidget *toolbar9;
+  GtkWidget *btnLEapplylistchanges;
+  GtkWidget *frame4;
+  GtkWidget *scrolledwindow3;
+  GtkWidget *text7;
+  GtkWidget *dialog_action_area1;
+  GtkWidget *btnLEok;
+  GtkWidget *btnLEapply;
+  GtkWidget *btnLEcancel;
+
+  listeditor = gnome_dialog_new ("GnomeSword - ListEditor", NULL);
+  gtk_object_set_data (GTK_OBJECT (listeditor), "listeditor", listeditor);
+  gtk_container_set_border_width (GTK_CONTAINER (listeditor), 4);
+  GTK_WINDOW (listeditor)->type = GTK_WINDOW_DIALOG;
+  gtk_window_set_policy (GTK_WINDOW (listeditor), FALSE, FALSE, FALSE);
+
+  dialog_vbox1 = GNOME_DIALOG (listeditor)->vbox;
+  gtk_object_set_data (GTK_OBJECT (listeditor), "dialog_vbox1", dialog_vbox1);
+  gtk_widget_show (dialog_vbox1);
+
+  menubar1 = gtk_menu_bar_new ();
+  gtk_widget_ref (menubar1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "menubar1", menubar1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (menubar1);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), menubar1, FALSE, FALSE, 0);
+  gnome_app_fill_menu (GTK_MENU_SHELL (menubar1), menubar1_uiinfo,
+                       NULL, FALSE, 0);
+
+  gtk_widget_ref (menubar1_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "file2",
+                            menubar1_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "new1",
+                            file2_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "open1",
+                            file2_menu_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "save1",
+                            file2_menu_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "save_as1",
+                            file2_menu_uiinfo[3].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "separator2",
+                            file2_menu_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[5].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "close1",
+                            file2_menu_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[6].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "separator3",
+                            file2_menu_uiinfo[6].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (file2_menu_uiinfo[7].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "exit1",
+                            file2_menu_uiinfo[7].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (menubar1_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "bookmarks1",
+                            menubar1_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (bookmarks1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "separator1",
+                            bookmarks1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  handlebox1 = gtk_handle_box_new ();
+  gtk_widget_ref (handlebox1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "handlebox1", handlebox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (handlebox1);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), handlebox1, TRUE, TRUE, 0);
+  gtk_widget_set_usize (handlebox1, -2, 33);
+
+  toolbar3 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar3", toolbar3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar3);
+  gtk_container_add (GTK_CONTAINER (handlebox1), toolbar3);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar3), GTK_RELIEF_NONE);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_NEW);
+  btnLEnew = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button18",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEnew);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEnew", btnLEnew,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEnew);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_OPEN);
+  btnLEopen = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button19",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEopen);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEopen", btnLEopen,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEopen);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_CLOSE);
+  btnLEclose = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button20",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEclose);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEclose", btnLEclose,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEclose);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_SAVE);
+  btnLEsave = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button21",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEsave);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEsave", btnLEsave,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEsave);
+
+  vseparator4 = gtk_vseparator_new ();
+  gtk_widget_ref (vseparator4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vseparator4", vseparator4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vseparator4);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar3), vseparator4, NULL, NULL);
+  gtk_widget_set_usize (vseparator4, 5, 7);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_REFRESH);
+  btnLErefresh = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button26",
+                                "Reload menu in ListEditor", NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLErefresh);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLErefresh", btnLErefresh,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLErefresh);
+
+  vseparator6 = gtk_vseparator_new ();
+  gtk_widget_ref (vseparator6);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vseparator6", vseparator6,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vseparator6);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar3), vseparator6, NULL, NULL);
+  gtk_widget_set_usize (vseparator6, 5, 7);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_PRINT);
+  btnLEprint = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar3),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button22",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnLEprint);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEprint", btnLEprint,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEprint);
+  gtk_widget_set_sensitive (btnLEprint, FALSE);
+
+  hbox1 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox1", hbox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox1);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), hbox1, TRUE, TRUE, 0);
+
+  frame3 = gtk_frame_new ("Bookmarks");
+  gtk_widget_ref (frame3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame3", frame3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame3);
+  gtk_box_pack_start (GTK_BOX (hbox1), frame3, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (frame3), 3);
+
+  vbox1 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vbox1", vbox1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox1);
+  gtk_container_add (GTK_CONTAINER (frame3), vbox1);
+
+  scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "scrolledwindow1", scrolledwindow1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow1);
+  gtk_box_pack_start (GTK_BOX (vbox1), scrolledwindow1, TRUE, TRUE, 0);
+  gtk_widget_set_usize (scrolledwindow1, 225, 181);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow1), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
 
   clLElist = gtk_clist_new (6);
   gtk_widget_ref (clLElist);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "clLElist", clLElist,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "clLElist", clLElist,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (clLElist);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow34), clLElist);
-  gtk_clist_set_column_width (GTK_CLIST (clLElist), 0, 207);
-  gtk_clist_set_column_width (GTK_CLIST (clLElist), 1, 80);
-  gtk_clist_set_column_width (GTK_CLIST (clLElist), 2, 80);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow1), clLElist);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 0, 223);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 1, 30);
+  gtk_clist_set_column_width (GTK_CLIST (clLElist), 2, 30);
   gtk_clist_set_column_width (GTK_CLIST (clLElist), 3, 80);
   gtk_clist_set_column_width (GTK_CLIST (clLElist), 4, 80);
   gtk_clist_set_column_width (GTK_CLIST (clLElist), 5, 80);
   gtk_clist_column_titles_hide (GTK_CLIST (clLElist));
 
-  label103 = gtk_label_new ("label103");
-  gtk_widget_ref (label103);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label103", label103,
+  label1 = gtk_label_new ("label1");
+  gtk_widget_ref (label1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label1", label1,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label103);
-  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 0, label103);
+  gtk_widget_show (label1);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 0, label1);
 
-  label104 = gtk_label_new ("label104");
-  gtk_widget_ref (label104);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label104", label104,
+  label2 = gtk_label_new ("label2");
+  gtk_widget_ref (label2);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label2", label2,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label104);
-  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 1, label104);
+  gtk_widget_show (label2);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 1, label2);
 
-  label105 = gtk_label_new ("label105");
-  gtk_widget_ref (label105);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label105", label105,
+  label3 = gtk_label_new ("label3");
+  gtk_widget_ref (label3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label3", label3,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label105);
-  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 2, label105);
+  gtk_widget_show (label3);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 2, label3);
 
-  label106 = gtk_label_new ("label106");
-  gtk_widget_ref (label106);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label106", label106,
+  label4 = gtk_label_new ("label4");
+  gtk_widget_ref (label4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label4", label4,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label106);
-  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 3, label106);
+  gtk_widget_show (label4);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 3, label4);
 
-  label107 = gtk_label_new ("label107");
-  gtk_widget_ref (label107);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label107", label107,
+  label5 = gtk_label_new ("label5");
+  gtk_widget_ref (label5);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label5", label5,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label107);
-  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 4, label107);
+  gtk_widget_show (label5);
+  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 4, label5);
 
-  label108 = gtk_label_new ("label108");
-  gtk_widget_ref (label108);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label108", label108,
+  toolbar1 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar1", toolbar1,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label108);
-  gtk_clist_set_column_widget (GTK_CLIST (clLElist), 5, label108);
+  gtk_widget_show (toolbar1);
+  gtk_box_pack_start (GTK_BOX (vbox1), toolbar1, FALSE, FALSE, 0);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar1), GTK_RELIEF_NONE);
 
-  toolbar29 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_widget_ref (toolbar29);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "toolbar29", toolbar29,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (toolbar29);
-  gtk_box_pack_start (GTK_BOX (vbox26), toolbar29, FALSE, FALSE, 0);
-  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar29), GTK_RELIEF_NONE);
-
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_UP);
-  btnLEup = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_UP);
+  btnLEup = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "button8",
+                                "button11",
                                 NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   gtk_widget_ref (btnLEup);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEup", btnLEup,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEup", btnLEup,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEup);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_DOWN);
-  btnLEdown = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_DOWN);
+  btnLEdown = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "button9",
+                                "button12",
                                 NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   gtk_widget_ref (btnLEdown);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEdown", btnLEdown,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEdown", btnLEdown,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEdown);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_BACK);
-  btnLEleft = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_BACK);
+  btnLEleft = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "button14",
-                                NULL, NULL,
+                                "button23",
+                                "Previous Level", NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   gtk_widget_ref (btnLEleft);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEleft", btnLEleft,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEleft", btnLEleft,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEleft);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_FORWARD);
-  btnLEright = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_FORWARD);
+  btnLEright = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "button15",
-                                NULL, NULL,
+                                "button24",
+                                "Next level", NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   gtk_widget_ref (btnLEright);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEright", btnLEright,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEright", btnLEright,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEright);
+  gtk_widget_set_usize (btnLEright, 56, -2);
 
-  vbox27 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox27);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "vbox27", vbox27,
+  vbox3 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vbox3", vbox3,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox27);
-  gtk_box_pack_start (GTK_BOX (hbox22), vbox27, TRUE, TRUE, 0);
+  gtk_widget_show (vbox3);
+  gtk_box_pack_start (GTK_BOX (hbox1), vbox3, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox3), 3);
 
-  frame22 = gtk_frame_new ("Lookup Verse");
-  gtk_widget_ref (frame22);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "frame22", frame22,
+  frame1 = gtk_frame_new ("Lookup Verse");
+  gtk_widget_ref (frame1);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame1", frame1,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (frame22);
-  gtk_box_pack_start (GTK_BOX (vbox27), frame22, FALSE, TRUE, 0);
+  gtk_widget_show (frame1);
+  gtk_box_pack_start (GTK_BOX (vbox3), frame1, FALSE, TRUE, 0);
 
-  vbox28 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox28);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "vbox28", vbox28,
+  toolbar4 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar4", toolbar4,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox28);
-  gtk_container_add (GTK_CONTAINER (frame22), vbox28);
-
-  toolbar31 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_widget_ref (toolbar31);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "toolbar31", toolbar31,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (toolbar31);
-  gtk_box_pack_start (GTK_BOX (vbox28), toolbar31, FALSE, FALSE, 0);
-  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar31), GTK_RELIEF_NONE);
+  gtk_widget_show (toolbar4);
+  gtk_container_add (GTK_CONTAINER (frame1), toolbar4);
+  gtk_widget_set_usize (toolbar4, 193, -2);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar4), GTK_RELIEF_NONE);
 
   entryVerseLookup = gtk_entry_new ();
   gtk_widget_ref (entryVerseLookup);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entryVerseLookup", entryVerseLookup,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryVerseLookup", entryVerseLookup,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (entryVerseLookup);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar31), entryVerseLookup, NULL, NULL);
-  gtk_widget_set_usize (entryVerseLookup, 248, -2);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar4), entryVerseLookup, NULL, NULL);
+  gtk_widget_set_usize (entryVerseLookup, 172, -2);
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (ListEditor, GNOME_STOCK_PIXMAP_JUMP_TO);
-  btnGotoVerse = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar31),
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (listeditor, GNOME_STOCK_PIXMAP_JUMP_TO);
+  btnLEgotoverse = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar4),
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
-                                "button10",
+                                "Go to Verse",
                                 NULL, NULL,
                                 tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnGotoVerse);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnGotoVerse", btnGotoVerse,
+  gtk_widget_ref (btnLEgotoverse);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEgotoverse", btnLEgotoverse,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnGotoVerse);
+  gtk_widget_show (btnLEgotoverse);
 
-  toolbar32 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-  gtk_widget_ref (toolbar32);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "toolbar32", toolbar32,
+  frame2 = gtk_frame_new ("Edit items");
+  gtk_widget_ref (frame2);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame2", frame2,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (toolbar32);
-  gtk_box_pack_start (GTK_BOX (vbox28), toolbar32, FALSE, FALSE, 0);
+  gtk_widget_show (frame2);
+  gtk_box_pack_start (GTK_BOX (vbox3), frame2, TRUE, TRUE, 0);
+  gtk_widget_set_usize (frame2, -2, 154);
 
-  combo1 = gtk_combo_new ();
-  gtk_widget_ref (combo1);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "combo1", combo1,
+  vbox4 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "vbox4", vbox4,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (combo1);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar32), combo1, NULL, NULL);
-  gtk_widget_set_usize (combo1, 190, -2);
+  gtk_widget_show (vbox4);
+  gtk_container_add (GTK_CONTAINER (frame2), vbox4);
 
-  cbLEBook = GTK_COMBO (combo1)->entry;
-  gtk_widget_ref (cbLEBook);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "cbLEBook", cbLEBook,
+  hbox2 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox2);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox2", hbox2,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (cbLEBook);
+  gtk_widget_show (hbox2);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox2, TRUE, TRUE, 0);
 
-  spLEChapter_adj = gtk_adjustment_new (1, 0, 151, 1, 10, 10);
-  spLEChapter = gtk_spin_button_new (GTK_ADJUSTMENT (spLEChapter_adj), 1, 0);
-  gtk_widget_ref (spLEChapter);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "spLEChapter", spLEChapter,
+  label19 = gtk_label_new ("item");
+  gtk_widget_ref (label19);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label19", label19,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (spLEChapter);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar32), spLEChapter, NULL, NULL);
-
-  spLEVerse_adj = gtk_adjustment_new (1, 0, 178, 1, 10, 10);
-  spLEVerse = gtk_spin_button_new (GTK_ADJUSTMENT (spLEVerse_adj), 1, 0);
-  gtk_widget_ref (spLEVerse);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "spLEVerse", spLEVerse,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (spLEVerse);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar32), spLEVerse, NULL, NULL);
-
-  frame23 = gtk_frame_new ("List Items");
-  gtk_widget_ref (frame23);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "frame23", frame23,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (frame23);
-  gtk_box_pack_start (GTK_BOX (vbox27), frame23, FALSE, TRUE, 0);
-
-  vbox29 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox29);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "vbox29", vbox29,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox29);
-  gtk_container_add (GTK_CONTAINER (frame23), vbox29);
+  gtk_widget_show (label19);
+  gtk_box_pack_start (GTK_BOX (hbox2), label19, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label19, 46, -2);
 
   entryListItem = gtk_entry_new ();
   gtk_widget_ref (entryListItem);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entryListItem", entryListItem,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryListItem", entryListItem,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (entryListItem);
-  gtk_box_pack_start (GTK_BOX (vbox29), entryListItem, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox2), entryListItem, TRUE, TRUE, 0);
 
-  toolbar33 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_TEXT);
-  gtk_widget_ref (toolbar33);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "toolbar33", toolbar33,
+  hbox3 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox3", hbox3,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (toolbar33);
-  gtk_box_pack_start (GTK_BOX (vbox29), toolbar33, FALSE, FALSE, 0);
+  gtk_widget_show (hbox3);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox3, TRUE, TRUE, 0);
 
-  btnLEAddVerse = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar33),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Add Verse",
-                                "Add verse in text window to list", NULL,
-                                NULL, NULL, NULL);
-  gtk_widget_ref (btnLEAddVerse);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEAddVerse", btnLEAddVerse,
+  label20 = gtk_label_new ("type");
+  gtk_widget_ref (label20);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label20", label20,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnLEAddVerse);
-
-  btnLEAddItem = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar33),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Add SubItem",
-                                "Add new item and make is a subitem", NULL,
-                                NULL, NULL, NULL);
-  gtk_widget_ref (btnLEAddItem);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEAddItem", btnLEAddItem,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnLEAddItem);
-
-  btnLEmakesub = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar33),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Make Subitem",
-                                "Make selected item a subitem", NULL,
-                                NULL, NULL, NULL);
-  gtk_widget_ref (btnLEmakesub);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEmakesub", btnLEmakesub,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnLEmakesub);
-
-  btnLEDelete = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar33),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Delete",
-                                "Delete selected item", NULL,
-                                NULL, NULL, NULL);
-  gtk_widget_ref (btnLEDelete);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEDelete", btnLEDelete,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnLEDelete);
-
-  hbox23 = gtk_hbox_new (FALSE, 0);
-  gtk_widget_ref (hbox23);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "hbox23", hbox23,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (hbox23);
-  gtk_box_pack_start (GTK_BOX (vbox27), hbox23, TRUE, TRUE, 0);
-
-  label109 = gtk_label_new ("type");
-  gtk_widget_ref (label109);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label109", label109,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label109);
-  gtk_box_pack_start (GTK_BOX (hbox23), label109, FALSE, FALSE, 0);
-  gtk_widget_set_usize (label109, 30, -2);
+  gtk_widget_show (label20);
+  gtk_box_pack_start (GTK_BOX (hbox3), label20, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label20, 45, -2);
 
   entryType = gtk_entry_new ();
   gtk_widget_ref (entryType);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entryType", entryType,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryType", entryType,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (entryType);
-  gtk_box_pack_start (GTK_BOX (hbox23), entryType, TRUE, TRUE, 0);
-  gtk_widget_set_usize (entryType, 82, -2);
+  gtk_box_pack_start (GTK_BOX (hbox3), entryType, TRUE, TRUE, 0);
+  gtk_widget_set_usize (entryType, 47, -2);
 
-  label110 = gtk_label_new ("level");
-  gtk_widget_ref (label110);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label110", label110,
+  label21 = gtk_label_new ("level");
+  gtk_widget_ref (label21);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label21", label21,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label110);
-  gtk_box_pack_start (GTK_BOX (hbox23), label110, FALSE, FALSE, 0);
-  gtk_widget_set_usize (label110, 34, -2);
+  gtk_widget_show (label21);
+  gtk_box_pack_start (GTK_BOX (hbox3), label21, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label21, 45, -2);
 
   entryLevel = gtk_entry_new ();
   gtk_widget_ref (entryLevel);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entryLevel", entryLevel,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryLevel", entryLevel,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (entryLevel);
-  gtk_box_pack_start (GTK_BOX (hbox23), entryLevel, TRUE, TRUE, 0);
-  gtk_widget_set_usize (entryLevel, 92, -2);
+  gtk_box_pack_start (GTK_BOX (hbox3), entryLevel, TRUE, TRUE, 0);
+  gtk_widget_set_usize (entryLevel, 52, -2);
 
-  table8 = gtk_table_new (3, 2, FALSE);
-  gtk_widget_ref (table8);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "table8", table8,
+  hbox4 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox4", hbox4,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (table8);
-  gtk_box_pack_start (GTK_BOX (vbox27), table8, TRUE, TRUE, 0);
-
-  label111 = gtk_label_new ("subitem");
-  gtk_widget_ref (label111);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label111", label111,
+  gtk_widget_show (hbox4);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox4, TRUE, TRUE, 0);
+*/
+/*  label22 = gtk_label_new ("preitem");
+  gtk_widget_ref (label22);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label22", label22,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label111);
-  gtk_table_attach (GTK_TABLE (table8), label111, 0, 1, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label112 = gtk_label_new ("menu");
-  gtk_widget_ref (label112);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label112", label112,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label112);
-  gtk_table_attach (GTK_TABLE (table8), label112, 0, 1, 2, 3,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  entrySubitem = gtk_entry_new ();
-  gtk_widget_ref (entrySubitem);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entrySubitem", entrySubitem,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entrySubitem);
-  gtk_table_attach (GTK_TABLE (table8), entrySubitem, 1, 2, 1, 2,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  entryMenu = gtk_entry_new ();
-  gtk_widget_ref (entryMenu);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entryMenu", entryMenu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (entryMenu);
-  gtk_table_attach (GTK_TABLE (table8), entryMenu, 1, 2, 2, 3,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
-
-  label113 = gtk_label_new ("previous Item");
-  gtk_widget_ref (label113);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "label113", label113,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label113);
-  gtk_table_attach (GTK_TABLE (table8), label113, 0, 1, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (label113, 66, -2);
+  gtk_widget_show (label22);
+  gtk_box_pack_start (GTK_BOX (hbox4), label22, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label22, 46, -2);
 
   entryPreitem = gtk_entry_new ();
   gtk_widget_ref (entryPreitem);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "entryPreitem", entryPreitem,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryPreitem", entryPreitem,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (entryPreitem);
-  gtk_table_attach (GTK_TABLE (table8), entryPreitem, 1, 2, 0, 1,
-                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-                    (GtkAttachOptions) (0), 0, 0);
+  gtk_box_pack_start (GTK_BOX (hbox4), entryPreitem, TRUE, TRUE, 0);
 
-  hbuttonbox1 = gtk_hbutton_box_new ();
-  gtk_widget_ref (hbuttonbox1);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "hbuttonbox1", hbuttonbox1,
+  hbox5 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox5);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox5", hbox5,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (hbuttonbox1);
-  gtk_box_pack_start (GTK_BOX (vbox27), hbuttonbox1, TRUE, TRUE, 0);
+  gtk_widget_show (hbox5);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox5, TRUE, TRUE, 0);
 
-  btnLEapplylistchanges = gnome_stock_button (GNOME_STOCK_BUTTON_APPLY);
+  label23 = gtk_label_new ("submenu");
+  gtk_widget_ref (label23);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label23", label23,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label23);
+  gtk_box_pack_start (GTK_BOX (hbox5), label23, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label23, 46, -2);
+
+  entrySubitem = gtk_entry_new ();
+  gtk_widget_ref (entrySubitem);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entrySubitem", entrySubitem,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entrySubitem);
+  gtk_box_pack_start (GTK_BOX (hbox5), entrySubitem, TRUE, TRUE, 0);
+
+  hbox6 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox6);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "hbox6", hbox6,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox6);
+  gtk_box_pack_start (GTK_BOX (vbox4), hbox6, TRUE, TRUE, 0);
+
+  label24 = gtk_label_new ("menu");
+  gtk_widget_ref (label24);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "label24", label24,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label24);
+  gtk_box_pack_start (GTK_BOX (hbox6), label24, FALSE, FALSE, 0);
+  gtk_widget_set_usize (label24, 46, -2);
+
+  entryMenu = gtk_entry_new ();
+  gtk_widget_ref (entryMenu);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "entryMenu", entryMenu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryMenu);
+  gtk_box_pack_start (GTK_BOX (hbox6), entryMenu, TRUE, TRUE, 0);
+  */
+  /*
+  toolbar6 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_TEXT);
+  gtk_widget_ref (toolbar6);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar6", toolbar6,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar6);
+  gtk_box_pack_start (GTK_BOX (vbox4), toolbar6, FALSE, FALSE, 0);
+
+  btnLEAddVerse = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar6),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Add Verse",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEAddVerse);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEAddVerse", btnLEAddVerse,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEAddVerse);
+  gtk_widget_set_usize (btnLEAddVerse, 68, -2);
+
+  btnLEAddItem = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar6),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Add Menu",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEAddItem);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEAddItem", btnLEAddItem,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEAddItem);
+
+  btnLEdelete = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar6),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Delete Item",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
+  gtk_widget_ref (btnLEdelete);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEdelete", btnLEdelete,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnLEdelete);
+
+  toolbar9 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_TEXT);
+  gtk_widget_ref (toolbar9);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "toolbar9", toolbar9,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar9);
+  gtk_box_pack_start (GTK_BOX (vbox4), toolbar9, FALSE, FALSE, 0);
+
+  btnLEapplylistchanges = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar9),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Apply Changes to List",
+                                NULL, NULL,
+                                NULL, NULL, NULL);
   gtk_widget_ref (btnLEapplylistchanges);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEapplylistchanges", btnLEapplylistchanges,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEapplylistchanges", btnLEapplylistchanges,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEapplylistchanges);
-  gtk_container_add (GTK_CONTAINER (hbuttonbox1), btnLEapplylistchanges);
-  GTK_WIDGET_SET_FLAGS (btnLEapplylistchanges, GTK_CAN_DEFAULT);
+  gtk_widget_set_usize (btnLEapplylistchanges, 204, -2);
 
-  btnLEcancelistchanges = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
-  gtk_widget_ref (btnLEcancelistchanges);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEcancelistchanges", btnLEcancelistchanges,
+  frame4 = gtk_frame_new (NULL);
+  gtk_widget_ref (frame4);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "frame4", frame4,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnLEcancelistchanges);
-  gtk_container_add (GTK_CONTAINER (hbuttonbox1), btnLEcancelistchanges);
-  GTK_WIDGET_SET_FLAGS (btnLEcancelistchanges, GTK_CAN_DEFAULT);
+  gtk_widget_show (frame4);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox1), frame4, TRUE, TRUE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (frame4), 3);
 
-  scrolledwindow33 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_ref (scrolledwindow33);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "scrolledwindow33", scrolledwindow33,
+  scrolledwindow3 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow3);
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "scrolledwindow3", scrolledwindow3,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (scrolledwindow33);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox5), scrolledwindow33, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow33), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_widget_show (scrolledwindow3);
+  gtk_container_add (GTK_CONTAINER (frame4), scrolledwindow3);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow3), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
 
   text7 = gtk_text_new (NULL, NULL);
   gtk_widget_ref (text7);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "text7", text7,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "text7", text7,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (text7);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow33), text7);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow3), text7);
 
-  dialog_action_area5 = GNOME_DIALOG (ListEditor)->action_area;
-  gtk_object_set_data (GTK_OBJECT (ListEditor), "dialog_action_area5", dialog_action_area5);
-  gtk_widget_show (dialog_action_area5);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area5), GTK_BUTTONBOX_END);
-  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area5), 8);
+  dialog_action_area1 = GNOME_DIALOG (listeditor)->action_area;
+  gtk_object_set_data (GTK_OBJECT (listeditor), "dialog_action_area1", dialog_action_area1);
+  gtk_widget_show (dialog_action_area1);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area1), 8);
 
-  gnome_dialog_append_button (GNOME_DIALOG (ListEditor), GNOME_STOCK_BUTTON_OK);
-  btnLEok = g_list_last (GNOME_DIALOG (ListEditor)->buttons)->data;
+  gnome_dialog_append_button (GNOME_DIALOG (listeditor), GNOME_STOCK_BUTTON_OK);
+  btnLEok = g_list_last (GNOME_DIALOG (listeditor)->buttons)->data;
   gtk_widget_ref (btnLEok);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEok", btnLEok,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEok", btnLEok,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEok);
+  gtk_widget_set_sensitive (btnLEok, FALSE);
   GTK_WIDGET_SET_FLAGS (btnLEok, GTK_CAN_DEFAULT);
 
-  gnome_dialog_append_button (GNOME_DIALOG (ListEditor), GNOME_STOCK_BUTTON_APPLY);
-  btnLEapply = g_list_last (GNOME_DIALOG (ListEditor)->buttons)->data;
+  gnome_dialog_append_button (GNOME_DIALOG (listeditor), GNOME_STOCK_BUTTON_APPLY);
+  btnLEapply = g_list_last (GNOME_DIALOG (listeditor)->buttons)->data;
   gtk_widget_ref (btnLEapply);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEapply", btnLEapply,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEapply", btnLEapply,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEapply);
+  gtk_widget_set_sensitive (btnLEapply, FALSE);
   GTK_WIDGET_SET_FLAGS (btnLEapply, GTK_CAN_DEFAULT);
 
-  gnome_dialog_append_button (GNOME_DIALOG (ListEditor), GNOME_STOCK_BUTTON_CANCEL);
-  btnLEcancel = g_list_last (GNOME_DIALOG (ListEditor)->buttons)->data;
+  gnome_dialog_append_button (GNOME_DIALOG (listeditor), GNOME_STOCK_BUTTON_CANCEL);
+  btnLEcancel = g_list_last (GNOME_DIALOG (listeditor)->buttons)->data;
   gtk_widget_ref (btnLEcancel);
-  gtk_object_set_data_full (GTK_OBJECT (ListEditor), "btnLEcancel", btnLEcancel,
+  gtk_object_set_data_full (GTK_OBJECT (listeditor), "btnLEcancel", btnLEcancel,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnLEcancel);
   GTK_WIDGET_SET_FLAGS (btnLEcancel, GTK_CAN_DEFAULT);
-
-  gtk_signal_connect (GTK_OBJECT (btnVerseListNew), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnVerseListNew_clicked),
+*/
+  gtk_signal_connect (GTK_OBJECT (btnLEnew), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLEnew_clicked),
                       NULL);
-  gtk_signal_connect (GTK_OBJECT (btnVerseListOpen), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnVerseListOpen_clicked),
+  gtk_signal_connect (GTK_OBJECT (btnLEopen), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLEopen_clicked),
                       NULL);
-  gtk_signal_connect (GTK_OBJECT (btnVerseListSave), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnVerseListSave_clicked),
+  gtk_signal_connect (GTK_OBJECT (btnLEclose), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLEclose_clicked),
                       NULL);
-  gtk_signal_connect (GTK_OBJECT (btnVerseListPrint), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnVerseListPrint_clicked),
+  gtk_signal_connect (GTK_OBJECT (btnLErefresh), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLErefresh_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (clLElist), "select_row",
                       GTK_SIGNAL_FUNC (on_clLElist_select_row),
@@ -935,17 +2209,8 @@ create_ListEditor (void)
   gtk_signal_connect (GTK_OBJECT (btnLEright), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLEright_clicked),
                       NULL);
-  gtk_signal_connect (GTK_OBJECT (btnGotoVerse), "clicked",
+  gtk_signal_connect (GTK_OBJECT (btnLEgotoverse), "clicked",
                       GTK_SIGNAL_FUNC (on_btnGotoVerse_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (cbLEBook), "changed",
-                      GTK_SIGNAL_FUNC (on_cbLEBook_changed),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (spLEChapter), "changed",
-                      GTK_SIGNAL_FUNC (on_spLEChapter_changed),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (spLEVerse), "changed",
-                      GTK_SIGNAL_FUNC (on_spLEVerse_changed),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnLEAddVerse), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLEAddVerse_clicked),
@@ -953,20 +2218,11 @@ create_ListEditor (void)
   gtk_signal_connect (GTK_OBJECT (btnLEAddItem), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLEAddItem_clicked),
                       NULL);
-  gtk_signal_connect (GTK_OBJECT (btnLEmakesub), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnLEmakesub_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnLEDelete), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnLEDelete_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (entryPreitem), "changed",
-                      GTK_SIGNAL_FUNC (on_entryPreitem_changed),
+  gtk_signal_connect (GTK_OBJECT (btnLEdelete), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLEdelete_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnLEapplylistchanges), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLEapplylistchanges_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnLEcancelistchanges), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnLEcancelistchanges_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnLEok), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLEok_clicked),
@@ -977,6 +2233,10 @@ create_ListEditor (void)
   gtk_signal_connect (GTK_OBJECT (btnLEcancel), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLEcancel_clicked),
                       NULL);
+  gtk_signal_connect (GTK_OBJECT (btnLEsave), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLEsave_clicked),
+                      NULL);
 
-  return ListEditor;
+  return listeditor;
 }
+

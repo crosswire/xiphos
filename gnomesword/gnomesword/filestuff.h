@@ -36,9 +36,6 @@ void
 loadbookmarkarray		(void);
 
 void
-loadbookmarksnew		(GtkWidget *list);
-
-void
 loadbookmarks_programstart		(void);
 
 void
@@ -53,9 +50,6 @@ savebookmark				(gchar *item);
 void
 savebookmarks				(void);
 
-void
-editbookmarksSave	  (GtkWidget *editdlg);
- 
 void
 saveoptions				  (void) ;
 

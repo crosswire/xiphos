@@ -30,7 +30,6 @@
 #include "dialogs.h"
 
 
-
 //-----------------------------------------------------------------------------------------------
 GtkWidget*
 create_propertybox1 (void)
@@ -619,7 +618,7 @@ create_BMEditor (void)
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area9), 8);
 
   gnome_dialog_append_button (GNOME_DIALOG (BMEditor), GNOME_STOCK_BUTTON_OK);
-  btnBMEok = g_list_last (GNOME_DIALOG (BMEditor)->buttons)->data;
+  btnBMEok = g_list_last(GNOME_DIALOG(BMEditor)->buttons)->data;
   gtk_widget_ref (btnBMEok);
   gtk_object_set_data_full (GTK_OBJECT (BMEditor), "btnBMEok", btnBMEok,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -637,7 +636,7 @@ create_BMEditor (void)
   gtk_tooltips_set_tip (tooltips, btnBMEapply, "Apply changes", NULL);
 
   gnome_dialog_append_button (GNOME_DIALOG (BMEditor), GNOME_STOCK_BUTTON_CANCEL);
-  btnBMEcancel = g_list_last (GNOME_DIALOG (BMEditor)->buttons)->data;
+  btnBMEcancel = g_list_last(GNOME_DIALOG (BMEditor)->buttons)->data;
   gtk_widget_ref (btnBMEcancel);
   gtk_object_set_data_full (GTK_OBJECT (BMEditor), "btnBMEcancel", btnBMEcancel,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -659,9 +658,6 @@ create_BMEditor (void)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnBMEDelete), "clicked",
                       GTK_SIGNAL_FUNC (on_btnBMEDelete_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnBMEsave), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnBMEsave_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnBMEup), "clicked",
                       GTK_SIGNAL_FUNC (on_btnBMEup_clicked),
