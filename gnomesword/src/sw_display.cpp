@@ -40,6 +40,7 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
+#include <markupfiltmgr.h>
 #include <versekey.h>
 #include <gal/widgets/e-unicode.h>
 
@@ -590,11 +591,10 @@ char IntDisplay(SETTINGS *s)
 	bool 
 		evenRow = FALSE;
 	
-	extern SWModule 
-		*curMod;
 	
-	extern SWMgr
-		*mainMgr1;
+	
+	SWMgr
+		*mgr;
 	
 	extern GtkHTMLStream 
 		*htmlstream;
@@ -602,20 +602,21 @@ char IntDisplay(SETTINGS *s)
 	gint 
 		utf8len;
 	
-	
+	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF)); 
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);	
-	SWModule *mod = mainMgr1->Modules[curMod->Name()];
+	SWModule *mod = mgr->Modules[interlinearMod0->Name()];
 	
 	tmpkey = g_strdup(s->cvInterlinear);
+	//d->SetKey(tmpkey);
 	mod->SetKey(tmpkey);
-	VerseKey *key = (VerseKey *) (SWKey *) *mod;	
+	VerseKey *key = (VerseKey *) (SWKey *) *mod;
 	
 	bgColor = "#f1f1f1";
 	int curVerse = key->Verse();
 	s->intCurVerse = curVerse;
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !mod->Error()); (*mod)++) {
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter &&  !mod->Error()); (*mod)++) {
 		sprintf(buf,"%s","<tr valign=\"top\">");		
 		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
 		utf8len = strlen(utf8str);		
@@ -686,6 +687,7 @@ char IntDisplay(SETTINGS *s)
 		}
 	}	
 	g_free(tmpkey);
+	delete mgr;
 	return 0;
 }
 
