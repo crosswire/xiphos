@@ -29,11 +29,10 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
-#include "gui/_display_info.h"
+#include "gui/display_info.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 
-#include "main/display_info.h"
 #include "main/bibletext.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
@@ -124,7 +123,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			++url;
 			modName = g_strdup(settings.lex_greek);
 			buf = g_strdup(url);
-			loadmodandkey(modName, buf);
+			gui_display_mod_and_key(modName, buf);
 			g_free(buf);
 			g_free(modName);
 		}
@@ -133,7 +132,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			++url;
 			modName = g_strdup(settings.lex_hebrew);
 			buf = g_strdup(url);
-			loadmodandkey(modName, buf);
+			gui_display_mod_and_key(modName, buf);
 			g_free(buf);
 			g_free(modName);
 		}
@@ -146,7 +145,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		}
 		++url;		/* remove M */
 		buf = g_strdup(url);
-		loadmodandkey("Packard", buf);
+		gui_display_mod_and_key("Packard", buf);
 		g_free(buf);
 		gtk_widget_show(dlg);
 	}
@@ -158,7 +157,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		}
 		++url;
 		buf = g_strdup(url);
-		chapter_display(vt->t->html, vt->t->mod_name, vt->t->tgs, buf);
+		chapter_display(vt->t->html, vt->t->mod_name, 
+				vt->t->tgs, buf, TRUE);
 		update_controls(vt);
 		g_free(buf);
 	}
@@ -204,7 +204,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			if (!gsI_isrunning) {
 				dlg = gui_create_display_informtion_dialog();
 			}
-			loadmodandkey(modbuf, buf);
+			gui_display_mod_and_key(modbuf, buf);
 		}
 		g_free(buf);
 		gtk_widget_show(dlg);
@@ -267,7 +267,8 @@ static void btn_goto_verse_clicked(GtkButton * button,
 	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
 	val_key = get_valid_key(buf);
 	//g_warning(buf);
-	chapter_display(vt->t->html, vt->t->mod_name, vt->t->tgs, val_key);
+	chapter_display(vt->t->html, vt->t->mod_name, 
+			vt->t->tgs, val_key, TRUE);
 	strcpy(vt->key,val_key);
 	update_controls(vt);
 	g_free(val_key);
@@ -315,7 +316,7 @@ static void module_new_activate(GtkMenuItem * menuitem,
 static void btn_sync_clicked(GtkButton * button, VIEW_TEXT * vt)
 {
 	chapter_display(vt->t->html, vt->t->mod_name, 
-			vt->t->tgs, settings.currentverse);	
+			vt->t->tgs, settings.currentverse, TRUE);	
 	strcpy(vt->key,settings.currentverse);
 	update_controls(vt);
 }
@@ -420,7 +421,7 @@ static void on_t_btn_toggled(GtkToggleButton * togglebutton,
 	set_text_module_global_option(option,
 				togglebutton->active);
 	chapter_display(cur_vt->t->html, cur_vt->t->mod_name , 
-			cur_vt->t->tgs, cur_vt->key);
+			cur_vt->t->tgs, cur_vt->key, TRUE);
 }
 
 /******************************************************************************
@@ -1141,7 +1142,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), get_list(BOOKS_LIST));
 	chapter_display(vt->t->html, vt->t->mod_name,
-			vt->t->tgs, settings.currentverse);
+			vt->t->tgs, settings.currentverse, TRUE);
 	sprintf(vt_current_verse, "%s", settings.currentverse);
 	update_controls(vt);
 }

@@ -35,7 +35,7 @@
 #include <string.h>
 
 #include "main/gs_gnomesword.h"
-//#include "main/gs_interlinear.h"
+
 #include "backend/sword.h"
 #include "backend/interlinear.h"
 

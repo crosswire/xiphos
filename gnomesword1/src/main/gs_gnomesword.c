@@ -70,8 +70,8 @@
 #include "backend/gbs_.h"
 #include "backend/dictlex_.h"
 #include "backend/properties.h"
-#include "backend/verselist.h"
 #include "backend/shortcutbar.h"
+#include "backend/bookmarks.h"
  
 /*****************************************************************************
  * externs
@@ -99,6 +99,11 @@ static gchar *update_nav_controls(gchar * key);
  *****************************************************************************/
 void init_gnomesword(void)
 {	
+	
+	
+	settings.displaySearchResults = FALSE;
+	settings.havethayer = backend_check_for_module("Thayer");
+	settings.havebdb = backend_check_for_module("BDB");
 	/*
 	 *  setup shortcut bar 
 	 */
@@ -191,6 +196,7 @@ void gnomesword_shutdown(void)
 	GtkWidget *msgbox;
 	gint answer = 0;
 
+	backend_save_bookmarks(settings.ctree_widget);
 	
 	/* if study pad file has changed since last save */
 	if (settings.modifiedSP) {
@@ -948,24 +954,10 @@ GList *do_search(gpointer *usr_data)
 	return backend_do_search(usr_data);
 }
 
-void display_sb_dictlex(gchar *modName, gchar *key)
-{
-	backend_display_sb_dictlex(modName, key);
-}
 
 GList *get_verse_list(gchar* module_name, gchar *verse_list)
 {
 	return backend_get_verse_list(module_name, verse_list, &settings);
-}
-
-void verselist_change_verse(gchar * url)
-{
-	backend_verselist_change_verse(&settings, url);
-}
-
-void display_search_results_item(gchar * key)
-{
-	backend_search_results_item_display(key);
 }
 
 GList *load_sb_group(gchar *filename, gchar *group_name, 
@@ -1000,22 +992,6 @@ int get_mod_type(char * mod_name)
 {
 	return backend_get_mod_type(mod_name);
 }
-gint get_sb_type_from_modname(gchar *modName)
-{
-	return backend_sb_type_from_modname(modName);
-}
-
-void setup_shortcutbar_backend(GtkWidget *html, GtkWidget *html2, 
-						GtkWidget *html3)
-{
-	backend_setup_verselist(html);
-	backend_setup_search_results_display(html2);
-	backend_setup_viewer(html3);
-}
-
-
-
-
 
 /******************************************************************************
  * Name
@@ -1096,4 +1072,46 @@ int module_is_locked(char * mod_name)
 char *get_valid_key(char *key)
 {
 	return backend_get_valid_key(key);
+}
+
+/******************************************************************************
+ * Name
+ *   get_module_text
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   char *get_module_text(char * mod_name, char * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+ 
+char *get_module_text(char * mod_name, char * key)
+{
+	backend_get_module_text(mod_name, key);	
+}
+
+/******************************************************************************
+ * Name
+ *   get_search_results_text
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   char *get_search_results_text(char * mod_name, char * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+ 
+char *get_search_results_text(char * mod_name, char * key)	
+{
+	return backend_get_search_results_text(mod_name, key);
 }

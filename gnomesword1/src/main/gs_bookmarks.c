@@ -549,7 +549,7 @@ void on_add_new_group1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_save_bookmarks1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	savebookmarks(p_bmtree->ctree_widget);	/*** sw_bookmarks.cpp ***/
+	backend_save_bookmarks(p_bmtree->ctree_widget);	/*** sw_bookmarks.cpp ***/
 }
 
 /*

@@ -16,8 +16,7 @@ CXXFLAGS =  \
     $(GTK_CFLAGS) 
     
 libgui_a_SOURCES =  \
-    _display_info.c \
-    _display_info.h \
+    display_info.c \
     _editor.c \
     _editor.h \
     about_gnomesword.c \
