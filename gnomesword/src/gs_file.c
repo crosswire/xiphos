@@ -44,10 +44,11 @@
 /*****************************************************************************
  *globals
 *****************************************************************************/
-char 	*homedir,		/* store $home directory */
+char 	
+	*homedir,		/* store $home directory */
 	*gSwordDir,		/* store GnomeSword directory */
 	*swbmDir,		/* bookmarks directory */
-	*fnbookmarks,		/* store filename for bookmark file */
+	*shortcutbarDir,		/* store dir name for shortcutbar files */
 	*fnbookmarksnew,
 	*fnconfigure;		/* store filename for configure file - options */
 FILE 	*configfile,		/*  file pointer to configuration file - options */
@@ -153,9 +154,15 @@ gint setDiretory(void)
 	swbmDir = g_new(char, strlen(homedir) + strlen(".sword/bookmarks") + 2);
 	sprintf(swbmDir, "%s/%s",homedir,".sword/bookmarks/");
 	/*old bookmarks */
-	fnbookmarks =
-	    g_new(char, strlen(gSwordDir) + strlen("bookmarks.txt") + 2);	
-	sprintf(fnbookmarks, "%s/%s", gSwordDir, "bookmarks.txt");
+	shortcutbarDir = g_new(char, strlen(gSwordDir) + strlen("shortcutbar") + 2);	
+	sprintf(shortcutbarDir, "%s/%s", gSwordDir, "shortcutbar");	
+	if (access(shortcutbarDir, F_OK) == -1) {	/* if .sword does not exist create it */
+		if ((mkdir(shortcutbarDir, S_IRWXU)) == 0) {
+			// do nothing
+		} else {
+			printf("can't create shortcutbar dir");
+		}
+	} 	
         /* set fnbookmarks to gSwordDir + bookmarks.txt */
 	fnbookmarksnew =
 	    g_new(char, strlen(gSwordDir) + strlen("bookmarksnew.gs") + 2);	
