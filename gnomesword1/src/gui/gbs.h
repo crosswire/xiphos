@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * gbs.h - generic book support - the gui
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ struct _gbsdata {
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *ctree;
+	GtkWidget *tree; /* gnome2 treeview */
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
 	gchar *mod_name;
