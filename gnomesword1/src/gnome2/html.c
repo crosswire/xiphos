@@ -202,7 +202,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				return;
 			}
 		} else if (!strncmp(url, "note=", 5)) { 
-			g_warning(url);               
+			//g_warning(url);               
 			buf1 = strchr(url, '=');
 			++buf1;
 			//tmpbuf = get_footnote_body(buf1);
@@ -213,9 +213,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			//g_free(tmpbuf);
 			return;
 			//}
-		}
-		/***  module name link  ***/
-		else if (*url == '[') {
+		} else if (*url == '[') {  /***  module name link  ***/
 			++url;
 			while (*url != ']') {
 				++url;
@@ -466,32 +464,48 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
-	gchar newmod[80], newref[80];
+	gchar *buf = NULL, *modbuf = NULL;
+	gchar *buf1 = NULL;
+	gchar newmod[80], newref[80], tmpbuf[255];
 	gchar *oldnew = NULL;
 	gint i = 0;
 	gboolean is_strongsmorph = FALSE;
+	const char *type;
 
 	if (*url == '@') {
 		++url;
 		gui_swap_parallel_with_main((gchar *) url);
-	}
-	/***  verse numbers in Bible Text window  ***/
-	else if (*url == '*') {
+	} else if (!strncmp(url, "noteID=", 7)) {
+		buf = strchr(url, '=');
+		++buf;
+		buf1 = g_strdup(buf);
+		type = get_footnote_type(NULL, NULL, buf);
+		if(!strcmp(type, "crossReference")) {
+			buf = get_footnote_body(buf1);
+			if (buf == NULL)
+				return;
+			else {
+				gui_display_verse_list_in_sidebar(settings.
+						  currentverse,
+						  xml_get_value("modules", 
+						  "bible"),
+						  buf);
+				g_free(buf);
+				return;
+			}
+		}
+		g_free(buf1);
+	} else if (*url == '*') {  /***  verse numbers in Bible Text window  ***/
 		++url;
 		buf = g_strdup(url);
 		gui_change_verse(buf);
 		g_free(buf);
-	}
-
-	else if (*url == 'I') {
+	} else if (*url == 'I') {
 		++url;
 		buf = g_strdup(url);
 		gui_change_verse(buf);
 		g_free(buf);
-	}
-	/***  module name  ***/
-	else if (*url == '[') {
+	} else if (*url == '[') {/***  module name  ***/
 		++url;
 		while (*url != ']') {
 			tmpbuf[i++] = *url;
@@ -500,9 +514,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		gui_display_about_module_dialog(tmpbuf, FALSE);
 
-	}
-	/*** thml verse reference ***/
-	else if (!strncmp(url, "version=", 7)
+	} else if (!strncmp(url, "version=", 7)/*** thml verse reference ***/
 		 || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
 		gchar *mod_name = NULL;
@@ -551,9 +563,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		g_free(buf);
 		g_free(mod_name);
 
-	}
-	/***  thml morph tag  ***/
-	else if (!strncmp(url, "type=morph", 10)) {
+	} else if (!strncmp(url, "type=morph", 10)) {/***  thml morph tag  ***/
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 
@@ -593,9 +603,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gui_display_dictlex_in_sidebar(modbuf, buf);
 		g_free(buf);
 		g_free(oldnew);
-	}
-	/*** thml strongs ***/
-	else if (!strncmp(url, "type=Strongs", 12)) {
+	} else if (!strncmp(url, "type=Strongs", 12)) {/*** thml strongs ***/
 		gchar *modbuf = NULL;
 		gchar *modbuf_viewer = NULL;
 		gchar *mybuf = NULL;
@@ -636,9 +644,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gui_display_dictlex_in_sidebar(modbuf_viewer,
 						       buf);
 		g_free(buf);
-	}
-	/***  gbf strongs  ***/
-	else if (*url == '#') {
+	} else if (*url == '#') {/***  gbf strongs  ***/
 		++url;		/* remove # */
 		if (*url == 'T') {
 			++url;	/* remove T */
@@ -741,9 +747,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				g_free(buf);
 			}
 		}
-	}
-	/***  gbf morph tag  ***/
-	else if (*url == 'M') {
+	} else if (*url == 'M') {/***  gbf morph tag  ***/
 		++url;		/* remove M */
 		buf = g_strdup(url);
 		if (settings.inDictpane)
@@ -751,9 +755,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar("Packard", buf);
 		g_free(buf);
-	}
-
-	else if (*url == 'U') {
+	} else if (*url == 'U') {
 		++url;		/* remove U */
 		buf = g_strdup(url);
 		if (get_mod_type(buf) == TEXT_TYPE) {

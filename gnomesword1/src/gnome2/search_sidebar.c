@@ -163,6 +163,16 @@ static void fill_search_results_list(int finds)
 	GtkTreeSelection *selection;
 	GtkTreePath *path;	
 	gchar *buf1 = N_("matches");
+	RESULTS *list_item;
+	
+	if(list_of_verses) {
+		while(list_of_verses) {
+			g_free(list_of_verses->data);
+			list_of_verses = g_list_next(list_of_verses);
+		}
+		g_list_free(list_of_verses);
+	}
+	list_of_verses = NULL;
 	
 	selection = gtk_tree_view_get_selection
                                           (GTK_TREE_VIEW(sidebar.results_list));
@@ -175,6 +185,11 @@ static void fill_search_results_list(int finds)
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 					   tmpbuf, -1);
+		list_item = g_new(RESULTS,1);
+		list_item->module = settings.sb_search_mod;
+		list_item->key = tmpbuf;
+		list_of_verses = g_list_append(list_of_verses, 
+						(RESULTS *) list_item);
 	}
 	
 	sprintf(buf, "%d %s", finds, buf1);

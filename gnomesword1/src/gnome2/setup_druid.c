@@ -132,7 +132,7 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 					 (widgets.combo_entry_int5)));
 
 
-	xml_set_value("GnomeSword", "modules", "percom",
+	xml_set_value("GnomeSword", "modules", "percomm",
 		      gtk_entry_get_text(GTK_ENTRY
 					 (widgets.
 					  combo_entry_personal)));

@@ -26,8 +26,8 @@
 extern "C" {
 #endif
 
-typedef struct _sitebar SIDEBAR;
-struct _sitebar {
+typedef struct _sidebar SIDEBAR;
+struct _sidebar {
 	GtkWidget *module_list;
 	GtkWidget *menu_modules;
 	GtkWidget
@@ -44,6 +44,13 @@ struct _sitebar {
 };
 extern SIDEBAR sidebar;
 
+typedef struct _search_results RESULTS;
+struct _search_results {
+	gchar *module;
+	gchar *key;
+};
+
+extern GList *list_of_verses;
 
 void gui_display_devotional_in_sidebar(void);
 void gui_set_sidebar_porgram_start(void);

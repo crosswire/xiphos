@@ -266,7 +266,33 @@ int backend_set_range(char * list)
  *   int
  */
 
-int backend_start_parse_verse_list(const char * list)
+int backend_start_parse_verse_list(const char * list, char * current_key)
+{
+	VerseKey key;
+	
+	key.setText(current_key);
+	verses = key.ParseVerseList(list, key);
+	return verses.Count();
+}
+
+
+/******************************************************************************
+ * Name
+ *    backend_start_parse_verse_list
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   int backend_start_parse_verse_list(char * list)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   int
+ */
+
+int backend_start_parse_range_list(const char * list)
 {
 	VerseKey key;
 	

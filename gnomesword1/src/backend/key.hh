@@ -35,7 +35,8 @@ void backend_set_scope2range(void);
 void backend_set_results_position(char pos);	
 const char *backend_get_next_result_key(void);
 int backend_set_range(char * list);
-int backend_start_parse_verse_list(const char * list);
+int backend_start_parse_verse_list(const char * list, char * current_key);
+int backend_start_parse_range_list(const char * list);
 char *backend_get_next_verse_list_element(int count);
 
 char *backend_get_valid_key(const char *key);
