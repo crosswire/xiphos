@@ -239,7 +239,7 @@ void initSWORD(GtkWidget * mainform)
 	percomDisplay = new GTKPerComDisp(lookup_widget(mainform, "textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
-	bookDisplay = new GtkHTMLEntryDisp(settings->htmlBook);
+	bookDisplay = new ComEntryDisp(settings->htmlBook);
 	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
 	FPNDisplay = new ComEntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));

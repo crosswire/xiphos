@@ -204,7 +204,7 @@ static void on_buttonBooks_clicked(GtkButton * button,
 }
 
 void
-on_clistSearchResults_select_row       (GtkCList        *clist,
+on_clistSearchResults_select_row(GtkCList        *clist,
                                         gint             row,
                                         gint             column,
                                         GdkEvent        *event,
