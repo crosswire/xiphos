@@ -59,7 +59,6 @@ GtkWidget *spbVTVerse;
  * externs
  ****************************************************************************************/
 extern gchar current_verse[];
-//extern GList *cbBook_items;
 extern SETTINGS *settings;
 extern gboolean gsI_isrunning;
 
@@ -187,12 +186,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
 		g_free(buf);
 		gtk_widget_show(dlg);
-	} else {
-		buf = g_strdup(url);
-		VTgotoverseSWORD(buf);
-		updatecontrols();
-		g_free(buf);
-	}
+	} 
 }
 
 static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)

@@ -126,7 +126,7 @@ void showSBVerseList(SETTINGS * s)
 	changegroupnameSB(s, s->groupName, groupnum7);
 }
 
-/*** set shortcut bar to verse list group ***/
+/*** set shortcut bar to Daily Devotion group ***/
 void setupforDailyDevotion(SETTINGS * s)
 {
 	showSBGroup(s, groupnum7);
@@ -634,7 +634,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(menuitem, menu_item_menu,
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 				      _("Biblical Texts"));
 
 		menuitem = gtk_menu_item_new_with_label(_("Add Commentary"));
@@ -649,7 +649,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(menuitem, menu_item_menu,
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 				      _("Commentaries"));
 
 		menuitem = gtk_menu_item_new_with_label(_("Add Dictionary"));
@@ -664,7 +664,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(menuitem, menu_item_menu,
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 				      _("Lexicons / Dictionaries"));
 	} else {
 		menuitem = gtk_menu_item_new_with_label(_("Add Shortcut"));
@@ -681,13 +681,13 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					  menu_item_menu);
 	/*** add bookmark items ***/
 		if (group_num == groupnum1)
-			create_modlistmenu_sb(menuitem, menu_item_menu,
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 					      _("Biblical Texts"));
 		if (group_num == groupnum2)
-			create_modlistmenu_sb(menuitem, menu_item_menu,
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 					      _("Commentaries"));
 		if (group_num == groupnum3)
-			create_modlistmenu_sb(menuitem, menu_item_menu,
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
 					      _("Lexicons / Dictionaries"));
 	}
 	/* Save the group num so we can get it in the callbacks. */
@@ -2063,12 +2063,12 @@ void update_shortcut_bar(SETTINGS * s)
 }
 
 void
-create_modlistmenu_sb(GtkWidget * menu,
+create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 		      GtkWidget * shortcut_menu_widget, gchar * modtype)
 {
 	GtkWidget *item;
 	GList *list;
-
+	if(group_num !=  groupnum0) {
 	item = gtk_menu_item_new_with_label(_("Add All Modules"));
 	gtk_widget_ref(item);
 	gtk_object_set_data_full(GTK_OBJECT(menu), "item",
@@ -2082,6 +2082,7 @@ create_modlistmenu_sb(GtkWidget * menu,
 			   GTK_SIGNAL_FUNC
 			   (on_add_all_activate),
 			   (gchar*)modtype);
+	}
 	
 	list = NULL;
 	list = getModlistSW(modtype);
