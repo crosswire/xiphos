@@ -9,7 +9,7 @@ AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
 
-AC_ARG_ENABLE(gnome2,[  --enable-gnome1          build for gnome1],gnome1=$enableval,gnome1="no") 
+AC_ARG_ENABLE(gnome1,[  --enable-gnome1          build for gnome1],gnome1=$enableval,gnome1="no") 
 
 if test "x$gnome1" = xno; then
 	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
@@ -59,9 +59,12 @@ else
 fi
 AM_GLIB_GNU_GETTEXT
 
+AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
+if test "x$sword_cvs" = xyes; then
+  AC_DEFINE(USE_SWORD_CVS, 1, [Define if you want to use cvs sword])
+fi
 
-
-AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],,enable_debug=no)
+AC_ARG_ENABLE(debug,[  --enable-debug          build debug library [default=no]],debug=$enableval,debug=no)
 CXXFLAGS="$CXXFLAGS -ftemplate-depth-25"
 
 if test x$enable_debug = xyes; then
@@ -241,14 +244,18 @@ echo
 echo "Summary of GnomeSword configuration:"
 echo
 
-echo "Building for Gnome:              2.x"  
+echo "Building for Gnome:           2.x"  
 
 
 if test "x$have_speller" = xyes; then
         echo "Spellchecking:                enabled"
-	echo "using:                            $speller"
+	echo "using:                        $speller"
 else
         echo "Spellchecking:                disabled"
 fi
 
-echo "install directory:              ${prefix}/bin"
+if test "x$sword_cvs" = xyes; then
+  echo "using:                        Sword CVS"
+fi
+
+echo "install directory:            ${prefix}/bin"
