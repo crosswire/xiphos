@@ -1,7 +1,17 @@
-2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
+2002-06-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* add French translation from Dominique Corbex <dominique.corbex@wanadoo.fr>
-	* change verse style menu item to be added in create_mainwindow
+	* added lookup default text module to preferences
+	* released 0.7.4
+
+2002-06-06  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* bumped to 0.7.4
+	* French translation updated by Dominique
+
+2002-06-05  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added French translation from Dominique Corbex <dominique.corbex@wanadoo.fr>
+	* changed verse style menu item to be added in create_mainwindow
 
 2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
