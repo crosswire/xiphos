@@ -246,6 +246,7 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 	GtkWidget *label9;
 	GtkWidget *label10;
 	GtkWidget *label11;
+	GtkWidget *label12;
 	GtkWidget *dialog_action_area3;
 	GtkWidget *cancelbutton2;
 	GtkWidget *okbutton3;
@@ -358,6 +359,28 @@ static GtkWidget *create_dialog_request(GS_DIALOG * info)
 		if (info->text3)
 			gtk_entry_set_text(GTK_ENTRY(entry3),
 					   info->text3);
+
+	}
+
+	if (info->label4) {
+		label12 = gtk_label_new(info->label3);
+		gtk_widget_show(label12);
+		gtk_table_attach(GTK_TABLE(table2), label12, 0, 1, 3, 4,
+				 (GtkAttachOptions) (GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		gtk_label_set_justify(GTK_LABEL(label12),
+				      GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label12), 0, 0.5);
+
+		entry4 = gtk_entry_new();
+		gtk_widget_show(entry4);
+		gtk_table_attach(GTK_TABLE(table2), entry4, 1, 2, 3, 4,
+				 (GtkAttachOptions) (GTK_EXPAND |
+						     GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		if (info->text4)
+			gtk_entry_set_text(GTK_ENTRY(entry4),
+					   info->text4);
 
 	}
 

@@ -259,7 +259,7 @@ int backend_uninstall_module(const char *dir, const char *modName)
 			modName);
 		return -1;
 	}
-	printf("\nprefixPath = %s\n",tmp_mgr->prefixPath);
+	//printf("\nprefixPath = %s\n",tmp_mgr->prefixPath);
 	module = it->second;
 	retval = installMgr->removeModule(tmp_mgr, module->Name());
 	delete tmp_mgr;
@@ -471,6 +471,7 @@ int backend_module_mgr_refresh_remote_source(const char *sourceName)
 
 void backend_init_module_mgr_config(void)
 {
+	
 	char *envhomedir = getenv("HOME");
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
@@ -496,6 +497,56 @@ void backend_init_module_mgr_config(void)
 	config.Save();
 }
 
+void backend_module_mgr_save_config(GList *local, GList *remote)
+{
+	MOD_MGR_SOURCE *mms;
+	GList *tmp = NULL;
+	char *envhomedir = getenv("HOME");
+	SWBuf confPath = (envhomedir) ? envhomedir : ".";
+	confPath += "/.sword/InstallMgr/InstallMgr.conf";
+	FileMgr::createParent(confPath.c_str());
+	remove(confPath.c_str());
+	
+	SWConfig config(confPath.c_str());
+	
+	config["General"]["PassiveFTF"] = "true";
+	
+	tmp = remote;
+	while(tmp) {
+		mms = (MOD_MGR_SOURCE*) tmp->data;
+		InstallSource is(mms->type);
+		is.caption = mms->caption;
+		is.source = mms->source;
+		is.directory = mms->directory;
+		config.Sections["Sources"].insert(
+				ConfigEntMap::value_type("FTPSource", 
+				is.getConfEnt().c_str()));
+		tmp = g_list_next(tmp);
+	}		
+	config.Save();
+}
+
+void backend_module_mgr_add_source(const char * type,
+				   const char * caption,
+				   const char * source,
+				   const char * directory)
+{
+	char *envhomedir = getenv("HOME");
+	SWBuf confPath = (envhomedir) ? envhomedir : ".";
+	confPath += "/.sword/InstallMgr/InstallMgr.conf";
+	FileMgr::createParent(confPath.c_str());
+	
+	SWConfig config(confPath.c_str());
+
+	InstallSource is(type);
+	is.caption = caption;
+	is.source = source;
+	is.directory = directory;
+	config.Sections["Sources"].insert(ConfigEntMap::value_type("FTPSource", 
+		is.getConfEnt().c_str()));	
+	config.Save();
+}
+
 /******************************************************************************
  * Name
  *   backend_init_module_mgr
@@ -518,7 +569,7 @@ void backend_init_module_mgr(const char *dir)
 		mgr = new SWMgr(dir);
 	else
 		mgr = new SWMgr();
-	printf("dir = %s\n",dir);
+	//printf("dir = %s\n",dir);
 	char *envhomedir = getenv("HOME");
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";

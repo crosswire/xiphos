@@ -56,11 +56,6 @@ void delete_module_mgr(void)
 {
 	backend_delete_module_mgr();
 }
-char *get_text(const char * module_name, const char *key)
-{
-	return backend_get_text(module_name, key);
-}
-
 
 int gbs_treekey_get_parent(unsigned long offset)
 {

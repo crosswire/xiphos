@@ -41,7 +41,6 @@
 #include <swversion.h>
 #include <swmodule.h>
 #include <localemgr.h>
-#include <flatapi.h>
 
 #include "main/sword.h"
 #include "main/lists.h"
@@ -51,21 +50,6 @@
 
 using namespace sword;
 
-
-char *backend_get_text(const char * module_name, const char *key)
-{
-	SWHANDLE mgr;
-	SWHANDLE module;
-	char *retval = NULL;
-	
-	mgr = SWMgr_new();
-	module = SWMgr_getModuleByName(mgr, module_name);
-	SWModule_setKeyText(module, key);
-	retval = strdup(SWModule_getRenderText(module));
-	SWMgr_delete(mgr);
-	return retval;	
-}
-
 static char *get_sword_locale(void)
 {
 	const char *sys_local;
@@ -74,17 +58,16 @@ static char *get_sword_locale(void)
 	int i = 0;
 	
 	sys_local = LocaleMgr::systemLocaleMgr.getDefaultLocaleName();
-	if(!strncmp(sys_local,"ru_RU-cp1251",10)) {
-		if(strlen(sys_local) > 12 ) {
-			for(i = 0; i < 12; i++) {
+	if(!strncmp(sys_local,"ru_RU",5)) {
+		//if(strlen(sys_local) > 12 ) {
+			/*for(i = 0; i < 12; i++) {
 				buf[i] = sys_local[i];
 				buf[i+1] = '\0';
-			}
-			sys_local = buf;
-		}
+			}*/
+			sys_local = "ru_RU-koi8-r";//buf;
+		//}
 		
-	}
-	else if(!strncmp(sys_local,"ru_RU-koi8-r",10)){
+	} else if(!strncmp(sys_local,"ru_RU-koi8-r",10)){
 		if(strlen(sys_local) >  12) {
 			for(i = 0; i < 12; i++) {
 				buf[i] = sys_local[i];
@@ -93,9 +76,7 @@ static char *get_sword_locale(void)
 			sys_local = buf;
 		}
 		
-	}
-		
-	else if(!strncmp(sys_local,"uk_UA-cp1251",10)){
+	} else if(!strncmp(sys_local,"uk_UA-cp1251",10)){
 		if(strlen(sys_local) > 12 ) {
 			for(i = 0; i < 12; i++) {
 				buf[i] = sys_local[i];
@@ -104,9 +85,7 @@ static char *get_sword_locale(void)
 			sys_local = buf;
 		}
 		
-	}
-		
-	else if(!strncmp(sys_local,"uk_UA-koi8-u",10)){
+	} else if(!strncmp(sys_local,"uk_UA-koi8-u",10)){
 		if(strlen(sys_local) > 12 ) {
 			for(i = 0; i < 12; i++) {
 				buf[i] = sys_local[i];
@@ -115,9 +94,7 @@ static char *get_sword_locale(void)
 			sys_local = buf;
 		}
 		
-	}
-		
-	else if(!strncmp(sys_local,"pt_BR",5)){
+	} else if(!strncmp(sys_local,"pt_BR",5)){
 		if(strlen(sys_local) > 5 ) {
 			for(i = 0; i < 5; i++) {
 				buf[i] = sys_local[i];
@@ -126,9 +103,7 @@ static char *get_sword_locale(void)
 			sys_local = buf;
 		}
 		
-	}
-		
-	else if(!strncmp(sys_local,"en_GB",5)){
+	} else if(!strncmp(sys_local,"en_GB",5)){
 		if(strlen(sys_local) > 5 ) {
 			for(i = 0; i < 5; i++) {
 				buf[i] = sys_local[i];
@@ -136,9 +111,7 @@ static char *get_sword_locale(void)
 			}
 			sys_local = buf;
 		}
-	}
-		
-	else {
+	} else {
 		if(strlen(sys_local) > 2 ) {
 			buf[0] = sys_local[0];
 			buf[1] = sys_local[1];
