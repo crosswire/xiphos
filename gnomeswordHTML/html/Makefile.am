@@ -11,13 +11,19 @@ INCLUDES =  \
 
 libhtmleditor_a_SOURCES = 	\
         gs_editor.c \
-	gs_editor.h \
+        gs_editor.h \
         body.c \
         body.h \
         control-data.c \
         control-data.h \
         dialog.c \
         dialog.h \
+        filebar.c \
+        filebar.h \
+        insertbar.c \
+        insertbar.h \
+        editbar.c \
+        editbar.h \
         image.c \
         image.h \
         link.c \
