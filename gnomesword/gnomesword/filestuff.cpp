@@ -93,7 +93,8 @@ setDiretory(void)
 }
 
 //--------------------------------------------------------------------------------------------
-void
+
+/* void
 loadbookmarkarray(void) //------------------------------------------- load bookmarks form file
 {                       //------------------------------------------- store in bmarks[]
 	gint i,j;
@@ -125,6 +126,8 @@ loadbookmarkarray(void) //------------------------------------------- load bookm
 	fclose(flbookmarks);
 
 }
+*/
+
 //-------------------------------------------------------------------------------------------
 void
 loadbookmarks_programstart(void)
@@ -145,8 +148,12 @@ loadbookmarks_programstart(void)
   filesize = stat_p.st_size;
   ibookmarks = (filesize / (sizeof(mylist)));
 	p_mylist = &mylist;
-	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
 	
+	if((flbookmarksnew = open(fnbookmarksnew, O_RDONLY)) == -1) //-- try to open file
+	{
+		createFiles(); //-- create bookmark file if we cannot open the file
+	}
+	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
 	while(i < ibookmarks)
 	{
 	  read(flbookmarksnew,(char *)&mylist,sizeof(mylist));					
@@ -219,11 +226,13 @@ savebookmark(gchar *item)
 	strcpy(p_mylist->menu	,"_Bookmarks/");
 	write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
 	close(flbookmarksnew); 	
-}
+} 
+
+/*
 //--------------------------------------------------------------------------------------------
 void
 savebookmarks(void) 
-{ /*
+{ 
 	gint i,j;
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
@@ -319,8 +328,9 @@ savebookmarks(void)
 		write(flbookmarksnew,(char *)&mylist,sizeof(mylist));
 		close(flbookmarksnew);	
 		ibookmarks = 10;
-		*/	
+			
 }
+*/
 
 //--------------------------------------------------------------------------------------------
 void

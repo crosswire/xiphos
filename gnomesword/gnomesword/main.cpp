@@ -38,10 +38,25 @@ main (int argc, char *argv[])
   GtkWidget *menu2;
   GtkWidget *menu3;
   GtkWidget *menu4;
-  GtkWidget *menu5;  
+  GtkWidget *menu5;
+  bool 			newconfigs = false;
+  bool			newbookmarks = false;
+  gchar 		*buf,
+  					tmpbuf[80];
 
+  sprintf(tmpbuf,"%d",argc);
+  cout << tmpbuf;
+  if(argc > 1)
+  buf = g_strdup(argv[1]);
+	
   gnome_init ("GnomeSword", VERSION, argc, argv);
-
+  if(!strcmp(buf,"newconfigs")) newconfigs = true;
+  if(!strcmp(buf,"newbookmarks")) newbookmarks = true;
+  if(!strcmp(buf,"newfiles"))
+  {
+  	newconfigs = true;
+  	newbookmarks = true;
+  }
   /*
    * The following code was added by Glade to create one of each component
    * (except popup menus), just so that you see something after building
@@ -56,8 +71,14 @@ main (int argc, char *argv[])
   mainwindow = create_mainwindow ();
 
   setDiretory();
-  loadbookmarkarray();
-  //createFiles();
+  if(newconfigs)
+  {
+  	createsettings();
+  }
+  if(newbookmarks)
+  {
+  	createFiles();
+  }
   initSword(mainwindow,menu1,menu2,menu3,menu4,menu5);
   gtk_widget_show (mainwindow);
   UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items
