@@ -238,7 +238,7 @@ static GtkHTMLReplaceAskDialog *ask_dialog_new(HTMLEngine * e)
 	GTK_WIDGET_SET_FLAGS(button_next, GTK_CAN_DEFAULT);
 
 	button_cancel_ask =
-	    gtk_button_new_from_stock ("gtk-cancel");
+	    gtk_button_new_from_stock (GTK_STOCK_CANCEL);
 	gtk_widget_show(button_cancel_ask);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox10),
 			  button_cancel_ask);
@@ -458,12 +458,12 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area30), hbuttonbox9,
 			   TRUE, TRUE, 0);
 
-	button_cancel = gtk_button_new_from_stock ("gtk-close");
+	button_cancel = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(button_cancel);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_cancel);
 	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
 
-	button_replace = gtk_button_new_from_stock ("gtk-find-and-replace");
+	button_replace = gtk_button_new_from_stock (GTK_STOCK_FIND_AND_REPLACE);
 	gtk_widget_show(button_replace);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_replace);
 	GTK_WIDGET_SET_FLAGS(button_replace, GTK_CAN_DEFAULT);
