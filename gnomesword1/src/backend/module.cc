@@ -984,8 +984,8 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 				return strdup((char *) mod->getRawEntry());
 			else
 				return strdup((char *) mod->RenderText());
-		} else
-			return strdup((char *) mod->RenderText());
+		} 
+		return strdup((char *) mod->RenderText());
 		
 	}
 	return NULL;
@@ -1328,9 +1328,8 @@ char *backend_get_commentary_text(char *mod_name, char *key)
 			else 
 				return strdup(mod->RenderText());
 			
-		} else 
-			return strdup(mod->RenderText());
-			
+		} 
+		return strdup(mod->RenderText());
 	}
 	return NULL;
 }

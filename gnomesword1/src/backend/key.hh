@@ -45,7 +45,7 @@ int backend_get_chapter_from_key(const char *key);
 int backend_get_verse_from_key(const char *key);
 const unsigned int backend_chapter_count(const char *key);
 const unsigned int backend_verse_count(const char *key);
-char *backend_get_next_book_of_bible(void);
+const char *backend_get_next_book_of_bible(void);
 
 
 #ifdef __cplusplus
