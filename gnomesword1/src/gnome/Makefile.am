@@ -16,8 +16,9 @@ gnomesword_1_0_SOURCES =  \
     bibletext_menu.c \
     bookmarks.c \
     cipher_key_dialog.c \
-    commentary_dialog.c \
     commentary.c \
+    commentary_dialog.c \
+    commentary_menu.c \
     dialog.c \
     dictlex.c \
     dictlex_dialog.c \

@@ -1,5 +1,6 @@
 INCLUDES =  \
-    -I$(top_builddir)/src
+    -I$(top_builddir)/src \
+    -I/usr/include/gconf/1/
 
 noinst_LIBRARIES = libmain.a  
 
