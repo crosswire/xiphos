@@ -31,6 +31,10 @@ void displayHTML(GtkWidget *html,
 		gint lentxt);
 void on_copyhtml_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
+void on_html_lookup_selection_activate(GtkMenuItem * menuitem, 
+		gpointer user_data);
+void on_html_goto_reference_activate(GtkMenuItem * menuitem, 
+		gpointer user_data);
 void gotoanchorHTML(gchar *verse);
 
 #ifdef __cplusplus
