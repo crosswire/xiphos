@@ -711,7 +711,7 @@ fi
 
 PACKAGE=gnomesword
 
-VERSION=0.1.8b
+VERSION=0.1.8c
 
 if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
   { echo "configure: error: source directory already configured; run "make distclean" there first" 1>&2; exit 1; }

@@ -1,6 +1,6 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/callback.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/Projects2/gnomesword/gnomesword/interface.cpp,/home/tb/Projects2/gnomesword/gnomesword/listeditor.cpp,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/listeditor.cpp,/home/tb/Projects2/gnomesword/gnomesword/dialogs.cpp,
 show_outputview=true
 show_treeview=true
 header_file=Untitled.h
