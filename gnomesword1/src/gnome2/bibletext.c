@@ -780,7 +780,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	main_dialogs_open((gchar *) user_data);
+	main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
 }
 
 /******************************************************************************

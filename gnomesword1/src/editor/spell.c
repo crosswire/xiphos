@@ -37,7 +37,8 @@
 #include "gtkhtml/htmlobject.h"
 #include "gtkhtml/htmlselection.h"
 
-//#include "menubar.h"
+//#include "menubar.h" 
+#include "Spell.h"
 #include "spell.h"
 #include "main/settings.h"
 

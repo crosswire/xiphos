@@ -36,6 +36,10 @@ AM_PROG_LIBTOOL
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
+EDITOR_API_VERSION=3.1
+AC_DEFINE_UNQUOTED(EDITOR_API_VERSION, "${EDITOR_API_VERSION}", [Editor API Version])
+AC_SUBST(EDITOR_API_VERSION)
+
 
 dnl ================================================================
 dnl Gettext stuff.

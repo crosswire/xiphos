@@ -86,8 +86,8 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 	   GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g);
 
 void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d);
-void main_dialog_save_note(DIALOG_DATA * d);
-void main_dialog_delete_note(DIALOG_DATA * d);
+void main_dialog_save_note(gpointer data);
+void main_dialog_delete_note(gpointer data);
 
 void main_dialog_update_controls(DIALOG_DATA * vt);
 void main_bible_dialog_display(DIALOG_DATA * t);
@@ -99,7 +99,7 @@ void main_free_on_destroy(DIALOG_DATA * vt);
 void main_dialog_goto_bookmark(const gchar * module, const gchar * key);
 void main_dialog_set_global_opt(gboolean choice);
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked);
-void main_dialogs_open(gchar * mod_name);
+DIALOG_DATA *main_dialogs_open( const gchar * mod_name,  const gchar * key);
 
 #ifdef __cplusplus
 }

@@ -44,9 +44,9 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+#include "editor/dialog.h"
 #include "editor/editor.h"
 #include "editor/editor_menu.h"
-#include "editor/editor_replace.h"
 #include "editor/toolbar_style.h"
 #include "editor/toolbar_edit.h"
 #include "gui/fileselection.h"
@@ -54,6 +54,8 @@
 #include "gui/html.h"
 
 #include "main/settings.h"
+static GtkWidget *control;
+static gint formatHTML = 1;
 
 /******************************************************************************
  * much of this code taken form GtkHTML
@@ -75,12 +77,13 @@
  *   GSHTMLEditorControlData *
  */
  
-GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
+GSHTMLEditorControlData *editor_control_data_new(GtkHTML * html, GtkWidget * vbox)
 {
 	GSHTMLEditorControlData *necd =
 	    g_new0(GSHTMLEditorControlData, 1);
-	necd->htmlwidget = gtk_html_new();
-	necd->html = GTK_HTML(necd->htmlwidget);
+	//necd->htmlwidget = gtk_html_new();
+	necd->html = html;
+	necd->vbox = vbox;
 	necd->paragraph_option = NULL;
 	necd->properties_types = NULL;
 	necd->block_font_style_change = FALSE;
@@ -92,6 +95,7 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 	necd->gbs = FALSE;
 	necd->personal_comments = FALSE;
 	necd->studypad = FALSE;
+	necd->be = NULL;
 	//necd->icon_theme              = gnome_icon_theme_new ();
 	
 	spell_init (necd->html, necd);
@@ -124,7 +128,7 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
  *   void
  */
  
-void gui_html_editor_control_data_destroy(GtkObject * object,
+void editor_control_data_destroy(GtkObject * object,
 			GSHTMLEditorControlData * ecd)
 {
 	g_assert(ecd);
@@ -204,13 +208,12 @@ void gui_update_statusbar(GSHTMLEditorControlData * ecd)
 
 /******************************************************************************
  * Name
- *  run_dialog
+ *  
  *
  * Synopsis
  *   #include "_editor.h"
  *
- *   void run_dialog(GnomeDialog *** dialog, GtkHTML * html, 
- *				DialogCtor ctor, const gchar * title)	
+ *   	
  *
  * Description
  *    
@@ -218,17 +221,19 @@ void gui_update_statusbar(GSHTMLEditorControlData * ecd)
  * Return value
  *   void
  */
- 
-void run_dialog(GtkWidget *** dialog, GtkHTML * html, 
-				DialogCtor ctor, const gchar * title)
+
+static int
+app_delete_cb (GtkWidget *widget, GdkEvent *event, gpointer dummy)
 {
-	if (*dialog) {
-		gtk_window_set_title(GTK_WINDOW(**dialog), title);
-		gtk_widget_show(GTK_WIDGET(**dialog));
-		gdk_window_raise(GTK_WIDGET(**dialog)->window);
-	} else {
-		*dialog = ctor(html);
-		gtk_window_set_title(GTK_WINDOW(**dialog), title);
-		gtk_widget_show(GTK_WIDGET(**dialog));
-	}
+	gtk_widget_destroy (GTK_WIDGET (widget));
+	//bonobo_main_quit ();
+
+	return FALSE;
+}
+
+
+guint editor_create (void)
+{
+	
+
 }
