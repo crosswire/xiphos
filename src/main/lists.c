@@ -27,6 +27,7 @@
 
 #include "main/lists.h"
 #include "main/sword.h"
+#include "main/settings.h"
 
 #include "backend/sword.h"
 	
@@ -99,6 +100,7 @@ GList * get_list(gint type)
 
 void init_lists(void)
 {	
+	guint  number_mods = 0;
 	mod_lists = &mods;
 	/* set glist to null */
 	mods.biblemods = NULL;
@@ -114,13 +116,45 @@ void init_lists(void)
 	mods.book_descriptions = NULL;	
 	mods.bible_books = NULL;
 	
+	settings.havebible = FALSE;
+	settings.havecomm = FALSE;
+	settings.havedict = FALSE;
+	settings.havebook = FALSE;
+	settings.havepercomm = FALSE;
+	
 	mods.bible_books = backend_get_books();
 	mods.options = backend_get_global_options_list();
+	
 	mods.biblemods = backend_get_list_of_mods_by_type(TEXT_MODS);
+	if(mods.biblemods != NULL) 
+		settings.havebible = TRUE;
+	number_mods = g_list_length(mods.biblemods);
+	g_print("\nNumber of Text modules = %d\n", number_mods);
+	
 	mods.commentarymods = backend_get_list_of_mods_by_type(COMM_MODS);
+	if(mods.commentarymods != NULL) 
+		settings.havecomm = TRUE;
+	number_mods = g_list_length(mods.commentarymods);
+	g_print("Number of Commentary modules = %d\n", number_mods);
+	
 	mods.dictionarymods = backend_get_list_of_mods_by_type(DICT_MODS);
+	if(mods.dictionarymods != NULL) 
+		settings.havedict = TRUE;
+	number_mods = g_list_length(mods.dictionarymods);
+	g_print("Number of Dict/lex modules = %d\n", number_mods);
+	
 	mods.bookmods = backend_get_list_of_mods_by_type(BOOK_MODS);
+	if(mods.bookmods != NULL) 
+		settings.havebook = TRUE;
+	number_mods = g_list_length(mods.bookmods);
+	g_print("Number of Book modules = %d\n", number_mods);
+	
 	mods.percommods = backend_get_list_of_percom_modules();
+	if(mods.percommods != NULL) 
+		settings.havepercomm = TRUE;
+	number_mods = g_list_length(mods.percommods);
+	g_print("Number of Percomm modules = %d\n\n", number_mods);
+	
 	mods.devotionmods = backend_get_list_of_devotion_modules();
 	mods.text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
 	mods.comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);

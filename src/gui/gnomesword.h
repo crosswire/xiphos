@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gnomesword.h - glue
+ * gnomesword.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *

@@ -55,6 +55,7 @@
 int main(int argc, char *argv[])
 {
 	gint icreatefiles = 0;
+	gint first_run = 0;
 	gboolean newconfigs = FALSE;
 	gboolean newbookmarks = FALSE;
 
@@ -76,11 +77,6 @@ int main(int argc, char *argv[])
 			newbookmarks = TRUE;
 		}
 	}
-
-	/* 
-	 * start swmgrs so they can be used by setup druid
-	 */
-	backend_first_init();
 	
 	/* 
 	 * check for directories and files
@@ -91,7 +87,8 @@ int main(int argc, char *argv[])
 	}
 
 	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs)  {
-		gui_first_run();
+		backend_init();
+		first_run = gui_first_run();
 	}
 
 	backend_load_properties();
@@ -99,8 +96,9 @@ int main(int argc, char *argv[])
 	gui_splash_init();
 
 	gui_splash_step1();
-	
-	backend_init_sword();
+		
+	if(!first_run) 
+		backend_init();
 
 	gui_splash_step2();
 		
