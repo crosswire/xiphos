@@ -1,3 +1,8 @@
+2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* reworked some of the save and load bookmarks code
+	  to work with Victor's changes	
+	
 2002-03-28  Victor Porton  <porton@localhost>
 
 	* rewritten some of bookmarks code

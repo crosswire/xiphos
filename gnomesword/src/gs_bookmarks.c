@@ -78,7 +78,6 @@ GtkCTreeNode *newrootnode;
  * static
  ******************************************************************************
 */
-static GtkCTreeNode *node2;
 static GtkCTreeNode *selected_node;
 static gboolean applychangestobookmark;
 
@@ -88,7 +87,6 @@ static gboolean applychangestobookmark;
  *****************************************************************************
 */
 static void after_press(GtkCTree * ctree, gpointer data);
-static void setleaf(GtkWidget * ctree_widget);
 static void on_ctree_select_row(GtkCList * clist,
 		    	gint row,
 		    	gint column, 
@@ -217,24 +215,6 @@ static void after_press(GtkCTree * ctree, gpointer data)
 
 }
 
-/*** sets all nodes that do not have children to leaf at load time :FIXME***/
-/*** this could cause problems if the node is a group but has had no children add yet ***/
-static void setleaf(GtkWidget * ctree_widget)
-{
-	GtkCTree *ctree;
-	int i;
-
-	ctree = GTK_CTREE(ctree_widget);
-	gtk_ctree_expand_recursive(ctree, NULL);
-	for (i = 0; i < GTK_CLIST(ctree)->rows; i++) {
-		node2 = gtk_ctree_node_nth(ctree, i);
-		if (GTK_CTREE_ROW(node2)->children == NULL) {
-			GTK_CTREE_ROW(node2)->is_leaf = TRUE;
-			GTK_CTREE_ROW(node2)->expanded = FALSE;
-		}
-	}
-	gtk_ctree_collapse_recursive(ctree, NULL);
-}
 
 static void
 on_ctree_select_row(GtkCList * clist,
@@ -747,7 +727,6 @@ void loadtree(SETTINGS * s)
 				 GTK_SIGNAL_FUNC(after_press), NULL);
 
 	loadbookmarks(s->ctree_widget);
-	setleaf(s->ctree_widget);
 	gtk_ctree_sort_recursive(p_bmtree->ctree, personal_node);
 
 	gtk_signal_connect(GTK_OBJECT(s->ctree_widget), "select_row",
@@ -1026,6 +1005,7 @@ create_addBookmarkMenuBM(GtkWidget *menu,
 	GtkWidget *item;
 	GtkCTree * ctree;
 	GtkCTreeNode *node;
+	gboolean is_leaf;
 	gint i;
 	ctree = GTK_CTREE(s->ctree_widget);
 	/* collapse tree so we only iterate through the roots */
@@ -1034,18 +1014,30 @@ create_addBookmarkMenuBM(GtkWidget *menu,
 		node = gtk_ctree_node_nth(ctree, i);
   		if (!node)
     			return;
-		item = gtk_menu_item_new_with_label(GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text);
-		gtk_widget_ref(item);
-		gtk_object_set_data_full(GTK_OBJECT(menu), "item",
-					 item,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(item);	
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_add_bookmark_activate),
-				   (GtkCTreeNode *)node);
-		gtk_container_add(GTK_CONTAINER(bookmark_menu_widget), item);		
+		gtk_ctree_get_node_info(ctree,
+					node,
+					NULL,
+					NULL,
+					NULL,
+					NULL,
+					NULL,
+					NULL,
+					&is_leaf,
+					NULL);
+		if(is_leaf) continue;  //{
+			item = gtk_menu_item_new_with_label(GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text);
+			gtk_widget_ref(item);
+			gtk_object_set_data_full(GTK_OBJECT(menu), "item",
+						 item,
+						 (GtkDestroyNotify)
+						 gtk_widget_unref);
+			gtk_widget_show(item);	
+			gtk_signal_connect(GTK_OBJECT(item), "activate",
+					   GTK_SIGNAL_FUNC
+					   (on_add_bookmark_activate),
+					   (GtkCTreeNode *)node);
+			gtk_container_add(GTK_CONTAINER(bookmark_menu_widget), item);	
+		//}
 	}	
 }
 
