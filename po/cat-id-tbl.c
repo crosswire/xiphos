@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-06 13:41-0500\n"
+"POT-Creation-Date: 2001-12-07 12:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "GomeSword - Save Note File"
 msgstr ""
 
-#: src/gs_gnomesword.c:73 src/gs_gui.c:677
+#: src/gs_gnomesword.c:73 src/gs_gui.c:679
 msgid "Romans 8:28"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid "_Quickmarks/"
 msgstr ""
 
-#: src/gs_gui.c:77 src/gs_gui.c:1477
+#: src/gs_gui.c:77 src/gs_gui.c:1412
 msgid "Copy"
 msgstr ""
 
@@ -198,85 +198,7 @@ msgstr ""
 msgid "Information about Bible texts"
 msgstr ""
 
-#. ***************************************************************************************
-#. hbox18 = gtk_hbox_new(FALSE, 0);
-#. gtk_widget_ref(hbox18);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "hbox18",
-#. hbox18,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(hbox18);
-#. gtk_box_pack_start(GTK_BOX(vbox22), hbox18, TRUE, TRUE, 0);
-#.
-#. framecom = gtk_frame_new(NULL);
-#. gtk_widget_ref(framecom);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "framecom",
-#. framecom,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(framecom);
-#. gtk_box_pack_start(GTK_BOX(hbox18), framecom, TRUE, TRUE, 0);
-#. gtk_container_set_border_width(GTK_CONTAINER(framecom), 2);
-#.
-#. swHtmlCom = gtk_scrolled_window_new(NULL, NULL);
-#. gtk_widget_ref(swHtmlCom);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "swHtmlCom",
-#. swHtmlCom,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(swHtmlCom);
-#. gtk_container_add(GTK_CONTAINER(framecom), swHtmlCom);
-#. gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swHtmlCom),
-#. GTK_POLICY_AUTOMATIC ,
-#. GTK_POLICY_AUTOMATIC);
-#.
-#.
-#.
-#. handlebox17 = gtk_handle_box_new();
-#. gtk_widget_ref(handlebox17);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "handlebox17",
-#. handlebox17,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_box_pack_start(GTK_BOX(hbox18), handlebox17, FALSE, FALSE, 0);
-#. gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(handlebox17),
-#. GTK_POS_TOP);
-#.
-#. toolbar26 =
-#. gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
-#. gtk_widget_ref(toolbar26);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "toolbar26",
-#. toolbar26,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(toolbar26);
-#. gtk_container_add(GTK_CONTAINER(handlebox17), toolbar26);
-#.
-#. tmp_toolbar_icon =
-#. gnome_stock_pixmap_widget(settings->app,
-#. GNOME_STOCK_PIXMAP_UP);
-#. btnComPrev =
-#. gtk_toolbar_append_element(GTK_TOOLBAR(toolbar26),
-#. GTK_TOOLBAR_CHILD_BUTTON, NULL,
-#. "button2", NULL, NULL,
-#. tmp_toolbar_icon, NULL, NULL);
-#. gtk_widget_ref(btnComPrev);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnComPrev",
-#. btnComPrev,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(btnComPrev);
-#.
-#. tmp_toolbar_icon =
-#. gnome_stock_pixmap_widget(settings->app,
-#. GNOME_STOCK_PIXMAP_DOWN);
-#. btnComNext =
-#. gtk_toolbar_append_element(GTK_TOOLBAR(toolbar26),
-#. GTK_TOOLBAR_CHILD_BUTTON, NULL,
-#. "button3", NULL, NULL,
-#. tmp_toolbar_icon, NULL, NULL);
-#. gtk_widget_ref(btnComNext);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnComNext",
-#. btnComNext,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(btnComNext);
-#.
-#. **********************************************************************************************
-#: src/gs_gui.c:173 src/gs_gui.c:1073 src/gs_shortcutbar.c:653
+#: src/gs_gui.c:173 src/gs_gui.c:1008 src/gs_shortcutbar.c:653
 #: src/gs_shortcutbar.c:688 src/gs_shortcutbar.c:1748
 msgid "Commentaries"
 msgstr ""
@@ -325,163 +247,163 @@ msgstr ""
 msgid "_History"
 msgstr ""
 
-#: src/gs_gui.c:369
+#: src/gs_gui.c:371
 msgid "GnomeSWORD - Bible Study Software"
 msgstr ""
 
-#: src/gs_gui.c:643
+#: src/gs_gui.c:645
 msgid "Romans"
 msgstr ""
 
-#: src/gs_gui.c:685
+#: src/gs_gui.c:687
 msgid "Goto verse"
 msgstr ""
 
-#: src/gs_gui.c:686
+#: src/gs_gui.c:688
 msgid "Go to verse in free form lookup and add verse to history"
 msgstr ""
 
-#: src/gs_gui.c:700
+#: src/gs_gui.c:702
 msgid "Back"
 msgstr ""
 
-#: src/gs_gui.c:701
+#: src/gs_gui.c:703
 msgid "Go backward through history list"
 msgstr ""
 
-#: src/gs_gui.c:716
+#: src/gs_gui.c:718
 msgid "Foward"
 msgstr ""
 
-#: src/gs_gui.c:717
+#: src/gs_gui.c:719
 msgid "Go foward through history list"
 msgstr ""
 
-#: src/gs_gui.c:742
+#: src/gs_gui.c:744
 msgid "Exit"
 msgstr ""
 
-#: src/gs_gui.c:743
+#: src/gs_gui.c:745
 msgid "Exit GnomeSword"
 msgstr ""
 
-#: src/gs_gui.c:916
+#: src/gs_gui.c:926
 msgid "Synchronize"
 msgstr ""
 
-#: src/gs_gui.c:917
+#: src/gs_gui.c:927
 msgid "Synchronize Commentary with Bible Text"
 msgstr ""
 
-#: src/gs_gui.c:928
+#: src/gs_gui.c:938
 msgid "button2"
 msgstr ""
 
-#: src/gs_gui.c:940
+#: src/gs_gui.c:950
 msgid "button3"
 msgstr ""
 
-#: src/gs_gui.c:960 src/gs_gui.c:1440
+#: src/gs_gui.c:970 src/gs_gui.c:1375
 msgid "Print"
 msgstr ""
 
-#: src/gs_gui.c:961
+#: src/gs_gui.c:971
 msgid "Print this Comment"
 msgstr ""
 
-#: src/gs_gui.c:1205
+#: src/gs_gui.c:1140
 msgid "Follow Main Text Window"
 msgstr ""
 
-#: src/gs_gui.c:1220
+#: src/gs_gui.c:1155
 msgid "Edit"
 msgstr ""
 
-#: src/gs_gui.c:1220
+#: src/gs_gui.c:1155
 msgid "Edit note"
 msgstr ""
 
-#: src/gs_gui.c:1234 src/gs_gui.c:1402
+#: src/gs_gui.c:1169 src/gs_gui.c:1337
 msgid "Save"
 msgstr ""
 
-#: src/gs_gui.c:1234
+#: src/gs_gui.c:1169
 msgid "Save note"
 msgstr ""
 
-#: src/gs_gui.c:1248
+#: src/gs_gui.c:1183
 msgid "Delete"
 msgstr ""
 
-#: src/gs_gui.c:1248
+#: src/gs_gui.c:1183
 msgid "Delete note"
 msgstr ""
 
-#: src/gs_gui.c:1262 src/gs_gui.c:1515
+#: src/gs_gui.c:1197 src/gs_gui.c:1450
 msgid "Spell Check"
 msgstr ""
 
-#: src/gs_gui.c:1262 src/gs_gui.c:1515
+#: src/gs_gui.c:1197 src/gs_gui.c:1450
 msgid "Start Spell Check"
 msgstr ""
 
-#: src/gs_gui.c:1270 src/gs_preferences_dlg.c:1287
+#: src/gs_gui.c:1205 src/gs_preferences_dlg.c:1287
 msgid "Personal Comments"
 msgstr ""
 
-#: src/gs_gui.c:1319
+#: src/gs_gui.c:1254
 msgid "Interlinear"
 msgstr ""
 
-#: src/gs_gui.c:1374
+#: src/gs_gui.c:1309
 msgid "New"
 msgstr ""
 
-#: src/gs_gui.c:1374
+#: src/gs_gui.c:1309
 msgid "Start new document"
 msgstr ""
 
-#: src/gs_gui.c:1388
+#: src/gs_gui.c:1323
 msgid "Open"
 msgstr ""
 
-#: src/gs_gui.c:1388
+#: src/gs_gui.c:1323
 msgid "Open File"
 msgstr ""
 
-#: src/gs_gui.c:1416
+#: src/gs_gui.c:1351
 msgid "Save As"
 msgstr ""
 
-#: src/gs_gui.c:1416
+#: src/gs_gui.c:1351
 msgid "Save as"
 msgstr ""
 
-#: src/gs_gui.c:1440
+#: src/gs_gui.c:1375
 msgid "Print current file"
 msgstr ""
 
-#: src/gs_gui.c:1463
+#: src/gs_gui.c:1398
 msgid "Cut"
 msgstr ""
 
-#: src/gs_gui.c:1463
+#: src/gs_gui.c:1398
 msgid "Cut to clipboard"
 msgstr ""
 
-#: src/gs_gui.c:1477
+#: src/gs_gui.c:1412
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/gs_gui.c:1491
+#: src/gs_gui.c:1426
 msgid "Paste"
 msgstr ""
 
-#: src/gs_gui.c:1491
+#: src/gs_gui.c:1426
 msgid "Paste from clipborad"
 msgstr ""
 
-#: src/gs_gui.c:1551
+#: src/gs_gui.c:1486
 msgid "Study Pad"
 msgstr ""
 
