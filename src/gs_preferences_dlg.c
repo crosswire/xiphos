@@ -46,6 +46,7 @@
 
 GtkWidget *notebook7;
 extern gchar *tmpcolor;
+static gboolean updatehtml, updateSB, updatelayout;
 
 #define NUM_SHORTCUT_TYPES1 3
 static gchar *shortcut_types[NUM_SHORTCUT_TYPES1] = {
@@ -61,7 +62,7 @@ static GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES1];
 //static GtkWidget *main_label;
 static EShortcutModel *shortcut_model;
 static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
-				const gchar * url, gpointer data);
+				 const gchar * url, gpointer data);
 
 static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
 				 const gchar * url, gpointer data)
@@ -83,14 +84,16 @@ static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
  * shortcut_bar - shortcut bar to add group to
  * group_name - name of the group to be added
  *****************************************************************************/
-static gint
-add_sb_group2(EShortcutBar *shortcut_bar,gchar *group_name)
+static gint add_sb_group2(EShortcutBar * shortcut_bar, gchar * group_name)
 {
 	gint group_num;
-	
-	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
-	e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
-        	return group_num;
+
+	group_num =
+	    e_shortcut_model_add_group(shortcut_bar->model, -1,
+				       group_name);
+	e_shortcut_bar_set_view_type(shortcut_bar, group_num,
+				     E_ICON_BAR_SMALL_ICONS);
+	return group_num;
 }
 
 /*****************************************************************************
@@ -103,6 +106,7 @@ on_shortcut_bar_item_selected1(EShortcutBar * shortcut_bar,
 {
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook7), item_num);	/* set notebook page */
 }
+
 /*
 static void set_preferences_to_current(SETTINGS * s)
 {
@@ -111,156 +115,211 @@ static void set_preferences_to_current(SETTINGS * s)
 */
 
 
-static void
-applyoptions(SETTINGS *s)
+static void applyoptions(SETTINGS * s)
 {
-         GtkWidget    	*text,
-				*dict,
-                      		*comm;
-	
-	text = lookup_widget(s->app,"nbTextMods");
-        dict = lookup_widget(s->app,"notebook4");
-        comm = lookup_widget(s->app,"notebook1");
-	/*  */	
-	if(s->text_tabs) {
-                gtk_widget_show(text);
-        } else {
-                gtk_widget_hide(text);
-        }
-        if(s->comm_tabs) {
-                gtk_widget_show(comm);
-        } else {
-                gtk_widget_hide(comm);
-        }
-        if(s->dict_tabs) {
-                gtk_widget_show(dict);
-        } else {
-                gtk_widget_hide(dict);
-        }
-        if(s->showshortcutbar){
-               e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
-        } else {
-               e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), 1);
-        }
-	GTK_CHECK_MENU_ITEM (s->versestyle_item)->active = s->versestyle;	
-	applyfontcolorandsizeSWORD();
-	updateshortcutbarSWORD();
+	GtkWidget *text, *dict, *comm;
+
+	text = lookup_widget(s->app, "nbTextMods");
+	dict = lookup_widget(s->app, "notebook4");
+	comm = lookup_widget(s->app, "notebook1");
+	/*  */
+	if (updatelayout) {
+		/* set the main window size */
+		gtk_window_set_default_size(GTK_WINDOW(s->app),
+					    s->gs_width, s->gs_hight);
+		if (s->showshortcutbar) {
+			e_paned_set_position(E_PANED
+					     (lookup_widget
+					      (s->app, "epaned")),
+					     s->shortcutbar_width);
+		} else {
+			e_paned_set_position(E_PANED
+					     (lookup_widget
+					      (s->app, "epaned")), 1);
+		}
+		/* set hight of bible and commentary pane */
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "vpaned1")),
+				     s->upperpane_hight);
+		/* set width of bible pane */
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "hpaned1")),
+				     s->biblepane_width);
+		updatelayout = FALSE;
+	}
+	if (s->text_tabs) {
+		gtk_widget_show(text);
+	} else {
+		gtk_widget_hide(text);
+	}
+	if (s->comm_tabs) {
+		gtk_widget_show(comm);
+	} else {
+		gtk_widget_hide(comm);
+	}
+	if (s->dict_tabs) {
+		gtk_widget_show(dict);
+	} else {
+		gtk_widget_hide(dict);
+	}
+	if (s->showshortcutbar) {
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "epaned")),
+				     s->shortcutbar_width);
+	} else {
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "epaned")), 1);
+	}
+	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
+	if (updatehtml)
+		applyfontcolorandsizeSWORD();
+	if (updateSB)
+		updateshortcutbarSWORD();
+	updatehtml = FALSE;
+	updateSB = FALSE;
 }
 
 
-static void get_preferences_from_dlg(GtkWidget *d ,SETTINGS * s)
+static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 {
 	/************************************************************
 	we need to read all propertybox options here
 	*************************************************************/
 	gchar *buf;
 	gdouble color[4];
-	
+
 	/*** read modules ***/
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry3")));
-	sprintf(s->MainWindowModule, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry4")));
-	sprintf(s->Interlinear1Module, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry5")));
-	sprintf(s->Interlinear2Module, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry6")));
-	sprintf(s->Interlinear3Module, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry7")));
-	sprintf(s->Interlinear4Module, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry8")));
-	sprintf(s->Interlinear5Module, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry9")));
-	sprintf(s->CommWindowModule, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry10")));
-	sprintf(s->DictWindowModule, "%s",buf);
-	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "entry11")));
-	sprintf(s->personalcommentsmod, "%s",buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry3")));
+	sprintf(s->MainWindowModule, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry4")));
+	sprintf(s->Interlinear1Module, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry5")));
+	sprintf(s->Interlinear2Module, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry6")));
+	sprintf(s->Interlinear3Module, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry7")));
+	sprintf(s->Interlinear4Module, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry8")));
+	sprintf(s->Interlinear5Module, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry9")));
+	sprintf(s->CommWindowModule, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry10")));
+	sprintf(s->DictWindowModule, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry11")));
+	sprintf(s->personalcommentsmod, "%s", buf);
 	/*** read html colors ***/
-	gnome_color_picker_get_d(GNOME_COLOR_PICKER(lookup_widget(d,"gcpText")), 
-			&color[0] , &color[1], &color[2], &color[3]);
-        buf = gdouble_arr_to_hex(color, 0);
-	sprintf(s->bible_text_color, "%s",buf);
-	gnome_color_picker_get_d(GNOME_COLOR_PICKER(lookup_widget(d,"gcpTextBG")), 
-			&color[0] , &color[1], &color[2], &color[3]);
-        buf = gdouble_arr_to_hex(color, 0);
-	sprintf(s->bible_bg_color, "%s",buf);
-	gnome_color_picker_get_d(GNOME_COLOR_PICKER(lookup_widget(d,"gcpCurrentverse")), 
-			&color[0] , &color[1], &color[2], &color[3]);
-        buf = gdouble_arr_to_hex(color, 0);
-	sprintf(s->currentverse_color, "%s",buf);
-	gnome_color_picker_get_d(GNOME_COLOR_PICKER(lookup_widget(d,"gcpTextLinks")), 
-			&color[0] , &color[1], &color[2], &color[3]);
-        buf = gdouble_arr_to_hex(color, 0);
-	sprintf(s->link_color, "%s",buf);
-	/*** read font sizes ***/	
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER
+				 (lookup_widget(d, "gcpText")), &color[0],
+				 &color[1], &color[2], &color[3]);
+	buf = gdouble_arr_to_hex(color, 0);
+	sprintf(s->bible_text_color, "%s", buf);
+	g_free(buf);
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER
+				 (lookup_widget(d, "gcpTextBG")),
+				 &color[0], &color[1], &color[2],
+				 &color[3]);
+	buf = gdouble_arr_to_hex(color, 0);
+	sprintf(s->bible_bg_color, "%s", buf);
+	g_free(buf);
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER
+				 (lookup_widget(d, "gcpCurrentverse")),
+				 &color[0], &color[1], &color[2],
+				 &color[3]);
+	buf = gdouble_arr_to_hex(color, 0);
+	sprintf(s->currentverse_color, "%s", buf);
+	g_free(buf);
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER
+				 (lookup_widget(d, "gcpTextVerseNums")),
+				 &color[0], &color[1], &color[2],
+				 &color[3]);
+	buf = gdouble_arr_to_hex(color, 0);
+	sprintf(s->bible_verse_num_color, "%s", buf);
+	g_free(buf);
+	gnome_color_picker_get_d(GNOME_COLOR_PICKER
+				 (lookup_widget(d, "gcpTextLinks")),
+				 &color[0], &color[1], &color[2],
+				 &color[3]);
+	buf = gdouble_arr_to_hex(color, 0);
+	sprintf(s->link_color, "%s", buf);
+	g_free(buf);
+	/*** read font sizes ***/
 	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "cmbEntryTextSize")));
-	sprintf(s->bible_font_size, "%s",buf);
+				 (lookup_widget(d, "cmbEntryTextSize")));
+	sprintf(s->bible_font_size, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget(d,
-					 "cmbEentryVNSize")));
-	sprintf(s->verse_num_font_size, "%s",buf);
+				 (lookup_widget(d, "cmbEentryVNSize")));
+	sprintf(s->verse_num_font_size, "%s", buf);
 	/*** read radio buttons ***/
 	s->usedefault = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "rbtnUsedefaults"))->active;
+							"rbtnUsedefaults"))->
+	    active;
 	/*** read check buttons ***/
 	s->showshortcutbar = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowSCB"))->active;
-	s->text_tabs = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowBibletabs"))->active;
-	s->comm_tabs = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowCOMtabs"))->active;
-	s->dict_tabs = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowDLtabs"))->active;	
-	s->versestyle = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "checkbutton9"))->active; 
-	s->showtextgroup = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowTextgroup"))->active;
-	s->showcomgroup = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowComGroup"))->active;
-	s-> showdictgroup= GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowDictGroup"))->active;
-	s->showhistorygroup = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnShowHistoryGroup"))->active;	
-	s->formatpercom = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "cbtnPNformat"))->active;		
-	s->autosavepersonalcomments = GTK_TOGGLE_BUTTON(lookup_widget(d,
-					 "checkbutton8"))->active;
-	
+							     "cbtnShowSCB"))->
+	    active;
+	s->text_tabs =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBibletabs"))->
+	    active;
+	s->comm_tabs =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowCOMtabs"))->active;
+	s->dict_tabs =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDLtabs"))->active;
+	s->versestyle =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton9"))->active;
+	s->showtextgroup =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowTextgroup"))->
+	    active;
+	s->showcomgroup =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowComGroup"))->
+	    active;
+	s->showdictgroup =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDictGroup"))->
+	    active;
+	s->showhistorygroup =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowHistoryGroup"))->
+	    active;
+	s->formatpercom =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
+	s->autosavepersonalcomments =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton8"))->active;
+	/*** read layout spin buttons ***/
+	s->gs_width =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (lookup_widget
+					      (d, "sbtnAppWidth")));
+	s->gs_hight =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (lookup_widget
+					      (d, "sbtnAppHight")));
+	s->shortcutbar_width =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (lookup_widget
+					      (d, "sbtnSBWidth")));
+	s->biblepane_width =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (lookup_widget
+					      (d, "sbtnTextWidth")));
+	s->upperpane_hight =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (lookup_widget
+					      (d, "sbtnUpPaneHight")));
+
+
 	saveconfig();
 	applyoptions(s);
-	
+
 }
- 
+
 
 static void on_btnPropertyboxOK_clicked(GtkButton * button,
 					gpointer user_data)
 {
 	GtkWidget *dlg;
 	SETTINGS *s;
-	
-	s = (SETTINGS *)user_data;
+
+	s = (SETTINGS *) user_data;
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	get_preferences_from_dlg(dlg,s);
+	get_preferences_from_dlg(dlg, s);
 	gtk_widget_destroy(dlg);
 }
 
@@ -270,10 +329,10 @@ static void on_btnPropertyboxApply_clicked(GtkButton * button,
 {
 	GtkWidget *dlg;
 	SETTINGS *s;
-	
-	s = (SETTINGS *)user_data;
+
+	s = (SETTINGS *) user_data;
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	get_preferences_from_dlg(dlg,s);
+	get_preferences_from_dlg(dlg, s);
 }
 
 static void
@@ -304,11 +363,13 @@ on_colorpicker_color_set(GnomeColorPicker * gnomecolorpicker,
 			 guint arg3, guint arg4, gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(gnomecolorpicker));
+	updatehtml = TRUE;
 }
 
 static void on_Entry_changed(GtkEditable * editable, gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(editable));
+	updatehtml = TRUE;
 }
 
 
@@ -316,17 +377,33 @@ static void
 on_button_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(togglebutton));
-}				
+	switch (GPOINTER_TO_INT(user_data)) {
+	case 0:
+		/*  */
+		break;
+	case 1:
+		updateSB = TRUE;
+		break;
+	}
+}
+
+
+static void
+on_spinbutton_changed(GtkEditable * editable, gpointer user_data)
+{
+	set_buttons_sensitive(GTK_WIDGET(editable));
+	updatelayout = TRUE;
+}
+
+
 /***  ***/
 GtkWidget *create_dlgSettings(SETTINGS * s,
-				GList *biblelist,
-				GList *commlist,
-				GList *dictlist,
-				GList *percomlist)
+			      GList * biblelist,
+			      GList * commlist,
+			      GList * dictlist, GList * percomlist)
 {
 	gint i, groupnum;
 	gchar *pathname;
-//	GdkPixbuf *icon_pixbuf;
 	gdouble *color;
 	gushort a;
 	GtkWidget *shortcut_bar;
@@ -389,6 +466,23 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *cbtnPNformat;
 	/****************************************************************************/
 	GtkWidget *checkbutton8;
+	GtkWidget *frame27;
+	GtkWidget *table10;
+	GtkWidget *label165;
+	GtkWidget *label166;
+	GtkWidget *label167;
+	GtkWidget *label168;
+	GtkWidget *label169;
+	GtkObject *sbtnAppWidth_adj;
+	GtkWidget *sbtnAppWidth;
+	GtkObject *sbtnAppHight_adj;
+	GtkWidget *sbtnAppHight;
+	GtkObject *sbtnSBWidth_adj;
+	GtkWidget *sbtnSBWidth;
+	GtkObject *sbtnTextWidth_adj;
+	GtkWidget *sbtnTextWidth;
+	GtkObject *sbtnUpPaneHight_adj;
+	GtkWidget *sbtnUpPaneHight;
 	GtkWidget *label123;
 	GtkWidget *table9;
 	GtkWidget *label156;
@@ -427,9 +521,13 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 
 	tooltips = gtk_tooltips_new();
 
-	a=000000;
-	
-	dlgSettings = gnome_dialog_new(_("GnomeSword - Preferences"), NULL);
+	a = 000000;
+	updatehtml = FALSE;
+	updateSB = FALSE;
+	updatelayout = FALSE;
+
+	dlgSettings =
+	    gnome_dialog_new(_("GnomeSword - Preferences"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSettings), "dlgSettings",
 			    dlgSettings);
 	gtk_window_set_policy(GTK_WINDOW(dlgSettings), FALSE, FALSE,
@@ -448,17 +546,17 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(dialog_vbox9), hbox22, TRUE, TRUE, 0);
 
 	shortcut_model = e_shortcut_model_new();
-	
+
 	shortcut_bar = e_shortcut_bar_new();
 	e_shortcut_bar_set_model(E_SHORTCUT_BAR(shortcut_bar),
-				shortcut_model);
+				 shortcut_model);
 	gtk_widget_set_usize(shortcut_bar, 150, 250);
 	gtk_widget_show(shortcut_bar);
 	gtk_box_pack_start(GTK_BOX(hbox22), shortcut_bar, TRUE, TRUE, 0);
 
 	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
-				icon_callback1, NULL);
-				
+					 icon_callback1, NULL);
+
 	notebook7 = gtk_notebook_new();
 	gtk_widget_ref(notebook7);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "notebook7",
@@ -511,9 +609,10 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpTextBG, 41, -2);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpTextBG),
 				     _("Pick a color for Background"));
-	if(string_is_color(s->bible_bg_color)){
-		color = hex_to_gdouble_arr(s->bible_bg_color); 
-		gnome_color_picker_set_i8 (GNOME_COLOR_PICKER(gcpTextBG),color[0] ,color[1] , color[2], a); 	
+	if (string_is_color(s->bible_bg_color)) {
+		color = hex_to_gdouble_arr(s->bible_bg_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpTextBG),
+					  color[0], color[1], color[2], a);
 	}
 
 	hbox30 = gtk_hbox_new(FALSE, 0);
@@ -543,11 +642,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpText, 41, -2);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpText),
 				     _("Pick a color for Bible Text"));
-	if(string_is_color(s->bible_text_color)){
-		color = hex_to_gdouble_arr(s->bible_text_color); 
-		gnome_color_picker_set_i8 (GNOME_COLOR_PICKER(gcpText),color[0] ,color[1] , color[2], a); 	
+	if (string_is_color(s->bible_text_color)) {
+		color = hex_to_gdouble_arr(s->bible_text_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpText),
+					  color[0], color[1], color[2], a);
 	}
-	
+
 	hbox36 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox36);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "hbox36", hbox36,
@@ -606,7 +706,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			     _
 			     ("Zero is base font size Go up or down from there"),
 			     NULL);
-	gtk_entry_set_text(GTK_ENTRY(cmbEntryTextSize), _(s->bible_font_size));
+	gtk_entry_set_text(GTK_ENTRY(cmbEntryTextSize),
+			   _(s->bible_font_size));
 
 	hbox35 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox35);
@@ -665,9 +766,11 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpCurrentverse, 41, -2);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpCurrentverse),
 				     _("Pick a color for Current Verse"));
-	if(string_is_color(s->currentverse_color)){
-		color = hex_to_gdouble_arr(s->currentverse_color); 
-		gnome_color_picker_set_i8 (GNOME_COLOR_PICKER(gcpCurrentverse),color[0] ,color[1] , color[2], a); 	
+	if (string_is_color(s->currentverse_color)) {
+		color = hex_to_gdouble_arr(s->currentverse_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpCurrentverse), color[0],
+					  color[1], color[2], a);
 	}
 	hbox31 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox31);
@@ -695,9 +798,11 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(hbox31), gcpTextVerseNums, TRUE, FALSE,
 			   0);
 	gtk_widget_set_usize(gcpTextVerseNums, 41, -2);
-	if(string_is_color(s->bible_verse_num_color)){
-		color = hex_to_gdouble_arr(s->bible_verse_num_color); 
-		gnome_color_picker_set_i8 (GNOME_COLOR_PICKER(gcpTextVerseNums),color[0] ,color[1] , color[2], a); 	
+	if (string_is_color(s->bible_verse_num_color)) {
+		color = hex_to_gdouble_arr(s->bible_verse_num_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpTextVerseNums), color[0],
+					  color[1], color[2], a);
 	}
 
 	hbox37 = gtk_hbox_new(FALSE, 0);
@@ -787,9 +892,10 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpTextLinks, 41, -2);
 	gtk_tooltips_set_tip(tooltips, gcpTextLinks,
 			     _("Strongs Numbers & Morph Tags"), NULL);
-	if(string_is_color(s->link_color)){
-		color = hex_to_gdouble_arr(s->link_color); 
-		gnome_color_picker_set_i8 (GNOME_COLOR_PICKER(gcpTextLinks),color[0] ,color[1] , color[2], a); 	
+	if (string_is_color(s->link_color)) {
+		color = hex_to_gdouble_arr(s->link_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpTextLinks),
+					  color[0], color[1], color[2], a);
 	}
 
 	btnSetToGSDefaults =
@@ -846,7 +952,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox36);
 	gtk_container_add(GTK_CONTAINER(frame21), vbox36);
- 
+
 	rbtnUsedefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
 					    _
@@ -860,7 +966,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(rbtnUsedefaults);
 	gtk_box_pack_start(GTK_BOX(vbox36), rbtnUsedefaults, FALSE, FALSE,
 			   0);
-	
+
 
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
@@ -875,11 +981,13 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(rbtnNoDefaults);
 	gtk_box_pack_start(GTK_BOX(vbox36), rbtnNoDefaults, FALSE, FALSE,
 			   0);
-	if(s->usedefault)
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbtnUsedefaults), TRUE);
+	if (s->usedefault)
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (rbtnUsedefaults), TRUE);
 	else
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbtnNoDefaults), TRUE);
-	
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (rbtnNoDefaults), TRUE);
+
 	cbtnShowSCB =
 	    gtk_check_button_new_with_label(_("Show Shortcut bar"));
 	gtk_widget_ref(cbtnShowSCB);
@@ -888,7 +996,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbtnShowSCB);
 	gtk_box_pack_start(GTK_BOX(vbox28), cbtnShowSCB, FALSE, FALSE, 0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowSCB), s->showshortcutbar);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowSCB),
+				     s->showshortcutbar);
 
 	cbtnShowBibletabs =
 	    gtk_check_button_new_with_label(_
@@ -900,7 +1009,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(cbtnShowBibletabs);
 	gtk_box_pack_start(GTK_BOX(vbox28), cbtnShowBibletabs, FALSE,
 			   FALSE, 0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowBibletabs), s->text_tabs);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowBibletabs),
+				     s->text_tabs);
 
 	cbtnShowCOMtabs =
 	    gtk_check_button_new_with_label(_
@@ -912,7 +1022,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(cbtnShowCOMtabs);
 	gtk_box_pack_start(GTK_BOX(vbox28), cbtnShowCOMtabs, FALSE, FALSE,
 			   0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowCOMtabs), s->comm_tabs);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowCOMtabs),
+				     s->comm_tabs);
 
 	cbtnShowDLtabs =
 	    gtk_check_button_new_with_label(_
@@ -924,7 +1035,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(cbtnShowDLtabs);
 	gtk_box_pack_start(GTK_BOX(vbox28), cbtnShowDLtabs, FALSE, FALSE,
 			   0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDLtabs), s->dict_tabs);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDLtabs),
+				     s->dict_tabs);
 
 	checkbutton9 =
 	    gtk_check_button_new_with_label(_("Use Verse Style"));
@@ -936,7 +1048,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(vbox28), checkbutton9, FALSE, FALSE, 0);
 	gtk_widget_set_usize(checkbutton9, 202, -2);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton9),
-				    s->versestyle );
+				     s->versestyle);
 
 	vbox41 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox41);
@@ -970,7 +1082,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowTextgroup, FALSE,
 			   FALSE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowTextgroup),
-				    s->showtextgroup );
+				     s->showtextgroup);
 
 	cbtnShowComGroup =
 	    gtk_check_button_new_with_label(_("Show Commentary Group"));
@@ -982,7 +1094,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowComGroup, FALSE, FALSE,
 			   0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowComGroup),
-				    s->showcomgroup );
+				     s->showcomgroup);
 
 	cbtnShowDictGroup =
 	    gtk_check_button_new_with_label(_("Show Dict/Lex Group"));
@@ -994,7 +1106,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowDictGroup, FALSE,
 			   FALSE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDictGroup),
-				    s->showdictgroup );
+				     s->showdictgroup);
 
 	cbtnShowHistoryGroup =
 	    gtk_check_button_new_with_label(_("Show History Group"));
@@ -1006,8 +1118,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(cbtnShowHistoryGroup);
 	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowHistoryGroup, FALSE,
 			   FALSE, 0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowHistoryGroup),
-				    s->showhistorygroup );
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (cbtnShowHistoryGroup),
+				     s->showhistorygroup);
 
 	frame25 = gtk_frame_new(_("Personal Comments"));
 	gtk_widget_ref(frame25);
@@ -1033,7 +1146,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_show(cbtnPNformat);
 	gtk_box_pack_start(GTK_BOX(vbox37), cbtnPNformat, FALSE, FALSE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnPNformat),
-				    s->formatpercom );
+				     s->formatpercom);
 
 
 	checkbutton8 = gtk_check_button_new_with_label(_("Auto Save"));
@@ -1045,7 +1158,143 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_box_pack_start(GTK_BOX(vbox37), checkbutton8, FALSE, FALSE, 0);
 	gtk_widget_set_usize(checkbutton8, 202, -2);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton8),
-				    s->autosavepersonalcomments );
+				     s->autosavepersonalcomments);
+
+	frame27 = gtk_frame_new(_("Layout"));
+	gtk_widget_ref(frame27);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "frame27",
+				 frame27,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame27);
+	gtk_box_pack_start(GTK_BOX(vbox41), frame27, TRUE, TRUE, 0);
+
+	table10 = gtk_table_new(3, 4, FALSE);
+	gtk_widget_ref(table10);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "table10",
+				 table10,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(table10);
+	gtk_container_add(GTK_CONTAINER(frame27), table10);
+
+	label165 = gtk_label_new(_("App Width"));
+	gtk_widget_ref(label165);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label165",
+				 label165,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label165);
+	gtk_table_attach(GTK_TABLE(table10), label165, 0, 1, 0, 1,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label165), 0, 0.5);
+
+	label166 = gtk_label_new(_("ShortCut Bar Width"));
+	gtk_widget_ref(label166);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label166",
+				 label166,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label166);
+	gtk_table_attach(GTK_TABLE(table10), label166, 0, 1, 1, 2,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label166), 0, 0.5);
+
+	label167 = gtk_label_new(_("Upper Pane Hight"));
+	gtk_widget_ref(label167);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label167",
+				 label167,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label167);
+	gtk_table_attach(GTK_TABLE(table10), label167, 0, 1, 2, 3,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label167), 0, 0.5);
+
+	label168 = gtk_label_new(_("App Hight"));
+	gtk_widget_ref(label168);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label168",
+				 label168,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label168);
+	gtk_table_attach(GTK_TABLE(table10), label168, 2, 3, 0, 1,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label168), 0, 0.5);
+
+	label169 = gtk_label_new(_("Bible Pane Width"));
+	gtk_widget_ref(label169);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label169",
+				 label169,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label169);
+	gtk_table_attach(GTK_TABLE(table10), label169, 2, 3, 1, 2,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label169), 0, 0.5);
+
+	sbtnAppWidth_adj =
+	    gtk_adjustment_new(s->gs_width, 640, 10000, 1, 10, 10);
+	sbtnAppWidth =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnAppWidth_adj), 1, 0);
+	gtk_widget_ref(sbtnAppWidth);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "sbtnAppWidth",
+				 sbtnAppWidth,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(sbtnAppWidth);
+	gtk_table_attach(GTK_TABLE(table10), sbtnAppWidth, 1, 2, 0, 1,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+
+	sbtnAppHight_adj =
+	    gtk_adjustment_new(s->gs_hight, 480, 10000, 1, 10, 10);
+	sbtnAppHight =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnAppHight_adj), 1, 0);
+	gtk_widget_ref(sbtnAppHight);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "sbtnAppHight",
+				 sbtnAppHight,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(sbtnAppHight);
+	gtk_table_attach(GTK_TABLE(table10), sbtnAppHight, 3, 4, 0, 1,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+
+	sbtnSBWidth_adj =
+	    gtk_adjustment_new(s->shortcutbar_width, 0, 300, 1, 10, 10);
+	sbtnSBWidth =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnSBWidth_adj), 1, 0);
+	gtk_widget_ref(sbtnSBWidth);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "sbtnSBWidth",
+				 sbtnSBWidth,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(sbtnSBWidth);
+	gtk_table_attach(GTK_TABLE(table10), sbtnSBWidth, 1, 2, 1, 2,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+
+	sbtnTextWidth_adj =
+	    gtk_adjustment_new(s->biblepane_width, 100, 100, 1, 10, 10);
+	sbtnTextWidth =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnTextWidth_adj), 1, 0);
+	gtk_widget_ref(sbtnTextWidth);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "sbtnTextWidth",
+				 sbtnTextWidth,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(sbtnTextWidth);
+	gtk_table_attach(GTK_TABLE(table10), sbtnTextWidth, 3, 4, 1, 2,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+
+	sbtnUpPaneHight_adj =
+	    gtk_adjustment_new(s->upperpane_hight, 0, 10000, 1, 10, 10);
+	sbtnUpPaneHight =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(sbtnUpPaneHight_adj), 1, 0);
+	gtk_widget_ref(sbtnUpPaneHight);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings),
+				 "sbtnUpPaneHight", sbtnUpPaneHight,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(sbtnUpPaneHight);
+	gtk_table_attach(GTK_TABLE(table10), sbtnUpPaneHight, 1, 2, 2, 3,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
 
 	label123 = gtk_label_new(_("Interface"));
 	gtk_widget_ref(label123);
@@ -1074,7 +1323,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_table_attach(GTK_TABLE(table9), label156, 0, 1, 0, 1,
 			 (GtkAttachOptions) (0),
 			 (GtkAttachOptions) (0), 0, 0);
- 
+
 	combo17 = gtk_combo_new();
 	gtk_widget_ref(combo17);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "combo17",
@@ -1085,14 +1334,14 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo17), biblelist);
-	
+
 	entry3 = GTK_COMBO(combo17)->entry;
 	gtk_widget_ref(entry3);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "entry3", entry3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entry3);
 	gtk_entry_set_text(GTK_ENTRY(entry3), s->MainWindowModule);
-	
+
 	combo18 = gtk_combo_new();
 	gtk_widget_ref(combo18);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "combo18",
@@ -1103,14 +1352,14 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo18), biblelist);
-	
+
 	entry4 = GTK_COMBO(combo18)->entry;
 	gtk_widget_ref(entry4);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "entry4", entry4,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entry4);
 	gtk_entry_set_text(GTK_ENTRY(entry4), s->Interlinear1Module);
-	
+
 	combo19 = gtk_combo_new();
 	gtk_widget_ref(combo19);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "combo19",
@@ -1392,14 +1641,13 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GTK_WIDGET_SET_FLAGS(btnPropertyboxCancel, GTK_CAN_DEFAULT);
 
 	gtk_signal_connect(GTK_OBJECT(gcpTextBG), "color_set",
-			   GTK_SIGNAL_FUNC(on_colorpicker_color_set), 
+			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(gcpText), "color_set",
-			   GTK_SIGNAL_FUNC(on_colorpicker_color_set), 
+			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(cmbEntryTextSize), "changed",
-			   GTK_SIGNAL_FUNC(on_Entry_changed),
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gcpCurrentverseBG), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
@@ -1410,52 +1658,101 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(cmbEentryVNSize), "changed",
-			   GTK_SIGNAL_FUNC(on_Entry_changed),
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(gcpTextLinks), "color_set",
 			   GTK_SIGNAL_FUNC(on_colorpicker_color_set),
 			   NULL);
 	/*gtk_signal_connect(GTK_OBJECT(btnSetToGSDefaults), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSetToGSDefaults_clicked),
-			   NULL);*/
+	   GTK_SIGNAL_FUNC(on_btnSetToGSDefaults_clicked),
+	   NULL); */
 	gtk_signal_connect(GTK_OBJECT(rbtnUsedefaults), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(rbtnNoDefaults), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowSCB), "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled), NULL);
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowBibletabs), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowCOMtabs), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowDLtabs), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowTextgroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(1));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowComGroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(1));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowDictGroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   NULL);
+			   GINT_TO_POINTER(1));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowHistoryGroup), "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled), 
-			   NULL);
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(1));
+
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
-			   GTK_SIGNAL_FUNC(on_button_toggled), 
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
+	gtk_signal_connect(GTK_OBJECT(checkbutton8), "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
+	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(1));
+
+	gtk_signal_connect(GTK_OBJECT(sbtnAppWidth), "changed",
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(sbtnAppHight), "changed",
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(sbtnSBWidth), "changed",
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(sbtnTextWidth), "changed",
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(sbtnUpPaneHight), "changed",
+			   GTK_SIGNAL_FUNC(on_spinbutton_changed), NULL);
+	
+	/*** module combos ***/
+	gtk_signal_connect(GTK_OBJECT(entry3), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
 			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry4), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry5), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry6), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry7), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry8), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL); 
+	gtk_signal_connect(GTK_OBJECT(entry9), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry10), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(entry11), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), 
+			   NULL);
+
+	/*** OK - Apply - Cancel ***/
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxOK), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnPropertyboxOK_clicked),
-			   (SETTINGS*) s);
+			   (SETTINGS *) s);
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxApply), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnPropertyboxApply_clicked),
-			   (SETTINGS*) s);
+			   (SETTINGS *) s);
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxCancel), "clicked",
 			   GTK_SIGNAL_FUNC
 			   (on_btnPropertyboxCancel_clicked), NULL);
@@ -1473,24 +1770,18 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
 			   NULL);
-	groupnum = add_sb_group2((EShortcutBar *)shortcut_bar, "Preferences");
-	e_shortcut_bar_set_view_type((EShortcutBar*)shortcut_bar,
-						      groupnum,
-						      E_ICON_BAR_LARGE_ICONS);
-	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-					groupnum, -1,
-					shortcut_types[0],
-					"Font Colors and Sizes");
-	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-					groupnum, -1,
-					shortcut_types[1],
-					"Misc Interface Settings");
-	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-					groupnum, -1,
-					shortcut_types[2],
-					"Sword Modules");
+	groupnum =
+	    add_sb_group2((EShortcutBar *) shortcut_bar, "Preferences");
+	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,
+				     groupnum, E_ICON_BAR_LARGE_ICONS);
+	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  groupnum, -1, shortcut_types[0],
+				  "Font Colors and Sizes");
+	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  groupnum, -1, shortcut_types[1],
+				  "Misc Interface Settings");
+	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  groupnum, -1, shortcut_types[2],
+				  "Sword Modules");
 	return dlgSettings;
 }
-
-
-

@@ -46,6 +46,7 @@ typedef struct _settings SETTINGS;
 struct _settings {
 	GtkWidget
 		*app,
+		*ctree_widget,
 		*versestyle_item;	/* widget to access toggle menu - for versestyle */
 	gchar	
 		MainWindowModule[80],	/* modules to open at program startup  */
