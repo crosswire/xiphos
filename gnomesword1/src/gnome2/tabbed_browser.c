@@ -73,10 +73,11 @@ static GList *passage_list;
 
 static void on_notebook_main_close_page(GtkButton * button, gpointer user_data)
 {
-	//gui_close_passage_tab(gint pagenum);
+	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)user_data;
+	gui_close_passage_tab(gtk_notebook_page_num
+				(GTK_NOTEBOOK(widgets.notebook_main),
+				pt->page_widget));
 }
-
-
 
 static void set_current_tab (PASSAGE_TAB_INFO *pt)
 {
@@ -109,7 +110,7 @@ static void set_current_tab (PASSAGE_TAB_INFO *pt)
  *   GtkWidget*
  */
  
-static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,const gchar *label_text)
+static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_text)
 {
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *box;
@@ -188,19 +189,19 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
-	//cur_passage_tab = pt;
 	set_current_tab (pt);
+	
 	//sets the text mod and key
-//	gui_change_module_and_key(pt->text_mod, pt->text_commentary_key);
-//	gui_change_verse(pt->text_commentary_key);
-
-	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
+	gui_change_module_and_key(pt->text_mod, pt->text_commentary_key);
+//	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
 	
 	//sets the commentary mod and key
-	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
+	gui_change_module_and_key(pt->commentary_mod, pt->text_commentary_key);
+//	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
-	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
+	gui_change_module_and_key(pt->dictlex_mod, pt->dictlex_key);
+//	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
 	
 	//sets the book mod and key
 }
@@ -222,21 +223,19 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
  */
 static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 {
-	GtkWidget *label;
-	int i;
+	GtkWidget *tab_widget;
 
 	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show(tbinf->page_widget);
 
-	label = gtk_label_new(tbinf->text_mod);
-	gtk_widget_show(label);
-	
+	tab_widget = tab_widget_new(tbinf, (gchar*)tbinf->text_commentary_key);
+
 	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-				 tbinf->page_widget, label);
+				 tbinf->page_widget, tab_widget);
 	
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget,
-					(gchar*)tbinf->text_mod);
+					(gchar*)tbinf->text_commentary_key);
 }
 
 /******************************************************************************
@@ -257,33 +256,21 @@ static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 void gui_open_verse_in_new_tab(gchar *verse_key)
 {
 	PASSAGE_TAB_INFO *pt;
-	GtkWidget *tab_widget;
 	
 	if(!settings.browsing)
 		return;
 	pt = g_new0(PASSAGE_TAB_INFO, 1);
-	pt->text_mod = cur_t->mod_name;
-	pt->commentary_mod = cur_c->mod_name;
-	pt->dictlex_mod = cur_d->mod_name;
+	pt->text_mod = g_strdup(cur_t->mod_name);
+	pt->commentary_mod = g_strdup(cur_c->mod_name);
+	pt->dictlex_mod = g_strdup(cur_d->mod_name);
 	pt->book_mod = NULL;
-	pt->text_commentary_key = settings.currentverse;
-	pt->dictlex_key = cur_d->key;
+	pt->text_commentary_key = g_strdup(verse_key);
+	pt->dictlex_key = g_strdup(cur_d->key);
 	pt->book_key = NULL;
 	
-	pt->page_widget = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show(pt->page_widget);
-	
-	tab_widget = tab_widget_new(pt,(gchar*)pt->text_commentary_key);
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
-	//cur_passage_tab = pt;
-	set_current_tab (pt);
-	//notebook_main_add_page(pt);
-	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-				 pt->page_widget, tab_widget);
-	
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
-					pt->page_widget,
-					(gchar*)pt->text_commentary_key);
+	set_current_tab(pt);
+	notebook_main_add_page(pt);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				gtk_notebook_page_num
@@ -338,9 +325,6 @@ void gui_notebook_main_setup(GList *ptlist)
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt = NULL;
 	
-	if(!settings.browsing)
-		return;
-	
 	passage_list = NULL;
 	tmp = ptlist;
 	tmp = g_list_first(tmp);
@@ -354,12 +338,23 @@ void gui_notebook_main_setup(GList *ptlist)
 		pt->dictlex_key = NULL;
 		pt->book_key = NULL;
 
-		notebook_main_add_page(pt);
 		passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+		notebook_main_add_page(pt);
 		tmp = g_list_next(tmp);
 	}
-
-	cur_passage_tab = pt;
+	if (NULL == pt) {
+		pt = g_new0(PASSAGE_TAB_INFO, 1);
+		pt->text_mod = g_strdup(cur_t->mod_name);
+		pt->commentary_mod = g_strdup(cur_c->mod_name);
+		pt->dictlex_mod = g_strdup(cur_d->mod_name);
+		pt->book_mod = NULL;
+		pt->text_commentary_key = g_strdup(settings.currentverse);
+		pt->dictlex_key = g_strdup(cur_d->key);
+		pt->book_key = NULL;
+		passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
+		notebook_main_add_page(pt);
+	}
+	set_current_tab(pt);
 	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
 			   "switch_page",
 			   G_CALLBACK
@@ -385,11 +380,16 @@ void gui_notebook_main_setup(GList *ptlist)
  */
 void gui_notebook_main_shutdown(void)
 {
-	if(!settings.browsing)
-		return;
 	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
-		PASSAGE_TAB_INFO *t = (PASSAGE_TAB_INFO*)passage_list->data;
+		PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)passage_list->data;
+		g_free(pt->text_mod);
+		g_free(pt->commentary_mod);
+		g_free(pt->dictlex_mod);
+		g_free(pt->book_mod);
+		g_free(pt->text_commentary_key);
+		g_free(pt->dictlex_key);
+		g_free(pt->book_key);
 		g_free((PASSAGE_TAB_INFO*)passage_list->data);
 		passage_list = g_list_next(passage_list);
 	}
