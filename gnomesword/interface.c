@@ -55,7 +55,7 @@
 GtkWidget *shortcut_bar;
 
 #ifdef  USE_SHORTCUTBAR
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 
@@ -65,7 +65,8 @@ gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
 	"history:"
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
-	"gnomesword/GnomeSword.png", "gnome-word.png",
+	"gnomesword/GnomeSword.png",
+	"gnome-word.png",
 	"gnomesword/GnomeSword.png",
 	"gnome-folder.png"
 };

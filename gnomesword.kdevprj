@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/main.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_history.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_history.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_viewdict.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/display.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_history.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/callback.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_sword.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/interface.c,
+openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/main.cpp,
 show_outputview=true
 show_treeview=true
-header_file=/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_history.h
-cpp_file=/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_sword.cpp
-browser_file=file:/home/terry/share/doc/HTML/default/kdevelop/reference/C/index.html
+header_file=Untitled.h
+cpp_file=/home/terry/Projects/Gnomesword-0.4.0/gnomesword/main.cpp
+browser_file=file:/home/terry/share/doc/HTML/default/kdevelop/welcome/index.html
 [gnomesword/interface.c]
 install_location=
 dist=true
