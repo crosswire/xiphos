@@ -28,36 +28,6 @@ extern "C" {
 
 #include "main/settings.h"
 
-typedef struct _gbsdata GBS_DATA;
-
-#include "gui/gbs_find.h"
-
-struct _gbsdata {
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *ctree;
-	GtkWidget *showtabs;
-	gchar *bookName;
-	gchar *searchstring;
-	gint booknum;
-	gboolean has_key;
-	GBF_FIND_DIALOG *find_dialog;
-};
-
-
-typedef struct _nodedata NODEDATA;
-struct _nodedata {
-	GtkCTreeNode *parent;
-	GtkCTreeNode *sibling;
-	gchar *buf[3];
-	GdkPixmap *pixmap1;
-	GdkPixmap *pixmap2;
-	GdkBitmap *mask1;
-	GdkBitmap *mask2;
-	gboolean is_leaf;
-	gboolean expanded;
-};
-
 void display_gbs(int page_num, char * key);
 int treekey_next_sibling(char * mod_name, unsigned long offset);
 int gbs_treekey_has_children(char * mod_name, 
@@ -67,7 +37,6 @@ unsigned long gbs_get_treekey_offset(char *mod_name);
 int gbs_treekey_first_child(char * bookname, unsigned long offset);
 char *get_book_key(int book_num);
 gboolean display_row_gbs(gint book_num, gchar *offset);
-GBS_DATA *get_gbs(GList * gbs);
 void new_gbs_display(GtkWidget * html, char * mod_name);
 #ifdef __cplusplus
 }
