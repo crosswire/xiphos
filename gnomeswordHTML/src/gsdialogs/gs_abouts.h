@@ -35,7 +35,7 @@ void on_btnAboutSwordOK_clicked(GtkButton * button,
  
 GtkWidget *create_about2(void);
 GtkWidget *create_AboutSword(void);
-GtkWidget *create_aboutmodules(void);
+GtkWidget *create_aboutmodules(gchar *buf);
  
  
 #ifdef __cplusplus

@@ -22,7 +22,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifdef USE_GTKHTML
 
 #include <gnome.h>
 #include <swmodule.h>
@@ -57,5 +56,10 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 	} virtual char Display(SWModule & imodule);
 };
 
-#endif /* USE_GTKHTML */
+
+//----------------------------------------------------------------------------------------------
+void AboutModsDisplayHTML(GString *text);
+
+
+
 
