@@ -173,7 +173,7 @@ if test $HAVE_SWORD_LIB = no; then
 fi 
  
 SWORD_CPPFLAGS="'-I$sword_incdir' -g" 
-SWORD_LIBS="$sword_libdir/$sword_file" 
+SWORD_LIBS="-L$sword_libdir -lsword -lz" 
  
 AC_SUBST(SWORD_CPPFLAGS) 
 AC_SUBST(SWORD_LIBS) 
