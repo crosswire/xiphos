@@ -32,16 +32,17 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include "gs_undock_sb.h"
+#include "gs_detach_sb.h"
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 
-
+/****  we need to send the shortcut bar back to the 
+       main window before we destroy the dialog  ****/
 static void
-on_dlgDock_destroy(GtkObject       *object,
-                                        SETTINGS *s)
+on_dlgDock_destroy(GtkObject *object,
+                   SETTINGS *s)
 {
-	if(!s->docked)
+	if(!s->docked) /* we need the if to prevent a loop */
 		on_btnSBDock_clicked(NULL, s);
 }
 
@@ -54,7 +55,7 @@ create_dlgDock (SETTINGS *s)
   gtk_object_set_data (GTK_OBJECT (dlgDock), "dlgDock", dlgDock);
   gtk_window_set_title (GTK_WINDOW (dlgDock), _("GnomeSWORD"));
   gtk_window_set_policy (GTK_WINDOW (dlgDock), TRUE, TRUE, FALSE);
-  gtk_widget_set_usize(dlgDock, s->shortcutbar_width, -2);
+  gtk_widget_set_usize(dlgDock, s->shortcutbar_width, s->gs_hight);
 	
   s->vboxDock = gtk_vbox_new (FALSE, 0);
   gtk_widget_ref (s->vboxDock);
