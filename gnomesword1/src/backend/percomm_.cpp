@@ -174,8 +174,7 @@ void backend_nav_percomm_module(int mod_num, int direction)
  *   void
  */
 
-void backend_new_percomm_display(GtkWidget * html, char *mod_name,
-			      SETTINGS * s)
+void backend_new_percomm_display(GtkWidget * html, char *mod_name)
 {
 	GList *tmp = NULL;
 	BE_PC *p;
@@ -184,7 +183,7 @@ void backend_new_percomm_display(GtkWidget * html, char *mod_name,
 	while (tmp != NULL) {
 		p = (BE_PC *) tmp->data;
 		if (!strcmp(p->mod->Name(), mod_name)) {
-			p->disp = new GtkHTMLEntryDisp(html, s);
+			p->disp = new GtkHTMLEntryDisp(html);
 			p->mod->Disp(p->disp);
 		}
 		tmp = g_list_next(tmp);

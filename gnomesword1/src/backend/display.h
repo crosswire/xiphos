@@ -38,13 +38,11 @@
 class GtkHTMLEntryDisp:public SWDisplay {
       protected:
 	GtkWidget * gtkText;
-	SETTINGS *s;
       public:
 	
 	bool use_gtkhtml_font;
-	GtkHTMLEntryDisp(GtkWidget * gtkText, SETTINGS *s) {
+	GtkHTMLEntryDisp(GtkWidget * gtkText) {
 		this->gtkText = gtkText;
-		this->s = s;
 	}
 	virtual char Display(SWModule & imodule);
 	virtual gchar* pick_font(SWModule & imodule);
@@ -53,13 +51,13 @@ class GtkHTMLEntryDisp:public SWDisplay {
 
 //----------------------------------------------------------------------------------------------
 class EntryDisp:public GtkHTMLEntryDisp { public:
-	EntryDisp(GtkWidget * gtkText, SETTINGS *s):GtkHTMLEntryDisp(gtkText,s) {
+	EntryDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
 class GtkHTMLChapDisp:public GtkHTMLEntryDisp { public:
-	GtkHTMLChapDisp(GtkWidget * gtkText, SETTINGS *s):GtkHTMLEntryDisp(gtkText,s) {
+	GtkHTMLChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} 
 	virtual char Display(SWModule & imodule);
 };

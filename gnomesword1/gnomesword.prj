@@ -78,41 +78,41 @@ module.include.files=\
 	src/backend/bookmarks.h\
 	src/backend/display_info_.h\
 	src/backend/shortcutbar.h\
-	src/gnome/about_gnomesword.h\
-	src/gnome/about_modules.h\
-	src/gnome/about_sword.h\
-	src/gnome/_bibletext.h\
-	src/gnome/bibletext_dialog.h\
-	src/gnome/_commentary.h\
-	src/gnome/commentary_dialog.h\
-	src/gnome/commentary_find.h\
-	src/gnome/_dictlex.h\
-	src/gnome/dictlex_dialog.h\
-	src/gnome/_display_info.h\
-	src/gnome/_editor.h\
-	src/gnome/_gbs.h\
-	src/gnome/_percomm.h\
-	src/gnome/gbs_find.h\
-	src/gnome/cipher_key_dialog.h\
-	src/gnome/editor_menu.h\
-	src/gnome/editor_replace.h\
-	src/gnome/editor_search.h\
-	src/gnome/editor_toolbar.h\
-	src/gnome/fileselection.h\
-	src/gnome/gui.h\
-	src/gnome/interlinear_dialog.h\
-	src/gnome/info_box.h\
-	src/gnome/link_dialog.h\
-	src/gnome/main_menu.h\
-	src/gnome/link_dialog.h\
-	src/gnome/preferences_dialog.h\
-	src/gnome/setup_druid.h\
-	src/gnome/shortcutbar_dialog.h\
-	src/gnome/shortcutbar_main.h\
-	src/gnome/shortcutbar_search.h\
-	src/gnome/shortcutbar_viewer.h\
-	src/gnome/studypad.h\
-	src/gnome/toolbar_nav.h\
+	src/gui/about_gnomesword.h\
+	src/gui/about_modules.h\
+	src/gui/about_sword.h\
+	src/gui/_bibletext.h\
+	src/gui/bibletext_dialog.h\
+	src/gui/_commentary.h\
+	src/gui/commentary_dialog.h\
+	src/gui/commentary_find.h\
+	src/gui/_dictlex.h\
+	src/gui/dictlex_dialog.h\
+	src/gui/_display_info.h\
+	src/gui/_editor.h\
+	src/gui/_gbs.h\
+	src/gui/_percomm.h\
+	src/gui/gbs_find.h\
+	src/gui/cipher_key_dialog.h\
+	src/gui/editor_menu.h\
+	src/gui/editor_replace.h\
+	src/gui/editor_search.h\
+	src/gui/editor_toolbar.h\
+	src/gui/fileselection.h\
+	src/gui/gui.h\
+	src/gui/interlinear_dialog.h\
+	src/gui/info_box.h\
+	src/gui/link_dialog.h\
+	src/gui/main_menu.h\
+	src/gui/link_dialog.h\
+	src/gui/preferences_dialog.h\
+	src/gui/setup_druid.h\
+	src/gui/shortcutbar_dialog.h\
+	src/gui/shortcutbar_main.h\
+	src/gui/shortcutbar_search.h\
+	src/gui/shortcutbar_viewer.h\
+	src/gui/studypad.h\
+	src/gui/toolbar_nav.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/gs_bookmarks.h\

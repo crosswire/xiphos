@@ -318,7 +318,7 @@ void setup_percomm(GList *mods)
 		p->ec = gui_percomm_control(p->mod_name,count);
 		p->html = p->ec->htmlwidget;
 		backend_new_percomm_display(p->ec->htmlwidget,
-					    p->mod_name, &settings);
+					    p->mod_name);
 		percomm_list =
 		    g_list_append(percomm_list, (PC_DATA *) p);
 		++count;

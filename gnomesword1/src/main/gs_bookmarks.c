@@ -173,6 +173,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 };
 
 
+
 static void addnewgrouptoMenus(GtkWidget *pmMenu, 
 				GtkCTreeNode *node, 
 				gchar *str) 
@@ -762,6 +763,8 @@ void loadtree()
 				 GTK_SIGNAL_FUNC(after_press), NULL);
 
 	loadbookmarks(settings.ctree_widget);
+	
+	
 	gtk_ctree_sort_recursive(p_bmtree->ctree, personal_node);
 
 	gtk_signal_connect(GTK_OBJECT(settings.ctree_widget), "select_row",

@@ -137,7 +137,7 @@ void backend_new_text_display(GtkWidget * html, char *modname,
 	while (tmp != NULL) {
 		t = (BE_TEXT *) tmp->data;
 		if (!strcmp(t->mod->Name(), modname)) {
-			t->disp = new GtkHTMLChapDisp(html, s);
+			t->disp = new GtkHTMLChapDisp(html);
 			t->mod->Disp(t->disp);
 		}
 		tmp = g_list_next(tmp);
