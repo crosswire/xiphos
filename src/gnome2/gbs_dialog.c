@@ -26,10 +26,6 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifdef USE_GTKEMBEDMOZ
-#include <gtkmozembed.h>
-#endif
-
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
 #include "gui/gbs_display.h"
@@ -626,39 +622,6 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(dlg->tree)));
 
-#ifdef USE_GTKEMBEDMOZ
-	if (!dlg->is_rtol) {
-
-		scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
-		gtk_widget_show(scrolledwindow_html);
-		gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-					       (scrolledwindow_html),
-					       GTK_POLICY_NEVER,
-					       GTK_POLICY_AUTOMATIC);
-		dlg->html = gtk_html_new();
-		gtk_widget_show(dlg->html);
-		gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
-				  dlg->html);
-		gtk_html_load_empty(GTK_HTML(dlg->html));
-		g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
-				   G_CALLBACK(dialog_url),
-				   (GBS_DATA *) dlg);
-		g_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
-				   G_CALLBACK(link_clicked),
-				   (GBS_DATA *) dlg);
-		g_signal_connect(GTK_OBJECT(dlg->html),
-				   "button_press_event",
-				   G_CALLBACK(button_press),
-				   (GBS_DATA *) dlg);
-	}
-	else {
-		dlg->html = gtk_moz_embed_new();
-		gtk_widget_show(dlg->html);
-		gtk_paned_pack2(GTK_PANED(hpaned), dlg->html, TRUE, TRUE);
-		gtk_widget_realize(dlg->html);	
-	}
-#else	   
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
 	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, FALSE, TRUE);
@@ -672,6 +635,9 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
+	g_signal_connect(GTK_OBJECT(dlg->html),
+			   "url_requested",
+			   G_CALLBACK(url_requested), NULL);
 	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			   G_CALLBACK(dialog_url),
 			   (GBS_DATA *) dlg);
@@ -682,8 +648,6 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 			   "button_press_event",
 			   G_CALLBACK(button_press),
 			   (GBS_DATA *) dlg);
-			   
-#endif	
 
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed), dlg);
