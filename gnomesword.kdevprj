@@ -1,10 +1,10 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/terry/projects/gnomesword2/gnomesword/main.cpp,/home/terry/projects/gnomesword2/configure.in,/home/terry/projects/gnomesword2/widgets/shortcut-bar/Makefile.am,
+openfiles=Untitled.h,Untitled.cpp,/home/terry/projects/gnomesword2/gnomesword/main.cpp,/home/terry/projects/gnomesword2/gnomesword/display.cpp,/home/terry/projects/gnomesword2/configure.in,/home/terry/projects/gnomesword2/ChangeLog,/home/terry/projects/gnomesword2/NEWS,
 show_outputview=true
 show_treeview=true
-header_file=/home/terry/projects/gnomesword2/widgets/shortcut-bar/Makefile.am
-cpp_file=/home/terry/projects/gnomesword2/gnomesword/main.cpp
+header_file=/home/terry/projects/gnomesword2/NEWS
+cpp_file=/home/terry/projects/gnomesword2/gnomesword/display.cpp
 browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/strcpy.html
 [COPYING]
 install_location=

@@ -1,3 +1,9 @@
+2000-09-15  Terry Biggs <tbiggs@users.sourceforge.net>
+        * release 0.2.4
+        *display.cpp changed to handle upper or lower case tags
+        *fixed history menu - clicking on verse ref will no longer
+        send you to Gen 1:1.
+
 2000-09-06  Terry Biggs <tbiggs@users.sourceforge.net>
         * fixed a segfault that cause gnomesword to crash while
         displaying verses from a search. 
