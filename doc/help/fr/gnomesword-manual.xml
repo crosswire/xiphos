@@ -4,7 +4,7 @@
 <!ENTITY introduction SYSTEM "introduction.xml">
 <!ENTITY start SYSTEM "start.xml"><!-- done -->
 <!ENTITY interface SYSTEM "interface.xml"><!-- done -->
-<!ENTITY preferences SYSTEM "preferences.xml"<!-- done -->
+<!ENTITY preferences SYSTEM "preferences.xml"><!-- done -->
 <!ENTITY modules SYSTEM "modules.xml"><!-- done -->
 <!ENTITY search SYSTEM "search.xml">
 <!ENTITY studypad SYSTEM "studypad.xml"> 
