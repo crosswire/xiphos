@@ -42,8 +42,8 @@ extern "C" {
 	void FillDictKeysSWORD(void);
 	void changeVerseSWORD(gchar * ref);
 	void ChangeVerseSWORD(void);
-	void resultsListSWORD(GtkWidget * searchFrm,
-			      gint row, gint column);
+	void changeVerseComSWORD(void);
+	void resultsListSWORD(GtkWidget * searchFrm, gint row, gint column);
 	void globaloptionsSWORD(gchar *option, gint window, gboolean choice);
 	void changecurModSWORD(gchar * modName, gboolean showchange);
 	void navcurcomModSWORD(gint direction);
