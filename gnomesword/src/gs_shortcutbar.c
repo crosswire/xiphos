@@ -225,7 +225,7 @@ on_clistSearchResults_select_row(GtkCList *clist,
 	if(s->showinmain) {
 		if(GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {		
 			if(GTK_TOGGLE_BUTTON (p_so->rbPhraseSearch)->active){
-				searchgbsGS_EDITOR(s->searchText);
+				//searchgbsGS_EDITOR(s->searchText);
 			}
 		}
 	}
