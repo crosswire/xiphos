@@ -49,6 +49,7 @@ GtkWidget *notebook7;
 extern gchar *tmpcolor;
 static gboolean updatehtml, updateSB, updatelayout;
 
+#ifdef USE_OLD_GAL
 #define NUM_SHORTCUT_TYPES1 3
 static gchar *shortcut_types[NUM_SHORTCUT_TYPES1] = {
 	"font:", "misc:", "modules:"
@@ -79,6 +80,9 @@ static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
 	}
 	return NULL;
 }
+#endif /* USE_OLD_GAL  */
+
+static EShortcutModel *shortcut_model;
 
 /******************************************************************************
  * add_sb_group - add group to shourtcut bar
@@ -455,8 +459,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			      GList * commlist,
 			      GList * dictlist, GList * percomlist)
 {
-	gint i, groupnum;
+#ifdef USE_OLD_GAL
+	gint i;
+#endif /* USE_OLD_GAL */
+	gint groupnum;
 	gchar *pathname;
+	GdkPixbuf *icon_pixbuf;
 	gdouble *color;
 	gushort a;
 	GtkWidget *shortcut_bar;
@@ -464,7 +472,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *dialog_vbox9;
 	GtkWidget *hbox22;
 	GtkWidget *frame26;
-
 	GtkWidget *vbox35;
 	GtkWidget *table13;
 	GtkWidget *label151;
@@ -648,9 +655,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(shortcut_bar, 150, 250);
 	gtk_widget_show(shortcut_bar);
 	gtk_box_pack_start(GTK_BOX(hbox22), shortcut_bar, TRUE, TRUE, 0);
-
+/*
 	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
-					 icon_callback1, NULL);
+					 icon_callback1, NULL);*/
 
 	notebook7 = gtk_notebook_new();
 	gtk_widget_ref(notebook7);
@@ -2021,7 +2028,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			   GTK_SIGNAL_FUNC
 			   (on_btnPropertyboxCancel_clicked), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSettings), "tooltips", tooltips);
-
+	groupnum =
+	    add_sb_group2((EShortcutBar *) shortcut_bar, "Preferences");
+	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
+			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
+			   NULL);
+#ifdef USE_OLD_GAL			   
 	for (i = 0; i < NUM_SHORTCUT_TYPES1; i++) {
 		pathname = gnome_pixmap_file(icon_filenames[i]);
 		if (pathname)
@@ -2030,11 +2042,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 		else
 			icon_pixbufs[i] = NULL;
 	}
-	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
-			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
-			   NULL);
-	groupnum =
-	    add_sb_group2((EShortcutBar *) shortcut_bar, "Preferences");
 	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,
 				     groupnum, E_ICON_BAR_LARGE_ICONS);
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
@@ -2046,5 +2053,27 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  groupnum, -1, shortcut_types[2],
 				  "Sword Modules");
+#else /* USE_OLD_GAL */
+	pathname = gnome_pixmap_file("gnome-ccwindowmanager.png");
+	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  groupnum, -1, "fonts",
+				  "Font Colors and Sizes",
+				  icon_pixbuf);
+	pathname = gnome_pixmap_file("gnome-settings.png");
+	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  groupnum, -1, "misc interface",
+				  "Misc Interface Settings",
+				  icon_pixbuf);
+	pathname = gnome_pixmap_file("gdict.png");
+	icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  groupnum, -1, "Sword Mods",
+				  "Sword Modules",
+				  icon_pixbuf);	
+#endif /* USE_OLD_GAL */
+	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,
+				     groupnum, E_ICON_BAR_LARGE_ICONS);
 	return dlgSettings;
 }

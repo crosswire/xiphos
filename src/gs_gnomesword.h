@@ -74,7 +74,8 @@ struct _settings {
 		default_font[126],
 		greek_font[126],
 		hebrew_font[126],
-		unicode_font[126];			
+		unicode_font[126],
+		groupName[50];			
 	gint 
       		currentverse_red,	/* current verse colors */
 	        currentverse_green, 
