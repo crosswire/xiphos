@@ -229,13 +229,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
 	dialog->case_sensitive =
-	    gtk_check_button_new_with_label(_("Match case"));
+	    gtk_check_button_new_with_label(_("Match Case"));
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->case_sensitive,
 			   FALSE, FALSE, 0);
 
 	dialog->backward =
-	    gtk_check_button_new_with_label(_("Search backwards"));
+	    gtk_check_button_new_with_label(_("Search Backwards"));
 	gtk_widget_show(dialog->backward);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->backward, FALSE,
 			   FALSE, 0);
