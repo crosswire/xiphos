@@ -1,8 +1,10 @@
 dnl Process this file with autoconf to produce a configure script.
  
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.7.7)
+AM_INIT_AUTOMAKE(gnomesword, 0.7.8)
 AM_CONFIG_HEADER(config.h)
+
+AC_PROG_CC
 
 dnl 
 dnl code from Evolution configure.in
@@ -55,8 +57,6 @@ AC_DEFUN(GS_CHECK_LIB, [
 	fi
 ])
 
-AC_PROG_CC
-
 dnl Initialize xml-i18n-tools
 dnl AM_PROG_XML_I18N_TOOLS 
 
@@ -96,9 +96,43 @@ fi
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
+dnl ******************************
+dnl GtkHTML checking
+dnl ******************************
+gtkhtml_ok="false"
+AC_MSG_CHECKING(for GtkHTML)
+  if gnome-config --libs gtkhtml > /dev/null 2>&1; then
+	vers=`gnome-config --modversion gtkhtml`
+	case $vers
+	in
+	    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
+	    *) gtkhtml_ok=true ;;
+	esac
+  else
+	gtkhtml_ok=false
+  fi
+
+if $gtkhtml_ok; then
+	AC_MSG_RESULT($vers found)
+else	
+	pkg_modules="gtkhtml-1.1"
+	PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
+	AC_SUBST(PACKAGE_CFLAGS)
+	AC_SUBST(PACKAGE_LIBS)
+	AC_DEFINE(USE_GTKHTML1, 1, [Define if you want to use the GtkHTML-1.1])
+fi
+
+if $gtkhtml_ok; then
+    PACKAGE_LIBS="`gnome-config --libs gtkhtml ` $THREADS_LIBS `unicode-config --libs`"
+    PACKAGE_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+    
+	AC_SUBST(PACKAGE_LIBS)
+	AC_SUBST(PACKAGE_CFLAGS)
+fi
+
+
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
 GS_CHECK_LIB(GAL, gal, 0.18.0.0)
-GS_CHECK_LIB(GtkHTML, gtkhtml, 0.16.0)
 GS_CHECK_LIB(GnomePrint, print, 0.29.0.0)
 
 dnl **************************
@@ -229,10 +263,10 @@ have_gnomeprint="yes"
 dnl ******************************
 dnl GtkHTML
 dnl ******************************
-GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
-GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
-AC_SUBST(GTKHTML_CFLAGS)
-AC_SUBST(GTKHTML_LIBS)
+dnl GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
+dnl GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
+dnl AC_SUBST(GTKHTML_CFLAGS)
+dnl AC_SUBST(GTKHTML_LIBS)
 
 dnl ******************************
 dnl Gnome App Lib 
