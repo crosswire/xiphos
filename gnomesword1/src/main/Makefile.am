@@ -7,24 +7,8 @@ INCLUDES =  \
 
 noinst_LIBRARIES = libmain.a  
 
-if GNOME_SPELL
-  SPELL_IDL = Spell.idl
-
-  IDL_GENERATED = 		\
-	Spell.h			\
-	Spell-common.c		\
-	Spell-skels.c		\
-	Spell-stubs.c
-
-$(IDL_GENERATED): $(SPELL_IDL)
-	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(top_builddir)/src/main/Spell.idl
-else
-  IDL_GENERATED =
-  SPELL_IDL =
-endif
 
 libmain_a_SOURCES =  \
-    $(IDL_GENERATED)\
     bibletext.c bibletext.h \
     commentary.c commentary.h \
     configs.c configs.h \
@@ -38,15 +22,7 @@ libmain_a_SOURCES =  \
     search.c search.h \
     settings.c settings.h \
     shortcutbar.c shortcutbar.h \
-    spell_gnome_spell.c \
     spell_pspell.c \
     spell.h \
     sword.c sword.h\
     xml.c xml.h
-
-
-EXTRA_DIST = \
-    $(SPELL_IDL)
-    
-CLEANFILES = \
-    $(IDL_GENERATED)

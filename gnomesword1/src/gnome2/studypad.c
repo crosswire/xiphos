@@ -51,30 +51,10 @@
 
 GSHTMLEditorControlData *editor_cd;
 
-void screen_changed(GtkWidget *widget, GdkScreen *arg1, gpointer user_data)
-{
-	//g_warning("screen_changed");
-	
-}
-	
-
-/******************************************************************************
- * Name
- *   gui_studypad_can_close
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   void gui_studypad_can_close(void)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-void gui_studypad_can_close(GSHTMLEditorControlData *ecd)
+gboolean
+on_studypad_delete                        (GtkWidget       *widget,
+                                        GdkEvent        *event,
+                                        GSHTMLEditorControlData *ecd)
 {
 	gchar *filename = NULL;
 	gchar *buf = NULL;
@@ -105,6 +85,69 @@ void gui_studypad_can_close(GSHTMLEditorControlData *ecd)
 				save_file(filename, ecd);
 			} else {
 				gui_fileselection_save(ecd,TRUE);
+			}
+		}
+		settings.modifiedSP = FALSE;
+		g_free(info);
+		g_string_free(str,TRUE);
+	}
+	return FALSE;
+}
+
+void screen_changed(GtkWidget *widget, GdkScreen *arg1, gpointer user_data)
+{
+	//g_warning("screen_changed");
+	
+}
+	
+
+/******************************************************************************
+ * Name
+ *   gui_studypad_can_close
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void gui_studypad_can_close(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void gui_studypad_can_close(void)
+{
+	gchar *filename = NULL;
+	gchar *buf = NULL;
+	gint test;
+	GS_DIALOG *info;
+	GString *str;
+	
+	if (settings.modifiedSP) {
+		str = g_string_new("");
+		info = gui_new_dialog();
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
+		if (settings.studypadfilename)
+			buf = settings.studypadfilename;
+		else
+			buf = N_("File");
+		g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s",
+			buf,
+			_("has been modified. Do you wish to save it?"));
+		info->label_top = str->str;
+		info->yes = TRUE;
+		info->no = TRUE;
+
+		test = gui_alert_dialog(info);
+		if (test == GS_YES) {
+			if (settings.studypadfilename) {
+				filename = g_strdup(settings.studypadfilename);
+				save_file(filename, editor_cd);
+			} else {
+				gui_fileselection_save(editor_cd,TRUE);
 			}
 		}
 		settings.modifiedSP = FALSE;
@@ -607,11 +650,15 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_widget_show(vboxSP);
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);
 	
-	
+	g_signal_connect(GTK_OBJECT(container), "delete-event",
+                G_CALLBACK(on_studypad_delete),
+			   specd);
+
+	/*
 	g_signal_connect(GTK_OBJECT(vboxSP), "destroy",
                 G_CALLBACK(gui_html_editor_control_data_destroy),
 			   specd);
-
+	*/
 	hboxstyle = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hboxstyle);
 	gtk_box_pack_start(GTK_BOX(vboxSP), hboxstyle, TRUE, TRUE, 0);

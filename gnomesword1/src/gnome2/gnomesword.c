@@ -49,6 +49,7 @@
 #include "gui/hints.h"
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
+//#include "gui/toolbar_nav.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -253,6 +254,7 @@ void frontend_display(void)
 		settings.setup_canceled = FALSE;
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
+	gtk_widget_grab_focus (sidebar.module_list);
 	g_print("done\n");
 }
 
@@ -293,9 +295,9 @@ void shutdown_frontend(void)
 	list_of_verses = NULL;
 	
 	gui_save_bookmarks_treeview();
+	
 	/* if study pad file has changed since last save */
-	if (widgets.studypad_dialog)
-		gtk_widget_destroy(widgets.studypad_dialog);
+	gui_studypad_can_close();
 	
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();
