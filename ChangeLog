@@ -1,3 +1,14 @@
+2004-01-05  Terry <tbiggs@users.sf.net>
+
+	* added module manager
+	  backend/module_mangger.cc
+	  backend/module_mangger.hh
+	  main/mod_mgr.c
+	  main/mod_mgr.h
+	  gnome2/mod_mgr.c
+	  gui/mod_mgr.h
+
+
 2004-01-02  Andy <andyp@users.sf.net>
 
 	* updated some strings

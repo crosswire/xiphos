@@ -26,10 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#ifdef USE_GTKEMBEDMOZ
-#include <gtkmozembed.h>
-#endif
-
+ 
 #include "gui/gbs_display.h"
 #include "gui/gbs.h"
 #include "gui/utilities.h"
@@ -191,31 +188,6 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 	}
 
 	str = g_string_append(str, "</body></html>");
-#ifdef USE_GTKEMBEDMOZ
-	if (!gbs->is_rtol) {
-		htmlstream =
-		    gtk_html_begin_content(GTK_HTML(gbs->html),
-					   "text/html; charset=utf-8");
-		if (str->len) {
-			gtk_html_write(GTK_HTML(gbs->html), htmlstream,
-				       str->str, str->len);
-		}
-		gtk_html_end(GTK_HTML(gbs->html), htmlstream, status1);
-		gtk_html_jump_to_anchor(GTK_HTML(gbs->html), anchor);
-		//gtk_html_set_editable(html, was_editable);
-	} else {
-		gtk_moz_embed_open_stream((GtkMozEmbed *) gbs->html,
-					  "file://", "text/html");
-		if (str->len) {
-			gtk_moz_embed_append_data((GtkMozEmbed *) gbs->
-						  html, str->str,
-						  str->len);
-		}
-
-		gtk_moz_embed_close_stream((GtkMozEmbed *) gbs->html);
-	}
-
-#else
 	htmlstream = gtk_html_begin_content(GTK_HTML(gbs->html),
 					    "text/html; charset=utf-8");
 	if (str->len) {
@@ -228,9 +200,7 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 	/* andyp - inserted for debugging, remove */
 	//g_print(str->str); 
 
-	//gtk_html_set_editable(html, was_editable);    
-
-#endif
+	//gtk_html_set_editable(html, was_editable); 
 	g_string_free(str, TRUE);
 	free_font(mf);
 }
