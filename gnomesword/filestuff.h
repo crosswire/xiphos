@@ -61,3 +61,7 @@ createsettings			(void);
 
 void
 loadStudyPadFile 		(gchar *filename);
+
+void
+savelist						(GtkWidget *list,
+										gint howmany);
