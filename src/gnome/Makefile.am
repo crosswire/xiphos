@@ -1,7 +1,7 @@
 INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
     $(PIXBUF_CFLAGS) \
-    $(GTKHTML_CFLAGS) \
+    $(PACKAGE_CFLAGS) \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
@@ -13,6 +13,7 @@ gnomesword_1_0_SOURCES =  \
     about_sword.c \
     bibletext.c \
     bibletext_dialog.c \
+    bibletext_menu.c \
     bookmarks.c \
     cipher_key_dialog.c \
     commentary_dialog.c \
@@ -61,7 +62,7 @@ gnomesword_1_0_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
-    $(GTKHTML_LIBS)\
+    $(PACKAGE_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS) \
