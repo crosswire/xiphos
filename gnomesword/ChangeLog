@@ -1,7 +1,13 @@
+2000-12-13 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*changed listeditor.cpp to gs_listeditor.c
+	*added gs_studypad.c and gs_studypad.h
+	
+
 2000-12-08 Terry Biggs <tbiggs@users.sourceforge.net> 
 
 	* shortcut bar bug fixed - really
-
+	* release 0.3.7a	
 
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
 

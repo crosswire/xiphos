@@ -24,8 +24,8 @@ COMMON_SOURCE = \
         gs_sword.h \
         interface.c \
         interface.h \
-        listeditor.c \
-        listeditor.h \
+        gs_listeditor.c \
+        gs_listeditor.h \
         main.cpp \
         menustuff.c \
         menustuff.h \

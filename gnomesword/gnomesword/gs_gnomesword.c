@@ -37,7 +37,7 @@
 #include "interface.h"
 #include "filestuff.h"
 #include "menustuff.h"
-#include "listeditor.h"
+#include "gs_listeditor.h"
 //#include "searchstuff.h"
 
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>

@@ -1,3 +1,19 @@
+/***************************************************************************
+                          menustuff.c  -  description
+                             -------------------
+    begin                : Wed Dec 13 2000
+    copyright            : (C) 2000 by Terry Biggs
+    email                : tbiggs@users.sourceforge.net
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
                           menustuff.cpp  -  description
