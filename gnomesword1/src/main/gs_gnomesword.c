@@ -790,7 +790,7 @@ void change_verse(gchar * key)
 		addhistoryitem = TRUE;
 
 		/* change main window */
-		display_text(val_key);
+		gui_display_text(val_key);
 	}
 
 	/* 
@@ -836,7 +836,7 @@ void set_verse_style(gboolean choice)
 
 	if (havebible) {
 		/* show the change */
-		display_text(settings.currentverse);
+		gui_display_text(settings.currentverse);
 	}
 }
 
@@ -873,7 +873,7 @@ void display_devotional(void)
 /*** the changes are already made we just need to show them ***/
 void display_new_font_color_and_size(void)
 {
-	display_text(settings.currentverse);
+	gui_display_text(settings.currentverse);
 	gui_display_commentary(settings.currentverse);
 	display_dictlex(settings.dictkey);
 	update_interlinear_page();
@@ -923,7 +923,7 @@ void save_properties(gboolean use_default)
 
 GList *do_search(gpointer *usr_data)
 {
-	return backend_do_search(&settings, usr_data);
+	return backend_do_search(usr_data);
 }
 
 void display_sb_dictlex(gchar *modName, gchar *key)
@@ -1040,3 +1040,23 @@ int module_is_locked(char * mod_name)
 	return backend_module_is_locked(mod_name);
 }
 
+/******************************************************************************
+ * Name
+ *   get_valid_key
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   char *get_valid_key(char *key)	
+ *
+ * Description
+ *    returns a valid Bible reference - must be freed by calling function
+ *
+ * Return value
+ *   char *
+ */
+
+char *get_valid_key(char *key)
+{
+	return backend_get_valid_key(key);
+}

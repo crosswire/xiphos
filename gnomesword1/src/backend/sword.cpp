@@ -194,21 +194,21 @@ void backend_init_sword(void)
 	g_print("Number of Book modules = %d\n\n", bookpages);
 
 	/*
-	 * setup Bible text, Commentary, Personal Comments
+	 * setup Commentary, Personal Comments
 	 * Generic Book and Dict/Lex Support
-	 */	
+	 */
 	if(havebible)
-		backend_setup_text();
+		backend_setup_bibletext();
 	if(havecomm)
-		backend_setup_commentary(&settings);
+		backend_setup_commentary();
 	if(havepercomm)
-		backend_setup_percomm(&settings);
+		backend_setup_percomm();
 	if(havedict)
 		backend_setup_dictlex();
 	if(havebook)
 		backend_setup_books();
 	if(havebible)
-		backend_setup_interlinear(&settings);
+		backend_setup_interlinear();
 }
 
 GList * backend_get_global_options_list(void)
@@ -265,8 +265,8 @@ void backend_shutdown(void)
 {
 	savebookmarks(settings.ctree_widget);
 	backend_save_properties(true);
-
-	backend_shutdown_text();
+	
+	backend_shutdown_bibletext();
 	backend_shutdown_commentary();
 	backend_shutdown_percomm();
 	backend_shutdown_dictlex();
