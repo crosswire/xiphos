@@ -38,7 +38,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-#include <rwphtml.h>
+//#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -51,7 +51,7 @@
 #include "gs_shortcutbar.h"
 #include "support.h"
 
-using std::string;
+//using std::string;
 using std::list;
 using namespace sword;
 
@@ -59,7 +59,7 @@ extern gint groupnum7;
 extern gchar *shortcutbarDir;
 extern SETTINGS *settings;
 
-list < string > sbfiles;
+list < SWBuf > sbfiles;
 
 static SWDisplay *viewersbDisplay;	//-- to display modules in viewer 
 static SWMgr *viewersbMgr;
