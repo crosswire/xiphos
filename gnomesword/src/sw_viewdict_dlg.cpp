@@ -36,6 +36,7 @@
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
+#include <markupfiltmgr.h>
 #include "sw_viewdict_dlg.h"
 #include "sw_gnomesword.h"
 #include "sw_display.h"
@@ -65,7 +66,7 @@ GList* setupSDSWORD(GtkWidget *text)
 	ModMap::iterator it; //-- iteratior			
 	SectionMap::iterator sit; //-- iteratior
 	
-	SDMgr	= new SWMgr();
+	SDMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	SDMod     = NULL;
 	SDDisplay = new  GtkHTMLEntryDisp(text);
 	//SDDisplay = new  GtkHTMLEntryDisp(text);
@@ -74,9 +75,6 @@ GList* setupSDSWORD(GtkWidget *text)
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			SDMod = (*it).second;
 			list = g_list_append(list,SDMod->Name());
-			sit = SDMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(SDMod, section);		
 			SDMod->Disp(SDDisplay);
 		}
 	}

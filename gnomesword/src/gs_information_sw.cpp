@@ -77,8 +77,6 @@ void VIDsetupSWORD(GtkWidget *text)
 	for(it = VIDMgr->Modules.begin(); it != VIDMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			VIDMod = (*it).second;
-			sit = VIDMgr->config->Sections.find((*it).second->Name()); //-- add render filters
-			ConfigEntMap &section = (*sit).second;
 			VIDMod->Disp(VIDDisplay);
 		}
 	}

@@ -642,7 +642,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(cbeBook);
 	gtk_entry_set_text(GTK_ENTRY(cbeBook), _("Romans"));
 
-	spbChapter_adj = gtk_adjustment_new(8, 0, 151, 1, 10, 10);
+	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
 	spbChapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
 	gtk_widget_ref(spbChapter);
@@ -654,7 +654,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				  NULL);
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spbChapter), TRUE);
 
-	spbVerse_adj = gtk_adjustment_new(28, 0, 180, 1, 10, 10);
+	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
 	spbVerse = gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
 	gtk_widget_ref(spbVerse);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "spbVerse",
