@@ -35,10 +35,6 @@
 #include "main/lists.h"
  
 #include "backend/sword.h"
-#include "backend/percomm_.h"
-#include "backend/bookmarks.h"
-#include "backend/module.hh"
-#include "backend/mgr.hh"
 
 
 /******************************************************************************
@@ -84,29 +80,6 @@ const char *get_sword_version(void)
 	return backend_get_sword_version();
 }
 
-
-/******************************************************************************
- * Name
- *   get_verse_list
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   GList *get_verse_list(gchar* module_name, gchar *verse_list)	
- *
- * Description
- *    
- *
- * Return value
- *   GList *
- */ 
-
-/*
-GList *get_verse_list(char* module_name, char *verse_list)
-{
-	return backend_get_verse_list(module_name, verse_list);
-}
-*/
 
 /******************************************************************************
  * Name
@@ -221,13 +194,3 @@ int set_module(int manager, char * module_name)
 {
 	return backend_set_module(manager, module_name);
 }
-
-
-
-/** Returns error. */
-/*
-char int module_error(void) 
-{
-	return backend_module_error(void);
-}
-*/
