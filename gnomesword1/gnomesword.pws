@@ -6,11 +6,11 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=107
-1=705
-2=499
-3=179
-4=13
+0=572
+1=1247
+2=115
+3=174
+4=263
 5=1
 6=91
 7=273
@@ -35,22 +35,29 @@ ShowLocals=true
 11=
 12=
 
+[breakpoints]
+0=1,,1,135825104,0,,gs_mainmenu_cb.c,107,6,1,on_about_the_sword_project1_activate,,1018891546,
+
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/gs_history.c
-1=/home/terry/Projects/gnomesword1/src/main/gs_menu.c
-2=/home/terry/Projects/gnomesword1/src/main/gs_popup_cb.c
-3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-4=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
-5=/home/terry/Projects/gnomesword1/src/backend/gbs.cpp
-6=/home/terry/Projects/gnomesword1/gnomesword.prj
+0=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+1=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+2=/home/terry/Projects/gnomesword1/src/backend/sword.h
+3=/home/terry/Projects/gnomesword1/src/gnome/about_modules.c
+4=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
 
 [find_text]
-0=notebook1
-1=htmlCommentaries
-2=scrolledwindow8
-3=swHtmlCom
+0=false
+1=len
+2=textModAbout
+3=aboutbox
+4=notebook1
+5=htmlCommentaries
+6=scrolledwindow8
+7=swHtmlCom
 
 [find_in_files]
-0=notebook1
-1=htmlCommentaries
-2=swHtmlCom
+0=display_about_module_dialog
+1=showmoduleinfoSWORD
+2=notebook1
+3=htmlCommentaries
+4=swHtmlCom
