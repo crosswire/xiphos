@@ -21,9 +21,34 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+#ifndef __GNOMESWORD_H__
+#define __GNOMESWORD_H__
 
 #include <gnome.h>
 #include <string>
+
+typedef struct _settings SETTINGS;
+struct _settings
+{
+	gchar   	MainWindowModule[80],  //-- modules to open at program startup
+						Interlinear1Module[80],
+						Interlinear2Module[80],
+						Interlinear3Module[80],
+						personalcommentsmod[80];
+	gchar			currentverse[80],      //-- verse to use at program startup	
+						dictkey[80];        //-- dictionary key to use at program startup - the one we shut down with
+	gint			currentverse_red,   //-- current verse colors
+						currentverse_green,
+						currentverse_blue;
+	gint			notebook3page,  //-- notebook 3 page number
+						notebook1page,  //-- commentaries notebook
+						notebook2page;  //-- dict - lex notebook
+	gboolean	strongs,           //-- toogle button and check menu state
+						footnotes,
+						versestyle,
+						interlinearpage,
+						autosavepersonalcomments;
+};
 
 void 
 FillDictKeys(char *ModName);
@@ -101,7 +126,7 @@ void
 freeformlookupSWORD		  (GdkEventKey  *event);
 
 void
-changcurcomModSWORD	 	(gchar *modName);
+changcurcomModSWORD	 	(gchar *modName, gint page_num);
 
 void
 editnoteSWORD					(bool editbuttonactive);
@@ -114,7 +139,8 @@ deletenoteSWORD				(void);
 
 void
 changcurdictModSWORD	(gchar *modName, 
-										string keyText);
+										string keyText,
+										gint page_num);
 void
 dictSearchTextChangedSWORD(gchar *mytext);
 
@@ -138,3 +164,12 @@ clearhistory						(void);
 
 void
 printfile								(void);
+
+void
+openpropertiesbox				(void);
+
+void
+changepagenotebook			(GtkNotebook *notebook,
+												gint page_num);
+
+#endif /* __GNOMESWORD_H__ */

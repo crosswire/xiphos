@@ -15,3 +15,4 @@ GtkWidget* create_dlgSearch (void);
 GtkWidget* create_wdwEditBookmarks (void);
 GtkWidget* create_dlgAboutSword (void);
 GtkWidget* create_pmEditnote (void);
+GtkWidget* create_dlgVerseList (void);
