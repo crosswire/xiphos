@@ -254,6 +254,7 @@ AM_CONDITIONAL(SPELLING,test "x$have_speller" = xyes)
 AC_OUTPUT([
 Makefile
 macros/Makefile
+src/editor/Makefile
 src/gsdialogs/Makefile
 src/gssword/Makefile
 src/Makefile

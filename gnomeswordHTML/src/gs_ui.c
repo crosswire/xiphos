@@ -40,7 +40,7 @@
 
 #include "callback.h"
 #include "gs_studypad.h"
-//#include "gs_editor.h"
+#include "gs_editor.h"
 #include "gs_ui.h"
 #include "gs_html.h"
 #include "support.h"
@@ -409,6 +409,8 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *list1;
 	GtkWidget *label58;
 	GtkWidget *hbox25;
+	GtkWidget *PCEditor;
+	GtkWidget *SPEditor;
 	gint i;
 	gchar *pathname;	
 	
@@ -1103,10 +1105,11 @@ GtkWidget *create_mainwindow(void)
 	ed_pc.text = gtk_text_new(NULL, NULL);
 	ed_pc.statusbar = gtk_statusbar_new();
 	ed_pc.notebook = gtk_notebook_new();
-	ed_pc.note_editor = TRUE;
+	ed_pc.note_editor = TRUE;*/
 	
-	htmlComments = create_editor(mainwindow, ed_pc);	  
-	statusbarNE = ed_pc.statusbar;
+	PCEditor = create_editor (vbox8,TRUE);
+	gtk_widget_show(PCEditor);
+	/*statusbarNE = ed_pc.statusbar;
 	textComments = ed_pc.text;	*/	
 
 	label85 = gtk_label_new("Comments Editor");
@@ -1202,7 +1205,10 @@ studypad editor
 	htmltext3 = create_editor(mainwindow, ed_sp);	  
 	statusbar2 = ed_sp.statusbar;
 	text3 = ed_sp.text;   */
-
+	
+         SPEditor = create_editor (vbox6,FALSE);
+	gtk_widget_show(SPEditor);
+	
 	label41 = gtk_label_new("Study Pad");
 	gtk_widget_ref(label41);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "label41",

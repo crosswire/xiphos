@@ -17,14 +17,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "gs_gbfhtml.h"
+#include "sw_gbfhtml.h"
 
-GS_GBFHTML::GS_GBFHTML()
+SW_GBFHTML::SW_GBFHTML()
 {
 }
 
 
-char GS_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
+char SW_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 {
 	char *to, *from, token[2048];
 	int tokpos = 0;

@@ -109,8 +109,6 @@ struct _interlinear {
 		ver5[80];
 };
 
-
-
 void initGnomeSword(GtkWidget *app, 
 		SETTINGS *settings, 
 		GList *biblemods, 
