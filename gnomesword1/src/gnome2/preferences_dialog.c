@@ -1171,13 +1171,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_object_set_data(GTK_OBJECT(dialog_prefs), "dialog_vbox24",
 			    dialog_vbox24);
 	gtk_widget_show(dialog_vbox24);
-	//gtk_container_set_border_width(GTK_CONTAINER(dialog_vbox24), 6);
 
 	hbox22 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox22);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox24), hbox22, TRUE, TRUE,
 			   0);
-
 
 /*************************************************** start sidebar */
 
