@@ -55,8 +55,8 @@
 /* Define if you want to use printing w/gnome-print */
 #undef USE_GNOMEPRINT
 
-/* Define if you want to use the GtkHTML */
-#undef USE_GTKHTML
+/* Define if you want to use pre 0.10.99.2 gal */
+#undef USE_OLD_GAL
 
 /* Define if you want to use spell checking */
 #undef USE_SPELL

@@ -175,8 +175,9 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
                 }
         }
 	if(count){
+		sprintf(s->groupName,"%s","Search Results");
 		getVerseListSBSWORD(searchMod->Name(), string->str, s);
-		sprintf(buf,"%d found",count);
+		sprintf(buf,"%d matches",count);
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
 	}
 	g_string_free(string,TRUE);
