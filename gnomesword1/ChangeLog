@@ -2,6 +2,10 @@
 
 	* renamed gui/_percomm.h to gui/percomm.h
 	* renamed gnome/_percomm.c to gnome/percomm.c
+	* moved main/gs_interlinear.c to gnome/interlinear.c
+	* moved main/gs_interlinear.h to gui/interlinear.h
+	* moved main/gs_gui.c to gnome/main_window.c
+	* moved main/gs_gui.h to gui/main_window.h
 
 
 2002-07-03  Terry Biggs <tbiggs@users.sourceforge.net>

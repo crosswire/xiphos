@@ -26,9 +26,9 @@
 #include <gnome.h>
 
 #include "gui/interlinear_dialog.h"
+#include "gui/interlinear.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_interlinear.h"
 #include "main/lists.h"
 
 /******************************************************************************
@@ -160,7 +160,7 @@ void gui_undock_interlinear_page(void)
 	settings.cvInterlinear =
 		update_controls_interlinear(settings.currentverse);
 	gtk_widget_show(Interlinear_UnDock_Dialog);
-	update_interlinear_page_detached();
+	gui_update_interlinear_page_detached();
 	g_free(settings.cvInterlinear);
 	ApplyChangeBook = TRUE;
 }
@@ -227,7 +227,7 @@ static void on_dlgInterlinear_destroy(GtkObject *object, gpointer user_data)
 	gtk_widget_reparent(settings.frameInt, vbox);
 	gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower), 2); 
 	settings.dockedInt = TRUE;
-	update_interlinear_page();
+	gui_update_interlinear_page();
 }
 
 /******************************************************************************
@@ -254,7 +254,7 @@ static void on_buttonIntSync_clicked(GtkButton * button, gpointer user_data)
 	ApplyChangeBook = FALSE;	
 	settings.cvInterlinear =
 		update_controls_interlinear(settings.currentverse);
-	update_interlinear_page_detached();
+	gui_update_interlinear_page_detached();
 	g_free(settings.cvInterlinear);
 	ApplyChangeBook = TRUE;
 }
@@ -289,7 +289,7 @@ static void on_entrycbIntBook_changed(GtkEditable *editable,
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
 		gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
 		settings.cvInterlinear = buf;
-		update_interlinear_page_detached();	
+		gui_update_interlinear_page_detached();	
 	}
 }
 
@@ -319,7 +319,7 @@ static gboolean on_sbIntChapter_button_release_event(GtkWidget *widget,
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
 	settings.cvInterlinear = change_verse_interlinear();
-	update_interlinear_page_detached();
+	gui_update_interlinear_page_detached();
 	ApplyChangeBook = TRUE;
 	return TRUE;
 }
@@ -348,7 +348,7 @@ static gboolean on_sbIntVerse_button_release_event(GtkWidget *widget,
 {	
 	ApplyChangeBook = FALSE;
 	settings.cvInterlinear = change_verse_interlinear();
-	update_interlinear_page_detached();
+	gui_update_interlinear_page_detached();
 	ApplyChangeBook = TRUE;
 	return TRUE;
 }
@@ -380,7 +380,7 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget *widget,
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	
 	if (event->keyval == 65293 || event->keyval == 65421) {	
 		settings.cvInterlinear = update_controls_interlinear(buf);
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 		g_free(settings.cvInterlinear);
 		ApplyChangeBook = TRUE;
 		return TRUE; 
@@ -417,7 +417,7 @@ static void on_btnIntGotoVerse_clicked(GtkButton *button, gpointer user_data)
 	
 	settings.cvInterlinear = update_controls_interlinear(buf);
 	
-	update_interlinear_page_detached();	//-- change verse to entry text 
+	gui_update_interlinear_page_detached();	//-- change verse to entry text 
 	g_free(settings.cvInterlinear);
 	ApplyChangeBook = TRUE;
 }
