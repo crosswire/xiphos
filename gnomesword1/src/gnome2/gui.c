@@ -37,7 +37,7 @@ void gui_init(int argc, char *argv[])
 #endif
 	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
                       argc, argv,
-                      GNOME_PARAM_APP_DATADIR, PACKAGE_DATA_DIR,
+                      GNOME_PROGRAM_STANDARD_PROPERTIES,
                       NULL);
 	//gnome_init("GnomeSword", VERSION, argc, argv);
 //	gdk_rgb_init ();
