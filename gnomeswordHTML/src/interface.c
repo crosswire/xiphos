@@ -371,6 +371,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *vbox2;
 	GtkWidget *hbox11;
 	GtkWidget *vbox8;
+	/*
 	GtkWidget *handlebox16;
 	GtkWidget *tbNotes;
 	GtkWidget *tbtnFollow;
@@ -378,6 +379,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *btnSaveNote;
 	GtkWidget *btnDeleteNote;
 	GtkWidget *btnSpellNotes;
+	*/
 	GtkWidget *label85;
 	GtkWidget *vbox3;
 	GtkWidget *frame2;
@@ -1161,7 +1163,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vbox8);
 	gtk_box_pack_start(GTK_BOX(hbox11), vbox8, TRUE, TRUE, 0);
 
-
+/*
 	handlebox16 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox16);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "handlebox16",
@@ -1254,8 +1256,8 @@ GtkWidget *create_mainwindow(void)
 				 btnSpellNotes,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnSpellNotes);
-
-	label85 = gtk_label_new("Personal Comments");
+*/
+	label85 = gtk_label_new("Comments Editor");
 	gtk_widget_ref(label85);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "label85",
 				 label85,
@@ -1504,7 +1506,8 @@ GtkWidget *create_mainwindow(void)
 	ed.htmlwidget = gtk_html_new();
 	ed.text = gtk_text_new(NULL, NULL);
 	ed.notebook = gtk_notebook_new();
-	ed.statusbar = gtk_statusbar_new();	
+	ed.statusbar = gtk_statusbar_new();
+	ed.note_editor = FALSE;
 	htmltext3 = create_editor(mainwindow, ed);	  
 	statusbar2 = ed.statusbar;
 	text3 = ed.text;
@@ -1731,7 +1734,7 @@ GtkWidget *create_mainwindow(void)
 			   (on_cbeFreeformLookup_key_press_event), NULL);
 	gtk_signal_connect(GTK_OBJECT(cbeFreeformLookup), "drag_drop",
 			   GTK_SIGNAL_FUNC(on_cbeFreeformLookup_drag_drop),
-			   NULL);
+			   NULL); 
 	gtk_signal_connect(GTK_OBJECT(btnLookup), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnLookup_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnBack), "clicked",
@@ -1746,8 +1749,8 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(btnComPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnComNext_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(tbtnFollow), "toggled",
+			   GTK_SIGNAL_FUNC(on_btnComNext_clicked), NULL); 
+/*	gtk_signal_connect(GTK_OBJECT(tbtnFollow), "toggled",
 			   GTK_SIGNAL_FUNC(on_tbtnFollow_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnEditNote), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnEditNote_toggled), NULL);
@@ -1756,6 +1759,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(btnDeleteNote), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnDeleteNote_clicked),
 			   NULL);
+*/
 #ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(btnSpellNotes), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),

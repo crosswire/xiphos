@@ -50,6 +50,8 @@
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 
+
+gchar sbNoteEditorText[255];
 /****************************************************************************************
  * externs
  ****************************************************************************************/
@@ -65,8 +67,8 @@ extern GtkWidget *statusbarNE;
 
 /***************************************************************************** 
  * ComEntryDisp - for displaying personal commentary modules in a 
- * GtkHTML widget
- * the mods need to be filtered to html first
+ * GtkHTML widget for editing 
+ * 
  * imodule - the Sword module to display
  *****************************************************************************/
 char ComEntryDisp::Display(SWModule & imodule)
@@ -75,7 +77,8 @@ char ComEntryDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
-
+	gint context_id2;	/* statusbar context_id ??? */
+	
 	font = "Roman";
 	buf = (char *) imodule.Description();
 	if ((sit = mainMgr1->config->Sections.find(imodule.Name())) !=
@@ -86,49 +89,23 @@ char ComEntryDisp::Display(SWModule & imodule)
 		}
 	}
 	(const char *) imodule;	/* snap to entry */
-	/* check for personal comments by finding ModDrv=RawFiles */
-	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	
-	    		(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)) {	/* check for edit mode */
-		//GtkWidget *statusbar;	/* pointer to comments statusbar */
-		gint context_id2;	/* statusbar context_id ??? */
-		/* add module name and verse to edit note statusbar */		
-		sprintf(tmpBuf, "[%s] ", imodule.KeyText());
-		/* setup statusbar for personal comments */
-		/* get context id */		
-		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbarNE), "GnomeSword");
-		/* ready status */
-		gtk_statusbar_pop(GTK_STATUSBAR(statusbarNE), context_id2);	
-		/* show verse ref in statusbar */		
-		gtk_statusbar_push(GTK_STATUSBAR(statusbarNE), context_id2, tmpBuf); 
-		beginHTML(GTK_WIDGET(gtkText));	
-	} else {
-		strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
-		sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
-			imodule.Name(), buf, imodule.Name(), imodule.KeyText());
-		strbuf = g_string_append(strbuf, tmpBuf);
-		/* show verse ref in gtkhtml widget  */
-		beginHTML(GTK_WIDGET(gtkText));
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	}
+	/* setup statusbar for personal comments */
+	/* get context id */		
+	context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbarNE), "GnomeSword");
+	/* ready status */
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbarNE), context_id2);	
+	/* show verse ref in statusbar */	
+	sprintf(sbNoteEditorText, "[%s] [%s]", imodule.Name(), imodule.KeyText());		
+	gtk_statusbar_push(GTK_STATUSBAR(statusbarNE), context_id2, sbNoteEditorText); 
+	beginHTML(GTK_WIDGET(gtkText));	
 	/* show module text for current key */
-	if (!stricmp(font, "Symbol")) {
-		strbuf = g_string_new("<FONT FACE=\"symbol\">");
-		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else if (!stricmp(font, "Greek")) {
-		strbuf = g_string_new("<FONT FACE=\"SIL Galatia\">");
-		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else {
-		strbuf = g_string_new((const char *) imodule);
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	}
+	strbuf = g_string_new((const char *) imodule);
+	
+	//g_warning(strbuf->str);
+	
+	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
+	g_string_free(strbuf, TRUE);
+	
 	endHTML(GTK_WIDGET(gtkText));
 	return 0;
 }
