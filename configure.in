@@ -191,6 +191,7 @@ src/backend/Makefile
 src/gnome2/Makefile
 src/main/Makefile
 gnomesword2.desktop
+gnomesword2.spec
 ])
 
 echo
