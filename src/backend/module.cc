@@ -29,8 +29,14 @@
 #include <unistd.h>
 #include <unixstr.h>
 #endif
-
+#ifdef USE_GNOME2
+#include <gnome.h>
+#include <glib-2.0/glib.h>
+#else
+#include <glib-1.2/glib.h>
+#endif
 #include <swmodule.h>
+#include <flatapi.h>
 #include <versekey.h>
 #include <utf8html.h>
 
@@ -1568,34 +1574,34 @@ void backend_init_language_map(void)
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");
 	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 	//languageMap[SWBuf("ae")] = SWBuf("Avestan");
-	languageMap[SWBuf("af")] = SWBuf("Afrikaans");
+	languageMap[SWBuf("af")] = SWBuf(_("Afrikaans"));
 	//languageMap[SWBuf("am")] = SWBuf("Amharic");
-	languageMap[SWBuf("ang")] = SWBuf("English, Old (ca.450-1100)");
-	languageMap[SWBuf("ar")] = SWBuf("Arabic");
+	languageMap[SWBuf("ang")] = SWBuf(_("English, Old (ca.450-1100)"));
+	languageMap[SWBuf("ar")] = SWBuf(_("Arabic"));
 	//languageMap[SWBuf("as")] = SWBuf("Assamese");
 	//languageMap[SWBuf("ay")] = SWBuf("Aymara");
-	languageMap[SWBuf("az")] = SWBuf("Azerbaijani");
+	languageMap[SWBuf("az")] = SWBuf(_("Azerbaijani"));
 	//languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-	languageMap[SWBuf("be")] = SWBuf("Belarusian");
-	languageMap[SWBuf("bg")] = SWBuf("Bulgarian");
+	languageMap[SWBuf("be")] = SWBuf(_("Belarusian"));
+	languageMap[SWBuf("bg")] = SWBuf(_("Bulgarian"));
 	//languageMap[SWBuf("bh")] = SWBuf("Bihari");
 	//languageMap[SWBuf("bi")] = SWBuf("Bislama");
 	//languageMap[SWBuf("bn")] = SWBuf("Bengali");
 	//languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-	languageMap[SWBuf("br")] = SWBuf("Breton");
-	languageMap[SWBuf("bs")] = SWBuf("Bosnian");
-	languageMap[SWBuf("ca")] = SWBuf("Catalan");
+	languageMap[SWBuf("br")] = SWBuf(_("Breton"));
+	languageMap[SWBuf("bs")] = SWBuf(_("Bosnian"));
+	languageMap[SWBuf("ca")] = SWBuf(_("Catalan"));
 	//languageMap[SWBuf("ce")] = SWBuf("Chechen");
-	languageMap[SWBuf("ceb")] = SWBuf("Cebuano");
+	languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano"));
 	//languageMap[SWBuf("ch")] = SWBuf("Chamorro");
 	//languageMap[SWBuf("co")] = SWBuf("Corsican");
-	languageMap[SWBuf("cop")] = SWBuf("Coptic");
-	languageMap[SWBuf("cs")] = SWBuf("Czech");
-	languageMap[SWBuf("cu")] = SWBuf("Church Slavic");
+	languageMap[SWBuf("cop")] = SWBuf(_("Coptic"));
+	languageMap[SWBuf("cs")] = SWBuf(_("Czech"));
+	languageMap[SWBuf("cu")] = SWBuf(_("Church Slavic"));
 	//languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-	languageMap[SWBuf("cy")] = SWBuf("Welsh");
-	languageMap[SWBuf("da")] = SWBuf("Danish");
-	languageMap[SWBuf("de")] = SWBuf("German");
+	languageMap[SWBuf("cy")] = SWBuf(_("Welsh"));
+	languageMap[SWBuf("da")] = SWBuf(_("Danish"));
+	languageMap[SWBuf("de")] = SWBuf(_("German"));
 	//languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
 	languageMap[SWBuf("el")] = SWBuf("Greek, Modern (1453-)");
 	languageMap[SWBuf("en")] = SWBuf("English");
