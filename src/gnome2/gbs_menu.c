@@ -399,14 +399,14 @@ static void add_global_option_items(GBS_DATA * g)
 	GSList *group = NULL;
 
 	if (check_for_global_option(g->mod_name, "GBFRedLetterWords")) {
-		g->bgo->words_in_red =
+		/*g->bgo->words_in_red =
 		    load_module_options(g->mod_name,
-					"Words of Christ in Red");
+					"Words of Christ in Red");*/
 
 
 		item =
-		    gtk_check_menu_item_new_with_label(_
-						       ("Words of Christ in Red"));
+		    gtk_check_menu_item_new_with_label(
+						_("Words of Christ in Red"));
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(g->module_options_menu),
 				  item);
@@ -421,9 +421,9 @@ static void add_global_option_items(GBS_DATA * g)
 	if ((check_for_global_option(g->mod_name, "GBFStrongs")) ||
 	    (check_for_global_option(g->mod_name, "ThMLStrongs")) ||
 	    (check_for_global_option(g->mod_name, "OSISStrongs"))) {
-		g->bgo->strongs =
+		/*g->bgo->strongs =
 		    load_module_options(g->mod_name,
-					"Strong's Numbers");
+					"Strong's Numbers");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_
@@ -441,9 +441,9 @@ static void add_global_option_items(GBS_DATA * g)
 	if ((check_for_global_option(g->mod_name, "GBFMorph")) ||
 	    (check_for_global_option(g->mod_name, "ThMLMorph")) ||
 	    (check_for_global_option(g->mod_name, "OSISSMorph"))) {
-		g->bgo->morphs =
+		/*g->bgo->morphs =
 		    load_module_options(g->mod_name,
-					"Morphological Tags");
+					"Morphological Tags");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_
@@ -460,8 +460,8 @@ static void add_global_option_items(GBS_DATA * g)
 
 	if ((check_for_global_option(g->mod_name, "GBFFootnotes")) ||
 	    (check_for_global_option(g->mod_name, "ThMLFootnotes"))) {
-		g->bgo->footnotes =
-		    load_module_options(g->mod_name, "Footnotes");
+		/*g->bgo->footnotes =
+		    load_module_options(g->mod_name, "Footnotes");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_("Footnotes"));
@@ -476,8 +476,8 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "UTF8GreekAccents")) {
-		g->bgo->greekaccents =
-		    load_module_options(g->mod_name, "Greek Accents");
+		/*g->bgo->greekaccents =
+		    load_module_options(g->mod_name, "Greek Accents");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_
@@ -494,8 +494,8 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "ThMLLemma")) {
-		g->bgo->lemmas =
-		    load_module_options(g->mod_name, "Lemmas");
+		/*g->bgo->lemmas =
+		    load_module_options(g->mod_name, "Lemmas");*/
 
 		item = gtk_check_menu_item_new_with_label(_("Lemmas"));
 		gtk_widget_show(item);
@@ -509,9 +509,9 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "ThMLScripref")) {
-		g->bgo->scripturerefs =
+		/*g->bgo->scripturerefs =
 		    load_module_options(g->mod_name,
-					"Scripture Cross-references");
+					"Scripture Cross-references");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_
@@ -528,9 +528,9 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "UTF8HebrewPoints")) {
-		g->bgo->hebrewpoints =
+		/*g->bgo->hebrewpoints =
 		    load_module_options(g->mod_name,
-					"Hebrew Vowel Points");
+					"Hebrew Vowel Points");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_
@@ -547,9 +547,9 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "UTF8Cantillation")) {
-		g->bgo->hebrewcant =
+		/*g->bgo->hebrewcant =
 		    load_module_options(g->mod_name,
-					"Hebrew Cantillation");
+					"Hebrew Cantillation");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_
@@ -565,8 +565,8 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "ThMLHeadings")) {
-		g->bgo->headings =
-		    load_module_options(g->mod_name, "Headings");
+		/*g->bgo->headings =
+		    load_module_options(g->mod_name, "Headings");*/
 
 		item =
 		    gtk_check_menu_item_new_with_label(_("Headings"));
@@ -581,13 +581,13 @@ static void add_global_option_items(GBS_DATA * g)
 	}
 
 	if (check_for_global_option(g->mod_name, "ThMLVariants")) {
-		g->bgo->variants_all =
-		    load_module_options(g->mod_name, "All Readings");
-		g->bgo->variants_primary =
+		/*g->bgo->variants_all =
+		    load_module_options(g->mod_name, "All Readings");*/
+		/*g->bgo->variants_primary =
 		    load_module_options(g->mod_name, "Primary Reading");
 		g->bgo->variants_secondary =
 		    load_module_options(g->mod_name,
-					"Secondary Reading");
+					"Secondary Reading");*/
 		item = gtk_menu_item_new_with_label(_("Variants"));
 		gtk_container_add(GTK_CONTAINER(g->module_options_menu),
 				  item);
