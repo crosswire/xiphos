@@ -3,20 +3,14 @@ Please see INSTALL file before you start.
 ==================================================================
 
 ******************************************************************
-GnomeSword requires Gnome ,the Sword libs and GtkHTML-1.1.x 
+GnomeSword requires Gnome ,the Sword libs and GtkHTML-3.x 
 ******************************************************************
 
 ##################################################################
-GnomeSword will use ispell, aspell or pspell for spell checking 
+GnomeSword uses pspell for spell checking 
 Some of the code for spell checking is from the Bluefish HTML editor 0.6
 ##################################################################
 
-==================================================================
-If you have mozilla-1.0.1 or later and you have the development 
-packages or installed from source you can run configure with the
---enable-gtkembedmoz option. If it works on your system it will give
-you right to left support for Hebrew. 
-==================================================================
 
 ******************************************************************
 you can start gnomesword with command line options

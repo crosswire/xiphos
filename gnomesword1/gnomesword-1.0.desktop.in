@@ -1,10 +1,13 @@
 
 [Desktop Entry]
-Name=GnomeSword Bible Study Tool
+Name=Bible Study Tool
 Comment=Bible Study Tool for the Gnome Desktop
 Exec=@gnomesword_exec@
 Icon=@PACKAGE_PIXMAPS_DIR@/GnomeSword.png
 Terminal=false
 MultipleArgs=false
 Type=Application
-Categories=Application;Accessories;Other
+Categories=Application;Utility;X-Red-Hat-Extra;
+StartupNotify=true
+Encoding=UTF-8
+X-Desktop-File-Install-Version=0.3
