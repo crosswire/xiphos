@@ -115,7 +115,7 @@ gboolean ApplyChange = true;	/* should we make changes when cbBook is changed */
 gboolean bVerseStyle = true;	/* should we show verses or paragraphs in main text window */
 gint curChapter = 8;	/* keep up with current chapter */
 gint curVerse =28;	/* keep up with current verse */
-gboolean noteModified = false; /* set to true is personal note has changed */
+gboolean noteModified = false; /* set to true if personal note has changed */
 gboolean usepersonalcomments = false; /* do we setup for personal comments - default is false
                                          will change to true if we find any personal modules  */
 gboolean autoSave = true; /* we want to auto save changes to personal comments */
@@ -209,7 +209,7 @@ initSWORD(GtkWidget *mainform)
 	dictionarymods = NULL;
 	percommods = NULL;
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
-	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
+//	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
 	mycolor = settings->currentverse_color;
 	textmodule.name = NULL;
 	textmodule.type = NULL;
@@ -235,12 +235,12 @@ initSWORD(GtkWidget *mainform)
 	GTKEntryDisp::__initialize();
 	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
-	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
+	percomDisplay = new  ComEntryDisp(lookup_widget(mainform,"htmlComments"));
 
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
-	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
+	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
-	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
+	FPNDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlComments"));
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
@@ -352,7 +352,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	
 	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
 		if(autoSave){                          //-- if we are in edit mode
-			savenoteSWORD(noteModified); 	//-- save if text in note window has changed			
+			savenoteHTML(MainFrm); 	//-- save if text in note window has changed			
 		}
 	}
 	 		
@@ -726,17 +726,13 @@ void
 editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit button
 {
  	if(editbuttonactive){
- 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),1);
 		percomMod->Disp(percomDisplay);
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), TRUE); //-- set text widget to editable	
 		gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
         } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
-			gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),0);
 		}
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), false); //-- set text widget to not editable
 		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
 	}
 	percomMod->Display(); 	
@@ -744,15 +740,13 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
 
 //-------------------------------------------------------------------------------------------
 void
-savenoteSWORD(gboolean noteisModified) //-- save personal comments
+savenoteSWORD(const gchar *data) //-- save personal comments
 {  	
-        if(noteisModified){ //-- if note modified save the changes
-		VerseKey mykey; //-- verse key text
-		gchar *buf;     //-- pointer to a string 
-		buf = gtk_editable_get_chars((GtkEditable *)NEtext,0,-1); //-- get comments from text widget
-		*percomMod << (const char *)buf; //-- save note!
+        if(noteModified){ //-- if note modified save the changes
+		//VerseKey mykey; //-- verse key text
+		*percomMod << data; //-- save note!
 	}
-	noteModified = false; //-- we just saved the note so it has not been modified 	
+	noteModified = false; 
 }
 
 //-------------------------------------------------------------------------------------------
