@@ -48,11 +48,15 @@ extern "C" {
 	void add_gtkhtml_widgets(GtkWidget * app);
 	void beginHTML(GtkWidget * html, gboolean utf8);
 	void endHTML(GtkWidget * html);
-	void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt);
+	void displayHTML(GtkWidget * html, 
+				const gchar * txt, 
+				gint lentxt);
 	void copyGS_HTML(GtkWidget *html_widget);
 	void on_copyhtml_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
-	void lookupGS_HTML(GtkWidget *html_widget, gchar *modName, gboolean word);
+	gchar *lookupGS_HTML(GtkWidget *html_widget, 
+				gboolean word);
+	gchar *buttonpresslookupGS_HTML(GtkWidget *html_widget);
 	void on_html_lookup_word_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 	void on_html_lookup_selection_activate(GtkMenuItem * menuitem,

@@ -158,8 +158,10 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	gchar *homedir, version[40];
 	const char *ver;
 	gchar gs_version[80];
+	gchar gs_gnomesword[80];
 	
 	sprintf(gs_version,"%s-%s", _("Welcome To GnomeSword"),VERSION);
+	sprintf(gs_gnomesword,"%s-%s",_("GnomeSword"),VERSION);
 	
 	dlgSetup = gnome_dialog_new(_("GnomeSword - Setup"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSetup), "dlgSetup", dlgSetup);
@@ -232,7 +234,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 						  &druidpagestandard3_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
-					    _("GnomeSword-0.5.2a"));
+					    gs_gnomesword);
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard3),
 					   create_image
@@ -855,7 +857,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 						&druidpagefinish1_title_color);
 	gnome_druid_page_finish_set_title(GNOME_DRUID_PAGE_FINISH
 					  (druidpagefinish1),
-					  _("GnomeSword-0.5.2a"));
+					  gs_gnomesword);
 	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 _("            Thank-you for using GnomeSword.\nClick Finish to close this dialog and run GnomeSword."));
