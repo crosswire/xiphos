@@ -29,7 +29,6 @@
 #include <gnome.h>
 #include "gs_gnomesword.h"
 #include "gs_menu.h"
-#include "interface.h"
 #include "callback.h"
 #include "gs_sword.h"
 #include "gs_popup_cb.h"
@@ -63,7 +62,7 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 
 extern gint	greekpage,
         	hebrewpage;
-extern GS_TABS	*p_tabs;
+//extern GS_TABS	*p_tabs;
 		
 /******************************************************************************
  * additemtognomemenu - add item to gnome menu 
@@ -214,14 +213,15 @@ void createpopupmenus(GtkWidget *app,
 	/* attach popup menus */
 	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");	
 	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");	
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = p_tabs->dictwindow;
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->dict_tabs;
 	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = p_tabs->commwindow;
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->comm_tabs;
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
 	menuhtmlcom = create_pmCommentsHtml(commentarylist, comDescription, dictionarylist, dictDescription);	
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
 	gnome_popup_menu_attach(menuDict,lookup_widget(app,"htmlDict"),(gchar*)"1");
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = p_tabs->commwindow;
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->comm_tabs;
 
 }
 

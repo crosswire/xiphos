@@ -1,9 +1,9 @@
 /***************************************************************************
-                            interface.h
+                                gs_preferences_dlg.h
                              -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
+    begin                : Fri July 27 2001
+    copyright            : (C) 2001 by Terry Biggs
+    email                : tbiggs@users.sourceforge.net
  ***************************************************************************/
  
 /*
@@ -25,8 +25,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include "gs_gnomesword.h"
 
-
+GtkWidget *create_dlgSettings(SETTINGS *s,
+				GList *biblelist,
+				GList *commlist,
+				GList *dictlist,
+				GList *percomlist);
 
 #ifdef __cplusplus
 }

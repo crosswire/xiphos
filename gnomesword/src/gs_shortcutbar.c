@@ -39,7 +39,6 @@ extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
 extern BM_TREE bmtree;
 extern GS_APP gs;
-extern GS_LAYOUT *p_gslayout;
 
 gint groupnum1 = 0,
         groupnum2 = 0,
@@ -64,7 +63,7 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 0);
 	} else {
 		settings->showshortcutbar = TRUE;
-		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), p_gslayout->shortcutbar_width);
+		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbar_width);
 	}
 }
 

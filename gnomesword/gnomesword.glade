@@ -2871,8 +2871,7 @@ Revelation
       <widget>
 	<class>GtkNotebook</class>
 	<name>notebook7</name>
-	<can_focus>True</can_focus>
-	<show_tabs>True</show_tabs>
+	<show_tabs>False</show_tabs>
 	<show_border>True</show_border>
 	<tab_pos>GTK_POS_TOP</tab_pos>
 	<scrollable>False</scrollable>
@@ -2886,46 +2885,481 @@ Revelation
 	</child>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox23</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
+	  <class>GtkFrame</class>
+	  <name>frame26</name>
+	  <label>Font Colors and Sizes</label>
+	  <label_xalign>0</label_xalign>
+	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 
 	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label103</name>
-	    <width>216</width>
-	    <label>Current Verse Color</label>
-	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
+	    <class>GtkVBox</class>
+	    <name>vbox35</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
 
-	  <widget>
-	    <class>GnomeColorPicker</class>
-	    <name>cpfgCurrentverse</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>color_set</name>
-	      <handler>on_cpfgCurrentverse_color_set</handler>
-	      <last_modification_time>Wed, 10 May 2000 13:02:03 GMT</last_modification_time>
-	    </signal>
-	    <dither>True</dither>
-	    <use_alpha>False</use_alpha>
-	    <title>Pick a color</title>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>False</fill>
-	    </child>
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox34</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label149</name>
+		<width>216</width>
+		<label>Background Color</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GnomeColorPicker</class>
+		<name>gcpTextBG</name>
+		<width>41</width>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>color_set</name>
+		  <handler>on_gcpTextBG_color_set</handler>
+		  <last_modification_time>Fri, 27 Jul 2001 14:48:57 GMT</last_modification_time>
+		</signal>
+		<dither>True</dither>
+		<use_alpha>False</use_alpha>
+		<title>Pick a color for Background</title>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox30</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label145</name>
+		<width>216</width>
+		<label>Text Color</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GnomeColorPicker</class>
+		<name>gcpText</name>
+		<width>41</width>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>color_set</name>
+		  <handler>on_gcpText_color_set</handler>
+		  <last_modification_time>Fri, 27 Jul 2001 14:50:04 GMT</last_modification_time>
+		</signal>
+		<dither>True</dither>
+		<use_alpha>False</use_alpha>
+		<title>Pick a color for Bible Text</title>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox36</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label151</name>
+		<width>216</width>
+		<label>Font Size</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkCombo</class>
+		<name>cmbTextFontSize</name>
+		<width>41</width>
+		<value_in_list>True</value_in_list>
+		<ok_if_empty>True</ok_if_empty>
+		<case_sensitive>False</case_sensitive>
+		<use_arrows>True</use_arrows>
+		<use_arrows_always>False</use_arrows_always>
+		<items>-2
+-1
++0
++1
++2
++3
++4
++5
+</items>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+
+		<widget>
+		  <class>GtkEntry</class>
+		  <child_name>GtkCombo:entry</child_name>
+		  <name>cmbEntryTextSize</name>
+		  <tooltip>Zero is base font size Go up or down from there</tooltip>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>changed</name>
+		    <handler>on_cmbEntryTextSize_changed</handler>
+		    <last_modification_time>Fri, 27 Jul 2001 15:05:47 GMT</last_modification_time>
+		  </signal>
+		  <editable>True</editable>
+		  <text_visible>True</text_visible>
+		  <text_max_length>0</text_max_length>
+		  <text>+0</text>
+		</widget>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox35</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label150</name>
+		<width>216</width>
+		<label>Current Verse Background Color</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GnomeColorPicker</class>
+		<name>gcpCurrentverseBG</name>
+		<width>41</width>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>color_set</name>
+		  <handler>on_gcpCurrentverseBG_color_set</handler>
+		  <last_modification_time>Fri, 27 Jul 2001 14:52:35 GMT</last_modification_time>
+		</signal>
+		<dither>True</dither>
+		<use_alpha>False</use_alpha>
+		<title>Pick a color - CurrentVerse BG</title>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox23</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label103</name>
+		<width>216</width>
+		<label>Current Verse Color</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GnomeColorPicker</class>
+		<name>gcpCurrentverse</name>
+		<width>41</width>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>color_set</name>
+		  <handler>on_gcpCurrentverse_color_set</handler>
+		  <last_modification_time>Fri, 27 Jul 2001 14:50:43 GMT</last_modification_time>
+		</signal>
+		<dither>True</dither>
+		<use_alpha>False</use_alpha>
+		<title>Pick a color for Current Verse</title>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox31</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label146</name>
+		<width>216</width>
+		<label>Verse Numbers</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GnomeColorPicker</class>
+		<name>gcpTextVerseNums</name>
+		<width>41</width>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>color_set</name>
+		  <handler>on_gcpTextVerseNums_color_set</handler>
+		  <last_modification_time>Fri, 27 Jul 2001 14:53:53 GMT</last_modification_time>
+		</signal>
+		<dither>True</dither>
+		<use_alpha>False</use_alpha>
+		<title>Pick a color</title>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox37</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label152</name>
+		<width>216</width>
+		<label>Verse Number Font Size</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkCombo</class>
+		<name>cmbVerseNumSize</name>
+		<width>41</width>
+		<value_in_list>True</value_in_list>
+		<ok_if_empty>True</ok_if_empty>
+		<case_sensitive>False</case_sensitive>
+		<use_arrows>True</use_arrows>
+		<use_arrows_always>False</use_arrows_always>
+		<items>-2
+-1
++0
++1
++2
++3
++4
++5
+</items>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+
+		<widget>
+		  <class>GtkEntry</class>
+		  <child_name>GtkCombo:entry</child_name>
+		  <name>cmbEentryVNSize</name>
+		  <tooltip>Zero is base font size Go up or down from there</tooltip>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>changed</name>
+		    <handler>on_cmbEentryVNSize_changed</handler>
+		    <last_modification_time>Fri, 27 Jul 2001 15:10:07 GMT</last_modification_time>
+		  </signal>
+		  <editable>True</editable>
+		  <text_visible>True</text_visible>
+		  <text_max_length>0</text_max_length>
+		  <text>+0</text>
+		</widget>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox32</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label147</name>
+		<width>216</width>
+		<label>Link Color</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GnomeColorPicker</class>
+		<name>gcpTextLinks</name>
+		<width>41</width>
+		<tooltip>Strongs Numbers &amp; Morph Tags</tooltip>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>color_set</name>
+		  <handler>on_gcpTextLinks_color_set</handler>
+		  <last_modification_time>Fri, 27 Jul 2001 14:56:18 GMT</last_modification_time>
+		</signal>
+		<dither>True</dither>
+		<use_alpha>False</use_alpha>
+		<title>Pick a color</title>
+		<child>
+		  <padding>0</padding>
+		  <expand>True</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>btnSetToGSDefaults</name>
+	      <tooltip>Use GnomeSword defaults for all settings</tooltip>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_btnSetToGSDefaults_clicked</handler>
+		<last_modification_time>Sat, 28 Jul 2001 14:15:23 GMT</last_modification_time>
+	      </signal>
+	      <label>GnomeSword Defaults</label>
+	      <relief>GTK_RELIEF_NONE</relief>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
 	  </widget>
 	</widget>
 
@@ -2933,7 +3367,7 @@ Revelation
 	  <class>GtkLabel</class>
 	  <child_name>Notebook:tab</child_name>
 	  <name>label98</name>
-	  <label>Main window</label>
+	  <label>Bible Text Window</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
@@ -2943,66 +3377,337 @@ Revelation
 	</widget>
 
 	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox28</name>
+	  <class>GtkHBox</class>
+	  <name>hbox64</name>
 	  <homogeneous>False</homogeneous>
 	  <spacing>0</spacing>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowSCB</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowSCB_toggled</handler>
-	      <last_modification_time>Sat, 19 Aug 2000 22:46:45 GMT</last_modification_time>
-	    </signal>
-	    <label>Show Shortcut bar</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GtkVBox</class>
+	    <name>vbox28</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
 	    <child>
 	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <expand>True</expand>
+	      <fill>True</fill>
 	    </child>
+
+	    <widget>
+	      <class>GtkFrame</class>
+	      <name>frame21</name>
+	      <label>Use Defaults When Opening GnomeSword</label>
+	      <label_xalign>0</label_xalign>
+	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkVBox</class>
+		<name>vbox36</name>
+		<homogeneous>False</homogeneous>
+		<spacing>0</spacing>
+
+		<widget>
+		  <class>GtkRadioButton</class>
+		  <name>rbtnUsedefaults</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_rbtnUsedefaults_toggled</handler>
+		    <last_modification_time>Fri, 27 Jul 2001 15:19:19 GMT</last_modification_time>
+		  </signal>
+		  <label>Yes, use defaults that I select</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkRadioButton</class>
+		  <name>rbtnNoDefaults</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_rbtnNoDefaults_toggled</handler>
+		    <last_modification_time>Fri, 27 Jul 2001 15:21:46 GMT</last_modification_time>
+		  </signal>
+		  <label>No, use settings saved
+on last GnomeSword run</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
+	      <name>cbtnShowSCB</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_cbtnShowSCB_toggled</handler>
+		<last_modification_time>Sat, 19 Aug 2000 22:46:45 GMT</last_modification_time>
+	      </signal>
+	      <label>Show Shortcut bar</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
+	      <name>cbtnShowBibletavs</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_cbtnShowBibletavs_toggled</handler>
+		<last_modification_time>Fri, 27 Jul 2001 15:14:51 GMT</last_modification_time>
+	      </signal>
+	      <label>Show Bible Texts notebook tabs</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
+	      <name>cbtnShowCOMtabs</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_cbtnShowCOMtabs_toggled</handler>
+		<last_modification_time>Sat, 19 Aug 2000 22:47:08 GMT</last_modification_time>
+	      </signal>
+	      <label>Show Commentary notebook tabs</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
+	      <name>cbtnShowDLtabs</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_cbtnShowDLtabs_toggled</handler>
+		<last_modification_time>Sat, 19 Aug 2000 22:47:18 GMT</last_modification_time>
+	      </signal>
+	      <label>Show Dict/Lex notebook tabs</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
+	      <name>checkbutton9</name>
+	      <width>202</width>
+	      <can_focus>True</can_focus>
+	      <label>Use Verse Style</label>
+	      <active>True</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
 	  </widget>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowCOMtabs</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowCOMtabs_toggled</handler>
-	      <last_modification_time>Sat, 19 Aug 2000 22:47:08 GMT</last_modification_time>
-	    </signal>
-	    <label>Show Commentary notebook tabs</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GtkVBox</class>
+	    <name>vbox41</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
 	    <child>
 	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <expand>True</expand>
+	      <fill>True</fill>
 	    </child>
-	  </widget>
 
-	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowDLtabs</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowDLtabs_toggled</handler>
-	      <last_modification_time>Sat, 19 Aug 2000 22:47:18 GMT</last_modification_time>
-	    </signal>
-	    <label>Show Dict/Lex notebook tabs</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
+	    <widget>
+	      <class>GtkFrame</class>
+	      <name>frame24</name>
+	      <label>Shortcut Bar Groups</label>
+	      <label_xalign>0</label_xalign>
+	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkVBox</class>
+		<name>vbox29</name>
+		<homogeneous>False</homogeneous>
+		<spacing>0</spacing>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>cbtnShowTextgroup</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_cbtnShowTextgroup_toggled</handler>
+		    <last_modification_time>Sat, 19 Aug 2000 22:47:27 GMT</last_modification_time>
+		  </signal>
+		  <label>Show Bible Text Group</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>cbtnShowComGroup</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_cbtnShowComGroup_toggled</handler>
+		    <last_modification_time>Sat, 19 Aug 2000 22:47:34 GMT</last_modification_time>
+		  </signal>
+		  <label>Show Commentary Group</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>cbtnShowDictGroup</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_cbtnShowDictGroup_toggled</handler>
+		    <last_modification_time>Sat, 19 Aug 2000 22:47:42 GMT</last_modification_time>
+		  </signal>
+		  <label>Show Dict/Lex Group</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>cbtnShowHistoryGroup</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_cbtnShowHistoryGroup_toggled</handler>
+		    <last_modification_time>Thu, 09 Nov 2000 20:36:20 GMT</last_modification_time>
+		  </signal>
+		  <label>Show History Group</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkFrame</class>
+	      <name>frame25</name>
+	      <label>Personal Comments</label>
+	      <label_xalign>0</label_xalign>
+	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkVBox</class>
+		<name>vbox37</name>
+		<homogeneous>False</homogeneous>
+		<spacing>0</spacing>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>cbtnPNformat</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>toggled</name>
+		    <handler>on_cbtnPNformat_toggled</handler>
+		    <last_modification_time>Wed, 12 Jul 2000 19:39:59 GMT</last_modification_time>
+		  </signal>
+		  <label>Use Formatting</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>checkbutton8</name>
+		  <width>202</width>
+		  <can_focus>True</can_focus>
+		  <label>Auto Save</label>
+		  <active>True</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>Placeholder</class>
+	    </widget>
 	  </widget>
 	</widget>
 
@@ -3020,84 +3725,569 @@ Revelation
 	</widget>
 
 	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox29</name>
+	  <class>GtkTable</class>
+	  <name>table9</name>
+	  <rows>9</rows>
+	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
+	  <row_spacing>0</row_spacing>
+	  <column_spacing>0</column_spacing>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowTextgroup</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowTextgroup_toggled</handler>
-	      <last_modification_time>Sat, 19 Aug 2000 22:47:27 GMT</last_modification_time>
-	    </signal>
-	    <label>Show Bible Text Group in Shortcut Bar</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GtkLabel</class>
+	    <name>label156</name>
+	    <label>Main Text Module</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
 	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>False</xfill>
+	      <yfill>False</yfill>
 	    </child>
 	  </widget>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowComGroup</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowComGroup_toggled</handler>
-	      <last_modification_time>Sat, 19 Aug 2000 22:47:34 GMT</last_modification_time>
-	    </signal>
-	    <label>Show Commentary Group in Shortcut Bar</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GtkCombo</class>
+	    <name>combo17</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
 	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry3</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo18</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry4</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo19</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry5</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo20</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>3</top_attach>
+	      <bottom_attach>4</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry6</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label157</name>
+	    <label>Commentary</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>6</top_attach>
+	      <bottom_attach>7</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
 	    </child>
 	  </widget>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowDictGroup</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowDictGroup_toggled</handler>
-	      <last_modification_time>Sat, 19 Aug 2000 22:47:42 GMT</last_modification_time>
-	    </signal>
-	    <label>Show Dict/Lex Group in Shortcut Bar</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GtkLabel</class>
+	    <name>label158</name>
+	    <label>Dict/Lex</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
 	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>7</top_attach>
+	      <bottom_attach>8</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
 	    </child>
 	  </widget>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnShowHistoryGroup</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnShowHistoryGroup_toggled</handler>
-	      <last_modification_time>Thu, 09 Nov 2000 20:36:20 GMT</last_modification_time>
-	    </signal>
-	    <label>Show History Group in Shortcut Bar</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GtkLabel</class>
+	    <name>label159</name>
+	    <label>Personal</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
 	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>8</top_attach>
+	      <bottom_attach>9</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo21</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>4</top_attach>
+	      <bottom_attach>5</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry7</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo22</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>5</top_attach>
+	      <bottom_attach>6</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry8</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo23</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>6</top_attach>
+	      <bottom_attach>7</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry9</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo24</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>7</top_attach>
+	      <bottom_attach>8</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry10</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>combo25</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>8</top_attach>
+	      <bottom_attach>9</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>entry11</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label160</name>
+	    <label>Interlinear 5</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>5</top_attach>
+	      <bottom_attach>6</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label161</name>
+	    <label>Interlinear 4</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>4</top_attach>
+	      <bottom_attach>5</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>True</xshrink>
+	      <yshrink>True</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label162</name>
+	    <label>Interlinear 3</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>7.45058e-09</xalign>
+	    <yalign>7.45058e-09</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>3</top_attach>
+	      <bottom_attach>4</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label163</name>
+	    <label>Interlinear 2</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>7.45058e-09</xalign>
+	    <yalign>7.45058e-09</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>True</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label164</name>
+	    <label>Interlinear 1</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>1.2666e-07</xalign>
+	    <yalign>7.45058e-09</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>True</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
 	    </child>
 	  </widget>
 	</widget>
@@ -3105,51 +4295,8 @@ Revelation
 	<widget>
 	  <class>GtkLabel</class>
 	  <child_name>Notebook:tab</child_name>
-	  <name>label124</name>
-	  <label>Shortcut Bar</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
-	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	</widget>
-
-	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox24</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
-
-	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>cbtnPNformat</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>toggled</name>
-	      <handler>on_cbtnPNformat_toggled</handler>
-	      <last_modification_time>Wed, 12 Jul 2000 19:39:59 GMT</last_modification_time>
-	    </signal>
-	    <label>Use Formatting</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>Placeholder</class>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <child_name>Notebook:tab</child_name>
-	  <name>label122</name>
-	  <label>Personal Notes</label>
+	  <name>label155</name>
+	  <label>Sword Modules</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>

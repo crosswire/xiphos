@@ -61,7 +61,8 @@ extern GtkWidget *textDict;
 GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern GtkWidget *appbar1;
 extern GS_APP gs;
-extern GS_LEXICON *p_gslexicon;
+extern SETTINGS *settings;
+
 /***************************************************************************************************
  *on_url taken form gtkhtml project
  ***************************************************************************************************/
@@ -166,13 +167,13 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			gotoBookmarkSWORD(p_gslexicon->greek, buf);  
+			gotoBookmarkSWORD(settings->lex_greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			gotoBookmarkSWORD(p_gslexicon->hebrew, buf);  
+			gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
@@ -199,13 +200,13 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			gotoBookmarkSWORD(p_gslexicon->greek, buf);  
+			gotoBookmarkSWORD(settings->lex_greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			gotoBookmarkSWORD(p_gslexicon->hebrew, buf);  
+			gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {

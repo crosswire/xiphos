@@ -33,9 +33,6 @@ extern "C" {
 
 #include <glib.h>
 
-#include "interface.h"
-
-
 
 gboolean run_spell_checker(void);
 
