@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
 
 #include "gui/about_sword.h"
 
@@ -95,7 +94,7 @@ GtkWidget *gui_create_about_sword(void)
 	     "software package for research and study of God and His Word. "
 	     "The SWORD Bible Framework allows easy manipulation of Bible "
 	     "texts, commentaries, lexicons, dictionaries, etc.  Many "
-	     "frontends are build using this framework. An installed "
+	     "frontends are built using this framework. An installed "
 	     "module set may be shared between any frontend using the "
 	     "framework.");
 
@@ -103,15 +102,14 @@ GtkWidget *gui_create_about_sword(void)
 	 * get sword version 
 	 */
 	ver = get_sword_version();
-	sprintf(version, "Sword-%s", ver);
+	sprintf(version, "<b>Sword-%s</b>", ver);
 	
 	dialog_about_sword = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
 			    "dialog_about_sword", dialog_about_sword);
 	gtk_window_set_title(GTK_WINDOW(dialog_about_sword),
 			     _("About the SWORD Project"));
-	gtk_window_set_policy(GTK_WINDOW(dialog_about_sword), TRUE,
-			      TRUE, FALSE);
+        gtk_window_set_resizable(GTK_WINDOW(dialog_about_sword), FALSE);
 
 	dialog_vbox27 = GTK_DIALOG(dialog_about_sword)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
@@ -126,19 +124,19 @@ GtkWidget *gui_create_about_sword(void)
 	pixmap1 = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/sword3.xpm");
 	gtk_widget_show(pixmap1);
-	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 4);
 
 	version_label = gtk_label_new(_("Sword Version"));
 	gtk_widget_show(version_label);
 	gtk_box_pack_start(GTK_BOX(vbox21), version_label, FALSE, FALSE,
 			   0);
 
-	gtk_label_set_text(GTK_LABEL(version_label), version);
+	gtk_label_set_markup(GTK_LABEL(version_label), version);
 	
 	scrolledwindow26 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow26);
 	gtk_box_pack_start(GTK_BOX(vbox21), scrolledwindow26, TRUE,
-			   TRUE, 0);
+			   TRUE, 4);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow26),
 				       GTK_POLICY_NEVER,

@@ -1,3 +1,10 @@
+2003-11-18  Andy Piper <andyp@users.sf.net>
+
+	* removed redundant icon
+	* tweaked gnomesword2.desktop.in again, more HIG-compliant
+	* updated src/gnome2/about_sword.c to fix typo, prettify, remove deprecated 
+	  calls
+
 2003-11-18  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev12
