@@ -71,7 +71,8 @@ void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
 GtkWidget *create_about(void)
 {
 	const gchar *authors[] = {
-		"Terry Biggs tbiggs@users.sourceforge.net",
+		"Terry Biggs  tbiggs@users.sf.net",
+		"Moses McKnight  m_mcknight@users.sf.net",
 		NULL
 	};
 	GtkWidget *about;
@@ -119,7 +120,7 @@ GtkWidget *create_AboutSword(void)
 	gtk_widget_show(vbox21);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox7), vbox21, TRUE, TRUE, 0);
 
-	pixmap1 = create_pixmap(AboutSword, "gnomesword/sword2.xpm", FALSE);
+	pixmap1 = create_pixmap(AboutSword, "gnomesword/sword3.xpm", FALSE);
 	gtk_widget_ref(pixmap1);
 	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "pixmap1",
 				 pixmap1,
@@ -251,7 +252,7 @@ GtkWidget *create_aboutmodules(void)
 	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, TRUE, TRUE, 0);
 
 	pixmap3 =
-	    create_pixmap(aboutmodules, "gnomesword/sword.xpm", FALSE);
+	    create_pixmap(aboutmodules, "gnomesword/sword3.xpm", FALSE);
 	gtk_widget_ref(pixmap3);
 	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "pixmap3",
 				 pixmap3,
@@ -259,7 +260,7 @@ GtkWidget *create_aboutmodules(void)
 	gtk_widget_show(pixmap3);
 	gtk_box_pack_start(GTK_BOX(hbox21), pixmap3, TRUE, TRUE, 0);
 
-	label97 = gtk_label_new("The Sword Project");
+	label97 = gtk_label_new("The SWORD Project");
 	gtk_widget_ref(label97);
 	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "label97",
 				 label97,
