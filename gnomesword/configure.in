@@ -56,7 +56,7 @@ AC_DEFUN(GS_CHECK_LIB, [
 ])
 
 dnl Initialize xml-i18n-tools
-AM_PROG_XML_I18N_TOOLS 
+dnl AM_PROG_XML_I18N_TOOLS 
 
 
 dnl check for libtool
@@ -74,9 +74,15 @@ AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h ge
 
 
 dnl Languages which your application supports
-ALL_LINGUAS="sk"
+ALL_LINGUAS="de sk"
 AM_GNOME_GETTEXT
 
+dnl Set PACKAGE_LOCALE_DIR in config.h.
+if test "x${prefix}" = "xNONE"; then
+  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
+else
+  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
+fi
 
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
