@@ -27,8 +27,8 @@
 #include <gtkhtml/gtkhtml.h>
 
 #ifdef USE_SPELL
-#include "main/spell.h"
-#include "main/spell_gui.h"
+//#include "main/spell.h"
+//#include "main/spell_gui.h"
 #endif
 
 #include "gui/gnomesword.h"
@@ -37,6 +37,7 @@
 #include "gui/_editor.h"
 #include "gui/editor_toolbar.h"
 #include "gui/editor_menu.h"
+#include "gui/editor_spell.h"
 #include "gui/info_box.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
@@ -927,6 +928,12 @@ static void create_percomm_pane(PC_DATA *p)
 				 p->ec->btn_spell,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->ec->btn_spell);
+	
+#ifdef USE_PSPELL	
+	gtk_widget_set_sensitive(p->ec->btn_spell, 1);
+#else
+	gtk_widget_set_sensitive(p->ec->btn_spell, 0);
+#endif
 
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
@@ -1021,9 +1028,10 @@ static void create_percomm_pane(PC_DATA *p)
 	gtk_signal_connect(GTK_OBJECT(p->ec->btn_replace), "clicked",
 			   GTK_SIGNAL_FUNC(on_btn_replace_clicked),
 			   p->ec);
+#ifdef USE_PSPELL			   
 	gtk_signal_connect(GTK_OBJECT(p->ec->btn_spell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb), p->ec);
-	
+#endif	
 	settings.toolbarComments = toolbar_style(p->ec);
 	gtk_widget_hide(p->ec->handlebox_toolbar);
 }

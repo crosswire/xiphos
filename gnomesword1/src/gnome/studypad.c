@@ -33,8 +33,8 @@
 #include <fcntl.h>
 
 #ifdef USE_SPELL
-#include "main/spell.h"
-#include "main/spell_gui.h"
+//#include "main/spell.h"
+//#include "main/spell_gui.h"
 #endif
 
 #include "gui/gnomesword.h"
@@ -42,6 +42,7 @@
 #include "gui/_editor.h"
 #include "gui/editor_toolbar.h"
 #include "gui/editor_menu.h"
+#include "gui/editor_spell.h"
 #include "gui/link_dialog.h"
 #include "gui/info_box.h"
 #include "gui/html.h"
@@ -993,6 +994,12 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				 specd->btn_spell,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_spell);
+	
+#ifdef USE_PSPELL	
+	gtk_widget_set_sensitive(specd->btn_spell, 1);
+#else
+	gtk_widget_set_sensitive(specd->btn_spell, 0);
+#endif
 
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
@@ -1023,7 +1030,11 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  specd->htmlwidget);
 	gtk_html_load_empty(specd->html);
-
+	
+	
+	
+	
+	
 	specd->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(specd->statusbar);
 	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->statusbar",
@@ -1077,9 +1088,10 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_signal_connect(GTK_OBJECT(specd->btn_replace), "clicked",
 			   GTK_SIGNAL_FUNC(on_btn_replace_clicked),
 			   specd);
+#ifdef USE_PSPELL
 	gtk_signal_connect(GTK_OBJECT(specd->btn_spell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb), specd);
-
+#endif
 	
 	
 

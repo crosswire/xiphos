@@ -40,8 +40,8 @@
 #include <fcntl.h>
 
 #ifdef USE_SPELL
-#include "main/spell.h"
-#include "main/spell_gui.h"
+//#include "main/spell.h"
+//#include "main/spell_gui.h"
 #endif	/* USE_SPELL */
 
 #include "gui/_editor.h"
@@ -49,6 +49,7 @@
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
 #include "gui/editor_search.h"
+#include "gui/editor_spell.h"
 #include "gui/percomm.h"
 #include "gui/link_dialog.h"
 #include "gui/fileselection.h"
@@ -670,11 +671,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	GtkWidget *cut;
 	GtkWidget *copy;
 	GtkWidget *paste;
-
-#ifdef USE_SPELL		/* USE_SPELL */
 	GtkWidget *spell;
-#endif				/* USE_SPELL */
-
 	GtkWidget *undo;
 	GtkWidget *find;
 	GtkWidget *find_again;
@@ -948,14 +945,19 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(paste);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), paste);
 
-#ifdef USE_SPELL
 	spell = gtk_menu_item_new_with_label(_("Spell Check"));
 	gtk_widget_ref(spell);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "spell", spell,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(spell);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), spell);
-#endif				/* USE_SPELL */
+	
+#ifdef USE_PSPELL	
+	gtk_widget_set_sensitive(spell, 1);
+#else
+	gtk_widget_set_sensitive(spell, 0);
+#endif
+
 
 	undo = gtk_menu_item_new_with_label(_("Undo"));
 	gtk_widget_ref(undo);
@@ -1056,10 +1058,12 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			   GTK_SIGNAL_FUNC(on_copy_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(paste), "activate",
 			   GTK_SIGNAL_FUNC(on_paste_activate), ecd);
-#ifdef USE_SPELL
+	
+#ifdef USE_PSPELL
 	gtk_signal_connect(GTK_OBJECT(spell), "activate",
 			   GTK_SIGNAL_FUNC(spell_check_cb), ecd);
-#endif				/* USE_SPELL */
+#endif	/* USE_PSPELL */
+	
 	gtk_signal_connect(GTK_OBJECT(undo), "activate",
 			   GTK_SIGNAL_FUNC(on_undo_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(find), "activate",

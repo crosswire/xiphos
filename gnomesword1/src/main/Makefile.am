@@ -11,7 +11,7 @@ INCLUDES =  \
 
 bin_PROGRAMS = gnomesword
 
-COMMON_SOURCE =  \
+gnomesword_SOURCES =  \
     bibletext.c \
     bibletext.h \
     bookmarks.c \
@@ -21,6 +21,7 @@ COMMON_SOURCE =  \
     dictlex.c \
     dictlex.h \
     gbs.c \
+    gbs.h \
     lists.c \
     lists.h \
     main.c \
@@ -31,19 +32,8 @@ COMMON_SOURCE =  \
     shortcutbar.c \
     shortcutbar.h \
     sword.c \
-    sword.h 
-    
-SPELLING_SOURCE =  \
-    debug.h \
-    spell.c \
-    spell.h \
-    spell_gui.c \
-    spell_gui.h \
-    char_table.c \
-    char_table.h 
+    sword.h
 
-EXTRA_DIST = \
-    $(SPELLING_SOURCE)
     
 gnomesword_LDADD = \
     $(GNOME_LIBDIR) \
@@ -53,14 +43,11 @@ gnomesword_LDADD = \
     $(GTKHTML_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
+    $(PSPELL_LIBS) \
     $(PIXBUF_LIBS) \
     $(top_builddir)/src/backend/libbackend.a \
     $(top_builddir)/src/gnome/libgui.a 
 
-
-gnomesword_SOURCES = \
-    $(SPELLING_SOURCE) \
-    $(COMMON_SOURCE)
 
 CXXFLAGS =  \
     $(GTK_CFLAGS) \

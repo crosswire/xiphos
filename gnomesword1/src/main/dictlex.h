@@ -30,8 +30,8 @@ int set_dictlex_module(char * mod_name);
 int set_dictlex_key(char * key);
 char *get_dictlex_key(int direction);	
 char *get_dictlex_text(char * mod_name, char * key);
-gchar *get_first_dictlex_key(void);
-gchar *get_next_dictlex_key(void);
+char *get_first_dictlex_key(void);
+char *get_next_dictlex_key(void);
 	
 #ifdef __cplusplus
 }

@@ -28,7 +28,6 @@
 #include "gui/shortcutbar_main.h"
 
 #include "main/shortcutbar.h"
-//#include "main/gs_gnomesword.h"
  
 #include "backend/sword.h"
 #include "backend/shortcutbar.h"
