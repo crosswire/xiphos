@@ -41,7 +41,7 @@
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/commentary.h"
-
+ 
 /******************************************************************************
  * global to this file only
  */
@@ -118,34 +118,6 @@ void gui_save_note(GSHTMLEditorControlData * e)
 	gtk_html_set_editable(e->html, TRUE);
 }
 
-/******************************************************************************
- * Name
- *  set_percomm_frame_label
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void set_percomm_frame_label(void)	
- *
- * Description
- *   sets percomm frame label to module name or null
- *
- * Return value
- *   void
- */
-
-static void set_percomm_frame_label(GtkWidget * frame, gchar * mod_name)
-{
-	/*
-	 * set frame label to NULL if tabs are showing
-	 * else set frame label to module name
-	 */
-	if (settings.percomm_tabs)
-		gtk_frame_set_label(GTK_FRAME(frame), NULL);
-	else
-		gtk_frame_set_label(GTK_FRAME(frame), mod_name);
-
-}
 
 /******************************************************************************
  * Name
