@@ -750,7 +750,8 @@ GtkWidget *gui_create_bookmark_tree(void)
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed), NULL);
 	use_dialog = FALSE;
-	bookmark_tree = GTK_TREE_VIEW(tree);
+	bookmark_tree = GTK_TREE_VIEW(tree); 
+	
 	g_signal_connect(model, "row-changed",
 			 G_CALLBACK(row_changed), NULL);
 	
