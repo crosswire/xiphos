@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * shortcutbar.c - glue  (: very sticky :)
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -73,10 +73,10 @@ GList *load_sb_group(gchar * filename, gchar * group_name,
  *   void
  */
 
-void save_sb_group(gchar * file_name, gchar * group_name,
-		   gint group_num, char *large_icons)
+void save_sb_group(GList * group_list, gchar * file_name, 
+		gchar * group_name, char *large_icons)
 {
-	gchar *item_url, *item_name;
+	/*gchar *item_url, *item_name;
 	gint j, number_of_items = 0;
 	GList *group_list = NULL;
 
@@ -90,10 +90,10 @@ void save_sb_group(gchar * file_name, gchar * group_name,
 		//g_warning("%s", item_name);
 		g_free(item_url);
 		g_free(item_name);
-	}
-	backend_save_sb_group(group_list, file_name, group_name, group_num,
+	}*/
+	backend_save_sb_group(group_list, file_name, group_name,
 			      large_icons);
-	g_list_free(group_list);
+	//g_list_free(group_list);
 }
 
 

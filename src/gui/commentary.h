@@ -22,6 +22,8 @@
 #ifndef ___COMMENTARY_H_
 #define ___COMMENTARY_H_
 
+#include "gui/editor.h"
+
 typedef struct _comm_global_ops COMM_GLOBALS;
 struct  _comm_global_ops {
 	gboolean
@@ -42,6 +44,16 @@ struct  _comm_global_ops {
 
 typedef struct _commdata COMM_DATA;
 struct _commdata {
+	/* for commentary dialogs */
+	GtkWidget *dialog;	
+	GtkWidget *cbe_book;
+	GtkWidget *spb_chapter;
+	GtkWidget *spb_verse;
+	GtkWidget *freeform_lookup;
+	GtkWidget *statusbar;
+	/* for personal comments editor */
+	GSHTMLEditorControlData *ec;
+	/* for commentary panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
@@ -72,7 +84,7 @@ struct _commdata {
 };
 extern COMM_DATA *cur_c;
 
-void gui_set_comm_frame_label(void);
+void gui_set_comm_frame_label(COMM_DATA * c);
 void gui_set_commentary_page_and_key(gint page_num,
 				     gchar * key);
 void gui_display_commentary(gchar * key);

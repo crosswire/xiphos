@@ -208,6 +208,7 @@ void shutdown_gnomesword(void)
 	g_free(settings.shortcutbarDir);
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
+	/*g_free(settings.xml_bookmark_dir);*/
 
 	if (settings.havebible) {
 		gui_shutdown_text();

@@ -275,6 +275,7 @@ static void on_btn_copy_clicked(GtkButton * button,
 	gtk_html_copy(ecd->html);
 }
 
+
 /******************************************************************************
  * Name
  *  on_btn_paste_clicked
@@ -304,6 +305,7 @@ static void on_btn_paste_clicked(GtkButton * button,
 	gui_update_statusbar(ecd);
 }
 
+
 /******************************************************************************
  * Name
  *  on_btn_undo_clicked
@@ -328,6 +330,7 @@ static void on_btn_undo_clicked(GtkButton * button,
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
 }
+
 
 /******************************************************************************
  * Name
@@ -375,8 +378,6 @@ static void on_btn_replace_clicked(GtkButton * button,
 {
 	replace(ecd);
 }
-
-
 
 
 /******************************************************************************

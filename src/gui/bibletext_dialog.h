@@ -24,23 +24,10 @@
 
 #include "gui/bibletext.h"
 
-typedef struct _viewtext VIEW_TEXT;
-struct _viewtext {
-	GtkWidget *dialog;
-	GtkWidget *cbe_book;
-	GtkWidget *spb_chapter;
-	GtkWidget *spb_verse;
-	GtkWidget *freeform_lookup;
-	GtkWidget *statusbar;
-	gchar key[80];
-	gboolean has_key;
-	TEXT_DATA *t;
-};
-
-void gui_sync_bibletext_dialog(void);
+void gui_sync_bibletext_dialog(TEXT_DATA * vt);
 void gui_on_lookup_bibletext_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
-void gui_close_text_dialog(void);
+void gui_close_text_dialog(TEXT_DATA * vt);
 void gui_open_bibletext_dialog(gchar * mod_name);
 void gui_setup_bibletext_dialog(GList *mods);
 void gui_shutdown_bibletext_dialog(void);

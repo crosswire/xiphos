@@ -49,7 +49,7 @@
  * static - global to this file only
  */
 static GList *dialog_list;
-static VIEW_TEXT *cur_vt;
+static TEXT_DATA *cur_vt;
 static gboolean dialog_freed;
 static gboolean apply_change;
 
@@ -86,7 +86,7 @@ void gui_on_lookup_bibletext_dialog_selection
 	memset(mod_name, 0, 16);
 	module_name_from_description(mod_name, dict_mod_description);
 
-	dict_key = gui_get_word_or_selection(cur_vt->t->html, FALSE);
+	dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(mod_name,
@@ -104,7 +104,7 @@ void gui_on_lookup_bibletext_dialog_selection
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void btn_close_clicked(GtkButton * button,VIEW_TEXT * vt)	
+ *   void btn_close_clicked(GtkButton * button,TEXT_DATA * vt)	
  *
  * Description
  *   call gtk_widget_destroy to destroy the bibletext dialog
@@ -114,11 +114,11 @@ void gui_on_lookup_bibletext_dialog_selection
  *   void
  */
 
-void gui_close_text_dialog(void)
+void gui_close_text_dialog(TEXT_DATA * vt)
 {
-	if (cur_vt->dialog) {
+	if (vt->dialog) {
 		dialog_freed = FALSE;
-		gtk_widget_destroy(cur_vt->dialog);
+		gtk_widget_destroy(vt->dialog);
 	}
 }
 
@@ -170,7 +170,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)	
+ *   void display(TEXT_DATA * vt, gchar * key, gboolean show_key)	
  *
  * Description
  *   calls chapter_display to display module text
@@ -179,10 +179,10 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
  *   void
  */
 
-static void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)
+static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
 {
-	chapter_display(vt->t->html,
-			vt->t->mod_name, vt->t->tgs, key, show_key);
+	chapter_display(vt->html,
+			vt->mod_name, vt->tgs, key, show_key);
 }
 
 
@@ -193,7 +193,7 @@ static void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void update_controls(VIEW_TEXT * vt)	
+ *   void update_controls(TEXT_DATA * vt)	
  *
  * Description
  *   update the book, chapter and verse contorls
@@ -202,7 +202,7 @@ static void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)
  *   void
  */
 
-static void update_controls(VIEW_TEXT * vt)
+static void update_controls(TEXT_DATA * vt)
 {
 	gchar *val_key;
 	gint cur_chapter, cur_verse;
@@ -210,7 +210,6 @@ static void update_controls(VIEW_TEXT * vt)
 	cur_vt = vt;
 	apply_change = FALSE;
 	val_key = get_valid_key(vt->key);
-	vt->t->key = vt->key;
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
 	/* 
@@ -248,7 +247,7 @@ static void update_controls(VIEW_TEXT * vt)
  */
 
 static void link_clicked(GtkHTML * html, const gchar * url,
-			 VIEW_TEXT * vt)
+			 TEXT_DATA * vt)
 {
 	gchar *buf, *modName;
 	gchar newref[80];
@@ -402,7 +401,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
  *   void
  */
 
-static void book_changed(GtkEditable * editable, VIEW_TEXT * vt)
+static void book_changed(GtkEditable * editable, TEXT_DATA * vt)
 {
 	if (apply_change) {
 		gchar buf[256], *val_key;
@@ -437,7 +436,7 @@ static void book_changed(GtkEditable * editable, VIEW_TEXT * vt)
 
 static gboolean chapter_button_release_event(GtkWidget * widget,
 					     GdkEventButton * event,
-					     VIEW_TEXT * vt)
+					     TEXT_DATA * vt)
 {
 	if (apply_change) {
 		gchar *bookname, *val_key;
@@ -479,7 +478,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 
 static gboolean verse_button_release_event(GtkWidget * widget,
 					   GdkEventButton * event,
-					   VIEW_TEXT * vt)
+					   TEXT_DATA * vt)
 {
 	if (apply_change) {
 		gchar *bookname, buf[256], *val_key;
@@ -524,7 +523,7 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 
 static gboolean entry_key_press_event(GtkWidget * widget,
 				      GdkEventKey * event,
-				      VIEW_TEXT * vt)
+				      TEXT_DATA * vt)
 {
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {
@@ -546,7 +545,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  * Synopsis
  *   #include "gui/bibletext_dialog.h"
  *
- *   gui_sync_bibletext_dialog(VIEW_TEXT * vt)	
+ *   gui_sync_bibletext_dialog(TEXT_DATA * vt)	
  *
  * Description
  *   set bibletext dialog to main window current verse
@@ -555,11 +554,10 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  *   void
  */
 
-void gui_sync_bibletext_dialog(void)
+void gui_sync_bibletext_dialog(TEXT_DATA * vt)
 {
 	display(cur_vt, settings.currentverse, TRUE);
-	strcpy(cur_vt->key, settings.currentverse);
-	cur_vt->t->key = cur_vt->key;
+	cur_vt->key = settings.currentverse;
 	update_controls(cur_vt);
 }
 
@@ -571,7 +569,7 @@ void gui_sync_bibletext_dialog(void)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void free_on_destroy(VIEW_TEXT * vt)
+ *   void free_on_destroy(TEXT_DATA * vt)
  *
  * Description
  *   removes dialog from dialog_list when dialog is destroyed other than
@@ -581,11 +579,10 @@ void gui_sync_bibletext_dialog(void)
  *   void
  */
 
-static void free_on_destroy(VIEW_TEXT * vt)
+static void free_on_destroy(TEXT_DATA * vt)
 {
-	g_free(vt->t->tgs);
-	g_free(vt->t);
-	dialog_list = g_list_remove(dialog_list, (VIEW_TEXT *) vt);
+	g_free(vt->tgs);
+	dialog_list = g_list_remove(dialog_list, (TEXT_DATA *) vt);
 	g_free(vt);
 }
 
@@ -606,7 +603,7 @@ static void free_on_destroy(VIEW_TEXT * vt)
  *   void
  */
 
-static void dialog_destroy(GtkObject * object, VIEW_TEXT * vt)
+static void dialog_destroy(GtkObject * object, TEXT_DATA * vt)
 {
 	if (!dialog_freed)
 		free_on_destroy(vt);
@@ -616,7 +613,7 @@ static void dialog_destroy(GtkObject * object, VIEW_TEXT * vt)
 
 static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      GdkEventMotion * event,
-					      VIEW_TEXT * vt)
+					      TEXT_DATA * vt)
 {
 	cur_vt = vt;
 	return TRUE;
@@ -629,7 +626,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void dialog_url(GtkHTML * html, const gchar * url, VIEW_TEXT * vt)	
+ *   void dialog_url(GtkHTML * html, const gchar * url, TEXT_DATA * vt)	
  *
  * Description
  *   
@@ -639,7 +636,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  */
 
 static void dialog_url(GtkHTML * html, const gchar * url,
-		       VIEW_TEXT * vt)
+		       TEXT_DATA * vt)
 {
 	gchar buf[255], *buf1;
 	gchar *url_buf = NULL;
@@ -838,7 +835,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
+static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 {
 	GtkWidget *toolbar_nav;
 	GtkWidget *cbBook;
@@ -924,7 +921,7 @@ static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void create_bibletext_dialog(VIEW_TEXT * vt)	
+ *   void create_bibletext_dialog(TEXT_DATA * vt)	
  *
  * Description
  *   viewtext gui
@@ -933,7 +930,7 @@ static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
  *   void 
  */
 
-static void create_bibletext_dialog(VIEW_TEXT * vt)
+static void create_bibletext_dialog(TEXT_DATA * vt)
 {
 
 	GtkWidget *vbox33;
@@ -946,7 +943,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
 			    vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
-			     get_module_description(vt->t->mod_name));
+			     get_module_description(vt->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 380, 400);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
@@ -975,10 +972,10 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 
-	vt->t->html = gtk_html_new();
-	gtk_widget_show(vt->t->html);
-	gtk_container_add(GTK_CONTAINER(swVText), vt->t->html);
-	gtk_html_load_empty(GTK_HTML(vt->t->html));
+	vt->html = gtk_html_new();
+	gtk_widget_show(vt->html);
+	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
+	gtk_html_load_empty(GTK_HTML(vt->html));
 
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
@@ -990,7 +987,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_signal_connect(GTK_OBJECT(vt->dialog),
 			   "destroy",
 			   GTK_SIGNAL_FUNC(dialog_destroy), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->t->html),
+	gtk_signal_connect(GTK_OBJECT(vt->html),
 			   "motion_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_dialog_motion_notify_event), vt);
@@ -998,9 +995,9 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 			   "motion_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_dialog_motion_notify_event), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->t->html), "on_url",
+	gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
 			   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);			   
-	gtk_signal_connect(GTK_OBJECT(vt->t->html), "link_clicked",
+	gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(link_clicked), vt);
 }
 
@@ -1022,33 +1019,32 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 
 void gui_open_bibletext_dialog(gchar * mod_name)
 {
-	VIEW_TEXT *vt;
+	TEXT_DATA *vt;
 	GtkWidget *popupmenu;
 
-	vt = g_new(VIEW_TEXT, 1);
-	vt->t = g_new(TEXT_DATA, 1);
-	vt->t->tgs = g_new(TEXT_GLOBALS, 1);
-	vt->t->mod_num = get_module_number(mod_name, TEXT_MODS);
-	vt->t->search_string = NULL;
+	vt = g_new(TEXT_DATA, 1);
+	vt->tgs = g_new(TEXT_GLOBALS, 1);
+	vt->mod_num = get_module_number(mod_name, TEXT_MODS);
+	vt->search_string = NULL;
 	vt->dialog = NULL;
-	vt->t->is_dialog = TRUE;
-	vt->t->mod_name = g_strdup(mod_name);
+	vt->is_dialog = TRUE;
+	vt->mod_name = g_strdup(mod_name);
 	create_bibletext_dialog(vt);
-	if (has_cipher_tag(vt->t->mod_name)) {
-		vt->t->is_locked = module_is_locked(vt->t->mod_name);
-		vt->t->cipher_old = get_cipher_key(vt->t->mod_name);
+	if (has_cipher_tag(vt->mod_name)) {
+		vt->is_locked = module_is_locked(vt->mod_name);
+		vt->cipher_old = get_cipher_key(vt->mod_name);
 	}
 
 	else {
-		vt->t->is_locked = 0;
-		vt->t->cipher_old = NULL;
+		vt->is_locked = 0;
+		vt->cipher_old = NULL;
 	}
-	popupmenu = gui_create_pm_text(vt->t);
-	gnome_popup_menu_attach(popupmenu, vt->t->html, NULL);
+	popupmenu = gui_create_pm_text(vt);
+	gnome_popup_menu_attach(popupmenu, vt->html, NULL);
 	gtk_widget_show(vt->dialog);
-	dialog_list = g_list_append(dialog_list, (VIEW_TEXT *) vt);
+	dialog_list = g_list_append(dialog_list, (TEXT_DATA *) vt);
 	cur_vt = vt;
-	gui_sync_bibletext_dialog();
+	gui_sync_bibletext_dialog(vt);
 }
 
 /******************************************************************************
@@ -1094,9 +1090,9 @@ void gui_shutdown_bibletext_dialog(void)
 {
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
-		VIEW_TEXT *vt = (VIEW_TEXT *) dialog_list->data;
+		TEXT_DATA *vt = (TEXT_DATA *) dialog_list->data;
 		dialog_freed = TRUE;
-//              g_warning("shuting down %s dialog",vt->t->mod_name);
+//              g_warning("shuting down %s dialog",vt->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
@@ -1105,10 +1101,9 @@ void gui_shutdown_bibletext_dialog(void)
 		/* 
 		 * free each TEXT_DATA item created 
 		 */
-		g_free(vt->t->mod_name);
-		g_free(vt->t->tgs);
-		g_free(vt->t);
-		g_free((VIEW_TEXT *) dialog_list->data);
+		g_free(vt->mod_name);
+		g_free(vt->tgs);
+		g_free((TEXT_DATA *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
 	}
 	g_list_free(dialog_list);
