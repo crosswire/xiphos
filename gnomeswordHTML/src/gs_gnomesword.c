@@ -122,9 +122,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	addnotebookpages(lookup_widget(app,"notebook1"), commentarymods);
 	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
 /*  set text windows to word warp */
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
+//	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
 //	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
+//	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
 //	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 /* set main notebook page */

@@ -5,7 +5,7 @@ INCLUDES =  \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS)
-
+    
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE =  \
@@ -48,14 +48,12 @@ COMMON_SOURCE =  \
     support.h \
     gs_html.c \
     gs_html.h \
-    gs_rwphtml.cpp \
-    gs_rwphtml.h \
-    gs_thmlhtml.cpp \
-    gs_thmlhtml.h \
     sw_utility.cpp\
     sw_utility.h \
     gs_toolbarEditor.c \
-    gs_toolbarEditor.h
+    gs_toolbarEditor.h\
+    printstuff.c \
+    printstuff.h
 
 SPELLING_SOURCE =  \
     debug.h \
@@ -66,86 +64,25 @@ SPELLING_SOURCE =  \
     char_table.c \
     char_table.h 
 
-PRINT_SOURCE = \
-    printstuff.c \
-    printstuff.h
-
 EXTRA_DIST = \
-    $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE)
+    $(SPELLING_SOURCE) 
 
-COMMON_LDADD = \
+gnomesword_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
-    $(SWORD_LIBS)
-
-PRINT_LDADD = \
+    $(SWORD_LIBS)\
     $(GNOME_PRINT_LIBS) \
-    $(PIXBUF_LIBS)
-
-SHORTCUTBAR_LDADD = \
+    $(PIXBUF_LIBS)\
     $(GNOME_APP_LIBS)
-
-if SHORTCUTBAR_SPELL
-gnomesword_SOURCES = \
-    $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE)	 \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD) \
-    $(SHORTCUTBAR_LDADD)
-endif
-
-if SHORTCUTBAR
-gnomesword_SOURCES = \
-    $(PRINT_SOURCE)	 \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD) \
-    $(SHORTCUTBAR_LDADD)
-endif
-		
-if SPELLING_PRINTING
-gnomesword_SOURCES = \
-    $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE) \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD)
-endif
-
+    
 if SPELLING
 gnomesword_SOURCES = \
     $(SPELLING_SOURCE) \
     $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD)
-endif
-
-if PRINTING
-gnomesword_SOURCES = \
-    $(PRINT_SOURCE) \
+else
+gnomesword_SOURCES =  \
     $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD)
-endif
-
-if NO_OPS
-gnomesword_SOURCES = \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD)
 endif
 
 CXXFLAGS =  \

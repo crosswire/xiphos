@@ -34,8 +34,8 @@
 #include <gbfplain.h>
 #include <plainhtml.h>
 #include <gbfhtml.h>
-//#include <rwphtml.h>
-//#include <thmlhtml.h>
+#include <rwphtml.h>
+#include <thmlhtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -45,8 +45,8 @@
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
-#include "gs_rwphtml.h"
-#include "gs_thmlhtml.h"
+//#include "gs_rwphtml.h"
+//#include "gs_thmlhtml.h"
 //#include "gs_gbfhtml.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
@@ -181,8 +181,8 @@ initSWORD(GtkWidget *mainform)
   	GtkWidget *menu_items;
   	
  	plaintohtml   	= new PLAINHTML(); /* sword renderfilter plain to html */
-  	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
-        rwptohtml		= new GS_RWPHTML(); /* sword renderfilter rwp to html */	
+  	thmltohtml	= new ThMLHTML(); /* sword renderfilter thml to html */	
+        rwptohtml		= new RWPHTML(); /* sword renderfilter rwp to html */	
         gbftohtml		= new GBFHTML(); /* sword renderfilter gbf to html */	
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
@@ -233,8 +233,8 @@ initSWORD(GtkWidget *mainform)
 #endif /* USE_SHORTCUTBAR */
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize();
-	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
-	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
+//	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
+//	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  ComEntryDisp(lookup_widget(mainform,"htmlComments"));
 
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
@@ -540,23 +540,27 @@ strongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have 
 {
 	if(choice){ //-- if choice is TRUE - we want strongs numbers	
 		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 		
+		mainMgr1->setGlobalOption("Strong's Numbers","On");
 	}else{   //-- we don't want strongs numbers	
 		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
+		mainMgr1->setGlobalOption("Strong's Numbers","Off");
 	}
 	settings->strongs = choice;   //-- store choice in settings
 	if(havebible) curMod->Display(); //-- we need to show change
 }
 
-//-------------------------------------------------------------------------------------------
+/******************************************************************************
+ * toogle gbf footnotes for modules that have them
+ ******************************************************************************/
 void
-footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have them
+footnotesSWORD(gboolean choice) 
 {
 	if(choice){ //-- we want footnotes	
 		mainMgr->setGlobalOption("Footnotes","On"); //-- turn footnotes on
-		//mainMgr1->setGlobalOption("Footnotes","On"); //-- turn footnotes on
+		mainMgr1->setGlobalOption("Footnotes","On"); 
 	}else{ //-- we don't want footnotes	
 		mainMgr->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
-		//mainMgr1->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
+		mainMgr1->setGlobalOption("Footnotes","Off"); 
 	}
 	settings->footnotes = choice;   //-- store choice in settings
 	if(havebible) curMod->Display(); //-- we need to show change
