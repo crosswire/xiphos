@@ -29,7 +29,7 @@ extern "C" {
 #include "gui/_editor.h"
 
 GtkWidget *gui_fileselection_open(GSHTMLEditorControlData *ecd);
-GtkWidget *gui_fileselection_save(GSHTMLEditorControlData *ecd);
+gint gui_fileselection_save(GSHTMLEditorControlData *ecd);
 
 #ifdef __cplusplus
 }

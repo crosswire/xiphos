@@ -46,6 +46,7 @@
 #include "gui/bookmarks.h"
 #include "gui/studypad.h"
 #include "gui/interlinear.h"
+#include "gui/dialog.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -183,7 +184,7 @@ void shutdown_gnomesword(void)
 	
 	/* if study pad file has changed since last save */
 	gui_studypad_can_close();
-		
+	
 	/* shutdown the sword stuff */
 	shutdown_sword();
 	

@@ -77,21 +77,22 @@ struct _text_data {
 	gchar *mod_name;
 	gchar *search_string;
 	gchar *key;
+	gchar *cipher_key;
+	gchar *cipher_old;
 	gint mod_num;
 	gboolean is_locked;
 	TEXT_GLOBALS *tgs;
 	Text_Find_Dialog *find_dialog;
 };
 
+void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);
 void gui_get_module_global_options(TEXT_DATA * t);
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
 void gui_display_text(gchar * key);
 void gui_add_new_text_pane(TEXT_DATA * t);
 void gui_add_global_option_buttons(GtkWidget * toolbar, 
-				      gchar * mod_name, 
-				      TEXT_GLOBALS * tgs, 
-				      GtkMenuCallback callback);
+	gchar * mod_name, TEXT_GLOBALS * tgs, GtkMenuCallback callback);
 void gui_setup_text(GList *mods);
 void gui_shutdown_text(void);
 	

@@ -53,6 +53,7 @@
 #include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+#include "gui/dialog.h"
 
 #include "main/percomm.h"
 #include "main/settings.h"
@@ -81,36 +82,35 @@
 static void on_new_activate(GtkMenuItem * menuitem, 
 					GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *msgbox;
-	gchar *msg;
-	gint answer = 0;
-
 	/* 
 	 * if study pad file has changed let's ask about saving it 
 	 */
 	if (ecd->changed) {
-		msg =
-		    g_strdup_printf("``%s'' %s",ecd->filename,
-			_("has been modified.  Do you wish to save it?"));
-		msgbox = gui_create_info_box();
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer =
-		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		g_free(msg);
-		switch (answer) {
-		case 0:
+		GS_DIALOG *info;
+		gint test;		
+				
+		info = gui_new_dialog();
+		info->label_top = ecd->filename;
+		info->label_middle = N_("has been modified.");
+		info->label_bottom = N_("Do you wish to save it?");
+		info->yes = TRUE;
+		info->no = TRUE;
+		
+		test = gui_gs_dialog(info);
+		if (test == GS_YES) {
 			save_file(ecd->filename, ecd);
-			break;
-		default:
-			break;
 		}
+		g_free(info);
 	}
+	sprintf(settings.studypadfilename, "%s", "");
+	settings.studypadfilename[0] = '\0';
 	sprintf(ecd->filename, "%s", "");
+	ecd->filename[0] = '\0';
 	gtk_html_select_all(ecd->html);
 	gtk_html_cut(ecd->html);
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), 1,
 			   _("-untitled-"));
-
+	gtk_frame_set_label(GTK_FRAME(ecd->frame), _("-untitled-"));
 	ecd->changed = FALSE;
 }
 
@@ -135,28 +135,26 @@ static void on_open_activate(GtkMenuItem * menuitem,
 					GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *openFile;
-	gchar *msg, buf[255];
-	GtkWidget *msgbox;
-	gint answer = 0;
+	gchar buf[255];
 	/* 
 	 * if study pad file has changed let's ask about saving it 
 	 */
 	if (ecd->changed) {
-		msg =
-		    g_strdup_printf("''%s'' %s",ecd->filename,
-			_("has been modified.  Do you wish to save it?"));
-		msgbox = gui_create_info_box();
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer =
-		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		g_free(msg);
-		switch (answer) {
-		case 0:
+		GS_DIALOG *info;
+		gint test;		
+				
+		info = gui_new_dialog();
+		info->label_top = ecd->filename;
+		info->label_middle = N_("has been modified.");
+		info->label_bottom = N_("Do you wish to save it?");
+		info->yes = TRUE;
+		info->no = TRUE;
+		
+		test = gui_gs_dialog(info);
+		if (test == GS_YES) {
 			save_file(ecd->filename, ecd);
-			break;
-		default:
-			break;
 		}
+		g_free(info);
 	}
 	sprintf(buf, "%s/*.pad", settings.homedir);
 	openFile = gui_fileselection_open(ecd);
@@ -213,34 +211,29 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 static void on_deletenote_activate(GtkMenuItem * menuitem,
 				       GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *label1, *label2, *label3, *msgbox;
-	gint answer = -1;
-	gchar *key;
-	
 	if(ecd->personal_comments) {
-		key = get_percomm_key();
+		GS_DIALOG *info;
+		gint test;
+		gchar *key;
 		
-		msgbox = gui_create_info_box();
-		label1 = gui_lookup_widget(msgbox, "lbInfoBox1");
-		label2 = gui_lookup_widget(msgbox, "lbInfoBox2");
-		label3 = gui_lookup_widget(msgbox, "lbInfoBox3");
-		gtk_label_set_text(GTK_LABEL(label1), _("Are you sure you want"));
-		gtk_label_set_text(GTK_LABEL(label2), _("to delete the note for"));
-		gtk_label_set_text(GTK_LABEL(label3),key);
-	
-		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		switch (answer) {
-		case 0:
+		key = get_percomm_key();		
+		info = gui_new_dialog();
+		info->label_top = N_("Are you sure you want");
+		info->label_middle = N_("to delete the note for");
+		info->label_bottom = key;
+		info->yes = TRUE;
+		info->no = TRUE;
+		
+		test = gui_gs_dialog(info);
+		if (test == GS_YES) {	
 			delete_percomm_note();
-			break;
-		default:
-			break;
+			gui_display_percomm(key);
 		}
 		settings.percomverse = key;
 		ecd->changed = FALSE;
 		update_statusbar(ecd);
-		free(key);
+		g_free(info);
+		g_free(key);
 	}
 }
 
@@ -273,7 +266,7 @@ void on_save_activate(GtkMenuItem * menuitem,
 		return;
 	} else {
 		sprintf(buf, "%s/.pad", settings.homedir);
-		savemyFile = gui_fileselection_save(ecd);
+//		savemyFile = gui_fileselection_save(ecd);
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION
 						(savemyFile), buf);
 		gtk_widget_show(savemyFile);
@@ -305,7 +298,7 @@ static void on_save_as_activate(GtkMenuItem * menuitem,
 	gchar buf[255];
 
 	sprintf(buf, "%s/.pad", settings.homedir);
-	savemyFile = gui_fileselection_save(ecd);
+//	savemyFile = gui_fileselection_save(ecd);
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(savemyFile),
 					buf);
 	gtk_widget_show(savemyFile);

@@ -44,6 +44,7 @@ struct _gs_dialog {
 	gchar *text6;
 	
 	gchar *label_top;
+	gchar *label_middle;
 	gchar *label1;
 	gchar *label2;
 	gchar *label3;
