@@ -1110,7 +1110,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_widget_show (cbtnShowCOMtabs);
   gtk_box_pack_start (GTK_BOX (vbox54), cbtnShowCOMtabs, FALSE, FALSE, 0);
 
-  cbtnShowDLtabs = gtk_check_button_new_with_label (_("Dict/Lex "));
+  cbtnShowDLtabs = gtk_check_button_new_with_label (_("Dict/Lex"));
   gtk_widget_ref (cbtnShowDLtabs);
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowDLtabs", cbtnShowDLtabs,
                             (GtkDestroyNotify) gtk_widget_unref);

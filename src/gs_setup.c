@@ -273,7 +273,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	gtk_widget_show(label113);
 	gtk_box_pack_start(GTK_BOX(vbox27), label113, FALSE, FALSE, 0);
 
-	label143 = gtk_label_new(_("SWORD verson"));
+	label143 = gtk_label_new(_("SWORD version"));
 	gtk_widget_ref(label143);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSetup), "label143",
 				 label143,
