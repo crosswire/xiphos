@@ -1367,7 +1367,7 @@ gchar *getcommodDescriptionSWORD(void)
  */
 
 GList *
-backend_getBibleBooksSWORD(void)
+backend_get_books(void)
 {
 	VerseKey key;
 	GList *glist = NULL;
