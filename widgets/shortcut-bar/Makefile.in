@@ -101,21 +101,11 @@ cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
 noinst_LIBRARIES = libshortcut-bar.a
-noinst_PROGRAMS = test-shortcut-bar
 
 INCLUDES =  	-I$(top_srcdir)					-I$(top_srcdir)/widgets/misc			-DEVOLUTION_VERSION=\""$(VERSION)"\"		$(EXTRA_GNOME_CFLAGS)				-DG_LOG_DOMAIN=\"shortcut-bar\"
 
 
 libshortcut_bar_a_SOURCES =  	e-group-bar.c			e-group-bar.h			e-icon-bar-bg-item.c		e-icon-bar-bg-item.h		e-icon-bar.c			e-icon-bar.h			e-shortcut-bar.c		e-shortcut-bar.h		e-shortcut-model.c		e-shortcut-model.h		e-vscrolled-bar.c		e-vscrolled-bar.h
-
-
-test_shortcut_bar_SOURCES =  	test-shortcut-bar.c
-
-
-test_shortcut_bar_LDADD =  	./libshortcut-bar.a			$(top_builddir)/widgets/e-paned/libepaned.a			../e-text/libetext.a			../misc/libemiscwidgets.a		../../e-util/libeutil.la		$(EXTRA_GNOME_LIBS)
-
-
-test_shortcut_bar_LDFLAGS =  	`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
@@ -131,12 +121,6 @@ libshortcut_bar_a_LIBADD =
 libshortcut_bar_a_OBJECTS =  e-group-bar.o e-icon-bar-bg-item.o \
 e-icon-bar.o e-shortcut-bar.o e-shortcut-model.o e-vscrolled-bar.o
 AR = ar
-PROGRAMS =  $(noinst_PROGRAMS)
-
-test_shortcut_bar_OBJECTS =  test-shortcut-bar.o
-test_shortcut_bar_DEPENDENCIES =  ./libshortcut-bar.a \
-$(top_builddir)/widgets/e-paned/libepaned.a ../e-text/libetext.a \
-../misc/libemiscwidgets.a ../../e-util/libeutil.la
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -151,9 +135,9 @@ TAR = gtar
 GZIP_ENV = --best
 DEP_FILES =  .deps/e-group-bar.P .deps/e-icon-bar-bg-item.P \
 .deps/e-icon-bar.P .deps/e-shortcut-bar.P .deps/e-shortcut-model.P \
-.deps/e-vscrolled-bar.P .deps/test-shortcut-bar.P
-SOURCES = $(libshortcut_bar_a_SOURCES) $(test_shortcut_bar_SOURCES)
-OBJECTS = $(libshortcut_bar_a_OBJECTS) $(test_shortcut_bar_OBJECTS)
+.deps/e-vscrolled-bar.P
+SOURCES = $(libshortcut_bar_a_SOURCES)
+OBJECTS = $(libshortcut_bar_a_OBJECTS)
 
 all: all-redirect
 .SUFFIXES:
@@ -211,19 +195,6 @@ libshortcut-bar.a: $(libshortcut_bar_a_OBJECTS) $(libshortcut_bar_a_DEPENDENCIES
 	-rm -f libshortcut-bar.a
 	$(AR) cru libshortcut-bar.a $(libshortcut_bar_a_OBJECTS) $(libshortcut_bar_a_LIBADD)
 	$(RANLIB) libshortcut-bar.a
-
-mostlyclean-noinstPROGRAMS:
-
-clean-noinstPROGRAMS:
-	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
-
-distclean-noinstPROGRAMS:
-
-maintainer-clean-noinstPROGRAMS:
-
-test-shortcut-bar: $(test_shortcut_bar_OBJECTS) $(test_shortcut_bar_DEPENDENCIES)
-	@rm -f test-shortcut-bar
-	$(LINK) $(test_shortcut_bar_LDFLAGS) $(test_shortcut_bar_OBJECTS) $(test_shortcut_bar_LDADD) $(LIBS)
 
 tags: TAGS
 
@@ -325,7 +296,7 @@ install-am: all-am
 install: install-am
 uninstall-am:
 uninstall: uninstall-am
-all-am: Makefile $(LIBRARIES) $(PROGRAMS)
+all-am: Makefile $(LIBRARIES)
 all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
@@ -342,30 +313,27 @@ distclean-generic:
 
 maintainer-clean-generic:
 mostlyclean-am:  mostlyclean-noinstLIBRARIES mostlyclean-compile \
-		mostlyclean-libtool mostlyclean-noinstPROGRAMS \
-		mostlyclean-tags mostlyclean-depend mostlyclean-generic
+		mostlyclean-libtool mostlyclean-tags mostlyclean-depend \
+		mostlyclean-generic
 
 mostlyclean: mostlyclean-am
 
-clean-am:  clean-noinstLIBRARIES clean-compile clean-libtool \
-		clean-noinstPROGRAMS clean-tags clean-depend \
-		clean-generic mostlyclean-am
+clean-am:  clean-noinstLIBRARIES clean-compile clean-libtool clean-tags \
+		clean-depend clean-generic mostlyclean-am
 
 clean: clean-am
 
 distclean-am:  distclean-noinstLIBRARIES distclean-compile \
-		distclean-libtool distclean-noinstPROGRAMS \
-		distclean-tags distclean-depend distclean-generic \
-		clean-am
+		distclean-libtool distclean-tags distclean-depend \
+		distclean-generic clean-am
 	-rm -f libtool
 
 distclean: distclean-am
 
 maintainer-clean-am:  maintainer-clean-noinstLIBRARIES \
 		maintainer-clean-compile maintainer-clean-libtool \
-		maintainer-clean-noinstPROGRAMS maintainer-clean-tags \
-		maintainer-clean-depend maintainer-clean-generic \
-		distclean-am
+		maintainer-clean-tags maintainer-clean-depend \
+		maintainer-clean-generic distclean-am
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
 
@@ -375,16 +343,15 @@ maintainer-clean: maintainer-clean-am
 clean-noinstLIBRARIES maintainer-clean-noinstLIBRARIES \
 mostlyclean-compile distclean-compile clean-compile \
 maintainer-clean-compile mostlyclean-libtool distclean-libtool \
-clean-libtool maintainer-clean-libtool mostlyclean-noinstPROGRAMS \
-distclean-noinstPROGRAMS clean-noinstPROGRAMS \
-maintainer-clean-noinstPROGRAMS tags mostlyclean-tags distclean-tags \
-clean-tags maintainer-clean-tags distdir mostlyclean-depend \
-distclean-depend clean-depend maintainer-clean-depend info-am info \
-dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
-install-exec install-data-am install-data install-am install \
-uninstall-am uninstall all-redirect all-am all installdirs \
-mostlyclean-generic distclean-generic clean-generic \
-maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+clean-libtool maintainer-clean-libtool tags mostlyclean-tags \
+distclean-tags clean-tags maintainer-clean-tags distdir \
+mostlyclean-depend distclean-depend clean-depend \
+maintainer-clean-depend info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

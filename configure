@@ -721,7 +721,7 @@ fi
 
 PACKAGE=gnomesword
 
-VERSION=0.2.0
+VERSION=0.2.1
 
 if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
   { echo "configure: error: source directory already configured; run "make distclean" there first" 1>&2; exit 1; }
@@ -3280,7 +3280,6 @@ macros/Makefile
 gnomesword/Makefile
 e-util/Makefile
 widgets/Makefile
-widgets/e-paned/Makefile
 widgets/e-text/Makefile
 widgets/misc/Makefile
 widgets/shortcut-bar/Makefile
@@ -3431,7 +3430,6 @@ macros/Makefile
 gnomesword/Makefile
 e-util/Makefile
 widgets/Makefile
-widgets/e-paned/Makefile
 widgets/e-text/Makefile
 widgets/misc/Makefile
 widgets/shortcut-bar/Makefile
