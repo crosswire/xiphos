@@ -52,7 +52,10 @@ static void
 on_link2_clicked (GtkHTML *html, const gchar *url, gpointer data)
 {	
 	//g_warning(url);
-	changeVerseSWORD(url);
+	if(*url == '#') {
+		++url;
+	     	lookupStrongsSWORD(atoi(url));
+	}else changeVerseSWORD(url);
 }
 
 /***************************************************************************************************
