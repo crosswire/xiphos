@@ -40,7 +40,7 @@
 static void
 on_finish_clicked(GnomeDialog * gnomedialog, gint arg1, gpointer user_data)
 {
-    createfromsetupconfig(gtk_widget_get_toplevel
+    backend_create_properties_from_setup(gtk_widget_get_toplevel
 			  (GTK_WIDGET(gnomedialog)));
     gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(gnomedialog)));
 }

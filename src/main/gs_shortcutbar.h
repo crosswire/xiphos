@@ -41,6 +41,7 @@ extern "C" {
                         *ckbPerCom, 
                         *ckbGBS, 
                         *rbPhraseSearch;
+		gchar *modname;
         };
 
         void setupforDailyDevotion ( SETTINGS * s );

@@ -40,9 +40,7 @@ extern "C" {
         GList *searchSWORD ( SETTINGS * s, SEARCH_OPT * so );
         void setupsearchresultsSBSW ( GtkWidget * html_widget );
         void shutdownsearchresultsSBSW ( void );
-        void changesearchresultsSW_SEARCH ( SETTINGS * s,
-                                            SEARCH_OPT * so,
-                                            gchar * url );
+        void backend_search_results_item_display(gchar *url);
 
 #ifdef __cplusplus
 }
