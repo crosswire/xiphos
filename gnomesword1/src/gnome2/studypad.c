@@ -92,7 +92,6 @@ void gui_studypad_can_close(void)
 	GS_DIALOG *info;
 	GString *str;
 	
-	g_message("gui_studypad_can_close");
 	if (settings.modifiedSP) {
 		str = g_string_new("");
 		info = gui_new_dialog();

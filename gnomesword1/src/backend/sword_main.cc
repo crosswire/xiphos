@@ -51,6 +51,7 @@ using namespace sword;
 using namespace std;
 
 BackEnd *backend = NULL;
+char *OLD_CODESET;
 
  
 #ifdef DEBUG 

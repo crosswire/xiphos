@@ -789,7 +789,6 @@ static gboolean button_release_event(GtkWidget * widget,
 		gtk_widget_set_sensitive(menu.delete, TRUE);
 		is_selected = TRUE;
 	}
-
 	switch (event->button) {
 	case 1:
 		button_one = TRUE;
@@ -828,7 +827,7 @@ static gboolean button_release_event(GtkWidget * widget,
 	}
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child
-		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {
+		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {			
 			if(!strcmp(module,"studypad"))
 				url =
 				    g_strdup_printf
