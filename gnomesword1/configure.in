@@ -1,5 +1,5 @@
 
-AC_INIT(gnomesword2, 2.0.rc1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword2, 2.0.0, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -50,7 +50,11 @@ GETTEXT_PACKAGE=gnomesword2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 dnl Languages which your application supports
-ALL_LINGUAS="bg de de_DE en_GB es es_ES fr fr_FR ru sk"
+if test "x$gnome1" = xno; then
+	ALL_LINGUAS="en_GB fr_FR"
+else
+	ALL_LINGUAS="bg de de_DE es es_ES fr ru sk"
+fi
 AM_GLIB_GNU_GETTEXT
 
 
@@ -222,6 +226,7 @@ po/Makefile.in
 doc/Makefile
 doc/help/Makefile
 doc/help/C/Makefile
+doc/help/fr/Makefile
 src/Makefile
 src/backend/Makefile
 src/gnome2/Makefile
