@@ -900,6 +900,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 {
 	GtkWidget *toolbar_nav;
 	GtkWidget *cbBook;
+	GtkWidget *label;
 	GtkObject *spbChapter_adj;
 	GtkObject *spbVerse_adj;
 
@@ -910,6 +911,12 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	gtk_widget_set_size_request(toolbar_nav, -1, 34);
 /*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);*/
+	
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	
 	cbBook = gtk_combo_new();
 	gtk_widget_show(cbBook);
@@ -927,6 +934,12 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	gtk_widget_show(vt->cbe_book);
 	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book), _("Romans"));
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
 	vt->spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
@@ -936,6 +949,12 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
 				    (vt->spb_chapter), TRUE);
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
 	vt->spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
@@ -945,6 +964,12 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vt->spb_verse),
 				    TRUE);
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	vt->freeform_lookup = gtk_entry_new();;
 	gtk_widget_show(vt->freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
@@ -1254,7 +1279,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 			    vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
 			     get_module_description(vt->mod_name));
-	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 380, 400);
+	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 400, 400);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
 

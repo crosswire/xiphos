@@ -35,6 +35,48 @@
 #include "main/sword.h"
 
 
+ 
+/******************************************************************************
+ * Name
+ *  set_gobal_options
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *  void 	
+ *
+ * Description
+ *   set module global options 
+ *
+ * Return value
+ *   void
+ */
+
+static void set_global_options(GBS_GLOBALS *bgo)
+{
+	set_global_option(3, "Strong's Numbers", bgo->strongs);
+	set_global_option(3, "Morphological Tags", bgo->morphs);
+	set_global_option(3, "Footnotes", bgo->footnotes);
+	set_global_option(3, "Greek Accents", bgo->greekaccents);
+	set_global_option(3, "Lemmas", bgo->lemmas);
+	set_global_option(3, "Cross-references", bgo->scripturerefs);
+	set_global_option(3, "Hebrew Vowel Points", bgo->hebrewpoints);
+	set_global_option(3, "Hebrew Cantillation", bgo->hebrewcant);
+	set_global_option(3, "Headings", bgo->headings);
+	set_global_option(3, "Words of Christ in Red", bgo->words_in_red);
+/*	if (tgs->variants_primary)
+		set_text_global_option("Textual Variants",
+				       "Primary Reading");
+	else if (tgs->variants_secondary)
+		set_text_global_option("Textual Variants",
+				       "Secondary Reading");
+	else
+		set_text_global_option("Textual Variants",
+				       "All Readings");*/
+}
+
+
+
 /******************************************************************************
  * Name
  *   gbs_entry
@@ -141,6 +183,7 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 	else
 		str = g_string_new(HTML_START "<body>");
 
+	set_global_options(gbs->bgo);
 	text = get_text_from_offset(gbs->mod_name, gbs->offset);
 	tmpbuf = gbs_get_treekey_local_name(gbs->offset);
 	str_tmp = gbs_entry(gbs->offset, gbs, tmpbuf, text, mf);
@@ -198,7 +241,7 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 	gtk_html_jump_to_anchor(GTK_HTML(gbs->html), anchor);
 	
 	/* andyp - inserted for debugging, remove */
-	//g_print(str->str); 
+	g_print(str->str); 
 
 	//gtk_html_set_editable(html, was_editable); 
 	g_string_free(str, TRUE);

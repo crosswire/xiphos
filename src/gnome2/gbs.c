@@ -841,6 +841,43 @@ static void add_vbox_to_notebook(GBS_DATA * g)
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+static GBS_GLOBALS *new_globals(void)
+{
+	GBS_GLOBALS *retval = NULL;
+	
+	retval = g_new0(GBS_GLOBALS, 1);
+	retval->words_in_red = FALSE;
+	retval->strongs = FALSE;
+	retval->morphs = FALSE;
+	retval->footnotes = FALSE;
+	retval->greekaccents = FALSE;
+	retval->lemmas = FALSE;
+	retval->scripturerefs = FALSE;
+	retval->hebrewpoints = FALSE;
+	retval->hebrewcant = FALSE;
+	retval->headings = FALSE;
+	retval->variants_all = FALSE;
+	retval->variants_primary = FALSE;
+	retval->variants_secondary = FALSE;
+	
+	return retval;
+}
+
+/******************************************************************************
+ * Name
  *  gui_setup_gbs
  *
  * Synopsis
@@ -871,6 +908,7 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
 		bookname = (gchar *) tmp->data;
+		gbs->bgo = new_globals();
 		gbs = g_new0(GBS_DATA, 1);
 		gbs->frame = NULL;
 		gbs->mod_name = bookname;
