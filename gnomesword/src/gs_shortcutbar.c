@@ -94,11 +94,13 @@ void showSBVerseList(SETTINGS * s)
 
 void	 changegroupnameSB(SETTINGS *s, gchar *groupName, gint groupNum)
 {
-	GtkWidget	*label;
+	GtkWidget *label;
 	EShortcutBar *bar1;
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
 	
+	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);	
+	//g_warning(groupName);
 	label = gtk_label_new(groupName);
+	gtk_widget_show(label);
 	e_group_bar_set_group_button_label(E_GROUP_BAR(bar1),
 						 groupNum,
 						 label);

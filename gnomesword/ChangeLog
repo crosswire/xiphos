@@ -1,7 +1,10 @@
 2001-08-16 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* release 0.5.1a
 	* fix gconf_init bug
 	* fix to work with gal-0.10.99.2 and under to 0.4.99
+	* view text dialog is now resizeable
+	* interlinear page is now a html table 
 
 
 2001-08-13 Terry Biggs <tbiggs@users.sourceforge.net>
