@@ -347,53 +347,60 @@ void GTKutf8ChapDisp::marksearchwords( GString *str )
 	gint len1, len2, len3, len4;
 	gchar closestr[40], openstr[40];
 	
+	// regular expression search results         ***fixme***
+	if(settings->searchType == 0) {
+		return;
+	}
+	// close tags
 	sprintf(closestr,"</b></font>");
+	// open tags
 	sprintf(openstr,"<font color=\"%s\"><b>",settings->found_color);
+	// point buf to found verse
 	buf = str->str;
 	searchbuf = g_strdup(settings->searchText);
-	
+		
+	// if we have a muti word search
 	if(settings->searchType == -2) {
 		char *token;
-		GList *list,*tmp;
+		GList *list;
 		gint count=0, i=0;
 		
 		list = NULL;
-		tmp = NULL;
+		// seperate the search words and add them to a glist
 		if((token=strtok(searchbuf ," ")) != NULL) {
 			list = g_list_append(list,token);
-			g_warning("%s", token);
 			++count;				
 			while((token=strtok(NULL," ")) != NULL) {
 				list = g_list_append(list,token);
-				g_warning("%s", token);
 				++count;
 			}
+		// if we have only one word
 		} else {
 			list = g_list_append(list,searchbuf);
 			count = 1;
-		}		
-		tmp = list;
-		g_warning("%d", count);
-		
+		}
+		list = g_list_first (list);
+		// find each word in the list and mark it
 		for(i=0; i<count;i++) {
-			g_warning("list = %s",(gchar*)tmp->data);
+			// set len1 to length of verse
 			len1 = strlen(buf);
-			len2 = strlen((gchar*)tmp->data);
-			
-			if((tmpbuf = strstr(buf,(gchar*)tmp->data)) != NULL) {
+			// set len2 to length of search word
+			len2 = strlen((gchar*)list->data);
+			// find search word in verse
+			if((tmpbuf = strstr(buf,(gchar*)list->data)) != NULL) {
+				// set len3 to length of tmpbuf (tmpbuf points to first occurance of search word in verse)
 				len3 = strlen(tmpbuf);
+				// set len4 to diff between len1 and len3
 				len4 = len1 - len3;
-				str = g_string_insert (str,
-                                            (len4+len2) ,
-                                             closestr); 		
-				str = g_string_insert (str,
-                                            len4 ,
-                                             openstr);
-			}			
+				// add end tags first (position to add tag to is len4 + len2)
+				str = g_string_insert (str, (len4+len2), closestr); 
+				// then add start tags (position to add tag to is len4)
+				str = g_string_insert (str, len4 , openstr);
+			}
+			// point buf to changed str
 			buf = str->str;
-			tmp = g_list_next(tmp);
-		}		
-		g_list_free(tmp);
+			list = g_list_next(list);
+		}	
 		g_list_free(list);
 	
 	// else we have a phrase and only need to mark it
@@ -404,16 +411,11 @@ void GTKutf8ChapDisp::marksearchwords( GString *str )
 		len3 = strlen(tmpbuf);		
 		len4 = len1 - len3;
 		// place end tag first
-		str = g_string_insert (str,
-                                            (len4+len2) ,
-                                             closestr);
+		str = g_string_insert (str, (len4+len2) , closestr);
 		// then place start tag
-		str = g_string_insert (str,
-                                            len4 ,
-                                             openstr);
-		
+		str = g_string_insert (str, len4 , openstr);		
 	}	
-	// free g_strdup()
+	// free g_strdup(searchbuf)
 	g_free(searchbuf);
 }
 
