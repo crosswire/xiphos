@@ -39,7 +39,8 @@ int backend_module_mgr_refresh_remote_source(const char *source_name);
 void backend_init_module_mgr_config(void);
 void backend_init_module_mgr(const char *dir);
 void backend_shut_down_module_mgr(void);
-
+void backend_module_mgr_add_source(const char * type, const char * caption,
+				   const char * source, const char * directory);
 
 #ifdef __cplusplus
 }
