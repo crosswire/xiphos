@@ -6,6 +6,7 @@ INCLUDES =  \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
     $(GTKHTML_CFLAGS) \
+    $(GNOMESWORD_CFLAGS)\
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src/backend/ \
     -I$(top_builddir)/src/gnome/
@@ -65,14 +66,12 @@ EXTRA_DIST = \
     $(SPELLING_SOURCE)
     
 gnomesword_LDADD = \
-    $(GNOME_LIBDIR) \
-    $(GNOMEUI_LIBS) \
+    $(GNOMESWORD_LIBS)\
     $(EXTRA_GNOME_LIBS) \
     $(SWORD_LIBS) \
     $(GTKHTML_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
-    $(PIXBUF_LIBS) \
     $(top_builddir)/src/backend/libbackend.a \
     $(top_builddir)/src/gnome/libgui.a 
 
