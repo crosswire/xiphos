@@ -42,7 +42,7 @@ libmain_a_SOURCES =  \
     spell_pspell.c \
     spell.h \
     sword.cc sword.h\
-    url.cc url.h\
+    url.cc url.hh\
     xml.c xml.h
 
 EXTRA_DIST = \
