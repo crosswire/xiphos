@@ -32,6 +32,7 @@
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 #include "main/xml.h"
@@ -139,7 +140,7 @@ void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar,
 					  (widgets.notebook_comm));
 	sprintf(historylist[historyitems].verseref, "%s", ref);
 	sprintf(historylist[historyitems].textmod, "%s",
-		xml_get_value("modules", "text"));//settings.MainWindowModule);
+		xml_get_value("modules", "bible"));//settings.MainWindowModule);
 	sprintf(historylist[historyitems].commod, "%s",
 		xml_get_value("modules", "comm"));//settings.CommWindowModule);
 

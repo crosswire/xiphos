@@ -45,6 +45,7 @@
 #include "gui/dictlex.h"
 #include "gui/interlinear.h"
 #include "gui/main_window.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/lists.h"
@@ -490,8 +491,8 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	
 	/*** read modules ***/
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.text_module));
-	xml_set_value("GnomeSword", "modules", "text", buf);
-	settings.MainWindowModule = xml_get_value("modules", "text");
+	xml_set_value("GnomeSword", "modules", "bible", buf);
+	settings.MainWindowModule = xml_get_value("modules", "bible");
 
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_1_module));
 	xml_set_value("GnomeSword", "modules", "int1", buf);
@@ -565,7 +566,7 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
 	xml_set_value("GnomeSword", "HTMLcolors", "text", buf);
-	settings.bible_text_color = xml_get_value("HTMLcolors", "text");
+	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	g_free(buf);
 
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
@@ -631,10 +632,10 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	    atoi(xml_get_value("shortcutbar", "shortcutbar"));
 
 	if (GTK_TOGGLE_BUTTON(check_button.show_bible_tabs)->active)
-		xml_set_value("GnomeSword", "tabs", "text", "1");
+		xml_set_value("GnomeSword", "tabs", "bible", "1");
 	else
-		xml_set_value("GnomeSword", "tabs", "text", "0");
-	settings.text_tabs = atoi(xml_get_value("tabs", "text"));
+		xml_set_value("GnomeSword", "tabs", "bible", "0");
+	settings.text_tabs = atoi(xml_get_value("tabs", "bible"));
 
 	if (GTK_TOGGLE_BUTTON(check_button.show_commentary_tabs)->
 	    active)
@@ -711,7 +712,7 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	else
 		xml_set_value("GnomeSword", "shortcutbar", "text", "0");
 	settings.showtextgroup =
-	    atoi(xml_get_value("shortcutbar", "text"));
+	    atoi(xml_get_value("shortcutbar", "bible"));
 
 	if (GTK_TOGGLE_BUTTON(check_button.show_commentary_group)->
 	    active)

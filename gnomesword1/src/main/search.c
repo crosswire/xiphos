@@ -27,7 +27,7 @@
 
 #include "gui/main_window.h"
 #include "gui/search_dialog.h"
-#include "gui/shortcutbar_search.h"
+//#include "gui/shortcutbar_search.h"
 
 #include "main/search.h"
  
@@ -57,8 +57,8 @@ void search_percent_update(char percent, void *userData)
 {
 	if(search_dialog)
 		gui_search_dialog_appbar_update(percent, userData);
-	else
-		gui_search_update(percent, userData);
+	/*else
+		gui_search_update(percent, userData);*/
 }
 
 

@@ -33,6 +33,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/shortcutbar.h"
 #include "main/module.h"

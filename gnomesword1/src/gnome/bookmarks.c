@@ -43,6 +43,7 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -50,6 +51,11 @@
 #include "main/xml.h"
 
 
+typedef struct _bmtree BM_TREE;
+struct _bmtree {
+	GtkWidget *ctree_widget;
+	GtkCTree *ctree;
+};
 
 /******************************************************************************
  * structures
@@ -136,6 +142,21 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 static void add_node(xmlNodePtr cur, GtkCTree * ctree,
 		     GtkCTreeNode * parent);
 
+void gui_add_bookmark_to_tree(GtkCTreeNode * node,
+		   gchar * modName, gchar * verse);
+
+void on_new_folder_activate(GtkMenuItem * menuitem,
+			  gpointer user_data);
+
+void on_edit_item_activate(GtkMenuItem * menuitem,
+		       gpointer user_data);
+void on_delete_item_activate(GtkMenuItem * menuitem,
+			 gpointer user_data);
+void on_allow_reordering_activate(GtkMenuItem * menuitem,
+			      gpointer user_data);
+void gui_create_add_bookmark_menu(GtkWidget * menu,
+			  GtkWidget * bookmark_menu_widget);			  
+		   
 
 /******************************************************************************
  * Name
@@ -803,7 +824,7 @@ static gchar *get_module_name(void)
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
 			return (gchar *) xml_get_value("modules",
-						       "text");
+						       "bible");
 			break;
 		case COMMENTARY_WINDOW:
 			return (gchar *) xml_get_value("modules",
@@ -998,7 +1019,7 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[2])->text;
 		if (strlen(mod_name) < 3)
-			mod_name = xml_get_value("modules", "text");
+			mod_name = xml_get_value("modules", "bible");
 		gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 		gtk_widget_set_sensitive(menu.new, FALSE);
 		gtk_widget_set_sensitive(menu.insert, FALSE);
@@ -1470,14 +1491,17 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
 }
 
 
+
+
+
 /******************************************************************************
  * Name
- *   gui_save_bookmarks
+ *   save_bookmarks
  *
  * Synopsis
  *   #include "gui/bookmarks.h"
  *
- *   void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
+ *   void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
  *
  * Description
  *   save bookmark tree 
@@ -1486,7 +1510,7 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
  *   void
  */
 
-void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
+static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 {
 
 	GNode *gnode;
@@ -1506,6 +1530,27 @@ void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 				    g_strdup(buf));
 }
 
+/******************************************************************************
+ * Name
+ *   gui_save_bookmarks
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void gui_save_bookmarks(void)
+ *
+ * Description
+ *   save bookmark tree 
+ *
+ * Return value
+ *   void
+ */
+
+void gui_save_bookmarks(void)
+{
+	save_bookmarks(NULL, NULL);
+	
+}
 
 /******************************************************************************
  * Name
@@ -2207,7 +2252,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Save Bookmarks"),
 	 N_("Save all bookmark files"),
-	 (gpointer) gui_save_bookmarks, NULL, NULL,
+	 (gpointer) save_bookmarks, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
 	 0, (GdkModifierType) 0, NULL},
 	{

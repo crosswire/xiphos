@@ -31,6 +31,7 @@
 #include "gui/shortcutbar_dialog.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 //#include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -147,4 +148,3 @@ GtkWidget* gui_create_shortcutbar_dialog(void)
 
 	return dlgDock;
 }
-

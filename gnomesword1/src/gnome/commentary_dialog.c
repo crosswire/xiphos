@@ -37,6 +37,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/toolbar_style.h"
 #include "gui/toolbar_edit.h"
+#include "gui/widgets.h"
 
 #include "main/commentary.h"
 #include "main/percomm.h"

@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "main/module.h"
+#include "main/settings.h"
 #include "main/xml.h"
 
 #include "backend/module.hh"
@@ -78,7 +79,7 @@ char *get_footnote_body(char *note)
 	//key = g_strdup_printf("%s %s:%s",book,chapter,verse);
 		
 	buf = backend_get_footnote_body(
-		xml_get_value("modules", "text"), 
+		xml_get_value("modules", "bible"), 
 		key, note_number);
 		
 	g_free(type);
@@ -157,6 +158,7 @@ int do_module_search(char * module_name ,char * search_string,
 		int search_type, int search_params, int dialog)
 {
 	search_dialog = dialog;
+	strcpy(settings.searchText, search_string);
 	return backend_do_module_search(module_name, search_string, 
 			     search_type, search_params);
 }

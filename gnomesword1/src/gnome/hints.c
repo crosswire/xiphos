@@ -29,6 +29,7 @@
 #include "gui/hints.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/gnomesword.h"
+#include "gui/widgets.h"
 
 #include "main/module.h"
 #include "main/xml.h"

@@ -46,6 +46,7 @@
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/font_dialog.h"
+#include "gui/widgets.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
@@ -745,9 +746,17 @@ void gui_add_new_gbs_pane(GBS_DATA * g)
 	GtkWidget *popupmenu;
 	
 	create_gbs_pane(g);
-	popupmenu = gui_create_pm_gbs(g); 
-	if (!g->is_rtol)
+	
+#ifdef USE_GTKEMBEDMOZ	
+	if (!g->is_rtol) {
+		popupmenu = gui_create_pm_gbs(g); 		
 		gnome_popup_menu_attach(popupmenu, g->html, NULL);
+	}
+#else
+	popupmenu = gui_create_pm_gbs(g); 
+	gnome_popup_menu_attach(popupmenu, g->html, NULL);
+#endif
+	
 	add_book_to_ctree(g->ctree, g->mod_name);
 	gtk_ctree_select(GTK_CTREE(g->ctree),rootnode);
 	on_ctreeGBS_select_row((GtkCList *) g->ctree,0,

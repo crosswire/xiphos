@@ -41,7 +41,6 @@
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
-#include "main/settings.h"
 
 using std::map;
 using std::list;

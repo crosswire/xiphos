@@ -28,13 +28,13 @@ extern "C" {
 
 #include "main/settings.h"
 
-void gui_show_hide_texts(gboolean choice);
-void gui_show_hide_comms(gboolean choice);
-void gui_show_hide_dicts(gboolean choice);
+void gui_show_hide_texts(int choice);
+void gui_show_hide_comms(int choice);
+void gui_show_hide_dicts(int choice);
 void gui_set_bible_comm_layout(void);	
-void gui_change_window_title(gchar * module_name);
-void gui_change_module_and_key(gchar *module_name, gchar *key);
-void gui_change_verse(gchar *key);	
+void gui_change_window_title(char * module_name);
+void gui_change_module_and_key(char *module_name, char *key);
+void gui_change_verse(char *key);	
 void gui_search_appbar_update(char percent, void *userData);
 void create_mainwindow(void);
 void gui_show_main_window(void);
@@ -44,4 +44,3 @@ void gui_show_main_window(void);
 #endif
 
 #endif
-

@@ -1,6 +1,6 @@
 INCLUDES =  \
     -I$(top_builddir)/src \
-    $(PACKAGE_CFLAGS) 
+    $(GNOME_CFLAGS) 
 
 noinst_LIBRARIES = libmain.a  
 
