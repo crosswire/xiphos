@@ -31,7 +31,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gs_viewcomm.h"
+#include "gs_viewcomm_dlg.h"
 #include "gs_sword.h"
 #include "gs_html.h"
 
