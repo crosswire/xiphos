@@ -1317,9 +1317,10 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 
 	info = gui_new_dialog();
-	info->title = N_("Clear List?");
-	info->label_top =
-	    N_("Do you really want to CLEAR the module list?");
+	info->stock_icon = "gtk-clear";
+	info->label_top = N_("Clear List?");
+	info->label_middle =
+	    N_("Do you really want to clear the module list?");
 	info->yes = TRUE;
 	info->no = TRUE;
 
@@ -1379,9 +1380,10 @@ static void delete_module(GtkButton * button, gpointer user_data)
 
 
 	info = gui_new_dialog();
-	info->title = N_("Remove Module?");
-	info->label_top =
-	    N_("Do you really want to REMOVE\n the selected module?");
+	info->stock_icon = "gtk-remove";
+	info->label_top = N_("Remove Module?");
+	info->label_middle =
+	    N_("Do you really want to remove\n the selected module?");
 	info->yes = TRUE;
 	info->no = TRUE;
 
@@ -1593,8 +1595,9 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 
 	info = gui_new_dialog();
-	info->title = N_("Delete Range?");
-	info->label_top =
+	info->stock_icon = "gtk-delete";
+	info->label_top = N_("Delete Range?");
+	info->label_middle =
 	    N_("Are you sure you want ot delete this range?");
 	info->label_bottom = name_string;
 	info->yes = TRUE;
@@ -1656,9 +1659,10 @@ static void delete_list(GtkButton * button, gpointer user_data)
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 
 	info = gui_new_dialog();
-	info->title = N_("Delete List?");
-	info->label_top =
-	    N_("Are you sure you want ot delete this list?");
+	info->stock_icon = "gtk-delete";
+	info->label_top = N_("Delete list?");
+	info->label_middle =
+	    N_("Are you sure you want to delete:");
 	info->label_bottom = name_string;
 	info->yes = TRUE;
 	info->no = TRUE;

@@ -151,7 +151,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 {
 
 	GtkWidget *dialog_vbox;
-	GtkWidget *vbox83;
 	GtkWidget *hbox83;
 	GtkWidget *pixmap;
 	GtkWidget *vbox84;
@@ -177,7 +176,8 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	gs_dialog = gtk_dialog_new();	
 	gtk_object_set_data(GTK_OBJECT(gs_dialog), "gs_dialog",
 			    gs_dialog);
-	gtk_window_set_title(GTK_WINDOW(gs_dialog), info->title ? info->title : "");
+	gtk_window_set_title(GTK_WINDOW(gs_dialog), 
+					info->title ? info->title : " ");
 	gtk_window_set_policy(GTK_WINDOW(gs_dialog), TRUE, TRUE, FALSE);
 	gtk_container_set_border_width (GTK_CONTAINER (gs_dialog), 8);
 	
@@ -203,12 +203,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 			    dialog_vbox);
 	gtk_widget_show(dialog_vbox);
 
-/*	vbox83 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox83);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox), vbox83, TRUE, TRUE,
-			   0);
-*/
-
 	hbox83 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox83);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox), hbox83, TRUE, TRUE, 0);
@@ -224,7 +218,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	vbox84 = gtk_vbox_new(FALSE, 8);
 	gtk_widget_show(vbox84);
 	gtk_box_pack_start(GTK_BOX(hbox83), vbox84, TRUE, TRUE, 0);
-	//gtk_container_set_border_width (GTK_CONTAINER (vbox84), 16);
 
 	if (info->label_top) {
 		str = g_string_new("");
@@ -244,12 +237,20 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 		gtk_box_pack_start(GTK_BOX(vbox84), label_middle, TRUE,
 				   TRUE, 0);
 	}
+	
+	if (info->label_bottom) {
+		label_bottom = gtk_label_new(info->label_bottom);
+		gtk_widget_show(label_bottom);
+		gtk_box_pack_start(GTK_BOX(vbox84), label_bottom, TRUE,
+				   TRUE, 0);
+	}
+
+	
 
 	table14 = gtk_table_new(6, 2, FALSE);;
 	gtk_widget_show(table14);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox), table14, TRUE, TRUE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (table14), 16);
-		//gtk_widget_set_size_request (table14, 350, -2);
 
 	if (info->label1) {
 		label1 = gtk_label_new(info->label1);
@@ -352,13 +353,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	   (GtkAttachOptions) (0), 0, 0);
 
 	 */
-	if (info->label_bottom) {
-		label_bottom = gtk_label_new(info->label_bottom);
-		gtk_widget_show(label_bottom);
-		gtk_box_pack_start(GTK_BOX(vbox84), label_bottom, TRUE,
-				   TRUE, 0);
-	}
-
 	g_signal_connect ((gpointer) gs_dialog, "response",
                     G_CALLBACK (on_dialog1_response),
                     info);
