@@ -54,7 +54,7 @@ using namespace sword;
 
 
 /******************************************************************************
- * static  global to this file only 
+ * static  global to this file only
  */
 
 static SWModule *search_module;
@@ -298,21 +298,17 @@ void backend_set_module_iterators(void)
  * Synopsis
  *   #include "backend/module.hh"
  *
- *   NAME_TYPE *backend_get_next_module_name(void)	
+ *   NAME_TYPE *backend_get_next_module_name(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   NAME_TYPE
  */
 
-NAME_TYPE *backend_get_next_module_name(void)
+NAME_TYPE *backend_get_next_module_name(NAME_TYPE *nt)
 {
-	NAME_TYPE nt, *retval = NULL;
-
-	retval = &nt;
-
 	if (begin != end) {
 
 		/*descriptionMap[string
@@ -321,27 +317,27 @@ NAME_TYPE *backend_get_next_module_name(void)
 		    string((char *) (*begin).second->Name());*/
 
 		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
-			nt.type = TEXT_TYPE;
-			nt.name =
+			nt->type = TEXT_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->Name());
 		}
 		if (!strcmp((*begin).second->Type(), COMM_MODS)) {
-			nt.type = COMMENTARY_TYPE;
-			nt.name =
+			nt->type = COMMENTARY_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->Name());
 		}
 		if (!strcmp((*begin).second->Type(), DICT_MODS)) {
-			nt.type = DICTIONARY_TYPE;
-			nt.name =
+			nt->type = DICTIONARY_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->Name());
 		}
 		if (!strcmp((*begin).second->Type(), BOOK_MODS)) {
-			nt.type = BOOK_TYPE;
-			nt.name =
+			nt->type = BOOK_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->Name());
 		}
 		begin++;
-		return retval;
+		return nt;
 	} else
 		return NULL;
 }
@@ -363,40 +359,36 @@ NAME_TYPE *backend_get_next_module_name(void)
  *   NAME_TYPE
  */
 
-NAME_TYPE *backend_get_next_module_description(void)
+NAME_TYPE *backend_get_next_module_description(NAME_TYPE *nt)
 {
-	NAME_TYPE nt, *retval = NULL;
-
-	retval = &nt;
-
 	if (begin != end) {
 
 		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
-			nt.type = TEXT_TYPE;
-			nt.name =
+			nt->type = TEXT_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->
 				   Description());
 		}
 		if (!strcmp((*begin).second->Type(), COMM_MODS)) {
-			nt.type = COMMENTARY_TYPE;
-			nt.name =
+			nt->type = COMMENTARY_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->
 				   Description());
 		}
 		if (!strcmp((*begin).second->Type(), DICT_MODS)) {
-			nt.type = DICTIONARY_TYPE;
-			nt.name =
+			nt->type = DICTIONARY_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->
 				   Description());
 		}
 		if (!strcmp((*begin).second->Type(), BOOK_MODS)) {
-			nt.type = BOOK_TYPE;
-			nt.name =
+			nt->type = BOOK_TYPE;
+			nt->name =
 			    strdup((char *) (*begin).second->
 				   Description());
 		}
 		begin++;
-		return retval;
+		return nt;
 	} else
 		return NULL;
 }
@@ -677,29 +669,29 @@ char *backend_get_mod_about_info(char *modname)
  * Synopsis
  *   #include "backend/module.hh"
  *
- *   int backend_get_module_page(char *module_name, char *module_type)	
+ *   int backend_get_module_page(char *module_name, char *module_type)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   int
  */
 
-int backend_get_module_page(char *module_name, char *module_type)
+int backend_get_module_page(const char *module_name, const char *module_type)
 {
 	ModMap::iterator it;
 	int module_index = 0;
 
 	for (it = sw.main_mgr->Modules.begin();
 	     it != sw.main_mgr->Modules.end(); it++) {
-
-		if (!strcmp((*it).second->Type(), module_type)) {
-
-			if (!strcmp((*it).second->Name(), module_name)) {
-				return module_index;
+		if ((*it).second) { // Sometimes Module is NULL - bug somewhere
+			if (!strcmp((*it).second->Type(), module_type)) {
+				if (!strcmp((*it).second->Name(), module_name)) {
+					return module_index;
+				}
+				++module_index;
 			}
-			++module_index;
 		}
 	}
 	return -1;
