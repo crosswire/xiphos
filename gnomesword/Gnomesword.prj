@@ -144,10 +144,6 @@ module.source.files=\
 	gs_editor_toolbar.h\
 	sw_gbs.cpp\
 	sw_gbs.h\
-	gs_undock_int.c\
-	gs_undock_int.h\
-	gs_undock_sb.c\
-	gs_undock_sb.h\
 	gs_gbs.c\
 	gs_getinfo_dlg.c\
 	gs_getinfo_dlg.h\

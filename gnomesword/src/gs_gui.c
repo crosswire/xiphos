@@ -584,8 +584,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	btnSBDock =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Dock",
-				       "Dock/Undock Shortcut Bar",
+				       "Detach",
+				       "Detach/Attach Shortcut Bar",
 				       NULL, tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnSBDock);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSBDock",

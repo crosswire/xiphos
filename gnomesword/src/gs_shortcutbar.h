@@ -32,8 +32,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 #include "gs_gnomesword.h"
+	
+typedef struct _search_opt SEARCH_OPT;
+struct  _search_opt{
+	GtkWidget 
+		*ckbCommentary,
+		*ckbPerCom,
+		*ckbGBS;
+};
 
 	void setupforDailyDevotion(SETTINGS * s);
 	void showSBVerseList(SETTINGS * s);
