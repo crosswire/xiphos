@@ -56,7 +56,7 @@ GtkWidget *create_dglVerseList(void)
 	gtk_object_set_data(GTK_OBJECT(dglVerseList), "dglVerseList",
 			    dglVerseList);
 	gtk_window_set_title(GTK_WINDOW(dglVerseList), _("VerseList"));
-	gtk_window_set_default_size(GTK_WINDOW(dglVerseList), 110, 125);
+	gtk_window_set_default_size(GTK_WINDOW(dglVerseList), 180, 165);
 
 	vbox33 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox33);

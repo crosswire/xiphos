@@ -159,12 +159,9 @@ extern gboolean file_changed;	/* set to true if text is study pad has changed - 
 extern SETTINGS *settings;
 extern SETTINGS myset;
 extern GtkWidget *shortcut_bar;
-#if USE_SHORTCUTBAR
-//extern gchar *shortcut_types[];
-#endif /* USE_SHORTCUTBAR */
 extern gchar *current_filename;	/* filename for open file in study pad window  */
 extern gchar current_verse[80];	/* current verse showing in main window - 1st - 2nd - 3rd
-				   interlinear window - commentary window */
+				                           interlinear window - commentary window */
 extern gint historyitems;      /* number of history items */
 extern HISTORY historylist[];  /* sturcture for storing history items */
 extern gboolean addhistoryitem; /* do we need to add item to history */
@@ -172,6 +169,7 @@ extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
 extern GS_APP gs;
+extern GS_FONTS *gsfonts;
 extern GS_NB_PAGES *nbpages;
 extern GtkWidget *htmlVL;
 extern gboolean isrunningVL
@@ -1480,7 +1478,10 @@ gboolean getVerseListSWORD(gchar *vlist)
 	tmpVerseList = DefaultVSKey.ParseVerseList((char *)vlist, DefaultVSKey);
 	beginHTML(htmlVL, FALSE);
 	while (!tmpVerseList.Error()) {
-		sprintf(buf,"<a href=\"%s\">%s</a><br>",(const char *)tmpVerseList,(const char *)tmpVerseList);
+		sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
+					gsfonts->verselist_font_size,
+					(const char *)tmpVerseList,
+					(const char *)tmpVerseList);
 		displayHTML(htmlVL, buf, strlen(buf));
 		tmpVerseList++;
 		++count;

@@ -50,7 +50,8 @@ struct _gsfonts {
 	gchar	bible_font_size[4], /*** html font sizes ***/
 			commentary_font_size[4],
 			dictionary_font_size[4],
-			interlinear_font_size[4];
+			interlinear_font_size[4],
+			verselist_font_size[4];
 };
 
 
