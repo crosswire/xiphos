@@ -19,9 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -46,23 +45,19 @@
 #endif /* USE_SPELL */
 
 #include "gs_gnomesword.h"
-#include "gs_file.h"
 #include "gs_html.h"
 #include "gs_editor.h"
 #include "gs_editor_toolbar.h"
 #include "gs_info_box.h"
-/*
- * gnome
- */
+#include "settings.h"
+
+/* gnome */
 #include "editor_menu.h"
 #include "link_dialog.h"
+#include "fileselection.h"
 
-/*
- * main
- */
+/* main */
 #include "percomm.h"
-
-extern char *homedir;
 
 /******************************************************************************
  * much this code taken form GtkHTML
@@ -289,8 +284,8 @@ static void on_btn_save_clicked(GtkButton * button,
 			save_file(ecd->filename, ecd);
 			return;
 		} else {
-			sprintf(buf, "%s/.pad", homedir);
-			savemyFile = create_fileselectionSave(ecd);
+			sprintf(buf, "%s/.pad", settings.homedir);
+			savemyFile = gui_fileselection_save(ecd);
 			gtk_file_selection_set_filename(GTK_FILE_SELECTION
 							(savemyFile), buf);
 			gtk_widget_show(savemyFile);
@@ -375,8 +370,8 @@ static void on_btn_open_clicked(GtkButton * button,
 			break;
 		}
 	}
-	sprintf(buf, "%s/*.pad", homedir);
-	openFile = create_fileselection1(ecd);
+	sprintf(buf, "%s/*.pad", settings.homedir);
+	openFile = gui_fileselection_open(ecd);
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
 					buf);
 	gtk_widget_show(openFile);

@@ -33,8 +33,7 @@
 #include <gal/util/e-util.h>
 
 #include "gs_gnomesword.h"
-
-extern SETTINGS *settings;
+#include "settings.h"
 
 /*****************************************************************************/
 /* FIXME: clean up below */
@@ -462,7 +461,7 @@ static GtkWidget *splash = NULL;
 void gui_splash_init() {
 	GdkPixbuf *icon_pixbuf;
 
-	if (settings->showsplash) {
+	if (settings.showsplash) {
 		splash = e_splash_new();
 		gtk_widget_show(splash);
 		gtk_object_ref(GTK_OBJECT(splash));
@@ -490,7 +489,7 @@ void gui_splash_init() {
 }
 
 void gui_splash_step1() {
-	if (settings->showsplash) {
+	if (settings.showsplash) {
 		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
 
 		while (gtk_events_pending()) {
@@ -501,7 +500,7 @@ void gui_splash_step1() {
 
 
 void gui_splash_step2() {
-	if (settings->showsplash) {
+	if (settings.showsplash) {
 		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
 
 		while (gtk_events_pending()) {
@@ -511,7 +510,7 @@ void gui_splash_step2() {
 }
 
 void gui_splash_step3() {
-	if (settings->showsplash) {
+	if (settings.showsplash) {
 		e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);
 
 		while (gtk_events_pending()) {
@@ -521,7 +520,7 @@ void gui_splash_step3() {
 }
 
 void gui_splash_step4() {
-	if (settings->showsplash) {
+	if (settings.showsplash) {
 		e_splash_set_icon_highlight(E_SPLASH(splash), 3, TRUE);
 
 		while (gtk_events_pending()) {
@@ -531,7 +530,7 @@ void gui_splash_step4() {
 }
 
 void gui_splash_done() {
-	if (settings->showsplash) {
+	if (settings.showsplash) {
 		gtk_widget_unref(splash);
 		gtk_widget_destroy(splash);
 	}
