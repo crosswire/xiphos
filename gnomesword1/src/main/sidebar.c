@@ -64,13 +64,13 @@ static TreePixbufs *pixbufs;
 
 /******************************************************************************
  * Name
- *  add_children_to_root
+ *  main_add_children_to_tree
  *
  * Synopsis
- *   #include "gui/gbs.h"
+ *   #include "main/sidebar.h"
  *
- *   void add_children_to_root(gchar *bookname,
- *   				unsigned long offset)	
+ *   void main_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
+ *				 gchar *mod_name, unsigned long offset)
  *
  * Description
  *    
@@ -79,7 +79,7 @@ static TreePixbufs *pixbufs;
  *   void
  */
 
-void main_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
+static void add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 				 gchar *mod_name, unsigned long offset)
 {
 	gchar buf[256];
@@ -147,6 +147,23 @@ void main_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *  main_create_pixbufs
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_create_pixbufs(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
 void main_create_pixbufs(void)
 {
 	pixbufs = g_new0(TreePixbufs, 1);
@@ -167,7 +184,24 @@ void main_create_pixbufs(void)
 }
 
 
-void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter, 
+/******************************************************************************
+ * Name
+ *  main_add_verses_to_chapter
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter, 
+ *				const gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter, 
 				const gchar * key)
 {	
 	gchar **work_buf = NULL;
@@ -214,7 +248,24 @@ void main_add_verses_to_chapter(GtkTreeModel * model, GtkTreeIter iter,
 
 
 
-void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter, 
+/******************************************************************************
+ * Name
+ *  main_add_chapters_to_book
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter, 
+				const gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter, 
 				const gchar * key)
 {	
 	gchar **work_buf = NULL;
@@ -257,7 +308,24 @@ void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter,
 }
 
 
-void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
+/******************************************************************************
+ * Name
+ *  main_add_books_to_bible
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
+				const gchar * mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 				const gchar * mod_name)
 {
 	GList *tmp = NULL;
@@ -313,12 +381,12 @@ void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 
 /******************************************************************************
  * Name
- *   
+ *   main_mod_treeview_button_one
  *
  * Synopsis
- *   #include "main/utilities.h"
+ *   #include "main/sidebar.h"
  *
- *   
+ *   void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
  *
  * Description
  *   
@@ -333,6 +401,7 @@ void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
 	gchar *cap = NULL;
 	gchar *mod = NULL;
 	gchar *key = NULL;
+	gchar *offset = NULL;
 	gint mod_type;
 	
 	
@@ -358,12 +427,31 @@ void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
 					     (widgets. button_parallel_view),
 					     FALSE);
 	*/
+	
+	if (!g_utf8_collate(cap, _("Commentaries"))) {
+		if(!settings.comm_showing) {
+			settings.comm_showing = TRUE;
+			gui_change_module_and_key(settings.CommWindowModule, 
+						settings.currentverse);
+		}
+	}
+	
+	if (!g_utf8_collate(cap, _("General Books"))) {
+		if(settings.comm_showing) {
+			settings.comm_showing = FALSE;
+			offset = g_strdup_printf("%lu",settings.book_offset);
+			gui_change_module_and_key(settings.book_mod, 
+						offset);
+			g_free(offset);
+		}
+	}
+	
 	if (!mod)
 		return;
 	
 	sbtype = get_mod_type(mod);
 	switch (sbtype) {
-	case 0:
+	case TEXT_TYPE:
 		/*if (GTK_TOGGLE_BUTTON(widgets.button_parallel_view)->
 		    active) {
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -371,45 +459,45 @@ void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
 						      button_parallel_view),
 						     FALSE);
 		}
-	*/
+		*/
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(
 					widgets.notebook_parallel_text), 0);
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)
 			&& !key)
-			main_add_books_to_bible(model, selected, mod);
+			add_books_to_bible(model, selected, mod);
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)
 			&& strstr(key,"book:"))
-			main_add_chapters_to_book(model, selected, key);
+			add_chapters_to_book(model, selected, key);
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)
 			&& strstr(key,"chapter:"))
-			main_add_verses_to_chapter(model, selected, key);
+			add_verses_to_chapter(model, selected, key);
 		if(key)
 			gui_url_handler(key, TRUE);
 		else
 			gui_change_module_and_key(mod, settings.currentverse);
 		break;
-	case 1:
+	case COMMENTARY_TYPE:
 		settings.comm_showing = TRUE;
 		gui_change_module_and_key(mod, settings.currentverse);
 		break;
-	case 2:
+	case DICTIONARY_TYPE:
 		gtk_notebook_set_current_page
 		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
 		gui_change_module_and_key(mod, settings.dictkey);
 		break;
-	case 3:
+	case BOOK_TYPE:
 		main_set_book_mod(mod, (key)?atol(key):0);
-		g_warning("main_mod_treeview_button_one = %s" ,key);
+		//g_warning("main_mod_treeview_button_one = %s" ,key);
 		if (!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)
 			&& !key) {
-			main_add_children_to_tree(model, 
+			add_children_to_tree(model, 
 					selected,
 				 	mod, 
 					gbs_get_treekey_offset());
 		}
 		if (!gtk_tree_model_iter_has_child (model, &selected)
 			    && gbs_treekey_has_children(atoi(key))) {
-				main_add_children_to_tree(model, 
+				add_children_to_tree(model, 
 				    		     selected,
 						     mod,
 				    		     atol(key));
@@ -437,7 +525,7 @@ void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
  *   add_language_folder
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/sidebar.h"
  *
  *   void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
  *			 gchar * language)
@@ -494,7 +582,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
  *   add_module_to_language_folder
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/sidebar.h"
  *
  *   void add_module_to_language_folder(GtkTreeModel * model,
  *		      GtkTreeIter iter, gchar * language, gchar * module_name)
@@ -545,12 +633,12 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 
 /******************************************************************************
  * Name
- *   load_module_tree
+ *   main_load_module_tree
  *
  * Synopsis
- *   #include "gui/utilities.h"
+ *   #include "main/sidebar.h"
  *
- *   void load_module_tree(GtkWidget * tree)
+ *   void main_load_module_tree(GtkWidget * tree)
  *
  * Description
  *   
@@ -592,6 +680,7 @@ void main_load_module_tree(GtkWidget * tree)
 		   COL_MODULE, _("Parallel View"),
 		   COL_OFFSET, _("Parallel View"), 
 		   -1);
+		   
 	gtk_tree_store_append(store, &child_iter, &iter);
 	gtk_tree_store_set(store, &child_iter, 
 		   COL_OPEN_PIXBUF, pixbufs->pixbuf_helpdoc,
@@ -706,6 +795,22 @@ void main_load_module_tree(GtkWidget * tree)
 				GTK_TREE_MODEL(store));
 }
 
+
+/******************************************************************************
+ * Name
+ *  main_add_mod_tree_columns
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_add_mod_tree_columns(GtkTreeView * tree)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
 
 void main_add_mod_tree_columns(GtkTreeView * tree)
 {

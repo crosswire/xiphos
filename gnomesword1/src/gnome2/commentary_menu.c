@@ -423,7 +423,7 @@ static void on_prev_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
 	gchar *key;
 
-	set_commentary_key(c->mod_name, c->key);
+	main_set_commentary_key(c->mod_name, c->key);
 	key = navigate_commentary(c->mod_name, 0);
 	if (key) {
 		if (c->is_dialog)
@@ -454,7 +454,7 @@ static void on_next_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
 	gchar *key;
 
-	set_commentary_key(c->mod_name, c->key);
+	main_set_commentary_key(c->mod_name, c->key);
 	key = navigate_commentary(c->mod_name, 1);
 	if (key) {
 		if (c->is_dialog)
