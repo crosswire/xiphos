@@ -323,15 +323,15 @@ initSWORD(GtkWidget *mainform)
 		 	 //-- if driver is RawFiles			
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
 				percomMod = (*it).second;
-				percomtextMod = (*it).second;
+				//percomtextMod = (*it).second;
 				 if(settings->formatpercom) {
-					 percomMod->Disp(FPNDisplay);  //-- if TRUE use formatted display
-					 percomtextMod->Disp(percomtextDisplay);
+					 percomMod->Disp(percomDisplay);  //-- if TRUE use formatted display
+					// percomtextMod->Disp(percomtextDisplay);
 				 } else percomMod->Disp(percomDisplay);                     //-- else standard display
 				 percommods = g_list_append(percommods,percomMod->Name());
 				 usepersonalcomments = TRUE; //-- used by verseChange function (gs_sword.cpp)
 				 percomMod->SetKey(settings->currentverse);
-				 percomtextMod->SetKey(settings->currentverse);
+				 //percomtextMod->SetKey(settings->currentverse);
 				 gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
 			} 	                                                 //-- have at least one personl module
 	  	}
@@ -363,7 +363,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	int l;
 	GList *mods;
 	
-	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
+	if(noteModified){ //-- save any changes to personal notes		
 		if(autoSave){                          //-- if we are in edit mode
 			savenoteHTML(MainFrm); 	//-- save if text in note window has changed			
 		}
@@ -414,20 +414,20 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 		endHTML(lookup_widget(MainFrm,"textComp1"));
 	}
 	//---------------------------------------------------------------- change personal notes editor
-	if(settings->notebook3page == 1){ 		
-		if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"tbtnFollow"))->active){ //-- if personal notes follow button is active (on)			
-			if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && (!autoSave)){
+	if(gtk_notebook_get_current_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3"))) == 1) {     //if(settings->notebook3page == 1){ 		
+		//if(TRUE){ //-- if personal notes follow button is active (on)			
+			if(!autoSave) {
 					//-- do nothing
 			}else{
 				if(usepersonalcomments && percomMod){
 					percomMod->SetKey(current_verse); //-- set personal module to current verse
-					percomtextMod->SetKey(current_verse); //-- set personal module to current verse
+					//percomtextMod->SetKey(current_verse); //-- set personal module to current verse
 					percomMod->Display();            //-- show change
-					percomtextMod->Display();            //-- show change
+					//percomtextMod->Display();            //-- show change
 					noteModified = false; //-- we just loaded comment so it is not modified	
 				}
 			}
-		}
+		//}
 	}
 	if(settings->notebook3page == 0 && autoscroll){
 		if(curcomMod){	
@@ -744,16 +744,16 @@ navcurcomModSWORD(gint direction)  //-- navigate the current commentary module
 void
 editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit button
 {
- 	if(editbuttonactive){
+ 	//if(editbuttonactive){
 		percomMod->Disp(percomDisplay);
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
-        } else {	
+   /*     } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
 		}
-	}
+	}*/
 	percomMod->Display(); 
-	percomtextMod->Display(); 
+	//percomtextMod->Display(); 
 }
 
 //-------------------------------------------------------------------------------------------
@@ -765,7 +765,7 @@ savenoteSWORD(const gchar *data) //-- save personal comments
 		*percomMod << data; //-- save note!
 	}
 	percomMod->Display(); 
-	percomtextMod->Display(); 
+	//percomtextMod->Display(); 
 	noteModified = false; 
 }
 
@@ -775,7 +775,7 @@ deletenoteSWORD(void)  //-- delete personal comment
 {
 	percomMod->deleteEntry();        //-- delete note
 	percomMod->Display();        //-- show change
-	percomtextMod->Display(); 
+	//percomtextMod->Display(); 
 }
 
 //-------------------------------------------------------------------------------------------
@@ -837,8 +837,8 @@ dictchangekeySWORD(gint direction)   //-- dict change key up or down -- arrow bu
 void
 changepercomModSWORD(gchar* modName)   //-- change personal comments module
 {	
-	GtkWidget *notebook, //-- pointer to a notebook widget
-                *label;    //-- pointer to a label widget
+	/*GtkWidget *notebook, //-- pointer to a notebook widget
+                *label;    //-- pointer to a label widget */
 	ModMap::iterator it; //-- module iterator
 	
         if(noteModified) return;//savenoteSWORD(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
@@ -849,10 +849,10 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 		if(havebible) percomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
 		//percomMod->Display(); //-- show the change 	
 		//-- let's change the notebook label to match our percomMod (current personal comments module)
-  	        notebook = lookup_widget(MainFrm,"notebook3");  //-- get the notebook our page is in]
-		label = gtk_label_new (percomMod->Name());   //-- create new label with mod name as the text
-		gtk_widget_show (label);   //-- make is visible
-		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label); //-- put label on personal comments page
+  	        //notebook = lookup_widget(MainFrm,"notebook3");  //-- get the notebook our page is in]
+		//label = gtk_label_new (percomMod->Name());   //-- create new label with mod name as the text
+		//gtk_widget_show (label);   //-- make is visible
+		//gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label); //-- put label on personal comments page
 		noteModified = false;
 	}	
 }

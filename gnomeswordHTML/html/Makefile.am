@@ -5,6 +5,7 @@ INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
 	-I$(top_srcdir) \
 	-I$(top_srcdir)/html \
+	-I$(top_srcdir)/src \
         -I /usr/include/gtkhtml \
 	$(EXTRA_GNOME_CFLAGS)
 

@@ -42,7 +42,11 @@ typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
 
 struct _GtkHTMLControlData {
 	GtkHTML   *html;
-	GtkWidget *vbox, *cpicker, *combo, *notebook;
+	GtkWidget 	*vbox, 
+				*cpicker, 
+				*combo, 
+				*notebook,
+				*statusbar;
 
 	GtkHTMLEditPropertiesDialog   *properties_dialog;
 	GList                         *properties_types;
@@ -52,7 +56,9 @@ struct _GtkHTMLControlData {
 	GtkHTMLReplaceDialog    *replace_dialog;
 
 	/* html/plain mode settings */
-	gboolean format_html;
+	gboolean 	format_html,
+				html_modified,
+				note_editor;
 	HTMLGdkPainter *gdk_painter;
 	HTMLGdkPainter *plain_painter;
 
@@ -62,6 +68,9 @@ struct _GtkHTMLControlData {
 	/* button release signal id */
 	guint releaseId;
 
+	/* filename */
+	gchar *filename;
+	
 	/* toolbars */
 	GtkWidget *toolbar_commands, 
 			*toolbar_style,

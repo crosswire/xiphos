@@ -37,6 +37,7 @@ struct _editor {
 			   *htmlwidget,
 			   *statusbar,
 			   *text;
+	gboolean   note_editor;
 }; 
 
 
