@@ -189,6 +189,26 @@
     <handler>on_mainwindow_destroy</handler>
     <last_modification_time>Sat, 04 Mar 2000 02:26:56 GMT</last_modification_time>
   </signal>
+  <signal>
+    <name>size_allocate</name>
+    <handler>on_mainwindow_size_allocate</handler>
+    <last_modification_time>Wed, 24 Oct 2001 18:38:20 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>draw</name>
+    <handler>on_mainwindow_draw</handler>
+    <last_modification_time>Wed, 24 Oct 2001 18:38:39 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>size_request</name>
+    <handler>on_mainwindow_size_request</handler>
+    <last_modification_time>Wed, 24 Oct 2001 18:39:17 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>state_changed</name>
+    <handler>on_mainwindow_state_changed</handler>
+    <last_modification_time>Wed, 24 Oct 2001 18:39:27 GMT</last_modification_time>
+  </signal>
   <title>GnomeSword - Bible Study Software</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
