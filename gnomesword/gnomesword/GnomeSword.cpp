@@ -154,7 +154,7 @@ gint    groupnum1 = 0,
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- apps main form
-	GtkWidget *menu1,  //-- main text window's popup menu
+	//GtkWidget *menu1,  //-- main text window's popup menu
 	GtkWidget *menu2,  //-- 1st inetrlinear window's popup menu
 	GtkWidget *menu3,  //-- 2nd inetrlinear window's popup menu
 	GtkWidget *menu4,  //-- 3rd inetrlinear window's popup menu
@@ -176,7 +176,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		*menu, //-- ??
 		*menuNE,
 		*menuCom,
-		*menuDict;
+		*menuDict,
+		*menuBible;
 		//iBibletext=0; //--
 	char    
 		menuName[64], //--  for menu item label
@@ -273,8 +274,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textDict")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComments")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"text3")) , TRUE );	
-	gnome_popup_menu_attach(menu1,lookup_widget(mainform,"moduleText"),(gchar*)"1");
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"text3")) , TRUE );
 	
         //--------------------------------------------------------------- create shortcut bar groups
 	if(settings->showtextgroup){
@@ -319,7 +319,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sprintf(rememberlastitem,"%s%s","_View/Main Window/",curMod->Name());	
 			sprintf(aboutrememberlastitem,"%s%s","_Help/About Sword Modules/Bible Texts/",curMod->Name());			
 			//---------------------------------------------------------------- add to popup menu
-			additemtopopupmenu(MainFrm, menu1, curMod->Name(), (GtkMenuCallback)on_mainText_activate );
+			//additemtopopupmenu(MainFrm, menu1, curMod->Name(), (GtkMenuCallback)on_mainText_activate );
 			//------------------------------------------------------- set GTK display for each module
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	        	if(sit !=mainMgr->config->Sections.end()){
@@ -580,9 +580,12 @@ initSword(GtkWidget *mainform,  //-- apps main form
  	/* create pop menu for commentaries */
 	menuCom = create_pmComments2(commentarymods);
 	/* create popup menu for dict/lex window */
-	menuDict = create_pmDict(dictionarymods); 	
+	menuDict = create_pmDict(dictionarymods);
+	/* create popup menu for Bible window */
+	menuBible = create_pmBible(biblemods);	
+		
 	//-------------------------------------------------------------- attach popup menus
-	
+	gnome_popup_menu_attach(menuBible,lookup_widget(mainform,"moduleText"),(gchar*)"1");
 	gnome_popup_menu_attach(menu2,lookup_widget(mainform,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(mainform,"textComp2"),(gchar*)"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(mainform,"textComp3"),(gchar*)"1");
