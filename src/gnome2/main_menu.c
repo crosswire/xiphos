@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * main_menu.c - creation of and call backs for gnomesword main menu
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,32 +26,25 @@
 #include <gnome.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
+#include "gui/about_gnomesword.h"
+#include "gui/about_sword.h"
+#include "gui/gnomesword.h"
+#include "gui/hints.h"
+#include "gui/history.h"
+#include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
 #include "gui/sidebar.h"
-#include "gui/bibletext_dialog.h"
-#include "gui/commentary_dialog.h"
-#include "gui/dictlex_dialog.h"
-#include "gui/gbs_dialog.h"
-#include "gui/history.h"
-#include "gui/html.h"
-#include "gui/utilities.h"
-#include "gui/about_modules.h"
-#include "gui/gnomesword.h"
+#include "gui/sidebar_dialog.h"
 #include "gui/search_dialog.h"
 #include "gui/studypad_dialog.h"
-#include "gui/about_gnomesword.h"
-#include "gui/about_sword.h"
-#include "gui/hints.h"
+#include "gui/utilities.h"
 #include "gui/widgets.h"
-#include "gui/sidebar_dialog.h"
 
-#include "main/sword.h"
 #include "main/bibletext.h"
 #include "main/lists.h"
-
-GtkWidget *htmlTexts;
+#include "main/sword.h"
 
 
 
@@ -323,95 +316,6 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 	gtk_widget_show(AboutBox);
 }
 
-/******************************************************************************
- * Name
- *  
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   v	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void on_bibletext_item_activate(GtkMenuItem * menuitem,
-				       gpointer user_data)
-{
-	gui_open_bibletext_dialog((gchar *) user_data);
-}
-
-/******************************************************************************
- * Name
- *  
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   v	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void on_commentary_item_activate(GtkMenuItem * menuitem,
-					gpointer user_data)
-{
-	gui_open_commentary_dialog((gchar *) user_data);
-}
-
-/******************************************************************************
- * Name
- *   on_dictlex_item_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void on_dictlex_item_activate(GtkMenuItem * menuitem,
-				     gpointer user_data)
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void on_dictlex_item_activate(GtkMenuItem * menuitem,
-				     gpointer user_data)
-{
-	gui_open_dictlex_dialog((gchar *) user_data);
-}
-
-/******************************************************************************
- * Name
- *   on_book_item_activate
- *
- * Synopsis
- *   #include "gui/main_menu.h"
- *
- *   void on_book_item_activate(GtkMenuItem * menuitem,
-				  gpointer user_data)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void on_book_item_activate(GtkMenuItem * menuitem,
-				  gpointer user_data)
-{
-	gui_open_gbs_dialog((gchar *) user_data);
-}
 
 /******************************************************************************
  * Name
@@ -574,26 +478,6 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
  * gnome menu structures
  */
 
-static GnomeUIInfo open_bibletext_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo open_commentary_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo open_dict_lex_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo open_book_dialog1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Open StudyPad"),
@@ -601,32 +485,7 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 open_studypad, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,/*
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Open Bibletext Dialog"),
-	 NULL,
-	 open_bibletext_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_RED,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Open Commentary Dialog"),
-	 NULL,
-	 open_commentary_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_BLUE,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Open Dictionary Dialog"),
-	 NULL,
-	 open_dict_lex_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_GREEN,
-	 0, (GdkModifierType) 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Open Book Dialog"),
-	 NULL,
-	 open_book_dialog1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_BOOK_YELLOW,
-	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,*/
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit_activate, NULL),
 	GNOMEUIINFO_END
 };
@@ -719,65 +578,17 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("Attach/Detach Shortcut Bar"),
+	 GNOME_APP_UI_ITEM, N_("Attach/Detach Sidebar"),
 	 NULL,
 	 gui_attach_detach_sidebar, NULL, NULL, 
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Show/Hide Shortcut Bar"),
+	 GNOME_APP_UI_ITEM, N_("Show/Hide Sidebar"),
 	 NULL,
 	 gui_sidebar_showhide, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo bible_texts1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo commentaries1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo dictionaries_lexicons1_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo books_menu_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo about_sword_modules1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Bible Texts"),
-	 N_("Information about Bible texts"),
-	 bible_texts1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Commentaries"),
-	 NULL,
-	 commentaries1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Dictionaries-Lexicons"),
-	 NULL,
-	 dictionaries_lexicons1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, N_("Books"),
-	 NULL,
-	 books_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
 	GNOMEUIINFO_END
 };
 
