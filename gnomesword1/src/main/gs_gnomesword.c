@@ -99,60 +99,60 @@ static gchar *update_nav_controls(gchar * key);
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
-void init_gnomesword(SETTINGS * s)
+void init_gnomesword(void)
 {	
 	
 
 	/*
 	 *  setup shortcut bar 
 	 */
-	gui_setup_shortcut_bar(s);
+	gui_setup_shortcut_bar(&settings);
 	/*
 	 *  create popup menus -- gs_menu.c 
 	 */
-	createpopupmenus(s, get_list(TEXT_DESC_LIST),get_list(OPTIONS_LIST));
+	createpopupmenus(&settings, get_list(TEXT_DESC_LIST),get_list(OPTIONS_LIST));
 	/*
 	 *  setup Bible text gui 
 	 */
 	if(havebible)
-		setup_text(s,get_list(TEXT_LIST));
+		setup_text(&settings,get_list(TEXT_LIST));
 
 	/*
 	 *  setup commentary gui support 
 	 */
 	if(havecomm)
-		setup_commentary(s,get_list(COMM_LIST));
+		setup_commentary(&settings,get_list(COMM_LIST));
 	/*
 	 *  setup personal comments gui support 
 	 */
 	if(havepercomm)
-		setup_percomm(s,get_list(PERCOMM_LIST));
+		setup_percomm(&settings,get_list(PERCOMM_LIST));
 	/*
 	 *  setup general book gui support 
 	 */
 	if(havebook)
-		setup_gbs(s,get_list(GBS_LIST));
+		setup_gbs(&settings,get_list(GBS_LIST));
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
 	if(havedict)
-		setup_dictlex(s,get_list(DICT_LIST));
+		setup_dictlex(&settings,get_list(DICT_LIST));
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 	
-	s->settingslist = NULL;
-	s->displaySearchResults = FALSE;
+	settings.settingslist = NULL;
+	settings.displaySearchResults = FALSE;
 	/*
 	 *  add modules to about modules menus -- gs_menu.c 
 	 */
-	addmodstomenus(s,
+	addmodstomenus(&settings,
 		       get_list(TEXT_LIST),
 		       get_list(COMM_LIST), 
 		       get_list(DICT_LIST), 
 		       get_list(GBS_LIST));
 		
-	s->versestyle_item =
-	    additemtooptionmenu(s->app, _("_Settings/"),
+	settings.versestyle_item =
+	    additemtooptionmenu(settings.app, _("_Settings/"),
 				_("Verse Style"), (GtkMenuCallback)
 				on_verse_style1_activate);
 
@@ -169,21 +169,21 @@ void init_gnomesword(SETTINGS * s)
 	/* 
 	 * FIXME: maybe we need to move the devotional ? 
 	 */
-	if (s->showdevotional) {
-		display_devotional(s);
+	if (settings.showdevotional) {
+		display_devotional(&settings);
 	}
 	
 	g_print("done\n");
 }
 
-void gnomesword_shutdown(SETTINGS * s)
+void gnomesword_shutdown(void)
 {
 	GtkWidget *msgbox;
 	gint answer = 0;
 
 	
 	/* if study pad file has changed since last save */
-	if (s->modifiedSP) {
+	if (settings.modifiedSP) {
 		msgbox = gui_create_info_box();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer =
@@ -191,10 +191,9 @@ void gnomesword_shutdown(SETTINGS * s)
 
 		switch (answer) {
 		case 0:
-			if (s->studypadfilename)
-				save_file_program_end(s->html_studypad,
-						      s->
-						      studypadfilename);
+			if (settings.studypadfilename)
+				save_file_program_end(settings.html_studypad,
+						      settings.studypadfilename);
 			break;
 		default:
 			break;
@@ -202,10 +201,10 @@ void gnomesword_shutdown(SETTINGS * s)
 	}
 	
 	/* shutdown the sword stuff */
-	backend_shutdown(s);
+	backend_shutdown();
 	
 	shutdown_list();
-	g_list_free(s->settingslist);
+	g_list_free(settings.settingslist);
 	
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
@@ -302,7 +301,7 @@ void UpdateChecks(SETTINGS * s)
 
 	else if (!s->showshortcutbar && s->showdevotional) {
 		gtk_widget_show(s->shortcut_bar);
-		on_btnSB_clicked(NULL, &settings);
+		gui_shortcutbar_showhide();
 	}
 
 	else {
@@ -943,8 +942,9 @@ int get_verse_from_key(char *key)
 
 void save_properties(gboolean use_default)
 {
-	backend_save_properties(&settings, use_default);
+	backend_save_properties(use_default);
 }
+
 GList *do_search(gpointer *usr_data)
 {
 	return backend_do_search(&settings, usr_data);
