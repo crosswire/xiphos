@@ -59,6 +59,7 @@
  externals
 ***********************************************************************************************/
 extern SWModule *curMod, *curcomMod, *percomMod;
+extern SWModule *curbookMod;
 extern gboolean firstsearch;
 extern SETTINGS *settings;
 extern GtkWidget *clistSearchResults;
@@ -77,7 +78,7 @@ static SWModule
 
 //-------------------------------------------------------------------------------------------
 GList*   /* search Bible text or commentaries */
-searchSWORD (GtkWidget *widget, SETTINGS *s)	
+searchSWORD (SETTINGS *s, SEARCH_OPT *so)	
 {	
 	
 	VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
@@ -95,13 +96,15 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	        *regexSearch,	//-- do we want to use regular expression search - radio button
 	        *phraseSearch,	//-- do we want to use phrase seach - radio button
 	        *caseSensitive,	//-- do we want search to be case sensitive - check box
-	       	*comToggle,	//-- do we want to search current commentary - check box
+	       //	*comToggle,	//-- do we want to search current commentary - check box
+	       //  *percomToggle,	//-- do we want to search personal commentary - check box
+	       //	*bookToggle,	//-- do we want to search current book - check box	
 	       	*bounds,	//-- do we want to use bounds for our search - check box
 	       	*lowerbound,	//-------- lower bounds entry widget
 	        *upperbound,	//-------- upper bounds entry widget
 	        *lastsearch,	//-- use verses from last search for bounds of this search
-	        *textWindow,	//-- text widget to display verses
-	       *percomToggle;	//-- do we want to search personal commentary - check box	
+	        *textWindow;	//-- text widget to display verses
+		
 	const gchar	
 		*resultText;   //-- temp storage for verse found
 	gchar     
@@ -124,57 +127,73 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	searchMgr = new SWMgr();	//-- create sword mgr
 	
 	searchMod = NULL;
-	searchText = lookup_widget (widget, "entrySearch");	//-- pointer to text entry
-	regexSearch = lookup_widget (widget, "rbRegExp");	//-- pointer to radio button
-	phraseSearch = lookup_widget (widget, "rbPhraseSearch");	//-- pointer to radio button
-	caseSensitive = lookup_widget (widget, "ckbCaseSensitive");	//-- pointer to check box
-	bounds = lookup_widget (widget, "rrbUseBounds");	//-- pointer to check box
-	lastsearch = lookup_widget (widget, "rbLastSearch");	//-- pointer to radio button
-	comToggle = lookup_widget (widget, "ckbCommentary");	//-- pointer to check box
-	percomToggle = lookup_widget (widget, "ckbPerCom");	//-- pointer to check box   
+	searchText = lookup_widget (s->app, "entrySearch");	//-- pointer to text entry
+	regexSearch = lookup_widget (s->app, "rbRegExp");	//-- pointer to radio button
+	phraseSearch = lookup_widget (s->app, "rbPhraseSearch");	//-- pointer to radio button
+	caseSensitive = lookup_widget (s->app, "ckbCaseSensitive");	//-- pointer to check box
+	bounds = lookup_widget (s->app, "rrbUseBounds");	//-- pointer to check box
+	lastsearch = lookup_widget (s->app, "rbLastSearch");	//-- pointer to radio button
+	//comToggle = lookup_widget (s->app, "ckbCommentary");	//-- pointer to check box
+	//percomToggle = lookup_widget (s->app, "ckbPerCom");	//-- pointer to check box
+	//bookToggle = lookup_widget (s->app, "ckbGBS");	//-- pointer to check box   
 
-	if (GTK_TOGGLE_BUTTON (comToggle)->active) {	/* if true search commentary */	  
+	if (GTK_TOGGLE_BUTTON (so->ckbCommentary)->active) {	/* if true search commentary */	  
 		  it = searchMgr->Modules.find (curcomMod->Name ());	/* find commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current commentary module */
 			    tmpMod = (*it).second;
 		  }
-	} else if (GTK_TOGGLE_BUTTON (percomToggle)->active) {	/* if true search personal commentary */	  
+	} 
+	
+	else if (GTK_TOGGLE_BUTTON (so->ckbPerCom)->active) {	/* if true search personal commentary */	  
 		  it = searchMgr->Modules.find (percomMod->Name ());	/* find personal commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
 			    tmpMod = (*it).second;
 		  }
-	} else {			/* if neither commertary nor personal check box checked */	 
-		  it = searchMgr->Modules.find (curMod->Name());	/* find personal commentary module */
-//		g_warning(curMod->Name());
+	} 
+	
+	else if (GTK_TOGGLE_BUTTON (so->ckbGBS)->active) {	/* if true search personal commentary */	  
+		  it = searchMgr->Modules.find(curbookMod->Name());	/* find personal commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
-//		g_warning(searchMod->Name());
 			    tmpMod = (*it).second;
-//		g_warning(tmpMod->Name());
+		  }
+	} 
+	
+	else {			/* if neither commertary nor personal check box checked */	 
+		  it = searchMgr->Modules.find (curMod->Name());	/* find personal commentary module */
+		  if (it != searchMgr->Modules.end ()) {
+			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
+			    tmpMod = (*it).second;
 		  }
 	}
 	
 	if (GTK_TOGGLE_BUTTON (bounds)->active) {
-		  lowerbound = lookup_widget (widget, "entryLower");	/* get Lower bounds entry widget from search form */
-		  upperbound = lookup_widget (widget, "entryUpper");	/* get Upper bounds entry widget from search form */
+		  lowerbound = lookup_widget (s->app, "entryLower");	/* get Lower bounds entry widget from search form */
+		  upperbound = lookup_widget (s->app, "entryUpper");	/* get Upper bounds entry widget from search form */
 		  searchScopeLowUp.ClearBounds ();	/* clear old bounds */
 		  searchScopeLowUp.LowerBound (gtk_entry_get_text (GTK_ENTRY (lowerbound)));	/* read lower bounds entry and set lower bounds for search */
 		  searchScopeLowUp.UpperBound (gtk_entry_get_text (GTK_ENTRY (upperbound)));	/* read upper bounds entry and set upper bounds for search */
 		  currentScope = &searchScopeLowUp;	/* set scope of search to use bounds */
-	} else if (GTK_TOGGLE_BUTTON (lastsearch)->active) {	/* check to see if we want to use results of search last for this search */	  
+	} 
+	
+	else if (GTK_TOGGLE_BUTTON (lastsearch)->active) {	/* check to see if we want to use results of search last for this search */	  
 		  currentScope = &searchScopeList;	//-- if we do _ move searchlist into currentScope
-	} else {
+	} 
+	
+	else {
 		  searchScopeLowUp.ClearBounds ();	//-------- clear old bounds
 		  searchScopeList.ClearList ();	//------------ clear scope search list
 		  currentScope = 0;	//------------ clear scope
-	  }
+	}
+	
 	char progressunits = 70;
 	count = 0;		/* we have not found anything yet */
 	printed = 0;
 	entryText = gtk_entry_get_text (GTK_ENTRY (searchText));	//-- what to search for
 	sprintf(s->searchText, "%s",entryText);
+	
 	if (searchMod) {		/* must have a good module - not null */	 
                 int searchType =
 			  GTK_TOGGLE_BUTTON (regexSearch)->
@@ -228,6 +247,7 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 			++count;	
                 }
         } 
+	
 	if(count){
 		ModMap::iterator it; 	
 		it = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
@@ -244,6 +264,7 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 1);
 		showSBVerseList(s);
 	}
+	
 	beginHTML(s->htmlRP, TRUE);
 	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
 				count, s->found_color,s->searchText,
@@ -314,12 +335,29 @@ void shutdownsearchresultsSBSW(void)
 }
 
 void
-changesearchresultsSBSW(SETTINGS *s, gchar *url)
+changesearchresultsSW_SEARCH(SETTINGS *s, SEARCH_OPT *so, gchar *url)
 {	
 	searchresultssbMod->SetKey(url);
 	searchresultssbMod->Display();
 	
-	if(s->showinmain)
-		changeVerseSWORD(url);	
+	if(s->showinmain) {
+		if(GTK_TOGGLE_BUTTON(so->ckbCommentary)->active){
+			curcomMod->SetKey(url);
+			curcomMod->Display();
+		}
+				
+		else if(GTK_TOGGLE_BUTTON(so->ckbPerCom)->active) {
+			percomMod->SetKey(url);
+			percomMod->Display();
+		}
+			
+		else if(GTK_TOGGLE_BUTTON(so->ckbGBS)->active) {
+			curbookMod->SetKey(url);
+			curbookMod->Display();
+		}
+			
+		else
+			changeVerseSWORD(url);	
+	}
 }
 

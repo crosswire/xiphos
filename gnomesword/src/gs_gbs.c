@@ -91,14 +91,15 @@ void addbooktoCTreeGS_GBS(SETTINGS * s, GList * books)
 GtkWidget *setupGBS(SETTINGS * s, GList * books)
 {
 	GtkWidget *pmGbs;
-
+	
 	scrolledwindow = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow",
 				 scrolledwindow,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow);
-
+	
+	
 	s->ctree_widget_books = gtk_ctree_new(3, 0);
 	gtk_widget_ref(s->ctree_widget_books);
 	gtk_object_set_data_full(GTK_OBJECT(s->app),
@@ -114,16 +115,11 @@ GtkWidget *setupGBS(SETTINGS * s, GList * books)
 				   80);
 	gtk_clist_set_column_width(GTK_CLIST(s->ctree_widget_books), 2,
 				   280);
-
-
 	/* load books */
-	//loadBookListSW_GBS(s);
-	//addbooktoCTreeGS_GBS(s, books);
 	loadBookListSW_GBS(s);
 	/* create and attach popup menu */
 	pmGbs = create_pmGBS();
 	gnome_popup_menu_attach(pmGbs, s->ctree_widget_books, s);
-
 
 	gtk_signal_connect(GTK_OBJECT(s->ctree_widget_books), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctreeBooks_select_row), s);
