@@ -494,7 +494,14 @@ void load_settings_structure(void)
 
 
 	settings.shortcutbar_width =
-	    atoi(xml_get_value("layout", "shortcutbar"));
+		atoi(xml_get_value("layout", "shortcutbar"));
+	if(xml_get_value("layout", "vltoppaneheight"))
+		settings.verselist_toppane_height =
+			atoi(xml_get_value("layout", "vltoppaneheight"));
+	else {
+		xml_add_new_item_to_section("layout", "vltoppaneheight", "210");
+		settings.verselist_toppane_height = 210;
+	}
 	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
 	settings.gs_width = atoi(xml_get_value("layout", "width"));
 	

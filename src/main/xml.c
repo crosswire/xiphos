@@ -525,6 +525,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "textpane", "240");
 	xmlNewTextChild(section_node, NULL, "shortcutbar", "178");
 	xmlNewTextChild(section_node, NULL, "uperpane", "210");
+	xmlNewTextChild(section_node, NULL, "vltoppaneheight", "210");
 
 
 	section_node = xmlNewChild(root_node, NULL, "lexicons", NULL);

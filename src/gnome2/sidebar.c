@@ -958,6 +958,39 @@ static gboolean on_treeview_button_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
+ *   vpaned_srch_rslt_button_release_event
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gboolean vpaned_srch_rslt_button_release_event(GtkWidget *widget,
+ *                           GdkEventButton  *event, gpointer user_data)
+ *
+ * Description
+ *   This function is called when the pane in the search result window is
+ *   resized.  It saves the position in the settings.
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean vpaned_srch_rslt_button_release_event(GtkWidget * widget,
+					       GdkEventButton * event,
+					       gpointer user_data)
+{
+	gint panesize;
+	gchar layout[80];
+
+	panesize = gtk_paned_get_position(GTK_PANED(widget));
+
+	settings.verselist_toppane_height = panesize;
+	sprintf(layout, "%d", settings.verselist_toppane_height);
+	xml_set_value("GnomeSword", "layout", "vltoppaneheight", layout);
+}
+
+
+/******************************************************************************
+ * Name
  *   on_save_list_as_bookmarks_activate
  *
  * Synopsis
@@ -1162,7 +1195,10 @@ static void create_search_results_page(GtkWidget * notebook)
 	gtk_widget_show(vpaned_srch_rslt);
 	gtk_box_pack_start(GTK_BOX(vbox), vpaned_srch_rslt, TRUE,
 			   TRUE, 0);
-	gtk_paned_set_position(GTK_PANED(vpaned_srch_rslt), 100);
+	if (settings.verselist_toppane_height == 0)
+		settings.verselist_toppane_height = 100;
+	gtk_paned_set_position(GTK_PANED(vpaned_srch_rslt),
+				settings.verselist_toppane_height);
 
 	frame3 = gtk_frame_new(NULL);
 	gtk_widget_show(frame3);
@@ -1200,6 +1236,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	gtk_widget_show(frame4);
 	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), frame4, TRUE,
 			TRUE);
+//	gtk_widget_set_size_request (frame4, 100, -1);
 
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app),
@@ -1232,6 +1269,10 @@ static void create_search_results_page(GtkWidget * notebook)
 			 "button_press_event",
 			 G_CALLBACK(on_treeview_button_press_event),
 			 NULL);
+	g_signal_connect(GTK_OBJECT(vpaned_srch_rslt),
+			"button_release_event",
+			G_CALLBACK(vpaned_srch_rslt_button_release_event),
+			NULL);
 }
 
 
