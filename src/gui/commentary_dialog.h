@@ -27,7 +27,8 @@ extern "C" {
 #endif
 
 #include "gui/commentary.h"
-
+	
+void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_on_lookup_commentary_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
 void gui_close_comm_dialog(COMM_DATA * vc);
