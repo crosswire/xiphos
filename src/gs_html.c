@@ -53,6 +53,7 @@ GtkWidget *htmlTexts;
 GtkWidget *htmlDict;
 GtkWidget *textDict;
 GtkWidget *htmlComments;
+GtkWidget *usehtml;
 
 extern GtkWidget *htmlVL;
 extern GtkWidget *MainFrm;
@@ -74,7 +75,11 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 	if (url == NULL)
 		gnome_appbar_set_status (GNOME_APPBAR (appbar1), "");
 	else{
-		if (*url == '#') {
+		if (*url == '@') {
+			++url;
+			//str = showfirstlineStrongsSWORD(atoi(url));
+			sprintf(buf,"Show %s in main window",url);
+		}else if (*url == '#') {
 			++url;
 			//str = showfirstlineStrongsSWORD(atoi(url));
 			sprintf(buf,"Go to Strongs %s",url);
@@ -108,7 +113,10 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar newmod[80], newref[80];
 	gint i=0;
 	
-	if(*url == '[')   {
+	if(*url == '@')   {
+		++url;
+		swapmodsSWORD((gchar*)url);
+	 } else if(*url == '[')   {
 		++url;
 		while(*url != ']') {
 			tmpbuf[i++] = *url;
@@ -236,6 +244,7 @@ static gint
 html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		    gpointer *data)
 {
+	usehtml = html;
 	switch (event->button) {
 	case 1:
 		break;
@@ -271,18 +280,54 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 /***************************************************************************************************
+ *lookup word in dict/lex module
+ ***************************************************************************************************/
+void on_html_lookup_word_activate(GtkMenuItem * menuitem,
+				       gpointer user_data)
+{
+	GtkWidget *entry, *notebook;
+	gchar *buf;
+	GtkHTML *html;
+	gint page;
+		
+	page = GPOINTER_TO_INT(user_data);	
+	if(page < 1000) {		
+		/* set notebook page */		
+		notebook = lookup_widget(MainFrm,"notebook4");
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),page ); 
+	}	
+	html = GTK_HTML(usehtml);
+	gtk_html_select_word(GTK_HTML(html));
+	buf = NULL;
+	buf = html->engine->clipboard
+	    ? html_object_get_selection_string(html->engine->clipboard)
+	    : html_engine_get_selection_string(html->engine);
+	if (buf){
+		entry = lookup_widget(MainFrm,"dictionarySearchText"); 
+		gtk_entry_set_text(GTK_ENTRY(entry), buf);	
+		//dictSearchTextChangedSWORD(buf);
+	}
+}
+/***************************************************************************************************
  *lookup selection in current dict/lex module
  ***************************************************************************************************/
 void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	GtkWidget *widget, *entry;
+	GtkWidget *entry, *notebook;
 	gchar *buf;
 	GtkHTML *html;
+	gint page;
 	
-	widget = lookup_widget(MainFrm, (gchar *) user_data);	
-	html = GTK_HTML(widget);
-	gtk_html_select_word(GTK_HTML(html));
+	page = GPOINTER_TO_INT(user_data);
+	if(page < 1000) {		
+		notebook = lookup_widget(MainFrm,"notebook4");
+		/* set notebook page */
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),page ); 
+	}
+	//widget = lookup_widget(MainFrm, htmlname);	
+	html = GTK_HTML(usehtml);
+	//gtk_html_select_word(GTK_HTML(html));
 	buf = NULL;
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
@@ -340,7 +385,8 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlCom")),
 			  htmlCommentaries);
 
-
+	usehtml = htmlTexts;
+	
 	htmlComments = gtk_html_new();
 	gtk_widget_ref(htmlComments);
 	gtk_object_set_data_full(GTK_OBJECT(app), "htmlComments",
@@ -381,21 +427,30 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
-
+	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
+			   
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect (GTK_OBJECT (htmlComments), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);	
+	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		    
 
 	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
 	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+	gtk_signal_connect(GTK_OBJECT(textComp1), "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		   
 			   
 	gtk_signal_connect (GTK_OBJECT (htmlDict), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+	gtk_signal_connect(GTK_OBJECT(htmlDict), "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		   
+			   		   
 }
 /***************************************************************************************************
  *beginHTML - start loading html widget

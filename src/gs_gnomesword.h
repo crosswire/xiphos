@@ -33,7 +33,8 @@ extern "C" {
 #if USE_SHORTCUTBAR	
 //#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
-	
+
+
 typedef struct _mods GS_MODS;
 struct _mods {
 	gchar	*name,

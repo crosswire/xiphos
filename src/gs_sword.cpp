@@ -40,7 +40,7 @@
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
-
+#include <gal/widgets/e-unicode.h>
 
 #include "sw_gbfhtml.h"
 #include "sw_thmlhtml.h"
@@ -404,14 +404,25 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 void
 updateinterlinearpage(void)
 {
+	GtkWidget *html_widget;
+	gchar tmpBuf[256];
+	gchar *utf8str;
+	gint utf8len;
+	
 	if(nbpages->notebook3page == 2){
-		beginHTML(lookup_widget(MainFrm,"textComp1"),TRUE);		
+		html_widget = lookup_widget(MainFrm,"textComp1");
+		beginHTML(html_widget,TRUE);
+		sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">");		
+		utf8str = e_utf8_from_gtk_string (html_widget, tmpBuf);
+		utf8len = g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(html_widget),utf8str , utf8len ); 
+		
 		changecomp1ModSWORD(settings->Interlinear1Module);
 		changecomp1ModSWORD(settings->Interlinear2Module);
 		changecomp1ModSWORD(settings->Interlinear3Module);
 		changecomp1ModSWORD(settings->Interlinear4Module);
 		changecomp1ModSWORD(settings->Interlinear5Module);
-		endHTML(lookup_widget(MainFrm,"textComp1"));
+		endHTML(html_widget);
 	}
 }
 //-------------------------------------------------------------------------------------------
@@ -533,58 +544,103 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	gtk_exit(0);           //-- exit	
 }
 
-//-------------------------------------------------------------------------------------------
+/*******************************************************************************
+ * toggle morphological tags on and off
+ * window - the window to effect
+ * choice - true = on, false = off
+ ******************************************************************************/
 void
-morphsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
+morphsSWORD(gint window, gboolean choice) //-- toogle strongs numbers for modules that have strongs
 {
-	if(choice){ //-- if choice is TRUE - we want strongs numbers	
-		mainMgr->setGlobalOption("Morphological Tags","On");  //-- turn strongs on 
-		mainMgr1->setGlobalOption("Morphological Tags","On");  //-- turn strongs on
-	}else{   //-- we don't want strongs numbers	
-		mainMgr->setGlobalOption("Morphological Tags","Off");	//-- turn strongs off
-		mainMgr1->setGlobalOption("Morphological Tags","Off");	//-- turn strongs off
-	}
-	settings->strongs = choice;   //-- store choice in settings
-	if(havebible){
-		curMod->Display(); //-- we need to show change
-		//comp1Mod->Display(); //-- we need to show change
+	switch(window){
+		case 0: // main text window	
+			if(choice){ 	
+				mainMgr->setGlobalOption("Morphological Tags","On");  
+			}else{   
+				mainMgr->setGlobalOption("Morphological Tags","Off");	
+			}
+			settings->strongs = choice;   //-- store choice in settings
+			if(havebible){
+				curMod->Display(); //-- we need to show change
+			}
+		break;
+		case 1: // interlinear window	
+			if(choice){ 
+				mainMgr1->setGlobalOption("Morphological Tags","On"); 
+			}else{   				
+				mainMgr1->setGlobalOption("Morphological Tags","Off");	
+			}
+			if(havebible){
+				updateinterlinearpage();
+			}
+		break;
 	}
 }
 
 
-//-------------------------------------------------------------------------------------------
+/*******************************************************************************
+ * toggle Strongs numbers on and off
+ * window - the window to effect
+ * choice - true = on, false = off
+ ******************************************************************************/
 void
-strongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
+strongsSWORD(gint window, gboolean choice) //-- toogle strongs numbers for modules that have strongs
 {
-	if(choice){ //-- if choice is TRUE - we want strongs numbers	
-		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 
-		mainMgr1->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on
-	}else{   //-- we don't want strongs numbers	
-		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off
-		mainMgr1->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off
-	}
-	settings->strongs = choice;   //-- store choice in settings
-	if(havebible){
-		curMod->Display(); //-- we need to show change
-		//comp1Mod->Display(); //-- we need to show change
+	switch(window){
+		case 0: // main text window	
+			if(choice){ //-- if choice is TRUE - we want strongs numbers	
+				mainMgr->setGlobalOption("Strong's Numbers","On");  
+			}else{   //-- we don't want strongs numbers	
+				mainMgr->setGlobalOption("Strong's Numbers","Off");
+			}
+			settings->strongs = choice;   //-- store choice in settings
+			if(havebible){
+				curMod->Display(); //-- we need to show change
+			}
+		break;
+		case 1: // interlinear window	
+			if(choice){ //-- if choice is TRUE - we want strongs numbers
+				mainMgr1->setGlobalOption("Strong's Numbers","On");  
+			}else{   //-- we don't want strongs numbers					
+				mainMgr1->setGlobalOption("Strong's Numbers","Off");
+			}
+			if(havebible){
+				updateinterlinearpage();
+			}
+		break;
 	}
 }
 
-//-------------------------------------------------------------------------------------------
+/*******************************************************************************
+ * toggle gbf footnotes on and off
+ * window - the window to effect
+ * choice - true = on, false = off
+ ******************************************************************************/
 void
-footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have them
+footnotesSWORD(gint window, gboolean choice) //-- toogle gbf footnotes for modules that have them
 {
-	if(choice){ //-- we want footnotes	
-		mainMgr->setGlobalOption("Footnotes","On"); //-- turn footnotes on
-		mainMgr1->setGlobalOption("Footnotes","On"); //-- turn footnotes on
-	}else{ //-- we don't want footnotes	
-		mainMgr->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
-		mainMgr1->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
-	}
-	settings->footnotes = choice;   //-- store choice in settings
-	if(havebible) {
-		curMod->Display(); //-- we need to show change
-		//comp1Mod->Display(); //-- we need to show change
+	switch(window){
+		case 0: // main text window	
+			if(choice){ 	
+				mainMgr->setGlobalOption("Footnotes","On");  
+			}else{   
+				mainMgr->setGlobalOption("Footnotes","Off");	
+			}
+			settings->strongs = choice;  
+			if(havebible){
+				curMod->Display(); 
+			}
+		break;
+		case 1: // interlinear window	
+			if(choice){ 
+				mainMgr1->setGlobalOption("Footnotes","On");  
+			}else{   				
+				mainMgr1->setGlobalOption("Footnotes","Off");	
+			}
+			if(havebible){
+				updateinterlinearpage();
+			}
+		break;
 	}
 }
 
@@ -1309,15 +1365,9 @@ gchar* getSDmodDescriptionSWORD(void)
  ******************************************************************************/
 void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
 {
-
-        ModMap::iterator it;
+	ModMap::iterator it;
         gchar *listitem;
-        //GdkCursor *cursor;
-        /*
-	gtk_widget_show(MainFrm);
-	cursor = gdk_cursor_new(GDK_CLOCK);
-	gdk_window_set_cursor(MainFrm->window,cursor);
-	*/
+        
         gtk_clist_clear( GTK_CLIST(clist)); //-- start with empty list	
         it = SDMgr->Modules.find(modName);  //-- find module we want to use
 	if (it != SDMgr->Modules.end()){
@@ -1327,11 +1377,13 @@ void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
 		SDMod->Display();	 //-- display new dict
 		
 		SDMod->Error();
+		//(*SDMod)=TOP;
 		for (;!SDMod->Error();(*SDMod)++){
 		        listitem = g_strdup((const char *)SDMod->KeyText()); //-- key to listitem
 		        //g_warning(listitem);
 		        gtk_clist_append(GTK_CLIST(clist) , &listitem); //-- listitem to list
-		        g_free(listitem);
+		       if(listitem)
+			       g_free(listitem);
 		}
 	}
 }
@@ -1523,3 +1575,33 @@ getSwordVerionSWORD(void)
 	retval = mainMgr->Version();
 	return retval;
 }
+
+/******************************************************************************
+ * swaps interlinear mod with mod in main text window
+ * intmod - interlinear mod name
+ ******************************************************************************/
+void
+swapmodsSWORD(gchar *intmod)
+{
+	gchar *modname;
+	
+	modname = curMod->Name();
+	if(!stricmp(settings->Interlinear5Module,intmod)) {
+		sprintf(settings->Interlinear5Module,"%s",modname);
+	}
+	if(!stricmp(settings->Interlinear4Module,intmod)) {
+		sprintf(settings->Interlinear4Module,"%s",modname);
+	}
+	if(!stricmp(settings->Interlinear3Module,intmod)) {
+		sprintf(settings->Interlinear3Module,"%s",modname);
+	}
+	if(!stricmp(settings->Interlinear2Module,intmod)) {
+		sprintf(settings->Interlinear2Module,"%s",modname);
+	}
+	if(!stricmp(settings->Interlinear1Module,intmod)) {
+		sprintf(settings->Interlinear1Module,"%s",modname);
+	}
+	gotoBookmarkSWORD(intmod, current_verse);
+	updateinterlinearpage();
+}
+
