@@ -341,25 +341,7 @@ void
 	 on_btnSpellCancel_clicked(GtkButton * button, gpointer user_data);
 
 	void
-	 on_btnEBMcut_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnEBMcopy_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnEBMpaste_clicked(GtkButton * button, gpointer user_data);
-
-	void
 	 on_text4_changed(GtkEditable * editable, gpointer user_data);
-
-	void
-	 on_btnEBMOK_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnEBMApply_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnEBMCancel_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_add_bookmark2_activate(GtkMenuItem * menuitem,
@@ -509,50 +491,6 @@ void
 				      gpointer user_data);
 
 	void
-	 on_btnVerseListNew_clicked(GtkButton * button,
-				    gpointer user_data);
-
-	void
-	 on_btnVerseListOpen_clicked(GtkButton * button,
-				     gpointer user_data);
-
-	void
-	 on_btnVerseListSave_clicked(GtkButton * button,
-				     gpointer user_data);
-
-	void
-	 on_btnVerseListPrint_clicked(GtkButton * button,
-				      gpointer user_data);
-
-	void
-	 on_btnVerseListClose_clicked(GtkButton * button,
-				      gpointer user_data);
-
-	void
-	 on_verse_list1_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
-
-	void
-	 on_btnVerseListOpen_clicked(GtkButton * button,
-				     gpointer user_data);
-
-	void
-	 on_btnVerseListSave_clicked(GtkButton * button,
-				     gpointer user_data);
-
-	void
-	 on_btnVerseListPrint_clicked(GtkButton * button,
-				      gpointer user_data);
-
-	void
-	 on_btnVerseListCopy_clicked(GtkButton * button,
-				     gpointer user_data);
-
-	void
-	 on_btnVerseListPaste_clicked(GtkButton * button,
-				      gpointer user_data);
-
-	void
 	 on_cbContext_toggled(GtkToggleButton * togglebutton,
 			      gpointer user_data);
 
@@ -598,37 +536,7 @@ void
 	void
 	 on_tree1_unselect_child(GtkTree * tree,
 				 GtkWidget * widget, gpointer user_data);
-
-	void
-	 on_btnBMEAddItem_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEDelete_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEsave_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEup_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEdown_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEleft_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEright_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEok_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEapply_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnBMEcancel_clicked(GtkButton * button, gpointer user_data);
-
+	
 	void
 	 on_about_this_module1_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
@@ -733,11 +641,11 @@ void
 
 	void
 	 on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
-
+/*
 	void
 	 on_entryPreitem_changed(GtkEditable * editable,
 				 gpointer user_data);
-
+*/
 	void
 	 on_btnLEapplylistchanges_clicked(GtkButton * button,
 					  gpointer user_data);
@@ -759,20 +667,11 @@ void
 
 
 	void
-	 on_new1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_open1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
 	 on_save1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 	void
 	 on_save_as1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_close1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
+	 
 	void
 	 on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
