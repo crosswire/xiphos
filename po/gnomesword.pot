@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-03-28 13:20-0500\n"
+"POT-Creation-Date: 2002-03-28 23:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ENCODING\n"
 
 #: src/gs_abouts.c:83
 msgid ""
@@ -256,7 +256,8 @@ msgid "Undo"
 msgstr ""
 
 #: src/gs_editor.c:1100 src/gs_editor_search.c:86 src/gs_editor_search.c:129
-#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/sw_gbs.cpp:392
+#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/gs_find_dlg.c:144
+#: src/sw_gbs.cpp:392
 msgid "Find"
 msgstr ""
 
@@ -317,7 +318,7 @@ msgstr ""
 msgid "backward"
 msgstr ""
 
-#: src/gs_editor_search.c:129
+#: src/gs_editor_search.c:129 src/gs_find_dlg.c:144
 msgid "Find Regular Expression"
 msgstr ""
 
@@ -473,7 +474,6 @@ msgstr ""
 msgid "Verse Style"
 msgstr ""
 
-#. -- remove old bookmarks from menu -- gs_menu.c
 #: src/gs_gnomesword.c:411
 msgid "_Quickmarks/<Separator>"
 msgstr ""
@@ -539,7 +539,7 @@ msgid "Information about Bible texts"
 msgstr ""
 
 #: src/gs_gui.c:251 src/gs_gui.c:1156 src/gs_gui.c:1165
-#: src/gs_shortcutbar.c:1944 src/gs_shortcutbar.c:2239
+#: src/gs_shortcutbar.c:1944
 msgid "Commentaries"
 msgstr ""
 
@@ -667,7 +667,7 @@ msgid "Study Pad"
 msgstr ""
 
 #: src/gs_gui.c:1513 src/gs_gui.c:1524 src/gs_preferences_dlg.c:1661
-#: src/gs_setup.c:562 src/gs_shortcutbar.c:1969 src/gs_shortcutbar.c:2264
+#: src/gs_setup.c:562 src/gs_shortcutbar.c:1969
 msgid "Dict/Lex"
 msgstr ""
 
@@ -827,7 +827,6 @@ msgstr ""
 msgid "View Module"
 msgstr ""
 
-#. view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 #: src/gs_menu.c:983 src/gs_menu.c:1012
 msgid "Use Current Dictionary"
 msgstr ""
@@ -1422,11 +1421,11 @@ msgstr ""
 msgid "Revelation"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1859 src/gs_shortcutbar.c:2155
+#: src/gs_shortcutbar.c:1859
 msgid "Favorites"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1919 src/gs_shortcutbar.c:2214
+#: src/gs_shortcutbar.c:1919
 msgid "Bible Text"
 msgstr ""
 
