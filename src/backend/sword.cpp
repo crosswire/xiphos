@@ -173,7 +173,7 @@ void backend_init(void)
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
 	g_print("%s\n", _("Checking for SWORD Modules"));
 	free((char*)sword_locale);
-	backend_init_language_map();
+	//backend_init_language_map();
 	/* create sword mgrs */
 	backend_init_managers();
 	backend = new SwordMain();

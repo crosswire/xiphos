@@ -31,7 +31,7 @@ char *backend_get_book_key(void);
 int backend_module_has_testament(const char * module_name,  int testament);
 const char *backend_get_module_config_entry(const char * module_name, 
 					    const char * entry);
-const char *backend_get_language_map(const char *language);
+//const char *backend_get_language_map(const char *language);
 char *backend_get_preverse_header(char * module_name, char * key, int pvHeading);
 const char *backend_get_footnote_type(char *module_name, char *key, char *note);
 char *backend_get_crossref(char *module_name, char *key, char *note);
@@ -47,7 +47,7 @@ int backend_do_module_search(char * module_name ,const char *search_string,
 		int search_type, int search_params);
 char *backend_get_search_results_text(char * mod_name, char * key);
 
-const char *backend_get_module_language(const char *module_name);
+//const char *backend_get_module_language(const char *module_name);
 int backend_is_personal_comment_module(char * mod_name);
 
 char *backend_get_module_description(char * module_name);
@@ -80,8 +80,8 @@ void backend_set_percomm_key(char * key);
 void backend_save_personal_comment(char * note);
 void backend_delete_personal_comment(void);
 char *backend_get_percomm_text(char * key);
-void backend_init_language_map(void);
-void backend_get_module_lists(MOD_LISTS * mods);
+//void backend_init_language_map(void);
+//void backend_get_module_lists(MOD_LISTS * mods);
 
 #ifdef __cplusplus
 }

@@ -45,6 +45,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/sidebar.h"
+#include "gui/toolbar_nav.h"
 #include "gui/widgets.h"
 
 #include "main/settings.h"
@@ -187,6 +188,8 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
 static void goto_bookmark(gchar * mod_name, gchar * key)
 {
 	gint module_type;
+	gchar *val_key;
+	gchar *url;
 	
 	if(!check_for_module(mod_name)) 
 		mod_name = settings.MainWindowModule;
@@ -218,13 +221,25 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 			case -1:
 				break;
 			case TEXT_TYPE:
+				val_key = gui_update_nav_controls(key);
+				url = g_strdup_printf("sword://%s/%s",
+						mod_name,val_key);
+				main_url_handler(url, TRUE);
+				g_free(val_key);
+				g_free(url);
+				break;
 			case COMMENTARY_TYPE:
-				gui_change_module_and_key(mod_name, key);
-				gui_change_verse(key);
+				val_key = gui_update_nav_controls(key);
+				url = g_strdup_printf("sword://%s/%s",
+						mod_name,val_key);
+				main_url_handler(url, TRUE);
+				g_free(val_key);
 				break;
 			case DICTIONARY_TYPE:				
 			case BOOK_TYPE:
-				gui_change_module_and_key(mod_name, key);
+				url = g_strdup_printf("sword://%s/%s",mod_name,key);
+				main_url_handler(url, TRUE);
+				g_free(url);
 				break;
 		}
 	}

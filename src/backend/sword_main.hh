@@ -24,9 +24,13 @@
 
 	
 #include <swmgr.h>
+#include <swbuf.h>
 #include <treekeyidx.h>
 #include "main/lists.h"
 
+using std::string;
+using std::map;
+using std::list;
 using namespace sword;
 	
 
@@ -42,16 +46,18 @@ class SwordMain {
 	SWMgr *percom_mgr;
 	SWMgr *results;
 	SWMgr *display_mgr;
-public:
+	TreeKeyIdx *tree_key;
+	typedef map < SWBuf, SWBuf > ModLanguageMap;
+	ModLanguageMap languageMap;
 	
+public:	
 	SWModule *text_mod;
 	SWModule *comm_mod;
 	SWModule *dict_mod;
 	SWModule *gbs_mod;
 	SWModule *percom_mod;
 	SWModule *display_mod;
-	
-	TreeKeyIdx *treeKey;	
+		
 	const char *version;	
 	SWDisplay *commDisplay;	
 	SWDisplay *dictDisplay;
@@ -61,17 +67,41 @@ public:
 	~SwordMain();
 	void init_SWORD();
 	void init_lists(MOD_LISTS * mods);
+	void init_language_map(void);
+	void setup_displays(void);
+
 	GList *fill_Bible_books(int testament);
+
 	void get_module_options(GList * options);
 	int is_Bible_key(const char * list, char * current_key);
 	char *get_valid_key(const char *key);
+	char *key_get_book(const char *key);
+	int key_get_chapter(const char *key);
+	const unsigned int key_chapter_count(const char *key);
+	const unsigned int key_verse_count(const char *key);
+	
+	
 	char *get_module_key(void);
-	int is_module(const char *mod_name);
-	int module_type(char *mod_name);
-	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
 	int set_module_key(const char *module_name, const char *key);
-	void setup_displays(void);
+	int is_module(const char *mod_name);
+	int set_module(const char *module_name);
 	char *navigate_module(int direction);
+	
+	int module_type(char *mod_name);
+	const char *module_get_language(const char *module_name);
+	int module_has_testament(const char * module_name,  int testament);
+	const char *get_language_map(const char *language);
+	
+	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
+	
+	char *get_key_form_offset(unsigned long offset);
+	void set_treekey(unsigned long offset);
+	unsigned long get_treekey_offset(void);
+	int treekey_has_children(unsigned long offset);
+	int treekey_first_child(unsigned long offset);
+	char *treekey_get_local_name(unsigned long offset);
+	int treekey_next_sibling(unsigned long offset);
+	
 	
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
 };

@@ -38,6 +38,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/key.h"
+#include "main/url.h"
 #include "main/xml.h"
 
 NAV_BAR nav_bar;
@@ -70,7 +71,7 @@ gchar *gui_update_nav_controls(const gchar * key)
 
 	settings.apply_change = FALSE;
 	val_key = get_valid_key(key);
-	//g_warning(val_key);
+	//g_warning(key);
 	//g_warning("key = %s val_key = %s",key,val_key);
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
@@ -119,16 +120,14 @@ gchar *gui_update_nav_controls(const gchar * key)
 static void on_cbeBook_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
-	gchar buf[256];
+	gchar *url;
 	gchar *bookname = NULL;
 	if (settings.apply_change) {
-		bookname = e_utf8_gtk_editable_get_text(editable);//gtk_editable_get_chars(editable, 0, -1);
-		//g_warning(bookname);
+		bookname = e_utf8_gtk_editable_get_text(editable);
 		if (*bookname) {
-			sprintf(buf, "%s 1:1", bookname);
-			//g_warning(bookname);
-			//g_warning(buf);
-			gui_change_verse(buf);
+			url = g_strdup_printf("sword:///%s 1:1", bookname);
+			main_url_handler(url, TRUE);
+			g_free(url);
 		}
 	}
 }
@@ -156,16 +155,13 @@ static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
 						   gpointer user_data)
 {
 	if (settings.apply_change) {
-		const gchar *bookname;
-		gchar buf[256];
-		gint chapter;
-
-		bookname = gtk_entry_get_text(GTK_ENTRY(cbe_book));
-		chapter =
-		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+		const gchar *bookname = gtk_entry_get_text(GTK_ENTRY(cbe_book));
+		gint chapter = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 						     (spb_chapter));
-		sprintf(buf, "%s %d:1", bookname, chapter);
-		gui_change_verse(buf);
+		gchar *url = g_strdup_printf("sword:///%s %d:1", bookname, 
+						chapter);
+		main_url_handler(url, TRUE);
+		g_free(url);
 	}
 	return FALSE;
 }
@@ -192,19 +188,15 @@ static gboolean on_spbVerse_button_release_event(GtkWidget * widget,
 						 gpointer user_data)
 {
 	if (settings.apply_change) {
-		const gchar *bookname;
-		gchar buf[256];
-		int chapter, verse;
-
-		bookname = gtk_entry_get_text(GTK_ENTRY(cbe_book));
-		chapter =
-		    gtk_spin_button_get_value(GTK_SPIN_BUTTON
-					      (spb_chapter));
-		verse =
-		    gtk_spin_button_get_value(GTK_SPIN_BUTTON
-					      (spb_verse));
-		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
-		gui_change_verse(buf);
+		const gchar *bookname = gtk_entry_get_text(GTK_ENTRY(cbe_book));
+		int chapter = gtk_spin_button_get_value(GTK_SPIN_BUTTON
+						(spb_chapter));
+		int verse = gtk_spin_button_get_value(GTK_SPIN_BUTTON
+						(spb_verse));
+		gchar *url = g_strdup_printf("sword:///%s %d:%d", bookname, 
+						chapter, verse);
+		main_url_handler(url, TRUE);
+		g_free(url);
 	}
 	return FALSE;
 }
@@ -227,8 +219,7 @@ static gboolean on_spbVerse_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static void on_button_dict_book_clicked(GtkButton * button,
-					gpointer user_data)
+static void on_button_dict_book_clicked(GtkButton * button, gpointer user_data)
 {
 /*	if (gtk_notebook_get_current_page
 	    (GTK_NOTEBOOK(widgets.workbook_lower)))
@@ -293,9 +284,12 @@ static void on_togglebutton_parallel_view_toggled(GtkToggleButton *
 static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 {
 	const gchar *buf;
-
+	gchar *url;
+	
 	buf = gtk_entry_get_text(GTK_ENTRY(cbe_freeform_lookup));
-	gui_change_verse(buf);	//-- change verse to entry text 
+	url = g_strdup_printf("sword:///%s",buf);
+	main_url_handler(url, TRUE); //-- change verse to entry text
+	g_free(url);
 }
 
 /******************************************************************************
@@ -321,11 +315,14 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 						     gpointer user_data)
 {
 	const gchar *buf;
+	gchar *url;
 
 	buf = gtk_entry_get_text(GTK_ENTRY(widget));
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {
-		gui_change_verse(buf);
+		url = g_strdup_printf("sword:///%s",buf);
+		main_url_handler(url, TRUE);
+		g_free(url);
 	}
 	return FALSE;
 }

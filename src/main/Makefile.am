@@ -24,7 +24,7 @@ libmain_a_SOURCES =  \
     percomm.c percomm.h \
     search.c search.h \
     settings.c settings.h \
-    sidebar.c sidebar.h\
+    sidebar.cc sidebar.h\
     spell_pspell.c \
     spell.h \
     sword.cc sword.h\

@@ -146,7 +146,7 @@ static void update_history_menu(GtkWidget * app)
 void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref)
 {
 	gint i;
-
+	g_warning("history = %s",ref);
 	/* check to see if item is already in list  
 	   if so do nothing */
 	for (i = 0; i < history_items; i++) {
