@@ -96,7 +96,6 @@ paragraph_style_changed_cb (GtkHTML *html,
 			return;
 		}
 	}
-
 	g_warning ("Editor component toolbar: unknown paragraph style %d", style);
 }
 
@@ -158,6 +157,7 @@ set_font_size (GtkWidget *w, GtkHTMLControlData *cd)
 
 	if (!cd->block_font_style_change)
 		gtk_html_set_font_style (cd->html, GTK_HTML_FONT_STYLE_MAX & ~GTK_HTML_FONT_STYLE_SIZE_MASK, style);
+	cd->html_modified = TRUE;
 }
 
 static void
@@ -169,6 +169,7 @@ font_size_changed (GtkWidget *w, GtkHTMLParagraphStyle style, GtkHTMLControlData
 	gtk_option_menu_set_history (GTK_OPTION_MENU (cd->font_size_menu),
 				     (style & GTK_HTML_FONT_STYLE_SIZE_MASK) - GTK_HTML_FONT_STYLE_SIZE_1);
 	cd->block_font_style_change = FALSE;
+	cd->html_modified = TRUE;
 }
 
 static GtkWidget *
@@ -222,6 +223,7 @@ color_changed (GtkWidget *w, GdkColor *gdk_color, GtkHTMLControlData *cd)
 	gtk_html_set_color (cd->html, color);
 	if (color)
 		html_color_unref (color);
+	cd->html_modified = TRUE;
 }
 
 static void
@@ -466,17 +468,72 @@ editor_toolbar_unindent_cb (GtkWidget *widget,
 	gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), -1);
 }
 
+GString *gstr;
+static gboolean
+save_note_receiver  (const HTMLEngine *engine,
+		const char *data,
+		unsigned int len,
+		void *user_data)
+{
+	static gboolean startgrabing = FALSE;
+		
+	if(!strncmp(data,"</BODY>",7)) startgrabing = FALSE;
+	if(startgrabing)
+		gstr = g_string_append(gstr,data);
+	if(!strcmp(data,"<BODY>")) startgrabing = TRUE;
+	
+	return TRUE;
+}
+
 /*  add by tb 2001-04-18  */
 static void
 editor_toolbar_code_cb(GtkWidget *widget,
 			    GtkHTMLControlData *cd)
-{
+{		
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		gtk_html_set_editable(cd->html,FALSE); 
+		gstr = g_string_new("");
+		if (!gtk_html_save(cd->html, (GtkHTMLSaveReceiverFn)save_note_receiver, GINT_TO_POINTER (0)))
+			g_warning("file not writen");		
+		else {
+			//g_warning("file writen");
+			//g_warning(gstr->str);
+			gtk_text_set_point(GTK_TEXT(cd->gtktext), 0);
+			gtk_text_forward_delete(GTK_TEXT(cd->gtktext),
+							gtk_text_get_length((GTK_TEXT(cd->gtktext))));
+			gtk_text_freeze(GTK_TEXT(cd->gtktext));
+			gtk_text_insert(GTK_TEXT(cd->gtktext), NULL, NULL, NULL,gstr->str , -1);
+			//gtk_text_set_point(GTK_TEXT(cd->gtktext), curPos);
+			gtk_text_thaw(GTK_TEXT(cd->gtktext));
+				//savenoteSWORD(gstr->str);
+			g_string_free(gstr,1);
+			gtk_html_set_editable(cd->html,TRUE); 	
+			gtk_notebook_set_page(GTK_NOTEBOOK(cd->notebook),1);
+		}
+	}
+	else {
+		gchar *buf;
+		GtkHTMLStream *htmlstream;
+		GtkHTMLStreamStatus status1;
+		gboolean was_editable;
+		
+		was_editable = gtk_html_get_editable (cd->html);
+		if (was_editable)
+			gtk_html_set_editable (cd->html, FALSE);
+		htmlstream = gtk_html_begin(cd->html);
+		
+		buf = gtk_editable_get_chars(GTK_EDITABLE(cd->gtktext),
+					0,
+					gtk_text_get_length(GTK_TEXT(cd->gtktext)));
+		
+		if (strlen(buf)) 
+			gtk_html_write(cd->html, htmlstream, buf, strlen(buf));
 	
-	
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
-		gtk_notebook_set_page(GTK_NOTEBOOK(cd->notebook),1);
-	else
+		gtk_html_end(cd->html, htmlstream, status1);
+		if (was_editable)
+			gtk_html_set_editable (cd->html, TRUE);
 		gtk_notebook_set_page(GTK_NOTEBOOK(cd->notebook),0);	
+	}
 }
 
 
@@ -882,22 +939,6 @@ editor_toolbar_sync_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 {
 	
 }
-GString *gstr;
-static gboolean
-save_note_receiver  (const HTMLEngine *engine,
-		const char *data,
-		unsigned int len,
-		void *user_data)
-{
-	static gboolean startgrabing = FALSE;
-		
-	if(!strncmp(data,"</BODY>",7)) startgrabing = FALSE;
-	if(startgrabing)
-		gstr = g_string_append(gstr,data);
-	if(!strcmp(data,"<BODY>")) startgrabing = TRUE;
-	
-	return TRUE;
-}
 
 static void
 editor_toolbar_savenote_cb (GtkWidget *widget, GtkHTMLControlData *cd)
@@ -909,7 +950,7 @@ editor_toolbar_savenote_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 	else
 		g_warning("file writen");
 	g_warning(gstr->str);
-	savenoteSWORD(gstr->str);
+	savenoteSWORD(gstr->str,cd->html_modified);
 	g_string_free(gstr,1);
 	gtk_html_set_editable(cd->html,TRUE); 		
 }

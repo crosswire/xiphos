@@ -149,10 +149,10 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 		strbuf = g_string_append(strbuf, "</font>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
-	} else if (!stricmp(font, "Greek")) {	/* greek -wingreek */
+	} else if (!stricmp(font, "greek1")) {	/* greek -wingreek */
 		strbuf =
-		    g_string_new
-		    ("<I> </I><FONT COLOR=\"#000000\" FACE=\"SIL Galatia\">");
+		    g_string_new 
+		    ("<I> </I><FONT COLOR=\"#000000\" FACE=\"greek1\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 		strbuf = g_string_append(strbuf, "</font><I> </I>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
@@ -160,7 +160,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	} else if (!stricmp(font, "BSTHebrew")) {	/* hebrew -wingreek */
 		strbuf =
 		    g_string_new
-		    ("<I> </I><FONT COLOR=\"#000000\" FACE=\"hebrew1\">");
+		    ("<I> </I><FONT COLOR=\"#000000\" FACE=\"BSTHebrew\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
 		strbuf = g_string_append(strbuf, "</font><I> </I>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
@@ -240,10 +240,15 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				g_string_sprintf(strbuf,
 						 "<FONT COLOR=\"%s\" FACE=\"symbol\">",
 						 mycolor);
-			} else if (!stricmp(font, "Greek")) {
+			} else if (!stricmp(font, "greek1")) {
 				g_string_sprintf(strbuf,
-						 "<FONT COLOR=\"%s\" FACE=\"SIL Galatia\">",
+						 "<FONT SIZE=\"+2\" COLOR=\"%s\" FACE=\"greek1\">",
 						 mycolor);
+			
+			} else if (!stricmp(font, "BSTHebrew")) {
+				g_string_sprintf(strbuf,
+						 "<FONT COLOR=\"%s\" FACE=\"bsthebrew\">",
+						 mycolor);				
 			} else {
 				if (bVerseStyle && newparagraph) {				
 					g_string_sprintf(strbuf, "<FONT COLOR=\"%s\">%c", mycolor,182);				
@@ -284,8 +289,10 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 		} else {
 			if (!stricmp(font, "Symbol")) {
 				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */				
-			} else if (!stricmp(font, "Greek")) {
-				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"SIL Galatia\">");					
+			} else if (!stricmp(font, "greek1")) {
+				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"greek1\">");
+			} else if (!stricmp(font, "BSTHebrew")) {
+				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"bsthebrew\">");					
 			} else {
 				strbuf = g_string_new("");
 				if (bVerseStyle && newparagraph) {
@@ -326,7 +333,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(tmpBuf);
 	return 0;
-}
+} /* end - char GTKhtmlChapDisp::Display(SWModule & imodule) */
 
 
 /* --------------------------------------------------------------------------------------------- */
@@ -357,7 +364,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 			sourceformat = (char *) (*eit).second.c_str();
 		if (!stricmp(sourceformat, "GBF"))
 			gbf = true;
-	}
+	} 
 	(const char *) imodule;
 	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
@@ -369,10 +376,10 @@ char InterlinearDisp::Display(SWModule & imodule)
 	/* heading */
 	if (!stricmp(font, "Symbol")) {
 		strbuf = g_string_new("<FONT FACE=\"symbol\">");
-	} else if (!stricmp(font, "Greek")) {
-		strbuf = g_string_new("<B> </B><FONT FACE=\"SIL Galatia\">");
+	} else if (!stricmp(font, "greek1")) { 
+		strbuf = g_string_new("<FONT SIZE=\"+3\" FACE=\"greek1\">");
 	} else if (!stricmp(font, "BSTHebrew")) {
-		strbuf = g_string_new("<B> </B><FONT FACE=\"bsthebrew\">");
+		strbuf = g_string_new("<FONT FACE=\"bsthebrew\">");
 	} else {
 		strbuf = g_string_new("<FONT COLOR=\"#000000\" >");
 	}
@@ -383,7 +390,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		strbuf = g_string_append(strbuf, "</font><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
-	} else if (!stricmp(font, "Greek")) {
+	} else if (!stricmp(font, "greek1")) {
 		strbuf = g_string_append(strbuf, "</font><BR><HR>");
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);

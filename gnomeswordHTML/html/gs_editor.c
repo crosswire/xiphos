@@ -191,6 +191,7 @@ html_key_pressed(GtkWidget * html, GdkEventButton * event,
 	
 	if(cd->note_editor) cd->filename = sbNoteEditorText;
 	updatestatusbar(cd);
+	return 1;
 }
 
 
@@ -387,6 +388,7 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	cd->notebook = ed->notebook;
 	cd->statusbar = ed->statusbar;
 	cd->note_editor = ed->note_editor;
+	cd->gtktext = ed->text;
 	
 	FormatBar = toolbar_style(cd);
 	gtk_box_pack_start(GTK_BOX(cd->vbox), FormatBar, FALSE, FALSE,
@@ -430,6 +432,7 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	gtk_widget_show(ed->text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowTEXT), ed->text);
 	gtk_text_set_word_wrap(GTK_TEXT (ed->text) , TRUE );
+	gtk_text_set_editable(GTK_TEXT (ed->text) , TRUE);
 	
 	label2 = gtk_label_new(_("label2"));
 	gtk_widget_ref(label2);

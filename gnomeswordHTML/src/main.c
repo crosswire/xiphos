@@ -72,11 +72,12 @@ main (int argc, char *argv[])
   	if(newbookmarks)
   	{
   		createFiles();
-  	}
-  	/* load settings into structure */
-  	myset = readsettings(); 
+  	}	 
+	//myset = readsettings(); 
   	/* set pointer to structure */
-  	settings = &myset;       
+  	settings = &myset;  
+	/* load settings into structure */
+	loadconfig(); /* new */
   	initSWORD(mainwindow);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
   	

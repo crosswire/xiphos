@@ -54,8 +54,8 @@ modename="$progname"
 # Constants.
 PROGRAM=ltmain.sh
 PACKAGE=libtool
-VERSION=1.3.5
-TIMESTAMP=" (1.385.2.206 2000/05/27 11:12:27)"
+VERSION=1.3.4
+TIMESTAMP=" (1.385.2.196 1999/12/07 21:47:57)"
 
 default_mode=
 help="Try \`$progname --help' for more information."
@@ -1656,7 +1656,7 @@ compiler."
 
 	# Check that each of the things are valid numbers.
 	case "$current" in
-	[0-9]*) ;;
+	0 | [1-9] | [1-9][0-9]*) ;;
 	*)
 	  $echo "$modename: CURRENT \`$current' is not a nonnegative integer" 1>&2
 	  $echo "$modename: \`$vinfo' is not valid version information" 1>&2
@@ -1665,7 +1665,7 @@ compiler."
 	esac
 
 	case "$revision" in
-	[0-9]*) ;;
+	0 | [1-9] | [1-9][0-9]*) ;;
 	*)
 	  $echo "$modename: REVISION \`$revision' is not a nonnegative integer" 1>&2
 	  $echo "$modename: \`$vinfo' is not valid version information" 1>&2
@@ -1674,7 +1674,7 @@ compiler."
 	esac
 
 	case "$age" in
-	[0-9]*) ;;
+	0 | [1-9] | [1-9][0-9]*) ;;
 	*)
 	  $echo "$modename: AGE \`$age' is not a nonnegative integer" 1>&2
 	  $echo "$modename: \`$vinfo' is not valid version information" 1>&2
@@ -1794,10 +1794,6 @@ compiler."
 	case "$host" in
 	*-*-cygwin* | *-*-mingw* | *-*-os2* | *-*-beos*)
 	  # these systems don't actually have a c library (as such)!
-	  ;;
-        *-*-rhapsody*)
-	  # rhapsody is a little odd...
-	  deplibs="$deplibs -framework System"
 	  ;;
 	*)
 	  # Add libc to deplibs on all other systems.
@@ -2931,21 +2927,13 @@ else
       # Run the actual program with our arguments.
 "
 	case $host in
+	*-*-cygwin* | *-*-mingw | *-*-os2*)
 	  # win32 systems need to use the prog path for dll
 	  # lookup to work
-	*-*-cygwin*)
-	  $echo >> $output "\
-      exec \$progdir/\$program \${1+\"\$@\"}
-"
-	  ;;
-
-	# Backslashes separate directories on plain windows
-	*-*-mingw | *-*-os2*)
 	  $echo >> $output "\
       exec \$progdir\\\\\$program \${1+\"\$@\"}
 "
 	  ;;
-
 	*)
 	  $echo >> $output "\
       # Export the path to the program.
@@ -3462,11 +3450,7 @@ libdir='$install_libdir'\
 	    if test "$finalize" = yes && test -z "$run"; then
 	      tmpdir="/tmp"
 	      test -n "$TMPDIR" && tmpdir="$TMPDIR"
-              tmpdir=`mktemp -d $tmpdir/libtool-XXXXXX 2> /dev/null`
-              if test $? = 0 ; then :
-              else
-                tmpdir="$tmpdir/libtool-$$"
-              fi
+	      tmpdir="$tmpdir/libtool-$$"
 	      if $mkdir -p "$tmpdir" && chmod 700 "$tmpdir"; then :
 	      else
 		$echo "$modename: error: cannot create temporary directory \`$tmpdir'" 1>&2
