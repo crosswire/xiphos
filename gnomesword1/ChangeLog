@@ -1,3 +1,11 @@
+2005-01-19  pierre <pierrebenz@users.sf.net>
+	* add personal commentary documentation files
+	* added documentation patch from Peter von Kaehne
+	* fixed documentation build for book format (translators,
+	  gnomesword.xml is now depreciated, translate to  new format please)
+	* 
+	
+
 2005-01-18  pierre <pierrebenz@users.sf.net>
 
 	* added documentation guidelines (still incomplete)
