@@ -59,6 +59,8 @@ make
 su
 make install
 
+For spell checking to work aspell or ispell must be in your path.
+
 default is without any options which should build if don't have gnomeprint,
 gdk_pixbuf nor gal.
 
