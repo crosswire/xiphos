@@ -608,11 +608,8 @@ void gui_setup_commentary(GList * mods)
 		if (has_cipher_tag(c->mod_name)) {
 			c->is_locked = module_is_locked(c->mod_name);
 			c->cipher_old = get_cipher_key(c->mod_name);
-			//g_warning("cipher key for %s is %s", c->mod_name,c->cipher_old);
 		}
-
 		else {
-
 			c->is_locked = 0;
 			c->cipher_old = NULL;
 		}
@@ -628,13 +625,17 @@ void gui_setup_commentary(GList * mods)
 			   G_CALLBACK
 			   (on_notebook_comm_switch_page), comm_list);
 
-	modbuf = g_strdup(xml_get_value("modules", "comm"));//settings.CommWindowModule);
-//	keybuf = g_strdup(settings.currentverse);
-
-	set_commentary_page(modbuf, comm_list);
-
+	modbuf = g_strdup(xml_get_value("modules", "comm"));
+	if(modbuf) {
+		if(check_for_module(modbuf))
+			set_commentary_page(modbuf, comm_list);
+		else if(check_for_module(c->mod_name))
+			set_commentary_page(c->mod_name, comm_list);
+	}
+	else 
+		if(check_for_module(c->mod_name))
+			set_commentary_page(c->mod_name, comm_list);
 	g_free(modbuf);
-//	g_free(keybuf);
 	g_list_free(tmp);
 }
 

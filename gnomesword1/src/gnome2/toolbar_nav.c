@@ -263,8 +263,6 @@ static void on_togglebutton_parallel_view_toggled(GtkToggleButton *
 	else
 		gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
 						      0);
-	/*gui_change_module_and_key(settings.MainWindowModule,
-							settings.currentverse);*/
 }
 
 
@@ -416,7 +414,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	    gtk_image_new_from_stock("gnome-stock-book-blue",
 				     gtk_toolbar_get_icon_size
 				     (GTK_TOOLBAR(toolbarNav)));
-	button_dict_book =
+	widgets.button_dict_book =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Dict/Book"), 
@@ -428,7 +426,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 						       (toolbarNav)->
 						       children)->
 					   data))->label), TRUE);
-	gtk_widget_show(button_dict_book);
+	gtk_widget_show(widgets.button_dict_book);
 
 	tmp_toolbar_icon =
 	    gtk_image_new_from_stock("gnome-stock-text-bulleted-list",
@@ -625,7 +623,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 
-	g_signal_connect((gpointer) button_dict_book, "clicked",
+	g_signal_connect((gpointer) widgets.button_dict_book, "clicked",
 			 G_CALLBACK(on_button_dict_book_clicked), NULL);
 	g_signal_connect((gpointer) widgets.button_parallel_view,
 			 "toggled",
