@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * toolbar_nav.h - Bible text navigation toolbar
+ * history.h - add, remove and nav history
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,18 +19,36 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __TOOLBAR_NAV_H_
-#define __TOOLBAR_NAV_H_
+#ifndef __HISTORY_H_
+#define __HISTORY_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include <gnome.h>
-	
-gchar *gui_update_nav_controls(gchar * key);
-GtkWidget *gui_create_nav_toolbar(void);
-	
+
+typedef struct _history HISTORY;
+struct _history {
+        gint itemnum;
+        gint compagenum;
+        gchar verseref[80];
+        gchar textmod[80];
+        gchar commod[80];
+};
+
+void clearhistory(GtkWidget *app,
+		GtkWidget *shortcut_bar);
+void updatehistorymenu(GtkWidget *app);
+void updatehistoryshortcutbar(GtkWidget *app,
+                GtkWidget *shortcut_bar);
+void updatehistorysidebar(GtkWidget *app);
+void addHistoryItem(GtkWidget *app,
+		GtkWidget *shortcut_bar,
+		gchar *ref);
+void historynav(GtkWidget *app, gint direction);
+void changeverseHistory(gint historynum);		
+
 #ifdef __cplusplus
 }
 #endif

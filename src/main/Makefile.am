@@ -24,8 +24,6 @@ COMMON_SOURCE =  \
     gbs.c \
     gs_gnomesword.c \
     gs_gnomesword.h \
-    gs_history.c \
-    gs_history.h \
     gs_html.c \
     gs_html.h \
     gs_menu.c \
@@ -39,8 +37,6 @@ COMMON_SOURCE =  \
     main.c \
     percomm.c \
     percomm.h \
-    support.c \
-    support.h \
     settings.c \
     settings.h 
 

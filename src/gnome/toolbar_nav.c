@@ -27,12 +27,61 @@
 
 #include "gui/toolbar_nav.h"
 #include "gui/shortcutbar_main.h"
+#include "gui/history.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/gs_popup_cb.h"
-#include "main/gs_history.h"
 #include "main/settings.h"
 #include "main/lists.h"
+
+
+
+/******************************************************************************
+ * Name
+ *   gui_update_nav_controls
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   gchar *gui_update_nav_controls(gchar * key)	
+ *
+ * Description
+ *   updates the nav toolbar controls 
+ *
+ * Return value
+ *   gchar *
+ */ 
+
+gchar *gui_update_nav_controls(gchar * key)
+{
+	char *val_key;
+	gint cur_chapter = 8, cur_verse = 28;
+
+	settings.apply_change = FALSE;
+	val_key = get_valid_key(key);
+	cur_chapter = get_chapter_from_key(val_key);
+	cur_verse = get_verse_from_key(val_key);
+	/* 
+	 *  remember last verse 
+	 */
+	strcpy(settings.currentverse, val_key);
+	/* 
+	 *  set book, chapter,verse and freeform lookup entries
+	 *  to new verse - settings.apply_change is set to false so we don't
+	 *  start a loop
+	 */
+	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook),
+			   get_book_from_key(val_key));
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (settings.spbChapter), cur_chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (settings.spbVerse), cur_verse);
+	gtk_entry_set_text(GTK_ENTRY
+			   (settings.cbeFreeformLookup), val_key);
+	settings.apply_change = TRUE;
+	return val_key;
+}
+
 
 /******************************************************************************
  * Name

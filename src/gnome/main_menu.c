@@ -35,15 +35,15 @@
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
+#include "gui/history.h"
+#include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/support.h"
 #include "main/gs_html.h"
 #include "main/bibletext.h"
 #include "main/gs_menu.h"
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
-#include "main/gs_history.h"
 #include "main/lists.h"
 
 GtkWidget *htmlTexts;
@@ -130,7 +130,7 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	gchar version[40];
 	
 	dlg = gui_create_about_sword();
-	version_label = lookup_widget(dlg, "version_label");
+	version_label = gui_lookup_widget(dlg, "version_label");
 	/* 
 	 * get sword version 
 	 */
@@ -502,7 +502,13 @@ static GnomeUIInfo view1_menu_uiinfo[] =
 
 
 static GnomeUIInfo settings1_menu_uiinfo[] = {
-	
+	{
+	    GNOME_APP_UI_TOGGLEITEM, N_("Verse Style"),
+	    NULL,
+	    (gpointer) on_verse_style1_activate, NULL, NULL,
+	    GNOME_APP_PIXMAP_NONE, NULL,
+	    0, (GdkModifierType) 0, NULL
+	},
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
 	GNOMEUIINFO_END
 };
@@ -742,9 +748,17 @@ void gui_create_main_menu(GtkWidget *app)
 				 menubar1_uiinfo[4].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(settings1_menu_uiinfo[0].widget);
+
+  gtk_widget_ref (settings1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT(app), "verse_style",
+                            settings1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+//  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (settings1_menu_uiinfo[0].widget), TRUE);
+	settings.versestyle_item = settings1_menu_uiinfo[0].widget;
+
+	gtk_widget_ref(settings1_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "preferences1",
-				 settings1_menu_uiinfo[0].widget,
+				 settings1_menu_uiinfo[1].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	gtk_widget_ref(menubar1_uiinfo[5].widget);

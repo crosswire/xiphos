@@ -38,11 +38,12 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
-#include "main/debug.h"
 #include "gui/_editor.h"
+//#include "gui/utilities.h"
+
+#include "main/debug.h"
 #include "main/spell.h"
 #include "main/spell_gui.h"
-#include "main/support.h"
 
 extern GtkWidget *text_widget;
 extern GtkWidget *html_widget;
