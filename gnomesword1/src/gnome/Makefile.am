@@ -38,10 +38,10 @@ libgui_a_SOURCES =  \
     commentary_dialog.h \
     commentary_find.c \
     commentary_find.h \
-    editor_menu.c \
     dictlex.c \
     dictlex_dialog.c \
     dictlex_dialog.h \
+    editor_menu.c \
     editor_menu.h \
     editor_replace.c \
     editor_replace.h \
@@ -54,6 +54,7 @@ libgui_a_SOURCES =  \
     gbs.c \
     gbs_find.c \
     gbs_find.h \
+    gtkhtml_display.c \
     gui.c \
     gui.h \
     info_box.c \

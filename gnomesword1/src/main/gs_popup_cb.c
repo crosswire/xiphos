@@ -58,8 +58,6 @@ gboolean autoscroll;
 extern GtkWidget * NEtext, *htmlCommentaries;
 
 extern gboolean isrunningSD,	/* is the view dictionary dialog runing */
- isrunningVC,			/* is the view commentary dialog runing */
- isrunningVT,			/* is the view text dialog runing */
  noteModified;			/* personal comments window changed */
 
 extern GList * options;

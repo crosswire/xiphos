@@ -26,20 +26,13 @@
 extern "C" {
 #endif
 
-
-void display_dictionary_page_and_key(gint page_num, gchar * key);
-GList *fill_dictlex_keys(int mod_num, int count);
-void display_dictlex(gchar * key);
-void new_dictlex_display(GtkWidget * html, gint mod_num);
-
-gchar *get_first_key_viewdict(void);
-gchar *get_next_key_viewdict(void);
-void search_text_changed_viewdict(gchar * key);
-void shutdown_viewdict(void);
-void load_module_viewdict(gchar * module_name);
-void goto_key_viewdict(gchar * key);
-void setup_viewdict(GtkWidget * text);
-
+int set_dictlex_module(char * mod_name);
+int set_dictlex_key(char * key);
+char *get_dictlex_key(int direction);	
+char *get_dictlex_text(char * mod_name, char * key);
+gchar *get_first_dictlex_key(void);
+gchar *get_next_dictlex_key(void);
+	
 #ifdef __cplusplus
 }
 #endif

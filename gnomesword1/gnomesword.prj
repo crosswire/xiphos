@@ -60,8 +60,6 @@ module.include.name=.
 module.include.type=
 module.include.expanded=1
 module.include.files=\
-	src/backend/viewdict.h\
-	src/backend/viewcomm.h\
 	src/backend/verselist.h\
 	src/backend/sword.h\
 	src/backend/search_.h\
@@ -70,7 +68,6 @@ module.include.files=\
 	src/backend/module_options.h\
 	src/backend/gbs_.h\
 	src/backend/bibletext_.h\
-	src/backend/bibletext_view_.h\
 	src/backend/interlinear.h\
 	src/backend/display.h\
 	src/backend/dictlex_.h\
@@ -93,6 +90,7 @@ module.include.files=\
 	src/gui/gbs.h\
 	src/gui/_percomm.h\
 	src/gui/gbs_find.h\
+	src/gui/gtkhtml_display.h\
 	src/gui/cipher_key_dialog.h\
 	src/gui/editor_menu.h\
 	src/gui/editor_replace.h\
@@ -141,8 +139,6 @@ module.source.name=.
 module.source.type=
 module.source.expanded=1
 module.source.files=\
-	src/backend/viewdict.cpp\
-	src/backend/viewcomm.cpp\
 	src/backend/verselist.cpp\
 	src/backend/sword.cpp\
 	src/backend/search_.cpp\
@@ -151,7 +147,6 @@ module.source.files=\
 	src/backend/module_options.cpp\
 	src/backend/gbs_.cpp\
 	src/backend/bibletext_.cpp\
-	src/backend/bibletext_view_.cpp\
 	src/backend/interlinear.cpp\
 	src/backend/display.cpp\
 	src/backend/dictlex_.cpp\
@@ -174,6 +169,7 @@ module.source.files=\
 	src/gnome/gbs.c\
 	src/gnome/_percomm.c\
 	src/gnome/gbs_find.c\
+	src/gnome/gtkhtml_diaplay.c\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/text_view.c\
 	src/gnome/editor_menu.c\
