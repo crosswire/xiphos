@@ -448,7 +448,6 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *epaned;
 #else
 	GtkWidget *hpaned2;
-	/*GtkWidget *sidebar;*/
 	GtkWidget *btsText;
 	GtkWidget *btsComms;
 	GtkWidget *btsDicts;

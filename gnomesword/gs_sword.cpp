@@ -74,6 +74,7 @@ SWDisplay *HTMLDisplay; /* to display formatted html */
 SWDisplay *HTMLchapDisplay; /* to display formatted html */
 SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
+SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
@@ -244,7 +245,7 @@ initSWORD(GtkWidget *mainform)
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
 	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
-	//RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries")); 
+	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries")); 
 #endif /* USE_GTKHTML */
 	compages = 0;
 	dictpages = 0;
@@ -304,9 +305,13 @@ initSWORD(GtkWidget *mainform)
 			} else if(!strcmp(sourceformat,"Plain")&& strcmp(curcomMod->Name(),"RWP")) {
 			        curcomMod->AddRenderFilter(plaintohtml);
 				curcomMod->Disp(HTMLDisplay);
-			} else if(!strcmp(curcomMod->Name(),"RWP")){   			
+			} else if(!strcmp(curcomMod->Name(),"RWP")){  
+#ifdef USE_GTKHTML 			
 			        curcomMod->AddRenderFilter(rwphtml);
-				curcomMod->Disp(HTMLDisplay);	//RWPDisplaycomDisplay		
+				curcomMod->Disp(HTMLDisplay);
+#else /* !USE_GTKHTML */
+				curcomMod->Disp(RWPDisplay);		
+#endif /* USE_GTKHTML */	
 			/* if driver is RawFiles - personal notes*/
 			}else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
@@ -605,6 +610,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete HTMLDisplay;
 	if(HTMLchapDisplay)
 		delete HTMLchapDisplay;	
+	if(RWPDisplay)
+		delete RWPDisplay;		
 	if(noteeditor)
 		delete noteeditor;	
 	gtk_exit(0);           //-- exit	
