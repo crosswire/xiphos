@@ -2,10 +2,8 @@
 
 SUBDIRS =   doc macros po src
 
-EXTRA_DIST = gnomesword1.desktop \
-             src/gui/*.h
+BUILT_SOURCES = ${PACKAGE}.desktop
 
-gnomesworddocdir = $(prefix)/doc/gnomesword
 gnomesworddoc_DATA = \
  	   README\
 	    COPYING\
@@ -16,6 +14,10 @@ gnomesworddoc_DATA = \
 	    TODO
 
 
+${PACKAGE}.desktop: ${PACKAGE}.desktop.in
+	sed -e 's:@pixmapdir@:$(datadir)/pixmaps/${PACKAGE}:g' ${PACKAGE}.desktop.in > ${PACKAGE}.desktop
+	
+gnomesworddocdir = $(prefix)/doc/gnomesword-1.0
 
 install-data-local:
 	@$(NORMAL_INSTALL)
@@ -28,15 +30,13 @@ install-data-local:
           done \
 	fi
 
-	$(mkinstalldirs) $(datadir)/gnome/apps/Applications; \
-        if test -f gnomesword.desktop; then \
-        $(INSTALL_DATA) gnomesword.desktop $(datadir)/gnome/apps/Applications; \
-        fi 
+	$(mkinstalldirs) $(datadir)/gnome/apps/Applications
+	$(INSTALL_DATA) ${PACKAGE}.desktop $(datadir)/gnome/apps/Applications
 
 uninstall-local:
 	@$(NORMAL_UNINSTALL)
 	rm -f -r $(datadir)/pixmaps/${PACKAGE}
-	rm -f $(datadir)/gnome/apps/Applications/gnomesword.desktop
+	rm -f $(datadir)/gnome/apps/Applications/gnomesword-1.0.desktop
 	rm -f -r $(datadir)/gnome/help/${PACKAGE}
 
 dist-hook:
