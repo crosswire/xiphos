@@ -100,20 +100,13 @@ void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
 	
 	key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));	
 	text = get_dictlex_text(settings.DictWindowModule, (gchar*)key);
-	
+	g_free(text);
 	key = get_key_from_module(2, settings.DictWindowModule);
 	
 	xml_set_value("GnomeSword", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
 	
-	if (text) {
-		entry_display(widgets.html_dict, 
-				settings.DictWindowModule, 
-				text, 
-				settings.dictkey, 
-				TRUE);
-		free(text);
-	}
+	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
 	
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widgets.listview_dict));
 	list_store = GTK_LIST_STORE(model);

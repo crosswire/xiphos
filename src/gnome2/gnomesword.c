@@ -315,7 +315,7 @@ void shutdown_frontend(void)
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();
 
-	shutdown_list();
+	main_shutdown_list();
 
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);

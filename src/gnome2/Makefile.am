@@ -86,7 +86,6 @@ gnomesword2_SOURCES =  \
     toolbar_edit.c \
     toolbar_nav.c \
     toolbar_style.c \
-    url.c \
     utilities.c
     
 gnomesword2_LDADD = \
