@@ -24,7 +24,12 @@
 #include <config.h>
 #endif
 
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,19 +64,19 @@ SETTINGS settings;
 /******************************************************************************
  * static
  */
-static void old_2_new_shortcut_file(gchar * old_file, gchar * new_file);
+static void old_2_new_shortcut_file(char * old_file, char * new_file);
 static int init_old(void);
 static int init_bookmarks(int new_bookmarks, int have_old);
 
-static gchar *old_prefs = NULL;
-static gchar *old_dir = NULL;
-static gchar *old_bm = NULL;
-static gchar *old_sb = NULL;
-static gchar *old_fav = NULL;
-static gchar *old_text = NULL;
-static gchar *old_comm = NULL;
-static gchar *old_dict = NULL;
-static gchar *old_gbs = NULL;
+static char *old_prefs = NULL;
+static char *old_dir = NULL;
+static char *old_bm = NULL;
+static char *old_sb = NULL;
+static char *old_fav = NULL;
+static char *old_text = NULL;
+static char *old_comm = NULL;
+static char *old_dict = NULL;
+static char *old_gbs = NULL;
 
 
 /******************************************************************************
@@ -92,11 +97,11 @@ static gchar *old_gbs = NULL;
  *   gint
  */
 
-gint settings_init(int new_configs, int new_bookmarks)
+int settings_init(int new_configs, int new_bookmarks)
 {
-	gint retval = 0;
-	gboolean have_old = FALSE;
-	gboolean need_old = FALSE;
+	int retval = 0;
+	int have_old = FALSE;
+	int need_old = FALSE;
 
 	/* set program title */
 	strcpy(settings.program_title, "GnomeSword");
@@ -295,9 +300,9 @@ int init_old(void)
 int init_bookmarks(int new_bookmarks, int have_old)
 {
 	GNode *bookmark_tree = NULL;
-	gchar *file_buf = NULL;
-	gchar *removed = NULL;
-	gint load_old = FALSE;
+	char *file_buf = NULL;
+	char *removed = NULL;
+	int load_old = FALSE;
 
 	settings.load_xml_bookmarks = FALSE;
 
@@ -436,8 +441,10 @@ void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
 
 void load_settings_structure(void)
 {
+	char *buf = NULL;
+	
 	settings.gs_version = VERSION;
-	settings.MainWindowModule = xml_get_value("modules", "text");
+	settings.MainWindowModule = xml_get_value("modules", "bible");
 	settings.CommWindowModule = xml_get_value("modules", "comm");
 	settings.DictWindowModule = xml_get_value("modules", "dict");
 	settings.BookWindowModule = xml_get_value("modules", "book");
@@ -485,7 +492,7 @@ void load_settings_structure(void)
 	    xml_get_value("fontsize", "versenum");
 
 
-	settings.bible_text_color = xml_get_value("HTMLcolors", "text");
+	settings.bible_text_color = xml_get_value("HTMLcolors", "text_fg");
 	settings.bible_bg_color =
 	    xml_get_value("HTMLcolors", "background");
 	settings.currentverse_color =
@@ -531,36 +538,73 @@ void load_settings_structure(void)
 	settings.studypadfilename =
 	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
-	settings.show_style_bar_sp =
-	    atoi(xml_get_value("studypad", "stylebar"));
-	settings.show_edit_bar_sp =
-	    atoi(xml_get_value("studypad", "editbar"));
+	buf = xml_get_value("studypad", "stylebar");
+	if(buf)
+		settings.show_style_bar_sp =  atoi(buf);
+	   // atoi(xml_get_value("studypad", "stylebar"));
+	buf = xml_get_value("studypad", "editbar");
+	if(buf)
+		settings.show_edit_bar_sp =  atoi(buf);
 
 
-	settings.showshortcutbar =
-	    atoi(xml_get_value("shortcutbar", "shortcutbar"));
-	settings.showfavoritesgroup =
-	    atoi(xml_get_value("shortcutbar", "favo"));
-	settings.showtextgroup =
-	    atoi(xml_get_value("shortcutbar", "text"));
-	settings.showcomgroup =
-	    atoi(xml_get_value("shortcutbar", "comm"));
-	settings.showdictgroup =
-	    atoi(xml_get_value("shortcutbar", "dict"));
-	settings.showbookgroup =
-	    atoi(xml_get_value("shortcutbar", "book"));
-	settings.showbookmarksgroup =
-	    atoi(xml_get_value("shortcutbar", "bookmark"));
-	settings.showhistorygroup =
-	    atoi(xml_get_value("shortcutbar", "history"));
-	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
+	buf = xml_get_value("shortcutbar", "shortcutbar");
+	if(buf)
+		settings.showshortcutbar = atoi(buf);
+	    //atoi(xml_get_value("shortcutbar", "shortcutbar"));
+	buf = xml_get_value("shortcutbar", "favo");
+	if(buf)
+		settings.showfavoritesgroup = atoi(buf);
+	   // atoi(xml_get_value("shortcutbar", "favo"));
+	buf = xml_get_value("shortcutbar", "bible");
+	if(buf)
+		settings.showtextgroup = atoi(buf);
+	    //atoi(xml_get_value("shortcutbar", "text"));
+	buf = xml_get_value("shortcutbar", "comm");
+	if(buf)
+		settings.showcomgroup = atoi(buf);
+	    //atoi(xml_get_value("shortcutbar", "comm"));
+	buf = xml_get_value("shortcutbar", "dict");
+	if(buf)
+		settings.showdictgroup = atoi(buf);
+	   // atoi(xml_get_value("shortcutbar", "dict"));
+	buf = xml_get_value("shortcutbar", "book");
+	if(buf)
+		settings.showbookgroup = atoi(buf);
+	    //atoi(xml_get_value("shortcutbar", "book"));
+	buf = xml_get_value("shortcutbar", "bookmark");
+	if(buf)
+		settings.showbookmarksgroup = atoi(buf);
+	    //atoi(xml_get_value("shortcutbar", "bookmark"));
+	buf = xml_get_value("shortcutbar", "history");
+	if(buf)
+		settings.showhistorygroup = atoi(buf);
+	    //atoi(xml_get_value("shortcutbar", "history"));
+	buf = xml_get_value("shortcutbar", "docked");
+	if(buf)
+		settings.docked =  atoi(buf);
+	//atoi(xml_get_value("shortcutbar", "docked"));
 
 
-	settings.text_tabs = atoi(xml_get_value("tabs", "text"));
-	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));
-	settings.dict_tabs = atoi(xml_get_value("tabs", "dict"));
-	settings.book_tabs = atoi(xml_get_value("tabs", "book"));
-	settings.percomm_tabs = atoi(xml_get_value("tabs", "percomm"));
+	buf = xml_get_value("tabs", "bible");
+	if(buf)
+		settings.text_tabs =  atoi(buf);
+	//atoi(xml_get_value("tabs", "bible"));
+	buf = xml_get_value("tabs", "comm");
+	if(buf)
+		settings.comm_tabs =  atoi(buf);
+	//atoi(xml_get_value("tabs", "comm"));
+	buf = xml_get_value("tabs", "dict");
+	if(buf)
+		settings.dict_tabs =  atoi(buf);
+	//atoi(xml_get_value("tabs", "dict"));
+	buf = xml_get_value("tabs", "book");
+	if(buf)
+		settings.book_tabs =  atoi(buf);
+	//atoi(xml_get_value("tabs", "book"));
+	buf = xml_get_value("tabs", "percomm");
+	if(buf)
+		settings.percomm_tabs =  atoi(buf);
+	//atoi(xml_get_value("tabs", "percomm"));
 
 
 	/*
@@ -571,6 +615,9 @@ void load_settings_structure(void)
 	   settings. = xml_get_value("", "");
 	 */
 }
+
+
+
 
 
 /******************************************************************************

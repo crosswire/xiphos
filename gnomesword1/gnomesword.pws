@@ -6,24 +6,73 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=431
-1=77
-2=526
-3=255
-4=49
-5=47
-6=212
-7=195
-8=288
-9=601
-10=601
-11=33
-12=915
-13=31
-14=31
-15=402
-16=37
-17=1
+0=825
+1=337
+2=1050
+3=1
+4=764
+5=802
+6=56
+7=28
+8=42
+9=31
+10=451
+11=45
+12=47
+13=46
+14=43
+15=40
+16=44
+17=46
+18=44
+19=61
+20=49
+21=44
+22=51
+23=37
+24=32
+25=35
+26=54
+27=35
+28=31
+29=51
+30=51
+31=40
+32=48
+33=34
+34=48
+35=36
+36=41
+37=38
+38=45
+39=34
+40=44
+41=33
+42=35
+43=35
+44=33
+45=48
+46=45
+47=47
+48=46
+49=43
+50=40
+51=44
+52=46
+53=44
+54=61
+55=49
+56=44
+57=51
+58=37
+59=32
+60=35
+61=54
+62=35
+63=31
+64=51
+65=40
+66=51
 
 [filemarkers]
 0=
@@ -44,6 +93,55 @@ ShowLocals=true
 15=
 16=
 17=
+18=
+19=
+20=
+21=
+22=
+23=
+24=
+25=
+26=
+27=
+28=
+29=
+30=
+31=
+32=
+33=
+34=
+35=
+36=
+37=
+38=
+39=
+40=
+41=
+42=
+43=
+44=
+45=
+46=
+47=
+48=
+49=
+50=
+51=
+52=
+53=
+54=
+55=
+56=
+57=
+58=
+59=
+60=
+61=
+62=
+63=
+64=
+65=
+66=
 
 [File View]
 filter.file.unmatch=*.so *.o *.a *.la
@@ -51,30 +149,23 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
-1=/home/terry/Projects/gnomesword1/src/gnome/utilities.c
-2=/home/terry/Projects/gnomesword1/src/backend/config.cc
-3=/home/terry/Projects/gnomesword1/src/main/configs.c
-4=/home/terry/Projects/gnomesword1/src/main/configs.h
-5=/home/terry/Projects/gnomesword1/src/backend/config.hh
-6=/home/terry/Projects/gnomesword1/src/gnome/gbs_display.c
-7=/home/terry/Projects/gnomesword1/src/gnome/dictlex.c
-8=/home/terry/Projects/gnomesword1/src/gnome/main_window.c
-9=/home/terry/Projects/gnomesword1/src/gnome/html.c
+0=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
+1=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
 
 [Project Tree]
 0=0
 1=0:0
 2=0:1
 3=0:3
+4=0:4
 
 [Symbol Tree]
 0=5
 
 [File Tree]
 0=0
-1=0:7
-2=0:7:3
+1=0:9
+2=0:9:3
 
 [replace_text]
 0=mod_name
@@ -87,24 +178,18 @@ filter.dir.ignore.hidden=0
 7=vpc->
 
 [find_text]
-0=verse_list_notebook
-1=get_module_name
-2=modName
-3=mod_name
-4=gui_show_footnote
-5=check
-6=popup_window
-7=g_warning
+0=gtk_toolbar_new
+1=edit2_menu_accels
+2=toolbars_menu_accels
+3=pmEditor_accels
+4=accel_group
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=gint *
-1=audiofile
-2="GnomeSword"
-3=GnomeSword
-4=SWORD_NAMESPACE
-5=REG_ICASE
-6=gs_gui.h
-7=gs_interlinear.h
+0=gui/gnomesword.h
+1=#include "gui/gnomesword.h"
+2=settings
+3=audiofile
+4=gint *

@@ -1,7 +1,7 @@
 INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
     $(PIXBUF_CFLAGS) \
-    $(PACKAGE_CFLAGS) \
+    $(GNOME_CFLAGS) \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
@@ -70,7 +70,7 @@ gnomesword_1_0_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
-    $(PACKAGE_LIBS)\
+    $(GNOME_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS) \
     $(PSPELL_LIBS) \

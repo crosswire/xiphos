@@ -43,6 +43,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/settings.h"

@@ -37,6 +37,7 @@
 #include "gui/utilities.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
+#include "gui/widgets.h"
 
 #include "main/percomm.h"
 #include "main/settings.h"

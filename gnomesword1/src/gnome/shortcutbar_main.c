@@ -45,6 +45,7 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
+#include "gui/widgets.h"
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"

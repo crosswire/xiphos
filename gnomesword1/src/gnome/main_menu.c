@@ -48,6 +48,7 @@
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "gui/hints.h"
+#include "gui/widgets.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"

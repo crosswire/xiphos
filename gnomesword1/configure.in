@@ -56,14 +56,14 @@ AC_ARG_ENABLE(gtkembedmoz,[--enable-gtkembedmoz enable gtkembedmoz],gtkembedmoz=
 
 
 if test "x$gtkembedmoz" = xyes; then
-	pkg_modules="gtkhtml-1.1 gal libxml gconf mozilla-gtkmozembed"
+	pkg_modules="gtkhtml-1.1 gal libxml mozilla-gtkmozembed"
 	AC_DEFINE(USE_GTKEMBEDMOZ, 1, [Define if you want to use gtkembedmoz])
 else
-	pkg_modules="gtkhtml-1.1 gal libxml gconf"
+	pkg_modules="gtkhtml-1.1 gal libxml"
 fi
-PKG_CHECK_MODULES(PACKAGE, [$pkg_modules])
-AC_SUBST(PACKAGE_CFLAGS)
-AC_SUBST(PACKAGE_LIBS)
+PKG_CHECK_MODULES(GNOME, [$pkg_modules])
+AC_SUBST(GNOME_CFLAGS)
+AC_SUBST(GNOME_LIBS)
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
 GS_CHECK_LIB(GnomePrint, print, 0.29.0.0)
