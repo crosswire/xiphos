@@ -572,7 +572,7 @@ int xml_create_settings_file(char *path)
 	section_node = xmlNewChild(root_node, NULL, "studypad", NULL);
 	xmlNewTextChild(section_node, NULL, "directory",
 			settings.homedir);
-	xmlNewTextChild(section_node, NULL, "lastfile", "");
+	xmlNewTextChild(section_node, NULL, "lastfile", NULL);
 	xmlNewTextChild(section_node, NULL, "editbar", "1");
 	xmlNewTextChild(section_node, NULL, "stylebar", "1");
 
