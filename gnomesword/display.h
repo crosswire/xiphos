@@ -24,10 +24,10 @@
 
 /********************************************************************\
 **********************************************************************
-**  this code was taken from the Sword Cheatah program				**
-**  and modfied to handle some of the HTML stuff. Also added		**
-**  suport for the x symbol font when using greek modules.  		**
-**  																**
+**  this code was taken from the Sword Cheatah program              **
+**  and modfied to handle some of the HTML stuff. Also added        **
+**  suport for the x symbol font when using greek modules.          **
+**                                                                  **
 **********************************************************************
 \********************************************************************/
 
@@ -36,104 +36,86 @@
 
 
 
-class GTKEntryDisp : public SWDisplay 
-{
-protected:
-	GtkWidget *gtkText;
-public:
+class GTKEntryDisp:public SWDisplay {
+      protected:
+	GtkWidget * gtkText;
+      public:
 	static GdkColor colourGreen;
 	static GdkColor colourBlue;
 	static GdkColor colourRed;
 	static GdkColor colourCur;
-	
-	static void __initialize()
-	{
-			GdkColormap *cmap;
 
-			cmap = gdk_colormap_get_system();
-			colourGreen.red = 0x0000;
-			colourGreen.green = 0xbbbb;
-			colourGreen.blue = 0x0000;
-			colourBlue.red = 0;
-			colourBlue.green = 0;
-			colourBlue.blue = 0xffff;
-			colourRed.red = 0xffff;
-			colourRed.green = 0;
-			colourRed.blue = 0;
-			colourCur.red = 0x0000;
-			colourCur.green = 0xbbbb;
-			colourCur.blue = 0x0000;
-			if (!gdk_color_alloc(cmap, &colourGreen))
-			{
-			  g_error("couldn't allocate colour");
-			}
-			if (!gdk_color_alloc(cmap, &colourBlue))
-			{
-			  g_error("couldn't allocate colour");
-			}
-			if (!gdk_color_alloc(cmap, &colourRed))
-			{
-			  g_error("couldn't allocate colour");
-			}
-			if (!gdk_color_alloc(cmap, &colourCur))
-			{
-			  g_error("couldn't allocate colour");
-			}
+	static void __initialize() { GdkColormap *cmap;
+
+		 cmap = gdk_colormap_get_system();
+		 colourGreen.red = 0x0000;
+		 colourGreen.green = 0xbbbb;
+		 colourGreen.blue = 0x0000;
+		 colourBlue.red = 0;
+		 colourBlue.green = 0;
+		 colourBlue.blue = 0xffff;
+		 colourRed.red = 0xffff;
+		 colourRed.green = 0;
+		 colourRed.blue = 0;
+		 colourCur.red = 0x0000;
+		 colourCur.green = 0xbbbb;
+		 colourCur.blue = 0x0000;
+		if (!gdk_color_alloc(cmap, &colourGreen)) {
+			g_error("couldn't allocate colour");
+		}
+		if (!gdk_color_alloc(cmap, &colourBlue)) {
+			g_error("couldn't allocate colour");
+		}
+		if (!gdk_color_alloc(cmap, &colourRed)) {
+			g_error("couldn't allocate colour");
+		}
+		if (!gdk_color_alloc(cmap, &colourCur)) {
+			g_error("couldn't allocate colour");
+		}
 	}
-	GTKEntryDisp(GtkWidget *gtkText) { this->gtkText = gtkText; }
-	virtual char Display(SWModule &imodule);
-	gchar *gettags(gchar *text, gint pos);
+	GTKEntryDisp(GtkWidget * gtkText) {
+		this->gtkText = gtkText;
+	}
+	virtual char Display(SWModule & imodule);
+	gint gettags(gchar * text, gchar *tag, gint pos);
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKPerComDisp : public GTKEntryDisp
-{
-  public:
-	GTKPerComDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);	
+class GTKPerComDisp:public GTKEntryDisp { public:
+	GTKPerComDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKChapDisp : public GTKEntryDisp
-{
-  public:
-	GTKChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);
+class GTKChapDisp:public GTKEntryDisp { public:
+	GTKChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-class HTMLChapDisp : public GTKEntryDisp
-{
-    //gchar *GTKEntryDisp::gettags(gchar *text, gint pos);
-  public:
-	HTMLChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);
+class HTMLChapDisp:public GTKEntryDisp {	
+      public:
+	HTMLChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKRWPDisp : public GTKEntryDisp
-{
-  public:
-	GTKRWPDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);
+class GTKRWPDisp:public GTKEntryDisp { public:
+	GTKRWPDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-class HTMLentryDisp : public GTKEntryDisp
-{
-  public:
-	HTMLentryDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);
+class HTMLentryDisp:public GTKEntryDisp { public:
+	HTMLentryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKInterlinearDisp : public GTKEntryDisp 
-{
-  public:
-	GTKInterlinearDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);
+class GTKInterlinearDisp:public GTKEntryDisp { public:
+	GTKInterlinearDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
-void
-AboutModsDisplay		(GtkWidget* text, gchar *aboutinfo);
+void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
