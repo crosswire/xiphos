@@ -6,14 +6,14 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=302
-1=106
-2=1
-3=660
-4=432
-5=38
-6=4
-7=259
+0=106
+1=56
+2=74
+3=825
+4=468
+5=1
+6=66
+7=884
 8=73
 9=51
 10=59
@@ -28,7 +28,7 @@ ShowLocals=true
 4=
 5=
 6=
-7=1164,1452,
+7=
 8=
 9=
 10=
@@ -36,8 +36,14 @@ ShowLocals=true
 12=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
-1=/home/terry/Projects/gnomesword1/src/backend/dictlex.cpp
+0=/home/terry/Projects/gnomesword1/src/backend/dictlex.cpp
+1=/home/terry/Projects/gnomesword1/src/main/gs_commentary.c
+2=/home/terry/Projects/gnomesword1/src/main/gs_commentary.h
+3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+4=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+5=/home/terry/Projects/gnomesword1/src/backend/gbs.cpp
+6=/home/terry/Projects/gnomesword1/src/main/gs_gbs.c
+7=/home/terry/Projects/gnomesword/src/sw_sword.cpp
 
 [replace_text]
 0=s->app
@@ -60,11 +66,11 @@ ShowLocals=true
 7=VCMgr
 
 [find_in_files]
-0=shutdownSWORD
-1=shutdownviewerSBSW
-2=displaydictlexSBSW
-3=getModlistSW
-4=saveshortcutbarSW
-5=loadshortcutbarSW
-6=save_iconsizeSW
-7=sbtypefromModNameSBSW
+0=gui_setPageandKey_DL
+1=shutdownSWORD
+2=shutdownviewerSBSW
+3=displaydictlexSBSW
+4=getModlistSW
+5=saveshortcutbarSW
+6=loadshortcutbarSW
+7=save_iconsizeSW

@@ -43,28 +43,20 @@ extern "C" {
 #define BOOK_MODS "Generic Books"
 
 
-
-	void backend_firstInitSWORD(void);
-	void navcurcomModSWORD(gint direction);
+	void backend_first_init(void);
 	void initSWORD(SETTINGS * s);
-	void modNameFromDesc(gchar * modName, gchar * modDesc);
 	void updateIntDlg(SETTINGS * s);
-	void updateinterlinearpage(void);
+	char *backend_get_interlinear_module_text(char * mod_name,
+							char *key);
+	void backend_text_module_change_verse(char *key);
+	void backend_module_name_from_description(gchar * mod_name,
+						  gchar * mod_desc);
 	void backend_shutdown(SETTINGS * s);
-	void FillDictKeysSWORD(void);
-	void changeVerseSWORD(gchar * ref);
-	void ChangeVerseSWORD(void);
-	void changeVerseComSWORD(void);
-	void resultsListSWORD(GtkWidget * searchFrm,
-			      gint row, gint column);
-	void globaloptionsSWORD(gchar * option, gint window,
-				gboolean choice, gboolean showchange);
-	void backend_change_text_module(gchar * modName, gboolean showchange);
+	void backend_change_text_module(gchar * modName,
+					gboolean showchange);
 	void backend_set_verse_style(gboolean choice);
 	void backend_set_locale(char *locale);
-	/*** change Bible book ***/
-	void backend_book_changed(gchar *bookname);
-	void backend_chapter_verse_changed(char *bookname, int chapter, int verse);
+	char *backend_get_valid_key(char *key);
 	char *backend_get_book_from_key(char *key);
 	int backend_get_chapter_from_key(char *key);
 	int backend_get_verse_from_key(char *key);
@@ -72,12 +64,14 @@ extern "C" {
 	void backend_delete_personal_comment(void);
 	void backend_change_percom_module(gchar * modName);
 	void backend_set_global_option(gint window, gchar * option,
-			       gchar * yesno);
+				       gchar * yesno);
 	GList *backend_get_books(void);
 	const char *backend_get_sword_verion(void);
-	void backend_swap_interlinear_with_main(gchar * intmod, SETTINGS *s);
-	void backend_display_new_font_color_and_size(SETTINGS *s);
-	void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s);
+	void backend_swap_interlinear_with_main(gchar * intmod,
+						SETTINGS * s);
+	void backend_display_new_font_color_and_size(SETTINGS * s);
+	void backend_save_module_key(gint modwindow, gchar * key,
+				     SETTINGS * s);
 	void backend_display_devotional(SETTINGS * s);
 	int backend_get_mod_type(gchar * modName);
 	GList *backend_get_list_of_mods_by_type(char *mod_type);
@@ -87,7 +81,9 @@ extern "C" {
 	gchar *backend_get_module_description(gchar * modName);
 	gchar *backend_get_path_to_mods(void);
 	gchar *backend_get_mod_aboutSWORD(gchar * modname);
-	int backend_get_module_page(char * module_name, char * module_type);
+	int backend_get_module_page(char *module_name,
+				    char *module_type);
+	char *backend_get_module_font_name(char *mod_name);
 	
 #ifdef __cplusplus
 }
