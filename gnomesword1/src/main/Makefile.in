@@ -155,8 +155,8 @@ COMMON_SOURCE = \
     bibletext.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
-    gs_commentary.c \
-    gs_commentary.h \
+    commentary.c \
+    commentary.h \
     gs_detach_int.c \
     gs_detach_int.h \
     gs_detach_sb.c \
@@ -263,7 +263,7 @@ PROGRAMS = $(bin_PROGRAMS)
 
 am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	char_table.$(OBJEXT) bibletext.$(OBJEXT) gs_bookmarks.$(OBJEXT) \
-	gs_commentary.$(OBJEXT) gs_detach_int.$(OBJEXT) \
+	commentary.$(OBJEXT) gs_detach_int.$(OBJEXT) \
 	gs_detach_sb.$(OBJEXT) gs_dictlex.$(OBJEXT) gs_editor.$(OBJEXT) \
 	gs_editor_replace.$(OBJEXT) gs_editor_search.$(OBJEXT) \
 	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) \
@@ -288,8 +288,7 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bibletext.Po $(DEPDIR)/char_table.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_bookmarks.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_commentary.Po \
+@AMDEP_TRUE@	$(DEPDIR)/commentary.Po $(DEPDIR)/gs_bookmarks.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_int.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_sb.Po $(DEPDIR)/gs_dictlex.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor.Po \
@@ -379,8 +378,8 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bibletext.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/char_table.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/commentary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bookmarks.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_commentary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_int.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_sb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_dictlex.Po@am__quote@

@@ -32,7 +32,6 @@
 #include "gs_interlinear.h"
 #include "gs_history.h"
 #include "gs_gui_cb.h"
-#include "gs_commentary.h"
 #include "gs_gbs.h"
 #include "gs_dictlex.h"
 #include "support.h"
@@ -52,6 +51,7 @@
  */ 
 #include "percomm.h"
 #include "bibletext.h"
+#include "commentary.h"
  
 /*
  * backend
@@ -101,7 +101,7 @@ void init_gnomesword(SETTINGS * s)
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 	mod_lists = &mods;
 	/*
-	   set glist to null 
+	 * set glist to null 
 	 */
 	mod_lists->biblemods = NULL;
 	mod_lists->commentarymods = NULL;
@@ -114,7 +114,7 @@ void init_gnomesword(SETTINGS * s)
 	mod_lists->dict_descriptions = NULL;
 	mod_lists->book_descriptions = NULL;
 	/*
-	   fill module lists
+	 * fill module lists
 	 */
 	mod_lists->options = backend_get_global_options_list();
 	mod_lists->text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
@@ -138,7 +138,7 @@ void init_gnomesword(SETTINGS * s)
 	/*
 	 *  setup commentary gui support 
 	 */
-	mod_lists->commentarymods = gui_setup_comm(s);
+	mod_lists->commentarymods = setup_commentary(s);
 	/*
 	 *  setup personal comments gui support 
 	 */
@@ -235,7 +235,7 @@ void gnomesword_shutdown(SETTINGS * s)
 	shutdown_text();
 	gui_shutdownGBS();
 	gui_shutdownDL();
-	gui_shutdownCOMM();
+	shutdown_commentary();
 	shutdown_percomm();
 	
 	g_print("\nwe are done with Gnomesword\n");
@@ -763,7 +763,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 	case COMMENTARY_TYPE:
 		page_num =
 		    backend_get_module_page(module_name, COMM_MODS);
-		gui_set_commentary_page_and_key(page_num, key);
+		set_commentary_page_and_key(page_num, key);
 		break;
 	case DICTIONARY_TYPE:
 		page_num =
