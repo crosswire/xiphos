@@ -31,6 +31,7 @@ extern "C" {
 
 #include <gnome.h>
 
+
 void initSWORD(GtkWidget *mainform);
 void shutdownSWORD(void);
 void FillDictKeysSWORD(void);
