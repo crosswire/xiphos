@@ -80,6 +80,7 @@
 #include "search.h"
 #include "interlinear.h"
 #include "gs_interlinear.h"
+#include "gs_bibletext.h"
 
 
 typedef map < string, string > modDescMap;
@@ -233,31 +234,27 @@ void backend_init_sword(SETTINGS * s)
 	     it != mainMgr->Modules.end(); it++) {
 		descriptionMap[string
 			       ((char *) (*it).second->Description())] =
-		    string((char *) (*it).second->Name());
+		    string((char *) (*it).second->Name());		
 
-		if (backend_module_is_locked((*it).second->Name()))
-			g_warning("%s is locked", (*it).second->Name());
-
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
+		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 			curMod = (*it).second;
 			havebible = TRUE;
 			++textpages;
 		}
 
-		else if (!strcmp((*it).second->Type(), "Commentaries")) {
+		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have 
 		}
 
 		else if (!strcmp
-			 ((*it).second->Type(),
-			  "Lexicons / Dictionaries")) {
+			 ((*it).second->Type(), DICT_MODS)) {
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
 
 		}
 
-		else if (!strcmp((*it).second->Type(), "Generic Books")) {
+		else if (!strcmp((*it).second->Type(), BOOK_MODS)) {
 			++bookpages;
 		}
 	}
@@ -300,34 +297,30 @@ void backend_init_sword(SETTINGS * s)
 	}
 }
 
-
 /******************************************************************************
  * Name
- *   backend_text_module_change_verse
+ *   backend_change_verse_percom
  *
  * Synopsis
  *   #include "sword.h"
  *
- *   void backend_text_module_change_verse(gchar * key)	
+ *   void backend_change_verse_percom(gchar * key)
  *
  * Description
- *   change verse for text mod and percom mod
+ *   change verse for percom mod
  *
  * Return value
  *   void
  */
-void backend_text_module_change_verse(gchar * key)
-{
-	vkText = key;
-	gui_display_text(key);
-	if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
-		if (!settings->editnote) {
-			if (usepersonalcomments && percomMod) {
-				percomMod->SetKey(key);	//-- set personal module to current verse
-				percomMod->Display();	//-- show change
-				noteModified = false;	//-- we just loaded comment so it is not modified                                       
-			}
-		}
+void backend_change_verse_percom(gchar * key)
+{	
+	if(percomMod) {
+		//-- set personal module to current verse
+		percomMod->SetKey(key);	
+		//-- show change
+		percomMod->Display();	
+		//-- we just loaded comment so it is not modified
+		noteModified = false;	                                       
 	}
 }
 
@@ -391,94 +384,6 @@ void backend_shutdown(SETTINGS * s)
 	g_print("\nwe are done with Sword\n");
 }
 
-/******************************************************************************
- * Name
- *  backend_change_text_module 
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void backend_change_text_module(gchar * modName, gboolean showchange)	
- *
- * Description
- *    change text module for main window
- *
- * Return value
- *   void
- */
-void backend_change_text_module(gchar * modName, gboolean showchange)
-{
-	ModMap::iterator it;
-	GtkWidget *frame;
-	gchar title[200];
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
-	GList *tmp;
-	bool value;
-
-	tmp = NULL;
-	if (havebible) {
-		it = mainMgr->Modules.find(modName);	//-- iterate through the modules until we find modName
-		if (it != mainMgr->Modules.end()) {	//-- if we find the module   
-			curMod = (*it).second;	//-- change current module to new module
-			if ((sit =
-			     mainMgr->config->Sections.find(curMod->
-							    Name())) !=
-			    mainMgr->config->Sections.end()) {
-				ConfigEntMap & section = (*sit).second;
-				//-- do we have a CipherKey= tag?
-				if ((entry = section.find("CipherKey")) != section.end()) {	//-- set sensitivity of unlock mod menu item
-					gtk_widget_set_sensitive
-					    (settings->
-					     unlocktextmod_item, TRUE);
-				} else {
-					gtk_widget_set_sensitive
-					    (settings->
-					     unlocktextmod_item, FALSE);
-				}
-				/*** set global options here ***/
-				tmp = options;
-				while (tmp != NULL) {
-					value =
-					    backend_load_module_options((*it).second->Name(), (gchar *) tmp->data);
-					set_module_global_options((gchar
-								   *)
-								  tmp->
-								  data,
-								  MAIN_TEXT_WINDOW,
-								  value,
-								  FALSE);
-					//g_warning("%s = %d",(gchar*)tmp->data,value); 
-					tmp = g_list_next(tmp);
-				}
-				g_list_free(tmp);
-			}
-			if (showchange) {
-				curMod->SetKey(current_verse);	//-- set key to current verse
-				curMod->Display();	//-- show it to the world
-			}
-		}
-		strcpy(settings->MainWindowModule, (gchar *) curMod->Name());	//-- remember where we are so we can open here next time we startup
-		sprintf(title, "GnomeSWORD - %s", (gchar *) curMod->Description());	//curMod->Description());              
-		gtk_window_set_title(GTK_WINDOW(settings->app), title);
-	}
-	frame = lookup_widget(settings->app, "frame9");
-	if (!settings->text_tabs)
-		gtk_frame_set_label(GTK_FRAME(frame), curMod->Name());	//-- set frame label
-	else
-		gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
-
-}
-
-/******************************************************************************
-* set verse style -- verses or paragraphs
-*******************************************************************************/
-void backend_set_verse_style(gboolean choice)
-{
-	settings->versestyle = choice;	//-- remember our choice for the next program startup
-	if (havebible)
-		curMod->Display();	//-- show the change
-}
 
 
 char *backend_get_valid_key(char *key)
@@ -602,12 +507,12 @@ void backend_set_global_option(gint window, gchar * option,
 
 /**********************************************************************
  * Name
- *   backend_getBibleBooksSWORD(void)
+ *   backend_get_books
  *
  * Synopsis
  *   #include "sw_sword.h"
  *   
- *   GList *backend_getBibleBooksSWORD(void);
+ *   GList *backend_get_books(void)
  *
  * Description
  *   Returns a list of the books of the Bible.

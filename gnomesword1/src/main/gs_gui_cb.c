@@ -89,7 +89,7 @@ on_btnStrongs_toggled(GtkToggleButton * togglebutton,
 {
 	if (settings->strongsnum) {
 		GTK_CHECK_MENU_ITEM(settings->strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-		set_module_global_options("Strong's Numbers", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)      
+		set_text_module_global_options("Strong's Numbers", togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)      
 	}
 }
 
@@ -99,7 +99,7 @@ on_btnMorphs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	if (settings->morphs) {
 		GTK_CHECK_MENU_ITEM(settings->morphs)->active = togglebutton->active;	//-- change menu check item to match button
-		set_module_global_options("Morphological Tags", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)      
+		set_text_module_global_options("Morphological Tags",togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)      
 	}
 }
 
@@ -110,7 +110,7 @@ on_btnFootnotes_toggled(GtkToggleButton * togglebutton,
 {
 	if (settings->footnotes) {
 		GTK_CHECK_MENU_ITEM(settings->footnotes)->active = togglebutton->active;	//-- change menu check item to match button
-		set_module_global_options("Footnotes", 0, togglebutton->active, TRUE);	//-- trun strongs numbers on and off(gs_sword.cpp)
+		set_text_module_global_options("Footnotes", togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)
 	}
 }
 
@@ -138,8 +138,7 @@ void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 		gchar buf[256];
 		gchar *bookname =
 		    gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget
-					(settings->app, "cbeBook")));
+				       (settings->cbeBook));
 		sprintf(buf,"%s 1:1",bookname);
 		change_verse(buf);
 	}
@@ -158,18 +157,13 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 	
 		bookname =
 		    gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget
-					(settings->app, "cbeBook")));
+				       (settings->cbeBook));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "spbChapter")));
+						     (settings->spbChapter));
 		verse =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "spbVerse")));
+						     (settings->spbVerse));
 		sprintf(buf,"%s %d:%d",bookname,chapter,verse);
 		change_verse(buf);		
 		return TRUE;
@@ -189,18 +183,13 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 	
 		bookname =
 		    gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget
-					(settings->app, "cbeBook")));
+				       (settings->cbeBook));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "spbChapter")));
+						     (settings->spbChapter));
 		verse =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "spbVerse")));
+						     (settings->spbVerse));
 		sprintf(buf,"%s %d:%d",bookname,chapter,verse);
 		change_verse(buf);
 		return TRUE;
@@ -215,8 +204,7 @@ void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 
 	buf =
 	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget
-				(settings->app, "cbeFreeformLookup")));
+			       (settings->cbeFreeformLookup));
 	change_verse(buf);	//-- change verse to entry text 
 }
 
@@ -228,26 +216,13 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 {
 	gchar *buf;
 
-	buf = gtk_entry_get_text(GTK_ENTRY(widget));	//lookup_widget(settings->app, "cbeFreeformLookup")));
+	buf = gtk_entry_get_text(GTK_ENTRY(widget));
 	if (event->keyval == 65293 || event->keyval == 65421) {	/* enter key */
-		change_verse(buf);	//backend_freeform_lookup(buf);
+		change_verse(buf);	
 		return TRUE;
 	}
 	return FALSE;
 }
-
-//----------------------------------------------------------------------------------------------
-void /* commentary notebook page changed */
-on_nbTextMods_switch_page(GtkNotebook * notebook,
-			  GtkNotebookPage * page, gint page_num,
-			  gpointer user_data)
-{
-	GtkLabel *label;	//-- pointer to page label
-
-	label = (GtkLabel *) page->tab_label;	//-- get label
-	backend_change_text_module((char *) label->label, TRUE);
-}
-
 
 //----------------------------------------------------------------------------------------------
 void on_textComments_changed(GtkEditable * editable, gpointer user_data)

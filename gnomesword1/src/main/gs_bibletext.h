@@ -41,6 +41,7 @@ extern "C" {
 	typedef struct _text_data TEXT_DATA;
 	struct _text_data {
 		GtkWidget *html;
+		GtkWidget *frame;
 		GtkWidget *showtabs;
 		gchar *mod_name;
 		gchar *mod_description;
@@ -49,21 +50,24 @@ extern "C" {
 		gint mod_num;
 		gboolean is_locked;
 		/*
-		gboolean
-		    strongs,
-		    morphs,
-		    footnotes,
-		    greekaccents,
-		    lemmas,
-		    scripturerefs, 
-		    hebrewpoints, 
-		    hebrewcant, 
-		    headings;
-		*/
+		   gboolean
+		   strongs,
+		   morphs,
+		   footnotes,
+		   greekaccents,
+		   lemmas,
+		   scripturerefs, 
+		   hebrewpoints, 
+		   hebrewcant, 
+		   headings;
+		 */
 		Text_Find_Dialog *find_dialog;
 	};
+
+	void set_text_module_global_options(gchar * option,
+					    gboolean choice);
 	void gui_set_text_page_and_key(gint page_num, gchar * key);
-	void gui_setup_text(SETTINGS * s);
+	GList *gui_setup_text(SETTINGS * s);
 	void gui_shutdown_text(void);
 	void gui_display_text(gchar * key);
 
