@@ -538,7 +538,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 	gchar *key = NULL;
 	gchar *offset = NULL;
 	gint mod_type;
-
+	GtkTreePath *path;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
 			   2, &cap, 3, &mod, 4, &key, -1);
@@ -625,6 +625,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		backend->set_module(mod);
 		backend->set_treekey(atoi((key) ? key : (gchar *) "0"));
 		main_display_book(mod, (key) ? key : (gchar *) "0");
+		path = gtk_tree_model_get_path(model,&selected);
 		if (!gtk_tree_model_iter_has_child(
 			GTK_TREE_MODEL(model), &selected)
 		    && !key) {
@@ -640,6 +641,9 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			add_children_to_tree(model,
 					     selected, mod, atol(key));
 		}
+		gtk_tree_view_expand_row(GTK_TREE_VIEW(sidebar.module_list),
+                                             path,
+                                             FALSE);
 		break;
 	}
 	if (cap)
