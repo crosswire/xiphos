@@ -157,7 +157,20 @@ int settings_init(int new_configs, int new_bookmarks)
 				     strlen("settings.xml") + 2);
 	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
 		"settings.xml");
-
+/*
+	if(new_configs){
+		// user ask for new configs 
+		g_print("\nCreate new configs: need to create settings!\n");
+		xml_create_settings_file(settings.fnconfigure);
+		backend_init_main_mgr();
+		init_lists();
+		retval = gui_first_run();
+		shutdown_list();
+		backend_delete_main_mgr();
+		xml_save_settings_doc(settings.fnconfigure);
+		xml_free_settings_doc();
+	}
+	*/
 	/* if gSwordDir does not exist create it */
 	if (access(settings.fnconfigure, F_OK) == -1) {
 		/* must be first run */
@@ -170,7 +183,6 @@ int settings_init(int new_configs, int new_bookmarks)
 		backend_delete_main_mgr();
 		xml_save_settings_doc(settings.fnconfigure);
 		xml_free_settings_doc();
-
 	}
 
 	xml_parse_settings_file(settings.fnconfigure);
@@ -187,12 +199,10 @@ int settings_init(int new_configs, int new_bookmarks)
 		g_free(old_gbs);
 	}
 
-
 	if (old_dir)
 		g_free(old_dir);
 	return retval;
 }
-
 
 /******************************************************************************
  * Name

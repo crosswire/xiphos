@@ -531,8 +531,10 @@ void gui_update_parallel_page(void)
 			}
 
 			font_size = get_module_font_size(mod_name);
-			if (strlen(font_size) < 2)
+			if (strlen(font_size) < 2){
+				free(font_size);
 				font_size = g_strdup("+0");
+			}
 
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
@@ -747,8 +749,10 @@ static void int_display(gchar * key)
 			}
 
 			use_font_size = get_module_font_size(mod_name);
-			if (strlen(use_font_size) < 2)
+			if (strlen(use_font_size) < 2){
+				free(use_font_size);
 				use_font_size = g_strdup("+0");
+			}
 
 			sprintf(buf,
 				"<td width=\"20%%\" bgcolor=\"%s\">"

@@ -751,7 +751,7 @@ void gui_setup_percomm(GList * mods)
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
-		p = g_new(PC_DATA, 1);
+		p = g_new0(PC_DATA, 1);
 		p->mod_name = (gchar *) tmp->data;
 		p->mod_num = count;
 		p->search_string = NULL;

@@ -1,7 +1,11 @@
 #ifndef __DEBUG_H_
 #define __DEBUG_H_
 
-#include <glib.h>
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
+#include <glib-1.2/glib.h>
+#endif
 
 /*
  * Implementation debug macros
