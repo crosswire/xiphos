@@ -207,8 +207,8 @@ void set_text_global_option(gchar * option, gchar * choice)
  *   char*
  */ 
 
-void set_parallel_global_option(char * option, char * yesno)
+/*void set_parallel_global_option(char * option, char * yesno)
 {
 	backend_set_global_option(8, option, yesno);
-	/*backend_set_parallel_global_option(option, yesno);*/
 }
+*/
