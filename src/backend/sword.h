@@ -85,7 +85,7 @@ extern "C" {
     gchar *gettextmodSWORD(void);
     gchar *getcommodSWORD(void);
     gchar *getcommodDescriptionSWORD(void);
-    GList *backend_getBibleBooksSWORD(void);
+    GList *backend_get_books(void);
     void gotoBookmarkSWORD(gchar * modName, gchar * key);
     gchar *getmodkeySWORD(gint num);
     const char *getSwordVerionSWORD(void);

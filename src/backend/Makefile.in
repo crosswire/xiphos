@@ -183,8 +183,8 @@ libbackend_a_SOURCES = \
     viewcomm_dlg.h\
     viewdict_dlg.cpp \
     viewdict_dlg.h \
-    viewtext_dlg.cpp \
-    viewtext_dlg.h 
+    viewtext.cpp \
+    viewtext.h 
 
 subdir = src/backend
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -199,7 +199,7 @@ am_libbackend_a_OBJECTS = bookmarks.$(OBJEXT) commentary.$(OBJEXT) \
 	display_info.$(OBJEXT) module_options.$(OBJEXT) \
 	properties.$(OBJEXT) search.$(OBJEXT) shortcutbar.$(OBJEXT) \
 	sword.$(OBJEXT) verselist_sb.$(OBJEXT) viewcomm_dlg.$(OBJEXT) \
-	viewdict_dlg.$(OBJEXT) viewtext_dlg.$(OBJEXT)
+	viewdict_dlg.$(OBJEXT) viewtext.$(OBJEXT)
 libbackend_a_OBJECTS = $(am_libbackend_a_OBJECTS)
 
 DEFS = @DEFS@
@@ -215,7 +215,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/search.Po $(DEPDIR)/shortcutbar.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sword.Po $(DEPDIR)/verselist_sb.Po \
 @AMDEP_TRUE@	$(DEPDIR)/viewcomm_dlg.Po $(DEPDIR)/viewdict_dlg.Po \
-@AMDEP_TRUE@	$(DEPDIR)/viewtext_dlg.Po
+@AMDEP_TRUE@	$(DEPDIR)/viewtext.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -286,7 +286,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/verselist_sb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewcomm_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewdict_dlg.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewtext_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewtext.Po@am__quote@
 
 distclean-depend:
 	-rm -rf $(DEPDIR)

@@ -41,18 +41,18 @@
 #include "sword.h"
 #include "display.h"
 
-SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
-SWMgr *SDMgr;	/* sword mgr for view dict dialog */
-SWModule *SDMod;   /* module for view dict dialog */
+static SWDisplay *display;	/* to display modules in view dict dialog */
+static SWMgr *mgr;	/* sword mgr for view dict dialog */
+static SWModule *mod;   /* module for view dict dialog */
 
 /***************************/
 //-------------------------------------------------------------------------------------------
 void
 shutdownSDSWORD(void)  //-- close down show dict/lex dialog
 {	
-	delete SDMgr;	
-	if(SDDisplay)
-		delete SDDisplay;	
+	delete mgr;	
+	if(display)
+		delete display;	
 }
 
 /****************************************************************************************
@@ -67,16 +67,15 @@ GList* setupSDSWORD(GtkWidget *text)
 	
 	extern SETTINGS *settings;
 	
-	SDMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	SDMod     = NULL;
-	SDDisplay = new  GtkHTMLEntryDisp(text,settings);
-	//SDDisplay = new  GtkHTMLEntryDisp(text);
+	mgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	mod     = NULL;
+	display = new  GtkHTMLEntryDisp(text,settings);
 	list = NULL;
-	for(it = SDMgr->Modules.begin(); it != SDMgr->Modules.end(); it++){
+	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
-			SDMod = (*it).second;
-			list = g_list_append(list,SDMod->Name());
-			SDMod->Disp(SDDisplay);
+			mod = (*it).second;
+			list = g_list_append(list,mod->Name());
+			mod->Disp(display);
 		}
 	}
 	return list;
@@ -88,43 +87,41 @@ GList* setupSDSWORD(GtkWidget *text)
  ******************************************************************************/
 gchar* getSDmodDescriptionSWORD(void)
 {
-	return (char *) SDMod->Description();;
+	return (char *) mod->Description();;
 }
 
 /******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
  *
  ******************************************************************************/
-void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
+void loadSDmodSWORD(gchar *modName)
 {
 	ModMap::iterator it;
-        
-        
-        gtk_clist_clear( GTK_CLIST(clist)); //-- start with empty list	
-        it = SDMgr->Modules.find(modName);  //-- find module we want to use
-	if (it != SDMgr->Modules.end()){		
-		SDMod = (*it).second;  //-- set curdictMod to new choice
-		SDMod->SetKey("");		
-		SDMod->Display();	 //-- display new dict		
+               
+        it = mgr->Modules.find(modName);  //-- find module we want to use
+	if (it != mgr->Modules.end()){		
+		mod = (*it).second;  //-- set mod to new choice
+		mod->SetKey("");		
+		mod->Display();	 //-- display new dict		
 	}
 }
 
 /******************************************************************************
- *loadSDkeysSWORD - load a dictionary keys into clist
+ *loadSDkeysSWORD - load a dictionary's keys into clist
  *returns a list of keys
  ******************************************************************************/
 void loadSDkeysSWORD(GtkWidget *clist)
 {
 	gchar *listitem;
-	//SDMod->SetKey("A");
-	if(!stricmp(SDMod->Name(),"WebstersDict"))
-		SDMod->SetKey("A");
+	//mod->SetKey("A");
+	if(!stricmp(mod->Name(),"WebstersDict"))
+		mod->SetKey("A");
 	else
-		(*SDMod)=TOP; 
-	SDMod->Display();
-	SDMod->Error();
-	for (;!SDMod->Error();(*SDMod)++){
-		listitem = g_strdup((const char *)SDMod->KeyText()); //-- key to listitem
+		(*mod)=TOP; 
+	mod->Display();
+	mod->Error();
+	for (;!mod->Error();(*mod)++){
+		listitem = g_strdup((const char *)mod->KeyText()); //-- key to listitem
 		gtk_clist_append(GTK_CLIST(clist) , &listitem); //-- listitem to list
 		if(listitem)
 			g_free(listitem);
@@ -137,8 +134,8 @@ void loadSDkeysSWORD(GtkWidget *clist)
  ******************************************************************************/
 void gotokeySWORD(gchar *newkey)
 {
-        SDMod->SetKey(newkey); //-- set key to our text
-        SDMod->Display();
+        mod->SetKey(newkey); //-- set key to our text
+        mod->Display();
 }
 
 /******************************************************************************
@@ -147,10 +144,10 @@ void gotokeySWORD(gchar *newkey)
  ******************************************************************************/
 void SDdictSearchTextChangedSWORD(char* newkey)
 {		
-	if (SDMod){ //-- if we have a dict module	
+	if (mod){ //-- if we have a dict module	
 		if(strcmp(newkey,"")){  //-- if text is not null		
-			SDMod->SetKey(newkey); //-- set key to our text
-			SDMod->Display();	//-- show what we found	
+			mod->SetKey(newkey); //-- set key to our text
+			mod->Display();	//-- show what we found	
 		}
 	}
 }

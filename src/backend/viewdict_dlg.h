@@ -35,7 +35,7 @@ extern "C" {
 
 	void gotokeySWORD(gchar * newkey);
 	GList *setupSDSWORD(GtkWidget * text);
-	void loadSDmodSWORD(GtkWidget * clist, gchar * modName);
+	void loadSDmodSWORD(gchar * modName);
 	void shutdownSDSWORD(void);
 	void SDdictSearchTextChangedSWORD(char *newkey);
 	gchar *getSDmodDescriptionSWORD(void);

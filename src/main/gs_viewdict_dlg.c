@@ -113,7 +113,7 @@ void on_ceSDMods_changed(GtkEditable * editable, gpointer user_data)
 	if (!firsttime) {
 		buf = gtk_entry_get_text(GTK_ENTRY(editable));
 		gtk_paned_set_position(GTK_PANED(hpaned2), 0);
-		loadSDmodSWORD(clKeys, buf);
+		loadSDmodSWORD(buf);
 		gtk_frame_set_label(GTK_FRAME(frameShowDict), buf);	/* set frame label to current Module name  */
 		buf = gtk_entry_get_text(GTK_ENTRY(GTK_WIDGET(user_data)));
 		SDdictSearchTextChangedSWORD(buf);
@@ -161,10 +161,7 @@ on_clKeys_select_row(GtkCList * clist,
  ****************************************************************************************/
 void initSD(gchar * modName)
 {
-
-	loadSDmodSWORD(clKeys, modName);
-
-
+	loadSDmodSWORD(modName);
 }
 
 /****************************************************************************************
