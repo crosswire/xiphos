@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+#include <libxml/parser.h>
 enum {
 	COL_OPEN_PIXBUF,
 	COL_CLOSED_PIXBUF,

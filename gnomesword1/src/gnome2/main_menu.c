@@ -24,7 +24,7 @@
 #endif
 
 #include <gnome.h>
-#include <gal/shortcut-bar/e-shortcut-bar.h>
+//#include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"

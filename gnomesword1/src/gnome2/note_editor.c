@@ -31,13 +31,17 @@
 #include <gtkhtml/htmlsettings.h>
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>
+#ifdef USE_GTKHTML30
 #include <gtkhtml/htmllinktext.h>
+#endif
 #include <gtkhtml/htmlengine-edit.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlengine-edit-cut-and-paste.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlengine-search.h>
+#ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
+#endif
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -1159,6 +1163,8 @@ static void on_replace_activate(GtkMenuItem * menuitem,
 static void set_link_to_module(gchar * linkref, gchar * linkmod,
 			       DIALOG_DATA * d)
 {
+
+#ifdef USE_GTKHTML30
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	const gchar *url;
 	const gchar *text;
@@ -1194,6 +1200,7 @@ static void set_link_to_module(gchar * linkref, gchar * linkmod,
 					 g_utf8_strlen(text, -1));
 		g_free(url_copy);
 	}
+#endif
 }
 
 /******************************************************************************
