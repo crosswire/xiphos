@@ -91,7 +91,8 @@ void gui_verselist_to_bookmarks(gchar * module_name)
 	
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
-	info->title = N_("Folder Name?");
+	info->stock_icon = "gtk-open";
+	info->title = N_("Bookmark");
 	info->label_top = N_("Enter Folder Name");
 	info->text1 = g_strdup(settings.searchText);
 	info->label1 = N_("Folder: ");

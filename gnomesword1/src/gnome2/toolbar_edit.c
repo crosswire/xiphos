@@ -104,7 +104,8 @@ static void on_btn_open_clicked(GtkButton * button,
 		GS_DIALOG *info;
 
 		info = gui_new_dialog();
-		info->title = N_("Save File?");
+		info->stock_icon = "gtk-save";
+		info->title = N_("Studypad");
 		if (settings.studypadfilename)
 			info->label_top = settings.studypadfilename;
 		else
@@ -192,13 +193,10 @@ static void on_btn_delete_clicked(GtkButton * button,
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
-		//gchar *key;
 
-		//key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
-		info->title = N_("Delete note?");
-		info->label_top = N_("Are you sure you want");
-		info->label_middle = N_("to delete the note for");
+		info->label_top = N_("Delete Note?");
+		info->label_middle = N_("Are you sure you want\nto delete the note for");
 		info->label_bottom = ecd->key;
 		info->yes = TRUE;
 		info->no = TRUE;
@@ -215,7 +213,6 @@ static void on_btn_delete_clicked(GtkButton * button,
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 		g_free(info);
-		//g_free(key);
 	}
 
 }
