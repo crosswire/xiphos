@@ -97,7 +97,7 @@ dnl *******************************
 
 AC_MSG_CHECKING([for gnome-print >= 0.20])
 if gnome-config --libs print > /dev/null 2>&1; then
-	vers=`gnome-config --modversion print | sed 's/^gnome-print-//'`
+	vers=`gnome-config --modversion gnomeprint | sed 's/^gnomeprint-//'`
 	if [[ "x$vers" = "x" ]] ; then
 		gnomeprint_ok=false
 	else

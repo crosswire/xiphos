@@ -25,7 +25,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-#pragma }
 #endif /* __cplusplus */
 
 /* ECanvas - A class derived from canvas for the purpose of adding
