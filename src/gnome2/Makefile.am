@@ -4,7 +4,8 @@ INCLUDES =  \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
-    -DLIBDIR=\""$(libdir)"\"
+    -DLIBDIR=\""$(libdir)"\" \
+    -DGNOME_DISABLE_DEPRECATED
 
 EXTRA_DIST =  \
 	$(top_builddir)/src/gui/*.h 
