@@ -44,6 +44,7 @@
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
 
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 

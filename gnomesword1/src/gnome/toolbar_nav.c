@@ -31,6 +31,7 @@
 #include "gui/main_window.h"
 
 #include "main/gs_gnomesword.h"
+#include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 

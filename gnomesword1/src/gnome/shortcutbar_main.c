@@ -43,6 +43,7 @@
 
 #include "main/shortcutbar.h"
 #include "main/gs_gnomesword.h"
+#include "main/sword.h"
 #include "main/gbs.h"
 #include "main/settings.h"
 #include "main/lists.h"

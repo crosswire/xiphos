@@ -6,13 +6,13 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=4403
-1=796
-2=1
-3=91
-4=1
-5=30
-6=443
+0=3
+1=32
+2=58
+3=90
+4=93
+5=227
+6=207
 7=54
 8=55
 9=48
@@ -46,17 +46,10 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/Projects/gtk+-1.2.10/gtk/testgtk.c
-1=/home/terry/Projects/gnomesword1/src/main/gs_bookmarks.c
-2=/home/terry/Projects/sword/src/keys/treekeyidx.cpp
-3=/home/terry/Projects/sword/include/treekeyidx.h
-4=/home/terry/Projects/sword/tests/genbooktest.cpp
-5=/home/terry/Projects/gnomesword1/src/backend/bookmarks.h
-6=/home/terry/Projects/gnomesword1/src/backend/bookmarks.cpp
-7=/home/terry/Projects/gnomesword1/src/gnome/gbs.c
-8=/home/terry/Projects/gnomesword1/src/gui/gbs.h
-9=/home/terry/Projects/gnomesword1/src/main/gs_bookmarks.h
-10=/home/terry/Projects/gnomesword1/src/main/main.c
+0=/home/terry/gnomesword/gnomesword1/src/main/sword.h
+1=/home/terry/gnomesword/gnomesword1/src/main/sword.c
+2=/home/terry/gnomesword/gnomesword1/src/main/gs_gnomesword.c
+3=/home/terry/gnomesword/gnomesword1/src/main/gs_gnomesword.h
 
 [replace_text]
 0=bookmark_tree
@@ -69,14 +62,14 @@ ShowLocals=true
 7=mgr_search
 
 [find_text]
-0=ctree
-1=backend_
-2=treeKey
-3=viewEntryText
-4=index
-5=parent
-6=bm.
-7=node
+0=paned
+1=historyitems
+2=historylist
+3=ctree
+4=backend_
+5=treeKey
+6=viewEntryText
+7=index
 
 [executer args]
 0=newconfigs

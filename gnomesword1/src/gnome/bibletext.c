@@ -39,6 +39,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/gs_gnomesword.h"
+#include "main/sword.h"
 
 
 /******************************************************************************

@@ -32,6 +32,7 @@
 #include "gui/html.h"
 
 #include "main/commentary.h"
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 #include "main/lists.h"
 #include "main/settings.h"
