@@ -68,12 +68,29 @@ if test x$enable_debug = xyes; then
 fi
 
 
-dnl AC_ARG_ENABLE(spell_check,[--enable-spell_check enable spell_check],spell_check=$enableval,spell_check="no") 
-
-GNOME_SPELL_MODULES="libgnomeui-2.0 >= 1.112.1 libbonoboui-2.0 >= 1.112.1 libglade-2.0 >= 1.99.9"
-PKG_CHECK_MODULES(GNOME_SPELL, $GNOME_SPELL_MODULES)
+GNOME_SPELL_CFLAGS=""
+GNOME_SPELL_LIBS=""
 AC_SUBST(GNOME_SPELL_CFLAGS)
 AC_SUBST(GNOME_SPELL_LIBS)
+dnl have_speller="no"
+dnl AC_ARG_ENABLE(spell_check,[--disable-spell_check disable spell_check],spell_check=$enableval,spell_check="yes") 
+
+dnl if test "x$spell_check" = xyes; then
+  GNOME_SPELL_MODULES="libgnomeui-2.0 >= 1.112.1 libbonoboui-2.0 >= 1.112.1 libglade-2.0 >= 1.99.9"
+  PKG_CHECK_MODULES(GNOME_SPELL, $GNOME_SPELL_MODULES)
+  AC_SUBST(GNOME_SPELL_CFLAGS)
+  AC_SUBST(GNOME_SPELL_LIBS)
+  have_speller="yes"
+  speller="gnome-spell"
+  AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
+  AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+
+  ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
+  AC_SUBST(ORBIT_IDL)
+
+  BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
+  AC_SUBST(BONOBO_IDL_INCLUDES)
+dnl fi
 
 dnl SPELL_LIBS=""
 dnl AC_SUBST(SPELL_LIBS)
@@ -97,23 +114,17 @@ dnl   if test -r $pspell_dir/pspell-config; then
 dnl    AC_FIND_FILE(aspell, $pspell_dirs, pspell_dir)
 dnl    if test -r $pspell_dir/aspell; then 
 dnl       HAVE_PSPELL=yes 
-      have_speller="yes"
-      speller="gnome-spell"
+dnl      have_speller="yes"
+dnl      speller="gnome-spell"
 dnl      AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
-      AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
-      AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+dnl      AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
+dnl      AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
 dnl       SPELL_LIBS="-L$pspell_dir -laspell -lltdl"
 dnl       AC_SUBST(SPELL_LIBS) 
 dnl       echo "found pspell-config"
 dnl     fi
 dnl   fi
 dnl fi
-
-ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
-AC_SUBST(ORBIT_IDL)
-
-BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
-AC_SUBST(BONOBO_IDL_INCLUDES)
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
 if test "x${prefix}" = "xNONE"; then
