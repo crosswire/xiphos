@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gbs.h - generic book support - the gui
+ * display.hh - 
  *
  * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
@@ -19,11 +19,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___GBS_H_
-#define ___GBS_H_
 
+#include <gtk/gtk.h>
+#include <swmgr.h>
+#include <swdisp.h>
+using namespace sword;
 
-void gui_update_gbs_global_ops(gchar * option, gboolean choice);
-void gui_set_book_page_and_key(gchar * mod_name, gchar * key);
+class GTKEntryDisp : public SWDisplay {
+protected:
+	GtkWidget *gtkText;
+public:	
+	GTKEntryDisp(GtkWidget *gtkText) { this->gtkText = gtkText; }
+	virtual char Display(SWModule &imodule);
+};
 
-#endif
+class GTKChapDisp : public GTKEntryDisp {
+public:
+	GTKChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);
+};

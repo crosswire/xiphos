@@ -78,7 +78,6 @@ int main(int argc, char *argv[])
 		if (!strncmp(argv[1], "sword:/",7)) {
 			have_sword_url = TRUE;
 		}
-		
 	}
 
 	/* 
@@ -89,13 +88,13 @@ int main(int argc, char *argv[])
 	gui_splash_init();
 
 	gui_splash_step1();
-    
-	backend_init();
+	
+	create_mainwindow();
 
 	gui_splash_step2();
 		
-	create_mainwindow();
-
+	backend_init();
+	
 	gui_splash_step3();
 
 	frontend_init();

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "gui/gbs.h"
+#include "gui/gbs_dialog.h"
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 

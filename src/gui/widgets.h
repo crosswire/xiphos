@@ -76,6 +76,9 @@ struct  _app_widgets {
 		*html_studypad, /* studypad html widget */
 		*bible_info_win, /* to display information (ie strongs) at  
                                      bottom of text pane */
+				     
+	/* book of the Bible combo */
+		*cb_books,
 		
 	/* textview widget */
 		*textview,

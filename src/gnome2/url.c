@@ -506,19 +506,19 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				gui_change_module_and_key(
 					settings.DictWindowModule,
 					settings.dictkey);
-				gtk_notebook_set_current_page(
-					GTK_NOTEBOOK(widgets.workbook_lower),0);
+				/*gtk_notebook_set_current_page(
+					GTK_NOTEBOOK(widgets.workbook_lower),0);*/
 			break;
 			case BOOK_TYPE:
 				settings.book_key = tmpkey;
 				xml_set_value("GnomeSword", "modules", "book",
 				      work_buf[MODULE]);
-				settings.BookWindowModule = work_buf[2];
+				settings.book_mod = work_buf[2];
 				gui_change_module_and_key(
-					settings.BookWindowModule,
+					settings.book_mod,
 					settings.book_key);
-				gtk_notebook_set_current_page(
-					GTK_NOTEBOOK(widgets.workbook_lower),1); 
+				/*gtk_notebook_set_current_page(
+					GTK_NOTEBOOK(widgets.workbook_lower),1);*/ 
 			break;
 		}
 	} else { /* module name not found or not given */
@@ -557,6 +557,10 @@ gint gui_url_handler(const gchar * url, gboolean clicked)
 {		
 	//g_warning(url);
 	if(strstr(url,"sword://"))
+		return sword_uri(url,clicked);
+	if(strstr(url,"book://"))
+		return sword_uri(url,clicked);
+	if(strstr(url,"chapter://"))
 		return sword_uri(url,clicked);
 	if(strstr(url,"reference://"))
 		return reference_uri(url,clicked);

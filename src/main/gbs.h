@@ -34,11 +34,11 @@ unsigned long gbs_get_treekey_offset(void);
 int gbs_treekey_first_child(unsigned long offset);
 char *get_book_key(char * book_name);
 char * display_row_gbs(char * book_name, char *offset);
-void change_book(char * mod_name, unsigned long offset);
-	
+//void change_book(char * mod_name, unsigned long offset);
+void main_set_book_mod(char * mod_name, unsigned long offset);	
+void main_display_gbs(char * mod_name, unsigned long offset);
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

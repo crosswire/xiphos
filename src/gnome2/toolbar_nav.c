@@ -230,7 +230,7 @@ static gboolean on_spbVerse_button_release_event(GtkWidget * widget,
 static void on_button_dict_book_clicked(GtkButton * button,
 					gpointer user_data)
 {
-	if (gtk_notebook_get_current_page
+/*	if (gtk_notebook_get_current_page
 	    (GTK_NOTEBOOK(widgets.workbook_lower)))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.workbook_lower),
@@ -239,6 +239,7 @@ static void on_button_dict_book_clicked(GtkButton * button,
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.workbook_lower),
 					      1);
+*/
 }
 
 
@@ -400,9 +401,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	GtkWidget *btnLookup;
 	GtkWidget *button_dict_book;
 	GtkWidget *togglebutton_parallel_view;
-	//GtkWidget *vseparator1;
 	GtkWidget *label;
-	//GtkWidget *vseparator2;
 	GtkObject *spb_chapter_adj;
 	GtkObject *spb_verse_adj;
 	GtkTooltips *tooltips;
@@ -421,24 +420,22 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_toolbar_set_style(GTK_TOOLBAR(toolbarNav),
 			      GTK_TOOLBAR_ICONS);
 
-	tmp_toolbar_icon =
-	    gtk_image_new_from_stock(GNOME_STOCK_BOOK_BLUE,
-				     gtk_toolbar_get_icon_size
-				     (GTK_TOOLBAR(toolbarNav)));
-	widgets.button_dict_book =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Dictionary/Book"), 
-				       _("Toggle Dictionary View"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_label_set_use_underline(GTK_LABEL
-				    (((GtkToolbarChild
-				       *) (g_list_last(GTK_TOOLBAR
-						       (toolbarNav)->
-						       children)->
-					   data))->label), TRUE);
-	gtk_widget_show(widgets.button_dict_book);
-
+	
+	nav_bar.button_back = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
+                                "gtk-go-back",
+                                _("Move backwards through history"),
+                                NULL, NULL, NULL, -1);
+	gtk_widget_show(nav_bar.button_back);
+	
+	nav_bar.button_forward = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
+                                "gtk-go-forward",
+                                _("Move foward through history"),
+                                NULL, NULL, NULL, -1);					   
+	gtk_widget_show(nav_bar.button_forward);
+	
+	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
+	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
+/*
 	tmp_toolbar_icon =
 	    gtk_image_new_from_stock(GNOME_STOCK_TEXT_BULLETED_LIST,
 				     gtk_toolbar_get_icon_size
@@ -456,35 +453,40 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 						       children)->
 					   data))->label), TRUE);
 	gtk_widget_show(widgets.button_parallel_view);
-	
+*/	
 	label = gtk_label_new ("");
 	gtk_widget_show (label);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
 	gtk_widget_set_size_request (label, 6, -1);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	
-  /*
-	vseparator1 = gtk_vseparator_new();
-	gtk_widget_show(vseparator1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), vseparator1,
-				  NULL, NULL);
-	gtk_widget_set_size_request(vseparator1, 5, 0);
+/*
+	tmp_toolbar_icon =
+	    gtk_image_new_from_stock(GNOME_STOCK_BOOK_BLUE,
+				     gtk_toolbar_get_icon_size
+				     (GTK_TOOLBAR(toolbarNav)));
+	widgets.button_dict_book =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Dictionary/Book"), 
+				       _("Toggle Dictionary View"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_label_set_use_underline(GTK_LABEL
+				    (((GtkToolbarChild
+				       *) (g_list_last(GTK_TOOLBAR
+						       (toolbarNav)->
+						       children)->
+					   data))->label), TRUE);
+	gtk_widget_show(widgets.button_dict_book);
 */
-	cbBook = gtk_combo_new();
-	g_object_set_data(G_OBJECT(GTK_COMBO(cbBook)->popwin),
-			  "GladeParentKey", cbBook);
-	gtk_widget_show(cbBook);
-	//gtk_widget_set_size_request(cbBook, 130, -1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, 
+
+	widgets.cb_books = gtk_combo_new();
+	gtk_widget_show(widgets.cb_books);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), widgets.cb_books, 
 				NULL,
 				NULL);
-	/*
-	 * get and load books of the Bible 
-	 */
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
-				      get_list(BOOKS_LIST));
+	
 
-	cbe_book = GTK_COMBO(cbBook)->entry;
+	cbe_book = GTK_COMBO(widgets.cb_books)->entry;
 	gtk_widget_show(cbe_book);
 	gtk_tooltips_set_tip(tooltips, cbe_book, _("Select a Book of the Bible"), 
 				NULL);
@@ -528,7 +530,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 				  cbe_freeform_lookup, 
 		_("Enter a Verse reference in Book 1:1 format and press Return or click the Go to Verse button")
 		, NULL);
-	//gtk_widget_set_size_request(cbe_freeform_lookup, 150, -1);
+		
 	nav_bar.lookup_entry = cbe_freeform_lookup;
 
 	label = gtk_label_new ("");
@@ -536,68 +538,20 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
 	gtk_widget_set_size_request (label, 6, -1);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	/*
-	vseparator2 = gtk_vseparator_new();
-	gtk_widget_show(vseparator2);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), vseparator2,
-				  NULL, NULL);
-	gtk_widget_set_size_request(vseparator2, 5, 0);
-*/
+	
+	
 	btnLookup = gtk_toolbar_insert_stock(GTK_TOOLBAR(toolbarNav),
 					     GTK_STOCK_JUMP_TO,
 		_("Go to verse"),
 					     NULL, NULL, NULL, -1);
 	gtk_widget_show(btnLookup);
 
-	/*tmp_toolbar_icon =
-	    gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
-				     gtk_toolbar_get_icon_size
-				     (GTK_TOOLBAR(toolbarNav)));*/
-	nav_bar.button_back = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
-                                "gtk-go-back",
-                                _("Move backwards through history"),
-                                NULL, NULL, NULL, -1);/*
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button5"), NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_label_set_use_underline(GTK_LABEL
-				    (((GtkToolbarChild
-				       *) (g_list_last(GTK_TOOLBAR
-						       (toolbarNav)->
-						       children)->
-					   data))->label), TRUE);*/
-	gtk_widget_show(nav_bar.button_back);
-
-	/*tmp_toolbar_icon =
-	    gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
-				     gtk_toolbar_get_icon_size
-				     (GTK_TOOLBAR(toolbarNav)));*/
-	nav_bar.button_forward = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
-                                "gtk-go-forward",
-                                _("Move foward through history"),
-                                NULL, NULL, NULL, -1);
-	/*    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button6"), NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_label_set_use_underline(GTK_LABEL
-				    (((GtkToolbarChild
-				       *) (g_list_last(GTK_TOOLBAR
-						       (toolbarNav)->
-						       children)->
-					   data))->label), TRUE);*/
-					   
-	gtk_widget_show(nav_bar.button_forward);
-	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
-
-	g_signal_connect((gpointer) widgets.button_dict_book, "clicked",
+	/*g_signal_connect((gpointer) widgets.button_dict_book, "clicked",
 			 G_CALLBACK(on_button_dict_book_clicked), NULL);
 	g_signal_connect((gpointer) widgets.button_parallel_view,
 			 "toggled",
 			 G_CALLBACK
-			 (on_togglebutton_parallel_view_toggled), NULL);
+			 (on_togglebutton_parallel_view_toggled), NULL);*/
 
 	g_signal_connect(GTK_OBJECT(cbe_book), "changed",
 			   G_CALLBACK(on_cbeBook_changed), NULL);
