@@ -29,16 +29,16 @@
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-#include "gui/note_toolbar_edit.h"
+#include "editor/note_toolbar_edit.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
-#include "gui/editor_spell.h"
+#include "editor/editor_spell.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
 #include "gui/commentary_dialog.h"
 #include "gui/fileselection.h"
-#include "gui/editor_menu.h"
+#include "editor/editor_menu.h"
 #include "gui/find_dialog.h"
 
 #include "main/settings.h"
