@@ -20,6 +20,7 @@
 #endif
 
 #include <gnome.h>
+
 #include "gs_popup_cb.h"
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
@@ -527,5 +528,22 @@ on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
 	}
 	gtk_widget_show(dlg);
 }
+
+void
+on_show_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	morphsSWORD(1, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
+void
+on_show_strongs_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	strongsSWORD(1, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
+void
+on_show_footnotes_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	footnotesSWORD(1, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
+
 
 

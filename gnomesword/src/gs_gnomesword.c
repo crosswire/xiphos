@@ -124,6 +124,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	//g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
 /* setup shortcut bar */
 	setupSB(sbbiblemods, sbcommods ,sbdictmods);
+/* set current verse color html */
 	mycolor = settings->currentverse_color;
 /* set color for current verse for gtktext widgets */
   	//myGreen.red =  settings->currentverse_red;
