@@ -26,13 +26,16 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
+
 #include  "gs_shortcutbar.h"
 #include  "gs_gnomesword.h"
 #include  "support.h"
 #include "gs_bookmarks.h"
 #include "sw_search.h"
+#include "sw_verselist_sb.h"
 
 extern gchar *shortcut_types[];
 extern GtkWidget *shortcut_bar;
@@ -48,10 +51,22 @@ gint groupnum1 = -1,
         groupnum3 = -1,
         groupnum4 = -1,
 	groupnum5 = -1,
-	groupnum6 = -1;
+	groupnum6 = -1,
+	groupnum7 = -1;
 /*GtkWidget 
 	*vpSearch;*/
+void
+showSBVerseList(SETTINGS *s)
+{
+	EShortcutBar *bar1;
 	
+	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
+	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
+						 groupnum7,
+						 TRUE);		
+}
+	
+
 /******************************************************************************
  * add_sb_group - add group to shourtcut bar
  * shortcut_bar - shortcut bar to add group to
@@ -151,9 +166,173 @@ on_btnSearch_clicked                   (GtkButton       *button,
 	searchSWORD(s->app, s);	
 }
 
+static void
+on_btnSBSaveVL_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
 
 
+static void
+on_tbtnSBViewMain_toggled              (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
 
+}
+
+
+static void
+on_btnSBShowCV_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+static void
+on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+{
+	changeVerseListSBSWORD((gchar*)url);
+}
+
+static GtkWidget *
+setupVerseListBar(GtkWidget *vboxVL, SETTINGS *s)
+{
+  GtkWidget *toolbar1;
+  GtkWidget *frameTB;
+  GtkWidget *tmp_toolbar_icon;
+  GtkWidget *btnSBSaveVL;
+  GtkWidget *tbtnSBViewMain;
+  GtkWidget *btnSBShowCV;
+  GtkWidget *frame1;
+  GtkWidget *scrolledwindow1;
+//  GtkWidget *htmllist;	
+  GtkWidget *frame2;
+  GtkWidget *scrolledwindow2;
+  GtkWidget *htmlshow;	
+	
+  frameTB = gtk_frame_new (NULL);
+  gtk_widget_ref (frameTB);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "frameTB", frameTB,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frameTB);
+  gtk_box_pack_start (GTK_BOX (vboxVL), frameTB, TRUE, TRUE, 0);
+
+  toolbar1 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar1);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "toolbar1", toolbar1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar1);
+  //gtk_box_pack_start (GTK_BOX (), toolbar1, FALSE, FALSE, 0);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar1), GTK_RELIEF_NONE);
+  gtk_container_add (GTK_CONTAINER (frameTB), toolbar1);
+  
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (s->app, GNOME_STOCK_PIXMAP_SAVE);
+  btnSBSaveVL = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                _("Save List"),
+                                _("Save the current verse list as a bookmark file"), NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnSBSaveVL);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "btnSBSaveVL", btnSBSaveVL,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnSBSaveVL);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (s->app, GNOME_STOCK_PIXMAP_JUMP_TO);
+  tbtnSBViewMain = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+                                NULL,
+                                _("Main Form"),
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (tbtnSBViewMain);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "tbtnSBViewMain", tbtnSBViewMain,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (tbtnSBViewMain);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (s->app, GNOME_STOCK_PIXMAP_REFRESH);
+  btnSBShowCV = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar1),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                _("UpdateMain"),
+                                _("Show current verse list verse in Main Form"), NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnSBShowCV);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "btnSBShowCV", btnSBShowCV,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnSBShowCV);
+
+  frame1 = gtk_frame_new (NULL);
+  gtk_widget_ref (frame1);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "frame1", frame1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame1);
+  gtk_box_pack_start (GTK_BOX (vboxVL), frame1, TRUE, TRUE, 0);
+
+  scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow1);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "scrolledwindow1", scrolledwindow1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow1);
+  gtk_container_add (GTK_CONTAINER (frame1), scrolledwindow1);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow1), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+	
+	s->vlsbhtml = gtk_html_new();
+	gtk_widget_ref(s->vlsbhtml);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "s->vlsbhtml", s->vlsbhtml,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(s->vlsbhtml);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow1),
+			 s->vlsbhtml );
+	gtk_html_load_empty(GTK_HTML(s->vlsbhtml));
+	
+  frame2 = gtk_frame_new (NULL);
+  gtk_widget_ref (frame2);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "frame2", frame2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame2);
+  gtk_box_pack_start (GTK_BOX (vboxVL), frame2, TRUE, TRUE, 0);
+
+  scrolledwindow2 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow2);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "scrolledwindow2", scrolledwindow2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow2);
+  gtk_container_add (GTK_CONTAINER (frame2), scrolledwindow2);
+  gtk_widget_set_usize (scrolledwindow2, -2, 251);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow2), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+	
+	htmlshow = gtk_html_new();
+	gtk_widget_ref(htmlshow);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "htmlshow", htmlshow,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlshow);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow2),
+			  htmlshow);
+	gtk_html_load_empty(GTK_HTML(htmlshow));
+	
+  gtk_signal_connect(GTK_OBJECT(s->vlsbhtml), "link_clicked",
+			GTK_SIGNAL_FUNC(on_link_clicked), 
+			NULL);	
+  gtk_signal_connect (GTK_OBJECT (btnSBSaveVL), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnSBSaveVL_clicked),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (tbtnSBViewMain), "toggled",
+                      GTK_SIGNAL_FUNC (on_tbtnSBViewMain_toggled),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (btnSBShowCV), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnSBShowCV_clicked),
+                      NULL);
+	return htmlshow;
+}
+
+
+/******************************************************************************
+* 
+*******************************************************************************/
 static void 
 setupSearchBar(GtkWidget *vp, SETTINGS *s)
 {
@@ -462,14 +641,17 @@ void setupSB(GList *textlist,
 	GList 
 		*tmp;
 	GtkWidget	
-		*treebar,
 		*button,
-		*searchbar,
 		*searchbutton,
 		*ctree,
 		*scrolledwindow1,
 		*scrolledwindow2,
-		*vpSearch;
+		*vpSearch,
+  		*vboxVL,
+		*vpVL,
+		*html,
+		*VLbutton;
+	
 	tmp = NULL;
 	if(settings->showtextgroup){
 	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
@@ -509,7 +691,7 @@ void setupSB(GList *textlist,
 	}
 	g_list_free(tmp);
 	/*** add bookmark group to shortcut bar ***/
-	treebar = e_group_bar_new();
+	//treebar = e_group_bar_new();
 	
 	scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
   	gtk_widget_ref (scrolledwindow1);
@@ -544,7 +726,7 @@ void setupSB(GList *textlist,
 						 
 	loadtree(settings);
 	
-	searchbar = e_group_bar_new();   
+	//searchbar = e_group_bar_new();   
 	
 	
   scrolledwindow2 = gtk_scrolled_window_new (NULL, NULL);
@@ -578,6 +760,38 @@ void setupSB(GList *textlist,
 						 searchbutton,
 						 -1); 
 	settings->searchbargroup = groupnum6;
+	
+	//verselistbar = e_group_bar_new();  
+	
+	vboxVL = gtk_vbox_new (FALSE, 0);
+  	gtk_widget_ref (vboxVL);
+  	gtk_object_set_data_full (GTK_OBJECT (settings->app), "vboxVL", vboxVL,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (vboxVL);
+  	gtk_widget_set_usize (vboxVL, 160, 360);
+	
+	vpVL = gtk_viewport_new (NULL, NULL);
+	  gtk_widget_ref (vpVL);
+	  gtk_object_set_data_full (GTK_OBJECT (settings->app), "vpVL", vpVL,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	  gtk_widget_show (vpVL);
+	  gtk_container_add (GTK_CONTAINER (vpVL), vboxVL);
+	  gtk_widget_set_usize (vpVL, 234, -2);
+	  
+	VLbutton = gtk_button_new_with_label("Verse List");
+	gtk_widget_ref (VLbutton);
+	gtk_object_set_data_full (GTK_OBJECT (MainFrm), "VLbutton",VLbutton ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (VLbutton);	
+
+	html = setupVerseListBar(vboxVL, settings);	
+	/* setup shortcut bar verse list sword stuff */
+	setupVerseListSBSWORD(html);
+	groupnum7  = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
+						 vpVL,
+						 VLbutton,
+						 -1); 
+	
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
                       	GTK_SIGNAL_FUNC (on_button_clicked),
                       	NULL);  
