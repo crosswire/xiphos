@@ -1,6 +1,9 @@
 INCLUDES =  \
     -I$(top_srcdir)/src \
-    $(GNOME_CFLAGS) 
+    $(GNOME_CFLAGS) \
+    -DGNOME_DISABLE_DEPRECATED \
+    -DGTK_DISABLE_DEPRECATED
+    
 
 noinst_LIBRARIES = libmain.a  
 

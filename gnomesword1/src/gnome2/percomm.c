@@ -375,7 +375,7 @@ static gint html_button_pressed(GtkWidget * html,
 		if (event->type == GDK_2BUTTON_PRESS && ecd->obj
 		    && event->state & GDK_CONTROL_MASK) {
 			ecd->releaseId =
-			    gtk_signal_connect(GTK_OBJECT(html),
+			    g_signal_connect(GTK_OBJECT(html),
 					       "button_release_event",
 					       G_CALLBACK(release),
 					       ecd);
@@ -497,30 +497,30 @@ static void create_percomm_pane(PC_DATA * p)
 
 	p->html = p->ec->htmlwidget;
 
-	gtk_signal_connect(GTK_OBJECT(p->ec->html), "submit",
+	g_signal_connect(GTK_OBJECT(p->ec->html), "submit",
 			   G_CALLBACK(on_submit), p->ec);
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (p->ec->htmlwidget),
 			   "load_done",
 			   G_CALLBACK(html_load_done), p->ec);
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (p->ec->htmlwidget),
 			   "key_press_event",
 			   G_CALLBACK(html_key_pressed), p->ec);
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (p->ec->htmlwidget),
 			   "button_press_event",
 			   G_CALLBACK(html_button_pressed), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget),
+	g_signal_connect(GTK_OBJECT(p->ec->htmlwidget),
 			   "enter_notify_event",
 			   G_CALLBACK(on_html_enter_notify_event),
 			   p->ec);
 	/* gs_html.c */
-	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget),
+	g_signal_connect(GTK_OBJECT(p->ec->htmlwidget),
 			   "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 	/* gs_html.c */
-	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "on_url",
+	g_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "on_url",
 			   G_CALLBACK(gui_url), NULL);
 
 	widgets.toolbar_comments = gui_toolbar_style(p->ec);
@@ -600,7 +600,7 @@ void gui_set_percomm_page(gchar * mod_name)
 	GTK_CHECK_MENU_ITEM(p->ec->editnote)->active = TRUE;
 	
 	if (percomm_last_page != page) {
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_percomm),
 				      page);
 	}
@@ -641,7 +641,7 @@ static void set_page_percomm(gchar * modname, GList * percomm_list)
 						notebook_percomm, NULL,
 						page, percomm_list);
 	else
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_percomm), page);
 	percomm_last_page = page;
 }
@@ -766,7 +766,7 @@ void gui_setup_percomm(GList * mods)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(widgets.notebook_percomm),
+	g_signal_connect(GTK_OBJECT(widgets.notebook_percomm),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_percomm_switch_page),

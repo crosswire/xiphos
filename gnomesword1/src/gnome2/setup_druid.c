@@ -1047,13 +1047,13 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			    tooltips);
 
 
-	gtk_signal_connect(GTK_OBJECT(dialog_setup), "destroy",
+	g_signal_connect(GTK_OBJECT(dialog_setup), "destroy",
 			   G_CALLBACK(dialog_destroy), NULL);
-	gtk_signal_connect(GTK_OBJECT
+	g_signal_connect(GTK_OBJECT
 			   (GNOME_DRUID_PAGE(druidpagefinish1)),
 			   "finish", G_CALLBACK(on_finish_clicked),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(druid1), "cancel",
+	g_signal_connect(GTK_OBJECT(druid1), "cancel",
 			   G_CALLBACK(on_cancel_clicked), NULL);
 
 

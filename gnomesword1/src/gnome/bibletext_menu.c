@@ -952,9 +952,10 @@ static void add_global_option_items(TEXT_DATA * t)
 		item =
 		    gtk_radio_menu_item_new_with_label(group,
 					_("All Readings"));
-		group =
+/*		group =
 		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
 					      (item));
+*/
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		if (t->tgs->variants_all)
@@ -968,9 +969,10 @@ static void add_global_option_items(TEXT_DATA * t)
 		item =
 		    gtk_radio_menu_item_new_with_label(group,
 					_("Primary Readings"));
-		group =
+/*		group =
 		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
 					      (item));
+*/
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		if (t->tgs->variants_primary)
@@ -984,9 +986,10 @@ static void add_global_option_items(TEXT_DATA * t)
 		item =
 		    gtk_radio_menu_item_new_with_label(group,
 				_("Secondary Readings"));
-		group =
+/*		group =
 		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
 					      (item));
+*/
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",

@@ -51,8 +51,8 @@ struct _gbsdata {
 
 typedef struct _nodedata NODEDATA;
 struct _nodedata {
-	GtkCTreeNode *parent;
-	GtkCTreeNode *sibling;
+//	GtkCTreeNode *parent;
+//	GtkCTreeNode *sibling;
 	gchar *buf[3];
 	GdkPixmap *pixmap1;
 	GdkPixmap *pixmap2;

@@ -25,6 +25,7 @@
 
 #ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
+#include <gal-2.0/gal/widgets/e-unicode.h>
 #else
 #include <glib-1.2/glib.h>
 #endif
@@ -107,9 +108,11 @@ GList *get_list(gint type)
 
 void init_lists(void)
 {
-	char *buf = NULL;
+	const char *buf = NULL;
 	NAME_TYPE *nt, innt;
-
+	gsize bytes_read;
+	gsize bytes_written;
+	
 	mod_lists = &mods;
 	/* set glist to null */
 	mods.biblemods = NULL;
@@ -134,8 +137,9 @@ void init_lists(void)
 	backend_new_module_mgr();
 
 	while ((buf = backend_get_next_book_of_bible()) != NULL) {
-		mods.bible_books = g_list_append(mods.bible_books,
-						 (char *) buf);
+		//gchar *e_utf8;
+		//e_utf8 = e_utf8_from_locale_string((const char *)buf);
+		mods.bible_books = g_list_append(mods.bible_books,(char *)buf);
 	}
 
 	backend_set_global_option_iterator();

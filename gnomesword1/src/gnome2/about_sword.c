@@ -186,7 +186,7 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox6), button);
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button), "clicked",
+	g_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_sword_ok), NULL);
 	return dialog_about_sword;
 

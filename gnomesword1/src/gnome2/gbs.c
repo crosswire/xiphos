@@ -87,10 +87,10 @@ extern gboolean in_url;
 /******************************************************************************
  *  static   
  */
-static void add_node_children(GtkCTreeNode * node, GBS_DATA * gbs,
-			      unsigned long offset);
+/*static void add_node_children(GtkCTreeNode * node, GBS_DATA * gbs,
+			      unsigned long offset);*/
 static gboolean gbs_find_running;
-static GtkCTreeNode *rootnode;
+//static GtkCTreeNode *rootnode;
 static GBS_DATA *cur_g;
 static gint tree_level;
 /* list of gbs data structures */
@@ -295,7 +295,7 @@ void gui_set_book_page_and_key(gint page_num, gchar * key)
 {
 	gchar *text;
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_gbs),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_gbs),
 			      page_num);
 
 	text = display_gbs(cur_g->mod_name, key);
@@ -694,13 +694,13 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 		gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
 				  p_gbs->html);
 		gtk_html_load_empty(GTK_HTML(p_gbs->html));
-		gtk_signal_connect(GTK_OBJECT(p_gbs->html),
+		g_signal_connect(GTK_OBJECT(p_gbs->html),
 				   "link_clicked",
 				   G_CALLBACK(gui_link_clicked), NULL);
-		gtk_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
+		g_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
 				   G_CALLBACK(gui_url),
 				   (gpointer) widgets.app);
-		gtk_signal_connect(GTK_OBJECT(p_gbs->html),
+		g_signal_connect(GTK_OBJECT(p_gbs->html),
 				   "button_release_event",
 				   G_CALLBACK(on_button_release_event),
 				   p_gbs);
@@ -711,7 +711,7 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 		gtk_container_add(GTK_CONTAINER(frameGBS), p_gbs->html);
 		gtk_widget_realize(p_gbs->html);
 /*
-		gtk_signal_connect(GTK_OBJECT(p_gbs->html),
+		g_signal_connect(GTK_OBJECT(p_gbs->html),
 				   "dom_mouse_click",
 				   G_CALLBACK(mozilla_mouse_click),
 				   NULL);
@@ -734,11 +734,11 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
 			  p_gbs->html);
 	gtk_html_load_empty(GTK_HTML(p_gbs->html));
-	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "link_clicked",
+	g_signal_connect(GTK_OBJECT(p_gbs->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
+	g_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
 			   G_CALLBACK(gui_url), (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(p_gbs->html),
+	g_signal_connect(GTK_OBJECT(p_gbs->html),
 			   "button_release_event",
 			   G_CALLBACK(on_button_release_event), p_gbs);
 #endif
@@ -821,7 +821,7 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 	cur_g = g;
 	
 	if (page)
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_gbs), page);
 	else
 		on_notebook_gbs_switch_page(GTK_NOTEBOOK
@@ -963,7 +963,7 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(widgets.notebook_gbs),
+	g_signal_connect(GTK_OBJECT(widgets.notebook_gbs),
 			   "switch_page",
 			   G_CALLBACK(on_notebook_gbs_switch_page),
 			   gbs_list);

@@ -727,23 +727,23 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_entry_set_text(GTK_ENTRY(vc->freeform_lookup),
 			   _("Romans 8:28"));
 
-	gtk_signal_connect(GTK_OBJECT(vc->cbe_book),
+	g_signal_connect(GTK_OBJECT(vc->cbe_book),
 			   "changed",
 			   G_CALLBACK(book_changed), vc);
 
-	gtk_signal_connect(GTK_OBJECT(sync_button),
+	g_signal_connect(GTK_OBJECT(sync_button),
 			   "toggled",
 			   G_CALLBACK(sync_toggled), vc);
 			   
-	gtk_signal_connect(GTK_OBJECT(vc->spb_chapter),
+	g_signal_connect(GTK_OBJECT(vc->spb_chapter),
 			   "button_release_event",
 			   G_CALLBACK
 			   (chapter_button_release_event), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->spb_verse),
+	g_signal_connect(GTK_OBJECT(vc->spb_verse),
 			   "button_release_event",
 			   G_CALLBACK
 			   (verse_button_release_event), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->freeform_lookup),
+	g_signal_connect(GTK_OBJECT(vc->freeform_lookup),
 			   "key_press_event",
 			   G_CALLBACK(entry_key_press_event), vc);
 	return toolbar_nav;
@@ -835,21 +835,21 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 		gtk_box_pack_start(GTK_BOX(vbox30), vc->ec->statusbar,
 				   FALSE, TRUE, 0);
 		/*
-		   gtk_signal_connect(GTK_OBJECT(vc->ec->html), "submit",
+		   g_signal_connect(GTK_OBJECT(vc->ec->html), "submit",
 		   G_CALLBACK(on_submit), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT
+		   g_signal_connect(GTK_OBJECT
 		   (vc->ec->htmlwidget),
 		   "load_done",
 		   G_CALLBACK(html_load_done), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT
+		   g_signal_connect(GTK_OBJECT
 		   (vc->ec->htmlwidget),
 		   "key_press_event",
 		   G_CALLBACK(html_key_pressed), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT
+		   g_signal_connect(GTK_OBJECT
 		   (vc->ec->htmlwidget),
 		   "button_press_event",
 		   G_CALLBACK(html_button_pressed), vc->ec);
-		   gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
+		   g_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 		   "enter_notify_event",
 		   G_CALLBACK(on_html_enter_notify_event),
 		   vc->ec);
@@ -861,12 +861,12 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 		g_signal_connect(G_OBJECT(vc->ec->htmlwidget),
 		   		"key_press_event",
 		   		G_CALLBACK(html_key_press_event), vc);
-		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
+		g_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
 		
-		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
+		g_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "on_url", G_CALLBACK(gui_url),
 				   NULL);
 
@@ -888,22 +888,22 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 				  vc->html);
 		gtk_html_load_empty(GTK_HTML(vc->html));
 
-		gtk_signal_connect(GTK_OBJECT(vc->html),
+		g_signal_connect(GTK_OBJECT(vc->html),
 				   "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   vc);
-		gtk_signal_connect(GTK_OBJECT(vc->html), "on_url",
+		g_signal_connect(GTK_OBJECT(vc->html), "on_url",
 				   G_CALLBACK(dialog_url), vc);
-		gtk_signal_connect(GTK_OBJECT(vc->html),
+		g_signal_connect(GTK_OBJECT(vc->html),
 				   "button_press_event",
 				   G_CALLBACK(button_press_event),
 				   vc);
 	}
 
 
-	gtk_signal_connect(GTK_OBJECT(vc->dialog), "destroy",
+	g_signal_connect(GTK_OBJECT(vc->dialog), "destroy",
 			   G_CALLBACK(on_dialog_destroy), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->dialog),
+	g_signal_connect(GTK_OBJECT(vc->dialog),
 			   "motion_notify_event",
 			   G_CALLBACK
 			   (on_dialog_motion_notify_event), vc);

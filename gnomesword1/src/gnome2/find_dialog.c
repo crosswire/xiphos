@@ -297,13 +297,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 
 
-	gtk_signal_connect(GTK_OBJECT(dialog->dialog), "destroy",
+	g_signal_connect(GTK_OBJECT(dialog->dialog), "destroy",
 			   G_CALLBACK(dialog_destroy), dialog);
-	gtk_signal_connect(GTK_OBJECT(dialog->find), "clicked",
+	g_signal_connect(GTK_OBJECT(dialog->find), "clicked",
 			   G_CALLBACK(find_clicked), dialog);
-	gtk_signal_connect(GTK_OBJECT(dialog->next), "clicked",
+	g_signal_connect(GTK_OBJECT(dialog->next), "clicked",
 			   G_CALLBACK(next_clicked), dialog);
-	gtk_signal_connect(GTK_OBJECT(dialog->close), "clicked",
+	g_signal_connect(GTK_OBJECT(dialog->close), "clicked",
 			   G_CALLBACK(close_clicked), dialog);
 }
 

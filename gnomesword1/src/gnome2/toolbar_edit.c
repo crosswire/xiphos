@@ -445,7 +445,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       NULL);
 		gtk_widget_show(ecd->btn_new);
 		
-		gtk_signal_connect(GTK_OBJECT(ecd->btn_new), "clicked",
+		g_signal_connect(GTK_OBJECT(ecd->btn_new), "clicked",
 				   G_CALLBACK(new_clicked),
 				   ecd);
 		
@@ -462,7 +462,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       NULL);
 		gtk_widget_show(ecd->btn_open);
 
-		gtk_signal_connect(GTK_OBJECT(ecd->btn_open), "clicked",
+		g_signal_connect(GTK_OBJECT(ecd->btn_open), "clicked",
 				   G_CALLBACK(on_btn_open_clicked),
 				   ecd);
 		tmp_toolbar_icon = gtk_image_new_from_stock (
@@ -504,7 +504,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       NULL);
 		gtk_widget_show(ecd->btn_delete);
 
-		gtk_signal_connect(GTK_OBJECT(ecd->btn_delete),
+		g_signal_connect(GTK_OBJECT(ecd->btn_delete),
 				   "clicked",
 				   G_CALLBACK
 				   (on_btn_delete_clicked), ecd);
@@ -618,26 +618,26 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_set_sensitive(ecd->btn_spell, 0);
 #endif
 
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
 			   G_CALLBACK(on_btn_save_clicked), ecd);
 
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
 			   G_CALLBACK(on_btn_print_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
 			   G_CALLBACK(on_btn_cut_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_copy), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_copy), "clicked",
 			   G_CALLBACK(on_btn_copy_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_paste), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_paste), "clicked",
 			   G_CALLBACK(on_btn_paste_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_undo), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_undo), "clicked",
 			   G_CALLBACK(on_btn_undo_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_Find), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_Find), "clicked",
 			   G_CALLBACK(on_btn_Find_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_replace), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_replace), "clicked",
 			   G_CALLBACK(on_btn_replace_clicked),
 			   ecd);
 #ifdef USE_SPELL
-	gtk_signal_connect(GTK_OBJECT(ecd->btn_spell), "clicked",
+	g_signal_connect(GTK_OBJECT(ecd->btn_spell), "clicked",
 			   G_CALLBACK(spell_check_cb), ecd);
 #endif
 	/************************************************** end toolbar_edit */

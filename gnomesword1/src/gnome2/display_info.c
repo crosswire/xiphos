@@ -209,10 +209,10 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
 	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button_close), "clicked",
+	g_signal_connect(GTK_OBJECT(button_close), "clicked",
 			   G_CALLBACK(button_close_clicked), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(dialog_display_info),
+	g_signal_connect(GTK_OBJECT(dialog_display_info),
 			   "destroy",
 			   G_CALLBACK(on_dlgInformation_destroy),
 			   NULL);

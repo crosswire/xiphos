@@ -346,7 +346,7 @@ e_splash_construct (ESplash *splash,
 			       "pixbuf", splash_image_pixbuf,
 			       NULL);
 	
-	gtk_signal_connect (GTK_OBJECT (splash), "button-press-event",
+	g_signal_connect (GTK_OBJECT (splash), "button-press-event",
 			    G_CALLBACK (button_press_event), splash);
 	
 	gtk_object_set (GTK_OBJECT (splash), "type", GTK_WINDOW_POPUP, NULL);
@@ -382,7 +382,8 @@ e_splash_new (void)
 	}
 	g_return_val_if_fail (splash_image_pixbuf != NULL, NULL);
 
-	new = gtk_type_new (e_splash_get_type ());
+	
+	new = g_object_new (e_splash_get_type (),NULL);
 	e_splash_construct (new, splash_image_pixbuf);
 
 	gdk_pixbuf_unref (splash_image_pixbuf);
