@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.6 
+# Anjuta Version 0.1.7 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -22,7 +22,7 @@ Compatibility Level: 1
 
 props.file.type=project
 
-anjuta.version=0.1.6
+anjuta.version=0.1.7
 anjuta.compatibility.level=1
 
 project.name=Gnomesword
@@ -177,8 +177,8 @@ module.help.name=help
 module.help.type=
 module.help.expanded=1
 module.help.files=\
-	help00.html\
-	intro.html
+	intro.html\
+	index.html
 
 module.doc.name=doc
 module.doc.type=

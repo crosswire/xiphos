@@ -383,7 +383,7 @@ void changeVerseSWORD(gchar * ref)
 	VerseKey key;
 	
 	key = ref;
-	g_warning("chapter = %d",key.Chapter());
+	//g_warning("chapter = %d",key.Chapter());
 	
 	if((!key.Chapter()) || (!key.Verse())) {	
 		vkText.AutoNormalize(0);
@@ -728,9 +728,9 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 				ConfigEntMap &section = (*sit).second;
 				//-- do we have a CipherKey= tag?
 				if((entry = section.find("CipherKey")) != section.end()) { //-- set sensitivity of unlock mod menu item
-					gtk_widget_set_sensitive(settings->unlockmod_item, TRUE);
+					gtk_widget_set_sensitive(settings->unlocktextmod_item, TRUE);
 				}else{
-					gtk_widget_set_sensitive(settings->unlockmod_item, FALSE);
+					gtk_widget_set_sensitive(settings->unlocktextmod_item, FALSE);
 				}
 			} 
 			if (showchange) {
@@ -846,26 +846,29 @@ void freeformlookupSWORD(GdkEventKey * event)	//-- change to verse in freeformlo
 	}
 }
 
-/*
-//-- someone changed text notebook page (sent here by callback function notebook page change)
-void
-nbchangecurModSWORD(gchar *modName, gint page_num, gboolean showchange)  
-{
-	//nbpages->nbTextModspage = page_num;
-	changecurModSWORD(modName, showchange); 
-}
-*/
-
 //-------------------------------------------------------------------------------------------
 void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone changed commentary notebook page (sent here by callback function notebook page change)
 {
 	ModMap::iterator it;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;
 	GtkWidget *frame;
 
 	if (havebible) {
 		it = mainMgr->Modules.find(modName);	//-- find commentary module (modName from page label)
 		if (it != mainMgr->Modules.end()) {
 			curcomMod = (*it).second;	//-- set curcomMod to modName
+			
+			if ((sit = mainMgr->config->Sections.find(curcomMod->Name())) != mainMgr->config->Sections.end()) {				
+				ConfigEntMap &section = (*sit).second;
+				//-- do we have a CipherKey= tag?
+				if((entry = section.find("CipherKey")) != section.end()) { //-- set sensitivity of unlock mod menu item
+					gtk_widget_set_sensitive(settings->unlockcommmod_item, TRUE);
+				}else{
+					gtk_widget_set_sensitive(settings->unlockcommmod_item, FALSE);
+				}
+			} 
+			
 			if (showchange) {
 				if (autoscroll)
 					curcomMod->SetKey(curMod->KeyText());	//-- go to text (verse)
@@ -873,8 +876,11 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 				strcpy(settings->CommWindowModule,
 				       curcomMod->Name());
 			}
+			
 		}
+		
 	}
+	
 	frame = lookup_widget(settings->app, "framecom");
 	if (settings->comm_tabs) {
 		gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
@@ -1390,17 +1396,29 @@ void applyfontcolorandsizeSWORD(void)
 }
 
 /*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
-void savekeySWORD(gchar * key)
+void savekeySWORD(gint modwindow, gchar * key)
 {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	DIR *dir;
-	gchar buf[256], conffile[256];
+	gchar buf[256], conffile[256], *modName;
 	struct dirent *ent;
 	
-	sprintf(buf,"%s/mods.d",mainMgr->prefixPath);
+	switch(modwindow) {
+		case MAIN_TEXT_WINDOW:
+			modName = curMod->Name();
+		break;
+		case COMMENTARY_WINDOW:
+			modName = curcomMod->Name();
+		break;
+		case DICTIONARY_WINDOW:
+			modName = curdictMod->Name();
+		break;
+	}
+	
+	sprintf(buf,"%s",mainMgr->configPath); 
 	dir = opendir(buf);	
-	char *modFile;
+	//char *modFile;
 	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
@@ -1408,12 +1426,9 @@ void savekeySWORD(gchar * key)
 			    && (strcmp(ent->d_name, ".."))) {
 				sprintf(conffile,"%s/%s",buf,ent->d_name);
 				SWConfig *myConfig = new SWConfig(conffile);
-				section =
-				    myConfig->Sections.find(curMod->Name());
+				section = myConfig->Sections.find(modName);
 				if (section != myConfig->Sections.end()) {
-					entry =
-					    section->second.
-					    find("CipherKey");
+					entry = section->second.find("CipherKey");
 					if (entry != section->second.end()) {
 						entry->second = key;	//-- set cipher key
 						myConfig->Save();	//-- save config file
@@ -1424,49 +1439,49 @@ void savekeySWORD(gchar * key)
 		}
 	}
 	closedir(dir);
-	mainMgr->setCipherKey(curMod->Name(), key);
-	mainMgr1->setCipherKey(curMod->Name(), key);	
-	//-- display module with new cipher key in text window and interlinear window
-	curMod->Display();
-	updateinterlinearpage();
+	
+	//-- display module with new cipher key 	
+	switch(modwindow) {
+		case MAIN_TEXT_WINDOW:	
+			mainMgr1->setCipherKey(modName, key); /* show change on interlinear page */
+		case COMMENTARY_WINDOW:
+			mainMgr->setCipherKey(modName, key);
+			ChangeVerseSWORD();
+		break;
+		case DICTIONARY_WINDOW:			
+			mainMgr->setCipherKey(modName, key);
+			curdictMod->Display();
+		break;
+	}
 }
 
 /*** write individual module font information to <module>.conf ***/
-bool savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
+gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
 {
 	ModMap::iterator it; 
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	DIR *dir;
-	//SWModule *module;
-	gchar buf[256], conffile[256];
+	gchar buf[256], conffile[256], *path;
 	struct dirent *ent;	
-		
-	sprintf(buf,"%s/mods.d",pathtomods());
-	dir = opendir(buf);	
-	char *modFile;
+	bool retval = false;
+	
+	sprintf(buf,"%s",mainMgr->configPath); 
+	dir = opendir(buf);
 	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "."))
-			    && (strcmp(ent->d_name, ".."))) {
+			if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
 				sprintf(conffile,"%s/%s",buf,ent->d_name);
-				SWConfig *myConfig = new SWConfig(conffile);
-				section =
-				    myConfig->Sections.find(modName);
-				if (section != myConfig->Sections.end()) {
-					entry = section->second.find(modtag);
-					if (entry != section->second.end()) {
-						entry->second = fontinfo;	//-- set font info
-						myConfig->Save();	//-- save config file
-					}
-				}
-				delete myConfig;
+				SWConfig myConfig(conffile);
+				myConfig[modName][modtag] = fontinfo;
+				myConfig.Save();
+				retval = true;
 			}
 		}
 	}
 	closedir(dir);
-	return true;
+	return retval;
 }
 
 

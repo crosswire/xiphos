@@ -82,8 +82,13 @@ extern "C" {
 	void loadpreferencemodsSWORD(void);
 	void gs_firstrunSWORD(void);
 	void applyfontcolorandsizeSWORD(void);
-	void savekeySWORD(gchar * key);
-
+	
+	/*** write individual module key to <module>.conf ***/
+	void savekeySWORD(gint modwindow, gchar * key);
+	
+	/*** write individual module font information to <module>.conf ***/
+	gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo);
+	
 #ifdef __cplusplus
 }
 #endif
