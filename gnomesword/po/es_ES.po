@@ -1,4 +1,5 @@
 # Spanish translation for GnomeSword
+# Localized for Spain
 # Copyright (C) 2002 Jan Paul Schmidt
 # Jan Paul Schmidt <jps@methusalix.net>
 # jps4ks
@@ -156,7 +157,7 @@ msgid ""
 "package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework. An installed module set may be shared between any frontend using the framework."
 
 msgstr ""
-"El Proyecto SWORD es un esfuerzo para crear un paquete de programas de computadora en contínua expansión para la investigación y estudio de Dios y Su Palabra.  El marco bíblico SWORD permite la manipulación fácil de textos bíblicos, comentarios, léxica, diccionarios, etc.  Muchos programas cliente son construidos utilizando este marco.  Un grupo de módulos instalados puede ser compartido entre todos los programas cliente utilizando el marco."
+"El Proyecto SWORD es un esfuerzo para crear un paquete de programas de ordenador en contínua expansión para la investigación y estudio de Dios y Su Palabra.  El marco bíblico SWORD permite la manipulación fácil de textos bíblicos, comentarios, léxica, diccionarios, etc.  Muchos programas cliente son construidos utilizando este marco.  Un grupo de módulos instalados puede ser compartido entre todos los programas cliente utilizando el marco."
 
 # src/gs_setup.c
 msgid "This guide will take you through the initial setup of GnomeSword"
@@ -225,7 +226,7 @@ msgstr "Añadir un Nuevo Grupo"
 
 # src/gs_bookmarks.c
 msgid "Add a new root group and file"
-msgstr "Añadir grupo y archivo base nuevos"
+msgstr "Añadir grupo y fichero base nuevos"
 
 # src/gs_bookmarks.c
 msgid "Save Bookmarks"
@@ -305,7 +306,7 @@ msgstr "Módulo"
 
 # src/gs_file.c
 msgid "GnomeSword - Open Note File"
-msgstr "GnomeSword - Abrir el Archivo de Notas"
+msgstr "GnomeSword - Abrir el Fichero de Notas"
 
 # src/gs_file.c:502
 msgid "GomeSword - Save Note File"
@@ -547,7 +548,7 @@ msgstr ",,%s'' ha sido modificado. ¿Desea guardarlo?"
 
 # src/gs_html_editor.c
 msgid "File"
-msgstr "Archivo"
+msgstr "Fichero"
 
 # src/gs_html.c
 msgid "Show %s in main window"
@@ -1108,7 +1109,7 @@ msgstr "Guardar Lista"
 
 # src/gs_shortcutbar.c
 msgid "Save the current verse list as a bookmark file"
-msgstr "Guardar la lista de versos actual como un archivo de marcas de libro"
+msgstr "Guardar la lista de versos actual como un fichero de marcas de libro"
 
 # src/gs_shortcutbar.c
 msgid "Main Form"
