@@ -34,7 +34,7 @@
 #include "main/bibletext.h"
 #include "main/settings.h"
 
-//"<font color=\"#FF0000\">"
+
 /******************************************************************************
  * Name
  *  get_font
@@ -90,106 +90,29 @@ static MOD_FONT *get_font(gchar * mod_name)
 
 static void set_global_options(TEXT_GLOBALS * tgs)
 {
-	if (tgs->strongs)
-		set_text_module_global_option("Strong's Numbers",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_strongs)->
-					      active);
-	if (tgs->morphs)
-		set_text_module_global_option("Morphological Tags",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_morphs)->
-					      active);
-	if (tgs->gbffootnotes || tgs->thmlfootnotes)
-		set_text_module_global_option("Footnotes",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_footnotes)->
-					      active);
-	if (tgs->greekaccents)
-		set_text_module_global_option("Greek Accents",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_accents)->
-					      active);
-	if (tgs->lemmas)
-		set_text_module_global_option("Lemmas",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_lemmas)->
-					      active);
-	if (tgs->scripturerefs)
-		set_text_module_global_option
-		    ("Scripture Cross-references",
-		     GTK_TOGGLE_BUTTON(tgs->t_btn_scripturerefs)->
-		     active);
-	if (tgs->hebrewpoints)
-		set_text_module_global_option("Hebrew Vowel Points",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_points)->
-					      active);
-	if (tgs->hebrewcant)
-		set_text_module_global_option("Hebrew Cantillation",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_cant)->
-					      active);
-	if (tgs->headings)
-		set_text_module_global_option("Headings",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_headings)->
-					      active);
-	if (tgs->words_in_red)
-		set_text_module_global_option("Red letter words",
-					      GTK_TOGGLE_BUTTON(tgs->
-								t_btn_redwords)->
-					      active);
-	if (tgs->variants) {
-		if (GTK_RADIO_MENU_ITEM(tgs->t_btn_primary)->
-		    check_menu_item.active)
+	
+	set_text_module_global_option("Strong's Numbers",tgs->strongs);
+	set_text_module_global_option("Morphological Tags",tgs->morphs);
+	set_text_module_global_option("Footnotes",tgs->footnotes);
+	set_text_module_global_option("Greek Accents",tgs->greekaccents);
+	set_text_module_global_option("Lemmas",tgs->lemmas);
+	set_text_module_global_option("Scripture Cross-references",tgs->scripturerefs);
+	set_text_module_global_option("Hebrew Vowel Points",tgs->hebrewpoints);
+	set_text_module_global_option("Hebrew Cantillation",tgs->hebrewcant);
+	set_text_module_global_option("Headings",tgs->headings);
+	set_text_module_global_option("Red letter words",tgs->words_in_red);
+	
+	if (tgs->variants_primary)
 			set_text_global_option("Textual Variants",
 					       "Primary Reading");
-		else if (GTK_RADIO_MENU_ITEM(tgs->t_btn_secondary)->
-			 check_menu_item.active)
+	else if (tgs->variants_secondary)
 			set_text_global_option("Textual Variants",
 					       "Secondary Reading");
-		else if (GTK_RADIO_MENU_ITEM(tgs->t_btn_all)->
-			 check_menu_item.active)
-			set_text_global_option("Textual Variants",
+	else
+		set_text_global_option("Textual Variants",
 					       "All Readings");
-	}
 }
 
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include ".h"
- *
- *   void ( GString *str )	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void strip_words_in_red(GString * str)
-{
-	gchar *tmpbuf, *buf, color_tag[26];
-	gint pos, len, len1, len2;
-
-	strcpy(color_tag, "<font color=\"#FF0000\">");
-	/* point buf to found verse */
-	buf = str->str;
-
-	len = strlen(color_tag);
-	len1 = strlen(buf);
-	while ((tmpbuf = strstr(buf, color_tag)) != NULL) {
-		len2 = strlen(tmpbuf);
-		pos = len1 - len2;
-		/* remove color tag */
-		str = g_string_erase(str, pos, len);
-	}
-}
 
 
 /******************************************************************************
@@ -469,7 +392,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
  *
  * Return value
  *   void
- */
+ */ 
 
 void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		     TEXT_GLOBALS * tgs, gchar * key,
