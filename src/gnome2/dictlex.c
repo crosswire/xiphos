@@ -61,7 +61,7 @@ static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 					    gint page_num,
 					    GList * dl_list);
 static GList *dl_list;
-static DL_DATA *cur_d;
+DL_DATA *cur_d;
 static gint number_of_dictionaries;
 static gint cell_height;
 static gint dict_last_page;
@@ -209,6 +209,27 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 				   settings.dictkey);
 
 	dict_last_page = page;
+}
+
+/******************************************************************************
+ * Name
+ *  gui_set_dictlex_mod_and_key
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)	
+ *
+ * Description
+ *   sets the dictionary module and key.  Primarily added for use in tabbed browsing
+ *
+ * Return value
+ *   void
+ */
+void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)
+{
+	set_page_dictlex(mod, dl_list);
+	gui_display_dictlex(key);
 }
 
 /******************************************************************************

@@ -1,4 +1,4 @@
-# Anjuta Version 1.1.98 
+# Anjuta Version 1.2.0 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.1.98
+anjuta.version=1.2.0
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -58,7 +58,6 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
-preferences.autoformat.style=Custom style
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -151,7 +150,8 @@ module.include.files=\
 	src/main/mod_mgr.h\
 	src/backend/module_manager.hh\
 	src/gui/mod_mgr.h\
-	src/gui/mod_global_ops.h
+	src/gui/mod_global_ops.h\
+	src/gui/tabbed_browser.h
 
 module.source.name=.
 module.source.type=
@@ -235,7 +235,8 @@ module.source.files=\
 	src/main/mod_mgr.c\
 	src/backend/module_manager.cc\
 	src/gnome2/mod_mgr.c\
-	src/gnome2/mod_global_ops.c
+	src/gnome2/mod_global_ops.c\
+	src/gnome2/tabbed_browser.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

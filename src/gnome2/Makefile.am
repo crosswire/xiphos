@@ -83,6 +83,7 @@ gnomesword2_SOURCES =  \
     splash.c \
     studypad.c \
     studypad_dialog.c \
+	tabbed_browser.c \
     toolbar_edit.c \
     toolbar_nav.c \
     toolbar_style.c \
