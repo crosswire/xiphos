@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "settings.h"
+
+#include "main/settings.h"
 
 void gui_undock_interlinear_page(SETTINGS *s);
 void gui_btnDockInt_clicked(GtkButton *button, SETTINGS *s);
@@ -34,4 +35,6 @@ GtkWidget *gui_create_interlinear_dialog(SETTINGS *s);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __INTERLINEAR_DIALOG_H__ */
+
+#endif
+

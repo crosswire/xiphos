@@ -22,11 +22,8 @@
 #ifndef ___COMMENTARY_H_
 #define ___COMMENTARY_H_
 
-/*
- * main
- */
-#include "settings.h"
-#include "commentary.h"
+#include "main/settings.h"
+#include "main/commentary.h"
 
 void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
@@ -34,6 +31,6 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 GtkWidget *gui_create_pm(COMM_DATA * c);
 void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 						gint count);
-							
 
-#endif	/* ___COMMENTARY_H_ */
+#endif
+

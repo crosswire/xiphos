@@ -32,4 +32,6 @@ GtkWidget* gui_create_shortcutbar_dialog(void);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __SHORTCUTBAR_DIALOG_H__ */
+
+#endif
+

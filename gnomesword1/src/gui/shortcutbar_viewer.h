@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * shortcutbar_viewer.h - create viewer group gui
@@ -19,6 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
 #ifndef _CREATE_SHORTCUTBAR_VIEWER_H
 #define _CREATE_SHORTCUTBAR_VIEWER_H
 
@@ -26,7 +26,7 @@
 extern "C" {
 #endif	
 
-#include "settings.h"
+#include "main/settings.h"
 
 typedef struct _shortcutbar_viewer SB_VIEWER;
 struct _shortcutbar_viewer {
@@ -50,5 +50,6 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vp, SETTINGS * s);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* _CREATE_SHORTCUTBAR_VIEWER_H */
+
+#endif
 

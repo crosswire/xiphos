@@ -18,6 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
 #ifndef _SHORTCUTBAR_SEARCH_H
 #define _SHORTCUTBAR_SEARCH_H
 
@@ -25,10 +26,11 @@
 extern "C" {
 #endif	
 	
-void gui_create_shortcutbar_search(GtkWidget * vp);
+void gui_create_shortcutbar_search(GtkWidget *vp);
 
 #ifdef __cplusplus
 }
 #endif
-#endif	/* _SHORTCUTBAR_SEARCH_H */
+
+#endif
 

@@ -23,10 +23,10 @@
 #define __EDITOR_MENU_H_
 
 #include <gnome.h>
-#include "_editor.h"
+#include "gui/_editor.h"
 
-void on_save_activate(GtkMenuItem * menuitem,
-		      GSHTMLEditorControlData * ecd);		      
+void on_save_activate(GtkMenuItem *menuitem, GSHTMLEditorControlData * ecd);
 GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd);
 
-#endif	/* __EDITOR_MENU_H_ */
+#endif
+
