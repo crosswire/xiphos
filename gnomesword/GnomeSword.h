@@ -135,7 +135,7 @@ void dictSearchTextChangedSWORD(gchar * mytext);
 
 void dictchangekeySWORD(gint direction);
 
-void addHistoryItem(void);
+void addHistoryItem(gchar *ref);
 
 void changepercomModSWORD(gchar * modName);
 
