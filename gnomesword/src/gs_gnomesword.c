@@ -308,41 +308,45 @@ addnotebookpages(GtkWidget *notebook,
  * UpdateChecks(GtkWidget *app) update chech menu items
  * and toggle buttons - called on start up
  *****************************************************************************/
-void UpdateChecks(GtkWidget *app)
+void UpdateChecks(SETTINGS *s)
 {
 	/* does user want verses or paragraphs */
-	GTK_CHECK_MENU_ITEM (settings->versestyle_item)->active = settings->versestyle;		
+	GTK_CHECK_MENU_ITEM (s->versestyle_item)->active = s->versestyle;		
 	/* set interlinear page to last setting */
-	if(settings->interlinearpage)
-		gtk_widget_show(lookup_widget(app,"vboxInt"));	
+	if(s->interlinearpage)
+		gtk_widget_show(lookup_widget(s->app,"vboxInt"));	
 	else
-		gtk_widget_hide(lookup_widget(app,"vboxInt"));	
+		gtk_widget_hide(lookup_widget(s->app,"vboxInt"));	
 	/* set interlinear page menu check item */		
-	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 
+	GTK_CHECK_MENU_ITEM (notepage)->active = s->interlinearpage; 
 	/* set interlinear footnotes to last setting used */
-	if(settings->footnotesint)  
+	if(s->footnotesint)  
 		setglobalopsSWORD(INTERLINEAR_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
 		setglobalopsSWORD(INTERLINEAR_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */	
 	/* set interlinear Strong's Numbers to last setting used */
-	if(settings->strongsint)  
-		setglobalopsSWORD(INTERLINEAR_WINDOW,"Strong's Numbers","On" );	/* keep footnotes in sync with menu */		
+	if(s->strongsint)  
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Strong's Numbers","On" );	/* keep Strongs in sync with menu */		
 	else
-		setglobalopsSWORD(INTERLINEAR_WINDOW,"Strong's Numbers","Off" );	/* keep footnotes in sync with menu */
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Strong's Numbers","Off" );	/* keep Strongs in sync with menu */
 	/* set interlinear morph tags to last setting used */
-	if(settings->morphsint)  
-		setglobalopsSWORD(INTERLINEAR_WINDOW,"Morphological Tags","On" );	/* keep footnotes in sync with menu */		
+	if(s->morphsint)  
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Morphological Tags","On" );	/* keep Morph Tags in sync with menu */		
 	else
-		setglobalopsSWORD(INTERLINEAR_WINDOW,"Morphological Tags","Off" );	/* keep footnotes in sync with menu */	
+		setglobalopsSWORD(INTERLINEAR_WINDOW,"Morphological Tags","Off" );	/* keep Morph Tag in sync with menu */	
 	/* set auto save personal comments to last setting */
-	autoSave = settings->autosavepersonalcomments;
+	autoSave = s->autosavepersonalcomments;
 	/* set auto save menu check item */	
 	//GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 	
         /* fill the dict key clist */
         if(havedict) FillDictKeysSWORD();
         /* set Text - apply changes */
         addhistoryitem = FALSE;
-        changeVerseSWORD(settings->currentverse);
+        changeVerseSWORD(s->currentverse);
+	if(!s->docked){
+		s->docked = TRUE;
+		on_btnSBDock_clicked(NULL, s);
+	}
 }
 
 /*****************************************************************************

@@ -63,6 +63,7 @@ gboolean loadconfig(void)
 	sprintf(buf, "%s/preferences.conf", gSwordDir);
 	SWConfig settingsInfo(buf);
 	settingsInfo.Load();
+	
 	/* app size on open ,epane sizes and shortcut bar width */
 	sprintf(settings->gs_version,"%s",settingsInfo["GnomeSword"]["Version"].c_str());
 	settings->shortcutbar_width =
@@ -75,11 +76,15 @@ gboolean loadconfig(void)
 	    atoi(settingsInfo["LAYOUT"]["AppWidth"].c_str());
 	settings->gs_hight =
 	    atoi(settingsInfo["LAYOUT"]["AppHight"].c_str());
+	settings->docked =
+	    atoi(settingsInfo["LAYOUT"]["ShortcutbarDocked"].c_str());
+	
 	/* which lexicon to open when storngs numbers are clicked */
 	sprintf(settings->lex_greek, "%s",
 		settingsInfo["LEXICONS"]["Greek"].c_str());
 	sprintf(settings->lex_hebrew, "%s",
 		settingsInfo["LEXICONS"]["Hebrew"].c_str());
+		
 	/* font sizes html widgets */
 	sprintf(settings->bible_font_size, "%s",
 		settingsInfo["FontSize"]["BibleWindow"].c_str());
@@ -93,12 +98,12 @@ gboolean loadconfig(void)
 		settingsInfo["FontSize"]["VerseListWindow"].c_str());
 	sprintf(settings->verse_num_font_size, "%s",
 		settingsInfo["FontSize"]["VerseNum"].c_str());
+		
 	/*** fonts ***/	
 	sprintf(settings->default_font,"%s",settingsInfo["Fonts"]["Default"].c_str());
 	sprintf(settings->greek_font,"%s", settingsInfo["Fonts"]["Greek"].c_str());
 	sprintf(settings->hebrew_font,"%s",settingsInfo["Fonts"]["Hebrew"].c_str());
-	sprintf(settings->unicode_font,"%s", settingsInfo["Fonts"]["Unicode"].c_str());
-	
+	sprintf(settings->unicode_font,"%s", settingsInfo["Fonts"]["Unicode"].c_str());	
 	
 	/* modules to use on startup */
 	sprintf(settings->MainWindowModule, "%s",
@@ -121,19 +126,23 @@ gboolean loadconfig(void)
 		settingsInfo["Modules"]["PerComments"].c_str());
 	sprintf(settings->devotionalmod, "%s",
 		settingsInfo["Modules"]["Devotional"].c_str());
+		
 	/* main notebook page */
 	settings->notebook3page =
 	    atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
+	    
 	/* Bible verse and dict/lex key to open with */
 	sprintf(settings->currentverse, "%s",
 		settingsInfo["Keys"]["verse"].c_str());
 	sprintf(settings->dictkey, "%s",
 		settingsInfo["Keys"]["dictionarykey"].c_str());
+		
 	/* studypad file to open with if any */
 	sprintf(settings->studypadfilename, "%s",
 		settingsInfo["StudyPad"]["Lastfile"].c_str());
 	sprintf(settings->studypaddir, "%s",
 		settingsInfo["StudyPad"]["Directory"].c_str());
+		
 	/* misc user options */
 	sprintf(settings->bible_text_color, "%s",
 		settingsInfo["User Options"]["BibleTextColor"].c_str());
@@ -146,8 +155,7 @@ gboolean loadconfig(void)
 	sprintf(settings->link_color, "%s",
 		settingsInfo["User Options"]["LinkColor"].c_str());
 	sprintf(settings->found_color, "%s",
-		settingsInfo["User Options"]["FoundColor"].c_str());
-		
+		settingsInfo["User Options"]["FoundColor"].c_str());		
 	settings->usedefault =
 	    atoi(settingsInfo["User Options"]["UseDefault"].c_str());
 	settings->strongs =
@@ -165,8 +173,7 @@ gboolean loadconfig(void)
 	settings->versestyle =
 	    atoi(settingsInfo["User Options"]["versestyle"].c_str());
 	settings->autosavepersonalcomments =
-	    atoi(settingsInfo["User Options"]["autosavepersonalcomments"].
-		 c_str());
+	    atoi(settingsInfo["User Options"]["autosavepersonalcomments"].c_str());
 	settings->formatpercom =
 	    atoi(settingsInfo["User Options"]["formatpercom"].c_str());
 	settings->showshortcutbar =
@@ -180,8 +187,7 @@ gboolean loadconfig(void)
 	settings->showdictgroup =
 	    atoi(settingsInfo["User Options"]["showdictgroup"].c_str());
 	settings->showbookmarksgroup =
-	    atoi(settingsInfo["User Options"]["showbookmarksgroup"].
-		 c_str());
+	    atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());
 	settings->interlinearpage =
 	    atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
 	settings->showhistorygroup =
@@ -292,6 +298,10 @@ gboolean saveconfig(void)
 		settingsInfo["LAYOUT"]["AppWidth"] = buf;
 		sprintf(buf, "%d", settings->gs_hight);
 		settingsInfo["LAYOUT"]["AppHight"] = buf;
+		if (settings->docked)
+			settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
+		else
+			settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "0";
 
 		settingsInfo["User Options"]["currentVerseColor"] =
 		    settings->currentverse_color;
@@ -426,6 +436,7 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["NoteScroll"] = "1";
 		else
 			settingsInfo["User Options"]["NoteScroll"] = "0";
+		
 
 
 		sprintf(buf, "%d", settings->text_tabs);
@@ -489,6 +500,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["LAYOUT"]["BiblePane"] = "262";
 	settingsInfo["LAYOUT"]["AppWidth"] = "700";
 	settingsInfo["LAYOUT"]["AppHight"] = "550";
+	settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
 
 	if (GTK_TOGGLE_BUTTON(lookup_widget(setup, "radiobutton1"))->
 	    active)
@@ -598,6 +610,7 @@ gboolean createconfig(void)
 	settingsInfo["LAYOUT"]["BiblePane"] = "262";
 	settingsInfo["LAYOUT"]["AppWidth"] = "700";
 	settingsInfo["LAYOUT"]["AppHight"] = "550";
+	settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
 
 	settingsInfo["User Options"]["UseDefault"] = "0";
 	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
