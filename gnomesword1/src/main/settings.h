@@ -201,6 +201,9 @@ struct _settings {
 	/* is Bibletime on the system */
 	int have_bibletime;
 	
+	/* cell height of dictionary treeview */
+	int cell_height;
+	
 	/* window location at close */
 	int app_x;
 	int app_y;

@@ -53,6 +53,7 @@
 #include "main/dictlex.h"
 #include "main/module.h"
 #include "main/sidebar.h"
+#include "main/url.h"
 #include "main/xml.h"
 
 
@@ -242,7 +243,7 @@ static void on_notebook_switch_page(GtkNotebook *notebook,
 
 static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gui_url_handler(url, TRUE);
+	main_url_handler(url, TRUE);
 }
 
 

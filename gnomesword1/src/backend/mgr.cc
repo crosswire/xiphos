@@ -99,7 +99,7 @@ void backend_init_managers(void)
 }
 
 void backend_setup_display_mgr(void)
-{
+{	
 	main_setup_displays();
 	ModMap::iterator it;
 	for (it = sw.display_mgr->Modules.begin(); it != 

@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 	gui_splash_done();
 	
 	if(have_sword_url)
-		gui_url_handler(argv[1], TRUE);
+		main_url_handler(argv[1], TRUE);
 
 	gui_main();
 

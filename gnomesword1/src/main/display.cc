@@ -42,6 +42,7 @@ extern "C" {
 //#include "gui/widgets.h"
 
 #include "backend/module.hh"
+#include "backend/sword_main.hh"
 #include "backend/tree.hh"
 
 	
@@ -108,14 +109,118 @@ char GTKChapDisp::Display(SWModule &imodule)
 	int curBook = key->Book();
 	int curPos = 0;
 	gfloat adjVal;
+	MOD_FONT *mf = get_font(imodule.Name());
+	GtkHTML *html = GTK_HTML(gtkText);
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GString *str = g_string_new(NULL);
+	gchar *buf;
+	gchar *buf2;
+	gchar *preverse = NULL;
+	gchar *paragraphMark = "&para;";
+	gchar *br = NULL;
+	gchar heading[32];
+	gboolean newparagraph = FALSE;
+	gboolean was_editable = gtk_html_get_editable(html);
+	g_string_printf(str,	HTML_START
+				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+				settings.bible_bg_color, 
+				settings.bible_text_color,
+				settings.link_color);
 
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++) {
+	main_set_global_options(ops);
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
+				== curChapter && !imodule.Error()); imodule++) {
+		int x = 0;
+		sprintf(heading,"%d",x);
+		while((preverse 
+			= backend->get_entry_attribute("Heading","Preverse",
+							    heading)) != NULL) {
+			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
+			str = g_string_append(str, buf);
+			g_free(preverse);
+			g_free(buf);						     
+			++x;
+			sprintf(heading,"%d",x);
+		}
+		buf = g_strdup_printf(
+			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+			(char*)key->getText(),
+			key->Verse(),
+			settings.verse_num_font_size,
+			settings.bible_verse_num_color, 
+			key->Verse());
+		str = g_string_append(str,buf);
+		g_free(buf);
+		buf = g_strdup_printf(
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				(mf->old_font)?mf->old_font:"", 
+				(mf->old_font_size)?mf->old_font_size:"+0", 
+				(key->Verse() == curVerse)
+				?settings.currentverse_color
+				:settings.bible_text_color);
 		
+		str = g_string_append(str,buf);
+		g_free(buf);	
+
+		if (newparagraph && settings.versestyle) {
+			newparagraph = FALSE;
+			str = g_string_append(str, paragraphMark);
+		}
+		str = g_string_append(str, (const char *)imodule);
+		buf = g_strdup_printf("%s",(const char *)imodule);
 		
+		if (settings.versestyle) {
+			if ((strstr(buf, "<BR>") == NULL) &&
+			    (strstr(buf, "<br />") == NULL) &&
+			     (strstr(buf, "<!P>") == NULL) &&
+			     (strstr(buf, "<p>") == NULL) &&
+			     (strstr(buf, "</p>") == NULL)  ) {
+				buf2 = g_strdup_printf(" %s", "</font><br>");
+			} else {
+				br = g_strrstr(buf, "<br"); /* last occurance */
+				if(strlen(br) > 6) /* we have a new line that's
+						      not at the end of the string */					
+					buf2 = g_strdup_printf(" %s", 
+								"</font><br>");
+				else
+					buf2 = g_strdup_printf(" %s", "</font>");
+			}
+			if ((strstr(buf, "<!P>") == NULL) &&
+			     (strstr(buf, "<p>") == NULL) ) {
+				newparagraph = FALSE;
+			} else {
+				newparagraph = TRUE;
+			}
+		} else {
+			if (strstr(buf, "<!P>") == NULL)
+				buf2 = g_strdup_printf(" %s", "</font>");
+			else
+				buf2 = g_strdup_printf(" %s", "</font><p>");
+		}
+		str = g_string_append(str, buf2);
+		g_free(buf);
+		g_free(buf2);
 	}
+	buf = g_strdup_printf("%s", "</body></html>");
+	str = g_string_append(str, buf);
+	g_free(buf);
+	if (str->len) {
+		gtk_html_load_from_string(html,str->str,str->len);
+	}
+	gtk_html_set_editable(html, was_editable);
+	if(curVerse > 1) {
+		buf = g_strdup_printf("%d", curVerse - 1);
+		gtk_html_jump_to_anchor(html, buf);
+		g_free(buf);
+	}	
+
+	g_string_free(str, TRUE);
 	key->Verse(1);
 	key->Chapter(1);
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
+	free_font(mf);	
+	g_free(ops);
 }

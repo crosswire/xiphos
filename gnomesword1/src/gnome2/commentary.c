@@ -123,7 +123,7 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 	
 	main_save_module_options_comm(settings.MainWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	main_display_commentary();
+	main_display_commentary(settings.CommWindowModule,settings.comm_key);
 }
 
 
@@ -151,21 +151,17 @@ static void popup_pm_comm(GdkEventButton * event)
 
 void gui_set_commentary_mod_and_key(gchar * mod_name, gchar * key)
 {	
-	xml_set_value("GnomeSword", "modules", "comm", mod_name);
-	settings.CommWindowModule = xml_get_value( "modules", "comm");
-	gui_set_comm_label(settings.CommWindowModule);
-	gui_change_window_title(settings.CommWindowModule);
-	gui_display_commentary(key);
+	gchar *strkey = get_valid_key(key);
+	settings.comm_showing = TRUE;	
+	main_display_commentary(mod_name, strkey);
 }
 
 
 void gui_display_commentary(gchar * key)
 {
-	gchar *strkey = get_valid_key(key);
-	
+	gchar *strkey = get_valid_key(key);	
 	settings.comm_showing = TRUE;	
-	main_set_commentary_key(settings.CommWindowModule, strkey);
-	main_display_commentary();
+	main_display_commentary(settings.CommWindowModule, strkey);
 }
 
 

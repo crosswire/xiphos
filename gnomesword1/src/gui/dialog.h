@@ -66,6 +66,7 @@ struct _gs_dialog {
 
 GS_DIALOG *gui_new_dialog(void);
 gint gui_gs_dialog(GS_DIALOG * info);
+gint gui_alert_dialog(GS_DIALOG * info);
 
 #ifdef __cplusplus
 }

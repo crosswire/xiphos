@@ -27,7 +27,6 @@
 #include <gnome.h>
 #include <swmgr.h>
 #include <swmodule.h>
-//#include <glib-2.0/glib.h>
 
 #include <ctype.h>
 #include <time.h>
@@ -35,6 +34,8 @@
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
+#include "gui/commentary.h"
+#include "gui/tabbed_browser.h"
 
 #include "main/display.hh"
 #include "main/sword.h"
@@ -44,41 +45,9 @@
  
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
+#include "backend/sword_main.hh"
 #include "backend/mgr.hh"
-/*
-void set_global_option(int manager, char * option, gboolean choice)
-{
-	char *on_off;
 
-	if (choice) {
-		on_off = "On";
-	} else {
-		on_off = "Off";
-	}
-	switch(manager) {
-		case TEXT_MGR:
-			sw.text_mgr->setGlobalOption(option, on_off);
-		break;
-		case COMM_MGR:
-			sw.display_mgr->setGlobalOption(option, on_off);
-		break;
-		case GBS_MGR:			
-			sw.display_mgr->setGlobalOption(option, on_off);
-		break;
-		case MAIN_MGR:			
-			sw.main_mgr->setGlobalOption(option, on_off);
-		break;
-		case SEARCH_MGR:
-			sw.search_mgr->setGlobalOption(option, on_off);
-		break;	
-		case INTER_MGR:
-			sw.inter_mgr->setGlobalOption(option, on_off);
-		break;
-	}	
-	sw.results->setGlobalOption(option, on_off);
-	//backend_set_global_option(manager, option, on_off);
-}
-*/
 void delete_module_mgr(void)
 {
 	backend_delete_module_mgr();
@@ -215,26 +184,174 @@ char * get_text_from_offset(char * module_name, unsigned long offset)
 	return backend_get_text_from_offset(module_name, offset);
 }
 
+
+void main_dictionary_entery_changed(char * mod_name)
+{
+	gint count = 7, i;
+	gchar *new_key, *text = NULL;
+	gchar *key = NULL;
+	static gboolean firsttime = TRUE;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
+	gint height;
+	
+	key = (gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
+	backend->set_module_key(mod_name, key);
+	key = backend->get_module_key();
+	
+	xml_set_value("GnomeSword", "keys", "dictionary", key);
+	settings.dictkey = xml_get_value("keys", "dictionary");
+	
+	backend->set_module_key(mod_name, key);
+	backend->display_mod->Display();
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widgets.listview_dict));
+	list_store = GTK_LIST_STORE(model);
+	
+	if (!firsttime) {
+		gdk_drawable_get_size ((GdkDrawable *)widgets.listview_dict->window,
+                                             NULL,
+                                             &height);
+		count = height / settings.cell_height;
+	}	 
+
+	if (count) {
+		gtk_list_store_clear(list_store);
+		new_key = backend->navigate_module(-1);
+
+		for (i = 0; i < (count / 2); i++) {
+			free(new_key);
+			new_key = backend->navigate_module(0);
+		}
+
+		for (i = 0; i < count; i++) {
+			free(new_key);
+			new_key = backend->navigate_module(1);
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 0,
+					   new_key, -1);
+		}
+		free(new_key);
+	}
+	firsttime = FALSE;
+} 
+
+
 void main_display_book(void)
 {
+	//backend->set_module(settings.book_mod,settings.book_offset);
 	sw.gbs_mod->Display();
+	
+/*	if(settings.browsing)
+		gui_update_tab_struct(NULL,
+				      NULL,
+				      NULL,
+				      mod_name,
+				      NULL,
+				      key?key:NULL,
+				      FALSE);
+*/
 }
 
-void main_display_commentary(void)
+void main_display_commentary(const char * mod_name, const char * key)
 {
-	sw.comm_mod->Display();
+	if(!settings.havecomm)
+		return;
+	
+	if(strcmp(settings.CommWindowModule,mod_name)) {
+		xml_set_value("GnomeSword", "modules", "comm", mod_name);
+		settings.CommWindowModule = xml_get_value( "modules", "comm");
+		gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
+		//gui_set_comm_label(settings.CommWindowModule);
+		gui_change_window_title(settings.CommWindowModule);
+	}
+	backend->set_module_key(mod_name, key);
+	backend->display_mod->Display();
+	
+	if(settings.browsing)
+		gui_update_tab_struct(NULL,
+				      mod_name,
+				      NULL,
+				      NULL,
+				      NULL,
+				      NULL,
+				      TRUE);
 }
+
 void main_display_dictionary(char * mod_name, char * key)
 {
-	backend_set_module(DICT_MGR, mod_name);
-	sw.dict_mod->SetKey(key);
-	sw.dict_mod->Display();
+	const gchar *old_key;
+	
+	if(!settings.havedict)
+		return;
+	if(strcmp(settings.DictWindowModule,mod_name)) {
+		xml_set_value("GnomeSword", "modules", "dict",
+					mod_name);
+		settings.DictWindowModule = xml_get_value(
+					"modules", "dict");
+	}
+	gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
+	
+	if(key == NULL)
+		key = "Grace";
+	
+	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
+	if(!strcmp(old_key, key))
+		main_dictionary_entery_changed(settings.DictWindowModule);
+	else
+		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	
+	if(settings.browsing)
+		gui_update_tab_struct(NULL,
+				      NULL,
+				      mod_name,
+				      NULL,
+				      key,
+				      NULL,
+				      settings.comm_showing);
+} 
+
+
+void main_display_bible(const char * mod_name, const char * key)
+{
+	if(!settings.havebible)
+		return;
+	
+	if(strcmp(settings.MainWindowModule,mod_name)) {
+		xml_set_value("GnomeSword", "modules", "bible",
+					mod_name);
+		settings.MainWindowModule = xml_get_value(
+					"modules", "bible");
+	}
+	backend->set_module_key(mod_name, key);
+	backend->display_mod->Display();
+	
+	if(settings.browsing) {
+		gui_update_tab_struct(mod_name,
+				      NULL,
+				      NULL,
+				      NULL,
+				      NULL,
+				      NULL,
+				      settings.comm_showing);
+		gui_set_tab_label(key);
+	}
 }
+
 void main_setup_displays(void)
 {
 	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm);
 	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict);
 }
+
+void main_setup_new_displays(void)
+{
+	backend->commDisplay = new GTKEntryDisp(widgets.html_comm);
+	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict);
+	backend->textDisplay = new GTKChapDisp(widgets.html_text);
+}
+
 
 /******************************************************************************
  * Name
@@ -254,5 +371,5 @@ void main_setup_displays(void)
  
 int set_module(int manager, char * module_name)
 {
-	return backend_set_module(manager, module_name);
+	backend_set_module(manager, module_name);
 }

@@ -49,11 +49,13 @@ public:
 	SWModule *dict_mod;
 	SWModule *gbs_mod;
 	SWModule *percom_mod;
+	SWModule *display_mod;
 	
 	TreeKeyIdx *treeKey;	
 	const char *version;	
 	SWDisplay *commDisplay;	
 	SWDisplay *dictDisplay;
+	SWDisplay *textDisplay;
 
 	SwordMain();
 	~SwordMain();
@@ -61,6 +63,15 @@ public:
 	void init_lists(MOD_LISTS * mods);
 	GList *fill_Bible_books(int testament);
 	void get_module_options(GList * options);
+	int is_Bible_key(const char * list, char * current_key);
+	char *get_valid_key(const char *key);
+	char *get_module_key(void);
+	int is_module(const char *mod_name);
+	int module_type(char *mod_name);
+	char *get_entry_attribute(const char *level1, const char *level2, const char *level3);
+	int set_module_key(const char *module_name, const char *key);
+	void setup_displays(void);
+	char *navigate_module(int direction);
 	
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
 };
