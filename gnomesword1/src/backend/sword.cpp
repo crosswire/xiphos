@@ -47,6 +47,7 @@
 #include "backend/sword_main.hh"
 
 using namespace sword;
+#include <url.h>
   
   
   
@@ -156,6 +157,8 @@ void backend_init(void)
 	char *sword_locale = NULL;
 	const char *sword_version = get_sword_version();
 	ModMap::iterator it; 
+	
+	//URL *url = new URL("sword://KJV/Romans 8:28");
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sword_version);
 	g_print("%s\n\n", _("Initiating SWORD"));
