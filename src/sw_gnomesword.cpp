@@ -35,22 +35,22 @@
 #include <dirent.h> 
 #include <gbfplain.h>
 #include <plainhtml.h>
-//#include <gbfhtml.h>
+#include <gbfhtmlhref.h>
 #include <rwphtml.h>
-//#include <thmlhtml.h>
+#include <thmlhtmlhref.h>
 //#include <latin1utf8.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "sw_gbfhtml.h"
-#include "thmlhtmllink.h"
+//#include "gbfhtmlhref.h"
+//#include "thmlhtmlhref.h"
 #include "sw_latin1utf8.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
-#include "gs_display.h"
+#include "sw_display.h"
 #include "callback.h"
 #include "sw_gnomesword.h"
 #include "support.h"
@@ -162,10 +162,10 @@ void initSWORD(GtkWidget * mainform)
 	g_print("Initiating Sword\n");
 
 	plaintohtml = new PLAINHTML();	//-- sword renderfilter plain to html
-	thmltohtml = new ThMLHTMLLINK();	/* sword renderfilter thml to html */
-	rwptohtml = new RWPHTML();
-	gbftohtml = new SW_GBFHTML();
-	lattoutf8 = new SW_Latin1UTF8();
+	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
+	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
+	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
+	lattoutf8 = new SW_Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
 
 	mainMgr = new SWMgr();	//-- create sword mgrs
 	mainMgr1 = new SWMgr();
@@ -782,8 +782,8 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 			curMod = (*it).second;	//-- change current module to new module
 			if ((sit = mainMgr->config->Sections.find(curMod->Name())) != mainMgr->config->Sections.end()) {				
 				ConfigEntMap &section = (*sit).second;
-				string cipherkey= ((entry = section.find("CipherKey")) != section.end()) ? (*entry).second : (string) "";
-				if(strcmp(cipherkey.c_str(),"")){ //-- set sensitivity of unlock mod menu item
+				//-- do we have a CipherKey= tag?
+				if((entry = section.find("CipherKey")) != section.end()) { //-- set sensitivity of unlock mod menu item
 					gtk_widget_set_sensitive(settings->unlockmod_item, TRUE);
 				}else{
 					gtk_widget_set_sensitive(settings->unlockmod_item, FALSE);
@@ -1556,7 +1556,7 @@ void savekeySWORD(gchar * key)
 	sprintf(buf,"%s/mods.d",mainMgr->prefixPath);
 	dir = opendir(buf);	
 	char *modFile;
-	if (dir) {		// find and update .conf file
+	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
 			if ((strcmp(ent->d_name, "."))
@@ -1570,8 +1570,8 @@ void savekeySWORD(gchar * key)
 					    section->second.
 					    find("CipherKey");
 					if (entry != section->second.end()) {
-						entry->second = key;	//set cipher key
-						myConfig->Save();	//save config file
+						entry->second = key;	//-- set cipher key
+						myConfig->Save();	//-- save config file
 					}
 				}
 				delete myConfig;
@@ -1580,6 +1580,10 @@ void savekeySWORD(gchar * key)
 	}
 	closedir(dir);
 	mainMgr->setCipherKey(curMod->Name(), key);
+	mainMgr1->setCipherKey(curMod->Name(), key);	
+	//-- display module with new cipher key in text window and interlinear window
+	curMod->Display();
+	updateinterlinearpage();
 }
 
 /*

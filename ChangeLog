@@ -1,5 +1,14 @@
 2001-08-18 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* Added notebook to verselist group of shortcut bar
+	  with three pages - verse list, search results and viewer
+	* Changed gs_display.* files to sw_display.*
+	* Changed the names of the filters:
+		gs_gbfhtml.* to gbfhtmlhref.*
+		gs_thmlhtml.* to thmlhtmlhref.*
+
+2001-08-18 Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* add unlock module dialog
 	* added support for module font size and font name
 
@@ -10,7 +19,7 @@
 	* fix gconf_init bug
 	* fix to work with gal-0.10.99.2 and under to 0.4.99
 	* view text dialog is now resizeable
-	* interlinear page is now a html table 
+	* interlinear verses are now in an html table 
 
 
 2001-08-13 Terry Biggs <tbiggs@users.sourceforge.net>

@@ -36,7 +36,7 @@
 #include <versekey.h>
 #include "sw_viewcomm_dlg.h"
 #include "sw_gnomesword.h"
-#include "gs_display.h"
+#include "sw_display.h"
 #include "sw_utility.h"
 
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */

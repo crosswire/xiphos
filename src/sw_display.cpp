@@ -40,7 +40,7 @@
 #include <versekey.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "gs_display.h"
+#include "sw_display.h"
 #include "support.h"
 #include "sw_gnomesword.h"
 #include "gs_html.h"

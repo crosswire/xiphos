@@ -31,9 +31,6 @@ extern "C" {
 
 #include <gnome.h>	
 #include "gs_gnomesword.h"
-gboolean displaydictlexSBSWORD(gchar *modName, 
-					gchar *vlist, 
-					SETTINGS *s);
 gboolean getVerseListSBSWORD(gchar *modName, 
 					gchar *vlist, 
 					SETTINGS *s);
