@@ -597,9 +597,9 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		switch(mod_type) {
 			case TEXT_TYPE:	
 				key = main_update_nav_controls(tmpkey);
-				main_display_bible(work_buf[MODULE], key);
 				main_display_commentary(
 						settings.CommWindowModule, key);
+				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				if(key) g_free((gchar*)key);
 			break;
@@ -622,8 +622,8 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		if(verse_count) { 
 			key = main_update_nav_controls(tmpkey);
 			/* display in current Bible and Commentary */
-			main_display_bible(settings.MainWindowModule, key);
 			main_display_commentary(settings.CommWindowModule, key);
+			main_display_bible(settings.MainWindowModule, key);
 			main_keep_bibletext_dialog_in_sync((gchar*)key);
 			if(key) g_free((gchar*)key);
 		} else {

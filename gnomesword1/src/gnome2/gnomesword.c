@@ -147,17 +147,17 @@ void frontend_display(void)
 
 	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
 	
+	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
+					      settings.dictkey);
+	main_url_handler(url);
+	g_free(url);
+
 	settings.addhistoryitem = FALSE;
 	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 					      settings.currentverse);
 	main_url_handler(url);
 	g_free(url);
 	
-	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
-					      settings.dictkey);
-	main_url_handler(url);
-	g_free(url);
-
 	if(!settings.havebible){
 		settings.showtexts = FALSE;
 		gui_show_hide_texts(FALSE);
@@ -216,6 +216,7 @@ void frontend_display(void)
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
 	gtk_widget_grab_focus (sidebar.module_list);
+	
 	g_print("%s\n\n", _("done"));
 }
 
