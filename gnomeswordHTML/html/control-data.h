@@ -39,9 +39,10 @@ typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
 //#include "engine.h"
 //#include "Spell.h"
 
+
 struct _GtkHTMLControlData {
 	GtkHTML   *html;
-	GtkWidget *vbox, *cpicker, *combo;
+	GtkWidget *vbox, *cpicker, *combo, *notebook;
 
 	GtkHTMLEditPropertiesDialog   *properties_dialog;
 	GList                         *properties_types;
@@ -62,7 +63,11 @@ struct _GtkHTMLControlData {
 	guint releaseId;
 
 	/* toolbars */
-	GtkWidget *toolbar_commands, *toolbar_style;
+	GtkWidget *toolbar_commands, 
+			*toolbar_style,
+			*toolbar_edit,
+			*toolbar_file,
+			*toolbar_insert;
 
 	GtkWidget *tt_button;
 	GtkWidget *bold_button;

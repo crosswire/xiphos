@@ -120,19 +120,14 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 			percommods);
 /* add pages to commentary and  dictionary notebooks */			
 	addnotebookpages(lookup_widget(app,"notebook1"), commentarymods);
-	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
-/*  set text windows to word warp */
-//	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
-//	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
-//	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
-//	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
+	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);
+	
 /* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
 			settings->notebook3page );
 /* store text widgets for spell checker */
 //	notes =  lookup_widget(app,"textComments");
-	studypad = lookup_widget(app,"text3");				
+	//studypad = lookup_widget(app,"text3");				
 /* Add options to Options Menu and get toggle item widget */
 	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments",
 				(GtkMenuCallback)on_auto_save_notes1_activate);
@@ -201,9 +196,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
 			
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
-		/*label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		changcurcomModSWORD(label1->label, pagenum, TRUE);   */
 		
                 if(settings->showcomtabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
@@ -216,18 +208,15 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	}
 /* set text modules to last used */
 	changecurModSWORD(settings->MainWindowModule,TRUE);
-	//changecomp1ModSWORD(settings->Interlinear1Module);
-	//changecomp2ModSWORD(settings->Interlinear2Module);
-	//changecomp3ModSWORD(settings->Interlinear3Module);
 	
 /* hide buttons - only show them if their options are enabled */
-	gtk_widget_hide(lookup_widget(app,"btnPrint"));
+/*	gtk_widget_hide(lookup_widget(app,"btnPrint"));
 	gtk_widget_hide(lookup_widget(app,"btnSpell"));
 	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
-	
+*/	
 /* do not show print button if printing not enabled */
 #ifdef USE_GNOMEPRINT
-        gtk_widget_show(lookup_widget(app,"btnPrint"));
+       // gtk_widget_show(lookup_widget(app,"btnPrint"));
 #endif /* USE_GNOMEPRINT */
 	
 /* do not show spell buttons if spellcheck not enabled */
