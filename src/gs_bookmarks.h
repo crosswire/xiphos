@@ -40,7 +40,25 @@ void
 addbookmarktotree(gchar *modName, gchar *verse);
 void
 loadtree(GtkWidget *ctree);
-				
+GtkWidget*
+create_pmBookmarkTree (void);
+void
+on_new_activate(GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+void
+on_add_new_group1_activate(GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+void
+on_save_bookmarks1_activate(GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+void
+on_delete_item_activate(GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_allow_reordering_activate           (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
 #ifdef __cplusplus
 }
 #endif
