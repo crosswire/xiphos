@@ -32,12 +32,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include "gui/gnomesword.h"
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/main_window.h"
 
 #include "main/bookmarks.h"
-#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 /******************************************************************************

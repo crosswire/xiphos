@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 
 GtkWidget *gui_create_cipher_key_dialog(gchar *mod_name);
 

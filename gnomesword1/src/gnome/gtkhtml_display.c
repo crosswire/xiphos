@@ -30,7 +30,7 @@
 #include "gui/gtkhtml_display.h"
 
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "main/settings.h"
 

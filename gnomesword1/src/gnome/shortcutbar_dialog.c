@@ -31,7 +31,7 @@
 #include "gui/shortcutbar_dialog.h"
 #include "gui/utilities.h"
 
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 static GtkWidget* gui_create_shortcutbar_dialog(void);

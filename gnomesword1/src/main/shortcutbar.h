@@ -27,7 +27,25 @@ extern "C" {
 #endif
 
 #include <glib-1.2/glib.h>
- 
+  
+typedef struct _sword_search SEARCH_SWORD;
+struct  _sword_search {
+	
+	gchar
+	    *module_name,
+	    *upper_bond, 
+	    *lower_bond, 
+	    *search_string;
+
+	gint
+	    search_type, 
+	    search_params, 
+	    found_count;
+
+	 gboolean 
+	    use_bonds, 
+	    use_lastsearch_for_bonds;
+};
 /*** function prototypes ***/
 
 GList *load_sb_group(gchar *filename, gchar *group_name, 
