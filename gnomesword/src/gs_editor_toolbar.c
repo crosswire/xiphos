@@ -563,9 +563,8 @@ create_style_toolbar (GSHTMLEditorControlData *cd)
 				      GTK_RELIEF_NONE);
 	
 	gtk_container_add (GTK_CONTAINER (handleboxEditorBar), cd->toolbar_style);
-	//gtk_box_pack_start (GTK_BOX (handleboxEditorBar), frame, TRUE, TRUE, 0);
 
-	gtk_widget_show_all (handleboxEditorBar);
+	gtk_widget_show_all(cd->toolbar_style);
 
 	cd->paragraph_option = setup_paragraph_style_option_menu (cd->html),
 	gtk_toolbar_prepend_widget (GTK_TOOLBAR (cd->toolbar_style),

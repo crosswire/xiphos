@@ -119,19 +119,26 @@ static void updatestatusbar(GSHTMLEditorControlData * ecd)
 
 	if (ecd->personal_comments)
 		buf2 = settings->percomverse;
-	
-	//else if(ecd->gbs)
-	//	buf2 = "";
-	
+			
 	else
 		buf2 = ecd->filename;
 
 	if (ecd->changed){
 		sprintf(buf, "%s - modified", buf2);
-		settings->modifiedSP = TRUE;
+		if(!ecd->personal_comments && !ecd->gbs)
+			settings->modifiedSP = TRUE;
+		if(ecd->personal_comments)
+			settings->modifiedPC = TRUE;
+		if(ecd->gbs)
+			settings->modifiedGBS = TRUE;
 	} else {
 		sprintf(buf, "%s", buf2);
-		settings->modifiedSP = FALSE;
+		if(!ecd->personal_comments && !ecd->gbs)
+			settings->modifiedSP = FALSE;
+		if(ecd->personal_comments)
+			settings->modifiedPC = FALSE;
+		if(ecd->gbs)
+			settings->modifiedGBS = FALSE;
 	} 
 
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), context_id2,
@@ -563,21 +570,18 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			   NULL);
 			   
 	if(necd->personal_comments){
-		toolbarComments = toolbar_style(necd);
-		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarComments, FALSE, FALSE, 0);
-		gtk_widget_hide(toolbarComments);
+		s->toolbarComments = toolbar_style(necd);
+		gtk_widget_hide(s->toolbarComments);
 	}
 			   
 	else if(necd->gbs){
-		toolbarBooks = toolbar_style(necd);
-		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarBooks, FALSE, FALSE, 0);
-		gtk_widget_hide(toolbarBooks);
+		s->toolbarBooks = toolbar_style(necd);
+		gtk_widget_hide(s->toolbarBooks);
 	}
 	
 	else {
-		toolbarStudypad = toolbar_style(necd);
-		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarStudypad, FALSE, FALSE, 0);
-		gtk_widget_hide(toolbarStudypad);
+		s->toolbarStudypad = toolbar_style(necd);
+		gtk_widget_hide(s->toolbarStudypad);
 		if(settings->studypadfilename)
 			load_file(settings->studypadfilename,necd);
 	}
@@ -790,23 +794,25 @@ on_editnote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {	
 	if(ecd->personal_comments) {
 		settings->editnote = GTK_CHECK_MENU_ITEM(menuitem)->active;
+		
 		if(GTK_CHECK_MENU_ITEM(menuitem)->active){		
-			gtk_widget_show(toolbarComments);
+			gtk_widget_show(settings->toolbarComments);
 		}
 	
 		else {
-			gtk_widget_hide(toolbarComments);
+			gtk_widget_hide(settings->toolbarComments);
 		}
 	}
 	
 	if(ecd->gbs) {
 		settings->editgbs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+		
 		if(GTK_CHECK_MENU_ITEM(menuitem)->active){		
-			gtk_widget_show(toolbarBooks);
+			gtk_widget_show(settings->toolbarBooks);
 		}
 	
 		else {
-			gtk_widget_hide(toolbarBooks);
+			gtk_widget_hide(settings->toolbarBooks);
 		}
 	}
 	gtk_html_set_editable(GTK_HTML(ecd->html), GTK_CHECK_MENU_ITEM(menuitem)->active);
@@ -1514,7 +1520,8 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 	
 	specd = gs_html_editor_control_data_new(s);
 	specd->personal_comments = FALSE;
-
+	specd->gbs = FALSE;
+	
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
@@ -1554,6 +1561,7 @@ GtkWidget *percom_control(GtkWidget * vbox, SETTINGS * s)
 	GtkWidget *vboxPC;
 
 	pcecd->personal_comments = TRUE;
+	pcecd->gbs = FALSE;
 
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
@@ -1596,7 +1604,8 @@ GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 	
 	gbsecd = gs_html_editor_control_data_new(s);
 	gbsecd->gbs = TRUE;
-
+	gbsecd->personal_comments = FALSE;
+	
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
