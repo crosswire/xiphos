@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_gui.c - main window gui
+ * main_window.c - main window gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -27,12 +27,12 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
-#include "main/gs_gui.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/support.h"
 
+#include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"

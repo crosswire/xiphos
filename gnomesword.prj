@@ -46,7 +46,7 @@ project.menu.comment=gnomesword Version 0.7.1
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=
+project.configure.options=--prefix=/home/terry
 
 anjuta.program.arguments=
 
@@ -99,6 +99,7 @@ module.include.files=\
 	src/gui/editor_toolbar.h\
 	src/gui/fileselection.h\
 	src/gui/gui.h\
+	src/gui/interlinear.h\
 	src/gui/interlinear_dialog.h\
 	src/gui/info_box.h\
 	src/gui/link_dialog.h\
@@ -120,7 +121,6 @@ module.include.files=\
 	src/main/display_info.h\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
-	src/main/gs_interlinear.h\
 	src/main/gs_gnomesword.h\
 	src/main/gs_gui.h\
 	src/main/gs_history.h\
@@ -180,6 +180,7 @@ module.source.files=\
 	src/gnome/fileselection.c\
 	src/gnome/link_dialog.c\
 	src/gnome/gui.c\
+	src/gnome/interlinear.c\
 	src/gnome/interlinear_dialog.c\
 	src/gnome/info_box.c\
 	src/gnome/main_menu.c\
@@ -199,7 +200,6 @@ module.source.files=\
 	src/main/dictlex.c\
 	src/main/display_info.c\
 	src/main/gbs.c\
-	src/main/gs_interlinear.c\
 	src/main/gs_gnomesword.c\
 	src/main/gs_gui.c\
 	src/main/gs_history.c\

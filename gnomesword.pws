@@ -6,12 +6,12 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=170
-1=34
-2=161
+0=31
+1=8
+2=413
 3=33
-4=413
-5=34
+4=30
+5=1
 6=1242
 7=58
 8=4
@@ -46,16 +46,12 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/percomm.c
-1=/home/terry/Projects/gnomesword1/src/main/percomm.h
-2=/home/terry/Projects/gnomesword1/src/backend/percomm_.cpp
-3=/home/terry/Projects/gnomesword1/src/backend/percomm_.h
-4=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
-5=/home/terry/Projects/gnomesword1/src/gui/percomm.h
-6=/home/terry/Projects/gnomesword1/src/gnome/percomm.c
-7=/home/terry/Projects/gnomesword1/src/main/main.c
-8=/home/terry/Projects/gnomesword1/ChangeLog
-9=/home/terry/Projects/gnomesword1/src/gui/gtkhtml_display.h
+0=/home/terry/Projects/gnomesword1/src/gui/gtkhtml_display.h
+1=/home/terry/Projects/gnomesword1/ChangeLog
+2=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
+3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+4=/home/terry/Projects/gnomesword1/src/gnome/main_window.c
+5=/home/terry/Projects/gnomesword1/src/gui/main_window.h
 
 [replace_text]
 0=p->ec->key
@@ -81,11 +77,11 @@ ShowLocals=true
 0=newconfigs
 
 [find_in_files]
-0=_percomm.h
-1=set_percomm_page_and_key
-2=mainMgr
-3=SWMgr *mainMgr
-4=backend/viewdict.h
-5=backend/viewcomm.h
-6=#include "backend/viewcomm.h"
-7=gui/_gbs.h
+0=gs_gui.h
+1=gs_interlinear.h
+2=_percomm.h
+3=set_percomm_page_and_key
+4=mainMgr
+5=SWMgr *mainMgr
+6=backend/viewdict.h
+7=backend/viewcomm.h
