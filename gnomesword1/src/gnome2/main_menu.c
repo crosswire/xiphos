@@ -620,13 +620,13 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Search"),
-	 N_("Shortcut bar search"),
+	 N_("Search using the shortcut bar"),
 	 on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Advanced Search"),
-	 N_("Open search dialog"),
+	 N_("Advanced search using the search dialog"),
 	 gui_do_dialog_search, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_OPEN,
 	 0, (GdkModifierType) 0, NULL},
@@ -756,7 +756,7 @@ static GnomeUIInfo about_sword_modules1_menu_uiinfo[] = {
 static GnomeUIInfo help1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Contents"),
-	 N_("Help contents"),
+	 N_("Open the GnomeSword manual"),
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_HELP,
 	 0, 0, NULL},
@@ -769,14 +769,14 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,*/
 	{
-	 GNOME_APP_UI_ITEM, N_("About the Sword Project ..."),
-	 N_("Infotmation about the Sword Project"),
+	 GNOME_APP_UI_ITEM, N_("About the SWORD Project ..."),
+	 N_("More information about the SWORD Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("About GnomeSword ..."),
-	 N_("About GnomeSword"),
+	 N_("About this application"),
 	 on_about_gnomesword1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
