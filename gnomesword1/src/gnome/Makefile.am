@@ -21,6 +21,8 @@ libgui_a_SOURCES =  \
     about_modules.c \
     about_modules.h \
     about_sword.c \
-    about_sword.h
+    about_sword.h \
+    splash.c \
+    splash.h
 
 
