@@ -1,0 +1,414 @@
+<chapter id="interface">
+	<title>L'interface de &app;</title>
+	
+ <!-- ============= Menubar  ============-->
+	<sect1 id="menubar">
+   		<title>La barre de menu</title>
+   		<para>
+   			La barre de menu se situe en haut de la fenêtre de l'application 
+			<application>&app;</application>. 
+			Pratiquement toutes les fonctions sont disponibles en utilisant les éléments 
+			de menu appropriés. Les différentes fonctions sont regroupées par type.
+			Par exemple, les opérations sur les fichiers sont regroupées dans le menu 
+   			<guisubmenu>Fichier</guisubmenu>.
+		</para>
+        	<figure id="menubar">
+			<title>La barre de menu</title>
+	  		<screenshot>
+		      		<screeninfo>La barre de menu de &app;</screeninfo>
+    		   		<graphic fileref="figures/interface_menubar" format="PNG" ></graphic>
+		      	</screenshot>
+    		</figure>
+	</sect1>
+	
+<!-- ============= Toolbars  ============-->
+	<sect1 id="toolbars">
+   		<title>La barre d'outils</title>
+   		<para>
+    		<!--	The function of the Toolbar is to allow quick and easy control over the Bible Pane.
+			Activation of the Toolbar option is done by simply moving the mouse cursor over the 
+			desired toolbar button and selecting it. A tooltip will appear if the mouse cursor 
+			is held stationary over a toolbar button, describing the function of the button. 
+		-->
+		La barre d'outils permet une navigation rapide et aisée parmi les versets de la Bible.
+    	</para>
+		<figure id="toolbar">
+			<title>La barre d'outils</title>
+			<screenshot>
+      				<mediaobject>
+						<imageobject>
+	    					<imagedata fileref="figures/interface_toolbar.png" format="PNG"/>
+						</imageobject>
+						<textobject>
+				        	<phrase>La barre d'outils</phrase>
+						</textobject>
+			       </mediaobject>
+			</screenshot>
+		</figure>			
+		<para>
+			La <interface>barre d'outils</interface> présente les fonctions suivantes :
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>					
+					Boutons de déplacement avant/arrière dans l'historique des versets
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Sélecteur de livre
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Sélecteur de chapitre
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Sélecteur de n° de verset
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Entrée d'un passage
+				</para>
+			</listitem>
+
+		</itemizedlist>
+		
+			<sect2 id="gnomeword-toolbar-history">
+				<title>Boutons de déplacement avant/arrière dans l'historique des versets</title><!--'-->
+				<para>
+					Permettent de naviguer dans l'historique des passages consultés.
+				</para>
+			</sect2>
+			<sect2 id="gnomesword-toolbar-book">
+				<title>Sélecteur de livre</title>
+				<para>
+					Permet de sélectionner rapidement un livre de la Bible. 
+					Le premier verset du livre est affiché immédiatement.
+				</para>
+			</sect2>
+			<sect2 id="gnomesword-toolbar-chapter">
+				<title>Selecteur de chapitre</title>
+				<para>
+					Permet de selectionner rapidement un chapitre du livre de 
+					la Bible en cours. Le premier verset du chapitre est affiché 
+					immédiatement.
+				</para>
+			</sect2>
+			<sect2 id="gnomesword-toolbar-verse">
+				<title>Sélecteur de verset</title>
+				<para>
+					Permet de selectionner rapidement un verset du chapitre en cours de la Bible.
+					Le verset est affiché immédiatement.
+				</para>
+			</sect2>
+			<sect2 id="gnomesword-toolbar-summary">
+				<title>Entrée d'un passage</title><!--'-->
+				<para>
+					Permet la saisie manuelle d'un passage sous la forme 
+					<interface>livre chapitre:verset</interface> {ex: Jn 3:16}.
+					Le verset est affiché lorsque le bouton situé à droite de la zone 
+					de saisie est activé.
+				</para>
+				<warning>
+					<para>
+						Vérifiez que les valeurs de livre, chapitre et verset sont correctes, 
+						sinon le passage ne changera pas ou vous obtiendrez un autre verset.
+					</para>
+				</warning>
+			</sect2>
+
+	</sect1>
+   
+<!-- ============= Sidepane  ============-->  
+	<sect1 id="gnomesword-sidepane">
+   	 	<title>Le volet latéral</title>
+		<figure>
+			<title>Le volet latéral</title>
+   		  	<screenshot>
+			   	<mediaobject>
+					<imageobject>
+         				<imagedata fileref="figures/interface_sidepane.png" format="PNG"/>
+					</imageobject>
+	 				<textobject>
+						<phrase>Le volet latéral</phrase>
+					</textobject>
+				</mediaobject>
+     		</screenshot>
+		</figure>
+		<para>
+<!--     	On the left hand side of <application>GnomeSword2</application> there is the shortcut bar. Here the
+     	user can quickly and easily switch between the different Bible texts,
+     	commentaries, dictionaries and general books. You can also select and
+     	edit your bookmarks, view search results, view verse lists and view your
+     	daily devotional book by simply clicking on the <guibutton>module</guibutton>
+     	icon and select your selection. -->
+			Le volet latéral se situe sur la partie gauche de la fenêtre principale de 
+			<application>&app;</application>. La fenêtre d'information affiche le culte
+			quotidien. Un click sur le bouton 
+			<guibutton>Modules</guibutton> active les options suivantes : 
+			<guibutton>Modules</guibutton> permet de facilement changer de version de la 
+			Bible, de commentaire, de dictionnaire ou de livre d'étude, 
+			<guibutton>Signets</guibutton> permet de gérer les signets
+			d'accès aux passages préférés, 
+			<guibutton>Rechercher</guibutton> présente le formulaire de recherche 
+			simplifiée dans la Bible ou les commentaires, 
+			<guibutton>Liste de versets</guibutton> affiche le résultat de la recherche.  
+   		</para>
+	</sect1>
+<!-- ============= Bible Text Pane  ============--> 
+	<sect1 id="gnomesword-bible">
+   		<title>Le volet des textes bibliques</title>
+  		<figure>
+   			<title>Le volet des textes bibliques</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_biblepane.png" format="PNG"/>
+ 					</imageobject>
+					<textobject>
+   						<phrase>Le volet des textes bibliques</phrase>
+	 				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+			Le volet des textes bibliques se présente à droite du volet latéral. 
+			Les différentes versions de la Bible sont affichées dans cette zone.
+			Au démarrage de <application>&app;</application>, la dernière version utilisée
+			ou la version par défaut sera affichée.
+		</para>
+		
+		<sect2 id="gnomesword-bible-open">
+			<title>Ouvrir une version spécifique de la Bible</title>
+			<para>
+				Pour changer de version de texte biblique, suivez au choix les instructions suivantes :
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez avec le bouton droit dans le <interface>volet d'affichage des 
+						textes bibliques</interface>. Dans le menu qui se présente, choisissez 
+						<menuchoice><guimenuitem>Fichier</guimenuitem><guimenuitem>Ouvrir le 
+						module</guimenuitem></menuchoice> et sélectionnez la version que vous 
+						désirez.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Avec l'option <guibutton>Modules</guibutton> du <interface>volet 
+						latéral</interface>, choisissez <menuchoice><guimenuitem>Textes 
+						bibliques</guimenuitem><guimenuitem>le langage de votre choix
+						</guimenuitem></menuchoice> et selectionnez la version que vous désirez.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-open-seperate">
+			<title>Ouvrir séparément une version de la Bible</title>
+			<para>
+				Pour afficher une version de la Bible dans une fenêtre séparée de 
+				<application>&app;</application>, suivez au choix les instructions suivantes :
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez avec le bouton droit dans le <interface>volet d'affichage 
+						des textes bibliques</interface>. Dans le menu qui se présente, 
+						choisissez <menuchoice><guimenuitem>Fichier</guimenuitem><guimenuitem>
+						Ouvrir le module dans une fenêtre </guimenuitem></menuchoice>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Avec l'option <guibutton>Modules</guibutton> du <interface>volet 
+						latéral</interface>, choisissez <menuchoice><guimenuitem>Textes 
+						bibliques</guimenuitem><guimenuitem>le langage de votre choix
+						</guimenuitem></menuchoice> puis cliquez avec le bouton droit 
+						sur la version désirée et choisissez <menuchoice><guimenuitem>
+						Ouvrir dans une fenêtre </guimenuitem></menuchoice>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-about">
+			<title>Notes à propos de la version en cours</title>
+			<para>
+				Pour afficher les informations relatives à la version  
+				de la Bible en cours, suivez les instructions suivantes:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez du bouton droit dans le <interface>volet d'affichage des
+						textes bibliques</interface>. Dans le menu qui se présente, 
+						choisissez <guimenuitem>À propos de</guimenuitem>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-options">
+			<title>Options du module</title>
+			<para>
+				De nombreuses versions de la Bible comportent des options supplémentaires que 
+				l'utilisateur peut valider ou non. Ces options sont les suivantes :
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Mots de Christ en rouge
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Nombres de Strong
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Étiquettes morphologiques
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+						Notes de bas de page
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+						Références croisées de l'Écriture
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+						Entêtes de chapitres
+					</para>
+				</listitem>
+			</itemizedlist>
+			<note>
+				<para>
+					Les versions en grec ou hébreu possèdent des options spécifiques 
+					qui ne s'appliquent qu'à ces langages.
+				</para>
+			</note>
+			<para>
+				Pour accèder à ces options :
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez du bouton droit dans le <interface>volet d'affichage des 
+						textes bibliques</interface>. Dans le menu qui se présente, choisissez 
+						<guimenuitem>Options du module</guimenuitem> 
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-dictionary">
+			<title>Recherche de la définition d'un mot</title>
+			<para>
+				Pour obtenir la définition d'un mot du texte, cliquez simplement sur le mot souhaité 
+				dans le texte, il est mis en surbrillance et sa définition, si elle existe, 
+				s'affiche automatiquement dans le <interface>volet des dictionnaires</interface>.
+			</para>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-find">
+			<title>Rechercher un mot particulier</title>
+			<para>
+				Pour rechercher un mot à l'intérieur d'un passage, suivez les instructions suivantes :
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez du bouton droit dans le <interface>volet d'affichage 
+						des textes bibliques</interface>. Dans le menu qui se présente,
+						 choisissez <guimenuitem>Éditer</guimenuitem>-&gt;<guibutton>
+						Rechercher</guibutton>. Saisissez ensuite le texte à rechercher
+						dans la boite de recherche qui apparaît, puis cliquez sur 
+						<guimenuitem>Rechercher</guimenuitem>.
+
+					</para>	
+				</listitem>
+			</itemizedlist>
+		</sect2>
+	</sect1>
+<!-- ============= Commentary Pane  ============--> 
+	<sect1 id="gnomesword-commentaries">
+   		<title>Le volet des commentaires</title>
+  		<figure>
+   			<title>Le volet des commentaires</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_commentarypane.png" format="PNG"/>
+	 				</imageobject>
+					<textobject>
+         				<phrase>Le volet des commentaires</phrase>
+	 				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+			Le <interface>volet d'affichage des commentaires</interface> permet la 
+			consultation des commentaires relatifs au verset en cours. Il permet également l'accès 
+			aux différents modules de commentaires installés. Le commentaire est 
+			directement lié au passage affiché dans le <interface>volet d'affichage 
+			des textes bibliques</interface>, ainsi pour consulter le commentaire d'un autre 
+			passage, il suffit de changer de verset à l'aide de la <interface>barre d'outils</interface>.
+		</para>
+		<note>
+			<para> 
+				En changeant la référence du passage à l'aide de la <interface>barre d'outils</interface>,
+				le contenu du <interface>volet d'affichage des textes bibliques</interface> et du 
+				<interface>volet d'affichage des commentaires</interface> changent simultanément.
+			</para>
+		</note>
+		
+		<sect2 id="gnomesword-commentary-about">
+			<title>Notes à propos du module commentaire</title>
+			<para>
+				Pour afficher les notes d'information à propos du module commentaire 
+				en cours, suivez les instructions suivantes :
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez du bouton droit dans le <interface>volet d'affichage 
+						des commentaires</interface>. Dans le menu qui se présente, 
+						choisissez <guimenuitem>À propos de</guimenuitem>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-commentary-headings">
+			<title>En-têtes des commentaires</title>	
+			<para>
+				De nombreux commentaires comprennent des en-têtes d'introduction au chapitre ou au livre 
+				en cours. Pour les afficher, suivez les instructions suivantes :  
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Cliquez du bouton droit dans le <interface>volet d'affichage des 
+						commentaires</interface>. Dans le menu qui se présente, choisissez 
+						<guimenuitem>En-tête de chapitre</guimenuitem>.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Répétez les opérations suivantes et choisissez <guimenuitem>En-tête de livre</guimenuitem> 
+				à la place de <guimenuitem>En-tête de chapitre</guimenuitem> si vous désirez afficher 
+				l'en-tête du livre.
+			</para>
+		</sect2>
+	</sect1>
+</chapter>
