@@ -1,4 +1,4 @@
-2002-04-20  Terry Biggs <tbiggs@users.sourceforge.net>
+2002-04-22  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed backend/viewcomm_dlg.* to backend/viewcomm.* 
 	* removed gui stuff from viewcomm.*
