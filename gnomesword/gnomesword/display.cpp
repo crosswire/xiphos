@@ -208,6 +208,11 @@ char  GTKInterlinearDisp::Display(SWModule & imodule)
 	if (!strcmp(font, "Symbol")) {
 		greek = TRUE;
 		sword_font = greek_font;
+	} else if(!strcmp(font, "Greek")) {
+	        sword_font =  gdk_font_load
+	        ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
+	        if(sword_font == NULL) sword_font = greek_font;
+	        greek = TRUE;
 	} else {
 		sword_font = roman_font;
 		greek = FALSE;
@@ -377,8 +382,9 @@ char GTKRWPDisp::Display(SWModule & imodule)
 	char *myverse,		/* pointers to strings */
 	*font;
 	int i, j, len;		/* integer vars */
-
+        bool greek2_on = false;
 	/* Load a italic font */
+	
 	italic_font =
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
@@ -394,8 +400,8 @@ char GTKRWPDisp::Display(SWModule & imodule)
 	    ("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
 	/* Load a greek font */
 	greek_font =
-	    gdk_font_load
-	    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
+	    gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
+	    //gdk_font_load ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
 	/* prepare text widget  */
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);	/* set position to begining of text */
 	gtk_text_forward_delete(GTK_TEXT(gtkText),
@@ -662,11 +668,11 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	versenum_font =
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-	/* Load a greek font */
+	/* Load a greek font  (symbol)*/
 	greek_font =
 	    gdk_font_load
 	    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-	    	    
+	 	    	
 	if (!strcmp(font, "Symbol")) {
 		greek_on = true;
 	} else if (!strcmp(font, "Greek")) {
@@ -710,7 +716,7 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 			myverse = NULL;
 			gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 			gtk_text_thaw(GTK_TEXT(gtkText));
-			return 't';	
+			return 't';
 		}		
 	}
 	while (i < len) {
@@ -829,7 +835,7 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 	int i, j, taglen;
 	bool greek_on = FALSE,
 	    italics_on = FALSE,
-	    poetry_on = FALSE, niv_on = false, Fo_on = false, cite_on =
+	    poetry_on = FALSE, Fo_on = false, cite_on =
 	    false;
 	GdkFont *sword_font, *greek_font, *fo_font, *fo_italic_font,
 	    *cite_font, *cite_italic_font;;
@@ -838,11 +844,7 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 	ConfigEntMap::iterator eit;
 
 	font = "Roman";
-	if (!strcmp(imodule.Name(), "NIV-GnomeSword"))
-		niv_on = true;	/* we need to know if we are using the niv */
-	else
-		niv_on = false;
-
+	
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
@@ -881,22 +883,21 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 		versenum_font =
 		    gdk_font_load
 		    ("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
-	/* Load a greek font */
-	greek_font =
-	    gdk_font_load
-	    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-
+	/* Load a greek font if needed*/   	
 	if (!strcmp(font, "Symbol")) {
-		sword_font = greek_font;
+		sword_font =  gdk_font_load
+	        ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 		greek_on = true;
 	} else if (!strcmp(font, "Greek")) {
-		sword_font = greek_font;
+		sword_font = gdk_font_load
+	        ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
+	        if(sword_font == NULL) sword_font =  gdk_font_load
+	                                ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 		greek_on = true;
 	} else {
 		sword_font = roman_font;
 		greek_on = false;
 	}
-
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
 	gtk_text_forward_delete(GTK_TEXT(gtkText),
 				gtk_text_get_length((GTK_TEXT(gtkText))));

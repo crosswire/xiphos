@@ -77,7 +77,7 @@ on_ceSDMods_changed                    (GtkEditable     *editable,
 	{
                 buf = gtk_entry_get_text(GTK_ENTRY(editable));
                 loadSDmodSWORD(clKeys,buf);
-                gtk_frame_set_label(frameShowDict,buf);  /* set frame label to current Module name  */
+                gtk_frame_set_label(GTK_FRAME(frameShowDict),buf);  /* set frame label to current Module name  */
         }
         firsttime = FALSE;
 }
