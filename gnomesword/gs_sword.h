@@ -41,7 +41,7 @@ void resultsListSWORD(GtkWidget * searchFrm,
 		gint column);
 void strongsSWORD(gboolean choice);
 void footnotesSWORD(gboolean choice);
-void changecurModSWORD(gchar * modName);
+void changecurModSWORD(gchar *modName, gboolean showchange);
 void navcurcomModSWORD(gint direction);
 void changecomp1ModSWORD(gchar * modName);
 void changecomp2ModSWORD(gchar * modName);
@@ -52,7 +52,8 @@ void verseSWORD(void);
 void btnlookupSWORD(void);
 void freeformlookupSWORD(GdkEventKey * event);
 void changcurcomModSWORD(gchar * modName, 
-		gint page_num);
+		gint page_num,
+		gboolean showchange);
 void editnoteSWORD(gboolean editbuttonactive);
 void savenoteSWORD(gboolean noteModified);
 void deletenoteSWORD(void);

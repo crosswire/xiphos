@@ -128,6 +128,9 @@ gint    groupnum1 = 0,
         groupnum4 = 0,
         greekpage = 0,
         hebrewpage = 0;
+gchar *textmod,
+        *commod,
+        *dictmod;
 
 /***********************************************************************************************
  externals
@@ -598,17 +601,20 @@ footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have 
 
 //-------------------------------------------------------------------------------------------
 void
-changecurModSWORD(gchar *modName) //-- change sword module for main window
+changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module for main window
 {                                 //-- someone clicked View->MainWindow->module
 	ModMap::iterator it;            //-- or clicked the mainwindow popup menu and the callback sent us here
         if(havebible) {
 	        it = mainMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 	        if (it != mainMgr->Modules.end()){ //-- if we find the module	
-		        curMod = (*it).second;  //-- change current module to new module		
-		        curMod->SetKey(current_verse); //-- set key to current verse
-		        curMod->Display();            //-- show it to the world
+		        curMod = (*it).second;  //-- change current module to new module
+		        if(showchange) {
+		                curMod->SetKey(current_verse); //-- set key to current verse
+		                curMod->Display();            //-- show it to the world
+		        }
 	        }
 	        strcpy(settings->MainWindowModule, curMod->Name()); //-- remember where we are so we can open here next time we startup
+	
 	        gtk_frame_set_label( GTK_FRAME(lookup_widget(MainFrm,"frame9")), //-- set main window frame label of
                                  curMod->Name());                  //-- to current Module name
         }
@@ -731,7 +737,7 @@ freeformlookupSWORD(GdkEventKey  *event) //-- change to verse in freeformlookup 
 
 //-------------------------------------------------------------------------------------------
 void
-changcurcomModSWORD(gchar *modName, gint page_num)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
+changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
 {
 	ModMap::iterator it;
 	GtkWidget *frame;//-- pointer to commentary frame *notebook, //-- pointer to commentary notebook
@@ -743,9 +749,10 @@ changcurcomModSWORD(gchar *modName, gint page_num)  //-- someone changed comment
 	        it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
 	        if (it != mainMgr->Modules.end()){	
 		        curcomMod = (*it).second;  //-- set curcomMod to modName
-		        if(autoscroll) curcomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
-		        //else  curcomMod->SetKey(com_key); //-- keep all commentary modules together (as close as we can)
-		        curcomMod->Display(); //-- show the change
+		        if(showchange) {
+		                if(autoscroll) curcomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
+		                curcomMod->Display(); //-- show the change
+		        }
 		        gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
 	        }
 	}	
@@ -1109,13 +1116,21 @@ GList* setupSDSWORD(GtkWidget *text)
 gchar* getdictmodSWORD(void)
 {
 	return curdictMod->Name();
-} /*
+}
+
+/*
  *
  */
 gchar* gettextmodSWORD(void)
-{
-	return curMod->Name();
-} /*
+{      	
+	
+	gchar buf[80];
+	
+	strcpy(buf,curMod->Name());
+	return buf;
+}
+
+/*
  *
  */
 gchar* getcommodSWORD(void)

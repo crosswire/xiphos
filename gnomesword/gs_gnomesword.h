@@ -72,6 +72,7 @@ struct _settings {
 typedef struct _history HISTORY;
 struct _history {
         gint itemnum;
+        gint compagenum;
         gchar verseref[80];
         gchar textmod[80];
         gchar commod[80];
@@ -110,15 +111,16 @@ void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
 void openpropertiesbox(void);
-void clearhistory(GtkWidget *app, 
-		GtkWidget *shortcut_bar);
 void editbookmarksLoad(GtkWidget * editdlg);
 void addBookmark(GtkWidget *app);
+void clearhistory(GtkWidget *app,
+		GtkWidget *shortcut_bar);
 void updatehistorymenu(GtkWidget *app);
-void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar);
+void updatehistoryshortcutbar(GtkWidget *app,
+                GtkWidget *shortcut_bar);
 void updatehistorysidebar(GtkWidget *app);
-void addHistoryItem(GtkWidget *app, 
-		GtkWidget *shortcut_bar, 
+void addHistoryItem(GtkWidget *app,
+		GtkWidget *shortcut_bar,
 		gchar *ref);
 void historynav(GtkWidget *app, gint direction);
 void changeverseHistory(gint historynum);
