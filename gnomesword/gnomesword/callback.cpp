@@ -28,7 +28,9 @@
 #endif
 
 #include <gnome.h>
+#ifdef USE_GTKHTML
 #include <gtkhtml/gtkhtml.h>
+#endif /* USE_GTKHTML */
 
 #if USE_SHORTCUTBAR
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
