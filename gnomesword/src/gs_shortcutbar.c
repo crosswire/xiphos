@@ -846,7 +846,9 @@ on_search_results_link_clicked(GtkHTML * html, const gchar * url,
 	SETTINGS *s;
 
 	s = (SETTINGS *) data;
-	changeVerseSWORD((gchar*)url);
+	s->displaySearchResults = TRUE;
+	changesearchresultsSBSW(s, (gchar *) url);
+	s->displaySearchResults = FALSE;
 	
 }
 
@@ -896,13 +898,13 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	GtkWidget *vbox3;
 	GtkWidget *frame3;
 	GtkWidget *scrolledwindow3;
-	//GtkWidget *frame4;
-	//GtkWidget *scrolledwindow4;
+	GtkWidget *frame4;
+	GtkWidget *scrolledwindow4;
 	GtkWidget *label2;
 	GtkWidget *frame5;
 	GtkWidget *label3;
 	GtkWidget *htmlshow;
-	//GtkWidget *htmlshow2;
+	GtkWidget *htmlshow2;
 	GtkWidget *scrolledwindow5;
 	GtkWidget *htmlviewer;
 	GtkWidget *frameTB;
@@ -1137,7 +1139,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_widget_show(s->srhtml);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3), s->srhtml);
 	gtk_html_load_empty(GTK_HTML(s->srhtml));
-/*
+
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame4);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4", frame4,
@@ -1164,9 +1166,9 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 "htmlshow2", htmlshow2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(htmlshow2);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3), htmlshow2);
-	gtk_html_load_empty(GTK_HTML(htmlshow2));*/
-	setupsearchresultsSBSW(s->srhtml);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow4), htmlshow2);
+	gtk_html_load_empty(GTK_HTML(htmlshow2));
+	setupsearchresultsSBSW(htmlshow2);
 	
 	label2 = gtk_label_new(_("label2"));
 	gtk_widget_ref(label2);
@@ -1266,6 +1268,7 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	GtkWidget *ckbCaseSensitive;
 	GtkWidget *ckbCommentary;
 	GtkWidget *ckbPerCom;
+	//GtkWidget *ckbMarkResults;
 	GtkWidget *frame4;
 	GtkWidget *vbox4;
 	GSList *vbox4_group = NULL;
@@ -1425,7 +1428,17 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	gtk_widget_show(ckbPerCom);
 	gtk_box_pack_start(GTK_BOX(vbox3), ckbPerCom, FALSE, FALSE, 0);
 	gtk_widget_set_usize(ckbPerCom, -2, 20);
-
+/*
+	ckbMarkResults = gtk_check_button_new_with_label(_("Mark Resluts"));
+	gtk_widget_ref(ckbMarkResults);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "ckbMarkResults",
+				 ckbMarkResults,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(ckbMarkResults);	
+	gtk_tooltips_set_tip (tooltips, ckbMarkResults, _("Marks search words in results - makes search very slow!"), NULL);
+	gtk_box_pack_start(GTK_BOX(vbox3), ckbMarkResults, FALSE, FALSE, 0);
+	gtk_widget_set_usize(ckbMarkResults, -2, 20);
+*/	
 	frame4 = gtk_frame_new(_("Search Scope"));
 	gtk_widget_ref(frame4);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4", frame4,

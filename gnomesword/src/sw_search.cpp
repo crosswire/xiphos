@@ -143,11 +143,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
 		  }
-	}	
-	ModMap::iterator it2; 	
-	it2 = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it2 != searchresultssbMgr->Modules.end()){ //-- if we find the module	
-			searchresultssbMod = (*it2).second;  //-- change module to new module
 	}
 	if (GTK_TOGGLE_BUTTON (bounds)->active) {
 		  lowerbound = lookup_widget (widget, "entryLower");	/* get Lower bounds entry widget from search form */
@@ -167,8 +162,7 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	count = 0;		/* we have not found anything yet */
 	printed = 0;
 	entryText = gtk_entry_get_text (GTK_ENTRY (searchText));	//-- what to search for
-	sprintf(s->searchText,"%s",entryText);
-	  
+	sprintf(s->searchText, "%s",entryText);
 	if (searchMod) {		/* must have a good module - not null */	 
                 int searchType =
 			  GTK_TOGGLE_BUTTON (regexSearch)->
@@ -202,41 +196,38 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 						searchMod->Name(),
 						resultText,
 						searchMod->Name());
-			list = g_list_append(list,g_strdup(tmpbuf->str));/*
+			list = g_list_append(list,g_strdup(tmpbuf->str));
 			sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
 			s->verselist_font_size,
 			resultText,
 			resultText);
 			utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
-			displayHTML(s->srhtml, utf8str, strlen(utf8str));*/
-			searchresultssbMod->SetKey((const char *) searchResults); //-- set key to the first one in the list
-			searchresultssbMod->Display(); 
+			displayHTML(s->srhtml, utf8str, strlen(utf8str));
 			searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope
 			                                                           in case we want to use them */
 			if(!count) 
 				sprintf(firstkey,"%s",(const char *)searchResults);
 			++count;	
                 }
-        }
+        } 
 	sprintf(buf,"</body</html>");	
 	utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
 	displayHTML(s->srhtml, utf8str, strlen(utf8str));
 	endHTML(s->srhtml);
 	if(count){
-	/*	ModMap::iterator it; 	
+		ModMap::iterator it; 	
 		it = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
 		if (it != searchresultssbMgr->Modules.end()){ //-- if we find the module	
 			searchresultssbMod = (*it).second;  //-- change module to new module
 			searchresultssbMod->SetKey(firstkey); //-- set key to the first one in the list
-			searchresultssbMod->Display(); 
-		}	*/	
-		/* cleanup appbar progress */
+			searchresultssbMod->Display(); 		
+			/* cleanup appbar progress */
+		}
 		sprintf(s->groupName,"%s","Search Results");
 		sprintf(buf,"%d matches",count);
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 1);
 		showSBVerseList(s);
-		markSearchWordsHTML(s->srhtml, entryText);
 	}
 	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
 	delete searchMgr;
@@ -274,19 +265,19 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	
 	searchresultssbMgr	= new SWMgr();
 	searchresultssbMod     = NULL;
-	searchresultssbDisplay = new  SearchResultsDisp(html_widget);
-	//searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
+	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget);
+	searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
 	
 	for(it = searchresultssbMgr->Modules.begin(); it != searchresultssbMgr->Modules.end(); it++){
 		searchresultssbMod = (*it).second;
 		sit = searchresultssbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
 		ConfigEntMap &section = (*sit).second;
 		addrenderfiltersSWORD(searchresultssbMod, section);
-		//if(!strcmp((*it).second->Type(), "Biblical Texts")){
-		//	searchresultssbMod->Disp(searchresultstextsbDisplay);			
-		//}else{
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			searchresultssbMod->Disp(searchresultstextsbDisplay);			
+		}else{
 			searchresultssbMod->Disp(searchresultssbDisplay);
-		//}
+		}
 	}
 }
 
@@ -309,5 +300,4 @@ changesearchresultsSBSW(SETTINGS *s, gchar *url)
 	if(s->showinmain)
 		changeVerseSWORD(url);
 }
-
 

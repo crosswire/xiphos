@@ -208,7 +208,9 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
+	GString *str;
 	
+	str = g_string_new("");
 	c = 182;  
 	Mgr = new SWMgr();	//-- create sword mgr
 
@@ -260,15 +262,11 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-	for (key->Verse(1);
-	     (key->Book() == curBook && key->Chapter() == curChapter
-	      && !imodule.Error()); imodule++) {
-		if (key->Verse() == curVerse)
-			sprintf(versecolor, "%s",
-				settings->currentverse_color);
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++) {
+		if (key->Verse() == curVerse)			
+			sprintf(versecolor, "%s", settings->currentverse_color);
 		else
-			sprintf(versecolor, "%s",
-				settings->bible_text_color);
+			sprintf(versecolor, "%s", settings->bible_text_color);
 		sprintf(tmpBuf,
 			"&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"%s\"><B>  %d</B></font></A> ",
 			imodule.Description(), imodule.KeyText(),
@@ -292,8 +290,13 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 			displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 		} 
-		
-		utf8str = (char *) imodule;
+		if((settings->displaySearchResults) && (key->Verse() == curVerse)){
+			g_string_erase(str,0,str->len);
+			g_string_append(str,(char *) imodule);
+			marksearchwords(str);
+			utf8str = str->str;			
+		} else 
+			utf8str = (char *) imodule;
 		displayHTML(GTK_WIDGET(gtkText), utf8str,
 			    strlen(utf8str));
 		if (settings->versestyle) {
@@ -329,10 +332,78 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(gtkText, tmpBuf);
 	g_free(font);
+	g_string_free(str,TRUE);
 	delete Mgr;
 	return 0;
 }
-
+void GTKutf8ChapDisp::marksearchwords( GString *str )
+{
+	gchar *tmpbuf, *buf, *searchbuf;
+	gint len1, len2, len3, len4;
+	
+	buf = str->str;
+	searchbuf = g_strdup(settings->searchText);
+	
+	if(settings->searchType == -2) {
+		char *token;
+		GList *list,*tmp;
+		gint count=0, i=0;
+		
+		list = NULL;
+		tmp = NULL;
+		if((token=strtok(searchbuf ," ")) != NULL) {
+			list = g_list_append(list,token);
+			g_warning("%s", token);
+			++count;				
+			while((token=strtok(NULL," ")) != NULL) {
+				list = g_list_append(list,token);
+				g_warning("%s", token);
+				++count;
+			}
+		} else {
+			list = g_list_append(list,searchbuf);
+			count = 1;
+		}
+		tmp = list;
+		//len1 = strlen(buf);
+		g_warning("%d", count);
+		for(i=0; i<count;i++) {
+			g_warning("list = %s",(gchar*)tmp->data);
+			len1 = strlen(buf);
+			len2 = strlen((gchar*)tmp->data);
+			if((tmpbuf = strstr(buf,(gchar*)tmp->data)) != NULL) {
+				len3 = strlen(tmpbuf);
+				len4 = len1 - len3;
+				str = g_string_insert (str,
+                                            (len4+len2) ,
+                                             "</b>"); 		
+				str = g_string_insert (str,
+                                            len4 ,
+                                             "<b>");
+			}
+			buf = str->str;
+			tmp = g_list_next(tmp);
+		}
+		g_list_free(tmp);
+		g_list_free(list);		
+	} else {
+		len1 = strlen(buf);
+		len2 = strlen(searchbuf);
+		tmpbuf = strstr(buf,searchbuf);
+		len3 = strlen(tmpbuf);
+		
+		len4 = len1 - len3;
+		str = g_string_insert (str,
+                                            (len4+len2) ,
+                                             "</b>");
+		
+		str = g_string_insert (str,
+                                            len4 ,
+                                             "<b>");
+		
+	}	
+	g_free(searchbuf);
+}
 /* --------------------------------------------------------------------------------------------- */
 char InterlinearDisp::Display(SWModule & imodule)
 {
@@ -428,87 +499,6 @@ char InterlinearDisp::Display(SWModule & imodule)
 	sprintf(tmpBuf,
 		"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
 		imodule.Name());
-	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
-	g_free(font);
-	delete Mgr;
-	return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-char SearchResultsDisp::Display(SWModule & imodule)
-{
-	gchar tmpBuf[800], *buf, *rowcolor;
-	gint i;
-	bool utf = false;
-	gint len;
-	gchar *utf8str, *use_font, *use_font_size, *font, *token;
-	gint utf8len;
-	string lang, swfont, swfontsize;
-	SWMgr *Mgr;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
-	static gint row = 1;
-
-	Mgr = new SWMgr();	//-- create sword mgr
-
-	if ((sit =
-	     Mgr->config->Sections.find(imodule.Name())) !=
-	    Mgr->config->Sections.end()) {
-		ConfigEntMap & section = (*sit).second;
-		swfont =
-		    ((entry =
-		      section.find("GSFont")) !=
-		     section.end())? (*entry).second : (string) "";
-		swfontsize =
-		    ((entry =
-		      section.find("GSFont size")) !=
-		     section.end())? (*entry).second : (string) "";
-		lang =
-		    ((entry =
-		      section.find("Lang")) !=
-		     section.end())? (*entry).second : (string) "";
-	}
-	if (strcmp(swfontsize.c_str(), "")) {
-		use_font_size = (gchar *) swfontsize.c_str();
-	} else {
-		use_font_size = settings->interlinear_font_size;
-	}
-	font = g_strdup("-adobe-helvetica-*-*");
-	if (strcmp(swfont.c_str(), "")) {
-		use_font = (gchar *) swfont.c_str();
-	} else {
-		font = "-adobe-helvetica-*-*";
-		if (!stricmp(lang.c_str(), "") ||
-		    !stricmp(lang.c_str(), "en") ||
-		    !stricmp(lang.c_str(), "de")) {
-			font = g_strdup(settings->default_font);
-		} else if (!stricmp(lang.c_str(), "grc")) {
-			font = g_strdup(settings->greek_font);
-		} else if (!stricmp(lang.c_str(), "he")) {
-			font = g_strdup(settings->hebrew_font);
-		} else {
-			font = g_strdup(settings->unicode_font);
-		}
-		use_font = gethtmlfontnameHTML(font);
-	}
-	sprintf(tmpBuf,
-			"<i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s] </font></i>",
-			settings->bible_verse_num_color,
-			settings->verse_num_font_size, imodule.KeyText());
-		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	
-	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);	//, settings->interlinear_font_size);
-	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
-		    strlen((const char *) imodule));
-	sprintf(tmpBuf,
-		"</font><small>[<A HREF=\"%s\">view context</a>]</small><br>",
-		imodule.KeyText());
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
 	g_free(font);

@@ -4034,6 +4034,7 @@ on last GnomeSword run</label>
 		  <widget>
 		    <class>GtkCheckButton</class>
 		    <name>cbtnPNformat</name>
+		    <tooltip>Use HTML tags to format notes</tooltip>
 		    <can_focus>True</can_focus>
 		    <signal>
 		      <name>toggled</name>
