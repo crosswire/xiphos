@@ -865,7 +865,7 @@ void gui_shutdown_gbs_dialog(void)
 		if (dlg->dialog)
 			gtk_widget_destroy(dlg->dialog);
 		/* 
-		 * free each TEXT_DATA item created 
+		 * free each DIALOG_DATA item created 
 		 */
 		if (dlg->mod_name)
 			g_free(dlg->mod_name);

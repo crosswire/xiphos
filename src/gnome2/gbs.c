@@ -640,6 +640,8 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
+	gtk_widget_hide(menu1_uiinfo[7].widget);
+	gtk_widget_hide(menu1_uiinfo[8].widget);
 	gtk_widget_hide(file3_menu_uiinfo[0].widget);
 	gtk_widget_hide(file3_menu_uiinfo[1].widget);
 	gtk_widget_hide(edit3_menu_uiinfo[2].widget);

@@ -403,7 +403,6 @@ static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 void gui_set_tab_label(const gchar * key)
 {
 	GString *str = g_string_new(NULL);
-	g_warning(key);
 	
 	if(cur_passage_tab->text_commentary_key)
 		g_free(cur_passage_tab->text_commentary_key);

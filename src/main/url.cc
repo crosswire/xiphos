@@ -475,7 +475,7 @@ static gint bookmark_uri(const gchar * url, gboolean use_dialog)
 		switch(mod_type) {
 			case TEXT_TYPE:	
 				if(use_dialog)
-					main_bibletext_dialog_goto_bookmark(
+					main_dialog_goto_bookmark(
 								(gchar*)url);
 				else {
 					key = gui_update_nav_controls(tmpkey);
@@ -486,12 +486,17 @@ static gint bookmark_uri(const gchar * url, gboolean use_dialog)
 					if(key) g_free((gchar*)key);
 				}
 			break;
-			case COMMENTARY_TYPE:				
-				key = gui_update_nav_controls(tmpkey);
-				main_display_bible(
-						settings.MainWindowModule, key);
-				main_display_commentary(work_buf[MODULE], key);
-				if(key) g_free((gchar*)key);	
+			case COMMENTARY_TYPE:
+				if(use_dialog)
+					main_dialog_goto_bookmark(
+								(gchar*)url);
+				else {				
+					key = gui_update_nav_controls(tmpkey);
+					main_display_bible(
+							settings.MainWindowModule, key);
+					main_display_commentary(work_buf[MODULE], key);
+					if(key) g_free((gchar*)key);	
+				}
 			break;
 			case DICTIONARY_TYPE:
 				main_display_dictionary(work_buf[MODULE],

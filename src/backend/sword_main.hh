@@ -36,26 +36,26 @@ using namespace sword;
 
 class SwordMain {
 	SWMgr *main_mgr;
-	SWMgr *search_mgr;
-	SWMgr *module_mgr;
-	SWMgr *text_mgr;
-	SWMgr *inter_mgr;
-	SWMgr *comm_mgr;
-	SWMgr *dict_mgr;
-	SWMgr *gbs_mgr;
-	SWMgr *percom_mgr;
-	SWMgr *results;
+	//SWMgr *search_mgr;
+//	SWMgr *module_mgr;
+//	SWMgr *text_mgr;
+//	SWMgr *inter_mgr;
+//	SWMgr *comm_mgr;
+//	SWMgr *dict_mgr;
+//	SWMgr *gbs_mgr;
+//	SWMgr *percom_mgr;
+//	SWMgr *results;
 	SWMgr *display_mgr;
 	TreeKeyIdx *tree_key;
 	typedef map < SWBuf, SWBuf > ModLanguageMap;
 	ModLanguageMap languageMap;
 	
 public:	
-	SWModule *text_mod;
-	SWModule *comm_mod;
-	SWModule *dict_mod;
-	SWModule *gbs_mod;
-	SWModule *percom_mod;
+//	SWModule *text_mod;
+//	SWModule *comm_mod;
+//	SWModule *dict_mod;
+//	SWModule *gbs_mod;
+//	SWModule *percom_mod;
 	SWModule *display_mod;
 		
 	const char *version;	

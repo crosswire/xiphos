@@ -233,20 +233,27 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_verse_style1_activate(GtkMenuItem * menuitem,
+static void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
 			      gpointer user_data)
 {
-	gchar *url = g_strdup_printf(	"sword://%s/%s",
-					settings.MainWindowModule,
-					settings.currentverse);
-	/* remember our choice for the next program startup */
-	settings.versestyle = GTK_CHECK_MENU_ITEM(menuitem)->active;
-
-	if (settings.havebible) {
-		/* show the change */
-		main_url_handler(url, TRUE);		
+	extern gboolean style_display;
+	if(style_display) {
+		gchar *file = g_strdup_printf("%s/modops.conf", 
+						settings.gSwordDir);
+		gchar *url = g_strdup_printf(	"sword://%s/%s",
+						settings.MainWindowModule,
+						settings.currentverse);
+		/* remember our choice for the next program startup */
+		settings.versestyle = menuitem->active;
+		save_conf_file_item(file, settings.MainWindowModule, "style",
+				(menuitem->active)?"verse":"paragraph");
+		if (settings.havebible) {
+			/* show the change */
+			main_url_handler(url, TRUE);		
+		}
+		g_free(url);
+		g_free(file);
 	}
-	g_free(url);
 }
 
 /******************************************************************************
