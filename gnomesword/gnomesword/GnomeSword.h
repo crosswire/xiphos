@@ -32,32 +32,33 @@
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar   MainWindowModule[80],	//-- modules to open at program startup
-	        Interlinear1Module[80],
-	        Interlinear2Module[80],
-	        Interlinear3Module[80], 
-	        personalcommentsmod[80], 
-	        currentverse[80],	//-- verse to use at program startup 
-	        dictkey[80],		//-- dictionary key to use at program startup - the one we shut down with
-	        studypadfilename[255];	//-- name of file in open in study when we closed or last file in studypad
-	gint    currentverse_red,	//-- current verse colors
-	        currentverse_green, currentverse_blue;
-	gint    notebook3page,	//-- notebook 3 page number
-	        notebook1page,		//-- commentaries notebook
-	        notebook2page;		//-- dict - lex notebook
-	gint	shortcutbarsize;
-	gboolean strongs,	//-- toogle button and check menu state
-	        footnotes,
-	        versestyle,
-	        interlinearpage,
-	        autosavepersonalcomments,
-	        formatpercom,
-	        showcomtabs,
-	        showdicttabs,
-	        showshortcutbar,
-	        showtextgroup,
-	        showcomgroup,
-	        showdictgroup,
-	        showhistorygroup;
+	           Interlinear1Module[80],
+	           Interlinear2Module[80],
+	           Interlinear3Module[80], 
+	           personalcommentsmod[80], 
+	           currentverse[80],	//-- verse to use at program startup 
+	           dictkey[80],		//-- dictionary key to use at program startup - the one we shut down with
+	           studypadfilename[255];	//-- name of file in open in study when we closed or last file in studypad
+	gint      currentverse_red,	//-- current verse colors
+	           currentverse_green, 
+	           currentverse_blue;
+	gint      notebook3page,	//-- notebook 3 page number
+	           notebook1page,		//-- commentaries notebook
+	           notebook2page;		//-- dict - lex notebook
+	gint	  shortcutbarsize;
+	gboolean   strongs,	//-- toogle button and check menu state
+	        	footnotes,
+	        	versestyle,
+	        	interlinearpage,
+	        	autosavepersonalcomments,
+	        	formatpercom,
+	        	showcomtabs,
+	        	showdicttabs,
+	        	showshortcutbar,
+	        	showtextgroup,
+	        	showcomgroup,
+	        	showdictgroup,
+	        	showhistorygroup;
 };
 
 typedef struct _listitem LISTITEM;

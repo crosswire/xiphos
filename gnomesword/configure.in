@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.3.3)
+AM_INIT_AUTOMAKE(gnomesword, 0.3.4)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -32,7 +32,7 @@ done
 dnl looking for general SWORD path 
  
 AC_ARG_WITH(sworddir, 
-[  --with-sworddir=DIR     path where swordlib is beeing installed (default=/usr/local/sword) ], 
+[  --with-sworddir=DIR     path where swordlib is installed (default=/usr/local/sword) ], 
 [ 
   ac_sword_dir=$withval 
 ], ac_sword_dir=/usr/local/sword 
