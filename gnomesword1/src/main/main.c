@@ -52,7 +52,6 @@ SETTINGS myset;
 
 int main(int argc, char *argv[])
 {
-	GtkWidget *mainwindow;
 	gint icreatefiles = 0;
 	gboolean newconfigs = FALSE;
 	gboolean newbookmarks = FALSE;
@@ -107,17 +106,13 @@ int main(int argc, char *argv[])
 	 */    
 	icreatefiles = setDiretory();
 
-	if (newconfigs) {
-		gui_firstRunSETUP(); //gs_firstrunSWORD();
-	}
-	
-	if (newbookmarks) {
+	if (icreatefiles == 2 || icreatefiles == 3 || newbookmarks) {
 		createbookmarksBM(swbmDir);
 	}
 
 	/*icreatefiles = 1;*/ /* please comment me - i am for testing */
-	if (icreatefiles == 1 || icreatefiles == 3) {
-		gui_firstRunSETUP();  //gs_firstrunSWORD();
+	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs) {
+		gui_firstRunSETUP();
 	}
 
 	/*
@@ -126,19 +121,11 @@ int main(int argc, char *argv[])
 	settings = &myset;
 	loadconfig(settings);
 
-	/*
-	 * If we have a new version run setup druid FIXME: do we need this?
-	 */
-	if (strcmp(VERSION, settings->gs_version)) {
-		gui_firstRunSETUP(); 
-	}
-
 	gui_splash_init();
 
 	gui_splash_step1();
 
-	mainwindow = create_mainwindow(settings);
-	add_gtkhtml_widgets(mainwindow);/*FIXME: add these widgets to create_mainwindow() */
+	create_mainwindow(settings);
 
 	gui_splash_step2();
 	
@@ -147,34 +134,12 @@ int main(int argc, char *argv[])
 	gui_splash_step3();
 
 	initGnomeSword(settings, biblemods, commentarymods, dictionarymods,
-		   percommods);
+			percommods);
 
 	gui_splash_step4();
 	
-	if (icreatefiles == 2 || icreatefiles == 3) {
-		createbookmarksBM(swbmDir);
-	}
-
 	gui_splash_done();
 
-	/*
-	 * Set the main window size.
-	 */
-	gtk_widget_set_usize(settings->app, settings->gs_width,
-			 settings->gs_hight);
-
-	/*
-	 * Set toggle state of buttons and menu items.
-	 */
-	UpdateChecks(settings);
-	
-	/* showing the devotional must come after the the app is shown or
-	   it will mess up the shortcut bar display */
-	/* FIXME: maybe we need to move the devotional ? */
-	if (settings->showdevotional) {
-		displayDevotional();
-	}
-	
 	gtk_main();
 
 	return 0;

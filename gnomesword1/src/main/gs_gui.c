@@ -318,7 +318,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-GtkWidget *create_mainwindow(SETTINGS *s)
+void create_mainwindow(SETTINGS *s)
 {
 	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
@@ -1335,5 +1335,7 @@ GtkWidget *create_mainwindow(SETTINGS *s)
 	
 	gtk_widget_grab_focus(s->app);
 
-	return s->app;
+	add_gtkhtml_widgets(s->app);
+
+	gtk_widget_set_usize(s->app, s->gs_width, settings->gs_hight);
 }
