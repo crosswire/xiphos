@@ -110,7 +110,7 @@ static void display(VIEW_COMM *c, gchar * key)
 static void free_on_destroy(VIEW_COMM * vc)
 {		
 	dialog_list = g_list_remove(dialog_list, (VIEW_COMM *) vc);
-	g_warning("shuting down %s dialog",vc->mod_name);
+//	g_warning("shuting down %s dialog",vc->mod_name);
 	g_free(vc);	
 }
 
@@ -418,15 +418,13 @@ static void create_commentary_dialog(VIEW_COMM * vc)
 	GtkAccelGroup *module_new_menu_accels;
 	GtkWidget *frame19;
 	GtkWidget *scrolledwindow38;
-	gchar title[256];
-	
-	sprintf(title,"%s - %s",vc->mod_name, _("GnomeSword"));
 	
 	vc->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
 	    
 	gtk_object_set_data(GTK_OBJECT(vc->dialog), "vc->dialog",
 			    vc->dialog);
-	gtk_window_set_title (GTK_WINDOW (vc->dialog), title);
+	gtk_window_set_title (GTK_WINDOW (vc->dialog), 
+			get_module_description(vc->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vc->dialog), 462, 280);
 	gtk_window_set_policy(GTK_WINDOW(vc->dialog), TRUE, TRUE,
 			      FALSE);
@@ -723,7 +721,7 @@ void gui_shutdown_commentary_dialog(void)
 	while (dialog_list != NULL) {
 		VIEW_COMM *vc = (VIEW_COMM *) dialog_list->data;
 		dialog_freed = TRUE;
-		g_warning("shuting down %s dialog",vc->mod_name);
+//		g_warning("shuting down %s dialog",vc->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */

@@ -83,7 +83,7 @@ static void display(COMM_DATA *c, gchar * key)
 		return;
 	}
 	else if(c->cipher_key) {
-		g_warning(c->cipher_key);
+//		g_warning(c->cipher_key);
 		gui_module_is_locked_display(c->html, 
 				c->mod_name, c->cipher_key);
 		return;		
@@ -473,7 +473,7 @@ void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c)
 {
 	gchar *cipher_key;
 	
-	g_warning(c->cipher_old);
+//	g_warning(c->cipher_old);
 	
 	cipher_key = gui_add_cipher_key(c->mod_name, c->cipher_old);
 	if(cipher_key){

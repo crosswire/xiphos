@@ -683,7 +683,7 @@ gint gui_gs_dialog(GS_DIALOG * info)
 		retval = 4;
 		is_running = TRUE;
 		gtk_main ();
-		g_warning("dialog closed");
+//		g_warning("dialog closed");
 		is_running = FALSE;
 		return retval;
 	}

@@ -102,27 +102,27 @@ static gboolean have_module(gchar *mod_name)
 
 void gui_check_interlinear_modules(void)
 {
-	if(strlen(settings.Interlinear1Module) > 2)
+	if(strlen(settings.Interlinear1Module) > 1)
 		interlinear1 = check_for_module(settings.Interlinear1Module);
 	else
 		interlinear1 = FALSE;
 	
-	if(strlen(settings.Interlinear2Module) > 2)
+	if(strlen(settings.Interlinear2Module) > 1)
 		interlinear2 = check_for_module(settings.Interlinear2Module);
 	else
 		interlinear2 = FALSE;
 	
-	if(strlen(settings.Interlinear3Module) > 2)
+	if(strlen(settings.Interlinear3Module) > 1)
 		interlinear3 = check_for_module(settings.Interlinear3Module);
 	else
 		interlinear3 = FALSE;
 	
-	if(strlen(settings.Interlinear4Module) > 2)
+	if(strlen(settings.Interlinear4Module) > 1)
 		interlinear4 = check_for_module(settings.Interlinear4Module);
 	else
 		interlinear4 = FALSE;
 	
-	if(strlen(settings.Interlinear5Module) > 2)	
+	if(strlen(settings.Interlinear5Module) > 1)	
 		interlinear5 = check_for_module(settings.Interlinear5Module);
 	else
 		interlinear5 = FALSE;
@@ -504,7 +504,7 @@ void gui_update_interlinear_page(void)
 						mod_name = NULL;
 				break;
 			}
-			
+//			g_warning("mod_name = %s",mod_name);
 			if(!mod_name) continue;
 
 			++j;
@@ -512,16 +512,16 @@ void gui_update_interlinear_page(void)
 			font_name = get_module_font_name(mod_name); 
 			if(strlen(font_name) < 2) {
 					use_gtkhtml_font = TRUE;
-					g_warning("use_gtkhtml_font = TRUE");
+//					g_warning("use_gtkhtml_font = TRUE");
 			}
 			else {
 				if(!strncmp(font_name,"none",4)) {
 					use_gtkhtml_font = TRUE;
-					g_warning("use_gtkhtml_font = TRUE");
+//					g_warning("use_gtkhtml_font = TRUE");
 				}
 				else {
 					use_gtkhtml_font = FALSE;
-					g_warning("use_gtkhtml_font = FALSE");
+//					g_warning("use_gtkhtml_font = FALSE");
 				}
 			}
 			
