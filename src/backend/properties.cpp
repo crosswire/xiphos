@@ -43,12 +43,12 @@ static char *isON(bool value)
  * load gnomesword properties - using sword SWConfig
  *****************************************************************************/
 
-int backend_load_properties(void)
+int backend_load_properties(char * path)
 {
 	char buf[255];
 
-	sprintf(buf, "%s/preferences.conf", settings.gSwordDir);
-	SWConfig settingsInfo(buf);
+	//sprintf(buf, "%s/preferences.conf", path);
+	SWConfig settingsInfo(path);
 	settingsInfo.Load();
 
 	/* app size on open ,epane sizes and shortcut bar width */
@@ -249,8 +249,8 @@ int backend_save_properties(int shutdown)
 {
 	char buf[80], buf2[255];
 
-	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
-	SWConfig settingsInfo(buf2);
+	//sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
+	SWConfig settingsInfo(settings.fnconfigure);
 
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
 
@@ -445,8 +445,8 @@ int backend_create_properties_from_setup(void)
 {
 	char buf[80], buf2[255];
 
-	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
-	SWConfig settingsInfo(buf2);
+	//sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
+	SWConfig settingsInfo(settings.fnconfigure);
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	settingsInfo["Modules"]["MainWindow"] = settings.MainWindowModule;
 	settingsInfo["Modules"]["CommWindow"] = settings.CommWindowModule;
@@ -537,8 +537,8 @@ int backend_create_properties(void)
 {
 	char buf[80], buf2[255];
 
-	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
-	SWConfig settingsInfo(buf2);
+	//sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
+	SWConfig settingsInfo(settings.fnconfigure);
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	settingsInfo["Modules"]["MainWindow"] = "KJV";
 	settingsInfo["Modules"]["CommWindow"] = "Personal";

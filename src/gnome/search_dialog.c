@@ -45,7 +45,7 @@
 
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
-#define FINDS N_("finds in the")
+#define FINDS N_("finds in ")
 typedef struct _search_dialog SEARCH_DIALOG;
 struct _search_dialog {
 	GtkWidget *dialog;

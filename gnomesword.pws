@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=44
-1=109
-2=104
-3=76
-4=1086
-5=30
-6=41
-7=28
-8=1
+0=247
+1=59
+2=47
+3=29
+4=60
+5=119
+6=36
+7=29
+8=540
 9=48
 10=60
 11=32
@@ -46,11 +46,15 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/backend/search.h
-1=/home/terry/gnomesword/gnomesword1/src/backend/search.cpp
+0=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
+1=/home/terry/gnomesword/gnomesword1/src/main/search.h
 2=/home/terry/gnomesword/gnomesword1/src/main/search.c
-3=/home/terry/gnomesword/gnomesword1/src/main/search.h
-4=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
+3=/home/terry/gnomesword/gnomesword1/src/backend/search.h
+4=/home/terry/gnomesword/gnomesword1/src/backend/search.cpp
+5=/home/terry/gnomesword/gnomesword1/src/main/settings.c
+6=/home/terry/gnomesword/gnomesword1/src/main/main.c
+7=/home/terry/gnomesword/gnomesword1/src/backend/properties.h
+8=/home/terry/gnomesword/gnomesword1/src/backend/properties.cpp
 
 [replace_text]
 0=notebook_search
@@ -63,14 +67,14 @@ ShowLocals=true
 7=b->
 
 [find_text]
-0=remove_selection
-1=MODS_LABEL
-2=do_dialog_search
-3=add_ranges
-4=frame66a
-5=frame66
-6=clist_ranges
-7=range_text_changed
+0=search_scope_bounds
+1=remove_selection
+2=MODS_LABEL
+3=do_dialog_search
+4=add_ranges
+5=frame66a
+6=frame66
+7=clist_ranges
 
 [executer args]
 0=newconfigs
