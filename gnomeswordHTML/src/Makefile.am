@@ -1,7 +1,7 @@
 
 SUBDIRS = gssword \
           gsdialogs \
-	  editor
+	  gseditor
 
 INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
@@ -12,7 +12,7 @@ INCLUDES =  \
     $(SWORD_CPPFLAGS) \
     -I$(top_srcdir)/src/gsdialogs \
     -I$(top_srcdir)/src/gssword \
-    -I$(top_srcdir)/src/editor \
+    -I$(top_srcdir)/src/gseditor \
     -I /usr/include/gtkhtml
     
     
@@ -73,7 +73,7 @@ gnomesword_LDADD = \
     $(GNOME_APP_LIBS)\
     $(top_builddir)/src/gsdialogs/libgsdialogs.a \
     $(top_builddir)/src/gssword/libgssword.a \
-    $(top_builddir)/src/editor/libgseditor.a
+    $(top_builddir)/src/gseditor/libgseditor.a
     
 if SPELLING
 gnomesword_SOURCES = \
