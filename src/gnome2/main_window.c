@@ -442,7 +442,6 @@ void create_mainwindow(void)
 {
 	GtkWidget *dock1;
 	GtkWidget *vbox_gs;
-	//GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
 	GtkWidget *hbox2;
 	GtkWidget *nav_toolbar;
@@ -502,17 +501,12 @@ void create_mainwindow(void)
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.epaned), 6);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
-/*	mainPanel = gtk_vbox_new(FALSE, 0);
-	gtk_paned_pack2(GTK_PANED(widgets.epaned), mainPanel,
-			TRUE, TRUE);
-	gtk_widget_show(mainPanel);
-*/
 	vboxMain = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxMain);
 	gtk_paned_pack2(GTK_PANED(widgets.epaned), vboxMain,
 			TRUE, TRUE);
+	gtk_container_set_border_width(GTK_CONTAINER(vboxMain), 2);
 	
-
 	/*
 	 * notebook to have separate passages opened at once
 	 * the passages are not actually open but are switched
@@ -526,8 +520,7 @@ void create_mainwindow(void)
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
 
-//	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_NEW,
-//					GTK_ICON_SIZE_SMALL_TOOLBAR);
+	
 	tab_button_icon = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
 						"/new_tab_button.png");
 	gtk_widget_show(tab_button_icon);
@@ -552,7 +545,6 @@ void create_mainwindow(void)
 	nav_toolbar = gui_create_nav_toolbar(vboxMain);
 	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
 			   FALSE, 0);
-	/* gtk_box_pack_start(GTK_BOX(vboxMain),nav_toolbar,FALSE,FALSE,0); */
 	/*
 	 * end nav toolbar
 	 */
@@ -566,30 +558,16 @@ void create_mainwindow(void)
 	widgets.vpaned = gtk_vpaned_new();
 	gtk_widget_show(widgets.vpaned);
 	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vpaned, TRUE, TRUE);
-	//gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE, 0);
-	//gtk_container_set_border_width(GTK_CONTAINER(widgets.vpaned), 1);
-	
-/*	hbox2 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hbox2);
-	gtk_paned_pack1(GTK_PANED(widgets.vpaned), hbox2, TRUE, TRUE);*/
 
 	widgets.vpaned2 = gtk_vpaned_new();
 	gtk_widget_show(widgets.vpaned2);
 	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.vpaned2, TRUE, TRUE);
-	//gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE, 0);
-	//gtk_container_set_border_width(GTK_CONTAINER(widgets.vpaned), 1);
-
 
 /**widgets.hpaned********/
-/*	widgets.hpaned = gtk_hpaned_new();
-	gtk_widget_show(widgets.hpaned);
-	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE, TRUE, 0);*/
-
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
 	gtk_paned_pack1(GTK_PANED(widgets.vpaned),
 					widgets.vbox_text, FALSE, TRUE);
-
 
 	/*
 	 * bible/parallel notebook
@@ -627,8 +605,6 @@ void create_mainwindow(void)
 				    (widgets.notebook_bible_parallel), 
 				    0),
 				   label);
-						
-
 
 	/*
 	 * previewer
@@ -637,12 +613,7 @@ void create_mainwindow(void)
 	gtk_widget_show(vbox);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 1);
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), vbox, FALSE, TRUE);
-/*
-	label = gtk_label_new(_("Information Viewer"));
-	gtk_widget_show(label);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-	gtk_misc_set_alignment((GtkMisc *) label, 0, 0);
-*/
+	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE,
@@ -659,7 +630,6 @@ void create_mainwindow(void)
 	gtk_widget_show(sidebar.html_viewer_widget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
-	//gtk_html_load_empty(GTK_HTML(sidebar.html_viewer_widget));
 
 	g_signal_connect(GTK_OBJECT(sidebar.html_viewer_widget),
 			 "link_clicked", G_CALLBACK(gui_link_clicked),
@@ -676,9 +646,7 @@ void create_mainwindow(void)
 			widgets.notebook_comm_book, TRUE, TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (widgets.notebook_comm_book), 1);
 	
-	/*gtk_box_pack_start(GTK_BOX(widgets.box_comm),
-			   widgets.notebook_comm_book, TRUE,
-			   TRUE, 0);*/
+	
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(widgets.notebook_comm_book),
                                              GTK_POS_BOTTOM);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.
@@ -724,9 +692,7 @@ void create_mainwindow(void)
 	/*
 	 * dict/lex
          */
-	widgets.box_dict = gui_create_dictionary_pane();        
-        /*gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
-			  widgets.box_dict);*/
+	widgets.box_dict = gui_create_dictionary_pane(); 
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned2),
 			widgets.box_dict, TRUE, TRUE);
 	/*

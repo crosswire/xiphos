@@ -10,6 +10,9 @@
 /* Define if you want to see debug messages */
 #undef DEBUG
 
+/* Editor API Version */
+#undef EDITOR_API_VERSION
+
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
 

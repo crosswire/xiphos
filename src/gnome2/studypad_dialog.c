@@ -34,6 +34,8 @@
 #include "main/settings.h"
 #include "main/module_dialogs.h"
 
+#include "editor/editor-control.h"
+
 /******************************************************************************
  * Name
  *   dialog_destroy
@@ -86,7 +88,7 @@ static GtkWidget *create_dialog(void)
 	GtkWidget *dialog;
 	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(dialog),"dialog",dialog);
-	gtk_widget_set_size_request(dialog, 590, 300);
+	gtk_widget_set_size_request(dialog, 600, 300);
 	gtk_window_set_policy(GTK_WINDOW
 			      (dialog),
 			      TRUE, TRUE, FALSE);
@@ -119,10 +121,10 @@ static GtkWidget *create_dialog(void)
 
 gint gui_open_studypad_dialog(gchar * file_name)
 {
-	widgets.studypad_dialog = create_dialog();
 
-	widgets.html_studypad =
-	  	gui_create_studypad_control(widgets.studypad_dialog,
-							  file_name);
-	return TRUE;
+	widgets.studypad_dialog = create_dialog();
+	
+	editor_new_editor(widgets.studypad_dialog, 
+					STUDYPAD, 
+					file_name); 
 }

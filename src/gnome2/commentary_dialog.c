@@ -490,7 +490,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 		gchar *url = g_strdup_printf("sword:///%s", buf);
 		main_dialogs_url_handler(c, url, TRUE);
 		g_free(url);
-		main_navbar_set(c->navbar,c->navbar.key);
+		main_navbar_set(c->navbar, c->navbar.key);
 
 		if (!ec)
 			return;
@@ -521,23 +521,22 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
 {
 	GSHTMLEditorControlData *ec
-		    = (GSHTMLEditorControlData *) c->editor;
-	const gchar *buf =
-	    gtk_entry_get_text(entry);
-	if(c->navbar.key)
+	    = (GSHTMLEditorControlData *) c->editor;
+	const gchar *buf = gtk_entry_get_text(entry);
+	if (c->navbar.key)
 		g_free(c->navbar.key);
 	c->navbar.key = g_strdup(buf);
 	gchar *url = g_strdup_printf("sword:///%s", buf);
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
-	main_navbar_set(c->navbar,c->navbar.key);
+	main_navbar_set(c->navbar, c->navbar.key);
 
 	if (!ec)
 		return;
 	if (ec->key)
 		g_free(ec->key);
-	ec->key = g_strdup_printf("%s", buf);	
-	
+	ec->key = g_strdup_printf("%s", buf);
+
 }
 
 
@@ -597,22 +596,21 @@ void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	gchar *book = NULL;
 	gchar *buf = NULL;
 	GtkTreeIter iter;
-	GtkTreeModel* model = gtk_combo_box_get_model(combobox);
-	
-	if(!do_display)
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+	if (!do_display)
 		return;
 #ifdef DEBUG
 	g_message("on_comboboxentry4_changed");
 #endif
 	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
-			   0, &book, -1);
-	
-	url = g_strdup_printf("sword:///%s 1:1",book);	
-	buf = g_strdup_printf("%s 1:1",book);
-	
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
+
+	url = g_strdup_printf("sword:///%s 1:1", book);
+	buf = g_strdup_printf("%s 1:1", book);
+
 	main_dialogs_url_handler(c, url, TRUE);
-	main_navbar_set(c->navbar,buf);
+	main_navbar_set(c->navbar, buf);
 	g_free(url);
 	g_free(book);
 	g_free(buf);
@@ -626,39 +624,38 @@ void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	gchar *chapter = NULL;
 	gchar *buf = NULL;
 	GtkTreeIter iter;
-	
-	GtkTreeModel* model = gtk_combo_box_get_model(combobox);
-	GtkTreeModel* book_model = gtk_combo_box_get_model(GTK_COMBO_BOX(c->navbar.comboboxentry_book));
-	
-	
-	if(!do_display)
+
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (c->navbar.comboboxentry_book));
+
+
+	if (!do_display)
 		return;
 #ifdef DEBUG
 	g_message("on_comboboxentry5_changed");
 #endif
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX(
-				c->navbar.comboboxentry_book), &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter,
-			   0, &book, -1);
-	
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (c->navbar.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
 			   0, &chapter, -1);
-	
+
 	url = g_strdup_printf("sword:///%s %s:1",
-				settings.MainWindowModule,
-				book,
-				chapter);
-	buf = g_strdup_printf("%s %s:1",
-				book,
-				chapter);
+			      settings.MainWindowModule, book, chapter);
+	buf = g_strdup_printf("%s %s:1", book, chapter);
 	main_dialogs_url_handler(c, url, TRUE);
-	main_navbar_set(c->navbar,buf);
-	
+	main_navbar_set(c->navbar, buf);
+
 	g_free(url);
 	g_free(book);
 	g_free(chapter);
-	g_free(buf);		
+	g_free(buf);
 }
 
 
@@ -670,42 +667,42 @@ void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 	gchar *verse = NULL;
 	gchar *buf = NULL;
 	GtkTreeIter iter;
-	
-	GtkTreeModel* model = gtk_combo_box_get_model(combobox);
-	GtkTreeModel* book_model = gtk_combo_box_get_model(GTK_COMBO_BOX(c->navbar.comboboxentry_book));
-	GtkTreeModel* chapter_model = gtk_combo_box_get_model(GTK_COMBO_BOX(c->navbar.comboboxentry_chapter));
 
-	
-	if(!do_display)
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (c->navbar.comboboxentry_book));
+	GtkTreeModel *chapter_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (c->navbar.comboboxentry_chapter));
+
+
+	if (!do_display)
 		return;
 #ifdef DEBUG
 	g_message("on_comboboxentry6_changed");
 #endif
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX(
-				c->navbar.comboboxentry_book), &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter,
-			   0, &book, -1);
-	
-	gtk_combo_box_get_active_iter(GTK_COMBO_BOX(
-				c->navbar.comboboxentry_chapter), &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter,
-			   0, &chapter, -1);
-	
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (c->navbar.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (c->navbar.comboboxentry_chapter),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0,
+			   &chapter, -1);
+
 	gtk_combo_box_get_active_iter(combobox, &iter);
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
-			   0, &verse, -1);
-	
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
+
 	url = g_strdup_printf("sword:///%s %s:%s",
-				book,
-				chapter,
-				verse);
-	buf = g_strdup_printf("%s %s:%s",
-				book,
-				chapter,
-				verse);
+			      book, chapter, verse);
+	buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
 	main_dialogs_url_handler(c, url, TRUE);
-	main_navbar_set(c->navbar,buf);
-	
+	main_navbar_set(c->navbar, buf);
+
 	g_free(url);
 	g_free(book);
 	g_free(chapter);
@@ -731,178 +728,20 @@ void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 
 static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 {
-
-/****************************************************************************/
 	GtkWidget *hbox3;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
-	
+
 	hbox3 = gtk_hbox_new(FALSE, 2);
 	gtk_widget_show(hbox3);
-	//gtk_box_pack_start(GTK_BOX(), hbox3, FALSE, FALSE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
 
 	sync_button = gtk_toggle_button_new();
 	gtk_widget_show(sync_button);
-	gtk_box_pack_start(GTK_BOX(hbox3), sync_button, FALSE, FALSE, 0);
-	gtk_button_set_relief(GTK_BUTTON(sync_button), GTK_RELIEF_NONE);
-
-	image = gtk_image_new_from_stock("gtk-refresh", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(image);
-	gtk_container_add(GTK_CONTAINER(sync_button), image);
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE, 0);
-	gtk_widget_set_size_request(separatortoolitem, 6, -1);
-/*
-	button12 = gtk_button_new();
-	gtk_widget_show(button12);
-	gtk_box_pack_start(GTK_BOX(hbox3), button12, FALSE, FALSE, 0);
-	gtk_button_set_relief(GTK_BUTTON(button12), GTK_RELIEF_NONE);
-
-	image3 =
-	    gtk_image_new_from_stock("gtk-go-back", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(image3);
-	gtk_container_add(GTK_CONTAINER(button12), image3);
-
-	button13 = gtk_button_new();
-	gtk_widget_show(button13);
-	gtk_box_pack_start(GTK_BOX(hbox3), button13, FALSE, FALSE, 0);
-	gtk_button_set_relief(GTK_BUTTON(button13), GTK_RELIEF_NONE);
-
-	image4 =
-	    gtk_image_new_from_stock("gtk-go-forward", GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show(image4);
-	gtk_container_add(GTK_CONTAINER(button13), image4);
-
-	separatortoolitem4 = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem4);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem4, FALSE, TRUE,
+	gtk_box_pack_start(GTK_BOX(hbox3), sync_button, FALSE, FALSE,
 			   0);
-*/
-	store = gtk_list_store_new (1, G_TYPE_STRING);
-	c->navbar.comboboxentry_book = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));
-	//comboboxentry4 = gtk_combo_box_entry_new_text (); //gtk_combo_box_entry_new();
-	gtk_widget_show(c->navbar.comboboxentry_book);
-	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_book, TRUE, TRUE, 0);
-	gtk_widget_set_size_request(c->navbar.comboboxentry_book, -1, 6);
-
-renderer = gtk_cell_renderer_text_new ();
-gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (c->navbar.comboboxentry_book), renderer, TRUE);
-gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_book), renderer,
-                                "text", 0,
-                                NULL);
-
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE,
-			   0);
-	gtk_widget_set_size_request(separatortoolitem, 6, -1);
-	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
-					 (separatortoolitem), FALSE);
-					 
-	store = gtk_list_store_new (1, G_TYPE_STRING);
-	
-	c->navbar.comboboxentry_chapter = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));//gtk_combo_box_entry_new();
-	gtk_widget_show(c->navbar.comboboxentry_chapter);
-	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_chapter, FALSE, TRUE, 0);
-	gtk_widget_set_size_request(c->navbar.comboboxentry_chapter, 61, -1);
-
-renderer = gtk_cell_renderer_text_new ();
-gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (c->navbar.comboboxentry_chapter), renderer, TRUE);
-gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_chapter), renderer,
-                                "text", 0,
-                                NULL);
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE,
-			   0);
-	gtk_widget_set_size_request(separatortoolitem, 6, -1);
-	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
-					 (separatortoolitem), FALSE);
-		 
-	store = gtk_list_store_new (1, G_TYPE_STRING);
-	c->navbar.comboboxentry_verse = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));//gtk_combo_box_entry_new();
-	gtk_widget_show(c->navbar.comboboxentry_verse);
-	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_verse, FALSE, TRUE, 0);
-	gtk_widget_set_size_request(c->navbar.comboboxentry_verse, 61, -1);
-	
-
-renderer = gtk_cell_renderer_text_new ();
-gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (c->navbar.comboboxentry_verse), renderer, TRUE);
-gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_verse), renderer,
-                                "text", 0,
-                                NULL);
-	
-
-	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
-	gtk_widget_show(separatortoolitem);
-	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE,
-			   0);
-
-	c->navbar.lookup_entry = gtk_entry_new();
-	gtk_widget_show(c->navbar.lookup_entry);
-	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.lookup_entry, TRUE, TRUE, 0);
-
-	g_signal_connect(GTK_OBJECT(sync_button),
-			 "toggled", G_CALLBACK(sync_toggled), c);
-	g_signal_connect ((gpointer) c->navbar.comboboxentry_book, "changed",
-		    G_CALLBACK (on_comboboxentry4_changed),
-		    c);
-	g_signal_connect ((gpointer) c->navbar.comboboxentry_chapter, "changed",
-		    G_CALLBACK (on_comboboxentry5_changed),
-		    c);
-	g_signal_connect ((gpointer) c->navbar.comboboxentry_verse, "changed",
-		    G_CALLBACK (on_comboboxentry6_changed),
-		    c);
-	g_signal_connect ((gpointer) c->navbar.lookup_entry, "activate",
-		    G_CALLBACK (on_entry_activate),
-		    c);
-
-/*  	GLADE_HOOKUP_OBJECT (vbox_tab, entry1, "entry1");
-	
-	g_signal_connect((gpointer) entry1,
-			 "focus",
-			 G_CALLBACK(on_focus), (TAB *) tab);
-	g_signal_connect((gpointer) entry1,
-			 "focus-in-event",
-			 G_CALLBACK(on_focus_in), (TAB *) tab);*/
-	return hbox3;		 
-/****************************************************************************/			 
-			 
-	
-	
-/*	
-	GtkWidget *toolbar_nav;
-	GtkWidget *hbox_toolbar;
-	GtkWidget *toolitem;
-	GtkWidget *image;
-	GtkWidget *cbBook;
-	GtkObject *spbChapter_adj;
-	GtkObject *spbVerse_adj;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *vseparator;
-	GtkWidget *label;
-	
-	
-	toolbar_nav = gtk_toolbar_new();
-	gtk_toolbar_set_style(GTK_TOOLBAR(toolbar_nav),
-			      GTK_TOOLBAR_ICONS);
-	gtk_widget_show(toolbar_nav);
-	gtk_widget_set_size_request(toolbar_nav, -1, 34);
-
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
-
-	sync_button = gtk_toggle_button_new();
-	gtk_widget_show(sync_button);
-	gtk_container_add(GTK_CONTAINER(toolitem), sync_button);
 	gtk_button_set_relief(GTK_BUTTON(sync_button), GTK_RELIEF_NONE);
 
 	image =
@@ -911,122 +750,108 @@ gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_verse),
 	gtk_widget_show(image);
 	gtk_container_add(GTK_CONTAINER(sync_button), image);
 
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
 
-	vseparator = gtk_vseparator_new();
-	gtk_widget_show(vseparator);
-	gtk_container_add(GTK_CONTAINER(toolitem), vseparator);
-	gtk_widget_set_size_request(vseparator, 6, 7);
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	c->navbar.comboboxentry_book =
+	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+	gtk_widget_show(c->navbar.comboboxentry_book);
+	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_book,
+			   TRUE, TRUE, 0);
+	gtk_widget_set_size_request(c->navbar.comboboxentry_book, -1,
+				    6);
 
-
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
-
-
-	cbBook = gtk_combo_new();
-	gtk_widget_show(cbBook);
-	gtk_container_add(GTK_CONTAINER(toolitem), cbBook);
-*/
-	/*
-	 * get and load books of the Bible 
-	 */
-/*	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
-				      get_list(BOOKS_LIST));
-
-	c->cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_set_size_request(c->cbe_book, 100, -1);
-	gtk_widget_show(c->cbe_book);
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (c->navbar.comboboxentry_book),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (c->navbar.comboboxentry_book),
+				       renderer, "text", 0, NULL);
 
 
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
 
-	label = gtk_label_new("");
-	gtk_widget_show(label);
-	gtk_container_add(GTK_CONTAINER(toolitem), label);
-	gtk_widget_set_size_request(label, 6, -1);
-	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	store = gtk_list_store_new(1, G_TYPE_STRING);
 
+	c->navbar.comboboxentry_chapter = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
+	gtk_widget_show(c->navbar.comboboxentry_chapter);
+	gtk_box_pack_start(GTK_BOX(hbox3),
+			   c->navbar.comboboxentry_chapter, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(c->navbar.comboboxentry_chapter, 61,
+				    -1);
 
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (c->navbar.comboboxentry_chapter),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (c->navbar.
+					comboboxentry_chapter),
+				       renderer, "text", 0, NULL);
 
-	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
-	c->spb_chapter =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_show(c->spb_chapter);
-	gtk_container_add(GTK_CONTAINER(toolitem), c->spb_chapter);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
-				    (c->spb_chapter), TRUE);
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
 
-
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
-
-	label = gtk_label_new("");
-	gtk_widget_show(label);
-	gtk_container_add(GTK_CONTAINER(toolitem), label);
-	gtk_widget_set_size_request(label, 6, -1);
-	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
-
-
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
-
-	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
-	c->spb_verse =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_show(c->spb_verse);
-	gtk_container_add(GTK_CONTAINER(toolitem), c->spb_verse);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(c->spb_verse),
-				    TRUE);
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	c->navbar.comboboxentry_verse = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
+	gtk_widget_show(c->navbar.comboboxentry_verse);
+	gtk_box_pack_start(GTK_BOX(hbox3),
+			   c->navbar.comboboxentry_verse, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(c->navbar.comboboxentry_verse, 61,
+				    -1);
 
 
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
-
-	label = gtk_label_new("");
-	gtk_widget_show(label);
-	gtk_container_add(GTK_CONTAINER(toolitem), label);
-	gtk_widget_set_size_request(label, 6, -1);
-	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (c->navbar.comboboxentry_verse),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (c->navbar.comboboxentry_verse),
+				       renderer, "text", 0, NULL);
 
 
-	toolitem = (GtkWidget *) gtk_tool_item_new();
-	gtk_widget_show(toolitem);
-	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
 
-	c->freeform_lookup = gtk_entry_new();
-	gtk_widget_show(c->freeform_lookup);
-	gtk_container_add(GTK_CONTAINER(toolitem), c->freeform_lookup);
-	gtk_entry_set_text(GTK_ENTRY(c->freeform_lookup),
-			   _("Romans 8:28"));
-
-	g_signal_connect(GTK_OBJECT(c->cbe_book),
-			 "changed", G_CALLBACK(book_changed), c);
+	c->navbar.lookup_entry = gtk_entry_new();
+	gtk_widget_show(c->navbar.lookup_entry);
+	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.lookup_entry, TRUE,
+			   TRUE, 0);
 
 	g_signal_connect(GTK_OBJECT(sync_button),
 			 "toggled", G_CALLBACK(sync_toggled), c);
-
-	g_signal_connect(GTK_OBJECT(c->spb_chapter),
-			 "button_release_event",
-			 G_CALLBACK(chapter_button_release_event), c);
-	g_signal_connect(GTK_OBJECT(c->spb_verse),
-			 "button_release_event",
-			 G_CALLBACK(verse_button_release_event), c);
-	g_signal_connect(GTK_OBJECT(c->freeform_lookup),
-			 "key_press_event",
-			 G_CALLBACK(entry_key_press_event), c);
-*/
-//	return toolbar_nav;
+	g_signal_connect((gpointer) c->navbar.comboboxentry_book,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry4_changed), c);
+	g_signal_connect((gpointer) c->navbar.comboboxentry_chapter,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry5_changed), c);
+	g_signal_connect((gpointer) c->navbar.comboboxentry_verse,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry6_changed), c);
+	g_signal_connect((gpointer) c->navbar.lookup_entry, "activate",
+			 G_CALLBACK(on_entry_activate), c);
+	return hbox3;
 }
 
 
@@ -1063,8 +888,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 	gtk_window_set_title(GTK_WINDOW(c->dialog),
 			     main_get_module_description(c->mod_name));
 	//gtk_window_set_default_size(GTK_WINDOW(c->dialog), 462, 280);
-	gtk_window_set_policy(GTK_WINDOW(c->dialog), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_policy(GTK_WINDOW(c->dialog), TRUE, TRUE, FALSE);
 	if (do_edit)
 		gtk_widget_set_size_request(c->dialog, 590, 380);
 	else
@@ -1084,7 +908,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 	gtk_widget_show(toolbar_nav);
 	gtk_box_pack_start(GTK_BOX(vbox_toolbars), toolbar_nav, FALSE,
 			   FALSE, 0);
-	
+
 	frame19 = gtk_frame_new(NULL);
 	gtk_widget_show(frame19);
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
@@ -1239,8 +1063,7 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 					       gpointer user_data)
 {
-	gchar *dict_key =
-	    gui_get_word_or_selection(cur_c->html, FALSE);
+	gchar *dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(settings.

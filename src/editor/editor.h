@@ -33,9 +33,10 @@ extern "C" {
 #endif
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
-#include "editor/editor_replace.h"
-
-typedef GtkWidget ** (*DialogCtor)(GtkHTML *html);
+typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
+typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
+//#include "editor/replace.h"
+#include "editor/search.h"
 
 struct _GSHTMLEditorControlData {
 	GtkHTML *html;
@@ -48,15 +49,20 @@ struct _GSHTMLEditorControlData {
 	GtkWidget *combo;
 	GtkWidget *paragraph_option;
 
-	GList *properties_types;
 	GSList *paragraph_group;
 
 	BonoboUIComponent *uic;
 
-//	GtkHTMLEditPropertiesDialog   *properties_dialog;
-//	GList                         *properties_types;
+	GtkHTMLEditPropertiesDialog   *properties_dialog;
+	GList                         *properties_types;
+
 	/* search & replace dialogs */
 	GtkHTMLReplaceDialog *replace_dialog;
+	GtkHTMLSearchDialog *search_dialog;
+	gboolean regular;
+	gchar *search_text;
+	gchar *replace_text_search;
+	gchar *replace_text_replace;
 
 	/* html/plain mode settings */
 	gboolean format_html;
@@ -148,20 +154,21 @@ struct _GSHTMLEditorControlData {
 	gboolean                block_language_changes;
 	gchar                  *language;
 //	EditorEngine           *editor_bonobo_engine;
-
+	gpointer be;
 	GtkWidget *spell_dialog;
+	GnomeIconTheme *icon_theme;
 
 };
 
 void gui_update_statusbar(GSHTMLEditorControlData *ecd);
-GSHTMLEditorControlData *gs_html_editor_control_data_new(void);
-void gui_html_editor_control_data_destroy(GtkObject *object, 
+GSHTMLEditorControlData *editor_control_data_new(GtkHTML * html, GtkWidget * vbox);
+void editor_control_data_destroy(GtkObject *object, 
 					GSHTMLEditorControlData *cd);
 /*void gui_editor_destroy(GtkObject *object, 
 					GSHTMLEditorControlData *ecd);
 void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor,
 						const gchar *title);*/
-
+guint editor_container_create (void);
 
 #ifdef __cplusplus
 }

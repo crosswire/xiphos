@@ -115,7 +115,7 @@ void url_requested(GtkHTML * html, const gchar * url,
  *
  *   void gui_url(GtkHTML * html, const gchar * url, gpointer data)
  *
- * Description
+ * Descrg_warningiption
  *   called when mouse moves over an url (link)
  *
  * Return value
