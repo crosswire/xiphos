@@ -397,10 +397,14 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	GtkWidget *btnLookup;
 	GtkWidget *button_dict_book;
 	GtkWidget *togglebutton_parallel_view;
-	GtkWidget *vseparator1;
-	GtkWidget *vseparator2;
+	//GtkWidget *vseparator1;
+	GtkWidget *label;
+	//GtkWidget *vseparator2;
 	GtkObject *spb_chapter_adj;
 	GtkObject *spb_verse_adj;
+	GtkTooltips *tooltips;
+	
+	tooltips = gtk_tooltips_new ();
 
 
 	toolbarNav = gtk_toolbar_new();
@@ -449,20 +453,28 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 						       children)->
 					   data))->label), TRUE);
 	gtk_widget_show(widgets.button_parallel_view);
-
+	
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
+  /*
 	vseparator1 = gtk_vseparator_new();
 	gtk_widget_show(vseparator1);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), vseparator1,
 				  NULL, NULL);
 	gtk_widget_set_size_request(vseparator1, 5, 0);
-
+*/
 	cbBook = gtk_combo_new();
 	g_object_set_data(G_OBJECT(GTK_COMBO(cbBook)->popwin),
 			  "GladeParentKey", cbBook);
 	gtk_widget_show(cbBook);
 	//gtk_widget_set_size_request(cbBook, 130, -1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
-				  NULL);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, 
+				NULL,
+				NULL);
 	/*
 	 * get and load books of the Bible 
 	 */
@@ -471,39 +483,66 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	cbe_book = GTK_COMBO(cbBook)->entry;
 	gtk_widget_show(cbe_book);
-
+	gtk_tooltips_set_tip (tooltips, cbe_book, _("Change book of the Bible"), 
+				NULL);
 	gtk_entry_set_text(GTK_ENTRY(cbe_book), _("Romans"));
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	spb_chapter_adj = gtk_adjustment_new(8, 0, 151, 1, 10, 10);
 	spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spb_chapter_adj), 1, 0);
 	gtk_widget_show(spb_chapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), spb_chapter,
-				  NULL, NULL);
+				  _("Change chapter"), NULL);
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	spb_verse_adj = gtk_adjustment_new(28, 0, 180, 1, 10, 10);
 	spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spb_verse_adj), 1, 0);
 	gtk_widget_show(spb_verse);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), spb_verse,
-				  NULL, NULL);
+				  _("Change verse"), NULL);
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	
 	cbe_freeform_lookup = gtk_entry_new();
 	gtk_widget_show(cbe_freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
-				  cbe_freeform_lookup, NULL, NULL);
+				  cbe_freeform_lookup, 
+		_("Enter desired verse in 'book 1:1' format and hit return or click Goto button")
+		, NULL);
 	//gtk_widget_set_size_request(cbe_freeform_lookup, 150, -1);
 	nav_bar.lookup_entry = cbe_freeform_lookup;
 
+	label = gtk_label_new ("");
+	gtk_widget_show (label);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbarNav), label, NULL, NULL);
+	gtk_widget_set_size_request (label, 6, -1);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	/*
 	vseparator2 = gtk_vseparator_new();
 	gtk_widget_show(vseparator2);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), vseparator2,
 				  NULL, NULL);
 	gtk_widget_set_size_request(vseparator2, 5, 0);
-
+*/
 	btnLookup = gtk_toolbar_insert_stock(GTK_TOOLBAR(toolbarNav),
 					     GTK_STOCK_JUMP_TO,
-					     NULL,
+		_("Go to verse"),
 					     NULL, NULL, NULL, -1);
 	gtk_widget_show(btnLookup);
 
@@ -513,7 +552,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 				     (GTK_TOOLBAR(toolbarNav)));*/
 	nav_bar.button_back = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
                                 "gtk-go-back",
-                                NULL,
+                                _("Move backwards through history"),
                                 NULL, NULL, NULL, -1);/*
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -533,7 +572,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 				     (GTK_TOOLBAR(toolbarNav)));*/
 	nav_bar.button_forward = gtk_toolbar_insert_stock (GTK_TOOLBAR (toolbarNav),
                                 "gtk-go-forward",
-                                NULL,
+                                _("Move foward through history"),
                                 NULL, NULL, NULL, -1);
 	/*    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
