@@ -28,12 +28,12 @@
 /* gnome */
 #include "_dictlex.h"
 #include "cipher_key_dialog.h"
+#include "shortcutbar_main.h"
 
 /* main */
 #include "settings.h"
 #include "lists.h"
 #include "dictlex.h"
-#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_viewdict_dlg.h"
 

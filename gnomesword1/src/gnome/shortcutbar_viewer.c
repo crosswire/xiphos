@@ -28,10 +28,14 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
 
+
+/* frontend */
+#include "shortcutbar_main.h"
+#include "shortcutbar_viewer.h"
+
+/* main */ 
 #include "gs_gnomesword.h"
 #include "gs_bookmarks.h"
-#include "shortcutbar_viewer.h"
-#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "support.h"
 #include "settings.h"
@@ -49,7 +53,7 @@ SB_VIEWER sb_v, *sv ;
  *   set_sb_for_daily_devotion 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_viewer.h"
  *
  *   void set_sb_for_daily_devotion(SETTINGS * s)	
  *
