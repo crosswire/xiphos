@@ -706,8 +706,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_table_attach(GTK_TABLE(table7), combo_text, 1, 2, 0, 1,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_text), biblemods);
+	if(biblemods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_text), biblemods);
 
 
 	widgets.combo_entry_text = GTK_COMBO(combo_text)->entry;
@@ -719,7 +719,9 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int1), biblemods);
+	
+	if(biblemods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_int1), biblemods);
 
 	widgets.combo_entry_int1 = GTK_COMBO(combo_int1)->entry;
 	gtk_widget_show(widgets.combo_entry_int1);
@@ -730,7 +732,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int2), biblemods);
+	if(biblemods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_int2), biblemods);
 
 	widgets.combo_entry_int2 = GTK_COMBO(combo_int2)->entry;
 	gtk_widget_show(widgets.combo_entry_int2);
@@ -741,7 +744,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int3), biblemods);
+	if(biblemods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_int3), biblemods);
 
 	widgets.combo_entry_int3 = GTK_COMBO(combo_int3)->entry;
 	gtk_widget_show(widgets.combo_entry_int3);
@@ -759,7 +763,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int4), biblemods);
+	if(biblemods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_int4), biblemods);
 
 	widgets.combo_entry_int4 = GTK_COMBO(combo_int4)->entry;
 	gtk_widget_show(widgets.combo_entry_int4);
@@ -770,7 +775,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int5), biblemods);
+	if(biblemods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_int5), biblemods);
 
 	widgets.combo_entry_int5 = GTK_COMBO(combo_int5)->entry;
 	gtk_widget_show(widgets.combo_entry_int5);
@@ -781,7 +787,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_comm), commmods);
+	if(commmods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_comm), commmods);
 
 	widgets.combo_entry_comm = GTK_COMBO(combo_comm)->entry;
 	gtk_widget_show(widgets.combo_entry_comm);
@@ -839,7 +846,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_gbs), gbsmods);
+	if(gbsmods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_gbs), gbsmods);
 
 	widgets.combo_entry_gbs = GTK_COMBO(combo_gbs)->entry;
 	gtk_widget_show(widgets.combo_entry_gbs);
@@ -857,7 +865,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_personal),
+	if(percommods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_personal),
 				      percommods);
 
 	widgets.combo_entry_personal = GTK_COMBO(combo_personal)->entry;
@@ -876,7 +885,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_dict), dictmods);
+	if(dictmods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_dict), dictmods);
 
 	widgets.combo_entry_dict = GTK_COMBO(combo_dict)->entry;
 	gtk_widget_show(widgets.combo_entry_dict);
@@ -894,7 +904,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 11, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_greek_lex),
+	if(dictmods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_greek_lex),
 				      dictmods);
 
 	widgets.entry_greek_lex = GTK_COMBO(combo_greek_lex)->entry;
@@ -917,7 +928,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 12, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_hebrew_lex),
+	if(dictmods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_hebrew_lex),
 				      dictmods);
 
 
@@ -941,7 +953,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 13, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_devotion),
+	if(devotionmods)
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo_devotion),
 				      devotionmods);
 
 	widgets.combo_entry_devotion = GTK_COMBO(combo_devotion)->entry;
@@ -973,8 +986,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					gdk_pixbuf_new_from_file
 					(PACKAGE_PIXMAPS_DIR
 					"/gs2-48x48.png",
-					&error)
-	);
+					&error));
 
 	gtk_object_set_data(GTK_OBJECT(dialog_setup), "tooltips",
 			    tooltips);
