@@ -36,7 +36,9 @@ extern "C" {
 #include <gnome.h>
 #include "gs_gnomesword.h"
 
-/* these strings are not seen by users */
+/* 
+   these strings are not seen by users
+ */
 #define TEXT_MODS "Biblical Texts"
 #define COMM_MODS "Commentaries"
 #define DICT_MODS "Lexicons / Dictionaries"
@@ -44,10 +46,7 @@ extern "C" {
 
 
 	void backend_first_init(void);
-	void initSWORD(SETTINGS * s);
-	void updateIntDlg(SETTINGS * s);
-	char *backend_get_interlinear_module_text(char * mod_name,
-							char *key);
+	void backend_init_sword(SETTINGS * s);
 	void backend_text_module_change_verse(char *key);
 	void backend_module_name_from_description(gchar * mod_name,
 						  gchar * mod_desc);
@@ -67,8 +66,6 @@ extern "C" {
 				       gchar * yesno);
 	GList *backend_get_books(void);
 	const char *backend_get_sword_verion(void);
-	void backend_swap_interlinear_with_main(gchar * intmod,
-						SETTINGS * s);
 	void backend_display_new_font_color_and_size(SETTINGS * s);
 	void backend_save_module_key(gint modwindow, gchar * key,
 				     SETTINGS * s);

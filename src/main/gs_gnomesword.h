@@ -262,11 +262,7 @@ struct _search_opt {
 
 /*** function prototypes ***/
 
-void initGnomeSword(SETTINGS *settings, 
-		GList *biblemods, 
-		GList *commentarymods , 
-		GList *dictionarymods, 
-		GList *percommods);
+void initGnomeSword(SETTINGS *settings);
 void gnomesword_shutdown(SETTINGS * s);
 gint addnotebookpages(GtkWidget *notebook, 
 		GList *list,
@@ -298,7 +294,6 @@ void change_module_and_key(gchar *module_name, gchar *key);
 void set_module_global_options(gchar * option, gint window, 
 		gboolean choice, gboolean showchange);
 void change_verse(gchar *key);
-void update_interlinear_page(SETTINGS * s);
 
 #ifdef __cplusplus
 }

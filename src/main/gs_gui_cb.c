@@ -327,7 +327,7 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 }
 
 //----------------------------------------------------------------------------------------------
-void on_btnInfoBoxYes_clicked(GtkButton * button, gpointer user_data)
+/*void on_btnInfoBoxYes_clicked(GtkButton * button, gpointer user_data)
 {
 	answer = 0;
 }
@@ -337,7 +337,7 @@ void on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data)
 {
 	answer = 1;
 }
-
+*/
 //----------------------------------------------------------------------------------------------
 void
 on_tbtnFollow_toggled(GtkToggleButton * togglebutton,

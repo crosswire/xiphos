@@ -53,6 +53,8 @@ COMMON_SOURCE =  \
     gs_info_box.h\
     gs_information_dlg.c \
     gs_information_dlg.h \
+    gs_interlinear.c \
+    gs_interlinear.h \
     gs_mainmenu_cb.c \
     gs_mainmenu_cb.h\
     gs_menu.c \
