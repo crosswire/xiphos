@@ -1,6 +1,16 @@
-2000-05-17 added spellchecking - not perfect but seems to work
+2000-06-06  - cleaned up bookmarks menu - edit bookmarks now applies changes when
+						you click ok.
+						- clear history works
+						- personal comments page moved - if you have more than one personal module
+						you can switch using popup menu on comments page.
+						- spellchecking works for personal comments now.
+
+2000-06-05  you can set the color for the current verse
+
+2000-06-02  fixed some bugs in the personal comments editor
+
+2000-05-17  -added spellchecking - not perfect but seems to work
 						ok in studypad.
 						
-2000-06-02 fixed some bugs in the personal comments editor
 
-2000-06-05 you can set the color for the current verse
+
