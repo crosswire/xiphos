@@ -39,8 +39,8 @@
 #include "support.h"
 #include "interface.h"
 #include "filestuff.h"
-#include "display.h"
-#include "listeditor.h"
+//#include "display.h"
+#include "gs_listeditor.h"
 #include "noteeditor.h"
 #include "searchstuff.h"
 #include "printstuff.h"
@@ -53,13 +53,11 @@
 /******************************************************************************
  * globals
 ******************************************************************************/
-LISTITEM listitem;		/* structure for ListEditor items
-				 (verse lists and bookmarks) */
-gint listrow;			/* current row in ListEditor clist widget */
+
 gboolean firstsearch = true;	/* search dialog is not running when true */
 gboolean firstLE = true;	/* ListEditor in not running when true */
 GtkWidget *searchDlg;		/* pointer to search dialog */
-GtkWidget *listeditor;		/* pointer to ListEditor */
+
 guint num1, num2, num3;
 gboolean buttonpressed = false;
 gboolean dicttabs,
@@ -70,7 +68,7 @@ gboolean dicttabs,
 	showcomgroup,
 	showdictgroup,
 	showhistorygroup;
-
+GtkWidget *listeditor;		/* pointer to ListEditor */
 /******************************************************************************
  * externals
 ******************************************************************************/
@@ -929,143 +927,7 @@ on_btnPropertyboxCancel_clicked(GtkButton * button, gpointer user_data)
 
 
 
-/*********************************************************************************
-**********************************************************************************
- *callbacks liseditor
-********************************************************************************** 
-*********************************************************************************/
-//------------------------------------------------
-void
-on_clLElist_select_row(GtkCList * clist,
-		       gint row,
-		       gint column, GdkEvent * event, gpointer user_data)
-{
-	listrow = row;
-	selectrow(GTK_WIDGET(clist), listrow, column);
-}
 
-//----------------------------------------------------------------------------------------------
-void on_btnLEup_clicked(GtkButton * button, gpointer user_data)
-{
-	movelistitem(GTK_WIDGET(button), 0, listrow);	//-- send to movelistitem function for processing (listeditor.cpp)
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEdown_clicked(GtkButton * button, gpointer user_data)
-{
-	movelistitem(GTK_WIDGET(button), 1, listrow);	//-- send to movelistitem function for processing (listeditor.cpp)
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEleft_clicked(GtkButton * button, gpointer user_data)
-{
-	movelistitem(GTK_WIDGET(button), 2, listrow);	//-- send to movelistitem function for processing (listeditor.cpp)
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEright_clicked(GtkButton * button, gpointer user_data)
-{
-	movelistitem(GTK_WIDGET(button), 3, listrow);	//-- send to movelistitem function for processing (listeditor.cpp)
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *entry;
-	gchar *buf;
-	entry = lookup_widget(GTK_WIDGET(button), "entryVerseLookup");
-	buf = gtk_entry_get_text(GTK_ENTRY(entry));
-	changeLEverseSWORD(buf);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *list, *entry;
-	gchar *item;
-
-	list = lookup_widget(GTK_WIDGET(button), "clLElist");
-	entry = lookup_widget(GTK_WIDGET(button), "entryVerseLookup");
-	item = gtk_entry_get_text(GTK_ENTRY(entry));
-	addverse(list, listrow, item);	//-- function to add item to list (listeditor.cpp)
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *list;
-
-	list = lookup_widget(GTK_WIDGET(button), "clLElist");
-	addsubitme(list, listrow);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEok_clicked(GtkButton * button, gpointer user_data)
-{
-	applychanges(GTK_WIDGET(button));
-	gtk_widget_hide(listeditor);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEapply_clicked(GtkButton * button, gpointer user_data)
-{
-	applychanges(GTK_WIDGET(button));
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data)
-{
-	gtk_widget_hide(listeditor);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnLEapplylistchanges_clicked(GtkButton * button, gpointer user_data)
-{
-	applylistchanges(GTK_WIDGET(button), listrow);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEdelete_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *list;
-
-	list = lookup_widget(GTK_WIDGET(button), "clLElist");
-	deleteitem(list);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEnew_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEopen_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEclose_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLErefresh_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnLEsave_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *listeditor;
-
-	listeditor = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	editbookmarksSave(listeditor);
-}
 //==============================================================================================
 
 
