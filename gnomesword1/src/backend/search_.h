@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * search.h - search Sword modules
@@ -27,14 +26,16 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 	
-	GList *backend_do_search(SETTINGS * s, gpointer *usr_data);
-	void backend_setup_search_results_display(GtkWidget * html_widget);
-	void backend_shutdown_search_results_display(void);
-	void backend_search_results_item_display(gchar * key);
+GList *backend_do_search(SETTINGS * s, gpointer *usr_data);
+void backend_setup_search_results_display(GtkWidget * html_widget);
+void backend_shutdown_search_results_display(void);
+void backend_search_results_item_display(gchar * key);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __SEARCH_H__ */
+
+#endif
+

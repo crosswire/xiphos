@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifndef __BIBLETEXT__H_
 #define __BIBLETEXT__H_
 
@@ -27,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 	
 const char* backend_get_text_module_description(int modnum);
 void backend_nav_text_module(int modnum, int direction);
@@ -43,4 +42,6 @@ gboolean backend_check_for_global_option(int mod_num, char *option);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __BIBLETEXT__H_ */
+
+#endif
+
