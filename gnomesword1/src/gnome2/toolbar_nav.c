@@ -586,7 +586,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			   0);
 	gtk_button_set_relief(GTK_BUTTON(btnLookup), GTK_RELIEF_NONE);
 
-	tmp_toolbar_icon = gtk_image_new_from_stock("gtk-jump-to",
+	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_JUMP_TO,
 						    GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(btnLookup), tmp_toolbar_icon);
@@ -598,7 +598,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_button_set_relief(GTK_BUTTON(nav_bar.button_back),
 			      GTK_RELIEF_NONE);
 
-	tmp_toolbar_icon = gtk_image_new_from_stock("gtk-go-back",
+	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK,
 						    GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(nav_bar.button_back),
@@ -613,7 +613,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	gtk_button_set_relief(GTK_BUTTON(nav_bar.button_forward),
 			      GTK_RELIEF_NONE);
 
-	tmp_toolbar_icon = gtk_image_new_from_stock("gtk-go-forward",
+	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_GO_FORWARD,
 						    GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(nav_bar.button_forward),

@@ -373,6 +373,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *label701;
 	GtkWidget *label702;
 	GtkWidget *label703;
+	gchar *labeltext;
 
 
 	gchar *homedir, version[40];
@@ -459,7 +460,11 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(druid_vbox3), vbox27, TRUE, TRUE, 0);
 
 	label700 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label700), _("<span weight=\"bold\">These settings have been detected automatically</span>"));
+
+	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",_("These values have been detected automatically"));
+  	gtk_label_set_markup(GTK_LABEL(label700), labeltext);
+	g_free(labeltext);
+	
 	gtk_widget_show(label700);
 	gtk_box_pack_start(GTK_BOX(vbox27), label700, FALSE, FALSE, 0);
 
@@ -555,7 +560,11 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(druid_vbox1), vbox26, TRUE, TRUE, 0);
 
 	label701 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label701), _("<span weight=\"bold\">Settings to use when GnomeSword starts</span>"));
+
+	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Settings to use when GnomeSword starts"));
+  	gtk_label_set_markup(GTK_LABEL(label701), labeltext);
+	g_free(labeltext);
+
 	gtk_widget_show(label701);
 	gtk_box_pack_start(GTK_BOX(vbox26), label701, FALSE, FALSE, 8);
 
@@ -705,7 +714,10 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(druid_vbox2);
 
 	label702 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label702), _("<span weight=\"bold\">Choose default SWORD modules</span>"));
+	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Choose default SWORD modules"));
+  	gtk_label_set_markup(GTK_LABEL(label702), labeltext);
+	g_free(labeltext);
+
 	gtk_widget_show(label702);
 	gtk_box_pack_start(GTK_BOX(druid_vbox2), label702, FALSE, FALSE, 8);
 

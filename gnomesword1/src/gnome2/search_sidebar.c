@@ -375,6 +375,7 @@ void gui_create_search_sidebar(void)
 	GtkWidget *scrolledwindow_search;
 	GtkWidget *viewport_search;
 	GtkTooltips *tooltips;
+	gchar *header;
 
 	tooltips = gtk_tooltips_new();
 
@@ -429,8 +430,11 @@ void gui_create_search_sidebar(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame_module),GTK_SHADOW_NONE);
 	
 	label1 = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<span weight=\"bold\">Search Module</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Module"));
+  	gtk_label_set_markup(GTK_LABEL(label1), header);
+	g_free(header);
+
 	gtk_widget_show(label1);
 	gtk_frame_set_label_widget      (GTK_FRAME(frame_module),
                                              label1);
@@ -490,12 +494,14 @@ void gui_create_search_sidebar(void)
 	gtk_container_set_border_width (GTK_CONTAINER (frame2), 2);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame2),GTK_SHADOW_NONE);
 	
-	label1 = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<span weight=\"bold\">Search Type</span>"));
+	label1 = gtk_label_new(NULL);
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Type"));
+  	gtk_label_set_markup(GTK_LABEL(label1), header);
+	g_free(header);
+	
 	gtk_widget_show(label1);
-	gtk_frame_set_label_widget      (GTK_FRAME(frame2),
-                                             label1);
+	gtk_frame_set_label_widget(GTK_FRAME(frame2), label1);
 
 	vbox2 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_show(vbox2);
@@ -540,11 +546,13 @@ void gui_create_search_sidebar(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame3),GTK_SHADOW_NONE);
 	
 	label1 = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<span weight=\"bold\">Search Options</span>"));
+	
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Options"));
+  	gtk_label_set_markup(GTK_LABEL(label1), header);
+	g_free(header);
+	
 	gtk_widget_show(label1);
-	gtk_frame_set_label_widget      (GTK_FRAME(frame3),
-                                             label1);
+	gtk_frame_set_label_widget(GTK_FRAME(frame3), label1);
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox3);
@@ -566,11 +574,13 @@ void gui_create_search_sidebar(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame4),GTK_SHADOW_NONE);
 	
 	label1 = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<span weight=\"bold\">Search Scope</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Search Scope"));
+  	gtk_label_set_markup(GTK_LABEL(label1), header);
+	g_free(header);
+
 	gtk_widget_show(label1);
-	gtk_frame_set_label_widget      (GTK_FRAME(frame4),
-                                             label1);
+	gtk_frame_set_label_widget(GTK_FRAME(frame4),label1);
 
 	vbox4 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_show(vbox4);
@@ -615,11 +625,13 @@ void gui_create_search_sidebar(void)
 	gtk_frame_set_shadow_type(GTK_FRAME(frame5),GTK_SHADOW_NONE);
 	
 	label1 = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label1),
-                                     _("<span weight=\"bold\">Bounds</span>"));
+
+	header = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Bounds"));
+  	gtk_label_set_markup(GTK_LABEL(label1), header);
+	g_free(header);
+
 	gtk_widget_show(label1);
-	gtk_frame_set_label_widget      (GTK_FRAME(frame5),
-                                             label1);
+	gtk_frame_set_label_widget(GTK_FRAME(frame5), label1);
 
 	table1 = gtk_table_new(2, 2, FALSE);
 	gtk_widget_show(table1);
