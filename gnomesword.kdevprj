@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/Projects/gnomesword2/gnomesword/main.cpp,
+openfiles=Untitled.h,Untitled.cpp,/Projects/gnomesword2/gnomesword/main.cpp,/Projects/gnomesword2/ChangeLog,
 show_outputview=true
 show_treeview=true
-header_file=Untitled.h
+header_file=/Projects/gnomesword2/ChangeLog
 cpp_file=/Projects/gnomesword2/gnomesword/main.cpp
-browser_file=file:/usr/doc/kde/HTML/default/kdevelop/welcome/index.html
+browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/strncmp.html
 [gnomesword/printstuff.c]
 install_location=
 dist=true
