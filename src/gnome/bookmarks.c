@@ -263,7 +263,7 @@ static gchar *get_module_name(void)
  * Return value
  *   void
  */
-
+/*
 static void addnewgrouptoMenus(GtkWidget * pmMenu,
 			       GtkCTreeNode * node, gchar * str)
 {
@@ -286,7 +286,7 @@ static void addnewgrouptoMenus(GtkWidget * pmMenu,
 			   (GtkCTreeNode *) node);
 	gtk_container_add(GTK_CONTAINER(menu), item);
 }
-
+*/
 /******************************************************************************
  * Name
  *   

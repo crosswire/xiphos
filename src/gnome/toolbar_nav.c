@@ -35,6 +35,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 
+NAV_BAR nav_bar;
 static GtkWidget * cbe_book;
 static GtkWidget * spb_chapter;
 static GtkWidget * spb_verse;
@@ -250,12 +251,12 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   on_btnBack_clicked
+ *   on_button_back_clicked
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   void on_btnBack_clicked(GtkButton * button, gpointer user_data)
+ *   void on_nav_bar.button_back_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
  *    move backward through history list
@@ -264,19 +265,19 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
  *   void
  */ 
 
-static void on_btnBack_clicked(GtkButton * button, gpointer user_data)
+static void on_button_back_clicked(GtkButton * button, gpointer user_data)
 {
 	historynav(widgets.app, 0);
 }
 
 /******************************************************************************
  * Name
- *   on_btnFoward_clicked
+ *   on_button_forward_clicked
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   void on_btnFoward_clicked(GtkButton * button, gpointer user_data)	
+ *   void on_button_forward_clicked(GtkButton * button, gpointer user_data)	
  *
  * Description
  *   go forward through history list 
@@ -285,7 +286,7 @@ static void on_btnBack_clicked(GtkButton * button, gpointer user_data)
  *   void
  */ 
 
-static void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
+static void on_button_forward_clicked(GtkButton * button, gpointer user_data)
 {
 	historynav(widgets.app, 1);
 }
@@ -314,8 +315,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 	GtkObject *spbChapter_adj;
 	GtkObject *spbVerse_adj;
 	GtkWidget *btnLookup;
-	GtkWidget *btnBack;
-	GtkWidget *btnFoward;
 
 	toolbarNav =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -411,7 +410,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_BACK);
-	btnBack =
+	nav_bar.button_back =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Back"),
@@ -419,17 +418,17 @@ GtkWidget *gui_create_nav_toolbar(void)
 				       ("Go backward through history list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(btnBack);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnBack",
-				 btnBack,
+	gtk_widget_ref(nav_bar.button_back);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "nav_bar.button_back",
+				 nav_bar.button_back,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnBack);
-	gtk_widget_set_sensitive(btnBack, FALSE);
+	gtk_widget_show(nav_bar.button_back);
+	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_FORWARD);
-	btnFoward =
+	nav_bar.button_forward =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Foward"),
@@ -437,12 +436,12 @@ GtkWidget *gui_create_nav_toolbar(void)
 				       ("Go foward through history list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(btnFoward);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnFoward",
-				 btnFoward,
+	gtk_widget_ref(nav_bar.button_forward);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "nav_bar.button_forward",
+				 nav_bar.button_forward,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnFoward);
-	gtk_widget_set_sensitive(btnFoward, FALSE);
+	gtk_widget_show(nav_bar.button_forward);
+	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
 
 	gtk_signal_connect(GTK_OBJECT(cbe_book), "changed",
 			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
@@ -461,10 +460,10 @@ GtkWidget *gui_create_nav_toolbar(void)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnLookup), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnLookup_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnBack), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnBack_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnFoward), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(nav_bar.button_back), "clicked",
+			   GTK_SIGNAL_FUNC(on_button_back_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(nav_bar.button_forward), "clicked",
+			   GTK_SIGNAL_FUNC(on_button_forward_clicked), NULL);
 
 	return toolbarNav;
 }

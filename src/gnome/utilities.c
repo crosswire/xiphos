@@ -68,51 +68,6 @@ gchar * remove_linefeeds(gchar * buf)
 
 /******************************************************************************
  * Name
- *   gui_lookup_widget
- *
- * Synopsis
- *   #include "gui/utilities.h"
- *
- *   GtkWidget *gui_lookup_widget(GtkWidget * widget, 
-				const gchar * widget_name)
- *
- * Description
- * This function returns a widget in a component.
- * Call it with the toplevel widget in the component (i.e. a window/dialog),
- * or alternatively any widget in the component, and the name of the widget
- * you want returned.   
- *
- * Return value
- *   GtkWidget *
- */
-
-GtkWidget *gui_lookup_widget(GtkWidget * widget, 
-				const gchar * widget_name)
-{
-	GtkWidget *parent, *found_widget;
-
-	for (;;) {
-		if (GTK_IS_MENU(widget))
-			parent =
-			    gtk_menu_get_attach_widget(GTK_MENU(widget));
-		else
-			parent = widget->parent;
-		if (parent == NULL)
-			break;
-		widget = parent;
-	}
-
-	found_widget =
-	    (GtkWidget *) gtk_object_get_data(GTK_OBJECT(widget),
-					      widget_name);
-	if (!found_widget)
-		g_warning("Widget not found: %s", widget_name);
-	return found_widget;
-}
-
-
-/******************************************************************************
- * Name
  *   gui_add_item2gnome_menu
  *
  * Synopsis

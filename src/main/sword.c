@@ -680,4 +680,12 @@ const unsigned int verse_count(char *key)
 {
 	return backend_verse_count(key);
 }
+
+/** Returns error. */
+/*
+char int module_error(void) 
+{
+	return backend_module_error(void);
+}
+*/
 	
