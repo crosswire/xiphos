@@ -2,14 +2,16 @@
 
 src/gs_abouts.c 
 src/gs_bookmarks.c 
+src/gs_editor.c 
 src/gs_editor_replace.c 
 src/gs_editor_toolbar.c 
 src/gs_file.c 
+src/gs_gbs.c 
+src/gs_getinfo_dlg.c
 src/gs_gnomesword.c 
 src/gs_gui.c 
 src/gs_history.c 
 src/gs_html.c 
-src/gs_html_editor.c 
 src/gs_info_box.c 
 src/gs_interlinear_dlg.c 
 src/gs_mainmenu_cb.c 

@@ -34,7 +34,7 @@
 #include <fcntl.h>
 
 #include "gs_gnomesword.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 #include "support.h"
 #include "gs_file.h"
 #include "gs_menu.h"
@@ -133,9 +133,10 @@ gint setDiretory(void)
 {
 	gint retval = 0;
 	gchar 
-		swDir[256],
+		dotswordDir[256],
 		*gsbmDir,		/* bookmarks directory for gnomesword-0.7.0 and up */
-		bmFile[300];
+		bmFile[300],
+		genbookdir[300];
 	
 	/* get home dir */
 	if ((homedir = getenv("HOME")) == NULL) { 		
@@ -146,8 +147,7 @@ gint setDiretory(void)
 	/* set gSwordDir to $home + .GnomeSword */
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
-	
-	sprintf(swDir, "%s/%s",homedir,".sword/bookmarks/");/* for compatability */
+	sprintf(dotswordDir, "%s/%s",homedir,".sword/bookmarks/");/* for compatability */
 	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
 	gsbmDir = g_new(char, strlen(homedir) + strlen(".GnomeSword/bookmarks") + 2);
 	sprintf(gsbmDir, "%s/%s",homedir,".GnomeSword/bookmarks/");
@@ -183,8 +183,60 @@ gint setDiretory(void)
 		retval = 1; 
 	}
 	
-	if (access(swDir, F_OK) == 0) {	/* if .sword/bookmarks does exist rename it to .GnomeSword/bookmarks*/
-		if ((rename(swDir, gsbmDir)) == 0) {
+	
+/****  find or create dir for local gbs support  ****/	
+	sprintf(genbookdir, "%s/%s",homedir,".sword/");/* for local gbs support */
+	
+	if (access(genbookdir, F_OK) == -1) {
+		if((mkdir(genbookdir, S_IRWXU)) == 0) {
+			// do nothing
+		} else { 
+			g_warning("can't create .sword dir");
+		}
+	}
+	sprintf(genbookdir, "%s/%s",homedir,".sword/mods.d");/* for local module support */
+	
+	if (access(genbookdir, F_OK) == -1) {	
+		if((mkdir(genbookdir, S_IRWXU)) == 0) {
+			// do nothing
+		} else { 
+			g_warning("can't create .sword/mods.d dir");
+		}
+	}
+	sprintf(genbookdir, "%s/%s",homedir,".sword/modules");/* for local gbs support */
+	
+	if (access(genbookdir, F_OK) == -1) {
+		if((mkdir(genbookdir, S_IRWXU)) == 0) {
+			// do nothing
+		} else { 
+			g_warning("can't create .sword/modules dir");
+		}
+	}
+	sprintf(genbookdir, "%s/%s",homedir,".sword/modules/genbook");/* for local gbs support */
+	
+	
+	if (access(genbookdir, F_OK) == -1) {
+		if((mkdir(genbookdir, S_IRWXU)) == 0) {
+			// do nothing
+		} else { 
+			g_warning("can't create .sword/modules/genbook dir");
+		}
+	}
+	sprintf(genbookdir, "%s/%s",homedir,".sword/modules/genbook/rawbook");/* for local gbs support */
+		
+	
+	if (access(genbookdir, F_OK) == -1) {
+		if((mkdir(genbookdir, S_IRWXU)) == 0) {
+			// do nothing
+		} else { 
+			g_warning("can't create .sword/modules/genbook/rawbook dir");
+		}
+	}
+/****  end local gbs dir checks  ****/	
+	
+	
+	if (access(dotswordDir, F_OK) == 0) {	/* if .sword/bookmarks does exist rename it to .GnomeSword/bookmarks*/
+		if ((rename(dotswordDir, gsbmDir)) == 0) {
 			// do nothing
 		} else { 
 			g_warning("can't rename bookmarks dir");

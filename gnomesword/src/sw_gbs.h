@@ -33,12 +33,23 @@
 extern "C" {
 #endif
 
+#include "gs_gnomesword.h"
+//	void appendSibblingSW_GBS(TreeKeyIdx *treeKey, gchar *text);
+//	void appendChildSW_GBS(TreeKeyIdx *treeKey, gchar *text);
+	void addchildSW_GBS(SETTINGS *s, gchar *name);
+	void addSiblingSW_GBS(SETTINGS *s, gchar *name);
+	void setupSW_GBS(SETTINGS *s);
+	void shutdownSW_GBS(void);
+	void loadBookListSW_GBS(SETTINGS *s);
+	void savebookSW_GBS(gchar *buf);
+	gint deleteNodeSW_GBS(SETTINGS *s);
+	void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *filename);
 	void on_ctreeBooks_select_row(GtkCList * clist,
 		    	gint row,
 		    	gint column, 
 			GdkEvent * event, 
-			gpointer user_data);
-	void load_book_tree(GtkWidget *ctree, 
+			SETTINGS *s);
+	void load_book_tree(SETTINGS *s,
 			GtkCTreeNode *node, 
 			gchar *bookName, 
 			gchar *treekey,

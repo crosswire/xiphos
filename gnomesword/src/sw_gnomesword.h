@@ -60,12 +60,11 @@ extern "C" {
 	void freeformlookupSWORD(GdkEventKey * event);
 	void changcurcomModSWORD(gchar * modName, gboolean showchange);
 	void savenoteSWORD(gchar *buf);
-	void savebookSWORD(gchar *buf)	;
 	void deletenoteSWORD(void);
 	void changcurdictModSWORD(gchar * modName, gchar * keyText);
 	void dictSearchTextChangedSWORD(gchar * mytext);
 	void dictchangekeySWORD(gint direction);
-	void showmoduleinfoSWORD(char *modName);
+	void showmoduleinfoSWORD(char *modName, gboolean isGBS);
 	void setglobalopsSWORD(gint window, gchar * option, gchar * yesno);
 	void changepercomModSWORD(gchar * modName);
 	void redisplayTextSWORD(void);

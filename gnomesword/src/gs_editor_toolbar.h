@@ -30,7 +30,7 @@
 #define _GS_EDITOR_TOOLBAR_H
 
 #include <gtkhtml/gtkhtml.h>
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 
 GtkWidget *toolbar_style         (GSHTMLEditorControlData * ecd);
 void       toolbar_update_format (GSHTMLEditorControlData * ecd);

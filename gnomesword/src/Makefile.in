@@ -158,12 +158,18 @@ COMMON_SOURCE = \
     gs_abouts.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
+    gs_editor.c \
+    gs_editor.h \
     gs_editor_replace.c \
     gs_editor_replace.h \
     gs_editor_toolbar.c \
     gs_editor_toolbar.h \
     gs_file.c \
     gs_file.h \
+    gs_gbs.c \
+    gs_gbs.h \
+    gs_getinfo_dlg.c \
+    gs_getinfo_dlg.h \
     gs_gnomesword.c \
     gs_gnomesword.h \
     gs_gui.c \
@@ -174,8 +180,6 @@ COMMON_SOURCE = \
     gs_history.h \
     gs_html.c \
     gs_html.h \
-    gs_html_editor.c \
-    gs_html_editor.h \
     gs_info_box.c \
     gs_info_box.h\
     gs_information_dlg.c \
@@ -280,24 +284,25 @@ PROGRAMS = $(bin_PROGRAMS)
 
 am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	char_table.$(OBJEXT) e-splash.$(OBJEXT) gs_abouts.$(OBJEXT) \
-	gs_bookmarks.$(OBJEXT) gs_editor_replace.$(OBJEXT) \
-	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) \
+	gs_bookmarks.$(OBJEXT) gs_editor.$(OBJEXT) \
+	gs_editor_replace.$(OBJEXT) gs_editor_toolbar.$(OBJEXT) \
+	gs_file.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
 	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
-	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_html_editor.$(OBJEXT) \
-	gs_info_box.$(OBJEXT) gs_information_dlg.$(OBJEXT) \
-	gs_information_sw.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
-	gs_menu.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
-	gs_popup_cb.$(OBJEXT) gs_setup.$(OBJEXT) \
-	gs_shortcutbar.$(OBJEXT) gs_undock_int.$(OBJEXT) \
-	gs_undock_sb.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
-	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
-	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT) \
-	sw_bookmarks.$(OBJEXT) sw_display.$(OBJEXT) sw_gbs.$(OBJEXT) \
-	sw_gnomesword.$(OBJEXT) sw_module_options.$(OBJEXT) \
-	sw_properties.$(OBJEXT) sw_search.$(OBJEXT) \
-	sw_shortcutbar.$(OBJEXT) sw_utility.$(OBJEXT) \
-	sw_verselist_sb.$(OBJEXT) sw_viewcomm_dlg.$(OBJEXT) \
-	sw_viewdict_dlg.$(OBJEXT) sw_viewtext_dlg.$(OBJEXT)
+	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
+	gs_information_dlg.$(OBJEXT) gs_information_sw.$(OBJEXT) \
+	gs_mainmenu_cb.$(OBJEXT) gs_menu.$(OBJEXT) \
+	gs_preferences_dlg.$(OBJEXT) gs_popup_cb.$(OBJEXT) \
+	gs_setup.$(OBJEXT) gs_shortcutbar.$(OBJEXT) \
+	gs_undock_int.$(OBJEXT) gs_undock_sb.$(OBJEXT) \
+	gs_unlockkey_dlg.$(OBJEXT) gs_viewcomm_dlg.$(OBJEXT) \
+	gs_viewdict_dlg.$(OBJEXT) gs_viewtext_dlg.$(OBJEXT) \
+	main.$(OBJEXT) support.$(OBJEXT) sw_bookmarks.$(OBJEXT) \
+	sw_display.$(OBJEXT) sw_gbs.$(OBJEXT) sw_gnomesword.$(OBJEXT) \
+	sw_module_options.$(OBJEXT) sw_properties.$(OBJEXT) \
+	sw_search.$(OBJEXT) sw_shortcutbar.$(OBJEXT) \
+	sw_utility.$(OBJEXT) sw_verselist_sb.$(OBJEXT) \
+	sw_viewcomm_dlg.$(OBJEXT) sw_viewdict_dlg.$(OBJEXT) \
+	sw_viewtext_dlg.$(OBJEXT)
 gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
 gnomesword_DEPENDENCIES =
 gnomesword_LDFLAGS =
@@ -310,12 +315,13 @@ LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/char_table.Po $(DEPDIR)/e-splash.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_abouts.Po $(DEPDIR)/gs_bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_replace.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_toolbar.Po $(DEPDIR)/gs_file.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_gbs.Po $(DEPDIR)/gs_getinfo_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gnomesword.Po $(DEPDIR)/gs_gui.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gui_cb.Po $(DEPDIR)/gs_history.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_html.Po $(DEPDIR)/gs_html_editor.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_info_box.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_html.Po $(DEPDIR)/gs_info_box.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_information_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_information_sw.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_mainmenu_cb.Po $(DEPDIR)/gs_menu.Po \
@@ -417,15 +423,17 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/e-splash.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_abouts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bookmarks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_replace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_toolbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_file.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gbs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_getinfo_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gnomesword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gui_cb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_history.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_html.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_html_editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_info_box.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_information_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_information_sw.Po@am__quote@

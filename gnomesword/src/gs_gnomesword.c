@@ -237,12 +237,10 @@ initGnomeSword(SETTINGS *s,
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
-        g_list_free(bookmods);
 	g_list_free(percommods);	
         g_list_free(sbbiblemods);
         g_list_free(sbcommods);
         g_list_free(sbdictmods);
-        g_list_free(sbbookmods);
        // options list freed on exit
 	
 	if(s->showsplash){	
