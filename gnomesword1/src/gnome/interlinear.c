@@ -103,27 +103,27 @@ static gboolean have_module(gchar *mod_name)
 void gui_check_interlinear_modules(void)
 {
 	if(strlen(settings.Interlinear1Module) > 2)
-		interlinear1 = have_module(settings.Interlinear1Module);
+		interlinear1 = check_for_module(settings.Interlinear1Module);
 	else
 		interlinear1 = FALSE;
 	
 	if(strlen(settings.Interlinear2Module) > 2)
-		interlinear2 = have_module(settings.Interlinear2Module);
+		interlinear2 = check_for_module(settings.Interlinear2Module);
 	else
 		interlinear2 = FALSE;
 	
 	if(strlen(settings.Interlinear3Module) > 2)
-		interlinear3 = have_module(settings.Interlinear3Module);
+		interlinear3 = check_for_module(settings.Interlinear3Module);
 	else
 		interlinear3 = FALSE;
 	
 	if(strlen(settings.Interlinear4Module) > 2)
-		interlinear4 = have_module(settings.Interlinear4Module);
+		interlinear4 = check_for_module(settings.Interlinear4Module);
 	else
 		interlinear4 = FALSE;
 	
 	if(strlen(settings.Interlinear5Module) > 2)	
-		interlinear5 = have_module(settings.Interlinear5Module);
+		interlinear5 = check_for_module(settings.Interlinear5Module);
 	else
 		interlinear5 = FALSE;
 	
@@ -252,7 +252,7 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear1Module, "%s", modName);
-	interlinear1 = have_module(settings.Interlinear1Module);
+	interlinear1 = check_for_module(settings.Interlinear1Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -287,7 +287,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear2Module, "%s", modName);
-	interlinear2 = have_module(settings.Interlinear2Module);
+	interlinear2 = check_for_module(settings.Interlinear2Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -321,7 +321,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear3Module, "%s", modName);
-	interlinear3 = have_module(settings.Interlinear3Module);
+	interlinear3 = check_for_module(settings.Interlinear3Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -355,7 +355,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear4Module, "%s", modName);
-	interlinear4 = have_module(settings.Interlinear4Module);
+	interlinear4 = check_for_module(settings.Interlinear4Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -389,7 +389,7 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear5Module, "%s", modName);
-	interlinear5 = have_module(settings.Interlinear5Module);
+	interlinear5 = check_for_module(settings.Interlinear5Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else

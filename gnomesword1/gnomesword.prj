@@ -88,6 +88,7 @@ module.include.files=\
 	src/gui/display_info.h\
 	src/gui/_editor.h\
 	src/gui/gbs.h\
+	src/gui/gbs_dialog.h\
 	src/gui/percomm.h\
 	src/gui/gbs_find.h\
 	src/gui/gtkhtml_display.h\
@@ -162,6 +163,7 @@ module.source.files=\
 	src/gnome/display_info.c\
 	src/gnome/_editor.c\
 	src/gnome/gbs.c\
+	src/gnome/gbs_dialog.c\
 	src/gnome/gbs_find.c\
 	src/gnome/gnomesword.c\
 	src/gnome/gtkhtml_display.c\

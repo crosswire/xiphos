@@ -6,14 +6,14 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=89
-1=139
-2=62
-3=137
-4=535
-5=99
-6=79
-7=130
+0=1005
+1=1120
+2=38
+3=34
+4=1
+5=88
+6=97
+7=255
 8=70
 9=75
 10=179
@@ -45,31 +45,31 @@ ShowLocals=true
 16=
 17=
 
-[breakpoints]
-0=1,,1,3,0,,bibletext.c,1473,2,0,gui_display_text,,1028988713,
-
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/gnome/bibletext.c
+0=/home/terry/gnomesword/gnomesword1/src/gnome/gbs_dialog.c
+1=/home/terry/gnomesword/gnomesword1/src/gnome/gbs.c
+2=/home/terry/gnomesword/gnomesword1/src/gui/gbs_dialog.h
+3=/home/terry/gnomesword/gnomesword1/src/gui/gbs.h
 
 [replace_text]
-0=notebook_search
-1=gtk_radio_button_new(_201_group);
-2=dlg->dialog
-3=dlg->get_input_dialog
-4=get_input_dialog
-5=which_bounds
-6=section
-7=b->
+0=button_close
+1=show_in_statusbar
+2=vt->statusbar
+3=notebook_search
+4=gtk_radio_button_new(_201_group);
+5=dlg->dialog
+6=dlg->get_input_dialog
+7=get_input_dialog
 
 [find_text]
-0=combo_personal
-1=label105
-2=combo2
-3=combo_gbs
-4=set_gbs_page
-5=page
-6=combo_entry1
-7=button_save_mods
+0=gtk_html_new
+1=button_clost
+2=scrolledwindow_html
+3=show_in_appbar
+4=widgets.appbar
+5=combo_personal
+6=label105
+7=combo2
 
 [executer args]
 0=newconfigs

@@ -37,6 +37,7 @@ libgui_a_SOURCES =  \
     editor_toolbar.c \
     fileselection.c \
     gbs.c \
+    gbs_dialog.c \
     gbs_find.c \
     gnomesword.c \
     gtkhtml_display.c \
