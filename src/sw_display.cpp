@@ -49,6 +49,7 @@
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 #include "sw_module_options.h"
+#include "sw_utility.h"
 
 gchar *mycolor;
 
@@ -59,7 +60,6 @@ extern SETTINGS *settings;
 
 /***************************************************************************** 
  * ComEntryDisp - for displaying commentary modules in a GtkHTML widget
- * the mods need to be filtered to html first
  * imodule - the Sword module to display
  *****************************************************************************/
 char ComEntryDisp::Display(SWModule & imodule)
@@ -104,19 +104,12 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	gint mybuflen, utf8len;
 	const gchar **end;
 	string lang, swfont, swfontsize;
-	SWMgr *Mgr;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
 	bool use_gtkhtml_font = false;
 
-	Mgr = new SWMgr();	//-- create sword mgr
-
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
-		ConfigEntMap & section = (*sit).second;
-		swfont = ((entry = section.find("GSFont")) != section.end())? (*entry).second : (string) "";
-		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
-		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
-	}
+	swfont = load_module_font((gchar*)imodule.Name(),"GSFont");
+	swfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
+	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
+	
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (strcmp(swfontsize.c_str(), "")) {
 		use_font_size = (gchar *) swfontsize.c_str();
@@ -166,7 +159,6 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	endHTML(GTK_WIDGET(gtkText));
 	g_free(font);
-	delete Mgr;
 	return 0;
 }
 
@@ -191,37 +183,28 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	const gchar **end;
 	bool newparagraph = false,
 		use_gtkhtml_font = false;
-	string lang, swfont, swfontsize;
-	SWMgr *Mgr;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
+	string lang, gsfont, gsfontsize;
 	GString *str;
 	
 	str = g_string_new("");
 	c = 182;  
-	Mgr = new SWMgr();	//-- create sword mgr
-
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
-		ConfigEntMap & section = (*sit).second;
-		swfont = ((entry = section.find("GSFont")) != section.end())? (*entry).second : (string) "";
-		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
-		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
-	}
-	//swfont = load_module_font(imodule.Name(), NULL);
+	gsfont = load_module_font((gchar*)imodule.Name(),"GSFont");
+	gsfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
+	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
+	//g_warning("%s font = %s",(gchar*)imodule.Name(), (gchar*)gsfont.c_str());
+	
 	font = g_strdup("-adobe-helvetica-*-*");
-	if (strcmp(swfontsize.c_str(), "")) {
-		use_font_size = (gchar *) swfontsize.c_str();
+	if (strcmp(gsfontsize.c_str(), "")) {
+		use_font_size = (gchar *)gsfontsize.c_str();
 	} else {
 		use_font_size = settings->bible_font_size;
 	}
 	
-	if (strcmp(swfont.c_str(), "")) {
-		use_font = (gchar *) swfont.c_str();
+	if (strcmp(gsfont.c_str(), "")) {
+		use_font = (gchar *)gsfont.c_str();
 		use_gtkhtml_font = false;
 	} else {
-		if (!stricmp(lang.c_str(), "") ||
-		    !stricmp(lang.c_str(), "en") ||
-		    !stricmp(lang.c_str(), "de")) {
+		if (!stricmp(lang.c_str(), "") || !stricmp(lang.c_str(), "en") || !stricmp(lang.c_str(), "de")) {
 			use_gtkhtml_font = true;
 			font = g_strdup(settings->default_font);
 		} else if (!stricmp(lang.c_str(), "grc")) {
@@ -280,8 +263,9 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			g_string_append(str,(char *) imodule);
 			marksearchwords(str);
 			utf8str = str->str;			
-		} else 
-			utf8str = (char *) imodule;
+		} else {
+				utf8str = (char *) imodule;			
+		}
 		displayHTML(GTK_WIDGET(gtkText), utf8str,
 			    strlen(utf8str));
 		if (settings->versestyle) {
@@ -318,7 +302,6 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gotoanchorHTML(gtkText, tmpBuf);
 	g_free(font);
 	g_string_free(str,TRUE);
-	delete Mgr;
 	return 0;
 }
 
@@ -332,26 +315,26 @@ void GTKutf8ChapDisp::marksearchwords( GString *str )
 	gint len1, len2, len3, len4;
 	gchar closestr[40], openstr[40];
 	
-	// regular expression search results         ***fixme***
+	//-- regular expression search results         ***fixme***
 	if(settings->searchType == 0) {
 		return;
 	}
-	// close tags
+	//-- close tags
 	sprintf(closestr,"</b></font>");
-	// open tags
+	//-- open tags
 	sprintf(openstr,"<font color=\"%s\"><b>",settings->found_color);
-	// point buf to found verse
+	//-- point buf to found verse
 	buf = str->str;
 	searchbuf = g_strdup(settings->searchText);
 		
-	// if we have a muti word search go here
+	//-- if we have a muti word search go here
 	if(settings->searchType == -2) {
 		char *token;
 		GList *list;
 		gint count=0, i=0;
 		
 		list = NULL;
-		// seperate the search words and add them to a glist
+		//-- seperate the search words and add them to a glist
 		if((token=strtok(searchbuf ," ")) != NULL) {
 			list = g_list_append(list,token);
 			++count;				
@@ -359,48 +342,48 @@ void GTKutf8ChapDisp::marksearchwords( GString *str )
 				list = g_list_append(list,token);
 				++count;
 			}
-		// if we have only one word
+		//-- if we have only one word
 		} else {
 			list = g_list_append(list,searchbuf);
 			count = 1;
 		}
 		list = g_list_first (list);
-		// find each word in the list and mark it
+		//-- find each word in the list and mark it
 		for(i=0; i<count;i++) {
-			// set len1 to length of verse
+			//-- set len1 to length of verse
 			len1 = strlen(buf);
-			// set len2 to length of search word
+			//-- set len2 to length of search word
 			len2 = strlen((gchar*)list->data);
-			// find search word in verse
+			//-- find search word in verse
 			if((tmpbuf = strstr(buf,(gchar*)list->data)) != NULL) {
-				// set len3 to length of tmpbuf (tmpbuf points to first occurance of search word in verse)
+				//-- set len3 to length of tmpbuf (tmpbuf points to first occurance of search word in verse)
 				len3 = strlen(tmpbuf);
-				// set len4 to diff between len1 and len3
+				//-- set len4 to diff between len1 and len3
 				len4 = len1 - len3;
-				// add end tags first (position to add tag to is len4 + len2)
+				//-- add end tags first (position to add tag to is len4 + len2)
 				str = g_string_insert (str, (len4+len2), closestr); 
-				// then add start tags (position to add tag to is len4)
+				//-- then add start tags (position to add tag to is len4)
 				str = g_string_insert (str, len4 , openstr);
 			}
-			// point buf to changed str
+			//-- point buf to changed str
 			buf = str->str;
 			list = g_list_next(list);
 		}	
 		g_list_free(list);
 	
-	// else we have a phrase and only need to mark it
+	//-- else we have a phrase and only need to mark it
 	} else {
 		len1 = strlen(buf);
 		len2 = strlen(searchbuf);
 		tmpbuf = strstr(buf,searchbuf);
 		len3 = strlen(tmpbuf);		
 		len4 = len1 - len3;
-		// place end tag first
+		//-- place end tag first
 		str = g_string_insert (str, (len4+len2) , closestr);
-		// then place start tag
+		//-- then place start tag
 		str = g_string_insert (str, len4 , openstr);		
 	}	
-	// free g_strdup(searchbuf)
+	//-- free searchbuf
 	g_free(searchbuf);
 }
 
@@ -415,19 +398,12 @@ char InterlinearDisp::Display(SWModule & imodule)
 	gchar *utf8str, *use_font, *use_font_size, *font, *token;
 	gint utf8len;
 	string lang, swfont, swfontsize;
-	SWMgr *Mgr;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;
 	static gint row = 1;
-
-	Mgr = new SWMgr();	//-- create sword mgr
-
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
-		ConfigEntMap & section = (*sit).second;
-		swfont = ((entry = section.find("GSFont")) != section.end())? (*entry).second : (string) "";
-		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
-		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
-	}
+	
+	swfont = load_module_font((gchar*)imodule.Name(),"GSFont");
+	swfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
+	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
+	
 	if (strcmp(swfontsize.c_str(), "")) {
 		use_font_size = (gchar *) swfontsize.c_str();
 	} else {
@@ -441,8 +417,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	} else {
 		font = "-adobe-helvetica-*-*";
 		if (!stricmp(lang.c_str(), "") ||
-		    !stricmp(lang.c_str(), "en") ||
-		    !stricmp(lang.c_str(), "de")) {
+			    !stricmp(lang.c_str(), "en") ||
+				    !stricmp(lang.c_str(), "de")) {
 			font = g_strdup(settings->default_font);
 			use_gtkhtml_font = true;			    
 		} else if (!stricmp(lang.c_str(), "grc")) {
@@ -501,7 +477,6 @@ char InterlinearDisp::Display(SWModule & imodule)
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
 	g_free(font);
-	delete Mgr;
 	return 0;
 }
 
