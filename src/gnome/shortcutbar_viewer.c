@@ -31,9 +31,9 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
+#include "gui/bookmarks.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_bookmarks.h"
 #include "main/gs_html.h"
 #include "main/support.h"
 #include "main/settings.h"
@@ -374,7 +374,7 @@ static void on_clistSearchResults_select_row(GtkCList *clist, gint row,
 static void on_btnSBSaveVL_clicked(GtkButton * button,
 				   gpointer user_data)
 {
-	addverselistBM(sblist);
+	gui_verselist_to_bookmarks(sblist);
 }
 
 /******************************************************************************

@@ -484,15 +484,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		if (utf8len) {
 			g_string_free(str,TRUE);
 			str = g_string_new(utf8str);
-			/*gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);*/
 		}
 		
 		if(newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
-			 str = g_string_append (str,paragraphMark);
-			
-			sprintf(tmpbuf,  "%s ", paragraphMark);
+			strcpy(tmpbuf, paragraphMark);
 			utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
 			utf8len = strlen(utf8str);		
 			if (utf8len) {
