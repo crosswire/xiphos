@@ -434,13 +434,13 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 	gtk_box_pack_start(GTK_BOX(vbox87), hbox85, FALSE, TRUE, 0);
 
 	dialog->backwards =
-	    gtk_check_button_new_with_label(_("search backward"));
+	    gtk_check_button_new_with_label(_("Search backwards"));
 	gtk_widget_show(dialog->backwards);
 	gtk_box_pack_start(GTK_BOX(hbox85), dialog->backwards, TRUE,
 			   TRUE, 4);
 
 	dialog->case_sensitive =
-	    gtk_check_button_new_with_label(_("case sensitive"));
+	    gtk_check_button_new_with_label(_("Match case"));
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox85), dialog->case_sensitive,
 			   TRUE, TRUE, 4);
