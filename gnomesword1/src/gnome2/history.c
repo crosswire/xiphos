@@ -37,7 +37,6 @@
 #include "main/settings.h"
 #include "main/xml.h"
 
-#include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 /******************************************************************************

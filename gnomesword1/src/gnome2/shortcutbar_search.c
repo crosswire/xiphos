@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
 #include <regex.h>
 
@@ -110,8 +109,6 @@ void gui_search_update(char percent, void *userData)
 
 void gui_set_search_label(void)
 {
-	gchar search_label[80];
-	gchar *buf = N_("Search");
 /*
 	if (GTK_TOGGLE_BUTTON(radiobutton_search_text)->active) {
 		sprintf(search_label, "%s %s", buf,
@@ -238,8 +235,26 @@ static void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 	GString *str;
 	gint search_params, finds;
 	const gchar *search_string;
-	gchar *search_module;
-
+	gchar *search_module;	
+	gchar search_label[80];
+	gchar *buf = N_("Search");
+	
+	
+	if (GTK_TOGGLE_BUTTON(radiobutton_search_text)->active) {
+		sprintf(search_label, "%s %s", buf,
+			settings.MainWindowModule);
+		strcpy(settings.sb_search_mod,
+		       settings.MainWindowModule);
+	}
+	else if (GTK_TOGGLE_BUTTON(radiobutton_search_comm)->active) {
+		sprintf(search_label, "%s %s", buf,
+			settings.CommWindowModule);
+		strcpy(settings.sb_search_mod,
+		       settings.CommWindowModule);
+	} 
+		
+	
+	
 	search_module = settings.sb_search_mod;
 	p_so->module_name = search_module;
 
