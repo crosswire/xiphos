@@ -1,3 +1,7 @@
+2000-08-30  Michael Meeks  <michael@helixcode.com>
+
+	* widgets/Makefile.am (SUBDIRS): add e-paned back.
+
 2000-08-27  Michael Meeks  <michael@helixcode.com> 
  
  * configure.in: Added sword seek and use logic, from 'BibleTime' 
