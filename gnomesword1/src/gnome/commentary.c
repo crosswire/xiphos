@@ -37,6 +37,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
+#include "gui/shortcutbar_search.h"
 
 #include "main/commentary.h"
 #include "main/settings.h"
@@ -213,7 +214,16 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 		gnome_dialog_close(c_old->find_dialog->dialog);
 		search_comm_find_dlg(c, FALSE, settings.findText);
 	}
-		
+	gui_change_window_title(c->mod_name);
+	/*
+	 * set search module to current text module 
+	 */
+	strcpy(settings.sb_search_mod, c->mod_name);
+	/*
+	 * set search frame label to current commentary module 
+	 */	
+	gui_set_search_label(c->mod_name);
+	
 	settings.comm_last_page = page_num;
 	/*
 	 * set settings.comm_key to current module key
@@ -892,6 +902,16 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	gchar *key;
 	
 	settings.whichwindow = COMMENTARY_WINDOW;
+	
+	gui_change_window_title(c->mod_name);
+	/*
+	 * set search module to current commentary module 
+	 */
+	strcpy(settings.sb_search_mod, c->mod_name);
+	/*
+	 * set search frame label to current commentary module 
+	 */	
+	gui_set_search_label(c->mod_name);
 	
 	switch (event->button) {
 	case 1:

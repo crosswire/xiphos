@@ -6,17 +6,17 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=1005
-1=1120
-2=38
-3=34
-4=1
-5=88
-6=97
-7=255
-8=70
-9=75
-10=179
+0=1
+1=34
+2=68
+3=44
+4=58
+5=27
+6=425
+7=156
+8=34
+9=366
+10=174
 11=228
 12=36
 13=384
@@ -46,10 +46,17 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/gnome/gbs_dialog.c
-1=/home/terry/gnomesword/gnomesword1/src/gnome/gbs.c
-2=/home/terry/gnomesword/gnomesword1/src/gui/gbs_dialog.h
-3=/home/terry/gnomesword/gnomesword1/src/gui/gbs.h
+0=/home/terry/gnomesword/gnomesword1/src/gui/search_dialog.h
+1=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
+2=/home/terry/gnomesword/gnomesword1/src/backend/search.cpp
+3=/home/terry/gnomesword/gnomesword1/src/main/search.c
+4=/home/terry/gnomesword/gnomesword1/src/main/search.h
+5=/home/terry/gnomesword/gnomesword1/src/backend/search.h
+6=/home/terry/gnomesword/gnomesword1/src/gnome/shortcutbar_search.c
+7=/home/terry/gnomesword/gnomesword1/src/main/sword.c
+8=/home/terry/gnomesword/gnomesword1/src/main/settings.h
+9=/home/terry/gnomesword/gnomesword1/src/gnome/shortcutbar_viewer.c
+10=/home/terry/gnomesword/gnomesword1/src/gnome/main_window.c
 
 [replace_text]
 0=button_close
@@ -62,24 +69,24 @@ ShowLocals=true
 7=get_input_dialog
 
 [find_text]
-0=gtk_html_new
-1=button_clost
-2=scrolledwindow_html
-3=show_in_appbar
-4=widgets.appbar
-5=combo_personal
-6=label105
-7=combo2
+0=p_so->ckbCommentary
+1=REG_ICASE
+2=entry_list_modules
+3=frame67
+4=entry_text
+5=clist_range
+6=set_range
+7=add_ranges
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=gs_gui.h
-1=gs_interlinear.h
-2=_percomm.h
-3=set_percomm_page_and_key
-4=mainMgr
-5=SWMgr *mainMgr
-6=backend/viewdict.h
-7=backend/viewcomm.h
+0=REG_ICASE
+1=gs_gui.h
+2=gs_interlinear.h
+3=_percomm.h
+4=set_percomm_page_and_key
+5=mainMgr
+6=SWMgr *mainMgr
+7=backend/viewdict.h

@@ -34,6 +34,19 @@
 #include "backend/search.h"
 
 
+
+void save_custom_modlist(GList * modlist)
+{
+	backend_save_custom_modlist(modlist);
+}
+
+
+GList * load_custom_modlist(void)
+{
+	return backend_load_custom_modlist();
+}
+
+
 /******************************************************************************
  * Name
  *   get_element

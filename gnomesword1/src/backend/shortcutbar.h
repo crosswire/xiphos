@@ -28,12 +28,10 @@ extern "C" {
 #endif
 	
 void backend_save_sb_iconsize(char *filename, char *large_icons);
-GList *backend_load_sb_group(char *filename, char *group_name,
-			char *use_largeicons);
-void backend_save_sb_group(char *filename, char *group_name, int group_num,
-		char *large_icons);
-
-
+GList *backend_load_sb_group(char *filename, 
+			char *group_name, char *use_largeicons);
+void backend_save_sb_group(GList * items, char *filename, 
+	char *group_name, int group_num, char *large_icons);
 GList *backend_get_verse_list(char *modName, char *vlist);
 	
 #ifdef __cplusplus

@@ -31,19 +31,20 @@ extern "C" {
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar	
-		gs_version[16], /* GnomeSWORD version */
+		gs_version[16], 	/* GnomeSWORD version */
 		MainWindowModule[80],	/* module to open at program startup  */
 		CommWindowModule[80],	/* module to open at program startup  */
 		DictWindowModule[80],	/* module to open at program startup  */
 		BookWindowModule[80],	/* module to open at program startup  */
 	        Interlinear1Module[80],	/* module to open at program startup  */
 	        Interlinear2Module[80],	/* module to open at program startup  */
-	        Interlinear3Module[80], 	/* module to open at program startup  */
+	        Interlinear3Module[80], /* module to open at program startup  */
 	        Interlinear4Module[80],	/* module to open at program startup  */
-	        Interlinear5Module[80], 	/* module to open at program startup  */
-	        personalcommentsmod[80], 	/* module to open at program startup  */
-	        devotionalmod[80], /* module to use for devotional */
-	        DefaultDict[80], /* module to use for devotional */
+	        Interlinear5Module[80], /* module to open at program startup  */
+	        personalcommentsmod[80],/* module to open at program startup  */
+		sb_search_mod[80], 	/* module to use for shortcut bar search */
+	        devotionalmod[80], 	/* module to use for devotional */
+	        DefaultDict[80], 	/* module to use for devotional */
 		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
 		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/	        
 		lex_greek_viewer[80], /* module to use for greek lexicon - strongs or thayers - in viewer */
