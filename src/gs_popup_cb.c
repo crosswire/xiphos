@@ -241,39 +241,6 @@ void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void
-on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp1ModSWORD(modName);
-}
-/*
-//----------------------------------------------------------------------------------------------
-void
-on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp2ModSWORD(modName);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp3ModSWORD(modName);
-}
-*/
-//----------------------------------------------------------------------------------------------
 void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
@@ -459,7 +426,12 @@ void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_changeint1mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
-	sprintf(settings->Interlinear1Module,"%s",(gchar *)user_data);
+	gchar modName[16];
+	
+	memset(modName,0,16); 
+	modNameFromDesc(modName, (gchar *) user_data);
+	g_warning(modName);
+	sprintf(settings->Interlinear1Module,"%s",modName);
 	changeVerseSWORD(current_verse);
 }	
 		
@@ -470,9 +442,13 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 void on_changeint2mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
-	sprintf(settings->Interlinear2Module,"%s",(gchar *)user_data);
-	changeVerseSWORD(current_verse);	
-
+	gchar modName[16];
+	
+	memset(modName,0,16); 
+	modNameFromDesc(modName, (gchar *) user_data);
+	g_warning(modName);
+	sprintf(settings->Interlinear2Module,"%s",modName);
+	changeVerseSWORD(current_verse);
 }		
 
 /*******************************************************************************
@@ -480,10 +456,14 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
  *******************************************************************************/	
 void on_changeint3mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
-{
-	sprintf(settings->Interlinear3Module,"%s",(gchar *)user_data);
+{	
+	gchar modName[16];
+	
+	memset(modName,0,16); 
+	modNameFromDesc(modName, (gchar *) user_data);
+	g_warning(modName);
+	sprintf(settings->Interlinear3Module,"%s",modName);
 	changeVerseSWORD(current_verse);
-
 }		
 
 /*******************************************************************************
@@ -492,9 +472,13 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 void on_changeint4mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
-	sprintf(settings->Interlinear4Module,"%s",(gchar *)user_data);
+	gchar modName[16];
+	
+	memset(modName,0,16); 
+	modNameFromDesc(modName, (gchar *) user_data);
+	g_warning(modName);
+	sprintf(settings->Interlinear4Module,"%s",modName);
 	changeVerseSWORD(current_verse);
-
 }		
 
 /*******************************************************************************
@@ -503,9 +487,13 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 void on_changeint5mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data)
 {
-	sprintf(settings->Interlinear5Module,"%s",(gchar *)user_data);
+	gchar modName[16];
+	
+	memset(modName,0,16); 
+	modNameFromDesc(modName, (gchar *) user_data);
+	g_warning(modName);
+	sprintf(settings->Interlinear5Module,"%s",modName);
 	changeVerseSWORD(current_verse);
-
 }
 
 

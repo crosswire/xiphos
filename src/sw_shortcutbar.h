@@ -29,7 +29,7 @@ extern "C" {
 #endif
 	
 #include "gs_gnomesword.h"
-
+gint sbtypefromModNameSBSW(gchar *description);
 void save_iconsizeSW(gchar * filename, gchar *large_icons);	
 GList *loadshortcutbarSW(gchar *filename, gchar *group_name, gchar *use_largeicons);
 void saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_icons);

@@ -124,7 +124,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	/* set the main window size */
 	gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
 	/* setup shortcut bar */
-	setupSB(sbfavoritesmods,	sbbiblemods, sbcommods ,sbdictmods);
+	setupSB(settings);
 	settings->settingslist = NULL;
 	/* set current verse color html */
 	mycolor = settings->currentverse_color;	
@@ -141,11 +141,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	/* create popup menus -- menu.c */
 	createpopupmenus(app, 
 				settings, 
-				biblemods,
 				sbbiblemods,
-				commentarymods,
 				sbcommods,
-				dictionarymods,
 				sbdictmods,
 				percommods);
 	/* add pages to commentary and  dictionary notebooks */

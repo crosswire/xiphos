@@ -60,11 +60,8 @@ removemenuitems(GtkWidget * MainFrm,
 		
 void createpopupmenus(GtkWidget *app, 
 				SETTINGS *settings,
-				GList *biblelist, 
 				GList *bilbeDescription,
-				GList *commentarylist, 
 				GList *comDescription,
-				GList *dictionarylist,
 				GList *dictDescription,
 				GList *percomlist);
 		
