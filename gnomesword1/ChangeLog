@@ -6,6 +6,13 @@
 	* fixed src/main/gs_interlinear.c: again works when not all
 	interlinear modules are present
 
+2002-06-06  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added frame label to docked interlinear and studypad to
+	  give a more uniform look.
+	
+
+
 2002-06-05  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gnome/_bibletext_view.* to gnome/bibletext_dialog.*
