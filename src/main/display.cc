@@ -269,6 +269,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
 	int curBook = key->Book();
+	int curTestament = key->Testament();
 	int curPos = 0;
 	GtkHTML *html = GTK_HTML(gtkText);
 	GtkHTMLStream *stream = gtk_html_begin(html);
@@ -276,7 +277,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar *utf8_key;
 	gchar *buf;
 	gchar *preverse = NULL;
-	gchar *paragraphMark = "&para;";
+	gchar *paragraphMark = NULL;
 	gchar *br = NULL;
 	gchar heading[32];                                          
 	gsize bytes_read;
@@ -284,6 +285,11 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GError **error = NULL;	
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	
+	if(!strcmp(imodule.Name(),"KJV"))
+		paragraphMark = "&para;";
+	else
+		paragraphMark = "";
+		
 	swbuf = "";
 	mf = get_font(imodule.Name());	
 	
@@ -302,6 +308,9 @@ char GTKChapDisp::Display(SWModule &imodule)
 	swbuf = "";
 	main_set_global_options(ops);
 	getVerseBefore(imodule);
+	gtk_html_write(html,stream,swbuf.c_str(), swbuf.length());
+	swbuf = "";
+	
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
@@ -338,19 +347,19 @@ char GTKChapDisp::Display(SWModule &imodule)
 				(key->Verse() == curVerse)
 				?settings.currentverse_color
 				:settings.bible_text_color);
-
+				
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			swbuf += paragraphMark;;
 		}
 		swbuf += (const char *)imodule;
 		
-		if (settings.versestyle) {
-			if ((strstr(swbuf.c_str(), "<!p>") == NULL) &&
-			     (strstr(swbuf.c_str(), "<p>") == NULL) ) {
-				newparagraph = FALSE;
-			} else {
+		if (settings.versestyle) { 
+			if(g_strstr_len(swbuf.c_str(),swbuf.length(),"<!p>")||
+			   g_strstr_len(swbuf.c_str(),swbuf.length(),"<p>")) {
 				newparagraph = TRUE;
+			} else {
+				newparagraph = FALSE;
 			}
 			swbuf.append("</font><br>");
 		} else {
