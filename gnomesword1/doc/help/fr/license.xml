@@ -1,30 +1,30 @@
 <chapter id="license">
 	<title>License</title>
-   		<para>
-    	This program is free software; you can redistribute it and/or
-    	modify it under the terms of the <ulink type="ghelp" url="gnome-help:gpl">GNU General Public
-    	License</ulink> as published by the Free Software Foundation;
-    	either version 2 of the License, or (at your option) any later
-    	version.
-   		</para>
-   		<para>
-    	This program is distributed in the hope that it will be useful, but
-    	WITHOUT ANY WARRANTY; without even the implied warranty of
-    	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    	<citetitle>GNU General Public License</citetitle> for more details.
-   		</para>
-   		<para>
-    	A copy of the <citetitle>GNU General Public License</citetitle> is
-    	included as an appendix to the <citetitle>GNOME Users
-    	Guide</citetitle>.  You may also obtain a copy of the
-    	<citetitle>GNU General Public License</citetitle> from the Free
-    	Software Foundation by visiting <ulink type="http" url="http://www.fsf.org">
-    	their Web site</ulink> or by writing to
-    	<address>
-     	Free Software Foundation, Inc.
-     	<street>59 Temple Place</street> - Suite 330
-     	<city>Boston</city>, <state>MA</state> <postcode>02111-1307</postcode>
-     	<country>USA</country>
-    	</address>
-   		</para>
+   	<para>
+		Ce programme est libre, vous pouvez le redistribuer et/ou le modifier 
+		selon les termes de la <ulink type="ghelp" url="gnome-help:gpl">
+		Licence Publique Générale GNU</ulink> publiée par la Free Software 
+		Foundation (version 2 ou bien toute autre version ultérieure choisie 
+		par vous).
+   	</para>
+   	<para>
+		Ce programme est distribué car potentiellement utile, mais SANS AUCUNE 
+		GARANTIE, ni explicite ni implicite, y compris les garanties de 
+		commercialisation ou d'adaptation dans un but spécifique. Reportez-vous 
+		à la <citetitle>Licence Publique Générale GNU</citetitle> pour plus de 
+		détails.
+   	</para>
+   	<para>
+		Le texte complet de la <citetitle>Licence Publique Générale GNU</citetitle> 
+		peut être consulté en annexe du <citetitle>GNOME Users Guide</citetitle> ou
+		sur le site Internet de la <ulink type="http" url="http://www.fsf.org">Free 
+		Software Foundation</ulink>, ou encore en écrivant à
+
+   	 	<address>
+     			Free Software Foundation, Inc.
+		     	<street>59 Temple Place</street> - Suite 330
+			<city>Boston</city>, <state>MA</state> <postcode>02111-1307</postcode>
+			<country>USA</country>
+	    	</address>
+   	</para>
 </chapter>
