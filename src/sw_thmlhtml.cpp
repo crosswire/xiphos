@@ -160,32 +160,28 @@ char SW_ThMLHTML::ProcessText(char *text, int maxlen)
 	// process desired tokens
 	if (!strncmp(token, "sync type=\"Strongs\" value=\"", 27) && (token[27] == 'H' || token[27] == 'G' || token[27] == 'A')) {
 	  *to++ = '<';
-	  *to++ = 'S';
-	  *to++ = 'M';
 	  *to++ = 'A';
-	  *to++ = 'L';
-	  *to++ = 'L';
+	  *to++ = ' ';
+	  *to++ = 'H';
+	  *to++ = 'R';
+	  *to++ = 'E';	
+	  *to++ = 'F';	
+	  *to++ = '=';
+	  *to++ = '\"';
+	  for (unsigned int i = 5; i < strlen(token); i++){
+		if(token[i] != '\"') 
+			*to++ = token[i];
+	  }
+	  *to++ = '\"';
 	  *to++ = '>';
-	  *to++ = '<';
-	  *to++ = 'E';
-	  *to++ = 'M';
-	  *to++ = '>';
-	  for (unsigned int i = 28; token[i] != '\"'; i++)
-	    *to++ = token[i];
+	  for (unsigned int i = 28; token[i] != '\"'; i++){
+		*to++ = token[i];
+	  }
 	  *to++ = '<';
 	  *to++ = '/';
-	  *to++ = 'E';
-	  *to++ = 'M';
-	  *to++ = '>';
-	  *to++ = '<';
-	  *to++ = '/';
-	  *to++ = 'S';
-	  *to++ = 'M';
 	  *to++ = 'A';
-	  *to++ = 'L';
-	  *to++ = 'L';
-	  *to++ = '>';
-	}
+	  *to++ = '>';	  
+  	}  
 	else if (!strncmp(token, "sync type=\"Morph\" value=\"", 25)) {
 	  *to++ = '<';
 	  *to++ = 'S';
