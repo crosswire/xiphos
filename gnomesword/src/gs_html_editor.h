@@ -49,7 +49,7 @@ struct _GSHTMLEditorControlData {
 	GSList                         *paragraph_group;
 	/* search & replace dialogs */
 	GtkWidget     *search_dialog;
-	GtkWidget    *replace_dialog;
+	gboolean    replace;
 
 	/* html/plain mode settings */
 	gboolean format_html;
@@ -101,5 +101,14 @@ gint load_file(gchar *filename, GSHTMLEditorControlData * ecd);
 
 GtkWidget *studypad_control(GtkWidget *notebook, SETTINGS *s);
 GtkWidget *percom_control(GtkWidget *notebook, SETTINGS *s);
-
+/*** link dialog create and call back ***/
+void set_link_to_module(gchar *linkref, gchar *linkmod, 
+					GSHTMLEditorControlData * ecd);
+void find_word_EDITOR(gchar *word, 
+					GSHTMLEditorControlData * ecd);
+void load_text_from_spell_EDITOR(GtkWidget *text, 
+					GSHTMLEditorControlData * ecd);
+/*** load text from html to speller ***/
+gboolean load_text_for_spell_EDITOR(GtkWidget *text, 
+					GSHTMLEditorControlData * ecd);
 #endif				/* __GS_HTML_EDITOR_H_ */

@@ -314,26 +314,6 @@ on_list1_select_row(GtkCList * clist,
 }
 
 
-
-//----------------------------------------------------------------------------------------------
-void on_btbSpellOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *spell;
-
-	spell = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(spell);
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_btnSpellCancel_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *spell;
-
-	spell = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(spell);
-}
-
 //----------------------------------------------------------------------------------------------
 void on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data)
 {

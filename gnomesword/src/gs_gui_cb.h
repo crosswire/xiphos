@@ -112,10 +112,6 @@ extern "C" {
 				     gpointer user_data);
 	void on_btndialog1Cancel_clicked(GtkButton * button,
 					 gpointer user_data);
-	void on_btnSpellNotes_clicked(GtkButton * button,
-				      gpointer user_data);
-	void on_btnSpellNotes_clicked(GtkButton * button,
-				      gpointer user_data);
 	void on_btnBack_clicked(GtkButton * button, gpointer user_data);
 	void on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data);
 	void on_btnKeyNext_clicked(GtkButton * button, gpointer user_data);

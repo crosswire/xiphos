@@ -53,8 +53,10 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 static GtkWidget *create_pmDict(GList *modsdesc);
 static GtkWidget* create_pmBible(GList * bibleDescription,
 				GList *dictDescription);
+				/*
 static GtkWidget *create_pmEditnote(GtkWidget *app, 
 		GList *mods);
+		*/
 static void loadmenuformmodlist(GtkWidget *pmInt, 
 		GList *mods, 
 		gchar *labelGtkWidget, 
@@ -256,6 +258,7 @@ additemtopopupmenu(GtkWidget * MainFrm, GtkWidget * menu, gchar * itemname,
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
 			      GTK_WIDGET(menuChoice));
 }
+
 /******************************************************************************
  * addseparato - add separator line to menu
  * MainFrm - main window - app
@@ -316,13 +319,13 @@ void createpopupmenus(GtkWidget *app,
 				GList *options) 
 {
 	GtkWidget 		
-		*menu5,
+		//*menu5,
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	
 	
 	menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
-	menu5 = create_pmEditnote(app, percomlist);
+	//menu5 = create_pmEditnote(app, percomlist);
 	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
 	menuBible = create_pmBible(bibleDescription, dictDescription);	
@@ -333,7 +336,7 @@ void createpopupmenus(GtkWidget *app,
 	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_strongs"))->active = settings->strongsint;
 	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_morphs"))->active = settings->morphsint;
 	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_footnotes"))->active = settings->footnotesint;	
-	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
+	//gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
@@ -1318,6 +1321,7 @@ void loadmenuformmodlist(GtkWidget *pmInt, GList *mods,  gchar *label, GtkMenuCa
 	g_list_free(tmp); 
 } 
 
+/*
 static void
 on_cut1_activate                       (GtkMenuItem     *menuitem,
                                         gpointer data)
@@ -1464,7 +1468,7 @@ static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods)
 				 pmEditnote_uiinfo[9].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	tmp = mods;	
-	while (tmp != NULL) { /* add personal comments modules to popup menu */
+	while (tmp != NULL) { 
 		additemtopopupmenu(app, pmEditnote,(gchar *) tmp->data , 
 			(GtkMenuCallback)on_change_module_activate); 
 		tmp = g_list_next(tmp);
@@ -1474,5 +1478,5 @@ static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods)
 	return pmEditnote;
 }
 
-
+*/
 
