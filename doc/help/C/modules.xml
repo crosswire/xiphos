@@ -1,0 +1,95 @@
+<!-- Modules -->
+<chapter id="module-manager">
+	<title>Module Manager</title>
+<!-- Introduction To Module Manager -->
+	<sect1 id="module-introduction">
+  		<title>Introduction To The Module Manager</title>
+		<figure>
+			<title>The Module Manager Dialog</title>
+	        <screenshot>
+	        	<mediaobject>
+	         		<imageobject>
+		     	    	<imagedata fileref="figures/module" format="PNG"/>
+					</imageobject>
+		        	<textobject>
+			        	<phrase>The Module Manager Dialog</phrase>
+					</textobject>
+		        </mediaobject>
+			</screenshot>
+		</figure>
+	</sect1>
+	
+<!-- Sword Configure-->
+	<sect1 id="sword-config">
+	<title>Sword Module Configurations</title>
+		<sect2 id="installation">
+			<title>Sword Module Installations</title>
+			<figure>
+				<title>Sword Module Installations</title>
+	        	<screenshot>
+		        	<mediaobject>
+	         			<imageobject>
+			     	    	<imagedata fileref="figures/sword_config" format="PNG"/>
+						</imageobject>
+		        		<textobject>
+				        	<phrase></phrase>
+						</textobject>
+		        	</mediaobject>
+				</screenshot>
+			</figure>
+		</sect2>
+		<sect2 id="sword-sources">
+			<title>Sword Sources Settings</title>
+			<figure>
+				<title>Sword Sources Settings</title>
+	        	<screenshot>
+		        	<mediaobject>
+	         			<imageobject>
+			     	    	<imagedata fileref="figures/sword_sources" format="PNG"/>
+						</imageobject>
+		        		<textobject>
+				        	<phrase></phrase>
+						</textobject>
+		        	</mediaobject>
+				</screenshot>
+			</figure>
+		</sect2>
+	</sect1>
+	
+<!-- Adding And Removing Modules -->
+	<sect1 id="module-management">
+		<title>Add And Remove Modules</title>
+		<sect2 id="add-module">
+			<title>Adding Sword Modules</title>
+			<figure>
+				<title></title>
+	       		<screenshot>
+			       	<mediaobject>
+	        			<imageobject>
+		     	    		<imagedata fileref="figures/sword_add" format="PNG"/>
+						</imageobject>
+		       			<textobject>
+				        	<phrase></phrase>
+						</textobject>
+			       	</mediaobject>
+				</screenshot>
+			</figure>
+		</sect2>
+		<sect2 id="remove-module">
+			<title>Removing Sword Modules</title>
+			<figure>
+				<title></title>
+	       		<screenshot>
+			       	<mediaobject>
+	        			<imageobject>
+		     	    		<imagedata fileref="figures/sword_remove" format="PNG"/>
+						</imageobject>
+		       			<textobject>
+				        	<phrase></phrase>
+						</textobject>
+			       	</mediaobject>
+				</screenshot>
+			</figure>
+		</sect2>
+	</sect1>
+</chapter>
