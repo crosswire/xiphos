@@ -34,17 +34,16 @@ GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
 GtkWidget *create_listeditor(void);
 
-void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-void on_ok_button1_clicked(GtkButton * button, gpointer user_data);
-void on_cancel_button1_clicked(GtkButton * button, gpointer user_data);
-void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
-
-void
-on_ok_button4_clicked(GtkButton * button, gpointer user_data);
-
-void
-on_cancel_button2_clicked(GtkButton * button, gpointer user_data);
+void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
+		gpointer user_data);
+void on_ok_button1_clicked(GtkButton * button, 
+		gpointer user_data);
+void on_cancel_button1_clicked(GtkButton * button, 
+		gpointer user_data);
+void on_ok_button2_clicked(GtkButton * button, 
+		gpointer user_data);
+void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
+void on_cancel_button2_clicked(GtkButton * button, gpointer user_data);
 
 void
  on_btnAboutOK_clicked(GtkButton * button, gpointer user_data);
@@ -1105,14 +1104,12 @@ void
 				      gpointer user_data);
 	
 	
-        gboolean
-        on_epaned_button_release_event(GtkWidget       *widget,
-                                        GdkEventButton  *event,
-                                        gpointer         user_data);
-                   
-void
-on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
-                                        gpointer         user_data);
+gboolean on_epaned_button_release_event(GtkWidget *widget,
+		GdkEventButton  *event,
+		gpointer  user_data);                   
+void on_cbtnShowHistoryGroup_toggled(GtkToggleButton *togglebutton,
+		gpointer user_data);
+		
 
 #ifdef __cplusplus
 }

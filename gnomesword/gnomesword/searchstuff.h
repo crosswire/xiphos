@@ -15,8 +15,10 @@
  *                                                                         *
  ***************************************************************************/
 #include <gnome.h>
+#include <swmodule.h>
 #include <swmgr.h>
 #include <swdisp.h>
+#include <versekey.h>
 
 GtkWidget* create_dlgSearch(void);
 
