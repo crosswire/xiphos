@@ -22,6 +22,23 @@
 #ifndef ___GBS_H_
 #define ___GBS_H_
 
+typedef struct _gbs_global_ops GBS_GLOBALS;
+struct  _gbs_global_ops {
+	gboolean
+	    words_in_red,
+	    strongs,
+	    morphs,
+	    footnotes,
+	    greekaccents,
+	    lemmas,
+	    scripturerefs,
+	    hebrewpoints, 
+	    hebrewcant, 
+	    headings, 
+	    variants_all, 
+	    variants_primary, 
+	    variants_secondary;
+};
 
 typedef struct _gbsdata GBS_DATA;
 struct _gbsdata {
@@ -47,12 +64,12 @@ struct _gbsdata {
 	gboolean is_locked;
 	gboolean is_dialog;
 	gboolean is_rtol;
+	
+	GBS_GLOBALS *bgo;
 };
 
 typedef struct _nodedata NODEDATA;
 struct _nodedata {
-//	GtkCTreeNode *parent;
-//	GtkCTreeNode *sibling;
 	gchar *buf[3];
 	GdkPixmap *pixmap1;
 	GdkPixmap *pixmap2;
