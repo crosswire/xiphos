@@ -896,33 +896,6 @@ static void add_columns(GtkWidget * treeview)
 
 /******************************************************************************
  * Name
- *   add_row
- *
- * Synopsis
- *   #include "preferences_dialog.h"
- *
- *   void add_row(const gchar * name, GdkPixbuf * icon, GtkListStore * store,
- *	gint page)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void add_row(const gchar * name, GdkPixbuf * icon,
-		    GtkTreeStore * store, gint page)
-{
-/*	GtkTreeIter iter;
-
-	gtk_tree_store_append(store, &iter);
-
-	gtk_tree_store_set(store, &iter, 0, name, 1, page, -1);*/
-}
-
-/******************************************************************************
- * Name
  *   tree_selection_changed
  *
  * Synopsis
@@ -998,33 +971,33 @@ static GtkTreeModel *create_model(void)
 	gtk_tree_store_set(model, &child_iter, 0, "Color", 1, 1, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Special", 1, 2, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Special", 1, 0, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, "General", -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Tabs", 1, 3, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Tabs", 1, 2, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 4, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Panes", 1, 2, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 5, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Misc", 1, 2, -1);
 
 
 	gtk_tree_store_append(model, &iter, NULL);
 	gtk_tree_store_set(model, &iter, 0, "Modules", -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Main", 1, 6, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Main", 1, 3, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Parallel", 1, 7, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Parallel", 1, 3, -1);
 
 	gtk_tree_store_append(model, &child_iter, &iter);
-	gtk_tree_store_set(model, &child_iter, 0, "Lecicons", 1, 8, -1);
+	gtk_tree_store_set(model, &child_iter, 0, "Lecicons", 1, 3, -1);
 
 	return GTK_TREE_MODEL(model);
 }
