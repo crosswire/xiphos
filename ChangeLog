@@ -1,3 +1,9 @@
+2002-05-06  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* split gs_dictlex.* into main/dictlex.* and gnome/_dictlex.*
+	* renamed backend/dictlex.* to dictlex_.*
+
+
 2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed gs_mainmenu_cb.* added gnome/main_menu.*

@@ -160,7 +160,7 @@ struct _settings {
 		whichwindow,      	/* which of the main form html windows is active */
 		intCurVerse,    /* detached interlinear current verse */
 		gbsLastPage,    /* last notebook page before change */
-		dlLastPage,     /* last notebook page before change */
+		dict_last_page,     /* last notebook page before change */
 		commLastPage,     /* last notebook page before change */
 		text_last_page,     /* last notebook page before change */
 		percomm_last_page;     /* last notebook page before change */
@@ -228,7 +228,7 @@ struct _settings {
 	/* store $home directory */
 	char *homedir;
 
-	/* store GnomeSword directory */
+	/* store .GnomeSword directory */
 	char *gSwordDir;
 
 	/* bookmarks directory */

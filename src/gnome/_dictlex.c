@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_dictlex.c - SHORT DESCRIPTION
+ * _dictlex.c - gui for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -20,69 +20,63 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#include <config.h>
+#  include <config.h>
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
 
-#include "gs_gnomesword.h"
-#include "gs_dictlex.h"
-#include "gs_html.h"
-#include "sword.h"
-#include "dictlex.h"
-#include "gs_viewdict_dlg.h"
+/* gnome */
+#include "_dictlex.h"
 #include "cipher_key_dialog.h"
+
+/* main */
 #include "settings.h"
+#include "dictlex.h"
+#include "gs_shortcutbar.h"
+#include "gs_html.h"
+#include "gs_viewdict_dlg.h"
 
 
-extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
+/******************************************************************************
+ * externs
+ */
+ 
+extern gboolean isrunningSD; 
+extern DL_DATA *cur_d;
+extern gboolean dict_display_change;
 
-GList *dl_list;
-//gboolean show_tabs_dl;
+/******************************************************************************
+ * global to this file only 
+ */
 
-/******  start code  ******/
-void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
-{
-	DL_DATA *d;
 
-	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL),
-			      page_num);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
 
-}
+/******************************************************************************
+ * Name
+ *   on_notebook_dictlex_switch_page
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
+ *		GtkNotebookPage * page,	gint page_num, GList * dl_list)	
+ *
+ * Description
+ *    change dictionary module
+ *
+ * Return value
+ *   void
+ */
 
-static void setPageDL(gchar * modname, GList * dl_list)
-{
-	gint page = 0;
-	DL_DATA *d = NULL;
-
-	dl_list = g_list_first(dl_list);
-	while (dl_list != NULL) {
-		d = (DL_DATA *) dl_list->data;
-		if (!strcmp(d->modName, modname))
-			break;
-		++page;
-		dl_list = g_list_next(dl_list);
-	}
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
-
-	settings.dlLastPage = page;
-}
-
-static
-void on_notebookDL_switch_page(GtkNotebook * notebook,
-			       GtkNotebookPage * page,
-			       gint page_num, GList * dl_list)
+void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
+		GtkNotebookPage * page,	gint page_num, GList * dl_list)
 {
 	DL_DATA *d; //, *d_old;
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
 	//-- change tab label to current book name
-
+	cur_d = d;
+	
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
 					(settings.workbook_lower),
 					gtk_notebook_get_nth_page
@@ -99,20 +93,38 @@ void on_notebookDL_switch_page(GtkNotebook * notebook,
 
 	sprintf(settings.DictWindowModule, "%s", d->modName);
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
-	settings.dlLastPage = page_num;
+	settings.dict_last_page = page_num;
 }
 
-static void on_entryDictLookup_changed(GtkEditable * editable,
-				       DL_DATA * d)
+/******************************************************************************
+ * Name
+ *   on_entryDictLookup_changed
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_entryDictLookup_changed(GtkEditable * editable,
+						       DL_DATA * d)	
+ *
+ * Description
+ *    look up text in dictionary entry widget
+ *
+ * Return value
+ *   void
+ */
+
+ static void on_entryDictLookup_changed(GtkEditable * editable,
+						       DL_DATA * d)
 {
 	gint count;
-	gchar *key, *text;
+	gchar *key;
+	char *text;
 	GList *dictkeys = NULL;
 	static gboolean firsttime = TRUE;
 
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
-	strcpy(settings.dictkey, key);
-	backend_displayinDL(d->modName, key);
+	strcpy(settings.dictkey, key);	
+	display_dictionary_page_and_key(d->mod_num, key);
 	if (firsttime)
 		count = 11;
 	else
@@ -120,25 +132,42 @@ static void on_entryDictLookup_changed(GtkEditable * editable,
 		    GTK_CLIST(d->clist)->clist_window_height /
 		    GTK_CLIST(d->clist)->row_height;
 	if (count) {
-		dictkeys = backend_fillDictKeysDL(d->modName, count);
+		dictkeys = fill_dictlex_keys(d->mod_num, count);
 		if (dictkeys) {
 			dictkeys = g_list_first(dictkeys);
 			gtk_clist_clear(GTK_CLIST(d->clist));
 			while (dictkeys != NULL) {
-				text = (gchar *) dictkeys->data;
+				text = (char*) dictkeys->data;
 				gtk_clist_append(GTK_CLIST(d->clist),
 						 &text);
+				g_free(text);
 				dictkeys = g_list_next(dictkeys);
 			}
 			g_list_free(dictkeys);
 		}
 	}
+	
 	firsttime = FALSE;
 }
 
-static void
-on_clistDictLex_select_row(GtkCList * clist,
-			   gint row,
+/******************************************************************************
+ * Name
+ *   on_clistDictLex_select_row
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_clistDictLex_select_row(GtkCList * clist, gint row,
+ *			   gint column, GdkEvent * event, DL_DATA * d)
+ *
+ * Description
+ *    display selected key
+ *
+ * Return value
+ *   void
+ */
+
+static void on_clistDictLex_select_row(GtkCList * clist, gint row,
 			   gint column, GdkEvent * event, DL_DATA * d)
 {
 	gchar *text;
@@ -146,19 +175,66 @@ on_clistDictLex_select_row(GtkCList * clist,
 	gtk_clist_get_text(GTK_CLIST(GTK_WIDGET(clist)), row, column,
 			   &text);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), text);
+
 }
 
-static
-void on_copy_activate(GtkMenuItem * menuitem, DL_DATA * d)
+/******************************************************************************
+ * Name
+ *   on_copy_activate
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_copy_activate(GtkMenuItem * menuitem, DL_DATA * d)	
+ *
+ * Description
+ *    copy selected text to clipboard
+ *
+ * Return value
+ *   void
+ */
+
+static void on_copy_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
 	//copyGS_HTML(d->html);
 }
 
-static
-void on_find_activate(GtkMenuItem * menuitem, DL_DATA * d)
+/******************************************************************************
+ * Name
+ *   on_find_activate
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_find_activate(GtkMenuItem * menuitem, DL_DATA * d)	
+ *
+ * Description
+ *    open find dialog
+ *
+ * Return value
+ *   void
+ */
+
+static void on_find_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
 	//searchGS_FIND_DLG(dl, FALSE, NULL);
 }
+
+/******************************************************************************
+ * Name
+ *  on_view_activate
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    display a different dictionary
+ *
+ * Return value
+ *   void
+ */
 
 static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -168,16 +244,46 @@ static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
 }
 
-static
-void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
+/******************************************************************************
+ * Name
+ *  on_showtabs_activate
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)	
+ *
+ * Description
+ *    hide/show dictlex notebook tabs
+ *
+ * Return value
+ *   void
+ */
+
+static void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
 	s->dict_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookDL),
 				   s->dict_tabs);
 }
 
-static 
-void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+/******************************************************************************
+ * Name
+ *  on_view_new_activate
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)	
+ *
+ * Description
+ *    open view dictionary dialog
+ *
+ * Return value
+ *   void
+ */
+
+static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
 	extern GtkWidget *frameShowDict;
 	static GtkWidget *dlg;
@@ -201,11 +307,42 @@ void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	gdk_window_set_cursor(s->app->window,cursor);
 }
 
-static
-void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
+/******************************************************************************
+ * Name
+ *  on_btnSyncDL_clicked
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)	
+ *
+ * Description
+ *    sync current module with current key
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
 {
 	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 }
+
+/******************************************************************************
+ * Name
+ *  on_unlock_key_activate
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)	
+ *
+ * Description
+ *    open cipher key dialog
+ *
+ * Return value
+ *   void
+ */
 
 static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
@@ -214,8 +351,24 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
 	dlg = gui_create_cipher_key_dialog(d->modName);
 	gtk_widget_show(dlg);
 }
-static
-GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
+
+/******************************************************************************
+ * Name
+ *   gui_create_dictlex_pm
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods)	
+ *
+ * Description
+ *   create a popup menu for the dict/lex pane 
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
+GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods)
 {
 	GtkWidget *pm;
 	GtkAccelGroup *pm_accels;
@@ -356,8 +509,24 @@ GtkWidget *create_pmDL(DL_DATA * dl, GList * mods)
 	return pm;
 }
 
+/******************************************************************************
+ * Name
+ *  gui_create_dictlex_pane
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   GtkWidget *gui_create_dictlex_pane(SETTINGS * s, 
+ *				     DL_DATA * dl, gint count)	
+ *
+ * Description
+ *    create a pane for displaying a dictionary of lexicom
+ *
+ * Return value
+ *   void
+ */
 
-static GtkWidget *create_DictLexPane(SETTINGS * s, GList * mods,
+void gui_create_dictlex_pane(SETTINGS * s, 
 				     DL_DATA * dl, gint count)
 {
 
@@ -370,7 +539,6 @@ static GtkWidget *create_DictLexPane(SETTINGS * s, GList * mods,
 	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
-	GtkWidget *popupmenu;
 	GtkWidget *label;
 
 	frameDict = gtk_frame_new(NULL);
@@ -517,73 +685,7 @@ static GtkWidget *create_DictLexPane(SETTINGS * s, GList * mods,
 	gtk_signal_connect(GTK_OBJECT(dl->clist), "select_row",
 			   GTK_SIGNAL_FUNC(on_clistDictLex_select_row),
 			   dl);
-
-	popupmenu = create_pmDL(dl, mods);
-	gnome_popup_menu_attach(popupmenu, dl->html, NULL);
-	dl->find_dialog = NULL;
-
 	return frameDict;
 }
 
-GList* gui_setup_dict(SETTINGS * s)
-{
-	GList *tmp = NULL;
-	GList *mods = NULL;
-	gchar *modname;
-	gchar *modbuf;
-	gchar *keybuf;
-	DL_DATA *dl;
-	gint count = 0;
-
-	dl_list = NULL;
-
-	mods = backend_get_list_of_mods_by_type(DICT_MODS);
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		modname = (gchar *) tmp->data;
-		dl = g_new(DL_DATA, 1);
-		dl->modName = modname;
-		dl->modDescription =
-		    backend_get_module_description(modname);
-		dl->searchstring = NULL;	
-		dl->has_key = backend_module_is_locked(dl->modName);
-		create_DictLexPane(s, mods, dl, count);
-		backend_newDisplayDL(dl->html, dl->modName, s);
-		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
-		++count;
-		tmp = g_list_next(tmp);
-	}
-
-
-	gtk_signal_connect(GTK_OBJECT(s->notebookDL), "switch_page",
-			   GTK_SIGNAL_FUNC(on_notebookDL_switch_page),
-			   dl_list);
-
-	modbuf = g_strdup(s->DictWindowModule);
-	keybuf = g_strdup(s->dictkey);
-
-	setPageDL(modbuf, dl_list);
-
-	g_free(modbuf);
-	g_free(keybuf);
-	g_list_free(tmp);
-	s->dlLastPage = 0;
-	return mods;
-}
-
-void gui_shutdownDL(void)
-{
-	dl_list = g_list_first(dl_list);
-	while (dl_list != NULL) {
-		DL_DATA *d = (DL_DATA *) dl_list->data;
-		/*if (d->modName)
-   g_free(d->modName); *//* free modNmae */
-		if (d->find_dialog)
-			g_free(d->find_dialog);	/* free any search dialogs created */
-		g_free((DL_DATA *) dl_list->data);
-		dl_list = g_list_next(dl_list);
-	}
-	g_list_free(dl_list);
-
-}
+//******  end of file  ******/

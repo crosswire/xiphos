@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bibletext_.h - support for Sword commentary modules
+ * _dictlex.h - gui for dictionary/lexicon modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,28 +19,21 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef ___DICTLEX_H_
+#define ___DICTLEX_H_
 
-#ifndef __BIBLETEXT__H_
-#define __BIBLETEXT__H_
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+/*
+ * main
+ */
 #include "settings.h"
-	
-const char* backend_get_text_module_description(int modnum);
-void backend_nav_text_module(int modnum, int direction);
-void backend_new_text_display(GtkWidget * html, char *modname,
-					      SETTINGS * s);
-void backend_setup_text(SETTINGS * s);
-void backend_shutdown_text(void);
-void backend_display_text(int modnum, char *key);
-void backend_set_text_global_option(char *option, char *yesno);
-void backend_set_module_unlocked(char *mod_name, int mod_num,char *key);
-gboolean backend_check_for_global_option(int mod_num, char *option);
-	
-#ifdef __cplusplus
-}
-#endif
-#endif				/* __BIBLETEXT__H_ */
+#include "dictlex.h"
+
+void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
+			       GtkNotebookPage * page,
+			       gint page_num, GList * dl_list);
+GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods);
+void gui_create_dictlex_pane(SETTINGS * s,DL_DATA * dl, 
+						gint count);
+							
+
+#endif	/* ___DICTLEX_H_ */
