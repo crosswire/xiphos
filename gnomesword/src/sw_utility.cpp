@@ -53,12 +53,15 @@
 #include "sw_latin1utf8.h"
 #include "sw_gnomesword.h"
 #include "sw_utility.h"
+
+/* sword render filters */
 SWFilter 
-    * gbftohtml,		/* sword render filters */
+    * gbftohtml,		
     *plaintohtml, 
     *thmltohtml, 
     *rwptohtml, 
     *lattoutf8;
+    
 /*** initRenderFiltersUTIL ***/
 void initRenderFiltersUTIL(void)
 {
@@ -81,8 +84,7 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	string encoding;
 	gchar *retval;
 	ConfigEntMap::iterator entry;
-	bool noDriver = true;
-	
+	bool noDriver = true;	
 	
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";

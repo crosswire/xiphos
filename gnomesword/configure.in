@@ -4,6 +4,57 @@ AC_INIT(configure.in)
 AM_INIT_AUTOMAKE(gnomesword, 0.5.2)
 AM_CONFIG_HEADER(config.h)
 
+dnl 
+dnl code from Evolution configure.in
+dnl
+AC_DEFUN(GS_CHECK_LIB, [
+	dispname="$1"
+	pkgname="$2"
+	minvers="$3"
+	maxvers="$4"
+
+	AC_MSG_CHECKING(for $dispname)
+
+	if gnome-config --libs $pkgname > /dev/null 2>&1; then
+		pkgvers=`gnome-config --modversion $pkgname | sed -e 's/^[[^0-9]]*//'`
+	else
+		pkgvers=not
+	fi
+	AC_MSG_RESULT($pkgvers found)
+
+	pkgvers=`echo $pkgvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
+	cmpminvers=`echo $minvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
+	cmpmaxvers=`echo $maxvers | awk -F. '{ print $[]1 * 1000000 + $[]2 * 10000 + $[]3 * 100 + $[]4;}'`
+	ok=yes
+	if test "$pkgvers" -lt $cmpminvers; then
+		ok=no
+	elif test -n "$maxvers"; then
+		if test "$pkgvers" -gt $cmpmaxvers; then
+			ok=no
+		elif test "$maxvers" != "$minvers" -a "$cmpmaxvers" -eq "$pkgvers"; then
+			ok=no
+		fi
+	fi
+	if test $ok = no; then
+		case $maxvers in
+		"")
+			dispvers="$minvers or higher"
+			;;
+		$minvers)
+			dispvers="$minvers (exactly)"
+			;;
+		*)
+			dispvers="$minvers or higher, but less than $maxvers,"
+			;;
+		esac
+
+		AC_MSG_ERROR([
+""
+"You need $dispname $dispvers to build GnomeSword"
+"If you think you already have this installed, consult the README."])
+	fi
+])
+
 dnl Pick up the Gnome macros.
 AM_ACLOCAL_INCLUDE(macros)
  
@@ -42,6 +93,11 @@ AM_PROG_LIBTOOL
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
+
+GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.8.0)
+GS_CHECK_LIB(GAL, gal, 0.7.9.5)
+GS_CHECK_LIB(GtkHTML, gtkhtml, 0.9.0.0)
+GS_CHECK_LIB(GnomePrint, print, 0.25.0.0)
 
 dnl **************************
 dnl  For the spell checker
@@ -148,44 +204,31 @@ if test $have_speller="yes"; then
    AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
 fi
 
+dnl ******************************
+dnl GdkPixbuf
+dnl ******************************
+PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
+PIXBUF_CFLAGS=`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf `
+AC_SUBST(PIXBUF_LIBS)
+AC_SUBST(PIXBUF_CFLAGS)
+have_pixbuf="yes"
 
 dnl ******************************
-dnl GdkPixbuf checking
+dnl GnomePrint 
 dnl ******************************
-have_pixbuf="no"
- AC_MSG_CHECKING(for Gdkpixbuf libraries)
- if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
-    AC_MSG_RESULT(found)
-        PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
-        PIXBUF_CFLAGS=`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf `
-        AC_SUBST(PIXBUF_LIBS)
-        AC_SUBST(PIXBUF_CFLAGS)
-    have_pixbuf="yes"
- else
-    AC_MSG_RESULT(Did not find gdkpixbuf installed)
- fi
+GNOME_PRINT_LIBS=`gnome-config --libs print`
+GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
+AC_SUBST(GNOME_PRINT_LIBS)
+AC_SUBST(GNOME_PRINT_CFLAGS)
+have_gnomeprint="yes"
 
 dnl ******************************
-dnl GnomePrint checking
+dnl GtkHTML
 dnl ******************************
-have_gnomeprint="no"
- AC_MSG_CHECKING(for GnomePrint libraries >= 0.20)
- if gnome-config --libs print > /dev/null 2>&1; then 
-    vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
-        awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
-    if test "$vers" -ge 20; then
-        AC_MSG_RESULT(found)
-        GNOME_PRINT_LIBS=`gnome-config --libs print`
-        GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
-        AC_SUBST(GNOME_PRINT_LIBS)
-        AC_SUBST(GNOME_PRINT_CFLAGS)
-        have_gnomeprint="yes"
-    else
-        AC_MSG_ERROR(You need at least GNOME print 0.20 for this version of gnomesword)
-    fi
- else
-    AC_MSG_ERROR(Did not find GnomePrint installed)
- fi
+GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
+GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
+AC_SUBST(GTKHTML_CFLAGS)
+AC_SUBST(GTKHTML_LIBS)
 
 dnl ******************************
 dnl Gnome App Lib checking
@@ -212,32 +255,7 @@ else
    AC_MSG_ERROR(You need at least GNOME Application libs 0.7.99.5 for this version of GnomeSword)
 fi
 
-dnl ******************************
-dnl GtkHTML checking
-dnl ******************************
-gtkhtml_ok="false"
-AC_MSG_CHECKING(for GtkHTML)
-  if gnome-config --libs gtkhtml > /dev/null 2>&1; then
-	vers=`gnome-config --modversion gtkhtml`
-	case $vers
-	in
-	    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
-	    *) gtkhtml_ok=true ;;
-	esac
-  else
-	gtkhtml_ok=false
-  fi
 
-if $gtkhtml_ok; then
-	AC_MSG_RESULT($vers found)
-else
-	AC_MSG_ERROR(GtkHTML 0.9.x is required to build gnomesword)
-fi
-
-GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
-GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
-AC_SUBST(GTKHTML_CFLAGS)
-AC_SUBST(GTKHTML_LIBS)
 
 EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
 EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"

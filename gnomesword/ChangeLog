@@ -1,3 +1,9 @@
+2001-10-01 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* fixed another shortcut bar bug - caused crash when deleting last 
+	  shortcut item in a group
+	  
+
 2001-09-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added po directory and gettext support
