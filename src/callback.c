@@ -388,62 +388,6 @@ void on_btnExit_clicked(GtkButton * button, gpointer user_data)
 {
 	shutdownSWORD();
 }
-/*
-//----------------------------------------------------------------------------------------------
-gboolean
-on_moduleText_button_press_event(GtkWidget * widget,
-				 GdkEventButton * event,
-				 gpointer user_data)
-{
-	gint versenum;		//-- new verse number
-	//gchar buf[80];
-
-	isstrongs = FALSE;
-	if (event->button == 1){  //-- some one pressed mouse button one
-		if (!GTK_EDITABLE(widget)->has_selection)
-			return FALSE;	//-- we do not have a selection
-		versenum = getversenumber(widget);	//-- get the new verse number
-		if (versenum > 0){	//-- if not a number stop		
-			if (isstrongs){	//-- if we have a storngs number look it up
-				lookupStrongsSWORD(versenum);
-				isstrongs = FALSE;
-			} else {
-				gtk_spin_button_set_value(GTK_SPIN_BUTTON
-							  (lookup_widget
-							   (settings->app,
-							    "spbVerse")),
-							    versenum);	//-- set verse spin button to new number
-				verseSWORD();	//-- change modules to the new verse
-			}
-		}
-	}
-	return TRUE;
-}
-
-//----------------------------------------------------------------------------------------------
-gboolean
-on_textDict_button_press_event (GtkWidget *widget,
-                                 GdkEventButton * event,
-                                 gpointer user_data)
-{
-        gint versenum;          //-- new verse number
-        //gchar buf[80];
-
-        isstrongs = FALSE;
-        if (event->button == 1){  //-- some one pressed mouse button one
-                if (!GTK_EDITABLE(widget)->has_selection)
-                        return FALSE;   //-- we do not have a selection
-                versenum = getdictnumber(widget);      //-- get the new verse number
-                if (versenum > 0){      //-- if not a number stop
-                        if (isstrongs){ //-- if we have a storngs number look it up
-                                lookupStrongsSWORD(versenum);
-                                isstrongs = FALSE;
-                        }
-                }
-        }
-        return TRUE;
-}*/
-
 
 //----------------------------------------------------------------------------------------------
 void /* commentary notebook page changed */
@@ -454,7 +398,6 @@ on_nbTextMods_switch_page(GtkNotebook * notebook,
 	GtkLabel *label;	//-- pointer to page label
 	
 	label = (GtkLabel *) page->tab_label;	//-- get label
-	//nbchangecurModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
 	changecurModSWORD((char *) label->label,TRUE ); 
 }
 
