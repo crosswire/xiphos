@@ -32,12 +32,11 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "display.h"
-#include "sword.h"
-#include "gs_gnomesword.h"
-//#include "gs_shortcutbar.h"
-#include "search_.h"
-#include "settings.h"
+#include "backend/display.h"
+#include "backend/sword.h"
+#include "main/gs_gnomesword.h"
+#include "backend/search_.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * static

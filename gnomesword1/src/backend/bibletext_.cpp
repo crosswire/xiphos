@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -34,13 +34,9 @@
 #include <sys/stat.h>
 #include <string.h>
 
-/*
- * backend
- */
-#include "bibletext_.h"
-
-#include "sword.h"
-#include "display.h"
+#include "backend/bibletext_.h"
+#include "backend/sword.h"
+#include "backend/display.h"
 
 typedef struct _backend_text BE_TEXT;
 struct _backend_text {

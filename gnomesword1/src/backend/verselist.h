@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * verselist.h - parse verse list retrun list
@@ -28,16 +27,16 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 
-	GList *backend_get_verse_list(gchar * modName,
-			      gchar * vlist, SETTINGS * s);
-	void backend_setup_verselist(GtkWidget * html_widget,
-				     SETTINGS * s);
-	void backend_shutdown_verselist(void);
-	void backend_verselist_change_verse(SETTINGS * s, gchar * url);
+GList *backend_get_verse_list(gchar *modName, gchar *vlist, SETTINGS *s);
+void backend_setup_verselist(GtkWidget *html_widget, SETTINGS *s);
+void backend_shutdown_verselist(void);
+void backend_verselist_change_verse(SETTINGS *s, gchar *url);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __VERSELIST_H__ */
+
+#endif
+

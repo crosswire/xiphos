@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * viewdict.cpp - sword support for veiwtext dialog
@@ -21,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -31,9 +30,10 @@
 #include <swmodule.h>
 #include <versekey.h>
 #include <markupfiltmgr.h>
-#include "viewdict.h"
-#include "sword.h"
-#include "display.h"
+
+#include "backend/viewdict.h"
+#include "backend/sword.h"
+#include "backend/display.h"
 
 static SWDisplay *display;	/* to display modules in view dict dialog */
 static SWMgr *mgr;		/* sword mgr for view dict dialog */

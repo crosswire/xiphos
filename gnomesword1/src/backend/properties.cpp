@@ -35,10 +35,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "gs_gnomesword.h"
-#include "properties.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "backend/properties.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 static
 gchar *isON(bool value)

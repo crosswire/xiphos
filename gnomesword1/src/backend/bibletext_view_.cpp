@@ -19,10 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -33,13 +31,11 @@
 #include <versekey.h>
 #include <markupfiltmgr.h>
 
-/* backend */
-#include "bibletext_view_.h"
-#include "sword.h"
-#include "display.h"
+#include "backend/bibletext_view_.h"
+#include "backend/sword.h"
+#include "backend/display.h"
 
-/* main */
-#include "settings.h"
+#include "main/settings.h"
 
 static SWDisplay *dispaly;	/* to display modules in view text dialog */
 static SWMgr *mgr;		/* sword mgr for view text dialog */

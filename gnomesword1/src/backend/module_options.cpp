@@ -21,7 +21,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -36,10 +36,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "gs_gnomesword.h"
-#include "module_options.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "backend/module_options.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * load module option - using sword SWConfig
