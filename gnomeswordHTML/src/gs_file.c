@@ -63,6 +63,8 @@ extern gchar bmarks[50][80];	/* array to store bookmarks - read in form file
 extern gboolean file_changed;	/* set to TRUE if text is study pad has changed
 					- and file is not saved */
 
+extern GtkWidget *text3;
+extern GtkWidget *statusbar2;
 /******************************************************************************
 *******************************************************************************
  *callbacks fileselection dialogs
@@ -349,19 +351,16 @@ void saveFile(gchar * filename)
 	FILE *fp;
 	gint bytes_written, len;
 	gint context_id2;
-	GtkWidget *statusbar;
-
-	statusbar = lookup_widget(MainFrm, "statusbar2");
 	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-					 "GtkSword");
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
+					 "GnomeSword");
 	if (current_filename == NULL || strcmp(current_filename, filename)) {
 		g_free(current_filename);
 		current_filename = g_strdup(filename);
 	}
 	data =
 	    gtk_editable_get_chars(GTK_EDITABLE
-				   (lookup_widget(MainFrm, "text3")), 0,
+				   (text3), 0,
 				   -1);
 	fp = fopen(filename, "w");
 	if (fp == NULL) {
@@ -372,14 +371,14 @@ void saveFile(gchar * filename)
 	bytes_written = fwrite(data, sizeof(gchar), len, fp);
 	fclose(fp);
 	g_free(data);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
 	if (len != bytes_written) {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
 				   "Error saving file.");
 		return;
 	}
 	sprintf(charbuf, "%s - saved.", current_filename);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, charbuf);
+	gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2, charbuf);
 	file_changed = FALSE;
 }
 
@@ -388,38 +387,37 @@ void saveFile(gchar * filename)
  *****************************************************************************/
 void loadFile(GtkWidget * filesel)
 {				
-	GtkWidget *statusbar, *text;
 	gchar filename[255];
 	FILE *fp;
 	gchar buffer[BUFFER_SIZE];
 	gint bytes_read;
 	gint context_id2;
 
-	statusbar = lookup_widget(MainFrm, "statusbar2");
-	text = lookup_widget(MainFrm, "text3");
+	
+	
 	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
 					 "GnomeSword");
 	sprintf(filename, "%s",
 		gtk_file_selection_get_filename(GTK_FILE_SELECTION
 						(filesel)));
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_text_freeze(GTK_TEXT(text));
-	gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+	gtk_text_freeze(GTK_TEXT(text3));
+	gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 	g_free(current_filename);
 	current_filename = NULL;
 	file_changed = FALSE;
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+		gtk_text_thaw(GTK_TEXT(text3));
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
 				   "Could not open file");
 		return;
 	}
 	for (;;) {
 		bytes_read = fread(buffer, sizeof(gchar), BUFFER_SIZE, fp);
 		if (bytes_read > 0)
-			gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
+			gtk_text_insert(GTK_TEXT(text3), NULL, NULL, NULL,
 					buffer, bytes_read);
 
 		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
@@ -428,17 +426,17 @@ void loadFile(GtkWidget * filesel)
 	/* If there is an error while loading, we reset everything to a good state. */
 	if (ferror(fp)) {
 		fclose(fp);
-		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+		gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
+		gtk_text_thaw(GTK_TEXT(text3));
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
 				   "Error loading file.");
 		return;
 	}
 	fclose(fp);
-	gtk_text_thaw(GTK_TEXT(text));
+	gtk_text_thaw(GTK_TEXT(text3));
 	current_filename = g_strdup(filename);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+	gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
 			   current_filename);
 }
 
@@ -446,34 +444,31 @@ void loadFile(GtkWidget * filesel)
  * load file into studypad during program startup
  *****************************************************************************/
 void loadStudyPadFile(gchar * filename)
-{				
-	GtkWidget *statusbar, *text;
+{	
 	FILE *fp;
 	gchar buffer[BUFFER_SIZE];
 	gint bytes_read;
 	gint context_id2;
 
-	statusbar = lookup_widget(MainFrm, "statusbar2");
-	text = lookup_widget(MainFrm, "text3");
 	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
 					 "GnomeSword");
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_text_freeze(GTK_TEXT(text));
-	gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+	gtk_text_freeze(GTK_TEXT(text3));
+	gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 	g_free(current_filename);
 	current_filename = NULL;
 	file_changed = FALSE;
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, filename);	/* Could not open file */
+		gtk_text_thaw(GTK_TEXT(text3));
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2, filename);	/* Could not open file */
 		return;
 	}
 	for (;;) {
 		bytes_read = fread(buffer, sizeof(gchar), BUFFER_SIZE, fp);
 		if (bytes_read > 0)
-			gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
+			gtk_text_insert(GTK_TEXT(text3), NULL, NULL, NULL,
 					buffer, bytes_read);
 
 		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
@@ -482,17 +477,17 @@ void loadStudyPadFile(gchar * filename)
 	/* If there is an error while loading, we reset everything to a good state */
 	if (ferror(fp)) {
 		fclose(fp);
-		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+		gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
+		gtk_text_thaw(GTK_TEXT(text3));
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
 				   "Error loading file.");
 		return;
 	}
 	fclose(fp);
-	gtk_text_thaw(GTK_TEXT(text));
+	gtk_text_thaw(GTK_TEXT(text3));
 	current_filename = g_strdup(filename);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+	gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
 			   current_filename);
 }
 

@@ -43,6 +43,8 @@ extern char *homedir;
 extern gboolean file_changed;	/* ??? */
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern gint answer; /* do we want to save studybad file on shutdown */
+extern GtkWidget *text3;
+extern GtkWidget *statusbar2;
 
 /******************************************************************************
  * StudyPad callbacks
@@ -53,11 +55,8 @@ extern gint answer; /* do we want to save studybad file on shutdown */
 ******************************************************************************/
 void on_btnSPnew_clicked(GtkButton * button, gpointer user_data)
 {
-	GtkWidget *text;
-
-	text = lookup_widget(GTK_WIDGET(button), "text3");
 	/* send text widget to gs_gnomesword.c to start new file */
-	newSP(text);
+	newSP(text3);
 }
 
 /******************************************************************************
@@ -149,9 +148,7 @@ void on_btnSaveFileAs_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void on_btnCut_clicked(GtkButton * button, gpointer user_data)
 {
-	GtkWidget *text;
-	text = lookup_widget(GTK_WIDGET(button), "text3");
-	gtk_editable_cut_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
+	gtk_editable_cut_clipboard(GTK_EDITABLE(GTK_TEXT(text3)));
 }
 
 /******************************************************************************
@@ -159,9 +156,7 @@ void on_btnCut_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void on_btnCopy_clicked(GtkButton * button, gpointer user_data)
 {
-	GtkWidget *text;
-	text = lookup_widget(GTK_WIDGET(button), "text3");
-	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
+	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text3)));
 }
 
 /******************************************************************************
@@ -169,9 +164,7 @@ void on_btnCopy_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void on_btnPaste_clicked(GtkButton * button, gpointer user_data)
 {
-	GtkWidget *text;
-	text = lookup_widget(GTK_WIDGET(button), "text3");
-	gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
+	gtk_text_insert(GTK_TEXT(text3), NULL, //&gtkText->style->black
 			NULL, NULL,
 			gs_clipboard->str, -1);
 }
@@ -184,12 +177,12 @@ void on_text3_changed(GtkEditable * editable, gpointer user_data)
 	GtkWidget *statusbar;
 	gchar charbuf[255];
 
-	statusbar = lookup_widget(GTK_WIDGET(editable), "statusbar2");
+	
 	if (current_filename) {
 		sprintf(charbuf, "%s - modified.", current_filename);
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), 1, charbuf);
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), 1, charbuf);
 	} else {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), 1,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), 1,
 				   "modified");
 	}
 	file_changed = TRUE;
@@ -205,7 +198,6 @@ void on_text3_changed(GtkEditable * editable, gpointer user_data)
 *****************************************************************************/
 void newSP(GtkWidget *text) 
 {
-        GtkWidget *statusbar;
 	GtkWidget *msgbox;
 	gchar *msg;
 	
@@ -226,8 +218,7 @@ void newSP(GtkWidget *text)
         current_filename = NULL;
         gtk_text_set_point(GTK_TEXT(text), 0);
 	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
-	statusbar = lookup_widget((text),"statusbar2");
-	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
+	gtk_statusbar_push (GTK_STATUSBAR (statusbar2), 1, "-untitled-");
 	file_changed = FALSE;	
 }
 

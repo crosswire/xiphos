@@ -33,8 +33,10 @@ extern "C" {
 typedef struct _editor EDITOR;
 struct _editor {
 	GtkWidget *vbox,
+			   *notebook,
 			   *htmlwidget,
-			   *statusbar;
+			   *statusbar,
+			   *text;
 }; 
 
 

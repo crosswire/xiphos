@@ -52,6 +52,7 @@ GtkWidget *htmlTexts;
 GtkWidget *htmlDict;
 GtkWidget *textDict;
 GtkWidget *htmlComments;
+GtkWidget *textComments;
 GtkWidget *noteEditor;
 GtkWidget *statusbarNE;
 
@@ -64,6 +65,8 @@ GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern GtkWidget *appbar1;
 extern gboolean noteModified;
 extern gboolean block_font_style_change;
+
+
 typedef struct _GtkHTMLEditTextProperties GtkHTMLEditTextProperties;
 	
 /*
@@ -98,11 +101,11 @@ save_receiver  (const HTMLEngine *engine,
 *****************************************************************************/
 void savenoteHTML(GtkWidget *app)    
 {
-	GtkWidget *html_widget;
+	//GtkWidget *html_widget;
 	GtkHTML *html;
 	
-	html_widget = lookup_widget(app,"htmlComments");
-	html = GTK_HTML(html_widget);
+	//html_widget = lookup_widget(app,"htmlComments");
+	html = GTK_HTML(htmlComments);
 	gtk_html_set_editable(html,FALSE); 
 	gstr = g_string_new("");
 	if (!gtk_html_save(html, (GtkHTMLSaveReceiverFn)save_receiver, GINT_TO_POINTER (0)))
@@ -347,13 +350,16 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkHTML *html;
 
 	widget = lookup_widget(MainFrm, (gchar *) user_data);
-
+	
 	html = GTK_HTML(widget);
+	gtk_html_copy (html);
+	/*
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
+	
 	g_string_free(gs_clipboard,TRUE);
-	gs_clipboard = g_string_new(buf);
+	gs_clipboard = g_string_new(buf); */
 	//g_print(gs_clipboard->str);
 }
 /***************************************************************************************************
@@ -439,10 +445,13 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	 
 	ed.vbox = lookup_widget(app,"vbox8"); 
 	ed.htmlwidget = gtk_html_new();
+	ed.text = gtk_text_new(NULL, NULL);
 	ed.statusbar = gtk_statusbar_new();
-	 
+	ed.notebook = gtk_notebook_new();
+	
 	htmlComments = create_editor(app, ed);	  
 	statusbarNE = ed.statusbar;
+	textComments = ed.text;
 	
 	textComp1 = gtk_html_new();
 	gtk_widget_ref(textComp1);
