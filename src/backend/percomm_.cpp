@@ -177,6 +177,34 @@ void backend_delete_personal_comment(void)
 	mod->deleteEntry();
 	g_print("\nkey %s of module %s has been deleted\n",mod->KeyText(),mod->Name());
 }
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "percomm_.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+ 
+int backend_is_personal_comment(char * mod_name)
+{
+	SWModule *module = mgr->Modules[mod_name];
+	if (!strcmp((char*)module->getConfigEntry("ModDrv") ,"RawFiles")) {
+		     return TRUE;
+	}
+	return FALSE;
+		
+}
+
 /******************************************************************************
  * Name
  *  backend_setup_percomm

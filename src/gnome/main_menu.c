@@ -44,6 +44,7 @@
 #include "gui/shortcutbar_dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/search_dialog.h"
+#include "gui/studypad_dialog.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"
@@ -450,13 +451,24 @@ static void view_lower_workbook(GtkMenuItem * menuitem,
 
 
 
-static void open_studypad(GtkMenuItem * menuitem,
-				gpointer user_data)
+static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if(settings.use_studypad_dialog) {
+	if (settings.studypad_dialog_exist) {
 		gtk_widget_show(widgets.studypad_dialog);
-		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->window);
+		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->
+				 window);
+	} else {
+		if (settings.use_studypad_dialog) {
+			settings.studypad_dialog_exist =
+			    gui_open_studypad_dialog(settings.
+						     studypadfilename);
+		} else {
+			gtk_notebook_set_page(GTK_NOTEBOOK
+					      (widgets.workbook_lower),
+					      settings.studypad_page);
+		}
 	}
+
 }
 
 
@@ -465,6 +477,12 @@ static void open_studypad(GtkMenuItem * menuitem,
  */
 
 static GnomeUIInfo file1_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Open Studypad"),
+	 N_("Open the Studypad editor"),
+	 open_studypad, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
 	GNOMEUIINFO_END
@@ -491,13 +509,8 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, N_("Studypad"),
-	 N_("Open Studypad"),
-	 open_studypad, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
+					  NULL),
 	GNOMEUIINFO_END
 };
 

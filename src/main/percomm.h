@@ -34,7 +34,7 @@ void set_percomm_key(char * key);
 void change_percomm_module(char * mod_name);
 void save_percomm_note(char *note);
 void delete_percomm_note(void);
-
+int is_personal_comment(char * mod_name);
 #ifdef __cplusplus
 }
 #endif

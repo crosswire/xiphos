@@ -43,6 +43,7 @@ struct _commdata {
 	gchar key[80];
 	gint modnum;
 	gboolean is_locked;
+	gboolean is_percomm;
 	gboolean book_heading;
 	gboolean chapter_heading;
 };

@@ -69,6 +69,7 @@ struct _GSHTMLEditorControlData {
 	/* menu items */
 	 GtkWidget
 	    *editnote,
+	    *toolbars,
 	    *show_tabs,
 	    *file,
 	    *edit2,
@@ -132,9 +133,12 @@ struct _GSHTMLEditorControlData {
 
 void gui_update_statusbar(GSHTMLEditorControlData *ecd);
 GSHTMLEditorControlData *gs_html_editor_control_data_new(void);
-void gs_html_editor_control_data_destroy(GSHTMLEditorControlData *cd);
-void on_editor_destroy(GtkObject *object, GSHTMLEditorControlData *ecd);
-void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title);
+void gui_html_editor_control_data_destroy(GtkObject *object, 
+					GSHTMLEditorControlData *cd);
+/*void gui_editor_destroy(GtkObject *object, 
+					GSHTMLEditorControlData *ecd);
+void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor,
+						const gchar *title);*/
 
 #endif
 

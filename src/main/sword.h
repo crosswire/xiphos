@@ -44,7 +44,6 @@ extern "C" {
 
 /*** end defs ***/
 
-//#include "gui/font_dialog.h"
 
 typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
