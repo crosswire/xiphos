@@ -55,14 +55,14 @@ int mod_mgr_uninstall(const char *mod_name)
 	return backend_uninstall_module(mod_name);
 }
 
-void mod_mgr_remote_install(const char *source_name, const char *mod_name)
+int mod_mgr_remote_install(const char *source_name, const char *mod_name)
 {
-	backend_remote_install_module(source_name, mod_name);
+	return backend_remote_install_module(source_name, mod_name);
 }
 
-void mod_mgr_local_install_module(const char *dir, const char *mod_name)
+int mod_mgr_local_install_module(const char *dir, const char *mod_name)
 {
-	backend_local_install_module(dir, mod_name);
+	return backend_local_install_module(dir, mod_name);
 }
 GList *mod_mgr_list_local_modules(const char *dir)
 {
@@ -74,9 +74,9 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 	return backend_module_mgr_remote_list_modules(source_name);
 }
 
-void mod_mgr_refresh_remote_source(const char *source_name)
+int mod_mgr_refresh_remote_source(const char *source_name)
 {
-	backend_module_mgr_refresh_remote_source(source_name);
+	return backend_module_mgr_refresh_remote_source(source_name);
 }
 
 void mod_mgr_init_config()
