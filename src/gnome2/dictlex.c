@@ -323,10 +323,12 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 	
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
 	d->key = g_strdup(key);
+	//xml_set_value("GnomeSword", "key", "dictionary", d->key);
+	
+	text = get_dictlex_text(d->mod_name, d->key);
+	d->key = get_key_from_module(2, d->mod_name);
 	settings.dictkey = d->key;
 	xml_set_value("GnomeSword", "key", "dictionary", d->key);
-
-	text = get_dictlex_text(d->mod_name, d->key);
 	if (text) {
 		entry_display(d->html, d->mod_name, text, d->key, TRUE);
 		free(text);
@@ -603,7 +605,8 @@ static void create_dictlex_pane(DL_DATA * dl)
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
 	g_signal_connect(GTK_OBJECT(dl->html), "on_url",
-			   G_CALLBACK(gui_url), (gpointer) widgets.app);
+			   G_CALLBACK(gui_url), 
+			   GINT_TO_POINTER(DICTIONARY_TYPE));
 	g_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 
