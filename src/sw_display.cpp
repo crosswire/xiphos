@@ -595,8 +595,12 @@ char IntDisplay(SETTINGS *s)
 	
 	extern SWMgr
 		*mainMgr1;
-	extern GtkHTMLStream *htmlstream;
-	gint utf8len;
+	
+	extern GtkHTMLStream 
+		*htmlstream;
+	
+	gint 
+		utf8len;
 	
 	
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);	
@@ -635,35 +639,40 @@ char IntDisplay(SETTINGS *s)
 			bgColor = "#f1f1f1";				
 		}	
 		//--interlinearMod0
-		DisplayIndividualMod(interlinearMod0, 
-				key, 
-				bgColor, 
+		if(interlinearMod0) 
+			DisplayIndividualMod(interlinearMod0,
+				key,
+				bgColor,
 				textColor,
 				s);
 		
 		//--interlinearMod1
-		DisplayIndividualMod(interlinearMod1, 
-				key, 
-				bgColor, 
+		if(interlinearMod1)
+			DisplayIndividualMod(interlinearMod1,
+				key,
+				bgColor,
 				textColor,
 				s);
 		
 		//--interlinearMod2
-		DisplayIndividualMod(interlinearMod2, 
+		if(interlinearMod2)
+			DisplayIndividualMod(interlinearMod2, 
 				key, 
 				bgColor, 
 				textColor,
 				s);
 		
 		//--interlinearMod3
-		DisplayIndividualMod(interlinearMod3, 
+		if(interlinearMod3)
+			DisplayIndividualMod(interlinearMod3, 
 				key, 
 				bgColor, 
 				textColor,
 				s);
 		
 		//--interlinearMod4
-		DisplayIndividualMod(interlinearMod4, 
+		if(interlinearMod4)
+			DisplayIndividualMod(interlinearMod4, 
 				key, 
 				bgColor, 
 				textColor,

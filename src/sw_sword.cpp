@@ -516,49 +516,58 @@ void updateIntDlg(SETTINGS *s)
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 	}
 	
-
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	if(interlinearMod0) {
+		sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 	}
 	
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear2Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	if(interlinearMod1) {	
+		sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear2Module);		
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 	}
 	
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear3Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	if(interlinearMod2) {		
+		sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear3Module);		
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 	}
 	
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear4Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	if(interlinearMod3) {		
+		sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear4Module);		
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 	}
 	
-	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear5Module);		
-	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	if(interlinearMod4) {		
+		sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear5Module);		
+		utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
 	}
-	
+		
 	sprintf(buf,"%s","</tr>");		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 	}
-	
+		
 	
 	/******      ******/
 	IntDisplay(s);
