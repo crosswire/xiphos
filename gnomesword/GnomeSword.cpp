@@ -381,12 +381,13 @@ initSword(GtkWidget *mainform,  //-- apps main form
 						      shortcut_types[0],
 						      curcomMod->Name());
 			}
-		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook		
+		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook	
 			havedict = true; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
 			notebook = lookup_widget(mainform,"notebook4");
-			additemtognomemenu(MainFrm,curdictMod->Name(), curdictMod->Name(),aboutrememberlastitem3 , (GtkMenuCallback)on_kjv1_activate );
+			additemtognomemenu(MainFrm,curdictMod->Name(), curdictMod->Name(),aboutrememberlastitem3 ,
+						 (GtkMenuCallback)on_kjv1_activate );
 			sprintf(aboutrememberlastitem3,"%s%s","_Help/About Sword Modules/Dictionaries-Lexicons/",curdictMod->Name());	
 			empty_notebook_page = gtk_vbox_new (FALSE, 0);
   		    	gtk_widget_show (empty_notebook_page);
@@ -396,8 +397,10 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sprintf(mybuf,"%d",pg2);			
 			if(!strcmp(curdictMod->Name(),"StrongsHebrew")) hebrewpage = pg2;
 			if(!strcmp(curdictMod->Name(),"StrongsGreek")) greekpage = pg2;
-			additemtognomemenu(MainFrm, curdictMod->Name(), mybuf, rememberlastitemDict, (GtkMenuCallback)on_dict_select_activate );
-			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg2++), label);
+			additemtognomemenu(MainFrm, curdictMod->Name(), mybuf, rememberlastitemDict,
+						 (GtkMenuCallback)on_dict_select_activate );
+			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 
+						pg2++), label);
 			sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",curdictMod->Name());
 			curdictMod->Disp(dictDisplay);
 			if(settings->showcomgroup){			
@@ -412,8 +415,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
   	//----------------------------------------------------------------- set up percom editor module and menu
 	for (it = percomMgr->Modules.begin(); it != percomMgr->Modules.end(); it++){
 		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is Commentaries
-		 	
-			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ //-- if driver is RawFiles			
+		 	 //-- if driver is RawFiles			
+			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
 				 percomMod = (*it).second;
 				 if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formatted display
 				 else percomMod->Disp(percomDisplay);                     //-- else standard displey
@@ -430,7 +433,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
 			 //------------------------------------------------------------------------------- add to menubar
-			additemtognomemenu(MainFrm, comp1Mod->Name(), comp1Mod->Name(),rememberlastitem , (GtkMenuCallback)on_1st_interlinear_window1_activate);
+			additemtognomemenu(MainFrm, comp1Mod->Name(), comp1Mod->Name(),rememberlastitem ,
+						 (GtkMenuCallback)on_1st_interlinear_window1_activate);
 			//---------------------------------------------------- remember last item - so next item will be place below it       	
 			sprintf(rememberlastitem,"%s%s","_View/Interlinear1 Window/",comp1Mod->Name());			
 			//----------------------------------------------------------------------------- add to popup menu
@@ -446,7 +450,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		comp2Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
 			 //------------------------------------------------------------------------------- add to menubar
-			additemtognomemenu(MainFrm, comp2Mod->Name(), comp2Mod->Name(),rememberlastitem , (GtkMenuCallback)on_2nd_interlinear_window1_activate);
+			additemtognomemenu(MainFrm, comp2Mod->Name(), comp2Mod->Name(),rememberlastitem ,
+						 (GtkMenuCallback)on_2nd_interlinear_window1_activate);
 			//---------------------------------------------------- remember last item - so next item will be place below it       	
 			sprintf(rememberlastitem,"%s%s","_View/Interlinear2 Window/",comp2Mod->Name());			
 			//----------------------------------------------------------------------------- add to popup menu
@@ -462,8 +467,9 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		comp3Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){
 			 //------------------------------------------------------------------------------- add to menubar
-			additemtognomemenu(MainFrm, comp3Mod->Name(), comp3Mod->Name(),rememberlastitem , (GtkMenuCallback)on_3rd_interlinear_window1_activate);
-			//---------------------------------------------------- remember last item - so next item will be place below it       	
+			additemtognomemenu(MainFrm, comp3Mod->Name(), comp3Mod->Name(),rememberlastitem ,
+						 (GtkMenuCallback)on_3rd_interlinear_window1_activate);
+			//---------------------------------------------------- remember last item - so next item will be place below it	
 			sprintf(rememberlastitem,"%s%s","_View/Interlinear3 Window/",comp3Mod->Name());			
 			//----------------------------------------------------------------------------- add to popup menu
 			additemtopopupmenu(MainFrm, menu4, comp3Mod->Name(), (GtkMenuCallback)on_3rd_interlinear_window1_activate);
@@ -477,11 +483,12 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	if(havedict){ //-- let's don't do this if we don't have at least one dictionary / lexicon
 			
 		gint pagenum = 0; //-- set page to 0 (first page in notebook)
-	
-		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page; //-- if save page is less than actual number of pages use saved page number else 0
+		//-- if save page is less than actual number of pages use saved page number else 0
+		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page; 
 		notebook = lookup_widget(mainform,"notebook4"); //-- get notebook
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); //-- set notebook page	
-		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook), //-- get the label from the notebook page (module name)
+		//-- get the label from the notebook page (module name)		
+		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook), 
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
 		it = mainMgr->Modules.find((char *)label1->label); //-- fint the module using text from label	
 		if (it != mainMgr->Modules.end()){
@@ -495,7 +502,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
                       NULL);
                 if(settings->showdicttabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
-	}else gtk_widget_hide(lookup_widget(MainFrm,"hbox8")); //-- hide dictionary section of window if we do not have at least one dictionary / lexicon 
+	}else gtk_widget_hide(lookup_widget(MainFrm,"hbox8")); //-- hide dictionary section of window if we do not have at least one dict/lex
 	
 	//---------------------------------------------------------------------------- set com module to open notebook page	
 	if(havecomm){ //-- let's don't do this if we don't have at least one commentary	
