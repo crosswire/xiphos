@@ -309,7 +309,12 @@ void on_copy_activate(GtkMenuItem *menuitem,
 {
 	copyGS_HTML(gbs->html);
 }
-
+//----------------------------------------------------------------------------------------------
+static
+void on_print_item_activate(GtkMenuItem * menuitem, GBS_DATA *gbs)
+{
+	html_print(gbs->html);		
+}
 static
 void on_find_activate(GtkMenuItem *menuitem,
 			       GBS_DATA *gbs)
@@ -424,6 +429,7 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	GtkWidget *pmGBS;
 	GtkAccelGroup *pmGBS_accels;
 	GtkWidget *copy;
+	GtkWidget *print_item;
 	GtkWidget *separator;
 	GtkWidget *lookup_word;
 	GtkWidget *lookup_word_menu;
@@ -457,6 +463,22 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 			    (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (copy);
 	gtk_container_add (GTK_CONTAINER (pmGBS), copy);
+
+	print_item = gtk_menu_item_new_with_label(_("Print Page"));
+	gtk_widget_ref(print_item);
+	gtk_object_set_data_full(GTK_OBJECT(pmGBS),
+				 "print_item", print_item,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(print_item);
+	gtk_container_add(GTK_CONTAINER(pmGBS),print_item);
+		
+	separator = gtk_menu_item_new ();
+  	gtk_widget_ref (separator);
+  	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator);
+  	gtk_container_add (GTK_CONTAINER (pmGBS), separator);
+  	gtk_widget_set_sensitive (separator, FALSE);
 
 	find = gtk_menu_item_new_with_label (_("Find"));
 	gtk_widget_ref (find);
@@ -622,6 +644,11 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	gtk_signal_connect (GTK_OBJECT (copy), "activate",
                       GTK_SIGNAL_FUNC (on_copy_activate),
                       gbs);
+	
+	gtk_signal_connect(GTK_OBJECT(print_item), "activate",	
+			   GTK_SIGNAL_FUNC(on_print_item_activate),
+			   gbs);
+	
 	gtk_signal_connect (GTK_OBJECT (find), "activate",
                       GTK_SIGNAL_FUNC (on_find_activate),
                       gbs);
