@@ -40,7 +40,7 @@ static GtkWidget *label_current_font;
 static GtkWidget *button_ok;
 static gboolean new_font_set = FALSE;
 
-
+ 
 /******************************************************************************
  * Name
  *   get_html_font_name
@@ -72,7 +72,7 @@ static gchar *get_html_font_name(gchar *fontname)
 			break;
 	}
 	
-	return strdup(buf);
+	return g_strdup(buf);
 }
 
 /******************************************************************************
