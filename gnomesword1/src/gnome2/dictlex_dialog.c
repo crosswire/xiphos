@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gal/e-paned/e-hpaned.h>
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/gtkhtml_display.h"
@@ -366,15 +365,15 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 	gtk_box_pack_start(GTK_BOX(vbox), dlg->frame, TRUE, TRUE,
 			   0);
 
-	hpaned7 = e_hpaned_new();
+	hpaned7 = gtk_hpaned_new();
 	gtk_widget_show(hpaned7);
 	gtk_container_add(GTK_CONTAINER(dlg->frame), hpaned7);
-	e_paned_set_position(E_PANED(hpaned7),
+	gtk_paned_set_position(GTK_PANED(hpaned7),
 				     220);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox56);
-	e_paned_pack1(E_PANED(hpaned7), vbox56, FALSE, TRUE);
+	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, FALSE, TRUE);
 
 
 	toolbarDLKey =
@@ -433,7 +432,7 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_show(frameDictHTML);
-	e_paned_pack2(E_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);

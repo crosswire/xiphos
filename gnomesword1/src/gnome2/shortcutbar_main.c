@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gal/e-paned/e-hpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/shortcut-bar/e-vscrolled-bar.h>
 #include <gal/widgets/e-unicode.h>
@@ -118,9 +117,9 @@ void showSBGroup(gint groupnum)
 		biblepanesize =
 		    (settings.gs_width -
 		     settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(widgets.epaned),
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
-		e_paned_set_position(E_PANED
+		gtk_paned_set_position(GTK_PANED
 				     (widgets.hpaned),
 				     biblepanesize);
 		settings.showshortcutbar = TRUE;
@@ -1343,7 +1342,7 @@ void gui_setup_shortcut_bar(void)
 
 	widgets.shortcutbar = shortcut_bar;
 
-	e_paned_pack1(E_PANED(widgets.epaned), shortcut_bar, FALSE, TRUE);
+	gtk_paned_pack1(GTK_PANED(widgets.epaned), shortcut_bar, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
 	/*
 	 * shortcut bar created now add groups and shortcuts
@@ -1711,17 +1710,17 @@ void gui_shortcutbar_showhide(void)
 		settings.showshortcutbar = FALSE;
 		settings.biblepane_width = settings.gs_width / 2;
 		gtk_widget_hide(widgets.shortcutbar);
-		e_paned_set_position(E_PANED(widgets.epaned), 0);
-		e_paned_set_position(E_PANED
+		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
+		gtk_paned_set_position(GTK_PANED
 				     (widgets.hpaned),
 				     settings.biblepane_width);
 	} else {
 		settings.showshortcutbar = TRUE;
 		settings.biblepane_width =
 		    (settings.gs_width - settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(widgets.epaned),
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
-		e_paned_set_position(E_PANED
+		gtk_paned_set_position(GTK_PANED
 				     (widgets.hpaned),
 				     settings.biblepane_width);
 		gtk_widget_show(widgets.shortcutbar);
@@ -1752,7 +1751,7 @@ void gui_set_shortcutbar_porgram_start(void)
 	 */
 	if (settings.showshortcutbar) {
 		gtk_widget_show(widgets.shortcutbar);
-		e_paned_set_position(E_PANED(widgets.epaned),
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 	}
 
@@ -1763,16 +1762,16 @@ void gui_set_shortcutbar_porgram_start(void)
 
 	else {
 		gtk_widget_hide(widgets.shortcutbar);
-		e_paned_set_position(E_PANED(widgets.epaned),
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				     1);
 	}
 
 	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(widgets.vpaned),
+	gtk_paned_set_position(GTK_PANED(widgets.vpaned),
 			     settings.upperpane_hight);
 
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(widgets.hpaned),
+	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 			     settings.biblepane_width);
 
 	if (!settings.docked) {

@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gal/e-paned/e-hpaned.h>
 
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
@@ -33,7 +32,6 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 static GtkWidget* gui_create_shortcutbar_dialog(void);
@@ -67,8 +65,8 @@ void gui_attach_detach_shortcutbar(void)
 		gtk_widget_reparent(widgets.shortcutbar, vbox_dock);
 		settings.showshortcutbar = TRUE;
 		gtk_widget_show(widgets.shortcutbar);
-		e_paned_set_position(E_PANED(widgets.epaned), 0);
-		e_paned_set_position(E_PANED
+		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
+		gtk_paned_set_position(GTK_PANED
 				     (widgets.hpaned),
 				     biblepanesize);
 		gtk_widget_show(widgets.dock_sb);
@@ -76,9 +74,9 @@ void gui_attach_detach_shortcutbar(void)
 		settings.docked = TRUE;
 		biblepanesize =
 		    (settings.gs_width - settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(widgets.epaned),
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
-		e_paned_set_position(E_PANED(widgets.hpaned),
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				     biblepanesize);
 		gtk_widget_reparent(widgets.shortcutbar,
 				    widgets.epaned);

@@ -118,11 +118,11 @@
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
 
-/* Define if you want to use aspell */
-#undef USE_ASPELL
-
 /* Define if you want to use Gnome2 */
 #undef USE_GNOME2
+
+/* Define if you want to use pspell */
+#undef USE_PSPELL
 
 /* Define if you want to spell checking */
 #undef USE_SPELL
