@@ -1,43 +1,37 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */ 
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_history.c
-    * -------------------
-    * Thu Feb 1 2001
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
+/*
+ * GnomeSword Bible Study Tool
+ * gs_history.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
-  
- #ifdef HAVE_CONFIG_H
-#  include <config.h>
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
 #endif
+
 #include <gnome.h>
 
 #include "gs_gnomesword.h"
 #include "sword.h"
 #include "gs_history.h"
 #include "gs_gui_cb.h"
-//#include "gs_mainmenu_cb.h"
 #include "gs_menu.h"
 #include "support.h"
+#include "settings.h"
 
 /*
  * gnome
@@ -53,7 +47,6 @@ gint currenthistoryitem = 0;
 gboolean addhistoryitem = FALSE; /* do we need to add item to history */
 gboolean firstbackclick = TRUE;
 
-extern SETTINGS *settings;
 extern gint groupnum4;
 extern gchar *shortcut_types[];
 
@@ -72,7 +65,7 @@ void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
         gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), FALSE);
 	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
 	
-        if(settings->showhistorygroup){
+        if(settings.showhistorygroup){
         	for(i = historyitems-1; i >= 0; i--) {
         		e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 						  groupnum4,
@@ -107,10 +100,10 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	}
 	historylist[historyitems].itemnum = historyitems;	
 	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
-	                        GTK_NOTEBOOK(settings->notebook_comm));		
+	                        GTK_NOTEBOOK(settings.notebook_comm));		
 	sprintf(historylist[historyitems].verseref,"%s",ref); 
-	sprintf(historylist[historyitems].textmod,"%s",settings->MainWindowModule);	
-	sprintf(historylist[historyitems].commod,"%s", settings->CommWindowModule);
+	sprintf(historylist[historyitems].textmod,"%s",settings.MainWindowModule);	
+	sprintf(historylist[historyitems].commod,"%s", settings.CommWindowModule);
 	
 	++historyitems;	
 	currenthistoryitem = historyitems;
@@ -119,7 +112,7 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
 	updatehistorymenu(app);
 	firstbackclick = TRUE;
-	if(settings->showhistorygroup){
+	if(settings.showhistorygroup){
                 updatehistoryshortcutbar(app, shortcut_bar);
 	}
 }

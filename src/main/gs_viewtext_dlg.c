@@ -1,33 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_viewtext_dlg.c
-     * -------------------
-     * Sat Mar 24 2001 
-     * copyright (C) 2001 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_viewtext_dlg.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -42,11 +35,15 @@
 #include "gs_information_dlg.h"
 #include "verselist.h"
 #include "support.h"
+#include "settings.h"
 
-/****************************************************************************************
- *globals
- ****************************************************************************************/
-gboolean isrunningVT = FALSE;	/* is the view text dialog runing */
+/******************************************************************************
+ * globals
+ *****************************************************************************/
+
+/* is the view text dialog runing */
+gboolean isrunningVT = FALSE;
+
 GtkWidget *text;
 GList *textList;
 GtkWidget *dlgViewText;
@@ -55,17 +52,16 @@ GtkWidget *cbeBook;
 GtkWidget *spbVTChapter;
 GtkWidget *spbVTVerse;
 
-
-/****************************************************************************************
+/******************************************************************************
  * externs
- ****************************************************************************************/
+ *****************************************************************************/
+
 extern gchar current_verse[];
-extern SETTINGS *settings;
 extern gboolean gsI_isrunning;
 
-/****************************************************************************************
+/******************************************************************************
  * update the book, chapter and verse contorls
- ****************************************************************************************/
+ *****************************************************************************/
 static void updatecontrols(void)
 {
 	gchar *buf;
@@ -108,7 +104,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 		if (*url == 'G') {
 			++url;
-			modName = g_strdup(settings->lex_greek);
+			modName = g_strdup(settings.lex_greek);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
 			g_free(buf);
@@ -117,7 +113,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 		if (*url == 'H') {
 			++url;
-			modName = g_strdup(settings->lex_hebrew);
+			modName = g_strdup(settings.lex_hebrew);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
 			g_free(buf);
@@ -155,9 +151,9 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		mybuf = strchr(url, '=');
 		++mybuf;
 		buf = g_strdup(mybuf);
-		settings->whichwindow = 0;
-		modbuf = get_module_name(settings);
-		display_verse_list(modbuf, buf, settings);
+		settings.whichwindow = 0;
+		modbuf = get_module_name(&settings);
+		display_verse_list(modbuf, buf, &settings);
 		g_free(buf);
 
 	}
@@ -302,7 +298,7 @@ static void additemstooptionsmenu(GtkWidget * shellmenu,
 								  *)
 						       tmp->data);
 		sprintf(menuName, "optionNum%d", viewNumber++);
-		gtk_object_set_data(GTK_OBJECT(settings->app), menuName,
+		gtk_object_set_data(GTK_OBJECT(settings.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
@@ -313,40 +309,40 @@ static void additemstooptionsmenu(GtkWidget * shellmenu,
 
 		/*              
 		   if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {       
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->strongsint;      
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.strongsint;      
 		   }
 
 		   if(!strcmp((gchar *) tmp->data,"Footnotes" )) {              
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->footnotesint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.footnotesint;
 		   }
 
 		   if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->morphsint;
-		   //gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.morphsint;
+		   //gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings.app,"btnMorphs")), settings.morphs);
 		   }
 
 		   if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->hebrewpointsint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.hebrewpointsint;
 		   }
 
 		   if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->cantillationmarksint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.cantillationmarksint;
 		   }
 
 		   if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.greekaccentsint;
 		   }    
 
 		   if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->crossrefint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.crossrefint;
 		   }    
 
 		   if(!strcmp((gchar *) tmp->data, "Lemmas")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->lemmasint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.lemmasint;
 		   }            
 
 		   if(!strcmp((gchar *) tmp->data, "Headings")) {
-		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->headingsint;
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings.headingsint;
 		   }    
 		 */
 		tmp = g_list_next(tmp);
@@ -676,7 +672,7 @@ GtkWidget *create_dlgViewText(GList * glist)
 	}
 	g_list_free(textList);	
 	
-	gtk_entry_set_text(GTK_ENTRY(cbeModule), settings->MainWindowModule);
+	gtk_entry_set_text(GTK_ENTRY(cbeModule), settings.MainWindowModule);
 	cbBook_items = backend_get_books();
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), cbBook_items);
 	backend_goto_verse_viewtext(current_verse);

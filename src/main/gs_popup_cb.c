@@ -1,32 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_popup_cb.c
-    * -------------------
-    * Thu Feb 8 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-  */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU Library General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_popup_cb.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -52,12 +46,14 @@
 #include "gs_detach_int.h"
 #include "gs_interlinear.h"
 #include "support.h"
+#include "settings.h"
 
-gboolean autoscroll;		/* is commentary window set to scroll with text window */
+/* is commentary window set to scroll with text window */
+gboolean autoscroll;
+
 /******************************************************************************
  * externals
-******************************************************************************/
-extern SETTINGS * settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
+ *****************************************************************************/
 
 extern GtkWidget * NEtext, *htmlComments, *htmlCommentaries;
 
@@ -87,14 +83,14 @@ void on_undockInt_activate(GtkMenuItem * menuitem, SETTINGS * s)
 //----------------------------------------------------------------------------------------------
 void on_edit_book_activate(GtkMenuItem * menuitem, gchar * user_data)
 {
-	set_html_edit(lookup_widget(settings->app, user_data));
+	set_html_edit(lookup_widget(settings.app, user_data));
 }
 
 
 //----------------------------------------------------------------------------------------------
 void on_save_book_activate(GtkMenuItem * menuitem, gchar * user_data)
 {
-	savebookEDITOR(lookup_widget(settings->app, user_data));
+	savebookEDITOR(lookup_widget(settings.app, user_data));
 }
 
 
@@ -102,7 +98,7 @@ void on_save_book_activate(GtkMenuItem * menuitem, gchar * user_data)
 //----------------------------------------------------------------------------------------------
 void on_print_item_activate(GtkMenuItem * menuitem, gchar * html)
 {
-	html_print(lookup_widget(settings->app, html));
+	html_print(lookup_widget(settings.app, html));
 }
 
 
@@ -131,7 +127,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 /*	GtkWidget *text;
 	gchar *buf;
 
-	text = lookup_widget(settings->app, "textCommentaries");
+	text = lookup_widget(settings.app, "textCommentaries");
 	if (!GTK_EDITABLE(text)->has_selection)
 		return;		//-- do we have a selection?
 	buf =
@@ -160,8 +156,8 @@ on_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
 /*	GtkWidget *entry, *text;
 	gchar *buf;
 
-	entry = lookup_widget(settings->app, "dictionarySearchText");
-	text = lookup_widget(settings->app, "moduleText");
+	entry = lookup_widget(settings.app, "dictionarySearchText");
+	text = lookup_widget(settings.app, "moduleText");
 	if (GTK_EDITABLE(text)->has_selection) {
 		buf =
 		    gtk_editable_get_chars(GTK_EDITABLE(text),
@@ -182,8 +178,8 @@ on_lookup_selection2_activate(GtkMenuItem * menuitem,
 /*	GtkWidget *entry, *text;
 	gchar *buf;
 
-	entry = lookup_widget(settings->app, "dictionarySearchText");
-	text = lookup_widget(settings->app, "textCommentaries");
+	entry = lookup_widget(settings.app, "dictionarySearchText");
+	text = lookup_widget(settings.app, "textCommentaries");
 	if (GTK_EDITABLE(text)->has_selection) {
 		buf =
 		    gtk_editable_get_chars(GTK_EDITABLE(text),
@@ -207,7 +203,7 @@ void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
-	text = lookup_widget(settings->app, "textComments");
+	text = lookup_widget(settings.app, "textComments");
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
@@ -217,7 +213,7 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
 
-	text = lookup_widget(settings->app, "textComments");
+	text = lookup_widget(settings.app, "textComments");
 	gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
 			NULL, NULL,
 			gs_clipboard->str, -1);
@@ -235,13 +231,13 @@ on_about_this_module_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
 	if (!strcmp((gchar *) user_data, "Bible"))
-		settings->whichwindow = MAIN_TEXT_WINDOW;
+		settings.whichwindow = MAIN_TEXT_WINDOW;
 	else if (!strcmp((gchar *) user_data, "commentary"))
-		settings->whichwindow = COMMENTARY_WINDOW;
+		settings.whichwindow = COMMENTARY_WINDOW;
 	else if (!strcmp((gchar *) user_data, "dictionary"))
-		settings->whichwindow = DICTIONARY_WINDOW;
+		settings.whichwindow = DICTIONARY_WINDOW;
 
-	display_about_module_dialog(get_module_name(settings), FALSE);
+	display_about_module_dialog(get_module_name(&settings), FALSE);
 }
 
 /*******************************************************************************
@@ -252,7 +248,7 @@ void on_auto_scroll1_activate(GtkMenuItem * menuitem,
 {
 	GtkWidget *toolbar;
 
-	toolbar = lookup_widget(settings->app, "handlebox17");
+	toolbar = lookup_widget(settings.app, "handlebox17");
 
 	autoscroll = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	if (autoscroll)
@@ -270,12 +266,12 @@ void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
 		gtk_widget_show(lookup_widget
-				(settings->app, (gchar *) user_data));
+				(settings.app, (gchar *) user_data));
 	else
 		gtk_widget_hide(lookup_widget
-				(settings->app, (gchar *) user_data));
+				(settings.app, (gchar *) user_data));
 	if (!strcmp((gchar *) user_data, "notebook4"))
-		settings->dict_tabs =
+		settings.dict_tabs =
 		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
 
@@ -292,12 +288,12 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
-	sprintf(settings->Interlinear1Module, "%s", modName);
+	sprintf(settings.Interlinear1Module, "%s", modName);
 	//change_verse(current_verse);
-	if (settings->dockedInt)
-		update_interlinear_page(settings);
+	if (settings.dockedInt)
+		update_interlinear_page(&settings);
 	else
-		update_interlinear_page_detached(settings);
+		update_interlinear_page_detached(&settings);
 }
 
 
@@ -313,12 +309,12 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
-	sprintf(settings->Interlinear2Module, "%s", modName);
+	sprintf(settings.Interlinear2Module, "%s", modName);
 	//change_verse(current_verse);
-	if (settings->dockedInt)
-		update_interlinear_page(settings);
+	if (settings.dockedInt)
+		update_interlinear_page(&settings);
 	else
-		update_interlinear_page_detached(settings);
+		update_interlinear_page_detached(&settings);
 }
 
 /*******************************************************************************
@@ -333,12 +329,12 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
-	sprintf(settings->Interlinear3Module, "%s", modName);
+	sprintf(settings.Interlinear3Module, "%s", modName);
 	//change_verse(current_verse);
-	if (settings->dockedInt)
-		update_interlinear_page(settings);
+	if (settings.dockedInt)
+		update_interlinear_page(&settings);
 	else
-		update_interlinear_page_detached(settings);
+		update_interlinear_page_detached(&settings);
 }
 
 /*******************************************************************************
@@ -353,12 +349,12 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
-	sprintf(settings->Interlinear4Module, "%s", modName);
+	sprintf(settings.Interlinear4Module, "%s", modName);
 	//change_verse(current_verse);
-	if (settings->dockedInt)
-		update_interlinear_page(settings);
+	if (settings.dockedInt)
+		update_interlinear_page(&settings);
 	else
-		update_interlinear_page_detached(settings);
+		update_interlinear_page_detached(&settings);
 }
 
 /*******************************************************************************
@@ -373,12 +369,12 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	backend_module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
-	sprintf(settings->Interlinear5Module, "%s", modName);
+	sprintf(settings.Interlinear5Module, "%s", modName);
 	//change_verse(current_verse);
-	if (settings->dockedInt)
-		update_interlinear_page(settings);
+	if (settings.dockedInt)
+		update_interlinear_page(&settings);
 	else
-		update_interlinear_page_detached(settings);
+		update_interlinear_page_detached(&settings);
 }
 
 
@@ -389,7 +385,7 @@ void on_int_global_options_activate(GtkMenuItem * menuitem,
 	set_interlinear_module_global_options((gchar *) user_data,
 					      GTK_CHECK_MENU_ITEM
 					      (menuitem)->active,
-						settings);
+						&settings);
 }
 
 void on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -409,7 +405,7 @@ void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint modNum;
 
 	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(settings->app, "notebook4");	//-- get notebook
+	notebook = lookup_widget(settings.app, "notebook4");	//-- get notebook
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 
@@ -420,7 +416,7 @@ void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint modNum;
 
 	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(settings->app, "notebook1");	//-- get notebook
+	notebook = lookup_widget(settings.app, "notebook1");	//-- get notebook
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 */
 }

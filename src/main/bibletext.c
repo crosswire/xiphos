@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -33,24 +33,21 @@
 #include "gs_viewtext_dlg.h"
 #include "cipher_key_dialog.h"
 #include "module_options.h"
+#include "settings.h"
 
-/*
- * frontend
- */
-#include "_bibletext.h" 
-/*
- * main
- */
+/* frontend */
+#include "_bibletext.h"
+
+/* main */
 #include "bibletext.h"
-/*
- * backend
- */
+
+/* backend */
 #include "bibletext_.h"
 
 /******************************************************************************
  * externs
  */
-extern SETTINGS *settings;
+
 extern gboolean isrunningVT;
 extern GList *options;
 
@@ -85,7 +82,7 @@ void text_page_changed(gint page_num, TEXT_DATA *t)
 	/*
 	 * remember new module name
 	 */
-	sprintf(settings->MainWindowModule, "%s", t->mod_name);
+	sprintf(settings.MainWindowModule, "%s", t->mod_name);
 	/*
 	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
 	 */
@@ -93,12 +90,12 @@ void text_page_changed(gint page_num, TEXT_DATA *t)
 	/*
 	 * remember page number
 	 */
-	settings->text_last_page = page_num;
+	settings.text_last_page = page_num;
 	/*
 	 * display new module with current verse
 	 */
 	if (display_change) {
-		set_text_page_and_key(page_num,settings->currentverse);
+		set_text_page_and_key(page_num,settings.currentverse);
 	}
 	/*
 	 * set global options for current module 
@@ -181,10 +178,10 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 		on_off = "Off";
 	}
 	
-	backend_save_module_options(settings->MainWindowModule,
+	backend_save_module_options(settings.MainWindowModule,
 				    option, on_off);
 	backend_set_text_global_option(option, on_off);
-	display_text(settings->currentverse);
+	display_text(settings.currentverse);
 }
 
 /******************************************************************************
@@ -206,7 +203,7 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 void set_text_variant_global_option(gchar * option, gchar * choice)
 {
 	backend_set_text_global_option(option, choice);
-	display_text(settings->currentverse);
+	display_text(settings.currentverse);
 }
 
 /******************************************************************************
@@ -270,7 +267,7 @@ void set_options_on_page_change(TEXT_DATA * t)
 			backend_set_text_global_option("Textual Variants", "Secondary Reading");
 		else if(GTK_RADIO_MENU_ITEM(t->t_btn_all)->check_menu_item.active)
 			backend_set_text_global_option("Textual Variants", "All Readings");
-		display_text(settings->currentverse);
+		display_text(settings.currentverse);
 	}
 }
 
@@ -297,9 +294,9 @@ void set_text_page_and_key(gint page_num, gchar * key)
 	 * called by on_notebook_text_switch_page
 	 */
 	display_change = FALSE;
-	if (settings->text_last_page != page_num) {
+	if (settings.text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
-				      (settings->notebook_text),
+				      (settings.notebook_text),
 				      page_num);
 	}
 
@@ -369,7 +366,7 @@ static void set_page_text(gchar * modname, GList * text_list,
 void display_text(gchar * key) 
 {
 	if (!cur_t->is_locked)
-		backend_display_text(settings->text_last_page, key);
+		backend_display_text(settings.text_last_page, key);
 }
 
 /******************************************************************************
@@ -474,5 +471,3 @@ void shutdown_text(void)
 		 text_list = g_list_next(text_list);
 	} g_list_free(text_list);
 }
-
-/******  end of file  ******/
