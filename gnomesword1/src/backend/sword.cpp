@@ -128,7 +128,7 @@ char *backend_get_sword_locale(void)
 	else {
 		OLD_CODESET = "iso8859-1";
 #ifdef DEBUG
-		g_warning("locale not found");
+		g_print("locale not found\n");
 #endif
 	}
 	return retval;

@@ -341,13 +341,14 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	navbar_main.is_dialog = FALSE;
 	navbar_main.key = g_strdup(settings.currentverse);
 	navbar_main.module_name = g_strdup(settings.MainWindowModule);
+	
 	hbox3 = gtk_hbox_new(FALSE, 2);
 	gtk_widget_show(hbox3);
 	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
-	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, eventbox,
 			     _("Move backwards through history"), NULL);
 
@@ -369,7 +370,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
-	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, eventbox,
 			     _("Move foward through history"), NULL);
 
@@ -396,7 +397,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
-	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, eventbox,
 			     _("Select a Book of the Bible"), NULL);
 
@@ -428,7 +429,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
-	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, eventbox, _("Change Chapter"),
 			     NULL);
 
@@ -462,7 +463,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	eventbox = gtk_event_box_new();
 	gtk_widget_show(eventbox);
-	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox3), eventbox, FALSE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, eventbox, _("Change Verse"),
 			     NULL);
 

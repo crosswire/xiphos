@@ -1117,12 +1117,14 @@ void main_do_dialog_search(gpointer user_data)
 
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(search1.notebook), 1);
 
-	search_type = GTK_TOGGLE_BUTTON
-	    (search1.rb_regexp)->active ? 0 :
+	search_type = 
+	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
-	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 : -3;
+	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 :
+	    GTK_TOGGLE_BUTTON(search1.rb_indexed_word)->active ? -4 : -3;
 
 	settings.searchType = search_type;
+	
 
 	search_params = GTK_TOGGLE_BUTTON
 	    (search1.cb_case_sensitive)->active ? 0 : REG_ICASE;
@@ -1149,6 +1151,7 @@ void main_do_dialog_search(gpointer user_data)
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 		gnome_appbar_set_status(GNOME_APPBAR
 					(search1.progressbar), buf);
+		//backendSearch->do_module_index(module,TRUE);
 
 		finds = backendSearch->do_module_search(module, search_string,
 					 search_type, search_params, TRUE);
@@ -1166,7 +1169,6 @@ void main_do_dialog_search(gpointer user_data)
 			gtk_html_write(GTK_HTML(html), htmlstream2,
 				       str->str, str->len);
 		}
-
 		g_free(module);
 		search_mods = g_list_next(search_mods);
 	}
