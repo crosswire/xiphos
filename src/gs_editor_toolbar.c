@@ -551,7 +551,7 @@ html_destroy_cb (GtkObject *object,
 static GtkWidget *
 create_style_toolbar (GSHTMLEditorControlData *cd)
 {
-	GtkWidget *frame, *handleboxEditorBar;
+	GtkWidget *handleboxEditorBar;
 
 	handleboxEditorBar = gtk_handle_box_new ();
 	//frame = gtk_frame_new (NULL);
