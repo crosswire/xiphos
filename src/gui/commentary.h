@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _commentary.h - gui for commentary modules
+ * commentary.h - gui for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -38,13 +38,15 @@ struct _commdata {
 	GtkWidget *btn_chap_heading;
 	GtkWidget *showtabs;
 	GtkWidget *showtoolbar;
-	gchar *modName;
-	gchar *searchstring;
+	gchar *mod_name;
+	gchar *search_string;
 	gchar key[80];
 	gint modnum;
 	gboolean has_key;
+	gboolean book_heading;
+	gboolean chapter_heading;
 	COMMFindDialog *find_dialog;
-};	
+};
 
 void gui_set_commentary_page_and_key(gint page_num,
 				     gchar * key);

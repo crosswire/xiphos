@@ -27,34 +27,35 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 
 void backend_first_init(void);
 void backend_init_sword(void);
 GList * backend_get_global_options_list(void);
-void backend_module_name_from_description(gchar * mod_name, gchar * mod_desc);
+void backend_module_name_from_description(char * mod_name, char * mod_desc);
 void backend_shutdown(void);
 void backend_set_locale(char *locale);
 char *backend_get_valid_key(char *key);
 const char *backend_get_book_from_key(char *key);
 int backend_get_chapter_from_key(char *key);
 int backend_get_verse_from_key(char *key);
-void backend_change_percom_module(gchar * modName);
-void backend_set_global_option(gint window, gchar *option, gchar *yesno);
+void backend_change_percom_module(char * modName);
+void backend_set_global_option(int window, char *option, char *yesno);
 GList *backend_get_books(void);
 const char *backend_get_sword_version(void);
 void backend_save_module_key(char *mod_name, char *key);
-int backend_get_mod_type(gchar * modName);
+int backend_get_mod_type(char * modName);
 GList *backend_get_list_of_mods_by_type(char *mod_type);
 GList *backend_get_list_of_devotion_modules(void);
 GList *backend_get_list_of_percom_modules(void);
 GList *backend_get_mod_description_list_SWORD(char *mod_type);
-gchar *backend_get_module_description(gchar * modName);
+gchar *backend_get_module_description(char * modName);
 gchar *backend_get_path_to_mods(void);
-gchar *backend_get_mod_aboutSWORD(gchar * modname);
+gchar *backend_get_mod_aboutSWORD(char * modname);
 int backend_get_module_page(char *module_name, char *module_type);
 char *backend_get_module_font_name(char *mod_name);
-gboolean backend_module_is_locked(char *mod_name);
+char *backend_get_module_font_size(char *mod_name);
+int backend_module_is_locked(char *mod_name);
 char *backend_get_cipher_key(char *mod_name);
 	
 #ifdef __cplusplus

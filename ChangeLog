@@ -1,3 +1,14 @@
+2002-07-01  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed /backend/viewcomm.*
+	* removed /backend/viewdict.*
+	* removed /backend/bibletext_view_.*
+	* changed gnome/commentary_dialog.c to open multiple dialogs.
+	* changed gnome/dictlex_dialog.c to open multiple dialogs.
+	* added gnome/gtkhtml_display.c and gui/gtkhtml_display.h these 
+	  will replace backend/display.* eventually
+
+
 2002-06-26  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* changed gnome/bibletext_dialog.c to open multiple dialogs.

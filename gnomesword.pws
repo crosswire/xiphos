@@ -6,22 +6,22 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=221
-1=168
+0=105
+1=1
 2=35
-3=254
-4=37
-5=311
-6=333
-7=1168
-8=28
-9=25
-10=1
-11=131
-12=28
-13=926
-14=1
-15=37
+3=28
+4=31
+5=310
+6=1076
+7=38
+8=272
+9=225
+10=290
+11=32
+12=36
+13=384
+14=57
+15=176
 16=1
 17=1
 
@@ -29,7 +29,7 @@ ShowLocals=true
 0=
 1=
 2=
-3=990,
+3=
 4=
 5=
 6=
@@ -46,42 +46,41 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-1=/home/terry/Projects/gnomesword1/src/backend/bibletext_view_.cpp
-2=/home/terry/Projects/gnomesword1/src/backend/bibletext_view_.h
-3=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
-4=/home/terry/Projects/gnomesword1/src/gui/bibletext_dialog.h
-5=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+0=/home/terry/Projects/gnomesword1/src/gnome/dictlex_dialog.c
+1=/home/terry/Projects/gnomesword1/src/gui/dictlex_dialog.h
+2=/home/terry/Projects/gnomesword1/src/gui/dictlex.h
+3=/home/terry/Projects/gnomesword1/src/gnome/dictlex.c
+4=/home/terry/Projects/gnomesword1/src/main/dictlex.c
 
 [replace_text]
-0=vt->spb_verse
-1=vt->spb_chapter
-2=vt->cbe_book
-3=vt->btn_close
-4=vt->btn_sync
-5=vt->btn_new
-6=vt->cbe_module
-7=vt->combo_module
+0=html_widget
+1=comm_display
+2=vc->
+3=toolbar
+4=vc->btn_close
+5=vc->html
+6=vc->btn_next
+7=vc->btn_prev
 
 [find_text]
-0=get_book_viewtext
-1=vt_current_verse
-2=update_controls
-3=gsI_isrunning
-4=on_modops_activate
-5=on_btnGotoVerse_clicked
-6=on_linkVT_clicked
-7=goto_verse_viewtext
+0=dictlex_
+1=viewcomm
+2=settings.dictkey
+3=module_new_menu
+4=comm_display
+5=havebible
+6=viewtext
+7=chapter_display
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=gui/_gbs.h
-1=gs_shortcutbar.h
-2=create_shortcutbar_viewer.h
-3=preferences_dlg
-4=gs_info_box.h
-5=create_InfoBox
-6=create_InfoBoxf
-7=find_dlg_defs.h
+0=backend/viewdict.h
+1=backend/viewcomm.h
+2=#include "backend/viewcomm.h"
+3=gui/_gbs.h
+4=gs_shortcutbar.h
+5=create_shortcutbar_viewer.h
+6=preferences_dlg
+7=gs_info_box.h

@@ -1219,7 +1219,7 @@ void gui_setup_gbs(GList *mods)
 		bookname = (gchar *)tmp->data;
 		gbs = g_new(GBS_DATA, 1);
 		gbs->bookName = bookname;
-		gbs->searchstring = NULL;
+		gbs->search_string = NULL;
 		gbs->booknum = count;
 		gbs->find_dialog = NULL;	
 		gbs->has_key = module_is_locked(gbs->bookName);
