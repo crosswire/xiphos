@@ -28,66 +28,66 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-	typedef struct _text_find_dialog Text_Find_Dialog;
-	struct _text_find_dialog {
-		GnomeDialog *dialog;
-		GtkWidget *htmlwidget;
-		GtkWidget *entry;
-		GtkWidget *backward;
-		GtkWidget *case_sensitive;
-		gboolean regular;
-	};
+typedef struct _text_find_dialog Text_Find_Dialog;
+struct _text_find_dialog {
+	GnomeDialog *dialog;
+	GtkWidget *htmlwidget;
+	GtkWidget *entry;
+	GtkWidget *backward;
+	GtkWidget *case_sensitive;
+	gboolean regular;
+};
 
-	typedef struct _text_data TEXT_DATA;
-	struct _text_data {
-		GtkWidget *html;
-		GtkWidget *frame;
-		GtkWidget *showtabs;
-		GtkWidget *t_btn_strongs;
-		GtkWidget *t_btn_morphs;
-		GtkWidget *t_btn_footnotes;
-		GtkWidget *t_btn_accents;
-		GtkWidget *t_btn_lemmas;
-		GtkWidget *t_btn_scripturerefs;
-		GtkWidget *t_btn_points;
-		GtkWidget *t_btn_cant;
-		GtkWidget *t_btn_headings;
-		GtkWidget *t_btn_primary;
-		GtkWidget *t_btn_secondary;
-		GtkWidget *t_btn_all;
-		gchar *mod_name;
-		gchar *mod_description;
-		gchar *search_string;
-		gchar *key;
-		gint mod_num;
-		gboolean is_locked;
-		gboolean
-		    gbfstrongs,
-		    thmlstrongs,
-		    gbfmorphs,
-		    thmlmorphs,
-		    gbffootnotes,
-		    thmlfootnotes,
-		    greekaccents,
-		    lemmas,
-		    scripturerefs,
-		    hebrewpoints, 
-		    hebrewcant, 
-		    headings, 
-		    variants;
-		Text_Find_Dialog *find_dialog;
-	};
-	
-	void text_page_changed(gint page_num, TEXT_DATA *t);
-	void set_text_page_and_key(gint page_num, gchar * key);
-	void set_text_module_global_option(gchar * option,
-					   gboolean choice);
-	void set_text_variant_global_option(gchar * option,
-					    gchar * choice);
-	void set_options_on_page_change(TEXT_DATA * t);
-	GList *setup_text(SETTINGS * s);
-	void shutdown_text(void);
-	void display_text(gchar * key);
+typedef struct _text_data TEXT_DATA;
+struct _text_data {
+	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *showtabs;
+	GtkWidget *t_btn_strongs;
+	GtkWidget *t_btn_morphs;
+	GtkWidget *t_btn_footnotes;
+	GtkWidget *t_btn_accents;
+	GtkWidget *t_btn_lemmas;
+	GtkWidget *t_btn_scripturerefs;
+	GtkWidget *t_btn_points;
+	GtkWidget *t_btn_cant;
+	GtkWidget *t_btn_headings;
+	GtkWidget *t_btn_primary;
+	GtkWidget *t_btn_secondary;
+	GtkWidget *t_btn_all;
+	gchar *mod_name;
+	gchar *mod_description;
+	gchar *search_string;
+	gchar *key;
+	gint mod_num;
+	gboolean is_locked;
+	gboolean
+	    gbfstrongs,
+	    thmlstrongs,
+	    gbfmorphs,
+	    thmlmorphs,
+	    gbffootnotes,
+	    thmlfootnotes,
+	    greekaccents,
+	    lemmas,
+	    scripturerefs,
+	    hebrewpoints, 
+	    hebrewcant, 
+	    headings, 
+	    variants;
+	Text_Find_Dialog *find_dialog;
+};
+
+void text_page_changed(gint page_num, TEXT_DATA *t);
+void set_text_page_and_key(gint page_num, gchar * key);
+void set_text_module_global_option(gchar * option,
+				   gboolean choice);
+void set_text_variant_global_option(gchar * option,
+				    gchar * choice);
+void set_options_on_page_change(TEXT_DATA * t);
+GList *setup_text(SETTINGS * s);
+void shutdown_text(void);
+void display_text(gchar * key);
 
 #ifdef __cplusplus
 }

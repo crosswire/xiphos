@@ -41,10 +41,6 @@
 #include "bookmarks.h"
 
 extern SETTINGS *settings;
-extern GList *biblemods;
-extern GList *commentarymods;
-extern GList *dictionarymods;
-extern GList *percommods;
 extern gchar *swbmDir;
 
 SETTINGS myset;

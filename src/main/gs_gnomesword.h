@@ -69,8 +69,9 @@ struct _settings {
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
 		*notebookGBS, /* notebook - gbs */
 		*notebookDL,  /* notebook - dict/lex */
-		*notebookCOMM,  /* notebook - dict/lex */
-		*notebook_text,  /* notebook - dict/lex */
+		*notebook_comm,  /* notebook - commentaries */
+		*notebook_text,  /* notebook - texts */
+		*notebook_percomm,  /* notebook - personal comments */
 		*verse_list_notebook,  
 	
 	/* nav control widgets */
@@ -85,6 +86,7 @@ struct _settings {
 		*frameInt, /* frame for interlinear html  */ 
 	
 	/* toolbars */
+		*hbox_toolbar,
 		*toolbarOptions,
 		*toolbarBooks,
 		*toolbarComments,
@@ -143,7 +145,7 @@ struct _settings {
 		lex_hebrew_viewer[80], /* module to use for hebrew lexicon - strongs or BDB - in viewer */
 	        currentverse[80],	/* verse to use at program startup */
 		comm_key[80],	/* verse to use at program startup */
-		book_key[80],
+		book_key[256],
 	        *cvInterlinear,	/* current verse for detached interlinear */
 		*percomverse, /* current verse for personal comments */
 	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
@@ -188,7 +190,8 @@ struct _settings {
 		gbsLastPage,    /* last notebook page before change */
 		dlLastPage,     /* last notebook page before change */
 		commLastPage,     /* last notebook page before change */
-		text_last_page;     /* last notebook page before change */
+		text_last_page,     /* last notebook page before change */
+		percomm_last_page;     /* last notebook page before change */
 						
 	gboolean   
 		usedefault, /* use default settings in gnomesword or those used for last session */
@@ -220,6 +223,7 @@ struct _settings {
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		book_tabs, /* show module tabs in books if true  */
+		percomm_tabs, /* show module tabs in personal commentary if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		notefollow, /* notes follow Bible text when true */
@@ -247,29 +251,6 @@ struct _settings {
 		*settingslist; /* glist for saveing verse lists - freed in backend_shutdown() gs_sword.cpp*/
 };
 
-typedef struct _search_opt SEARCH_OPT;
-struct _search_opt {
-	GtkWidget
-		*ckbCommentary,
-		*ckbPerCom, 
-		*ckbGBS, 
-		*rbPhraseSearch;
-	
-	gchar 
-		*module_name,
-		*upper_bond,
-		*lower_bond,
-		*search_string;
-	
-	int 
-		search_type,
-		search_params,
-		found_count;
-	
-	gboolean 
-		use_bonds,
-		use_lastsearch_for_bonds;
-};
 /******************************************************************************
  *  lists to keep for the life of the program
  *   
@@ -289,6 +270,7 @@ struct _module_lists {
 	*options;	
 };
 
+extern SETTINGS *settings;
 extern MOD_LISTS *mod_lists;
 /*** function prototypes ***/
 
@@ -317,7 +299,6 @@ gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
 void display_about_module_dialog(gchar *modname, gboolean isGBS);
-void search_module(SETTINGS *s, SEARCH_OPT *so);
 gchar *get_module_key(SETTINGS *s);
 gchar *get_module_name(SETTINGS *s);
 gchar *get_module_name_from_description(gchar *description);

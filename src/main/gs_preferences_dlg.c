@@ -40,6 +40,12 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
+/*
+   frontend
+ */
+#include "_bibletext.h"
+
+
 #include "gs_preferences_dlg.h"
 #include "sword.h"
 #include "gs_gnomesword.h"
@@ -85,11 +91,11 @@ on_shortcut_bar_item_selected1(EShortcutBar * shortcut_bar,
 
 static void applyoptions(SETTINGS * s)
 {
-	GtkWidget *text, *dict, *comm;
+	GtkWidget *dict, *comm;
 
-	text = lookup_widget(s->app, "nbTextMods");
+	
 	dict = s->notebookDL;
-	comm = s->notebookCOMM;
+	comm = s->notebook_comm;
 	/*  */
 	if (updatelayout) {
 		/* set the main window size */
@@ -115,17 +121,15 @@ static void applyoptions(SETTINGS * s)
 				     s->biblepane_width);
 		updatelayout = FALSE;
 	}
-
-	if (s->text_tabs) {
-		gtk_widget_show(text);
-	} else {
-		gtk_widget_hide(text);
-	}
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_text),
+				   s->text_tabs); 
+	gui_set_text_frame_label();
+	
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS),
 				   s->book_tabs);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookDL),
 				   s->dict_tabs);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookCOMM),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
 				   s->comm_tabs);
 
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;

@@ -54,8 +54,6 @@ extern "C" {
 					    gpointer user_data);
 	void on_john_3_1_activate(GtkMenuItem * menuitem,
 				  gpointer user_data);
-	void on_mainText_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
 	void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data);
 	void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data);
 	void on_paste1_activate(GtkMenuItem * menuitem,
@@ -69,8 +67,6 @@ extern "C" {
 					   gpointer user_data);
 	void on_show_tabs_activate(GtkMenuItem * menuitem,
 				   gpointer user_data);
-	void on_change_module_activate(GtkMenuItem * menuitem,
-				       gpointer user_data);
 	void on_changeint1mod_activate(GtkMenuItem * menuitem,
 				       gpointer user_data);
 	void on_changeint2mod_activate(GtkMenuItem * menuitem,

@@ -214,6 +214,8 @@ COMMON_SOURCE = \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     main.c \
+    percomm.c \
+    percomm.h \
     support.c \
     support.h 
 
@@ -275,7 +277,8 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_popup_cb.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
 	gs_setup.$(OBJEXT) gs_shortcutbar.$(OBJEXT) \
 	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
-	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT)
+	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) percomm.$(OBJEXT) \
+	support.$(OBJEXT)
 gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
 gnomesword_DEPENDENCIES = $(top_builddir)/src/backend/libbackend.a \
 	$(top_builddir)/src/gnome/libgui.a
@@ -310,8 +313,8 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewcomm_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewdict_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewtext_dlg.Po $(DEPDIR)/main.Po \
-@AMDEP_TRUE@	$(DEPDIR)/spell.Po $(DEPDIR)/spell_gui.Po \
-@AMDEP_TRUE@	$(DEPDIR)/support.Po
+@AMDEP_TRUE@	$(DEPDIR)/percomm.Po $(DEPDIR)/spell.Po \
+@AMDEP_TRUE@	$(DEPDIR)/spell_gui.Po $(DEPDIR)/support.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -411,6 +414,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewdict_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewtext_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/percomm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/spell.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/spell_gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/support.Po@am__quote@
