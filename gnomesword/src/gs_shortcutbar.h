@@ -32,6 +32,7 @@ extern "C" {
 //#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include "gs_gnomesword.h"
 	
+	
 void showSBVerseList(SETTINGS *s);
 void on_btnSB_clicked(GtkButton * button, gpointer user_data);
 void setupSB(GList *text, GList *commentary, GList *dictionary);

@@ -156,7 +156,12 @@ module.pixmap.files=\
 	sword.xpm\
 	yes.xpm\
 	sword2.xpm\
-	splash.png
+	splash.png\
+	book-de.png\
+	book-en.png\
+	book-gr.png\
+	book-he.png\
+	book-un.png
 
 module.data.name=data
 module.data.type=
