@@ -1,7 +1,7 @@
 
 [Desktop Entry]
-Name=Bible Study Tool
-Comment=GnomeSword-2.0 Bible Study Tool
+Name=GnomeSword2 Bible Guide
+Comment=Study the Bible
 Exec=@gnomesword_exec@
 Icon=@PACKAGE_PIXMAPS_DIR@/gs2-48x48.png
 Terminal=false
