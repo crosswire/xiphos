@@ -498,6 +498,75 @@
 	      <right_justify>False</right_justify>
 	      <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
 	    </widget>
+
+	    <widget>
+	      <class>GtkPixmapMenuItem</class>
+	      <name>about_sword_modules1</name>
+	      <tooltip>Information about the installed modules</tooltip>
+	      <label>About Sword Modules</label>
+	      <right_justify>False</right_justify>
+	      <stock_icon>GNOME_STOCK_MENU_ABOUT</stock_icon>
+
+	      <widget>
+		<class>GtkMenu</class>
+		<name>about_sword_modules1_menu</name>
+
+		<widget>
+		  <class>GtkMenuItem</class>
+		  <name>bible_texts1</name>
+		  <tooltip>Information about Bible texts</tooltip>
+		  <label>Bible Texts</label>
+		  <right_justify>False</right_justify>
+
+		  <widget>
+		    <class>GtkMenu</class>
+		    <name>bible_texts1_menu</name>
+
+		    <widget>
+		      <class>GtkMenuItem</class>
+		      <name>separator15</name>
+		      <right_justify>False</right_justify>
+		    </widget>
+		  </widget>
+		</widget>
+
+		<widget>
+		  <class>GtkMenuItem</class>
+		  <name>commentaries1</name>
+		  <label>Commentaries</label>
+		  <right_justify>False</right_justify>
+
+		  <widget>
+		    <class>GtkMenu</class>
+		    <name>commentaries1_menu</name>
+
+		    <widget>
+		      <class>GtkMenuItem</class>
+		      <name>separator16</name>
+		      <right_justify>False</right_justify>
+		    </widget>
+		  </widget>
+		</widget>
+
+		<widget>
+		  <class>GtkMenuItem</class>
+		  <name>dictionaries-lexicons1</name>
+		  <label>Dictionaries-Lexicons</label>
+		  <right_justify>False</right_justify>
+
+		  <widget>
+		    <class>GtkMenu</class>
+		    <name>dictionaries-lexicons1_menu</name>
+
+		    <widget>
+		      <class>GtkMenuItem</class>
+		      <name>separator17</name>
+		      <right_justify>False</right_justify>
+		    </widget>
+		  </widget>
+		</widget>
+	      </widget>
+	    </widget>
 	  </widget>
 	</widget>
       </widget>
@@ -1804,7 +1873,7 @@ Revelation
 <widget>
   <class>GnomePropertyBox</class>
   <name>propertybox1</name>
-  <border_width>1</border_width>
+  <border_width>5</border_width>
   <signal>
     <name>apply</name>
     <handler>on_propertybox1_clicked</handler>
@@ -2600,7 +2669,7 @@ Revelation
 <widget>
   <class>GnomeAbout</class>
   <name>about2</name>
-  <border_width>1</border_width>
+  <border_width>4</border_width>
   <modal>True</modal>
   <logo>GnomeSword.png</logo>
   <copyright>                Copyright                 2000</copyright>
@@ -2678,6 +2747,7 @@ Revelation
 <widget>
   <class>GnomeDialog</class>
   <name>dlgSearch</name>
+  <border_width>4</border_width>
   <title>GnomeSword - Search</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -3270,6 +3340,7 @@ Revelation
 <widget>
   <class>GnomeDialog</class>
   <name>wdwEditBookmarks</name>
+  <border_width>4</border_width>
   <title>GnomeSword - Edit Bookmarks</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -3285,7 +3356,7 @@ Revelation
     <child_name>GnomeDialog:vbox</child_name>
     <name>dialog-vbox2</name>
     <homogeneous>False</homogeneous>
-    <spacing>8</spacing>
+    <spacing>0</spacing>
     <child>
       <padding>4</padding>
       <expand>True</expand>
@@ -3458,131 +3529,6 @@ Revelation
 </widget>
 
 <widget>
-  <class>GtkDialog</class>
-  <name>dlgAboutSword</name>
-  <width>319</width>
-  <title>About The Sword Project</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>True</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
-
-  <widget>
-    <class>GtkVBox</class>
-    <child_name>Dialog:vbox</child_name>
-    <name>dialog-vbox4</name>
-    <homogeneous>False</homogeneous>
-    <spacing>0</spacing>
-
-    <widget>
-      <class>GtkVBox</class>
-      <name>vbox21</name>
-      <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkPixmap</class>
-	<name>pixmap1</name>
-	<filename>sword.xpm</filename>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>4</xpad>
-	<ypad>4</ypad>
-	<build_insensitive>True</build_insensitive>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GtkScrolledWindow</class>
-	<name>scrolledwindow26</name>
-	<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkText</class>
-	  <name>txtAboutSword</name>
-	  <can_focus>True</can_focus>
-	  <editable>False</editable>
-	  <text>The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.</text>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkScrolledWindow</class>
-	<name>scrolledwindow27</name>
-	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkText</class>
-	  <name>text6</name>
-	  <can_focus>True</can_focus>
-	  <editable>False</editable>
-	  <text>Modules can be downloaded from the Sword Project at www.crosswire.org</text>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkHBox</class>
-      <child_name>Dialog:action_area</child_name>
-      <name>dialog-action_area4</name>
-      <border_width>10</border_width>
-      <homogeneous>True</homogeneous>
-      <spacing>5</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-	<pack>GTK_PACK_END</pack>
-      </child>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>btnAboutSwordOK</name>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_btnAboutSwordOK_clicked</handler>
-	  <last_modification_time>Thu, 11 May 2000 19:30:33 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-      </widget>
-    </widget>
-  </widget>
-</widget>
-
-<widget>
   <class>GtkMenu</class>
   <name>pmEditnote</name>
 
@@ -3640,6 +3586,7 @@ Revelation
 <widget>
   <class>GnomeDialog</class>
   <name>dlgVerseList</name>
+  <border_width>4</border_width>
   <title>GnomeSword - Verse List</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -3859,6 +3806,516 @@ Revelation
 	  <last_modification_time>Sat, 10 Jun 2000 18:49:45 GMT</last_modification_time>
 	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>InfoBox</name>
+  <border_width>4</border_width>
+  <width>216</width>
+  <title>GnomeSword - InfoBox</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>True</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox6</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox20</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkPixmap</class>
+	<name>pixmap2</name>
+	<filename>GnomeSword.xpm</filename>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<build_insensitive>True</build_insensitive>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox24</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>lbInfoBox1</name>
+	  <label>File</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>lbInfoBox2</name>
+	  <label>in StudyPad is not saved!</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>lbInfoBox3</name>
+	  <label>Shall I save it?</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area6</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>btnInfoBoxYes</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_btnInfoBoxYes_clicked</handler>
+	  <last_modification_time>Thu, 15 Jun 2000 15:47:22 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_YES</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>btnInfoBoxNo</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_btnInfoBoxNo_clicked</handler>
+	  <last_modification_time>Thu, 15 Jun 2000 15:46:57 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_NO</stock_button>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>AboutSword</name>
+  <border_width>4</border_width>
+  <title>About The Sword Project</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox7</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox21</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkPixmap</class>
+	<name>pixmap1</name>
+	<filename>sword.xpm</filename>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>4</xpad>
+	<ypad>4</ypad>
+	<build_insensitive>True</build_insensitive>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow26</name>
+	<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkText</class>
+	  <name>txtAboutSword</name>
+	  <height>103</height>
+	  <can_focus>True</can_focus>
+	  <editable>False</editable>
+	  <text>The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.</text>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label95</name>
+	<height>24</height>
+	<label>Modules can be downloaded from the Sword Project </label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomeHRef</class>
+	<name>href1</name>
+	<can_focus>True</can_focus>
+	<url>www.crosswire.org</url>
+	<label>The Sword Project</label>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label96</name>
+	<height>19</height>
+	<label>Current Module</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkText</class>
+	<name>text6</name>
+	<can_focus>True</can_focus>
+	<editable>False</editable>
+	<text></text>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area7</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>btnAboutSwordOK</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_btnAboutSwordOK_clicked</handler>
+	  <last_modification_time>Thu, 15 Jun 2000 16:02:50 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>dialog1</name>
+  <border_width>4</border_width>
+  <title>About Sword Modules</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox8</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox25</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox21</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkPixmap</class>
+	  <name>pixmap3</name>
+	  <filename>sword.xpm</filename>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <build_insensitive>True</build_insensitive>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label97</name>
+	  <label>The Sword Project</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkPixmap</class>
+	  <name>pixmap4</name>
+	  <filename>GnomeSword.xpm</filename>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <build_insensitive>True</build_insensitive>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>lbModName</name>
+	<height>21</height>
+	<label>KJV</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow30</name>
+	<width>304</width>
+	<height>183</height>
+	<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkText</class>
+	  <name>textModAbout</name>
+	  <can_focus>True</can_focus>
+	  <editable>False</editable>
+	  <text></text>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area8</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>btnAboutModuleOK</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_btnAboutModuleOK_clicked</handler>
+	  <last_modification_time>Fri, 16 Jun 2000 02:22:49 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
     </widget>
   </widget>

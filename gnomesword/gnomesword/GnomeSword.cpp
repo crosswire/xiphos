@@ -149,7 +149,10 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	char          menuName[64], //--  for menu item label
 					menuName1[64], //--  for menu item label
 					mybuf[80], //-- ??
-					rememberlastitem[80]; //--  use to store last menu item so we can add the next item under it - gnome menus
+					rememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+					aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+					aboutrememberlastitem2[80], //--  use to store last menu item so we can add the next item under it - gnome menus
+					aboutrememberlastitem3[80]; //--  use to store last menu item so we can add the next item under it - gnome menus
 	int             viewNumber = 1, //--  for numbering menu items
 					viewNumber1= 1, //-- for numbering menu items
 					itemNum = 0, //-- for numbering menu items
@@ -166,6 +169,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	mainMgr2        = new SWMgr();
 	mainMgr3        = new SWMgr();
 	searchMgr		= new SWMgr();
+	
 	curMod           = NULL; //-- set mods to null
 	comp1Mod      = NULL;
 	comp2Mod      = NULL;
@@ -173,6 +177,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	curcomMod     = NULL;
 	curdictMod      = NULL;
 	searchMod      = NULL;
+	percomMod     = NULL;
+	
 	chapDisplay    = 0;// set in create
 	entryDisplay    = 0;// set in create
 	comp1Display    = 0;// set in create
@@ -217,16 +223,22 @@ initSword(GtkWidget *mainform,  //-- app's main form
   studypad = lookup_widget(mainform,"text3");
 	//-------------------------------------------------------------- set main window modules and add to menus	
 	sprintf(rememberlastitem,"%s","_View/Main Window/");
-	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) 
+	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/");
+	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/");
+	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/");
+	
+	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++)
 	{
 
 		if (!strcmp((*it).second->Type(), "Biblical Texts"))
 		{
 			curMod = (*it).second;
 			 //------------------------------------------------------------------ add to menubar
-			additemtognomemenu(MainFrm, curMod->Name(), rememberlastitem , (GtkMenuCallback)on_mainText_activate );  
+			additemtognomemenu(MainFrm, curMod->Name(), rememberlastitem , (GtkMenuCallback)on_mainText_activate );
+			additemtognomemenu(MainFrm, curMod->Name(), aboutrememberlastitem , (GtkMenuCallback)on_kjv1_activate );
 			//--------------------------------------- remember last item - so next item will be place below it       	
-			sprintf(rememberlastitem,"%s%s","_View/Main Window/",curMod->Name());			
+			sprintf(rememberlastitem,"%s%s","_View/Main Window/",curMod->Name());	
+			sprintf(aboutrememberlastitem,"%s%s","_Help/About Sword Modules/Bible Texts/",curMod->Name());			
 			//---------------------------------------------------------------- add to popup menu
 			additemtopopupmenu(MainFrm, menu1, curMod->Name(), (GtkMenuCallback)on_mainText_activate );
 			//------------------------------------------------------- set GTK display for each module
@@ -241,6 +253,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 				{
 				 	percomMod = (*it).second;
 				 	percomMod->Disp(percomDisplay);	
+				 	additemtognomemenu(MainFrm,percomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
+				 	sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",percomMod->Name());	
 				 	additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate);
 				 	usepersonalcomments = true; //-- this does nothing now
 				 	gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
@@ -255,7 +269,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 					label = gtk_label_new (curcomMod->Name());
 			    gtk_widget_show (label);
 					gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label);
-				
+				  additemtognomemenu(MainFrm,curcomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
+				 	sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
 					if(!strcmp(curcomMod->Name(),"Family"))
 						curcomMod->Disp(BTFcomDisplay);
 					else
@@ -267,7 +282,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 			{	
 				curdictMod = (*it).second;
 				notebook = lookup_widget(mainform,"notebook4");
-				
+				additemtognomemenu(MainFrm,curdictMod->Name(), aboutrememberlastitem3 , (GtkMenuCallback)on_kjv1_activate );
+				sprintf(aboutrememberlastitem3,"%s%s","_Help/About Sword Modules/Dictionaries-Lexicons/",curdictMod->Name());	
 				empty_notebook_page = gtk_vbox_new (FALSE, 0);
   				gtk_widget_show (empty_notebook_page);
   				gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
@@ -425,6 +441,8 @@ initSword(GtkWidget *mainform,  //-- app's main form
 
   loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
   changeVerse(settings->currentverse); //---------------------------------------------- set Text
+
+  if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); //-- load last used file into studypad
 
 //-- hide buttons only show them if their options are enabled
 	gtk_widget_hide(lookup_widget(MainFrm,"btnPrint"));
@@ -652,10 +670,34 @@ UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle button
 void 
 ShutItDown(void)  //------------- close down GnomeSword program
 {
+  char *msg;
+  GtkWidget *msgbox;
+  int answer;
 
-
+  sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
 	writesettings(myset); //-- save setting (myset structure) to use when we start back up
-	//delete settings;
+	if(file_changed)
+	{
+		
+		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
+		msgbox = gnome_message_box_new(msg,
+						GNOME_MESSAGE_BOX_QUESTION,
+						GNOME_STOCK_BUTTON_YES,
+						GNOME_STOCK_BUTTON_NO,						
+						NULL);
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		g_free (msg);
+		switch (answer)
+		{
+		case 0:			
+					saveFile(current_filename);
+					break;
+		default:
+					break;
+		}
+	}   	
+	
 	delete mainMgr;   //-- delete Sword managers
 	delete mainMgr1;
 	delete mainMgr2;
@@ -678,7 +720,10 @@ ShutItDown(void)  //------------- close down GnomeSword program
 		delete dictDisplay;
 	if(BTFsearchDisplay)
 		delete BTFsearchDisplay;
+	if(percomDisplay)
+		delete percomDisplay;
 	gtk_exit(0);           //-- exit
+	
 }
 
 
@@ -1305,4 +1350,38 @@ void
 changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
    settings->notebook3page = page_num;
+}
+
+//-------------------------------------------------------------------------------------------
+void
+showmoduleinfoSWORD(char *modName)
+{
+	GtkWidget *aboutbox,
+ 						*text,
+    				*label;
+	char 			*buf,
+ 						*bufabout;
+  ModMap::iterator it; //-- module iterator
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator cit;
+	
+	it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
+	if (it != mainMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
+	{
+	    buf = (char *)(*it).second->Description();
+	    sit = mainMgr->config->Sections.find((*it).second->Name());
+	    if (sit !=mainMgr->config->Sections.end())
+	    {
+	    	cit = (*sit).second.find("About");
+					if (cit != (*sit).second.end()) 				
+						bufabout = (*cit).second.c_str();
+	    }
+	}
+	aboutbox = create_dialog1();
+	text = lookup_widget(aboutbox,"textModAbout");
+	label = lookup_widget(aboutbox,"lbModName");
+	gtk_label_set_text( GTK_LABEL(label),buf);
+	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE );
+	AboutModsDisplay(text, bufabout) ;
+	gtk_widget_show(aboutbox);
 }

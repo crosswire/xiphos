@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/Projects2/gnomesword/gnomesword/interface.cpp,/home/tb/Projects2/gnomesword/gnomesword/callback.cpp,
 show_outputview=true
 show_treeview=true
 header_file=Untitled.h
-cpp_file=/home/tb/Projects2/gnomesword/gnomesword/main.cpp
-browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/open.html
+cpp_file=/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp
+browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/atexit.htm
 [COPYING]
 install_location=
 dist=true

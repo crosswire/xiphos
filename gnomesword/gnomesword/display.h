@@ -89,3 +89,5 @@ class GTKInterlinearDisp : public GTKEntryDisp
 	virtual char Display(SWModule &imodule);
 };
 
+void
+AboutModsDisplay		(GtkWidget* text, gchar *aboutinfo);
