@@ -18,13 +18,9 @@ CXXFLAGS =  \
 libgui_a_SOURCES =  \
     display_info.c \
     _editor.c \
-    _editor.h \
     about_gnomesword.c \
-    about_gnomesword.h \
     about_modules.c \
-    about_modules.h \
     about_sword.c \
-    about_sword.h \
     bibletext.c \
     bibletext_dialog.c \
     bookmarks.c \
@@ -37,6 +33,7 @@ libgui_a_SOURCES =  \
     editor_menu.c \
     editor_replace.c \
     editor_search.c \
+    editor_spell.c \
     editor_toolbar.c \
     fileselection.c \
     gbs.c \
@@ -54,21 +51,14 @@ libgui_a_SOURCES =  \
     main_menu.c \
     percomm.c \
     preferences_dialog.c \
-    preferences_dialog.h \
     setup_druid.c \
-    setup_druid.h \
     shortcutbar_dialog.c \
-    shortcutbar_dialog.h \
     shortcutbar_main.c \
-    shortcutbar_main.h \
     shortcutbar_search.c \
-    shortcutbar_search.h \
     shortcutbar_viewer.c \
-    shortcutbar_viewer.h \
     splash.c \
-    splash.h \
     studypad.c \
-    studypad.h \
     toolbar_nav.c \
-    toolbar_nav.h \
     utilities.c
+    
+ 

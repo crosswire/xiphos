@@ -1,9 +1,21 @@
+2002-07-27  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed main/char_table.*, main/spell.* and main/spell_gui.*
+	* added gui/editor_spell.h and gnome/editor_spell.c
+	* spell checking now requires pspell but gnomesword will be built
+	  without spell checking if configure does not find pspell.
+	* gui stuff is removed from backend and main execpt main/settings.h
+	
+
+
 2002-07-24  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added main/swprd.c and main/sword.h
 	* moved functions that access backend from main/gs_gnomesword.c
 	  to main/sword.c
-	* moved main/gs_gnomesword.* to gui/gnomesword.*
+	* moved main/gs_gnomesword.* to gui/gnomesword.h
+	  and gnome/gnomesword.c
+	* added src/gui/*.h to EXTRA_DIST in top level Makefile.am
 
 
 2002-07-23  Terry Biggs <tbiggs@users.sourceforge.net>

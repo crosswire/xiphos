@@ -27,6 +27,7 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/gtkhtmlfontstyle.h>
 #include <gtkhtml/htmlform.h>
+#include <gtkhtml/htmlengine.h>
 #include <gtkhtml/htmlengine-edit.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlengine-edit-cut-and-paste.h>
@@ -40,8 +41,8 @@
 #include <fcntl.h>
 
 #ifdef USE_SPELL
-#include "main/spell.h"
-#include "main/spell_gui.h"
+//#include "main/spell.h"
+//#include "main/spell_gui.h"
 #endif /* USE_SPELL */
 
 #include "gui/_editor.h"
@@ -55,7 +56,6 @@
 #include "gui/html.h"
 
 #include "main/percomm.h"
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 /******************************************************************************

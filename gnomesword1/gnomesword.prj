@@ -95,8 +95,10 @@ module.include.files=\
 	src/gui/editor_menu.h\
 	src/gui/editor_replace.h\
 	src/gui/editor_search.h\
+	src/gui/editor_spell.h\
 	src/gui/editor_toolbar.h\
 	src/gui/fileselection.h\
+	src/gui/find_dlg_defs.h\
 	src/gui/gnomesword.h\
 	src/gui/gui.h\
 	src/gui/history.h\
@@ -117,18 +119,14 @@ module.include.files=\
 	src/gui/studypad.h\
 	src/gui/toolbar_nav.h\
 	src/gui/utilities.h\
-	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/commentary.h\
 	src/main/dictlex.h\
-	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/percomm.h\
 	src/main/lists.h\
 	src/main/settings.h\
 	src/main/shortcutbar.h\
-	src/main/spell.h\
-	src/main/spell_gui.h\
 	src/main/sword.h
 
 module.source.name=.
@@ -173,6 +171,7 @@ module.source.files=\
 	src/gnome/editor_menu.c\
 	src/gnome/editor_replace.c\
 	src/gnome/editor_search.c\
+	src/gnome/editor_spell.c\
 	src/gnome/editor_toolbar.c\
 	src/gnome/fileselection.c\
 	src/gnome/link_dialog.c\
@@ -187,12 +186,12 @@ module.source.files=\
 	src/gnome/shortcutbar_dialog.c\
 	src/gnome/shortcutbar_main.c\
 	src/gnome/shortcutbar_search.c\
+	src/gnome/shortcutbar_spell.c\
 	src/gnome/shortcutbar_viewer.c\
 	src/gnome/studypad.c\
 	src/gnome/splash.c\
 	src/gnome/toolbar_nav.c\
 	src/gnome/utilities.c\
-	src/main/char_table.c\
 	src/main/bibletext.c\
 	src/main/commentary.c\
 	src/main/dictlex.c\
@@ -202,8 +201,6 @@ module.source.files=\
 	src/main/percomm.c\
 	src/main/settings.c\
 	src/main/shortcutbar.c\
-	src/main/spell.c\
-	src/main/spell_gui.c\
 	src/main/sword.c
 
 module.pixmap.name=.

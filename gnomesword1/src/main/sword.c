@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 #include <ctype.h>
 #include <time.h>
 
@@ -52,12 +52,12 @@
  *  search_percent_update
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   void search_percent_update(char percent, void *userData)	
  *
  * Description
- *    
+ *    updates the progress bar during search
  *
  * Return value
  *   void
@@ -74,7 +74,7 @@ void search_percent_update(char percent, void *userData)
  *  module_name_from_description
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   void module_name_from_description(gchar *mod_name, gchar *description)	
  *
@@ -85,7 +85,7 @@ void search_percent_update(char percent, void *userData)
  *   void
  */ 
 
-void module_name_from_description(gchar *mod_name, gchar *description)
+void module_name_from_description(char *mod_name, char *description)
 {
 	backend_module_name_from_description(mod_name, description);
 }
@@ -96,7 +96,7 @@ void module_name_from_description(gchar *mod_name, gchar *description)
  *  get_module_number
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   int get_module_number(char *module_name, char *module_type)	
  *
@@ -118,7 +118,7 @@ int get_module_number(char *module_name, char *module_type)
  *  save_module_key
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   void save_module_key(gchar * mod_name, gchar * key)	
  *
@@ -129,7 +129,7 @@ int get_module_number(char *module_name, char *module_type)
  *   void
  */ 
 
-void save_module_key(gchar * mod_name, gchar * key)
+void save_module_key(char * mod_name, char * key)
 {
 	backend_save_module_key(mod_name, key);
 
@@ -142,7 +142,7 @@ void save_module_key(gchar * mod_name, gchar * key)
  *  get_sword_version
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   const char *get_sword_version(void)	
  *
@@ -164,7 +164,7 @@ const char *get_sword_version(void)
  *  get_module_description
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   gchar *get_module_description(gchar * mod_name)	
  *
@@ -175,7 +175,7 @@ const char *get_sword_version(void)
  *   gchar *
  */ 
 
-gchar *get_module_description(gchar * mod_name)
+char *get_module_description(char * mod_name)
 {
 	return backend_get_module_description(mod_name);
 }
@@ -186,7 +186,7 @@ gchar *get_module_description(gchar * mod_name)
  *  get_book_from_key
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   const char *get_book_from_key(char *key)	
  *
@@ -208,7 +208,7 @@ const char *get_book_from_key(char *key)
  *  get_chapter_from_key
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   int get_chapter_from_key(char *key)	
  *
@@ -230,7 +230,7 @@ int get_chapter_from_key(char *key)
  *  get_verse_from_key
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   int get_verse_from_key(char *key)	
  *
@@ -252,7 +252,7 @@ int get_verse_from_key(char *key)
  *  save_properties
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   void save_properties(gboolean use_default)	
  *
@@ -274,7 +274,7 @@ void save_properties(gboolean use_default)
  *  do_search
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   GList *do_search(gpointer *usr_data)	
  *
@@ -296,7 +296,7 @@ GList *do_search(gpointer *usr_data)
  *   get_verse_list
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   GList *get_verse_list(gchar* module_name, gchar *verse_list)	
  *
@@ -308,7 +308,7 @@ GList *do_search(gpointer *usr_data)
  */ 
 
 
-GList *get_verse_list(gchar* module_name, gchar *verse_list)
+GList *get_verse_list(char* module_name, char *verse_list)
 {
 	return backend_get_verse_list(module_name, verse_list);
 }
@@ -319,7 +319,7 @@ GList *get_verse_list(gchar* module_name, gchar *verse_list)
  *  get_module_font_name
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   char *get_module_font_name(char *mod_name)	
  *
@@ -341,7 +341,7 @@ char *get_module_font_name(char *mod_name)
  *  get_module_font_size
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   char *get_module_font_size(char *mod_name)	
  *
@@ -363,7 +363,7 @@ char *get_module_font_size(char *mod_name)
  *  get_mod_type
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   int get_mod_type(char * mod_name)
  *
@@ -385,7 +385,7 @@ int get_mod_type(char * mod_name)
  *  module_is_locked
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   int module_is_locked(char * mod_name)
  *
@@ -429,7 +429,7 @@ char *get_valid_key(char *key)
  *   get_module_text
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   char *get_module_text(char * mod_name, char * key)	
  *
@@ -451,7 +451,7 @@ char *get_module_text(char * mod_name, char * key)
  *   get_search_results_text
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   char *get_search_results_text(char * mod_name, char * key)	
  *
@@ -473,7 +473,7 @@ char *get_search_results_text(char * mod_name, char * key)
  *   create_properties_from_setup
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   int create_properties_from_setup(void)	
  *
@@ -495,7 +495,7 @@ int create_properties_from_setup(void)
  *  get_path_to_mods
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   	gchar *get_path_to_mods(void)
  *
@@ -506,7 +506,7 @@ int create_properties_from_setup(void)
  *   gchar *
  */ 
 
-gchar *get_path_to_mods(void)
+char *get_path_to_mods(void)
 {
 	return backend_get_path_to_mods();
 }
@@ -517,7 +517,7 @@ gchar *get_path_to_mods(void)
  *  get_list_of_mods_by_type
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   GList *get_list_of_mods_by_type(char *mod_type)	
  *
@@ -539,7 +539,7 @@ GList *get_list_of_mods_by_type(char *mod_type)
  *  get_mod_about_info
  *
  * Synopsis
- *   #include "gnomesword.h"
+ *   #include "sword.h"
  *
  *   gchar *get_mod_about_info(char * mod_name)	
  *
@@ -550,7 +550,7 @@ GList *get_list_of_mods_by_type(char *mod_type)
  *   gchar *
  */ 
 
-gchar *get_mod_about_info(char * mod_name)
+char *get_mod_about_info(char * mod_name)
 {
 	return backend_get_mod_about_info(mod_name);
 }

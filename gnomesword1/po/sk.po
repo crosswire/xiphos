@@ -34,11 +34,11 @@ msgid ""
 "dictionaries, etc.  Many frontends are build using this framework.  An "
 "installed module set may be shared between any frontend using the framework."
 msgstr ""
-"SWORD projekt je úsilie o vytvorenie rozsiahleho softvérového balíka "
-"na výskum a ¹túdium Boha a Jeho Slova.  Biblický rámec SWORDu "
-"umo¾òuje µahké ovládanie textu biblie, komentárov, lexikónov, "
-"slovníkov atï.  Veµa frontendov je budovaných na tomto rámci.  "
-"Nain¹talovaná sada modulov mô¾e by» pomocou rámca zdieµaná medzi akýmkoµvek frontendom."
+"SWORD projekt je úsilie o vytvorenie rozsiahleho softvérového balíka na "
+"výskum a ¹túdium Boha a Jeho Slova.  Biblický rámec SWORDu umo¾òuje µahké "
+"ovládanie textu biblie, komentárov, lexikónov, slovníkov atï.  Veµa "
+"frontendov je budovaných na tomto rámci.  Nain¹talovaná sada modulov mô¾e "
+"by» pomocou rámca zdieµaná medzi akýmkoµvek frontendom."
 
 #: src/gs_abouts.c:170
 msgid "Modules can be downloaded from the Sword Project "
@@ -293,7 +293,8 @@ msgstr "Referencia"
 
 #: src/gs_editor.c:1302
 msgid "Bible Reference or Module key to display when link is clicked"
-msgstr "Biblická referencia alebo kµúè modulu, ktorý sa zobrazí pri kliknutí na odkaz"
+msgstr ""
+"Biblická referencia alebo kµúè modulu, ktorý sa zobrazí pri kliknutí na odkaz"
 
 #: src/gs_editor.c:1326
 msgid "Name of module to show when link is clicked"
@@ -1190,7 +1191,8 @@ msgid "Your Home Directory:"
 msgstr "Vá¹ domovský prieèinok:"
 
 #: src/gs_setup.c:278
-msgid "SWORD version"
+#, fuzzy
+msgid "SWORD verson"
 msgstr "Verzia SWORD:"
 
 #: src/gs_setup.c:298
@@ -1539,4 +1541,3 @@ msgstr "popis"
 #: src/sw_gbs.cpp:592
 msgid "label200"
 msgstr "popis200"
-
