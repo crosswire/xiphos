@@ -28,8 +28,7 @@ extern "C" {
 
 #include "main/settings.h"
 
-void backend_new_dictlex_display(GtkWidget *html, 
-			int mod_num, SETTINGS *s);
+void backend_new_dictlex_display(GtkWidget *html, int mod_num);
 void backend_setup_dictlex(SETTINGS *s);
 void backend_shutdown_dictlex(void);
 void backend_display_dictlex(int mod_num, char *key);

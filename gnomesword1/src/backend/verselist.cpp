@@ -120,15 +120,15 @@ GList *backend_get_verse_list(gchar * module_name, gchar * vlist,
  * Return value
  *   void
  */
-void backend_setup_verselist(GtkWidget * html_widget, SETTINGS * s)
+void backend_setup_verselist(GtkWidget * html_widget)
 {
 	ModMap::iterator it;	//-- iteratior     
 	SectionMap::iterator sit;	//-- iteratior
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	mod = NULL;
-	entry_display = new GtkHTMLEntryDisp(html_widget, s);
-	chapter_display = new GtkHTMLChapDisp(html_widget, s);
+	entry_display = new GtkHTMLEntryDisp(html_widget);
+	chapter_display = new GtkHTMLChapDisp(html_widget);
 
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		mod = (*it).second;

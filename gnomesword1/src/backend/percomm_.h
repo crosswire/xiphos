@@ -33,8 +33,7 @@ const char *backend_get_percomm_key(int mod_num);
 void backend_save_personal_comment(int mod_num, char * buf);
 void backend_delete_personal_comment(int mod_num);
 void backend_nav_percomm_module(int mod_num, int direction);
-void backend_new_percomm_display(GtkWidget * html, char *mod_name,
-		SETTINGS * s);
+void backend_new_percomm_display(GtkWidget * html, char *mod_name);
 void backend_setup_percomm(SETTINGS * s);
 void backend_shutdown_percomm(void);
 void backend_display_percomm(int mod_num, char *key);

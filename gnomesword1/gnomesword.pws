@@ -6,19 +6,19 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=40
-1=30
-2=1
-3=1
-4=35
+0=31
+1=103
+2=648
+3=4
+4=48
 5=47
-6=48
-7=1
-8=4
-9=648
-10=103
-11=58
-12=302
+6=1
+7=30
+8=1
+9=1
+10=115
+11=103
+12=34
 13=29
 
 [filemarkers]
@@ -38,37 +38,27 @@ ShowLocals=true
 13=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/Makefile.am
-1=/home/terry/Projects/gnomesword1/src/gnome/_bibletext.c
-2=/home/terry/Projects/gnomesword1/src/gnome/commentary_dialog.h
-3=/home/terry/Projects/gnomesword1/src/gnome/commentary_dialog.c
-4=/home/terry/Projects/gnomesword1/src/gnome/dictlex_dialog.h
-5=/home/terry/Projects/gnomesword1/src/gnome/dictlex_dialog.c
-6=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
-7=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.h
-8=/home/terry/Projects/gnomesword1/ChangeLog
-9=/home/terry/Projects/gnomesword1/src/main/bibletext.c
-10=/home/terry/Projects/gnomesword1/src/main/bibletext.h
+0=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
 
 [replace_text]
-0=bibletext.h
-1=bibletext_dialog.h
-2=shortcutbar_viewer.h
-3=_percomm
-4=pcecd
-5=vboxPC
-6=settings.
+0=settings.
+1=bibletext.h
+2=bibletext_dialog.h
+3=shortcutbar_viewer.h
+4=_percomm
+5=pcecd
+6=vboxPC
 7=workbook_upper_switch_page
 
 [find_text]
-0=gs_viewtext.h
-1=text_view.h
-2=text_view
-3=backend_
-4=create_shortcutbar_viewer.h
-5=change_viewer_page
-6=fill_search_results_clist
-7=HTML_START
+0=g_strdup
+1=gbs_find_running
+2=in_url
+3=pixmap1
+4=cur_g
+5=gbs_list
+6=backend_
+7=s->
 
 [executer args]
 0=newconfigs

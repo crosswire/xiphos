@@ -37,6 +37,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/studypad.h"
 #include "gui/info_box.h"
+#include "gui/_gbs.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -45,7 +46,6 @@
 #include "main/commentary.h"
 #include "main/percomm.h"
 #include "main/dictlex.h"
-#include "main/gbs.h"
 #include "main/gs_interlinear.h"
 #include "main/gs_history.h"
 #include "main/settings.h"
@@ -127,7 +127,7 @@ void init_gnomesword(void)
 	 *  setup general book gui support 
 	 */
 	if (havebook) {
-		setup_gbs(get_list(GBS_LIST));
+		gui_setup_gbs(get_list(GBS_LIST));
 	}
 
 	/*
@@ -212,7 +212,7 @@ void gnomesword_shutdown(void)
 	if(havebible)
 		shutdown_text();
 	if(havebook)
-		shutdown_gbs();
+		gui_shutdown_gbs();
 	if(havedict)
 		shutdown_dictlex();
 	if(havecomm)
@@ -756,7 +756,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			    backend_get_module_page(module_name, 
 							BOOK_MODS);
 			if(key)
-				set_book_page_and_key(page_num, key);
+				gui_set_book_page_and_key(page_num, key);
 			else {
 				gtk_notebook_set_page(GTK_NOTEBOOK(
 					settings.notebook_gbs),
@@ -970,7 +970,7 @@ gint get_sb_type_from_modname(gchar *modName)
 void setup_shortcutbar_backend(GtkWidget *html, GtkWidget *html2, 
 						GtkWidget *html3)
 {
-	backend_setup_verselist(html,&settings);
+	backend_setup_verselist(html);
 	backend_setup_search_results_display(html2);
 	backend_setup_viewer(html3);
 }
@@ -1033,3 +1033,9 @@ gint get_num_shortcut_items(GtkWidget * shortcutbar_widget,
 					      model, group_num);
 
 }
+
+int module_is_locked(char * mod_name)
+{
+	return backend_module_is_locked(mod_name);
+}
+
