@@ -102,7 +102,7 @@ GtkWidget *create_AboutSword(void)
 	GtkWidget *dialog_action_area7;
 	GtkWidget *btnAboutSwordOK;
 
-	AboutSword = gnome_dialog_new("About The Sword Project", NULL);
+	AboutSword = gnome_dialog_new(_("About The Sword Project"), NULL);
 	gtk_object_set_data(GTK_OBJECT(AboutSword), "AboutSword",
 			    AboutSword);
 	gtk_container_set_border_width(GTK_CONTAINER(AboutSword), 4);
@@ -162,7 +162,7 @@ GtkWidget *create_AboutSword(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow26), txtAboutSword);
 	gtk_widget_set_usize(txtAboutSword, -2, 133);
 	gtk_text_insert(GTK_TEXT(txtAboutSword), NULL, NULL, NULL,
-			"The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.",
+			_("The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework."),
 			359);
 
 	label95 =
