@@ -152,7 +152,8 @@ module.include.files=\
 	src/gui/mod_mgr.h\
 	src/gui/mod_global_ops.h\
 	src/gui/tabbed_browser.h\
-	src/gui/url.h
+	src/gui/url.h\
+	src/main/display.hh
 
 module.source.name=.
 module.source.type=
@@ -242,7 +243,8 @@ module.source.files=\
 	src/backend/gs_gbfhtmlhref.cpp\
 	src/backend/gs_markupfiltmgr.cpp\
 	src/backend/gs_osishtmlhref.cpp\
-	src/backend/gs_thmlhtmlhref.cpp
+	src/backend/gs_thmlhtmlhref.cpp\
+	src/main/display.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

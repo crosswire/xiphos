@@ -31,10 +31,12 @@
 #include <gnome.h>
 
 #include "gui/url.h"
+#include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/hints.h"
 #include "gui/utilities.h"
+#include "gui/sidebar.h"
 #include "gui/dialog.h"
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
@@ -46,7 +48,6 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-extern gboolean in_url;
 
 
 /******************************************************************************
@@ -272,6 +273,8 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
 	gchar *modbuf_viewer = NULL;
 	gchar *modbuf = NULL;
 	gchar *mybuf = NULL;
+	guint delay;	
+	guint i;	
 	gchar **work_buf = g_strsplit (url,"/",4);
 	
 	if(!strcmp(work_buf[2],"Greek")) {
@@ -295,7 +298,12 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
 		mybuf =
 		    get_module_text(get_mod_type(modbuf), modbuf, work_buf[3]);
 		if (mybuf) {
-			show_in_appbar(widgets.appbar, work_buf[3], modbuf);
+			entry_display(sidebar.html_viewer_widget,  
+					modbuf, 
+					mybuf, 
+					work_buf[3], 
+					TRUE);
+			//show_in_appbar(widgets.appbar, work_buf[3], modbuf);
 			//gui_display_in_hint_window(mybuf);
 			g_free(mybuf);
 		}

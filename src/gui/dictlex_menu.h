@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+#include "gui/dictlex_dialog.h"
 GtkWidget *gui_create_pm_dict(DL_DATA * t);
 	
 #ifdef __cplusplus
@@ -33,4 +34,3 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t);
 #endif
 
 #endif
-

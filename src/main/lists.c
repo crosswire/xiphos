@@ -23,15 +23,11 @@
 #include <config.h>
 #endif
 
-#ifdef USE_GNOME2
+#include <gnome.h>
 #include <glib-2.0/glib.h>
 #include <gal/widgets/e-unicode.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
-#include <string.h>
 
-#include <gnome.h>
+#include <string.h>
 
 #include "main/lists.h"
 #include "main/sword.h"
@@ -42,24 +38,10 @@
 #include "backend/module.hh"
 #include "backend/key.hh"
 
+
 /******************************************************************************
  *  lists to keep for the life of the program
- *   
  */
-typedef struct _module_lists MOD_LISTS;
-struct _module_lists {
-	GList
-	    * biblemods,
-	    *commentarymods,
-	    *dictionarymods,
-	    *bookmods,
-	    *percommods,
-	    *devotionmods,
-	    *text_descriptions,
-	    *dict_descriptions,
-	    *comm_descriptions,
-	    *book_descriptions, *bible_books, *options;
-};
 static MOD_LISTS *mod_lists;
 static MOD_LISTS mods;
 
@@ -109,15 +91,9 @@ GList *get_list(gint type)
 
 
 void init_lists(void)
-{
-	const gchar *buf = NULL;
-	gchar *book = NULL;
-	NAME_TYPE *nt, innt;
-	gsize bytes_read;
-	gsize bytes_written;
-	GError *error;
-	
+{	
 	mod_lists = &mods;
+	
 	/* set glist to null */
 	mods.biblemods = NULL;
 	mods.commentarymods = NULL;
@@ -139,96 +115,9 @@ void init_lists(void)
 	settings.havepercomm = FALSE;
 
 	backend_new_module_mgr();
-
-	while ((buf = backend_get_next_book_of_bible()) != NULL) {
-		book = g_convert(buf,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
-		if(book == NULL) {
-			g_print ("error: %s\n", error->message);
-			g_error_free (error);
-		}
-		mods.bible_books = g_list_append(mods.bible_books,(char *)book);
-	}
-
-	backend_set_global_option_iterator();
-	while ((buf = backend_get_next_global_option()) != NULL) {
-		mods.options =
-		    g_list_append(mods.options, (char *) buf);
-	}
-
-	backend_set_module_iterators();
-	while ((nt = backend_get_next_module_name(&innt)) != NULL) {
-		switch (nt->type) {
-		case TEXT_TYPE:
-			mods.biblemods =
-			    g_list_append(mods.biblemods,
-					  (char *) nt->name);
-			break;
-		case COMMENTARY_TYPE:
-			mods.commentarymods =
-			    g_list_append(mods.commentarymods,
-					  (char *) nt->name);
-			break;
-		case DICTIONARY_TYPE:
-			mods.dictionarymods =
-			    g_list_append(mods.dictionarymods,
-					  (char *) nt->name);
-			break;
-		case BOOK_TYPE:
-			mods.bookmods =
-			    g_list_append(mods.bookmods,
-					  (char *) nt->name);
-			break;
-		}
-	}
-
-	backend_set_module_iterators();
-	while ((nt = backend_get_next_module_description(&innt)) != NULL) {
-		switch (nt->type) {
-		case TEXT_TYPE:
-			mods.text_descriptions =
-			    g_list_append(mods.text_descriptions,
-					  (char *) nt->name);
-			break;
-		case COMMENTARY_TYPE:
-			mods.comm_descriptions =
-			    g_list_append(mods.comm_descriptions,
-					  (char *) nt->name);
-			break;
-		case DICTIONARY_TYPE:
-			mods.dict_descriptions =
-			    g_list_append(mods.dict_descriptions,
-					  (char *) nt->name);
-			break;
-		case BOOK_TYPE:
-			mods.book_descriptions =
-			    g_list_append(mods.book_descriptions,
-					  (char *) nt->name);
-			break;
-		}
-	}
-	
-	backend_set_module_iterators();
-	while ((buf = backend_get_next_percom_name()) != NULL) {
-		if (!strcmp(buf, "+"))
-			continue;
-		mods.percommods = g_list_append(mods.percommods,
-						(char *) buf);
-	}
-
-	backend_set_module_iterators();
-	while ((buf = backend_get_next_devotion_name()) != NULL) {
-		if (!strcmp(buf, "+"))
-			continue;
-		mods.devotionmods = g_list_append(mods.devotionmods,
-						  (char *) buf);
-	}
-
+	mods.bible_books = backend_get_books_of_bible();
+	backend_get_global_options_list(mods.options);
+	backend_get_module_lists(mod_lists);
 	backend_delete_module_mgr();
 
 	settings.havebible = g_list_length(mods.biblemods);

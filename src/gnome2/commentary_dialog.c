@@ -58,6 +58,30 @@ static gboolean apply_change;
 
 
 
+
+/******************************************************************************
+ * Name
+ *   gui_display_commentary_with_struct
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void gui_display_commentary_with_struct(gchar * key)	
+ *
+ * Description
+ *    display new key in current commentary
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_commentary_with_struct(COMM_DATA * c, gchar * key)
+{
+	strcpy(settings.comm_key, key);
+	strcpy(cur_vc->key, key);
+	//display(c, key);
+}
+
 /******************************************************************************
  * Name
  *   gui_note_can_close
