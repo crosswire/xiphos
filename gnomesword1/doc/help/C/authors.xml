@@ -1,0 +1,31 @@
+<!-- Authors -->
+<chapter id="authors" lang="en">
+	<title>Authors</title>
+		<para>
+    	This manual was written by:
+		</para>
+		<itemizedlist>
+		<listitem>
+			<para>
+			Andy Piper
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+			Pierre Benz
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+	Please send all comments and suggestions regarding 
+    	this manual to GnomeSword Development list <email>gnomesword-developers@lists.sourceforge.net</email>. 
+	Comments may also be submitted via the project trackers at SourceForge.
+   		</para> 
+<para>
+    	For more information on <application>GnomeSword</application>, please visit the project 
+    	website at <ulink type="http" url="http://gnomesword.sf.net/">http://gnomesword.sf.net</ulink>. 
+    	Bug reports should be made using the Bug Tracker at the project development site 
+    	<ulink type="http" url="http://www.sourceforge.net/projects/gnomesword">
+    	http://www.sourceforge.net/projects/gnomesword</ulink>
+		</para>
+</chapter>

@@ -1,0 +1,162 @@
+<!-- ============= Search  ============--> 
+<chapter id="search">
+	<title>Searching</title>
+	<sect1 id="gnomesword-search">
+		<title>Using The Search Functions</title>
+		<para>
+		The Search dialog can be activated by choosing <menuchoice><guisubmenu>Edit
+		</guisubmenu><guimenuitem>Search</guimenuitem></menuchoice>
+		</para>
+		<para>
+        This is what the Search Dialog typically looks like:
+        </para>
+        <figure>
+        	<title>The Search Dialog</title>
+            <screenshot>
+            	<mediaobject>
+                	<imageobject>
+                    	<imagedata fileref="figures/interface_search" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                	    <phrase>The Search Dialog</phrase>
+                    </textobject>
+                </mediaobject>
+            </screenshot>
+		</figure>
+	</sect1>
+	
+	<sect1 id="gnomesword-search-dialog">
+		<title>The Search Dialog</title>
+		<para>
+		The <interface>Search Dialog</interface> consists of the following parts:
+		</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					Search Key Entry box
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Search Module Selector
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Search Type Selector
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Search Options Checkbox
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Search Scope Selector
+					</para>
+				</listitem>
+			</itemizedlist>
+		
+		<sect2 id="gnomesword-search-key">
+			<title>Search Key Entry Box</title>
+			<para>Allows entry of the key for which you would like to search. The 
+			search key can be a word, part of a word, several words, a phrase, or 
+			a regular expression depending on the type of search selected. When 
+			the search key is entered and all other selections in the search dialog 
+			are complete, click the <guibutton>Find</guibutton> button to begin 
+			the search.</para>
+			</sect2>
+		
+		<sect2 id="gnomesword-search-modselect">
+			<title>Search Module Selector</title>
+			<para>Allows selection of which modules	you would like to search. 
+			Select <guibutton>Bible</guibutton> to search Bible versions or 
+			<guibutton>Commentary</guibutton> to search commentaries. Only 
+			the currently active module will be searched.</para>
+		</sect2>
+		
+		<sect2 id="gnomesword-search-typeselect">
+		<title>Search Type Selector</title>
+		<para>Allows selection of the type of search. There are three search
+		types available:
+		</para>
+			<variablelist>
+				<varlistentry>
+					<term><guibutton>Multi word</guibutton></term> 
+					<listitem><para>This type will match any verse that has 
+					all the words in the search key, regardless of where 
+					they appear in the verse.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guibutton>Regular expression</guibutton></term> 
+					<listitem><para>This search uses a regular expression
+					as a search key. A regular expression is a pattern used 
+					to match a string of text. A regular expression can be 
+					used to find verses with words that match a particular 
+					pattern. For example the regular expression <example>
+					\ A[a-z]*iah </example> will match verses that contain
+					the words Aiah, Ahaziah, Athaliah and Amariah.</para>
+					<para>A complete discussion of regular expressions is 
+					beyond the scope of this manual, but more information 
+					can be found in the grep man page.</para></listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guibutton>Exact phrase</guibutton></term> 
+					<listitem><para>This type will match the search key
+					exatly as entered. If the search key is <userinput>
+					it is good</userinput>, this search would match a verse
+					which contains "<emphasis>it is good</emphasis>," but 
+					would not match a verse	which contains "<emphasis>
+					good</emphasis>, and doeth <emphasis>it</emphasis> not, 
+					to him it <emphasis>is</emphasis> sin."</para></listitem>
+				</varlistentry>
+			</variablelist>
+ 		</sect2>
+
+		<sect2 id="gnomesword-search-options">
+			<title>Search Options Checkbox</title>
+			<para>Allows selecting of search options. The only available option 
+			is <guibutton>Match case</guibutton>. Check this box to make the 
+			search case sensitive.</para>
+		</sect2>
+		
+		<sect2 id="gnomesword-search-scopeselect">
+			<title>Search Scope Selector</title>
+			<para>Allows defining the range within the specificed module that will
+			be searched. There are three search scopes available:</para>
+			<variablelist>
+				<varlistentry>
+					<term><guibutton>No scope</guibutton></term>
+					<listitem><para>This button causes the search to
+					to include the entire module.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guibutton>Use bounds</guibutton></term>
+					<listitem><para>Selecting this button produces two text 
+					entry boxes marked <guilabel>Lower</guilabel> and
+					<guilabel>Upper</guilabel>. Enter the first book 
+					to search in the <guilabel>Lower</guilabel> box and
+					the last book to search in the <guilabel>Upper</guilabel>
+					box. The search will begin with the <guilabel>Lower
+					</guilabel> book and end with the <guilabel>Upper
+					</guilabel> book and include all books in between.
+					</para>
+					<para>Chapter and verse numbers can be entered into
+					the search bound boxes as well to further narrow the
+					search. </para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><guibutton>Last search</guibutton></term>
+					<listitem><para>Select this button to do a new 
+					search including only the verses returned as a 
+					result of the last search. Use this with a new 
+					search key to narrow the search further.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist> 
+		</sect2>
+	</sect1>
+</chapter>

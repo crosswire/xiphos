@@ -1,0 +1,122 @@
+<chapter id="familiar">
+	<title>Getting Started with GnomeSword</title>
+<!-- ============= Getting Started with GnomeSword  ============-->
+	<sect1 id="gnomesword-getting-started">
+  		<title>Starting GnomeSword</title>
+			<para>
+			You can start <application>GnomeSword</application> in the following ways:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Applications menu</term>
+					<listitem>
+						<para>
+						Choose <menuchoice><guisubmenu>Accessories</guisubmenu>
+						<guimenuitem>Gnomesword2 Bible Study Guide</guimenuitem>
+						</menuchoice>.
+			            </para>
+    				</listitem>
+    			</varlistentry>
+    			<varlistentry>
+    				<term>Command line</term>
+    				<listitem>
+    					<para>
+						Type <command>gnomesword2</command>, then press <keycap>Return</keycap>.
+						</para>
+    				</listitem>
+    			</varlistentry>
+  		  	</variablelist>
+    </sect1>
+<!--Starting Gnomesword for the First Time  -->
+  	<sect1 id="gnomesword-first-start">
+  		<title>Starting GnomeSword For The First Time</title>
+		<para>
+		When you start <application>GnomeSword</application> for the first time, a simple
+		<interface>Setup Assistant</interface> appears. This will enable you to configure your choice of 
+		<application>SWORD Project</application> modules. It also enables you to set basic user interface 
+		options. Once your done with this, you should be presented with the <application>GnomeSword</application>
+		interface.
+		</para>
+	 </sect1>
+<!-- GnomeSword on first time use -->
+   	 <sect1 id="gnomesword-when-you-start">
+	 <title>Launching GnomeSword</title>
+		<para>
+		When you start <application>GnomeSword</application>, the following interface is displayed:
+		</para>
+		<figure id="gnomesword-start-interface">
+			<title>GnomeSword interface</title>
+			<screenshot>
+				<mediaobject>
+			 		<imageobject>
+						<imagedata fileref="figures/interface" format="PNG"/>
+					</imageobject>
+					<textobject>
+        				<phrase>GnomeSword window</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+		The <application>GnomeSword</application> interface contains the following elements:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Menubar</term>
+				<listitem>
+					<para>
+					The menus on the menubar contain several commands which extend the use of <application>GnomeSword
+					</application>. These include the StudyPad and advanced search functions.The menus also allow you to customize
+					your use of <application>GnomeSword</application>.
+			        </para>
+				</listitem>
+		 	</varlistentry>
+	        <varlistentry>
+				<term>Toolbar</term>
+					<listitem>
+						<para>
+						 The <interface>toolbar</interface> contains buttons that let you quickly navigate through the Bible.
+						</para>
+					</listitem>
+		 		</varlistentry>
+                <varlistentry>
+					<term>Sidebar</term>
+					<listitem>
+						<para>
+						The <interface>Sidebar</interface> provides access to several features. 
+						It contains your bookmarks and the list of installed books. It can also be 
+						used to perform simple searches.
+					</para>
+				</listitem>
+		  	</varlistentry>
+		  	<varlistentry>
+				<term>Bible Text pane</term>
+				<listitem>
+					<para>
+					The <interface>Bible Text pane</interface> displays the Bible text which is currently being viewed.
+					</para>
+			    </listitem>
+		  	 </varlistentry>
+		  	 <varlistentry>
+			 	<term>Commentary pane</term>
+			 	<listitem>
+					<para>
+					The <interface>Commentary pane</interface> displays commentaries on the current Bible Text being used.
+					</para>
+			 	</listitem>
+		     </varlistentry>
+			 <varlistentry>
+			 	<term>Dictionary/Book Pane</term>
+			 	<listitem>
+					<para>
+					The <interface>Dictionary/Book Pane</interface> displays dictionary information
+					on selected words in the <interface>Bible Text Pane</interface>.
+					</para>
+			 	</listitem>
+		     </varlistentry>
+			 </variablelist>
+		     <para>
+			When you right-click in the different interface sections, the interface displays a popup menu. 
+			</para>
+	</sect1>
+</chapter>

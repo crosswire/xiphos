@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE manual PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY introduction SYSTEM "introduction.xml">
+<!ENTITY start SYSTEM "start.xml">
+<!ENTITY interface SYSTEM "interface.xml">
+<!ENTITY preferences SYSTEM "preferences.xml"> 
+<!ENTITY modules SYSTEM "modules.xml">
+<!ENTITY search SYSTEM "search.xml">
+<!ENTITY studypad SYSTEM "studypad.xml"> 
+<!ENTITY authors SYSTEM "authors.xml">
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY app "GnomeSword2">
+<!ENTITY appversion "2.1.1">
+<!ENTITY manrevision "2.1">
+<!ENTITY gnomesword "the GnomeSword Team">
+<!ENTITY license SYSTEM "license.xml">
+<!ENTITY date "September 2003">
+]>
+
+<!-- =============Document Header ============================= -->
+<book id="index" lang="en">
+	<bookinfo>
+		<title>GnomeSword2 Manual</title>
+		<copyright>
+			<year>2003-2004</year>
+   	 		<holder>The GnomeSword Team</holder>
+  	 	</copyright>
+		<legalnotice>
+   			<para>
+     		Permission is granted to copy, distribute and/or modify this
+     		document under the terms of the <citetitle>GNU Free Documentation
+     		License</citetitle>, Version 1.1 or any later version published
+     		by the Free Software Foundation with no Invariant Sections, no
+     		Front-Cover Texts, and no Back-Cover Texts. You may obtain a copy
+     		of the <citetitle>GNU Free Documentation License</citetitle> from
+     		the Free Software Foundation by visiting <ulink type="http"
+     		url="http://www.fsf.org">their Web site</ulink> or by writing to:
+     		Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+     		Boston, MA 02111-1307, USA.
+   			</para>
+   			<para>
+     		Many of the names used by companies to distinguish their products and
+     		services are claimed as trademarks. Where those names appear in any
+     		GNOME documentation, and those trademarks are made aware to the members
+     		of the GNOME Documentation Project, the names have been printed in caps
+     		or initial caps.
+   			</para>
+  		</legalnotice>
+
+<!-- this is the version of manual, not application --> 
+		<releaseinfo>This is version 2.1.1 of the GnomeSword Manual</releaseinfo>
+ 		</bookinfo>
+<!-- Document Body -->
+<!-- Introduction -->
+		&introduction;
+<!-- Getting Started with GnomeSword -->
+		&start;
+<!-- Interface -->
+		&interface;
+<!-- Preferences -->
+		&preferences;
+<!-- Modules -->
+		&modules;
+<!-- Searching -->
+		&search;
+<!-- Studypad -->
+		&studypad;
+<!-- Authors -->
+		&authors;
+<!-- License -->
+		&license;
+</book>

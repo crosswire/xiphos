@@ -1,0 +1,55 @@
+--------------------------------------
+Documentation Guidelines
+---------------------------------------
+Welcome to the GnomeSword documentation guidelines.
+This document will contain some guidelines for writing/submitting a good patch
+to the GnomeSword documentation project.
+
+Any new features or large scale work should first be discussed on the
+gnomesword-developers mailing-list first.  This will ensure the idea fits in the
+direction we wish to take GnomeSword, and also that the effort is not
+duplicated.
+
+-----------------
+General:
+-----------------
+1. Please read the Gnome Documentation Project guidelines. If you would like a copy of it
+in PDF format, please email one of the Documentation developers. 
+
+2. Whilst editing, you can view your changes by simply going into your working directory and running :
+	" yelp filename.xml" 
+
+This also helps with finding errors and debugging. 
+
+-----------------
+Files:
+----------------
+1. gnomesword-manual.xml is the main file to the documentation. All chapter are linked from here. It acts
+as a contents page. The interface section's within GnomeSword are broken up into smaller more manageable 
+files which are listed within this file. If a new section is to be added to the manual eg. "Advanced Search dialogs",
+this needs to be mentioned in here. 
+
+2. Files are broken up into groups of interface categories. If you wish to edit the preferences dialog documentation, just 
+simply edit the "preferences.xml" file.
+
+------------------
+Screenshots:
+-------------------
+1. screenshots will only be accepted if it is in the "Traditional" theme. It can be
+accessed by going:
+
+	Applications -> Desktop Preferences -> Theme
+	or 
+	by simply running the command "gnome-theme-manager" in the terminal.
+
+This is to comply with the Gnome Documentation Project standards. 
+
+2.Please use discretion about image sizes. This includes file size and images size ( length
+and height). While there is no rule or standard to how big the image must be, visibility of the
+screenshot and visibility within "Yelp" is the main priority. We don't want to user to scroll horizontally
+just to view a screenshot. I normally keep my screenshot width at a maximum of 600 pixels.
+
+3.file naming will be done with the prefix of the interface ( eg. preferences, underscore, interface subsection ( eg. font-color ) 
+eg. " preferences_fontscolor.png"
+NOTE: please use lower-case.
+
