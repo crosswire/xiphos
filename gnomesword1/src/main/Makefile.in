@@ -1,0 +1,576 @@
+# Makefile.in generated automatically by automake 1.5 from Makefile.am.
+
+# Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
+# Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+@SET_MAKE@
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+top_builddir = ../..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_HEADER = $(INSTALL_DATA)
+transform = @program_transform_name@
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+AMTAR = @AMTAR@
+AS = @AS@
+AWK = @AWK@
+BUILD_INCLUDED_LIBINTL = @BUILD_INCLUDED_LIBINTL@
+CATALOGS = @CATALOGS@
+CATOBJEXT = @CATOBJEXT@
+CC = @CC@
+CXX = @CXX@
+DATADIRNAME = @DATADIRNAME@
+DEPDIR = @DEPDIR@
+DLLTOOL = @DLLTOOL@
+ECHO = @ECHO@
+EXEEXT = @EXEEXT@
+EXTRA_GNOME_CFLAGS = @EXTRA_GNOME_CFLAGS@
+EXTRA_GNOME_LIBS = @EXTRA_GNOME_LIBS@
+GENCAT = @GENCAT@
+GMOFILES = @GMOFILES@
+GMSGFMT = @GMSGFMT@
+GNOMEGNORBA_LIBS = @GNOMEGNORBA_LIBS@
+GNOMEUI_LIBS = @GNOMEUI_LIBS@
+GNOME_APPLETS_LIBS = @GNOME_APPLETS_LIBS@
+GNOME_APP_CFLAGS = @GNOME_APP_CFLAGS@
+GNOME_APP_LIBS = @GNOME_APP_LIBS@
+GNOME_CAPPLET_LIBS = @GNOME_CAPPLET_LIBS@
+GNOME_CONFIG = @GNOME_CONFIG@
+GNOME_DOCKLETS_LIBS = @GNOME_DOCKLETS_LIBS@
+GNOME_INCLUDEDIR = @GNOME_INCLUDEDIR@
+GNOME_LIBDIR = @GNOME_LIBDIR@
+GNOME_LIBS = @GNOME_LIBS@
+GNOME_PRINT_CFLAGS = @GNOME_PRINT_CFLAGS@
+GNOME_PRINT_LIBS = @GNOME_PRINT_LIBS@
+GNORBA_CFLAGS = @GNORBA_CFLAGS@
+GNORBA_LIBS = @GNORBA_LIBS@
+GTKHTML_CFLAGS = @GTKHTML_CFLAGS@
+GTKHTML_LIBS = @GTKHTML_LIBS@
+GTKXMHTML_LIBS = @GTKXMHTML_LIBS@
+GTK_CFLAGS = @GTK_CFLAGS@
+GTK_CONFIG = @GTK_CONFIG@
+GTK_LIBS = @GTK_LIBS@
+GT_NO = @GT_NO@
+GT_YES = @GT_YES@
+INCLUDE_LOCALE_H = @INCLUDE_LOCALE_H@
+INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+INSTOBJEXT = @INSTOBJEXT@
+INTLDEPS = @INTLDEPS@
+INTLLIBS = @INTLLIBS@
+INTLOBJS = @INTLOBJS@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
+MKINSTALLDIRS = @MKINSTALLDIRS@
+OBJDUMP = @OBJDUMP@
+OBJEXT = @OBJEXT@
+ORBIT_CFLAGS = @ORBIT_CFLAGS@
+ORBIT_CONFIG = @ORBIT_CONFIG@
+ORBIT_IDL = @ORBIT_IDL@
+ORBIT_LIBS = @ORBIT_LIBS@
+PACKAGE = @PACKAGE@
+PIXBUF_CFLAGS = @PIXBUF_CFLAGS@
+PIXBUF_LIBS = @PIXBUF_LIBS@
+POFILES = @POFILES@
+POSUB = @POSUB@
+PTHREAD_LIB = @PTHREAD_LIB@
+RANLIB = @RANLIB@
+STRIP = @STRIP@
+SWORD_CPPFLAGS = @SWORD_CPPFLAGS@
+SWORD_LIBS = @SWORD_LIBS@
+USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
+USE_NLS = @USE_NLS@
+VERSION = @VERSION@
+XPM_LIBS = @XPM_LIBS@
+ZVT_LIBS = @ZVT_LIBS@
+am__include = @am__include@
+am__quote = @am__quote@
+cflags_set = @cflags_set@
+cxxflags_set = @cxxflags_set@
+install_sh = @install_sh@
+l = @l@
+
+INCLUDES = \
+    $(GNOME_INCLUDEDIR) \
+    $(EXTRA_GNOME_CFLAGS) \
+    $(EXTRA_PRINT_CFLAGS) \
+    $(EXTRA_APP_CFLAGS) \
+    $(PIXBUF_CFLAGS) \
+    $(SWORD_CPPFLAGS) \
+    $(GTKHTML_CFLAGS) \
+    -I/usr/include/gnome-1.0/ \
+    -I$(top_builddir)/src/backend/ \
+    -I$(top_builddir)/src/gnome/
+
+
+bin_PROGRAMS = gnomesword
+
+COMMON_SOURCE = \
+    e-splash.c \
+    e-splash.h \
+    gs_bookmarks.c \
+    gs_bookmarks.h \
+    gs_commentary.c \
+    gs_commentary.h \
+    gs_detach_int.c \
+    gs_detach_int.h \
+    gs_detach_sb.c \
+    gs_detach_sb.h \
+    gs_dictlex.c \
+    gs_dictlex.h \
+    gs_editor.c \
+    gs_editor.h \
+    gs_editor_replace.c \
+    gs_editor_replace.h \
+    gs_editor_search.c \
+    gs_editor_search.h \
+    gs_editor_toolbar.c \
+    gs_editor_toolbar.h \
+    gs_file.c \
+    gs_file.h \
+    gs_find_dlg.c \
+    gs_find_dlg.h \
+    gs_gbs.c \
+    gs_gbs.h \
+    gs_getinfo_dlg.c \
+    gs_getinfo_dlg.h \
+    gs_gnomesword.c \
+    gs_gnomesword.h \
+    gs_gui.c \
+    gs_gui.h \
+    gs_gui_cb.c \
+    gs_gui_cb.h \
+    gs_history.c \
+    gs_history.h \
+    gs_html.c \
+    gs_html.h \
+    gs_info_box.c \
+    gs_info_box.h\
+    gs_information_dlg.c \
+    gs_information_dlg.h \
+    gs_mainmenu_cb.c \
+    gs_mainmenu_cb.h\
+    gs_menu.c \
+    gs_menu.h \
+    gs_popup_cb.c \
+    gs_popup_cb.h \
+    gs_preferences_dlg.c \
+    gs_preferences_dlg.h \
+    gs_setup.c \
+    gs_setup.h \
+    gs_shortcutbar.c \
+    gs_shortcutbar.h \
+    gs_unlockkey_dlg.c \
+    gs_unlockkey_dlg.h \
+    gs_viewcomm_dlg.c \
+    gs_viewcomm_dlg.h \
+    gs_viewdict_dlg.c \
+    gs_viewdict_dlg.h \
+    gs_viewtext_dlg.c \
+    gs_viewtext_dlg.h \
+    main.c \
+    support.c \
+    support.h 
+
+
+SPELLING_SOURCE = \
+    debug.h \
+    spell.c \
+    spell.h \
+    spell_gui.c \
+    spell_gui.h \
+    char_table.c \
+    char_table.h 
+
+
+EXTRA_DIST = \
+    $(SPELLING_SOURCE)
+
+
+gnomesword_LDADD = \
+    $(GNOME_LIBDIR) \
+    $(GNOMEUI_LIBS) \
+    $(EXTRA_GNOME_LIBS) \
+    $(SWORD_LIBS) \
+    $(GTKHTML_LIBS)\
+    $(GNOME_APP_LIBS)\
+    $(GNOME_PRINT_LIBS) \
+    $(PIXBUF_LIBS) \
+    $(top_builddir)/src/backend/libbackend.a \
+    $(top_builddir)/src/gnome/libgui.a 
+
+
+gnomesword_SOURCES = \
+    $(SPELLING_SOURCE) \
+    $(COMMON_SOURCE)
+
+
+CXXFLAGS = \
+    $(GTK_CFLAGS) \
+    $(SWORD_CPPFLAGS)
+
+subdir = src/main
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_CLEAN_FILES =
+bin_PROGRAMS = gnomesword$(EXEEXT)
+PROGRAMS = $(bin_PROGRAMS)
+
+am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
+	char_table.$(OBJEXT) e-splash.$(OBJEXT) gs_bookmarks.$(OBJEXT) \
+	gs_commentary.$(OBJEXT) gs_detach_int.$(OBJEXT) \
+	gs_detach_sb.$(OBJEXT) gs_dictlex.$(OBJEXT) gs_editor.$(OBJEXT) \
+	gs_editor_replace.$(OBJEXT) gs_editor_search.$(OBJEXT) \
+	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) \
+	gs_find_dlg.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
+	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
+	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
+	gs_information_dlg.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
+	gs_menu.$(OBJEXT) gs_popup_cb.$(OBJEXT) \
+	gs_preferences_dlg.$(OBJEXT) gs_setup.$(OBJEXT) \
+	gs_shortcutbar.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
+	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
+	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT)
+gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
+gnomesword_DEPENDENCIES = $(top_builddir)/src/backend/libbackend.a \
+	$(top_builddir)/src/gnome/libgui.a
+gnomesword_LDFLAGS =
+
+DEFS = @DEFS@
+DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/char_table.Po $(DEPDIR)/e-splash.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_commentary.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_detach_int.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_detach_sb.Po $(DEPDIR)/gs_dictlex.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor_replace.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor_search.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor_toolbar.Po $(DEPDIR)/gs_file.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_find_dlg.Po $(DEPDIR)/gs_gbs.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_getinfo_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_gnomesword.Po $(DEPDIR)/gs_gui.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_gui_cb.Po $(DEPDIR)/gs_history.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_html.Po $(DEPDIR)/gs_info_box.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_information_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_mainmenu_cb.Po $(DEPDIR)/gs_menu.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_popup_cb.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_preferences_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_setup.Po $(DEPDIR)/gs_shortcutbar.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_unlockkey_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_viewcomm_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_viewdict_dlg.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_viewtext_dlg.Po $(DEPDIR)/main.Po \
+@AMDEP_TRUE@	$(DEPDIR)/spell.Po $(DEPDIR)/spell_gui.Po \
+@AMDEP_TRUE@	$(DEPDIR)/support.Po
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
+	$(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+CFLAGS = @CFLAGS@
+DIST_SOURCES = $(gnomesword_SOURCES)
+DIST_COMMON = Makefile.am Makefile.in
+SOURCES = $(gnomesword_SOURCES)
+
+all: all-am
+
+.SUFFIXES:
+.SUFFIXES: .c .lo .o .obj
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+	-rm -f libtool
+$(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && \
+	  $(AUTOMAKE) --gnu  src/main/Makefile
+Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) && \
+	  CONFIG_HEADERS= CONFIG_LINKS= \
+	  CONFIG_FILES=$(subdir)/$@ $(SHELL) ./config.status
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+	  if test -f $$p \
+	     || test -f $$p1 \
+	  ; then \
+	    f=`echo $$p1|sed '$(transform);s/$$/$(EXEEXT)/'`; \
+	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f"; \
+	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  f=`echo $$p|sed 's/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
+	  echo " rm -f $(DESTDIR)$(bindir)/$$f"; \
+	  rm -f $(DESTDIR)$(bindir)/$$f; \
+	done
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+gnomesword$(EXEEXT): $(gnomesword_OBJECTS) $(gnomesword_DEPENDENCIES) 
+	@rm -f gnomesword$(EXEEXT)
+	$(LINK) $(gnomesword_LDFLAGS) $(gnomesword_OBJECTS) $(gnomesword_LDADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT) core *.core
+
+distclean-compile:
+	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/char_table.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/e-splash.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bookmarks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_commentary.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_int.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_sb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_dictlex.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_replace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_search.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_toolbar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_file.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_find_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gbs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_getinfo_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gnomesword.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gui_cb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_history.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_html.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_info_box.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_information_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_mainmenu_cb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_menu.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_popup_cb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_preferences_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_setup.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_shortcutbar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_unlockkey_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewcomm_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewdict_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewtext_dlg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/spell.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/spell_gui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/support.Po@am__quote@
+
+distclean-depend:
+	-rm -rf $(DEPDIR)
+
+.c.o:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(COMPILE) -c `test -f $< || echo '$(srcdir)/'`$<
+
+.c.obj:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(COMPILE) -c `cygpath -w $<`
+
+.c.lo:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(LTCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
+CCDEPMODE = @CCDEPMODE@
+uninstall-info-am:
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	mkid -fID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
+
+GTAGS:
+	here=`CDPATH=: && cd $(top_builddir) && pwd` \
+	  && cd $(top_srcdir) \
+	  && gtags -i $(GTAGS_ARGS) $$here
+
+distclean-tags:
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
+
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+
+top_distdir = ../..
+distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  if test "$$dir" != "$$file" && test "$$dir" != "."; then \
+	    $(mkinstalldirs) "$(distdir)/$$dir"; \
+	  fi; \
+	  if test -d $$d/$$file; then \
+	    cp -pR $$d/$$file $(distdir) \
+	    || exit 1; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || cp -p $$d/$$file $(distdir)/$$file \
+	    || exit 1; \
+	  fi; \
+	done
+check-am: all-am
+check: check-am
+all-am: Makefile $(PROGRAMS)
+
+installdirs:
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+
+install: install-am
+install-exec: install-exec-am
+install-data: install-data-am
+uninstall: uninstall-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+
+installcheck: installcheck-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+	  `test -z '$(STRIP)' || \
+	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+	@echo "This command is intended for maintainers to use"
+	@echo "it deletes files that may require special tools to rebuild."
+clean: clean-am
+
+clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
+
+distclean: distclean-am
+
+distclean-am: clean-am distclean-compile distclean-depend \
+	distclean-generic distclean-libtool distclean-tags
+
+dvi: dvi-am
+
+dvi-am:
+
+info: info-am
+
+info-am:
+
+install-data-am:
+
+install-exec-am: install-binPROGRAMS
+
+install-info: install-info-am
+
+install-man:
+
+installcheck-am:
+
+maintainer-clean: maintainer-clean-am
+
+maintainer-clean-am: distclean-am maintainer-clean-generic
+
+mostlyclean: mostlyclean-am
+
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
+
+uninstall-am: uninstall-binPROGRAMS uninstall-info-am
+
+.PHONY: GTAGS all all-am check check-am clean clean-binPROGRAMS \
+	clean-generic clean-libtool distclean distclean-compile \
+	distclean-depend distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am info info-am install \
+	install-am install-binPROGRAMS install-data install-data-am \
+	install-exec install-exec-am install-info install-info-am \
+	install-man install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool tags uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-info-am
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
