@@ -997,7 +997,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_container_add(GTK_CONTAINER(file_menu), save);
 
 
-		saveas = gtk_menu_item_new_with_label(_("Save As ..."));
+		saveas = gtk_menu_item_new_with_label(_("Save AS"));
 		gtk_widget_show(saveas);
 		gtk_container_add(GTK_CONTAINER(file_menu), saveas);
 	}

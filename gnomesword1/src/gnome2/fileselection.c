@@ -234,7 +234,7 @@ static GtkWidget *create_fileselection_save(
 	GtkWidget *cancel;
 
 	fileselection =
-		gtk_file_selection_new(_("Save StudyPad File"));
+		gtk_file_selection_new(_("GomeSword - Save StudyPad File"));
 	gtk_object_set_data(GTK_OBJECT(fileselection), "fileselection",
 			fileselection);
 	gtk_container_set_border_width(GTK_CONTAINER(fileselection), 10);
