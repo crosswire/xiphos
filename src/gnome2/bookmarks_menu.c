@@ -586,28 +586,34 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	info->text1 = g_strdup(caption);
 	info->ok = TRUE;
 	info->cancel = TRUE;
-
+		
+	
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
 		data = g_new(BOOKMARK_DATA,1);
+		data->caption = info->text1;
+		data->key = NULL; 		
+		data->module = NULL; 
+		data->module_desc = NULL;
+		data->description = NULL;
 		if(is_leaf) {
 			data->opened = pixbufs->pixbuf_helpdoc;
-			data->closed = NULL;
+			data->closed = NULL;	
+			data->key = info->text2; 		
+			data->module = info->text3; 
+			data->module_desc = get_module_description(info->text3);
+			if((strlen(description) > 1) || (strcmp(caption,info->text1))) {
+				data->description = info->text1;
+			}
+			else 
+				data->description = NULL;
+			data->is_leaf = TRUE;
 		} else {				
 			data->opened = pixbufs->pixbuf_opened;
-			data->closed = pixbufs->pixbuf_closed;	
+			data->closed = pixbufs->pixbuf_closed;
+			data->is_leaf = FALSE;
 		}
-		if((strlen(description) > 1) || (strcmp(caption,info->text1))) {
-			data->description = info->text1;
-		}
-		else 
-			data->description = NULL;
 			
-		data->caption = info->text1;	
-		data->key = info->text2; 		
-		data->module = info->text3; 
-		data->module_desc = get_module_description(info->text3);
-		data->is_leaf = TRUE;
 		gtk_tree_store_set(GTK_TREE_STORE(model), &selected, 
 			   COL_OPEN_PIXBUF, data->opened,
 			   COL_CLOSED_PIXBUF, data->closed,
