@@ -95,9 +95,9 @@ AC_LANG_CPLUSPLUS
 
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
-GS_CHECK_LIB(GAL, gal, 0.13.9.0)
-GS_CHECK_LIB(GtkHTML, gtkhtml, 0.14.9.0)
-GS_CHECK_LIB(GnomePrint, print, 0.25.0.0)
+GS_CHECK_LIB(GAL, gal, 0.8.0.0)
+GS_CHECK_LIB(GtkHTML, gtkhtml, 0.9.2.0)
+GS_CHECK_LIB(GnomePrint, print, 0.24.0.0)
 
 dnl **************************
 dnl  For the spell checker
