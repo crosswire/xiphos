@@ -73,6 +73,10 @@ struct  _app_widgets {
 		*html_studypad, /* studypad html widget */
 		
 	/* popup menu item widgets */
+	
+                *viewtexts_item, /* widget to access toggle menu - for showtexts */
+                *viewcomms_item, /* widget to access toggle menu - for showcommss */
+                *viewdicts_item, /* widget to access toggle menu - for showdicts */
 		*versestyle_item;	/* widget to access toggle menu - for versestyle */
 };
 extern WIDGETS widgets;		

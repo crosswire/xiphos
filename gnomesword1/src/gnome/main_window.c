@@ -134,6 +134,101 @@ GdkBitmap *mask3;
 extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
 
+/* Show/hide bible texts */
+void gui_show_hide_texts(gboolean choice)
+{
+	GtkWidget *texts;
+	texts = gui_lookup_widget(widgets.app, "vbox_text");
+	settings.showtexts = choice;
+	if (choice == FALSE) {
+		gtk_widget_hide(texts);
+	} else {
+		gtk_widget_show(texts);
+	}
+	gui_set_bible_comm_layout();
+
+}
+
+
+/* Show/hide Commentaries */
+void gui_show_hide_comms(gboolean choice)
+{
+	settings.showcomms = choice;
+	if (choice == FALSE) {
+		gtk_widget_hide(widgets.workbook_upper);
+	} else {
+		gtk_widget_show(widgets.workbook_upper);
+	}
+	gui_set_bible_comm_layout();
+}
+
+/* Show/hide Dictionaries-Lexicons */
+void gui_show_hide_dicts(gboolean choice)
+{
+	settings.showdicts = choice;
+	if (choice == FALSE) {
+		gtk_widget_hide(widgets.workbook_lower);
+	} else {
+		gtk_widget_show(widgets.workbook_lower);
+	}
+	gui_set_bible_comm_layout();
+}
+
+void gui_set_bible_comm_layout(void)
+{
+	if ((settings.showtexts == FALSE)
+	    && (settings.showcomms == FALSE)) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "vpaned1")), 0);
+	} else if (settings.showdicts == FALSE) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "vpaned1")),
+				     settings.gs_hight);
+	} else {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "vpaned1")),
+				     settings.upperpane_hight);
+	}
+
+	if ((settings.showtexts == FALSE)
+	    && (settings.showcomms == TRUE)) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "hpaned1")), 0);
+	} else if (settings.showtexts == FALSE) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "hpaned1")),
+				     settings.gs_width);
+	} else if ((settings.showtexts == TRUE)
+		   && (settings.showcomms == FALSE)) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "hpaned1")),
+				     settings.gs_width);
+	} else if ((settings.showtexts == TRUE)
+		   && (settings.showcomms == TRUE)) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "hpaned1")),
+				     settings.biblepane_width);
+	}
+
+	else if (settings.showtexts == TRUE) {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "hpaned1")),
+				     settings.gs_width);
+	} else {
+		e_paned_set_position(E_PANED
+				     (gui_lookup_widget
+				      (widgets.app, "hpaned1")),
+				     settings.biblepane_width);
+	}
+}
 
 /******************************************************************************
  * Name
@@ -608,7 +703,6 @@ void create_mainwindow(void)
 	GtkWidget *label85;
 	GtkWidget *swInt;
 	GtkWidget *label41;
-	GtkWidget *hbox8;
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
@@ -948,15 +1042,7 @@ void create_mainwindow(void)
 							
 	/*
 	 * end studypad editor 
-	 */									     
-	hbox8 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox8);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hbox8", hbox8,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(hbox8);
-
-
-	e_paned_pack2(E_PANED(vpaned1), hbox8, TRUE, TRUE);
+	 */
 
 	widgets.workbook_lower = gtk_notebook_new ();
 	gtk_widget_ref (widgets.workbook_lower);
@@ -964,9 +1050,9 @@ void create_mainwindow(void)
 			"widgets.workbook_lower", widgets.workbook_lower,
 				(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.workbook_lower);
-	gtk_box_pack_start(GTK_BOX (hbox8), widgets.workbook_lower,
-			TRUE, TRUE, 0);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.workbook_lower));
+	
+	e_paned_pack2(E_PANED(vpaned1), widgets.workbook_lower, TRUE, TRUE);
 	
 	/*
 	 * dict/lex  
