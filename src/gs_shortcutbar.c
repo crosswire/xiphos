@@ -64,6 +64,8 @@ gint groupnum0 = -1,
 
 static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
+static void on_search_results_link_clicked(GtkHTML * html, const gchar * url,
+			       gpointer data);
 static void on_link_clicked(GtkHTML * html, const gchar * url,
 			    gpointer data);
 //static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data);
@@ -844,7 +846,8 @@ on_search_results_link_clicked(GtkHTML * html, const gchar * url,
 	SETTINGS *s;
 
 	s = (SETTINGS *) data;
-	changesearchresultsSBSW(s, (gchar *) url);
+	changeVerseSWORD((gchar*)url);
+	
 }
 
 static void
@@ -893,13 +896,13 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	GtkWidget *vbox3;
 	GtkWidget *frame3;
 	GtkWidget *scrolledwindow3;
-	GtkWidget *frame4;
-	GtkWidget *scrolledwindow4;
+	//GtkWidget *frame4;
+	//GtkWidget *scrolledwindow4;
 	GtkWidget *label2;
 	GtkWidget *frame5;
 	GtkWidget *label3;
 	GtkWidget *htmlshow;
-	GtkWidget *htmlshow2;
+	//GtkWidget *htmlshow2;
 	GtkWidget *scrolledwindow5;
 	GtkWidget *htmlviewer;
 	GtkWidget *frameTB;
@@ -1134,7 +1137,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_widget_show(s->srhtml);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3), s->srhtml);
 	gtk_html_load_empty(GTK_HTML(s->srhtml));
-
+/*
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame4);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4", frame4,
@@ -1153,6 +1156,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow4), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	
 
 	htmlshow2 = gtk_html_new();
 	gtk_widget_ref(htmlshow2);
@@ -1160,10 +1164,10 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 "htmlshow2", htmlshow2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(htmlshow2);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow4), htmlshow2);
-	gtk_html_load_empty(GTK_HTML(htmlshow2));
-	setupsearchresultsSBSW(htmlshow2);
-
+	gtk_container_add(GTK_CONTAINER(scrolledwindow3), htmlshow2);
+	gtk_html_load_empty(GTK_HTML(htmlshow2));*/
+	setupsearchresultsSBSW(s->srhtml);
+	
 	label2 = gtk_label_new(_("label2"));
 	gtk_widget_ref(label2);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "label2", label2,
