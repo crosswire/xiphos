@@ -632,8 +632,8 @@ HTMLentryDisp::Display(SWModule &imodule)
  				*myverse,
 				*font,
 				*sourceType,
-				*tag;
-	int i,j,len;
+				tag[255];
+	int i,j,len,taglen;
 	font = "Roman";
 	
 	/* Load a italic font */
@@ -668,13 +668,10 @@ HTMLentryDisp::Display(SWModule &imodule)
 	
 	while(i<len)		
 	{
-	    if(myverse[i] == '<')
-	    {
-	        tag = gettags(myverse,i); //-- get html tags
-	        buf = g_strdup(tag);
-	        //cout << buf << '\n';
-	        i = i + strlen(buf);  //-- remove tags (we do not want to see them)
-	        g_free(buf);
+	    if(myverse[i] == '<'){	    
+	        tag[0] = '\0';
+	        taglen = gettags(myverse, tag, i); //-- get html tags
+	        i = i + taglen;  //-- remove tags (we do not want to see them)
 	        //-------------------------------------------------------------------------- italic
 		    if(!strcmp(tag,"<I>"))
   	        {					
@@ -765,11 +762,10 @@ HTMLChapDisp::Display(SWModule &imodule)
 {
 	char    tmpBuf[255];
 	char    *verseBuf,
-	        *tag,
-                *buf;
+	        tag[255];
 	char    *myverse,
                 *font;
-	int     i,j;	
+	int     i,j,taglen;	
 	bool 	greek_on=FALSE,
 		italics_on=FALSE,
 		poetry_on=FALSE,
@@ -854,13 +850,13 @@ HTMLChapDisp::Display(SWModule &imodule)
 		        verseBuf = new char[len+1];
 	                verseBuf[0]='\0';
 		        while(i<len){
-		                if(myverse[i] == '<'){   		
-		                        tag = gettags(myverse,i); //-- get html tags
+		                if(myverse[i] == '<'){
+		                        tag[0] = '\0';   		
+		                        taglen = gettags(myverse, tag, i); //-- get html tags
 		                        if(tag){
-		                                buf = g_strdup(tag);
-		                                i = i + strlen(buf);  //-- remove tags (we do not want to see them)
-		                                //cout << tag << '\n';
-    	                                        g_free(buf);
+		                                i = i + taglen;  //-- remove tags (we do not want to see them)
+		                                //sprintf(buf,"%d",taglen);
+		                                //cout << tag << '\n' << buf << '\n';
 		                                if(!strcmp(tag,"<SMALL><EM>")){  //-- strongs numbers -		           		
 				                        if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
 				                        else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
@@ -1030,12 +1026,10 @@ HTMLChapDisp::Display(SWModule &imodule)
 }
 
 //-----------------------------------------------------------------------------------------------
-gchar *
-GTKEntryDisp::gettags(gchar *text, gint pos)
+gint
+GTKEntryDisp::gettags(gchar *text, gchar *tag, gint pos)
 {
     gint i,j,len;
-    gchar   tag[256],
-            *buf;
 
     j = 0;
     len = strlen(text);
@@ -1047,10 +1041,10 @@ GTKEntryDisp::gettags(gchar *text, gint pos)
         tag[j] = '\0';
         if(text[i] == '>' && text[i+1] != '<' )
         {
-            return tag;
+            return j;
         }
     }
-    return NULL;
+    return 0;
 }
 
 //-------------------------------------------------------------------------------------------
