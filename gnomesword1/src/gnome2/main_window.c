@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include "main/sword.h"
 #include "main/settings.h"
-
+ 
 #include "gui/gnomesword.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
