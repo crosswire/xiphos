@@ -1839,10 +1839,8 @@ static GtkWidget *create_search_dialog(void)
 	gtk_object_set_data(GTK_OBJECT(search_dialog), "search_dialog",
 			    search_dialog);
 	gtk_window_set_title(GTK_WINDOW(search_dialog), title);
-	gtk_window_set_default_size(GTK_WINDOW(search_dialog), 598,
-				    337);
-	gtk_window_set_policy(GTK_WINDOW(search_dialog), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_default_size(GTK_WINDOW(search_dialog), 598, 400);
+	gtk_window_set_policy(GTK_WINDOW(search_dialog), TRUE, TRUE, FALSE);
 
 	hbox_search = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox_search);
@@ -1860,9 +1858,9 @@ static GtkWidget *create_search_dialog(void)
 
 	frame_search = gtk_frame_new(_("Search"));
 	gtk_widget_show(frame_search);
-	gtk_box_pack_start(GTK_BOX(vbox57), frame_search, FALSE, TRUE,
-			   0);
-
+	gtk_box_pack_start(GTK_BOX(vbox57), frame_search, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_search), 2);
+					     
 	vbox82 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox82);
 	gtk_container_add(GTK_CONTAINER(frame_search), vbox82);
@@ -1884,8 +1882,6 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar37), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar37);
 	gtk_box_pack_start(GTK_BOX(hbox71), toolbar37, TRUE, TRUE, 0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar37),
-				      GTK_RELIEF_NONE);*/
 
 	label230 = gtk_label_new(_(" for "));
 	gtk_widget_show(label230);
@@ -1901,10 +1897,10 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(entry17);
 	gtk_box_pack_start(GTK_BOX(vbox_entry), entry17, FALSE, FALSE,
 			   0);
-	gtk_widget_set_usize(entry17, 350, -2);
+	gtk_widget_set_usize(entry17, 325, -2);
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-search", 
+			"gtk-find", 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar37)));
 	button_begin_search =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar37),
@@ -1921,7 +1917,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_set_usize(vseparator25, 6, 7);
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-exit", 
+			"gtk-close", 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar37)));
 	button_close =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar37),
@@ -1930,21 +1926,19 @@ static GtkWidget *create_search_dialog(void)
 				       _("Close search dialog"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(button_close);
-
-	frame66 = gtk_frame_new(NULL);
-	gtk_widget_show(frame66);
-	gtk_box_pack_start(GTK_BOX(vbox57), frame66, TRUE, TRUE, 0);
-
+	
 	notebook8 = gtk_notebook_new();
 	gtk_widget_show(notebook8);
-	gtk_container_add(GTK_CONTAINER(frame66), notebook8);
+	gtk_box_pack_start(GTK_BOX(vbox57), notebook8, TRUE, TRUE, 0);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(notebook8), TRUE);
 	gtk_notebook_set_tab_hborder(GTK_NOTEBOOK(notebook8), 8);
 	gtk_notebook_set_tab_vborder(GTK_NOTEBOOK(notebook8), 1);
-
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook8),FALSE);
+	
 	frame47 = gtk_frame_new(NULL);
 	gtk_widget_show(frame47);
 	gtk_container_add(GTK_CONTAINER(notebook8), frame47);
+	gtk_container_set_border_width (GTK_CONTAINER (frame47), 2);
 
 	vbox58 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox58);
@@ -1954,6 +1948,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(frame_scope);
 	gtk_box_pack_start(GTK_BOX(vbox58), frame_scope, FALSE, TRUE,
 			   0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_scope), 2);
 
 	vbox77 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox77);
@@ -1983,8 +1978,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(rb_last);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_last, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_last,
-			     _
-			     ("Use the results of the last search for the search scope"),
+	    _("Use the results of the last search for the search scope"),
 			     NULL);
 
 	rb_custom_range =
@@ -2019,6 +2013,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(frame_modlists);
 	gtk_box_pack_start(GTK_BOX(vbox58), frame_modlists, FALSE, TRUE,
 			   0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_modlists), 2);
 
 	vbox79 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox79);
@@ -2088,6 +2083,7 @@ static GtkWidget *create_search_dialog(void)
 	frame49 = gtk_frame_new(_("Search Type"));
 	gtk_widget_show(frame49);
 	gtk_box_pack_start(GTK_BOX(vbox72), frame49, TRUE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame49), 2);
 
 	vbox63 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox63);
@@ -2120,6 +2116,7 @@ static GtkWidget *create_search_dialog(void)
 	frame57 = gtk_frame_new(_("Options"));
 	gtk_widget_show(frame57);
 	gtk_box_pack_start(GTK_BOX(hbox74), frame57, TRUE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame57), 2);
 
 	vbox64 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox64);
@@ -2176,8 +2173,6 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar35), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar35);
 	gtk_box_pack_start(GTK_BOX(vbox70), toolbar35, FALSE, FALSE, 0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar35),
-				      GTK_RELIEF_NONE);*/
 				      
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			"gtk-jump-to", 
@@ -2252,6 +2247,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox65), frame_report, TRUE, TRUE,
 			   0);
 	gtk_widget_set_usize(frame_report, 212, -2);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_report), 2);
 
 	scrolledwindow_report = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_report);
@@ -2265,6 +2261,7 @@ static GtkWidget *create_search_dialog(void)
 	frame_preview = gtk_frame_new(_("Preview"));
 	gtk_widget_show(frame_preview);
 	gtk_paned_pack2(GTK_PANED(vpaned3), frame_preview, TRUE, TRUE);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_preview), 2);
 
 	scrolledwindow_preview = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_preview);
@@ -2278,6 +2275,7 @@ static GtkWidget *create_search_dialog(void)
 	frame_results = gtk_frame_new(_("Found"));
 	gtk_widget_show(frame_results);
 	gtk_paned_pack2(GTK_PANED(hpaned7), frame_results, TRUE, TRUE);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_results), 2);
 
 	scrolledwindow_results = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_results);
@@ -2306,6 +2304,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(frame_custom_ranges);
 	gtk_container_add(GTK_CONTAINER(notebook8),
 			  frame_custom_ranges);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_custom_ranges), 2);
 
 	vbox78 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox78);
@@ -2316,8 +2315,6 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar38), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar38);
 	gtk_box_pack_start(GTK_BOX(vbox78), toolbar38, FALSE, FALSE, 0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar38),
-				      GTK_RELIEF_NONE);*/
 				      
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			"gtk-new", 
@@ -2398,6 +2395,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(frame66a);
 	gtk_box_pack_start(GTK_BOX(hbox76), frame66a, TRUE, TRUE, 0);
 	gtk_widget_set_usize(frame66a, 176, -2);
+	gtk_container_set_border_width (GTK_CONTAINER (frame66a), 2);
 
 	vbox76 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox76);
@@ -2460,6 +2458,7 @@ static GtkWidget *create_search_dialog(void)
 	frame67a = gtk_frame_new(NULL);
 	gtk_widget_show(frame67a);
 	gtk_container_add(GTK_CONTAINER(notebook8), frame67a);
+	gtk_container_set_border_width (GTK_CONTAINER (frame67a), 2);
 
 	vbox73 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox73);
@@ -2470,8 +2469,6 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar36), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar36);
 	gtk_box_pack_start(GTK_BOX(vbox73), toolbar36, FALSE, FALSE, 0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar36),
-				      GTK_RELIEF_NONE);*/
 
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
@@ -2573,6 +2570,7 @@ static GtkWidget *create_search_dialog(void)
 	frame67 = gtk_frame_new(NULL);
 	gtk_widget_show(frame67);
 	gtk_box_pack_start(GTK_BOX(hbox82), frame67, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame67), 2);
 
 	vbox80 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox80);
@@ -2581,6 +2579,7 @@ static GtkWidget *create_search_dialog(void)
 	frame69 = gtk_frame_new(_("List Name"));
 	gtk_widget_show(frame69);
 	gtk_box_pack_start(GTK_BOX(vbox80), frame69, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame69), 2);
 
 	entry_modlist_name = gtk_entry_new();
 	gtk_widget_show(entry_modlist_name);
@@ -2589,6 +2588,7 @@ static GtkWidget *create_search_dialog(void)
 	frame68 = gtk_frame_new(_("Modules"));
 	gtk_widget_show(frame68);
 	gtk_box_pack_start(GTK_BOX(vbox80), frame68, TRUE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame68), 2);
 
 	vbox81 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox81);
@@ -2599,8 +2599,6 @@ static GtkWidget *create_search_dialog(void)
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar39), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar39);
 	gtk_box_pack_start(GTK_BOX(vbox81), toolbar39, FALSE, FALSE, 0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar39),
-				      GTK_RELIEF_NONE);*/
 
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
@@ -2644,7 +2642,9 @@ static GtkWidget *create_search_dialog(void)
 				       (scrolledwindow66),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-
+				       
+				       
+/**********************************************************************/
 	clist_modules = gtk_clist_new(2);
 	gtk_widget_show(clist_modules);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow66),
@@ -2661,7 +2661,10 @@ static GtkWidget *create_search_dialog(void)
 	label233 = gtk_label_new("");
 	gtk_widget_show(label233);
 	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 1,
-				    label233);
+				    label233);	       
+/**********************************************************************/
+
+
 
 	label205 = gtk_label_new(_("Custom Lists"));
 	gtk_widget_show(label205);
@@ -2746,12 +2749,13 @@ static GtkWidget *create_search_dialog(void)
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(search.treeview)));
 	/* connect signals */
 
+	g_signal_connect(G_OBJECT(search_dialog), "destroy",
+                      G_CALLBACK(on_button_close),
+			   NULL);
+       g_signal_connect(G_OBJECT(entry17), "activate",
+                          G_CALLBACK(on_button_begin_search), NULL);
 	g_signal_connect(mod_selection, "changed",
 			 G_CALLBACK(mod_selection_changed), search.treeview);
-/*
-	g_signal_connect(G_OBJECT(search.ctree), "tree_select_row",
-			   G_CALLBACK(on_ctree_select_row), NULL);
-			   */
 	g_signal_connect(G_OBJECT(search.rb_current_module),
 			   "toggled",
 			   G_CALLBACK(current_module_toggled),
@@ -2872,18 +2876,6 @@ void gui_do_dialog_search(void)
 
 		/* add custom modlist to module_list */
 		add_modlist();
-
-		/* add bibletext folder to module ctree and fill it */
-		//fill_group("Bibletext", get_list(TEXT_DESC_LIST));
-
-		/* add commentary folder to module ctree and fill it */
-		//fill_group("Commentaries", get_list(COMM_DESC_LIST));
-
-		/* add dictionary folder to module ctree and fill it */
-		//fill_group("Dictionaries", get_list(DICT_DESC_LIST));
-
-		/* add book folder to module ctree and fill it */
-		//fill_group("General Books", get_list(GBS_DESC_LIST));
 
 		/* set search module to current module 
 		   and put in clist_modules */

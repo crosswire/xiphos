@@ -520,10 +520,13 @@ static void create_pane(TEXT_DATA * t)
 	GtkWidget *vbox;
 	GtkWidget *frame_text;
 	GtkWidget *scrolledwindow;
-
+	
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_show(t->frame);
-	gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
+	gtk_box_pack_start(GTK_BOX(t->vbox), t->frame, TRUE,
+			   TRUE, 0); 
+	gtk_frame_set_shadow_type(GTK_FRAME(t->frame),GTK_SHADOW_NONE);
+	//gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
