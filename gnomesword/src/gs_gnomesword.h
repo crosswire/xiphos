@@ -113,7 +113,9 @@ struct _settings {
 	        personalcommentsmod[80], 	/* module to open at program startup  */
 	        devotionalmod[80], /* module to use for devotional */
 		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
-		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/
+		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/	        
+		lex_greek_viewer[80], /* module to use for greek lexicon - strongs or thayers - in viewer */
+		lex_hebrew_viewer[80], /* module to use for hebrew lexicon - strongs or BDB - in viewer */
 	        currentverse[80],	/* verse to use at program startup */
 	        *cvInterlinear,	/* current verse for detached interlinear */
 		*percomverse, /* current verse for personal comments */
@@ -189,9 +191,14 @@ struct _settings {
 		text_tabs, /* show module tabs in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
+		book_tabs, /* show module tabs in books if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		notefollow, /* notes follow Bible text when true */
+		havethayer, /* for greek morph tags */
+		havebdb, /* for hebrew morph tags */
+		inViewer, /* display dict/lex in viewer when word or link clicked */
+		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
 		
 		/** if items are docked **/
 		docked, /* true when shortcut bar is docked */

@@ -74,147 +74,156 @@ gboolean loadconfig(SETTINGS *s)
 	
 	/* app size on open ,epane sizes and shortcut bar width */
 	sprintf(settings->gs_version,"%s",settingsInfo["GnomeSword"]["Version"].c_str());
-	settings->shortcutbar_width =
+	s->shortcutbar_width =
 	    atoi(settingsInfo["LAYOUT"]["Shortcutbar"].c_str());
-	settings->upperpane_hight =
+	s->upperpane_hight =
 	    atoi(settingsInfo["LAYOUT"]["UperPane"].c_str());
-	settings->biblepane_width =
+	s->biblepane_width =
 	    atoi(settingsInfo["LAYOUT"]["BiblePane"].c_str());
-	settings->gs_width =
+	s->gs_width =
 	    atoi(settingsInfo["LAYOUT"]["AppWidth"].c_str());
-	settings->gs_hight =
+	s->gs_hight =
 	    atoi(settingsInfo["LAYOUT"]["AppHight"].c_str());
-	settings->docked =
+	s->docked =
 	    atoi(settingsInfo["LAYOUT"]["ShortcutbarDocked"].c_str());
 	
 	/* which lexicon to open when storngs numbers are clicked */
-	sprintf(settings->lex_greek, "%s",
+	sprintf(s->lex_greek, "%s",
 		settingsInfo["LEXICONS"]["Greek"].c_str());
-	sprintf(settings->lex_hebrew, "%s",
+	sprintf(s->lex_hebrew, "%s",
 		settingsInfo["LEXICONS"]["Hebrew"].c_str());
+	/* which lexicon to open in viewer when storngs numbers are clicked */
+	sprintf(s->lex_greek_viewer, "%s",
+		settingsInfo["LEXICONS"]["Greek Viewer"].c_str());
+	sprintf(s->lex_hebrew_viewer, "%s",
+		settingsInfo["LEXICONS"]["Hebrew Viewer"].c_str());
 		
 	/* font sizes html widgets */
-	sprintf(settings->bible_font_size, "%s",
+	sprintf(s->bible_font_size, "%s",
 		settingsInfo["FontSize"]["BibleWindow"].c_str());
-	sprintf(settings->commentary_font_size, "%s",
+	sprintf(s->commentary_font_size, "%s",
 		settingsInfo["FontSize"]["CommentaryWindow"].c_str());
-	sprintf(settings->dictionary_font_size, "%s",
+	sprintf(s->dictionary_font_size, "%s",
 		settingsInfo["FontSize"]["DictionaryWindow"].c_str());
-	sprintf(settings->interlinear_font_size, "%s",
+	sprintf(s->interlinear_font_size, "%s",
 		settingsInfo["FontSize"]["InterlinearWindow"].c_str());
-	sprintf(settings->verselist_font_size, "%s",
+	sprintf(s->verselist_font_size, "%s",
 		settingsInfo["FontSize"]["VerseListWindow"].c_str());
-	sprintf(settings->verse_num_font_size, "%s",
+	sprintf(s->verse_num_font_size, "%s",
 		settingsInfo["FontSize"]["VerseNum"].c_str());
 		
 	/*** fonts ***/	
-	sprintf(settings->default_font,"%s",settingsInfo["Fonts"]["Default"].c_str());
-	sprintf(settings->greek_font,"%s", settingsInfo["Fonts"]["Greek"].c_str());
-	sprintf(settings->hebrew_font,"%s",settingsInfo["Fonts"]["Hebrew"].c_str());
-	sprintf(settings->unicode_font,"%s", settingsInfo["Fonts"]["Unicode"].c_str());	
-	sprintf(settings->interlinear_font,"%s", settingsInfo["Fonts"]["Interlinear"].c_str());
+	sprintf(s->default_font,"%s",settingsInfo["Fonts"]["Default"].c_str());
+	sprintf(s->greek_font,"%s", settingsInfo["Fonts"]["Greek"].c_str());
+	sprintf(s->hebrew_font,"%s",settingsInfo["Fonts"]["Hebrew"].c_str());
+	sprintf(s->unicode_font,"%s", settingsInfo["Fonts"]["Unicode"].c_str());	
+	sprintf(s->interlinear_font,"%s", settingsInfo["Fonts"]["Interlinear"].c_str());
 	
 	/* modules to use on startup */
-	sprintf(settings->MainWindowModule, "%s",
+	sprintf(s->MainWindowModule, "%s",
 		settingsInfo["Modules"]["MainWindow"].c_str());
-	sprintf(settings->CommWindowModule, "%s",
+	sprintf(s->CommWindowModule, "%s",
 		settingsInfo["Modules"]["CommWindow"].c_str());
-	sprintf(settings->DictWindowModule, "%s",
+	sprintf(s->DictWindowModule, "%s",
 		settingsInfo["Modules"]["DictWindow"].c_str());
-	sprintf(settings->Interlinear1Module, "%s",
+	sprintf(s->Interlinear1Module, "%s",
 		settingsInfo["Modules"]["Interlinear1"].c_str());
-	sprintf(settings->Interlinear2Module, "%s",
+	sprintf(s->Interlinear2Module, "%s",
 		settingsInfo["Modules"]["Interlinear2"].c_str());
-	sprintf(settings->Interlinear3Module, "%s",
+	sprintf(s->Interlinear3Module, "%s",
 		settingsInfo["Modules"]["Interlinear3"].c_str());
-	sprintf(settings->Interlinear4Module, "%s",
+	sprintf(s->Interlinear4Module, "%s",
 		settingsInfo["Modules"]["Interlinear4"].c_str());
-	sprintf(settings->Interlinear5Module, "%s",
+	sprintf(s->Interlinear5Module, "%s",
 		settingsInfo["Modules"]["Interlinear5"].c_str());
-	sprintf(settings->personalcommentsmod, "%s",
+	sprintf(s->personalcommentsmod, "%s",
 		settingsInfo["Modules"]["PerComments"].c_str());
-	sprintf(settings->devotionalmod, "%s",
+	sprintf(s->devotionalmod, "%s",
 		settingsInfo["Modules"]["Devotional"].c_str());
 		
 	/* main notebook page */
-	settings->notebook3page =
+	s->notebook3page =
 	    atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
 	    
 	/* Bible verse and dict/lex key to open with */
-	sprintf(settings->currentverse, "%s",
+	sprintf(s->currentverse, "%s",
 		settingsInfo["Keys"]["verse"].c_str());
-	sprintf(settings->dictkey, "%s",
+	sprintf(s->dictkey, "%s",
 		settingsInfo["Keys"]["dictionarykey"].c_str());
 		
 	/* studypad file to open with if any */
-	sprintf(settings->studypadfilename, "%s",
+	sprintf(s->studypadfilename, "%s",
 		settingsInfo["StudyPad"]["Lastfile"].c_str());
-	sprintf(settings->studypaddir, "%s",
+	sprintf(s->studypaddir, "%s",
 		settingsInfo["StudyPad"]["Directory"].c_str());
 		
 	/* misc user options */
-	sprintf(settings->bible_text_color, "%s",
+	sprintf(s->bible_text_color, "%s",
 		settingsInfo["User Options"]["BibleTextColor"].c_str());
-	sprintf(settings->bible_bg_color, "%s",
+	sprintf(s->bible_bg_color, "%s",
 		settingsInfo["User Options"]["BibleBGColor"].c_str());
-	sprintf(settings->currentverse_color, "%s",
+	sprintf(s->currentverse_color, "%s",
 		settingsInfo["User Options"]["currentVerseColor"].c_str());
-	sprintf(settings->bible_verse_num_color, "%s",
+	sprintf(s->bible_verse_num_color, "%s",
 		settingsInfo["User Options"]["BibleVerseNumColor"].c_str());
-	sprintf(settings->link_color, "%s",
+	sprintf(s->link_color, "%s",
 		settingsInfo["User Options"]["LinkColor"].c_str());
-	sprintf(settings->found_color, "%s",
+	sprintf(s->found_color, "%s",
 		settingsInfo["User Options"]["FoundColor"].c_str());		
-	settings->usedefault =
+	s->usedefault =
 	    atoi(settingsInfo["User Options"]["UseDefault"].c_str());
-	settings->strongs =
+	s->strongs =
 	    atoi(settingsInfo["User Options"]["strongs"].c_str());
-	settings->strongsint =
+	s->strongsint =
 	    atoi(settingsInfo["User Options"]["strongs interlinear"].c_str());
-	settings->morphsint =
+	s->morphsint =
 	    atoi(settingsInfo["User Options"]["morphs interlinear interlinear"].c_str());  
-	settings->hebrewpointsint =
+	s->hebrewpointsint =
 	    atoi(settingsInfo["User Options"]["Hebrew Points Interlinear"].c_str());
-	settings->cantillationmarksint =
+	s->cantillationmarksint =
 	    atoi(settingsInfo["User Options"]["Cantillation Marks Interlinear"].c_str());     
-	settings->footnotesint =
+	s->footnotesint =
 	    atoi(settingsInfo["User Options"]["footnotes interlinear"].c_str());
-	settings->versestyle =
+	s->versestyle =
 	    atoi(settingsInfo["User Options"]["versestyle"].c_str());
-	settings->autosavepersonalcomments =
+	s->autosavepersonalcomments =
 	    atoi(settingsInfo["User Options"]["autosavepersonalcomments"].c_str());
-	settings->formatpercom =
+	s->formatpercom =
 	    atoi(settingsInfo["User Options"]["formatpercom"].c_str());
-	settings->showshortcutbar =
+	s->showshortcutbar =
 	    atoi(settingsInfo["User Options"]["showshortcutbar"].c_str());
-	settings-> showfavoritesgroup=
+	s-> showfavoritesgroup=
 	    atoi(settingsInfo["User Options"]["showfavogroup"].c_str());
-	settings->showtextgroup =
+	s->showtextgroup =
 	    atoi(settingsInfo["User Options"]["showtextgroup"].c_str());
-	settings->showcomgroup =
+	s->showcomgroup =
 	    atoi(settingsInfo["User Options"]["showcomgroup"].c_str());
-	settings->showdictgroup =
+	s->showdictgroup =
 	    atoi(settingsInfo["User Options"]["showdictgroup"].c_str());
-	settings->showbookgroup =
+	s->showbookgroup =
 	    atoi(settingsInfo["User Options"]["showbookgroup"].c_str());
-	settings->showbookmarksgroup =
+	s->showbookmarksgroup =
 	    atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());
-	settings->interlinearpage =
+	s->interlinearpage =
 	    atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
-	settings->showhistorygroup =
+	s->showhistorygroup =
 	    atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
-	settings->showsplash =
+	s->showsplash =
 	    atoi(settingsInfo["User Options"]["ShowSplash"].c_str());
-	settings->showdevotional =
+	s->showdevotional =
 	    atoi(settingsInfo["User Options"]["Daily Devotional"].c_str());
-	settings->text_tabs =
+	s->text_tabs =
 	    atoi(settingsInfo["User Options"]["BibleTabs"].c_str());
-	settings->comm_tabs =
+	s->comm_tabs =
 	    atoi(settingsInfo["User Options"]["CommTabs"].c_str());
-	settings->dict_tabs =
+	s->dict_tabs =
 	    atoi(settingsInfo["User Options"]["DictTabs"].c_str());
-	settings->notefollow =
+	s->notefollow =
 	    atoi(settingsInfo["User Options"]["NoteScroll"].c_str());
+	s->inViewer =
+	    atoi(settingsInfo["User Options"]["InViewer"].c_str());
+	s->inDictpane =
+	    atoi(settingsInfo["User Options"]["InDictPane"].c_str());
 
 
 	return true;
@@ -223,7 +232,7 @@ gboolean loadconfig(SETTINGS *s)
 /******************************************************************************
  * save gnomesword configuration - using sword SWConfig
  ******************************************************************************/
-gboolean saveconfig(gboolean shutdown)
+gboolean saveconfig(SETTINGS *s, gboolean shutdown)
 {
 	gchar buf[80], buf2[255];
 
@@ -232,137 +241,141 @@ gboolean saveconfig(gboolean shutdown)
 	
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
 	
-	if (settings->usedefault && shutdown) {
+	if (s->usedefault && shutdown) {
 		settingsInfo["StudyPad"]["Lastfile"] =
-		    	settings->studypadfilename;
+		    	s->studypadfilename;
 		settingsInfo["Keys"]["verse"] = 
-			settings->currentverse;
+			s->currentverse;
 		settingsInfo["Keys"]["dictionarykey"] = 
-			settings->dictkey;
+			s->dictkey;
 	} else {
 		settingsInfo["Modules"]["MainWindow"] =
-		    settings->MainWindowModule;
+		    s->MainWindowModule;
 		settingsInfo["Modules"]["CommWindow"] =
-		    settings->CommWindowModule;
+		    s->CommWindowModule;
 		settingsInfo["Modules"]["DictWindow"] =
-		    settings->DictWindowModule;
+		    s->DictWindowModule;
 		settingsInfo["Modules"]["Interlinear1"] =
-		    settings->Interlinear1Module;
+		    s->Interlinear1Module;
 		settingsInfo["Modules"]["Interlinear2"] =
-		    settings->Interlinear2Module;
+		    s->Interlinear2Module;
 		settingsInfo["Modules"]["Interlinear3"] =
-		    settings->Interlinear3Module;
+		    s->Interlinear3Module;
 		settingsInfo["Modules"]["Interlinear4"] =
-		    settings->Interlinear4Module;
+		    s->Interlinear4Module;
 		settingsInfo["Modules"]["Interlinear5"] =
-		    settings->Interlinear5Module;
+		    s->Interlinear5Module;
 		settingsInfo["Modules"]["PerComments"] =
-		    settings->personalcommentsmod;
+		    s->personalcommentsmod;
 		settingsInfo["Modules"]["Devotional"] =
-		    settings->devotionalmod;
+		    s->devotionalmod;
 
-		settingsInfo["LEXICONS"]["Greek"] = settings->lex_greek;
-		settingsInfo["LEXICONS"]["Hebrew"] = settings->lex_hebrew;
+		settingsInfo["LEXICONS"]["Greek"] = s->lex_greek;
+		settingsInfo["LEXICONS"]["Hebrew"] = s->lex_hebrew;
+/* which lexicon to open in viewer when storngs numbers are clicked */
+		settingsInfo["LEXICONS"]["Greek Viewer"] = s->lex_greek_viewer;
+		settingsInfo["LEXICONS"]["Hebrew Viewer"] = s->lex_hebrew_viewer;
 
-
-		sprintf(buf, "%d", settings->notebook3page);
+		sprintf(buf, "%d", s->notebook3page);
 		settingsInfo["Notebooks"]["notebook3page"] = buf;
 
 
 
-		settingsInfo["Keys"]["verse"] = settings->currentverse;
-		settingsInfo["Keys"]["dictionarykey"] = settings->dictkey;
+		settingsInfo["Keys"]["verse"] = s->currentverse;
+		settingsInfo["Keys"]["dictionarykey"] = s->dictkey;
 
 		settingsInfo["StudyPad"]["Lastfile"] =
-		    settings->studypadfilename;
+		    s->studypadfilename;
 		settingsInfo["StudyPad"]["Directory"] =
-		    settings->studypaddir;
+		    s->studypaddir;
 
 		settingsInfo["FontSize"]["BibleWindow"] =
-		    settings->bible_font_size;
+		    s->bible_font_size;
 		settingsInfo["FontSize"]["CommentaryWindow"] =
-		    settings->commentary_font_size;
+		    s->commentary_font_size;
 		settingsInfo["FontSize"]["DictionaryWindow"] =
-		    settings->dictionary_font_size;
+		    s->dictionary_font_size;
 		settingsInfo["FontSize"]["InterlinearWindow"] =
-		    settings->interlinear_font_size;
+		    s->interlinear_font_size;
 		settingsInfo["FontSize"]["VerseListWindow"] =
-		    settings->verselist_font_size;
+		    s->verselist_font_size;
 		settingsInfo["FontSize"]["VerseNum"] =
-		    settings->verse_num_font_size;
+		    s->verse_num_font_size;
 		 settingsInfo["Fonts"]["Default"] =
-		    settings->default_font;   
+		    s->default_font;   
 		 settingsInfo["Fonts"]["Greek"] =
-		    settings->greek_font;   
+		    s->greek_font;   
 		 settingsInfo["Fonts"]["Hebrew"] =
-		    settings->hebrew_font;   
+		    s->hebrew_font;   
 		 settingsInfo["Fonts"]["Unicode"] =
-		    settings->unicode_font;   
-		 settingsInfo["Fonts"]["Interlinear"] = settings->interlinear_font;
+		    s->unicode_font;   
+		 settingsInfo["Fonts"]["Interlinear"] = s->interlinear_font;
 		 
 		/* layout */    
-		sprintf(buf, "%d", settings->shortcutbar_width);
+		sprintf(buf, "%d", s->shortcutbar_width);
 		settingsInfo["LAYOUT"]["Shortcutbar"] = buf;
 		
-		sprintf(buf, "%d", settings->upperpane_hight);
+		sprintf(buf, "%d", s->upperpane_hight);
 		settingsInfo["LAYOUT"]["UperPane"] = buf;
 	
-		sprintf(buf, "%d", settings->biblepane_width);
+		sprintf(buf, "%d", s->biblepane_width);
 		settingsInfo["LAYOUT"]["BiblePane"] = buf;
 		
-		sprintf(buf, "%d", settings->gs_width);
+		sprintf(buf, "%d", s->gs_width);
 		settingsInfo["LAYOUT"]["AppWidth"] = buf;
 		
-		sprintf(buf, "%d", settings->gs_hight);
+		sprintf(buf, "%d", s->gs_hight);
 		settingsInfo["LAYOUT"]["AppHight"] = buf;		
 		
-		settingsInfo["LAYOUT"]["ShortcutbarDocked"] = isON(settings->docked);
+		settingsInfo["LAYOUT"]["ShortcutbarDocked"] = isON(s->docked);
 		
 		
 		/* User Options */
 		settingsInfo["User Options"]["currentVerseColor"] =
-		    settings->currentverse_color;
+		    s->currentverse_color;
 		
 		settingsInfo["User Options"]["BibleTextColor"] =
-		    settings->bible_text_color;
+		    s->bible_text_color;
 		
 		settingsInfo["User Options"]["BibleBGColor"] =
-		    settings->bible_bg_color;
+		    s->bible_bg_color;
 		
 		settingsInfo["User Options"]["BibleVerseNumColor"] =
-		    settings->bible_verse_num_color;
+		    s->bible_verse_num_color;
 		
 		 settingsInfo["User Options"]["LinkColor"] = 
-		 	settings->link_color;   
+		 	s->link_color;   
 		
 		settingsInfo["User Options"]["FoundColor"] =
-			settings->found_color;
+			s->found_color;
 		
-		settingsInfo["User Options"]["UseDefault"] = isON(settings->usedefault);
-		settingsInfo["User Options"]["strongs"] = isON(settings->strongs);
-		settingsInfo["User Options"]["strongs interlinear"] = isON(settings->strongsint);
-		settingsInfo["User Options"]["morphs interlinear"] = isON(settings->morphsint);
-		settingsInfo["User Options"]["Hebrew Points Interlinear"] = isON(settings->hebrewpoints);
-		settingsInfo["User Options"]["Cantillation Marks Interlinear"] = isON(settings->cantillationmarks);
-		settingsInfo["User Options"]["footnotes interlinear"] = isON(settings->footnotesint);
-		settingsInfo["User Options"]["versestyle"] = isON(settings->versestyle);
-		settingsInfo["User Options"]["autosavepersonalcomments"] = isON(settings->autosavepersonalcomments);
-		settingsInfo["User Options"]["formatpercom"] = isON(settings->formatpercom);
-		settingsInfo["User Options"]["showshortcutbar"] = isON(settings->showshortcutbar);
-		settingsInfo["User Options"]["showfavogroup"] = isON(settings->showfavoritesgroup);
-		settingsInfo["User Options"]["showtextgroup"] = isON(settings->showtextgroup);
-		settingsInfo["User Options"]["showcomgroup"] = isON(settings->showcomgroup);
-		settingsInfo["User Options"]["showdictgroup"] = isON(settings->showdictgroup);
-		settingsInfo["User Options"]["showbookgroup"] = isON(settings->showbookgroup);
-		settingsInfo["User Options"]["showbookmarksgroup"] = isON(settings->showbookmarksgroup);
-		settingsInfo["User Options"]["interlinearpage"] = isON(settings->interlinearpage);
-		settingsInfo["User Options"]["showhistorygroup"] = isON(settings->showhistorygroup);
-		settingsInfo["User Options"]["ShowSplash"] =  isON(settings->showsplash);
-		settingsInfo["User Options"]["Daily Devotional"] = isON(settings->showdevotional);
-		settingsInfo["User Options"]["NoteScroll"] = isON(settings->notefollow);
-		settingsInfo["User Options"]["BibleTabs"] = isON(settings->text_tabs);
-		settingsInfo["User Options"]["CommTabs"] = isON(settings->comm_tabs);
-		settingsInfo["User Options"]["DictTabs"] = isON(settings->dict_tabs);
+		settingsInfo["User Options"]["UseDefault"] = isON(s->usedefault);
+		settingsInfo["User Options"]["strongs"] = isON(s->strongs);
+		settingsInfo["User Options"]["strongs interlinear"] = isON(s->strongsint);
+		settingsInfo["User Options"]["morphs interlinear"] = isON(s->morphsint);
+		settingsInfo["User Options"]["Hebrew Points Interlinear"] = isON(s->hebrewpoints);
+		settingsInfo["User Options"]["Cantillation Marks Interlinear"] = isON(s->cantillationmarks);
+		settingsInfo["User Options"]["footnotes interlinear"] = isON(s->footnotesint);
+		settingsInfo["User Options"]["versestyle"] = isON(s->versestyle);
+		settingsInfo["User Options"]["autosavepersonalcomments"] = isON(s->autosavepersonalcomments);
+		settingsInfo["User Options"]["formatpercom"] = isON(s->formatpercom);
+		settingsInfo["User Options"]["showshortcutbar"] = isON(s->showshortcutbar);
+		settingsInfo["User Options"]["showfavogroup"] = isON(s->showfavoritesgroup);
+		settingsInfo["User Options"]["showtextgroup"] = isON(s->showtextgroup);
+		settingsInfo["User Options"]["showcomgroup"] = isON(s->showcomgroup);
+		settingsInfo["User Options"]["showdictgroup"] = isON(s->showdictgroup);
+		settingsInfo["User Options"]["showbookgroup"] = isON(s->showbookgroup);
+		settingsInfo["User Options"]["showbookmarksgroup"] = isON(s->showbookmarksgroup);
+		settingsInfo["User Options"]["interlinearpage"] = isON(s->interlinearpage);
+		settingsInfo["User Options"]["showhistorygroup"] = isON(s->showhistorygroup);
+		settingsInfo["User Options"]["ShowSplash"] =  isON(s->showsplash);
+		settingsInfo["User Options"]["Daily Devotional"] = isON(s->showdevotional);
+		settingsInfo["User Options"]["NoteScroll"] = isON(s->notefollow);
+		settingsInfo["User Options"]["BibleTabs"] = isON(s->text_tabs);
+		settingsInfo["User Options"]["CommTabs"] = isON(s->comm_tabs);
+		settingsInfo["User Options"]["DictTabs"] = isON(s->dict_tabs);
+	        settingsInfo["User Options"]["InViewer"] = isON(s->inViewer);
+		settingsInfo["User Options"]["InDictPane"] = isON(s->inDictpane);
 	}
 	settingsInfo.Save();
 	return true;
@@ -453,6 +466,8 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["ShowSplash"] = "1";
 	settingsInfo["User Options"]["Daily Devotional"] = "1";
 	settingsInfo["User Options"]["NoteScroll"] = "1";
+	settingsInfo["User Options"]["InViewer"] = "1";
+	settingsInfo["User Options"]["InDictPane"] = "1";
 	settingsInfo.Save();
 	return true;
 }
@@ -535,6 +550,8 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["ShowSplash"] = "1";
 	settingsInfo["User Options"]["Daily Devotional"] = "1";
 	settingsInfo["User Options"]["NoteScroll"] = "1";
+	settingsInfo["User Options"]["InViewer"] = "1";
+	settingsInfo["User Options"]["InDictPane"] = "1";
 	
 	settingsInfo.Save();
 	return true;

@@ -179,9 +179,9 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			}
 		}
 		
-		mybuf = NULL;
-		mybuf = strstr(buf, "value=");
 		
+		mybuf = NULL;
+		mybuf = strstr(buf, "value=");		
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
 			++mybuf;

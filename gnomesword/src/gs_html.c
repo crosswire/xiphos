@@ -85,7 +85,7 @@ GtkWidget *gs_new_html_widget(SETTINGS *s) {
 	html = gtk_html_new();
 	gtk_html_load_empty(GTK_HTML(html));	
 	gtk_signal_connect(GTK_OBJECT(html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(html), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
 	return html;
@@ -184,14 +184,17 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data) {
  ***************************************************************************************************/
 void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar * buf, *modbuf = NULL, tmpbuf[255];
+	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
 	gchar newmod[80], newref[80];
 	gint i = 0, havemod = 0;
-
+	
+	
 	if (*url == '@') {
 		++url;
 		swapmodsSWORD((gchar *) url);
-	} else if (*url == '[') {
+	} 
+	
+	else if (*url == '[') {
 		++url;
 		while (*url != ']') {
 			tmpbuf[i++] = *url;
@@ -199,8 +202,10 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++url;
 		}
 		showmoduleinfoSWORD(tmpbuf,FALSE);
-	 /*** let's seperate mod version and passage ***/
-	} else if (!strncmp(url, "version=", 7)
+	 
+	} 
+	/*** let's seperate mod version and passage ***/
+	else if (!strncmp(url, "version=", 7)
 		   || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
 		mybuf = strstr(url, "version=");
@@ -239,55 +244,48 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			/* we have a dict/lex module 
 			    so we don't need to get a verse list */
 			displaydictlexSBSW(modbuf, buf, settings);
-		} else {
+		} 
+		else {
 			getVerseListSBSWORD(modbuf, buf, settings);
 		}
 		g_free(buf);
 		
-	} else if (!strncmp(url, "type=morph", 10)) {
+	} 
+	
+	else if (!strncmp(url, "type=morph", 10)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
-		mybuf = strstr(url, "class=Packard");
+		buf = g_strdup(url);
+		mybuf = strstr(url, "class=");
 		if (mybuf) {
-			modbuf = "Packard";
+			gint i;
+			modbuf = strchr(mybuf, '=');
+			++modbuf;
+			for(i=0;i<strlen(modbuf);i++){
+				if(modbuf[i]==' ') {
+					modbuf[i]='\0';
+					break;
+				}
+			}
 		}
-		mybuf = NULL;
-		mybuf = strstr(url, "class=Robinson");
-		if (mybuf) {
-			modbuf = "Robinson";
-		}
-		mybuf = strstr(url, "value=");
+		
+		mybuf = NULL;		
+		mybuf = strstr(buf, "value=");
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
 			++mybuf;
-			/*for(i=0;i<strlen(mybuf);i++){
-				if(mybuf[i]=='-') 
-					mybuf[i]=' ';
-			}*/
 		}
 		buf = g_strdup(mybuf);
-		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
-		displaydictlexSBSW(modbuf, buf, settings);
-		//gotoBookmarkSWORD(modbuf, buf);
+		if(settings->inDictpane) gotoBookmarkSWORD(modbuf, buf);
+		if(settings->inViewer) displaydictlexSBSW(modbuf, buf, settings);
 		g_free(buf);
-	
-	 /*** let's seperate mod version and passage ***/
-	} else if (!strncmp(url, "type=", 5)) {
+	} 
+	/*** l ***/
+	else if (!strncmp(url, "type=Strongs", 12)) {
+		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		gint type = 0;
-		mybuf = strstr(url, "type=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			i = 0;
-			while (mybuf[i] != ' ') {
-				newmod[i] = mybuf[i];
-				newmod[i + 1] = '\0';
-				++i;
-				++havemod;
-			}
-			//g_warning(newmod);
-		}
+		//buf = g_strdup(url);
 		mybuf = NULL;
 		mybuf = strstr(url, "value=");
 		i = 0;
@@ -300,148 +298,106 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				type = 1;
 			++mybuf;
 			sprintf(newref, "%5.5d", atoi(mybuf));
-			//g_warning(newref);
 		}
-		if (havemod > 2) {
-			if (!strcmp(newmod, "Strongs") && type == 0)
-				modbuf = "StrongsHebrew";
-			if (!strcmp(newmod, "Strongs") && type == 1)
-				modbuf = "StrongsGreek";
-
-		} else {
-			modbuf = "";
-			return;
-		}
+			if (type)
+				modbuf = settings->lex_greek;
+			else
+				modbuf = settings->lex_hebrew;
+		
 		buf = g_strdup(newref);
-		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
-		displaydictlexSBSW(modbuf, buf, settings);
+		if(settings->inDictpane) gotoBookmarkSWORD(modbuf, buf);
+		if(settings->inViewer) displaydictlexSBSW(modbuf, buf, settings);
 		g_free(buf);
 
-	} else if (*url == '#') {
+	} 
+	
+	else if (*url == '#') {
 		++url;		/* remove # */
-		if (*url == 'T')
+		if (*url == 'T') {
 			++url; /* remove T */
+			if (*url == 'G') {
+				++url; /* remove G */
+				if(settings->havethayer) {
+					buf = g_strdup(url);
+					if(settings->inDictpane) gotoBookmarkSWORD("Thayer", buf);
+					if(settings->inViewer) displaydictlexSBSW("Thayer", buf, settings);
+					g_free(buf);
+					return;
+				}
+				
+				else 
+					return;
+			}
+			
+			if (*url == 'H') {
+				++url; /* remove H */
+				if(settings->havebdb) {
+					buf = g_strdup(url);
+					if(settings->inDictpane) gotoBookmarkSWORD("BDB", buf);
+					if(settings->inViewer) displaydictlexSBSW("BDB", buf, settings);
+					g_free(buf);
+					return;
+				}
+				
+				else 
+					return;
+			}
+		}
+		
 		if (*url == 'G') {
 			++url; /* remove G */
 			buf = g_strdup(url);
-			//gotoBookmarkSWORD(settings->lex_greek, buf);
-			displaydictlexSBSW(settings->lex_greek, buf, settings);
-			g_free(buf);
+			if(atoi(buf) > 5624) {
+				if(settings->havethayer) {
+					buf = g_strdup(url);
+					if(settings->inDictpane) gotoBookmarkSWORD("Thayer", buf);
+					if(settings->inViewer) displaydictlexSBSW("Thayer", buf, settings);
+					g_free(buf);
+					return;
+				}				
+				else 
+					return;
+				
+			}
+			
+			else {
+				if(settings->inDictpane) gotoBookmarkSWORD(settings->lex_greek, buf);
+				if(settings->inViewer) displaydictlexSBSW(settings->lex_greek_viewer, buf, settings);
+				g_free(buf);
+			}
 		}
+		
 		if (*url == 'H') {
 			++url; /* remove H */
 			buf = g_strdup(url);
-			//gotoBookmarkSWORD(settings->lex_hebrew, buf);
-			displaydictlexSBSW(settings->lex_hebrew, buf, settings);
-			g_free(buf);
+			if(atoi(buf) > 8674) {
+				if(settings->havebdb) {
+					buf = g_strdup(url);
+					if(settings->inDictpane) gotoBookmarkSWORD("BDB", buf);
+					if(settings->inViewer) displaydictlexSBSW("BDB", buf, settings);
+					g_free(buf);
+					return;
+				}
+				
+				else 
+					return;
+			}
+			
+			else {
+				if(settings->inDictpane) gotoBookmarkSWORD(settings->lex_hebrew, buf);
+				if(settings->inViewer) displaydictlexSBSW(settings->lex_hebrew_viewer, buf, settings);
+				g_free(buf);
+			}
 		}
-	} else if (*url == 'M') {
-		++url;		/* remove M */
-		buf = g_strdup(url);
-		//displaydictlexSBSWORD("Packard", buf, settings);
-		gotoBookmarkSWORD("Packard", buf);
-		g_free(buf);
-	}
-}
-
-/***************************************************************************************************
- *link in text window clicked
- ***************************************************************************************************/
-void
-on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
-{
-	gchar *buf, *modbuf, tmpbuf[255];
-	gint i = 0;
-
-	if (*url == '#') {
-		++url;		/* remove # */
-		if (*url == 'T')
-			++url;
-		if (*url == 'G') {
-			++url;
-			buf = g_strdup(url);
-			//gotoBookmarkSWORD(settings->lex_greek, buf);
-			displaydictlexSBSW(settings->lex_greek, buf, settings);
-			g_free(buf);
-		}
-		if (*url == 'H') {
-			++url;
-			buf = g_strdup(url);
-			//gotoBookmarkSWORD(settings->lex_hebrew, buf);
-			displaydictlexSBSW(settings->lex_hebrew, buf, settings);
-			g_free(buf);
-		}
-		
-	} else if (*url == 'M') {
-		++url;		/* remove M */
-		buf = g_strdup(url);
-		//gotoBookmarkSWORD("Packard", buf);
-		displaydictlexSBSW("Packard", buf, settings);
-		g_free(buf);
-		
-	} else if (*url == '*') {
-		++url;
-		while (*url != ']') {
-			++url;
-		}
-		++url;
-		buf = g_strdup(url);
-		changeVerseSWORD(buf);
-		g_free(buf);
-		
-	} else if (*url == 'I') {
-		++url;
-		buf = g_strdup(url);
-		changeVerseSWORD(buf);
-		g_free(buf);
-		
-	} else if (*url == '[') {
-		++url;
-		while (*url != ']') {
-			tmpbuf[i++] = *url;
-			tmpbuf[i + 1] = '\0';
-			++url;
-		}
-		showmoduleinfoSWORD(tmpbuf,FALSE);
+	} 
 	
-	 /*** let's remove passage= verse list ***/
-	} else if (!strncmp(url, "passage=", 7)) {
-		gchar *mybuf = NULL;
-		mybuf = strchr(url, '=');
-		++mybuf;
-		buf = g_strdup(mybuf);
-		modbuf = getmodnameSWORD(0);
-		getVerseListSBSWORD(modbuf, buf, settings);
-		g_free(buf);
-		
-	} else if (!strncmp(url, "type=morph", 10)) {
-		gchar *modbuf = NULL;
-		gchar *mybuf = NULL;
-		mybuf = strstr(url, "class=Packard");
-		if (mybuf) {
-			modbuf = "Packard";
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "class=Robinson");
-		if (mybuf) {
-			modbuf = "Robinson";
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "value=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;/*
-			for(i=0;i<strlen(mybuf);i++){
-				if(mybuf[i]=='-') 
-					mybuf[i]=' ';
-			}*/
-		}
-		buf = g_strdup(mybuf);
-		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
-		gotoBookmarkSWORD(modbuf, buf);
+	else if (*url == 'M') {
+		++url;		/* remove M */
+		buf = g_strdup(url);
+		if(settings->inDictpane) gotoBookmarkSWORD("Packard", buf);
+		if(settings->inViewer) displaydictlexSBSW("Packard", buf, settings);
 		g_free(buf);
 	}
-
 }
 
 /******************************************************************************
@@ -480,7 +436,10 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 	case 1:if(!in_url) {
 			key = buttonpresslookupGS_HTML(html);
 			if(key) {
-				displaydictlexSBSW(settings->DictWindowModule, key, settings);
+				if(settings->inViewer)
+					displaydictlexSBSW(settings->DictWindowModule, key, settings);
+				if(settings->inDictpane)
+					gotoBookmarkSWORD(settings->DictWindowModule, key);
 				g_free(key);
 			}
 			return TRUE;
@@ -700,7 +659,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 
 
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_press_event",
