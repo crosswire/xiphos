@@ -46,26 +46,6 @@ int gbs_treekey_get_parent(unsigned long offset)
 {
 	return backend_get_parent(offset);
 }
-/******************************************************************************
- * Name
- *  module_name_from_description
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void module_name_from_description(gchar *mod_name, gchar *description)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-char *module_name_from_description(char *description)
-{
-	backend_module_name_from_description(description);
-}
 
 
 /******************************************************************************
