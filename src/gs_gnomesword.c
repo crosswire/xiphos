@@ -48,7 +48,7 @@
 /*****************************************************************************
 * globals
 *****************************************************************************/	
-GtkWidget	*versestyle,	/* widget to access toggle menu - for versestyle */
+GtkWidget	
 		*footnotes,	/* widget to access toggle menu - for footnotes */
   		*strongsnum,/* widget to access toggle menu - for strongs numbers */
 	    	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
@@ -89,7 +89,7 @@ extern gboolean havedict; /* let us know if we have at least one lex-dict module
 extern gboolean havecomm; /* let us know if we have at least one commentary module */
 extern gboolean havebible; /* let us know if we have at least one Bible text module */
 extern gboolean usepersonalcomments; /* do we setup for personal comments - default is FALSE */
-extern gboolean bVerseStyle;
+//extern gboolean bVerseStyle;
 extern gboolean autoSave;
 extern gint groupnum4;
 extern gint ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
@@ -163,7 +163,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_auto_save_notes1_activate);
 	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page",
 				(GtkMenuCallback)on_show_interlinear_page1_activate);
-	versestyle = additemtooptionmenu(app, "_Settings/", "Verse Style",
+	settings->versestyle_item = additemtooptionmenu(app, "_Settings/", "Verse Style",
 				(GtkMenuCallback)on_verse_style1_activate);
 	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes",
 				(GtkMenuCallback)on_footnotes1_activate);
@@ -321,12 +321,7 @@ addnotebookpages(GtkWidget *notebook, GList *list, gchar *modName)
  *****************************************************************************/
 void UpdateChecks(GtkWidget *app)
 {
-	if(settings->versestyle)	/* set verse style to last setting used */
-		bVerseStyle = TRUE; /* keep VerseStyle in sync with menu */
-	else
-		bVerseStyle = FALSE; /* keep VerseStyle in sync with menu */
-	GTK_CHECK_MENU_ITEM (versestyle)->active = settings->versestyle;
-	
+	GTK_CHECK_MENU_ITEM (settings->versestyle_item)->active = settings->versestyle;	
 	
 	if(settings->footnotes)  /* set footnotes to last setting used */
 		setglobalopsSWORD("Footnotes","On" );	/* keep footnotes in sync with menu */		
@@ -363,41 +358,6 @@ void UpdateChecks(GtkWidget *app)
         //addHistoryItem(app, lookup_widget(app, "shortcut_bar"), settings->currentverse);
 }
 
-void
-applyoptions(void)
-{
-         GtkWidget    	*text,
-				*dict,
-                      		*comm;
-	
-	text = lookup_widget(MainFrm,"nbTextMods");
-        dict = lookup_widget(MainFrm,"notebook4");
-        comm = lookup_widget(MainFrm,"notebook1");
-	/*  */	
-	if(settings->text_tabs) {
-                gtk_widget_show(text);
-        } else {
-                gtk_widget_hide(text);
-        }
-        if(settings->comm_tabs) {
-                gtk_widget_show(comm);
-        } else {
-                gtk_widget_hide(comm);
-        }
-        if(settings->dict_tabs) {
-                gtk_widget_show(dict);
-        } else {
-                gtk_widget_hide(dict);
-        }
-        if(settings->showshortcutbar){
-               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbar_width);
-        } else {
-               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1);
-        }
-	GTK_CHECK_MENU_ITEM (versestyle)->active = settings->versestyle;
-	bVerseStyle = settings->versestyle;
-	applyfontcolorandsizeSWORD();
-}
 
 /*****************************************************************************		
  * return verse number form verse in main Bible window
@@ -470,46 +430,7 @@ gint getdictnumber (GtkWidget *text)
          return atoi(buf); /* send it back as an integer */
 }
 
-/*****************************************************************************
- * sbchangeModSword
- * group_num
- * item_num
-******************************************************************************/
-void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, gint item_num)
-{
-        GtkWidget       *notebook;
-        gchar		*type[1],
-				*ref[1];
-	
-	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
-						  group_num,
-						  item_num,
-						  type,
-						  ref);
-					  	
-	if(!strcmp(type[0],"bible:")) {
-		if(havebible){/* let's don't do this if we don't have at least one Bible text */
-			//changecurModSWORD(ref[0],TRUE);
-			notebook = lookup_widget(app,"nbTextMods"); /* get notebook */
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
-		}
-	}
-	if(!strcmp(type[0],"commentary:")) {
-		if(havecomm) { /* let's don't do this if we don't have at least one commentary */	           			            	
-			notebook = lookup_widget(app,"notebook1"); /* get notebook */
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
-    		}
-    	}
-	if(!strcmp(type[0],"dict/lex:")) {
-		if(havedict) { /* let's don't do this if we don't have at least one dictionary / lexicon */	           			            	
-			notebook = lookup_widget(app,"notebook4"); /* get notebook */
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
-  		}
-	}
-	if(!strcmp(type[0],"history:")) {
-		changeVerseSWORD(ref[0]);
-	}						
-}
+
 
 /*****************************************************************************
  *setformatoption
