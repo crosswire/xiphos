@@ -217,7 +217,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key)
 {
 	gchar tmpBuf[500];
-	gchar *use_font;
+	gchar *use_font = FALSE;
 	gchar *use_font_size = NULL;
 	GString *str;
 	GString *search_str;
@@ -229,8 +229,9 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	GtkHTMLStream *htmlstream;
 
 	mf = get_font(mod_name);
-
+	//if(mf->old_font)
 	use_font = g_strdup(mf->old_font);
+	//g_warning("mod = %s use_font = %s", mod_name,use_font);
 	//g_warning("use_font = %s",use_font);
 	if (use_font) {
 		if (!strncmp(use_font, "none", 4))
@@ -242,12 +243,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		use_gtkhtml_font = TRUE;
 
 	}
-
-	if ((mf->old_font_size[0] == '-')
-	    || (mf->old_font_size[0] == '+'))
-		use_font_size = g_strdup(mf->old_font_size);
-	else
-		use_font_size = g_strdup("+0");
+	use_font_size = g_strdup(mf->old_font_size);
 
 	/* setup gtkhtml widget */
 	html = GTK_HTML(html_widget);
@@ -319,7 +315,8 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		free(use_font_size);
 	if (use_font)
 		free(use_font);
-	g_free(mf);
+	//free_font(mf);
+	free_font(mf);
 	g_string_free(str, TRUE);
 }
 
@@ -392,12 +389,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		use_gtkhtml_font = TRUE;
 
 	}
-
-	if ((mf->old_font_size[0] == '-')
-	    || (mf->old_font_size[0] == '+'))
-		use_font_size = g_strdup(mf->old_font_size);
-	else
-		use_font_size = g_strdup("+0");
+	use_font_size = g_strdup(mf->old_font_size);
 
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
@@ -436,7 +428,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 
 		str = g_string_append(str, buf);
 
-		if (use_gtkhtml_font) {
+		if (!use_gtkhtml_font) {
 			sprintf(tmpbuf,
 				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				use_font, use_font_size, textColor);
@@ -508,7 +500,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		g_free(use_font_size);
 	if (use_font)
 		g_free(use_font);
-	g_free(mf);
+	free_font(mf);
 	g_free(tmpkey);
 }
 
@@ -560,13 +552,7 @@ void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 		use_gtkhtml_font = TRUE;
 
 	}
-
-	if ((mf->old_font_size[0] == '-')
-	    || (mf->old_font_size[0] == '+'))
-		use_font_size = g_strdup(mf->old_font_size);
-	else
-		use_font_size = g_strdup("+1");
-
+	use_font_size = g_strdup(mf->old_font_size);
 
 	sprintf(tmpBuf,
 		HTML_START
@@ -631,7 +617,7 @@ void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 		free(use_font_size);
 	if (use_font)
 		free(use_font);
-	g_free(mf);
+	free_font(mf);
 	g_string_free(str, TRUE);
 }
 
@@ -694,7 +680,6 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 	mf = get_font(mod_name);
 
 	use_font = g_strdup(mf->old_font);
-	//g_warning("use_font = %s",use_font);
 	if (use_font) {
 		if (!strncmp(use_font, "none", 4))
 			use_gtkhtml_font = TRUE;
@@ -706,12 +691,7 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 
 	}
 
-	if ((mf->old_font_size[0] == '-')
-	    || (mf->old_font_size[0] == '+'))
-		use_font_size = g_strdup(mf->old_font_size);
-	else
-		use_font_size = g_strdup("+1");
-
+	use_font_size = g_strdup(mf->old_font_size);
 
 	if (use_globals)
 		set_global_options(tgs);
@@ -817,7 +797,7 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 		g_free(use_font_size);
 	if (use_font)
 		g_free(use_font);
-	g_free(mf);
+	free_font(mf);
 	g_free(tmpkey);
 }
 #endif
@@ -1007,7 +987,7 @@ void chapter_display_icu(GtkWidget * html_widget, gchar * mod_name,
 		g_free(use_font_size);
 	if (use_font)
 		g_free(use_font);
-	g_free(mf);
+	free_font(mf);
 	g_free(tmpkey);
 }
 #endif

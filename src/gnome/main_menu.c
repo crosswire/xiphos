@@ -440,6 +440,12 @@ static void on_book_item_activate(GtkMenuItem * menuitem,
 static void view_hints(GtkMenuItem * menuitem, gpointer user_data)
 {
 	hint.use_hints = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	
+	if(!hint.use_hints)
+		gui_destroy_hint_window();
+	/*
+	if(hint.use_hints)
+		gui_open_hint_viewer();*/
 }
 
 

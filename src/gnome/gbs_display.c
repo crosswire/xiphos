@@ -76,12 +76,7 @@ static GString *gbs_entry(unsigned long offset, GBS_DATA * gbs,
 		use_gtkhtml_font = TRUE;
 
 	}
-		
-	if ((mf->old_font_size[0] == '-')
-	    || (mf->old_font_size[0] == '+'))
-		use_font_size = g_strdup(mf->old_font_size);
-	else
-		use_font_size = g_strdup("+1");
+	use_font_size = g_strdup(mf->old_font_size);
 	
 	if (gbs->is_rtol)
 		div_align = "<div align=\"right\">";
@@ -233,4 +228,5 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 
 #endif
 	g_string_free(str, TRUE);
+	free_font(mf);
 }
