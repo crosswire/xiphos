@@ -119,9 +119,21 @@ static GnomeUIInfo file1_menu_uiinfo[] =
 
 static GnomeUIInfo edit1_menu_uiinfo[] =
 {
-  GNOMEUIINFO_MENU_COPY_ITEM (on_copy1_activate, NULL),
+  {
+    GNOME_APP_UI_ITEM, "Copy",
+    "Copy high lighted text form main window",
+    on_copy1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
   GNOMEUIINFO_SEPARATOR,
-  GNOMEUIINFO_MENU_FIND_ITEM (on_find1_activate, NULL),
+  {
+    GNOME_APP_UI_ITEM, "Search",
+    "Open search dialog",
+    on_search1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
   GNOMEUIINFO_END
 };
 
@@ -147,7 +159,13 @@ static GnomeUIInfo bookmarks1_menu_uiinfo[] =
 
 static GnomeUIInfo history1_menu_uiinfo[] =
 {
-  GNOMEUIINFO_MENU_CLEAR_ITEM (on_clear1_activate, NULL),
+  {
+    GNOME_APP_UI_ITEM, "C_lear",
+    "Clear history list",
+    on_clear1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
   GNOMEUIINFO_SEPARATOR,
   GNOMEUIINFO_END
 };
@@ -219,14 +237,14 @@ static GnomeUIInfo help1_menu_uiinfo[] =
 {
   {
     GNOME_APP_UI_ITEM, "About the Sword Project...",
-    "The Sword Project",
+    "About The Sword Project",
     on_about_the_sword_project1_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
     0, 0, NULL
   },
   {
     GNOME_APP_UI_ITEM, "About GnomeSword...",
-    "Open About box",
+    "About GnomeSword",
     on_about_gnomesword1_activate, NULL, NULL,
     GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
     0, 0, NULL
@@ -348,7 +366,11 @@ create_mainwindow (void)
   GtkWidget *scrolledwindow8;
   GtkWidget *textDict;
   GtkWidget *vbox14;
+  GtkWidget *hbox19;
+  GtkWidget *toolbar25;
+  GtkWidget *btnKeyPrev;
   GtkWidget *dictionarySearchText;
+  GtkWidget *btnKeyNext;
   GtkWidget *list1;
   GtkWidget *label58;
   GtkWidget *appbar1;
@@ -398,7 +420,7 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
 
   gtk_widget_ref (edit1_menu_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "find1",
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "search1",
                             edit1_menu_uiinfo[2].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
@@ -699,6 +721,7 @@ create_mainwindow (void)
   gtk_box_pack_start (GTK_BOX (mainPanel), vpaned1, TRUE, TRUE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (vpaned1), 1);
   gtk_paned_set_gutter_size (GTK_PANED (vpaned1), 10);
+  gtk_paned_set_position (GTK_PANED (vpaned1), 236);
 
   hbox2 = gtk_hbox_new (FALSE, 0);
   gtk_widget_ref (hbox2);
@@ -928,7 +951,7 @@ create_mainwindow (void)
   gtk_widget_ref (btnSpellNotes);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnSpellNotes", btnSpellNotes,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnSpellNotes);
+
 
   label85 = gtk_label_new ("Personal Comments");
   gtk_widget_ref (label85);
@@ -1112,8 +1135,8 @@ create_mainwindow (void)
   gtk_widget_ref (btnPrint);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnPrint", btnPrint,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnPrint);
-  gtk_widget_set_sensitive (btnPrint, FALSE);
+
+//  gtk_widget_set_sensitive (btnPrint, FALSE);
 
   vseparator10 = gtk_vseparator_new ();
   gtk_widget_ref (vseparator10);
@@ -1177,7 +1200,7 @@ create_mainwindow (void)
   gtk_widget_ref (btnSpell);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnSpell", btnSpell,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnSpell);
+
 
   scrolledwindow17 = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_ref (scrolledwindow17);
@@ -1271,14 +1294,56 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (vbox14);
   gtk_box_pack_start (GTK_BOX (hbox13), vbox14, TRUE, TRUE, 0);
+  gtk_widget_set_usize (vbox14, 208, -2);
+
+  hbox19 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox19);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "hbox19", hbox19,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox19);
+  gtk_box_pack_start (GTK_BOX (vbox14), hbox19, FALSE, FALSE, 0);
+
+  toolbar25 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+  gtk_widget_ref (toolbar25);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "toolbar25", toolbar25,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (toolbar25);
+  gtk_box_pack_start (GTK_BOX (hbox19), toolbar25, TRUE, TRUE, 0);
+  gtk_widget_set_usize (toolbar25, 132, -2);
+  gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar25), GTK_RELIEF_NONE);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_BACK);
+  btnKeyPrev = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar25),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button2",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnKeyPrev);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnKeyPrev", btnKeyPrev,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnKeyPrev);
 
   dictionarySearchText = gtk_entry_new ();
   gtk_widget_ref (dictionarySearchText);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "dictionarySearchText", dictionarySearchText,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (dictionarySearchText);
-  gtk_box_pack_start (GTK_BOX (vbox14), dictionarySearchText, FALSE, FALSE, 0);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar25), dictionarySearchText, NULL, NULL);
+  gtk_widget_set_usize (dictionarySearchText, 145, -2);
   gtk_entry_set_text (GTK_ENTRY (dictionarySearchText), "GRACE");
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_FORWARD);
+  btnKeyNext = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar25),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button3",
+                                NULL, NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnKeyNext);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnKeyNext", btnKeyNext,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnKeyNext);
 
   list1 = gtk_clist_new (1);
   gtk_widget_ref (list1);
@@ -1286,6 +1351,7 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (list1);
   gtk_box_pack_start (GTK_BOX (vbox14), list1, TRUE, TRUE, 0);
+  gtk_widget_set_usize (list1, 126, -2);
   gtk_clist_set_column_width (GTK_CLIST (list1), 0, 80);
   gtk_clist_column_titles_hide (GTK_CLIST (list1));
 
@@ -1302,6 +1368,7 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
+  gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
 
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
@@ -1429,8 +1496,14 @@ create_mainwindow (void)
   gtk_signal_connect (GTK_OBJECT (textDict), "selection_received",
                       GTK_SIGNAL_FUNC (on_moduleText_selection_received),
                       NULL);
+  gtk_signal_connect (GTK_OBJECT (btnKeyPrev), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnKeyPrev_clicked),
+                      NULL);
   gtk_signal_connect (GTK_OBJECT (dictionarySearchText), "changed",
                       GTK_SIGNAL_FUNC (on_dictionarySearchText_changed),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (btnKeyNext), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnKeyNext_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (list1), "select_row",
                       GTK_SIGNAL_FUNC (on_list1_select_row),

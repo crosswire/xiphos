@@ -28,3 +28,6 @@
 /* Define if you want to use aspell spell checking */
 #undef USE_ASPELL
 
+/* Define if you want to use printing w/gnome-print */
+#undef USE_GNOMEPRINT
+

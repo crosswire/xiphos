@@ -1,6 +1,45 @@
 Basic Installation
 ==================
-     ===================== notice =======================
+===================== notice =======================
+You need to have the Sword Project (sword-1.5.0) installed.
+You need a least one each text ,commentary and dictionary module also.
+Sword-1.5.0 and the modules can be found at www.crosswire.org in the Sword Project.
+
+============================================================================
+========= you need aspell.30 and pspell.10 to compile gnomesword ===========
+======================== with spellchecking ================================
+================= do ./configure --enable-spellchecking ====================
+===================== to compile with spell checking =======================
+=========== you can get aspell from - http://aspell.sourceforge.net/========
+============================================================================
+
+============================================================================
+=========== you need gnome-print-0.20 to compile with printing =============
+=================== do ./configure --enable-printing =======================
+======================== to compile with printing ==========================
+=========== you can get gnome-print from - http://www.gnome.org/============
+============================================================================
+
+You must also have gnome up and running.
+If you are using RedHat you need to have the gnome and gtk dev packages
+installed.
+It all worked on my RedHat 6.2 system.
+
+First, be sure to read INSTALL in the root of the Sword project
+directory for instructions on how to make sure the API
+libraries are installed and configured properly.
+
+Then do a:
+
+./configure
+or
+./configure --enable-spellchecking --enable-printing
+make
+su
+make install
+
+default is without spell checking or printing
+
    ===================== see README =======================
      ====================================================
 
