@@ -1218,7 +1218,10 @@ void main_dialogs_open(gchar * mod_name)
 	switch(type) {
 		case TEXT_TYPE:
 			gui_create_bibletext_dialog(t);
-			be->chapDisplay = new DialogChapDisp(t->html, be); 
+			if(t->is_rtol)
+				be->dialogRTOLDisplay = new DialogTextviewChapDisp(t->text, be);
+			else	
+				be->chapDisplay = new DialogChapDisp(t->html, be); 
 			be->init_SWORD(1);			
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
@@ -1242,7 +1245,6 @@ void main_dialogs_open(gchar * mod_name)
 			strcpy(ec->filename, t->mod_name);
 			t->is_percomm = TRUE;
 			gui_create_note_editor(t);
-			//gui_create_commentary_dialog(t, TRUE);
 			be->entryDisplay = new DialogEntryDisp(ec->htmlwidget, be); 
 			be->init_SWORD(1);
 			t->key = g_strdup(settings.currentverse);

@@ -64,11 +64,31 @@ extern "C" {
 
 gboolean style_display = TRUE;
 
-void delete_module_mgr(void)
+/*void delete_module_mgr(void)
 {
 	backend_delete_module_mgr();
 }
+*/
+/******************************************************************************
+ * Name
+ *  module_name_from_description
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void module_name_from_description(gchar *mod_name, gchar *description)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
+char *main_module_name_from_description(char *description)
+{
+	return backend->module_name_from_description(description);
+}
 
 /******************************************************************************
  * Name
@@ -753,6 +773,7 @@ void main_setup_new_displays(void)
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
 	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
+	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
 }
 
 const char *main_get_module_language(const char *module_name)

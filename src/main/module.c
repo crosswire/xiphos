@@ -39,7 +39,7 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-#include "backend/module.hh"
+//#include "backend/module.hh"
 #include "backend/key.hh"
 
 extern int search_dialog;
@@ -382,24 +382,3 @@ int has_cipher_tag(char *mod_name)
 	return backend_has_cipher_tag(mod_name);
 }
 */
-
-/******************************************************************************
- * Name
- *  module_name_from_description
- *
- * Synopsis
- *   #include ".h"
- *
- *   void module_name_from_description(gchar *mod_name, gchar *description)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-char *module_name_from_description(char *description)
-{
-	backend_module_name_from_description(description);
-}

@@ -43,7 +43,6 @@
 #include <string>
 
 #include "module_manager.hh"
-#include "backend/module.hh"
 #include "backend/sword_main.hh"
 #include "backend/mgr.hh"
 #include "main/mod_mgr.h"

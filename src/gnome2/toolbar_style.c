@@ -23,7 +23,7 @@
  */
 #include <config.h>
 #include <gnome.h>
-//#include <gal/widgets/widget-color-combo.h>
+#include <gal/widgets/widget-color-combo.h>
 
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>
@@ -460,11 +460,11 @@ static void unset_focus(GtkWidget * w, gpointer data)
 static void set_color_combo(GtkHTML * html,
 			    GSHTMLEditorControlData * cd)
 {
-/*	color_combo_set_color(COLOR_COMBO(cd->combo),
+	color_combo_set_color(COLOR_COMBO(cd->combo),
 			      &html_colorset_get_color_allocated
 			      (html->engine->painter,
 			       HTMLTextColor)->color);
-*/
+
 }
 
 /******************************************************************************
@@ -535,8 +535,8 @@ static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
 
 static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 {
-/*	HTMLColor *color;
-
+	HTMLColor *color;
+ 
 	color = html_colorset_get_color (cd->html->engine->settings->color_set, HTMLTextColor);
 	if (GTK_WIDGET_REALIZED (cd->html))
 		html_color_alloc (color, cd->html->engine->painter);
@@ -551,7 +551,7 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 
 	gtk_widget_show_all (cd->combo);
 	return cd->combo;
-*/	
+	
 /*	HTMLColor *color;
 
 	color =
@@ -1129,10 +1129,10 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 	gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(cd->toolbar_style),
 					 editor_toolbar_style_uiinfo,
 					 NULL, cd);
-/*	coloritem = setup_color_combo(cd);
+	coloritem = setup_color_combo(cd);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(cd->toolbar_style),
 				  coloritem, NULL, NULL);
-*/
+ 
 	cd->font_style_changed_connection_id
 	    =
 	    g_signal_connect(G_OBJECT(cd->htmlwidget),

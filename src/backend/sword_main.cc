@@ -59,9 +59,12 @@ BackEnd::BackEnd() {
 	
 	tree_key = NULL;
 	
-	commDisplay      = 0;	// set in create
-	dictDisplay     = 0;	// set in create
-	textDisplay     = 0;	// set in create
+	commDisplay          = 0;	// set in create
+	dictDisplay          = 0;	// set in create
+	textDisplay          = 0;	// set in create
+	entryDisplay         = 0;	// set in create
+	chapDisplay          = 0;	// set in create
+	dialogRTOLDisplay    = 0;	// set in create
 }
 
 
@@ -77,7 +80,13 @@ BackEnd::~BackEnd() {
 	if (dictDisplay)
 		delete dictDisplay;
 	if (textDisplay)
-		delete textDisplay;
+		delete textDisplay;	
+	if(entryDisplay)
+		delete entryDisplay;
+	if(chapDisplay)
+		delete chapDisplay;
+	if(dialogRTOLDisplay)
+		delete dialogRTOLDisplay;
 }
 
 
@@ -90,7 +99,11 @@ void BackEnd::init_SWORD(int gsType) {
 					it != display_mgr->Modules.end(); it++) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
-				display_mod->Disp(textDisplay);
+				const char *direction = display_mod->getConfigEntry("Direction");
+				if(direction && !strcmp(direction,"RtoL" ))
+					display_mod->Disp(RTOLDisplay);
+				else
+					display_mod->Disp(textDisplay);
 			}
 			if (!strcmp(display_mod->Type(), COMM_MODS)) {
 				display_mod->Disp(commDisplay);
@@ -106,8 +119,11 @@ void BackEnd::init_SWORD(int gsType) {
 	} else if(gsType == 1) {
 		for (it = display_mgr->Modules.begin(); it != display_mgr->Modules.end(); it++) {	
 			display_mod = (*it).second;
-			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
-				display_mod->Disp(chapDisplay);
+			if (!strcmp(display_mod->Type(), TEXT_MODS)) {const char *direction = display_mod->getConfigEntry("Direction");
+				if(direction && !strcmp(direction,"RtoL" ))
+					display_mod->Disp(dialogRTOLDisplay);
+				else
+					display_mod->Disp(chapDisplay);
 			} else {
 				display_mod->Disp(entryDisplay);
 			}
@@ -415,6 +431,23 @@ char *BackEnd::module_description(char *mod_name) {
 	}
 	return NULL;
 }
+
+char *BackEnd::module_name_from_description(char *description) {
+	ModMap::iterator it;
+	char *retval = NULL;
+	
+	if(!description)
+		return NULL;
+	
+	for (it = main_mgr->Modules.begin();
+	     it != main_mgr->Modules.end(); it++) {
+		  if (!strcmp((*it).second->Description(), description))
+			retval = strdup((*it).second->Name());
+	}
+	return retval;
+}
+
+
 
 int BackEnd::module_has_testament(const char * module_name,  int testament) {
 	ModMap::iterator it;
