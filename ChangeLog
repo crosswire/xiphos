@@ -1,4 +1,4 @@
-2003-12-07  Andy <andyp@users.sf.net>
+2003-12-08  Andy <andyp@users.sf.net>
 
 	* removed old html docs files - they were empty anyway
 	* clarified purpose of src/gnome2/dummy.cpp and src/gnome/dummy.cpp.
