@@ -112,9 +112,6 @@ create_menu1 (void)
 
 static GnomeUIInfo file1_menu_uiinfo[] =
 {
-  GNOMEUIINFO_MENU_OPEN_ITEM (NULL, NULL),
-  GNOMEUIINFO_MENU_SAVE_ITEM (on_save1_activate, NULL),
-  GNOMEUIINFO_MENU_SAVE_AS_ITEM (on_save_as1_activate, NULL),
   GNOMEUIINFO_SEPARATOR,
   GNOMEUIINFO_MENU_EXIT_ITEM (on_exit1_activate, NULL),
   GNOMEUIINFO_END
@@ -185,28 +182,28 @@ static GnomeUIInfo view1_menu_uiinfo[] =
     GNOME_APP_UI_SUBTREE, "Main Window",
     "Select text module for main window",
     main_window1_menu_uiinfo, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, "Main Window",
+    GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
   {
     GNOME_APP_UI_SUBTREE, "Interlinear1 Window",
     "Select text module for 1st Interlinear window",
     interlinear1_window1_menu_uiinfo, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, "Interlinear1 Window",
+    GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
   {
     GNOME_APP_UI_SUBTREE, "Interlinear2 Window",
     "Select text module for 2nd Interlinear window",
     interlinear2_window1_menu_uiinfo, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, "Interlinear2 Window",
+    GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
   {
     GNOME_APP_UI_SUBTREE, "Interlinear3 Window",
     "Select text module for 3rd Interlinear window",
     interlinear3_window1_menu_uiinfo, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, "Interlinear3 Window",
+    GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
   GNOMEUIINFO_END
@@ -220,7 +217,20 @@ static GnomeUIInfo settings1_menu_uiinfo[] =
 
 static GnomeUIInfo help1_menu_uiinfo[] =
 {
-  GNOMEUIINFO_MENU_ABOUT_ITEM (on_about3_activate, NULL),
+  {
+    GNOME_APP_UI_ITEM, "About the Sword Project...",
+    "The Sword Project",
+    on_about_the_sword_project1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "About GnomeSword...",
+    "Open About box",
+    on_about_gnomesword1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+    0, 0, NULL
+  },
   GNOMEUIINFO_END
 };
 
@@ -232,14 +242,14 @@ static GnomeUIInfo menubar1_uiinfo[] =
     GNOME_APP_UI_SUBTREE, "_Bookmarks",
     NULL,
     bookmarks1_menu_uiinfo, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, "_Bookmarks",
+    GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
   {
     GNOME_APP_UI_SUBTREE, "_History",
     NULL,
     history1_menu_uiinfo, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, "_History",
+    GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
   GNOMEUIINFO_MENU_VIEW_TREE (view1_menu_uiinfo),
@@ -266,7 +276,6 @@ create_mainwindow (void)
   GtkWidget *spbVerse;
   GtkWidget *btnLookup;
   GtkWidget *cbeFreeformLookup;
-  GtkWidget *btnBookmarks;
   GtkWidget *btnExit;
   GtkWidget *mainPanel;
   GtkWidget *vpaned1;
@@ -290,6 +299,7 @@ create_mainwindow (void)
   GtkWidget *btnEditNote;
   GtkWidget *btnSaveNote;
   GtkWidget *btnDeleteNote;
+  GtkWidget *btnSpellNotes;
   GtkWidget *label64;
   GtkWidget *vbox3;
   GtkWidget *frame2;
@@ -355,28 +365,13 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
 
   gtk_widget_ref (file1_menu_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "open1",
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "separator4",
                             file1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
   gtk_widget_ref (file1_menu_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "save1",
-                            file1_menu_uiinfo[1].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (file1_menu_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "save_as1",
-                            file1_menu_uiinfo[2].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (file1_menu_uiinfo[3].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "separator4",
-                            file1_menu_uiinfo[3].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (file1_menu_uiinfo[4].widget);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "exit1",
-                            file1_menu_uiinfo[4].widget,
+                            file1_menu_uiinfo[1].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
   gtk_widget_ref (menubar1_uiinfo[1].widget);
@@ -495,8 +490,13 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
 
   gtk_widget_ref (help1_menu_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "about3",
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "about_the_sword_project1",
                             help1_menu_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (help1_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "about_gnomesword1",
+                            help1_menu_uiinfo[1].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
   toolbar20 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
@@ -656,18 +656,6 @@ create_mainwindow (void)
   gtk_widget_set_usize (cbeFreeformLookup, 190, -2);
   gtk_entry_set_text (GTK_ENTRY (cbeFreeformLookup), "Romans 8:28");
 
-  tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_BOOK_OPEN);
-  btnBookmarks = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar20),
-                                GTK_TOOLBAR_CHILD_BUTTON,
-                                NULL,
-                                "Bookmarks",
-                                "Bookmarks - add - edit - goto", NULL,
-                                tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (btnBookmarks);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnBookmarks", btnBookmarks,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnBookmarks);
-
   tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_EXIT);
   btnExit = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar20),
                                 GTK_TOOLBAR_CHILD_BUTTON,
@@ -701,7 +689,7 @@ create_mainwindow (void)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "hbox2", hbox2,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (hbox2);
-  gtk_container_add (GTK_CONTAINER (vpaned1), hbox2);
+  gtk_paned_pack1 (GTK_PANED (vpaned1), hbox2, TRUE, TRUE);
 
   hpaned1 = gtk_hpaned_new ();
   gtk_widget_ref (hpaned1);
@@ -716,7 +704,7 @@ create_mainwindow (void)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "frame9", frame9,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frame9);
-  gtk_container_add (GTK_CONTAINER (hpaned1), frame9);
+  gtk_paned_pack1 (GTK_PANED (hpaned1), frame9, FALSE, TRUE);
   gtk_widget_set_usize (frame9, 325, -2);
   gtk_container_set_border_width (GTK_CONTAINER (frame9), 2);
 
@@ -763,7 +751,7 @@ create_mainwindow (void)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "notebook3", notebook3,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (notebook3);
-  gtk_container_add (GTK_CONTAINER (hpaned1), notebook3);
+  gtk_paned_pack2 (GTK_PANED (hpaned1), notebook3, TRUE, TRUE);
   gtk_container_set_border_width (GTK_CONTAINER (notebook3), 2);
   gtk_notebook_set_scrollable (GTK_NOTEBOOK (notebook3), TRUE);
 
@@ -864,6 +852,18 @@ create_mainwindow (void)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnDeleteNote", btnDeleteNote,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnDeleteNote);
+
+  tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_SPELLCHECK);
+  btnSpellNotes = gtk_toolbar_append_element (GTK_TOOLBAR (tbNotes),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "button1",
+                                "Start Spell Check", NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (btnSpellNotes);
+  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnSpellNotes", btnSpellNotes,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnSpellNotes);
 
   label64 = gtk_label_new ("Commentaries");
   gtk_widget_ref (label64);
@@ -1107,13 +1107,12 @@ create_mainwindow (void)
                                 GTK_TOOLBAR_CHILD_BUTTON,
                                 NULL,
                                 "button8",
-                                NULL, NULL,
+                                "Start Spell Check", NULL,
                                 tmp_toolbar_icon, NULL, NULL);
   gtk_widget_ref (btnSpell);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnSpell", btnSpell,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnSpell);
-  gtk_widget_set_sensitive (btnSpell, FALSE);
 
   scrolledwindow17 = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_ref (scrolledwindow17);
@@ -1150,7 +1149,7 @@ create_mainwindow (void)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "hbox8", hbox8,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (hbox8);
-  gtk_container_add (GTK_CONTAINER (vpaned1), hbox8);
+  gtk_paned_pack2 (GTK_PANED (vpaned1), hbox8, TRUE, TRUE);
   gtk_widget_set_usize (hbox8, -2, 115);
 
   frame10 = gtk_frame_new ("Dictionaries - Lexicons");
@@ -1238,6 +1237,7 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
+  gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
 
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
@@ -1304,6 +1304,9 @@ create_mainwindow (void)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnDeleteNote), "clicked",
                       GTK_SIGNAL_FUNC (on_btnDeleteNote_clicked),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (btnSpellNotes), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnSpellNotes_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (textComp1), "button_press_event",
                       GTK_SIGNAL_FUNC (on_textComp1_button_press_event),
@@ -1744,7 +1747,7 @@ create_dlgSearch (void)
   GtkWidget *ckbCom;
   GtkWidget *frame20;
   GtkWidget *hbox17;
-  GSList *__group = NULL;
+  GSList *_3_group = NULL;
   GtkWidget *rbNoScope;
   GtkWidget *rbUseBounds;
   GtkWidget *rbLastSearch;
@@ -1911,8 +1914,8 @@ create_dlgSearch (void)
   gtk_widget_show (hbox17);
   gtk_container_add (GTK_CONTAINER (frame20), hbox17);
 
-  rbNoScope = gtk_radio_button_new_with_label (__group, "No Scope");
-  __group = gtk_radio_button_group (GTK_RADIO_BUTTON (rbNoScope));
+  rbNoScope = gtk_radio_button_new_with_label (_3_group, "No Scope");
+  _3_group = gtk_radio_button_group (GTK_RADIO_BUTTON (rbNoScope));
   gtk_widget_ref (rbNoScope);
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "rbNoScope", rbNoScope,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1920,16 +1923,16 @@ create_dlgSearch (void)
   gtk_box_pack_start (GTK_BOX (hbox17), rbNoScope, FALSE, FALSE, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (rbNoScope), TRUE);
 
-  rbUseBounds = gtk_radio_button_new_with_label (__group, "Use Bounds");
-  __group = gtk_radio_button_group (GTK_RADIO_BUTTON (rbUseBounds));
+  rbUseBounds = gtk_radio_button_new_with_label (_3_group, "Use Bounds");
+  _3_group = gtk_radio_button_group (GTK_RADIO_BUTTON (rbUseBounds));
   gtk_widget_ref (rbUseBounds);
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "rbUseBounds", rbUseBounds,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (rbUseBounds);
   gtk_box_pack_start (GTK_BOX (hbox17), rbUseBounds, FALSE, FALSE, 0);
 
-  rbLastSearch = gtk_radio_button_new_with_label (__group, "Last Search");
-  __group = gtk_radio_button_group (GTK_RADIO_BUTTON (rbLastSearch));
+  rbLastSearch = gtk_radio_button_new_with_label (_3_group, "Last Search");
+  _3_group = gtk_radio_button_group (GTK_RADIO_BUTTON (rbLastSearch));
   gtk_widget_ref (rbLastSearch);
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "rbLastSearch", rbLastSearch,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -2234,322 +2237,94 @@ create_wdwEditBookmarks (void)
 }
 
 GtkWidget*
-create_dlgSpell (void)
+create_dlgAboutSword (void)
 {
-  GtkWidget *dlgSpell;
-  GtkWidget *dialog_vbox3;
-  GtkWidget *hpaned2;
-  GtkWidget *hbox16;
-  GtkWidget *vbox20;
-  GtkWidget *correction;
-  GtkWidget *scrolledwindow24;
-  GtkWidget *suggestions;
-  GtkWidget *label81;
-  GtkWidget *table5;
-  GtkWidget *change_;
-  GtkWidget *ignore_;
-  GtkWidget *revert_;
-  GtkWidget *lookup_;
-  GtkWidget *stop_;
-  GtkWidget *change_all_;
-  GtkWidget *ignore_all_;
-  GtkWidget *learn_;
-  GtkWidget *auto_lookup_;
-  GtkWidget *options_;
-  GtkWidget *start_;
-  GtkWidget *scrolledwindow23;
-  GtkWidget *definition;
-  GtkWidget *dialog_action_area3;
-  GtkWidget *btnSpellOK;
-  GtkWidget *btnSpellApply;
-  GtkWidget *btnSpellCancel;
+  GtkWidget *dlgAboutSword;
+  GtkWidget *dialog_vbox4;
+  GtkWidget *vbox21;
+  GtkWidget *pixmap1;
+  GtkWidget *scrolledwindow26;
+  GtkWidget *txtAboutSword;
+  GtkWidget *scrolledwindow27;
+  GtkWidget *text6;
+  GtkWidget *dialog_action_area4;
+  GtkWidget *btnAboutSwordOK;
 
-  dlgSpell = gnome_dialog_new ("GnomeSword - Spell Check", NULL);
-  gtk_object_set_data (GTK_OBJECT (dlgSpell), "dlgSpell", dlgSpell);
-  gtk_window_set_policy (GTK_WINDOW (dlgSpell), FALSE, FALSE, FALSE);
+  dlgAboutSword = gtk_dialog_new ();
+  gtk_object_set_data (GTK_OBJECT (dlgAboutSword), "dlgAboutSword", dlgAboutSword);
+  gtk_widget_set_usize (dlgAboutSword, 319, -2);
+  gtk_window_set_title (GTK_WINDOW (dlgAboutSword), "About The Sword Project");
+  gtk_window_set_modal (GTK_WINDOW (dlgAboutSword), TRUE);
 
-  dialog_vbox3 = GNOME_DIALOG (dlgSpell)->vbox;
-  gtk_object_set_data (GTK_OBJECT (dlgSpell), "dialog_vbox3", dialog_vbox3);
-  gtk_widget_show (dialog_vbox3);
+  dialog_vbox4 = GTK_DIALOG (dlgAboutSword)->vbox;
+  gtk_object_set_data (GTK_OBJECT (dlgAboutSword), "dialog_vbox4", dialog_vbox4);
+  gtk_widget_show (dialog_vbox4);
 
-  hpaned2 = gtk_hpaned_new ();
-  gtk_widget_ref (hpaned2);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "hpaned2", hpaned2,
+  vbox21 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox21);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "vbox21", vbox21,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (hpaned2);
-  gtk_box_pack_start (GTK_BOX (dialog_vbox3), hpaned2, TRUE, TRUE, 0);
-  gtk_paned_set_gutter_size (GTK_PANED (hpaned2), 10);
+  gtk_widget_show (vbox21);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox4), vbox21, TRUE, TRUE, 0);
 
-  hbox16 = gtk_hbox_new (FALSE, 0);
-  gtk_widget_ref (hbox16);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "hbox16", hbox16,
+  pixmap1 = create_pixmap (dlgAboutSword, "gnomesword/sword.xpm", FALSE);
+  gtk_widget_ref (pixmap1);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "pixmap1", pixmap1,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (hbox16);
-  gtk_container_add (GTK_CONTAINER (hpaned2), hbox16);
+  gtk_widget_show (pixmap1);
+  gtk_box_pack_start (GTK_BOX (vbox21), pixmap1, FALSE, FALSE, 0);
+  gtk_misc_set_padding (GTK_MISC (pixmap1), 4, 4);
 
-  vbox20 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox20);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "vbox20", vbox20,
+  scrolledwindow26 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow26);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "scrolledwindow26", scrolledwindow26,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox20);
-  gtk_box_pack_start (GTK_BOX (hbox16), vbox20, TRUE, TRUE, 0);
+  gtk_widget_show (scrolledwindow26);
+  gtk_box_pack_start (GTK_BOX (vbox21), scrolledwindow26, TRUE, TRUE, 0);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow26), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-  correction = gtk_entry_new ();
-  gtk_widget_ref (correction);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "correction", correction,
+  txtAboutSword = gtk_text_new (NULL, NULL);
+  gtk_widget_ref (txtAboutSword);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "txtAboutSword", txtAboutSword,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (correction);
-  gtk_box_pack_start (GTK_BOX (vbox20), correction, FALSE, FALSE, 0);
+  gtk_widget_show (txtAboutSword);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow26), txtAboutSword);
+  gtk_text_insert (GTK_TEXT (txtAboutSword), NULL, NULL, NULL,
+                   "The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.", 359);
 
-  scrolledwindow24 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_ref (scrolledwindow24);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "scrolledwindow24", scrolledwindow24,
+  scrolledwindow27 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow27);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "scrolledwindow27", scrolledwindow27,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (scrolledwindow24);
-  gtk_box_pack_start (GTK_BOX (vbox20), scrolledwindow24, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow24), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+  gtk_widget_show (scrolledwindow27);
+  gtk_box_pack_start (GTK_BOX (vbox21), scrolledwindow27, TRUE, TRUE, 0);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow27), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
-  suggestions = gtk_clist_new (1);
-  gtk_widget_ref (suggestions);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "suggestions", suggestions,
+  text6 = gtk_text_new (NULL, NULL);
+  gtk_widget_ref (text6);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "text6", text6,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (suggestions);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow24), suggestions);
-  gtk_clist_set_column_width (GTK_CLIST (suggestions), 0, 80);
-  gtk_clist_column_titles_show (GTK_CLIST (suggestions));
+  gtk_widget_show (text6);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow27), text6);
+  gtk_text_insert (GTK_TEXT (text6), NULL, NULL, NULL,
+                   "Modules can be downloaded from the Sword Project at www.crosswire.org", 69);
 
-  label81 = gtk_label_new ("label81");
-  gtk_widget_ref (label81);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "label81", label81,
+  dialog_action_area4 = GTK_DIALOG (dlgAboutSword)->action_area;
+  gtk_object_set_data (GTK_OBJECT (dlgAboutSword), "dialog_action_area4", dialog_action_area4);
+  gtk_widget_show (dialog_action_area4);
+  gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area4), 10);
+
+  btnAboutSwordOK = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
+  gtk_widget_ref (btnAboutSwordOK);
+  gtk_object_set_data_full (GTK_OBJECT (dlgAboutSword), "btnAboutSwordOK", btnAboutSwordOK,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (label81);
-  gtk_clist_set_column_widget (GTK_CLIST (suggestions), 0, label81);
+  gtk_widget_show (btnAboutSwordOK);
+  gtk_box_pack_start (GTK_BOX (dialog_action_area4), btnAboutSwordOK, FALSE, FALSE, 0);
 
-  table5 = gtk_table_new (6, 2, FALSE);
-  gtk_widget_ref (table5);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "table5", table5,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (table5);
-  gtk_box_pack_start (GTK_BOX (hbox16), table5, FALSE, TRUE, 0);
-
-  change_ = gtk_button_new_with_label ("Change");
-  gtk_widget_ref (change_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "change_", change_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (change_);
-  gtk_table_attach (GTK_TABLE (table5), change_, 0, 1, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (change_, 56, -2);
-
-  ignore_ = gtk_button_new_with_label ("Ignore");
-  gtk_widget_ref (ignore_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "ignore_", ignore_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (ignore_);
-  gtk_table_attach (GTK_TABLE (table5), ignore_, 0, 1, 2, 3,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (ignore_, 56, -2);
-
-  revert_ = gtk_button_new_with_label ("Revert");
-  gtk_widget_ref (revert_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "revert_", revert_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (revert_);
-  gtk_table_attach (GTK_TABLE (table5), revert_, 0, 1, 3, 4,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (revert_, 56, -2);
-
-  lookup_ = gtk_button_new_with_label ("Lookup");
-  gtk_widget_ref (lookup_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "lookup_", lookup_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (lookup_);
-  gtk_table_attach (GTK_TABLE (table5), lookup_, 0, 1, 4, 5,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (lookup_, 56, -2);
-
-  stop_ = gtk_button_new_with_label ("Stop");
-  gtk_widget_ref (stop_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "stop_", stop_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (stop_);
-  gtk_table_attach (GTK_TABLE (table5), stop_, 1, 2, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (stop_, 56, -2);
-
-  change_all_ = gtk_button_new_with_label ("Change All");
-  gtk_widget_ref (change_all_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "change_all_", change_all_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (change_all_);
-  gtk_table_attach (GTK_TABLE (table5), change_all_, 1, 2, 1, 2,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (change_all_, 56, -2);
-
-  ignore_all_ = gtk_button_new_with_label ("Ignore All");
-  gtk_widget_ref (ignore_all_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "ignore_all_", ignore_all_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (ignore_all_);
-  gtk_table_attach (GTK_TABLE (table5), ignore_all_, 1, 2, 2, 3,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (ignore_all_, 56, -2);
-
-  learn_ = gtk_button_new_with_label ("Learn");
-  gtk_widget_ref (learn_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "learn_", learn_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (learn_);
-  gtk_table_attach (GTK_TABLE (table5), learn_, 1, 2, 3, 4,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (learn_, 56, -2);
-
-  auto_lookup_ = gtk_button_new_with_label ("Auto");
-  gtk_widget_ref (auto_lookup_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "auto_lookup_", auto_lookup_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (auto_lookup_);
-  gtk_table_attach (GTK_TABLE (table5), auto_lookup_, 1, 2, 4, 5,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (auto_lookup_, 56, -2);
-
-  options_ = gtk_button_new_with_label ("Options");
-  gtk_widget_ref (options_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "options_", options_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (options_);
-  gtk_table_attach (GTK_TABLE (table5), options_, 0, 1, 5, 6,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (options_, 56, -2);
-
-  start_ = gtk_button_new_with_label ("Start");
-  gtk_widget_ref (start_);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "start_", start_,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (start_);
-  gtk_table_attach (GTK_TABLE (table5), start_, 0, 1, 0, 1,
-                    (GtkAttachOptions) (0),
-                    (GtkAttachOptions) (0), 0, 0);
-  gtk_widget_set_usize (start_, 56, -2);
-
-  scrolledwindow23 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_ref (scrolledwindow23);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "scrolledwindow23", scrolledwindow23,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (scrolledwindow23);
-  gtk_container_add (GTK_CONTAINER (hpaned2), scrolledwindow23);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow23), GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
-
-  definition = gtk_text_new (NULL, NULL);
-  gtk_widget_ref (definition);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "definition", definition,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (definition);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow23), definition);
-
-  dialog_action_area3 = GNOME_DIALOG (dlgSpell)->action_area;
-  gtk_object_set_data (GTK_OBJECT (dlgSpell), "dialog_action_area3", dialog_action_area3);
-  gtk_widget_show (dialog_action_area3);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area3), GTK_BUTTONBOX_END);
-  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area3), 8);
-
-  gnome_dialog_append_button (GNOME_DIALOG (dlgSpell), GNOME_STOCK_BUTTON_OK);
-  btnSpellOK = g_list_last (GNOME_DIALOG (dlgSpell)->buttons)->data;
-  gtk_widget_ref (btnSpellOK);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "btnSpellOK", btnSpellOK,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnSpellOK);
-  gtk_widget_set_sensitive (btnSpellOK, FALSE);
-  GTK_WIDGET_SET_FLAGS (btnSpellOK, GTK_CAN_DEFAULT);
-
-  gnome_dialog_append_button (GNOME_DIALOG (dlgSpell), GNOME_STOCK_BUTTON_APPLY);
-  btnSpellApply = g_list_last (GNOME_DIALOG (dlgSpell)->buttons)->data;
-  gtk_widget_ref (btnSpellApply);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "btnSpellApply", btnSpellApply,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnSpellApply);
-  gtk_widget_set_sensitive (btnSpellApply, FALSE);
-  GTK_WIDGET_SET_FLAGS (btnSpellApply, GTK_CAN_DEFAULT);
-
-  gnome_dialog_append_button (GNOME_DIALOG (dlgSpell), GNOME_STOCK_BUTTON_CANCEL);
-  btnSpellCancel = g_list_last (GNOME_DIALOG (dlgSpell)->buttons)->data;
-  gtk_widget_ref (btnSpellCancel);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSpell), "btnSpellCancel", btnSpellCancel,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (btnSpellCancel);
-  GTK_WIDGET_SET_FLAGS (btnSpellCancel, GTK_CAN_DEFAULT);
-
-  gtk_signal_connect (GTK_OBJECT (suggestions), "select_row",
-                      GTK_SIGNAL_FUNC (on_suggestions_select_row),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnSpellOK), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnSpellOK_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnSpellApply), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnSpellApply_clicked),
-                      NULL);
-  gtk_signal_connect (GTK_OBJECT (btnSpellCancel), "clicked",
-                      GTK_SIGNAL_FUNC (on_btnSpellCancel_clicked),
+  gtk_signal_connect (GTK_OBJECT (btnAboutSwordOK), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnAboutSwordOK_clicked),
                       NULL);
 
-  return dlgSpell;
-}
-
-static GnomeUIInfo pumuBookmarks_uiinfo[] =
-{
-  {
-    GNOME_APP_UI_ITEM, "Add Bookmark",
-    "Add current verse to Bookmarks",
-    on_add_bookmark2_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_RED,
-    0, 0, NULL
-  },
-  {
-    GNOME_APP_UI_ITEM, "Edit Bookmarks ...",
-    "Edit Bookmark list",
-    on_edit_bookmarks_1_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
-    0, 0, NULL
-  },
-  GNOMEUIINFO_SEPARATOR,
-  GNOMEUIINFO_END
-};
-
-GtkWidget*
-create_pumuBookmarks (void)
-{
-  GtkWidget *pumuBookmarks;
-
-  pumuBookmarks = gtk_menu_new ();
-  gtk_object_set_data (GTK_OBJECT (pumuBookmarks), "pumuBookmarks", pumuBookmarks);
-  gnome_app_fill_menu (GTK_MENU_SHELL (pumuBookmarks), pumuBookmarks_uiinfo,
-                       NULL, FALSE, 0);
-
-  gtk_widget_ref (pumuBookmarks_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pumuBookmarks), "add_bookmark2",
-                            pumuBookmarks_uiinfo[0].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pumuBookmarks_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pumuBookmarks), "edit_bookmarks_1",
-                            pumuBookmarks_uiinfo[1].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pumuBookmarks_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pumuBookmarks), "separator12",
-                            pumuBookmarks_uiinfo[2].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  return pumuBookmarks;
+  return dlgAboutSword;
 }
 

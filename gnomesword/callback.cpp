@@ -39,6 +39,10 @@
 #include "filestuff.h"
 #include "display.h"
 
+#ifdef USE_ASPELL
+#include "spellcheck.h"
+#endif /* USE_ASPELL */
+
 bool noteModified = FALSE;
 bool firstsearch = TRUE;
 GtkWidget *searchDlg;
@@ -49,7 +53,7 @@ extern GtkWidget *bookmark_mnu;
 extern gchar	*font_mainwindow,
 							*font_interlinear,
 							*font_currentverse;
-extern GdkColor myGreen;
+extern GdkColor myGreen;  //-- current verse color for main text window - declared in display.cpp
 
 //-------------------------------------------------------------------------------------------
 void
@@ -566,6 +570,7 @@ on_btnEditNote_toggled                 (GtkToggleButton *togglebutton,
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(GTK_WIDGET(togglebutton),"textComments")), FALSE);
 		//if(noteModified) ;
 	}
+	//setsensitive(togglebutton->active);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -813,30 +818,19 @@ on_item53_activate                     (GtkMenuItem     *menuitem,
 }
 
 //----------------------------------------------------------------------------------------------
-
-
-
-
 void
 on_btnSpell_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
-{
-	GtkWidget* speller,
-					*spell,
-					 *text;
-	gchar 		*buf;
-	GnomeSpell *gtkspell;
-
-	speller = create_dlgSpell ();
-/*	spell = lookup_widget(speller,"spell1");
-	text = lookup_widget(GTK_WIDGET(button),"text3");
-	buf = gtk_editable_get_chars (GTK_EDITABLE (text), 0, -1);
-	gnome_spell_check(gtkspell,buf);*/
-	gtk_widget_show (speller);
-
+{ 	
+#ifdef USE_ASPELL
+	GtkWidget *speller;
+		
+	speller = spellcheck(0);
+#endif /* USE_ASPELL */
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_btbSpellOK_clicked                  (GtkButton       *button,
                                         gpointer         user_data)
@@ -848,6 +842,7 @@ on_btbSpellOK_clicked                  (GtkButton       *button,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_btnSpellApply_clicked               (GtkButton       *button,
                                         gpointer         user_data)
@@ -856,6 +851,7 @@ on_btnSpellApply_clicked               (GtkButton       *button,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_btnSpellCancel_clicked              (GtkButton       *button,
                                         gpointer         user_data)
@@ -867,6 +863,7 @@ on_btnSpellCancel_clicked              (GtkButton       *button,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_btnSearchOK_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
@@ -876,6 +873,7 @@ on_btnSearchOK_clicked                 (GtkButton       *button,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_exit1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -884,6 +882,7 @@ on_exit1_activate                      (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_copy1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -892,6 +891,7 @@ on_copy1_activate                      (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_copy2_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -899,6 +899,7 @@ on_copy2_activate                      (GtkMenuItem     *menuitem,
 
 }
 
+//----------------------------------------------------------------------------------------------
 void
 on_find1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -907,6 +908,7 @@ on_find1_activate                      (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_inter1_module1_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -914,6 +916,7 @@ on_inter1_module1_activate               (GtkMenuItem     *menuitem,
 
 }
 
+//----------------------------------------------------------------------------------------------
 void
 on_clear1_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -921,8 +924,9 @@ on_clear1_activate               (GtkMenuItem     *menuitem,
 
 }
 
+//----------------------------------------------------------------------------------------------
 void
-on_about3_activate                     (GtkMenuItem     *menuitem,
+on_about_gnomesword1_activate                     (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
  	GtkWidget *AboutBox;
@@ -932,6 +936,7 @@ on_about3_activate                     (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_item3_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -940,6 +945,7 @@ on_item3_activate                      (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_save1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -948,6 +954,7 @@ on_save1_activate                      (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_save_as1_activate                   (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -956,6 +963,7 @@ on_save_as1_activate                   (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_strongs_numbers1_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -967,6 +975,7 @@ on_strongs_numbers1_activate           (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_footnotes1_activate                 (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -978,21 +987,17 @@ on_footnotes1_activate                 (GtkMenuItem     *menuitem,
 }
 
 
+//----------------------------------------------------------------------------------------------
 void
 on_copy3_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	GtkWidget *text;
-	text = lookup_widget(MainFrm
-,"moduleText");
+	text = lookup_widget(MainFrm,"moduleText");
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
-
-
-
-
-
+//----------------------------------------------------------------------------------------------
 void
 on_propertybox1_clicked                (GnomePropertyBox *gnomepropertybox,
                                         gint             arg1,
@@ -1001,7 +1006,7 @@ on_propertybox1_clicked                (GnomePropertyBox *gnomepropertybox,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_fontpicker2_font_set                (GnomeFontPicker *gnomefontpicker,
                                         string        arg1,
@@ -1010,7 +1015,7 @@ on_fontpicker2_font_set                (GnomeFontPicker *gnomefontpicker,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_colorpicker5_color_set              (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1026,7 +1031,7 @@ on_colorpicker5_color_set              (GnomeColorPicker *gnomecolorpicker,
 //	curMod->Display();
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_colorpicker1_color_set              (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1042,7 +1047,7 @@ on_colorpicker1_color_set              (GnomeColorPicker *gnomecolorpicker,
 //	curMod->Display();
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_colorpicker2_color_set              (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1054,7 +1059,7 @@ on_colorpicker2_color_set              (GnomeColorPicker *gnomecolorpicker,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_preferences1_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -1065,7 +1070,7 @@ on_preferences1_activate               (GtkMenuItem     *menuitem,
 	gtk_widget_show(Propertybox); 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_suggestions_select_row              (GtkCList        *clist,
                                         gint             row,
@@ -1076,7 +1081,7 @@ on_suggestions_select_row              (GtkCList        *clist,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnSpellOK_clicked                  (GtkButton       *button,
                                         gpointer         user_data)
@@ -1084,7 +1089,7 @@ on_btnSpellOK_clicked                  (GtkButton       *button,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnEBMcut_clicked                   (GtkButton       *button,
                                         gpointer         user_data)
@@ -1092,7 +1097,7 @@ on_btnEBMcut_clicked                   (GtkButton       *button,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnEBMcopy_clicked                  (GtkButton       *button,
                                         gpointer         user_data)
@@ -1100,7 +1105,7 @@ on_btnEBMcopy_clicked                  (GtkButton       *button,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnEBMpaste_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
@@ -1108,7 +1113,7 @@ on_btnEBMpaste_clicked                 (GtkButton       *button,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_text4_changed                       (GtkEditable     *editable,
                                         gpointer         user_data)
@@ -1116,7 +1121,7 @@ on_text4_changed                       (GtkEditable     *editable,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnEBMOK_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
@@ -1128,7 +1133,7 @@ on_btnEBMOK_clicked                    (GtkButton       *button,
 	gtk_widget_destroy(dlg);
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnEBMApply_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
@@ -1139,7 +1144,7 @@ on_btnEBMApply_clicked                 (GtkButton       *button,
 	editbookmarksSave(dlg);	
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnEBMCancel_clicked                (GtkButton       *button,
                                         gpointer         user_data)
@@ -1150,7 +1155,7 @@ on_btnEBMCancel_clicked                (GtkButton       *button,
 	gtk_widget_destroy(dlg);
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_add_bookmark2_activate              (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -1158,7 +1163,7 @@ on_add_bookmark2_activate              (GtkMenuItem     *menuitem,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_edit_bookmarks_1_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -1166,7 +1171,7 @@ on_edit_bookmarks_1_activate           (GtkMenuItem     *menuitem,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cbusebounds_toggled                 (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
@@ -1174,15 +1179,7 @@ on_cbusebounds_toggled                 (GtkToggleButton *togglebutton,
 
 }
 
-
-void
-on_btnBookmarks_clicked                (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	  gnome_popup_menu_do_popup(bookmark_mnu,NULL,NULL,NULL,NULL);
-}
-
-
+//----------------------------------------------------------------------------------------------
 void
 on_cpfgMainwindow_color_set            (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1194,37 +1191,39 @@ on_cpfgMainwindow_color_set            (GnomeColorPicker *gnomecolorpicker,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_fpMainwindow_font_set               (GnomeFontPicker *gnomefontpicker,
                                         GString        arg1,
                                         gpointer         user_data)
 {
 	font_mainwindow = arg1.str;
-	
+	gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
+
+
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_fbCurrentverse_font_set             (GnomeFontPicker *gnomefontpicker,
                                         GString        arg1,
                                         gpointer         user_data)
 {
   font_currentverse = arg1.str;
-
+  gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_fbInerlinear_font_set               (GnomeFontPicker *gnomefontpicker,
                                         GString        arg1,
                                         gpointer         user_data)
 {
   font_interlinear = arg1.str;
-
+  gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cpfgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1236,9 +1235,10 @@ on_cpfgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
 	myGreen.red = arg1;
 	myGreen.green = arg2;
 	myGreen.blue = arg3;
+	gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomecolorpicker))));
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cpfgInterlinear_color_set           (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1250,7 +1250,7 @@ on_cpfgInterlinear_color_set           (GnomeColorPicker *gnomecolorpicker,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cpbgMainwindow_color_set            (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1262,7 +1262,7 @@ on_cpbgMainwindow_color_set            (GnomeColorPicker *gnomecolorpicker,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cpbgInterlinear_color_set           (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1272,9 +1272,10 @@ on_cpbgInterlinear_color_set           (GnomeColorPicker *gnomecolorpicker,
                                         gpointer         user_data)
 {
 
+
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cpbgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
@@ -1285,4 +1286,45 @@ on_cpbgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
 {
 
 }
+
+//----------------------------------------------------------------------------------------------
+void
+on_about_the_sword_project1_activate   (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget *dlg,
+						*text1,
+						*text2;
+	
+ 	dlg = create_dlgAboutSword();
+ 	text1 = lookup_widget(dlg,"txtAboutSword");
+ 	text2 = lookup_widget(dlg,"text6");
+ 	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
+ 	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
+ 	gtk_widget_show(dlg);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnAboutSwordOK_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget	*dlg;
+
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));	
+	gtk_widget_destroy(dlg);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnSpellNotes_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+#ifdef USE_ASPELL
+	GtkWidget *speller;
+	if(GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(button),"btnEditNote"))->active)
+  speller = spellcheck(1);
+#endif /* USE_ASPELL */
+}
+
 

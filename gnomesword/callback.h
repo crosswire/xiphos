@@ -400,7 +400,7 @@ on_item1_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
 void
-on_about3_activate                     (GtkMenuItem     *menuitem,
+on_about_gnomesword1_activate          (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
 void
@@ -546,10 +546,6 @@ on_cbusebounds_toggled                 (GtkToggleButton *togglebutton,
                                         gpointer         user_data);
 
 void
-on_btnBookmarks_clicked                (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
 on_cpfgMainwindow_color_set            (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg1,
                                         guint            arg2,
@@ -610,4 +606,42 @@ on_cpbgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg2,
                                         guint            arg3,
                                         guint            arg4,
+                                        gpointer         user_data);
+
+void
+on_about_the_sword_project1_activate   (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnAboutSwordOK_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_spell1_found_word                   (GnomeSpell      *gnomespell,
+                                        gpointer         arg1,
+                                        gpointer         user_data);
+
+void
+on_spell1_handled_word                 (GnomeSpell      *gnomespell,
+                                        gpointer         arg1,
+                                        gpointer         user_data);
+
+void
+on_btndlg1OK_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btndlg1Apply_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btndialog1Cancel_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnSpellNotes_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnSpellNotes_clicked               (GtkButton       *button,
                                         gpointer         user_data);
