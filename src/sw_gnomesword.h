@@ -51,6 +51,8 @@ extern "C" {
 	void changecomp2ModSWORD(gchar * modName);
 	void changecomp3ModSWORD(gchar * modName);
 	void setversestyleSWORD(gboolean choice);
+	/*** change Bible book ***/
+	void bookSWORD(void);
 	void chapterSWORD(void);
 	void verseSWORD(void);
 	void btnlookupSWORD(void);

@@ -183,9 +183,8 @@ void initSWORD(GtkWidget * mainform)
  
 	g_print("%s\n","Initiating Sword\n");
 
-	mainMgr = new SWMarkupMgr();	//-- create sword mgrs
-	//mainMgr->Markup(FMT_HTMLHREF);
-	mainMgr1 = new SWMarkupMgr();
+	mainMgr = new SWMarkupMgr(); //(0, 0, true, ENC_UTF8, FMT_HTMLHREF);	//-- create sword mgrs
+	mainMgr1 = new SWMarkupMgr(); //(0, 0, true, ENC_UTF8, FMT_HTMLHREF);
 	percomMgr = new SWMgr();
 
 	curMod = NULL;		//-- set mods to null
@@ -800,23 +799,46 @@ void setversestyleSWORD(gboolean choice)
 		curMod->Display();	//-- show the change
 }
 
+
+/*** change Bible book ***/
+void bookSWORD(void)		//-- someone changed book combo
+{
+	gchar *bookname, buf[256];
+	gint iChap, iVerse;
+	
+	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
+	
+	sprintf(buf,"%s %d:%d", bookname, 1, 1);
+	vkText = buf;
+	vkComm = buf;
+	
+	ChangeVerseSWORD();
+}
+
 //-------------------------------------------------------------------------------------------
 void chapterSWORD(void)		//-- someone clicked the chapter spin button
 {
-	gint iChap;
-	gchar *buf;
-	//-- set iChap to value in spin button
-	iChap =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
-					      (settings->app,
-					       "spbChapter")));
-	//-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
-	swKey.Chapter(iChap);
-	buf = g_strdup(swKey);
-	//-- change all our modules to new chapter
-	changeVerseSWORD(buf);
-	g_free(buf);
+	gchar *bookname, buf[256];
+	gint iChap, iVerse;
+	
+	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")));
+	//iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse")));
+	if((!iChap)){
+		vkText.AutoNormalize(0);
+		vkComm.AutoNormalize(0);
+	}
+	
+	if (iChap < 0)
+		iChap + 1;
+	
+	sprintf(buf,"%s %d:%d", bookname, iChap, 1);
+	vkText = buf;
+	vkComm = buf;
+	
+	ChangeVerseSWORD();
+	vkText.AutoNormalize(1);
+	vkComm.AutoNormalize(1);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1067,8 +1089,8 @@ void showmoduleinfoSWORD(char *modName)	//--  show module information in an abou
 	    *newbuf, discription[500];
 	gint len;
 	ModMap::iterator it;	//-- module iterator
-	SectionMap::iterator sit;	//--
-	ConfigEntMap::iterator cit;	//--
+	SectionMap::iterator sit;	//--  iterator
+	ConfigEntMap::iterator cit;	//-- iterator
 
 	bufabout = "oops";
 	it = mainMgr->Modules.find(modName);	//-- find module (modName)
