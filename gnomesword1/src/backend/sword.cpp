@@ -49,7 +49,7 @@
 #include "backend/sword_defs.h"
 
 using namespace sword;
- 
+  
 static char *get_sword_locale(void)
 {
 	const char *sys_local;
