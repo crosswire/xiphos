@@ -481,6 +481,8 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 					3,&book, 
 					4,&offset, 
 					-1);
+		gtk_tree_path_free(path);
+		
 		if (offset) {
 			//g_warning("%s in %s at %s",name,book,offset);
 			g->offset = strtoul(offset, NULL, 0);

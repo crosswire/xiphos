@@ -455,22 +455,29 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 				   &mod, -1);
 		if (mod) {
 			sbtype = get_mod_type(mod);
-			if (sbtype == 0 || sbtype == 1)
-				gui_change_module_and_key(mod,
+			switch(sbtype) {
+				case 0:
+				case 1:
+					gui_change_module_and_key(mod,
 							  settings.
 							  currentverse);
-			else if (sbtype == 3) {
-				gtk_notebook_set_page
-				    (GTK_NOTEBOOK
-				     (widgets.workbook_lower), 1);
-				gui_change_module_and_key(mod, NULL);
-			}
-
-			else
-				gui_change_module_and_key(mod,
+					break;
+				case 2:
+					gtk_notebook_set_page
+					    (GTK_NOTEBOOK
+					     (widgets.workbook_lower), 0);
+					gui_change_module_and_key(mod,
 							  settings.
 							  dictkey);
+					break;
+				case 3:
+					gtk_notebook_set_page
+					    (GTK_NOTEBOOK
+					     (widgets.workbook_lower), 1);
+					gui_change_module_and_key(mod, NULL);
+					break;
 			//g_warning("mod = %s\nkey = %s",mod,settings.dictkey);
+			}
 			g_free(mod);
 		}
 	}
@@ -690,7 +697,6 @@ static void create_viewer_page(GtkWidget * notebook)
 static void selection_changed(GtkTreeSelection * selection, gpointer data)
 {
 	GtkTreeIter selected;
-	GtkTreePath *path;
 	gchar *key = NULL;
 	gchar *text = NULL;
 	

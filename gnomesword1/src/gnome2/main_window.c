@@ -284,7 +284,9 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		if (settings.havedict) {
 			page_num =
 			    get_module_number(module_name, DICT_MODS);
-			gui_set_dictionary_page_and_key(page_num, key);
+			gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
+			      page_num);
+			//gui_set_dictionary_page_and_key(page_num, key);
 		}
 		break;
 	case BOOK_TYPE:
@@ -671,6 +673,8 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.workbook_lower));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.workbook_lower), FALSE);
+	/*gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.workbook_lower),
+				   FALSE);*/
 
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.workbook_lower,
 		      TRUE, TRUE);
