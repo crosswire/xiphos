@@ -45,6 +45,7 @@ struct  _app_widgets {
 		*notebook_text,  /* notebook - texts */
 		*notebook_percomm,  /* notebook - personal comments */
 		*notebook_sidebar,  /* notebook - sidebar */
+		*notebook_main,	/* main notebook to have multiple passages open at once */
 		*vbox_percomm,  /* vbox for personal comments notebook */
 		*vbox_text,  /* vbox for  */
 	    
