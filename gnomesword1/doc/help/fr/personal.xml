@@ -1,0 +1,52 @@
+ <!-- Personal Commentary-->
+<chapter id="personal" lang="en">
+	<title>The Personal Commentary </title>
+				<para> To build up a personal commentary you will need to install the editable 'Personal' sword module from the English Commentaries section. 
+				Right click it and choose <guimenuitem> edit-&gt;Personal </guimenuitem> in the pop-up menus.   
+				</para>
+				<para> An editor window similar to the <guimenuitem> Study Pad </guimenuitem> will appear. Edit your comment and save it, in future it will appear as your comment to the relevant verse. </para>
+				<figure>
+    				<title>The Personal Commentary Editor </title>
+     				<screenshot>
+      					<mediaobject>
+						<imageobject>
+	      						<imagedata fileref="figures/gnomesword_personal_commentary" format="PNG"/>
+						</imageobject>
+						<textobject>
+					        	<phrase>Personal Commentary Editor </phrase>
+						</textobject>
+				       </mediaobject>
+			        </screenshot>
+			        </figure>
+			        <para> Locationbar</para>
+			        	<itemizedlist>
+			        	<listitem><para> Synchronise Button</para></listitem>
+			        	<listitem><para>Bible Book, Chapter and Verse Selectors</para></listitem>
+			        	<listitem><para>Location Summary</para></listitem>
+			        	</itemizedlist>
+			        <para> Use the <guimenuitem>Synchronise Button</guimenuitem> to quickly change location of your editor to that of the underlying Bibletext or use the <guimenuitem> Book </guimenuitem>, <guimenuitem>Chapter </guimenuitem> and <guimenuitem>Verse selectors </guimenuitem> to choose to edit your comment to one particular verse. </para>	
+			        <para> Toolbar 1</para>
+			        	<itemizedlist>
+			     		<listitem><para>Font Size and Environment</para></listitem>
+			     		<listitem><para>Font Type</para></listitem>
+			     		<listitem><para>Bold, Italics, Underscored, Crossed Out</para></listitem>
+			     		<listitem><para>Left, Centre and Right  Bound</para></listitem>
+			     		<listitem><para>Shift Paragraph Right or Left</para></listitem>
+			     		<listitem><para>Colour Selector</para></listitem>
+			     		</itemizedlist>
+			        <para> Toolbar 2</para>
+			        	<itemizedlist>
+			        	<listitem><para>Save, Delete and Print</para></listitem>
+			        	<listitem><para>Cut, Copy, Paste and Undo</para></listitem>
+			        	<listitem><para>Find and 'Find and Replace'</para></listitem>
+			        	<listitem><para>Spellcheck</para></listitem>
+			        	</itemizedlist>
+			        
+			        
+			        
+			        <para>To create a link to other verses right click the text and choose <guimenuitem>Link..</guimenuitem>. In the pop-up window enter the link location and the module linked to.</para>
+			        
+			        <tip>
+			        	<para>The created commentary page will be attached to an individual verse only. To write commentary pages from within the Gnomesword, attached to longer stretches of text use the <guimenuitem>Link..</guimenuitem> function to link several pages together</para> 
+			        </tip>  
+</chapter>
