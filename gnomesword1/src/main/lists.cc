@@ -34,7 +34,6 @@
 #include "main/settings.h"
 
 #include "backend/sword.h"
-#include "backend/mgr.hh"
 #include "backend/sword_main.hh"
 
 

@@ -37,9 +37,7 @@
 #include "main/parallel_view.h"
 
 #include "backend/sword.h"
-#include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
-#include "backend/mgr.hh"
 
 static int of2tf(const gchar * on_off)
 {
@@ -76,26 +74,7 @@ static void set_global_option(int manager, char * option, gboolean choice)
 	char *on_off;
 
 	on_off = tf2of(choice);
-	
-	switch(manager) {
-		case TEXT_MGR:
-			mgr->setGlobalOption(option, on_off);
-		break;
-		case COMM_MGR:
-		case GBS_MGR:			
-			mgr->setGlobalOption(option, on_off);
-		break;
-		case MAIN_MGR:			
-			sw.main_mgr->setGlobalOption(option, on_off);
-		break;
-		case SEARCH_MGR:
-			sw.search_mgr->setGlobalOption(option, on_off);
-		break;	
-		case INTER_MGR:
-			sw.inter_mgr->setGlobalOption(option, on_off);
-		break;
-	}	
-	sw.results->setGlobalOption(option, on_off);
+	mgr->setGlobalOption(option, on_off);
 }
 /******************************************************************************
  * Name

@@ -257,11 +257,15 @@ char *BackEnd::get_config_entry(char * module_name, char * entry) {
 	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
 		mod = (*it).second;
-		return g_strdup((char *) mod->
-			getConfigEntry(entry));
+		return g_strdup((char *) mod->getConfigEntry(entry));
 	} else
 		return NULL;
 }
+
+void BackEnd::set_cipher_key(char * mod_name, char * key) {
+	display_mgr->setCipherKey(mod_name, key);	
+}
+
 int BackEnd::is_Bible_key(const char * list, char * current_key) {
 	VerseKey key;
 	
@@ -636,14 +640,26 @@ void BackEnd::setup_displays(void) {
 GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 	GList *retlist = NULL;
 	VerseKey key;
-	ListKey vs;
+	ListKey vs;                                                   
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error;
+
 	
 	key.setText(current_key);
 	vs = key.ParseVerseList(list, key);
 	if(!vs.Count())
 		return retlist;
 	while(!vs.Error()) {
-		retlist = g_list_append(retlist, (char*)vs.getText());
+		char *mykey = g_convert((char*)vs.getText(),
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+
+		retlist = g_list_append(retlist, (char*)mykey);
 		vs++;
 	}
 	return retlist;

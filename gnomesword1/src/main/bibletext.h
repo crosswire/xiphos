@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 	
-void set_module_unlocked(char * mod_name, char * key);
+//void set_module_unlocked(char * mod_name, char * key);
 //void set_text_global_option(char * option, char * choice);
 void set_text_module_global_option(char * option,
 				   int choice);
