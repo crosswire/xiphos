@@ -34,6 +34,7 @@
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
+#include <fcntl.h>
 
 #include "gui/html.h"
 #include "gui/gnomesword.h"
@@ -57,6 +58,32 @@ static GtkHTMLStream *htmlstream;
 static GtkHTMLStreamStatus status1;
 
 gboolean in_url;
+
+void
+url_requested (GtkHTML *html, const gchar *url, GtkHTMLStream *handle)
+{
+	GtkHTMLStreamStatus status;
+	gint fd;
+
+	if (!strncmp (url, "file:", 5))
+		url += 5;
+
+	fd = open (url, O_RDONLY);
+	status = GTK_HTML_STREAM_OK;
+	if (fd != -1) {
+		ssize_t size;
+		void *buf = alloca (1 << 7);
+		while ((size = read (fd, buf, 1 << 7))) {
+			if (size == -1) {
+				status = GTK_HTML_STREAM_ERROR;
+				break;
+			} else
+				gtk_html_write (html, handle, (const gchar *) buf, size);
+		}
+	} else
+		status = GTK_HTML_STREAM_ERROR;
+	gtk_html_end (html, handle, status);
+}
 
 /******************************************************************************
  * Name

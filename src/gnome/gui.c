@@ -36,10 +36,10 @@ void gui_init(int argc, char *argv[])
 #endif
 
 	gnome_init("GnomeSword", VERSION, argc, argv);
+	gdk_rgb_init ();
 }
 
 void gui_main(void)
 {
 	gtk_main();
 }
-

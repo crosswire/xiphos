@@ -458,6 +458,10 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 			   */
 			   
+	gtk_signal_connect(GTK_OBJECT(dlg->html),
+			"url_requested",
+			GTK_SIGNAL_FUNC(url_requested), 
+			NULL);
 	gtk_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			   GTK_SIGNAL_FUNC(dialog_url), 
 			   dlg);
