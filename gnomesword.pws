@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=261
-1=33
-2=219
-3=1
-4=299
-5=69
-6=615
-7=865
-8=55
+0=44
+1=109
+2=104
+3=76
+4=1086
+5=30
+6=41
+7=28
+8=1
 9=48
 10=60
 11=32
@@ -32,8 +32,8 @@ ShowLocals=true
 3=
 4=
 5=
-6=157,
-7=154,
+6=
+7=
 8=
 9=
 10=
@@ -46,30 +46,31 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/gnome/editor_spell.c
-1=/home/terry/gnomesword/gnomesword1/src/gui/editor_spell.h
-2=/home/terry/gnomesword/gnomesword1/src/main/spell_ispell.c
-3=/home/terry/gnomesword/gnomesword1/src/main/spell.h
+0=/home/terry/gnomesword/gnomesword1/src/backend/search.h
+1=/home/terry/gnomesword/gnomesword1/src/backend/search.cpp
+2=/home/terry/gnomesword/gnomesword1/src/main/search.c
+3=/home/terry/gnomesword/gnomesword1/src/main/search.h
+4=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
 
 [replace_text]
-0=spell_checker
-1=.h
-2=DEBUG_MSG
-3=sword.h
-4=bookmark_tree
-5=bm->
-6=get_mod_type
-7=p->ec->key
+0=notebook_search
+1=gtk_radio_button_new(_201_group);
+2=dlg->dialog
+3=dlg->get_input_dialog
+4=get_input_dialog
+5=which_bounds
+6=section
+7=b->
 
 [find_text]
-0=manager
-1=ecd
-2=word
-3=word->text
-4=Tword
-5=free_word
-6=run_spell_checker
-7=check_word
+0=remove_selection
+1=MODS_LABEL
+2=do_dialog_search
+3=add_ranges
+4=frame66a
+5=frame66
+6=clist_ranges
+7=range_text_changed
 
 [executer args]
 0=newconfigs

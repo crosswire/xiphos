@@ -287,7 +287,7 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	gint have, end, current;
 	const gchar *utf8str = NULL;
 	gchar *buf = NULL;	
-	
+
 	html_engine_edit_cursor_position_save(ecd->html->engine);
 	html_engine_end_of_document(ecd->html->engine); 
 	end = html_cursor_get_position(ecd->html->engine->cursor); 
@@ -309,6 +309,17 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), "");
 						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), "");
 					}
+#ifdef USE_ISPELL
+					else if (have == 5){ /* for ispell UNKNOWN */
+						gtk_clist_clear(GTK_CLIST(spc_gui.near_misses_clist));							
+						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), utf8str);
+						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), utf8str);
+						correct_word(utf8str, ecd);
+						gtk_clist_clear(GTK_CLIST(spc_gui.near_misses_clist));							
+						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), "");
+						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), "");						
+					}
+#endif /* end USE_ISPELL */
 					else if (have == -1)
 						check_for_error();
 					if (spc_message == SPC_CLOSE) {
@@ -329,6 +340,7 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	html_engine_unselect_all(ecd->html->engine);
 	html_engine_deactivate_selection (ecd->html->engine);
 	html_engine_edit_cursor_position_restore(ecd->html->engine);
+
 	return (spc_message != SPC_CLOSE);
 }	
 
@@ -815,7 +827,8 @@ void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 	spc_gui.window = create_spc_window(ecd);
 	gtk_widget_set_sensitive(spc_gui.options_button, 0);	
 	gtk_widget_show(spc_gui.window);
-	init_spell();	
+
+	init_spell();
 }
 
 

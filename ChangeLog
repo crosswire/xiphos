@@ -1,3 +1,12 @@
+2002-08-08  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added main/search.*
+	* added backend/search.*
+	* added gui/search_dialog.h
+	* added gnome/search_dialog.c
+	* removed backend/search_.*
+
+
 2002-07-30  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added main/spell_ispell.c for ispell support

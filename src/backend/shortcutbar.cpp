@@ -39,7 +39,6 @@
 #include <string.h>
 
 #include "main/shortcutbar.h"
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 #include "backend/shortcutbar.h"
