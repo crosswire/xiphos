@@ -53,12 +53,14 @@ static SWModule
 gboolean
 getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 {
-	gboolean retval = FALSE;
+	gboolean retval = FALSE,
+			oddkey = TRUE;
 	gchar 
 		buf[256], 
 		*utf8str,
 		tmpbuf[256],
-		firstkey[256];
+		firstkey[256],
+		*colorkey;
 	ListKey tmpVerseList;
 	VerseKey DefaultVSKey;
 	gint count=0;
@@ -80,9 +82,17 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
 	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
 	while (!tmpVerseList.Error()) {
-		sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
-					s->verselist_font_size,
+		if(oddkey){
+			colorkey = s->link_color;
+			oddkey = FALSE;
+		}else{
+			colorkey = s->bible_text_color;
+			oddkey = TRUE;
+		}
+		sprintf(buf,"<a href=\"%s\"><font color=\"%s\"size=\"%s\">%s</font></a><br>",
 					(const char *)tmpVerseList,
+					colorkey,
+					s->verselist_font_size,
 					(const char *)tmpVerseList);
 		utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
 		displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
@@ -92,7 +102,7 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 		tmpVerseList++;
 		++count;
 	}
-	sprintf(buf,"</body</html>");	
+	sprintf(buf,"</table></body</html>");	
 	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
 	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
 	endHTML(s->vlsbhtml);

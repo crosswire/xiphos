@@ -1,11 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                            gs_gnomesword.c
-                             -------------------
-    begin                : Tue Dec 05 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
- ***************************************************************************/
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_gnomesword.c
+    * -------------------
+    * Tue Dec 05 2000
+    * copyright (C) 2001 by tbiggs
+    * tbiggs@users.sourceforge.net
+    *
+ */
 
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -322,9 +324,8 @@ addnotebookpages(GtkWidget *notebook,
 	return retVal;
 }
 
-
 /*****************************************************************************
- * UpdateChecks(GtkWidget *mainform) update chech menu items
+ * UpdateChecks(GtkWidget *app) update chech menu items
  * and toggle buttons - called on start up
  *****************************************************************************/
 void UpdateChecks(GtkWidget *app)
@@ -339,9 +340,9 @@ void UpdateChecks(GtkWidget *app)
 	
 	/* set interlinear page to last setting */
 	if(settings->interlinearpage)
-		gtk_widget_show(lookup_widget(app,"vbox3"));	
+		gtk_widget_show(lookup_widget(app,"vboxInt"));	
 	else
-		gtk_widget_hide(lookup_widget(app,"vbox3"));	
+		gtk_widget_hide(lookup_widget(app,"vboxInt"));	
 	/* set interlinear page menu check item */		
 	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 
 	/* set interlinear footnotes to last setting used */
@@ -453,13 +454,16 @@ void addQuickmark(GtkWidget *app)
 *****************************************************************************/
 void showIntPage(GtkWidget *app, gboolean choice)  
 {
-	GtkWidget *intpage; /* pointer to interlinear notebook page */
+	GtkWidget *intpage,*frame; /* pointer to interlinear notebook page */
 
-	intpage= lookup_widget(app,"vbox3"); /* set pointer to page */
+	intpage= lookup_widget(app,"vboxInt"); /* set pointer to page */
+	frame= lookup_widget(app,"frame2"); /* set pointer to page */
 	if(choice){
 		gtk_widget_show(intpage);		/* show page */
+		gtk_widget_show(frame);		/* show page */		
 	} else {
 		gtk_widget_hide(intpage);		/* hide page */
+		gtk_widget_hide(frame);
 	}
 	settings->interlinearpage = choice;  /* remember choice for next program startup */
 }

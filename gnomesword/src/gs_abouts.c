@@ -1,11 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                            gs_abouts.c
-                             -------------------
-    begin                : Tue Mar 13 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@infinet.com
- ***************************************************************************/
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_abouts.c
+    * -------------------
+    * Tue Mar 13 2001
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+  */
 
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -22,7 +23,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
+ 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -67,24 +68,25 @@ void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
 }
 
 
-GtkWidget *create_about2(void)
+GtkWidget *create_about(void)
 {
 	const gchar *authors[] = {
-		"\t\t\t  Terry Biggs    tbiggs@users.sourceforge.net",
+		"Terry Biggs   tbiggs@users.sourceforge.net",
 		NULL
 	};
-	GtkWidget *about2;
+	GtkWidget *about;
 
-	about2 = gnome_about_new("gnomesword", VERSION,
-				 "                Copyright                 2000",
+	about = gnome_about_new("gnomesword", VERSION,
+				 "                              Copyright\t  2000",
 				 authors,
-				 "This is a faithful saying,and worthy of all acceptation, that Christ Jesus came into the world to save sinners; of whom I am chief. - I Timothy 1:15",
-				 "gnomesword/GnomeSword.png");
-	gtk_object_set_data(GTK_OBJECT(about2), "about2", about2);
-	gtk_container_set_border_width(GTK_CONTAINER(about2), 4);
-	gtk_window_set_modal(GTK_WINDOW(about2), TRUE);
-
-	return about2;
+				"This is a faithful saying,and worthy of all acceptation,\
+				that Christ Jesus came into the world to save sinners;\
+				of whom I am chief. - I Timothy 1:15",
+				 "gnomesword/about.png");
+	gtk_object_set_data(GTK_OBJECT(about), "about", about);
+	gtk_container_set_border_width(GTK_CONTAINER(about), 4);
+	gtk_window_set_modal(GTK_WINDOW(about), TRUE);
+	return about;
 }
 
 
@@ -96,12 +98,9 @@ GtkWidget *create_AboutSword(void)
 	GtkWidget *pixmap1;
 	GtkWidget *version_label;
 	GtkWidget *scrolledwindow26;
-	GtkWidget *scrolledwindow27;
 	GtkWidget *txtAboutSword;
 	GtkWidget *label95;
 	GtkWidget *href1;
-	GtkWidget *label96;
-	GtkWidget *text6;
 	GtkWidget *dialog_action_area7;
 	GtkWidget *btnAboutSwordOK;
 
@@ -163,7 +162,7 @@ GtkWidget *create_AboutSword(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(txtAboutSword);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow26), txtAboutSword);
-	gtk_widget_set_usize(txtAboutSword, -2, 103);
+	gtk_widget_set_usize(txtAboutSword, -2, 133);
 	gtk_text_insert(GTK_TEXT(txtAboutSword), NULL, NULL, NULL,
 			"The SWORD Project is an effort to create an ever expanding software package for research and study of God and His Word.  The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework.  An installed module set may be shared between any frontend using the framework.",
 			359);
@@ -185,37 +184,7 @@ GtkWidget *create_AboutSword(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(href1);
 	gtk_box_pack_start(GTK_BOX(vbox21), href1, FALSE, FALSE, 0);
-
-	label96 = gtk_label_new("Current Module");
-	gtk_widget_ref(label96);
-	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "label96",
-				 label96,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label96);
-	gtk_box_pack_start(GTK_BOX(vbox21), label96, FALSE, FALSE, 0);
-	gtk_widget_set_usize(label96, -2, 19);
-
-	scrolledwindow27 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow27);
-	gtk_object_set_data_full(GTK_OBJECT(AboutSword),
-				 "scrolledwindow27", scrolledwindow27,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow27);
-	gtk_box_pack_start(GTK_BOX(vbox21), scrolledwindow27, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow27),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-				       
-	text6 = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(text6);
-	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "text6", text6,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(text6);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow27), text6);
-	//gtk_box_pack_start(GTK_BOX(scrolledwindow27), text6, TRUE, TRUE, 0);
-
+	
 	dialog_action_area7 = GNOME_DIALOG(AboutSword)->action_area;
 	gtk_object_set_data(GTK_OBJECT(AboutSword), "dialog_action_area7",
 			    dialog_action_area7);

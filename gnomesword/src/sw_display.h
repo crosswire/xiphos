@@ -109,8 +109,4 @@ class GTKPerComDisp:public GTKEntryDisp { public:
 	} virtual char Display(SWModule & imodule);
 };
 
-//----------------------------------------------------------------------------------------------
-void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
-
-
 

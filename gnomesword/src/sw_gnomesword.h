@@ -69,7 +69,6 @@ void changcurdictModSWORD(gchar * modName,
 void dictSearchTextChangedSWORD(gchar * mytext);
 void dictchangekeySWORD(gint direction);
 void showmoduleinfoSWORD(char *modName);
-void showinfoSWORD(GtkWidget * text, GtkLabel * label, GtkLabel * version_label);
 void setglobalopsSWORD(gint window, gchar *option, gchar *yesno);
 void changepercomModSWORD(gchar * modName);
 void redisplayTextSWORD(void);
