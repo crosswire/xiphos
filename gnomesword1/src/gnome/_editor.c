@@ -154,7 +154,7 @@ void update_statusbar(GSHTMLEditorControlData * ecd)
 	gtk_statusbar_pop(GTK_STATUSBAR(ecd->statusbar), context_id2);
 
 	if (ecd->personal_comments)
-		buf2 = settings.percomverse;
+		buf2 = ecd->key;
 			
 	else
 		buf2 = ecd->filename;

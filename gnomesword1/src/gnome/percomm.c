@@ -32,10 +32,11 @@
 #endif
 
 #include "gui/gtkhtml_display.h"
-#include "gui/_percomm.h"
+#include "gui/percomm.h"
 #include "gui/_editor.h"
 #include "gui/editor_toolbar.h"
 #include "gui/editor_menu.h"
+#include "gui/info_box.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
@@ -50,6 +51,74 @@
 static PC_DATA *cur_p;
 static gboolean percomm_display_change;
 static GList *percomm_list;
+static GString *gstr;
+
+
+
+/******************************************************************************
+ * Name
+ *   save_note_receiver
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   	gboolean save_note_receiver(const HTMLEngine * engine,
+ *		   const char *data, unsigned int len, void *user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */ 
+
+static gboolean save_note_receiver(const HTMLEngine * engine,
+		   const char *data, unsigned int len, void *user_data)
+{
+	static gboolean startgrabing = FALSE;
+	if (!strncmp(data, "</BODY>", 7))
+		startgrabing = FALSE;
+	if (startgrabing) {
+		gstr = g_string_append(gstr, data);
+		//g_warning(gstr->str);
+	}
+	if (strstr(data, "<BODY") != NULL)
+		startgrabing = TRUE;
+
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *  gui_save_note
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   void gui_save_note(GSHTMLEditorControlData * e)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_save_note(GSHTMLEditorControlData * e)
+{
+	gtk_html_set_editable(e->html, FALSE);
+	gstr = g_string_new("");
+	if (!gtk_html_save
+	    (e->html, (GtkHTMLSaveReceiverFn) save_note_receiver,
+	     GINT_TO_POINTER(0))) {
+		g_warning("file not writen");
+	} else {
+		save_percomm_note(gstr->str);
+		g_print("\nfile writen\n");
+	}
+	g_string_free(gstr, 0);
+	gtk_html_set_editable(e->html, TRUE);
+}
 
 /******************************************************************************
  * Name
@@ -135,6 +204,10 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 				settings.percomm_last_page);
 	p = (PC_DATA *) g_list_nth_data(pcl, page_num);
 	
+	change_percomm_module(p->mod_name);
+	strcpy(p->ec->key,settings.currentverse);
+	set_percomm_key(p->ec->key);
+	
 	if(!p->ec->frame)
 		gui_add_new_percomm_pane(p);
 	
@@ -154,10 +227,10 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	 * display new module with current verse
 	 */
 	if(percomm_display_change) {
-		text_str = get_commentary_text(p->mod_name, settings.currentverse);
+		text_str = get_percomm_text(p->ec->key);
 		if(text_str) {
 			entry_display(p->ec->htmlwidget, p->mod_name, 
-					text_str, settings.currentverse);
+				text_str, p->ec->key, FALSE);
 			free(text_str);
 		}
 	}
@@ -396,10 +469,10 @@ static void on_btn_save_clicked(GtkButton * button,
 					PC_DATA *p)
 {
 	if(p->ec->personal_comments) {
-		editor_save_note(p->ec->htmlwidget, p->mod_name);
+		gui_save_note(p->ec);
 		p->ec->changed = FALSE;
 		update_statusbar(p->ec);
-	}		
+	}
 }
 
 /******************************************************************************
@@ -422,10 +495,34 @@ static void on_btn_save_clicked(GtkButton * button,
 static void on_btn_delete_clicked(GtkButton * button,
 					PC_DATA *p)
 {
+	GtkWidget *label1, *label2, *label3, *msgbox;
+	gint answer = -1;
+	gchar *key;
+	
 	if(p->ec->personal_comments) {
-		delete_percomm_note(p->mod_name);
+		key = get_percomm_key();
+		
+		msgbox = gui_create_info_box();
+		label1 = lookup_widget(msgbox, "lbInfoBox1");
+		label2 = lookup_widget(msgbox, "lbInfoBox2");
+		label3 = lookup_widget(msgbox, "lbInfoBox3");
+		gtk_label_set_text(GTK_LABEL(label1), _("Are you sure you want"));
+		gtk_label_set_text(GTK_LABEL(label2), _("to delete the note for"));
+		gtk_label_set_text(GTK_LABEL(label3),key);
+	
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		switch (answer) {
+		case 0:
+			delete_percomm_note();
+			break;
+		default:
+			break;
+		}
+		settings.percomverse = key;
 		p->ec->changed = FALSE;
 		update_statusbar(p->ec);
+		free(key);
 	}
 }
 
@@ -951,9 +1048,10 @@ void gui_display_percomm(gchar *key)
 {	
 	gchar *text_str = NULL;
 	settings.percomverse = key;
-	text_str = get_commentary_text(cur_p->mod_name, key);
+	strcpy(cur_p->ec->key, key);
+	text_str = get_percomm_text(key);
 	if(text_str) {
-		entry_display(cur_p->html, cur_p->mod_name, text_str, key);
+		entry_display(cur_p->html, cur_p->mod_name, text_str, key, FALSE);
 		free(text_str);
 	}
 	update_statusbar(cur_p->ec);
@@ -983,7 +1081,7 @@ void gui_set_percomm_page_and_key(gint page_num, gchar * key)
 	 * called by on_notebook_percomm_switch_page
 	 */
 	percomm_display_change = FALSE;
-	
+	strcpy(cur_p->ec->key, key);
 	settings.percomverse = key;
 	if (settings.text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
@@ -991,9 +1089,10 @@ void gui_set_percomm_page_and_key(gint page_num, gchar * key)
 				      page_num);
 	}
 	
-	text_str = get_commentary_text(cur_p->mod_name, key);
+	text_str = get_percomm_text(key);
 	if(text_str) {
-		entry_display(cur_p->html, cur_p->mod_name, text_str, key);
+		entry_display(cur_p->html, cur_p->mod_name, text_str, 
+							key, FALSE);
 		free(text_str);
 	}
 	update_statusbar(cur_p->ec);
@@ -1126,7 +1225,6 @@ void gui_setup_percomm(GList *mods)
 {
 	GList *tmp = NULL;
 	gchar *modbuf;
-	gchar *keybuf;
 	PC_DATA *p;
 	gint count = 0;
 
@@ -1140,8 +1238,8 @@ void gui_setup_percomm(GList *mods)
 		p->mod_name = (gchar *) tmp->data;
 		p->mod_num = count;
 		p->search_string = NULL;
-		p->key = NULL;
 		p->ec = gs_html_editor_control_data_new();
+		strcpy(p->ec->key, settings.currentverse);
 		p->ec->frame = NULL;
 		strcpy(p->ec->filename,p->mod_name);
 		add_vbox_to_notebook(p);
@@ -1158,12 +1256,10 @@ void gui_setup_percomm(GList *mods)
 			   percomm_list);
 
 	modbuf = g_strdup(settings.personalcommentsmod);
-	keybuf = g_strdup(settings.currentverse);
 
 	set_page_percomm(modbuf, percomm_list);
 
 	g_free(modbuf);
-	g_free(keybuf);
 	g_list_free(tmp);
 }
 
