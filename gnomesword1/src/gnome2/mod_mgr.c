@@ -1796,7 +1796,7 @@ void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
 	if(!gtk_tree_selection_get_selected(selection, &model, &selected)) 
 		return;
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+	gtk_tree_model_get(model, &selected,
 				   COLUMN_TYPE, &type, 
 				   COLUMN_CAPTION, &caption, 
 				   COLUMN_SOURCE, &source, 
@@ -1820,7 +1820,7 @@ void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 
 	test = gui_alert_dialog(yes_no_dialog);
 	if (test == GS_YES) {
-		gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
+		gtk_list_store_remove(GTK_LIST_STORE(model), &selected);
 		save_sources();
 	}
 	g_free(yes_no_dialog);

@@ -70,9 +70,26 @@ PASSAGE_TAB_INFO *cur_passage_tab;
  * globals to this file only 
  */
 static GList *passage_list;
+static gboolean page_change = FALSE;
 //static gboolean display_change = TRUE;
 //static gint text_last_page;
 
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
 
 static void on_notebook_main_close_page(GtkButton * button, gpointer user_data)
 {
@@ -82,6 +99,23 @@ static void on_notebook_main_close_page(GtkButton * button, gpointer user_data)
 				pt->page_widget));
 }
 
+/******************************************************************************
+ * Name
+ *  set_current_tab
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void set_current_tab (PASSAGE_TAB_INFO *pt)	
+ *
+ * Description
+ *   point cur_passage_tab to the current tab and turns the close button on 
+ *   and off
+ *
+ * Return value
+ *   void
+ */
+ 
 static void set_current_tab (PASSAGE_TAB_INFO *pt)
 {
 	PASSAGE_TAB_INFO *ot = cur_passage_tab;
@@ -187,7 +221,7 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					 gint page_num, GList **tl)
 {
 	PASSAGE_TAB_INFO *pt;
-	
+	page_change = TRUE;
 	/* get data structure for new passage */
 	pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	
@@ -205,7 +239,7 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	//sets the dictionary mod and key
 	gui_change_module_and_key(pt->dictlex_mod, pt->dictlex_key);
 //	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
-	
+	page_change = FALSE;
 	//sets the book mod and key
 }
 
@@ -239,6 +273,91 @@ static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget,
 					(gchar*)tbinf->text_commentary_key);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_set_tab_label
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_set_tab_label(TABED_PAGE *p)	
+ *
+ * Description
+ *   sets current tab label to current verse
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_set_tab_label(const gchar * key)
+{
+	GString *str = g_string_new(NULL);
+	
+	if(cur_passage_tab->text_commentary_key)
+		g_free(cur_passage_tab->text_commentary_key);
+	cur_passage_tab->text_commentary_key = g_strdup(key);
+		
+	g_string_printf(str,"%s: %s",
+				cur_passage_tab->text_mod,
+				cur_passage_tab->text_commentary_key); 
+	gtk_label_set_text (cur_passage_tab->tab_label,str->str);
+	g_string_free(str,TRUE);
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_update_tab_struct(const gchar * text_mod, 
+			   const gchar * commentary_mod, 
+			   const gchar * dictlex_mod, 
+			   const gchar * book_mod, 
+			   const gchar * dictlex_key, 
+			   const gchar * book_key)
+{	
+	if(page_change) 
+		return;
+	
+	if(text_mod) {
+		if(cur_passage_tab->text_mod)
+			g_free(cur_passage_tab->text_mod);
+		cur_passage_tab->text_mod = g_strdup(text_mod);		
+	}
+	if(commentary_mod) {
+		if(cur_passage_tab->commentary_mod)
+			g_free(cur_passage_tab->commentary_mod);
+		cur_passage_tab->commentary_mod = g_strdup(commentary_mod);		
+	} 
+	if(dictlex_mod) {
+		if(cur_passage_tab->dictlex_mod)
+			g_free(cur_passage_tab->dictlex_mod);
+		cur_passage_tab->dictlex_mod = g_strdup(dictlex_mod);		
+	} 
+	if(book_mod) {
+		if(cur_passage_tab->book_mod)
+			g_free(cur_passage_tab->book_mod);
+		cur_passage_tab->book_mod = g_strdup(book_mod);		
+	}
+	if(dictlex_key) {
+		if(cur_passage_tab->dictlex_key)
+			g_free(cur_passage_tab->dictlex_key);
+		cur_passage_tab->dictlex_key = g_strdup(dictlex_key);		
+	}
 }
 
 /******************************************************************************
@@ -300,7 +419,8 @@ void gui_close_passage_tab(gint pagenum)
 {
 	if (-1 == pagenum)
 		pagenum = gtk_notebook_get_current_page(GTK_NOTEBOOK(widgets.notebook_main));
-	
+	if (1 == gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main)))
+		return;
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	passage_list = g_list_remove(passage_list, pt);
 	g_free(pt->text_mod);
