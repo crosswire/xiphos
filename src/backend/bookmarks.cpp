@@ -130,7 +130,7 @@ void backend_save_bookmarks(GNode * bookmark_tree, char *dir)
         SectionMap::iterator sit;
         list < string >::iterator it;
 	int x = 0, i = 0;
-        sprintf(persfile, "%spersonal.conf", dir);
+        sprintf(persfile, "%s/personal.conf", dir);
 
         /*** delete all bookmark files before saving in case a top level was deleted ***/
         for (it = bmfiles.begin(); it != bmfiles.end(); it++) {
@@ -145,7 +145,7 @@ void backend_save_bookmarks(GNode * bookmark_tree, char *dir)
 		
 	
 	if (es->is_leaf) {
-		sprintf(conffile, "%s%s.conf", dir, "root");
+		sprintf(conffile, "%s/%s.conf", dir, "root");
 		bmconf = new SWConfig(conffile);
 		emap = bmconf->Sections["ROOT"];
 		sprintf(buf, "branch%d", x++);
@@ -166,7 +166,7 @@ void backend_save_bookmarks(GNode * bookmark_tree, char *dir)
 	else {
 		if(!strcmp(es->module,"ROOT")) {
 		
-			sprintf(conffile, "%s%s", dir,es->key);
+			sprintf(conffile, "%s/%s", dir,es->key);
 			bmconf = new SWConfig(conffile);
 			emap = bmconf->Sections["ROOT"];
 			sprintf(buf, "branch%d", i++);
@@ -189,7 +189,7 @@ void backend_save_bookmarks(GNode * bookmark_tree, char *dir)
 	while((gnode = g_node_next_sibling(gnode)) != NULL) {
 		es = (ExportStruct *)gnode->data; 
 		if (es->is_leaf) {
-			sprintf(conffile, "%s%s.conf", dir, "root");
+			sprintf(conffile, "%s/%s.conf", dir, "root");
 			bmconf = new SWConfig(conffile);
 			emap = bmconf->Sections["ROOT"];
 			sprintf(buf, "branch%d", x++);
@@ -208,7 +208,7 @@ void backend_save_bookmarks(GNode * bookmark_tree, char *dir)
 		}
 		
 		else {
-			sprintf(conffile, "%s%s", dir,es->key);
+			sprintf(conffile, "%s/%s", dir,es->key);
 			bmconf = new SWConfig(conffile);
 			emap = bmconf->Sections["ROOT"];
 			sprintf(buf, "branch%d", i++);
@@ -373,7 +373,7 @@ GNode * backend_load_bookmarks(char *dir)
         root_node = g_node_insert(root_node,-1,root_node);
 	
         t = "|";
-        sprintf(conffile, "%spersonal.conf", dir);
+        sprintf(conffile, "%s/personal.conf", dir);
         if (access(conffile, F_OK) == -1)
                 return NULL;
         bookmarkInfo = new SWConfig(conffile);
@@ -409,7 +409,7 @@ GNode * backend_load_bookmarks(char *dir)
                             && (strcmp(ent->d_name, "personal.conf"))
                             && (strcmp(ent->d_name, "."))
                             && (strcmp(ent->d_name, ".."))) {
-                                sprintf(conffile, "%s%s", dir,
+                                sprintf(conffile, "%s/%s", dir,
                                         ent->d_name);
                                 bookmarkInfo = new SWConfig(conffile);
                                 if ((sit =
@@ -442,7 +442,7 @@ GNode * backend_load_bookmarks(char *dir)
                 closedir(directory);
         }
 	
-        sprintf(conffile, "%sroot.conf", dir);
+        sprintf(conffile, "%s/root.conf", dir);
         if (access(conffile, F_OK) == -1)
                 return root_node;
         bookmarkInfo = new SWConfig(conffile);

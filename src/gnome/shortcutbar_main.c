@@ -1198,13 +1198,17 @@ void gui_setup_shortcut_bar(void)
 
 	tmp = NULL;
 	if (settings.showfavoritesgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Favorites.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Favorites.conf");
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Favorites"));
 		filename = "Favorites.conf";
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
-		
+		    load_sb_group(text, group_name, icon_size);
+		g_free(text);
 		//g_warning("group = %s",group_name);
 		//g_warning("size  = %s",icon_size);
 		
@@ -1268,12 +1272,19 @@ void gui_setup_shortcut_bar(void)
 	tmp = NULL;
 	
 	if (settings.showtextgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("BibleText.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"BibleText.conf");
+		
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Bible Text"));
-		filename = "BibleText.conf";
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
+		
+		g_free(text);
+		
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1294,12 +1305,17 @@ void gui_setup_shortcut_bar(void)
 		}
 	}
 	if (settings.showcomgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Commentaries.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Commentaries.conf");	
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Commentaries"));
-		filename = "Commentaries.conf";
+		
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
+		g_free(text);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1320,13 +1336,19 @@ void gui_setup_shortcut_bar(void)
 		}
 	}
 	if (settings.showdictgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Dictionaries.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Dictionaries.conf");
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 e_utf8_from_locale_string(_
 							   ("Dict/Lex")));
-		filename = "Dictionaries.conf";
+		
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
+		g_free(text);
+		
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1349,12 +1371,18 @@ void gui_setup_shortcut_bar(void)
 
 	/* GBS */
 	if (settings.showbookgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Books.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Books.conf");
 		groupnum8 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Book"));
 		filename = "Books.conf";
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
+		g_free(text);
+		
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1550,13 +1578,20 @@ void gui_update_shortcut_bar(void)
 	}
 	tmp = NULL;
 	if (settings.showfavoritesgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Favorites.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Favorites.conf");
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Favorites"));
-		filename = "Favorites.conf";
+		
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
 		large_icons = atoi(icon_size);
+		
+		g_free(text);
+		
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
 						     shortcut_bar,
@@ -1605,13 +1640,20 @@ void gui_update_shortcut_bar(void)
 		}
 	}
 	if (settings.showtextgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("BibleText.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"BibleText.conf");
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Bible Text"));
-		filename = "BibleText.conf";
+		
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
 		large_icons = atoi(icon_size);
+		
+		g_free(text);
+		
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
 						     shortcut_bar,
@@ -1631,13 +1673,19 @@ void gui_update_shortcut_bar(void)
 		}
 	}
 	if (settings.showcomgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Commentaries.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Commentaries.conf");		
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 _("Commentaries"));
-		filename = "Commentaries.conf";
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
 		large_icons = atoi(icon_size);
+		
+		g_free(text);
+		
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
 						     shortcut_bar,
@@ -1657,14 +1705,20 @@ void gui_update_shortcut_bar(void)
 		}
 	}
 	if (settings.showdictgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Dictionaries.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Dictionaries.conf");
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 e_utf8_from_locale_string(_
 							   ("Dict/Lex")));
-		filename = "Dictionaries.conf";
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
 		large_icons = atoi(icon_size);
+		
+		g_free(text);
+		
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
 						     shortcut_bar,
@@ -1686,13 +1740,19 @@ void gui_update_shortcut_bar(void)
 
 	/* GBS */
 	if (settings.showbookgroup) {
+		gchar *text = g_new(char, strlen(settings.shortcutbarDir) +
+				strlen("Books.conf") + 3);
+		sprintf(text, "%s/%s", settings.shortcutbarDir,
+				"Books.conf");
 		groupnum8 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 _("Book"));
-		filename = "Books.conf";
+				 _("Book"));		
 		tmp =
-		    load_sb_group(filename, group_name, icon_size);
+		    load_sb_group(text, group_name, icon_size);
 		large_icons = atoi(icon_size);
+		
+		g_free(text);
+		
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
 						     shortcut_bar,

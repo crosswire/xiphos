@@ -46,7 +46,7 @@ struct  _app_widgets {
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
 		*workbook_upper, /* notebook - commentaries and editors */	
-		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
+		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear */
 		*notebook_gbs, /* notebook - gbs */
 		*notebook_dict,  /* notebook - dict/lex */
 		*notebook_comm,  /* notebook - commentaries */

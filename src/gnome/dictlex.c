@@ -32,6 +32,8 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/html.h"
+#include "gui/main_window.h"
+#include "gui/shortcutbar_search.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -204,6 +206,15 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	
 	//-- change tab label to current book name
 	cur_d = d;
+	gui_change_window_title(d->mod_name);
+	/*
+	 * set search module to current dict/lex module 
+	 */
+	strcpy(settings.sb_search_mod, d->mod_name);
+	/*
+	 * set search frame label to current dict/lex module 
+	 */
+	gui_set_search_label(d->mod_name);
 	
 	gui_set_dict_frame_label(d);
 	
@@ -637,6 +648,15 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 {	
 	settings.whichwindow = DICTIONARY_WINDOW;
 	
+	gui_change_window_title(dl->mod_name);
+	/*
+	 * set search module to current dict/lex module 
+	 */
+	strcpy(settings.sb_search_mod, dl->mod_name);
+	/*
+	 * set search frame label to current dict/lex module 
+	 */
+	gui_set_search_label(dl->mod_name);	
 	
 	switch (event->button) {
 	case 1:
