@@ -311,20 +311,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 {
 	GtkWidget *druid1;
 	GtkWidget *druidpagestart1;
-	GdkColor druidpagestart1_bg_color = { 0, 6168, 6168, 28527 };
-	GdkColor druidpagestart1_textbox_color =
-	    { 0, 65535, 65535, 65535 };
-	GdkColor druidpagestart1_logo_bg_color =
-	    { 0, 6425, 6682, 29298 };
-	GdkColor druidpagestart1_title_color =
-	    { 0, 65535, 65535, 65535 };
 	GtkWidget *druidpagestandard3;
-	GdkColor druidpagestandard3_bg_color =
-	    { 0, 46260, 7967, 11308 };
-	GdkColor druidpagestandard3_logo_bg_color =
-	    { 0, 45232, 8481, 11822 };
-	GdkColor druidpagestandard3_title_color =
-	    { 0, 65535, 65535, 65535 };
 	GtkWidget *druid_vbox3;
 	GtkWidget *vbox27;
 	GtkWidget *label112;
@@ -340,11 +327,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *label120;
 	GtkWidget *label121;
 	GtkWidget *druidpagestandard1;
-	GdkColor druidpagestandard1_bg_color = { 0, 6168, 6168, 28527 };
-	GdkColor druidpagestandard1_logo_bg_color =
-	    { 0, 8481, 6425, 31354 };
-	GdkColor druidpagestandard1_title_color =
-	    { 0, 65535, 65535, 65535 };
 	GtkWidget *druid_vbox1;
 	GtkWidget *vbox26;
 	GSList *vbox26_group = NULL;
@@ -356,12 +338,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *hbox29;
 	GtkWidget *hbox84;
 	GtkWidget *druidpagestandard2;
-	GdkColor druidpagestandard2_bg_color =
-	    { 0, 44204, 24929, 13107 };
-	GdkColor druidpagestandard2_logo_bg_color =
-	    { 0, 43176, 25186, 12850 };
-	GdkColor druidpagestandard2_title_color =
-	    { 0, 65535, 65535, 65535 };
 	GtkWidget *druid_vbox2;
 	GtkWidget *table7;
 	GtkWidget *label104;
@@ -392,13 +368,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *combo_devotion;
 	GtkWidget *label111;
 	GtkWidget *druidpagefinish1;
-	GdkColor druidpagefinish1_bg_color = { 0, 6425, 6425, 28784 };
-	GdkColor druidpagefinish1_textbox_color =
-	    { 0, 65535, 65535, 65535 };
-	GdkColor druidpagefinish1_logo_bg_color =
-	    { 0, 6425, 3855, 27242 };
-	GdkColor druidpagefinish1_title_color =
-	    { 0, 65535, 65535, 65535 };
 	GtkTooltips *tooltips;
 	GError *error = NULL;
 
@@ -443,18 +412,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 				GNOME_DRUID_PAGE(druidpagestart1));
 	gnome_druid_set_page(GNOME_DRUID(druid1),
 			     GNOME_DRUID_PAGE(druidpagestart1));
-	gnome_druid_page_edge_set_bg_color(GNOME_DRUID_PAGE_EDGE
-					    (druidpagestart1),
-					    &druidpagestart1_bg_color);
-	gnome_druid_page_edge_set_textbox_color(GNOME_DRUID_PAGE_EDGE
-						 (druidpagestart1),
-						 &druidpagestart1_textbox_color);
-	gnome_druid_page_edge_set_logo_bg_color(GNOME_DRUID_PAGE_EDGE
-						 (druidpagestart1),
-						 &druidpagestart1_logo_bg_color);
-	gnome_druid_page_edge_set_title_color(GNOME_DRUID_PAGE_EDGE
-					       (druidpagestart1),
-					       &druidpagestart1_title_color);
 	gnome_druid_page_edge_set_title(GNOME_DRUID_PAGE_EDGE
 					 (druidpagestart1),
 					 _("Welcome To GnomeSword"));
@@ -476,15 +433,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show_all(druidpagestandard3);
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagestandard3));
-	gnome_druid_page_standard_set_bg_color(GNOME_DRUID_PAGE_STANDARD
-					       (druidpagestandard3),
-					       &druidpagestandard3_bg_color);
-	gnome_druid_page_standard_set_logo_bg_color
-	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard3),
-	     &druidpagestandard3_logo_bg_color);
-	gnome_druid_page_standard_set_title_color
-	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard3),
-	     &druidpagestandard3_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
 					    settings.program_title);
@@ -576,15 +524,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show_all(druidpagestandard1);
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagestandard1));
-	gnome_druid_page_standard_set_bg_color(GNOME_DRUID_PAGE_STANDARD
-					       (druidpagestandard1),
-					       &druidpagestandard1_bg_color);
-	gnome_druid_page_standard_set_logo_bg_color
-	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard1),
-	     &druidpagestandard1_logo_bg_color);
-	gnome_druid_page_standard_set_title_color
-	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard1),
-	     &druidpagestandard1_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard1),
 					    _
@@ -735,15 +674,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show_all(druidpagestandard2);
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagestandard2));
-	gnome_druid_page_standard_set_bg_color(GNOME_DRUID_PAGE_STANDARD
-					       (druidpagestandard2),
-					       &druidpagestandard2_bg_color);
-	gnome_druid_page_standard_set_logo_bg_color
-	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard2),
-	     &druidpagestandard2_logo_bg_color);
-	gnome_druid_page_standard_set_title_color
-	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard2),
-	     &druidpagestandard2_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard2),
 					    _
@@ -1030,18 +960,6 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(druidpagefinish1);
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagefinish1));
-	gnome_druid_page_edge_set_bg_color(GNOME_DRUID_PAGE_EDGE
-					     (druidpagefinish1),
-					     &druidpagefinish1_bg_color);
-	gnome_druid_page_edge_set_textbox_color
-	    (GNOME_DRUID_PAGE_EDGE(druidpagefinish1),
-	     &druidpagefinish1_textbox_color);
-	gnome_druid_page_edge_set_logo_bg_color
-	    (GNOME_DRUID_PAGE_EDGE(druidpagefinish1),
-	     &druidpagefinish1_logo_bg_color);
-	gnome_druid_page_edge_set_title_color(GNOME_DRUID_PAGE_EDGE
-						(druidpagefinish1),
-						&druidpagefinish1_title_color);
 	gnome_druid_page_edge_set_title(GNOME_DRUID_PAGE_EDGE
 					  (druidpagefinish1),
 					  settings.program_title);
