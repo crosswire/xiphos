@@ -34,6 +34,7 @@ struct _bookmark_menu {
 	GtkWidget *edit;
 	GtkWidget *point;
 	GtkWidget *delete;
+	GtkWidget *reorder;
 	GtkWidget *save;
 	GtkWidget *bibletime;
 	GtkWidget *rr_submenu;

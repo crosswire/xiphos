@@ -37,6 +37,7 @@ struct _sitebar {
 		*html_widget,
 		*html_viewer_widget;
 	GtkWidget *optionmenu1;
+	GtkWidget *menu_item_save_search;
 	gchar   mod_name[80];
 };
 extern SIDEBAR sidebar;

@@ -1268,6 +1268,10 @@ void gui_create_bookmark_menu(void)
 	menu.delete = pmBookmarkTree_uiinfo[6].widget;
 
 	menu.save = pmBookmarkTree_uiinfo[8].widget;
+	
+	
+	
+	menu.reorder = pmBookmarkTree_uiinfo[12].widget;
 
 	menu.bibletime = pmBookmarkTree_uiinfo[14].widget;
 	menu.rr_submenu = pmBookmarkTree_uiinfo[15].widget;
