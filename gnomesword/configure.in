@@ -267,7 +267,7 @@ AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_speller" = xyes)
 
 AC_OUTPUT([
 Makefile
-dnl intl/Makefile
+intl/Makefile
 po/Makefile.in
 help/Makefile
 macros/Makefile
