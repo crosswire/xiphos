@@ -203,7 +203,7 @@ GList * backend_load_custom_ranges(void)
 int backend_clear_scope(void)
 {
 	current_scope = 0;	//------------ clear scope
-	return current_scope->Error();
+	return 1;
 }
 
 
@@ -249,7 +249,7 @@ int backend_clear_search_list(void)
 int backend_set_scope2last_search(void)
 {
 	current_scope = &search_scope_list;//-- move searchlist into current_scope
-	return current_scope->Error();
+	return 1;
 }
 
 
