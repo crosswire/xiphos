@@ -34,6 +34,7 @@ libmain_a_SOURCES =  \
     main.c \
     module_dialogs.cc module_dialogs.h \
     mod_mgr.cc mod_mgr.h \
+    navbar.cc navbar.h \
     parallel_view.cc parallel_view.h \
     search_dialog.cc search_dialog.h \
     search_sidebar.cc search_sidebar.h \

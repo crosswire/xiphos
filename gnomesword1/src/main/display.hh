@@ -20,6 +20,10 @@
  */
 
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
@@ -39,6 +43,17 @@ public:
 	virtual char Display(SWModule &imodule);
 };
 
+class GTKChapDisp : public GTKEntryDisp {
+public:
+	GTKChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
+	virtual char Display(SWModule &imodule);
+	virtual void getVerseBefore(SWModule &imodule);
+	virtual void getVerseAfter(SWModule &imodule);
+	MOD_FONT *mf;
+	GString *str;
+};
+
+#ifdef USE_MOZILLA
 class GTKMozEntryDisp : public  SWDisplay{
 protected:
 	GtkWidget *gtkText;
@@ -56,12 +71,8 @@ public:
 	virtual void getVerseAfter(SWModule &imodule);
 	MOD_FONT *mf;
 };
+#endif
 
-class GTKChapDisp : public GTKEntryDisp {
-public:
-	GTKChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
-	virtual char Display(SWModule &imodule);
-};
 
 class GTKTextviewChapDisp : public GTKEntryDisp {
 public:

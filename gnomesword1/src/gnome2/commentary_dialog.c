@@ -41,20 +41,21 @@
 #include "gui/toolbar_edit.h"
 #include "gui/widgets.h"
 
-#include "main/sword.h"
 #include "main/lists.h"
+#include "main/navbar.h"
 #include "main/settings.h"
+#include "main/sword.h"
 
 
-static void create_menu(DIALOG_DATA * t ,GdkEventButton * event);
+static void create_menu(DIALOG_DATA * t, GdkEventButton * event);
 
 extern gboolean dialog_freed;
-
+extern gboolean do_display;
 /****************************************************************************************
  * static - global to this file only
  */
 
-DIALOG_DATA *cur_vc;
+DIALOG_DATA *cur_c;
 static gboolean apply_change;
 static GtkWidget *sync_button;
 
@@ -79,7 +80,7 @@ static GtkWidget *sync_button;
 void gui_display_commentary_with_struct(DIALOG_DATA * c, gchar * key)
 {
 	strcpy(settings.comm_key, key);
-	if(c->key)
+	if (c->key)
 		g_free(c->key);
 	c->key = g_strdup(key);
 	//display(c, key);
@@ -101,34 +102,35 @@ void gui_display_commentary_with_struct(DIALOG_DATA * c, gchar * key)
  *   void
  */
 
-void gui_note_can_close(GSHTMLEditorControlData *ecd)
+void gui_note_can_close(GSHTMLEditorControlData * ecd)
 {
 	gchar *filename = NULL;
 	gchar *buf = NULL;
 	gint test;
 	GS_DIALOG *info;
 	GString *str;
-	
+
 	if (settings.modifiedPC) {
 		str = g_string_new("");
 		info = gui_new_dialog();
 		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s %s",
-			_("Note for"),
-			ecd->key,
-			_("has been modified. Do you wish to save it?"));
+				"<span weight=\"bold\">%s</span>\n\n%s %s",
+				_("Note for"),
+				ecd->key,
+				_
+				("has been modified. Do you wish to save it?"));
 		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
 
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
-//			gui_save_note(ecd);
+//                      gui_save_note(ecd);
 		}
 		settings.modifiedPC = FALSE;
 		g_free(info);
-		g_string_free(str,TRUE);
+		g_string_free(str, TRUE);
 	}
 }
 
@@ -150,20 +152,20 @@ void gui_note_can_close(GSHTMLEditorControlData *ecd)
  */
 
 void gui_on_lookup_commentary_dialog_selection
-    (GtkMenuItem * menuitem, gchar * dict_mod_description) 
-{
+    (GtkMenuItem * menuitem, gchar * dict_mod_description) {
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = main_module_name_from_description(dict_mod_description);
-	if(!mod_name) 
+	mod_name =
+	    main_module_name_from_description(dict_mod_description);
+	if (!mod_name)
 		return;
 
-	dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
+	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(mod_name,
-						      dict_key);
+						     dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
@@ -180,7 +182,7 @@ void gui_on_lookup_commentary_dialog_selection
  *   #include "commentary_dialog.h"
  *
  *   void on_dialog_destroy(GtkObject * object, 
- *						DIALOG_DATA * vc)	
+ *						DIALOG_DATA * c)	
  *
  * Description
  *   shut down the View Commentay Dialog
@@ -189,10 +191,10 @@ void gui_on_lookup_commentary_dialog_selection
  *   void
  */
 
-static void on_dialog_destroy(GtkObject * object, DIALOG_DATA * vc)
-{	
+static void on_dialog_destroy(GtkObject * object, DIALOG_DATA * c)
+{
 	if (!dialog_freed)
-		main_free_on_destroy(vc);
+		main_free_on_destroy(c);
 	dialog_freed = FALSE;
 	settings.percomm_dialog_exist = FALSE;
 }
@@ -205,7 +207,7 @@ static void on_dialog_destroy(GtkObject * object, DIALOG_DATA * vc)
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void gui_close_comm_dialog(DIALOG_DATA * vc)	
+ *   void gui_close_comm_dialog(DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -214,11 +216,11 @@ static void on_dialog_destroy(GtkObject * object, DIALOG_DATA * vc)
  *   void
  */
 
-void gui_close_comm_dialog(DIALOG_DATA * vc)
+void gui_close_comm_dialog(DIALOG_DATA * c)
 {
-	if (vc->dialog) {
+	if (c->dialog) {
 		dialog_freed = FALSE;
-		gtk_widget_destroy(vc->dialog);
+		gtk_widget_destroy(c->dialog);
 	}
 }
 
@@ -231,7 +233,7 @@ void gui_close_comm_dialog(DIALOG_DATA * vc)
  *   #include "commentary_dialog.h"
  *
  *   gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-                      GdkEventMotion  *event, DIALOG_DATA * vc)	
+                      GdkEventMotion  *event, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -242,9 +244,9 @@ void gui_close_comm_dialog(DIALOG_DATA * vc)
 
 static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      GdkEventMotion * event,
-					      DIALOG_DATA * vc)
+					      DIALOG_DATA * c)
 {
-	cur_vc = vc;
+	cur_c = c;
 	return FALSE;
 }
 
@@ -257,7 +259,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * vc)	
+ *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -267,9 +269,9 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  */
 
 static void dialog_url(GtkHTML * html, const gchar * url,
-		       DIALOG_DATA * vc)
+		       DIALOG_DATA * c)
 {
-	cur_vc = vc;
+	cur_c = c;
 }
 
 
@@ -281,10 +283,10 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   #include "gui/commentary_dialog.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					DIALOG_DATA * vc)	
+ *					DIALOG_DATA * c)	
  *
  * Description
- *    mouse button pressed in window - used to set cur_vc to the current
+ *    mouse button pressed in window - used to set cur_c to the current
  *    commentary dialog structure
  *
  * Return value
@@ -294,7 +296,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 static gint button_press_event(GtkWidget * html,
 			       GdkEventButton * event, DIALOG_DATA * c)
 {
-	cur_vc = c;
+	cur_c = c;
 	switch (event->button) {
 	case 1:
 		break;
@@ -307,20 +309,21 @@ static gint button_press_event(GtkWidget * html,
 	return FALSE;
 }
 static gboolean html_key_press_event(GtkWidget * widget,
-				      GdkEventKey * event,
-				      DIALOG_DATA * vc)
+				     GdkEventKey * event,
+				     DIALOG_DATA * c)
 {
-	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) vc->editor;
-	cur_vc = vc;
+	GSHTMLEditorControlData *ec =
+	    (GSHTMLEditorControlData *) c->editor;
+	cur_c = c;
 	ec->changed = TRUE;
 	//g_warning("html_key_press_event");
 	gui_update_statusbar(ec);
 	return FALSE;
-	
+
 }
 
-void html_cursor_move(GtkHTML *html, GtkDirectionType dir_type, 
-				     GtkHTMLCursorSkipType skip)
+void html_cursor_move(GtkHTML * html, GtkDirectionType dir_type,
+		      GtkHTMLCursorSkipType skip)
 {
 	g_warning("html_cursor_move");
 }
@@ -346,15 +349,16 @@ static void book_changed(GtkEditable * editable, DIALOG_DATA * c)
 {
 	gchar *url;
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
-	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) c->editor;
+	GSHTMLEditorControlData *ec =
+	    (GSHTMLEditorControlData *) c->editor;
 	if (*bookname) {
 		url = g_strdup_printf("sword:///%s 1:1", bookname);
 		main_dialogs_url_handler(c, url, TRUE);
 		g_free(url);
 	}
-	if(!ec)
+	if (!ec)
 		return;
-	if(ec->key)
+	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s 1:1", bookname);
 }
@@ -385,19 +389,20 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	gchar *url;
 	gchar *val_key;
 	gint chapter;
-	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) c->editor;
+	GSHTMLEditorControlData *ec =
+	    (GSHTMLEditorControlData *) c->editor;
 
-	bookname = (gchar*)gtk_entry_get_text(GTK_ENTRY(c->cbe_book));
+	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(c->cbe_book));
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (c->spb_chapter));
 	url = g_strdup_printf("sword:///%s %d:1", bookname, chapter);
 	main_dialogs_url_handler(c, url, TRUE);
-	g_free(url);	
-	
-	if(!ec)
+	g_free(url);
+
+	if (!ec)
 		return FALSE;
-	if(ec->key)
+	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s %d:1", bookname, chapter);
 	return FALSE;
@@ -429,23 +434,26 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	gchar *url;
 	gchar *val_key;
 	gint chapter, verse;
-	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) c->editor;
+	GSHTMLEditorControlData *ec =
+	    (GSHTMLEditorControlData *) c->editor;
 
-	bookname = (gchar*)gtk_entry_get_text(GTK_ENTRY(c->cbe_book));
+	bookname = (gchar *) gtk_entry_get_text(GTK_ENTRY(c->cbe_book));
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (c->spb_chapter));
 	verse =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (c->spb_verse));
-	url = g_strdup_printf("sword:///%s %d:%d", bookname, chapter, verse);
-	
+	url =
+	    g_strdup_printf("sword:///%s %d:%d", bookname, chapter,
+			    verse);
+
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
-	
-	if(!ec)
+
+	if (!ec)
 		return FALSE;
-	if(ec->key)
+	if (ec->key)
 		g_free(ec->key);
 	ec->key = g_strdup_printf("%s %d:%d", bookname, chapter, verse);
 	return FALSE;
@@ -475,22 +483,62 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 {
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {
-		GSHTMLEditorControlData *ec 
-				= (GSHTMLEditorControlData*) c->editor;
-		const gchar *buf = gtk_entry_get_text(GTK_ENTRY(widget));
+		GSHTMLEditorControlData *ec
+		    = (GSHTMLEditorControlData *) c->editor;
+		const gchar *buf =
+		    gtk_entry_get_text(GTK_ENTRY(widget));
 		gchar *url = g_strdup_printf("sword:///%s", buf);
 		main_dialogs_url_handler(c, url, TRUE);
 		g_free(url);
-		
-		if(!ec)
+		main_navbar_set(c->navbar,c->navbar.key);
+
+		if (!ec)
 			return;
-		if(ec->key)
+		if (ec->key)
 			g_free(ec->key);
-		ec->key = g_strdup_printf("%s", buf); 
+		ec->key = g_strdup_printf("%s", buf);
 	}
 	return FALSE;
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_entry_activate
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)	
+ *
+ * Description
+ *   go to verse in free form entry if user hit <enter>
+ *
+ * Return value
+ *   void
+ */
+
+static void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)
+{
+	GSHTMLEditorControlData *ec
+		    = (GSHTMLEditorControlData *) c->editor;
+	const gchar *buf =
+	    gtk_entry_get_text(entry);
+	if(c->navbar.key)
+		g_free(c->navbar.key);
+	c->navbar.key = g_strdup(buf);
+	gchar *url = g_strdup_printf("sword:///%s", buf);
+	main_dialogs_url_handler(c, url, TRUE);
+	g_free(url);
+	main_navbar_set(c->navbar,c->navbar.key);
+
+	if (!ec)
+		return;
+	if (ec->key)
+		g_free(ec->key);
+	ec->key = g_strdup_printf("%s", buf);	
+	
+}
 
 
 /******************************************************************************
@@ -500,9 +548,9 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  * Synopsis
  *   #include "gui/commentary_dialog.h"
  *
- *   void sync_with_main(DIALOG_DATA * vc)	
+ *   void sync_with_main(DIALOG_DATA * c)	
  *
- * Description
+ * Descriptionc->navbar.lookup_entry
  *   bring the the View Commentay Dialog module into sync with main window
  *
  * Return value
@@ -511,7 +559,8 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 static void sync_with_main(DIALOG_DATA * c)
 {
-	gchar *url = g_strdup_printf("sword:///%s", settings.currentverse);
+	gchar *url =
+	    g_strdup_printf("sword:///%s", settings.currentverse);
 	main_dialogs_url_handler(c, url, TRUE);
 	g_free(url);
 }
@@ -524,7 +573,7 @@ static void sync_with_main(DIALOG_DATA * c)
  * Synopsis
  *   #include "gui/commentary_dialog.h"
  *
- *   void sync_toggled(GtkToggleButton * button, DIALOG_DATA * vc)	
+ *   void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -535,14 +584,134 @@ static void sync_with_main(DIALOG_DATA * c)
 
 static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)
 {
-	if(button->active) {
-		sync_with_main(cur_vc);
-		cur_vc->sync = TRUE;
-	}
-	else		
-		cur_vc->sync = FALSE;
+	if (button->active) {
+		sync_with_main(cur_c);
+		cur_c->sync = TRUE;
+	} else
+		cur_c->sync = FALSE;
 }
 
+void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel* model = gtk_combo_box_get_model(combobox);
+	
+	if(!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry4_changed");
+#endif
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
+			   0, &book, -1);
+	
+	url = g_strdup_printf("sword:///%s 1:1",book);	
+	buf = g_strdup_printf("%s 1:1",book);
+	
+	main_dialogs_url_handler(c, url, TRUE);
+	main_navbar_set(c->navbar,buf);
+	g_free(url);
+	g_free(book);
+	g_free(buf);
+}
+
+
+void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	
+	GtkTreeModel* model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel* book_model = gtk_combo_box_get_model(GTK_COMBO_BOX(c->navbar.comboboxentry_book));
+	
+	
+	if(!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry5_changed");
+#endif
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX(
+				c->navbar.comboboxentry_book), &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter,
+			   0, &book, -1);
+	
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
+			   0, &chapter, -1);
+	
+	url = g_strdup_printf("sword:///%s %s:1",
+				settings.MainWindowModule,
+				book,
+				chapter);
+	buf = g_strdup_printf("%s %s:1",
+				book,
+				chapter);
+	main_dialogs_url_handler(c, url, TRUE);
+	main_navbar_set(c->navbar,buf);
+	
+	g_free(url);
+	g_free(book);
+	g_free(chapter);
+	g_free(buf);		
+}
+
+
+void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *verse = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	
+	GtkTreeModel* model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel* book_model = gtk_combo_box_get_model(GTK_COMBO_BOX(c->navbar.comboboxentry_book));
+	GtkTreeModel* chapter_model = gtk_combo_box_get_model(GTK_COMBO_BOX(c->navbar.comboboxentry_chapter));
+
+	
+	if(!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry6_changed");
+#endif
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX(
+				c->navbar.comboboxentry_book), &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter,
+			   0, &book, -1);
+	
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX(
+				c->navbar.comboboxentry_chapter), &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter,
+			   0, &chapter, -1);
+	
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
+			   0, &verse, -1);
+	
+	url = g_strdup_printf("sword:///%s %s:%s",
+				book,
+				chapter,
+				verse);
+	buf = g_strdup_printf("%s %s:%s",
+				book,
+				chapter,
+				verse);
+	main_dialogs_url_handler(c, url, TRUE);
+	main_navbar_set(c->navbar,buf);
+	
+	g_free(url);
+	g_free(book);
+	g_free(chapter);
+	g_free(verse);
+	g_free(buf);
+}
 
 /******************************************************************************
  * Name
@@ -560,122 +729,324 @@ static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(DIALOG_DATA * vc)
+static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 {
+
+/****************************************************************************/
+	GtkWidget *hbox3;
+//	GtkWidget *sync_button;
+	GtkWidget *image;
+	GtkWidget *separatortoolitem;
+/*	
+	GtkWidget *button12;
+	GtkWidget *image3;
+	GtkWidget *button13;
+	GtkWidget *image4;
+	GtkWidget *separatortoolitem4;
+*/
+//	GtkWidget *comboboxentry4;
+	//GtkWidget *separatortoolitem6;
+//	GtkWidget *comboboxentry5;
+	//GtkWidget *separatortoolitem5;
+//	GtkWidget *comboboxentry6;
+	//GtkWidget *separatortoolitem7;
+	//GtkWidget *entry1;
+	GtkListStore *store;
+	GtkCellRenderer *renderer;
+	//GtkListStore *book_store;
+//	GtkListStore *chapter_store;
+//	GtkListStore *verse_store;
+/****************************************************************************/
+		
+/****************************************************************************/
+	hbox3 = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox3);
+	//gtk_box_pack_start(GTK_BOX(), hbox3, FALSE, FALSE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
+
+	sync_button = gtk_toggle_button_new();
+	gtk_widget_show(sync_button);
+	gtk_box_pack_start(GTK_BOX(hbox3), sync_button, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(sync_button), GTK_RELIEF_NONE);
+
+	image = gtk_image_new_from_stock("gtk-refresh", GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image);
+	gtk_container_add(GTK_CONTAINER(sync_button), image);
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+/*
+	button12 = gtk_button_new();
+	gtk_widget_show(button12);
+	gtk_box_pack_start(GTK_BOX(hbox3), button12, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(button12), GTK_RELIEF_NONE);
+
+	image3 =
+	    gtk_image_new_from_stock("gtk-go-back", GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image3);
+	gtk_container_add(GTK_CONTAINER(button12), image3);
+
+	button13 = gtk_button_new();
+	gtk_widget_show(button13);
+	gtk_box_pack_start(GTK_BOX(hbox3), button13, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(button13), GTK_RELIEF_NONE);
+
+	image4 =
+	    gtk_image_new_from_stock("gtk-go-forward", GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image4);
+	gtk_container_add(GTK_CONTAINER(button13), image4);
+
+	separatortoolitem4 = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem4);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem4, FALSE, TRUE,
+			   0);
+*/
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+	c->navbar.comboboxentry_book = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));
+	//comboboxentry4 = gtk_combo_box_entry_new_text (); //gtk_combo_box_entry_new();
+	gtk_widget_show(c->navbar.comboboxentry_book);
+	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_book, TRUE, TRUE, 0);
+	gtk_widget_set_size_request(c->navbar.comboboxentry_book, -1, 6);
+
+renderer = gtk_cell_renderer_text_new ();
+gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (c->navbar.comboboxentry_book), renderer, TRUE);
+gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_book), renderer,
+                                "text", 0,
+                                NULL);
+
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
+					 
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+	
+	c->navbar.comboboxentry_chapter = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));//gtk_combo_box_entry_new();
+	gtk_widget_show(c->navbar.comboboxentry_chapter);
+	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_chapter, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(c->navbar.comboboxentry_chapter, 61, -1);
+
+renderer = gtk_cell_renderer_text_new ();
+gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (c->navbar.comboboxentry_chapter), renderer, TRUE);
+gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_chapter), renderer,
+                                "text", 0,
+                                NULL);
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
+		 
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+	c->navbar.comboboxentry_verse = gtk_combo_box_new_with_model (GTK_TREE_MODEL (store));//gtk_combo_box_entry_new();
+	gtk_widget_show(c->navbar.comboboxentry_verse);
+	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.comboboxentry_verse, FALSE, TRUE, 0);
+	gtk_widget_set_size_request(c->navbar.comboboxentry_verse, 61, -1);
+	
+
+renderer = gtk_cell_renderer_text_new ();
+gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (c->navbar.comboboxentry_verse), renderer, TRUE);
+gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (c->navbar.comboboxentry_verse), renderer,
+                                "text", 0,
+                                NULL);
+	
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE, TRUE,
+			   0);
+
+	c->navbar.lookup_entry = gtk_entry_new();
+	gtk_widget_show(c->navbar.lookup_entry);
+	gtk_box_pack_start(GTK_BOX(hbox3), c->navbar.lookup_entry, TRUE, TRUE, 0);
+
+	g_signal_connect(GTK_OBJECT(sync_button),
+			 "toggled", G_CALLBACK(sync_toggled), c);
+	g_signal_connect ((gpointer) c->navbar.comboboxentry_book, "changed",
+		    G_CALLBACK (on_comboboxentry4_changed),
+		    c);
+	g_signal_connect ((gpointer) c->navbar.comboboxentry_chapter, "changed",
+		    G_CALLBACK (on_comboboxentry5_changed),
+		    c);
+	g_signal_connect ((gpointer) c->navbar.comboboxentry_verse, "changed",
+		    G_CALLBACK (on_comboboxentry6_changed),
+		    c);
+	g_signal_connect ((gpointer) c->navbar.lookup_entry, "activate",
+		    G_CALLBACK (on_entry_activate),
+		    c);
+
+/*  	GLADE_HOOKUP_OBJECT (vbox_tab, entry1, "entry1");
+	
+	g_signal_connect((gpointer) entry1,
+			 "focus",
+			 G_CALLBACK(on_focus), (TAB *) tab);
+	g_signal_connect((gpointer) entry1,
+			 "focus-in-event",
+			 G_CALLBACK(on_focus_in), (TAB *) tab);*/
+	return hbox3;		 
+/****************************************************************************/			 
+			 
+	
+	
+/*	
 	GtkWidget *toolbar_nav;
+	GtkWidget *hbox_toolbar;
+	GtkWidget *toolitem;
+	GtkWidget *image;
 	GtkWidget *cbBook;
 	GtkObject *spbChapter_adj;
 	GtkObject *spbVerse_adj;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator;
 	GtkWidget *label;
-
-	toolbar_nav =
-	    gtk_toolbar_new();
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar_nav), GTK_TOOLBAR_ICONS);
+	
+	
+	toolbar_nav = gtk_toolbar_new();
+	gtk_toolbar_set_style(GTK_TOOLBAR(toolbar_nav),
+			      GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar_nav);
 	gtk_widget_set_size_request(toolbar_nav, -1, 34);
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_REFRESH, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar_nav)));
-	sync_button =
-		gtk_toolbar_append_element(GTK_TOOLBAR
-				       (toolbar_nav),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("Sync"),
-				       _("Toggle sync with main window"), 
-				       NULL,
-				       tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_show(sync_button);
 
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
+	sync_button = gtk_toggle_button_new();
+	gtk_widget_show(sync_button);
+	gtk_container_add(GTK_CONTAINER(toolitem), sync_button);
+	gtk_button_set_relief(GTK_BUTTON(sync_button), GTK_RELIEF_NONE);
+
+	image =
+	    gtk_image_new_from_stock("gtk-refresh",
+				     GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image);
+	gtk_container_add(GTK_CONTAINER(sync_button), image);
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
 
 	vseparator = gtk_vseparator_new();
 	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
-				  vseparator, NULL, NULL);
+	gtk_container_add(GTK_CONTAINER(toolitem), vseparator);
 	gtk_widget_set_size_request(vseparator, 6, 7);
-	
-	
+
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
+
 	cbBook = gtk_combo_new();
 	gtk_widget_show(cbBook);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav), cbBook,
-				  NULL, NULL);
-
+	gtk_container_add(GTK_CONTAINER(toolitem), cbBook);
+*/
 	/*
 	 * get and load books of the Bible 
 	 */
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
+/*	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
 				      get_list(BOOKS_LIST));
 
-	vc->cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_set_size_request(vc->cbe_book, 100, -1);
-	gtk_widget_show(vc->cbe_book);
+	c->cbe_book = GTK_COMBO(cbBook)->entry;
+	gtk_widget_set_size_request(c->cbe_book, 100, -1);
+	gtk_widget_show(c->cbe_book);
 
-	label = gtk_label_new ("");
-	gtk_widget_show (label);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
-	gtk_widget_set_size_request (label, 6, -1);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
+	label = gtk_label_new("");
+	gtk_widget_show(label);
+	gtk_container_add(GTK_CONTAINER(toolitem), label);
+	gtk_widget_set_size_request(label, 6, -1);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
-	vc->spb_chapter =
+	c->spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_show(vc->spb_chapter);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
-				  vc->spb_chapter, NULL, NULL);
+	gtk_widget_show(c->spb_chapter);
+	gtk_container_add(GTK_CONTAINER(toolitem), c->spb_chapter);
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
-				    (vc->spb_chapter), TRUE);
-				    
-	label = gtk_label_new ("");
-	gtk_widget_show (label);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
-	gtk_widget_set_size_request (label, 6, -1);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	
+				    (c->spb_chapter), TRUE);
+
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
+	label = gtk_label_new("");
+	gtk_widget_show(label);
+	gtk_container_add(GTK_CONTAINER(toolitem), label);
+	gtk_widget_set_size_request(label, 6, -1);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
 	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
-	vc->spb_verse =
+	c->spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_show(vc->spb_verse);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
-				  vc->spb_verse, NULL, NULL);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vc->spb_verse),
+	gtk_widget_show(c->spb_verse);
+	gtk_container_add(GTK_CONTAINER(toolitem), c->spb_verse);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(c->spb_verse),
 				    TRUE);
 
-	label = gtk_label_new ("");
-	gtk_widget_show (label);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar_nav), label, NULL, NULL);
-	gtk_widget_set_size_request (label, 6, -1);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	
-	vc->freeform_lookup = gtk_entry_new();
-	gtk_widget_show(vc->freeform_lookup);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
-				  vc->freeform_lookup, NULL, NULL);
-	gtk_entry_set_text(GTK_ENTRY(vc->freeform_lookup),
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
+	label = gtk_label_new("");
+	gtk_widget_show(label);
+	gtk_container_add(GTK_CONTAINER(toolitem), label);
+	gtk_widget_set_size_request(label, 6, -1);
+	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+
+
+	toolitem = (GtkWidget *) gtk_tool_item_new();
+	gtk_widget_show(toolitem);
+	gtk_container_add(GTK_CONTAINER(toolbar_nav), toolitem);
+
+	c->freeform_lookup = gtk_entry_new();
+	gtk_widget_show(c->freeform_lookup);
+	gtk_container_add(GTK_CONTAINER(toolitem), c->freeform_lookup);
+	gtk_entry_set_text(GTK_ENTRY(c->freeform_lookup),
 			   _("Romans 8:28"));
 
-	g_signal_connect(GTK_OBJECT(vc->cbe_book),
-			   "changed",
-			   G_CALLBACK(book_changed), vc);
+	g_signal_connect(GTK_OBJECT(c->cbe_book),
+			 "changed", G_CALLBACK(book_changed), c);
 
 	g_signal_connect(GTK_OBJECT(sync_button),
-			   "toggled",
-			   G_CALLBACK(sync_toggled), vc);
-			   
-	g_signal_connect(GTK_OBJECT(vc->spb_chapter),
-			   "button_release_event",
-			   G_CALLBACK
-			   (chapter_button_release_event), vc);
-	g_signal_connect(GTK_OBJECT(vc->spb_verse),
-			   "button_release_event",
-			   G_CALLBACK
-			   (verse_button_release_event), vc);
-	g_signal_connect(GTK_OBJECT(vc->freeform_lookup),
-			   "key_press_event",
-			   G_CALLBACK(entry_key_press_event), vc);
-	return toolbar_nav;
+			 "toggled", G_CALLBACK(sync_toggled), c);
+
+	g_signal_connect(GTK_OBJECT(c->spb_chapter),
+			 "button_release_event",
+			 G_CALLBACK(chapter_button_release_event), c);
+	g_signal_connect(GTK_OBJECT(c->spb_verse),
+			 "button_release_event",
+			 G_CALLBACK(verse_button_release_event), c);
+	g_signal_connect(GTK_OBJECT(c->freeform_lookup),
+			 "key_press_event",
+			 G_CALLBACK(entry_key_press_event), c);
+*/
+//	return toolbar_nav;
 }
 
 
@@ -695,44 +1066,45 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * vc)
  *   void
  */
 
-void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit)
+void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 {
 	GtkWidget *vbox30;
 	GtkWidget *vbox_toolbars;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
-	GtkWidget *scrolledwindow38;	
-	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) vc->editor;
+	GtkWidget *scrolledwindow38;
+	GSHTMLEditorControlData *ec =
+	    (GSHTMLEditorControlData *) c->editor;
 
-	vc->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	c->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	gtk_object_set_data(GTK_OBJECT(vc->dialog), "vc->dialog",
-			    vc->dialog);
-	gtk_window_set_title(GTK_WINDOW(vc->dialog),
-			     main_get_module_description(vc->mod_name));
-	//gtk_window_set_default_size(GTK_WINDOW(vc->dialog), 462, 280);
-	gtk_window_set_policy(GTK_WINDOW(vc->dialog), TRUE, TRUE,
+	gtk_object_set_data(GTK_OBJECT(c->dialog), "c->dialog",
+			    c->dialog);
+	gtk_window_set_title(GTK_WINDOW(c->dialog),
+			     main_get_module_description(c->mod_name));
+	//gtk_window_set_default_size(GTK_WINDOW(c->dialog), 462, 280);
+	gtk_window_set_policy(GTK_WINDOW(c->dialog), TRUE, TRUE,
 			      FALSE);
 	if (do_edit)
-		gtk_widget_set_size_request(vc->dialog, 590, 380);
+		gtk_widget_set_size_request(c->dialog, 590, 380);
 	else
-		gtk_widget_set_size_request(vc->dialog, 460, 280);
+		gtk_widget_set_size_request(c->dialog, 460, 280);
 
 	vbox30 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox30);
 
-	gtk_container_add(GTK_CONTAINER(vc->dialog), vbox30);
+	gtk_container_add(GTK_CONTAINER(c->dialog), vbox30);
 
 	vbox_toolbars = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_toolbars);
 	gtk_box_pack_start(GTK_BOX(vbox30), vbox_toolbars, FALSE, FALSE,
 			   0);
 
-	toolbar_nav = create_nav_toolbar(vc);
+	toolbar_nav = create_nav_toolbar(c);
 	gtk_widget_show(toolbar_nav);
 	gtk_box_pack_start(GTK_BOX(vbox_toolbars), toolbar_nav, FALSE,
 			   FALSE, 0);
-
+	
 	frame19 = gtk_frame_new(NULL);
 	gtk_widget_show(frame19);
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
@@ -745,8 +1117,9 @@ void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit)
 				       (scrolledwindow38),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow38,
-                                             settings.shadow_type);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow38,
+					    settings.shadow_type);
 
 
 	if (do_edit) {
@@ -755,91 +1128,83 @@ void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit)
 		gtk_widget_show(ec->htmlwidget);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
 				  ec->htmlwidget);
-	
+
 		//gtk_html_set_editable(ec->html, TRUE);
 		ec->vbox = vbox30;
 
 		ec->pm = gui_create_editor_popup(ec);
-		gnome_popup_menu_attach(ec->pm, ec->htmlwidget,
-					NULL);
+		gnome_popup_menu_attach(ec->pm, ec->htmlwidget, NULL);
 
 		ec->statusbar = gtk_statusbar_new();
 		gtk_widget_show(ec->statusbar);
 		gtk_box_pack_start(GTK_BOX(vbox30), ec->statusbar,
 				   FALSE, TRUE, 0);
 		/*
-		   g_signal_connect(GTK_OBJECT(vc->ec->html), "submit",
-		   G_CALLBACK(on_submit), vc->ec);
+		   g_signal_connect(GTK_OBJECT(c->ec->html), "submit",
+		   G_CALLBACK(on_submit), c->ec);
 		   g_signal_connect(GTK_OBJECT
-		   (vc->ec->htmlwidget),
+		   (c->ec->htmlwidget),
 		   "load_done",
-		   G_CALLBACK(html_load_done), vc->ec);
+		   G_CALLBACK(html_load_done), c->ec);
 		   g_signal_connect(GTK_OBJECT
-		   (vc->ec->htmlwidget),
+		   (c->ec->htmlwidget),
 		   "key_press_event",
-		   G_CALLBACK(html_key_pressed), vc->ec);
+		   G_CALLBACK(html_key_pressed), c->ec);
 		   g_signal_connect(GTK_OBJECT
-		   (vc->ec->htmlwidget),
+		   (c->ec->htmlwidget),
 		   "button_press_event",
-		   G_CALLBACK(html_button_pressed), vc->ec);
-		   g_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
+		   G_CALLBACK(html_button_pressed), c->ec);
+		   g_signal_connect(GTK_OBJECT(c->ec->htmlwidget),
 		   "enter_notify_event",
 		   G_CALLBACK(on_html_enter_notify_event),
-		   vc->ec);
-		g_signal_connect(G_OBJECT(vc->ec->htmlwidget),
-		   		"cursor_move",
-		   		G_CALLBACK(html_cursor_move), vc->ec);
+		   c->ec);
+		   g_signal_connect(G_OBJECT(c->ec->htmlwidget),
+		   "cursor_move",
+		   G_CALLBACK(html_cursor_move), c->ec);
 		 */
 		/* html.c */
 		g_signal_connect(G_OBJECT(ec->htmlwidget),
-		   		"key_press_event",
-		   		G_CALLBACK(html_key_press_event), vc);
+				 "key_press_event",
+				 G_CALLBACK(html_key_press_event), c);
 		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
-				   "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   NULL);
-		
+				 "link_clicked",
+				 G_CALLBACK(gui_link_clicked), NULL);
+
 		g_signal_connect(GTK_OBJECT(ec->htmlwidget),
-				   "on_url", G_CALLBACK(gui_url),
-				   NULL);
+				 "on_url", G_CALLBACK(gui_url), NULL);
 
 		gui_toolbar_style(ec);
 		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
-				   ec->toolbar_style, FALSE, FALSE,
-				   0);
+				   ec->toolbar_style, FALSE, FALSE, 0);
 		gtk_widget_show(ec->toolbar_style);
 		gui_toolbar_edit(ec);
 		gtk_box_pack_start(GTK_BOX(vbox_toolbars),
-				   ec->toolbar_edit, FALSE, FALSE,
-				   0);
+				   ec->toolbar_edit, FALSE, FALSE, 0);
 		gtk_widget_show(ec->toolbar_edit);
 
 	} else {
-		vc->html = gtk_html_new();
-		gtk_widget_show(vc->html);
+		c->html = gtk_html_new();
+		gtk_widget_show(c->html);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
-				  vc->html);
-		gtk_html_load_empty(GTK_HTML(vc->html));
+				  c->html);
+		gtk_html_load_empty(GTK_HTML(c->html));
 
-		g_signal_connect(GTK_OBJECT(vc->html),
-				   "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   vc);
-		g_signal_connect(GTK_OBJECT(vc->html), "on_url",
-				   G_CALLBACK(dialog_url), vc);
-		g_signal_connect(GTK_OBJECT(vc->html),
-				   "button_press_event",
-				   G_CALLBACK(button_press_event),
-				   vc);
+		g_signal_connect(GTK_OBJECT(c->html),
+				 "link_clicked",
+				 G_CALLBACK(gui_link_clicked), c);
+		g_signal_connect(GTK_OBJECT(c->html), "on_url",
+				 G_CALLBACK(dialog_url), c);
+		g_signal_connect(GTK_OBJECT(c->html),
+				 "button_press_event",
+				 G_CALLBACK(button_press_event), c);
 	}
 
 
-	g_signal_connect(GTK_OBJECT(vc->dialog), "destroy",
-			   G_CALLBACK(on_dialog_destroy), vc);
-	g_signal_connect(GTK_OBJECT(vc->dialog),
-			   "motion_notify_event",
-			   G_CALLBACK
-			   (on_dialog_motion_notify_event), vc);
+	g_signal_connect(GTK_OBJECT(c->dialog), "destroy",
+			 G_CALLBACK(on_dialog_destroy), c);
+	g_signal_connect(GTK_OBJECT(c->dialog),
+			 "motion_notify_event",
+			 G_CALLBACK(on_dialog_motion_notify_event), c);
 }
 
 
@@ -852,54 +1217,59 @@ void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit)
  **
  **/
 
-static void on_about_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_about_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
-	gui_display_about_module_dialog(cur_vc->mod_name, FALSE);
+	gui_display_about_module_dialog(cur_c->mod_name, FALSE);
 }
 
-static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_print1_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
 {
-	gui_html_print(cur_vc->html, FALSE);
-}
-
-
-static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gui_copy_html(cur_vc->html);
+	gui_html_print(cur_c->html, FALSE);
 }
 
 
-static void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_copy2_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
-	gui_find_dlg(cur_vc->html, cur_vc->mod_name, FALSE, NULL);
+	gui_copy_html(cur_c->html);
+}
+
+
+static void on_find1_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
+{
+	gui_find_dlg(cur_c->html, cur_c->mod_name, FALSE, NULL);
 }
 
 
 static void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *url = g_strdup_printf(	"sword://%s/%s",
-					cur_vc->mod_name,
-					settings.currentverse);
-	gui_set_module_font(cur_vc->mod_name);
-	main_dialogs_url_handler(cur_vc, url, TRUE);
+	gchar *url = g_strdup_printf("sword://%s/%s",
+				     cur_c->mod_name,
+				     settings.currentverse);
+	gui_set_module_font(cur_c->mod_name);
+	main_dialogs_url_handler(cur_c, url, TRUE);
 	g_free(url);
 }
 
 
 static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
-				   		gpointer user_data)
+					       gpointer user_data)
 {
-	gchar *dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
+	gchar *dict_key =
+	    gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(settings.
-						      DictWindowModule,
-						      dict_key);
+						     DictWindowModule,
+						     dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(settings.
-						  DictWindowModule,
-						  dict_key);
+						DictWindowModule,
+						dict_key);
 		g_free(dict_key);
 	}
 }
@@ -962,17 +1332,18 @@ on_secondary_reading_activate(GtkMenuItem * menuitem,
  */
 
 static void lookup_commentary_selection(GtkMenuItem * menuitem,
-				    gchar * dict_mod_description)
+					gchar * dict_mod_description)
 {
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = main_module_name_from_description(dict_mod_description);
-	dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
+	mod_name =
+	    main_module_name_from_description(dict_mod_description);
+	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(mod_name,
-						      dict_key);
+						     dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
@@ -999,16 +1370,16 @@ static void lookup_commentary_selection(GtkMenuItem * menuitem,
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gchar *module_name = main_module_name_from_description((gchar *)user_data);
+	gchar *module_name =
+	    main_module_name_from_description((gchar *) user_data);
 	gchar *url = NULL;
-	if(module_name) {
+	if (module_name) {
 		url = g_strdup_printf("sword://%s/%s",
-					module_name,
-					cur_vc->key);
-		main_dialogs_url_handler(cur_vc, url, TRUE);
+				      module_name, cur_c->key);
+		main_dialogs_url_handler(cur_c, url, TRUE);
 		g_free(url);
 		g_free(module_name);
-	}	
+	}
 }
 
 /******************************************************************************
@@ -1028,9 +1399,11 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void global_option_red_words(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_red_words(GtkCheckMenuItem * menuitem,
+				    DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->words_in_red = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1054,9 +1427,11 @@ static void global_option_red_words(GtkCheckMenuItem * menuitem, DIALOG_DATA * t
  *   void
  */
 
-static void global_option_strongs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_strongs(GtkCheckMenuItem * menuitem,
+				  DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->strongs = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1080,9 +1455,11 @@ static void global_option_strongs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
  *   void
  */
 
-static void global_option_morphs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_morphs(GtkCheckMenuItem * menuitem,
+				 DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->morphs = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1106,9 +1483,11 @@ static void global_option_morphs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
  *   void
  */
 
-static void global_option_footnotes(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_footnotes(GtkCheckMenuItem * menuitem,
+				    DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->footnotes = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1132,9 +1511,11 @@ static void global_option_footnotes(GtkCheckMenuItem * menuitem, DIALOG_DATA * t
  *   void
  */
 
-static void global_option_greekaccents(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_greekaccents(GtkCheckMenuItem * menuitem,
+				       DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->greekaccents = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1158,9 +1539,11 @@ static void global_option_greekaccents(GtkCheckMenuItem * menuitem, DIALOG_DATA 
  *   void
  */
 
-static void global_option_lemmas(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_lemmas(GtkCheckMenuItem * menuitem,
+				 DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->lemmas = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1184,9 +1567,11 @@ static void global_option_lemmas(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
  *   void
  */
 
-static void global_option_scripturerefs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_scripturerefs(GtkCheckMenuItem * menuitem,
+					DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->scripturerefs = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1210,9 +1595,11 @@ static void global_option_scripturerefs(GtkCheckMenuItem * menuitem, DIALOG_DATA
  *   void
  */
 
-static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem,
+				       DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->hebrewpoints = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1236,9 +1623,11 @@ static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem, DIALOG_DATA 
  *   void
  */
 
-static void global_option_hebrewcant(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_hebrewcant(GtkCheckMenuItem * menuitem,
+				     DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->hebrewcant = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1262,9 +1651,11 @@ static void global_option_hebrewcant(GtkCheckMenuItem * menuitem, DIALOG_DATA * 
  *   void
  */
 
-static void global_option_headings(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
+static void global_option_headings(GtkCheckMenuItem * menuitem,
+				   DIALOG_DATA * t)
 {
-	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
+	gchar *url =
+	    g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->headings = menuitem->active;
 	main_dialogs_url_handler(t, url, TRUE);
 	g_free(url);
@@ -1289,7 +1680,7 @@ static void global_option_headings(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 
 static void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * t)
 {
-	//close_text_dialog(cur_vc);
+	//close_text_dialog(cur_c);
 }
 
 
@@ -1312,14 +1703,15 @@ static void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * t)
 
 static void on_sync_activate(GtkMenuItem * menuitem, gpointer data)
 {
-	sync_with_main(cur_vc);
+	sync_with_main(cur_c);
 }
 
 
-static void stay_in_sync_activate(GtkCheckMenuItem * menuitem, gpointer data)
+static void stay_in_sync_activate(GtkCheckMenuItem * menuitem,
+				  gpointer data)
 {
-	 gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sync_button),
-			              menuitem->active);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sync_button),
+				     menuitem->active);
 }
 
 
@@ -1339,14 +1731,14 @@ static GnomeUIInfo file3_menu_uiinfo[] = {
 	 NULL,
 	 view_text_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, (GdkModifierType) 0, NULL },
-	 {
+	 0, (GdkModifierType) 0, NULL},
+	{
 	 GNOME_APP_UI_ITEM, N_("Sync with main"),
 	 NULL,
 	 (gpointer) on_sync_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-refresh",
 	 0, (GdkModifierType) 0, NULL},
-	 {
+	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Stay in sync"),
 	 NULL,
 	 (gpointer) stay_in_sync_activate, NULL, NULL,
@@ -1355,7 +1747,7 @@ static GnomeUIInfo file3_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM (on_close_activate, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(on_close_activate, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -1422,7 +1814,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Words of Christ in Red"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Words of Christ in Red",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1431,7 +1823,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	 GNOME_APP_UI_TOGGLEITEM,
 	 N_("Strong's Numbers"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Strong's Numbers",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE,
@@ -1442,7 +1834,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Morphological Tags"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Morphological Tags",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1450,7 +1842,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Footnotes"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Footnotes",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1458,7 +1850,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Greek Accents"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Greek Accents",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1466,7 +1858,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lemmas"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Lemmas",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1474,7 +1866,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Scripture Cross-references"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Scripture Cross-references",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1482,7 +1874,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Vowel Points"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Hebrew Vowel Points",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1490,7 +1882,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Cantillation"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Hebrew Cantillation",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1498,7 +1890,7 @@ static GnomeUIInfo module_options_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Headings"),
 	 NULL,
-	 NULL, //(gpointer) on_global_option,
+	 NULL,			//(gpointer) on_global_option,
 	 (gpointer) "Headings",	/* not seen by user */
 	 NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -1564,7 +1956,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
+static void create_menu(DIALOG_DATA * t, GdkEventButton * event)
 {
 	GtkWidget *menu1;
 	GtkWidget *lookup_selection_menu;
@@ -1574,8 +1966,8 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	GtkWidget *edit_per_menu;
 	GnomeUIInfo *menuitem;
 	gchar *mod_name = t->mod_name;
-	
-	cur_vc = t;
+
+	cur_c = t;
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
@@ -1602,14 +1994,16 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 
 
 	view_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM
+				  (file3_menu_uiinfo[0].widget),
 				  view_menu);
 
 	gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_menu,
 				(GCallback) on_view_mod_activate);
 
 	edit_per_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM
+				  (edit3_menu_uiinfo[2].widget),
 				  edit_per_menu);
 
 
@@ -1622,11 +2016,11 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	gtk_widget_show(usecurrent);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
-	
+
 	g_signal_connect(GTK_OBJECT(usecurrent),
-			   "activate",
-			   G_CALLBACK(on_use_current_dictionary_activate), 
-			   NULL);		  
+			 "activate",
+			 G_CALLBACK(on_use_current_dictionary_activate),
+			 NULL);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
@@ -1635,38 +2029,37 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	gtk_widget_set_sensitive(separator, FALSE);
 
 	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
-				(GCallback)lookup_commentary_selection);
+				(GCallback)
+				lookup_commentary_selection);
 
 
 	if ((main_check_for_global_option(mod_name,
-				     "GBFRedLetterWords")) ||
+					  "GBFRedLetterWords")) ||
 	    (main_check_for_global_option(mod_name,
-				     "OSISRedLetterWords"))) {
+					  "OSISRedLetterWords"))) {
 		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
-				    widget)->active = t->ops->words_in_red;					     
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[2].widget),
-				"activate",
-				G_CALLBACK(global_option_red_words), 
-				(DIALOG_DATA *)t);
+				    widget)->active =
+		    t->ops->words_in_red;
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[2].widget),
+				 "activate",
+				 G_CALLBACK(global_option_red_words),
+				 (DIALOG_DATA *) t);
 	}
-	if ((main_check_for_global_option
-	     (mod_name, "GBFStrongs"))
-	    ||
-	    (main_check_for_global_option
-	     (mod_name, "ThMLStrongs"))
-	    ||
-	    (main_check_for_global_option
-	     (mod_name, "OSISStrongs"))) {
+	if ((main_check_for_global_option(mod_name, "GBFStrongs"))
+	    || (main_check_for_global_option(mod_name, "ThMLStrongs"))
+	    || (main_check_for_global_option(mod_name, "OSISStrongs"))) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
-				    widget)->active = t->ops->strongs;					     
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[3].widget),
-				"activate",
-				G_CALLBACK(global_option_strongs), 
-				(DIALOG_DATA *)t);
+				    widget)->active = t->ops->strongs;
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[3].widget),
+				 "activate",
+				 G_CALLBACK(global_option_strongs),
+				 (DIALOG_DATA *) t);
 	}
 	if ((main_check_for_global_option(mod_name, "GBFMorph")) ||
 	    (main_check_for_global_option(mod_name, "ThMLMorph")) ||
@@ -1674,11 +2067,12 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
 				    widget)->active = t->ops->morphs;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[4].widget),
-				"activate",
-				G_CALLBACK(global_option_morphs), 
-				(DIALOG_DATA *)t);
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[4].widget),
+				 "activate",
+				 G_CALLBACK(global_option_morphs),
+				 (DIALOG_DATA *) t);
 	}
 	if ((main_check_for_global_option(mod_name, "GBFFootnotes")) ||
 	    (main_check_for_global_option(mod_name, "ThMLFootnotes")) ||
@@ -1686,73 +2080,85 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
 				    widget)->active = t->ops->footnotes;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[5].widget),
-				"activate",
-				G_CALLBACK(global_option_footnotes), 
-				(DIALOG_DATA *)t);
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[5].widget),
+				 "activate",
+				 G_CALLBACK(global_option_footnotes),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
-				    widget)->active = t->ops->greekaccents;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[6].widget),
-				"activate",
-				G_CALLBACK(global_option_greekaccents), 
-				(DIALOG_DATA *)t);
+				    widget)->active =
+		    t->ops->greekaccents;
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[6].widget),
+				 "activate",
+				 G_CALLBACK(global_option_greekaccents),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "ThMLLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
 				    widget)->active = t->ops->lemmas;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[7].widget),
-				"activate",
-				G_CALLBACK(global_option_lemmas), 
-				(DIALOG_DATA *)t);
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[7].widget),
+				 "activate",
+				 G_CALLBACK(global_option_lemmas),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "ThMLScripref") ||
 	    (main_check_for_global_option(mod_name, "OSISScripref"))) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
-				    widget)->active = t->ops->scripturerefs;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[8].widget),
-				"activate",
-				G_CALLBACK(global_option_scripturerefs), 
-				(DIALOG_DATA *)t);
+				    widget)->active =
+		    t->ops->scripturerefs;
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[8].widget),
+				 "activate",
+				 G_CALLBACK
+				 (global_option_scripturerefs),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
-				    widget)->active = t->ops->hebrewpoints;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[9].widget),
-				"activate",
-				G_CALLBACK(global_option_hebrewpoints), 
-				(DIALOG_DATA *)t);
+				    widget)->active =
+		    t->ops->hebrewpoints;
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[9].widget),
+				 "activate",
+				 G_CALLBACK(global_option_hebrewpoints),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "UTF8Cantillation")) {
 		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
-				    widget)->active = t->ops->hebrewcant;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[10].widget),
-				"activate",
-				G_CALLBACK(global_option_hebrewcant), 
-				(DIALOG_DATA *)t);
+				    widget)->active =
+		    t->ops->hebrewcant;
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[10].
+				  widget), "activate",
+				 G_CALLBACK(global_option_hebrewcant),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
 	    (main_check_for_global_option(mod_name, "OSISHeadings"))) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
-		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = t->ops->headings;
-		
-		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[11].widget),
-				"activate",
-				G_CALLBACK(global_option_headings), 
-				(DIALOG_DATA *)t);
+
+		g_signal_connect(GTK_OBJECT
+				 (module_options_menu_uiinfo[11].
+				  widget), "activate",
+				 G_CALLBACK(global_option_headings),
+				 (DIALOG_DATA *) t);
 	}
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
@@ -1764,7 +2170,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
 
 	}
-	if(main_has_cipher_tag(mod_name))
+	if (main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[6].widget);
 
 
@@ -1791,8 +2197,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 	 * menu1_uiinfo[8].widget, "show_tabs");
 	 */
 	gnome_popup_menu_do_popup_modal(menu1, NULL,
-					NULL, event, NULL,
-					t->html);
+					NULL, event, NULL, t->html);
 	gtk_widget_destroy(menu1);
 	//g_free(ops);
 }
