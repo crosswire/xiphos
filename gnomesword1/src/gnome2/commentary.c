@@ -34,7 +34,7 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
@@ -303,7 +303,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 					    g_strdup(settings.
 						     DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer
+					gui_display_dictlex_in_sidebar
 					    (dict, key);
 				if (settings.inDictpane)
 					gui_change_module_and_key(dict,

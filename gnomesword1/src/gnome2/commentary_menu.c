@@ -39,7 +39,7 @@
 #include "gui/percomm.h"
 #include "gui/dictlex.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
@@ -141,7 +141,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name,
+			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
@@ -173,7 +173,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 	gchar *dict_key = gui_get_word_or_selection(c->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(settings.
+			gui_display_dictlex_in_sidebar(settings.
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
