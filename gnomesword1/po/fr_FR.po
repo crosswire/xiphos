@@ -30,12 +30,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-19 19:08-0500\n"
-"PO-Revision-Date: 2005-03-18 23:22+0100\n"
+"PO-Revision-Date: 2005-03-23 21:18+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -290,16 +290,15 @@ msgstr "Signet"
 
 #: src/editor/popup.c:474
 msgid "Paste Quotation"
-msgstr ""
+msgstr "Coller comme citation"
 
 #: src/editor/popup.c:478
 msgid "Insert Link"
-msgstr "Insére un lien"
+msgstr "Insérer un lien"
 
 #: src/editor/popup.c:485
-#, fuzzy
 msgid "Remove Link"
-msgstr "Supprimer"
+msgstr "Supprimer le lien"
 
 #: src/editor/popup.c:492
 msgid "Style"
@@ -319,43 +318,43 @@ msgstr "Format du Lien.."
 
 #: src/editor/popup.c:507
 msgid "Rule Style..."
-msgstr ""
+msgstr "Style de ligne horizontale"
 
 #: src/editor/popup.c:511
 msgid "Image Style..."
-msgstr ""
+msgstr "Style de l'image"
 
 #: src/editor/popup.c:522
 msgid "Cell Style..."
-msgstr ""
+msgstr "Style de cellule.."
 
 #: src/editor/popup.c:525
 msgid "Table Style..."
-msgstr ""
+msgstr "Style de tableau.."
 
 #: src/editor/popup.c:531
 msgid "Page Style..."
-msgstr ""
+msgstr "Style de page.."
 
 #: src/editor/popup.c:536
 msgid "Table insert"
-msgstr ""
+msgstr "Insère un tableau"
 
 #: src/editor/popup.c:539
 msgid "Row above"
-msgstr ""
+msgstr "Ligne en-dessus"
 
 #: src/editor/popup.c:540
 msgid "Row below"
-msgstr ""
+msgstr "Ligne en-dessous"
 
 #: src/editor/popup.c:542
 msgid "Column before"
-msgstr ""
+msgstr "Colonne avant"
 
 #: src/editor/popup.c:543
 msgid "Column after"
-msgstr ""
+msgstr "Colonne après"
 
 #: src/editor/popup.c:548
 msgid "Table delete"
@@ -363,16 +362,15 @@ msgstr "Supprimer la table"
 
 #: src/editor/popup.c:550
 msgid "Row"
-msgstr ""
+msgstr "Ligne"
 
 #: src/editor/popup.c:551
 msgid "Column"
 msgstr "Colonne"
 
 #: src/editor/popup.c:552
-#, fuzzy
 msgid "Cell contents"
-msgstr "Sommaire"
+msgstr "Contenu de cellule"
 
 #: src/editor/popup.c:560
 msgid "Check Word Spelling..."
@@ -393,9 +391,8 @@ msgid "Add Word to Dictionary"
 msgstr "Ajouter au dictionnaire"
 
 #: src/editor/popup.c:581
-#, fuzzy
 msgid "Ignore Misspelled Word"
-msgstr "Orthographe correcte"
+msgstr "Ignorer les mots mal orthographiés"
 
 #: src/editor/popup.c:585
 msgid "Input Methods"
@@ -435,9 +432,8 @@ msgid "With:"
 msgstr "Avec :"
 
 #: src/editor/search.c:113
-#, fuzzy
 msgid "_Backward"
-msgstr "Rechercher en arrière"
+msgstr "_Arrière"
 
 #: src/editor/search.c:115
 msgid "_Regular Expression"
@@ -527,7 +523,7 @@ msgstr "Insérer une règle"
 
 #: src/editor/toolbar_edit.c:833
 msgid "Insert rule at cursor"
-msgstr ""
+msgstr "Insérer une ligne horizontale"
 
 #: src/editor/toolbar_edit.c:843
 msgid "Insert table"
@@ -535,7 +531,7 @@ msgstr "Insère une table"
 
 #: src/editor/toolbar_edit.c:844
 msgid "Insert table at cursor"
-msgstr "Insérer une table"
+msgstr "Insérer un tableau"
 
 #: src/editor/toolbar_edit.c:863
 msgid "Spell"
@@ -899,7 +895,7 @@ msgstr "Synchroniser avec la fenêtre principale"
 
 #: src/gnome2/bibletext_dialog.c:1923 src/gnome2/commentary_dialog.c:1545
 msgid "Stay in sync"
-msgstr ""
+msgstr "Synchronisé"
 
 #: src/gnome2/bookmarks_menu.c:461
 msgid "Folder name: "
@@ -1361,14 +1357,12 @@ msgid "_Help"
 msgstr "_Aide"
 
 #: src/gnome2/main_window.c:472
-#, fuzzy
 msgid "Starting"
-msgstr "Démarrage de Sword"
+msgstr "Démarrage"
 
 #: src/gnome2/main_window.c:473
-#, fuzzy
 msgid "Building GnomeSword interface"
-msgstr "Construction de l'interface"
+msgstr "Construction de l'interface de Gnomesword"
 
 #: src/gnome2/main_window.c:480
 msgid "GnomeSword - Bible Study Software"
@@ -1447,9 +1441,8 @@ msgid "Type"
 msgstr "Type"
 
 #: src/gnome2/mod_mgr.c:1110
-#, fuzzy
 msgid "Caption"
-msgstr "Options"
+msgstr "Libellé"
 
 #: src/gnome2/mod_mgr.c:1119
 msgid "Source"
@@ -1482,7 +1475,7 @@ msgstr "Saisir une source distante"
 
 #: src/gnome2/mod_mgr.c:1778
 msgid "Caption:"
-msgstr ""
+msgstr "Libellé :"
 
 #: src/gnome2/mod_mgr.c:1779
 msgid "Type:"
@@ -2445,7 +2438,7 @@ msgstr "Démarrage de Sword"
 
 #: src/gnome2/studypad.c:184
 msgid "not loaded"
-msgstr ""
+msgstr "non chargé"
 
 #: src/gnome2/studypad.c:422
 msgid "StudyPad"
