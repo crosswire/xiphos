@@ -2487,7 +2487,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox64), 4);
 
 	cb_case_sensitive =
-	    gtk_check_button_new_with_label(_("Case Sensitive"));
+	    gtk_check_button_new_with_label(_("Match case"));
 	gtk_widget_show(cb_case_sensitive);
 	gtk_box_pack_start(GTK_BOX(vbox64), cb_case_sensitive, FALSE,
 			   FALSE, 0);
@@ -2508,7 +2508,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox64), search.cb_include_morphs,
 			   FALSE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, search.cb_include_morphs,
-			     _("In modules that have Morph Tags"),
+			     _("In modules that have Morphological Tags"),
 			     NULL);
 
 	search.cb_include_footnotes =
@@ -2546,7 +2546,7 @@ static GtkWidget *create_search_dialog(void)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, _("Show Context"),
-				       _("Show In Main window"), NULL,
+				       _("Show in Main Window"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(togglebutton_show_main);
 
