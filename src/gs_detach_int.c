@@ -43,6 +43,10 @@ GtkWidget *sbIntVerse;
 GtkWidget *entryIntLookup;
 gboolean ApplyChangeBook;
 
+
+
+
+
 void undock_interlinear_page(SETTINGS * s)
 {
 	ApplyChangeBook = FALSE;

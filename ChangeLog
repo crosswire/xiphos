@@ -1,3 +1,18 @@
+2002-12-19  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* bumped to 0.7.7
+
+
+2002-12-17  Jan Paul Schmidt <japas@users.sf.net>
+
+	* added bg.po file from	Andrew Ivanov <gnome@mail.orbitel.bg>
+	
+
+2002-11-25  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added print item to bibletext, dict/lex and gbs menus
+	
+
 2002-11-16  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed gnome fontpickers from preferences dialog.
