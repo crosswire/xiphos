@@ -76,7 +76,7 @@ AC_ARG_WITH(sworddir,
  
 dnl looking for sword includes 
 AC_MSG_CHECKING([for sword headers]) 
-sword_incdirs="${prefix}/include $ac_sword_dir/include $ac_sword_dir/include/sword /usr/include/sword /usr/include /usr/local/include /usr/local/sword/include /usr/local/include/sword /opt/sword/include /usr/sword/include/sword /usr/local/include/sword /usr/local/sword/include/sword /opt/sword/include/sword" 
+sword_incdirs="${prefix}/include $ac_sword_dir/include $ac_sword_dir/include/sword /usr/include/sword /usr/include /usr/local/include /usr/local/sword/include /usr/local/include/sword /opt/sword/include /usr/sword/include/sword  /usr/local/sword/include/sword /opt/sword/include/sword" 
 AC_FIND_FILE(swmgr.h, $sword_incdirs, sword_incdir) 
  
 AC_MSG_RESULT([$sword_incdir]) 

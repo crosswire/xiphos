@@ -33,7 +33,6 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
-//#include <swbasicfilter.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
 #include "gbfhtmlhref.h"
