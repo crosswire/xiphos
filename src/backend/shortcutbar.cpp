@@ -39,7 +39,7 @@
 #include <string.h>
 
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
+//#include "gs_shortcutbar.h"
 #include "display.h"
 #include "shortcutbar.h"
 #include "sword.h"

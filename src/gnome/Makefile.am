@@ -42,10 +42,6 @@ libgui_a_SOURCES =  \
     cipher_key_dialog.h \
     commentary_find.c \
     commentary_find.h \
-    create_shortcutbar_search.c \
-    create_shortcutbar_search.h \
-    shortcutbar_viewer.c \
-    shortcutbar_viewer.h \
     editor_menu.c \
     editor_menu.h \
     editor_replace.c \
@@ -74,6 +70,12 @@ libgui_a_SOURCES =  \
     setup_druid.h \
     shortcutbar_dialog.c \
     shortcutbar_dialog.h \
+    shortcutbar_main.c \
+    shortcutbar_main.h \
+    shortcutbar_search.c \
+    shortcutbar_search.h \
+    shortcutbar_viewer.c \
+    shortcutbar_viewer.h \
     splash.c \
     splash.h \
     studypad.c \

@@ -28,12 +28,12 @@
 /* frontend */
 #include "_bibletext.h"
 #include "_bibletext_view.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
 
 /* main */
 #include "cipher_key_dialog.h"
 #include "bibletext.h"
-#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "bibletext_view.h"
 #include "settings.h"

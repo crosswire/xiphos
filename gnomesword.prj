@@ -91,7 +91,6 @@ module.include.files=\
 	src/gnome/_gbs.h\
 	src/gnome/_percomm.h\
 	src/gnome/gbs_find.h\
-	src/gnome/create_shortcutbar_search.h\
 	src/gnome/cipher_key_dialog.h\
 	src/gnome/editor_menu.h\
 	src/gnome/editor_replace.h\
@@ -107,6 +106,8 @@ module.include.files=\
 	src/gnome/preferences_dialog.h\
 	src/gnome/setup_druid.h\
 	src/gnome/shortcutbar_dialog.h\
+	src/gnome/shortcutbar_main.h\
+	src/gnome/shortcutbar_search.h\
 	src/gnome/shortcutbar_viewer.h\
 	src/gnome/studypad.h\
 	src/gnome/toolbar_nav.h\
@@ -128,7 +129,6 @@ module.include.files=\
 	src/main/gs_menu.h\
 	src/main/gs_popup_cb.h\
 	src/main/setup.h\
-	src/main/gs_shortcutbar.h\
 	src/main/gs_viewcomm_dlg.h\
 	src/main/gs_viewdict_dlg.h\
 	src/main/percomm.h\
@@ -173,7 +173,6 @@ module.source.files=\
 	src/gnome/_gbs.c\
 	src/gnome/_percomm.c\
 	src/gnome/gbs_find.c\
-	src/gnome/create_shortcutbar_search.c\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/text_view.c\
 	src/gnome/editor_menu.c\
@@ -189,6 +188,8 @@ module.source.files=\
 	src/gnome/preferences_dialog.c\
 	src/gnome/setup_druid.c\
 	src/gnome/shortcutbar_dialog.c\
+	src/gnome/shortcutbar_main.c\
+	src/gnome/shortcutbar_search.c\
 	src/gnome/shortcutbar_viewer.c\
 	src/gnome/studypad.c\
 	src/gnome/splash.c\
@@ -209,7 +210,6 @@ module.source.files=\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
 	src/main/setup.c\
-	src/main/gs_shortcutbar.c\
 	src/main/gs_viewcomm_dlg.c\
 	src/main/gs_viewdict_dlg.c\
 	src/main/gs_viewtext.c\

@@ -25,23 +25,22 @@
 
 #include <gnome.h>
 
-#include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
-#include "gs_html.h"
-#include "sword.h"
-#include "shortcutbar.h"
-#include "cipher_key_dialog.h"
-#include "module_options.h"
-#include "settings.h"
-
 /* frontend */
 #include "_bibletext.h"
+#include "shortcutbar_main.h"
+#include "cipher_key_dialog.h"
+#include "module_options.h"
 
 /* main */
+#include "settings.h"
 #include "bibletext.h"
+#include "gs_gnomesword.h"
+#include "gs_html.h"
 
 /* backend */
 #include "bibletext_.h"
+#include "sword.h"
+#include "shortcutbar.h"
 
 /******************************************************************************
  * externs

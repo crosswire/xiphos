@@ -35,12 +35,12 @@
 /* frontend */
 #include "_gbs.h"
 #include "cipher_key_dialog.h"
+#include "shortcutbar_main.h"
 
 /* main */
 #include "settings.h"
 #include "gs_bookmarks.h"
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
 #include "gbs.h"
 #include "gs_html.h"
 

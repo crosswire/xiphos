@@ -27,10 +27,10 @@
 
 /* frontend */
 #include "toolbar_nav.h"
+#include "shortcutbar_main.h"
 
 /* main */ 
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
 #include "gs_popup_cb.h"
 #include "gs_history.h"
 #include "settings.h"

@@ -35,7 +35,6 @@
 #include "sword.h"
 #include "gs_html.h"
 #include "display.h"
-#include "gs_shortcutbar.h"
 #include "verselist.h"
 #include "support.h"
 

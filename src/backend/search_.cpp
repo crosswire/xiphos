@@ -35,7 +35,7 @@
 #include "display.h"
 #include "sword.h"
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
+//#include "gs_shortcutbar.h"
 #include "search_.h"
 #include "settings.h"
 
