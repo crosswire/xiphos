@@ -20,7 +20,6 @@
 #endif
 
 #include <gnome.h>
-
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlobject.h>
 #include <gtkhtml/htmlengine-edit-clueflowstyle.h>
@@ -43,7 +42,7 @@
 #include "support.h"
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
-
+#include "sw_verselist_dlg.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -55,12 +54,8 @@ GtkWidget *textDict;
 GtkWidget *htmlComments;
 GtkWidget *usehtml;
 
-extern GtkWidget *htmlVL;
-extern GtkWidget *MainFrm;
 extern GtkWidget *textDict;
-GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
-extern GtkWidget *appbar1;
-extern GS_APP gs;
+extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern SETTINGS *settings;
 
 /***************************************************************************************************
@@ -74,7 +69,7 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 	
 	app = GNOME_APP (data);
 	if (url == NULL)
-		gnome_appbar_set_status (GNOME_APPBAR (appbar1), "");
+		gnome_appbar_set_status (GNOME_APPBAR (settings->appbar), "");
 	else{
 		if (*url == '@') {
 			++url;
@@ -100,7 +95,7 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 			sprintf(buf,"%s",url);		
 		} else 
 			sprintf(buf,"Go to %s",url);
-		gnome_appbar_set_status (GNOME_APPBAR (appbar1), buf);
+		gnome_appbar_set_status (GNOME_APPBAR (settings->appbar), buf);
 	}
 }
 
@@ -110,9 +105,16 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf, tmpbuf[255];
-	gchar newmod[80], newref[80];
-	gint i=0;
+	gchar 
+		*buf,
+		*modbuf, 
+		tmpbuf[255];
+	gchar 
+		newmod[80], 
+		newref[80];
+	gint 
+		i=0,
+		havemod=0;
 	
 	if(*url == '@')   {
 		++url;
@@ -138,15 +140,16 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				newmod[i] = mybuf[i];
 				newmod[i+1] = '\0';
 				++i;
+				++havemod;
 			}
 			//g_warning(newmod);
 		}
 		mybuf = NULL;
 		mybuf = strstr(url, "passage=") ;
+		i = 0;
 		if(mybuf){
 			mybuf = strchr(mybuf,'=');
 			++mybuf;
-			i=0;
 			while(i < strlen(mybuf)) {
 				newref[i] = mybuf[i];
 				newref[i+1] = '\0';
@@ -154,12 +157,15 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			}
 			//g_warning(newref);
 		} 
-		buf = g_strdup(newref);
-		if(getVerseListSWORD(buf)){
-			/* do nothing */
-		}else{
-			changeVerseSWORD(buf);
+		if(havemod>2){ 
+			modbuf = newmod;
+			//g_warning("newmod = %s",newmod);
+		}else{ 
+			modbuf = settings->MainWindowModule;
+			//g_warning("modbuf = %s",modbuf);
 		}
+		buf = g_strdup(newref);
+		getVerseListSWORD(modbuf, buf, settings);
 		g_free(buf);
 	}else if (*url == '#') {
 		++url;		/* remove # */
@@ -268,7 +274,7 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *buf;
 	GtkHTML *html;
 
-	widget = lookup_widget(MainFrm, (gchar *) user_data);
+	widget = lookup_widget(settings->app, (gchar *) user_data);
 
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
@@ -294,7 +300,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem,
 	page = GPOINTER_TO_INT(user_data);	
 	if(page < 1000) {		
 		/* set notebook page */		
-		notebook = lookup_widget(MainFrm,"notebook4");
+		notebook = lookup_widget(settings->app,"notebook4");
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),page ); 
 	}	
 	html = GTK_HTML(usehtml);
@@ -304,7 +310,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem,
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	if (buf){
-		entry = lookup_widget(MainFrm,"dictionarySearchText"); 
+		entry = lookup_widget(settings->app,"dictionarySearchText"); 
 		gtk_entry_set_text(GTK_ENTRY(entry), buf);	
 		//dictSearchTextChangedSWORD(buf);
 	}
@@ -322,11 +328,11 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	
 	page = GPOINTER_TO_INT(user_data);
 	if(page < 1000) {		
-		notebook = lookup_widget(MainFrm,"notebook4");
+		notebook = lookup_widget(settings->app,"notebook4");
 		/* set notebook page */
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),page ); 
 	}
-	//widget = lookup_widget(MainFrm, htmlname);	
+	//widget = lookup_widget(settings->app, htmlname);	
 	html = GTK_HTML(usehtml);
 	//gtk_html_select_word(GTK_HTML(html));
 	buf = NULL;
@@ -334,7 +340,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	if (buf){
-		entry = lookup_widget(MainFrm,"dictionarySearchText"); 
+		entry = lookup_widget(settings->app,"dictionarySearchText"); 
 		gtk_entry_set_text(GTK_ENTRY(entry), buf);	
 		//dictSearchTextChangedSWORD(buf);
 	}
@@ -350,7 +356,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	gchar *buf;
 	GtkHTML *html;
 
-	widget = lookup_widget(MainFrm, (gchar *) user_data);
+	widget = lookup_widget(settings->app, (gchar *) user_data);
 	html = GTK_HTML(widget);
 	buf = NULL;
 	buf = html->engine->clipboard

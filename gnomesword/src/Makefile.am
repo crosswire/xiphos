@@ -81,7 +81,11 @@ COMMON_SOURCE =  \
     sw_thmlhtml.cpp \
     sw_thmlhtml.h\
     sw_latin1utf8.cpp \
-    sw_latin1utf8.h
+    sw_latin1utf8.h \
+    sw_search.cpp \
+    sw_search.h \
+    sw_verselist_dlg.cpp \
+    sw_verselist_dlg.h
 
 SPELLING_SOURCE =  \
     debug.h \

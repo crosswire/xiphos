@@ -1,3 +1,8 @@
+2001-08-02 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added search to shortcut bar
+	* added files sw_search.cpp and sw_search.h
+
 2001-07-30 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* convert old bookmarks to new on first start
@@ -27,7 +32,7 @@
 2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added a verse list dialog that pops up when you  click a
-	link in a ThML commentay that has more than one verse.
+	link in a ThML commentay.
 	Thanks to SWORD ParseVerseList.
 	* added notebook tabs to Bible window
 

@@ -39,18 +39,11 @@
 #include "gs_html.h"
 #include "gs_gnomesword.h"
 
-
 gchar *mycolor;
 
 /****************************************************************************************
  * externs
  ****************************************************************************************/
-extern SWMgr *mainMgr;
-extern SWMgr *mainMgr1;
-//extern bool bVerseStyle;
-extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
-extern SWModule *comp1Mod;
-extern gchar *current_verse;
 extern SETTINGS *settings;
 
 /***************************************************************************** 
@@ -64,18 +57,20 @@ char ComEntryDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
-
+	SWMgr *Mgr;
+  	
+	Mgr = new SWMgr();	//-- create sword mgr
 	font = "Roman";
 	buf = (char *) imodule.Description();
-	if ((sit = mainMgr1->config->Sections.find(imodule.Name())) !=
-	    mainMgr1->config->Sections.end()) {
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) !=
+	    Mgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
 		    (*sit).second.end()) {
 			font = (char *) (*eit).second.c_str();
 		}
 	}
 	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbCom")), 0);
+			      (lookup_widget(settings->app, "nbCom")), 0);
 	(const char *) imodule;	/* snap to entry */
 	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
@@ -104,6 +99,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 		g_string_free(strbuf, TRUE);
 	}
 	endHTML(GTK_WIDGET(gtkText));
+	delete Mgr; 
 	return 0;
 }
 
@@ -122,7 +118,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	const gchar **end;
 
 	/*gtk_notebook_set_page(GTK_NOTEBOOK
-	   (lookup_widget(MainFrm, "nbCom")), 0); */
+	   (lookup_widget(settings->app, "nbCom")), 0); */
 
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
@@ -169,6 +165,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 char GTKhtmlChapDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[500], *buf, *font, *mybuf;
+	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
@@ -181,13 +178,14 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	char *Buf, c;
 	bool newparagraph = false;
 	gint mybuflen;
-
+  	
+	Mgr = new SWMgr();	//-- create sword mgr
 	c = 182;
 	font = "Roman";
 	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbText")), 1);
-	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
-	    mainMgr->config->Sections.end()) {
+			      (lookup_widget(settings->app, "nbText")), 1);
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) !=
+	    Mgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
 		    (*sit).second.end()) {
 			font = (char *) (*eit).second.c_str();
@@ -346,6 +344,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(gtkText, tmpBuf);
+	delete Mgr; 
 	return 0;
 }
 
@@ -372,7 +371,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	//c = 182;       
  	
 	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbText")), 1);
+			      (lookup_widget(settings->app, "nbText")), 1);
 
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 

@@ -29,6 +29,7 @@
 extern "C" {
 #endif
 #include "gs_sword.h"
+#include "gs_gnomesword.h"
 	
 typedef struct _bmtree BM_TREE;
 struct _bmtree {
@@ -40,7 +41,7 @@ struct _bmtree {
 void
 addbookmarktotree(gchar *modName, gchar *verse);
 void
-loadtree(GtkWidget *ctree);
+loadtree(SETTINGS *s);
 GtkWidget*
 create_pmBookmarkTree (void);
 void
