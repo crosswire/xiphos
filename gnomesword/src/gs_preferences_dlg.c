@@ -2048,6 +2048,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(cbtnShowBooktabs), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));
+	gtk_signal_connect(GTK_OBJECT(cbtnInViewer), "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
+	gtk_signal_connect(GTK_OBJECT(cbtnInDictPane), "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnFavoritesGroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
