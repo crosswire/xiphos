@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=303
-1=194
-2=117
-3=38
-4=1
-5=259
-6=73
-7=51
-8=150
-9=164
+0=51
+1=73
+2=259
+3=1
+4=38
+5=117
+6=194
+7=303
+8=21
+9=27
 10=38
 11=47
 12=89
@@ -23,10 +23,10 @@ ShowLocals=true
 [filemarkers]
 0=
 1=
-2=
+2=1164,1452,
 3=
 4=
-5=1164,1452,
+5=
 6=
 7=
 8=
@@ -36,14 +36,16 @@ ShowLocals=true
 12=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/gs_popup_cb.c
-1=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
-2=/home/terry/Projects/gnomesword1/src/main/gs_preferences_dlg.c
-3=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
-4=/home/terry/Projects/gnomesword1/ChangeLog
-5=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
-6=/home/terry/Projects/gnomesword1/src/backend/shortcutbar.cpp
-7=/home/terry/Projects/gnomesword1/src/backend/shortcutbar.h
+0=/home/terry/Projects/gnomesword1/src/backend/shortcutbar.h
+1=/home/terry/Projects/gnomesword1/src/backend/shortcutbar.cpp
+2=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
+3=/home/terry/Projects/gnomesword1/ChangeLog
+4=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
+5=/home/terry/Projects/gnomesword1/src/main/gs_preferences_dlg.c
+6=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
+7=/home/terry/Projects/gnomesword1/src/main/gs_popup_cb.c
+8=/home/terry/Projects/gnomesword1/src/backend/viewtext.cpp
+9=/home/terry/Projects/gnomesword1/src/backend/viewtext.h
 
 [replace_text]
 0=mod
