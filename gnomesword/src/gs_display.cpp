@@ -27,6 +27,13 @@
 #include <config.h>
 #endif
 
+#ifndef __GNUC__
+#include <io.h>
+#else
+#include <unistd.h>
+#include <unixstr.h>
+#endif
+ 
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
@@ -110,16 +117,19 @@ char ComEntryDisp::Display(SWModule & imodule)
  *****************************************************************************/
 char GtkHTMLEntryDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[500], *buf;
-	//SectionMap::iterator sit;
-	//ConfigEntMap::iterator eit;
+	gchar tmpBuf[500], *buf, *font, *use_font, *token;
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
 
-	/*gtk_notebook_set_page(GTK_NOTEBOOK
-	   (lookup_widget(settings->app, "nbCom")), 0); */
-
+	font = "-adobe-helvetica-*-*";
+	font = g_strdup(settings->greek_font);	
+	++font;
+	token=strtok(font,"-");
+	use_font = token;
+	use_font = strtok(NULL,"-");
+	g_warning("use_font = %s",use_font);
+	
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	sprintf(tmpBuf,
@@ -139,8 +149,8 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-	sprintf(tmpBuf, "<font size=\"%s\">",
-		settings->bible_font_size);
+	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
+		use_font, settings->bible_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -164,7 +174,8 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
  ******************************************************************************/
 char GTKhtmlChapDisp::Display(SWModule & imodule)
 {
-	char tmpBuf[500], *buf, *font, *mybuf;
+	char tmpBuf[500], *buf, *mybuf, *use_font;
+	string font, lang;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
@@ -175,30 +186,29 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	int curBook = key->Book();
 	int curPos = 0;
 	gint len;
-	char *Buf, c;
+	gchar *Buf, c;
 	bool newparagraph = false;
 	gint mybuflen;
+	ConfigEntMap::iterator entry;
   	
 	Mgr = new SWMgr();	//-- create sword mgr
 	c = 182;
 	font = "Roman";
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(settings->app, "nbText")), 1);
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) !=
-	    Mgr->config->Sections.end()) {
-		if ((eit = (*sit).second.find("Font")) !=
-		    (*sit).second.end()) {
-			font = (char *) (*eit).second.c_str();
-		}
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
+		ConfigEntMap &section = (*sit).second;
+		font = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	} 
-	beginHTML(GTK_WIDGET(gtkText), FALSE);
+	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	strbuf = g_string_new("");
 	g_string_sprintf(strbuf,
-			 "<HTML><HEAD><META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; CHARSET=ISO-8859-7\"><META NAME=\"GENERATOR\" CONTENT=\"GtkHTML/0.10.99\">\
-			</HEAD><body text=\"#151515\" link=\"#898989\">");
+			 "<HTML><body text=\"#151515\" link=\"#898989\">");
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 
+	//g_warning(settings->default_font);
 	for (key->Verse(1);
 	     (key->Book() == curBook && key->Chapter() == curChapter
 	      && !imodule.Error()); imodule++) {
@@ -217,21 +227,24 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					 imodule.KeyText(), key->Verse(),
 					 key->Verse());
 		}
-
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 		if (key->Verse() == curVerse) {
 			strbuf = g_string_new("");
-			if (!stricmp(font, "Symbol")) {
+		    if (!stricmp(lang.c_str(), "")  || !stricmp(lang.c_str(), "en")) {
+			if (!stricmp(font.c_str(), "Symbol")) {
 				g_string_sprintf(strbuf,
-						 "<FONT COLOR=\"%s\" FACE=\"symbol\">",
+						 "<FONT COLOR=\"%s\" FACE=\"symbol\">", 
 						 mycolor);
-			} else if (!stricmp(font, "greek1")) {
+			} else if (!stricmp(font.c_str(), "greek1")) {
 				g_string_sprintf(strbuf,
-						 "<FONT SIZE=\"+5\" COLOR=\"%s\" FACE=\"greek1\">",
+						 "<FONT COLOR=\"%s\" FACE=\"greek1\">",
 						 mycolor);
-
-			} else if (!stricmp(font, "BSTHebrew")) {
+			} else if (!stricmp(lang.c_str(), "en")) {
+				g_string_sprintf(strbuf,
+						 "<FONT COLOR=\"%s\" FACE=\"helvetica\">",
+						 mycolor);
+			} else if (!stricmp(font.c_str(), "BSTHebrew")) {
 				g_string_sprintf(strbuf,
 						 "<FONT COLOR=\"%s\" FACE=\"bsthebrew\">",
 						 mycolor);
@@ -246,6 +259,12 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 							 "<FONT COLOR=\"%s\">",
 							 mycolor);
 			}
+		   }else{
+			   	strbuf = g_string_new("");
+				g_string_sprintf(strbuf,
+						 "<FONT COLOR=\"%s\" FACE=\"%s\">",
+						 mycolor,settings->default_font);
+		   }
 			if (newparagraph) {
 				newparagraph = false;
 			}
@@ -280,13 +299,17 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				    strbuf->len);
 			g_string_free(strbuf, TRUE);
 		} else {
-			if (!stricmp(font, "Symbol")) {
+		    if (!stricmp(lang.c_str(), "")  || !stricmp(lang.c_str(), "en")) {
+			if (!stricmp(font.c_str(), "Symbol")) {
 				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */
-			} else if (!stricmp(font, "greek1")) {
+			} else if (!stricmp(font.c_str(), "greek1")) {
 				strbuf =
 				    g_string_new
 				    ("<FONT SIZE=\"+5\"  COLOR=\"#000000\" FONT FACE=\"greek1\">");
-			} else if (!stricmp(font, "BSTHebrew")) {
+			} else if (!stricmp(lang.c_str(), "en")) {
+				strbuf =
+				    g_string_new("<FONT COLOR=\"#000000\" FACE=\"helvetica\">");
+			} else if (!stricmp(font.c_str(), "BSTHebrew")) {
 				strbuf =
 				    g_string_new
 				    ("<FONT COLOR=\"#000000\" FONT FACE=\"bsthebrew\">");
@@ -301,6 +324,10 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					g_string_sprintf(strbuf,
 							 "<FONT COLOR=\"#000000\" >");
 			}
+		}else{
+			strbuf = g_string_new("");
+			g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" FACE=\"%s\">",settings->default_font);
+		} 
 			strbuf =
 			    g_string_append(strbuf,
 					    (const char *) imodule);
@@ -356,7 +383,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
  ******************************************************************************/
 char GTKutf8ChapDisp::Display(SWModule & imodule)
 {
-	char tmpBuf[500], *buf, *mybuf, *encoding, versecolor[80];
+	char tmpBuf[500], *buf, *mybuf, versecolor[80];
 	VerseKey *key = (VerseKey *) (SWKey *) imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -364,15 +391,41 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	int curPos = 0;
 	gint len;
 	char *Buf, c;
-	gchar *utf8str;
+	gchar *utf8str, *use_font, *font, *token;
 	gint mybuflen, utf8len;
 	const gchar **end;
 
-	//c = 182;       
- 	
+	string lang;
+	SWMgr *Mgr;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;
+	//c = 182;  
+ 	Mgr = new SWMgr();	//-- create sword mgr
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(settings->app, "nbText")), 1);
-
+	
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
+		ConfigEntMap &section = (*sit).second;
+		//font = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
+	} 
+	font = "-adobe-helvetica-*-*";
+	if (!stricmp(lang.c_str(), "") || 
+				!stricmp(lang.c_str(), "en") || 
+					!stricmp(lang.c_str(), "en" )) {
+		font = g_strdup(settings->default_font);		
+	}else if (!stricmp(lang.c_str(), "grc")) {
+		font = g_strdup(settings->greek_font);		
+	}else if (!stricmp(lang.c_str(), "he")) {
+		font = g_strdup(settings->hebrew_font);		
+	}else{
+		font = g_strdup(settings->unicode_font);		
+	}
+	++font;
+	token=strtok(font,"-");
+	use_font = token;
+	use_font = strtok(NULL,"-");
+	g_warning("use_font = %s",use_font);
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 
 	sprintf(tmpBuf,
@@ -401,8 +454,8 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-		sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">",
-			versecolor, settings->bible_font_size);
+		sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">",
+			use_font, versecolor, settings->bible_font_size);
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -434,6 +487,8 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(gtkText, tmpBuf);
+	//g_free(font);
+	delete Mgr;
 	return 0;
 }
 
@@ -444,9 +499,39 @@ char InterlinearDisp::Display(SWModule & imodule)
 	gint i;
 	bool utf = false;
 	gint len;
-	gchar *utf8str;
+	gchar *utf8str, *use_font, *font, *token;
 	gint utf8len;
-
+	string lang;
+	SWMgr *Mgr;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;
+	
+	Mgr = new SWMgr();	//-- create sword mgr
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(settings->app, "nbText")), 1);
+	
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
+		ConfigEntMap &section = (*sit).second;
+		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
+	} 
+	font = "-adobe-helvetica-*-*";
+	if (!stricmp(lang.c_str(), "") || 
+				!stricmp(lang.c_str(), "en") || 
+					!stricmp(lang.c_str(), "en" )) {
+		font = g_strdup(settings->default_font);		
+	}else if (!stricmp(lang.c_str(), "grc")) {
+		font = g_strdup(settings->greek_font);		
+	}else if (!stricmp(lang.c_str(), "he")) {
+		font = g_strdup(settings->hebrew_font);		
+	}else{
+		font = g_strdup(settings->unicode_font);		
+	}
+	++font;
+	token=strtok(font,"-");
+	use_font = token;
+	use_font = strtok(NULL,"-");
+	g_warning("use_font = %s",use_font);
+	
 
 	//buf = (char *) imodule.Description(); 
 	(const char *) imodule;
@@ -463,8 +548,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-	sprintf(tmpBuf, "<font size=\"%s\">",
-		settings->interlinear_font_size);
+	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
+		use_font, settings->interlinear_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -477,6 +562,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		imodule.Name());
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));
+	delete Mgr;
 	return 0;
 }
 
