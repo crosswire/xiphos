@@ -336,9 +336,9 @@ void UpdateChecks(GtkWidget *app)
 	GTK_CHECK_MENU_ITEM (settings->versestyle_item)->active = settings->versestyle;	
 	
 	if(settings->footnotes)  /* set footnotes to last setting used */
-		setglobalopsSWORD("Footnotes","On" );	/* keep footnotes in sync with menu */		
+		setglobalopsSWORD(0,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
-		setglobalopsSWORD("Footnotes","Off" );	/* keep footnotes in sync with menu */			
+		setglobalopsSWORD(0,"Footnotes","Off" );	/* keep footnotes in sync with menu */			
 	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;
 	
 	/* set interlinear page to last setting */
@@ -355,10 +355,10 @@ void UpdateChecks(GtkWidget *app)
 	/* set Strong's numbers to last setting */
 	if(settings->strongs)	
 		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD("Strong's Numbers","On");  /* " */
+		setglobalopsSWORD(0,"Strong's Numbers","On");  
 	else
 		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD("Strong's Numbers","Off"); /* ' */
+		setglobalopsSWORD(0,"Strong's Numbers","Off");
 	/* set strongs toogle button */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
 	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
@@ -369,80 +369,6 @@ void UpdateChecks(GtkWidget *app)
         addhistoryitem = FALSE;
         changeVerseSWORD(settings->currentverse);
 }
-
-
-/*****************************************************************************		
- * return verse number form verse in main Bible window
- * starting index must be in the verse number
- * else we return 0			
-******************************************************************************/
-gint getversenumber(GtkWidget *text)
-{
-	gchar   *buf, /* buffer for storing the verse number */
-	        cbuf; /* char for checking for numbers (isdigit) */
-	gint	startindex, /* first digit in verse number */
-	        endindex,   /* last digit in verse number */
-	        index;      /* current position in text widget */
-						
-	 index = gtk_editable_get_position(GTK_EDITABLE(text));	/* get current position for a starting point */
-	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); /* get char at current position (index) */
-	 if(!isdigit(cbuf)) return 0; /* if cbuf is not a number stop - do no more */
-	 endindex = index;  /* set endindex to index */
-	 while(isdigit(cbuf)){ /* loop until cbuf is not a number */	
-	 	cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); /* get next char */
-	 	if(cbuf == ')' || cbuf == '>') isstrongs = TRUE;
-	 	++endindex;   /* increment endindex */
-	 } 	
-	 --endindex; /* our last char was not a number so back up one */
-	 startindex = index; /* set startindex to index */
-	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); /* get char at index - we know it is a number */
-	 while(isdigit(cbuf)){  /* loop backward util cbuf is not a number */	
-	        cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); /* get previous char */
-	 	if(cbuf == '(' || cbuf == '<') isstrongs = TRUE;
-	 	--startindex; /* decrement startindex  */ 	 		
-	 }	
-	 ++startindex; /* last char (cbuf) was not a number */
-	 ++startindex; /* last char (cbuf) was not a number */
-	 buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
-	 return atoi(buf); /* send it back as an integer */
-}
-
-/*****************************************************************************
- *getdictnumber
- *text
- *returns strongs number else 0
-******************************************************************************/
-gint getdictnumber (GtkWidget *text)
-{
-        gchar   *buf, /* buffer for storing the verse number */
-                cbuf; /* char for checking for numbers (isdigit) */
-        gint    startindex, /* first digit in verse number */
-                endindex,   /* last digit in verse number */
-                index;      /* current position in text widget */
-
-         index = gtk_editable_get_position(GTK_EDITABLE(text)); /* get current position for a starting point */
-         cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); /* get char at current position (index) */
-         if(!isdigit(cbuf)) return 0; /* if cbuf is not a number stop - do no more */
-         endindex = index;  /* set endindex to index */
-         while(isdigit(cbuf)){ /* loop until cbuf is not a number */
-                cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); /* get next char */
-                ++endindex;   /* increment endindex */
-         }
-         --endindex; /* our last char was not a number so back up one */
-         startindex = index; /* set startindex to index */
-         cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); /* get char at index - we know it is a number */
-         while(isdigit(cbuf)){  /* loop backward util cbuf is not a number */
-                cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); /* get previous char */
-                --startindex; /* decrement startindex */
-         }
-         ++startindex; /* last char (cbuf) was not a number */
-         ++startindex; /* last char (cbuf) was not a number */
-         buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); /* get verse number */
-	 if(endindex-startindex > 1) isstrongs = TRUE;
-         return atoi(buf); /* send it back as an integer */
-}
-
-
 
 /*****************************************************************************
  *setformatoption

@@ -154,10 +154,9 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-
 	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
 		    strlen((const char *) imodule));
-
+	//g_warning((const char *) imodule);
 	sprintf(tmpBuf, " %s", "</font></body></html>");
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
