@@ -26,7 +26,7 @@ extern "C" {
 	void on_link_clicked(GtkHTML * html, const gchar * url,
 			     gpointer data);
 	void add_gtkhtml_widgets(GtkWidget * app);
-	void beginHTML(GtkWidget * html);
+	void beginHTML(GtkWidget * html, gboolean utf8);
 	void endHTML(GtkWidget * html);
 	void displayHTML(GtkWidget * html, gchar * txt, gint lentxt);
 	void on_copyhtml_activate(GtkMenuItem * menuitem,

@@ -299,7 +299,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 /***************************************************************************************************
  *beginHTML
  ***************************************************************************************************/
-void beginHTML(GtkWidget * html)
+void beginHTML(GtkWidget * html, gboolean utf8)
 {
 	htmlstream = gtk_html_begin(GTK_HTML(html));
 }
