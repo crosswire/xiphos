@@ -45,7 +45,7 @@
 #include "sw_shortcutbar.h"
 #include "support.h"
 
-extern gchar *gSwordDir;
+extern gchar *shortcutbarDir;
 extern SETTINGS *settings;
 list <string> sbfiles;	
 
@@ -57,7 +57,7 @@ save_iconsizeSW(gchar *filename, gchar *large_icons)
 	gint 
 		j=0;
 	
-	sprintf(conffile,"%s/shortcutbar/%s", gSwordDir, filename);	
+	sprintf(conffile,"%s/%s", shortcutbarDir, filename);	
 	SWConfig sbInfo(conffile);
 	sbInfo["Shortcut Info"]["Large Icon"] = large_icons;	
 	sbInfo.Save();
@@ -77,7 +77,7 @@ GList *loadshortcutbarSW(gchar *filename, gchar *group_name, gchar *use_largeico
 	GList *list;
 	
 	list = NULL;
-	sprintf(conffile,"%s/shortcutbar/%s", gSwordDir, filename);
+	sprintf(conffile,"%s/%s", shortcutbarDir, filename);
 	
 	SWConfig sbInfo(conffile);
 	sprintf(group_name,"%s", sbInfo["Shortcut Info"]["Group Name"].c_str());
@@ -110,7 +110,7 @@ saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_
 		conffile[256];
 	gint j=0;
 	
-	sprintf(conffile,"%s/shortcutbar/%s", gSwordDir, filename);
+	sprintf(conffile,"%s/%s", shortcutbarDir, filename);
 	unlink(conffile);
 	
 	SWConfig sbInfo(conffile);
