@@ -248,7 +248,7 @@ void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *modName;
 
 	modName = (gchar *) user_data;
-	changecurModSWORD(modName);
+	changecurModSWORD(modName,TRUE);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -443,7 +443,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	static gboolean firsttime = TRUE;
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- get label
-		changcurcomModSWORD((char *) label->label, page_num);	//-- pass label text and page number
+		changcurcomModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
 	}								//-- to function to do the work - gs_sword.cpp
 	firsttime = FALSE;
 }
@@ -1694,7 +1694,7 @@ void
 on_textbutton_clicked                     (GtkButton       *button,
                                         gpointer         user_data)
 {
-	changecurModSWORD((char *) user_data);
+	changecurModSWORD((char *) user_data,TRUE);
 }
 
 /*******************************************************************************

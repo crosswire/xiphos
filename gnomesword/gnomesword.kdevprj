@@ -1,10 +1,10 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/main.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/spell.c,/usr/include/glib.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/spell_gui.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/spell_gui.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/spell.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.c,/home/terry/Projects/Gnomesword-0.4.0/configure.in,/home/terry/Projects/Gnomesword-0.4.0/INSTALL,
+openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/main.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_sword.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/callback.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_history.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_history.cpp,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_listeditor.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_sword.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_viewdict.c,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_viewdict.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/spell_gui.h,/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_file.h,
 show_outputview=true
 show_treeview=true
-header_file=/home/terry/Projects/Gnomesword-0.4.0/INSTALL
-cpp_file=/home/terry/Projects/Gnomesword-0.4.0/gnomesword/spell.c
+header_file=/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.h
+cpp_file=/home/terry/Projects/Gnomesword-0.4.0/gnomesword/gs_gnomesword.c
 browser_file=file:/home/terry/share/doc/HTML/default/kdevelop/reference/C/index.html
 [gnomesword/gs_file.c]
 install_location=
@@ -71,6 +71,11 @@ install_location=
 dist=true
 install=false
 type=SOURCE
+[gnomesword/gs_history.h]
+install_location=
+dist=true
+install=false
+type=HEADER
 [LFV Groups]
 Dialogs=*.kdevdlg,
 GNU=AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,NEWS,
@@ -200,8 +205,13 @@ email=tbiggs@users.sourceforge.net
 kdevprj_version=1.2
 dir_where_make_will_be_called=
 modifyMakefiles=false
+[gnomesword/gs_history.cpp]
+install_location=
+dist=true
+install=false
+type=SOURCE
 [gnomesword/Makefile.am]
-files=gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.h,gnomesword/support.h,gnomesword/printstuff.h,gnomesword/interface.c,gnomesword/support.c,gnomesword/printstuff.c,gnomesword/noteeditor.h,gnomesword/noteeditor.cpp,gnomesword/searchstuff.h,gnomesword/searchstuff.cpp,gnomesword/gs_gnomesword.c,gnomesword/gs_gnomesword.h,gnomesword/gs_sword.cpp,gnomesword/gs_sword.h,gnomesword/gs_studypad.h,gnomesword/gs_studypad.c,gnomesword/menustuff.c,gnomesword/gs_listeditor.c,gnomesword/gs_listeditor.h,gnomesword/callback.cpp,gnomesword/gs_file.c,gnomesword/gs_file.h,gnomesword/char_table.c,gnomesword/char_table.h,gnomesword/debug.h,gnomesword/spell.c,gnomesword/spell.h,gnomesword/spell_gui.c,gnomesword/spell_gui.h,gnomesword/gs_viewdict.c,gnomesword/gs_viewdict.h,
+files=gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.h,gnomesword/support.h,gnomesword/printstuff.h,gnomesword/interface.c,gnomesword/support.c,gnomesword/printstuff.c,gnomesword/noteeditor.h,gnomesword/noteeditor.cpp,gnomesword/searchstuff.h,gnomesword/searchstuff.cpp,gnomesword/gs_gnomesword.c,gnomesword/gs_gnomesword.h,gnomesword/gs_sword.cpp,gnomesword/gs_sword.h,gnomesword/gs_studypad.h,gnomesword/gs_studypad.c,gnomesword/menustuff.c,gnomesword/gs_listeditor.c,gnomesword/gs_listeditor.h,gnomesword/callback.cpp,gnomesword/gs_file.c,gnomesword/gs_file.h,gnomesword/char_table.c,gnomesword/char_table.h,gnomesword/debug.h,gnomesword/spell.c,gnomesword/spell.h,gnomesword/spell_gui.c,gnomesword/spell_gui.h,gnomesword/gs_viewdict.c,gnomesword/gs_viewdict.h,gnomesword/gs_history.h,gnomesword/gs_history.cpp,
 type=prog_main
 sub_dirs=
 [INSTALL]
