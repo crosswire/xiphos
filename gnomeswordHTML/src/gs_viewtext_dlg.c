@@ -383,6 +383,11 @@ create_dlgViewText (void)
 						   (on_dlgViewText_destroy),
 						   NULL);
 
+	gtk_signal_connect(GTK_OBJECT(text), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
+/*	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);			
+*/			    
   gtk_signal_connect (GTK_OBJECT (cbeModule), "changed",
                       GTK_SIGNAL_FUNC (on_cbeModule_changed),
                       NULL);

@@ -63,28 +63,28 @@ char GS_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 					for (unsigned int i = 2;
 					     i < strlen(token); i++)
 						*to++ = token[i];
-					strcpy(to," \"><FONT SIZE=\"-1\">");
+					strcpy(to," \"><FONT SIZE=\"-2\">");
 					to += strlen(to);
 					for (unsigned int i = 2;
 					     i < strlen(token); i++)
 						*to++ = token[i];
 					strcpy(to,"</FONT></A> ");
 					to += strlen(to);
-					continue;
+					continue;				 
 				case 'T':	// Tense
 					strcpy(to," <A HREF=\"#");
 					to += strlen(to);
 					for (unsigned int i = 3;
 					     i < strlen(token); i++)
 						*to++ = token[i];					
-					strcpy(to,"\"> <FONT SIZE=\"-1\"><I>");
+					strcpy(to,"\"> <FONT SIZE=\"-2\"><I>");
 					to += strlen(to);
 					for (unsigned int i = 3;
 					     i < strlen(token); i++)
 						*to++ = token[i];					
 					strcpy(to,"</I></FONT></A> ");
 					to += strlen(to);
-					continue;
+					continue;				
 				}
 				break;
 			case 'R':

@@ -176,7 +176,7 @@ extern gchar *gSwordDir,		/* store GnomeSword directory */
 	*fnbookmarksnew,
 	*fnconfigure;
 //extern EDITOR *ed1;
-
+extern GList *cbBook_items;
 
 static void addtoModList(SWModule *mod, GList *list);
 /***********************************************************************************************
@@ -196,7 +196,9 @@ initSWORD(GtkWidget *mainform)
 		*font;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
-  	
+  	VerseKey DefaultVSKey;
+	GString *s1;
+	
  	plaintohtml   	= new PLAINHTML(); /* sword renderfilter plain to html */
   	thmltohtml	= new ThMLHTML(); /* sword renderfilter thml to html */	
         rwptohtml		= new RWPHTML(); /* sword renderfilter rwp to html */	
@@ -262,6 +264,17 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
+	/*** load Bible books ***/
+	DefaultVSKey = TOP;
+	cbBook_items = NULL;
+	while (!DefaultVSKey.Error()) {
+		s1 = g_string_new((const char *)DefaultVSKey);
+		s1 = g_string_truncate(s1, (s1->len - 4));
+		cbBook_items = g_list_append(cbBook_items, s1->str);
+		//g_warning(s1->str);
+		DefaultVSKey.Book(DefaultVSKey.Book() + 1);
+		g_string_free(s1,FALSE);
+	}
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			curMod = (*it).second;
@@ -513,6 +526,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 				break;
 		}
 	} 
+	g_list_free(cbBook_items);
   	g_free(gSwordDir);
 	g_free(fnbookmarks);	
 	g_free(fnbookmarksnew);
@@ -557,11 +571,15 @@ void
 strongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
 {
 	if(choice){ //-- if choice is TRUE - we want strongs numbers	
-		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 		
+		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 	
+		mainMgr->setGlobalOption("Morphological Tags","On");  //-- turn strongs on		
 		mainMgr1->setGlobalOption("Strong's Numbers","On");
+		mainMgr1->setGlobalOption("Morphological Tags","On");  //-- turn strongs on	
 	}else{   //-- we don't want strongs numbers	
 		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
+		mainMgr->setGlobalOption("Morphological Tags","Off");  //-- turn strongs on	
 		mainMgr1->setGlobalOption("Strong's Numbers","Off");
+		mainMgr1->setGlobalOption("Morphological Tags","Off");  //-- turn strongs on
 	}
 	settings->strongs = choice;   //-- store choice in settings
 	if(havebible) curMod->Display(); //-- we need to show change
@@ -1199,6 +1217,16 @@ gchar* getVTmodDescriptionSWORD(void)
 	return (char *) VTMod->Description();;
 }
 
+/******************************************************************************
+ * change verse in VT dialog
+ ******************************************************************************/
+void changeVTverseSWORD(gchar * verse)
+{
+	if (VTMod) {
+		VTMod->SetKey(verse);
+		VTMod->Display();
+	}
+}
 /******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
  *returns a list of keys

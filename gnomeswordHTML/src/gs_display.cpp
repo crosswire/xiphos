@@ -307,7 +307,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	g_string_free(strbuf, TRUE);
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
-	gotoanchorHTML(tmpBuf);
+	gotoanchorHTML(tmpBuf, gtkText);
 	return 0;
 } /* end - char GTKhtmlChapDisp::Display(SWModule & imodule) */
 
@@ -357,7 +357,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 		strbuf = g_string_new("");
 		g_string_sprintf(strbuf,"<FONT FACE=\"symbol\" SIZE=\"%s\">",settings->bible_font_size);
 	} else if (!stricmp(font, "greek1")) { 
-		strbuf = g_string_new("<div style=\"font-family: greek1; font-size: 18pt\">");
+		strbuf = g_string_new("");
+		g_string_sprintf(strbuf,"<FONT FACE=\"greek1\" SIZE=\"%s\">",settings->bible_font_size);
 		//g_string_sprintf(strbuf,"<div style=\"font-family: greek1; font-size: 16pt\">",settings->bible_font_size);
 	} else if (!stricmp(font, "BSTHebrew")) {
 		strbuf = g_string_new("");	

@@ -184,6 +184,7 @@ body_properties (GtkHTMLControlData *cd, gpointer *set_data)
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_table_attach_defaults (GTK_TABLE (table), frame, 1, 2, 0, 1);
 	fill_sample (data);
+
 	/* gtk_idle_add (hide_preview, data); */
 
 	gtk_widget_show_all (table);

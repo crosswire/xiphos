@@ -31,8 +31,9 @@ extern "C" {
 	void symbolHTML(GtkWidget *html_widget);   
 	void on_url(GtkHTML * html, const gchar * url, gpointer data);
 	void on_link_clicked(GtkHTML * html, const gchar * url,
-			     gpointer data);
-	void add_gtkhtml_widgets(GtkWidget * app);
+			     	gpointer data);
+	void on_link2_clicked(GtkHTML * html, const gchar * url, 
+				gpointer data);
 	void beginHTML(GtkWidget * html);
 	void endHTML(GtkWidget * html);
 	void displayHTML(GtkWidget * html, gchar * txt, gint lentxt);
@@ -44,9 +45,12 @@ extern "C" {
 					       gpointer user_data);
 	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 					     gpointer user_data);
-	void gotoanchorHTML(gchar * verse);
+	void gotoanchorHTML(gchar * verse, GtkWidget *html_widget);
 	void sethtmltoeditHTML(GtkWidget *html_widget, gboolean choice);
-
+	gboolean on_htmlComments_key_press_event(GtkWidget * widget,
+				GdkEventKey * event, gpointer user_data);
+				
+				
 #ifdef __cplusplus
 }
 #endif
