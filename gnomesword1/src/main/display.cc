@@ -133,7 +133,6 @@ char GTKEntryDisp::Display(SWModule &imodule)
 }
 
 
-
 char GTKChapDisp::Display(SWModule &imodule) 
 {
 	char tmpBuf[255];
@@ -353,6 +352,176 @@ char GTKMozEntryDisp::Display(SWModule &imodule)
 }
 
 
+char GtkMozChapDisp::Display(SWModule &imodule) 
+{
+#ifdef USE_MOZILLA
+	char tmpBuf[255];
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	gfloat adjVal;
+	MOD_FONT *mf = get_font(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GString *str = g_string_new(NULL);
+	GString *str_tmp = g_string_new(NULL);
+	gchar *utf8_key;
+	gchar *buf;
+	gchar *buf2;
+	gchar *preverse = NULL;
+	gchar *paragraphMark = "&para;";
+	gchar *br = NULL;
+	gchar heading[32];                                          
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+	gboolean newparagraph = FALSE;
+	
+	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
+	
+	g_string_printf(str,	HTML_START
+				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+				settings.bible_bg_color, 
+				settings.bible_text_color,
+				settings.link_color);//settings.link_color);
+	if(is_rtol) 
+		str = g_string_append(str,"<DIV ALIGN=right>");	
+	
+	gtk_moz_embed_append_data(new_browser, str->str, str->len);
+	
+	main_set_global_options(ops);
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
+				== curChapter && !imodule.Error()); imodule++) {
+		int x = 0;
+		sprintf(heading,"%d",x);
+		while((preverse 
+			= backend->get_entry_attribute("Heading","Preverse",
+							    heading)) != NULL) {
+			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
+			str_tmp = g_string_append(str_tmp, buf);
+			g_free(preverse);
+			g_free(buf);						     
+			++x;
+			sprintf(heading,"%d",x);
+		}
+		
+		gtk_moz_embed_append_data(new_browser, str_tmp->str, str_tmp->len);
+		g_string_erase(str_tmp,0,-1);
+		
+		if(key->Verse() == curVerse || 
+				key->Verse() == curVerse-1 || 
+				key->Verse() == curVerse-2|| 
+				key->Verse() == curVerse+2|| 
+				key->Verse() == curVerse+1 ) {
+			main_set_strongs_morphs(ops);
+		} else {		
+			main_set_strongs_morphs_off(ops);
+		}
+		
+		utf8_key = g_convert((char*)key->getText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		g_string_printf(str,
+			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+			utf8_key,
+			key->Verse(), 
+			(settings.versestyle)
+			?settings.verse_num_font_size
+			:"-2",
+			settings.bible_verse_num_color, 
+			key->Verse());
+		g_free(utf8_key);
+		
+		buf = g_strdup_printf(
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				(mf->old_font)?mf->old_font:"", 
+				(mf->old_font_size)?mf->old_font_size:"+0", 
+				(key->Verse() == curVerse)
+				?settings.currentverse_color
+				:settings.bible_text_color);
+		
+		str = g_string_append(str,buf);
+		g_free(buf);	
+
+		if (newparagraph && settings.versestyle) {
+			newparagraph = FALSE;
+			str = g_string_append(str, paragraphMark);
+		}
+			
+		buf = g_strdup_printf("%s",(const char *)imodule);
+		str = g_string_append(str, buf);
+		
+		if (settings.versestyle) {
+			/*if ((strstr(buf, "<BR") == NULL) &&
+			    (strstr(buf, "<br") == NULL) &&
+			     (strstr(buf, "<!P") == NULL) &&
+			     (strstr(buf, "<!p") == NULL) &&
+			     (strstr(buf, "<!/P") == NULL) &&
+			     (strstr(buf, "<p") == NULL) &&
+			     (strstr(buf, "</p") == NULL)  ) {*/
+				buf2 = g_strdup_printf(" %s", "</font><br>");
+			/*} else {
+				br = g_strrstr(buf, "<br"); // last occurance 
+				if(br && (strlen(br) > 6)) // we have a new line that's
+						           // not at the end of the string 					
+					buf2 = g_strdup_printf(" %s", 
+								"</font><br>");
+				else
+					buf2 = g_strdup_printf(" %s", "</font>");
+			}*/
+			if ((strstr(buf, "<!p>") == NULL) &&
+			     (strstr(buf, "<p>") == NULL) ) {
+				newparagraph = FALSE;
+			} else {
+				newparagraph = TRUE;
+			}
+		} else {
+			if (strstr(buf, "<!P>") == NULL)
+				buf2 = g_strdup_printf(" %s", "</font>");
+			else
+				buf2 = g_strdup_printf(" %s", "</font><p>");
+		}
+		str = g_string_append(str, buf2);
+		gtk_moz_embed_append_data(new_browser, str->str, str->len);
+		g_free(buf);
+		g_free(buf2);
+	}
+	if(is_rtol) 
+		g_string_printf(str,"</DIV></body></html>");
+	else	
+		g_string_printf(str, "</body></html>");
+	if (str->len) {
+		gtk_moz_embed_append_data(new_browser, str->str, str->len);			
+		gtk_moz_embed_close_stream(new_browser);		
+		if(curVerse > 1) {
+			buf = g_strdup_printf("%d", curVerse);
+			embed_go_to_anchor(new_browser, buf);
+			g_free(buf);
+		}
+	}
+	
+	g_string_free(str, TRUE);
+	g_string_free(str_tmp, TRUE);
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+	free_font(mf);	
+	g_free(ops);
+#endif
+}
+
+
 /******************************************************************************
  * Name
  *   
@@ -493,189 +662,6 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 }
 
 
-
-char GtkMozChapDisp::Display(SWModule &imodule) 
-{
-#ifdef USE_MOZILLA
-	char tmpBuf[255];
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
-	int curVerse = key->Verse();
-	int curChapter = key->Chapter();
-	int curBook = key->Book();
-	//int curPos = 0;
-	gfloat adjVal;
-	MOD_FONT *mf = get_font(imodule.Name());
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
-	GString *str = g_string_new(NULL);
-	GString *str_tmp = g_string_new(NULL);
-	gchar *utf8_key;
-	gchar *buf;
-	gchar *buf2;
-	gchar *preverse = NULL;
-	gchar *paragraphMark = "&para;";
-	gchar *br = NULL;
-	gchar heading[32];                                          
-	gsize bytes_read;
-	gsize bytes_written;
-	GError **error = NULL;
-	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
-	gboolean is_gbf = FALSE;
-	gboolean is_thml = FALSE;
-	gboolean is_osis = FALSE;		
-	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
-	gboolean newparagraph = FALSE;
-	
-	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
-	
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
-	
-	g_string_printf(str,	HTML_START
-				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-				settings.bible_bg_color, 
-				settings.bible_text_color,
-				settings.bible_text_color);//settings.link_color);
-	if(is_rtol) 
-		str = g_string_append(str,"<DIV ALIGN=right>");	
-	
-	gtk_moz_embed_append_data(new_browser, str->str, str->len);
-	
-	main_set_global_options(ops);
-	//main_set_strongs_morphs_off(ops);
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
-				== curChapter && !imodule.Error()); imodule++) {
-		int x = 0;
-		sprintf(heading,"%d",x);
-		while((preverse 
-			= backend->get_entry_attribute("Heading","Preverse",
-							    heading)) != NULL) {
-			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
-			str_tmp = g_string_append(str_tmp, buf);
-			g_free(preverse);
-			g_free(buf);						     
-			++x;
-			sprintf(heading,"%d",x);
-		}
-		
-		gtk_moz_embed_append_data(new_browser, str_tmp->str, str_tmp->len);
-		g_string_erase(str_tmp,0,-1);
-		
-		if(key->Verse() == curVerse) {
-			settings.font_color = settings.currentverse_color;
-			main_set_strongs_morphs(ops);
-		} else {		
-			settings.font_color = settings.bible_text_color;
-			main_set_strongs_morphs_off(ops);
-		}
-		
-		utf8_key = g_convert((char*)key->getText(),
-                             -1,
-                             UTF_8,
-                             OLD_CODESET,
-                             &bytes_read,
-                             &bytes_written,
-                             error);
-		g_string_printf(str,
-			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
-			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
-			utf8_key,
-			key->Verse(),
-			settings.verse_num_font_size,
-			settings.bible_verse_num_color, 
-			key->Verse());
-		g_free(utf8_key);
-		
-		buf = g_strdup_printf(
-				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
-				(mf->old_font)?mf->old_font:"", 
-				(mf->old_font_size)?mf->old_font_size:"+0", 
-				(key->Verse() == curVerse)
-				?settings.currentverse_color
-				:settings.bible_text_color);
-		
-		//gtk_moz_embed_append_data(new_browser, str->str, str->len);
-		str = g_string_append(str,buf);
-		g_free(buf);	
-
-		if (newparagraph && settings.versestyle) {
-			newparagraph = FALSE;
-			str = g_string_append(str, paragraphMark);
-		}
-			
-		buf = g_strdup_printf("%s",(const char *)imodule);
-		str = g_string_append(str, buf);
-		/*if(key->Verse() == curVerse)
-			g_message(imodule.getRawEntry());*/
-		if (settings.versestyle) {
-			if ((strstr(buf, "<BR") == NULL) &&
-			    (strstr(buf, "<br") == NULL) &&
-			     (strstr(buf, "<!P") == NULL) &&
-			     (strstr(buf, "<!p") == NULL) &&
-			     (strstr(buf, "<!/P") == NULL) &&
-			     (strstr(buf, "<p") == NULL) &&
-			     (strstr(buf, "</p") == NULL)  ) {
-				buf2 = g_strdup_printf(" %s", "</font><br>");
-			} else {
-				br = g_strrstr(buf, "<br"); /* last occurance */
-				if(br && (strlen(br) > 6)) /* we have a new line that's
-						      not at the end of the string */					
-					buf2 = g_strdup_printf(" %s", 
-								"</font><br>");
-				else
-					buf2 = g_strdup_printf(" %s", "</font>");
-			}
-			if ((strstr(buf, "<!P>") == NULL) &&
-			     (strstr(buf, "<p>") == NULL) ) {
-				newparagraph = FALSE;
-			} else {
-				newparagraph = TRUE;
-			}
-		} else {
-			if (strstr(buf, "<!P>") == NULL)
-				buf2 = g_strdup_printf(" %s", "</font>");
-			else
-				buf2 = g_strdup_printf(" %s", "</font><p>");
-		}
-		str = g_string_append(str, buf2);
-		gtk_moz_embed_append_data(new_browser, str->str, str->len);
-		g_free(buf);
-		g_free(buf2);
-	}
-	if(is_rtol) 
-		g_string_printf(str,"</DIV></body></html>");
-	else	
-		g_string_printf(str, "</body></html>");
-	if (str->len) {
-		gtk_moz_embed_append_data(new_browser, str->str, str->len);			
-		gtk_moz_embed_close_stream(new_browser);		
-		if(curVerse > 1) {
-			buf = g_strdup_printf("%d", curVerse);
-			embed_go_to_anchor(new_browser, buf);
-			g_free(buf);
-		}
-	}
-	
-	g_string_free(str, TRUE);
-	g_string_free(str_tmp, TRUE);
-	key->Verse(1);
-	key->Chapter(1);
-	key->Book(curBook);
-	key->Chapter(curChapter);
-	key->Verse(curVerse);
-	free_font(mf);	
-	g_free(ops);
-/*	if(is_gbf || is_thml) {
-		delete to_osis;
-		delete osishtml;
-	}
-	if(is_osis) {
-		delete osishtml;
-	}
-*/
-#endif
-}
-
-
-
 char DialogEntryDisp::Display(SWModule &imodule) 
 {
 	GString *str = g_string_new(NULL);
@@ -736,7 +722,6 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	free_font(mf);	
 	g_free(ops);
 }
-
 
 
 char DialogChapDisp::Display(SWModule &imodule) 
@@ -860,6 +845,7 @@ char DialogChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 	free_font(mf);	
 }
+
 
 char DialogTextviewChapDisp::Display(SWModule &imodule)
 {	
