@@ -134,15 +134,16 @@ void
 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
-	GtkWidget *dlg, *text1, *text2, *label;
-
+	GtkWidget *dlg, *text1, *text2, *label, *version_label;
+	
 	dlg = create_AboutSword();
 	text1 = lookup_widget(dlg, "txtAboutSword");
 	text2 = lookup_widget(dlg, "text6");
 	label = lookup_widget(dlg, "label96");
+	version_label = lookup_widget(dlg, "version_label");
 	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
 	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
-	showinfoSWORD(text2, GTK_LABEL(label));
+	showinfoSWORD(text2, GTK_LABEL(label), GTK_LABEL(version_label));
 	gtk_widget_show(dlg);
 }
 
@@ -262,22 +263,22 @@ on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *notebook;
-	gchar *modNum;
+	gint modNum;
 
-	modNum = (gchar *) user_data;
+	modNum = GPOINTER_TO_INT(user_data);
 	notebook = lookup_widget(MainFrm, "notebook1");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum));	//-- set notebook page
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 
 //----------------------------------------------------------------------------------------------
 void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *notebook;
-	gchar *modNum;
+	gint modNum;
 
-	modNum = (gchar *) user_data;
+	modNum = GPOINTER_TO_INT(user_data);
 	notebook = lookup_widget(MainFrm, "notebook4");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum));	//-- set notebook page
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 
 
@@ -443,12 +444,9 @@ on_nbTextMods_switch_page(GtkNotebook * notebook,
 			 gint page_num, gpointer user_data)
 {
 	GtkLabel *label;	//-- pointer to page label
-	static gboolean firsttime = TRUE;
-	if (!firsttime) {
+	
 		label = (GtkLabel *) page->tab_label;	//-- get label
 		nbchangecurModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
-	}								//-- to function to do the work - gs_sword.cpp
-	firsttime = FALSE;
 }
 
 
@@ -462,7 +460,7 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	static gboolean firsttime = TRUE;
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- get label
-		changcurcomModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
+		changcurcomModSWORD((char *) label->label, TRUE);	//-- pass label text and page number
 	}								//-- to function to do the work - gs_sword.cpp
 	firsttime = FALSE;
 }
@@ -529,8 +527,8 @@ on_notebook4_switch_page(GtkNotebook * notebook,
 		if (!strcmp(label->label, "Torrey"))
 			entryText = "";	//-- if Torrey module then set text to null else segfault?
 		keyText = entryText;	//-- put entryText into string keyText
-		changcurdictModSWORD((char *) label->label, keyText, page_num);	/* sent to changcurdictModSWORD() function in
-															 GnomeSword.cpp */
+		changcurdictModSWORD((char *) label->label, keyText);	/* sent to changcurdictModSWORD() function in
+															 gs_sword.cpp */
 	}
 	firsttime = FALSE;	//-- no longer the first time
 }
