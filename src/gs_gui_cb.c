@@ -348,11 +348,11 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	
 	gtk_widget_hide(toolbarComments);
 	gtk_widget_hide(toolbarStudypad);
-	if(page_num == 1 && settings->editnote) {
+	if(page_num == 2 && settings->editnote) {
 		gtk_widget_show(toolbarComments);
 	}
 	
-	else if(page_num == 3) {
+	else if(page_num == 4) {
 		gtk_widget_show(toolbarStudypad);	
 	}		
 }

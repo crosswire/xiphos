@@ -126,8 +126,6 @@ initGnomeSword(GtkWidget *app,
 		dictpage;
 	
 	g_print("%s\n", "Initiating GnomeSword\n");
-	/* set the main window size */
-	//gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
 	/* setup shortcut bar */
 	setupSB(settings);
 	settings->settingslist = NULL;
@@ -137,11 +135,9 @@ initGnomeSword(GtkWidget *app,
 	addmodstomenus(app, 
 				settings, 
 				biblemods, 
-				sbbiblemods, 
 				commentarymods,
-				sbcommods, 
 				dictionarymods,
-				sbdictmods,
+				bookmods,
 				percommods);
 	/* create popup menus -- gs_menu.c */
 	createpopupmenus(app, 
@@ -149,6 +145,7 @@ initGnomeSword(GtkWidget *app,
 				sbbiblemods,
 				sbcommods,
 				sbdictmods,
+				sbbookmods,
 				percommods,
 				options);
 	additemstooptionsmenu(options,settings);			
@@ -238,9 +235,9 @@ initGnomeSword(GtkWidget *app,
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                                         GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                                         NULL);	
-        }else 
+        }/*else 
 		gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
-		
+	*/	
 	/* set personal commets notebook label and display module */
 	if(usepersonalcomments){
 		 /* change personal comments module */
@@ -368,7 +365,7 @@ void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
         settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
-        if(page_num < 3) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
+        if(page_num < 4 && page_num != 2) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
 
