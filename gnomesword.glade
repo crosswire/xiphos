@@ -833,148 +833,6 @@ Revelation
       <spacing>0</spacing>
 
       <widget>
-	<class>GtkToolbar</class>
-	<name>toolbarEditor</name>
-	<orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	<type>GTK_TOOLBAR_ICONS</type>
-	<space_size>5</space_size>
-	<space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	<relief>GTK_RELIEF_NORMAL</relief>
-	<tooltips>True</tooltips>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-
-	<widget>
-	  <class>GtkOptionMenu</class>
-	  <name>opmenuEditorFontSize</name>
-	  <can_focus>True</can_focus>
-	  <items>-2
--1
-+0
-+1
-+2
-+3
-+4
-</items>
-	  <initial_choice>2</initial_choice>
-	</widget>
-
-	<widget>
-	  <class>GtkOptionMenu</class>
-	  <name>opmenuEditorHeadings</name>
-	  <can_focus>True</can_focus>
-	  <items>Normal
-Preformat
-</items>
-	  <initial_choice>0</initial_choice>
-	</widget>
-
-	<widget>
-	  <class>GtkToggleButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>togglebutton1</name>
-	  <label>togglebutton1</label>
-	  <active>False</active>
-	</widget>
-
-	<widget>
-	  <class>GtkToggleButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>togglebutton2</name>
-	  <label>togglebutton2</label>
-	  <active>False</active>
-	</widget>
-
-	<widget>
-	  <class>GtkToggleButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>togglebutton3</name>
-	  <label>togglebutton3</label>
-	  <active>False</active>
-	</widget>
-
-	<widget>
-	  <class>GtkToggleButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>togglebutton4</name>
-	  <label>togglebutton4</label>
-	  <active>False</active>
-	</widget>
-
-	<widget>
-	  <class>GtkToggleButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>togglebutton5</name>
-	  <label>togglebutton5</label>
-	  <active>False</active>
-	</widget>
-
-	<widget>
-	  <class>GtkVSeparator</class>
-	  <name>vseparator15</name>
-	  <width>7</width>
-	  <height>11</height>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>button1</name>
-	  <label>button1</label>
-	  <child>
-	    <new_group>True</new_group>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>button2</name>
-	  <label>button2</label>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>button3</name>
-	  <label>button3</label>
-	</widget>
-
-	<widget>
-	  <class>GtkVSeparator</class>
-	  <name>vseparator16</name>
-	  <width>7</width>
-	  <height>11</height>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>button4</name>
-	  <label>button4</label>
-	</widget>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <child_name>Toolbar:button</child_name>
-	  <name>button5</name>
-	  <label>button5</label>
-	</widget>
-
-	<widget>
-	  <class>GnomeColorPicker</class>
-	  <name>colorpicker1</name>
-	  <can_focus>True</can_focus>
-	  <dither>True</dither>
-	  <use_alpha>False</use_alpha>
-	  <title>Pick a color</title>
-	</widget>
-      </widget>
-
-      <widget>
 	<class>GtkHBox</class>
 	<child_name>GnomeDock:contents</child_name>
 	<name>hbox25</name>
@@ -1158,6 +1016,148 @@ Preformat
 	    <expand>True</expand>
 	    <fill>True</fill>
 	  </child>
+
+	  <widget>
+	    <class>GtkToolbar</class>
+	    <name>toolbarEditor</name>
+	    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+	    <type>GTK_TOOLBAR_ICONS</type>
+	    <space_size>5</space_size>
+	    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	    <tooltips>True</tooltips>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkOptionMenu</class>
+	      <name>opmenuEditorFontSize</name>
+	      <can_focus>True</can_focus>
+	      <items>-2
+-1
++0
++1
++2
++3
++4
+</items>
+	      <initial_choice>2</initial_choice>
+	    </widget>
+
+	    <widget>
+	      <class>GtkOptionMenu</class>
+	      <name>opmenuEditorHeadings</name>
+	      <can_focus>True</can_focus>
+	      <items>Normal
+Preformat
+</items>
+	      <initial_choice>0</initial_choice>
+	    </widget>
+
+	    <widget>
+	      <class>GtkToggleButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>togglebutton1</name>
+	      <label>togglebutton1</label>
+	      <active>False</active>
+	    </widget>
+
+	    <widget>
+	      <class>GtkToggleButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>togglebutton2</name>
+	      <label>togglebutton2</label>
+	      <active>False</active>
+	    </widget>
+
+	    <widget>
+	      <class>GtkToggleButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>togglebutton3</name>
+	      <label>togglebutton3</label>
+	      <active>False</active>
+	    </widget>
+
+	    <widget>
+	      <class>GtkToggleButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>togglebutton4</name>
+	      <label>togglebutton4</label>
+	      <active>False</active>
+	    </widget>
+
+	    <widget>
+	      <class>GtkToggleButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>togglebutton5</name>
+	      <label>togglebutton5</label>
+	      <active>False</active>
+	    </widget>
+
+	    <widget>
+	      <class>GtkVSeparator</class>
+	      <name>vseparator15</name>
+	      <width>7</width>
+	      <height>11</height>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>button1</name>
+	      <label>button1</label>
+	      <child>
+		<new_group>True</new_group>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>button2</name>
+	      <label>button2</label>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>button3</name>
+	      <label>button3</label>
+	    </widget>
+
+	    <widget>
+	      <class>GtkVSeparator</class>
+	      <name>vseparator16</name>
+	      <width>7</width>
+	      <height>11</height>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>button4</name>
+	      <label>button4</label>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <child_name>Toolbar:button</child_name>
+	      <name>button5</name>
+	      <label>button5</label>
+	    </widget>
+
+	    <widget>
+	      <class>GnomeColorPicker</class>
+	      <name>colorpicker1</name>
+	      <can_focus>True</can_focus>
+	      <dither>True</dither>
+	      <use_alpha>False</use_alpha>
+	      <title>Pick a color</title>
+	    </widget>
+	  </widget>
 
 	  <widget>
 	    <class>GtkVPaned</class>
