@@ -1181,8 +1181,15 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 		++page;
 		gbs_list = g_list_next(gbs_list);
 	}
-		
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_gbs), page);
+	if(page)
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+				  widgets.notebook_gbs), page);
+	else
+		on_notebook_gbs_switch_page(GTK_NOTEBOOK(
+				  widgets.notebook_gbs),
+				  NULL,
+				  page, 
+				  gbs_list);	
 	gui_set_gbs_frame_label(g);
 		
 	settings.book_last_page = page;
