@@ -41,7 +41,6 @@
 
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
-#include "main/gs_menu.h"
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "main/lists.h"
@@ -690,70 +689,63 @@ void gui_create_main_menu(GtkWidget *app)
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "daily_devotion1",
 				 view1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
-
-
-  gtk_widget_ref (view1_menu_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (app), "separator28",
-                            view1_menu_uiinfo[1].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (view1_menu_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (app), "new_bibletext_dialog1",
-                            view1_menu_uiinfo[2].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-			    
-
+				 (GtkDestroyNotify) gtk_widget_unref);	
 	
-  add_mods_to_menus(get_list(TEXT_LIST), _("_View/New Bibletext Dialog/"),
+	
+	gtk_widget_ref (view1_menu_uiinfo[1].widget);
+	gtk_object_set_data_full (GTK_OBJECT (app), "separator28",
+			    view1_menu_uiinfo[1].widget,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	
+	gtk_widget_ref (view1_menu_uiinfo[2].widget);
+	gtk_object_set_data_full (GTK_OBJECT (app), "new_bibletext_dialog1",
+			    view1_menu_uiinfo[2].widget,
+			    (GtkDestroyNotify) gtk_widget_unref);
+			    
+	
+	
+	gui_add_mods_to_menus(get_list(TEXT_LIST), _("_View/New Bibletext Dialog/"),
 			  (GtkMenuCallback)on_bibletext_item_activate);
 			  
 			  
-
-  gtk_widget_ref (view1_menu_uiinfo[3].widget);
-  gtk_object_set_data_full (GTK_OBJECT (app), "new_commentary_dialog1",
-                            view1_menu_uiinfo[3].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  
-  add_mods_to_menus(get_list(COMM_LIST), _("_View/New Commentary Dialog/"),
+	
+	gtk_widget_ref (view1_menu_uiinfo[3].widget);
+	gtk_object_set_data_full (GTK_OBJECT (app), "new_commentary_dialog1",
+			    view1_menu_uiinfo[3].widget,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	
+	
+	gui_add_mods_to_menus(get_list(COMM_LIST), _("_View/New Commentary Dialog/"),
 			  (GtkMenuCallback)on_commentary_item_activate);
-  
-
-  gtk_widget_ref (view1_menu_uiinfo[4].widget);
-  gtk_object_set_data_full (GTK_OBJECT (app), "new_dict_lex_dialog1",
-                            view1_menu_uiinfo[4].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-	add_mods_to_menus(get_list(DICT_LIST), _("_View/New Dictionary Dialog/"),
+	
+	
+	gtk_widget_ref (view1_menu_uiinfo[4].widget);
+	gtk_object_set_data_full (GTK_OBJECT (app), "new_dict_lex_dialog1",
+			    view1_menu_uiinfo[4].widget,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	
+	gui_add_mods_to_menus(get_list(DICT_LIST), _("_View/New Dictionary Dialog/"),
 			  (GtkMenuCallback)on_dictlex_item_activate);
+	
+	
+	gtk_widget_ref (view1_menu_uiinfo[5].widget);
+	gtk_object_set_data_full (GTK_OBJECT (app), "new_book_dialog1",
+			    view1_menu_uiinfo[5].widget,
+			    (GtkDestroyNotify) gtk_widget_unref);
 
-
-  gtk_widget_ref (view1_menu_uiinfo[5].widget);
-  gtk_object_set_data_full (GTK_OBJECT (app), "new_book_dialog1",
-                            view1_menu_uiinfo[5].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-
-	add_mods_to_menus(get_list(GBS_LIST), _("_View/New Book Dialog/"),
-			  (GtkMenuCallback)on_book_item_activate);
-
-
-
+	gui_add_mods_to_menus(get_list(GBS_LIST), 
+				_("_View/New Book Dialog/"),
+				(GtkMenuCallback)on_book_item_activate);
 
 	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "settings1",
 				 menubar1_uiinfo[4].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-
-  gtk_widget_ref (settings1_menu_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT(app), "verse_style",
+	gtk_widget_ref (settings1_menu_uiinfo[0].widget);
+	gtk_object_set_data_full (GTK_OBJECT(app), "verse_style",
                             settings1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
-//  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (settings1_menu_uiinfo[0].widget), TRUE);
 	settings.versestyle_item = settings1_menu_uiinfo[0].widget;
 
 	gtk_widget_ref(settings1_menu_uiinfo[1].widget);
