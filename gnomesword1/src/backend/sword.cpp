@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * sword.cpp support for sword modules
@@ -55,7 +54,6 @@
 #include "sword.h"
 #include "support.h"
 #include "gs_preferences_dlg.h"
-#include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_popup_cb.h"
 #include "gs_html.h"
@@ -81,7 +79,7 @@
 #include "interlinear.h"
 #include "gs_interlinear.h"
 #include "bibletext.h"
-
+#include "settings.h"
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
@@ -119,17 +117,13 @@ gboolean noteModified = false,	/* set to true is personal note has changed */
 
 gchar com_key[80] = "Rom 8:28",	/* current commentary key */
 *textmod, *commod, *dictmod;
+
 gint 
  dictpages,		/* number of dictionaries */
  compages,			/* number of commentaries */
  textpages,			/* number of Bible text */
  bookpages;
 
-/******************************************************************************
- externals
- */
-
-extern SETTINGS *settings;
 extern GtkWidget *htmlComments;
 extern gchar current_verse[80];	
 
@@ -200,8 +194,8 @@ void backend_init_sword(SETTINGS * s)
 	//-- setup versekeys for text and comm windows
 	vkText.Persist(1);
 	vkComm.Persist(1);
-	vkText = settings->currentverse;
-	vkComm = settings->currentverse;
+	vkText = settings.currentverse;
+	vkComm = settings.currentverse;
 
 
 	s->displaySearchResults = false;
@@ -397,9 +391,6 @@ int backend_get_verse_from_key(char *key)
 	return vkey.Verse();
 }
 
-//-------------------------------------------------------------------------------------------
-
-
 /******************************************************************************
  * 
  * option - option to set
@@ -474,7 +465,7 @@ void backend_display_new_font_color_and_size(SETTINGS * s)
 	curMod->Display();
 	display_commentary(s->currentverse);
 	backend_displayinDL(s->DictWindowModule, s->dictkey);
-	update_interlinear_page(settings);
+	update_interlinear_page(&settings);
 }
 
 /*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
@@ -830,4 +821,3 @@ char *backend_get_cipher_key(char *mod_name)
 	closedir(dir);
 	return NULL;	
 }
-/******   end of file   ******/

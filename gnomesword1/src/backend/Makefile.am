@@ -50,8 +50,8 @@ libbackend_a_SOURCES =  \
     verselist.h\
     viewcomm.cpp \
     viewcomm.h\
-    viewdict.cpp \
-    viewdict.h \
+    viewdict.cpp\
+    viewdict.h\
     viewtext.cpp \
     viewtext.h 
 

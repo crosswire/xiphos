@@ -38,10 +38,10 @@
 #include "gs_gnomesword.h"
 #include "bookmarks.h"
 #include "gs_bookmarks.h"
+#include "settings.h"
 
 GtkStyle *style;
-extern gchar *swbmDir;
-extern SETTINGS *settings;
+
 extern BM_TREE *p_bmtree;
 extern BM_TREE bmtree;
 extern GdkPixmap *pixmap1;
@@ -131,7 +131,7 @@ void loadbookmarks(GtkWidget * ctree_widget)
         gtk_clist_freeze(GTK_CLIST(ctree));
         gtk_clist_clear(GTK_CLIST(ctree));
         t = "|";
-        sprintf(conffile, "%spersonal.conf", swbmDir);
+        sprintf(conffile, "%spersonal.conf", settings.swbmDir);
         if (access(conffile, F_OK) == -1)
                 return;
         bookmarkInfo = new SWConfig(conffile);
@@ -169,14 +169,14 @@ void loadbookmarks(GtkWidget * ctree_widget)
         }
         delete bookmarkInfo;
 
-        if (dir = opendir(swbmDir)) {
+        if (dir = opendir(settings.swbmDir)) {
                 rewinddir(dir);
                 while ((ent = readdir(dir))) {
                         if ((strcmp(ent->d_name, "root.conf"))
                             && (strcmp(ent->d_name, "personal.conf"))
                             && (strcmp(ent->d_name, "."))
                             && (strcmp(ent->d_name, ".."))) {
-                                sprintf(conffile, "%s%s", swbmDir,
+                                sprintf(conffile, "%s%s", settings.swbmDir,
                                         ent->d_name);
                                 bookmarkInfo = new SWConfig(conffile);
                                 if ((sit =
@@ -222,7 +222,7 @@ void loadbookmarks(GtkWidget * ctree_widget)
                 closedir(dir);
         }
 
-        sprintf(conffile, "%sroot.conf", swbmDir);
+        sprintf(conffile, "%sroot.conf", settings.swbmDir);
         if (access(conffile, F_OK) == -1)
                 return;
         bookmarkInfo = new SWConfig(conffile);
@@ -311,7 +311,7 @@ void savebookmarks(GtkWidget * ctree_widget)
         SectionMap::iterator sit;
         list < string >::iterator it;
 
-        sprintf(persfile, "%spersonal.conf", swbmDir);
+        sprintf(persfile, "%spersonal.conf", settings.swbmDir);
 
         /*** delete all bookmark files before saving in case a top level was deleted ***/
         for (it = bmfiles.begin(); it != bmfiles.end(); it++) {
@@ -339,7 +339,7 @@ void savebookmarks(GtkWidget * ctree_widget)
                                         NULL, NULL, &is_leaf, NULL);
                 if (is_leaf) {
                         //g_warning("is_leaf");
-                        sprintf(conffile, "%s%s.conf", swbmDir, "root");
+                        sprintf(conffile, "%s%s.conf", settings.swbmDir, "root");
                         bmconf = new SWConfig(conffile);
                         emap = bmconf->Sections["ROOT"];
                         sprintf(buf, "branch%d", x++);
@@ -361,7 +361,7 @@ void savebookmarks(GtkWidget * ctree_widget)
                 }
 
                 else {
-                        sprintf(conffile, "%s%s", swbmDir,
+                        sprintf(conffile, "%s%s", settings.swbmDir,
                                 GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->
                                                  row.cell[1])->text);
                         bmconf = new SWConfig(conffile);
