@@ -63,7 +63,6 @@
 #include "gs_menu.h"
 #include "gs_popup_cb.h"
 #include "gs_mainmenu_cb.h"
-//#include "gs_listeditor.h"
 #include "gs_html.h"
 #include "gs_abouts.h"
 #include "gs_info_box.h"
@@ -181,24 +180,26 @@ extern gchar * current_filename,	/* filename for open file in study pad window  
  current_verse[80],		/* current verse showing in main window, interlinear window - commentary window */
 *mycolor, *mycolor;
 extern HISTORY historylist[];	/* sturcture for storing history items */
+
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
  ***********************************************************************************************/
-void initSWORD(GtkWidget * mainform)
+void initSWORD(SETTINGS *s)
 { 
 	ModMap::iterator it;	//-- iteratior
 	ConfigEntMap::iterator eit;	//-- iteratior
 	int i,			//-- counter
 	 j;			//-- counter 
 	gchar * lang;
+	GList *tmp;
  
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n","Initiating Sword\n");
 
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
 	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF)); 
-	percomMgr = new SWMgr();
+	percomMgr = new SWMgr(); 
 
 	curMod = NULL;		//-- set mods to null
 	comp1Mod = NULL;
@@ -232,22 +233,22 @@ void initSWORD(GtkWidget * mainform)
 	
 	settings->displaySearchResults = false;
 	
-	MainFrm = lookup_widget(mainform, "settings->app");	//-- save mainform for use latter
-	NEtext = lookup_widget(mainform, "textComments");	//-- get note edit widget
+	MainFrm = s->app;	//-- save mainform for use latter
+	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
 	GTKEntryDisp::__initialize();	//-- this is for gtktext	
-	percomDisplay = new GTKPerComDisp(lookup_widget(mainform, "textComments"));
-	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
-	commDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
-	bookDisplay = new ComEntryDisp(settings->htmlBook);
-	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
+	percomDisplay = new GTKPerComDisp(lookup_widget(s->app, "textComments"));
+	UTF8Display = new GTKutf8ChapDisp(lookup_widget(s->app, "htmlTexts"));
+	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"));
+	bookDisplay = new ComEntryDisp(s->htmlBook);
+	comp1Display = new InterlinearDisp(s->htmlInterlinear);
 	FPNDisplay = new ComEntryDisp(htmlComments);
-	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
+	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"));
 	compages = 0;
 	dictpages = 0;
 
 
-	if (settings->showsplash) {
+	if (s->showsplash) {
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	}
@@ -282,7 +283,6 @@ void initSWORD(GtkWidget * mainform)
 			curdictMod->Disp(dictDisplay);
 		} else if (!strcmp((*it).second->Type(), "Generic Book")) {	//-- set dictionary modules   
 			curbookMod = (*it).second;
-//			g_warning(curbookMod->Name());
 			bookmods = g_list_append(bookmods, curbookMod->Name());
 			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
 			curbookMod->Disp(bookDisplay);
@@ -295,31 +295,31 @@ void initSWORD(GtkWidget * mainform)
 			//-- if driver is RawFiles                     
 			if ((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") {
 				percomMod = (*it).second;
-				if (settings->formatpercom)
+				if (s->formatpercom)
 					percomMod->Disp(FPNDisplay);	//-- if TRUE use formatted display
 				else
 					percomMod->Disp(percomDisplay);	//-- else standard display
 				percommods = g_list_append(percommods, percomMod->Name());
 				usepersonalcomments = TRUE;	//-- used by verseChange function (sw_gnomesword.cpp)
-				percomMod->SetKey(settings->currentverse);
-				gtk_widget_show(lookup_widget(settings->app, "vbox2"));	//-- show personal comments page because we
+				percomMod->SetKey(s->currentverse);
+				gtk_widget_show(lookup_widget(s->app, "vbox2"));	//-- show personal comments page because we
 			}	//-- have at least one personl module
 		}
 	}
 	//-- interlinear
-	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end();
-	     it++) {
+	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++) {
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			comp1Mod->Disp(comp1Display);
 		}
-	}
+	} 
+	
 	//-- get list of  globalOptions for menus
 	OptionsList optionslist = mainMgr->getGlobalOptions();
 	for (OptionsList::iterator it = optionslist.begin(); it != optionslist.end(); it++) {	
 		//-- save options in a glist for popup menus
 		options = g_list_append(options, (gchar *)(*it).c_str());
-	}
+	}	
 }
 
 void modNameFromDesc(gchar * modName, gchar * modDesc)
@@ -336,10 +336,10 @@ void ChangeVerseSWORD(void)
 	
 	strcpy(current_verse, vkText);
 	ApplyChange = false;
+	//--------------------------------------------------- change main window			
 	if (changemain && havebible) {
-		if (curMod) {	//--------------------------------------------------- change main window
-			curMod->SetKey(vkText);
-			
+		if (curMod) {	curMod->SetKey(vkText);
+			//----------- add verse to history menu
 			if (addhistoryitem) {
 				if (strcmp(settings->currentverse, historylist[historyitems - 1].verseref))
 					addHistoryItem(settings->app,
@@ -347,8 +347,8 @@ void ChangeVerseSWORD(void)
 						       settings->currentverse);
 			}			
 			addhistoryitem = TRUE;
-			
-			strcpy(settings->currentverse, curMod->KeyText());	//----------------------- remember last verse
+			//----------------------- remember last verse
+			strcpy(settings->currentverse, curMod->KeyText());	
 			char s1[255], s2[255];
 			curVerse = vkText.Verse();
 			curChapter = vkText.Chapter();
@@ -369,19 +369,19 @@ void ChangeVerseSWORD(void)
 	changemain = TRUE;
 	
 	//--------------------------------------------------------------- change interlinear verses
-	updateinterlinearpage();
+	if(settings->dockedInt)
+		updateinterlinearpage();
+	else
+		updateIntDlg();
 	
-	//--------------------------------------------------------------- change personal notes editor	 if not in edit mode
+	//------------------------------- change personal notes editor	 if not in edit mode
 	if (settings->notebook3page == 2) {
-		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
-			if (settings->editnote) {
-				//-- do nothing
-			} else {
+		if (settings->notefollow) {  //-- if personal notes follow button is active (on)                   
+			if (!settings->editnote){
 				if (usepersonalcomments && percomMod) {
-					percomMod->SetKey(vkComm);	//-- set personal module to current verse
+					percomMod->SetKey(vkComm); //-- set personal module to current verse
 					percomMod->Display();	//-- show change
-					noteModified = false;	//-- we just loaded comment so it is not modified 
-					
+					noteModified = false;	//-- we just loaded comment so it is not modified 					
 				}
 			}
 		}
@@ -442,37 +442,79 @@ void changeVerseComSWORD(void)
 	vkComm.AutoNormalize(1);
 }
 
+/*** please fix me ***/
+void updateIntDlg(void)
+{
+	GList *modList = NULL;
+	ModMap::iterator it;
+	
+	it = mainMgr1->Modules.find(settings->Interlinear1Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
+		comp1Mod = (*it).second;	//-- change current module to new module
+		comp1Mod->SetKey(current_verse);	//-- set key to current verse
+	}
+	modList = g_list_append(modList,(SWModule*)comp1Mod);
+	
+	it = mainMgr1->Modules.find(settings->Interlinear2Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
+		comp1Mod = (*it).second;	//-- change current module to new module
+	}
+	modList = g_list_append(modList,(SWModule*)comp1Mod);
+	
+	it = mainMgr1->Modules.find(settings->Interlinear3Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
+		comp1Mod = (*it).second;	//-- change current module to new module
+	}		
+	modList = g_list_append(modList,(SWModule*)comp1Mod);
+	
+	it = mainMgr1->Modules.find(settings->Interlinear4Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
+		comp1Mod = (*it).second;	//-- change current module to new module
+	}		
+	modList = g_list_append(modList,(SWModule*)comp1Mod);
+	
+	it = mainMgr1->Modules.find(settings->Interlinear5Module);	//-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
+		comp1Mod = (*it).second;	//-- change current module to new module
+		comp1Mod->SetKey(current_verse);	//-- set key to current verse
+	}		
+	modList = g_list_append(modList,(SWModule*)comp1Mod);		
+	
+	IntDisplay(modList);
+	g_list_free(modList);
+		
+}
+
 /*
  * Sets up the interlinear html widget and calls changecomp1ModSWORD for each 
  * interlinear module
  */
 void updateinterlinearpage(void)
-{
-	GtkWidget *html_widget;
+{	
 	gchar tmpBuf[256];
 	gchar *utf8str;
 	gint utf8len;
 
-	if (settings->notebook3page == 3) {
-		html_widget = lookup_widget(settings->app, "textComp1");
-		beginHTML(html_widget, TRUE);
+	if (settings->notebook3page == 4) {
+		//html_widget = lookup_widget(settings->app, "textComp1");
+		beginHTML(settings->htmlInterlinear, TRUE);
 		sprintf(tmpBuf,
 			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings->bible_bg_color,
 			settings->bible_text_color, settings->link_color);
-		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
+		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(html_widget), utf8str, utf8len);
+		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
 		changecomp1ModSWORD(settings->Interlinear1Module);
 		changecomp1ModSWORD(settings->Interlinear2Module);
 		changecomp1ModSWORD(settings->Interlinear3Module);
 		changecomp1ModSWORD(settings->Interlinear4Module);
 		changecomp1ModSWORD(settings->Interlinear5Module);
 		sprintf(tmpBuf, "</table></body></html>");
-		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
+		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(html_widget), utf8str, utf8len);
-		endHTML(html_widget);
+		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
+		endHTML(settings->htmlInterlinear);
 	}
 }
 
@@ -673,9 +715,11 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 			settings->greekaccentsint = choice;
 		}
 		
-		if (havebible) {
+		if(settings->dockedInt && havebible)
 			updateinterlinearpage();
-		}
+		else
+			updateIntDlg();
+		
 		break;
 	}
 }
@@ -799,22 +843,11 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 void changecomp1ModSWORD(gchar * modName)
 {
 	ModMap::iterator it;
-	//GList *tmp = NULL;
-	//bool value = false;
 	
-	//tmp =  NULL;
 	it = mainMgr1->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
 	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
 		comp1Mod = (*it).second;	//-- change current module to new module
 		comp1Mod->SetKey(current_verse);	//-- set key to current verse
-		//tmp = options;
-		/*while(tmp != NULL) {
-			value = load_module_options((*it).second->Name(), (gchar*)tmp->data);					
-			globaloptionsSWORD((gchar*)tmp->data, INTERLINEAR_WINDOW, value, FALSE);
-			//g_warning("%s = %d",(gchar*)tmp->data,value);	
-			tmp = g_list_next(tmp);
-		}*/
-		//g_list_free(tmp);
 		comp1Mod->Display();	//-- show it to the world
 	}
 }

@@ -44,7 +44,6 @@
 #include "gs_history.h"
 #include "support.h"
 #include "gs_file.h"
-//#include "gs_listeditor.h"
 #include "gs_abouts.h"
 
 
@@ -341,7 +340,6 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)
 {
-	GnomeDockItem* item;
 	static gboolean firsttime = TRUE;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to FALSE
 	if (!firsttime) {
 		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
@@ -359,8 +357,12 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	else if(page_num == 1 && settings->editgbs) {
 		gtk_widget_show(settings->toolbarBooks);
 	}
-	
-	else if(page_num == 4) {
+	/*
+	else if(page_num == 3 && !settings->dockedInt) {
+		gtk_widget_show(settings->toolbarStudypad);	
+	}	
+	*/
+	else if(page_num == 3) {
 		gtk_widget_show(settings->toolbarStudypad);	
 	}		
 }

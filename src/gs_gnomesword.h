@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#include "sw_gnomesword.h"
+//#include "sw_gnomesword.h"
 
 #define MAIN_TEXT_WINDOW 0 
 #define INTERLINEAR_WINDOW 1
@@ -53,9 +53,12 @@ struct _settings {
 		*shortcut_bar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
-		*hboxToolbar, /* for editor toolbars ??? */
+		*workbook, /* notebook - commentaries, editors, and interlinear page */	
+	
+	/* dock/undock stuff */
 		*dockSB, /* dock for shortcut bar */
 		*vboxDock, 
+		*frameInt, /* frame for interlinear html  */ 
 	
 	/* toolbars */
 		*toolbarOptions,
@@ -70,6 +73,7 @@ struct _settings {
 		*htmlcomm, /* html commentary widget */
 		*htmlSP, /* studypad html widget */
 		*htmlBook, /* gbs html widget */
+		*htmlInterlinear, /* interlinear html widget */
 	
 	/* popup menu item widgets */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
@@ -174,7 +178,10 @@ struct _settings {
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		notefollow, /* notes follow Bible text when true */
+		
+		/** if items are docked **/
 		docked, /* true when shortcut bar is docked */
+		dockedInt, /* true when interlinear page is docked */
 		
 		/** editors **/
 		editnote, /* true when percom html widget is in edit mode */
@@ -186,7 +193,6 @@ struct _settings {
 	GList 
 		*settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
-
 
 /*** function prototypes ***/
 
