@@ -103,7 +103,7 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	const char *ver;
 	gchar version[40];
 	
-	dlg = create_AboutSword();
+	dlg = gui_create_about_sword();
 	text1 = lookup_widget(dlg, "txtAboutSword");
 	version_label = lookup_widget(dlg, "version_label");
 	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);	
@@ -211,7 +211,7 @@ on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *AboutBox;
 
-	AboutBox = create_about();
+	AboutBox = gui_create_about_gnomesword();
 	gtk_widget_show(AboutBox);
 }
 

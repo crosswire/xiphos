@@ -19,15 +19,27 @@ msgstr "Anwendungshöhe"
 msgid "Bible Texts"
 msgstr "Bibeltexte"
 
+# src/gs_shortcutbar.c
+msgid "Book"
+msgstr "Buch"
+
 # src/gs_gui.c
 # src/gs_gui.c
 # src/gs_shortcutbar.c
 msgid "Books"
 msgstr "Bücher"
 
+# src/gs_preferences_dlg.c
+msgid "Default Dictionary"
+msgstr "Wörterbuchvorgabe"
+
 # src/gs_gui.c
 msgid "Detach/Attach Shortcut Bar"
 msgstr "Schnellzugriffsleiste abreißen/andocken"
+
+# src/gs_menu.c
+msgid "Dict/Lex"
+msgstr "Wörterbücher/Lexika"
 
 # src/gs_preferences_dlg.c
 msgid "Dock Shortcut Bar"
@@ -37,25 +49,81 @@ msgstr "Schnellzugriffsleiste angedockt"
 msgid "Font Colors and Sizes"
 msgstr "Darstellung"
 
-# gs_preferences_dlg.c
+# src/gs_preferences_dlg.c
 msgid "Font Size"
 msgstr "Zeichensatzgröße"
+
+# src/gs_menu.c
+msgid "Footnotes"
+msgstr "Fußnoten"
 
 # src/gs_preferences_dlg.c
 msgid "GnomeSword - Settings"
 msgstr "GnomeSword - Einstellungen"
+
+# src/menu.c
+msgid "Greek Accents"
+msgstr "Griechische Akzente"
+
+# src/gs_preferences_dlg.c
+msgid "Greek Lex Viewer"
+msgstr "Griechisches Lexikon Betrachter"
+
+# src/gs_menu.c
+msgid "Headings"
+msgstr "Überschriften"
+
+# src/gs_menu.c
+msgid "Hebrew Cantillation"
+msgstr "Hebräische Cantillation"
+
+# src/gs_preferences_dlg.c
+msgid "Hebrew Lex Viewer"
+msgstr "Hebräisches Lexikon Betrachter"
+
+# src/gs_menu.c
+msgid "Hebrew Vowel Points"
+msgstr "Hebräische Selbstlaute Punkte"
 
 # src/gs_gui.c
 msgid "Hide/Show Shortcut Bar"
 msgstr "Schnellzugriffsleiste verstecken/anzeigen"
 
 # src/gs_preferences_dlg.c
+msgid "In Dict/Lex Window"
+msgstr "Anzeigen im Wörterbuch/Lexika Fenster"
+
+# src/gs_preferences_dlg.c
+msgid "In Shortcut bar Viewer"
+msgstr "Anzeigen im Betrachter der Schnellzugriffsleiste"
+
+# src/menu.c
+msgid "Lemmas"
+msgstr "Kurztitel"
+
+# src/gs_preferences_dlg.c
 msgid "Misc Interface Settings"
 msgstr "Sonstiges"
 
 # src/gs_preferences_dlg.c
+msgid "Misc"
+msgstr "Sonstiges"
+
+# src/gs_menu.c
+msgid "Morphological Tags"
+msgstr "Morphologische Marken"
+
+# src/gs_preferences_dlg.c
 msgid "Preferences"
 msgstr "Vorlieben"
+
+# src/gs_menu.c
+msgid "Scripture Cross-reference"
+msgstr "Querverweise der Schrift"
+
+# src/gs_shortcutbar.c
+msgid "Search Book"
+msgstr "Suche Buch"
 
 # src/gs_preferences_dlg.c
 msgid "Shortcut Bar"
@@ -66,25 +134,39 @@ msgid "Shortcut Bar Settings"
 msgstr "Schnellzugriffsleiste"
 
 # src/gs_preferences_dlg.c
-msgid "Show Book Group"
+msgid "Show Books Group"
 msgstr "Zeige Buchgruppe"
+
+# src/gs_menu.c
+# src/gs_preferences_dlg.c
+msgid "Show Tabs"
+msgstr "Zeige Reiter"
+
+# src/gs_menu.c
+msgid "Strong's Numbers"
+msgstr ",,Strongs'' Nummern"
+
+# src/gs_setup.c
+msgid "SWORD version"
+msgstr "Sword-Version"
 
 # src/gs_abouts.c
 msgid ""
 "The SWORD Project is an effort to create an ever expanding software "
-"package for research and study of God and His Word. The SWORD Bible "
-"Framework allows easy manipulation of Bible texts, commentaries, "
-"lexicons, dictionaries, etc.  Many frontends are build using this "
-"framework.  An installed module set may be shared between any "
-"frontend using the framework."
+"package for research and study of God and His Word. The SWORD Bible Framework allows easy manipulation of Bible texts, commentaries, lexicons, dictionaries, etc.  Many frontends are build using this framework. An installed module set may be shared between any frontend using the framework."
+
 msgstr ""
 "Das Sword Projekt bemüht sich eine immer wachsende Softwareumgebung "
 "zum Forschen und Studieren nach Gott und Seinem Word zur Verfügung zu "
 "stellen. Diese von Sword zur Verfügung gestellte Arbeitsumgebung "
 "erlaubt einfache Bearbeitung von Bibeltexten, Kommentaren, Lexika, "
-"Wörterbüchern etc. Viele Programme bauen auf dieser Umgebung auf. "
+"Wörterbüchern und mehr. Viele Programme bauen auf dieser Umgebung auf. "
 "Installierte Module können unter diesen Programmen gemeinsam benutzt "
 "werden."
+
+# src/gs_setup.c
+msgid "This guide will take you through the initial setup of GnomeSword"
+msgstr "Dieser Assistent wird Sie bei der Einrichtung von GnomeSword unterstützen"
 
 # src/gs_gui.c
 msgid "Toogle Footnotes"
@@ -102,6 +184,10 @@ msgstr ",,Strongs'' Nummern umschalten"
 msgid "Upper Pane Height"
 msgstr "Höhe des oberen Bereichs"
 
+# src/gs_preferences_dlg.c
+msgid "Use Default Dictionary"
+msgstr "Benutzte Wörterbuchvorgabe"
+
 # src/gs_abouts.c
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who "
@@ -109,6 +195,14 @@ msgid ""
 msgstr ""
 "Wir möchten Troy Griffitts und allen Anderen danken, die das Sword "
 "Projekt ermöglichten."
+
+# src/gs_setup.c
+msgid "Welcome To GnomeSword"
+msgstr "Willkommen zu GnomeSword"
+
+# src/gs_preferences_dlg.c
+msgid "where to View Dict/Lex When Link or Word Clicked"
+msgstr "Angeklickte Links oder Worte"
 
 #
 # unsorted below this point :o(
@@ -309,7 +403,7 @@ msgstr "Chronik löschen"
 
 # src/gs_gui.c
 msgid "Daily Devotion"
-msgstr "Losung"
+msgstr "Tageslosung"
 
 # src/gs_gui.c
 msgid "Show the Daily Devotion for Today"
@@ -917,7 +1011,7 @@ msgstr "Soll GnomeSword geöffnet werden mit"
 
 # src/gs_setup.c
 msgid "Settings you choose as default"
-msgstr "Ihre Standard-Einstellungen"
+msgstr "Ihren Standard-Einstellungen"
 
 # src/gs_setup.c
 msgid "Settings used the last time GnomeSword ran"
@@ -925,7 +1019,7 @@ msgstr "Einstellungen der letzten GnomeSword-Sitzung"
 
 # src/gs_setup.c
 msgid "Settings to use on first program run"
-msgstr "Benutzte Einstellungen beim ersten Programstart"
+msgstr "Einstellungen für den ersten Programstart"
 
 # src/gs_setup.c:746
 msgid "Show Bible Tabs"
@@ -956,8 +1050,9 @@ msgid ""
 "            Thank-you for using GnomeSword.\n"
 "Click Finish to close this dialog and run GnomeSword."
 msgstr ""
-"            Danke für das Benutzen von GnomeSword.\n"
-"       Klicken Sie auf Fertig um diesen Dialog zu schließen und GnomeSword zu starten."
+"Danke für das Benutzen von GnomeSword.\n"
+"Klicken Sie auf Fertig um diesen Dialog zu schließen\n"
+"und GnomeSword zu starten."
 
 # src/gs_shortcutbar.c
 msgid "Large Icons"
