@@ -11,11 +11,19 @@ if test "x$gnome2" = xyes; then
 	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])	
 	DIRS="backend main gnome2"
 	AC_SUBST(DIRS)
+	GNAME="GnomeSword2 Bible Study Tool"
+	AC_SUBST(GNAME)	
+	gnomesword_exec="gnomesword2"
+	AC_SUBST(gnomesword_exec)	
 	PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 libxml-2.0 sword,,exit)
 	
 else		
 	DIRS="backend main gnome"
 	AC_SUBST(DIRS)
+	GNAME="GnomeSword Bible Study Tool"
+	AC_SUBST(GNAME)	
+	gnomesword_exec="gnomesword-1.0"
+	AC_SUBST(gnomesword_exec)
 	PKG_CHECK_MODULES(GNOME, gtkhtml-1.1 gal libxml sword,,exit)
 fi
 AC_SUBST(GNOME_LIBS)
@@ -134,8 +142,7 @@ src/backend/Makefile
 src/gnome/Makefile
 src/gnome2/Makefile
 src/main/Makefile
-gnomesword2.desktop
-gnomesword-1.0.desktop
+gnomesword.desktop
 ])
 
 echo
