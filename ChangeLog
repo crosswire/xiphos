@@ -1,5 +1,6 @@
 2001-08-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* change to release 0.5.0
 	* changed main menu item 'Bookmarks' to 'Quickmarks' to
 	   avoid confusion with shortcut bar bookmarks
 	* added choice of Lexicon to be used when strongs number

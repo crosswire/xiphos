@@ -55,173 +55,172 @@ GtkWidget *htmlComments;
 GtkWidget *usehtml;
 
 extern GtkWidget *textDict;
-extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
+extern GString *gs_clipboard;	/* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern SETTINGS *settings;
 
 /***************************************************************************************************
  *on_url taken form gtkhtml project
  ***************************************************************************************************/
-void
-on_url (GtkHTML *html, const gchar *url, gpointer data)
+void on_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	GnomeApp *app;
 	gchar buf[255];
-	
-	app = GNOME_APP (data);
+
+	app = GNOME_APP(data);
 	if (url == NULL)
-		gnome_appbar_set_status (GNOME_APPBAR (settings->appbar), "");
-	else{
+		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
+					"");
+	else {
 		if (*url == '@') {
 			++url;
 			//str = showfirstlineStrongsSWORD(atoi(url));
-			sprintf(buf,"Show %s in main window",url);
-		}else if (*url == '#') {
+			sprintf(buf, "Show %s in main window", url);
+		} else if (*url == '#') {
 			++url;
-			if(*url == 'T') ++url;
-			if(*url == 'G'){
+			if (*url == 'T')
+				++url;
+			if (*url == 'G') {
 				gchar *tmpbuf;
-				++url; 
+				++url;
 				tmpbuf = g_strdup(url);
-				displaydictlexSBSWORD(settings->lex_greek, tmpbuf, settings);
-			//gotoBookmarkSWORD(settings->lex_greek, buf);  
+				displaydictlexSBSWORD(settings->lex_greek,
+						      tmpbuf, settings);
+				//gotoBookmarkSWORD(settings->lex_greek, buf);  
 				g_free(tmpbuf);
 			}
-			if(*url == 'H'){
+			if (*url == 'H') {
 				gchar *tmpbuf;
-				++url;  		
+				++url;
 				tmpbuf = g_strdup(url);
-				displaydictlexSBSWORD(settings->lex_hebrew, tmpbuf, settings);
+				displaydictlexSBSWORD(settings->lex_hebrew,
+						      tmpbuf, settings);
 				//gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 				g_free(tmpbuf);
-			}		  		
+			}
 			//str = showfirstlineStrongsSWORD(atoi(url));
-			sprintf(buf,"Go to Strongs %s",url);
-		}else if (*url == 'M') {
+			sprintf(buf, "Go to Strongs %s", url);
+		} else if (*url == 'M') {
 			gchar *tmpbuf;
 			++url;
 			tmpbuf = g_strdup(url);
 			displaydictlexSBSWORD("Packard", tmpbuf, settings);
 			g_free(tmpbuf);
-			sprintf(buf,"Morph Tag: %s",url);	
-		} else if(*url == '[') {
+			sprintf(buf, "Morph Tag: %s", url);
+		} else if (*url == '[') {
 			++url;
-			while(*url != ']') {
+			while (*url != ']') {
 				++url;
 			}
 			++url;
-			sprintf(buf,"%s",url);	
-		} else if(*url == '*') {
+			sprintf(buf, "%s", url);
+		} else if (*url == '*') {
 			++url;
-			sprintf(buf,"%s",url);		
-		} else 
-			sprintf(buf,"Go to %s",url);
-		gnome_appbar_set_status (GNOME_APPBAR (settings->appbar), buf);
+			sprintf(buf, "%s", url);
+		} else
+			sprintf(buf, "Go to %s", url);
+		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
+					buf);
 	}
 }
 
 /***************************************************************************************************
  *link in commentary module clicked
  ***************************************************************************************************/
-void
-on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar 
-		*buf,
-		*modbuf=NULL,
-		tmpbuf[255];
-	gchar 
-		newmod[80], 
-		newref[80];
-	gint 
-		i=0,
-		havemod=0;
-	
-	if(*url == '@')   {
+	gchar * buf, *modbuf = NULL, tmpbuf[255];
+	gchar newmod[80], newref[80];
+	gint i = 0, havemod = 0;
+
+	if (*url == '@') {
 		++url;
-		swapmodsSWORD((gchar*)url);
-	 } else if(*url == '[')   {
+		swapmodsSWORD((gchar *) url);
+	} else if (*url == '[') {
 		++url;
-		while(*url != ']') {
+		while (*url != ']') {
 			tmpbuf[i++] = *url;
-			tmpbuf[i+1] = '\0';
+			tmpbuf[i + 1] = '\0';
 			++url;
-		}		
-		showmoduleinfoSWORD(tmpbuf); 
-	 /*** let's seperate mod version and passage ***/	
-	} else if(!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7)) {	 	
+		}
+		showmoduleinfoSWORD(tmpbuf);
+	 /*** let's seperate mod version and passage ***/
+	} else if (!strncmp(url, "version=", 7)
+		   || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
-		mybuf = strstr(url, "version=") ;
-		if(mybuf){
-			mybuf = strchr(mybuf,'=');
+		mybuf = strstr(url, "version=");
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
 			++mybuf;
-			i=0;
-			while(mybuf[i] != ' ') {
+			i = 0;
+			while (mybuf[i] != ' ') {
 				newmod[i] = mybuf[i];
-				newmod[i+1] = '\0';
+				newmod[i + 1] = '\0';
 				++i;
 				++havemod;
 			}
 			//g_warning(newmod);
 		}
 		mybuf = NULL;
-		mybuf = strstr(url, "passage=") ;
+		mybuf = strstr(url, "passage=");
 		i = 0;
-		if(mybuf){
-			mybuf = strchr(mybuf,'=');
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
 			++mybuf;
-			while(i < strlen(mybuf)) {
+			while (i < strlen(mybuf)) {
 				newref[i] = mybuf[i];
-				newref[i+1] = '\0';
+				newref[i + 1] = '\0';
 				++i;
 			}
 			//g_warning(newref);
-		} 
-		if(havemod>2){ 
+		}
+		if (havemod > 2) {
 			modbuf = newmod;
 			//g_warning("newmod = %s",newmod);
-		}else{ 
+		} else {
 			modbuf = settings->MainWindowModule;
 			//g_warning("modbuf = %s",modbuf);
 		}
 		buf = g_strdup(newref);
 		getVerseListSBSWORD(modbuf, buf, settings);
-		g_free(buf);		
-	 /*** let's seperate mod version and passage ***/	
-	} else if(!strncmp(url, "type=", 5)) {	 	
+		g_free(buf);
+	 /*** let's seperate mod version and passage ***/
+	} else if (!strncmp(url, "type=", 5)) {
 		gchar *mybuf = NULL;
-		gint type=0;
-		mybuf = strstr(url, "type=") ;
-		if(mybuf){
-			mybuf = strchr(mybuf,'=');
+		gint type = 0;
+		mybuf = strstr(url, "type=");
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
 			++mybuf;
-			i=0;
-			while(mybuf[i] != ' ') {
+			i = 0;
+			while (mybuf[i] != ' ') {
 				newmod[i] = mybuf[i];
-				newmod[i+1] = '\0';
+				newmod[i + 1] = '\0';
 				++i;
 				++havemod;
 			}
 			//g_warning(newmod);
 		}
 		mybuf = NULL;
-		mybuf = strstr(url, "value=") ;
+		mybuf = strstr(url, "value=");
 		i = 0;
-		if(mybuf){
-			mybuf = strchr(mybuf,'=');
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
 			++mybuf;
-			if(mybuf[0] == 'H') type = 0;
-			if(mybuf[0] == 'G') type = 1;	
+			if (mybuf[0] == 'H')
+				type = 0;
+			if (mybuf[0] == 'G')
+				type = 1;
 			++mybuf;
-			sprintf(newref,"%5.5d",atoi(mybuf));
+			sprintf(newref, "%5.5d", atoi(mybuf));
 			//g_warning(newref);
-		} 
-		if(havemod>2){ 
-			if(!strcmp(newmod,"Strongs") && type == 0)
+		}
+		if (havemod > 2) {
+			if (!strcmp(newmod, "Strongs") && type == 0)
 				modbuf = "StrongsHebrew";
-			if(!strcmp(newmod,"Strongs") && type == 1)
+			if (!strcmp(newmod, "Strongs") && type == 1)
 				modbuf = "StrongsGreek";
-			
-		}else{ 
+
+		} else {
 			modbuf = "";
 			return;
 		}
@@ -229,32 +228,33 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
 		displaydictlexSBSWORD(modbuf, buf, settings);
 		g_free(buf);
-			
-	}else if (*url == '#') {
+
+	} else if (*url == '#') {
 		++url;		/* remove # */
-		if(*url == 'T') ++url;
-		if(*url == 'G'){
-			++url; 
+		if (*url == 'T')
+			++url; /* remove T */
+		if (*url == 'G') {
+			++url; /* remove G */
 			buf = g_strdup(url);
-			displaydictlexSBSWORD(settings->lex_greek, buf, settings);
-			//gotoBookmarkSWORD(settings->lex_greek, buf);  
+			//displaydictlexSBSWORD(settings->lex_greek, buf, settings);
+			gotoBookmarkSWORD(settings->lex_greek, buf);
 			g_free(buf);
 		}
-		if(*url == 'H'){
-			++url;  		
+		if (*url == 'H') {
+			++url; /* remove H */
 			buf = g_strdup(url);
-			displaydictlexSBSWORD(settings->lex_hebrew, buf, settings);
-			//gotoBookmarkSWORD(settings->lex_hebrew, buf);  
+			//displaydictlexSBSWORD(settings->lex_hebrew, buf, settings);
+			gotoBookmarkSWORD(settings->lex_hebrew, buf);
 			g_free(buf);
-		}		  		
+		}
 	} else if (*url == 'M') {
 		++url;		/* remove M */
-		buf = g_strdup(url); 
-		displaydictlexSBSWORD("Packard", buf, settings);
-		//gotoBookmarkSWORD("Packard", buf);  
+		buf = g_strdup(url);
+		//displaydictlexSBSWORD("Packard", buf, settings);
+		gotoBookmarkSWORD("Packard", buf);
 		g_free(buf);
-	} 
-	
+	}
+
 }
 
 /***************************************************************************************************
@@ -265,48 +265,49 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, tmpbuf[255];
 	gint i = 0;
-	
+
 	if (*url == '#') {
 		++url;		/* remove # */
-		if(*url == 'T') ++url;
-		if(*url == 'G'){
-			++url; 
+		if (*url == 'T')
+			++url;
+		if (*url == 'G') {
+			++url;
 			buf = g_strdup(url);
 			//displaydictlexSBSWORD(settings->lex_greek, buf, settings);
-			gotoBookmarkSWORD(settings->lex_greek, buf);  
+			gotoBookmarkSWORD(settings->lex_greek, buf);
 			g_free(buf);
 		}
-		if(*url == 'H'){
-			++url;  		
+		if (*url == 'H') {
+			++url;
 			buf = g_strdup(url);
 			//displaydictlexSBSWORD(settings->lex_hebrew, buf, settings);
-			gotoBookmarkSWORD(settings->lex_hebrew, buf);  
+			gotoBookmarkSWORD(settings->lex_hebrew, buf);
 			g_free(buf);
-		}		  		
+		}
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
 		//displaydictlexSBSWORD("Packard", buf, settings);
-		gotoBookmarkSWORD("Packard", buf);  
+		gotoBookmarkSWORD("Packard", buf);
 		g_free(buf);
-	} else  if(*url == '*')   {
+	} else if (*url == '*') {
 		++url;
-		while(*url != ']') {			
+		while (*url != ']') {
 			++url;
-		} 
+		}
 		++url;
 		buf = g_strdup(url);
 		changeVerseSWORD(buf);
 		g_free(buf);
-	} else if(*url == '[')   {
+	} else if (*url == '[') {
 		++url;
-		while(*url != ']') {
+		while (*url != ']') {
 			tmpbuf[i++] = *url;
-			tmpbuf[i+1] = '\0';
+			tmpbuf[i + 1] = '\0';
 			++url;
-		}		
-		showmoduleinfoSWORD(tmpbuf);  
-	} else {		
+		}
+		showmoduleinfoSWORD(tmpbuf);
+	} else {
 		buf = g_strdup(url);
 		changeVerseSWORD(buf);
 		g_free(buf);
@@ -318,7 +319,7 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
  ******************************************************************************/
 static gint
 html_button_pressed(GtkWidget * html, GdkEventButton * event,
-		    gpointer *data)
+		    gpointer * data)
 {
 	usehtml = html;
 	settings->whichwindow = GPOINTER_TO_INT(data);
@@ -329,12 +330,13 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		break;
 	case 3:
 		//gtk_html_select_word(GTK_HTML(html));
-		
+
 		break;
 	}
 	return 0;
-	
+
 }
+
 /***************************************************************************************************
  *copy menu item clicked in any html window
  *user_data - window (GtkHTML widget) to copy from
@@ -352,7 +354,7 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
-	g_string_free(gs_clipboard,TRUE);
+	g_string_free(gs_clipboard, TRUE);
 	gs_clipboard = g_string_new(buf);
 	//g_print(gs_clipboard->str);
 }
@@ -361,31 +363,33 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
  *lookup word in dict/lex module
  ***************************************************************************************************/
 void on_html_lookup_word_activate(GtkMenuItem * menuitem,
-				       gpointer user_data)
+				  gpointer user_data)
 {
 	GtkWidget *entry, *notebook;
 	gchar *buf;
 	GtkHTML *html;
 	gint page;
-		
-	page = GPOINTER_TO_INT(user_data);	
-	if(page < 1000) {		
-		/* set notebook page */		
-		notebook = lookup_widget(settings->app,"notebook4");
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),page ); 
-	}	
+
+	page = GPOINTER_TO_INT(user_data);
+	if (page < 1000) {
+		/* set notebook page */
+		notebook = lookup_widget(settings->app, "notebook4");
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
+	}
 	html = GTK_HTML(usehtml);
 	gtk_html_select_word(GTK_HTML(html));
 	buf = NULL;
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
-	if (buf){
-		entry = lookup_widget(settings->app,"dictionarySearchText"); 
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);	
+	if (buf) {
+		entry =
+		    lookup_widget(settings->app, "dictionarySearchText");
+		gtk_entry_set_text(GTK_ENTRY(entry), buf);
 		//dictSearchTextChangedSWORD(buf);
 	}
 }
+
 /***************************************************************************************************
  *lookup selection in current dict/lex module
  ***************************************************************************************************/
@@ -396,23 +400,24 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	gchar *buf;
 	GtkHTML *html;
 	gint page;
-	
+
 	page = GPOINTER_TO_INT(user_data);
-	if(page < 1000) {		
-		notebook = lookup_widget(settings->app,"notebook4");
+	if (page < 1000) {
+		notebook = lookup_widget(settings->app, "notebook4");
 		/* set notebook page */
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),page ); 
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
 	}
-	//widget = lookup_widget(settings->app, htmlname);	
+	//widget = lookup_widget(settings->app, htmlname);      
 	html = GTK_HTML(usehtml);
 	//gtk_html_select_word(GTK_HTML(html));
 	buf = NULL;
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
-	if (buf){
-		entry = lookup_widget(settings->app,"dictionarySearchText"); 
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);	
+	if (buf) {
+		entry =
+		    lookup_widget(settings->app, "dictionarySearchText");
+		gtk_entry_set_text(GTK_ENTRY(entry), buf);
 		//dictSearchTextChangedSWORD(buf);
 	}
 }
@@ -464,7 +469,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			  htmlCommentaries);
 
 	usehtml = htmlTexts;
-	
+
 	htmlComments = gtk_html_new();
 	gtk_widget_ref(htmlComments);
 	gtk_object_set_data_full(GTK_OBJECT(app), "htmlComments",
@@ -484,67 +489,75 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER
 			  (lookup_widget(app, "scrolledwindow15")),
 			  textComp1);
-			  
+
 	htmlDict = gtk_html_new();
-	gtk_widget_ref(htmlDict);	
+	gtk_widget_ref(htmlDict);
 	gtk_object_set_data_full(GTK_OBJECT(app), "htmlDict",
 				 htmlDict,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(htmlDict);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "scrolledwindow8")), htmlDict);
+	gtk_container_add(GTK_CONTAINER
+			  (lookup_widget(app, "scrolledwindow8")),
+			  htmlDict);
 
 
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
-	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
+			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(htmlTexts), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), GINT_TO_POINTER(0));
+			   GTK_SIGNAL_FUNC(html_button_pressed),
+			   GINT_TO_POINTER(0));
 
 	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
-	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), GINT_TO_POINTER(1));
-			   
+	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
+	gtk_signal_connect(GTK_OBJECT(htmlCommentaries),
+			   "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed),
+			   GINT_TO_POINTER(1));
+
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (htmlComments), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);	
+	gtk_signal_connect(GTK_OBJECT(htmlComments), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		    
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
 
-	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
+	gtk_signal_connect(GTK_OBJECT(textComp1), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(textComp1), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		   
-			   
-	gtk_signal_connect (GTK_OBJECT (htmlDict), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
+
+	gtk_signal_connect(GTK_OBJECT(htmlDict), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), GINT_TO_POINTER(2));		   
-			   		   
+			   GTK_SIGNAL_FUNC(html_button_pressed),
+			   GINT_TO_POINTER(2));
+
 }
 
 /***************************************************************************************************
  *beginHTML - start loading html widget
  ***************************************************************************************************/
-void beginHTML(GtkWidget *html_widget, gboolean isutf8)
+void beginHTML(GtkWidget * html_widget, gboolean isutf8)
 {
 	GtkHTML *html;
-	
+
 	html = GTK_HTML(html_widget);
 	//was_editable = gtk_html_get_editable (html);
 	/*if (was_editable)
-		gtk_html_set_editable (html, FALSE);*/	
-	if(isutf8){
-		htmlstream = gtk_html_begin_content (html, "text/html; charset=utf-8");		
-	}else{
+	   gtk_html_set_editable (html, FALSE); */
+	if (isutf8) {
+		htmlstream =
+		    gtk_html_begin_content(html,
+					   "text/html; charset=utf-8");
+	} else {
 		htmlstream = gtk_html_begin(html);
 	}
 }
@@ -570,7 +583,7 @@ void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt)
 /***************************************************************************************************
  *gotoanchorHTML
  ***************************************************************************************************/
-void gotoanchorHTML(GtkWidget *html_widget, gchar * verse)
+void gotoanchorHTML(GtkWidget * html_widget, gchar * verse)
 {
 	gtk_html_jump_to_anchor(GTK_HTML(html_widget), verse);
 }
@@ -581,6 +594,5 @@ void gotoanchorHTML(GtkWidget *html_widget, gchar * verse)
 void sethtmltoeditHTML(gboolean choice)
 {
 	/* gtk_html_set_default_background_color (GTK_HTML (html_widget), &bgColor); */
-	gtk_html_set_editable (GTK_HTML (htmlComments), choice);
+	gtk_html_set_editable(GTK_HTML(htmlComments), choice);
 }
-
