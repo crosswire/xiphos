@@ -34,6 +34,7 @@
 #include "main/bibletext.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
+#include "main/settings.h"
 
 #include "backend/bibletext_.h"
 #include "backend/sword.h"
@@ -160,7 +161,8 @@ int save_module_options(char * mod_name, char * option,
 	} else {
 		on_off = "Off";
 	}
-	return backend_save_module_options(mod_name, option, on_off);
+	return backend_save_module_options(mod_name, option, on_off, 
+					settings.gSwordDir );
 }
 
 /******************************************************************************
@@ -181,7 +183,8 @@ int save_module_options(char * mod_name, char * option,
 
 int load_module_options(char * modName, char * option)
 {
-	return backend_load_module_options(modName, option);
+	return backend_load_module_options(modName, option, 
+					settings.gSwordDir);
 }
 /******************************************************************************
  * Name

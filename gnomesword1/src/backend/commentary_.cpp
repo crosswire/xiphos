@@ -28,13 +28,7 @@
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <string.h>
 
-
-#include "backend/sword.h"
 #include "backend/commentary_.h"
 
 

@@ -23,7 +23,14 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#ifndef __GNUC__
+#include <io.h>
+#else
+#include <unistd.h>
+#include <unixstr.h>
+#endif
+
+#include <glib-1.2/glib.h>
 #include <swmgr.h>
 #include <swconfig.h>
 #include <versekey.h>
@@ -33,10 +40,9 @@
 #include <string.h>
 
 #include "main/gs_gnomesword.h"
+#include "main/settings.h"
 
 #include "backend/shortcutbar.h"
-#include "backend/sword.h"
-
 
 
 /******************************************************************************
@@ -191,8 +197,7 @@ void backend_save_sb_group(char * filename, char * group_name,
  *   GList *
  */
 
-GList *backend_get_verse_list(char * module_name, char * vlist,
-			      SETTINGS * s)
+GList *backend_get_verse_list(char * module_name, char * vlist)
 {
 	GList *retval = NULL;
 	char firstkey[256];

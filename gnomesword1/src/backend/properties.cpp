@@ -23,17 +23,9 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 #include <swmgr.h>
 #include <swconfig.h>
-#include <swmodule.h>
-#include <versekey.h>
-#include <gbfplain.h>
-#include <plainhtml.h>
-#include <rwphtml.h>
-#include <regex.h>
-#include <stdio.h>
-#include <sys/stat.h>
 
 #include "backend/properties.h"
 

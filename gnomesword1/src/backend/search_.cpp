@@ -23,16 +23,13 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 #include <swmgr.h>
 #include <markupfiltmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
 #include <regex.h>
-#include <stdio.h>
-#include <sys/stat.h>
 
-#include "backend/sword.h"
 #include "backend/search_.h"
 #include "backend/sword_defs.h"
 

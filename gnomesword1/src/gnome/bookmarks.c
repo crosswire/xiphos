@@ -1177,8 +1177,8 @@ static gboolean gnode2ctree(GtkCTree * ctree, guint depth,
 	if (!cnode || !gnode || (!(es = gnode->data)))
 		return FALSE;
 
-	g_warning("bookmark = %s, %s ,%s", es->label, es->key,
-		  es->module);
+	/*g_warning("bookmark = %s, %s ,%s", es->label, es->key,
+		  es->module);*/
 	
 	if (es->is_leaf) {
 		pixmap_closed = NULL;
