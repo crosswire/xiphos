@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * sword.c - glue 
+ * sword.cc - glue 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -29,11 +29,61 @@
 #include <swmodule.h>
 #include <stringmgr.h>
 
+#ifdef USE_MOZILLA
+#include <gtkmozembed.h>
+#include <gtkmozembed_internal.h>
+#include <nsIDOMMouseEvent.h>
+#include <dom/nsIDOMKeyEvent.h>
+#endif
+/*#include <nsCOMPtr.h>
+#include <nsIDOMDocument.h>
+#include <content/nsIDocumentViewer.h>
+#include <content/nsIContent.h>
+#include <nsIWebBrowser.h>
+#include <content/nsIDocument.h>
+#include <nsIDOMMouseEvent.h>
+#include <dom/nsIDOMKeyEvent.h>
+#include <nsIDOMEventTarget.h>
+#include <dom/nsIDOMNSHTMLElement.h>  
+#include <nsIDOMHTMLElement.h>  
+#include <nsIDOMHTMLTextAreaElement.h>  
+#include <nsIDOMNamedNodeMap.h>
+#include <webbrowserpersist/nsIWebBrowserPersist.h>
+#include <necko/nsNetUtil.h>
+#include <nsIWebBrowserFind.h>
+#include <dom/nsIDOMNSDocument.h>
+#include <dom/nsIDOMNSEvent.h>
+#include <docshell/nsIDocShell.h>
+#include <docshell/nsIDocShellTreeItem.h>
+#include <docshell/nsIDocShellTreeOwner.h>
+#include <nsIDOMNodeList.h>
+#include <nsIDOMWindow.h>
+#include <nsISelection.h>
+#include <nsIDOMRange.h>
+#include <nsIWebBrowserFind.h>
+#include <necko/nsNetUtil.h>
+#include <uconv/nsICharsetConverterManager.h>
+#if MOZILLA_SNAPSHOT < 10
+#	include <uconv/nsICharsetConverterManager2.h>
+#endif
+#include <nsIDOMWindow.h>
+#include <nsISelection.h>
+#include <nsISHistory.h>
+#include <nsIHistoryEntry.h>
+#include <nsISHEntry.h>
+#include <nsIWebNavigation.h>
+#include <nsCWebBrowserPersist.h>
+#include <widget/nsIBaseWindow.h>
+#include <nsIWebPageDescriptor.h>
+#include <nsIPresContext.h>
+#include <nsIEventStateManager.h>
+*/
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 #include <gtkhtml/gtkhtml.h>
+#include "gui/bibletext.h"
 #ifdef __cplusplus
 }
 #endif
@@ -50,6 +100,7 @@ extern "C" {
 #include "gui/gnomesword.h"
 #include "gui/sidebar.h"
 #include "gui/utilities.h"
+#include "gui/html.h"
 
 #include "main/display.hh"
 #include "main/sword.h"
@@ -68,9 +119,9 @@ extern GtkWidget *cbe_book;
 extern GtkWidget *spb_chapter;
 extern GtkWidget *spb_verse;
 extern GtkWidget *cbe_freeform_lookup;
+extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
-
 
 
 /******************************************************************************
@@ -656,10 +707,10 @@ void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
 				mod_name, key);
 		} else {
 			g_string_printf(tmp_str,
-				"<a href=\"about://%s/%s\">"
+				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\">"
 				"<font color=\"%s\">[%s]</a></font>[%s] ",
-				mod_name,
 				backend->module_description(mod_name),
+				mod_name,
 				settings.bible_verse_num_color,
 				mod_name, 
 				key);
@@ -715,7 +766,8 @@ void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
  */
 
 void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-		             gchar * action ,gchar * type)
+		             gchar * action ,gchar * type ,gchar * morph_text,
+			     gchar * morph)
 {
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
@@ -758,16 +810,39 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 			str = g_string_append(str, tmp_str->str);
 		}
 	}
-	g_string_printf(tmp_str, 
-			"<font face=\"%s\" size=\"%s\">",
-			(mf->old_font)?mf->old_font:"none", 
-			(mf->old_font_size)?mf->old_font_size:"+0");
-	str = g_string_append(str, tmp_str->str);
-	str = g_string_append(str, text);
-
-	g_string_printf(tmp_str, " %s", "</font></body></html>");
-	str = g_string_append(str, tmp_str->str);
-
+	
+	if(!strcmp(action ,"showStrongsMorph")) {  //&& !strcmp(type,"Greek")
+		g_string_printf(tmp_str,"<font color=\"grey\">%s: %s<HR></font><br>",
+				_("Strongs"),key);
+		str = g_string_append(str, tmp_str->str);
+		g_string_printf(tmp_str, 
+				"<font face=\"%s\" size=\"%s\">",
+				(mf->old_font)?mf->old_font:"none", 
+				(mf->old_font_size)?mf->old_font_size:"+0");
+		str = g_string_append(str, tmp_str->str);
+		str = g_string_append(str, text);
+		
+		g_string_printf(tmp_str,"<font color=\"grey\"><br><br>%s: %s<HR></font><br>",
+					_("Morphology"),morph);
+		str = g_string_append(str, tmp_str->str);
+		str = g_string_append(str, morph_text);
+		g_string_printf(tmp_str, " %s<br>", "</font></body></html>");
+		str = g_string_append(str, tmp_str->str);
+		
+		
+	} else {
+		g_string_printf(tmp_str, 
+				"<font face=\"%s\" size=\"%s\">",
+				(mf->old_font)?mf->old_font:"none", 
+				(mf->old_font_size)?mf->old_font_size:"+0");
+		str = g_string_append(str, tmp_str->str);
+		str = g_string_append(str, text);
+	
+		g_string_printf(tmp_str, " %s", "</font></body></html>");
+		str = g_string_append(str, tmp_str->str);
+	
+	}
+	
 	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
@@ -786,8 +861,7 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
  * Synopsis
  *   #include "main/sword.h.h"
  *
- *   void main_clear_viewer(GtkWidget * html_widget, gchar * mod_name, 
- *		    gchar * text, gchar *key, gchar * type, gboolean show_key)
+ *   void main_clear_viewer(VOID)
  *
  * Description
  *   clear the information viewer
@@ -802,7 +876,7 @@ void main_clear_viewer(void)
 	GString *str;
 	GString *search_str;
 	gboolean was_editable = FALSE;
-	//MOD_FONT *mf = get_font(mod_name);
+	
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 
 	/* setup gtkhtml widget */
@@ -1079,18 +1153,22 @@ void main_change_verse(const char * bible, const char * commentary,
 }
 
 
-void main_setup_displays(void)
-{
-//	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm,backend);
-//	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
-}
 
-void main_setup_new_displays(void)
-{
+
+void main_setup_displays(void)
+{ 
+
+#ifdef USE_MOZILLA
+	backend->textDisplay = new GtkMozChapDisp(widgets.html_text,backend);
+	backend->RTOLDisplay = new GtkMozChapDisp(widgets.html_text,backend);
+	backend->commDisplay = new GTKMozEntryDisp(widgets.html_comm,backend);
+	backend->dictDisplay = new GTKMozEntryDisp(widgets.html_dict,backend);
+#else
+	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
+	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
-	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
-	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
+#endif
 }
 
 const char *main_get_module_language(const char *module_name)

@@ -292,46 +292,6 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
 
 /******************************************************************************
  * Name
- *   goto_bookmark
- *
- * Synopsis
- *   #include "gui/bookmarks_menu.h"
- *
- *   void goto_bookmark(gchar * mod_name, gchar * key)
- *
- * Description
- *   test for module type and call the appropriate function to
- *   display bookmark
- *
- * Return value
- *   void
- */
-
-static void goto_bookmark(gchar * url)
-{
-	gint module_type;
-	
-	if (use_dialog) {
-		module_type = main_main_get_mod_type_from_url(url);
-		switch (module_type) {
-		case TEXT_TYPE:
-		case COMMENTARY_TYPE:
-			main_dialog_goto_bookmark(url);
-			break;
-		case DICTIONARY_TYPE:
-			//gui_dictionary_dialog_goto_bookmark(mod_name, key);
-			break;
-		case BOOK_TYPE:
-			//gui_gbs_dialog_goto_bookmark(mod_name, key);
-			break;
-		}
-	} else
-		main_url_handler(url);
-}
-
-
-/******************************************************************************
- * Name
  *   
  *
  * Synopsis
@@ -435,7 +395,11 @@ static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 					3, &key, 
 					4, &module, 
 					-1);
-		url = g_strdup_printf("bookmark://%s/%s",module,key);
+		url = g_strdup_printf("gnomesword.url?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					"newDialog",
+					main_url_encode(key), 
+					main_url_encode(module));
 		main_url_handler(url, TRUE);
 		g_free(url);
 	}
@@ -1086,6 +1050,7 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkTreeIter iter;
 	gchar *key = NULL;
 	gchar *module = NULL;
+	gchar *url = NULL;
 	
 	
 	selection = gtk_tree_view_get_selection(bookmark_tree);
@@ -1095,9 +1060,15 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   3, &key, 
 				   4, &module, 
 			           -1);	
-	main_open_bookmark_in_new_tab(module,key);
+	url = g_strdup_printf("gnomesword.url?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					"newTab",
+					main_url_encode(key), 
+					main_url_encode(module));
+	main_url_handler(url, FALSE);
 	g_free(key);
 	g_free(module);
+	g_free(url);
 }
 
 

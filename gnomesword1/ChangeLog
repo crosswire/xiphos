@@ -1,3 +1,12 @@
+2004-09-26  terry <terry470@users.sf.net>
+
+	* gnomesword can be build using gtkmozembed for the Bible, commentary 
+	  and dictionary panes.
+	* added backend/gs_osishtmlhref.* and backend/gs_markupfiltmgr.* for 
+	  gtkmozembed.
+	* added main/embed.cc and main/embed.h for gtkmozembed.
+	
+
 2004-08-19  terry <terry470@users.sf.net>
 
 	* removed files - backend/gs_thmlhtml.*, backend/gs_osishtmlhref.*,

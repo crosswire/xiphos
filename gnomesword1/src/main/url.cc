@@ -151,12 +151,13 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 
 /******************************************************************************
  * Name
- *   about_uri
+ *   show_mod_info
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint about_uri(const gchar * url, gboolean clicked)
+ *   gint show_mod_info(const gchar * module, const gchar * discription,
+ *						gboolean clicked)
  *
  * Description
  *  
@@ -165,27 +166,27 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   gint
  */
  
- static gint about_uri(const gchar * url, gboolean clicked)
+ static gint show_mod_info(const gchar * module, const gchar * discription,
+						gboolean clicked)
 {
-	gchar **work_buf = g_strsplit (url,"/",4);
 	if(clicked) {
-		gui_display_about_module_dialog(work_buf[2], FALSE);		
+		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					work_buf[3]);
+					discription);
 	}
-	g_strfreev(work_buf);
 	return 1;
 }
 
+
  /******************************************************************************
  * Name
- *   parallel_uri
+ *   show_parallel
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint parallel_uri(const gchar * url, gboolean clicked)
+ *   gint show_parallel(const gchar * value, const gchar * type,gboolean clicked)
  *
  * Description
  *  
@@ -194,29 +195,28 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   gint
  */
  
- static gint parallel_uri(const gchar * url, gboolean clicked)
+ static gint show_parallel(const gchar * value, const gchar * type, 
+							gboolean clicked)
 {
-	gchar **work_buf = g_strsplit (url,"/",4);
-	if(!strcmp(work_buf[2],"swap")) {
+	if(!strcmp(type,"swap")) {
 		if(clicked) {
-			main_swap_parallel_with_main((gchar *) work_buf[3]);		
+			main_swap_parallel_with_main((gchar *) value);		
 		} else {
 			gchar *buf = g_strdup_printf( 
-				_("Show %s in main window"), work_buf[3]);
+				_("Show %s in main window"), value);
 			gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 						buf);
 			g_free(buf);
 		}
 	}
-	if(!strcmp(work_buf[2],"verse")) {
+	if(!strcmp(type,"verse")) {
 		if(clicked) {
 		//g_warning(work_buf[3]);
 			settings.cvparallel = 
-				main_parallel_update_controls(work_buf[3]);
+				main_parallel_update_controls(value);
 			main_update_parallel_page_detached();
 		} 
 	}
-	g_strfreev(work_buf);
 	return 1;
 }
 
@@ -237,7 +237,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   gint
  */
  
- static gint morph_uri(const gchar * type, const gchar * value, 
+ static gint show_morph(const gchar * type, const gchar * value, 
 				gboolean clicked)
 {	
 	gchar *modbuf = NULL;
@@ -261,7 +261,9 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 					mybuf, 
 					(gchar*)value, 
 					"showMorph",
-					(gchar*)type);
+					(gchar*)type,
+					NULL,
+					NULL);
 			//show_in_appbar(widgets.appbar, (gchar*)value, modbuf);
 			g_free(mybuf);
 		}
@@ -288,7 +290,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   
  */ 
  
-static gint strongs_uri(const gchar * type, const gchar * value, 
+static gint show_strongs(const gchar * type, const gchar * value, 
 			gboolean clicked)
 {	
 	gchar *modbuf_viewer = NULL;
@@ -324,8 +326,80 @@ static gint strongs_uri(const gchar * type, const gchar * value,
 					mybuf, 
 					(gchar*)value, 
 					"showStrongs",
-					(gchar*)type);
+					(gchar*)type,
+					NULL,
+					NULL);
 			g_free(mybuf);
+		}
+	}
+	return 1;
+	
+}
+
+
+ /******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   
+ *
+ * Description
+ *  
+ *
+ * Return value
+ *   
+ */ 
+ 
+static gint show_strongs_morph(const gchar * type, const gchar * value, 
+			 const gchar * morph, gboolean clicked)
+{	
+	gchar *modbuf_viewer = NULL;
+	gchar *modbuf = NULL;
+	gchar *morph_mod = NULL;
+	gchar *strongs_buf = NULL;
+	gchar *morph_buf = NULL;
+	guint delay;	
+	guint i;	
+	
+	//g_warning("url = %s",url);
+	if(!strcmp(type,"Greek")) {
+		if(backend->is_module(settings.lex_greek_viewer)) 
+			modbuf_viewer = settings.lex_greek_viewer;
+		if(backend->is_module(settings.lex_greek)) 
+			modbuf = settings.lex_greek;
+		if(backend->is_module("Robinson")) 
+			morph_mod = "Robinson";
+	} else if(!strcmp(type,"Hebrew")) {
+		if(backend->is_module(settings.lex_hebrew_viewer)) 
+			modbuf_viewer = settings.lex_hebrew_viewer;
+		if(backend->is_module(settings.lex_hebrew)) 
+			modbuf = settings.lex_hebrew;
+	}
+	
+	if (clicked) {
+		if (settings.inDictpane)
+			main_display_dictionary(modbuf, (gchar*)value);
+		if (settings.inViewer)
+			main_sidebar_display_dictlex(modbuf_viewer, (gchar*)value);		
+	} else {
+		strongs_buf =
+		    main_get_rendered_text(modbuf, (gchar*)value);
+		morph_buf =
+		    main_get_rendered_text(morph_mod, (gchar*)morph);
+		if (strongs_buf) {
+			main_information_viewer(  
+					modbuf, 
+					strongs_buf, 
+					(gchar*)value, 
+					"showStrongsMorph",
+					(gchar*)type,
+					(gchar*)morph_buf,
+					(gchar*)morph);
+			g_free(strongs_buf);
+			if(morph_buf) g_free(morph_buf);
 		}
 	}
 	return 1;
@@ -349,7 +423,7 @@ static gint strongs_uri(const gchar * type, const gchar * value,
  *   gint
  */
  
-static gint note_uri(const gchar * module, const gchar * passage, 
+static gint show_note(const gchar * module, const gchar * passage, 
 		const gchar * type, const gchar * value, gboolean clicked)
 {	
 	gchar *tmpbuf = NULL;
@@ -366,8 +440,11 @@ static gint note_uri(const gchar * module, const gchar * passage,
 		hint.in_popup = FALSE;
 	}
 */	
-	if(!backend->is_module((gchar*)module)) 
+	if(/*module && (strlen(module) > 2) && */!backend->is_module((gchar*)module)) 
 		module = settings.MainWindowModule;
+	
+	if(passage && (strlen(passage) < 5)) 
+		passage = settings.currentverse;
 	
 	if(strstr(type,"x") && clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);
@@ -394,7 +471,9 @@ static gint note_uri(const gchar * module, const gchar * passage,
 					buf, 
 					(gchar*)value,
 					"showNote",			
-					(gchar*)type);
+					(gchar*)type,
+					NULL,
+					NULL);
 			//gui_display_in_hint_window(tmpbuf);
 			if(buf) g_free(buf);	
 		}			
@@ -417,10 +496,13 @@ static gint note_uri(const gchar * module, const gchar * passage,
 		
 		tmp = backend->parse_verse_list(tmpbuf, settings.currentverse);  
 		while (tmp != NULL) {
-			buf = g_strdup_printf("<a href=\"sword://%s/%s\">%s</a><br>",
+			buf = g_strdup_printf(
+				"<a href=\"sword://%s/%s\">"
+				"<font color=\"%s\">%s,</font></a><br>",
 				(gchar*)module,
-					(const char *) tmp->data,
-					(const char *) tmp->data);
+				(const char *) tmp->data,
+				settings.bible_text_color,
+				(const char *) tmp->data);
 			str = g_string_append(str,buf);
 			if(buf) g_free(buf);
 			buf = NULL;
@@ -430,9 +512,12 @@ static gint note_uri(const gchar * module, const gchar * passage,
 		}
 		g_list_free(tmp);
 		
-		buf = g_strdup_printf("<a href=\"sword://%s/%s\">%s%s</a><br>",
+		buf = g_strdup_printf(
+				"<a href=\"sword://%s/%s\">"
+				"<font color=\"%s\">%s%s</font></a><br>",
 				(gchar*)module,
 				settings.currentverse,
+				settings.bible_text_color,
 				_("Back to "),
 				settings.currentverse);
 		str = g_string_append(str,buf);
@@ -446,7 +531,9 @@ static gint note_uri(const gchar * module, const gchar * passage,
 					str->str, 
 					(gchar*)value,
 					"showNote",			
-					(gchar*)type);
+					(gchar*)type,
+					NULL,
+					NULL);
 			//gui_display_in_hint_window(tmpbuf);
 		}			
 	}
@@ -472,7 +559,7 @@ static gint note_uri(const gchar * module, const gchar * passage,
  *   gint
  */
  
-static gint reference_uri(const gchar * module, const gchar * list, gboolean clicked)
+static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 {	
 	if(!clicked)
 		return 1;
@@ -497,106 +584,75 @@ static gint reference_uri(const gchar * module, const gchar * list, gboolean cli
  *   gint (const gchar * url)
  *
  * Description
- *   handle a sword uri in the form 'sword://KJV/1John5:8'
- *                                   'sword://MHC/Genesis1:1'
- *                                   'sword:///Romans8:28'
- *   and display in the appropriate pane
+ *   
+ *   
  *
  * Return value
  *   gint
  */
 
-static gint bookmark_uri(const gchar * url, gboolean use_dialog)
+static gint show_bookmark(const gchar * module, const gchar * key, 
+						const gchar * type)//const gchar * url, gboolean use_dialog)
 {
 	gchar *buf = NULL;
-	gchar *module = NULL;
-	const gchar *key = NULL;
 	gchar *tmpkey = NULL;
 	gint mod_type;
 	gint verse_count;
 	gboolean change_verse = FALSE;
-	gchar **work_buf = NULL;
 	
-	
-	work_buf = g_strsplit (url,"/",4);
-	if(!work_buf[2] && !work_buf[KEY]) {
-		alert_url_not_found(url);
-		g_strfreev(work_buf);
+	verse_count = backend->is_Bible_key(key, settings.currentverse);
+	if(!verse_count){
+		alert_url_not_found(key);
 		return 0;
 	}
-	if(!work_buf[3]) {
-		tmpkey = work_buf[MODULE];		
-	} else
-		tmpkey = work_buf[KEY];
 	
-	verse_count = backend->is_Bible_key(tmpkey, settings.currentverse);
-	if(!work_buf[3] && !verse_count){
-		alert_url_not_found(url);
-		g_strfreev(work_buf);
-		return 0;
-	}
-	if(backend->is_module(work_buf[MODULE])) {
-		mod_type = backend->module_type(work_buf[MODULE]);
+	if(backend->is_module(module)) {
+		if(!strcmp(type,"newTab")) {
+			main_open_bookmark_in_new_tab((gchar*)module, 
+					(gchar*)key);
+			return 1;
+		}
+		
+		mod_type = backend->module_type((gchar*)module);
 		switch(mod_type) {
 			case TEXT_TYPE:	
-				if(use_dialog)
+				if(!strcmp(type,"newDialog")) {
 					main_dialog_goto_bookmark(
-								(gchar*)url);
-				else {
-					key = main_update_nav_controls(tmpkey);
-					main_display_bible(work_buf[MODULE], key);
+						(gchar*)module,
+						(gchar*)key);					
+				} else {
+					tmpkey = main_update_nav_controls(key);
+					main_display_bible(module, tmpkey);
 					main_display_commentary(
-							settings.CommWindowModule, key);
-					main_keep_bibletext_dialog_in_sync((gchar*)key);
-					if(key) g_free((gchar*)key);
+							settings.CommWindowModule, tmpkey);
+					main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
+					if(tmpkey) g_free((gchar*)tmpkey);
 				}
 			break;
 			case COMMENTARY_TYPE:
 			case PERCOM_TYPE:
-				if(use_dialog)
+				if(!strcmp(type,"newDialog")) {
 					main_dialog_goto_bookmark(
-								(gchar*)url);
-				else {				
-					key = main_update_nav_controls(tmpkey);
+						(gchar*)module,
+						(gchar*)key);
+				} else {				
+					tmpkey = main_update_nav_controls(key);
 					main_display_bible(
-							settings.MainWindowModule, key);
-					main_display_commentary(work_buf[MODULE], key);
-					if(key) g_free((gchar*)key);	
+							settings.MainWindowModule, tmpkey);
+					main_display_commentary(module, tmpkey);
+					if(tmpkey) g_free((gchar*)tmpkey);	
 				}
 			break;
 			case DICTIONARY_TYPE:
-				main_display_dictionary(work_buf[MODULE],
-							tmpkey);
+				main_display_dictionary((gchar*)module,
+							(gchar*)key);
 			break;
 			case BOOK_TYPE:
-				main_display_book(work_buf[MODULE], tmpkey); 
+				main_display_book((gchar*)module, (gchar*)key); 
 			break;
 		}
 	} 
-	g_strfreev(work_buf);
-	
-	/*
-	 * change parallel verses
-	 */
-	/*if (settings.dockedInt) {
-		gui_update_parallel_page();
-	}
-	*/
-	/* 
-	 * add item to history 
-	 */
-	/*if (settings.addhistoryitem) {
-		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
-			//g_warning("currentverse = %s",settings.currentverse);
-			gui_add_history_Item(widgets.app,
-				       GTK_WIDGET
-				       (widgets.shortcutbar),
-				       settings.currentverse);
-	}
-	settings.addhistoryitem = TRUE;
-	*/
 	return 1;
-	
 }
 
 
@@ -752,34 +808,46 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar* value = NULL;
 	gchar* module = NULL;
 	gchar* passage = NULL;
+	gchar* morph = NULL;
+	gchar* strongs = NULL;
 	gchar *buf = NULL;
 	URL* m_url;
 	
-	if(strstr(url,"passagestudy.jsp")) {/* passagestudy.jsp?action=showStrongs&type= */
+	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url")) {/* passagestudy.jsp?action=showStrongs&type= */
 		m_url = new URL((const char*)url);	
 		action = g_strdup(m_url->getParameterValue("action"));
 		type = g_strdup((gchar*)m_url->getParameterValue("type"));
 		value = g_strdup((gchar*)m_url->getParameterValue("value"));
-/*
+		morph = g_strdup((gchar*)m_url->getParameterValue("morph"));
+		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
+
 #ifdef DEBUG
 		g_warning("main_url_handler()");
 		g_warning("url = %s",url);
 		g_warning("action = %s",action);
 		g_warning("type = %s",type);  
 		g_warning("value = %s",value);
+		g_warning("strongs = %s",strongs);  
+		g_warning("morph = %s",morph);
 #endif	
-*/	
+		
+		if(strlen(strongs) > 2 && strlen(morph) > 2 ) {
+			show_strongs_morph(type,strongs,morph,clicked);
+		} else if(strlen(strongs) > 2 && strlen(morph) < 2) {
+			show_strongs(type,strongs,clicked);			
+		}
+		
 		if(!strcmp(action,"showStrongs")) 
-			strongs_uri(type,value,clicked);
+			show_strongs(type,value,clicked);
 		
 		
 		if(!strcmp(action,"showMorph"))
-			morph_uri(type, value,clicked);
+			show_morph(type, value,clicked);
 		
 		if(!strcmp(action,"showNote")) {	
 			module = g_strdup(m_url->getParameterValue("module"));
 			passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
-			note_uri(module, passage, type, value, clicked);
+			show_note(module, passage, type, value, clicked);
 			if(module) g_free(module);
 			if(passage) g_free(passage);
 		}
@@ -787,61 +855,43 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		if(!strcmp(action,"showRef")) {	
 			module = g_strdup(m_url->getParameterValue("module"));
 			if(!strcmp(type,"scripRef"))
-				reference_uri(module,value,clicked);
+				show_ref(module,value,clicked);
 			if(!strcmp(type,"swordURL")) {
 				
 			}
 			if(module) g_free(module);
 		}
 		
+		if(!strcmp(action,"showBookmark")) {	
+			module = g_strdup(m_url->getParameterValue("module"));
+			show_bookmark(module, value, type);
+			if(module) g_free(module);
+		}		
+		
+		if(!strcmp(action,"showModInfo")) {	
+			module = g_strdup(m_url->getParameterValue("module"));
+			show_mod_info(module, value, clicked);
+			if(module) g_free(module);
+		}		
+		
+		if(!strcmp(action,"showParallel")) {
+			show_parallel(value, type, clicked);
+		}
+		
 		if(action) g_free(action);
 		if(type) g_free(type);
 		if(value) g_free(value);
+		if(strongs) g_free(strongs);
+		if(morph) g_free(morph);
 		return 1;
 	}
 	if(strstr(url,"sword://"))
 		return sword_uri(url,clicked);
-	if(strstr(url,"bookmark://"))
-		return bookmark_uri(url,clicked);
 	if(strstr(url,"book://"))
 		return sword_uri(url,clicked);
 	if(strstr(url,"chapter://"))
 		return sword_uri(url,clicked);
-	if(strstr(url,"about://"))
-		return about_uri(url,clicked);
-	if(strstr(url,"parallel://"))
-		return parallel_uri(url,clicked);
 	return 0;
-}
-
-
-/******************************************************************************
- * Name
- *   main_main_get_mod_type_from_url
- *
- * Synopsis
- *   #include "main/url.hh"
- *
- *   gint main_main_get_mod_type_from_url(const gchar * url)
- *
- * Description
- *  
- *
- * Return value
- *   gint
- */
- 
-gint main_main_get_mod_type_from_url(const gchar * url)
-{
-	gchar **work_buf = NULL;
-	gint retval = -1;
-		
-	work_buf = g_strsplit (url,"/",4);
-	if(!work_buf[MODULE])
-		return retval;
-	retval = backend->module_type(work_buf[MODULE]);	
-	g_strfreev(work_buf);
-	return retval;	
 }
 
 
@@ -865,7 +915,7 @@ const gchar *main_url_encode(const gchar * pram)
 {
 	SWBuf retval;
 	retval = URL::encode(pram);
-	g_warning(retval.c_str());
+	//g_warning(retval.c_str());
 	if(retval.length())
 		return g_strdup(retval.c_str());
 	else

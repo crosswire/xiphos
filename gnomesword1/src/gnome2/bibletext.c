@@ -27,6 +27,9 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
 
+#ifdef USE_MOZILLA
+#include <gtkmozembed.h>
+#endif
 
 
 #include "gui/gnomesword.h"
@@ -50,10 +53,11 @@
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/global_ops.hh"
+#include "main/embed.h"
 
 gboolean shift_key_presed = FALSE;
 
-static void create_menu(GdkEventButton * event);
+static void create_menu(void); //GdkEventButton * event);
 
 static GtkTextBuffer *text_buffer;
 
@@ -97,17 +101,15 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
  *
  *
  * Description
- *   add global module options to popup menus
+ *   
  *
  * Return value
  *   void
  */
 
-void gui_popup_pm_text(gchar * mod_name, GdkEventButton * event)
+void gui_popup_pm_text(void)
 {
-	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
-	create_menu(event);	
-	g_free(ops);
+	create_menu();	
 }
 
 
@@ -135,9 +137,10 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
 	case 1:
 		break;
 	case 2:
+		shift_key_presed = TRUE;
 		break;
 	case 3:
-		gui_popup_pm_text(settings.MainWindowModule, event);
+		gui_popup_pm_text();
 		break;
 	}
 	return FALSE;
@@ -203,6 +206,10 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 		}
 		break;
 	case 2:
+		if(shift_key_presed) {
+			shift_key_presed = FALSE;
+			break;
+		}
 		if (!in_url)
 			break;
 		url = html_engine_get_link_at (GTK_HTML(widgets.html_text)->engine,
@@ -255,33 +262,21 @@ static gboolean textview_button_press_event(GtkWidget * widget,
 	case 2:
 		break;
 	case 3:
-		gui_popup_pm_text(settings.MainWindowModule, event);
+		gui_popup_pm_text();
 		return TRUE;
 		break;
 	}
 	return FALSE;
 }
 
-gboolean on_motion_notify_event
-                                        (GtkWidget       *widget,
-                                        GdkEventMotion  *event,
-                                        gpointer         user_data)
-{
-	/*static gulong delay = 5000000;	
-			
-	while(delay != 0) {
-			--delay;
-	} 
-	delay = 5000000; 
-	//g_warning("on_motion_notify_event");*/
-	return FALSE;
-}
+
 
 static gboolean
 on_enter_notify_event        (GtkWidget       *widget,
                                         GdkEventCrossing *event,
                                         gpointer         user_data)
 {
+	shift_key_presed = FALSE;
 	gtk_widget_grab_focus (widgets.html_text);
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	gui_change_window_title(settings.MainWindowModule);
@@ -298,6 +293,7 @@ static gboolean on_key_press_event           (GtkWidget       *widget,
 			shift_key_presed = TRUE;
 		break;
 	}
+	g_message("on_key_press_event");
   	return FALSE;
 }
 
@@ -496,11 +492,24 @@ GtkWidget *gui_create_bible_pane(void)
 {
 	GtkWidget *notebook_text;
 	GtkWidget *scrolledwindow;
-	
+	GtkWidget *eventbox1;
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
+
+#ifdef USE_MOZILLA	
+	eventbox1 = gtk_event_box_new ();
+	gtk_widget_show (eventbox1);
+	gtk_container_add(GTK_CONTAINER(notebook_text), eventbox1);
+	widgets.html_text = embed_new(TEXT_TYPE);
+	gtk_widget_show(widgets.html_text);
+	gtk_container_add(GTK_CONTAINER(eventbox1),
+			 widgets.html_text);
 	
+	g_signal_connect ((gpointer) eventbox1, "enter_notify_event",
+		    G_CALLBACK (on_enter_notify_event),
+		    NULL);
+#else		
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(notebook_text),
@@ -516,9 +525,29 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_widget_show(widgets.html_text);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  widgets.html_text);
-
-
-
+			  
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
+				G_CALLBACK(gui_link_clicked),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
+				G_CALLBACK(gui_url),
+				GINT_TO_POINTER(TEXT_TYPE));		    
+	g_signal_connect(GTK_OBJECT(widgets.html_text),"button_release_event",
+				G_CALLBACK(on_text_button_release_event),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "button_press_event",
+				G_CALLBACK(on_text_button_press_event),
+				NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "enter_notify_event",
+		    		G_CALLBACK (on_enter_notify_event),
+		       		NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_press_event",
+		    		G_CALLBACK (on_key_press_event),
+		    		NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_text), "key_release_event",
+		    		G_CALLBACK (on_key_release_event),
+		    		NULL);				   
+#endif
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(notebook_text),
@@ -541,15 +570,6 @@ GtkWidget *gui_create_bible_pane(void)
 	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (widgets.textview),
 						GTK_WRAP_WORD);
 
-	g_signal_connect ((gpointer) widgets.html_text, "enter_notify_event",
-		    G_CALLBACK (on_enter_notify_event),
-		    NULL);
-	g_signal_connect ((gpointer) widgets.html_text, "key_press_event",
-		    G_CALLBACK (on_key_press_event),
-		    NULL);
-	g_signal_connect ((gpointer) widgets.html_text, "key_release_event",
-		    G_CALLBACK (on_key_release_event),
-		    NULL);
 		    
 	g_signal_connect(GTK_OBJECT(widgets.textview),
 				   "button_release_event",
@@ -561,32 +581,12 @@ GtkWidget *gui_create_bible_pane(void)
 				   G_CALLBACK
 				   (textview_button_press_event),
 				  NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   NULL);
-	g_signal_connect ((gpointer)widgets.html_text , 
-		    "motion_notify_event",
-                    G_CALLBACK (on_motion_notify_event),
-                    NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
-				   G_CALLBACK(gui_url),
-				   GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_text),
-				   "button_press_event",
-				   G_CALLBACK
-				   (on_text_button_press_event),
-				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_text_button_release_event),
-				   NULL);
 	return 	notebook_text;			   
 	
 }
 
 
-/** BiblicalText menu stuff
+/** menu stuff
  **
  **
  **
@@ -615,7 +615,11 @@ void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
+#else
 	gui_copy_html(widgets.html_text);
+#endif
 }
 
 
@@ -648,6 +652,11 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   		gpointer user_data)
 {
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);	
+#else
 	gchar *dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
@@ -660,6 +669,7 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						  dict_key);
 		g_free(dict_key);
 	}
+#endif
 }
 
 
@@ -729,9 +739,16 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
-
+	
 	mod_name = main_module_name_from_description(dict_mod_description);
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	dict_key = gtk_editable_get_chars((GtkEditable *)widgets.entry_dict,0,-1);
+#else
 	dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
+#endif
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(mod_name,
@@ -1028,7 +1045,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static void create_menu(GdkEventButton * event)
+static void create_menu(void)//GdkEventButton * event)
 {
 	GtkWidget *menu1;
 	GtkWidget *lookup_selection_menu;
@@ -1207,10 +1224,12 @@ static void create_menu(GdkEventButton * event)
 	 * menu1_uiinfo[7].widget, "separator7");
 	 * menu1_uiinfo[8].widget, "show_tabs");
 	 */
-	gnome_popup_menu_do_popup_modal(menu1, NULL,
+	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
-					widgets.html_text);
-	gtk_widget_destroy(menu1);
+					widgets.html_text); */
+	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+	//gtk_widget_destroy(menu1);
 	g_free(ops);
 }
 
