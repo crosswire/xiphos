@@ -32,7 +32,6 @@
 #include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext.h"
-#include "gui/bibletext_menu.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
@@ -100,9 +99,14 @@ void gui_update_text_global_ops(gchar * option, gboolean choice)
 
 static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
+	gchar *url = g_strdup_printf(	"sword://%s/%s",
+					settings.MainWindowModule,
+					settings.currentverse);
 	save_module_options(settings.MainWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	gui_display_text(settings.currentverse);
+	/* show the change */
+	main_url_handler(url, TRUE);		
+	g_free(url);
 }
 
 
@@ -127,41 +131,6 @@ void gui_popup_pm_text(gchar * mod_name, GdkEventButton * event)
 	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
 	create_menu(event);	
 	g_free(ops);
-}
-
-
-
-
-void gui_set_text_mod_and_key(gchar * mod_name, gchar * val_key)
-{
-/*	if(cur_t_new->mod_name)
-		g_free(cur_t_new->mod_name);
-		cur_t_new->mod_name = g_strdup(settings.MainWindowModule);
-			gui_display_text(val_key);
-			break;
-		}
-		tmp = g_list_next(tmp);
-	}*/
-	gui_display_text(val_key);
-
-}
-
-
-void gui_display_text(const gchar * val_key)
-{
-	main_display_bible(settings.MainWindowModule, val_key);
-	/*
-	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
-	if(is_module_rtl(settings.MainWindowModule))
-		chapter_display(widgets.textview,
-			settings.MainWindowModule,
-			ops, (gchar *) val_key, TRUE);
-	else
-		chapter_display(widgets.html_text,
-			settings.MainWindowModule,
-			ops, (gchar *) val_key, TRUE);
-	g_free(ops);
-	*/
 }
 
 
@@ -248,7 +217,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 					gui_display_dictlex_in_sidebar
 					    (dict, key);
 				if (settings.inDictpane)
-					gui_change_module_and_key(dict,
+					main_display_dictionary(dict,
 								  key);
 				g_free(key);
 				if (dict)
@@ -635,8 +604,14 @@ void on_item2_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+	gchar *url = g_strdup_printf(	"sword://%s/%s",
+					settings.MainWindowModule,
+					settings.currentverse);
 	gui_set_module_font(settings.MainWindowModule);
-	gui_display_text(settings.currentverse);
+	//gui_display_text(settings.currentverse);
+	/* show the change */
+	main_url_handler(url, TRUE);		
+	g_free(url);
 }
 
 
@@ -650,7 +625,7 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(settings.
+			main_display_dictionary(settings.
 						  DictWindowModule,
 						  dict_key);
 		g_free(dict_key);
@@ -732,7 +707,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
+			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}
@@ -791,7 +766,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	module_name = module_name_from_description((gchar *) user_data);
 	if(module_name) {
-		gui_change_module_and_key(module_name, settings.currentverse);
+		main_display_bible(module_name, settings.currentverse);
 		g_free(module_name);
 	}
 }

@@ -80,7 +80,7 @@ void gui_lookup_dictlex_dialog_selection
 			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
+			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 	}
 	if(mod_name) g_free(mod_name);

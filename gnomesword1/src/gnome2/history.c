@@ -35,6 +35,7 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/url.h"
 #include "main/xml.h"
 
 
@@ -146,7 +147,7 @@ static void update_history_menu(GtkWidget * app)
 void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref)
 {
 	gint i;
-	g_warning("history = %s",ref);
+	//g_warning("history = %s",ref);
 	/* check to see if item is already in list  
 	   if so do nothing */
 	for (i = 0; i < history_items; i++) {
@@ -199,6 +200,8 @@ void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref
 
 void gui_change_verse_history(gint historynum)
 {
+	gchar *url;
+	
 	current_history_item = historynum;
 	if (first_back_click) {
 		settings.addhistoryitem = TRUE;
@@ -206,11 +209,19 @@ void gui_change_verse_history(gint historynum)
 		settings.addhistoryitem = FALSE;
 	}
 	/* change text mod */
-	gui_change_module_and_key(history_list[historynum].textmod,
+	url = g_strdup_printf("sword://%s/%s",history_list[historynum].textmod,
 				  history_list[historynum].verseref);
+	main_url_handler(url, TRUE);
+	g_free(url);
+	/*gui_change_module_and_key(history_list[historynum].textmod,
+				  history_list[historynum].verseref);*/
 	/* change commentary mod */
-	gui_change_module_and_key(history_list[historynum].commod,
+	url = g_strdup_printf("sword://%s/%s",history_list[historynum].commod,
 				  history_list[historynum].verseref);
+	main_url_handler(url, TRUE);
+	g_free(url);
+	/*gui_change_module_and_key(history_list[historynum].commod,
+				  history_list[historynum].verseref);*/
 }
 
 

@@ -50,6 +50,7 @@
 #include "main/sword.h"
 #include "main/key.h"
 #include "main/xml.h"
+#include "main/module_dialogs.h"
 
 
 
@@ -307,13 +308,13 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
 static void goto_bookmark(gchar * mod_name, gchar * key)
 {
 	gint module_type;
+	gchar *url = g_strdup_printf("sword://%/%s",mod_name,key);
 
 	if (use_dialog) {
 		module_type = get_mod_type(mod_name);
 		switch (module_type) {
 		case TEXT_TYPE:
-			gui_bibletext_dialog_goto_bookmark(mod_name,
-							   key);
+			//main_bibletext_dialog_goto_bookmark(mod_name, key);
 			break;
 		case COMMENTARY_TYPE:
 			gui_commentary_dialog_goto_bookmark(mod_name,
@@ -328,7 +329,9 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 			break;
 		}
 	} else
-		gui_change_module_and_key(mod_name, key);
+		main_url_handler(url);
+	g_free(url);
+		//gui_change_module_and_key(mod_name, key);
 }
 
 
@@ -916,7 +919,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	BOOKMARK_DATA * data;
 	GS_DIALOG *info;
 	gchar buf[256];
-	GString *str;
+	GString *str = g_string_new(NULL);
 	
 	
 	if (!gtk_tree_selection_get_selected(current_selection,NULL,&selected))
@@ -925,7 +928,6 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	mod_name = get_module_name();
 	key = get_module_key();		
 	data = g_new(BOOKMARK_DATA,1);
-	str = g_string_new("");
 	info = gui_new_dialog();
 	info->title = N_("Bookmark");
 	g_string_printf(str, "<span weight=\"bold\">%s</span>", _("Add"));

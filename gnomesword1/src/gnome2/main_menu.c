@@ -236,13 +236,17 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_verse_style1_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
+	gchar *url = g_strdup_printf(	"sword://%s/%s",
+					settings.MainWindowModule,
+					settings.currentverse);
 	/* remember our choice for the next program startup */
 	settings.versestyle = GTK_CHECK_MENU_ITEM(menuitem)->active;
 
 	if (settings.havebible) {
 		/* show the change */
-//		gui_display_text(settings.currentverse);
+		main_url_handler(url, TRUE);		
 	}
+	g_free(url);
 }
 
 /******************************************************************************

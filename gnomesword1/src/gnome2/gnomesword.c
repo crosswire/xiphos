@@ -142,7 +142,7 @@ void frontend_init(void)
 	if (settings.havebible) {
 	//	gui_setup_bibletext();//gui_setup_text(get_list(TEXT_LIST));
 	//	gui_open_bibletext(settings.MainWindowModule);
-		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
+		main_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 
 	/*
@@ -274,7 +274,6 @@ void frontend_display(void)
 		settings.setup_canceled = FALSE;
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
-	//gui_set_text_mod_and_key(settings.MainWindowModule, settings.currentverse);
 	gtk_widget_grab_focus (sidebar.module_list);
 	g_print("%s\n\n", _("done"));
 }
@@ -333,7 +332,7 @@ void shutdown_frontend(void)
 
 	if (settings.havebible) {
 //		gui_shutdown_text();
-		gui_shutdown_bibletext_dialog();
+		main_shutdown_bibletext_dialog();
 	}
 
 	if (settings.havebook) {

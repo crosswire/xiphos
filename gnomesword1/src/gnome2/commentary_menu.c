@@ -179,7 +179,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(settings.
+			main_display_dictionary(settings.
 						  DictWindowModule,
 						  dict_key);
 		g_free(dict_key);
@@ -209,7 +209,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	module_name = module_name_from_description((gchar *) user_data);
 	if(module_name) {
-		gui_change_module_and_key(module_name, settings.currentverse);
+		main_display_commentary(module_name, settings.currentverse);
 		g_free(module_name);
 	}
 }

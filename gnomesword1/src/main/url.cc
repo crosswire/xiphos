@@ -243,7 +243,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	} 		
 	if (clicked) {
 		if (settings.inDictpane)
-			gui_change_module_and_key(modbuf, work_buf[3]);
+			main_display_dictionary(modbuf, work_buf[3]);
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(modbuf, work_buf[3]);		
 	} else {
@@ -301,7 +301,7 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
 		
 	if (clicked) {
 		if (settings.inDictpane)
-			gui_change_module_and_key(modbuf, work_buf[3]);
+			main_display_dictionary(modbuf, work_buf[3]);
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(modbuf_viewer, work_buf[3]);		
 	} else {
@@ -522,7 +522,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	 */
 	if (settings.addhistoryitem) {
 		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
-			g_warning("currentverse = %s",settings.currentverse);
+			//g_warning("currentverse = %s",settings.currentverse);
 			gui_add_history_Item(widgets.app,
 				       GTK_WIDGET
 				       (widgets.shortcutbar),

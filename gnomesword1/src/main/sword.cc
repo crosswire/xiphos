@@ -35,6 +35,7 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 #include "gui/commentary.h"
+#include "gui/parallel_view.h"
 #include "gui/tabbed_browser.h"
 #include "gui/gnomesword.h"
 
@@ -365,6 +366,14 @@ void main_display_bible(const char * mod_name, const char * key)
 				      settings.comm_showing);
 		gui_set_tab_label(key);
 	}
+
+	/*
+	 * change parallel verses
+	 */
+	if (settings.dockedInt) {
+		gui_update_parallel_page();
+	}
+
 }
 
 
