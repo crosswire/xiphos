@@ -613,6 +613,38 @@
 					<interface>Bible Text Pane</interface> and the <interface>Commentary Pane</interface> will be changed. 	
 				</para>
 			</note>
+			<sect3 id="gnomesword-commentary-about">
+				<title>Finding Out About The Commentary Module</title>
+				<para>
+					To find out about the commentary currently being displayed simply:
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							right-click in the	<interface>Commentary Pane</interface>.In the popup menu choose
+							<guimenuitem>About </guimenuitem> module name.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			<sect3 id="gnomesword-commentary-headings">
+				<title>Commentary Headings.</title>	
+				<para>Most commentaries have additional headings which enable introductory information about the book and chapter currently
+					  being displayed in the <interface>Bible Text Pane</interface>. In order to view them, simply:
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+						  	right-click in the <interface>Commentary Pane</interface>.	In the popup menu choose <guimenuitem>File-&gt;Navigate
+							-&gt;Chapter Heading</guimenuitem>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					Repeat the steps above and choose <guimenuitem>Book Heading</guimenuitem>, instead of <guimenuitem>Chapter Heading
+					</guimenuitem>, if you want view the Book Headings.
+				</para>
+			</sect3>
 		</sect2>
 		
 		
