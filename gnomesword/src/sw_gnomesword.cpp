@@ -317,12 +317,12 @@ void initSWORD(GtkWidget * mainform)
 			}
 		}
 	}
-
+/*
 	if (settings->showsplash) {
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	}
-
+*/
 }
 
 void modNameFromDesc(gchar * modName, gchar * modDesc)
@@ -1115,37 +1115,6 @@ void showmoduleinfoSWORD(char *modName)	//--  show module information in an abou
 	} else
 		g_warning(bufabout);
 }
-
-//-------------------------------------------------------------------------------------------
-void showinfoSWORD(GtkWidget * text, GtkLabel * label, GtkLabel * version_label)	//--  show text module about information in the Sword Project about dialog
-{
-	char *buf,		//-- pointer to text buffer for label (mod name)
-	*bufabout,		//-- pointer to text buffer for text widget (mod about)
-	 version[40];
-	ModMap::iterator it;	//-- module iterator
-	SectionMap::iterator sit;	//--
-	ConfigEntMap::iterator cit;	//--
-	gfloat ver;
-
-	ver = getSwordVerionSWORD();
-	sprintf(version, "Sword-%.2f", ver);
-	gtk_label_set_text(GTK_LABEL(version_label), version);	//-- set label to sword version
-
-	it = mainMgr->Modules.find(curMod->Name());	//-- find module (modName)
-	if (it != mainMgr->Modules.end()) {	//-- if we don't run out of mods before we find the one we are looking for   
-		buf = (char *) (*it).second->Description();	//-- get discription of module
-		sit = mainMgr->config->Sections.find((*it).second->Name());
-		if (sit != mainMgr->config->Sections.end()) {
-			cit = (*sit).second.find("About");
-			if (cit != (*sit).second.end())
-				bufabout = (char *) (*cit).second.c_str();	//-- get module about information
-		}
-	}
-	gtk_label_set_text(GTK_LABEL(label), buf);	//-- set label to module discription        
-	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE);	//-- set word wrap to TRUE for text widget
-	AboutModsDisplay(text, bufabout);	//-- send about info and text widget to display function (display.cpp)
-}
-
 
 /******************************************************************************
  * setglobalopsSWORD

@@ -1,10 +1,12 @@
-/***************************************************************************
-                              	       gs_gui_cb.h
-                             -------------------
-Mon May 8 2000
-copyright (C) 2000 by Terry Biggs
-tbiggs@users.sourceforge.net
- ***************************************************************************/
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_gui_cb.h
+    * -------------------
+    * Mon May 8 2000
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+ */
 
 /*   
  *  This program is free software; you can redistribute it and/or modify
@@ -21,6 +23,9 @@ tbiggs@users.sourceforge.net
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
+#ifndef __GS_GUI_CB_H_
+#define __GS_GUI_CB_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -139,3 +144,5 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* __GS_GUI_CB_H_ */

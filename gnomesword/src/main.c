@@ -75,7 +75,7 @@ main (int argc, char *argv[])
   			newbookmarks = TRUE;
 		}
 	} 
-#ifdef GTKHTML_HAVE_GCONF
+#ifdef GTKHTML_HAVE_GCONF  /*** this is needed for gtkhtml ***/
 	if (!gconf_init (argc, argv, &gconf_error)) {
 		g_assert (gconf_error != NULL);
 		g_error ("GConf init failed:\n  %s", gconf_error->message);

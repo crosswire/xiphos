@@ -1,11 +1,13 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                            gs_gnomesword.h
-                             -------------------
-    begin                : Tue Dec 05 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
- ***************************************************************************/
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_gnomesword.h
+    * -------------------
+    * Tue Dec 05 2000
+    * copyright (C) 2001 by tbiggs
+    * tbiggs@users.sourceforge.net
+    *
+ */
 
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -31,14 +33,17 @@ extern "C" {
 #endif
 
 #include "sw_gnomesword.h"
- 
+
+#define MAIN_TEXT_WINDOW 0 
+#define INTERLINEAR_WINDOW 1
+	
 typedef struct _settings SETTINGS;
 struct _settings {
 	GtkWidget
-		*app,
+		*app,  /* main form */
 		*appbar, /* gnome status/progress bar */
-		*shortcut_bar,
-		*ctree_widget,
+		*shortcut_bar,  /* the shortcut bar widget */
+		*ctree_widget,  /* bookmarks tree */
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
 		*srhtml,  /* html widget for serch results list in shortcut bar */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
@@ -154,8 +159,10 @@ gint string_is_color(gchar *color);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
+
 #ifdef __cplusplus
 }
 #endif
+
 #endif /* __GS_GNOMESWORD_H__ */
 
