@@ -80,7 +80,7 @@ typedef struct _Icon Icon;
 struct _ESplashPrivate {
 	GnomeCanvas *canvas;
 	GdkPixbuf *splash_image_pixbuf;
-
+	GtkProgressBar *progressbar;
 	GList *icons;		/* (Icon *) */
 	int num_icons;
 
@@ -89,8 +89,8 @@ struct _ESplashPrivate {
 
 /* Layout constants.  These need to be changed if the splash changes.  */
 
-#define ICON_Y    290
-#define ICON_SIZE 25
+#define ICON_Y    280
+#define ICON_SIZE 34
 
 /* Icon management.  */
 
@@ -305,7 +305,7 @@ void
 e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 {
 	ESplashPrivate *priv;
-	GtkWidget *canvas, *frame;
+	GtkWidget *canvas, *frame, *vbox;
 	int image_width, image_height;
 
 	g_return_if_fail(splash != NULL);
@@ -329,11 +329,22 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 
 	frame = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
-	gtk_container_add(GTK_CONTAINER(frame), canvas);
+	//gtk_container_add(GTK_CONTAINER(frame), canvas);
 	gtk_widget_show(frame);
 
 	gtk_container_add(GTK_CONTAINER(splash), frame);
 
+	vbox = gtk_vbox_new(FALSE,2);
+	gtk_widget_show(vbox);	
+	gtk_container_add(GTK_CONTAINER(frame), vbox);
+	
+	gtk_box_pack_start((GtkBox *)vbox, canvas,TRUE,TRUE,0);
+	
+	priv->progressbar = (GtkProgressBar*)gtk_progress_bar_new();
+	gtk_widget_show(GTK_WIDGET(priv->progressbar));
+	gtk_box_pack_start((GtkBox *)vbox, GTK_WIDGET(priv->progressbar),FALSE,TRUE,0);	
+	
+	
 	gnome_canvas_item_new(GNOME_CANVAS_GROUP(priv->canvas->root),
 			      GNOME_TYPE_CANVAS_PIXBUF,
 			      "pixbuf", splash_image_pixbuf, NULL);
@@ -345,7 +356,7 @@ e_splash_construct(ESplash * splash, GdkPixbuf * splash_image_pixbuf)
 	gtk_window_set_position(GTK_WINDOW(splash), GTK_WIN_POS_CENTER);
 	gtk_window_set_policy(GTK_WINDOW(splash), FALSE, FALSE, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(splash), image_width,
-				    image_height);
+				    image_height+20);
 	gtk_window_set_title(GTK_WINDOW(splash), "GnomeSword");
 
 }
@@ -458,6 +469,7 @@ void gui_splash_init()
 {
 	GdkPixbuf *icon_pixbuf;
 	GError *error = NULL;
+	GtkWidget *image;
 
 	if (settings.showsplash) {
 		splash = e_splash_new();
@@ -466,10 +478,10 @@ void gui_splash_init()
 
 		gtk_widget_show(splash);
 		gtk_object_ref(GTK_OBJECT(splash));
-
-		icon_pixbuf =
-		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/sword.png", &error);
+		
+		icon_pixbuf = 
+		   gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+					     "/init-settings.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
@@ -480,7 +492,7 @@ void gui_splash_init()
 
 		icon_pixbuf =
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/book-gold.png", &error);
+					     "/gnome-window-manager.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
@@ -492,7 +504,7 @@ void gui_splash_init()
 
 		icon_pixbuf =
 		    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					     "/book-green.png", &error);
+					     "/sword3.png", &error);
 		if (!icon_pixbuf) {
 			fprintf(stderr, "pixmap file error: %s\n",
 				error->message);
@@ -518,9 +530,16 @@ void gui_splash_init()
 
 void gui_splash_step1()
 {
+	ESplashPrivate *priv;
 	if (settings.showsplash) {
+		
+		priv = E_SPLASH(splash)->priv;
+		gtk_progress_bar_set_text(priv->progressbar,
+                                             _("Loading settings"));
+		gtk_progress_bar_set_fraction(priv->progressbar,
+                                             0.2);
 		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
-
+		
 		while (gtk_events_pending()) {
 			gtk_main_iteration();
 		}
@@ -530,7 +549,13 @@ void gui_splash_step1()
 
 void gui_splash_step2()
 {
+	ESplashPrivate *priv;
 	if (settings.showsplash) {
+		priv = E_SPLASH(splash)->priv;
+		gtk_progress_bar_set_text(priv->progressbar,
+                                             _("Building Interface"));
+		gtk_progress_bar_set_fraction(priv->progressbar,
+                                             0.5);
 		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
 
 		while (gtk_events_pending()) {
@@ -541,7 +566,13 @@ void gui_splash_step2()
 
 void gui_splash_step3()
 {
+	ESplashPrivate *priv;
 	if (settings.showsplash) {
+		priv = E_SPLASH(splash)->priv;
+		gtk_progress_bar_set_text(priv->progressbar,
+                                             _("Starting Sword"));
+		gtk_progress_bar_set_fraction(priv->progressbar,
+                                             0.8);
 		e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);
 
 		while (gtk_events_pending()) {
@@ -552,7 +583,13 @@ void gui_splash_step3()
 
 void gui_splash_step4()
 {
+	ESplashPrivate *priv;
 	if (settings.showsplash) {
+		priv = E_SPLASH(splash)->priv;
+		gtk_progress_bar_set_text(priv->progressbar,
+                                             _("Displaying GnomeSword"));
+		gtk_progress_bar_set_fraction(priv->progressbar,
+                                             1.0);
 		e_splash_set_icon_highlight(E_SPLASH(splash), 3, TRUE);
 
 		while (gtk_events_pending()) {
