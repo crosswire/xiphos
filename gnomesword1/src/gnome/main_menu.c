@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
+#include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
 #include "support.h"
@@ -49,12 +49,25 @@
  * static - global to this file only
  */
 
-				
 /******************************************************************************
- *on_help_contents_activate - user chose help item
-******************************************************************************/
-void
-on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
+ * Name
+ *  on_help_contents_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_help_contents_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   display the help contents file
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_help_contents_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
 {       
 	pid_t pid;	
 	
@@ -67,19 +80,47 @@ on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 /******************************************************************************
- *on_mnuHistoryitem1_activate - user chose an history item
-******************************************************************************/
-void
-on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
+ * Name
+ *  on_mnuHistoryitem1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   change text module to chosen histor item
+ *
+ * Return value
+ *   void
+ */
+
+void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
 {       	
 	changeverseHistory(atoi((gchar *)user_data));
 }
 
+/******************************************************************************
+ * Name
+ *  on_about_the_sword_project1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   display - The SWORD Project - about information
+ *
+ * Return value
+ *   void
+ */
 
-/*** display - The SWORD Project - about information ***/
-void
-on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
-				     gpointer user_data)
+void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
+						gpointer user_data)
 {
 	GtkWidget *dlg, *version_label;
 	const char *ver;
@@ -87,32 +128,76 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	
 	dlg = gui_create_about_sword();
 	version_label = lookup_widget(dlg, "version_label");
-	/* get sword version */
-	ver = backend_get_sword_verion();	
+	/* 
+	 * get sword version 
+	 */
+	ver = get_sword_version();
 	sprintf(version,"Sword-%s",ver);
 	gtk_label_set_text(GTK_LABEL(version_label),version);
 	gtk_widget_show(dlg);
 }
 
+/******************************************************************************
+ * Name
+ *  on_daily_devotion1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   display daily devotion in shortcut bar viewer
+ *
+ * Return value
+ *   void
+ */
 
-/*** display daily devotion in shortcut bar viewer ***/
-void
-on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
-                                        gpointer         user_data)
+void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
+						gpointer user_data)
 {	
 	backend_display_devotional(settings);
 }
 
-
-/*** open preferences dialog ***/
-void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
+/******************************************************************************
+ * Name
+ *  on_preferences1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   open preferences dialog
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	setup_preferences_dlg(settings);
 }
 
-
-/*** display search group in shortcut bar ***/
-void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
+/******************************************************************************
+ * Name
+ *  on_search_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   display search group in shortcut bar
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	SETTINGS *s;
 	EShortcutBar *bar1;
@@ -127,40 +212,99 @@ void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 						 TRUE);
 }
 
+/******************************************************************************
+ * Name
+ *  on_verse_style1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)	
+ *
+ * Description
+ *   toogle between verse and paragraph style
+ *
+ * Return value
+ *   void
+ */
 
-/*** toogle between verse and paragraph style ***/
-void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	set_verse_style(GTK_CHECK_MENU_ITEM(menuitem)->active); 
 }
 
+/******************************************************************************
+ * Name
+ *  on_exit1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   do a nice orderly shut down and exit gnomesword
+ *   by calling gtk_widget_destroy() which will call
+ *   on_mainwindow_destroy()
+ *
+ * Return value
+ *   void
+ */
 
-/*** do a nice orderly shut down and exit gnomesword ***/
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gtk_widget_destroy(settings->app); 
-	/* this will send us to on_mainwindow_destroy() */
 }
 
-/*** remove all items from history list ***/
-void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu
-			gpointer user_data)
+/******************************************************************************
+ * Name
+ *  on_clear1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_clear1_activate(GtkMenuItem * menuitem,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   remove all items from history list by calling
+ *   clearhistory();
+ *
+ * Return value
+ *   void
+ */
+ 
+void on_clear1_activate(GtkMenuItem * menuitem,
+						gpointer user_data)
 {
 	clearhistory(settings->app,GTK_WIDGET(settings->shortcut_bar));
 }
 
+/******************************************************************************
+ * Name
+ *  on_about_gnomesword1_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void on_about_gnomesword1_activate(GtkMenuItem * menuitem, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   display gnomesword about dialog 
+ *
+ * Return value
+ *   void
+ */
 
-/*** display gnomesword about dialog ***/
-void
-on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_about_gnomesword1_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
 {
 	GtkWidget *AboutBox;
 
 	AboutBox = gui_create_about_gnomesword();
 	gtk_widget_show(AboutBox);
 }
-
-
 
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
@@ -179,7 +323,7 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Search"),
 	 N_("Open search dialog"),
-	 on_search1_activate, NULL, NULL,
+	 on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	GNOMEUIINFO_END
@@ -310,10 +454,21 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-
-
-
-
+/******************************************************************************
+ * Name
+ *   gui_create_main_menu
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void gui_create_main_menu(GtkWidget *app)	
+ *
+ * Description
+ *   create the main menu for gnomesword
+ *
+ * Return value
+ *   void
+ */
 
 void gui_create_main_menu(GtkWidget *app)
 {
@@ -468,6 +623,22 @@ void gui_create_main_menu(GtkWidget *app)
 				 books_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);	
 }
+
+/******************************************************************************
+ * Name
+ *  gui_install_menu_hints
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void gui_install_menu_hints(GtkWidget *app)	
+ *
+ * Description
+ *   install hints - display menu hints in status bar
+ *
+ * Return value
+ *   void
+ */
 
 void gui_install_menu_hints(GtkWidget *app)
 {
