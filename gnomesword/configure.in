@@ -108,8 +108,8 @@ AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir])
 
 AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking],spellchecking=$enableval,spellchecking="no") 
 AC_ARG_ENABLE(printing,[--enable-printing		enable printing],printing=$enableval,printing="no")
- AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
- AC_ARG_ENABLE(all,[--enable-all		enable all]all,all=$enableval,all="no")
+AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
+AC_ARG_ENABLE(all,[--enable-all		enable all]all,all=$enableval,all="no")
 
 dnl looking for aspell 
 if test "x$spelchecking" = xyes || test "x$all" = xyes; then
