@@ -90,33 +90,52 @@
 				</listitem>
 		  	</varlistentry>
 		  	<varlistentry>
-				<term>Bible Text pane</term>
+				<term>Bible Text Pane</term>
 				<listitem>
 					<para>
 					The <interface>Bible Text pane</interface> displays the Bible text which is currently being viewed.
 					</para>
 			    </listitem>
 		  	 </varlistentry>
+			<varlistentry>
+				<term>Viewer</term>
+				<listitem>
+					<para>
+					The <interface>Viewer</interface> displays bible text module options. This includes strong numbers, footnotes and 						morphological tags. It is located just below the Bible Text Pane.
+					</para>
+				</listitem>
+			 </varlistentry>
 		  	 <varlistentry>
-			 	<term>Commentary pane</term>
+			 	<term>Commentary Pane</term>
 			 	<listitem>
 					<para>
 					The <interface>Commentary pane</interface> displays commentaries on the current Bible Text being used.
 					</para>
 			 	</listitem>
-		     </varlistentry>
+		         </varlistentry>
+			 <varlistentry>
+			 	<term>Book Pane</term>
+			 	<listitem>
+					<para>
+					The <interface>Book Pane</interface> displays general books available from the Sword Project. These include modules like
+					"Calvin's Institutes", "Josephus: The Complete Works" etc. This Pane can be accessed	via the Book View tab just below the
+					Commentary Pane.
+					</para>
+			 	</listitem>
+		         </varlistentry>
 			 <varlistentry>
 			 	<term>Dictionary/Book Pane</term>
 			 	<listitem>
 					<para>
 					The <interface>Dictionary/Book Pane</interface> displays dictionary information
-					on selected words in the <interface>Bible Text Pane</interface>.
+					on selected words in the <interface>Bible Text Pane</interface>. It is located just below the Commentary Pane
 					</para>
 			 	</listitem>
 		     </varlistentry>
 			 </variablelist>
 		     <para>
-			When you right-click in the different interface sections, the interface displays a popup menu. 
+			When you right-click in the different interface sections, the interface displays a popup menu, which allows you to access more module
+			specific options. These include printing services. 
 			</para>
 	</sect1>
 </chapter>
