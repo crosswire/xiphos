@@ -36,7 +36,8 @@
 #include <htmlengine-edit-fontstyle.h>
 #include <htmlsettings.h>
 #include <htmlengine-edit-cut-and-paste.h>
-
+//#include <htmlengine-edit-cut.h>
+//#include <htmlengine-edit-paste.h>
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>

@@ -108,12 +108,12 @@ ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     -I$(top_srcdir)/html         -I /usr/include/gtkhtml 
+INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     -I$(top_srcdir)/html     -I /usr/include/gtkhtml 
 
 
 bin_PROGRAMS = gnomesword
 
-COMMON_SOURCE =      gs_abouts.c     gs_abouts.h     gs_viewtext_dlg.c     gs_viewtext_dlg.h     gs_viewcomm_dlg.c     gs_viewcomm_dlg.h     gs_viewdict_dlg.c     gs_viewdict_dlg.h     gs_studypad.c     gs_studypad.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     display.cpp     display.h     gs_display.cpp     gs_display.h     gs_file.c     gs_file.h     gs_sword.cpp     gs_sword.h     interface.c     interface.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     sw_utility.cpp     sw_utility.h     printstuff.c     printstuff.h     gs_gbfhtml.cpp     gs_gbfhtml.h    gs_wgsil.cpp    gs_wgsil.h
+COMMON_SOURCE =      gs_abouts.c     gs_abouts.h     gs_ui.c     gs_ui.h     gs_viewtext_dlg.c     gs_viewtext_dlg.h     gs_viewcomm_dlg.c     gs_viewcomm_dlg.h     gs_viewdict_dlg.c     gs_viewdict_dlg.h     gs_studypad.c     gs_studypad.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     display.cpp     display.h     gs_display.cpp     gs_display.h     gs_file.c     gs_file.h     gs_sword.cpp     gs_sword.h     interface.c     interface.h     gs_listeditor.c     gs_listeditor.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     sw_utility.cpp     sw_utility.h     printstuff.c     printstuff.h     gs_gbfhtml.cpp     gs_gbfhtml.h    gs_wgsil.cpp    gs_wgsil.h
 
 
 SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell_gui.h     char_table.c     char_table.h 
@@ -122,7 +122,7 @@ SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell
 EXTRA_DIST =      $(SPELLING_SOURCE) 
 
 
-gnomesword_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)     $(top_builddir)/html/libhtmleditor.a
+gnomesword_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)     $(top_builddir)/html/libhtmleditor.a 
 
 @SPELLING_TRUE@gnomesword_SOURCES =     $(SPELLING_SOURCE)     $(COMMON_SOURCE)
 @SPELLING_FALSE@gnomesword_SOURCES =     $(COMMON_SOURCE)
@@ -139,15 +139,15 @@ DEFS = @DEFS@ -I. -I$(srcdir) -I..
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-@SPELLING_FALSE@gnomesword_OBJECTS =  gs_abouts.o gs_viewtext_dlg.o \
-@SPELLING_FALSE@gs_viewcomm_dlg.o gs_viewdict_dlg.o gs_studypad.o \
-@SPELLING_FALSE@gs_gnomesword.o gs_history.o callback.o display.o \
-@SPELLING_FALSE@gs_display.o gs_file.o gs_sword.o interface.o \
+@SPELLING_FALSE@gnomesword_OBJECTS =  gs_abouts.o gs_ui.o \
+@SPELLING_FALSE@gs_viewtext_dlg.o gs_viewcomm_dlg.o gs_viewdict_dlg.o \
+@SPELLING_FALSE@gs_studypad.o gs_gnomesword.o gs_history.o callback.o \
+@SPELLING_FALSE@display.o gs_display.o gs_file.o gs_sword.o interface.o \
 @SPELLING_FALSE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
 @SPELLING_FALSE@gs_search.o gs_search_cb.o support.o gs_html.o \
 @SPELLING_FALSE@sw_utility.o printstuff.o gs_gbfhtml.o gs_wgsil.o
 @SPELLING_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o char_table.o \
-@SPELLING_TRUE@gs_abouts.o gs_viewtext_dlg.o gs_viewcomm_dlg.o \
+@SPELLING_TRUE@gs_abouts.o gs_ui.o gs_viewtext_dlg.o gs_viewcomm_dlg.o \
 @SPELLING_TRUE@gs_viewdict_dlg.o gs_studypad.o gs_gnomesword.o \
 @SPELLING_TRUE@gs_history.o callback.o display.o gs_display.o gs_file.o \
 @SPELLING_TRUE@gs_sword.o interface.o gs_listeditor.o main.o gs_menu.o \
@@ -177,10 +177,10 @@ DEP_FILES =  .deps/callback.P .deps/char_table.P .deps/display.P \
 .deps/gs_gnomesword.P .deps/gs_history.P .deps/gs_html.P \
 .deps/gs_listeditor.P .deps/gs_menu.P .deps/gs_popup_cb.P \
 .deps/gs_search.P .deps/gs_search_cb.P .deps/gs_studypad.P \
-.deps/gs_sword.P .deps/gs_viewcomm_dlg.P .deps/gs_viewdict_dlg.P \
-.deps/gs_viewtext_dlg.P .deps/gs_wgsil.P .deps/interface.P .deps/main.P \
-.deps/printstuff.P .deps/spell.P .deps/spell_gui.P .deps/support.P \
-.deps/sw_utility.P
+.deps/gs_sword.P .deps/gs_ui.P .deps/gs_viewcomm_dlg.P \
+.deps/gs_viewdict_dlg.P .deps/gs_viewtext_dlg.P .deps/gs_wgsil.P \
+.deps/interface.P .deps/main.P .deps/printstuff.P .deps/spell.P \
+.deps/spell_gui.P .deps/support.P .deps/sw_utility.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 

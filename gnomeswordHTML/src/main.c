@@ -27,7 +27,7 @@
 #include "gs_menu.h"
 #include "support.h"
 #include "callback.h"
-#include "interface.h"
+#include "gs_ui.h"
 #include "gs_file.h"
 #include "gs_html.h"
 
@@ -62,7 +62,7 @@ main (int argc, char *argv[])
   	gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	*/
-  	mainwindow = create_mainwindow ();
+  	mainwindow = create_mainwindow();
   	add_gtkhtml_widgets(mainwindow);
   	setDiretory();
   	if(newconfigs)
