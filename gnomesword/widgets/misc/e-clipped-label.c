@@ -31,6 +31,7 @@
  */
 
 #include <math.h>
+#include <string.h>
 
 #include <gdk/gdki18n.h>
 #include <libgnome/gnome-defs.h>

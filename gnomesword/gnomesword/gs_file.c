@@ -443,7 +443,7 @@ void loadStudyPadFile(gchar * filename)
 void writesettings(SETTINGS settings)
 {
 	int fd;	/* file handle */
-
+        //g_warning("saved com page = %d",settings.notebook1page);
 	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* open file (settings.cfg) */
 	write(fd, (char *) &settings, sizeof(settings));	/* save structure to disk */
 	close(fd);		/* close file */

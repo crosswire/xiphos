@@ -1,6 +1,3 @@
 
-SUBDIRS =			\
-	misc			\
-	e-text			\
-	e-paned			\
-	shortcut-bar
+SUBDIRS = misc\
+          shortcut-bar

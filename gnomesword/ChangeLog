@@ -1,7 +1,39 @@
+2001-01-30 Terry Biggs <tbiggs@users.sourceforge.net>
+
+      *release 0.4.0
+      *added history list and buttons
+
+
+2001-01-08 Terry Biggs <tbiggs@users.sourceforge.net>
+        	
+	*fixed listeditor bug - crashed with seg fault
+	 when last item was moved up.
+	 
+
+2001-01-05 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*merged gnomesword and gnomeswordLE
+	*removed spellcheck.cpp, spellcheck.h, DICTClient.cpp and DICTClient..h
+	*gnomesword will use ispell or aspell for spell checking
+	*added files from Bluefish HTML Editor:
+	*spell.c, spell.h, spell_gui.c, spell_gui.h, char_table.c and char_table.h
+	for spell checking
+	*gnomesword will now use ispell or aspell 
+	*added dialog for viewing dictionary modules
+	
+
+2000-12-23 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*now using gal 4.0 
+	*removed all of the Evolution code but 
+	/widgets/shortcut-bar and /widgets/misc.
+	 
+
 2000-12-15 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*changed filestuff.cpp to gs_file.c
 	*changed filestuff.h to gs_file.c
+	
 
 2000-12-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -12,7 +44,8 @@
 2000-12-08 Terry Biggs <tbiggs@users.sourceforge.net> 
 
 	* shortcut bar bug fixed - really
-	* release 0.3.7a	
+	* release 0.3.7a
+		
 
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -24,6 +57,7 @@
         	settings->shortcutbarsize = panesize;
         	return true;
         }
+        
 
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
 
