@@ -96,14 +96,14 @@ void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_help_contents_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
-{
-	//GError *error = NULL;
-	/*if(!gnome_help_display("",
-				     NULL,
-				     &error)) {
-		fprintf (stderr, "Gnome help error: %s\n", error->message);
-		g_error_free (error);
-	}*/
+{	
+	GError *error = NULL;
+	
+       if (gnome_help_display ((const gchar*)"gnomesword.xml", NULL, &error) == FALSE) {
+		g_warning(error->message);
+		g_error_free (error);        
+	}
+	
 }
 
 /******************************************************************************
@@ -864,7 +864,7 @@ void gui_create_main_menu(GtkWidget * app)
 
 	/*gtk_menu_item_right_justify(GTK_MENU_ITEM
 				    (menubar1_uiinfo[4].widget));*/
-	gtk_widget_set_sensitive(help1_menu_uiinfo[0].widget, FALSE);
+	//gtk_widget_set_sensitive(help1_menu_uiinfo[0].widget, FALSE);
 
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
 			      _

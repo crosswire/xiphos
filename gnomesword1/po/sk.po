@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
-"POT-Creation-Date: 2003-11-13 11:35-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-11-18 15:43-0500\n"
 "PO-Revision-Date: 2002-10-21 19:34+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -52,11 +53,11 @@ msgstr "O projekte SWORD..."
 msgid "Sword Version"
 msgstr "Sword moduly"
 
-#: src/gnome/about_sword.c:159 src/gnome2/about_sword.c:158
+#: src/gnome/about_sword.c:159 src/gnome2/about_sword.c:160
 msgid "Modules can be downloaded from the Sword Project "
 msgstr "Moduly môŸu by» stiahnuté zo Sword projektu "
 
-#: src/gnome/about_sword.c:165 src/gnome2/about_sword.c:164
+#: src/gnome/about_sword.c:165 src/gnome2/about_sword.c:166
 #, fuzzy
 msgid "The Sword Project"
 msgstr "O projekte SWORD..."
@@ -254,7 +255,7 @@ msgstr "_Upravi»"
 #: src/gnome/parallel_view.c:1246 src/gnome/toolbar_edit.c:532
 #: src/gnome2/bibletext_menu.c:1270 src/gnome2/commentary_menu.c:1349
 #: src/gnome2/editor_menu.c:1028 src/gnome2/main_menu.c:615
-#: src/gnome2/parallel_view.c:1205 src/gnome2/toolbar_edit.c:532
+#: src/gnome2/parallel_view.c:1202 src/gnome2/toolbar_edit.c:532
 msgid "Copy"
 msgstr "Kopírova»"
 
@@ -275,7 +276,7 @@ msgstr "Upravi» poloŸku"
 
 #: src/gnome/bibletext_menu.c:1300 src/gnome/commentary_menu.c:1372
 #: src/gnome/parallel_view.c:1260 src/gnome2/bibletext_menu.c:1300
-#: src/gnome2/commentary_menu.c:1372 src/gnome2/parallel_view.c:1219
+#: src/gnome2/commentary_menu.c:1372 src/gnome2/parallel_view.c:1216
 msgid "Module Options"
 msgstr "Nastavenia modulov"
 
@@ -825,36 +826,36 @@ msgid "Go to %s"
 msgstr "Ís» na %s"
 
 #: src/gnome/gtkhtml_display.c:1036 src/gnome/gtkhtml_display.c:1051
-#: src/gnome2/gtkhtml_display.c:857 src/gnome2/gtkhtml_display.c:869
+#: src/gnome2/gtkhtml_display.c:853 src/gnome2/gtkhtml_display.c:865
 msgid "The"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1038 src/gnome2/gtkhtml_display.c:859
+#: src/gnome/gtkhtml_display.c:1038 src/gnome2/gtkhtml_display.c:855
 msgid "module is locked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1054 src/gnome2/gtkhtml_display.c:872
+#: src/gnome/gtkhtml_display.c:1054 src/gnome2/gtkhtml_display.c:868
 msgid "module has been unlocked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1071 src/gnome2/gtkhtml_display.c:886
+#: src/gnome/gtkhtml_display.c:1071 src/gnome2/gtkhtml_display.c:882
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1075 src/gnome2/gtkhtml_display.c:890
+#: src/gnome/gtkhtml_display.c:1075 src/gnome2/gtkhtml_display.c:886
 msgid "click here"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1076 src/gnome2/gtkhtml_display.c:891
+#: src/gnome/gtkhtml_display.c:1076 src/gnome2/gtkhtml_display.c:887
 #, fuzzy
 msgid "to unlock the module"
 msgstr "Odomknú» tento modul"
 
-#: src/gnome/gtkhtml_display.c:1089 src/gnome2/gtkhtml_display.c:901
+#: src/gnome/gtkhtml_display.c:1089 src/gnome2/gtkhtml_display.c:897
 msgid "You will have to restart GnomeSword after you unlock it."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1104 src/gnome2/gtkhtml_display.c:912
+#: src/gnome/gtkhtml_display.c:1104 src/gnome2/gtkhtml_display.c:908
 #, fuzzy
 msgid "You need to restart GnomeSword to view it"
 msgstr "Prejete si otvori» GnomeSword s"
@@ -879,7 +880,7 @@ msgstr "VloŸi» otvárací kµúè"
 msgid "GnomeSword Print Preview"
 msgstr "Interlineárna stránka GnomeSWORDu"
 
-#: src/gnome/main_menu.c:108 src/gnome2/main_menu.c:105
+#: src/gnome/main_menu.c:108
 msgid "Cannot launch gnome-help-browser"
 msgstr "Gnome-prehliadaè-pomocníka sa nedá spusti»"
 
@@ -1048,19 +1049,19 @@ msgstr "O Sword moduloch"
 msgid "Information about the installed modules"
 msgstr "Informácie o nain¹talovaných moduloch"
 
-#: src/gnome/main_menu.c:778 src/gnome2/main_menu.c:770
+#: src/gnome/main_menu.c:778 src/gnome2/main_menu.c:776
 msgid "About GnomeSword..."
 msgstr "O GnomeSword..."
 
-#: src/gnome/main_menu.c:779 src/gnome2/main_menu.c:771
+#: src/gnome/main_menu.c:779 src/gnome2/main_menu.c:777
 msgid "About GnomeSword"
 msgstr "O GnomeSword"
 
-#: src/gnome/main_menu.c:784 src/gnome2/main_menu.c:776
+#: src/gnome/main_menu.c:784 src/gnome2/main_menu.c:770
 msgid "About the Sword Project..."
 msgstr "O Sword projekte..."
 
-#: src/gnome/main_menu.c:785 src/gnome2/main_menu.c:777
+#: src/gnome/main_menu.c:785 src/gnome2/main_menu.c:771
 msgid "Infotmation About The Sword Project"
 msgstr "Informácie o Sword projekte"
 
@@ -1102,19 +1103,19 @@ msgstr "Prida» Slovník"
 msgid "_File/Open Book Dialog/"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome/main_menu.c:878 src/gnome2/main_menu.c:870
+#: src/gnome/main_menu.c:878 src/gnome2/main_menu.c:871
 msgid "_Help/About Sword Modules/Bible Texts/"
 msgstr "_Pomocník/O Sword moduloch/Biblické texty/"
 
-#: src/gnome/main_menu.c:883 src/gnome2/main_menu.c:875
+#: src/gnome/main_menu.c:883 src/gnome2/main_menu.c:876
 msgid "_Help/About Sword Modules/Commentaries/"
 msgstr "_Pomocník/O Sword moduloch/Komentáre/"
 
-#: src/gnome/main_menu.c:888 src/gnome2/main_menu.c:880
+#: src/gnome/main_menu.c:888 src/gnome2/main_menu.c:881
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
 msgstr "_Pomocník/O Sword moduloch/Slovníky-lexikóny/"
 
-#: src/gnome/main_menu.c:892 src/gnome2/main_menu.c:884
+#: src/gnome/main_menu.c:892 src/gnome2/main_menu.c:885
 msgid "_Help/About Sword Modules/Books/"
 msgstr "_Pomocník/O Sword moduloch/Knihy/"
 
@@ -1138,32 +1139,32 @@ msgstr "Slovník-Lexikón"
 msgid "Parallel View"
 msgstr ""
 
-#: src/gnome/parallel_view.c:1255 src/gnome2/parallel_view.c:1214
+#: src/gnome/parallel_view.c:1255 src/gnome2/parallel_view.c:1211
 msgid "Detach/Attach"
 msgstr "Pripoji»/Odobra»"
 
 #. build change parallel modules submenu
-#: src/gnome/parallel_view.c:1273 src/gnome2/parallel_view.c:1232
+#: src/gnome/parallel_view.c:1273 src/gnome2/parallel_view.c:1229
 #, fuzzy
 msgid "Change parallel 1"
 msgstr "Interlinearny 1"
 
-#: src/gnome/parallel_view.c:1276 src/gnome2/parallel_view.c:1235
+#: src/gnome/parallel_view.c:1276 src/gnome2/parallel_view.c:1232
 #, fuzzy
 msgid "Change parallel 2"
 msgstr "Interlinearny 2"
 
-#: src/gnome/parallel_view.c:1279 src/gnome2/parallel_view.c:1238
+#: src/gnome/parallel_view.c:1279 src/gnome2/parallel_view.c:1235
 #, fuzzy
 msgid "Change parallel 3"
 msgstr "Interlinearny 3"
 
-#: src/gnome/parallel_view.c:1282 src/gnome2/parallel_view.c:1241
+#: src/gnome/parallel_view.c:1282 src/gnome2/parallel_view.c:1238
 #, fuzzy
 msgid "Change parallel 4"
 msgstr "Interlinearny 4"
 
-#: src/gnome/parallel_view.c:1285 src/gnome2/parallel_view.c:1244
+#: src/gnome/parallel_view.c:1285 src/gnome2/parallel_view.c:1241
 #, fuzzy
 msgid "Change parallel 5"
 msgstr "Interlinearny 5"
@@ -1282,8 +1283,7 @@ msgstr "+5"
 
 #: src/gnome/preferences_dialog.c:1495 src/gnome2/preferences_dialog.c:1708
 msgid "Zero is base font size Go up or down from there"
-msgstr ""
-"Nula je základná veµkos» písma Choïte hore alebo dolu z tadiaµto"
+msgstr "Nula je základná veµkos» písma Choïte hore alebo dolu z tadiaµto"
 
 #: src/gnome/preferences_dialog.c:1503 src/gnome2/preferences_dialog.c:1713
 msgid "GnomeSword Defaults"
@@ -2664,8 +2664,8 @@ msgstr "Zoznam ver¹ov"
 
 #~ msgid "Bible Reference or Module key to display when link is clicked"
 #~ msgstr ""
-#~ "Biblická referencia alebo kµúè modulu, ktorý sa zobrazí pri "
-#~ "kliknutí na odkaz"
+#~ "Biblická referencia alebo kµúè modulu, ktorý sa zobrazí pri kliknutí "
+#~ "na odkaz"
 
 #~ msgid "Name of module to show when link is clicked"
 #~ msgstr "Názov modulu, ktorý sa zobrazí pri kliknutí na odkaz"
