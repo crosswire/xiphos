@@ -23,6 +23,8 @@
 #define __EDITOR_H_
 
 #include <gnome.h>
+#include <bonobo.h>
+#include "main/Spell.h"
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 #include "gui/editor_replace.h"
@@ -124,6 +126,21 @@ struct _GSHTMLEditorControlData {
 	gboolean studypad; 
 	gchar filename[256];
 	gchar key[256];
+	
+	CORBA_sequence_GNOME_Spell_Language *languages;
+	gboolean                block_language_changes;
+	gchar                  *language;
+	GNOME_Spell_Dictionary  dict;
+//	EditorEngine           *editor_bonobo_engine;
+	BonoboObject           *persist_stream;
+        BonoboObject           *persist_file;
+	BonoboControl          *control;
+
+	GtkWidget *spell_dialog;
+	Bonobo_PropertyBag spell_control_pb;
+	gboolean has_spell_control;
+	gboolean has_spell_control_set;
+	gboolean spell_check_next;
 
 };
 

@@ -588,6 +588,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	specd->vbox = vboxSP;
 	specd->pm = gui_create_editor_popup(specd);
 	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
+	
 /*
 	gtk_signal_connect(GTK_OBJECT(specd->html), "submit",
 			   G_CALLBACK(on_submit), specd);
@@ -636,6 +637,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	
 	gtk_html_set_editable(specd->html,TRUE);
 	
+	//gui_new_editor_api(specd);
 	return htmlwidget;
 }
 

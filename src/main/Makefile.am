@@ -4,7 +4,23 @@ INCLUDES =  \
 
 noinst_LIBRARIES = libmain.a  
 
+
+
+SPELL_IDLS = Spell.idl
+SPELL_IDL_GENERATED_H =		\
+	Spell.h
+SPELL_IDL_GENERATED_C = 	\
+	Spell-common.c		\
+	Spell-skels.c		\
+	Spell-stubs.c
+	
+SPELL_IDL_GENERATED = \
+    $(SPELL_IDL_GENERATED_C)\
+    $(SPELL_IDL_GENERATED_H)
+
+
 libmain_a_SOURCES =  \
+    $(SPELL_IDL_GENERATED)\
     bibletext.c bibletext.h \
     commentary.c commentary.h \
     configs.c configs.h \
@@ -18,9 +34,12 @@ libmain_a_SOURCES =  \
     search.c search.h \
     settings.c settings.h \
     shortcutbar.c shortcutbar.h \
-    spell_aspell.c \
-    spell_ispell.c \
-    spell_pspell.c \
+    spell_gnome_spell.c \
     spell.h \
     sword.c sword.h\
     xml.c xml.h
+
+
+EXTRA_DIST = \
+    $(SPELL_IDLS) \
+    $(SPELL_IDL_GENERATED)
