@@ -87,8 +87,8 @@ static void applyoptions(SETTINGS * s)
 	GtkWidget *text, *dict, *comm;
 
 	text = lookup_widget(s->app, "nbTextMods");
-	dict = lookup_widget(s->app, "notebook4");
-	comm = lookup_widget(s->app, "notebook1");
+	dict = s->notebookDL;
+	comm = s->notebookCOMM;
 	/*  */
 	if (updatelayout) {
 		/* set the main window size */
@@ -114,27 +114,19 @@ static void applyoptions(SETTINGS * s)
 				     s->biblepane_width);
 		updatelayout = FALSE;
 	}
+	
 	if (s->text_tabs) {
 		gtk_widget_show(text);
 	} else {
 		gtk_widget_hide(text);
 	}
-	if (s->comm_tabs) {
-		gtk_widget_show(comm);
-	} else {
-		gtk_widget_hide(comm);
-	}
-	if (s->dict_tabs) {
-		gtk_widget_show(dict);
-	} else {
-		gtk_widget_hide(dict);
-	}
-	if (s->book_tabs) {
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (s->notebookGBS), TRUE);
-	} else {
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (s->notebookGBS), FALSE);
-	}
-
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS), 
+					s->book_tabs);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookDL), 
+					s->dict_tabs);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookCOMM),
+					s->comm_tabs);
+	
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
 	if (updatehtml)
 		applyfontcolorandsizeSWORD();

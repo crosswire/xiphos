@@ -252,7 +252,7 @@ GtkWidget *create_dlgInterlinear(SETTINGS * s)
 	gtk_widget_set_usize (cbIntBook, 154, -2);
 	
 	/*** get and load books of the Bible ***/
-	cbIntBook_items = backend_getBibleBooksSWORD();
+	cbIntBook_items = backend_get_books();
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbIntBook), cbIntBook_items);
 	g_list_free(cbIntBook_items);
 	
