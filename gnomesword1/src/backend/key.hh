@@ -40,7 +40,7 @@ int backend_start_parse_range_list(const char * list);
 char *backend_get_next_verse_list_element(int count);
 
 char *backend_get_valid_key(const char *key);
-const char *backend_get_book_from_key(const char *key);
+char *backend_get_book_from_key(const char *key);
 int backend_get_chapter_from_key(const char *key);
 int backend_get_verse_from_key(const char *key);
 const unsigned int backend_chapter_count(const char *key);

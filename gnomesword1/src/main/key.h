@@ -41,7 +41,7 @@ void set_scope2range(void);
 char *get_valid_key(const char *key);
 const unsigned int chapter_count(const char *key);
 const unsigned int verse_count(const char *key);
-const char *get_book_from_key(const char *key);
+char *get_book_from_key(const char *key);
 int get_chapter_from_key(const char *key);
 int get_verse_from_key(const char *key);	
 	
