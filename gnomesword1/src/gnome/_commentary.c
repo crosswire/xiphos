@@ -25,18 +25,16 @@
 
 #include <gnome.h>
 
-/*
- * gnome
- */
+/* gnome */
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
-/*
- * main
- */
+
+/* main */
 #include "commentary.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_viewcomm_dlg.h"
+#include "settings.h"
 
 
 /******************************************************************************
@@ -46,6 +44,7 @@
 extern gboolean isrunningVC;
 extern COMM_DATA *cur_c;
 extern gboolean comm_display_change;
+
 /******************************************************************************
  * global to this file only 
  */
@@ -76,22 +75,22 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
-	strcpy(settings->CommWindowModule, c->modName);
+	strcpy(settings.CommWindowModule, c->modName);
 	/*
-	 * set settings->comm_key to current module key
+	 * set settings.comm_key to current module key
 	 */
 	if(c->key)
-		strcpy(settings->comm_key,c->key);
-	settings->commLastPage = page_num;
+		strcpy(settings.comm_key,c->key);
+	settings.commLastPage = page_num;
 	if(comm_display_change) {
-		if ((c->key[0] == '\0') && (settings->currentverse != NULL)) {
+		if ((c->key[0] == '\0') && (settings.currentverse != NULL)) {
 			set_commentary_page_and_key(c->modnum,
-					      settings->currentverse);
-			strcpy(settings->comm_key,settings->currentverse);
-			strcpy(c->key, settings->comm_key);
+					      settings.currentverse);
+			strcpy(settings.comm_key,settings.currentverse);
+			strcpy(c->key, settings.comm_key);
 		}
 	}
-	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings->comm_tabs;
+	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
 }
 
 /******************************************************************************
@@ -161,7 +160,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	dict_mod = get_module_name_from_description(dict_mod_description);
 	dict_key = get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
-		display_dictlex_in_viewer(dict_mod, dict_key, settings);
+		display_dictlex_in_viewer(dict_mod, dict_key, &settings);
 		g_free(dict_key);
 		g_free(dict_mod);
 	}
@@ -189,9 +188,9 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = get_word_or_selection(c->html, FALSE);
 	if (key) {
-		display_dictlex_in_viewer(settings->DictWindowModule, 
+		display_dictlex_in_viewer(settings.DictWindowModule, 
 						key,
-						settings);
+						&settings);
 		g_free(key);
 	}
 }
@@ -219,7 +218,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_comm),
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm),
 			      page);
 }
 
@@ -548,10 +547,10 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 			   GTK_SIGNAL_FUNC(on_find_activate), c);
 	gtk_signal_connect(GTK_OBJECT(c->showtabs), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_comm_showtabs_activate), settings);
+			   (on_comm_showtabs_activate), &settings);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_view_new_activate), settings);
+			   (on_view_new_activate), &settings);
 	return pm;
 }
 
@@ -573,7 +572,7 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 
 static void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
 {
-	set_commentary_page_and_key(c->modnum, settings->currentverse);
+	set_commentary_page_and_key(c->modnum, settings.currentverse);
 }
 
 /******************************************************************************
@@ -596,8 +595,8 @@ static void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 {
 	const gchar *key = navigate_commentary(c->modnum, 0);
 	if(key) {
-		strcpy(settings->comm_key,key);
-		strcpy(cur_c->key,settings->comm_key);
+		strcpy(settings.comm_key,key);
+		strcpy(cur_c->key, settings.comm_key);
 	}
 }
 
@@ -621,8 +620,8 @@ static void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 {
 	const gchar *key = navigate_commentary(c->modnum, 1);
 	if(key) {
-		strcpy(settings->comm_key,key);
-		strcpy(cur_c->key,settings->comm_key);
+		strcpy(settings.comm_key,key);
+		strcpy(cur_c->key, settings.comm_key);
 	}
 }
 
@@ -670,7 +669,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	extern gboolean in_url;
 	gchar *key;
 	
-	settings->whichwindow = COMMENTARY_WINDOW;
+	settings.whichwindow = COMMENTARY_WINDOW;
 	
 	switch (event->button) {
 	case 1:
@@ -678,16 +677,14 @@ static gboolean on_button_release_event(GtkWidget * widget,
 			key = buttonpresslookupGS_HTML(c->html);
 			if (key) {
 				gchar *dict = NULL;
-				if (settings->useDefaultDict)
-					dict = g_strdup(settings->
-							DefaultDict);
+				if (settings.useDefaultDict)
+					dict = g_strdup(settings.DefaultDict);
 				else
-					dict = g_strdup(settings->
-							DictWindowModule);
-				if (settings->inViewer)
+					dict = g_strdup(settings.DictWindowModule);
+				if (settings.inViewer)
 					display_dictlex_in_viewer(dict, key,
-							   settings);
-				if (settings->inDictpane)
+							   &settings);
+				if (settings.inDictpane)
 					change_module_and_key(dict, key);
 				g_free(key);
 				if (dict)

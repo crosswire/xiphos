@@ -33,17 +33,14 @@
 #include "gs_viewcomm_dlg.h"
 #include "cipher_key_dialog.h"
 
-/*
- * gnome
- */
+/* gnome */
 #include "_commentary.h"
-/*
- * main
- */
+
+/* main */
 #include "commentary.h"
-/*
- * backend
- */
+#include "settings.h"
+
+/* backend */
 #include "sword.h"
 #include "commentary_.h"
 
@@ -51,7 +48,6 @@
  * externs
  */ 
 
-extern SETTINGS *settings;
 extern gboolean isrunningVC; 
 
 /******************************************************************************
@@ -108,9 +104,9 @@ const char* navigate_commentary(gint modnum, gint direction)
 void set_commentary_page_and_key(gint page_num, gchar *key)
 {
 	comm_display_change = FALSE;
-	strcpy(settings->comm_key,key);
+	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key,key);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_comm), page_num);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page_num);
 	backend_display_commentary(page_num,key);
 	comm_display_change = TRUE;
 }
@@ -171,9 +167,9 @@ static void set_commentary_page(gchar * modname, GList * comm_list,
  
 void display_commentary(gchar * key)
 {
-	strcpy(settings->comm_key,key);
+	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key, key);
-	backend_display_commentary(settings->commLastPage, key);
+	backend_display_commentary(settings.commLastPage, key);
 }
 
 /******************************************************************************
