@@ -24,6 +24,7 @@
 #endif
 #include <gnome.h>
 #include <regex.h>
+#include <swbuf.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -189,7 +190,7 @@ void main_range_text_changed(GtkEditable * editable)
 static void set_search_global_option(gchar * option, gboolean choice)
 {	
 	char *on_off;
-	SWMgr *mgr = backendSearch->get_main_mgr();
+	SWMgr *mgr = backendSearch->get_display_mgr();
 
 	if (choice) {
 		on_off = "On";
@@ -197,6 +198,9 @@ static void set_search_global_option(gchar * option, gboolean choice)
 		on_off = "Off";
 	}
 	mgr->setGlobalOption(option, on_off);
+#ifdef DEBUG
+	g_print("option = %s is %s\n",option,on_off);
+#endif
 }
 
 
@@ -1079,6 +1083,30 @@ static void set_up_dialog_search(void)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *   main_get_rendered_text
+ *
+ * Synopsis
+ *   #include "main/sword.h"
+ *
+ *   char *main_get_rendered_text(char *module_name, char *key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char *
+ */
+
+char *main_get_search_rendered_text(char *module_name, char *key)
+{
+	check_search_global_options();
+	return backendSearch->get_render_text(module_name, key);
+}
+
+
 void main_do_dialog_search(gpointer user_data)
 {
 	gint search_type, search_params, finds;
@@ -1092,6 +1120,8 @@ void main_do_dialog_search(gpointer user_data)
 	GtkHTMLStreamStatus status2;
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream2;
+	GList *tmp = NULL;
+	SWBuf swbuf = "";
 
 	search_string =
 	    gtk_entry_get_text(GTK_ENTRY(search1.search_entry));
@@ -1120,10 +1150,9 @@ void main_do_dialog_search(gpointer user_data)
 	search_type = 
 	    GTK_TOGGLE_BUTTON(search1.rb_regexp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(search1.rb_exact_phrase)->active ? -1 :
-	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 :
-	    GTK_TOGGLE_BUTTON(search1.rb_indexed_word)->active ? -4 : -3;
+	    GTK_TOGGLE_BUTTON(search1.rb_words)->active ? -2 : -3;
+	   // GTK_TOGGLE_BUTTON(search1.rb_indexed_word)->active ? -4 : -3;
 
-	settings.searchType = search_type;
 	
 
 	search_params = GTK_TOGGLE_BUTTON
@@ -1140,10 +1169,14 @@ void main_do_dialog_search(gpointer user_data)
 		search_mods = get_current_list();
 	} else
 		search_mods = get_current_search_mod();
-
+	search_mods = g_list_first(search_mods);
+	
+	
+	settings.searchType = search_type;
+	//if(search_type != -4)
 	check_search_global_options();
 
-	search_mods = g_list_first(search_mods);
+	
 	
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
@@ -1151,7 +1184,9 @@ void main_do_dialog_search(gpointer user_data)
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 		gnome_appbar_set_status(GNOME_APPBAR
 					(search1.progressbar), buf);
-		//backendSearch->do_module_index(module,TRUE);
+
+		if(search_type == -2)
+			search_type = backendSearch->check_for_optimal_search(module);
 
 		finds = backendSearch->do_module_search(module, search_string,
 					 search_type, search_params, TRUE);
@@ -1160,9 +1195,9 @@ void main_do_dialog_search(gpointer user_data)
 			backendSearch->get_next_listkey()) != 
 								NULL) {
 			add_to_found_list((gchar *) key_buf,
-					  (gchar *) module);
+					  (gchar *) module);		
 		}
-
+		
 		g_string_printf(str, "%d %s <A HREF=\"%s\">%s</A><br>",
 				finds, FINDS, module, module);
 		if (str->len) {

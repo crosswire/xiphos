@@ -43,6 +43,7 @@ void main_mod_selection_changed(GtkTreeSelection * selection,
 void main_do_dialog_search(gpointer user_data);
 void main_open_search_dialog(void);
 void main_close_search_dialog(void);
+char *main_get_search_rendered_text(char *module_name, char *key);
 
 #ifdef __cplusplus
 }
