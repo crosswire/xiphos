@@ -34,6 +34,9 @@ extern "C" {
 #include <gnome.h>
 	void on_print_item_activate(GtkMenuItem * menuitem, 
 				gpointer user_data);
+	/*** toogle global options in interlinear window ***/
+	void on_int_global_options_activate(GtkMenuItem * menuitem, 
+				gpointer user_data);
 	void on_unlock_key_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 	void on_boldNE_activate(GtkMenuItem * menuitem,

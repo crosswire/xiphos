@@ -175,9 +175,6 @@ void on_btnPaste_clicked(GtkButton * button, gpointer user_data)
 	GtkWidget *text;
 	text = lookup_widget(GTK_WIDGET(button), "text3");
 	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-	/*gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
-			NULL, NULL,
-			gs_clipboard->str, -1);*/
 }
 
 /******************************************************************************

@@ -39,12 +39,15 @@
 #include "support.h"
 #include "gs_bookmarks.h"
 
+GtkWidget *menuInt;
+GtkWidget *lang_options_menu;
+
 /*
  *******************************************************************************
  * static function prototypes
  *******************************************************************************
  */
-static GtkWidget* create_pmInt(GList *mods, gchar *intWindow);
+static GtkWidget* create_pmInt(GList *mods, GList *options, gchar *intWindow);
 static GtkWidget *create_pmCommentsHtml(GList *comDescription, 
 				GList *dictDescription);
 static GtkWidget *create_pmDict(GList *modsdesc);
@@ -60,7 +63,126 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 extern gint	greekpage,
         	hebrewpage;
 extern SETTINGS *settings;
+
+extern GtkWidget 
+	*strongsnum,
+	*footnotes,
+	*hebrewpoints,
+	*cantillationmarks,
+	*greekaccents,
+	*morphs;		
 		
+		
+/*** add sword global options to menus ***/	
+void
+additemstooptionsmenu(GList *options)
+{
+	GtkWidget *item;
+	gchar *menu;
+	GnomeUIInfo *menuitem;		
+	GtkWidget 
+		*menuChoice,
+		*shellmenu;
+	gchar menuName[64];
+	int viewNumber = 0;
+	GList *tmp;
+	
+	tmp = NULL;
+
+	tmp = options;
+	while (tmp != NULL) {	
+		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
+			menu = "_Settings/Language Options/";
+			shellmenu = lang_options_menu;
+		}
+		
+		else if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
+			menu = "_Settings/Language Options/";
+			shellmenu = lang_options_menu;
+		}
+		
+		else if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
+			menu = "_Settings/Language Options/";
+			shellmenu = lang_options_menu;
+		}
+		
+		else {
+			menu = "_Settings/";
+			shellmenu =  menuInt;
+		}
+		
+		menuitem = g_new(GnomeUIInfo, 2);
+		menuitem->type = GNOME_APP_UI_TOGGLEITEM;
+		menuitem->user_data = (gchar *)(gchar *) tmp->data;
+		menuitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
+		menuitem->pixmap_info = NULL;
+		menuitem->accelerator_key = 0;
+		menuitem->label = (gchar *)(gchar *) tmp->data;
+		menuitem->moreinfo = (gpointer) (GtkMenuCallback)on_global_options_activate;
+		menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
+		gnome_app_insert_menus_with_data(GNOME_APP(settings->app), menu,
+					 menuitem, NULL);
+		item = menuitem[0].widget;
+		
+			
+		/* add global option items to interlinear popup menu */
+		menuChoice = gtk_check_menu_item_new_with_label((gchar *)(gchar *) tmp->data);	
+		sprintf(menuName, "optionNum%d", viewNumber++);
+		gtk_object_set_data(GTK_OBJECT(settings->app), menuName, menuChoice);
+		gtk_widget_show(menuChoice);
+		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
+			   GTK_SIGNAL_FUNC(on_int_global_options_activate),
+			  (gchar *)(gchar *) tmp->data);  
+		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
+                                             GTK_WIDGET(menuChoice),
+                                             1);      
+		/*gtk_menu_shell_append(GTK_MENU_SHELL(shellmenu),
+			      GTK_WIDGET(menuChoice));	*/		      
+		
+		
+		if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
+			strongsnum =  menuitem[0].widget;
+			GTK_CHECK_MENU_ITEM(item)->active = settings->strongs;	
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->strongsint;		
+			/* set strongs toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), settings->strongs);
+		}
+		
+		if(!strcmp((gchar *) tmp->data,"Footnotes" )) {
+			footnotes =  menuitem[0].widget;			
+			GTK_CHECK_MENU_ITEM(item)->active = settings->footnotes;			
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->footnotesint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
+			morphs =  menuitem[0].widget;
+			GTK_CHECK_MENU_ITEM(item)->active = settings->morphs;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->morphsint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
+			hebrewpoints =  menuitem[0].widget;
+			GTK_CHECK_MENU_ITEM(item)->active = settings->hebrewpoints;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->hebrewpointsint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
+			cantillationmarks =  menuitem[0].widget;
+			GTK_CHECK_MENU_ITEM(item)->active = settings->cantillationmarks;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->cantillationmarksint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
+			greekaccents =  menuitem[0].widget;
+			GTK_CHECK_MENU_ITEM(item)->active = settings->greekaccents;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
+		}	
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+}
+
+
 /******************************************************************************
  * additemtognomemenu - add item to gnome menu 
  * adds an item to the main menu bar
@@ -174,16 +296,16 @@ void createpopupmenus(GtkWidget *app,
 				GList *bibleDescription,
 				GList *comDescription,
 				GList *dictDescription,
-				GList *percomlist) 
+				GList *percomlist,
+				GList *options) 
 {
-	GtkWidget 
-		*menuInt, 
+	GtkWidget 		
 		*menu5,
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	
 	
-	menuInt = create_pmInt(bibleDescription, "textComp1"); 
+	menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
 	menu5 = create_pmEditnote(app, percomlist);
 	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
@@ -192,9 +314,9 @@ void createpopupmenus(GtkWidget *app,
 	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);			
 	/* attach popup menus and ajust checkmarks*/
 	gnome_popup_menu_attach(menuInt,lookup_widget(app,"textComp1"),(gchar*)"1");
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_strongs"))->active = settings->strongsint;
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_morphs"))->active = settings->morphsint;
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_footnotes"))->active = settings->footnotesint;	
+	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_strongs"))->active = settings->strongsint;
+	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_morphs"))->active = settings->morphsint;
+	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_footnotes"))->active = settings->footnotesint;	
 	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
@@ -1084,14 +1206,12 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
  * GtkMenuCallback mycallback - callback for copy text
  ******************************************************************************/
 static GtkWidget*
-create_pmInt(GList *mods, gchar *intWindow)
+create_pmInt(GList *mods, GList *options, gchar *intWindow)
 {
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;
 	GtkWidget *copy7;
-	GtkWidget *show_strongs;
-	GtkWidget *show_morphs;
-	GtkWidget *show_footnotes;
+	GtkWidget *lang_options;
 	GtkWidget *separator2;
 	GtkTooltips *tooltips;
 
@@ -1107,34 +1227,19 @@ create_pmInt(GList *mods, gchar *intWindow)
 	gtk_widget_show (copy7);
 	gtk_container_add (GTK_CONTAINER (pmInt), copy7);
 
-	show_strongs = gtk_check_menu_item_new_with_label("Strongs Numbers");
-	gtk_widget_ref(show_strongs);
-	gtk_object_set_data_full(GTK_OBJECT(pmInt), "show_strongs",
-				 show_strongs,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(show_strongs);
-	gtk_container_add(GTK_CONTAINER(pmInt), show_strongs);
-	gtk_tooltips_set_tip(tooltips, show_strongs, "Show Storngs Numbers",
-			     NULL);
+	lang_options = gtk_menu_item_new_with_label ("Language Options");
+	gtk_widget_ref(lang_options);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "lang_options",lang_options ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (lang_options);
+  	gtk_container_add (GTK_CONTAINER(pmInt), lang_options);
 	
-	show_morphs = gtk_check_menu_item_new_with_label("Morph Tags");
-	gtk_widget_ref(show_morphs);
-	gtk_object_set_data_full(GTK_OBJECT(pmInt), "show_morphs",
-				 show_morphs,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(show_morphs);
-	gtk_container_add(GTK_CONTAINER(pmInt),show_morphs );
-	gtk_tooltips_set_tip(tooltips, show_morphs, "Show Morphological Tags",
-			     NULL);
-	show_footnotes = gtk_check_menu_item_new_with_label("Footnotes");
-	gtk_widget_ref(show_footnotes);
-	gtk_object_set_data_full(GTK_OBJECT(pmInt), "show_footnotes",
-				 show_footnotes,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(show_footnotes);
-	gtk_container_add(GTK_CONTAINER(pmInt), show_footnotes);
-	gtk_tooltips_set_tip(tooltips, show_footnotes, "Show Footnotes",
-			     NULL);
+	lang_options_menu = gtk_menu_new ();
+  	gtk_widget_ref(lang_options_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "lang_options_menu",lang_options_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lang_options), lang_options_menu);
+	
   	separator2 = gtk_menu_item_new ();
   	gtk_widget_ref (separator2);
   	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
@@ -1152,6 +1257,7 @@ create_pmInt(GList *mods, gchar *intWindow)
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
+			/*
   	gtk_signal_connect (GTK_OBJECT (show_strongs), "activate",
                       	GTK_SIGNAL_FUNC (on_show_strongs_activate),
                       	NULL);
@@ -1160,7 +1266,8 @@ create_pmInt(GList *mods, gchar *intWindow)
                       	NULL);		
 	gtk_signal_connect (GTK_OBJECT (show_footnotes), "activate",
                       	GTK_SIGNAL_FUNC (on_show_footnotes_activate),
-                      	NULL);		
+                      	NULL);	
+			*/
   return pmInt;
 }
 

@@ -38,15 +38,13 @@ extern "C" {
 	void initSWORD(GtkWidget * mainform);
 	void modNameFromDesc(gchar * modName, gchar * modDesc);
 	void updateinterlinearpage(void);
-
 	void shutdownSWORD(void);
 	void FillDictKeysSWORD(void);
 	void changeVerseSWORD(gchar * ref);
 	void ChangeVerseSWORD(void);
 	void resultsListSWORD(GtkWidget * searchFrm,
 			      gint row, gint column);
-	void strongsSWORD(gint window, gboolean choice);
-	void footnotesSWORD(gint window, gboolean choice);
+	void globaloptionsSWORD(gchar *option, gint window, gboolean choice);
 	void changecurModSWORD(gchar * modName, gboolean showchange);
 	void navcurcomModSWORD(gint direction);
 	void changecomp1ModSWORD(gchar * modName);
@@ -75,22 +73,6 @@ extern "C" {
 	gchar *getcommodSWORD(void);
 	gchar *getcommodDescriptionSWORD(void);
 	GList *getBibleBooks(void);
-	
-/*******************************************************************************
- * toggle hebrew points on and off
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-	void hebrewpointsSWORD(gint window, gboolean choice);
-
-/*******************************************************************************
- * toggle hebrew cantillation marks on and off
- * window - the window to effect - text or interlinear
- * choice - true = on, false = off
- ******************************************************************************/
-void cantillationmarksSWORD(gint window, gboolean choice);	
-	
-	void morphsSWORD(gint window, gboolean choice);
 	void gotoBookmarkSWORD(gchar * modName, gchar * key);
 	gchar *getmodkeySWORD(gint num);
 	gfloat getSwordVerionSWORD(void);
