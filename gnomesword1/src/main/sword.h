@@ -36,6 +36,7 @@ extern "C" {
 #define COMMENTARY_TYPE 1 
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
+#define PERCOM_TYPE 4
        
 /* these strings are not seen by users */
 #define TEXT_MODS "Biblical Texts"

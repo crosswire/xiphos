@@ -45,15 +45,16 @@ SwordMain *backend = NULL;
 SwordMain::SwordMain() {
 	main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-	search_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-	results = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-	percom_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+//	search_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+//	results = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+//	percom_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	
-	text_mod = NULL;
-	comm_mod = NULL;
-	dict_mod = NULL;
-	gbs_mod = NULL;
-	percom_mod = NULL;
+//	text_mod = NULL;
+//	comm_mod = NULL;
+//	dict_mod = NULL;
+//	gbs_mod = NULL;
+//	percom_mod = NULL;
+	display_mod = NULL;
 	
 	tree_key = NULL;
 	
@@ -66,9 +67,9 @@ SwordMain::SwordMain() {
 SwordMain::~SwordMain() {
 	delete main_mgr;
 	delete display_mgr;
-	delete search_mgr;
-	delete results;
-	delete percom_mgr;
+//	delete search_mgr;
+//	delete results;
+//	delete percom_mgr;
 	
 	if (commDisplay)
 		delete commDisplay;
@@ -310,6 +311,8 @@ int SwordMain::module_type(char *mod_name) {
 		}
 
 		if (!strcmp((*it).second->Type(), COMM_MODS)) {
+			if (!strcmp((char *) (*it).second->getConfigEntry("ModDrv"), "RawFiles")) 
+				return PERCOM_TYPE;			
 			return COMMENTARY_TYPE;
 		}
 

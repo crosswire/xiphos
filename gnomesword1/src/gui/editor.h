@@ -22,6 +22,10 @@
 #ifndef __EDITOR_H_
 #define __EDITOR_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <gnome.h>
 #ifdef USE_GNOME_SPELL	
 #include <bonobo.h>
@@ -160,5 +164,10 @@ void gui_html_editor_control_data_destroy(GtkObject *object,
 					GSHTMLEditorControlData *ecd);
 void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor,
 						const gchar *title);*/
+
+
+#ifdef __cplusplus
+}
+#endif	
 
 #endif

@@ -26,64 +26,17 @@
 extern "C" {
 #endif
 
-#include "gui/editor.h"
 
-#include "main/global_ops.hh"
-		
-typedef struct _commdata COMM_DATA;
-struct _commdata {
-	/* for commentary dialogs */
-	GtkWidget *dialog;	
-	GtkWidget *cbe_book;
-	GtkWidget *spb_chapter;
-	GtkWidget *spb_verse;
-	GtkWidget *freeform_lookup;
-	GtkWidget *statusbar;
+#include "main/module_dialogs.h"
 	
-	/* for personal comments editor */
-	GSHTMLEditorControlData *ec;
 	
-	/* for commentary panes */
-	GtkWidget *vbox;
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *btnCOMMSync;
-	GtkWidget *btnCOMMBack;
-	GtkWidget *btnCOMMForward;
-	GtkWidget *btnCOMMPrint;
-	GtkWidget *btn_book_heading;
-	GtkWidget *btn_chap_heading;
-	GtkWidget *showtabs;
-	GtkWidget *module_options_menu;
-	
-	gchar *mod_name;
-	gchar *search_string;
-	gchar *cipher_key;
-	gchar *cipher_old;
-	gchar key[80];
-	
-	gint modnum;
-	
-	gboolean is_locked;
-	gboolean is_percomm;
-	gboolean is_dialog;
-	gboolean book_heading;
-	gboolean chapter_heading;
-	gboolean sync;
-	
-	GLOBAL_OPS *ops;
-};
-extern COMM_DATA *cur_c;
 void gui_keep_comm_dialog_in_sync(gchar * key);	
 void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_on_lookup_commentary_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
-void gui_close_comm_dialog(COMM_DATA * vc);
-void gui_open_commentary_dialog(gchar * mod_name);
-void gui_open_commentary_editor(gchar * mod_name);
-void gui_setup_commentary_dialog(GList *mods);
-void gui_shutdown_commentary_dialog(void);
+void gui_close_comm_dialog(DIALOG_DATA * vc);
 void gui_display_commentary_in_dialog(gchar * key);
+void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit);
 
 #ifdef __cplusplus
 }

@@ -202,11 +202,8 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 			case -1:
 				break;
 			case TEXT_TYPE:
-				main_bibletext_dialog_goto_bookmark(url);
-				break;
 			case COMMENTARY_TYPE:
-				gui_commentary_dialog_goto_bookmark(mod_name,
-								    key);
+				main_dialog_goto_bookmark(url);
 				break;
 			case DICTIONARY_TYPE:
 				gui_dictionary_dialog_goto_bookmark(mod_name,

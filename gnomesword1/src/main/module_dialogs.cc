@@ -26,14 +26,25 @@
 #include <gnome.h>
 #include <swmgr.h>
 #include <swmodule.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <gtkhtml/gtkhtml.h>
-#include <gal/widgets/e-unicode.h>
+#ifdef __cplusplus
+}
+#endif	
+
+
+//#include <gal/widgets/e-unicode.h>
 #include <string.h>
 
 
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
+#include "gui/commentary_dialog.h"
 #include "gui/display_info.h"
+#include "gui/editor.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/hints.h"
@@ -56,6 +67,7 @@
 
 
 #include "backend/dialogs.hh"
+#include "backend/sword_main.hh"
 
 enum {
 	TYPE_URI,
@@ -67,13 +79,16 @@ enum {
 };
 
 gboolean bible_freed;
+
+gboolean dialog_freed;
 gboolean bible_apply_change;
 
 /******************************************************************************
  * static - global to this file only
  */
-static TEXT_DATA *dlg_bible;
-static GList *bible_list;
+static DIALOG_DATA *dlg_bible;
+static DIALOG_DATA *dlg_percom;
+static GList *list_dialogs;
 static gboolean bible_in_url;
 
 /******************************************************************************
@@ -81,6 +96,16 @@ static gboolean bible_in_url;
  */
 extern gboolean gsI_isrunning;	/* information dialog */
 
+void main_dialog_save_note(const gchar * note)
+{
+	ModuleDialogs *be;
+	
+	if(!dlg_percom)
+		return;	
+	
+	be = (ModuleDialogs*)dlg_percom->backend;
+	be->save_entry(note);	
+}
 
 
 /******************************************************************************
@@ -90,7 +115,7 @@ extern gboolean gsI_isrunning;	/* information dialog */
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void update_controls(TEXT_DATA * vt)	
+ *   void update_controls(DIALOG_DATA * vt)	
  *
  * Description
  *   update the book, chapter and verse contorls
@@ -99,7 +124,7 @@ extern gboolean gsI_isrunning;	/* information dialog */
  *   void
  */
 
-void main_dialog_update_controls(TEXT_DATA * vt)
+void main_dialog_update_controls(DIALOG_DATA * vt)
 {
 	gchar *val_key;
 	gint cur_chapter, cur_verse;
@@ -134,7 +159,7 @@ void main_dialog_update_controls(TEXT_DATA * vt)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void (TEXT_DATA * vt)
+ *   void (DIALOG_DATA * vt)
  *
  * Description
  *   
@@ -143,7 +168,7 @@ void main_dialog_update_controls(TEXT_DATA * vt)
  *   void
  */
 
-void main_bible_dialog_passage_changed(TEXT_DATA * t, gchar * passage)
+void main_bible_dialog_passage_changed(DIALOG_DATA * t, gchar * passage)
 {	
 	ModuleDialogs *be = (ModuleDialogs*)t->backend;
 	gchar buf[256];
@@ -171,7 +196,7 @@ void main_bible_dialog_passage_changed(TEXT_DATA * t, gchar * passage)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void (TEXT_DATA * vt)
+ *   void (DIALOG_DATA * vt)
  *
  * Description
  *   
@@ -180,7 +205,7 @@ void main_bible_dialog_passage_changed(TEXT_DATA * t, gchar * passage)
  *   void
  */
 
-void main_bible_dialog_display(TEXT_DATA * t)
+void main_bible_dialog_display(DIALOG_DATA * t)
 {	
 	ModuleDialogs *be = (ModuleDialogs*)t->backend;
 	be->set_module_key(t->mod_name,t->key);
@@ -194,7 +219,7 @@ void main_bible_dialog_display(TEXT_DATA * t)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void free_on_destroy(TEXT_DATA * vt)
+ *   void free_on_destroy(DIALOG_DATA * vt)
  *
  * Description
  *   removes dialog from dialog_list when dialog is destroyed other than
@@ -204,93 +229,23 @@ void main_bible_dialog_display(TEXT_DATA * t)
  *   void
  */
 
-void main_free_on_destroy(TEXT_DATA * t)
+void main_free_on_destroy(DIALOG_DATA * t)
 {
 	GList *tmp = NULL;
-	bible_list = g_list_remove(bible_list, (TEXT_DATA*) t);
+	list_dialogs = g_list_remove(list_dialogs, (DIALOG_DATA*) t);
 	g_free(t->ops); 
 	g_free(t->key);
+	g_free(t->mod_name); 
+	if((GSHTMLEditorControlData*)t->editor) {
+		gui_html_editor_control_data_destroy(NULL, 
+				(GSHTMLEditorControlData*)t->editor);		
+		dlg_percom = NULL;
+	}
 	if((ModuleDialogs*)t->backend) {
 		ModuleDialogs* be = (ModuleDialogs*)t->backend;
 		delete be;
 	}
 	g_free(t);
-}
-
-/******************************************************************************
- * Name
- *   main_open_bibletext_dialog
- *
- * Synopsis
- *   #include "bibletext_dialog.h"
- *
- *   void main_open_bibletext_dialog(gchar * mod_name)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void main_open_bibletext_dialog(gchar * mod_name)
-{	
-	GtkWidget *popupmenu;
-	ModuleDialogs *be;
-	TEXT_DATA *t = NULL;
-	gchar *val_key = NULL;
-	
-	t = g_new0(TEXT_DATA, 1);
-	t->backend = (ModuleDialogs*) new ModuleDialogs();
-	be = (ModuleDialogs*)t->backend;
-	
-	t->ops = main_new_globals(mod_name);
-	t->ops->words_in_red = FALSE;
-	t->ops->strongs = FALSE;
-	t->ops->morphs = FALSE;
-	t->ops->footnotes = FALSE;
-	t->ops->greekaccents = FALSE;
-	t->ops->lemmas = FALSE;
-	t->ops->scripturerefs = FALSE;
-	t->ops->hebrewpoints = FALSE;
-	t->ops->hebrewcant = FALSE;
-	t->ops->headings = FALSE;
-	t->ops->variants_all = FALSE;
-	t->ops->variants_primary = FALSE;
-	t->ops->variants_secondary = FALSE;
-	
-	t->mod_num = get_module_number(mod_name, TEXT_MODS);
-	t->search_string = NULL;
-	t->dialog = NULL;
-	t->key = NULL;
-	t->is_dialog = TRUE;
-	t->mod_name = g_strdup(mod_name);
-	t->is_rtol = is_module_rtl(t->mod_name);
-	gui_create_bibletext_dialog(t);
-	
-	be->chapDisplay = new DialogChapDisp(t->html); 
-	be->init_SWORD(t->mod_name);
-	
-	if (has_cipher_tag(t->mod_name)) {
-		t->is_locked = module_is_locked(t->mod_name);
-		t->cipher_old = get_cipher_key(t->mod_name);
-	}
-
-	else {
-		t->is_locked = 0;
-		t->cipher_old = NULL;
-	}
-	gtk_widget_show(t->dialog);
-	bible_list = g_list_append(bible_list, (TEXT_DATA *) t);
-	dlg_bible = t;
-	t->sync = FALSE;
-	t->key = g_strdup(settings.currentverse);
-	main_dialog_update_controls(t);
-	be->set_key(t->key);
-	be->mod->Display();
-	bible_apply_change = TRUE;
-	g_free(val_key);
-	//main_sync_bibletext_dialog_with_main(t->dlg);
 }
 
 
@@ -310,7 +265,7 @@ void main_open_bibletext_dialog(gchar * mod_name)
  *   void
  */
 
-void main_bibletext_dialog_goto_bookmark(gchar * url)
+void main_dialog_goto_bookmark(gchar * url)
 {
 	GList *tmp = NULL;
 	gchar **work_buf = NULL;
@@ -322,9 +277,9 @@ void main_bibletext_dialog_goto_bookmark(gchar * url)
 		return;
 	}
 	
-	tmp = g_list_first(bible_list);
+	tmp = g_list_first(list_dialogs);
 	while (tmp != NULL) {
-		TEXT_DATA *t = (TEXT_DATA *) tmp->data;
+		DIALOG_DATA *t = (DIALOG_DATA *) tmp->data;
 		if(!strcmp(t->mod_name, work_buf[MODULE])) {
 			ModuleDialogs* be = (ModuleDialogs*)t->backend;
 			if(t->key)
@@ -340,7 +295,7 @@ void main_bibletext_dialog_goto_bookmark(gchar * url)
 		tmp = g_list_next(tmp);
 	}
 	
-	main_open_bibletext_dialog(work_buf[2]);
+	main_dialogs_open(work_buf[2]);
 	ModuleDialogs* be = (ModuleDialogs*)dlg_bible->backend;
 	if(dlg_bible->key)
 		g_free(dlg_bible->key);
@@ -354,12 +309,12 @@ void main_bibletext_dialog_goto_bookmark(gchar * url)
 
 /******************************************************************************
  * Name
- *   gui_setup_bibletext_dialog
+ *   main_dialogs_setup
  *
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void gui_setup_bibletext_dialog(GList *mods)	
+ *   void main_dialogs_setup (GList *mods)	
  *
  * Description
  *   
@@ -368,11 +323,13 @@ void main_bibletext_dialog_goto_bookmark(gchar * url)
  *   void
  */
 
-void main_setup_bibletext_dialog(GList * mods)
+void main_dialogs_setup(void)
 {
-	bible_list = NULL;
+	list_dialogs = NULL;
 	bible_freed = FALSE;
+	dialog_freed = FALSE;
 	bible_apply_change = FALSE;
+	dlg_percom = NULL;
 }
 
 
@@ -383,7 +340,7 @@ void main_setup_bibletext_dialog(GList * mods)
  * Synopsis
  *   #include "gui/bibletext_dialog.h"
  *
- *   gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt)	
+ *   gui_sync_bibletext_dialog_with_main(DIALOG_DATA * vt)	
  *
  * Description
  *   set bibletext dialog to main window current verse
@@ -392,7 +349,7 @@ void main_setup_bibletext_dialog(GList * mods)
  *   void
  */
 
-void main_sync_bibletext_dialog_with_main(TEXT_DATA * t)
+void main_sync_bibletext_dialog_with_main(DIALOG_DATA * t)
 { 
 	main_bible_dialog_passage_changed(t, settings.currentverse);
 }
@@ -417,9 +374,9 @@ void main_sync_bibletext_dialog_with_main(TEXT_DATA * t)
 void main_keep_bibletext_dialog_in_sync(gchar * key)
 {
 	GList *tmp = NULL;
-	tmp = g_list_first(bible_list);
+	tmp = g_list_first(list_dialogs);
 	while (tmp != NULL) {
-		TEXT_DATA * t = (TEXT_DATA*) tmp->data;
+		DIALOG_DATA * t = (DIALOG_DATA*) tmp->data;
 		if(t->sync) {
 			ModuleDialogs *be = (ModuleDialogs*)t->backend;
 			be->set_module_key(t->mod_name, key);
@@ -446,21 +403,25 @@ void main_keep_bibletext_dialog_in_sync(gchar * key)
  *   void
  */
 
-void main_shutdown_bibletext_dialog(void)
+void main_dialogs_shutdown(void)
 {
-	GList *tmp = bible_list;
+	GList *tmp = list_dialogs;
 	//g_warning("items = %d",g_list_length(tmp));
 	while (tmp != NULL) {
-		TEXT_DATA *t = (TEXT_DATA*) tmp->data;
+		DIALOG_DATA *t = (DIALOG_DATA*) tmp->data;
 		bible_freed = TRUE;
+		dialog_freed = TRUE;
 		/* 
 		 *  destroy any dialogs created 
 		 */
 		if (t->dialog)
 			gtk_widget_destroy(t->dialog);
 		/* 
-		 * free each TEXT_DATA item created 
+		 * free each DIALOG_DATA item created 
 		 */
+		if((GSHTMLEditorControlData*)t->editor)
+			gui_html_editor_control_data_destroy(NULL, 
+					(GSHTMLEditorControlData*)t->editor);
 		if((ModuleDialogs*)t->backend) {
 			ModuleDialogs* be = (ModuleDialogs*)t->backend;
 			delete be;
@@ -471,7 +432,7 @@ void main_shutdown_bibletext_dialog(void)
 		g_free(t);
 		tmp = g_list_next(tmp);
 	}
-	g_list_free(bible_list);
+	g_list_free(list_dialogs);
 }
 
 void main_dialog_set_global_opt(gboolean choice)
@@ -497,7 +458,7 @@ void main_dialog_set_global_opt(gboolean choice)
  *   gint
  */
  
-static gint note_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
+static gint note_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {	
 	gchar **work_buf = NULL;
 	gchar *module = NULL;
@@ -565,7 +526,7 @@ static gint note_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
  *   gint
  */
 
-static gint morph_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
+static gint morph_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {
 	gchar *module = NULL;
 	gchar *key = NULL;
@@ -619,7 +580,7 @@ static gint morph_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
  *   gint
  */
 
-static gint strongs_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
+static gint strongs_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {
 	gchar *module = NULL;
 	gchar *key = NULL;
@@ -680,7 +641,7 @@ static gint strongs_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
  *   gint
  */
 
-static gint sword_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
+static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {
 	gchar *module = NULL;
 	gchar *key = NULL;
@@ -745,7 +706,7 @@ static gint sword_uri(TEXT_DATA * t, const gchar * url, gboolean clicked)
  *   gint
  */
 
-gint main_dialogs_url_handler(TEXT_DATA * t, const gchar * url, gboolean clicked)
+gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {		
 	//g_warning(url);
 	if(strstr(url,"sword://"))
@@ -758,24 +719,124 @@ gint main_dialogs_url_handler(TEXT_DATA * t, const gchar * url, gboolean clicked
 		return note_uri(t, url, clicked);
 /*	if(strstr(url,"bookmark://"))
 		return bookmark_uri(url,clicked);
-	if(strstr(url,"book://"))
-		return sword_uri(url,clicked);
-	if(strstr(url,"chapter://"))
-		return sword_uri(url,clicked);
 	if(strstr(url,"reference://"))
 		return reference_uri(url,clicked);
-	if(strstr(url,"noteID://"))
-		return note_uri(url,clicked);
-	if(strstr(url,"strongs://"))
-		return strongs_uri(url,clicked);
-	if(strstr(url,"morph://"))
-		return morph_uri(url,clicked);
 	if(strstr(url,"about://"))
 		return about_uri(url,clicked);
-	if(strstr(url,"parallel://"))
-		return parallel_uri(url,clicked);
 */
 	return 0;
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_dialogs_open
+ *
+ * Synopsis
+ *   #include "modules_dialogs.h"
+ *
+ *   void main_dialogs_open(gchar * mod_name)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialogs_open(gchar * mod_name)
+{	
+	GtkWidget *popupmenu;
+	ModuleDialogs *be;
+	DIALOG_DATA *t = NULL;
+	gint type;
+	GSHTMLEditorControlData *ec;
+	
+	if(!backend->is_module(mod_name))
+		return;
+	type = backend->module_type(mod_name);
+	
+	t = g_new0(DIALOG_DATA, 1);
+	t->backend = (ModuleDialogs*) new ModuleDialogs();
+	be = (ModuleDialogs*)t->backend;
+	
+	t->ops = main_new_globals(mod_name);
+	t->ops->words_in_red = FALSE;
+	t->ops->strongs = FALSE;
+	t->ops->morphs = FALSE;
+	t->ops->footnotes = FALSE;
+	t->ops->greekaccents = FALSE;
+	t->ops->lemmas = FALSE;
+	t->ops->scripturerefs = FALSE;
+	t->ops->hebrewpoints = FALSE;
+	t->ops->hebrewcant = FALSE;
+	t->ops->headings = FALSE;
+	t->ops->variants_all = FALSE;
+	t->ops->variants_primary = FALSE;
+	t->ops->variants_secondary = FALSE;
+	
+	t->editor = NULL;
+	t->search_string = NULL;
+	t->dialog = NULL;
+	t->key = NULL;
+	t->is_dialog = TRUE;
+	t->mod_name = g_strdup(mod_name);	
+	t->is_rtol = is_module_rtl(t->mod_name);
+	t->is_percomm = FALSE;
+	t->sync = FALSE;
+	
+	if (has_cipher_tag(t->mod_name)) {
+		t->is_locked = module_is_locked(t->mod_name);
+		t->cipher_old = get_cipher_key(t->mod_name);
+	}
+
+	else {
+		t->is_locked = 0;
+		t->cipher_old = NULL;
+	}
+	
+	switch(type) {
+		case TEXT_TYPE:
+			gui_create_bibletext_dialog(t);
+			be->chapDisplay = new DialogChapDisp(t->html, be); 
+			be->init_SWORD(t->mod_name);
+			t->key = g_strdup(settings.currentverse);
+			main_dialog_update_controls(t);
+		break;
+		case COMMENTARY_TYPE:
+			gui_create_commentary_dialog(t, FALSE);
+			be->entryDisplay = new DialogEntryDisp(t->html, be); 
+			be->init_SWORD(t->mod_name);
+			t->key = g_strdup(settings.currentverse);
+			main_dialog_update_controls(t);
+		break;
+		case PERCOM_TYPE:
+			t->editor = (GSHTMLEditorControlData *) 
+					gs_html_editor_control_data_new();
+			ec = (GSHTMLEditorControlData *) t->editor;
+			ec->stylebar = TRUE;
+			ec->editbar = TRUE;
+			ec->personal_comments = TRUE;
+			strcpy(ec->filename, t->mod_name);
+			t->is_percomm = TRUE;
+			gui_create_commentary_dialog(t, TRUE);
+			be->entryDisplay = new DialogEntryDisp(ec->htmlwidget, be); 
+			be->init_SWORD(t->mod_name);
+			t->key = g_strdup(settings.currentverse);
+			main_dialog_update_controls(t);
+			settings.percomm_dialog_exist = TRUE;
+			dlg_percom = t;
+		break;
+	}
+		
+	gtk_widget_show(t->dialog);
+	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
+	dlg_bible = t;
+	be->set_key(t->key);
+	be->mod->Display();
+	bible_apply_change = TRUE;
+	if(type == PERCOM_TYPE)
+		gtk_html_set_editable(ec->html, TRUE);
 }
 
 
