@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
 #include <swmgr.h>
 #include <markupfiltmgr.h>
 #include <swconfig.h>

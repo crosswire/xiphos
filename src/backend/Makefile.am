@@ -1,13 +1,5 @@
-INCLUDES =  \
-    $(GNOME_INCLUDEDIR) \
-    $(EXTRA_GNOME_CFLAGS) \
-    $(EXTRA_PRINT_CFLAGS) \
-    $(EXTRA_APP_CFLAGS) \
-    $(PIXBUF_CFLAGS) \
-    $(SWORD_CPPFLAGS) \
-    $(GTKHTML_CFLAGS) \
-    -I/usr/include/gnome-1.0/ \
-    -I$(top_builddir)/src
+INCLUDES = \
+	-I$(top_builddir)/src
 
 noinst_LIBRARIES = libbackend.a
 
@@ -15,9 +7,7 @@ EXTRA_DIST =  \
     sword_defs.h
 
 CXXFLAGS =  \
-    $(GTK_CFLAGS) \
     $(SWORD_CPPFLAGS)
-
 
 libbackend_a_SOURCES =  \
     bibletext_.cpp \

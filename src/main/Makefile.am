@@ -1,16 +1,9 @@
 INCLUDES =  \
-    $(GNOME_INCLUDEDIR) \
-    $(EXTRA_GNOME_CFLAGS) \
-    $(EXTRA_PRINT_CFLAGS) \
-    $(EXTRA_APP_CFLAGS) \
-    $(PIXBUF_CFLAGS) \
-    $(GTKHTML_CFLAGS) \
-    -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
-bin_PROGRAMS = gnomesword1
+noinst_LIBRARIES = libmain.a  
 
-gnomesword1_SOURCES =  \
+libmain_a_SOURCES =  \
     bibletext.c \
     bibletext.h \
     bookmarks.c \
@@ -37,17 +30,3 @@ gnomesword1_SOURCES =  \
     spell.h \
     sword.c \
     sword.h
-
-    
-gnomesword1_LDADD = \
-    $(GNOME_LIBDIR) \
-    $(GNOMEUI_LIBS) \
-    $(EXTRA_GNOME_LIBS) \
-    $(GTKHTML_LIBS)\
-    $(GNOME_APP_LIBS)\
-    $(GNOME_PRINT_LIBS) \
-    $(PSPELL_LIBS) \
-    $(PIXBUF_LIBS) \
-    $(SWORD_LIBS) \
-    $(top_builddir)/src/backend/libbackend.a \
-    $(top_builddir)/src/gnome/libgui.a
