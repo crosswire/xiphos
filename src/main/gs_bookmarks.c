@@ -705,7 +705,6 @@ void addverselistBM(SETTINGS * s, GList * list)
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
 	while (tmp != NULL) {
-//		g_warning((gchar *) tmp->data);
 		token = strtok((gchar *) tmp->data, t);
 		text[0] = token;
 		token = strtok(NULL, t);

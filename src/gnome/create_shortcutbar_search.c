@@ -27,13 +27,21 @@
 
 #include <gnome.h>
 #include <gal/e-paned/e-hpaned.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
+#include "gs_html.h"
 #include "create_shortcutbar_search.h"
+#include "shortcutbar_viewer.h"
 
-extern SEARCH_OPT so, *p_so;
+#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
+extern SB_VIEWER sb_v, *sv;
+
+SEARCH_OPT so, *p_so;
+
+GList *sblist;	/* for saving search results to bookmarks */
 
 	
 static  GtkWidget *rrbUseBounds;
@@ -44,6 +52,90 @@ static 	GtkWidget *rbRegExp;
 static 	GtkWidget *rbLastSearch;
 static 	GtkWidget *rbPhraseSearch;
 static 	GtkWidget *ckbCaseSensitive;
+
+
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "create_shortcutbar_search.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+static void fill_search_results_clist(GList *glist, SEARCH_OPT *so, SETTINGS *s)
+{
+	GList *tmp = NULL;
+	gchar *utf8str, buf[256];
+	gint i = 0;
+	
+	tmp = glist;
+	gtk_clist_clear(GTK_CLIST(sv->clist));
+	while (tmp != NULL) {	
+		gchar *buf1 = (gchar*)tmp->data;
+		gchar *token = strtok(buf1, "|");
+		buf1 = token;
+		token = strtok(NULL, "|");
+		buf1 = token;
+		gtk_clist_insert(GTK_CLIST(sv->clist), i, &buf1);
+		++i;
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+	sprintf(s->groupName,"%s","Search Results");
+	sprintf(buf,"%d matches",i);
+	gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
+	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
+	showSBVerseList(s);
+	
+	/* report results */
+	beginHTML(s->htmlRP, TRUE);
+	sprintf(buf,HTML_START 
+	    "<body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
+				i, s->found_color,s->searchText,
+				s->bible_verse_num_color,so->module_name);	
+	utf8str = e_utf8_from_gtk_string(s->htmlRP, buf);
+	displayHTML(s->htmlRP, utf8str, strlen(utf8str));
+	endHTML(s->htmlRP);	
+	
+	/* cleanup appbar progress */
+	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
+	/* display first item in list by selection row 0 */
+	gtk_clist_select_row(GTK_CLIST(sv->clist), 0, 0);	
+}
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+static void search_module(SETTINGS * s, SEARCH_OPT * so)
+{
+	if (sblist)
+		g_list_free(sblist);
+	sblist = NULL;
+	sblist = do_search((gpointer*)so);
+	fill_search_results_clist(sblist, so, s);
+}
 
 static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 {	
