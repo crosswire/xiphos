@@ -83,7 +83,7 @@ gchar* getcommodSWORD(void);
 void gotokeySWORD(gchar *newkey);
 void shutdownSDSWORD(void);
 void SDdictSearchTextChangedSWORD(char* newkey);
-
+gchar *showfirstlineStrongsSWORD(gint theNumber);
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }

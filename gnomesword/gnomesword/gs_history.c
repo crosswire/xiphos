@@ -116,7 +116,7 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	        for(i=0;i<24;i++) { 	
 	                historylist[i] = historylist[i+1];
 	        }
-	        historyitems = 24;
+	        historyitems = 23;
 	}
 	historylist[historyitems].itemnum = historyitems;	
 	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
@@ -131,6 +131,7 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
         /* set sensitivity of history buttons */
 	if(currenthistoryitem > 0) gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), TRUE);
 	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
+	
 	updatehistorymenu(app);
 	firstbackclick = TRUE;
 	if(settings->showhistorygroup){
@@ -149,13 +150,17 @@ void changeverseHistory(gint historynum)
 {
         currenthistoryitem = historynum;
         if(firstbackclick){
-                 addhistoryitem = TRUE;
-                 firstbackclick = FALSE;
+                 addhistoryitem = TRUE;                 
         } else   addhistoryitem = FALSE;
         //g_warning("change mod = %s\n",historylist[historynum].textmod);
         changecurModSWORD(historylist[historynum].textmod,FALSE);
         changcurcomModSWORD(historylist[historynum].commod,historylist[historynum].compagenum, FALSE);
         changeVerseSWORD(historylist[historynum].verseref);
+	if(firstbackclick){
+                --currenthistoryitem;
+		--currenthistoryitem;
+                firstbackclick = FALSE;
+        } 
 }
 
 /*
@@ -168,22 +173,17 @@ void historynav(GtkWidget *app, gint direction)
                 if(currenthistoryitem < historyitems-1){
                         ++currenthistoryitem;
                         changeverseHistory(currenthistoryitem);
-                        //changeVerseSWORD(historylist[currenthistoryitem].verseref);
-
                 }
                 /* set sensitivity of history buttons */
 	        if(currenthistoryitem >= historyitems-1) gtk_widget_set_sensitive(
 	                                lookup_widget(app,"btnFoward"), FALSE);
 	        if(currenthistoryitem >= 0) gtk_widget_set_sensitive(
-	                                lookup_widget(app,"btnBack"), TRUE);
-
+					lookup_widget(app,"btnBack"), TRUE);
         } else {
-
                 if(currenthistoryitem > 0){
                         --currenthistoryitem;
-                        if(firstbackclick) addhistoryitem = TRUE;
+			if(firstbackclick) addhistoryitem = TRUE;
                         changeverseHistory(currenthistoryitem);
-                        //changeVerseSWORD(historylist[currenthistoryitem].verseref);
                         firstbackclick = FALSE;
                 }
                 /* set sensitivity of history buttons */
@@ -191,9 +191,7 @@ void historynav(GtkWidget *app, gint direction)
 	                                lookup_widget(app,"btnBack"), FALSE);
 	        if(currenthistoryitem < historyitems) gtk_widget_set_sensitive(
 	                                lookup_widget(app,"btnFoward"), TRUE);
-
         }
-        //currenthistoryitem
 }
 
 /*
@@ -206,12 +204,10 @@ void updatehistorymenu(GtkWidget *app)
 
         removemenuitems(app, "_History/<Separator>", historyitems+1);
         addseparator(app, "_History/C_lear");
-
         for(i=0;i<historyitems;i++) {
                 sprintf(buf,"%d",historylist[i].itemnum);
                 additemtognomemenu(app, historylist[i].verseref, buf, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate);
         }
-
 }
 
 #if USE_SHORTCUTBAR
@@ -223,8 +219,6 @@ void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar)
         gint i;
 
         for(i = historyitems-2; i >= 0; i--) {
-
-               // g_warning("i = %d\n",i);
                 e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
                                                 groupnum4,
 						i);
@@ -237,7 +231,7 @@ void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar)
         }
 }
 
-#else
+#else /* !USE_SHORTCUTBAR */
 /*
  *
  */

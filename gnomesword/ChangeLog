@@ -1,5 +1,13 @@
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* added html window for dict/lex modules
+	* changed the html interlinear window to a single window that will
+	  display five Bible text modules
+		
+	
+	
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+
 	*release 0.3.9pre1
 	*GtkHTML-0.8.0 is not required to build gnomesword
 	*but gnomesword can be built with GtkHTML

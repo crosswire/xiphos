@@ -49,7 +49,12 @@ static GtkWidget *create_pmCommentsHtml(GList * mods);
 #endif /* USE_GTKHTML */
 static GtkWidget *create_pmDict(GList * mods);
 static GtkWidget* create_pmBible(GList *mods);
-static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods);
+static GtkWidget *create_pmEditnote(GtkWidget *app, 
+		GList *mods);
+static void loadmenuformmodlist(GtkWidget *pmInt, 
+		GList *mods, 
+		gchar *labelGtkWidget, 
+		GtkMenuCallback mycallback);
 /******************************************************************************/
 
 
@@ -196,11 +201,8 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	menuBible = create_pmBible(biblelist);	
 		
 	/* attach popup menus */
-	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");
-	gnome_popup_menu_attach(menu3,lookup_widget(app,"textComp2"),(gchar*)"1");
-	gnome_popup_menu_attach(menu4,lookup_widget(app,"textComp3"),(gchar*)"1");
-	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
-	gnome_popup_menu_attach(menuDict,lookup_widget(app,"textDict"),(gchar*)"1");
+	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");	
+	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");	
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->showdicttabs;
 	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->showcomtabs;
@@ -209,9 +211,13 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	menuhtmlcom = create_pmCommentsHtml(commentarylist);	
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
+	gnome_popup_menu_attach(menuDict,lookup_widget(app,"htmlDict"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->showcomtabs;
 #else
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"moduleText"),(gchar*)"1");
+	gnome_popup_menu_attach(menuDict,lookup_widget(app,"textDict"),(gchar*)"1");
+	gnome_popup_menu_attach(menu3,lookup_widget(app,"textComp2"),(gchar*)"1");
+	gnome_popup_menu_attach(menu4,lookup_widget(app,"textComp3"),(gchar*)"1");
 #endif /* USE_GTKHTML */
 }
 
@@ -820,7 +826,17 @@ static GtkWidget *create_pmDict(GList * mods)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-
+#ifdef USE_GTKHTML
+  	gtk_signal_connect (GTK_OBJECT (copy5), "activate",
+                      	GTK_SIGNAL_FUNC (on_copyhtml_activate),
+                      	(gchar *)"htmlDict");
+          gtk_signal_connect (GTK_OBJECT (goto_reference3), "activate",
+                      	GTK_SIGNAL_FUNC (on_html_goto_reference_activate),
+                      	(gchar *)"htmlDict");   
+	gtk_signal_connect(GTK_OBJECT(lookup_word1), "activate",
+			   GTK_SIGNAL_FUNC(on_html_lookup_selection_activate),
+			   (gchar *)"htmlDict");                      	          	
+#else /* !USE_GTKHTML */
 	gtk_signal_connect(GTK_OBJECT(copy5), "activate",
 			   GTK_SIGNAL_FUNC(on_copy3_activate),
 			   (gchar *) "textDict");
@@ -830,6 +846,7 @@ static GtkWidget *create_pmDict(GList * mods)
 	gtk_signal_connect(GTK_OBJECT(lookup_word1), "activate",
 			   GTK_SIGNAL_FUNC(on_lookup_word1_activate),
 			   NULL);
+#endif  /* USE_GTKHTML */
 	gtk_signal_connect(GTK_OBJECT(about_this_module5), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module5_activate),
 			   NULL);
@@ -965,9 +982,33 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
 	GtkWidget *copy7;
 	GtkWidget *about_this_module1;
 	GtkWidget *separator2;
+#ifdef USE_GTKHTML
+	GtkWidget *view_module;
+	GtkWidget *view_module_menu;
+	GtkAccelGroup *view_module_menu_accels;	
+	/*
+	GtkWidget *view_module3;
+	GtkWidget *view_module3_menu;
+	GtkAccelGroup *view_module3_menu_accels;	
+	GtkWidget *view_module3;
+	GtkWidget *view_module3_menu;
+	GtkAccelGroup *view_module3_menu_accels;	
+	GtkWidget *view_module3;
+	GtkWidget *view_module3_menu;
+	GtkAccelGroup *view_module3_menu_accels;	
 	GtkWidget *view_module3;
 	GtkWidget *view_module3_menu;
 	GtkAccelGroup *view_module3_menu_accels;
+	*/
+
+
+
+
+#else /* !USE_GTKHTML */	
+	GtkWidget *view_module3;
+	GtkWidget *view_module3_menu;
+	GtkAccelGroup *view_module3_menu_accels;
+#endif /* USE_GTKHTML */
 	GtkWidget *item3;
 	GList *tmp;
 	gint i = 0;
@@ -997,7 +1038,14 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
   	gtk_widget_show (separator2);
   	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);
-
+#ifdef USE_GTKHTML
+  	/* build change interlinear modules submenu */
+	loadmenuformmodlist(pmInt, mods, "Change Interlinear 1", (GtkMenuCallback)on_changeint1mod_activate );  	
+	loadmenuformmodlist(pmInt, mods, "Change Interlinear 2", (GtkMenuCallback)on_changeint2mod_activate );	
+	loadmenuformmodlist(pmInt, mods, "Change Interlinear 3", (GtkMenuCallback)on_changeint3mod_activate );  	
+	loadmenuformmodlist(pmInt, mods, "Change Interlinear 4", (GtkMenuCallback)on_changeint4mod_activate );
+	loadmenuformmodlist(pmInt, mods, "Change Interlinear 5", (GtkMenuCallback)on_changeint5mod_activate );
+#else /* !USE_GTKHTML */
   	view_module3 = gtk_menu_item_new_with_label ("View Module");
   	gtk_widget_ref (view_module3);
   	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module3", view_module3,
@@ -1011,8 +1059,6 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
                             (GtkDestroyNotify) gtk_widget_unref);
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
   	view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
-
-	
 	tmp = mods;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -1030,11 +1076,18 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
 		++i;
 		tmp = g_list_next(tmp);
 	}
-	g_list_free(tmp);
+	g_list_free(tmp);  	
+
+#endif /* USE_GTKHTML */
+	
+
 #ifdef USE_GTKHTML
+
+
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
+                      	
 #else /* !USE_GTKHTML */
 	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copy3_activate),
@@ -1046,6 +1099,46 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
   return pmInt;
 }
 
+static
+void loadmenuformmodlist(GtkWidget *pmInt, GList *mods,  gchar *label, GtkMenuCallback mycallback)
+{
+	GList *tmp;
+	GtkWidget *item;
+	GtkWidget *view_module;
+	GtkWidget *view_module_menu;
+	GtkAccelGroup *view_module_menu_accels;	
+	
+	view_module = gtk_menu_item_new_with_label (label);
+  	gtk_widget_ref (view_module);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module", view_module,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (view_module);
+  	gtk_container_add (GTK_CONTAINER (pmInt), view_module);
+
+  	view_module_menu = gtk_menu_new ();
+  	gtk_widget_ref (view_module_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module_menu", view_module_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module), view_module_menu);
+  	view_module_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module_menu));
+	tmp = mods;
+	while (tmp != NULL) {
+		item = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_ref(item);
+		gtk_object_set_data_full(GTK_OBJECT(pmInt), "item",
+					 item,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(item);		
+		gtk_signal_connect(GTK_OBJECT(item), "activate",
+				   GTK_SIGNAL_FUNC(mycallback),
+				   g_strdup((gchar *)tmp->data ));
+
+		gtk_container_add(GTK_CONTAINER(view_module_menu), item);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp); 
+} 	
 
 
 static GnomeUIInfo edit2_menu_uiinfo[] = {

@@ -1,6 +1,6 @@
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                          main.cpp  -  description
+                          main.c  -  description
                              -------------------
     begin                : Mon May 8 2000
     copyright            : (C) 2000 by Terry Biggs
@@ -15,9 +15,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
-
-
+ 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -43,21 +41,20 @@ int
 main (int argc, char *argv[])
 {
 	GtkWidget 
-		*mainwindow,
-		*setup;
+		*mainwindow;
+	//	*setup;
 	gboolean 		
-		newconfigs = false,	
-		newbookmarks = false;
-	gchar 	tmpbuf[80];
+		newconfigs = FALSE,	
+		newbookmarks = FALSE;
 	
 	gnome_init("GnomeSword", VERSION, argc, argv);		
 	if(argc > 1) {			
-		if(!strcmp(argv[1],"newconfigs")) newconfigs = true;
-		if(!strcmp(argv[1],"newbookmarks")) newbookmarks = true;
+		if(!strcmp(argv[1],"newconfigs")) newconfigs = TRUE;
+		if(!strcmp(argv[1],"newbookmarks")) newbookmarks = TRUE;
 		if(!strcmp(argv[1],"newfiles"))
 		{
-  			newconfigs = true;
-  			newbookmarks = true;
+  			newconfigs = TRUE;
+  			newbookmarks = TRUE;
 		}
 	}		
   	/*

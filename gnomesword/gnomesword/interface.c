@@ -52,8 +52,8 @@
 #include "spell_gui.h"
 #endif				/* USE_SPELL */
 
-GtkWidget *shortcut_bar;
-
+GtkWidget *shortcut_bar,
+		*appbar1; 
 #ifdef  USE_SHORTCUTBAR
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 
@@ -536,6 +536,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *frame17;
 	GtkWidget *scrolledwindow16;
 	GtkWidget *frame18;
+	GtkWidget *framedict;
 	GtkWidget *scrolledwindow21;
 	GtkWidget *label12;
 	GtkWidget *frame12;
@@ -573,7 +574,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *btnKeyNext;
 	GtkWidget *list1;
 	GtkWidget *label58;
-	GtkWidget *appbar1, *hbox25;
+	GtkWidget *hbox25;
 
 #if USE_SHORTCUTBAR
 	gint i;
@@ -1997,7 +1998,9 @@ GtkWidget *create_mainwindow(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	
+#ifdef USE_GTKHTML
+
+#else /* !USE_GTKHTML */	
 
 	frame17 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame17);
@@ -2043,7 +2046,7 @@ GtkWidget *create_mainwindow(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	
+#endif /* USE_GTKHTML */	
 
 	label12 = gtk_label_new("Interlinear");
 	gtk_widget_ref(label12);
@@ -2330,18 +2333,28 @@ GtkWidget *create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(vbox1), notebook4, FALSE, TRUE, 0);
 	gtk_widget_set_usize(notebook4, -2, 31);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(notebook4), TRUE);
-
+	
+	framedict = gtk_frame_new(NULL);
+	gtk_widget_ref(framecom);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "framedict",
+				 framedict,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(framedict);
+	gtk_box_pack_start(GTK_BOX(vbox1), framedict, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(framedict), 2);
+	
 	scrolledwindow8 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow8);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "scrolledwindow8",
 				 scrolledwindow8,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow8);
-	gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow8, TRUE, TRUE, 0);
+	gtk_container_add(GTK_CONTAINER(framedict), scrolledwindow8);
+	//gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow8, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow8), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-
+/*
 	textDict = gtk_text_new(NULL, NULL);
 	gtk_widget_ref(textDict);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "textDict",
@@ -2349,7 +2362,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(textDict);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow8), textDict);
-
+*/
 	vbox14 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox14);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vbox14", vbox14,
@@ -2594,11 +2607,13 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(notebook4), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook4_switch_page),
 			   NULL);
+	/*
 	gtk_signal_connect(GTK_OBJECT(textDict), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_textDict_drag_begin), NULL);
 	gtk_signal_connect(GTK_OBJECT(textDict), "button_press_event",
 			   GTK_SIGNAL_FUNC(on_textDict_button_press_event),
 			   NULL);
+	*/
 	gtk_signal_connect(GTK_OBJECT(btnKeyPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnKeyPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(dictionarySearchText), "changed",
