@@ -31,7 +31,7 @@ extern "C" {
 
 typedef struct _gbsdata GBS_DATA;
 /* gnome */
-#include "gbs_find_dialog.h"
+#include "gbs_find.h"
 struct _gbsdata {
 	GtkWidget *html;
 	GtkWidget *ctree;

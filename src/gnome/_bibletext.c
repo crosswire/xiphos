@@ -27,6 +27,7 @@
 
 /* frontend */
 #include "_bibletext.h"
+#include "_bibletext_view.h"
 
 /* main */
 #include "cipher_key_dialog.h"
@@ -34,8 +35,9 @@
 
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
-#include "gs_viewtext_dlg.h"
+#include "bibletext_view.h"
 #include "settings.h"
+#include "lists.h"
 
 /******************************************************************************
  * externs
@@ -346,7 +348,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	gdk_window_set_cursor(s->app->window, cursor);
 
 	if (!isrunningVT) {
-		//dlg = create_dlgViewText(s);
+		dlg = gui_create_viewtext_dialog();
 		isrunningVT = TRUE;
 	}
 	gtk_widget_show(dlg);
@@ -581,7 +583,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   (on_unlock_key_activate), t);
 	}
 
-	tmp = mod_lists->dict_descriptions;
+	tmp = get_list(DICT_DESC_LIST);
 	while (tmp != NULL) {
 		item4 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -602,7 +604,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	g_list_free(tmp);
 
 	i = 0;
-	tmp = mod_lists->text_descriptions;
+	tmp = get_list(TEXT_DESC_LIST);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);

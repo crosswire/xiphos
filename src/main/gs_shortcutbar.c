@@ -46,6 +46,7 @@
 #include "create_shortcutbar_search.h"
 #include "create_shortcutbar_viewer.h"
 #include "settings.h"
+#include "lists.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
@@ -525,16 +526,16 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	glist = NULL;
 	switch(GPOINTER_TO_INT(user_data)) {
 		case TEXT_TYPE:
-			glist = mod_lists->text_descriptions;
+			glist = get_list(TEXT_DESC_LIST);
 		break;
 		case COMMENTARY_TYPE:
-			glist = mod_lists->comm_descriptions;
+			glist = get_list(COMM_DESC_LIST);
 		break;
 		case DICTIONARY_TYPE:
-			glist = mod_lists->dict_descriptions;
+			glist = get_list(DICT_DESC_LIST);
 		break;
 		case BOOK_TYPE:
-			glist = mod_lists->book_descriptions;
+			glist = get_list(GBS_DESC_LIST);
 		break;
 	}
 	
@@ -1746,16 +1747,16 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 	
 	switch(mod_type) {
 		case TEXT_TYPE:
-			glist = mod_lists->text_descriptions;
+			glist = get_list(TEXT_DESC_LIST);
 		break;
 		case COMMENTARY_TYPE:
-			glist = mod_lists->comm_descriptions;
+			glist = get_list(COMM_DESC_LIST);
 		break;
 		case DICTIONARY_TYPE:
-			glist = mod_lists->dict_descriptions;
+			glist = get_list(DICT_DESC_LIST);
 		break;
 		case BOOK_TYPE:
-			glist = mod_lists->book_descriptions;
+			glist = get_list(GBS_DESC_LIST);
 		break;
 	}
 	

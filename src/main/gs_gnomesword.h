@@ -58,27 +58,7 @@ extern "C" {
 #define DICT_MODS "Lexicons / Dictionaries"
 #define BOOK_MODS "Generic Books"
 #define CIPHER_KEY_LEN 16
-    
-/******************************************************************************
- *  lists to keep for the life of the program
- *   
- */
-typedef struct _module_lists MOD_LISTS;
-struct _module_lists {
-	GList	
-	*biblemods,
-	*commentarymods,
-	*dictionarymods, 
-	*bookmods, 
-	*percommods, 
-	*text_descriptions, 
-	*dict_descriptions,
-	*comm_descriptions,
-	*book_descriptions,
-	*options;	
-};
-
-extern MOD_LISTS *mod_lists;
+ 
 /*** function prototypes ***/
 
 void init_gnomesword(SETTINGS *settings);
@@ -104,6 +84,8 @@ void set_verse_style(gboolean choice);
 void save_module_key(gchar * mod_name, gchar * key);
 const char *get_sword_version(void);
 void display_devotional(SETTINGS * s);
+void display_new_font_color_and_size(SETTINGS * s);
+gchar *get_module_description(gchar * mod_name);
 
 #ifdef __cplusplus
 }

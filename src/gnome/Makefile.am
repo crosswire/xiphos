@@ -18,36 +18,38 @@ CXXFLAGS =  \
 libgui_a_SOURCES =  \
     _bibletext.c \
     _bibletext.h \
+    _bibletext_view.c \
+    _bibletext_view.h \
     _commentary.c \
     _commentary.h \
     _dictlex.c \
-    commentary_find_dialog.c \
-    commentary_find_dialog.h \
     _dictlex.h \
     _editor.c \
     _editor.h \
     _gbs.c \
     _gbs.h \
-    gbs_find_dialog.c \
-    gbs_find_dialog.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
     about_modules.h \
     about_sword.c \
     about_sword.h \
+    cipher_key_dialog.c \
+    cipher_key_dialog.h \
+    commentary_find.c \
+    commentary_find.h \
     create_shortcutbar_search.c \
     create_shortcutbar_search.h \
     create_shortcutbar_viewer.c \
     create_shortcutbar_viewer.h \
-    cipher_key_dialog.c \
-    cipher_key_dialog.h \
-    fileselection.c \
-    fileselection.h \
-    gui.c \
-    gui.h \
     editor_menu.c \
     editor_menu.h \
+    fileselection.c \
+    fileselection.h \
+    gbs_find.c \
+    gbs_find.h \
+    gui.c \
+    gui.h \
     link_dialog.c \
     link_dialog.h \
     main_menu.c \

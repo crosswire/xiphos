@@ -380,7 +380,6 @@ void setup_gbs(SETTINGS * s, GList *mods)
 
 	settings.book_last_page = 0;
 	g_list_free(tmp);
-	return mods;
 }
 
 /******************************************************************************
