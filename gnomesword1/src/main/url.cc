@@ -299,17 +299,26 @@ static gint show_strongs(const gchar * type, const gchar * value,
 	guint delay;	
 	guint i;	
 	
-	//g_warning("url = %s",url);
-	if(!strcmp(type,"Greek")) {
-		if(backend->is_module(settings.lex_greek_viewer)) 
-			modbuf_viewer = settings.lex_greek_viewer;
-		if(backend->is_module(settings.lex_greek)) 
-			modbuf = settings.lex_greek;
-	} else if(!strcmp(type,"Hebrew")) {
-		if(backend->is_module(settings.lex_hebrew_viewer)) 
-			modbuf_viewer = settings.lex_hebrew_viewer;
-		if(backend->is_module(settings.lex_hebrew)) 
-			modbuf = settings.lex_hebrew;
+	if(!strcmp(settings.MainWindowModule,"NASB")) {
+		if(!strcmp(type,"Greek")) 
+			modbuf = "NasbGreek";
+		else 
+			modbuf = "NasbHebrew";
+			
+	} else {
+		
+		//g_warning("url = %s",url);
+		if(!strcmp(type,"Greek")) {
+			if(backend->is_module(settings.lex_greek_viewer)) 
+				modbuf_viewer = settings.lex_greek_viewer;
+			if(backend->is_module(settings.lex_greek)) 
+				modbuf = settings.lex_greek;
+		} else if(!strcmp(type,"Hebrew")) {
+			if(backend->is_module(settings.lex_hebrew_viewer)) 
+				modbuf_viewer = settings.lex_hebrew_viewer;
+			if(backend->is_module(settings.lex_hebrew)) 
+				modbuf = settings.lex_hebrew;
+		}
 	}
 	
 	if (clicked) {
@@ -365,6 +374,8 @@ static gint show_strongs_morph(const gchar * type, const gchar * value,
 	guint i;	
 	
 	//g_warning("url = %s",url);
+	if(!strcmp(settings.MainWindowModule,"NASB"))
+		g_message("module is NASB");
 	if(!strcmp(type,"Greek")) {
 		if(backend->is_module(settings.lex_greek_viewer)) 
 			modbuf_viewer = settings.lex_greek_viewer;
@@ -831,9 +842,9 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		g_warning("morph = %s",morph);
 #endif	
 		
-		if(strlen(strongs) > 2 && strlen(morph) > 2 ) {
+		if(strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
 			show_strongs_morph(type,strongs,morph,clicked);
-		} else if(strlen(strongs) > 2 && strlen(morph) < 2) {
+		} else if(strlen(strongs) >= 1 && strlen(morph) < 1) {
 			show_strongs(type,strongs,clicked);			
 		}
 		
