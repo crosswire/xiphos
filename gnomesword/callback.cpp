@@ -28,10 +28,10 @@
 #endif
 
 #include <gnome.h>
-#include <swmodule.h>
-#include <swmgr.h>
-#include <versekey.h>
-#include <regex.h>
+//#include <swmodule.h>
+//#include <swmgr.h>
+//#include <versekey.h>
+//#include <regex.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 #include  <widgets/e-paned/e-paned.h>
 #include  <widgets/e-paned/e-hpaned.h>
@@ -1429,28 +1429,28 @@ void on_btnBMEcancel_clicked(GtkButton * button, gpointer user_data)
 void
 on_about_this_module1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(curMod->Name());
+	showmoduleinfoSWORD(getmodnameSWORD(0));
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_about_this_module2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(comp1Mod->Name());
+	showmoduleinfoSWORD(getmodnameSWORD(3));
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_about_this_module3_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(comp2Mod->Name());
+	showmoduleinfoSWORD(getmodnameSWORD(4));
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_about_this_module4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(comp3Mod->Name());
+	showmoduleinfoSWORD(getmodnameSWORD(5));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2013,7 +2013,7 @@ void on_lookup_word_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(curdictMod->Name());
+	showmoduleinfoSWORD(getmodnameSWORD(2));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2100,7 +2100,7 @@ on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_about_this_module6_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(curcomMod->Name());
+	showmoduleinfoSWORD(getmodnameSWORD(1));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2358,15 +2358,18 @@ on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
                                gpointer         user_data)
 {
-        gchar buf[80];
+        gint panesize;
         
-        settings->shortcutbarsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
-        sprintf(buf,"%d\n",settings->shortcutbarsize);
-        cout << buf;
-        if(settings->shortcutbarsize) return true;
+        panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
+        if(panesize > 0 )
+        {
+        	settings->shortcutbarsize = panesize;
+        	return true;
+        }
         return false;
 }
 
+//----------------------------------------------------------------------------------------------
 void
 on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
