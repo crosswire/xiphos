@@ -3563,7 +3563,7 @@ Revelation
 	  <widget>
 	    <class>GtkTable</class>
 	    <name>table7</name>
-	    <rows>12</rows>
+	    <rows>9</rows>
 	    <columns>2</columns>
 	    <homogeneous>False</homogeneous>
 	    <row_spacing>0</row_spacing>
@@ -3742,52 +3742,6 @@ Revelation
 		<text_max_length>0</text_max_length>
 		<text></text>
 	      </widget>
-	    </widget>
-
-	    <widget>
-	      <class>GtkCheckButton</class>
-	      <name>checkbutton2</name>
-	      <can_focus>True</can_focus>
-	      <label>Use Verse Style                                                                                                       </label>
-	      <active>True</active>
-	      <draw_indicator>True</draw_indicator>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>9</top_attach>
-		<bottom_attach>10</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>False</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkCheckButton</class>
-	      <name>checkbutton3</name>
-	      <can_focus>True</can_focus>
-	      <label>Show Interlinear Page                                                                                              </label>
-	      <active>True</active>
-	      <draw_indicator>True</draw_indicator>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>11</top_attach>
-		<bottom_attach>12</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>False</xfill>
-		<yfill>False</yfill>
-	      </child>
 	    </widget>
 
 	    <widget>
@@ -4177,28 +4131,155 @@ Revelation
 		<yfill>False</yfill>
 	      </child>
 	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVBox</class>
+	    <name>vbox34</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
 
 	    <widget>
-	      <class>GtkCheckButton</class>
-	      <name>checkbutton1</name>
-	      <can_focus>True</can_focus>
-	      <label>Auto Save Personal comments                                                                                  </label>
-	      <active>True</active>
-	      <draw_indicator>True</draw_indicator>
+	      <class>GtkHBox</class>
+	      <name>hbox27</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
 	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>10</top_attach>
-		<bottom_attach>11</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>False</xfill>
-		<yfill>False</yfill>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
 	      </child>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton2</name>
+		<width>202</width>
+		<can_focus>True</can_focus>
+		<label>Use Verse Style</label>
+		<active>True</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton4</name>
+		<width>162</width>
+		<can_focus>True</can_focus>
+		<label>Show Bible Tabs</label>
+		<active>True</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>Placeholder</class>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox28</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton1</name>
+		<width>202</width>
+		<can_focus>True</can_focus>
+		<label>Auto Save Personal comments </label>
+		<active>True</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton5</name>
+		<width>162</width>
+		<can_focus>True</can_focus>
+		<label>Show Commentary Tabs</label>
+		<active>False</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>Placeholder</class>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox29</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton3</name>
+		<width>202</width>
+		<can_focus>True</can_focus>
+		<label>Show Interlinear Page</label>
+		<active>True</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>True</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton6</name>
+		<width>162</width>
+		<can_focus>True</can_focus>
+		<label>Show Dict/Lex Tabs</label>
+		<active>False</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>Placeholder</class>
+	      </widget>
 	    </widget>
 	  </widget>
 
