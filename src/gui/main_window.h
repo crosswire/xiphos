@@ -27,7 +27,8 @@ extern "C" {
 #endif
 
 #include "main/settings.h"
-
+	
+void gui_change_window_title(gchar * module_name);
 void gui_change_module_and_key(gchar *module_name, gchar *key);
 void gui_change_verse(gchar *key);	
 void gui_search_appbar_update(char percent, void *userData);

@@ -34,6 +34,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/gbs.h"
+#include "gui/gbs_dialog.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary.h"
@@ -90,14 +91,6 @@ void init_gnomesword(void)
 	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
 	
 	/*
-	 *  setup Bible text gui 
-	 */
-	if (settings.havebible) {
-		gui_setup_text(get_list(TEXT_LIST));
-		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
-	}
-	
-	/*
 	 *  setup commentary gui support 
 	 */
 	if (settings.havecomm) {
@@ -126,6 +119,14 @@ void init_gnomesword(void)
 	if (settings.havedict) {
 		gui_setup_dictlex(get_list(DICT_LIST));
 		gui_setup_dictlex_dialog(get_list(DICT_LIST));
+	}	
+	
+	/*
+	 *  setup Bible text gui 
+	 */
+	if (settings.havebible) {
+		gui_setup_text(get_list(TEXT_LIST));
+		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");

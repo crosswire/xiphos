@@ -349,7 +349,8 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 {
 
 	if (show) {
-		if (GTK_TOGGLE_BUTTON(p_so->ckbCommentary)->active) {
+		gui_change_module_and_key(p_so->module_name, key);
+		/*if (GTK_TOGGLE_BUTTON(p_so->ckbCommentary)->active) {
 			gui_change_module_and_key(p_so->module_name, key);
 		}
 
@@ -362,7 +363,7 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 		}
 
 		else
-			gui_change_verse(key);
+			gui_change_verse(key);*/
 	}
 }
 

@@ -55,6 +55,14 @@ struct  _custom_range{
 	gchar *range;
 };
 
+typedef struct _custom_list CUSTOM_MODLIST;
+struct  _custom_list{
+	gchar *label;
+	gchar *modules;
+};
+
+void save_custom_modlist(GList * modlist);
+GList * load_custom_modlist(void);
 GList * get_element(char * entry);
 int set_range(char * list);
 void save_custom_ranges(GList * ranges);
