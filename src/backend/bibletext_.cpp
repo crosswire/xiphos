@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bibletext.cpp - support for Sword Bible text modules
+ * bibletext_.cpp - support for Sword Bible text modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -35,10 +34,13 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "gs_gnomesword.h"
+/*
+   backend
+ */
+#include "bibletext_.h"
+
 #include "sword.h"
 #include "display.h"
-#include "bibletext.h"
 
 typedef struct _backend_text BE_TEXT;
 struct _backend_text {
@@ -52,8 +54,6 @@ struct _backend_text {
  */
 static SWMgr *mgr;
 static GList *be_text_list;
-
-
 
 /******************************************************************************
  * Name
@@ -212,6 +212,21 @@ void backend_display_text(int modnum, char *key)
 	t->mod->Display();
 }
 
+/******************************************************************************
+ * Name
+ *  backend_set_text_global_option
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *   
+ *   void backend_set_text_global_option(char * option, char * yesno)	
+ *
+ * Description
+ *   sets sword module global options ie strongs, morph tags or footnotes
+ *
+ * Return value
+ *   void
+ */
 void backend_set_text_global_option(char * option, char * yesno)
 {
 	/* 
@@ -220,9 +235,45 @@ void backend_set_text_global_option(char * option, char * yesno)
 	mgr->setGlobalOption(option, yesno);
 }
 
+/******************************************************************************
+ * Name
+ *  backend_set_module_unlocked
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *   
+ *   void backend_set_module_unlocked(char *mod_name, char *key)	
+ *
+ * Description
+ *   unlocks locked module - FIXME: does not work :(
+ *
+ * Return value
+ *   void
+ */
 void backend_set_module_unlocked(char *mod_name, char *key)
 {	/* this does not work */
 	g_warning("module is %s\nkey = %s",mod_name,key);
 	mgr->setCipherKey(mod_name, key);	
+}
+
+/******************************************************************************
+ * Name
+ *  backend_check_for_global_option
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *   
+ *   gboolean backend_check_for_global_option(int mod_num, char *option)	
+ *
+ * Description
+ *   returns true is module has option
+ *
+ * Return value
+ *   gboolean
+ */
+gboolean backend_check_for_global_option(int mod_num, char *option)
+{		
+	BE_TEXT *t = (BE_TEXT *) g_list_nth_data(be_text_list, mod_num);
+	return t->mod->getConfig().has("GlobalOptionFilter",option);
 }
 /******   end of file   ******/

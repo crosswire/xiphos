@@ -51,7 +51,7 @@ extern "C" {
 	void copyGS_HTML(GtkWidget *html_widget);
 	void on_copyhtml_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
-	gchar *lookupGS_HTML(GtkWidget *html_widget, 
+	gchar *get_word_or_selection(GtkWidget *html_widget, 
 				gboolean word);
 	gchar *buttonpresslookupGS_HTML(GtkWidget *html_widget);
 	void on_html_lookup_word_activate(GtkMenuItem * menuitem,

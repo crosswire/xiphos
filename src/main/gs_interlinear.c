@@ -298,7 +298,7 @@ static void int_display(SETTINGS *s, gchar * key)
 
 void update_interlinear_page_detached(SETTINGS * s)
 {
-	gchar * utf8str, *bgColor, *textColor, buf[500], *tmpkey;
+	gchar * utf8str, buf[500];
 	gint utf8len;
 
 	//-- setup gtkhtml widget

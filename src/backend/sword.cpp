@@ -76,23 +76,23 @@
 #include "commentary.h"
 #include "gs_commentary.h"
 #include "bibletext.h"
-#include "gs_bibletext.h"
+#include "bibletext_.h"
 #include "search.h"
 #include "interlinear.h"
 #include "gs_interlinear.h"
-#include "gs_bibletext.h"
+#include "bibletext.h"
 
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
 
-/***********************************************************************************************
+/******************************************************************************
  * Sword globals 
-***********************************************************************************************/
-SWDisplay *FPNDisplay;		/* to display formatted personal notes using GtkText */
+ */
+SWDisplay *FPNDisplay; /* to display formatted personal notes */
 
-SWMgr * percomMgr,		/* sword mgr for percomMod - personal comments editor */
-    *mainMgr;			/* sword mgr for curMod */
+SWMgr * percomMgr,  /* sword mgr for personal comments editor */
+    *mainMgr;		/* sword mgr for curMod */
 
 VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
  vkText, vkComm;
@@ -122,7 +122,7 @@ gchar com_key[80] = "Rom 8:28",	/* current commentary key */
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
-extern GList * options;
+//extern GList * options;
 
 extern gint dictpages,		/* number of dictionaries */
  compages,			/* number of commentaries */
@@ -192,7 +192,9 @@ void backend_init_sword(SETTINGS * s)
 	int i,			//-- counter
 	 j;			//-- counter 
 	GList *tmp;
-
+	
+	
+		
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n", "Initiating Sword\n");
 
@@ -202,8 +204,6 @@ void backend_init_sword(SETTINGS * s)
 	vkText = settings->currentverse;
 	vkComm = settings->currentverse;
 
-	//-- set glist to null 
-	options = NULL;
 
 	s->displaySearchResults = false;
 	s->havethayer = false;
@@ -287,16 +287,22 @@ void backend_init_sword(SETTINGS * s)
 		}
 	}
 
+
+}
+
+GList * backend_get_global_options_list(void)
+{
+	GList * tmp = NULL;
 	//-- get list of  globalOptions for menus
 	OptionsList optionslist = mainMgr->getGlobalOptions();
 	for (OptionsList::iterator it = optionslist.begin();
 	     it != optionslist.end(); it++) {
 		//-- save options in a glist for popup menus
-		options =
-		    g_list_append(options, (gchar *) (*it).c_str());
+		tmp =
+		    g_list_append(tmp, (gchar *) (*it).c_str());
 	}
+	return tmp;
 }
-
 /******************************************************************************
  * Name
  *   backend_change_verse_percom
@@ -455,7 +461,6 @@ void backend_delete_personal_comment(void)	//-- delete personal comment
 		break;
 	}
 }
-
 
 //-------------------------------------------------------------------------------------------
 void backend_change_percom_module(gchar * modName)	//-- change personal comments module

@@ -16,6 +16,8 @@ CXXFLAGS =  \
     $(GTK_CFLAGS) 
     
 libgui_a_SOURCES =  \
+    _bibletext.c \
+    _bibletext.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
