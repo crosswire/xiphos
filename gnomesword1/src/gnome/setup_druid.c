@@ -1042,7 +1042,7 @@ static GtkWidget *gui_create_setup_druid(GList *biblemods,
  *   void
  */ 
 
-void gui_first_run(void)
+gint gui_first_run(void)
 {
 	GtkWidget *dlg;
 	GList *biblemods = NULL;
@@ -1063,6 +1063,7 @@ void gui_first_run(void)
 	g_list_free(biblemods);
 	g_list_free(commmods);
 	g_list_free(dictmods);
+	return 1;
 }
 
 /******  end of file   ******/
