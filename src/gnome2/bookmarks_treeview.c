@@ -605,9 +605,16 @@ static void create_pixbufs(void)
 	
 	pixbufs = g_new0(TreePixbufs, 1);
 	pixbufs->pixbuf_closed = gtk_widget_render_icon(widgets.app,
+                                             "epiphany-bookmarks",
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
+	if(!pixbufs->pixbuf_closed)
+		pixbufs->pixbuf_closed 
+			= gtk_widget_render_icon(widgets.app,
                                              GNOME_STOCK_BOOK_BLUE, 
                                              GTK_ICON_SIZE_MENU,
                                              NULL);
+		
 	pixbufs->pixbuf_opened =
 		gtk_widget_render_icon(widgets.app,
                                              GNOME_STOCK_BOOK_OPEN, 
@@ -616,6 +623,12 @@ static void create_pixbufs(void)
 	pixbufs->pixbuf_helpdoc =
 		gtk_widget_render_icon(widgets.app,
                                              "epiphany-bookmark-page",
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
+	if(!pixbufs->pixbuf_helpdoc)
+		pixbufs->pixbuf_helpdoc 
+			= gtk_widget_render_icon(widgets.app,
+                                             GTK_STOCK_DND,
                                              GTK_ICON_SIZE_MENU,
                                              NULL);
 }
