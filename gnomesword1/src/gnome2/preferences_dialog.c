@@ -395,19 +395,23 @@ static void applyoptions(void)
 	}
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs);
-	gui_set_text_frame_label(cur_t);
+	if(settings.havebible)
+		gui_set_text_frame_label(cur_t);
 
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
-	gui_set_gbs_frame_label();
+	if(settings.havebook)
+		gui_set_gbs_frame_label();
 
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 				   settings.dict_tabs);
-	gui_set_dict_frame_label();
+	if(settings.havedict)
+		gui_set_dict_frame_label();
 
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
-	gui_set_comm_frame_label(cur_c);
+	if(settings.havecomm)
+		gui_set_comm_frame_label(cur_c);
 
 	GTK_CHECK_MENU_ITEM(widgets.versestyle_item)->active =
 	    settings.versestyle;
@@ -419,17 +423,16 @@ static void applyoptions(void)
 	    settings.showdicts;
 
 	if (updatehtml) {
-		gui_display_text(settings.currentverse);
-		gui_display_commentary(settings.currentverse);
-		gui_display_dictlex(settings.dictkey);
-		gui_update_parallel_page();
+		if(settings.havebible)
+			gui_display_text(settings.currentverse);
+		if(settings.havecomm)
+			gui_display_commentary(settings.currentverse);
+		if(settings.havedict)
+			gui_display_dictlex(settings.dictkey);
+		if(settings.havebible)
+			gui_update_parallel_page();
 		//display_new_font_color_and_size();
 	}
-
-/*	if (updateSB) {
-		gui_update_shortcut_bar();
-	}
-*/
 	gui_set_bible_comm_layout();
 	updatehtml = FALSE;
 	updateSB = FALSE;
@@ -2336,24 +2339,24 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	updatelayout = FALSE;
 
 	/** add module list to combo boxs **/
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo17), biblelist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo18), biblelist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo19), biblelist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo20), biblelist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo21), biblelist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo22), biblelist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo23), commlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo24), dictlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(comboDefaultDict),
+	if(biblelist) gtk_combo_set_popdown_strings(GTK_COMBO(combo17), biblelist);
+	if(biblelist) gtk_combo_set_popdown_strings(GTK_COMBO(combo18), biblelist);
+	if(biblelist) gtk_combo_set_popdown_strings(GTK_COMBO(combo19), biblelist);
+	if(biblelist) gtk_combo_set_popdown_strings(GTK_COMBO(combo20), biblelist);
+	if(biblelist) gtk_combo_set_popdown_strings(GTK_COMBO(combo21), biblelist);
+	if(biblelist) gtk_combo_set_popdown_strings(GTK_COMBO(combo22), biblelist);
+	if(commlist) gtk_combo_set_popdown_strings(GTK_COMBO(combo23), commlist);
+	if(dictlist) gtk_combo_set_popdown_strings(GTK_COMBO(combo24), dictlist);
+	if(dictlist) gtk_combo_set_popdown_strings(GTK_COMBO(comboDefaultDict),
 				      dictlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(comboGreekViewer),
+	if(dictlist) gtk_combo_set_popdown_strings(GTK_COMBO(comboGreekViewer),
 				      dictlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo26), dictlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(comboHebViewer),
+	if(dictlist) gtk_combo_set_popdown_strings(GTK_COMBO(combo26), dictlist);
+	if(dictlist) gtk_combo_set_popdown_strings(GTK_COMBO(comboHebViewer),
 				      dictlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo27), dictlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo25), percomlist);
-	gtk_combo_set_popdown_strings(GTK_COMBO(comboDevotion),
+	if(dictlist) gtk_combo_set_popdown_strings(GTK_COMBO(combo27), dictlist);
+	if(percomlist) gtk_combo_set_popdown_strings(GTK_COMBO(combo25), percomlist);
+	if(devotionlist) gtk_combo_set_popdown_strings(GTK_COMBO(comboDevotion),
 				      devotionlist);
 
 	gtk_entry_set_text(GTK_ENTRY(entry.verse_number_size),
@@ -2452,36 +2455,53 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     (check_button.show_splash_screen),
 				     settings.showsplash);
 
-	gtk_entry_set_text(GTK_ENTRY(entry.text_module),
-			   settings.MainWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entry.parallel_1_module),
-			   settings.parallel1Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.parallel_2_module),
-			   settings.parallel2Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.parallel_3_module),
-			   settings.parallel3Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.parallel_4_module),
-			   settings.parallel4Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.parallel_5_module),
-			   settings.parallel5Module);
-	gtk_entry_set_text(GTK_ENTRY(entry.commentary_module),
-			   settings.CommWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entry.dictionary_module),
-			   settings.DictWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entry.default_dictionary_module),
-			   settings.DefaultDict);
-	gtk_entry_set_text(GTK_ENTRY(entry.greek_lex_viewer_module),
-			   settings.lex_greek_viewer);
-	gtk_entry_set_text(GTK_ENTRY(entry.hebrew_lex_viewer_module),
-			   settings.lex_hebrew_viewer);
-	gtk_entry_set_text(GTK_ENTRY(entry.percomm_module),
-			   settings.personalcommentsmod);
-	gtk_entry_set_text(GTK_ENTRY(entry.greek_lex__module),
-			   settings.lex_greek);
-	gtk_entry_set_text(GTK_ENTRY(entry.hebrew_lex__module),
-			   settings.lex_hebrew);
-	gtk_entry_set_text(GTK_ENTRY(entry.devotion_module),
-			   settings.devotionalmod);
+	if(settings.MainWindowModule) 
+		gtk_entry_set_text(GTK_ENTRY(entry.text_module),
+				   settings.MainWindowModule);
+	if(settings.parallel1Module) 
+		gtk_entry_set_text(GTK_ENTRY(entry.parallel_1_module),
+				   settings.parallel1Module);
+	if(settings.parallel2Module) 
+		gtk_entry_set_text(GTK_ENTRY(entry.parallel_2_module),
+				   settings.parallel2Module);
+	if(settings.parallel3Module) 
+		gtk_entry_set_text(GTK_ENTRY(entry.parallel_3_module),
+				   settings.parallel3Module);
+	if(settings.parallel4Module) 
+		gtk_entry_set_text(GTK_ENTRY(entry.parallel_4_module),
+				   settings.parallel4Module);
+	if(settings.parallel5Module) 
+		gtk_entry_set_text(GTK_ENTRY(entry.parallel_5_module),
+				   settings.parallel5Module);
+	
+	if(settings.CommWindowModule) 
+		gtk_entry_set_text(GTK_ENTRY(entry.commentary_module),
+				   settings.CommWindowModule);
+	if(settings.DictWindowModule) 
+		gtk_entry_set_text(GTK_ENTRY(entry.dictionary_module),
+				   settings.DictWindowModule);
+	if(settings.DefaultDict) 
+		gtk_entry_set_text(GTK_ENTRY(entry.default_dictionary_module),
+				   settings.DefaultDict);
+	if(settings.lex_greek_viewer) 
+		gtk_entry_set_text(GTK_ENTRY(entry.greek_lex_viewer_module),
+				   settings.lex_greek_viewer);
+	if(settings.lex_hebrew_viewer) 
+		gtk_entry_set_text(GTK_ENTRY(entry.hebrew_lex_viewer_module),
+				   settings.lex_hebrew_viewer);
+	if(settings.personalcommentsmod) 
+		gtk_entry_set_text(GTK_ENTRY(entry.percomm_module),
+				   settings.personalcommentsmod);
+	if(settings.lex_greek) 
+		gtk_entry_set_text(GTK_ENTRY(entry.greek_lex__module),
+				   settings.lex_greek);
+	if(settings.lex_hebrew) 
+		gtk_entry_set_text(GTK_ENTRY(entry.hebrew_lex__module),
+				   settings.lex_hebrew);
+	if(settings.devotionalmod) 
+		gtk_entry_set_text(GTK_ENTRY(entry.devotion_module),
+				   settings.devotionalmod);
+	//if(settings.) 
 	gtk_entry_set_text(GTK_ENTRY(entry.combo_entry_sp_dir),
 			   settings.studypaddir);
 
