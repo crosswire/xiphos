@@ -23,8 +23,8 @@
 #endif
 
 #include <gnome.h>
-//#include "gs_SWORD.h"
-#include "GnomeSword.h"
+
+#include "gs_sword.h"
 #include "gs_gnomesword.h"
 #include "menustuff.h"
 #include "support.h"

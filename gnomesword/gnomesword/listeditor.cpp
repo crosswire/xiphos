@@ -30,7 +30,7 @@
 #include <versekey.h>
 
 #include "gs_gnomesword.h"
-#include "GnomeSword.h"
+#include "gs_sword.h"
 #include "display.h"
 #include "callback.h"
 #include "interface.h"

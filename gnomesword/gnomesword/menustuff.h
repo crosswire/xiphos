@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "GnomeSword.h"
+#include "gs_sword.h"
 
 void
 additemtognomemenu(GtkWidget * MainFrm,
