@@ -189,7 +189,7 @@ static void fill_search_results_clist(int finds)
 	sprintf(buf, "%d %s", finds, buf1);
 	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
-	showSBVerseList();
+	gui_show_sb_verseList();
 
 	/* report results */
 

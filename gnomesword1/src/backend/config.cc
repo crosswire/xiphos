@@ -42,6 +42,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <glib-1.2/glib.h>
 
 #include "backend/config.hh"
 #include "backend/sword_defs.h"
@@ -447,55 +448,45 @@ char *backend_get_module_font_size(char *mod_name, char * dir)
  *   
  */
  
-void backend_load_font_info(MOD_FONT * mf, char * dir)
-{
-	char buf[255];
-	char *tmpbuf = NULL;
+char *backend_get_conf_item(char * file, char * mod_name, char * item)
+{	
+	char *buf = NULL;
+	SWConfig conf_file(file);
+	conf_file.Load();
 
-	sprintf(buf, "%s/fonts.conf", dir);
-	SWConfig module_options(buf);
-	module_options.Load();
-
-	mf->old_font =
-	    (char *) module_options[mf->mod_name]["Font"].c_str();
-	mf->old_gdk_font =
-	    (char *) module_options[mf->mod_name]["GdkFont"].c_str();
-	mf->old_font_size =
-	    (char *) module_options[mf->mod_name]["Fontsize"].c_str();
+	buf = (char *) conf_file[mod_name][item].c_str();
+	if(strlen(buf))
+		return strdup(buf);
+	else
+		return NULL;
 }
-
 
 
 /******************************************************************************
  * Name
- *   
+ *   backend_save_conf_item
  *
  * Synopsis
  *   #include "backend/config.hh"
  *
- *   
+ *   void backend_save_conf_item(char * file, char * mod_name, char * item,
+ *				char * value)
  *
  * Description
  *   
  *
  * Return value
- *   
+ *   void
  */
  
-void backend_save_font_info(MOD_FONT * mf, char * dir)
+void backend_save_conf_item(char * file, char * mod_name, char * item,
+				char * value)
 {
-	char buf[80], buf2[255];
+	SWConfig conf_file(file);
 
-	sprintf(buf, "%s/fonts.conf", dir);
-	SWConfig module_options(buf);
-
-	module_options[mf->mod_name]["Font"] = mf->new_font;
-	module_options[mf->mod_name]["GdkFont"] = mf->new_gdk_font;
-	module_options[mf->mod_name]["Fontsize"] = mf->new_font_size;
-
-	module_options.Save();
+	conf_file[mod_name][item] = value;
+	conf_file.Save();
 }
-
 
 
 /******************************************************************************
@@ -531,7 +522,6 @@ int backend_load_module_options(char * modName, char * option,
 		retval = false;
 	return retval;
 }
-
 
 
 /******************************************************************************

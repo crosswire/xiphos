@@ -41,9 +41,10 @@ const char *backend_get_next_config_value(void);
 void backend_save_module_key(char *mod_name, char *key);
 	
 char *backend_get_module_font_name(char *mod_name, char * dir);
-char *backend_get_module_font_size(char *mod_name, char * dir);	
-void backend_load_font_info(MOD_FONT * mf, char * dir);
-void backend_save_font_info(MOD_FONT * mf, char * dir);
+char *backend_get_module_font_size(char *mod_name, char * dir);
+char *backend_get_conf_item(char * file, char * mod_name, char * item);
+void backend_save_conf_item(char * file, char * mod_name, char * item,
+				char * value);
 
 
 int backend_load_module_options(char * modName, char * option, 

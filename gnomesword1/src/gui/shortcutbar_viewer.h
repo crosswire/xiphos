@@ -38,9 +38,10 @@ struct _shortcutbar_viewer {
 		*html_viewer_widget;
 	gchar   mod_name[80];
 };
+extern SB_VIEWER *sv;
 
 void gui_display_devotional(void);
-void showSBVerseList(void);
+void gui_show_sb_verseList(void);
 gboolean gui_display_dictlex_in_viewer(char *modName, char *key);
 void gui_display_verse_list(gchar * key, gchar *module_name, 
 						gchar *verse_list);
