@@ -1,8 +1,11 @@
-2002-05-16  Terry Biggs <tbiggs@users.sourceforge.net>
+2002-05-17  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed main/gs_gui_cb.*
 	* added gnome/toolbar_nav.*
-	* removed gs_getinfo_dlg.* - was not used
+	* removed main/gs_getinfo_dlg.* - was not used
+	* renamed main/gs_information_dlg.* to main/display_info.*
+	* renamed backend/display_info.* to backend/display_info_.* 
+	* added gnome/_display_info.*
 
 
 2002-05-16  Terry Biggs <tbiggs@users.sourceforge.net>
@@ -13,19 +16,19 @@
 
 2002-05-15  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* move main/gs_editor_replace.* to gnome/editor_replace.*
-	* move main/gs_editor_search.* to gnome/gs_editor_search.*
-	* move main/gs_editor_toolbar.* to gnome/editor_toolbar.*
+	* moved main/gs_editor_replace.* to gnome/editor_replace.*
+	* moved main/gs_editor_search.* to gnome/gs_editor_search.*
+	* moved main/gs_editor_toolbar.* to gnome/editor_toolbar.*
 	
 
 2002-05-12  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* move main/gs_detach_sb.* to gnome/shortcutbar_dialog.*
+	* moved main/gs_detach_sb.* to gnome/shortcutbar_dialog.*
 
 
 2002-05-11  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* move main/gs_detach_int.* to gnome/interlinear_dialog.*
+	* moved main/gs_detach_int.* to gnome/interlinear_dialog.*
 	
 
 2002-05-10  Terry Biggs <tbiggs@users.sourceforge.net>

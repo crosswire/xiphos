@@ -29,8 +29,8 @@ libbackend_a_SOURCES =  \
     dictlex_.h \
     display.cpp \
     display.h \
-    display_info.cpp \
-    display_info.h \
+    display_info_.cpp \
+    display_info_.h \
     gbs_.cpp \
     gbs_.h \
     interlinear.cpp \

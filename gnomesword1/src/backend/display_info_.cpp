@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * display_info.cpp - About dialogs for GnomeSword
+ * display_info_.cpp - About dialogs for GnomeSword
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -30,10 +30,14 @@
 #include <markupfiltmgr.h>
 #include <versekey.h>
 
-#include "gs_gnomesword.h"
-#include "display_info.h"
-#include "display.h"
+/* main */
+//#include "gs_gnomesword.h"
 #include "settings.h"
+
+/* backend */
+#include "display_info_.h"
+#include "display.h"
+
 
 /***********************************************************************
  * for dispaly dict/lex information when a link is clicked in a view
