@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.7 
+# Anjuta Version 0.1.8 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -22,7 +22,7 @@ Compatibility Level: 1
 
 props.file.type=project
 
-anjuta.version=0.1.7
+anjuta.version=0.1.8
 anjuta.compatibility.level=1
 
 project.name=Gnomesword
@@ -68,8 +68,6 @@ module.source.files=\
 	gs_html.h\
 	gs_listeditor.c\
 	gs_menu.c\
-	gs_studypad.c\
-	printstuff.c\
 	spell.c\
 	spell.h\
 	spell_gui.c\
@@ -82,12 +80,10 @@ module.source.files=\
 	gs_file.h\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
-	gs_studypad.h\
 	gs_gnomesword.h\
 	gs_listeditor.h\
 	gs_menu.h\
 	gs_history.h\
-	printstuff.h\
 	sw_utility.cpp\
 	sw_utility.h\
 	gs_shortcutbar.c\
@@ -141,7 +137,9 @@ module.source.files=\
 	gs_information_sw.cpp\
 	gs_information_sw.h\
 	sw_module_options.cpp\
-	sw_module_options.h
+	sw_module_options.h\
+	gs_html_editor.c\
+	gs_html_editor.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
@@ -202,9 +200,11 @@ compiler.options.optimize.buttons=0 1 0 0
 
 compiler.options.other.buttons=1 0 
 
-compiler.options.other.c.options=
+compiler.options.other.c.flags=
 
-compiler.options.other.l.options=
+compiler.options.other.l.flags=
+
+compiler.options.other.l.libs=
 
 project.source.paths=
 

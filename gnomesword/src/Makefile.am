@@ -6,7 +6,7 @@ INCLUDES =  \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
     $(GTKHTML_CFLAGS) \
-	-I/usr/include/gnome-1.0/
+    -I/usr/include/gnome-1.0/
 
 bin_PROGRAMS = gnomesword
  
@@ -19,6 +19,8 @@ COMMON_SOURCE =  \
     gs_setup.h \
     gs_abouts.c \
     gs_abouts.h \
+    gs_html_editor.c \
+    gs_html_editor.h \
     gs_info_box.c \
     gs_info_box.h\
     gs_mainmenu_cb.c \
@@ -27,8 +29,6 @@ COMMON_SOURCE =  \
     gs_viewcomm_dlg.h \
     gs_viewdict_dlg.c \
     gs_viewdict_dlg.h \
-    gs_studypad.c \
-    gs_studypad.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
     gs_gnomesword.c \
@@ -85,9 +85,7 @@ COMMON_SOURCE =  \
     sw_viewcomm_dlg.cpp \
     sw_viewcomm_dlg.h\
     sw_viewdict_dlg.cpp \
-    sw_viewdict_dlg.h \
-    printstuff.c \
-    printstuff.h
+    sw_viewdict_dlg.h
 
 SPELLING_SOURCE =  \
     debug.h \

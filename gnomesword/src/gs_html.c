@@ -55,6 +55,7 @@
 #include "support.h"
 #include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
+#include "gs_html_editor.h"
 #include "sw_verselist_sb.h"
 #include "sw_shortcutbar.h"
 
@@ -541,7 +542,11 @@ void add_gtkhtml_widgets(GtkWidget * app)
 
 	usehtml = htmlTexts;
 
-	htmlComments = gtk_html_new();
+
+	//htmlComments = percom_control(lookup_widget(settings->app,"vboxPC"), settings);
+	
+	
+	/*gtk_html_new();
 	gtk_widget_ref(htmlComments);
 	gtk_object_set_data_full(GTK_OBJECT(app), "htmlComments",
 				 htmlComments,
@@ -549,7 +554,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_widget_show(htmlComments);
 	gtk_container_add(GTK_CONTAINER
 			  (lookup_widget(app, "swHtmlPerCom")),
-			  htmlComments);
+			  htmlComments);*/
 
 	textComp1 = gtk_html_new();
 	gtk_widget_ref(textComp1);
@@ -592,9 +597,9 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);/*
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
 
 	gtk_signal_connect(GTK_OBJECT(textComp1), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
@@ -619,11 +624,12 @@ void add_gtkhtml_widgets(GtkWidget * app)
 void beginHTML(GtkWidget * html_widget, gboolean isutf8)
 {
 	GtkHTML *html;
-
+	gboolean was_editable;
+	
 	html = GTK_HTML(html_widget);
-	//was_editable = gtk_html_get_editable (html);
-	/*if (was_editable)
-	   gtk_html_set_editable (html, FALSE); */
+	was_editable = gtk_html_get_editable (html);
+	if (was_editable)
+	   gtk_html_set_editable (html, FALSE); 
 	if (isutf8) {
 		htmlstream =
 		    gtk_html_begin_content(html,
@@ -631,6 +637,7 @@ void beginHTML(GtkWidget * html_widget, gboolean isutf8)
 	} else {
 		htmlstream = gtk_html_begin(html);
 	}
+	gtk_html_set_editable (html, was_editable); 
 }
 
 /***************************************************************************************************

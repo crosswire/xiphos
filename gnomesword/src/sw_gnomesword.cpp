@@ -161,7 +161,8 @@ extern GtkWidget
 	*hebrewpoints,
 	*cantillationmarks,
 	*greekaccents,
-	*morphs;
+	*morphs,
+	*htmlComments;
 extern gchar * current_filename,	/* filename for open file in study pad window  */
  current_verse[80],		/* current verse showing in main window, interlinear window - commentary window */
 *mycolor, *mycolor;
@@ -226,7 +227,7 @@ void initSWORD(GtkWidget * mainform)
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
-	FPNDisplay = new ComEntryDisp(lookup_widget(mainform, "htmlComments"));
+	FPNDisplay = new ComEntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
 	compages = 0;
 	dictpages = 0;
@@ -318,7 +319,7 @@ void ChangeVerseSWORD(void)
 	if ((GTK_TOGGLE_BUTTON
 	     (lookup_widget(settings->app, "btnEditNote"))->active) && noteModified) {
 		if (autoSave) {	//-- if we are in edit mode
-			savenoteSWORD(noteModified);	//-- save if text in note window has changed                    
+			//savenoteSWORD(noteModified);	//-- save if text in note window has changed                    
 		}
 	}
 	
@@ -373,6 +374,7 @@ void ChangeVerseSWORD(void)
 					percomMod->SetKey(vkComm);	//-- set personal module to current verse
 					percomMod->Display();	//-- show change
 					noteModified = false;	//-- we just loaded comment so it is not modified 
+					
 				}
 			}
 		}
@@ -988,24 +990,41 @@ void editnoteSWORD(gboolean editbuttonactive)	//-- someone clicked the note edit
 }
 
 //-------------------------------------------------------------------------------------------
-void savenoteSWORD(gboolean noteisModified)	//-- save personal comments
+void savenoteSWORD(gchar *buf)	//-- save personal comments
 {
-	if (noteisModified) {	//-- if note modified save the changes
-		VerseKey mykey;	//-- verse key text
-		gchar *buf;	//-- pointer to a string                                        
-		//GtkWidget *text; //-- pointer to commentary text widget               
-		//text = lookup_widget(settings->app,"textComments"); //-- get text widget
-		buf = gtk_editable_get_chars((GtkEditable *) NEtext, 0, -1);	//-- get comments from text widget
+	if(buf)
 		*percomMod << (const char *) buf;	//-- save note!
-	}
-	noteModified = false;	//-- we just saved the note so it has not been modified   
+	noteModified = false;	//-- we just saved the note so it has not been modified 
 }
 
 //-------------------------------------------------------------------------------------------
 void deletenoteSWORD(void)	//-- delete personal comment
-{
-	percomMod->deleteEntry();	//-- delete note
-	percomMod->Display();	//-- show change
+{	
+	GtkWidget 
+		*label1,
+		*label2,
+		*label3,
+		*msgbox;
+	
+	msgbox = create_InfoBox();
+	label1 = lookup_widget(msgbox,"lbInfoBox1");	
+	label2 = lookup_widget(msgbox,"lbInfoBox2");	
+	label3 = lookup_widget(msgbox,"lbInfoBox3");
+	gtk_label_set_text(GTK_LABEL(label1), "Are you sure you want");
+	gtk_label_set_text(GTK_LABEL(label2), "to delete the note for");
+	gtk_label_set_text(GTK_LABEL(label3), (gchar*)percomMod->KeyText());
+	
+	gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+	answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+	switch (answer) {
+		case 0:				 
+			percomMod->deleteEntry();	//-- delete note
+			percomMod->Display();	//-- show change
+			noteModified = false;	//-- we just deleted the note so it has not been modified 
+			break;
+		default:
+			break;
+	}	
 }
 
 //-------------------------------------------------------------------------------------------
