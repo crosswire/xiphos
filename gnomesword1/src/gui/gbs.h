@@ -67,7 +67,7 @@ void gui_set_gbs_frame_label(void);
 void on_notebook_gbs_switch_page(GtkNotebook *notebook, 
 		GtkNotebookPage *page, gint page_num, GList *data_gbs);
 void gui_add_new_gbs_pane(GBS_DATA * g);
-void gui_setup_gbs(GList *mods);
+void gui_setup_gbs(GList *mods, gint starting_page);
 void gui_shutdown_gbs(void);
 
 #endif

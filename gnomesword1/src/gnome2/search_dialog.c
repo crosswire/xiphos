@@ -86,6 +86,7 @@ struct _search_dialog {
 	GtkWidget *rb_exact_phrase;
 	GtkWidget *cb_case_sensitive;
 	GtkWidget *ctree;
+	GtkWidget *treeview;
 	GtkWidget *progressbar;
 	GtkWidget *cb_include_strongs;
 	GtkWidget *cb_include_morphs;
@@ -114,8 +115,6 @@ struct _search_dialog {
 
 	gchar *search_mod;
 };
-
-
 
 
 static gchar *get_modlist_string(GList * mods);
@@ -563,78 +562,6 @@ static void change_mods_select_label(char *mod_name)
 				   mod_name);
 	} else
 		add_modlist_to_label();
-}
-
-
-/******************************************************************************
- * Name
- *   fill_group
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void fill_group(gint group_num, GList * mod_lists)
- *
- * Description
- *   fill shortcut bar group with module names
- *
- * Return value
- *   void
- */
-
-static void fill_group(gchar * folder, GList * mod_lists)
-{
-	GList *tmp = NULL;
-	gchar *text[1];
-	GdkPixmap *pixmap_closed;
-	GdkBitmap *mask_closed;
-	GdkPixmap *pixmap_opened;
-	GdkBitmap *mask_opened;
-	GtkCTreeNode *node;
-	extern GdkPixmap *pixmap1;
-	extern GdkPixmap *pixmap2;
-	extern GdkPixmap *pixmap3;
-	extern GdkBitmap *mask1;
-	extern GdkBitmap *mask2;
-	extern GdkBitmap *mask3;
-
-	text[0] = folder;
-
-	pixmap_opened = pixmap1;
-	mask_opened = mask1;
-	pixmap_closed = pixmap2;
-	mask_closed = mask2;
-
-	node = gtk_ctree_insert_node(GTK_CTREE(search.ctree),
-				     NULL,
-				     NULL,
-				     text,
-				     3,
-				     pixmap_opened,
-				     mask_opened,
-				     pixmap_closed,
-				     mask_closed, FALSE, FALSE);
-	pixmap_closed = NULL;
-	mask_closed = NULL;
-	pixmap_opened = pixmap3;
-	mask_opened = mask3;
-	tmp = mod_lists;
-	while (tmp != NULL) {
-		text[0] = (gchar *) tmp->data;
-
-		gtk_ctree_insert_node(GTK_CTREE(search.ctree),
-				      node,
-				      NULL,
-				      text,
-				      3,
-				      pixmap_opened,
-				      mask_opened,
-				      pixmap_closed,
-				      mask_closed, TRUE, FALSE);
-
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
 }
 
 
@@ -1684,15 +1611,16 @@ static void current_module_toggled(GtkToggleButton * togglebutton,
 }
 
 
+
 /******************************************************************************
  * Name
- *   on_ctree_select_row
+ *   mod_selection_changed
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   void on_ctree_select_row(GtkCTree * ctree,
-		    GList * node, gint column, gpointer user_data)
+ *   void mod_selection_changed(GtkTreeSelection * selection,
+ *		      GtkWidget * tree_widget)
  *
  * Description
  *   
@@ -1701,61 +1629,58 @@ static void current_module_toggled(GtkToggleButton * togglebutton,
  *   void
  */
 
-static void on_ctree_select_row(GtkCTree * ctree,
-				GList * node, gint column,
-				gpointer user_data)
+static void mod_selection_changed(GtkTreeSelection * selection,
+				  GtkWidget * tree_widget)
 {
-	gchar *mod_desc = NULL;
+	gint sbtype;
+	GtkTreeIter selected;
+	gchar *mod = NULL;
+	gchar *mod_description = NULL;
 	gchar *mod_list = NULL;
-	gchar *mod_name = NULL;
+	gint mod_type;
 	gchar *text[2];
-	GtkCTreeNode *selected_node;
 	GList *mods = NULL;
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 
-	selected_node = (GtkCTreeNode *) node;
-	/* if node is leaf we need to add mod to list */
-	if (GTK_CTREE_ROW(selected_node)->is_leaf) {
-		mod_desc =
-		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
-				     cell[0])->text;
-	} else {
-		gtk_ctree_toggle_expansion(ctree, selected_node);
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
 		return;
-	}
-
-	if (mod_desc) {
-		
-		mod_name = module_name_from_description(mod_desc);
-	}
-	if (mod_name) {
-		text[0] = mod_desc;
-		text[1] = mod_name;
-	} else
+	
+	if(gtk_tree_model_iter_has_child(model, &selected)) 
 		return;
-
-	if (GTK_TOGGLE_BUTTON(search.rb_current_module)->active) {
-		search.search_mod = g_strdup(mod_name);
-		search.module_count = 1;
-	} else {
-		gtk_clist_append(GTK_CLIST(search.clist_modules), text);
-
-		mods = get_current_list();
-		mod_list = get_modlist_string(mods);
+	
+	gtk_tree_model_get(model, &selected, 0, &mod, -1);
+	if (mod) {
+		mod_description = get_module_description(mod);				
+		text[0] = mod_description;
+		text[1] = mod;
+		sbtype = get_mod_type(mod);
 		
-		if (mod_list) {
-			gtk_clist_set_text((GtkCList *)
-					   search.
-					   module_lists,
-					   search.
-					   custom_list_row,
-					   1, mod_list);
-			g_free(mod_list);
+		if (GTK_TOGGLE_BUTTON(search.rb_current_module)->active) {
+			search.search_mod = g_strdup(mod);
+			search.module_count = 1;
+		} else {
+			gtk_clist_append(GTK_CLIST(search.clist_modules), text);
+	
+			mods = get_current_list();
+			mod_list = get_modlist_string(mods);
+			
+			if (mod_list) {
+				gtk_clist_set_text((GtkCList *)
+						   search.
+						   module_lists,
+						   search.
+						   custom_list_row,
+						   1, mod_list);
+				g_free(mod_list);
+			}
+			++search.module_count;
 		}
-		++search.module_count;
+		change_mods_select_label(mod);
+		g_free(mod);
 	}
-	change_mods_select_label(mod_name);
-	g_free(mod_name);
 }
+
 
 
 
@@ -1855,7 +1780,7 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *vseparator33;
 	GtkWidget *button30;
 	GtkWidget *scrolledwindow66;
-	GtkWidget *scrolledwindow_ctree;
+	GtkWidget *scrolledwindow_tree;
 	GtkWidget *clist_modules;
 	GtkWidget *label232;
 	GtkWidget *label233;
@@ -1903,6 +1828,7 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *appbar_search;
 	GtkWidget *label207;
 	GtkTooltips *tooltips;
+	GObject *mod_selection;
 	gchar title[256];
 
 	sprintf(title, "%s - %s", settings.program_title, _("Search"));
@@ -2777,19 +2703,21 @@ static GtkWidget *create_search_dialog(void)
 	search.progressbar = appbar_search;
 	search.label_mod_select = label_search_module;
 
-	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_ctree);
+	scrolledwindow_tree = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow_tree);
 	gtk_scrolled_window_set_policy((GtkScrolledWindow *)
-				       scrolledwindow_ctree,
+				       scrolledwindow_tree,
 				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	search.ctree = gtk_ctree_new(1, 0);
-	gtk_widget_show(search.ctree);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow_ctree),
-			  search.ctree);
-	gtk_clist_set_column_width(GTK_CLIST(search.ctree), 0, 280);
-	gtk_paned_pack1(GTK_PANED(hpaned8), scrolledwindow_ctree, TRUE,
-			TRUE);
+				       GTK_POLICY_AUTOMATIC); 
+	gtk_paned_pack1(GTK_PANED(hpaned8), scrolledwindow_tree, TRUE,
+			TRUE);  
+	
+
+	search.treeview = gtk_tree_view_new();
+	gtk_widget_show(search.treeview);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow_tree), search.treeview);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(search.treeview),
+					  FALSE);
 
 	search.which_scope = GTK_TOGGLE_BUTTON(search.rb_no_scope);
 
@@ -2813,87 +2741,93 @@ static GtkWidget *create_search_dialog(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_results),
 			  search.results_html);
 
-
+	gui_load_module_tree(search.treeview);
+	mod_selection =
+	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(search.treeview)));
 	/* connect signals */
 
-	gtk_signal_connect(GTK_OBJECT(search.ctree), "tree_select_row",
+	g_signal_connect(mod_selection, "changed",
+			 G_CALLBACK(mod_selection_changed), search.treeview);
+/*
+	g_signal_connect(G_OBJECT(search.ctree), "tree_select_row",
 			   G_CALLBACK(on_ctree_select_row), NULL);
-	gtk_signal_connect(GTK_OBJECT(search.rb_current_module),
+			   */
+	g_signal_connect(G_OBJECT(search.rb_current_module),
 			   "toggled",
 			   G_CALLBACK(current_module_toggled),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(search.rb_no_scope), "toggled",
+	g_signal_connect(G_OBJECT(search.rb_no_scope), "toggled",
 			   G_CALLBACK(scope_toggled), NULL);
-	gtk_signal_connect(GTK_OBJECT(search.rb_mod_list), "toggled",
+	g_signal_connect(G_OBJECT(search.rb_mod_list), "toggled",
 			   G_CALLBACK(mod_list_toggled), NULL);
-	gtk_signal_connect(GTK_OBJECT(search.rb_custom_range),
+	g_signal_connect(G_OBJECT(search.rb_custom_range),
 			   "toggled", G_CALLBACK(scope_toggled),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(button_save_mods), "clicked",
+	g_signal_connect(G_OBJECT(button_save_mods), "clicked",
 			   G_CALLBACK(save_modlist), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(button_modlist_new), "clicked",
+	g_signal_connect(G_OBJECT(button_modlist_new), "clicked",
 			   G_CALLBACK(new_modlist), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(button28), "clicked",
+	g_signal_connect(G_OBJECT(button28), "clicked",
 			   G_CALLBACK(clear_modules), NULL);
-	gtk_signal_connect(GTK_OBJECT(button30), "clicked",
+	g_signal_connect(G_OBJECT(button30), "clicked",
 			   G_CALLBACK(delete_module), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(button_delete_list), "clicked",
+	g_signal_connect(G_OBJECT(button_delete_list), "clicked",
 			   G_CALLBACK(delete_list), NULL);
-	gtk_signal_connect(GTK_OBJECT(button_new_range), "clicked",
+	g_signal_connect(G_OBJECT(button_new_range), "clicked",
 			   G_CALLBACK(new_range), NULL);
-	gtk_signal_connect(GTK_OBJECT(button_save_range), "clicked",
+	g_signal_connect(G_OBJECT(button_save_range), "clicked",
 			   G_CALLBACK(save_range), NULL);
-	gtk_signal_connect(GTK_OBJECT(button_delete_range), "clicked",
+	g_signal_connect(G_OBJECT(button_delete_range), "clicked",
 			   G_CALLBACK(delete_range), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(entry_range_name), "changed",
+	g_signal_connect(G_OBJECT(entry_range_name), "changed",
 			   G_CALLBACK(range_name_changed), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(entry_range_text), "changed",
+	g_signal_connect(G_OBJECT(entry_range_text), "changed",
 			   G_CALLBACK(range_text_changed), NULL);
 
 
-	gtk_signal_connect(GTK_OBJECT(search.entry_list_name),
+	g_signal_connect(G_OBJECT(search.entry_list_name),
 			   "changed",
 			   G_CALLBACK(list_name_changed), NULL);
 
 
-	gtk_signal_connect(GTK_OBJECT(search.clist_range), "select_row",
+	g_signal_connect(G_OBJECT(search.clist_range), "select_row",
 			   G_CALLBACK(custom_range_select_row),
 			   NULL);
 
-	gtk_signal_connect(GTK_OBJECT(search.module_lists),
+	g_signal_connect(G_OBJECT(search.module_lists),
 			   "select_row",
 			   G_CALLBACK(custom_list_select_row),
 			   NULL);
 
-	gtk_signal_connect(GTK_OBJECT(search.clist_modules),
+	g_signal_connect(G_OBJECT(search.clist_modules),
 			   "select_row",
 			   G_CALLBACK(modules_select_row), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(search.togglebutton_show_main),
+	g_signal_connect(G_OBJECT(search.togglebutton_show_main),
 			   "toggled",
 			   G_CALLBACK
 			   (on_togglebutton_show_main), NULL);
-	gtk_signal_connect(GTK_OBJECT(button_close), "clicked",
+	g_signal_connect(G_OBJECT(button_close), "clicked",
 			   G_CALLBACK(on_button_close), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(button_begin_search), "clicked",
+	g_signal_connect(G_OBJECT(button_begin_search), "clicked",
 			   G_CALLBACK
 			   (on_button_begin_search), NULL);
-	gtk_signal_connect(GTK_OBJECT(search.results_html),
+	g_signal_connect(G_OBJECT(search.results_html),
 			   "link_clicked",
 			   G_CALLBACK(link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(search.results_html), "on_url",
+	g_signal_connect(G_OBJECT(search.results_html), "on_url",
 			   G_CALLBACK(url), NULL);
-	gtk_signal_connect(GTK_OBJECT(search.report_html),
+	g_signal_connect(G_OBJECT(search.report_html),
 			   "link_clicked",
 			   G_CALLBACK(report_link_clicked), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(button_clear_results), "clicked",
+	g_signal_connect(G_OBJECT(button_clear_results), "clicked",
 			   G_CALLBACK(button_clean), NULL);
 
 
@@ -2940,16 +2874,16 @@ void gui_do_dialog_search(void)
 		add_modlist();
 
 		/* add bibletext folder to module ctree and fill it */
-		fill_group("Bibletext", get_list(TEXT_DESC_LIST));
+		//fill_group("Bibletext", get_list(TEXT_DESC_LIST));
 
 		/* add commentary folder to module ctree and fill it */
-		fill_group("Commentaries", get_list(COMM_DESC_LIST));
+		//fill_group("Commentaries", get_list(COMM_DESC_LIST));
 
 		/* add dictionary folder to module ctree and fill it */
-		fill_group("Dictionaries", get_list(DICT_DESC_LIST));
+		//fill_group("Dictionaries", get_list(DICT_DESC_LIST));
 
 		/* add book folder to module ctree and fill it */
-		fill_group("General Books", get_list(GBS_DESC_LIST));
+		//fill_group("General Books", get_list(GBS_DESC_LIST));
 
 		/* set search module to current module 
 		   and put in clist_modules */

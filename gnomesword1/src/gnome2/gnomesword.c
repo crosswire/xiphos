@@ -73,6 +73,7 @@
 
 void frontend_init(void)
 {
+	gint number_of_pages = 0;
 	g_print("%s\n", "Initiating GnomeSword\n");
 	
 	hint.in_popup = FALSE;
@@ -118,21 +119,21 @@ void frontend_init(void)
 	}
 
 	/*
-	 *  setup general book gui support 
-	 */
-	if (settings.havebook) {
-		gui_setup_gbs(get_list(GBS_LIST));
-		gui_setup_gbs_dialog(get_list(GBS_LIST));
-	}
-
-	/*
 	 *  setup Dict/Lex gui support 
 	 */
 	if (settings.havedict) {
-		gui_setup_dictlex(get_list(DICT_LIST));
+		number_of_pages = gui_setup_dictlex(get_list(DICT_LIST));
 		gui_setup_dictlex_dialog(get_list(DICT_LIST));
 	}
 
+	/*
+	 *  setup general book gui support 
+	 */
+	if (settings.havebook) {
+		gui_setup_gbs(get_list(GBS_LIST),number_of_pages);
+		gui_setup_gbs_dialog(get_list(GBS_LIST));
+	}
+	
 	/*
 	 *  setup Bible text gui 
 	 */
