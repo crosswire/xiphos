@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
  /*
     * GnomeSword Bible Study Tool
     * gs_info_box.c
@@ -38,7 +39,6 @@
 
 #include "gs_info_box.h"
 #include "gs_gui_cb.h"
-#include "gs_studypad.h"
 #include "support.h"
 
 GtkWidget *create_InfoBox(void)

@@ -33,6 +33,7 @@
 #include <fcntl.h>
 
 #include "gs_gnomesword.h"
+#include "gs_html_editor.h"
 #include "support.h"
 #include "gs_file.h"
 #include "gs_menu.h"
@@ -78,12 +79,15 @@ extern gboolean file_changed;	/* set to TRUE if text is study pad has changed
 /******************************************************************************
  *on_ok_button1_clicked - fileselection dialog
 ******************************************************************************/
-static void on_ok_button1_clicked(GtkButton * button, gpointer user_data)
+static void on_ok_button1_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *filesel;
-
+	
 	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	loadFile(filesel);
+	sprintf(ecd->filename, "%s",
+		gtk_file_selection_get_filename(GTK_FILE_SELECTION
+						(filesel)));
+	load_file(ecd->filename, ecd);
 	gtk_widget_destroy(filesel);
 }
 
@@ -94,17 +98,16 @@ static void on_cancel_button1_clicked(GtkButton * button, gpointer user_data)
 }
 
 //----------------------------------------------
-void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
+static void on_ok_button2_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *filesel;
-	gchar filename[255];
 
 	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	sprintf(filename, "%s",
+	sprintf(ecd->filename, "%s",
 		gtk_file_selection_get_filename(GTK_FILE_SELECTION
 						(filesel)));
 	gtk_widget_destroy(filesel);
-	saveFile(filename);
+	save_file(ecd->filename, ecd);
 }
 
 /* fileselection dialog cancel button clicked */
@@ -377,42 +380,7 @@ void createFiles(void)
  *****************************************************************************/
 void saveFile(gchar * filename)
 {				
-	gchar *data, charbuf[255];
-	FILE *fp;
-	gint bytes_written, len;
-	gint context_id2;
-	GtkWidget *statusbar;
 
-	statusbar = lookup_widget(MainFrm, "statusbar2");
-	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-					 "GtkSword");
-	if (current_filename == NULL || strcmp(current_filename, filename)) {
-		g_free(current_filename);
-		current_filename = g_strdup(filename);
-	}
-	data =
-	    gtk_editable_get_chars(GTK_EDITABLE
-				   (lookup_widget(MainFrm, "text3")), 0,
-				   -1);
-	fp = fopen(filename, "w");
-	if (fp == NULL) {
-		g_free(data);
-		return;
-	}
-	len = strlen(data);
-	bytes_written = fwrite(data, sizeof(gchar), len, fp);
-	fclose(fp);
-	g_free(data);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	if (len != bytes_written) {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-				   "Error saving file.");
-		return;
-	}
-	sprintf(charbuf, "%s - saved.", current_filename);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, charbuf);
-	file_changed = FALSE;
 }
 
 /*****************************************************************************
@@ -420,58 +388,7 @@ void saveFile(gchar * filename)
  *****************************************************************************/
 void loadFile(GtkWidget * filesel)
 {				
-	GtkWidget *statusbar, *text;
-	gchar filename[255];
-	FILE *fp;
-	gchar buffer[BUFFER_SIZE];
-	gint bytes_read;
-	gint context_id2;
 
-	statusbar = lookup_widget(MainFrm, "statusbar2");
-	text = lookup_widget(MainFrm, "text3");
-	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-					 "GnomeSword");
-	sprintf(filename, "%s",
-		gtk_file_selection_get_filename(GTK_FILE_SELECTION
-						(filesel)));
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_text_freeze(GTK_TEXT(text));
-	gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-	g_free(current_filename);
-	current_filename = NULL;
-	file_changed = FALSE;
-	fp = fopen(filename, "r");
-	if (fp == NULL) {
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-				   "Could not open file");
-		return;
-	}
-	for (;;) {
-		bytes_read = fread(buffer, sizeof(gchar), BUFFER_SIZE, fp);
-		if (bytes_read > 0)
-			gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
-					buffer, bytes_read);
-
-		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
-			break;
-	}
-	/* If there is an error while loading, we reset everything to a good state. */
-	if (ferror(fp)) {
-		fclose(fp);
-		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-				   "Error loading file.");
-		return;
-	}
-	fclose(fp);
-	gtk_text_thaw(GTK_TEXT(text));
-	current_filename = g_strdup(filename);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-			   current_filename);
 }
 
 /*****************************************************************************
@@ -479,7 +396,7 @@ void loadFile(GtkWidget * filesel)
  *****************************************************************************/
 void loadStudyPadFile(gchar * filename)
 {				
-	GtkWidget *statusbar, *text;
+/*	GtkWidget *statusbar, *text;
 	FILE *fp;
 	gchar buffer[BUFFER_SIZE];
 	gint bytes_read;
@@ -499,7 +416,7 @@ void loadStudyPadFile(gchar * filename)
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
 		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, filename);	/* Could not open file */
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, filename);	// Could not open file 
 		return;
 	}
 	for (;;) {
@@ -510,8 +427,9 @@ void loadStudyPadFile(gchar * filename)
 
 		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
 			break;
-	}
+	}*/
 	/* If there is an error while loading, we reset everything to a good state */
+	/*
 	if (ferror(fp)) {
 		fclose(fp);
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
@@ -525,10 +443,10 @@ void loadStudyPadFile(gchar * filename)
 	current_filename = g_strdup(filename);
 	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
 	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-			   current_filename);
+			   current_filename);*/
 }
 
-GtkWidget *create_fileselection1(void)
+GtkWidget *create_fileselection1(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *fileselection1;
 	GtkWidget *ok_button1;
@@ -555,7 +473,7 @@ GtkWidget *create_fileselection1(void)
 	GTK_WIDGET_SET_FLAGS(cancel_button1, GTK_CAN_DEFAULT);
 
 	gtk_signal_connect(GTK_OBJECT(ok_button1), "clicked",
-			   GTK_SIGNAL_FUNC(on_ok_button1_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_ok_button1_clicked), ecd);
 	gtk_signal_connect(GTK_OBJECT(cancel_button1), "clicked",
 			   GTK_SIGNAL_FUNC(on_cancel_button1_clicked),
 			   NULL);
@@ -563,7 +481,7 @@ GtkWidget *create_fileselection1(void)
 	return fileselection1;
 }
 
-GtkWidget *create_fileselectionSave(void)
+GtkWidget *create_fileselectionSave(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *fileselectionSave;
 	GtkWidget *ok_button2;
@@ -590,7 +508,7 @@ GtkWidget *create_fileselectionSave(void)
 	GTK_WIDGET_SET_FLAGS(cancel_button2, GTK_CAN_DEFAULT);
 
 	gtk_signal_connect(GTK_OBJECT(ok_button2), "clicked",
-			   GTK_SIGNAL_FUNC(on_ok_button2_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_ok_button2_clicked), ecd);
 	gtk_signal_connect(GTK_OBJECT(cancel_button2), "clicked",
 			   GTK_SIGNAL_FUNC(on_cancel_button2_clicked),
 			   NULL);

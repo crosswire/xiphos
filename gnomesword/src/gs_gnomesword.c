@@ -160,13 +160,11 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	/*  set text windows to word warp */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 	/* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
 			settings->notebook3page );
 	/* store text widgets for spell checker */
-	notes =  lookup_widget(app,"textComments");
-	studypad = lookup_widget(app,"text3");				
+	notes =  lookup_widget(app,"textComments");		
 	/* Add options to Options Menu and get toggle item widget */
 	autosaveitem = additemtooptionmenu(app, _("_Settings/"), _("Auto Save Personal Comments"),
 				(GtkMenuCallback)on_auto_save_notes1_activate);
@@ -254,13 +252,10 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	}
 	
 	/* hide buttons - only show them if their options are enabled */
-	gtk_widget_hide(lookup_widget(app,"btnSpell"));
 	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
-        gtk_widget_show(lookup_widget(app,"btnPrint"));
 	
 	/* do not show spell buttons if spellcheck not enabled */
 #ifdef USE_SPELL
-        gtk_widget_show (lookup_widget(app,"btnSpell"));
         gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
 #endif /* USE_SPELL */	
 
@@ -274,8 +269,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         g_list_free(sbdictmods);
        // options list freed on exit
 	
-	if(settings->showsplash){
-		//e_splash_set_icon_highlight (E_SPLASH(splash),4, TRUE);	
+	if(settings->showsplash){	
 		while (gtk_events_pending ())
 				gtk_main_iteration ();
 	}

@@ -59,7 +59,7 @@ extern "C" {
 	void freeformlookupSWORD(GdkEventKey * event);
 	void changcurcomModSWORD(gchar * modName, gboolean showchange);
 	void editnoteSWORD(gboolean editbuttonactive);
-	void savenoteSWORD(gboolean noteisModified);
+	void savenoteSWORD(gchar *buf);
 	void deletenoteSWORD(void);
 	void changcurdictModSWORD(gchar * modName, gchar * keyText);
 	void dictSearchTextChangedSWORD(gchar * mytext);

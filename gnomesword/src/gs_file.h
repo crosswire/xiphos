@@ -31,8 +31,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "gs_html_editor.h"
 	
-void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
+//void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
 void loadFile(GtkWidget * filesel);
 gint setDiretory(void);
@@ -44,8 +46,8 @@ void savebookmark(gchar * item);
 void saveoptions(void);
 void createFiles(void);
 void loadStudyPadFile(gchar * filename);
-GtkWidget *create_fileselection1(void);
-GtkWidget *create_fileselectionSave(void);
+GtkWidget *create_fileselection1(GSHTMLEditorControlData * ecd);
+GtkWidget *create_fileselectionSave(GSHTMLEditorControlData * ecd);
 
 #ifdef __cplusplus
 }

@@ -136,6 +136,21 @@ GtkWidget *create_spc_window(void)
 	gtk_widget_show(spc_gui.vbox);
 	gtk_container_add(GTK_CONTAINER(spc_gui.window), spc_gui.vbox);
 
+	spc_gui.scrollwindow = gtk_scrolled_window_new(NULL, NULL);
+	/* gtk_widget_ref (spc_gui.hbuttonbox_top);
+	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "sp_hbuttonbox_top", spc_gui.hbuttonbox_top,
+	   (GtkDestroyNotify) gtk_widget_unref); */
+	gtk_widget_show(spc_gui.scrollwindow);
+	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.scrollwindow,
+			   TRUE, TRUE, 0);
+	
+	spc_gui.text = gtk_text_new(NULL, NULL);
+	/*  gtk_widget_ref (spc_gui.vbox);
+	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_vbox", spc_gui.vbox,
+	   (GtkDestroyNotify) gtk_widget_unref); */
+	gtk_widget_show(spc_gui.text);
+	gtk_container_add(GTK_CONTAINER(spc_gui.scrollwindow), spc_gui.text);
+	
 	spc_gui.hbuttonbox_top = gtk_hbutton_box_new();
 	/* gtk_widget_ref (spc_gui.hbuttonbox_top);
 	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "sp_hbuttonbox_top", spc_gui.hbuttonbox_top,
@@ -332,13 +347,13 @@ GtkWidget *create_spc_window(void)
 void spell_check_cb(GtkWidget * w, gpointer data)
 {
 	/* checks if the text is empty */
-	text_widget = lookup_widget(gtk_widget_get_toplevel(w), (gchar *)data);
+	//text_widget = lookup_widget(gtk_widget_get_toplevel(w), (gchar *)data);
 //	g_warning((gchar *)data);
-	if (gtk_text_get_length(GTK_TEXT(text_widget)) != 0) {
+	//if (gtk_text_get_length(GTK_TEXT(spc_gui.text)) != 0) {
 		spc_gui.window = create_spc_window();
 		//spc_gui.status_bar_count = bf_statusbar_message(("checking spelling"));
 		gtk_widget_show(spc_gui.window);
-	}
+	//}
 }
 
 #endif
