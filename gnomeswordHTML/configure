@@ -3567,7 +3567,7 @@ ac_given_INSTALL="$INSTALL"
 trap 'rm -fr `echo "
 Makefile
 macros/Makefile
-src/editor/Makefile
+src/gseditor/Makefile
 src/gsdialogs/Makefile
 src/gssword/Makefile
 src/Makefile
@@ -3717,7 +3717,7 @@ cat >> $CONFIG_STATUS <<EOF
 
 CONFIG_FILES=\${CONFIG_FILES-"Makefile
 macros/Makefile
-src/editor/Makefile
+src/gseditor/Makefile
 src/gsdialogs/Makefile
 src/gssword/Makefile
 src/Makefile
