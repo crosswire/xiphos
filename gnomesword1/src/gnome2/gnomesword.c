@@ -41,7 +41,6 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
-//#include "gui/percomm.h"
 #include "gui/bookmarks.h"
 #include "gui/studypad.h"
 #include "gui/parallel_view.h"
@@ -52,6 +51,7 @@
 #include "gui/mod_mgr.h"
 #include "gui/tabbed_browser.h"
 
+#include "main/parallel_view.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/sidebar.h"
@@ -103,10 +103,10 @@ void frontend_init(void)
 	 *  parallel stuff
 	 */
 	if (settings.havebible) {
-		gui_check_parallel_modules();
-		gui_set_parallel_options_at_start();
-		gui_create_parallel_page();
-		gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
+		main_check_parallel_modules();
+		//main_set_parallel_options_at_start();
+		main_init_paraellel_view();
+		//gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
 
 	main_dialogs_setup();
@@ -273,6 +273,7 @@ void shutdown_frontend(void)
 	
 	main_dialogs_shutdown();
 	main_delete_sidebar_search_backend();
+	main_delete_paraellel_view();
 	
 	if(settings.browsing)
 		gui_notebook_main_shutdown();

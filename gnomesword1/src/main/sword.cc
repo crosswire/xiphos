@@ -54,6 +54,7 @@ extern "C" {
 #include "main/lists.h"
 #include "main/xml.h"
  
+#include "main/parallel_view.h"
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
@@ -749,7 +750,7 @@ void main_display_bible(const char * mod_name, const char * key)
 	 * change parallel verses
 	 */
 	if (settings.dockedInt) {
-		gui_update_parallel_page();
+		main_update_parallel_page();
 	}
 
 }
@@ -851,7 +852,13 @@ const char *main_get_mod_config_entry(const char * module_name, const char * ent
 {
 	return backend->get_config_entry((char*)module_name, (char*)entry);
 }
-
+int main_is_mod_rtol(const char * module_name)
+{
+	char *direction = backend->get_config_entry((char*)module_name, "Direction");
+	if(direction && !strcmp(direction, "RtoL"))
+		return TRUE;
+	return FALSE;
+}
 
 /******************************************************************************
  * Name

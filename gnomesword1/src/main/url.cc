@@ -50,6 +50,7 @@
 #include "main/configs.h"
 #include "main/module.h"
 #include "main/module_dialogs.h"
+#include "main/parallel_view.h"
 #include "main/sword.h"
 #include "main/xml.h"
 
@@ -194,7 +195,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	gchar **work_buf = g_strsplit (url,"/",4);
 	if(!strcmp(work_buf[2],"swap")) {
 		if(clicked) {
-			gui_swap_parallel_with_main((gchar *) work_buf[3]);		
+			main_swap_parallel_with_main((gchar *) work_buf[3]);		
 		} else {
 			gchar *buf = g_strdup_printf( 
 				_("Show %s in main window"), work_buf[3]);
@@ -208,7 +209,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 		//g_warning(work_buf[3]);
 			settings.cvparallel = 
 				gui_update_controls_parallel(work_buf[3]);
-			gui_update_parallel_page_detached();
+			main_update_parallel_page_detached();
 		} 
 	}
 	g_strfreev(work_buf);
@@ -635,7 +636,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	 * change parallel verses
 	 */
 	if (settings.dockedInt) {
-		gui_update_parallel_page();
+		main_update_parallel_page();
 	}
 	
 	/* 
