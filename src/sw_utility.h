@@ -35,9 +35,12 @@ extern "C" {
 
 #include <swmodule.h>
 #include <swmgr.h>
-
-	gchar *addrenderfiltersSWORD(SWModule * module,
+	/*** create render filters ***/
+	void initRenderFiltersUTIL(void);
+	/*** add render filters for all modules ***/
+	void addrenderfiltersSWORD(SWModule * module,
 				ConfigEntMap & section);
+	/*** delete render filters at shut down ***/
 	void deleteRenderfilters(void);
 	/* path to sword mods */
 	//void pathtomods(char *path);

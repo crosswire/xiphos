@@ -35,9 +35,11 @@
 #include <swmgr.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
+//#include <gbfhtmlhref.h>
 #include "gbfhtmlhref.h"
 #include <rwphtml.h>
 #include <thmlhtml.h>
+//#include <thmlhtmlhref.h>
 #include "thmlhtmlhref.h"
 //#include <latin1utf8.h>
 
@@ -57,38 +59,38 @@ SWFilter
     *thmltohtml, 
     *rwptohtml, 
     *lattoutf8;
+/*** initRenderFiltersUTIL ***/
+void initRenderFiltersUTIL(void)
+{
+	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
+	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
+	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
+	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
+	lattoutf8 = new SW_Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
+}
 
 /********************************************************************************************** 
  * addrenderfilters - 
  *           code originally taken form BibleTime 0.31    
  * 
  *********************************************************************************************/
-gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
+void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 {
 	string sourceformat;
 	string moduleDriver;
 	string encoding;
-	string lang;
 	gchar *retval;
 	ConfigEntMap::iterator entry;
 	bool noDriver = true;
- 	bool isGBF = false;
 	
-	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
-	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
-	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
-	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
-	lattoutf8 = new SW_Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
 	
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
 	encoding = ((entry = section.find("Encoding")) != section.end()) ? (*entry).second : (string) "";
-	lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
 		module->AddRenderFilter(gbftohtml);
 		noDriver = false; 
-		isGBF = true;
 	}
 
 	if (!stricmp(sourceformat.c_str(), "PLAIN")) {
@@ -116,12 +118,10 @@ gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 			noDriver = false;
 		}
 	}	
-	if(!module->isUnicode()) {                                                     //(stricmp(encoding.c_str(), "UTF-8")){ // &&( !isGBF)) {
+	
+	if(!module->isUnicode()) { 
 		module->AddRenderFilter(lattoutf8);
 	}
-	retval = (char*)lang.c_str();
-	//g_warning(retval);
-	return retval;
 }
 
 void deleteRenderfilters(void)
