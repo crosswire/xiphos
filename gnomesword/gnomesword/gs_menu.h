@@ -66,6 +66,7 @@ void addmodstomenus(GtkWidget *app, SETTINGS *settings,GList *biblelist,
 		GList *commentarylist, GList *dictionarylist,
 		GList *percomlist);		
 
+		
 #ifdef __cplusplus
 }
 #endif

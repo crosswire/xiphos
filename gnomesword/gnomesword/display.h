@@ -135,10 +135,14 @@ class GTKRWPDisp:public GTKEntryDisp { public:
 class GTKInterlinearDisp:public GTKEntryDisp { public:
 	GTKInterlinearDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
+};//----------------------------------------------------------------------------------------------
+class InterlinearDisp:public GTKEntryDisp { public:
+	InterlinearDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
 };
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
-void interlinearDisplay(GList *mods);
+//void interlinearDisplay(GList *mods, gchar *verse);
 
 

@@ -493,9 +493,11 @@ SETTINGS createsettings(void)
 
 	p_settings = &settings;	/* set p_settings to point to settings structure - we have to do this set the values of the structure */
 	strcpy(p_settings->MainWindowModule, "KJV");	/* set main window module */
-	strcpy(p_settings->Interlinear1Module, "KJV");	/* set first interlinear window module */
-	strcpy(p_settings->Interlinear2Module, "KJV");	/* set second interlinear window module */
-	strcpy(p_settings->Interlinear3Module, "KJV");	/* set third interlinear window module */
+	strcpy(p_settings->Interlinear1Module, "BBE");	/* set first interlinear window module */
+	strcpy(p_settings->Interlinear2Module, "WEB");	/* set second interlinear window module */
+	strcpy(p_settings->Interlinear3Module, "Byz");	/* set third interlinear window module */
+	strcpy(p_settings->Interlinear4Module, "NIV");	/* set second interlinear window module */
+	strcpy(p_settings->Interlinear5Module, "NASB");	/* set third interlinear window module */	
 	strcpy(p_settings->personalcommentsmod, "-+*Personal*+-");	/* personal comments module */
 	strcpy(p_settings->currentverse, "Romans 8:28");	/* set openning verse */
 	strcpy(p_settings->dictkey, "GRACE");	/* dictionary key to use at program startup - the one we shut down with */

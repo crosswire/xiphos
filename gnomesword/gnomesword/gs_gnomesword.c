@@ -57,6 +57,7 @@ GtkWidget	*versestyle,	/* widget to access toggle menu - for versestyle */
 		*notes;    /* notes text widget */
 
 
+GString *gs_clipboard; /* for copying from the html widgets freed in shutdownSWORD in gs_sword.cpp*/
 
 gboolean isstrongs = FALSE; /* main window selection is not storngs number */
 gchar *current_filename= NULL;	/* filename for open file in study pad window */
@@ -129,8 +130,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp2")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp3")) , TRUE );
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),1);
-#endif /* USE_GTKHTML */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textDict")) , TRUE );
+#endif /* USE_GTKHTML */	
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
@@ -171,7 +172,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 #endif /* USE_SHORTCUTBAR */
 /* load last used file into studypad */
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
-
+/* create gs_clipboard */
+	gs_clipboard = g_string_new("");
 /* set dict module to open notebook page */
 	/* let's don't do this if we don't have at least one dictionary / lexicon */	
 	if(havedict){ 			
@@ -222,9 +224,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	}
 /* set text modules to last used */
 	changecurModSWORD(settings->MainWindowModule,TRUE);
-	changecomp1ModSWORD(settings->Interlinear1Module);
-	changecomp2ModSWORD(settings->Interlinear2Module);
-	changecomp3ModSWORD(settings->Interlinear3Module);
+	//changecomp1ModSWORD(settings->Interlinear1Module);
+	//changecomp2ModSWORD(settings->Interlinear2Module);
+	//changecomp3ModSWORD(settings->Interlinear3Module);
 	
 /* hide buttons - only show them if their options are enabled */
 	gtk_widget_hide(lookup_widget(app,"btnPrint"));
