@@ -32,6 +32,7 @@
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 #include "main/lists.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * globals

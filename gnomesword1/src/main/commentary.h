@@ -25,42 +25,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-/* main */
-#include "main/settings.h"	
-
-typedef struct _commdata COMM_DATA;
-
-#include "gui/commentary_find.h"
-
-struct _commdata {
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *frame_toolbar;
-	GtkWidget *btnCOMMSync;
-	GtkWidget *btnCOMMBack;
-	GtkWidget *btnCOMMForward;
-	GtkWidget *btnCOMMPrint;
-	GtkWidget *btn_book_heading;
-	GtkWidget *btn_chap_heading;
-	GtkWidget *showtabs;
-	GtkWidget *showtoolbar;
-	gchar *modName;
-	gchar *searchstring;
-	gchar key[80];
-	gint modnum;
-	gboolean has_key;
-	COMMFindDialog *find_dialog;
-};	
 
 void display_book_heading(int mod_num);
 void display_chap_heading(int mod_num);
 const char* navigate_commentary(gint modnum, gint direction);
-void set_commentary_page_and_key(gint page_num,
-				     gchar * key);
-void setup_commentary(GList *mods);
-void shutdown_commentary(void);
-void display_commentary(gchar * key);
+void display_comm(gint page_num, gchar * key);
+void new_display_commentary(GtkWidget * html, gchar * modName);
 void shutdown_viewcomm(void);
 void goto_verse_viewcomm(gchar *verse);
 void load_module_viewcomm(gchar *module_name);
