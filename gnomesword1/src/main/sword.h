@@ -60,6 +60,8 @@ int get_verse_from_key(char *key);
 void save_properties(gboolean use_default);
 GList *get_verse_list(char* module_name, char *verse_list);
 int module_is_locked(char * mod_name);
+char *get_cipher_key(char *mod_name);
+int has_cipher_tag(char *mod_name);
 char *get_valid_key(char *key);
 int get_module_number(char *module_name, char *module_type);
 char *get_module_text(char * mod_name, char * key);

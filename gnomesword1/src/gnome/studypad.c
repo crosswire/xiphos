@@ -46,13 +46,17 @@
 #include "gui/link_dialog.h"
 #include "gui/info_box.h"
 #include "gui/html.h"
+#include "gui/dialog.h"
 
 #include "gui/fileselection.h"
 #include "main/settings.h"
 
 #define BUFFER_SIZE 4096
 
-
+static void on_btn_save_clicked(GtkButton * button,
+					GSHTMLEditorControlData * ecd);
+					
+static GSHTMLEditorControlData *editor_cd;
 
 
 /******************************************************************************
@@ -74,6 +78,32 @@
 void gui_studypad_can_close(void)
 {
 	if (settings.modifiedSP) {
+		
+		gint test;
+		GS_DIALOG *info;
+	
+		info = gui_new_dialog();
+		if (strlen(settings.studypadfilename) > 0 )
+			info->label_top = settings.studypadfilename;
+		else
+			info->label_top = N_("File");
+		info->label_middle = N_("in StudyPad is not saved!");
+		info->yes = TRUE;
+		info->no = TRUE;
+	
+		test = gui_gs_dialog(info);
+		if (test == GS_YES){
+			on_btn_save_clicked(NULL,
+					editor_cd);
+			/*
+			save_file_program_end(widgets.html_studypad,
+					settings.studypadfilename);
+			*/
+		}
+		
+		g_free(info);
+		
+		/*
 		GtkWidget *msgbox;
 		gint answer = 0;
 		
@@ -91,6 +121,7 @@ void gui_studypad_can_close(void)
 		default:
 			break;
 		}
+		*/
 	}
 }
 /******************************************************************************
@@ -510,15 +541,10 @@ static void on_btn_save_clicked(GtkButton * button,
 	GtkWidget *savemyFile;
 	gchar buf[255];
 	
-	if(strlen(ecd->filename) > 1)  {
+	if(strlen(settings.studypadfilename) > 0)  {
 		save_file(ecd->filename, ecd);
-		return;
 	} else {
-		sprintf(buf, "%s/.pad", settings.homedir);
-		savemyFile = gui_fileselection_save(ecd);
-		gtk_file_selection_set_filename(GTK_FILE_SELECTION
-						(savemyFile), buf);
-		gtk_widget_show(savemyFile);
+		gui_fileselection_save(ecd);
 	}
 		
 }
@@ -1101,7 +1127,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	if (settings.studypadfilename) {
 		load_file(settings.studypadfilename, specd);
 	}
-		
+	editor_cd = specd;	
 	return htmlwidget;
 }
 

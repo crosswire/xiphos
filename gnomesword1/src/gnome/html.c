@@ -44,6 +44,10 @@
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/dialog.h"
+#include "gui/bibletext.h"
+#include "gui/commentary.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -265,6 +269,11 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			g_free(buf1);
 			return;	
 		}
+	
+		else if (*url == 'U') {
+			++url;
+			sprintf(buf,_("Unlock %s"),url);
+		}
 		/***  any other link  ***/
 		else
 			sprintf(buf, _("Go to %s"), url);
@@ -309,7 +318,6 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(url);
 		gui_change_verse(buf);
 		g_free(buf);
-
 	}
 
 	else if (*url == 'I') {
@@ -551,6 +559,18 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gui_change_module_and_key("Packard", buf);
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer("Packard", buf);
+		g_free(buf);
+	}
+	
+	else if (*url == 'U') {
+		++url;		/* remove U */
+		buf = g_strdup(url);
+		if(get_mod_type(buf) == TEXT_TYPE) {
+			gui_unlock_bibletext(NULL, (TEXT_DATA *) data);
+		}
+		else if(get_mod_type(buf) == COMMENTARY_TYPE) {
+			gui_unlock_commentary(NULL, (COMM_DATA *) data);
+		}
 		g_free(buf);
 	}
 }

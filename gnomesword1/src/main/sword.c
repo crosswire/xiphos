@@ -362,6 +362,50 @@ int module_is_locked(char * mod_name)
 
 /******************************************************************************
  * Name
+ *  get_cipher_key
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   char *get_cipher_key(char *mod_name)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
+
+char *get_cipher_key(char *mod_name)
+{
+	return backend_get_cipher_key(mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *  has_cipher_tag
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   int has_cipher_tag(char *mod_name)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+
+int has_cipher_tag(char *mod_name)
+{
+	return backend_has_cipher_tag(mod_name);
+}
+
+
+/******************************************************************************
+ * Name
  *   get_valid_key
  *
  * Synopsis
