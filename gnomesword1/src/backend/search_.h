@@ -27,10 +27,8 @@ extern "C" {
 #endif
 	
 GList *backend_do_search(gpointer *usr_data);
-void backend_setup_search_results_display(GtkWidget * html_widget);
-void backend_shutdown_search_results_display(void);
-void backend_search_results_item_display(gchar * key);
-
+char *backend_get_search_results_text(char * mod_name, char * key);
+	
 #ifdef __cplusplus
 }
 #endif

@@ -28,7 +28,7 @@ extern "C" {
 
 void createbookmarksBM(gchar * dir);
 void loadbookmarks(GtkWidget * ctree_widget);
-void savebookmarks(GtkWidget * ctree_widget);
+void backend_save_bookmarks(GtkWidget * ctree_widget);
 
 #ifdef __cplusplus
 }

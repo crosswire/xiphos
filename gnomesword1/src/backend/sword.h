@@ -24,8 +24,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-	
+#endif	
 
 
 #include <gnome.h>
@@ -51,15 +50,16 @@ GList *backend_get_list_of_mods_by_type(char *mod_type);
 GList *backend_get_list_of_devotion_modules(void);
 GList *backend_get_list_of_percom_modules(void);
 GList *backend_get_mod_description_list_SWORD(char *mod_type);
-gchar *backend_get_module_description(char * modName);
-gchar *backend_get_path_to_mods(void);
-gchar *backend_get_mod_aboutSWORD(char * modname);
+char *backend_get_module_description(char * modName);
+char *backend_get_path_to_mods(void);
+char *backend_get_mod_aboutSWORD(char * modname);
 int backend_get_module_page(char *module_name, char *module_type);
 char *backend_get_module_font_name(char *mod_name);
 char *backend_get_module_font_size(char *mod_name);
 int backend_module_is_locked(char *mod_name);
 char *backend_get_cipher_key(char *mod_name);
-	
+char *backend_get_module_text(char * mod_name, char * key);	
+int backend_check_for_module(char * mod_name);
 
 #ifdef __cplusplus
 }

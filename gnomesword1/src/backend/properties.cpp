@@ -35,13 +35,11 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "main/gs_gnomesword.h"
 #include "backend/properties.h"
-#include "main/support.h"
+
 #include "main/settings.h"
 
-static
-gchar *isON(bool value)
+static char *isON(bool value)
 {
 	if (value)
 		return "1";
@@ -53,9 +51,9 @@ gchar *isON(bool value)
  * load gnomesword properties - using sword SWConfig
  *****************************************************************************/
 
-gboolean backend_load_properties(void)
+int backend_load_properties(void)
 {
-	gchar buf[255];
+	char buf[255];
 
 	sprintf(buf, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf);
@@ -255,9 +253,9 @@ gboolean backend_load_properties(void)
  * save gnomesword properties - using sword SWConfig
  *****************************************************************************/
 
-gboolean backend_save_properties(gboolean shutdown)
+int backend_save_properties(int shutdown)
 {
-	gchar buf[80], buf2[255];
+	char buf[80], buf2[255];
 
 	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);
@@ -431,8 +429,10 @@ gboolean backend_save_properties(gboolean shutdown)
 		    isON(settings.comm_tool);
 		settingsInfo["User Options"]["DictTabs"] =
 		    isON(settings.dict_tabs);
-		settingsInfo["User Options"]["BookTabs"] = isON(settings.book_tabs);
-	        settingsInfo["User Options"]["PercommTabs"] = isON(settings.percomm_tabs);
+		settingsInfo["User Options"]["BookTabs"] = 
+			isON(settings.book_tabs);
+	        settingsInfo["User Options"]["PercommTabs"] = 
+			isON(settings.percomm_tabs);
 		settingsInfo["User Options"]["InViewer"] =
 		    isON(settings.inViewer);
 		settingsInfo["User Options"]["InDictPane"] =
@@ -449,9 +449,9 @@ gboolean backend_save_properties(gboolean shutdown)
  * and information from the setup dialog
  *****************************************************************************/
 
-gboolean backend_create_properties_from_setup(void)
+int backend_create_properties_from_setup(void)
 {
-	gchar buf[80], buf2[255];
+	char buf[80], buf2[255];
 
 	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);
@@ -541,9 +541,9 @@ gboolean backend_create_properties_from_setup(void)
  * create gnomesword properties - using sword SWConfig
  *****************************************************************************/
 
-gboolean backend_create_properties(void)
+int backend_create_properties(void)
 {
-	gchar buf[80], buf2[255];
+	char buf[80], buf2[255];
 
 	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);

@@ -32,7 +32,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "backend/display.h"
 #include "backend/sword.h"
 #include "backend/search_.h"
 #include "backend/sword_defs.h"
@@ -40,14 +39,6 @@
 #include "main/settings.h"
 #include "main/gs_gnomesword.h"
 
-/******************************************************************************
- * static
- */
-static SWDisplay 
-	*display;	/* to display modules in searchresults */
-	
-static SWModule 
-	*mod;   /* module for searchresults */
 
 
 /******************************************************************************
@@ -65,6 +56,7 @@ static SWModule
  * Return value
  *   GList *
  */
+ 
 GList* backend_do_search(gpointer *usr_data)	
 {	
 	SEARCH_OPT *search_opts;
@@ -76,15 +68,15 @@ GList* backend_do_search(gpointer *usr_data)
 	ModMap::iterator 
 		it;
 			
-	const gchar	
+	const char	
 		*resultText;   //-- temp storage for verse found
-	gchar     
+	char     
 		buf[256], 
 		buf2[256], 
 		*mybuf[2],
 		scount[5],	//-- string from gint count for label
 		firstkey[80];
-	gint            
+	int            
 		count;		//-- number of hits
 	GList 
 		*list;
@@ -157,91 +149,34 @@ GList* backend_do_search(gpointer *usr_data)
                 }
         } 
 	search_opts->found_count = count;
-	
-	if(count){
-		ModMap::iterator it; 	
-		it = sw_mgr.results->Modules.find(searchMod->Name());
-		if (it != sw_mgr.results->Modules.end()){ //-- if we find the module	
-			mod = (*it).second;  //-- change module to new module
-		}
-	}
-			
-	
+		
 	g_string_free(tmpbuf,TRUE);
 	return list;
 }
 
-
 /******************************************************************************
  * Name
- *   backend_setup_search_results_display
+ *   backend_get_search_results_text
  *
  * Synopsis
- *   #include "search.h"
+ *   #include "search_.h"
  *
- *   backend_setup_search_results_display(GtkWidget *html_widget)	
+ *   char *backend_get_search_results_text(char * mod_name, char * key)	
  *
  * Description
- *   set up sword module and display for viewing search results
+ *    
  *
  * Return value
- *   void
+ *   char *
  */
-void backend_setup_search_results_display(GtkWidget *html_widget)
-{	
-	ModMap::iterator it; //-- iteratior	
-	SectionMap::iterator sit; //-- iteratior
+ 
+char *backend_get_search_results_text(char * mod_name, char * key)
+{
+	SWModule *mod = sw_mgr.results->Modules[mod_name];
 	
-		
-	mod     = NULL;
-	display = new  GtkHTMLEntryDisp(html_widget);
-	
-	for(it = sw_mgr.results->Modules.begin(); it != sw_mgr.results->Modules.end(); it++){
-		mod = (*it).second;
-			mod->Disp(display);
+	if(mod) {
+		mod->SetKey(key);
+		return strdup((char*)mod->RenderText());
 	}
+	return NULL;
 }
-
-/******************************************************************************
- * Name
- *   backend_shutdown_search_results_display
- *
- * Synopsis
- *   #include "search.h"
- *
- *   void backend_shutdown_search_results_display(void)
- *
- * Description
- *   delete sword mgr and display use for viewing search results
- *
- * Return value
- *   void
- */
-void backend_shutdown_search_results_display(void) 
-{	
-		
-	if(display)
-		delete display;	
-}
-
-/******************************************************************************
- * Name
- *   backend_search_results_item_display
- *
- * Synopsis
- *   #include "search.h"
- *
- *   void backend_search_results_item_display(gchar *url)
- *
- * Description
- *   display a new key (result item) in search results display
- *
- * Return value
- *   void
- */
-void backend_search_results_item_display(gchar *key)
-{	
-	mod->SetKey(key);
-	mod->Display();
-}
-
