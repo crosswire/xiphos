@@ -661,7 +661,7 @@ on_notebook4_switch_page(GtkNotebook * notebook,
 	GtkLabel *label;	//-- pointer to tab label
 	gchar *keyText;		//-- string for verse key text
 	gchar *entryText;	//-- pointer to dict key
-	static gboolean firsttime = true;	//-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
+	static gboolean firsttime = true;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to false
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- set label to tab label
 		entryText =
@@ -1317,7 +1317,7 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)
 {
-	static gboolean firsttime = true;	//-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
+	static gboolean firsttime = true;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to false
 	if (!firsttime) {
 		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
 	}

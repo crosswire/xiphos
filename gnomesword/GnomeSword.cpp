@@ -213,7 +213,7 @@ initSword(GtkWidget *mainform)
 	percommods = NULL;
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget	
-  	//--------------------------------------------------------------- create shortcut bar groups
+  	//-- create shortcut bar groups
 	if(settings->showtextgroup){
 	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
 	}
@@ -227,7 +227,7 @@ initSword(GtkWidget *mainform)
 		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	    
 	}
 		
-        //------------------------------------------------------------- setup displays for sword modules
+        //-- setup displays for sword modules
     	noteeditor = new NoteEditor();
 	GTKEntryDisp::__initialize();
 	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
@@ -262,14 +262,14 @@ initSword(GtkWidget *mainform)
 			}else			
 				curMod->Disp(chapDisplay);
 			
-		  	//-----------   add choice to shortcut bar
+		  	//--  add choice to shortcut bar
 		  	if(settings->showtextgroup){
 		    		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum1, -1,
 						      shortcut_types[0],
 						      curMod->Name());
 		  	}		  			
-		}else if (!strcmp((*it).second->Type(), "Commentaries")){ //-- set commentary modules and add to notebook		
+		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
 			havecomm = true; //-- we have at least one commentay module
@@ -288,7 +288,7 @@ initSword(GtkWidget *mainform)
 			}
 			else if(!strcmp(sourceformat,"ThML")) curcomMod->Disp(HTMLDisplay);
 			else if(!strcmp(curcomMod->Name(),"RWP")) curcomMod->Disp(RWPDisplay);
-			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ //-- if driver is RawFiles			   				 	
+			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){  /* if driver is RawFiles */
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
 				 else curcomMod->Disp(comDisplay);
 			}else curcomMod->Disp(comDisplay);
@@ -607,7 +607,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm, "dictionarySearchText"))); //-- get key to form user
 	j=0;
 	it = mainMgr->Modules.find(ModName); //-- find module to use for search
-	if (it != mainMgr->Modules.end()){ //-- if we don't reach the end of our modules	
+	if (it != mainMgr->Modules.end()){ //-- if we dont reach the end of our modules	
 		SWModule *mod = (*it).second;  //-- temp module to work with
 		mod->KeyText(); //-- snap to entry
 		saveKey = mod->KeyText(); //-- save our place
@@ -651,7 +651,7 @@ UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle button
 	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;
 	
 	
-	if(settings->interlinearpage)	//---------------------------- set interlinear page to last setting
+	if(settings->interlinearpage)	//-- set interlinear page to last setting
 		gtk_widget_show(lookup_widget(mainform,"vbox3"));	
 	else
 		gtk_widget_hide(lookup_widget(mainform,"vbox3"));		
@@ -662,16 +662,15 @@ UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle button
 	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; //-- set auto save menu check item
 	
 	
-	if(settings->strongs)	//--------------------------- set Strong's numbers to last setting
-		mainMgr->setGlobalOption("Strong's Numbers","On"); //-- keep strongs numbers in sync with menu	
+	if(settings->strongs)	/* set Strong's numbers to last setting */
+		mainMgr->setGlobalOption("Strong's Numbers","On");  /* " */ /* keep strongs numbers in sync with menu */
 	else
-		mainMgr->setGlobalOption("Strong's Numbers","Off"); //-- keep strongs numbers in sync with menu
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(mainform,"btnStrongs")), settings->strongs);	//-- set strongs toogle button
+		mainMgr->setGlobalOption("Strong's Numbers","Off"); /* ' */ /* keep strongs numbers in sync with menu */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(mainform,"btnStrongs")), settings->strongs);	/* set strongs toogle button */
 	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
 	
-        if(havedict) FillDictKeys(curdictMod->Name()); //-- fill the dict key clist
-        changeVerse(settings->currentverse); //--------------------------------------- set Text - apply changes
-
+        if(havedict) FillDictKeys(curdictMod->Name());  /* fill the dict key clist */
+        changeVerse(settings->currentverse);  /* set Text - apply changes */
 }
 
 //-------------------------------------------------------------------------------------------

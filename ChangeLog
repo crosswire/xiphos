@@ -1,3 +1,11 @@
+2000-11-20 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*release 0.3.2
+	*fixed crash with seg fault on initial startup after build,
+	 thanks to Fred Smith <fredex@fcshome.stoneham.ma.us> 
+	 for finding and fixing this bug.
+	 
+
 2000-11-14 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*separate initSword() and initGnomeSword()
