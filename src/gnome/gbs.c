@@ -61,11 +61,12 @@ extern GdkBitmap *mask3;
  */
 static void add_node_children(GtkCTreeNode *node, gchar *bookname,
 					unsigned long offset);
-/* list of gbs data structures */
-static GList *gbs_list;		
-static GBS_DATA *cur_g;
 static gboolean in_url;
 static gboolean gbs_find_running;
+static GtkCTreeNode *rootnode;	
+static GBS_DATA *cur_g;
+/* list of gbs data structures */
+static GList *gbs_list;	
 
 
 /******************************************************************************
@@ -123,16 +124,17 @@ static GtkCTreeNode *add_node_gbs(NODEDATA * data)
 {
 	GtkCTreeNode *retval;
 
-	retval = gtk_ctree_insert_node(GTK_CTREE(widgets.ctree_widget_books),
-				       data->parent,
-				       data->sibling,
-				       data->buf,
-				       3,
-				       data->pixmap1,
-				       data->mask1,
-				       data->pixmap2,
-				       data->mask2,
-				       data->is_leaf, data->expanded);
+	retval = gtk_ctree_insert_node(GTK_CTREE(
+					widgets.ctree_widget_books),
+				       	data->parent,
+				      	data->sibling,
+				    	data->buf,
+				       	3,
+				       	data->pixmap1,
+				       	data->mask1,
+				       	data->pixmap2,
+				       	data->mask2,
+				       	data->is_leaf, data->expanded);
 	return retval;
 }
 		
@@ -278,7 +280,8 @@ void gui_set_gbs_frame_label(void)
 	if (settings.book_tabs)
 		gtk_frame_set_label(GTK_FRAME(cur_g->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(cur_g->frame), cur_g->mod_name);
+		gtk_frame_set_label(GTK_FRAME(cur_g->frame), 
+						cur_g->mod_name);
 	
 }
 
@@ -470,9 +473,9 @@ static gboolean on_button_release_event(GtkWidget * widget,
 		if (!in_url) {
 			key = gui_button_press_lookup(g->html);
 			if (key) {
-				gui_display_dictlex_in_viewer(settings.DictWindowModule,
-							  key
-							  );
+				gui_display_dictlex_in_viewer(
+					settings.DictWindowModule,
+					key);
 				g_free(key);
 			}
 			return TRUE;
@@ -606,8 +609,6 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
  
 static void add_book_to_ctree(GtkWidget * ctree, gchar * mod_name)
 {
-
-	GtkCTreeNode *rootnode;
 	gchar *buf[3];
 
 	buf[0] = mod_name;
@@ -690,7 +691,9 @@ void gui_add_new_gbs_pane(GBS_DATA * g)
 	popupmenu = gui_create_pm_gbs(g); 
 	gnome_popup_menu_attach(popupmenu, g->html, NULL);
 	add_book_to_ctree(g->ctree, g->mod_name);
-	
+	gtk_ctree_select(GTK_CTREE(g->ctree),rootnode);
+	on_ctreeGBS_select_row((GtkCList *) g->ctree,0,
+			0, NULL, g);
 }
 
 /******************************************************************************
@@ -774,8 +777,10 @@ void gui_setup_gbs(GList *mods)
 		gbs->is_dialog = FALSE;	
 		gbs->has_key = module_is_locked(gbs->mod_name);
 		if (has_cipher_tag(gbs->mod_name)) {
-			gbs->is_locked = module_is_locked(gbs->mod_name);
-			gbs->cipher_old = get_cipher_key(gbs->mod_name);
+			gbs->is_locked 
+				= module_is_locked(gbs->mod_name);
+			gbs->cipher_old 
+				= get_cipher_key(gbs->mod_name);
 		}
 
 		else {

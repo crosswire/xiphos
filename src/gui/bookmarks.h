@@ -41,7 +41,7 @@ void gui_load_bookmark_tree(void);
 void create_bookmark_menu(void);
 void on_new_folder_activate(GtkMenuItem * menuitem,
 			  gpointer user_data);
-void gui_save_gnode_to_xml_bookmarks(GNode * node);
+void gui_save_old_bookmarks_to_new(GNode *gnode);
 void gui_save_bookmarks(GtkMenuItem * menuitem,
 			     gpointer user_data);
 void on_edit_item_activate(GtkMenuItem * menuitem,

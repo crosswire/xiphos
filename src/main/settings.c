@@ -179,7 +179,7 @@ gint settings_init(void)
 			GNode *bookmark_tree;
 			bookmark_tree =
 			    backend_load_old_bookmarks(old_bm);
-			gui_save_gnode_to_xml_bookmarks(bookmark_tree);
+			gui_save_old_bookmarks_to_new(bookmark_tree);
 		} else
 			g_warning("can't create bookmarks dir");
 	}
@@ -201,7 +201,7 @@ gint settings_init(void)
 			GNode *bookmark_tree;
 			bookmark_tree =
 			    backend_load_bookmarks(settings.swbmDir);
-			gui_save_gnode_to_xml_bookmarks(bookmark_tree);
+			gui_save_old_bookmarks_to_new(bookmark_tree);
 			settings.load_xml_bookmarks = TRUE;
 		}
 		g_free(file_buf);
