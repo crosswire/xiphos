@@ -25,7 +25,7 @@
 #include <gnome.h>
 #ifdef USE_GNOME_SPELL	
 #include <bonobo.h>
-#include "main/Spell.h"
+#include "gnome2/Spell.h"
 #endif
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
