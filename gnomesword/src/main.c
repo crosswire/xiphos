@@ -83,6 +83,8 @@ main (int argc, char *argv[])
   	/* set pointer to structure */
   	settings = &myset; 
 	loadconfig(); /* new */  /*** sw_propertiew.cpp ***/  
+	if(strcmp(VERSION,settings->gs_version))
+		gs_firstrunSWORD(); /*** gs_sword.cpp ***/ 
 	/* splash screen */	
 	splash = e_splash_new (); /*** e-splash.c ***/ 
 	if(settings->showsplash){	
