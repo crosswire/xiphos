@@ -194,7 +194,8 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	beginHTML(GTK_WIDGET(gtkText), FALSE);
 	strbuf = g_string_new("");
 	g_string_sprintf(strbuf,
-			 "<HTML><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">",
+			 "<HTML><HEAD><META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; CHARSET=ISO-8859-7\"><META NAME=\"GENERATOR\" CONTENT=\"GtkHTML/0.10.99\">\
+			</HEAD><body text=\"#151515\" link=\"#898989\"><font  size=\"%s\">",
 			 "+1");
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);

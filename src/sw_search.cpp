@@ -46,7 +46,7 @@ static char printed = 0;
 extern SETTINGS *settings;
 
 //-------------------------------------------------------------------------------------------
-void    /* search Bible text or commentaries */
+GList*   /* search Bible text or commentaries */
 searchSWORD (GtkWidget *widget, SETTINGS *s)	
 {	
 	
@@ -81,8 +81,13 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	gint            
 		count;		//-- number of hits
 	GString 
+		*tmpbuf,
 		*string;
-
+	GList 
+		*list;
+		
+	tmpbuf = g_string_new("");
+	list = NULL;	
 	searchMgr = new SWMgr();	//-- create sword mgrs
 	searchMod = NULL;
 	searchText = lookup_widget (widget, "entrySearch");	//-- pointer to text entry
@@ -96,8 +101,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	comToggle = lookup_widget (widget, "ckbCommentary");	//-- pointer to check box
 	percomToggle = lookup_widget (widget, "ckbPerCom");	//-- pointer to check box   
 	//textWindow = lookup_widget (widget, "txtSearch");	//-- pointer to text widget
-
-
 
 	if (GTK_TOGGLE_BUTTON (comToggle)->active) {	/* if true search commentary */	  
 		  it = searchMgr->Modules.find (curcomMod->Name ());	/* find commentary module */
@@ -160,6 +163,13 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 				sprintf(buf,"%s",resultText);
 				string = g_string_append(string,buf);
 			}
+			g_string_sprintf(tmpbuf,"%s, %s|%s|%s",
+						resultText,
+						searchMod->Name(),
+						resultText,
+						searchMod->Name());
+			g_warning("tmpbuf = %s",tmpbuf->str);
+			list = g_list_append(list,g_strdup(tmpbuf->str));
 			searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope
 			                                                           in case we want to use them */
 			++count;	
@@ -172,7 +182,9 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
 	}
 	g_string_free(string,TRUE);
+	g_string_free(tmpbuf,TRUE);
 	delete searchMgr;
+	return list;
 }
 
 //-------------------------------------------------------------------------------------------
