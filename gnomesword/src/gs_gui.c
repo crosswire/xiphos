@@ -409,27 +409,28 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	g_print("%s\n", "Building GnomeSword interface");
 	if (s->showsplash) {
 		icon_pixbuf =
-      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
-		icon_pixbuf = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword.xpm");
-		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
-		gdk_pixbuf_unref(icon_pixbuf);
-
-		icon_pixbuf =
-      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/gnome-fontsel.xpm");
+		icon_pixbuf = 
+			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		icon_pixbuf =
-      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/gnome-fontsel.xpm");
+		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
+		gdk_pixbuf_unref(icon_pixbuf);
+
+		icon_pixbuf =
+			gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		while (gtk_events_pending())
 			gtk_main_iteration();
-		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
+		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
 	}
 
 	s->app =
@@ -1728,7 +1729,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	
 	gtk_widget_grab_focus(s->app);
 	if (s->showsplash) {
-		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
+		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	}
