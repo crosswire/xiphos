@@ -17,7 +17,7 @@ COMMON_SOURCE =  \
     gs_gnomesword.h \
     gs_history.c \
     gs_history.h \
-    callback.cpp \
+    callback.c \
     callback.h \
     display.cpp \
     display.h \
@@ -32,10 +32,10 @@ COMMON_SOURCE =  \
     main.c \
     gs_menu.c \
     gs_menu.h \
-    noteeditor.cpp \
-    noteeditor.h \
-    searchstuff.cpp \
-    searchstuff.h \
+    gs_search.cpp \
+    gs_search.h \\
+    gs_search_cb.cpp \
+    gs_search_cb.h \
     support.c \
     support.h \
     gs_html.c \

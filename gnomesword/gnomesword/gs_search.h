@@ -14,6 +14,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
@@ -25,7 +29,6 @@ GtkWidget* create_dlgSearch(void);
 
 class SearchWindow
 {
-        GtkWidget *dlgSearch;
         GtkWidget *dialog_vbox1;
  
         GtkWidget *frame8;
@@ -63,7 +66,6 @@ class SearchWindow
         GtkWidget *label46;
         GtkWidget *scrolledwindow20;
         GtkWidget *txtSearch;
-        GtkWidget *cbContext;
         GtkWidget *hbox15;
         GtkWidget *label57;
         GtkWidget *lbSearchHits;
@@ -74,7 +76,7 @@ class SearchWindow
         SWDisplay *HTMLsearchDisplay; //--- to display HTML modules using GtkText a verse at a time
         SWDisplay *RWPsearchDisplay; //--- to display RWP module using GtkText a verse at a time
         SWMgr *searchMgr; //-- sword mgr for searchMod - module used for searching
-        SWModule *searchMod; //-- module for searching and search window
+        
         VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
         ListKey	searchScopeList; //----------- search list for searching verses found on last search
         SWKey	*currentScope; //----------- use to set scope of search
@@ -82,16 +84,27 @@ class SearchWindow
         SWFilter *gbftohtml;
         SWFilter *rwphtml;
 	//void percentUpdate(char percent, void *userData); 
+	
 public:
 	SearchWindow();
 	~SearchWindow();
+	GtkWidget *dlgSearch;
 	GtkWidget *create();
 	GtkWidget *progressbar;
         GtkWidget *resultList;
+        GtkWidget *cbContext;
+	
+	SWModule *searchMod; //-- module for searching and search window
+	
         void searchSWORD(GtkWidget *searchFrm);  //-- search Bible text or commentaries
-        void resultsListSWORD(GtkWidget *searchFrm, gint row, gint column); //-- someone clicked the results list
         void initsearchWindow(GtkWidget *searchDlg); //-- init search dialog
+	
 };
 
 extern SearchWindow *searchWindow;
+
+
+#ifdef __cplusplus
+}
+#endif
 
