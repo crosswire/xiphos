@@ -1,3 +1,9 @@
+2003-11-24  Terry <tbiggs@users.sf.net>
+
+	* removed gnome2/shortcutbar.h it was no longer needed
+	* combined "search results" and "verse list" in the sidebar
+
+
 2003-11-24  Andy Piper <andyp@users.sf.net>
 
 	* docs are conventionally installed to /usr/share/doc and not to
