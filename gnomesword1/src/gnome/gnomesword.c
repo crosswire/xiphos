@@ -139,6 +139,14 @@ void init_gnomesword(void)
 	
 	gui_change_verse(settings.currentverse);
 	
+			    
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
+			widgets.viewtexts_item), settings.showtexts);
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
+			widgets.viewcomms_item), settings.showcomms);
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
+			widgets.viewdicts_item), settings.showdicts);
+	
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
 	 */
