@@ -113,13 +113,15 @@ static void fill_search_results_clist(GList * glist, SEARCH_OPT * so)
 	tmp = glist;
 	gtk_clist_clear(GTK_CLIST(sv->clist));
 	while (tmp != NULL) {
-		gchar *buf1 = (gchar *) tmp->data;
+		gchar *buf2 = g_strdup((gchar *) tmp->data);
+		gchar *buf1 = buf2;
 		gchar *token = strtok(buf1, "|");
 		buf1 = token;
 		token = strtok(NULL, "|");
 		buf1 = token;
 		gtk_clist_insert(GTK_CLIST(sv->clist), i, &buf1);
 		++i;
+		g_free(buf2);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);

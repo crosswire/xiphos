@@ -225,16 +225,19 @@ static void set_text_variant_global_option(gchar * option,
  */
 
 static void on_notebook_text_switch_page(GtkNotebook * notebook,
-					 GtkNotebookPage * page,
-					 gint page_num, GList * tl)
+		GtkNotebookPage * page, gint page_num, GList * tl)
 {
 	TEXT_DATA *t;
 	/*
 	 * get data structure for new module 
 	 */
 	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
-	if (!t->frame)
+	/*
+	 * create pane if it does not already exist
+	 */
+	if (!t->frame){
 		gui_add_new_text_pane(t);
+	}
 	/*
 	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
 	 */
@@ -252,7 +255,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 */
 	strcpy(settings.sb_search_mod, t->mod_name);
 	/*
-	 * set search frame label to current text module 
+	 * set search label to current text module 
 	 */
 	gui_set_search_label(t->mod_name);
 	/*
@@ -502,8 +505,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 static void on_unlock_key_activate(GtkMenuItem * menuitem,
 				   TEXT_DATA * t)
 {
-	GtkWidget *dlg;
-	dlg = gui_create_cipher_key_dialog(t->mod_name);
+	GtkWidget *dlg = gui_create_cipher_key_dialog(t->mod_name);
 	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
 }
@@ -770,6 +772,8 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 			   (on_text_showtoolbar_activate), t);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC(on_view_new_activate), t);
+			   
+	
 	return pm_text;
 }
 
@@ -1483,12 +1487,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 				      page_num);
 	}
 
-	if (cur_t->is_locked) {
-		GtkWidget *dlg;
-		dlg = gui_create_cipher_key_dialog(cur_t->mod_name);
-		gtk_widget_show(dlg);
-
-	} else
+	if (!cur_t->is_locked) 
 		chapter_display(cur_t->html, cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
 	display_change = TRUE;
@@ -1512,7 +1511,8 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 
 void gui_display_text(gchar * key)
 {
-	chapter_display(cur_t->html, cur_t->mod_name,
+	if (!cur_t->is_locked) 
+		chapter_display(cur_t->html, cur_t->mod_name,
 			cur_t->tgs, key, TRUE);
 }
 

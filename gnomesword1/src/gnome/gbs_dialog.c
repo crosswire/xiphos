@@ -449,33 +449,26 @@ static void on_gbf_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 
 }
-void
+static void
 modops_activate                     (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 
 }
 
-void
+static void
 edit_toggled                     (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
 
 }
 
-void
+static void
 paste_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
 {
 
 }
-
-
-
-
-
-
-
 
 
 /******************************************************************************
