@@ -27,7 +27,6 @@
 #include <ctype.h>
 #include <time.h>
 
-
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
 

@@ -87,7 +87,7 @@ void save_sb_group(gchar * file_name, gchar * group_name,
 				       &item_name);
 		
 		group_list = g_list_append(group_list, (char *) g_strdup(item_name));
-		g_warning("%s", item_name);
+		//g_warning("%s", item_name);
 		g_free(item_url);
 		g_free(item_name);
 	}

@@ -168,7 +168,7 @@ static void add_modlist_to_label(void)
 
 	mods = get_current_list();
 	mod_list = get_modlist_string(mods);
-	g_warning(mod_list);
+//	g_warning(mod_list);
 	gtk_label_set_text(GTK_LABEL(search.label_search_module),
 			   mod_list);
 	g_free(mod_list);

@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=1569
+0=1
 1=1
-2=32
-3=48
-4=37
-5=45
-6=37
-7=49
-8=25
+2=283
+3=1
+4=1
+5=77
+6=102
+7=109
+8=178
 9=151
 10=35
 11=1
@@ -46,7 +46,8 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
+0=/home/tbiggs/Projects/gnomesword1/configure.in
+1=/home/tbiggs/Projects/gnomesword1/Makefile.am
 
 [replace_text]
 0=dialog->dialog
@@ -59,14 +60,14 @@ ShowLocals=true
 7=gui_unlock_key
 
 [find_text]
-0=g_warning
-1=comm_find_running
-2=find_dialog_new
-3=dialog_destroy
-4=find_dialog
-5=find
-6=dialog_find
-7=pixmap1
+0=Settings
+1=toolbar
+2=print
+3=toolbarOptions
+4=create_text_pane
+5=view_book_menu_accels
+6=view_menu_accels
+7=find
 
 [executer args]
 0=newconfigs

@@ -123,7 +123,7 @@ static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
                                         DL_DIALOG * dlg)
 {
 	cur_dlg = dlg;
-	g_warning("current module = %s",cur_dlg->d->mod_name);
+//	g_warning("current module = %s",cur_dlg->d->mod_name);
 }
 
 
@@ -148,7 +148,7 @@ static void free_on_destroy(DL_DIALOG * dlg)
 {	
 	g_free(dlg->d);
 	dialog_list = g_list_remove(dialog_list, (DL_DIALOG *) dlg);
-		g_warning("shuting down %s dialog",dlg->d->mod_name);
+//		g_warning("shuting down %s dialog",dlg->d->mod_name);
 	g_free(dlg);
 }
 
@@ -296,14 +296,12 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 	GtkWidget *label;
 	GtkWidget *btn_close;
 	
-	gchar title[256];
-	
-	sprintf(title,"%s - %s", dlg->d->mod_name, _("GnomeSword"));
 	dlg->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
 	    
 	gtk_object_set_data(GTK_OBJECT(dlg->dialog), "dlg->dialog",
 			    dlg->dialog);
-	gtk_window_set_title (GTK_WINDOW (dlg->dialog), title);
+	gtk_window_set_title (GTK_WINDOW (dlg->dialog), 
+			get_module_description(dlg->d->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 465, 275);
 	gtk_window_set_policy(GTK_WINDOW(dlg->dialog), TRUE, TRUE,
 			      FALSE);
@@ -562,7 +560,7 @@ void gui_shutdown_dictlex_dialog(void)
 		DL_DIALOG *dlg = (DL_DIALOG *) dialog_list->data;
 		dialog_freed = TRUE;
 	
-		g_warning("shuting down %s dialog",dlg->d->mod_name);
+//		g_warning("shuting down %s dialog",dlg->d->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */

@@ -175,7 +175,7 @@ int backend_load_properties(char * path)
 	    atoi(settingsInfo["User Options"]["strongs interlinear"].
 		 c_str());
 	settings.morphsint = atoi(settingsInfo["User Options"]
-			    ["morphs interlinear interlinear"].c_str());
+			    ["morphs interlinear"].c_str());
 	settings.hebrewpointsint = atoi(settingsInfo["User Options"]
 				  ["Hebrew Points Interlinear"].
 				  c_str());
