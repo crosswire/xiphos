@@ -47,11 +47,9 @@
 
 #include "main/url.h"
 #include "main/sword.h"
-//#include "main/gbs.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
-#include "main/module.h"
 #include "main/sidebar.h"
 #include "main/url.h"
 #include "main/xml.h"

@@ -31,7 +31,6 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
-#include "main/module.h"
 #include "main/xml.h"
 #include "main/settings.h"
 

@@ -53,7 +53,6 @@
 #include "sword_defs.h"
 
 #include "main/sword.h"
-#include "main/search.h"
 
 using namespace sword;
 using namespace std;

@@ -33,7 +33,6 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
-#include "main/module.h"
 #include "main/search_sidebar.h"
 #include "main/sword.h"
 #include "main/settings.h"
