@@ -43,6 +43,7 @@ libgui_a_SOURCES =  \
     gbs_find.c \
     gtkhtml_display.c \
     gui.c \
+    history.c \
     info_box.c \
     interlinear.c \
     interlinear_dialog.c \
@@ -67,4 +68,5 @@ libgui_a_SOURCES =  \
     studypad.c \
     studypad.h \
     toolbar_nav.c \
-    toolbar_nav.h
+    toolbar_nav.h \
+    utilities.c

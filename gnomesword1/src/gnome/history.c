@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_history.c - SHORT DESCRIPTION
+ * history.c - add, remove and nav history
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -25,13 +25,14 @@
 
 #include <gnome.h>
 
-#include "main/gs_gnomesword.h"
-#include "main/gs_history.h"
-#include "main/gs_menu.h"
-#include "main/support.h"
-#include "main/settings.h"
 
+#include "gui/history.h"
 #include "gui/main_menu.h"
+#include "gui/utilities.h"
+
+#include "main/gs_gnomesword.h"
+#include "main/gs_menu.h"
+#include "main/settings.h"
 
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
@@ -57,8 +58,8 @@ void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
         removemenuitems(app, _("_History/<Separator>"), historyitems+1);
         addseparator(app, _("_History/C_lear"));
         /* set sensitivity of history buttons */
-        gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), FALSE);
-	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
+        gtk_widget_set_sensitive(gui_lookup_widget(app,"btnBack"), FALSE);
+	gtk_widget_set_sensitive(gui_lookup_widget(app,"btnFoward"), FALSE);
 	
         if(settings.showhistorygroup){
         	for(i = historyitems-1; i >= 0; i--) {
@@ -103,8 +104,8 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	++historyitems;	
 	currenthistoryitem = historyitems;
         /* set sensitivity of history buttons */
-	if(currenthistoryitem > 0) gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), TRUE);
-	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
+	if(currenthistoryitem > 0) gtk_widget_set_sensitive(gui_lookup_widget(app,"btnBack"), TRUE);
+	gtk_widget_set_sensitive(gui_lookup_widget(app,"btnFoward"), FALSE);
 	updatehistorymenu(app);
 	firstbackclick = TRUE;
 	if(settings.showhistorygroup){
@@ -147,9 +148,9 @@ void historynav(GtkWidget *app, gint direction)
                 }
                 /* set sensitivity of history buttons */
 	        if(currenthistoryitem >= historyitems-1) gtk_widget_set_sensitive(
-	                                lookup_widget(app,"btnFoward"), FALSE);
+	                                gui_lookup_widget(app,"btnFoward"), FALSE);
 	        if(currenthistoryitem >= 0) gtk_widget_set_sensitive(
-					lookup_widget(app,"btnBack"), TRUE);
+					gui_lookup_widget(app,"btnBack"), TRUE);
         } else {
                 if(currenthistoryitem > 0){
                         --currenthistoryitem;
@@ -159,9 +160,9 @@ void historynav(GtkWidget *app, gint direction)
                 }
                 /* set sensitivity of history buttons */
 	        if(currenthistoryitem < 1) gtk_widget_set_sensitive(
-	                                lookup_widget(app,"btnBack"), FALSE);
+	                                gui_lookup_widget(app,"btnBack"), FALSE);
 	        if(currenthistoryitem < historyitems) gtk_widget_set_sensitive(
-	                                lookup_widget(app,"btnFoward"), TRUE);
+	                                gui_lookup_widget(app,"btnFoward"), TRUE);
         }
 }
 

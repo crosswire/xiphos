@@ -38,8 +38,8 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
 #include "gui/preferences_dialog.h"
+#include "gui/utilities.h"
 
-#include "main/support.h"
 #include "main/gs_gnomesword.h"
 #include "main/lists.h"
 #include "main/settings.h"
@@ -148,11 +148,11 @@ static void applyoptions(void)
 		}
 		/* set height of bible and commentary pane */
 		e_paned_set_position(E_PANED
-				     (lookup_widget(settings.app, "vpaned1")),
+				     (gui_lookup_widget(settings.app, "vpaned1")),
 				     settings.upperpane_hight);
 		/* set width of bible pane */
 		e_paned_set_position(E_PANED
-				     (lookup_widget(settings.app, "hpaned1")),
+				     (gui_lookup_widget(settings.app, "hpaned1")),
 				     settings.biblepane_width);
 		updatelayout = FALSE;
 	}
@@ -228,102 +228,102 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	gdouble color[4];
 
 	/*** read modules ***/
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry3")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry3")));
 	sprintf(settings.MainWindowModule, "%s", buf);
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry4")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry4")));
 	sprintf(settings.Interlinear1Module, "%s", buf);
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry5")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry5")));
 	sprintf(settings.Interlinear2Module, "%s", buf);
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry6")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry6")));
 	sprintf(settings.Interlinear3Module, "%s", buf);
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry7")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry7")));
 	sprintf(settings.Interlinear4Module, "%s", buf);
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry8")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry8")));
 	sprintf(settings.Interlinear5Module, "%s", buf);
-	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry9")));
+	buf = gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry9")));
 	sprintf(settings.CommWindowModule, "%s", buf);
 	buf =
-	    gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry10")));
+	    gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry10")));
 	sprintf(settings.DictWindowModule, "%s", buf);
 	buf =
 	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget(d, "entryDefaultDict")));
+			       (gui_lookup_widget(d, "entryDefaultDict")));
 	sprintf(settings.DefaultDict, "%s", buf);
 	buf =
-	    gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry11")));
+	    gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry11")));
 	sprintf(settings.personalcommentsmod, "%s", buf);
 	buf =
 	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget(d, "entryDevotion")));
+			       (gui_lookup_widget(d, "entryDevotion")));
 	sprintf(settings.devotionalmod, "%s", buf);
 	buf =
-	    gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry13")));
+	    gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry13")));
 	sprintf(settings.lex_greek, "%s", buf);
 	buf =
-	    gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry14")));
+	    gtk_entry_get_text(GTK_ENTRY(gui_lookup_widget(d, "entry14")));
 	sprintf(settings.lex_hebrew, "%s", buf);
 	buf =
 	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget
+			       (gui_lookup_widget
 				(d, "combo_entryGreekViewer")));
 	sprintf(settings.lex_greek_viewer, "%s", buf);
 	buf =
 	    gtk_entry_get_text(GTK_ENTRY
-			       (lookup_widget
+			       (gui_lookup_widget
 				(d, "combo_entryHebViewer")));
 	sprintf(settings.lex_hebrew_viewer, "%s", buf);
 	/*** read font pickers ***/
 	font =
 	    gnome_font_picker_get_font_name(GNOME_FONT_PICKER
-					    (lookup_widget
+					    (gui_lookup_widget
 					     (d, "fpDefaultFont")));
 	sprintf(settings.default_font, "%s", font);
 	font =
 	    gnome_font_picker_get_font_name(GNOME_FONT_PICKER
-					    (lookup_widget
+					    (gui_lookup_widget
 					     (d, "fpGreekFont")));
 	sprintf(settings.greek_font, "%s", font);
 	font =
 	    gnome_font_picker_get_font_name(GNOME_FONT_PICKER
-					    (lookup_widget
+					    (gui_lookup_widget
 					     (d, "fpHebrewFont")));
 	sprintf(settings.hebrew_font, "%s", font);
 	font =
 	    gnome_font_picker_get_font_name(GNOME_FONT_PICKER
-					    (lookup_widget
+					    (gui_lookup_widget
 					     (d, "fpUnicodeFont")));
 	sprintf(settings.unicode_font, "%s", font);
 	/*** read html colors ***/
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
-				 (lookup_widget(d, "gcpText")),
+				 (gui_lookup_widget(d, "gcpText")),
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
 	sprintf(settings.bible_text_color, "%s", buf);
 	g_free(buf);
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
-				 (lookup_widget(d, "gcpTextBG")),
+				 (gui_lookup_widget(d, "gcpTextBG")),
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
 	sprintf(settings.bible_bg_color, "%s", buf);
 	g_free(buf);
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
-				 (lookup_widget(d, "gcpCurrentverse")),
+				 (gui_lookup_widget(d, "gcpCurrentverse")),
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
 	sprintf(settings.currentverse_color, "%s", buf);
 	g_free(buf);
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
-				 (lookup_widget(d, "gcpTextVerseNums")),
+				 (gui_lookup_widget(d, "gcpTextVerseNums")),
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
 	sprintf(settings.bible_verse_num_color, "%s", buf);
 	g_free(buf);
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
-				 (lookup_widget(d, "gcpTextLinks")),
+				 (gui_lookup_widget(d, "gcpTextLinks")),
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
@@ -331,88 +331,88 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	g_free(buf);
 	/*** read font sizes ***/
 	buf = gtk_entry_get_text(GTK_ENTRY
-				 (lookup_widget
+				 (gui_lookup_widget
 				  (d, "cmbEntryTextSize")));
 	sprintf(settings.bible_font_size, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY
-				 (lookup_widget(d, "cmbEentryVNSize")));
+				 (gui_lookup_widget(d, "cmbEentryVNSize")));
 	sprintf(settings.verse_num_font_size, "%s", buf);
 	/*** read radio buttons ***/
 	settings.usedefault =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "rbtnUsedefaults"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "rbtnUsedefaults"))->
 	    active;
 	/*** read check buttons ***/
 	settings.showshortcutbar =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowSCB"))->active;
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowSCB"))->active;
 	settings.text_tabs =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBibletabs"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowBibletabs"))->
 	    active;
 	settings.comm_tabs =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowCOMtabs"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowCOMtabs"))->
 	    active;
 	settings.dict_tabs =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDLtabs"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowDLtabs"))->
 	    active;
 	settings.book_tabs =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBooktabs"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowBooktabs"))->
 	    active;
 	settings.useDefaultDict =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnUseDefaultDict"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnUseDefaultDict"))->
 	    active;
 	settings.versestyle =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton9"))->active;
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "checkbutton9"))->active;
 	settings.showfavoritesgroup =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnFavoritesGroup"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnFavoritesGroup"))->
 	    active;
 	settings.showtextgroup =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowTextgroup"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowTextgroup"))->
 	    active;
 	settings.showcomgroup =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowComGroup"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowComGroup"))->
 	    active;
 	settings.showdictgroup =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDictGroup"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowDictGroup"))->
 	    active;
 	settings.showbookgroup =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBookGroup"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowBookGroup"))->
 	    active;
 	settings.showhistorygroup =
-	    GTK_TOGGLE_BUTTON(lookup_widget
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget
 			      (d, "cbtnShowHistoryGroup"))->active;
 	settings.docked =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbuttonSBDock"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "checkbuttonSBDock"))->
 	    active;
 	settings.formatpercom =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnPNformat"))->active;
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnPNformat"))->active;
 	settings.inViewer =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnInViewer"))->active;
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnInViewer"))->active;
 	settings.inDictpane =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnInDictPane"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnInDictPane"))->
 	    active;
 	settings.showdevotional =
-	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDevotion"))->
+	    GTK_TOGGLE_BUTTON(gui_lookup_widget(d, "cbtnShowDevotion"))->
 	    active;
 
 	/*** read layout spin buttons ***/
 	settings.gs_width =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
+					     (gui_lookup_widget
 					      (d, "sbtnAppWidth")));
 	settings.gs_hight =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
+					     (gui_lookup_widget
 					      (d, "sbtnAppHight")));
 	settings.shortcutbar_width =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
+					     (gui_lookup_widget
 					      (d, "sbtnSBWidth")));
 	settings.biblepane_width =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
+					     (gui_lookup_widget
 					      (d, "sbtnTextWidth")));
 	settings.upperpane_hight =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (lookup_widget
+					     (gui_lookup_widget
 					      (d, "sbtnUpPaneHight")));
 
 	save_properties(FALSE);
@@ -520,8 +520,8 @@ static void set_buttons_sensitive(GtkWidget * widget)
 	GtkWidget *dlg, *btnok, *btnapply;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(widget));
-	btnok = lookup_widget(dlg, "btnPropertyboxOK");
-	btnapply = lookup_widget(dlg, "btnPropertyboxApply");
+	btnok = gui_lookup_widget(dlg, "btnPropertyboxOK");
+	btnapply = gui_lookup_widget(dlg, "btnPropertyboxApply");
 	gtk_widget_set_sensitive(btnok, TRUE);
 	gtk_widget_set_sensitive(btnapply, TRUE);
 }
