@@ -69,17 +69,8 @@ struct _settings {
 	        link_color[15],  /* color for strongs, morph tags */	
 		bible_verse_num_color[15], /* verse number color */
 		found_color[15], /* color to use for search word in results display */
-		bible_font_size[4], /*** html font sizes ***/
-		commentary_font_size[4],
-		dictionary_font_size[4],
-		interlinear_font_size[4],
 		verselist_font_size[4],
-		verse_num_font_size[4],
-		default_font[126], /* use if no other font is requested */
-		greek_font[126],
-		hebrew_font[126],
-		unicode_font[126],
-		interlinear_font[126];		
+		verse_num_font_size[4];		
 		
 	gint 
       		shortcutbar_width,
@@ -153,7 +144,7 @@ struct _settings {
 		
 		/** editors **/
 		editnote, /* true when percom html widget is in edit mode */
-		editgbs, /* true when percom html widget is in edit mode */
+		editgbs, /* true when gbs html widget is in edit mode */
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */

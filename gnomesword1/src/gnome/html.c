@@ -214,13 +214,16 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		else if (!strncmp(url, "type=morph", 10)) {
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
-			buf1 = g_strdup(url);
-			mybuf = strstr(url, "class=");
+			gchar *myurl = NULL;
+			
+			myurl = g_strdup(url);
+			buf1 = g_strdup(myurl);
+			mybuf = strstr(myurl, "class=");
 			if (mybuf) {
 				gint i;
 				modbuf = strchr(mybuf, '=');
 				++modbuf;
-				if(strncmp(modbuf,"none", 5)) { /* gbf */
+				if(!strncmp(modbuf,"none", 5)) {    // gbf 
 					modbuf = "Packard";
 				}
 				else {
@@ -241,7 +244,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			}
 			buf1 = g_strdup(mybuf);
 			show_in_appbar(widgets.appbar, buf1, modbuf);			
-			g_free(buf1);
+			g_free(buf1);			
+			g_free(myurl);
 			return;
 		}
 		/*** thml strongs ***/
@@ -314,8 +318,6 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
 	gchar newmod[80], newref[80];
 	gint i = 0, havemod = 0;
-	
-	g_warning("url = %s",url);
 
 	if (*url == '@') {
 		++url;
@@ -396,13 +398,14 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	else if (!strncmp(url, "type=morph", 10)) { //sync type="morph" class="Robinson" value="T-GSM" 
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
+		
 		buf = g_strdup(url);
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			if(strncmp(modbuf,"none", 5)) { /* gbf */
+			if(!strncmp(modbuf,"none", 5)) { /* gbf */
 				modbuf = "Packard";
 			}
 			else {

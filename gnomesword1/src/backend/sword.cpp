@@ -533,27 +533,6 @@ int backend_get_module_page(char *module_name, char *module_type)
 	return -1;
 }
 
-char *backend_get_module_font_name(char *mod_name)
-{
-	SWModule *mod = mainMgr->Modules[mod_name];
-	char *buf = (char *) mod->getConfigEntry("Font");
-	if(buf)
-		return strdup(buf);
-	else
-		return NULL;
-}
-
-char *backend_get_module_font_size(char *mod_name)
-{
-	SWModule *mod = mainMgr->Modules[mod_name];
-	char *buf = (char*) mod->getConfigEntry("GSFont size");
-	if(buf)
-		return strdup(buf);
-	else
-		return NULL;
-}
-
-
 int backend_module_is_locked(char *mod_name)
 {
 	SectionMap::iterator section;

@@ -1772,7 +1772,6 @@ static gint button_release_event(GtkWidget * html,
 					     "button_press_event");
 		return TRUE;
 		break;
-	default:
 	}
 
 	return FALSE;
