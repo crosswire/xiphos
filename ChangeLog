@@ -1,5 +1,12 @@
+2003-06-10  Terry <tbiggs@users.sf.net>
+
+	* added toggle button to Bibletext and Commentary dialogs
+	  to allow user to keep them in sync with main window.
+
+
 2003-05-13  Terry <tbiggs@users.sf.net>
 
+	* bumped to 0.9.dev5
 	* added studypad default directory entry to preferences_dialog.c
 
 

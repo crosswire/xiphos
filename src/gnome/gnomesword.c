@@ -72,7 +72,7 @@
  */
 
 
-void init_gnomesword(void)
+void frontend_init(void)
 {
 	g_print("%s\n", "Initiating GnomeSword\n");
 	
@@ -137,10 +137,31 @@ void init_gnomesword(void)
 		gui_setup_text(get_list(TEXT_LIST));
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
-
-
+	
 	gui_set_shortcutbar_porgram_start();
+}
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void (void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+
+void frontend_display(void)
+{
+	g_print("%s\n", "Displaying GnomeSword\n");
 	gui_show_main_window();
 
 	settings.addhistoryitem = FALSE;
@@ -190,7 +211,7 @@ void init_gnomesword(void)
  *   void
  */
 
-void shutdown_gnomesword(void)
+void shutdown_frontend(void)
 {
 	gui_save_bookmarks(NULL, NULL);
 	xml_save_settings_doc(settings.fnconfigure);
@@ -201,9 +222,6 @@ void shutdown_gnomesword(void)
 		gtk_widget_destroy(widgets.studypad_dialog);
 	else
 		gui_studypad_can_close();
-
-	/* shutdown the sword stuff */
-	shutdown_sword();
 
 	shutdown_list();
 

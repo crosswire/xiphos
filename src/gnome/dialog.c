@@ -371,10 +371,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	}
 	/*
 	   label5 = gtk_label_new(_("label5"));
-	   gtk_widget_ref(label5);
-	   gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "label5",
-	   label5,
-	   (GtkDestroyNotify) gtk_widget_unref);
 	   gtk_widget_show(label5);
 	   gtk_table_attach(GTK_TABLE(table14), label5, 0, 1, 4, 5,
 	   (GtkAttachOptions) (GTK_FILL),
@@ -382,20 +378,12 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	   gtk_misc_set_alignment(GTK_MISC(label5), 0, 0.5);
 	
 	   entry5 = gtk_entry_new();
-	   gtk_widget_ref(entry5);
-	   gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "entry5",
-	   entry5,
-	   (GtkDestroyNotify) gtk_widget_unref);
 	   gtk_widget_show(entry5);
 	   gtk_table_attach(GTK_TABLE(table14), entry5, 1, 2, 4, 5,
 	   (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 	   (GtkAttachOptions) (0), 0, 0);
 
 	   label6 = gtk_label_new(_("label6"));
-	   gtk_widget_ref(label6);
-	   gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "label6",
-	   label6,
-	   (GtkDestroyNotify) gtk_widget_unref);
 	   gtk_widget_show(label6);
 	   gtk_table_attach(GTK_TABLE(table14), label6, 0, 1, 5, 6,
 	   (GtkAttachOptions) (GTK_FILL),
@@ -403,10 +391,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	   gtk_misc_set_alignment(GTK_MISC(label6), 0, 0.5);
 
 	   entry6 = gtk_entry_new();
-	   gtk_widget_ref(entry6);
-	   gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "entry6",
-	   entry6,
-	   (GtkDestroyNotify) gtk_widget_unref);
 	   gtk_widget_show(entry6);
 	   gtk_table_attach(GTK_TABLE(table14), entry6, 1, 2, 5, 6,
 	   (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),

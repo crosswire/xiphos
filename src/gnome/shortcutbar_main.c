@@ -959,12 +959,6 @@ static void show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_append(GTK_MENU(menu), menuitem);
 
 		menu_item_menu = gtk_menu_new();
-		gtk_widget_ref(menu_item_menu);
-		gtk_object_set_data_full(GTK_OBJECT(menu),
-					 "menu_item_menu",
-					 menu_item_menu,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		gui_create_mod_list_menu(group_num, menuitem, menu_item_menu, TEXT_TYPE);
@@ -975,12 +969,6 @@ static void show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_append(GTK_MENU(menu), menuitem);
 
 		menu_item_menu = gtk_menu_new();
-		gtk_widget_ref(menu_item_menu);
-		gtk_object_set_data_full(GTK_OBJECT(menu),
-					 "menu_item_menu",
-					 menu_item_menu,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		gui_create_mod_list_menu(group_num, menuitem, menu_item_menu, COMMENTARY_TYPE);
@@ -992,12 +980,6 @@ static void show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_append(GTK_MENU(menu), menuitem);
 
 		menu_item_menu = gtk_menu_new();
-		gtk_widget_ref(menu_item_menu);
-		gtk_object_set_data_full(GTK_OBJECT(menu),
-					 "menu_item_menu",
-					 menu_item_menu,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		gui_create_mod_list_menu(group_num, menuitem, menu_item_menu, DICTIONARY_TYPE);
@@ -1008,12 +990,6 @@ static void show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_append(GTK_MENU(menu), menuitem);
 
 		menu_item_menu = gtk_menu_new();
-		gtk_widget_ref(menu_item_menu);
-		gtk_object_set_data_full(GTK_OBJECT(menu),
-					 "menu_item_menu",
-					 menu_item_menu,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		gui_create_mod_list_menu(group_num, menuitem, menu_item_menu, BOOK_TYPE);	
@@ -1026,12 +1002,6 @@ static void show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_append(GTK_MENU(menu), menuitem);
 
 		menu_item_menu = gtk_menu_new();
-		gtk_widget_ref(menu_item_menu);
-		gtk_object_set_data_full(GTK_OBJECT(menu),
-					 "menu_item_menu",
-					 menu_item_menu,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 	/*** add bookmark items ***/

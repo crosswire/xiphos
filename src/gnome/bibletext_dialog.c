@@ -59,7 +59,7 @@ static GList *dialog_list;
 static TEXT_DATA *cur_vt;
 static gboolean dialog_freed;
 static gboolean apply_change;
-
+static gboolean in_url;
 /******************************************************************************
  * externs
  */
@@ -318,8 +318,12 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 //              g_warning(url);
 		buf = g_strdup(url);
 		strcpy(vt->key, buf);
-		display(vt, buf, TRUE);
-		update_controls(vt);
+		if(vt->sync)
+			gui_change_verse(vt->key);
+		else {
+			display(vt, buf, TRUE);
+			update_controls(vt);
+		}
 		g_free(buf);
 	}
 
@@ -337,6 +341,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		buf = g_strdup(url);
+/*
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
@@ -349,7 +354,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 				}
 			}
 		}			
-
+*/
+		modbuf = "Robinson";
 		mybuf = NULL;
 		mybuf = strstr(buf, "value=");
 		if (mybuf) {
@@ -558,12 +564,12 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   gui_sync_bibletext_dialog
+ *   gui_sync_bibletext_dialog_with_main
  *
  * Synopsis
  *   #include "gui/bibletext_dialog.h"
  *
- *   gui_sync_bibletext_dialog(TEXT_DATA * vt)	
+ *   gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt)	
  *
  * Description
  *   set bibletext dialog to main window current verse
@@ -572,13 +578,43 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  *   void
  */
 
-void gui_sync_bibletext_dialog(TEXT_DATA * vt)
-{
+void gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt)
+{ 
 	display(cur_vt, settings.currentverse, TRUE);
 	cur_vt->key = settings.currentverse;
 	update_controls(cur_vt);
 }
 
+
+
+/******************************************************************************
+ * Name
+ *   gui_keep_bibletext_dialog_in_sync
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void gui_keep_bibletext_dialog_in_sync(gchar * key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_keep_bibletext_dialog_in_sync(gchar * key)
+{
+	GList *tmp = NULL;
+	tmp = g_list_first(dialog_list);
+	while (tmp != NULL) {
+		TEXT_DATA * vt = (TEXT_DATA *) tmp->data;
+		if(vt->sync) {
+			gui_sync_bibletext_dialog_with_main(vt);
+		}
+		tmp = g_list_next(tmp);
+	}
+}
 
 /******************************************************************************
  * Name
@@ -672,11 +708,11 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	if (url == NULL) {
 		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar),
 				   context_id2, "");
-		//in_url = FALSE;
+		in_url = FALSE;
 	}
 	/***  we are in an url  ***/
 	else {
-
+		in_url = TRUE;
 		if (*url_buf == '#') {
 			++url_buf;	/* remove # */
 			if (*url_buf == 'T') {
@@ -772,6 +808,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
 			buf1 = g_strdup(url_buf);
+/*
 			mybuf = strstr(url_buf, "class=");
 			if (mybuf) {
 				gint i;
@@ -784,7 +821,8 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 					}
 				}
 			}
-
+*/
+			modbuf = "Robinson";
 			mybuf = NULL;
 			mybuf = strstr(buf1, "value=");
 			if (mybuf) {
@@ -863,15 +901,11 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	toolbar_nav =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar_nav);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar_nav",
-				 toolbar_nav,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar_nav);
 	gtk_widget_set_usize(toolbar_nav, -2, 34);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);
-
+	
 	cbBook = gtk_combo_new();
 	gtk_widget_show(cbBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav), cbBook,
@@ -916,6 +950,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 	gtk_signal_connect(GTK_OBJECT(vt->cbe_book),
 			   "changed",
 			   GTK_SIGNAL_FUNC(book_changed), vt);
+			   
 	gtk_signal_connect(GTK_OBJECT(vt->spb_chapter),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
@@ -983,12 +1018,80 @@ static void on_togglebutton_cant_toggled(GtkToggleButton * togglebutton,
 
 #endif
 
+
+/******************************************************************************
+ * Name
+ *  on_button_release_event
+ *
+ * Synopsis
+ *   #include "gui/bibletext_dialog.h"
+ *
+ *  gboolean on_button_release_event(GtkWidget * widget,
+			    GdkEventButton * event, TEXT_DATA * t)	
+ *
+ * Description
+ *   called when mouse button is clicked in html widget
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					TEXT_DATA * t)
+{
+	
+	gchar *key;
+
+	//settings.whichwindow = MAIN_TEXT_WINDOW;
+	/*
+	 * set program title to current text module name 
+	 */
+	//gui_change_window_title(t->mod_name);
+
+	switch (event->button) {
+	case 1:
+		if (!in_url) {
+			key = gui_button_press_lookup(t->html);
+			if (key) {
+				gchar *dict = NULL;
+				if (settings.useDefaultDict)
+					dict =
+					    g_strdup(settings.
+						     DefaultDict);
+				else
+					dict =
+					    g_strdup(settings.
+						     DictWindowModule);
+				if (settings.inViewer)
+					gui_display_dictlex_in_viewer
+					    (dict, key);
+				if (settings.inDictpane)
+					gui_change_module_and_key(dict,
+								  key);
+				g_free(key);
+				if (dict)
+					g_free(dict);
+			}
+		}
+		return TRUE;
+		break;
+	case 2:
+		return TRUE;
+		break;
+	case 3:
+		return TRUE;
+		break;
+	}
+	return FALSE;
+}
+
 /******************************************************************************
  * Name
  *   create_bibletext_dialog
  *
  * Synopsis
- *   #include "bibletext_dialog.h"
+ *   #include "gui/bibletext_dialog.h"
  *
  *   void create_bibletext_dialog(TEXT_DATA * vt)	
  *
@@ -1003,7 +1106,6 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 {
 
 	GtkWidget *vbox33;
-	GtkWidget *toolbar_nav;
 	GtkWidget *frame21;
 	GtkWidget *swVText; 
 #ifdef USE_GTKEMBEDMOZ
@@ -1029,11 +1131,11 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
 
 
-	toolbar_nav = create_nav_toolbar(vt);
-	gtk_widget_show(toolbar_nav);
-	gtk_box_pack_start(GTK_BOX(vbox33), toolbar_nav, FALSE, FALSE,
+	vt->toolbar_nav = create_nav_toolbar(vt);
+	gtk_widget_show(vt->toolbar_nav);
+	gtk_box_pack_start(GTK_BOX(vbox33), vt->toolbar_nav, FALSE, FALSE,
 			   0);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(vt->toolbar_nav),
 				      GTK_RELIEF_NONE);
 
 
@@ -1158,6 +1260,13 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 			   "motion_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_dialog_motion_notify_event), vt);
+	gtk_signal_connect(GTK_OBJECT(vt->html),
+			   "button_release_event",
+			   GTK_SIGNAL_FUNC
+			   (on_button_release_event),
+			   (TEXT_DATA *) vt);
+			   
+			   
 	gtk_signal_connect(GTK_OBJECT(vt->dialog),
 			   "motion_notify_event",
 			   GTK_SIGNAL_FUNC
@@ -1246,7 +1355,8 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	gtk_widget_show(vt->dialog);
 	dialog_list = g_list_append(dialog_list, (TEXT_DATA *) vt);
 	cur_vt = vt;
-	gui_sync_bibletext_dialog(vt);
+	vt->sync = FALSE;
+	gui_sync_bibletext_dialog_with_main(vt);
 }
 
 /******************************************************************************

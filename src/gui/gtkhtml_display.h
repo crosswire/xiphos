@@ -28,7 +28,7 @@ extern "C" {
 	
 #include "gui/bibletext.h"
 	
-#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf-8'></head>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 	
 void entry_display(GtkWidget * html_widget, gchar * mod_name, 
  				        gchar * text, gchar * key, 

@@ -738,11 +738,6 @@ void gui_setup_percomm(GList * mods)
 	percomm_display_change = TRUE;
 
 	widgets.notebook_percomm = gtk_notebook_new();
-	gtk_widget_ref(widgets.notebook_percomm);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.notebook_percomm",
-				 widgets.notebook_percomm,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.notebook_percomm);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK
 				    (widgets.notebook_percomm), TRUE);
@@ -850,10 +845,6 @@ void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num)
 	settings.percomm_page = page_num;
 	
 	widgets.vbox_percomm = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(widgets.vbox_percomm);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "widgets.vbox_percomm",
-				 widgets.vbox_percomm,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.vbox_percomm);
 	gtk_container_add(GTK_CONTAINER(workbook_lower), widgets.vbox_percomm);
 
@@ -862,10 +853,6 @@ void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num)
 	 */
 
 	label = gtk_label_new(_("Personal Comments"));
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
-				 label,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(workbook_lower),
 				   gtk_notebook_get_nth_page

@@ -39,7 +39,7 @@
 #include "main/bibletext.h"
 #include "main/settings.h"
 #include "main/key.h"
-
+   
 
 /******************************************************************************
  * Name
@@ -68,7 +68,7 @@ static void set_global_options(TEXT_GLOBALS * tgs)
 	set_text_module_global_option("Hebrew Vowel Points",tgs->hebrewpoints);
 	set_text_module_global_option("Hebrew Cantillation",tgs->hebrewcant);
 	set_text_module_global_option("Headings",tgs->headings);
-	set_text_module_global_option("Red letter words",tgs->words_in_red);	
+	set_text_module_global_option("Words of Christ in Red",tgs->words_in_red);	
 	if (tgs->variants_primary)
 			set_text_global_option("Textual Variants",
 					       "Primary Reading");
@@ -339,7 +339,6 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		     TEXT_GLOBALS * tgs, gchar * key,
 		     gboolean use_globals)
 {
-	gchar * utf8str;
 	gchar *bgColor;
 	gchar *textColor;
 	gchar buf[500];
@@ -351,7 +350,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	gboolean newparagraph = FALSE;
 	gboolean use_gtkhtml_font = FALSE;
 	GString *str;
-	gint utf8len, cur_verse, cur_chapter, i = 1;
+	gint cur_verse, cur_chapter, i = 1;
 	const char *cur_book;
 	MOD_FONT *mf;
 
@@ -377,7 +376,6 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	mf = get_font(mod_name);
 
 	use_font = g_strdup(mf->old_font);
-	//g_warning("use_font = %s",use_font);
 	if (use_font) {
 		if (!strncmp(use_font, "none", 4))
 			use_gtkhtml_font = TRUE;
@@ -405,7 +403,6 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		set_global_options(tgs);
 
 	sprintf(buf,
-		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
@@ -435,12 +432,12 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		
 		if (use_gtkhtml_font) {
 			sprintf(tmpbuf,
-				"<font size=\"%s\" color=\"%s\">",
-				use_font_size, textColor);
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				use_font, use_font_size, textColor);
 		} else {
 			sprintf(tmpbuf,
-			  "<font face=\"%s\" size=\"%s\" color=\"%s\">",
-				use_font, use_font_size, textColor);
+			  "<font size=\"%s\" color=\"%s\">",
+				use_font_size,textColor);
 		}
 		str = g_string_append(str,tmpbuf);
 		
@@ -453,7 +450,6 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 
 		/* get module text and prepare to display it */
 		text_str = get_module_text(0, mod_name, tmpkey);
-		
 		str = g_string_append(str, text_str);
 		/*
 		if (settings.displaySearchResults)
@@ -487,11 +483,9 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 
 	sprintf(buf, "%s", "</body></html>");
 	str = g_string_append(str,buf);
-	utf8str = e_utf8_from_gtk_string(html_widget, str->str);
-	utf8len = strlen(utf8str);
-	if (utf8len) {
-		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-			       utf8len);
+	if (str->len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
+			       str->len);
 	}
 
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
