@@ -40,6 +40,8 @@ void chapter_display(GtkWidget * html_widget, gchar * module_name,
 		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals);
 void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals);
+void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
+		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals);
 /*void chapter_display_icu(GtkWidget * html_widget, gchar * mod_name,
 		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals);*/
 void gui_module_is_locked_display(GtkWidget * html_widget, 

@@ -70,20 +70,16 @@
 
 static void display_text(TEXT_DATA * t)
 {	
-#ifdef USE_GTKEMBEDMOZ	
-		if(!t->is_rtol) 
-			chapter_display(t->html, 
-				t->mod_name,
-				t->tgs, t->key, TRUE);
-		else
-			chapter_display_mozilla(t->html, 
-				t->mod_name,
-				t->tgs, t->key, TRUE);
+	if(!t->is_rtol) 
+		chapter_display(t->html, 
+			t->mod_name,
+			t->tgs, t->key, TRUE);
+	else
+		chapter_display_textview(t->text, 
+			t->mod_name,
+			t->tgs, t->key, TRUE);
 
-#else	
-		chapter_display(t->html, t->mod_name,
-				t->tgs, t->key, TRUE);
-#endif
+
 }
 
 /******************************************************************************

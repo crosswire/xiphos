@@ -56,6 +56,7 @@ struct _text_data {
 	/* widgets for text panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
+	GtkWidget *text;
 	GtkWidget *frame;
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
