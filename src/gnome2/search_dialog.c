@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/widgets/e-unicode.h>
 #include <regex.h>
 #include <string.h>
@@ -94,9 +93,6 @@ struct _search_dialog {
 	GtkWidget *cb_include_morphs;
 	GtkWidget *cb_include_footnotes;
 	GSList *_201_group;
-
-	EShortcutModel *shortcut_model;
-	GtkWidget *shortcut_bar;
 
 	gint text_group;
 	gint comm_group;
