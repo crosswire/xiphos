@@ -293,7 +293,7 @@ void initSWORD(SETTINGS *s)
 			curdictMod->Disp(dictDisplay);			
 		} 
 		
-		else if (!strcmp((*it).second->Type(), "Generic Book")) { 			
+		else if (!strcmp((*it).second->Type(), "Generic Books")) { 			
 			bookmods = g_list_append(bookmods, (*it).second->Name());
 			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
 		}
@@ -532,38 +532,37 @@ void updateinterlinearpage(void)
 	gchar *utf8str;
 	gint utf8len;
 
-	//if (settings->notebook3page == 4) {
-		//html_widget = lookup_widget(settings->app, "textComp1");
-	interlinearMod0 = mainMgr1->Modules[settings->Interlinear1Module];
-	interlinearMod1 = mainMgr1->Modules[settings->Interlinear2Module];
-	interlinearMod2 = mainMgr1->Modules[settings->Interlinear3Module];
-	interlinearMod3 = mainMgr1->Modules[settings->Interlinear4Module];
-	interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
-	
-	beginHTML(settings->htmlInterlinear, TRUE);
-	sprintf(tmpBuf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
-		settings->bible_bg_color,
-		settings->bible_text_color, settings->link_color);
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(settings->htmlInterlinear, utf8str, utf8len);
-	interlinearMod0->SetKey(current_verse);
-	interlinearMod1->SetKey(current_verse);
-	interlinearMod2->SetKey(current_verse);
-	interlinearMod3->SetKey(current_verse);
-	interlinearMod4->SetKey(current_verse);
-	interlinearMod0->Display();
-	interlinearMod1->Display();
-	interlinearMod2->Display();
-	interlinearMod3->Display();
-	interlinearMod4->Display();
-	sprintf(tmpBuf, "</table></body></html>");
-	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(settings->htmlInterlinear, utf8str, utf8len);
-	endHTML(settings->htmlInterlinear);
-	//}
+	if(havebible) {
+		interlinearMod0 = mainMgr1->Modules[settings->Interlinear1Module];
+		interlinearMod1 = mainMgr1->Modules[settings->Interlinear2Module];
+		interlinearMod2 = mainMgr1->Modules[settings->Interlinear3Module];
+		interlinearMod3 = mainMgr1->Modules[settings->Interlinear4Module];
+		interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
+		
+		beginHTML(settings->htmlInterlinear, TRUE);
+		sprintf(tmpBuf,
+			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+			settings->bible_bg_color,
+			settings->bible_text_color, settings->link_color);
+		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
+		interlinearMod0->SetKey(current_verse);
+		interlinearMod1->SetKey(current_verse);
+		interlinearMod2->SetKey(current_verse);
+		interlinearMod3->SetKey(current_verse);
+		interlinearMod4->SetKey(current_verse);
+		interlinearMod0->Display();
+		interlinearMod1->Display();
+		interlinearMod2->Display();
+		interlinearMod3->Display();
+		interlinearMod4->Display();
+		sprintf(tmpBuf, "</table></body></html>");
+		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
+		endHTML(settings->htmlInterlinear);
+	}
 }
 
 
@@ -826,7 +825,7 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 			++dictindex;
 		} 
 		
-		else if (!strcmp((*it).second->Type(), "Generic Book")) {
+		else if (!strcmp((*it).second->Type(), "Generic Books")) {
 			if (!strcmp((*it).second->Name(), modName)) {				
 				gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS), bookindex);	
 				return;
