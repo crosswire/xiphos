@@ -578,7 +578,10 @@ int check_for_module(char * mod_name)
 	return backend_check_for_module(mod_name);
 }
 
-
+void init_sword(void)
+{
+	backend_init();
+}
 /******************************************************************************
  * Name
  *   shutdown_sword

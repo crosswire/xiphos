@@ -71,6 +71,7 @@ char *get_path_to_mods(void);
 GList *get_list_of_mods_by_type(char *mod_type);
 char *get_mod_about_info(char * mod_name);
 int check_for_module(char * mod_name);
+void init_sword(void);
 void shutdown_sword(void);
 
 #ifdef __cplusplus
