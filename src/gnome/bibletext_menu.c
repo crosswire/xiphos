@@ -912,7 +912,7 @@ static void add_global_option_items(TEXT_DATA * t)
 	}
 
 	if ((check_for_global_option(t->mod_name, "ThMLHeadings")) ||
-		(check_for_global_option(t->mod_name, "OSISHeadings")) ) {
+	   (check_for_global_option(t->mod_name, "OSISHeadings")) ) {
 		t->tgs->headings =
 		    load_module_options(t->mod_name, "Headings");
 
