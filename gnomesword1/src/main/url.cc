@@ -444,17 +444,13 @@ static gint show_note(const gchar * module, const gchar * passage,
 	gint i = 0;
 	
 	if(!in_url)
-		return 1;	
-/*	
-	if (hint.in_popup) {
-		gtk_widget_destroy(hint.hint_window);
-		hint.in_popup = FALSE;
-	}
-*/	
-	if(/*module && (strlen(module) > 2) && */!backend->is_module((gchar*)module)) 
+		return 1;
+	
+	if(!backend->is_module((gchar*)module)) 
 		module = settings.MainWindowModule;
 	
-	if(passage && (strlen(passage) < 5)) 
+	if(passage && (strlen(passage) < 5))
+	//if(passage && !backend->is_Bible_key(passage, settings.currentverse))
 		passage = settings.currentverse;
 	
 	if(strstr(type,"x") && clicked) {

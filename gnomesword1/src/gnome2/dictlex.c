@@ -286,23 +286,53 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
   	return FALSE;
 }
 
+void dict_key_entry_changed(GtkEntry * entry, gpointer data)
+{
+	gchar *buf = NULL;
+	
+	buf = (gchar*)gtk_entry_get_text(entry);
+	
+	if(strlen(buf) < 2 )
+		return;
+	
+	main_display_dictionary(settings.DictWindowModule, buf);
+}
+
+void button_back_clicked(GtkButton * button, gpointer user_data)
+{
+	main_dictionary_button_clicked(0);
+}
+
+void button_forward_clicked(GtkButton * button, gpointer user_data)
+{
+	main_dictionary_button_clicked(1);
+}
 
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
 	GtkWidget *hpaned;
 	GtkWidget *vbox;
+	GtkWidget *hbox2;
+	GtkWidget *button10;
+	GtkWidget *image1;
+	GtkWidget *comboboxentry1;
+	GtkWidget *button11;
+	GtkWidget *image2;
 	GtkWidget *frame_entry;
 	GtkWidget *toolbarDLKey;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *label205;
 	GtkWidget *scrolledwindow;
 	GtkListStore *model;
-	GtkWidget *eventbox;	
+	GtkWidget *eventbox;
+	GtkListStore *store;
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
-
+	
+	gtk_container_set_border_width (GTK_CONTAINER (box_dict), 1);
+/*
 	widgets.label_dict = gtk_label_new(settings.DictWindowModule);
 	gtk_widget_show(widgets.label_dict);
 	gtk_box_pack_start(GTK_BOX(box_dict),
@@ -310,7 +340,8 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_label_set_justify(GTK_LABEL(widgets.label_dict),
 			      GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(widgets.label_dict), 0, 0.5);
-
+*/
+/*
 	hpaned = gtk_hpaned_new();
 	gtk_widget_show(hpaned);
 	gtk_box_pack_start(GTK_BOX(box_dict), hpaned, TRUE, TRUE, 0);
@@ -330,12 +361,12 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_frame_set_shadow_type((GtkFrame *)frame_entry,
                                     settings.shadow_type);
 	gtk_box_pack_start(GTK_BOX(vbox), frame_entry, TRUE, TRUE, 0);
-	
+*/	
 	/* create tree model */
-	model = gtk_list_store_new(1, G_TYPE_STRING);
+//	model = gtk_list_store_new(1, G_TYPE_STRING);
 
 	/* create tree view */
-	widgets.listview_dict =
+/*	widgets.listview_dict =
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(widgets.listview_dict);
 	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW
@@ -349,25 +380,63 @@ GtkWidget *gui_create_dictionary_pane(void)
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(widgets.listview_dict));
 
+*/
+
+
+	hbox2 = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox2);
+	gtk_box_pack_start(GTK_BOX(box_dict), hbox2, FALSE, FALSE, 0);
+
+	button10 = gtk_button_new();
+	gtk_widget_show(button10);
+	gtk_box_pack_start(GTK_BOX(hbox2), button10, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(button10), GTK_RELIEF_NONE);
+
+	image1 =
+	    gtk_image_new_from_stock("gtk-go-back",
+				     GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image1);
+	gtk_container_add(GTK_CONTAINER(button10), image1);
+
+	store = 
+	    gtk_list_store_new(1, G_TYPE_STRING);
+	    
+	widgets.comboboxentry_dict = gtk_combo_box_entry_new_with_model(GTK_TREE_MODEL(
+				store),0);
+	gtk_widget_show(widgets.comboboxentry_dict);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.comboboxentry_dict, TRUE, TRUE,
+			   0);
+	widgets.entry_dict = GTK_WIDGET(GTK_BIN(widgets.comboboxentry_dict)->child);
+	
+	button11 = gtk_button_new();
+	gtk_widget_show(button11);
+	gtk_box_pack_start(GTK_BOX(hbox2), button11, FALSE, FALSE, 0);
+	gtk_button_set_relief(GTK_BUTTON(button11), GTK_RELIEF_NONE);
+
+	image2 =
+	    gtk_image_new_from_stock("gtk-go-forward",
+				     GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image2);
+	gtk_container_add(GTK_CONTAINER(button11), image2);
+
 
 
 #ifdef USE_MOZILLA	
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
-	gtk_paned_pack2(GTK_PANED(hpaned), eventbox, TRUE, TRUE);
+	gtk_box_pack_start(GTK_BOX(box_dict), eventbox, TRUE, TRUE, 0);
+	
 	widgets.html_dict = embed_new(DICTIONARY_TYPE);
 	gtk_widget_show(widgets.html_dict);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_dict);
-	
 	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
-
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
-	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow, TRUE, TRUE);
+	gtk_box_pack_start(GTK_BOX(box_dict), scrolledwindow, TRUE, TRUE, 0);
 
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
@@ -393,11 +462,20 @@ GtkWidget *gui_create_dictionary_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
 #endif
-	g_signal_connect(GTK_OBJECT(widgets.entry_dict), "changed",
-			 G_CALLBACK(on_entryDictLookup_changed), NULL);
-	g_signal_connect(G_OBJECT(widgets.listview_dict),
+	settings.signal_id = g_signal_connect(GTK_OBJECT(widgets.entry_dict), 
+			 "changed",
+			 G_CALLBACK(dict_key_entry_changed), 
+			 NULL);
+			 
+	g_signal_connect ((gpointer) button10, "clicked",
+		    G_CALLBACK (button_back_clicked),
+		    NULL);
+	g_signal_connect ((gpointer) button11, "clicked",
+		    G_CALLBACK (button_forward_clicked),
+		    NULL);
+	/*g_signal_connect(G_OBJECT(widgets.listview_dict),
 			 "button_release_event",
-			 G_CALLBACK(list_button_released), NULL);
+			 G_CALLBACK(list_button_released), NULL);*/
 	return box_dict;
 }
 

@@ -54,6 +54,7 @@ public:
 		
 	const char *version;	
 	SWDisplay *commDisplay;	
+	SWDisplay *bookDisplay;	
 	SWDisplay *dictDisplay;
 	SWDisplay *textDisplay;
 	SWDisplay *RTOLDisplay;
