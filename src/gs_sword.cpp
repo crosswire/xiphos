@@ -524,6 +524,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 				break;
 		}
 	}  
+	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
 	g_string_free(gs_clipboard,TRUE);
 	//-- delete Sword managers
@@ -1112,7 +1113,7 @@ gchar* getmodnameSWORD(gint num)
 ******************************************************************************/
 gchar* getmodkeySWORD(gint num)
 {
-        if(havebible) {
+              if(havebible) {
 	        switch(num)
 	        {
 		        case 0: return (gchar*)curMod->KeyText();
@@ -1125,6 +1126,7 @@ gchar* getmodkeySWORD(gint num)
 			        break;
 	        }
 	}		
+
 }
 
 /******************************************************************************

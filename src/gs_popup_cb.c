@@ -83,7 +83,7 @@ void on_referenceNE_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
 	{
 		buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
-		sprintf(tmpbuf,"<a href=\"%s\">",buf);
+		sprintf(tmpbuf,"<a href=\"passage=%s\">",buf);
 		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
 		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
 		gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
@@ -376,20 +376,6 @@ void on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 	
 	changeVerseSWORD(buf);
 }
-		
-/*******************************************************************************
- * show add bookmark - popup menu choice
- *******************************************************************************/	
-void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar *modName;
-	gchar *key;
-	
-	modName = getmodnameSWORD(atoi(user_data));
-	key = getmodkeySWORD(atoi(user_data));
-	addbookmarktotree(modName,key);
-}
-		
 
 /*******************************************************************************
  * show hide notebook tabs - popup menu choice
