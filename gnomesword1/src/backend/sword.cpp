@@ -265,7 +265,7 @@ void backend_init_sword(SETTINGS * s)
 
 	//-- setup Commentary Support, Generic Book Support and Dict/Lex Support
 	backend_setup_text(s);
-	backend_setupCOMM(s);
+	backend_setup_commentary(s);
 	backend_setupDL(s);
 	backend_setupGBS(s);
 	backend_setup_interlinear(s);
@@ -346,7 +346,7 @@ void backend_shutdown(SETTINGS * s)
 	backend_shutdown_text();
 	backend_shutdownGBS();
 	backend_shutdownDL();
-	backend_shutdownCOMM();
+	backend_shutdown_commentary();
 	backend_shutdown_search_results_display();
 	backend_shutdown_sb_viewer();
 	backend_shutdown_interlinear();
