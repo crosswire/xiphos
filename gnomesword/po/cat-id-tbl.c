@@ -1,1229 +1,397 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-05 19:42-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
-
-#: src/gs_abouts.c:83
-msgid ""
-"We would like to thank Troy Griffitts and all the other folks who have given "
-"us The SWORD Project."
-msgstr ""
-
-#: src/gs_abouts.c:170
-msgid "Modules can be downloaded from the Sword Project "
-msgstr ""
-
-#: src/gs_bookmarks.c:192
-msgid "_New SubGroup"
-msgstr ""
-
-#: src/gs_bookmarks.c:193
-msgid "Add new SubGroup to selected group"
-msgstr ""
-
-#: src/gs_bookmarks.c:196
-msgid "Add New Group"
-msgstr ""
-
-#: src/gs_bookmarks.c:197
-msgid "Add a new root group and file"
-msgstr ""
-
-#: src/gs_bookmarks.c:202
-msgid "Save Bookmarks"
-msgstr ""
-
-#: src/gs_bookmarks.c:203
-msgid "Save all bookmark files"
-msgstr ""
-
-#: src/gs_bookmarks.c:208
-msgid "Edit Item"
-msgstr ""
-
-#: src/gs_bookmarks.c:209
-msgid "Edit bookmark item"
-msgstr ""
-
-#: src/gs_bookmarks.c:214
-msgid "Delete Item(s)"
-msgstr ""
-
-#: src/gs_bookmarks.c:215
-msgid "Delete item and it's siblings"
-msgstr ""
-
-#: src/gs_bookmarks.c:221
-msgid "Expand All"
-msgstr ""
-
-#: src/gs_bookmarks.c:222
-msgid "Expand all Bookmarks groups"
-msgstr ""
-
-#: src/gs_bookmarks.c:227
-msgid "Collapse All"
-msgstr ""
-
-#: src/gs_bookmarks.c:228
-msgid "Collapse all Bookmarks groups"
-msgstr ""
-
-#: src/gs_bookmarks.c:233
-msgid "Allow Reordering"
-msgstr ""
-
-#: src/gs_bookmarks.c:234
-msgid "Toggle Reording - allow items to be moved by draging"
-msgstr ""
-
-#: src/gs_bookmarks.c:930
-msgid "GnomeSword - Edit Bookmark"
-msgstr ""
-
-#: src/gs_bookmarks.c:949
-msgid "Label"
-msgstr ""
-
-#: src/gs_bookmarks.c:960
-msgid "Reference "
-msgstr ""
-
-#: src/gs_bookmarks.c:971 src/gs_html_editor.c:1342
-msgid "Module"
-msgstr ""
-
-#: src/gs_file.c:467
-msgid "GnomeSword - Open Note File"
-msgstr ""
-
-#: src/gs_file.c:502
-msgid "GomeSword - Save Note File"
-msgstr ""
-
-#: src/gs_gnomesword.c:73 src/gs_gui.c:652
-msgid "Romans 8:28"
-msgstr ""
-
-#. Add options to Options Menu and get toggle item widget
-#: src/gs_gnomesword.c:169 src/gs_gnomesword.c:171 src/gs_gnomesword.c:173
-msgid "_Settings/"
-msgstr ""
-
-#: src/gs_gnomesword.c:169
-msgid "Auto Save Personal Comments"
-msgstr ""
-
-#: src/gs_gnomesword.c:171 src/gs_setup.c:797
-msgid "Show Interlinear Page"
-msgstr ""
-
-#: src/gs_gnomesword.c:173
-msgid "Verse Style"
-msgstr ""
-
-#. -- remove old bookmarks from menu -- menustuff.cpp 
-#: src/gs_gnomesword.c:423
-msgid "_Quickmarks/<Separator>"
-msgstr ""
-
-#: src/gs_gnomesword.c:424 src/gs_listeditor.c:248 src/gs_listeditor.c:497
-msgid "_Quickmarks/"
-msgstr ""
-
-#: src/gs_gui.c:71 src/gs_html_editor.c:963
-msgid "Copy"
-msgstr ""
-
-#: src/gs_gui.c:72
-msgid "Copy highlighted text form main window"
-msgstr ""
-
-#: src/gs_gui.c:78 src/gs_shortcutbar.c:1848
-msgid "Search"
-msgstr ""
-
-#: src/gs_gui.c:79
-msgid "Open search dialog"
-msgstr ""
-
-#: src/gs_gui.c:88
-msgid "Add Quickmark"
-msgstr ""
-
-#: src/gs_gui.c:89
-msgid "Add current verse to Quickmarks menu"
-msgstr ""
-
-#: src/gs_gui.c:94 src/gs_gui.c:95 src/gs_listeditor.c:264
-#: src/gs_listeditor.c:277
-msgid "Edit Quickmarks"
-msgstr ""
-
-#: src/gs_gui.c:105
-msgid "C_lear"
-msgstr ""
-
-#: src/gs_gui.c:106
-msgid "Clear history list"
-msgstr ""
-
-#: src/gs_gui.c:116
-msgid "Daily Devotion"
-msgstr ""
-
-#: src/gs_gui.c:117
-msgid "Show the Daily Devotion for Today"
-msgstr ""
-
-#: src/gs_gui.c:131
-msgid "Language Options"
-msgstr ""
-
-#: src/gs_gui.c:157
-msgid "Bible Texts"
-msgstr ""
-
-#: src/gs_gui.c:158
-msgid "Information about Bible texts"
-msgstr ""
-
-#: src/gs_gui.c:163 src/gs_gui.c:1015 src/gs_shortcutbar.c:653
-#: src/gs_shortcutbar.c:688 src/gs_shortcutbar.c:1748
-#: src/gs_shortcutbar.c:2008
-msgid "Commentaries"
-msgstr ""
-
-#: src/gs_gui.c:169
-msgid "Dictionaries-Lexicons"
-msgstr ""
-
-#: src/gs_gui.c:179
-msgid "Contents"
-msgstr ""
-
-#: src/gs_gui.c:180
-msgid "Help Contents"
-msgstr ""
-
-#: src/gs_gui.c:185
-msgid "About the Sword Project..."
-msgstr ""
-
-#: src/gs_gui.c:186
-msgid "Infotmation About The Sword Project"
-msgstr ""
-
-#: src/gs_gui.c:191
-msgid "About Sword Modules"
-msgstr ""
-
-#: src/gs_gui.c:192
-msgid "Information about the installed modules"
-msgstr ""
-
-#: src/gs_gui.c:198
-msgid "About GnomeSword..."
-msgstr ""
-
-#: src/gs_gui.c:199
-msgid "About GnomeSword"
-msgstr ""
-
-#: src/gs_gui.c:210
-msgid "_Quickmarks"
-msgstr ""
-
-#: src/gs_gui.c:216
-msgid "_History"
-msgstr ""
-
-#: src/gs_gui.c:343
-msgid "GnomeSWORD - Bible Study Software"
-msgstr ""
-
-#: src/gs_gui.c:618
-msgid "Romans"
-msgstr ""
-
-#: src/gs_gui.c:660
-msgid "Goto verse"
-msgstr ""
-
-#: src/gs_gui.c:662
-msgid "Go to verse in free form lookup and add verse to history"
-msgstr ""
-
-#: src/gs_gui.c:676
-msgid "Back"
-msgstr ""
-
-#: src/gs_gui.c:678
-msgid "Go backward through history list"
-msgstr ""
-
-#: src/gs_gui.c:693
-msgid "Foward"
-msgstr ""
-
-#: src/gs_gui.c:694
-msgid "Go foward through history list"
-msgstr ""
-
-#: src/gs_gui.c:719
-msgid "Exit"
-msgstr ""
-
-#: src/gs_gui.c:720
-msgid "Exit GnomeSword"
-msgstr ""
-
-#: src/gs_gui.c:917
-msgid "Synchronize"
-msgstr ""
-
-#: src/gs_gui.c:919
-msgid "Synchronize Commentary with Bible Text"
-msgstr ""
-
-#: src/gs_gui.c:933
-msgid "button2"
-msgstr ""
-
-#: src/gs_gui.c:947
-msgid "button3"
-msgstr ""
-
-#: src/gs_gui.c:971 src/gs_html_editor.c:928
-msgid "Print"
-msgstr ""
-
-#: src/gs_gui.c:971
-msgid "Print this Comment"
-msgstr ""
-
-#.
-#. handlebox16 = gtk_handle_box_new();
-#. gtk_widget_ref(handlebox16);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "handlebox16",
-#. handlebox16,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(handlebox16);
-#. gtk_box_pack_start(GTK_BOX(hbox11), handlebox16, FALSE, FALSE, 0);
-#. gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(handlebox16),
-#. GTK_SHADOW_NONE);
-#. gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(handlebox16),
-#. GTK_POS_TOP);
-#.
-#. tbNotes =
-#. gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
-#. gtk_widget_ref(tbNotes);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "tbNotes",
-#. tbNotes,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(tbNotes);
-#. gtk_container_add(GTK_CONTAINER(handlebox16), tbNotes);
-#. gtk_toolbar_set_button_relief(GTK_TOOLBAR(tbNotes),
-#. GTK_RELIEF_NONE);
-#.
-#. tmp_toolbar_icon =
-#. gnome_stock_pixmap_widget(settings->app,
-#. GNOME_STOCK_PIXMAP_JUMP_TO);
-#. tbtnFollow =
-#. gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-#. GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-#. NULL, "togglebutton1",
-#. _("Follow Main Text Window"), NULL,
-#. tmp_toolbar_icon, NULL, NULL);
-#. gtk_widget_ref(tbtnFollow);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "tbtnFollow",
-#. tbtnFollow,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(tbtnFollow);
-#. gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(tbtnFollow), TRUE);
-#.
-#. tmp_toolbar_icon =
-#. gnome_stock_pixmap_widget(settings->app,
-#. GNOME_STOCK_PIXMAP_PROPERTIES);
-#. btnEditNote =
-#. gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-#. GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-#. NULL, _("Edit"), _("Edit note"),
-#. NULL, tmp_toolbar_icon, NULL, NULL);
-#. gtk_widget_ref(btnEditNote);
-#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnEditNote",
-#. btnEditNote,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(btnEditNote);
-#.
-#. tmp_toolbar_icon =
-#. gnome_stock_pixmap_widget(settings->app,
-#. GNOME_STOCK_PIXMAP_SPELLCHECK);
-#.
-#: src/gs_gui.c:1174 src/gs_preferences_dlg.c:1287
-msgid "Personal Comments"
-msgstr ""
-
-#: src/gs_gui.c:1224
-msgid "Interlinear"
-msgstr ""
-
-#: src/gs_gui.c:1237
-msgid "Study Pad"
-msgstr ""
-
-#: src/gs_history.c:66 src/gs_history.c:185 src/gs_history.c:189
-msgid "_History/<Separator>"
-msgstr ""
-
-#: src/gs_history.c:67 src/gs_history.c:186
-msgid "_History/C_lear"
-msgstr ""
-
-#. str = showfirstlineStrongsSWORD(atoi(url));
-#: src/gs_html.c:92
-#, c-format
-msgid "Show %s in main window"
-msgstr ""
-
-#: src/gs_html.c:135
-#, c-format
-msgid "Go to Strongs %s"
-msgstr ""
-
-#: src/gs_html.c:154
-#, c-format
-msgid "Go to %s"
-msgstr ""
-
-#: src/gs_html_editor.c:534 src/gs_html_editor.c:568
-#, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr ""
-
-#: src/gs_html_editor.c:552
-msgid "-untitled-"
-msgstr ""
-
-#: src/gs_html_editor.c:851
-msgid "File"
-msgstr ""
-
-#: src/gs_html_editor.c:870
-msgid "Save Note"
-msgstr ""
-
-#: src/gs_html_editor.c:880
-msgid "Delete Note"
-msgstr ""
-
-#: src/gs_html_editor.c:891
-msgid "New"
-msgstr ""
-
-#: src/gs_html_editor.c:899
-msgid "Open"
-msgstr ""
-
-#: src/gs_html_editor.c:908
-msgid "Save"
-msgstr ""
-
-#: src/gs_html_editor.c:918
-msgid "Save AS"
-msgstr ""
-
-#: src/gs_html_editor.c:938
-msgid "_Edit"
-msgstr ""
-
-#: src/gs_html_editor.c:956
-msgid "Cut"
-msgstr ""
-
-#: src/gs_html_editor.c:970
-msgid "Paste"
-msgstr ""
-
-#: src/gs_html_editor.c:978
-msgid "Spell Check"
-msgstr ""
-
-#: src/gs_html_editor.c:986
-msgid "Undo"
-msgstr ""
-
-#: src/gs_html_editor.c:993
-msgid "Find"
-msgstr ""
-
-#: src/gs_html_editor.c:1000
-msgid "Find Next"
-msgstr ""
-
-#: src/gs_html_editor.c:1008
-msgid "Replace"
-msgstr ""
-
-#: src/gs_html_editor.c:1016
-msgid "Link..."
-msgstr ""
-
-#: src/gs_html_editor.c:1128
-msgid "GnomeSWORD Find"
-msgstr ""
-
-#: src/gs_html_editor.c:1144
-msgid "Enter Word or Phrase"
-msgstr ""
-
-#: src/gs_html_editor.c:1168 src/gs_shortcutbar.c:1498
-msgid "Case Sensitive"
-msgstr ""
-
-#: src/gs_html_editor.c:1178
-msgid "Foward Search"
-msgstr ""
-
-#: src/gs_html_editor.c:1190
-msgid "Regular Expresion"
-msgstr ""
-
-#: src/gs_html_editor.c:1302
-msgid "GnomeSWORD Add Reference Link"
-msgstr ""
-
-#: src/gs_html_editor.c:1318
-msgid "Reference"
-msgstr ""
-
-#: src/gs_html_editor.c:1334
-msgid "Bible Reference or Module key to display when link is clicked"
-msgstr ""
-
-#: src/gs_html_editor.c:1358
-msgid "Name of module to show when link is clicked"
-msgstr ""
-
-#: src/gs_info_box.c:58
-msgid "GnomeSword - InfoBox"
-msgstr ""
-
-#: src/gs_info_box.c:99
-msgid "in StudyPad is not saved!"
-msgstr ""
-
-#: src/gs_info_box.c:107
-msgid "Shall I save it?"
-msgstr ""
-
-#: src/gs_listeditor.c:463
-msgid "GnomeSword - Quickmark Editor"
-msgstr ""
-
-#. -- add Separator it was deleted with old menus 
-#: src/gs_listeditor.c:501
-msgid "_Quickmarks/Edit Quickmarks"
-msgstr ""
-
-#: src/gs_listeditor.c:967
-msgid "GnomeSword - Quickmarks Editor"
-msgstr ""
-
-#: src/gs_listeditor.c:1108
-msgid "Quickmarks"
-msgstr ""
-
-#: src/gs_listeditor.c:1226
-msgid "Previous Level"
-msgstr ""
-
-#: src/gs_listeditor.c:1240
-msgid "Next level"
-msgstr ""
-
-#: src/gs_listeditor.c:1257
-msgid "Edit items"
-msgstr ""
-
-#: src/gs_listeditor.c:1352
-msgid "Add Menu"
-msgstr ""
-
-#: src/gs_listeditor.c:1364
-msgid "Delete Item"
-msgstr ""
-
-#: src/gs_listeditor.c:1385
-msgid "Apply Changes to List"
-msgstr ""
-
-#: src/gs_mainmenu_cb.c:80
-msgid "Cannot launch gnome-help-browser"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:617
-msgid "GnomeSword - Preferences"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:654 src/gs_preferences_dlg.c:2035
-msgid "Font Colors and Sizes"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:678
-msgid "Font Size"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:701
-msgid "Pick a color for Background"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:714
-msgid "Pick a color for Bible Text"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:729 src/gs_preferences_dlg.c:811
-msgid "-2"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:731 src/gs_preferences_dlg.c:813
-msgid "-1"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:733 src/gs_preferences_dlg.c:815
-msgid "+0"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:735 src/gs_preferences_dlg.c:817
-msgid "+1"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:737 src/gs_preferences_dlg.c:819
-msgid "+2"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:739 src/gs_preferences_dlg.c:821
-msgid "+3"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:741 src/gs_preferences_dlg.c:823
-msgid "+4"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:743 src/gs_preferences_dlg.c:825
-msgid "+5\r"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:756 src/gs_preferences_dlg.c:837
-msgid "Zero is base font size Go up or down from there"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:772
-msgid "Pick a color - CurrentVerse BG"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:785
-msgid "Pick a color for Current Verse"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:852
-msgid "Strongs Numbers & Morph Tags"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:897
-msgid "Background Color"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:909
-msgid "Text Color"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:921
-msgid "Current Verse Color"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:933
-msgid "Current Verse Background Color"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:946
-msgid "Default Font"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:957
-msgid "Verse Numbers"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:969
-msgid "Verse Number Font Size"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:981
-msgid "Link Color"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:993
-msgid "Greek Font"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1004
-msgid "Hebrew Font"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1015
-msgid "Unicode Font"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1041
-msgid "GnomeSword Defaults"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1050
-msgid "Use GnomeSword defaults for all settings on this page"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1055
-msgid "Bible Text Window"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1080
-msgid "Use Defaults When Opening GnomeSword"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1097
-msgid "Yes, use defaults that I select"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1111
-msgid ""
-"No, use settings saved\n"
-"on last GnomeSword run"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1129
-msgid "Show Shortcut bar"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1141
-msgid "Show Bible Texts notebook tabs"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1154
-msgid "Show Commentary notebook tabs"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1167
-msgid "Show Dict/Lex notebook tabs"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1179 src/gs_setup.c:734
-msgid "Use Verse Style"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1191
-msgid "Show Daily Devotion"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1197
-msgid "Show Daily Devotion if you have a Devotion module"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1208
-msgid "Shortcut Bar Groups"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1224
-msgid "Show Favorites Group"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1238
-msgid "Show Bible Text Group"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1250
-msgid "Show Commentary Group"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1262
-msgid "Show Dict/Lex Group"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1274
-msgid "Show History Group"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1303
-msgid "Use Formatting"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1314
-msgid "Auto Save"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1325
-msgid "Layout"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1341
-msgid "App Width"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1352
-msgid "ShortCut Bar Width"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1363
-msgid "Upper Pane Hight"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1374
-msgid "App Hight"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1385
-msgid "Bible Pane Width"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1461
-msgid "Interface"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1479 src/gs_setup.c:468
-msgid "Main Text Module"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1561 src/gs_setup.c:546
-msgid "Commentary"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1572 src/gs_setup.c:557 src/gs_shortcutbar.c:1773
-#: src/gs_shortcutbar.c:2033
-msgid "Dict/Lex"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1583 src/gs_setup.c:568
-msgid "Personal"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1594
-msgid "Greek Lexicon"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1606
-msgid "Hebrew Lexicon"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1747
-msgid "Daily Devotional"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1776 src/gs_setup.c:659
-msgid "Interlinear 5"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1787 src/gs_setup.c:670
-msgid "Interlinear 4"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1798 src/gs_setup.c:681
-msgid "Interlinear 3"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1811 src/gs_setup.c:694
-msgid "Interlinear 2"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1824 src/gs_setup.c:707
-msgid "Interlinear 1"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:1836 src/gs_preferences_dlg.c:2047
-msgid "Sword Modules"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:2027
-msgid "Preferences"
-msgstr ""
-
-#: src/gs_preferences_dlg.c:2041
-msgid "Misc Interface Settings"
-msgstr ""
-
-#: src/gs_setup.c:161
-msgid "GnomeSword - Setup"
-msgstr ""
-
-#: src/gs_setup.c:202
-msgid "Welcome To GnomeSword-0.5.2a"
-msgstr ""
-
-#: src/gs_setup.c:206
-msgid "This guide will take you through the initial setup of GnomeSword"
-msgstr ""
-
-#: src/gs_setup.c:232 src/gs_setup.c:855
-msgid "GnomeSword-0.5.2a"
-msgstr ""
-
-#: src/gs_setup.c:252
-msgid "Your Home Directory:"
-msgstr ""
-
-#: src/gs_setup.c:273
-msgid "SWORD verson"
-msgstr ""
-
-#: src/gs_setup.c:293
-msgid "Sword Directory:"
-msgstr ""
-
-#: src/gs_setup.c:309
-msgid "Number of Bible Text Modules:"
-msgstr ""
-
-#: src/gs_setup.c:325
-msgid "Number of Commentary Modules:"
-msgstr ""
-
-#: src/gs_setup.c:342
-msgid "Number of Lexicon / Dictionary Modules"
-msgstr ""
-
-#: src/gs_setup.c:379
-msgid "Do you want GnomeSword to open with"
-msgstr ""
-
-#: src/gs_setup.c:402
-msgid "Settings you choose as default"
-msgstr ""
-
-#: src/gs_setup.c:415
-msgid "Settings used the last time GnomeSword ran"
-msgstr ""
-
-#: src/gs_setup.c:448
-msgid "Settings to use on first program run"
-msgstr ""
-
-#: src/gs_setup.c:746
-msgid "Show Bible Tabs"
-msgstr ""
-
-#: src/gs_setup.c:766
-msgid "Auto Save Personal comments "
-msgstr ""
-
-#: src/gs_setup.c:778
-msgid "Show Commentary Tabs"
-msgstr ""
-
-#: src/gs_setup.c:809
-msgid "Show Dict/Lex Tabs"
-msgstr ""
-
-#: src/gs_setup.c:822
-msgid ""
-"These setting will be the default settings if you chose to use default "
-"settings. "
-msgstr ""
-
-#: src/gs_setup.c:858
-msgid ""
-"            Thank-you for using GnomeSword.\n"
-"Click Finish to close this dialog and run GnomeSword."
-msgstr ""
-
-#: src/gs_shortcutbar.c:607
-msgid "Large Icons"
-msgstr ""
-
-#: src/gs_shortcutbar.c:613
-msgid "Small Icons"
-msgstr ""
-
-#: src/gs_shortcutbar.c:625
-msgid "Add Bible Text"
-msgstr ""
-
-#: src/gs_shortcutbar.c:638 src/gs_shortcutbar.c:685
-msgid "Biblical Texts"
-msgstr ""
-
-#: src/gs_shortcutbar.c:640
-msgid "Add Commentary"
-msgstr ""
-
-#: src/gs_shortcutbar.c:655
-msgid "Add Dictionary"
-msgstr ""
-
-#: src/gs_shortcutbar.c:668 src/gs_shortcutbar.c:691
-msgid "Lexicons / Dictionaries"
-msgstr ""
-
-#: src/gs_shortcutbar.c:670
-msgid "Add Shortcut"
-msgstr ""
-
-#: src/gs_shortcutbar.c:710
-msgid "About this Module"
-msgstr ""
-
-#: src/gs_shortcutbar.c:723
-msgid "Remove from Shortcut Bar"
-msgstr ""
-
-#. gtk_widget_set_usize(vpVL, 234, -2);
-#: src/gs_shortcutbar.c:846 src/gs_shortcutbar.c:1878
-msgid "Verse List"
-msgstr ""
-
-#: src/gs_shortcutbar.c:853
-msgid "Search Results"
-msgstr ""
-
-#: src/gs_shortcutbar.c:860 src/gs_shortcutbar.c:1055
-msgid "Viewer"
-msgstr ""
-
-#: src/gs_shortcutbar.c:971
-msgid "Save List"
-msgstr ""
-
-#: src/gs_shortcutbar.c:972
-msgid "Save the current verse list as a bookmark file"
-msgstr ""
-
-#: src/gs_shortcutbar.c:986
-msgid "Main Form"
-msgstr ""
-
-#: src/gs_shortcutbar.c:987
-msgid "Toggle to show results in Main Form"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1000
-msgid "UpdateMain"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1001
-msgid "Show current verse list verse in Main Form"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1025
-msgid "VerseList"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1026
-msgid "View Verse List"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1040
-msgid "SearchResults"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1041
-msgid "View Search Results"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1136
-msgid "label1"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1263
-msgid "label2"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1304
-msgid "label3"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1428
-msgid "Begin Search"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1431
-msgid "Search Type"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1446
-msgid "Multi Word"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1460
-msgid "Regular Expression"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1471
-msgid "Exact Phrase"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1483
-msgid "Search Options"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1509
-msgid "Search Commentary"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1518
-msgid "Search Personal"
-msgstr ""
-
-#.
-#. ckbMarkResults = gtk_check_button_new_with_label(_("Mark Resluts"));
-#. gtk_widget_ref(ckbMarkResults);
-#. gtk_object_set_data_full(GTK_OBJECT(s->app), "ckbMarkResults",
-#. ckbMarkResults,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ckbMarkResults);
-#. gtk_tooltips_set_tip (tooltips, ckbMarkResults, _("Marks search words in results - makes search very slow!"), NULL);
-#. gtk_box_pack_start(GTK_BOX(vbox3), ckbMarkResults, FALSE, FALSE, 0);
-#. gtk_widget_set_usize(ckbMarkResults, -2, 20);
-#.
-#: src/gs_shortcutbar.c:1537
-msgid "Search Scope"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1552
-msgid "No Scope"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1564
-msgid "Use Bounds"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1576
-msgid "Last Search"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1587
-msgid "Bounds"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1601
-msgid "Lower"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1611
-msgid "Upper "
-msgstr ""
-
-#: src/gs_shortcutbar.c:1631
-msgid "Genesis"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1643
-msgid "Revelation"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1670 src/gs_shortcutbar.c:1931
-msgid "Favorites"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1723 src/gs_shortcutbar.c:1983
-msgid "Bible Text"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1798 src/gs_shortcutbar.c:2057
-msgid "History"
-msgstr ""
-
-#: src/gs_shortcutbar.c:1821
-msgid "Bookmarks"
-msgstr ""
-
-#: src/gs_shortcutbar.c:2072
-msgid "Add All Modules"
-msgstr ""
-
-#: src/gs_unlockkey_dlg.c:83 src/gs_viewtext_dlg.c:373
-msgid "GnomeSword"
-msgstr ""
-
-#: src/gs_unlockkey_dlg.c:102
-msgid "Enter Unlock Key"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:153
-msgid "GnomeSword - View Commentary"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:189 src/gs_viewtext_dlg.c:547
-msgid "button7"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:439
-msgid "Sync with main window"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:220
-msgid "Enter a verse"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:228
-msgid "button10"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:228
-msgid "Goto Verse"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:242
-msgid "button9"
-msgstr ""
-
-#: src/gs_viewcomm_dlg.c:255
-msgid "button8"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:193
-msgid "GnomeSwrod - View Dictionary"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:438
-msgid "Sync"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:229
-msgid "Lookup key from main window"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:255
-msgid "Lookup: "
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:279
-msgid "button6"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:280
-msgid "Load all keys for this module"
-msgstr ""
-
-#: src/gs_viewdict_dlg.c:333
-msgid "label125"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:424
-msgid "Add"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:466
-msgid "Module Options"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:547
-msgid "Go to verse"
-msgstr ""
+/* Automatically generated by po2tbl.sed from gnomesword.pot.  */
+
+#if HAVE_CONFIG_H
+# include <config.h>
+#endif
+
+#include "libgettext.h"
+
+const struct _msg_ent _msg_tbl[] = {
+  {"", 1},
+  {"\
+We would like to thank Troy Griffitts and all the other folks who have given \
+us The SWORD Project.", 2},
+  {"About The Sword Project", 3},
+  {"\
+The SWORD Project is an effort to create an ever expanding software package \
+for research and study of God and His Word.  The SWORD Bible Framework \
+allows easy manipulation of Bible texts, commentaries, lexicons, \
+dictionaries, etc.  Many frontends are build using this framework.  An \
+installed module set may be shared between any frontend using the framework.", 4},
+  {"Modules can be downloaded from the Sword Project ", 5},
+  {"_New SubGroup", 6},
+  {"Add new SubGroup to selected group", 7},
+  {"Add New Group", 8},
+  {"Add a new root group and file", 9},
+  {"Save Bookmarks", 10},
+  {"Save all bookmark files", 11},
+  {"_Insert Item", 12},
+  {"Insert new bookmark here", 13},
+  {"_Add Item at Root", 14},
+  {"Add new bookmark item", 15},
+  {"Edit Item", 16},
+  {"Edit bookmark item", 17},
+  {"Delete Item(s)", 18},
+  {"Delete item and it's siblings", 19},
+  {"Expand All", 20},
+  {"Expand all Bookmarks groups", 21},
+  {"Collapse All", 22},
+  {"Collapse all Bookmarks groups", 23},
+  {"Allow Reordering", 24},
+  {"Toggle Reording - allow items to be moved by draging", 25},
+  {"GnomeSword - New Bookmark", 26},
+  {"GnomeSword - Edit Bookmark", 27},
+  {"Label", 28},
+  {"Reference ", 29},
+  {"Module", 30},
+  {"Interlinear", 31},
+  {"Interlinear Page", 32},
+  {"GnomeSWORD - Interlinear Page", 33},
+  {"button6", 34},
+  {"Romans", 35},
+  {"Romans 8:28", 36},
+  {"Goto verse", 37},
+  {"Go to verse in free form lookup and add verse to history", 38},
+  {"Dock", 39},
+  {"GnomeSWORD", 40},
+  {"``%s'' has been modified.  Do you wish to save it?", 41},
+  {"-untitled-", 42},
+  {"File", 43},
+  {"Save Note", 44},
+  {"Delete Note", 45},
+  {"Open File", 46},
+  {"Save Entry", 47},
+  {"Delete Entry", 48},
+  {"New", 49},
+  {"Open", 50},
+  {"Save", 51},
+  {"Save AS", 52},
+  {"Print", 53},
+  {"_Edit", 54},
+  {"Cut", 55},
+  {"Copy", 56},
+  {"Paste", 57},
+  {"Spell Check", 58},
+  {"Undo", 59},
+  {"Find", 60},
+  {"Find Next", 61},
+  {"Replace", 62},
+  {"Link...", 63},
+  {"GnomeSWORD Add Reference Link", 64},
+  {"Reference", 65},
+  {"Bible Reference or Module key to display when link is clicked", 66},
+  {"Name of module to show when link is clicked", 67},
+  {"Replace confirmation", 68},
+  {"Replace all", 69},
+  {"Next", 70},
+  {"search backward", 71},
+  {"case sensitive", 72},
+  {"with", 73},
+  {"backward", 74},
+  {"Find Regular Expression", 75},
+  {"Normal", 76},
+  {"Preformat", 77},
+  {"Header 1", 78},
+  {"Header 2", 79},
+  {"Header 3", 80},
+  {"Header 4", 81},
+  {"Header 5", 82},
+  {"Header 6", 83},
+  {"Address", 84},
+  {"List", 85},
+  {"Num List", 86},
+  {"Roman List", 87},
+  {"Alpha List", 88},
+  {"Automatic", 89},
+  {"Left align", 90},
+  {"Left justifies the paragraphs", 91},
+  {"Center", 92},
+  {"Center justifies the paragraphs", 93},
+  {"Right align", 94},
+  {"Right justifies the paragraphs", 95},
+  {"Typewriter", 96},
+  {"Toggle typewriter font style", 97},
+  {"Bold", 98},
+  {"Makes the text bold", 99},
+  {"Italic", 100},
+  {"Makes the text italic", 101},
+  {"Underline", 102},
+  {"Underlines the text", 103},
+  {"Strikeout", 104},
+  {"Strikes out the text", 105},
+  {"Unindent", 106},
+  {"Indents the paragraphs less", 107},
+  {"Indent", 108},
+  {"Indents the paragraphs more", 109},
+  {"GnomeSword - Open Note File", 110},
+  {"GomeSword - Save Note File", 111},
+  {"_Settings/", 112},
+  {"Verse Style", 113},
+  {"_Quickmarks/<Separator>", 114},
+  {"_Quickmarks/Clear Quickmarks", 115},
+  {"Copy highlighted text form main window", 116},
+  {"Search", 117},
+  {"Open search dialog", 118},
+  {"Add Quickmark", 119},
+  {"Add current verse to Quickmarks menu", 120},
+  {"Clear Quickmarks", 121},
+  {"Edit Quickmarks", 122},
+  {"C_lear", 123},
+  {"Clear history list", 124},
+  {"Daily Devotion", 125},
+  {"Show the Daily Devotion for Today", 126},
+  {"Module Options", 127},
+  {"Bible Texts", 128},
+  {"Information about Bible texts", 129},
+  {"Commentaries", 130},
+  {"Dictionaries-Lexicons", 131},
+  {"Books", 132},
+  {"Contents", 133},
+  {"Help Contents", 134},
+  {"About the Sword Project...", 135},
+  {"Infotmation About The Sword Project", 136},
+  {"About Sword Modules", 137},
+  {"Information about the installed modules", 138},
+  {"About GnomeSword...", 139},
+  {"About GnomeSword", 140},
+  {"_Quickmarks", 141},
+  {"_History", 142},
+  {"GnomeSWORD - Bible Study Software", 143},
+  {"Detach/Attach Shortcut Bar", 144},
+  {"Hide/Show Shortcut Bar", 145},
+  {"Toogle Strongs Numbers", 146},
+  {"Toogle Morphological Tags", 147},
+  {"Toogle Footnotes", 148},
+  {"Back", 149},
+  {"Go backward through history list", 150},
+  {"Foward", 151},
+  {"Go foward through history list", 152},
+  {"Synchronize", 153},
+  {"Synchronize Commentary with Bible Text", 154},
+  {"button2", 155},
+  {"button3", 156},
+  {"Print this Comment", 157},
+  {"Personal Comments", 158},
+  {"Study Pad", 159},
+  {"Dict/Lex", 160},
+  {"_History/<Separator>", 161},
+  {"_History/C_lear", 162},
+  {"Show %s in main window", 163},
+  {"Go to %s", 164},
+  {"GnomeSword - InfoBox", 165},
+  {"in StudyPad is not saved!", 166},
+  {"Shall I save it?", 167},
+  {"Cannot launch gnome-help-browser", 168},
+  {"_Settings/Module Options/", 169},
+  {"Strong's Numbers", 170},
+  {"Footnotes", 171},
+  {"Morphological Tags", 172},
+  {"Hebrew Vowel Points", 173},
+  {"Hebrew Cantillation", 174},
+  {"Greek Accents", 175},
+  {"Scripture Cross-references", 176},
+  {"Lemmas", 177},
+  {"Headings", 178},
+  {"_Help/About Sword Modules/Bible Texts/<Separator>", 179},
+  {"_Help/About Sword Modules/Commentaries/<Separator>", 180},
+  {"_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>", 181},
+  {"_Help/About Sword Modules/Bible Texts/", 182},
+  {"_Help/About Sword Modules/Commentaries/", 183},
+  {"StrongsHebrew", 184},
+  {"StrongsGreek", 185},
+  {"_Help/About Sword Modules/Dictionaries-Lexicons/", 186},
+  {"_Help/About Sword Modules/Books/<Separator>", 187},
+  {"_Help/About Sword Modules/Books/", 188},
+  {"Goto Reference", 189},
+  {"Lookup Word", 190},
+  {"Add Bookmark", 191},
+  {"Add dict/lex key and module to Presonal Bookmarks", 192},
+  {"About this module", 193},
+  {"Show Tabs", 194},
+  {"Show notebook tabs", 195},
+  {"View in New Window", 196},
+  {"View this module in a new window", 197},
+  {"View Module", 198},
+  {"Use Current Dictionary", 199},
+  {"Lookup Selection", 200},
+  {"Add current verse to Presonal Bookmarks", 201},
+  {"View Text in new window", 202},
+  {"Unlock This Module", 203},
+  {"Detach/Attach", 204},
+  {"GnomeSword - Settings", 205},
+  {"Font Colors and Sizes", 206},
+  {"Font Size", 207},
+  {"Background Color", 208},
+  {"Text Color", 209},
+  {"Current Verse Color", 210},
+  {"Current Verse Background Color", 211},
+  {"Verse Numbers", 212},
+  {"Verse Number Font Size", 213},
+  {"Link Color", 214},
+  {"Greek Font", 215},
+  {"Hebrew Font", 216},
+  {"Unicode Font", 217},
+  {"Pick a color for Background", 218},
+  {"Pick a color for Bible Text", 219},
+  {"-2", 220},
+  {"-1", 221},
+  {"+0", 222},
+  {"+1", 223},
+  {"+2", 224},
+  {"+3", 225},
+  {"+4", 226},
+  {"+5\r", 227},
+  {"Zero is base font size Go up or down from there", 228},
+  {"Pick a color - CurrentVerse BG", 229},
+  {"Pick a color for Current Verse", 230},
+  {"Strongs Numbers & Morph Tags", 231},
+  {"Default Font", 232},
+  {"GnomeSword Defaults", 233},
+  {"Use GnomeSword defaults for all settings on this page", 234},
+  {"Bible Text Window", 235},
+  {"Use Defaults When Opening GnomeSword", 236},
+  {"Yes, use defaults that I select", 237},
+  {"\
+No, use settings saved\n\
+on last GnomeSword run", 238},
+  {"Show Bible Texts notebook tabs", 239},
+  {"Show Commentary notebook tabs", 240},
+  {"Show Dict/Lex notebook tabs", 241},
+  {"Use Verse Style", 242},
+  {"Show Daily Devotion", 243},
+  {"Show Daily Devotion if you have a Devotion module", 244},
+  {"Use Formatting", 245},
+  {"Use HTML tags to format notes", 246},
+  {"Auto Save", 247},
+  {"Interface", 248},
+  {"Layout", 249},
+  {"App Width", 250},
+  {"ShortCut Bar Width", 251},
+  {"Upper Pane Height", 252},
+  {"App Height", 253},
+  {"Bible Pane Width", 254},
+  {"label190", 255},
+  {"Shortcut Bar", 256},
+  {"Show Shortcut bar", 257},
+  {"Show Favorites Group", 258},
+  {"Show Bible Text Group", 259},
+  {"Show Commentary Group", 260},
+  {"Show Dict/Lex Group", 261},
+  {"Show Book Group", 262},
+  {"Show History Group", 263},
+  {"Dock Shortcut Bar", 264},
+  {"label189", 265},
+  {"Main Text Module", 266},
+  {"Commentary", 267},
+  {"Personal", 268},
+  {"Interlinear 5", 269},
+  {"Interlinear 4", 270},
+  {"Interlinear 3", 271},
+  {"Interlinear 2", 272},
+  {"Interlinear 1", 273},
+  {"Daily Devotional", 274},
+  {"Greek Lexicon", 275},
+  {"Hebrew Lexicon", 276},
+  {"Sword Modules", 277},
+  {"Preferences", 278},
+  {"Misc Interface Settings", 279},
+  {"Shortcut Bar Settings", 280},
+  {"Welcome To GnomeSword", 281},
+  {"GnomeSword", 282},
+  {"GnomeSword - Setup", 283},
+  {"This guide will take you through the initial setup of GnomeSword", 284},
+  {"Your Home Directory:", 285},
+  {"SWORD verson", 286},
+  {"Sword Directory:", 287},
+  {"Number of Bible Text Modules:", 288},
+  {"Number of Commentary Modules:", 289},
+  {"Number of Lexicon / Dictionary Modules", 290},
+  {"Do you want GnomeSword to open with", 291},
+  {"Settings you choose as default", 292},
+  {"Settings used the last time GnomeSword ran", 293},
+  {"Settings to use on first program run", 294},
+  {"Show Bible Tabs", 295},
+  {"Auto Save Personal comments ", 296},
+  {"Show Commentary Tabs", 297},
+  {"Show Interlinear Page", 298},
+  {"Show Dict/Lex Tabs", 299},
+  {"\
+These setting will be the default settings if you chose to use default \
+settings. ", 300},
+  {"\
+            Thank-you for using GnomeSword.\n\
+Click Finish to close this dialog and run GnomeSword.", 301},
+  {"Large Icons", 302},
+  {"Small Icons", 303},
+  {"Add Bible Text", 304},
+  {"Add Commentary", 305},
+  {"Add Dictionary", 306},
+  {"Add Book", 307},
+  {"Add Shortcut", 308},
+  {"About this Module", 309},
+  {"Remove from Shortcut Bar", 310},
+  {"Verse List", 311},
+  {"Search Results", 312},
+  {"Viewer", 313},
+  {"Save List", 314},
+  {"Save the current verse list as a bookmark file", 315},
+  {"Main Form", 316},
+  {"Toggle to show results in Main Form", 317},
+  {"UpdateMain", 318},
+  {"Show current verse list verse in Main Form", 319},
+  {"VerseList", 320},
+  {"View Verse List", 321},
+  {"SearchResults", 322},
+  {"View Search Results", 323},
+  {"label1", 324},
+  {"label2", 325},
+  {"label3", 326},
+  {"Begin Search", 327},
+  {"Search Type", 328},
+  {"Multi Word", 329},
+  {"Regular Expression", 330},
+  {"Exact Phrase", 331},
+  {"Search Options", 332},
+  {"Case Sensitive", 333},
+  {"Search Commentary", 334},
+  {"Search Personal", 335},
+  {"Search Book", 336},
+  {"Search Current Book", 337},
+  {"Search Scope", 338},
+  {"No Scope", 339},
+  {"Use Bounds", 340},
+  {"Last Search", 341},
+  {"Bounds", 342},
+  {"Lower", 343},
+  {"Upper ", 344},
+  {"Genesis", 345},
+  {"Revelation", 346},
+  {"Favorites", 347},
+  {"Bible Text", 348},
+  {"Book", 349},
+  {"History", 350},
+  {"Bookmarks", 351},
+  {"Add All Modules", 352},
+  {"Enter Unlock Key", 353},
+  {"GnomeSword - View Commentary", 354},
+  {"button7", 355},
+  {"Sync with main window", 356},
+  {"Enter a verse", 357},
+  {"button10", 358},
+  {"Goto Verse", 359},
+  {"button9", 360},
+  {"button8", 361},
+  {"GnomeSwrod - View Dictionary", 362},
+  {"Sync", 363},
+  {"Lookup key from main window", 364},
+  {"Lookup: ", 365},
+  {"Load all keys for this module", 366},
+  {"label125", 367},
+  {"Add", 368},
+  {"Go to verse", 369},
+  {"View Book", 370},
+  {"label", 371},
+  {"label200", 372},
+};
+
+int _msg_tbl_length = 372;
