@@ -68,7 +68,7 @@ extern char *homedir;
 extern GtkWidget *htmlComments;
 
 static GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd);
-static GtkWidget *create_dlgSearch(gboolean replace, GSHTMLEditorControlData * ecd);
+static GtkWidget *create_dlgSearch(GSHTMLEditorControlData * ecd);
 static GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd);
 
 
@@ -128,6 +128,8 @@ static void updatestatusbar(GSHTMLEditorControlData * ecd)
 			   buf);
 }
 
+
+/******************************************************************* html file stuff - load and save */
 #define BUFFER_SIZE 4096
 /*** load studypad file ***/
 gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
@@ -270,6 +272,8 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	return retval;
 }
 
+/************************************************************************************ spell checking stuff */
+#ifdef USE_SPELL
 void find_word_EDITOR(gchar * word, GSHTMLEditorControlData * ecd)
 {
 	html_engine_search(ecd->html->engine, word, 0,	/* not case sen */
@@ -277,7 +281,6 @@ void find_word_EDITOR(gchar * word, GSHTMLEditorControlData * ecd)
 			   0);	/* not regex */
 }
 
-#ifdef USE_SPELL
 void load_text_from_spell_EDITOR(GtkWidget * text,
 				 GSHTMLEditorControlData * ecd)
 {
@@ -327,7 +330,7 @@ void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd)
 	gs_html_editor_control_data_destroy(ecd);
 }
 
-
+/********************************************************************************** create editor and call backs */
 /******************************************************************************
  * this code taken form GtkHTML
  ******************************************************************************/
@@ -393,7 +396,7 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 	return FALSE;
 }
 
-gboolean
+static gboolean
 on_html_enter_notify_event(GtkWidget * widget,
 			   GdkEventCrossing * event,
 			   GSHTMLEditorControlData * ecd)
@@ -472,6 +475,8 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 	return necd->htmlwidget;
 }
 
+
+/*************************************************************************** editor popup menu and call backs */
 static void
 on_new_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
@@ -681,7 +686,7 @@ on_find_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *dlg;
 
-	dlg = create_dlgSearch(FALSE, ecd);
+	dlg = create_dlgSearch(ecd);
 	gtk_widget_show(dlg);
 }
 
@@ -696,10 +701,7 @@ on_find_again_activate(GtkMenuItem * menuitem,
 static void
 on_replace_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *dlg;
-
-	dlg = create_dlgSearch(TRUE, ecd);
-	gtk_widget_show(dlg);
+	replace(ecd);
 }
 
 /*
@@ -1512,7 +1514,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	return pmEditor;
 }
 
-
+/*************************************************************************** search dialog and call backs */
 static gboolean
 on_entry12_key_press_event(GtkWidget * widget,
 			   GdkEventKey * event,
@@ -1521,8 +1523,6 @@ on_entry12_key_press_event(GtkWidget * widget,
 
 	return FALSE;
 }
-
-
 
 static void
 on_btnFindOK_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
@@ -1553,7 +1553,7 @@ on_cancel_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 }
 
 
-GtkWidget *create_dlgSearch(gboolean replace, GSHTMLEditorControlData * ecd)
+GtkWidget *create_dlgSearch(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *dlgSearch;
 	GtkWidget *dialog_vbox16;
@@ -1567,9 +1567,7 @@ GtkWidget *create_dlgSearch(gboolean replace, GSHTMLEditorControlData * ecd)
 	GtkWidget *dialog_action_area16;
 	GtkWidget *btnFindOK;
 	GtkWidget *btnFindCancel;
-	
-	ecd->replace = replace;
-	
+			
 	dlgSearch = gnome_dialog_new(_("GnomeSWORD Find"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgSearch), "dlgSearch", dlgSearch);
 	gtk_window_set_default_size(GTK_WINDOW(dlgSearch), 350, -1);
@@ -1602,26 +1600,6 @@ GtkWidget *create_dlgSearch(gboolean replace, GSHTMLEditorControlData * ecd)
 	gtk_box_pack_start(GTK_BOX(vbox45), entry12, FALSE, FALSE, 0);
 	gtk_widget_set_usize(entry12, 291, -2);
 	
-	if(replace){
-		GtkWidget *labelReplace;
-		GtkWidget *entryReplace;
-		labelReplace = gtk_label_new(_("Enter Word or Phrase"));
-		gtk_widget_ref(labelReplace);
-		gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "labelReplace",
-				 labelReplace,
-				 (GtkDestroyNotify) gtk_widget_unref);
-		gtk_widget_show(labelReplace);
-		gtk_box_pack_start(GTK_BOX(vbox45),labelReplace , FALSE, FALSE, 0);
-
-		entryReplace = gtk_entry_new();
-		gtk_widget_ref(entryReplace);
-		gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "entryReplace", entryReplace,
-				 (GtkDestroyNotify) gtk_widget_unref);
-		gtk_widget_show(entryReplace);
-		gtk_box_pack_start(GTK_BOX(vbox45), entryReplace, FALSE, FALSE, 0);
-		gtk_widget_set_usize(entryReplace, 291, -2);
-	}
-
 	hbox66 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox66);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "hbox66", hbox66,
@@ -1705,8 +1683,8 @@ GtkWidget *create_dlgSearch(gboolean replace, GSHTMLEditorControlData * ecd)
 	return dlgSearch;
 }
 
-
-/*** link dialog create and call back ***/
+/*************************************************************************** link dialog create and call backs */
+/*** set link module and key ***/
 void
 set_link_to_module(gchar * linkref, gchar * linkmod,
 		   GSHTMLEditorControlData * ecd)
@@ -1746,6 +1724,7 @@ on_btnLinkOK_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 	updatestatusbar(ecd);
 }
 
+/*** create dialog for setting up links in text ***/
 GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *dlgLink;
@@ -1863,7 +1842,8 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 	return dlgLink;
 }
 
-
+/************************************************************************************ studypad editor control */
+/*** create studypad editor control ***/
 GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 {
 	GtkWidget *frame12;
@@ -1903,7 +1883,8 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 	return htmlwidget;
 }
 
-
+/************************************************************************** personal commentary editor control */
+/*** create personal commentary editor control ***/
 GtkWidget *percom_control(GtkWidget * vbox, SETTINGS * s)
 {
 	GtkWidget *frame12;

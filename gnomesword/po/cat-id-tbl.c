@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-14 15:49-0500\n"
+"POT-Creation-Date: 2001-12-15 10:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "Reference "
 msgstr ""
 
-#: src/gs_bookmarks.c:971 src/gs_html_editor.c:1806
+#: src/gs_bookmarks.c:971 src/gs_html_editor.c:1785
 msgid "Module"
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid "_Quickmarks/"
 msgstr ""
 
-#: src/gs_gui.c:71 src/gs_html_editor.c:1128
+#: src/gs_gui.c:71 src/gs_html_editor.c:1130
 msgid "Copy"
 msgstr ""
 
@@ -303,7 +303,7 @@ msgstr ""
 msgid "button3"
 msgstr ""
 
-#: src/gs_gui.c:968 src/gs_html_editor.c:1093
+#: src/gs_gui.c:968 src/gs_html_editor.c:1095
 msgid "Print"
 msgstr ""
 
@@ -383,76 +383,76 @@ msgstr ""
 msgid "Go to %s"
 msgstr ""
 
-#: src/gs_html_editor.c:486 src/gs_html_editor.c:520
+#: src/gs_html_editor.c:491 src/gs_html_editor.c:525
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr ""
 
-#: src/gs_html_editor.c:504
+#: src/gs_html_editor.c:509
 msgid "-untitled-"
 msgstr ""
 
-#: src/gs_html_editor.c:1016
+#: src/gs_html_editor.c:1018
 msgid "File"
 msgstr ""
 
-#: src/gs_html_editor.c:1035
+#: src/gs_html_editor.c:1037
 msgid "Save Note"
 msgstr ""
 
-#: src/gs_html_editor.c:1045
+#: src/gs_html_editor.c:1047
 msgid "Delete Note"
 msgstr ""
 
-#: src/gs_html_editor.c:1056
+#: src/gs_html_editor.c:1058
 msgid "New"
 msgstr ""
 
-#: src/gs_html_editor.c:1064
+#: src/gs_html_editor.c:1066
 msgid "Open"
 msgstr ""
 
-#: src/gs_html_editor.c:1073
+#: src/gs_html_editor.c:1075
 msgid "Save"
 msgstr ""
 
-#: src/gs_html_editor.c:1083
+#: src/gs_html_editor.c:1085
 msgid "Save AS"
 msgstr ""
 
-#: src/gs_html_editor.c:1103
+#: src/gs_html_editor.c:1105
 msgid "_Edit"
 msgstr ""
 
-#: src/gs_html_editor.c:1121
+#: src/gs_html_editor.c:1123
 msgid "Cut"
 msgstr ""
 
-#: src/gs_html_editor.c:1135
+#: src/gs_html_editor.c:1137
 msgid "Paste"
 msgstr ""
 
-#: src/gs_html_editor.c:1143
+#: src/gs_html_editor.c:1145
 msgid "Spell Check"
 msgstr ""
 
-#: src/gs_html_editor.c:1151
+#: src/gs_html_editor.c:1153
 msgid "Undo"
 msgstr ""
 
-#: src/gs_html_editor.c:1158
+#: src/gs_html_editor.c:1160
 msgid "Find"
 msgstr ""
 
-#: src/gs_html_editor.c:1165
+#: src/gs_html_editor.c:1167
 msgid "Find Next"
 msgstr ""
 
-#: src/gs_html_editor.c:1173
+#: src/gs_html_editor.c:1175
 msgid "Replace"
 msgstr ""
 
-#: src/gs_html_editor.c:1181
+#: src/gs_html_editor.c:1183
 msgid "Font Style"
 msgstr ""
 
@@ -467,103 +467,103 @@ msgstr ""
 #. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
 #. (plain_text1), TRUE);
 #.
-#: src/gs_html_editor.c:1209
+#: src/gs_html_editor.c:1211
 msgid "Bold"
 msgstr ""
 
-#: src/gs_html_editor.c:1219
+#: src/gs_html_editor.c:1221
 msgid "Italic"
 msgstr ""
 
-#: src/gs_html_editor.c:1230
+#: src/gs_html_editor.c:1232
 msgid "Underline"
 msgstr ""
 
-#: src/gs_html_editor.c:1241
+#: src/gs_html_editor.c:1243
 msgid "Strick Out"
 msgstr ""
 
-#: src/gs_html_editor.c:1251
+#: src/gs_html_editor.c:1253
 msgid "Paragraph"
 msgstr ""
 
-#: src/gs_html_editor.c:1280
+#: src/gs_html_editor.c:1282
 msgid "Left"
 msgstr ""
 
-#: src/gs_html_editor.c:1297
+#: src/gs_html_editor.c:1299
 msgid "Right"
 msgstr ""
 
-#: src/gs_html_editor.c:1313
+#: src/gs_html_editor.c:1315
 msgid "Center"
 msgstr ""
 
-#: src/gs_html_editor.c:1344
+#: src/gs_html_editor.c:1346
 msgid "Increase Indent"
 msgstr ""
 
-#: src/gs_html_editor.c:1353
+#: src/gs_html_editor.c:1355
 msgid "Decrease Indent"
 msgstr ""
 
-#: src/gs_html_editor.c:1361
+#: src/gs_html_editor.c:1363
 msgid "Link..."
 msgstr ""
 
-#: src/gs_html_editor.c:1369
+#: src/gs_html_editor.c:1371
 msgid "Heading"
 msgstr ""
 
-#: src/gs_html_editor.c:1386
+#: src/gs_html_editor.c:1388
 msgid "Normal"
 msgstr ""
 
-#: src/gs_html_editor.c:1395
+#: src/gs_html_editor.c:1397
 msgid "Roman List"
 msgstr ""
 
-#: src/gs_html_editor.c:1406
+#: src/gs_html_editor.c:1408
 msgid "Alphabetical List"
 msgstr ""
 
-#: src/gs_html_editor.c:1418
+#: src/gs_html_editor.c:1420
 msgid "Numerical List"
 msgstr ""
 
-#: src/gs_html_editor.c:1573
+#: src/gs_html_editor.c:1571
 msgid "GnomeSWORD Find"
 msgstr ""
 
-#: src/gs_html_editor.c:1589 src/gs_html_editor.c:1608
+#: src/gs_html_editor.c:1587
 msgid "Enter Word or Phrase"
 msgstr ""
 
-#: src/gs_html_editor.c:1633 src/gs_shortcutbar.c:1498
+#: src/gs_html_editor.c:1611 src/gs_shortcutbar.c:1498
 msgid "Case Sensitive"
 msgstr ""
 
-#: src/gs_html_editor.c:1643
+#: src/gs_html_editor.c:1621
 msgid "Foward Search"
 msgstr ""
 
-#: src/gs_html_editor.c:1655
+#: src/gs_html_editor.c:1633
 msgid "Regular Expresion"
 msgstr ""
 
-#: src/gs_html_editor.c:1766
+#: src/gs_html_editor.c:1745
 msgid "GnomeSWORD Add Reference Link"
 msgstr ""
 
-#: src/gs_html_editor.c:1782
+#: src/gs_html_editor.c:1761
 msgid "Reference"
 msgstr ""
 
-#: src/gs_html_editor.c:1798
+#: src/gs_html_editor.c:1777
 msgid "Bible Reference or Module key to display when link is clicked"
 msgstr ""
 
-#: src/gs_html_editor.c:1822
+#: src/gs_html_editor.c:1801
 msgid "Name of module to show when link is clicked"
 msgstr ""
 

@@ -19,6 +19,8 @@ COMMON_SOURCE =  \
     gs_setup.h \
     gs_abouts.c \
     gs_abouts.h \
+    gs_editor_replace.c \
+    gs_editor_replace.h \
     gs_html_editor.c \
     gs_html_editor.h \
     gs_info_box.c \
