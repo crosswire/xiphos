@@ -1,10 +1,10 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                          gs_display.cpp  -  description
+                                  gs_display.cpp
                              -------------------
-    begin                : Fri Mar 16 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@infinet.com
+    				Fri Mar 16 2001
+    		     copyright (C) 2001 by Terry Biggs
+ 			tbiggs@users.sourceforge.net
  ***************************************************************************/
 
 /*
@@ -110,18 +110,17 @@ char ComEntryDisp::Display(SWModule & imodule)
 	return 0;
 }
 
-
 /***************************************************************************** 
  * GtkHTMLEntryDisp - for displaying dict/lex modules in a GtkHTML 
  * widget the mods need to be filtered to html first
  *****************************************************************************/
 char GtkHTMLEntryDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[500], *buf, *font, *use_font, *token;
+	gchar tmpBuf[500], *buf, *font, *use_font, *use_font_size, *token;
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	string lang, swfont;
+	string lang, swfont, swfontsize;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
@@ -131,9 +130,16 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap &section = (*sit).second;
 		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		swfontsize = ((entry = section.find("Font size")) != section.end()) ? (*entry).second : (string) "";
 		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	} 
 	g_warning(swfont.c_str());
+	if(strcmp(swfontsize.c_str(),"")){
+		use_font_size = (gchar*)swfontsize.c_str();
+		g_warning(use_font_size);
+	}else{ 
+		use_font_size = settings->bible_font_size;
+	}
 	if(strcmp(swfont.c_str(),"")){
 		use_font = (gchar*)swfont.c_str();
 		g_warning("have font");
@@ -165,7 +171,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
-		use_font, settings->bible_font_size);
+		use_font, use_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -405,10 +411,10 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	int curPos = 0;
 	gint len;
 	char *Buf, c;
-	gchar *utf8str, *use_font, *font, *token;
+	gchar *utf8str, *use_font, *use_font_size, *font, *token;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	string lang, swfont;
+	string lang, swfont, swfontsize;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
@@ -420,12 +426,19 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap &section = (*sit).second;
 		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		swfontsize = ((entry = section.find("Font size")) != section.end()) ? (*entry).second : (string) "";
 		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	} 
-	g_warning(swfont.c_str());
+	//g_warning(swfont.c_str());
+	if(strcmp(swfontsize.c_str(),"")){
+		use_font_size = (gchar*)swfontsize.c_str();
+		//g_warning(use_font_size);
+	}else{ 
+		use_font_size = settings->bible_font_size;
+	}
 	if(strcmp(swfont.c_str(),"")){
 		use_font = (gchar*)swfont.c_str();
-		g_warning("have font");
+		//g_warning("have font");
 	}else{
 		font = "-adobe-helvetica-*-*";
 		if (!stricmp(lang.c_str(), "") || 
@@ -443,7 +456,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		token=strtok(font,"-");
 		use_font = token;
 		use_font = strtok(NULL,"-");
-		g_warning("no font");
+		//g_warning("no font");
 	}
 	//g_warning("use_font = %s",use_font);
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
@@ -475,7 +488,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 		sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">",
-			use_font, versecolor, settings->bible_font_size);
+			use_font, versecolor, use_font_size);
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -487,7 +500,6 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 				sprintf(tmpBuf, " %s", "</font><br>");
 			}else{
 				sprintf(tmpBuf, " %s", "</font>");
-				//g_warning(tmpBuf);
 			}
 		} else
 			sprintf(tmpBuf, " %s", "</font>");
@@ -518,9 +530,9 @@ char InterlinearDisp::Display(SWModule & imodule)
 	gint i;
 	bool utf = false;
 	gint len;
-	gchar *utf8str, *use_font, *font, *token;
+	gchar *utf8str, *use_font, *use_font_size, *font, *token;
 	gint utf8len;
-	string lang, swfont;
+	string lang, swfont, swfontsize;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
@@ -533,9 +545,16 @@ char InterlinearDisp::Display(SWModule & imodule)
 	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap &section = (*sit).second;
 		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
+		swfontsize = ((entry = section.find("Font size")) != section.end()) ? (*entry).second : (string) "";
 		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
 	} 
 	g_warning(swfont.c_str());
+	if(strcmp(swfontsize.c_str(),"")){
+		use_font_size = (gchar*)swfontsize.c_str();
+		g_warning(use_font_size);
+	}else{ 
+		use_font_size = settings->interlinear_font_size;
+	}
 	if(strcmp(swfont.c_str(),"")){
 		use_font = (gchar*)swfont.c_str();
 		g_warning("have font");
@@ -558,15 +577,12 @@ char InterlinearDisp::Display(SWModule & imodule)
 		use_font = strtok(NULL,"-");
 		g_warning("no font");
 	}
-	//g_warning("use_font = %s",use_font);
 	if(row == 6) 
 		row = 1;
 	if(row == 1|| row == 3||row==5)
 		rowcolor = "#F1F1F1";
 	else
 		rowcolor = settings->bible_bg_color;
-
-	//buf = (char *) imodule.Description(); 
 	(const char *) imodule;
 	if(row == 1){
 	sprintf(tmpBuf,
@@ -593,16 +609,14 @@ char InterlinearDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
-		use_font, "+1"); //, settings->interlinear_font_size);
+		use_font, use_font_size); //, settings->interlinear_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-
 	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
 		    strlen((const char *) imodule));
-
 	sprintf(tmpBuf,
-		" [<A HREF=\"@%s\">view context</a>]</font><br></td></tr>",
+		"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
 		imodule.Name());
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));

@@ -943,6 +943,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	GtkWidget *about_this_module1;
 	GtkWidget *add_bookmark;
 	GtkWidget *add_bookmark_menu;
+	GtkWidget *separator4;
 	GtkWidget *separator2;
 	GtkWidget *view_module3;
 	GtkWidget *view_module3_menu;
@@ -1051,7 +1052,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	gtk_container_add(GTK_CONTAINER(pmBible), show_tabs);
 	gtk_tooltips_set_tip(tooltips, show_tabs, "Show notebook tabs",
 			     NULL);
-			     
+				     
   	about_this_module1 = gtk_menu_item_new_with_label ("About this module");
   	gtk_widget_ref (about_this_module1);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "about_this_module1", about_this_module1,
@@ -1064,7 +1065,22 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "viewtext", viewtext,
                             (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (viewtext);
-  	gtk_container_add (GTK_CONTAINER (pmBible), viewtext);	
+  	gtk_container_add (GTK_CONTAINER (pmBible), viewtext);
+	
+	separator4 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator4);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator4", separator4,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator4);
+  	gtk_container_add (GTK_CONTAINER (pmBible), separator4);
+  	gtk_widget_set_sensitive (separator4, FALSE);		
+			     
+  	settings->unlockmod_item = gtk_menu_item_new_with_label ("Unlock This Module");
+  	gtk_widget_ref (settings->unlockmod_item);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "settings->unlockmod_item",settings->unlockmod_item ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (settings->unlockmod_item);
+  	gtk_container_add (GTK_CONTAINER (pmBible), settings->unlockmod_item);
   	
   	
   	separator2 = gtk_menu_item_new ();
@@ -1161,6 +1177,9 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
                       	"Bible");
 	gtk_signal_connect (GTK_OBJECT (viewtext), "activate",
                       	GTK_SIGNAL_FUNC (on_viewtext_activate),
+                      	NULL);
+	gtk_signal_connect (GTK_OBJECT (settings->unlockmod_item), "activate",
+                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
                       	NULL);
   return pmBible;
 }

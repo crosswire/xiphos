@@ -1,10 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                            gs_viewtext_dlg.h
-                             -------------------
-    begin                : Mon May 14 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@infinet.com
+gs_viewtext_dlg.h
+ 
+Mon May 14 2001
+copyright (C) 2001 by Terry Biggs
+tbiggs@users.sourceforge.net
  ***************************************************************************/
 
 /*
