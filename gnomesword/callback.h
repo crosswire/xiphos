@@ -16,8 +16,13 @@
  ***************************************************************************/
 #include <gnome.h>
 //#include <swmodule.h>
-
 /*
+gchar *
+gettheselection													(GtkWidget *text,
+																				gint start,
+																				gint end);
+																				
+
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
