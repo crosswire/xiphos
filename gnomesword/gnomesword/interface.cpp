@@ -1237,7 +1237,7 @@ create_mainwindow (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (appbar1);
   gnome_app_set_statusbar (GNOME_APP (mainwindow), appbar1);
-
+	gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
   gtk_signal_connect (GTK_OBJECT (mainwindow), "destroy",
                       GTK_SIGNAL_FUNC (on_mainwindow_destroy),
                       NULL);
@@ -1768,6 +1768,7 @@ create_dlgSearch (void)
 
   dlgSearch = gnome_dialog_new ("GnomeSword - Search", NULL);
   gtk_object_set_data (GTK_OBJECT (dlgSearch), "dlgSearch", dlgSearch);
+  GTK_WINDOW (dlgSearch)->type = GTK_WINDOW_DIALOG;
 
   dialog_vbox1 = GNOME_DIALOG (dlgSearch)->vbox;
   gtk_object_set_data (GTK_OBJECT (dlgSearch), "dialog_vbox1", dialog_vbox1);
@@ -2055,7 +2056,7 @@ create_dlgSearch (void)
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area1), GTK_BUTTONBOX_END);
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area1), 8);
 
-  gnome_dialog_append_button (GNOME_DIALOG (dlgSearch), GNOME_STOCK_BUTTON_OK);
+  gnome_dialog_append_button (GNOME_DIALOG (dlgSearch), GNOME_STOCK_BUTTON_CLOSE);
   btnSearchOK = g_list_last (GNOME_DIALOG (dlgSearch)->buttons)->data;
   gtk_widget_ref (btnSearchOK);
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "btnSearchOK", btnSearchOK,

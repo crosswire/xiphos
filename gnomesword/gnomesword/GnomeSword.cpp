@@ -48,7 +48,7 @@
  *  -- add to interface.cpp after glade builds code --
  *  -- must be insereted following creation of appbar --
  * gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
- * 
+ *
  */
 
 
@@ -101,7 +101,7 @@ gchar options[11][80],	//-- array to store a number of setting - read in form fi
 GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
 				*footnotes,	//-- widget to access toggle menu - for footnotes
 				*notepage;	//-- widget to access toggle menu - for interlinear notebook page
-				
+			
 extern gint ibookmarks;	//-- number of items in bookmark menu
 extern GdkColor myGreen; //-- current verse color
 GtkWidget* studypad;  //-- studypad text widget
@@ -173,6 +173,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	myGreen.blue = 0x0000;
 	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
+
 	//--------------------------------------------------------------------- setup displays for sword modules
 	GTKEntryDisp::__initialize();
 	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
@@ -397,9 +398,9 @@ loadbookmarks(GtkWidget *MainFrm)
 
 //-------------------------------------------------------------------------------------------
 void 
-changeVerse(gchar *ref)
+changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary text together
 {
-	string keyText;
+	string keyText; //-- string for verse key text to change to
 	GtkWidget *msgBox;
 	int l;
 
@@ -424,7 +425,7 @@ changeVerse(gchar *ref)
 			}
 			strncpy(s2,s1,l);
 			s2[l] = '\0';
-			//---------------------------------------------------------- set entries to new verse
+			//------------------------- set book, chapter,verse and freeform lookup entries to new verse
 			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook")),s2);
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")),curChapter);
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),curVerse);
@@ -637,7 +638,7 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 	}
 	else if(GTK_TOGGLE_BUTTON(lastsearch)->active) //---------- check to see if we want to use results of search last for this search
 	{
-		currentScope = &searchScopeList;
+		currentScope = &searchScopeList; //-- if we do = move searchlist into currentScope
 	}
 	else
 	{
@@ -646,159 +647,156 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 		currentScope = 0; //------------ clear scope
 	}
 
-	count = 0;
-	gtk_clist_clear(GTK_CLIST(resultList));	
+	count = 0;    //-- set count to 0 - we have not found anything yet
+	gtk_clist_clear(GTK_CLIST(resultList));	//-- clear list widget for new results
 
-	entryText = gtk_entry_get_text(GTK_ENTRY(searchText));
-	srchText = entryText;
-	gtk_label_set_text( GTK_LABEL(lbSearchHits) ,"0" );
-	if (searchMod)
+	entryText = gtk_entry_get_text(GTK_ENTRY(searchText)); //-- what to search for
+	srchText = entryText; //-- move from char* to string
+	gtk_label_set_text( GTK_LABEL(lbSearchHits) ,"0" ); //-- set hits label to 0
+	if (searchMod)  //-- must have a good module - not null
 	{
-		int searchType = GTK_TOGGLE_BUTTON(regexSearch)->active ? 0 : GTK_TOGGLE_BUTTON(phraseSearch)->active ? -1 : -2;
-		int searchParams = GTK_TOGGLE_BUTTON(caseSensitive)->active ? 0 : REG_ICASE;
-		gtk_clist_freeze(GTK_CLIST(resultList));
-		for (ListKey &searchResults = searchMod->Search(srchText.c_str(), searchType,
+		int searchType = GTK_TOGGLE_BUTTON(regexSearch)->active ? 0 : GTK_TOGGLE_BUTTON(phraseSearch)->active ? -1 : -2; //-- get search type
+		int searchParams = GTK_TOGGLE_BUTTON(caseSensitive)->active ? 0 : REG_ICASE; //-- get search params - case sensitive
+		gtk_clist_freeze(GTK_CLIST(resultList)); //-- keep list form scrolling until we are done
+		for (ListKey &searchResults = searchMod->Search(srchText.c_str(), searchType, //-- give search string to module to search
 									searchParams, currentScope); !searchResults.Error(); searchResults++)
 		{
-			resultText = (const char *)searchResults;
-			gtk_clist_append(GTK_CLIST(resultList), &resultText);
-			searchScopeList << (const char *)searchResults;
-			++count;
+			resultText = (const char *)searchResults;  //-- put verse key string of find into a string
+			gtk_clist_append(GTK_CLIST(resultList), &resultText); //-- store find in list
+			searchScopeList << (const char *)searchResults;  //-- remember finds for next search's scope
+			++count;                                         //-- if we want to use them
 		}
-		gtk_clist_thaw(GTK_CLIST(resultList));
-		sprintf(scount,"%d",count);
-		gtk_label_set_text( GTK_LABEL(lbSearchHits) ,scount );
+		gtk_clist_thaw(GTK_CLIST(resultList)); //-- thaw list so we can look through the results
+		sprintf(scount,"%d",count); //-- put count int string
+		gtk_label_set_text( GTK_LABEL(lbSearchHits) ,scount ); //-- tell user how many hits we had
 	}
 }
 
 //-------------------------------------------------------------------------------------------
 void
-resultsListSWORD(GtkWidget *searchFrm, gint row, gint column)
-{
-	GtkWidget	*resultList,
-					 *textWindow,
-					 *comToggle;
- 	gchar 		  *text,
-					 tmpBuf[255];
-	SWModule *searchMod;
-	ModMap::iterator it;	
+resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone clicked the results list
+{                                                             //-- from our search and sent us here
+	GtkWidget	*resultList, //-- pointer to resultlist
+					 *textWindow,  //-- pointer to search dlg textwindow
+					 *comToggle;   //-- pointer to search commentary check box
+ 	gchar 		  *text;     //-- pointer to resultlist key text
+				//	 tmpBuf[255];  //--
+	SWModule *searchMod;  //-- pointer to search module
+	ModMap::iterator it;	//-- manager iterator
 	
 	
-	resultList = lookup_widget(searchFrm,"resultList");
-	textWindow = lookup_widget(searchFrm,"txtSearch");
-	comToggle = lookup_widget(searchFrm,"ckbCom");
+	resultList = lookup_widget(searchFrm,"resultList"); //-- set pointer to resultList
+	textWindow = lookup_widget(searchFrm,"txtSearch");  //-- set pointer to text window
+	comToggle = lookup_widget(searchFrm,"ckbCom");      //-- set pointer to commentary check box
 	
-    gtk_clist_get_text(GTK_CLIST(resultList), row, column, &text);
+  gtk_clist_get_text(GTK_CLIST(resultList), row, column, &text); //-- get key text from resultlist
 
-    if(!GTK_TOGGLE_BUTTON(comToggle)->active)
+  if(!GTK_TOGGLE_BUTTON(comToggle)->active) //-- check state of commentary check box
 	{
-		it = searchMgr->Modules.find(curMod->Name()); 	
+		it = searchMgr->Modules.find(curMod->Name());  //-- if not checked use curMod for display	
 		if (it != searchMgr->Modules.end()) 
 		{
-			searchMod = (*it).second;
+			searchMod = (*it).second;  //-- set search module to same as curMod
 		}			
 	}
 	else
 	{
-		it = searchMgr->Modules.find(curcomMod->Name()); 	
+		it = searchMgr->Modules.find(curcomMod->Name()); //-- if checked use curcomMod for display
 		if (it != searchMgr->Modules.end()) 
 		{
-			searchMod = (*it).second;
+			searchMod = (*it).second; //-- set search module to same as curcomMod
 		}			
 	}		
 	
-	if(searchMod)
+	if(searchMod) //-- make sure module is not null
 	{
-		searchMod->SetKey(text);
-		searchMod->Display();
+		searchMod->SetKey(text); //-- set module to verse key text
+		searchMod->Display();    //-- show verse or commentary
 	}
 }
 
 //-------------------------------------------------------------------------------------------
 void
-setupSearchDlg(GtkWidget *searchDlg)
+setupSearchDlg(GtkWidget *searchDlg) //-- init search dialog
 {
-		ModMap::iterator it;
-		gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(searchDlg,"txtSearch")) , TRUE );
-		BTFsearchDisplay = new GTKInterlinearDisp(lookup_widget(searchDlg,"txtSearch"));
+		ModMap::iterator it;  //-- sword manager iterator
+		gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(searchDlg,"txtSearch")) , TRUE ); //-- set text window to word wrap
+		BTFsearchDisplay = new GTKInterlinearDisp(lookup_widget(searchDlg,"txtSearch")); //-- set sword display
     	//--------------------------------------------------------------------------------------- searchmodule	
-		for (it = searchMgr->Modules.begin(); it != searchMgr->Modules.end(); it++)
+		for (it = searchMgr->Modules.begin(); it != searchMgr->Modules.end(); it++) //-- iterator through modules
 		{
-			searchMod  = (*it).second;
-			searchMod->Disp(BTFsearchDisplay);
+			searchMod  = (*it).second;  //-- set searchMod
+			searchMod->Disp(BTFsearchDisplay); //-- set search display for modules
 		}
 }
 
 //-------------------------------------------------------------------------------------------
 void
-strongsSWORD(bool choice)
+strongsSWORD(bool choice) //-- toogle strongs numbers for modules that have strongs
 {
-	if(choice)
+	if(choice) //-- if choice is true - we want strongs numbers
 	{
-		mainMgr->setGlobalOption("Strong's Numbers","On");
-		strcpy(options[6],"TRUE");
+		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on
+		strcpy(options[6],"TRUE");   //-- store choice in options array
 	}
-	else
+	else   //-- we don't want strongs numbers
 	{
-		mainMgr->setGlobalOption("Strong's Numbers","Off");		
-		strcpy(options[6],"FALSE");		
+		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
+		strcpy(options[6],"FALSE");	//-- store choice in options array	
 	}
-	curMod->Display();
+	curMod->Display(); //-- we need to show change
 }
 
 //-------------------------------------------------------------------------------------------
 void
-footnotesSWORD(bool choice)
+footnotesSWORD(bool choice) //-- toogle gbf footnotes for modules that have them
 {
-	if(choice)
+	if(choice) //-- we want footnotes
 	{
-		mainMgr->setGlobalOption("Footnotes","On");
-		strcpy(options[7],"TRUE");
+		mainMgr->setGlobalOption("Footnotes","On"); //-- turn footnotes on
+		strcpy(options[7],"TRUE"); //-- store choice in options array
 	}
-	else
+	else //-- we don't want footnotes
 	{
-		mainMgr->setGlobalOption("Footnotes","Off");		
-		strcpy(options[7],"FALSE");		
+		mainMgr->setGlobalOption("Footnotes","Off");	//-- turn footnotes off	
+		strcpy(options[7],"FALSE");	//-- store choice in options array	
 	}
-	curMod->Display();
+	curMod->Display(); //-- we need to show change
 }
 
 //-------------------------------------------------------------------------------------------
 void
-addBookmark(void)
+addBookmark(void)  //-- someone clicked add bookmark to get us here
 {
-	GnomeUIInfo *bookmarkitem;
-	gchar    *bookname,
-				ref[255];
-	gint       iVerse,
-				iChap,
-				i,j;
-	FILE *flbookmarks;
+	GnomeUIInfo *bookmarkitem;  //-- pointer to gnome menu item structure
+	gchar    		*bookname;      //-- pointer to the Bible book we want to mark
+	gint       	iVerse,         //-- verse we want to mark
+							iChap;          //-- chapter we want to mark
 
-	if(ibookmarks < 49)
+	if(ibookmarks < 49) //-- keep items in footnote menu to 48 + 1
 	{
-		bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook")));
-		iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")));
-		iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")));
-		sprintf(bmarks[ibookmarks],"%s %d:%d\0",bookname, iChap,iVerse );
-		bookmarkitem = g_new(GnomeUIInfo,2);
-		bookmarkitem->type = GNOME_APP_UI_ITEM;
-		bookmarkitem->moreinfo=(gpointer)on_john_3_1_activate;
-		bookmarkitem->user_data=g_strdup(bmarks[ibookmarks]);
-		bookmarkitem->label = bmarks[ibookmarks];
-		bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-		bookmarkitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;
-		bookmarkitem->accelerator_key = 0;
-		bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO;
-		gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),"_Bookmarks/",bookmarkitem,NULL);	
-		 ++ibookmarks;
+		bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook"))); //-- get book name
+		iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number
+		iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- get chapter
+		sprintf(bmarks[ibookmarks],"%s %d:%d\0",bookname, iChap,iVerse ); //-- put book chapter and verse into bookmarks array
+		bookmarkitem = g_new(GnomeUIInfo,2); //-- create new gnome menu item
+		bookmarkitem->type = GNOME_APP_UI_ITEM; //-- type is regular menu item
+		bookmarkitem->moreinfo=(gpointer)on_john_3_1_activate; //-- set call back function
+		bookmarkitem->user_data=g_strdup(bmarks[ibookmarks]);  //-- set user data to bookmark for use in call back
+		bookmarkitem->label = bmarks[ibookmarks]; //-- set label for menu item
+		bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;  //-- stock gnome pixmap
+		bookmarkitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN; //-- open book pixmap
+		bookmarkitem->accelerator_key = 0;  //-- stop wild generation of accelerator keys
+		bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO; //-- last item
+		gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),"_Bookmarks/",bookmarkitem,NULL);	//-- insert into bookmarks menu
+		 ++ibookmarks;  //-- increment number of bookmark item + 1
 	}
-	savebookmarks();
+	savebookmarks();  //-- save to file so we don't forget -- function in filestuff.cpp
 }
 
 //-------------------------------------------------------------------------------------------
 void
-editbookmarksLoad(GtkWidget *editdlg)
+editbookmarksLoad(GtkWidget *editdlg) //--
 {
 	GtkWidget *text;
 	gchar buf[255];
