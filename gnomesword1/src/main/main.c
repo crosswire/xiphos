@@ -26,6 +26,11 @@
 #include <glib-1.2/glib.h>
 #include <string.h>
 
+
+#ifdef USE_GTKHTML1
+#include <gconf/gconf.h>
+#endif	
+
 #include "gui/gui.h"
 #include "gui/main_window.h"
 #include "gui/splash.h"
@@ -59,6 +64,9 @@ int main(int argc, char *argv[])
 	gboolean newconfigs = FALSE;
 	gboolean newbookmarks = FALSE;
 
+#ifdef USE_GTKHTML1
+	GError *gconf_error = NULL;
+#endif
 	gui_init(argc, argv);
 	
 	if (argc > 1) {
@@ -78,6 +86,17 @@ int main(int argc, char *argv[])
 		}
 	}
 	
+#ifdef USE_GTKHTML1
+    /* 
+     * This is needed for gtkhtml-1.1
+     */
+
+    if (!gconf_init(argc, argv, &gconf_error)) {
+	g_assert(gconf_error != NULL);
+	g_error("GConf init failed:\n  %s", gconf_error->message);
+	return FALSE;
+    }
+#endif
 	/* 
 	 * check for directories and files
 	 */    

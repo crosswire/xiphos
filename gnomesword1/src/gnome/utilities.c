@@ -32,8 +32,8 @@
 
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+#include "main/lists.h"
 #include "main/settings.h"
-
 
 
 /******************************************************************************
@@ -199,7 +199,7 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 {	
 	gchar	
 		view_remember_last_item[80];
-	gint	i = 0;
+	//gint	i = 0;
 	GList 	*tmp = NULL;
 
 	sprintf(view_remember_last_item,"%s", menu);
@@ -216,7 +216,7 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 		sprintf(view_remember_last_item,"%s%s", 
 				menu, 
 				(gchar *) tmp->data);	
-		++i;
+		//++i;
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
@@ -244,6 +244,44 @@ void gui_remove_menu_items(gchar * startitem, gint numberofitems)
 	gnome_app_remove_menus(GNOME_APP(widgets.app), startitem,
 			       numberofitems);
 }			
+
+/******************************************************************************
+ * Name
+ *  add_mods_2_gtk_menu
+ *
+ * Synopsis
+ *   #include "gui/utilities.h"
+ *
+ *   void add_mods_2_gtk_menu(gchar * mod_type, GtkMenu * menu,
+				GtkMenuCallback callback)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
+				GtkMenuCallback callback)
+{
+	GList 	*tmp = NULL;
+	GtkWidget * item;
+	
+	tmp = get_list(mod_type);
+	while (tmp != NULL) {	
+		item =
+		    gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_show(item);
+		gtk_signal_connect(GTK_OBJECT(item), "activate",
+				   GTK_SIGNAL_FUNC
+				   (callback),
+				   (gchar *) tmp->data);		
+		gtk_container_add(GTK_CONTAINER(menu), item); 
+		tmp = g_list_next(tmp);	
+	}	
+}
+
 
 
 /******************************************************************************

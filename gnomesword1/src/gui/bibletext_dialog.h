@@ -27,25 +27,23 @@
 typedef struct _viewtext VIEW_TEXT;
 struct _viewtext {
 	GtkWidget *dialog;
-	GtkWidget *btn_sync;
-	GtkWidget *btn_close;
 	GtkWidget *cbe_book;
 	GtkWidget *spb_chapter;
 	GtkWidget *spb_verse;
 	GtkWidget *freeform_lookup;
-	GtkWidget *html;
-	GtkWidget *btn_print;
 	GtkWidget *statusbar;
-	gchar *mod_name;
 	gchar key[80];
-	gint dialog_number;
 	gboolean has_key;
 	TEXT_DATA *t;
-};	
+};
 
+void gui_on_lookup_bibletext_dialog_selection
+	(GtkMenuItem * menuitem, gchar * dict_mod_description);
+void gui_close_text_dialog(void);
 void gui_open_bibletext_dialog(gchar * mod_name);
 void gui_setup_bibletext_dialog(GList *mods);
 void gui_shutdown_bibletext_dialog(void);
 
 #endif
 
+/* end of file */
