@@ -693,3 +693,78 @@ on_btnKeyNext_clicked                  (GtkButton       *button,
 void
 on_search1_activate                       (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
+
+void
+on_fpStudypad_font_set                 (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data);
+
+void
+on_fpSPPrinter_font_set                (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data);
+
+void
+on_btnSearchSaveList_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListNew_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListOpen_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListSave_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListPrint_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListClose_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_verse_list1_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListOpen_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListSave_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListPrint_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListCopy_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnVerseListPaste_clicked           (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_cbContext_toggled                   (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+void
+on_verselist_select_row                (GtkCList        *clist,
+                                        gint             row,
+                                        gint             column,
+                                        GdkEvent        *event,
+                                        gpointer         user_data);
+
+void
+on_notebook3_switch_page               (GtkNotebook     *notebook,
+                                        GtkNotebookPage *page,
+                                        gint             page_num,
+                                        gpointer         user_data);
