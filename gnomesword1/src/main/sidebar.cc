@@ -92,8 +92,7 @@ void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
 						key);
 			settings.currentverse = xml_get_value(
 						"keys", "verse");
-		}
-		
+		}		
 		break;
 	case DICTIONARY_TYPE:
 		xml_set_value("GnomeSword", "keys", "dictionary", key);
