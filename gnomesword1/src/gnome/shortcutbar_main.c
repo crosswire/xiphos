@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * shortcutbar.c - create and maintain the main shortcut bar
+ * shortcutbar_main.c - create and maintain the main shortcut bar
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -31,18 +31,18 @@
 #include <gal/widgets/e-unicode.h>
 
 /* frontend */
+#include "shortcutbar_main.h"
 #include "shortcutbar_dialog.h"
-#include "create_shortcutbar_search.h"
+#include "shortcutbar_search.h"
 #include "shortcutbar_viewer.h"
+#include "_editor.h"
 
 /* main */ 
-#include "gs_shortcutbar.h"
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_bookmarks.h"
 #include "gbs.h"
 #include "gs_html.h"
-#include "_editor.h"
 #include "settings.h"
 #include "lists.h"
 
@@ -93,7 +93,7 @@ static void remove_all_items(gint group_num);
  *   showSBGroup 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void showSBGroup(SETTINGS * s, gint groupnum)	
  *
@@ -130,7 +130,7 @@ void showSBGroup(SETTINGS * s, gint groupnum)
  *   changegroupnameSB 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)	
  *
@@ -159,7 +159,7 @@ void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)
  *   savegroup 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void savegroup(EShortcutBar * shortcut_bar, gint group_num)	
  *
@@ -240,7 +240,7 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
  *   on_shortcut_dragged 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void on_shortcut_dragged(EShortcutBar * shortcut_bar,
  *				gint group_num, gint item_num)	
@@ -269,7 +269,7 @@ static void on_shortcut_dragged(EShortcutBar * shortcut_bar,
  *    on_shortcut_dropped
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void on_shortcut_dropped(EShortcutBar * shortcut_bar,
  *	    gint group_num, gint item_num, gchar * url, gchar * name)
@@ -302,7 +302,7 @@ static void on_shortcut_dropped(EShortcutBar * shortcut_bar,
  *    on_about_item_activate
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void on_about_item_activate(GtkMenuItem * menuitem,
  *						gpointer data)	
@@ -343,7 +343,7 @@ static void on_about_item_activate(GtkMenuItem * menuitem,
  *    remove_all_items
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void remove_all_items(gint group_num)	
  *
@@ -371,7 +371,7 @@ static void remove_all_items(gint group_num)
  *   on_remove_item_activate 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void on_remove_item_activate(GtkMenuItem * menuitem,
  *						gpointer data)	
@@ -451,7 +451,7 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
  *   on_add_all_activate 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
@@ -545,7 +545,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   on_add_shortcut_activate 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void on_add_shortcut_activate(GtkMenuItem * menuitem, 
  *						gpointer user_data)
@@ -653,7 +653,7 @@ static void on_add_shortcut_activate(GtkMenuItem * menuitem,
  *   add_sb_group 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   gint add_sb_group(EShortcutBar * shortcut_bar,
 					gchar * group_name)	
@@ -683,7 +683,7 @@ static gint add_sb_group(EShortcutBar * shortcut_bar,
  *   set_large_icons 
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void set_large_icons(GtkWidget * menuitem, 
 				EShortcutBar * shortcut_bar)	
@@ -724,7 +724,7 @@ static void set_large_icons(GtkWidget * menuitem,
  *    set_small_icons
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void set_small_icons(GtkWidget * menuitem, 
  *				EShortcutBar * shortcut_bar)
@@ -765,7 +765,7 @@ static void set_small_icons(GtkWidget * menuitem,
  *    show_standard_popup
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void show_standard_popup(EShortcutBar * shortcut_bar,
  *				GdkEvent * event, gint group_num)	
@@ -917,7 +917,7 @@ static void show_standard_popup(EShortcutBar * shortcut_bar,
  *    show_context_popup
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   	void show_context_popup(EShortcutBar * shortcut_bar,
  *		   GdkEvent * event, gint group_num, gint item_num)
@@ -973,7 +973,7 @@ static void show_context_popup(EShortcutBar * shortcut_bar,
  *    on_shortcut_bar_item_selected
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   	void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
  *			GdkEvent * event,gint group_num, gint item_num)
@@ -1097,7 +1097,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
  *    gui_setup_shortcut_bar
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void gui_setup_shortcut_bar(SETTINGS * s)
  *
@@ -1456,7 +1456,7 @@ void gui_setup_shortcut_bar(SETTINGS * s)
  *    gui_update_shortcut_bar
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void gui_update_shortcut_bar(SETTINGS * s)	
  *
@@ -1682,7 +1682,7 @@ void gui_update_shortcut_bar(SETTINGS * s)
  *    gui_create_mod_list_menu
  *
  * Synopsis
- *   #include "_shortcutbar.h"
+ *   #include "shortcutbar_main.h"
  *
  *   void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 		      GtkWidget * shortcut_menu_widget, gint mod_type)	

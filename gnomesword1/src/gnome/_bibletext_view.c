@@ -30,13 +30,13 @@
 /* frontend */
 #include "_bibletext_view.h"
 #include "_display_info.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
 
 /* main */ 
 #include "display_info.h"
 #include "bibletext_view.h"
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "support.h"
 #include "settings.h"

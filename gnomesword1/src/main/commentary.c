@@ -25,20 +25,18 @@
 
 #include <gnome.h>
 
-
-#include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
-#include "gs_html.h"
-#include "shortcutbar.h"
-#include "gs_viewcomm_dlg.h"
-
-/* gnome */
+/* frontend */
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
+#include "shortcutbar_main.h"
 
 /* main */
 #include "commentary.h"
 #include "settings.h"
+#include "gs_gnomesword.h"
+#include "gs_html.h"
+#include "shortcutbar.h"
+#include "gs_viewcomm_dlg.h"
 
 /* backend */
 #include "sword.h"

@@ -6,11 +6,11 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=54
-1=36
-2=33
-3=41
-4=42
+0=39
+1=66
+2=36
+3=33
+4=41
 5=994
 6=30
 7=1
@@ -38,10 +38,8 @@ ShowLocals=true
 13=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
-1=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
-2=/home/terry/Projects/gnomesword1/src/gnome/_bibletext_view.c
-3=/home/terry/Projects/gnomesword1/src/main/gs_html.c
+0=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
+1=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
 
 [replace_text]
 0=shortcutbar_viewer.h
@@ -67,11 +65,11 @@ ShowLocals=true
 0=newconfigs
 
 [find_in_files]
-0=create_shortcutbar_viewer.h
-1=preferences_dlg
-2=gs_info_box.h
-3=create_InfoBox
-4=create_InfoBoxf
-5=find_dlg_defs.h
-6=create_dlgInformation
-7=loadmodandkey
+0=gs_shortcutbar.h
+1=create_shortcutbar_viewer.h
+2=preferences_dlg
+3=gs_info_box.h
+4=create_InfoBox
+5=create_InfoBoxf
+6=find_dlg_defs.h
+7=create_dlgInformation
