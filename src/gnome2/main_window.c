@@ -634,6 +634,8 @@ void create_mainwindow(void)
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
+	GtkWidget *notebook;
+  GtkWidget *empty_notebook_page;
 	GdkColor transparent = { 0 };
 	gint page_num = 0;
 
@@ -668,9 +670,7 @@ void create_mainwindow(void)
 
 	widgets.epaned = gtk_hpaned_new();
 	gtk_widget_show(widgets.epaned);
-	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned,
-			   TRUE, TRUE, 0);
-
+	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE, 0);
 
 	mainPanel = gtk_vbox_new(FALSE, 0);
 	gtk_paned_pack2(GTK_PANED(widgets.epaned), mainPanel,
@@ -680,27 +680,46 @@ void create_mainwindow(void)
 	vboxMain = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxMain);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vboxMain, TRUE, TRUE, 0);
+	
+	/* tabbed notebook start */
+	notebook = gtk_notebook_new();
+	//gtk_widget_show(notebook);
+	gtk_box_pack_start(GTK_BOX(vboxMain),
+			   notebook, FALSE,
+			  FALSE , 0);
+	gtk_widget_set_size_request(notebook, -1, 26);
+	
+	empty_notebook_page = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (empty_notebook_page);
+	gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
+	
+	label41 = gtk_label_new(_("//KJV/John 3:16"));
+	gtk_widget_show(label41);
 
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+				   (notebook),
+				   gtk_notebook_get_nth_page
+				   (GTK_NOTEBOOK
+				    (notebook),
+				    0), label41);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook), FALSE);
+	/* tabbed notebook end */
+	
 	/*
 	 * nav toolbar 
 	 */
 
 	nav_toolbar = gui_create_nav_toolbar(widgets.app);
-	/*gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
-	   FALSE, 0); */
+	/* gtk_box_pack_start(GTK_BOX(vboxMain),nav_toolbar,FALSE,FALSE,0); */
 
 	/*
 	 * end nav toolbar 
 	 */
 
-
 	widgets.vpaned = gtk_vpaned_new();
 	gtk_widget_show(widgets.vpaned);
-	gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned,
-			 TRUE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER
-				       (widgets.vpaned), 1);
-
+	gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.vpaned), 1);
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox2);
@@ -708,14 +727,12 @@ void create_mainwindow(void)
 
 	widgets.hpaned = gtk_hpaned_new();
 	gtk_widget_show(widgets.hpaned);
-	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE,
-			   TRUE, 0);
-
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE, TRUE, 0);
 
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
-	gtk_paned_pack1(GTK_PANED(widgets.hpaned),
-			widgets.vbox_text, FALSE, TRUE);
+	gtk_paned_pack1(GTK_PANED(widgets.hpaned), 
+					widgets.vbox_text, FALSE, TRUE);
 
 	/*
 	 * text/parallel notebook
@@ -725,11 +742,9 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(widgets.vbox_text),
 			   widgets.notebook_parallel_text, TRUE,
 			   TRUE, 0);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.
 				    notebook_parallel_text), FALSE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK
-				     (widgets.
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.
 				      notebook_parallel_text), FALSE);
 
 	/*
