@@ -156,7 +156,7 @@ void gui_on_lookup_commentary_dialog_selection
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	if(!mod_name) 
 		return;
 
@@ -965,7 +965,7 @@ static void lookup_commentary_selection(GtkMenuItem * menuitem,
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
@@ -997,7 +997,7 @@ static void lookup_commentary_selection(GtkMenuItem * menuitem,
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gchar *module_name = module_name_from_description((gchar *)user_data);
+	gchar *module_name = main_module_name_from_description((gchar *)user_data);
 	gchar *url = NULL;
 	if(module_name) {
 		url = g_strdup_printf("sword://%s/%s",

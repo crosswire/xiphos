@@ -46,7 +46,7 @@ struct  _custom_list{
 	gchar *value;
 };
 
-void search_dialog_appbar_update(char percent, void *userData);
+//void search_dialog_appbar_update(char percent, void *userData);
 //void search_percent_update(char percent, void *userData);
 void set_search_global_option(gchar * option, gboolean choice);
 

@@ -272,8 +272,6 @@ static gboolean textview_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
 {
-	gchar *key;
-
 	switch (event->button) {
 	case 1:
 		break;
@@ -281,6 +279,7 @@ static gboolean textview_button_press_event(GtkWidget * widget,
 		break;
 	case 3:
 		gui_popup_pm_text(settings.MainWindowModule, event);
+		return TRUE;
 		break;
 	}
 	return FALSE;
@@ -535,7 +534,8 @@ GtkWidget *gui_create_bible_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
-  g_signal_connect ((gpointer)widgets.html_text , "motion_notify_event",
+	g_signal_connect ((gpointer)widgets.html_text , 
+			"motion_notify_event",
                     G_CALLBACK (on_motion_notify_event),
                     NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
@@ -700,7 +700,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
@@ -764,7 +764,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	gchar *module_name = NULL;
 
-	module_name = module_name_from_description((gchar *) user_data);
+	module_name = main_module_name_from_description((gchar *) user_data);
 	if(module_name) {
 		main_display_bible(module_name, settings.currentverse);
 		g_free(module_name);

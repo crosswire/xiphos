@@ -573,7 +573,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	gchar *module_name = NULL;
 
-	module_name = module_name_from_description((gchar *) user_data);
+	module_name = main_module_name_from_description((gchar *) user_data);
 	if(module_name) {
 		main_display_dictionary(module_name, settings.dictkey);
 		g_free(module_name);

@@ -23,11 +23,8 @@
 #include <config.h>
 #endif
 
-#ifdef USE_GNOME2
+
 #include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 
 #include "gui/main_window.h"
 #include "gui/search_dialog.h"
@@ -36,33 +33,8 @@
 #include "main/search.h"
  
 #include "backend/key.hh"
-#include "backend/module.hh"
 #include "backend/config.hh"
 #include "backend/sword.h"
-
-/******************************************************************************
- * Name
- *   search_dialog_appbar_update
- *
- * Synopsis
- *   #include "main/search.h"
- *
- *   void search_dialog_appbar_update(char percent, void *userData)	
- *
- * Description
- *    called by backend search to update progress during search
- *
- * Return value
- *   void
- */ 
-
-void search_dialog_appbar_update(char percent, void *userData)
-{
-//	gui_search_dialog_appbar_update(percent, userData);
-}
-
-
-
 /******************************************************************************
  * Name
  *   set_search_global_option

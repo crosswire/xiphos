@@ -40,9 +40,8 @@ extern "C" {
 #include "main/sword.h"
 
 #include "gui/utilities.h"
-//#include "gui/widgets.h"
+#include "gui/widgets.h"
 
-#include "backend/module.hh"
 #include "backend/sword_main.hh"
 
 	
@@ -121,6 +120,8 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar heading[32];
 	gboolean newparagraph = FALSE;
 	gboolean was_editable = gtk_html_get_editable(html);
+	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -225,6 +226,147 @@ char GTKChapDisp::Display(SWModule &imodule)
 	free_font(mf);	
 	g_free(ops);
 }
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/gtkhtml_display.h"
+ *
+ *   
+ *
+ * Description
+ *   display Sword Bible texts a chapter at a time
+ *
+ * Return value
+ *   void
+ */
+
+char GTKTextviewChapDisp::Display(SWModule &imodule)
+{	
+	char tmpBuf[255];
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curPos = 0;
+	gfloat adjVal;
+	GtkTextMark   *mark = NULL;
+	GtkTextIter iter, startiter, enditer;
+	static GtkTextTag *font_tag = NULL;
+	MOD_FONT *mf = get_font(imodule.Name());
+	GtkTextView *textview = GTK_TEXT_VIEW(gtkText);
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
+	GString *str = g_string_new(NULL);
+	const gchar *mark_name = "CurrentVerse";
+	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 1);
+	if(font_tag)
+		gtk_text_tag_table_remove(gtk_text_buffer_get_tag_table (buffer),
+                                font_tag);
+	
+	font_tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
+        g_object_set (G_OBJECT (font_tag),
+		"font", mf->old_font,
+		NULL);
+	
+	//* clear the buffer *
+	gtk_text_buffer_get_start_iter(buffer, &startiter);
+	gtk_text_buffer_get_end_iter(buffer, &enditer);
+	gtk_text_buffer_delete(buffer, &startiter, &enditer);
+	
+	
+	main_set_global_options(ops);
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
+				== curChapter && !imodule.Error()); imodule++) {
+		
+		g_string_printf(str, "%d", key->Verse());
+	        gtk_text_buffer_get_end_iter(buffer, &iter);
+		gtk_text_buffer_insert_with_tags(buffer, 
+				&iter,
+				str->str,
+				str->len,
+				gtk_text_tag_table_lookup (
+				gtk_text_buffer_get_tag_table (buffer),
+						       "verseNumber"),
+				NULL);
+		
+		g_string_printf(str, " %s", (const char *)imodule);
+		
+		if(key->Verse() == curVerse) {
+		        gtk_text_buffer_get_end_iter(buffer, &iter);
+			mark = gtk_text_buffer_create_mark (buffer,
+						mark_name,
+						&iter,
+						TRUE);
+		        gtk_text_buffer_get_end_iter(buffer, &iter);
+			gtk_text_buffer_insert_with_tags (buffer, &iter,
+                                        str->str,
+                                        str->len,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+                                        "fg_currentverse"),
+                                        font_tag,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+					"large"),
+					/*gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+					"verse"),*/			
+                                        NULL);		
+		} else {
+			gtk_text_buffer_get_end_iter(buffer, &iter);			
+			gtk_text_buffer_insert_with_tags (buffer, &iter,
+                                        str->str,
+                                        str->len,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+                                        "fg_verse"),
+                                        font_tag,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+					"large"),
+					/*gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+					"verse"),*/		
+                                        NULL);		
+		} 
+		gtk_text_buffer_get_end_iter(buffer, &iter);
+		if (settings.versestyle) 
+			gtk_text_buffer_insert(buffer, &iter, "\n", strlen("\n"));
+		else
+			gtk_text_buffer_insert(buffer, &iter, " ", strlen(" "));
+		
+	}
+	
+	gtk_text_buffer_get_start_iter(buffer, &startiter);
+	gtk_text_buffer_get_end_iter(buffer, &enditer);
+	gtk_text_buffer_apply_tag_by_name(buffer, 
+			"rtl_text", 
+			&startiter, 
+			&enditer);
+		
+	gtk_text_view_scroll_to_mark(GTK_TEXT_VIEW(textview),
+				mark,
+				FALSE,
+				TRUE,
+				0.0,
+				0.0);
+	gtk_text_buffer_delete_mark(buffer,mark);
+	
+	g_string_free(str, TRUE);
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+	free_font(mf);	
+	g_free(ops);
+}
+
+
 
 char DialogEntryDisp::Display(SWModule &imodule) 
 {
@@ -409,4 +551,121 @@ char DialogChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 	free_font(mf);	
+}
+
+char DialogTextviewChapDisp::Display(SWModule &imodule)
+{	
+	char tmpBuf[255];
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curPos = 0;
+	gfloat adjVal;
+	GtkTextMark   *mark = NULL;
+	GtkTextIter iter, startiter, enditer;
+	static GtkTextTag *font_tag = NULL;
+	MOD_FONT *mf = get_font(imodule.Name());
+	GtkTextView *textview = GTK_TEXT_VIEW(gtkText);
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GtkTextBuffer *buffer = gtk_text_view_get_buffer(textview);
+	GString *str = g_string_new(NULL);
+	const gchar *mark_name = "CurrentVerse";
+	
+	if(!font_tag) {
+		font_tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
+		g_object_set (G_OBJECT (font_tag), "font", mf->old_font,
+					NULL);
+	}
+	
+	//* clear the buffer *
+	gtk_text_buffer_get_start_iter(buffer, &startiter);
+	gtk_text_buffer_get_end_iter(buffer, &enditer);
+	gtk_text_buffer_delete(buffer, &startiter, &enditer);
+	
+	
+	main_set_global_options(ops);
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
+				== curChapter && !imodule.Error()); imodule++) {
+		
+		g_string_printf(str, "%d", key->Verse());
+	        gtk_text_buffer_get_end_iter(buffer, &iter);
+		gtk_text_buffer_insert_with_tags(buffer, 
+				&iter,
+				str->str,
+				str->len,
+				gtk_text_tag_table_lookup (
+				gtk_text_buffer_get_tag_table (buffer),
+						       "verseNumber"),
+				NULL);
+		
+		g_string_printf(str, " %s", (const char *)imodule);
+		
+		if(key->Verse() == curVerse) {
+		        gtk_text_buffer_get_end_iter(buffer, &iter);
+			mark = gtk_text_buffer_create_mark (buffer,
+						mark_name,
+						&iter,
+						TRUE);
+		        gtk_text_buffer_get_end_iter(buffer, &iter);
+			gtk_text_buffer_insert_with_tags (buffer, &iter,
+                                        str->str,
+                                        str->len,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+                                        "fg_currentverse"),
+                                        font_tag,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+					"large"),			
+                                        NULL);		
+		} else {
+			gtk_text_buffer_get_end_iter(buffer, &iter);			
+			gtk_text_buffer_insert_with_tags (buffer, &iter,
+                                        str->str,
+                                        str->len,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+                                        "fg_verse"),
+                                        font_tag,
+                                        gtk_text_tag_table_lookup (
+					gtk_text_buffer_get_tag_table (buffer),
+					"large"),		
+                                        NULL);		
+		} 
+		gtk_text_buffer_get_end_iter(buffer, &iter);
+		if (settings.versestyle) 
+			gtk_text_buffer_insert(buffer, &iter, "\n", strlen("\n"));
+		else
+			gtk_text_buffer_insert(buffer, &iter, " ", strlen(" "));
+		
+	}
+	
+	gtk_text_buffer_get_start_iter(buffer, &startiter);
+	gtk_text_buffer_get_end_iter(buffer, &enditer);
+	gtk_text_buffer_apply_tag_by_name(buffer, 
+			"rtl_text", 
+			&startiter, 
+			&enditer);
+		
+	gtk_text_view_scroll_to_mark(GTK_TEXT_VIEW(textview),
+				mark,
+				FALSE,
+				TRUE,
+				0.0,
+				0.0);
+	gtk_text_buffer_delete_mark(buffer,mark);
+	
+	if(font_tag)
+		gtk_text_tag_table_remove(gtk_text_buffer_get_tag_table (buffer),
+                                font_tag);
+	font_tag = NULL;
+	g_string_free(str, TRUE);
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+	free_font(mf);	
+	g_free(ops);
 }
