@@ -72,6 +72,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 	Mgr = new SWMgr();	//-- create sword mgr
 	font = "Roman";
 	buf = (char *) imodule.Description();
+	
 	if ((sit = Mgr->config->Sections.find(imodule.Name())) !=
 	    Mgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
@@ -79,8 +80,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 			font = (char *) (*eit).second.c_str();
 		}
 	}
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(settings->app, "nbCom")), 0);
+	
 	(const char *) imodule;	/* snap to entry */
 	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
@@ -211,8 +211,6 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	
 	c = 182;  
 	Mgr = new SWMgr();	//-- create sword mgr
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(settings->app, "nbText")), 1);
 
 	if ((sit =
 	     Mgr->config->Sections.find(imodule.Name())) !=
@@ -351,8 +349,6 @@ char InterlinearDisp::Display(SWModule & imodule)
 	static gint row = 1;
 
 	Mgr = new SWMgr();	//-- create sword mgr
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(settings->app, "nbText")), 1);
 
 	if ((sit =
 	     Mgr->config->Sections.find(imodule.Name())) !=

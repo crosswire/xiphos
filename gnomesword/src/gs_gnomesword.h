@@ -37,6 +37,8 @@ extern "C" {
 
 #define MAIN_TEXT_WINDOW 0 
 #define INTERLINEAR_WINDOW 1
+#define COMMENTARY_WINDOW 2
+#define DICTIONARY_WINDOW 3
 	
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -49,7 +51,9 @@ struct _settings {
 		*srhtml,  /* html widget for serch results list in shortcut bar */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu, /* add bookmark menu item */
-		*unlockmod_item, /* unlock module menu item */
+		*unlocktextmod_item, /* unlock module menu item */
+		*unlockcommmod_item, /* unlock module menu item */
+		*unlockdictmod_item, /* unlock module menu item */
 		*htmlcomm; /* html commentary widget */
 	gchar	
 		gs_version[16],
