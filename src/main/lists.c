@@ -23,7 +23,11 @@
 #include <config.h>
 #endif
 
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
 #include <string.h>
 
 #include "main/lists.h"
@@ -105,7 +109,7 @@ void init_lists(void)
 {
 	guint number_mods = 0;
 	char *buf = NULL;
-	NAME_TYPE *nt;
+	NAME_TYPE *nt, innt;
 
 	mod_lists = &mods;
 	/* set glist to null */
@@ -142,7 +146,7 @@ void init_lists(void)
 	}
 
 	backend_set_module_iterators();
-	while ((nt = backend_get_next_module_name()) != NULL) {
+	while ((nt = backend_get_next_module_name(&innt)) != NULL) {
 		switch (nt->type) {
 		case TEXT_TYPE:
 			mods.biblemods =
@@ -168,7 +172,7 @@ void init_lists(void)
 	}
 
 	backend_set_module_iterators();
-	while ((nt = backend_get_next_module_description()) != NULL) {
+	while ((nt = backend_get_next_module_description(&innt)) != NULL) {
 		switch (nt->type) {
 		case TEXT_TYPE:
 			mods.text_descriptions =
