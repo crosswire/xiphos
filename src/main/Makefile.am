@@ -8,9 +8,9 @@ INCLUDES =  \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
-bin_PROGRAMS = gnomesword
+bin_PROGRAMS = gnomesword1
 
-gnomesword_SOURCES =  \
+gnomesword1_SOURCES =  \
     bibletext.c \
     bibletext.h \
     bookmarks.c \
@@ -39,7 +39,7 @@ gnomesword_SOURCES =  \
     sword.h
 
     
-gnomesword_LDADD = \
+gnomesword1_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \

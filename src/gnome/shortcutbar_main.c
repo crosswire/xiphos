@@ -1553,7 +1553,7 @@ void gui_update_shortcut_bar(void)
 	gint count, i, large_icons, current_group, sbtype = 0;
 	GList *tmp;
 	EShortcutBar *bar;
-	gchar *filename, group_name[256], icon_size[10];
+	gchar group_name[256], icon_size[10];
 	GdkPixbuf *icon_pixbuf = NULL;
 	gchar modName[16];
 	
