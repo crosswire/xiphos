@@ -179,7 +179,7 @@ static GtkWidget *gui_create_about_modules(void)
 	GtkWidget *scrolledwindow30;
 	GtkWidget *dialog_action_area28;
 	GtkWidget *hbuttonbox7;
-	GtkWidget *button_ok;
+	GtkWidget *button;
 
 	dialog_about_mods = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
@@ -247,13 +247,13 @@ static GtkWidget *gui_create_about_modules(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox7),
 				  GTK_BUTTONBOX_END);
 
-	button_ok = gtk_button_new_from_stock ("gtk-ok");
+	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE); //"gtk-close");
 	/*gnome_stock_button(GNOME_STOCK_BUTTON_OK);*/
-	gtk_widget_show(button_ok);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button_ok);
-	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
+	gtk_widget_show(button);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
+	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button_ok), "clicked",
+	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_modules_ok), NULL);
 	return dialog_about_mods;
 
