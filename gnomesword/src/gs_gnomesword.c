@@ -79,11 +79,13 @@ extern GList
 	*biblemods,
 	*commentarymods,
 	*dictionarymods,
+	*bookmods,
 	*percommods,	
 	*sbfavoritesmods,
 	*sbbiblemods,
 	*sbdictmods,
 	*sbcommods,
+	*sbbookmods,
 	*options;
 	
 extern gchar 
@@ -125,7 +127,7 @@ initGnomeSword(GtkWidget *app,
 	
 	g_print("%s\n", "Initiating GnomeSword\n");
 	/* set the main window size */
-	gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
+	//gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
 	/* setup shortcut bar */
 	setupSB(settings);
 	settings->settingslist = NULL;
@@ -249,10 +251,12 @@ initGnomeSword(GtkWidget *app,
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
+        g_list_free(bookmods);
 	g_list_free(percommods);	
         g_list_free(sbbiblemods);
         g_list_free(sbcommods);
         g_list_free(sbdictmods);
+        g_list_free(sbbookmods);
        // options list freed on exit
 	
 	if(settings->showsplash){	

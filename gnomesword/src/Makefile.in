@@ -200,34 +200,36 @@ COMMON_SOURCE = \
     gs_html.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
-    sw_viewtext_dlg.cpp \
-    sw_viewtext_dlg.h \
     gs_information_dlg.c \
     gs_information_dlg.h \
     gs_information_sw.cpp \
     gs_information_sw.h \
-    sw_module_options.cpp \
-    sw_module_options.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
-    sw_gnomesword.cpp \
-    sw_gnomesword.h \
-    sw_utility.cpp\
-    sw_utility.h \
-    sw_properties.cpp \
-    sw_properties.h \
     sw_bookmarks.cpp \
     sw_bookmarks.h \
+    sw_gbs.cpp \
+    sw_gbs.h \
+    sw_gnomesword.cpp \
+    sw_gnomesword.h \
+    sw_module_options.cpp \
+    sw_module_options.h \
+    sw_properties.cpp \
+    sw_properties.h \
     sw_search.cpp \
     sw_search.h \
     sw_shortcutbar.cpp \
     sw_shortcutbar.h \
+    sw_utility.cpp\
+    sw_utility.h \
     sw_verselist_sb.cpp \
     sw_verselist_sb.h\
     sw_viewcomm_dlg.cpp \
     sw_viewcomm_dlg.h\
     sw_viewdict_dlg.cpp \
-    sw_viewdict_dlg.h
+    sw_viewdict_dlg.h \
+    sw_viewtext_dlg.cpp \
+    sw_viewtext_dlg.h 
 
 
 SPELLING_SOURCE = \
@@ -283,13 +285,14 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_preferences_dlg.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
 	main.$(OBJEXT) gs_menu.$(OBJEXT) gs_popup_cb.$(OBJEXT) \
 	support.$(OBJEXT) gs_html.$(OBJEXT) gs_viewtext_dlg.$(OBJEXT) \
-	sw_viewtext_dlg.$(OBJEXT) gs_information_dlg.$(OBJEXT) \
-	gs_information_sw.$(OBJEXT) sw_module_options.$(OBJEXT) \
-	gs_shortcutbar.$(OBJEXT) sw_gnomesword.$(OBJEXT) \
-	sw_utility.$(OBJEXT) sw_properties.$(OBJEXT) \
-	sw_bookmarks.$(OBJEXT) sw_search.$(OBJEXT) \
-	sw_shortcutbar.$(OBJEXT) sw_verselist_sb.$(OBJEXT) \
-	sw_viewcomm_dlg.$(OBJEXT) sw_viewdict_dlg.$(OBJEXT)
+	gs_information_dlg.$(OBJEXT) gs_information_sw.$(OBJEXT) \
+	gs_shortcutbar.$(OBJEXT) sw_bookmarks.$(OBJEXT) \
+	sw_gbs.$(OBJEXT) sw_gnomesword.$(OBJEXT) \
+	sw_module_options.$(OBJEXT) sw_properties.$(OBJEXT) \
+	sw_search.$(OBJEXT) sw_shortcutbar.$(OBJEXT) \
+	sw_utility.$(OBJEXT) sw_verselist_sb.$(OBJEXT) \
+	sw_viewcomm_dlg.$(OBJEXT) sw_viewdict_dlg.$(OBJEXT) \
+	sw_viewtext_dlg.$(OBJEXT)
 gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
 gnomesword_DEPENDENCIES =
 gnomesword_LDFLAGS =
@@ -320,7 +323,8 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewtext_dlg.Po $(DEPDIR)/main.Po \
 @AMDEP_TRUE@	$(DEPDIR)/spell.Po $(DEPDIR)/spell_gui.Po \
 @AMDEP_TRUE@	$(DEPDIR)/support.Po $(DEPDIR)/sw_bookmarks.Po \
-@AMDEP_TRUE@	$(DEPDIR)/sw_display.Po $(DEPDIR)/sw_gnomesword.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sw_display.Po $(DEPDIR)/sw_gbs.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sw_gnomesword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_module_options.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_properties.Po $(DEPDIR)/sw_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_shortcutbar.Po $(DEPDIR)/sw_utility.Po \
@@ -434,6 +438,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/support.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_bookmarks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_display.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_gbs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_gnomesword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_module_options.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_properties.Po@am__quote@

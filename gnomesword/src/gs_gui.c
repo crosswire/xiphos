@@ -292,6 +292,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *frame2;
 	GtkWidget *vbox4;
 	GtkWidget *scrolledwindow15;
+  GtkWidget *notebookBooksDicts;
 	GtkWidget *framedict;
 	GtkWidget *label12;
 	GtkWidget *label41;
@@ -310,6 +311,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *btnKeyNext;
 	GtkWidget *list1;
 	GtkWidget *label58;
+	
+  GtkWidget *frame36;
+  GtkWidget *scrolledwindowBooks;
+  GtkWidget *htmlBooks;
+  GtkWidget *label185;
+	
 	GtkWidget *hbox25;
 	gchar *pathname;
 	GdkPixbuf *icon_pixbuf;
@@ -345,6 +352,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			    settings->app);
 	gtk_widget_set_usize(settings->app, 680, 480);
 	GTK_WIDGET_SET_FLAGS(settings->app, GTK_CAN_FOCUS);
+	gtk_window_set_policy (GTK_WINDOW (settings->app), TRUE, TRUE, TRUE);
 
 	dock1 = GNOME_APP(settings->app)->dock;
 	gtk_widget_ref(dock1);
@@ -695,7 +703,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(epaned);
 	gtk_box_pack_start(GTK_BOX(hbox25), epaned, TRUE, TRUE, 0);
-	e_paned_set_position(E_PANED(epaned), 120);
+	//e_paned_set_position(E_PANED(epaned), 120);
 
 	shortcut_model = e_shortcut_model_new();
 
@@ -751,7 +759,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(cbBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
 				  NULL);
-	gtk_widget_set_usize(cbBook, 154, -2);
+//	gtk_widget_set_usize(cbBook, 154, -2);
 
 	/*** get and load books of the Bible ***/
 	cbBook_items = getBibleBooks();
@@ -797,7 +805,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(cbeFreeformLookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
 				  cbeFreeformLookup, NULL, NULL);
-	gtk_widget_set_usize(cbeFreeformLookup, 190, -2);
+//	gtk_widget_set_usize(cbeFreeformLookup, 190, -2);
 	gtk_entry_set_text(GTK_ENTRY(cbeFreeformLookup), _("Romans 8:28"));
 
 	tmp_toolbar_icon =
@@ -860,7 +868,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(vpaned1);
 	gtk_box_pack_end(GTK_BOX(vboxMain), vpaned1, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vpaned1), 1);
-	e_paned_set_position(E_PANED(vpaned1), 236);
+	//e_paned_set_position(E_PANED(vpaned1), 236);
 
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
@@ -875,7 +883,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "hpaned1",
 				 hpaned1,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_set_usize(hpaned1, -2, 380);
+	//gtk_widget_set_usize(hpaned1, -2, 380);
 	gtk_widget_show(hpaned1);
 	gtk_box_pack_start(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
 
@@ -1221,7 +1229,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame2);
 	gtk_box_pack_start(GTK_BOX(vboxInt), frame2, TRUE, TRUE, 0);
-	gtk_widget_set_usize(frame2, -2, 67);
+	//gtk_widget_set_usize(frame2, -2, 67);
 
 	vbox4 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox4);
@@ -1269,17 +1277,27 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 							     (notebook3),
 							     3), label41);
 
+
+  notebookBooksDicts = gtk_notebook_new ();
+  gtk_widget_ref (notebookBooksDicts);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "notebookBooksDicts", notebookBooksDicts,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (notebookBooksDicts);
+  
+  	e_paned_pack2(E_PANED(vpaned1), notebookBooksDicts, TRUE, TRUE);
+
 	hbox8 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox8);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "hbox8", hbox8,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox8);
+//gtk_box_pack_start (GTK_BOX (hbox8), notebookBooksDicts, TRUE, TRUE, 0);
+
+	gtk_container_add(GTK_CONTAINER(notebookBooksDicts), hbox8);
+	//e_paned_pack2(E_PANED(vpaned1), hbox8, TRUE, TRUE);
 
 
-	e_paned_pack2(E_PANED(vpaned1), hbox8, TRUE, TRUE);
-
-
-	gtk_widget_set_usize(hbox8, -2, 115);
+	//gtk_widget_set_usize(hbox8, -2, 115);
 
 	frame10 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame10);
@@ -1288,7 +1306,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame10);
 	gtk_box_pack_start(GTK_BOX(hbox8), frame10, TRUE, TRUE, 0);
-	gtk_widget_set_usize(frame10, -2, 205);
+	//gtk_widget_set_usize(frame10, -2, 205);
 	gtk_container_set_border_width(GTK_CONTAINER(frame10), 2);
 
 	hbox13 = gtk_hbox_new(FALSE, 0);
@@ -1305,7 +1323,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox1);
 	gtk_box_pack_start(GTK_BOX(hbox13), vbox1, TRUE, TRUE, 0);
-	gtk_widget_set_usize(vbox1, 427, -2);
+	//gtk_widget_set_usize(vbox1, 427, -2);
 
 	notebook4 = gtk_notebook_new();
 	gtk_widget_ref(notebook4);
@@ -1345,7 +1363,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox14);
 	gtk_box_pack_start(GTK_BOX(hbox13), vbox14, FALSE, TRUE, 0);
-	gtk_widget_set_usize(vbox14, 208, -2);
+	//gtk_widget_set_usize(vbox14, 208, -2);
 
 	hbox19 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox19);
@@ -1363,7 +1381,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar25);
 	gtk_box_pack_start(GTK_BOX(hbox19), toolbar25, TRUE, TRUE, 0);
-	gtk_widget_set_usize(toolbar25, 132, -2);
+	//gtk_widget_set_usize(toolbar25, 132, -2);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar25),
 				      GTK_RELIEF_NONE);
 
@@ -1424,6 +1442,88 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label58);
 	gtk_clist_set_column_widget(GTK_CLIST(list1), 0, label58);
+
+  label = gtk_label_new (_("Dictionaries/Lexicons"));
+  gtk_widget_ref (label);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "label", label,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebookBooksDicts), 
+	  gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebookBooksDicts), 0), label);
+
+
+  frame36 = gtk_frame_new (NULL);
+  gtk_widget_ref (frame36);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "frame36", frame36,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame36);
+  gtk_container_add (GTK_CONTAINER (notebookBooksDicts), frame36);
+/*
+  hpaned5 = gtk_hpaned_new ();
+  gtk_widget_ref (hpaned5);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "hpaned5", hpaned5,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hpaned5);
+  gtk_container_add (GTK_CONTAINER (frame36), hpaned5);
+  gtk_paned_set_position (GTK_PANED (hpaned5), 0);
+
+  scrolledwindow51 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindow51);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "scrolledwindow51", scrolledwindow51,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindow51);
+  gtk_paned_pack1 (GTK_PANED (hpaned5), scrolledwindow51, FALSE, TRUE);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow51), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  ctreeBooks = gtk_ctree_new (1, 0);
+  gtk_widget_ref (ctreeBooks);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "ctreeBooks", ctreeBooks,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (ctreeBooks);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow51), ctreeBooks);
+  gtk_clist_set_column_width (GTK_CLIST (ctreeBooks), 0, 80);
+  gtk_clist_column_titles_show (GTK_CLIST (ctreeBooks));
+
+  label187 = gtk_label_new (_("label187"));
+  gtk_widget_ref (label187);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "label187", label187,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label187);
+  gtk_clist_set_column_widget (GTK_CLIST (ctreeBooks), 0, label187);
+*/
+  scrolledwindowBooks = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_ref (scrolledwindowBooks);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "scrolledwindowBooks", scrolledwindowBooks,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (scrolledwindowBooks);
+//  gtk_paned_pack2 (GTK_PANED (hpaned5), scrolledwindowBooks, TRUE, TRUE);
+gtk_container_add (GTK_CONTAINER (frame36), scrolledwindowBooks);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindowBooks), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  htmlBooks = gtk_html_new();
+	gtk_widget_ref(htmlBooks);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app),
+				 "htmlBooks", htmlBooks,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlBooks);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowBooks),
+			  htmlBooks);
+	
+	gtk_html_load_empty(GTK_HTML(htmlBooks));
+	gtk_signal_connect(GTK_OBJECT(htmlBooks), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(htmlBooks), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), settings->app);
+
+
+  label185 = gtk_label_new (_("Books"));
+  gtk_widget_ref (label185);
+  gtk_object_set_data_full (GTK_OBJECT (settings->app), "label185", label185,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label185);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebookBooksDicts), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebookBooksDicts), 1), label185);
+
+
 
 	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
 	gtk_widget_ref(appbar1);

@@ -134,7 +134,7 @@
   <default_height>500</default_height>
   <allow_shrink>True</allow_shrink>
   <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
+  <auto_shrink>True</auto_shrink>
   <enable_layout_config>True</enable_layout_config>
 
   <widget>
@@ -2225,8 +2225,13 @@ Revelation
 
 		<widget>
 		  <class>GtkNotebook</class>
-		  <name>notebook8</name>
+		  <name>notebookBooksDicts</name>
 		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>switch_page</name>
+		    <handler>on_notebookBooksDicts_switch_page</handler>
+		    <last_modification_time>Mon, 28 Jan 2002 19:37:40 GMT</last_modification_time>
+		  </signal>
 		  <show_tabs>True</show_tabs>
 		  <show_border>True</show_border>
 		  <tab_pos>GTK_POS_TOP</tab_pos>
@@ -2464,15 +2469,69 @@ Revelation
 		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 
 		    <widget>
-		      <class>GtkScrolledWindow</class>
-		      <name>scrolledwindow46</name>
-		      <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-		      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		      <class>GtkHPaned</class>
+		      <name>hpaned5</name>
+		      <handle_size>10</handle_size>
+		      <gutter_size>6</gutter_size>
+		      <position>0</position>
 
 		      <widget>
-			<class>Placeholder</class>
+			<class>GtkScrolledWindow</class>
+			<name>scrolledwindow51</name>
+			<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+			<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+			<child>
+			  <shrink>True</shrink>
+			  <resize>False</resize>
+			</child>
+
+			<widget>
+			  <class>GtkCTree</class>
+			  <name>ctreeBooks</name>
+			  <can_focus>True</can_focus>
+			  <signal>
+			    <name>tree_select_row</name>
+			    <handler>on_ctreeBooks_tree_select_row</handler>
+			    <last_modification_time>Mon, 28 Jan 2002 19:40:24 GMT</last_modification_time>
+			  </signal>
+			  <columns>1</columns>
+			  <column_widths>80</column_widths>
+			  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+			  <show_titles>True</show_titles>
+			  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+			  <widget>
+			    <class>GtkLabel</class>
+			    <child_name>CTree:title</child_name>
+			    <name>label187</name>
+			    <label>label187</label>
+			    <justify>GTK_JUSTIFY_CENTER</justify>
+			    <wrap>False</wrap>
+			    <xalign>0.5</xalign>
+			    <yalign>0.5</yalign>
+			    <xpad>0</xpad>
+			    <ypad>0</ypad>
+			  </widget>
+			</widget>
+		      </widget>
+
+		      <widget>
+			<class>GtkScrolledWindow</class>
+			<name>scrolledwindowBooks</name>
+			<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+			<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+			<child>
+			  <shrink>True</shrink>
+			  <resize>True</resize>
+			</child>
+
+			<widget>
+			  <class>Placeholder</class>
+			</widget>
 		      </widget>
 		    </widget>
 		  </widget>
