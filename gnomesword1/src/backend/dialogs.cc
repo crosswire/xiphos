@@ -59,10 +59,10 @@ ModuleDialogs::~ModuleDialogs() {
 }
 
 
-void ModuleDialogs::init_SWORD(const char * mod_name) {
+void ModuleDialogs::init_SWORD() {
 	//main_setup_new_displays();
-	ModMap::iterator it = mgr->Modules.find(mod_name);
-	if (it != mgr->Modules.end()) {			
+	ModMap::iterator it;
+	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {	
 		mod = (*it).second;
 		if (!strcmp(mod->Type(), TEXT_MODS)) {
 			mod->Disp(chapDisplay);
@@ -188,6 +188,9 @@ void ModuleDialogs::save_entry(const char * entry) {
 	mod->setEntry((const char *) entry);
 }
 
+void ModuleDialogs::delete_entry(void) {
+	mod->deleteEntry();
+}
 
 int ModuleDialogs::is_module(const char *mod_name) {
 	SWMgr *tmp_mgr = new SWMgr();
@@ -265,23 +268,25 @@ char *ModuleDialogs::get_entry_attribute(const char *level1, const char *level2,
 
 
 int ModuleDialogs::set_module(const char *module_name) {
-	mod = mgr->Modules[module_name];
-	if (mod) 
-		return 1;
-	else 
-		return 0;
-	
+	ModMap::iterator it = mgr->Modules.find(module_name);
+	if (it != mgr->Modules.end()) {
+		mod = (*it).second;
+		if (mod) 
+			return 1;
+	}
+	return 0;	
 }
 
 int ModuleDialogs::set_module_key(const char *module_name, const char *key) {
-	mod = mgr->Modules[module_name];
-	if (mod) {
-		mod->setKey(key);
-		return 1;
+	ModMap::iterator it = mgr->Modules.find(module_name);
+	if (it != mgr->Modules.end()) {	
+		mod = (*it).second;
+		if (mod) {
+			mod->setKey(key);
+			return 1;
+		}
 	}
-	else 
-		return 0;
-	
+	return 0;	
 }
 
 
