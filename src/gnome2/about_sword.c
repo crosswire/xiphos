@@ -181,7 +181,7 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox6),
 				  GTK_BUTTONBOX_END);
 
-	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE); //"gtk-ok");
+	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox6), button);
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);

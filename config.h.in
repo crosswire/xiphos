@@ -124,6 +124,9 @@
 /* Define if you want to use gnome-spell */
 #undef USE_GNOME_SPELL
 
+/* Define if you want to use pspell */
+#undef USE_PSPELL
+
 /* Define if you want to spell checking */
 #undef USE_SPELL
 

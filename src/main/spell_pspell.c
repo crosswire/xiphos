@@ -78,7 +78,8 @@ void check_for_error(void)
  *   void
  */
 
-void store_replacement(const gchar * missed_word, const gchar * new_word)
+void store_replacement(const gchar * missed_word, const gchar * new_word, 
+						char * language)
 {
 	pspell_manager_store_replacement(spell_checker,  
                                 missed_word, -1, 
@@ -126,7 +127,7 @@ int add_to_session(const gchar * word)
  *   int
  */
 
-int add_to_personal(const gchar * word)
+int add_to_personal(const gchar * word, char * language)
 {
 	return pspell_manager_add_to_personal(spell_checker,
 						word, -1);	

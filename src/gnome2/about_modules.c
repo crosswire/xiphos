@@ -247,8 +247,7 @@ static GtkWidget *gui_create_about_modules(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox7),
 				  GTK_BUTTONBOX_END);
 
-	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE); //"gtk-close");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_OK);*/
+	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
 	gtk_widget_show(button);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button);
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
