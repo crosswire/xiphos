@@ -48,6 +48,7 @@
 #include "gui/dialog.h"
 #include "gui/hints.h"
 #include "gui/widgets.h"
+#include "gui/sidebar.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -280,6 +281,16 @@ void shutdown_frontend(void)
 		g_object_unref(pixbufs->pixbuf_opened);	
 	if(pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
+	
+	/* free verse list */
+	if(list_of_verses) {
+		while(list_of_verses) {
+			g_free(list_of_verses->data);
+			list_of_verses = g_list_next(list_of_verses);
+		}
+		g_list_free(list_of_verses);
+	}
+	list_of_verses = NULL;
 	
 	gui_save_bookmarks_treeview();
 	/* if study pad file has changed since last save */

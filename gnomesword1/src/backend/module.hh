@@ -34,6 +34,9 @@ struct _name_type {
 
 
 char *backend_get_preverse_header(char * module_name, char * key, int pvHeading);
+const char *backend_get_footnote_type(char *module_name, char *key, char *note);
+char *backend_get_crossref(char *module_name, char *key, char *note);
+
 char *backend_get_footnote_body(char *module_name, 
 					char *key, char *note);
 /*char *backend_get_footnote_body_new(char *module_name, 

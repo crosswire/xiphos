@@ -30,7 +30,8 @@ extern "C" {
 
 const char *get_next_result_key(void);
 int set_range(char * list);
-int start_parse_verse_list(const char * list);
+int start_parse_verse_list(const char * list, char * current_key);
+int start_parse_range_list(const char * list);
 void set_results_position(char pos);
 char *get_next_verse_list_element(int count);
 int clear_scope(void);	
