@@ -98,6 +98,7 @@ extern GtkWidget *htmlComments;
 extern GtkWidget *htmltext3;
 //gboolean firstbackclick = TRUE;
 extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved  */
+extern GList *cbBook_items;
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
@@ -110,15 +111,16 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	GtkLabel *label1;
 	GtkWidget *notebook;
 	
+	
 /* set color for current verse */
   	myGreen.red =  settings->currentverse_red;
 	myGreen.green = settings->currentverse_green;
 	myGreen.blue =  settings->currentverse_blue;		
-/* add modules to menus -- menu.c */
+/* add modules to menus -- gs_menu.c */
 	addmodstomenus(app, settings, biblemods,
 			commentarymods, dictionarymods,
 			percommods);
-/* create popup menus -- menu.c */
+/* create popup menus -- gs_menu.c */
 	createpopupmenus(app, settings, biblemods,
 			commentarymods, dictionarymods,
 			percommods);
@@ -236,7 +238,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         setupSidebar(app);
         fillSBtoolbars(app,biblemods , commentarymods, dictionarymods);
 #endif /* USE_SHORTCUTBAR */
-
+	gtk_combo_set_popdown_strings(GTK_COMBO(lookup_widget(app,"cbBook")), cbBook_items);
 /* free module lists */
         g_list_free(biblemods);
         g_list_free(commentarymods);

@@ -29,7 +29,6 @@
 #include "callback.h"
 #include "gs_ui.h"
 #include "gs_file.h"
-#include "gs_html.h"
 
 extern SETTINGS *settings;
 SETTINGS myset;	
@@ -63,7 +62,6 @@ main (int argc, char *argv[])
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	*/
   	mainwindow = create_mainwindow();
-  	add_gtkhtml_widgets(mainwindow);
   	setDiretory();
   	if(newconfigs)
   	{
