@@ -1,3 +1,13 @@
+2003-11-24  Andy Piper <andyp@users.sf.net>
+
+	* docs are conventionally installed to /usr/share/doc and not to
+	  /usr/doc so we'll fix configure.in and Makefile.am to do that. This
+	  means that a 'make uninstall' won't kill the /usr/doc directory
+	  (which probably only contains a gnomesword2 directory as /usr/doc
+	  is not usually present on e.g. RedHat/Fedora systems, probably
+          others) so it will need to be removed manually to avoid cruftage.
+
+
 2003-11-23  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev14

@@ -122,7 +122,7 @@ fi
 
 dnl Set PACKAGE DATA & DOC DIR
 packagedatadir=share/${PACKAGE}
-packagedocdir=doc/${PACKAGE}
+packagedocdir=share/doc/${PACKAGE}
 
 dnl Set PACKAGE DIRs in config.h.
 packagepixmapsdir=share/pixmaps/${PACKAGE}
