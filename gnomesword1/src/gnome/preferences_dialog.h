@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * lists.h glists of module names and descriptions, bible books etc.
+ * preferences_dialog.h - get user preferences
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,36 +19,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
-
-#ifndef _LISTS_H
-#define _LISTS_H
+#ifndef __PREFERENCES_DIALOG_H_
+#define __PREFERENCES_DIALOG_H_
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
-       
-/* list types */
-#define TEXT_LIST 0 
-#define TEXT_DESC_LIST 1 
-#define COMM_LIST 2
-#define COMM_DESC_LIST 3
-#define DICT_LIST 4
-#define DICT_DESC_LIST 5
-#define GBS_LIST 6
-#define GBS_DESC_LIST 7
-#define BOOKS_LIST 8
-#define OPTIONS_LIST 9
-#define PERCOMM_LIST 10
-#define DEVOTION_LIST 11
+#include "settings.h"
 
-GList * get_list(gint type);
-void init_lists(void);
-void shutdown_list(void);
-
+void gui_setup_preferences_dialog(SETTINGS *s);
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* _LISTS_H */
+#endif /* __PREFERENCES_DIALOG_H_ */
+

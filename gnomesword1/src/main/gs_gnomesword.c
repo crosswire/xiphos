@@ -63,6 +63,7 @@
 #include "percomm_.h"
 #include "gbs_.h"
 #include "dictlex_.h"
+#include "properties.h"
  
  
 /*****************************************************************************
@@ -916,4 +917,23 @@ int get_verse_from_key(char *key)
 	return backend_get_verse_from_key(key);
 }
 
+/******************************************************************************
+ * Name
+ *  save_properties
+ *
+ * Synopsis
+ *   #include "gs_gnomesword.h"
+ *
+ *   void save_properties(gboolean use_default)	
+ *
+ * Description
+ *   save properties stored in SETTINGS structure
+ *
+ * Return value
+ *   void
+ */
 
+void save_properties(gboolean use_default)
+{
+	backend_save_properties(&settings, use_default);
+}
