@@ -219,5 +219,5 @@ void shutdown_gnomesword(void)
 	if(settings.havepercomm)
 		gui_shutdown_percomm();
 	
-	g_print("\GnomeSword is shutdown\n");
+	g_print("\nGnomeSword is shutdown\n");
 }

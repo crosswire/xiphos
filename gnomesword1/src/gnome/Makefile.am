@@ -26,7 +26,6 @@ gnomesword_1_0_SOURCES =  \
     editor_replace.c \
     editor_search.c \
     editor_spell.c \
-    editor_toolbar.c \
     fileselection.c \
     find_dialog.c \
     font_dialog.c \
@@ -51,7 +50,9 @@ gnomesword_1_0_SOURCES =  \
     shortcutbar_viewer.c \
     splash.c \
     studypad.c \
+    toolbar_edit.c \
     toolbar_nav.c \
+    toolbar_style.c \
     utilities.c
     
 gnomesword_1_0_LDADD = \

@@ -40,7 +40,7 @@
 #include <fcntl.h>
 
 #include "gui/_editor.h"
-#include "gui/editor_toolbar.h"
+#include "gui/toolbar_style.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
 #include "gui/editor_search.h"
@@ -580,13 +580,13 @@ static void on_link_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */ 
- 
+ /*
 static void on_autoscroll_activate(GtkMenuItem * menuitem,
 				       GSHTMLEditorControlData * ecd)
 {
 	settings.notefollow = GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
-
+*/
 /******************************************************************************
  * Name
  *  on_editnote_activate
@@ -612,13 +612,15 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
-			gtk_widget_show(ecd->frame_toolbar);
-			//gtk_widget_show(ecd->handlebox_toolbar);
+			if(ecd->stylebar) 
+				gtk_widget_show(ecd->toolbar_style);
+			if(ecd->editbar) 
+				gtk_widget_show(ecd->toolbar_edit);
 		}
 
 		else {
-			//gtk_widget_hide(ecd->handlebox_toolbar);
-			gtk_widget_hide(ecd->frame_toolbar);
+			gtk_widget_hide(ecd->toolbar_style);
+			gtk_widget_hide(ecd->toolbar_edit);
 		}
 	}
 
@@ -627,11 +629,13 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
-			gtk_widget_show(ecd->frame_toolbar);
+			gtk_widget_show(ecd->toolbar_style);
+			gtk_widget_show(ecd->toolbar_edit);
 		}
 
 		else {
-			gtk_widget_show(ecd->frame_toolbar);
+			gtk_widget_hide(ecd->toolbar_style);
+			gtk_widget_hide(ecd->toolbar_edit);
 		}
 	}
 	gtk_html_set_editable(GTK_HTML(ecd->html),
@@ -665,6 +669,70 @@ static void show_tabs_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  
+ *
+ * Synopsis
+ *   #include "editor_menu.h"
+ *
+ *   void (GtkMenuItem * menuitem,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    show/hide 
+ *
+ * Return value
+ *   void
+ */ 
+ 
+static void edit_bar_activate(GtkMenuItem * menuitem,
+					GSHTMLEditorControlData * ecd)
+{
+	ecd->editbar = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(ecd->studypad)
+		settings.show_edit_bar_sp = ecd->editbar;
+	else
+		settings.show_edit_bar = ecd->editbar;
+	if(ecd->editbar)
+		gtk_widget_show(ecd->toolbar_edit);
+	else
+		gtk_widget_hide(ecd->toolbar_edit);
+	
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "editor_menu.h"
+ *
+ *   void (GtkMenuItem * menuitem,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    show/hide 
+ *
+ * Return value
+ *   void
+ */ 
+ 
+static void style_bar_activate(GtkMenuItem * menuitem,
+					GSHTMLEditorControlData * ecd)
+{
+	ecd->stylebar = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(ecd->studypad)
+		settings.show_style_bar_sp = ecd->stylebar;
+	else
+		settings.show_style_bar = ecd->stylebar;
+	if(ecd->stylebar)
+		gtk_widget_show(ecd->toolbar_style);
+	else
+		gtk_widget_hide(ecd->toolbar_style);
+	
+}
+
+/******************************************************************************
+ * Name
  *  gui_create_editor_popup
  *
  * Synopsis
@@ -684,12 +752,13 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	GtkWidget *pmEditor;
 	GtkAccelGroup *pmEditor_accels;
 	guint tmp_key;
-	GtkWidget *autoscroll = NULL;
+	//GtkWidget *autoscroll = NULL;
 	GtkWidget *separator;
-	GtkWidget *view;
-	GtkWidget *view_menu;
-	GtkAccelGroup *view_menu_accels;
+	GtkWidget *toolbars;
+	GtkWidget *toolbars_menu;
+	GtkAccelGroup *toolbars_menu_accels;
 	GtkWidget *style_toolbar;
+	GtkWidget *edit_toolbar;
 	GtkWidget *file_menu;
 	GtkAccelGroup *file_menu_accels;
 	GtkWidget *save_note = NULL;
@@ -720,19 +789,55 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	pmEditor_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmEditor));
 
+	toolbars = gtk_menu_item_new_with_label("");
+	tmp_key =
+	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(toolbars)->child),
+				  _("Toolbars"));
+	gtk_widget_add_accelerator(toolbars, "activate_item",
+				   pmEditor_accels, tmp_key, 0, 0);
+	gtk_widget_ref(toolbars);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "toolbars",
+				 toolbars,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(toolbars);
+	gtk_container_add(GTK_CONTAINER(pmEditor), toolbars);	
+	
+	toolbars_menu = gtk_menu_new();
+	gtk_widget_ref(toolbars_menu);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "toolbars_menu",
+				 toolbars_menu,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(toolbars), toolbars_menu);
+	toolbars_menu_accels =
+	    gtk_menu_ensure_uline_accel_group(GTK_MENU(toolbars_menu));
+	
+	style_toolbar =
+	    gtk_check_menu_item_new_with_label(_("Style Bar"));
+	gtk_widget_ref(style_toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+				 "style_toolbar", style_toolbar,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(style_toolbar);
+	gtk_container_add(GTK_CONTAINER(toolbars_menu), style_toolbar);
+	
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				(style_toolbar), ecd->stylebar);
+	
+	edit_toolbar =
+	    gtk_check_menu_item_new_with_label(_("Edit Bar"));
+	gtk_widget_ref(edit_toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+				 "edit_toolbar", edit_toolbar,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(edit_toolbar);
+	gtk_container_add(GTK_CONTAINER(toolbars_menu), edit_toolbar);
+ 
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				(edit_toolbar), ecd->editbar);	
+	
 	if (ecd->personal_comments) {
-		autoscroll =
-		    gtk_check_menu_item_new_with_label("Auto Scroll");
-		gtk_widget_ref(autoscroll);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "autoscroll", autoscroll,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(autoscroll);
-		gtk_container_add(GTK_CONTAINER(pmEditor), autoscroll);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-					       (autoscroll), TRUE);
-
 		ecd->editnote =
 		    gtk_check_menu_item_new_with_label("Edit Note");
 		gtk_widget_ref(ecd->editnote);
@@ -811,39 +916,8 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	
 	if (ecd->gbs)
 		gtk_widget_set_sensitive(GTK_WIDGET(ecd->file), FALSE);
-
-	view = gtk_menu_item_new_with_label("");
-	tmp_key =
-	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(view)->child),
-				  _("View"));
-	gtk_widget_add_accelerator(view, "activate_item",
-				   pmEditor_accels, tmp_key, 0, 0);
-	gtk_widget_ref(view);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "view",
-				 view,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(view);
-	gtk_container_add(GTK_CONTAINER(pmEditor), view);	
 	
-	view_menu = gtk_menu_new();
-	gtk_widget_ref(view_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "view_menu",
-				 view_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view), view_menu);
-	view_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_menu));
 	
-	style_toolbar =
-	    gtk_check_menu_item_new_with_label(_("Style Toolbar"));
-	gtk_widget_ref(style_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-				 "style_toolbar", style_toolbar,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(style_toolbar);
-	gtk_container_add(GTK_CONTAINER(view_menu), style_toolbar);
- 
 	ecd->file = gtk_menu_item_new_with_label("");
 	tmp_key =
 	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(ecd->file)->child),
@@ -1079,9 +1153,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_deletenote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(autoscroll), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_autoscroll_activate), ecd);
 		gtk_signal_connect(GTK_OBJECT(ecd->editnote),
 				   "activate",
 				   GTK_SIGNAL_FUNC
@@ -1131,6 +1202,15 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	gtk_signal_connect(GTK_OBJECT(spell), "activate",
 			   GTK_SIGNAL_FUNC(spell_check_cb), ecd);
 #endif	/* USE_SPELL */
+	
+	gtk_signal_connect(GTK_OBJECT(style_toolbar),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (style_bar_activate), ecd);
+	gtk_signal_connect(GTK_OBJECT(edit_toolbar),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (edit_bar_activate), ecd);
 	
 	gtk_signal_connect(GTK_OBJECT(undo), "activate",
 			   GTK_SIGNAL_FUNC(on_undo_activate), ecd);

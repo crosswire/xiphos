@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * editor_toolbar.c - style toolbar for editors
+ * toolbar_style.c - style toolbar for editors
  *               
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -30,7 +30,7 @@
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-#include "gui/editor_toolbar.h"
+#include "gui/toolbar_style.h"
 #include "gui/gnomesword.h"
 
 #include "main/settings.h"
@@ -1130,7 +1130,7 @@ void toolbar_update_format (GSHTMLEditorControlData *cd)
  *   GtkWidget *
  */
 
-GtkWidget *toolbar_style (GSHTMLEditorControlData *cd)
+GtkWidget *gui_toolbar_style (GSHTMLEditorControlData *cd)
 {
 	g_return_val_if_fail (cd->html != NULL, NULL);
 	g_return_val_if_fail (GTK_IS_HTML (cd->html), NULL);
