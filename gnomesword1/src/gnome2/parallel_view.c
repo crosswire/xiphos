@@ -201,7 +201,76 @@ static void on_undockInt_activate(GtkMenuItem * menuitem)
 	}
 }
 
+/******************************************************************************
+ * Name
+ *   gui_change_int1_mod
+ *
+ * Synopsis
+ *   #include "gui/parallel.h
+ *
+ *   void gui_changeint1_mod(gchar * mod_name)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
 
+void gui_change_parallel_module(GSParallel parallel, gchar * mod_name)
+{
+	if(!mod_name) 
+		return;
+	switch(parallel) {
+	case PARALLEL1:	
+		xml_set_value("GnomeSword", "modules", "int1",
+			      mod_name);
+		settings.parallel1Module =
+		    xml_get_value("modules", "int1");
+		parallel1 =
+		    check_for_module(settings.parallel1Module);
+		break;
+	case PARALLEL2:	
+		xml_set_value("GnomeSword", "modules", "int2",
+			      mod_name);
+		settings.parallel2Module =
+		    xml_get_value("modules", "int2");
+		parallel2 =
+		    check_for_module(settings.parallel2Module);
+		break;
+	case PARALLEL3:	
+		xml_set_value("GnomeSword", "modules", "int3",
+			      mod_name);
+		settings.parallel3Module =
+		    xml_get_value("modules", "int3");
+		parallel3 =
+		    check_for_module(settings.parallel3Module);
+		break;
+	case PARALLEL4:	
+		xml_set_value("GnomeSword", "modules", "int4",
+			      mod_name);
+		settings.parallel4Module =
+		    xml_get_value("modules", "int4");
+		parallel4 =
+		    check_for_module(settings.parallel4Module);
+		break;
+	case PARALLEL5:	
+		xml_set_value("GnomeSword", "modules", "int5",
+			      mod_name);
+		settings.parallel5Module =
+		    xml_get_value("modules", "int5");
+		parallel5 =
+		    check_for_module(settings.parallel5Module);
+		break;
+	default:
+		return;
+		break;
+	}
+	if (settings.dockedInt)
+		gui_update_parallel_page();
+	else
+		gui_update_parallel_page_detached();
+}
 
 /******************************************************************************
  * Name

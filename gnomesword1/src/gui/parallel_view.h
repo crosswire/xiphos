@@ -27,7 +27,19 @@ extern "C" {
 #endif
 
 #include "main/settings.h"
+
+typedef enum
+{
+	PARALLEL1,
+	PARALLEL2,
+	PARALLEL3,
+	PARALLEL4,
+	PARALLEL5
 	
+}GSParallel;
+
+
+void gui_change_parallel_module(GSParallel parallel, gchar * mod_name);	
 void gui_check_parallel_modules(void);	
 void gui_set_parallel_options_at_start(void);
 void gui_update_parallel_page(void);
