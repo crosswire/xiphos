@@ -21,6 +21,8 @@ COMMON_SOURCE =  \
     commentary.h \
     dictlex.c \
     dictlex.h \
+    display_info.c \
+    display_info.h \
     find_dlg_defs.h \
     gbs.c \
     gbs.h \
@@ -36,8 +38,6 @@ COMMON_SOURCE =  \
     gs_html.h \
     gs_info_box.c \
     gs_info_box.h\
-    gs_information_dlg.c \
-    gs_information_dlg.h \
     gs_interlinear.c \
     gs_interlinear.h \
     gs_menu.c \

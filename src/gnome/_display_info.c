@@ -1,37 +1,34 @@
-
 /*
-    GnomeSword Bible Study Tool
-    *  gs_information_dlg.h - About dialogs for GnomeSword
-    *
-    *  Copyright (C) 2000,2001,2002 GnomeSword Developer Team
-    *
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */ 
-
-/* 
- * dialog used to display information (strongs etc) from view(text, comm, dict) dialogs
+ * GnomeSword Bible Study Tool
+ * _display_info.c - 
  *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include "gs_information_dlg.h"
+
 #include "display_info.h"
+
+#include "_display_info.h"
 
 gboolean gsI_isrunning = FALSE;
 
@@ -39,21 +36,13 @@ static void on_dlgInformation_destroy(GtkObject * object,
                                         gpointer user_data)
 {
 	gsI_isrunning = FALSE;
-	backend_dispaly_info_shutdown(); /* backend/display_info.cpp */
+	dispaly_info_shutdown(); 
 }
 
 static void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
-
-
-void loadmodandkey(gchar * modName, gchar * newkey)
-{
-        /* backend/display_info.cpp */
-	backend_dispaly_info_load_modudle(modName, newkey);
-}
-
 
 GtkWidget *create_dlgInformation(void)
 {
@@ -123,7 +112,7 @@ GtkWidget *create_dlgInformation(void)
 			   GTK_SIGNAL_FUNC(on_btnInfoOK_clicked), NULL);
 	gsI_isrunning = TRUE;
         
-	backend_display_info_setup(text); /* backend/display_info.cpp */
+	display_info_setup(text);
         
 	return dlgInformation;
 }

@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gal/e-paned/e-hpaned.h>
 
 /* frontend */
 #include "toolbar_nav.h"
@@ -42,21 +41,23 @@ extern gboolean ApplyChange;
 
 /******************************************************************************
  * Name
- *   
+ *   on_cbeBook_changed
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   	
+ *   void on_cbeBook_changed(GtkEditable * editable, 
+ *						gpointer user_data)	
  *
  * Description
- *    
+ *   change book 
  *
  * Return value
- *   
+ *   void
  */ 
 
-static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
+static void on_cbeBook_changed(GtkEditable * editable, 
+						gpointer user_data)
 {
 	if (ApplyChange) {
 		gchar buf[256];
@@ -69,24 +70,23 @@ static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   
+ *   on_spbChapter_button_release_event
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   	
+ *   gboolean on_spbChapter_button_release_event(GtkWidget * widget,
+ *			GdkEventButton * event,   gpointer user_data)	
  *
  * Description
- *    
+ *    change chapter 
  *
  * Return value
- *   
+ *   gboolean
  */ 
 
-static gboolean
-on_spbChapter_button_release_event(GtkWidget * widget,
-				   GdkEventButton * event,
-				   gpointer user_data)
+static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
+			GdkEventButton * event,   gpointer user_data)
 {
 	if (ApplyChange) {
 		gchar *bookname;
@@ -112,24 +112,23 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   
+ *   on_spbVerse_button_release_event
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   	
+ *   gboolean on_spbVerse_button_release_event(GtkWidget * widget, 
+ *			GdkEventButton * event,  gpointer user_data)	
  *
  * Description
- *    
+ *    change verse
  *
  * Return value
- *   
+ *   gboolean
  */ 
 
-static gboolean
-on_spbVerse_button_release_event(GtkWidget * widget,
-				 GdkEventButton * event,
-				 gpointer user_data)
+static gboolean on_spbVerse_button_release_event(GtkWidget * widget, 
+			GdkEventButton * event,  gpointer user_data)
 {
 	if (ApplyChange) {
 		gchar *bookname, buf[256];
@@ -154,18 +153,18 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   
+ *   on_btnLookup_clicked
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   	
+ *   void on_btnLookup_clicked(GtkButton * button, gpointer user_data)	
  *
  * Description
- *    
+ *    go to verse in free form entry
  *
  * Return value
- *   
+ *   void
  */ 
 
 static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
@@ -178,24 +177,23 @@ static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   
+ *   on_cbeFreeformLookup_key_press_event
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   	
+ *   gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
+ *				GdkEventKey * event, gpointer user_data)	
  *
  * Description
- *    
+ *   go to verse in free form entry if user hit <enter>
  *
  * Return value
- *   
+ *   gboolean
  */ 
 
-static gboolean
-on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
-				     GdkEventKey * event,
-				     gpointer user_data)
+static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
+				GdkEventKey * event, gpointer user_data)
 {
 	gchar *buf;
 
@@ -210,18 +208,18 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   
+ *   on_btnBack_clicked
  *
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   	
+ *   void on_btnBack_clicked(GtkButton * button, gpointer user_data)
  *
  * Description
- *    
+ *    move backward through history list
  *
  * Return value
- *   
+ *   void
  */ 
 
 static void on_btnBack_clicked(GtkButton * button, gpointer user_data)

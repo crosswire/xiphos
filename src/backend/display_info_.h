@@ -1,7 +1,6 @@
-
 /*
     GnomeSword Bible Study Tool
-    *  display_info.h - About dialogs for GnomeSword
+    *  display_info_.h - display for view dialogs
     *
     *  Copyright (C) 2000,2001,2002 GnomeSword Developer Team
     *
@@ -20,8 +19,8 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __GS_INFORMATION_SW_H__
-#define __GS_INFORMATION_SW_H__
+#ifndef __DISPLAY_INFO__H__
+#define __DISPLAY_INFO__H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,5 +37,5 @@ void backend_dispaly_info_change_key(gchar *newkey);
 }
 #endif
 
-#endif /* __GS_INFORMATION_SW_H__ */
+#endif /* __DISPLAY_INFO__H__ */
 
