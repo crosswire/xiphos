@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * dictlex_dialog.h - dialog for displaying a dictlex module
+ * html.h - GtkHtml gui stuff
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -17,28 +17,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */ 
-
-#ifndef __DICTLEX_DIALOG_H_
-#define __DICTLEX_DIALOG_H_
+ */
+ 
+#ifndef __HTML_H_
+#define __HTML_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "gui/dictlex.h"
+#include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 	
-typedef struct _dl_dialog DL_DIALOG;
-struct  _dl_dialog{
-	GtkWidget *dialog;	
-	GtkWidget *btn_close;
-	DL_DATA *d;
-};
-
-void gui_open_dictlex_dialog(gchar * mod_name);
-void initSD(gchar * modName);
-void gui_setup_dictlex_dialog(GList *mods);
-void gui_shutdown_dictlex_dialog(void) ;
+void gui_url(GtkHTML * html, const gchar * url, gpointer data);
+void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data);
+void gui_begin_html(GtkWidget * html, gboolean utf8);
+void gui_end_html(GtkWidget * html);
+void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt);
+void gui_copy_html(GtkWidget *html_widget);
+void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data);
+gchar *gui_get_word_or_selection(GtkWidget *html_widget, gboolean word);
+gchar *gui_button_press_lookup(GtkWidget *html_widget);
+void gui_html_print(GtkWidget * htmlwidget);
 
 #ifdef __cplusplus
 }

@@ -1,30 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_html.c 
-    * -------------------
-    * Thu Feb 8 2001
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
-  */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * html.c - GtkHtml gui stuff
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -57,32 +50,40 @@
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
 
+#include "gui/html.h"
 #include "gui/_editor.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/interlinear.h"
 #include "gui/utilities.h"
 
-#include "main/gs_html.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
-GtkHTMLStream *htmlstream;
-GtkHTMLStreamStatus status1;
+static GtkHTMLStream *htmlstream;
+static GtkHTMLStreamStatus status1;
 
-GtkWidget *htmlCommentaries;
-GtkWidget *htmlDict;
-GtkWidget *textDict;
-GtkWidget *htmlComments;
-GtkWidget *usehtml;
-
-extern GtkWidget *textDict;
 gboolean in_url;
 
-/*
+
+
+/******************************************************************************
+ * Name
+ *   gui_url
  *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_url(GtkHTML * html, const gchar * url, gpointer data)
+ *
+ * Description
+ *   called when mouse moves over an url (link)
+ *
+ * Return value
+ *   void
  */
-void on_url(GtkHTML * html, const gchar * url, gpointer data)
+ 
+void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[255];
 
@@ -123,10 +124,24 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 	}
 }
 
-/*
- *link in commentary module clicked
+
+/******************************************************************************
+ * Name
+ *   gui_link_clicked
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+ *
+ * Description
+ *   html link clicked
+ *
+ * Return value
+ *   void
  */
-void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+
+void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
 	gchar newmod[80], newref[80];
@@ -139,10 +154,6 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	}
 	/***  verse numbers in Bible Text window  ***/
 	else if (*url == '*') {
-		++url;
-		while (*url != ']') {
-			++url;
-		}
 		++url;
 		buf = g_strdup(url);
 		change_verse(buf);
@@ -394,11 +405,24 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 }
 
 
-/***************************************************************************************************
- *copy menu item clicked in gbs
- *html_widget - (GtkHTML widget) to copy from
- ***************************************************************************************************/
-void copyGS_HTML(GtkWidget * html_widget)
+/******************************************************************************
+ * Name
+ *   gui_copy_html
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_copy_html(GtkWidget * html_widget)
+ *
+ * Description
+ *   copy menu item clicked in gbs
+ *   html_widget - (GtkHTML widget) to copy from
+ *
+ * Return value
+ *   
+ */
+
+void gui_copy_html(GtkWidget * html_widget)
 {
 	GtkHTML *html;
 
@@ -406,11 +430,25 @@ void copyGS_HTML(GtkWidget * html_widget)
 	gtk_html_copy(html);
 }
 
-/***************************************************************************************************
- *copy menu item clicked in any html window
- *user_data - window (GtkHTML widget) to copy from
- ***************************************************************************************************/
-void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
+
+/******************************************************************************
+ * Name
+ *   gui_copyhtml_activate
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *   copy menu item clicked in any html window
+ *   user_data - window (GtkHTML widget) to copy from   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkHTML *html;
 
@@ -443,10 +481,24 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gtk_html_copy(html);
 }
 
+
 /******************************************************************************
- * get word or selection from html widget
+ * Name
+ *   gui_get_word_or_selection
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
+ *
+ * Description
+ *   get word or selection from html widget
+ *
+ * Return value
+ *   gchar *
  */
-gchar *get_word_or_selection(GtkWidget * html_widget, gboolean word)
+
+gchar *gui_get_word_or_selection(GtkWidget * html_widget, gboolean word)
 {
 	gchar *key = NULL;
 	GtkHTML *html;
@@ -464,10 +516,24 @@ gchar *get_word_or_selection(GtkWidget * html_widget, gboolean word)
 	return key;
 }
 
-/***************************************************************************************************
- *lookup word in dict/lex module
- ***************************************************************************************************/
-gchar *buttonpresslookupGS_HTML(GtkWidget * html_widget)
+
+/******************************************************************************
+ * Name
+ *   gui_button_press_lookup
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   gchar *gui_button_press_lookup(GtkWidget * html_widget)
+ *
+ * Description
+ *   lookup word in dict/lex module
+ *
+ * Return value
+ *   gchar *
+ */
+
+gchar *gui_button_press_lookup(GtkWidget * html_widget)
 {
 	gchar *key = NULL;
 	GtkHTML *html;
@@ -487,96 +553,24 @@ gchar *buttonpresslookupGS_HTML(GtkWidget * html_widget)
 	return key;
 }
 
-/***************************************************************************************************
- *lookup word in dict/lex module
- ***************************************************************************************************/
-void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
-{
-	gchar *key = NULL, modName[16];
 
-	if (strcmp(modDesc, "current")) {
-				    /***  if menu choice was not 'use current dict' ***/
-		memset(modName, 0, 16);
-		module_name_from_description(modName, modDesc);
-	}
+/******************************************************************************
+ * Name
+ *   gui_begin_html
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_begin_html(GtkWidget * html_widget, gboolean isutf8)
+ *
+ * Description
+ *   start loading html widget
+ *
+ * Return value
+ *   void
+ */
 
-	else {
-		sprintf(modName, "%s", settings.DictWindowModule);
-	}
-
-	key = get_word_or_selection(usehtml, TRUE);
-					/***  usehtml is set when a button is pressed
-						in a html window  ***/
-	if (key) {
-		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modName, key);
-		if (settings.inDictpane)
-			change_module_and_key(modName, key);
-		g_free(key);
-	}
-
-}
-
-/***************************************************************************************************
- *lookup selection in current dict/lex module
- ***************************************************************************************************/
-void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
-				       gchar * modDesc)
-{
-	gchar *key = NULL, modName[16];
-
-	if (strcmp(modDesc, "current")) {
-				    /***  if menu choice was not 'use current dict' ***/
-		memset(modName, 0, 16);
-		module_name_from_description(modName, modDesc);
-	}
-
-	else {
-		sprintf(modName, "%s", settings.DictWindowModule);
-	}
-
-	key = get_word_or_selection(usehtml, FALSE);
-					 /***  usehtml is set when a button is pressed
-						in a html window  ***/
-	if (key) {
-		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modName, key);
-		if (settings.inDictpane)
-			change_module_and_key(modName, key);
-		g_free(key);
-	}
-
-}
-
-/***************************************************************************************************
- *goto selected Bible reference
- ***************************************************************************************************/
-void on_html_goto_reference_activate(GtkMenuItem * menuitem,
-				     gpointer user_data)
-{
-	GtkWidget *widget, *entry;
-	GtkHTML *html;
-	gchar *buf, *modbuf;
-
-	widget = gui_lookup_widget(settings.app, (gchar *) user_data);
-	html = GTK_HTML(widget);
-	gtk_html_copy(html);
-	entry = gui_lookup_widget(settings.app, "cbeFreeformLookup");
-	/* clear entry */
-	gtk_entry_set_text(GTK_ENTRY(entry), "");
-	/* put selected ref in entry */
-	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));
-	buf = gtk_entry_get_text(GTK_ENTRY(entry));
-	/* get name for current text module */
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	modbuf = get_module_name();
-	gui_display_verse_list(modbuf, buf);
-}
-
-/***************************************************************************************************
- *beginHTML - start loading html widget
- ***************************************************************************************************/
-void beginHTML(GtkWidget * html_widget, gboolean isutf8)
+void gui_begin_html(GtkWidget * html_widget, gboolean isutf8)
 {
 	GtkHTML *html;
 	gboolean was_editable;
@@ -595,52 +589,76 @@ void beginHTML(GtkWidget * html_widget, gboolean isutf8)
 	gtk_html_set_editable(html, was_editable);
 }
 
-/***************************************************************************************************
- *endHTML
- ***************************************************************************************************/
-void endHTML(GtkWidget * html)
+
+/******************************************************************************
+ * Name
+ *   gui_end_html
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_end_html(GtkWidget * html)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_end_html(GtkWidget * html)
 {
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 }
 
-/***************************************************************************************************
- *displayHTML
- ***************************************************************************************************/
-void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt)
+
+/******************************************************************************
+ * Name
+ *   gui_display_html
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
+ *
+ * Description
+ *   display text using gtk_html_write()
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 {
 	if (strlen(txt)) {
 		gtk_html_write(GTK_HTML(html), htmlstream, txt, lentxt);
 	}
 }
 
-/***************************************************************************************************
- *gotoanchorHTML
- ***************************************************************************************************/
-void gotoanchorHTML(GtkWidget * html_widget, gchar * verse)
-{
-	gtk_html_jump_to_anchor(GTK_HTML(html_widget), verse);
-}
 
-/***************************************************************************************************
- * get html fontname from x fontname (gnome font picker name)
- ***************************************************************************************************/
-gchar *gethtmlfontnameHTML(gchar * xfontname)
-{
-	gchar *token, *retval;
-	++xfontname;
-	token = strtok(xfontname, "-");
-	token = strtok(NULL, "-");
-	retval = token;
-	return retval;
-}
+/******************************************************************************
+ * Name
+ *   print_footer
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void print_footer(GtkHTML * html, GnomePrintContext * context,
+ *		gdouble x, gdouble y, gdouble width, gdouble height,
+ *						gpointer user_data)
+ *
+ * Description
+ *   printing stuff
+ *
+ * Return value
+ *   void
+ */
 
-/***  printing using gtk_html_print_with_header_footer()  ***/
 static gint page_num;
 static GnomeFont *font;
-static void
-print_footer(GtkHTML * html, GnomePrintContext * context,
-	     gdouble x, gdouble y, gdouble width, gdouble height,
-	     gpointer user_data)
+static void print_footer(GtkHTML * html, GnomePrintContext * context,
+		gdouble x, gdouble y, gdouble width, gdouble height,
+						gpointer user_data)
 {
 	gchar *text = g_strdup_printf("- %d -", page_num);
 	gdouble tw = gnome_font_get_width_string(font, "text");
@@ -660,7 +678,24 @@ print_footer(GtkHTML * html, GnomePrintContext * context,
 	page_num++;
 }
 
-void html_print(GtkWidget * htmlwidget)
+
+/******************************************************************************
+ * Name
+ *   gui_html_print
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void gui_html_print(GtkWidget * htmlwidget)
+ *
+ * Description
+ *   printing using gtk_html_print_with_header_footer()
+ *
+ * Return value
+ *   void
+ */
+ 
+void gui_html_print(GtkWidget * htmlwidget)
 {
 	GnomePrintMaster *print_master;
 	GnomePrintContext *print_context;
@@ -689,14 +724,5 @@ void html_print(GtkWidget * htmlwidget)
 	gtk_object_unref(GTK_OBJECT(print_master));
 }
 
-/*** toogle htmlwidget edit mode ***/
-void set_html_edit(GtkWidget * htmlwidget)
-{
-	gboolean choice;
 
-	if (gtk_html_get_editable(GTK_HTML(htmlwidget)))
-		choice = FALSE;
-	else
-		choice = TRUE;
-	gtk_html_set_editable(GTK_HTML(htmlwidget), choice);
-}
+
