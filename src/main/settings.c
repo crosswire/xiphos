@@ -88,6 +88,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	int have_old = FALSE;
 	int need_old = FALSE;
 	char *sword_dir = NULL;
+	char *gs_old = NULL;
 
 	/* set program title */
 	strcpy(settings.program_title, "GnomeSword");
@@ -106,7 +107,12 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	/* if gSwordDir does not exist create it */
 	if (access(settings.gSwordDir, F_OK) == -1) {
-		if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
+		gs_old = g_strdup_printf("%s/.gnomesword-1.0",settings.homedir);		
+		if (access(gs_old, F_OK) == 0) {
+			if(rename(gs_old,settings.gSwordDir) != 0) {
+				printf("can not rename  .gnomesword-1.0");
+			}
+		} else if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			printf("can not create  .gnomesword-2.0");
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
