@@ -24,6 +24,7 @@
 #endif
 
 #include <gnome.h>
+#include <gal/e-paned/e-hpaned.h>
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/gtkhtml_display.h"
@@ -307,48 +308,29 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 			      FALSE);
 	
 	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_widget_ref (vbox);
-	gtk_object_set_data_full (GTK_OBJECT (dlg->dialog), "vbox", 
-			vbox,
-			(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (vbox);
 	gtk_container_add (GTK_CONTAINER (dlg->dialog), vbox);
   
   
 	dlg->d->frame = gtk_frame_new(NULL);
-	gtk_widget_ref(dlg->d->frame);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "dlg->d->frame",
-				 dlg->d->frame,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dlg->d->frame);	
 	gtk_box_pack_start(GTK_BOX(vbox), dlg->d->frame, TRUE, TRUE,
 			   0);
 
-	hpaned7 = gtk_hpaned_new();
-	gtk_widget_ref(hpaned7);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "hpaned7",
-				 hpaned7,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	hpaned7 = e_hpaned_new();
 	gtk_widget_show(hpaned7);
 	gtk_container_add(GTK_CONTAINER(dlg->d->frame), hpaned7);
-	gtk_paned_set_position(GTK_PANED(hpaned7), 215);
+	e_paned_set_position(E_PANED(hpaned7),
+				     220);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox56);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "vbox56",
-				 vbox56,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox56);
-	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, FALSE, TRUE);
+	e_paned_pack1(E_PANED(hpaned7), vbox56, FALSE, TRUE);
 
 
 	toolbarDLKey =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbarDLKey);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "toolbarDLKey",
-				 toolbarDLKey,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarDLKey);
 	gtk_box_pack_start(GTK_BOX(vbox56), toolbarDLKey, FALSE, TRUE,
 			   0);
@@ -364,20 +346,12 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 				       _("Sync"), _("Load current key"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(btnSyncDL);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "btnSyncDL",
-				 btnSyncDL,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnSyncDL);
 
 
 
 
 	dlg->d->entry = gtk_entry_new();
-	gtk_widget_ref(dlg->d->entry);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "dlg->d->entry",
-				 dlg->d->entry,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dlg->d->entry);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarDLKey), dlg->d->entry,
 				  NULL, NULL);
@@ -390,44 +364,23 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 				       _("Close"), _("Close Dialog"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(btn_close);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog),
-				 "btn_close", btn_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btn_close);
 
 	dlg->d->clist = gtk_clist_new(1);
-	gtk_widget_ref(dlg->d->clist);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "dlg->d->clist",
-				 dlg->d->clist,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dlg->d->clist);
 	gtk_box_pack_start(GTK_BOX(vbox56), dlg->d->clist, TRUE, TRUE, 0);
 	gtk_clist_set_column_width(GTK_CLIST(dlg->d->clist), 0, 80);
 	gtk_clist_column_titles_hide(GTK_CLIST(dlg->d->clist));
 
-	label205 = gtk_label_new(_("label205"));
-	gtk_widget_ref(label205);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "label205",
-				 label205,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	label205 = gtk_label_new("");
 	gtk_widget_show(label205);
 	gtk_clist_set_column_widget(GTK_CLIST(dlg->d->clist), 0, label205);
 
 	frameDictHTML = gtk_frame_new(NULL);
-	gtk_widget_ref(frameDictHTML);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog),
-				 "frameDictHTML", frameDictHTML,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frameDictHTML);
-	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
+	e_paned_pack2(E_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindowDictHTML);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog),
-				 "scrolledwindowDictHTML",
-				 scrolledwindowDictHTML,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
 			  scrolledwindowDictHTML);
@@ -438,19 +391,12 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 
 
 	dlg->d->html = gtk_html_new();
-	gtk_widget_ref(dlg->d->html);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog),
-				 "dlg->d->html", dlg->d->html,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dlg->d->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
 			  dlg->d->html);
 	gtk_html_load_empty(GTK_HTML(dlg->d->html));
 
 	label = gtk_label_new(dlg->d->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "label", label,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 		
 	gtk_signal_connect (GTK_OBJECT (dlg->dialog), "set_focus",

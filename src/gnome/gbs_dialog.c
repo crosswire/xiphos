@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+#include <gal/e-paned/e-hpaned.h>
 
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
@@ -757,20 +758,12 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_window_set_default_size(GTK_WINDOW(gbs_dialog), 525, 306);
 	
 	vbox_dialog = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox_dialog);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vbox_dialog",
-				 vbox_dialog,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox_dialog);
 	gtk_container_add(GTK_CONTAINER(gbs_dialog), vbox_dialog);
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "toolbar",
-				 toolbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), toolbar, FALSE, FALSE,
 			   0);
@@ -786,11 +779,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       NULL, _("Edit"),
 				       _("Edit this Book"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(tb_edit);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "tb_edit",
-				 tb_edit,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(tb_edit);
 	gtk_widget_hide(tb_edit);
 
 	tmp_toolbar_icon =
@@ -801,11 +789,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("New"), NULL, NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button_new);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_new",
-				 button_new,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_new);
 	gtk_widget_hide(button_new);
 
 	tmp_toolbar_icon =
@@ -816,19 +799,9 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Save"), NULL, NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button_save);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_save",
-				 button_save,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_save);
 	gtk_widget_hide(button_save);
 
 	vseparator29 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator29);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator29",
-				 vseparator29,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(vseparator29);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator29,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator29, 5, 7);
@@ -842,11 +815,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("Cut"), _("Cut to clipboard"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(button_cut);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_cut",
-				 button_cut,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_cut);
 	gtk_widget_hide(button_cut);
 
 	tmp_toolbar_icon =
@@ -858,11 +826,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("Copy"),
 				       _("Copy to clipboard"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button_copy);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_copy",
-				 button_copy,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_copy);
 	gtk_widget_hide(button_copy);
 
 	tmp_toolbar_icon =
@@ -874,11 +837,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("Paste"),
 				       _("Paste from clipborad"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button_past);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_past",
-				 button_past,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_past);
 	gtk_widget_hide(button_past);
 
 	tmp_toolbar_icon =
@@ -890,19 +848,9 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("Undo"), _("Undo change"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(button_undo);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_undo",
-				 button_undo,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_undo);
 	gtk_widget_hide(button_undo);
 
 	vseparator30 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator30);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator30",
-				 vseparator30,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(vseparator30);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator30,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator30, 5, 7);
@@ -915,19 +863,9 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Link"), _("Add a link"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button_link);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_link",
-				 button_link,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_link);
 	gtk_widget_hide(button_link);
 
 	vseparator32 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator32);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator32",
-				 vseparator32,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(vseparator32);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator32,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator32, 5, 7);
@@ -941,11 +879,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("Find"), _("Open Find Dialog"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(button_find);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_find",
-				 button_find,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_find);
 	gtk_widget_hide(button_find);
 
 	tmp_toolbar_icon =
@@ -959,18 +892,9 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       ("Open Find and Replace Dialog"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(button_replace);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
-				 "button_replace", button_replace,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button_replace);
 	gtk_widget_hide(button_replace);
 
 	vseparator31 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator31);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator31",
-				 vseparator31,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	//gtk_widget_show(vseparator31);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator31,
 				  NULL, NULL);
@@ -985,24 +909,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("button8"),
 				       _("Start Spell Check"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button26);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button26",
-				 button26,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(button26);	
 	gtk_widget_hide(button26);
 
 	menubar_options = gtk_menu_bar_new();
-	gtk_widget_ref(menubar_options);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
-				 "menubar_options", menubar_options,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	//gtk_widget_show(menubar_options);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), menubar_options,
 				  NULL, NULL);
 	gnome_app_fill_menu(GTK_MENU_SHELL(menubar_options),
 			    menubar_options_uiinfo, NULL, FALSE, 0);
-
+/*
 	gtk_widget_ref(menubar_options_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
 				 "pixmapmenuitem1",
@@ -1018,9 +933,10 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "thml",
 				 thml_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
+*/
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (thml_uiinfo[0].widget), TRUE);
-
+/*
 	gtk_widget_ref(thml_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "gbf",
 				 thml_uiinfo[1].widget,
@@ -1036,13 +952,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				 "checkmenuitem1",
 				 pixmapmenuitem1_menu_uiinfo[1].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+*/
 	vseparator28 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator28);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator28",
-				 vseparator28,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	//gtk_widget_show(vseparator28);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator28,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator28, 5, 7);
@@ -1056,49 +967,29 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 				       _("Close"),
 				       _("Close this dialog"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button_close);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_close",
-				 button_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_close);
 
 	frame_gbs = gtk_frame_new(NULL);
-	gtk_widget_ref(frame_gbs);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "frame_gbs",
-				 frame_gbs,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame_gbs);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), frame_gbs, TRUE, TRUE,
 			   0);
 
-	hpaned = gtk_hpaned_new();
-	gtk_widget_ref(hpaned);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "hpaned",
-				 hpaned,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	hpaned = e_hpaned_new();
 	gtk_widget_show(hpaned);
-	gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);
-	gtk_paned_set_position(GTK_PANED(hpaned), 179);
+	gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);	
+	e_paned_set_position(E_PANED(hpaned),190);
+	//gtk_paned_set_position(GTK_PANED(hpaned), 179);
 
 	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow_ctree);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
-				 "scrolledwindow_ctree",
-				 scrolledwindow_ctree,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow_ctree);
-	gtk_paned_pack1(GTK_PANED(hpaned), scrolledwindow_ctree, FALSE,
-			TRUE);
+	e_paned_pack1(E_PANED(hpaned), scrolledwindow_ctree, FALSE,
+						TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_ctree),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
 	ctree_gbs = gtk_ctree_new(3, 0);
-	gtk_widget_ref(ctree_gbs);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "ctree_gbs",
-				 ctree_gbs,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ctree_gbs);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_ctree),
 			  ctree_gbs);
@@ -1107,49 +998,27 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_clist_set_column_width(GTK_CLIST(ctree_gbs), 2, 40);
 	gtk_clist_column_titles_hide(GTK_CLIST(ctree_gbs));
 
-	label241 = gtk_label_new(_("label241"));
-	gtk_widget_ref(label241);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "label241",
-				 label241,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	label241 = gtk_label_new("");
 	gtk_widget_show(label241);
 	gtk_clist_set_column_widget(GTK_CLIST(ctree_gbs), 0, label241);
 
-	label242 = gtk_label_new(_("label242"));
-	gtk_widget_ref(label242);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "label242",
-				 label242,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	label242 = gtk_label_new("");
 	gtk_widget_show(label242);
 	gtk_clist_set_column_widget(GTK_CLIST(ctree_gbs), 1, label242);
 
-	label243 = gtk_label_new(_("label243"));
-	gtk_widget_ref(label243);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "label243",
-				 label243,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	label243 = gtk_label_new("");
 	gtk_widget_show(label243);
 	gtk_clist_set_column_widget(GTK_CLIST(ctree_gbs), 2, label243);
 
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow_html);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
-				 "scrolledwindow_html",
-				 scrolledwindow_html,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow_html);
-	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, TRUE,
-			TRUE);
+	e_paned_pack2(E_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_html),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
 	statusbar5 = gtk_statusbar_new();
-	gtk_widget_ref(statusbar5);
-	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "statusbar5",
-				 statusbar5,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(statusbar5);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), statusbar5, FALSE,
 			   FALSE, 0);
@@ -1205,11 +1074,6 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	dlg->g->ctree = ctree_gbs;
 
 	dlg->g->html = gtk_html_new();
-
-	gtk_widget_ref(dlg->g->html);
-	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog),
-				 "dlg->g->->html", dlg->g->html,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dlg->g->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
 			  dlg->g->html);

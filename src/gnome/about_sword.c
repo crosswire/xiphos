@@ -119,28 +119,16 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_widget_show(dialog_vbox27);
 
 	vbox21 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox21);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "vbox21", vbox21,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox21);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox27), vbox21, TRUE, TRUE,
 			   0);
 
 	pixmap1 = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/sword3.xpm");
-	gtk_widget_ref(pixmap1);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "pixmap1", pixmap1,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pixmap1);
 	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 0);
 
 	version_label = gtk_label_new(_("Sword Version"));
-	gtk_widget_ref(version_label);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "version_label", version_label,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(version_label);
 	gtk_box_pack_start(GTK_BOX(vbox21), version_label, FALSE, FALSE,
 			   0);
@@ -148,10 +136,6 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_label_set_text(GTK_LABEL(version_label), version);
 	
 	scrolledwindow26 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow26);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "scrolledwindow26", scrolledwindow26,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow26);
 	gtk_box_pack_start(GTK_BOX(vbox21), scrolledwindow26, TRUE,
 			   TRUE, 0);
@@ -161,10 +145,6 @@ GtkWidget *gui_create_about_sword(void)
 				       GTK_POLICY_AUTOMATIC);
 
 	txtAboutSword = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(txtAboutSword);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "txtAboutSword", txtAboutSword,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(txtAboutSword);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow26),
 			  txtAboutSword);
@@ -177,20 +157,12 @@ GtkWidget *gui_create_about_sword(void)
 	label95 =
 	    gtk_label_new(_
 			  ("Modules can be downloaded from the Sword Project "));
-	gtk_widget_ref(label95);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "label95", label95,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label95);
 	gtk_box_pack_start(GTK_BOX(vbox21), label95, FALSE, FALSE, 0);
 	gtk_widget_set_usize(label95, -2, 24);
 
 	href1 =
 	    gnome_href_new("www.crosswire.org", _("The Sword Project"));
-	gtk_widget_ref(href1);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "href1", href1,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(href1);
 	gtk_box_pack_start(GTK_BOX(vbox21), href1, FALSE, FALSE, 0);
 
@@ -204,10 +176,6 @@ GtkWidget *gui_create_about_sword(void)
 				       (dialog_action_area27), 10);
 
 	hbuttonbox6 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox6);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "hbuttonbox6", hbuttonbox6,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox6);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area27), hbuttonbox6,
 			   TRUE, TRUE, 0);
@@ -215,10 +183,6 @@ GtkWidget *gui_create_about_sword(void)
 				  GTK_BUTTONBOX_END);
 
 	button_ok = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	gtk_widget_ref(button_ok);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_about_sword),
-				 "button_ok", button_ok,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_ok);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox6), button_ok);
 	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
