@@ -22,5 +22,22 @@
 				</mediaobject>
 			</screenshot>
 		</figure>
+		   <para> The Studypad will save into your working directory, making it useful for collecting and exporting information and Bible study material from Gnomesword into other programmes.</para>
+		<para> Toolbar 1</para>
+			        	<itemizedlist>
+			     		<listitem><para>Font Size and Environment</para></listitem>
+			     		<listitem><para>Font Type</para></listitem>
+			     		<listitem><para>Bold, Italics, Underscored, Crossed Out</para></listitem>
+			     		<listitem><para>Left, Centre and Right  Bound</para></listitem>
+			     		<listitem><para>Shift Paragraph Right or Left</para></listitem>
+			     		<listitem><para>Colour Selector</para></listitem>
+			     		</itemizedlist>
+		<para> Toolbar 2</para>
+			        	<itemizedlist>
+			        	<listitem><para>New, Save, Delete and Print</para></listitem>
+			        	<listitem><para>Cut, Copy, Paste and Undo</para></listitem>
+			        	<listitem><para>Find and 'Find and Replace'</para></listitem>
+			        	<listitem><para>Spellcheck</para></listitem>
+			        	</itemizedlist>
 	</sect1>
 </chapter>
