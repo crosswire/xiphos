@@ -326,10 +326,6 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
 	set_current_tab (pt);
 	
-	//sets the text mod and key
-	main_display_bible(pt->text_mod, pt->text_commentary_key);
-	main_update_nav_controls(pt->text_commentary_key);
-	
 	//sets the commentary mod and key
 	if(pt->comm_showing)
 		main_display_commentary(pt->commentary_mod, 
@@ -338,6 +334,10 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 		main_display_book(pt->book_mod, pt->book_offset);
 	
 //	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
+	
+	//sets the text mod and key
+	main_display_bible(pt->text_mod, pt->text_commentary_key);
+	main_update_nav_controls(pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
 	main_display_dictionary(pt->dictlex_mod, pt->dictlex_key);

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-15 12:34-0400\n"
+"POT-Creation-Date: 2004-05-17 16:14-0400\n"
 "PO-Revision-Date: 2003-12-9 12:21:00+0200\n"
 "Last-Translator: Andy Piper <andyp@users.sf.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -48,53 +48,53 @@ msgstr ""
 msgid "Number of Devotion modules"
 msgstr ""
 
-#: src/main/sidebar.cc:307
+#: src/main/sidebar.cc:355
 msgid "verse"
 msgstr ""
 
-#: src/main/sidebar.cc:367
+#: src/main/sidebar.cc:415
 msgid "chapter"
 msgstr ""
 
 #.
 #. * parallel page
 #.
-#: src/main/sidebar.cc:495 src/main/sidebar.cc:742 src/main/sidebar.cc:743
-#: src/main/sidebar.cc:744 src/gnome2/parallel_dialog.c:133
+#: src/main/sidebar.cc:543 src/main/sidebar.cc:790 src/main/sidebar.cc:791
+#: src/main/sidebar.cc:792 src/gnome2/parallel_dialog.c:133
 #: src/gnome2/parallel_dialog.c:135 src/gnome2/parallel_view.c:365
 #: src/gnome2/parallel_view.c:390 src/gnome2/sidebar.c:642
 #: src/gnome2/sidebar.c:651 src/gnome2/utilities.c:177
 msgid "Parallel View"
 msgstr ""
 
-#: src/main/sidebar.cc:501 src/main/sidebar.cc:750 src/main/sidebar.cc:751
-#: src/main/sidebar.cc:752
+#: src/main/sidebar.cc:549 src/main/sidebar.cc:798 src/main/sidebar.cc:799
+#: src/main/sidebar.cc:800
 msgid "Standard View"
 msgstr ""
 
-#: src/main/sidebar.cc:507 src/main/sidebar.cc:779 src/main/sidebar.cc:781
-#: src/gnome2/mod_mgr.c:614 src/gnome2/preferences_dialog.c:1711
+#: src/main/sidebar.cc:555 src/main/sidebar.cc:827 src/main/sidebar.cc:829
+#: src/gnome2/mod_mgr.c:614 src/gnome2/preferences_dialog.c:1739
 #: src/gnome2/utilities.c:199
 msgid "Commentaries"
 msgstr ""
 
-#: src/main/sidebar.cc:516 src/main/sidebar.cc:836 src/main/sidebar.cc:838
+#: src/main/sidebar.cc:564 src/main/sidebar.cc:884 src/main/sidebar.cc:886
 #: src/gnome2/mod_mgr.c:624 src/gnome2/utilities.c:242
 msgid "General Books"
 msgstr ""
 
-#: src/main/sidebar.cc:618 src/main/sidebar.cc:670 src/gnome2/mod_mgr.c:445
+#: src/main/sidebar.cc:666 src/main/sidebar.cc:718 src/gnome2/mod_mgr.c:445
 #: src/gnome2/mod_mgr.c:513 src/gnome2/utilities.c:69
 #: src/gnome2/utilities.c:119
 msgid "Unknown"
 msgstr ""
 
-#: src/main/sidebar.cc:734 src/main/sidebar.cc:736 src/gnome2/mod_mgr.c:610
+#: src/main/sidebar.cc:782 src/main/sidebar.cc:784 src/gnome2/mod_mgr.c:610
 #: src/gnome2/utilities.c:171
 msgid "Biblical Texts"
 msgstr ""
 
-#: src/main/sidebar.cc:807 src/main/sidebar.cc:809 src/gnome2/mod_mgr.c:619
+#: src/main/sidebar.cc:855 src/main/sidebar.cc:857 src/gnome2/mod_mgr.c:619
 #: src/gnome2/utilities.c:220
 msgid "Dictionaries"
 msgstr ""
@@ -305,7 +305,7 @@ msgstr ""
 
 #: src/gnome2/bibletext.c:992 src/gnome2/commentary.c:736
 #: src/gnome2/dictlex.c:806 src/gnome2/gbs.c:603
-#: src/gnome2/preferences_dialog.c:1623
+#: src/gnome2/preferences_dialog.c:1651
 msgid "Show Tabs"
 msgstr ""
 
@@ -650,7 +650,7 @@ msgstr ""
 msgid "Spell Checker"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:748 src/gnome2/preferences_dialog.c:2020
+#: src/gnome2/editor_spell.c:748 src/gnome2/preferences_dialog.c:2048
 msgid "Dictionary"
 msgstr ""
 
@@ -740,36 +740,36 @@ msgstr ""
 msgid "Current font: "
 msgstr ""
 
-#: src/gnome2/font_dialog.c:360 src/gnome2/preferences_dialog.c:1466
+#: src/gnome2/font_dialog.c:360 src/gnome2/preferences_dialog.c:1553
 msgid "+5"
 msgstr ""
 
-#: src/gnome2/font_dialog.c:362 src/gnome2/preferences_dialog.c:1464
+#: src/gnome2/font_dialog.c:362 src/gnome2/preferences_dialog.c:1551
 msgid "+4"
 msgstr ""
 
-#: src/gnome2/font_dialog.c:364 src/gnome2/preferences_dialog.c:1462
+#: src/gnome2/font_dialog.c:364 src/gnome2/preferences_dialog.c:1549
 msgid "+3"
 msgstr ""
 
-#: src/gnome2/font_dialog.c:366 src/gnome2/preferences_dialog.c:1460
+#: src/gnome2/font_dialog.c:366 src/gnome2/preferences_dialog.c:1547
 msgid "+2"
 msgstr ""
 
-#: src/gnome2/font_dialog.c:368 src/gnome2/preferences_dialog.c:1458
+#: src/gnome2/font_dialog.c:368 src/gnome2/preferences_dialog.c:1545
 msgid "+1"
 msgstr ""
 
 #: src/gnome2/font_dialog.c:370 src/gnome2/font_dialog.c:383
-#: src/gnome2/preferences_dialog.c:1456 src/gnome2/preferences_dialog.c:1477
+#: src/gnome2/preferences_dialog.c:1543 src/gnome2/preferences_dialog.c:1564
 msgid "+0"
 msgstr ""
 
-#: src/gnome2/font_dialog.c:372 src/gnome2/preferences_dialog.c:1454
+#: src/gnome2/font_dialog.c:372 src/gnome2/preferences_dialog.c:1541
 msgid "-1"
 msgstr ""
 
-#: src/gnome2/font_dialog.c:374 src/gnome2/preferences_dialog.c:1452
+#: src/gnome2/font_dialog.c:374 src/gnome2/preferences_dialog.c:1539
 msgid "-2"
 msgstr ""
 
@@ -893,7 +893,7 @@ msgstr ""
 msgid "Show the Daily Devotion for today"
 msgstr ""
 
-#: src/gnome2/main_menu.c:559 src/gnome2/preferences_dialog.c:1699
+#: src/gnome2/main_menu.c:559 src/gnome2/preferences_dialog.c:1727
 msgid "Bible Texts"
 msgstr ""
 
@@ -901,8 +901,8 @@ msgstr ""
 msgid "Show or hide Bible texts window"
 msgstr ""
 
-#: src/gnome2/main_menu.c:565 src/gnome2/preferences_dialog.c:1654
-#: src/gnome2/preferences_dialog.c:2001 src/gnome2/search_sidebar.c:211
+#: src/gnome2/main_menu.c:565 src/gnome2/preferences_dialog.c:1682
+#: src/gnome2/preferences_dialog.c:2029 src/gnome2/search_sidebar.c:211
 #: src/gnome2/setup_druid.c:807
 msgid "Commentary"
 msgstr ""
@@ -1371,7 +1371,7 @@ msgstr ""
 msgid "Indents the paragraphs more"
 msgstr ""
 
-#: src/gnome2/parallel_dialog.c:388
+#: src/gnome2/parallel_dialog.c:388 src/gnome2/preferences_dialog.c:1013
 msgid "Parallel"
 msgstr ""
 
@@ -1428,59 +1428,84 @@ msgstr ""
 msgid "The pixbuf to render."
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:900 src/gnome2/preferences_dialog.c:1175
+#: src/gnome2/preferences_dialog.c:904 src/gnome2/preferences_dialog.c:1179
 msgid "Preferences"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1323
+#: src/gnome2/preferences_dialog.c:983
+#, fuzzy
+msgid "Fonts"
+msgstr "Font Colours"
+
+#: src/gnome2/preferences_dialog.c:986
+#, fuzzy
+msgid "Color"
+msgstr "Font Colours"
+
+#: src/gnome2/preferences_dialog.c:989 src/gnome2/preferences_dialog.c:1003
+#: src/gnome2/preferences_dialog.c:1016
+msgid "Misc"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:993 src/gnome2/preferences_dialog.c:1786
+msgid "General"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:996
+msgid "Tabs and Panes"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:1007 src/gnome2/search_dialog.c:1375
+#: src/gnome2/search_dialog.c:2037 src/gnome2/sidebar.c:208
+#: src/gnome2/sidebar.c:1409
+msgid "Modules"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:1010
+msgid "Main"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:1327
 msgid "Font Colors"
 msgstr "Font Colours"
 
-#: src/gnome2/preferences_dialog.c:1348
+#: src/gnome2/preferences_dialog.c:1352
 msgid "Background"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1361
+#: src/gnome2/preferences_dialog.c:1365
 msgid "Pick the background color"
 msgstr "Pick the background colour"
 
-#: src/gnome2/preferences_dialog.c:1368
+#: src/gnome2/preferences_dialog.c:1372
 msgid "Bible text"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1381
+#: src/gnome2/preferences_dialog.c:1385
 msgid "Pick the Bible text color"
 msgstr "Pick the Bible text colour"
 
-#: src/gnome2/preferences_dialog.c:1388
+#: src/gnome2/preferences_dialog.c:1392
 msgid "Current Verse text"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1401
+#: src/gnome2/preferences_dialog.c:1405
 msgid "Pick the current Verse color"
 msgstr "Pick the current Verse colour"
 
-#: src/gnome2/preferences_dialog.c:1419
+#: src/gnome2/preferences_dialog.c:1423
 msgid "Verse numbers"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1438
-msgid "Verse number font size"
-msgstr ""
-
-#: src/gnome2/preferences_dialog.c:1475
-msgid "Zero is the base font size. Increase or decrease the size."
-msgstr ""
-
-#: src/gnome2/preferences_dialog.c:1483
+#: src/gnome2/preferences_dialog.c:1441
 msgid "Links"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1510
+#: src/gnome2/preferences_dialog.c:1468
 msgid "Strong's Numbers & Morphological Tags"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1515
+#: src/gnome2/preferences_dialog.c:1473
 msgid "GnomeSword Defaults"
 msgstr ""
 
@@ -1493,178 +1518,186 @@ msgstr ""
 #. NULL);
 #. gtk_button_set_relief(GTK_BUTTON(button.gnomesword_defaults),
 #. GTK_RELIEF_HALF);
-#: src/gnome2/preferences_dialog.c:1526
+#: src/gnome2/preferences_dialog.c:1484
 msgid "Bible Text Window"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1578
-msgid "Use Defaults When Starting GnomeSword"
+#: src/gnome2/preferences_dialog.c:1502
+msgid "Font Miscellaneous"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1595
-msgid "Yes, use defaults"
+#: src/gnome2/preferences_dialog.c:1525
+msgid "Verse number font size"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:1562
+msgid "Zero is the base font size. Increase or decrease the size."
 msgstr ""
 
 #: src/gnome2/preferences_dialog.c:1606
+msgid "Use Defaults When Starting GnomeSword"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:1623
+msgid "Yes, use defaults"
+msgstr ""
+
+#: src/gnome2/preferences_dialog.c:1634
 msgid "No, use settings saved the last time I used GnomeSword"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1640
+#: src/gnome2/preferences_dialog.c:1668
 msgid "Use tabbed browsing"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1647
+#: src/gnome2/preferences_dialog.c:1675
 msgid "Bible texts"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1661 src/gnome2/setup_druid.c:929
+#: src/gnome2/preferences_dialog.c:1689 src/gnome2/setup_druid.c:929
 msgid "Dictionary/Lexicon"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1668
+#: src/gnome2/preferences_dialog.c:1696
 msgid "Books"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1682
+#: src/gnome2/preferences_dialog.c:1710
 msgid "Show"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1705
+#: src/gnome2/preferences_dialog.c:1733
 msgid "Display Bible text window"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1719
+#: src/gnome2/preferences_dialog.c:1747
 msgid "Commentaries, Personal Comments and StudyPad"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1726
+#: src/gnome2/preferences_dialog.c:1754
 msgid "Lower workbook"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1732
+#: src/gnome2/preferences_dialog.c:1760
 msgid "Dictionary/Lexicon and generic books"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1758
-msgid "General"
-msgstr ""
-
-#: src/gnome2/preferences_dialog.c:1777 src/gnome2/setup_druid.c:614
+#: src/gnome2/preferences_dialog.c:1805 src/gnome2/setup_druid.c:614
 msgid "Use Verse style"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1790
+#: src/gnome2/preferences_dialog.c:1818
 msgid "Use default Dictionary"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1798
+#: src/gnome2/preferences_dialog.c:1826
 msgid "Show Daily Devotion at start up"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1804
+#: src/gnome2/preferences_dialog.c:1832
 msgid "Show Daily Devotion if you have a Devotion module"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1809
+#: src/gnome2/preferences_dialog.c:1837
 msgid "Show splash screen at start up"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1816
+#: src/gnome2/preferences_dialog.c:1844
 msgid "Show the splash screen when GnomeSword starts"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1829
+#: src/gnome2/preferences_dialog.c:1857
 msgid "Show Dictionary / Lexicon"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1848
+#: src/gnome2/preferences_dialog.c:1876
 msgid "In Sidebar viewer"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1858
+#: src/gnome2/preferences_dialog.c:1886
 msgid "In Dictionary/Lexicon window"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1932 src/gnome2/preferences_dialog.c:1949
+#: src/gnome2/preferences_dialog.c:1960 src/gnome2/preferences_dialog.c:1977
 msgid "StudyPad default directory"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1971
+#: src/gnome2/preferences_dialog.c:1999
 msgid "<b>Main Window Modules</b>"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:1982
+#: src/gnome2/preferences_dialog.c:2010
 msgid "Biblical Text"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2039
+#: src/gnome2/preferences_dialog.c:2067
 msgid "Default Dictionary"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2061
+#: src/gnome2/preferences_dialog.c:2089
 msgid "Personal Notes"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2086
+#: src/gnome2/preferences_dialog.c:2114
 msgid "<b>Parallel View</b>"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2097 src/gnome2/setup_druid.c:882
+#: src/gnome2/preferences_dialog.c:2125 src/gnome2/setup_druid.c:882
 msgid "Parallel 1"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2116 src/gnome2/setup_druid.c:873
+#: src/gnome2/preferences_dialog.c:2144 src/gnome2/setup_druid.c:873
 msgid "Parallel 2"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2135 src/gnome2/setup_druid.c:864
+#: src/gnome2/preferences_dialog.c:2163 src/gnome2/setup_druid.c:864
 msgid "Parallel 3"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2154 src/gnome2/setup_druid.c:857
+#: src/gnome2/preferences_dialog.c:2182 src/gnome2/setup_druid.c:857
 msgid "Parallel 4"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2174 src/gnome2/setup_druid.c:850
+#: src/gnome2/preferences_dialog.c:2202 src/gnome2/setup_druid.c:850
 msgid "Parallel 5"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2202
+#: src/gnome2/preferences_dialog.c:2230
 msgid "<b>Miscellaneous Modules</b>"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2213 src/gnome2/setup_druid.c:997
+#: src/gnome2/preferences_dialog.c:2241 src/gnome2/setup_druid.c:997
 msgid "Daily Devotional"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2233 src/gnome2/setup_druid.c:972
+#: src/gnome2/preferences_dialog.c:2261 src/gnome2/setup_druid.c:972
 msgid "Hebrew Lexicon"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2249 src/gnome2/preferences_dialog.c:2296
+#: src/gnome2/preferences_dialog.c:2277 src/gnome2/preferences_dialog.c:2324
 msgid ""
 "Which Greek Lexicon to display in Dictionary/Lexicon window when a link or "
 "word is clicked"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2256
+#: src/gnome2/preferences_dialog.c:2284
 msgid "Hebrew Lexicon Viewer"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2274
+#: src/gnome2/preferences_dialog.c:2302
 msgid ""
 "Which Hebrew Lexicon to display in viewer when a link or word is clicked"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2281 src/gnome2/setup_druid.c:948
+#: src/gnome2/preferences_dialog.c:2309 src/gnome2/setup_druid.c:948
 msgid "Greek Lexicon"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2304
+#: src/gnome2/preferences_dialog.c:2332
 msgid "Greek Lexicon Viewer"
 msgstr ""
 
-#: src/gnome2/preferences_dialog.c:2322
+#: src/gnome2/preferences_dialog.c:2350
 msgid "Which Greek Lexicon to display in viewer when a link or word is clicked"
 msgstr ""
 
@@ -1734,11 +1767,6 @@ msgstr ""
 
 #: src/gnome2/search_dialog.c:1346
 msgid "Use a custom range for the scope of the search"
-msgstr ""
-
-#: src/gnome2/search_dialog.c:1375 src/gnome2/search_dialog.c:2037
-#: src/gnome2/sidebar.c:208 src/gnome2/sidebar.c:1409
-msgid "Modules"
 msgstr ""
 
 #: src/gnome2/search_dialog.c:1393
