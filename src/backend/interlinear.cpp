@@ -31,6 +31,8 @@
 
 #include "backend/interlinear.h"
 
+using namespace sword;
+
 /******************************************************************************
  * locals
  */

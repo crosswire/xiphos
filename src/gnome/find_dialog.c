@@ -49,7 +49,7 @@ struct _find_dialog {
 	gboolean regular;
 };
 
-FIND_DIALOG *dialog;
+static FIND_DIALOG *dialog;
 
 
 /******************************************************************************

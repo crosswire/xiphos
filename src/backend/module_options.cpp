@@ -29,6 +29,8 @@
 #include "backend/module_options.h"
 //#include "main/settings.h"
 
+using namespace sword;
+
 /******************************************************************************
  * load module option - using sword SWConfig
  ******************************************************************************/

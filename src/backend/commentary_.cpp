@@ -31,6 +31,7 @@
 
 #include "backend/commentary_.h"
 
+using namespace sword;
 
 /******************************************************************************
  * static - global to this file only 

@@ -220,10 +220,15 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				gint i;
 				modbuf = strchr(mybuf, '=');
 				++modbuf;
-				for (i = 0; i < strlen(modbuf); i++) {
-					if (modbuf[i] == ' ') {
-						modbuf[i] = '\0';
-						break;
+				if(strncmp(modbuf,"none", 5)) { /* gbf */
+					modbuf = "Packard";
+				}
+				else {
+					for (i = 0; i < strlen(modbuf); i++) {
+						if (modbuf[i] == ' ') {
+							modbuf[i] = '\0';
+							break;
+						}
 					}
 				}
 			}
@@ -260,7 +265,10 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				sprintf(newref, "%5.5d", atoi(mybuf));
 			}
 			if (type)
-				modbuf = settings.lex_greek;
+				if((atoi(mybuf) > 5624) && (settings.havethayer))
+					modbuf = "Thayer";
+				else
+					modbuf = settings.lex_greek;
 			else
 				modbuf = settings.lex_hebrew;
 	
@@ -306,7 +314,8 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
 	gchar newmod[80], newref[80];
 	gint i = 0, havemod = 0;
-
+	
+	g_warning("url = %s",url);
 
 	if (*url == '@') {
 		++url;
@@ -384,7 +393,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	}
 	/***  thml morph tag  ***/
-	else if (!strncmp(url, "type=morph", 10)) {
+	else if (!strncmp(url, "type=morph", 10)) { //sync type="morph" class="Robinson" value="T-GSM" 
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		buf = g_strdup(url);
@@ -393,10 +402,15 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			for (i = 0; i < strlen(modbuf); i++) {
-				if (modbuf[i] == ' ') {
-					modbuf[i] = '\0';
-					break;
+			if(strncmp(modbuf,"none", 5)) { /* gbf */
+				modbuf = "Packard";
+			}
+			else {
+				for (i = 0; i < strlen(modbuf); i++) {
+					if (modbuf[i] == ' ') {
+						modbuf[i] = '\0';
+						break;
+					}
 				}
 			}
 		}
@@ -417,6 +431,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	/*** thml strongs ***/
 	else if (!strncmp(url, "type=Strongs", 12)) {
 		gchar *modbuf = NULL;
+		gchar *modbuf_viewer = NULL;
 		gchar *mybuf = NULL;
 		gint type = 0;
 		//buf = g_strdup(url);
@@ -433,18 +448,27 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++mybuf;
 			sprintf(newref, "%5.5d", atoi(mybuf));
 		}
-		if (type)
-			modbuf = settings.lex_greek;
-		else
+		if (type) {
+			if((atoi(mybuf) > 5624) && (settings.havethayer)) {
+				modbuf = "Thayer";
+				modbuf_viewer = "Thayer";
+			}
+			else {
+				modbuf_viewer = settings.lex_greek_viewer;
+				modbuf = settings.lex_greek;
+			}
+		}
+		else {
 			modbuf = settings.lex_hebrew;
+			modbuf_viewer = settings.lex_hebrew_viewer;
+		}
 
 		buf = g_strdup(newref);
 		if (settings.inDictpane)
 			gui_change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modbuf, buf);
+			gui_display_dictlex_in_viewer(modbuf_viewer, buf);
 		g_free(buf);
-
 	}
 	/***  gbf strongs  ***/
 	else if (*url == '#') {
