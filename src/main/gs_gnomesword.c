@@ -45,7 +45,6 @@
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
-#include "e-splash.h"
 #include "about_modules.h"
 
 #include <gal/e-paned/e-hpaned.h>
@@ -100,7 +99,7 @@ initGnomeSword(SETTINGS * s,
                GList * biblemods,
                GList * commentarymods,
                GList * dictionarymods,
-               GList * percommods, GtkWidget * splash)
+               GList * percommods)
 {
         GtkWidget *notebook;
 
@@ -241,11 +240,6 @@ initGnomeSword(SETTINGS * s,
         g_list_free(bookmods);
         g_list_free(sbbookmods);
         // options list freed on exit
-
-        if (s->showsplash) {
-                while (gtk_events_pending())
-                        gtk_main_iteration();
-        }
 
         g_print("done\n");
 }

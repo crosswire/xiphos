@@ -238,8 +238,7 @@ void initGnomeSword(SETTINGS *settings,
 		GList *biblemods, 
 		GList *commentarymods , 
 		GList *dictionarymods, 
-		GList *percommods,
-		GtkWidget *splash);
+		GList *percommods);
 gint addnotebookpages(GtkWidget *notebook, 
 		GList *list,
 		gchar *modName); 
