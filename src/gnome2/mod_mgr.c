@@ -63,6 +63,13 @@ enum {
 	NUM_COLUMNS
 };
 
+enum {
+	COLUMN_TYPE,
+	COLUMN_CAPTION,
+	COLUMN_SOURCE,
+	COLUMN_DIRECTORY,
+	NUM_REMOTE_COLUMNS
+};
 
 static GtkWidget *treeview;
 static GtkWidget *treeview1;
@@ -1041,6 +1048,62 @@ static void add_columns_to_first(GtkTreeView * treeview)
 }
 
 
+/******************************************************************************
+ * Name
+ *   add_columns_to_remote_treeview
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void  add_columns_to_remote_treeview(GtkTreeView *treeview)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void add_columns_to_remote_treeview(GtkTreeView * treeview)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Type"),
+						     renderer, "text",
+						     COLUMN_TYPE, NULL);
+	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
+	gtk_tree_view_append_column(treeview, column);
+
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Caption"),
+						     renderer, "text",
+						     COLUMN_CAPTION, NULL);
+	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
+	gtk_tree_view_append_column(treeview, column);
+
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Source"),
+						     renderer, "text",
+						     COLUMN_SOURCE, NULL);
+	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
+	gtk_tree_view_append_column(treeview, column);
+
+	renderer = gtk_cell_renderer_text_new();
+	column =
+	    gtk_tree_view_column_new_with_attributes(_("Directory"),
+						     renderer, "text",
+						     COLUMN_DIRECTORY, NULL);
+	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
+	gtk_tree_view_append_column(treeview, column);
+
+}
+
 static GtkTreeModel *create_model_to_first(void)
 {
 	GtkTreeStore *model;
@@ -1110,7 +1173,11 @@ static GtkTreeModel *create_remote_source_treeview_model(void)
 	GtkTreeIter iter;
 
 	/* create list store */
-	store = gtk_tree_store_new(1, G_TYPE_STRING);
+	store = gtk_tree_store_new(NUM_REMOTE_COLUMNS, 
+				   G_TYPE_STRING,
+				   G_TYPE_STRING,
+				   G_TYPE_STRING,
+				   G_TYPE_STRING);
 
 	return GTK_TREE_MODEL(store);
 	
@@ -1190,10 +1257,9 @@ static gboolean button_press_event(GtkWidget * widget,
 static void load_remote_source_treeview(void)
 {
 	GList *tmp = NULL;
-	GString *str = g_string_new(NULL);
+	GList *combo1_items = NULL;
 	GtkTreeIter iter;
 	MOD_MGR_SOURCE *mms;
-	GList *combo1_items = NULL;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	
@@ -1201,20 +1267,20 @@ static void load_remote_source_treeview(void)
 	tmp = mod_mgr_list_remote_sources();
 	while(tmp) {		
 		mms = (MOD_MGR_SOURCE *) tmp->data;
-		g_string_printf(str,"%s|%s|%s|%s",
-				(gchar *) mms->caption,
-				(gchar *) mms->type,
-				(gchar *) mms->source,
-				(gchar *) mms->directory);
-		g_warning(str->str);
 		gtk_tree_store_append(GTK_TREE_STORE(model), &iter, NULL);
-		gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 0, str->str, -1);
+		gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+					COLUMN_TYPE, mms->type, 
+					COLUMN_CAPTION, mms->caption, 
+					COLUMN_SOURCE, mms->source, 
+					COLUMN_DIRECTORY, mms->directory, 
+					-1);
 		combo1_items =
 		    g_list_append(combo1_items, (gchar *) mms->caption);
 		tmp = g_list_next(tmp);
 	}
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), combo1_items);
 	g_list_free(combo1_items);
+	g_list_free(tmp);
 	
 }
 
@@ -1343,12 +1409,51 @@ on_button_remove_local_clicked(GtkButton * button, gpointer user_data)
 
 }
 
+void save_remote_sources(void)
+{	
+	gchar *type = NULL;
+	gchar *caption = NULL;
+	gchar *source = NULL;
+	gchar *directory = NULL;
+	gboolean valid;
+	GtkTreeIter iter;
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
+	
+	mod_mgr_clear_config();
+		
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	while (valid)
+	{					
+		gtk_tree_model_get (model, &iter, 
+				  COLUMN_TYPE, &type,
+				  COLUMN_CAPTION, &caption,
+				  COLUMN_SOURCE, &source,
+				  COLUMN_DIRECTORY, &directory,
+				  -1);
+		
+		mod_mgr_add_source("FTPSource",
+				   type, 
+				   caption,
+				   source, 
+				   directory);		
+		g_free (type);		
+		g_free (caption);		
+		g_free (source);		
+		g_free (directory);
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+	load_remote_source_treeview();
+}
 
 void
 on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *dialog;
+	GtkTreeIter iter;
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 
 	dialog = gui_new_dialog();
 	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
@@ -1374,23 +1479,75 @@ on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 		g_free(dialog);
 		return;
 	}
-	mod_mgr_add_source(dialog->text2, 
-			   dialog->text1,
-			   dialog->text3, 
-			   dialog->text4);
+	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, NULL);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				COLUMN_TYPE, dialog->text2, 
+				COLUMN_CAPTION, dialog->text1, 
+				COLUMN_SOURCE, dialog->text3, 
+				COLUMN_DIRECTORY, dialog->text4, 
+				-1);
 	g_free(dialog->text1);
 	g_free(dialog->text2);
 	g_free(dialog->text3);
 	g_free(dialog->text4);
 	g_free(dialog);
-	load_remote_source_treeview();
+	save_remote_sources();
 }
 
 
 void
 on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 {
+	gint test;
+	GS_DIALOG *yes_no_dialog;
+	gchar *name_string;
+	GtkTreeSelection* selection;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	gchar *caption = NULL;
+	gchar *type = NULL;
+	gchar *source = NULL;
+	gchar *directory = NULL;
+	GString *str = g_string_new(NULL);
+	GtkTreeModel *model;
+	
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
+	if(!gtk_tree_selection_get_selected(selection, &model, &selected)) 
+		return;
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+				   COLUMN_TYPE, &type, 
+				   COLUMN_CAPTION, &caption, 
+				   COLUMN_SOURCE, &source, 
+				   COLUMN_DIRECTORY , &directory, 
+				   -1);
+	name_string = caption;
 
+	yes_no_dialog = gui_new_dialog();
+	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
+	yes_no_dialog->title = N_("Bookmark");	
+	g_string_printf(str,
+			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
+			_("Remove the selected source"),
+			caption,
+			type,
+			source,
+			directory);
+	yes_no_dialog->label_top = str->str;
+	yes_no_dialog->yes = TRUE;
+	yes_no_dialog->no = TRUE;
+
+	test = gui_alert_dialog(yes_no_dialog);
+	if (test == GS_YES) {
+		gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
+		save_remote_sources();
+	}
+	g_free(yes_no_dialog);
+	g_free(type);
+	g_free(caption);
+	g_free(source);
+	g_free(directory);
+	g_string_free(str,TRUE);
+	
 }
 
 
@@ -1845,14 +2002,7 @@ GtkWidget *create_dialog(void)
 			  treeview_remote);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
 					  (treeview_remote), FALSE);
-
-	renderer = gtk_cell_renderer_text_new();
-	column =
-	    gtk_tree_view_column_new_with_attributes(_("Add/Remove"),
-						     renderer, "text",
-						     0, NULL);
-	gtk_tree_view_column_set_sort_column_id(column, 0);
-	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview_remote), column);
+	add_columns_to_remote_treeview(GTK_TREE_VIEW(treeview_remote));
 
 	vbox11 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox11);
