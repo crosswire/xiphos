@@ -131,6 +131,9 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 void gui_open_verse_in_new_tab(gchar *verse_key)
 {
 	PASSAGE_TAB_INFO *pt;
+	
+	if(!settings.browsing)
+		return;
 	pt = g_new0(PASSAGE_TAB_INFO, 1);
 	pt->text_mod = cur_t->mod_name;
 	pt->commentary_mod = cur_c->mod_name;
@@ -231,6 +234,9 @@ void gui_notebook_main_setup(GList *ptlist)
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt;
 	
+	if(!settings.browsing)
+		return;
+	
 	passage_list = NULL;
 	tmp = ptlist;
 	tmp = g_list_first(tmp);
@@ -275,6 +281,8 @@ void gui_notebook_main_setup(GList *ptlist)
  */
 void gui_notebook_main_shutdown(void)
 {
+	if(!settings.browsing)
+		return;
 	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
 		PASSAGE_TAB_INFO *t = (PASSAGE_TAB_INFO*)passage_list->data;

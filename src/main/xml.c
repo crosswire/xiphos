@@ -611,6 +611,7 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, "tabs", NULL);
+	xmlNewTextChild(section_node, NULL, "browsing", "1");
 	xmlNewTextChild(section_node, NULL, "bible", "0");
 	xmlNewTextChild(section_node, NULL, "comm", "0");
 	xmlNewTextChild(section_node, NULL, "dict", "0");
