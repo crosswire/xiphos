@@ -388,7 +388,7 @@ void on_btnExit_clicked(GtkButton * button, gpointer user_data)
 {
 	shutdownSWORD();
 }
-
+/*
 //----------------------------------------------------------------------------------------------
 gboolean
 on_moduleText_button_press_event(GtkWidget * widget,
@@ -442,7 +442,9 @@ on_textDict_button_press_event (GtkWidget *widget,
                 }
         }
         return TRUE;
-}
+}*/
+
+
 //----------------------------------------------------------------------------------------------
 void /* commentary notebook page changed */
 on_nbTextMods_switch_page(GtkNotebook * notebook,
@@ -451,8 +453,9 @@ on_nbTextMods_switch_page(GtkNotebook * notebook,
 {
 	GtkLabel *label;	//-- pointer to page label
 	
-		label = (GtkLabel *) page->tab_label;	//-- get label
-		nbchangecurModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
+	label = (GtkLabel *) page->tab_label;	//-- get label
+	//nbchangecurModSWORD((char *) label->label, page_num, TRUE);	//-- pass label text and page number
+	changecurModSWORD((char *) label->label,TRUE ); 
 }
 
 
