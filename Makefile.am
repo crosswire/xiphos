@@ -1,16 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS =   macros \
-            help \
-	    po \
-	    src 
+SUBDIRS =   help macros po src
 
 EXTRA_DIST = gnomesword.glade \
         Gnomesword.prj \
-        gnomesword.desktop\
-	xml-i18n-extract.in \
-	xml-i18n-merge.in \
-	xml-i18n-update.in
+        gnomesword.desktop
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
 gnomesworddoc_DATA = \
