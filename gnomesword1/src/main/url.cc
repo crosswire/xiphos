@@ -580,13 +580,13 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
 
 /******************************************************************************
  * Name
- *   show_bookmark
+ *   show_module_and_key
  *
  * Synopsis
  *   #include "main/url.hh"
  *
- *   gint show_bookmark(const gchar * module, const gchar * key, 
-						const gchar * type)
+ *   gint show_module_and_key(const gchar * module, const gchar * key, 
+					const gchar * type, gboolean clicked)
  *
  * Description
  *   
@@ -596,14 +596,19 @@ static gint show_ref(const gchar * module, const gchar * list, gboolean clicked)
  *   gint
  */
 
-static gint show_bookmark(const gchar * module, const gchar * key, 
-						const gchar * type)
+static int show_module_and_key(const char * module, const char * key, 
+					const char * type, gboolean clicked)
 {
 	gchar *buf = NULL;
 	gchar *tmpkey = NULL;
 	gint mod_type;
 	gint verse_count;
 	gboolean change_verse = FALSE;
+		
+	if(!clicked) {
+		//gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), url);
+		return 1;
+	}
 	
 	
 	if(backend->is_module(module)) {
@@ -622,16 +627,14 @@ static gint show_bookmark(const gchar * module, const gchar * key,
 			case TEXT_TYPE:	
 				tmpkey = main_update_nav_controls(key);
 				main_display_bible(module, tmpkey);
-				main_display_commentary(
-						settings.CommWindowModule, tmpkey);
+				main_display_commentary(NULL, tmpkey);
 				main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
 				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
 			case COMMENTARY_TYPE:
 			case PERCOM_TYPE:								
 				tmpkey = main_update_nav_controls(key);
-				main_display_bible(
-						settings.MainWindowModule, tmpkey);
+				main_display_bible(NULL, tmpkey);
 				main_display_commentary(module, tmpkey);
 				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
@@ -643,17 +646,8 @@ static gint show_bookmark(const gchar * module, const gchar * key,
 				main_display_book((gchar*)module, (gchar*)key); 
 			break;
 		}
-	} 	
-	/* 
-	 * add item to history 
-	 */
-/*	if (settings.addhistoryitem) {
-		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
-			gui_add_history_Item(widgets.app,
-				       settings.currentverse);
-	}*/
+	}
 	settings.addhistoryitem = TRUE;
-	
 	return 1;
 }
 
@@ -727,8 +721,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		switch(mod_type) {
 			case TEXT_TYPE:
 				key = main_update_nav_controls(tmpkey);
-				main_display_commentary(
-						settings.CommWindowModule, key);
+				main_display_commentary(NULL, key);
 				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				if(key) g_free((gchar*)key);
@@ -736,8 +729,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			case COMMENTARY_TYPE:	
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(work_buf[MODULE],key);
-				main_display_bible(settings.MainWindowModule, 
-							key);
+				main_display_bible(NULL, key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				if(key) g_free((gchar*)key);
 			break;
@@ -753,8 +745,8 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		if(verse_count) { 
 			key = main_update_nav_controls(tmpkey);
 			/* display in current Bible and Commentary */
-			main_display_commentary(settings.CommWindowModule, key);
-			main_display_bible(settings.MainWindowModule, key);
+			main_display_commentary(NULL, key);
+			main_display_bible(NULL, key);
 			main_keep_bibletext_dialog_in_sync((gchar*)key);
 			if(key) g_free((gchar*)key);
 		} else {
@@ -762,24 +754,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 		}
 	} 
 	g_strfreev(work_buf);
-	
-	/*
-	 * change parallel verses
-	 */
-	if (settings.dockedInt) {
-		main_update_parallel_page();
-	}
-	
-	/* 
-	 * add item to history 
-	 */
-/*	if (settings.addhistoryitem) {
-		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
-			gui_add_history_Item(widgets.app,
-				       settings.currentverse);
-	}*/
 	settings.addhistoryitem = TRUE;
-	
 	return 1;
 }
 
@@ -873,7 +848,7 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		
 		if(!strcmp(action,"showBookmark")) {	
 			module = g_strdup(m_url->getParameterValue("module"));
-			show_bookmark(module, value, type);
+			show_module_and_key(module, value, type, clicked);
 			if(module) g_free(module);
 		}		
 		

@@ -22,13 +22,14 @@
 #ifndef __TABBED_BROWSER_H__
 #define __TABBED_BROWSER_H__
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 #include <gnome.h>
 #include "main/tab_history.h"
 	
-typedef struct _passage_tab_info PASSAGE_TAB_INFO;	
+typedef struct _passage_tab_info PASSAGE_TAB_INFO;
 struct _passage_tab_info {
 	GtkWidget *page_widget;
 	GtkLabel *tab_label;
@@ -47,6 +48,7 @@ struct _passage_tab_info {
 	gint current_history_item;
 	gboolean first_back_click;
 };
+
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
 
 void gui_save_tabs(const gchar *filename);
@@ -67,9 +69,9 @@ void gui_open_tabs(void);
 
 void gui_notebook_main_setup(void);
 void gui_notebook_main_shutdown(void);
-void gui_notebook_main_switch_page(GtkNotebook * notebook,
+/*void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					GtkNotebookPage * page,
-					gint page_num, GList **tl);
+					gint page_num, GList **tl);*/
 #ifdef __cplusplus
 }
 #endif

@@ -32,14 +32,14 @@
 
 
 #include <glib-2.0/glib.h>
-#include <gnome.h>
+//#include <gnome.h>
 #include <swversion.h>
 #include <swmodule.h>
 #include <localemgr.h>
 
 #include "main/sword.h"
 #include "main/lists.h"
-#include "main/display.hh"
+//#include "main/display.hh"
 #include "main/settings.h"
 
 #include "backend/sword.h"
@@ -163,7 +163,7 @@ void backend_init(void)
 	g_print("sword-%s\n", sword_version);
 	g_print("%s\n\n", _("Initiating SWORD"));
 #endif 
-	SWConfig conf_file("/etc/sword.conf");
+/*	SWConfig conf_file("/etc/sword.conf");
 	
 	if(g_file_test("/usr/etc/sword.conf",G_FILE_TEST_EXISTS))
 		SWConfig conf_file("/usr/etc/sword.conf");
@@ -176,7 +176,7 @@ void backend_init(void)
 #ifdef DEBUG	
 	g_print("path to locales %s\n", buf);
 #endif	
-	LocaleMgr::getSystemLocaleMgr()->loadConfigDir(buf); 
+	LocaleMgr::getSystemLocaleMgr()->loadConfigDir(buf); */
 	sys_locale = strdup((char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
 
 	sword_locale = backend_get_sword_locale();
@@ -192,7 +192,7 @@ void backend_init(void)
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();
-	g_free(buf);
+//	g_free(buf);
 }
 
 

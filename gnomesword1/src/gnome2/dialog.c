@@ -771,3 +771,43 @@ gint gui_alert_dialog(GS_DIALOG * info)
 	}
 	return 4;
 }
+
+/******************************************************************************
+ * Name
+ *   gui_alert_dialog
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   gint gui_alert_dialog(GS_DIALOG * info)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gint
+ */
+
+gint gui_close_confirmation_dialog(GS_DIALOG * info)
+{
+	GtkWidget *dialog;
+	static gboolean is_running = FALSE;
+
+	if (!is_running) {
+		dialog = create_dialog_alert(info);	//gs_dialog_build(info);
+		gtk_dialog_add_button (GTK_DIALOG (dialog),
+				       _("Close _without Saving"),
+				       GTK_RESPONSE_NO);
+	
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
+		retval = 4;
+		is_running = TRUE;
+		gtk_dialog_run((GtkDialog *) dialog);
+		is_running = FALSE;
+		gtk_widget_destroy(dialog);
+		return retval;
+	}
+	return 4;
+}

@@ -330,7 +330,10 @@ static gboolean on_delete(GtkWidget * widget,
 	gint test;
 	GS_DIALOG *info;
 	GString *str;
-
+	gboolean retval = FALSE;
+#ifdef DEBUG 
+	g_message("on_delete");
+#endif
 	if (settings.modifiedSP) {
 		str = g_string_new("");
 		info = gui_new_dialog();
@@ -345,24 +348,32 @@ static gboolean on_delete(GtkWidget * widget,
 				_
 				("has been modified. Do you wish to save it?"));
 		info->label_top = str->str;
-		info->yes = TRUE;
-		info->no = TRUE;
 
-		test = gui_alert_dialog(info);
-		if (test == GS_YES) {
-			if (settings.studypadfilename) {
-				filename =
-				    g_strdup(settings.studypadfilename);
-				save_file(filename, ecd);
-			} else {
-				gui_fileselection_save(ecd, TRUE);
-			}
+		test = gui_close_confirmation_dialog(info);
+		switch(test) {
+			case GS_YES:
+				if (settings.studypadfilename) {
+					filename =
+					    g_strdup(settings.studypadfilename);
+					save_file(filename, ecd);
+				} else {
+					gui_fileselection_save(ecd, TRUE);
+				}
+				retval = FALSE;
+			break;
+			case GS_NO:
+				retval = FALSE;
+			break;
+			case GS_CANCEL:
+				retval = TRUE;
+			break;
 		}
+		
 		settings.modifiedSP = FALSE;
 		g_free(info);
 		g_string_free(str, TRUE);
 	}
-	return FALSE;
+	return retval;
 }
 
 
