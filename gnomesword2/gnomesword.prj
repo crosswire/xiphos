@@ -1,0 +1,303 @@
+# Anjuta Version 1.1.97 
+Compatibility Level: 1 
+
+<PROJECT_DESCRIPTION_START>
+Some description<PROJECT_DESCRIPTION_END>
+<CONFIG_PROGS_START>
+<CONFIG_PROGS_END>
+<CONFIG_LIBS_START>
+<CONFIG_LIBS_END>
+<CONFIG_HEADERS_START>
+<CONFIG_HEADERS_END>
+<CONFIG_CHARACTERISTICS_START>
+<CONFIG_CHARACTERISTICS_END>
+<CONFIG_LIB_FUNCS_START>
+<CONFIG_LIB_FUNCS_END>
+<CONFIG_ADDITIONAL_START>
+<CONFIG_ADDITIONAL_END>
+<CONFIG_FILES_START>
+<CONFIG_FILES_END>
+<MAKEFILE_AM_START>
+<MAKEFILE_AM_END>
+
+props.file.type=project
+
+anjuta.version=1.1.97
+anjuta.compatibility.level=1
+
+project.name=gnomesword
+project.type=GNOME
+project.target.type=EXECUTABLE
+project.version=0.9.0
+project.author=Gnomesword Project Team
+project.source.target=src/gnome/gnomesword
+project.has.gettext=1
+project.gui.command=
+project.programming.language=C
+project.excluded.modules=intl
+
+project.config.extra.modules.before=
+project.config.extra.modules.after=
+project.config.blocked=1
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
+
+project.menu.entry=gnomesword Version 0.9.0
+project.menu.group=Application
+project.menu.comment=gnomesword Version 0.9.0
+project.menu.icon=/home/terry/Projects/gnomesword2/pixmaps/GnomeSword.png
+project.menu.need.terminal=0
+
+project.configure.options=--prefix=/home/terry
+anjuta.program.arguments=
+preferences.build.option.jobs=0
+preferences.build.option.silent=0
+preferences.build.option.autosave=1
+preferences.anjuta.make.options=-k
+preferences.make=make
+preferences.build.option.keep.going=0
+preferences.build.option.warn.undef=0
+preferences.autoformat.custom.style= -i8 -sc -bli0 -bl0 -cbi0 -ss
+preferences.autoformat.style=Style of Kangleipak
+preferences.indent.opening=0
+preferences.autoformat.disable=1
+preferences.indent.automatic=1
+preferences.use.tabs=1
+preferences.indent.size=8
+preferences.tabsize=8
+preferences.indent.closing=0
+
+module.include.name=.
+module.include.type=
+module.include.files=\
+	acconfig.h\
+	src/backend/config.hh\
+	src/backend/key.hh\
+	src/backend/mgr.hh\
+	src/backend/module.hh\
+	src/backend/sword.h\
+	src/backend/tree.hh\
+	src/backend/sword_defs.h\
+	src/main/bibletext.h\
+	src/main/commentary.h\
+	src/main/configs.h\
+	src/main/dictlex.h\
+	src/main/gbs.h\
+	src/main/key.h\
+	src/main/lists.h\
+	src/main/module.h\
+	src/main/percomm.h\
+	src/main/search.h\
+	src/main/settings.h\
+	src/main/shortcutbar.h\
+	src/main/spell.h\
+	src/main/sword.h\
+	src/main/xml.h\
+	src/gnome/shortcutbar.h\
+	src/gui/about_gnomesword.h\
+	src/gui/about_modules.h\
+	src/gui/about_sword.h\
+	src/gui/bibletext_dialog.h\
+	src/gui/bibletext.h\
+	src/gui/bibletext_menu.h\
+	src/gui/bookmarks.h\
+	src/gui/cipher_key_dialog.h\
+	src/gui/commentary_dialog.h\
+	src/gui/commentary.h\
+	src/gui/commentary_menu.h\
+	src/gui/dialog.h\
+	src/gui/dictlex_dialog.h\
+	src/gui/dictlex.h\
+	src/gui/dictlex_menu.h\
+	src/gui/display_info.h\
+	src/gui/editor.h\
+	src/gui/editor_menu.h\
+	src/gui/editor_replace.h\
+	src/gui/editor_spell.h\
+	src/gui/fileselection.h\
+	src/gui/find_dialog.h\
+	src/gui/font_dialog.h\
+	src/gui/gbs_dialog.h\
+	src/gui/gbs_display.h\
+	src/gui/gbs.h\
+	src/gui/gbs_menu.h\
+	src/gui/gnomesword.h\
+	src/gui/gtkhtml_display.h\
+	src/gui/gui.h\
+	src/gui/hints.h\
+	src/gui/history.h\
+	src/gui/html.h\
+	src/gui/interlinear_dialog.h\
+	src/gui/interlinear.h\
+	src/gui/main_menu.h\
+	src/gui/main_window.h\
+	src/gui/percomm.h\
+	src/gui/preferences_dialog.h\
+	src/gui/search_dialog.h\
+	src/gui/setup_druid.h\
+	src/gui/shortcutbar_dialog.h\
+	src/gui/shortcutbar_main.h\
+	src/gui/shortcutbar_search.h\
+	src/gui/shortcutbar_viewer.h\
+	src/gui/splash.h\
+	src/gui/studypad_dialog.h\
+	src/gui/studypad.h\
+	src/gui/toolbar_edit.h\
+	src/gui/toolbar_nav.h\
+	src/gui/toolbar_style.h\
+	src/gui/utilities.h\
+	config.h
+
+module.source.name=.
+module.source.type=
+module.source.files=\
+	src/backend/config.cc\
+	src/backend/key.cc\
+	src/backend/mgr.cc\
+	src/backend/module.cc\
+	src/backend/sword.cpp\
+	src/backend/tree.cc\
+	src/main/bibletext.c\
+	src/main/commentary.c\
+	src/main/configs.c\
+	src/main/dictlex.c\
+	src/main/gbs.c\
+	src/main/key.c\
+	src/main/lists.c\
+	src/main/main.c\
+	src/main/module.c\
+	src/main/percomm.c\
+	src/main/search.c\
+	src/main/settings.c\
+	src/main/shortcutbar.c\
+	src/main/spell_aspell.c\
+	src/main/spell_ispell.c\
+	src/main/spell_pspell.c\
+	src/main/sword.c\
+	src/main/xml.c\
+	src/gnome/about_gnomesword.c\
+	src/gnome/about_modules.c\
+	src/gnome/about_sword.c\
+	src/gnome/bibletext.c\
+	src/gnome/bibletext_dialog.c\
+	src/gnome/bibletext_menu.c\
+	src/gnome/bookmarks.c\
+	src/gnome/cipher_key_dialog.c\
+	src/gnome/commentary.c\
+	src/gnome/commentary_dialog.c\
+	src/gnome/commentary_menu.c\
+	src/gnome/dialog.c\
+	src/gnome/dictlex.c\
+	src/gnome/dictlex_dialog.c\
+	src/gnome/dictlex_menu.c\
+	src/gnome/display_info.c\
+	src/gnome/dummy.cpp\
+	src/gnome/editor.c\
+	src/gnome/editor_menu.c\
+	src/gnome/editor_replace.c\
+	src/gnome/editor_spell.c\
+	src/gnome/fileselection.c\
+	src/gnome/find_dialog.c\
+	src/gnome/font_dialog.c\
+	src/gnome/gbs.c\
+	src/gnome/gbs_dialog.c\
+	src/gnome/gbs_display.c\
+	src/gnome/gbs_menu.c\
+	src/gnome/gnomesword.c\
+	src/gnome/gtkhtml_display.c\
+	src/gnome/gui.c\
+	src/gnome/hints.c\
+	src/gnome/history.c\
+	src/gnome/html.c\
+	src/gnome/interlinear.c\
+	src/gnome/interlinear_dialog.c\
+	src/gnome/main_menu.c\
+	src/gnome/main_window.c\
+	src/gnome/percomm.c\
+	src/gnome/preferences_dialog.c\
+	src/gnome/search_dialog.c\
+	src/gnome/setup_druid.c\
+	src/gnome/shortcutbar_dialog.c\
+	src/gnome/shortcutbar_main.c\
+	src/gnome/shortcutbar_search.c\
+	src/gnome/shortcutbar_viewer.c\
+	src/gnome/splash.c\
+	src/gnome/studypad.c\
+	src/gnome/studypad_dialog.c\
+	src/gnome/toolbar_edit.c\
+	src/gnome/toolbar_nav.c\
+	src/gnome/toolbar_style.c\
+	src/gnome/utilities.c
+
+module.pixmap.name=.
+module.pixmap.type=
+module.pixmap.files=\
+	doc/help/GnomeSword.png\
+	doc/help/gs.png\
+	pixmaps/about.png\
+	pixmaps/book-bl.png\
+	pixmaps/book-gold.png\
+	pixmaps/book-green.png\
+	pixmaps/book-un.png\
+	pixmaps/dialog.png\
+	pixmaps/dlg-bl.png\
+	pixmaps/dlg-un.png\
+	pixmaps/gnome-fontsel.xpm\
+	pixmaps/GnomeSword.png\
+	pixmaps/GnomeSword.xpm\
+	pixmaps/splash.png\
+	pixmaps/sword3.xpm\
+	pixmaps/sword.xpm\
+	pixmaps/tt.xpm
+
+module.data.name=.
+module.data.type=
+module.data.files=
+
+module.help.name=.
+module.help.type=
+module.help.files=
+
+module.doc.name=.
+module.doc.type=
+module.doc.files=\
+	po/ChangeLog\
+	README\
+	AUTHORS\
+	COPYING\
+	ChangeLog\
+	INSTALL\
+	NEWS\
+	TODO\
+	m4/ChangeLog\
+	doc/help/intro.html\
+	doc/help/index.html\
+	doc/help/search.html\
+	doc/help/search_sb.html\
+	doc/help/search_dialog.html
+
+module.po.files=\
+	bg.po\
+	de.po\
+	es.po\
+	es_ES.po\
+	fr.po\
+	sk.po
+
+compiler.options.supports=
+compiler.options.include.paths=\
+	.\
+	..
+compiler.options.library.paths=
+compiler.options.libraries=
+compiler.options.libraries.selected=
+compiler.options.defines=\
+	HAVE_CONFIG_H
+compiler.options.defines.selected=
+compiler.options.warning.buttons=0 0 1 1 0 1 0 0 0 0 0 0 0 1 0 0 
+compiler.options.optimize.buttons=0 0 1 0 
+compiler.options.other.buttons=1 0 
+compiler.options.other.c.flags=
+compiler.options.other.l.flags=
+compiler.options.other.l.libs=
+
+project.src.paths=
