@@ -44,8 +44,8 @@ struct _listitem {
 //void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
 gint setDiretory(void);
-void loadquickmarks_programstart(void);
-void loadquickmarks_afterSeparator(void);
+void loadquickmarks_programstart(GtkWidget *MainFrm);
+void loadquickmarks_afterSeparator(GtkWidget *MainFrm);
 void loadoptionarray(void);
 void clearquickmarks(void);
 void savequickmark(gchar * item);

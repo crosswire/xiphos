@@ -612,8 +612,8 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(html_button_pressed),
 			   GINT_TO_POINTER(2));
 
-	gtk_signal_connect(GTK_OBJECT(lookup_widget(settings->app,"htmlBooks")), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
+	/*gtk_signal_connect(GTK_OBJECT(lookup_widget(settings->app,"htmlBooks")), "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
 }
 
 /***************************************************************************************************
@@ -741,5 +741,17 @@ html_print(GtkWidget *htmlwidget)
 	gtk_object_unref(GTK_OBJECT(print_master));
 }
 
+/*** toogle htmlwidget edit mode ***/
+void
+set_html_edit(GtkWidget *htmlwidget)
+{
+	gboolean choice;
+	
+	if(gtk_html_get_editable(GTK_HTML(htmlwidget)))
+		choice = FALSE;
+	else
+		choice = TRUE;
+	gtk_html_set_editable(GTK_HTML(htmlwidget), choice);	
+}
 
 

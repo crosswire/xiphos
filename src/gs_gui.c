@@ -323,9 +323,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *list1;
 	GtkWidget *label58;
 	
-  GtkWidget *frame36;
-  GtkWidget *scrolledwindowBooks;
-  GtkWidget *htmlBooks;
+//  GtkWidget *frame36;
+//  GtkWidget *scrolledwindowBooks;
+//  GtkWidget *htmlBooks;
   GtkWidget *label185;
 	
 	GtkWidget *hbox25;
@@ -1134,7 +1134,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 							     (notebook3),
 							     0), label64);
 
-
+	settings->htmlBook = gbs_control(notebook3, settings);
+	
+	/*
   frame36 = gtk_frame_new (NULL);
   gtk_widget_ref (frame36);
   gtk_object_set_data_full (GTK_OBJECT (settings->app), "frame36", frame36,
@@ -1165,6 +1167,8 @@ gtk_container_add (GTK_CONTAINER (frame36), scrolledwindowBooks);
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(htmlBooks), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), settings->app);
+*/
+
 
   label185 = gtk_label_new (_("Books"));
   gtk_widget_ref (label185);

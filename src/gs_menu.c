@@ -311,14 +311,14 @@ void createpopupmenus(GtkWidget *app,
 	menuBible = create_pmBible(bibleDescription, dictDescription);	
 	/* create popup menu for commentaries window */
 	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);	
-	menuBook = create_popupmenu("htmlBooks",bookDescription, dictDescription);		
+	//menuBook = create_popupmenu("htmlBooks",bookDescription, dictDescription);		
 	/* attach popup menus and ajust checkmarks*/
 	gnome_popup_menu_attach(menuInt,lookup_widget(app,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->comm_tabs;
-	gnome_popup_menu_attach(menuBook,lookup_widget(app,"htmlBooks"),(gchar*)"1");
+	//gnome_popup_menu_attach(menuBook,lookup_widget(app,"htmlBooks"),(gchar*)"1");
 	gnome_popup_menu_attach(menuDict,lookup_widget(app,"htmlDict"),(gchar*)"1");	
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->dict_tabs;
 
@@ -1316,6 +1316,9 @@ static GtkWidget *create_popupmenu(gchar *window, GList *Description1,
 {
 	GtkWidget *popupmenu;
 	GtkWidget *copy6;
+	GtkWidget *edit;
+	GtkWidget *open;
+	GtkWidget *save;
 	GtkWidget *goto_reference;
 	GtkWidget *lookup_word;
 	GtkWidget *lookup_word_menu;
@@ -1329,11 +1332,8 @@ static GtkWidget *create_popupmenu(gchar *window, GList *Description1,
 	GtkWidget *add_bookmark_menu;
 	GtkWidget *about_this_module6;
 	GtkWidget *view_in_new_window;
-	GtkWidget *view_module1;
-	GtkWidget *view_module1_menu;
 	GtkWidget *print_item;
-	GtkAccelGroup *view_module1_menu_accels;
-	GtkWidget *separator22, *item1, *item3, *item4;
+	GtkWidget *separator22, *item3, *item4;
 	GtkTooltips *tooltips;
 	GList *tmp = NULL;
 	gint i = 0;
@@ -1350,7 +1350,29 @@ static GtkWidget *create_popupmenu(gchar *window, GList *Description1,
 	gtk_widget_show(copy6);
 	gtk_container_add(GTK_CONTAINER(popupmenu), copy6);
 
-
+	edit = gtk_check_menu_item_new_with_label("Edit");
+	gtk_widget_ref(edit);
+	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "edit",
+				edit ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(edit);
+	gtk_container_add(GTK_CONTAINER(popupmenu),edit );
+			     
+	open = gtk_menu_item_new_with_label("Open");
+	gtk_widget_ref(open);
+	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "open", open,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(open);
+	gtk_container_add(GTK_CONTAINER(popupmenu), open);
+	
+			     
+	save = gtk_menu_item_new_with_label("Save");
+	gtk_widget_ref(save);
+	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "save", save,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(save);
+	gtk_container_add(GTK_CONTAINER(popupmenu), save);
+	
 	print_item = gtk_menu_item_new_with_label("Print Comment");
 	gtk_widget_ref(print_item);
 	gtk_object_set_data_full(GTK_OBJECT(popupmenu),
@@ -1532,16 +1554,19 @@ static GtkWidget *create_popupmenu(gchar *window, GList *Description1,
 	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
 			   "commentary");
-			   /*
-	gtk_signal_connect(GTK_OBJECT(view_in_new_window), "activate",
-			   GTK_SIGNAL_FUNC(on_view_in_new_window2_activate),
-			   NULL);	
-			   */
-			   /*
-	gtk_signal_connect (GTK_OBJECT (settings->unlockcommmod_item), "activate",
-                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
-                      	GINT_TO_POINTER(COMMENTARY_WINDOW));
-			*/
+			   
+	gtk_signal_connect(GTK_OBJECT(edit), "activate",
+			   GTK_SIGNAL_FUNC(on_edit_book_activate),
+			   (gchar*)"htmlBooks");	
+	/*		  
+	gtk_signal_connect (GTK_OBJECT (open), "activate",
+                      	GTK_SIGNAL_FUNC (on_open_book_activate),
+                      	(gchar*)"htmlBooks");
+	*/					   
+	gtk_signal_connect (GTK_OBJECT (save), "activate",
+                      	GTK_SIGNAL_FUNC (on_save_book_activate),
+                      	(gchar*)"htmlBooks");
+			
 	gtk_object_set_data(GTK_OBJECT(popupmenu), "tooltips", tooltips);
 	return popupmenu;
 }
