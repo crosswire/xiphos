@@ -31,13 +31,10 @@
 #include <swmodule.h>
 #include <swmgr.h>
 #include <versekey.h>
-//#include <thmlgbf.h>
-//#include <gbfplain.h>
 #include <gal/widgets/e-unicode.h>
 
 #include "gs_display.h"
 #include "support.h"
-//#include "interface.h"
 #include "gs_sword.h"
 #include "gs_html.h"
 #include "gs_gnomesword.h"
@@ -54,8 +51,7 @@ extern bool bVerseStyle;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
-//extern INTERLINEAR interlinearMods;
-extern GS_FONTS *gsfonts;
+extern SETTINGS *settings;
 
 /***************************************************************************** 
  * ComEntryDisp - for displaying commentary modules in a GtkHTML widget
@@ -86,7 +82,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
 	/* show verse ref in text widget  */
-	/* show module text for current key */
+	/* show module text for current key */ 
 	beginHTML(GTK_WIDGET(gtkText),TRUE);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
@@ -132,7 +128,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	beginHTML(GTK_WIDGET(gtkText),TRUE);
 	sprintf(tmpBuf,"<html><body>");
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str);//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 	
 	/* show verse ref in text widget  */
@@ -142,20 +138,20 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 					imodule.Name(),
 					 imodule.KeyText() );	
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-			utf8len = g_utf8_strlen (utf8str , -1) ;
+			utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 			
 			 sprintf(tmpBuf, "<font size=\"%s\">",
-					gsfonts->dictionary_font_size);	
+					settings->dictionary_font_size);	
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-			utf8len = g_utf8_strlen (utf8str , -1) ;
+			utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	 
 			
 			displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, strlen((const char *)imodule) ); 
 						 
 			 sprintf(tmpBuf, " %s", "</font></body></html>");			 
 			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-			utf8len = g_utf8_strlen (utf8str , -1) ;
+			utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 			 /*
 			 g_warning("utf8 string!");
@@ -347,7 +343,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	
+	 
 	//c = 182;	 
 	
 	gtk_notebook_set_page(GTK_NOTEBOOK
@@ -355,33 +351,33 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	
 	beginHTML(GTK_WIDGET(gtkText),TRUE);	
 	
-	sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">",
-		gsfonts->bible_font_size);
+	sprintf(tmpBuf,"<html><body bgcolor=\"%s\" text=\"#151515\" link=\"#898989\">",
+		settings->bible_bg_color);
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 	
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter
-	      && !imodule.Error()); imodule++) {
-		
-		if (key->Verse() == curVerse) {
-			  sprintf(versecolor,"%s",mycolor);
-		}else{
-			  sprintf(versecolor,"%s", "#000000");
-		}		
-		sprintf(tmpBuf, "&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
-					 imodule.Description(),
-					 imodule.KeyText(), key->Verse(),
-					 key->Verse());	
+	      && !imodule.Error()); imodule++) {		
+		if (key->Verse() == curVerse)
+			sprintf(versecolor,"%s",settings->currentverse_color);
+		else
+			sprintf(versecolor,"%s", settings->bible_text_color);
+		sprintf(tmpBuf, "&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"%s\"><B>%d</B></font></A> ",
+					imodule.Description(),
+					imodule.KeyText(), 
+					key->Verse(),
+					settings->bible_verse_num_color,
+					key->Verse());	
 		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-		utf8len = g_utf8_strlen (utf8str , -1) ;
+		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 			 
 		sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">",
-					versecolor ,
-			 		gsfonts->bible_font_size);	
+					versecolor,
+			 		settings->bible_font_size);	
 		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-		utf8len = g_utf8_strlen (utf8str , -1) ;
+		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	 
 			
 		displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, strlen((const char *)imodule) ); 
@@ -392,12 +388,12 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			else sprintf(tmpBuf, " %s", "</font>");	
 		} else sprintf(tmpBuf, " %s", "</font>");			 
 		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-		utf8len = g_utf8_strlen (utf8str , -1) ;
+		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 	}
 	sprintf(tmpBuf, " %s", "</body></html>");			 
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
 	key->Verse(1);
 	key->Chapter(1);
@@ -427,17 +423,17 @@ char InterlinearDisp::Display(SWModule & imodule)
 		"<B><A HREF=\"[%s]%s\"><FONT COLOR=\"#000FCF\" SIZE=\"%s\"> [%s]</font></a></b><FONT COLOR=\"#000FCF\">[%s] </font>",
 				imodule.Name(), 
 				 imodule.Description(),
-				gsfonts->interlinear_font_size,
+				settings->interlinear_font_size,
 				imodule.Name(), 
 				imodule.KeyText());	
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);	
 		
 	sprintf(tmpBuf,	 "<font size=\"%s\">",
-				gsfonts->interlinear_font_size);	
+				settings->interlinear_font_size);	
 	utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
-	utf8len = g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 	
 			
 	displayHTML(GTK_WIDGET(gtkText), (const char *)imodule, strlen((const char *)imodule) );

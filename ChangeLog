@@ -1,15 +1,20 @@
+2001-07-28 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*new preferences dialog
+	* added files gs_preferences_dlg.c and gs_preferences_dlg.h
+	* removed interface.c and interface.h	
+
 2001-07-25 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added e-splash.c and e-spalash.h to src from gIDE from evolution
 	* added splash.png to pixmaps
-	* added splash screen
+	* added splash screen	
 
 2001-07-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added [view context] link to each interlinear verse that will swap 
 	 it with the module in the main window. 
 	* added Strongs, Footnotes and Morph Tags to interlinear popup menu.
-
 
 2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
 
@@ -21,7 +26,6 @@
 
 	* Create new bookmark group and file is working.
 	
-
 2001-07-13 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* load and save bookmark ctree is working

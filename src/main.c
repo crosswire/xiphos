@@ -26,8 +26,6 @@
 #include "gs_gnomesword.h"
 #include "gs_menu.h"
 #include "support.h"
-//#include "callback.h"
-#include "interface.h"
 #include "gs_file.h"
 #include "gs_html.h"
 #include "gs_gui.h"
@@ -72,7 +70,7 @@ main (int argc, char *argv[])
   	if(newbookmarks)
   	{
   		createFiles();
-  	} 
+  	}
 	//icreatefiles = 1;/* please remove me - i am for testing */
 	if(icreatefiles == 1){		
 		gs_firstrunSWORD();
@@ -80,17 +78,14 @@ main (int argc, char *argv[])
   	/* set pointer to structure */
   	settings = &myset; 
 	loadconfig(); /* new */    
-	/* splash screen */
-	
+	/* splash screen */	
 	splash = e_splash_new ();
 	if(settings->showsplash){	
 		gtk_widget_show (splash);
 		gtk_object_ref (GTK_OBJECT (splash));
-		//gtk_window_set_position (GTK_WINDOW (splash), GTK_WIN_POS_CENTER);
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
-	}
-	
+	}  	
 	mainwindow = create_mainwindow (splash);
   	add_gtkhtml_widgets(mainwindow);
 	if(settings->showsplash)

@@ -32,7 +32,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-//#include <gtkhtml/gtkhtml.h>
 
 #include <gnome.h>
 #include <gtk/gtk.h>
@@ -40,7 +39,6 @@
 #include "gs_info_box.h"
 #include "callback.h"
 #include "gs_studypad.h"
-#include "interface.h"
 #include "support.h"
 
 GtkWidget *create_InfoBox(void)

@@ -57,9 +57,9 @@ GtkWidget *spbVTVerse;
  ****************************************************************************************/
 extern gchar current_verse[];
 //extern GList *cbBook_items;
-
+extern SETTINGS *settings;
 extern gboolean gsI_isrunning;
-extern GS_LEXICON *p_gslexicon;
+
 /****************************************************************************************
  * update the book, chapter and verse contorls
  ****************************************************************************************/
@@ -101,7 +101,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'T') ++url;
 		if(*url == 'G' ) {
 			++url;
-			modName = g_strdup(p_gslexicon->greek);
+			modName = g_strdup(settings->lex_greek);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
 			g_warning(modName);
@@ -110,7 +110,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}   		
 		if(*url == 'H') {
 			++url;
-			modName =  g_strdup(p_gslexicon->hebrew);
+			modName =  g_strdup(settings->lex_hebrew);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
 			g_warning(modName);
