@@ -962,3 +962,17 @@ gchar* getmodnameSWORD(gint num)
 			break;
 	}		
 }
+
+/******************************************************************************
+ *navcurcommModSWORD
+ * 
+ * 
+******************************************************************************/
+void navcurcommModSWORD(gint backfoward)
+{
+	if (curcomMod) {
+		if(backfoward) (*curcomMod)++;
+		else (*curcomMod)--;		
+		curcomMod->Display();
+	}
+}

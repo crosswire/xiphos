@@ -77,6 +77,7 @@ void setglobalopsSWORD(gchar *option,
 void changepercomModSWORD(gchar * modName);
 void redisplayTextSWORD(void);
 gchar* getmodnameSWORD(gint num);
+void navcurcommModSWORD(gint backfoward);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

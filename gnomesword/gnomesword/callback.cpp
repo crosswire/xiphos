@@ -28,10 +28,6 @@
 #endif
 
 #include <gnome.h>
-//#include <swmodule.h>
-//#include <swmgr.h>
-//#include <versekey.h>
-//#include <regex.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 #include  <widgets/e-paned/e-paned.h>
 #include  <widgets/e-paned/e-hpaned.h>
@@ -52,46 +48,21 @@
 
 #ifdef USE_ASPELL
 #include "spellcheck.h"
-#endif				/* USE_ASPELL */
+#endif /* USE_ASPELL */
 
-LISTITEM listitem;		//-- structure for ListEditor items (verse lists and bookmarks)
-gint listrow;			//-- current row in ListEditor clist widget
-gboolean firstsearch = true;	//-- search dialog is not running when true
-gboolean firstLE = true;		//-- ListEditor in not running when true
-GtkWidget *searchDlg;		//-- pointer to search dialog
-GtkWidget *listeditor;		//-- pointer to ListEditor
-extern SETTINGS *settings;	//-- pointer to settings structure - (declared in GnomeSword.cpp)
-extern gboolean ApplyChange;	//-- to keep form looping when book combobox is changed - do we still need this ???
-extern gboolean file_changed;	//-- ???
-extern gchar *current_filename;	//-- file in studypad
-extern GtkWidget *MainFrm;	//-- GnomeSword widget (gnome app)(declared and set in GnomeSword.cpp)
-extern GtkWidget *NEtext;
-extern GtkWidget *bookmark_mnu;	//-- ???
-extern GtkWidget *strongsnum;	//-- menu check item (declared in GnomeSword.cpp)
-extern GtkWidget *shortcut_bar;
-extern gchar *font_mainwindow,	//--
-*font_interlinear,		//--
-*font_currentverse;		//--
-extern GdkColor myGreen;	//-- current verse color for main text window - declared in display.cpp
-extern gboolean noteModified;	//-- personal comments window changed
-
-extern gboolean autoSave;	//-- auto save personal comments when verse changes -- declared in GnomeSword.cpp
-extern gint answer;		//-- do we save file on exit
-extern SWModule *curMod;	//-- module for main text window (GnomeSword.cpp)
-extern SWModule *comp1Mod;	//-- module for first interlinear window (GnomeSword.cpp)
-extern SWModule *comp2Mod;	//-- module for second interlinear window (GnomeSword.cpp)   
-extern SWModule *comp3Mod;	//-- module for third interlinear window (GnomeSword.cpp)
-extern SWModule *curcomMod;	//-- module for commentary text window (GnomeSword.cpp)
-extern SWModule *curdictMod;	//-- module for dict/lex text window (GnomeSword.cpp)
-
-extern gint ibookmarks;		//-- number of bookmark menu items
-extern NoteEditor *noteeditor;
-extern gboolean autoscroll;
-extern gboolean isstrongs;	//-- main window selection is not storngs number (GnomeSword.cpp)
-extern char *homedir;
+/******************************************************************************
+ * globals
+******************************************************************************/
+LISTITEM listitem;		/* structure for ListEditor items
+				 (verse lists and bookmarks) */
+gint listrow;			/* current row in ListEditor clist widget */
+gboolean firstsearch = true;	/* search dialog is not running when true */
+gboolean firstLE = true;	/* ListEditor in not running when true */
+GtkWidget *searchDlg;		/* pointer to search dialog */
+GtkWidget *listeditor;		/* pointer to ListEditor */
 guint num1, num2, num3;
-gboolean 	buttonpressed = false;
-gboolean 	dicttabs,
+gboolean buttonpressed = false;
+gboolean dicttabs,
 	comtabs,
 	bar,
 	applycolor = false,
@@ -100,16 +71,43 @@ gboolean 	dicttabs,
 	showdictgroup,
 	showhistorygroup;
 
-//-------------------------------------------------------------------------------------------
-void
-on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	gchar *buf;
-	buf = (gchar *) user_data;
-	changeVerse(buf);
-}
+/******************************************************************************
+ * externals
+******************************************************************************/
+extern SETTINGS *settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
+extern gboolean ApplyChange;	/* to keep form looping when book combobox is changed - do we still need this ??? */
+extern gboolean file_changed;	/* ??? */
+extern gchar *current_filename;	/* file in studypad */
+extern GtkWidget *MainFrm;	/* GnomeSword widget (gnome app)(declared and set in gs_sword.cpp) */
+extern GtkWidget *NEtext;
+extern GtkWidget *bookmark_mnu;	/* ??? */
+extern GtkWidget *strongsnum;	/* menu check item (declared in gs_gnomesword.c) */
+extern GtkWidget *shortcut_bar;
+extern gchar 	*font_mainwindow,	
+		*font_interlinear,		
+		*font_currentverse;		
+extern GdkColor myGreen;	/* current verse color for main text window - declared in display.cpp */
+extern gboolean noteModified;	/* personal comments window changed */
+extern gboolean autoSave;	/* auto save personal comments when verse changes -- declared in gs_sword.cpp */
+extern gint answer;		/* do we save file on exit */
+extern gint ibookmarks;		/* number of bookmark menu items */
+extern NoteEditor *noteeditor;
+extern gboolean autoscroll;
+extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
+extern char *homedir;
 
-//----------------------------------------------------------------------------------------------
+
+
+
+/******************************************************************************
+*******************************************************************************
+ *callbacks fileselection dialogs
+******************************************************************************* 
+******************************************************************************/
+
+/******************************************************************************
+ *on_ok_button1_clicked - fileselection dialog
+******************************************************************************/
 void on_ok_button1_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *filesel;
@@ -120,13 +118,13 @@ void on_ok_button1_clicked(GtkButton * button, gpointer user_data)
 }
 
 
-//----------------------------------------------------------------------------------------------
+//----------------------------------------------
 void on_cancel_button1_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
-//----------------------------------------------------------------------------------------------
+//----------------------------------------------
 void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *filesel;
@@ -140,7 +138,7 @@ void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
 	saveFile(filename);
 }
 
- //----------------------------------------------------------------------------------------------
+ //------------------------------------------
  //-- save verse list - fileselection dialog ok button clicke
  //-- user data - the list widget dialog ok button clicked
 void on_ok_button4_clicked(GtkButton * button, gpointer user_data)
@@ -155,19 +153,62 @@ void on_ok_button4_clicked(GtkButton * button, gpointer user_data)
 	savelist(filename, (GtkWidget *) user_data);	//-- send filename and list widget to savelist function (filestuff.cpp)
 }
 
-//----------------------------------------------------------------------------------------------
+//--------------------------------------------
 void
 //-- fileselection dialog cancel button clicked
 on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
-{
-	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));	//--destroy fileselection dialog
+{	//--destroy fileselection dialog
+	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
-//----------------------------------------------------------------------------------------------
+
+/*********************************************************************************
+**********************************************************************************
+ *callbacks About dialogs
+********************************************************************************** 
+*********************************************************************************/
+//-------------------------------------------------
 void on_btnAboutOK_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
+
+//-------------------------------------------------
+void on_btnAboutModuleOK_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *dlg;
+
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	gtk_widget_destroy(dlg);
+}
+
+//------------------------------------------------
+void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *dlg;
+
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	gtk_widget_destroy(dlg);
+}
+
+
+/*********************************************************************************
+**********************************************************************************
+ *callbacks MainFrm
+********************************************************************************** 
+*********************************************************************************/
+
+/******************************************************************************
+ *on_mnuHistoryitem1_activate - user chose an history item
+******************************************************************************/
+void
+on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gchar *buf;
+	buf = (gchar *) user_data;
+	changeVerse(buf);
+}
+
 
 //----------------------------------------------------------------------------------------------
 void on_copy_verse1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -183,37 +224,6 @@ void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
 	shutdownSWORD();
 }
 
-//----------------------------------------------------------------------------------------------
-void on_listeditor_destroy(GtkObject * object, gpointer user_data)
-{
-	firstLE = true;
-	destroyListEditor();
-}
-
-//----------------------------------------------------------------------------------------------
-void on_dlgSearch_destroy(GtkObject * object, gpointer user_data)
-{
-	firstsearch = true;
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnSearch1_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *searchFrm;
-	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	searchWindow->searchSWORD(searchFrm);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_resultList_select_row(GtkCList * clist,
-			 gint row,
-			 gint column, GdkEvent * event, gpointer user_data)
-{
-	GtkWidget *searchFrm;
-	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist));
-	searchWindow->resultsListSWORD(searchFrm, row, column);
-}
 
 //----------------------------------------------------------------------------------------------
 void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
@@ -906,55 +916,9 @@ void on_btnSpellOK_clicked(GtkButton * button, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void on_btnEBMcut_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnEBMcopy_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnEBMpaste_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
 void on_text4_changed(GtkEditable * editable, gpointer user_data)
 {
 
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnEBMOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	editbookmarksSave(dlg);	//-- in filestuff.cpp
-	gtk_widget_destroy(dlg);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnEBMApply_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	editbookmarksSave(dlg);	//-- in filestuff.cpp
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnEBMCancel_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1088,15 +1052,6 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	gtk_text_set_word_wrap(GTK_TEXT(text2), true);
 	showinfoSWORD(text2, GTK_LABEL(label));
 	gtk_widget_show(dlg);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1240,59 +1195,6 @@ void on_btnSearchSaveList_clicked(GtkButton * button, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void on_btnVerseListNew_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnVerseListOpen_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnVerseListClose_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnVerseListPrint_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_verse_list1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_btnVerseListSave_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	editbookmarksSave(dlg);
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_btnVerseListCopy_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnVerseListPaste_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
 void
 on_cbContext_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
@@ -1339,14 +1241,7 @@ void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	showmoduleinfoSWORD((char *) user_data);
 }
 
-//----------------------------------------------------------------------------------------------
-void on_btnAboutModuleOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
 
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
-}
 
 //----------------------------------------------------------------------------------------------
 void
@@ -1366,61 +1261,6 @@ void on_tree1_selection_changed(GtkTree * tree, gpointer user_data)
 void
 on_tree1_unselect_child(GtkTree * tree,
 			GtkWidget * widget, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEAddItem_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEDelete_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEup_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEdown_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEleft_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEright_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEok_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEapply_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnBMEcancel_clicked(GtkButton * button, gpointer user_data)
 {
 
 }
@@ -1490,7 +1330,14 @@ on_btnPropertyboxCancel_clicked(GtkButton * button, gpointer user_data)
 	gtk_widget_destroy(dlg);
 }
 
-//----------------------------------------------------------------------------------------------
+
+
+/*********************************************************************************
+**********************************************************************************
+ *callbacks liseditor
+********************************************************************************** 
+*********************************************************************************/
+//------------------------------------------------
 void
 on_clLElist_select_row(GtkCList * clist,
 		       gint row,
@@ -1611,7 +1458,8 @@ void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void on_entryPreitem_changed(GtkEditable * editable, gpointer user_data)
+void
+on_btnLEcancelistchanges_clicked(GtkButton * button, gpointer user_data)
 {
 
 }
@@ -1621,32 +1469,6 @@ void
 on_btnLEapplylistchanges_clicked(GtkButton * button, gpointer user_data)
 {
 	applylistchanges(GTK_WIDGET(button), listrow);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnLEcancelistchanges_clicked(GtkButton * button, gpointer user_data)
-{
-
-}
-
-//==============================================================================================
-//----------------------------------------------------------------------------------------------
-void on_new1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_open1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
-}
-
-//----------------------------------------------------------------------------------------------
-void on_close1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1754,7 +1576,6 @@ void on_btnLErefresh_clicked(GtkButton * button, gpointer user_data)
 
 }
 
-
 //----------------------------------------------------------------------------------------------
 void on_btnLEsave_clicked(GtkButton * button, gpointer user_data)
 {
@@ -1763,6 +1584,7 @@ void on_btnLEsave_clicked(GtkButton * button, gpointer user_data)
 	listeditor = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	editbookmarksSave(listeditor);
 }
+//==============================================================================================
 
 //----------------------------------------------------------------------------------------------
 void
@@ -2039,19 +1861,13 @@ void on_lookup_word1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
-	if (curcomMod) {
-		(*curcomMod)--;
-		curcomMod->Display();
-	}
+	navcurcommModSWORD(0);
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
-	if (curcomMod) {
-		(*curcomMod)++;
-		curcomMod->Display();
-	}
+	navcurcommModSWORD(1);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2240,7 +2056,7 @@ on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
 
 //----------------------------------------------------------------------------------------------
 void
-//-- show hide commentary notebook tabs - popup menu choice------------------------------------- to falsetoogled which will do the work
+//-- show hide commentary notebook tabs - popup menu choice
 on_show_tabs1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
@@ -2251,7 +2067,7 @@ on_show_tabs1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 //----------------------------------------------------------------------------------------------
 void
-//-- show hide dict/lex notebook tabs - popup menu choice--------------------------------------- to falsetoogled which will do the work
+//-- show hide dict/lex notebook tabs - popup menu choice
 on_show_tabs2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
@@ -2383,4 +2199,37 @@ on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
 	gtk_widget_set_sensitive (btnok, true);
 	gtk_widget_set_sensitive (btnapply, true);
 	showhistorygroup = togglebutton->active;
+}
+
+
+//----------------------------------------------------------------------------------------------
+void on_listeditor_destroy(GtkObject * object, gpointer user_data)
+{
+	firstLE = true;
+	destroyListEditor();
+}
+
+//----------------------------------------------------------------------------------------------
+void on_dlgSearch_destroy(GtkObject * object, gpointer user_data)
+{
+	firstsearch = true;
+}
+
+//----------------------------------------------------------------------------------------------
+void on_btnSearch1_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *searchFrm;
+	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	searchWindow->searchSWORD(searchFrm);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_resultList_select_row(GtkCList * clist,
+			 gint row,
+			 gint column, GdkEvent * event, gpointer user_data)
+{
+	GtkWidget *searchFrm;
+	searchFrm = gtk_widget_get_toplevel(GTK_WIDGET(clist));
+	searchWindow->resultsListSWORD(searchFrm, row, column);
 }
