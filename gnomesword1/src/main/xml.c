@@ -32,10 +32,296 @@
 
 
 #include "main/xml.h"
+#include "main/module.h"
 #include "main/settings.h"
 
+struct _bookmark_data {
+	gchar *caption;
+	gchar *key;
+	gchar *module;
+	gboolean is_leaf;
+};
+typedef struct _bookmark_data BOOKMARK_DATA;
+	
+static BOOKMARK_DATA *es;
 static xmlDocPtr xml_settings_doc;
 static xmlNodePtr section_ptr;
+
+
+/******************************************************************************
+ * Name
+ *   xml_new_bookmark_file
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   void xml_new_bookmark_file(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void xml_new_bookmark_file(void)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr xml_root;
+	xmlNodePtr xml_node;
+	xmlNodePtr xml_folder;
+	xmlAttrPtr xml_attr;
+	const xmlChar *xml_filename;
+	gchar buf[256];
+	
+	sprintf(buf, "%s/%s/bookmarks.xml", settings.gSwordDir,
+		"bookmarks");
+	xml_filename = (const xmlChar *) buf;
+	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
+
+	if (xml_doc == NULL) {
+		fprintf(stderr,
+			"Document not created successfully. \n");
+		return;
+	}
+
+	xml_node = xmlNewNode(NULL, (const xmlChar *) "SwordBookmarks");
+	xml_attr = xmlNewProp(xml_node, "syntaxVersion",
+			      (const xmlChar *) "1.0");
+	xmlDocSetRootElement(xml_doc, xml_node);
+
+	xml_root = xml_add_folder_to_parent(xml_node, "Personal");
+	xml_folder = xml_add_folder_to_parent(xml_root, "What must I do to be saved?");
+	xml_add_bookmark_to_parent(xml_folder, 
+					"Acts 16:31",
+					"Acts 16:31",
+					NULL);
+	xml_add_bookmark_to_parent(xml_folder, 
+					"Eph 2:8",
+					"Eph 2:8",
+					NULL);
+	xml_add_bookmark_to_parent(xml_folder, 
+					"Romans 1:16",
+					"Romans 1:16",
+					NULL);
+	xml_folder = xml_add_folder_to_parent(xml_root, "What is the Gospel?");
+	xml_add_bookmark_to_parent(xml_folder, 
+					"1 Cor 15:1-4",
+					"1 Cor 15:1",
+					NULL);
+
+	xmlSaveFile(xml_filename, xml_doc);
+	xmlFreeDoc(xml_doc);
+}
+
+/******************************************************************************
+ * Name
+ *  xml_add_folder_to_parent
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, 
+ *						BOOKMARK_DATA * es)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   xmlNodePtr
+ */
+
+xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
+{ 
+	xmlNodePtr cur_node;
+	xmlAttrPtr xml_attr;
+
+	cur_node = xmlNewChild(parent,
+			       NULL, (const xmlChar *) "Folder", NULL);
+	xml_attr = xmlNewProp(cur_node,
+			      "caption", (const xmlChar *) caption);
+	return cur_node;
+}
+
+
+/******************************************************************************
+ * Name
+ *  xml_add_bookmark_to_parent
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_add_bookmark_to_parent(xmlNodePtr parent, 
+ *						BOOKMARK_DATA * es)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
+					gchar * key, gchar * module)
+{
+	xmlNodePtr xml_node;
+	xmlAttrPtr xml_attr;
+	gchar *mod_desc = NULL;
+
+	if (module) {
+		if (strlen(module) > 2)
+			mod_desc = get_module_description(module);
+	} 
+
+	if (mod_desc == NULL)
+		mod_desc = " ";
+
+	xml_node = xmlNewChild(parent,
+			       NULL,
+			       (const xmlChar *) "Bookmark", NULL);
+	xml_attr = xmlNewProp(xml_node,
+			      "modulename",
+			      (const xmlChar *) module);
+	xml_attr =
+	    xmlNewProp(xml_node, "key", (const xmlChar *) key);
+	xml_attr =
+	    xmlNewProp(xml_node, "moduledescription",
+		       (const xmlChar *) mod_desc);
+	xml_attr =
+	    xmlNewProp(xml_node, "description",
+		       (const xmlChar *) caption);
+}
+
+/******************************************************************************
+ * Name
+ *  get_node_data
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void get_node_data(GNode * node)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void get_node_data(GNode * node)
+{
+	es = g_new(BOOKMARK_DATA, 1);
+	es = (BOOKMARK_DATA *) node->data;
+}
+
+/******************************************************************************
+ * Name
+ *  parse_gnode_tree
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void parse_gnode_tree(GNode * node, xmlNodePtr parent)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void parse_gnode_tree(GNode * node, xmlNodePtr parent)
+{
+	static xmlNodePtr cur_node;
+	GNode *work;
+
+	for (work = node->children; work; work = work->next) {
+		get_node_data(work);
+		if (!es->is_leaf) {
+			cur_node = xml_add_folder_to_parent(parent, es->caption);
+		} else {
+			xml_add_bookmark_to_parent(parent, es->caption,
+						es->key, es->module);
+		}
+		g_free(es);
+		parse_gnode_tree(work, cur_node);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  xml_save_gnode_to_bookmarks
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_save_gnode_to_bookmarks(GNode * node, gchar *file_buf)	
+ *
+ * Description
+ *    for compatability with old bookmarks
+ *
+ * Return value
+ *   void
+ */
+
+void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
+{
+	xmlNodePtr root_node = NULL;
+	xmlNodePtr cur_node = NULL;
+	xmlDocPtr root_doc;
+	xmlAttrPtr root_attr;
+	const xmlChar *xml_filename;
+	
+	if (!gnode)
+		return;
+	xml_filename = (const xmlChar *) file_buf;
+	root_doc = xmlNewDoc((const xmlChar *) "1.0");
+
+	if (root_doc != NULL) {
+		root_node = xmlNewNode(NULL, (const xmlChar *)
+				       "SwordBookmarks");
+		root_attr =
+		    xmlNewProp(root_node, "syntaxVersion",
+			       (const xmlChar *) "1.0");
+		xmlDocSetRootElement(root_doc, root_node);
+	}
+
+	es = (BOOKMARK_DATA *) gnode->data;
+
+	if ((!g_strcasecmp(es->module, "ROOT")) ||
+	    (!g_strcasecmp(es->module, "GROUP"))) {
+		cur_node =
+		    xml_add_folder_to_parent(root_node, es->caption);
+		parse_gnode_tree(gnode, cur_node);
+	} else {
+		xml_add_bookmark_to_parent(root_node, 
+						es->caption,
+						es->key,
+						es->module);
+	}
+
+	while ((gnode = g_node_next_sibling(gnode)) != NULL) {
+		get_node_data(gnode);
+		if (!es->is_leaf) {
+			cur_node =
+			    xml_add_folder_to_parent(root_node,
+						     es->caption);
+			parse_gnode_tree(gnode, cur_node);
+		} else {
+			if (root_doc != NULL) {
+				xml_add_bookmark_to_parent
+				    (root_node, es->caption,
+						es->key,
+						es->module);
+			}
+		}
+	}
+	g_print("\nsaving = %s\n", xml_filename);
+	xmlSaveFile(xml_filename, root_doc);
+	xmlFreeDoc(root_doc);
+	g_free(file_buf);
+}
 
 
 /******************************************************************************
