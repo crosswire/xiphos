@@ -3320,7 +3320,7 @@ fi
 
 
 have_speller="no"
-if test "x$spelchecking" = xyes || test "x$all" = xyes; then
+
   echo $ac_n "checking for aspell""... $ac_c" 1>&6
 echo "configure:3326: checking for aspell" >&5 
   aspell_dirs="${prefix}/bin $ac_aspell_dir/bin /usr/bin /usr/local/bin" 
@@ -3368,12 +3368,11 @@ EOF
     echo "found"
    fi
   fi
-fi
+
 
 have_pixbuf="no"
-if test "x$shortcutbar" = xyes || test "x$printing" = xyes || test "x$all" = xyes; then
  echo $ac_n "checking for Gdkpixbuf libraries""... $ac_c" 1>&6
-echo "configure:3377: checking for Gdkpixbuf libraries" >&5
+echo "configure:3376: checking for Gdkpixbuf libraries" >&5
  if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
     echo "$ac_t""found" 1>&6
         PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
@@ -3384,12 +3383,11 @@ echo "configure:3377: checking for Gdkpixbuf libraries" >&5
  else
     echo "$ac_t""Did not find gdkpixbuf installed" 1>&6
  fi
-fi
+
 
 have_gnomeprint="no"
-if test "x$shortcutbar" = xyes || test "x$printing" = xyes || test "x$all" = xyes; then
  echo $ac_n "checking for GnomePrint libraries >= 0.20""... $ac_c" 1>&6
-echo "configure:3393: checking for GnomePrint libraries >= 0.20" >&5
+echo "configure:3391: checking for GnomePrint libraries >= 0.20" >&5
  if gnome-config --libs print > /dev/null 2>&1; then 
     vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
@@ -3410,12 +3408,11 @@ EOF
  else
     echo "$ac_t""Did not find GnomePrint installed" 1>&6
  fi
-fi
+
 
 have_gal="no"
-if test "x$shortcutbar" = xyes || test "x$all" = xyes; then
  echo $ac_n "checking for Gnome App libraries (GAL) >= 0.4.99.7""... $ac_c" 1>&6
-echo "configure:3419: checking for Gnome App libraries (GAL) >= 0.4.99.7" >&5
+echo "configure:3416: checking for Gnome App libraries (GAL) >= 0.4.99.7" >&5
  if gnome-config --libs gal > /dev/null 2>&1; then 
     vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
@@ -3432,10 +3429,10 @@ echo "configure:3419: checking for Gnome App libraries (GAL) >= 0.4.99.7" >&5
  else
     echo "$ac_t""Did not find GnomeAppLib (GAL) installed" 1>&6
  fi
-fi
+
 gtkhtml_ok="false"
 echo $ac_n "checking for GtkHTML""... $ac_c" 1>&6
-echo "configure:3439: checking for GtkHTML" >&5
+echo "configure:3436: checking for GtkHTML" >&5
   if gnome-config --libs gtkhtml > /dev/null 2>&1; then
 	vers=`gnome-config --modversion gtkhtml`
 	case $vers

@@ -547,3 +547,5 @@ on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
 	dlg = create_dlgViewText ();
 	gtk_widget_show(dlg);
 }
+
+

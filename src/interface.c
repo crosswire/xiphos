@@ -41,6 +41,7 @@
 #include "gs_studypad.h"
 #include "interface.h"
 #include "support.h"
+#include "gs_shortcutbar.h"
 
 #ifdef USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
