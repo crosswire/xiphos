@@ -1,18 +1,18 @@
-Basic Installation for GnomeSword 0.4.0 and later
+Basic Installation for GnomeSword 0.7.0 and later
 ==================
 ===================== notice =======================
-You must have GtkHTML-0.8.0 or later to build gnomesword 
-ftp://download.sourceforge.net/pub/mirrors/gnome/unstable/sources/gtkhtml/gtkhtml-0.8.0.tar.gz
+You must have GtkHTML-1.0.0 or later to build gnomesword 
+ftp://download.sourceforge.net/pub/mirrors/gnome/unstable/sources/gtkhtml/gtkhtml-1.0.0.tar.gz
 
-You need to have the Sword Project (sword-1.5.1a) installed.
+You need to have the Sword Project (sword-1.5.3) installed.
 You need at least one each text ,commentary and dictionary module also.
-Sword-1.5.1a and the modules can be found at www.crosswire.org in the Sword Project.
+Sword-1.5.3 and the modules can be found at www.crosswire.org in the Sword Project.
 
-if you want build to gnomesword with the Evolution shortcut bar you need these packages
-You need gal-0.4.99.7 or later -- helix  ftp://spidermonkey.ximian.com/ximian/
+you also need these packages
+You need gal-0.18.1 or later -- helix  ftp://spidermonkey.ximian.com/ximian/
                                                 evolution-snapshots/distributions/RedHat-6
-You need gnome-print-0.25 or later -- http://www.gnome.org/
-You need gdk-pixbuf-0.9 or later -- http://www.gnome.org/
+You need gnome-print-0.31 or later -- http://www.gnome.org/
+You need gdk-pixbuf-0.11.0 or later -- http://www.gnome.org/
 
 
 ======================================================================
@@ -36,7 +36,7 @@ everything it needs..
 ======================================================================
 
 ============================================================================
- gnomesword will use ispell or aspell for spell checking if you enable spell checking. see below
+ gnomesword will use ispell or aspell for spell checking 
 ============================================================================
 
 You must also have gnome up and running.
@@ -51,25 +51,11 @@ libraries are installed and configured properly.
 Then do a:
 
 ./configure 
-or
-./configure  --enable-spellchecking
-or
-./configure  --enable-printing
-or
-./configure  --enable-shortcutbar
-or
-./configure  --enable-all
 make
 su
 make install
 
 For spell checking to work aspell or ispell must be in your path.
-
-default is without any options which should build if don't have gnomeprint,
-gdk_pixbuf nor gal.
-
-if you --enable-all the configure script will check to see is you have the needed
-packages. 
 
    ========================================================
      ====================================================

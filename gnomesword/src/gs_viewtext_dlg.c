@@ -1,15 +1,15 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
   /*
-    * GnomeSword Bible Study Tool
-    * gs_viewtext_dlg.c
-    * -------------------
-    * Sat Mar 24 2001 
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-    *
- */
- 
+     * GnomeSword Bible Study Tool
+     * gs_viewtext_dlg.c
+     * -------------------
+     * Sat Mar 24 2001 
+     * copyright (C) 2001 by Terry Biggs
+     * tbiggs@users.sourceforge.net
+     *
+   */
+
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "gs_information_dlg.h"
+#include "sw_verselist_sb.h"
 #include "support.h"
 
 /****************************************************************************************
@@ -68,8 +69,8 @@ extern gboolean gsI_isrunning;
 static void updatecontrols(void)
 {
 	gchar *buf;
-	
-	buf =  VTgetbookSWORD();
+
+	buf = VTgetbookSWORD();
 	gtk_entry_set_text(GTK_ENTRY(cbeBook), buf);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spbVTChapter),
 				  VTgetchapterSWORD());
@@ -84,113 +85,113 @@ static void updatecontrols(void)
 /******************************************************************************
  * viewtext callbacks
  ******************************************************************************/
- 
- 
+
+
 /*****************************************************************************
  *link in text window clicked
  *****************************************************************************/
 static
 void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf,*modName;
+	gchar *buf, *modName;
 	static GtkWidget *dlg;
 	if (*url == '#') {
-		
-		if(!gsI_isrunning){
-		 	dlg = create_dlgInformation();
-		 }
+
+		if (!gsI_isrunning) {
+			dlg = create_dlgInformation();
+		}
 		++url;		/* remove # */
-		if(*url == 'T') ++url;
-		if(*url == 'G' ) {
+		
+		if (*url == 'T')
+			++url;
+		
+		if (*url == 'G') {
 			++url;
 			modName = g_strdup(settings->lex_greek);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
-//			g_warning(modName);
+//                      g_warning(modName);
 			g_free(buf);
 			g_free(modName);
-		}   		
-		if(*url == 'H') {
+		}
+		
+		if (*url == 'H') {
 			++url;
-			modName =  g_strdup(settings->lex_hebrew);
+			modName = g_strdup(settings->lex_hebrew);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
-//			g_warning(modName);
+//                      g_warning(modName);
 			g_free(buf);
 			g_free(modName);
-		} 
-		 gtk_widget_show(dlg);
+		}
+		gtk_widget_show(dlg);
+		
 	} else if (*url == 'M') {
-		if(!gsI_isrunning){
-		 	dlg = create_dlgInformation();
-		 }
+		if (!gsI_isrunning) {
+			dlg = create_dlgInformation();
+		}
 		++url;		/* remove M */
-		buf = g_strdup(url); 
+		buf = g_strdup(url);
 		loadmodandkey("Packard", buf);
 		g_free(buf);
-		 gtk_widget_show(dlg); 
-	}else  if(*url == '*'){
+		gtk_widget_show(dlg);
+		
+	} else if (*url == '*') {
 		++url;
-		while(*url != ']') {
+		while (*url != ']') {
 			++url;
-		} 
+		}
 		++url;
 		buf = g_strdup(url);
 		VTgotoverseSWORD(buf);
 		updatecontrols();
+		g_free(buf); 
+	
+	/*** let's remove passage= verse list ***/
+	} else if (!strncmp(url, "passage=", 7)) {
+		gchar *mybuf = NULL;
+		gchar *modbuf = NULL;
+		mybuf = strchr(url, '=');
+		++mybuf;
+		buf = g_strdup(mybuf);
+		modbuf = getmodnameSWORD(0);
+		getVerseListSBSWORD(modbuf, buf, settings);
 		g_free(buf);
-	}  else {		
+		
+	} else if (!strncmp(url, "type=morph", 10)) {
+		gchar *modbuf = NULL;
+		gchar *mybuf = NULL;
+		mybuf = strstr(url, "class=Packard");
+		if (mybuf) {
+			modbuf = "Packard";
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "value=");
+		
+		if (mybuf) {
+			gint i;
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			for(i=0;i<strlen(mybuf);i++){
+				if(mybuf[i]=='-') 
+					mybuf[i]=' ';
+			}
+		}
+		
+		if (!gsI_isrunning) {
+			dlg = create_dlgInformation();
+		}
+		
+		buf = g_strdup(mybuf);
+		loadmodandkey(modbuf, buf);
+		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
+		g_free(buf);
+		gtk_widget_show(dlg);
+	} else {
 		buf = g_strdup(url);
 		VTgotoverseSWORD(buf);
 		updatecontrols();
 		g_free(buf);
-	}
-}
-
-/*****************************************************************************
- * toggle  Strong's Numbers
- *****************************************************************************/
-static void
-on_tbtVTStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
-{
-	if(togglebutton->active){ /* we want strongs numbers  */
-		/* turn strongs on  */
-		VTsetGlobalOptionsSWORD("Strong's Numbers","On");
-	}else{   /* we don't want strongs numbers */
-	              /* turn strongs off   */
-		VTsetGlobalOptionsSWORD("Strong's Numbers","Off");	
-	}
-}
-
-/*****************************************************************************
- *  toggle Footnotes
- *****************************************************************************/
-static void
-on_tbtnVTFootnotes_toggled(GtkToggleButton * togglebutton,
-			   gpointer user_data)
-{
-	if(togglebutton->active){  /* we want footnotes */
-		/* turn footnotes on  */
-		VTsetGlobalOptionsSWORD("Footnotes","On");
-	}else{  /* we don't want footnotes  */
-	        /* turn footnotes off */
-		VTsetGlobalOptionsSWORD("Footnotes","Off");	
-	}
-}
-
-/*****************************************************************************
- *  toggle Morphological Tags
- *****************************************************************************/
-static void
-on_tbtnVTMorf_toggled                  (GtkToggleButton *togglebutton,
-                                        gpointer         user_data)
-{
-	if(togglebutton->active){ //-- if choice is TRUE - we want morphs
-		//-- turn morphs on
-		VTsetGlobalOptionsSWORD("Morphological Tags","On");
-	}else{   /* we don't want morphs */
-	        //-- turn morphs off
-		VTsetGlobalOptionsSWORD("Morphological Tags","Off");
 	}
 }
 
@@ -204,11 +205,14 @@ static void on_btnGotoVerse_clicked(GtkButton * button, gpointer user_data)
 {
 	gchar *bookname, buf[120];
 	gint iChap, iVerse;
-	
+
 	bookname = gtk_entry_get_text(GTK_ENTRY(cbeBook));
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spbVTChapter)); 
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spbVTVerse)); 
-	sprintf(buf,"%s %d:%d", bookname, iChap, iVerse);
+	iChap =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (spbVTChapter));
+	iVerse =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spbVTVerse));
+	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
 	//g_warning(buf);
 	VTgotoverseSWORD(buf);
 	updatecontrols();
@@ -257,10 +261,93 @@ static void on_btnVTClose_clicked(GtkButton * button, gpointer user_data)
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
+/*** set SWORD module global options ***/
+static void on_modops_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	if (GTK_CHECK_MENU_ITEM(menuitem)->active) {	//-- if choice is TRUE - we want option
+		//-- turn option on
+		VTsetGlobalOptionsSWORD((gchar*)user_data, "On");
+	} else {		/* we don't want option */
+		//-- turn option off
+		VTsetGlobalOptionsSWORD((gchar*)user_data, "Off");
+	}
+}
+
+/*** add sword global options to menu ***/
+static void additemstooptionsmenu(GtkWidget * shellmenu, GList * options)
+{
+	GtkWidget * menuChoice;
+	gchar menuName[64];
+	int viewNumber = 0;
+	GList *tmp;
+
+	tmp = NULL;
+
+	tmp = options;
+	while (tmp != NULL) {
+
+		/* add global option items to menu */
+		menuChoice =
+		    gtk_check_menu_item_new_with_label((gchar *) (gchar *)
+						       tmp->data);
+		sprintf(menuName, "optionNum%d", viewNumber++);
+		gtk_object_set_data(GTK_OBJECT(settings->app), menuName,
+				    menuChoice);
+		gtk_widget_show(menuChoice);
+		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
+				   GTK_SIGNAL_FUNC(on_modops_activate),
+				   (gchar *) (gchar *) tmp->data);
+		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
+				      GTK_WIDGET(menuChoice), 1);
+
+		/*              
+		   if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {       
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->strongsint;      
+		   }
+
+		   if(!strcmp((gchar *) tmp->data,"Footnotes" )) {              
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->footnotesint;
+		   }
+
+		   if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->morphsint;
+		   //gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);
+		   }
+
+		   if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->hebrewpointsint;
+		   }
+
+		   if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->cantillationmarksint;
+		   }
+
+		   if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->greekaccentsint;
+		   }    
+
+		   if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->crossrefint;
+		   }    
+
+		   if(!strcmp((gchar *) tmp->data, "Lemmas")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->lemmasint;
+		   }            
+
+		   if(!strcmp((gchar *) tmp->data, "Headings")) {
+		   GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->headingsint;
+		   }    
+		 */
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+}
+
+
 /******************************************************************************
  * viewtext ui
  ******************************************************************************/
-GtkWidget *create_dlgViewText(void)
+GtkWidget *create_dlgViewText(GList * glist)
 {
 
 	GtkWidget *dialog_vbox14;
@@ -272,9 +359,10 @@ GtkWidget *create_dlgViewText(void)
 	GtkWidget *btnVTAdd;
 	GtkWidget *btnSync;
 	GtkWidget *vseparator16;
-	GtkWidget *tbtVTStrongs;
-	GtkWidget *tbtnVTFootnotes;
-	GtkWidget *tbtnVTMorf;
+	GtkWidget *menubar;
+	GtkWidget *module_options;
+	GtkWidget *module_options_menu;
+	GtkAccelGroup *module_options_menu_accels;
 	GtkWidget *toolbar30;
 	GtkWidget *combo11;
 	GtkObject *spbVTChapter_adj;
@@ -284,11 +372,14 @@ GtkWidget *create_dlgViewText(void)
 	GtkWidget *swVText;
 	GtkWidget *dialog_action_area14;
 	GtkWidget *btnVTClose;
+	GList *tmp;
+
+	tmp = NULL;
 
 	dlgViewText = gnome_dialog_new(_("GnomeSword"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgViewText), "dlgViewText",
 			    dlgViewText);
-	gtk_window_set_default_size(GTK_WINDOW(dlgViewText), 300, 412);
+	gtk_window_set_default_size(GTK_WINDOW(dlgViewText), 370, 412);
 	gtk_window_set_policy(GTK_WINDOW(dlgViewText), TRUE, TRUE, FALSE);
 
 	dialog_vbox14 = GNOME_DIALOG(dlgViewText)->vbox;
@@ -369,47 +460,37 @@ GtkWidget *create_dlgViewText(void)
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator16, 7, 13);
 
-	tmp_toolbar_icon =
-	    create_pixmap(dlgViewText, "gnomesword/strongs2.xpm", TRUE);
-	tbtVTStrongs =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("Strongs"),
-				       _("Toggle Strongs Numbers"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(tbtVTStrongs);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "tbtVTStrongs",
-				 tbtVTStrongs,
+	menubar = gtk_menu_bar_new();
+	gtk_widget_ref(menubar);
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "menubar",
+				 menubar,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(tbtVTStrongs);
+	gtk_widget_show(menubar);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), menubar, NULL,
+				  NULL);
 
-	tmp_toolbar_icon =
-	    create_pixmap(dlgViewText, "gnomesword/footnote3.xpm", TRUE);
-	tbtnVTFootnotes =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("Footnotes"),
-				       _("Toggle Footnotes"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(tbtnVTFootnotes);
+	module_options = gtk_menu_item_new_with_label(_("Module Options"));
+	gtk_widget_ref(module_options);
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "module_options",
+				 module_options,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(module_options);
+	gtk_container_add(GTK_CONTAINER(menubar), module_options);
+
+	module_options_menu = gtk_menu_new();
+	gtk_widget_ref(module_options_menu);
 	gtk_object_set_data_full(GTK_OBJECT(dlgViewText),
-				 "tbtnVTFootnotes", tbtnVTFootnotes,
+				 "module_options_menu",
+				 module_options_menu,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(tbtnVTFootnotes);
-	gtk_widget_set_usize(tbtnVTFootnotes, 30, 30);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_options),
+				  module_options_menu);
+	module_options_menu_accels =
+	    gtk_menu_ensure_uline_accel_group(GTK_MENU
+					      (module_options_menu));
 
-     tmp_toolbar_icon = gnome_stock_pixmap_widget (dlgViewText, GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY);
-	tbtnVTMorf = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
-                                GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-                                NULL,
-                                _("togglebutton1"),
-                                _("toggle Morf "), NULL,
-                                tmp_toolbar_icon, NULL, NULL);
-  gtk_widget_ref (tbtnVTMorf);
-  gtk_object_set_data_full (GTK_OBJECT (dlgViewText), "tbtnVTMorf", tbtnVTMorf,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (tbtnVTMorf);
-	
+	additemstooptionsmenu(module_options_menu, glist);
+
 	toolbar30 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar30);
@@ -539,22 +620,13 @@ GtkWidget *create_dlgViewText(void)
 			   GTK_SIGNAL_FUNC(on_btnVTAdd_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSync), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSync_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(tbtVTStrongs), "toggled",
-			   GTK_SIGNAL_FUNC(on_tbtVTStrongs_toggled), NULL);
-	gtk_signal_connect(GTK_OBJECT(tbtnVTFootnotes), "toggled",
-			   GTK_SIGNAL_FUNC(on_tbtnVTFootnotes_toggled),
-			   NULL);
-  	gtk_signal_connect (GTK_OBJECT (tbtnVTMorf), "toggled",
-                      GTK_SIGNAL_FUNC (on_tbtnVTMorf_toggled),
-                      NULL);
 	gtk_signal_connect(GTK_OBJECT(cbeBook), "changed",
 			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
-			   
 	gtk_signal_connect(GTK_OBJECT(btnGotoVerse), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnGotoVerse_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnVTClose), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnVTClose_clicked), NULL);
-			   
+
 	textList = NULL;
 	textList = VTsetupSWORD(text, combo11);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo10), textList);

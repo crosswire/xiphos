@@ -1273,17 +1273,7 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
-			/*
-  	gtk_signal_connect (GTK_OBJECT (show_strongs), "activate",
-                      	GTK_SIGNAL_FUNC (on_show_strongs_activate),
-                      	NULL);
-	gtk_signal_connect (GTK_OBJECT (show_morphs), "activate",
-                      	GTK_SIGNAL_FUNC (on_show_morphs_activate),
-                      	NULL);		
-	gtk_signal_connect (GTK_OBJECT (show_footnotes), "activate",
-                      	GTK_SIGNAL_FUNC (on_show_footnotes_activate),
-                      	NULL);	
-			*/
+			
   return pmInt;
 }
 
@@ -1471,4 +1461,6 @@ static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods)
 
 	return pmEditnote;
 }
+
+
 
