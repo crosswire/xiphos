@@ -4,7 +4,8 @@ INCLUDES =  \
     $(EXTRA_PRINT_CFLAGS) \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
-    $(SWORD_CPPFLAGS)
+    $(SWORD_CPPFLAGS) \
+    $(GTKHTML_CFLAGS)
 
 bin_PROGRAMS = gnomesword
  
@@ -76,8 +77,8 @@ COMMON_SOURCE =  \
     sw_bookmarks.h \
     sw_gbfhtml.cpp \
     sw_gbfhtml.h \
-    sw_thmlhtml.cpp \
-    sw_thmlhtml.h\
+    thmlhtmllink.cpp \
+    thmlhtmllink.h\
     sw_latin1utf8.cpp \
     sw_latin1utf8.h \
     sw_search.cpp \
@@ -112,8 +113,9 @@ COMMON_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
-    $(SWORD_LIBS)
-
+    $(SWORD_LIBS) \
+    $(GTKHTML_LIBS)
+    
 PRINT_LDADD = \
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS)
@@ -171,7 +173,7 @@ gnomesword_SOURCES = \
 
 gnomesword_LDADD =  \
     $(COMMON_LDADD) \
-    $(PRINT_LDADD)
+    $(PRINT_LDADD)	
 endif
 
 if NO_OPS
@@ -179,7 +181,7 @@ gnomesword_SOURCES = \
     $(COMMON_SOURCE)
 
 gnomesword_LDADD =  \
-    $(COMMON_LDADD)
+    $(COMMON_LDADD)	
 endif
 
 CXXFLAGS =  \
