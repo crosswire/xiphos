@@ -57,7 +57,7 @@ extern "C" {
 	gchar *gethtmlfontnameHTML(gchar *xfontname);
 	/*** set html default font ***/
 	void set_gtkhtml_default_font_HTML(GtkWidget *html_widget, gchar *xfontname);
-	
+	void html_print(GtkWidget *htmlwidget);
 #ifdef __cplusplus
 }
 #endif
