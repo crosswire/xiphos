@@ -84,6 +84,10 @@ void gotokeySWORD(gchar *newkey);
 void shutdownSDSWORD(void);
 void SDdictSearchTextChangedSWORD(char* newkey);
 gchar *showfirstlineStrongsSWORD(gint theNumber);
+GtkWidget *createSearchDlgSWORD(void);
+void startsearchSWORD(GtkWidget *searchFrm);
+void rlclickedSWORD(GtkWidget *searchFrm);
+
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }
