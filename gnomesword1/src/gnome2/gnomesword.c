@@ -79,11 +79,10 @@
 void frontend_init(void)
 {
 	guint number_of_pages = 0;
-//#ifdef DEBUG	
+#ifdef DEBUG	
 	g_print("%s\n", _("Initiating GnomeSword"));
-//#endif
+#endif
 
-	settings.shadow_type = 1;
 	
 	hint.in_popup = FALSE;
 	hint.use_hints = FALSE;

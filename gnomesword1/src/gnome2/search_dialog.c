@@ -2097,6 +2097,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow66),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow66,
+                                             settings.shadow_type);
 	/* create tree model */
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 
@@ -2156,6 +2158,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       scrolledwindow_tree,
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_tree,
+                                             settings.shadow_type);
 	gtk_paned_pack1(GTK_PANED(hpaned8), scrolledwindow_tree, TRUE,
 			TRUE);
 

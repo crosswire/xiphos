@@ -197,6 +197,8 @@ static GtkWidget *gui_create_about_modules(void)
 				       (scrolledwindow30),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow30,
+                                             settings.shadow_type);
 
 
 	text_html = gtk_html_new();
