@@ -60,6 +60,35 @@ static gboolean display_change = TRUE;
 
 /******************************************************************************
  * Name
+ *   have_module
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h
+ *
+ *   gboolean have_module(gchar *mod_name)
+ *
+ * Description
+ *   test for module
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean have_module(gchar *mod_name)
+{
+	GList *tmp = NULL;
+	tmp = get_list(TEXT_LIST);
+	while(tmp != NULL) {
+		if(!strcmp(mod_name,(gchar*)tmp->data))
+			return TRUE;
+		tmp = g_list_next(tmp);
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
  *  gui_get_module_global_options
  *
  * Synopsis
