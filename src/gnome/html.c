@@ -314,6 +314,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			if (mybuf) {
 				modbuf = strchr(mybuf, '=');
 				++modbuf;
+				if(modbuf[0] == 'x' && modbuf[1] == '-')
+					modbuf += 2;
 				if (!strncmp(modbuf, "Robinson", 7)) {	
 					modbuf = "Robinson";
 				} 
@@ -517,11 +519,14 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 
+		oldnew = g_strdup(url);
 		buf = g_strdup(url);
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
+			if(modbuf[0] == 'x' && modbuf[1] == '-')
+				modbuf += 2;
 			if (!strncmp(modbuf, "Robinson", 7)) {	
 				modbuf = "Robinson";
 			} 
@@ -541,12 +546,17 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			mybuf = strchr(mybuf, '=');
 			++mybuf;
 		}
+		if(is_strongsmorph) {				
+			++mybuf;
+			++mybuf;
+		} 
 		buf = g_strdup(mybuf);
 		if (settings.inDictpane)
 			gui_change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(modbuf, buf);
 		g_free(buf);
+		g_free(oldnew);
 	}
 	/*** thml strongs ***/
 	else if (!strncmp(url, "type=Strongs", 12)) {
