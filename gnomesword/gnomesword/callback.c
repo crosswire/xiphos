@@ -46,6 +46,8 @@
 #include "interface.h"
 #include "gs_file.h"
 #include "gs_listeditor.h"
+#include "gs_abouts.h"
+
 //#include "noteeditor.h"
 //#include "searchstuff.h"
 #include "printstuff.h"
@@ -148,31 +150,6 @@ void
 on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
 {	//--destroy fileselection dialog
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
-}
-
-
-/*********************************************************************************
-**********************************************************************************
- *callbacks About dialogs
-**********************************************************************************
-*********************************************************************************/
-
-//-------------------------------------------------
-void on_btnAboutModuleOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
-}
-
-//------------------------------------------------
-void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
 }
 
 
@@ -599,12 +576,12 @@ on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	//-- we change the state of strongs toogle buttn to match the menu item this will activate on_btnStrongs_toogled
-	//-- which will do the work
+	/* we change the state of strongs toogle buttn to match the menu item this will 
+	    activate on_btnStrongs_toogled  which will do the work */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (lookup_widget
 				      (MainFrm, "btnStrongs")),
-				     GTK_CHECK_MENU_ITEM(menuitem)->active);	//-- set strongs toogle button
+				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
 }
 
 
