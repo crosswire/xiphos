@@ -33,7 +33,7 @@
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_file.h"
-#include "menustuff.h"
+#include "gs_menu.h"
 #include "gs_sword.h"
 #include "gs_listeditor.h"
 

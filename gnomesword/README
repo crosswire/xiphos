@@ -2,7 +2,7 @@
 Please see INSTALL file before you start.
 ==================================================================
 ******************************************************************
-GnomeSword requires Gnome and the Sword libs to run
+GnomeSword requires Gnome ,the Sword libs and GtkHTML-0.8.0 to run
 ******************************************************************
 ##################################################################
 you can do some formatting of your personal notes
@@ -40,10 +40,6 @@ The printing code is from gedit-0.7.9. I only change what I had to to
 make it work with GnomeSword.
 
 The code for spell checking is from the Bluefish HTML editor 0.6
-
-The code for the shortcut bar is from the Evolution project without
-any changes - I just copied the subdirs 'e-util' and 'widgets' into
-the gnomesword dir.
 
 I wish to thank the folks who have put so much time and work into the
 Sword Project and then giving it to the world! God Bless you!

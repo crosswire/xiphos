@@ -690,6 +690,19 @@
 	</widget>
 
 	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>btnSB</name>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_btnSB_clicked</handler>
+	    <last_modification_time>Thu, 08 Feb 2001 10:22:32 GMT</last_modification_time>
+	  </signal>
+	  <label>button7</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_INDEX</stock_pixmap>
+	</widget>
+
+	<widget>
 	  <class>GtkCombo</class>
 	  <name>cbBook</name>
 	  <width>154</width>
@@ -1024,72 +1037,100 @@ Revelation
 		</child>
 
 		<widget>
-		  <class>GtkVBox</class>
-		  <name>vbox19</name>
-		  <homogeneous>False</homogeneous>
-		  <spacing>0</spacing>
+		  <class>GtkNotebook</class>
+		  <name>nbText</name>
+		  <show_tabs>False</show_tabs>
+		  <show_border>False</show_border>
+		  <tab_pos>GTK_POS_TOP</tab_pos>
+		  <scrollable>False</scrollable>
+		  <tab_hborder>2</tab_hborder>
+		  <tab_vborder>2</tab_vborder>
+		  <popup_enable>False</popup_enable>
 
 		  <widget>
 		    <class>GtkScrolledWindow</class>
-		    <name>scrolledwindow18</name>
+		    <name>swHtmlBible</name>
 		    <border_width>2</border_width>
 		    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		    <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
 		    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 		    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-		    <child>
-		      <padding>0</padding>
-		      <expand>True</expand>
-		      <fill>True</fill>
-		    </child>
 
 		    <widget>
-		      <class>GtkText</class>
-		      <name>moduleText</name>
-		      <can_focus>True</can_focus>
-		      <has_focus>True</has_focus>
-		      <signal>
-			<name>button_press_event</name>
-			<handler>on_moduleText_button_press_event</handler>
-			<last_modification_time>Tue, 20 Apr 1999 20:08:53 GMT</last_modification_time>
-		      </signal>
-		      <signal>
-			<name>drag_begin</name>
-			<handler>on_moduleText_drag_begin</handler>
-			<last_modification_time>Sat, 15 Jul 2000 16:56:59 GMT</last_modification_time>
-		      </signal>
-		      <signal>
-			<name>enter_notify_event</name>
-			<handler>on_moduleText_enter_notify_event</handler>
-			<last_modification_time>Wed, 19 Jul 2000 15:45:08 GMT</last_modification_time>
-		      </signal>
-		      <editable>False</editable>
-		      <text></text>
+		      <class>Placeholder</class>
 		    </widget>
 		  </widget>
 
 		  <widget>
-		    <class>GtkFrame</class>
-		    <name>frame19</name>
-		    <label_xalign>0</label_xalign>
-		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		    <child>
-		      <padding>0</padding>
-		      <expand>False</expand>
-		      <fill>False</fill>
-		    </child>
+		    <class>GtkLabel</class>
+		    <child_name>Notebook:tab</child_name>
+		    <name>label131</name>
+		    <label>label131</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		  </widget>
+
+		  <widget>
+		    <class>GtkVBox</class>
+		    <name>vbox19</name>
+		    <homogeneous>False</homogeneous>
+		    <spacing>0</spacing>
 
 		    <widget>
-		      <class>GtkLabel</class>
-		      <name>lbText</name>
-		      <label>[KJV]</label>
-		      <justify>GTK_JUSTIFY_CENTER</justify>
-		      <wrap>False</wrap>
-		      <xalign>0.5</xalign>
-		      <yalign>0.5</yalign>
-		      <xpad>1</xpad>
-		      <ypad>1</ypad>
+		      <class>GtkScrolledWindow</class>
+		      <name>scrolledwindow18</name>
+		      <border_width>2</border_width>
+		      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+		      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		      <child>
+			<padding>0</padding>
+			<expand>True</expand>
+			<fill>True</fill>
+		      </child>
+
+		      <widget>
+			<class>GtkText</class>
+			<name>moduleText</name>
+			<can_focus>True</can_focus>
+			<has_focus>True</has_focus>
+			<signal>
+			  <name>button_press_event</name>
+			  <handler>on_moduleText_button_press_event</handler>
+			  <last_modification_time>Tue, 20 Apr 1999 20:08:53 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>drag_begin</name>
+			  <handler>on_moduleText_drag_begin</handler>
+			  <last_modification_time>Sat, 15 Jul 2000 16:56:59 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>enter_notify_event</name>
+			  <handler>on_moduleText_enter_notify_event</handler>
+			  <last_modification_time>Wed, 19 Jul 2000 15:45:08 GMT</last_modification_time>
+			</signal>
+			<editable>False</editable>
+			<text></text>
+		      </widget>
 		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>Notebook:tab</child_name>
+		    <name>label132</name>
+		    <label>label132</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
 		  </widget>
 		</widget>
 	      </widget>
@@ -1158,10 +1199,10 @@ Revelation
 		    </child>
 
 		    <widget>
-		      <class>GtkVBox</class>
-		      <name>vbox23</name>
-		      <homogeneous>False</homogeneous>
-		      <spacing>0</spacing>
+		      <class>GtkFrame</class>
+		      <name>frameCom</name>
+		      <label_xalign>0</label_xalign>
+		      <shadow_type>GTK_SHADOW_IN</shadow_type>
 		      <child>
 			<padding>0</padding>
 			<expand>True</expand>
@@ -1169,39 +1210,103 @@ Revelation
 		      </child>
 
 		      <widget>
-			<class>GtkScrolledWindow</class>
-			<name>scrolledwindow28</name>
-			<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-			<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-			<child>
-			  <padding>0</padding>
-			  <expand>True</expand>
-			  <fill>True</fill>
-			</child>
+			<class>GtkNotebook</class>
+			<name>nbCom</name>
+			<border_width>2</border_width>
+			<signal>
+			  <name>switch_page</name>
+			  <handler>on_nbCom_switch_page</handler>
+			  <last_modification_time>Thu, 08 Feb 2001 10:16:06 GMT</last_modification_time>
+			</signal>
+			<show_tabs>False</show_tabs>
+			<show_border>True</show_border>
+			<tab_pos>GTK_POS_TOP</tab_pos>
+			<scrollable>False</scrollable>
+			<tab_hborder>2</tab_hborder>
+			<tab_vborder>2</tab_vborder>
+			<popup_enable>False</popup_enable>
 
 			<widget>
-			  <class>GtkText</class>
-			  <name>textCommentaries</name>
-			  <can_focus>True</can_focus>
-			  <signal>
-			    <name>changed</name>
-			    <handler>on_textComments_changed</handler>
-			    <last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>button_release_event</name>
-			    <handler>on_textComments_button_release_event</handler>
-			    <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>drag_begin</name>
-			    <handler>on_textCommentaries_drag_begin</handler>
-			    <last_modification_time>Sat, 15 Jul 2000 16:55:24 GMT</last_modification_time>
-			  </signal>
-			  <editable>False</editable>
-			  <text></text>
+			  <class>GtkScrolledWindow</class>
+			  <name>swHtmlCom</name>
+			  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			  <widget>
+			    <class>Placeholder</class>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkLabel</class>
+			  <child_name>Notebook:tab</child_name>
+			  <name>label127</name>
+			  <label>label127</label>
+			  <justify>GTK_JUSTIFY_CENTER</justify>
+			  <wrap>False</wrap>
+			  <xalign>0.5</xalign>
+			  <yalign>0.5</yalign>
+			  <xpad>0</xpad>
+			  <ypad>0</ypad>
+			</widget>
+
+			<widget>
+			  <class>GtkVBox</class>
+			  <name>vbox23</name>
+			  <homogeneous>False</homogeneous>
+			  <spacing>0</spacing>
+
+			  <widget>
+			    <class>GtkScrolledWindow</class>
+			    <name>scrolledwindow28</name>
+			    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+			    <child>
+			      <padding>0</padding>
+			      <expand>True</expand>
+			      <fill>True</fill>
+			    </child>
+
+			    <widget>
+			      <class>GtkText</class>
+			      <name>textCommentaries</name>
+			      <can_focus>True</can_focus>
+			      <signal>
+				<name>changed</name>
+				<handler>on_textComments_changed</handler>
+				<last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
+			      </signal>
+			      <signal>
+				<name>button_release_event</name>
+				<handler>on_textComments_button_release_event</handler>
+				<last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
+			      </signal>
+			      <signal>
+				<name>drag_begin</name>
+				<handler>on_textCommentaries_drag_begin</handler>
+				<last_modification_time>Sat, 15 Jul 2000 16:55:24 GMT</last_modification_time>
+			      </signal>
+			      <editable>False</editable>
+			      <text></text>
+			    </widget>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkLabel</class>
+			  <child_name>Notebook:tab</child_name>
+			  <name>label128</name>
+			  <label>label128</label>
+			  <justify>GTK_JUSTIFY_CENTER</justify>
+			  <wrap>False</wrap>
+			  <xalign>0.5</xalign>
+			  <yalign>0.5</yalign>
+			  <xpad>0</xpad>
+			  <ypad>0</ypad>
 			</widget>
 		      </widget>
 		    </widget>
@@ -1280,10 +1385,6 @@ Revelation
 		  <spacing>0</spacing>
 
 		  <widget>
-		    <class>Placeholder</class>
-		  </widget>
-
-		  <widget>
 		    <class>GtkHBox</class>
 		    <name>hbox11</name>
 		    <homogeneous>False</homogeneous>
@@ -1306,12 +1407,21 @@ Revelation
 		      </child>
 
 		      <widget>
-			<class>GtkScrolledWindow</class>
-			<name>scrolledwindow11</name>
-			<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-			<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+			<class>GtkNotebook</class>
+			<name>nbPerCom</name>
+			<border_width>2</border_width>
+			<signal>
+			  <name>switch_page</name>
+			  <handler>on_nbPerCom_switch_page</handler>
+			  <last_modification_time>Thu, 08 Feb 2001 10:15:19 GMT</last_modification_time>
+			</signal>
+			<show_tabs>False</show_tabs>
+			<show_border>True</show_border>
+			<tab_pos>GTK_POS_TOP</tab_pos>
+			<scrollable>False</scrollable>
+			<tab_hborder>2</tab_hborder>
+			<tab_vborder>2</tab_vborder>
+			<popup_enable>False</popup_enable>
 			<child>
 			  <padding>0</padding>
 			  <expand>True</expand>
@@ -1319,46 +1429,94 @@ Revelation
 			</child>
 
 			<widget>
-			  <class>GtkText</class>
-			  <name>textComments</name>
-			  <can_focus>True</can_focus>
-			  <signal>
-			    <name>changed</name>
-			    <handler>on_textComments_changed</handler>
-			    <last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>button_release_event</name>
-			    <handler>on_textComments_button_release_event</handler>
-			    <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>drag_begin</name>
-			    <handler>on_textComments_drag_begin</handler>
-			    <last_modification_time>Mon, 17 Jul 2000 13:02:11 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>drag_data_get</name>
-			    <handler>on_textComments_drag_data_get</handler>
-			    <last_modification_time>Mon, 17 Jul 2000 13:02:28 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>drag_data_received</name>
-			    <handler>on_textComments_drag_data_received</handler>
-			    <last_modification_time>Mon, 17 Jul 2000 13:02:36 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>drag_drop</name>
-			    <handler>on_textComments_drag_drop</handler>
-			    <last_modification_time>Mon, 17 Jul 2000 13:02:52 GMT</last_modification_time>
-			  </signal>
-			  <signal>
-			    <name>key_press_event</name>
-			    <handler>on_textComments_key_press_event</handler>
-			    <last_modification_time>Mon, 17 Jul 2000 13:03:15 GMT</last_modification_time>
-			  </signal>
-			  <editable>False</editable>
-			  <text></text>
+			  <class>GtkScrolledWindow</class>
+			  <name>swHtmlPerCom</name>
+			  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			  <widget>
+			    <class>Placeholder</class>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkLabel</class>
+			  <child_name>Notebook:tab</child_name>
+			  <name>label129</name>
+			  <label>label129</label>
+			  <justify>GTK_JUSTIFY_CENTER</justify>
+			  <wrap>False</wrap>
+			  <xalign>0.5</xalign>
+			  <yalign>0.5</yalign>
+			  <xpad>0</xpad>
+			  <ypad>0</ypad>
+			</widget>
+
+			<widget>
+			  <class>GtkScrolledWindow</class>
+			  <name>scrolledwindow11</name>
+			  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			  <widget>
+			    <class>GtkText</class>
+			    <name>textComments</name>
+			    <can_focus>True</can_focus>
+			    <signal>
+			      <name>changed</name>
+			      <handler>on_textComments_changed</handler>
+			      <last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
+			    </signal>
+			    <signal>
+			      <name>button_release_event</name>
+			      <handler>on_textComments_button_release_event</handler>
+			      <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
+			    </signal>
+			    <signal>
+			      <name>drag_begin</name>
+			      <handler>on_textComments_drag_begin</handler>
+			      <last_modification_time>Mon, 17 Jul 2000 13:02:11 GMT</last_modification_time>
+			    </signal>
+			    <signal>
+			      <name>drag_data_get</name>
+			      <handler>on_textComments_drag_data_get</handler>
+			      <last_modification_time>Mon, 17 Jul 2000 13:02:28 GMT</last_modification_time>
+			    </signal>
+			    <signal>
+			      <name>drag_data_received</name>
+			      <handler>on_textComments_drag_data_received</handler>
+			      <last_modification_time>Mon, 17 Jul 2000 13:02:36 GMT</last_modification_time>
+			    </signal>
+			    <signal>
+			      <name>drag_drop</name>
+			      <handler>on_textComments_drag_drop</handler>
+			      <last_modification_time>Mon, 17 Jul 2000 13:02:52 GMT</last_modification_time>
+			    </signal>
+			    <signal>
+			      <name>key_press_event</name>
+			      <handler>on_textComments_key_press_event</handler>
+			      <last_modification_time>Mon, 17 Jul 2000 13:03:15 GMT</last_modification_time>
+			    </signal>
+			    <editable>False</editable>
+			    <text></text>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkLabel</class>
+			  <child_name>Notebook:tab</child_name>
+			  <name>label130</name>
+			  <label>label130</label>
+			  <justify>GTK_JUSTIFY_CENTER</justify>
+			  <wrap>False</wrap>
+			  <xalign>0.5</xalign>
+			  <yalign>0.5</yalign>
+			  <xpad>0</xpad>
+			  <ypad>0</ypad>
 			</widget>
 		      </widget>
 
