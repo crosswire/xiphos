@@ -55,6 +55,89 @@ static GList *be_comm_list;
 
 /******************************************************************************
  * Name
+ *  backend_display_book_heading
+ *
+ * Synopsis
+ *   #include "commentary_.h"
+ *
+ *   void backend_display_book_heading(gint modnum)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_display_book_heading(gint modnum)
+{
+	char key[256];
+	BE_COMM *c = (BE_COMM *) g_list_nth_data(be_comm_list, modnum);
+
+	VerseKey vkey,nkey;
+	vkey = settings.currentverse; //c->mod->KeyText();
+	const char *book = vkey.books[vkey.Testament() - 1][vkey.Book() -
+							 1].name;
+		
+	sprintf(key,"%s 0:0",book);
+	nkey.Persist(1);
+	nkey.AutoNormalize(1);
+	nkey = settings.currentverse;
+	c->mod->SetKey(nkey);
+	
+	nkey.AutoNormalize(0);
+	nkey = key;
+	c->mod->SetKey(nkey);
+	c->mod->Error();	
+	c->mod->Display();
+	nkey.Persist(0);
+}
+
+
+/******************************************************************************
+ * Name
+ *  backend_display_chap_heading
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void backend_display_chap_heading(gint modnum)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_display_chap_heading(gint modnum)
+{
+	char key[256];
+	BE_COMM *c = (BE_COMM *) g_list_nth_data(be_comm_list, modnum);
+
+	VerseKey vkey,nkey;
+	vkey = settings.currentverse; //c->mod->KeyText();
+	const char *book = vkey.books[vkey.Testament() - 1][vkey.Book() -
+							 1].name;
+	int chap = vkey.Chapter();
+	
+	sprintf(key,"%s %d:0",book,chap);
+	nkey.Persist(1);
+	nkey.AutoNormalize(1);
+	nkey = settings.currentverse;
+	c->mod->SetKey(nkey);
+	
+	nkey.AutoNormalize(0);
+	nkey = key;
+	c->mod->SetKey(nkey);
+	c->mod->Error();	
+	c->mod->Display();
+	nkey.Persist(0);
+}
+
+
+/******************************************************************************
+ * Name
  *  backend_nav_commentary
  *
  * Synopsis

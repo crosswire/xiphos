@@ -6,14 +6,14 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=160
-1=80
-2=861
-3=40
-4=35
-5=26
-6=673
-7=43
+0=67
+1=26
+2=46
+3=169
+4=30
+5=96
+6=126
+7=41
 8=186
 9=34
 10=28
@@ -36,18 +36,8 @@ ShowLocals=true
 12=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/settings.h
-1=/home/terry/Projects/gnomesword1/src/main/gbs.h
-2=/home/terry/Projects/gnomesword1/src/main/gbs.c
-3=/home/terry/Projects/gnomesword1/src/backend/gbs_.cpp
-4=/home/terry/Projects/gnomesword1/src/backend/gbs_.h
-5=/home/terry/Projects/gnomesword1/src/gnome/_gbs.h
-6=/home/terry/Projects/gnomesword1/src/gnome/_gbs.c
-7=/home/terry/Projects/gnomesword1/src/gnome/_bibletext.c
-8=/home/terry/Projects/gnomesword1/gnomesword.prj
-9=/home/terry/Projects/gnomesword1/src/backend/Makefile.am
-10=/home/terry/Projects/gnomesword1/src/gnome/Makefile.am
-11=/home/terry/Projects/gnomesword1/src/main/Makefile.am
+0=/home/terry/Projects/gnomesword1/src/gnome/commentary_find_dialog.c
+1=/home/terry/Projects/gnomesword1/src/gnome/commentary_find_dialog.h
 
 [replace_text]
 0=app
@@ -60,21 +50,21 @@ ShowLocals=true
 7=MainWindowModule
 
 [find_text]
-0=gbsLastPage
-1=bookDescription
-2=setPageDL
-3=backend_getModule
-4=modDescription
-5=mod_description
-6=mods
-7=swmgrCOMM
+0=dialog_destroy
+1=find_dialog_destroy
+2=backend_newDisplayGBS
+3=swmgrBook
+4=gbs_list
+5=show_tabs_gbs
+6=pixmap3
+7=pixmap1
 
 [find_in_files]
-0=backend_dictentryTextChangedDL
-1=dlLastPage
-2=backend_fill_dictlex_keys
-3=gs_commentary.h
-4=epaned
-5=appbar1
-6=showIntPage
-7=save_module_key
+0=commLastPage
+1=backend_display_book
+2=backend_treekeyHasChildrenGBS
+3=backend_treekeyGetLocalNameGBS
+4=backend_treekeyFirstChildGBS
+5=backend_treekeyGetOffsetGBS
+6=notebookGBS
+7=add_bookmark_to_tree

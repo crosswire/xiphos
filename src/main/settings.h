@@ -161,7 +161,7 @@ struct _settings {
 		intCurVerse,    /* detached interlinear current verse */
 		book_last_page,    /* last notebook page before change */
 		dict_last_page,     /* last notebook page before change */
-		commLastPage,     /* last notebook page before change */
+		comm_last_page,     /* last notebook page before change */
 		text_last_page,     /* last notebook page before change */
 		percomm_last_page;     /* last notebook page before change */
 						
