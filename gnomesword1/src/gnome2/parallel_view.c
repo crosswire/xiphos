@@ -78,31 +78,31 @@ void gui_check_parallel_modules(void)
 {
 	if(settings.parallel1Module) 
 		parallel1 =
-		    check_for_module(settings.parallel1Module);
+		    main_is_module(settings.parallel1Module);
 	else
 		parallel1 = FALSE;
 
 	if (settings.parallel2Module)
 		parallel2 =
-		    check_for_module(settings.parallel2Module);
+		    main_is_module(settings.parallel2Module);
 	else
 		parallel2 = FALSE;
 
 	if (settings.parallel3Module)
 		parallel3 =
-		    check_for_module(settings.parallel3Module);
+		    main_is_module(settings.parallel3Module);
 	else
 		parallel3 = FALSE;
 
 	if (settings.parallel4Module)
 		parallel4 =
-		    check_for_module(settings.parallel4Module);
+		    main_is_module(settings.parallel4Module);
 	else
 		parallel4 = FALSE;
 
 	if (settings.parallel5Module)
 		parallel5 =
-		    check_for_module(settings.parallel5Module);
+		    main_is_module(settings.parallel5Module);
 	else
 		parallel5 = FALSE;
 
@@ -228,7 +228,7 @@ void gui_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		settings.parallel1Module =
 		    xml_get_value("modules", "int1");
 		parallel1 =
-		    check_for_module(settings.parallel1Module);
+		    main_is_module(settings.parallel1Module);
 		break;
 	case PARALLEL2:	
 		xml_set_value("GnomeSword", "modules", "int2",
@@ -236,7 +236,7 @@ void gui_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		settings.parallel2Module =
 		    xml_get_value("modules", "int2");
 		parallel2 =
-		    check_for_module(settings.parallel2Module);
+		    main_is_module(settings.parallel2Module);
 		break;
 	case PARALLEL3:	
 		xml_set_value("GnomeSword", "modules", "int3",
@@ -244,7 +244,7 @@ void gui_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		settings.parallel3Module =
 		    xml_get_value("modules", "int3");
 		parallel3 =
-		    check_for_module(settings.parallel3Module);
+		    main_is_module(settings.parallel3Module);
 		break;
 	case PARALLEL4:	
 		xml_set_value("GnomeSword", "modules", "int4",
@@ -252,7 +252,7 @@ void gui_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		settings.parallel4Module =
 		    xml_get_value("modules", "int4");
 		parallel4 =
-		    check_for_module(settings.parallel4Module);
+		    main_is_module(settings.parallel4Module);
 		break;
 	case PARALLEL5:	
 		xml_set_value("GnomeSword", "modules", "int5",
@@ -260,7 +260,7 @@ void gui_change_parallel_module(GSParallel parallel, gchar * mod_name)
 		settings.parallel5Module =
 		    xml_get_value("modules", "int5");
 		parallel5 =
-		    check_for_module(settings.parallel5Module);
+		    main_is_module(settings.parallel5Module);
 		break;
 	default:
 		return;
@@ -303,7 +303,7 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
 		settings.parallel1Module =
 		    xml_get_value("modules", "int1");
 		parallel1 =
-		    check_for_module(settings.parallel1Module);
+		    main_is_module(settings.parallel1Module);
 		if (settings.dockedInt)
 			gui_update_parallel_page();
 		else
@@ -345,7 +345,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 		settings.parallel2Module =
 		    xml_get_value("modules", "int2");
 		parallel2 =
-		    check_for_module(settings.parallel2Module);
+		    main_is_module(settings.parallel2Module);
 		if (settings.dockedInt)
 			gui_update_parallel_page();
 		else
@@ -386,7 +386,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 		settings.parallel3Module =
 		    xml_get_value("modules", "int3");
 		parallel3 =
-		    check_for_module(settings.parallel3Module);
+		    main_is_module(settings.parallel3Module);
 		if (settings.dockedInt)
 			gui_update_parallel_page();
 		else
@@ -427,7 +427,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 		settings.parallel4Module =
 		    xml_get_value("modules", "int4");
 		parallel4 =
-		    check_for_module(settings.parallel4Module);
+		    main_is_module(settings.parallel4Module);
 		if (settings.dockedInt)
 			gui_update_parallel_page();
 		else
@@ -466,7 +466,7 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	
 	xml_set_value("GnomeSword", "modules", "int5", mod_name);
 	settings.parallel5Module = xml_get_value("modules", "int5");
-	parallel5 = check_for_module(settings.parallel5Module);
+	parallel5 = main_is_module(settings.parallel5Module);
 	if (settings.dockedInt)
 		gui_update_parallel_page();
 	else
@@ -638,7 +638,7 @@ void gui_update_parallel_page(void)
 				"<tr bgcolor=\"%s\"><td><b><a href=\"about://%s/%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
 				rowcolor,
 				mod_name,
-				get_module_description(mod_name),
+				main_get_module_description(mod_name),
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size, mod_name);
 
@@ -666,7 +666,7 @@ void gui_update_parallel_page(void)
 			}
 
 			utf8str =
-			    get_parallel_module_text(mod_name,
+			    main_get_rendered_text(mod_name,
 							settings.
 							currentverse);
 			//g_warning(utf8str);
@@ -828,7 +828,7 @@ static void int_display(gchar * key)
 
 			if (mod_name) {
 				utf8str =
-				    get_parallel_module_text
+				    main_get_rendered_text
 				    (mod_name, tmpkey);
 				if (strlen(utf8str)) {
 					gtk_html_write(GTK_HTML(html),

@@ -32,7 +32,6 @@ extern "C" {
 #include "backend/key.hh"
 #include "backend/config.hh"
 #include "backend/module.hh"
-#include "backend/tree.hh"
 		
 void backend_init(void);
 void backend_shutdown(int save_properties);

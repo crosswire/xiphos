@@ -38,7 +38,7 @@ enum {
 };
 
 gint main_url_handler(const gchar * url, gboolean clicked);
-gint main_get_mod_type_from_url(const gchar * url);
+gint main_main_get_mod_type_from_url(const gchar * url);
 	
 
 #ifdef __cplusplus

@@ -176,10 +176,10 @@ void backend_init(void)
 	//backend_init_language_map();
 	/* create sword mgrs */
 	backend_init_managers();
-	backend = new SwordMain();
-	backend->init_SWORD();
+	backend = new BackEnd();
+	backend->init_SWORD(0);
 	main_init_lists();
-	backend_setup_treekey();
+//	backend_setup_treekey();
 	backend_setup_display_mgr();
 }
 
@@ -202,7 +202,7 @@ void backend_init(void)
 
 void backend_shutdown(int save_properties)
 {
-	backend_shutdown_treekey();
+//	backend_shutdown_treekey();
 	//main_delete_displays();
 	if(sw.entryDisplay)
 		delete sw.entryDisplay;

@@ -28,7 +28,7 @@
 #include <gal/widgets/e-unicode.h>
 
 
-#include "gui/gtkhtml_display.h"
+//#include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
@@ -46,7 +46,7 @@
 #include "main/lists.h"
 #include "main/key.h"
 #include "main/xml.h"
-
+ 
 static void create_menu(DIALOG_DATA * t ,GdkEventButton * event);
 
 /******************************************************************************
@@ -95,7 +95,7 @@ void gui_on_lookup_bibletext_dialog_selection
 	dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(mod_name,
+			main_sidebar_display_dictlex(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
@@ -159,7 +159,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 					 settings.program_title);
 	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
 
-	text = get_striptext(4, mod, key);
+	text = main_get_striptext(mod, key);
 	str = remove_linefeeds(text);
 	if (str) {
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar),
@@ -904,7 +904,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 					    g_strdup(settings.
 						     DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_sidebar
+					main_sidebar_display_dictlex
 					    (dict, key);
 				if (settings.inDictpane)
 					main_display_dictionary(dict,
@@ -1140,7 +1140,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
 			    vt->dialog);
 	gtk_window_set_title(GTK_WINDOW(vt->dialog),
-			     get_module_description(vt->mod_name));
+			     main_get_module_description(vt->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 400, 400);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
@@ -1293,7 +1293,7 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 	gchar *dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(settings.
+			main_sidebar_display_dictlex(settings.
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
@@ -1314,7 +1314,7 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 	cipher_old = get_cipher_key(settings.MainWindowModule);
 	cipher_key = gui_add_cipher_key(settings.MainWindowModule, cipher_old);
 	if (cipher_key) {
-		gui_module_is_locked_display(widgets.html_text,
+		main_locked_module_display(widgets.html_text,
 					     settings.MainWindowModule,
 					     cipher_key);
 	}
@@ -1377,7 +1377,7 @@ static void lookup_bibletext_selection(GtkMenuItem * menuitem,
 	dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(mod_name,
+			main_sidebar_display_dictlex(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
@@ -2084,9 +2084,9 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				(GCallback)lookup_bibletext_selection);
 
 
-	if ((check_for_global_option(mod_name,
+	if ((main_check_for_global_option(mod_name,
 				     "GBFRedLetterWords")) ||
-	    (check_for_global_option(mod_name,
+	    (main_check_for_global_option(mod_name,
 				     "OSISRedLetterWords"))) {
 		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
@@ -2097,13 +2097,13 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_red_words), 
 				(DIALOG_DATA *)t);
 	}
-	if ((check_for_global_option
+	if ((main_check_for_global_option
 	     (mod_name, "GBFStrongs"))
 	    ||
-	    (check_for_global_option
+	    (main_check_for_global_option
 	     (mod_name, "ThMLStrongs"))
 	    ||
-	    (check_for_global_option
+	    (main_check_for_global_option
 	     (mod_name, "OSISStrongs"))) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
@@ -2114,9 +2114,9 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_strongs), 
 				(DIALOG_DATA *)t);
 	}
-	if ((check_for_global_option(mod_name, "GBFMorph")) ||
-	    (check_for_global_option(mod_name, "ThMLMorph")) ||
-	    (check_for_global_option(mod_name, "OSISMorph"))) {
+	if ((main_check_for_global_option(mod_name, "GBFMorph")) ||
+	    (main_check_for_global_option(mod_name, "ThMLMorph")) ||
+	    (main_check_for_global_option(mod_name, "OSISMorph"))) {
 		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
 				    widget)->active = t->ops->morphs;
@@ -2126,9 +2126,9 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_morphs), 
 				(DIALOG_DATA *)t);
 	}
-	if ((check_for_global_option(mod_name, "GBFFootnotes")) ||
-	    (check_for_global_option(mod_name, "ThMLFootnotes")) ||
-	    (check_for_global_option(mod_name, "OSISFootnotes"))) {
+	if ((main_check_for_global_option(mod_name, "GBFFootnotes")) ||
+	    (main_check_for_global_option(mod_name, "ThMLFootnotes")) ||
+	    (main_check_for_global_option(mod_name, "OSISFootnotes"))) {
 		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
 				    widget)->active = t->ops->footnotes;
@@ -2138,7 +2138,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_footnotes), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "UTF8GreekAccents")) {
+	if (main_check_for_global_option(mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
 				    widget)->active = t->ops->greekaccents;
@@ -2148,7 +2148,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_greekaccents), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "ThMLLemma")) {
+	if (main_check_for_global_option(mod_name, "ThMLLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
 				    widget)->active = t->ops->lemmas;
@@ -2158,8 +2158,8 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_lemmas), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "ThMLScripref") ||
-	    (check_for_global_option(mod_name, "OSISScripref"))) {
+	if (main_check_for_global_option(mod_name, "ThMLScripref") ||
+	    (main_check_for_global_option(mod_name, "OSISScripref"))) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
 				    widget)->active = t->ops->scripturerefs;
@@ -2169,7 +2169,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_scripturerefs), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "UTF8HebrewPoints")) {
+	if (main_check_for_global_option(mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
 				    widget)->active = t->ops->hebrewpoints;
@@ -2179,7 +2179,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_hebrewpoints), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "UTF8Cantillation")) {
+	if (main_check_for_global_option(mod_name, "UTF8Cantillation")) {
 		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
 				    widget)->active = t->ops->hebrewcant;
@@ -2189,8 +2189,8 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_hebrewcant), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "ThMLHeadings") ||
-	    (check_for_global_option(mod_name, "OSISHeadings"))) {
+	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
+	    (main_check_for_global_option(mod_name, "OSISHeadings"))) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
 		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = t->ops->headings;
@@ -2200,7 +2200,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 				G_CALLBACK(global_option_headings), 
 				(DIALOG_DATA *)t);
 	}
-	if (check_for_global_option(mod_name, "ThMLVariants")) {
+	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
 
 		gtk_widget_show(all_readings_uiinfo[0].widget);	//"all_readings");
@@ -2210,7 +2210,7 @@ static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
 
 	}
-	if(has_cipher_tag(mod_name))
+	if(t->is_locked)
 		gtk_widget_show(menu1_uiinfo[6].widget);
 
 

@@ -35,6 +35,7 @@
 
 #include "main/xml.h"
 #include "main/module.h"
+#include "main/sword.h"
 #include "main/settings.h"
 
 struct _bookmark_data {
@@ -256,7 +257,7 @@ static void parse_gnode_tree(GNode * node, xmlNodePtr parent)
 		} else {
 			if (es->module) {
 				if (strlen(es->module) > 2)
-					mod_desc = get_module_description(es->module);
+					mod_desc = main_get_module_description(es->module);
 			}
 			xml_add_bookmark_to_parent(parent, es->caption,
 						es->key, es->module, mod_desc);
@@ -316,7 +317,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 	} else {
 		if (es->module) {
 			if (strlen(es->module) > 2)
-				mod_desc = get_module_description(es->module);
+				mod_desc = main_get_module_description(es->module);
 		}
 		xml_add_bookmark_to_parent(root_node, 
 						es->caption,
@@ -335,7 +336,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 		} else {
 			if (es->module) {
 				if (strlen(es->module) > 2)
-					mod_desc = get_module_description(es->module);
+					mod_desc = main_get_module_description(es->module);
 			}
 			if (root_doc != NULL) {
 				xml_add_bookmark_to_parent

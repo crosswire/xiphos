@@ -26,7 +26,7 @@
 #include <gnome.h>
 
 
-#include "gui/gtkhtml_display.h"
+//#include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
 #include "gui/gnomesword.h"
@@ -230,7 +230,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 	gchar *dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(settings.
+			main_sidebar_display_dictlex(settings.
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
@@ -248,10 +248,10 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *cipher_key;
 	gchar *cipher_old;
 	
-	cipher_old = get_cipher_key(settings.book_mod);
+//	cipher_old = get_cipher_key(settings.book_mod);
 	cipher_key = gui_add_cipher_key(settings.book_mod, cipher_old);
 	if (cipher_key) {
-		gui_module_is_locked_display(widgets.html_text,
+		main_locked_module_display(widgets.html_text,
 				settings.book_mod, cipher_key);
 	}
 }
@@ -314,7 +314,7 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(mod_name,
+			main_sidebar_display_dictlex(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
@@ -665,73 +665,73 @@ static void create_menu(GdkEventButton * event)
 				(GCallback)gui_lookup_gbs_selection);
 			
 				
-	if ((check_for_global_option(mod_name,
+	if ((main_check_for_global_option(mod_name,
 				     "GBFRedLetterWords")) ||
-	    (check_for_global_option(mod_name,
+	    (main_check_for_global_option(mod_name,
 				     "OSISRedLetterWords"))) {
 		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
 				    widget)->active = ops->words_in_red;
 	}
-	if ((check_for_global_option
+	if ((main_check_for_global_option
 	     (mod_name, "GBFStrongs"))
 	    ||
-	    (check_for_global_option
+	    (main_check_for_global_option
 	     (mod_name, "ThMLStrongs"))
 	    ||
-	    (check_for_global_option
+	    (main_check_for_global_option
 	     (mod_name, "OSISStrongs"))) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
 				    widget)->active = ops->strongs;
 	}
-	if ((check_for_global_option(mod_name, "GBFMorph")) ||
-	    (check_for_global_option(mod_name, "ThMLMorph")) ||
-	    (check_for_global_option(mod_name, "OSISMorph"))) {
+	if ((main_check_for_global_option(mod_name, "GBFMorph")) ||
+	    (main_check_for_global_option(mod_name, "ThMLMorph")) ||
+	    (main_check_for_global_option(mod_name, "OSISMorph"))) {
 		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
 				    widget)->active = ops->morphs;
 	}
-	if ((check_for_global_option(mod_name, "GBFFootnotes")) ||
-	    (check_for_global_option(mod_name, "ThMLFootnotes")) ||
-	    (check_for_global_option(mod_name, "OSISFootnotes"))) {
+	if ((main_check_for_global_option(mod_name, "GBFFootnotes")) ||
+	    (main_check_for_global_option(mod_name, "ThMLFootnotes")) ||
+	    (main_check_for_global_option(mod_name, "OSISFootnotes"))) {
 		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
 				    widget)->active = ops->footnotes;
 	}
-	if (check_for_global_option(mod_name, "UTF8GreekAccents")) {
+	if (main_check_for_global_option(mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
 				    widget)->active = ops->greekaccents;
 	}
-	if (check_for_global_option(mod_name, "ThMLLemma")) {
+	if (main_check_for_global_option(mod_name, "ThMLLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
 				    widget)->active = ops->lemmas;
 	}
-	if (check_for_global_option(mod_name, "ThMLScripref") ||
-	    (check_for_global_option(mod_name, "OSISScripref"))) {
+	if (main_check_for_global_option(mod_name, "ThMLScripref") ||
+	    (main_check_for_global_option(mod_name, "OSISScripref"))) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
 				    widget)->active = ops->scripturerefs;
 	}
-	if (check_for_global_option(mod_name, "UTF8HebrewPoints")) {
+	if (main_check_for_global_option(mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
 				    widget)->active = ops->hebrewpoints;
 	}
-	if (check_for_global_option(mod_name, "UTF8Cantillation")) {
+	if (main_check_for_global_option(mod_name, "UTF8Cantillation")) {
 		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
 				    widget)->active = ops->hebrewcant;
 	}
-	if (check_for_global_option(mod_name, "ThMLHeadings") ||
-	    (check_for_global_option(mod_name, "OSISHeadings"))) {
+	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
+	    (main_check_for_global_option(mod_name, "OSISHeadings"))) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
 		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
 				    widget)->active = ops->headings;   
 	}
-	if (check_for_global_option(mod_name, "ThMLVariants")) {
+	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
 
 		gtk_widget_show(all_readings_uiinfo[0].widget);	//"all_readings");
@@ -741,7 +741,7 @@ static void create_menu(GdkEventButton * event)
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
 		
 	}
-	if(has_cipher_tag(mod_name))
+	if(main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[6].widget);
 	
 	

@@ -1,8 +1,6 @@
 INCLUDES =  \
     -I$(top_srcdir)/src \
-    $(GNOME_CFLAGS) \
-    -DGNOME_DISABLE_DEPRECATED \
-    -DGTK_DISABLE_DEPRECATED
+    $(GNOME_CFLAGS) 
     
 
 noinst_LIBRARIES = libmain.a  
@@ -39,6 +37,8 @@ libmain_a_SOURCES =  \
     mod_mgr.c mod_mgr.h \
     percomm.c percomm.h \
     search.c search.h \
+    search_dialog.cc search_dialog.h \
+    search_sidebar.cc search_sidebar.h \
     settings.c settings.h \
     sidebar.cc sidebar.h\
     spell_pspell.c \

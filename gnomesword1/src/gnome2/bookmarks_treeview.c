@@ -193,12 +193,12 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 	gchar *val_key;
 	gchar *url = g_strdup_printf("sword://%s/%s",mod_name,key);;
 	
-	if(!check_for_module(mod_name)) 
+	if(!main_is_module(mod_name)) 
 		mod_name = settings.MainWindowModule;
 	
-	module_type = get_mod_type(mod_name);
+	module_type = main_get_mod_type(mod_name);
 	if (use_dialog) {
-		//module_type = get_mod_type(mod_name);
+		//module_type = main_get_mod_type(mod_name);
 		switch (module_type) {
 			case -1:
 				break;

@@ -4,9 +4,7 @@ INCLUDES =  \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
-    -DLIBDIR=\""$(libdir)"\" \
-    -DGNOME_DISABLE_DEPRECATED \
-    -DGTK_DISABLE_DEPRECATED
+    -DLIBDIR=\""$(libdir)"\" 
 
 
 bin_PROGRAMS = gnomesword2
@@ -38,7 +36,6 @@ gnomesword2_SOURCES =  \
     gbs.c \
     gbs_dialog.c \
     gnomesword.c \
-    gtkhtml_display.c \
     gui.c \
     hints.c \
     history.c \
