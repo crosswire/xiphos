@@ -202,9 +202,11 @@ initGnomeSword(SETTINGS *s,
                 else 
 			gtk_widget_hide(notebook);
          /* hide dictionary section of window if we do not have at least one dict/lex */
-	}else 
+	}
+	
+	/*else 
 		gtk_widget_hide(lookup_widget(s->app,"hbox8"));
-	 
+	*/ 
 	/* set com module to open notebook page */	
 	if(havecomm){ /* let's don't do this if we don't have at least one commentary */ 
 		if(commpage == 0)

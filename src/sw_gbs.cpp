@@ -194,7 +194,7 @@ GBS_DATA *getgbs(GList *gbs)
 	ModMap::iterator it;
 	
 	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Generic Book")) {
+		if (!strcmp((*it).second->Type(), "Generic Books")) {
 			if (!strcmp((*it).second->Name(), settings->BookWindowModule)) {
 				break;
 			}
@@ -601,7 +601,7 @@ void setupSW_GBS(SETTINGS *s)
 	displays.clear();
 	gbs_data = NULL;
 	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Generic Book")) { 
+		if (!strcmp((*it).second->Type(), "Generic Books")) { 
 			GBS_DATA *gbs = new GBS_DATA;
 			gbs->bookName = (*it).second->Name();			
 			gbs->bookDescription = (*it).second->Description();		
