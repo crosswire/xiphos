@@ -25,7 +25,7 @@
 #define _E_CALENDAR_H_
 
 #include <gtk/gtkwidget.h>
-#include "e-util/e-canvas.h"
+#include <gal/widgets/e-canvas.h>
 #include "e-calendar-item.h"
 
 #ifdef __cplusplus
@@ -54,13 +54,21 @@ struct _ECalendar
 
 	ECalendarItem *calitem;
 
-	GnomeCanvasItem *prev_item, *next_item;
+	GnomeCanvasItem *prev_item;
+	GnomeCanvasItem *next_item;
 
 	gint min_rows;
 	gint min_cols;
 
 	gint max_rows;
 	gint max_cols;
+
+	/* These are all used when the prev/next buttons are held down.
+	   moving_forward is TRUE if we are moving forward in time, i.e. the
+	   next button is pressed. */
+	gint timeout_id;
+	gint timeout_delay;
+	gboolean moving_forward;
 };
 
 struct _ECalendarClass
@@ -78,6 +86,13 @@ void	   e_calendar_set_minimum_size	(ECalendar	*cal,
 void	   e_calendar_set_maximum_size	(ECalendar	*cal,
 					 gint		 rows,
 					 gint		 cols);
+
+/* Returns the border size on each side of the month displays. */
+void	   e_calendar_get_border_size	(ECalendar	*cal,
+					 gint		*top,
+					 gint		*bottom,
+					 gint		*left,
+					 gint		*right);
 
 
 #ifdef __cplusplus

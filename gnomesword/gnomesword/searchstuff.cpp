@@ -210,15 +210,19 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
 		gtk_clist_freeze (GTK_CLIST (resultList));	//-- keep list form scrolling until we are done
 		//-- give search string to module to search
-		for (ListKey & searchResults = searchMod->Search (entryText, searchType, searchParams, 
-											currentScope, 0, 
-											&percentUpdate,  (void*)&progressunits);
-		       !searchResults.Error (); 
-		       searchResults++) {		    
+		for (ListKey & searchResults = searchMod->Search (entryText,
+		                                                searchType,
+		                                                searchParams,
+		                                                currentScope, 0,
+		                                                &percentUpdate,
+		                                                (void*)&progressunits);
+		                                                !searchResults.Error ();
+		                                                searchResults++) {		
 			    resultText = (const char *)searchResults;	//-- put verse key string of find into a string
 			    gtk_clist_append (GTK_CLIST (resultList), clistText);	//-- store find in list
-			    searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope */
-			    ++count;	//-- if we want to use them
+			    searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope
+			                                                           in case we want to use them */
+			    ++count;	
                 }
 		gtk_clist_thaw (GTK_CLIST (resultList));	//-- thaw list so we can look through the results
 		sprintf (scount, "%d", count);	//-- put count into string
@@ -243,24 +247,33 @@ SearchWindow::resultsListSWORD (GtkWidget * searchFrm, gint row, gint column)	//
 	}
 	if (GTK_TOGGLE_BUTTON (contextToggle)->active) {	/* check state of context check box */        
 		  /* if true */
-		  changeVerse (text);	/* show selection in main window */
+		  changeVerseSWORD(text);	/* show selection in main window */
 	}
 }
 
 //-------------------------------------------------------------------------------------------
 static void percentUpdate(char percent, void *userData) {
-	/*static char printed = 0;
+	/*
+	static char printed = 0;
 	char maxHashes = *((char *)userData);
+	float num;
 	char buf[80];
 	
 	while ((((float)percent)/100) * maxHashes > printed) {
 		gtk_progress_set_value(GTK_PROGRESS(searchWindow->progressbar),(float)percent) ;
 		gtk_widget_grab_focus(searchWindow->progressbar);
 		sprintf(buf,"%f",(((float)percent)/100));
+		num = (float)percent/100;
+		gtk_widget_grab_focus(searchWindow->progressbar);
+		gtk_progress_bar_update(GTK_PROGRESS_BAR(searchWindow->progressbar),
+				num);
+		
+		sprintf(buf,"%f",(((float)percent)/100));
 		cout << buf << '\n';
 		printed++;	
-	}*/
+	}   */
 }
+
 //-------------------------------------------------------------------------------------------
 GtkWidget *
 SearchWindow::create ()
@@ -277,13 +290,14 @@ SearchWindow::create ()
 	gtk_widget_show (dialog_vbox1);
   	/* Create a GtkAdjusment object to hold the range of the
            * progress bar */
-          //adj = (GtkAdjustment *) gtk_adjustment_new (0, 1, 100, 0, 0, 0);
+        //adj = (GtkAdjustment *) gtk_adjustment_new (0, 1, 100, 0, 0, 0);
 
           /* Create the GtkProgressBar using the adjustment */
-        /* progressbar = gtk_progress_bar_new_with_adjustment (adj);
+        /*
+        progressbar = gtk_progress_bar_new_with_adjustment (adj);
 
  
-  	//progressbar = gtk_progress_bar_new ();
+  	progressbar = gtk_progress_bar_new ();
   	gtk_widget_ref (progressbar);
   	gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "progressbar", progressbar,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -292,8 +306,8 @@ SearchWindow::create ()
   	gtk_progress_set_show_text (GTK_PROGRESS (progressbar), TRUE);
 	gtk_progress_bar_set_bar_style (GTK_PROGRESS_BAR (progressbar),
                                           GTK_PROGRESS_CONTINUOUS);	
-        */		      
-				      
+        */		
+				
 	frame8 = gtk_frame_new (NULL);
 	gtk_widget_ref (frame8);
 	gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "frame8", frame8,
@@ -394,6 +408,19 @@ SearchWindow::create ()
 				  (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (searchTypePanel);
 	gtk_container_add (GTK_CONTAINER (frame15), searchTypePanel);
+	
+	multiWordSearch =
+		gtk_radio_button_new_with_label (searchType_group,
+						 "Multi Word");
+	searchType_group =
+		gtk_radio_button_group (GTK_RADIO_BUTTON (multiWordSearch));
+	gtk_widget_ref (multiWordSearch);
+	gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "multiWordSearch",
+				  multiWordSearch,
+				  (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (multiWordSearch);
+	gtk_box_pack_start (GTK_BOX (searchTypePanel), multiWordSearch, FALSE,
+			    FALSE, 0);
 
 	regexSearch =
 		gtk_radio_button_new_with_label (searchType_group,
@@ -421,18 +448,6 @@ SearchWindow::create ()
 	gtk_box_pack_start (GTK_BOX (searchTypePanel), phraseSearch, FALSE,
 			    FALSE, 0);
 
-	multiWordSearch =
-		gtk_radio_button_new_with_label (searchType_group,
-						 "Multi Word");
-	searchType_group =
-		gtk_radio_button_group (GTK_RADIO_BUTTON (multiWordSearch));
-	gtk_widget_ref (multiWordSearch);
-	gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "multiWordSearch",
-				  multiWordSearch,
-				  (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (multiWordSearch);
-	gtk_box_pack_start (GTK_BOX (searchTypePanel), multiWordSearch, FALSE,
-			    FALSE, 0);
 
 	frame16 = gtk_frame_new ("Search Options");
 	gtk_widget_ref (frame16);

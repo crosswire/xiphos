@@ -553,6 +553,7 @@ static GtkWidget *create_pmDict(GList * mods)
 	GtkWidget *lookup_word1;
 	GtkWidget *about_this_module5;
 	GtkWidget *show_tabs1;
+	GtkWidget *view_in_new_window;
 	GtkWidget *separator23;
 	GtkWidget *view_module2;
 	GtkWidget *view_module2_menu;
@@ -607,6 +608,16 @@ static GtkWidget *create_pmDict(GList * mods)
 	gtk_widget_show(show_tabs1);
 	gtk_container_add(GTK_CONTAINER(pmDict), show_tabs1);
 	gtk_tooltips_set_tip(tooltips, show_tabs1, "Show notebook tabs",
+			     NULL);
+			
+        view_in_new_window = gtk_menu_item_new_with_label("View in New Window");
+	gtk_widget_ref(view_in_new_window);
+	gtk_object_set_data_full(GTK_OBJECT(pmDict), "view_in_new_window",
+				 show_tabs1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(view_in_new_window);
+	gtk_container_add(GTK_CONTAINER(pmDict), view_in_new_window);
+	gtk_tooltips_set_tip(tooltips, view_in_new_window, "View this module in a new window",
 			     NULL);
 
 	separator23 = gtk_menu_item_new();
@@ -668,6 +679,9 @@ static GtkWidget *create_pmDict(GList * mods)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(about_this_module5), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module5_activate),
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(view_in_new_window), "activate",
+			   GTK_SIGNAL_FUNC(on_view_in_new_window_activate),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(show_tabs1), "activate",
 			   GTK_SIGNAL_FUNC(on_show_tabs2_activate), NULL);

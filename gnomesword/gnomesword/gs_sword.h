@@ -30,22 +30,15 @@ extern "C" {
 
 
 #include <gnome.h>
-//#include <string>
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
-
-
-void initSword(GtkWidget *mainform);
-
+void initSWORD(GtkWidget *mainform);
 void shutdownSWORD(void);
-
-void FillDictKeys(void);
-void changeVerse(gchar * ref);
+void FillDictKeysSWORD(void);
+void changeVerseSWORD(gchar * ref);
 void searchSWORD(GtkWidget * searchFrm);
 void resultsListSWORD(GtkWidget * searchFrm, 
 		gint row, 
 		gint column);
-void setupSearchDlg(GtkWidget * searchDlg);
 void strongsSWORD(gboolean choice);
 void footnotesSWORD(gboolean choice);
 void changecurModSWORD(gchar * modName);
@@ -81,6 +74,14 @@ void navcurcommModSWORD(gint backfoward);
 void setuplisteditSWORD(GtkWidget *text);
 void changeLEverseSWORD(gchar *verse);
 void destroyListEditorSWORD(void);
+GList* setupSDSWORD(GtkWidget *text);
+void loadSDmodSWORD(GtkWidget *clist,gchar *modName);
+gchar* getdictmodSWORD(void);
+gchar* gettextmodSWORD(void);
+gchar* getcommodSWORD(void);
+void gotokeySWORD(gchar *newkey);
+void shutdownSDSWORD(void);
+void SDdictSearchTextChangedSWORD(char* newkey);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

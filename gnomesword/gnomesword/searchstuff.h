@@ -60,7 +60,6 @@ class SearchWindow
         GtkWidget *entryLower;
         GtkWidget *entryUpper;
         GtkWidget *scrolledwindow2;
-        GtkWidget *resultList;
         GtkWidget *label46;
         GtkWidget *scrolledwindow20;
         GtkWidget *txtSearch;
@@ -88,6 +87,7 @@ public:
 	~SearchWindow();
 	GtkWidget *create();
 	GtkWidget *progressbar;
+        GtkWidget *resultList;
         void searchSWORD(GtkWidget *searchFrm);  //-- search Bible text or commentaries
         void resultsListSWORD(GtkWidget *searchFrm, gint row, gint column); //-- someone clicked the results list
         void initsearchWindow(GtkWidget *searchDlg); //-- init search dialog

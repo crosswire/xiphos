@@ -1,4 +1,4 @@
-
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
                           listeditor.c  -  description
                              -------------------
@@ -7,14 +7,14 @@
     email                : tbiggs@infinet.com
  ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/***********************************************************************************
+ *                                                                                 *
+ *   This program is free software; you can redistribute it and/or modify      *
+ *   it under the terms of the GNU General Public License as published by *
+ *   the Free Software Foundation; either version 2 of the License, or        *
+ *   (at your option) any later version.                                           *
+ *                                                                                 *
+ ***********************************************************************************/
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -49,7 +49,7 @@ struct _listrow {
 LISTITEM mylistitem;
 LISTITEM *p_mylistitem;
 LISTITEM listitem;		/* structure for ListEditor items
-				 (verse lists and bookmarks) */
+				   (verse lists and bookmarks) */
 gint listrow;			/* current row in ListEditor clist widget */
 gchar *remfirstsub;
 gchar *title;
@@ -64,7 +64,7 @@ extern gchar *fnbookmarksnew;	/* bookmarks file name - declared and set in files
 extern gchar rememberlastitem[255];	/* we need to use this when add to bookmarks */
 extern GtkWidget *MainFrm;	/*----------- main form (app) */
 extern gchar remembersubtree[256];	/* used for bookmark menus declared in filestuff.cpp */
-extern GtkWidget *listeditor;		/* pointer to ListEditor */
+extern GtkWidget *listeditor;	/* pointer to ListEditor */
 
 /*****************************************************************************
  *internal functions - visable to this file only
@@ -231,7 +231,7 @@ void on_btnLEsave_clicked(GtkButton * button, gpointer user_data)
 /******************************************************************************
  * set ok and apply button sensitivity
  *****************************************************************************/
-void setbuttonson(GtkWidget * listeditor, gboolean choice) 
+void setbuttonson(GtkWidget * listeditor, gboolean choice)
 {
 	GtkWidget *ok, *apply;
 
@@ -253,7 +253,7 @@ void editbookmarksSave(GtkWidget * editdlg)
 	newsave = TRUE;
 	flbookmarksnew = open(fnbookmarksnew, O_WRONLY | O_TRUNC);
 	list = lookup_widget(editdlg, "clLElist");
-	for (i = 0; i < GTK_CLIST(list)->rows; i++){	/* ibookmarks */	
+	for (i = 0; i < GTK_CLIST(list)->rows; i++) {	/* ibookmarks */
 		getrow(list, i, buf);
 		getitem(buf);
 		strcpy(p_mylistitem->item, buf[0]);
@@ -279,7 +279,8 @@ void getitem(gchar * buf[6])
 	    tmpbuf[255], *preitem = "", *presubitem = "Edit Bookmarks";
 	static gint oldlevel = 0;
 	gint level, type;
-	static gboolean firsttime = TRUE, firstsub = TRUE, first0item = TRUE;
+	static gboolean firsttime = TRUE, firstsub = TRUE, first0item =
+	    TRUE;
 	gint i;
 	// gchar mybuf[80];
 
@@ -365,11 +366,12 @@ void loadbookmarksnew(GtkWidget * list)
 	stat(fnbookmarksnew, &stat_p);	/* get file info */
 	filesize = stat_p.st_size;	/* filesize in bytes */
 	/* find number of records in file (filesize / record size) */
-	ibookmarks = (filesize / (sizeof(mylistitem)));	
+	ibookmarks = (filesize / (sizeof(mylistitem)));
 	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);	/* open bookmarks file */
-	while (i < ibookmarks){	/* loop until we have all the records */
+	while (i < ibookmarks) {	/* loop until we have all the records */
 		/* read in one record at a time */
-		read(flbookmarksnew, (char *) &mylistitem, sizeof(mylistitem));
+		read(flbookmarksnew, (char *) &mylistitem,
+		     sizeof(mylistitem));
 		p_mylistitem = &mylistitem;	/* set pointer to record */
 		buf[0] = g_strdup(p_mylistitem->item);
 		remfirstsub = g_strdup(p_mylistitem->item);
@@ -381,12 +383,13 @@ void loadbookmarksnew(GtkWidget * list)
 		buf[4] = g_strdup(p_mylistitem->menu);
 		buf[5] = g_strdup(p_mylistitem->preitem);
 		/* insert item in editor list */
-		gtk_clist_insert(GTK_CLIST(list), i, buf);	
+		gtk_clist_insert(GTK_CLIST(list), i, buf);
 		/* show level by amount of shift */
 		gtk_clist_set_shift(GTK_CLIST(list), i, 0, 0,
-				    (p_mylistitem->level * 10));	
+				    (p_mylistitem->level * 10));
 		++i;
-		for(j=0;j<6;j++) g_free(buf[j]);
+		for (j = 0; j < 6; j++)
+			g_free(buf[j]);
 	}
 	sprintf(rememberlastitem, "%s", p_mylistitem->item);
 	close(flbookmarksnew);
@@ -398,8 +401,8 @@ void loadbookmarksnew(GtkWidget * list)
 void addsubitme(GtkWidget * list, gint row)
 {
 	gchar *buf[6];
-	gint  j;
-	
+	gint j;
+
 	++row;
 	buf[0] = g_strdup("");
 	buf[1] = g_strdup("1");
@@ -410,7 +413,8 @@ void addsubitme(GtkWidget * list, gint row)
 	gtk_clist_insert(GTK_CLIST(list), row, buf);	/* insert item in new position */
 	gtk_clist_select_row(GTK_CLIST(list), row, 0);	/* seletct row (new item) */
 	++ibookmarks;
-	for(j=0;j<6;j++) g_free(buf[j]);
+	for (j = 0; j < 6; j++)
+		g_free(buf[j]);
 }
 
 /******************************************************************************
@@ -428,54 +432,55 @@ void deleteitem(GtkWidget * list)
 void addverse(GtkWidget * list, gint row, gchar * item)
 {
 	gchar *buf[6], *tmpbuf;
-        gint j;
+	gint j;
 
 	buf[0] = g_strdup(item);	/* set item to verse */
 	buf[1] = g_strdup("0");	/* set type to item (0) */
-        /* get level from previous item in list */
+	/* get level from previous item in list */
 	gtk_clist_get_text(GTK_CLIST(list), row, 2, &tmpbuf);
 	buf[2] = g_strdup(tmpbuf);
-        /* get item from list */
-	gtk_clist_get_text(GTK_CLIST(list), row, 3, &tmpbuf);	
+	/* get item from list */
+	gtk_clist_get_text(GTK_CLIST(list), row, 3, &tmpbuf);
 	buf[3] = g_strdup(tmpbuf);
-        /* get item from list */
-	gtk_clist_get_text(GTK_CLIST(list), row, 4, &tmpbuf);	
+	/* get item from list */
+	gtk_clist_get_text(GTK_CLIST(list), row, 4, &tmpbuf);
 	buf[4] = g_strdup(tmpbuf);
-        /* get item from list */
-	gtk_clist_get_text(GTK_CLIST(list), row, 0, &tmpbuf);	
+	/* get item from list */
+	gtk_clist_get_text(GTK_CLIST(list), row, 0, &tmpbuf);
 	buf[5] = g_strdup(tmpbuf);
-        /* insert item in new position */
+	/* insert item in new position */
 	++row;
-	gtk_clist_insert(GTK_CLIST(list), row, buf);	
+	gtk_clist_insert(GTK_CLIST(list), row, buf);
 	++ibookmarks;
 	if (row < ibookmarks) {
 		++row;
 		getrow(list, row, buf);
 		tmpbuf = g_strdup(item);	/* previous item */
 		/* change only if not a subitem and not following a <Separator> */
-		if (buf[1][0] == 0 && buf[0][0] != '<'){			
+		if (buf[1][0] == 0 && buf[0][0] != '<') {
 			gtk_clist_set_text(GTK_CLIST(list), row, 5,
 					   tmpbuf);
 		}
-		for(j=0;j<6;j++) g_free(buf[j]);
+		for (j = 0; j < 6; j++)
+			g_free(buf[j]);
 	}
-	gtk_clist_select_row(GTK_CLIST(list), row - 1, 0);	/* seletct row (new item)  */  	
+	gtk_clist_select_row(GTK_CLIST(list), row - 1, 0);	/* seletct row (new item)  */
 }
 
 
 /******************************************************************************
  *create and init ListEditor
- *****************************************************************************/ 
+ *****************************************************************************/
 GtkWidget *createListEditor(void)
 {
-	GtkWidget *ListEditor, *text;	
+	GtkWidget *ListEditor, *text;
 
 	title = "GnomeSword - Bookmark Editor";
 	p_mylistitem = &mylistitem;
 	ListEditor = create_listeditor();
 	text = lookup_widget(ListEditor, "text7");
-	/* set text window to word wrap */	
-	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE);	
+	/* set text window to word wrap */
+	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE);
 	/* init listmodule */
 	setuplisteditSWORD(text);
 	gtk_signal_connect(GTK_OBJECT(ListEditor), "destroy",
@@ -485,8 +490,8 @@ GtkWidget *createListEditor(void)
 
 /******************************************************************************
  *load bookmarks into an editor dialog
- *****************************************************************************/ 
-void editbookmarks(GtkWidget * editdlg) 
+ *****************************************************************************/
+void editbookmarks(GtkWidget * editdlg)
 {
 	GtkWidget *list;
 
@@ -496,39 +501,38 @@ void editbookmarks(GtkWidget * editdlg)
 
 /******************************************************************************
  *up date bookmark menu with our changes
- *****************************************************************************/ 
+ *****************************************************************************/
 void applychanges(GtkWidget * widget)
 {
 	GtkWidget *listeditor, *list;
 	gchar tmpbuf[255];
-        gchar *buf[6];
+	gchar *buf[6];
 
 	listeditor = lookup_widget(widget, "listeditor");
 	list = lookup_widget(listeditor, "clLElist");
 	/* save to file so we don't forget -- local */
-	editbookmarksSave(listeditor);	
-        getrow(list, 0, buf);
+	editbookmarksSave(listeditor);
+	getrow(list, 0, buf);
 	getitem(buf);
-	sprintf(tmpbuf, "%s%s", "_Bookmarks/",
-		buf[0]);
-	/* remove old bookmarks form menu -- menustuff.cpp */	
+	sprintf(tmpbuf, "%s%s", "_Bookmarks/", buf[0]);
+	/* remove old bookmarks form menu -- menustuff.cpp */
 	removemenuitems(MainFrm, tmpbuf, ibookmarks);
 	/* add Separator it was deleted with old menus */
 	addseparator(MainFrm, "_Bookmarks/Edit Bookmarks");
-	/* let's show what we did -- filestuff.cpp */	
-	loadbookmarks_programstart();	
+	/* let's show what we did -- filestuff.cpp */
+	loadbookmarks_programstart();
 	loadbookmarksnew(list);
 	setbuttonson(listeditor, FALSE);
 }
 
 /******************************************************************************
  *up date clist with info from form
- *****************************************************************************/ 
+ *****************************************************************************/
 void applylistchanges(GtkWidget * widget, gint row)
 {
 	GtkWidget *editor, *entry, *list;
 	gchar *buf[6];		/* pointer to string storage */
-	gint  j,level;
+	gint j, level;
 
 
 	editor = gtk_widget_get_toplevel(widget);	/* set pointer to editor dialog */
@@ -544,41 +548,42 @@ void applylistchanges(GtkWidget * widget, gint row)
 	entry = lookup_widget(editor, "entryLevel");	/* get level entry */
 	buf[2] = g_strdup(gtk_entry_get_text(GTK_ENTRY(entry)));
 	level = atoi(buf[2]);
-	
+
 	gtk_clist_remove(GTK_CLIST(list), row);	/* remove item from current position */
 	gtk_clist_insert(GTK_CLIST(list), row, buf);	/* insert item in new position */
 	gtk_clist_set_shift(GTK_CLIST(list), row, 0, 0, (level * 10));	/* set indent */
 	gtk_clist_select_row(GTK_CLIST(list), row, 0);	/* seletct row (same item) */
 	/* free buf */
-	for(j=0;j<3;j++) g_free(buf[j]);
+	for (j = 0; j < 3; j++)
+		g_free(buf[j]);
 }
 
 /******************************************************************************
  *for getting info from selected row and displaying in form
- *****************************************************************************/ 
+ *****************************************************************************/
 void selectrow(GtkWidget * list, gint row, gint column)
 {
 	GtkWidget *editor, *entry;
-	gchar *buf; 
+	gchar *buf;
 	currentrow = row;
 	editor = gtk_widget_get_toplevel(list);	/* set pointer to editor dialog */
-	
+
 	entry = lookup_widget(editor, "entryListItem");	/* get item entry */
-	gtk_clist_get_text(GTK_CLIST(list), row, 0, &buf);	/* get item from list */	
+	gtk_clist_get_text(GTK_CLIST(list), row, 0, &buf);	/* get item from list */
 	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */
 
 	entry = lookup_widget(editor, "entryType");	/* get item entry */
-	gtk_clist_get_text(GTK_CLIST(list), row, 1, &buf);	/* get item from list */	
+	gtk_clist_get_text(GTK_CLIST(list), row, 1, &buf);	/* get item from list */
 	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */
 
 	entry = lookup_widget(editor, "entryLevel");	/* get item entry */
-	gtk_clist_get_text(GTK_CLIST(list), row, 2, &buf);	/* get item from list */	
-	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */     	
+	gtk_clist_get_text(GTK_CLIST(list), row, 2, &buf);	/* get item from list */
+	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */
 }
 
 /******************************************************************************
  *for finding sub items above
- *****************************************************************************/ 
+ *****************************************************************************/
 gint findpresubitem(GtkWidget * list, gint row, gint ilevel)
 {
 	gint i, level;
@@ -625,44 +630,47 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 	gchar *buf[6],		/* pointer to string storage */
 	*prebuf[6],		/* item before */
 	*nextbuf[6],		/* item after */
-	*tmpbuf="\0",		/* pointer to string storage */
+	*tmpbuf = "\0",		/* pointer to string storage */
 	 mybuf[80];
-	gint 	ilevel=0,		/* for level item */
-		itype=0,
-		prelevel=0,
-		nextlevel=0,
-		pretype=0,
-		nexttype=0,
-		newrow=0;	/* for counting */
+	gint ilevel = 0,	/* for level item */
+	 itype = 0,
+	    prelevel = 0, nextlevel = 0, pretype = 0, nexttype =
+	    0, newrow = 0; /* for counting */
+	gint    lastrow;	
+	
 	LISTROW *items;
 	/* set pointer to editor dialog */
-	editor = gtk_widget_get_toplevel(widget);	
+	editor = gtk_widget_get_toplevel(widget);
+	/* set list pointer to clLElist (clist widget ) */
 	list = lookup_widget(widget, "clLElist");
-	/*-- read items from list so we can move them or show changes */
-	getrow(list, listrow, buf);	
+	lastrow =  (GTK_CLIST(list)->rows - 1);
+	/*  read items from list so we can move them or show changes */
+	getrow(list, listrow, buf);
 	/* we need to know level so we can add tabs
-		(increment and deincrement level) */
-	ilevel = atoi(buf[2]);	
+	   (increment and deincrement level) */
+	ilevel = atoi(buf[2]);
 	itype = atoi(buf[1]);
+	/* make sure there is a row for us to access */
 	if (listrow > 0) {
+		/* get previous item (item before the one we want to change) */
 		getrow(list, listrow - 1, prebuf);
 		prelevel = atoi(prebuf[2]);
 		pretype = atoi(prebuf[1]);
 	}
-	/* make sure there is a row for us to access */
-	if (listrow < GTK_CLIST(list)->rows){	
+	/* make sure there is a row for us to access */	
+	if (listrow < lastrow) {
+		/* get next item (item after the one we want to change) */
 		getrow(list, listrow + 1, nextbuf);
 		nextlevel = atoi(nextbuf[2]);
 		nexttype = atoi(nextbuf[1]);
 	}
-	switch (direction){	/* make sure that we want to do something */	
-	case 0:		/**** up ****/
-		if (listrow >= 1)	/* don't do anything if we are in first row and press up button */
-		{
+	switch (direction) {	/* make sure that we want to do something */
+	case 0:	/**** up ****/
+		/* don't do anything if we are in first row and press up button */
+		if (listrow >= 1) {
 			if (listrow == 1 && (atoi(buf[1]) == 0))
 				return;	/* if item is not a sumitem (submenu) do nothing */
-			if (atoi(buf[1]) == 1)	/* we are moving a sub item */
-			{
+			if (atoi(buf[1]) == 1) {	/* we are moving a sub item */
 				gint lrow, howmany;
 
 				lrow = listrow;
@@ -670,26 +678,29 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 				    findpresubitem(list, lrow, ilevel);
 
 				howmany = findhowmany(list, lrow);
-				items =  (LISTROW*)g_malloc(sizeof(LISTROW)*howmany);
+				items =
+				    (LISTROW *) g_malloc(sizeof(LISTROW) *
+							 howmany);
 				remove_item_and_children(list, items,
 							 lrow);
 				insert_items(list, items, howmany, newrow);
 				g_free(items);
 				setbuttonson(editor, TRUE);
 				return;
-			} else { /* we are moving an item */
+			} else {	/* we are moving an item */
+
+				if (atoi(prebuf[1]) == 0) {	/* if we jumped an item */
+				        gtk_clist_swap_rows (GTK_CLIST(list),
+			                                listrow,
+			                                listrow-1);
+			                --listrow;
+			                gtk_clist_select_row(GTK_CLIST(list), listrow, 0);
+			                setbuttonson(editor, TRUE);
+			                return;
 			
-				if (atoi(prebuf[1]) == 0){	/* if we jumped an item */				
-					buf[2] = g_strdup(prebuf[2]);
-					buf[3] = g_strdup(prebuf[3]);
-					buf[5] = g_strdup(prebuf[5]);
-					tmpbuf = g_strdup(buf[0]);
-					gtk_clist_set_text(GTK_CLIST(list),
-							   listrow - 1, 5,
-							   tmpbuf);
-				} else { /* if we jumped a sub item */				
+				} else {	/* if we jumped a sub item */
 					getrow(list, listrow - 2, prebuf);
-					if (atoi(prebuf[1]) == 0){	/* if row we will follow is an item */					
+					if (atoi(prebuf[1]) == 0) {	/* if row we will follow is an item */
 						buf[2] =
 						    g_strdup(prebuf[2]);
 						buf[3] =
@@ -697,14 +708,16 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 						buf[5] =
 						    g_strdup(prebuf[0]);
 
-					} else { /* if row we will follow is a sub item */					
+					} else {	/* if row we will follow is a sub item */
 						sprintf(buf[2], "%d",
 							(atoi(prebuf[2]) + 1));	/* move one to the right of the sub item */
-						buf[3] = g_strdup(prebuf[0]);
+						buf[3] =
+						    g_strdup(prebuf[0]);
 						buf[5] = g_strdup("");
 					}
-					getcolumn(list, listrow, 1, tmpbuf);
-					if (atoi(tmpbuf) == 0){  /* what we left behind was an item not a sub item */					
+					getcolumn(list, listrow, 1,
+						  tmpbuf);
+					if (atoi(tmpbuf) == 0) {	/* what we left behind was an item not a sub item */
 						tmpbuf = g_strdup("");
 						gtk_clist_set_text
 						    (GTK_CLIST(list),
@@ -717,9 +730,9 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 		} else
 			return;
 		break;
-	case 1:		/**** down ****/
-		if (listrow < GTK_CLIST(list)->rows){	/* don't do anything if we are in last row and press down button */	
-			if (atoi(buf[1]) == 1){	/* we are moving a sub item */			
+	case 1:	/**** down ****/
+		if (listrow < GTK_CLIST(list)->rows -1) {	/* don't do anything if we are in last row and press down button */
+			if (atoi(buf[1]) == 1) {	/* we are moving a sub item */
 				gint lrow, howmany;
 
 				lrow = listrow;
@@ -728,7 +741,9 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 
 				howmany = findhowmany(list, lrow);
 				newrow = newrow - howmany;
-				items =  (LISTROW *)g_malloc(sizeof(LISTROW)*howmany);
+				items =
+				    (LISTROW *) g_malloc(sizeof(LISTROW) *
+							 howmany);
 				remove_item_and_children(list, items,
 							 lrow);
 				sprintf(mybuf,
@@ -741,7 +756,7 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 			}
 			if (atoi(buf[1]) == 0) {
 				if (atoi(buf[2]) != atoi(nextbuf[2]))
-					return;/* 	//-- do not move item to a new level */
+					return;	/*       //-- do not move item to a new level */
 			}
 			gtk_clist_remove(GTK_CLIST(list), listrow);	/* remove item from current position */
 			++listrow;	/* add one to listrow */
@@ -762,7 +777,7 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 			sprintf(buf[2], "%d", ilevel);
 			gtk_clist_remove(GTK_CLIST(list), listrow);	/* remove item from current position */
 		} else if (itype == 0) {
-			if (pretype == 1 && prelevel >= ilevel){ /* if the previous item is a submenu and it's level equal to or grater than our level */			
+			if (pretype == 1 && prelevel >= ilevel) {	/* if the previous item is a submenu and it's level equal to or grater than our level */
 				++ilevel;
 				sprintf(buf[2], "%d", ilevel);
 				gtk_clist_remove(GTK_CLIST(list), listrow);	/* remove item from current position */
@@ -811,7 +826,7 @@ void getrow(GtkWidget * list, gint listrow, gchar * buf[6])
 void getcolumn(GtkWidget * list, gint row, gint column, gchar * buf)
 {
 	/*-- read item from list */
-	gtk_clist_get_text(GTK_CLIST(list), row, column, &buf);	/* get item from list */         
+	gtk_clist_get_text(GTK_CLIST(list), row, column, &buf);	/* get item from list */
 }
 
 /****************************************************************************** 
@@ -832,7 +847,8 @@ gint findhowmany(GtkWidget * clist, gint row)
 		if (atoi(buf[2]) > level) {
 			++row;
 			++i;
-		} else break;
+		} else
+			break;
 	}
 	return i;
 }
@@ -1430,8 +1446,8 @@ GtkWidget *create_listeditor(void)
 						 GTK_TOOLBAR_CHILD_BUTTON,
 						 NULL,
 						 "Delete Item",
-						 NULL, NULL,
-						 NULL, NULL, NULL);
+						 NULL, NULL, NULL, NULL,
+						 NULL);
 	gtk_widget_ref(btnLEdelete);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "btnLEdelete",
 				 btnLEdelete,

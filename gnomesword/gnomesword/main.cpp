@@ -47,9 +47,7 @@ main (int argc, char *argv[])
 	gboolean 		
 		newconfigs = false,	
 		newbookmarks = false;
-	gchar 
-  		tmpbuf[80];
-
+	gchar 	tmpbuf[80];
 	
 	gnome_init("GnomeSword", VERSION, argc, argv);		
 	if(argc > 1) {			
@@ -80,7 +78,7 @@ main (int argc, char *argv[])
   	myset = readsettings(); 
   	/* set pointer to structure */
   	settings = &myset;       
-  	initSword(mainwindow);
+  	initSWORD(mainwindow);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
   	gtk_widget_show(mainwindow);
   	/* set toggle state of buttons and menu items */

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.3.7b)
+AM_INIT_AUTOMAKE(gnomesword, 0.4.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -11,6 +11,35 @@ GNOME_INIT
 AC_ISC_POSIX
 AC_PROG_CC
 AC_HEADER_STDC
+
+GNOME_COMPILE_WARNINGS
+GNOME_X_CHECKS
+
+dnl Subst PACKAGE_PIXMAPS_DIR.
+PACKAGE_PIXMAPS_DIR="`gnome-config --datadir`/pixmaps/${PACKAGE}"
+AC_SUBST(PACKAGE_PIXMAPS_DIR)
+
+dnl Subst PACKAGE_HELP_DIR.
+PACKAGE_HELP_DIR="`gnome-config --datadir`/gnome/help/${PACKAGE}"
+AC_SUBST(PACKAGE_HELP_DIR)
+
+dnl Subst PACKAGE_MENU_DIR.
+PACKAGE_MENU_DIR="`gnome-config --datadir`/gnome/apps"
+AC_SUBST(PACKAGE_MENU_DIR)
+
+dnl **************************
+dnl  For the spell checker
+dnl **************************
+
+dnl don't define WITH_SPC if you want to build without spell-checker
+AC_DEFINE(WITH_SPC, 1, [Define if you want to use spell checking])
+
+#AC_DEFINE(DEBUG, 1, [Define if you want to use debug])
+
+dnl Checks select argument types
+AC_FUNC_SELECT_ARGTYPES
+AC_HEADER_TIME
+
 
 dnl ------------------------------------------------------------------------
 dnl Find a file (or one of more files in a list of dirs)
@@ -76,40 +105,99 @@ AC_SUBST(SWORD_CPPFLAGS)
 AC_SUBST(SWORD_LIBS) 
  
 AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
- 
 
-GNOME_COMPILE_WARNINGS
-GNOME_X_CHECKS
+AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking],spellchecking=$enableval,spellchecking="no") 
+AC_ARG_ENABLE(printing,[--enable-printing		enable printing],printing=$enableval,printing="no")
+ AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
+ AC_ARG_ENABLE(all,[--enable-all		enable all]all,all=$enableval,all="no")
+
+dnl looking for aspell 
+if test "x$spelchecking" = xyes || test "x$all" = xyes; then
+  AC_MSG_CHECKING([for aspell]) 
+  aspell_dirs="${prefix}/bin $ac_aspell_dir/bin /usr/bin /usr/local/bin" 
+  AC_FIND_FILE(aspell, $aspell_dirs, aspell_dir) 
+  if test -r $aspell_dir/aspell; then 
+   HAVE_ASPELL=yes 
+   AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
+   echo "found"
+  else
+   AC_MSG_CHECKING([for ispell]) 
+   ispell_dirs="${prefix}/bin $ac_ispell_dir/bin /usr/bin /usr/local/bin" 
+   AC_FIND_FILE(ispell, $ispell_dirs, ispell_dir) 
+   if test -r $ispell_dir/ispell; then 
+    HAVE_ISPELL=yes 
+    AC_DEFINE(USE_ISPELL, 1, [Define if you want to use ispell])
+    echo "found"
+   fi
+  fi
+fi
 
 dnl ******************************
 dnl GdkPixbuf checking
 dnl ******************************
-AC_MSG_CHECKING(for Gdkpixbuf libraries)
-if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
+have_pixbuf="no"
+if test "x$shortcutbar" = xyes || test "x$printing" = xyes || test "x$all" = xyes; then
+ AC_MSG_CHECKING(for Gdkpixbuf libraries)
+ if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
     AC_MSG_RESULT(found)
-else
-    AC_MSG_ERROR(Did not find gdkpixbuf installed)
+        PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
+        PIXBUF_CFLAGS=`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf`
+        AC_SUBST(PIXBUF_LIBS)
+        AC_SUBST(PIXBUF_CFLAGS)
+    have_pixbuf="yes"
+ else
+    AC_MSG_RESULT(Did not find gdkpixbuf installed)
+ fi
 fi
 
 dnl ******************************
 dnl GnomePrint checking
 dnl ******************************
-AC_MSG_CHECKING(for GnomePrint libraries >= 0.20)
-if gnome-config --libs print > /dev/null 2>&1; then 
+have_gnomeprint="no"
+if test "x$shortcutbar" = xyes || test "x$printing" = xyes || test "x$all" = xyes; then
+ AC_MSG_CHECKING(for GnomePrint libraries >= 0.20)
+ if gnome-config --libs print > /dev/null 2>&1; then 
     vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
     if test "$vers" -ge 20; then
-        AC_MSG_RESULT(found)                      
+        AC_MSG_RESULT(found)
+        GNOME_PRINT_LIBS=`gnome-config --libs print`
+        GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
+        AC_SUBST(GNOME_PRINT_LIBS)
+        AC_SUBST(GNOME_PRINT_CFLAGS)
+        AC_DEFINE(USE_GNOMEPRINT, 1, [Define if you want to use printing w/gnome-print])
+        have_gnomeprint="yes"
     else
-        AC_MSG_ERROR(You need at least GNOME print 0.20 for this version of gnomesword)        
+        AC_MSG_RESULT(You need at least GNOME print 0.20 for this version of gnomesword)
     fi
-else
-    AC_MSG_ERROR(Did not find GnomePrint installed)
+ else
+    AC_MSG_RESULT(Did not find GnomePrint installed)
+ fi
 fi
-GNOME_PRINT_LIBS=`gnome-config --libs print`
-GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
-AC_SUBST(GNOME_PRINT_LIBS)
-AC_SUBST(GNOME_PRINT_CFLAGS)
+
+dnl ******************************
+dnl Gnome App Lib checking
+dnl ******************************
+have_gal="no"
+if test "x$shortcutbar" = xyes || test "x$all" = xyes; then
+ AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.4)
+ if gnome-config --libs gal > /dev/null 2>&1; then 
+    vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
+        awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
+    if test "$vers" -ge 40000; then
+        AC_MSG_RESULT(found)
+        GNOME_APP_LIBS=`gnome-config --libs gal`
+        GNOME_APP_CFLAGS=`gnome-config --cflags gal`
+        AC_SUBST(GNOME_APP_LIBS)
+        AC_SUBST(GNOME_APP_CFLAGS)
+        have_gal="yes"
+    else
+        AC_MSG_RESULT(Did not find GNOME Application libs 0.4 )
+    fi
+ else
+    AC_MSG_RESULT(Did not find GnomeAppLib (GAL) installed)
+ fi
+fi
 
 
 dnl Subst PACKAGE_PIXMAPS_DIR.
@@ -121,15 +209,14 @@ AM_PROG_LIBTOOL
 
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
-AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking w/aspell],spellchecking=$enableval,spellchecking="no")
 
 
-EXTRA_GNOME_LIBS="`gnome-config --libs libglade gdk_pixbuf gnomecanvaspixbuf gnomeui ` $THREADS_LIBS `unicode-config --libs`"
-EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gdk_pixbuf gnomecanvaspixbuf gnomeui ` $THREADS_CFLAGS `unicode-config --cflags`"
+EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
+EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
 AC_SUBST(EXTRA_GNOME_LIBS)
 AC_SUBST(EXTRA_GNOME_CFLAGS)
 
-LIBS="$LIBS -L/usr/local/lib -L/usr/lib -lgnomeprint `xml-config --libs`"
+LIBS="$LIBS -L/usr/local/lib -L/usr/lib `xml-config --libs`"
 
 dnl Only use -Wall if we have gcc
 if test "x$GCC" = "xyes"; then
@@ -137,26 +224,28 @@ if test "x$GCC" = "xyes"; then
     CFLAGS="$CFLAGS -Wall"
   fi
 fi
-if test "x$spellchecking" = xyes; then
-	LIBS="$LIBS -laspell"
-fi
-if test "x$spellchecking" = xyes; then
-	AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell spell checking])
+
+if test "x$spellchecking" = xyes || test "x$all" = xyes; then
+	AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
 fi
 
-AC_DEFINE(USE_GNOMEPRINT, 1, [Define if you want to use printing w/gnome-print])
+if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes || test "x$all" = xyes; then
+        AC_DEFINE(USE_SHORTCUTBAR, 1, [Define if you want to use the shortcutbar])
+fi
 
-AM_CONDITIONAL(SPELLING,test "x$spellchecking" = xyes)
-AM_CONDITIONAL(NO_OPS, test "x$spellchecking" = xno)
+AM_CONDITIONAL(SHORTCUTBAR,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xno)
+AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xyes || test "x$all" = xyes)
+AM_CONDITIONAL(SPELLING,test "x$spellchecking" = xyes && test "x$have_gnomeprint" = xno && test "x$have_gal" = xno)
+AM_CONDITIONAL(PRINTING,test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xno && test "x$have_gal" = xno)
+AM_CONDITIONAL(SPELLING_PRINTING,test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xyes && test "x$have_gal" = xno)
+AM_CONDITIONAL(NO_OPS,test "x$have_gnomeprint" = xno && test "x$spellchecking" = xno && test "x$have_gal" = xno)
 
+#if test "x$have_gal" = xyes; then
 AC_OUTPUT([
 Makefile
 macros/Makefile
 gnomesword/Makefile
-e-util/Makefile
 widgets/Makefile
-widgets/e-text/Makefile
-widgets/e-paned/Makefile
 widgets/misc/Makefile
 widgets/shortcut-bar/Makefile
 ])
@@ -165,9 +254,19 @@ widgets/shortcut-bar/Makefile
 echo
 echo "Summary of GnomeSword configuration:"
 echo
-if test "x$spellchecking" = xyes; then
-        echo "Spellchecking with Aspell:                    enabled"
+if test "x$spellchecking" = xyes || test "x$all" = xyes; then
+        echo "Spellchecking:                    enabled"
 else
-        echo "Spellchecking with Aspell:                    disabled"
+        echo "Spellchecking:                    disabled"
 fi
 
+if test "x$have_gnomeprint" = xyes; then
+        echo "Printing:                         enabled"
+else
+	echo "Printing:                         disabled"
+fi
+if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes; then
+        echo "GnomeSword will be built with the Evolution shortcut bar"
+else
+        echo "GnomeSword will be built without the Evolution shortcut bar"
+fi
