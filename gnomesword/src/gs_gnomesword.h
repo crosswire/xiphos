@@ -49,7 +49,8 @@ struct _settings {
 		*srhtml,  /* html widget for serch results list in shortcut bar */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu, /* add bookmark menu item */
-		*unlockmod_item; /* unlock module menu item */
+		*unlockmod_item, /* unlock module menu item */
+		*htmlcomm; /* html commentary widget */
 	gchar	
 		gs_version[16],
 		MainWindowModule[80],	/* modules to open at program startup  */
