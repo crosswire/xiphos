@@ -38,6 +38,7 @@
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
 #include "gs_viewdict.h"
+#include "gs_history.h"
 #include "support.h"
 #include "interface.h"
 #include "gs_file.h"
