@@ -2,7 +2,7 @@
 Please see INSTALL file before you start.
 ==================================================================
 ******************************************************************
-GnomeSword requires Gnome ,the Sword libs and GtkHTML-0.8.0 to run
+GnomeSword requires Gnome ,the Sword libs and GtkHTML-0.9.x to run
 ******************************************************************
 ##################################################################
 you can do some formatting of your personal notes
@@ -10,11 +10,11 @@ text inclosed in <B></b> will be bold - ctrl+b
 text inclosed in <I></i> will be italic - ctrl+i
 text inclosed in <FONT FACE="symbol"></font> will use the symbol font (greek) - ctrl+g
 text formatted like <a href=\"Romans 8:28">Romans 8:28</a> will be red (for Bible references) - ctrl+r
-you can also mark for underline - ctrl+l - but gnomesword will not show underline - now.
-when in edit mode you will see the format marks in the editor
+you can also mark for underline - ctrl+l.
+when in edit mode you will see the format <TAGS> in the editor
 you must higlight the text you want marked - then use the keys or the popup menu to apply
 the tags.
-The formatting is different form the last release - I hope this does not cause a problem.
+The formatting is different form early releases - I hope this does not cause a problem.
 I changed to make the personal comments compatible with BibleTime.
 you can turn formatting on or off in the preferences dialog
 ##################################################################
@@ -33,8 +33,8 @@ some of the cheatah code is still used in GnomeSword.
 I took the code for setting the scope of a search from
 the Bibletime program.
 
-I think I may have taken some code form the Sword Project's windoze
-programs also.
+I have taken some code form the Sword Project's windoze
+programs also. 
 
 The printing code is from gedit-0.7.9. I only change what I had to to
 make it work with GnomeSword.
