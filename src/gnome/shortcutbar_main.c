@@ -1477,6 +1477,9 @@ void gui_setup_shortcut_bar(void)
 	groupnum7 =
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar), vpVL,
 				  VLbutton, -1);
+				  
+				  
+				  
 	e_shortcut_bar_set_enable_drags((EShortcutBar *)
 					shortcut_bar, TRUE);/*
 	gtk_signal_connect(GTK_OBJECT(VLbutton), "clicked",

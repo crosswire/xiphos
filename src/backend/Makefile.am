@@ -18,6 +18,7 @@ CXXFLAGS =  \
     $(GTK_CFLAGS) \
     $(SWORD_CPPFLAGS)
 
+
 libbackend_a_SOURCES =  \
     bibletext_.cpp \
     bibletext_.h \
@@ -37,9 +38,13 @@ libbackend_a_SOURCES =  \
     percomm_.h \
     properties.cpp \
     properties.h \
-    search_.cpp \
-    search_.h \
+    search.cpp \
+    search.h \
     shortcutbar.cpp \
     shortcutbar.h \
     sword.cpp \
-    sword.h \
+    sword.h 
+
+libbackend_a_LIBADD = \
+   $(SWORD_LIBS)
+   

@@ -4,7 +4,6 @@ INCLUDES =  \
     $(EXTRA_PRINT_CFLAGS) \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
-    $(SWORD_CPPFLAGS) \
     $(GTKHTML_CFLAGS) \
     -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
@@ -27,6 +26,8 @@ gnomesword_SOURCES =  \
     main.c \
     percomm.c \
     percomm.h \
+    search.c \
+    search.h \
     settings.c \
     settings.h \
     shortcutbar.c \
@@ -42,7 +43,6 @@ gnomesword_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
-    $(SWORD_LIBS) \
     $(GTKHTML_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
@@ -52,7 +52,4 @@ gnomesword_LDADD = \
     $(top_builddir)/src/gnome/libgui.a 
 
 
-CXXFLAGS =  \
-    $(GTK_CFLAGS) \
-    $(SWORD_CPPFLAGS)
 
