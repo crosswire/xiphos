@@ -23,17 +23,41 @@
 #include <config.h>
 #endif
 
-
-//#include <glib-2.0/glib.h>
-//#include <gnome.h>
-
-
 #include "main/mod_mgr.h"
 
-
 #include "gui/mod_mgr.h"
-#include "backend/module_manager.hh"
 
+#include "backend/module_manager.hh"
+#include "backend/sword_main.hh"
+
+
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/mod_mgr.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_update_module_lists(void)
+{
+	main_shutdown_list();
+	delete backend;		
+	backend = new BackEnd();
+	backend->init_SWORD(0);
+	main_init_lists();
+}
 
 
 /******************************************************************************

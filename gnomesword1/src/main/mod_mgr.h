@@ -47,6 +47,7 @@ struct  _mms {
 	const char *directory;
 };
 
+void main_update_module_lists(void);
 MOD_MGR *mod_mgr_get_next_module(void);
 void update_install_status(long total, long done, const char *message);
 void update_install_progress(double fraction);
