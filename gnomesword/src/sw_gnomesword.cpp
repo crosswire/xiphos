@@ -249,11 +249,6 @@ void initSWORD(GtkWidget * mainform)
 			++textpages;
 			biblemods = g_list_append(biblemods, curMod->Name());
 			sbbiblemods = g_list_append(sbbiblemods, curMod->Description());
-			/*
-			sit = mainMgr->config->Sections.find((*it).second->Name());
-			ConfigEntMap & section = (*sit).second;
-			addrenderfiltersSWORD(curMod, section);
-			*/
 			curMod->Disp(UTF8Display);
 			curMod->SetKey(vkText);
 		} else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
@@ -262,11 +257,6 @@ void initSWORD(GtkWidget * mainform)
 			sbcommods = g_list_append(sbcommods, curcomMod->Description());
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have  
-			/*
-			sit = mainMgr->config->Sections.find((*it).second->Name());
-			ConfigEntMap & section = (*sit).second;
-			addrenderfiltersSWORD(curcomMod, section);
-			*/
 			curcomMod->Disp(commDisplay);
 			curcomMod->SetKey(vkComm);
 		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
@@ -275,11 +265,6 @@ void initSWORD(GtkWidget * mainform)
 			curdictMod = (*it).second;
 			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
-			/*
-			sit = mainMgr->config->Sections.find((*it).second->Name());
-			ConfigEntMap & section = (*sit).second;
-			addrenderfiltersSWORD(curdictMod, section);
-			*/
 			curdictMod->Disp(dictDisplay);
 		}
 	}
@@ -306,14 +291,6 @@ void initSWORD(GtkWidget * mainform)
 	     it++) {
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
-			/*
-			sit = mainMgr1->config->Sections.find((*it).second->Name());	//-- check to see if we need render filters
-			if (sit != mainMgr1->config->Sections.end()) {
-				sit = mainMgr1->config->Sections.find((*it).second->Name());
-				ConfigEntMap & section = (*sit).second;
-				addrenderfiltersSWORD(comp1Mod, section);
-			}
-			*/
 			comp1Mod->Disp(comp1Display);
 		}
 	}
@@ -849,7 +826,7 @@ void bookSWORD(void)		//-- someone changed book combo
 	
 	ChangeVerseSWORD();
 }
-
+/*
 //-------------------------------------------------------------------------------------------
 void chapterSWORD(void)		//-- someone clicked the chapter spin button
 {
@@ -858,24 +835,24 @@ void chapterSWORD(void)		//-- someone clicked the chapter spin button
 	
 	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")));
-	//iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse")));
-	if((!iChap)){
+	
+	if((!iChap)||(!iVerse)){
 		vkText.AutoNormalize(0);
 		vkComm.AutoNormalize(0);
 	}
-	
-	if (iChap < 0)
-		iChap + 1;
-	
+		
+	if(iChap < 0){
+		++iChap;
+	}
 	sprintf(buf,"%s %d:%d", bookname, iChap, 1);
 	vkText = buf;
 	vkComm = buf;
-	
+		
 	ChangeVerseSWORD();
 	vkText.AutoNormalize(1);
 	vkComm.AutoNormalize(1);
 }
-
+*/
 //-------------------------------------------------------------------------------------------
 void verseSWORD(void)		//-- someone clicked the verse spin button
 {
@@ -885,20 +862,21 @@ void verseSWORD(void)		//-- someone clicked the verse spin button
 	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter")));
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse")));
-	if((!iChap) || (!iVerse)){
+	if((!iChap)||(!iVerse)){
 		vkText.AutoNormalize(0);
 		vkComm.AutoNormalize(0);
 	}
 	
-	if (iChap < 0)
-		iChap + 1;
-	if (iVerse < 0)
-		iVerse + 1;
-	
+	if(iVerse < 0){
+		++iVerse;
+	}
+	if(iChap < 0){
+		++iChap;
+	}
 	sprintf(buf,"%s %d:%d", bookname, iChap, iVerse);
 	vkText = buf;
 	vkComm = buf;
-	
+		
 	ChangeVerseSWORD();
 	vkText.AutoNormalize(1);
 	vkComm.AutoNormalize(1);

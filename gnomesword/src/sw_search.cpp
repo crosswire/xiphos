@@ -290,9 +290,6 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	
 	for(it = searchresultssbMgr->Modules.begin(); it != searchresultssbMgr->Modules.end(); it++){
 		searchresultssbMod = (*it).second;
-		sit = searchresultssbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-		ConfigEntMap &section = (*sit).second;
-		//addrenderfiltersSWORD(searchresultssbMod, section);
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			searchresultssbMod->Disp(searchresultstextsbDisplay);			
 		}else{
