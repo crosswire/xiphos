@@ -1,3 +1,16 @@
+2003-12-07  Andy <andyp@users.sf.net>
+
+	* removed old html docs files - they were empty anyway
+	* clarified purpose of src/gnome2/dummy.cpp and src/gnome/dummy.cpp.
+	  These files force g++ linkage. Added comments inside so that idiots
+	  like me don't try to remove them when helpfully "cleaning up" the 
+	  source tree :-)
+	* updated spec file with better Requires/BuildRequires
+	* enabled Help->Contents to actually launch the Help. This needed a
+	  patch on gui.c to fix gnome_program_init(), Makefile.am changes, and 
+	  a small change in main_menu.c.
+	
+
 2003-12-08  Terry <tbiggs@users.sf.net>
 
 	* bumped to  0.9.dev18
