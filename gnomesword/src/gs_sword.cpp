@@ -172,6 +172,10 @@ extern GString
 	*gs_clipboard;	
 extern HISTORY 
 	historylist[];  /* sturcture for storing history items */
+extern GList 
+	*langlisttext,
+	*langlistcomm,
+	*langlistdict;
 
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -227,6 +231,9 @@ initSWORD(GtkWidget *mainform)
 	sbbiblemods 	= NULL;
 	sbcommods 	= NULL;
 	sbdictmods 	= NULL;
+	langlisttext 	= NULL;
+	langlistcomm 	= NULL;
+	langlistdict	= NULL;
 	
 	MainFrm = lookup_widget(mainform,"settings->app"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
@@ -257,7 +264,7 @@ initSWORD(GtkWidget *mainform)
 			++textpages;
 			biblemods = g_list_append(biblemods,curMod->Name());
 			sbbiblemods = g_list_append(sbbiblemods,curMod->Description());
-			addrenderfiltersSWORD(curMod, section);			
+			langlisttext = g_list_append(langlisttext, addrenderfiltersSWORD(curMod, section));			
 			curMod->Disp(UTF8Display);
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			curcomMod = (*it).second;
@@ -267,7 +274,7 @@ initSWORD(GtkWidget *mainform)
 			++compages; //-- how many pages do we have  
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(curcomMod, section); 
+			langlistcomm = g_list_append(langlistcomm, addrenderfiltersSWORD(curcomMod, section)); 
 			curcomMod->Disp(HTMLDisplay);
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules	
 			havedict = TRUE; //-- we have at least one lex / dict module
@@ -277,7 +284,7 @@ initSWORD(GtkWidget *mainform)
 			sbdictmods = g_list_append(sbdictmods,curdictMod->Description());
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(curdictMod, section);
+			langlistdict = g_list_append(langlistdict, addrenderfiltersSWORD(curdictMod, section));
 			curdictMod->Disp(dictDisplay);
 		}
 	} 		
@@ -527,6 +534,9 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
 	g_string_free(gs_clipboard,TRUE);
+	g_list_free(langlisttext);
+	g_list_free(langlistcomm);
+	g_list_free(langlistdict);
 	//-- delete Sword managers
 	delete mainMgr;   
 	delete mainMgr1;

@@ -62,15 +62,15 @@ extern SETTINGS *settings;
 
 #define NUM_SHORTCUT_TYPES 5
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
-	"bible:", "commentary:", "dict/lex:",
-	"history:","modmaint:"
+	"english:", "greek:", "hebrew:",
+	"deutch:","unknown:"
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
-	"gnomesword/GnomeSword.png",
-	"gnomesword/sword.xpm",
-	"gnomesword/GnomeSword.png",
-	"gnome-folder.png",
-	"gdict.png"
+	"gnomesword/book-en.png",
+	"gnomesword/book-gr.png",
+	"gnomesword/book-he.png",
+	"gnomesword/book-de.png",
+	"gnomesword/book-un.png"
 };
 
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
