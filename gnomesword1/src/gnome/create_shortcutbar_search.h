@@ -1,7 +1,7 @@
 
 /*
  * GnomeSword Bible Study Tool
- * search.h - search Sword modules
+ * FILE - SHORT DESCRIPTION
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,24 +19,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
-#ifndef __SEARCH_H__
-#define __SEARCH_H__
+#ifndef _CREATE_SHORTCUTBAR_SEARCH_H
+#define _CREATE_SHORTCUTBAR_SEARCH_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <gnome.h>
-#include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
-	/* search Bible text or commentaries */
-	GList *backend_do_search(SETTINGS * s, SEARCH_OPT * so);
-	void setupsearchresultsSBSW(GtkWidget * html_widget);
-	void shutdownsearchresultsSBSW(void);
-	void backend_search_results_item_display(gchar * url);
+	void gui_create_shortcutbar_search(GtkWidget * vp, SETTINGS * s);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __SEARCH_H__ */
+#endif				/* _CREATE_SHORTCUTBAR_SEARCH_H */
+/******   end of file   *******/

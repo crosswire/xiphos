@@ -1,3 +1,9 @@
+2002-04-18  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* add create_shortcutbar_search.*
+	* removed most gui stuff from search.cpp
+
+
 2002-04-15  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added src/gnome src/backend src/main
