@@ -25,16 +25,14 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "toolbar_nav.h"
-#include "shortcutbar_main.h"
+#include "gui/toolbar_nav.h"
+#include "gui/shortcutbar_main.h"
 
-/* main */ 
-#include "gs_gnomesword.h"
-#include "gs_popup_cb.h"
-#include "gs_history.h"
-#include "settings.h"
-#include "lists.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_popup_cb.h"
+#include "main/gs_history.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
 /******************************************************************************
  * Name

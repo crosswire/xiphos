@@ -25,18 +25,16 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "_bibletext.h"
-#include "bibletext_dialog.h"
-#include "shortcutbar_main.h"
-#include "shortcutbar_viewer.h"
+#include "gui/_bibletext.h"
+#include "gui/bibletext_dialog.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_viewer.h"
+#include "gui/cipher_key_dialog.h"
 
-/* main */
-#include "cipher_key_dialog.h"
-#include "bibletext.h"
-#include "gs_html.h"
-#include "settings.h"
-#include "lists.h"
+#include "main/bibletext.h"
+#include "main/gs_html.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
 /******************************************************************************
  * externs

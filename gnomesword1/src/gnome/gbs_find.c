@@ -30,13 +30,8 @@
 #include <gtkhtml/htmlengine-search.h>
 #include <gal/widgets/e-unicode.h>
 
-/* gnome */
-#include "gbs_find.h"
-
-/* main */
-#include "settings.h"
-
-
+#include "gui/gbs_find.h"
+#include "main/settings.h"
 
 typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
 #define FIND_DIALOG(name,title) find_dialog ((GnomeDialog ***)&c-> name ## _dialog, c->html, (DialogCtor) gbs_ ## name ## _dialog_new, title)

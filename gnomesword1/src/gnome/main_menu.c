@@ -28,22 +28,19 @@
 #include <gal/e-paned/e-vpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
-/* frontend */
-#include "main_menu.h"
-#include "preferences_dialog.h"
-#include "shortcutbar_main.h"
+#include "gui/main_menu.h"
+#include "gui/preferences_dialog.h"
+#include "gui/shortcutbar_main.h"
 
-/* main */
-#include "gs_gnomesword.h"
-#include "support.h"
-#include "gs_html.h"
-#include "bibletext.h"
-#include "gs_menu.h"
-#include "gs_gui.h"
-#include "about_gnomesword.h"
-#include "about_sword.h"
-#include "gs_history.h"
-
+#include "main/gs_gnomesword.h"
+#include "main/support.h"
+#include "main/gs_html.h"
+#include "main/bibletext.h"
+#include "main/gs_menu.h"
+#include "main/gs_gui.h"
+#include "gui/about_gnomesword.h"
+#include "gui/about_sword.h"
+#include "main/gs_history.h"
 
 GtkWidget *htmlTexts;
 

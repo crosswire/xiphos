@@ -39,10 +39,8 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-/* frontend */
-#include "link_dialog.h"
-#include "_editor.h"
-
+#include "gui/link_dialog.h"
+#include "gui/_editor.h"
 
 /******************************************************************************
  * globals to this file only 
