@@ -229,6 +229,8 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 * get data structure for new module 
 	 */
 	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
+	if(!t->frame)
+		gui_add_new_text_pane(t);
 	/*
 	 * do work that's non gui
 	 */
@@ -1305,7 +1307,6 @@ static void create_text_pane(TEXT_DATA * t)
 	GtkWidget *vbox;
 	GtkWidget *toolbar;
 	GtkWidget *scrolledwindow;
-	GtkWidget *label;
 	
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(t->frame);
@@ -1313,7 +1314,7 @@ static void create_text_pane(TEXT_DATA * t)
 				 t->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(t->frame);
-	gtk_container_add(GTK_CONTAINER(settings.notebook_text), t->frame);
+	gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox);
@@ -1369,23 +1370,6 @@ static void create_text_pane(TEXT_DATA * t)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), t->html);
 	gtk_html_load_empty(GTK_HTML(t->html));
 
-	label = gtk_label_new(t->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
-				 label, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_text),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(settings.notebook_text),
-				    t->mod_num), label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings.notebook_text),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (settings.notebook_text),
-					  t->mod_num),
-					 (gchar *) t->mod_name);
 
 	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
@@ -1489,6 +1473,80 @@ void gui_display_text(gchar * key)
 
 /******************************************************************************
  * Name
+ *  gui_add_new_pane
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void gui_add_new_pane(TEXT_DATA * t)
+ *
+ * Description
+ *   creates a text pane when user selects a new text module
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_new_text_pane(TEXT_DATA * t)
+{	
+	GtkWidget *popupmenu;
+	
+	gui_get_module_global_options(t);
+	create_text_pane(t);
+	popupmenu = create_pm_text(t);
+	gnome_popup_menu_attach(popupmenu, t->html, NULL);
+}
+
+/******************************************************************************
+ * Name
+ *  add_vbox_to_notebook
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void add_vbox_to_notebook(TEXT_DATA * t)
+ *
+ * Description
+ *   adds a vbox and label to the text notebook for each text module
+ *
+ * Return value
+ *   void
+ */
+
+static void add_vbox_to_notebook(TEXT_DATA * t)
+{	
+	GtkWidget *label;
+	
+	t->vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(t->vbox);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+			"t->vbox", t->vbox,
+			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(t->vbox);
+	gtk_container_add(GTK_CONTAINER(settings.notebook_text), t->vbox);
+	
+	
+	label = gtk_label_new(t->mod_name);
+	gtk_widget_ref(label);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
+				 label, (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_text),
+				   gtk_notebook_get_nth_page
+				   (GTK_NOTEBOOK(settings.notebook_text),
+				    t->mod_num), label);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
+					 (settings.notebook_text),
+					 gtk_notebook_get_nth_page
+					 (GTK_NOTEBOOK
+					  (settings.notebook_text),
+					  t->mod_num),
+					 (gchar *) t->mod_name);
+}
+
+/******************************************************************************
+ * Name
  *  gui_setup_text
  *
  * Synopsis
@@ -1505,7 +1563,7 @@ void gui_display_text(gchar * key)
 
 void gui_setup_text(GList *mods) 
 {
-	GtkWidget *popupmenu;
+	
 	GList *tmp = NULL;
 	gchar *modbuf;
 	TEXT_DATA *t;
@@ -1524,10 +1582,8 @@ void gui_setup_text(GList *mods)
 		t->key = NULL;
 		t->find_dialog = NULL;
 		t->is_locked = module_is_locked(t->mod_name);
-		gui_get_module_global_options(t);
-		create_text_pane(t);
-		popupmenu = create_pm_text(t);
-		gnome_popup_menu_attach(popupmenu, t->html, NULL);
+		t->frame = NULL;
+		add_vbox_to_notebook(t);
 		text_list = g_list_append(text_list, (TEXT_DATA *) t);
 		++count;
 		tmp = g_list_next(tmp);

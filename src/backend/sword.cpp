@@ -48,6 +48,7 @@
 #include "main/lists.h"
 
 #include "backend/sword.h"
+#include "backend/sword_defs.h"
 #include "backend/shortcutbar.h"
 #include "backend/properties.h"
 #include "backend/bookmarks.h"
@@ -62,6 +63,9 @@
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
+
+MANAGERS sw_mgr,
+	 _mgr;
 
 /******************************************************************************
  * static  global to this file only 
@@ -105,6 +109,9 @@ void backend_first_init(void)
 {
 	// create sword mgr
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	sw_mgr.search = new SWMgr();
+	sw_mgr.results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	
 	init_lists();
 }
 
@@ -142,7 +149,7 @@ void backend_init_sword(void)
 	settings.displaySearchResults = false;
 	settings.havethayer = false;
 	settings.havebdb = false;
-	
+		
 
 		
 	g_print("Sword locale is %s\n",
@@ -280,7 +287,8 @@ void backend_shutdown(void)
 	 * delete Sword manager
 	 */
 	delete mainMgr;
-
+	delete sw_mgr.search;
+	delete sw_mgr.results; 
 	g_print("\nSword is shutdown\n");
 }
 

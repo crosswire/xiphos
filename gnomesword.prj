@@ -75,6 +75,7 @@ module.include.files=\
 	src/backend/bookmarks.h\
 	src/backend/display_info_.h\
 	src/backend/shortcutbar.h\
+	src/backend/sword_defs.h\
 	src/gui/about_gnomesword.h\
 	src/gui/about_modules.h\
 	src/gui/about_sword.h\

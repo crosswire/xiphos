@@ -187,7 +187,11 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 					 settings.comm_last_page);
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
+	
 	strcpy(settings.CommWindowModule, c->mod_name);
+	
+	if(!c->frame)
+		gui_add_new_comm_pane(c);
 	
 	set_comm_frame_label(c);
 	
@@ -913,7 +917,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
  * Synopsis
  *   #include "_commentary.h"
  *
- *   void gui_create_commentary_pane(COMM_DATA * c, *gint count)
+ *   void gui_create_commentary_pane(COMM_DATA * c)
  *
  * Description
  *   create a commentary pane (window) for a sword commentary module
@@ -922,14 +926,13 @@ static gboolean on_button_release_event(GtkWidget * widget,
  *   void
  */
 
-static void create_commentary_pane(COMM_DATA *c, gint count)
+static void create_commentary_pane(COMM_DATA *c)
 {
 	GtkWidget *vbox57;
 	GtkWidget *toolbar;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator19;
 	GtkWidget *scrolledwindowCOMMhtml;
-	GtkWidget *label;
 
 
 	c->frame = gtk_frame_new(NULL);
@@ -938,7 +941,7 @@ static void create_commentary_pane(COMM_DATA *c, gint count)
 				 c->frame, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->frame);
-	gtk_container_add(GTK_CONTAINER(settings.notebook_comm), c->frame);
+	gtk_container_add(GTK_CONTAINER(c->vbox), c->frame);
 
 	vbox57 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox57);
@@ -1112,22 +1115,6 @@ static void create_commentary_pane(COMM_DATA *c, gint count)
 			  c->html);
 	gtk_html_load_empty(GTK_HTML(c->html));
 
-	label = gtk_label_new(c->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
-				 label, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_comm),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(settings.notebook_comm),
-				    count), label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings.notebook_comm),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (settings.notebook_comm),
-					  count), (gchar *) c->mod_name);
 
 	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
@@ -1209,6 +1196,79 @@ void gui_display_commentary(gchar * key)
 
 /******************************************************************************
  * Name
+ *  gui_add_new_comm_pane
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void gui_add_new_comm_pane(COMM_DATA *c)
+ *
+ * Description
+ *   creates a commentary pane when user selects a new commentary module
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_new_comm_pane(COMM_DATA *c)
+{	
+	GtkWidget *popupmenu;
+	
+	create_commentary_pane(c);
+	popupmenu = create_pm(c);
+	gnome_popup_menu_attach(popupmenu, c->html, NULL);
+}
+
+/******************************************************************************
+ * Name
+ *  add_vbox_to_notebook
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void add_vbox_to_notebook(COMM_DATA *c)
+ *
+ * Description
+ *   adds a vbox and label to the commentary notebook for each comm module
+ *
+ * Return value
+ *   void
+ */
+
+static void add_vbox_to_notebook(COMM_DATA *c)
+{	
+	GtkWidget *label;
+	
+	c->vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(c->vbox);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+			"c->vbox", c->vbox,
+			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(c->vbox);
+	gtk_container_add(GTK_CONTAINER(settings.notebook_comm), c->vbox);
+	
+	label = gtk_label_new(c->mod_name);
+	gtk_widget_ref(label);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
+				 label, (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_comm),
+				gtk_notebook_get_nth_page
+				(GTK_NOTEBOOK(settings.notebook_comm),
+				c->modnum), label);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
+				(settings.notebook_comm),
+				gtk_notebook_get_nth_page
+				(GTK_NOTEBOOK(settings.notebook_comm),
+				c->modnum), (gchar *) c->mod_name);
+	
+	
+}
+
+
+/******************************************************************************
+ * Name
  *  gui_setup_commentary
  *
  * Synopsis
@@ -1225,7 +1285,6 @@ void gui_display_commentary(gchar * key)
  
 void gui_setup_commentary(GList *mods)
 {
-	GtkWidget *popupmenu;
 	GList *tmp = NULL;
 	gchar *modname;
 	gchar *modbuf;
@@ -1242,6 +1301,7 @@ void gui_setup_commentary(GList *mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		c = g_new(COMM_DATA, 1);
+		c->frame = NULL;
 		c->mod_name = modname;
 		c->modnum = count;
 		c->search_string = NULL;
@@ -1250,9 +1310,7 @@ void gui_setup_commentary(GList *mods)
 		c->chapter_heading = FALSE;
 		c->find_dialog = NULL;		
 		c->has_key = module_is_locked(c->mod_name);
-		create_commentary_pane(c, count);
-		popupmenu = create_pm(c);
-		gnome_popup_menu_attach(popupmenu, c->html, NULL);
+		add_vbox_to_notebook(c);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
 		++count;
 		tmp = g_list_next(tmp);

@@ -25,9 +25,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+
 
 #include <gnome.h>
-//#include "main/gs_gnomesword.h"
+	
 
 void backend_first_init(void);
 void backend_init_sword(void);
@@ -58,6 +60,7 @@ char *backend_get_module_font_size(char *mod_name);
 int backend_module_is_locked(char *mod_name);
 char *backend_get_cipher_key(char *mod_name);
 	
+
 #ifdef __cplusplus
 }
 #endif
