@@ -52,12 +52,6 @@
 #include "gs_html.h"
 
 
-#ifdef USE_SPELL
-#include "spell.h"
-#include "spell_gui.h"
-#endif				/* USE_SPELL */
-
-
 GtkWidget *appbar1;
 GtkWidget *main_label;
 
@@ -298,7 +292,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *btnEditNote;
 //	GtkWidget *btnSaveNote;
 //	GtkWidget *btnDeleteNote;
-	GtkWidget *btnSpellNotes;
+//	GtkWidget *btnSpellNotes;
 	GtkWidget *label85;
 	GtkWidget *vboxInt;
 	GtkWidget *frame2;
@@ -1207,7 +1201,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
 				      GNOME_STOCK_PIXMAP_SPELLCHECK);
-	btnSpellNotes =
+/*	btnSpellNotes =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Spell Check"), _("Start Spell Check"),
@@ -1217,7 +1211,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 "btnSpellNotes", btnSpellNotes,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnSpellNotes);
-
+*/
 	label85 = gtk_label_new(_("Personal Comments"));
 	gtk_widget_ref(label85);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label85",
@@ -1758,9 +1752,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 			   NULL);
 			   */
 #ifdef USE_SPELL
-	gtk_signal_connect(GTK_OBJECT(btnSpellNotes), "clicked",
-			   GTK_SIGNAL_FUNC(spell_check_cb),
-			   (gchar *) "textComments");
+			
 #endif				/* USE_SPELL */
 /*
 	gtk_signal_connect(GTK_OBJECT(notebook3), "switch_page",

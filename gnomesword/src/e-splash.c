@@ -61,7 +61,7 @@ struct _ESplashPrivate {
 
 /* Layout constants.  These need to be changed if the splash changes.  */
 
-#define ICON_Y    300
+#define ICON_Y    290
 #define ICON_SIZE 25
 
 
