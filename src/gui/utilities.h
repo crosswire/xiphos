@@ -26,7 +26,7 @@ extern "C" {
 #include <gnome.h>
 #include "main/configs.h"
 
-
+gint sword_url_handler(const gchar * url);
 void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar);
 MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);

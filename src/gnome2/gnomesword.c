@@ -288,7 +288,7 @@ void shutdown_frontend(void)
 	if(pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
 	
-	/* free verse list */
+	/* free verse list used for saving search results */
 	if(list_of_verses) {
 		while(list_of_verses) {
 			g_free(list_of_verses->data);
