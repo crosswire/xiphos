@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/projects/gnomesword/gnomesword/main.cpp,/home/tb/projects/gnomesword/gnomesword/interface.c,/home/tb/projects/gnomesword/gnomesword/support.c,/home/tb/projects/gnomesword/gnomesword/callback.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/projects/gnomesword/gnomesword/display.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.h,/home/tb/projects/gnomesword/gnomesword/Makefile.am,/home/tb/projects/gnomesword/config.h,/home/tb/projects/gnomesword/configure.in,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/projects/gnomesword/gnomesword/main.cpp,/home/tb/projects/gnomesword/gnomesword/Makefile.am,/home/tb/projects/gnomesword/gnomesword/display.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/projects/gnomesword/gnomesword/callback.cpp,/home/tb/projects/gnomesword/README,/home/tb/projects/gnomesword/NEWS,/home/tb/projects/gnomesword/ChangeLog,
 show_outputview=true
 show_treeview=true
-header_file=/home/tb/projects/gnomesword/configure.in
-cpp_file=/home/tb/projects/gnomesword/gnomesword/display.cpp
-browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/CPLUSPLUS/SYNTAX/new.html
+header_file=/home/tb/projects/gnomesword/ChangeLog
+cpp_file=/home/tb/projects/gnomesword/gnomesword/GnomeSword.cpp
+browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/CONTRIB/intro.html
 [COPYING]
 install_location=
 dist=true
