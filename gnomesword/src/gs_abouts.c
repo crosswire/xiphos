@@ -97,6 +97,7 @@ gui_create_about_gnomesword(void)
     "Jp Robinson  <robinson@knightmail.com>",
     "Dominique Corbex <dominique.corbex@wanadoo.fr>",
     "Zdenko Podobný <zdpo@mailbox.sk>",
+    "Pavlo Bohmat <bohm@ukr.net>",
     NULL
   };
   GtkWidget *about;

@@ -122,7 +122,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	const gchar 
 		**end;
 	
-	string 
+	SWBuf 
 		swfontsize;
 	
 	GString 
@@ -306,7 +306,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	gint mybuflen, utf8len;
 	const gchar **end;
 	bool newparagraph = false;
-	string gsfontsize;
+	SWBuf gsfontsize;
 	GString *str;
 	
 	str = g_string_new("");
@@ -531,7 +531,7 @@ static void DisplayIndividualMod(SWModule *m,
 		buf[500], *gsfont,
 		*use_font_size = NULL;
 	
-	string 
+	SWBuf 
 		swfontsize;
 	gint utf8len;
 	bool use_font = FALSE;

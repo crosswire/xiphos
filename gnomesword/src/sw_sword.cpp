@@ -87,9 +87,10 @@ using std::map;
 using std::list;
 using namespace sword;
 
-typedef map < string, string > modDescMap;
-typedef map < string, string > bookAbrevMap;
+typedef map < SWBuf, SWBuf > modDescMap;
+typedef map < SWBuf, SWBuf > bookAbrevMap;
 
+typedef list <SWBuf> OptionsList;
 /*******************************************************
  * Sword globals 
 ********************************************************/
@@ -284,9 +285,9 @@ void initSWORD(SETTINGS * s)
 
 	for (it = mainMgr->Modules.begin();
 	     it != mainMgr->Modules.end(); it++) {
-		descriptionMap[string
+		descriptionMap[SWBuf
 			       ((char *) (*it).second->Description())] =
-		    string((char *) (*it).second->Name());
+		    SWBuf((char *) (*it).second->Name());
 
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			curMod = (*it).second;
@@ -772,7 +773,7 @@ void FillDictKeysSWORD(void)
 	 i,			//-- counters
 	 j, count;
 	SWKey saveKey;		//-- for starting point
-	gchar *entryText,	//-- pointer to string to search for
+	gchar *entryText,	//-- pointer to SWBuf to search for
 	*listitem;		//-- hold item until added to list
 	GtkWidget *list;	//-- list widget to display items found
 
@@ -1916,7 +1917,7 @@ void loadpreferencemodsSWORD(void)
 	GList *dictMods = NULL;
 	GList *percomMods = NULL;
 	GList *devotionMods = NULL;
-	string feature;
+	SWBuf feature;
 	gint devotionals = 0;
 	Mgr = new SWMgr();	//-- create sword mgr
 	for (it = Mgr->Modules.begin(); it != Mgr->Modules.end(); it++) {
@@ -1940,7 +1941,7 @@ void loadpreferencemodsSWORD(void)
 			    ((entry =
 			      section.find("Feature")) !=
 			     section.end())? (*entry).
-			    second : (string) "";
+			    second : (SWBuf) "";
 			dictMods =
 			    g_list_append(dictMods,
 					  (*it).second->Name());
