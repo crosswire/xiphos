@@ -71,5 +71,5 @@ loadStudyPadFile 		(gchar *filename);
 void
 savelist						(gchar *filename,
 										GtkWidget *list);
-										
-										
+
+																	

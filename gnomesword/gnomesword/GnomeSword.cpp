@@ -30,8 +30,8 @@
 #include <swmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
-//#include <gbfplain.h>
-#include <thmlgbf.h>
+#include <gbfplain.h>
+//#include <thmlgbf.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -83,7 +83,7 @@ SWModule *searchMod; //-- module for searching and search window
 VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
 ListKey	searchScopeList; //----------- search list for searching verses found on last search
 SWKey	*currentScope; //----------- use to set scope of search
-SWFilter *thmltogbf;
+SWFilter *gbftoplain;
 
 
 //---------------------------------------------------------------- GnomeSword global to this file
@@ -91,6 +91,7 @@ SWFilter *thmltogbf;
 SETTINGS *settings;
 SETTINGS myset;	
 GtkWidget *MainFrm,	//-- main form widget
+					*NEtext,  //-- note edit widget
 					*bookmark_mnu; //-- popup menu for bookmarks
 
 gchar *current_filename= NULL;	//-- filename for open file in study pad window 
@@ -173,7 +174,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 
   myset = readsettings();  //-- load settings into structure
   settings = &myset;       //-- set pointer to structure
-  thmltogbf	= new ThMLGBF(); //-- renderfilter
+  gbftoplain	= new GBFPlain(); //-- renderfilter
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -213,7 +214,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	myGreen.blue =  settings->currentverse_blue;
 	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
-
+  NEtext =  lookup_widget(MainFrm,"textComments"); //-- get note edit widget
 	//--------------------------------------------------------------------- setup displays for sword modules
 	GTKEntryDisp::__initialize();
 	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
@@ -253,6 +254,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		if (!strcmp((*it).second->Type(), "Biblical Texts"))
 		{
 			curMod = (*it).second;
+			if(!strcmp(curMod->Name(),"NIV")) curMod->AddRenderFilter(gbftoplain);
 			 //------------------------------------------------------------------ add to menubar
 			additemtognomemenu(MainFrm, curMod->Name(), rememberlastitem , (GtkMenuCallback)on_mainText_activate );
 			additemtognomemenu(MainFrm, curMod->Name(), aboutrememberlastitem , (GtkMenuCallback)on_kjv1_activate );
@@ -285,8 +287,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			  curcomMod->Disp(RWPDisplay);
 			else if(!strcmp(curcomMod->Name(),"Scofield"))
 			{
-				curcomMod->AddRenderFilter(thmltogbf);
-			  curcomMod->Disp(GBFDisplay);
+				//curcomMod->AddRenderFilter(thmltogbf);
+			  curcomMod->Disp(HTMLDisplay);
 			}
 			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") //-- if driver is RawFiles
 			{   				 	
@@ -486,14 +488,14 @@ initSword(GtkWidget *mainform,  //-- apps main form
  	
  	
 	//-------------------------------------------------------------- attach popup menus
-	menuNE = create_pmNE ();
+	//menuNE = create_pmNE ();
 	menuCom = create_pmComments ();
 	gnome_popup_menu_attach(menu1,lookup_widget(mainform,"moduleText"),(gchar*)"1");
 	gnome_popup_menu_attach(menu2,lookup_widget(mainform,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(mainform,"textComp2"),(gchar*)"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(mainform,"textComp3"),(gchar*)"1");
-	//gnome_popup_menu_attach(menu5,lookup_widget(mainform,"textComments"),(gchar*)"1");
-	gnome_popup_menu_attach(menuNE,lookup_widget(mainform,"textComments"),(gchar*)"1");
+	gnome_popup_menu_attach(menu5,lookup_widget(mainform,"textComments"),(gchar*)"1");
+	//gnome_popup_menu_attach(menuNE,lookup_widget(mainform,"textComments"),(gchar*)"1");
 	gnome_popup_menu_attach(menuCom,lookup_widget(mainform,"textCommentaries"),(gchar*)"1");	
 		
   //----------------------------------------------------------------------- set dictionary key
@@ -738,8 +740,8 @@ ShutItDown(void)  //------------- close down GnomeSword program
 	delete mainMgr3;
 	delete searchMgr;
 	
-  if (thmltogbf!=0)  //-- delete Sword render filters
-		delete thmltogbf;
+  if (gbftoplain != 0)  //-- delete Sword render filters
+		delete gbftoplain;
 	
 	if (chapDisplay)    //-- delete Sword displays
 		delete chapDisplay;
@@ -759,6 +761,10 @@ ShutItDown(void)  //------------- close down GnomeSword program
 		delete GBFsearchDisplay;
 	if(percomDisplay)
 		delete percomDisplay;
+	if(HTMLDisplay)
+		delete HTMLDisplay;	
+	if(GBFDisplay)
+		delete GBFDisplay;		
 	gtk_exit(0);           //-- exit
 	
 }
@@ -1071,7 +1077,7 @@ changecurModSWORD(gchar *modName) //-- change sword module for main window
 	it = mainMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 	if (it != mainMgr->Modules.end()) //-- if we find the module
 	{
-		curMod = (*it).second;  //-- change current module to new module
+		curMod = (*it).second;  //-- change current module to new module		
 		curMod->SetKey(current_verse); //-- set key to current verse
 		curMod->Display();            //-- show it to the world
 	}
@@ -1259,14 +1265,14 @@ savenoteSWORD(bool noteModified) //-- save personal comments
   if(noteModified) //-- if note modified save the changes
   {
 		VerseKey mykey; //-- verse key text
-		gchar *buf;     //-- pointer to a string
-		GtkWidget *text; //-- pointer to commentary text widget
+		gchar *buf;     //-- pointer to a string 					
+		GtkWidget *text; //-- pointer to commentary text widget		
 		
-		text = lookup_widget(MainFrm,"textComments"); //-- get text widget
-		buf = gtk_editable_get_chars((GtkEditable *)text,0,-1); //-- get comments from text widget
-		*percomMod << (const char *)buf; //-- save note!
-		noteModified = false; //-- we just saved the note so it has not been modified
-	} 	
+		//text = lookup_widget(MainFrm,"textComments"); //-- get text widget
+		buf = gtk_editable_get_chars((GtkEditable *)NEtext,0,-1); //-- get comments from text widget
+		*percomMod << (const char *)buf; //-- save note!  		
+	}
+	noteModified = false; //-- we just saved the note so it has not been modified 	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1350,7 +1356,7 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 						*label;    //-- pointer to a label widget
 	ModMap::iterator it; //-- module iterator
 	
-  if(noteModified) savenoteSWORD(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
+  if(noteModified) return;//savenoteSWORD(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
 	it = percomMgr->Modules.find(modName); //-- find commentary module (modName from page label)
 	if (it != percomMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
 	{
@@ -1363,6 +1369,7 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 		label = gtk_label_new (percomMod->Name());   //-- create new label with mod name as the text
 		gtk_widget_show (label);   //-- make is visible
 		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label); //-- put label on personal comments page
+		noteModified = false;
 	}	
 }
 

@@ -23,7 +23,6 @@ GtkWidget* create_aboutmodules (void);
 GtkWidget* create_dlgSettings (void);
 GtkWidget* create_dialog1 (void);
 GtkWidget* create_listeditor (void);
-GtkWidget* create_pmNE (void);
 GtkWidget* create_pmComments (void);
 
 
@@ -1246,6 +1245,11 @@ void
 on_goto_reference_activate             (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
                                         
+
+void
+on_goto_reference2_activate             (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
 
 void
 on_textComments_drag_begin             (GtkWidget       *widget,
