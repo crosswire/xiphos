@@ -869,7 +869,7 @@ void create_mainwindow(void)
 			   "button_release_event",
 			   G_CALLBACK(button_release_event), NULL);
 
-	gtk_widget_grab_focus(widgets.app);
+	gtk_widget_grab_focus(nav_bar.lookup_entry);
 
 	gtk_widget_set_usize(widgets.app, settings.gs_width,
 			     settings.gs_hight);
