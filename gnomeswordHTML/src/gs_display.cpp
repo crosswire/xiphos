@@ -217,7 +217,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
  ******************************************************************************/
 char GTKhtmlChapDisp::Display(SWModule & imodule)
 {
-	char tmpBuf[500], *buf, *font;
+	char tmpBuf[500], *buf, *font, *mybuf;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	//ConfigEntMap::iterator cit;	//-- iteratior
@@ -230,8 +230,11 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	gint len;
 	gchar *sourceformat;
 	bool gbf = false;
-	char *Buf;
+	char *Buf, c;
+	bool newparagraph = false;
+	gint mybuflen;
 
+	c = 182;
 	font = "Roman";
 	sourceformat = "plain";
 
@@ -286,30 +289,33 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 						 "<FONT COLOR=\"%s\" FACE=\"SIL Galatia\">",
 						 mycolor);
 			} else {
+				if (bVerseStyle && newparagraph) {				
+					g_string_sprintf(strbuf, "<FONT COLOR=\"%s\">%c", mycolor,182);				
+					newparagraph = false;
+				} else
 				g_string_sprintf(strbuf,
 						 "<FONT COLOR=\"%s\">",
 						 mycolor);
 			}
-			if (gbf) {
-				len = strlen((const char *) imodule);
-				len = len * 5;
-				Buf = new char[len];
-				strcpy(Buf, (const char *) imodule);
-				gbftohtml(Buf, len);
-				strbuf = g_string_append(strbuf, Buf);
-				delete[]Buf;
-				Buf = NULL;
-			} else
-				strbuf =
-				    g_string_append(strbuf, (const char *)
-						    imodule);
+			if (newparagraph) {			
+				newparagraph = false;
+			} 	
+			strbuf = g_string_append(strbuf, (const char *)imodule);
 			if (bVerseStyle) {
 				if (strstr(strbuf->str, "<BR>") == NULL
 				    && strstr(strbuf->str, "<P>") == NULL)
 					strbuf =
 					    g_string_append(strbuf,
 							    "</font><br>");
-				else
+				else if(strstr(strbuf->str, "<P>") != NULL) {
+					mybuf = strstr(strbuf->str, "<P>");
+					mybuflen = strlen(mybuf);
+					mybuflen =strbuf->len - mybuflen; 
+					strbuf = g_string_truncate(strbuf,mybuflen);
+					    g_string_append(strbuf,
+							    "</font><br>");
+					newparagraph = true;
+				} else
 					strbuf =
 					    g_string_append(strbuf,
 							    "</font>");
@@ -324,26 +330,28 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");	/* we had to add font color to get the symbol font to work */				
 			} else if (!stricmp(font, "Greek")) {
 				strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"SIL Galatia\">");					
-			} else 
-				strbuf = g_string_new("<FONT COLOR=\"#000000\" >");
-			if (gbf) {
-					len = strlen((const char *) imodule);
-					len = len * 5;
-					Buf = new char[len];
-					strcpy(Buf,
-					       (const char *) imodule);
-					gbftohtml(Buf, len);
-					strbuf = g_string_append(strbuf, Buf);
-					delete[]Buf;
-					Buf = NULL;
-			} else
+			} else {
+				strbuf = g_string_new("");
+				if (bVerseStyle && newparagraph) {
+					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >%c",c);
+					newparagraph = false;
+				} else
+					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >");
 				strbuf = g_string_append(strbuf, (const char *)imodule);
+			}
 			if (bVerseStyle) {
 				if (strstr(strbuf->str, "<BR>") == NULL
 					    && strstr(strbuf->str, "<P>") == NULL)
 						strbuf = g_string_append(strbuf, "</font><br>");
-				else
-					strbuf = g_string_append(strbuf, "</font>");
+				else if(strstr(strbuf->str, "<P>") != NULL) {
+						mybuf = strstr(strbuf->str, "<P>");
+						mybuflen = strlen(mybuf);
+						mybuflen =strbuf->len - mybuflen; 
+						strbuf = g_string_truncate(strbuf,mybuflen);
+					    	g_string_append(strbuf, "</font><br>");
+						newparagraph = true;
+				} else
+					strbuf = g_string_append(strbuf, "</font>"); 
 			} else 
 				strbuf = g_string_append(strbuf, "</font>");	
 			displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
@@ -413,6 +421,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		strbuf = g_string_new("<FONT COLOR=\"#000000\" >");
 	}
 	/* body */
+	/*
 	if (gbf) {
 		len = strlen((const char *) imodule);
 		len = len * 5;
@@ -423,9 +432,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 		strbuf = g_string_append(strbuf, Buf);
 		delete[]Buf;
 		Buf = NULL;		
-	} else {
+	} else  */
 		strbuf = g_string_append(strbuf, (const char *) imodule);
-	}
 	/* closing */
 	if (!stricmp(font, "Symbol")) {
 		strbuf = g_string_append(strbuf, "</font><BR><HR>");

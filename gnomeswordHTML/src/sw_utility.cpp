@@ -74,7 +74,7 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 //	}
 	
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
-		/* module->AddRenderFilter(gbftohtml);  gbfhtml filter is built into gnomesword at present */
+		module->AddRenderFilter(gbftohtml);  
 		noDriver = false; 
 	}
 
