@@ -54,6 +54,8 @@ COMMON_SOURCE =  \
     support.h \
     gs_html.c \
     gs_html.h \
+    gs_verselist_dlg.c \
+    gs_verselist_dlg.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     gs_viewtext_sw.cpp \

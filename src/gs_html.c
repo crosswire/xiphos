@@ -54,7 +54,7 @@ GtkWidget *htmlDict;
 GtkWidget *textDict;
 GtkWidget *htmlComments;
 
-
+extern GtkWidget *htmlVL;
 extern GtkWidget *MainFrm;
 extern GtkWidget *textDict;
 GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
@@ -146,7 +146,11 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			//g_warning(newref);
 		} 
 		buf = g_strdup(newref);
-		changeVerseSWORD(buf);
+		if(getVerseListSWORD(buf)){
+			g_warning("this is good");
+		}else{
+			changeVerseSWORD(buf);
+		}
 		g_free(buf);
 	}else if (*url == '#') {
 		++url;		/* remove # */

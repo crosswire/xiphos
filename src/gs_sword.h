@@ -101,6 +101,7 @@ GList *getBibleBooks(void);
 void morphsSWORD(gboolean choice) ;
 void gotBookmarkSWORD(gchar *modName, gchar *key);
 gchar* getmodkeySWORD(gint num);
+gboolean getVerseListSWORD(gchar *vlist);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

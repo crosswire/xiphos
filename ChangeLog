@@ -1,3 +1,9 @@
+2001-07-16 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added a verse list dialog that pops up when you  click
+	link in a ThML commentay that has more than one verse.
+	Thanks to SWORD ParseVerseList.
+
 2001-07-14 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* Create new bookmark group and file is working.

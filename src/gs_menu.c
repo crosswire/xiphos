@@ -589,7 +589,9 @@ static GtkWidget *create_pmCommentsHtml(GList * mods, GList *comDescription)
 {
 	GtkWidget *pmCommentsHtml;
 	GtkWidget *copy6;
-	GtkWidget *goto_reference2;
+	GtkWidget *goto_reference;
+	//GtkWidget *goto_reference_menu;
+	//GtkAccelGroup *goto_reference_menu_accels;
 	GtkWidget *lookup_selection2;
 	GtkWidget *add_bookmark;
 	GtkWidget *about_this_module6;
@@ -618,13 +620,24 @@ static GtkWidget *create_pmCommentsHtml(GList * mods, GList *comDescription)
 	gtk_widget_show(copy6);
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), copy6);
 
-	goto_reference2 = gtk_menu_item_new_with_label("Goto Reference");
-	gtk_widget_ref(goto_reference2);
+	goto_reference = gtk_menu_item_new_with_label("Goto Reference");
+	gtk_widget_ref(goto_reference);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
-				 "goto_reference2", goto_reference2,
+				 "goto_reference", goto_reference,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(goto_reference2);
-	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), goto_reference2);
+	gtk_widget_show(goto_reference);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), goto_reference);
+	/*
+	goto_reference_menu = gtk_menu_new();
+	gtk_widget_ref(goto_reference_menu);
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
+				 "goto_reference_menu", goto_reference_menu,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(goto_reference),
+				  goto_reference_menu);
+	goto_reference_menu_accels=
+	gtk_menu_ensure_uline_accel_group(GTK_MENU(goto_reference_menu_accels));
+	*/
 
 	lookup_selection2 =
 	    gtk_menu_item_new_with_label("Lookup Selection");
@@ -742,7 +755,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods, GList *comDescription)
 	gtk_signal_connect(GTK_OBJECT(lookup_selection2), "activate",
 			   GTK_SIGNAL_FUNC(on_html_lookup_selection_activate),
 			   (gchar *) "htmlCommentaries");
-	gtk_signal_connect(GTK_OBJECT(goto_reference2), "activate",
+	gtk_signal_connect(GTK_OBJECT(goto_reference), "activate",
 			   GTK_SIGNAL_FUNC(on_html_goto_reference_activate),
 			   (gchar *) "htmlCommentaries");
 	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",

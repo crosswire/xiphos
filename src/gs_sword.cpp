@@ -60,6 +60,7 @@
 #include "gs_search.h"
 #include "gs_abouts.h"
 #include "gs_info_box.h"
+#include "gs_verselist_dlg.h"
 
 #include "sw_utility.h"
 #include "sw_properties.h"
@@ -172,7 +173,9 @@ extern GString *gs_clipboard;
 extern gboolean firstsearch;
 extern GS_APP gs;
 extern GS_NB_PAGES *nbpages;
-
+extern GtkWidget *htmlVL;
+extern gboolean isrunningVL
+;
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -1458,5 +1461,35 @@ GList *getBibleBooks(void)
 	}
 	return list;	
 }
-
+/*
+ * parse vlist for verses
+ */
+gboolean getVerseListSWORD(gchar *vlist)
+{
+	gboolean retval=FALSE;
+	gchar buf[256];
+	ListKey tmpVerseList;
+	VerseKey DefaultVSKey;
+	gint count=0;
+	static GtkWidget *dlg;
+	
+	if(!isrunningVL){
+		dlg = create_dglVerseList();
+		isrunningVL = TRUE;
+	}			
+	tmpVerseList = DefaultVSKey.ParseVerseList((char *)vlist, DefaultVSKey);
+	beginHTML(htmlVL, FALSE);
+	while (!tmpVerseList.Error()) {
+		sprintf(buf,"<a href=\"%s\">%s</a><br>",(const char *)tmpVerseList,(const char *)tmpVerseList);
+		displayHTML(htmlVL, buf, strlen(buf));
+		tmpVerseList++;
+		++count;
+	}
+	endHTML(htmlVL);
+	if(count>1){ 
+		gtk_widget_show(dlg);
+		retval = TRUE;
+	}
+	return retval;
+}
 
