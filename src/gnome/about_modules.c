@@ -32,7 +32,6 @@
 #include "gui/gnomesword.h"
 
 #include "main/sword.h"
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 /******************************************************************************
@@ -52,10 +51,10 @@
 
 static void about_modules_ok(GtkButton * button, gpointer user_data)
 {
-        GtkWidget *dlg;
+	GtkWidget *dlg;
 
-        dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-        gtk_widget_destroy(dlg);
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	gtk_widget_destroy(dlg);
 }
 
 
@@ -73,7 +72,7 @@ static void about_modules_ok(GtkButton * button, gpointer user_data)
  *
  * Return value
  *   void
- */ 
+ */
 
 static void about_module_display(gchar * to, gchar * text)
 {
@@ -165,126 +164,127 @@ static void about_module_display(gchar * to, gchar * text)
  * Return value
  *   GtkWidget *
  */
- 
+
 static GtkWidget *gui_create_about_modules(void)
 {
-        GtkWidget *aboutmodules;
-        GtkWidget *dialog_vbox8;
-        GtkWidget *vbox25;
-        GtkWidget *hbox21;
-        GtkWidget *pixmap3;
-        GtkWidget *label97;
-        GtkWidget *pixmap4;
-        GtkWidget *scrolledwindow30;
-        GtkWidget *text;
-        GtkWidget *dialog_action_area8;
-        GtkWidget *btn_ok;
+	GtkWidget *dialog_about_mods;
+	GtkWidget *dialog_vbox28;
+	GtkWidget *vbox25;
+	GtkWidget *hbox21;
+	GtkWidget *pixmap;
+	GtkWidget *frame73;
+	GtkWidget *scrolledwindow30;
+	GtkWidget *text;
+	GtkWidget *dialog_action_area28;
+	GtkWidget *hbuttonbox7;
+	GtkWidget *button_ok;
 
-        aboutmodules = gnome_dialog_new("About Sword Modules", NULL);
-        gtk_object_set_data(GTK_OBJECT(aboutmodules), "aboutmodules",
-                            aboutmodules);
-        gtk_container_set_border_width(GTK_CONTAINER(aboutmodules), 4);
-        gtk_window_set_policy(GTK_WINDOW(aboutmodules), FALSE, FALSE,
-                              FALSE);
+	dialog_about_mods = gtk_dialog_new();
+	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
+			    "dialog_about_mods", dialog_about_mods);
+	gtk_window_set_title(GTK_WINDOW(dialog_about_mods),
+			     _("About Sword Module"));
+	gtk_window_set_default_size(GTK_WINDOW(dialog_about_mods), 324,
+				    304);
+	gtk_window_set_policy(GTK_WINDOW(dialog_about_mods), TRUE, TRUE,
+			      FALSE);
 
-        dialog_vbox8 = GNOME_DIALOG(aboutmodules)->vbox;
-        gtk_object_set_data(GTK_OBJECT(aboutmodules), "dialog_vbox8",
-                            dialog_vbox8);
-        gtk_widget_show(dialog_vbox8);
+	dialog_vbox28 = GTK_DIALOG(dialog_about_mods)->vbox;
+	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
+			    "dialog_vbox28", dialog_vbox28);
+	gtk_widget_show(dialog_vbox28);
 
-        vbox25 = gtk_vbox_new(FALSE, 0);
-        gtk_widget_ref(vbox25);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "vbox25",
-                                 vbox25,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(vbox25);
-        gtk_box_pack_start(GTK_BOX(dialog_vbox8), vbox25, TRUE, TRUE,
-                           0);
+	vbox25 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox25);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "vbox25", vbox25,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vbox25);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox28), vbox25, TRUE, TRUE,
+			   0);
 
-        hbox21 = gtk_hbox_new(FALSE, 0);
-        gtk_widget_ref(hbox21);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "hbox21",
-                                 hbox21,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(hbox21);
-        gtk_box_pack_start(GTK_BOX(vbox25), hbox21, TRUE, TRUE, 0);
+	hbox21 = gtk_hbox_new(FALSE, 0);
+	gtk_widget_ref(hbox21);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "hbox21", hbox21,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hbox21);
+	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, TRUE, TRUE, 0);
 
-        pixmap3 =
-            gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-                                       "/sword3.xpm");
-        gtk_widget_ref(pixmap3);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "pixmap3",
-                                 pixmap3,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(pixmap3);
-        gtk_box_pack_start(GTK_BOX(hbox21), pixmap3, TRUE, TRUE, 0);
+	pixmap =
+	    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+				       "/sword3.xpm");
+	gtk_widget_ref(pixmap);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "pixmap", pixmap,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(pixmap);
+	gtk_box_pack_start(GTK_BOX(hbox21), pixmap, TRUE, TRUE, 0);
 
-        label97 = gtk_label_new("The SWORD Project");
-        gtk_widget_ref(label97);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "label97",
-                                 label97,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(label97);
-        gtk_box_pack_start(GTK_BOX(hbox21), label97, FALSE, FALSE, 0);
+	frame73 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame73);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "frame73", frame73,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame73);
+	gtk_box_pack_start(GTK_BOX(vbox25), frame73, TRUE, TRUE, 0);
 
-        pixmap4 =
-            gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-                                       "GnomeSword.xpm");
-        gtk_widget_ref(pixmap4);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "pixmap4",
-                                 pixmap4,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(pixmap4);
-        gtk_box_pack_start(GTK_BOX(hbox21), pixmap4, TRUE, TRUE, 0);
+	scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow30);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "scrolledwindow30", scrolledwindow30,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow30);
+	gtk_container_add(GTK_CONTAINER(frame73), scrolledwindow30);
+	gtk_widget_set_usize(scrolledwindow30, 304, 183);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow30),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_ALWAYS);
 
-        scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
-        gtk_widget_ref(scrolledwindow30);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules),
-                                 "scrolledwindow30", scrolledwindow30,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(scrolledwindow30);
-        gtk_box_pack_start(GTK_BOX(vbox25), scrolledwindow30, TRUE,
-                           TRUE, 0);
-        gtk_widget_set_usize(scrolledwindow30, 304, 183);
-        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-                                       (scrolledwindow30),
-                                       GTK_POLICY_NEVER,
-                                       GTK_POLICY_ALWAYS);
 
-        text = gtk_html_new();
-        gtk_widget_ref(text);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules),
-                                 "text", text,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(text);
-        gtk_container_add(GTK_CONTAINER(scrolledwindow30),
-                          text);
+	text = gtk_html_new();
+	gtk_widget_ref(text);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "text", text,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(text);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text);
 
-        dialog_action_area8 = GNOME_DIALOG(aboutmodules)->action_area;
-        gtk_object_set_data(GTK_OBJECT(aboutmodules),
-                            "dialog_action_area8", dialog_action_area8);
-        gtk_widget_show(dialog_action_area8);
-        gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area8),
-                                  GTK_BUTTONBOX_END);
-        gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area8),
-                                   8);
 
-        gnome_dialog_append_button(GNOME_DIALOG(aboutmodules),
-                                   GNOME_STOCK_BUTTON_OK);
-        btn_ok =
-            g_list_last(GNOME_DIALOG(aboutmodules)->buttons)->data;
-        gtk_widget_ref(btn_ok);
-        gtk_object_set_data_full(GTK_OBJECT(aboutmodules),
-                                 "btn_ok", btn_ok,
-                                 (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(btn_ok);
-        GTK_WIDGET_SET_FLAGS(btn_ok, GTK_CAN_DEFAULT);
+	dialog_action_area28 =
+	    GTK_DIALOG(dialog_about_mods)->action_area;
+	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),
+			    "dialog_action_area28",
+			    dialog_action_area28);
+	gtk_widget_show(dialog_action_area28);
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (dialog_action_area28), 10);
 
-        gtk_signal_connect(GTK_OBJECT(btn_ok), "clicked",
-                           GTK_SIGNAL_FUNC(about_modules_ok),
-                           NULL);
+	hbuttonbox7 = gtk_hbutton_box_new();
+	gtk_widget_ref(hbuttonbox7);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "hbuttonbox7", hbuttonbox7,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hbuttonbox7);
+	gtk_box_pack_start(GTK_BOX(dialog_action_area28), hbuttonbox7,
+			   TRUE, TRUE, 0);
+	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox7),
+				  GTK_BUTTONBOX_END);
 
-        return aboutmodules;
+	button_ok = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
+	gtk_widget_ref(button_ok);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_about_mods),
+				 "button_ok", button_ok,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(button_ok);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox7), button_ok);
+	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
+
+	gtk_signal_connect(GTK_OBJECT(button_ok), "clicked",
+			   GTK_SIGNAL_FUNC(about_modules_ok), NULL);
+	return dialog_about_mods;
+
 }
 
 /******************************************************************************
@@ -306,7 +306,7 @@ static GtkWidget *gui_create_about_modules(void)
  * Return value
  *   void
  */
- 
+
 void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 {
 	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog        
@@ -347,12 +347,13 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		about_module_display(to, bufabout);	/* send about info to display function */
 		gui_begin_html(text, FALSE);
 		gui_display_html(text, "<html><body>",
-			    strlen("<html><body>"));
-		gui_display_html(text, discription, strlen(discription));
+				 strlen("<html><body>"));
+		gui_display_html(text, discription,
+				 strlen(discription));
 		if (to)
 			gui_display_html(text, to, strlen(to));
 		gui_display_html(text, "</body></html>",
-			    strlen("</body></html>"));
+				 strlen("</body></html>"));
 		gui_end_html(text);
 	}
 
@@ -364,4 +365,3 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 	if (to)
 		free(to);
 }
-

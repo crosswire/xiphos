@@ -1,3 +1,16 @@
+2002-10-19  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added gnome/find_dialog.c and gui/find_dialog.h
+	* removed gnome/commentary_find.c and gui/commentary_find.h
+	* removed gnome/gbs_find.c and gui/gbs_find.h
+	* removed gui/find_dlg.defs.h
+
+
+2002-10-18  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed gnome/link_dialog.c and gui/link_dialog.h
+
+
 2002-10-08  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed gnome/info_box.c and gui/info_box.h

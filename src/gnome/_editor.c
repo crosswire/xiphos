@@ -51,7 +51,6 @@
 #include "gui/editor_search.h"
 #include "gui/editor_toolbar.h"
 #include "gui/fileselection.h"
-#include "gui/link_dialog.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
 

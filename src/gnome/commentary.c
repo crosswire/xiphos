@@ -32,12 +32,12 @@
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/commentary_dialog.h"
-#include "gui/commentary_find.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
+#include "gui/find_dialog.h"
 
 #include "main/commentary.h"
 #include "main/settings.h"
@@ -48,10 +48,6 @@
 static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl);
-/******************************************************************************
- * externs
- */ 
-extern gboolean comm_find_running;
 
 /******************************************************************************
  * global to this file only 
@@ -221,10 +217,6 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	
 	set_comm_frame_label(c);
 	
-	if(comm_find_running) {
-		gnome_dialog_close(c_old->find_dialog->dialog);
-		search_comm_find_dlg(c, FALSE, settings.findText);
-	}
 	gui_change_window_title(c->mod_name);
 	/*
 	 * set search module to current text module 
@@ -299,7 +291,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 
 static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	search_comm_find_dlg(c, FALSE, NULL);
+	gui_find_dlg(c->html, c->mod_name,  FALSE, NULL);//search_comm_find_dlg(c, FALSE, NULL);
 }
 
 /******************************************************************************
@@ -1360,10 +1352,8 @@ void gui_setup_commentary(GList *mods)
 	gchar *keybuf;
 	COMM_DATA *c;
 	gint count = 0;
-	extern gboolean comm_find_running;
 	
 	comm_list = NULL;
-	comm_find_running = FALSE;
 	
 	tmp = mods;
 	tmp = g_list_first(tmp);
@@ -1377,7 +1367,6 @@ void gui_setup_commentary(GList *mods)
 		c->key[0] = '\0';
 		c->book_heading = FALSE;
 		c->chapter_heading = FALSE;
-		c->find_dialog = NULL;
 		c->cipher_key = NULL;	
 		
 		if(has_cipher_tag(c->mod_name)) {
@@ -1434,11 +1423,6 @@ void gui_shutdown_commentary(void)
 	comm_list = g_list_first(comm_list);
 	while (comm_list != NULL) {
 		COMM_DATA *c = (COMM_DATA *) comm_list->data;
-		/* 
-		 * free any find dialogs created 
-		 */
-		if (c->find_dialog)	
-			g_free(c->find_dialog);
 		/* 
 		 * free any cipher keys 
 		 */

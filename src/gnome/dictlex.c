@@ -34,6 +34,7 @@
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
+#include "gui/find_dialog.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -353,7 +354,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, DL_DATA * d)
 
 static void on_find_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
-	//searchGS_FIND_DLG(dl, FALSE, NULL);
+	gui_find_dlg(d->html, d->mod_name,  FALSE, NULL);
 }
 
 /******************************************************************************

@@ -23,9 +23,6 @@
 #define ___COMMENTARY_H_
 
 typedef struct _commdata COMM_DATA;
-
-#include "gui/commentary_find.h"
-
 struct _commdata {
 	GtkWidget *vbox;
 	GtkWidget *html;
@@ -48,7 +45,6 @@ struct _commdata {
 	gboolean is_locked;
 	gboolean book_heading;
 	gboolean chapter_heading;
-	COMMFindDialog *find_dialog;
 };
 
 void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c);

@@ -34,7 +34,7 @@
 #include "gui/gbs_dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
-#include "gui/gbs_find.h"
+#include "gui/find_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/bookmarks.h"
@@ -402,11 +402,6 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	gui_set_search_label(g->mod_name);
 	
 	strcpy(settings.BookWindowModule, g->mod_name);
-
-	if (gbs_find_running) {
-		gbs_find_close_dialog(NULL, g_old->find_dialog);
-		search_gbs_find_dlg(g, FALSE, settings.findText);
-	}
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;
 	settings.book_last_page = page_num;	
 	widgets.html_book = g->html;
@@ -476,7 +471,7 @@ static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 
 static void on_find_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 {
-	if(!gbs_find_running) search_gbs_find_dlg(gbs, FALSE, NULL);
+	gui_find_dlg(gbs->html, gbs->mod_name,  FALSE, NULL);
 }
 
 /******************************************************************************
@@ -1373,7 +1368,7 @@ void gui_setup_gbs(GList *mods)
 		gbs->search_string = NULL;
 		gbs->mod_num = count;
 		gbs->offset = 0;
-		gbs->find_dialog = NULL;	
+		//gbs->find_dialog = NULL;	
 		gbs->has_key = module_is_locked(gbs->mod_name);
 		add_vbox_to_notebook(gbs);
 		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);		
@@ -1410,9 +1405,6 @@ void gui_shutdown_gbs(void)
 {
 	gbs_list = g_list_first(gbs_list);
 	while (gbs_list != NULL) {
-		GBS_DATA *g = (GBS_DATA *) gbs_list->data;
-		if (g->find_dialog)
-			g_free(g->find_dialog);	//-- free any search dialogs created
 		g_free((GBS_DATA *) gbs_list->data);
 		gbs_list = g_list_next(gbs_list);
 	}
