@@ -1490,19 +1490,15 @@ gchar *getcommodDescriptionSWORD(void)
 *******************************************************************************/
 GList *getBibleBooksSWORD(void)
 {
-	VerseKey DefaultVSKey;
+	VerseKey VSKey;
 	GList *glist = NULL;
-	GString *s1;
 
 	/*** load Bible books ***/
-	DefaultVSKey = TOP;
-	while (!DefaultVSKey.Error()) {
-		s1 = g_string_new((const char *) DefaultVSKey);
-		s1 = g_string_truncate(s1, (s1->len - 4));
-		glist = g_list_append(glist, s1->str);
-		DefaultVSKey.Book(DefaultVSKey.Book() + 1);
-		g_string_free(s1, FALSE);
-	}
+	for (int i = 0; i <= 1; ++i) {
+		for ( int j = 0; j < VSKey.BMAX[i]; ++j) {
+			glist = g_list_append(glist, (char*)VSKey.books[i][j].name);
+		}
+	}	
 	return glist;
 }
 

@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Slovak translation for GnomeSWORD
+# Copyright (C) 2001 Zdenko Podobný
+# FIRST Zdenko Podobný <zdpo@mailbox.sk>, 2001.
 #
 msgid ""
 msgstr ""
