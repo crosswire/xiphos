@@ -120,7 +120,8 @@ GtkWidget *create_AboutSword(void)
 	gtk_widget_show(vbox21);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox7), vbox21, TRUE, TRUE, 0);
 
-	pixmap1 = create_pixmap(AboutSword, "gnomesword/sword3.xpm", FALSE);
+	pixmap1 =
+    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.xpm");
 	gtk_widget_ref(pixmap1);
 	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "pixmap1",
 				 pixmap1,
@@ -252,7 +253,7 @@ GtkWidget *create_aboutmodules(void)
 	gtk_box_pack_start(GTK_BOX(vbox25), hbox21, TRUE, TRUE, 0);
 
 	pixmap3 =
-	    create_pixmap(aboutmodules, "gnomesword/sword3.xpm", FALSE);
+    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.xpm");
 	gtk_widget_ref(pixmap3);
 	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "pixmap3",
 				 pixmap3,
@@ -269,8 +270,7 @@ GtkWidget *create_aboutmodules(void)
 	gtk_box_pack_start(GTK_BOX(hbox21), label97, FALSE, FALSE, 0);
 
 	pixmap4 =
-	    create_pixmap(aboutmodules, "gnomesword/GnomeSword.xpm",
-			  FALSE);
+    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "GnomeSword.xpm");
 	gtk_widget_ref(pixmap4);
 	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "pixmap4",
 				 pixmap4,
