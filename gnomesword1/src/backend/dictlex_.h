@@ -18,6 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
 #ifndef __DICTLEX__H_
 #define __DICTLEX__H_
 
@@ -25,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 
 void backend_new_dictlex_display(GtkWidget *html, 
 			int mod_num, SETTINGS *s);
@@ -39,4 +40,6 @@ void backend_dictentryTextChangedDL(char *modname, char *mytext);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __DICTLEX__H_ */
+
+#endif
+

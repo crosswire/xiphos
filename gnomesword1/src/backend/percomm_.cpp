@@ -34,13 +34,9 @@
 #include <sys/stat.h>
 #include <string.h>
 
-/*
- * backend
- */
-#include "percomm_.h"
-#include "sword.h"
-#include "display.h"
-
+#include "backend/percomm_.h"
+#include "backend/sword.h"
+#include "backend/display.h"
 
 typedef struct _backend_percomm BE_PC;
 struct _backend_percomm {

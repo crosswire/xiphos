@@ -20,9 +20,8 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -35,10 +34,10 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "gs_gnomesword.h"
-#include "bookmarks.h"
-#include "gs_bookmarks.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "backend/bookmarks.h"
+#include "main/gs_bookmarks.h"
+#include "main/settings.h"
 
 GtkStyle *style;
 

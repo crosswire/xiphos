@@ -36,13 +36,10 @@
 #include <treekeyidx.h>
 #include <rawgenbook.h>
 
-/* main */
-#include "settings.h"
-
-/* backend */
-#include "sword.h"
-#include "display.h"
-#include "gbs_.h"
+#include "main/settings.h"
+#include "backend/sword.h"
+#include "backend/display.h"
+#include "backend/gbs_.h"
 
 typedef struct _backend_gbs BE_GBS;
 struct _backend_gbs {

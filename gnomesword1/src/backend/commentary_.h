@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifndef __COMMENTARY__H_
 #define __COMMENTARY__H_
 
@@ -27,14 +26,13 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 	
 void backend_display_book_heading(gint modnum);	
 void backend_display_chap_heading(gint modnum);
-const char* backend_nav_commentary( gint modnum,
-				   gint direction );
-void backend_new_display_commentary( GtkWidget * html, char *modname,
-			      SETTINGS * s );
+const char *backend_nav_commentary(gint modnum, gint direction);
+void backend_new_display_commentary(GtkWidget *html, char *modname,
+		SETTINGS *s);
 void backend_setup_commentary( SETTINGS * s );
 void backend_shutdown_commentary( void );
 void backend_display_commentary( int modnnum, gchar * key );
@@ -42,4 +40,6 @@ void backend_display_commentary( int modnnum, gchar * key );
 #ifdef __cplusplus
 }
 #endif
-#endif  /* __COMMENTARY__H_ */
+
+#endif
+

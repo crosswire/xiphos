@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -34,13 +34,11 @@
 #include <sys/stat.h>
 #include <string.h>
 
-/* main */
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 
-/* backend */
-#include "sword.h"
-#include "display.h"
-#include "dictlex_.h"
+#include "backend/sword.h"
+#include "backend/display.h"
+#include "backend/dictlex_.h"
 
 typedef struct _backend_dl BE_DL;
 struct _backend_dl {

@@ -7,7 +7,7 @@ INCLUDES =  \
     $(SWORD_CPPFLAGS) \
     $(GTKHTML_CFLAGS) \
     -I/usr/include/gnome-1.0/ \
-    -I$(top_builddir)/src/main/
+    -I$(top_builddir)/src
 
 noinst_LIBRARIES = libbackend.a
 

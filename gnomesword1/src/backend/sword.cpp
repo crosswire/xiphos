@@ -44,23 +44,21 @@
 #include <sys/stat.h>
 #include <string.h>
 
-/* main */ 
-#include "settings.h"
-#include "lists.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
-/* backend */
-#include "sword.h"
-#include "shortcutbar.h"
-#include "properties.h"
-#include "bookmarks.h"
-#include "verselist.h"
-#include "gbs_.h"
-#include "dictlex_.h"
-#include "commentary_.h"
-#include "bibletext_.h"
-#include "percomm_.h"
-#include "search_.h"
-#include "interlinear.h"
+#include "backend/sword.h"
+#include "backend/shortcutbar.h"
+#include "backend/properties.h"
+#include "backend/bookmarks.h"
+#include "backend/verselist.h"
+#include "backend/gbs_.h"
+#include "backend/dictlex_.h"
+#include "backend/commentary_.h"
+#include "backend/bibletext_.h"
+#include "backend/percomm_.h"
+#include "backend/search_.h"
+#include "backend/interlinear.h"
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;

@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * viewdict.cpp - sword support for veiwtext dialog
@@ -26,20 +25,23 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "gs_gnomesword.h"
-#include "settings.h"
 
-	void backend_setup_viewdict(GtkWidget * text, SETTINGS * s);
-	void backend_shutdown_viewdict(void);
-	void backend_load_module_viewdict(char * module_name);
-	void backend_goto_key_viewdict(char * new_key);
-	void backend_search_text_changed_viewdict(char * new_key);
-	char *backend_get_first_key_viewdict(void);
-	char *backend_get_next_key_viewdict(void);
-	char *backend_get_first_module_viewdict(void);
-	char *backend_get_next_module_viewdict(void);
+#include "main/gs_gnomesword.h"
+#include "main/settings.h"
+
+void backend_setup_viewdict(GtkWidget * text, SETTINGS *s);
+void backend_shutdown_viewdict(void);
+void backend_load_module_viewdict(char *module_name);
+void backend_goto_key_viewdict(char *new_key);
+void backend_search_text_changed_viewdict(char *new_key);
+char *backend_get_first_key_viewdict(void);
+char *backend_get_next_key_viewdict(void);
+char *backend_get_first_module_viewdict(void);
+char *backend_get_next_module_viewdict(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __VIEWDICT_H__ */
+
+#endif
+

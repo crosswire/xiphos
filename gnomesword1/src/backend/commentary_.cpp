@@ -19,9 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -35,11 +34,11 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 
-#include "sword.h"
-#include "display.h"
-#include "commentary_.h"
+#include "backend/sword.h"
+#include "backend/display.h"
+#include "backend/commentary_.h"
 
 typedef struct _backend_comm BE_COMM;
 struct _backend_comm {
