@@ -150,47 +150,55 @@ gint groupnum0 = -1,
     groupnum7 = -1,
     groupnum8 = -1; /* GBS books tree group */
 
-static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
-static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
-/*
-static void on_search_results_link_clicked(GtkHTML * html, const gchar * url,
-			       gpointer data);
-			       */
-static void on_link_clicked(GtkHTML * html, const gchar * url,
-			    gpointer data);
-//static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data);
+static void setupSearchBar(GtkWidget * vp, 
+					SETTINGS * s);
+static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, 
+					SETTINGS * s);
+static void on_link_clicked(GtkHTML * html, 
+					const gchar * url,
+					gpointer data);
 static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
-				      gpointer user_data);
-static void on_btnSBSaveVL_clicked(GtkButton * button, gpointer user_data);
-static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s);
+				        gpointer user_data);
+static void on_btnSBSaveVL_clicked(GtkButton * button, 
+					gpointer user_data);
+static void on_btnSearch_clicked(GtkButton * button, 
+					SETTINGS * s);
 static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
-					  GdkEvent * event, gint group_num,
-					  gint item_num);
+					GdkEvent * event, 
+					gint group_num,
+					gint item_num);
 static void show_standard_popup(EShortcutBar * shortcut_bar,
-				GdkEvent * event, gint group_num);
+					GdkEvent * event, 
+					gint group_num);
 static void show_context_popup(EShortcutBar * shortcut_bar,
-			       GdkEvent * event,
-			       gint group_num, gint item_num);
+					GdkEvent * event,
+					gint group_num, 
+					gint item_num);
 static void set_small_icons(GtkWidget * menuitem,
-			    EShortcutBar * shortcut_bar);
+					EShortcutBar * shortcut_bar);
 static void set_large_icons(GtkWidget * menuitem,
-			    EShortcutBar * shortcut_bar);
-static gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
+					EShortcutBar * shortcut_bar);
+static gint add_sb_group(EShortcutBar * shortcut_bar, 
+					gchar * group_name);
 static void on_item_added(EShortcutModel * shortcut_model,
-					gint group_num, gint item_num);
+					gint group_num, 
+					gint item_num);
 static void on_item_removed(EShortcutModel * shortcut_model,
-					gint group_num, gint item_num);
+					gint group_num, 
+					gint item_num);
 static void on_clistSearchResults_select_row(GtkCList *clist,
                                         gint             row,
                                         gint             column,
                                         GdkEvent        *event,
                                         gpointer         user_data);
-static void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data);
+static void on_add_all_activate(GtkMenuItem * menuitem, 
+					gpointer user_data);
 static void remove_all_items(gint group_num);
 
 
 
-static void on_buttonBooks_clicked(GtkButton * button, SETTINGS *s)
+static void on_buttonBooks_clicked(GtkButton * button, 
+					SETTINGS *s)
 {
 	gtk_notebook_set_page (GTK_NOTEBOOK (lookup_widget(s->app,"notebook3")),1);	
 }
