@@ -25,10 +25,6 @@
 
 #include <gnome.h>
 
-#ifdef USE_GTKEMBEDMOZ
-#include <gtkmozembed.h>
-#endif
-
 
 #include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
@@ -65,6 +61,7 @@ extern gboolean gsI_isrunning;
 
 TEXT_DATA *cur_t;
 
+GtkTextBuffer *text_buffer;
 /******************************************************************************
  * globals to this file only 
  */
@@ -242,10 +239,12 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	/*
 	 *  keep showtabs menu item current 
 	 */
+	if(!t->is_rtol)
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
 
 	gui_set_text_frame_label(t);
-	widgets.html_text = t->html;
+	if(!t->is_rtol)
+		widgets.html_text = t->html;
 /*
 	if(!t->is_rtol)
 		gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_text));
@@ -318,71 +317,163 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-#ifdef USE_GTKEMBEDMOZ
-int mozilla_mouse_click(GtkMozEmbed * embed, gpointer dom_event)
+
+
+static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
+	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
 {
-/*
-	GtkWidget *popupmenu;
+	gint char_index;
 	
-	popupmenu = gui_create_pm_text(cur_t);
-	gnome_popup_menu_do_popup(popupmenu,
-                                   NULL,
-                                   NULL,
-                                   NULL,
-                                   NULL);
-	g_warning("mozilla_mouse_click");
-*/
-	return 0;
+	char_index = gtk_text_iter_get_offset (iter);
+	//printf ("offset = %d", char_index);
+  switch (event->type)
+    {
+    case GDK_MOTION_NOTIFY:
+      printf ("Motion event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_BUTTON_PRESS:
+      printf ("Button press at char %d tag `%s'\n",
+             char_index, tag->name);
+	    switch(event->button.button){
+		    case 1:
+			//return do_something_with_tag(tag, iter, user_data);
+		        break;
+		    case 2:
+		    case 3:
+		        break;
+	    
+	}
+	
+    	return TRUE;	
+      break;
+        
+    case GDK_2BUTTON_PRESS:
+      printf ("Double click at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_3BUTTON_PRESS:
+      printf ("Triple click at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_BUTTON_RELEASE:
+      printf ("Button release at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_KEY_PRESS:
+    case GDK_KEY_RELEASE:
+      printf ("Key event at char %d tag `%s'\n",
+              char_index, tag->name);
+    	return TRUE;
+      break;
+      
+    case GDK_ENTER_NOTIFY:
+      printf ("enter event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+	    
+    case GDK_LEAVE_NOTIFY:
+      printf ("leave event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+	    
+    case GDK_PROPERTY_NOTIFY:
+    case GDK_SELECTION_CLEAR:
+    case GDK_SELECTION_REQUEST:
+    case GDK_SELECTION_NOTIFY:
+    case GDK_PROXIMITY_IN:
+    case GDK_PROXIMITY_OUT:
+    case GDK_DRAG_ENTER:
+    case GDK_DRAG_LEAVE:
+    case GDK_DRAG_MOTION:
+    case GDK_DRAG_STATUS:
+    case GDK_DROP_START:
+    case GDK_DROP_FINISHED:
+    	return FALSE;
+    default:
+    	return FALSE;
+      break;
+    }    
+    return FALSE;
 }
 
-/******************************************************************************
- * Name
- *  set_module_font_activate
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *
- *   void set_module_font_activate(GtkMenuItem * menuitem,
-				     TEXT_DATA * t)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void set_module_font(GtkButton * button, TEXT_DATA * t)
+static void setup_tag (GtkTextTag *tag, gpointer user_data)
 {
-	gui_set_module_font(t->mod_name);
-
-	chapter_display_mozilla(t->html, t->mod_name,
-				t->tgs, settings.currentverse, TRUE);
+	g_signal_connect (G_OBJECT (tag),
+		    "event",
+		    G_CALLBACK (tag_event_handler),
+		    user_data);
 }
 
-static void on_togglebutton_points_toggled(GtkToggleButton *
-					   togglebutton, TEXT_DATA * t)
+void create_text_tags(GtkTextBuffer *buffer)
 {
-	t->tgs->hebrewpoints = togglebutton->active;
-	save_module_options(t->mod_name, "Hebrew Vowel Points",
-			    t->tgs->hebrewpoints);
-	chapter_display_mozilla(t->html, t->mod_name,
-				t->tgs, settings.currentverse, TRUE);
+	GtkTextTag *tag;
+	GdkColor color;
+	GdkColor color2;
+	GdkColor color_red;
+	GdkColor colorLink;
+	PangoFontDescription *font_desc;
+	
+		
+		
+	/* verse number tag verse style*/
+	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
+	setup_tag (tag, buffer);  
+	color.red = color.green = 0;
+	color.blue = 0xffff;
+		"scale", PANGO_SCALE_XX_SMALL,
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);	
+		
+	/* current verse color tag */	
+	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
+	color.blue = 0;
+	color.green = 0xbbbb;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+		
+	/*  verse color tag */	
+	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
+	color.blue = 0;
+	color.green = 0;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+		
+	/* right to left tag */
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_quote", NULL);
+        g_object_set (G_OBJECT (tag),
+		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
+		//"scale", PANGO_SCALE_XX_LARGE,
+                "wrap_mode", GTK_WRAP_WORD,
+                "direction", GTK_TEXT_DIR_RTL,
+                "indent", 0,
+                "left_margin", 0,
+                "right_margin", 0,
+                NULL);	
+		
+	/* large tag */
+	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
+        g_object_set (G_OBJECT (tag),
+		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
+		"scale", PANGO_SCALE_XX_LARGE,
+                NULL);			
 }
-
-
-static void on_togglebutton_cant_toggled(GtkToggleButton * togglebutton,
-					 TEXT_DATA * t)
-{
-	t->tgs->hebrewcant = togglebutton->active;
-	save_module_options(t->mod_name, "Hebrew Cantillation",
-			    t->tgs->hebrewcant);
-	chapter_display_mozilla(t->html, t->mod_name,
-				t->tgs, settings.currentverse, TRUE);
-}
-
-
-#endif
+	
 
 /******************************************************************************
  * Name
@@ -405,12 +496,6 @@ static void create_pane(TEXT_DATA * t)
 	GtkWidget *vbox;
 	GtkWidget *frame_text;
 	GtkWidget *scrolledwindow;
-#ifdef USE_GTKEMBEDMOZ
-	GtkWidget *toolbar_moz;
-	GtkWidget *button_set_font;
-	GtkWidget *togglebutton_points;
-	GtkWidget *togglebutton_cant;
-#endif
 
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_show(t->frame);
@@ -420,22 +505,22 @@ static void create_pane(TEXT_DATA * t)
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
 
+	frame_text = gtk_frame_new(NULL);
+	gtk_widget_show(frame_text);
+	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE,
+			   TRUE, 0);
 
-#ifdef USE_GTKEMBEDMOZ
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
+	gtk_container_add(GTK_CONTAINER(frame_text),
+			  scrolledwindow);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+
 	if (!t->is_rtol) {
-		frame_text = gtk_frame_new(NULL);
-		gtk_widget_show(frame_text);
-		gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE,
-				   TRUE, 0);
-
-		scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-		gtk_widget_show(scrolledwindow);
-		gtk_container_add(GTK_CONTAINER(frame_text),
-				  scrolledwindow);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-					       (scrolledwindow),
-					       GTK_POLICY_AUTOMATIC,
-					       GTK_POLICY_AUTOMATIC);
+		
 		t->html = gtk_html_new();
 		gtk_widget_show(t->html);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow),
@@ -454,115 +539,15 @@ static void create_pane(TEXT_DATA * t)
 				   (TEXT_DATA *) t);
 	}
 
-	else {
-
-		toolbar_moz =
-		    gtk_toolbar_new();
-		gtk_toolbar_set_style (GTK_TOOLBAR (toolbar_moz), GTK_TOOLBAR_ICONS);
-		gtk_widget_show(toolbar_moz);
-		gtk_box_pack_start(GTK_BOX(vbox), toolbar_moz, FALSE,
-				   FALSE, 0);
-/*		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_moz),
-					      GTK_RELIEF_NONE);*/
-
-		button_set_font =
-		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar_moz),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("Font"), NULL,
-					       NULL, NULL, NULL, NULL);
-		gtk_widget_show(button_set_font);
-
-		gtk_signal_connect(GTK_OBJECT(button_set_font),
-				   "clicked",
-				   G_CALLBACK(set_module_font),
-				   (TEXT_DATA *) t);
-
-
-		if (check_for_global_option
-		    (t->mod_name, "UTF8HebrewPoints")) {
-			togglebutton_points =
-			    gtk_toolbar_append_element(GTK_TOOLBAR
-				       (toolbar_moz),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL,
-				       _
-				       ("Vowel Points"),
-				       NULL, NULL, NULL,
-				       NULL, NULL);
-			gtk_widget_show(togglebutton_points);
-
-			gtk_signal_connect(GTK_OBJECT
-				   (togglebutton_points),
-				   "toggled",
-				   G_CALLBACK
-				   (on_togglebutton_points_toggled),
-				   (TEXT_DATA *) t);
-		}
-
-		if (check_for_global_option
-		    (t->mod_name, "UTF8Cantillation")) {
-			togglebutton_cant =
-			    gtk_toolbar_append_element(GTK_TOOLBAR
-				       (toolbar_moz),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL,
-				       _("Cantilation"),
-				       NULL, NULL, NULL,
-				       NULL, NULL);
-			gtk_widget_show(togglebutton_cant);
-
-			gtk_signal_connect(GTK_OBJECT
-				   (togglebutton_cant),
-				   "toggled",
-				   G_CALLBACK
-				   (on_togglebutton_cant_toggled),
-				   (TEXT_DATA *) t);
-		}
-
-		frame_text = gtk_frame_new(NULL);
-		gtk_widget_show(frame_text);
-		gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE,
-				   TRUE, 0);
-
-		gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.3.1");
-		t->html = gtk_moz_embed_new();
-		gtk_widget_show(t->html);
-		gtk_container_add(GTK_CONTAINER(frame_text), t->html);
-		gtk_widget_realize(t->html);
-
-
-		gtk_signal_connect(GTK_OBJECT(t->html),
-				   "dom_mouse_click",
-				   G_CALLBACK(mozilla_mouse_click),
-				   NULL);
+	else {  /* use gtktextview for right to left text */
+		t->text = gtk_text_view_new ();
+		gtk_widget_show (t->text);
+		gtk_container_add (GTK_CONTAINER (scrolledwindow), t->text);
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (t->text), FALSE);
+		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (t->text));
+		create_text_tags(text_buffer);
+		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (t->text), GTK_WRAP_WORD);
 	}
-
-#else
-	frame_text = gtk_frame_new(NULL);
-	gtk_widget_show(frame_text);
-	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE, TRUE, 0);
-
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(frame_text), scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	t->html = gtk_html_new();
-	gtk_widget_show(t->html);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow), t->html);
-	gtk_html_load_empty(GTK_HTML(t->html));
-
-	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
-			   G_CALLBACK(gui_link_clicked),
-			   (TEXT_DATA *) t);
-	gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
-			   G_CALLBACK(gui_url), (TEXT_DATA *) t);
-	gtk_signal_connect(GTK_OBJECT(t->html), "button_release_event",
-			   G_CALLBACK(on_button_release_event),
-			   (TEXT_DATA *) t);
-#endif
 }
 
 /******************************************************************************
@@ -623,20 +608,14 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 	}
 
 	if (!cur_t->is_locked) {
-#ifdef USE_GTKEMBEDMOZ
 		if (!cur_t->is_rtol)
 			chapter_display(cur_t->html,
 					cur_t->mod_name,
 					cur_t->tgs, key, TRUE);
 		else
-			chapter_display_mozilla(cur_t->html,
+			chapter_display_textview(cur_t->text,
 						cur_t->mod_name,
 						cur_t->tgs, key, TRUE);
-
-#else
-		chapter_display(cur_t->html, cur_t->mod_name,
-				cur_t->tgs, key, TRUE);
-#endif
 	}
 	display_change = TRUE;
 	cur_t->key = settings.currentverse;
@@ -661,20 +640,17 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 void gui_display_text(gchar * key)
 {
 	if (!cur_t->is_locked)
-#ifdef USE_GTKEMBEDMOZ
 		if (!cur_t->is_rtol)
 			chapter_display(cur_t->html,
 					cur_t->mod_name,
 					cur_t->tgs, key, TRUE);
-		else
-			chapter_display_mozilla(cur_t->html,
-						cur_t->mod_name,
-						cur_t->tgs, key, TRUE);
-
-#else
-		chapter_display(cur_t->html, cur_t->mod_name,
+		else {
+			/* right to left text */
+			chapter_display_textview(cur_t->text,
+				cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
-#endif
+		}
+			
 	else if (cur_t->cipher_key) {
 		gui_module_is_locked_display(cur_t->html,
 					     cur_t->mod_name,
@@ -706,18 +682,13 @@ void gui_add_new_text_pane(TEXT_DATA * t)
 
 	create_pane(t);
 	if (t->is_locked)
-		gui_module_is_locked_display(t->html, t->mod_name,
-							t->cipher_key);
-
-#ifdef USE_GTKEMBEDMOZ					    
-	if (!t->is_rtol) {
-		popupmenu = gui_create_pm_text(t);
-		gnome_popup_menu_attach(popupmenu, t->html, NULL);
-	}
-#else
+		gui_module_is_locked_display(t->html, t->mod_name,t->cipher_key);
+		
 	popupmenu = gui_create_pm_text(t);
-	gnome_popup_menu_attach(popupmenu, t->html, NULL);
-#endif
+	if (!t->is_rtol) 
+		gnome_popup_menu_attach(popupmenu, t->html, NULL);
+	else
+		gnome_popup_menu_attach(popupmenu, t->text, NULL);
 }
 
 /******************************************************************************
