@@ -520,8 +520,8 @@ char *BackEnd::get_module_key() {
 	
 	mykey = g_convert(   (char*)display_mod->KeyText(),
                              -1,
-                             OLD_CODESET,
                              UTF_8,
+                             OLD_CODESET,
                              &bytes_read,
                              &bytes_written,
                              error);
@@ -622,7 +622,18 @@ char *BackEnd::module_name_from_description(char *description) {
 
 
 int BackEnd::get_key_testament(const char * key) {
-	sword::VerseKey ikey( key );
+        gsize bytes_written;
+	char *mykey =  g_locale_from_utf8(key,-1,NULL,&bytes_written,NULL);
+	/*char *mykey = g_convert(   (char*)key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);*/
+	
+	sword::VerseKey ikey( mykey );
+	g_free(mykey);
 	return ikey.Testament();	
 }
 
