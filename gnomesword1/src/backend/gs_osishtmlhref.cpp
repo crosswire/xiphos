@@ -158,7 +158,11 @@ bool GSOSISHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserD
 						catch ( ... ) {	}
 						if (vkey) {
 							char ch = ((tag.getAttribute("type") && ((!strcmp(tag.getAttribute("type"), "crossReference")) || (!strcmp(tag.getAttribute("type"), "x-cross-ref")))) ? 'x':'n');
-							buf.appendFormatted("<a href=\"noteID://%s/%s/%c/%s\"><small><sup>*%c</sup></small></a> ", u->version.c_str(), vkey->getText(), ch, footnoteNumber.c_str(), ch);
+							if(!strcmp(u->version.c_str(),"WLC")) {
+								//remove notes for the WLC
+							}
+							else
+								buf.appendFormatted("<a href=\"noteID://%s/%s/%c/%s\"><small><sup>*%c</sup></small></a> ", u->version.c_str(), vkey->getText(), ch, footnoteNumber.c_str(), ch);
 						}
 					}
 					u->suspendTextPassThru = true;
