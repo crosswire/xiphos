@@ -105,7 +105,7 @@ static gchar *get_module_from_url(const gchar * url)
 				++i;
 			}
 		}
-		if (check_for_module(newmod))
+		if (main_is_module(newmod))
 			retval = g_strdup(newmod);
 		else 
 			retval = g_strdup(xml_get_value("modules", "bible"));
@@ -321,7 +321,7 @@ void gui_display_devotional_in_sidebar(void)
 				    (sidebar.optionmenu1), 4);*/
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      4);
-	gui_display_dictlex_in_sidebar(settings.devotionalmod, buf);
+	main_sidebar_display_dictlex(settings.devotionalmod, buf);
 }
 
 
@@ -421,40 +421,6 @@ void gui_sidebar_showhide(void)
 	}
 }
 
-/******************************************************************************
- * Name
- *   gui_display_dictlex_in_sidebar
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
- *
- * Description
- *
- *
- * Return value
- *   gboolean
- */
-
-gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
-{
-	if (settings.showshortcutbar) {
-		gchar *text;
-		/*gtk_option_menu_set_history(GTK_OPTION_MENU
-					    (sidebar.optionmenu1), 4);*/
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_sidebar), 4);
-		text = get_dictlex_text(mod_name, key);
-		if (text) {
-			entry_display(sidebar.html_viewer_widget,
-				      mod_name, text, key, TRUE);
-			free(text);
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
 
 /******************************************************************************
  * Name
@@ -858,10 +824,10 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 			break;
 		}
 	}
-	text = get_search_results_text(settings.sb_search_mod, key);
+	text = main_get_search_results_text(settings.sb_search_mod, key);
 	if (text) {
 		settings.displaySearchResults = TRUE;
-		entry_display(sidebar.html_widget,
+		main_entry_display(sidebar.html_widget,
 			      settings.sb_search_mod, text, key, TRUE);
 		settings.displaySearchResults = FALSE;
 		free(text);

@@ -37,13 +37,13 @@ extern "C" {
 #include "main/display.hh"
 #include "main/settings.h"
 #include "main/global_ops.hh"
+#include "main/sword.h"
 
 #include "gui/utilities.h"
 //#include "gui/widgets.h"
 
 #include "backend/module.hh"
 #include "backend/sword_main.hh"
-#include "backend/tree.hh"
 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -63,9 +63,9 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
-	if(backend_get_mod_type(imodule.Name()) == 3)
-		keytext = backend_gbs_get_treekey_local_name(
-			backend_gbs_get_treekey_offset());
+	if(backend->module_type(imodule.Name()) == BOOK_TYPE)
+		keytext = backend->treekey_get_local_name(
+				settings.book_offset);
 	else
 		keytext = imodule.KeyText();
 	
@@ -231,7 +231,7 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	GString *str = g_string_new(NULL);
 	const gchar *keytext = NULL;
 	int curPos = 0;
-	int type = be->module_type();
+	int type = be->module_type(imodule.Name());
 	GtkHTML *html = GTK_HTML(gtkText);
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
