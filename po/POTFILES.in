@@ -57,7 +57,9 @@ src/gnome2/spell_gnome_spell.c
 src/gnome2/splash.c
 src/gnome2/studypad.c
 src/gnome2/studypad_dialog.c
+src/gnome2/tabbed_browser.c
 src/gnome2/toolbar_edit.c
 src/gnome2/toolbar_nav.c
 src/gnome2/toolbar_style.c
+src/gnome2/url.c
 src/gnome2/utilities.c
