@@ -63,6 +63,7 @@ int set_module(int manager, char * module_name);
 void main_setup_displays(void);
 void main_display_book(void);
 void main_display_commentary(void);
+void main_display_dictionary(char * mod_name, char * key);
 
 #ifdef __cplusplus
 }

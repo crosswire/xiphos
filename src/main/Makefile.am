@@ -17,7 +17,7 @@ libmain_a_SOURCES =  \
     gbs.c gbs.h \
     global_ops.cc global_ops.hh \
     key.c key.h \
-    lists.c lists.h \
+    lists.cc lists.h \
     main.c \
     module.c module.h \
     mod_mgr.c mod_mgr.h \
@@ -28,4 +28,5 @@ libmain_a_SOURCES =  \
     spell_pspell.c \
     spell.h \
     sword.cc sword.h\
+    url.c url.h\
     xml.c xml.h
