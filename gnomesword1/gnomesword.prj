@@ -1,4 +1,4 @@
-# Anjuta Version 1.1.97 
+# Anjuta Version 1.1.98 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.1.97
+anjuta.version=1.1.98
 anjuta.compatibility.level=1
 
 project.name=gnomesword
