@@ -819,7 +819,13 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 	}
 	if (mod) {
 		mod->SetKey(key);
-		return strdup((char *) mod->RenderText());
+		//printf("\nRawEntry:\n%s\n",mod->getRawEntry());
+		// work-a-round for bug in thmlhtmlhref filter
+		if((!strcmp(mod->Name(),"AmTract")) || 
+					(!strcmp(mod->Name(),"Scofield")))
+			return strdup((char *) mod->getRawEntry());
+		else	
+			return strdup((char *) mod->RenderText());
 	}
 	return NULL;
 }
@@ -1152,8 +1158,13 @@ char *backend_get_commentary_text(char *mod_name, char *key)
 	if (mod) {
 		versekey.Persist(1);
 		versekey = key;
-		mod->SetKey(versekey);
-		return strdup((char *) mod->RenderText());
+		mod->SetKey(versekey);	
+		//printf("\nRawEntry:\n%s\n",mod->getRawEntry());
+		// work-a-round for bug in thmlhtmlhref filter
+		if((!strcmp(mod->Name(),"AmTract")) || (!strcmp(mod->Name(),"Scofield")))
+			return strdup(mod->getRawEntry());
+		else	
+			return strdup(mod->RenderText());
 	}
 	return NULL;
 }
