@@ -37,10 +37,9 @@ void on_btnAboutModuleOK_clicked(GtkButton * button,
 				     gpointer user_data);
 void on_btnAboutSwordOK_clicked(GtkButton * button,
 				    gpointer user_data); 
-GtkWidget *create_about(void);
-GtkWidget *create_AboutSword(void);
-GtkWidget *create_aboutmodules(void);
- 
+GtkWidget *gui_create_about_modules(void);
+GtkWidget *gui_create_about_sword(void);
+GtkWidget *gui_create_about_gnomesword(void);
  
 #ifdef __cplusplus
 }

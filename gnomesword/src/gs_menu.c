@@ -110,47 +110,47 @@ additemstooptionsmenu(GList *options, SETTINGS *s)
                                              GTK_WIDGET(menuChoice),
                                              1);  	      
 				
-		if(!strcmp((gchar *) tmp->data, _("Strong's Numbers"))) {
+		if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
 			s->strongsnum =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->strongsint;		
 		}
 		
-		if(!strcmp((gchar *) tmp->data,_("Footnotes" ))) {
+		if(!strcmp((gchar *) tmp->data, "Footnotes")) {
 			s->footnotes =  menuitem[0].widget;			
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->footnotesint;
 		}
 		
-		if(!strcmp((gchar *) tmp->data, _("Morphological Tags"))) {
+		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
 			s->morphs =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->morphsint;
 		}
 		
-		if(!strcmp((gchar *) tmp->data, _("Hebrew Vowel Points"))) {
+		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
 			s->hebrewpoints =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->hebrewpointsint;
 		}
 		
-		if(!strcmp((gchar *) tmp->data, _("Hebrew Cantillation"))) {
+		if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
 			s->cantillationmarks =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->cantillationmarksint;
 		}
 		
-		if(!strcmp((gchar *) tmp->data, _("Greek Accents"))) {
+		if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
 			s->greekaccents =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->greekaccentsint;
 		}	
 		
-		if(!strcmp((gchar *) tmp->data, _("Scripture Cross-references"))) {
+		if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
 			s->crossrefs =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->crossrefint;
 		}	
 		
-		if(!strcmp((gchar *) tmp->data, _("Lemmas"))) {
+		if(!strcmp((gchar *) tmp->data, "Lemmas")) {
 			s->lemmas =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->lemmasint;
 		}		
 		
-		if(!strcmp((gchar *) tmp->data, _("Headings"))) {
+		if(!strcmp((gchar *) tmp->data, "Headings")) {
 			s->headings =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->headingsint;
 		}	
@@ -610,7 +610,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(auto_scroll1),
 				       TRUE);
 
-	show_tabs1 = gtk_check_menu_item_new_with_label("Show Tabs");
+	show_tabs1 = gtk_check_menu_item_new_with_label(_("Show Tabs"));
 	gtk_widget_ref(show_tabs1);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "show_tabs1",
 				 show_tabs1,

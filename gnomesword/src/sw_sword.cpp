@@ -50,6 +50,7 @@
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <string.h>
 #include <time.h>
 #include <gal/widgets/e-unicode.h>
 
@@ -81,6 +82,7 @@
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
+
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
@@ -205,7 +207,6 @@ void initSWORD(SETTINGS *s)
 	ConfigEntMap::iterator eit;	//-- iteratior
 	int i,			//-- counter
 	 j;			//-- counter 
-	gchar * lang;
 	GList *tmp;
  
 	g_print("gnomesword-%s\n", VERSION);
@@ -273,6 +274,8 @@ void initSWORD(SETTINGS *s)
 			gtk_main_iteration();
 	}
 	
+	g_print("Sword locale is %s\n", LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+
 	g_print("%s\n", "Loading SWORD Moudules");
 	
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
@@ -784,7 +787,7 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), choice);	
 		}
 		
-		if(!strcmp(option,"Footnotes" )) {
+		if(!strcmp(option, "Footnotes")) {
 			GTK_CHECK_MENU_ITEM(settings->footnotes)->active = choice;		
 			/* set footnotes toogle button */
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), choice);	
@@ -824,7 +827,7 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 			settings->strongsint = choice;	
 		}
 		
-		if(!strcmp(option,"Footnotes" )) {
+		if(!strcmp(option, "Footnotes")) {
 			settings->footnotesint = choice;
 		}
 		
@@ -1004,20 +1007,37 @@ void setversestyleSWORD(gboolean choice)
 		curMod->Display();	//-- show the change
 }
 
+/**********************************************************************
+ * Name
+ *   bookSWORD
+ *
+ * Synopsis
+ *   #include "sw_sword.h"
+ *
+ *   void bookSWORD(void);
+ *
+ * Description
+ *   Change Bible book.
+ *   Called if someone changed book combo.
+ *
+ * Return value
+ *   none
+ */
 
-/*** change Bible book ***/
-void bookSWORD(void)		//-- someone changed book combo
-{
-	gchar *bookname, buf[256];
-	gint iChap, iVerse;
+void
+bookSWORD(void) {
+  gchar *bookname;
+  gchar buf[256];
+
+  bookname =
+    gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app, "cbeBook")));
+
+  sprintf(buf, "%s %d:%d", bookname, 1, 1);
+
+  vkText = buf;
+  vkComm = buf;
 	
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(settings->app,"cbeBook")));
-	
-	sprintf(buf,"%s %d:%d", bookname, 1, 1);
-	vkText = buf;
-	vkComm = buf;
-	
-	ChangeVerseSWORD();
+  ChangeVerseSWORD();
 }
 
 /*
@@ -1345,7 +1365,7 @@ void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module inform
 		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
 		buf);
 	if(!isGBS) {
-		aboutbox = create_aboutmodules();	//-- create about dialog
+		aboutbox = gui_create_about_modules();
 		gtk_widget_show(aboutbox);
 	}
 	
@@ -1495,17 +1515,36 @@ gchar *getcommodDescriptionSWORD(void)
 	return (char *) curcomMod->Description();;
 }
 
-/* GList *backend_getBibleBooksSWORD(void)
-*  returns a list of the books of the Bible
-*  GList *list needs to be freed by calling function
-*/
-GList *backend_getBibleBooksSWORD(void)
+/**********************************************************************
+ * Name
+ *   backend_getBibleBooksSWORD(void)
+ *
+ * Synopsis
+ *   #include "sw_sword.h"
+ *   
+ *   GList *backend_getBibleBooksSWORD(void);
+ *
+ * Description
+ *   Returns a list of the books of the Bible.
+ *   GList *list needs to be freed by calling function.
+ *
+ *   This is called before initSWORD! :o(
+ *
+ * Return value
+ *   GList pointer of books of the Bible
+ */
+
+GList *
+backend_getBibleBooksSWORD(void)
 {
 	VerseKey key;
 	GList *glist = NULL;
 
-	/*** load Bible books ***/
-	for (int i = 0; i <= 1; ++i) {
+	/*
+   * Load Bible books.
+   */
+  
+  for (int i = 0; i <= 1; ++i) {
 		for ( int j = 0; j < key.BMAX[i]; ++j) {
 			glist = g_list_append(glist, (char*)key.books[i][j].name);
 		}
@@ -1830,4 +1869,3 @@ gint get_mod_typeSWORD(gchar *modName)
 	/*** delete Sword manager ***/
 	delete mgr;
 }
-

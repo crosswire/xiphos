@@ -27,7 +27,7 @@
   */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -48,115 +48,140 @@
 #include "sw_bookmarks.h"
 #include "e-splash.h"
 
-extern SETTINGS 
-	*settings;
-SETTINGS 
-	myset;	
-extern GList 	
-	*biblemods,
-	*commentarymods,
-	*dictionarymods,
-	*percommods;	
+extern SETTINGS *settings;
+extern GList *biblemods;
+extern GList *commentarymods;
+extern GList *dictionarymods;
+extern GList *percommods;
 extern gchar *swbmDir;
+
+SETTINGS myset;  
  
 int
 main (int argc, char *argv[])
 {
-	GtkWidget 
-		*mainwindow,	
-		*splash;
-	gboolean 		
-		newconfigs = FALSE,	
-		newbookmarks = FALSE;
-	gint 
-		icreatefiles=0;
-	
+  GtkWidget *mainwindow;
+  gint icreatefiles = 0;
+  gboolean newconfigs = FALSE;
+  gboolean newbookmarks = FALSE;
+  GtkWidget *splash;
+
 #ifdef GTKHTML_HAVE_GCONF
-	GError  *gconf_error  = NULL;
-#endif	
+  GError *gconf_error = NULL;
+#endif
 
 #if ENABLE_NLS
   bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
   textdomain(PACKAGE);
 #endif
 
+  gnome_init("GnomeSword", VERSION, argc, argv);    
+  if(argc > 1) {      
+    if(!strcmp(argv[1], "newconfigs")) {
+      newconfigs = TRUE;
+    }
+    if(!strcmp(argv[1], "newbookmarks")) {
+      newbookmarks = TRUE;
+    }
+    if(!strcmp(argv[1], "newfiles")) {
+      newconfigs = TRUE;
+      newbookmarks = TRUE;
+    }
+  } 
+
+#ifdef GTKHTML_HAVE_GCONF
+  /* 
+   * This is needed for gtkhtml.
+   */
+
+  if (!gconf_init(argc, argv, &gconf_error)) {
+    g_assert(gconf_error != NULL);
+    g_error("GConf init failed:\n  %s", gconf_error->message);
+    return FALSE;
+  }
+#endif  
+
+  icreatefiles = setDiretory();
+  if(newconfigs) {
+    gs_firstrunSWORD();
+  }
+  if(newbookmarks) {
+    createbookmarksBM(swbmDir);
+  }
+
+  /*icreatefiles = 1;*//* please remove me - i am for testing */
+  if(icreatefiles == 1 || icreatefiles == 3 ){    
+    gs_firstrunSWORD();
+  }
+
+  /*
+   * Set pointer to structure.
+   */
+  settings = &myset; 
+  loadconfig(settings);
+
+  if(strcmp(VERSION,settings->gs_version)) {
+    gs_firstrunSWORD();
+  }
+
+  /*
+   * Splash screen.
+   */
+  splash = e_splash_new ();
+  if(settings->showsplash){  
+    gtk_widget_show(splash);
+    gtk_object_ref(GTK_OBJECT(splash));
+    while (gtk_events_pending()) {
+      gtk_main_iteration();
+    }
+  }     
   
-	gnome_init("GnomeSword", VERSION, argc, argv);		
-	if(argc > 1) {			
-		if(!strcmp(argv[1],"newconfigs")) newconfigs = TRUE;
-		if(!strcmp(argv[1],"newbookmarks")) newbookmarks = TRUE;
-		if(!strcmp(argv[1],"newfiles"))
-		{
-  			newconfigs = TRUE;
-  			newbookmarks = TRUE;
-		}
-	} 
-#ifdef GTKHTML_HAVE_GCONF  /*** this is needed for gtkhtml ***/
-	if (!gconf_init (argc, argv, &gconf_error)) {
-		g_assert (gconf_error != NULL);
-		g_error ("GConf init failed:\n  %s", gconf_error->message);
-		return FALSE;
-	}
-#endif	
-  	icreatefiles = setDiretory(); /*** gs_file.c ***/  
-  	if(newconfigs)
-  	{
-  		gs_firstrunSWORD(); /*** gs_sword.cpp ***/  
-  	}
-  	if(newbookmarks)
-  	{
-  		createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
-  	}
-	//icreatefiles = 1;/* please remove me - i am for testing */
-	if(icreatefiles == 1 || icreatefiles == 3 ){		
-		gs_firstrunSWORD(); /*** gs_sword.cpp ***/  
-	}
-  	/* set pointer to structure */
-  	settings = &myset; 
-	loadconfig(settings); /* new */  /*** sw_propertiew.cpp ***/  
-	if(strcmp(VERSION,settings->gs_version))
-		gs_firstrunSWORD(); /*** sw_gnomesword.cpp ***/ 		
-	/* splash screen */	
-	splash = e_splash_new (); /*** e-splash.c ***/ 
-	if(settings->showsplash){	
-		gtk_widget_show (splash);
-		gtk_object_ref (GTK_OBJECT (splash));
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
-	}  	 
-	
-	mainwindow = create_mainwindow (splash, settings); /*** gs_gui.c ***/ 	
-  	add_gtkhtml_widgets(mainwindow); /*** gs_html.c ***/ 
-	
-	if(settings->showsplash)
-		e_splash_set_icon_highlight (E_SPLASH(splash),2, TRUE);
-	
-  	initSWORD(settings); /*** sw_sword.cpp ***/  
-	
-	if(settings->showsplash)
-		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);
-  	
-	initGnomeSword(settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
-	
-	if(icreatefiles == 2 || icreatefiles == 3 ){		
-		createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
-	}
-	
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-  	
-	if(settings->showsplash)
-		gtk_widget_unref (splash);
-	gtk_widget_destroy (splash);
-	/* set the main window size */
-	gtk_widget_set_usize(settings->app, settings->gs_width, settings->gs_hight);
-	
-	if(settings->showdevotional) {
-		displayDevotional();	
-	}
-  	/* set toggle state of buttons and menu items */
-  	UpdateChecks(settings);  	
-  	gtk_main ();  	
-  	return 0;
+  mainwindow = create_mainwindow(splash, settings);
+  add_gtkhtml_widgets(mainwindow);
+  
+  if(settings->showsplash) {
+    e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);
+  }
+  
+  initSWORD(settings);
+  
+  if(settings->showsplash) {
+    e_splash_set_icon_highlight(E_SPLASH(splash), 3, TRUE);
+  }
+    
+  initGnomeSword(settings, biblemods, commentarymods, dictionarymods,
+    percommods,splash);
+  
+  if(icreatefiles == 2 || icreatefiles == 3 ){    
+    createbookmarksBM(swbmDir);
+  }
+  
+  while (gtk_events_pending()) {
+    gtk_main_iteration();
+  }
+  
+  if(settings->showsplash) {
+    gtk_widget_unref(splash);
+  }
+
+  gtk_widget_destroy(splash);
+
+  /*
+   * Set the main window size.
+   */
+  gtk_widget_set_usize(settings->app, settings->gs_width, settings->gs_hight);
+  
+  if(settings->showdevotional) {
+    displayDevotional();  
+  }
+
+  /*
+   * Set toggle state of buttons and menu items.
+   */
+
+  UpdateChecks(settings);    
+  gtk_main();
+
+  return 0;
 }
 
