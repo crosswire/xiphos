@@ -873,8 +873,9 @@ static gboolean button_release_event(GtkWidget * widget,
 			gchar *url = g_strdup_printf("bookmark://%s/%s",module,key);
 			if(button_one)
 				main_url_handler(url, FALSE);
-			else if(button_two) 
-				main_url_handler(url, TRUE);
+			else if(button_two) 	
+				main_open_bookmark_in_new_tab(module,key);
+				//main_url_handler(url, TRUE);
 			g_free(url);
 			
 		}

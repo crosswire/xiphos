@@ -1084,7 +1084,6 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
 	GtkTreeIter iter;
-	gchar *caption = NULL;
 	gchar *key = NULL;
 	gchar *module = NULL;
 	
@@ -1093,9 +1092,10 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if (!gtk_tree_selection_get_selected(selection,NULL,&selected))
 		return;
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   3, &key, -1);	
-	gui_open_passage_in_new_tab(key);
-	g_free(caption);
+				   3, &key, 
+				   4, &module, 
+			           -1);	
+	main_open_bookmark_in_new_tab(module,key);
 	g_free(key);
 	g_free(module);
 }
