@@ -6,17 +6,17 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=343
+0=567
 1=1
-2=1
-3=75
-4=231
-5=1
-6=10
-7=20
-8=10
-9=3
-10=113
+2=473
+3=348
+4=200
+5=56
+6=827
+7=1113
+8=59
+9=44
+10=30
 11=45
 12=47
 13=46
@@ -149,13 +149,23 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome2/studypad.c
-1=/home/terry/Projects/gnomesword1/src/gnome2/commentary_dialog.c
+0=/home/terry/Projects/gnomesword1/src/gnome2/gtkhtml_display.c
+1=/home/terry/Projects/gbible/src/display.c
+2=/home/terry/Projects/gnomesword1/src/gnome2/bibletext.c
+3=/home/terry/Projects/gnomesword1/src/gnome2/main_window.c
+4=/home/terry/Projects/gnomesword1/src/gnome2/toolbar_nav.c
+5=/home/terry/Projects/gnomesword1/src/main/main.c
+6=/home/terry/Projects/gnomesword1/src/gnome2/bibletext_menu.c
+7=/home/terry/Projects/gnomesword1/src/gnome2/bibletext_dialog.c
+8=/home/terry/Projects/gnomesword1/src/gui/bibletext.h
+9=/home/terry/Projects/gnomesword1/src/gui/gtkhtml_display.h
+10=/home/terry/Projects/gnomesword1/src/gnome2/dictlex.c
 
 [Project Tree]
 0=0
-1=0:1
-2=0:4
+1=0:0
+2=0:1
+3=0:4
 
 [File Tree]
 0=0
@@ -171,11 +181,11 @@ filter.dir.ignore.hidden=0
 7=vpc->
 
 [find_text]
-0=gnomesword
-1=AC_PROG_MAK_SET
-2=AC_PROG_MAK_-SET
-3=SUBDIRS
-4=e_utf8_from_gtk_string
+0=utf8len
+1=text_str
+2=tmpbuf
+3=buf
+4=textColor
 
 [executer args]
 0=newconfigs
