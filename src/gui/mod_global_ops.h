@@ -25,23 +25,23 @@
 
 typedef struct _global_ops GLOBAL_OPS;
 struct  _global_ops {
-	gboolean
-	    words_in_red,
-	    strongs,
-	    morphs,
-	    footnotes,
-	    greekaccents,
-	    lemmas,
-	    scripturerefs,
-	    hebrewpoints, 
-	    hebrewcant, 
-	    headings, 
-	    variants_all, 
-	    variants_primary, 
-	    variants_secondary;
+	gboolean words_in_red;
+	gboolean strongs;
+	gboolean morphs;
+	gboolean footnotes;
+	gboolean greekaccents;
+	gboolean lemmas;
+	gboolean scripturerefs;
+	gboolean hebrewpoints; 
+	gboolean hebrewcant; 
+	gboolean headings; 
+	gboolean variants_all; 
+	gboolean variants_primary; 
+	gboolean variants_secondary;
 	gint module_type;
 };
-
+ 
+void gui_set_global_options(GLOBAL_OPS * ops);
 GLOBAL_OPS *gui_new_globals(void);
 void gui_add_global_option_items(gchar * mod_name, 
 				GtkWidget * module_options_menu, 

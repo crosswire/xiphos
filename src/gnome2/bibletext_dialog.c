@@ -191,11 +191,11 @@ static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
 {
 	if (!vt->is_rtol)
 		chapter_display(vt->html,
-			vt->mod_name, vt->tgs, key, show_key);
+			vt->mod_name, vt->ops, key, show_key);
 	else
 		chapter_display_textview(vt->text,
 					vt->mod_name,
-					vt->tgs, key, show_key);
+					vt->ops, key, show_key);
 
 }
 
@@ -641,7 +641,7 @@ void gui_keep_bibletext_dialog_in_sync(gchar * key)
 
 static void free_on_destroy(TEXT_DATA * vt)
 {
-	g_free(vt->tgs);
+	g_free(vt->ops);
 	dialog_list = g_list_remove(dialog_list, (TEXT_DATA *) vt);
 	g_free(vt);
 }
@@ -1399,6 +1399,7 @@ void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 	update_controls(cur_vt);
 }
 
+
 /******************************************************************************
  * Name
  *   gui_open_bibletext_dialog
@@ -1421,7 +1422,7 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	GtkWidget *popupmenu;
 
 	vt = g_new0(TEXT_DATA, 1);
-	vt->tgs = g_new0(TEXT_GLOBALS, 1);
+	vt->ops = gui_new_globals();
 	vt->mod_num = get_module_number(mod_name, TEXT_MODS);
 	vt->search_string = NULL;
 	vt->dialog = NULL;
@@ -1505,7 +1506,7 @@ void gui_shutdown_bibletext_dialog(void)
 		 * free each TEXT_DATA item created 
 		 */
 		g_free(vt->mod_name);
-		g_free(vt->tgs);
+		g_free(vt->ops);
 		g_free((TEXT_DATA *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
 	}

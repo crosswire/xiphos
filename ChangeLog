@@ -2,6 +2,9 @@
 
 	* added space between items in Bible and commentary dialog navigation 
 	  tool bars
+	* added global option support to gbs (for Andy's Life Time module)
+	* the footnotes in lifetimes look bad - in BT also 
+	  (may be a filter problem)
 
 
 2004-01-06  Andy <andyp@users.sf.net>
