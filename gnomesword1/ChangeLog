@@ -2,7 +2,7 @@
 
 	* clicking on verse (link) in preview pane (sidebar or search_dialog) 
 	  now displays verse in main text pane. 
-
+	* fixed bug #862463
 
 2003-12-17  Terry <tbiggs@users.sf.net>
 
