@@ -228,7 +228,20 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 1);
 		showSBVerseList(s);
+		
+		beginHTML(s->htmlRP, TRUE);
+		sprintf(buf,"</body</html>");	
+		utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
+		displayHTML(s->srhtml, utf8str, strlen(utf8str));
+		endHTML(s->srhtml);
+		
 	}
+	beginHTML(s->htmlRP, TRUE);
+	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found!</center></body</html>", count, s->found_color,s->searchText);	
+	utf8str = e_utf8_from_gtk_string(s->htmlRP, buf);
+	displayHTML(s->htmlRP, utf8str, strlen(utf8str));
+	endHTML(s->htmlRP);
+	
 	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
 	delete searchMgr;
 	g_string_free(tmpbuf,TRUE);

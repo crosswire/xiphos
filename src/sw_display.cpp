@@ -336,11 +336,19 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	delete Mgr;
 	return 0;
 }
+
+/*
+ * marks search word(s) or phrase in results view 
+ * *str is current verse in chapter display
+*/
 void GTKutf8ChapDisp::marksearchwords( GString *str )
 {
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len1, len2, len3, len4;
+	gchar closestr[40], openstr[40];
 	
+	sprintf(closestr,"</b></font>");
+	sprintf(openstr,"<font color=\"%s\"><b>",settings->found_color);
 	buf = str->str;
 	searchbuf = g_strdup(settings->searchText);
 	
@@ -363,48 +371,53 @@ void GTKutf8ChapDisp::marksearchwords( GString *str )
 		} else {
 			list = g_list_append(list,searchbuf);
 			count = 1;
-		}
+		}		
 		tmp = list;
-		//len1 = strlen(buf);
 		g_warning("%d", count);
+		
 		for(i=0; i<count;i++) {
 			g_warning("list = %s",(gchar*)tmp->data);
 			len1 = strlen(buf);
 			len2 = strlen((gchar*)tmp->data);
+			
 			if((tmpbuf = strstr(buf,(gchar*)tmp->data)) != NULL) {
 				len3 = strlen(tmpbuf);
 				len4 = len1 - len3;
 				str = g_string_insert (str,
                                             (len4+len2) ,
-                                             "</b>"); 		
+                                             closestr); 		
 				str = g_string_insert (str,
                                             len4 ,
-                                             "<b>");
-			}
+                                             openstr);
+			}			
 			buf = str->str;
 			tmp = g_list_next(tmp);
-		}
+		}		
 		g_list_free(tmp);
-		g_list_free(list);		
+		g_list_free(list);
+	
+	// else we have a phrase and only need to mark it
 	} else {
 		len1 = strlen(buf);
 		len2 = strlen(searchbuf);
 		tmpbuf = strstr(buf,searchbuf);
-		len3 = strlen(tmpbuf);
-		
+		len3 = strlen(tmpbuf);		
 		len4 = len1 - len3;
+		// place end tag first
 		str = g_string_insert (str,
                                             (len4+len2) ,
-                                             "</b>");
-		
+                                             closestr);
+		// then place start tag
 		str = g_string_insert (str,
                                             len4 ,
-                                             "<b>");
+                                             openstr);
 		
 	}	
+	// free g_strdup()
 	g_free(searchbuf);
 }
-/* --------------------------------------------------------------------------------------------- */
+
+// ---------------------------------------------
 char InterlinearDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[800], *buf, *rowcolor;

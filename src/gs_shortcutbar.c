@@ -908,6 +908,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	GtkWidget *scrolledwindow5;
 	GtkWidget *htmlviewer;
 	GtkWidget *frameTB;
+	GtkWidget *frameRP;
+	GtkWidget *scrolledwindowRP;
 
 	frameTB = gtk_frame_new(NULL);
 	gtk_widget_ref(frameTB);
@@ -1112,6 +1114,34 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox3);
 	gtk_container_add(GTK_CONTAINER(nbVL), vbox3);
+	
+	frameRP = gtk_frame_new(NULL);
+	gtk_widget_ref(frameRP);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameRP",frameRP ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_set_usize(frameRP, -2, 50);
+	gtk_widget_show(frameRP);
+	gtk_box_pack_start(GTK_BOX(vbox3), frameRP, TRUE, TRUE, 0);
+
+	scrolledwindowRP = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindowRP);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindowRP",
+				 scrolledwindowRP,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindowRP);
+	gtk_container_add(GTK_CONTAINER(frameRP), scrolledwindowRP);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindowRP), GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+				       
+	s->htmlRP = gtk_html_new();
+	gtk_widget_ref(s->htmlRP);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "s->htmlRP", s->htmlRP,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(s->htmlRP);
+	gtk_container_add(GTK_CONTAINER(scrolledwindowRP), s->htmlRP);
+	gtk_html_load_empty(GTK_HTML(s->htmlRP));
 
 	frame3 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame3);
@@ -1154,7 +1184,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow4);
 	gtk_container_add(GTK_CONTAINER(frame4), scrolledwindow4);
-	gtk_widget_set_usize(scrolledwindow4, -2, 251);
+	gtk_widget_set_usize(scrolledwindow4, -2, 175);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow4), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
