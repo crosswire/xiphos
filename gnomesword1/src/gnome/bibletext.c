@@ -24,8 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
-#include <gal/widgets/e-unicode.h>
 
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext.h"

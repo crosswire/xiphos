@@ -180,7 +180,7 @@ static void gui_set_dict_frame_label(DL_DATA *d)
  *   void
  */
 
-void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
+static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 		GtkNotebookPage * page,	gint page_num, GList * dl_list)
 {
 	DL_DATA *d; //, *d_old;

@@ -92,7 +92,7 @@ void update_interlinear_page()
 
 			++j;
 			
-			if((font_name = backend_get_module_font_name(mod_name)) != NULL)
+			if((font_name = get_module_font_name(mod_name)) != NULL)
 				use_gtkhtml_font = FALSE;
 			else
 				use_gtkhtml_font = TRUE;

@@ -170,7 +170,7 @@ module.source.files=\
 	src/gnome/gbs.c\
 	src/gnome/_percomm.c\
 	src/gnome/gbs_find.c\
-	src/gnome/gtkhtml_diaplay.c\
+	src/gnome/gtkhtml_display.c\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/text_view.c\
 	src/gnome/editor_menu.c\

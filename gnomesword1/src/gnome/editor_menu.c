@@ -189,8 +189,9 @@ static void on_open_activate(GtkMenuItem * menuitem,
 static void on_savenote_activate(GtkMenuItem * menuitem,
 				     GSHTMLEditorControlData * ecd)
 {
-	if (ecd->personal_comments)
-		editor_save_note(ecd->htmlwidget);
+	if (ecd->personal_comments) {		
+		editor_save_note(ecd->htmlwidget,ecd->filename);
+	}
 	ecd->changed = FALSE;
 	update_statusbar(ecd);
 }
@@ -215,7 +216,7 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 static void on_deletenote_activate(GtkMenuItem * menuitem,
 				       GSHTMLEditorControlData * ecd)
 {
-	delete_percomm_note();
+	delete_percomm_note(ecd->filename);
 	ecd->changed = FALSE;
 	update_statusbar(ecd);
 }
@@ -602,7 +603,7 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 static void show_tabs_activate(GtkMenuItem * menuitem,
 					GSHTMLEditorControlData * ecd)
 {
-	tabs(GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_percomm_tabs(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
 /******************************************************************************

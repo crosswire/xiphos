@@ -28,13 +28,15 @@ typedef struct _gbsdata GBS_DATA;
 #include "gui/gbs_find.h"
 
 struct _gbsdata {
+	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *ctree;
 	GtkWidget *showtabs;
-	gchar *bookName;
+	gchar *mod_name;
 	gchar *search_string;
-	gint booknum;
+	gint mod_num;
+	unsigned long offset;
 	gboolean has_key;
 	GBF_FIND_DIALOG *find_dialog;
 };
@@ -57,8 +59,7 @@ void gui_set_book_page_and_key(gint page_num, gchar * key);
 void gui_set_gbs_frame_label(GBS_DATA *g);
 void on_notebook_gbs_switch_page(GtkNotebook *notebook, 
 		GtkNotebookPage *page, gint page_num, GList *data_gbs);
-GtkWidget *gui_create_pm_gbs(GBS_DATA *gbs);
-void gui_create_gbs_pane(gchar *modName, gint count, GBS_DATA *p_gbs);
+void gui_add_new_gbs_pane(GBS_DATA * g);
 void gui_setup_gbs(GList *mods);
 void gui_shutdown_gbs(void);
 

@@ -461,7 +461,7 @@ gchar *get_word_or_selection(GtkWidget * html_widget, gboolean word)
 
 	if (html_engine_is_selection_active(html->engine)) {
 		key = html_engine_get_selection_string(html->engine);
-		key = g_strdelimit(key, ".,\"<>;:?", ' ');
+		key = g_strdelimit(key, ".,\"<>;:?s", ' ');
 		key = g_strstrip(key);
 		return g_strdup(key);	/* must be freed by calling function */
 	}
@@ -482,7 +482,7 @@ gchar *buttonpresslookupGS_HTML(GtkWidget * html_widget)
 		if (html_engine_is_selection_active(html->engine)) {
 			key =
 			    html_engine_get_selection_string(html->engine);
-			key = g_strdelimit(key, ".,\"<>;:", ' ');
+			key = g_strdelimit(key, ".,\"<>;:?s", ' ');
 			key = g_strstrip(key);
 			return g_strdup(key);	/* must be freed by calling function */
 		}
@@ -501,7 +501,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 	if (strcmp(modDesc, "current")) {
 				    /***  if menu choice was not 'use current dict' ***/
 		memset(modName, 0, 16);
-		backend_module_name_from_description(modName, modDesc);
+		module_name_from_description(modName, modDesc);
 	}
 
 	else {
@@ -532,7 +532,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	if (strcmp(modDesc, "current")) {
 				    /***  if menu choice was not 'use current dict' ***/
 		memset(modName, 0, 16);
-		backend_module_name_from_description(modName, modDesc);
+		module_name_from_description(modName, modDesc);
 	}
 
 	else {
