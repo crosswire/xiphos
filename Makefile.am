@@ -3,7 +3,7 @@
 SUBDIRS = 	macros \
 	    gnomesword
 
-EXTRA_DIST = gnomesword.glade gnomesword.kdevprj Gnomesword.prj
+EXTRA_DIST = gnomesword.glade Gnomesword.prj
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
 gnomesworddoc_DATA = \

@@ -14,7 +14,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <gnome.h>
+
 #include <stdlib.h>
 #include <string.h>
 #include "gs_rwphtml.h"
@@ -73,59 +73,71 @@ char GS_RWPHTML::ProcessText(char *text, int maxlen, const SWKey * key)
 			*to++ = '\"';
 			*to++ = '>';
 			first_letter = true;
-			gint i = 0;
+			int i = 0;
 			greek_str[0] = '\0';
 			while (*from != '\\') {
 				greek_str[i++] = *from;
 				greek_str[i + 1] = '\0';
 				from++;
 			}
-			//g_warning("str = %s , num = %d\n", greek_str, i);
 			for (int j = 0; j < i; j++) {
 				if ((first_letter)
 				    && (greek_str[j] == 'h')) {
 					if (greek_str[j + 1] == 'o') {
-						*to++ = greek_str[j];
+						*to++ = 'o';						;
 						first_letter = false;
+						++j;
 						continue;
 					} else if (greek_str[j + 1] == 'a') {
-						*to++ = greek_str[j];
+						*to++ = 'a';
 						first_letter = false;
+						++j;
 						continue;
 					} else if (greek_str[j + 1] == 'w') {
-						*to++ = greek_str[j];
+						*to++ = 'w';
 						first_letter = false;
+						++j;
 						continue;
 					} else if (greek_str[j + 1] == 'u') {
-						*to++ = greek_str[j];
+						*to++ = 'u';
 						first_letter = false;
+						++j;
+						continue;
+					} else if (greek_str[j + 1] ==
+						   -109) {
+						*to++ = 'w';
+						first_letter = false;
+						++j;
 						continue;
 					} else if (greek_str[j + 1] ==
 						   -120) {
 						*to++ = 'h';
 						first_letter = false;
+						++j;
 						continue;
 					} else if (greek_str[j + 1] == 'i') {
-						*to++ = greek_str[j];
+						*to++ = 'i';
 						first_letter = false;
+						++j;
 						continue;
 					}
 					first_letter = false;
 				}
-				if (*from == 39)
-					continue;
 				if ((greek_str[j] == 't')
 				    && (greek_str[j + 1] == 'h')) {
 					*to++ = 'q';
+					++j;
 					continue;
 				}
 				if ((greek_str[j] == 'c')
 				    && (greek_str[j + 1] == 'h')) {
 					*to++ = 'c';
+					++j;
 					continue;
 				}
 				if ((greek_str[j] == 'p')
 				    && (greek_str[j + 1] == 'h')) {
+				    	++j;
 					*to++ = 'f';
 					continue;
 				}
@@ -138,31 +150,23 @@ char GS_RWPHTML::ProcessText(char *text, int maxlen, const SWKey * key)
 					continue;
 				}
 				if (greek_str[j] == -109) {
+					if(greek_str[j+1] == 'i') ++j;
 					*to++ = 'w';
 					continue;
 				}
 				if (greek_str[j] == ' ')
 					first_letter = true;
 				if (greek_str[j] == 's') {
-					switch (greek_str[j + 1]) {
-					case '\\':
-						*to++ = 'V';
-						break;
-					case ' ':
-					case '.':
-					case ',':
-					case ')':
-						*to++ = 'V';
-						break;
-					default:
-						*to++ = 's';
-						break;
-					}
+					if(isalpha(greek_str[j + 1])) *to++ = 's';
+					else *to++ = 'V';
+					continue;					
+				}
+				if (greek_str[j] == '\'') {					
 					continue;
 				}
 				*to++ = greek_str[j];
 			}
-			*to++ = ' ';
+			
 			*to++ = '<';
 			*to++ = '/';
 			*to++ = 'F';

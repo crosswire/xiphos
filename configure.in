@@ -27,6 +27,13 @@ dnl Subst PACKAGE_MENU_DIR.
 PACKAGE_MENU_DIR="`gnome-config --datadir`/gnome/apps"
 AC_SUBST(PACKAGE_MENU_DIR)
 
+dnl Initialize libtool
+AM_PROG_LIBTOOL
+
+AC_PROG_CXX
+AC_LANG_CPLUSPLUS
+
+
 dnl **************************
 dnl  For the spell checker
 dnl **************************
@@ -110,7 +117,7 @@ AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking],spell
 AC_ARG_ENABLE(printing,[--enable-printing		enable printing],printing=$enableval,printing="no")
 AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
 AC_ARG_ENABLE(all,[--enable-all		enable all]all,all=$enableval,all="no")
-
+have_speller="no"
 dnl looking for aspell 
 if test "x$spelchecking" = xyes || test "x$all" = xyes; then
   AC_MSG_CHECKING([for aspell]) 
@@ -118,6 +125,7 @@ if test "x$spelchecking" = xyes || test "x$all" = xyes; then
   AC_FIND_FILE(aspell, $aspell_dirs, aspell_dir) 
   if test -r $aspell_dir/aspell; then 
    HAVE_ASPELL=yes 
+   have_speller="yes"
    AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
    echo "found"
   else
@@ -126,6 +134,7 @@ if test "x$spelchecking" = xyes || test "x$all" = xyes; then
    AC_FIND_FILE(ispell, $ispell_dirs, ispell_dir) 
    if test -r $ispell_dir/ispell; then 
     HAVE_ISPELL=yes 
+    have_speller="yes"
     AC_DEFINE(USE_ISPELL, 1, [Define if you want to use ispell])
     echo "found"
    fi
@@ -223,17 +232,6 @@ fi
 
 
 
-dnl Subst PACKAGE_PIXMAPS_DIR.
-PACKAGE_PIXMAPS_DIR="`gnome-config --datadir`/pixmaps/${PACKAGE}"
-AC_SUBST(PACKAGE_PIXMAPS_DIR)
-
-dnl Initialize libtool
-AM_PROG_LIBTOOL
-
-AC_PROG_CXX
-AC_LANG_CPLUSPLUS
-
-
 if $gtkhtml_ok; then
     EXTRA_GNOME_LIBS="`gnome-config --libs libglade gtkhtml gnomeui` $THREADS_LIBS `unicode-config --libs`"
     EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
@@ -261,12 +259,12 @@ if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnome
         AC_DEFINE(USE_SHORTCUTBAR, 1, [Define if you want to use the shortcutbar])
 fi
 
-AM_CONDITIONAL(SHORTCUTBAR,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xno)
-AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xyes || test "x$all" = xyes)
-AM_CONDITIONAL(SPELLING,test "x$spellchecking" = xyes && test "x$have_gnomeprint" = xno && test "x$have_gal" = xno)
-AM_CONDITIONAL(PRINTING,test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xno && test "x$have_gal" = xno)
-AM_CONDITIONAL(SPELLING_PRINTING,test "x$have_gnomeprint" = xyes && test "x$spellchecking" = xyes && test "x$have_gal" = xno)
-AM_CONDITIONAL(NO_OPS,test "x$have_gnomeprint" = xno && test "x$spellchecking" = xno && test "x$have_gal" = xno)
+AM_CONDITIONAL(SHORTCUTBAR,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xno)
+AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xyes)
+AM_CONDITIONAL(SPELLING,test "x$have_speller" = xyes && test "x$have_gnomeprint" = xno && test "x$have_gal" = xno)
+AM_CONDITIONAL(PRINTING,test "x$have_gnomeprint" = xyes && test "x$have_pixbuf" = xyes && test "x$have_speller" = xno && test "x$have_gal" = xno)
+AM_CONDITIONAL(SPELLING_PRINTING,test "x$have_gnomeprint" = xyes && test "x$have_pixbuf" = xyes && test "x$have_speller" = xyes && test "x$have_gal" = xno)
+AM_CONDITIONAL(NO_OPS,test "x$have_gnomeprint" = xno && test "x$have_speller" = xno && test "x$have_gal" = xno)
 
 AC_OUTPUT([
 Makefile
@@ -278,7 +276,7 @@ gnomesword/Makefile
 echo
 echo "Summary of GnomeSword configuration:"
 echo
-if test "x$spellchecking" = xyes || test "x$all" = xyes; then
+if test "x$have_speller" = xyes; then
         echo "Spellchecking:                    enabled"
 else
         echo "Spellchecking:                    disabled"
