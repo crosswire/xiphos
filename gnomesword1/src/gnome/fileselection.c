@@ -34,7 +34,7 @@
 
 #define BUFFER_SIZE 8192	/* input buffer size */
 
-
+ 
 /******************************************************************************
  * Name
  *   dialog_destroy

@@ -33,7 +33,6 @@
 #include "gui/editor_toolbar.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_spell.h"
-#include "gui/info_box.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
