@@ -649,10 +649,8 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count, GBS_DATA *p_gbs
 	
 	gtk_signal_connect (GTK_OBJECT (p_gbs->html), "button_release_event",
                       GTK_SIGNAL_FUNC (on_button_release_event), p_gbs);
-		      
-	SWDisplay *disp = new GtkHTMLEntryDisp(p_gbs->html,s);
-	mod->Disp(disp);
-	displays.insert(displays.begin(), disp);
+	
+			
 	addbooktoCTree(p_gbs->ctree, (gchar*)mod->Name());
 	popupmenu = create_pmGBS(p_gbs);
 	gnome_popup_menu_attach(popupmenu,p_gbs->html,NULL);
@@ -677,7 +675,11 @@ void setupSW_GBS(SETTINGS *s)
 			gbs->bookName = (*it).second->Name();			
 			gbs->bookDescription = (*it).second->Description();		
 			gbs->searchstring = NULL;
-			createGBS_Pane((*it).second, s, count, gbs) ;
+			createGBS_Pane((*it).second, s, count, gbs);
+			
+			SWDisplay *disp = new GtkHTMLEntryDisp(gbs->html,s);
+			(*it).second->Disp(disp);
+			displays.insert(displays.begin(), disp);
 			gbs_data = g_list_append(gbs_data, (GBS_DATA *) gbs);
 			sprintf(s->BookWindowModule,"%s",gbs->bookName);
 			++count;
