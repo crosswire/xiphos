@@ -547,7 +547,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "showdicts", "1");
 	xmlNewTextChild(section_node, NULL, "showtexts", "1");
 	xmlNewTextChild(section_node, NULL, "versestyle", "1");
-
+	xmlNewTextChild(section_node, NULL, "setup_canceled","0");
 
 	section_node = xmlNewChild(root_node, NULL, "modules", NULL);
 	xmlNewTextChild(section_node, NULL, "book", NULL);

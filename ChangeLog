@@ -1,3 +1,10 @@
+2003-12-01  Terry <tbiggs@users.sf.net>
+
+	* fixed bug #852017 (?) - gs will run if setup_druid is canceled
+	  but now pops up a dialog and asks if the user wishes to run the 
+	  preferences_dialog
+
+
 2003-11-30  Andy <andyp@users.sf.net>
 
 	* stripped out the colour-changing code from the setup_druid as
