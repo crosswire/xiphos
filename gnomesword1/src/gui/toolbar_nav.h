@@ -35,7 +35,7 @@ struct  _toolbar_nav {
 };
 extern NAV_BAR nav_bar;
 
-gchar *gui_update_nav_controls(gchar * key);
+gchar *gui_update_nav_controls(const gchar * key);
 GtkWidget *gui_create_nav_toolbar(void);
 	
 #ifdef __cplusplus
@@ -43,4 +43,3 @@ GtkWidget *gui_create_nav_toolbar(void);
 #endif
 
 #endif
-

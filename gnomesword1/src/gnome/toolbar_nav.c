@@ -52,7 +52,7 @@ static GtkWidget * cbe_freeform_lookup;
  * Synopsis
  *   #include "toolbar_nav.h"
  *
- *   gchar *gui_update_nav_controls(gchar * key)	
+ *   gchar *gui_update_nav_controls(const gchar * key)	
  *
  * Description
  *   updates the nav toolbar controls 
@@ -61,7 +61,7 @@ static GtkWidget * cbe_freeform_lookup;
  *   gchar *
  */ 
 
-gchar *gui_update_nav_controls(gchar * key)
+gchar *gui_update_nav_controls(const gchar * key)
 {
 	char *val_key;
 	gint cur_chapter = 8, cur_verse = 28;
