@@ -207,7 +207,7 @@ void main_set_book_mod(char * mod_name, unsigned long offset)
 	settings.book_mod = xml_get_value( "modules", "book");
 	
 	buf = g_strdup_printf("%lu", offset);
-	g_warning("main_set_book_mod = %s",buf);
+	//g_warning("main_set_book_mod = %s",buf);
 	xml_set_value("GnomeSword", "keys", "offset", buf);
 	settings.book_offset = atol(xml_get_value( "keys", "offset"));
 	g_free(buf);

@@ -105,12 +105,10 @@ static void set_gbs_label(gchar * mod_name)
 
 void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
 {
-	//GLOBAL_OPS *ops = gui_new_globals(settings.book_mod);
 	settings.comm_showing = FALSE;
 	settings.whichwindow = BOOK_WINDOW;
 	main_display_book();
 	set_gbs_label(mod_name);
-	//g_free(ops);
 }
 
 

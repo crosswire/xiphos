@@ -322,7 +322,12 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 //	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
 	
 	//sets the commentary mod and key
-	gui_change_module_and_key(pt->commentary_mod, pt->text_commentary_key);
+	if(pt->comm_showing)
+		gui_change_module_and_key(pt->commentary_mod, 
+					  pt->text_commentary_key);
+	else
+		gui_change_module_and_key(pt->book_mod, 
+					  pt->book_offset);
 //	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
@@ -428,10 +433,12 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   const gchar * dictlex_mod, 
 			   const gchar * book_mod, 
 			   const gchar * dictlex_key,
-			   const gchar * book_key)
+			   const gchar * book_offset,
+			   gboolean comm_showing)
 {	
 	if(page_change) 
 		return;
+	
 	
 	if(text_mod) {
 		if(cur_passage_tab->text_mod)
@@ -439,6 +446,7 @@ void gui_update_tab_struct(const gchar * text_mod,
 		cur_passage_tab->text_mod = g_strdup(text_mod);		
 	}
 	if(commentary_mod) {
+		cur_passage_tab->comm_showing = comm_showing;
 		if(cur_passage_tab->commentary_mod)
 			g_free(cur_passage_tab->commentary_mod);
 		cur_passage_tab->commentary_mod = g_strdup(commentary_mod);		
@@ -449,9 +457,15 @@ void gui_update_tab_struct(const gchar * text_mod,
 		cur_passage_tab->dictlex_mod = g_strdup(dictlex_mod);		
 	} 
 	if(book_mod) {
+		cur_passage_tab->comm_showing = comm_showing;
 		if(cur_passage_tab->book_mod)
 			g_free(cur_passage_tab->book_mod);
 		cur_passage_tab->book_mod = g_strdup(book_mod);		
+	}
+	if(book_offset) {
+		if(cur_passage_tab->book_offset)
+			g_free(cur_passage_tab->book_offset);
+		cur_passage_tab->book_offset = g_strdup(book_mod);		
 	}
 	/*if(text_commentary_key) {
 		if(cur_passage_tab->text_commentary_key)
@@ -493,7 +507,8 @@ void gui_open_passage_in_new_tab(gchar *verse_key)
 	pt->book_mod = NULL;
 	pt->text_commentary_key = g_strdup(verse_key);
 	pt->dictlex_key = g_strdup(settings.dictkey);
-	pt->book_key = NULL;
+	pt->book_offset = NULL;
+	pt->comm_showing = settings.comm_showing;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
@@ -541,27 +556,32 @@ void gui_open_module_in_new_tab(gchar *module)
 		pt->text_mod = g_strdup(module);
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
-		pt->book_mod = NULL;
+		pt->book_mod = g_strdup(settings.book_mod);
 		break;
 	case COMMENTARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(module);
 		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
-		pt->book_mod = NULL;
+		pt->book_mod = g_strdup(settings.book_mod);
 		break;
 	case DICTIONARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(settings.CommWindowModule);
 		pt->dictlex_mod = g_strdup(module);
-		pt->book_mod = NULL;
+		pt->book_mod = g_strdup(settings.book_mod);
 		break;
 	case BOOK_TYPE:
+		pt->text_mod = g_strdup(settings.MainWindowModule);
+		pt->commentary_mod = g_strdup(settings.CommWindowModule);
+		pt->dictlex_mod = g_strdup(settings.DictWindowModule);
+		pt->book_mod = g_strdup(module);
 		break;
 	}
 		
 	pt->text_commentary_key = g_strdup(settings.currentverse);
-	pt->dictlex_key = g_strdup(settings.dictkey);
-	pt->book_key = NULL;
+	pt->dictlex_key = g_strdup(settings.dictkey);	
+	pt->book_offset = NULL;
+	pt->comm_showing = settings.comm_showing;
 	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	set_current_tab(pt);
@@ -605,7 +625,7 @@ void gui_close_all_tabs(void)
 		g_free(pt->book_mod);
 		g_free(pt->text_commentary_key);
 		g_free(pt->dictlex_key);
-		g_free(pt->book_key);
+		g_free(pt->book_offset);
 		g_free(pt);
 		gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), i);
 	}
@@ -646,7 +666,7 @@ void gui_close_passage_tab(gint pagenum)
 	g_free(pt->book_mod);
 	g_free(pt->text_commentary_key);
 	g_free(pt->dictlex_key);
-	g_free(pt->book_key);
+	g_free(pt->book_offset);
 	g_free(pt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
@@ -689,7 +709,7 @@ void gui_notebook_main_setup(GList *ptlist)
 		pt->book_mod = NULL;
 		pt->text_commentary_key = NULL;
 		pt->dictlex_key = NULL;
-		pt->book_key = NULL;
+		pt->book_offset = NULL;
 
 		passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 		notebook_main_add_page(pt);
@@ -703,7 +723,7 @@ void gui_notebook_main_setup(GList *ptlist)
 		pt->book_mod = NULL;
 		pt->text_commentary_key = g_strdup(settings.currentverse);
 		pt->dictlex_key = g_strdup(settings.dictkey);
-		pt->book_key = NULL;
+		pt->book_offset = NULL;
 		passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 		notebook_main_add_page(pt);
 	}
@@ -758,7 +778,7 @@ void gui_notebook_main_shutdown(void)
 		g_free(pt->book_mod);
 		g_free(pt->text_commentary_key);
 		g_free(pt->dictlex_key);
-		g_free(pt->book_key);
+		g_free(pt->book_offset);
 		g_free((PASSAGE_TAB_INFO*)passage_list->data);
 		passage_list = g_list_next(passage_list);
 	}

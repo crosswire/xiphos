@@ -208,11 +208,6 @@ void main_setup_displays(void)
 	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm);
 }
 
-void main_delete_displays(void)
-{
-	if(sw.entryDisplay)
-		delete sw.entryDisplay;
-}
 /******************************************************************************
  * Name
  *  
