@@ -186,6 +186,10 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	DL_DATA *d; //, *d_old;
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
+	
+	if(!d->frame)
+		gui_add_new_dict_pane(d);
+	
 	//-- change tab label to current book name
 	cur_d = d;
 	
@@ -449,7 +453,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
  * Synopsis
  *   #include "_dictlex.h"
  *
- *   GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods)	
+ *   GtkWidget *gui_create_dictlex_pm(DL_DATA * dl)	
  *
  * Description
  *   create a popup menu for the dict/lex pane 
@@ -458,7 +462,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
  *   GtkWidget*
  */
 
-static GtkWidget *create_dictlex_pm(DL_DATA * dl, GList * mods)
+static GtkWidget *create_dictlex_pm(DL_DATA * dl)
 {
 	GtkWidget *pm;
 	GtkAccelGroup *pm_accels;
@@ -659,7 +663,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  *   void
  */
 
-static void create_dictlex_pane(DL_DATA *dl, gint count)
+static void create_dictlex_pane(DL_DATA *dl)
 {
 
 	GtkWidget *hpaned7;
@@ -670,7 +674,6 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
-	GtkWidget *label;
 
 	dl->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(dl->frame);
@@ -678,7 +681,7 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 				 dl->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->frame);
-	gtk_container_add(GTK_CONTAINER(settings.notebookDL), dl->frame);
+	gtk_container_add(GTK_CONTAINER(dl->vbox), dl->frame);
 
 	hpaned7 = gtk_hpaned_new();
 	gtk_widget_ref(hpaned7);
@@ -789,21 +792,6 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 			  dl->html);
 	gtk_html_load_empty(GTK_HTML(dl->html));
 
-	label = gtk_label_new(dl->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebookDL),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(settings.notebookDL), count),
-				   label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings.notebookDL),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK(settings.notebookDL),
-					  count),
-					 (gchar *) dl->mod_name);
-
 	gtk_signal_connect(GTK_OBJECT(dl->html),
 			"button_press_event",
 			GTK_SIGNAL_FUNC(html_button_pressed), 
@@ -820,6 +808,76 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 	gtk_signal_connect(GTK_OBJECT(dl->clist), "select_row",
 			   GTK_SIGNAL_FUNC(on_clistDictLex_select_row),
 			   dl);
+}
+/******************************************************************************
+ * Name
+ *  gui_add_new_dict_pane
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void gui_add_new_dict_pane(DL_DATA *dl)
+ *
+ * Description
+ *   creates a dictlex pane when user selects a new dictlex module
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_new_dict_pane(DL_DATA *dl)
+{	
+	GtkWidget *popup;
+	
+	create_dictlex_pane(dl);
+	popup = create_dictlex_pm(dl);
+	gnome_popup_menu_attach(popup, dl->html, NULL);
+}
+
+/******************************************************************************
+ * Name
+ *  add_vbox_to_notebook
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void add_vbox_to_notebook(TEXT_DATA * t)
+ *
+ * Description
+ *   adds a vbox and label to the dictlex notebook for each dictlex module
+ *
+ * Return value
+ *   void
+ */
+
+static void add_vbox_to_notebook(DL_DATA *dl)
+{	
+	GtkWidget *label;
+	
+	dl->vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(dl->vbox);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+			"dl->vbox", dl->vbox,
+			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(dl->vbox);
+	gtk_container_add(GTK_CONTAINER(settings.notebookDL), dl->vbox);	
+	
+	label = gtk_label_new(dl->mod_name);
+	gtk_widget_ref(label);
+	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebookDL),
+				   gtk_notebook_get_nth_page
+				   (GTK_NOTEBOOK(settings.notebookDL), dl->mod_num),
+				   label);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings.notebookDL),
+					 gtk_notebook_get_nth_page
+					 (GTK_NOTEBOOK(settings.notebookDL),
+					  dl->mod_num),
+					 (gchar *) dl->mod_name);
+
+	
 }
 
 /******************************************************************************
@@ -840,7 +898,6 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 
 void gui_setup_dictlex(GList *mods)
 {
-	GtkWidget *popup;
 	GList *tmp = NULL;
 	gchar *modname;
 	gchar *modbuf;
@@ -855,14 +912,13 @@ void gui_setup_dictlex(GList *mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		dl = g_new(DL_DATA, 1);
-		dl->mod_name = modname;
+		dl->frame = NULL;
 		dl->mod_num = count;
+		dl->mod_name = modname;
 		dl->search_string = NULL;
 		dl->find_dialog = NULL;	
 		dl->has_key = module_is_locked(dl->mod_name);
-		create_dictlex_pane(dl, count);
-		popup = create_dictlex_pm(dl, mods);
-		gnome_popup_menu_attach(popup, dl->html, NULL);
+		add_vbox_to_notebook(dl);
 		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
 		++count;
 		tmp = g_list_next(tmp);
