@@ -63,7 +63,7 @@
 #include "debug.h"
 #include "char_table.h"
 #include "support.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 
 #include <unistd.h>
 #include <fcntl.h>

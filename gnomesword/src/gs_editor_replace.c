@@ -27,7 +27,7 @@
 #include <config.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 #include "gs_editor_replace.h"
 
 

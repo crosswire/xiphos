@@ -40,7 +40,7 @@
 
 #include "gs_popup_cb.h"
 #include "gs_html.h"
-#include "gs_html_editor.h"
+#include "gs_editor.h"
 #include "gs_unlockkey_dlg.h"
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"
@@ -161,7 +161,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(getmodnameSWORD(2));
+	showmoduleinfoSWORD(getmodnameSWORD(2),FALSE);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -276,16 +276,16 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD((char *) user_data);
+	showmoduleinfoSWORD((char *) user_data,FALSE);
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_about_this_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if(!strcmp((gchar *)user_data,"Bible")) showmoduleinfoSWORD(getmodnameSWORD(0));
-	else if (!strcmp((gchar *)user_data,"commentary")) showmoduleinfoSWORD(getmodnameSWORD(1));
-	else if (!strcmp((gchar *)user_data,"dictionary")) showmoduleinfoSWORD(getmodnameSWORD(2));	
+	if(!strcmp((gchar *)user_data,"Bible")) showmoduleinfoSWORD(getmodnameSWORD(0),FALSE);
+	else if (!strcmp((gchar *)user_data,"commentary")) showmoduleinfoSWORD(getmodnameSWORD(1),FALSE);
+	else if (!strcmp((gchar *)user_data,"dictionary")) showmoduleinfoSWORD(getmodnameSWORD(2),FALSE);	
 	
 }
 

@@ -140,8 +140,6 @@ module.source.files=\
 	gs_information_sw.h\
 	sw_module_options.cpp\
 	sw_module_options.h\
-	gs_html_editor.c\
-	gs_html_editor.h\
 	gs_editor_replace.c\
 	gs_editor_replace.h\
 	gs_editor_toolbar.c\
@@ -151,7 +149,10 @@ module.source.files=\
 	gs_undock_int.c\
 	gs_undock_int.h\
 	gs_undock_sb.c\
-	gs_undock_sb.h
+	gs_undock_sb.h\
+	gs_gbs.c\
+	gs_getinfo_dlg.c\
+	gs_getinfo_dlg.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
