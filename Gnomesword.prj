@@ -28,7 +28,7 @@ anjuta.compatibility.level=1
 project.name=Gnomesword
 project.type=GNOME
 project.target.type=EXECUTABLE
-project.version=0.7.0
+project.version=0.7.2
 project.author=terry
 project.source.target=gnomesword
 
@@ -71,7 +71,7 @@ module.include.files=\
 	gs_editor_toolbar.h\
 	gs_file.h\
 	gs_find_dlg.h\
-	gs_gbs.h \
+	gs_gbs.h\
 	gs_getinfo_dlg.h\
 	gs_gnomesword.h\
 	gs_gui.h\
