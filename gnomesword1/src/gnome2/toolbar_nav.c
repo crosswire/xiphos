@@ -336,9 +336,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	GtkWidget *eventbox;
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
-	GtkTooltips *tooltips;
-
-	tooltips = gtk_tooltips_new();
+	GtkTooltips *tooltips = gtk_tooltips_new();
 
 	navbar_main.is_dialog = FALSE;
 	navbar_main.key = g_strdup(settings.currentverse);
