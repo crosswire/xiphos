@@ -26,12 +26,18 @@
 extern "C" {
 #endif
 
-GtkWidget *create_dlgShowDict(void);
+GtkWidget *create_dlgViewDict(void);
 void initSD(gchar *modName);
 
 /*
  * callbacks
  */
+void
+on_btnClose_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+void
+on_btnVDSync_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
 void
 on_dlgShowDict_destroy                 (GtkObject       *object,
                                         gpointer         user_data);
