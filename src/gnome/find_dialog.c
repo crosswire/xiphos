@@ -190,7 +190,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
 			    "dialog->dialog", dialog->dialog);
 	gtk_window_set_title(GTK_WINDOW(dialog->dialog),
-			     _("GnomeSWORD - Find"));
+			     _("GnomeSword - Find"));
 	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_DIALOG;
 	gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
 			      FALSE);

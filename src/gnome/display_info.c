@@ -138,7 +138,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			    "dialog_display_information",
 			    dialog_display_information);
 	gtk_window_set_title(GTK_WINDOW(dialog_display_information),
-			     _("GnomeSWORD"));
+			     _("GnomeSword"));
 	GTK_WINDOW(dialog_display_information)->type =
 	    GTK_WINDOW_DIALOG;
 	gtk_window_set_default_size(GTK_WINDOW

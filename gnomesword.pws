@@ -7,14 +7,14 @@ ShowLocals=true
 
 [filenumbers]
 0=1
-1=1
-2=283
-3=1
-4=1
-5=77
-6=102
-7=109
-8=178
+1=1058
+2=1063
+3=155
+4=797
+5=241
+6=67
+7=846
+8=1
 9=151
 10=35
 11=1
@@ -30,10 +30,10 @@ ShowLocals=true
 1=
 2=
 3=
-4=
-5=
+4=781,1087,
+5=237,714,1026,
 6=
-7=
+7=692,868,
 8=
 9=
 10=
@@ -46,8 +46,14 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/tbiggs/Projects/gnomesword1/configure.in
-1=/home/tbiggs/Projects/gnomesword1/Makefile.am
+0=/home/terry/Projects/gnomesword1/ChangeLog
+1=/home/terry/Projects/gnomesword1/src/gnome/editor_toolbar.c
+2=/home/terry/Projects/gnomesword1/src/gnome/main_window.c
+3=/home/terry/Projects/gnomesword1/src/gnome/_editor.c
+4=/home/terry/Projects/gnomesword1/src/gnome/studypad.c
+5=/home/terry/Projects/gnomesword1/src/gnome/percomm.c
+6=/home/terry/Projects/gnomesword1/src/gui/_editor.h
+7=/home/terry/Projects/gnomesword1/src/gnome/editor_menu.c
 
 [replace_text]
 0=dialog->dialog
@@ -60,14 +66,14 @@ ShowLocals=true
 7=gui_unlock_key
 
 [find_text]
-0=Settings
-1=toolbar
-2=print
-3=toolbarOptions
-4=create_text_pane
-5=view_book_menu_accels
-6=view_menu_accels
-7=find
+0=view_menu
+1=->frame
+2=hboxstyle
+3=vboxSP
+4=vbox
+5=vbox6
+6=handlebox18
+7=vbox2
 
 [executer args]
 0=newconfigs

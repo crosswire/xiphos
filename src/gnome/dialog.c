@@ -252,7 +252,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	gs_dialog = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(gs_dialog), "gs_dialog",
 			    gs_dialog);
-	gtk_window_set_title(GTK_WINDOW(gs_dialog), _("GnomeSWORD"));
+	gtk_window_set_title(GTK_WINDOW(gs_dialog), _("GnomeSword"));
 	gtk_window_set_policy(GTK_WINDOW(gs_dialog), TRUE, TRUE, FALSE);
 
 	info->dialog = gs_dialog;

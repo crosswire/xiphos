@@ -245,7 +245,7 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),
 			    "dialog_mod_font", dialog_mod_font);
 	gtk_window_set_title(GTK_WINDOW(dialog_mod_font),
-			     _("Set Module Font - GnomeSWORD"));
+			     _("Set Module Font - GnomeSword"));
 	GTK_WINDOW(dialog_mod_font)->type = GTK_WINDOW_DIALOG;
 	gtk_window_set_default_size(GTK_WINDOW(dialog_mod_font), 301,
 				    164);
