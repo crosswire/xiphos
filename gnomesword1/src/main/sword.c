@@ -58,9 +58,9 @@ int gbs_treekey_get_parent(unsigned long offset)
  *   void
  */ 
 
-void module_name_from_description(char *mod_name, char *description)
+char *module_name_from_description(char *description)
 {
-	backend_module_name_from_description(mod_name, description);
+	backend_module_name_from_description(description);
 }
 
 

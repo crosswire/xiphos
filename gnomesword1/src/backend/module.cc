@@ -49,13 +49,13 @@ using std::map;
 using std::list;
 using namespace sword;
 
-typedef map < string, string > modDescMap;
+//typedef map < string, string > modDescMap;
 #include "backend/mgr.hh"
 
 #define CIPHER_KEY_LEN 16
 
 
-modDescMap descriptionMap;
+//modDescMap descriptionMap;
 
 /******************************************************************************
  * static  global to this file only 
@@ -189,10 +189,18 @@ int backend_is_module_rtl(char *mod_name)
  *   void
  */
 
-void backend_module_name_from_description(char *mod_name,
-					  char *mod_desc)
+char * backend_module_name_from_description(char *mod_desc)
 {
-	strcpy(mod_name, descriptionMap[mod_desc].c_str());
+	ModMap::iterator it;
+	
+	for (it = sw.main_mgr->Modules.begin(); it != sw.main_mgr->Modules.end(); it++) {
+		if(!strcmp((*it).second->Description(),mod_desc))
+			return strdup((*it).second->Name());
+		
+	}
+	return NULL;
+	//strcpy(mod_name, descriptionMap[mod_desc].c_str());
+	
 }
 
 
@@ -311,10 +319,10 @@ NAME_TYPE *backend_get_next_module_name(void)
 
 	if (begin != end) {
 
-		descriptionMap[string
+		/*descriptionMap[string
 			       ((char *) (*begin).second->
 				Description())] =
-		    string((char *) (*begin).second->Name());
+		    string((char *) (*begin).second->Name());*/
 
 		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
 			nt.type = TEXT_TYPE;

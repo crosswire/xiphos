@@ -226,11 +226,13 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
 
-	gchar module_name[16];
+	gchar *module_name = NULL;
 
-	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);
-	gui_change_module_and_key(module_name, settings.currentverse);
+	module_name = module_name_from_description((gchar *) user_data);
+	if(module_name) {
+		gui_change_module_and_key(module_name, settings.currentverse);
+		g_free(module_name);
+	}
 }
 
 
@@ -745,7 +747,8 @@ static void add_global_option_items(TEXT_DATA * t)
 	GtkWidget *menu;
 	GSList *group = NULL;
 
-	if (check_for_global_option(t->mod_name, "GBFRedLetterWords")) {
+	if ((check_for_global_option(t->mod_name, "GBFRedLetterWords"))
+	    || (check_for_global_option(t->mod_name, "OSISRedLetterWords"))) {
 		t->tgs->words_in_red =
 		    load_module_options(t->mod_name,
 					"Words of Christ in Red");
@@ -1017,11 +1020,13 @@ static void add_global_option_items(TEXT_DATA * t)
 static void on_new_dialog_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar module_name[16];
+	gchar *module_name = NULL;
 
-	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);
-	gui_open_bibletext_dialog(module_name);
+	module_name = module_name_from_description((gchar *) user_data);
+	if(module_name) {
+		gui_open_bibletext_dialog(module_name);
+		g_free(module_name);
+	}
 }
 
 
