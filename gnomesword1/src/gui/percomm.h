@@ -24,7 +24,7 @@
 
 #include <gnome.h>
 #include "main/percomm.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 typedef struct _percomm_data PC_DATA;
 struct _percomm_data {

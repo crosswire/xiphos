@@ -29,7 +29,7 @@
 #include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/percomm.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/toolbar_style.h"
 #include "gui/toolbar_edit.h"
 #include "gui/editor_menu.h"
@@ -224,7 +224,7 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	GTK_CHECK_MENU_ITEM(p->ec->show_tabs)->active =
 	    settings.percomm_tabs;
 	gui_percomm_tabs(settings.percomm_tabs);
-	update_statusbar(p->ec);
+	gui_update_statusbar(p->ec);
 }
 
 /******************************************************************************
@@ -273,7 +273,7 @@ static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
 {
 	ecd->changed = TRUE;
 	//file_changed = TRUE;
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 	return 1;
 }
 
@@ -297,7 +297,7 @@ static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
 static void html_load_done(GtkWidget * html,
 			   GSHTMLEditorControlData * ecd)
 {
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 }
 
 /******************************************************************************
@@ -451,7 +451,7 @@ static void create_percomm_pane(PC_DATA * p)
 	GtkWidget *toolbar;
 
 	p->ec->personal_comments = TRUE;
-
+	
 	vboxPC = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxPC);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxPC",
@@ -580,7 +580,7 @@ void gui_display_percomm(gchar * key)
 			      key, FALSE);
 		free(text_str);
 	}
-	update_statusbar(cur_p->ec);
+	gui_update_statusbar(cur_p->ec);
 }
 
 /******************************************************************************
@@ -621,7 +621,7 @@ void gui_set_percomm_page_and_key(gint page_num, gchar * key)
 			      key, FALSE);
 		free(text_str);
 	}
-	update_statusbar(cur_p->ec);
+	gui_update_statusbar(cur_p->ec);
 	percomm_display_change = TRUE;
 }
 
@@ -773,8 +773,8 @@ void gui_setup_percomm(GList * mods)
 		p->ec = gs_html_editor_control_data_new();
 		strcpy(p->ec->key, settings.currentverse);
 		p->ec->htmlwidget = NULL;
-		p->ec->stylebar = settings.show_style_bar;
-		p->ec->editbar = settings.show_edit_bar;
+		p->ec->stylebar = load_percomm_options(p->mod_name, "Style bar");
+		p->ec->editbar = load_percomm_options(p->mod_name, "Edit bar");
 		strcpy(p->ec->filename, p->mod_name);
 		add_vbox_to_notebook(p);
 		percomm_list =

@@ -68,6 +68,9 @@ gint settings_init(void)
 	gchar *old_gbs = NULL;
 	gboolean have_old = FALSE;
 	
+	/* set program title */
+	strcpy(settings.program_title, "GnomeSword");
+	
 	/* Get home dir */
 	if ((settings.homedir = getenv("HOME")) == NULL) {
 		g_error("$HOME is not set!");

@@ -224,15 +224,22 @@ int backend_load_properties(char *path)
 	    atoi(settingsInfo["User Options"]["showcomms"].c_str());
 	settings.showdicts =
 	    atoi(settingsInfo["User Options"]["showdicts"].c_str());
-	settings.show_style_bar =
-	    atoi(settingsInfo["User Options"]["showstylebar"].c_str());
-	settings.show_edit_bar =
-	    atoi(settingsInfo["User Options"]["showeditbar"].c_str());
+	    
+	/* editor options */
+	settings.use_studypad =
+	    atoi(settingsInfo["Editor Options"]["Use StudyPad"].
+		 c_str());
 	settings.show_style_bar_sp =
-	    atoi(settingsInfo["User Options"]["showstylebar studypad"].
+	    atoi(settingsInfo["Editor Options"]["showstylebar studypad"].
 		 c_str());
 	settings.show_edit_bar_sp =
-	    atoi(settingsInfo["User Options"]["showeditbar studypad"].
+	    atoi(settingsInfo["Editor Options"]["showeditbar studypad"].
+		 c_str());
+	settings.use_studypad_dialog =
+	    atoi(settingsInfo["Editor Options"]["Use Studypad Dialog"].
+		 c_str());
+	settings.use_percomm_dialog =
+	    atoi(settingsInfo["Editor Options"]["Use Percomm Dialog"].
 		 c_str());
 
 	return true;
@@ -417,14 +424,18 @@ int backend_save_properties(int shutdown)
 		    isON(settings.showcomms);
 		settingsInfo["User Options"]["showdicts"] =
 		    isON(settings.showdicts);
-		settingsInfo["User Options"]["showstylebar"] =
-		    isON(settings.show_style_bar);
-		settingsInfo["User Options"]["showeditbar"] =
-		    isON(settings.show_edit_bar);
-		settingsInfo["User Options"]["showstylebar studypad"] =
+		    
+		/* editor options */
+		settingsInfo["Editor Options"]["Use StudyPad"] =
+		    isON(settings.use_studypad);
+		settingsInfo["Editor Options"]["showstylebar studypad"] =
 		    isON(settings.show_style_bar_sp);
-		settingsInfo["User Options"]["showeditbar studypad"] =
+		settingsInfo["Editor Options"]["showeditbar studypad"] =
 		    isON(settings.show_edit_bar_sp);
+		settingsInfo["Editor Options"]["Use Studypad Dialog"] =
+		    isON(settings.use_studypad_dialog);
+		settingsInfo["Editor Options"]["Use Percomm Dialog"] =
+		    isON(settings.use_percomm_dialog);
 	}
 	settingsInfo.Save();
 	return true;
@@ -518,10 +529,11 @@ int backend_create_properties_from_setup(void)
 	settingsInfo["User Options"]["showtexts"] = "1";
 	settingsInfo["User Options"]["showcomms"] = "1";
 	settingsInfo["User Options"]["showdicts"] = "1";
-	settingsInfo["User Options"]["showeditbar"] = "1";
-	settingsInfo["User Options"]["showstylebar"] = "1";
-	settingsInfo["User Options"]["showeditbar studypad"] = "1";
-	settingsInfo["User Options"]["showstylebar studypad"] = "1";
+	settingsInfo["Editor Options"]["Use StudyPad"] = "1";
+	settingsInfo["Editor Options"]["showeditbar studypad"] = "1";
+	settingsInfo["Editor Options"]["showstylebar studypad"] = "1";
+	settingsInfo["Editor Options"]["Use Studypad Dialog"] = "0";
+	settingsInfo["Editor Options"]["Use Percomm Dialog"] = "0";
 
 	settingsInfo.Save();
 	return true;
@@ -598,10 +610,11 @@ int backend_create_properties(void)
 	settingsInfo["User Options"]["showtexts"] = "1";
 	settingsInfo["User Options"]["showcomms"] = "1";
 	settingsInfo["User Options"]["showdicts"] = "1";
-	settingsInfo["User Options"]["showeditbar"] = "1";
-	settingsInfo["User Options"]["showstylebar"] = "1";
-	settingsInfo["User Options"]["showeditbar studypad"] = "1";
-	settingsInfo["User Options"]["showstylebar studypad"] = "1";
+	settingsInfo["Editor Options"]["Use StudyPad"] = "1";
+	settingsInfo["Editor Options"]["showeditbar studypad"] = "1";
+	settingsInfo["Editor Options"]["showstylebar studypad"] = "1";
+	settingsInfo["Editor Options"]["Use Studypad Dialog"] = "0";
+	settingsInfo["Editor Options"]["Use Percomm Dialog"] = "0";
 
 	settingsInfo.Save();
 	return true;

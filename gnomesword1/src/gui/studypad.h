@@ -23,13 +23,15 @@
 #define __STUDYPAD_H_
 
 #include <gnome.h>
-#include "gui/_editor.h"
+#include "gui/editor.h"
 
 void gui_studypad_can_close(void);
 gint save_file_program_end(GtkWidget *htmlwidget, gchar *filename);
 gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint load_file(gchar *filename, GSHTMLEditorControlData *ecd);
-GtkWidget *gui_create_studypad_control(GtkWidget *notebook);
+gint gui_open_studypad(GtkWidget *notebook, gchar * file_name, 
+						gint page_num);
+gint gui_open_studypad_dialog(gchar * file_name);
 
 #endif
 
