@@ -238,7 +238,6 @@ initSWORD(GtkWidget *mainform)
 	}
 #endif /* USE_SHORTCUTBAR */
         //-- setup displays for sword modules
-    	//noteeditor = new NoteEditor();
 	GTKEntryDisp::__initialize();
 	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
@@ -287,9 +286,9 @@ initSWORD(GtkWidget *mainform)
 				curMod->AddRenderFilter(gbftohtml); 
 #endif /* USE_GTKHTML */				
 				curMod->Disp(HTMLchapDisplay);
-			}else if(!strcmp(sourceformat, "Plain") && !strcmp(font, "Greek")){ //-- 
+			}else if(!strcmp(sourceformat, "Plain") )/*&& !strcmp(font, "Greek")){ //-- 
 				curMod->Disp(chapDisplay);				
-			}else if(!strcmp(sourceformat, "Plain") && strcmp(font, "Greek")){ //-- we need plain to html filter			
+			}else if(!strcmp(sourceformat, "Plain") && strcmp(font, "Greek"))*/{ //-- we need plain to html filter			
 			  	curMod->AddRenderFilter(plaintohtml);
 				curMod->Disp(HTMLchapDisplay);
 			} /*else			
