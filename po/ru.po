@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword 0.7.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-25 14:40-0500\n"
+"POT-Creation-Date: 2003-11-27 16:49-0500\n"
 "PO-Revision-Date: 2003-06-05 15:31+0300\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -67,85 +67,85 @@ msgstr "Модули могут загружаться с проекта SWORD."
 msgid "The Sword Project"
 msgstr "О проекте Sword"
 
-#: src/gnome2/bibletext_dialog.c:868 src/gnome2/html.c:424
+#: src/gnome2/bibletext_dialog.c:870 src/gnome2/html.c:424
 #, fuzzy
 msgid "Go to "
 msgstr "Перейти к %s"
 
-#: src/gnome2/bibletext_dialog.c:922 src/gnome2/parallel_dialog.c:534
+#: src/gnome2/bibletext_dialog.c:924 src/gnome2/parallel_dialog.c:534
 #: src/gnome2/toolbar_nav.c:471
 msgid "Romans"
 msgstr "Римлянам"
 
-#: src/gnome2/bibletext_dialog.c:947 src/gnome2/commentary_dialog.c:668
+#: src/gnome2/bibletext_dialog.c:949 src/gnome2/commentary_dialog.c:670
 #: src/gnome2/parallel_dialog.c:558
 msgid "Romans 8:28"
 msgstr "Римлянам 8:28"
 
-#: src/gnome2/bibletext_menu.c:759 src/gnome2/commentary_menu.c:681
+#: src/gnome2/bibletext_menu.c:759 src/gnome2/commentary_menu.c:683
 msgid "Words of Christ in Red"
 msgstr ""
 
-#: src/gnome2/bibletext_menu.c:780 src/gnome2/commentary_menu.c:702
+#: src/gnome2/bibletext_menu.c:780 src/gnome2/commentary_menu.c:704
 msgid "Strong's Numbers"
 msgstr "Номера Стронга"
 
-#: src/gnome2/bibletext_menu.c:800 src/gnome2/commentary_menu.c:722
+#: src/gnome2/bibletext_menu.c:800 src/gnome2/commentary_menu.c:724
 msgid "Morphological Tags"
 msgstr "Морфологические теги"
 
-#: src/gnome2/bibletext_menu.c:818 src/gnome2/commentary_menu.c:739
+#: src/gnome2/bibletext_menu.c:818 src/gnome2/commentary_menu.c:741
 msgid "Footnotes"
 msgstr "Нижние заметки"
 
-#: src/gnome2/bibletext_menu.c:835 src/gnome2/commentary_menu.c:756
+#: src/gnome2/bibletext_menu.c:835 src/gnome2/commentary_menu.c:758
 msgid "Greek Accents"
 msgstr "Греческие ударения"
 
-#: src/gnome2/bibletext_menu.c:851 src/gnome2/commentary_menu.c:772
+#: src/gnome2/bibletext_menu.c:851 src/gnome2/commentary_menu.c:774
 msgid "Lemmas"
 msgstr "Аннотации"
 
-#: src/gnome2/bibletext_menu.c:870 src/gnome2/commentary_menu.c:790
+#: src/gnome2/bibletext_menu.c:870 src/gnome2/commentary_menu.c:792
 msgid "Scripture Cross-references"
 msgstr "Перекрестные ссылки Писания"
 
-#: src/gnome2/bibletext_menu.c:889 src/gnome2/commentary_menu.c:809
+#: src/gnome2/bibletext_menu.c:889 src/gnome2/commentary_menu.c:811
 msgid "Hebrew Vowel Points"
 msgstr "Черты гласных иврита"
 
-#: src/gnome2/bibletext_menu.c:908 src/gnome2/commentary_menu.c:828
+#: src/gnome2/bibletext_menu.c:908 src/gnome2/commentary_menu.c:830
 msgid "Hebrew Cantillation"
 msgstr "Кантиляции иврита"
 
-#: src/gnome2/bibletext_menu.c:925 src/gnome2/commentary_menu.c:844
+#: src/gnome2/bibletext_menu.c:925 src/gnome2/commentary_menu.c:846
 msgid "Headings"
 msgstr "Заголовки"
 
-#: src/gnome2/bibletext_menu.c:944 src/gnome2/commentary_menu.c:863
+#: src/gnome2/bibletext_menu.c:944 src/gnome2/commentary_menu.c:865
 #, fuzzy
 msgid "Variants"
 msgstr "Печать"
 
-#: src/gnome2/bibletext_menu.c:954 src/gnome2/commentary_menu.c:874
+#: src/gnome2/bibletext_menu.c:954 src/gnome2/commentary_menu.c:876
 #, fuzzy
 msgid "All Readings"
 msgstr "Допустить преобразование"
 
-#: src/gnome2/bibletext_menu.c:970 src/gnome2/commentary_menu.c:891
+#: src/gnome2/bibletext_menu.c:970 src/gnome2/commentary_menu.c:893
 msgid "Primary Readings"
 msgstr ""
 
-#: src/gnome2/bibletext_menu.c:986 src/gnome2/commentary_menu.c:908
+#: src/gnome2/bibletext_menu.c:986 src/gnome2/commentary_menu.c:910
 msgid "Secondary Readings"
 msgstr ""
 
-#: src/gnome2/bibletext_menu.c:1152 src/gnome2/commentary_menu.c:1207
-#: src/gnome2/editor_menu.c:987 src/gnome2/toolbar_edit.c:451
+#: src/gnome2/bibletext_menu.c:1152 src/gnome2/commentary_menu.c:1211
+#: src/gnome2/editor_menu.c:991 src/gnome2/toolbar_edit.c:453
 msgid "Open"
 msgstr "Открыть"
 
-#: src/gnome2/bibletext_menu.c:1153 src/gnome2/commentary_menu.c:1208
+#: src/gnome2/bibletext_menu.c:1153 src/gnome2/commentary_menu.c:1212
 #, fuzzy
 msgid "in a dialog"
 msgstr "Открыть диалог поиска"
@@ -155,13 +155,13 @@ msgstr "Открыть диалог поиска"
 #.
 #. * file menu
 #.
-#: src/gnome2/bibletext_menu.c:1165 src/gnome2/commentary_menu.c:1218
-#: src/gnome2/editor_menu.c:933 src/gnome2/studypad.c:82
-#: src/gnome2/toolbar_edit.c:110
+#: src/gnome2/bibletext_menu.c:1165 src/gnome2/commentary_menu.c:1222
+#: src/gnome2/editor_menu.c:937 src/gnome2/studypad.c:83
+#: src/gnome2/toolbar_edit.c:111
 msgid "File"
 msgstr "Файл"
 
-#: src/gnome2/bibletext_menu.c:1175 src/gnome2/commentary_menu.c:1238
+#: src/gnome2/bibletext_menu.c:1175 src/gnome2/commentary_menu.c:1242
 #, fuzzy
 msgid "Sync with Main Window"
 msgstr "Синхронизировать с главным окном"
@@ -170,47 +170,47 @@ msgstr "Синхронизировать с главным окном"
 msgid "Keep in Sync"
 msgstr ""
 
-#: src/gnome2/bibletext_menu.c:1202 src/gnome2/commentary_menu.c:1283
+#: src/gnome2/bibletext_menu.c:1202 src/gnome2/commentary_menu.c:1287
 #, fuzzy
 msgid "Open New Dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome2/bibletext_menu.c:1218 src/gnome2/commentary_menu.c:1299
+#: src/gnome2/bibletext_menu.c:1218 src/gnome2/commentary_menu.c:1303
 #, fuzzy
 msgid "Open Module"
 msgstr "Просмотр модуля"
 
-#: src/gnome2/bibletext_menu.c:1242 src/gnome2/commentary_menu.c:1320
-#: src/gnome2/editor_menu.c:1001 src/gnome2/toolbar_edit.c:511
+#: src/gnome2/bibletext_menu.c:1242 src/gnome2/commentary_menu.c:1324
+#: src/gnome2/editor_menu.c:1005 src/gnome2/toolbar_edit.c:513
 msgid "Print"
 msgstr "Печать"
 
-#: src/gnome2/bibletext_menu.c:1252 src/gnome2/commentary_menu.c:1330
-#: src/gnome2/dictlex_dialog.c:539 src/gnome2/editor_spell.c:623
-#: src/gnome2/find_dialog.c:268 src/gnome2/search_dialog.c:2200
+#: src/gnome2/bibletext_menu.c:1252 src/gnome2/commentary_menu.c:1334
+#: src/gnome2/dictlex_dialog.c:541 src/gnome2/editor_spell.c:623
+#: src/gnome2/find_dialog.c:268 src/gnome2/search_dialog.c:2201
 msgid "Close"
 msgstr ""
 
 #.
 #. * edit menu
 #.
-#: src/gnome2/bibletext_menu.c:1264 src/gnome2/commentary_menu.c:1342
+#: src/gnome2/bibletext_menu.c:1264 src/gnome2/commentary_menu.c:1346
 #, fuzzy
 msgid "Edit"
 msgstr "Правка"
 
 #. pmInt_accels =
 #. gtk_menu_ensure_uline_accel_group(GTK_MENU(pmInt));
-#: src/gnome2/bibletext_menu.c:1271 src/gnome2/commentary_menu.c:1349
-#: src/gnome2/editor_menu.c:1028 src/gnome2/main_menu.c:615
-#: src/gnome2/parallel_view.c:1201 src/gnome2/toolbar_edit.c:538
+#: src/gnome2/bibletext_menu.c:1271 src/gnome2/commentary_menu.c:1353
+#: src/gnome2/editor_menu.c:1032 src/gnome2/main_menu.c:615
+#: src/gnome2/parallel_view.c:1212 src/gnome2/toolbar_edit.c:540
 msgid "Copy"
 msgstr "Копировать"
 
-#: src/gnome2/bibletext_menu.c:1275 src/gnome2/commentary_menu.c:1353
-#: src/gnome2/editor_menu.c:1051 src/gnome2/find_dialog.c:185
+#: src/gnome2/bibletext_menu.c:1275 src/gnome2/commentary_menu.c:1357
+#: src/gnome2/editor_menu.c:1055 src/gnome2/find_dialog.c:185
 #: src/gnome2/find_dialog.c:258 src/gnome2/find_dialog.c:338
-#: src/gnome2/toolbar_edit.c:574
+#: src/gnome2/toolbar_edit.c:576
 msgid "Find"
 msgstr "Найти"
 
@@ -219,216 +219,240 @@ msgstr "Найти"
 msgid "Note"
 msgstr "Сохранить заметку"
 
-#: src/gnome2/bibletext_menu.c:1301 src/gnome2/commentary_menu.c:1372
-#: src/gnome2/parallel_view.c:1215
+#: src/gnome2/bibletext_menu.c:1301 src/gnome2/commentary_menu.c:1376
+#: src/gnome2/parallel_view.c:1226
 msgid "Module Options"
 msgstr "Опции модуля"
 
-#: src/gnome2/bibletext_menu.c:1309 src/gnome2/commentary_menu.c:1380
+#: src/gnome2/bibletext_menu.c:1309 src/gnome2/commentary_menu.c:1384
 msgid "Set Module Font"
 msgstr "Установка шрифта модуля"
 
-#: src/gnome2/bibletext_menu.c:1314 src/gnome2/commentary_menu.c:1385
+#: src/gnome2/bibletext_menu.c:1314 src/gnome2/commentary_menu.c:1389
 #, fuzzy
 msgid "Set font for this module"
 msgstr "Об этом модуле"
 
-#: src/gnome2/bibletext_menu.c:1328 src/gnome2/commentary_menu.c:1400
+#: src/gnome2/bibletext_menu.c:1328 src/gnome2/commentary_menu.c:1404
 msgid "Lookup Selection"
 msgstr "Выборочный просмотр"
 
-#: src/gnome2/bibletext_menu.c:1373 src/gnome2/commentary_menu.c:1445
+#: src/gnome2/bibletext_menu.c:1373 src/gnome2/commentary_menu.c:1449
 msgid "Unlock This Module"
 msgstr "Разблокировать модуль"
 
 # src/gs_preferences_dlg.c
-#: src/gnome2/bibletext_menu.c:1388 src/gnome2/commentary_menu.c:1459
+#: src/gnome2/bibletext_menu.c:1388 src/gnome2/commentary_menu.c:1463
 #: src/gnome2/preferences_dialog.c:1823
 msgid "Show"
 msgstr "Показывать"
 
-#: src/gnome2/bibletext_menu.c:1396 src/gnome2/commentary_menu.c:1467
+#: src/gnome2/bibletext_menu.c:1396 src/gnome2/commentary_menu.c:1471
 #, fuzzy
 msgid "Tabs"
 msgstr "Показать вкладки"
 
-#: src/gnome2/bookmarks_menu.c:606
+#: src/gnome2/bookmarks_menu.c:607
+#, fuzzy
+msgid "Edit?"
+msgstr "Правка"
+
+#: src/gnome2/bookmarks_menu.c:608
 #, fuzzy
 msgid "Edit Bookmark"
 msgstr "Добавить закладку"
 
-#: src/gnome2/bookmarks_menu.c:776
+#: src/gnome2/bookmarks_menu.c:778
 msgid "Restore Bookmark Folder"
 msgstr ""
 
 #: src/gnome2/bookmarks_menu.c:847
+#, fuzzy
+msgid "Remove Item(s)?"
+msgstr "Удалить элемент(ы)"
+
+#: src/gnome2/bookmarks_menu.c:850
 msgid "Really REMOVE the selected item (and all its subitems)?"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1004
+#: src/gnome2/bookmarks_menu.c:1007
+#, fuzzy
+msgid "Bookmark?"
+msgstr "Закладки"
+
+#: src/gnome2/bookmarks_menu.c:1008
 msgid "Add Bookmark"
 msgstr "Добавить закладку"
 
-#: src/gnome2/bookmarks_menu.c:1010
+#: src/gnome2/bookmarks_menu.c:1014
 #, fuzzy
 msgid "Label: "
 msgstr "Метка"
 
-#: src/gnome2/bookmarks_menu.c:1011
+#: src/gnome2/bookmarks_menu.c:1015
 #, fuzzy
 msgid "Verse: "
 msgstr "Список стиха"
 
-#: src/gnome2/bookmarks_menu.c:1012 src/gnome2/editor_menu.c:584
+#: src/gnome2/bookmarks_menu.c:1016 src/gnome2/editor_menu.c:588
 #, fuzzy
 msgid "Module: "
 msgstr "Модуль"
 
-#: src/gnome2/bookmarks_menu.c:1091
+#: src/gnome2/bookmarks_menu.c:1095 src/gnome2/bookmarks_treeview.c:94
+#, fuzzy
+msgid "Folder Name?"
+msgstr "Ввести стих"
+
+#: src/gnome2/bookmarks_menu.c:1096
 msgid "Enter Folder Name - use no '|'"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1092
+#: src/gnome2/bookmarks_menu.c:1097
 msgid "Folder Name"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1093 src/gnome2/bookmarks_treeview.c:96
+#: src/gnome2/bookmarks_menu.c:1098 src/gnome2/bookmarks_treeview.c:97
 msgid "Folder: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1139
+#: src/gnome2/bookmarks_menu.c:1144
 msgid "Remove Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1140
+#: src/gnome2/bookmarks_menu.c:1145
 msgid "Remove folder and save it"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1146
+#: src/gnome2/bookmarks_menu.c:1151
 msgid "Restore Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1147
+#: src/gnome2/bookmarks_menu.c:1152
 msgid "Restore saved folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1156
+#: src/gnome2/bookmarks_menu.c:1161
 #, fuzzy
 msgid "Open in a dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome2/bookmarks_menu.c:1157
+#: src/gnome2/bookmarks_menu.c:1162
 #, fuzzy
 msgid "Open this bookmark in a dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome2/bookmarks_menu.c:1162
+#: src/gnome2/bookmarks_menu.c:1167
 msgid "New Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1163
+#: src/gnome2/bookmarks_menu.c:1168
 #, fuzzy
 msgid "Add new Folder to selected Folder"
 msgstr "Добавить новую подгруппу в выбранную группу"
 
-#: src/gnome2/bookmarks_menu.c:1168
+#: src/gnome2/bookmarks_menu.c:1173
 #, fuzzy
 msgid "Insert Bookmark"
 msgstr "Вставить здесь новую закладку"
 
-#: src/gnome2/bookmarks_menu.c:1169
+#: src/gnome2/bookmarks_menu.c:1174
 msgid "Insert new bookmark here"
 msgstr "Вставить здесь новую закладку"
 
-#: src/gnome2/bookmarks_menu.c:1174
+#: src/gnome2/bookmarks_menu.c:1179
 #, fuzzy
 msgid "Add Bookmark at Root"
 msgstr "Добавить закладку"
 
-#: src/gnome2/bookmarks_menu.c:1175
+#: src/gnome2/bookmarks_menu.c:1180
 msgid "Add new bookmark item"
 msgstr "Добавить новый елемент закладки"
 
-#: src/gnome2/bookmarks_menu.c:1180
+#: src/gnome2/bookmarks_menu.c:1185
 #, fuzzy
 msgid "_Edit Item"
 msgstr "Правка элемента"
 
-#: src/gnome2/bookmarks_menu.c:1181
+#: src/gnome2/bookmarks_menu.c:1186
 msgid "Edit bookmark item"
 msgstr "Правка элемента закладки"
 
-#: src/gnome2/bookmarks_menu.c:1186
+#: src/gnome2/bookmarks_menu.c:1191
 msgid "Make _Point to New "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1188
+#: src/gnome2/bookmarks_menu.c:1193
 msgid "Change the bookmark to point to the current reading point"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1193
+#: src/gnome2/bookmarks_menu.c:1198
 msgid "Delete Item(s)"
 msgstr "Удалить элемент(ы)"
 
-#: src/gnome2/bookmarks_menu.c:1194
+#: src/gnome2/bookmarks_menu.c:1199
 msgid "Delete item and it's siblings"
 msgstr "Удалить элемент и его уровни"
 
-#: src/gnome2/bookmarks_menu.c:1200
+#: src/gnome2/bookmarks_menu.c:1205
 msgid "Expand All"
 msgstr "Выделить все"
 
-#: src/gnome2/bookmarks_menu.c:1201
+#: src/gnome2/bookmarks_menu.c:1206
 msgid "Expand all Bookmarks groups"
 msgstr "Выделить все группы закладок"
 
-#: src/gnome2/bookmarks_menu.c:1206
+#: src/gnome2/bookmarks_menu.c:1211
 msgid "Collapse All"
 msgstr "Уничтожить все"
 
-#: src/gnome2/bookmarks_menu.c:1207
+#: src/gnome2/bookmarks_menu.c:1212
 msgid "Collapse all Bookmarks groups"
 msgstr "Уничтожить все группы закладок"
 
-#: src/gnome2/bookmarks_menu.c:1213
+#: src/gnome2/bookmarks_menu.c:1218
 msgid "Allow Reordering"
 msgstr "Допустить преобразование"
 
-#: src/gnome2/bookmarks_menu.c:1215
+#: src/gnome2/bookmarks_menu.c:1220
 #, fuzzy
 msgid "Toggle Reording - allow items to be moved from one folder to another"
 msgstr ""
 "Переключать преобразование - допускать перемещение пунктов перетягиванием"
 
-#: src/gnome2/bookmarks_menu.c:1221
+#: src/gnome2/bookmarks_menu.c:1226
 #, fuzzy
 msgid "Bibletime Bookmarks"
 msgstr "Сохранить закладки"
 
-#: src/gnome2/bookmarks_menu.c:1222
+#: src/gnome2/bookmarks_menu.c:1227
 #, fuzzy
 msgid "Load Bibletime Bookmarks"
 msgstr "Сохранить закладки"
 
-#: src/gnome2/bookmarks_menu.c:1227
+#: src/gnome2/bookmarks_menu.c:1232
 msgid "Remove - Restore"
 msgstr ""
 
-#: src/gnome2/bookmarks_treeview.c:94
+#: src/gnome2/bookmarks_treeview.c:95
 #, fuzzy
 msgid "Enter Folder Name"
 msgstr "Ввести стих"
 
-#: src/gnome2/cipher_key_dialog.c:61
+#: src/gnome2/cipher_key_dialog.c:59
+msgid "Cipher Key?"
+msgstr ""
+
+#: src/gnome2/cipher_key_dialog.c:62
 msgid "Enter Cipher Key: "
 msgstr ""
 
-#: src/gnome2/commentary_dialog.c:615 src/gnome2/dictlex_dialog.c:519
+#: src/gnome2/commentary_dialog.c:617 src/gnome2/dictlex_dialog.c:521
 #: src/gnome2/parallel_dialog.c:518
 msgid "Sync"
 msgstr "Синхронизация"
 
-#: src/gnome2/commentary_dialog.c:616
+#: src/gnome2/commentary_dialog.c:618
 #, fuzzy
 msgid "Toggle Sync with main window"
 msgstr "Синхронизировать с главным окном"
@@ -436,154 +460,170 @@ msgstr "Синхронизировать с главным окном"
 #.
 #. * navigate menu
 #.
-#: src/gnome2/commentary_menu.c:1227
+#: src/gnome2/commentary_menu.c:1231
 msgid "Navigate"
 msgstr ""
 
-#: src/gnome2/commentary_menu.c:1245
+#: src/gnome2/commentary_menu.c:1249
 msgid "Sync with NavBar"
 msgstr ""
 
-#: src/gnome2/commentary_menu.c:1258
+#: src/gnome2/commentary_menu.c:1262
 #, fuzzy
 msgid "Prev Comment"
 msgstr "Печатать комментарий"
 
-#: src/gnome2/commentary_menu.c:1262
+#: src/gnome2/commentary_menu.c:1266
 #, fuzzy
 msgid "Next Comment"
 msgstr "Печатать комментарий"
 
-#: src/gnome2/commentary_menu.c:1272
+#: src/gnome2/commentary_menu.c:1276
 #, fuzzy
 msgid "Chapter Heading"
 msgstr "Заголовки"
 
-#: src/gnome2/commentary_menu.c:1277
+#: src/gnome2/commentary_menu.c:1281
 #, fuzzy
 msgid "Book Heading"
 msgstr "Заголовки"
 
-#: src/gnome2/dictlex_dialog.c:520
+#: src/gnome2/dictlex_dialog.c:522
 msgid "Load current key"
 msgstr ""
 
-#: src/gnome2/dictlex_dialog.c:540
+#: src/gnome2/dictlex_dialog.c:542
 msgid "Close Dialog"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:97 src/gnome2/editor_menu.c:152
+#: src/gnome2/editor_menu.c:96 src/gnome2/editor_menu.c:152
+#: src/gnome2/studypad.c:79 src/gnome2/toolbar_edit.c:107
+#, fuzzy
+msgid "Save File?"
+msgstr "Открыть файл"
+
+#: src/gnome2/editor_menu.c:98 src/gnome2/editor_menu.c:154
 msgid "has been modified."
 msgstr ""
 
-#: src/gnome2/editor_menu.c:98 src/gnome2/editor_menu.c:153
-#: src/gnome2/studypad.c:84 src/gnome2/toolbar_edit.c:112
+#: src/gnome2/editor_menu.c:99 src/gnome2/editor_menu.c:155
+#: src/gnome2/studypad.c:85 src/gnome2/toolbar_edit.c:113
 #, fuzzy
 msgid "Do you wish to save it?"
 msgstr "``%s'' был изменен.  Хотите сохранить?"
 
-#: src/gnome2/editor_menu.c:117
+#: src/gnome2/editor_menu.c:118
 msgid "-untitled-"
 msgstr "-без заголовка-"
 
-#: src/gnome2/editor_menu.c:255 src/gnome2/toolbar_edit.c:198
+#: src/gnome2/editor_menu.c:257
+#, fuzzy
+msgid "Delete Note?"
+msgstr "Удалить заметку"
+
+#: src/gnome2/editor_menu.c:258 src/gnome2/toolbar_edit.c:200
 msgid "Are you sure you want"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:256 src/gnome2/toolbar_edit.c:199
+#: src/gnome2/editor_menu.c:259 src/gnome2/toolbar_edit.c:201
 msgid "to delete the note for"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:580
+#: src/gnome2/editor_menu.c:583
+#, fuzzy
+msgid "Link?"
+msgstr "Ссылка..."
+
+#: src/gnome2/editor_menu.c:584
 #, fuzzy
 msgid "Add Reference Link"
 msgstr "GnomeSWORD Добавить сноску на ссылку"
 
-#: src/gnome2/editor_menu.c:582
+#: src/gnome2/editor_menu.c:586
 #, fuzzy
 msgid "Reference: "
 msgstr "Сноска "
 
-#: src/gnome2/editor_menu.c:843
+#: src/gnome2/editor_menu.c:847
 msgid "Toolbars"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:855
+#: src/gnome2/editor_menu.c:859
 msgid "Style Bar"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:863
+#: src/gnome2/editor_menu.c:867
 #, fuzzy
 msgid "Edit Bar"
 msgstr "Правка"
 
-#: src/gnome2/editor_menu.c:948 src/gnome2/toolbar_edit.c:481
+#: src/gnome2/editor_menu.c:952 src/gnome2/toolbar_edit.c:483
 msgid "Save Note"
 msgstr "Сохранить заметку"
 
-#: src/gnome2/editor_menu.c:953
+#: src/gnome2/editor_menu.c:957
 msgid "Export Note"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:958 src/gnome2/toolbar_edit.c:494
+#: src/gnome2/editor_menu.c:962 src/gnome2/toolbar_edit.c:496
 msgid "Delete Note"
 msgstr "Удалить заметку"
 
-#: src/gnome2/editor_menu.c:966 src/gnome2/toolbar_edit.c:452
+#: src/gnome2/editor_menu.c:970 src/gnome2/toolbar_edit.c:454
 msgid "Open File"
 msgstr "Открыть файл"
 
-#: src/gnome2/editor_menu.c:971
+#: src/gnome2/editor_menu.c:975
 msgid "Save Entry"
 msgstr "Сохранить поле"
 
-#: src/gnome2/editor_menu.c:976
+#: src/gnome2/editor_menu.c:980
 msgid "Delete Entry"
 msgstr "Удалить поле"
 
-#: src/gnome2/editor_menu.c:983 src/gnome2/search_dialog.c:2600
-#: src/gnome2/search_dialog.c:2772 src/gnome2/toolbar_edit.c:434
+#: src/gnome2/editor_menu.c:987 src/gnome2/search_dialog.c:2601
+#: src/gnome2/search_dialog.c:2773 src/gnome2/toolbar_edit.c:436
 msgid "New"
 msgstr "Новый"
 
-#: src/gnome2/editor_menu.c:991 src/gnome2/toolbar_edit.c:467
-#: src/gnome2/toolbar_edit.c:480
+#: src/gnome2/editor_menu.c:995 src/gnome2/toolbar_edit.c:469
+#: src/gnome2/toolbar_edit.c:482
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/gnome2/editor_menu.c:996
+#: src/gnome2/editor_menu.c:1000
 msgid "Save AS"
 msgstr "Сохранить как"
 
-#: src/gnome2/editor_menu.c:1009 src/gnome2/main_menu.c:792
+#: src/gnome2/editor_menu.c:1013 src/gnome2/main_menu.c:792
 msgid "_Edit"
 msgstr "Правка"
 
 #. edit2_menu_accels =
 #. gtk_menu_ensure_uline_accel_group(GTK_MENU(edit2_menu));
-#: src/gnome2/editor_menu.c:1024 src/gnome2/toolbar_edit.c:528
+#: src/gnome2/editor_menu.c:1028 src/gnome2/toolbar_edit.c:530
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/gnome2/editor_menu.c:1032 src/gnome2/toolbar_edit.c:548
+#: src/gnome2/editor_menu.c:1036 src/gnome2/toolbar_edit.c:550
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/gnome2/editor_menu.c:1036
+#: src/gnome2/editor_menu.c:1040
 msgid "Spell Check"
 msgstr "Проверка орфографии"
 
-#: src/gnome2/editor_menu.c:1047 src/gnome2/toolbar_edit.c:558
+#: src/gnome2/editor_menu.c:1051 src/gnome2/toolbar_edit.c:560
 msgid "Undo"
 msgstr "Отменить действие"
 
-#: src/gnome2/editor_menu.c:1056 src/gnome2/editor_replace.c:224
+#: src/gnome2/editor_menu.c:1060 src/gnome2/editor_replace.c:224
 #: src/gnome2/editor_replace.c:382 src/gnome2/editor_replace.c:457
-#: src/gnome2/editor_spell.c:646 src/gnome2/toolbar_edit.c:585
+#: src/gnome2/editor_spell.c:646 src/gnome2/toolbar_edit.c:587
 msgid "Replace"
 msgstr "Переместить"
 
-#: src/gnome2/editor_menu.c:1060
+#: src/gnome2/editor_menu.c:1064
 msgid "Link..."
 msgstr "Ссылка..."
 
@@ -625,7 +665,7 @@ msgstr "Проверка орфографии"
 msgid "Start"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:629 src/gnome2/search_dialog.c:2391
+#: src/gnome2/editor_spell.c:629 src/gnome2/search_dialog.c:2392
 #, fuzzy
 msgid "Options"
 msgstr "Опции модуля"
@@ -680,7 +720,7 @@ msgstr "GomeSword - Сохранить файл заметки"
 msgid "Enter Word or Phrase"
 msgstr "Ввести стих"
 
-#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2401
+#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2402
 #: src/gnome2/search_sidebar.c:531
 msgid "Case Sensitive"
 msgstr "Регистрозависимый"
@@ -769,8 +809,8 @@ msgstr ""
 msgid "Copy highlighted text from main window"
 msgstr "Копировать выделенный текст из главного окна"
 
-#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:2109
-#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:222
+#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:2135
+#: src/gnome2/search_sidebar.c:222
 msgid "Search"
 msgstr "Поиск"
 
@@ -779,7 +819,7 @@ msgstr "Поиск"
 msgid "Shortcut Bar Search"
 msgstr "Панель ярлыков"
 
-#: src/gnome2/main_menu.c:628
+#: src/gnome2/main_menu.c:628 src/gnome2/search_dialog.c:2117
 #, fuzzy
 msgid "Advanced Search"
 msgstr "Последний поиск"
@@ -932,32 +972,32 @@ msgstr "Тексты Библии"
 msgid "Dict/Lex"
 msgstr "Словари/Лексиконы"
 
-#: src/gnome2/parallel_view.c:1210
+#: src/gnome2/parallel_view.c:1221
 msgid "Detach/Attach"
 msgstr "Отсоединить/Присоединить"
 
 #. build change parallel modules submenu
-#: src/gnome2/parallel_view.c:1228
+#: src/gnome2/parallel_view.c:1239
 #, fuzzy
 msgid "Change parallel 1"
 msgstr "Изменить подстрочный 1"
 
-#: src/gnome2/parallel_view.c:1231
+#: src/gnome2/parallel_view.c:1242
 #, fuzzy
 msgid "Change parallel 2"
 msgstr "Изменить подстрочный 2"
 
-#: src/gnome2/parallel_view.c:1234
+#: src/gnome2/parallel_view.c:1245
 #, fuzzy
 msgid "Change parallel 3"
 msgstr "Изменить подстрочный 3"
 
-#: src/gnome2/parallel_view.c:1237
+#: src/gnome2/parallel_view.c:1248
 #, fuzzy
 msgid "Change parallel 4"
 msgstr "Изменить подстрочный 4"
 
-#: src/gnome2/parallel_view.c:1240
+#: src/gnome2/parallel_view.c:1251
 #, fuzzy
 msgid "Change parallel 5"
 msgstr "Изменить подстрочный 5"
@@ -965,7 +1005,7 @@ msgstr "Изменить подстрочный 5"
 #.
 #. * parallel page
 #.
-#: src/gnome2/parallel_view.c:1307 src/gnome2/parallel_view.c:1330
+#: src/gnome2/parallel_view.c:1318 src/gnome2/parallel_view.c:1341
 #: src/gnome2/parallel_dialog.c:225 src/gnome2/parallel_dialog.c:227
 #: src/gnome2/sidebar.c:461 src/gnome2/sidebar.c:473
 #: src/gnome2/toolbar_nav.c:438 src/gnome2/utilities.c:182
@@ -1355,106 +1395,126 @@ msgstr ""
 msgid "Search Finished"
 msgstr "Опции поиска"
 
-#: src/gnome2/search_dialog.c:1301
+#: src/gnome2/search_dialog.c:1300
+#, fuzzy
+msgid "Clear List?"
+msgstr "Очистить список истории"
+
+#: src/gnome2/search_dialog.c:1302
 msgid "Do you really want to CLEAR the module list?"
 msgstr ""
 
 #: src/gnome2/search_dialog.c:1358
+#, fuzzy
+msgid "Remove Module?"
+msgstr "Модуль"
+
+#: src/gnome2/search_dialog.c:1360
 msgid ""
 "Do you really want to REMOVE\n"
 " the selected module?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1566
+#: src/gnome2/search_dialog.c:1567
+#, fuzzy
+msgid "Delete Range?"
+msgstr "Удалить заметку"
+
+#: src/gnome2/search_dialog.c:1569
 msgid "Are you sure you want ot delete this range?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1626
+#: src/gnome2/search_dialog.c:1628
+#, fuzzy
+msgid "Delete List?"
+msgstr "Удалить заметку"
+
+#: src/gnome2/search_dialog.c:1630
 msgid "Are you sure you want ot delete this list?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2143
+#: src/gnome2/search_dialog.c:2144
 #, fuzzy
 msgid "<Module>"
 msgstr "Модуль"
 
-#: src/gnome2/search_dialog.c:2161
+#: src/gnome2/search_dialog.c:2162
 msgid " for "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2183
+#: src/gnome2/search_dialog.c:2184
 msgid "Begin"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2183
+#: src/gnome2/search_dialog.c:2184
 #, fuzzy
 msgid "Begin search"
 msgstr "Начать поиск"
 
-#: src/gnome2/search_dialog.c:2201
+#: src/gnome2/search_dialog.c:2202
 #, fuzzy
 msgid "Close search dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome2/search_dialog.c:2222
+#: src/gnome2/search_dialog.c:2223
 #, fuzzy
 msgid "Scope"
 msgstr "Без контекста"
 
-#: src/gnome2/search_dialog.c:2238
+#: src/gnome2/search_dialog.c:2239
 #, fuzzy
 msgid "Entire Module   "
 msgstr "Просмотр модуля"
 
-#: src/gnome2/search_dialog.c:2244
+#: src/gnome2/search_dialog.c:2245
 msgid "Search entire module(s)"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2250
+#: src/gnome2/search_dialog.c:2251
 msgid "Current Results   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2256
+#: src/gnome2/search_dialog.c:2257
 msgid "Use the results of the last search for the search scope"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2261
+#: src/gnome2/search_dialog.c:2262
 msgid "Custom Range   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2268
+#: src/gnome2/search_dialog.c:2269
 msgid "Use a custom search range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2287 src/gnome2/search_dialog.c:2883
+#: src/gnome2/search_dialog.c:2288 src/gnome2/search_dialog.c:2884
 #, fuzzy
 msgid "Modules"
 msgstr "Модуль"
 
-#: src/gnome2/search_dialog.c:2303
+#: src/gnome2/search_dialog.c:2304
 #, fuzzy
 msgid "Single Module"
 msgstr "Просмотр модуля"
 
-#: src/gnome2/search_dialog.c:2309
+#: src/gnome2/search_dialog.c:2310
 msgid "Use a single module for the search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2316
+#: src/gnome2/search_dialog.c:2317
 #, fuzzy
 msgid "Module List"
 msgstr "Опции модуля"
 
-#: src/gnome2/search_dialog.c:2323
+#: src/gnome2/search_dialog.c:2324
 msgid "Use current module list for search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2328
+#: src/gnome2/search_dialog.c:2329
 #, fuzzy
 msgid "Custom List"
 msgstr "Нумерованый список"
 
-#: src/gnome2/search_dialog.c:2336
+#: src/gnome2/search_dialog.c:2337
 msgid "Use a custom module list for the search"
 msgstr ""
 
@@ -1482,176 +1542,176 @@ msgstr ""
 #. FALSE, FALSE, 0);
 #.
 #.
-#: src/gnome2/search_dialog.c:2358 src/gnome2/search_sidebar.c:481
+#: src/gnome2/search_dialog.c:2359 src/gnome2/search_sidebar.c:481
 msgid "Search Type"
 msgstr "Тип поиска"
 
-#: src/gnome2/search_dialog.c:2369 src/gnome2/search_sidebar.c:492
+#: src/gnome2/search_dialog.c:2370 src/gnome2/search_sidebar.c:492
 msgid "Multi Word"
 msgstr "Многословный"
 
-#: src/gnome2/search_dialog.c:2376 src/gnome2/search_sidebar.c:504
+#: src/gnome2/search_dialog.c:2377 src/gnome2/search_sidebar.c:504
 msgid "Regular Expression"
 msgstr "Постоянные выражения"
 
-#: src/gnome2/search_dialog.c:2384 src/gnome2/search_sidebar.c:513
+#: src/gnome2/search_dialog.c:2385 src/gnome2/search_sidebar.c:513
 msgid "Exact Phrase"
 msgstr "Точная фраза"
 
-#: src/gnome2/search_dialog.c:2408
+#: src/gnome2/search_dialog.c:2409
 #, fuzzy
 msgid "Include Strongs Numbers"
 msgstr "Переключить номера Стронга"
 
-#: src/gnome2/search_dialog.c:2413
+#: src/gnome2/search_dialog.c:2414
 #, fuzzy
 msgid "In modules that have Strongs Numbers"
 msgstr "Переключить номера Стронга"
 
-#: src/gnome2/search_dialog.c:2417
+#: src/gnome2/search_dialog.c:2418
 #, fuzzy
 msgid "Include Morph Tags"
 msgstr "Номера Стронга и морфологических тегов"
 
-#: src/gnome2/search_dialog.c:2422
+#: src/gnome2/search_dialog.c:2423
 msgid "In modules that have Morph Tags"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2426
+#: src/gnome2/search_dialog.c:2427
 #, fuzzy
 msgid "Include Footnotes"
 msgstr "Переключить нижние заметки"
 
-#: src/gnome2/search_dialog.c:2431
+#: src/gnome2/search_dialog.c:2432
 msgid "In modules that have Footnotes"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2433
+#: src/gnome2/search_dialog.c:2434
 #, fuzzy
 msgid "Search Criteria"
 msgstr "Поиск персонального"
 
 # src/gs_preferences_dlg.c
-#: src/gnome2/search_dialog.c:2458
+#: src/gnome2/search_dialog.c:2459
 #, fuzzy
 msgid "Show Context"
 msgstr "Показывать комментарии"
 
-#: src/gnome2/search_dialog.c:2459
+#: src/gnome2/search_dialog.c:2460
 #, fuzzy
 msgid "Show In Main window"
 msgstr "Показать %s в главном окне"
 
-#: src/gnome2/search_dialog.c:2476
+#: src/gnome2/search_dialog.c:2477
 #, fuzzy
 msgid "Save Results"
 msgstr "Поиск результатов"
 
-#: src/gnome2/search_dialog.c:2478
+#: src/gnome2/search_dialog.c:2479
 #, fuzzy
 msgid "Save Search Results as Bookmarks"
 msgstr "Просмотр поиска результатов"
 
-#: src/gnome2/search_dialog.c:2496
+#: src/gnome2/search_dialog.c:2497
 #, fuzzy
 msgid "Clear"
 msgstr "Очистить"
 
-#: src/gnome2/search_dialog.c:2497
+#: src/gnome2/search_dialog.c:2498
 msgid "clear lists for new search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2520
+#: src/gnome2/search_dialog.c:2521
 msgid "Search Results"
 msgstr "Поиск результатов"
 
-#: src/gnome2/search_dialog.c:2536
+#: src/gnome2/search_dialog.c:2537
 msgid "Preview"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2550
+#: src/gnome2/search_dialog.c:2551
 #, fuzzy
 msgid "Found"
 msgstr "Ограничения"
 
-#: src/gnome2/search_dialog.c:2570
+#: src/gnome2/search_dialog.c:2571
 #, fuzzy
 msgid "Results"
 msgstr "Поиск результатов"
 
-#: src/gnome2/search_dialog.c:2601
+#: src/gnome2/search_dialog.c:2602
 msgid "Create new custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2612 src/gnome2/search_dialog.c:2797
+#: src/gnome2/search_dialog.c:2613 src/gnome2/search_dialog.c:2798
 #: src/gnome2/sidebar.c:1004
 msgid "Save List"
 msgstr "Сохранить список"
 
-#: src/gnome2/search_dialog.c:2613
+#: src/gnome2/search_dialog.c:2614
 msgid "Save custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2630 src/gnome2/search_dialog.c:2815
-#: src/gnome2/search_dialog.c:2924 src/gnome2/toolbar_edit.c:493
+#: src/gnome2/search_dialog.c:2631 src/gnome2/search_dialog.c:2816
+#: src/gnome2/search_dialog.c:2925 src/gnome2/toolbar_edit.c:495
 #, fuzzy
 msgid "Delete"
 msgstr "Удалить заметку"
 
-#: src/gnome2/search_dialog.c:2631
+#: src/gnome2/search_dialog.c:2632
 msgid "Delete selected range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2685
+#: src/gnome2/search_dialog.c:2686
 msgid "Range Name"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2695
+#: src/gnome2/search_dialog.c:2696
 msgid "Range Text"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2705
+#: src/gnome2/search_dialog.c:2706
 msgid "eg. Matt-John;Rev4"
 msgstr ""
 
 #. ****************************************************************************
-#: src/gnome2/search_dialog.c:2742
+#: src/gnome2/search_dialog.c:2743
 msgid "Custom Ranges"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2773
+#: src/gnome2/search_dialog.c:2774
 msgid "Create new module list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2785 src/gnome2/search_dialog.c:2786
-#: src/gnome2/search_dialog.c:2905
+#: src/gnome2/search_dialog.c:2786 src/gnome2/search_dialog.c:2787
+#: src/gnome2/search_dialog.c:2906
 #, fuzzy
 msgid "Clear Module List"
 msgstr "Очистить список истории"
 
-#: src/gnome2/search_dialog.c:2798
+#: src/gnome2/search_dialog.c:2799
 msgid "Save list of modules"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2816
+#: src/gnome2/search_dialog.c:2817
 msgid "Delete selected list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2874
+#: src/gnome2/search_dialog.c:2875
 #, fuzzy
 msgid "List Name"
 msgstr "Список"
 
-#: src/gnome2/search_dialog.c:2906
+#: src/gnome2/search_dialog.c:2907
 msgid "Clear all modules from list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2926
+#: src/gnome2/search_dialog.c:2927
 msgid "Remove selected module from list"
 msgstr ""
 
 #. ********************************************************************
-#: src/gnome2/search_dialog.c:2959
+#: src/gnome2/search_dialog.c:2960
 #, fuzzy
 msgid "Custom Lists"
 msgstr "Нумерованый список"
@@ -1881,48 +1941,58 @@ msgstr "Список стиха"
 msgid "_Viewer"
 msgstr "Просмоторщик"
 
-#: src/gnome2/studypad.c:83 src/gnome2/toolbar_edit.c:111
+#: src/gnome2/studypad.c:84 src/gnome2/toolbar_edit.c:112
 msgid "has been modified. "
 msgstr ""
 
-#: src/gnome2/studypad.c:669 src/gnome2/studypad.c:681
+#: src/gnome2/studypad.c:670 src/gnome2/studypad.c:682
 msgid "Study Pad"
 msgstr "Блокнот изучения"
 
-#: src/gnome2/toolbar_edit.c:435
+#: src/gnome2/studypad_dialog.c:113
+#, fuzzy
+msgid "StudyPad"
+msgstr "Блокнот изучения"
+
+#: src/gnome2/toolbar_edit.c:199
+#, fuzzy
+msgid "Delete note?"
+msgstr "Удалить заметку"
+
+#: src/gnome2/toolbar_edit.c:437
 #, fuzzy
 msgid "New File"
 msgstr "Открыть файл"
 
-#: src/gnome2/toolbar_edit.c:468
+#: src/gnome2/toolbar_edit.c:470
 msgid "Save Curent File"
 msgstr ""
 
-#: src/gnome2/toolbar_edit.c:512
+#: src/gnome2/toolbar_edit.c:514
 #, fuzzy
 msgid "Print window contents"
 msgstr "Печать этого комментария"
 
-#: src/gnome2/toolbar_edit.c:528
+#: src/gnome2/toolbar_edit.c:530
 #, fuzzy
 msgid "Cut "
 msgstr "Вырезать"
 
-#: src/gnome2/toolbar_edit.c:575
+#: src/gnome2/toolbar_edit.c:577
 msgid "Find in this note"
 msgstr ""
 
-#: src/gnome2/toolbar_edit.c:586
+#: src/gnome2/toolbar_edit.c:588
 #, fuzzy
 msgid "Find and Replace"
 msgstr "Переместить"
 
-#: src/gnome2/toolbar_edit.c:602
+#: src/gnome2/toolbar_edit.c:604
 #, fuzzy
 msgid "Spell"
 msgstr "Проверка орфографии"
 
-#: src/gnome2/toolbar_edit.c:603
+#: src/gnome2/toolbar_edit.c:605
 #, fuzzy
 msgid "Spell check note"
 msgstr "Проверка орфографии"
@@ -2232,9 +2302,6 @@ msgstr "Больший отступ параграфов"
 
 #~ msgid "Remove from Shortcut Bar"
 #~ msgstr "Удалить из панели ярлыков"
-
-#~ msgid "Bookmarks"
-#~ msgstr "Закладки"
 
 #~ msgid "Verse List"
 #~ msgstr "Список стиха"
