@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
  
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev1)
+AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev2)
 AM_CONFIG_HEADER(config.h)
 
 dnl 
@@ -143,9 +143,9 @@ fi
 
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
-GS_CHECK_LIB(GAL, gal, 0.18.0.0)
+GS_CHECK_LIB(GAL, gal, 0.8.0.0)
 GS_CHECK_LIB(GnomePrint, print, 0.29.0.0)
-GS_CHECK_LIB(Gnome-xml, xml, 1.8.17.0)
+GS_CHECK_LIB(Gnome-xml, xml, 0.8.17.0)
 
 dnl ******************************
 dnl libxml 

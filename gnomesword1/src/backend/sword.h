@@ -29,7 +29,6 @@ extern "C" {
 #include <glib-1.2/glib.h>
 #include "main/lists.h"
 	
-	
 void backend_init(void);
 GList * backend_get_global_options_list(void);
 void backend_module_name_from_description(char * mod_name, char * mod_desc);

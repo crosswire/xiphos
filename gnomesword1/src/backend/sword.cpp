@@ -66,24 +66,24 @@ using std::map;
 using namespace sword;
 
 typedef map < string, string > modDescMap;
-typedef map < string, string > bookAbrevMap;
+//typedef map < string, string > bookAbrevMap;
 
 #define CIPHER_KEY_LEN 16
 
-MANAGERS sw_mgr;
 
 /******************************************************************************
  * static  global to this file only 
  */
 
-static SWMgr *mainMgr;		/* sword mgr for curMod */
+static SWMgr *mainMgr;	
 static modDescMap descriptionMap;
 
 /******************************************************************************
  * globals
  */
 
-bookAbrevMap abrevationMap;
+//bookAbrevMap abrevationMap;
+MANAGERS sw_mgr;
 
 
 
@@ -102,6 +102,7 @@ bookAbrevMap abrevationMap;
  * Return value
  *   void
  */
+ 
 void backend_init(void)
 {	
 	g_print("gnomesword-%s\n", VERSION);
@@ -140,6 +141,23 @@ void backend_init(void)
 		backend_setup_interlinear();
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_get_global_options_list
+ *
+ * Synopsis
+ *   #include "backend/sword.h"
+ *
+ *   GList * backend_get_global_options_list(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GList
+ */
+ 
 GList * backend_get_global_options_list(void)
 {
 	GList * tmp = NULL;
@@ -149,10 +167,12 @@ GList * backend_get_global_options_list(void)
 	     it != optionslist.end(); it++) {
 		//-- save options in a glist for popup menus
 		tmp =
-		    g_list_append(tmp, (gchar *) (*it).c_str());
+		    g_list_append(tmp, (gchar *) strdup((*it).c_str()));
 	}
 	return tmp;
 }
+
+
 /******************************************************************************
  * Name
  *   backend_module_name_from_description
@@ -168,11 +188,13 @@ GList * backend_get_global_options_list(void)
  * Return value
  *   void
  */
+
 void backend_module_name_from_description(char * mod_name,
 					  char * mod_desc)
 {
 	strcpy(mod_name, descriptionMap[mod_desc].c_str());
 }
+
 
 /******************************************************************************
  * Name
