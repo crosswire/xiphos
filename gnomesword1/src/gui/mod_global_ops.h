@@ -39,9 +39,13 @@ struct  _global_ops {
 	    variants_all, 
 	    variants_primary, 
 	    variants_secondary;
+	gint module_type;
 };
 
 GLOBAL_OPS *gui_new_globals(void);
-
+void gui_add_global_option_items(gchar * mod_name, 
+				GtkWidget * module_options_menu, 
+				gint type_module,
+				GLOBAL_OPS * ops);
 
 #endif
