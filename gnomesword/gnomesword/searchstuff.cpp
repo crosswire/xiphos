@@ -209,11 +209,16 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
 		gtk_clist_freeze (GTK_CLIST (resultList));	//-- keep list form scrolling until we are done
 		//-- give search string to module to search
-		for (ListKey & searchResults = searchMod->Search (entryText, searchType, searchParams, 
-											currentScope, 0, 
-											&percentUpdate,  (void*)&progressunits);
-		       !searchResults.Error (); 
-		       searchResults++) {		    
+		// bool opsup = searchMod->isSearchOptimallySupported(entryText, searchType, searchParams, currentScope);
+		for (ListKey & searchResults = searchMod->Search (entryText,
+								searchType,
+								searchParams,
+								currentScope,
+								0,
+								&percentUpdate,
+								(void*)&progressunits); 							
+		       						!searchResults.Error ();
+		       						searchResults++) {		
 			    resultText = (const char *) searchResults;	//-- put verse key string of find into a string
 			    gtk_clist_append (GTK_CLIST (resultList), &resultText);	//-- store find in list
 			    searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope */
