@@ -28,13 +28,7 @@
 #include <gtkhtml/htmlengine-print.h>
 #include <gtkhtml/htmlselection.h>
 #include <gal/widgets/e-unicode.h>
-//#include <gal/unicode/gunicode.h>
-//#include <libgnomeprint/gnome-printer.h>
 #include <libgnomeprint/gnome-print.h>
-//#include <libgnomeprint/gnome-printer-dialog.h>
-//#include <libgnomeprint/gnome-print-master.h>
-//#include <libgnomeprint/gnome-print-master-preview.h>
-//#include <libgnomeprint/gnome-print-preview.h>
 #include <fcntl.h>
 
 #include "gui/html.h"
@@ -42,7 +36,7 @@
 #include "gui/editor.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/interlinear.h"
+#include "gui/parallel_view.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
@@ -172,7 +166,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	/***  we are in an url  ***/
 	else {
 		in_url = TRUE;	/* we need this for html_button_released */
-		/***  swap interlinear and main text mods link ***/
+		/***  swap parallel and main text mods link ***/
 		if (*url == '@') {
 			++url;
 			sprintf(buf, _("Show %s in main window"), url);
@@ -446,7 +440,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	if (*url == '@') {
 		++url;
-		gui_swap_interlinear_with_main((gchar *) url);
+		gui_swap_parallel_with_main((gchar *) url);
 	}
 	/***  verse numbers in Bible Text window  ***/
 	else if (*url == '*') {
@@ -785,8 +779,8 @@ void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	case MAIN_TEXT_WINDOW:
 		html = GTK_HTML(widgets.html_text);
 		break;
-	case INTERLINEAR_WINDOW:
-		html = GTK_HTML(widgets.html_interlinear);
+	case parallel_WINDOW:
+		html = GTK_HTML(widgets.html_parallel);
 		break;
 	case COMMENTARY_WINDOW:
 		html = GTK_HTML(widgets.html_comm);

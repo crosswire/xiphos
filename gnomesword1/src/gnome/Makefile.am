@@ -44,10 +44,10 @@ gnomesword_1_0_SOURCES =  \
     hints.c \
     history.c \
     html.c \
-    interlinear.c \
-    interlinear_dialog.c \
     main_menu.c \
     main_window.c \
+    parallel_view.c \
+    parallel_dialog.c \
     percomm.c \
     preferences_dialog.c \
     search_dialog.c \
