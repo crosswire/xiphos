@@ -30,12 +30,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-16 15:59-0500\n"
-"PO-Revision-Date: 2005-03-09 20:54+0100\n"
+"PO-Revision-Date: 2005-03-18 23:22+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -151,9 +151,8 @@ msgid "Add reference Link"
 msgstr "Ajouter un lien de référence"
 
 #: src/editor/editor_menu.c:537
-#, fuzzy
 msgid "Link text: "
-msgstr "Rechercher suivant"
+msgstr "Texte du lien:"
 
 #: src/editor/editor_menu.c:539
 msgid "Reference: "
@@ -243,36 +242,32 @@ msgid "Link..."
 msgstr "Lien.."
 
 #: src/editor/popup.c:199 src/editor/popup.c:276
-#, fuzzy
 msgid "Properties"
-msgstr "Progression"
+msgstr "Propriétés"
 
 #: src/editor/popup.c:207 src/gnome2/preferences_cell_renderer.c:399
 msgid "Text"
 msgstr "Texte"
 
 #: src/editor/popup.c:213 src/editor/popup.c:279
-#, fuzzy
 msgid "Link"
-msgstr "Liens"
+msgstr "Lien"
 
 #: src/editor/popup.c:219
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: src/editor/popup.c:225
 msgid "Paragraph"
-msgstr ""
+msgstr "Paragraphe"
 
 #: src/editor/popup.c:231
-#, fuzzy
 msgid "Page"
-msgstr "Coller"
+msgstr "Page"
 
 #: src/editor/popup.c:237 src/editor/toolbar_edit.c:122
-#, fuzzy
 msgid "Rule"
-msgstr "Module"
+msgstr "Règle"
 
 #: src/editor/popup.c:243 src/editor/popup.c:537 src/editor/popup.c:549
 #: src/editor/toolbar_edit.c:143
@@ -280,9 +275,8 @@ msgid "Table"
 msgstr "Table"
 
 #: src/editor/popup.c:249
-#, fuzzy
 msgid "Cell"
-msgstr "Vérifier l'orthographe"
+msgstr "Cellule"
 
 #. info->stock_icon = GTK_STOCK_OPEN;
 #: src/editor/popup.c:468 src/gnome2/bibletext.c:1023
@@ -299,7 +293,6 @@ msgid "Paste Quotation"
 msgstr ""
 
 #: src/editor/popup.c:478
-#, fuzzy
 msgid "Insert Link"
 msgstr "Insére un lien"
 
@@ -309,22 +302,20 @@ msgid "Remove Link"
 msgstr "Supprimer"
 
 #: src/editor/popup.c:492
-#, fuzzy
 msgid "Style"
-msgstr "Style verset"
+msgstr "Style"
 
 #: src/editor/popup.c:495
 msgid "Text Style..."
-msgstr ""
+msgstr "Style du texte..."
 
 #: src/editor/popup.c:497 src/editor/popup.c:503 src/editor/popup.c:513
 msgid "Paragraph Style..."
-msgstr ""
+msgstr "Style de paragraphe"
 
 #: src/editor/popup.c:501
-#, fuzzy
 msgid "Link Style..."
-msgstr "Lien.."
+msgstr "Format du Lien.."
 
 #: src/editor/popup.c:507
 msgid "Rule Style..."
@@ -368,7 +359,7 @@ msgstr ""
 
 #: src/editor/popup.c:548
 msgid "Table delete"
-msgstr ""
+msgstr "Supprimer la table"
 
 #: src/editor/popup.c:550
 msgid "Row"
@@ -376,7 +367,7 @@ msgstr ""
 
 #: src/editor/popup.c:551
 msgid "Column"
-msgstr ""
+msgstr "Colonne"
 
 #: src/editor/popup.c:552
 #, fuzzy
@@ -385,22 +376,21 @@ msgstr "Sommaire"
 
 #: src/editor/popup.c:560
 msgid "Check Word Spelling..."
-msgstr ""
+msgstr "Vérifier l\"orthographe"
 
 #: src/editor/popup.c:565
 msgid "Add Word to"
-msgstr ""
+msgstr "Ajouter un mot à"
 
 #: src/editor/popup.c:569
-#, fuzzy, c-format
+#, c-format
 msgid "%s Dictionary"
-msgstr "Dictionnaire"
+msgstr "%s·Dictionnaire"
 
 # src/gs_preferences_dlg.c
 #: src/editor/popup.c:578
-#, fuzzy
 msgid "Add Word to Dictionary"
-msgstr "Utiliser le dictionnaire par défaut"
+msgstr "Ajouter au dictionnaire"
 
 #: src/editor/popup.c:581
 #, fuzzy
@@ -409,7 +399,7 @@ msgstr "Orthographe correcte"
 
 #: src/editor/popup.c:585
 msgid "Input Methods"
-msgstr ""
+msgstr "_Méthodes de saisie"
 
 #. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
 #: src/editor/replace.c:79
@@ -441,9 +431,8 @@ msgid "Replace:"
 msgstr "Remplace :"
 
 #: src/editor/replace.c:185
-#, fuzzy
 msgid "With:"
-msgstr "avec"
+msgstr "Avec :"
 
 #: src/editor/search.c:113
 #, fuzzy
@@ -533,9 +522,8 @@ msgid "Insert link at cursor"
 msgstr "Insérer un lien"
 
 #: src/editor/toolbar_edit.c:832
-#, fuzzy
 msgid "Insert rule"
-msgstr "Insérer un mot"
+msgstr "Insérer une règle"
 
 #: src/editor/toolbar_edit.c:833
 msgid "Insert rule at cursor"
@@ -1101,7 +1089,7 @@ msgstr "Note pour"
 
 #: src/gnome2/dialog.c:159
 msgid " "
-msgstr ""
+msgstr "."
 
 #: src/gnome2/dialog.c:799
 msgid "Close _without Saving"
@@ -2439,11 +2427,11 @@ msgstr "À propos du SWORD Project"
 
 #: src/gnome2/splash.c:538
 msgid "Loading settings"
-msgstr ""
+msgstr "Chargement des préférences"
 
 #: src/gnome2/splash.c:556
 msgid "Building Interface"
-msgstr ""
+msgstr "Construction de l'interface"
 
 #: src/gnome2/splash.c:573
 msgid "Starting Sword"
