@@ -114,7 +114,7 @@ static void on_linkVT_clicked(GtkHTML * html, const gchar * url,
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
-			dlg = create_dlgInformation();
+			dlg = gui_create_display_informtion_dialog();
 		}
 		++url;		/* remove # */
 
@@ -143,7 +143,7 @@ static void on_linkVT_clicked(GtkHTML * html, const gchar * url,
 
 	else if (*url == 'M') {
 		if (!gsI_isrunning) {
-			dlg = create_dlgInformation();
+			dlg = gui_create_display_informtion_dialog();
 		}
 		++url;		/* remove M */
 		buf = g_strdup(url);
@@ -203,7 +203,7 @@ static void on_linkVT_clicked(GtkHTML * html, const gchar * url,
 			++mybuf;
 			buf = g_strdup(mybuf);
 			if (!gsI_isrunning) {
-				dlg = create_dlgInformation();
+				dlg = gui_create_display_informtion_dialog();
 			}
 			loadmodandkey(modbuf, buf);
 		}
