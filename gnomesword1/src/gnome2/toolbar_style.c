@@ -469,11 +469,13 @@ static void set_color_combo(GtkHTML * html,
 			       HTMLTextColor)->color);
 #endif
 #ifdef USE_GTKHTML31
+/*
 	color_combo_set_color (COLOR_COMBO (cd->combo),
 			       &html_colorset_get_color_allocated 
 				(html->engine->settings->color_set,
 				html->engine->painter, 
 				HTMLTextColor)->color);
+*/
 #endif
 }
 
@@ -554,9 +556,9 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 		g_signal_connect (cd->html, "realize", G_CALLBACK (realize_engine), cd);
         g_signal_connect (cd->html, "load_done", G_CALLBACK (load_done), cd);
 
+#ifdef USE_GTKHTML30
 	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, color_group_fetch ("toolbar_text", cd));
-
-#ifdef USE_GTKHTML30	
+	
 	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
 	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
 #endif	
