@@ -1131,6 +1131,7 @@ GtkWidget *gui_create_search_dialog(void)
 	GtkWidget *rb_words;
 	GtkWidget *tb_regexp;
 	GtkWidget *rb_exact_phrase;
+	GtkWidget *rb_indexed_word;
 	GtkWidget *frame57;
 	GtkWidget *vbox64;
 	GtkWidget *cb_case_sensitive;
@@ -1493,7 +1494,13 @@ GtkWidget *gui_create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox63), search1.rb_attributes, FALSE,
 			   FALSE, 0);	
 	g_free(header);			   
-			   
+		
+	rb_indexed_word = gtk_radio_button_new_with_label_from_widget
+                                            ((GtkRadioButton *)rb_words,
+                                             _("Indexed"));
+	gtk_widget_show(rb_indexed_word);
+	gtk_box_pack_start(GTK_BOX(vbox63), rb_indexed_word, FALSE,
+			   FALSE, 0);	   
 
 	frame57 = gtk_frame_new(NULL);
 	gtk_widget_show(frame57);
@@ -2162,6 +2169,7 @@ GtkWidget *gui_create_search_dialog(void)
 	search1.rb_words = rb_words;
 	search1.rb_regexp = tb_regexp;
 	search1.rb_exact_phrase = rb_exact_phrase;
+	search1.rb_indexed_word = rb_indexed_word;
 	search1.cb_case_sensitive = cb_case_sensitive;
 	search1.progressbar = appbar_search;
 	search1.label_mod_select = label_search_module;
