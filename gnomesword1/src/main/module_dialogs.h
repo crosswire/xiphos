@@ -27,8 +27,9 @@ extern "C" {
 #endif
 
 typedef struct _dialog_data DIALOG_DATA;
-	
+
 #include "main/global_ops.hh"
+#include "main/navbar.h"
 
 struct _dialog_data {
 	/* dialog widgets */
@@ -73,7 +74,7 @@ struct _dialog_data {
 	gpointer editor;
 	
         GObject *mod_selection;
-	
+	NAVBAR navbar;
 	GLOBAL_OPS *ops;
 };
 

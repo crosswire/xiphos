@@ -71,10 +71,12 @@ static void set_dialog_global_option(DIALOG_DATA * t, char * option, gboolean ch
 static void set_global_option(int manager, char * option, gboolean choice)
 {
 	SWMgr *mgr = backend->get_display_mgr();
+	SWMgr *main_mgr = backend->get_main_mgr();
 	char *on_off;
 
 	on_off = tf2of(choice);
 	mgr->setGlobalOption(option, on_off);
+	main_mgr->setGlobalOption(option, on_off);
 }
 
 
