@@ -58,7 +58,6 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
-preferences.autoformat.style=Custom style
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -248,8 +247,7 @@ module.pixmap.files=\
 	book_closed.png\
 	book_open.png\
 	helpdoc.png\
-	gs2-48x48.png\
-	gs3-48x48.png
+	gs2-48x48.png
 
 module.data.name=.
 module.data.type=
