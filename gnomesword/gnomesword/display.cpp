@@ -85,13 +85,16 @@ char
 GTKInterlinearDisp::Display(SWModule &imodule) 
 {
 	char tmpBuf[255];
-	GdkFont *sword_font;
+	GdkFont *sword_font,
+					*greek_font;
 	gchar    *myname;
 	bool greek,
-			findclose;
-    char verseBuf[800];
-    char *myverse,
-			*font;
+			findclose,
+			italics_on=FALSE;
+	char 	verseBuf[800],
+ 				buf[800];
+	char 	*myverse,
+				*font;
 	int i,j,len;	
 
 	SectionMap::iterator sit;
@@ -107,21 +110,29 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 	}
 
 	/* Load a italic font */
-        italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
+ 	italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
 	/* Load a bold font */
-        bold_font = gdk_font_load ("-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1");
+ 	bold_font = gdk_font_load ("-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1");
 	/* Load a roman font */
-        roman_font = gdk_font_load(font_interlinear);
+ 	roman_font = gdk_font_load(font_interlinear);
 	/* Load a verse number font */
-        versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-    /* Load a greek font */
-	sword_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
+ 	versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
+  /* Load a greek font */
+	greek_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 
 	/******************************************************************** check for greek module that use symbol font */
 	greek = FALSE;	
 	
-	if(!strcmp(font,"Symbol")) greek=TRUE;
-
+	if(!strcmp(font,"Symbol"))
+	{
+		greek=TRUE;
+  	sword_font = greek_font;
+  }	
+	else
+	{
+		sword_font = roman_font;
+		greek=FALSE;
+	}
 	findclose = FALSE; 
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
 	gtk_text_forward_delete (GTK_TEXT (gtkText), gtk_text_get_length((GTK_TEXT(gtkText))));
@@ -142,68 +153,91 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 		while(i<len)
 		{
 			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='I')
-    		{				
+   		{				
 				i=i+4;
 				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
 				verseBuf[0]='\0';
     			//myverse[i] = '[';
-    		}
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='i')
-    		{
+   		{
 				i=i+4;
 				gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
 				verseBuf[0]='\0';
     			//myverse[i] = ']';
-    		}
+    	}			
+			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='P')
+   		{				
+				i=i+4;
+				sprintf(buf,"%s\n\n",verseBuf);
+				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, buf, -1);
+				j=0;
+				verseBuf[0]='\0';
+				italics_on = TRUE;
+    	}
+			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='p')
+   		{
+				i=i+4;
+				sprintf(buf,"%s\n",verseBuf);
+				gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, buf, -1);
+				j=0;
+				verseBuf[0]='\0';
+    		italics_on = FALSE;
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='B')
-    		{				
+   		{				
 				i=i+4;
 				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
 				verseBuf[0]='\0';
     			//myverse[i] = '[';
-    		}
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='b')
-    		{
+   		{
 				i=i+4;
 				gtk_text_insert(GTK_TEXT(gtkText), bold_font, &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
 				verseBuf[0]='\0';
     			//myverse[i] = ']';
-    		}
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='C')
-    		{				
+   		{				
     			while(myverse[i] != '>')
     			{
     				++i;
 	    		}
-				++i;
-    		}
+					++i;
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='R' && myverse[i+2]=='F')
-    		{				
+   		{				
 				i=i+3;
     			myverse[i] = '{';
-    		}
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='R' && myverse[i+2]=='f')
-    		{				
+   		{				
 				i=i+3;
     			myverse[i] = '}';
-    		}
+    	}
+    	if(myverse[i] == '<' && myverse[i+1] =='R' && myverse[i+2]=='B')
+    	{				
+				i=i+3;
+    		myverse[i] = '*';
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='G')
     		{				
-				i=i+2;
+					i=i+2;
     			myverse[i] = '<';
     		}
 			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='H')
     		{				
-				i=i+2;
+					i=i+2;
     			myverse[i] = '<';
     		}
 			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='T')
     		{				
-				i=i+3;
+					i=i+3;
     			myverse[i] = '(';
 				findclose = TRUE;			
     		}
@@ -219,8 +253,10 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 	    	++i;    		
 	    	verseBuf[j+1] = '\0';
 	    	++j;
-		}
-		gtk_text_insert(GTK_TEXT(gtkText), roman_font, &gtkText->style->black, NULL, verseBuf, -1);		
+		}		
+		if(italics_on) sword_font = italic_font;
+		else sword_font = roman_font;
+		gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);		
 		verseBuf[0]='\0';
 	}
 	/**************************************************************************************************************************************/
@@ -233,10 +269,14 @@ char
 GTKChapDisp::Display(SWModule &imodule) 
 {
 	char tmpBuf[255];
-    	char verseBuf[800];
-    	char *myverse, *font;
+	char 	verseBuf[800],
+ 				buf[800];
+	char 	*myverse,
+ 				*font;
 	int i,j;	
-	bool findclose=FALSE;
+	bool 	findclose=FALSE,
+				italics_on=FALSE,
+				poetry_on=FALSE;
 	GdkFont *sword_font, *greek_font;
 	ModMap::iterator it;
 	SectionMap::iterator sit;
@@ -309,9 +349,32 @@ GTKChapDisp::Display(SWModule &imodule)
 				verseBuf[0]='\0';
     				//myverse[i] = ']';
     		}
+			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='P')
+   		{				
+				i=i+4;
+				sprintf(buf,"%s",verseBuf);
+				if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, buf, -1);
+				else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, buf, -1);
+				j=0;
+				verseBuf[0]='\0';
+				italics_on = TRUE;
+				poetry_on = TRUE;
+    				//myverse[i] = '[';
+    	}
+			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='p')
+   		{
+				i=i+4;
+				sprintf(buf,"%s",verseBuf);
+				if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), italic_font, &myGreen,NULL , buf, -1);
+				else gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, buf, -1);
+				j=0;
+				verseBuf[0]='\0';
+    		italics_on = FALSE;
+    		poetry_on = FALSE;
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='C' && myverse[i+2] == 'M')	
 			{
-				if(!bVerseStyle)
+				if((!bVerseStyle) || poetry_on)
 				{
 					i=i+3;
 					myverse[i] = '\t';
@@ -337,22 +400,33 @@ GTKChapDisp::Display(SWModule &imodule)
 				i=i+3;
     			myverse[i] = '}';
     		}
+    	if(myverse[i] == '<' && myverse[i+1] =='R' && myverse[i+2]=='B')
+    	{				
+				i=i+3;
+    			myverse[i] = '*';
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='G')
-    		{				
+   		{				
 				i=i+2;
     			myverse[i] = '<';
-    		}
+    	}
 			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='H')
-    		{				
+   		{				
 				i=i+2;
     			myverse[i] = '<';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='T')
-    		{				
+    	}
+			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='T' && myverse[i+3]=='G')
+   		{				
 				i=i+3;
     			myverse[i] = '(';
 				findclose = TRUE;			
-	    	}
+	   	}
+			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='T' && myverse[i+3]=='H')
+   		{				
+				i=i+3;
+    			myverse[i] = '(';
+				findclose = TRUE;			
+	   	} 	    	
 			if(findclose)
 			{
 				if(myverse[i] == '>')
@@ -360,12 +434,21 @@ GTKChapDisp::Display(SWModule &imodule)
 					myverse[i] = ')';
 					findclose=FALSE;
 				}
-			}
+			}if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='T' && myverse[i+3]=='P')
+   		{				
+				i=i+5;
+    		//myverse[i] = ' ';	
+	   	}
 			verseBuf[j] = myverse[i];
 	    	++i;    		
 	    	verseBuf[j+1] = '\0';
 	    	++j;
 		}
+		if(strcmp(font,"Symbol")) //-- make sure we are not using greek font
+		{
+			if(italics_on) sword_font = italic_font;
+			else sword_font = roman_font;
+		} 		
 		if (key->Verse() == curVerse) 
 		{
 			gtk_text_thaw(GTK_TEXT(gtkText));
@@ -380,7 +463,7 @@ GTKChapDisp::Display(SWModule &imodule)
 		}
 		verseBuf[0]='\0';
 		//---------------------------------------------------------------------------- toggle paragraph style 
-		if(bVerseStyle)
+		if(bVerseStyle && (!poetry_on))
 			gtk_text_insert(GTK_TEXT(gtkText), 	roman_font, &gtkText->style->black, NULL, "\n", -1); 
 
 	}

@@ -218,7 +218,7 @@ saveoptions(void)
 
 //--------------------------------------------------------------------------------------------
 void
-createFiles(void) //--------------- files nessary for GomeSword
+createFiles(void) //--------------- files nessary for GomeSword if they do not exist
 {
 	FILE *f;
 	if((f = fopen(fnbookmarks,"w"))==NULL)  //-------------------------- create bookmark file
@@ -264,7 +264,7 @@ createFiles(void) //--------------- files nessary for GomeSword
 
 //-------------------------------------------------------------------------------------------
 void
-saveFile (gchar *filename)
+saveFile (gchar *filename)  //-- save studypad file
 {
   	gchar *data, charbuf[255];
   	FILE *fp;
@@ -306,7 +306,7 @@ saveFile (gchar *filename)
 
 //-------------------------------------------------------------------------------------------
 void
-loadFile (GtkWidget *filesel)
+loadFile (GtkWidget *filesel)  //-- load file into studypad
 {
  	GtkWidget 	*statusbar,
  				 	 *text;

@@ -69,18 +69,18 @@ GNOME_LIBS = -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GNORBA_CFLAGS = -I/usr/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/lib/glib/include -I/usr/X11R6/include
 GNORBA_LIBS = -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnorba -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lnsl -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GTKXMHTML_LIBS = -rdynamic -lgtkxmhtml -lXpm -ljpeg -lpng -lz -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXext -lX11 -lm
-GTK_CFLAGS = -I/usr/lib/glib/include -I/usr/X11R6/include
+GTK_CFLAGS = -I/usr/local/lib/glib/include -I/usr/local/include -I/usr/X11R6/include
 GTK_CONFIG = /usr/bin/gtk-config
-GTK_LIBS = -lSM -lICE -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
+GTK_LIBS = -lSM -lICE -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -L/usr/local/lib -rdynamic -lgmodule -lglib -ldl -lXext -lX11 -lm
 MAKEINFO = makeinfo
-ORBIT_CFLAGS = -I/usr/lib/glib/include -I/usr/include
+ORBIT_CFLAGS = -I/usr/local/lib/glib/include -I/usr/local/include -I/usr/include
 ORBIT_CONFIG = /usr/bin/orbit-config
 ORBIT_IDL = /usr/bin/orbit-idl
-ORBIT_LIBS = -L/usr/lib -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lglib -lnsl -lm
+ORBIT_LIBS = -L/usr/lib -L/usr/local/lib -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lglib -lnsl -lm
 PACKAGE = gnomesword
 PACKAGE_PIXMAPS_DIR = /usr/share/pixmaps/gnomesword
 PTHREAD_LIB = -lpthread
-VERSION = 0.1.6
+VERSION = 0.1.7
 XPM_LIBS = -lXpm
 ZVT_LIBS = -rdynamic -lzvt -lutil -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXext -lX11 -lm
 cflags_set = yes
@@ -90,10 +90,8 @@ INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword
 
 
 bin_PROGRAMS = gnomesword
-
-gnomesword_SOURCES =  	main.cpp 	support.cpp support.h 	display.cpp display.h 	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h 	interface.cpp interface.h 	filestuff.cpp filestuff.h 	menustuff.cpp menustuff.h
-
-
+gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
+#gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
 gnomesword_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) 
@@ -104,17 +102,21 @@ PROGRAMS =  $(bin_PROGRAMS)
 
 
 DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I..
-CPPFLAGS =  -I/usr/lib/glib/include -I/usr/X11R6/include
+CPPFLAGS =  -I/usr/local/lib/glib/include -I/usr/local/include -I/usr/X11R6/include
 LDFLAGS = 
-LIBS =  -L/usr/lib -lsword -lz
-gnomesword_OBJECTS =  main.o support.o display.o GnomeSword.o callback.o \
-interface.o filestuff.o menustuff.o
+LIBS =  -L/usr/local/lib -L/usr/lib -lsword -lz -laspell
+#gnomesword_OBJECTS =  main.o support.o display.o \
+#GnomeSword.o callback.o interface.o filestuff.o \
+#menustuff.o
+gnomesword_OBJECTS =  main.o support.o display.o \
+GnomeSword.o callback.o interface.o filestuff.o \
+menustuff.o spellcheck.o DICTClient.o
 gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
-CFLAGS = -g -O2 -Wall -Wunused -Wmissing-prototypes -Wmissing-declarations 
+CFLAGS = -g -O2 -Wall -Wunused 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
@@ -125,9 +127,9 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = gtar
 GZIP_ENV = --best
-DEP_FILES =  .deps/GnomeSword.P .deps/callback.P .deps/display.P \
-.deps/filestuff.P .deps/interface.P .deps/main.P .deps/menustuff.P \
-.deps/support.P
+DEP_FILES =  .deps/DICTClient.P .deps/GnomeSword.P .deps/callback.P \
+.deps/display.P .deps/filestuff.P .deps/interface.P .deps/main.P \
+.deps/menustuff.P .deps/spellcheck.P .deps/support.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
