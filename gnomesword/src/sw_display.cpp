@@ -251,7 +251,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 
 gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 {
-	gchar *use_font, *gsfont,*retval = "";
+	gchar *retval = NULL;
 	MOD_FONT *mf;
 	
 	font_size = NULL;
@@ -266,26 +266,21 @@ gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 	
 	load_module_font_info(mf);
 	
-	gsfont = NULL;
-	gsfont = mf->old_font;  
+	
+	use_gtkhtml_font = true;
+		
 	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
 		font_size = mf->old_font_size;
 	else
 		font_size = "+1";
-	
-	if(!strncmp(gsfont,"none",4)){
-		//g_warning("gsfont = %s",gsfont);
-		gsfont = NULL;
-		//g_warning("gsfont = %s",gsfont);
 		
+	if(strlen(mf->old_font) > 2){	
+		if(strncmp(mf->old_font,"none",4)){
+			retval = g_strdup(mf->old_font);
+			use_gtkhtml_font = false;
+		}
 	}
 	
-	if (gsfont) {		
-		retval = gsfont;
-		use_gtkhtml_font = false;
-	} else {
-		use_gtkhtml_font = true;
-	}
 	//g_warning("retval = %s",retval);
 	g_free(mf);
 	return retval;
@@ -314,23 +309,12 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	string gsfontsize;
 	GString *str;
 	
-	use_gtkhtml_font = false;
 	str = g_string_new("");
 	  
-	paragraphMark = "&para;";  
-	use_font = g_strdup(pick_font(imodule));
-	if(use_font) {
-		if(!strncmp(use_font,"none",4))
-			use_gtkhtml_font = TRUE;
-		else
-			use_gtkhtml_font = FALSE;
-		
-	}
-	else {
-		use_gtkhtml_font = TRUE;
-		
-	}
+	paragraphMark = "&para;"; 
 	
+	use_gtkhtml_font = false;
+	use_font = pick_font(imodule);	
 	use_font_size = g_strdup(font_size);
 	
 	//-- setup gtkhtml widget
@@ -447,7 +431,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	gtk_html_jump_to_anchor(html, tmpBuf);
 	
 	g_string_free(str,TRUE);
-	g_free(use_font);
+	if(use_font) g_free(use_font);
 	g_free(use_font_size);
 	return 0;
 }
@@ -544,31 +528,68 @@ static void DisplayIndividualMod(SWModule *m,
 {
 	gchar 
 		*utf8str,
-		buf[500],
+		buf[500], *gsfont,
 		*use_font_size = NULL;
 	
 	string 
 		swfontsize;
 	gint utf8len;
-	extern GtkHTMLStream *htmlstream;
+	bool use_font = FALSE;
+	extern GtkHTMLStream *htmlstream;	
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
+	MOD_FONT *mf;
+	
+	font_size = NULL;
+	
+	mf = g_new(MOD_FONT,1);
+	mf->mod_name = (gchar*) m->Name();
+	mf->old_font = NULL;
+	mf->old_font_size = NULL;
+	mf->new_font = NULL;
+	mf->new_font_size = NULL;
+	mf->no_font = 0;
+	
+	load_module_font_info(mf);
+	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
+		use_font_size = g_strdup(mf->old_font_size);
+	else
+		use_font_size = g_strdup("+1");
+	gsfont = NULL;
+	
+	if(strlen(mf->old_font) > 2){	
+		if(strncmp(mf->old_font,"none",4)){
+			gsfont = g_strdup(mf->old_font);
+			use_font = true;
+		}
+	}
+	
+	g_free(mf);
+	
+	
+	
 	m->SetKey(k);
 	
-	use_font_size = (gchar*)m->getConfigEntry("GSFont size"); //load_module_font((gchar*)m->Name(),"GSFont size");	
-	
-	if (!use_font_size) {
-		use_font_size = s->bible_font_size;
-	}
-		
-	sprintf(buf,
-		"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font size=\"%s\" color=\"%s\">", 
-		bgColor,
-		m->KeyText(),
-		k->Verse(),				 
-		s->bible_verse_num_color, 
-		k->Verse(),
-		use_font_size,
-		textColor);	
+	if(use_font)	
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font face =\"%s\" size=\"%s\" color=\"%s\">", 
+			bgColor,
+			m->KeyText(),
+			k->Verse(),				 
+			s->bible_verse_num_color, 
+			k->Verse(),
+			gsfont,
+			use_font_size,
+			textColor);
+	else	
+		sprintf(buf,
+			"<td width=\"20%\" bgcolor=\"%s\"><A HREF=\"I%s\" NAME=\"%d\"><font color=\"%s\">%d. </font></A><font size=\"%s\" color=\"%s\">", 
+			bgColor,
+			m->KeyText(),
+			k->Verse(),				 
+			s->bible_verse_num_color, 
+			k->Verse(),
+			use_font_size,
+			textColor);
 	
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
 	utf8len = strlen(utf8str);		
@@ -586,6 +607,8 @@ static void DisplayIndividualMod(SWModule *m,
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 	}
+	g_free(use_font_size);
+	g_free(gsfont);
 }
 
 extern SWModule
@@ -727,8 +750,10 @@ char InterlinearDisp::Display(SWModule & imodule)
 	static gint row = 1;
 	
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
+	
+	use_gtkhtml_font = true;
 	use_font = pick_font(imodule);
-	use_font_size = font_size; 
+	use_font_size = g_strdup(font_size); 
 		
 	if (row == 6)
 		row = 1;
@@ -786,7 +811,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 	}
-	//g_free(font);
+	if(use_font) g_free(use_font);
+	if(use_font) g_free(use_font_size);
 	return 0;
 }
 

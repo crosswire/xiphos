@@ -1414,21 +1414,21 @@ gchar *intsyncSWORD(GtkWidget * book,	//-- someone clicked the sync button on th
 		    GtkWidget * verse, GtkWidget * entry, gchar * key)
 {
 	VerseKey vkey;
-
 	gchar * bookname, *newbook, *retval, buf[256];
-
 	gint iChap, iVerse;
-
-	//cout << "key = " << key << "\n";
+	
 	vkey.AutoNormalize(1);
 	vkey = key;
 	iChap = vkey.Chapter();
 	iVerse = vkey.Verse();
+	bookname = gtk_entry_get_text(GTK_ENTRY(book));
 	newbook =
 	    (gchar *) vkey.books[vkey.Testament() - 1][vkey.Book() -
 						       1].name;
+	g_warning("%s %d:%d",newbook,iChap,iVerse);
 	if (strcmp(bookname, newbook))
 		gtk_entry_set_text(GTK_ENTRY(book), newbook);
+	
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(chapter), iChap);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(verse), iVerse);
 	strcpy(buf, vkey);
