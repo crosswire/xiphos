@@ -59,6 +59,110 @@ enum {
 TreePixbufs *pixbufs;
 
 
+
+/******************************************************************************
+ * Name
+ *   main_display_verse_list_in_sidebar
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
+ *				       gchar * verse_list)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
+				       gchar * verse_list)
+{
+	GList *tmp = NULL;
+	gboolean oddkey = TRUE;
+	gchar buf[256], *utf8str, *colorkey;
+	gchar *first_key = NULL;
+	gchar *next_verse = NULL;
+	gint i = 0;
+	gint count = 0;
+	GString *str;
+	GtkTreeModel *model;
+	GtkListStore *list_store;	
+	GtkTreeSelection *selection;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	RESULTS *list_item;
+	
+	
+	list_of_verses = g_list_first(list_of_verses);
+	if(list_of_verses) {
+		while(list_of_verses) {
+			g_free(list_of_verses->data);
+			list_of_verses = g_list_next(list_of_verses);
+		}
+		g_list_free(list_of_verses);
+	}
+	list_of_verses = NULL;
+	
+	strcpy(settings.sb_search_mod,module_name);
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+	list_store = GTK_LIST_STORE(model);
+	gtk_list_store_clear(list_store);
+	
+	strcpy(sidebar.mod_name, module_name);
+	
+	if (verse_list[0] == 'S' && verse_list[1] == 'e'
+	    && verse_list[2] == 'e') {
+		verse_list += 4;
+	}
+	i = 0;
+/*	
+	count = start_parse_verse_list(verse_list,key);
+	while (count--) {
+		next_verse = get_next_verse_list_element(i++);
+		if (!next_verse)
+			break;
+		list_item = g_new(RESULTS,1);
+		list_item->module = module_name;
+		list_item->key = (gchar *) next_verse;
+		list_of_verses = g_list_append(list_of_verses, 
+						(RESULTS *) list_item);
+	}
+	*/
+	tmp = backend->parse_verse_list(verse_list, key);  //list_of_verses;
+	while (tmp != NULL) {
+		gtk_list_store_append(list_store, &iter);
+		gtk_list_store_set(list_store, &iter, 0,
+					   (const char *) tmp->data, -1);
+		
+		if (i == 0)
+			first_key = g_strdup((const char *) tmp->data);
+		++i;
+		tmp = g_list_next(tmp);
+	}
+	
+	selection = gtk_tree_view_get_selection
+                                          (GTK_TREE_VIEW(sidebar.results_list));
+	if(!gtk_tree_model_get_iter_first(model,&iter))
+		return;
+	path = gtk_tree_model_get_path(model,&iter);				
+	gtk_tree_selection_select_path(selection,
+                                             path);
+
+	gtk_tree_path_free(path);
+	
+	gui_verselist_button_release_event(NULL,NULL,NULL);
+	/*gtk_option_menu_set_history(GTK_OPTION_MENU
+				    (sidebar.optionmenu1), 3);*/
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+			      3);
+	//g_string_free(str, TRUE);
+}
+
+
 /******************************************************************************
  * Name
  *  main_add_children_to_tree

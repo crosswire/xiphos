@@ -42,62 +42,10 @@
 #include "main/xml.h"
 
 NAV_BAR nav_bar;
-static GtkWidget *cbe_book;
-static GtkWidget *spb_chapter;
-static GtkWidget *spb_verse;
-static GtkWidget *cbe_freeform_lookup;
-
-
-/******************************************************************************
- * Name
- *   gui_update_nav_controls
- *
- * Synopsis
- *   #include "toolbar_nav.h"
- *
- *   gchar *gui_update_nav_controls(const gchar * key)	
- *
- * Description
- *   updates the nav toolbar controls 
- *
- * Return value
- *   gchar *
- */
-
-gchar *gui_update_nav_controls(const gchar * key)
-{
-	char *val_key;
-	gint cur_chapter = 8, cur_verse = 28;
-
-	settings.apply_change = FALSE;
-	val_key = get_valid_key(key);
-	//g_warning(key);
-	//g_warning("key = %s val_key = %s",key,val_key);
-	cur_chapter = get_chapter_from_key(val_key);
-	cur_verse = get_verse_from_key(val_key);
-	/* 
-	 *  remember last verse 
-	 */
-	xml_set_value("GnomeSword", "keys", "verse", val_key);
-	settings.currentverse = xml_get_value("keys", "verse");
-	//g_warning("cv = %s\nval_key = %s",settings.currentverse,val_key);
-	/* 
-	 *  set book, chapter,verse and freeform lookup entries
-	 *  to new verse - settings.apply_change is set to false so we don't
-	 *  start a loop
-	 */
-	gtk_entry_set_text(GTK_ENTRY(cbe_book),
-			   get_book_from_key(val_key));
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (spb_chapter), cur_chapter);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (spb_verse), cur_verse);
-	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup), val_key);
-	if(settings.browsing)
-		gui_set_tab_label(val_key);
-	settings.apply_change = TRUE;
-	return val_key;
-}
+GtkWidget *cbe_book;
+GtkWidget *spb_chapter;
+GtkWidget *spb_verse;
+GtkWidget *cbe_freeform_lookup;
 
 
 /******************************************************************************

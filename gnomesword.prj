@@ -120,19 +120,14 @@ module.include.files=\
 	src/main/dictlex.h\
 	src/main/percomm.h\
 	src/main/lists.h\
-	src/main/search.h\
 	src/main/settings.h\
 	src/main/spell.h\
 	src/main/sword.h\
-	src/main/module.h\
-	src/backend/key.hh\
 	src/backend/mgr.hh\
-	src/main/key.h\
 	src/backend/config.hh\
 	src/main/configs.h\
 	src/main/xml.h\
 	src/gui/sidebar.h\
-	src/gui/parallel_dialog.h\
 	src/gui/parallel_view.h\
 	src/gui/widgets.h\
 	src/gui/preferences_cell_renderer.h\
@@ -160,19 +155,15 @@ module.source.name=.
 module.source.type=
 module.source.files=\
 	src/backend/config.cc\
-	src/backend/key.cc\
 	src/backend/mgr.cc\
 	src/backend/sword.cpp\
 	src/main/bibletext.c\
 	src/main/dictlex.c\
 	src/main/main.c\
 	src/main/percomm.c\
-	src/main/search.c\
 	src/main/settings.c\
 	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
-	src/main/module.c\
-	src/main/key.c\
 	src/main/configs.c\
 	src/main/xml.c\
 	src/gnome2/about_gnomesword.c\

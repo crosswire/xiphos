@@ -177,7 +177,7 @@ static void deal_with_notes(const gchar * url, gboolean clicked)
 					work_buf[0],
 					work_buf[2]);
 		if (tmpbuf)
-			gui_display_verse_list_in_sidebar(settings.
+			main_display_verse_list_in_sidebar(settings.
 					  currentverse,
 					  xml_get_value("modules", 
 					  "bible"),
@@ -257,7 +257,7 @@ static void deal_with_refs(const gchar * url)
 		   so we don't need to get a verse list */
 		main_sidebar_display_dictlex(mod_name, buf);
 	} else {
-		gui_display_verse_list_in_sidebar(settings.currentverse,
+		main_display_verse_list_in_sidebar(settings.currentverse,
 						  mod_name,
 						  buf);
 	}

@@ -530,15 +530,15 @@ void main_dialog_update_controls(DIALOG_DATA * t)
 	dlg_bible = t;
 	bible_apply_change = FALSE;
 	val_key = be->get_valid_key(t->key);
-	cur_chapter = get_chapter_from_key(val_key);
-	cur_verse = get_verse_from_key(val_key);
+	cur_chapter = be->key_get_chapter(val_key);
+	cur_verse = be->key_get_verse(val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries
 	 *  to new verse - settings.bible_apply_change is set to false so we don't
 	 *  start a loop
 	 */
 	gtk_entry_set_text(GTK_ENTRY(t->cbe_book),
-			   get_book_from_key(val_key));
+			   be->key_get_book(val_key));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
 				  (t->spb_chapter), cur_chapter);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON

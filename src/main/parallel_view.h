@@ -36,6 +36,8 @@ typedef enum
 	
 }GSParallel;
 
+gchar *main_parallel_change_verse(void);
+gchar *main_parallel_update_controls(const gchar * ref);
 void main_load_g_ops_parallel(GtkWidget *menu);
 void main_set_parallel_options_at_start(void);
 void main_load_menu_form_mod_list(GtkWidget * pmInt, gchar * label,
