@@ -12,7 +12,6 @@ libbackend_a_SOURCES =  \
     key.cc key.hh \
     mgr.cc mgr.hh \
     module_manager.cc module_manager.hh \
-    module_search.cc .hh \
     sword.cpp sword.h\
     sword_main.cc sword_main.hh \
     gs_gbfhtmlhref.cpp gs_gbfhtmlhref.h \

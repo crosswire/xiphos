@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * mod_search.c - glue  (: very sticky :)
+ * search_sidebar.cc - glue  (: very sticky :)
  *
  * Copyright (C) 2004 GnomeSword Developer Team
  *
@@ -46,7 +46,7 @@ extern "C" {
 #include "gui/html.h"
 #include "gui/dialog.h"
 
-#include "backend/module_search.hh"
+//#include "backend/module_search.hh"
 #include "backend/sword_main.hh"
 
 #define SEARCHING N_("Searching the ")
@@ -54,8 +54,7 @@ extern "C" {
 #define FINDS N_("found in ")		
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
-static ModuleSearch *backendSearch;
-static ModuleSearch *backendDialogSearch;
+static BackEnd *backendSearch;
 static gboolean is_running = FALSE;
 
 int search_dialog;
@@ -263,7 +262,7 @@ void main_do_sidebar_search(gpointer user_data)
  
 void main_init_sidebar_search_backend(void)
 {
-	backendSearch = new ModuleSearch();
+	backendSearch = new BackEnd();
 	
 }
 

@@ -35,6 +35,8 @@
 
 #include "main/settings.h"
 #include "main/sword.h"
+#include "main/search_sidebar.h"
+#include "main/search_dialog.h"
 
 using namespace sword;
 using namespace std;
@@ -46,34 +48,24 @@ BackEnd *backend = NULL;
 BackEnd::BackEnd() {
 	main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-//	search_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-//	results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-//	percom_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	
-//	text_mod = NULL;
-//	comm_mod = NULL;
-//	dict_mod = NULL;
-//	gbs_mod = NULL;
-//	percom_mod = NULL;
 	display_mod = NULL;
 	
 	tree_key = NULL;
 	
-	commDisplay          = 0;	// set in create
-	dictDisplay          = 0;	// set in create
-	textDisplay          = 0;	// set in create
-	entryDisplay         = 0;	// set in create
-	chapDisplay          = 0;	// set in create
-	dialogRTOLDisplay    = 0;	// set in create
+	commDisplay          = 0;
+	dictDisplay          = 0;
+	textDisplay          = 0;
+	entryDisplay         = 0;
+	chapDisplay          = 0;
+	dialogRTOLDisplay    = 0;
+	verselistDisplay     = 0;
+	viewerDisplay        = 0;
 }
-
+ 
 
 BackEnd::~BackEnd() {
 	delete main_mgr;
 	delete display_mgr;
-//	delete search_mgr;
-//	delete results;
-//	delete percom_mgr;
 	
 	if (commDisplay)
 		delete commDisplay;
@@ -87,6 +79,10 @@ BackEnd::~BackEnd() {
 		delete chapDisplay;
 	if(dialogRTOLDisplay)
 		delete dialogRTOLDisplay;
+	if(verselistDisplay)
+		delete verselistDisplay;
+	if(viewerDisplay)
+		delete viewerDisplay;
 }
 
 
@@ -628,6 +624,66 @@ char *BackEnd::navigate_module(int direction) {
 
 void BackEnd::setup_displays(void) {
 	
+}
+
+
+void BackEnd::set_listkey_position(char pos) {
+	results.setPosition((char)pos);
+}
+
+const char *BackEnd::get_next_listkey(void) {
+	const char *retval = NULL;	
+	while(!results.Error()) {
+		retval = results.getText();
+		results++;
+		return retval;
+	}
+	return NULL;	
+}
+
+int BackEnd::clear_scope(void) {
+	current_scope = 0;	
+	return 1;
+}
+
+int BackEnd::clear_search_list(void) {
+	search_scope_list.ClearList();
+	return search_scope_list.Count ();
+}
+
+int BackEnd::set_range(char * list) {
+	search_range = VerseKey().ParseVerseList(list, "", true);
+	return search_range.Count ();
+}
+
+void BackEnd::set_scope2range(void) {
+	current_scope = &search_range;
+}
+
+int BackEnd::set_scope2last_search(void) {
+	current_scope = &search_scope_list;//-- move searchlist into current_scope
+	return 1;
+}
+
+int BackEnd::do_module_search(char *module_name, const char *search_string, 
+				int search_type, int search_params, int is_dialog) {
+	char progressunits = 70;
+	results.ClearList();
+	search_mod = NULL;
+
+	search_mod = main_mgr->Modules[module_name];
+	if (!search_mod)
+		return -1;
+	results = search_mod->Search(search_string,
+					search_type,
+					search_params,
+					current_scope, 0,
+					(is_dialog)
+					?main_dialog_search_percent_update
+					:main_sidebar_search_percent_update,
+					(void *) &progressunits);
+	search_scope_list = results;
+	return results.Count();
 }
 
 void BackEnd::init_language_map(void) {
