@@ -1,10 +1,14 @@
-/***************************************************************************
-                                    gs_shortcutbar.c
-                             -------------------
-                                  Thu Jun 14 2001
-                          copyright (C) 2001 by tbiggs
-                                tbiggs@users.sf.net
- ***************************************************************************/
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+  /*
+    * GnomeSword Bible Study Tool
+    * gs_shortcutbar.c
+    * -------------------
+    * Thu Jun 14 2001
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+    *
+ */
+ 
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
