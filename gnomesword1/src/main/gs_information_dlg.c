@@ -1,16 +1,10 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-  /*
-    * GnomeSword Bible Study Tool
-    *gs_information_dlg .c
-    * -------------------
-    * Tue June 12 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
+/*
+    GnomeSword Bible Study Tool
+    *  gs_information_dlg.h - About dialogs for GnomeSword
     *
- */
- 
- /*
+    *  Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+    *
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
     *  the Free Software Foundation; either version 2 of the License, or
@@ -24,8 +18,8 @@
     *  You should have received a copy of the GNU General Public License
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
-  
+  */ 
+
 /* 
  * dialog used to display information (strongs etc) from view(text, comm, dict) dialogs
  *
@@ -37,14 +31,15 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include "gs_information_dlg.h"
-#include "information_dlg.h"
+#include "display_info.h"
 
 gboolean gsI_isrunning = FALSE;
 
-static void on_dlgInformation_destroy(GtkObject * object, gpointer user_data)
+static void on_dlgInformation_destroy(GtkObject * object, 
+                                        gpointer user_data)
 {
 	gsI_isrunning = FALSE;
-	VIDshutdownSWORD();
+	backend_dispaly_info_shutdown(); /* backend/display_info.cpp */
 }
 
 static void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
@@ -55,7 +50,8 @@ static void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
 
 void loadmodandkey(gchar * modName, gchar * newkey)
 {
-	VIDloadmodSWORD(modName, newkey);
+        /* backend/display_info.cpp */
+	backend_dispaly_info_load_modudle(modName, newkey);
 }
 
 
@@ -71,7 +67,7 @@ GtkWidget *create_dlgInformation(void)
 	dlgInformation = gnome_dialog_new(NULL, NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgInformation), "dlgInformation",
 			    dlgInformation);
-	GTK_WINDOW(dlgInformation)->type = GTK_WINDOW_DIALOG;	//GTK_WINDOW_POPUP;
+	GTK_WINDOW(dlgInformation)->type = GTK_WINDOW_DIALOG;
 	gtk_window_set_default_size(GTK_WINDOW(dlgInformation), 308, 267);
 	gtk_window_set_policy(GTK_WINDOW(dlgInformation), FALSE, TRUE,
 			      TRUE);
@@ -126,6 +122,8 @@ GtkWidget *create_dlgInformation(void)
 	gtk_signal_connect(GTK_OBJECT(btnInfoOK), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnInfoOK_clicked), NULL);
 	gsI_isrunning = TRUE;
-	VIDsetupSWORD(text);
+        
+	backend_display_info_setup(text); /* backend/display_info.cpp */
+        
 	return dlgInformation;
 }
