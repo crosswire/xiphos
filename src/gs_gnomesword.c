@@ -152,7 +152,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				sbdictmods,
 				percommods,
 				options);
-	additemstooptionsmenu(options);			
+	additemstooptionsmenu(options,settings);			
 	/* add pages to commentary and  dictionary notebooks */
 	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
 	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
@@ -272,7 +272,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         g_list_free(sbbiblemods);
         g_list_free(sbcommods);
         g_list_free(sbdictmods);
-        g_list_free(options);
+       // g_list_free(options);
 	
 	if(settings->showsplash){
 		//e_splash_set_icon_highlight (E_SPLASH(splash),4, TRUE);	
@@ -330,42 +330,42 @@ void UpdateChecks(GtkWidget *app)
 {
 	GTK_CHECK_MENU_ITEM (settings->versestyle_item)->active = settings->versestyle;	
 	/* set footnotes to last setting used */
-	if(settings->footnotes)  
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
-	else
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */
+	//if(settings->footnotes)  
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
+	//else
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */
 	
 	//GTK_CHECK_MENU_ITEM (hebrewpoints)->active = settings->hebrewpoints;
 	//GTK_CHECK_MENU_ITEM (cantillationmarks)->active = settings->cantillationmarks;
 	
 	/* set Hebrew Vowel Point to last setting */
-	if(settings->hebrewpoints)	
+	//if(settings->hebrewpoints)	
 		/* keep  in sync with menu */
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Vowel Points","On");  
-	else
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Vowel Points","On");  
+	//else
 		/* keep in sync with menu */
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Vowel Points","Off");	
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Vowel Points","Off");	
 	
 	/* set Hebrew Cantillation to last setting */
-	if(settings->cantillationmarks)	
+	//if(settings->cantillationmarks)	
 		/* keep  in sync with menu */
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Cantillation","On");  
-	else
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Cantillation","On");  
+	//else
 		/* keep  in sync with menu */
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Hebrew Cantillation","Off");	
 	
 	/* set Strong's numbers to last setting */
-	if(settings->strongs)	
+	//if(settings->strongs)	
 		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","On");  
-	else
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","On");  
+	//else
 		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","Off");	
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","Off");	
 	/* set  morph tags to last setting used */
-	if(settings->morphs)  
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","On" );	/* keep footnotes in sync with menu */		
-	else
-		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","Off" );	/* keep footnotes in sync with menu */
+	//if(settings->morphs)  
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","On" );	/* keep footnotes in sync with menu */		
+	//else
+	//	setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","Off" );	/* keep footnotes in sync with menu */
 	
 	/* set interlinear page to last setting */
 	if(settings->interlinearpage)
