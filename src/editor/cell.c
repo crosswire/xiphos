@@ -328,9 +328,9 @@ static GtkWidget *
 cell_widget (GtkHTMLEditCellProperties *d)
 {
 	GtkWidget *cell_page;
-	GladeXML *xml;
+	GladeXML *xml; 
 
-	xml = glade_xml_new ("gtkhtml-editor-properties.glade", "cell_page", GETTEXT_PACKAGE);
+	xml = glade_xml_new (GTKHTML_DATA_DIR"/gtkhtml-editor-properties.glade", "cell_page", GETTEXT_PACKAGE);
 	if (!xml)
 		g_error (_("Could not load glade file."));
 

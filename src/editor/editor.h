@@ -102,6 +102,10 @@ struct _GSHTMLEditorControlData {
 	GtkWidget *btn_undo;
 	GtkWidget *btn_Find;
 	GtkWidget *btn_replace;
+	GtkWidget *btn_insert_image;
+	GtkWidget *btn_insert_link;
+	GtkWidget *btn_insert_rule;
+	GtkWidget *btn_insert_table;
 	GtkWidget *btn_spell;
 	/* 
 	   toolbar_style buttons 

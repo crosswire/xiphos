@@ -169,7 +169,7 @@ rule_widget (GtkHTMLEditRuleProperties *d, gboolean insert)
 	GtkWidget *rule_page;
 	GladeXML *xml;
 
-	xml = glade_xml_new ("gtkhtml-editor-properties.glade", "rule_page", NULL);
+	xml = glade_xml_new (GTKHTML_DATA_DIR"/gtkhtml-editor-properties.glade", "rule_page", NULL);
 	if (!xml)
 		g_error (_("Could not load glade file."));
 
