@@ -26,15 +26,12 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
-
 void backend_new_dictlex_display(GtkWidget *html, int mod_num);
-void backend_setup_dictlex(SETTINGS *s);
+void backend_setup_dictlex(void);
 void backend_shutdown_dictlex(void);
 void backend_display_dictlex(int mod_num, char *key);
 GList* backend_fill_dictlex_keys(int mod_num, int count);
 void backend_dictentryTextChangedDL(char *modname, char *mytext);	
-	
 	
 #ifdef __cplusplus
 }
