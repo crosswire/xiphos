@@ -1,3 +1,9 @@
+2003-01-24  Terry Biggs <tbiggs@users.sf.net>
+
+	* revomed toolbar from Bible text pane put
+	  all option in popup menu.
+	* added same popup menu to Bible text dialog
+
 2003-01-22  Terry Biggs <tbiggs@users.sf.net>
 	
 	* removed strip_words_in_red() from 
