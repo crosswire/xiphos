@@ -27,14 +27,12 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
-	/* search Bible text or commentaries */
-	GList *backend_do_search(SETTINGS * s, SEARCH_OPT * so);
-	void setupsearchresultsSBSW(GtkWidget * html_widget);
-	void shutdownsearchresultsSBSW(void);
-	void backend_search_results_item_display(gchar * url);
+	
+	GList *backend_do_search(SETTINGS * s, gpointer *usr_data);
+	void backend_setup_search_results_display(GtkWidget * html_widget);
+	void backend_shutdown_search_results_display(void);
+	void backend_search_results_item_display(gchar * key);
 
 #ifdef __cplusplus
 }

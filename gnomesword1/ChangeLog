@@ -1,7 +1,12 @@
+2002-04-19  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* add files create_shortcutbar_viewer.* to src/gnome
+	* remove gui stuff from backend/verslist_sb.*
+
 2002-04-18  Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* add create_shortcutbar_search.*
-	* removed most gui stuff from search.cpp
+	* add files create_shortcutbar_search.* to src/gnome
+	* removed gui stuff from search.cpp
 
 
 2002-04-15  Terry Biggs <tbiggs@users.sourceforge.net>

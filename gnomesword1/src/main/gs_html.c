@@ -61,6 +61,7 @@
 #include "support.h"
 #include "sword.h"
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
 #include "gs_editor.h"
 #include "verselist_sb.h"
 #include "shortcutbar.h"
@@ -221,7 +222,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			   so we don't need to get a verse list */
 			displaydictlexSBSW(modbuf, buf, settings);
 		} else {
-			getVerseListSBSWORD(modbuf, buf, settings);
+			display_verse_list(modbuf, buf, settings);
 		}
 		g_free(buf);
 
@@ -639,7 +640,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	buf = gtk_entry_get_text(GTK_ENTRY(entry));
 	/* get name for current text module */
 	modbuf = getmodnameSWORD(0);
-	getVerseListSBSWORD(modbuf, buf, settings);
+	display_verse_list(modbuf, buf, settings);
 }
 
 /***************************************************************************************************
