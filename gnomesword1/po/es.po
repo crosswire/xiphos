@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
-"POT-Creation-Date: 2003-11-13 11:35-0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-11-18 15:43-0500\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Jorge Chacón <jgchacon@itelgua.com>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -54,11 +55,11 @@ msgstr "Acerca de el Proyecto Sword"
 msgid "Sword Version"
 msgstr "Versión de Sword"
 
-#: src/gnome/about_sword.c:159 src/gnome2/about_sword.c:158
+#: src/gnome/about_sword.c:159 src/gnome2/about_sword.c:160
 msgid "Modules can be downloaded from the Sword Project "
 msgstr "los Módulos pueden ser obtenidos de Proyecto Sword "
 
-#: src/gnome/about_sword.c:165 src/gnome2/about_sword.c:164
+#: src/gnome/about_sword.c:165 src/gnome2/about_sword.c:166
 msgid "The Sword Project"
 msgstr "El Proyecto Sword"
 
@@ -255,7 +256,7 @@ msgstr "_Editar"
 #: src/gnome/parallel_view.c:1246 src/gnome/toolbar_edit.c:532
 #: src/gnome2/bibletext_menu.c:1270 src/gnome2/commentary_menu.c:1349
 #: src/gnome2/editor_menu.c:1028 src/gnome2/main_menu.c:615
-#: src/gnome2/parallel_view.c:1205 src/gnome2/toolbar_edit.c:532
+#: src/gnome2/parallel_view.c:1202 src/gnome2/toolbar_edit.c:532
 msgid "Copy"
 msgstr "Copiar"
 
@@ -276,7 +277,7 @@ msgstr "Editar un Ítem"
 
 #: src/gnome/bibletext_menu.c:1300 src/gnome/commentary_menu.c:1372
 #: src/gnome/parallel_view.c:1260 src/gnome2/bibletext_menu.c:1300
-#: src/gnome2/commentary_menu.c:1372 src/gnome2/parallel_view.c:1219
+#: src/gnome2/commentary_menu.c:1372 src/gnome2/parallel_view.c:1216
 msgid "Module Options"
 msgstr "Opciones del Módulo"
 
@@ -499,8 +500,8 @@ msgstr "Permitir Reordenamiento"
 #, fuzzy
 msgid "Toggle Reording - allow items to be moved from one folder to another"
 msgstr ""
-"Activar/Desactivar Reordenamiento - permitir que los ítemes sean movidos "
-"por arrastre"
+"Activar/Desactivar Reordenamiento - permitir que los ítemes sean movidos por "
+"arrastre"
 
 #: src/gnome/bookmarks.c:2283 src/gnome2/bookmarks_menu.c:1222
 #, fuzzy
@@ -837,36 +838,36 @@ msgid "Go to %s"
 msgstr "Ir a %s"
 
 #: src/gnome/gtkhtml_display.c:1036 src/gnome/gtkhtml_display.c:1051
-#: src/gnome2/gtkhtml_display.c:857 src/gnome2/gtkhtml_display.c:869
+#: src/gnome2/gtkhtml_display.c:853 src/gnome2/gtkhtml_display.c:865
 msgid "The"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1038 src/gnome2/gtkhtml_display.c:859
+#: src/gnome/gtkhtml_display.c:1038 src/gnome2/gtkhtml_display.c:855
 msgid "module is locked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1054 src/gnome2/gtkhtml_display.c:872
+#: src/gnome/gtkhtml_display.c:1054 src/gnome2/gtkhtml_display.c:868
 msgid "module has been unlocked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1071 src/gnome2/gtkhtml_display.c:886
+#: src/gnome/gtkhtml_display.c:1071 src/gnome2/gtkhtml_display.c:882
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1075 src/gnome2/gtkhtml_display.c:890
+#: src/gnome/gtkhtml_display.c:1075 src/gnome2/gtkhtml_display.c:886
 msgid "click here"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1076 src/gnome2/gtkhtml_display.c:891
+#: src/gnome/gtkhtml_display.c:1076 src/gnome2/gtkhtml_display.c:887
 #, fuzzy
 msgid "to unlock the module"
 msgstr "Quitarle llave a este Módulo"
 
-#: src/gnome/gtkhtml_display.c:1089 src/gnome2/gtkhtml_display.c:901
+#: src/gnome/gtkhtml_display.c:1089 src/gnome2/gtkhtml_display.c:897
 msgid "You will have to restart GnomeSword after you unlock it."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:1104 src/gnome2/gtkhtml_display.c:912
+#: src/gnome/gtkhtml_display.c:1104 src/gnome2/gtkhtml_display.c:908
 #, fuzzy
 msgid "You need to restart GnomeSword to view it"
 msgstr "Desea que GnomeSword inicie con"
@@ -892,7 +893,7 @@ msgstr "Ingrese Clave"
 msgid "GnomeSword Print Preview"
 msgstr "Búsqueda de GnomeSword"
 
-#: src/gnome/main_menu.c:108 src/gnome2/main_menu.c:105
+#: src/gnome/main_menu.c:108
 msgid "Cannot launch gnome-help-browser"
 msgstr ""
 
@@ -1067,19 +1068,19 @@ msgstr "Acerca de los Módulos de Sword"
 msgid "Information about the installed modules"
 msgstr "Información acerca de los módulos instalados"
 
-#: src/gnome/main_menu.c:778 src/gnome2/main_menu.c:770
+#: src/gnome/main_menu.c:778 src/gnome2/main_menu.c:776
 msgid "About GnomeSword..."
 msgstr "Acerca de GnomeSword..."
 
-#: src/gnome/main_menu.c:779 src/gnome2/main_menu.c:771
+#: src/gnome/main_menu.c:779 src/gnome2/main_menu.c:777
 msgid "About GnomeSword"
 msgstr "Acerca de GnomeSword"
 
-#: src/gnome/main_menu.c:784 src/gnome2/main_menu.c:776
+#: src/gnome/main_menu.c:784 src/gnome2/main_menu.c:770
 msgid "About the Sword Project..."
 msgstr "Acerca del Proyecto Sword..."
 
-#: src/gnome/main_menu.c:785 src/gnome2/main_menu.c:777
+#: src/gnome/main_menu.c:785 src/gnome2/main_menu.c:771
 msgid "Infotmation About The Sword Project"
 msgstr "Información acreca del Proyecto Sword"
 
@@ -1125,22 +1126,22 @@ msgstr "Añadir un Diccionario"
 msgid "_File/Open Book Dialog/"
 msgstr "Abrir el diálogo de búsqueda"
 
-#: src/gnome/main_menu.c:878 src/gnome2/main_menu.c:870
+#: src/gnome/main_menu.c:878 src/gnome2/main_menu.c:871
 #, fuzzy
 msgid "_Help/About Sword Modules/Bible Texts/"
 msgstr "Acerca de los Módulos de Sword"
 
-#: src/gnome/main_menu.c:883 src/gnome2/main_menu.c:875
+#: src/gnome/main_menu.c:883 src/gnome2/main_menu.c:876
 #, fuzzy
 msgid "_Help/About Sword Modules/Commentaries/"
 msgstr "Acerca de los Módulos de Sword"
 
-#: src/gnome/main_menu.c:888 src/gnome2/main_menu.c:880
+#: src/gnome/main_menu.c:888 src/gnome2/main_menu.c:881
 #, fuzzy
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
 msgstr "Diccionarios y Léxica"
 
-#: src/gnome/main_menu.c:892 src/gnome2/main_menu.c:884
+#: src/gnome/main_menu.c:892 src/gnome2/main_menu.c:885
 #, fuzzy
 msgid "_Help/About Sword Modules/Books/"
 msgstr "Acerca de los Módulos de Sword"
@@ -1165,32 +1166,32 @@ msgstr "Diccionarios/Léxica"
 msgid "Parallel View"
 msgstr ""
 
-#: src/gnome/parallel_view.c:1255 src/gnome2/parallel_view.c:1214
+#: src/gnome/parallel_view.c:1255 src/gnome2/parallel_view.c:1211
 msgid "Detach/Attach"
 msgstr "Desprender/Fijar"
 
 #. build change parallel modules submenu
-#: src/gnome/parallel_view.c:1273 src/gnome2/parallel_view.c:1232
+#: src/gnome/parallel_view.c:1273 src/gnome2/parallel_view.c:1229
 #, fuzzy
 msgid "Change parallel 1"
 msgstr "Cambiar Interlineal 1"
 
-#: src/gnome/parallel_view.c:1276 src/gnome2/parallel_view.c:1235
+#: src/gnome/parallel_view.c:1276 src/gnome2/parallel_view.c:1232
 #, fuzzy
 msgid "Change parallel 2"
 msgstr "Cambiar Interlineal 2"
 
-#: src/gnome/parallel_view.c:1279 src/gnome2/parallel_view.c:1238
+#: src/gnome/parallel_view.c:1279 src/gnome2/parallel_view.c:1235
 #, fuzzy
 msgid "Change parallel 3"
 msgstr "Cambiar Interlineal 3"
 
-#: src/gnome/parallel_view.c:1282 src/gnome2/parallel_view.c:1241
+#: src/gnome/parallel_view.c:1282 src/gnome2/parallel_view.c:1238
 #, fuzzy
 msgid "Change parallel 4"
 msgstr "Cambiar Interlineal 4"
 
-#: src/gnome/parallel_view.c:1285 src/gnome2/parallel_view.c:1244
+#: src/gnome/parallel_view.c:1285 src/gnome2/parallel_view.c:1241
 #, fuzzy
 msgid "Change parallel 5"
 msgstr "Cambiar Interlineal 5"
