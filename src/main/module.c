@@ -173,22 +173,26 @@ char *get_footnote_body(char *note)
 	token = strtok(note, ".");
 	if(token)
 		key = g_strdup(token);
-	else return NULL;
+	else 
+		return NULL;
 	token = strtok(NULL, ".");
 	if(token)
 		type = g_strdup(token);
-	else return NULL;
+	else 
+		return NULL;
 	token = strtok(NULL, ".");
 	if(token)
 		note_number = strdup(token);
-	else return NULL;
-	
-	//key = g_strdup_printf("%s %s:%s",book,chapter,verse);
-		
-	buf = backend_get_footnote_body(
+	else 
+		return NULL;
+/*		
+	backend_get_footnote_body_new(
 		xml_get_value("modules", "bible"), 
 		key, note_number);
-		
+*/	
+	buf = backend_get_footnote_body(
+		xml_get_value("modules", "bible"), 
+		key, note_number);		
 	g_free(type);
 	g_free(key);
 	g_free(note_number);

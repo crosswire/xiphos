@@ -133,20 +133,73 @@ char *backend_get_footnote_body(char *module_name,
 				char *key, char *note)
 {
 	SWKey *keybuf;
-	SWModule *module = sw.main_mgr->Modules[module_name];
-	module->SetKey(key);
+	ListKey tmpVerseList;
+	VerseKey *DefaultVSKey;
+	SWModule *module = sw.text_mgr->Modules[module_name];
+	
+	DefaultVSKey = new VerseKey();
+	DefaultVSKey->setText(key);
+	module->SetKey(*DefaultVSKey);
 	module->RenderText();
 	keybuf = module->getKey();
-	SWBuf body =
-	    module->getEntryAttributes()["Footnote"][note]["body"].c_str();
-	module->renderFilter(body, keybuf);
-	if (body)
-		return strdup(body.c_str());
-	else
-		return NULL;
+	SWBuf type = 
+		module->getEntryAttributes()["Footnote"][note]["type"].c_str();
+/*		
+	if (type == "crossReference") {
+		SWBuf refList = module->getEntryAttributes()["Footnote"][note]["refList"].c_str();
+		//tmpVerseList = DefaultVSKey->ParseVerseList(refList.c_str(), *DefaultVSKey);
+		if (tmpVerseList.Count())
+			printf("%s\n", refList.c_str());
+			return strdup(refList.c_str());
+	} else {*/
+		SWBuf body =
+			module->getEntryAttributes()
+					["Footnote"][note]["body"].c_str();
+		module->renderFilter(body, keybuf);	
+		if (body)
+			return strdup(body.c_str());
+	//}
+	return NULL;
 }
 
 
+/*
+char *backend_get_footnote_body_new(char *module_name,
+				char *key, char *note)
+{
+	ModMap::iterator it;
+	VerseKey *DefaultVSKey;
+	ListKey tmpVerseList;
+	SWKey *keybuf;
+	
+	DefaultVSKey = new VerseKey();
+	DefaultVSKey->setText(key);
+	keybuf = DefaultVSKey;
+	printf("%module_name = s\n", module_name);
+	printf("key = %s\n", keybuf->getText());
+	printf("note = %s\n", note);
+	it = sw.text_mgr->Modules.find(module_name);
+	if (it != sw.text_mgr->Modules.end()) {
+		SWModule *module = it->second;
+		module->setKey(*DefaultVSKey);
+		int verseNum = DefaultVSKey->Verse();
+		printf("verseNum = %i\n", verseNum);
+		DefaultVSKey->Verse(verseNum);
+		module->RenderText();	// force entry attributes to get set
+		SWBuf type = module->getEntryAttributes()["Footnote"][note]["type"].c_str();
+		printf("type = %s\n", type.c_str());
+		SWBuf body = module->getEntryAttributes()["Footnote"][note]["body"].c_str();
+	module->renderFilter(body, keybuf);
+		printf("body = %s\n", body.c_str());
+		if (type == "crossReference") {
+			SWBuf refList = module->getEntryAttributes()["Footnote"][note]["refList"].c_str();
+			tmpVerseList = DefaultVSKey->ParseVerseList(refList.c_str(), *DefaultVSKey);
+			if (tmpVerseList.Count())
+				printf("%s", refList.c_str());//AddVerseChoices(menu, refList.c_str(), rtf);
+		}
+	} 
+}
+*/
 
 /******************************************************************************
  * Name
