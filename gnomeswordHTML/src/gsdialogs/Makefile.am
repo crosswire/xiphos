@@ -17,11 +17,11 @@ libgsdialogs_a_SOURCES = 	\
        gs_abouts.h \
        gs_listeditor.c \
        gs_listeditor.h \
-       gs_information_sw.c \
+       gs_information_dlg.c \
        gs_viewcomm_dlg.h \
        gs_viewtext_dlg.c \
        gs_viewtext_sw.h \
-       gs_information_sw.h \
+       gs_information_dlg.h \
        gs_viewdict_dlg.c \
        gs_viewtext_dlg.h \
        gs_viewcomm_dlg.c \

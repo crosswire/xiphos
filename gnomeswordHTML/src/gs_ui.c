@@ -301,16 +301,18 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 on_about_the_sword_project1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "About GnomeSword...",
-	 "About GnomeSword",
-	 on_about_gnomesword1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-	 0, 0, NULL},
+	
 	{
 	 GNOME_APP_UI_SUBTREE, "About Sword Modules",
 	 "Information about the installed modules",
 	 about_sword_modules1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+	 0, 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+    {
+	 GNOME_APP_UI_ITEM, "About GnomeSword...",
+	 "About GnomeSword",
+	 on_about_gnomesword1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
 	GNOMEUIINFO_END

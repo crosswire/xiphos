@@ -52,6 +52,7 @@ create_dlgInformation (void)
   GtkWidget *scwnInfo;
   GtkWidget *dialog_action_area15;
   GtkWidget *btnInfoOK;
+  GtkWidget *text;
 
   dlgInformation = gnome_dialog_new (NULL, NULL);
   gtk_object_set_data (GTK_OBJECT (dlgInformation), "dlgInformation", dlgInformation);
@@ -69,6 +70,13 @@ create_dlgInformation (void)
   gtk_widget_show (scwnInfo);
   gtk_box_pack_start (GTK_BOX (dialog_vbox15), scwnInfo, TRUE, TRUE, 0);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scwnInfo), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
+  text = gtk_html_new();
+	gtk_widget_ref(text);
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "text", text,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(text);
+	gtk_container_add(GTK_CONTAINER(swVText), text);
 
   dialog_action_area15 = GNOME_DIALOG (dlgInformation)->action_area;
   gtk_object_set_data (GTK_OBJECT (dlgInformation), "dialog_action_area15", dialog_action_area15);
