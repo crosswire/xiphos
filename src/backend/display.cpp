@@ -48,7 +48,7 @@ extern "C" {
 #include <gtkhtml/gtkhtml.h>
 }
 
-#include "display.h"
+#include "backend/display.h"
 
 /*
  *  EntryDisp - for displaying modules in a GtkHTML widget wo/displaying the key

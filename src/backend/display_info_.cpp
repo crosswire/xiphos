@@ -30,13 +30,9 @@
 #include <markupfiltmgr.h>
 #include <versekey.h>
 
-/* main */
-#include "settings.h"
-
-/* backend */
-#include "display_info_.h"
-#include "display.h"
-
+#include "main/settings.h"
+#include "backend/display_info_.h"
+#include "backend/display.h"
 
 /***********************************************************************
  * for dispaly dict/lex information when a link is clicked in a view

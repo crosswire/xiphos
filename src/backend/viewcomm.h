@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * viewcomm.cpp - sword support for veiwcomm dialog
@@ -27,15 +26,17 @@
 extern "C" {
 #endif
 
-	void backend_setup_viewcomm(GtkWidget * text);
-	void backend_shutdown_viewcomm(void);
-	void backend_load_module_viewcomm(gchar * modName);
-	void backend_goto_verse_viewcomm(gchar * newkey);
-	void backend_nav_module_viewcomm(gint direction);
-	char *backend_get_first_module_viewcomm(void);
-	char *backend_get_next_module_viewcomm(void);
+void backend_setup_viewcomm(GtkWidget * text);
+void backend_shutdown_viewcomm(void);
+void backend_load_module_viewcomm(gchar * modName);
+void backend_goto_verse_viewcomm(gchar * newkey);
+void backend_nav_module_viewcomm(gint direction);
+char *backend_get_first_module_viewcomm(void);
+char *backend_get_next_module_viewcomm(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __VIEWCOMM_H__ */
+
+#endif
+

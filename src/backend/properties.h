@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * properties.cpp - save gnomesword properties and settings
@@ -23,19 +22,20 @@
 #ifndef __PROPERTIES_H__
 #define __PROPERTIES_H__
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 
-	gboolean backend_load_properties(void);
-	gboolean backend_save_properties(gboolean shutdown);
-	gboolean backend_create_properties_from_setup(void);
-	gboolean backend_create_properties(void);
+gboolean backend_load_properties(void);
+gboolean backend_save_properties(gboolean shutdown);
+gboolean backend_create_properties_from_setup(void);
+gboolean backend_create_properties(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __PROPERTIES_H__ */
+
+#endif
+

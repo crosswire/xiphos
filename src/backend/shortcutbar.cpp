@@ -20,7 +20,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -38,13 +38,12 @@
 #include <dirent.h>
 #include <string.h>
 
-#include "gs_gnomesword.h"
-//#include "gs_shortcutbar.h"
-#include "display.h"
-#include "shortcutbar.h"
-#include "sword.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "backend/display.h"
+#include "backend/shortcutbar.h"
+#include "backend/sword.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 extern gint groupnum7;
 

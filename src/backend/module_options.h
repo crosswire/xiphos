@@ -1,4 +1,3 @@
-
 /*
  * GnomeSword Bible Study Tool
  * module_options.h - load and save individual module options
@@ -23,11 +22,9 @@
 #ifndef __MODULE_OPTIONS_H__
 #define __MODULE_OPTIONS_H__
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 /******************************************************************************
  * load module option - using sword SWConfig
@@ -42,4 +39,6 @@ gboolean backend_save_module_options(char *modName, char *option, char *value);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __MODULE_OPTIONS_H__ */
+
+#endif
+

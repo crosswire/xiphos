@@ -34,10 +34,10 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "gs_gnomesword.h"
-#include "gs_interlinear.h"
-#include "sword.h"
-#include "interlinear.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_interlinear.h"
+#include "backend/sword.h"
+#include "backend/interlinear.h"
 
 /******************************************************************************
  * locals

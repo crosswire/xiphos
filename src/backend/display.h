@@ -30,12 +30,10 @@
 
 #include <gnome.h>
 #include <swmodule.h>
-#include "gs_gnomesword.h"
-#include "settings.h"
-
+#include "main/gs_gnomesword.h"
+#include "main/settings.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
-
 
 class GtkHTMLEntryDisp:public SWDisplay {
       protected:
@@ -69,5 +67,5 @@ class GtkHTMLChapDisp:public GtkHTMLEntryDisp { public:
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);
 
+#endif
 
-#endif /* __SW_DISPLAY_H_ */
