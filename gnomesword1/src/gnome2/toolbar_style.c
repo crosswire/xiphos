@@ -528,6 +528,23 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 {
 	HTMLColor *color;
 
+	color = html_colorset_get_color (cd->html->engine->settings->color_set, HTMLTextColor);
+	if (GTK_WIDGET_REALIZED (cd->html))
+		html_color_alloc (color, cd->html->engine->painter);
+	else
+		g_signal_connect (cd->html, "realize", G_CALLBACK (realize_engine), cd);
+        g_signal_connect (cd->html, "load_done", G_CALLBACK (load_done), cd);
+
+	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, color_group_fetch ("toolbar_text", cd));
+	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
+	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
+        g_signal_connect (cd->combo, "color_changed", G_CALLBACK (color_changed), cd);
+
+	gtk_widget_show_all (cd->combo);
+	return cd->combo;
+	
+/*	HTMLColor *color;
+
 	color =
 	    html_colorset_get_color(cd->html->engine->settings->
 				    color_set, HTMLTextColor);
@@ -548,6 +565,7 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 
 	gtk_widget_show_all(cd->combo);
 	return cd->combo;
+	*/
 }
 
 /******************************************************************************
@@ -1047,6 +1065,12 @@ static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
+static void
+indentation_changed (GtkWidget *w, guint level, GSHTMLEditorControlData *cd)
+{
+	gtk_widget_set_sensitive (cd->unindent_button, level != 0);
+}
+
 /******************************************************************************
  * Name
  *   create_style_toolbar
@@ -1111,6 +1135,8 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 
 	cd->unindent_button = editor_toolbar_style_uiinfo[8].widget;
 	cd->indent_button = editor_toolbar_style_uiinfo[9].widget;
+	g_signal_connect (cd->html, "current_paragraph_indentation_changed",
+			  G_CALLBACK (indentation_changed), cd);
 
 	gtk_toolbar_set_style (GTK_TOOLBAR (cd->toolbar_style), GTK_TOOLBAR_ICONS);
 	
@@ -1118,9 +1144,8 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 			   "current_paragraph_alignment_changed",
 			   G_CALLBACK
 			   (paragraph_alignment_changed_cb), cd);
-
-	gtk_signal_connect(GTK_OBJECT(cd->combo), "color_changed",
-			   G_CALLBACK(color_changed), cd);
+	toolbar_update_format (cd);
+			   
 	return cd->toolbar_style;
 }
 
@@ -1147,12 +1172,25 @@ static void toolbar_item_update_sensitivity(GtkWidget * widget,
 	GSHTMLEditorControlData *cd = (GSHTMLEditorControlData *) data;
 	gboolean sensitive;
 
+	sensitive = ((cd->format_html && widget != cd->unindent_button)
+		     || widget == cd->paragraph_option
+		     || widget == cd->indent_button
+		     || (widget == cd->unindent_button && gtk_html_get_paragraph_indentation (cd->html))
+		     || widget == cd->left_align_button
+		     || widget == cd->center_button
+		     || widget == cd->right_align_button);
+
+	gtk_widget_set_sensitive (widget, sensitive);
+/*
 	sensitive = (cd->format_html
 		     || widget == cd->paragraph_option
 		     || widget == cd->indent_button
-		     || widget == cd->unindent_button);
+		     || widget == cd->unindent_button
+		     || widget == cd->left_align_button
+		     || widget == cd->center_button
+		     || widget == cd->right_align_button);
 
-	gtk_widget_set_sensitive(widget, sensitive);
+	gtk_widget_set_sensitive(widget, sensitive);*/
 }
 
 /******************************************************************************
@@ -1173,11 +1211,13 @@ static void toolbar_item_update_sensitivity(GtkWidget * widget,
 
 void toolbar_update_format(GSHTMLEditorControlData * cd)
 {
-	gtk_container_forall(GTK_CONTAINER(cd->toolbar_style),
+	/*if (cd->toolbar_style)
+		gtk_container_forall(GTK_CONTAINER(cd->toolbar_style),
 			     toolbar_item_update_sensitivity, cd);
 
-	paragraph_style_option_menu_set_mode(cd->paragraph_option,
-					     cd->format_html);
+	if (cd->paragraph_option)
+		paragraph_style_option_menu_set_mode(cd->paragraph_option,
+					     cd->format_html);*/
 }
 
 /******************************************************************************
