@@ -32,6 +32,7 @@
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
+#include "gui/tabbed_browser.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -91,6 +92,8 @@ gchar *gui_update_nav_controls(const gchar * key)
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
 				  (spb_verse), cur_verse);
 	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup), val_key);
+	if(settings.browsing)
+		gui_set_tab_label(val_key);
 	settings.apply_change = TRUE;
 	return val_key;
 }
