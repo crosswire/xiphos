@@ -653,7 +653,7 @@ void addbookmarktotree(GtkCTreeNode *node, gchar *modName, gchar *verse)
 {
 	GtkWidget *dlg;
 	gchar *text[3], buf[256];
-	sprintf(buf, "%s %s", verse, modName);
+	sprintf(buf, "%s, %s", verse, modName);
 	text[0] = buf;
 	text[1] = verse;
 	text[2] = modName;
