@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/tee --enable-debug --enable-moz_embed
+project.configure.options=--prefix=/usr CFLAGS=-O2 CXXFLAGS=-O2
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -62,8 +62,8 @@ preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
 preferences.use.tabs=1
-preferences.indent.size=8
-preferences.tabsize=8
+preferences.indent.size=4
+preferences.tabsize=4
 preferences.indent.closing=0
 
 module.include.name=.
