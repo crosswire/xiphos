@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 0.9.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr--enable-spell_check --enable-debug
+project.configure.options=--prefix=/home/terry --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -227,7 +227,8 @@ module.source.files=\
 	src/gnome2/search_sidebar.c\
 	src/gnome2/bookmarks_treeview.c\
 	src/gnome2/preferences_cell_renderer.c\
-	src/gnome2/bookmarks_menu.c
+	src/gnome2/bookmarks_menu.c\
+	src/main/spell_gnome_spell.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
