@@ -93,6 +93,7 @@ gui_create_about_gnomesword(void)
     "Victor Porton  porton@users.sf.net",
     "Stephen Binks steveb@icenet.com.au",
     "Carl Constantine duckwing@users.sf.net",
+    "Jorge Chacon <jgchacon@itelgua.com>",
     NULL
   };
   GtkWidget *about;

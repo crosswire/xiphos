@@ -1,3 +1,11 @@
+2002-04-11  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* bumped to 0.7.2
+
+2002-04-11  Jorge Chacon <jgchacon@itelgua.com>
+
+	* added Spanish translation
+
 2002-04-11  Victor Porton  <porton@localhost>
 
 	* fixed bug about verses with numbers 0 and -1

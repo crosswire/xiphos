@@ -140,7 +140,6 @@ GdkBitmap *mask3;
 
 extern GtkWidget *shortcut_bar;
 extern EShortcutModel *shortcut_model;
-//extern SETTINGS *settings;
 
 
 static GnomeUIInfo file1_menu_uiinfo[] = {
@@ -152,7 +151,7 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Copy"),
-	 N_("Copy highlighted text form main window"),
+	 N_("Copy highlighted text from main window"),
 	 on_copyhtml_activate, "htmlTexts", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
@@ -705,7 +704,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, "Strongs",
-				       _("Toogle Strongs Numbers"), NULL,
+				       _("Toggle Strongs Numbers"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnStrongs);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnStrongs",
@@ -719,7 +718,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, "Morphological",
-				       _("Toogle Morphological Tags"), NULL,
+				       _("Toggle Morphological Tags"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnMorphs);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnMorphs",
@@ -733,7 +732,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, "Footnotes",
-				       _("Toogle Footnotes"), NULL,
+				       _("Toggle Footnotes"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnFootnotes);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnFootnotes",
