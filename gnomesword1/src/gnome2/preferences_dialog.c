@@ -381,7 +381,7 @@ static void applyoptions(void)
 	/*  */
 	if (updatelayout) {
 		/* set the main window size */
-		gtk_widget_set_usize(widgets.app, settings.gs_width,
+		gtk_widget_set_size_request(widgets.app, settings.gs_width,
 				     settings.gs_hight);
 
 		if (settings.showshortcutbar && settings.docked) {
@@ -767,7 +767,7 @@ static void get_preferences_from_dlg(GtkWidget * d)
 
 
 	/*** read layout spin buttons ***/
-	sprintf(layout, "%d",
+/*	sprintf(layout, "%d",
 		gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 						 (spin_button.
 						  app_width)));
@@ -809,7 +809,7 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	xml_set_value("GnomeSword", "layout", "uperpane", layout);
 	settings.upperpane_hight =
 	    atoi(xml_get_value("layout", "uperpane"));
-
+*/
 	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	
 	applyoptions();
@@ -1351,7 +1351,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	tooltips = gtk_tooltips_new();
   /*************************************************************/
-	sbtnAppWidth_adj =
+/*	sbtnAppWidth_adj =
 	    gtk_adjustment_new(settings.gs_width, 640, 10000, 1, 10,
 			       10);
 	sbtnAppHight_adj =
@@ -1365,7 +1365,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			       10, 10);
 	sbtnUpPaneHight_adj =
 	    gtk_adjustment_new(settings.upperpane_hight, 0, 10000, 1,
-			       10, 10);
+			       10, 10);*/
   /*************************************************************/
 
 
@@ -1411,7 +1411,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(listview);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_listview),
 			  listview);
-	gtk_widget_set_usize(listview, 110, -2);
+	gtk_widget_set_size_request(listview, 110, -1);
 	add_columns(listview);
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection
@@ -1420,7 +1420,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	/* add icons to sidebar listview */
 	icon_pixbuf = NULL;
 /*	icon_pixbuf = gtk_widget_render_icon(widgets.app,
-                                             "gtk-select-font", //GNOME_STOCK_BOOK_BLUE, 
+                                             GTK_STOCK_SELECT_FONT, //GNOME_STOCK_BOOK_BLUE, 
                                              GTK_ICON_SIZE_DIALOG,
                                              NULL);*/
 	/*if (!icon_pixbuf) {
@@ -1453,7 +1453,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 		g_error_free(error);
 		error = NULL;
 	}*/
-	add_row("Layout", icon_pixbuf, store, 2);
+/*	add_row("Layout", icon_pixbuf, store, 2);*/
 /*
 	icon_pixbuf = NULL;
 	icon_pixbuf =
@@ -1465,7 +1465,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 		g_error_free(error);
 		error = NULL;
 	}*/
-	add_row("Sword Modules", icon_pixbuf, store, 3);
+	add_row("Sword Modules", icon_pixbuf, store, 2);
 /***************************************************** end sidebar */
 
 
@@ -1500,7 +1500,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(table13);
 	gtk_box_pack_start(GTK_BOX(vbox35), table13, TRUE, TRUE, 0);
 
-	label149 = gtk_label_new(_("Background Color"));
+	label149 = gtk_label_new(_("Background"));
 	gtk_widget_show(label149);
 	gtk_table_attach(GTK_TABLE(table13), label149, 0, 1, 0, 1,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -1508,7 +1508,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_label_set_justify(GTK_LABEL(label149), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label149), 0, 0.5);
 
-	label145 = gtk_label_new(_("Text Color"));
+	label145 = gtk_label_new(_("Bible text"));
 	gtk_widget_show(label145);
 	gtk_table_attach(GTK_TABLE(table13), label145, 0, 1, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -1516,7 +1516,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_label_set_justify(GTK_LABEL(label145), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label145), 0, 0.5);
 
-	label103 = gtk_label_new(_("Current Verse Color"));
+	label103 = gtk_label_new(_("Current Verse text"));
 	gtk_widget_show(label103);
 	gtk_table_attach(GTK_TABLE(table13), label103, 0, 1, 3, 4,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -1524,16 +1524,16 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_label_set_justify(GTK_LABEL(label103), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label103), 0, 0.5);
 
-	label150 = gtk_label_new(_("Current Verse Background Color"));
+	label150 = gtk_label_new(_("Current Verse background"));
 	//gtk_widget_show(label150);
 	gtk_table_attach(GTK_TABLE(table13), label150, 0, 1, 2, 3,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_widget_set_usize(label150, 218, -2);
+	gtk_widget_set_size_request(label150, 218, -1);
 	gtk_label_set_justify(GTK_LABEL(label150), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label150), 0, 0.5);
 
-	label146 = gtk_label_new(_("Verse Numbers"));
+	label146 = gtk_label_new(_("Verse numbers"));
 	gtk_widget_show(label146);
 	gtk_table_attach(GTK_TABLE(table13), label146, 0, 1, 4, 5,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -1541,7 +1541,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_label_set_justify(GTK_LABEL(label146), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label146), 0, 0.5);
 
-	label152 = gtk_label_new(_("Verse Number Font Size"));
+	label152 = gtk_label_new(_("Verse number font size"));
 	gtk_widget_show(label152);
 	gtk_table_attach(GTK_TABLE(table13), label152, 0, 1, 5, 6,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -1549,7 +1549,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_label_set_justify(GTK_LABEL(label152), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label152), 0, 0.5);
 
-	label147 = gtk_label_new(_("Link Color"));
+	label147 = gtk_label_new(_("Links"));
 	gtk_widget_show(label147);
 	gtk_table_attach(GTK_TABLE(table13), label147, 0, 1, 6, 7,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -1565,7 +1565,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER
 				     (color_picker.text_background),
-				     _("Pick a color for Background"));
+				     _("Pick the background color"));
 
 	color_picker.text = gnome_color_picker_new();
 	gtk_widget_show(color_picker.text);
@@ -1574,7 +1574,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER
 				     (color_picker.text),
-				     _("Pick a color for Bible Text"));
+				     _("Pick the Bible text color"));
 
 	gcpCurrentverseBG = gnome_color_picker_new();
 	//gtk_widget_show(gcpCurrentverseBG);
@@ -1584,7 +1584,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER
 				     (gcpCurrentverseBG),
 				     _
-				     ("Pick a color - CurrentVerse BG"));
+				     ("Pick the current Verse background color"));
 
 	color_picker.text_current_verse = gnome_color_picker_new();
 	gtk_widget_show(color_picker.text_current_verse);
@@ -1595,7 +1595,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER
 				     (color_picker.text_current_verse),
 				     _
-				     ("Pick a color for Current Verse"));
+				     ("Pick the current Verse color"));
 
 	color_picker.verse_numbers = gnome_color_picker_new();
 	gtk_widget_show(color_picker.verse_numbers);
@@ -1603,7 +1603,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 1, 2, 4, 5,
 			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
-	gtk_widget_set_usize(color_picker.verse_numbers, 41, -2);
+	gtk_widget_set_size_request(color_picker.verse_numbers, 41, -1);
 
 	color_picker.href_links = gnome_color_picker_new();
 	gtk_widget_show(color_picker.href_links);
@@ -1612,7 +1612,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gtk_tooltips_set_tip(tooltips, color_picker.href_links,
-			     _("Strongs Numbers & Morph Tags"), NULL);
+			     _("Strong's Numbers & Morphological Tags"), NULL);
 
 	cmbVerseNumSize = gtk_combo_new();
 	gtk_widget_show(cmbVerseNumSize);
@@ -1645,7 +1645,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(entry.verse_number_size);
 	gtk_tooltips_set_tip(tooltips, entry.verse_number_size,
 			     _
-			     ("Zero is base font size Go up or down from there"),
+			     ("Zero is the base font size. Increase or decrease the size."),
 			     NULL);
 	gtk_entry_set_text(GTK_ENTRY(entry.verse_number_size), _("+0"));
 
@@ -1696,7 +1696,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(hbox64), vbox28, TRUE, TRUE, 0);
 
 	frame21 =
-	    gtk_frame_new(_("Use Defaults When Opening GnomeSword"));
+	    gtk_frame_new(_("Use Defaults When Starting GnomeSword"));
 	gtk_widget_show(frame21);
 	gtk_box_pack_start(GTK_BOX(vbox28), frame21, FALSE, TRUE, 0);
 
@@ -1707,7 +1707,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	check_button.use_defaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
 					    _
-					    ("Yes, use defaults that I select"));
+					    ("Yes, use defaults"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (check_button.use_defaults));
@@ -1718,7 +1718,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
 					    _
-					    ("No, use settings saved on last GnomeSword run"));
+					    ("No, use settings saved the last time I used GnomeSword"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
 	gtk_widget_show(rbtnNoDefaults);
@@ -1734,7 +1734,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_add(GTK_CONTAINER(frame42), vbox54);
 
 	check_button.show_bible_tabs =
-	    gtk_check_button_new_with_label(_("Bible Texts"));
+	    gtk_check_button_new_with_label(_("Bible texts"));
 	gtk_widget_show(check_button.show_bible_tabs);
 	gtk_box_pack_start(GTK_BOX(vbox54),
 			   check_button.show_bible_tabs, FALSE, FALSE,
@@ -1748,7 +1748,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 
 	check_button.show_dictionary_tabs =
-	    gtk_check_button_new_with_label(_("Dict/Lex "));
+	    gtk_check_button_new_with_label(_("Dictionary/Lexicon"));
 	gtk_widget_show(check_button.show_dictionary_tabs);
 	gtk_box_pack_start(GTK_BOX(vbox54),
 			   check_button.show_dictionary_tabs, FALSE,
@@ -1796,14 +1796,14 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				      show_commentary_pane), TRUE);
 
 	check_button.show_lower_workbook =
-	    gtk_check_button_new_with_label(_("Lower Workbook"));
+	    gtk_check_button_new_with_label(_("Lower workbook"));
 	gtk_widget_show(check_button.show_lower_workbook);
 	gtk_box_pack_start(GTK_BOX(vbox86),
 			   check_button.show_lower_workbook, FALSE,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_lower_workbook,
 			     _
-			     ("Dict/Lex, Generic Books and parallel Page"),
+			     ("Dictionary/Lexicon and generic books"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
@@ -1818,19 +1818,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_add(GTK_CONTAINER(frame43), vbox55);
 
 	check_button.use_verse_style =
-	    gtk_check_button_new_with_label(_("Use Verse Style"));
+	    gtk_check_button_new_with_label(_("Use Verse style"));
 	gtk_widget_show(check_button.use_verse_style);
 	gtk_box_pack_start(GTK_BOX(vbox55),
 			   check_button.use_verse_style, FALSE, FALSE,
 			   0);
-	gtk_widget_set_usize(check_button.use_verse_style, 202, -2);
+	gtk_widget_set_size_request(check_button.use_verse_style, 202, -1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_verse_style),
 				     TRUE);
 
 	check_button.use_default_dictionary =
 	    gtk_check_button_new_with_label(_
-					    ("Use Default Dictionary"));
+					    ("Use default Dictionary"));
 	gtk_widget_show(check_button.use_default_dictionary);
 	gtk_box_pack_start(GTK_BOX(vbox55),
 			   check_button.use_default_dictionary, FALSE,
@@ -1849,19 +1849,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.show_splash_screen =
 	    gtk_check_button_new_with_label(_
-					    ("Show Splash Screen at start up"));
+					    ("Show splash screen at start up"));
 	gtk_widget_show(check_button.show_splash_screen);
 	gtk_box_pack_start(GTK_BOX(vbox55),
 			   check_button.show_splash_screen, FALSE,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_splash_screen,
-			     _("Show Splash Screen at program start"),
+			     _("Show the splash screen when GnomeSword starts"),
 			     NULL);
 
 
 	frame41 =
 	    gtk_frame_new(_
-			  ("where to View Dict/Lex When Link or Word Clicked"));
+			  ("Where to View Dictionary/Lexicon"));
 	gtk_widget_show(frame41);
 	gtk_box_pack_start(GTK_BOX(vbox28), frame41, FALSE, FALSE, 0);
 
@@ -1871,7 +1871,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.show_in_viewer =
 	    gtk_check_button_new_with_label(_
-					    ("In Shortcut bar Viewer"));
+					    ("In Shortcut bar viewer"));
 	gtk_widget_show(check_button.show_in_viewer);
 	gtk_box_pack_start(GTK_BOX(vbox53), check_button.show_in_viewer,
 			   FALSE, FALSE, 0);
@@ -1880,7 +1880,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     TRUE);
 
 	check_button.show_in_dictionary =
-	    gtk_check_button_new_with_label(_("In Dict/Lex Window"));
+	    gtk_check_button_new_with_label(_("In Dictionary/Lexicon window"));
 	gtk_widget_show(check_button.show_in_dictionary);
 	gtk_box_pack_start(GTK_BOX(vbox53),
 			   check_button.show_in_dictionary, FALSE,
@@ -1904,7 +1904,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.use_studypad_dialog =
 	    gtk_check_button_new_with_label(_
-					    ("Open StudyPad in a Dialog"));
+					    ("Open StudyPad in a dialog"));
 	gtk_widget_show(check_button.use_studypad_dialog);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.use_studypad_dialog, FALSE,
@@ -1912,7 +1912,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.use_percomm_dialog =
 	    gtk_check_button_new_with_label(_
-					    ("Open Personal Comments Editor in a Dialog"));
+					    ("Open Personal Comments editor in a dialog"));
 	gtk_widget_show(check_button.use_percomm_dialog);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.use_percomm_dialog, FALSE,
@@ -1920,7 +1920,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.percomm_formatting =
 	    gtk_check_button_new_with_label(_
-					    ("Use Formatting in Personal Comments"));
+					    ("Use formatting in Personal Comments"));
 	//gtk_widget_show(check_button.percomm_formatting);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.percomm_formatting, FALSE,
@@ -1937,14 +1937,14 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox89), hbox_default_dir, FALSE,
 			   FALSE, 0);
 
-	label = gtk_label_new(_("Default Directory"));
+	label = gtk_label_new(_("Default directory"));
 	gtk_widget_show(label);
 	gtk_box_pack_start(GTK_BOX(hbox_default_dir), label, FALSE,
 			   FALSE, 0);
 	gtk_misc_set_padding(GTK_MISC(label), 3, 0);
 
 	fileentry1 =
-	    gnome_file_entry_new(NULL, _("StudyPad Default Directory"));
+	    gnome_file_entry_new(NULL, _("StudyPad default directory"));
 	gtk_widget_show(fileentry1);
 	gtk_box_pack_start(GTK_BOX(hbox_default_dir), fileentry1, TRUE,
 			   TRUE, 0);
@@ -1966,7 +1966,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	/* end misc page */
 	
 	/* start layout page */
-	scrolledwindow54 = gtk_scrolled_window_new(NULL, NULL);
+/*	scrolledwindow54 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow54);
 	gtk_container_add(GTK_CONTAINER(notebook7), scrolledwindow54);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -2069,7 +2069,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook7), 2),
 				   label190);
-
+*/
 	/* end layout page */
 	
 	/* start module page */
@@ -2139,7 +2139,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label157), 0, 0.5);
 
-	label158 = gtk_label_new(_("Dict/Lex"));
+	label158 = gtk_label_new(_("Dictionary/Lexicon"));
 	gtk_widget_show(label158);
 	gtk_table_attach(GTK_TABLE(table9), label158, 0, 1, 7, 8,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2189,21 +2189,21 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.percomm_module = GTK_COMBO(combo25)->entry;
 	gtk_widget_show(entry.percomm_module);
 
-	label160 = gtk_label_new(_("parallel 5"));
+	label160 = gtk_label_new(_("Parallel 5"));
 	gtk_widget_show(label160);
 	gtk_table_attach(GTK_TABLE(table9), label160, 0, 1, 5, 6,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label160), 0, 0.5);
 
-	label161 = gtk_label_new(_("parallel 4"));
+	label161 = gtk_label_new(_("Parallel 4"));
 	gtk_widget_show(label161);
 	gtk_table_attach(GTK_TABLE(table9), label161, 0, 1, 4, 5,
 			 (GtkAttachOptions) (GTK_SHRINK | GTK_FILL),
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label161), 0, 0.5);
 
-	label162 = gtk_label_new(_("parallel 3"));
+	label162 = gtk_label_new(_("Parallel 3"));
 	gtk_widget_show(label162);
 	gtk_table_attach(GTK_TABLE(table9), label162, 0, 1, 3, 4,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2212,7 +2212,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_misc_set_alignment(GTK_MISC(label162), 7.45058e-09,
 			       7.45058e-09);
 
-	label163 = gtk_label_new(_("parallel 2"));
+	label163 = gtk_label_new(_("Parallel 2"));
 	gtk_widget_show(label163);
 	gtk_table_attach(GTK_TABLE(table9), label163, 0, 1, 2, 3,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2221,7 +2221,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_misc_set_alignment(GTK_MISC(label163), 7.45058e-09,
 			       7.45058e-09);
 
-	label164 = gtk_label_new(_("parallel 1"));
+	label164 = gtk_label_new(_("Parallel 1"));
 	gtk_widget_show(label164);
 	gtk_table_attach(GTK_TABLE(table9), label164, 0, 1, 1, 2,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2264,7 +2264,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(entry.greek_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.greek_lex__module,
 			     _
-			     ("Which Greek Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     ("Which Greek Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
 			     NULL);
 
 	label192 = gtk_label_new(_("Hebrew Lexicon"));
@@ -2284,17 +2284,17 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(entry.hebrew_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.hebrew_lex__module,
 			     _
-			     ("Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     ("Which Hebrew Lexicon to display in Dictionary/Lexicon window when a link or word is clicked"),
 			     NULL);
 
-	label202 = gtk_label_new(_("Greek Lex Viewer"));
+	label202 = gtk_label_new(_("Greek Lexicon Viewer"));
 	gtk_widget_show(label202);
 	gtk_table_attach(GTK_TABLE(table9), label202, 0, 1, 10, 11,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label202), 0, 0.5);
 
-	label203 = gtk_label_new(_("Hebrew Lex Viewer"));
+	label203 = gtk_label_new(_("Hebrew Lexicon Viewer"));
 	gtk_widget_show(label203);
 	gtk_table_attach(GTK_TABLE(table9), label203, 0, 1, 12, 13,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2312,7 +2312,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(entry.greek_lex_viewer_module);
 	gtk_tooltips_set_tip(tooltips, entry.greek_lex_viewer_module,
 			     _
-			     ("Which Greek Lecicon to display in viewer when a link or word is clicked"),
+			     ("Which Greek Lexicon to display in viewer when a link or word is clicked"),
 			     NULL);
 
 	comboHebViewer = gtk_combo_new();
@@ -2336,7 +2336,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label191), 0, 0.5);
 
-	label253 = gtk_label_new(_("Default Dict"));
+	label253 = gtk_label_new(_("Default Dictionary"));
 	gtk_widget_show(label253);
 	gtk_table_attach(GTK_TABLE(table9), label253, 0, 1, 8, 9,
 			 (GtkAttachOptions) (GTK_FILL),
@@ -2357,7 +2357,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(label155);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook7),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(notebook7), 3),
+				   (GTK_NOTEBOOK(notebook7), 2),
 				   label155);
 
 	/* end module page */
@@ -2380,20 +2380,20 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				  GTK_BUTTONBOX_END);
 	gtk_button_box_set_spacing(GTK_BUTTON_BOX(hbuttonbox3), 10);
 
-	button.ok = gtk_button_new_from_stock("gtk-ok");
-	gtk_widget_show(button.ok);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button.ok);
-	GTK_WIDGET_SET_FLAGS(button.ok, GTK_CAN_DEFAULT);
+	button_cancel = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+	gtk_widget_show(button_cancel);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button_cancel);
+	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
 
-	button.apply = gtk_button_new_from_stock("gtk-apply");
+	button.apply = gtk_button_new_from_stock(GTK_STOCK_APPLY);
 	gtk_widget_show(button.apply);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button.apply);
 	GTK_WIDGET_SET_FLAGS(button.apply, GTK_CAN_DEFAULT);
 
-	button_cancel = gtk_button_new_from_stock("gtk-cancel");
-	gtk_widget_show(button_cancel);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button_cancel);
-	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
+	button.ok = gtk_button_new_from_stock(GTK_STOCK_OK);
+	gtk_widget_show(button.ok);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button.ok);
+	GTK_WIDGET_SET_FLAGS(button.ok, GTK_CAN_DEFAULT);
 
 
 /**************************************************** start settings */
