@@ -284,10 +284,10 @@ char GTKChapDisp::Display(SWModule &imodule)
 	g_free(ops);
 }
 
- 
+
+#ifdef USE_MOZILLA 
 char GTKMozEntryDisp::Display(SWModule &imodule) 
 {
-#ifdef USE_MOZILLA
 	GString *str = g_string_new(NULL);
 	gchar *keytext = NULL;
 	int curPos = 0;                                         
@@ -348,11 +348,10 @@ char GTKMozEntryDisp::Display(SWModule &imodule)
 	free_font(mf);	
 	g_free(ops);
 	if(keytext) g_free(keytext);
-#endif
 }
 
 void GtkMozChapDisp::getVerseBefore(SWModule &imodule)
-{
+{	
 	gsize bytes_read;
 	gsize bytes_written;
 	GError **error = NULL;
@@ -506,7 +505,6 @@ void GtkMozChapDisp::getVerseAfter(SWModule &imodule)
 
 char GtkMozChapDisp::Display(SWModule &imodule) 
 {
-#ifdef USE_MOZILLA
 	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
@@ -681,8 +679,8 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 	free_font(mf);	
 	g_free(ops);
-#endif
 }
+#endif
 
 
 /******************************************************************************
