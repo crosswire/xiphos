@@ -205,7 +205,8 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 			  active ? 0 : GTK_TOGGLE_BUTTON (phraseSearch)->
 			  active ? -1 : -2;	//-- get search type		
 		int searchParams =
-			  GTK_TOGGLE_BUTTON (caseSensitive)->active ? 0 : REG_ICASE;	//-- get search params - case sensitive
+			  GTK_TOGGLE_BUTTON (caseSensitive)->
+			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
 		gtk_clist_freeze (GTK_CLIST (resultList));	//-- keep list form scrolling until we are done
 		//-- give search string to module to search
 		for (ListKey & searchResults = searchMod->Search (entryText, searchType, searchParams, 

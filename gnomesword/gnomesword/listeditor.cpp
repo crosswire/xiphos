@@ -29,6 +29,7 @@
 #include <swmodule.h>
 #include <versekey.h>
 
+#include "gs_gnomesword.h"
 #include "GnomeSword.h"
 #include "display.h"
 #include "callback.h"

@@ -21,6 +21,10 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef __GNOMESWORD_H__
 #define __GNOMESWORD_H__
 
@@ -29,37 +33,7 @@
 //#include <string>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
-typedef struct _settings SETTINGS;
-struct _settings {
-	gchar   MainWindowModule[80],	//-- modules to open at program startup
-	           Interlinear1Module[80],
-	           Interlinear2Module[80],
-	           Interlinear3Module[80], 
-	           personalcommentsmod[80], 
-	           currentverse[80],	//-- verse to use at program startup 
-	           dictkey[80],		//-- dictionary key to use at program startup - the one we shut down with
-	           studypadfilename[255];	//-- name of file in open in study when we closed or last file in studypad
-	gint      currentverse_red,	//-- current verse colors
-	           currentverse_green, 
-	           currentverse_blue;
-	gint      notebook3page,	//-- notebook 3 page number
-	           notebook1page,		//-- commentaries notebook
-	           notebook2page;		//-- dict - lex notebook
-	gint	  shortcutbarsize;
-	gboolean   strongs,	//-- toogle button and check menu state
-	        	footnotes,
-	        	versestyle,
-	        	interlinearpage,
-	        	autosavepersonalcomments,
-	        	formatpercom,
-	        	showcomtabs,
-	        	showdicttabs,
-	        	showshortcutbar,
-	        	showtextgroup,
-	        	showcomgroup,
-	        	showdictgroup,
-	        	showhistorygroup;
-};
+
 
 typedef struct _listitem LISTITEM;
 struct _listitem {
@@ -73,16 +47,14 @@ struct _listitem {
 
 void initSword(GtkWidget *mainform);
 
-void initGnomeSword(GtkWidget *app);
-void addnotebookpages(GtkWidget *notebook, GList *list);
-		
+
 void FillDictKeys(char *ModName);
 
 void changeVerse(gchar * ref);
 
 void ShutItDown(void);
 
-void UpdateChecks(GtkWidget * mainform);
+
 
 void searchSWORD(GtkWidget * searchFrm);
 
@@ -162,20 +134,12 @@ gint getversenumber(GtkWidget * text);
 gint getdictnumber(GtkWidget * text);
 
 void sbchangeModSword(gint group_num, gint item_num);
-
-void
-applyoptions(gboolean showshortcut,
-	     gboolean showcomtabs,
-	     gboolean showdicttabs,
-	     gboolean showtextgroup, 
-	     gboolean showcomgroup, 
-	     gboolean showdictgroup, 
-	     gboolean showhistorygroup);
-
-gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
-
 void lookupStrongsSWORD(gint theNumber);
-
+void setglobalopsSWORD(gchar *option,
+			gchar *yesno);
 
 
 #endif	/* __GNOMESWORD_H__ */
+#ifdef __cplusplus
+}
+#endif
