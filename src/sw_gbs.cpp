@@ -238,7 +238,6 @@ void setupSW_GBS(SETTINGS *s)
 	curbookMod = NULL;
 	bookDisplay = 0;
 	bookDisplay = new EntryDisp(s->htmlBook);
-	loadBookListSW_GBS(s);
 }
 
 void shutdownSW_GBS(void)
@@ -254,20 +253,24 @@ void loadBookListSW_GBS(SETTINGS *s)
 {	
 	ModMap::iterator 
 		it;	//-- iteratior
+	GList *books;
 	
 	g_list_free(bookmods);
 	g_list_free(sbbookmods);
 	bookmods = NULL;	
 	sbbookmods = NULL;
-	
+	books = NULL;
 	for (it = swmgrBook->Modules.begin(); it != swmgrBook->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Generic Book")) {  
 			curbookMod = (*it).second;
 			bookmods = g_list_append(bookmods, curbookMod->Name());
+			books = g_list_append(books, curbookMod->Name());
 			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
 			curbookMod->Disp(bookDisplay);
 		}
-	}	
+	}
+	addbooktoCTreeGS_GBS(s, books);
+	g_list_free(books);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -328,8 +331,6 @@ void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *fileName)
 		tmpbuf[256];
 	string 
 		bookpath;
-	TreeKeyIdx 
-		*treeKey;
 	
 	fileName = g_strchomp(fileName); //-- remove trailing spaces
 	fileName = g_strdelimit(fileName," /*?|",'_'); //-- remove chars from filename
@@ -346,12 +347,11 @@ void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *fileName)
 		bookpath = bookpath + "/" + fileName;
 		RawGenBook::createModule((gchar*)bookpath.c_str());
 		createModuleConf(bookName,fileName);
-		cout << bookpath << "\n";
 	}
 	
 	RawGenBook *book = new RawGenBook((gchar*)bookpath.c_str());
 	TreeKeyIdx root = *((TreeKeyIdx *)((SWKey *)(*book)));
-	treeKey = (TreeKeyIdx *)(SWKey *)(*book);
+	TreeKeyIdx *treeKey = (TreeKeyIdx *)(SWKey *)(*book);
 	appendChild(treeKey, bookName);
 	treeKey->firstChild();
 	setEntryText(book, bookName);
@@ -361,8 +361,10 @@ void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *fileName)
 				current_node, NULL, buf, 3,
 				pixmap1, mask1, pixmap2,
 				mask2, FALSE, FALSE);
-	delete treeKey;
+	
 	delete book;
+	swmgrBook->Load();
+	loadBookListSW_GBS(s);
 }
 
 void changeNodeNameSW_GBS(SETTINGS *s, gchar *name)
@@ -416,6 +418,7 @@ void changeNodeNameSW_GBS(SETTINGS *s, gchar *name)
 	}	
 	setnodeinfoGS_GBS(s, p_nodedata);	
 }
+
 /***  does nothing yet ****fixme****  ***/
 gint deleteNodeSW_GBS(SETTINGS *s)
 {
@@ -485,6 +488,8 @@ on_ctreeBooks_select_row(GtkCList * clist,
 	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
 	TreeKeyIdx treenode = *treeKey;
 	treenode.setOffset(strtoul(offset,NULL,0));
+	
+	g_warning("nodename = %s bookname = %s",nodename, bookname);
 	
 	if(!curbookMod->isWritable()) 
 		iswritable = 0;
