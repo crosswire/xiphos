@@ -1001,6 +1001,43 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 			   GTK_SIGNAL_FUNC(link_clicked), vt);
 }
 
+
+/******************************************************************************
+ * Name
+ *   gui_bibletext_dialog_goto_bookmark
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key)
+{
+	GList *tmp = NULL;
+	tmp = g_list_first(dialog_list);
+	while (tmp != NULL) {
+		TEXT_DATA *vt = (TEXT_DATA *) tmp->data;
+		if(!strcmp(vt->mod_name, mod_name)) {
+			vt->key = key;
+			display(vt, vt->key, TRUE);
+			update_controls(vt);
+			return;
+		}		
+		tmp = g_list_next(tmp);
+	}
+	gui_open_bibletext_dialog(mod_name);
+	strcpy(cur_vt->key, key);
+	display(cur_vt, cur_vt->key, TRUE);
+	update_controls(cur_vt);
+}
+
 /******************************************************************************
  * Name
  *   gui_open_bibletext_dialog
@@ -1008,7 +1045,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void gui_open_bibletext_dialog(gint mod_num)	
+ *   void gui_open_bibletext_dialog(gchar * mod_name)	
  *
  * Description
  *   

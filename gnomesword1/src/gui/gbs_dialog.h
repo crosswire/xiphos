@@ -27,7 +27,8 @@ extern "C" {
 #endif
 
 #include "gui/gbs.h"
-
+	
+void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_open_gbs_dialog(gchar * mod_name);
 void gui_setup_gbs_dialog(GList *mods);
 void gui_shutdown_gbs_dialog(void) ;
