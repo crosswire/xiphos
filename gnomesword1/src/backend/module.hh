@@ -41,8 +41,8 @@ int backend_do_module_search(char * module_name ,const char *search_string,
 		int search_type, int search_params);
 char *backend_get_search_results_text(char * mod_name, char * key);
 void backend_set_module_iterators(void);
-NAME_TYPE *backend_get_next_module_name(void);
-NAME_TYPE *backend_get_next_module_description(void);
+NAME_TYPE *backend_get_next_module_name(NAME_TYPE *nt);
+NAME_TYPE *backend_get_next_module_description(NAME_TYPE *nt);
 
 int backend_is_personal_comment_module(char * mod_name);
 char *backend_get_next_percom_name(void);
