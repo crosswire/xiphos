@@ -43,6 +43,10 @@
 #include "main/lists.h"
 #include "main/sword.h"
 
+
+static void on_notebook_comm_switch_page(GtkNotebook * notebook,
+				 GtkNotebookPage * page,
+				 gint page_num, GList * cl);
 /******************************************************************************
  * externs
  */ 
@@ -125,8 +129,15 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 		++page;
 		comm_list = g_list_next(comm_list);
 	}
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm), page);
+	if(page)
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+				  widgets.notebook_comm), page);
+	else
+		on_notebook_comm_switch_page(GTK_NOTEBOOK(
+				  widgets.notebook_comm),
+				  NULL,
+				  page, 
+				  comm_list);
 	settings.comm_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 			settings.comm_tabs);
@@ -181,7 +192,7 @@ static void set_comm_frame_label(COMM_DATA *c)
  *   void
  */
 
-static void on_notebook_comm_switch_page(GtkNotebook * notebook,
+void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl)
 {

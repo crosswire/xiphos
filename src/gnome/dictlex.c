@@ -48,6 +48,8 @@ extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 /******************************************************************************
  * global to this file only 
  */
+static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
+		GtkNotebookPage * page,	gint page_num, GList * dl_list);
 static GList *dl_list;
 static DL_DATA *cur_d;
 
@@ -130,7 +132,15 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 		++page;
 		dl_list = g_list_next(dl_list);
 	}
-
+	if(page)		
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+				  widgets.notebook_dict), page);
+	else
+		on_notebook_dictlex_switch_page(GTK_NOTEBOOK(
+				  widgets.notebook_dict),
+				  NULL,
+				  page, 
+				  dl_list);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict), page);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 
@@ -182,7 +192,7 @@ static void gui_set_dict_frame_label(DL_DATA *d)
  *   void
  */
 
-static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
+void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 		GtkNotebookPage * page,	gint page_num, GList * dl_list)
 {
 	DL_DATA *d; //, *d_old;

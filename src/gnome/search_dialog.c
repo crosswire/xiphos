@@ -563,6 +563,29 @@ static void on_button_save_clicked(GtkButton * button,
 
 /******************************************************************************
  * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void save_mods(GtkButton * button, gpointer user_data)
+{
+	
+	
+
+}
+
+/******************************************************************************
+ * Name
  *   on_togglebutton_show_main
  *
  * Synopsis
@@ -2740,6 +2763,9 @@ static GtkWidget *create_search_dialog(void)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (search.rb_custom_range), "toggled",
                       GTK_SIGNAL_FUNC (scope_toggled),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (button_save_mods), "clicked",
+                      GTK_SIGNAL_FUNC (save_mods),
                       NULL);
 /*	gtk_signal_connect(GTK_OBJECT(search.),
 			"button_release_event",
