@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * html.c - GtkHtml gui stuff
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -423,7 +423,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			if (!strncmp(modbuf, "none", 5)) { /* gbf */
+			if (!strncmp(modbuf, "none", 5)) {	/* gbf */
 				modbuf = "Packard";
 			} else {
 				for (i = 0; i < strlen(modbuf); i++) {
@@ -916,25 +916,45 @@ void gui_html_print(GtkWidget * htmlwidget)
 	GnomePrintMaster *print_master;
 	GnomePrintContext *print_context;
 	GtkWidget *preview;
+	GtkWidget *print_dialog;
 	GtkHTML *html;
+	gint ret;
 
 	html = GTK_HTML(htmlwidget);
 
 	print_master = gnome_print_master_new();
 	print_context = gnome_print_master_get_context(print_master);
 
+	print_dialog = gnome_print_dialog_new(_("Print"), 0);
+
 	page_num = 1;
 	font =
 	    gnome_font_new_closest("Times", GNOME_FONT_BOOK, FALSE, 12);
-	gtk_html_print_with_header_footer(html, print_context, .0, .03,
-					  NULL, print_footer, NULL);
+	ret = gnome_dialog_run(GNOME_DIALOG(print_dialog));
+	print_master =
+	    gnome_print_master_new_from_dialog(GNOME_PRINT_DIALOG
+					       (print_dialog));
+	print_context = gnome_print_master_get_context(print_master);
+	gtk_html_print_with_header_footer(html, print_context, .0,
+					  .03, NULL, print_footer,
+					  NULL);
+
+	switch (ret) {
+	case GNOME_PRINT_PRINT:
+		gnome_print_master_print(print_master);
+		break;
+	case GNOME_PRINT_PREVIEW:
+		preview = GTK_WIDGET(gnome_print_master_preview_new
+				     (print_master,
+				      _("GnomeSword Print Preview")));
+		gtk_widget_show(preview);
+		break;
+	case GNOME_PRINT_CANCEL:
+		break;
+	}
+	gtk_widget_destroy(print_dialog);
+	
 	if (font)
 		gtk_object_unref(GTK_OBJECT(font));
-
-	preview =
-	    GTK_WIDGET(gnome_print_master_preview_new
-		       (print_master, "GnomeSword Print Preview"));
-	gtk_widget_show(preview);
-
 	gtk_object_unref(GTK_OBJECT(print_master));
 }

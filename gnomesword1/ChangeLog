@@ -10,6 +10,12 @@
 	* added chapter_display_mozilla() that uses gtkembedmoz()
 	  to display Hebrew right to left. Just a workaround until
 	  the port to Gnome2. 
+	* added two patches from Tim Silversides. 
+	  1. The First starts search when a user presses return in the 
+	     search text entry.
+	  2. The second gives the user a choice of whether or not to 
+	     preview printing.
+	     
 
 2003-04-25  Terry <tbiggs@users.sf.net>
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-04-29 14:51-0400\n"
+"POT-Creation-Date: 2003-04-29 16:11-0400\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -200,7 +200,8 @@ msgid "Open Module"
 msgstr "Afficher le module"
 
 #: src/gnome/bibletext_menu.c:1185 src/gnome/commentary_menu.c:1234
-#: src/gnome/editor_menu.c:1057 src/gnome/toolbar_edit.c:528
+#: src/gnome/editor_menu.c:1057 src/gnome/html.c:928
+#: src/gnome/toolbar_edit.c:528
 msgid "Print"
 msgstr "Imprimer..."
 
@@ -594,7 +595,7 @@ msgstr "Enregistrer"
 msgid "Save AS"
 msgstr "Enregistrer sous..."
 
-#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:764
+#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:763
 msgid "_Edit"
 msgstr "_Editer"
 
@@ -792,6 +793,11 @@ msgstr "Historique/_Effacer"
 #, fuzzy
 msgid "Unlock "
 msgstr "Entrez la clé de déverrouillage"
+
+#: src/gnome/html.c:949
+#, fuzzy
+msgid "GnomeSword Print Preview"
+msgstr "GnomeSword - Page Combiné"
 
 #: src/gnome/interlinear.c:1181
 msgid "Detach/Attach"
@@ -1010,56 +1016,56 @@ msgstr "À propos de GnomeSword"
 msgid "_File"
 msgstr "Fichier"
 
-#: src/gnome/main_menu.c:771
+#: src/gnome/main_menu.c:769
 #, fuzzy
 msgid "H_istory"
 msgstr "Historique"
 
-#: src/gnome/main_menu.c:778
+#: src/gnome/main_menu.c:775
 #, fuzzy
 msgid "_View"
 msgstr "Afficheur"
 
-#: src/gnome/main_menu.c:785
+#: src/gnome/main_menu.c:781
 msgid "_Help"
 msgstr ""
 
-#: src/gnome/main_menu.c:816
+#: src/gnome/main_menu.c:811
 msgid "_File/Open Bibletext Dialog/"
 msgstr ""
 
-#: src/gnome/main_menu.c:821
+#: src/gnome/main_menu.c:816
 #, fuzzy
 msgid "_File/Open Commentary Dialog/"
 msgstr "Onglets des Commentaires"
 
-#: src/gnome/main_menu.c:826
+#: src/gnome/main_menu.c:821
 #, fuzzy
 msgid "_File/Open Dictionary Dialog/"
 msgstr "Ajouter un dictionnaire"
 
-#: src/gnome/main_menu.c:831
+#: src/gnome/main_menu.c:826
 #, fuzzy
 msgid "_File/Open Book Dialog/"
 msgstr "Ouvrir la boite de recherche"
 
 #  don't translate: GnomeUI-WARNING **: gnome_app_insert_menus_custom: couldn't find insertion point for menus!
-#: src/gnome/main_menu.c:845
+#: src/gnome/main_menu.c:841
 msgid "_Help/About Sword Modules/Bible Texts/"
 msgstr ""
 
 #  don't translate: GnomeUI-WARNING **: gnome_app_insert_menus_custom: couldn't find insertion point for menus!
-#: src/gnome/main_menu.c:849
+#: src/gnome/main_menu.c:846
 msgid "_Help/About Sword Modules/Commentaries/"
 msgstr ""
 
 #  don't translate: GnomeUI-WARNING **: gnome_app_insert_menus_custom: couldn't find insertion point for menus!
-#: src/gnome/main_menu.c:853
+#: src/gnome/main_menu.c:851
 msgid "_Help/About Sword Modules/Dictionaries-Lexicons/"
 msgstr ""
 
 #  don't translate: GnomeUI-WARNING **: gnome_app_insert_menus_custom: couldn't find insertion point for menus!
-#: src/gnome/main_menu.c:857
+#: src/gnome/main_menu.c:855
 msgid "_Help/About Sword Modules/Books/"
 msgstr ""
 
@@ -2399,10 +2405,6 @@ msgstr "Augmenter l'indentation du texte"
 #, fuzzy
 #~ msgid "GnomeSword - Find"
 #~ msgstr "GnomeSword - Préférences"
-
-#, fuzzy
-#~ msgid "GnomeSword - Interlinear"
-#~ msgstr "GnomeSword - Page Combiné"
 
 #~ msgid "Use Formatting"
 #~ msgstr "Utiliser la mise en forme"
