@@ -26,8 +26,6 @@ libgui_a_SOURCES =  \
     _display_info.h \
     _editor.c \
     _editor.h \
-    _gbs.c \
-    _gbs.h \
     _percomm.c \
     _percomm.h \
     about_gnomesword.c \
@@ -56,6 +54,7 @@ libgui_a_SOURCES =  \
     editor_toolbar.h \
     fileselection.c \
     fileselection.h \
+    gbs.c \
     gbs_find.c \
     gbs_find.h \
     gui.c \

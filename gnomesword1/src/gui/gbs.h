@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _gbs.h - generic book support - the gui
+ * gbs.h - generic book support - the gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
