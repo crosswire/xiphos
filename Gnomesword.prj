@@ -107,7 +107,9 @@ module.source.files=\
 	gs_viewcomm.h\
 	gs_history.h\
 	printstuff.h\
-	interface.h
+	interface.h\
+	sw_utility.cpp\
+	sw_utility.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -1,3 +1,8 @@
+2001-04-05 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added addrenderfilterSWORD function
+
+
 2001-03-28 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added check for save if studypad file is modified on open and new
