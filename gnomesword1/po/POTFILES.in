@@ -53,7 +53,8 @@ src/gnome2/about_sword.c
 src/gnome2/bibletext.c
 src/gnome2/bibletext_dialog.c
 src/gnome2/bibletext_menu.c
-src/gnome2/bookmarks.c
+src/gnome2/bookmarks_menu.c
+src/gnome2/bookmarks_treeview.c
 src/gnome2/cipher_key_dialog.c
 src/gnome2/commentary.c
 src/gnome2/commentary_dialog.c

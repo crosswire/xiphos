@@ -32,6 +32,8 @@
 #endif
 #include <string.h>
 
+#include "gui/gnomesword.h"
+
 #include "main/module.h"
 #include "main/settings.h"
 #include "main/xml.h"
@@ -42,6 +44,85 @@
 extern int search_dialog;
 
 
+/******************************************************************************
+ * Name
+ *  get_module_key
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   char *get_module_key(void)	
+ *
+ * Description
+ *    returns module key
+ *
+ * Return value
+ *   char *
+ */
+
+char *get_module_key(void)
+{
+	if (settings.havebible) {
+		switch (settings.whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			return (char *) settings.currentverse;
+			break;
+		case COMMENTARY_WINDOW:
+			return (char *) settings.comm_key;
+			break;
+		case DICTIONARY_WINDOW:
+			return (char *) settings.dictkey;
+			break;
+		case parallel_WINDOW:
+			return (char *) settings.cvparallel;
+			break;
+		case BOOK_WINDOW:
+			return (char *) settings.book_key;
+			break;
+		}
+	}
+	return NULL;
+}
+
+
+/******************************************************************************
+ * Name
+ *  get_module_name
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   char *get_module_name(void)	
+ *
+ * Description
+ *    returns module name
+ *
+ * Return value
+ *   char *
+ */
+
+char *get_module_name(void)
+{
+	if (settings.havebible) {
+		switch (settings.whichwindow) {
+		case MAIN_TEXT_WINDOW:
+			return (char *) xml_get_value("modules",
+						       "bible");
+			break;
+		case COMMENTARY_WINDOW:
+			return (char *) xml_get_value("modules",
+						       "comm");
+			break;
+		case DICTIONARY_WINDOW:
+			return (char *) settings.DictWindowModule;
+			break;
+		case BOOK_WINDOW:
+			return (char *) settings.BookWindowModule;
+			break;
+		}
+	}
+	return NULL;
+}
 
 /******************************************************************************
  * Name

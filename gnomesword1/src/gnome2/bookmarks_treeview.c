@@ -206,8 +206,6 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 		} else
 			data->caption = g_strdup(key);
 	}
-
-
 	data->key = g_strdup(key);
 	data->module = g_strdup(mod1);
 	data->is_leaf = TRUE;
@@ -317,12 +315,12 @@ static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
 
 /******************************************************************************
  * Name
- *  parse_bookmarks
+ *  gui_parse_bookmarks
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
- *   void parse_bookmarks(GtkCTree * ctree)	
+ *   void gui_parse_bookmarks(GtkCTree * ctree)	
  *
  * Description
  *    load a xml bookmark file
@@ -331,39 +329,17 @@ static void add_node(xmlNodePtr cur, GtkTreeIter *parent)
  *   void
  */
 
-static void parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
+void parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
 			    GtkTreeIter *parent)
 {
-	xmlDocPtr doc;
 	xmlNodePtr cur = NULL;
 	BOOKMARK_DATA data, *p = NULL;
 	GtkTreeIter iter;
 	GtkTreePath *path;
 
 	p = &data;
-
-	doc = xmlParseFile(file);
-
-	if (doc == NULL) {
-		fprintf(stderr, "Document not parsed successfully. \n");
-		return;
-	}
-
-	cur = xmlDocGetRootElement(doc);
-	if (cur == NULL) {
-		fprintf(stderr, "empty document \n");
-		return;
-	}
-
-	if (xmlStrcmp(cur->name, (const xmlChar *) "SwordBookmarks")) {
-		fprintf(stderr,
-			"wrong type, root node != SwordBookmarks\n");
-		xmlFreeDoc(doc);
-		return;
-	}
-
-	cur = cur->xmlChildrenNode;
-
+	cur = xml_load_bookmark_file(file);
+	//cur = cur->xmlChildrenNode;
 	while (cur != NULL) {
 		if (!xmlStrcmp(cur->name, (const xmlChar *) "Bookmark")) {
 			get_xml_bookmark_data(cur, p);
@@ -383,12 +359,69 @@ static void parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
 		else
 			break;
 	}
-	xmlFreeDoc(doc);
+	xml_free_bookmark_doc();
 	path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), parent);
 	gtk_tree_view_expand_to_path(tree, path);
 	gtk_tree_path_free(path);
 }
 
+/******************************************************************************
+ * Name
+ *   gui_load_removed
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_treview.h"
+ *
+ *   void gui_load_removed()
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_load_removed(const xmlChar * file)
+{
+	xmlNodePtr cur = NULL;
+	BOOKMARK_DATA data, *p = NULL;
+	GtkTreeIter iter;
+	GtkTreeIter parent;
+	GtkTreePath *path;
+	gchar *caption = NULL;
+	GtkTreeSelection* selection;
+	GtkTreeIter selected;
+
+	selection = gtk_tree_view_get_selection(bookmark_tree);
+	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	p = &data;
+	
+	cur = xml_load_bookmark_file(file);
+	while (cur != NULL) {
+		if (!xmlStrcmp(cur->name, (const xmlChar *) "Bookmark")) {
+			get_xml_bookmark_data(cur, p);
+			add_item_to_tree(&iter, &parent, p);
+			free_bookmark_data(p);
+		} else {
+			get_xml_folder_data(cur, p);
+			if(p->caption) {
+				add_item_to_tree(&parent, &selected, p);
+			}
+			free_bookmark_data(p);
+			add_node(cur, &parent);
+		}
+
+		if (cur->next)
+			cur = cur->next;
+		else
+			break;
+	}
+	xml_free_bookmark_doc();
+	path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), &selected);
+	gtk_tree_view_expand_to_path(bookmark_tree, path);
+	gtk_tree_path_free(path);
+}
 
 /******************************************************************************
  * Name
@@ -423,13 +456,12 @@ static void tree_selection_changed(GtkTreeSelection * selection,
 		
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 				     &selected) && key != NULL) {
-			//g_warning(caption);
 			if(button_one)
 				goto_bookmark(module, key);
 			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
-			gtk_widget_set_sensitive(menu.point, TRUE);
+			//gtk_widget_set_sensitive(menu.point, TRUE);
 			gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 		}
 		else {
@@ -477,6 +509,45 @@ static void load_xml_bookmarks(GtkTreeView *tree, GtkTreeIter *iter)
 	g_string_free(str, TRUE);
 }
 
+/******************************************************************************
+ * Name
+ *   row_changed
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void row_changed(GtkTreeModel *treemodel, GtkTreePath *arg1,
+ *                             GtkTreeIter *arg2, gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void row_changed(GtkTreeModel *treemodel, GtkTreePath *arg1,
+                             GtkTreeIter *arg2, gpointer user_data)
+{
+	bookmarks_changed = TRUE;
+	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+}
+
+/******************************************************************************
+ * Name
+ *   create_pixbufs
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void create_pixbufs(void)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
 
 static void create_pixbufs(void)
 {
@@ -491,6 +562,22 @@ static void create_pixbufs(void)
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR 
 				     "/helpdoc.png", NULL);
 }
+
+/******************************************************************************
+ * Name
+ *   add_columns
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   void add_columns(GtkTreeView * tree)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
 
 static void add_columns(GtkTreeView * tree)
 {
@@ -513,7 +600,8 @@ static void add_columns(GtkTreeView * tree)
 	gtk_tree_view_column_pack_start(column, renderer, TRUE);
 	gtk_tree_view_column_set_attributes(column, renderer,
 					    "text", COL_CAPTION, NULL);
-	gtk_tree_view_append_column(tree, column);
+	gtk_tree_view_append_column(tree, column); 
+	gtk_tree_view_column_set_sort_column_id(column, COL_CAPTION );
 
 
 	column = gtk_tree_view_column_new();
@@ -534,10 +622,25 @@ static void add_columns(GtkTreeView * tree)
 }
 
 
+/******************************************************************************
+ * Name
+ *   create_model
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_menu.h"
+ *
+ *   GtkTreeModel *create_model(void)
+ *
+ * 
+ * Description
+ *    
+ *
+ * Return value
+ *   GtkTreeModel *
+ */
+
 static GtkTreeModel *create_model(void)
 {
-	
-
 	/* create tree store */
 	model = gtk_tree_store_new(N_COLUMNS,
 				   GDK_TYPE_PIXBUF,
@@ -545,9 +648,6 @@ static GtkTreeModel *create_model(void)
 				   G_TYPE_STRING,
 				   G_TYPE_STRING, 
 				   G_TYPE_STRING);
-
-
-
 	return GTK_TREE_MODEL(model);	
 }
 
@@ -646,5 +746,8 @@ GtkWidget *gui_create_bookmark_tree(void)
 			 G_CALLBACK(tree_selection_changed), NULL);
 	use_dialog = FALSE;
 	bookmark_tree = GTK_TREE_VIEW(tree);
+	g_signal_connect(model, "row-changed",
+			 G_CALLBACK(row_changed), NULL);
+	
 	return tree;
 }
