@@ -43,6 +43,8 @@
 #include "main/settings.h"
 #include "main/dictlex.h"
 
+#include "gnome/shortcutbar.h"
+
 extern SEARCH_OPT so, *p_so;
 extern GList *sblist;			/* for saving search results to bookmarks  */
 extern gint groupnum7;

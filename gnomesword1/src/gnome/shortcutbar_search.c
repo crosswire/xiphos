@@ -39,6 +39,8 @@
 #include "main/search.h"
 #include "main/settings.h"
 
+#include "gnome/shortcutbar.h"
+
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
 extern SB_VIEWER sb_v, *sv;
