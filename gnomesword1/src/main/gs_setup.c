@@ -150,15 +150,15 @@ static GtkWidget *create_dlgSetup(void)
     gchar gs_version[80];
     gchar gs_gnomesword[80];
 
-    biblemods = backend_getModListOfTypeSWORD(TEXT_MODS);
-    commmods = backend_getModListOfTypeSWORD(COMM_MODS);
-    dictmods = backend_getModListOfTypeSWORD(DICT_MODS);
+    biblemods = backend_get_list_of_mods_by_type(TEXT_MODS);
+    commmods = backend_get_list_of_mods_by_type(COMM_MODS);
+    dictmods = backend_get_list_of_mods_by_type(DICT_MODS);
 
     sprintf(gtextmods, "%d", g_list_length(biblemods));
     sprintf(gcommmods, "%d", g_list_length(commmods));
     sprintf(gdictmods, "%d", g_list_length(dictmods));
     
-    pathtomods = backend_getPathToModsSWORD();
+    pathtomods = backend_get_path_to_mods();
     
     sprintf(gs_version, "%s-%s", _("Welcome To GnomeSword"), VERSION);
     sprintf(gs_gnomesword, "%s-%s", _("GnomeSword"), VERSION);

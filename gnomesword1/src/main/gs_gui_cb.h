@@ -33,7 +33,8 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-
+#include "gs_gnomesword.h"
+	
 	void on_mainwindow_size_allocate(GtkWidget * widget,
 					 GtkAllocation * allocation,
 					 gpointer user_data);
@@ -50,7 +51,7 @@ extern "C" {
 	void on_resultList_select_row(GtkCList * clist, gint row,
 				      gint column, GdkEvent * event,
 				      gpointer user_data);
-	void on_mainwindow_destroy(GtkObject * object, gpointer user_data);
+	void on_mainwindow_destroy(GtkObject * object, SETTINGS * s);
 	void on_dlgSearch_destroy(GtkObject * object, gpointer user_data);
 	void on_btnSearch_clicked(GtkButton * button, gpointer user_data);
 	void on_btnStrongs_toggled(GtkToggleButton * togglebutton,

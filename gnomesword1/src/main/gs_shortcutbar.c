@@ -43,7 +43,7 @@
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_bookmarks.h"
-#include "verselist_sb.h"
+#include "verselist.h"
 #include "shortcutbar.h"
 #include "gbs.h"
 #include "gs_detach_sb.h"
@@ -106,7 +106,19 @@ static void on_add_all_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 static void remove_all_items(gint group_num);
 
-
+gboolean display_dictlex_in_viewer(char * modName, char * key, 
+						SETTINGS * s)
+{
+	if (s->showshortcutbar) {	
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+			s->verse_list_notebook), 2);
+		sprintf(s->groupName, "%s", "Viewer");
+		showSBVerseList(s);
+		backend_display_sb_dictlex(modName, key);
+		return TRUE;
+	}
+	return FALSE;
+}
 void display_verse_list(gchar * module_name, gchar * verse_list,
 				SETTINGS * s)
 {
@@ -263,9 +275,8 @@ void showSBVerseList(SETTINGS * s)
 }
 
 /*** set shortcut bar to Daily Devotion group ***/
-void setupforDailyDevotion(SETTINGS * s)
+void set_sb_for_daily_devotion(SETTINGS * s)
 {
-
 	showSBGroup(s, groupnum7);
 	changegroupnameSB(s, _("Daily Devotion"), groupnum7);
 }
@@ -322,10 +333,10 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Favorites.conf",
+			backend_save_sb_group("Favorites.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Favorites.conf",
+			backend_save_sb_group("Favorites.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -333,10 +344,10 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("BibleText.conf",
+			backend_save_sb_group("BibleText.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("BibleText.conf",
+			backend_save_sb_group("BibleText.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -344,10 +355,10 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Commentaries.conf",
+			backend_save_sb_group("Commentaries.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Commentaries.conf",
+			backend_save_sb_group("Commentaries.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -355,10 +366,10 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Dictionaries.conf",
+			backend_save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Dictionaries.conf",
+			backend_save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -366,10 +377,10 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum8) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Books.conf", group_name,
+			backend_save_sb_group("Books.conf", group_name,
 					  group_num, "1");
 		else
-			saveshortcutbarSW("Books.conf", group_name,
+			backend_save_sb_group("Books.conf", group_name,
 					  group_num, "0");
 	}
 }
@@ -462,10 +473,10 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Favorites.conf",
+			backend_save_sb_group("Favorites.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Favorites.conf",
+			backend_save_sb_group("Favorites.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -473,10 +484,10 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("BibleText.conf",
+			backend_save_sb_group("BibleText.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("BibleText.conf",
+			backend_save_sb_group("BibleText.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -484,10 +495,10 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Commentaries.conf",
+			backend_save_sb_group("Commentaries.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Commentaries.conf",
+			backend_save_sb_group("Commentaries.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -495,10 +506,10 @@ static void on_remove_item_activate(GtkMenuItem * menuitem,
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Dictionaries.conf",
+			backend_save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Dictionaries.conf",
+			backend_save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "0");
 	}
 }
@@ -512,7 +523,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	glist = NULL;
-	glist = getModlistSW((gchar *) user_data);
+	glist = backend_get_sb_mod_list((gchar *) user_data);
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num =
@@ -528,7 +539,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 		memset(modName, 0, 16);
 		modNameFromDesc(modName, (gchar *) glist->data);
 		sbtype = 0;
-		sbtype = sbtypefromModNameSBSW(modName);
+		sbtype = backend_sb_type_from_modname(modName);
 		if (sbtype < 0)
 			sbtype = 0;
 
@@ -589,7 +600,7 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 	memset(modName, 0, 16);
 	modNameFromDesc(modName, (gchar *) user_data);
 	sbtype = 0;
-	sbtype = sbtypefromModNameSBSW(modName);
+	sbtype = backend_sb_type_from_modname(modName);
 	if (sbtype < 0)
 		sbtype = 0;
 
@@ -623,10 +634,10 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Favorites.conf",
+			backend_save_sb_group("Favorites.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Favorites.conf",
+			backend_save_sb_group("Favorites.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -634,10 +645,10 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("BibleText.conf",
+			backend_save_sb_group("BibleText.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("BibleText.conf",
+			backend_save_sb_group("BibleText.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -645,10 +656,10 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Commentaries.conf",
+			backend_save_sb_group("Commentaries.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Commentaries.conf",
+			backend_save_sb_group("Commentaries.conf",
 					  group_name, group_num, "0");
 	}
 
@@ -656,10 +667,10 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
-			saveshortcutbarSW("Dictionaries.conf",
+			backend_save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "1");
 		else
-			saveshortcutbarSW("Dictionaries.conf",
+			backend_save_sb_group("Dictionaries.conf",
 					  group_name, group_num, "0");
 	}
 }
@@ -789,13 +800,13 @@ set_large_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
 	e_shortcut_bar_set_view_type(shortcut_bar, group_num,
 				     E_ICON_BAR_LARGE_ICONS);
 	if (group_num == groupnum0)
-		save_iconsizeSW("Favorites.conf", "1");
+		backend_save_sb_iconsize("Favorites.conf", "1");
 	if (group_num == groupnum1)
-		save_iconsizeSW("BibleText.conf", "1");
+		backend_save_sb_iconsize("BibleText.conf", "1");
 	if (group_num == groupnum2)
-		save_iconsizeSW("Commentaries.conf", "1");
+		backend_save_sb_iconsize("Commentaries.conf", "1");
 	if (group_num == groupnum3)
-		save_iconsizeSW("Dictionaries.conf", "1");
+		backend_save_sb_iconsize("Dictionaries.conf", "1");
 }
 
 static void
@@ -813,13 +824,13 @@ set_small_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
 	e_shortcut_bar_set_view_type(shortcut_bar, group_num,
 				     E_ICON_BAR_SMALL_ICONS);
 	if (group_num == groupnum0)
-		save_iconsizeSW("Favorites.conf", "0");
+		backend_save_sb_iconsize("Favorites.conf", "0");
 	if (group_num == groupnum1)
-		save_iconsizeSW("BibleText.conf", "0");
+		backend_save_sb_iconsize("BibleText.conf", "0");
 	if (group_num == groupnum2)
-		save_iconsizeSW("Commentaries.conf", "0");
+		backend_save_sb_iconsize("Commentaries.conf", "0");
 	if (group_num == groupnum3)
-		save_iconsizeSW("Dictionaries.conf", "0");
+		backend_save_sb_iconsize("Dictionaries.conf", "0");
 }
 
 static void
@@ -1041,7 +1052,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 			if (group_num == groupnum0) {
 				gint sbtype;
-				sbtype = sbtypefromModNameSBSW(modName);
+				sbtype = backend_sb_type_from_modname(modName);
 				if (sbtype == 0 || sbtype == 1)
 					gotoBookmarkSWORD(modName,
 							  settings->
@@ -1197,7 +1208,7 @@ void setupSB(SETTINGS * s)
 				 _("Favorites"));
 		filename = "Favorites.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1208,7 +1219,7 @@ void setupSB(SETTINGS * s)
 			memset(modName, 0, 16);
 			modNameFromDesc(modName, (gchar *) tmp->data);
 			sbtype = 0;
-			sbtype = sbtypefromModNameSBSW(modName);
+			sbtype = backend_sb_type_from_modname(modName);
 			if (sbtype < 0)
 				sbtype = 0;
 			switch (sbtype) {
@@ -1253,7 +1264,7 @@ void setupSB(SETTINGS * s)
 				 _("Bible Text"));
 		filename = "BibleText.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1279,7 +1290,7 @@ void setupSB(SETTINGS * s)
 				 _("Commentaries"));
 		filename = "Commentaries.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1306,7 +1317,7 @@ void setupSB(SETTINGS * s)
 							   ("Dict/Lex")));
 		filename = "Dictionaries.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1333,7 +1344,7 @@ void setupSB(SETTINGS * s)
 				 _("Book"));
 		filename = "Books.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1521,7 +1532,7 @@ void update_shortcut_bar(SETTINGS * s)
 				 _("Favorites"));
 		filename = "Favorites.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1532,7 +1543,7 @@ void update_shortcut_bar(SETTINGS * s)
 			memset(modName, 0, 16);
 			modNameFromDesc(modName, (gchar *) tmp->data);
 			sbtype = 0;
-			sbtype = sbtypefromModNameSBSW(modName);
+			sbtype = backend_sb_type_from_modname(modName);
 			if (sbtype < 0)
 				sbtype = 0;
 			switch (sbtype) {
@@ -1576,7 +1587,7 @@ void update_shortcut_bar(SETTINGS * s)
 				 _("Bible Text"));
 		filename = "BibleText.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1602,7 +1613,7 @@ void update_shortcut_bar(SETTINGS * s)
 				 _("Commentaries"));
 		filename = "Commentaries.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1629,7 +1640,7 @@ void update_shortcut_bar(SETTINGS * s)
 							   ("Dict/Lex")));
 		filename = "Dictionaries.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1657,7 +1668,7 @@ void update_shortcut_bar(SETTINGS * s)
 				 _("Book"));
 		filename = "Books.conf";
 		tmp =
-		    loadshortcutbarSW(filename, group_name, icon_size);
+		    backend_load_sb_group(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
 			e_shortcut_bar_set_view_type((EShortcutBar *)
@@ -1712,7 +1723,7 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 	}
 
 	glist = NULL;
-	glist = getModlistSW(modtype);
+	glist = backend_get_sb_mod_list(modtype);
 	while (glist != NULL) {
 		item =
 		    gtk_menu_item_new_with_label((gchar *) glist->data);

@@ -112,9 +112,11 @@ on_btnFootnotes_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
+void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
 {
-    shutdownSWORD();
+	backend_shutdown(s);
+	gnomesword_shutdown(s);
+	gtk_exit(0);		
 }
 
 //----------------------------------------------------------------------------------------------

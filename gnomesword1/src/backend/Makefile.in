@@ -177,8 +177,8 @@ libbackend_a_SOURCES = \
     shortcutbar.h \
     sword.cpp \
     sword.h \
-    verselist_sb.cpp \
-    verselist_sb.h\
+    verselist.cpp \
+    verselist.h\
     viewcomm.cpp \
     viewcomm.h\
     viewdict.cpp \
@@ -198,7 +198,7 @@ am_libbackend_a_OBJECTS = bookmarks.$(OBJEXT) commentary.$(OBJEXT) \
 	dictlex.$(OBJEXT) display.$(OBJEXT) gbs.$(OBJEXT) \
 	display_info.$(OBJEXT) module_options.$(OBJEXT) \
 	properties.$(OBJEXT) search.$(OBJEXT) shortcutbar.$(OBJEXT) \
-	sword.$(OBJEXT) verselist_sb.$(OBJEXT) viewcomm.$(OBJEXT) \
+	sword.$(OBJEXT) verselist.$(OBJEXT) viewcomm.$(OBJEXT) \
 	viewdict.$(OBJEXT) viewtext.$(OBJEXT)
 libbackend_a_OBJECTS = $(am_libbackend_a_OBJECTS)
 
@@ -213,7 +213,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/display_info.Po $(DEPDIR)/gbs.Po \
 @AMDEP_TRUE@	$(DEPDIR)/module_options.Po $(DEPDIR)/properties.Po \
 @AMDEP_TRUE@	$(DEPDIR)/search.Po $(DEPDIR)/shortcutbar.Po \
-@AMDEP_TRUE@	$(DEPDIR)/sword.Po $(DEPDIR)/verselist_sb.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sword.Po $(DEPDIR)/verselist.Po \
 @AMDEP_TRUE@	$(DEPDIR)/viewcomm.Po $(DEPDIR)/viewdict.Po \
 @AMDEP_TRUE@	$(DEPDIR)/viewtext.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -283,7 +283,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/shortcutbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sword.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/verselist_sb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/verselist.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewcomm.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewdict.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/viewtext.Po@am__quote@
