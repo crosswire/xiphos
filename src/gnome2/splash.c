@@ -29,7 +29,6 @@
 #include <gtk/gtk.h>
 #include <gtk/gtkwindow.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-//#include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 #include <gal/util/e-util.h>
 
 #include "main/settings.h"
@@ -91,13 +90,11 @@ struct _ESplashPrivate {
 	int layout_idle_id;
 };
 
-
 /* Layout constants.  These need to be changed if the splash changes.  */
 
 #define ICON_Y    290
 #define ICON_SIZE 25
 
-
 /* Icon management.  */
 
 static GdkPixbuf *
@@ -178,7 +175,6 @@ icon_free (Icon *icon)
 	g_free (icon);
 }
 
-
 /* Icon layout management.  */
 
 static void
@@ -239,7 +235,6 @@ schedule_relayout (ESplash *splash)
 	priv->layout_idle_id = gtk_idle_add (layout_idle_cb, splash);
 }
 
-
 /* GtkObject methods.  */
 
 static void
@@ -270,7 +265,6 @@ impl_destroy (GtkObject *object)
 	g_free (priv);
 }
 
-
 static void
 class_init (ESplashClass *klass)
 {
@@ -336,7 +330,7 @@ e_splash_construct (ESplash *splash,
 	image_width = gdk_pixbuf_get_width (splash_image_pixbuf);
 	image_height = gdk_pixbuf_get_height (splash_image_pixbuf);
 
-	gtk_widget_set_usize (canvas, image_width, image_height);
+	gtk_widget_set_size_request (canvas, image_width, image_height);
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas), 0, 0, image_width, image_height);
 	gtk_widget_show (canvas);
 

@@ -23,7 +23,6 @@
  */
 #include <config.h>
 #include <gnome.h>
-//#include <gal/widgets/widget-color-combo.h>
 
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>
@@ -106,7 +105,7 @@ static void on_btn_open_clicked(GtkButton * button,
 		GS_DIALOG *info;
 		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		if (settings.studypadfilename)
 			tmp_buf = settings.studypadfilename;
 		else
@@ -114,7 +113,7 @@ static void on_btn_open_clicked(GtkButton * button,
 		g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s",
 			tmp_buf,
-			"has been modified. Do you wish to save it?");
+			_("has been modified. Do you wish to save it?"));
 		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
@@ -202,7 +201,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 		
 		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		g_string_printf(str,"<span weight=\"bold\">%s</span>\n\n%s %s",
 						_("Delete Note?"), 
 			_("Are you sure you want to delete the note for\n"), ecd->key);
@@ -434,14 +433,14 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 
 	if (ecd->studypad) {
 		tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-new", 
+			GTK_STOCK_NEW, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 		ecd->btn_new =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
 					       GTK_TOOLBAR_CHILD_BUTTON,
 					       NULL, _("New"),
-					       _("New File"), NULL,
+					       _("Create a new file"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
 		gtk_widget_show(ecd->btn_new);
@@ -451,14 +450,14 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				   ecd);
 		
 		tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-open", 
+			GTK_STOCK_OPEN, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 		ecd->btn_open =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
 					       GTK_TOOLBAR_CHILD_BUTTON,
 					       NULL, _("Open"),
-					       _("Open File"), NULL,
+					       _("Open a file"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
 		gtk_widget_show(ecd->btn_open);
@@ -467,40 +466,40 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				   G_CALLBACK(on_btn_open_clicked),
 				   ecd);
 		tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-save", 
+			GTK_STOCK_SAVE, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 		ecd->btn_save =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
 					       GTK_TOOLBAR_CHILD_BUTTON,
 					       NULL, _("Save"),
-					       _("Save Current File"),
+					       _("Save the current file"),
 					       NULL, tmp_toolbar_icon,
 					       NULL, NULL);
 		gtk_widget_show(ecd->btn_save);
 	} else {
 		tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-save", 
+			GTK_STOCK_SAVE, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 		ecd->btn_save =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
 					       GTK_TOOLBAR_CHILD_BUTTON,
 					       NULL, _("Save"),
-					       _("Save Note"), NULL,
+					       _("Save note"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
 		gtk_widget_show(ecd->btn_save);
 
 		tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-delete", 
+			GTK_STOCK_DELETE, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 		ecd->btn_delete =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
 					       GTK_TOOLBAR_CHILD_BUTTON,
 					       NULL, _("Delete"),
-					       _("Delete Note"), NULL,
+					       _("Delete note"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
 		gtk_widget_show(ecd->btn_delete);
@@ -512,7 +511,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 
 	}
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-print", 
+			GTK_STOCK_PRINT, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_print =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -529,17 +528,17 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-cut", 
+			GTK_STOCK_CUT, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_cut =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Cut"), _("Cut "), NULL,
+				       _("Cut"), _("Cut"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(ecd->btn_cut);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-copy", 
+			GTK_STOCK_COPY, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_copy =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -549,7 +548,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(ecd->btn_copy);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-paste", 
+			GTK_STOCK_PASTE, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_paste =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -559,7 +558,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(ecd->btn_paste);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-undo", 
+			GTK_STOCK_UNDO, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_undo =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -575,7 +574,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-find", 
+			GTK_STOCK_FIND, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_Find =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -586,7 +585,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(ecd->btn_Find);
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-find-and-replace", 
+			GTK_STOCK_FIND_AND_REPLACE, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_replace =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -603,7 +602,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-spell-check", 
+			GTK_STOCK_SPELL_CHECK, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_spell =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
