@@ -177,7 +177,7 @@ struct _settings {
 	/* store $home directory */
 	char *homedir;
 
-	/* store .gnomesword-1.0 directory */
+	/* store .gnomesword-2.0 directory */
 	char *gSwordDir;
 
 	/* bookmarks directory */
