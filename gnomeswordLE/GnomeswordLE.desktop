@@ -1,0 +1,9 @@
+
+[Desktop Entry]
+Name=GnomeswordLE Version 0.4.0 
+Comment=Bible Study Software 
+Exec=gnomeswordLE 
+Icon=/usr/share/pixmaps/gnomesword/GnomeSword2.xpm
+Terminal=false
+MultipleArgs=false
+Type=Application
