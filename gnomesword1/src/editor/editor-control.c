@@ -486,7 +486,7 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type,
 	return cd;
 }
 
-GSHTMLEditorControlData *editor_new_editor(GtkWidget * container,
+GSHTMLEditorControlData *editor_new(GtkWidget * container,
 					   int type, char *filename)
 {
 	if (!container)

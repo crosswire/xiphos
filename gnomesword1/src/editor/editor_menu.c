@@ -484,7 +484,7 @@ static void set_link_to_module(gchar * linktext, gchar * linkref,
 
 	//e = ecd->html->engine;
 	
-	if (strlen(linkmod))
+	if (linkmod && strlen(linkmod))
 		sprintf(buf, "sword://%s/%s", linkmod, linkref);
 	else
 		sprintf(buf, "<a href=\"sword:///%s\">", linkref);

@@ -1114,7 +1114,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Open in a dialog"),
 	 N_("Open this bookmark in a dialog"),
 	 (gpointer) on_dialog_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
+	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("New Folder"),

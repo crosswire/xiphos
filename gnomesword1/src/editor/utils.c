@@ -201,7 +201,7 @@ editor_check_stock ()
 		GdkPixbuf *pixbuf;
 		GError *error = NULL;
 
-		pixbuf = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/insert-link-16.png", &error);
+		pixbuf = gdk_pixbuf_new_from_file (GTKHTML_DATA_DIR"/icons/insert-link-16.png", &error);
 		if (!pixbuf) {
 			g_error_free (error);
 		} else {
