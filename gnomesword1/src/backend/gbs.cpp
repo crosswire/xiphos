@@ -208,7 +208,7 @@ gboolean backend_displayRowGBS(gint booknum, gchar * offset)
         return false;
 }
 
-void backend_setupGBS(SETTINGS * s)
+void backend_setup_books(SETTINGS * s)
 {
         ModMap::iterator it;    //-- iteratior
         gint count = 0;
@@ -231,7 +231,7 @@ void backend_setupGBS(SETTINGS * s)
         }
 }
 
-void backend_shutdownGBS(void)
+void backend_shutdown_books(void)
 {
         delete swmgrBook;
 

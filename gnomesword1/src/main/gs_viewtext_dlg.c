@@ -56,7 +56,7 @@ GtkWidget *spbVTVerse;
  * externs
  *****************************************************************************/
 
-extern gchar current_verse[];
+
 extern gboolean gsI_isrunning;
 
 /******************************************************************************
@@ -228,7 +228,7 @@ on_cbeModule_changed(GtkEditable * editable, gpointer user_data)
 	static gboolean firsttime = TRUE;
 	buf = gtk_entry_get_text(GTK_ENTRY(editable));
 	backend_load_module_viewtext(buf);
-	backend_goto_verse_viewtext(current_verse);
+	backend_goto_verse_viewtext(settings.currentverse);
 	sprintf(title, "GnomeSword - %s",
 		backend_get_module_description(buf));
 	gtk_window_set_title(GTK_WINDOW(dlgViewText), title);
@@ -238,7 +238,7 @@ on_cbeModule_changed(GtkEditable * editable, gpointer user_data)
 
 static void on_btnSync_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_goto_verse_viewtext(current_verse);
+	backend_goto_verse_viewtext(settings.currentverse);
 	updatecontrols();
 }
 
@@ -675,8 +675,8 @@ GtkWidget *create_dlgViewText(GList * glist)
 	gtk_entry_set_text(GTK_ENTRY(cbeModule), settings.MainWindowModule);
 	cbBook_items = backend_get_books();
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), cbBook_items);
-	backend_goto_verse_viewtext(current_verse);
-	sprintf(vt_current_verse, "%s", current_verse);
+	backend_goto_verse_viewtext(settings.currentverse);
+	sprintf(vt_current_verse, "%s", settings.currentverse);
 	updatecontrols();
 	g_list_free(textList);
 	isrunningVT = TRUE;
