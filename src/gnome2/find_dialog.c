@@ -28,9 +28,11 @@
 #include <gtkhtml/htmlengine.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlengine-search.h>
+/*
 #ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
 #endif
+*/
 
 #include "gui/find_dialog.h"
 #include "main/settings.h"
