@@ -532,6 +532,7 @@ static void create_dictlex_pane(DL_DATA * dl)
 
 	GtkWidget *hpaned7;
 	GtkWidget *vbox56;
+	GtkWidget *hbox;
 	GtkWidget *toolbarDLKey;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSyncDL;
@@ -543,46 +544,34 @@ static void create_dictlex_pane(DL_DATA * dl)
 	dl->frame = gtk_frame_new(NULL);
 	gtk_widget_show(dl->frame);
 	gtk_container_add(GTK_CONTAINER(dl->vbox), dl->frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(dl->frame),GTK_SHADOW_NONE);
 
 	hpaned7 = gtk_hpaned_new();
 	gtk_widget_show(hpaned7);
 	gtk_container_add(GTK_CONTAINER(dl->frame), hpaned7);
-	gtk_paned_set_position(GTK_PANED(hpaned7), 190);
+	gtk_paned_set_position(GTK_PANED(hpaned7), 195);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox56);
 	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, TRUE, TRUE);
 
-	toolbarDLKey = gtk_toolbar_new();
-	gtk_toolbar_set_style(GTK_TOOLBAR(toolbarDLKey),
-			      GTK_TOOLBAR_ICONS);
-	gtk_widget_show(toolbarDLKey);
-	gtk_box_pack_start(GTK_BOX(vbox56), toolbarDLKey, FALSE, TRUE,
-			   0);
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_widget_show (hbox);
+	gtk_box_pack_start (GTK_BOX (vbox56), hbox, FALSE, TRUE, 0);
 
-	tmp_toolbar_icon = gtk_image_new_from_stock("gtk-refresh",
-						    gtk_toolbar_get_icon_size
-						    (GTK_TOOLBAR
-						     (toolbarDLKey)));
-
-	btnSyncDL =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
-				       GTK_TOOLBAR_CHILD_BUTTON,
-				       NULL,
-				       _("Sync"),
-				       _("Load current key"),
-				       NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(btnSyncDL);
-
-
-
-
+	btnSyncDL = gtk_button_new ();
+	gtk_widget_show (btnSyncDL);
+	gtk_box_pack_start (GTK_BOX (hbox), btnSyncDL, FALSE, TRUE, 0);
+	
+	tmp_toolbar_icon = gtk_image_new_from_stock ("gtk-refresh", 
+						GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show (tmp_toolbar_icon);
+	gtk_container_add (GTK_CONTAINER (btnSyncDL), tmp_toolbar_icon);
+	
 	dl->entry = gtk_entry_new();
 	gtk_widget_show(dl->entry);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarDLKey), dl->entry,
-				  NULL, NULL);
-
+	gtk_box_pack_start (GTK_BOX (hbox), dl->entry, TRUE, TRUE, 0);
+	
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
@@ -596,8 +585,6 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dl->listview),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(dl->listview));
-	/* gtk_tree_view_set_search_column (GTK_TREE_VIEW (dl->listview),
-	   COLUMN_DESCRIPTION); */
 	dl->mod_selection = G_OBJECT(gtk_tree_view_get_selection
 		     (GTK_TREE_VIEW(dl->listview)));
 		     

@@ -291,7 +291,10 @@ module.pixmap.files=\
 	pixmaps/splash.png\
 	pixmaps/sword.xpm\
 	pixmaps/sword3.xpm\
-	doc/help/gs.png
+	doc/help/gs.png\
+	book_closed.png\
+	book_open.png\
+	helpdoc.png
 
 module.data.name=.
 module.data.type=

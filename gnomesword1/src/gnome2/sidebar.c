@@ -57,6 +57,39 @@ static gchar *s_module_name;
 
 /******************************************************************************
  * Name
+ *   add_columns
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void add_columns(GtkTreeView * treeview) 
+ *
+ * Description
+ *   add columns to listview
+ *
+ * Return value
+ *   void
+ */
+
+static void add_columns(GtkTreeView * treeview)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+
+	renderer = gtk_cell_renderer_text_new();
+
+	column = gtk_tree_view_column_new_with_attributes("Results",
+							  renderer,
+							  "text", 0,
+							  NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+	gtk_tree_view_append_column(treeview, column);
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_display_devotional_in_sidebar
  *
  * Synopsis
@@ -637,6 +670,54 @@ static void create_viewer_page(GtkWidget * notebook)
 	*/
 }
 
+
+/******************************************************************************
+ * Name
+ *   selection_changed
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void tree_selection_changed(GtkTreeSelection * selection, NULL)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void selection_changed(GtkTreeSelection * selection, gpointer data)
+{
+	GtkTreeIter selected;
+	GtkTreePath *path;
+	gchar *key = NULL;
+	gchar *text = NULL;
+	
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+		
+
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 
+					0,&key,
+					-1);
+		if (key) {			
+			text = get_search_results_text(settings.sb_search_mod, key);
+			if(text) {
+				settings.displaySearchResults = TRUE;
+				entry_display(sidebar.html_widget, 
+						settings.sb_search_mod,
+				   		text, key, TRUE);
+				settings.displaySearchResults = FALSE;	
+				free(text);
+			}
+			g_free(key);
+		}
+	}
+}
+
+
 /******************************************************************************
  * Name
  *   create_search_results_page
@@ -663,6 +744,8 @@ static void create_search_results_page(GtkWidget * notebook)
 	GtkWidget *scrolledwindow3;
 	GtkWidget *frame4;
 	GtkWidget *scrolledwindow4;
+	GtkListStore *model;
+	GObject *selection;
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
@@ -705,14 +788,23 @@ static void create_search_results_page(GtkWidget * notebook)
 				       (scrolledwindow3),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
-	sidebar.clist = gtk_clist_new(1);
-	gtk_widget_show(sidebar.clist);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3),
-			  sidebar.clist);
-	gtk_clist_set_column_width(GTK_CLIST(sidebar.clist), 0, 100);
-	gtk_clist_column_titles_hide(GTK_CLIST(sidebar.clist));
-
+		
+	/* create list model */
+	model = gtk_list_store_new(1, G_TYPE_STRING);
+	
+	sidebar.results_list = 
+			gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	gtk_widget_show(sidebar.results_list);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.results_list);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(sidebar.results_list), TRUE);
+	
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(sidebar.results_list),
+					  FALSE);
+	add_columns(GTK_TREE_VIEW(sidebar.results_list));
+	
+	selection = G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(sidebar.results_list)));
+		     
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
 	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), frame4, TRUE,
@@ -732,11 +824,9 @@ static void create_search_results_page(GtkWidget * notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow4),
 			  sidebar.html_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
-	/*
-	   gtk_signal_connect(GTK_OBJECT(sidebar.clist),
-	   "select_row",
-	   G_CALLBACK
-	   (on_clistSearchResults_select_row), NULL); */
+	
+	g_signal_connect(selection, "changed",
+			 G_CALLBACK(selection_changed), NULL);
 }
 
 
@@ -898,22 +988,15 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox_viewer;
 	GObject *mod_selection;
 
-	//sv = &sb_v;
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
 	widgets.shortcutbar = vbox1;
-
-	toolbar2 = gtk_toolbar_new();
-	gtk_widget_show(toolbar2);
-	gtk_box_pack_start(GTK_BOX(vbox1), toolbar2, FALSE, FALSE, 0);
-	gtk_toolbar_set_style(GTK_TOOLBAR(toolbar2), GTK_TOOLBAR_BOTH);
-
+	
 	sidebar.optionmenu1 = gtk_option_menu_new();
 	gtk_widget_show(sidebar.optionmenu1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar2),
-				  sidebar.optionmenu1, NULL, NULL);
-
+	gtk_box_pack_start(GTK_BOX(vbox1), sidebar.optionmenu1, FALSE, TRUE, 0);
+	
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);

@@ -53,15 +53,35 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
+typedef struct _treeitem TreeItem;
+struct _treeitem {
+	GtkWidget *tree;
+	gchar *module_name;
+	gchar *item_name;
+	gchar *offset;
+	gboolean is_leaf;
+	gboolean expanded;
+        GdkPixbuf *pixbuf_opened;
+        GdkPixbuf *pixbuf_closed;
+};
+
+typedef struct {
+        GdkPixbuf *pixbuf_opened;
+        GdkPixbuf *pixbuf_closed;
+        GdkPixbuf *pixbuf_helpdoc;
+} TreePixbufs;
+
+enum {
+	COL_OPEN_PIXBUF,
+	COL_CLOSED_PIXBUF,
+	COL_TITLE,
+	COL_BOOK,
+	COL_OFFSET,
+	N_COLUMNS
+};
 /******************************************************************************
  *  externs  
  */
-extern GdkPixmap *pixmap1;
-extern GdkPixmap *pixmap2;
-extern GdkPixmap *pixmap3;
-extern GdkBitmap *mask1;
-extern GdkBitmap *mask2;
-extern GdkBitmap *mask3;
 extern gboolean in_url;
 
 /******************************************************************************
@@ -75,14 +95,23 @@ static GBS_DATA *cur_g;
 static gint tree_level;	
 /* list of gbs data structures */
 static GList *gbs_list;	
-
+static GtkTreeModel *model;
+static TreePixbufs *pixbufs;
 /*
 static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	
 }
 */
+static void create_pixbufs (void)
+{
+	pixbufs = g_new0 (TreePixbufs, 1);
+	
+	pixbufs->pixbuf_closed = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/book_closed.png", NULL);
+	pixbufs->pixbuf_opened = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/book_open.png", NULL);
+	pixbufs->pixbuf_helpdoc = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/helpdoc.png", NULL);
 
+}
 /******************************************************************************
  * Name
  *  get_gbs
@@ -118,14 +147,15 @@ GBS_DATA *get_gbs(GList * gbs)
 	return g;
 }
 
+
 /******************************************************************************
  * Name
- *  add_node_gbs
+ *  add_tree_item
  *
  * Synopsis
- *   #include "gbs.h"
+ *   #include "gui/gbs.h"
  *
- *   GtkCTreeNode *add_node_gbs(NODEDATA *data)	
+ *   void add_tree_item()	
  *
  * Description
  *    
@@ -134,32 +164,31 @@ GBS_DATA *get_gbs(GList * gbs)
  *   GtkCTreeNode*
  */ 
  
-static GtkCTreeNode *add_node_gbs(NODEDATA * data)
+static void add_tree_item(TreeItem *item, GtkTreeIter parent)
 {
-	GtkCTreeNode *retval;
-
-	retval = gtk_ctree_insert_node(GTK_CTREE(
-					widgets.ctree_widget_books),
-				       	data->parent,
-				      	data->sibling,
-				    	data->buf,
-				       	3,
-				       	data->pixmap1,
-				       	data->mask1,
-				       	data->pixmap2,
-				       	data->mask2,
-				       	data->is_leaf, data->expanded);
-	return retval;
+	
+	GtkTreeIter iter;
+	GtkTreePath *path;
+	
+	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, &parent);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				COL_OPEN_PIXBUF,item->pixbuf_opened,
+				COL_CLOSED_PIXBUF,item->pixbuf_closed,
+				COL_TITLE, item->item_name, 
+				COL_BOOK, item->module_name, 
+				COL_OFFSET, item->offset, 
+				-1); 
 }
-		
+
+
 /******************************************************************************
  * Name
- *  add_node_children
+ *  add_children_to_root
  *
  * Synopsis
- *   #include "gbs.h"
+ *   #include "gui/gbs.h"
  *
- *   void add_node_children(GtkCTreeNode *node, gchar *bookname,
+ *   void add_children_to_root(gchar *bookname,
  *   				unsigned long offset)	
  *
  * Description
@@ -169,74 +198,69 @@ static GtkCTreeNode *add_node_gbs(NODEDATA * data)
  *   void
  */ 
  
-static void add_node_children(GtkCTreeNode *node, GBS_DATA * gbs,
+static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 		unsigned long offset)
 {
 	gchar buf[256];
 	gchar *tmpbuf;
-	GtkCTreeNode *tmp_parent_node = node;
-	NODEDATA nodedata, *p_nodedata;
+	TreeItem treeitem, *p_treeitem;
+	GdkPixbuf *open;
+	GdkPixbuf *closed;
+	
+	p_treeitem = &treeitem;
+	p_treeitem->module_name = gbs->mod_name;
+	p_treeitem->tree = gbs->tree;
 	
 	
-	p_nodedata = &nodedata;
-	p_nodedata->sibling = NULL;
-	p_nodedata->buf[1] = gbs->mod_name;
-
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				COL_OPEN_PIXBUF,pixbufs->pixbuf_opened,
+				COL_CLOSED_PIXBUF,pixbufs->pixbuf_closed,
+				-1); 
+			
 	if (gbs_treekey_first_child(offset)) {
 		offset = gbs_get_treekey_offset();
 		sprintf(buf, "%lu", offset);
-		p_nodedata->parent = node;
-		p_nodedata->buf[2] = buf;
+		p_treeitem->offset = buf;
 		tmpbuf =
 		    gbs_get_treekey_local_name(offset);
-		p_nodedata->buf[0] = (gchar*)tmpbuf;
+		p_treeitem->item_name = (gchar*)tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
-			p_nodedata->pixmap1 = pixmap1;
-			p_nodedata->mask1 = mask1;
-			p_nodedata->pixmap2 = pixmap2;
-			p_nodedata->mask2 = mask2;
-			p_nodedata->is_leaf = FALSE;
-			p_nodedata->expanded = FALSE;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
+			p_treeitem->is_leaf = FALSE;
+			p_treeitem->expanded = FALSE;
 		} else {
-			p_nodedata->pixmap1 = pixmap3;
-			p_nodedata->mask1 = mask3;
-			p_nodedata->pixmap2 = NULL;
-			p_nodedata->mask2 = NULL;
-			p_nodedata->is_leaf = TRUE;
-			p_nodedata->expanded = FALSE;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_helpdoc;
+			p_treeitem->pixbuf_closed = NULL;
+			p_treeitem->is_leaf = TRUE;
+			p_treeitem->expanded = FALSE;
 		}
-		node = add_node_gbs(p_nodedata);
+		add_tree_item(p_treeitem, iter);
 		free(tmpbuf);
-	}
-
+	}	
+	
 	while (treekey_next_sibling(offset)) {
 		offset = gbs_get_treekey_offset();
 		sprintf(buf, "%lu", offset);
-		p_nodedata->parent = tmp_parent_node;
-		p_nodedata->buf[2] = buf;
+		p_treeitem->offset = buf;
 		tmpbuf =
 		    gbs_get_treekey_local_name(offset);
-		p_nodedata->buf[0] = (gchar*)tmpbuf;
+		p_treeitem->item_name = (gchar*)tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
-			p_nodedata->pixmap1 = pixmap1;
-			p_nodedata->mask1 = mask1;
-			p_nodedata->pixmap2 = pixmap2;
-			p_nodedata->mask2 = mask2;
-			p_nodedata->is_leaf = FALSE;
-			p_nodedata->expanded = FALSE;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
+			p_treeitem->is_leaf = FALSE;
+			p_treeitem->expanded = FALSE;
 		} else {
-			p_nodedata->pixmap1 = pixmap3;
-			p_nodedata->mask1 = mask3;
-			p_nodedata->pixmap2 = NULL;
-			p_nodedata->mask2 = NULL;
-			p_nodedata->is_leaf = TRUE;
-			p_nodedata->expanded = FALSE;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_helpdoc;
+			p_treeitem->pixbuf_closed = NULL;
+			p_treeitem->is_leaf = TRUE;
+			p_treeitem->expanded = FALSE;
 		}
-		node = add_node_gbs(p_nodedata);
+		add_tree_item(p_treeitem, iter);
 		free(tmpbuf);
 	}
 }
-
 /******************************************************************************
  * Name
  *  gui_set_book_page_and_key
@@ -307,60 +331,6 @@ void gui_set_gbs_frame_label(void)
 		gtk_frame_set_label(GTK_FRAME(cur_g->frame), 
 						cur_g->mod_name);
 	
-}
-
-/******************************************************************************
- * Name
- *  on_ctreeGBS_select_row
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_ctreeGBS_select_row(GtkCList * clist, gint row,
- *			gint column, GdkEvent * event, GBS_DATA * gbs)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
-			gint column, GdkEvent * event, GBS_DATA * gbs)
-{
-	gchar *bookname, *nodename, *offset;
-	GtkCTreeNode *treeNode;
-	GtkCTreeRow *treerow;
-	
-	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
-	widgets.ctree_widget_books = gbs->ctree;
-	treerow = GTK_CTREE_ROW(treeNode); 
-	
-	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
-					cell[0])->text;
-	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
-					cell[1])->text;
-	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
-					cell[2])->text;
-	tree_level = treerow->level;
-	
-	gbs->offset = strtoul(offset, NULL, 0);
-	
-	change_book(bookname, gbs->offset);
-	settings.book_key = gbs_get_treekey_local_name(gbs->offset);
-	
-	if (tree_level >= 1) {		
-		/** fill ctree node with children **/
-		if ((GTK_CTREE_ROW(treeNode)->children == NULL)
-		    && (!GTK_CTREE_ROW(treeNode)->is_leaf)) {
-			add_node_children(treeNode, gbs, 
-				    gbs->offset);     
-			gtk_ctree_expand(GTK_CTREE(gbs->ctree),
-					 treeNode);
-		} 
-		gbs_display(gbs, offset, tree_level, treerow->is_leaf);
-	}
 }
 
 
@@ -499,13 +469,136 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+static GtkTreeModel *create_model (void)
+{
+  GtkTreeStore *model;
+
+  /* create tree store */
+  model = gtk_tree_store_new (N_COLUMNS, 
+			  GDK_TYPE_PIXBUF,
+			  GDK_TYPE_PIXBUF,
+			  G_TYPE_STRING,
+			  G_TYPE_STRING,
+			  G_TYPE_STRING);
+
+ 
+
+  return GTK_TREE_MODEL(model);
+}
+
+static void add_columns(GtkTreeView *tree)
+{
+	GtkTreeViewColumn *column;
+	GtkTreeViewColumn *column2;
+	GtkCellRenderer *renderer;
+  
+	column = gtk_tree_view_column_new ();
+	
+	renderer = GTK_CELL_RENDERER (gtk_cell_renderer_pixbuf_new ());
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes
+		(column, renderer,
+		 "pixbuf", COL_OPEN_PIXBUF,
+		 "pixbuf-expander-open", COL_OPEN_PIXBUF,
+		 "pixbuf-expander-closed", COL_CLOSED_PIXBUF,
+		 NULL);
+	
+	
+	
+	renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "text", COL_TITLE,
+					     NULL);
+	gtk_tree_view_append_column (tree, column);
+	
+	
+	column = gtk_tree_view_column_new ();
+	renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "text", COL_BOOK,
+					     NULL);
+	gtk_tree_view_append_column (tree, column);
+	gtk_tree_view_column_set_visible(column,FALSE);
+	
+	column = gtk_tree_view_column_new ();
+	renderer = GTK_CELL_RENDERER (gtk_cell_renderer_text_new ());
+	gtk_tree_view_column_pack_start (column, renderer, TRUE);
+	gtk_tree_view_column_set_attributes (column, renderer,
+					     "text", COL_OFFSET,
+					     NULL);
+	gtk_tree_view_append_column (tree, column);
+	gtk_tree_view_column_set_visible(column,FALSE);
+}
+
+
+/******************************************************************************
+ * Name
+ *   tree_selection_changed
+ *
+ * Synopsis
+ *   #include "gui/gbs.h"
+ *
+ *   void tree_selection_changed(GtkTreeSelection * selection,
+ *		      GtkWidget * tree_widget)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void tree_selection_changed(GtkTreeSelection * selection,
+				  GBS_DATA * g)
+{
+	GtkTreeIter selected;
+	GtkTreePath *path;
+	gchar *name = NULL;
+	gchar *book = NULL;
+	gchar *offset = NULL;
+	
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(g->tree));
+		
+
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		path = gtk_tree_model_get_path(model, &selected);
+		tree_level = gtk_tree_path_get_depth(path);
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 
+					2,&name,
+					3,&book, 
+					4,&offset, 
+					-1);
+		if (offset) {
+			//g_warning("%s in %s at %s",name,book,offset);
+			g->offset = strtoul(offset, NULL, 0);
+			change_book(book, g->offset);
+			settings.book_key = gbs_get_treekey_local_name(g->offset);
+			if( !gtk_tree_model_iter_has_child(model, &selected) &&
+				gbs_treekey_has_children(g->offset)) {
+				add_children_to_tree(g, selected, g->offset);
+				gtk_tree_view_expand_to_path(
+					GTK_TREE_VIEW(g->tree),path);
+			}
+			gbs_display(g, offset, tree_level,  
+					gtk_tree_model_iter_has_child(
+						model,
+                                                &selected));
+			g_free(name);
+			g_free(book);
+			g_free(offset);
+		}
+	}
+}
 
 /******************************************************************************
  * Name
  *  gui_create_gbs_pane
  *
  * Synopsis
- *   #include "_gbs.h"
+ *   #include "gbs.h"
  *
  *   void gui_create_gbs_pane(GBS_DATA *p_gbs)	
  *
@@ -520,52 +613,51 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 {
 
 	GtkWidget *hpanedGBS;
+	GtkWidget *frame;
 	GtkWidget *scrolledwindowCTREE_GBS;
 	GtkWidget *label;
 	GtkWidget *frameGBS;
 	GtkWidget *scrolledwindowHTML_GBS;
-
+	GObject *selection;
+	
 	p_gbs->frame = gtk_frame_new(NULL);
 	gtk_widget_show(p_gbs->frame);
 	gtk_container_add(GTK_CONTAINER(p_gbs->vbox), p_gbs->frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(p_gbs->frame),GTK_SHADOW_NONE);
 	
 	hpanedGBS = gtk_hpaned_new();
 	gtk_widget_show(hpanedGBS);
 	gtk_container_add(GTK_CONTAINER(p_gbs->frame), hpanedGBS);	
-	gtk_paned_set_position(GTK_PANED(hpanedGBS),190);
+	gtk_paned_set_position(GTK_PANED(hpanedGBS),195);
 
+	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_paned_pack1(GTK_PANED(hpanedGBS), frame, TRUE,
+						TRUE);
+	
 	scrolledwindowCTREE_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowCTREE_GBS);
-	gtk_paned_pack1(GTK_PANED(hpanedGBS), scrolledwindowCTREE_GBS, TRUE,
-						TRUE);
+	gtk_container_add(GTK_CONTAINER(frame), scrolledwindowCTREE_GBS);
+	/*gtk_paned_pack1(GTK_PANED(hpanedGBS), scrolledwindowCTREE_GBS, TRUE,
+						TRUE);*/
 	
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowCTREE_GBS),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
-	p_gbs->ctree = gtk_ctree_new(3, 0);
-	gtk_widget_show(p_gbs->ctree);
+	model = create_model();			       
+	p_gbs->tree = gtk_tree_view_new_with_model(model);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(p_gbs->tree),
+					  FALSE);
+	gtk_widget_show(p_gbs->tree);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowCTREE_GBS),
-			  p_gbs->ctree);
-	gtk_container_set_border_width(GTK_CONTAINER(p_gbs->ctree), 1);
-	gtk_clist_set_column_width(GTK_CLIST(p_gbs->ctree), 0, 680);
-	gtk_clist_set_column_width(GTK_CLIST(p_gbs->ctree), 1, 1);
-	gtk_clist_set_column_width(GTK_CLIST(p_gbs->ctree), 2, 1);
-	gtk_clist_column_titles_hide(GTK_CLIST(p_gbs->ctree));
-
-	label = gtk_label_new("");
-	gtk_widget_show(label);
-	gtk_clist_set_column_widget(GTK_CLIST(p_gbs->ctree), 0, label);
-
-	label = gtk_label_new("");
-	gtk_widget_show(label);
-	gtk_clist_set_column_widget(GTK_CLIST(p_gbs->ctree), 1, label);
-
-	label = gtk_label_new("");
-	gtk_widget_show(label);
-	gtk_clist_set_column_widget(GTK_CLIST(p_gbs->ctree), 2, label);
-
+			  p_gbs->tree);
+	add_columns(GTK_TREE_VIEW(p_gbs->tree));
+	
+	selection =
+	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(p_gbs->tree)));
+	    
+	    
 	frameGBS = gtk_frame_new(NULL);
 	gtk_widget_show(frameGBS);
 	gtk_paned_pack2(GTK_PANED(hpanedGBS), frameGBS, TRUE, TRUE);
@@ -642,20 +734,19 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 			   p_gbs);
 #endif			   
 
-
-	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
-			   G_CALLBACK(on_ctreeGBS_select_row),
-			   p_gbs);
+	g_signal_connect(selection, "changed",
+			 G_CALLBACK(tree_selection_changed), p_gbs);
 }
+
 
 /******************************************************************************
  * Name
- *  add_book_to_ctree
+ *  add_book_to_tree
  *
  * Synopsis
  *   #include "gbs.h"
  *
- *   void add_book_to_ctree(GtkWidget * ctree, gchar * mod_name)	
+ *   void add_book_to_tree(GtkWidget * tree, gchar * mod_name)	
  *
  * Description
  *    
@@ -664,19 +755,25 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
  *   void
  */ 
  
-static void add_book_to_ctree(GtkWidget * ctree, gchar * mod_name)
+static void add_book_to_tree(GBS_DATA * g)
 {
-	gchar *buf[3];
-
-	buf[0] = mod_name;
-	buf[1] = mod_name;
-	buf[2] = "0";
-	rootnode = gtk_ctree_insert_node(GTK_CTREE(ctree),
-					 NULL, NULL, buf, 3, pixmap1,
-					 mask1, pixmap2, mask2, FALSE,
-					 FALSE);
-
+	GtkTreeIter iter;
+	GtkTreePath *path;
+	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, NULL);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				    COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				    COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				    COL_TITLE,g->mod_name,
+				    COL_BOOK,g->mod_name,
+				    COL_OFFSET,NULL,
+				    -1);
+	change_book(g->mod_name, 0);
+	add_children_to_tree(g, iter, gbs_get_treekey_offset());
+	path = gtk_tree_model_get_path(model,&iter);
+	gtk_tree_view_expand_to_path(GTK_TREE_VIEW(g->tree),path);
+	
 }
+
 
 /******************************************************************************
  * Name
@@ -744,22 +841,12 @@ void gui_add_new_gbs_pane(GBS_DATA * g)
 {	
 	GtkWidget *popupmenu;
 	
+	create_pixbufs();
 	create_gbs_pane(g);
-	
-#ifdef USE_GTKEMBEDMOZ	
-	if (!g->is_rtol) {
-		popupmenu = gui_create_pm_gbs(g); 		
-		gnome_popup_menu_attach(popupmenu, g->html, NULL);
-	}
-#else
+
 	popupmenu = gui_create_pm_gbs(g); 
 	gnome_popup_menu_attach(popupmenu, g->html, NULL);
-#endif
-	
-	add_book_to_ctree(g->ctree, g->mod_name);
-	gtk_ctree_select(GTK_CTREE(g->ctree),rootnode);
-	on_ctreeGBS_select_row((GtkCList *) g->ctree,0,
-			0, NULL, g);
+	add_book_to_tree(g);
 }
 
 /******************************************************************************
