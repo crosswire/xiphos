@@ -514,7 +514,7 @@ msgid "_Quickmarks/Clear Quickmarks"
 msgstr "_Rýchle znaèky/Upravi» Rýchle znaèky"
 
 #: src/gs_gui.c:155
-msgid "Copy highlighted text form main window"
+msgid "Copy highlighted text from main window"
 msgstr "Kopírova» vyznaèenú textovú formu v hlavnom okne"
 
 #: src/gs_gui.c:161 src/gs_shortcutbar.c:2070
@@ -641,17 +641,17 @@ msgstr "Zobrazi» ppanel so skratkami"
 
 #: src/gs_gui.c:708
 #, fuzzy
-msgid "Toogle Strongs Numbers"
+msgid "Toggle Strongs Numbers"
 msgstr "Prepnú» Strongové èísla"
 
 #: src/gs_gui.c:722
 #, fuzzy
-msgid "Toogle Morphological Tags"
+msgid "Toggle Morphological Tags"
 msgstr "Zobrazi» morfologické príznaky"
 
 #: src/gs_gui.c:736
 #, fuzzy
-msgid "Toogle Footnotes"
+msgid "Toggle Footnotes"
 msgstr "Prenú» poznámky pod èiarov"
 
 #: src/gs_gui.c:888

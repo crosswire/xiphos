@@ -1,3 +1,8 @@
+2002-04-20  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added es.po from Jorge Chacon <jgchacon@itelgua.com>
+	* corrected some spelling error in gui
+
 2002-04-19  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* add files create_shortcutbar_viewer.* to src/gnome
