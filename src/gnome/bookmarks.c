@@ -217,6 +217,9 @@ static void add_xml_bookmark_to_parent(xmlNodePtr parent,
 			mod_desc = get_module_description(es->module);
 		
 	}
+	else 
+		es->module = " ";
+	
 	if(mod_desc == NULL)
 		mod_desc = " ";
 	
@@ -289,17 +292,17 @@ void gui_new_xml_bookmark_file(void)
 	xml_folder = add_xml_folder_to_parent(xml_root,es);
 	
 	es->caption = "Acts 16:31";
-	es->module = "KJV";
+	es->module = NULL;
 	es->key = "Acts 16:31";
 	add_xml_bookmark_to_parent(xml_folder, es);
 	
 	es->caption = "Eph 2:8";
-	es->module = "KJV";
+	es->module = NULL;
 	es->key = "Eph 2:8";
 	add_xml_bookmark_to_parent(xml_folder, es);
 	
 	es->caption = "Romans 1:16";
-	es->module = "KJV";
+	es->module = NULL;
 	es->key = "Romans 1:16";
 	add_xml_bookmark_to_parent(xml_folder, es);
 	
@@ -308,7 +311,7 @@ void gui_new_xml_bookmark_file(void)
 	xml_folder = add_xml_folder_to_parent(xml_root,es);
 		       
 	es->caption = "1 Cor 15:1-4";
-	es->module = "KJV";
+	es->module = NULL;
 	es->key = "1 Cor 15:1";
 	add_xml_bookmark_to_parent(xml_folder, es);
 		       
@@ -1036,7 +1039,7 @@ void goto_bookmark(gchar * mod_name, gchar * key)
 static void on_ctree_select_row(GtkCTree * ctree,
 		    GList * node, gint column, gpointer user_data)
 {
-	gchar *modName, *key;
+	gchar *mod_name, *key;
 
 	selected_node = (GtkCTreeNode *) node;
 	/* if node is leaf we need to change mod and key */
@@ -1044,20 +1047,24 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		key =
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[1])->text;
-		modName =
+		mod_name =
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[2])->text;
+		if(strlen(mod_name) < 3)
+			mod_name = settings.MainWindowModule;
 		gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 		gtk_widget_set_sensitive(menu.new, FALSE);
 		gtk_widget_set_sensitive(menu.insert, FALSE);
 		gtk_widget_set_sensitive(menu.point,TRUE);
 		if(!button_three)
-			goto_bookmark(modName, key);
+			goto_bookmark(mod_name, key);
 	} else {
 		gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 		gtk_widget_set_sensitive(menu.new, TRUE);
 		gtk_widget_set_sensitive(menu.insert, TRUE);
 		gtk_widget_set_sensitive(menu.point,FALSE);
+		if(!button_three)
+			gtk_ctree_toggle_expansion(ctree,selected_node);
 	}
 	gtk_widget_set_sensitive(menu.edit,TRUE);
 	gtk_widget_set_sensitive(menu.delete,TRUE);

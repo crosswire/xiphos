@@ -1,6 +1,13 @@
+2003-03-03  Terry Biggs <tbiggs@users.sf.net>
+
+	* bumped to dev2
+	* fixed crash on open caused by no bookmarks
+	* sword.xpm added back to pixmaps directory (oops)
+
 2003-02-25  Terry Biggs <tbiggs@users.sf.net>
 
 	* added open in dialog item to bookmark popup menu
+
 
 2003-02-24  Terry Biggs <tbiggs@users.sf.net>
 

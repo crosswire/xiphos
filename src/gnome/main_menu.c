@@ -756,7 +756,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(file1_menu_uiinfo),
 	GNOMEUIINFO_MENU_EDIT_TREE(edit1_menu_uiinfo),
 	{
-	 GNOME_APP_UI_SUBTREE, N_("_History"),
+	 GNOME_APP_UI_SUBTREE, N_("H_istory"),
 	 NULL,
 	 history1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
