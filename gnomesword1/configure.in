@@ -14,7 +14,7 @@ DIRS="backend main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0,,exit)
+PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0 ,,exit)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
@@ -47,6 +47,21 @@ dnl Languages which your application supports
 	ALL_LINGUAS="de de_DE en_GB fr_FR ru uk"
 
 AM_GLIB_GNU_GETTEXT
+
+MOZILLA_LIBS=""
+MOZILLA_CFLAGS=""
+AC_ARG_ENABLE(moz_embed,[  --enable-moz_embed    use moz_embed [default=no]],moz_embed=$enableval,moz_embed=no)
+if test "x$moz_embed" = xyes; then
+   AC_DEFINE(USE_MOZILLA, 1, [Define if you want to use moz_embed])	
+   PKG_CHECK_MODULES(MOZILLA, mozilla-gtkmozembed,,exit)
+
+   mozilla_include_root="`$PKG_CONFIG --variable=includedir mozilla-gtkmozembed`"
+dnl    AC_SUBST(mozilla_include_root)
+dnl   echo "mozilla_include_root = $mozilla_include_root"
+   MOZILLA_CFLAGS="$MOZILLA_CFLAGS -I$mozilla_include_root/gfx -I$mozilla_include_root/layout -I$mozilla_include_root/content -I$mozilla_include_root/docshell -I$mozilla_include_root/dom -I$mozilla_include_root/widget"
+fi
+AC_SUBST(MOZILLA_LIBS)
+AC_SUBST(MOZILLA_CFLAGS)
 
 
 dnl AC_ARG_ENABLE(sword_cvs,[  --enable-sword_cvs        use cvs sword [default=no]],sword_cvs=$enableval,sword_cvs=no)
@@ -256,5 +271,8 @@ echo "Sword libs              $LIB_SWORD"
 if test "x$debug" = xyes; then
   echo "debug:                    enabled"
 fi
-
+if test "x$moz_embed" = xyes; then
+  echo "use mozilla:              enabled"
+  echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
+fi
   echo "install directory:     ${prefix}/bin"

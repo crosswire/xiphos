@@ -95,7 +95,7 @@ void main_keep_bibletext_dialog_in_sync(gchar * key);
 void main_dialogs_setup(void);
 void main_dialogs_shutdown(void);
 void main_free_on_destroy(DIALOG_DATA * vt);
-void main_dialog_goto_bookmark(gchar * url);
+void main_dialog_goto_bookmark(const gchar * module, const gchar * key);
 void main_dialog_set_global_opt(gboolean choice);
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked);
 void main_dialogs_open(gchar * mod_name);
