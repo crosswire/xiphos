@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-17 19:53-0500\n"
+"POT-Creation-Date: 2001-12-28 15:58-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: src/gs_abouts.c:83
 msgid ""
@@ -100,19 +100,19 @@ msgstr ""
 msgid "Reference "
 msgstr ""
 
-#: src/gs_bookmarks.c:971 src/gs_html_editor.c:1809
+#: src/gs_bookmarks.c:971 src/gs_html_editor.c:1341
 msgid "Module"
 msgstr ""
 
-#: src/gs_file.c:456
+#: src/gs_file.c:467
 msgid "GnomeSword - Open Note File"
 msgstr ""
 
-#: src/gs_file.c:491
+#: src/gs_file.c:502
 msgid "GomeSword - Save Note File"
 msgstr ""
 
-#: src/gs_gnomesword.c:73 src/gs_gui.c:651
+#: src/gs_gnomesword.c:73 src/gs_gui.c:652
 msgid "Romans 8:28"
 msgstr ""
 
@@ -133,15 +133,16 @@ msgstr ""
 msgid "Verse Style"
 msgstr ""
 
-#: src/gs_gnomesword.c:422
+#. -- remove old bookmarks from menu -- menustuff.cpp 
+#: src/gs_gnomesword.c:423
 msgid "_Quickmarks/<Separator>"
 msgstr ""
 
-#: src/gs_gnomesword.c:423 src/gs_listeditor.c:248 src/gs_listeditor.c:497
+#: src/gs_gnomesword.c:424 src/gs_listeditor.c:248 src/gs_listeditor.c:497
 msgid "_Quickmarks/"
 msgstr ""
 
-#: src/gs_gui.c:71 src/gs_html_editor.c:1145
+#: src/gs_gui.c:71 src/gs_html_editor.c:962
 msgid "Copy"
 msgstr ""
 
@@ -198,8 +199,9 @@ msgstr ""
 msgid "Information about Bible texts"
 msgstr ""
 
-#: src/gs_gui.c:163 src/gs_gui.c:1014 src/gs_shortcutbar.c:653
+#: src/gs_gui.c:163 src/gs_gui.c:1015 src/gs_shortcutbar.c:653
 #: src/gs_shortcutbar.c:688 src/gs_shortcutbar.c:1748
+#: src/gs_shortcutbar.c:2008
 msgid "Commentaries"
 msgstr ""
 
@@ -247,91 +249,137 @@ msgstr ""
 msgid "_History"
 msgstr ""
 
-#: src/gs_gui.c:342
+#: src/gs_gui.c:343
 msgid "GnomeSWORD - Bible Study Software"
 msgstr ""
 
-#: src/gs_gui.c:617
+#: src/gs_gui.c:618
 msgid "Romans"
 msgstr ""
 
-#: src/gs_gui.c:659
+#: src/gs_gui.c:660
 msgid "Goto verse"
 msgstr ""
 
-#: src/gs_gui.c:661
+#: src/gs_gui.c:662
 msgid "Go to verse in free form lookup and add verse to history"
 msgstr ""
 
-#: src/gs_gui.c:675
+#: src/gs_gui.c:676
 msgid "Back"
 msgstr ""
 
-#: src/gs_gui.c:677
+#: src/gs_gui.c:678
 msgid "Go backward through history list"
 msgstr ""
 
-#: src/gs_gui.c:692
+#: src/gs_gui.c:693
 msgid "Foward"
 msgstr ""
 
-#: src/gs_gui.c:693
+#: src/gs_gui.c:694
 msgid "Go foward through history list"
 msgstr ""
 
-#: src/gs_gui.c:718
+#: src/gs_gui.c:719
 msgid "Exit"
 msgstr ""
 
-#: src/gs_gui.c:719
+#: src/gs_gui.c:720
 msgid "Exit GnomeSword"
 msgstr ""
 
-#: src/gs_gui.c:916
+#: src/gs_gui.c:917
 msgid "Synchronize"
 msgstr ""
 
-#: src/gs_gui.c:918
+#: src/gs_gui.c:919
 msgid "Synchronize Commentary with Bible Text"
 msgstr ""
 
-#: src/gs_gui.c:932
+#: src/gs_gui.c:933
 msgid "button2"
 msgstr ""
 
-#: src/gs_gui.c:946
+#: src/gs_gui.c:947
 msgid "button3"
 msgstr ""
 
-#: src/gs_gui.c:970 src/gs_html_editor.c:1110
+#: src/gs_gui.c:971 src/gs_html_editor.c:927
 msgid "Print"
 msgstr ""
 
-#: src/gs_gui.c:970
+#: src/gs_gui.c:971
 msgid "Print this Comment"
 msgstr ""
 
-#: src/gs_gui.c:1146
-msgid "Follow Main Text Window"
-msgstr ""
-
-#: src/gs_gui.c:1161
-msgid "Edit"
-msgstr ""
-
-#: src/gs_gui.c:1161
-msgid "Edit note"
-msgstr ""
-
-#: src/gs_gui.c:1173 src/gs_preferences_dlg.c:1287
+#.
+#. handlebox16 = gtk_handle_box_new();
+#. gtk_widget_ref(handlebox16);
+#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "handlebox16",
+#. handlebox16,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(handlebox16);
+#. gtk_box_pack_start(GTK_BOX(hbox11), handlebox16, FALSE, FALSE, 0);
+#. gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(handlebox16),
+#. GTK_SHADOW_NONE);
+#. gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(handlebox16),
+#. GTK_POS_TOP);
+#.
+#. tbNotes =
+#. gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
+#. gtk_widget_ref(tbNotes);
+#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "tbNotes",
+#. tbNotes,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(tbNotes);
+#. gtk_container_add(GTK_CONTAINER(handlebox16), tbNotes);
+#. gtk_toolbar_set_button_relief(GTK_TOOLBAR(tbNotes),
+#. GTK_RELIEF_NONE);
+#.
+#. tmp_toolbar_icon =
+#. gnome_stock_pixmap_widget(settings->app,
+#. GNOME_STOCK_PIXMAP_JUMP_TO);
+#. tbtnFollow =
+#. gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
+#. GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+#. NULL, "togglebutton1",
+#. _("Follow Main Text Window"), NULL,
+#. tmp_toolbar_icon, NULL, NULL);
+#. gtk_widget_ref(tbtnFollow);
+#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "tbtnFollow",
+#. tbtnFollow,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(tbtnFollow);
+#. gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(tbtnFollow), TRUE);
+#.
+#. tmp_toolbar_icon =
+#. gnome_stock_pixmap_widget(settings->app,
+#. GNOME_STOCK_PIXMAP_PROPERTIES);
+#. btnEditNote =
+#. gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
+#. GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+#. NULL, _("Edit"), _("Edit note"),
+#. NULL, tmp_toolbar_icon, NULL, NULL);
+#. gtk_widget_ref(btnEditNote);
+#. gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnEditNote",
+#. btnEditNote,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(btnEditNote);
+#.
+#. tmp_toolbar_icon =
+#. gnome_stock_pixmap_widget(settings->app,
+#. GNOME_STOCK_PIXMAP_SPELLCHECK);
+#.
+#: src/gs_gui.c:1174 src/gs_preferences_dlg.c:1287
 msgid "Personal Comments"
 msgstr ""
 
-#: src/gs_gui.c:1223
+#: src/gs_gui.c:1224
 msgid "Interlinear"
 msgstr ""
 
-#: src/gs_gui.c:1236
+#: src/gs_gui.c:1237
 msgid "Study Pad"
 msgstr ""
 
@@ -343,6 +391,7 @@ msgstr ""
 msgid "_History/C_lear"
 msgstr ""
 
+#. str = showfirstlineStrongsSWORD(atoi(url));
 #: src/gs_html.c:92
 #, c-format
 msgid "Show %s in main window"
@@ -358,297 +407,112 @@ msgstr ""
 msgid "Go to %s"
 msgstr ""
 
-#: src/gs_html_editor.c:506 src/gs_html_editor.c:540
+#: src/gs_html_editor.c:533 src/gs_html_editor.c:567
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr ""
 
-#: src/gs_html_editor.c:524
+#: src/gs_html_editor.c:551
 msgid "-untitled-"
 msgstr ""
 
-#: src/gs_html_editor.c:1033
+#: src/gs_html_editor.c:850
 msgid "File"
 msgstr ""
 
-#: src/gs_html_editor.c:1052
+#: src/gs_html_editor.c:869
 msgid "Save Note"
 msgstr ""
 
-#: src/gs_html_editor.c:1062
+#: src/gs_html_editor.c:879
 msgid "Delete Note"
 msgstr ""
 
-#: src/gs_html_editor.c:1073
+#: src/gs_html_editor.c:890
 msgid "New"
 msgstr ""
 
-#: src/gs_html_editor.c:1081
+#: src/gs_html_editor.c:898
 msgid "Open"
 msgstr ""
 
-#: src/gs_html_editor.c:1090
+#: src/gs_html_editor.c:907
 msgid "Save"
 msgstr ""
 
-#: src/gs_html_editor.c:1100
+#: src/gs_html_editor.c:917
 msgid "Save AS"
 msgstr ""
 
-#: src/gs_html_editor.c:1120
+#: src/gs_html_editor.c:937
 msgid "_Edit"
 msgstr ""
 
-#: src/gs_html_editor.c:1138
+#: src/gs_html_editor.c:955
 msgid "Cut"
 msgstr ""
 
-#: src/gs_html_editor.c:1152
+#: src/gs_html_editor.c:969
 msgid "Paste"
 msgstr ""
 
-#: src/gs_html_editor.c:1160
+#: src/gs_html_editor.c:977
 msgid "Spell Check"
 msgstr ""
 
-#: src/gs_html_editor.c:1168
+#: src/gs_html_editor.c:985
 msgid "Undo"
 msgstr ""
 
-#: src/gs_html_editor.c:1175
+#: src/gs_html_editor.c:992
 msgid "Find"
 msgstr ""
 
-#: src/gs_html_editor.c:1182
+#: src/gs_html_editor.c:999
 msgid "Find Next"
 msgstr ""
 
-#: src/gs_html_editor.c:1190
+#: src/gs_html_editor.c:1007
 msgid "Replace"
 msgstr ""
 
-#.
-#. font_style1 = gtk_menu_item_new_with_label(_("Font Style"));
-#. gtk_widget_ref(font_style1);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "font_style1",
-#. font_style1,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(font_style1);
-#. gtk_container_add(GTK_CONTAINER(pmEditor), font_style1);
-#.
-#. font_style1_menu = gtk_menu_new();
-#. gtk_widget_ref(font_style1_menu);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "font_style1_menu",
-#. font_style1_menu,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_menu_item_set_submenu(GTK_MENU_ITEM(font_style1),
-#. font_style1_menu);
-#. font_style1_menu_accels =
-#. gtk_menu_ensure_uline_accel_group(GTK_MENU(font_style1_menu));
-#.
-#.
-#. plain_text1 = gtk_check_menu_item_new_with_label(_("Plain Text"));
-#. gtk_widget_ref(plain_text1);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "plain_text1",
-#. plain_text1,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(plain_text1);
-#. gtk_container_add(GTK_CONTAINER(font_style1_menu), plain_text1);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (plain_text1), TRUE);
-#.
-#. ecd->bold = gtk_check_menu_item_new_with_label(_("Bold"));
-#. gtk_widget_ref(ecd->bold);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->bold",
-#. ecd->bold,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->bold);
-#. gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->bold);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->bold),
-#. TRUE);
-#.
-#. ecd->italic = gtk_check_menu_item_new_with_label(_("Italic"));
-#. gtk_widget_ref(ecd->italic);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->italic",
-#. ecd->italic,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->italic);
-#. gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->italic);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (ecd->italic), TRUE);
-#.
-#. ecd->underline =
-#. gtk_check_menu_item_new_with_label(_("Underline"));
-#. gtk_widget_ref(ecd->underline);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->underline",
-#. ecd->underline,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->underline);
-#. gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->underline);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (ecd->underline), TRUE);
-#.
-#. ecd->strikeout =
-#. gtk_check_menu_item_new_with_label(_("Strick Out"));
-#. gtk_widget_ref(ecd->strikeout);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->strikeout",
-#. ecd->strikeout,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->strikeout);
-#. gtk_container_add(GTK_CONTAINER(font_style1_menu), ecd->strikeout);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (ecd->strikeout), TRUE);
-#.
-#.
-#. paragraph1 = gtk_menu_item_new_with_label(_("Paragraph"));
-#. gtk_widget_ref(paragraph1);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "paragraph1",
-#. paragraph1,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(paragraph1);
-#. gtk_container_add(GTK_CONTAINER(pmEditor), paragraph1);
-#.
-#. paragraph1_menu = gtk_menu_new();
-#. gtk_widget_ref(paragraph1_menu);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "paragraph1_menu",
-#. paragraph1_menu,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_menu_item_set_submenu(GTK_MENU_ITEM(paragraph1),
-#. paragraph1_menu);
-#. paragraph1_menu_accels =
-#. gtk_menu_ensure_uline_accel_group(GTK_MENU(paragraph1_menu));
-#.
-#.
-#. ecd->left_align = gtk_check_menu_item_new_with_label(_("Left"));
-#. gtk_widget_ref(ecd->left_align);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->left_align", ecd->left_align,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->left_align);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->left_align);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->left_align),
-#. TRUE);
-#.
-#. ecd->left_align =
-#. gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
-#. _("Left"));
-#. ecd->paragraph_group =
-#. gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-#. (ecd->left_align));
-#. gtk_widget_ref(ecd->left_align);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->left_align",
-#. ecd->left_align,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->left_align);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->left_align);
-#. gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
-#. (ecd->left_align), TRUE);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (ecd->left_align), TRUE);
-#.
-#. ecd->right_align =
-#. gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
-#. _("Right"));
-#. ecd->paragraph_group =
-#. gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
-#. (ecd->right_align));
-#. gtk_widget_ref(ecd->right_align);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->right_align",
-#. ecd->right_align,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->right_align);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu),
-#. ecd->right_align);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (ecd->right_align), TRUE);
-#.
-#. ecd->center =
-#. gtk_radio_menu_item_new_with_label(ecd->paragraph_group,
-#. _("Center"));
-#. ecd->paragraph_group =
-#. gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(ecd->center));
-#. gtk_widget_ref(ecd->center);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->center",
-#. ecd->center,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->center);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->center);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM
-#. (ecd->center), TRUE);
-#.
-#.
-#. ecd->right_align = gtk_check_menu_item_new_with_label(_("Right"));
-#. gtk_widget_ref(ecd->right_align);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->right_align", ecd->right_align,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->right_align);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->right_align);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->right_align),
-#. TRUE);
-#.
-#. ecd->center = gtk_check_menu_item_new_with_label(_("Center"));
-#. gtk_widget_ref(ecd->center);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->center", ecd->center,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(ecd->center);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), ecd->center);
-#. gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(ecd->center),
-#. TRUE);
-#.
-#. increase_indent =
-#. gtk_menu_item_new_with_label(_("Increase Indent"));
-#. gtk_widget_ref(increase_indent);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "increase_indent",
-#. increase_indent,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(increase_indent);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), increase_indent);
-#.
-#. decrease_indent =
-#. gtk_menu_item_new_with_label(_("Decrease Indent"));
-#. gtk_widget_ref(decrease_indent);
-#. gtk_object_set_data_full(GTK_OBJECT(pmEditor), "decrease_indent",
-#. decrease_indent,
-#. (GtkDestroyNotify) gtk_widget_unref);
-#. gtk_widget_show(decrease_indent);
-#. gtk_container_add(GTK_CONTAINER(paragraph1_menu), decrease_indent);
-#.
-#: src/gs_html_editor.c:1382
+#: src/gs_html_editor.c:1015
 msgid "Link..."
 msgstr ""
 
-#: src/gs_html_editor.c:1595
+#: src/gs_html_editor.c:1127
 msgid "GnomeSWORD Find"
 msgstr ""
 
-#: src/gs_html_editor.c:1611
+#: src/gs_html_editor.c:1143
 msgid "Enter Word or Phrase"
 msgstr ""
 
-#: src/gs_html_editor.c:1635 src/gs_shortcutbar.c:1498
+#: src/gs_html_editor.c:1167 src/gs_shortcutbar.c:1498
 msgid "Case Sensitive"
 msgstr ""
 
-#: src/gs_html_editor.c:1645
+#: src/gs_html_editor.c:1177
 msgid "Foward Search"
 msgstr ""
 
-#: src/gs_html_editor.c:1657
+#: src/gs_html_editor.c:1189
 msgid "Regular Expresion"
 msgstr ""
 
-#: src/gs_html_editor.c:1769
+#: src/gs_html_editor.c:1301
 msgid "GnomeSWORD Add Reference Link"
 msgstr ""
 
-#: src/gs_html_editor.c:1785
+#: src/gs_html_editor.c:1317
 msgid "Reference"
 msgstr ""
 
-#: src/gs_html_editor.c:1801
+#: src/gs_html_editor.c:1333
 msgid "Bible Reference or Module key to display when link is clicked"
 msgstr ""
 
-#: src/gs_html_editor.c:1825
+#: src/gs_html_editor.c:1357
 msgid "Name of module to show when link is clicked"
 msgstr ""
 
@@ -668,6 +532,7 @@ msgstr ""
 msgid "GnomeSword - Quickmark Editor"
 msgstr ""
 
+#. -- add Separator it was deleted with old menus 
 #: src/gs_listeditor.c:501
 msgid "_Quickmarks/Edit Quickmarks"
 msgstr ""
@@ -943,6 +808,7 @@ msgid "Commentary"
 msgstr ""
 
 #: src/gs_preferences_dlg.c:1572 src/gs_setup.c:557 src/gs_shortcutbar.c:1773
+#: src/gs_shortcutbar.c:2033
 msgid "Dict/Lex"
 msgstr ""
 
@@ -1118,6 +984,7 @@ msgstr ""
 msgid "Remove from Shortcut Bar"
 msgstr ""
 
+#. gtk_widget_set_usize(vpVL, 234, -2);
 #: src/gs_shortcutbar.c:846 src/gs_shortcutbar.c:1878
 msgid "Verse List"
 msgstr ""
@@ -1261,20 +1128,24 @@ msgstr ""
 msgid "Revelation"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1670
+#: src/gs_shortcutbar.c:1670 src/gs_shortcutbar.c:1931
 msgid "Favorites"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1723
+#: src/gs_shortcutbar.c:1723 src/gs_shortcutbar.c:1983
 msgid "Bible Text"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1798
+#: src/gs_shortcutbar.c:1798 src/gs_shortcutbar.c:2057
 msgid "History"
 msgstr ""
 
 #: src/gs_shortcutbar.c:1821
 msgid "Bookmarks"
+msgstr ""
+
+#: src/gs_shortcutbar.c:2072
+msgid "Add All Modules"
 msgstr ""
 
 #: src/gs_unlockkey_dlg.c:83 src/gs_viewtext_dlg.c:373

@@ -217,7 +217,7 @@ void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    gtk_editable_get_chars(GTK_EDITABLE(NEtext),
 				   GTK_EDITABLE(NEtext)->selection_start_pos,
 				   GTK_EDITABLE(NEtext)->selection_end_pos);
-	changeVerseSWORD(buf);
+	//changeVerseSWORD(buf);
 		
 }
 
@@ -236,6 +236,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GTK_EDITABLE(text)->selection_start_pos,
 				   GTK_EDITABLE(text)->selection_end_pos);
 
+	
 	changeVerseSWORD(buf);*/
 }
 

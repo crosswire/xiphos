@@ -727,18 +727,6 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 
 //-------------------------------------------------------------
 
-/*	
-	settings->vboxMain = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(settings->vboxMain);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app),
-				 "settings->vboxMain", settings->vboxMain,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings->vboxMain);
-	gnome_app_set_contents(GNOME_APP(settings->app),
-			       settings->vboxMain);
-*/
-
-
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox25);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "hbox25",
