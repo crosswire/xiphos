@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * gbs.c - generic book support - the gui
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@
 #include "gui/gbs_dialog.h"
 #include "gui/gbs_display.h"
 #include "gui/gbs_menu.h"
+#include "gui/mod_global_ops.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/find_dialog.h"
@@ -854,26 +855,21 @@ static void add_vbox_to_notebook(GBS_DATA * g)
  * Return value
  *   
  */
-static GBS_GLOBALS *new_globals(void)
-{
-	GBS_GLOBALS *retval = NULL;
-	
-	retval = g_new0(GBS_GLOBALS, 1);
-	retval->words_in_red = FALSE;
-	retval->strongs = FALSE;
-	retval->morphs = FALSE;
-	retval->footnotes = FALSE;
-	retval->greekaccents = FALSE;
-	retval->lemmas = FALSE;
-	retval->scripturerefs = FALSE;
-	retval->hebrewpoints = FALSE;
-	retval->hebrewcant = FALSE;
-	retval->headings = FALSE;
-	retval->variants_all = FALSE;
-	retval->variants_primary = FALSE;
-	retval->variants_secondary = FALSE;
-	
-	return retval;
+static void set_new_globals(GLOBAL_OPS * gops)
+{	
+	gops->words_in_red = TRUE;
+	gops->strongs = TRUE;
+	gops->morphs = TRUE;
+	gops->footnotes = TRUE;
+	gops->greekaccents = TRUE;
+	gops->lemmas = TRUE;
+	gops->scripturerefs = TRUE;
+	gops->hebrewpoints = TRUE;
+	gops->hebrewcant = TRUE;
+	gops->headings = TRUE;
+	gops->variants_all = TRUE;
+	gops->variants_primary = TRUE;
+	gops->variants_secondary = TRUE;
 }
 
 /******************************************************************************
@@ -908,8 +904,9 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
 		bookname = (gchar *) tmp->data;
-		gbs->bgo = new_globals();
 		gbs = g_new0(GBS_DATA, 1);
+		gbs->bgo = gui_new_globals();
+		set_new_globals(gbs->bgo);
 		gbs->frame = NULL;
 		gbs->mod_name = bookname;
 		gbs->search_string = NULL;

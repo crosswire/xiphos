@@ -29,6 +29,7 @@
  
 #include "gui/gbs_display.h"
 #include "gui/gbs.h"
+#include "gui/mod_global_ops.h"
 #include "gui/utilities.h"
 
 #include "main/gbs.h"
@@ -52,7 +53,7 @@
  *   void
  */
 
-static void set_global_options(GBS_GLOBALS *bgo)
+static void set_global_options(GLOBAL_OPS *bgo)
 {
 	set_global_option(3, "Strong's Numbers", bgo->strongs);
 	set_global_option(3, "Morphological Tags", bgo->morphs);
@@ -241,7 +242,7 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 	gtk_html_jump_to_anchor(GTK_HTML(gbs->html), anchor);
 	
 	/* andyp - inserted for debugging, remove */
-	g_print(str->str); 
+	//g_print(str->str); 
 
 	//gtk_html_set_editable(html, was_editable); 
 	g_string_free(str, TRUE);

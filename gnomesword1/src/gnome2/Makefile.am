@@ -66,6 +66,7 @@ gnomesword2_SOURCES =  \
     html.c \
     main_menu.c \
     main_window.c \
+    mod_global_ops.c \
     mod_mgr.c \
     parallel_view.c \
     parallel_dialog.c \
