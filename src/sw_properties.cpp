@@ -152,14 +152,6 @@ gboolean loadconfig(void)
 	    atoi(settingsInfo["User Options"]["UseDefault"].c_str());
 	settings->strongs =
 	    atoi(settingsInfo["User Options"]["strongs"].c_str());
-	settings->morphs =
-	    atoi(settingsInfo["User Options"]["morphs"].c_str());  
-	settings->hebrewpoints =
-	    atoi(settingsInfo["User Options"]["Hebrew Points"].c_str());
-	settings->cantillationmarks =
-	    atoi(settingsInfo["User Options"]["Cantillation Marks"].c_str());  
-	settings->footnotes =
-	    atoi(settingsInfo["User Options"]["footnotes"].c_str());
 	settings->strongsint =
 	    atoi(settingsInfo["User Options"]["strongs interlinear"].c_str());
 	settings->morphsint =
@@ -321,27 +313,7 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["strongs"] = "1";
 		else
 			settingsInfo["User Options"]["strongs"] = "0";
-
-		if (settings->morphs)
-			settingsInfo["User Options"]["morphs"] = "1";
-		else
-			settingsInfo["User Options"]["morphs"] = "0";
-
-		if (settings->hebrewpoints)
-			settingsInfo["User Options"]["Hebrew Points"] = "1";
-		else
-			settingsInfo["User Options"]["Hebrew Points"] = "0";
-
-		if (settings->cantillationmarks)
-			settingsInfo["User Options"]["Cantillation Marks"] = "1";
-		else
-			settingsInfo["User Options"]["Cantillation Marks"] = "0";
-
-		if (settings->footnotes)
-			settingsInfo["User Options"]["footnotes"] = "1";
-		else
-			settingsInfo["User Options"]["footnotes"] = "0";
-
+		
 		if (settings->strongsint)
 			settingsInfo["User Options"]["strongs interlinear"] = "1";
 		else

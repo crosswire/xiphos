@@ -34,7 +34,7 @@ extern "C" {
 #include "sw_gnomesword.h"
 		
 	/*** add sword global options to menus ***/	
-	void additemstooptionsmenu(GList *options);
+	void additemstooptionsmenu(GList *options, SETTINGS *s);
 	
 	void
 	 additemtognomemenu(GtkWidget * MainFrm,

@@ -44,7 +44,7 @@ extern "C" {
 	void ChangeVerseSWORD(void);
 	void changeVerseComSWORD(void);
 	void resultsListSWORD(GtkWidget * searchFrm, gint row, gint column);
-	void globaloptionsSWORD(gchar *option, gint window, gboolean choice);
+	void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean showchange);
 	void changecurModSWORD(gchar * modName, gboolean showchange);
 	void navcurcomModSWORD(gint direction);
 	void changecomp1ModSWORD(gchar * modName);

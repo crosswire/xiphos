@@ -562,7 +562,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 /*** toogle global options in interlinear window ***/
 void on_int_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	globaloptionsSWORD((gchar *)user_data, INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+	globaloptionsSWORD((gchar *)user_data, INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active, TRUE);	
 }
 
 void
