@@ -1333,7 +1333,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		    gtk_menu_ensure_uline_accel_group(GTK_MENU
 						      (view_comm_menu));*/
 		gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_comm_menu,
-					(GtkMenuCallback)
+					(GCallback)
 					on_new_dialog_activate);
 	} else {
 
@@ -1349,7 +1349,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		    gtk_menu_ensure_uline_accel_group(GTK_MENU
 						      (view_comm_menu));*/
 		gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_comm_menu,
-					(GtkMenuCallback)
+					(GCallback)
 					on_view_mod_activate);
 
 		view_new = gtk_menu_item_new_with_label(buf);
@@ -1465,12 +1465,12 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 	if (c->is_dialog)
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
 					lookup_selection_menu,
-					(GtkMenuCallback)
+					(GCallback)
 					gui_on_lookup_commentary_dialog_selection);
 	else
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
 					lookup_selection_menu,
-					(GtkMenuCallback)
+					(GCallback)
 					on_lookup_selection_activate);
 
 	/*
