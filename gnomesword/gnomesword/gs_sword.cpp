@@ -79,7 +79,7 @@ SWDisplay *HTMLchapDisplay; /* to display formatted html */
 SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
-
+SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
@@ -88,7 +88,7 @@ SWMgr *mainMgr3; /* sword mgr for comp3Mod - third interlinear module */
 SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
 SWMgr *listMgr;	/* sword mgr for ListEditor */
 SWMgr *SDMgr;	/* sword mgr for view dict dialog */
-
+SWMgr *VCMgr;	/* sword mgr for view comm dialog */
 
 VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
 
@@ -101,6 +101,7 @@ SWModule *percomMod; /* module for personal commentary  window */
 SWModule *curdictMod; /* module for dict window */
 SWModule *listMod;   /* module for ListEditor */
 SWModule *SDMod;   /* module for view dict dialog */
+SWModule *VCMod;   /* module for view comm dialog */
 
 SWFilter *gbftohtml;
 SWFilter *plaintohtml;
@@ -911,7 +912,7 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
         } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
-#ifdef USE_GTKHTML
+#ifdef USE_GTKHTML				
 			gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),0);
 #endif /* USE_GTKHTML */
 		}
@@ -941,14 +942,6 @@ savenoteSWORD(gboolean noteisModified) //-- save personal comments
 void
 deletenoteSWORD(void)  //-- delete personal comment
 {
-	VerseKey mykey;
-	gchar *buf;
-		
-	//-- first we clear the note window
-	gtk_text_set_point(GTK_TEXT(lookup_widget(MainFrm,"textComments")), 0); //-- start clearing at beginning of text widget
-	gtk_text_forward_delete(GTK_TEXT(lookup_widget(MainFrm,"textComments")), //-- delete from beginning to end
-				gtk_text_get_length(GTK_TEXT(lookup_widget(MainFrm,"textComments"))));							
-	//-- then we delete the note	
 	percomMod->deleteEntry();        //-- delete note
 	percomMod->Display();        //-- show change
 }
@@ -1313,6 +1306,30 @@ gchar* getcommodSWORD(void)
 }
 
 /******************************************************************************
+ * returns the description of the current commentary module
+ ******************************************************************************/
+gchar* getcommodDescriptionSWORD(void)
+{
+	return (char *) curcomMod->Description();;
+}
+
+/******************************************************************************
+ * returns the description of the view commentary dialog module
+ ******************************************************************************/
+gchar* getVCmodDescriptionSWORD(void)
+{
+	return (char *) VCMod->Description();;
+}
+
+/******************************************************************************
+ * returns the description of the view commentary dialog module
+ ******************************************************************************/
+gchar* getSDmodDescriptionSWORD(void)
+{
+	return (char *) SDMod->Description();;
+}
+
+/******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
  *returns a list of keys
  ******************************************************************************/
@@ -1360,8 +1377,7 @@ void gotokeySWORD(gchar *newkey)
  *  newkey from the dict lookup entry
  ******************************************************************************/
 void SDdictSearchTextChangedSWORD(char* newkey)
-{	
-	strcpy(settings->dictkey,newkey); //-- remember the key
+{		
 	if (SDMod){ //-- if we have a dict module	
 		if(strcmp(newkey,"")){  //-- if text is not null		
 			SDMod->SetKey(newkey); //-- set key to our text
@@ -1395,10 +1411,101 @@ void startsearchSWORD(GtkWidget *searchFrm)
 	searchWindow->searchSWORD(searchFrm);	
 }
 
-/****************************************************************************** 
- *searchWindow->resultsListSWORD(searchFrm, row, column);
- ******************************************************************************/
-void rlclickedSWORD(GtkWidget *searchFrm)
-{	
+
+/****************************************************************************************
+ *setupCommSWORD - set up the sword stuff for the view dictionary dialog
+ *returns a list of commentary modules
+ ****************************************************************************************/
+GList* setupCommSWORD(GtkWidget *text)
+{
+	GList *list;
+	ModMap::iterator it; //-- iteratior	
+	SectionMap::iterator sit; //-- iteratior
+	ConfigEntMap::iterator cit; //-- iteratior
+	gchar 	*sourceformat;
 	
+	VCMgr	= new SWMgr();
+	VCMod     = NULL;
+	sourceformat = "Plain";
+#ifdef USE_GTKHTML
+	VCDisplay = new  GtkHTMLEntryDisp(text);
+#else /* !USE_GTKHTML */
+	VCDisplay = new  GTKEntryDisp(text);
+#endif /* USE_GTKHTML */
+	list = NULL;
+	for(it = VCMgr->Modules.begin(); it != VCMgr->Modules.end(); it++){
+		if(!strcmp((*it).second->Type(), "Commentaries")){
+			VCMod = (*it).second;
+			sit = VCMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+			if (sit !=VCMgr->config->Sections.end()){
+	    			cit = (*sit).second.find("SourceType");
+				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat ="Plain";
+			}			
+			if (!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
+				VCMod->AddRenderFilter(gbftohtml);				
+			} else if(!strcmp(sourceformat,"ThML")) { //-- we need ThML to html filter
+				VCMod->AddRenderFilter(thmltohtml);		
+			} else if(!strcmp(sourceformat,"Plain")&& strcmp(VCMod->Name(),"RWP")) { //-- we need plain to html filter
+			        VCMod->AddRenderFilter(plaintohtml);
+			} else if(!strcmp(VCMod->Name(),"RWP")){  //-- we need rwp to html filter 
+#ifdef USE_GTKHTML 			
+			       VCMod->AddRenderFilter(rwphtml);
+#else /* !USE_GTKHTML */
+				//VCMod->Disp(RWPDisplay);		
+#endif /* USE_GTKHTML */		
+			}
+			list = g_list_append(list,VCMod->Name());
+			VCMod->Disp(VCDisplay);
+		}
+	}
+	return list;
 }
+
+//-------------------------------------------------------------------------------------------
+void shutdownVCSWORD(void)  //-- close down view comm dialog program
+{	
+	delete VCMgr;	
+	if(VCDisplay)
+		delete VCDisplay;	
+}
+
+/******************************************************************************
+ *loadVCmodSWORD - load a commentary module into the view commentary dialog
+ *
+ ******************************************************************************/
+void loadVCmodSWORD(gchar *modName)
+{
+        ModMap::iterator it;
+        
+        it = VCMgr->Modules.find(modName);  //-- find module we want to use
+	if (it != VCMgr->Modules.end()){
+		
+		VCMod = (*it).second;  //-- set curdictMod to new choice
+		VCMod->SetKey("");		
+		VCMod->Display();	 //-- display new dict
+	}
+}
+
+/******************************************************************************
+ *gotoverseVCSWORD - find new verse for view commentary dialog
+ *
+ ******************************************************************************/
+void gotoverseVCSWORD(gchar *newkey)
+{
+        VCMod->SetKey(newkey); //-- set key to our text
+        VCMod->Display();
+}
+
+void navVCModSWORD(gint direction)  //-- navigate the current commentary module
+{
+        switch(direction){   
+		case 0: (*VCMod)--;
+			break;
+		case 1: (*VCMod)++;
+			break;
+        }
+        VCMod->Error(); //-- clear any errors
+        VCMod->Display();
+}
+
