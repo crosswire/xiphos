@@ -2729,100 +2729,10 @@ msgstr ""
 #~ msgid "Start Spell Check"
 #~ msgstr "Revisar Ortografía"
 
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label205"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label190"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label236"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label237"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label232"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label233"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label234"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label235"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label226"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label200"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label241"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label242"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label243"
-#~ msgstr "Etiqueta"
-
 # src/gs_shortcutbar.c
 #, fuzzy
 #~ msgid "Upper Workbook"
 #~ msgstr "Superior "
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label189"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label1"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label2"
-#~ msgstr "Etiqueta"
-
-# src/gs_bookmarks.c
-#, fuzzy
-#~ msgid "label3"
-#~ msgstr "Etiqueta"
 
 # src/gs_menu.c
 # src/gs_preferences_dlg.c
