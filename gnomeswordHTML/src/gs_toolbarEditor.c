@@ -24,6 +24,11 @@
   */
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h> 
+#include <gtkhtml/htmlcolor.h> 
+#include <gtkhtml/htmlcolorset.h> 
+#include <gtkhtml/htmlengine-edit-fontstyle.h> 
+#include <gtkhtml/htmlsettings.h> 
+#include <gal/widgets/widget-color-combo.h>
 
 #include "gs_html.h"
 #include "support.h"
@@ -35,23 +40,10 @@ static   GtkWidget *btnStrikeout;
 static  GtkWidget *btnAlignLeft;
 static  GtkWidget *btnAlignCenter;
 static  GtkWidget *btnAlignRight;
+static  GtkWidget *font_size_menu;
+static  GtkWidget *combo;
+
 gboolean block_font_style_change;
-
-
-static void
-on_paragraph_style_menu_clicked        (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-static void
-on_font_size_menu_clicked              (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
 
 
 static void
@@ -206,15 +198,235 @@ paragraph_alignment_changed_cb (GtkHTML *widget,
 	}
 }
 
+/******************************************************************************
+ *
+ ******************************************************************************/
+static void
+color_changed (GtkWidget *w, GdkColor *gdk_color, GtkHTML *html)
+{
+	HTMLColor *color = gdk_color
+		&& gdk_color != &html_colorset_get_color (html->engine->settings->color_set, HTMLTextColor)->color
+		? html_color_new_from_gdk_color (gdk_color) : NULL;
+
+	gtk_html_set_color (html, color);
+	if (color)
+		html_color_unref (color);
+}
+
+static void
+unset_focus (GtkWidget *w, gpointer data)
+{
+	GTK_WIDGET_UNSET_FLAGS (w, GTK_CAN_FOCUS);
+}
+
+inline static void
+set_color_combo (GtkHTML *html, gpointer user_data)
+{
+	color_combo_set_color (COLOR_COMBO (combo),
+			       &html_colorset_get_color_allocated (html->engine->painter, HTMLTextColor)->color);
+}
+
+static void
+realize_engine (GtkHTML *html, gpointer user_data)
+{
+	set_color_combo (html, user_data);
+	gtk_signal_disconnect_by_func (GTK_OBJECT (html), realize_engine,user_data );
+}
+
+static void
+load_done (GtkHTML *html, gpointer user_data)
+{
+	set_color_combo (html, NULL);
+}
+
+static GtkWidget *
+setup_color_combo (GtkHTML *html)
+{
+	HTMLColor *color;
+
+	color = html_colorset_get_color (html->engine->settings->color_set, HTMLTextColor);
+	if (GTK_WIDGET_REALIZED (html))
+		html_color_alloc (color, html->engine->painter);
+	else
+		gtk_signal_connect (GTK_OBJECT (html), "realize", realize_engine, NULL);
+        gtk_signal_connect (GTK_OBJECT (html), "load_done", GTK_SIGNAL_FUNC (load_done), NULL);
+
+	combo = color_combo_new (NULL, _("Automatic"), &color->color, "toolbar_text");
+	GTK_WIDGET_UNSET_FLAGS (combo, GTK_CAN_FOCUS);
+	gtk_container_forall (GTK_CONTAINER (combo), unset_focus, NULL);
+        gtk_signal_connect (GTK_OBJECT (combo), "changed", GTK_SIGNAL_FUNC (color_changed), 
+		html);
+
+	gtk_widget_show_all (combo);
+	return combo;
+}
+
+/******************************************************************************
+ * Paragraph style option menu.  
+ ******************************************************************************/
+static struct {
+	GtkHTMLParagraphStyle style;
+	const gchar *description;
+} paragraph_style_items[] = {
+	{ GTK_HTML_PARAGRAPH_STYLE_NORMAL, N_("Normal") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H1, N_("Header 1") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H2, N_("Header 2") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H3, N_("Header 3") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H4, N_("Header 4") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H5, N_("Header 5") },
+	{ GTK_HTML_PARAGRAPH_STYLE_H6, N_("Header 6") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ADDRESS, N_("Address") },
+	{ GTK_HTML_PARAGRAPH_STYLE_PRE, N_("Pre") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMDIGIT, N_("List item (digit)") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMDOTTED, N_("List item (unnumbered)") },
+	{ GTK_HTML_PARAGRAPH_STYLE_ITEMROMAN, N_("List item (roman)") },
+	{ GTK_HTML_PARAGRAPH_STYLE_NORMAL, NULL },
+};
+
+static void
+paragraph_style_changed_cb (GtkHTML *html,
+			    GtkHTMLParagraphStyle style,
+			    gpointer data)
+{
+	GtkOptionMenu *option_menu;
+	guint i;
+
+	option_menu = GTK_OPTION_MENU (data);
+
+	for (i = 0; paragraph_style_items[i].description != NULL; i++) {
+		if (paragraph_style_items[i].style == style) {
+			gtk_option_menu_set_history (option_menu, i);
+			return;
+		}
+	}
+
+	g_warning ("Editor component toolbar: unknown paragraph style %d", style);
+}
+
+static void
+paragraph_style_menu_item_activated_cb (GtkWidget *widget,
+					gpointer data)
+{
+	GtkHTMLParagraphStyle style;
+	GtkHTML *html;
+
+	html = GTK_HTML (data);
+	style = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (widget), "paragraph_style_value"));
+
+	/* g_warning ("Setting paragraph style to %d.", style); */
+
+	gtk_html_set_paragraph_style (html, style);
+}
+
+static GtkWidget *
+setup_paragraph_style_option_menu (GtkHTML *html)
+{
+	GtkWidget *option_menu;
+	GtkWidget *menu;
+	guint i;
+
+	option_menu = gtk_option_menu_new ();
+	menu = gtk_menu_new ();
+
+	for (i = 0; paragraph_style_items[i].description != NULL; i++) {
+		GtkWidget *menu_item;
+
+		menu_item = gtk_menu_item_new_with_label (_(paragraph_style_items[i].description));
+		gtk_widget_show (menu_item);
+
+		gtk_menu_append (GTK_MENU (menu), menu_item);
+
+		gtk_object_set_data (GTK_OBJECT (menu_item), "paragraph_style_value",
+				     GINT_TO_POINTER (paragraph_style_items[i].style));
+		gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				    GTK_SIGNAL_FUNC (paragraph_style_menu_item_activated_cb),
+				    html);
+	}
+
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
+
+	gtk_signal_connect (GTK_OBJECT (html), "current_paragraph_style_changed",
+			    GTK_SIGNAL_FUNC (paragraph_style_changed_cb), option_menu);
+
+	gtk_widget_show (option_menu);
+
+	return option_menu;
+}
+
+static void
+set_font_size (GtkWidget *w, GtkHTML *html)
+{
+	GtkHTMLFontStyle style = GTK_HTML_FONT_STYLE_SIZE_1 + GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (w),
+												    "size"));
+
+	if (!block_font_style_change)
+		gtk_html_set_font_style (html, GTK_HTML_FONT_STYLE_MAX & ~GTK_HTML_FONT_STYLE_SIZE_MASK, style);
+}
+
+static void
+font_size_changed (GtkWidget *w, GtkHTMLParagraphStyle style, GtkHTML *html)
+{
+	if (style == GTK_HTML_FONT_STYLE_DEFAULT)
+		style = GTK_HTML_FONT_STYLE_SIZE_3;
+	block_font_style_change = TRUE;
+	gtk_option_menu_set_history (GTK_OPTION_MENU (font_size_menu),
+				     (style & GTK_HTML_FONT_STYLE_SIZE_MASK) - GTK_HTML_FONT_STYLE_SIZE_1);
+	block_font_style_change = FALSE;
+}
+
+static GtkWidget *
+setup_font_size_option_menu (GtkHTML*html)
+{
+	GtkWidget *option_menu;
+	GtkWidget *menu;
+	guint i;
+	gchar size [3];
+
+	font_size_menu = option_menu = gtk_option_menu_new ();
+
+	menu = gtk_menu_new ();
+	size [2] = 0;
+
+	for (i = 0; i < GTK_HTML_FONT_STYLE_SIZE_MAX; i++) {
+		GtkWidget *menu_item;
+
+		size [0] = (i>1) ? '+' : '-';
+		size [1] = '0' + ((i>1) ? i - 2 : 2 - i);
+
+		menu_item = gtk_menu_item_new_with_label (size);
+		gtk_widget_show (menu_item);
+
+		gtk_menu_append (GTK_MENU (menu), menu_item);
+
+		gtk_object_set_data (GTK_OBJECT (menu_item), "size",
+				     GINT_TO_POINTER (i));
+		gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				    GTK_SIGNAL_FUNC (set_font_size), 
+					html);
+	}
+
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), 2);
+
+	gtk_signal_connect (GTK_OBJECT (html), "insertion_font_style_changed",
+			    GTK_SIGNAL_FUNC (font_size_changed), 
+					html);
+
+	gtk_widget_show (option_menu);
+
+	return option_menu;
+}
+
+
 GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
 {
   
   GtkWidget *tbHTMLEdit;
-  GtkWidget *paragraph_style_menu;
+/*  GtkWidget *paragraph_style_menu;
   GtkWidget *paragraph_style_menu_menu;
   GtkWidget *glade_menuitem;
   GtkWidget *font_size_menu;
-  GtkWidget *font_size_menu_menu;
+  GtkWidget *font_size_menu_menu; */
   GtkWidget *vseparator14;
   GtkWidget *vseparator15;
   GtkWidget *btnIndent;
@@ -228,85 +440,13 @@ GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
   gtk_widget_show (tbHTMLEdit);
   gtk_box_pack_start (GTK_BOX (lookup_widget(mainwindow,"vbox32")), tbHTMLEdit, FALSE, FALSE, 0);
   gtk_toolbar_set_button_relief (GTK_TOOLBAR (tbHTMLEdit), GTK_RELIEF_NONE);
-  
-  
 
-  paragraph_style_menu = gtk_option_menu_new ();
-  gtk_widget_ref (paragraph_style_menu);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "paragraph_style_menu", paragraph_style_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (paragraph_style_menu);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (tbHTMLEdit), paragraph_style_menu, NULL, NULL);
-  paragraph_style_menu_menu = gtk_menu_new ();
-  glade_menuitem = gtk_menu_item_new_with_label (_("Normal"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Header 1"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Header 2"));
-  gtk_widget_show (glade_menuitem);
-   gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Header 3"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Header 4"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Header 5"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Header 6"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Address"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("Pre"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("List item (digit)"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("List item (unnumbered)"));
-  gtk_widget_show (glade_menuitem);
-    gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("List item (roman)"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (paragraph_style_menu_menu), glade_menuitem);
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (paragraph_style_menu), paragraph_style_menu_menu);
-
-  font_size_menu = gtk_option_menu_new ();
-  gtk_widget_ref (font_size_menu);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "font_size_menu", font_size_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (font_size_menu);
-  gtk_toolbar_append_widget (GTK_TOOLBAR (tbHTMLEdit), font_size_menu, NULL, NULL);
-  font_size_menu_menu = gtk_menu_new ();
-  glade_menuitem = gtk_menu_item_new_with_label (_("-2"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("-1"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("+0"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("+1"));
-  gtk_widget_show (glade_menuitem);
-    gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("+2"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("+3"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  glade_menuitem = gtk_menu_item_new_with_label (_("+4"));
-  gtk_widget_show (glade_menuitem);
-  gtk_menu_append (GTK_MENU (font_size_menu_menu), glade_menuitem);
-  gtk_option_menu_set_menu (GTK_OPTION_MENU (font_size_menu), font_size_menu_menu);
-  gtk_option_menu_set_history (GTK_OPTION_MENU (font_size_menu), 2);
-
+	gtk_toolbar_prepend_widget (GTK_TOOLBAR (tbHTMLEdit),
+				    setup_paragraph_style_option_menu (GTK_HTML(lookup_widget(mainwindow,html))),
+				    NULL, NULL);
+	gtk_toolbar_prepend_widget (GTK_TOOLBAR (tbHTMLEdit),
+				    setup_font_size_option_menu (GTK_HTML(lookup_widget(mainwindow,html))),
+				    NULL, NULL);
   tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_TEXT_BOLD);
   btnBold = gtk_toolbar_append_element (GTK_TOOLBAR (tbHTMLEdit),
                                 GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
@@ -427,13 +567,11 @@ GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnUnIndent", btnUnIndent,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnUnIndent);
-
-    gtk_signal_connect (GTK_OBJECT (paragraph_style_menu), "clicked",
-                      GTK_SIGNAL_FUNC (on_paragraph_style_menu_clicked),
-                      html);
-  gtk_signal_connect (GTK_OBJECT (font_size_menu), "clicked",
-                      GTK_SIGNAL_FUNC (on_font_size_menu_clicked),
-                      html);
+  /* add color combo */
+  gtk_toolbar_append_widget (GTK_TOOLBAR (tbHTMLEdit),
+				   setup_color_combo (GTK_HTML(lookup_widget(mainwindow,html))),
+				   NULL, NULL);
+ 
   gtk_signal_connect (GTK_OBJECT (btnBold), "toggled",
                       GTK_SIGNAL_FUNC (on_btnBold_toggled),
                       html);

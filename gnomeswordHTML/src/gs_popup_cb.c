@@ -197,10 +197,10 @@ void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+/*
 	GtkWidget *text;
 	gchar *buf;
 
-	text = lookup_widget(MainFrm, "textCommentaries");
 	if (!GTK_EDITABLE(text)->has_selection)
 		return;		//-- do we have a selection?
 	buf =
@@ -209,6 +209,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GTK_EDITABLE(text)->selection_end_pos);
 
 	changeVerseSWORD(buf);
+*/
 }
 
 //----------------------------------------------------------------------------------------------
@@ -262,7 +263,7 @@ on_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *entry, *text;
+/*	GtkWidget *entry, *text;
 	gchar *buf;
 
 	entry = lookup_widget(MainFrm, "dictionarySearchText");
@@ -276,7 +277,7 @@ on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
 					   selection_end_pos);
 		gtk_entry_set_text(GTK_ENTRY(entry), buf);
 		dictSearchTextChangedSWORD(buf);
-	}
+	}*/
 }
 
 

@@ -25,6 +25,7 @@
 #include <versekey.h>
 #include <plainhtml.h>
 #include <gbfhtml.h>
+#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -36,7 +37,6 @@
 #include "gs_sword.h"
 #include "support.h"
 #include "interface.h"
-#include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
 #include "sw_utility.h"
 
@@ -52,9 +52,9 @@ SearchWindow::SearchWindow ()
 	_3_group = NULL;
 	searchMgr = new SWMgr ();
 	searchMod = NULL;
-	plaintohtml = new PLAINHTML ();	/* sword renderfilter Plain to html */
-	gbftohtml = new GBFHTML ();	/* sword renderfilter gbf to html */
-	rwphtml = new GS_RWPHTML();  /* sword renderfilter rwp to html */
+//	plaintohtml = new PLAINHTML ();	/* sword renderfilter Plain to html */
+//	gbftohtml = new GBFHTML ();	/* sword renderfilter gbf to html */
+//	rwphtml = new RWPHTML();  /* sword renderfilter rwp to html */
 	PLAINsearchDisplay = 0;	/* set in create */
 	HTMLsearchDisplay = 0;
 	//RWPsearchDisplay = 0;

@@ -419,9 +419,6 @@ char HTMLChapDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbText")), 0);
-
 	font = "Roman";
 
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
