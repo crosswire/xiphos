@@ -1,0 +1,303 @@
+#!@XML_I18N_TOOLS_PERL@ -w 
+# -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
+
+#
+#  The XML Translation Extractor
+#
+#  Copyright (C) 2000 Free Software Foundation.
+#
+#  This library is free software; you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as
+#  published by the Free Software Foundation; either version 2 of the
+#  License, or (at your option) any later version.
+#
+#  This script is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#  General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this library; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#  Authors: Kenneth Christiansen <kenneth@gnu.org>
+#           Darin Adler <darin@eazel.com>
+#
+
+## Release information
+my $PROGRAM      = "xml-i18n-extract";
+my $PACKAGE      = "xml-i18n-tools";
+my $VERSION      = "0.8.4";
+
+## Script options - Enable by setting value to 1
+my $ENABLE_INI   = "1"; ## desktop and alike files
+my $ENABLE_KEYS  = "1"; ## mimetype descriptions
+my $ENABLE_GLADE = "1"; ## glade files
+my $ENABLE_XML 	 = "1"; ## generic xml files
+
+## Loaded modules
+use strict; 
+use File::Basename;
+use Getopt::Long;
+
+## Scalars used by the option stuff
+my $TYPE_ARG	= "0";
+my $LOCAL_ARG	= "0";
+my $HELP_ARG 	= "0";
+my $VERSION_ARG = "0";
+my $UPDATE_ARG  = "0";
+my $QUIET_ARG   = "0";
+
+my $FILE;
+my $OUTFILE;
+
+my $gettext_type = "";
+my $input;
+my %messages = ();
+
+## Always print first
+$| = 1;
+
+## Handle options
+GetOptions (
+	    "type=s"     => \$TYPE_ARG,
+            "local|l"    => \$LOCAL_ARG,
+            "help|h|?"   => \$HELP_ARG,
+            "version|v"  => \$VERSION_ARG,
+            "update"     => \$UPDATE_ARG,
+	    "quiet|q"    => \$QUIET_ARG,
+            ) or &error;
+
+&split_on_argument;
+
+
+## Check for options. 
+## This section will check for the different options.
+
+sub split_on_argument {
+
+    if ($VERSION_ARG) {
+        &version;
+
+    } elsif ($HELP_ARG) {
+	&help;
+        
+    } elsif ($LOCAL_ARG) {
+        &place_local;
+        &extract;
+
+    } elsif ($UPDATE_ARG) {
+	&place_normal;
+	&extract;
+
+    } elsif (@ARGV > 0) {
+	&place_normal;
+	&message;
+	&extract;
+
+    } else {
+	&help;
+
+    }  
+}    
+
+sub place_normal {
+    $FILE	 = $ARGV[0];
+    $OUTFILE     = "$FILE.h";
+}   
+
+sub place_local {
+    $OUTFILE     = fileparse($FILE, ());
+    if (!-e "tmp/") { 
+        system("mkdir tmp/"); 
+    }
+    $OUTFILE     = "./tmp/$OUTFILE.h"
+}
+
+sub determine_type {
+   if ($TYPE_ARG =~ /^gettext\/(.*)/) {
+	$gettext_type=$1
+   }
+}
+
+## Sub for printing release information
+sub version{
+    print "${PROGRAM} (${PACKAGE}) $VERSION\n";
+    print "Copyright (C) 2000 Free Software Foundation, Inc.\n";
+    print "Written by Kenneth Christiansen, 2000.\n\n";
+    print "This is free software; see the source for copying conditions. There is NO\n";
+    print "warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n";
+    exit;
+}
+
+## Sub for printing usage information
+sub help{
+    print "Usage: ${PROGRAM} [FILENAME] [OPTIONS] ...\n";
+    print "Generates a header file from an xml source file.\n\nGrabs all strings ";
+    print "between <_translatable_node> and it's end tag,\nwhere tag are all allowed ";
+    print "xml tags. Read the docs for more info.\n\n"; 
+    print "  -v, --version                shows the version\n";
+    print "  -h, --help                   shows this help page\n";
+    print "  -q, --quiet                  quiet mode\n";
+    print "\nReport bugs to <kenneth\@gnu.org>.\n";
+    exit;
+}
+
+## Sub for printing error messages
+sub error{
+#   print "xml-i18n-extract: invalid option @ARGV\n";
+    print "Try `${PROGRAM} --help' for more information.\n";
+    exit;
+}
+
+sub message {
+    print "Generating C format header file for translation.\n";
+}
+
+sub extract {
+    &determine_type;
+
+    &convert ($FILE);
+
+    open OUT, ">$OUTFILE";
+    &msg_write;
+    close OUT;
+
+    print "Wrote $OUTFILE\n" unless $QUIET_ARG;
+}
+
+sub convert($) {
+
+    ## Reading the file
+    {
+	local (*IN);
+	local $/; #slurp mode
+	open (IN, "<$FILE") || die "can't open $FILE: $!";
+	$input = <IN>;
+    }
+
+    &type_ini;
+    &type_keys;
+    &type_xml;
+    &type_glade;
+}
+
+sub type_ini {
+
+    if ($ENABLE_INI) { 
+        
+        ### For generic translatable desktop files ###
+    
+        if ($gettext_type eq "ini"){    
+
+            while ($input =~ /^_.*=(.*)$/mg) {
+                $messages{$1} = [];
+            }
+        }
+    }
+}
+
+sub type_keys {
+    
+    if ($ENABLE_KEYS) {
+    
+        ### For generic translatable mime/keys files ###
+
+        if ($gettext_type eq "keys"){
+            while ($input =~ /^\s*_\w+=(.*)$/mg) {
+                $messages{$1} = [];
+            }
+        }
+    }
+}
+
+sub type_xml {
+
+    if ($ENABLE_XML) {
+
+	### For generic translatable XML files ###
+        
+        if ($gettext_type eq "xml"){
+
+            while ($input =~ /[\t\n\s]_\w+=\"([^\"]+)\"/sg) {
+                $messages{$1} = [];
+            }
+
+            while ($input =~ /<_(\w+)>([^<]+)<\/_\1>/sg) {
+                $messages{$2} = [];
+            }
+
+	}
+    }
+}
+
+sub type_glade {
+
+    if ($ENABLE_GLADE) {
+        
+        ### For translatable Glade XML files ###
+
+        if ($gettext_type eq "glade"){
+
+            my $translate = "label|title|text|format|copyright|comments|
+                             preview_text|tooltip";
+
+            while ($input =~ /<($translate)>([^<]+)<\/($translate)>/sg) {
+
+                # Glade has some bugs, especially it uses translations tags to contain little
+                # non-translatable content. We work around this, by not including these
+                # strings that only includes something like: label4, and window1
+                if ($2 !~ /^(window|label)[0-9]+$/) {
+                    $messages{$2} = [];
+                }
+            }
+            
+            while ($input =~ /<items>(..[^<]*)<\/items>/sg) {
+                my @items =  split (/\n/, $1);
+                for (my $n = 0; $n < @items; $n++) {
+                    $messages{$items[$n]} = [];
+                }
+            }
+
+	}
+    }
+
+}
+
+sub msg_write {
+    
+    foreach my $message (sort keys %messages) { 
+        
+        my ($tag) = @{ $messages{$message} };
+        
+        # Replace XML entities for some special characters with
+        # the appropriate gettext syntax for those characters.
+     	$message =~ s/&quot;/\\"/mg; # "
+    	$message =~ s/&lt;/</mg;
+    	$message =~ s/&gt;/>/mg;
+     	$message =~ s/&amp;/&/mg;
+       
+   	print OUT "/* xgettext:no-c-format */\n" if $message =~ /%/;
+    	print OUT "/* $tag */\n" if $tag;
+        
+    	my @lines = split (/\n/, $message);
+
+    	for (my $n = 0; $n < @lines; $n++) {
+
+            if ($n == 0) { 
+ 		print OUT "char *s = N_(\""; 
+            } else {  
+ 		print OUT "             \""; 
+	    }
+
+            print OUT $lines[$n];
+
+            if ($n < @lines - 1) { 
+		print OUT "\\n\"\n"; 
+ 	    } else { 
+		print OUT "\");\n";  
+	    }
+        }
+    }
+}
+
