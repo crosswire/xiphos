@@ -29,10 +29,6 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
-#include "sword.h"
-#include "commentary.h"
-#include "commentary_.h"
-#include "_commentary.h"
 #include "shortcutbar.h"
 #include "gs_viewcomm_dlg.h"
 #include "cipher_key_dialog.h"
@@ -41,31 +37,103 @@
  * gnome
  */
 #include "_commentary.h"
+/*
+ * main
+ */
+#include "commentary.h"
+/*
+ * backend
+ */
+#include "sword.h"
+#include "commentary_.h"
+
+/******************************************************************************
+ * externs
+ */ 
 
 extern SETTINGS *settings;
-extern gboolean isrunningVC;  
+extern gboolean isrunningVC; 
+
+/******************************************************************************
+ * globals
+ */ 
+ 
 COMM_DATA *cur_c;
-GList *comm_list;
 gboolean comm_display_change = TRUE;
 
-				 
+/******************************************************************************
+ * global to this file only 
+ */
+ 
+static GList *comm_list;
+
+
+/******************************************************************************
+ * Name
+ *   navigate_commentary
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   const char* navigate_commentary(gint modnum, gint direction)	
+ *
+ * Description
+ *    navigate foward or backward through commentary
+ *
+ * Return value
+ *   void
+ */
+ 
 const char* navigate_commentary(gint modnum, gint direction)
 {
 	return backend_nav_commentary(modnum, direction);
 }
 
+/******************************************************************************
+ * Name
+ *  set_commentary_page_and_key
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void set_commentary_page_and_key(gint page_num, gchar *key)	
+ *
+ * Description
+ *   change commentary page and key 
+ *
+ * Return value
+ *   void
+ */
+ 
 void set_commentary_page_and_key(gint page_num, gchar *key)
 {
 	comm_display_change = FALSE;
 	strcpy(settings->comm_key,key);
 	strcpy(cur_c->key,key);
 	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_comm), page_num);
-	backend_displayinCOMM(page_num,key);
+	backend_display_commentary(page_num,key);
 	comm_display_change = TRUE;
 }
 
+/******************************************************************************
+ * Name
+ *  set_commentary_page
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void set_commentary_page(gchar * modname, GList * comm_list,
+ *							SETTINGS * s)	
+ *
+ * Description
+ *    change commentary page without changing key
+ *
+ * Return value
+ *   void
+ */
+ 
 static void set_commentary_page(gchar * modname, GList * comm_list,
-			SETTINGS * s)
+							SETTINGS * s)
 {
 	gint page = 0;
 	COMM_DATA *c = NULL;
@@ -85,13 +153,45 @@ static void set_commentary_page(gchar * modname, GList * comm_list,
 				   s->comm_tabs);
 }
 
+/******************************************************************************
+ * Name
+ *   display_commentary
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void display_commentary(gchar * key)	
+ *
+ * Description
+ *    display new key in current commentary
+ *
+ * Return value
+ *   void
+ */
+ 
 void display_commentary(gchar * key)
 {
 	strcpy(settings->comm_key,key);
 	strcpy(cur_c->key, key);
-	backend_displayinCOMM(settings->commLastPage, key);
+	backend_display_commentary(settings->commLastPage, key);
 }
 
+/******************************************************************************
+ * Name
+ *  setup_commentary
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   GList* setup_commentary(SETTINGS * s)	
+ *
+ * Description
+ *    setup gui commentary support and return list on commentary names
+ *
+ * Return value
+ *   void
+ */
+ 
 GList* setup_commentary(SETTINGS * s)
 {
 	GtkWidget *popupmenu;
@@ -122,7 +222,7 @@ GList* setup_commentary(SETTINGS * s)
 		gui_create_commentary_pane(s, c, count);
 		popupmenu = gui_create_pm(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);
-		backend_newDisplayCOMM(c->html, c->modName, s);
+		backend_new_display_commentary(c->html, c->modName, s);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
 		++count;
 		tmp = g_list_next(tmp);
@@ -144,13 +244,33 @@ GList* setup_commentary(SETTINGS * s)
 	return mods;
 }
 
+/******************************************************************************
+ * Name
+ *   shutdown_commentary
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void shutdown_commentary(void)	
+ *
+ * Description
+ *   shut down and cleanup 
+ *
+ * Return value
+ *   void
+ */
+ 
 void shutdown_commentary(void)
 {
 	comm_list = g_list_first(comm_list);
 	while (comm_list != NULL) {
 		COMM_DATA *c = (COMM_DATA *) comm_list->data;
-		if (c->find_dialog)	/* free any search dialogs created */
+		/* 
+		 * free any search dialogs created 
+		 */
+		if (c->find_dialog)	
 			g_free(c->find_dialog);
+		
 		g_free((COMM_DATA *) comm_list->data);
 		comm_list = g_list_next(comm_list);
 	}

@@ -47,27 +47,20 @@ struct _backend_comm {
 	int num;
 };
 
-/*
- * externs  
+/******************************************************************************
+ * static - global to this file only 
  */
-extern SETTINGS *settings;
-
-/*
- * globals  
- */
-SWMgr *swmgrCOMM;
-GList *be_comm_list;
-
-/***  start code  ***/
+static SWMgr *mgr;
+static GList *be_comm_list;
 
 /******************************************************************************
  * Name
- *  backend_nav_commentary_COMM
+ *  backend_nav_commentary
  *
  * Synopsis
  *   #include "commentary.h"
  *
- *   void backend_nav_commentary_COMM(gint modnum, gint direction)	
+ *   void backend_nav_commentary(gint modnum, gint direction)	
  *
  * Description
  *    navigate the current commentary module and return key
@@ -100,6 +93,23 @@ const char* backend_nav_commentary(gint modnum, gint direction)
 		return NULL;
 }
 
+/******************************************************************************
+ * Name
+ *  backend_get_module
+ *
+ * Synopsis
+ *   #include "commentary_.h"
+ *
+ *   SWModule *backend_get_module(char *modname)	
+ *
+ * Description
+ *    
+ *    
+ *
+ * Return value
+ *   SWModule *
+ */
+
 static SWModule *backend_get_module(char *modname)
 {
 	GList *tmp = NULL;
@@ -120,8 +130,26 @@ static SWModule *backend_get_module(char *modname)
 	return mod;
 }
 
-void backend_newDisplayCOMM(GtkWidget * html, char *modname,
-			    SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   backend_new_display_commentary
+ *
+ * Synopsis
+ *   #include "commentary_.h"
+ *
+ *   void backend_new_display_commentary(GtkWidget * html, char *modname,
+ *							SETTINGS * s)	
+ *
+ * Description
+ *    create a sword display for a commentary module
+ *    
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_new_display_commentary(GtkWidget * html, char *modname,
+							SETTINGS * s)
 {
 	GList *tmp = NULL;
 	BE_COMM *c;
@@ -138,15 +166,32 @@ void backend_newDisplayCOMM(GtkWidget * html, char *modname,
 	g_list_free(tmp);
 }
 
-void backend_setupCOMM(SETTINGS * s)
+/******************************************************************************
+ * Name
+ *    backend_setup_commentary
+ *
+ * Synopsis
+ *   #include "commentary_.h"
+ *
+ *   void backend_setup_commentary(SETTINGS * s)	
+ *
+ * Description
+ *   set up sword commentary support
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void backend_setup_commentary(SETTINGS * s)
 {
-	ModMap::iterator it;	//-- iteratior
+	ModMap::iterator it;
 	gint count = 0;
 
-	swmgrCOMM = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	be_comm_list = NULL;
-	for (it = swmgrCOMM->Modules.begin();
-	     it != swmgrCOMM->Modules.end(); it++) {
+	for (it = mgr->Modules.begin();
+	     it != mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			BE_COMM *c = new BE_COMM;
 			c->mod = (*it).second;
@@ -158,23 +203,62 @@ void backend_setupCOMM(SETTINGS * s)
 	}
 }
 
-void backend_shutdownCOMM(void)
-{
-	delete swmgrCOMM;
+/******************************************************************************
+ * Name
+ *    backend_shutdown_commentary
+ *
+ * Synopsis
+ *   #include "commentary_.h"
+ *
+ *   void backend_shutdown_commentary(void)	
+ *
+ * Description
+ *    shut down sword commentary support
+ *    and cleanup
+ *
+ * Return value
+ *   void
+ */
 
-	/***  free backend stuff  ***/
+void backend_shutdown_commentary(void)
+{
+	delete mgr;
+	/*
+	 * free backend stuff  
+	 */
 	be_comm_list = g_list_first(be_comm_list);
 	while (be_comm_list != NULL) {
 		BE_COMM *c = (BE_COMM *) be_comm_list->data;
-		if (c->dlDisp)	//-- delete any swdisplays created
+		/*
+		 * delete any swdisplays created
+		 */
+		if (c->dlDisp)
 			delete c->dlDisp;
+		
 		delete(BE_COMM *) be_comm_list->data;
 		be_comm_list = g_list_next(be_comm_list);
 	}
 	g_list_free(be_comm_list);
 }
 
-void backend_displayinCOMM(int modnum, gchar * key)
+/******************************************************************************
+ * Name
+ *  backend_display_commentary
+ *
+ * Synopsis
+ *   #include "commentary_.h"
+ *
+ *   void backend_display_commentary(int modnum, gchar * key)	
+ *
+ * Description
+ *    display commentary
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void backend_display_commentary(int modnum, gchar * key)
 {
 	BE_COMM *co;
 	co = (BE_COMM *) g_list_nth_data(be_comm_list, modnum);
