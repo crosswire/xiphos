@@ -481,8 +481,8 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *vbox19;
 	GtkWidget *scrolledwindow18;
 	GtkWidget *moduleText;
-	GtkWidget *frame19;
-	GtkWidget *lbText;
+	//GtkWidget *frame19;
+	//GtkWidget *lbText;
 	GtkWidget *notebook3;
 	GtkWidget *vbox22;
 	GtkWidget *notebook1;
