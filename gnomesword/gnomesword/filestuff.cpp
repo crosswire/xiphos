@@ -147,7 +147,7 @@ loadoptionarray(void) //---------------------------------------------- load sett
 		printf("open failed!");
 		gtk_exit(1);
 	}
-	for(i=0;i<10;i++)
+	for(i=0;i<15;i++)
 	{
 		fgets(mybuf,79,configfile);
 		for(j=0;j<79;j++)
@@ -199,7 +199,7 @@ saveoptions(void)
 	gint j;
 
 	configfile = fopen(fnconfigure,"w"); //-------------------------- save op setting, so we can open where we closed
-	while(i<10)
+	while(i<15)
 	{
 		for(j=0;j<79;j++)
 		{

@@ -55,7 +55,9 @@ main (int argc, char *argv[])
   menu2 = create_menuInt1();
   menu3 = create_menuInt2();
   menu4 = create_menuInt3();
+  menu5 = create_pmEditnote();
   mainwindow = create_mainwindow ();
+
   setDiretory();
   loadbookmarkarray();
   loadoptionarray();
