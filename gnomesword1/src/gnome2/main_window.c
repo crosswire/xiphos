@@ -609,7 +609,9 @@ void create_mainwindow(void)
 		gtk_widget_show(widgets.notebook_main);
 	gtk_box_pack_start(GTK_BOX(vboxMain),
 			   widgets.notebook_main, FALSE, FALSE, 0);
-	gtk_widget_set_size_request(widgets.notebook_main, -1, 20);
+	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
+	gtk_notebook_set_scrollable (GTK_NOTEBOOK(widgets.notebook_main),
+                                             TRUE);
 
 //	empty_notebook_page = gtk_vbox_new (FALSE, 0);
 //	gtk_widget_show (empty_notebook_page);

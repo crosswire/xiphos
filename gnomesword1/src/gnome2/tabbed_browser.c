@@ -54,6 +54,7 @@
 static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
 					 gint page_num, GList **tl);
+static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,const gchar *label_text);
 
 /******************************************************************************
  * externs
@@ -70,6 +71,95 @@ static GList *passage_list;
 //static gint text_last_page;
 
 
+static void on_notebook_main_close_page(GtkButton * button, gpointer user_data)
+{
+	//gui_close_passage_tab(gint pagenum);
+}
+
+
+
+static void set_current_tab (PASSAGE_TAB_INFO *pt)
+{
+	PASSAGE_TAB_INFO *ot = cur_passage_tab;
+	
+	if (ot != NULL && ot->button_close != NULL) {
+		gtk_widget_hide (ot->button_close);
+		gtk_widget_show (ot->close_pixmap);
+	}
+	cur_passage_tab = pt;
+	if (pt != NULL && pt->button_close != NULL) {
+		gtk_widget_show (pt->button_close);
+		gtk_widget_hide (pt->close_pixmap);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *  tab_widget_new
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,const gchar *label_text)	
+ *
+ * Description
+ *   creates a tab widget that contains a label and a close button
+ *
+ * Return value
+ *   GtkWidget*
+ */
+ 
+static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,const gchar *label_text)
+{
+	GtkWidget *tmp_toolbar_icon;
+	GtkWidget *box;
+	GtkRequisition r;
+	GdkColor color;
+	
+	g_return_val_if_fail(label_text != NULL, NULL);
+	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
+					GTK_ICON_SIZE_MENU); 
+	gtk_widget_show(tmp_toolbar_icon); 
+	
+	tbinf->button_close = gtk_button_new();
+	gtk_container_add(GTK_CONTAINER(tbinf->button_close), tmp_toolbar_icon);
+	gtk_button_set_relief(GTK_BUTTON(tbinf->button_close), GTK_RELIEF_NONE);
+	gtk_widget_set_usize (tbinf->button_close, 16, 16);
+	
+	tbinf->close_pixmap = gtk_image_new_from_stock(GTK_STOCK_CLOSE, 
+					GTK_ICON_SIZE_SMALL_TOOLBAR);
+	gtk_widget_size_request (tbinf->button_close, &r);
+	gtk_widget_set_usize (tbinf->close_pixmap, r.width, r.height);
+	gtk_widget_set_sensitive(tbinf->close_pixmap, FALSE);
+	
+	tbinf->tab_label = GTK_LABEL(gtk_label_new (label_text));
+	gtk_widget_show (GTK_WIDGET(tbinf->tab_label));
+	
+	color.red = 0;
+	color.green = 0; 
+	color.blue = 0;
+	
+	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_NORMAL, &color);
+	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_INSENSITIVE, &color);
+	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_ACTIVE, &color);
+	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_PRELIGHT, &color);
+	gtk_widget_modify_fg (tbinf->button_close, GTK_STATE_SELECTED, &color);
+	gtk_widget_show(tbinf->button_close);
+	
+	box = gtk_hbox_new(FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(tbinf->tab_label), TRUE, 
+					TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(box), tbinf->button_close, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(box), tbinf->close_pixmap, FALSE, FALSE, 0);
+	
+	gtk_widget_show(box);
+	
+	g_signal_connect (GTK_OBJECT (tbinf->button_close), "clicked",
+				G_CALLBACK(on_notebook_main_close_page),
+				tbinf);
+	
+	return box;
+}
 
 /******************************************************************************
  * Name
@@ -98,19 +188,19 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
-	cur_passage_tab = pt;
-
+	//cur_passage_tab = pt;
+	set_current_tab (pt);
 	//sets the text mod and key
-	gui_change_module_and_key(pt->text_mod, pt->text_commentary_key);
-	gui_change_verse(pt->text_commentary_key);
+//	gui_change_module_and_key(pt->text_mod, pt->text_commentary_key);
+//	gui_change_verse(pt->text_commentary_key);
 
-//	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
+	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
 	
 	//sets the commentary mod and key
-//	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
+	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
-//	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
+	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
 	
 	//sets the book mod and key
 }
@@ -167,6 +257,7 @@ static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 void gui_open_verse_in_new_tab(gchar *verse_key)
 {
 	PASSAGE_TAB_INFO *pt;
+	GtkWidget *tab_widget;
 	
 	if(!settings.browsing)
 		return;
@@ -175,14 +266,24 @@ void gui_open_verse_in_new_tab(gchar *verse_key)
 	pt->commentary_mod = cur_c->mod_name;
 	pt->dictlex_mod = cur_d->mod_name;
 	pt->book_mod = NULL;
-	pt->text_commentary_key = verse_key;
+	pt->text_commentary_key = settings.currentverse;
 	pt->dictlex_key = cur_d->key;
 	pt->book_key = NULL;
 	
+	pt->page_widget = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show(pt->page_widget);
+	
+	tab_widget = tab_widget_new(pt,(gchar*)pt->text_commentary_key);
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
-	cur_passage_tab = pt;
-
-	notebook_main_add_page(pt);
+	//cur_passage_tab = pt;
+	set_current_tab (pt);
+	//notebook_main_add_page(pt);
+	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 pt->page_widget, tab_widget);
+	
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
+					pt->page_widget,
+					(gchar*)pt->text_commentary_key);
 	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				gtk_notebook_page_num
@@ -235,7 +336,7 @@ void gui_close_passage_tab(gint pagenum)
 void gui_notebook_main_setup(GList *ptlist)
 {
 	GList *tmp = NULL;
-	PASSAGE_TAB_INFO *pt;
+	PASSAGE_TAB_INFO *pt = NULL;
 	
 	if(!settings.browsing)
 		return;

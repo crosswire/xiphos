@@ -29,6 +29,9 @@ extern "C" {
 typedef struct _passage_tab_info PASSAGE_TAB_INFO;
 struct _passage_tab_info {
 	GtkWidget *page_widget;
+	GtkLabel *tab_label;
+	GtkWidget *button_close;
+	GtkWidget *close_pixmap;
 	gchar *text_mod;
 	gchar *commentary_mod;
 	gchar *dictlex_mod;
