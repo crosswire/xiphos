@@ -12,8 +12,8 @@ ShowLocals=true
 3=1
 4=1
 5=1
-6=91
-7=273
+6=102
+7=4
 8=1
 9=17
 10=48
@@ -41,6 +41,10 @@ ShowLocals=true
 2=/home/terry/Projects/gnomesword1/src/backend/bookmarks.cpp
 3=/home/terry/Projects/gnomesword1/src/backend/gbs.cpp
 4=/home/terry/Projects/gnomesword1/src/main/gs_gbs.c
+5=/home/terry/Projects/gnomesword1/src/backend/display.cpp
+6=/home/terry/Projects/gnomesword1/src/backend/display_info.cpp
+7=/home/terry/Projects/gnomesword1/doc/getting_started.txt
+8=/home/terry/Projects/gnomesword1/doc/Makefile.am
 
 [find_text]
 0=ctree = user_data;
