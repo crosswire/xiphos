@@ -1,3 +1,10 @@
+2002-08-23  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* changed settings to use .gnomesword-1.0 directory
+	  so you can run gnomesword1 and gnomesword and keep settings
+	  seperate.	
+	
+
 2002-08-17  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gnome/gbs_dialog.c and gui/gbs_dialog.h

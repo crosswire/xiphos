@@ -796,7 +796,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "tb_edit",
 				 tb_edit,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(tb_edit);
+	//gtk_widget_show(tb_edit);
+	gtk_widget_hide(tb_edit);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(gbs_dialog,
@@ -810,7 +811,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_new",
 				 button_new,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_new);
+	//gtk_widget_show(button_new);
+	gtk_widget_hide(button_new);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(gbs_dialog,
@@ -824,14 +826,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_save",
 				 button_save,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_save);
+	//gtk_widget_show(button_save);
+	gtk_widget_hide(button_save);
 
 	vseparator29 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator29);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator29",
 				 vseparator29,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator29);
+	//gtk_widget_show(vseparator29);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator29,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator29, 5, 7);
@@ -849,7 +852,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_cut",
 				 button_cut,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_cut);
+	//gtk_widget_show(button_cut);
+	gtk_widget_hide(button_cut);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(gbs_dialog,
@@ -864,7 +868,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_copy",
 				 button_copy,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_copy);
+	//gtk_widget_show(button_copy);
+	gtk_widget_hide(button_copy);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(gbs_dialog,
@@ -879,7 +884,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_past",
 				 button_past,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_past);
+	//gtk_widget_show(button_past);
+	gtk_widget_hide(button_past);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(gbs_dialog,
@@ -894,14 +900,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_undo",
 				 button_undo,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_undo);
+	//gtk_widget_show(button_undo);
+	gtk_widget_hide(button_undo);
 
 	vseparator30 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator30);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator30",
 				 vseparator30,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator30);
+	//gtk_widget_show(vseparator30);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator30,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator30, 5, 7);
@@ -918,14 +925,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_link",
 				 button_link,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_link);
+	//gtk_widget_show(button_link);
+	gtk_widget_hide(button_link);
 
 	vseparator32 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator32);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator32",
 				 vseparator32,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator32);
+	//gtk_widget_show(vseparator32);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator32,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator32, 5, 7);
@@ -943,7 +951,8 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button_find",
 				 button_find,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_find);
+	//gtk_widget_show(button_find);
+	gtk_widget_hide(button_find);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(gbs_dialog,
@@ -960,14 +969,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
 				 "button_replace", button_replace,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button_replace);
+	//gtk_widget_show(button_replace);
+	gtk_widget_hide(button_replace);
 
 	vseparator31 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator31);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator31",
 				 vseparator31,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator31);
+	//gtk_widget_show(vseparator31);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator31,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator31, 5, 7);
@@ -985,13 +995,15 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "button26",
 				 button26,
 				 (GtkDestroyNotify) gtk_widget_unref);
+	//gtk_widget_show(button26);	
+	gtk_widget_hide(button26);
 
 	menubar_options = gtk_menu_bar_new();
 	gtk_widget_ref(menubar_options);
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog),
 				 "menubar_options", menubar_options,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(menubar_options);
+	//gtk_widget_show(menubar_options);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), menubar_options,
 				  NULL, NULL);
 	gnome_app_fill_menu(GTK_MENU_SHELL(menubar_options),
@@ -1036,7 +1048,7 @@ static void create_gbs_dialog(GBS_DIALOG * dlg)
 	gtk_object_set_data_full(GTK_OBJECT(gbs_dialog), "vseparator28",
 				 vseparator28,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator28);
+	//gtk_widget_show(vseparator28);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator28,
 				  NULL, NULL);
 	gtk_widget_set_usize(vseparator28, 5, 7);

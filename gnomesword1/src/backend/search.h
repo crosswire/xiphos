@@ -26,6 +26,8 @@
 extern "C" {
 #endif	
 	
+void backend_save_custom_modlist(GList * modlist);
+GList * backend_load_custom_modlist(void);
 int backend_set_range(char * list)	;
 GList * backend_get_element(char * entry);
 void backend_save_custom_ranges(GList * ranges);

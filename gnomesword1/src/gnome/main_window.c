@@ -135,6 +135,34 @@ extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
 
 
+/******************************************************************************
+ * Name
+ *  gui_change_window_title
+ *
+ * Synopsis
+ *   #include "main_window.h"
+ *
+ *   void gui_change_window_title(gchar * module_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_change_window_title(gchar * module_name)
+{
+	gchar title[200];
+	/*
+	 * set program title to GnomeSWORD + current module name 
+	 */
+	sprintf(title, "GnomeSWORD - %s", get_module_description(module_name));
+	gtk_window_set_title(GTK_WINDOW(widgets.app), title);	
+}
+
+
+
 
 /******************************************************************************
  * Name

@@ -58,7 +58,7 @@ project.config.extra.modules.after=
 
 module.include.name=.
 module.include.type=
-module.include.expanded=1
+module.include.expanded=0
 module.include.files=\
 	src/backend/sword.h\
 	src/backend/search.h\
@@ -248,7 +248,7 @@ module.help.files=
 
 module.doc.name=.
 module.doc.type=
-module.doc.expanded=0
+module.doc.expanded=1
 module.doc.files=\
 	AUTHORS\
 	COPYING\
@@ -263,6 +263,9 @@ module.doc.files=\
 	doc/getting_started.txt\
 	doc/help/index.html\
 	doc/help/intro.html\
+	doc/help/search.html\
+	doc/help/search_sb.html\
+	doc/help/search_dialog.html\
 	doc/help/template.html
 
 module.po.expanded=0

@@ -45,6 +45,83 @@ static SWKey	*current_scope; //----------- use to set scope of search
 static SWModule *search_module;
 static ListKey search_range;
 
+/******************************************************************************
+ * Name
+ *   backend_save_custom_modlist
+ *
+ * Synopsis
+ *   #include "backend/search.h"
+ *
+ *   void backend_save_custom_modlist(GList * modlist)
+ *
+ * Description
+ *   saves custom search module lists in preference.conf
+ *
+ * Return value
+ *   void
+ */
+
+void backend_save_custom_modlist(GList * modlist)
+{
+	GList *tmp = NULL;
+	SWConfig *config = new SWConfig(settings.fnconfigure);	
+	tmp = modlist;
+	CUSTOM_MODLIST *r;
+	
+	config->Sections["Custom Module Lists"].erase(
+		config->Sections["Custom Module Lists"].begin(), 
+		config->Sections["Custom Module Lists"].end());
+	
+	while(tmp != NULL) {
+		r = (CUSTOM_MODLIST*)tmp->data;
+		config->Sections["Custom Module Lists"].insert(
+			ConfigEntMap::value_type(r->label, r->modules));
+		tmp = g_list_next(tmp);
+	}
+	config->Save();
+	g_list_free(tmp);
+	delete config;
+}
+
+
+/******************************************************************************
+ * Name
+ *    backend_load_custom_modlist
+ *
+ * Synopsis
+ *   #include "backend/search.h"
+ *
+ *   GList * backend_load_custom_modlist(void)
+ *
+ * Description
+ *   get custom search module lists from preference.conf file
+ *   and returns them in a glist
+ *
+ * Return value
+ *   GList *
+ */
+
+GList * backend_load_custom_modlist(void)
+{
+	CUSTOM_MODLIST * l;
+	GList * rv = NULL;
+	ConfigEntMap::iterator loop, end;
+	SWConfig *config = new SWConfig(settings.fnconfigure);	
+	
+	loop = config->Sections["Custom Module Lists"].begin();
+	end = config->Sections["Custom Module Lists"].end();
+	while (loop != end) {
+		l = g_new(CUSTOM_MODLIST,1);
+		l->label = g_strdup(loop->first.c_str());
+		l->modules = g_strdup(loop->second.c_str());
+		rv = g_list_append(rv, (CUSTOM_MODLIST*)l);
+		loop++;
+	}
+	delete config;	
+	return rv;
+}
+
+
 
 
 /******************************************************************************
