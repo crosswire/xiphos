@@ -1175,7 +1175,7 @@ deletenoteSWORD(void)  //-- delete personal comment
 	gtk_text_forward_delete(GTK_TEXT(lookup_widget(MainFrm,"textComments")), //-- delete from beginning to end
 				gtk_text_get_length(GTK_TEXT(lookup_widget(MainFrm,"textComments"))));							
 	//-- then we delete the note	
-	percomMod->Delete();        //-- delete note
+	percomMod->deleteEntry();        //-- delete note
 	percomMod->Display();        //-- show change
 }
 
