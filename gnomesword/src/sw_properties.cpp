@@ -143,6 +143,9 @@ gboolean loadconfig(void)
 		settingsInfo["User Options"]["BibleVerseNumColor"].c_str());
 	sprintf(settings->link_color, "%s",
 		settingsInfo["User Options"]["LinkColor"].c_str());
+	sprintf(settings->found_color, "%s",
+		settingsInfo["User Options"]["FoundColor"].c_str());
+		
 	settings->usedefault =
 	    atoi(settingsInfo["User Options"]["UseDefault"].c_str());
 	settings->strongs =
@@ -292,7 +295,8 @@ gboolean saveconfig(void)
 		    settings->bible_verse_num_color;
 		 settingsInfo["User Options"]["LinkColor"] = 
 		 	settings->link_color;   
-		
+		settingsInfo["User Options"]["FoundColor"] =
+			settings->found_color;
 		
 		if (settings->usedefault)
 			settingsInfo["User Options"]["UseDefault"] = "1";
@@ -516,7 +520,8 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["BibleTextColor"] = "#000000";
 	settingsInfo["User Options"]["BibleBGColor"] = "#FFFFFF";
 	settingsInfo["User Options"]["BibleVerseNumColor"] = "#000FCF";
-	settingsInfo["User Options"]["LinkColor"] = "#898989";
+	settingsInfo["User Options"]["LinkColor"] = "#898989"; 
+	settingsInfo["User Options"]["FoundColor"] = "#D02898";
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
 	settingsInfo["User Options"]["ShowSplash"] = "1";
 
@@ -578,6 +583,7 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["BibleBGColor"] = "#FFFFFF";
 	settingsInfo["User Options"]["BibleVerseNumColor"] = "#000FCF";
 	settingsInfo["User Options"]["LinkColor"] = "#898989";
+	settingsInfo["User Options"]["FoundColor"] = "#D02898";
 	settingsInfo["User Options"]["BibleTabs"] = "1";
 	settingsInfo["User Options"]["CommTabs"] = "1";
 	settingsInfo["User Options"]["DictTabs"] = "1";
