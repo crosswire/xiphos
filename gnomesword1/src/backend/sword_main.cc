@@ -49,7 +49,7 @@ using namespace std;
 
 BackEnd *backend = NULL;
 
-
+ 
 //static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
  
 BackEnd::BackEnd() {
