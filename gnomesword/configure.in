@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.2.7)
+AM_INIT_AUTOMAKE(gnomesword, 0.3.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -40,14 +40,14 @@ AC_ARG_WITH(sworddir,
  
 dnl looking for sword includes 
 AC_MSG_CHECKING([for sword headers]) 
-sword_incdirs="${prefix}/include $ac_sword_dir/include $ac_sword_dir/include/sword /usr/include/sword /usr/include /usr/local/include /usr/local/sword/include /usr/local/include/sword /opt/sword/include /usr/local/include/sword /usr/local/sword/include/sword /opt/sword/include/sword" 
+sword_incdirs="${prefix}/include $ac_sword_dir/include $ac_sword_dir/include/sword /usr/include/sword /usr/include /usr/local/include /usr/local/sword/include /usr/local/include/sword /opt/sword/include /usr/sword/include/sword /usr/local/include/sword /usr/local/sword/include/sword /opt/sword/include/sword" 
 AC_FIND_FILE(swmgr.h, $sword_incdirs, sword_incdir) 
  
 AC_MSG_RESULT([$sword_incdir]) 
  
 dnl looking for sword library 
 AC_MSG_CHECKING([for sword library]) 
-sword_libdirs="${prefix}/lib $ac_sword_dir/lib /usr/lib /usr/local/lib /usr/local/sword/lib /usr/lib/sword/lib /usr/local/share/sword/lib /opt/sword/lib" 
+sword_libdirs="${prefix}/lib $ac_sword_dir/lib /usr/lib /usr/sword/lib /usr/local/lib /usr/local/sword/lib /usr/lib/sword/lib /usr/local/share/sword/lib /opt/sword/lib" 
  
 AC_FIND_FILE(libsword.so, $sword_libdirs, sword_libdir) 
 if test -r $sword_libdir/libsword.so; then 
