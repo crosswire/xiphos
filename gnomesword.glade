@@ -1272,7 +1272,27 @@ Revelation
 			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 
 			<widget>
-			  <class>Placeholder</class>
+			  <class>GtkViewport</class>
+			  <name>viewport4</name>
+			  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+			  <widget>
+			    <class>GtkScrolledWindow</class>
+			    <name>scrolledwindow51</name>
+			    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			    <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
+			    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			    <widget>
+			      <class>GtkText</class>
+			      <name>textBible</name>
+			      <tooltip>Bible text window</tooltip>
+			      <can_focus>True</can_focus>
+			      <editable>False</editable>
+			      <text></text>
+			    </widget>
+			  </widget>
 			</widget>
 		      </widget>
 		    </widget>
@@ -9205,6 +9225,73 @@ Click Finish to close this dialog and run GnomeSword.</text>
     <widget>
       <class>Placeholder</class>
     </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>pmGBDTree</name>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>create_new_book</name>
+    <tooltip>Create a new empty book</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_create_new_book_activate</handler>
+      <last_modification_time>Mon, 04 Feb 2002 14:57:11 GMT</last_modification_time>
+    </signal>
+    <label>Create New Book</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_BOOK_OPEN</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>add_child</name>
+    <tooltip>Add a child to the current node</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_add_child_activate</handler>
+      <last_modification_time>Mon, 04 Feb 2002 14:57:11 GMT</last_modification_time>
+    </signal>
+    <label>Add Child</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_NEW</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>add_sibling</name>
+    <tooltip>Add a sibling to the current node</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_add_sibling_activate</handler>
+      <last_modification_time>Mon, 04 Feb 2002 14:57:11 GMT</last_modification_time>
+    </signal>
+    <label>Add Sibling</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_NEW</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>separator21</name>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>collapse_all</name>
+    <tooltip>Collapse the book tree</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_collapse_all_activate</handler>
+      <last_modification_time>Mon, 04 Feb 2002 14:57:11 GMT</last_modification_time>
+    </signal>
+    <label>Collapse all</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_TOP</stock_icon>
   </widget>
 </widget>
 
