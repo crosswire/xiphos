@@ -2,7 +2,8 @@
 
 	* fixed detach interlinear crash when Main Text module
 	  is duplicated in interlinear.
-
+	* added use default dictionary choice to preferences dialog
+	  for left clicking on a word.
 
 2002-03-30  Terry Biggs <tbiggs@users.sourceforge.net>
 
