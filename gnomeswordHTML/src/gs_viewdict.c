@@ -77,6 +77,7 @@ void on_btnVDSync_clicked(GtkButton * button, gpointer user_data)
 /*
  *
  */
+static
 void on_dlgViewDict_destroy(GtkObject * object, gpointer user_data)
 {
 	isrunningSD = FALSE;

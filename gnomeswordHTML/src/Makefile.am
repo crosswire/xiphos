@@ -53,7 +53,9 @@ COMMON_SOURCE =  \
     gs_toolbarEditor.c \
     gs_toolbarEditor.h\
     printstuff.c \
-    printstuff.h
+    printstuff.h \
+    gs_gbfhtml.cpp \
+    gs_gbfhtml.h
 
 SPELLING_SOURCE =  \
     debug.h \

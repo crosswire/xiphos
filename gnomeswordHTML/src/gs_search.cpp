@@ -23,9 +23,9 @@
 #include <swmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
-#include <plainhtml.h>
-#include <gbfhtml.h>
-#include <rwphtml.h>
+//#include <plainhtml.h>
+//#include <gbfhtml.h>
+//#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -37,7 +37,7 @@
 #include "gs_sword.h"
 #include "support.h"
 #include "interface.h"
-#include "gs_thmlhtml.h"
+//#include "gs_thmlhtml.h"
 #include "sw_utility.h"
 
 

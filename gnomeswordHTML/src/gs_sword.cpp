@@ -33,7 +33,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-#include <gbfhtml.h>
+//#include <gbfhtml.h>
 #include <rwphtml.h>
 #include <thmlhtml.h>
 #include <regex.h>
@@ -47,7 +47,7 @@
 
 //#include "gs_rwphtml.h"
 //#include "gs_thmlhtml.h"
-//#include "gs_gbfhtml.h"
+#include "gs_gbfhtml.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -183,7 +183,7 @@ initSWORD(GtkWidget *mainform)
  	plaintohtml   	= new PLAINHTML(); /* sword renderfilter plain to html */
   	thmltohtml	= new ThMLHTML(); /* sword renderfilter thml to html */	
         rwptohtml		= new RWPHTML(); /* sword renderfilter rwp to html */	
-        gbftohtml		= new GBFHTML(); /* sword renderfilter gbf to html */	
+        gbftohtml		= new GS_GBFHTML(); /* sword renderfilter gbf to html */	
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
