@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 0.9.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/terry
+project.configure.options=--prefix=/home/terry --enable-gnome2
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
