@@ -54,12 +54,12 @@
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/info_box.h"
+#include "gui/utilities.h"
 
 #include "main/percomm.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 #include "main/settings.h"
-#include "main/support.h"
 
 /****************************************************************************** 
  * editor popup menu and call backs 
@@ -225,9 +225,9 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		key = get_percomm_key();
 		
 		msgbox = gui_create_info_box();
-		label1 = lookup_widget(msgbox, "lbInfoBox1");
-		label2 = lookup_widget(msgbox, "lbInfoBox2");
-		label3 = lookup_widget(msgbox, "lbInfoBox3");
+		label1 = gui_lookup_widget(msgbox, "lbInfoBox1");
+		label2 = gui_lookup_widget(msgbox, "lbInfoBox2");
+		label3 = gui_lookup_widget(msgbox, "lbInfoBox3");
 		gtk_label_set_text(GTK_LABEL(label1), _("Are you sure you want"));
 		gtk_label_set_text(GTK_LABEL(label2), _("to delete the note for"));
 		gtk_label_set_text(GTK_LABEL(label3),key);

@@ -1,3 +1,11 @@
+2002-07-16  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed main/support.*
+	* added gui/utilities.h
+	* added gnome/utilities.c
+	* renamed main/gs_history.* to gui/history.h and gnome/history.c
+
+
 2002-07-13  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed main/gs_bookmarks.*

@@ -62,10 +62,10 @@
 #include <gtkhtml/htmlengine-search.h>
 #include <gal/widgets/e-unicode.h>
 
+
 #include "main/spell.h"
 #include "main/debug.h"
 #include "main/char_table.h"
-#include "main/support.h"
 
 #include <unistd.h>
 #include <fcntl.h>

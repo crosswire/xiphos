@@ -30,7 +30,6 @@
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 #include "main/settings.h"
-#include "main/support.h"
 
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
@@ -38,6 +37,7 @@
 #include "gui/shortcutbar_dialog.h"
 #include "gui/studypad.h"
 #include "gui/toolbar_nav.h"
+#include "gui/utilities.h"
 
 static char *book_open_xpm[] = {
 	"16 16 4 1",
@@ -348,7 +348,7 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 		    e_paned_get_position(E_PANED(settings.epaned));
 	else
 		panesize =
-		    e_paned_get_position(E_PANED(lookup_widget
+		    e_paned_get_position(E_PANED(gui_lookup_widget
 				  (settings.app,
 				   (gchar *) user_data)));
 

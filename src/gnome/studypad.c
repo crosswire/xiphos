@@ -47,7 +47,6 @@
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 #include "gui/fileselection.h"
-#include "main/support.h"
 #include "main/settings.h"
 
 #define BUFFER_SIZE 4096
