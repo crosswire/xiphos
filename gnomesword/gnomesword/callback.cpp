@@ -74,8 +74,7 @@ extern gchar *font_mainwindow,	//--
 *font_currentverse;		//--
 extern GdkColor myGreen;	//-- current verse color for main text window - declared in display.cpp
 extern bool noteModified;	//-- personal comments window changed
-//extern bool waitonmessage;
-//extern gboolean saveChanges;
+
 extern gboolean autoSave;	//-- auto save personal comments when verse changes -- declared in GnomeSword.cpp
 extern gint answer;		//-- do we save file on exit
 extern SWModule *curMod;	//-- module for main text window (GnomeSword.cpp)
@@ -91,11 +90,15 @@ extern gboolean autoscroll;
 extern gboolean isstrongs;	//-- main window selection is not storngs number (GnomeSword.cpp)
 extern char *homedir;
 guint num1, num2, num3;
-bool buttonpressed = false;
-bool dicttabs,
-    comtabs,
-    bar, applycolor = false, showtextgroup, showcomgroup, showdictgroup;
-extern gint sbsize;
+bool 	buttonpressed = false;
+bool 	dicttabs,
+	comtabs,
+	bar,
+	applycolor = false,
+	showtextgroup,
+	showcomgroup,
+	showdictgroup;
+
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -2265,7 +2268,7 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 0);
 	} else {
 		settings->showshortcutbar = true;
-		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), sbsize);
+		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
 	}
 }
 
@@ -2350,13 +2353,12 @@ on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 }
 
 //----------------------------------------------------------------------------------------------
-
 gboolean
 on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
                                gpointer         user_data)
 {
-        sbsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
-        if(sbsize) return TRUE; 
+        settings->shortcutbarsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
+        if(settings->shortcutbarsize) return TRUE;
         return FALSE;
 }
