@@ -154,7 +154,8 @@ module.include.files=\
 	src/main/display.hh\
 	src/main/global_ops.hh\
 	src/main/url.h\
-	src/backend/sword_main.hh
+	src/backend/sword_main.hh\
+	src/main/module_dialogs.h
 
 module.source.name=.
 module.source.type=
@@ -247,7 +248,8 @@ module.source.files=\
 	src/backend/sword_main.cc\
 	src/main/lists.cc\
 	src/main/url.cc\
-	src/main/sidebar.cc
+	src/main/sidebar.cc\
+	src/main/module_dialogs.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -1,3 +1,15 @@
+2004-03-15  Terry <tbiggs@users.sf.net>
+
+	* completely reworked gnome2/bibletext_dialog.c
+	* removed gui/bibletext_menu.h and gnome2/bibletext_menu.c
+	* added main/module_dialogs.cc and main/module_dialogs.h
+	* added backend/dialogs.cc and backend/dialogs.hh
+	
+2004-03-11  Terry <tbiggs@users.sf.net>
+
+	* added backend/sword_main.cc and backend/sword_main.hh
+	
+
 2004-03-03  Terry <tbiggs@users.sf.net>
 
 	* renamed gui/mod_global_ops.h and gnome2/mod_global_ops.c to

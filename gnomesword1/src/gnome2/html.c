@@ -322,7 +322,7 @@ static void deal_with_storngs(const gchar * url, gboolean clicked)
 	buf = g_strdup(newref);
 	if (clicked) {
 		if (settings.inDictpane)
-			gui_change_module_and_key(modbuf, buf);
+			main_display_dictionary(modbuf, buf);
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(modbuf_viewer, buf);		
 	} else {
@@ -412,7 +412,7 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 	mybuf = NULL;
 	if (clicked) {		
 		if (settings.inDictpane)
-			gui_change_module_and_key(modbuf, buf);
+			main_display_dictionary(modbuf, buf);
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(modbuf, buf);
 	} else {

@@ -1020,7 +1020,7 @@ void gui_swap_parallel_with_main(char *intmod)
 	if (!strcmp(settings.parallel1Module, intmod)) {
 		settings.parallel1Module = xml_get_value("modules", "bible");
 	}
-	gui_change_module_and_key(intmod, settings.currentverse);
+	main_display_bible(intmod, settings.currentverse);
 	gui_update_parallel_page();
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widgets.
 						   button_parallel_view),FALSE);

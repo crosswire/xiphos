@@ -994,6 +994,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 	gchar *newmod, *newref;
 	gint i = 0, havemod = 0;
 	gchar *text = NULL;
+	gchar *url2 = NULL;
 
 	newmod = g_new0(gchar, strlen(url));
 	newref = g_new0(gchar, strlen(url));
@@ -1033,11 +1034,13 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		buf = g_strdup(newref);
 		settings.displaySearchResults = TRUE;
 		
+		url2 = g_strdup_printf("sword://%s/%s",modbuf,buf);
+		
 		switch(GPOINTER_TO_INT(data)) {
 		case 0:
 			if (GTK_TOGGLE_BUTTON(search.togglebutton_show_main)->
 			    active) {
-				gui_change_module_and_key(modbuf, buf);
+				main_url_handler(url2,TRUE); //gui_change_module_and_key(modbuf, buf);
 	
 			}	
 			text = get_module_text(5, modbuf, buf);
@@ -1047,14 +1050,15 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 				free(text);
 			}
 			if (search.show_in_main)
-				gui_change_module_and_key(modbuf, buf);
+				main_url_handler(url2,TRUE); //gui_change_module_and_key(modbuf, buf);
 			break;
 		case 1:
-				gui_change_module_and_key(modbuf, buf);
+				main_url_handler(url2,TRUE); //gui_change_module_and_key(modbuf, buf);
 			break;
 		}
 		settings.displaySearchResults = FALSE;
 		g_free(buf);
+		g_free(url2);
 	}
 	g_free(newmod);
 	g_free(newref);
