@@ -32,7 +32,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
-#include <swmarkupmgr.h>
+#include <markupfiltmgr.h>
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
@@ -60,7 +60,7 @@ list <string> sbfiles;
 
 static SWDisplay 
 	*viewersbDisplay;	/* to display modules in viewer dialog */
-static SWMarkupMgr 
+static SWMgr 
 	*viewersbMgr; 
 static SWModule 
 	*viewersbMod;   /* module for viewer dialog */
@@ -241,8 +241,7 @@ void setupviewerSBSW(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	viewersbMgr	= new SWMarkupMgr();	//-- create sword mgrs
-	//viewersbMgr->Markup(FMT_HTMLHREF);
+	viewersbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	viewersbMod     = NULL;
 	viewersbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	

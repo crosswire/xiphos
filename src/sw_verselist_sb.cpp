@@ -32,7 +32,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
-#include <swmarkupmgr.h>
+#include <markupfiltmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
 #include <gal/widgets/e-unicode.h>
@@ -58,7 +58,7 @@ extern gint groupnum7;
 static SWDisplay 
 	*verselistsbDisplay,	/* to display modules in verselist dialog */
 	*verselisttextsbDisplay;
-static SWMarkupMgr 
+static SWMgr 
 	*verselistsbMgr; 
 static SWModule 
 	*verselistsbMod;   /* module for verselist dialog */
@@ -149,8 +149,7 @@ void setupVerseListSBSWORD(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	verselistsbMgr	= new SWMarkupMgr();	//-- create sword mgrs
-	verselistsbMgr->Markup(FMT_HTMLHREF);
+	verselistsbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	verselistsbMod     = NULL;
 	verselistsbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	verselisttextsbDisplay = new  GTKutf8ChapDisp(html_widget);

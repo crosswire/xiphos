@@ -39,8 +39,9 @@
 
 #include <gnome.h>
 #include <swmgr.h>
-#include <swmarkupmgr.h>
+#include <markupfiltmgr.h>
 
+#include <swversion.h>
 #include <swmodule.h>
 #include <swconfig.h>
 #include <versekey.h>
@@ -92,9 +93,7 @@ SWDisplay
     
 SWMgr 
     *percomMgr,			/* sword mgr for percomMod - personal comments editor */
-    *listMgr;			/* sword mgr for ListEditor */
-    
-SWMarkupMgr  
+    *listMgr,		/* sword mgr for ListEditor */
     *mainMgr1,			/* sword mgr for comp1Mod - first interlinear module */
     *mainMgr;		/* sword mgr for curMod - curcomMod - curdictMod */
 
@@ -176,16 +175,17 @@ extern HISTORY historylist[];	/* sturcture for storing history items */
 void initSWORD(GtkWidget * mainform)
 { 
 	ModMap::iterator it;	//-- iteratior
-	SectionMap::iterator sit;	//-- iteratior
+	//SectionMap::iterator sit;	//-- iteratior
 	ConfigEntMap::iterator eit;	//-- iteratior
 	int i,			//-- counter
 	 j;			//-- counter 
 	gchar * lang;
  
+	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n","Initiating Sword\n");
 
-	mainMgr = new SWMarkupMgr(); //(0, 0, true, ENC_UTF8, FMT_HTMLHREF);	//-- create sword mgrs
-	mainMgr1 = new SWMarkupMgr(); //(0, 0, true, ENC_UTF8, FMT_HTMLHREF);
+	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
+	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF)); 
 	percomMgr = new SWMgr();
 
 	curMod = NULL;		//-- set mods to null
@@ -215,6 +215,7 @@ void initSWORD(GtkWidget * mainform)
 	sbcommods = NULL;
 	sbdictmods = NULL;
 	options = NULL;
+	
 	settings->displaySearchResults = false;
 	
 	MainFrm = lookup_widget(mainform, "settings->app");	//-- save mainform for use latter
@@ -238,20 +239,21 @@ void initSWORD(GtkWidget * mainform)
 	}
 	
 	g_print("%s\n", "Loading SWORD Moudules");
-	g_print("gnomesword-%s\n", VERSION);
 	
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
 		descriptionMap[string ((char *) (*it).second->Description())] =
 		    string((char *) (*it).second->Name());
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			curMod = (*it).second;
-			sit = mainMgr->config->Sections.find((*it).second->Name());
-			ConfigEntMap & section = (*sit).second;
 			havebible = TRUE;
 			++textpages;
 			biblemods = g_list_append(biblemods, curMod->Name());
 			sbbiblemods = g_list_append(sbbiblemods, curMod->Description());
+			/*
+			sit = mainMgr->config->Sections.find((*it).second->Name());
+			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curMod, section);
+			*/
 			curMod->Disp(UTF8Display);
 			curMod->SetKey(vkText);
 		} else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
@@ -260,9 +262,11 @@ void initSWORD(GtkWidget * mainform)
 			sbcommods = g_list_append(sbcommods, curcomMod->Description());
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have  
+			/*
 			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curcomMod, section);
+			*/
 			curcomMod->Disp(commDisplay);
 			curcomMod->SetKey(vkComm);
 		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
@@ -271,10 +275,11 @@ void initSWORD(GtkWidget * mainform)
 			curdictMod = (*it).second;
 			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
 			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
+			/*
 			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curdictMod, section);
-			
+			*/
 			curdictMod->Disp(dictDisplay);
 		}
 	}
@@ -301,13 +306,15 @@ void initSWORD(GtkWidget * mainform)
 	     it++) {
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
+			/*
 			sit = mainMgr1->config->Sections.find((*it).second->Name());	//-- check to see if we need render filters
 			if (sit != mainMgr1->config->Sections.end()) {
 				sit = mainMgr1->config->Sections.find((*it).second->Name());
 				ConfigEntMap & section = (*sit).second;
 				addrenderfiltersSWORD(comp1Mod, section);
-				comp1Mod->Disp(comp1Display);
 			}
+			*/
+			comp1Mod->Disp(comp1Display);
 		}
 	}
 	//-- add globalOptions to menus
@@ -1306,11 +1313,11 @@ GList *getBibleBooks(void)
 /******************************************************************************
  * returns the version number of the sword libs
  ******************************************************************************/
-gfloat getSwordVerionSWORD(void)
+const char *getSwordVerionSWORD(void)
 {
-	gfloat retval;
-
-	retval = mainMgr->Version();
+	SWVersion retval;
+	
+	retval = SWVersion::currentVersion;
 	return retval;
 }
 

@@ -32,7 +32,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
-#include <swmarkupmgr.h>
+#include <markupfiltmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
 #include <plainhtml.h>
@@ -70,7 +70,7 @@ static char printed = 0;
 static SWDisplay 
 	*searchresultssbDisplay,	/* to display modules in searchresults */
 	*searchresultstextsbDisplay;
-static SWMarkupMgr 
+static SWMgr 
 	*searchresultssbMgr; 
 static SWModule 
 	*searchresultssbMod;   /* module for searchresults */
@@ -283,8 +283,7 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	searchresultssbMgr	= new SWMarkupMgr();
-	searchresultssbMgr->Markup(FMT_HTMLHREF);	
+	searchresultssbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
 	searchresultssbMod     = NULL;
 	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
