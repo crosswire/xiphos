@@ -661,7 +661,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GINT_TO_POINTER(1));
 	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "button_release_event",
 			   GTK_SIGNAL_FUNC(html_button_released),
-			   GINT_TO_POINTER(0));
+			   GINT_TO_POINTER(1));
 /*
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
