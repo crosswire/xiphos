@@ -249,16 +249,15 @@ void frontend_display(void)
 
 void shutdown_frontend(void)
 {
-	gui_save_bookmarks_treeview();
-	xml_save_settings_doc(settings.fnconfigure);
-	xml_free_settings_doc();
 	
+	gui_save_bookmarks_treeview();
 	/* if study pad file has changed since last save */
 	if (widgets.studypad_dialog)
 		gtk_widget_destroy(widgets.studypad_dialog);
-	else
-		gui_studypad_can_close();
-
+	
+	xml_save_settings_doc(settings.fnconfigure);
+	xml_free_settings_doc();
+	
 	shutdown_list();
 
 	/* free dir and file stuff */

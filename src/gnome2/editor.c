@@ -117,6 +117,9 @@ void gui_html_editor_control_data_destroy(GtkObject * object,
 {
 	g_assert(ecd);
 
+	if(ecd->changed && ecd->studypad)
+		gui_studypad_can_close(ecd);
+	
 	if (ecd->plain_painter)
 		gtk_object_unref(GTK_OBJECT(ecd->plain_painter));
 

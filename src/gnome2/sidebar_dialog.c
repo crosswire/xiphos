@@ -132,7 +132,7 @@ GtkWidget* create_sidebar_dialog(void)
 
 	dlgDock = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(dlgDock), "dlgDock", dlgDock);
-	gtk_window_set_title(GTK_WINDOW(dlgDock), settings.program_title);
+	gtk_window_set_title(GTK_WINDOW(dlgDock), _("Sidebar"));
 	gtk_window_set_policy(GTK_WINDOW(dlgDock), TRUE, TRUE, FALSE);
 	gtk_widget_set_usize(dlgDock, settings.shortcutbar_width,
 			settings.gs_hight);
@@ -141,8 +141,8 @@ GtkWidget* create_sidebar_dialog(void)
 	gtk_widget_show(vbox_dock);
 	gtk_container_add(GTK_CONTAINER(dlgDock), vbox_dock);
 
-	gtk_signal_connect(GTK_OBJECT(dlgDock), "destroy",
-			GTK_SIGNAL_FUNC(on_dialog_destroy), NULL);
+	g_signal_connect(G_OBJECT(dlgDock), "destroy",
+			G_CALLBACK(on_dialog_destroy), NULL);
 
 	return dlgDock;
 }
