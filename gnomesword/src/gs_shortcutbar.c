@@ -31,16 +31,28 @@
 #include  "gs_shortcutbar.h"
 #include  "gs_gnomesword.h"
 #include  "support.h"
+#include "gs_bookmarks.h"
 
 extern gchar *shortcut_types[];
 extern GtkWidget *shortcut_bar;
 extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
+extern BM_TREE bmtree;
+extern GS_APP gs;
 
 gint groupnum1 = 0,
         groupnum2 = 0,
         groupnum3 = 0,
-        groupnum4 = 0;
+        groupnum4 = 0,
+	groupnum5 = 0;
+
+void
+on_button_clicked                      (GtkButton       *button,
+                                        gpointer         user_data)
+{
+ 	g_warning("ok!");
+}
+
 
 
 //----------------------------------------------------------------------------------------------
@@ -70,6 +82,13 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
 {
 	GList *tmp;
+	GtkWidget* treebar,
+			*button,
+			*ctree,
+			*scrolledwindow1;
+//	GtkCTree *ctree;
+	
+	
 	
 	tmp = NULL;
 	if(settings->showtextgroup){
@@ -85,6 +104,37 @@ void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
 		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	
 	}
 	
+	treebar = e_group_bar_new();
+	
+	scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
+  	gtk_widget_ref (scrolledwindow1);
+  	gtk_object_set_data_full (GTK_OBJECT (MainFrm), "scrolledwindow1", scrolledwindow1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (scrolledwindow1);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow1),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	ctree = gtk_ctree_new (2, 0);
+  	gtk_widget_ref (ctree);
+  	gtk_object_set_data_full (GTK_OBJECT (MainFrm), "ctree",ctree ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (ctree);
+	gtk_container_add (GTK_CONTAINER (scrolledwindow1), ctree);
+  	gtk_clist_set_column_width (GTK_CLIST (ctree), 0, 280);
+  	gtk_clist_set_column_width (GTK_CLIST (ctree), 1, 40);
+  	//gtk_clist_column_titles_show (GTK_CLIST (ctree1));
+	gs.ctree_widget = ctree;
+	
+	button = gtk_button_new_with_label("Bookmarks");
+	gtk_widget_ref (button);
+	gtk_object_set_data_full (GTK_OBJECT (MainFrm), "button", button,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (button);
+	groupnum5  = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
+						 scrolledwindow1,
+						 button,
+						 -1);
 	//--  add modules to shortcut bar
 	if(settings->showtextgroup){ 	
 		tmp = textlist;
@@ -118,7 +168,13 @@ void setupSB(GList *textlist, GList *commentarylist, GList *dictionarylist)
 			tmp = g_list_next(tmp);
 		}
 	}	
-                 g_list_free(tmp);
+        g_list_free(tmp);
+	loadtree(gs.ctree_widget);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      GTK_SIGNAL_FUNC (on_button_clicked),
+                      NULL);     
+
+
 }
 
 /******************************************************************************

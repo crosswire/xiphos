@@ -122,7 +122,13 @@ module.source.files=\
 	gs_info_box.c\
 	gs_info_box.h\
 	sw_properties.cpp\
-	sw_properties.h
+	sw_properties.h\
+	gs_bookmarks.c\
+	gs_bookmarks.h\
+	sw_latin1utf8.cpp\
+	sw_latin1utf8.h\
+	sw_bookmarks.cpp\
+	sw_bookmarks.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

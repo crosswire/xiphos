@@ -36,17 +36,15 @@
 //#include <gbfhtml.h>
 #include <rwphtml.h>
 //#include <thmlhtml.h>
+//#include <latin1utf8.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
 
-#if USE_SHORTCUTBAR
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
-//#include <gal/e-paned/e-hpaned.h>
-#endif /* USE_SHORTCUTBAR */
 
 #include "sw_gbfhtml.h"
 #include "sw_thmlhtml.h"
+#include "sw_latin1utf8.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -65,6 +63,7 @@
 
 #include "sw_utility.h"
 #include "sw_properties.h"
+#include "sw_bookmarks.h"
 
 /***********************************************************************************************
 Sword global to this file
@@ -112,6 +111,7 @@ SWFilter *gbftohtml;
 SWFilter *plaintohtml;
 SWFilter *thmltohtml;
 SWFilter *rwptohtml;
+SWFilter *lattoutf8;
 /***********************************************************************************************
 GnomeSword globals
 ***********************************************************************************************/ 	
@@ -166,6 +166,7 @@ extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
+extern GS_APP gs;
 
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -184,11 +185,12 @@ initSWORD(GtkWidget *mainform)
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
 	string encoding;
-  	
+  	 
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new SW_ThMLHTML(); /* sword renderfilter thml to html */	
         rwptohtml	= new RWPHTML();
         gbftohtml		= new SW_GBFHTML();
+        lattoutf8		= new SW_Latin1UTF8();
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -237,7 +239,7 @@ initSWORD(GtkWidget *mainform)
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
-	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
+	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
 	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
@@ -249,17 +251,15 @@ initSWORD(GtkWidget *mainform)
 			curMod = (*it).second;
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
+			//encoding = ((cit = section.find("Encoding")) != section.end()) ? (*cit).second : (string) "";
 			havebible = TRUE;
 			biblemods = g_list_append(biblemods,curMod->Name());
-			encoding = ((cit = section.find("Encoding")) != section.end()) ? (*cit).second : (string) "";
-			if(!stricmp(encoding.c_str(), "UTF-8")) {
-				addrenderfiltersSWORD(curMod, section);
+			addrenderfiltersSWORD(curMod, section);
+			//if (!stricmp(encoding.c_str(), "UTF-8")) {				
 				curMod->Disp(UTF8Display);
-			}else{
-				addrenderfiltersSWORD(curMod, section);
+			/*}else{
 				curMod->Disp(HTMLchapDisplay);
-			}
-	  			
+			}*/
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
@@ -269,14 +269,6 @@ initSWORD(GtkWidget *mainform)
 			ConfigEntMap &section = (*sit).second;
 			addrenderfiltersSWORD(curcomMod, section);
 			curcomMod->Disp(HTMLDisplay);
-			/* if driver is RawFiles - personal notes*/
-			/*
-			if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){
-				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
-				 else curcomMod->Disp(comDisplay);
-			}else curcomMod->Disp(comDisplay);*/
-
-
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook	
 			havedict = TRUE; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
@@ -286,7 +278,6 @@ initSWORD(GtkWidget *mainform)
 			ConfigEntMap &section = (*sit).second;
 			addrenderfiltersSWORD(curdictMod, section);
 			curdictMod->Disp(dictDisplay);
-
 		}
 	} 		
   	//-- set up percom editor module
@@ -467,6 +458,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 
         sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
 	writesettings(myset); //-- save setting (myset structure) to use when we start back up
+	savebookmarks(gs.ctree_widget);
 	saveconfig();
 	if(file_changed){ //-- if study pad file has changed since last save		
 		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
@@ -493,6 +485,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete gbftohtml;
 	if (plaintohtml != 0)
 		delete plaintohtml;	
+	if (lattoutf8 != 0)
+		delete lattoutf8;	
 	if (chapDisplay)    //-- delete Sword displays
 		delete chapDisplay;
 	if (entryDisplay)

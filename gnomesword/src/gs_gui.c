@@ -40,7 +40,7 @@
 #include "gs_gui.h"
 #include "callback.h"
 #include "gs_studypad.h"
-//#include "interface.h"
+#include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_shortcutbar.h"
 #include "gs_sword.h"
@@ -56,21 +56,23 @@
 #endif				/* USE_SPELL */
 
 GtkWidget *shortcut_bar, *appbar1;
+extern GS_APP gs;
 
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 
-#define NUM_SHORTCUT_TYPES 4
+#define NUM_SHORTCUT_TYPES 5
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
 	"bible:", "commentary:", "dict/lex:",
-	"history:"
+	"history:","modmaint:"
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 	"gnomesword/GnomeSword.png",
 	"gnomesword/sword.xpm",
 	"gnomesword/GnomeSword.png",
-	"gnome-folder.png"
+	"gnome-folder.png",
+	"gdict.png"
 };
 
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
@@ -436,12 +438,10 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *list1;
 	GtkWidget *label58;
 	GtkWidget *hbox25;
-
 //#if USE_SHORTCUTBAR
 	gint i;
 	gchar *pathname;
 //#endif				/* USE_SHORTCUTBAR */
-
 	mainwindow =
 	    gnome_app_new("gnomesword",
 			  "GnomeSword - Bible Study Software");
@@ -449,8 +449,9 @@ GtkWidget *create_mainwindow(void)
 			    mainwindow);
 	gtk_widget_set_usize(mainwindow, 680, 480);
 	GTK_WIDGET_SET_FLAGS(mainwindow, GTK_CAN_FOCUS);
-	gtk_window_set_default_size(GTK_WINDOW(mainwindow), 680, 480);
-
+	
+	gs.app = mainwindow;
+	
 	dock1 = GNOME_APP(mainwindow)->dock;
 	gtk_widget_ref(dock1);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "dock1", dock1,
@@ -936,6 +937,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hpaned1",
 				 hpaned1,
 				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_set_usize (hpaned1, -2, 380);
 	gtk_widget_show(hpaned1);
 	gtk_box_pack_end(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
 
@@ -948,7 +950,7 @@ GtkWidget *create_mainwindow(void)
 
 	e_paned_pack1(E_PANED(hpaned1), frame9, FALSE, TRUE);
 
-	gtk_widget_set_usize(frame9, 325, -2);
+	gtk_widget_set_usize(frame9, 380, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(frame9), 2);
 
 	nbText = gtk_notebook_new();
@@ -1406,7 +1408,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame2);
 	gtk_box_pack_start(GTK_BOX(vbox3), frame2, TRUE, TRUE, 0);
-	gtk_widget_set_usize(frame2, -2, 67);
+	//gtk_widget_set_usize(frame2, -2, 67);
 
 	vbox4 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox4);
@@ -1992,7 +1994,14 @@ GtkWidget *create_mainwindow(void)
 
 	gtk_signal_connect(GTK_OBJECT(epaned), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
-			   NULL);
+			   (gchar*)"epaned");
+	gtk_signal_connect(GTK_OBJECT(vpaned1), "button_release_event",
+			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
+			  (gchar*)"vpaned1");
+	gtk_signal_connect(GTK_OBJECT(hpaned1), "button_release_event",
+			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
+			  (gchar*)"hpaned1");
+			   
 //-------------------------------------------------------------------------------------------
 	gtk_widget_pop_visual();
 	gtk_widget_pop_colormap();
