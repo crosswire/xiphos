@@ -542,9 +542,13 @@ on_notebook1_switch_page               (GtkNotebook     *notebook,
                                         gpointer         user_data)
 {
 	GtkLabel *label; //-- pointer to page label
-
-	label = (GtkLabel *)page->tab_label; //-- get label
-	changcurcomModSWORD((char *)label->label); //-- pass label text to function to do the work - GnomeSword.cpp
+  static bool firsttime = true;
+  if(!firsttime)
+  {
+		label = (GtkLabel *)page->tab_label; //-- get label
+		changcurcomModSWORD((char *)label->label,page_num); //-- pass label text and page number to function to do the work - GnomeSword.cpp
+	}
+	firsttime = false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -692,7 +696,7 @@ on_btnPrint_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
 {
 #ifdef  USE_GNOMEPRINT
-	print_text(GTK_WIDGET(button),current_filename); //-- pass studypad text widget to print
+	file_print(GTK_WIDGET(button),current_filename,1); //-- pass studypad text widget to print
 #endif  /*USE_GNOMEPRINT*/
 }
 
@@ -747,21 +751,25 @@ on_text3_changed                       (GtkEditable     *editable,
 }
 
 //----------------------------------------------------------------------------------------------
-void
+void                             //-- someone changed dict & lex notebook page
 on_notebook4_switch_page               (GtkNotebook     *notebook,
                                         GtkNotebookPage *page,
                                         gint             page_num,
                                         gpointer         user_data)
 {
-	GtkLabel *label;
-	string keyText;
-	gchar *entryText;
-
-	label = (GtkLabel *)page->tab_label;	
-	entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(notebook),"dictionarySearchText")));
-	if(!strcmp(label->label,"Torrey")) entryText = "";
-	keyText = entryText;
-	changcurdictModSWORD((char *)label->label,keyText);
+	GtkLabel *label;     //-- pointer to tab label
+	string keyText;      //-- string for verse key text
+	gchar *entryText;    //-- pointer to dict key
+	static bool firsttime = true;    //-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
+  if(!firsttime)
+  {
+		label = (GtkLabel *)page->tab_label;	//-- set label to tab label
+		entryText = gtk_entry_get_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(notebook),"dictionarySearchText"))); //-- get key from entry
+		if(!strcmp(label->label,"Torrey")) entryText = ""; //-- if Torrey module then set text to null else segfault?
+		keyText = entryText;  //-- put entryText into string keyText
+		changcurdictModSWORD((char *)label->label,keyText, page_num);  //-- sent to changcurdictModSWORD() function in GnomeSword.cpp
+	}
+	firsttime = false; //-- no longer the first time
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1080,10 +1088,7 @@ void
 on_preferences1_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget *Propertybox;
-
-	Propertybox = create_propertybox1();
-	gtk_widget_show(Propertybox); 
+	openpropertiesbox();
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1451,5 +1456,132 @@ on_search1_activate                       (GtkMenuItem     *menuitem,
 	gtk_widget_show (searchDlg); 	
 }
 
+//----------------------------------------------------------------------------------------------
+void
+on_fpStudypad_font_set                 (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data)
+{
+  //arg1.str;
+  gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomefontpicker))));
+}
 
+//----------------------------------------------------------------------------------------------
+void
+on_fpSPPrinter_font_set                (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnSearchSaveList_clicked           (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListNew_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListOpen_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListClose_clicked           (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListPrint_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_verse_list1_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{ 	
+	GtkWidget *dlg;
+	dlg = create_dlgVerseList();
+	gtk_widget_show(dlg);
+}
+
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListSave_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListCopy_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnVerseListPaste_clicked           (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_cbContext_toggled                   (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_verselist_select_row                (GtkCList        *clist,
+                                        gint             row,
+                                        gint             column,
+                                        GdkEvent        *event,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_notebook3_switch_page               (GtkNotebook     *notebook,
+                                        GtkNotebookPage *page,
+                                        gint             page_num,
+                                        gpointer         user_data)
+{  	
+	static bool firsttime = true;    //-- don't do anything if this is the first time here, but remember we were here - set firsttime to false
+  if(!firsttime)
+  {
+    changepagenotebook(notebook,page_num); //-- send to changepagenotebook() function in GnomeSword.cpp
+  }
+  firsttime = false; //-- remember we were here
+}
 
