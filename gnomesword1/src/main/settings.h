@@ -22,8 +22,9 @@
 #ifndef _SETTINGS_H_
 #define _SETTINGS_H_
 
-#include <gnome.h>
+//#include <gnome.h>
 
+#include <glib-2.0/glib.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -221,7 +222,7 @@ struct _settings {
 	int shadow_type;
 	
 	/* signal id dictionary combo changed */
-	gulong signal_id;
+	long signal_id;
 	
 };
 

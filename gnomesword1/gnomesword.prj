@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/tee --enable-debug
+project.configure.options=--prefix=/usr --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -106,13 +106,8 @@ module.include.files=\
 	src/gui/studypad.h\
 	src/gui/toolbar_nav.h\
 	src/gui/utilities.h\
-	src/main/bibletext.h\
-	src/main/commentary.h\
-	src/main/dictlex.h\
-	src/main/percomm.h\
 	src/main/lists.h\
 	src/main/settings.h\
-	src/main/spell.h\
 	src/main/sword.h\
 	src/main/configs.h\
 	src/main/xml.h\
@@ -129,7 +124,6 @@ module.include.files=\
 	src/main/global_ops.hh\
 	src/backend/sword_main.hh\
 	src/main/module_dialogs.h\
-	src/main/mod_search.h\
 	src/gui/search_sidebar.h\
 	src/main/search_dialog.h\
 	src/main/search_sidebar.h\

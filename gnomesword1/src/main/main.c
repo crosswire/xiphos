@@ -30,7 +30,7 @@
 #include "gui/main_window.h"
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
-#include "gui/widgets.h"
+//#include "gui/widgets.h"
 
 #include "main/url.hh"
 
@@ -110,8 +110,8 @@ int main(int argc, char *argv[])
 	if(have_sword_url)
 		main_url_handler(argv[1], TRUE);
 
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-					(widgets.notebook_comm_book), 0);
+	/*gtk_notebook_set_current_page(GTK_NOTEBOOK
+					(widgets.notebook_comm_book), 0);*/
 	gui_main();
 
 	return 0;

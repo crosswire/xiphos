@@ -25,7 +25,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
- 
 typedef struct _app_widgets WIDGETS;
 struct  _app_widgets {
 	GtkWidget

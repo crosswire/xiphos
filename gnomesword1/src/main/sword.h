@@ -25,7 +25,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gnome.h>
+//#include <gnome.h>
+#include <glib/gi18n.h>
+#include <glib-2.0/glib.h>
+//#include <libgnome/libgnome.h>
+//#include <libgnomeui/libgnomeui.h>
 	
 #include "main/configs.h"	
 /*** these defs need to be seen by gui and backend ***/
@@ -65,13 +69,13 @@ char *main_get_crossref(char * mod_name, char * key,
 char *main_get_footnote_body(char * mod_name, char * key, 
 						char * note_number);
 char *main_get_search_results_text(char * mod_name, char * key);
-void main_locked_module_display(GtkWidget * html_widget,
-				  gchar * mod_name, gchar * cipher_key);
-void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
-		   gchar * text, gchar * key, gboolean show_key);
-void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-		             gchar * action ,gchar * type ,gchar * morph_text,
-			     gchar * morph);
+void main_locked_module_display(gpointer data,
+				  char * mod_name, char * cipher_key);
+void main_entry_display(gpointer data, char * mod_name,
+		   char * text, char * key, gboolean show_key);
+void main_information_viewer(char * mod_name, char * text, char * key,
+		             char * action ,char * type ,char * morph_text,
+			     char * morph);
 void main_clear_viewer(void);
 void main_display_book(const char * mod_name, char * key);
 void main_display_commentary(const char * mod_name, const char * key);

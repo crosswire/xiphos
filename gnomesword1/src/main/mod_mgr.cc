@@ -24,8 +24,8 @@
 #endif
 
 
-#include <glib-2.0/glib.h>
-#include <gnome.h>
+//#include <glib-2.0/glib.h>
+//#include <gnome.h>
 
 
 #include "main/mod_mgr.h"

@@ -447,9 +447,10 @@ void shutdown_backend(void)
  *   void
  */
 
-void main_locked_module_display(GtkWidget * html_widget,
-				  gchar * mod_name, gchar * cipher_key)
+void main_locked_module_display(gpointer data,
+				  char * mod_name, char * cipher_key)
 {
+	GtkWidget *html_widget = (GtkWidget *) data;
 	GtkHTML *html = GTK_HTML(html_widget);
 	GtkHTMLStreamStatus status1;
 	GtkHTMLStream *htmlstream;
@@ -661,9 +662,10 @@ static void mark_search_words(GString * str)
  *   void
  */
 
-void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
+void main_entry_display(gpointer data, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key)
 {
+	GtkWidget *html_widget = (GtkWidget *) data;
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
@@ -1051,18 +1053,20 @@ void main_display_book(const char * mod_name, char * key)
 }
 
 void main_display_commentary(const char * mod_name, const char * key)
-{
-	if(!settings.havecomm || !mod_name || !settings.comm_showing)
+{	
+	if(!settings.havecomm || !settings.comm_showing)
 		return;
-	if(!backend->is_module(mod_name))
+	
+	if(!mod_name)
+		mod_name = xml_get_value("modules", "comm");
+	
+	if(!mod_name || !backend->is_module(mod_name))
 		return;
 	if(!settings.CommWindowModule)
 		settings.CommWindowModule = (char*)mod_name;
 	
 	settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
-//	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-	//gui_change_window_title(settings.CommWindowModule);
 	
 	if(strcmp(settings.CommWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
@@ -1127,6 +1131,10 @@ void main_display_bible(const char * mod_name, const char * key)
 	gchar *file = NULL;
 	gchar *style = NULL;
 	gchar *val_key = NULL;
+	
+	if(!mod_name)
+		mod_name = xml_get_value("modules", "bible");	
+	
 	
 	if(!settings.havebible || !mod_name)
 		return;
