@@ -48,6 +48,7 @@
 #include "gs_viewcomm_dlg.h"
 #include "gs_viewtext_dlg.h"
 #include "gs_bookmarks.h"
+#include "gs_undock_int.h"
 #include "support.h"
 
 
@@ -75,6 +76,20 @@ extern gchar
 extern GList
 	*options;
 	
+/*** undock/dock interlinear page ***/
+void on_undockInt_activate(GtkMenuItem * menuitem,  SETTINGS *s)
+{
+	if(s->dockedInt) {
+		s->dockedInt = FALSE;
+		undock_interlinear_page(s); /* gs_interlinear_dlg.c */
+		
+	}
+	else {
+		s->dockedInt = TRUE;
+		on_btnDockInt_clicked(NULL,s); /* gs_interlinear_dlg.c */
+	}	
+}
+
 
 //----------------------------------------------------------------------------------------------
 void on_edit_book_activate(GtkMenuItem * menuitem,  gchar *user_data)

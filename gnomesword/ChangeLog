@@ -1,3 +1,11 @@
+2002-02-15 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* made interlinear page undockable
+	* when int page is undocked it displays a chapter at 
+	 a time with the mods side by side in an html table 
+	 like BibleTime.
+	* added gs_undock_int.* and gs_undock_sb.*
+
 2002-02-02 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added editor to gbs

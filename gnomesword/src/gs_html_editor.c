@@ -52,6 +52,7 @@
 #endif				/* USE_SPELL */
 
 #include "gs_gnomesword.h"
+#include "sw_gnomesword.h"
 #include "gs_file.h"
 #include "gs_html.h"
 #include "gs_html_editor.h"

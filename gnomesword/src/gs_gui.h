@@ -31,8 +31,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include "gs_gnomesword.h"
 
-	GtkWidget *create_mainwindow(GtkWidget * splash);
+	GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s);
 
 #ifdef __cplusplus
 }
