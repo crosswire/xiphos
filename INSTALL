@@ -1,13 +1,10 @@
 Basic Installation for GnomeSword 0.4.0 and later
 ==================
 ===================== notice =======================
-You must have GtkHTML-0.8.0 to build gnomesword 
+You must have GtkHTML-0.8.0 or later to build gnomesword 
 ftp://download.sourceforge.net/pub/mirrors/gnome/unstable/sources/gtkhtml/gtkhtml-0.8.0.tar.gz
-If you have installed gtkhtml-0.8.1 or .2 gnomesword will not work! It
-lockup and do bad things!
 
-You need to have the Sword Project (sword-1.5.0) installed.
-(sword-1.5.1a for gnomesword-0.3.0 or later)
+You need to have the Sword Project (sword-1.5.1a) installed.
 You need at least one each text ,commentary and dictionary module also.
 Sword-1.5.1a and the modules can be found at www.crosswire.org in the Sword Project.
 
