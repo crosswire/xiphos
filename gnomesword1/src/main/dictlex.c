@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * dictlex.c - SHORT DESCRIPTION
+ * dictlex.c - dictlex glue
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -30,6 +30,8 @@
 /* backend */
 #include "sword.h"
 #include "dictlex_.h"
+#include "viewdict.h"
+#include "dictlex_dialog.h"
 
 /* gnome */
 #include "_dictlex.h"
@@ -40,24 +42,20 @@
 #include "dictlex.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
-#include "gs_viewdict_dlg.h"
 
 /******************************************************************************
  * externs
- */
- 
+ */ 
 extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 
 /******************************************************************************
  * global to this file only 
  */
-
 static GList *dl_list;
 
 /******************************************************************************
  * globals
  */
-
 DL_DATA *cur_d;
 
 
@@ -174,13 +172,13 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
  * Synopsis
  *   #include "dictlex.h"
  *
- *   GList* setup_dictlex(SETTINGS * s)
+ *   void setup_dictlex(SETTINGS * s)
  *
  * Description
  *   setup dictlex support 
  *
  * Return value
- *   GList*
+ *  void
  */
 
 void setup_dictlex(SETTINGS * s, GList *mods)
@@ -195,7 +193,6 @@ void setup_dictlex(SETTINGS * s, GList *mods)
 
 	dl_list = NULL;
 
-	//mods = backend_get_list_of_mods_by_type(DICT_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -283,3 +280,151 @@ void display_dictlex(gchar * key)
 	strcpy(settings.dictkey,key);
 	backend_display_dictlex(settings.dict_last_page, key);
 }
+
+/******************************************************************************
+ * Name
+ *   get_first_key_viewdict
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   gchar *get_first_key_viewdict(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gchar *
+ */
+
+gchar *get_first_key_viewdict(void)
+{
+	return backend_get_first_key_viewdict();
+}
+
+/******************************************************************************
+ * Name
+ *   get_next_key_viewdict
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   gchar *get_next_key_viewdict(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gchar *
+ */
+
+gchar *get_next_key_viewdict(void)
+{
+	return backend_get_next_key_viewdict();
+}
+
+/******************************************************************************
+ * Name
+ *  search_text_changed_viewdict 
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void search_text_changed_viewdict(gchar * key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void search_text_changed_viewdict(gchar * key)
+{
+	backend_search_text_changed_viewdict(key);
+}
+
+/******************************************************************************
+ * Name
+ *   shutdown_viewdict
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void shutdown_viewdict(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void shutdown_viewdict(void)
+{
+	backend_shutdown_viewdict();
+}
+
+/******************************************************************************
+ * Name
+ *   load_module_viewdict
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void load_module_viewdict(gchar * module_name)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void load_module_viewdict(gchar * module_name)
+{
+	backend_load_module_viewdict(module_name);
+}
+
+/******************************************************************************
+ * Name
+ *   goto_key_viewdict
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void goto_key_viewdict(gchar * key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void goto_key_viewdict(gchar * key)
+{
+	backend_goto_key_viewdict(key);
+}
+
+/******************************************************************************
+ * Name
+ *  setup_viewdict 
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void setup_viewdict(GtkWidget * text, SETTINGS *s)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void setup_viewdict(GtkWidget * text, SETTINGS *s)
+{
+	backend_setup_viewdict(text, s);
+}
+

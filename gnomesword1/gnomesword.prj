@@ -84,8 +84,10 @@ module.include.files=\
 	src/gnome/_bibletext.h\
 	src/gnome/_bibletext_view.h\
 	src/gnome/_commentary.h\
+	src/gnome/commentary_dialog.h\
 	src/gnome/commentary_find.h\
 	src/gnome/_dictlex.h\
+	src/gnome/dictlex_dialog.h\
 	src/gnome/_display_info.h\
 	src/gnome/_editor.h\
 	src/gnome/_gbs.h\
@@ -129,8 +131,6 @@ module.include.files=\
 	src/main/gs_menu.h\
 	src/main/gs_popup_cb.h\
 	src/main/setup.h\
-	src/main/gs_viewcomm_dlg.h\
-	src/main/gs_viewdict_dlg.h\
 	src/main/percomm.h\
 	src/main/lists.h\
 	src/main/settings.h\
@@ -166,8 +166,10 @@ module.source.files=\
 	src/gnome/_bibletext.c\
 	src/gnome/_bibletext_view.c\
 	src/gnome/_commentary.c\
+	src/gnome/commentary_dialog.c\
 	src/gnome/commentary_find.c\
 	src/gnome/_dictlex.c\
+	src/gnome/dictlex_dialog.c\
 	src/gnome/_display_info.c\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\
@@ -210,9 +212,6 @@ module.source.files=\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
 	src/main/setup.c\
-	src/main/gs_viewcomm_dlg.c\
-	src/main/gs_viewdict_dlg.c\
-	src/main/gs_viewtext.c\
 	src/main/lists.c\
 	src/main/main.c\
 	src/main/percomm.c\

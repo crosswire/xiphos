@@ -36,6 +36,7 @@
 #include <string.h>
 
 #include "gs_gnomesword.h"
+
 #include "sword.h"
 #include "display.h"
 #include "commentary_.h"

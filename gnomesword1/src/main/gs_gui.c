@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_gui.c - SHORT DESCRIPTION
+ * gs_gui.c - main window gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *

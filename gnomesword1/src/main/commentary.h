@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * commentary.h - glue for commentary modules
+ * commentary.h - glue for commentary modules and commentary dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -60,6 +60,11 @@ void set_commentary_page_and_key(gint page_num,
 void setup_commentary(SETTINGS * s, GList *mods);
 void shutdown_commentary(void);
 void display_commentary(gchar * key);
+void shutdown_viewcomm(void);
+void goto_verse_viewcomm(gchar *verse);
+void load_module_viewcomm(gchar *module_name);
+void nav_module_viewcomm(gint direction);
+void setup_viewcomm(GtkWidget * text);
 
 #ifdef __cplusplus
 }

@@ -35,6 +35,7 @@
 #include "viewcomm.h"
 #include "sword.h"
 #include "display.h"
+
 #include "settings.h"
 
 static SWDisplay *display;	/* to display modules in view comm dialog */
