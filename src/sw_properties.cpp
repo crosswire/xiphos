@@ -65,8 +65,7 @@ gboolean loadconfig(void)
 	sprintf(buf,"%s/preferences.conf",gSwordDir); 
 	SWConfig settingsInfo(buf); 
 	settingsInfo.Load();
-	//g_warning("buf = %s",buf);
-	
+	/* app size on open ,epane sizes and shortcut bar width*/
 	gslayout.shortcutbar_width = atoi(settingsInfo["LAYOUT"]["Shortcutbar"].c_str()); 
 	gslayout.upperpane_hight = atoi(settingsInfo["LAYOUT"]["UperPane"].c_str()); 
 	gslayout.biblepane_width = atoi(settingsInfo["LAYOUT"]["BiblePane"].c_str()); 
@@ -75,13 +74,13 @@ gboolean loadconfig(void)
 	/* which lexicon to open when storngs numbers are clicked */
 	sprintf(gslexicon.greek, "%s", settingsInfo["LEXICONS"]["Greek"].c_str()); 
 	sprintf(gslexicon.hebrew, "%s", settingsInfo["LEXICONS"]["Hebrew"].c_str()); 
-	
+	/* font sizes html widgets */
 	sprintf(mfonts.bible_font_size, "%s", settingsInfo["FontSize"]["BibleWindow"].c_str()); 
 	sprintf(mfonts.commentary_font_size, "%s", settingsInfo["FontSize"]["CommentaryWindow"].c_str()); 
     	sprintf(mfonts.dictionary_font_size, "%s", settingsInfo["FontSize"]["DictionaryWindow"].c_str()); 
 	sprintf(mfonts.interlinear_font_size, "%s", settingsInfo["FontSize"]["InterlinearWindow"].c_str()); 
 	sprintf(mfonts.verselist_font_size, "%s", settingsInfo["FontSize"]["VerseListWindow"].c_str()); 
-	
+	/* modules to use on startup */
     	sprintf(settings->MainWindowModule, "%s",settingsInfo["Modules"]["MainWindow"].c_str());
     	sprintf(settings->CommWindowModule, "%s",settingsInfo["Modules"]["CommWindow"].c_str());
     	sprintf(settings->DictWindowModule, "%s",settingsInfo["Modules"]["DictWindow"].c_str());	
@@ -91,16 +90,16 @@ gboolean loadconfig(void)
 	sprintf(settings->Interlinear4Module, "%s",settingsInfo["Modules"]["Interlinear4"].c_str()); 
 	sprintf(settings->Interlinear5Module, "%s",settingsInfo["Modules"]["Interlinear5"].c_str());
     	sprintf(settings->personalcommentsmod, "%s",settingsInfo["Modules"]["PerComments"].c_str()); 
-	/* notebook pages */
+	/* main notebook page */
 	npages.notebook3page = atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
-	
+	/* Bible verse and dict/lex key to open with */
 	sprintf(settings->currentverse, "%s",settingsInfo["Keys"]["verse"].c_str() ); 
 	sprintf(settings->dictkey, "%s",settingsInfo["Keys"]["dictionarykey"].c_str()); 
-	
-	//settingsInfo["StudyPad"]["lastfile"] = settings->studypadfilename;
-	
-	sprintf(settings->currentverse_color, "%s",settingsInfo["User Options"]["currentVerseColor"].c_str()); 
-	 
+	/* studypad file to open with if any */
+	sprintf(settings->studypadfilename, "%s",settingsInfo["StudyPad"]["Lastfile"] .c_str());
+	sprintf(settings->studypaddir, "%s",settingsInfo["StudyPad"]["Directory"] .c_str());
+	/* misc user options */
+	sprintf(settings->currentverse_color, "%s",settingsInfo["User Options"]["currentVerseColor"].c_str()); 	 
 	settings->strongs = atoi(settingsInfo["User Options"]["strongs"].c_str());
 	settings->footnotes = atoi(settingsInfo["User Options"]["footnotes"].c_str());	
 	settings->versestyle = atoi(settingsInfo["User Options"]["versestyle"].c_str());
@@ -112,13 +111,11 @@ gboolean loadconfig(void)
 	settings->showdictgroup = atoi(settingsInfo["User Options"]["showdictgroup"].c_str());
 	settings->showbookmarksgroup = atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());	
 	settings->interlinearpage = atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
-	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
-	settings->shortcutbarsize = atoi(settingsInfo["User Options"]["shortcutbarsize"].c_str());  
-	
+	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());	
 	tabs.textwindow= atoi(settingsInfo["User Options"]["BibleTabs"].c_str());
 	tabs.commwindow= atoi(settingsInfo["User Options"]["CommTabs"].c_str());
 	tabs.dictwindow= atoi(settingsInfo["User Options"]["DictTabs"].c_str());
-  	//g_warning(settingsInfo["TEST"]["mytest"].c_str());
+	
 	p_tabs = &tabs;
 	nbpages = &npages;
 	gsfonts = &mfonts;
@@ -162,7 +159,8 @@ gboolean saveconfig(void)
 	settingsInfo["Keys"]["verse"] = settings->currentverse; 
 	settingsInfo["Keys"]["dictionarykey"] = settings->dictkey; 
 	
-	settingsInfo["StudyPad"]["lastfile"] = settings->studypadfilename;
+	settingsInfo["StudyPad"]["Lastfile"] = settings->studypadfilename;
+	settingsInfo["StudyPad"]["Directory"] = settings->studypaddir;
 	
 	settingsInfo["FontSize"]["BibleWindow"] = gsfonts->bible_font_size; 
 	settingsInfo["FontSize"]["CommentaryWindow"] = gsfonts->commentary_font_size; 
@@ -242,12 +240,68 @@ gboolean saveconfig(void)
 		settingsInfo["User Options"]["showhistorygroup"] = "1";
 	else
 		settingsInfo["User Options"]["showhistorygroup"] = "0";
+	
+    	settingsInfo.Save();
+	return true;
+}
+
+/******************************************************************************
+ * create gnomesword configuration - using sword SWConfig
+ ******************************************************************************/
+gboolean createconfig(void)
+{
+	gchar buf[80], buf2[255];	 
+	
+	sprintf(buf2,"%s/preferences.conf",gSwordDir); 
+	SWConfig settingsInfo(buf2); 
+    	settingsInfo["Modules"]["MainWindow"] = "KJV";
+    	settingsInfo["Modules"]["CommWindow"] =  "Personal";
+    	settingsInfo["Modules"]["DictWindow"] =  "Eastons";	
+    	settingsInfo["Modules"]["Interlinear1"] =  "Byz";
+	settingsInfo["Modules"]["Interlinear2"] =  "BBE";
+	settingsInfo["Modules"]["Interlinear3"] =  "Websters"; 
+	settingsInfo["Modules"]["Interlinear4"] =  "WEB"; 
+	settingsInfo["Modules"]["Interlinear5"] =  "BBE";
+    	settingsInfo["Modules"]["PerComments"] =  "Personal";
+	
+	settingsInfo["LEXICONS"]["Greek"] = "Strongs Greek";
+	settingsInfo["LEXICONS"]["Hebrew"] = "Strongs Hebrew";
 		
-	sprintf(buf, "%d",settings->shortcutbarsize);
-	settingsInfo["User Options"]["shortcutbarsize"] = buf; 
+	settingsInfo["Notebooks"]["notebook3page"] = "0"; 		 
+	settingsInfo["Keys"]["verse"] = "Romans 8:28"; 
+	settingsInfo["Keys"]["dictionarykey"] = "GRACE"; 
 	
+	settingsInfo["StudyPad"]["Lastfile"] = "";
+	settingsInfo["StudyPad"]["Directory"] = "~";
 	
-	//settingsInfo["TEST"]["mytest"] = "KJV,ROM 3:23, MHC, John 3:16";
+	settingsInfo["FontSize"]["BibleWindow"] = "+1"; 
+	settingsInfo["FontSize"]["CommentaryWindow"] =  "+1"; 
+    	settingsInfo["FontSize"]["DictionaryWindow"] =  "+1"; 
+	settingsInfo["FontSize"]["InterlinearWindow"] =  "+1"; 
+	settingsInfo["FontSize"]["VerseListWindow"] =  "+1"; 	
+		
+	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
+	settingsInfo["LAYOUT"]["UperPane"] = "296";
+	settingsInfo["LAYOUT"]["BiblePane"] = "262";
+	settingsInfo["LAYOUT"]["AppWidth"] = "700";
+	settingsInfo["LAYOUT"]["AppHight"] = "550";
+	
+	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
+	settingsInfo["User Options"]["BibleTabs"]= "1";
+	settingsInfo["User Options"]["CommTabs"]= "1";
+	settingsInfo["User Options"]["DictTabs"]= "1";
+	settingsInfo["User Options"]["strongs"] = "0";
+	settingsInfo["User Options"]["footnotes"] = "0";
+	settingsInfo["User Options"]["versestyle"] = "1";
+	settingsInfo["User Options"]["autosavepersonalcomments"] = "1";
+	settingsInfo["User Options"]["formatpercom"] = "0";
+	settingsInfo["User Options"]["showshortcutbar"] = "1";
+	settingsInfo["User Options"]["showtextgroup"] = "1";
+	settingsInfo["User Options"]["showcomgroup"] = "1";
+	settingsInfo["User Options"]["showdictgroup"] = "1";
+	settingsInfo["User Options"]["showbookmarksgroup"] = "1";
+	settingsInfo["User Options"]["interlinearpage"] = "1";
+	settingsInfo["User Options"]["showhistorygroup"] = "1";
 	
     	settingsInfo.Save();
 	return true;

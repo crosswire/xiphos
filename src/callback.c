@@ -1048,7 +1048,6 @@ on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 }
 
 //----------------------------------------------------------------------------------------------
-#if USE_SHORTCUTBAR
 gboolean
 on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
@@ -1067,7 +1066,7 @@ on_epaned_button_release_event(GtkWidget       *widget,
         }
         return TRUE;
 }
-#endif /* USE_SHORTCUTBAR */
+
 //----------------------------------------------------------------------------------------------
 void
 on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,

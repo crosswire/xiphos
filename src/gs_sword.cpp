@@ -485,7 +485,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
         GtkWidget *msgbox;
 
         sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
-	writesettings(myset); //-- save setting (myset structure) to use when we start back up
+	//writesettings(myset); //-- save setting (myset structure) to use when we start back up
 	savebookmarks(gs.ctree_widget);
 	saveconfig();
 	if(file_changed){ //-- if study pad file has changed since last save		
