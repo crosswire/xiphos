@@ -105,9 +105,9 @@ void gui_new_activate(GtkMenuItem * menuitem,
 		}
 		g_free(info);
 	}
-	settings.studypadfilename = "";
+	settings.studypadfilename = NULL;
 	xml_set_value("GnomeSword", "studypad", "lastfile", 
-							"");
+							NULL);
 	
 	sprintf(ecd->filename, "%s", "");
 	ecd->filename[0] = '\0';
