@@ -134,13 +134,29 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 
 static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
 	const gchar *buf = gtk_entry_get_text(entry);
+/*	gchar *key = g_convert(buf,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     &error);
+	if(key == NULL) {
+		g_print ("error: %s\n", error->message);
+		g_error_free (error);
+		return;
+	}*/
 	if (navbar_main.key)
 		g_free(navbar_main.key);
 	navbar_main.key = g_strdup(buf);
 	gchar *url = g_strdup_printf("sword:///%s", buf);
 	main_url_handler(url, TRUE);
 	g_free(url);
+	//g_free(key);
 	main_navbar_set(navbar_main, navbar_main.key);
 }
 
@@ -196,6 +212,10 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox,
 	gchar *book = NULL;
 	gchar *buf = NULL;
 	GtkTreeIter iter;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
+	gchar *key = NULL;
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
 
 	if (!do_display)
@@ -205,7 +225,19 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox,
 #endif
 	gtk_combo_box_get_active_iter(combobox, &iter);
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
-
+	//	g_error_free (error);
+/*	key = g_convert(book,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     NULL); //&error);
+	if(key == NULL) {
+		g_print ("error: %s\n", error->message);
+		g_error_free (error);
+		return;
+	}*/
 	url = g_strdup_printf("sword:///%s 1:1", book);
 	buf = g_strdup_printf("%s 1:1", book);
 
@@ -214,6 +246,7 @@ static void on_comboboxentry4_changed(GtkComboBox * combobox,
 	g_free(url);
 	g_free(book);
 	g_free(buf);
+	//g_free(key);
 }
 
 
@@ -267,6 +300,9 @@ static void on_comboboxentry6_changed(GtkComboBox * combobox,
 	gchar *chapter = NULL;
 	gchar *verse = NULL;
 	gchar *buf = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error = NULL;
 	GtkTreeIter iter;
 
 	GtkTreeModel *model = gtk_combo_box_get_model(combobox);

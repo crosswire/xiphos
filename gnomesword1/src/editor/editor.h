@@ -160,6 +160,7 @@ struct _GSHTMLEditorControlData {
 
 };
 
+extern GSHTMLEditorControlData *editor_cd;
 void gui_update_statusbar(GSHTMLEditorControlData *ecd);
 GSHTMLEditorControlData *editor_control_data_new(GtkHTML * html, GtkWidget * vbox);
 void editor_control_data_destroy(GtkObject *object, 
