@@ -152,7 +152,8 @@ module.include.files=\
 	src/backend/module_manager.hh\
 	src/gui/mod_mgr.h\
 	src/gui/mod_global_ops.h\
-	src/gui/tabbed_browser.h
+	src/gui/tabbed_browser.h\
+	src/gui/url.h
 
 module.source.name=.
 module.source.type=
@@ -237,7 +238,8 @@ module.source.files=\
 	src/backend/module_manager.cc\
 	src/gnome2/mod_mgr.c\
 	src/gnome2/mod_global_ops.c\
-	src/gnome2/tabbed_browser.c
+	src/gnome2/tabbed_browser.c\
+	src/gnome2/url.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
