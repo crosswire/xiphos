@@ -1,3 +1,9 @@
+2003-12-10  Andy <andyp@users.sf.net>
+
+	* fix bug reporting URL in configure.in (the project is not hosted at 
+	  gnome.org.... yet...)
+	
+
 2003-12-10  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev19
