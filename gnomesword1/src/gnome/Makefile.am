@@ -1,21 +1,12 @@
 INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
-    $(EXTRA_GNOME_CFLAGS) \
-    $(EXTRA_PRINT_CFLAGS) \
-    $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
     $(GTKHTML_CFLAGS) \
-    -I/usr/include/gnome-1.0/ \
     -I$(top_builddir)/src
 
-noinst_LIBRARIES = libgui.a  
+bin_PROGRAMS = gnomesword-1.0
 
-
-
-CXXFLAGS =  \
-    $(GTK_CFLAGS) 
-    
-libgui_a_SOURCES =  \
+gnomesword_1_0_SOURCES =  \
     display_info.c \
     _editor.c \
     about_gnomesword.c \
@@ -62,4 +53,15 @@ libgui_a_SOURCES =  \
     toolbar_nav.c \
     utilities.c
     
- 
+gnomesword_1_0_LDADD = \
+    $(GNOME_LIBDIR) \
+    $(GNOMEUI_LIBS) \
+    $(EXTRA_GNOME_LIBS) \
+    $(GTKHTML_LIBS)\
+    $(GNOME_APP_LIBS)\
+    $(GNOME_PRINT_LIBS) \
+    $(PSPELL_LIBS) \
+    $(PIXBUF_LIBS) \
+    $(SWORD_LIBS) \
+    $(top_builddir)/src/main/libmain.a \
+    $(top_builddir)/src/backend/libbackend.a
