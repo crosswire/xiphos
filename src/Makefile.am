@@ -85,7 +85,9 @@ COMMON_SOURCE =  \
     sw_search.cpp \
     sw_search.h \
     sw_verselist_dlg.cpp \
-    sw_verselist_dlg.h
+    sw_verselist_dlg.h\
+    sw_verselist_sb.cpp \
+    sw_verselist_sb.h
 
 SPELLING_SOURCE =  \
     debug.h \

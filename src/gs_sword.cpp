@@ -65,6 +65,7 @@
 #include "sw_utility.h"
 #include "sw_properties.h"
 #include "sw_bookmarks.h"
+#include "sw_verselist_sb.h"
 
 /***********************************************************************************************
  * Sword globals 
@@ -313,6 +314,7 @@ initSWORD(GtkWidget *mainform)
 		while (gtk_events_pending ())
 				gtk_main_iteration ();
 	}
+	
 }
 
 
@@ -521,7 +523,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 			default:
 				break;
 		}
-	}   	
+	}  
+	shutdownverselistSBSWORD();
 	g_string_free(gs_clipboard,TRUE);
 	//-- delete Sword managers
 	delete mainMgr;   
