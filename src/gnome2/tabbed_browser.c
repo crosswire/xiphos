@@ -340,7 +340,7 @@ void gui_load_tabs(const gchar *filename)
 			}
 		}
 		xmlFreeDoc(xml_doc);
-	}
+	
 		if (error == TRUE || pt == NULL) {
 			pt = g_new0(PASSAGE_TAB_INFO, 1);
 			pt->text_mod = g_strdup(settings.MainWindowModule);
@@ -362,7 +362,7 @@ void gui_load_tabs(const gchar *filename)
 			settings.dictkey = g_strdup(pt->dictlex_key);
 			settings.book_offset = atol(pt->book_offset);
 		}
-//	}
+	}
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 			gtk_notebook_page_num(GTK_NOTEBOOK(widgets.notebook_main), pt->page_widget));
 	set_current_tab(pt);
