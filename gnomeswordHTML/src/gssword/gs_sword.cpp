@@ -62,7 +62,7 @@
 #include "gs_html.h"
 #include "gs_search.h"
 #include "gs_abouts.h"
-#include "gs_editor.h"
+//#include "gs_editor.h"
 #include "sw_utility.h"
 #include "gsdialogs/gs_viewtext_dlg.h"
 

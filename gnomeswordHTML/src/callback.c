@@ -62,7 +62,7 @@
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
-
+/*
 #include "control-data.h"
 #include "popup.h"
 #include "properties.h"
@@ -70,7 +70,7 @@
 #include "paragraph.h"
 #include "link.h"
 #include "body.h"
-
+*/
 #include "callback.h"
 #include "gs_gnomesword.h"
 #include "gssword/gs_sword.h"
@@ -82,7 +82,7 @@
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
 #include "gs_html.h"
-#include "toolbar.h"
+//#include "toolbar.h"
 
 //#include "gs_toolbarEditor.h"
 //#include "noteeditor.h"

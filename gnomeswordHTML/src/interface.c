@@ -28,7 +28,7 @@
 
 #include "callback.h"
 #include "gs_studypad.h"
-#include "gs_editor.h"
+//#include "gs_editor.h"
 #include "gs_ui.h"
 #include "support.h"
 #include "gs_popup_cb.h"
