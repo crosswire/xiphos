@@ -51,6 +51,8 @@ extern SWFilter *gbftohtml;
 extern SWFilter *plaintohtml;
 extern SWFilter *thmltohtml;
 extern SWFilter *rwptohtml;
+extern SWFilter *wgreektosil;
+
 
 /********************************************************************************************** 
  * addrenderfilters - 
@@ -72,7 +74,12 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 //		if ((RawGBF*)(module))
 //			sourceformat = "GBF";
 //	}
-	
+	/*
+	if(!stricmp(module->Name(),"N27U4")) {
+		module->AddRenderFilter(wgreektosil);  
+		g_warning("N27U4");
+		noDriver = false; 
+	}*/
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
 		module->AddRenderFilter(gbftohtml);  
 		noDriver = false; 

@@ -22,9 +22,9 @@
 
 #include <config.h>
 #include <string.h>
-#include <htmlengine-edit-fontstyle.h>
-#include <htmlengine-edit-cut-and-paste.h>
-#include <htmlselection.h>
+#include "htmlengine-edit-fontstyle.h"
+#include "htmlengine-edit-cut-and-paste.h"
+#include "htmlselection.h"
 
 #include "properties.h"
 #include "dialog.h"
@@ -78,6 +78,8 @@ link_properties (GtkHTMLControlData *cd, gpointer *set_data)
 	gtk_box_pack_start (GTK_BOX (hbox), data->entry, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+	gtk_widget_show_all (vbox);
 
 	return vbox;
 }

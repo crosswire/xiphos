@@ -21,11 +21,9 @@
 */
 
 #include <config.h>
-#include <htmlengine.h>
-
-
 #include "replace.h"
 #include "dialog.h"
+#include "htmlengine.h"
 
 struct _GtkHTMLReplaceAskDialog {
 	GnomeDialog *dialog;

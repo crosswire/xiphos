@@ -22,12 +22,11 @@
 
 #include <config.h>
 #include <gal/widgets/widget-color-combo.h>
-#include <htmlengine-edit-clueflowstyle.h>
-#include <htmlimage.h>
-#include <htmlcolor.h>
-#include <htmlcolorset.h>
-#include <htmlsettings.h>
-
+#include "htmlengine-edit-clueflowstyle.h"
+#include "htmlimage.h"
+#include "htmlcolor.h"
+#include "htmlcolorset.h"
+#include "htmlsettings.h"
 #include "body.h"
 #include "properties.h"
 #include "utils.h"
@@ -76,10 +75,14 @@ fill_sample (GtkHTMLEditBodyProperties *d)
 }
 
 static void
-color_changed (GtkWidget *w, GdkColor *color, GtkHTMLEditBodyProperties *data)
+color_changed (GtkWidget *w, GdkColor *color, gboolean by_user, GtkHTMLEditBodyProperties *data)
 {
 	gint idx;
 
+	/* If the color was changed programatically there's not need to set things */
+	if (!by_user)
+		return;
+		
 	idx = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (w), "type"));
 	data->color [idx] = color
 		? *color
@@ -165,23 +168,25 @@ body_properties (GtkHTMLControlData *cd, gpointer *set_data)
         html_color_alloc (color, cd->html->engine->painter); \
 	combo = color_combo_new (NULL, _("Automatic"), \
 				 &color->color, \
-				 "body_" g); \
+				 color_group_fetch ("body_" g, cd)); \
         color_combo_set_color (COLOR_COMBO (combo), &data->color [ct]); \
         gtk_object_set_data (GTK_OBJECT (combo), "type", GINT_TO_POINTER (ct)); \
         gtk_signal_connect (GTK_OBJECT (combo), "changed", GTK_SIGNAL_FUNC (color_changed), data); \
 	hbox = gtk_hbox_new (FALSE, 3); \
 	gtk_box_pack_start (GTK_BOX (hbox), combo, FALSE, FALSE, 0); \
-	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(x)), FALSE, FALSE, 0); \
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (x), FALSE, FALSE, 0); \
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	ADD_COLOR ("Text", HTMLTextColor, "text");
-	ADD_COLOR ("Link", HTMLLinkColor, "link");
-	ADD_COLOR ("Background", HTMLBgColor, "bg");
+	ADD_COLOR (_("Text"), HTMLTextColor, "text");
+	ADD_COLOR (_("Link"), HTMLLinkColor, "link");
+	ADD_COLOR (_("Background"), HTMLBgColor, "bg");
 
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_table_attach_defaults (GTK_TABLE (table), frame, 1, 2, 0, 1);
 	fill_sample (data);
 	/* gtk_idle_add (hide_preview, data); */
+
+	gtk_widget_show_all (table);
 
 	return table;
 }

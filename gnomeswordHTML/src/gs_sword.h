@@ -95,6 +95,9 @@ gboolean saveconfig(void);
 gboolean loadconfig(void);
 void shutdownVTSWORD(void);
 GList* setupVTSWORD(GtkWidget *text);
+void gotoverseVTSWORD(gchar *newkey);
+void loadVTmodSWORD(gchar *modName);
+gchar* getVTmodDescriptionSWORD(void);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

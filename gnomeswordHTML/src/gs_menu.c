@@ -721,6 +721,7 @@ static GtkWidget* create_pmBible(GList *mods)
 	GtkWidget *copy7;
 	GtkWidget *lookup_selection;
 	GtkWidget *about_this_module1;
+	GtkWidget *viewtext;
 	GtkWidget *separator2;
 	GtkWidget *view_module3;
 	GtkWidget *view_module3_menu;
@@ -755,6 +756,13 @@ static GtkWidget* create_pmBible(GList *mods)
   	gtk_widget_show (about_this_module1);
   	gtk_container_add (GTK_CONTAINER (pmBible), about_this_module1);
 
+	viewtext = gtk_menu_item_new_with_label ("View Text in new window");
+  	gtk_widget_ref (viewtext);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "viewtext", viewtext,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (viewtext);
+  	gtk_container_add (GTK_CONTAINER (pmBible), viewtext);	
+	
   	separator2 = gtk_menu_item_new ();
   	gtk_widget_ref (separator2);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator2", separator2,
@@ -806,6 +814,10 @@ static GtkWidget* create_pmBible(GList *mods)
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
                       	GTK_SIGNAL_FUNC (on_about_this_module1_activate),
                       	NULL);
+	gtk_signal_connect (GTK_OBJECT (viewtext), "activate",
+                      	GTK_SIGNAL_FUNC (on_viewtext_activate),
+                      	NULL);
+	
   return pmBible;
 }
 
