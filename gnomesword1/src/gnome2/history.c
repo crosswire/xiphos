@@ -152,9 +152,6 @@ void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar,
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
 	updatehistorymenu(app);
 	firstbackclick = TRUE;
-	if (settings.showhistorygroup) {
-		updatehistoryshortcutbar(app, shortcut_bar);
-	}
 }
 
 
