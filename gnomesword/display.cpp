@@ -968,7 +968,7 @@ HTMLChapDisp::Display(SWModule & imodule)
 								    gtk_text_insert
 								    (GTK_TEXT
 								     (gtkText),
-								     fo_font,
+								     fo_italic_font,
 								     &myGreen,
 								     NULL,
 								     verseBuf,
@@ -977,7 +977,7 @@ HTMLChapDisp::Display(SWModule & imodule)
 								gtk_text_insert
 								    (GTK_TEXT
 								     (gtkText),
-								     fo_font,
+								     fo_italic_font,
 								     &gtkText->
 								     style->
 								     black,
