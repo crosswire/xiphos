@@ -40,6 +40,7 @@
 
 #include "gs_popup_cb.h"
 #include "gs_html.h"
+#include "gs_html_editor.h"
 #include "gs_unlockkey_dlg.h"
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"
@@ -74,6 +75,20 @@ extern gchar
 extern GList
 	*options;
 	
+
+//----------------------------------------------------------------------------------------------
+void on_edit_book_activate(GtkMenuItem * menuitem,  gchar *user_data)
+{
+	set_html_edit(lookup_widget(settings->app,user_data));
+}
+
+
+//----------------------------------------------------------------------------------------------
+void on_save_book_activate(GtkMenuItem * menuitem, gchar *user_data)
+{
+	savebookEDITOR(lookup_widget(settings->app,user_data));
+}
+
 	
 
 //----------------------------------------------------------------------------------------------
