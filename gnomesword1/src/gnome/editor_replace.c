@@ -204,10 +204,6 @@ static GtkHTMLReplaceAskDialog *ask_dialog_new(HTMLEngine * e)
 	gtk_widget_show(dialog_vbox31);
 
 	hseparator2 = gtk_hseparator_new();
-	gtk_widget_ref(hseparator2);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_ask), "hseparator2",
-				 hseparator2,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hseparator2);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox31), hseparator2, TRUE,
 			   TRUE, 0);
@@ -221,49 +217,28 @@ static GtkHTMLReplaceAskDialog *ask_dialog_new(HTMLEngine * e)
 				       (dialog_action_area31), 10);
 
 	hbuttonbox10 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox10);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_ask), "hbuttonbox10",
-				 hbuttonbox10,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox10);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area31), hbuttonbox10,
 			   TRUE, TRUE, 0);
 
 	button_replace_ask = gtk_button_new_with_label(_("Replace"));
-	gtk_widget_ref(button_replace_ask);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_ask),
-				 "button_replace_ask",
-				 button_replace_ask,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_replace_ask);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox10),
 			  button_replace_ask);
 	GTK_WIDGET_SET_FLAGS(button_replace_ask, GTK_CAN_DEFAULT);
 
 	button_all = gtk_button_new_with_label(_("Replace all"));
-	gtk_widget_ref(button_all);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_ask), "button_all",
-				 button_all,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_all);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox10), button_all);
 	GTK_WIDGET_SET_FLAGS(button_all, GTK_CAN_DEFAULT);
 
 	button_next = gtk_button_new_with_label(_("Next"));
-	gtk_widget_ref(button_next);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_ask), "button_next",
-				 button_next,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_next);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox10), button_next);
 	GTK_WIDGET_SET_FLAGS(button_next, GTK_CAN_DEFAULT);
 
 	button_cancel_ask =
 	    gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	gtk_widget_ref(button_cancel_ask);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_ask),
-				 "button_cancel_ask", button_cancel_ask,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_cancel_ask);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox10),
 			  button_cancel_ask);
@@ -418,93 +393,50 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 	gtk_widget_show(dialog_vbox30);
 
 	vbox87 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox87);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "vbox87",
-				 vbox87,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox87);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox30), vbox87, TRUE, TRUE,
 			   0);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox87), 5);
 
 	hbox86 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox86);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "hbox86",
-				 hbox86,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox86);
 	gtk_box_pack_start(GTK_BOX(vbox87), hbox86, FALSE, TRUE, 0);
 
 	label254 = gtk_label_new(_(" Replace "));
-	gtk_widget_ref(label254);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "label254",
-				 label254,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label254);
 	gtk_box_pack_start(GTK_BOX(hbox86), label254, FALSE, FALSE, 0);
 
 	dialog->entry_find = gtk_entry_new();
-	gtk_widget_ref(dialog->entry_find);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->entry_find",
-				 dialog->entry_find,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->entry_find);
 	gtk_box_pack_start(GTK_BOX(hbox86), dialog->entry_find, TRUE,
 			   TRUE, 0);
 
 	hbox87 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox87);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "hbox87",
-				 hbox87,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox87);
 	gtk_box_pack_start(GTK_BOX(vbox87), hbox87, FALSE, TRUE, 0);
 
 	label255 = gtk_label_new(_("       with "));
-	gtk_widget_ref(label255);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "label255",
-				 label255,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label255);
 	gtk_box_pack_start(GTK_BOX(hbox87), label255, FALSE, FALSE, 0);
 	gtk_label_set_justify(GTK_LABEL(label255), GTK_JUSTIFY_RIGHT);
 
 	dialog->entry_replace = gtk_entry_new();
-	gtk_widget_ref(dialog->entry_replace);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->entry_replace",
-				 dialog->entry_replace,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->entry_replace);
 	gtk_box_pack_start(GTK_BOX(hbox87), dialog->entry_replace, TRUE,
 			   TRUE, 0);
 
 	hbox85 = gtk_hbox_new(TRUE, 0);
-	gtk_widget_ref(hbox85);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "hbox85",
-				 hbox85,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox85);
 	gtk_box_pack_start(GTK_BOX(vbox87), hbox85, FALSE, TRUE, 0);
 
 	dialog->backwards =
 	    gtk_check_button_new_with_label(_("search backward"));
-	gtk_widget_ref(dialog->backwards);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->backwards", dialog->backwards,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->backwards);
 	gtk_box_pack_start(GTK_BOX(hbox85), dialog->backwards, TRUE,
 			   TRUE, 4);
 
 	dialog->case_sensitive =
 	    gtk_check_button_new_with_label(_("case sensitive"));
-	gtk_widget_ref(dialog->case_sensitive);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->case_sensitive",
-				 dialog->case_sensitive,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox85), dialog->case_sensitive,
 			   TRUE, TRUE, 4);
@@ -518,28 +450,16 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 				       (dialog_action_area30), 10);
 
 	hbuttonbox9 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox9);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "hbuttonbox9", hbuttonbox9,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox9);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area30), hbuttonbox9,
 			   TRUE, TRUE, 0);
 
 	button_replace = gtk_button_new_with_label(_("Replace"));
-	gtk_widget_ref(button_replace);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "button_replace", button_replace,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_replace);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_replace);
 	GTK_WIDGET_SET_FLAGS(button_replace, GTK_CAN_DEFAULT);
 
 	button_cancel = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	gtk_widget_ref(button_cancel);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "button_cancel", button_cancel,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_cancel);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_cancel);
 	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);

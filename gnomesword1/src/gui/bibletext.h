@@ -59,6 +59,7 @@ struct _text_data {
 	GtkWidget *frame;
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
+	GtkWidget *toolbar_nav;
 	
 	gchar *mod_name;
 	gchar *search_string;
@@ -71,6 +72,7 @@ struct _text_data {
 	gboolean is_locked;
 	gboolean is_dialog;
 	gboolean is_rtol;
+	gboolean sync;
 	
 	TEXT_GLOBALS *tgs;
 };

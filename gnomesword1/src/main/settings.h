@@ -186,6 +186,9 @@ struct _settings {
 	/* store filename for configure file - options */
 	char *fnconfigure;
 
+	/* module name for current dialog */
+	char *module_dialog;
+
 	/* apply changes to what? the text navigation bar */
 	gboolean apply_change;
 	

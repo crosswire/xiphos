@@ -63,11 +63,11 @@ extern gboolean gsI_isrunning;
 
 
 TEXT_DATA *cur_t;
+
 /******************************************************************************
  * globals to this file only 
  */
 static GList *text_list;
-TEXT_DATA *cur_t;
 static gboolean display_change = TRUE;
 
 
@@ -356,18 +356,17 @@ int mozilla_mouse_click(GtkMozEmbed * embed, gpointer dom_event)
 static void set_module_font(GtkButton * button, TEXT_DATA * t)
 {
 	gui_set_module_font(t->mod_name);
-		
+
 	chapter_display_mozilla(t->html, t->mod_name,
 				t->tgs, settings.currentverse, TRUE);
 }
 
 static void on_togglebutton_points_toggled(GtkToggleButton *
-					   togglebutton,
-					   TEXT_DATA * t)
+					   togglebutton, TEXT_DATA * t)
 {
 	t->tgs->hebrewpoints = togglebutton->active;
-	save_module_options(t->mod_name, "Hebrew Vowel Points", 
-				    t->tgs->hebrewpoints);
+	save_module_options(t->mod_name, "Hebrew Vowel Points",
+			    t->tgs->hebrewpoints);
 	chapter_display_mozilla(t->html, t->mod_name,
 				t->tgs, settings.currentverse, TRUE);
 }
@@ -377,8 +376,8 @@ static void on_togglebutton_cant_toggled(GtkToggleButton * togglebutton,
 					 TEXT_DATA * t)
 {
 	t->tgs->hebrewcant = togglebutton->active;
-	save_module_options(t->mod_name, "Hebrew Cantillation", 
-				    t->tgs->hebrewcant);
+	save_module_options(t->mod_name, "Hebrew Cantillation",
+			    t->tgs->hebrewcant);
 	chapter_display_mozilla(t->html, t->mod_name,
 				t->tgs, settings.currentverse, TRUE);
 }
@@ -417,7 +416,7 @@ static void create_pane(TEXT_DATA * t)
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_show(t->frame);
 	gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
-	
+
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
@@ -474,44 +473,51 @@ static void create_pane(TEXT_DATA * t)
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_show(button_set_font);
 
-		gtk_signal_connect (GTK_OBJECT (button_set_font), "clicked",
-                      GTK_SIGNAL_FUNC (set_module_font),
-                      		(TEXT_DATA *) t);
-		
-		
+		gtk_signal_connect(GTK_OBJECT(button_set_font),
+				   "clicked",
+				   GTK_SIGNAL_FUNC(set_module_font),
+				   (TEXT_DATA *) t);
+
+
 		if (check_for_global_option
 		    (t->mod_name, "UTF8HebrewPoints")) {
 			togglebutton_points =
 			    gtk_toolbar_append_element(GTK_TOOLBAR
-						       (toolbar_moz),
-						       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-						       NULL,
-						       _
-						       ("Vowel Points"),
-						       NULL, NULL, NULL,
-						       NULL, NULL);
+				       (toolbar_moz),
+				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+				       NULL,
+				       _
+				       ("Vowel Points"),
+				       NULL, NULL, NULL,
+				       NULL, NULL);
 			gtk_widget_show(togglebutton_points);
-			
-			gtk_signal_connect (GTK_OBJECT (togglebutton_points), "toggled",
-                      		GTK_SIGNAL_FUNC (on_togglebutton_points_toggled),
-                      			(TEXT_DATA *) t);
+
+			gtk_signal_connect(GTK_OBJECT
+				   (togglebutton_points),
+				   "toggled",
+				   GTK_SIGNAL_FUNC
+				   (on_togglebutton_points_toggled),
+				   (TEXT_DATA *) t);
 		}
 
 		if (check_for_global_option
 		    (t->mod_name, "UTF8Cantillation")) {
 			togglebutton_cant =
 			    gtk_toolbar_append_element(GTK_TOOLBAR
-						       (toolbar_moz),
-						       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-						       NULL,
-						       _("Cantilation"),
-						       NULL, NULL, NULL,
-						       NULL, NULL);
+				       (toolbar_moz),
+				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+				       NULL,
+				       _("Cantilation"),
+				       NULL, NULL, NULL,
+				       NULL, NULL);
 			gtk_widget_show(togglebutton_cant);
-			
-  			gtk_signal_connect (GTK_OBJECT (togglebutton_cant), "toggled",
-                      		GTK_SIGNAL_FUNC (on_togglebutton_cant_toggled),
-                      			(TEXT_DATA *) t);
+
+			gtk_signal_connect(GTK_OBJECT
+				   (togglebutton_cant),
+				   "toggled",
+				   GTK_SIGNAL_FUNC
+				   (on_togglebutton_cant_toggled),
+				   (TEXT_DATA *) t);
 		}
 
 		frame_text = gtk_frame_new(NULL);
@@ -519,7 +525,7 @@ static void create_pane(TEXT_DATA * t)
 		gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE,
 				   TRUE, 0);
 
-		//gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.0.1");
+		gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.3.1");
 		t->html = gtk_moz_embed_new();
 		gtk_widget_show(t->html);
 		gtk_container_add(GTK_CONTAINER(frame_text), t->html);
@@ -729,20 +735,12 @@ static void add_vbox_to_notebook(TEXT_DATA * t)
 	GtkWidget *label;
 
 	t->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(t->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "t->vbox", t->vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(t->vbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
 			  t->vbox);
 
 
 	label = gtk_label_new(t->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
-				 label, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_text),
 				   gtk_notebook_get_nth_page
@@ -779,7 +777,7 @@ void gui_setup_text(GList * mods)
 	gchar *modbuf;
 	TEXT_DATA *t;
 	gint count = 0;
-	
+
 	text_list = NULL;
 	tmp = mods;
 	tmp = g_list_first(tmp);
@@ -796,7 +794,6 @@ void gui_setup_text(GList * mods)
 		if (has_cipher_tag(t->mod_name)) {
 			t->is_locked = module_is_locked(t->mod_name);
 			t->cipher_old = get_cipher_key(t->mod_name);
-			//g_warning("cipher tag for %s = %s",t->mod_name,t->cipher_old);
 		}
 
 		else {
@@ -816,7 +813,7 @@ void gui_setup_text(GList * mods)
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_text_switch_page), text_list);
 
-	modbuf = g_strdup(xml_get_value("modules", "text"));	//settings.MainWindowModule);
+	modbuf = g_strdup(xml_get_value("modules", "text"));
 
 	set_page_text(modbuf, text_list);
 

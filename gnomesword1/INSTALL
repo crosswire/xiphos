@@ -7,9 +7,9 @@ You need gal-0.24.0 or later -- Ximian
 You need gnome-print-0.35 or later -- http://www.gnome.org/
 You need gdk-pixbuf-0.18.0 or later -- http://www.gnome.org/
 
-You need to have the Sword Project (sword-1.5.5) installed.
+You need to have the Sword Project (sword-1.5.6) installed.
 You need at least one each text ,commentary and dictionary module also.
-Sword-1.5.5 and the modules can be found at www.crosswire.org 
+Sword-1.5.6 and the modules can be found at www.crosswire.org 
 in the Sword Project.
 
 

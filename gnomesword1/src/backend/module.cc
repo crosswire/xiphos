@@ -99,7 +99,7 @@ int backend_get_display_level(char * module_name)
 	char *buf = NULL;
 	buf = (char *) sw.main_mgr->Modules[module_name]->
 			getConfigEntry("DisplayLevel");
-	if(buf)
+	if(buf != NULL)
 		return atoi(buf);
 	else
 		return 0;
@@ -1228,8 +1228,9 @@ void backend_save_personal_comment(char * note)
 	
 	if(note) {
 		sw.percom_mod->setEntry((const char *) note);
-		g_warning("mod = %s\nkey = %s\nnote = %s",sw.percom_mod->Name(),
+/*		g_warning("mod = %s\nkey = %s\nnote = %s",sw.percom_mod->Name(),
 					sw.percom_mod->KeyText(),note);
+*/
 	}
 }
 

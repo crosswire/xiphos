@@ -56,7 +56,7 @@ const char *get_sword_version(void);
 char *get_search_results_text(char * mod_name, char * key);
 char *get_path_to_mods(void);
 void init_sword(void);
-void shutdown_sword(void);
+void shutdown_backend(void);
 char *get_text_from_offset(char * module_name, unsigned long offset);
 int set_module(int manager, char * module_name);
 

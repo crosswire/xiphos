@@ -57,6 +57,7 @@
 #include "gui/gnomesword.h"
 #include "gui/dialog.h"
 #include "gui/find_dialog.h"
+#include "gui/commentary_dialog.h"
 
 #include "main/percomm.h"
 #include "main/settings.h"
@@ -246,26 +247,29 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
-		gchar *key;
+		//gchar *key;
 
-		key = get_percomm_key(ecd->filename);
+		//key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
 		info->label_top = N_("Are you sure you want");
 		info->label_middle = N_("to delete the note for");
-		info->label_bottom = key;
+		info->label_bottom = ecd->key;
 		info->yes = TRUE;
 		info->no = TRUE;
 
 		test = gui_gs_dialog(info);
 		if (test == GS_YES) {
 			delete_percomm_note();
-			gui_display_percomm(key);
+			if(settings.use_percomm_dialog)
+				gui_display_commentary_in_dialog(ecd->key);
+			else
+				gui_display_percomm(ecd->key);
 		}
-		settings.percomverse = key;
+		settings.percomverse = ecd->key;
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 		g_free(info);
-		g_free(key);
+		//g_free(key);
 	}
 }
 
@@ -838,17 +842,9 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				  _("Toolbars"));
 	gtk_widget_add_accelerator(ecd->toolbars, "activate_item",
 				   pmEditor_accels, tmp_key, 0, 0);
-	gtk_widget_ref(ecd->toolbars);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->toolbars",
-				 ecd->toolbars,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->toolbars);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->toolbars);
 	toolbars_menu = gtk_menu_new();
-	gtk_widget_ref(toolbars_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "toolbars_menu",
-				 toolbars_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ecd->toolbars),
 				  toolbars_menu);
 	toolbars_menu_accels =
@@ -856,11 +852,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 
 	style_toolbar =
 	    gtk_check_menu_item_new_with_label(_("Style Bar"));
-	gtk_widget_ref(style_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-				 "style_toolbar", style_toolbar,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(style_toolbar);
 	gtk_container_add(GTK_CONTAINER(toolbars_menu), style_toolbar);
 
@@ -869,11 +860,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 
 	edit_toolbar =
 	    gtk_check_menu_item_new_with_label(_("Edit Bar"));
-	gtk_widget_ref(edit_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-				 "edit_toolbar", edit_toolbar,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(edit_toolbar);
 	gtk_container_add(GTK_CONTAINER(toolbars_menu), edit_toolbar);
 
@@ -885,11 +871,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		if(!settings.use_percomm_dialog) {
 			ecd->editnote =
 			    gtk_check_menu_item_new_with_label("Edit Note");
-			gtk_widget_ref(ecd->editnote);
-			gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-						 "ecd->editnote", ecd->editnote,
-						 (GtkDestroyNotify)
-						 gtk_widget_unref);
 			gtk_widget_show(ecd->editnote);
 			gtk_container_add(GTK_CONTAINER(pmEditor),
 					  ecd->editnote);
@@ -902,11 +883,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				   (on_editnote_activate), ecd);		
 
 			separator = gtk_menu_item_new();
-			gtk_widget_ref(separator);
-			gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-						 "separator", separator,
-						 (GtkDestroyNotify)
-						 gtk_widget_unref);
 			gtk_widget_show(separator);
 			gtk_container_add(GTK_CONTAINER(pmEditor), separator);
 			gtk_widget_set_sensitive(separator, FALSE);
@@ -914,12 +890,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 			
 			ecd->show_tabs =
 			    gtk_check_menu_item_new_with_label("Show Tabs");
-			gtk_widget_ref(ecd->show_tabs);
-			gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-						 "ecd->show_tabs",
-						 ecd->show_tabs,
-						 (GtkDestroyNotify)
-						 gtk_widget_unref);
 			gtk_widget_show(ecd->show_tabs);
 			gtk_container_add(GTK_CONTAINER(pmEditor),
 					  ecd->show_tabs);
@@ -928,11 +898,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		}
 
 		separator = gtk_menu_item_new();
-		gtk_widget_ref(separator);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "separator", separator,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(separator);
 		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
 		gtk_widget_set_sensitive(separator, FALSE);
@@ -942,11 +907,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 
 		ecd->editnote =
 		    gtk_check_menu_item_new_with_label("Edit");
-		gtk_widget_ref(ecd->editnote);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "ecd->editnote", ecd->editnote,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(ecd->editnote);
 		gtk_container_add(GTK_CONTAINER(pmEditor),
 				  ecd->editnote);
@@ -956,11 +916,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 					 FALSE);
 
 		separator = gtk_menu_item_new();
-		gtk_widget_ref(separator);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "separator", separator,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(separator);
 		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
 		gtk_widget_set_sensitive(separator, FALSE);
@@ -977,18 +932,10 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				  _("File"));
 	gtk_widget_add_accelerator(ecd->file, "activate_item",
 				   pmEditor_accels, tmp_key, 0, 0);
-	gtk_widget_ref(ecd->file);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->file",
-				 ecd->file,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->file);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->file);
 
 	file_menu = gtk_menu_new();
-	gtk_widget_ref(file_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "file_menu",
-				 file_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ecd->file), file_menu);
 
 	file_menu_accels =
@@ -1016,30 +963,16 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	else if (ecd->gbs) {
 
 		open = gtk_menu_item_new_with_label(_("Open File"));
-		gtk_widget_ref(open);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "open",
-					 open, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(open);
 		gtk_container_add(GTK_CONTAINER(file_menu), open);
 
 		save_note =
 		    gtk_menu_item_new_with_label(_("Save Entry"));
-		gtk_widget_ref(save_note);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "save_note", save_note,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(save_note);
 		gtk_container_add(GTK_CONTAINER(file_menu), save_note);
 
 		delete_note =
 		    gtk_menu_item_new_with_label(_("Delete Entry"));
-		gtk_widget_ref(delete_note);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "delete_note", delete_note,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(delete_note);
 		gtk_container_add(GTK_CONTAINER(file_menu),
 				  delete_note);
@@ -1047,43 +980,24 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 
 	else {
 		new = gtk_menu_item_new_with_label(_("New"));
-		gtk_widget_ref(new);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "new",
-					 new, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(new);
 		gtk_container_add(GTK_CONTAINER(file_menu), new);
 
 		open = gtk_menu_item_new_with_label(_("Open"));
-		gtk_widget_ref(open);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "open",
-					 open, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(open);
 		gtk_container_add(GTK_CONTAINER(file_menu), open);
 
 		save = gtk_menu_item_new_with_label(_("Save"));
-		gtk_widget_ref(save);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "save",
-					 save, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(save);
 		gtk_container_add(GTK_CONTAINER(file_menu), save);
 
 
 		saveas = gtk_menu_item_new_with_label(_("Save AS"));
-		gtk_widget_ref(saveas);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "saveas",
-					 saveas, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(saveas);
 		gtk_container_add(GTK_CONTAINER(file_menu), saveas);
 	}
 
 	print = gtk_menu_item_new_with_label(_("Print"));
-	gtk_widget_ref(print);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "print", print,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(print);
 	gtk_container_add(GTK_CONTAINER(file_menu), print);
 
@@ -1094,10 +1008,6 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				  _("_Edit"));
 	gtk_widget_add_accelerator(ecd->edit2, "activate_item",
 				   pmEditor_accels, tmp_key, 0, 0);
-	gtk_widget_ref(ecd->edit2);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->edit2",
-				 ecd->edit2,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->edit2);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->edit2);
 
@@ -1105,40 +1015,24 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_widget_set_sensitive(GTK_WIDGET(ecd->edit2), FALSE);
 
 	edit2_menu = gtk_menu_new();
-	gtk_widget_ref(edit2_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "edit2_menu",
-				 edit2_menu,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ecd->edit2),
 				  edit2_menu);
 	edit2_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(edit2_menu));
 
 	cut = gtk_menu_item_new_with_label(_("Cut"));
-	gtk_widget_ref(cut);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "cut", cut,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cut);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), cut);
 
 	copy = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_ref(copy);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "copy", copy,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(copy);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), copy);
 
 	paste = gtk_menu_item_new_with_label(_("Paste"));
-	gtk_widget_ref(paste);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "paste", paste,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(paste);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), paste);
 
 	spell = gtk_menu_item_new_with_label(_("Spell Check"));
-	gtk_widget_ref(spell);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "spell", spell,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(spell);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), spell);
 
@@ -1150,33 +1044,19 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 
 
 	undo = gtk_menu_item_new_with_label(_("Undo"));
-	gtk_widget_ref(undo);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "undo", undo,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(undo);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), undo);
 
 	find = gtk_menu_item_new_with_label(_("Find"));
-	gtk_widget_ref(find);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "find", find,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(find);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), find);
 
 
 	replace = gtk_menu_item_new_with_label(_("Replace"));
-	gtk_widget_ref(replace);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "replace",
-				 replace,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(replace);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), replace);
 
 	ecd->link = gtk_menu_item_new_with_label(_("Link..."));
-	gtk_widget_ref(ecd->link);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->link",
-				 ecd->link,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->link);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->link);
 
@@ -1193,7 +1073,8 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_deletenote_activate), ecd);
-		gtk_signal_connect(GTK_OBJECT(ecd->show_tabs),
+		if(!settings.use_percomm_dialog)
+			gtk_signal_connect(GTK_OBJECT(ecd->show_tabs),
 				   "activate",
 				   GTK_SIGNAL_FUNC
 				   (show_tabs_activate), ecd);

@@ -28,6 +28,7 @@ extern "C" {
 
 #include "gui/commentary.h"
 	
+void gui_keep_comm_dialog_in_sync(gchar * key);	
 void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_on_lookup_commentary_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
@@ -43,4 +44,3 @@ void gui_display_commentary_in_dialog(gchar * key);
 #endif
 
 #endif
-

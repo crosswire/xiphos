@@ -79,6 +79,7 @@ struct _commdata {
 	gboolean is_dialog;
 	gboolean book_heading;
 	gboolean chapter_heading;
+	gboolean sync;
 	
 	COMM_GLOBALS *cgs;
 };
@@ -93,4 +94,3 @@ void gui_add_new_comm_pane(COMM_DATA *c);
 void gui_setup_commentary(GList *mods);
 void gui_shutdown_commentary(void);
 #endif
-
