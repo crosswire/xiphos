@@ -857,6 +857,7 @@ static void add_vbox_to_notebook(GBS_DATA * g)
  */
 static void set_new_globals(GLOBAL_OPS * gops)
 {	
+	gops->module_type = 3;
 	gops->words_in_red = TRUE;
 	gops->strongs = TRUE;
 	gops->morphs = TRUE;
