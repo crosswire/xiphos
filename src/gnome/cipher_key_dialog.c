@@ -28,7 +28,7 @@
 
 #include "gui/cipher_key_dialog.h"
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 
 static GtkWidget *entryKey;
 static void on_btkUKok_clicked(GtkButton * button, gchar *mod_name);

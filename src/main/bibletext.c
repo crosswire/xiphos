@@ -28,7 +28,7 @@
 
 #include "main/settings.h"
 #include "main/bibletext.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 
 #include "backend/bibletext_.h"
 #include "backend/sword.h"

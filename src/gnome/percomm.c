@@ -31,6 +31,7 @@
 #include "main/spell_gui.h"
 #endif
 
+#include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/percomm.h"
 #include "gui/_editor.h"
@@ -40,7 +41,6 @@
 #include "gui/utilities.h"
 #include "gui/html.h"
 
-#include "main/gs_gnomesword.h"
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/commentary.h"

@@ -555,3 +555,46 @@ gchar *get_mod_about_info(char * mod_name)
 	return backend_get_mod_about_info(mod_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *   check_for_module
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   int check_for_module(char * mod_name)
+ *
+ * Description
+ *    check for presents of a module by name
+ *
+ * Return value
+ *   int
+ */
+ 
+int check_for_module(char * mod_name)
+{
+	return backend_check_for_module(mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   shutdown_sword
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void shutdown_sword(void)	
+ *
+ * Description
+ *   close down sword by calling backend_shutdown();
+ *
+ * Return value
+ *   void
+ */
+
+void shutdown_sword(void)
+{
+	backend_shutdown();
+}

@@ -31,7 +31,7 @@
 #include "gui/utilities.h"
 
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 /******************************************************************************

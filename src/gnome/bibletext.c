@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 
+#include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
@@ -38,7 +39,6 @@
 #include "main/bibletext.h"
 #include "main/settings.h"
 #include "main/lists.h"
-#include "main/gs_gnomesword.h"
 #include "main/sword.h"
 
 
