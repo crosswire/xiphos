@@ -34,7 +34,7 @@
 #include "main/bibletext.h"
 #include "main/settings.h"
 
-
+//"<font color=\"#FF0000\">"
 /******************************************************************************
  * Name
  *  get_font
@@ -90,11 +90,11 @@ static  MOD_FONT * get_font(gchar *mod_name)
 
 static void set_global_options(TEXT_GLOBALS *tgs)
 {
-	if (tgs->gbfstrongs || tgs->thmlstrongs)
+	if (tgs->strongs)
 		set_text_module_global_option("Strong's Numbers",
 				GTK_TOGGLE_BUTTON(tgs->t_btn_strongs)->
 					       active);
-	if (tgs->gbfmorphs || tgs->thmlmorphs)
+	if (tgs->morphs)
 		set_text_module_global_option("Morphological Tags",
 				GTK_TOGGLE_BUTTON(tgs->t_btn_morphs)->
 						active);
@@ -135,6 +135,42 @@ static void set_global_options(TEXT_GLOBALS *tgs)
 			set_text_global_option("Textual Variants", "All Readings");
 	}
 }
+	
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void ( GString *str )	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void strip_words_in_red(GString * str)
+{
+	gchar *tmpbuf, *buf, color_tag[26];
+	gint pos, len, len1, len2;	
+	
+	strcpy(color_tag, "<font color=\"#FF0000\">");
+	/* point buf to found verse */
+	buf = str->str;
+
+	len = strlen(color_tag);
+	len1 = strlen(buf);
+	while((tmpbuf = strstr(buf, color_tag)) != NULL) {
+		len2 = strlen(tmpbuf);
+		pos = len1 - len2;
+		/* remove color tag */
+		str = g_string_erase(str, pos, len);
+	}
+}
+
 	
 /******************************************************************************
  * Name
@@ -550,23 +586,14 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			}	
 		} 
 		
-		text_str = get_bibletext_text(mod_name, tmpkey);
-		if(settings.displaySearchResults) {
-			if(i == cur_verse) {
-				str = g_string_append (str,text_str);
-				mark_search_words(str);
-				utf8str = str->str;			
-			} else {			
-				str = g_string_append (str,text_str);
-				mark_search_words(str);		
-				utf8str = str->str;			
-			}
-		}
-		
-		else {
-			str = g_string_append (str,text_str);
-			utf8str = str->str;
-		}
+		/* get module text and prepare to display it */
+		text_str = get_bibletext_text(mod_name, tmpkey);		
+		str = g_string_append (str,text_str);
+		if(settings.displaySearchResults)
+			mark_search_words(str);	
+		if(settings.strip_words_in_red)
+			strip_words_in_red(str);
+		utf8str = str->str;
 		free(text_str);
 		
 		if (settings.versestyle) {

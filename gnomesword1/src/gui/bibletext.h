@@ -41,10 +41,8 @@ struct  _text_global_ops {
 	GtkWidget *t_btn_secondary;
 	GtkWidget *t_btn_all;
 	gboolean
-	    gbfstrongs,
-	    thmlstrongs,
-	    gbfmorphs,
-	    thmlmorphs,
+	    strongs,
+	    morphs,
 	    gbffootnotes,
 	    thmlfootnotes,
 	    greekaccents,
@@ -81,6 +79,7 @@ struct _text_data {
 	gchar *cipher_old;
 	gint mod_num;
 	gboolean is_locked;
+	gboolean strip_words_in_red;
 	TEXT_GLOBALS *tgs;
 	Text_Find_Dialog *find_dialog;
 };
