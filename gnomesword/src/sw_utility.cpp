@@ -36,10 +36,7 @@
 #include <gbfplain.h>
 #include <plainhtml.h>
 #include <gbfhtmlhref.h>
-#include <rwphtml.h>
-#include <thmlhtml.h>
 #include <thmlhtmlhref.h>
-#include <latin1utf8.h>
 #ifndef __GNUC__
 #include <io.h>
 #else
@@ -54,18 +51,14 @@
 SWFilter 
     * gbftohtml,		
     *plaintohtml, 
-    *thmltohtml, 
-    *rwptohtml, 
-    *lattoutf8;
+    *thmltohtml;
     
 /*** initRenderFiltersUTIL ***/
 void initRenderFiltersUTIL(void)
 {
 	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
 	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
-	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
 	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
-	lattoutf8 = new Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
 }
 
 /********************************************************************************************** 
@@ -86,10 +79,6 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
 	modDirection = ((entry = section.find("Direction")) != section.end()) ? (*entry).second : (string) "";
 	
-	if(!module->isUnicode()) { 
-//		g_warning("%s module is not utf8",module->Name());
-		module->Encoding(ENC_UTF8);
-	}
 	/*
 	if (!stricmp(modDirection.c_str(), "RtoL")) {
 		module->Direction(DIRECTION_RTL);
@@ -110,11 +99,6 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 		noDriver = false;
 	}
 	
-	if (!stricmp(module->Name(), "RWP")) {
-		module->AddRenderFilter(rwptohtml);
-		noDriver = false;
-	}
-
 	if (noDriver){
 		if (!stricmp(moduleDriver.c_str(), "RawCom")) {
 			module->AddRenderFilter(plaintohtml);
@@ -133,14 +117,10 @@ void deleteRenderfilters(void)
 	//-- delete render filters
 	if (thmltohtml != 0)
 		delete thmltohtml;
-	if (rwptohtml != 0)
-		delete rwptohtml;
 	if (gbftohtml != 0)
 		delete gbftohtml;
 	if (plaintohtml != 0)
 		delete plaintohtml;
-	if (lattoutf8 != 0)
-		delete lattoutf8;
 }
 
 /* path to sword modules 
