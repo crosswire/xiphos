@@ -914,8 +914,11 @@ e_group_bar_add_group		(EGroupBar	*group_bar,
 
 	/* Append an empty group to the children array and get a pointer to
 	   it, so we can use it like a normal group. */
-	group_num = group_bar->children->len;
-	g_array_append_val (group_bar->children, empty_group);
+	if (position == -1)
+		group_num = group_bar->children->len;
+	else
+		group_num = position;
+	g_array_insert_val (group_bar->children, group_num, empty_group);
 	group = &g_array_index (group_bar->children,
 				EGroupBarChild, group_num);
 
@@ -929,26 +932,32 @@ e_group_bar_add_group		(EGroupBar	*group_bar,
 	group->button_window_target_y = 0;
 	group->child_window_target_y = 0;
 
-	/* If we don't have a current group, set it to the first one. */
+	/* If we don't have a current group, set it to the first one.
+	   Move the currently shown group index forward if necessary. */
 	if (group_bar->current_group_num == -1)
 		group_bar->current_group_num = 0;
+	else if (group_bar->current_group_num >= group_num)
+		group_bar->current_group_num++;
 
 	/* If the EGroupBar widget is realize, we need to create the child
 	   windows to put the button & child in. */
 	if (GTK_WIDGET_REALIZED (group_bar)) {
 		e_group_bar_create_group_button_window (group_bar, group_num);
+		gdk_window_show (group->button_window);
+
 		e_group_bar_create_group_child_window (group_bar, group_num);
+		gdk_window_show (group->child_window);
 
 		/* We need to lower all the child windows of the previous
 		   groups, in reverse order, to keep the stacking order
 		   correct. */
-		for (tmp_group_num = group_num - 1;
+		for (tmp_group_num = group_num;
 		     tmp_group_num >= 0;
 		     tmp_group_num--) {
 			tmp_group = &g_array_index (group_bar->children,
 						    EGroupBarChild,
 						    tmp_group_num);
-			gdk_window_lower (group->child_window);
+			gdk_window_lower (tmp_group->child_window);
 		}
 	}
 
@@ -1136,6 +1145,7 @@ e_group_bar_set_current_group_num	(EGroupBar	*group_bar,
 		/* The positions will be sorted out when the widget's size is
 		   allocated. */
 		group_bar->current_group_num = group_num;
+		gtk_widget_queue_resize (GTK_WIDGET (group_bar));
 	}
 }
 

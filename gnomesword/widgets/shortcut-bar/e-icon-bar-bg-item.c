@@ -234,15 +234,23 @@ e_icon_bar_bg_item_draw (GnomeCanvasItem *canvas_item, GdkDrawable *drawable,
 			bar_y = 0;
 		} else {
 			/* We need to draw the bar after the last item. */
-			item = &g_array_index (icon_bar->items, EIconBarItem,
-					       icon_bar->items->len - 1);
-			bar_y = item->item_height + icon_bar->spacing;
+			if (icon_bar->items->len != 0) {
+				item = &g_array_index (icon_bar->items,
+						       EIconBarItem,
+						       icon_bar->items->len - 1);
+				bar_y = item->item_height + icon_bar->spacing;
+			} else {
+				item = NULL;
+				bar_y = icon_bar->spacing;
+			}
 		}
 
-		if (icon_bar->view_type == E_ICON_BAR_LARGE_ICONS) {
-			bar_y += item->icon_y;
-		} else {
-			bar_y += MIN (item->icon_y, item->text_y);
+		if (item) {
+			if (icon_bar->view_type == E_ICON_BAR_LARGE_ICONS) {
+				bar_y += item->icon_y;
+			} else {
+				bar_y += MIN (item->icon_y, item->text_y);
+			}
 		}
 		bar_y -= y + icon_bar->spacing / 2;
 
