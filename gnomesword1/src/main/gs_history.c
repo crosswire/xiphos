@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 
+/* main */
 #include "gs_gnomesword.h"
 #include "sword.h"
 #include "gs_history.h"
@@ -32,9 +33,7 @@
 #include "support.h"
 #include "settings.h"
 
-/*
- * gnome
- */
+/* frontend */
 #include "main_menu.h"
 
 #include <gal/e-paned/e-hpaned.h>
