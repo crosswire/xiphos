@@ -263,8 +263,8 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
 			sprintf(tmpBuf,
-				"<A HREF=\"version=%s passage=%s\">"
-				"<FONT COLOR=\"%s\">[%s] %s </font></A>",
+				"<a hred=\"version=%s passage=%s\">"
+				"<font color=\"%s\">[%s] %s </font></A>",
 				mod_name,
 				key,
 				settings.bible_verse_num_color,
@@ -894,7 +894,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 		g_string_printf(str, "%s%s",
 			"<br><br>",
 			_
-			("You will have to restart GnomeSword after you unlock it."));
+			("You will need to restart GnomeSword after you unlock it."));
 
 		if (str->len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
