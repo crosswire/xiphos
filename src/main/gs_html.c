@@ -139,7 +139,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	if (*url == '@') {
 		++url;
-		swap_interlinear_with_main((gchar *) url, &settings);
+		swap_interlinear_with_main((gchar *) url);
 	}
 	/***  verse numbers in Bible Text window  ***/
 	else if (*url == '*') {

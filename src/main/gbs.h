@@ -61,12 +61,12 @@ struct _nodedata {
 char *get_book_key(int book_num);
 gboolean display_row_gbs(gint book_num, gchar *offset);
 GBS_DATA *get_gbs(GList * gbs);
-void add_node_children(SETTINGS *s, GtkCTreeNode *node, gchar *bookname,
-						unsigned long offset);
+void add_node_children(GtkCTreeNode *node, gchar *bookname,
+		unsigned long offset);
 void set_book_page_and_key(gint page_num, gchar * key);
-void setup_gbs(SETTINGS * s, GList *mods);
+void setup_gbs(GList *mods);
 void shutdown_gbs(void);
-GtkCTreeNode *add_node_gbs(SETTINGS * s, NODEDATA * data);
+GtkCTreeNode *add_node_gbs(NODEDATA * data);
 
 #ifdef __cplusplus
 }

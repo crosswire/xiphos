@@ -73,12 +73,10 @@ gboolean display_change = TRUE;
  *   const char*
  */
  
-const char* text_get_description(int mod_num)
+const char *text_get_description(int mod_num)
 {
 	return backend_get_text_module_description(mod_num);
 }
-
-
 
 /******************************************************************************
  * Name
@@ -336,7 +334,7 @@ void set_text_page_and_key(gint page_num, gchar * key)
  * Synopsis
  *   #include "bibletext.h"
  *   
- *   void set_page_text(gchar * modname, GList * text_list,SETTINGS * s)	
+ *   void set_page_text(gchar * modname, GList * text_list)	
  *
  * Description
  *   change text module by finding page number from module name
@@ -345,8 +343,7 @@ void set_text_page_and_key(gint page_num, gchar * key)
  *   void
  */
 
-static void set_page_text(gchar * modname, GList * text_list,
-			  SETTINGS * s) 
+static void set_page_text(gchar * modname, GList * text_list) 
 {
 	gint page = 0;
 	TEXT_DATA *t = NULL;
@@ -360,10 +357,10 @@ static void set_page_text(gchar * modname, GList * text_list,
 		text_list = g_list_next(text_list);
 	}
 	cur_t = t;
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebook_text), page);
-	s->text_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_text),
-				   s->text_tabs);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_text), page);
+	settings.text_last_page = page;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_text),
+			settings.text_tabs);
 }
 
 /******************************************************************************
@@ -395,7 +392,7 @@ void display_text(gchar * key)
  * Synopsis
  *   #include "bibletext.h"
  *
- *   void setup_text(SETTINGS * s, GList *mods)
+ *   void setup_text(GList *mods)
  *
  * Description
  *   set up gui for sword text modules - return list of text module names
@@ -404,7 +401,7 @@ void display_text(gchar * key)
  *   void
  */
 
-void setup_text(SETTINGS * s, GList *mods) 
+void setup_text(GList *mods) 
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
@@ -428,23 +425,23 @@ void setup_text(SETTINGS * s, GList *mods)
 		t->find_dialog = NULL;
 		t->is_locked = backend_module_is_locked(t->mod_name);
 		get_module_global_options(t);
-		gui_create_text_pane(s, t);
+		gui_create_text_pane(&settings, t);
 		popupmenu = gui_create_pm_text(t);
 		gnome_popup_menu_attach(popupmenu, t->html, NULL);
-		backend_new_text_display(t->html, t->mod_name, s);
+		backend_new_text_display(t->html, t->mod_name, &settings);
 		text_list = g_list_append(text_list, (TEXT_DATA *) t);
 		++count;
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(s->notebook_text),
+	gtk_signal_connect(GTK_OBJECT(settings.notebook_text),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_text_switch_page), text_list);
 
-	modbuf = g_strdup(s->MainWindowModule);
+	modbuf = g_strdup(settings.MainWindowModule);
 
-	set_page_text(modbuf, text_list, s);
+	set_page_text(modbuf, text_list);
 
 	g_free(modbuf);
 	g_list_free(tmp);

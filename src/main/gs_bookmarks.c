@@ -681,7 +681,7 @@ void add_bookmark_to_tree(GtkCTreeNode *node, gchar *modName, gchar *verse)
 /*
  * add results of search to tree as a root node with children
  */
-void addverselistBM(SETTINGS * s, GList * list)
+void addverselistBM(GList * list)
 {
 	char
 	*token, *text[3], *t;
@@ -693,14 +693,14 @@ void addverselistBM(SETTINGS * s, GList * list)
 	node = NULL;
 	tmp = list;
 	t = "|";
-	ctree = GTK_CTREE(s->ctree_widget);
+	ctree = GTK_CTREE(settings.ctree_widget);
 	/*** open dialog to get name for root node ***/
 	dialog =
 	    gnome_request_dialog(FALSE,
 				 "Enter Root Group Name - use no \'|\'",
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
-				 GINT_TO_POINTER(1), GTK_WINDOW(s->app));
+				 GINT_TO_POINTER(1), GTK_WINDOW(settings.app));
 	/*** wait here until dialog is closed ***/
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
@@ -728,12 +728,12 @@ void addverselistBM(SETTINGS * s, GList * list)
 /* 
  * fill bookmark tree 
  */
-void loadtree(SETTINGS * s)
+void loadtree()
 {
 	GtkWidget *menu, *new_widget, *insert_item_widget;
 
-	bmtree.ctree = GTK_CTREE(s->ctree_widget);
-	bmtree.ctree_widget = s->ctree_widget;
+	bmtree.ctree = GTK_CTREE(settings.ctree_widget);
+	bmtree.ctree_widget = settings.ctree_widget;
 	p_bmtree = &bmtree;
 	
 	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
@@ -761,10 +761,10 @@ void loadtree(SETTINGS * s)
 				 "scroll_vertical",
 				 GTK_SIGNAL_FUNC(after_press), NULL);
 
-	loadbookmarks(s->ctree_widget);
+	loadbookmarks(settings.ctree_widget);
 	gtk_ctree_sort_recursive(p_bmtree->ctree, personal_node);
 
-	gtk_signal_connect(GTK_OBJECT(s->ctree_widget), "select_row",
+	gtk_signal_connect(GTK_OBJECT(settings.ctree_widget), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctree_select_row),
 			   bmtree.ctree);
 	gtk_clist_set_row_height(GTK_CLIST(p_bmtree->ctree), 15);
@@ -1038,16 +1038,15 @@ GtkWidget *create_dlgEditBookMark(gchar * text[3], gboolean newbookmark)
  * and create_pmDict
  */
 void
-create_addBookmarkMenuBM(GtkWidget *menu, 
-					GtkWidget *bookmark_menu_widget, 
-					SETTINGS *s)
+create_addBookmarkMenuBM(GtkWidget *menu, GtkWidget *bookmark_menu_widget)
 {
 	GtkWidget *item;
 	GtkCTree * ctree;
 	GtkCTreeNode *node;
 	gboolean is_leaf;
 	gint i;
-	ctree = GTK_CTREE(s->ctree_widget);
+	ctree = GTK_CTREE(settings.ctree_widget);
+
 	/* collapse tree so we only iterate through the roots */
 	gtk_ctree_collapse_recursive (ctree, NULL); 
 	for(i=0; i< GTK_CLIST(ctree)->rows; i++){
@@ -1080,3 +1079,4 @@ create_addBookmarkMenuBM(GtkWidget *menu,
 		//}
 	}	
 }
+

@@ -64,76 +64,58 @@ extern gboolean isrunningSD,	/* is the view dictionary dialog runing */
 
 extern GList * options;
 
-/*** undock/dock interlinear page ***/
-void on_undockInt_activate(GtkMenuItem * menuitem, SETTINGS * s)
+/* undock/dock interlinear page */
+void on_undockInt_activate(GtkMenuItem *menuitem)
 {
-	if (s->dockedInt) {
-		s->dockedInt = FALSE;
-		gui_undock_interlinear_page(s);	/* gs_interlinear_dlg.c */
+	if (settings.dockedInt) {
+		settings.dockedInt = FALSE;
+		gui_undock_interlinear_page(&settings);
 
 	} else {
-		s->dockedInt = TRUE;
-		gui_btnDockInt_clicked(NULL, s);	/* gs_interlinear_dlg.c */
+		settings.dockedInt = TRUE;
+		gui_btnDockInt_clicked(NULL, &settings);
 	}
 }
 
-
-
-
-//----------------------------------------------------------------------------------------------
-void on_print_item_activate(GtkMenuItem * menuitem, gchar * html)
+void on_print_item_activate(GtkMenuItem *menuitem, gchar *html)
 {
 	html_print(lookup_widget(settings.app, html));
 }
 
-
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module5_activate(GtkMenuItem * menuitem,
-			       gpointer user_data)
+void on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 
 	//display_about_module_dialog(getmodnameSWORD(2),FALSE);
 }
 
 
-
-//----------------------------------------------------------------------------------------------
-void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_john_3_1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	change_verse((gchar *) user_data);
+	change_verse((gchar *)user_data);
 }
 
-//----------------------------------------------------------------------------------------------
-void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_copy4_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *text;
 	text = lookup_widget(settings.app, "textComments");
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
-/*
-//----------------------------------------------------------------------------------------------
 void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *text;
+/*	GtkWidget *text;
 
 	text = lookup_widget(settings.app, "textComments");
-	gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
-			NULL, NULL,
-			gs_clipboard->str, -1);
+	gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
+			gs_clipboard->str, -1); */
 }
-*/
-//----------------------------------------------------------------------------------------------
+
 void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	display_about_module_dialog((char *) user_data, FALSE);
 }
 
-//----------------------------------------------------------------------------------------------
-void
-on_about_this_module_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
+void on_about_this_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (!strcmp((gchar *) user_data, "Bible"))
 		settings.whichwindow = MAIN_TEXT_WINDOW;
@@ -145,11 +127,7 @@ on_about_this_module_activate(GtkMenuItem * menuitem,
 	display_about_module_dialog(get_module_name(), FALSE);
 }
 
-/*******************************************************************************
- *
- *******************************************************************************/
-void on_auto_scroll1_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
+void on_auto_scroll1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *toolbar;
 
@@ -161,8 +139,6 @@ void on_auto_scroll1_activate(GtkMenuItem * menuitem,
 	else
 		gtk_widget_show(toolbar);
 }
-
-
 
 /*******************************************************************************
  * show hide notebook tabs - popup menu choice
@@ -196,9 +172,9 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear1Module, "%s", modName);
 	//change_verse(current_verse);
 	if (settings.dockedInt)
-		update_interlinear_page(&settings);
+		update_interlinear_page();
 	else
-		update_interlinear_page_detached(&settings);
+		update_interlinear_page_detached();
 }
 
 
@@ -217,9 +193,9 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear2Module, "%s", modName);
 	//change_verse(current_verse);
 	if (settings.dockedInt)
-		update_interlinear_page(&settings);
+		update_interlinear_page();
 	else
-		update_interlinear_page_detached(&settings);
+		update_interlinear_page_detached();
 }
 
 /*******************************************************************************
@@ -237,9 +213,9 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear3Module, "%s", modName);
 	//change_verse(current_verse);
 	if (settings.dockedInt)
-		update_interlinear_page(&settings);
+		update_interlinear_page();
 	else
-		update_interlinear_page_detached(&settings);
+		update_interlinear_page_detached();
 }
 
 /*******************************************************************************
@@ -257,9 +233,9 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear4Module, "%s", modName);
 	//change_verse(settings.currentverse);
 	if (settings.dockedInt)
-		update_interlinear_page(&settings);
+		update_interlinear_page();
 	else
-		update_interlinear_page_detached(&settings);
+		update_interlinear_page_detached();
 }
 
 /*******************************************************************************
@@ -277,9 +253,9 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear5Module, "%s", modName);
 	//change_verse(settings.currentverse);
 	if (settings.dockedInt)
-		update_interlinear_page(&settings);
+		update_interlinear_page();
 	else
-		update_interlinear_page_detached(&settings);
+		update_interlinear_page_detached();
 }
 
 
@@ -289,8 +265,7 @@ void on_int_global_options_activate(GtkMenuItem * menuitem,
 {
 	set_interlinear_module_global_options((gchar *) user_data,
 					      GTK_CHECK_MENU_ITEM
-					      (menuitem)->active,
-						&settings);
+					      (menuitem)->active);
 }
 
 /***  ***/
