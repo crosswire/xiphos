@@ -23,8 +23,6 @@
 #include <config.h>
 #endif
 
-
-
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
