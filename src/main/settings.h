@@ -131,6 +131,9 @@ struct _settings {
 		comm_tool, /* show toolbar in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		book_tabs, /* show module tabs in books if true  */
+                showtexts, /* show bible texts if true  */
+                showcomms, /* show commentaries if true  */
+                showdicts, /* show dictionaries/lexicons if true */
 		percomm_tabs, /* show module tabs in personal commentary if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */

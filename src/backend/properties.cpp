@@ -237,6 +237,12 @@ int backend_load_properties(char * path)
 	    atoi(settingsInfo["User Options"]["UseDefaultDict"].
 		 c_str());
 
+       settings.showtexts =
+           atoi(settingsInfo["User Options"]["showtexts"].c_str());
+       settings.showcomms =
+           atoi(settingsInfo["User Options"]["showcomms"].c_str());
+       settings.showdicts =
+           atoi(settingsInfo["User Options"]["showdicts"].c_str());
 
 	return true;
 }
@@ -431,6 +437,9 @@ int backend_save_properties(int shutdown)
 		    isON(settings.inDictpane);
 		settingsInfo["User Options"]["UseDefaultDict"] =
 		    isON(settings.useDefaultDict);
+               settingsInfo["User Options"]["showtexts"] = isON(settings.showtexts);
+               settingsInfo["User Options"]["showcomms"] = isON(settings.showcomms);
+               settingsInfo["User Options"]["showdicts"] = isON(settings.showdicts);
 	}
 	settingsInfo.Save();
 	return true;
@@ -525,6 +534,10 @@ int backend_create_properties_from_setup(void)
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
 	settingsInfo["User Options"]["UseDefaultDict"] = "0";
+       settingsInfo["User Options"]["showtexts"] = "1";
+       settingsInfo["User Options"]["showcomms"] = "1";
+       settingsInfo["User Options"]["showdicts"] = "1";
+	
 	settingsInfo.Save();
 	return true;
 }
@@ -616,6 +629,9 @@ int backend_create_properties(void)
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
 	settingsInfo["User Options"]["UseDefaultDict"] = "0";
+       settingsInfo["User Options"]["showtexts"] = "1";
+       settingsInfo["User Options"]["showcomms"] = "1";
+       settingsInfo["User Options"]["showdicts"] = "1";
 
 	settingsInfo.Save();
 	return true;

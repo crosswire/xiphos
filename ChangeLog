@@ -1,3 +1,15 @@
+2002-09-16  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added gnome/dialog.c and gui/dialog.h this is to
+	  replace gnomedialog
+	  
+
+2002-09-11  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added patch from Tim Silversides <silversides@btinternet.com>
+	  that toggles show/hide texts, comms and dicts.
+
+
 2002-08-27  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gnomesword.desktop to gnomesword1.desktop

@@ -28,6 +28,7 @@ libgui_a_SOURCES =  \
     commentary_dialog.c \
     commentary.c \
     commentary_find.c \
+    dialog.c \
     dictlex.c \
     dictlex_dialog.c \
     editor_menu.c \
