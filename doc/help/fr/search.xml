@@ -84,9 +84,9 @@
 						<para>
 							Cette recherche s'effectue à l'aide d'un mot, d'une partie de mot, 
 							ou de plusieurs mots.
-							Les versets comprenant tous les mots à rechercher seront
+							Les passages comprenant tous les mots à rechercher seront
 							obtenus, quelque soit l'ordre dans lequel ces mots apparaissent 
-							dans le verset.
+							dans le texte.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -94,18 +94,18 @@
 					<term><guibutton>Expression régulière</guibutton></term> 
 					<listitem>
 						<para>
-							This search uses a regular expression
-					as a search key. A regular expression is a pattern used 
-					to match a string of text. A regular expression can be 
-					used to find verses with words that match a particular 
-					pattern. For example the regular expression <example>
-					\ A[a-z]*iah </example> will match verses that contain
-					the words Aiah, Ahaziah, Athaliah and Amariah.
+							Une expression régulière est une clé de recherche basée
+							sur un langage et une syntaxe spécifiques permettant de 
+							retrouver un mot, ou une phrase à l'aide de combinaisons 
+							complexes. Par exemple l'expression régulière <example>
+							\ A[a-z]*iah </example> permet de retrouver les passages 
+							qui contiennent les mots Aiah, Ahaziah, Athaliah et Amariah.
 						</para>
 						<para>
-							A complete discussion of regular expressions is 
-					beyond the scope of this manual, but more information 
-					can be found in the grep man page.
+							Un exposé complet de l'emploi des expressions régulières 
+							dépasse le cadre de ce manuel, cependant 
+							plus d'informations à ce sujet sont détaillées dans
+							la page man de grep.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -113,13 +113,13 @@
 					<term><guibutton>Phrase exacte</guibutton></term> 
 					<listitem>
 						<para>
-							Seuls les versets qui contiennent exactement
+							Seuls les passages qui contiennent exactement
 							la phrase à rechercher seront obtenus.
 							Si la phrase à rechercher est <userinput>
-							en liberté</userinput>, les versets obtenus
-							contiendront  "<emphasis>en liberté</emphasis>,"
-							mais pas "<emphasis>en</emphasis> toute 
-							<emphasis>liberté</emphasis>".
+							en vérité</userinput>, les passages obtenus
+							contiendront  "<emphasis>en vérité</emphasis>,"
+							mais pas" <emphasis>en</emphasis> toute 
+							<emphasis>vérité</emphasis>".
 				
 						</para>
 					</listitem>
@@ -130,64 +130,72 @@
 		<sect2 id="gnomesword-search-options">
 			<title>Options de la recherche</title>
 			<para>
-			<!-- Allows selecting of search options. The only available option 
-			is <guibutton>Match case</guibutton>. Check this box to make the 
-			search case sensitive.--> 
+				La seule option disponible est l'option <guibutton>Respecter la casse</guibutton>.
+				Elle est à cocher si la recherche doit tenir compte des majuscules et des minuscules.
 			</para>
 		</sect2>
 		
 		<sect2 id="gnomesword-search-scopeselect">
 			<title>Étendue de la recherche</title>
-			<para>Allows defining the range within the specificed module that will
-			be searched. There are three search scopes available:</para>
+			<para>
+				La recherche peut s'effectuer sur l'ensemble du module sélectionné ou sur un ensemble
+				de passages plus limité. Les limites de la recherche sont définissables de trois façons :
+			</para>
 			<variablelist>
 				<varlistentry>
-					<term><guibutton>No scope</guibutton></term>
-					<listitem><para>This button causes the search to
-					to include the entire module.</para>
+					<term><guibutton>Pas de limites</guibutton></term>
+					<listitem>
+						<para>
+							La recherche est effectuée sur le odule entier
+						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Use bounds</guibutton></term>
-					<listitem><para>Selecting this button produces two text 
-					entry boxes marked <guilabel>Lower</guilabel> and
-					<guilabel>Upper</guilabel>. Enter the first book 
-					to search in the <guilabel>Lower</guilabel> box and
-					the last book to search in the <guilabel>Upper</guilabel>
-					box. The search will begin with the <guilabel>Lower
-					</guilabel> book and end with the <guilabel>Upper
-					</guilabel> book and include all books in between.
-					</para>
-					<para>Chapter and verse numbers can be entered into
-					the search bound boxes as well to further narrow the
-					search. </para>
+					<term><guibutton>Avec limites</guibutton></term>
+					<listitem>
+						<para>
+							Deux zones supplémentaires de saisie des limites s'affichent 
+							quand cette option est sélectionnée. Le premier livre où débutera
+							la recherche est à saisir dans <guilabel>Basse</guilabel> et le
+							dernier livre où se terminera la recherche dans <guilabel>Haute
+							</guilabel>.
+						</para>
+						<para>
+							Les numéros de chapître et verset peuvent aussi être ajoutés aux noms de livres.
+						</para>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Last search</guibutton></term>
-					<listitem><para>Select this button to do a new 
-					search including only the verses returned as a 
-					result of the last search. Use this with a new 
-					search key to narrow the search further.</para>
+					<term><guibutton>Limites précédentes</guibutton></term>
+					<listitem>
+						<para>
+							Cette option est à sélectionner si une nouvelle recherche doit être
+							exécutée sur les passages obtenus comme résultats de la recherche
+							précédente. La clé de recherche doit être modifiée pour affiner
+							la liste de résultats.
+						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist> 
 		</sect2>
 	</sect1>
 	<sect1 id="gnomesword-advanced-search">
-	   <title> Advanced Searches</title> 
-	   <para> More complicated searches might require the use of the advanced search functions, found under <guimenuitem>Edit-&gt;Advanced Search</guimenuitem></para>
+	   <title>Recherches avancées</title> 
+		<para>
+			Des recherches plus complexes peuvent nécessiter l'utilisation de la boîte de dialogue 
+			recherche avancée, disponible par le menu <guimenuitem>Éditer-&gt;Recherche avancée</guimenuitem>
+		</para>
 
 	 
 	     <figure>
-		<title>The Advanced Search Dialogue</title>
+		<title>La boîte de dialogue recherche avancée</title>
 		<screenshot>
 	 	       <mediaobject>
 		      		<imageobject>
 				        <imagedata fileref="figures/gnomesword_advanced_search" format="PNG"/>
 				</imageobject>
 			 	<textobject>
-		     			<phrase>The Advanced Search Dialogue</phrase>
+		     			<phrase>La boîte de dialogue recherche avancée</phrase>
 				</textobject>
 		       </mediaobject>
 		 </screenshot>
@@ -197,6 +205,8 @@
 	   <warning>
 	   	<para>
 		 Changes to some of the settings (e.g. scope of search, searched modules, etc.) in Advanced Search will 	affect the simple search via the side pane but not vice versa.
+			Les changements effectués dans les options (limites de la recherche, modules, etc..) de la boite de
+			dilogue recherche avancée changent aussi les options de la recherche du volet latéral, mais pas l'inverse.
 		</para>
 	   </warning>  
 	   </sect1>
