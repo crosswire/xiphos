@@ -195,7 +195,8 @@ static void text_page_changed(gint page_num, TEXT_DATA *t)
 static void set_text_variant_global_option(gchar * option, gchar * choice)
 {
 	set_text_global_option(option, choice);
-	chapter_display(cur_t->html, cur_t->mod_name, cur_t->tgs, settings.currentverse);
+	chapter_display(cur_t->html, cur_t->mod_name, 
+			cur_t->tgs, settings.currentverse, TRUE);
 }
 
 
@@ -835,7 +836,7 @@ static void on_t_btn_toggled(GtkToggleButton * togglebutton,
 	save_module_options(cur_t->mod_name, option, 
 				    togglebutton->active);
 	chapter_display(cur_t->html, cur_t->mod_name, cur_t->tgs, 
-					settings.currentverse);
+				settings.currentverse, TRUE);
 }
 
 /******************************************************************************
@@ -1444,7 +1445,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 
 	} else
 		chapter_display(cur_t->html, cur_t->mod_name, 
-					    cur_t->tgs, key);
+					cur_t->tgs, key, TRUE);
 	display_change = TRUE;
 }
 
@@ -1466,7 +1467,8 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 
 void gui_display_text(gchar * key) 
 {
-	chapter_display(cur_t->html, cur_t->mod_name, cur_t->tgs, key);
+	chapter_display(cur_t->html, cur_t->mod_name, 
+			cur_t->tgs, key, TRUE);
 }
 
 /******************************************************************************

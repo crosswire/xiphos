@@ -36,7 +36,6 @@
 
 #include "backend/percomm_.h"
 #include "backend/sword.h"
-#include "backend/display.h"
 
 /******************************************************************************
  * globals to this file only 
@@ -90,7 +89,6 @@ char *backend_get_percomm_text(char * key)
 void backend_set_percomm_key(char * key)
 {
 	if (mod){
-		//versekey = key;
 		mod->SetKey(key);
 	}
 }

@@ -1,3 +1,14 @@
+2002-07-05  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* renamed gui/_display_info.h to gui/display_info.h
+	* renamed gnome/_display_info.c to gnome/display_info.c
+	* removed backend/display_info_.*
+	* removed main/display_info.*
+	* removed backend/verselist.*
+	* removed backend/display.*
+
+
+
 2002-07-04  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gui/_percomm.h to gui/percomm.h

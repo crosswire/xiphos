@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _display_info.h - display information (ie strongs) in a dialog
+ * display_info.h - display information (ie strongs) in a dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
+void gui_display_mod_and_key(gchar * mod_name, gchar * key);
 GtkWidget *gui_create_display_informtion_dialog(void);
 
 #ifdef __cplusplus

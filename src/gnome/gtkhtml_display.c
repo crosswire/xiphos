@@ -371,7 +371,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
  */
 
 void chapter_display(GtkWidget * html_widget, gchar * mod_name,
-		     TEXT_GLOBALS * tgs, gchar * key)
+		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals)
 {
 	gchar
 	    *utf8str,
@@ -427,7 +427,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	/*
 	 * set global options for current module 
 	 */
-	set_global_options(tgs);	
+	if(use_globals)
+		set_global_options(tgs);	
 	
 	sprintf(buf,
 		HTML_START"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",

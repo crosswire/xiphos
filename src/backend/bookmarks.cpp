@@ -34,8 +34,9 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "main/gs_gnomesword.h"
 #include "backend/bookmarks.h"
+
+#include "main/gs_gnomesword.h"
 #include "main/gs_bookmarks.h"
 #include "main/settings.h"
 
@@ -299,7 +300,7 @@ void AddSectionToConf(SWConfig * config, string section,
 /******************************************************************************
  * save gnomesword bookmarks - using sword SWConfig
  ******************************************************************************/
-void savebookmarks(GtkWidget * ctree_widget)
+void backend_save_bookmarks(GtkWidget * ctree_widget)
 {
         GtkCTreeNode *node;
         GtkCTree *ctree;

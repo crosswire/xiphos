@@ -44,7 +44,7 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "main/settings.h"
+#include "main/gs_gnomesword.h"
 #include "main/lists.h"
 
 #include "backend/sword.h"
@@ -52,7 +52,6 @@
 #include "backend/shortcutbar.h"
 #include "backend/properties.h"
 #include "backend/bookmarks.h"
-#include "backend/verselist.h"
 #include "backend/gbs_.h"
 #include "backend/dictlex_.h"
 #include "backend/commentary_.h"
@@ -144,18 +143,11 @@ void backend_init_sword(void)
 	
 		
 	g_print("gnomesword-%s\n", VERSION);
-	g_print("%s\n", "Initiating Sword\n");
-
-	settings.displaySearchResults = false;
-	settings.havethayer = false;
-	settings.havebdb = false;
-		
-
-		
+	g_print("%s\n", "Initiating Sword\n");		
 	g_print("Sword locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
-
 	g_print("%s\n", "Check for SWORD Modules");
+	
 
 	for (it = mainMgr->Modules.begin();
 	     it != mainMgr->Modules.end(); it++) {
@@ -270,7 +262,6 @@ void backend_module_name_from_description(char * mod_name,
 
 void backend_shutdown(void)
 {
-	savebookmarks(settings.ctree_widget);
 	backend_save_properties(true);
 	
 	backend_shutdown_bibletext();
@@ -278,13 +269,10 @@ void backend_shutdown(void)
 	backend_shutdown_percomm();
 	backend_shutdown_dictlex();
 	backend_shutdown_books();
-	backend_shutdown_search_results_display();
-	backend_shutdown_sb_viewer();
 	backend_shutdown_interlinear();
-	backend_shutdown_verselist();
 	
 	/*
-	 * delete Sword manager
+	 * delete Sword managers
 	 */
 	delete mainMgr;
 	delete sw_mgr.search;
@@ -415,7 +403,7 @@ void backend_save_module_key(char *mod_name, char *key)
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	DIR *dir;
-	gchar buf[256], conffile[256];
+	char buf[256], conffile[256];
 	struct dirent *ent;
 
 	sprintf(buf, "%s", mainMgr->configPath);
@@ -610,14 +598,14 @@ char *backend_get_path_to_mods(void)
  */
 char *backend_get_mod_aboutSWORD(char * modname)
 {
-	return g_strdup((gchar *) mainMgr->Modules[modname]->
+	return g_strdup((char *) mainMgr->Modules[modname]->
 			getConfigEntry("About"));
 }
 
 int backend_get_module_page(char *module_name, char *module_type)
 {
 	ModMap::iterator it;
-	gint module_index = 0;
+	int module_index = 0;
 
 	for (it = mainMgr->Modules.begin();
 	     it != mainMgr->Modules.end(); it++) {
@@ -748,4 +736,58 @@ char *backend_get_cipher_key(char *mod_name)
 	}
 	closedir(dir);
 	return NULL;	
+}
+
+/******************************************************************************
+ * Name
+ *   backend_get_module_text
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   char *backend_get_module_text(char * mod_name, char * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+ 
+char *backend_get_module_text(char * mod_name, char * key)
+{
+	SWModule *mod = mainMgr->Modules[mod_name];
+	
+	if(mod) {
+		mod->SetKey(key);
+		return strdup((char*)mod->RenderText());
+	}
+	return NULL;
+}
+
+/******************************************************************************
+ * Name
+ *   backend_check_for_module
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   int backend_check_for_module(char * mod_name)
+ *
+ * Description
+ *    check for presents of a module by name
+ *
+ * Return value
+ *   int
+ */
+ 
+int backend_check_for_module(char * mod_name)
+{
+	SWModule *mod = mainMgr->Modules[mod_name];
+	
+	if(mod) {
+		
+		return 1;
+	}
+	return 0;
 }
