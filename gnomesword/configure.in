@@ -99,8 +99,6 @@ dnl Subst PACKAGE_MENU_DIR.
 PACKAGE_MENU_DIR="`gnome-config --datadir`/gnome/apps"
 AC_SUBST(PACKAGE_MENU_DIR)
 
-AC_PROG_CXX
-AC_LANG_CPLUSPLUS
 
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
@@ -119,6 +117,8 @@ dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
 AC_HEADER_TIME
 
+AC_PROG_CXX
+AC_LANG_CPLUSPLUS
 
 dnl ------------------------------------------------------------------------
 dnl Find a file (or one of more files in a list of dirs)

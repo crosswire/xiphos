@@ -61,7 +61,6 @@
  externals
 ***********************************************************************************************/
 extern SWModule *curMod, *curcomMod, *percomMod;
-//extern SWModule *curbookMod;
 extern gboolean firstsearch;
 extern SETTINGS *settings;
 extern GtkWidget *clistSearchResults;
@@ -79,7 +78,7 @@ static SWModule
 	*searchresultssbMod;   /* module for searchresults */
 
 //-------------------------------------------------------------------------------------------
-GList*   /* search Bible text or commentaries */
+GList*   /* search Bible text, commentaries of generic books*/
 searchSWORD (SETTINGS *s, SEARCH_OPT *so)	
 {	
 	
@@ -96,11 +95,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	        *lbSearchHits,	//-- label for showing how many verses we found
 	        *resultList,	//-- list of verses found
 	        *regexSearch,	//-- do we want to use regular expression search - radio button
-	        //*phraseSearch,	//-- do we want to use phrase seach - radio button
 	        *caseSensitive,	//-- do we want search to be case sensitive - check box
-	       //	*comToggle,	//-- do we want to search current commentary - check box
-	       //  *percomToggle,	//-- do we want to search personal commentary - check box
-	       //	*bookToggle,	//-- do we want to search current book - check box	
 	       	*bounds,	//-- do we want to use bounds for our search - check box
 	       	*lowerbound,	//-------- lower bounds entry widget
 	        *upperbound,	//-------- upper bounds entry widget
@@ -131,13 +126,9 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	searchMod = NULL;
 	searchText = lookup_widget (s->app, "entrySearch");	//-- pointer to text entry
 	regexSearch = lookup_widget (s->app, "rbRegExp");	//-- pointer to radio button
-	//phraseSearch = lookup_widget (s->app, "rbPhraseSearch");	//-- pointer to radio button
 	caseSensitive = lookup_widget (s->app, "ckbCaseSensitive");	//-- pointer to check box
 	bounds = lookup_widget (s->app, "rrbUseBounds");	//-- pointer to check box
 	lastsearch = lookup_widget (s->app, "rbLastSearch");	//-- pointer to radio button
-	//comToggle = lookup_widget (s->app, "ckbCommentary");	//-- pointer to check box
-	//percomToggle = lookup_widget (s->app, "ckbPerCom");	//-- pointer to check box
-	//bookToggle = lookup_widget (s->app, "ckbGBS");	//-- pointer to check box   
 
 	if (GTK_TOGGLE_BUTTON (so->ckbCommentary)->active) {	/* if true search commentary */	  
 		  it = searchMgr->Modules.find (curcomMod->Name ());	/* find commentary module */
@@ -227,21 +218,9 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 			VerseKey *key = (VerseKey *) &tmpMod->Key();
 			int curVerse = key->Verse();
 			int curChapter = key->Chapter();
-			//GString* vref = g_string_new((const char *)searchResults);
-			/* let's shorten the book name */
-			/*vref = g_string_truncate (vref, 4);*/
-			sprintf(buf,"%s",(const char *)searchResults);	
-					
-			mybuf[0] = buf; 							
-			//g_string_free(vref,TRUE);
-			/*
-			vref = g_string_new((char *)tmpMod->StripText());			
-			vref = g_string_truncate (vref, 45);
-			sprintf(buf2,"%s....",vref->str);	
-			mybuf[1] = buf2;
-			*/
+			sprintf(buf,"%s",(const char *)searchResults);					
+			mybuf[0] = buf; 
 			gtk_clist_insert(GTK_CLIST(clistSearchResults), count, mybuf);
-			//g_string_free(vref,TRUE);
 			/* remember finds for next search's scope in case we want to use them */						
 			searchScopeList << (const char *) searchResults;	
 			if(!count) 
