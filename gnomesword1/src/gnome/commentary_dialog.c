@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * commentary_dialog.c - dialog for a commentary module
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@
 static GList *dialog_list;
 static VIEW_COMM *cur_vc;
 static gboolean dialog_freed;
-
+static gboolean apply_change;
 
 
 
@@ -73,8 +73,7 @@ static gboolean dialog_freed;
  */
 
 void gui_on_lookup_commentary_dialog_selection
-		(GtkMenuItem * menuitem, gchar * dict_mod_description)
-{
+    (GtkMenuItem * menuitem, gchar * dict_mod_description) {
 	gchar *dict_key, mod_name[16];
 
 	memset(mod_name, 0, 16);
@@ -113,7 +112,7 @@ static void display(VIEW_COMM * vc, gchar * key)
 	gchar *strkey;
 
 	cur_vc = vc;
-	
+
 	strkey = get_valid_key(key);
 	strcpy(vc->c->key, strkey);
 
@@ -143,7 +142,8 @@ static void display(VIEW_COMM * vc, gchar * key)
 			}
 		} else {
 			text_str =
-			    get_commentary_text(vc->c->mod_name, strkey);
+			    get_commentary_text(vc->c->mod_name,
+						strkey);
 		}
 	}
 
@@ -175,7 +175,6 @@ static void display(VIEW_COMM * vc, gchar * key)
 static void free_on_destroy(VIEW_COMM * vc)
 {
 	dialog_list = g_list_remove(dialog_list, (VIEW_COMM *) vc);
-//      g_warning("shuting down %s dialog",vc->mod_name);
 	g_free(vc);
 }
 
@@ -234,162 +233,6 @@ void gui_close_comm_dialog(void)
 	}
 }
 
-/******************************************************************************
- * Name
- *   on_btn_close_clicked
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void on_btn_close_clicked(GtkButton * button, 
- *						VIEW_COMM * vc)	
- *
- * Description
- *   hide the dialog but do not destroy
- *
- * Return value
- *   void
- */
-
-static void on_btn_close_clicked(GtkButton * button, VIEW_COMM * vc)
-{
-	if (vc->dialog) {
-		dialog_freed = FALSE;
-		gtk_widget_destroy(vc->dialog);
-	}
-}
-
-
-/******************************************************************************
- * Name
- *   on_btn_sync_clicked
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void on_btn_sync_clicked(GtkButton * button, VIEW_COMM * vc)	
- *
- * Description
- *   bring the the View Commentay Dialog module into sync with main window
- *
- * Return value
- *   void
- */
-
-static void on_btn_sync_clicked(GtkButton * button, VIEW_COMM * vc)
-{
-	display(vc, settings.currentverse);
-}
-
-
-/******************************************************************************
- * Name
- *   module_new_activate
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void module_new_activate(GtkEditable * editable, 
- *					gpointer user_data)	
- *
- * Description
- *   load new commentary module
- *
- * Return value
- *   void
- */
-
-static void module_new_activate(GtkEditable * editable,
-				gpointer user_data)
-{
-	gui_open_commentary_dialog((gchar *) user_data);
-}
-
-
-/******************************************************************************
- * Name
- *   on_btn_goto_clicked
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void on_btn_goto_clicked(GtkButton * button, VIEW_COMM * vc)	
- *
- * Description
- *   goto new versekey
- *
- * Return value
- *   void
- */
-
-static void on_btn_goto_clicked(GtkButton * button, VIEW_COMM * vc)
-{
-	gchar *buf;
-
-	buf = gtk_entry_get_text(GTK_ENTRY(vc->entry_key));
-	display(vc, buf);
-}
-
-
-/******************************************************************************
- * Name
- *   on_btn_prev_clicked
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void on_btn_prev_clicked(GtkButton * button, VIEW_COMM * vc)
- *
- * Description
- *   goto previous module key
- *
- * Return value
- *   void
- */
-
-static void on_btn_prev_clicked(GtkButton * button, VIEW_COMM * vc)
-{
-	gchar *key;
-
-	set_commentary_key(vc->c->mod_name, vc->c->key);
-	key = navigate_commentary(vc->c->mod_name, 0);
-	if (key) {
-		strcpy(vc->c->key, key);
-		display(vc, key);
-		free(key);
-	}
-}
-
-
-/******************************************************************************
- * Name
- *   on_btn_next_clicked
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void on_btn_next_clicked(GtkButton * button, VIEW_COMM * vc)	
- *
- * Description
- *   goto next module key
- *
- * Return value
- *   void
- */
-
-static void on_btn_next_clicked(GtkButton * button, VIEW_COMM * vc)
-{
-	gchar *key;
-
-	set_commentary_key(vc->c->mod_name, vc->c->key);
-	key = navigate_commentary(vc->c->mod_name, 1);
-	if (key) {
-		strcpy(vc->c->key, key);
-		display(vc, key);
-		free(key);
-	}
-}
-
 
 /******************************************************************************
  * Name
@@ -416,55 +259,6 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 	return TRUE;
 }
 
-
-/******************************************************************************
- * Name
- *   add_items_to_module_menu
- *
- * Synopsis
- *   #include "commentary_dialog.h"
- *
- *   void add_items_to_module_menu(GtkWidget * shellmenu)	
- *
- * Description
- *   add commentary module names to new module menu
- *
- * Return value
- *   void
- */
-
-static void add_items_to_module_menu(GtkWidget * shellmenu)
-{
-	GtkWidget *menuChoice;
-	gchar menuName[64];
-	int view_number = 0;
-	GList *tmp;
-
-	tmp = NULL;
-
-	tmp = get_list(COMM_LIST);
-	while (tmp != NULL) {
-
-		/* add module name items to menu */
-		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *) (gchar
-								  *)
-						       tmp->data);
-		sprintf(menuName, "ModuleNum%d", view_number);
-		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
-				    menuChoice);
-		gtk_widget_show(menuChoice);
-		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
-				   GTK_SIGNAL_FUNC(module_new_activate),
-				   (gchar *) tmp->data);
-		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
-				      GTK_WIDGET(menuChoice),
-				      view_number);
-		++view_number;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-}
 
 
 /******************************************************************************
@@ -509,10 +303,322 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  */
 
 static gint button_press_event(GtkWidget * html,
-			GdkEventButton * event, VIEW_COMM * vc)
+			       GdkEventButton * event, VIEW_COMM * vc)
 {
 	cur_vc = vc;
 	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   update_controls
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void update_controls(VIEW_COMM * vc)	
+ *
+ * Description
+ *   update the book, chapter and verse contorls
+ *
+ * Return value
+ *   void
+ */
+
+static void update_controls(VIEW_COMM * vc)
+{
+	gchar *val_key;
+	gint cur_chapter, cur_verse;
+
+	cur_vc = vc;
+	apply_change = FALSE;
+	val_key = get_valid_key(vc->c->key);
+	//vc->c->key = vc->key;
+	cur_chapter = get_chapter_from_key(val_key);
+	cur_verse = get_verse_from_key(val_key);
+	/* 
+	 *  set book, chapter,verse and freeform lookup entries
+	 *  to new verse - apply_change is set to 
+	 *  false so we don't start a loop
+	 */
+	gtk_entry_set_text(GTK_ENTRY(vc->cbe_book),
+			   get_book_from_key(val_key));
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (vc->spb_chapter), cur_chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (vc->spb_verse), cur_verse);
+	gtk_entry_set_text(GTK_ENTRY(vc->freeform_lookup), val_key);
+	g_free(val_key);
+
+	apply_change = TRUE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   book_changed
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void book_changed(GtkEditable * editable, gpointer user_data)	
+ *
+ * Description
+ *   change book 
+ *
+ * Return value
+ *   void
+ */
+
+static void book_changed(GtkEditable * editable, VIEW_COMM * vc)
+{
+	if (apply_change) {
+		gchar buf[256], *val_key;
+		gchar *bookname =
+		    gtk_entry_get_text(GTK_ENTRY(vc->cbe_book));
+		sprintf(buf, "%s 1:1", bookname);
+		val_key = get_valid_key(buf);
+		display(vc, val_key);
+		strcpy(vc->c->key, val_key);
+		update_controls(vc);
+		g_free(val_key);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   chapter_button_release_event
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   gboolean chapter_button_release_event(GtkWidget * widget,
+ *			GdkEventButton * event,   gpointer user_data)	
+ *
+ * Description
+ *    change chapter 
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean chapter_button_release_event(GtkWidget * widget,
+					     GdkEventButton * event,
+					     VIEW_COMM * vc)
+{
+	if (apply_change) {
+		gchar *bookname, *val_key;
+		gchar buf[256];
+		gint chapter;
+
+		bookname = gtk_entry_get_text(GTK_ENTRY(vc->cbe_book));
+		chapter =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (vc->spb_chapter));
+		sprintf(buf, "%s %d:1", bookname, chapter);
+		val_key = get_valid_key(buf);
+		display(vc, val_key);
+		strcpy(vc->c->key, val_key);
+		update_controls(vc);
+		g_free(val_key);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   gboolean (GtkWidget * widget, 
+ *			GdkEventButton * event,  gpointer user_data)	
+ *
+ * Description
+ *    change verse
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean verse_button_release_event(GtkWidget * widget,
+					   GdkEventButton * event,
+					   VIEW_COMM * vc)
+{
+	if (apply_change) {
+		gchar *bookname, buf[256], *val_key;
+		gint chapter, verse;
+
+		bookname = gtk_entry_get_text(GTK_ENTRY(vc->cbe_book));
+		chapter =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (vc->spb_chapter));
+		verse =
+		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						     (vc->spb_verse));
+		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
+
+		val_key = get_valid_key(buf);
+		display(vc, val_key);
+		strcpy(vc->c->key, val_key);
+		update_controls(vc);
+		g_free(val_key);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   entry_key_press_event
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   gboolean entry_key_press_event(GtkWidget * widget,
+ *				GdkEventKey * event, gpointer user_data)	
+ *
+ * Description
+ *   go to verse in free form entry if user hit <enter>
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean entry_key_press_event(GtkWidget * widget,
+				      GdkEventKey * event,
+				      VIEW_COMM * vc)
+{
+	/* if <enter> key */
+	if (event->keyval == 65293 || event->keyval == 65421) {
+		gchar *buf, *val_key;
+		buf = gtk_entry_get_text(GTK_ENTRY(widget));
+		val_key = get_valid_key(buf);
+		display(vc, val_key);
+		strcpy(vc->c->key, val_key);
+		update_controls(vc);
+		g_free(val_key);
+	}
+	return TRUE;
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   sync_with_main
+ *
+ * Synopsis
+ *   #include "gui/commentary_dialog.h"
+ *
+ *   void sync_with_main(VIEW_COMM * vc)	
+ *
+ * Description
+ *   bring the the View Commentay Dialog module into sync with main window
+ *
+ * Return value
+ *   void
+ */
+
+static void sync_with_main(VIEW_COMM * vc)
+{
+	strcpy(vc->c->key, settings.currentverse);
+	update_controls(vc);
+	display(vc, vc->c->key);
+}
+
+/******************************************************************************
+ * Name
+ *   create_nav_toolbar
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   GtkWidget *create_nav_toolbar(void)	
+ *
+ * Description
+ *    create navigation toolbar and 
+ *
+ * Return value
+ *   void
+ */
+
+static GtkWidget *create_nav_toolbar(VIEW_COMM * vc)
+{
+	GtkWidget *toolbar_nav;
+	GtkWidget *cbBook;
+	GtkObject *spbChapter_adj;
+	GtkObject *spbVerse_adj;
+
+	toolbar_nav =
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
+	gtk_widget_show(toolbar_nav);
+	gtk_widget_set_usize(toolbar_nav, -2, 34);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
+				      GTK_RELIEF_NONE);
+
+	cbBook = gtk_combo_new();
+	gtk_widget_show(cbBook);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav), cbBook,
+				  NULL, NULL);
+
+	/*
+	 * get and load books of the Bible 
+	 */
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
+				      get_list(BOOKS_LIST));
+
+	vc->cbe_book = GTK_COMBO(cbBook)->entry;
+	gtk_widget_set_usize(vc->cbe_book, 100, -2);
+	gtk_widget_show(vc->cbe_book);
+
+	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
+	vc->spb_chapter =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
+	gtk_widget_show(vc->spb_chapter);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vc->spb_chapter, NULL, NULL);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
+				    (vc->spb_chapter), TRUE);
+
+	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
+	vc->spb_verse =
+	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
+	gtk_widget_show(vc->spb_verse);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vc->spb_verse, NULL, NULL);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vc->spb_verse),
+				    TRUE);
+
+	vc->freeform_lookup = gtk_entry_new();
+	gtk_widget_show(vc->freeform_lookup);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vc->freeform_lookup, NULL, NULL);
+	gtk_entry_set_text(GTK_ENTRY(vc->freeform_lookup),
+			   _("Romans 8:28"));
+
+	gtk_signal_connect(GTK_OBJECT(vc->cbe_book),
+			   "changed",
+			   GTK_SIGNAL_FUNC(book_changed), vc);
+	gtk_signal_connect(GTK_OBJECT(vc->spb_chapter),
+			   "button_release_event",
+			   GTK_SIGNAL_FUNC
+			   (chapter_button_release_event), vc);
+	gtk_signal_connect(GTK_OBJECT(vc->spb_verse),
+			   "button_release_event",
+			   GTK_SIGNAL_FUNC
+			   (verse_button_release_event), vc);
+	gtk_signal_connect(GTK_OBJECT(vc->freeform_lookup),
+			   "key_press_event",
+			   GTK_SIGNAL_FUNC(entry_key_press_event), vc);
+	return toolbar_nav;
 }
 
 
@@ -536,13 +642,7 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 {
 	GtkWidget *vbox30;
 	GtkWidget *vbox_toolbars;
-	GtkWidget *toolbar;
-	GtkWidget *vseparator;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *menubar;
-	GtkWidget *module_new;
-	GtkWidget *module_new_menu;
-	GtkAccelGroup *module_new_menu_accels;
+	GtkWidget *toolbar_nav;
 	GtkWidget *frame19;
 	GtkWidget *scrolledwindow38;
 
@@ -557,176 +657,21 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 			      FALSE);
 
 	vbox30 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox30);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vbox30",
-				 vbox30,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox30);
 
 	gtk_container_add(GTK_CONTAINER(vc->dialog), vbox30);
 
 	vbox_toolbars = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox_toolbars);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-				 "vbox_toolbars", vbox_toolbars,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox_toolbars);
 	gtk_box_pack_start(GTK_BOX(vbox30), vbox_toolbars, FALSE, FALSE,
 			   0);
 
-	toolbar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "toolbar",
-				 toolbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar);
-	gtk_box_pack_start(GTK_BOX(vbox_toolbars), toolbar, FALSE,
+	toolbar_nav = create_nav_toolbar(vc);
+	gtk_widget_show(toolbar_nav);
+	gtk_box_pack_start(GTK_BOX(vbox_toolbars), toolbar_nav, FALSE,
 			   FALSE, 0);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vc->dialog,
-				      GNOME_STOCK_PIXMAP_REFRESH);
-	vc->btn_sync =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button7"),
-				       _("Sync with main window"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(vc->btn_sync);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vc->btn_sync",
-				 vc->btn_sync,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->btn_sync);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-				 "vseparator", vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator, 7, 13);
-
-	if (!do_edit) {
-		menubar = gtk_menu_bar_new();
-		gtk_widget_ref(menubar);
-		gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-					 "menubar", menubar,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(menubar);
-		gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), menubar,
-					  NULL, NULL);
-
-		module_new =
-		    gtk_menu_item_new_with_label(_("Open New Module "));
-		gtk_widget_ref(module_new);
-		gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-					 "module_new", module_new,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(module_new);
-		gtk_container_add(GTK_CONTAINER(menubar), module_new);
-
-		module_new_menu = gtk_menu_new();
-		gtk_widget_ref(module_new_menu);
-		gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-					 "module_new_menu",
-					 module_new_menu,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_new),
-					  module_new_menu);
-		module_new_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU
-						      (module_new_menu));
-
-		add_items_to_module_menu(module_new_menu);
-	}
-
-	vc->entry_key = gtk_entry_new();
-	gtk_widget_ref(vc->entry_key);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-				 "vc->entry_key", vc->entry_key,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->entry_key);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vc->entry_key,
-				  _("Enter a verse"), NULL);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vc->dialog,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	vc->btn_goto =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button10"), _("Goto Verse"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(vc->btn_goto);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vc->btn_goto",
-				 vc->btn_goto,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->btn_goto);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vc->dialog,
-				      GNOME_STOCK_PIXMAP_DOWN);
-	vc->btn_prev =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button9"), NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(vc->btn_prev);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vc->btn_prev",
-				 vc->btn_prev,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->btn_prev);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vc->dialog,
-				      GNOME_STOCK_PIXMAP_UP);
-	vc->btn_next =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button8"), NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(vc->btn_next);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "vc->btn_next",
-				 vc->btn_next,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->btn_next);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-				 "vseparator", vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator, 7, 13);
-
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(vc->dialog,
-				      GNOME_STOCK_PIXMAP_EXIT);
-	vc->btn_close =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Close"), _("Close Dialog"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(vc->btn_close);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-				 "vc->btn_close", vc->btn_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vc->btn_close);
-
 
 	frame19 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame19);
@@ -828,13 +773,16 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 				  vc->c->html);
 		gtk_html_load_empty(GTK_HTML(vc->c->html));
 
-		gtk_signal_connect(GTK_OBJECT(vc->c->html), "link_clicked",
+		gtk_signal_connect(GTK_OBJECT(vc->c->html),
+				   "link_clicked",
 				   GTK_SIGNAL_FUNC(gui_link_clicked),
 				   vc);
 		gtk_signal_connect(GTK_OBJECT(vc->c->html), "on_url",
 				   GTK_SIGNAL_FUNC(dialog_url), vc);
-		gtk_signal_connect(GTK_OBJECT(vc->c->html), "button_press_event",
-				   GTK_SIGNAL_FUNC(button_press_event), vc);
+		gtk_signal_connect(GTK_OBJECT(vc->c->html),
+				   "button_press_event",
+				   GTK_SIGNAL_FUNC(button_press_event),
+				   vc);
 	}
 
 
@@ -844,20 +792,6 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 			   "motion_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_dialog_motion_notify_event), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->btn_sync), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_sync_clicked), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->btn_goto), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_goto_clicked), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->btn_prev), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_prev_clicked), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->btn_next), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_next_clicked), vc);
-	gtk_signal_connect(GTK_OBJECT(vc->btn_close), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_close_clicked), vc);
-
-	gtk_entry_set_text(GTK_ENTRY(vc->entry_key),
-			   settings.currentverse);
-	display(vc, settings.currentverse);
 }
 
 
@@ -876,13 +810,13 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
  * Return value
  *   void
  */
- 
+
 void gui_display_commentary_in_dialog(gchar * key)
 {
-	strcpy(settings.comm_key,key);
+	strcpy(settings.comm_key, key);
 	strcpy(cur_vc->c->key, key);
-        display(cur_vc, key);
-} 
+	display(cur_vc, key);
+}
 
 /******************************************************************************
  * Name
@@ -902,7 +836,7 @@ void gui_display_commentary_in_dialog(gchar * key)
  */
 
 void gui_open_commentary_dialog(gchar * mod_name)
-{	
+{
 	VIEW_COMM *vc;
 	GtkWidget *popupmenu;
 
@@ -912,25 +846,25 @@ void gui_open_commentary_dialog(gchar * mod_name)
 	vc->c->cgs = g_new(COMM_GLOBALS, 1);
 	vc->ec = NULL;
 	vc->dialog = NULL;
-	vc->c->mod_name = g_strdup(mod_name);	
+	vc->c->mod_name = g_strdup(mod_name);
 	vc->c->book_heading = FALSE;
 	vc->c->chapter_heading = FALSE;
 	vc->c->is_dialog = TRUE;
 	vc->c->is_percomm = is_personal_comment(vc->c->mod_name);
 	dialog_list = g_list_append(dialog_list, (VIEW_COMM *) vc);
 	create_commentary_dialog(vc, FALSE);
-	
-	if(has_cipher_tag(vc->c->mod_name)) {
+
+	if (has_cipher_tag(vc->c->mod_name)) {
 		vc->c->is_locked = module_is_locked(vc->c->mod_name);
 		vc->c->cipher_old = get_cipher_key(vc->c->mod_name);
-	}	
-	else {		
+	} else {
 		vc->c->is_locked = 0;
 		vc->c->cipher_old = NULL;
 	}
-	
-	popupmenu = gui_create_pm_comm(vc->c); 
+
+	popupmenu = gui_create_pm_comm(vc->c);
 	gnome_popup_menu_attach(popupmenu, vc->c->html, NULL);
+	sync_with_main(vc);
 	gtk_widget_show(vc->dialog);
 }
 
@@ -953,29 +887,29 @@ void gui_open_commentary_dialog(gchar * mod_name)
  */
 
 void gui_open_commentary_editor(gchar * mod_name)
-{	
-	VIEW_COMM *vc;	
-	
+{
+	VIEW_COMM *vc;
+
 	GList *tmp = g_list_first(dialog_list);
 	while (tmp != NULL) {
 		vc = (VIEW_COMM *) tmp->data;
-		if(!strcmp(vc->c->mod_name, mod_name)) {
+		if (!strcmp(vc->c->mod_name, mod_name)) {
 			gtk_entry_set_text(GTK_ENTRY(vc->entry_key),
-			   settings.currentverse);
+					   settings.currentverse);
 			display(vc, settings.currentverse);
 			gdk_window_raise(GTK_WIDGET(vc->dialog)->
-				 window);
+					 window);
 			return;
-		}		
+		}
 		tmp = g_list_next(tmp);
 	}
-	
+
 	vc = g_new(VIEW_COMM, 1);
 	vc->ec = gs_html_editor_control_data_new();
 	vc->dialog = NULL;
 	vc->c->is_dialog = TRUE;
 	vc->c->mod_name = g_strdup(mod_name);
-	
+
 	vc->ec->stylebar =
 	    load_percomm_options(vc->c->mod_name, "Style bar");
 	vc->ec->editbar =
@@ -986,15 +920,16 @@ void gui_open_commentary_editor(gchar * mod_name)
 	vc->c->chapter_heading = FALSE;
 	dialog_list = g_list_append(dialog_list, (VIEW_COMM *) vc);
 	create_commentary_dialog(vc, TRUE);
-	gtk_widget_show(vc->dialog);
-	
+	sync_with_main(vc);
+
 	if (vc->ec->stylebar)
 		gtk_widget_show(vc->ec->toolbar_style);
 	if (vc->ec->editbar)
 		gtk_widget_show(vc->ec->toolbar_edit);
+	gtk_widget_show(vc->dialog);
 	gtk_widget_set_sensitive(vc->ec->toolbars, TRUE);
 	gtk_html_set_editable(GTK_HTML(vc->ec->html), TRUE);
-	settings.percomm_dialog_exist = TRUE;	
+	settings.percomm_dialog_exist = TRUE;
 }
 
 
@@ -1043,7 +978,7 @@ void gui_setup_commentary_dialog(GList * mods)
 
 void gui_shutdown_commentary_dialog(void)
 {
-	
+
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
 		VIEW_COMM *vc = (VIEW_COMM *) dialog_list->data;

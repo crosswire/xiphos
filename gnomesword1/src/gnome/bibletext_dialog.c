@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * bibletext_dialog.c - view Bible text module in a dialog
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -541,12 +541,12 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   btn_sync_clicked
+ *   sync_with_main
  *
  * Synopsis
- *   #include "bibletext_dialog.h"
+ *   #include "gui/bibletext_dialog.h"
  *
- *   void btn_sync_clicked(GtkButton * button, gpointer user_data)	
+ *   void sync_with_main(VIEW_TEXT * vt)	
  *
  * Description
  *   set text to main window current verse
@@ -555,7 +555,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  *   void
  */
 
-static void btn_sync_clicked(GtkButton * button, VIEW_TEXT * vt)
+static void sync_with_main(VIEW_TEXT * vt)
 {
 	cur_vt = vt;
 	display(vt, settings.currentverse, TRUE);
@@ -839,7 +839,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   void
  */
 
-GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
+static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
 {
 	GtkWidget *toolbar_nav;
 	GtkWidget *cbBook;
@@ -1083,7 +1083,6 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	}
 
 	else {
-
 		vt->t->is_locked = 0;
 		vt->t->cipher_old = NULL;
 	}
@@ -1091,7 +1090,7 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	gnome_popup_menu_attach(popupmenu, vt->t->html, NULL);
 	gtk_widget_show(vt->dialog);
 	dialog_list = g_list_append(dialog_list, (VIEW_TEXT *) vt);
-	btn_sync_clicked(NULL, vt);
+	sync_with_main(vt);
 }
 
 /******************************************************************************
