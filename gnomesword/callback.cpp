@@ -504,7 +504,7 @@ on_notebook4_switch_page(GtkNotebook * notebook,
 	GtkLabel *label;	//-- pointer to tab label
 	gchar *keyText;		//-- string for verse key text
 	gchar *entryText;	//-- pointer to dict key
-	static gboolean firsttime = TRUE;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to FALSE
+	static gboolean firsttime = TRUE; //-- dont do anything if this is the first time here, but remember we were here - set firsttime to FALSE
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- set label to tab label
 		entryText =
@@ -514,7 +514,8 @@ on_notebook4_switch_page(GtkNotebook * notebook,
 		if (!strcmp(label->label, "Torrey"))
 			entryText = "";	//-- if Torrey module then set text to null else segfault?
 		keyText = entryText;	//-- put entryText into string keyText
-		changcurdictModSWORD((char *) label->label, keyText, page_num);	//-- sent to changcurdictModSWORD() function in GnomeSword.cpp
+		changcurdictModSWORD((char *) label->label, keyText, page_num);	/* sent to changcurdictModSWORD() function in
+															 GnomeSword.cpp */
 	}
 	firsttime = FALSE;	//-- no longer the first time
 }

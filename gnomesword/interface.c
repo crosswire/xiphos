@@ -53,6 +53,10 @@
 #endif				/* USE_SPELL */
 
 GtkWidget *shortcut_bar;
+/* interlinear windows */
+GtkWidget *textComp1;
+GtkWidget *textComp2;
+GtkWidget *textComp3;	
 
 #ifdef  USE_SHORTCUTBAR
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
@@ -2004,6 +2008,8 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox4);
 	gtk_container_add(GTK_CONTAINER(frame2), vbox4);
+
+
 
 	scrolledwindow15 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow15);
