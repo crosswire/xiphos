@@ -30,7 +30,11 @@
 #include <unixstr.h>
 #endif
 
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
 #include <swmgr.h>
 #include <markupfiltmgr.h>
 #include <swversion.h>
@@ -71,7 +75,7 @@ void backend_init(void)
 	g_print("Sword locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 	g_print("%s\n", "Checking for SWORD Modules");
-	
+	backend_init_language_map();
 	/*
 	 *create sword mgrs
 	 */

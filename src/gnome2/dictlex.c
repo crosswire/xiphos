@@ -188,7 +188,10 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 						NULL, page, dl_list);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
 			      page);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
+	g_print("dictkey = %s\n",settings.dictkey);
+
+	if (d)
+		gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 
 	settings.dict_last_page = page;
 }
@@ -657,10 +660,10 @@ void gui_setup_dictlex(GList * mods)
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
-		dl = g_new(DL_DATA, 1);
+		dl = g_new0(DL_DATA, 1);
 		dl->frame = NULL;
 		dl->mod_num = count;
-		dl->mod_name = modname;//g_strdup(modname);
+		dl->mod_name = modname; //g_strdup(modname);
 		dl->search_string = NULL;
 		dl->key = NULL;
 		dl->cipher_key = NULL;

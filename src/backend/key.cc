@@ -31,7 +31,11 @@
 #endif
 
 #include <swmodule.h>
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
 
 #include <versekey.h>
 #include <regex.h>

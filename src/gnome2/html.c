@@ -471,6 +471,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	else if (!strncmp(url, "version=", 7)
 		 || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
+		gchar *mod_name = NULL;
 		mybuf = strstr(url, "version=");
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
@@ -500,16 +501,20 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			modbuf = xml_get_value("modules", "bible");	//settings.MainWindowModule;
 		}
 		buf = g_strdup(newref);
+		mod_name = g_strdup(modbuf);
+
 		sprintf(settings.groupName, "%s", "Verse List");
 
 		if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
-			gui_display_dictlex_in_sidebar(modbuf, buf);
+			gui_display_dictlex_in_sidebar(mod_name, buf);
 		} else {
-			gui_display_verse_list_in_sidebar(settings.currentverse, modbuf, buf);
+			g_warning("verse=%s\nmod=%s\nref=%s",settings.currentverse,mod_name,buf);
+			gui_display_verse_list_in_sidebar(settings.currentverse, mod_name, buf);
 		}
 		g_free(buf);
+		g_free(mod_name);
 
 	}
 	/***  thml morph tag  ***/

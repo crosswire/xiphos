@@ -176,7 +176,7 @@ void gui_create_add_bookmark_menu(GtkWidget * menu,
 
 static void get_node_data(GNode * node)
 {
-	es = g_new(BOOKMARK_DATA, 1);
+	es = g_new0(BOOKMARK_DATA, 1);
 	es = (BOOKMARK_DATA *) node->data;
 }
 
@@ -1413,7 +1413,7 @@ static gboolean ctree2gnode(GtkCTree * ctree, guint depth,
 	if (!cnode || !gnode)
 		return FALSE;
 
-	es = g_new(BOOKMARK_DATA, 1);
+	es = g_new0(BOOKMARK_DATA, 1);
 	gnode->data = (BOOKMARK_DATA *) es;
 	es->is_leaf = GTK_CTREE_ROW(cnode)->is_leaf;
 	es->caption =
