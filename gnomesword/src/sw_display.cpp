@@ -630,7 +630,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	it = mainMgr->Modules.find(imodule.Name());
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* else just the keytext */
 	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
-	    (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)) {	/* check for edit mode */
+	    (settings->editnote)) {	/* check for edit mode */
 		GtkWidget *statusbar;	/* pointer to comments statusbar */
 		gint context_id2;	/* statusbar context_id ??? */
 		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* add module name and verse to edit note statusbar */

@@ -1,12 +1,22 @@
+2001-12-18 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*  added gs_html_editor.*, gs_editor_replace.* and gs_editor_toolbar.* most of this code is 
+	   from gtkhtml-1.0
+	* removed printer.*  - now using gtk_html_print_with_header_footer for printing.
+	* added html formatting to studypad and note editor using gtkhtml
+	* global options stored for each module added modops.conf to ~/.GnomeSword for storing 
+	  module options
+
+
 2001-12-05 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	* added global options menu to view text dialog
+	* added global options menu to viewtext dialog
 	
 
 2001-12-04 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* bumped to release 0.7.0
-	* uses SWORD MarkupFilterMgr
+	* now using SWORD MarkupFilterMgr
 	
 	
 2001-11-25 Moses Mcknight<m-mcknight@users.sf.net>
