@@ -85,7 +85,7 @@ GtkWidget *gui_create_about_sword(void)
 	GtkWidget *href1;
 	GtkWidget *dialog_action_area27;
 	GtkWidget *hbuttonbox6;
-	GtkWidget *button_ok;
+	GtkWidget *button;
 	const char *ver;
 	gchar version[40];
 	gchar *about =
@@ -181,12 +181,12 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox6),
 				  GTK_BUTTONBOX_END);
 
-	button_ok = gtk_button_new_from_stock ("gtk-ok");
-	gtk_widget_show(button_ok);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox6), button_ok);
-	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
+	button = gtk_button_new_from_stock (GTK_STOCK_CLOSE); //"gtk-ok");
+	gtk_widget_show(button);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox6), button);
+	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 
-	gtk_signal_connect(GTK_OBJECT(button_ok), "clicked",
+	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 			   G_CALLBACK(about_sword_ok), NULL);
 	return dialog_about_sword;
 
