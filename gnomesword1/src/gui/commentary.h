@@ -22,15 +22,6 @@
 #ifndef ___COMMENTARY_H_
 #define ___COMMENTARY_H_
 
-//#include "gui/editor.h"
-//#include "gui/mod_global_ops.h"
-
-void gui_set_comm_label(gchar * mod_name);
-void gui_set_commentary_mod_and_key(gchar * mod_name,
-				     gchar * key);
-void gui_display_commentary(gchar * key);
 GtkWidget *gui_create_commentary_pane(void);
-//void gui_popup_pm_comm(gchar * mod_name, GdkEventButton * event);
-
 
 #endif

@@ -320,8 +320,6 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 
 	if (c->dialog)
 		gui_display_commentary_in_dialog(c->key);
-	else
-		gui_display_commentary(c->key);
 }
 
 
