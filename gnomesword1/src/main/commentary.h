@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_commentary.h - support for commentary modules
+ * commentary.h - glue for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -28,37 +28,38 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-	typedef struct _COMMFindDialog COMMFindDialog;
-	struct _COMMFindDialog {
-		GnomeDialog *dialog;
-		GtkWidget *htmlwidget;
-		GtkWidget *entry;
-		GtkWidget *backward;
-		GtkWidget *case_sensitive;
-		gboolean regular;
-	};
+typedef struct _COMMFindDialog COMMFindDialog;
+struct _COMMFindDialog {
+	GnomeDialog *dialog;
+	GtkWidget *htmlwidget;
+	GtkWidget *entry;
+	GtkWidget *backward;
+	GtkWidget *case_sensitive;
+	gboolean regular;
+};
 
-	typedef struct _commdata COMM_DATA;
-	struct _commdata {
-		GtkWidget *html;
-		GtkWidget *btnCOMMSync;
-		GtkWidget *btnCOMMBack;
-		GtkWidget *btnCOMMForward;
-		GtkWidget *btnCOMMPrint;
-		GtkWidget *showtabs;
-		gchar *modName;
-		gchar *modDescription;
-		gchar *searchstring;
-		gchar key[80];
-		gint modnum;
-		gboolean has_key;
-		COMMFindDialog *find_dialog;
-	};
-	void gui_set_commentary_page_and_key(gint page_num,
-					     gchar * key);
-	GList* gui_setup_comm(SETTINGS * s);
-	void gui_shutdownCOMM(void);
-	void display_commentary(gchar * key);
+typedef struct _commdata COMM_DATA;
+struct _commdata {
+	GtkWidget *html;
+	GtkWidget *btnCOMMSync;
+	GtkWidget *btnCOMMBack;
+	GtkWidget *btnCOMMForward;
+	GtkWidget *btnCOMMPrint;
+	GtkWidget *showtabs;
+	gchar *modName;
+	gchar *modDescription;
+	gchar *searchstring;
+	gchar key[80];
+	gint modnum;
+	gboolean has_key;
+	COMMFindDialog *find_dialog;
+};
+const char* navigate_commentary(gint modnum, gint direction);
+void set_commentary_page_and_key(gint page_num,
+				     gchar * key);
+GList* setup_commentary(SETTINGS * s);
+void shutdown_commentary(void);
+void display_commentary(gchar * key);
 
 #ifdef __cplusplus
 }

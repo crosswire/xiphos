@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_commentary.c - support for commentary modules
+ * _commentary.c - gui for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -25,39 +25,33 @@
 
 #include <gnome.h>
 
-
-#include "gs_gnomesword.h"
+/*
+ * gnome
+ */
+#include "_commentary.h"
+#include "cipher_key_dialog.h"
+/*
+ * main
+ */
+#include "commentary.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
-#include "sword.h"
-#include "gs_commentary.h"
-#include "commentary.h"
-#include "shortcutbar.h"
 #include "gs_viewcomm_dlg.h"
-#include "cipher_key_dialog.h"
 
-extern SETTINGS *settings;
-extern gboolean isrunningVC;  
-COMM_DATA *cur_c;
-GList *comm_list;
-static gboolean display_change = TRUE;
 
-static void on_notebook_comm_switch_page(GtkNotebook * notebook,
-				 GtkNotebookPage * page,
-				 gint page_num, GList * cl);
-				 
-				 
-void gui_set_commentary_page_and_key(gint page_num, gchar *key)
-{
-	display_change = FALSE;
-	strcpy(settings->comm_key,key);
-	strcpy(cur_c->key,key);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_comm), page_num);
-	backend_displayinCOMM(page_num,key);
-	display_change = TRUE;
-}
+/******************************************************************************
+ * externs
+ */
+ 
+extern gboolean isrunningVC;
+extern COMM_DATA *cur_c;
+extern gboolean comm_display_change;
+/******************************************************************************
+ * global to this file only 
+ */
 
-static
+
+
 void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl)
@@ -68,14 +62,14 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	cur_c = c;
 	strcpy(settings->CommWindowModule, c->modName);
 	/*
-	   set settings->comm_key to current module key
+	 * set settings->comm_key to current module key
 	 */
 	if(c->key)
 		strcpy(settings->comm_key,c->key);
 	settings->commLastPage = page_num;
-	if(display_change) {
+	if(comm_display_change) {
 		if ((c->key[0] == '\0') && (settings->currentverse != NULL)) {
-			backend_displayinCOMM(c->modnum,
+			set_commentary_page_and_key(c->modnum,
 					      settings->currentverse);
 			strcpy(settings->comm_key,settings->currentverse);
 			strcpy(c->key, settings->comm_key);
@@ -85,28 +79,7 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 }
 
 
-static void setPageCOMM(gchar * modname, GList * comm_list,
-			SETTINGS * s)
-{
-	gint page = 0;
-	COMM_DATA *c = NULL;
 
-	comm_list = g_list_first(comm_list);
-	while (comm_list != NULL) {
-		c = (COMM_DATA *) comm_list->data;
-		if (!strcmp(c->modName, modname))
-			break;
-		++page;
-		comm_list = g_list_next(comm_list);
-	}
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebook_comm), page);
-	s->commLastPage = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
-				   s->comm_tabs);
-}
-
-/****  popup menu call backs  ****/
 
 static
 void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
@@ -141,8 +114,9 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = get_word_or_selection(c->html, FALSE);
 	if (key) {
-		display_dictlex_in_viewer(settings->DictWindowModule, key,
-				   settings);
+		display_dictlex_in_viewer(settings->DictWindowModule, 
+						key,
+						settings);
 		g_free(key);
 	}
 }
@@ -195,8 +169,7 @@ void on_unlock_key_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 	dlg = gui_create_cipher_key_dialog(c->modName);
 	gtk_widget_show(dlg);
 }
-static
-GtkWidget *create_pm(COMM_DATA * c)
+GtkWidget *gui_create_pm(COMM_DATA * c)
 {
 	GtkWidget *pm;
 	GtkAccelGroup *pm_accels;
@@ -431,28 +404,26 @@ GtkWidget *create_pm(COMM_DATA * c)
 static 
 void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
 {
-	backend_displayinCOMM(c->modnum, settings->currentverse);
+	set_commentary_page_and_key(c->modnum, settings->currentverse);
 }
 
 static 
 void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 {
-	gchar *key = backend_nav_commentary_COMM(c->modnum, 0);
+	const gchar *key = navigate_commentary(c->modnum, 0);
 	if(key) {
 		strcpy(settings->comm_key,key);
 		strcpy(cur_c->key,settings->comm_key);
-		g_free(key);
 	}
 }
 
 static 
 void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 {
-	gchar *key = backend_nav_commentary_COMM(c->modnum, 1);
+	const gchar *key = navigate_commentary(c->modnum, 1);
 	if(key) {
 		strcpy(settings->comm_key,key);
 		strcpy(cur_c->key,settings->comm_key);
-		g_free(key);
 	}
 }
 
@@ -506,9 +477,8 @@ gboolean on_button_release_event(GtkWidget * widget,
 }
 
 
-static 
-GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
-				 gint count)
+void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
+							gint count)
 {
 	GtkWidget *frameCOMM;
 	GtkWidget *vbox57;
@@ -701,79 +671,9 @@ GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 			   GTK_SIGNAL_FUNC
 			   (on_btn_print_clicked), (COMM_DATA *) c);
 
-	return frameCOMM;
 }
 
-void display_commentary(gchar * key)
-{
-	strcpy(settings->comm_key,key);
-	strcpy(cur_c->key, key);
-	backend_displayinCOMM(settings->commLastPage, key);
-}
 
-GList* gui_setup_comm(SETTINGS * s)
-{
-	GtkWidget *popupmenu;
-	GList *tmp = NULL;
-	GList *mods = NULL;
-	gchar *modname;
-	gchar *modbuf;
-	gchar *keybuf;
-	COMM_DATA *c;
-	gint count = 0;
 
-	comm_list = NULL;
 
-	mods = backend_get_list_of_mods_by_type(COMM_MODS);
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		modname = (gchar *) tmp->data;
-		c = g_new(COMM_DATA, 1);
-		c->modName = modname;
-		c->modDescription =
-		    backend_get_module_description(modname);
-		c->modnum = count;
-		c->searchstring = NULL;
-		c->key[0] = '\0';
-		c->find_dialog = NULL;		
-		c->has_key = backend_module_is_locked(c->modName);
-		createPaneCOMM(s, c, count);
-		popupmenu = create_pm(c);
-		gnome_popup_menu_attach(popupmenu, c->html, NULL);
-		backend_newDisplayCOMM(c->html, c->modName, s);
-		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
-		++count;
-		tmp = g_list_next(tmp);
-	}
-
-	gtk_signal_connect(GTK_OBJECT(s->notebook_comm),
-			   "switch_page",
-			   GTK_SIGNAL_FUNC
-			   (on_notebook_comm_switch_page), comm_list);
-
-	modbuf = g_strdup(s->CommWindowModule);
-	keybuf = g_strdup(s->currentverse);
-
-	setPageCOMM(modbuf, comm_list, s);
-
-	g_free(modbuf);
-	g_free(keybuf);
-	g_list_free(tmp);
-	return mods;
-}
-
-void gui_shutdownCOMM(void)
-{
-	comm_list = g_list_first(comm_list);
-	while (comm_list != NULL) {
-		COMM_DATA *c = (COMM_DATA *) comm_list->data;
-		if (c->find_dialog)	/* free any search dialogs created */
-			g_free(c->find_dialog);
-		g_free((COMM_DATA *) comm_list->data);
-		comm_list = g_list_next(comm_list);
-	}
-	g_list_free(comm_list);
-}
-
-/******  end of file  ******/
+//******  end of file  ******/

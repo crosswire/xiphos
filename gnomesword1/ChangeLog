@@ -5,6 +5,9 @@
 	  and call backs into gnome/main_menu.*
 	* added function headers to gnome/main_menu.* and removed
 	  calls to backend
+	* renamee main/gs_commentary.* to main/commentary.*
+	* renamed backend/commentary.* to backend/commentary_.*
+	* added gnome/_commentary.*
 	
 
 

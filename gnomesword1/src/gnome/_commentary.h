@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _bibletext.h - gui for Bible text modules
+ * _commentary.h - gui for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,27 +19,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___BIBLETEXT_H_
-#define ___BIBLETEXT_H_
+#ifndef ___COMMENTARY_H_
+#define ___COMMENTARY_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #include "gs_gnomesword.h"
 /*
  * main
  */
-#include "bibletext.h"
-	
-void gui_set_text_frame_label(void);
-void on_notebook_text_switch_page(GtkNotebook * notebook,
-				GtkNotebookPage * page,
-				gint page_num, GList * tl); 
-void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t);
-GtkWidget *gui_create_pm_text(TEXT_DATA * t);
-	
-#ifdef __cplusplus
-}
-#endif
-#endif				/* ___BIBLETEXT_H_ */
+#include "commentary.h"
+
+void on_notebook_comm_switch_page(GtkNotebook * notebook,
+				 GtkNotebookPage * page,
+				 gint page_num, GList * cl);
+GtkWidget *gui_create_pm(COMM_DATA * c);
+void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
+						gint count);
+							
+
+#endif	/* ___COMMENTARY_H_ */
