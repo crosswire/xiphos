@@ -91,14 +91,14 @@ SWFilter *plaintohtml;
 
 SETTINGS *settings;
 SETTINGS myset;	
-extern GtkWidget    *MainFrm,	//-- main form widget 					
-			        *shortcut_bar;
-GtkWidget           *NEtext,  //-- note edit widget
-					*bookmark_mnu; //-- popup menu for bookmarks	
+extern GtkWidget	*MainFrm,	//-- main form widget 					
+			*shortcut_bar;
+GtkWidget           	*NEtext,  //-- note edit widget
+			*bookmark_mnu; //-- popup menu for bookmarks	
 							
-extern EShortcutModel *shortcut_model;
+//extern EShortcutModel *shortcut_model;
 extern gchar *shortcut_types[];
-gchar groupitems[5][50][256];
+
 
 gchar *current_filename= NULL;	//-- filename for open file in study pad window 
 gchar current_verse[80]="Romans 8:28";	//-- current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window
@@ -149,9 +149,11 @@ extern GtkWidget *pmComments;
 gint    groupnum1 = 0,
         groupnum2 = 0,
         groupnum3 = 0,
+        groupnum4 = 0,
         greekpage = 0,
         hebrewpage = 0;
-gint    sbsize = 120;
+//gint    sbsize = 120;
+
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- apps main form
@@ -198,7 +200,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		itemNum2 = 0,//-- for numbering shortbar items
 		itemNum3 = 0,//-- for numbering shortbar items
 		i, //-- counter
-		j; //-- counter
+		j, //-- counter
+		itemp = 0;
 		
 	GList   *biblemods = NULL,
 	        *commentarymods = NULL,
@@ -277,22 +280,25 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	
         //--------------------------------------------------------------- create shortcut bar groups
 	if(settings->showtextgroup){
-	    add_test_group((EShortcutBar *)shortcut_bar, "Bible Text");
-	    groupnum1 = 0;
+	    	add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
+	    	groupnum1 = itemp;
+	    	++itemp;
 	}
-	else groupnum1 = -1;
 	if(settings->showcomgroup){
-	    add_test_group((EShortcutBar *)shortcut_bar, "Commentaries");
-	    if(groupnum1 == 0) groupnum2 = 1;
-	    else groupnum2 = 0;
-	}else groupnum2 = -1;
-	if(settings->showdictgroup){
-	    add_test_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
-	    if(groupnum2 == 1) groupnum3 = 2;
-	    if(groupnum2 == 0) groupnum3 = 1;
-	    if(groupnum2 == -1 && groupnum1 == 0) groupnum3 = 1;
-	    if(groupnum2 == -1 && groupnum1 == -1) groupnum3 = 0;
+	    	add_sb_group((EShortcutBar *)shortcut_bar, "Commentaries");
+	    	groupnum2 = itemp;
+	    	++itemp;
 	}
+	if(settings->showdictgroup){
+		add_sb_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
+	    	groupnum3 = itemp;
+	    	++itemp;
+	}
+	if(settings->showhistorygroup){
+		add_sb_group((EShortcutBar *)shortcut_bar, "History");
+	    	groupnum4 = itemp;
+	}
+		
         //--------------------------------------------------------- store text widgets for spell checker
 	notes =  lookup_widget(mainform,"textComments");
 	studypad = lookup_widget(mainform,"text3");
@@ -334,15 +340,14 @@ initSword(GtkWidget *mainform,  //-- apps main form
 				curMod->Disp(HTMLchapDisplay);
 			}else			
 				curMod->Disp(chapDisplay);
-			//g_free(sourceformat);
+			
 		  	//-----------   add choice to shortcut bar
 		  	if(settings->showtextgroup){
-		    		sprintf(groupitems[groupnum1][itemNum++], "%s", curMod->Name());
 		    		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum1, -1,
 						      shortcut_types[0],
 						      curMod->Name());
-		  	}//gtk_menu_shell_append		  			
+		  	}		  			
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){ //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
@@ -385,10 +390,9 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			}else curcomMod->Disp(comDisplay);
 			//g_free(sourceformat);
 			if(settings->showcomgroup){
-			    sprintf(groupitems[groupnum2][itemNum2++], "%s", curcomMod->Name());
 			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum2, -1,
-						      shortcut_types[0],
+						      shortcut_types[1],
 						      curcomMod->Name());
 			}
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook	
@@ -415,10 +419,9 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",curdictMod->Name());
 			curdictMod->Disp(dictDisplay);
 			if(settings->showcomgroup){			
-			        sprintf(groupitems[groupnum3][itemNum3++], "%s", curdictMod->Name());
 			        e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum3, -1,
-						      shortcut_types[0],
+						      shortcut_types[2],
 						      curdictMod->Name());
 			}
 		}
@@ -602,7 +605,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
         changeVerse(settings->currentverse); //---------------------------------------------- set Text
         //----------------------- show hide shortcut bar - set to options setting
         if(settings->showshortcutbar){
-                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), sbsize);
+                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1);
         }
@@ -613,7 +616,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	gtk_widget_hide(lookup_widget(MainFrm,"btnPrint"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpell"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpellNotes"));
-
+//-- free list we used to build menus
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
@@ -941,6 +944,11 @@ addHistoryItem(void)  //-- add an item to the history menu
 	sprintf(ref,"%s %d:%d",bookname, iChap,iVerse ); //-- store book, chapter and verse in ref string
 	additemtognomemenu(MainFrm, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); //-- add item to history menu
 	++historyitems;
+	
+	e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+						      groupnum4, -1,
+						      shortcut_types[3],
+						      ref);
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1279,9 +1287,16 @@ setautosave(gboolean choice)    //-- someone clicked auto save personal  comment
 void
 clearhistory(void)    //-- someone clicked clear history
 {
+        gint i;
+
         removemenuitems(MainFrm, "_History/<Separator>", historyitems+1);
-        historyitems = 0;
         addseparator(MainFrm, "_History/C_lear");
+        for(i = historyitems-1; i >= 0; i--) {
+        	e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+						  groupnum4,
+						  i);
+        }
+        historyitems = 0;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1439,7 +1454,6 @@ getversenumber(GtkWidget *text)
 {
 	gchar   *buf, //-- buffer for storing the verse number
 	        cbuf; //-- char for checking for numbers (isdigit)
-	        //tmpbuf[256];
 	gint	startindex, //-- first digit in verse number
 	        endindex,   //-- last digit in verse number
 	        index;      //-- current position in text widget
@@ -1464,7 +1478,6 @@ getversenumber(GtkWidget *text)
 	 ++startindex; //-- last char (cbuf) was not a number
 	 ++startindex; //-- last char (cbuf) was not a number
 	 buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
-	 //cout << buf << '\n';
 	 return atoi(buf); //-- send it back as an integer
 }
 
@@ -1474,7 +1487,6 @@ gint getdictnumber (GtkWidget *text)
 {
         gchar   *buf, //-- buffer for storing the verse number
                 cbuf; //-- char for checking for numbers (isdigit)
-                //tmpbuf[256];
         gint    startindex, //-- first digit in verse number
                 endindex,   //-- last digit in verse number
                 index;      //-- current position in text widget
@@ -1509,28 +1521,32 @@ sbchangeModSword(gint group_num, gint item_num)
 {
         GtkWidget       *notebook;
         gint            num = 0;
+        gchar		*type[1],
+        		*ref[1];
 
-        if(groupnum3 == 2) num = group_num;
-        else if( groupnum3 == 1)num = group_num + 1;
-        else if( groupnum3 == 0)num = group_num + 2;
-
-        switch(num){
-                case 0: changecurModSWORD(groupitems[0][item_num]);
-                        break;
-                case 1: if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
-		                notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
-		                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-                        }
-                        break;
-                case 2: if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
-		                notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
-		                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-                        }	
-                        break;
-                case 3:
-                        break;
-        }
-
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
+						  group_num,
+						  item_num,
+						  type,
+						  ref); 	
+	if(!strcmp(type[0],"bible:")) {
+		changecurModSWORD(ref[0]);
+	}
+	if(!strcmp(type[0],"commentary:")) {
+		if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
+			notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
+    		}
+    	}
+	if(!strcmp(type[0],"dict/lex:")) {
+		if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
+			notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
+  		}
+	}
+	if(!strcmp(type[0],"history:")) {
+		changeVerse(ref[0]);
+	}
 }
 
 //---------------------------------------------------------------------------------------------
@@ -1553,7 +1569,7 @@ applyoptions(bool showshortcut, bool showcomtabs, bool showdicttabs, bool showte
         settings->showdictgroup = showdictgroup;
 
         if(settings->showshortcutbar){
-               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), sbsize);
+               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
         } else {
                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1); 
         }
@@ -1571,13 +1587,14 @@ applyoptions(bool showshortcut, bool showcomtabs, bool showdicttabs, bool showte
 
 //---------------------------------------------------------------------------------------------
 void
-add_test_group (EShortcutBar *shortcut_bar,gchar *group_name)
+add_sb_group (EShortcutBar *shortcut_bar,gchar *group_name)
 {
 	gint group_num;
 	
 	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
         e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
 }
+
 //---------------------------------------------------------------------------------------------
 void
 lookupStrongsSWORD(gint theNumber) //-- theNumber - strongs number was double clicked selected and
