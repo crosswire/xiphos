@@ -1523,7 +1523,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 							    0), _("Dict/Lex"));
  	
 	
-	/****************************************************** GBS html editor/display */
+	/********************************************************** GBS html display */
 	
 	s->notebookGBS = gtk_notebook_new ();
 	gtk_widget_ref (s->notebookGBS);
