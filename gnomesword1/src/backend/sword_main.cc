@@ -113,18 +113,18 @@ void BackEnd::init_SWORD(int gsType) {
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {
 				const char *direction = display_mod->getConfigEntry("Direction");
 				if(direction && !strcmp(direction,"RtoL" ))
-					display_mod->Disp(RTOLDisplay);
+					display_mod->setDisplay(RTOLDisplay);
 				else
-					display_mod->Disp(textDisplay);
+					display_mod->setDisplay(textDisplay);
 			}
 			if (!strcmp(display_mod->Type(), COMM_MODS)) {
-				display_mod->Disp(commDisplay);
+				display_mod->setDisplay(commDisplay);
 			}
 			if (!strcmp(display_mod->Type(), DICT_MODS)) {
-				display_mod->Disp(dictDisplay);
+				display_mod->setDisplay(dictDisplay);
 			}
 			if (!strcmp(display_mod->Type(), BOOK_MODS)) {
-				display_mod->Disp(bookDisplay);
+				display_mod->setDisplay(bookDisplay);
 			}			
 		}
 		init_language_map();
@@ -133,11 +133,11 @@ void BackEnd::init_SWORD(int gsType) {
 			display_mod = (*it).second;
 			if (!strcmp(display_mod->Type(), TEXT_MODS)) {const char *direction = display_mod->getConfigEntry("Direction");
 				if(direction && !strcmp(direction,"RtoL" ))
-					display_mod->Disp(dialogRTOLDisplay);
+					display_mod->setDisplay(dialogRTOLDisplay);
 				else
-					display_mod->Disp(chapDisplay);
+					display_mod->setDisplay(chapDisplay);
 			} else {
-				display_mod->Disp(entryDisplay);
+				display_mod->setDisplay(entryDisplay);
 			}
 		}	
 	}
@@ -619,10 +619,14 @@ char *BackEnd::module_name_from_description(char *description) {
 }
 
 
+int BackEnd::get_key_testament(const char * key) {
+	sword::VerseKey ikey( key );
+	return ikey.Testament();	
+}
 
 int BackEnd::module_has_testament(const char * module_name,  int testament) {
 	ModMap::iterator it;
-	SWModule *module;
+	//SWModule *module;
 	int ot = 0;
 	int nt = 0;
 	

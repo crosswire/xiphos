@@ -1,4 +1,12 @@
-2005-01-28  terry <terry470@users.sf.net>
+2005-01-31  terry <tbiggs@users.sf.net>
+
+	* old testament modules will not try to display a new testament ref
+	* new testament modules will not try to display an old testament ref
+	* added the last verse of the previous chapter and the first verse of
+	  the next chapter to the chapter display (Bible text pane)
+
+
+2005-01-28  terry <tbiggs@users.sf.net>
 
 	* made changes to gui:
 	  moved viewer below text pane
@@ -22,7 +30,7 @@
 	* added gnomesword-manual.xml + manual updates
 
 
-2004-09-26  terry <terry470@users.sf.net>
+2004-09-26  terry <tbiggs@users.sf.net>
 
 	* gnomesword can be build using gtkmozembed for the Bible, commentary 
 	  and dictionary panes.
@@ -31,7 +39,7 @@
 	* added main/embed.cc and main/embed.h for gtkmozembed.
 	
 
-2004-08-19  terry <terry470@users.sf.net>
+2004-08-19  terry <tbiggs@users.sf.net>
 
 	* removed files - backend/gs_thmlhtml.*, backend/gs_osishtmlhref.*,
 	  backend/gs_gbfhtmlhref.* and backend/gs_markupfiltmgr.*
@@ -42,19 +50,19 @@
 	  but always visible)
 	
 
-2004-08-12  terry <terry470@users.sf.net>
+2004-08-12  terry <tbiggs@users.sf.net>
 
 	* bumped to 2.1.2
 	* made gs cvs dependant on sword-1.5.8 (sword-cvs)
 	
 
-2004-08-10  terry <terry470@users.sf.net>
+2004-08-10  terry <tbiggs@users.sf.net>
 
 	* added shadows (borders) to most of the scroll windows can be turned 
 	  off by setting settings.shadow_type=GTK_SHADOW_NONE (0) in 
 	  main_window.c create_mainwindow(). Default=GTK_SHADOW_IN (1).
 
-2004-08-07  terry <terry470@users.sf.net>
+2004-08-07  terry <tbiggs@users.sf.net>
 
 	* added doc patch from Jeff Ratliff - covers the sidebar search.
 	
