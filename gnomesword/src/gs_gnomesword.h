@@ -33,7 +33,6 @@
 extern "C" {
 #endif
 
-//#include "sw_gnomesword.h"
 
 #define MAIN_TEXT_WINDOW 0 
 #define INTERLINEAR_WINDOW 1
@@ -113,9 +112,9 @@ struct _settings {
 	        studypadfilename[255],   /* name of file in studypad when we closed */
 		studypaddir[255],	    /* directory for studypad files */
 		groupName[50], /* ??? */
-		searchText[256]; /* ??? */	
+		searchText[256], /* ??? */	
 		
-	gchar /* fonts, font colors and font sizes */
+	/* fonts, font colors and font sizes */
 	        bible_text_color[15], /* color for text */
 	        bible_bg_color[15],  /* color for background */
 	        currentverse_color[15],  /* color for current verse */	
@@ -144,8 +143,9 @@ struct _settings {
 		notebook3page,	//-- notebook 3 page number
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
-		whichwindow;      	/* which of the main form html windows is active */
+		whichwindow,      	/* which of the main form html windows is active */
 						/* 0=text, 1= comm, 2=dict */
+		iquickmarks;	/* number of items in bookmark menu */
 						
 	gboolean   
 		usedefault, /* use default settings in gnomesword or those used for last session */
@@ -196,8 +196,7 @@ struct _settings {
 
 /*** function prototypes ***/
 
-void initGnomeSword(GtkWidget *app, 
-		SETTINGS *settings, 
+void initGnomeSword(SETTINGS *settings, 
 		GList *biblemods, 
 		GList *commentarymods , 
 		GList *dictionarymods, 

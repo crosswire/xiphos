@@ -56,7 +56,7 @@ extern SETTINGS *settings;
 /******************************************************************************
  * load gnomesword configuration - using sword SWConfig
  ******************************************************************************/
-gboolean loadconfig(void)
+gboolean loadconfig(SETTINGS *s)
 {
 	gchar buf[255];
 
