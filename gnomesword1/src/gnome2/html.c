@@ -519,8 +519,6 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(newref);
 		mod_name = g_strdup(modbuf);
 
-		sprintf(settings.groupName, "%s", "Verse List");
-
 		if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */

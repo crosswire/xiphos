@@ -1449,17 +1449,90 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(dialog_vbox24), hbox22, TRUE, TRUE,
 			   0);
 
-/**********************************************************************/
+
+/*************************************************** start sidebar */
+
+	scrolledwindow_listview = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow_listview);
+	gtk_box_pack_start(GTK_BOX(hbox22), scrolledwindow_listview,
+			 FALSE, TRUE, 0);
+
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow_listview),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_ALWAYS);
+
+	store = gtk_list_store_new(3,
+				   G_TYPE_STRING,
+				   GDK_TYPE_PIXBUF, G_TYPE_INT);
+	listview = gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
+
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(listview),
+					  FALSE);
+	gtk_widget_show(listview);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow_listview),
+			  listview);
+	gtk_widget_set_usize(listview, 110, -2);
+	add_columns(listview);
+	selection =
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(listview)));
+	
+	/* add icons to sidebar listview */
+	icon_pixbuf = NULL;
+	icon_pixbuf =
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+				     "/gnome-fontsel.xpm", &error);
+	if (!icon_pixbuf) {
+		fprintf(stderr, "pixmap file error: %s\n",
+			error->message);
+		g_error_free(error);
+		error = NULL;
+	}
+	add_row("Font Colors", icon_pixbuf, store, 0);
+
+	icon_pixbuf = NULL;
+	icon_pixbuf =
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+				     "/GnomeSword.png", &error);
+	if (!icon_pixbuf) {
+		fprintf(stderr, "pixmap file error: %s\n",
+			error->message);
+		g_error_free(error);
+		error = NULL;
+	}
+	add_row("Misc Settings", icon_pixbuf, store, 1);
+
+	icon_pixbuf = NULL;
+	icon_pixbuf =
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+				     "/GnomeSword.png", &error);
+	if (!icon_pixbuf) {
+		fprintf(stderr, "pixmap file error: %s\n",
+			error->message);
+		g_error_free(error);
+		error = NULL;
+	}
+	add_row("Layout", icon_pixbuf, store, 2);
+
+	icon_pixbuf = NULL;
+	icon_pixbuf =
+	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.xpm",
+				     &error);
+	if (!icon_pixbuf) {
+		fprintf(stderr, "pixmap file error: %s\n",
+			error->message);
+		g_error_free(error);
+		error = NULL;
+	}
+	add_row("Sword Modules", icon_pixbuf, store, 3);
+/***************************************************** end sidebar */
 
 
-
-/**********************************************************************/
-
-
-
+/************************************************** start notebook */
 	notebook7 = gtk_notebook_new();
 	gtk_widget_show(notebook7);
-	gtk_box_pack_end(GTK_BOX(hbox22), notebook7, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox22), notebook7, TRUE, TRUE, 0);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(notebook7), FALSE);
 
 	scrolledwindow56 = gtk_scrolled_window_new(NULL, NULL);
@@ -1655,7 +1728,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook7), 0),
 				   label98);
-
+	/* end font color page */
+	
+	/* start misc page */
 	scrolledwindow55 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow55);
 	gtk_container_add(GTK_CONTAINER(notebook7), scrolledwindow55);
@@ -1948,7 +2023,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook7), 1),
 				   label123);
-
+	/* end misc page */
+	
+	/* start layout page */
 	scrolledwindow54 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow54);
 	gtk_container_add(GTK_CONTAINER(notebook7), scrolledwindow54);
@@ -2053,6 +2130,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   (GTK_NOTEBOOK(notebook7), 2),
 				   label190);
 
+	/* end layout page */
+	
+	/* start module page */
 
 	scrolledwindow52 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow52);
@@ -2340,6 +2420,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				   (GTK_NOTEBOOK(notebook7), 3),
 				   label155);
 
+	/* end module page */
+	
+	/*  */
+	
 	dialog_action_area24 = GTK_DIALOG(dialog_prefs)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog_prefs),
 			    "dialog_action_area24",
@@ -2357,7 +2441,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_button_box_set_spacing(GTK_BUTTON_BOX(hbuttonbox3), 10);
 
 	button.ok = gtk_button_new_from_stock("gtk-ok");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_OK); */
 	gtk_widget_show(button.ok);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button.ok);
 	GTK_WIDGET_SET_FLAGS(button.ok, GTK_CAN_DEFAULT);
@@ -2372,36 +2455,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_add(GTK_CONTAINER(hbuttonbox3), button_cancel);
 	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
 
-/*********************************************** start sidebar */
-
-	scrolledwindow_listview = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_listview);
-	gtk_box_pack_end(GTK_BOX(hbox22), scrolledwindow_listview,
-			 FALSE, TRUE, 0);
-
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_listview),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-
-	store = gtk_list_store_new(3,
-				   G_TYPE_STRING,
-				   GDK_TYPE_PIXBUF, G_TYPE_INT);
-	listview = gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
-
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(listview),
-					  FALSE);
-	gtk_widget_show(listview);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow_listview),
-			  listview);
-	//gtk_box_pack_end(GTK_BOX(hbox22), listview, FALSE, TRUE, 0);
-	gtk_widget_set_usize(listview, 160, -2);
-	add_columns(listview);
-	selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(listview)));
-/************************************************** end sidebar */
-
 
 /**************************************************** start settings */
 	updatehtml = FALSE;
@@ -2409,47 +2462,39 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	updatelayout = FALSE;
 
 	/** add module list to combo boxs **/
-	if (biblelist)
+	if (biblelist) {
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo17),
 					      biblelist);
-	if (biblelist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo18),
 					      biblelist);
-	if (biblelist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo19),
 					      biblelist);
-	if (biblelist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo20),
 					      biblelist);
-	if (biblelist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo21),
 					      biblelist);
-	if (biblelist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo22),
 					      biblelist);
+	}
 	if (commlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo23),
 					      commlist);
-	if (dictlist)
+	if (dictlist) {
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo24),
 					      dictlist);
-	if (dictlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO
 					      (comboDefaultDict),
 					      dictlist);
-	if (dictlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO
 					      (comboGreekViewer),
 					      dictlist);
-	if (dictlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo26),
 					      dictlist);
-	if (dictlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(comboHebViewer),
 					      dictlist);
-	if (dictlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo27),
 					      dictlist);
+	}
 	if (percomlist)
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo25),
 					      percomlist);
@@ -2770,54 +2815,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_object_set_data(GTK_OBJECT(dialog_prefs), "tooltips",
 			    tooltips);
 
-
-	icon_pixbuf = NULL;
-	icon_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/gnome-fontsel.xpm", &error);
-	if (!icon_pixbuf) {
-		fprintf(stderr, "pixmap file error: %s\n",
-			error->message);
-		g_error_free(error);
-		error = NULL;
-	}
-	add_row("Font Colors", icon_pixbuf, store, 0);
-
-	icon_pixbuf = NULL;
-	icon_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/GnomeSword.png", &error);
-	if (!icon_pixbuf) {
-		fprintf(stderr, "pixmap file error: %s\n",
-			error->message);
-		g_error_free(error);
-		error = NULL;
-	}
-	add_row("Misc Settings", icon_pixbuf, store, 1);
-
-	icon_pixbuf = NULL;
-	icon_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/GnomeSword.png", &error);
-	if (!icon_pixbuf) {
-		fprintf(stderr, "pixmap file error: %s\n",
-			error->message);
-		g_error_free(error);
-		error = NULL;
-	}
-	add_row("Layout", icon_pixbuf, store, 2);
-
-	icon_pixbuf = NULL;
-	icon_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.xpm",
-				     &error);
-	if (!icon_pixbuf) {
-		fprintf(stderr, "pixmap file error: %s\n",
-			error->message);
-		g_error_free(error);
-		error = NULL;
-	}
-	add_row("Sword Modules", icon_pixbuf, store, 3);
 
 	/** set color pickers to current colors **/
 	setcolorpickersColor(color_picker.text_background,

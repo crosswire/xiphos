@@ -58,7 +58,7 @@ COMM_DATA *cur_c;
  */
 static GList *comm_list;
 static gboolean comm_display_change = TRUE;
-
+static gint comm_last_page;
 
 static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
@@ -158,7 +158,7 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 		on_notebook_comm_switch_page(GTK_NOTEBOOK
 					     (widgets.notebook_comm),
 					     NULL, page, comm_list);
-	settings.comm_last_page = page;
+	comm_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
 }
@@ -218,8 +218,7 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				  gint page_num, GList * cl)
 {
 	COMM_DATA *c, *c_old;
-	c_old = (COMM_DATA *) g_list_nth_data(cl,
-					      settings.comm_last_page);
+	c_old = (COMM_DATA *) g_list_nth_data(cl, comm_last_page);
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
 
@@ -241,7 +240,7 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	 */
 	gui_set_search_label();
 
-	settings.comm_last_page = page_num;
+	comm_last_page = page_num;
 	/*
 	 * set settings.comm_key to current module key
 	 */

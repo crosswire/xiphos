@@ -136,71 +136,7 @@ void gui_set_search_label_sidebar(void)
 }
 
 
-/******************************************************************************
- * Name
- *    fill_search_results_clist
- *
- * Synopsis
- *   #include "shortcutbar_search.h"
- *
- *   void fill_search_results_clist(GList *glist, SEARCH_OPT *so) 
- *
- * Description
- *   display a list of keys found during search
- *
- * Return value
- *   void
- */
 
-static void fill_search_results_clist(int finds)
-{
-/*	gchar *utf8str, buf[256];
-	gchar *tmpbuf;
-	const gchar *key_buf = NULL;
-	gint i = 0;
-	gchar *buf0 = N_("Search Results");
-	gchar *buf1 = N_("matches");
-	gchar *buf2 = N_("Occurrences of");
-	gchar *buf3 = N_("found in");
-
-
-
-	gtk_clist_clear(GTK_CLIST(sidebar.clist));
-	set_results_position((char) 1);	
-	while ((key_buf = get_next_result_key()) != NULL) {
-		tmpbuf = (gchar *) key_buf;
-		gtk_clist_insert(GTK_CLIST(sidebar.clist), i++, &tmpbuf);
-
-	}
-
-	strcpy(settings.groupName, buf0);
-	sprintf(buf, "%d %s", finds, buf1);
-	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 3);
-	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
-					3);
-	
-
-	gui_begin_html(widgets.html_search_report, TRUE);
-	sprintf(buf, "<body><center>%d %s <br><font color=\"%s\">"
-		"<b>\"%s\"</b></font><br>%s <font color=\"%s\">"
-		"<b>[%s]</b></font></center></body>",
-		finds,
-		buf2,
-		settings.found_color,
-		settings.searchText,
-		buf3,
-		settings.bible_verse_num_color, settings.sb_search_mod);
-	gui_display_html(widgets.html_search_report, buf,
-			 strlen(buf));
-	gui_end_html(widgets.html_search_report);
-
-	
-	gtk_progress_bar_update(GTK_PROGRESS_BAR(progressbar_search),
-				0.0);
-	gtk_clist_select_row(GTK_CLIST(sidebar.clist), 0, 0);
-	*/
-}
 
 /******************************************************************************
  * Name
@@ -245,10 +181,8 @@ static void fill_search_results_list(int finds)
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 					   tmpbuf, -1);
-		//sblist = g_list_append(sblist,(gchar *)tmpbuf);
 	}
-
-	strcpy(settings.groupName, buf0);
+	
 	sprintf(buf, "%d %s", finds, buf1);
 	gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), buf);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 3);
@@ -313,8 +247,7 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 	else if (GTK_TOGGLE_BUTTON(radiobutton_search_comm)->active) {
 		sprintf(search_label, "%s %s", buf,
 			settings.CommWindowModule);
-		strcpy(settings.sb_search_mod,
-		       settings.CommWindowModule);
+		strcpy(settings.sb_search_mod,settings.CommWindowModule);
 	} 	
 	
 	search_module = settings.sb_search_mod;

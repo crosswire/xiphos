@@ -86,7 +86,19 @@ if test "x$spell_check" = xyes; then
     AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
     PSPELL_LIBS="-L$pspell_dir -lpspell-compat -laspell-compat -lltdl"
     AC_SUBST(PSPELL_LIBS) 
-    echo "found"
+    echo "found pspell-compat-config"
+  else
+    AC_FIND_FILE(pspell-config, $pspell_dirs, pspell_dir) 
+    if test -r $pspell_dir/pspell-config; then 
+      HAVE_PSPELL=yes 
+      have_speller="yes"
+      speller="pspell"
+      AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
+      AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+      PSPELL_LIBS="-L$pspell_dir -lpspell -laspell -lltdl"
+      AC_SUBST(PSPELL_LIBS) 
+      echo "found pspell-config"
+    fi
   fi
 fi
 
