@@ -1,8 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS =   help macros intl po src
+SUBDIRS = m4    help po src
 
-EXTRA_DIST = gnomesword.desktop
+EXTRA_DIST = config.rpath  gnomesword.desktop
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
 gnomesworddoc_DATA = \
@@ -48,3 +48,5 @@ dist-hook:
           done \
         fi
 
+
+ACLOCAL_AMFLAGS = -I m4

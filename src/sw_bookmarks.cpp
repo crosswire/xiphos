@@ -44,7 +44,7 @@
 #include "sw_bookmarks.h"
 #include "gs_bookmarks.h"
 
-using std::string;
+//using std::string;
 using std::map;
 using std::list;
 using namespace sword;
@@ -60,7 +60,7 @@ extern GdkPixmap *pixmap3;
 extern GdkBitmap *mask1;
 extern GdkBitmap *mask2;
 extern GdkBitmap *mask3;
-list <string> bmfiles;
+list <SWBuf> bmfiles;
 GtkCTreeNode *personal_node;
 
 
@@ -207,7 +207,7 @@ void loadbookmarks(GtkWidget *ctree_widget)
 /******************************************************************************
  * 
  ******************************************************************************/
-void AddSectionToConf(SWConfig *config, string section, GtkCTreeNode *node, int index)
+void AddSectionToConf(SWConfig *config, SWBuf section, GtkCTreeNode *node, int index)
 {
 	GtkCTreeNode *work;
 	ConfigEntMap sit;
@@ -246,7 +246,7 @@ void savebookmarks(GtkWidget *ctree_widget)
 	SWConfig *bmconf;
 	ConfigEntMap emap;
 	SectionMap::iterator sit;
-	list <string>::iterator it;
+	list <SWBuf>::iterator it;
 	
 	sprintf(persfile,"%spersonal.conf",swbmDir);
 	
@@ -335,7 +335,3 @@ createbookmarksBM(gchar *dir)
 	
 	bmInfo.Save(); 	
 }
-
-
-
-

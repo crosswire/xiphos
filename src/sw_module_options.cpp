@@ -37,7 +37,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-#include <rwphtml.h>
+//#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -89,5 +89,3 @@ bool save_module_options(gchar *modName, gchar *option, gchar *value)
 	module_options.Save();
 	return true;
 }
-
-

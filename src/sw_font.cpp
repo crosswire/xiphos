@@ -37,7 +37,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-#include <rwphtml.h>
+//#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -87,5 +87,3 @@ void save_module_font_info(MOD_FONT *mf)
 	
 	module_options.Save();
 }
-
-
