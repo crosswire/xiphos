@@ -1189,23 +1189,18 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				       (scrolledwindow_treeview),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	/*gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW
-					    (scrolledwindow_treeview),
-					    GTK_SHADOW_IN);*/
-
-
-	model = create_model();	/*gtk_tree_store_new(2,
-				   G_TYPE_STRING,
-				   G_TYPE_INT); */
+				       
+	model = create_model();
 	treeview = gtk_tree_view_new_with_model(model);
-
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview),
 					  FALSE);
 	gtk_widget_show(treeview);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_treeview),
 			  treeview);
 	gtk_widget_set_size_request(treeview, 130, -1);
-	add_columns(treeview);
+	add_columns(treeview);	
+	gtk_tree_view_expand_all(GTK_TREE_VIEW(treeview));
+	
 	selection =
 	    G_OBJECT(gtk_tree_view_get_selection
 		     (GTK_TREE_VIEW(treeview)));
@@ -1276,35 +1271,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(notebook7), vbox);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
-/*
-	header =
-	    g_strdup_printf
-	    ("<span  size=\"xx-large\" weight=\"bold\">%s</span>",
-	     _("Your"));
-	label = gtk_label_new(NULL);
-	gtk_widget_show(label);
-	gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
-	gtk_label_set_markup(GTK_LABEL(label), header);
-	g_free(header);
-*/	
+
 	image = gtk_image_new_from_file (PACKAGE_PIXMAPS_DIR "/logo.png");
 	gtk_widget_show(image);
 	gtk_box_pack_start(GTK_BOX(vbox), image, TRUE, TRUE, 0);
-
-/*	header =
-	    g_strdup_printf
-	    ("<span  size=\"xx-large\" weight=\"bold\">%s</span>",
-	     _("Preferences"));
-	label = gtk_label_new(NULL);
-	gtk_widget_show(label);
-	gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
-	gtk_label_set_use_markup(GTK_LABEL(label), TRUE);
-	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
-	gtk_label_set_markup(GTK_LABEL(label), header);
-	g_free(header);
-*/
 
 	label = gtk_label_new("Cover Page");	/* should never be seen by user */
 	gtk_widget_show(label);
