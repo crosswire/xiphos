@@ -39,6 +39,15 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+
+#ifdef USE_GTKHTML1
+#include <gtkhtml/htmlenums.h>
+#include <gtkhtml/htmlsettings.h>
+#include <gtkhtml/htmlcolor.h>
+#include <gtkhtml/htmlcolorset.h>
+#include <gtkhtml/htmllinktext.h>
+#endif
+
 #include "gui/editor.h"
 #include "gui/toolbar_style.h"
 #include "gui/editor_menu.h"
@@ -376,7 +385,11 @@ static void on_copy_activate(GtkMenuItem * menuitem,
 static void on_paste_activate(GtkMenuItem * menuitem,
 			      GSHTMLEditorControlData * ecd)
 {
+#ifdef USE_GTKHTML1
+	gtk_html_paste(ecd->html,FALSE);
+#else
 	gtk_html_paste(ecd->html);
+#endif
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
 }
@@ -495,16 +508,47 @@ static void on_replace_activate(GtkMenuItem * menuitem,
 static void set_link_to_module(gchar * linkref, gchar * linkmod,
 			       GSHTMLEditorControlData * ecd)
 {
-	gchar buf[256], *target = "";
-	HTMLEngine *e = ecd->html->engine;
+	const gchar *url;
+	const gchar *text;
+	gchar *target;
+	gchar *url_copy;
+	gchar buf[256];
+	HTMLEngine *e;
+	HTMLObject *new_link;
 
+	e = ecd->html->engine;
+	
 	if (strlen(linkmod))
 		sprintf(buf, "version=%s passage=%s", linkmod, linkref);
 	else
 		sprintf(buf, "passage=%s", linkref);
+
+#ifdef USE_GTKHTML1
+	url = buf;
+	text = linkref;
+	if (url && text && *url && *text) {
+		target = strchr(url, '#');
+		url_copy =
+		    target ? g_strndup(url,
+				       target - url) : g_strdup(url);
+		new_link =
+		    html_link_text_new(text,
+				       GTK_HTML_FONT_STYLE_DEFAULT,
+				       html_colorset_get_color(e->
+							settings->
+							color_set,
+							HTMLLinkColor),
+				       url_copy, target);
+		html_engine_paste_object(e, new_link,
+					 g_utf8_strlen(text, -1));
+		g_free(url_copy);
+	}
+#else
+	target = "";
 	html_engine_selection_push(e);
 	html_engine_insert_link(e, buf, target);
 	html_engine_selection_pop(e);
+#endif
 }
 
 /******************************************************************************

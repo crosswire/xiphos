@@ -51,7 +51,7 @@
  *   void
  */
 
-static  MOD_FONT * get_font(gchar *mod_name)
+static MOD_FONT *get_font(gchar * mod_name)
 {
 	MOD_FONT *mf;
 
@@ -88,54 +88,74 @@ static  MOD_FONT * get_font(gchar *mod_name)
  *   void
  */
 
-static void set_global_options(TEXT_GLOBALS *tgs)
+static void set_global_options(TEXT_GLOBALS * tgs)
 {
 	if (tgs->strongs)
 		set_text_module_global_option("Strong's Numbers",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_strongs)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_strongs)->
+					      active);
 	if (tgs->morphs)
 		set_text_module_global_option("Morphological Tags",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_morphs)->
-						active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_morphs)->
+					      active);
 	if (tgs->gbffootnotes || tgs->thmlfootnotes)
 		set_text_module_global_option("Footnotes",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_footnotes)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_footnotes)->
+					      active);
 	if (tgs->greekaccents)
 		set_text_module_global_option("Greek Accents",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_accents)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_accents)->
+					      active);
 	if (tgs->lemmas)
 		set_text_module_global_option("Lemmas",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_lemmas)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_lemmas)->
+					      active);
 	if (tgs->scripturerefs)
-		set_text_module_global_option("Scripture Cross-references",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_scripturerefs)->
-						active);
+		set_text_module_global_option
+		    ("Scripture Cross-references",
+		     GTK_TOGGLE_BUTTON(tgs->t_btn_scripturerefs)->
+		     active);
 	if (tgs->hebrewpoints)
 		set_text_module_global_option("Hebrew Vowel Points",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_points)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_points)->
+					      active);
 	if (tgs->hebrewcant)
 		set_text_module_global_option("Hebrew Cantillation",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_cant)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_cant)->
+					      active);
 	if (tgs->headings)
 		set_text_module_global_option("Headings",
-				GTK_TOGGLE_BUTTON(tgs->t_btn_headings)->
-					       active);
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_headings)->
+					      active);
+	if (tgs->words_in_red)
+		set_text_module_global_option("Red letter words",
+					      GTK_TOGGLE_BUTTON(tgs->
+								t_btn_redwords)->
+					      active);
 	if (tgs->variants) {
-		if(GTK_RADIO_MENU_ITEM(tgs->t_btn_primary)->check_menu_item.active)
-			set_text_global_option("Textual Variants", "Primary Reading");
-		else if(GTK_RADIO_MENU_ITEM(tgs->t_btn_secondary)->check_menu_item.active)
-			set_text_global_option("Textual Variants", "Secondary Reading");
-		else if(GTK_RADIO_MENU_ITEM(tgs->t_btn_all)->check_menu_item.active)
-			set_text_global_option("Textual Variants", "All Readings");
+		if (GTK_RADIO_MENU_ITEM(tgs->t_btn_primary)->
+		    check_menu_item.active)
+			set_text_global_option("Textual Variants",
+					       "Primary Reading");
+		else if (GTK_RADIO_MENU_ITEM(tgs->t_btn_secondary)->
+			 check_menu_item.active)
+			set_text_global_option("Textual Variants",
+					       "Secondary Reading");
+		else if (GTK_RADIO_MENU_ITEM(tgs->t_btn_all)->
+			 check_menu_item.active)
+			set_text_global_option("Textual Variants",
+					       "All Readings");
 	}
 }
-	
+
 /******************************************************************************
  * Name
  *   
@@ -155,15 +175,15 @@ static void set_global_options(TEXT_GLOBALS *tgs)
 static void strip_words_in_red(GString * str)
 {
 	gchar *tmpbuf, *buf, color_tag[26];
-	gint pos, len, len1, len2;	
-	
+	gint pos, len, len1, len2;
+
 	strcpy(color_tag, "<font color=\"#FF0000\">");
 	/* point buf to found verse */
 	buf = str->str;
 
 	len = strlen(color_tag);
 	len1 = strlen(buf);
-	while((tmpbuf = strstr(buf, color_tag)) != NULL) {
+	while ((tmpbuf = strstr(buf, color_tag)) != NULL) {
 		len2 = strlen(tmpbuf);
 		pos = len1 - len2;
 		/* remove color tag */
@@ -171,7 +191,7 @@ static void strip_words_in_red(GString * str)
 	}
 }
 
-	
+
 /******************************************************************************
  * Name
  *   mark_search_words
@@ -240,17 +260,17 @@ static void mark_search_words(GString * str)
 				    (gchar *) list->data)) != NULL) {
 				/* set len3 to length of tmpbuf 
 				   (tmpbuf points to first occurance of 
-					    search word in verse) */
+				   search word in verse) */
 				len3 = strlen(tmpbuf);
 				//-- set len4 to diff between len1 and len3
 				len4 = len1 - len3;
 				/* add end tags first 
-				  (position to add tag to is len4 + len2) */
+				   (position to add tag to is len4 + len2) */
 				str =
 				    g_string_insert(str, (len4 + len2),
 						    closestr);
 				/* then add start tags 
-					(position to add tag to is len4) */
+				   (position to add tag to is len4) */
 				str =
 				    g_string_insert(str, len4, openstr);
 			}
@@ -300,42 +320,40 @@ static void mark_search_words(GString * str)
 void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key)
 {
-	gchar
-	    tmpBuf[500],
-	    *use_font, *use_font_size = NULL, *utf8str;
-
-
+	gchar tmpBuf[500];
+	gchar *use_font;
+	gchar *use_font_size = NULL;
+	gchar *utf8str;
 	gint utf8len;
-
-	GString * str;
-
-	gboolean use_gtkhtml_font = FALSE, was_editable = FALSE;
+	GString *str;
+	gboolean use_gtkhtml_font = FALSE;
+	gboolean was_editable = FALSE;
 	MOD_FONT *mf;
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream;
-	
+
 	mf = get_font(mod_name);
-		
+
 	use_font = g_strdup(mf->old_font);
 	//g_warning("use_font = %s",use_font);
-	if(use_font) {
-		if(!strncmp(use_font,"none",4))
+	if (use_font) {
+		if (!strncmp(use_font, "none", 4))
 			use_gtkhtml_font = TRUE;
 		else
 			use_gtkhtml_font = FALSE;
-		
-	}
-	else {
+
+	} else {
 		use_gtkhtml_font = TRUE;
-		
+
 	}
 
-	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
+	if ((mf->old_font_size[0] == '-')
+	    || (mf->old_font_size[0] == '+'))
 		use_font_size = g_strdup(mf->old_font_size);
 	else
 		use_font_size = g_strdup("+1");
-	
+
 	/* setup gtkhtml widget */
 	html = GTK_HTML(html_widget);
 	was_editable = gtk_html_get_editable(html);
@@ -358,33 +376,34 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	}
 
 	/* show key in html widget  */
-	if(show_key) {
+	if (show_key) {
 		str = g_string_new("");
 		if ((settings.displaySearchResults)) {
 			g_string_sprintf(str,
-				"<A HREF=\"version=%s passage=%s\">"
-				"<FONT COLOR=\"%s\">[%s] %s </font></A>",
+					 "<A HREF=\"version=%s passage=%s\">"
+					 "<FONT COLOR=\"%s\">[%s] %s </font></A>",
 					 mod_name,
 					 key,
 					 settings.bible_verse_num_color,
 					 mod_name, key);
 		}
-	
+
 		else {
 			g_string_sprintf(str,
-				"<A HREF=\"[%s] %s\">"
-				"<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
+					 "<A HREF=\"[%s] %s\">"
+					 "<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
 					 mod_name,
-					 get_module_description(mod_name),
+					 get_module_description
+					 (mod_name),
 					 settings.bible_verse_num_color,
 					 mod_name, key);
-		}	
-	
+		}
+
 		utf8str = e_utf8_from_gtk_string(html_widget, str->str);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
 		}
 		g_string_free(str, 0);
 	}
@@ -453,151 +472,149 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
  */
 
 void chapter_display(GtkWidget * html_widget, gchar * mod_name,
-		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals)
+		     TEXT_GLOBALS * tgs, gchar * key,
+		     gboolean use_globals)
 {
 	gchar
-	    *utf8str,
+	    * utf8str,
 	    *bgColor,
 	    *textColor,
 	    buf[500],
-	    *tmpkey, 
-	    tmpbuf[256],
-	    *use_font, *use_font_size, *text_str;
-	gchar 	*paragraphMark;	
+	    *tmpkey, tmpbuf[256], *use_font, *use_font_size, *text_str;
+	gchar *paragraphMark;
 
 	gboolean was_editable = FALSE;
 	gboolean newparagraph = FALSE;
 	gboolean use_gtkhtml_font = FALSE;
-	
-	GString * str;
+	GString *str;
 	gint utf8len, cur_verse, cur_chapter, i = 1;
 	const char *cur_book;
 	MOD_FONT *mf;
-	
+
 	GtkHTML *html = GTK_HTML(html_widget);
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTMLStream *htmlstream;
-	
+
 	was_editable = gtk_html_get_editable(html);
 	tmpkey = get_valid_key(key);
 
-	paragraphMark = "&para;"; 
-	
+	paragraphMark = "&para;";
+
 	bgColor = "#f1f1f1";
 	cur_verse = get_verse_from_key(tmpkey);
 	cur_chapter = get_chapter_from_key(tmpkey);
 	cur_book = get_book_from_key(tmpkey);
-	
+
 	str = g_string_new("");
-	
+
 	mf = get_font(mod_name);
-		
+
 	use_font = g_strdup(mf->old_font);
 	//g_warning("use_font = %s",use_font);
-	if(use_font) {
-		if(!strncmp(use_font,"none",4))
+	if (use_font) {
+		if (!strncmp(use_font, "none", 4))
 			use_gtkhtml_font = TRUE;
 		else
 			use_gtkhtml_font = FALSE;
-		
-	}
-	else {
+
+	} else {
 		use_gtkhtml_font = TRUE;
-		
+
 	}
 
-	if((mf->old_font_size[0] == '-') || (mf->old_font_size[0] == '+'))
+	if ((mf->old_font_size[0] == '-')
+	    || (mf->old_font_size[0] == '+'))
 		use_font_size = g_strdup(mf->old_font_size);
 	else
 		use_font_size = g_strdup("+1");
-	
+
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
 
 	/*
 	 * set global options for current module 
 	 */
-	if(use_globals)
-		set_global_options(tgs);	
-	
+	if (use_globals)
+		set_global_options(tgs);
+
 	sprintf(buf,
-		HTML_START"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings.bible_bg_color, settings.bible_text_color, settings.link_color);
+		HTML_START
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings.bible_bg_color, settings.bible_text_color,
+		settings.link_color);
 	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-	utf8len = strlen(utf8str);     
+	utf8len = strlen(utf8str);
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
 			       utf8len);
 	}
-	
-	
-	for (i = 1; ; i++) {	
-		sprintf(tmpbuf,"%s %d:%d",cur_book,cur_chapter,i);
+
+	for (i = 1;; i++) {
+		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		g_free(tmpkey);
 		tmpkey = get_valid_key(tmpbuf);
-		if(cur_chapter != get_chapter_from_key(tmpkey))
+		if (cur_chapter != get_chapter_from_key(tmpkey))
 			break;
-				
-		if(i == cur_verse)
+
+		if (i == cur_verse)
 			textColor = settings.currentverse_color;
-		else 
+		else
 			textColor = settings.bible_text_color;
-			
-					
-		 
-						
-		sprintf(buf,			
+
+		sprintf(buf,
 			"&nbsp; <A HREF=\"*%s\" NAME=\"%d\">"
-			"<font size=\"%s\" color=\"%s\">%d</font></A> ", 
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
 			tmpkey,
-			i,	
-			settings.verse_num_font_size,			 
-			settings.bible_verse_num_color,
-			i);	
-		
+			i,
+			settings.verse_num_font_size,
+			settings.bible_verse_num_color, i);
+
 		utf8str = e_utf8_from_gtk_string(html_widget, buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
 		}
-			
-		if (use_gtkhtml_font){
-			sprintf(tmpbuf, "<font size=\"%s\" color=\"%s\">", use_font_size, textColor);
+
+		if (use_gtkhtml_font) {
+			sprintf(tmpbuf,
+				"<font size=\"%s\" color=\"%s\">",
+				use_font_size, textColor);
+		} else {
+			sprintf(tmpbuf,
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				use_font, use_font_size, textColor);
 		}
-		else {
-			sprintf(tmpbuf, "<font face=\"%s\" size=\"%s\" color=\"%s\">",
-				use_font, use_font_size, textColor);			
-		}
-	
+
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
-			g_string_free(str,TRUE);
+			g_string_free(str, TRUE);
 			str = g_string_new(utf8str);
 		}
-		
-		if(newparagraph && settings.versestyle) {
+
+		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			strcpy(tmpbuf, paragraphMark);
-			utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
-			utf8len = strlen(utf8str);		
+			utf8str =
+			    e_utf8_from_gtk_string(html_widget, tmpbuf);
+			utf8len = strlen(utf8str);
 			if (utf8len) {
-				str = g_string_append (str,utf8str);
-			}	
-		} 
-		
+				str = g_string_append(str, utf8str);
+			}
+		}
+
 		/* get module text and prepare to display it */
-		text_str = get_bibletext_text(mod_name, tmpkey);		
-		str = g_string_append (str,text_str);
-		if(settings.displaySearchResults)
-			mark_search_words(str);	
-		if(settings.strip_words_in_red)
-			strip_words_in_red(str);
+		text_str = get_bibletext_text(mod_name, tmpkey);
+		str = g_string_append(str, text_str);
+		if (settings.displaySearchResults)
+			mark_search_words(str);
 		utf8str = str->str;
 		free(text_str);
-		
+
 		if (settings.versestyle) {
-			if ((strstr(utf8str , "<BR>") == NULL ) && (strstr(utf8str, "<!P>") == NULL))  {
+			if ((strstr(utf8str, "<BR>") == NULL)
+			    && (strstr(utf8str, "<!P>") == NULL)) {
 				sprintf(tmpbuf, " %s", "</font><br>");
 			} else {
 				sprintf(tmpbuf, " %s", "</font>");
@@ -607,22 +624,23 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			} else {
 				newparagraph = TRUE;
 			}
-		} 
-		
+		}
+
 		else {
 			if (strstr(utf8str, "<!P>") == NULL)
 				sprintf(tmpbuf, " %s", "</font>");
-			else 
+			else
 				sprintf(tmpbuf, " %s", "</font><p>");
-		}			
+		}
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
-		utf8len = strlen(utf8str);		
-		if (utf8len) {	
-			str = g_string_append (str,utf8str);
-			gtk_html_write(html, htmlstream, str->str, str->len);
-		}	
-		
-	}	
+		utf8len = strlen(utf8str);
+		if (utf8len) {
+			str = g_string_append(str, utf8str);
+			gtk_html_write(html, htmlstream, str->str,
+				       str->len);
+		}
+
+	}
 
 	sprintf(buf, "%s", "</body></html>");
 	utf8str = e_utf8_from_gtk_string(html_widget, buf);
@@ -661,103 +679,108 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
  *   void
  */
 
-void gui_module_is_locked_display(GtkWidget * html_widget, 
-				gchar * mod_name, gchar * cipher_key)
-{	
+void gui_module_is_locked_display(GtkWidget * html_widget,
+				  gchar * mod_name, gchar * cipher_key)
+{
 	GtkHTML *html = GTK_HTML(html_widget);
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTMLStream *htmlstream;
-	gchar	buf[500],
-		*utf8str;
+	gchar buf[500], *utf8str;
 	gint utf8len;
-	
-	
+
+
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
-	
-	sprintf(buf,"%s",
-		HTML_START"<body><br>");
+
+	sprintf(buf, "%s", HTML_START "<body><br>");
 	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-	utf8len = strlen(utf8str);     
+	utf8len = strlen(utf8str);
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
 			       utf8len);
 	}
-	
-	if(!cipher_key){
-		sprintf(buf,"%s %s %s %s %s",
+
+	if (!cipher_key) {
+		sprintf(buf, "%s %s %s %s %s",
 			_("The"),
 			"<b>",
-			mod_name,
-			"</b>",
-			_("module is locked."));
-		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-		utf8len = strlen(utf8str);     
+			mod_name, "</b>", _("module is locked."));
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
+					   buf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
 		}
 	}
-	
+
 	else {
-		sprintf(buf,"%s %s %s %s %s",
+		sprintf(buf, "%s %s %s %s %s",
 			_("The"),
 			"<b>",
 			mod_name,
-			"</b>",
-			_("module has been unlocked."));
-		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-		utf8len = strlen(utf8str);     
+			"</b>", _("module has been unlocked."));
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
+					   buf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
 		}
 	}
-	
-	
-	
-	
-	if(!cipher_key){
-		sprintf(buf,"%s %s %s%s%s %s %s %s",
+
+
+
+
+	if (!cipher_key) {
+		sprintf(buf, "%s %s %s%s%s %s %s %s",
 			"<br><br>",
 			_("If you have the cipher key you can"),
 			"<a href=\"U",
-			mod_name,		
+			mod_name,
 			"\">",
 			_("click here"),
-			" </a>",
-			_("to unlock the module"));
-		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-		utf8len = strlen(utf8str); 
+			" </a>", _("to unlock the module"));
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
+					   buf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-			       utf8len);
-		}  
-	
-		sprintf(buf,"%s%s",
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
+		}
+
+		sprintf(buf, "%s%s",
 			"<br><br>",
-			_("You will have to restart GnomeSword after you unlock it."));
-		
-		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-		utf8len = strlen(utf8str);     
+			_
+			("You will have to restart GnomeSword after you unlock it."));
+
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
+					   buf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
 		}
 	}
-	
+
 	else {
-		sprintf(buf,"%s%s" ,
+		sprintf(buf, "%s%s",
 			"<br><br>",
 			_("You need to restart GnomeSword to view it"));
-		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
-		utf8len = strlen(utf8str);     
+		utf8str =
+		    e_utf8_from_gtk_string(widgets.html_interlinear,
+					   buf);
+		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
-				       utf8len);
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
 		}
 	}
-		
+
 
 	strcpy(buf, "</body></html>");
 	utf8str = e_utf8_from_gtk_string(html_widget, buf);
@@ -768,7 +791,7 @@ void gui_module_is_locked_display(GtkWidget * html_widget,
 	}
 
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-	
+
 }
 
 /******   end of file   ******/

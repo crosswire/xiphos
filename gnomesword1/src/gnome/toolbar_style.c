@@ -918,7 +918,7 @@ static void paragraph_alignment_changed_cb (GtkHTML *widget,
 static void editor_toolbar_indent_cb (GtkWidget *widget,
 					GSHTMLEditorControlData *cd)
 {
-	gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), +1);
+	//gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), +1);
 }
 
 /******************************************************************************
@@ -941,7 +941,7 @@ static void editor_toolbar_indent_cb (GtkWidget *widget,
 static void editor_toolbar_unindent_cb (GtkWidget *widget,
 					GSHTMLEditorControlData *cd)
 {
-	gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), -1);
+	//gtk_html_modify_indent_by_delta (GTK_HTML (cd->html), -1);
 }
 
 /******************************************************************************
