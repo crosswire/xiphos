@@ -63,6 +63,8 @@ void setup_dictlex(SETTINGS * s, GList *mods);
 void shutdown_dictlex(void);
 void set_dictionary_page_and_key(gint page_num,
 				     gchar * key);
+void display_dictlex(gchar * key);
+
 #ifdef __cplusplus
 }
 #endif

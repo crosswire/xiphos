@@ -229,7 +229,6 @@ void setup_dictlex(SETTINGS * s, GList *mods)
 	g_free(keybuf);
 	g_list_free(tmp);
 	s->dict_last_page = 0;
-	return mods;
 }
 
 /******************************************************************************
@@ -261,4 +260,26 @@ void shutdown_dictlex(void)
 	}
 	g_list_free(dl_list);
 
+}
+
+/******************************************************************************
+ * Name
+ *   display_dictlex
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void display_dictlex(gchar * key)	
+ *
+ * Description
+ *    display new key in current dictionary
+ *
+ * Return value
+ *   void
+ */
+ 
+void display_dictlex(gchar * key)
+{
+	strcpy(settings.dictkey,key);
+	backend_display_dictlex(settings.dict_last_page, key);
 }

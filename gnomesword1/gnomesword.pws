@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=417
-1=1
-2=14
-3=925
-4=503
-5=24
-6=126
-7=41
-8=186
+0=51
+1=121
+2=40
+3=41
+4=44
+5=123
+6=56
+7=197
+8=39
 9=34
 10=28
 11=23
@@ -35,36 +35,39 @@ ShowLocals=true
 11=
 12=
 
-[breakpoints]
-0=2,,1,1651469415,0,,sword.cpp,187,8,1,backend_init_sword,,1020958906,
-1=4,,1,1953720684,0,,sword.cpp,175,9,1,backend_init_sword,,1020958906,
-
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/main/bibletext.c
-1=/home/terry/Projects/gnomesword1/src/gnome/_bibletext.c
+0=/home/terry/Projects/gnomesword1/src/backend/sword.h
+1=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
+2=/home/terry/Projects/gnomesword1/src/backend/bibletext_view_.cpp
+3=/home/terry/Projects/gnomesword1/src/gnome/_bibletext_view.c
+4=/home/terry/Projects/gnomesword1/src/main/lists.h
+5=/home/terry/Projects/gnomesword1/src/main/lists.c
+6=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
+7=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+8=/home/terry/Projects/gnomesword1/src/main/gs_gui.c
 
 [replace_text]
-0=app
-1=s->epaned
-2=toolbar
-3=s->app
-4=pm
-5=t->frame
-6=add_module_key
-7=MainWindowModule
+0=c->frame
+1=toolbar
+2=c->toolbar
+3=app
+4=s->epaned
+5=s->app
+6=pm
+7=t->frame
 
 [find_text]
-0=dialog_destroy
-1=find_dialog_destroy
-2=backend_newDisplayGBS
-3=swmgrBook
-4=gbs_list
-5=show_tabs_gbs
-6=pixmap3
-7=pixmap1
+0=cbeB
+1=updatecontrols
+2=update
+3=gsI_isrunning
+4=listitem
+5=tmp
+6=glist
+7=textList
 
 [executer args]
-1=newconfigs
+0=newconfigs
 
 [find_in_files]
 0=commLastPage

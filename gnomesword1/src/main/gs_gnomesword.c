@@ -25,34 +25,36 @@
 
 #include <gnome.h>
 #include <ctype.h>
+#include <time.h>
 #include <gal/widgets/e-unicode.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
-#include "gs_gnomesword.h"
-#include "gs_interlinear.h"
-#include "gs_history.h"
-#include "gs_gui_cb.h"
-#include "support.h"
-#include "gs_info_box.h"
-#include "gs_html.h"
-#include "gs_menu.h"
-#include "gs_shortcutbar.h"
 
 /*
- * gnome
+ * frontend
  */
 #include "main_menu.h"
 #include "about_modules.h"
+
 /*
  * main
  */ 
+#include "gs_gnomesword.h"
 #include "settings.h"
+#include "lists.h"
 #include "bibletext.h"
 #include "commentary.h"
 #include "percomm.h"
 #include "dictlex.h"
 #include "gbs.h"
+#include "gs_interlinear.h"
+#include "gs_history.h"
+#include "support.h"
+#include "gs_info_box.h"
+#include "gs_html.h"
+#include "gs_menu.h"
+#include "gs_shortcutbar.h"
  
 /*
  * backend
@@ -100,7 +102,6 @@ static gchar *update_nav_controls(gchar * key);
 void init_gnomesword(SETTINGS * s)
 {	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
-	
 
 	/*
 	 *  setup shortcut bar 
@@ -109,33 +110,33 @@ void init_gnomesword(SETTINGS * s)
 	/*
 	 *  create popup menus -- gs_menu.c 
 	 */
-	createpopupmenus(s, mod_lists->text_descriptions, mod_lists->options);
+	createpopupmenus(s, get_list(TEXT_DESC_LIST),get_list(OPTIONS_LIST));
 	/*
 	 *  setup Bible text gui 
 	 */
 	if(havebible)
-		setup_text(s,mod_lists->biblemods);
+		setup_text(s,get_list(TEXT_LIST));
 
 	/*
 	 *  setup commentary gui support 
 	 */
 	if(havecomm)
-		setup_commentary(s,mod_lists->commentarymods);
+		setup_commentary(s,get_list(COMM_LIST));
 	/*
 	 *  setup personal comments gui support 
 	 */
 	if(havepercomm)
-		setup_percomm(s,mod_lists->percommods);
+		setup_percomm(s,get_list(PERCOMM_LIST));
 	/*
 	 *  setup general book gui support 
 	 */
 	if(havebook)
-		setup_gbs(s,mod_lists->bookmods);
+		setup_gbs(s,get_list(GBS_LIST));
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
 	if(havedict)
-		setup_dictlex(s,mod_lists->dictionarymods);
+		setup_dictlex(s,get_list(DICT_LIST));
 
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
@@ -143,10 +144,10 @@ void init_gnomesword(SETTINGS * s)
 	 *  add modules to about modules menus -- gs_menu.c 
 	 */
 	addmodstomenus(s,
-		       mod_lists->biblemods,
-		       mod_lists->commentarymods, 
-		       mod_lists->dictionarymods, 
-		       mod_lists->bookmods);
+		       get_list(TEXT_LIST),
+		       get_list(COMM_LIST), 
+		       get_list(DICT_LIST), 
+		       get_list(GBS_LIST));
 		
 	s->versestyle_item =
 	    additemtooptionmenu(s->app, _("_Settings/"),
@@ -167,7 +168,7 @@ void init_gnomesword(SETTINGS * s)
 	 * FIXME: maybe we need to move the devotional ? 
 	 */
 	if (s->showdevotional) {
-		backend_display_devotional(s);
+		display_devotional(s);
 	}
 }
 
@@ -195,19 +196,8 @@ void gnomesword_shutdown(SETTINGS * s)
 		}
 	}
 	
-	/* free lists */
-	g_list_free(mod_lists->biblemods);
-	g_list_free(mod_lists->commentarymods);
-	g_list_free(mod_lists->dictionarymods);
-	g_list_free(mod_lists->bookmods);
-	g_list_free(mod_lists->percommods);
-	g_list_free(mod_lists->text_descriptions);
-	g_list_free(mod_lists->dict_descriptions);
-	g_list_free(mod_lists->comm_descriptions);
-	g_list_free(mod_lists->book_descriptions);
-	g_list_free(mod_lists->options);
+	shutdown_list();
 	g_list_free(s->settingslist);
-	g_list_free(s->book_items);
 	
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
@@ -870,5 +860,39 @@ const char *get_sword_version(void)
 
 void display_devotional(SETTINGS * s)
 {
-	backend_display_devotional(s);
+	gchar buf[80];
+	time_t curtime;
+	struct tm *loctime;
+
+	/* 
+	 * Get the current time. 
+	 */
+	curtime = time(NULL);
+
+	/* 
+	 * Convert it to local time representation. 
+	 */
+	loctime = localtime(&curtime);
+
+	/* 
+	 * Print it out in a nice format. 
+	 */
+	strftime(buf, 80, "%m.%d", loctime);
+
+	display_dictlex_in_viewer(s->devotionalmod, buf, s);
+	set_sb_for_daily_devotion(s);
 }
+/*** the changes are already made we just need to show them ***/
+void display_new_font_color_and_size(SETTINGS * s)
+{
+	display_text(settings.currentverse);
+	display_commentary(s->currentverse);
+	display_dictlex(s->dictkey);
+	update_interlinear_page(&settings);
+}
+
+gchar *get_module_description(gchar * mod_name)
+{
+	return backend_get_module_description(mod_name);
+}
+

@@ -30,7 +30,6 @@
 #include "gs_html.h"
 #include "sword.h"
 #include "shortcutbar.h"
-#include "gs_viewtext_dlg.h"
 #include "cipher_key_dialog.h"
 #include "module_options.h"
 #include "settings.h"
