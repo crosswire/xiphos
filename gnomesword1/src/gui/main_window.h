@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_gui.c - main window gui 
+ * main_window.h - main window gui 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GS_GUI_H_
-#define __GS_GUI_H_ 
+#ifndef __MAIN_WINDOW_H_
+#define __MAIN_WINDOW_H_
 
 #ifdef __cplusplus
 extern "C" {

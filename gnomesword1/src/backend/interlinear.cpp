@@ -35,7 +35,7 @@
 #include <string.h>
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_interlinear.h"
+//#include "main/gs_interlinear.h"
 #include "backend/sword.h"
 #include "backend/interlinear.h"
 
@@ -120,7 +120,7 @@ char *backend_get_interlinear_module_text(char *mod_name, char *key)
 		mod->SetKey(key);
 	else
 		return NULL;
-	return g_strdup((gchar *) mod->RenderText());
+	return strdup((char *) mod->RenderText());
 }
 
 /******************************************************************************

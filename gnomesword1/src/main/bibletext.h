@@ -35,7 +35,10 @@ int check_for_global_option(char * mod_name, char * option);
 int save_module_options(char * mod_name, char * option, 
 				    int choice);
 int load_module_options(char * modName, char * option);
-
+	
+char *get_interlinear_module_text(char * mod_name, char * tmpkey);
+void set_interlinear_global_option(char * option, char * yesno);
+	
 #ifdef __cplusplus
 }
 #endif

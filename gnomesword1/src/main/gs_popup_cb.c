@@ -37,12 +37,12 @@
 #include "gui/_editor.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
+#include "gui/interlinear.h"
 
 #include "main/gs_popup_cb.h"
 #include "main/gs_html.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_bookmarks.h"
-#include "main/gs_interlinear.h"
 #include "main/support.h"
 #include "main/settings.h"
 
@@ -170,9 +170,9 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear1Module, "%s", modName);
 	//change_verse(current_verse);
 	if (settings.dockedInt)
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	else
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 }
 
 
@@ -191,9 +191,9 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear2Module, "%s", modName);
 	//change_verse(current_verse);
 	if (settings.dockedInt)
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	else
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 }
 
 /*******************************************************************************
@@ -211,9 +211,9 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear3Module, "%s", modName);
 	//change_verse(current_verse);
 	if (settings.dockedInt)
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	else
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 }
 
 /*******************************************************************************
@@ -231,9 +231,9 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear4Module, "%s", modName);
 	//change_verse(settings.currentverse);
 	if (settings.dockedInt)
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	else
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 }
 
 /*******************************************************************************
@@ -251,9 +251,9 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	sprintf(settings.Interlinear5Module, "%s", modName);
 	//change_verse(settings.currentverse);
 	if (settings.dockedInt)
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	else
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 }
 
 
@@ -261,7 +261,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 void on_int_global_options_activate(GtkMenuItem * menuitem,
 				    gpointer user_data)
 {
-	set_interlinear_module_global_options((gchar *) user_data,
+	gui_set_interlinear_module_global_options((gchar *) user_data,
 					      GTK_CHECK_MENU_ITEM
 					      (menuitem)->active);
 }

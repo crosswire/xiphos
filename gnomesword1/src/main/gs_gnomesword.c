@@ -30,6 +30,7 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
+#include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/about_modules.h"
 #include "gui/shortcutbar_main.h"
@@ -45,6 +46,7 @@
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/percomm.h"
+#include "gui/interlinear.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -53,13 +55,11 @@
 #include "main/commentary.h"
 #include "main/percomm.h"
 #include "main/dictlex.h"
-#include "main/gs_interlinear.h"
 #include "main/gs_history.h"
 #include "main/settings.h"
 #include "main/support.h"
 #include "main/gs_html.h"
 #include "main/gs_menu.h"
-#include "main/gs_gui.h"
  
 #include "backend/search_.h"
 #include "backend/sword.h"
@@ -819,7 +819,7 @@ void change_verse(gchar * key)
 	 * change interlinear verses 
 	 */
 	if (settings.dockedInt) {
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	}
 
 	/* 
@@ -898,7 +898,7 @@ void display_new_font_color_and_size(void)
 	gui_display_text(settings.currentverse);
 	gui_display_commentary(settings.currentverse);
 	gui_display_dictlex(settings.dictkey);
-	update_interlinear_page();
+	gui_update_interlinear_page();
 }
 
 gchar *get_module_description(gchar * mod_name)

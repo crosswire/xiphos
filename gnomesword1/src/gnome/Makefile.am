@@ -28,41 +28,27 @@ libgui_a_SOURCES =  \
     about_sword.h \
     bibletext.c \
     bibletext_dialog.c \
-    bibletext_dialog.h \
     cipher_key_dialog.c \
-    cipher_key_dialog.h \
     commentary_dialog.c \
     commentary.c \
-    commentary_dialog.h \
     commentary_find.c \
-    commentary_find.h \
     dictlex.c \
     dictlex_dialog.c \
-    dictlex_dialog.h \
     editor_menu.c \
-    editor_menu.h \
     editor_replace.c \
-    editor_replace.h \
     editor_search.c \
-    editor_search.h \
     editor_toolbar.c \
-    editor_toolbar.h \
     fileselection.c \
-    fileselection.h \
     gbs.c \
     gbs_find.c \
-    gbs_find.h \
     gtkhtml_display.c \
     gui.c \
-    gui.h \
     info_box.c \
-    info_box.h \
+    interlinear.c \
     interlinear_dialog.c \
-    interlinear_dialog.h \
     link_dialog.c \
-    link_dialog.h \
+    main_window.c \
     main_menu.c \
-    main_menu.h \
     percomm.c \
     preferences_dialog.c \
     preferences_dialog.h \
