@@ -53,54 +53,6 @@
 
 static void create_menu(GdkEventButton * event);
 
-
-/******************************************************************************
- * Name
- *  gui_set_comm_frame_label
- *
- * Synopsis
- *   #include "gui/commentary.h"
- *
- *   void gui_set_comm_frame_label(void)	
- *
- * Description
- *   sets frame label to module name or null
- *
- * Return value
- *   void
- */
-
-void gui_set_comm_label(gchar * mod_name)
-{
-	/*
-	 * set label to module name
-	 */
-	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-}
-
-/******************************************************************************
- * Name
- *  update_text_global_ops
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *
- *   void update_text_global_ops(gchar * option, gboolean choice)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void gui_update_comm_global_ops(gchar * option, gboolean choice)
-{
-	/*g_warning("gui_update_text_global_ops");
-	save_module_options(settings.MainWindowModule, option, choice);
-	gui_display_text(settings.currentverse);*/
-}
-
 /******************************************************************************
  * Name
  *  global_option_red_words
@@ -146,22 +98,6 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 static void popup_pm_comm(GdkEventButton * event)
 {
 	create_menu(event);
-}
-
-
-void gui_set_commentary_mod_and_key(gchar * mod_name, gchar * key)
-{	
-	gchar *strkey = get_valid_key(key);
-	settings.comm_showing = TRUE;	
-	main_display_commentary(mod_name, strkey);
-}
-
-
-void gui_display_commentary(gchar * key)
-{
-	gchar *strkey = get_valid_key(key);	
-	settings.comm_showing = TRUE;	
-	main_display_commentary(settings.CommWindowModule, strkey);
 }
 
 
@@ -257,8 +193,9 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 					gui_display_dictlex_in_sidebar
 					    (dict, key);
 				if (settings.inDictpane)
-					gui_change_module_and_key(dict,
-								  key);
+					main_display_dictionary(dict, key);
+					/*gui_change_module_and_key(dict,
+								  key);*/
 				g_free(key);
 				if (dict)
 					g_free(dict);
@@ -423,9 +360,11 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(settings.
-						  DictWindowModule,
+			main_display_dictionary(settings.DictWindowModule,
 						  dict_key);
+			/*gui_change_module_and_key(settings.
+						  DictWindowModule,
+						  dict_key);*/
 		g_free(dict_key);
 	}
 }
@@ -510,7 +449,8 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
+			main_display_dictionary(mod_name, dict_key);
+			//gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}
@@ -561,7 +501,8 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	module_name = module_name_from_description((gchar *) user_data);
 	if(module_name) {
-		gui_change_module_and_key(module_name, settings.currentverse);
+		main_display_commentary(module_name, settings.currentverse);
+		//gui_change_module_and_key(module_name, settings.currentverse);
 		g_free(module_name);
 	}
 }

@@ -44,6 +44,7 @@
 
 #include "module_manager.hh"
 #include "backend/module.hh"
+#include "backend/sword_main.hh"
 #include "backend/mgr.hh"
 #include "main/mod_mgr.h"
 #include "main/sword.h"
@@ -143,8 +144,8 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 					   &bytes_written, error);
 		if (mod_info->name) {
 			mod_info->language = (module->Lang())?
-			    backend_get_language_map(module->
-						     Lang()) : "unknown";
+				backend->get_language_map(module->Lang()): 
+				"unknown";
 			mod_info->type = g_convert(module->Type(),
 						   -1,
 						   UTF_8,

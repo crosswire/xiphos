@@ -400,11 +400,14 @@ static void on_colorpicker_color_set(GnomeColorPicker *
 
 
       if (settings.havebible)
-              gui_display_text(settings.currentverse);
+	      main_display_bible(settings.MainWindowModule, 
+      			settings.currentverse);
 	if (settings.havecomm)
-		gui_display_commentary(settings.currentverse);
-//	if (settings.havedict)
-//		gui_display_dictlex(settings.dictkey);
+		main_display_commentary(settings.CommWindowModule, 
+			settings.currentverse);
+	if (settings.havedict)
+		main_display_dictionary(settings.DictWindowModule, 
+			settings.dictkey);
 	if (settings.havebible)
 		gui_update_parallel_page();
 	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
