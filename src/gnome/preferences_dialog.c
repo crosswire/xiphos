@@ -1634,7 +1634,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	label190 = gtk_label_new(_("label190"));
+	label190 = gtk_label_new("");
 	gtk_widget_show(label190);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook7),
 				   gtk_notebook_get_nth_page
@@ -1729,7 +1729,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     (check_button.dock_shortcut_bar),
 				     TRUE);
 
-	label189 = gtk_label_new(_(""));
+	label189 = gtk_label_new("");
 	gtk_widget_show(label189);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook7),
 				   gtk_notebook_get_nth_page
