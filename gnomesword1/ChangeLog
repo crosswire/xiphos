@@ -1,3 +1,19 @@
+2004-01-06  Andy <andyp@users.sf.net>
+
+	* updated spec file to fix build for users and support the renaming of
+	  the package to gnomesword. We now obsolete gnomesword2 (weird but 
+	  hopefully it will hold up ok).
+	  
+
+2004-01-13  Terry <tbiggs@users.sf.net>
+
+	* major changes to rename package to gnomesword (was gnomesword2).
+	  Users of gnomesword2 CVS builds (or who have built from source) should
+	  do a 'make uninstall' from their old tree before updating to avoid
+	  manual work removing old gnomesword2 files.
+	* fixed references to main/shortcutbar.h and removed unnecessary files.
+
+
 2004-01-09  Terry <tbiggs@users.sf.net>
 
 	* added space between items in Bible and commentary dialog navigation 
