@@ -1,3 +1,10 @@
+2003-12-08  Terry <tbiggs@users.sf.net>
+
+	* bumped to  0.9.dev18
+	* added enable-pspell to configure.in (for compatability with systems 
+	  that don't have the right gnome-spell) will go away later.
+
+
 2003-12-07  Andy <andyp@users.sf.net>
 
 	* weekend hackathon :-)
@@ -16,7 +23,7 @@
 
 2003-12-07  Terry <tbiggs@users.sf.net>
 
-	* added about module item to contex menus in gbs_menu.c, dictlex_menu.c,
+	* added about module item to context menus in gbs_menu.c, dictlex_menu.c,
 	  commentary_menu.c and bibletext_menu.c
 
 
