@@ -1,5 +1,5 @@
 # application files
-gnomesword2.desktop.in
+gnomesword.desktop.in
 # backend source files
 #src/backend/module.cc
 #src/backend/sword.cpp

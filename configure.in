@@ -1,5 +1,5 @@
 
-AC_INIT(gnomesword2, 2.1.dev1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword, 2.1.dev1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -48,7 +48,7 @@ AC_LANG_CPLUSPLUS
 dnl ================================================================
 dnl Gettext stuff.
 dnl ================================================================
-GETTEXT_PACKAGE=gnomesword2
+GETTEXT_PACKAGE=gnomesword
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 dnl Languages which your application supports
@@ -233,19 +233,15 @@ src/Makefile
 src/backend/Makefile
 src/gnome2/Makefile
 src/main/Makefile
-gnomesword2.desktop.in
-gnomesword2.spec
+gnomesword.desktop.in
+gnomesword.spec
 ])
 
 echo
 echo "Summary of GnomeSword configuration:"
 echo
 
-if test "x$gnome1" = xno; then
-	echo "Building for Gnome:              2.x"  
-else
-         echo "Building for Gnome:              1.4.x"
-fi
+echo "Building for Gnome:              2.x"  
 
 
 if test "x$have_speller" = xyes; then

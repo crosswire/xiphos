@@ -1305,7 +1305,6 @@ GtkWidget *create_dialog(void)
 	GtkWidget *vbox4;
 	GtkWidget *hbox4;
 	GtkWidget *hbox2;
-	//GList *combo1_items = NULL;
 	GtkWidget *label6;
 	GtkWidget *vbox5;
 	GtkWidget *hbox9;
@@ -1455,7 +1454,7 @@ GtkWidget *create_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox4), fileentry1, TRUE, TRUE, 0);
 	gnome_file_entry_set_directory_entry(GNOME_FILE_ENTRY
 					     (fileentry1), TRUE);
-	//GNOME_FILE_COMBO(combo1);
+					     
 	combo_entry1 =
 	    gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(fileentry1));
 	gtk_widget_show(combo_entry1);
@@ -1567,7 +1566,6 @@ GtkWidget *create_dialog(void)
 
 	/* add columns to the tree view */
 	add_columns(GTK_TREE_VIEW(treeview), FALSE);
-	//load_module_tree (GTK_TREE_VIEW (treeview));
 
 
 	progressbar = gtk_progress_bar_new();
@@ -1599,7 +1597,6 @@ GtkWidget *create_dialog(void)
 	model = create_model();
 
 	treeview2 = gtk_tree_view_new_with_model(model);
-	//treeview2 = gtk_tree_view_new();
 	gtk_widget_show(treeview2);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow3), treeview2);
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview2),
