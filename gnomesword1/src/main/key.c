@@ -236,7 +236,7 @@ int start_parse_verse_list(char * list)
 
 char *get_valid_key(const char *key)
 {
-	return backend_get_valid_key(key);
+	return backend_get_valid_key(key); 
 }
 
 
