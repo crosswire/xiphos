@@ -74,26 +74,30 @@ sbtypefromModNameSBSW(gchar *modName)
 	gint retval = -1;
 	gchar *modType;
 		
+	
 	mgr = new SWMgr();	//-- create sword mgrs
 	/*** get module type ***/
-	modType = mgr->Modules[modName]->Type();
-	
-	if(!strcmp(modType, "Biblical Texts")){
-		retval = 0;
+	//modType = mgr->Modules[modName]->Type();
+	it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName
+	if (it != mgr->Modules.end()) {	
+		modType = (*it).second->Type();
+		
+		if(!strcmp(modType, "Biblical Texts")){
+			retval = 0;
+		}
+		
+		if(!strcmp(modType, "Commentaries")){
+			retval = 1;
+		}
+		
+		if(!strcmp(modType, "Lexicons / Dictionaries")){
+			retval = 2;
+		} 
+		
+		if(!strcmp(modType, "Generic Book")){
+			retval = 3;
+		} 
 	}
-	
-	if(!strcmp(modType, "Commentaries")){
-		retval = 1;
-	}
-	
-	if(!strcmp(modType, "Lexicons / Dictionaries")){
-		retval = 2;
-	} 
-	
-	if(!strcmp(modType, "Generic Book")){
-		retval = 3;
-	} 
-	
 	/*** delete Sword manager ***/
 	delete mgr;
 	return retval;
