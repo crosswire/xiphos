@@ -39,6 +39,8 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
+#include "gs_html.h"
+
 
 #if USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
@@ -93,6 +95,8 @@ extern gchar remembersubtree[256];  /* used for bookmark menus declared in files
 extern gchar *shortcut_types[];
 #endif /* USE_SHORTCUTBAR */
 extern gboolean addhistoryitem; /* do we need to add item to history */
+extern GtkWidget *htmlComments;
+extern GtkWidget *htmltext3;
 //gboolean firstbackclick = TRUE;
 
 /******************************************************************************
@@ -662,9 +666,12 @@ void setformatoption(GtkWidget *button)
 *****************************************************************************/
 void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
-        settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
+		
+	settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
+	
         if(page_num < 3) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
+
 }
 
 /******************************************************************************
