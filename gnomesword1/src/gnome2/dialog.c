@@ -467,7 +467,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	if (info->stock_icon) {
 		image = gtk_image_new_from_stock(info->stock_icon,
 						 GTK_ICON_SIZE_DND);
-		/*image = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+		/*image = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
 		   "/gs2-48x48.png"); */
 		gtk_widget_show(image);
 		gtk_box_pack_start(GTK_BOX(hbox83), image, FALSE, TRUE,
