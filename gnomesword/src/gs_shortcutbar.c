@@ -47,8 +47,7 @@ extern gboolean havedict;	/* let us know if we have at least one lex-dict module
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
 extern EShortcutModel *shortcut_model;
-GList *sblist,			/* for building verselist */
-*langlistfavorites, *langlisttext, *langlistcomm, *langlistdict;
+GList *sblist;
 gint groupnum0 = -1,
     groupnum1 = -1,
     groupnum2 = -1,
@@ -59,7 +58,7 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
 static void on_link_clicked(GtkHTML * html, const gchar * url,
 			    gpointer data);
-static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data);
+//static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data);
 static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
 				      gpointer user_data);
 static void on_btnSBSaveVL_clicked(GtkButton * button, gpointer user_data);
@@ -733,11 +732,12 @@ static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
 	s->showinmain = togglebutton->active;
 }
 
-
+/*
 static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data)
 {
-
+	
 }
+*/
 
 static void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
@@ -755,7 +755,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSBSaveVL;
 	GtkWidget *tbtnSBViewMain;
-	GtkWidget *btnSBShowCV;
+//	GtkWidget *btnSBShowCV;
 	GtkWidget *frame1;
 	GtkWidget *scrolledwindow1;
 //  GtkWidget *htmllist;        
@@ -809,7 +809,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 				 tbtnSBViewMain,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(tbtnSBViewMain);
-
+/*
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_REFRESH);
 	btnSBShowCV =
@@ -823,7 +823,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSBShowCV",
 				 btnSBShowCV,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSBShowCV);
+	gtk_widget_show(btnSBShowCV);*/
 
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame1);
@@ -886,8 +886,8 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(tbtnSBViewMain), "toggled",
 			   GTK_SIGNAL_FUNC(on_tbtnSBViewMain_toggled), s);
-	gtk_signal_connect(GTK_OBJECT(btnSBShowCV), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSBShowCV_clicked), s);
+	/*gtk_signal_connect(GTK_OBJECT(btnSBShowCV), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnSBShowCV_clicked), s);*/
 	return htmlshow;
 }
 
