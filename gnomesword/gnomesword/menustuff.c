@@ -27,7 +27,7 @@
 #include "menustuff.h"
 #include "interface.h"
 #include "callback.h"
-#include "GnomeSword.h"
+#include "gs_sword.h"
 #include "support.h"
 
 /******************************************************************************

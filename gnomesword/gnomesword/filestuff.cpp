@@ -33,7 +33,7 @@
 #include "support.h"
 #include "filestuff.h"
 #include "menustuff.h"
-#include "GnomeSword.h"
+#include "gs_sword.h"
 #include "listeditor.h"
 
 #define BUFFER_SIZE 8192	/* input buffer size */

@@ -46,7 +46,7 @@
 #include "gs_gnomesword.h"
 #include "display.h"
 #include "callback.h"
-#include "GnomeSword.h"
+#include "gs_sword.h"
 #include "support.h"
 #include "interface.h"
 #include "filestuff.h"
