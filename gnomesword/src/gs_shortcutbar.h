@@ -41,6 +41,8 @@ extern "C" {
 	void changegroupnameSB(SETTINGS * s,
 			       	gchar * groupName, 
 				gint groupNum);
+	void on_btnSBDock_clicked(GtkButton * button, 
+				SETTINGS *s);
 	void on_btnSB_clicked(GtkButton * button, 
 				SETTINGS * s);
 	void setupSB(SETTINGS * s);

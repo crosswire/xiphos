@@ -86,7 +86,7 @@ void AddSection(GtkCTree *ctree, SWConfig *config, const gchar *section, GtkCTre
 			token=strtok(NULL,t);
 			text[2] = token;
 			is_leaf = false;
-			node = gtk_ctree_insert_node(ctree,parent,NULL,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
+			node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
 			gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
 			AddSection(ctree,config,(*eit).first.c_str(),node);
 		}
@@ -258,8 +258,8 @@ createbookmarksBM(gchar *dir)
 	/** seperators are '|' the pipe char **/
 	bmInfo["ROOT"]["branch0"] = "Personal|personal.conf|ROOT";
 	
-	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?]|GROUP| ";
-	bmInfo["branch0"]["branch5"]="[What is the Gospel?]|GROUP| ";
+	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?]|GROUP|GROUP";
+	bmInfo["branch0"]["branch5"]="[What is the Gospel?]|GROUP|GROUP";
 	bmInfo["branch0"]["branch7"]="Romans 8:28 KJV|Romans 8:28|KJV";
 	bmInfo["branch0"]["branch8"]="Rev 1:5 KJV|Rev 1:5|KJV";
 	

@@ -489,17 +489,19 @@ on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
                                gpointer         user_data)
 {
-        gint panesize;
-	panesize = e_paned_get_position(E_PANED(lookup_widget(settings->app,(gchar *)user_data)));
+        if(settings->docked) {
+		gint panesize;
+		panesize = e_paned_get_position(E_PANED(lookup_widget(settings->app,(gchar *)user_data)));
 	
-        if(panesize > 15 )
-        {	if(!strcmp((gchar *)user_data,"epaned"))
-        		settings->shortcutbar_width = panesize; 
-		if(!strcmp((gchar *)user_data,"vpaned1"))
-        		settings->upperpane_hight = panesize; 
-		if(!strcmp((gchar *)user_data,"hpaned1"))
-        		settings->biblepane_width = panesize; 
-        }
+		if(panesize > 15 )
+		{	if(!strcmp((gchar *)user_data,"epaned"))
+				settings->shortcutbar_width = panesize; 
+			if(!strcmp((gchar *)user_data,"vpaned1"))
+				settings->upperpane_hight = panesize; 
+			if(!strcmp((gchar *)user_data,"hpaned1"))
+				settings->biblepane_width = panesize; 
+		}
+	}
         return TRUE;
 }
 
