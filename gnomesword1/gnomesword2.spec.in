@@ -14,12 +14,15 @@ Group:		Applications/Productivity
 Source:		http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-root
 Requires:	sword >= 1.5.6
+Requires:	gnome >= 2.0
+Requires:	gtkhtml3 >= 3.0
+Requires:	bonobo >= 1.0
 BuildRequires:	sword-devel >= 1.5.6
-BuildRequires:	gnome-libs-devel >= 1.4
+BuildRequires:	gnome-libs-devel >= 2.0
 BuildRequires:	gal-devel >= 0.22
-BuildRequires:	gtkhtml2-devel >= 2.2
+BuildRequires:	gtkhtml3-devel >= 3.0
+BuildRequires:	bonobo-devel >= 1.0
 BuildRequires:	gnome-spell
-BuildRequires:	aspell-devel
 
 %description
 Bible Study Software for the Linux community. Lookup and search Bible texts and
@@ -63,7 +66,9 @@ esac
 %{prefix}/share/applications/%{name}.desktop
 
 %changelog
-* Fri Dec 05 2003 Andy Piper <andy.piper@freeuk.com>
+* Mon Dec 08 2003 Andy Piper <andyp@users.sf.net>
+- Updated dependencies
+* Fri Dec 05 2003 Andy Piper <andyp@users.sf.net>
 - Added to GnomeSword CVS
 * Thu Nov 27 2003 Hugo van der Kooij <hugo@vanderkooij.org>
 - Fixed loose ends in the config
