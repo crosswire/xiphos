@@ -1,0 +1,6 @@
+# List of source files containing translatable strings.
+
+save/main.c
+save/interface.c
+save/callback.cpp
+save/support.c
