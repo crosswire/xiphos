@@ -73,7 +73,7 @@ char EntryDisp::Display(SWModule & imodule)
 	htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
 	
 	sprintf(tmpBuf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		HTML_START "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		s->bible_bg_color, s->bible_text_color,
 		s->link_color);	
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
@@ -149,7 +149,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	(const char *) imodule;	
 	
 	sprintf(tmpBuf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		HTML_START "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		s->bible_bg_color, 
 		s->bible_text_color,
 		s->link_color);
@@ -327,7 +327,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	GtkHTMLStream *htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
 	
 	g_string_sprintf(str,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		HTML_START "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		s->bible_bg_color, s->bible_text_color,
 		s->link_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
