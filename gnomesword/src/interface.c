@@ -56,6 +56,7 @@ GtkWidget *create_dlgSettings(void)
 	GtkWidget *label98;
 	GtkWidget *vbox28;
 	GtkWidget *cbtnShowSCB;
+	GtkWidget *cbtnShowTXtabs;
 	GtkWidget *cbtnShowCOMtabs;
 	GtkWidget *cbtnShowDLtabs;
 	GtkWidget *label123;
@@ -159,6 +160,18 @@ GtkWidget *create_dlgSettings(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbtnShowSCB);
 	gtk_box_pack_start(GTK_BOX(vbox28), cbtnShowSCB, FALSE, FALSE, 0);
+
+	cbtnShowTXtabs=
+	    gtk_check_button_new_with_label
+	    ("Show BibleWindow notebook tabs");
+	gtk_widget_ref(cbtnShowTXtabs);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings),
+				 "cbtnShowTXtabs",cbtnShowTXtabs ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cbtnShowTXtabs);
+	gtk_box_pack_start(GTK_BOX(vbox28), cbtnShowTXtabs, FALSE, FALSE,
+			   0);
+
 
 	cbtnShowCOMtabs =
 	    gtk_check_button_new_with_label
@@ -330,7 +343,11 @@ GtkWidget *create_dlgSettings(void)
 			   GTK_SIGNAL_FUNC(on_cpfgCurrentverse_color_set),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(cbtnShowSCB), "toggled",
-			   GTK_SIGNAL_FUNC(on_cbtnShowSCB_toggled), NULL);
+			   GTK_SIGNAL_FUNC(on_cbtnShowSCB_toggled), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(cbtnShowTXtabs), "toggled",
+			   GTK_SIGNAL_FUNC(on_cbtnShowTXtabs_toggled),			   
+			   NULL);					   
 	gtk_signal_connect(GTK_OBJECT(cbtnShowCOMtabs), "toggled",
 			   GTK_SIGNAL_FUNC(on_cbtnShowCOMtabs_toggled),
 			   NULL);

@@ -25,7 +25,9 @@ GtkWidget *create_menu1(void);
 GtkWidget *create_wdwEditBookmarks(void);
 GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
-	
+void on_nbTextMods_switch_page(GtkNotebook * notebook,	
+			 GtkNotebookPage * page,
+			 gint page_num, gpointer user_data);
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
 		gpointer user_data);
 void on_ok_button1_clicked(GtkButton * button, 
@@ -222,6 +224,8 @@ gboolean on_list1_button_press_event(GtkWidget * widget,
 
 void on_cbtnShowSCB_toggled(GtkToggleButton * togglebutton,
 				gpointer user_data);
+void on_cbtnShowTXtabs_toggled(GtkToggleButton * togglebutton,
+			  gpointer user_data);
 void on_cbtnShowCOMtabs_toggled(GtkToggleButton * togglebutton,
 				    gpointer user_data);
 void on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,

@@ -66,25 +66,32 @@ gboolean file_changed = FALSE;	/* set to true if text is study pad has changed -
 gchar current_verse[80]="Romans 8:28";	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 gboolean changemain = TRUE; /* change verse of Bible text window */
 gint dictpages,
-	 compages;
+	 compages,
+	 textpages;
 SETTINGS *settings;
 GS_APP gs;
 gchar 	 bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
 GS_LAYOUT gslayout,
 		   *p_gslayout;
-
-
+GS_NB_PAGES *nbpages,
+			npages;
+GS_TABS	tabs,
+		*p_tabs;
 /*****************************************************************************
 * externs
 *****************************************************************************/
 extern GList 	*biblemods,
-		*commentarymods,
-		*dictionarymods,
-		*percommods;
+			*commentarymods,
+			*dictionarymods,
+			*percommods,
+			*sbbiblemods,
+			*sbdictmods,
+			*sbcommods;
 extern gchar *mydictmod;						
 extern GdkColor myGreen; /* current verse color */
 extern gboolean havedict; /* let us know if we have at least one lex-dict module */
 extern gboolean havecomm; /* let us know if we have at least one commentary module */
+extern gboolean havebible; /* let us know if we have at least one Bible text module */
 extern gboolean usepersonalcomments; /* do we setup for personal comments - default is FALSE */
 extern gboolean bVerseStyle;
 extern gboolean autoSave;
@@ -109,24 +116,37 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	GtkWidget *notebook;
 	p_gslayout = &gslayout;
 	
-	
+/* set the main window size */
 	gtk_window_set_default_size(GTK_WINDOW(app), p_gslayout->gs_width, p_gslayout->gs_hight);
-	g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
+	//g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
 /* setup shortcut bar */
-	setupSB(biblemods, commentarymods ,dictionarymods);	
-/* set color for current verse */
+	setupSB(sbbiblemods, sbcommods ,sbdictmods);	
+/* set color for current verse for gtktext widgets */
   	myGreen.red =  settings->currentverse_red;
 	myGreen.green = settings->currentverse_green;
 	myGreen.blue =  settings->currentverse_blue;		
 /* add modules to menus -- menu.c */
-	addmodstomenus(app, settings, biblemods,
-			commentarymods, dictionarymods,
-			percommods);
+	addmodstomenus(app, 
+				settings, 
+				biblemods, /* list of mod names */
+				sbbiblemods, /* list of mod descriptions */
+				commentarymods,
+				sbcommods, 
+				dictionarymods,
+				sbdictmods,
+				percommods);
 /* create popup menus -- menu.c */
-	createpopupmenus(app, settings, biblemods,
-			commentarymods, dictionarymods,
-			percommods);
-/* add pages to commentary and  dictionary notebooks */			
+	createpopupmenus(app, 
+				settings, 
+				biblemods,
+				sbbiblemods,
+				commentarymods,
+				sbcommods,
+				dictionarymods,
+				sbdictmods,
+				percommods);
+/* add pages to commentary and  dictionary notebooks */
+	addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods);
 	addnotebookpages(lookup_widget(app,"notebook1"), commentarymods);
 	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
 /*  set text windows to word warp */
@@ -137,7 +157,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 /* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
-			settings->notebook3page );
+			nbpages->notebook3page );
 /* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
@@ -159,34 +179,52 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         loadbookmarks_programstart(); /* add bookmarks to menubar */
         changeVerseSWORD(settings->currentverse); /* set Text */
 /* show hide shortcut bar - set to options setting */
-#if USE_SHORTCUTBAR
         if(settings->showshortcutbar){
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
-	/* set size of bible and commentary pane */
+/* set hight of bible and commentary pane */
 	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), p_gslayout->upperpane_hight);
-	/* set size of bible pane */
+/* set width of bible pane */
 	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")),p_gslayout->biblepane_width);
-#else /* !USE_SHORTCUTBAR */
-        if(settings->showshortcutbar){
-                gtk_paned_set_position(GTK_PANED(lookup_widget(app,"hpaned2")), 106);
-        }else{
-               gtk_paned_set_position(GTK_PANED(lookup_widget(app,"hpaned2")), 0);
-        }
-#endif /* USE_SHORTCUTBAR */
 /* load last used file into studypad */
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
 /* create gs_clipboard */
 	gs_clipboard = g_string_new("");
+	
+/* set Bible module to open notebook page */
+	/* let's don't do this if we don't have at least one text module */	
+	if(havebible){ 			
+		/* set page to 0 (first page in notebook) */
+		gint pagenum = 0;
+		/* if save page is less than actual number of pages use saved page number else 0 */
+		if(nbpages->nbTextModspage < textpages) pagenum = nbpages->nbTextModspage;
+		/* get notebook */
+		notebook = lookup_widget(app,"nbTextMods");
+		/* set notebook page */
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
+		/* get the label from the notebook page (module name) */	
+		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
+						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
+		nbchangecurModSWORD(label1->label, pagenum, TRUE); 	
+		
+		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
+			   GTK_SIGNAL_FUNC(on_nbTextMods_switch_page),
+			   NULL);	
+                if(p_tabs->textwindow) 
+			gtk_widget_show(notebook);
+                else gtk_widget_hide(notebook);
+         /* hide dictionary section of window if we do not have at least one dict/lex */
+	}
+		
 /* set dict module to open notebook page */
 	/* let's don't do this if we don't have at least one dictionary / lexicon */	
 	if(havedict){ 			
 		/* set page to 0 (first page in notebook) */
 		gint pagenum = 0;
 		/* if save page is less than actual number of pages use saved page number else 0 */
-		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page;
+		if(nbpages->notebook2page < dictpages) pagenum = nbpages->notebook2page;
 		/* get notebook */
 		notebook = lookup_widget(app,"notebook4");
 		/* set notebook page */
@@ -198,7 +236,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook4_switch_page),
                       NULL);
-                if(settings->showdicttabs) gtk_widget_show(notebook);
+                if(p_tabs->dictwindow) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
          /* hide dictionary section of window if we do not have at least one dict/lex */
 	}else gtk_widget_hide(lookup_widget(app,"hbox8"));
@@ -212,14 +250,14 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                                         GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                                         NULL);
-		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
+		if(nbpages->notebook1page < compages) pagenum = nbpages->notebook1page;
 			
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
 		/*label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
 		changcurcomModSWORD(label1->label, pagenum, TRUE);   */
 		
-                if(settings->showcomtabs) gtk_widget_show(notebook);
+                if(p_tabs->commwindow) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
         }else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
 		
@@ -229,7 +267,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		changepercomModSWORD(settings->personalcommentsmod);	
 	}
 /* set text modules to last used */
-	changecurModSWORD(settings->MainWindowModule,TRUE);
+	//changecurModSWORD(settings->MainWindowModule,TRUE);
 	//changecomp1ModSWORD(settings->Interlinear1Module);
 	//changecomp2ModSWORD(settings->Interlinear2Module);
 	//changecomp3ModSWORD(settings->Interlinear3Module);
@@ -263,6 +301,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
 	g_list_free(percommods);	
+        g_list_free(sbbiblemods);
+        g_list_free(sbcommods);
+        g_list_free(sbdictmods);
 }
 
 /**********************************************************************************************
@@ -343,45 +384,54 @@ void UpdateChecks(GtkWidget *app)
 }
 
 void
-applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
-		gboolean showdicttabs, gboolean showtextgroup,
-                gboolean showcomgroup, gboolean showdictgroup,
+applyoptions(GtkWidget *app,
+		gboolean showshortcut, 
+		gboolean showtexttabs,
+		gboolean showcomtabs,
+		gboolean showdicttabs, 
+		gboolean showtextgroup,
+                gboolean showcomgroup, 
+		gboolean showdictgroup,
                 gboolean showhistorygroup)
 {
-         GtkWidget    *dict,
-                      *comm;
-
+         GtkWidget    	*text,
+				*dict,
+                      		*comm;
+	text = lookup_widget(app,"nbTextMods");
         dict = lookup_widget(app,"notebook4");
         comm = lookup_widget(app,"notebook1");
-
+/*  */
         settings->showshortcutbar = showshortcut;
-        settings->showcomtabs = showcomtabs;
-        settings->showdicttabs = showdicttabs;
+	
+	p_tabs->textwindow = showtexttabs;
+        p_tabs->commwindow = showcomtabs;
+        p_tabs->dictwindow = showdicttabs;
 
         settings->showtextgroup = showtextgroup;
         settings->showcomgroup =  showcomgroup;
         settings->showdictgroup = showdictgroup;
         settings->showhistorygroup = showhistorygroup;
-
-        if(settings->showcomtabs) {
+	
+	if(p_tabs->textwindow) {
+                gtk_widget_show(text);
+        } else {
+                gtk_widget_hide(text);
+        }
+        if(p_tabs->commwindow) {
                 gtk_widget_show(comm);
         } else {
                 gtk_widget_hide(comm);
         }
-        if(settings->showdicttabs) {
+        if(p_tabs->dictwindow) {
                 gtk_widget_show(dict);
         } else {
                 gtk_widget_hide(dict);
         }
-#if USE_SHORTCUTBAR
         if(settings->showshortcutbar){
                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
         } else {
                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
-#else
-        setupSidebar(app);
-#endif /* USE_SHORTCUTBAR */
 }
 
 /*****************************************************************************		
@@ -463,9 +513,9 @@ gint getdictnumber (GtkWidget *text)
 void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, gint item_num)
 {
         GtkWidget       *notebook;
-#if USE_SHORTCUTBAR
         gchar		*type[1],
-			*ref[1];
+				*ref[1];
+	
 	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
 						  group_num,
 						  item_num,
@@ -473,7 +523,11 @@ void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, g
 						  ref);
 					  	
 	if(!strcmp(type[0],"bible:")) {
-		changecurModSWORD(ref[0],TRUE);
+		if(havebible){/* let's don't do this if we don't have at least one Bible text */
+			//changecurModSWORD(ref[0],TRUE);
+			notebook = lookup_widget(app,"nbTextMods"); /* get notebook */
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); /* set notebook page */
+		}
 	}
 	if(!strcmp(type[0],"commentary:")) {
 		if(havecomm) { /* let's don't do this if we don't have at least one commentary */	           			            	
@@ -490,21 +544,6 @@ void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, g
 	if(!strcmp(type[0],"history:")) {
 		changeVerseSWORD(ref[0]);
 	}						
-#else
-	if(group_num == 1) {
-		if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
-			notebook = lookup_widget(app,"notebook1"); //-- get notebook
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-    		}
-    	}
-	if(group_num == 2) {
-		if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
-			notebook = lookup_widget(app,"notebook4"); //-- get notebook
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-  		}
-	}
-#endif /* USE_SHORTCUTBAR */	
-
 }
 
 /*****************************************************************************
@@ -526,7 +565,7 @@ void setformatoption(GtkWidget *button)
 *****************************************************************************/
 void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
-        settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
+        nbpages->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
         if(page_num < 3) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
@@ -538,6 +577,7 @@ void openpropertiesbox(void)
 {
 	GtkWidget   *Propertybox, 	/* pointer to propertybox dialog */
                 *cpcurrentverse, 	   /* pointer to current verse color picker */
+		*texttabsbutton,	/* show textwindow notebook tabs toggle button */
                 *comtabsbutton,  	   /* show commentary notebook tabs toggle button */
                 *dicttabsbutton, 	     /* show dict/lex notebook tabs toggle button */
                 *shortcutbarbutton, 	   /* show shortcut bar toggle button */
@@ -553,6 +593,7 @@ void openpropertiesbox(void)
 	
 	Propertybox = create_dlgSettings(); /* create propertybox dialog */
 	shortcutbarbutton = lookup_widget(Propertybox,"cbtnShowSCB");
+	texttabsbutton = lookup_widget(Propertybox,"cbtnShowTXtabs");
 	comtabsbutton = lookup_widget(Propertybox,"cbtnShowCOMtabs");
 	dicttabsbutton  = lookup_widget(Propertybox,"cbtnShowDLtabs");
 	cpcurrentverse = lookup_widget(Propertybox,"cpfgCurrentverse"); /* set cpcurrentverse to point to color picker */
@@ -568,8 +609,9 @@ void openpropertiesbox(void)
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); /* set color of current verse color picker button */
 	/* set toggle buttons to settings structur */
 	GTK_TOGGLE_BUTTON(shortcutbarbutton)->active = settings->showshortcutbar;
-	GTK_TOGGLE_BUTTON(comtabsbutton)->active = settings->showcomtabs;
-	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = settings->showdicttabs;
+	GTK_TOGGLE_BUTTON(texttabsbutton)->active = p_tabs->textwindow;
+	GTK_TOGGLE_BUTTON(comtabsbutton)->active = p_tabs->commwindow;
+	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = p_tabs->dictwindow;
 	GTK_TOGGLE_BUTTON(textgroupbutton)->active = settings->showtextgroup;
 	GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
 	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;

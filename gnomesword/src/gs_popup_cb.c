@@ -375,27 +375,16 @@ void on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 		
 
 /*******************************************************************************
- * show hide commentary notebook tabs - popup menu choice
+ * show hide notebook tabs - popup menu choice
  *******************************************************************************/	
-void on_show_tabs1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		gtk_widget_show(lookup_widget(MainFrm, "notebook1"));
+		gtk_widget_show(lookup_widget(MainFrm, (gchar *)user_data));
 	else
-		gtk_widget_hide(lookup_widget(MainFrm, "notebook1"));
+		gtk_widget_hide(lookup_widget(MainFrm, (gchar *)user_data));
 }
 		
-
-/*******************************************************************************
- * show hide dict/lex notebook tabs - popup menu choice
- *******************************************************************************/	
-void on_show_tabs2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		gtk_widget_show(lookup_widget(MainFrm, "notebook4"));
-	else
-		gtk_widget_hide(lookup_widget(MainFrm, "notebook4"));
-}
 
 /*******************************************************************************
  *
