@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
  /*
     * GnomeSword Bible Study Tool
     * gs_gui_cb.c
@@ -36,6 +37,7 @@
 
 #include "gs_gui_cb.h"
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
 #include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
@@ -107,15 +109,9 @@ void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
 void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 {
 	SETTINGS *s;
-	EShortcutBar *bar1;
-		
+	
 	s = (SETTINGS *)user_data;
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
-	e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
-	s->showshortcutbar = TRUE;		
-	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
-						 s->searchbargroup,
-						 TRUE);
+	showSBGroup(s, s->searchbargroup);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -124,25 +120,11 @@ void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 	gchar *bookname, ref[255];
 
 	if (ApplyChange) {
-		bookname =
-		    gtk_entry_get_text(GTK_ENTRY
-				       (lookup_widget
-					(GTK_WIDGET(editable),
+		/*bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(editable),
 					 "cbeBook")));
 		sprintf(ref, "%s 1:1", bookname);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON
-					  (lookup_widget
-					   (GTK_WIDGET(editable),
-					    "spbChapter")), 1);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON
-					  (lookup_widget
-					   (GTK_WIDGET(editable),
-					    "spbVerse")), 1);
-		gtk_entry_set_text(GTK_ENTRY
-				   (lookup_widget
-				    (GTK_WIDGET(editable),
-				     "cbeFreeformLookup")), ref);
-		changeVerseSWORD(ref);
+		changeVerseSWORD(ref);*/
+		verseSWORD();
 	}
 }
 
@@ -152,8 +134,11 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 				   GdkEventButton * event,
 				   gpointer user_data)
 {
-	chapterSWORD();
-	return TRUE;
+	if (ApplyChange) {
+		verseSWORD();
+		return TRUE;
+	}
+	return FALSE;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -162,8 +147,11 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 				 GdkEventButton * event,
 				 gpointer user_data)
 {
-	verseSWORD();
-	return TRUE;
+	if (ApplyChange) {
+		verseSWORD();
+		return TRUE;
+	}
+	return FALSE;
 }
 
 //----------------------------------------------------------------------------------------------

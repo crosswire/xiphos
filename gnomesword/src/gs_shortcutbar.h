@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
   /*
      * GnomeSword Bible Study Tool
      * gs_shortcutbar.h
@@ -36,6 +37,7 @@ extern "C" {
 
 
 	void showSBVerseList(SETTINGS * s);
+	void showSBGroup(SETTINGS * s, gint groupnum);
 	void changegroupnameSB(SETTINGS * s,
 			       	gchar * groupName, 
 				gint groupNum);
