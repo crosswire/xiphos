@@ -34,7 +34,11 @@ void save_iconsizeSW(gchar * filename, gchar *large_icons);
 GList *loadshortcutbarSW(gchar *filename, gchar *group_name, gchar *use_largeicons);
 void saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_icons);
 GList *getModlistSW(gchar *modtype);
-	
+gboolean displaydictlexSBSW(gchar *modName, 
+					gchar *vlist, 
+					SETTINGS *s);	
+void setupviewerSBSW(GtkWidget *html_widget);
+void shutdownviewerSBSW(void);	
 #ifdef __cplusplus
 }
 #endif

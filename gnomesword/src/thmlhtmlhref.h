@@ -16,8 +16,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _THMLHTMLLINK_H
-#define _THMLHTMLLINK_H
+#ifndef _THMLHTMLHREF_H
+#define _THMLHTMLHREF_H
 
 #include <swfilter.h>
 
@@ -25,11 +25,11 @@
 
   /** this filter converts ThML text to HTML text
   */
-class SWDLLEXPORT ThMLHTMLLINK:public SWFilter
+class SWDLLEXPORT ThMLHTMLHREF:public SWFilter
 {
 public:
-  ThMLHTMLLINK ();
+  ThMLHTMLHREF ();
   virtual char ProcessText (char *text, int maxlen = -1);
 };
 
-#endif /* _THMLHTMLLINK_H */
+#endif /* _THMLHTMLHREF_H */

@@ -35,7 +35,7 @@
 #include "gs_gnomesword.h"
 #include "gs_information_sw.h"
 #include "sw_utility.h"
-#include "gs_display.h"
+#include "sw_display.h"
 
 SWDisplay *VIDDisplay;  /* to display modules in view comm dialog */
 SWMgr *VIDMgr;  /* sword mgr for view comm dialog */

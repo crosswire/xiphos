@@ -36,7 +36,7 @@
 #include <versekey.h>
 #include "sw_viewdict_dlg.h"
 #include "sw_gnomesword.h"
-#include "gs_display.h"
+#include "sw_display.h"
 #include "sw_utility.h"
 
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */

@@ -43,11 +43,22 @@
 
 #include "gs_gnomesword.h"
 #include "sw_shortcutbar.h"
+#include "sw_utility.h"
+#include "sw_display.h"
+#include "gs_shortcutbar.h"
 #include "support.h"
 
+extern gint groupnum7;
 extern gchar *shortcutbarDir;
 extern SETTINGS *settings;
 list <string> sbfiles;	
+
+static SWDisplay 
+	*viewersbDisplay;	/* to display modules in viewer dialog */
+static SWMgr 
+	*viewersbMgr; 
+static SWModule 
+	*viewersbMod;   /* module for viewer dialog */
 
 gint
 sbtypefromModNameSBSW(gchar *modName)
@@ -180,3 +191,70 @@ GList *getModlistSW(gchar *modtype)
 	delete mgr;				
 	return list;
 }
+
+
+
+/*
+ * 
+ * 
+ */
+gboolean
+displaydictlexSBSW(gchar *modName, gchar *key, SETTINGS *s)
+{
+	gchar 
+		buf[256], 
+		*utf8str,
+		tmpbuf[256];	
+	
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 2);	
+	sprintf(s->groupName,"%s","Viewer");
+	changegroupnameSB(s, s->groupName, groupnum7);
+	if(!strcmp(modName,viewersbMod->Name())){
+		g_warning("in viewer key = %s",key);
+		viewersbMod->SetKey(key); //-- set key to the first one in the list
+		viewersbMod->Display(); 
+	}else{
+		ModMap::iterator it; 	
+		it = viewersbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
+		if (it != viewersbMgr->Modules.end()){ //-- if we find the module	
+			viewersbMod = (*it).second;  //-- change module to new module
+			g_warning("in viewer key = %s mod = %s",key,viewersbMod->Name());
+			viewersbMod->SetKey(key); //-- set key to the first one in the list
+			viewersbMod->Display(); 
+		}
+	}
+	return TRUE;	
+}
+
+/****************************************************************************************
+ *setupVLSWORD - set up the sword stuff for the viewer dialog
+ ****************************************************************************************/
+void setupviewerSBSW(GtkWidget *html_widget)
+{	
+	ModMap::iterator it; //-- iteratior	
+	SectionMap::iterator sit; //-- iteratior
+	
+	viewersbMgr	= new SWMgr();
+	viewersbMod     = NULL;
+	viewersbDisplay = new  GtkHTMLEntryDisp(html_widget);
+	
+	for(it = viewersbMgr->Modules.begin(); it != viewersbMgr->Modules.end(); it++){
+		viewersbMod = (*it).second;
+		sit = viewersbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
+		ConfigEntMap &section = (*sit).second;
+		addrenderfiltersSWORD(viewersbMod, section);
+		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
+			viewersbMod->Disp(viewersbDisplay);
+		}
+	}
+}
+
+/*** close down viewer dialog ***/
+void shutdownviewerSBSW(void) 
+{	
+	delete viewersbMgr;	
+	if(viewersbDisplay)
+		delete viewersbDisplay;	
+}
+
+

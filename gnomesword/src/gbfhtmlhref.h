@@ -19,8 +19,8 @@
 /* $Header$ */
 /* $Revision$ */
 
-#ifndef SW_GBFHTML_H
-#define SW_GBFHTML_H
+#ifndef GBFHTMLHREF_H
+#define GBFHTMLHREF_H
 
 #include <swfilter.h>
 
@@ -28,10 +28,10 @@
 
   /** This filter converts GBF Text into HTML
   */
-class SWDLLEXPORT SW_GBFHTML:public SWFilter
+class SWDLLEXPORT GBFHTMLHREF:public SWFilter
 {
 public:
-  SW_GBFHTML ();
+  GBFHTMLHREF ();
   virtual char ProcessText (char *text, int maxlen, const SWKey * key);
 };
 
