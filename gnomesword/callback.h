@@ -44,68 +44,33 @@ void on_ok_button2_clicked(GtkButton * button,
 		gpointer user_data);
 void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
 void on_cancel_button2_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnAboutOK_clicked(GtkButton * button, gpointer user_data);
-
 void on_btnSearch1_clicked(GtkButton * button, gpointer user_data);
 void on_resultList_select_row(GtkCList * clist, gint row,
-				      gint column, GdkEvent * event,
-				      gpointer user_data);
+		gint column, GdkEvent * event,
+		gpointer user_data);
+void on_mainwindow_destroy(GtkObject * object, gpointer user_data);
+void on_listeditor_destroy(GtkObject * object, gpointer user_data);
+void on_dlgSearch_destroy(GtkObject * object, gpointer user_data);
+void on_btnSearch_clicked(GtkButton * button, gpointer user_data);
+void on_btnStrongs_toggled(GtkToggleButton * togglebutton,
+		gpointer user_data);
+void on_add_bookmark1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_edit_bookmarks1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data);
+void on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_verse_style1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
 
-void
- on_copy_verse1_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
-
-void
- on_mainwindow_destroy(GtkObject * object, gpointer user_data);
-void
- on_listeditor_destroy(GtkObject * object, gpointer user_data);
-void
- on_dlgSearch_destroy(GtkObject * object, gpointer user_data);
-void
- on_btnSearch_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnStrongs_toggled(GtkToggleButton * togglebutton,
-			       gpointer user_data);
-
-void
- on_add_bookmark1_activate(GtkMenuItem * menuitem,
-				   gpointer user_data);
-
-void
- on_edit_bookmarks1_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
-
-void
- on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-void
- on_footnotes_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-void
- on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-void
- on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
-					     gpointer user_data);
-
-void
- on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
-					     gpointer user_data);
-
-void
- on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
-					     gpointer user_data);
-
-void
- on_verse_style1_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
-
-void
- on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
-					    gpointer user_data);
 
 void
  on_cbeBook_changed(GtkEditable * editable, gpointer user_data);
@@ -165,59 +130,11 @@ void
 void
  on_btnDeleteNote_clicked(GtkButton * button, gpointer user_data);
 
-gboolean
- on_textComp1_button_press_event(GtkWidget * widget,
-					    GdkEventButton * event,
-					    gpointer user_data);
-
-gboolean
- on_textComp2_button_press_event(GtkWidget * widget,
-					    GdkEventButton * event,
-					    gpointer user_data);
-
-gboolean
- on_textComp3_button_press_event(GtkWidget * widget,
-					    GdkEventButton * event,
-					    gpointer user_data);
-
-void
- on_btnOpenFile_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnSaveFile_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnSaveFileAs_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnPrint_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnCut_clicked(GtkButton * button, gpointer user_data);
-
-void
- on_btnCopy_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnPaste_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_text3_changed(GtkEditable * editable, gpointer user_data);
 
 	void
 	 on_notebook4_switch_page(GtkNotebook * notebook,
 				  GtkNotebookPage * page,
 				  gint page_num, gpointer user_data);
-
-	 gboolean
-	    on_moduleText_selection_notify_event(GtkWidget * widget,
-						 GdkEventSelection * event,
-						 gpointer user_data);
-
-	void
-	 on_moduleText_selection_received(GtkWidget * widget,
-					  GtkSelectionData * data,
-					  guint time, gpointer user_data);
 
 	void
 	 on_dictionarySearchText_changed(GtkEditable * editable,
@@ -248,15 +165,8 @@ void
 	 on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 	void
-	 on_add_bookmark1_activate(GtkMenuItem * menuitem,
-				   gpointer user_data);
-
-	void
 	 on_edit_bookmarks1_activate(GtkMenuItem * menuitem,
 				     gpointer user_data);
-
-	void
-	 on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 	void
 	 on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data);
@@ -276,12 +186,6 @@ void
 	 on_item1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 	void
-	 on_save1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_save_as1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
 	 on_strongs_numbers1_activate(GtkMenuItem * menuitem,
 				      gpointer user_data);
 
@@ -298,69 +202,11 @@ void
 	void
 	 on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data);
 
-
-	void
-	 on_fontpicker2_font_set(GnomeFontPicker * gnomefontpicker,
-				 GString arg1, gpointer user_data);
-
-	void
-	 on_colorpicker5_color_set(GnomeColorPicker * gnomecolorpicker,
-				   guint arg1,
-				   guint arg2,
-				   guint arg3,
-				   guint arg4, gpointer user_data);
-
-	void
-	 on_colorpicker1_color_set(GnomeColorPicker * gnomecolorpicker,
-				   guint arg1,
-				   guint arg2,
-				   guint arg3,
-				   guint arg4, gpointer user_data);
-
-	void
-	 on_colorpicker2_color_set(GnomeColorPicker * gnomecolorpicker,
-				   guint arg1,
-				   guint arg2,
-				   guint arg3,
-				   guint arg4, gpointer user_data);
-
 	void
 	 on_preferences1_activate(GtkMenuItem * menuitem,
 				  gpointer user_data);
-
-	void
-	 on_suggestions_select_row(GtkCList * clist,
-				   gint row,
-				   gint column,
-				   GdkEvent * event, gpointer user_data);
-
-	void
-	 on_btnSpellOK_clicked(GtkButton * button, gpointer user_data);
-
 	void
 	 on_btnSpellCancel_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_text4_changed(GtkEditable * editable, gpointer user_data);
-
-	void
-	 on_add_bookmark2_activate(GtkMenuItem * menuitem,
-				   gpointer user_data);
-
-	void
-	 on_edit_bookmarks_1_activate(GtkMenuItem * menuitem,
-				      gpointer user_data);
-
-	void
-	 on_cbusebounds_toggled(GtkToggleButton * togglebutton,
-				gpointer user_data);
-
-	void
-	 on_cpfgMainwindow_color_set(GnomeColorPicker * gnomecolorpicker,
-				     guint arg1,
-				     guint arg2,
-				     guint arg3,
-				     guint arg4, gpointer user_data);
 
 	void
 	 on_fpMainwindow_font_set(GnomeFontPicker * gnomefontpicker,
@@ -380,35 +226,6 @@ void
 				       guint arg2,
 				       guint arg3,
 				       guint arg4, gpointer user_data);
-
-	void
-	 on_cpfgInterlinear_color_set(GnomeColorPicker * gnomecolorpicker,
-				      guint arg1,
-				      guint arg2,
-				      guint arg3,
-				      guint arg4, gpointer user_data);
-
-	void
-	 on_cpbgMainwindow_color_set(GnomeColorPicker * gnomecolorpicker,
-				     guint arg1,
-				     guint arg2,
-				     guint arg3,
-				     guint arg4, gpointer user_data);
-
-	void
-	 on_cpbgInterlinear_color_set(GnomeColorPicker * gnomecolorpicker,
-				      guint arg1,
-				      guint arg2,
-				      guint arg3,
-				      guint arg4, gpointer user_data);
-
-	void
-	 on_cpbgCurrentverse_color_set(GnomeColorPicker * gnomecolorpicker,
-				       guint arg1,
-				       guint arg2,
-				       guint arg3,
-				       guint arg4, gpointer user_data);
-
 	void
 	 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 					      gpointer user_data);
@@ -442,13 +259,6 @@ void
 	 on_btnSpellNotes_clicked(GtkButton * button, gpointer user_data);
 
 	void
-	 on_fpMainwindowitalic_font_set(GnomeFontPicker * gnomefontpicker,
-					GString arg1, gpointer user_data);
-
-	void
-	 save_changes_handler(int reply, gpointer data);
-
-	void
 	 on_auto_save_notes1_activate(GtkMenuItem * menuitem,
 				      gpointer user_data);
 	void
@@ -466,9 +276,6 @@ void
 	void
 	 on_change_module_activate(GtkMenuItem * menuitem,
 				   gpointer user_data);
-	void
-	 on_fbMainwindowbold_font_set(GnomeFontPicker * gnomefontpicker,
-				      GString arg1, gpointer user_data);
 
 	void
 	 on_btnKeyPrev_clicked(GtkButton * button, gpointer user_data);
@@ -483,22 +290,8 @@ void
 				GString arg1, gpointer user_data);
 
 	void
-	 on_fpSPPrinter_font_set(GnomeFontPicker * gnomefontpicker,
-				 GString arg1, gpointer user_data);
-
-	void
 	 on_btnSearchSaveList_clicked(GtkButton * button,
 				      gpointer user_data);
-
-	void
-	 on_cbContext_toggled(GtkToggleButton * togglebutton,
-			      gpointer user_data);
-
-	void
-	 on_verselist_select_row(GtkCList * clist,
-				 gint row,
-				 gint column,
-				 GdkEvent * event, gpointer user_data);
 
 	void
 	 on_notebook3_switch_page(GtkNotebook * notebook,
@@ -525,17 +318,6 @@ void
 	void
 	 on_btnAboutModuleOK_clicked(GtkButton * button,
 				     gpointer user_data);
-
-	void
-	 on_tree1_select_child(GtkTree * tree,
-			       GtkWidget * widget, gpointer user_data);
-
-	void
-	 on_tree1_selection_changed(GtkTree * tree, gpointer user_data);
-
-	void
-	 on_tree1_unselect_child(GtkTree * tree,
-				 GtkWidget * widget, gpointer user_data);
 	
 	void
 	 on_about_this_module1_activate(GtkMenuItem * menuitem,
@@ -603,35 +385,16 @@ void
 	 on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data);
 
 	void
-	 on_cbLEBook_changed(GtkEditable * editable, gpointer user_data);
-
-	void
-	 on_spLEChapter_changed(GtkEditable * editable,
-				gpointer user_data);
-
-	void
-	 on_spLEVerse_changed(GtkEditable * editable, gpointer user_data);
-
-	void
 	 on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data);
 
 	void
-	 on_btnLEDelete_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEClose_clicked(GtkButton * button, gpointer user_data);
-
-	void
 	 on_clLElist_select_row(GtkCList * clist,
 				gint row,
 				gint column,
 				GdkEvent * event, gpointer user_data);
-
-	void
-	 on_btnLEmakesub_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
@@ -651,10 +414,6 @@ void
 					  gpointer user_data);
 
 	void
-	 on_btnLEcancelistchanges_clicked(GtkButton * button,
-					  gpointer user_data);
-
-	void
 	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
 
 	void
@@ -667,22 +426,7 @@ void
 
 
 	void
-	 on_save1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_save_as1_activate(GtkMenuItem * menuitem, gpointer user_data);
-	 
-	void
 	 on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-
-	void
-	 on_btnLEup1_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEdown1_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEaddmenu_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_btnLEdelete_clicked(GtkButton * button, gpointer user_data);
@@ -697,31 +441,10 @@ void
 	 on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
 
 	void
-	 on_btnLEnew_clicked(GtkButton * button, gpointer user_data);
-
-	void
 	 on_btnLEopen_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEup1_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEdown1_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEup2_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEdown2_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEup3_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEdown3_clicked(GtkButton * button, gpointer user_data);
 
 	void
 	 on_btnLEok_clicked(GtkButton * button, gpointer user_data);
@@ -739,48 +462,6 @@ void
 	 on_btnLEopen_clicked(GtkButton * button, gpointer user_data);
 
 	void
-	 on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEprev_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEnext_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEprev_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEnext_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEprev_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEnext_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEprev_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEnext_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEprev_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEnext_clicked(GtkButton * button, gpointer user_data);
-
-	void
-	 on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
-
-	void
 	 on_btnLErefresh_clicked(GtkButton * button, gpointer user_data);
 
 	void
@@ -789,10 +470,6 @@ void
 	void
 	 on_tbtnFollow_toggled(GtkToggleButton * togglebutton,
 			       gpointer user_data);
-
-	void
-	 on_btnSPnew_clicked(GtkButton * button, gpointer user_data);
-
 
 	void
 	 on_cbtnPNformat_toggled(GtkToggleButton * togglebutton,
@@ -896,10 +573,6 @@ void
 	    on_moduleText_enter_notify_event(GtkWidget * widget,
 					     GdkEventCrossing * event,
 					     gpointer user_data);
-
-	void
-	 on_lookup_word_1_activate(GtkMenuItem * menuitem,
-				   gpointer user_data);
 
 	void
 	 on_about_this_module5_activate(GtkMenuItem * menuitem,

@@ -70,12 +70,14 @@ SWDisplay *RWPDisplay; /* to display Robertsons Word Pictures in the New Testame
 SWDisplay *FPNDisplay; /* to display formatted personal notes using GtkText */
 SWDisplay *HTMLDisplay; /* to display formatted html */
 SWDisplay *HTMLchapDisplay; /* to display formatted html */
+SWDisplay *listDisplay;	/* to display modules in list editor */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
 SWMgr *mainMgr2; /* sword mgr for comp2Mod - second interlinear module */ 
 SWMgr *mainMgr3; /* sword mgr for comp3Mod - third interlinear module */
 SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
+SWMgr *listMgr;	/* sword mgr for ListEditor */
 
 VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
 
@@ -86,6 +88,7 @@ SWModule *comp3Mod; /* module for third interlinear window */
 SWModule *curcomMod; /* module for commentary  window */	
 SWModule *percomMod; /* module for personal commentary  window */	
 SWModule *curdictMod; /* module for dict window */
+SWModule *listMod;   /* module for ListEditor */
 
 SWFilter *gbftohtml;
 SWFilter *plaintohtml;
@@ -975,4 +978,47 @@ void navcurcommModSWORD(gint backfoward)
 		else (*curcomMod)--;		
 		curcomMod->Display();
 	}
+}
+
+/******************************************************************************
+ *setuplisteditSWORD
+ *
+ *
+******************************************************************************/
+void setuplisteditSWORD(GtkWidget *text)
+{
+	listMgr = new SWMgr();
+	listMod = NULL;
+	ModMap::iterator it;	/* sword manager iterator */
+	
+	/* set sword display */
+	listDisplay = new GTKInterlinearDisp(text);	
+	/* iterator through modules */	
+	for (it = listMgr->Modules.begin(); it != listMgr->Modules.end(); it++){
+		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
+			listMod = (*it).second;	/* set listMod  */
+			listMod->Disp(listDisplay);	/* set listeditor display for modules */
+		}
+	}
+	it = listMgr->Modules.find(curMod->Name()); /* set listMod to curMod */
+	if (it != listMgr->Modules.end()) {
+		listMod = (*it).second;
+	}
+}
+
+//-------------------------------------------------------------------------------------------
+void changeLEverseSWORD(gchar * verse)
+{
+	if (listMod) {
+		listMod->SetKey(verse);
+		listMod->Display();
+	}
+}
+
+//-------------------------------------------------------------------------------------------
+void destroyListEditorSWORD(void)	//-- destroy ListEditor
+{
+	delete listMgr;
+	if (listDisplay)	//-- delete Sword display
+		delete listDisplay;
 }
