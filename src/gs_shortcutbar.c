@@ -908,6 +908,8 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			if (group_num == groupnum0) {
 				gint sbtype;
 				sbtype = sbtypefromModNameSBSW(modName);
+				g_warning("type = %d",sbtype);
+				
 				if (sbtype == 0 || sbtype == 1)
 					gotoBookmarkSWORD(modName,
 						  settings->currentverse);

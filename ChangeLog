@@ -1,3 +1,11 @@
+2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* fixed crash when reference is change and no 
+	  commentary modules are present thanks to 
+	  Jp Robinson for finding this bug
+	* bumped to 0.7.2a
+	
+
 2002-04-19  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* bumped to 0.7.2
