@@ -27,11 +27,6 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine-print.h>
 #include <gtkhtml/htmlselection.h>
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
