@@ -72,7 +72,7 @@ extern "C" {
 //#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
-char *OLD_CODESET;
+extern char *OLD_CODESET;
 using namespace sword; 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -85,7 +85,28 @@ extern gboolean shift_key_presed;
 
 gboolean style_display = TRUE;
 
+/******************************************************************************
+ * Name
+ *  main_is_bible_ref
+ *
+ * Synopsis
+ *   #include ".h"
+ *   
+ *   	int main_is_bible_ref(char * key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   int
+ */
 
+int main_is_bible_ref(char * key)
+{
+	return backend->is_Bible_key(key, settings.currentverse);	
+}
+
+	
 /******************************************************************************
  * Name
  *  set_module_unlocked
