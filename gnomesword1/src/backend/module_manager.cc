@@ -56,7 +56,6 @@ static ModMap::iterator it;
 static ModMap::iterator end;
 
 
-
 /******************************************************************************
  * Name
  *   preDownloadStatus
@@ -64,7 +63,7 @@ static ModMap::iterator end;
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   void InstallMgr::preDownloadStatus(long totalBytes, long completedBytes, 
+ *   void StatusReporter::preStatus(long totalBytes, long completedBytes, 
  *				   const char *message)
  *
  * Description
@@ -74,7 +73,7 @@ static ModMap::iterator end;
  *   void
  */
 
-void InstallMgr::preDownloadStatus(long totalBytes, long completedBytes, 
+void GSStatusReporter::preStatus(long totalBytes, long completedBytes, 
 				   const char *message)
 {
 	update_install_status(totalBytes, completedBytes, message);
@@ -87,7 +86,7 @@ void InstallMgr::preDownloadStatus(long totalBytes, long completedBytes,
  * Synopsis
  *   #include "backend/module_manager.hh"
  *
- *   void InstallMgr::statusUpdate(double dltotal, double dlnow)
+ *   void StatusReporter::statusUpdate(double dltotal, double dlnow)
  *
  * Description
  *   
@@ -96,13 +95,102 @@ void InstallMgr::preDownloadStatus(long totalBytes, long completedBytes,
  *   void
  */
 
-void InstallMgr::statusUpdate(double dltotal, double dlnow) 
+void GSStatusReporter::statusUpdate(double dltotal, double dlnow) 
 {
 	if (!dltotal)
 		return;	
 	double filefraction  = (dlnow / dltotal);
 	update_install_progress(filefraction);
 }
+
+
+ModuleManager::ModuleManager() {	
+	char *envhomedir = getenv("HOME");
+	baseDir = (envhomedir) ? envhomedir : ".";
+	baseDir += "/.sword/InstallMgr";
+	statusReporter = new GSStatusReporter();
+}
+ 
+ModuleManager::~ModuleManager() {
+	
+}
+/*
+void ModuleManager::initMgr(const char *dir)
+{
+	if(dir)
+		mgr = new SWMgr(dir);
+	else
+		mgr = new SWMgr();
+}
+
+void ModuleManager::deleteMgr(void)
+{
+	delete mgr;
+}
+
+void ModuleManager::initModuleMgr(void)
+{	
+	installMgr = new InstallMgr(baseDir, statusReporter);
+}
+
+void ModuleManager::deleteModuleMgr(void)
+{	
+	delete installMgr;
+}
+
+
+MOD_MGR *ModuleManager::getNextModule(void)
+{
+	MOD_MGR *mod_info = NULL;
+	const char *buf;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;
+	SWModule *module;
+	
+	if(it != end) {
+		module = it->second;
+		mod_info = g_new(MOD_MGR, 1);
+		mod_info->name = g_convert(module->Name(),
+					   -1,
+					   UTF_8,
+					   OLD_CODESET,
+					   &bytes_read,
+					   &bytes_written, error);
+		if (mod_info->name) {
+			mod_info->language = (module->Lang())?
+				backend->get_language_map(module->Lang()): 
+				"unknown";
+			mod_info->type = g_convert(module->Type(),
+						   -1,
+						   UTF_8,
+						   OLD_CODESET,
+						   &bytes_read,
+						   &bytes_written,
+						   error);
+			buf =
+			    (module->getConfigEntry("Version")) ? module->
+			    getConfigEntry("Version") : " ";
+			mod_info->new_version = g_convert(buf, 
+						-1, UTF_8, OLD_CODESET,
+				      		&bytes_read, 
+						&bytes_written,
+				      		error);
+			mod_info->old_version =
+			    backend->get_config_entry(mod_info->name, "Version"); //backend_get_module_version(mod_info->name);
+			mod_info->installed =
+			    backend->is_module(mod_info->name);
+			mod_info->description = module->Description();
+			mod_info->locked = 
+				(module->getConfigEntry("CipherKey")) ? 1 : 0;
+			it++;	
+			return (MOD_MGR *) mod_info;
+		}
+	} 
+	return NULL;
+}
+
+*/
 
 /******************************************************************************
  * Name
@@ -600,7 +688,9 @@ void backend_init_module_mgr(const char *dir)
 	char *envhomedir = getenv("HOME");
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
-	installMgr = new InstallMgr(baseDir);
+	GSStatusReporter *statusReporter = new GSStatusReporter();
+	installMgr = new InstallMgr(baseDir, statusReporter);
+	//installMgr = new InstallMgr(baseDir);
 	backend_module_mgr_list_local_sources();
 }
 

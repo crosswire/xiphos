@@ -108,6 +108,7 @@ static gint response;
 static GdkPixbuf *INSTALLED;
 static GdkPixbuf *LOCKED;
 static GdkPixbuf *BLANK;
+static gchar *current_mod;
 
 
 
@@ -133,7 +134,7 @@ static void create_pixbufs(void)
 					   GTK_STOCK_APPLY,
 					   GTK_ICON_SIZE_MENU, NULL);
 	LOCKED = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					"/epiphany-secure.png",NULL);
+					  "/epiphany-secure.png", NULL);
 	BLANK = gtk_widget_render_icon(widgets.app,
 				       "gnome-stock-blank",
 				       GTK_ICON_SIZE_MENU, NULL);
@@ -236,6 +237,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 	tmp = modules;
 	while (tmp) {
 		buf = (gchar *) tmp->data;
+		current_mod = buf;
 		if (install) {
 			g_string_printf(mods, "%s: %s",
 					_("Installing: "), buf);
@@ -250,7 +252,8 @@ static void remove_install_modules(GList * modules, gboolean install)
 						  mods->str);
 			g_print("uninstalling %s from %s\n", buf,
 				destination);
-			if (mod_mgr_uninstall(destination, buf) == -1) {
+			failed = mod_mgr_uninstall(destination, buf);
+			if (failed == -1) {
 				//mod_mgr_shut_down();
 				if (destination) {
 					new_dest = NULL;
@@ -291,7 +294,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 		else
 			g_string_printf(mods, "%s", _("Remove failed"));
 	} else {
-		g_string_printf(mods, "%s", _("Finished"));
+		g_string_printf(mods, "%s", _("Finished"));		
 	}
 	if (install) {
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar),
@@ -856,8 +859,8 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
  *   void
  */
 
-static void fixed_toggled(GtkCellRendererToggle * cell, gchar * path_str,
-	      gpointer data)
+static void fixed_toggled(GtkCellRendererToggle * cell,
+			  gchar * path_str, gpointer data)
 {
 	GtkTreeModel *model = (GtkTreeModel *) data;
 	GtkTreeIter iter;
@@ -915,7 +918,7 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 	gtk_tree_view_append_column(treeview, column);
 
 	column = gtk_tree_view_column_new();
-	image = gtk_image_new_from_stock(GTK_STOCK_APPLY,	
+	image = gtk_image_new_from_stock(GTK_STOCK_APPLY,
 					 GTK_ICON_SIZE_MENU);
 	gtk_widget_show(image);
 	renderer = GTK_CELL_RENDERER(gtk_cell_renderer_pixbuf_new());
@@ -1078,7 +1081,8 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Caption"),
 						     renderer, "text",
-						     COLUMN_CAPTION, NULL);
+						     COLUMN_CAPTION,
+						     NULL);
 	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
@@ -1086,7 +1090,8 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Source"),
 						     renderer, "text",
-						     COLUMN_SOURCE, NULL);
+						     COLUMN_SOURCE,
+						     NULL);
 	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
@@ -1094,7 +1099,8 @@ static void add_columns_to_remote_treeview(GtkTreeView * treeview)
 	column =
 	    gtk_tree_view_column_new_with_attributes(_("Directory"),
 						     renderer, "text",
-						     COLUMN_DIRECTORY, NULL);
+						     COLUMN_DIRECTORY,
+						     NULL);
 	gtk_tree_view_column_set_sort_column_id(column, COLUMN_NAME);
 	gtk_tree_view_append_column(treeview, column);
 
@@ -1169,15 +1175,15 @@ static GtkTreeModel *create_remote_source_treeview_model(void)
 	GtkTreeIter iter;
 
 	/* create list store */
-	store = gtk_list_store_new(NUM_REMOTE_COLUMNS, 
+	store = gtk_list_store_new(NUM_REMOTE_COLUMNS,
 				   G_TYPE_STRING,
 				   G_TYPE_STRING,
-				   G_TYPE_STRING,
-				   G_TYPE_STRING);
+				   G_TYPE_STRING, G_TYPE_STRING);
 
 	return GTK_TREE_MODEL(store);
-	
+
 }
+
 /******************************************************************************
  * Name
  *   button_press_event
@@ -1260,30 +1266,31 @@ static void load_source_treeviews(void)
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	GtkTreeModel *local_model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
-	
+
 	/* remote */
-	gtk_list_store_clear (GTK_LIST_STORE(remote_model));
+	gtk_list_store_clear(GTK_LIST_STORE(remote_model));
 	tmp = mod_mgr_list_remote_sources();
-	while(tmp) {		
+	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
-		gtk_list_store_append(GTK_LIST_STORE(remote_model), &iter);
-		gtk_list_store_set(GTK_LIST_STORE(remote_model), &iter, 
-					COLUMN_TYPE, mms->type, 
-					COLUMN_CAPTION, mms->caption, 
-					COLUMN_SOURCE, mms->source, 
-					COLUMN_DIRECTORY, mms->directory, 
-					-1);
+		gtk_list_store_append(GTK_LIST_STORE(remote_model),
+				      &iter);
+		gtk_list_store_set(GTK_LIST_STORE(remote_model), &iter,
+				   COLUMN_TYPE, mms->type,
+				   COLUMN_CAPTION, mms->caption,
+				   COLUMN_SOURCE, mms->source,
+				   COLUMN_DIRECTORY, mms->directory,
+				   -1);
 		combo1_items =
 		    g_list_append(combo1_items, (gchar *) mms->caption);
 		tmp = g_list_next(tmp);
 	}
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), combo1_items);	
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), combo1_items);
 	g_list_free(combo1_items);
 	g_list_free(tmp);
 	tmp = NULL;
-	
+
 	/* local */
-	gtk_list_store_clear (GTK_LIST_STORE(local_model));
+	gtk_list_store_clear(GTK_LIST_STORE(local_model));
 	tmp = mod_mgr_list_local_sources();
 	if (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
@@ -1291,23 +1298,24 @@ static void load_source_treeviews(void)
 					      fileentry1,
 					      mms->directory);
 	}
-	while(tmp) {		
+	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
-		gtk_list_store_append(GTK_LIST_STORE(local_model), &iter);
-		gtk_list_store_set(GTK_LIST_STORE(local_model), &iter, 
-					COLUMN_TYPE, mms->type, 
-					COLUMN_CAPTION, mms->caption, 
-					COLUMN_SOURCE, mms->source, 
-					COLUMN_DIRECTORY, mms->directory, 
-					-1);
+		gtk_list_store_append(GTK_LIST_STORE(local_model),
+				      &iter);
+		gtk_list_store_set(GTK_LIST_STORE(local_model), &iter,
+				   COLUMN_TYPE, mms->type,
+				   COLUMN_CAPTION, mms->caption,
+				   COLUMN_SOURCE, mms->source,
+				   COLUMN_DIRECTORY, mms->directory,
+				   -1);
 		gnome_entry_append_history((GnomeEntry *) combo_entry1,
 					   TRUE, mms->directory);
 		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-	
-	
+
+
 }
 
 /******************************************************************************
@@ -1441,7 +1449,7 @@ void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
  */
 
 void save_sources(void)
-{	
+{
 	gchar *type = NULL;
 	gchar *caption = NULL;
 	gchar *source = NULL;
@@ -1452,53 +1460,43 @@ void save_sources(void)
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	GtkTreeModel *local_model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
-	
+
 	mod_mgr_clear_config();
-		
-	valid = gtk_tree_model_get_iter_first (remote_model, &iter);
-	while (valid)
-	{					
-		gtk_tree_model_get (remote_model, &iter, 
-				  COLUMN_TYPE, &type,
-				  COLUMN_CAPTION, &caption,
-				  COLUMN_SOURCE, &source,
-				  COLUMN_DIRECTORY, &directory,
-				  -1);
-		
+
+	valid = gtk_tree_model_get_iter_first(remote_model, &iter);
+	while (valid) {
+		gtk_tree_model_get(remote_model, &iter,
+				   COLUMN_TYPE, &type,
+				   COLUMN_CAPTION, &caption,
+				   COLUMN_SOURCE, &source,
+				   COLUMN_DIRECTORY, &directory, -1);
+
 		mod_mgr_add_source("FTPSource",
-				   type, 
-				   caption,
-				   source, 
-				   directory);		
-		g_free (type);		
-		g_free (caption);		
-		g_free (source);		
-		g_free (directory);
-		valid = gtk_tree_model_iter_next (remote_model, &iter);
+				   type, caption, source, directory);
+		g_free(type);
+		g_free(caption);
+		g_free(source);
+		g_free(directory);
+		valid = gtk_tree_model_iter_next(remote_model, &iter);
 	}
-	
-	valid = gtk_tree_model_get_iter_first (local_model, &iter);
-	while (valid)
-	{					
-		gtk_tree_model_get (local_model, &iter, 
-				  COLUMN_TYPE, &type,
-				  COLUMN_CAPTION, &caption,
-				  COLUMN_SOURCE, &source,
-				  COLUMN_DIRECTORY, &directory,
-				  -1);
-		
+
+	valid = gtk_tree_model_get_iter_first(local_model, &iter);
+	while (valid) {
+		gtk_tree_model_get(local_model, &iter,
+				   COLUMN_TYPE, &type,
+				   COLUMN_CAPTION, &caption,
+				   COLUMN_SOURCE, &source,
+				   COLUMN_DIRECTORY, &directory, -1);
+
 		mod_mgr_add_source("DIRSource",
-				   type, 
-				   caption,
-				   source, 
-				   directory);		
-		g_free (type);		
-		g_free (caption);		
-		g_free (source);		
-		g_free (directory);
-		valid = gtk_tree_model_iter_next (local_model, &iter);
+				   type, caption, source, directory);
+		g_free(type);
+		g_free(caption);
+		g_free(source);
+		g_free(directory);
+		valid = gtk_tree_model_iter_next(local_model, &iter);
 	}
-	
+
 	load_source_treeviews();
 }
 
@@ -1520,33 +1518,34 @@ void save_sources(void)
  *   void
  */
 
-void on_fileselection_local_source_response (GtkDialog * dialog,
-                                gint response_id, GtkFileSelection * filesel)
+void on_fileselection_local_source_response(GtkDialog * dialog,
+					    gint response_id,
+					    GtkFileSelection * filesel)
 {
 	GtkTreeIter iter;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_local));
-	
-	switch(response_id) {
-		case GTK_RESPONSE_OK:
-			gtk_list_store_append(GTK_LIST_STORE(model), &iter);
-			gtk_list_store_set(GTK_LIST_STORE(model), &iter, 
-				COLUMN_TYPE, "DIR", 
-				COLUMN_CAPTION, 
-				gtk_file_selection_get_filename (filesel), 
-				COLUMN_SOURCE, "[local]", 
-				COLUMN_DIRECTORY, 
-				gtk_file_selection_get_filename (filesel), 
-				-1);
-			save_sources();
-			g_warning(gtk_file_selection_get_filename (filesel));
-			
+
+	switch (response_id) {
+	case GTK_RESPONSE_OK:
+		gtk_list_store_append(GTK_LIST_STORE(model), &iter);
+		gtk_list_store_set(GTK_LIST_STORE(model), &iter,
+				   COLUMN_TYPE, "DIR",
+				   COLUMN_CAPTION,
+				   gtk_file_selection_get_filename
+				   (filesel), COLUMN_SOURCE, "[local]",
+				   COLUMN_DIRECTORY,
+				   gtk_file_selection_get_filename
+				   (filesel), -1);
+		save_sources();
+		g_warning(gtk_file_selection_get_filename(filesel));
+
 		break;
-		case GTK_RESPONSE_CANCEL:
-			
-			
+	case GTK_RESPONSE_CANCEL:
+
+
 		break;
-		
+
 	}
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
@@ -1568,33 +1567,45 @@ void on_fileselection_local_source_response (GtkDialog * dialog,
  *   GtkWidget*
  */
 
-GtkWidget* create_fileselection_local_source (void)
+GtkWidget *create_fileselection_local_source(void)
 {
-  GtkWidget *fileselection_local_source;
-  GtkWidget *ok_button1;
-  GtkWidget *cancel_button1;
+	GtkWidget *fileselection_local_source;
+	GtkWidget *ok_button1;
+	GtkWidget *cancel_button1;
 
-  fileselection_local_source = gtk_file_selection_new (_("Select Local Source"));
-  gtk_container_set_border_width (GTK_CONTAINER (fileselection_local_source), 10);
-  gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (fileselection_local_source));
-  
-  gtk_widget_set_sensitive(
-	GTK_FILE_SELECTION(fileselection_local_source)->file_list,FALSE);
-  gtk_widget_hide(GTK_FILE_SELECTION(fileselection_local_source)->selection_entry);
-	
-  ok_button1 = GTK_FILE_SELECTION (fileselection_local_source)->ok_button;	
-  gtk_widget_show (ok_button1);
-  GTK_WIDGET_SET_FLAGS (ok_button1, GTK_CAN_DEFAULT);
+	fileselection_local_source =
+	    gtk_file_selection_new(_("Select Local Source"));
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (fileselection_local_source),
+				       10);
+	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION
+					       (fileselection_local_source));
 
-  cancel_button1 = GTK_FILE_SELECTION (fileselection_local_source)->cancel_button;
-  gtk_widget_show (cancel_button1);
-  GTK_WIDGET_SET_FLAGS (cancel_button1, GTK_CAN_DEFAULT);
+	gtk_widget_set_sensitive(GTK_FILE_SELECTION
+				 (fileselection_local_source)->
+				 file_list, FALSE);
+	gtk_widget_hide(GTK_FILE_SELECTION(fileselection_local_source)->
+			selection_entry);
 
-  	g_signal_connect ((gpointer) fileselection_local_source, "response",
-                    G_CALLBACK (on_fileselection_local_source_response),
-                    (GtkFileSelection *)fileselection_local_source);
+	ok_button1 =
+	    GTK_FILE_SELECTION(fileselection_local_source)->ok_button;
+	gtk_widget_show(ok_button1);
+	GTK_WIDGET_SET_FLAGS(ok_button1, GTK_CAN_DEFAULT);
 
-  return fileselection_local_source;
+	cancel_button1 =
+	    GTK_FILE_SELECTION(fileselection_local_source)->
+	    cancel_button;
+	gtk_widget_show(cancel_button1);
+	GTK_WIDGET_SET_FLAGS(cancel_button1, GTK_CAN_DEFAULT);
+
+	g_signal_connect((gpointer) fileselection_local_source,
+			 "response",
+			 G_CALLBACK
+			 (on_fileselection_local_source_response),
+			 (GtkFileSelection *)
+			 fileselection_local_source);
+
+	return fileselection_local_source;
 }
 
 
@@ -1616,7 +1627,7 @@ GtkWidget* create_fileselection_local_source (void)
 
 void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
 {
-	GtkWidget *dlg = create_fileselection_local_source ();
+	GtkWidget *dlg = create_fileselection_local_source();
 	gtk_widget_show(dlg);
 }
 
@@ -1637,12 +1648,13 @@ void on_button_add_local_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_button_remove_local_clicked(GtkButton * button, gpointer user_data)
+static void on_button_remove_local_clicked(GtkButton * button,
+					   gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
 	gchar *name_string;
-	GtkTreeSelection* selection;
+	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 	GtkTreeIter iter;
 	gchar *caption = NULL;
@@ -1651,28 +1663,26 @@ static void on_button_remove_local_clicked(GtkButton * button, gpointer user_dat
 	gchar *directory = NULL;
 	GString *str = g_string_new(NULL);
 	GtkTreeModel *model;
-	
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_local));
-	if(!gtk_tree_selection_get_selected(selection, &model, &selected)) 
+
+	selection =
+	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_local));
+	if (!gtk_tree_selection_get_selected
+	    (selection, &model, &selected))
 		return;
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   COLUMN_TYPE, &type, 
-				   COLUMN_CAPTION, &caption, 
-				   COLUMN_SOURCE, &source, 
-				   COLUMN_DIRECTORY , &directory, 
-				   -1);
+			   COLUMN_TYPE, &type,
+			   COLUMN_CAPTION, &caption,
+			   COLUMN_SOURCE, &source,
+			   COLUMN_DIRECTORY, &directory, -1);
 	name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = N_("Bookmark");	
+	yes_no_dialog->title = N_("Bookmark");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
 			_("Remove the selected source"),
-			caption,
-			type,
-			source,
-			directory);
+			caption, type, source, directory);
 	yes_no_dialog->label_top = str->str;
 	yes_no_dialog->yes = TRUE;
 	yes_no_dialog->no = TRUE;
@@ -1687,8 +1697,8 @@ static void on_button_remove_local_clicked(GtkButton * button, gpointer user_dat
 	g_free(caption);
 	g_free(source);
 	g_free(directory);
-	g_string_free(str,TRUE);
-	
+	g_string_free(str, TRUE);
+
 }
 
 
@@ -1708,13 +1718,14 @@ static void on_button_remove_local_clicked(GtkButton * button, gpointer user_dat
  *   void
  */
 
-void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
+void on_button_add_remote_clicked(GtkButton * button,
+				  gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *dialog;
 	GtkTreeIter iter;
 	GString *str = g_string_new(NULL);
-	
+
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(treeview_remote));
 	g_string_printf(str,
@@ -1723,19 +1734,19 @@ void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 	dialog = gui_new_dialog();
 	dialog->stock_icon = GTK_STOCK_DIALOG_INFO;
 	dialog->label_top = str->str;
-	dialog->label1 = N_("Caption:");	
+	dialog->label1 = N_("Caption:");
 	dialog->label2 = N_("Type:");
 	dialog->label3 = N_("URL:");
 	dialog->label4 = N_("Directory:");
-	dialog->text1 = g_strdup("Crosswire");	
-	dialog->text2 = g_strdup("FTP");		
-	dialog->text3 = g_strdup("ftp.crosswire.org");		
-	dialog->text4 = g_strdup("/pub/sword/raw");	
+	dialog->text1 = g_strdup("Crosswire");
+	dialog->text2 = g_strdup("FTP");
+	dialog->text3 = g_strdup("ftp.crosswire.org");
+	dialog->text4 = g_strdup("/pub/sword/raw");
 	dialog->cancel = TRUE;
 	dialog->ok = TRUE;
-	
+
 	test = gui_gs_dialog(dialog);
-	if (test != GS_OK) {		
+	if (test != GS_OK) {
 		g_free(dialog->text1);
 		g_free(dialog->text2);
 		g_free(dialog->text3);
@@ -1745,12 +1756,11 @@ void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
 		return;
 	}
 	gtk_list_store_append(GTK_LIST_STORE(model), &iter);
-	gtk_list_store_set(GTK_LIST_STORE(model), &iter, 
-				COLUMN_TYPE, dialog->text2, 
-				COLUMN_CAPTION, dialog->text1, 
-				COLUMN_SOURCE, dialog->text3, 
-				COLUMN_DIRECTORY, dialog->text4, 
-				-1);
+	gtk_list_store_set(GTK_LIST_STORE(model), &iter,
+			   COLUMN_TYPE, dialog->text2,
+			   COLUMN_CAPTION, dialog->text1,
+			   COLUMN_SOURCE, dialog->text3,
+			   COLUMN_DIRECTORY, dialog->text4, -1);
 	g_free(dialog->text1);
 	g_free(dialog->text2);
 	g_free(dialog->text3);
@@ -1777,12 +1787,13 @@ void on_button_add_remote_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
+void on_button_remove_remote_clicked(GtkButton * button,
+				     gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *yes_no_dialog;
 	gchar *name_string;
-	GtkTreeSelection* selection;
+	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 	GtkTreeIter iter;
 	gchar *caption = NULL;
@@ -1791,28 +1802,26 @@ void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 	gchar *directory = NULL;
 	GString *str = g_string_new(NULL);
 	GtkTreeModel *model;
-	
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
-	if(!gtk_tree_selection_get_selected(selection, &model, &selected)) 
+
+	selection =
+	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview_remote));
+	if (!gtk_tree_selection_get_selected
+	    (selection, &model, &selected))
 		return;
 	gtk_tree_model_get(model, &selected,
-				   COLUMN_TYPE, &type, 
-				   COLUMN_CAPTION, &caption, 
-				   COLUMN_SOURCE, &source, 
-				   COLUMN_DIRECTORY , &directory, 
-				   -1);
+			   COLUMN_TYPE, &type,
+			   COLUMN_CAPTION, &caption,
+			   COLUMN_SOURCE, &source,
+			   COLUMN_DIRECTORY, &directory, -1);
 	name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
 	yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_WARNING;
-	yes_no_dialog->title = N_("Bookmark");	
+	yes_no_dialog->title = N_("Bookmark");
 	g_string_printf(str,
 			"<span weight=\"bold\">%s</span>\n\n%s|%s|%s|%s",
 			_("Remove the selected source"),
-			caption,
-			type,
-			source,
-			directory);
+			caption, type, source, directory);
 	yes_no_dialog->label_top = str->str;
 	yes_no_dialog->yes = TRUE;
 	yes_no_dialog->no = TRUE;
@@ -1827,8 +1836,8 @@ void on_button_remove_remote_clicked(GtkButton * button, gpointer user_data)
 	g_free(caption);
 	g_free(source);
 	g_free(directory);
-	g_string_free(str,TRUE);
-	
+	g_string_free(str, TRUE);
+
 }
 
 
@@ -1880,15 +1889,15 @@ GtkWidget *create_dialog(void)
 	GtkWidget *vbox7;
 	GtkWidget *label16;
 
-  GtkWidget *hbox12;
-  GtkWidget *vbox14;
-  GtkWidget *label26;
-  GtkWidget *scrolledwindow6;
-  GtkWidget *vbox15;
-  GtkWidget *label27;
-  GtkWidget *button_add_local;
-  GtkWidget *button_remove_local;
-  
+	GtkWidget *hbox12;
+	GtkWidget *vbox14;
+	GtkWidget *label26;
+	GtkWidget *scrolledwindow6;
+	GtkWidget *vbox15;
+	GtkWidget *label27;
+	GtkWidget *button_add_local;
+	GtkWidget *button_remove_local;
+
 	GtkWidget *hbox11;
 	GtkWidget *vbox9;
 	GtkWidget *label18;
@@ -1915,7 +1924,7 @@ GtkWidget *create_dialog(void)
 	GString *str = g_string_new(NULL);
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	
+
 	dialog = gtk_dialog_new();
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
 	gtk_window_set_title(GTK_WINDOW(dialog), _("Module Manager"));
@@ -1940,8 +1949,9 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow2),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow2,
-                                             settings.shadow_type);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow2,
+					    settings.shadow_type);
 
 	model = create_model_to_first();
 	treeview1 = gtk_tree_view_new_with_model(model);
@@ -2049,8 +2059,9 @@ GtkWidget *create_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox4), hbox2, FALSE, TRUE, 0);
 
 	radiobutton2 =
-	    gtk_radio_button_new_with_mnemonic_from_widget((GtkRadioButton *) 
-	    		radiobutton_source, _("Remote"));
+	    gtk_radio_button_new_with_mnemonic_from_widget((GtkRadioButton *)
+							   radiobutton_source,
+							   _("Remote"));
 	gtk_widget_show(radiobutton2);
 	gtk_box_pack_start(GTK_BOX(hbox2), radiobutton2, FALSE, FALSE,
 			   0);
@@ -2141,8 +2152,9 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow1),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow1,
-                                             settings.shadow_type);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow1,
+					    settings.shadow_type);
 
 	model = create_model();
 
@@ -2182,8 +2194,9 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow3),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow3,
-                                             settings.shadow_type);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow3,
+					    settings.shadow_type);
 	model = create_model();
 
 	treeview2 = gtk_tree_view_new_with_model(model);
@@ -2219,52 +2232,61 @@ GtkWidget *create_dialog(void)
 	gtk_label_set_justify(GTK_LABEL(label16), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label16), 0, 0.5);
 
-  hbox12 = gtk_hbox_new (FALSE, 6);
-  gtk_widget_show (hbox12);
-  gtk_box_pack_start (GTK_BOX (vbox7), hbox12, TRUE, TRUE, 0);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox12), 12);
+	hbox12 = gtk_hbox_new(FALSE, 6);
+	gtk_widget_show(hbox12);
+	gtk_box_pack_start(GTK_BOX(vbox7), hbox12, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox12), 12);
 
-  vbox14 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (vbox14);
-  gtk_box_pack_start (GTK_BOX (hbox12), vbox14, TRUE, TRUE, 0);
+	vbox14 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox14);
+	gtk_box_pack_start(GTK_BOX(hbox12), vbox14, TRUE, TRUE, 0);
 
-  label26 = gtk_label_new (_("Current local sources"));
-  gtk_widget_show (label26);
-  gtk_box_pack_start (GTK_BOX (vbox14), label26, FALSE, FALSE, 0);
-  gtk_label_set_justify (GTK_LABEL (label26), GTK_JUSTIFY_LEFT);
-  gtk_misc_set_alignment (GTK_MISC (label26), 0, 0.5);
+	label26 = gtk_label_new(_("Current local sources"));
+	gtk_widget_show(label26);
+	gtk_box_pack_start(GTK_BOX(vbox14), label26, FALSE, FALSE, 0);
+	gtk_label_set_justify(GTK_LABEL(label26), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(label26), 0, 0.5);
 
-  scrolledwindow6 = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_show (scrolledwindow6);
-  gtk_box_pack_start (GTK_BOX (vbox14), scrolledwindow6, TRUE, TRUE, 0);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow6), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	scrolledwindow6 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow6);
+	gtk_box_pack_start(GTK_BOX(vbox14), scrolledwindow6, TRUE, TRUE,
+			   0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow6),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
 
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow6,
-                                             settings.shadow_type);
-					     
-  model = create_remote_source_treeview_model();
-  treeview_local = gtk_tree_view_new_with_model(model);
-  gtk_widget_show (treeview_local);
-  gtk_container_add (GTK_CONTAINER (scrolledwindow6), treeview_local);
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview_local), FALSE);
-  add_columns_to_remote_treeview(GTK_TREE_VIEW(treeview_local));
-  
-  vbox15 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (vbox15);
-  gtk_box_pack_start (GTK_BOX (hbox12), vbox15, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow6,
+					    settings.shadow_type);
 
-  label27 = gtk_label_new ("");
-  gtk_widget_show (label27);
-  gtk_box_pack_start (GTK_BOX (vbox15), label27, FALSE, FALSE, 0);
-  gtk_label_set_justify (GTK_LABEL (label27), GTK_JUSTIFY_LEFT);
+	model = create_remote_source_treeview_model();
+	treeview_local = gtk_tree_view_new_with_model(model);
+	gtk_widget_show(treeview_local);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow6),
+			  treeview_local);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview_local),
+					  FALSE);
+	add_columns_to_remote_treeview(GTK_TREE_VIEW(treeview_local));
 
-  button_add_local = gtk_button_new_from_stock ("gtk-add");
-  gtk_widget_show (button_add_local);
-  gtk_box_pack_start (GTK_BOX (vbox15), button_add_local, FALSE, FALSE, 0);
+	vbox15 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox15);
+	gtk_box_pack_start(GTK_BOX(hbox12), vbox15, TRUE, TRUE, 0);
 
-  button_remove_local = gtk_button_new_from_stock ("gtk-remove");
-  gtk_widget_show (button_remove_local);
-  gtk_box_pack_start (GTK_BOX (vbox15), button_remove_local, FALSE, FALSE, 0);
+	label27 = gtk_label_new("");
+	gtk_widget_show(label27);
+	gtk_box_pack_start(GTK_BOX(vbox15), label27, FALSE, FALSE, 0);
+	gtk_label_set_justify(GTK_LABEL(label27), GTK_JUSTIFY_LEFT);
+
+	button_add_local = gtk_button_new_from_stock("gtk-add");
+	gtk_widget_show(button_add_local);
+	gtk_box_pack_start(GTK_BOX(vbox15), button_add_local, FALSE,
+			   FALSE, 0);
+
+	button_remove_local = gtk_button_new_from_stock("gtk-remove");
+	gtk_widget_show(button_remove_local);
+	gtk_box_pack_start(GTK_BOX(vbox15), button_remove_local, FALSE,
+			   FALSE, 0);
 
 	hbox11 = gtk_hbox_new(FALSE, 6);
 	gtk_widget_show(hbox11);
@@ -2289,9 +2311,10 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow5),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow5,
-                                             settings.shadow_type);
-				       
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)
+					    scrolledwindow5,
+					    settings.shadow_type);
+
 	model = create_remote_source_treeview_model();
 	treeview_remote = gtk_tree_view_new_with_model(model);
 	gtk_widget_show(treeview_remote);
@@ -2410,14 +2433,13 @@ GtkWidget *create_dialog(void)
 			 G_CALLBACK(on_notebook1_switch_page), NULL);
 	g_signal_connect((gpointer) radiobutton2, "toggled",
 			 G_CALLBACK(on_radiobutton2_toggled), NULL);
-			 
-	
-  g_signal_connect ((gpointer) button_add_local, "clicked",
-                    G_CALLBACK (on_button_add_local_clicked),
-                    NULL);
-  g_signal_connect ((gpointer) button_remove_local, "clicked",
-                    G_CALLBACK (on_button_remove_local_clicked),
-                    NULL);
+
+
+	g_signal_connect((gpointer) button_add_local, "clicked",
+			 G_CALLBACK(on_button_add_local_clicked), NULL);
+	g_signal_connect((gpointer) button_remove_local, "clicked",
+			 G_CALLBACK(on_button_remove_local_clicked),
+			 NULL);
 	g_signal_connect((gpointer) button_add_remote, "clicked",
 			 G_CALLBACK(on_button_add_remote_clicked),
 			 NULL);
@@ -2505,6 +2527,9 @@ void gui_open_mod_mgr(void)
 void gui_update_install_status(glong total, glong done,
 			       const gchar * message)
 {
+	gchar *buf;
+	
+	buf = g_strdup_printf("%s: %s",current_mod,message);
 	GtkProgressBar *pbar;
 	switch (current_page) {
 	case 1:
@@ -2517,10 +2542,11 @@ void gui_update_install_status(glong total, glong done,
 		pbar = GTK_PROGRESS_BAR(progressbar1);
 		break;
 	}
-	gtk_progress_bar_set_text(pbar, message);
+	gtk_progress_bar_set_text(pbar, buf);
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
+	g_free(buf);
 }
 
 

@@ -22,6 +22,34 @@
 #ifndef __MODULE_MANAGER_HH__
 #define __MODULE_MANAGER_HH__
 
+#include <swmgr.h>
+#include <installmgr.h>
+#include <filemgr.h>
+
+using namespace std;
+using namespace sword;
+
+class GSStatusReporter : public StatusReporter {
+	virtual void statusUpdate(double dltotal, double dlnow);
+	virtual void preStatus(long totalBytes, long completedBytes, const char *message);
+};
+
+class ModuleManager {	
+	SWMgr *mgr;
+	SWMgr *list_mgr;
+	InstallMgr *installMgr;
+	ModMap::iterator it;
+	ModMap::iterator end;
+	GSStatusReporter *statusReporter;
+	SWBuf baseDir;
+public:	
+	ModuleManager();
+	~ModuleManager();
+	void init_ModuleManager(void);	
+	
+};
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
