@@ -297,7 +297,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	sprintf(rememberlastitem,"%s","_View/Main Window/");
 	sprintf(rememberlastitemCom,"%s","_View/Commentary Window/");
 	sprintf(rememberlastitemDict,"%s","_View/Dict-Lex Window/");
-	
+	/* create pop menu for commentaries */
+	menuCom = create_pmComments();	
 	//sprintf(remberlookup,"%s","");
 	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
 	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
@@ -338,7 +339,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 						      groupnum1, -1,
 						      shortcut_types[0],
 						      curMod->Name());
-		  	}		  			
+		  	}//gtk_menu_shell_append		  			
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){ //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
 			havecomm = true; //-- we have at least one commentay module
@@ -351,10 +352,12 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			label = gtk_label_new (curcomMod->Name());
 			gtk_widget_show (label);
 			sprintf(mybuf,"%d",pg1);
-			additemtognomemenu(MainFrm, curcomMod->Name(), mybuf, rememberlastitemCom, (GtkMenuCallback)on_com_select_activate );
+			additemtognomemenu(MainFrm, curcomMod->Name(), mybuf, rememberlastitemCom, (GtkMenuCallback)on_com_select_activate);
 			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label); 
 			sprintf(rememberlastitemCom,"%s%s","_View/Commentary Window/",curcomMod->Name());	
-			additemtognomemenu(MainFrm,curcomMod->Name(), curcomMod->Name(),aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
+			additemtognomemenu(MainFrm,curcomMod->Name(), curcomMod->Name(),aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );						
+			//---------------------------------------------------------------- add to popup menu
+			//additemtopopupmenu(MainFrm,, curcomMod->Name(), (GtkMenuCallback)on_com_select_activate);
 			sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());			
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	    		if (sit !=mainMgr->config->Sections.end()){
@@ -404,8 +407,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",curdictMod->Name());
 			curdictMod->Disp(dictDisplay);
 			if(settings->showcomgroup){			
-			    sprintf(groupitems[groupnum3][itemNum3++], "%s", curdictMod->Name());
-			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+			        sprintf(groupitems[groupnum3][itemNum3++], "%s", curdictMod->Name());
+			        e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum3, -1,
 						      shortcut_types[0],
 						      curdictMod->Name());
@@ -567,7 +570,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
  	strongsnum   = additemtooptionmenu(MainFrm, "_Settings/", "Show Strongs Numbers", (GtkMenuCallback)on_strongs_numbers1_activate); 	
  	
 	//-------------------------------------------------------------- attach popup menus
-	menuCom = create_pmComments();	
+	
 	gnome_popup_menu_attach(menu2,lookup_widget(mainform,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(mainform,"textComp2"),(gchar*)"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(mainform,"textComp3"),(gchar*)"1");
@@ -906,7 +909,7 @@ addHistoryItem(void)  //-- add an item to the history menu
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number from verse spin button
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")));//-- get chapter number from chapter spin button
 	sprintf(ref,"%s %d:%d",bookname, iChap,iVerse ); //-- store book, chapter and verse in ref string
-	additemtognomemenu(MainFrm, ref, "_History/<Separator>", "_History/<Separator>",(GtkMenuCallback) on_john_3_1_activate); //-- add item to history menu
+	additemtognomemenu(MainFrm, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); //-- add item to history menu
 	++historyitems;
 }
 
