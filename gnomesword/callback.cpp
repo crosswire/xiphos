@@ -51,6 +51,7 @@
 bool firstsearch = TRUE;
 GtkWidget *searchDlg;
 extern bool ApplyChange;
+extern bool file_changed;
 extern gchar *current_filename;
 extern GtkWidget *MainFrm;
 extern GtkWidget *bookmark_mnu;
@@ -79,6 +80,7 @@ on_ok_button1_clicked                  (GtkButton       *button,
 
 	filesel = gtk_widget_get_toplevel (GTK_WIDGET (button));
 	loadFile (filesel);
+	
 	gtk_widget_destroy(filesel);
 
 }
@@ -748,6 +750,7 @@ on_text3_changed                       (GtkEditable     *editable,
 	{
 		gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "modified");		
 	}
+	file_changed = true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1315,7 +1318,7 @@ on_about_the_sword_project1_activate   (GtkMenuItem     *menuitem,
 						*text1,
 						*text2;
 	
- 	dlg = create_dlgAboutSword();
+ 	dlg = create_AboutSword();
  	text1 = lookup_widget(dlg,"txtAboutSword");
  	text2 = lookup_widget(dlg,"text6");
  	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
@@ -1583,5 +1586,42 @@ on_notebook3_switch_page               (GtkNotebook     *notebook,
     changepagenotebook(notebook,page_num); //-- send to changepagenotebook() function in GnomeSword.cpp
   }
   firsttime = false; //-- remember we were here
+}
+
+
+void
+on_btnInfoBoxYes_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+    file_changed = false;
+}
+
+
+void
+on_btnInfoBoxNo_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+
+
+
+void
+on_kjv1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+    showmoduleinfoSWORD((char*)user_data);
+}
+
+
+void
+on_btnAboutModuleOK_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+ 	GtkWidget	*dlg;
+
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));	
+	gtk_widget_destroy(dlg);
 }
 

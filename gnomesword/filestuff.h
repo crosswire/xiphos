@@ -39,13 +39,13 @@ void
 loadoptionarray			(void);
 
 void
-savebookmarks			(void);
+savebookmarks				(void);
 
 void
-editbookmarksSave	   (GtkWidget *editdlg);
+editbookmarksSave	  (GtkWidget *editdlg);
  
 void
-saveoptions				 (void) ;
+saveoptions				  (void) ;
 
 void
 createFiles					(void);
@@ -58,3 +58,6 @@ readsettings				(void);
 
 SETTINGS
 createsettings			(void);
+
+void
+loadStudyPadFile 		(gchar *filename);
