@@ -413,7 +413,6 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 	GtkWidget *view_book_menu;
 	GtkAccelGroup *view_book_menu_accels;
 	GtkWidget *find;
-	//GtkWidget *showtabs;
 	GList *tmp;
 	gint i;
 
@@ -570,7 +569,7 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
                       	gbs);
 	}
 	
-	tmp = sbdictmods;
+	tmp = backend_get_mod_description_list_SWORD(DICT_MODS);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -605,7 +604,7 @@ GtkWidget *create_pmGBS(GBS_DATA * gbs)
 	g_list_free(tmp);
 
 	i = 0;
-	tmp = sbbookmods;
+	tmp = backend_get_mod_description_list_SWORD(COMM_MODS);
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -650,7 +649,6 @@ GtkWidget *createGBS_Pane(gchar * modName, SETTINGS * s, gint count,
 	GtkWidget *label;
 	GtkWidget *frameGBS;
 	GtkWidget *scrolledwindowHTML_GBS;
-	GtkWidget *popupmenu;
 
 	hpanedGBS = gtk_hpaned_new();
 	gtk_widget_ref(hpanedGBS);
@@ -765,14 +763,12 @@ GtkWidget *createGBS_Pane(gchar * modName, SETTINGS * s, gint count,
 			   p_gbs);
 
 	gui_add_book_to_ctree(p_gbs->ctree, modName);
-	popupmenu = create_pmGBS(p_gbs);
-	gnome_popup_menu_attach(popupmenu, p_gbs->html, NULL);
-	p_gbs->find_dialog = NULL;
 	return hpanedGBS;
 }
 
-void gui_setupGBS(SETTINGS * s)
+GList* gui_setup_gbs(SETTINGS * s)
 {
+	GtkWidget *popupmenu;
 	gint count = 0;
 	GList *tmp = NULL;
 	GList *mods = NULL;
@@ -791,9 +787,12 @@ void gui_setupGBS(SETTINGS * s)
 		gbs->bookDescription =
 		    backend_get_module_description(bookname);
 		gbs->searchstring = NULL;
-		gbs->booknum = count;	
+		gbs->booknum = count;
+		gbs->find_dialog = NULL;	
 		gbs->has_key = backend_module_is_locked(gbs->bookName);
 		createGBS_Pane(bookname, s, count, gbs);
+		popupmenu = create_pmGBS(gbs);
+		gnome_popup_menu_attach(popupmenu, gbs->html, NULL);
 		backend_newDisplayGBS(gbs->html, gbs->bookName, s);
 		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);
 		sprintf(s->BookWindowModule, "%s", gbs->bookName);
@@ -807,7 +806,7 @@ void gui_setupGBS(SETTINGS * s)
 
 	settings->gbsLastPage = 0;
 	g_list_free(tmp);
-	g_list_free(mods);
+	return mods;
 }
 
 void gui_shutdownGBS(void)

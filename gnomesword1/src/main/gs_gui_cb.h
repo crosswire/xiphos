@@ -38,9 +38,6 @@ extern "C" {
 	void on_mainwindow_size_allocate(GtkWidget * widget,
 					 GtkAllocation * allocation,
 					 gpointer user_data);
-	void on_nbTextMods_switch_page(GtkNotebook * notebook,
-				       GtkNotebookPage * page,
-				       gint page_num, gpointer user_data);
 	void on_ok_button1_clicked(GtkButton * button, gpointer user_data);
 	void on_cancel_button1_clicked(GtkButton * button,
 				       gpointer user_data);

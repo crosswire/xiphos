@@ -698,7 +698,7 @@ void gui_displayCOMM(gchar * key)
 	backend_displayinCOMM(settings->commLastPage, key);
 }
 
-void gui_setupCOMM(SETTINGS * s)
+GList* gui_setup_comm(SETTINGS * s)
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
@@ -747,8 +747,7 @@ void gui_setupCOMM(SETTINGS * s)
 	g_free(modbuf);
 	g_free(keybuf);
 	g_list_free(tmp);
-	g_list_free(mods);
-	//s->dlLastPage = 0;
+	return mods;
 }
 
 void gui_shutdownCOMM(void)

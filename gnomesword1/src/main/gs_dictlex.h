@@ -59,7 +59,7 @@ extern "C" {
 	};
 
 
-	void gui_setupDL(SETTINGS * s);
+	GList* gui_setup_dict(SETTINGS * s);
 	void gui_shutdownDL(void);
 	void gui_set_dictionary_page_and_key(gint page_num,
 					     gchar * key);
