@@ -53,6 +53,7 @@ gnomesword2_SOURCES =  \
     search_sidebar.c \
     setup_druid.c \
     sidebar.c \
+    sidebar_dialog.c \
     splash.c \
     studypad.c \
     studypad_dialog.c \
