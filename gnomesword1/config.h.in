@@ -19,6 +19,9 @@
 /* Gettext package */
 #undef GETTEXT_PACKAGE
 
+/* GtkHTML data directory */
+#undef GTKHTML_DATA_DIR
+
 /* Define to 1 if you have the `bind_textdomain_codeset' function. */
 #undef HAVE_BIND_TEXTDOMAIN_CODESET
 

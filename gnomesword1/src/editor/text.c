@@ -154,7 +154,7 @@ text_properties (GSHTMLEditorControlData *cd, gpointer *set_data)
 
 	d->cd = cd;
 	*set_data = d;
-	xml = glade_xml_new ("gtkhtml-editor-properties.glade", "text_page", GETTEXT_PACKAGE);
+	xml = glade_xml_new (GTKHTML_DATA_DIR"/gtkhtml-editor-properties.glade", "text_page", GETTEXT_PACKAGE);
 	if (!xml)
 		g_error (_("Could not load glade file."));
 
