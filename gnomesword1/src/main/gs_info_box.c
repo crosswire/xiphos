@@ -40,7 +40,7 @@
 #include "gs_info_box.h"
 #include "support.h"
 
-GtkWidget *create_InfoBox(void)
+GtkWidget *gui_create_info_box(void)
 {
 	GtkWidget *InfoBox;
 	GtkWidget *dialog_vbox6;
@@ -73,7 +73,8 @@ GtkWidget *create_InfoBox(void)
 	gtk_box_pack_start(GTK_BOX(dialog_vbox6), hbox20, TRUE, TRUE, 0);
 
 	pixmap2 =
-    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+		gnome_pixmap_new_from_file(
+			PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
 	gtk_widget_ref(pixmap2);
 	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "pixmap2", pixmap2,
 				 (GtkDestroyNotify) gtk_widget_unref);

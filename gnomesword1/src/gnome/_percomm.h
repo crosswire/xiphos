@@ -26,6 +26,7 @@
 #include "settings.h"
 #include "percomm.h"
 
+void gui_set_percomm_frame_label(GtkWidget * frame, gchar *mod_name);
 GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, 
 					gchar *mod_name, gint page_num);
 #endif	/* ___PERCOMM_H_ */

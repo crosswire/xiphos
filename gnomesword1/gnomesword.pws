@@ -6,12 +6,12 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=3
-1=1007
-2=143
-3=40
-4=40
-5=35
+0=34
+1=65
+2=21
+3=34
+4=29
+5=34
 6=37
 7=30
 8=40
@@ -38,16 +38,12 @@ ShowLocals=true
 13=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/toolbar_nav.h
-1=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
-2=/home/terry/Projects/gnomesword1/src/backend/properties.cpp
-3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-4=/home/terry/Projects/gnomesword1/src/main/settings.h
-5=/home/terry/Projects/gnomesword1/src/main/gs_gui.c
-6=/home/terry/Projects/gnomesword1/src/gnome/toolbar_nav.c
-7=/home/terry/Projects/gnomesword1/src/main/gs_history.c
-8=/home/terry/Projects/gnomesword1/src/main/gs_info_box.c
-9=/home/terry/Projects/gnomesword1/src/main/gs_menu.c
+0=/home/terry/Projects/gnomesword1/src/gnome/_bibletext_view.c
+1=/home/terry/Projects/gnomesword1/src/gnome/gbs_find.c
+2=/home/terry/Projects/gnomesword1/src/main/display_info.h
+3=/home/terry/Projects/gnomesword1/src/main/display_info.c
+4=/home/terry/Projects/gnomesword1/src/gnome/_display_info.h
+5=/home/terry/Projects/gnomesword1/src/gnome/_display_info.c
 
 [replace_text]
 0=settings.
@@ -60,24 +56,24 @@ ShowLocals=true
 7=app
 
 [find_text]
-0=s->
-1=nav_toolbar
-2=vboxMain
-3=toolbarNav
-4=btn_search
-5=btnSB
-6=on_btn_search_clicked
-7=ApplyChange
+0=combo11
+1=s->
+2=nav_toolbar
+3=vboxMain
+4=toolbarNav
+5=btn_search
+6=btnSB
+7=on_btn_search_clicked
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=workbook
-1=notebook3
-2=gs_getinfo_dlg.h
-3=create_dlgGetTextInfo
-4=hebrewpoints
-5=strongsnum
-6=addnewgrouptoMenus
-7=add_bookmark_menu
+0=create_dlgInformation
+1=loadmodandkey
+2=workbook
+3=notebook3
+4=gs_getinfo_dlg.h
+5=create_dlgGetTextInfo
+6=hebrewpoints
+7=strongsnum

@@ -96,7 +96,7 @@ static void on_new_activate(GtkMenuItem * menuitem,
 		msg =
 		    g_strdup_printf("``%s'' %s",ecd->filename,
 			_("has been modified.  Do you wish to save it?"));
-		msgbox = create_InfoBox();
+		msgbox = gui_create_info_box();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer =
 		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
@@ -149,7 +149,7 @@ static void on_open_activate(GtkMenuItem * menuitem,
 		msg =
 		    g_strdup_printf("''%s'' %s",ecd->filename,
 			_("has been modified.  Do you wish to save it?"));
-		msgbox = create_InfoBox();
+		msgbox = gui_create_info_box();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer =
 		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
@@ -582,6 +582,30 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 
 }
 
+
+/******************************************************************************
+ * Name
+ *  show_tabs_activate
+ *
+ * Synopsis
+ *   #include "editor_menu.h"
+ *
+ *   void show_tabs_activate(GtkMenuItem * menuitem,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    show/hide percomm notebook tabs
+ *
+ * Return value
+ *   void
+ */ 
+ 
+static void show_tabs_activate(GtkMenuItem * menuitem,
+					GSHTMLEditorControlData * ecd)
+{
+	tabs(GTK_CHECK_MENU_ITEM(menuitem)->active);
+}
+
 /******************************************************************************
  * Name
  *  gui_create_editor_popup
@@ -664,6 +688,29 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				  ecd->editnote);
 		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 					       (ecd->editnote), FALSE);
+
+		separator = gtk_menu_item_new();
+		gtk_widget_ref(separator);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "separator", separator,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+		
+		ecd->show_tabs =
+		    gtk_check_menu_item_new_with_label("Show Tabs");
+		gtk_widget_ref(ecd->show_tabs);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "ecd->show_tabs", ecd->show_tabs,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(ecd->show_tabs);
+		gtk_container_add(GTK_CONTAINER(pmEditor),
+				  ecd->show_tabs);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (ecd->show_tabs), FALSE);
 
 		separator = gtk_menu_item_new();
 		gtk_widget_ref(separator);
@@ -942,6 +989,10 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 				   "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_editnote_activate), ecd);
+		gtk_signal_connect(GTK_OBJECT(ecd->show_tabs),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (show_tabs_activate), ecd);
 	} else if (ecd->gbs) {
 		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
 				   GTK_SIGNAL_FUNC

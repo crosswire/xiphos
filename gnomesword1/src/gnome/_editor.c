@@ -536,7 +536,7 @@ static void on_btn_open_clicked(GtkButton * button,
 		    g_strdup_printf(_
 				    ("``%s'' has been modified.  Do you wish to save it?"),
 				    ecd->filename);
-		msgbox = create_InfoBox();
+		msgbox = gui_create_info_box();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer =
 		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));

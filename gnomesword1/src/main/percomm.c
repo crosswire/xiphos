@@ -176,7 +176,7 @@ void delete_percomm_note(void)
 	
 	key = backend_get_percomm_key(cur_p->mod_num);
 	
-	msgbox = create_InfoBox();
+	msgbox = gui_create_info_box();
 	label1 = lookup_widget(msgbox, "lbInfoBox1");
 	label2 = lookup_widget(msgbox, "lbInfoBox2");
 	label3 = lookup_widget(msgbox, "lbInfoBox3");
@@ -245,7 +245,34 @@ void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 		gtk_widget_show(p->ec->frame_toolbar);
 		gtk_widget_show(p->ec->handlebox_toolbar);
 	}
-	settings.html_percomm = p->ec->htmlwidget;	
+	settings.html_percomm = p->ec->htmlwidget;
+	
+	GTK_CHECK_MENU_ITEM(p->ec->show_tabs)->active = settings.percomm_tabs;
+	tabs(settings.percomm_tabs);
+}
+
+/******************************************************************************
+ * Name
+ *  tabs
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *   void tabs(gboolean choice)
+ *
+ * Description
+ *    show/hide percomm notebook tabs
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void tabs(gboolean choice)
+{
+	settings.percomm_tabs = choice;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_percomm),
+				   settings.percomm_tabs);	
+	gui_set_percomm_frame_label(cur_p->ec->frame, cur_p->mod_name);
 }
 
 /******************************************************************************
