@@ -90,6 +90,10 @@ sbtypefromModNameSBSW(gchar *modName)
 		retval = 2;
 	} 
 	
+	if(!strcmp(modType, "Generic Book")){
+		retval = 3;
+	} 
+	
 	/*** delete Sword manager ***/
 	delete mgr;
 	return retval;
