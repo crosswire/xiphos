@@ -1621,8 +1621,8 @@ void savekeySWORD(gint modwindow, gchar * key)
 	}
 }
 
-/*** write individual module font information to <module>.conf ***/
-gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
+/*** write individual module information to <module>.conf ***/
+gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * info)
 {
 	ModMap::iterator it; 
 	SectionMap::iterator section;
@@ -1640,7 +1640,7 @@ gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
 			if ((strcmp(ent->d_name, ".")) && (strcmp(ent->d_name, ".."))) {
 				sprintf(conffile,"%s/%s",buf,ent->d_name);
 				SWConfig myConfig(conffile);
-				myConfig[modName][modtag] = fontinfo;
+				myConfig[modName][modtag] = info;
 				myConfig.Save();
 				retval = true;
 			}

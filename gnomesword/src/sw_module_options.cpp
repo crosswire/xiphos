@@ -89,35 +89,12 @@ bool save_module_options(gchar *modName, gchar *option, gchar *value)
 }
 
 /******************************************************************************
- * load module font - using sword SWConfig
- ******************************************************************************/
-string load_module_font(gchar *modName, gchar *tag)
-{
-	gchar buf[255];
-	string retval = "";
-		
-	sprintf(buf, "%s/modops.conf", gSwordDir);
-	SWConfig module_options(buf);
-	module_options.Load();	
-	retval = module_options[modName][tag];
-	
-	return retval;	
-}
- 
-/******************************************************************************
  * save module font - using sword SWConfig
  ******************************************************************************/
 bool save_module_font(gchar *modName, gchar *font)
 {
-	gchar buf[80];
-
-	sprintf(buf, "%s/modops.conf", gSwordDir);
-	SWConfig module_options(buf);
 	
-	module_options[modName]["GSFont"] = font;	
-	
-	module_options.Save();
-	return true;
+	return false;
 }
 
 

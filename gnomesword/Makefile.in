@@ -138,7 +138,7 @@ cxxflags_set = @cxxflags_set@
 install_sh = @install_sh@
 l = @l@
 
-SUBDIRS = help macros po src
+SUBDIRS = help macros intl po src
 
 EXTRA_DIST = gnomesword.glade \
         Gnomesword.prj \
@@ -159,7 +159,7 @@ subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = intl/Makefile
 DIST_SOURCES =
 DATA = $(gnomesworddoc_DATA)
 
@@ -226,6 +226,8 @@ $(srcdir)/./stamp-h.in: $(top_srcdir)/configure.in $(ACLOCAL_M4) $(top_srcdir)/a
 
 distclean-hdr:
 	-rm -f config.h
+intl/Makefile: $(top_builddir)/config.status $(top_srcdir)/intl/Makefile.in
+	cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= CONFIG_LINKS= $(SHELL) ./config.status
 uninstall-info-am:
 install-gnomesworddocDATA: $(gnomesworddoc_DATA)
 	@$(NORMAL_INSTALL)
@@ -348,7 +350,7 @@ GZIP_ENV = --best
 distdir: $(DISTFILES)
 	-chmod -R a+w $(distdir) >/dev/null 2>&1; rm -rf $(distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/po
+	$(mkinstalldirs) $(distdir)/intl $(distdir)/po
 	@for file in $(DISTFILES); do \
 	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
 	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
