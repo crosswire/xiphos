@@ -30,18 +30,15 @@
 #include <unixstr.h>
 #endif
 
-#include <swmodule.h>
-#ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
+#include <swmodule.h>
 
 #include <versekey.h>
 #include <regex.h>
 #include <pthread.h>
 #include <string.h>
 
+#include "backend/key.hh"
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
@@ -503,33 +500,48 @@ int backend_get_verse_from_key(const char *key)
 
 /**********************************************************************
  * Name
- *   backend_get_next_book_of_bible
+ *   backend_get_books_of_bible 
  *
  * Synopsis
  *   #include "backend/key.hh"
  *   
- *   char *backend_get_next_book_of_bible(void)
+ *   GList *backend_get_books_of_bible(void)
  *
  * Description
- *   Returns the next book of the Bible.
+ *   Returns a list of the books of the Bible.
  *
  * Return value
- *   char*
+ *   GList*
  */
 
-const char *backend_get_next_book_of_bible(void)
+GList *backend_get_books_of_bible(void)
 {
-	static VerseKey key;
-	static int i = 0, j = 0;
+	VerseKey key;
+	char *book = NULL;
+	char *tmp = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError *error;
+	GList * books = NULL;
+	int i = 0, j = 0;
 	while(i < 2) {
 		while(j < key.BMAX[i]) { 
-			return (const char *)key.books[i][j++].name;
+			book = g_convert((const char *)key.books[i][j++].name,
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     &error);
+			if(book == NULL) {
+				g_print ("error: %s\n", error->message);
+				g_error_free (error);
+				continue;
+			}
+			books = g_list_append(books, (char *)book);
 		}
 		j = 0;
 		i++;
 	}
-	// set counter to zero after we are done getting list of books
-	i = 0;
-	j = 0;
-	return NULL;
+	return books;
 }

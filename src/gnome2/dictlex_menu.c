@@ -222,7 +222,7 @@ static void on_dictionary_showtabs_activate(GtkMenuItem * menuitem,
 	settings.dict_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 				   settings.dict_tabs);
-	gui_set_dict_frame_label();
+//	gui_set_dict_frame_label();
 }
 
 
@@ -649,11 +649,11 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 			lookup_selection_menu,
 			(GCallback)
 			gui_lookup_dictlex_dialog_selection);
-	else
+/*	else
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
 			lookup_selection_menu,
 			(GCallback)
-			gui_lookup_dictlex_selection);
+			gui_lookup_dictlex_selection);*/
 
 	/*
 	 * if module has cipher key include this item

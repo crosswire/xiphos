@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */ 
+ */
 
 #ifndef __DICTLEX_DIALOG_H_
 #define __DICTLEX_DIALOG_H_
@@ -26,8 +26,39 @@
 extern "C" {
 #endif
 
-#include "gui/dictlex.h"
-	
+//#include "gui/dictlex.h"
+
+typedef struct _dldata DL_DATA;
+struct _dldata {
+        GtkWidget *dialog;
+        GtkWidget *vbox;
+        GtkWidget *html;
+        GtkWidget *frame;
+        GtkWidget *clist;
+        GtkWidget *listview;
+        GtkWidget *entry;
+        GtkWidget *showtabs;
+        GtkWidget *module_options_menu;
+
+#ifdef USE_GNOME2
+        GObject *mod_selection;
+#endif
+        gchar *mod_name;
+        gchar *search_string;
+        gchar *key;
+        gchar *cipher_key;
+        gchar *cipher_old;
+
+        int mod_num;
+        gulong sig_id;
+
+        gboolean has_key;
+        gboolean is_locked;
+        gboolean is_dialog;
+        gboolean is_rtol;
+};
+extern DL_DATA *cur_d;
+
 void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key);
 void gui_lookup_dictlex_dialog_selection
     (GtkMenuItem * menuitem, gchar * dict_mod_description);

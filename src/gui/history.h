@@ -31,7 +31,6 @@ extern "C" {
 typedef struct _history HISTORY;
 struct _history {
         gint itemnum;
-        gint compagenum;
         gchar verseref[80];
         gchar textmod[80];
         gchar commod[80];

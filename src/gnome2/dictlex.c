@@ -53,264 +53,20 @@ extern gboolean dict_display_change;
 extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
 
 
+
+
 /******************************************************************************
- * global to this file only 
+ * static
  */
-static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
-					    GtkNotebookPage * page,
-					    gint page_num,
-					    GList * dl_list);
-static GList *dl_list;
-DL_DATA *cur_d;
-static gint number_of_dictionaries;
+static void create_menu(GdkEventButton * event);
 static gint cell_height;
-static gint dict_last_page;
 
 
-/******************************************************************************
- * Name
- *  on_lookup_selection_activate
- *
- * Synopsis
- *   #include "gui/dictlex.h"
- *   void gui_lookup_dict_selection_activate(GtkMenuItem * menuitem,
- *				  gchar * modDescription)   	
- *
- * Description
- *   lookup seledtion in a dict/lex module
- *
- * Return value
- *   void
- */
 
-void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
-				  gchar * dict_mod_description)
+static void set_label(gchar * mod_name)
 {
-	gchar *dict_key;
-	gchar *mod_name = NULL;
-
-	mod_name = module_name_from_description(dict_mod_description);
-	if(!mod_name) 
-		return;
-
-	dict_key = gui_get_word_or_selection(cur_d->html, FALSE);
-	if (dict_key) {
-		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(mod_name,
-						       dict_key);
-		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
-		g_free(dict_key);
-	}
-	if (mod_name)
-		g_free(mod_name);
-}
-
-/******************************************************************************
- * Name
- *   gui_display_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void gui_display_dictlex(gchar * key)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void gui_display_dictlex(gchar * key)
-{
-	gui_set_dictionary_page_and_key(dict_last_page, key);
-}
-
-/******************************************************************************
- * Name
- *   gui_set_dictionary_page_and_key
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
- *
- * Description
- *   change notebook page and set new key in entry widget
- *
- * Return value
- *   void
- */
-
-void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
-{
-	DL_DATA *d = NULL;
-
-	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	if(d) {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(
-				widgets.notebook_dict), page_num);
-		gtk_entry_set_text(GTK_ENTRY(d->entry), key);
-	}
-}
-
-/******************************************************************************
- * Name
- *   set_page_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void set_page_dictlex(gchar * modname, GList * dl_list)
- *
- * Description
- *    set dictlex notebook page on startup
- *
- * Return value
- *   void
- */
-
-static void set_page_dictlex(gchar * modname, GList * dl_list)
-{
-	gint page = 0;
-	DL_DATA *d = NULL;
-
-	dl_list = g_list_first(dl_list);
-	if(modname) {
-		while (dl_list != NULL) {
-			d = (DL_DATA *) dl_list->data;
-			if (!strcmp(d->mod_name, modname))
-				break;
-			++page;
-			dl_list = g_list_next(dl_list);
-		}
-	}
-	else {
-		d = (DL_DATA *) dl_list->data;
-		page = 0;
-	}
+	gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
 	
-	cur_d = d;
-	
-	if (page)
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_dict), page);
-	else
-		on_notebook_dictlex_switch_page(GTK_NOTEBOOK
-						(widgets.notebook_dict),
-						NULL, page, dl_list);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict),
-			      page);
-	//g_print("dictkey = %s\n", settings.dictkey);
-
-	if (d)
-		gtk_entry_set_text(GTK_ENTRY(d->entry),
-				   settings.dictkey);
-
-	dict_last_page = page;
-}
-
-/******************************************************************************
- * Name
- *  gui_set_dictlex_mod_and_key
- *
- * Synopsis
- *   #include "_dictlex.h"
- *
- *   void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)	
- *
- * Description
- *   sets the dictionary module and key.  Primarily added for use in tabbed browsing
- *
- * Return value
- *   void
- */
-void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)
-{
-	set_page_dictlex(mod, dl_list);
-	gui_display_dictlex(key);
-}
-
-/******************************************************************************
- * Name
- *  gui_set_dict_frame_label
- *
- * Synopsis
- *   #include "_dictlex.h"
- *
- *   void gui_set_dict_frame_label(void)	
- *
- * Description
- *   sets dict/lex frame label to module name or null
- *
- * Return value
- *   void
- */
-
-void gui_set_dict_frame_label()
-{
-	/*
-	 * set frame label to NULL if tabs are showing
-	 * else set frame label to module namecur_
-	 */
-	if (settings.dict_tabs)
-		gtk_frame_set_label(GTK_FRAME(cur_d->frame), NULL);
-	else
-		gtk_frame_set_label(GTK_FRAME(cur_d->frame),
-				    cur_d->mod_name);
-
-}
-
-/******************************************************************************
- * Name
- *   on_notebook_dictlex_switch_page
- *
- * Synopsis
- *   #include "_dictlex.h"
- *
- *   void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
- *		GtkNotebookPage * page,	gint page_num, GList * dl_list)	
- *
- * Description
- *    change dictionary module
- *
- * Return value
- *   void
- */
-
-void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
-				     GtkNotebookPage * page,
-				     gint page_num, GList * dl_list)
-{
-	DL_DATA *d;		//, *d_old;
-
-	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-
-	if (!d->frame)
-		gui_add_new_dict_pane(d);
-
-
-	//-- change tab label to current book name
-	cur_d = d;
-	gui_change_window_title(d->mod_name);
-	/*
-	 * set search module to current dict/lex module 
-	 */
-//      strcpy(settings.sb_search_mod, d->mod_name);
-	/*
-	 * set search frame label to current dict/lex module 
-	 */
-//      gui_set_search_label();
-
-	gui_set_dict_frame_label();
-
-	settings.DictWindowModule = d->mod_name;
-	xml_set_value("GnomeSword", "modules", "dict", d->mod_name);
-
-	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
-	dict_last_page = page_num;
-	widgets.html_dict = d->html;
 }
 
 
@@ -331,7 +87,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
  *   void
  */
 
-void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
+void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
 {
 	gint count = 7, i;
 	const gchar *key;
@@ -342,25 +98,28 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 	GtkTreeIter iter;
 	gint height;
 	
-	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
-	d->key = g_strdup(key);
-	//xml_set_value("GnomeSword", "key", "dictionary", d->key);
+	key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));	
+	text = get_dictlex_text(settings.DictWindowModule, (gchar*)key);
 	
-	text = get_dictlex_text(d->mod_name, d->key);
-	d->key = get_key_from_module(2, d->mod_name);
-	settings.dictkey = d->key;
-	xml_set_value("GnomeSword", "key", "dictionary", d->key);
+	key = get_key_from_module(2, settings.DictWindowModule);
+	
+	xml_set_value("GnomeSword", "keys", "dictionary", key);
+	settings.dictkey = xml_get_value("keys", "dictionary");
+	
 	if (text) {
-		entry_display(d->html, d->mod_name, text, d->key, TRUE);
-		//g_printf("dict: %s\n",text);
+		entry_display(widgets.html_dict, 
+				settings.DictWindowModule, 
+				text, 
+				settings.dictkey, 
+				TRUE);
 		free(text);
 	}
 	
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widgets.listview_dict));
 	list_store = GTK_LIST_STORE(model);
 	
 	if (!firsttime) {
-		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
+		gdk_drawable_get_size ((GdkDrawable *)widgets.listview_dict->window,
                                              NULL,
                                              &height);
 		count = height / cell_height;
@@ -368,16 +127,16 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 
 	if (count) {
 		gtk_list_store_clear(list_store);
-		new_key = get_dictlex_key(2, d->mod_name, -1);
+		new_key = get_dictlex_key(2, settings.DictWindowModule, -1);
 
 		for (i = 0; i < (count / 2); i++) {
 			free(new_key);
-			new_key = get_dictlex_key(2, d->mod_name, 0);
+			new_key = get_dictlex_key(2, settings.DictWindowModule, 0);
 		}
 
 		for (i = 0; i < count; i++) {
 			free(new_key);
-			new_key = get_dictlex_key(2, d->mod_name, 1);
+			new_key = get_dictlex_key(2, settings.DictWindowModule, 1);
 			gtk_list_store_append(list_store, &iter);
 			gtk_list_store_set(list_store, &iter, 0,
 					   new_key, -1);
@@ -387,27 +146,85 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 	firsttime = FALSE;
 }
 
-
 /******************************************************************************
  * Name
- *  on_btnSyncDL_clicked
+ *    
  *
  * Synopsis
  *   #include "gui/dictlex.h"
  *
- *   void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)	
+ *   
  *
  * Description
- *    sync current module with current key
+ *   add global module options to popup menus
  *
  * Return value
  *   void
  */
 
-void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
+static void popup_pm_dict(gchar * mod_name, GdkEventButton * event)
 {
-	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
+	create_menu(event);
 }
+
+
+/******************************************************************************
+ * Name
+ *   gui_display_dictlex
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void gui_display_dictlex(gchar * key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_dictlex(gchar * key)
+{
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_set_dictlex_mod_and_key
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key)	
+ *
+ * Description
+ *   sets the dictionary module and key.  Primarily added for use in tabbed browsing
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_dictlex_mod_and_key(gchar *mod_name, gchar *key)
+{
+	const gchar *old_key;
+	
+	xml_set_value("GnomeSword", "modules", "dict", mod_name);
+	settings.DictWindowModule = xml_get_value("modules", "dict");
+	set_label(settings.DictWindowModule);
+	if(key == NULL)
+		key = "Grace";
+	gui_display_dictlex(key);
+	
+	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
+	if(!strcmp(old_key, key))
+		on_entryDictLookup_changed(NULL, NULL);
+	else
+		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+
+}
+
 
 /******************************************************************************
  * Name
@@ -427,11 +244,11 @@ void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
  */
 
 static gint html_button_pressed(GtkWidget * html,
-				GdkEventButton * event, DL_DATA * dl)
+				GdkEventButton * event, gpointer data)
 {
 	settings.whichwindow = DICTIONARY_WINDOW;
 
-	gui_change_window_title(dl->mod_name);
+	gui_change_window_title(settings.DictWindowModule);
 
 	switch (event->button) {
 	case 1:
@@ -443,6 +260,8 @@ static gint html_button_pressed(GtkWidget * html,
 		 */
 		break;
 	case 3:
+		popup_pm_dict(settings.DictWindowModule, event);
+		break;
 		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
 		   "button_press_event"); */
 		break;
@@ -452,6 +271,7 @@ static gint html_button_pressed(GtkWidget * html,
 
 	return FALSE;
 }
+
 
 /******************************************************************************
  * Name
@@ -470,15 +290,15 @@ static gint html_button_pressed(GtkWidget * html,
  *   gint
  */
 
-static gint list_button_released(GtkWidget * html,
-				GdkEventButton * event, DL_DATA * d)
+static gint list_button_released(GtkWidget * treeview,
+				GdkEventButton * event, gpointer data)
 {
 	GtkTreeSelection* selection;
 	GtkTreeIter selected;
 	gchar *buf = NULL;
 	GtkTreeModel *model ;
 	
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(d->listview));
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
                         
 	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
 		return;
@@ -487,7 +307,7 @@ static gint list_button_released(GtkWidget * html,
 	case 1:
 		gtk_tree_model_get(model, &selected, 0, &buf, -1);
 		if (buf) {
-			gtk_entry_set_text(GTK_ENTRY(d->entry), buf);
+			gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), buf);
 			g_free(buf);
 		}	 	
 		break;
@@ -499,6 +319,7 @@ static gint list_button_released(GtkWidget * html,
 	
 	return FALSE;
 }
+
 
 
 static void add_columns(GtkTreeView * treeview)
@@ -527,295 +348,662 @@ static void add_columns(GtkTreeView * treeview)
                                     &cell_height);
 }
 
-/******************************************************************************
- * Name
- *  gui_create_dictlex_pane
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   GtkWidget *gui_create_dictlex_pane(DL_DATA *dl, gint count)	
- *
- * Description
- *    create a pane for displaying a dictionary or lexicom
- *
- * Return value
- *   void
- */
-
-static void create_dictlex_pane(DL_DATA * dl)
+GtkWidget *gui_create_dictionary_pane(void)
 {
-
-	GtkWidget *hpaned7;
-	GtkWidget *vbox56;
+	GtkWidget *box_dict;
+	GtkWidget *hpaned;
+	GtkWidget *vbox;
 	GtkWidget *hbox;
 	GtkWidget *toolbarDLKey;
 	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *btnSyncDL;
 	GtkWidget *label205;
-	GtkWidget *frameDictHTML;
-	GtkWidget *scrolledwindowDictHTML;
+	GtkWidget *scrolledwindow;
 	GtkListStore *model;
 	
-	dl->frame = gtk_frame_new(NULL);
-	gtk_widget_show(dl->frame);
-	gtk_container_add(GTK_CONTAINER(dl->vbox), dl->frame);
-	gtk_frame_set_shadow_type(GTK_FRAME(dl->frame),GTK_SHADOW_NONE);
+	box_dict = gtk_vbox_new(FALSE, 0);
+        gtk_widget_show(box_dict);
+			  
+        widgets.label_dict = gtk_label_new(settings.DictWindowModule);
+        gtk_widget_show(widgets.label_dict);
+        gtk_box_pack_start(GTK_BOX(box_dict),
+                           widgets.label_dict, FALSE,
+                           FALSE, 0);
+        gtk_label_set_justify (GTK_LABEL (widgets.label_dict), GTK_JUSTIFY_LEFT);
+        gtk_misc_set_alignment (GTK_MISC (widgets.label_dict), 0, 0.5);
 
-	hpaned7 = gtk_hpaned_new();
-	gtk_widget_show(hpaned7);
-	gtk_container_add(GTK_CONTAINER(dl->frame), hpaned7);
-	gtk_paned_set_position(GTK_PANED(hpaned7), 195);
+	hpaned = gtk_hpaned_new();
+	gtk_widget_show(hpaned);
+        gtk_box_pack_start(GTK_BOX(box_dict),
+                           hpaned, TRUE,
+                           TRUE, 0);
+	gtk_paned_set_position(GTK_PANED(hpaned), 195);
 
-	vbox56 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox56);
-	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, TRUE, TRUE);
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox);
+	gtk_paned_pack1(GTK_PANED(hpaned), vbox, TRUE, TRUE);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_widget_show (hbox);
-	gtk_box_pack_start (GTK_BOX (vbox56), hbox, FALSE, TRUE, 0);
-
-	btnSyncDL = gtk_button_new ();
-	gtk_widget_show (btnSyncDL);
-	gtk_box_pack_start (GTK_BOX (hbox), btnSyncDL, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 	
-	tmp_toolbar_icon = gtk_image_new_from_stock (GTK_STOCK_REFRESH, 
-						GTK_ICON_SIZE_BUTTON);
-	gtk_widget_show (tmp_toolbar_icon);
-	gtk_container_add (GTK_CONTAINER (btnSyncDL), tmp_toolbar_icon);
-	
-	dl->entry = gtk_entry_new();
-	gtk_widget_show(dl->entry);
-	gtk_box_pack_start (GTK_BOX (hbox), dl->entry, TRUE, TRUE, 0);
+	widgets.entry_dict = gtk_entry_new();
+	gtk_widget_show(widgets.entry_dict);
+	gtk_box_pack_start (GTK_BOX (hbox), widgets.entry_dict, TRUE, TRUE, 0);
 	
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
 	/* create tree view */
-	dl->listview =
+	widgets.listview_dict =
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
-	gtk_widget_show(dl->listview);
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(dl->listview), TRUE);
-	gtk_box_pack_start(GTK_BOX(vbox56), dl->listview, TRUE, TRUE,
+	gtk_widget_show(widgets.listview_dict);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widgets.listview_dict), TRUE);
+	gtk_box_pack_start(GTK_BOX(vbox), widgets.listview_dict, TRUE, TRUE,
 			   0);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dl->listview),
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(widgets.listview_dict),
 					  FALSE);
-	add_columns(GTK_TREE_VIEW(dl->listview));
-		     
-	frameDictHTML = gtk_frame_new(NULL);
-	gtk_widget_show(frameDictHTML);
-	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
+	add_columns(GTK_TREE_VIEW(widgets.listview_dict));
 
-	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindowDictHTML);
-	gtk_container_add(GTK_CONTAINER(frameDictHTML),
-			  scrolledwindowDictHTML);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindowDictHTML),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	dl->html = gtk_html_new();
-	gtk_widget_show(dl->html);
-	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
-			  dl->html);
-	gtk_html_load_empty(GTK_HTML(dl->html));
+        scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+        gtk_widget_show(scrolledwindow);
+	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow, TRUE, TRUE);
+	
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+                                       (scrolledwindow),
+                                       GTK_POLICY_AUTOMATIC,
+                                       GTK_POLICY_AUTOMATIC);
 
-	g_signal_connect(GTK_OBJECT(dl->html),
+        widgets.html_dict = gtk_html_new();
+        gtk_widget_show(widgets.html_dict);
+        gtk_container_add(GTK_CONTAINER(scrolledwindow),
+                          widgets.html_dict);
+
+	g_signal_connect(GTK_OBJECT(widgets.html_dict),
 			   "button_press_event",
-			   G_CALLBACK(html_button_pressed), dl);
-	g_signal_connect(GTK_OBJECT(dl->html),
+			   G_CALLBACK(html_button_pressed), NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_dict),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
-	g_signal_connect(GTK_OBJECT(dl->html), "on_url",
+	g_signal_connect(GTK_OBJECT(widgets.html_dict), "on_url",
 			   G_CALLBACK(gui_url), 
 			   GINT_TO_POINTER(DICTIONARY_TYPE));
-	g_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
+	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 
 
-	g_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
-			   G_CALLBACK(on_btnSyncDL_clicked), dl);
-	g_signal_connect(GTK_OBJECT(dl->entry), "changed",
-			   G_CALLBACK(on_entryDictLookup_changed), dl);
-	g_signal_connect(G_OBJECT(dl->listview),
+	
+	g_signal_connect(GTK_OBJECT(widgets.entry_dict), "changed",
+			   G_CALLBACK(on_entryDictLookup_changed), NULL);
+	
+	g_signal_connect(G_OBJECT(widgets.listview_dict),
 			   "button_release_event",
-			   G_CALLBACK(list_button_released), dl);
+			   G_CALLBACK(list_button_released), NULL);
+	return box_dict;
 }
+/**
+ **
+ **
+ **
+ **
+ **
+ **
+ **/
+
 
 /******************************************************************************
  * Name
- *  gui_add_new_dict_pane
+ *  update_text_global_ops
  *
  * Synopsis
- *   #include "dictlex.h"
+ *   #include "gui/bibletext.h"
  *
- *   void gui_add_new_dict_pane(DL_DATA *dl)
+ *   void update_text_global_ops(gchar * option, gboolean choice)	
  *
  * Description
- *   creates a dictlex pane when user selects a new dictlex module
+ *   
  *
  * Return value
  *   void
  */
 
-void gui_add_new_dict_pane(DL_DATA * dl)
+static void update_comm_global_ops(gchar * option, gboolean choice)
 {
-	GtkWidget *popup;
-
-	create_dictlex_pane(dl);
-	popup = gui_create_pm_dict(dl);	//create_dictlex_pm(dl);
-	gnome_popup_menu_attach(popup, dl->html, NULL);
+	/*g_warning("gui_update_text_global_ops");
+	save_module_options(settings.MainWindowModule, option, choice);
+	gui_display_text(settings.currentverse);*/
 }
 
 /******************************************************************************
  * Name
- *  add_vbox_to_notebook
+ *  global_option_red_words
  *
  * Synopsis
- *   #include "dictlex.h"
+ *   #include "gui/.h"
  *
- *   void add_vbox_to_notebook(TEXT_DATA * t)
+ *   void on_global_option(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
  *
  * Description
- *   adds a vbox and label to the dictlex notebook for each dictlex module
+ *   
  *
  * Return value
  *   void
  */
 
-static void add_vbox_to_notebook(DL_DATA * dl)
+static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
-	GtkWidget *label;
-
-	dl->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(dl->vbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict),
-			  dl->vbox);
-
-	label = gtk_label_new(dl->mod_name);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_dict),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(widgets.notebook_dict),
-				    dl->mod_num), label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.notebook_dict),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.notebook_dict),
-					  dl->mod_num),
-					 (gchar *) dl->mod_name);
-
-
+/*	save_module_options(settings.MainWindowModule, (gchar *) data,
+			    GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_display_text(settings.currentverse);*/
 }
+
 
 /******************************************************************************
  * Name
- *   gui_setup_dictlex
+ *    
  *
  * Synopsis
- *   #include "dictlex.h"
+ *   #include "gui/.h"
  *
- *   void gui_setup_dictlex(GList *mods)
- *
- * Description
- *   setup dictlex support 
- *
- * Return value
- *  void
- */
-
-gint gui_setup_dictlex(GList * mods)
-{
-	GList *tmp = NULL;
-	gchar *modname;
-	gchar *modbuf;
-	DL_DATA *dl;
-	gint count = 0;
-
-	dl_list = NULL;
-
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		modname = (gchar *) tmp->data;
-		dl = g_new0(DL_DATA, 1);
-		dl->frame = NULL;
-		dl->mod_num = count;
-		dl->mod_name = modname;	
-		dl->search_string = NULL;
-		dl->key = NULL;
-		dl->cipher_key = NULL;
-		dl->is_dialog = FALSE;
-		dl->has_key = module_is_locked(dl->mod_name);
-		if (has_cipher_tag(dl->mod_name)) {
-			dl->is_locked = module_is_locked(dl->mod_name);
-			dl->cipher_old = get_cipher_key(dl->mod_name);
-		}
-
-		else {
-
-			dl->is_locked = 0;
-			dl->cipher_old = NULL;
-		}
-		dl->is_rtol = is_module_rtl(dl->mod_name);
-		add_vbox_to_notebook(dl);
-		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
-		++count;
-		tmp = g_list_next(tmp);
-	}
-
-
-	g_signal_connect(GTK_OBJECT(widgets.notebook_dict),
-			   "switch_page",
-			   G_CALLBACK
-			   (on_notebook_dictlex_switch_page), dl_list);
-
-	modbuf = g_strdup(settings.DictWindowModule);
-	if(modbuf) {
-		if(check_for_module(modbuf))
-			set_page_dictlex(modbuf, dl_list);
-		else if(check_for_module(dl->mod_name))
-			set_page_dictlex(dl->mod_name, dl_list);
-	}
-	else 
-		if(check_for_module(dl->mod_name))
-			set_page_dictlex(dl->mod_name, dl_list);
-	g_free(modbuf);
-	g_list_free(tmp);
-	number_of_dictionaries = count;
-	return count;
-}
-
-/******************************************************************************
- * Name
- *   gui_shutdown_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void gui_shutdown_dictlex(void)
+ *   
  *
  * Description
- *    shutdown and cleanup dictlex support
+ *   add global module options to popup menus
  *
  * Return value
  *   void
  */
 
-void gui_shutdown_dictlex(void)
+
+
+static void on_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	dl_list = g_list_first(dl_list);
-	while (dl_list != NULL) {
-		DL_DATA *d = (DL_DATA *) dl_list->data;
-		if (d->key)
-			g_free(d->key);
-		//if(d->mod_name) g_free(d->mod_name);
-		g_free(d);
-		dl_list = g_list_next(dl_list);
-	}
-	g_list_free(dl_list);
+	gui_display_about_module_dialog(settings.DictWindowModule, FALSE);
+}
+
+
+static void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
 
 }
+
+
+static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_html_print(widgets.html_dict, FALSE);
+}
+
+
+static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_copy_html(widgets.html_dict);
+}
+
+
+static void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_find_dlg(widgets.html_dict, settings.DictWindowModule, FALSE, NULL);
+}
+
+
+static void on_item2_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+static void
+on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_set_module_font(settings.DictWindowModule);
+	on_entryDictLookup_changed(NULL, NULL);
+}
+
+
+static void
+on_use_current_dictionary_activate(GtkMenuItem * menuitem,
+				   gpointer user_data)
+{
+	gchar *dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+	if (dict_key) {
+		if (settings.inViewer)
+			gui_display_dictlex_in_sidebar(settings.
+						      DictWindowModule,
+						      dict_key);
+		if (settings.inDictpane)
+			gui_change_module_and_key(settings.
+						  DictWindowModule,
+						  dict_key);
+		g_free(dict_key);
+	}
+}
+
+
+static void
+on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gchar *cipher_key;
+	gchar *cipher_old;
+	
+	cipher_old = get_cipher_key(settings.DictWindowModule);
+	cipher_key = gui_add_cipher_key(settings.DictWindowModule, cipher_old);
+	if (cipher_key) {
+		gui_module_is_locked_display(widgets.html_dict,
+					     settings.DictWindowModule,
+					     cipher_key);
+	}
+}
+
+
+static void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+static void
+on_all_readings_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+static void
+on_primary_reading_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+static void
+on_secondary_reading_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
+{
+
+}
+
+
+
+static void on_view_mod_activate(GtkMenuItem * menuitem,
+				 gpointer user_data)
+{
+
+	gchar *module_name = NULL;
+
+	module_name = module_name_from_description((gchar *) user_data);
+	if(module_name) {
+		gui_change_module_and_key(module_name, settings.dictkey);
+		g_free(module_name);
+	}
+}
+
+
+static GnomeUIInfo view_text_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("item1"),
+	 NULL,
+	 (gpointer) on_item1_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-book-green",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo file3_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Open Module"),
+	 NULL,
+	 view_text_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
+	GNOMEUIINFO_END
+};
+
+
+static GnomeUIInfo edit3_menu_uiinfo[] = {
+	GNOMEUIINFO_MENU_COPY_ITEM(on_copy2_activate, NULL),
+	GNOMEUIINFO_MENU_FIND_ITEM(on_find1_activate, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo all_readings_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("All Readings"),
+	 NULL,
+	 (gpointer) on_all_readings_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Primary Reading"),
+	 NULL,
+	 (gpointer) on_primary_reading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Secondary Reading"),
+	 NULL,
+	 (gpointer) on_secondary_reading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo variants_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_RADIOITEMS, NULL, NULL, all_readings_uiinfo,
+	 NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, 0,
+	 (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo module_options_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Set Module Font"),
+	 NULL,
+	 (gpointer) on_set_module_font_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-select-font",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Words of Christ in Red"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Words of Christ in Red",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM,
+	 N_("Strong's Numbers"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Strong's Numbers",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE,
+	 NULL,
+	 0,
+	 (GdkModifierType) 0,
+	 NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Morphological Tags"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Morphological Tags",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Footnotes"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Footnotes",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Greek Accents"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Greek Accents",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Lemmas"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Lemmas",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Scripture Cross-references"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Scripture Cross-references",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Vowel Points"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Hebrew Vowel Points",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Cantillation"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Hebrew Cantillation",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Headings"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Headings",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Variants"),
+	 NULL,
+	 variants_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo lookup_selection_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Use Current Dictionary"),
+	 NULL,
+	 (gpointer) on_use_current_dictionary_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo menu1_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("About"),
+	 NULL,
+	 (gpointer) on_about_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_SUBTREE, N_("File"),
+	 NULL,
+	 file3_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Edit"),
+	 NULL,
+	 edit3_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("_Module Options"),
+	 NULL,
+	 module_options_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-ok",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Lookup Selection"),
+	 NULL,
+	 lookup_selection_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
+	 NULL,
+	 (gpointer) on_unlock_module_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Show Tabs"),
+	 NULL,
+	 (gpointer) on_show_tabs_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static void create_menu(GdkEventButton * event)
+{
+	GtkWidget *menu1;
+	GtkWidget *lookup_selection_menu;
+	GtkWidget *usecurrent;
+	GtkWidget *view_menu;
+	GtkWidget *separator;
+	GnomeUIInfo *menuitem;
+	gchar *mod_name = settings.DictWindowModule;
+	GLOBAL_OPS *ops = gui_new_globals(mod_name);
+	menu1 = gtk_menu_new();
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
+			    NULL, FALSE, 0);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (all_readings_uiinfo[0].widget),
+				       TRUE);
+	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	//"words_in_red"         
+	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	//"strongs_numbers"      
+	gtk_widget_hide(module_options_menu_uiinfo[4].widget);	//"/morph_tags"  
+	gtk_widget_hide(module_options_menu_uiinfo[5].widget);	//"footnotes"    
+	gtk_widget_hide(module_options_menu_uiinfo[6].widget);	// "greek_accents"       
+	gtk_widget_hide(module_options_menu_uiinfo[7].widget);	//"lemmas"       
+	gtk_widget_hide(module_options_menu_uiinfo[8].widget);	//"cross_references"    
+	gtk_widget_hide(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points" 
+	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation"        
+	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
+	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
+	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module" 
+
+
+
+	view_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+				  view_menu);
+	
+	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_menu,
+				(GCallback) on_view_mod_activate);
+								
+	
+	lookup_selection_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu1_uiinfo[5].widget),
+				  lookup_selection_menu);
+	
+	usecurrent =
+	    gtk_menu_item_new_with_label(_("Use Current Dictionary"));
+	gtk_widget_show(usecurrent);
+	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
+			  usecurrent);
+
+	separator = gtk_menu_item_new();
+	gtk_widget_show(separator);
+	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
+			  separator);
+	gtk_widget_set_sensitive(separator, FALSE);
+/*	
+	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
+				(GCallback)gui_lookup_dict_selection);
+*/			
+				
+	if ((check_for_global_option(mod_name,
+				     "GBFRedLetterWords")) ||
+	    (check_for_global_option(mod_name,
+				     "OSISRedLetterWords"))) {
+		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
+				    widget)->active = ops->words_in_red;
+	}
+	if ((check_for_global_option
+	     (mod_name, "GBFStrongs"))
+	    ||
+	    (check_for_global_option
+	     (mod_name, "ThMLStrongs"))
+	    ||
+	    (check_for_global_option
+	     (mod_name, "OSISStrongs"))) {
+		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
+				    widget)->active = ops->strongs;
+	}
+	if ((check_for_global_option(mod_name, "GBFMorph")) ||
+	    (check_for_global_option(mod_name, "ThMLMorph")) ||
+	    (check_for_global_option(mod_name, "OSISMorph"))) {
+		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
+				    widget)->active = ops->morphs;
+	}
+	if ((check_for_global_option(mod_name, "GBFFootnotes")) ||
+	    (check_for_global_option(mod_name, "ThMLFootnotes")) ||
+	    (check_for_global_option(mod_name, "OSISFootnotes"))) {
+		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
+				    widget)->active = ops->footnotes;
+	}
+	if (check_for_global_option(mod_name, "UTF8GreekAccents")) {
+		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
+				    widget)->active = ops->greekaccents;
+	}
+	if (check_for_global_option(mod_name, "ThMLLemma")) {
+		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
+				    widget)->active = ops->lemmas;
+	}
+	if (check_for_global_option(mod_name, "ThMLScripref") ||
+	    (check_for_global_option(mod_name, "OSISScripref"))) {
+		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
+				    widget)->active = ops->scripturerefs;
+	}
+	if (check_for_global_option(mod_name, "UTF8HebrewPoints")) {
+		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
+				    widget)->active = ops->hebrewpoints;
+	}
+	if (check_for_global_option(mod_name, "UTF8Cantillation")) {
+		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
+				    widget)->active = ops->hebrewcant;
+	}
+	if (check_for_global_option(mod_name, "ThMLHeadings") ||
+	    (check_for_global_option(mod_name, "OSISHeadings"))) {
+		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
+		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
+				    widget)->active = ops->headings;   
+	}
+	if (check_for_global_option(mod_name, "ThMLVariants")) {
+		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
+
+		gtk_widget_show(all_readings_uiinfo[0].widget);	//"all_readings");
+
+		gtk_widget_show(all_readings_uiinfo[1].widget);	//"primary_reading");
+
+		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
+		
+	}
+	if(has_cipher_tag(mod_name))
+		gtk_widget_show(menu1_uiinfo[6].widget);
+	
+	gnome_popup_menu_do_popup_modal(menu1, NULL,
+					NULL, event, NULL,
+					widgets.html_text);
+	gtk_widget_destroy(menu1);
+	g_free(ops);
+}
+
+
+
+
 
 //******  end of file  ******/

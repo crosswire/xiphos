@@ -22,61 +22,15 @@
 #ifndef ___COMMENTARY_H_
 #define ___COMMENTARY_H_
 
-#include "gui/editor.h"
-#include "gui/mod_global_ops.h"
+//#include "gui/editor.h"
+//#include "gui/mod_global_ops.h"
 
-
-typedef struct _commdata COMM_DATA;
-struct _commdata {
-	/* for commentary dialogs */
-	GtkWidget *dialog;	
-	GtkWidget *cbe_book;
-	GtkWidget *spb_chapter;
-	GtkWidget *spb_verse;
-	GtkWidget *freeform_lookup;
-	GtkWidget *statusbar;
-	
-	/* for personal comments editor */
-	GSHTMLEditorControlData *ec;
-	
-	/* for commentary panes */
-	GtkWidget *vbox;
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *btnCOMMSync;
-	GtkWidget *btnCOMMBack;
-	GtkWidget *btnCOMMForward;
-	GtkWidget *btnCOMMPrint;
-	GtkWidget *btn_book_heading;
-	GtkWidget *btn_chap_heading;
-	GtkWidget *showtabs;
-	GtkWidget *module_options_menu;
-	
-	gchar *mod_name;
-	gchar *search_string;
-	gchar *cipher_key;
-	gchar *cipher_old;
-	gchar key[80];
-	
-	gint modnum;
-	
-	gboolean is_locked;
-	gboolean is_percomm;
-	gboolean is_dialog;
-	gboolean book_heading;
-	gboolean chapter_heading;
-	gboolean sync;
-	
-	GLOBAL_OPS *ops;
-};
-extern COMM_DATA *cur_c;
-
-void gui_set_comm_frame_label(COMM_DATA * c);
-void gui_set_commentary_page_and_key(gint page_num,
+void gui_set_comm_label(gchar * mod_name);
+void gui_set_commentary_mod_and_key(gchar * mod_name,
 				     gchar * key);
 void gui_display_commentary(gchar * key);
-void gui_display_commentary_with_struct(COMM_DATA *c, gchar * key);
-void gui_add_new_comm_pane(COMM_DATA *c);
-void gui_setup_commentary(GList *mods);
-void gui_shutdown_commentary(void);
+GtkWidget *gui_create_commentary_pane(void);
+void gui_popup_pm_comm(gchar * mod_name, GdkEventButton * event);
+
+
 #endif

@@ -47,6 +47,7 @@
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
+#include "main/lists.h"
 #include "main/search.h"
 #include "main/sword.h"
 
@@ -500,12 +501,12 @@ char *backend_get_search_results_text(char *mod_name, char *key)
 
 /******************************************************************************
  * Name
- *   backend_set_module_iterators
+ *   backend_get_module_lists
  *
  * Synopsis
  *   #include "backend/module.hh"
  *
- *   void backend_set_module_iterators(void)	
+ *   void backend_get_module_lists(MOD_LISTS * mods)	
  *
  * Description
  *    
@@ -514,112 +515,66 @@ char *backend_get_search_results_text(char *mod_name, char *key)
  *   void
  */
 
-void backend_set_module_iterators(void)
+
+void backend_get_module_lists(MOD_LISTS * mods)
 {
-	begin = sw.module_mgr->Modules.begin();
-	end = sw.module_mgr->Modules.end();
-}
-
-/******************************************************************************
- * Name
- *   backend_get_next_module_name
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   NAME_TYPE *backend_get_next_module_name(void)
- *
- * Description
- *
- *
- * Return value
- *   NAME_TYPE
- */
-
-NAME_TYPE *backend_get_next_module_name(NAME_TYPE * nt)
-{
-	if (begin != end) {
-
-		/*descriptionMap[string
-		   ((char *) (*begin).second->
-		   Description())] =
-		   string((char *) (*begin).second->Name()); */
-
-		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
-			nt->type = TEXT_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->Name());
+	ModMap::iterator it;
+	
+	for (it = sw.module_mgr->Modules.begin(); it != 
+				sw.module_mgr->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
+			mods->biblemods =
+			    g_list_append(mods->biblemods,
+				strdup((char *) (*it).second->Name()));
+			mods->text_descriptions =
+			    g_list_append(mods->text_descriptions,
+				strdup((char *) (*it).second->
+				   Description()));
 		}
-		if (!strcmp((*begin).second->Type(), COMM_MODS)) {
-			nt->type = COMMENTARY_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->Name());
+		if (!strcmp((*it).second->Type(), COMM_MODS)) {
+			mods->commentarymods =
+			    g_list_append(mods->commentarymods,
+			    strdup((char *) (*it).second->Name()));
+			mods->comm_descriptions =
+			    g_list_append(mods->comm_descriptions,
+				strdup((char *) (*it).second->
+				   Description()));
+			if (!strcmp((*it).second->getConfigEntry("ModDrv")
+				    , "RawFiles")) {
+				mods->percommods = g_list_append(mods->percommods,
+				    strdup((char *) (*it).second->Name()));
+			} 
 		}
-		if (!strcmp((*begin).second->Type(), DICT_MODS)) {
-			nt->type = DICTIONARY_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->Name());
+		if (!strcmp((*it).second->Type(), DICT_MODS)) {
+			mods->dictionarymods =
+			    g_list_append(mods->dictionarymods,
+			    strdup((char *) (*it).second->Name()));
+			mods->dict_descriptions =
+			    g_list_append(mods->dict_descriptions,
+			    strdup((char *) (*it).second->
+				   Description()));
+			
+			char *feature =
+			    (char *) (*it).second->getConfigEntry("Feature");
+			if(!feature)
+				continue;
+			if (!strcmp(feature, "DailyDevotion"))
+				mods->devotionmods 
+				   = g_list_append(mods->devotionmods,
+				    strdup((char *) (*it).second->Name()));
 		}
-		if (!strcmp((*begin).second->Type(), BOOK_MODS)) {
-			nt->type = BOOK_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->Name());
+		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+			mods->bookmods =
+			    g_list_append(mods->bookmods,
+			    strdup((char *) (*it).second->Name()));
+			mods->book_descriptions =
+			    g_list_append(mods->book_descriptions,
+			    strdup((char *) (*it).second->
+				   Description()));
 		}
-		begin++;
-		return nt;
-	} else
-		return NULL;
-}
-
-
-/******************************************************************************
- * Name
- *   backend_get_next_module_description
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   	NAME_TYPE *backend_get_next_module_description(void)
- *
- * Description
- *   
- *
- * Return value
- *   NAME_TYPE
- */
-
-NAME_TYPE *backend_get_next_module_description(NAME_TYPE * nt)
-{
-	if (begin != end) {
-
-		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
-			nt->type = TEXT_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->
-				   Description());
-		}
-		if (!strcmp((*begin).second->Type(), COMM_MODS)) {
-			nt->type = COMMENTARY_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->
-				   Description());
-		}
-		if (!strcmp((*begin).second->Type(), DICT_MODS)) {
-			nt->type = DICTIONARY_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->
-				   Description());
-		}
-		if (!strcmp((*begin).second->Type(), BOOK_MODS)) {
-			nt->type = BOOK_TYPE;
-			nt->name =
-			    strdup((char *) (*begin).second->
-				   Description());
-		}
-		begin++;
-		return nt;
-	} else
-		return NULL;
+		
+	}	
+	
 }
 
 
@@ -650,84 +605,6 @@ int backend_is_personal_comment_module(char *module_name)
 	}
 	return FALSE;
 
-}
-
-
-/**********************************************************************
- * Name
- *   backend_get_next_percom_name
- *
- * Synopsis
- *   #include "backend/module.hh"
- *   
- *   char *backend_get_next_percom_name(void)
- *
- * Description
- *   
- *
- * Return value
- *   char*
- */
-
-char *backend_get_next_percom_name(void)
-{
-	char *retval = NULL;
-
-	if (begin != end) {
-		if (!strcmp((*begin).second->getConfigEntry("ModDrv")
-			    , "RawFiles")) {
-			retval =
-			    strdup((char *) (*begin).second->Name());
-			begin++;
-			return retval;
-		} else {
-			begin++;
-			return "+";
-		}
-	} else
-		return NULL;
-}
-
-
-/**********************************************************************
- * Name
- *   backend_get_next_devotion_name
- *
- * Synopsis
- *   #include "backend/module.hh"
- *   
- *   char *backend_get_next_devotion_name(void)
- *
- * Description
- *   
- *
- * Return value
- *   char*
- */
-
-char *backend_get_next_devotion_name(void)
-{
-	char *retval = NULL;
-	char *feature = NULL;
-
-	if (begin != end) {
-		feature =
-		    (char *) (*begin).second->getConfigEntry("Feature");
-		if (!feature) {
-			begin++;
-			return "+";
-		}
-		if (!strcmp(feature, "DailyDevotion")) {
-			retval =
-			    strdup((char *) (*begin).second->Name());
-			begin++;
-			return retval;
-		} else {
-			begin++;
-			return "+";
-		}
-	} else
-		return NULL;
 }
 
 

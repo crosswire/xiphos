@@ -133,7 +133,7 @@ static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 					 gchar * dict_mod_description)
 {
-	gchar *dict_key = NULL;
+/*	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
 	mod_name = module_name_from_description(dict_mod_description);
@@ -149,7 +149,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
-	}
+	}*/
 }
 
 /******************************************************************************
@@ -345,9 +345,9 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 				      COMM_DATA * c)
 {
 	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
-				   settings.comm_tabs);
-	gui_set_comm_frame_label(c);
+/*	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
+				   settings.comm_tabs);*/
+//	gui_set_comm_frame_label(c);
 }
 
 /******************************************************************************
@@ -370,10 +370,10 @@ static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
 	if (c->is_dialog)
 		gui_display_commentary_in_dialog(settings.currentverse);
-	else
+/*	else
 		gui_display_commentary_with_struct(c,
 						   settings.
-						   currentverse);
+						   currentverse);*/
 }
 
 
@@ -395,11 +395,11 @@ static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 
 static void on_sync_toggle(GtkCheckMenuItem * menuitem, COMM_DATA * c)
 {
-	c->sync = menuitem->active;
+/*	c->sync = menuitem->active;
 	if (c->sync)
 		gui_display_commentary_with_struct(c,
 						   settings.
-						   currentverse);
+						   currentverse);*/
 }
 
 /******************************************************************************
@@ -427,8 +427,8 @@ static void on_prev_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 	if (key) {
 		if (c->is_dialog)
 			gui_display_commentary_in_dialog(key);
-		else
-			gui_display_commentary_with_struct(c, key);
+/*		else
+			gui_display_commentary_with_struct(c, key);*/
 		free(key);
 	}
 }
@@ -458,8 +458,8 @@ static void on_next_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 	if (key) {
 		if (c->is_dialog)
 			gui_display_commentary_in_dialog(key);
-		else
-			gui_display_commentary_with_struct(c, key);
+/*		else
+			gui_display_commentary_with_struct(c, key);*/
 		free(key);
 	}
 }
@@ -487,10 +487,10 @@ static void on_chapter_heading_activate(GtkMenuItem * menuitem,
 	c->chapter_heading = TRUE;
 	if (c->is_dialog)
 		gui_display_commentary_in_dialog(c->key);
-	else
+/*	else
 		gui_display_commentary_with_struct(c,
 						   settings.
-						   currentverse);
+						   currentverse);*/
 }
 
 
@@ -514,7 +514,7 @@ static void on_book_heading_activate(GtkMenuItem * menuitem,
 				     COMM_DATA * c)
 {
 	c->book_heading = TRUE;
-	gui_display_commentary_with_struct(c, settings.currentverse);
+//	gui_display_commentary_with_struct(c, settings.currentverse);
 }
 
 

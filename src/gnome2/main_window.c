@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * main_window.c - main window gui
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,6 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/htmlengine.h>
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -57,7 +56,6 @@ WIDGETS widgets;
 extern HISTORY history_list[];	/* sturcture for storing history items */
 extern gint history_items;
 
-GtkTextBuffer *text_buffer;
 
 /******************************************************************************
  * Name
@@ -66,7 +64,7 @@ GtkTextBuffer *text_buffer;
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_show_hide_texts(gboolean choice)	
+ *   void gui_show_hide_texts(gboolean choice)
  *
  * Description
  *    Show/hide bible texts
@@ -94,7 +92,7 @@ void gui_show_hide_texts(gboolean choice)
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_show_hide_comms(gboolean choice)	
+ *   void gui_show_hide_comms(gboolean choice)
  *
  * Description
  *    Show/hide Commentaries
@@ -107,9 +105,9 @@ void gui_show_hide_comms(gboolean choice)
 {
 	settings.showcomms = choice;
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.notebook_comm);
+		gtk_widget_hide(widgets.box_comm);
 	} else {
-		gtk_widget_show(widgets.notebook_comm);
+		gtk_widget_show(widgets.box_comm);
 	}
 	gui_set_bible_comm_layout();
 }
@@ -122,7 +120,7 @@ void gui_show_hide_comms(gboolean choice)
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_show_hide_dicts(gboolean choice)	
+ *   void gui_show_hide_dicts(gboolean choice)
  *
  * Description
  *    Show/hide Dictionaries-Lexicons
@@ -150,10 +148,10 @@ void gui_show_hide_dicts(gboolean choice)
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_set_bible_comm_layout(void)	
+ *   void gui_set_bible_comm_layout(void)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -205,10 +203,10 @@ void gui_set_bible_comm_layout(void)
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_change_window_title(gchar * module_name)	
+ *   void gui_change_window_title(gchar * module_name)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -218,9 +216,9 @@ void gui_change_window_title(gchar * module_name)
 {
 	gchar title[200];
 	/*
-	 * set program title to current module name 
+	 * set program title to current module name
 	 */
-	sprintf(title, "%s - %s", get_module_description(module_name), 
+	sprintf(title, "%s - %s", get_module_description(module_name),
 						settings.program_title);
 	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
 }
@@ -235,10 +233,10 @@ void gui_change_window_title(gchar * module_name)
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_change_module_and_key(gchar * module_name, gchar * key)	
+ *   void gui_change_module_and_key(gchar * module_name, gchar * key)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -251,22 +249,22 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 	gchar *val_key = NULL;
 
 	mod_type = get_mod_type(module_name);
-	
+
 	switch (mod_type) {
 	case TEXT_TYPE:
 		if (settings.havebible) {
 			if(settings.browsing)
-				gui_update_tab_struct(module_name, 
-					      NULL, 
-					      NULL, 
-					      NULL, 
-					      NULL, 
+				gui_update_tab_struct(module_name,
+					      NULL,
+					      NULL,
+					      NULL,
+					      NULL,
 					      NULL);
 			val_key = gui_update_nav_controls(key);
 			if(!strcmp(settings.MainWindowModule,module_name))
 				gui_change_verse((gchar*)val_key);
 			else {
-				xml_set_value("GnomeSword", "modules", "bible", 
+				xml_set_value("GnomeSword", "modules", "bible",
 							module_name);
 				settings.MainWindowModule = xml_get_value(
 							"modules", "bible");
@@ -278,41 +276,40 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 	case COMMENTARY_TYPE:
 		if (settings.havecomm) {
 			if(settings.browsing)
-				gui_update_tab_struct(NULL, 
-					      module_name, 
-					      NULL, 
-					      NULL, 
-					      NULL, 
+				gui_update_tab_struct(NULL,
+					      module_name,
+					      NULL,
+					      NULL,
+					      NULL,
 					      NULL);
-			page_num =
-			    get_module_number(module_name, COMM_MODS);
-			gui_set_commentary_page_and_key(page_num, key);
+			xml_set_value("GnomeSword", "modules", "comm",
+						module_name);
+			settings.CommWindowModule = xml_get_value(
+						"modules", "comm");
+			gui_set_comm_label(settings.CommWindowModule);
+			gui_change_verse(key);
 		}
 		break;
 	case DICTIONARY_TYPE:
 		if (settings.havedict) {
-			if(settings.browsing) 
-				gui_update_tab_struct(NULL, 
-					      NULL, 
-					      module_name, 
-					      NULL, 
-					      key, 
-					      NULL);
-			page_num =
-			    get_module_number(module_name, DICT_MODS);
-			if(page_num == -1)
-				page_num == 0;
-			gui_set_dictionary_page_and_key(page_num, key);
+			if(settings.browsing)
+				gui_update_tab_struct(NULL,
+					      NULL,
+					      module_name,
+					      NULL,
+					      key,
+					      NULL);			
+			gui_set_dictlex_mod_and_key(module_name, key);
 		}
 		break;
 	case BOOK_TYPE:
 		if (settings.havebook) {
 			if(settings.browsing)
-				gui_update_tab_struct(NULL, 
-					      NULL,  
-					      NULL, 
+				gui_update_tab_struct(NULL,
+					      NULL,
+					      NULL,
 					      module_name,
-					      NULL,  
+					      NULL,
 					      key?key:NULL);
 			page_num =
 			    get_module_number(module_name, BOOK_MODS);
@@ -338,10 +335,10 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   void gui_change_verse(gchar * key)	
+ *   void gui_change_verse(gchar * key)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -370,23 +367,23 @@ void gui_change_verse(const gchar * key)
 		gui_keep_bibletext_dialog_in_sync(val_key);
 	}
 
-	/* 
-	 * change parallel verses 
+	/*
+	 * change parallel verses
 	 */
 	if (settings.dockedInt) {
 		gui_update_parallel_page();
 	}
 
-	/* 
-	 * change personal notes editor   if not in edit mode 
+	/*
+	 * change personal notes editor   if not in edit mode
 	 */
 	if (!settings.editnote)
 		if (settings.havepercomm)
 			if (!settings.use_percomm_dialog)
 				gui_display_percomm(val_key);
 
-	/* 
-	 * set commentary module to current verse 
+	/*
+	 * set commentary module to current verse
 	 */
 	if (settings.havecomm) {
 		gui_display_commentary(val_key);
@@ -407,7 +404,7 @@ void gui_change_verse(const gchar * key)
  *   void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
  *
  * Description
- *    shutdown gnomesword 
+ *    shutdown gnomesword
  *
  * Return value
  *   void
@@ -435,7 +432,7 @@ static void on_mainwindow_destroy(GtkObject * object,
  *			GdkEventButton * event, gpointer user_data)
  *
  * Description
- *    get and store pane sizes 
+ *    get and store pane sizes
  *
  * Return value
  *   void
@@ -477,15 +474,15 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   
+ *
  *
  * Synopsis
  *   #include "gui/main_window.h"
  *
- *   
+ *
  *
  * Description
- *     
+ *
  *
  * Return value
  *   void
@@ -525,7 +522,7 @@ void gui_search_appbar_update(char percent, void *userData)
  *				   gpointer user_data)
  *
  * Description
- *     
+ *
  *
  * Return value
  *   gboolean
@@ -540,12 +537,12 @@ static gboolean on_configure_event(GtkWidget * widget,
 	gint y;
 
  	gdk_window_get_root_origin(GDK_WINDOW(widgets.app->window), &x, &y);
-	
+
 	settings.gs_width = event->width;
 	settings.gs_hight = event->height;
 	settings.app_x = x;
 	settings.app_y = y;
-	
+
 	sprintf(layout, "%d", settings.gs_width);
 	xml_set_value("GnomeSword", "layout", "width", layout);
 
@@ -564,318 +561,6 @@ static gboolean on_configure_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *  on_text_button_press_event
- *
- * Synopsis
- *   #include ".h"
- *
- *  gboolean on_text_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)	
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-static gboolean on_text_button_press_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	switch (event->button) {
-	case 1:		
-		break;
-	case 2:
-		break;
-	case 3:		
-		gui_popup_pm_text(settings.MainWindowModule, event);
-		break;
-	}
-	return FALSE;
-}
-/******************************************************************************
- * Name
- *  on_button_release_event
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)	
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_text_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					TEXT_DATA * t)
-{
-	extern gboolean in_url;
-	gchar *key;
-	const gchar *url;
-	gchar *buf = NULL;
-
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name 
-	 */
-	gui_change_window_title(settings.MainWindowModule);
-
-	switch (event->button) {
-	case 1:
-		if (!in_url) {
-			key = gui_button_press_lookup(widgets.html_text);
-			if (key) {
-				gchar *dict = NULL;
-				if (settings.useDefaultDict)
-					dict =
-					    g_strdup(settings.
-						     DefaultDict);
-				else
-					dict =
-					    g_strdup(settings.
-						     DictWindowModule);
-				if (settings.inViewer)
-					gui_display_dictlex_in_sidebar
-					    (dict, key);
-				if (settings.inDictpane)
-					gui_change_module_and_key(dict,
-								  key);
-				g_free(key);
-				if (dict)
-					g_free(dict);
-			}
-		}
-		break;
-	case 2:
-		if (!in_url) 
-			break;
-		url = html_engine_get_link_at (GTK_HTML(widgets.html_text)->engine,
-					 event->x,
-					 event->y);
-		if(strstr(url,"sword://")) {
-			gchar **work_buf = g_strsplit (url,"/",4);			
-			gui_open_passage_in_new_tab(work_buf[3]);
-			g_strfreev(work_buf);
-		}
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-
-
-static gboolean textview_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	extern gboolean in_url;
-	gchar *key;
-
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name 
-	 */
-	gui_change_window_title(settings.MainWindowModule);
-
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-
-
-static gboolean textview_button_press_event(GtkWidget * widget,
-					GdkEventButton * event,
-					gpointer data)
-{
-	gchar *key;
-
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:	
-		gui_popup_pm_text(settings.MainWindowModule, event);
-		break;
-	}
-	return FALSE;
-}
-
-
-static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
-	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
-{
-	gint char_index;
-	
-	char_index = gtk_text_iter_get_offset (iter);
-	//printf ("offset = %d", char_index);
-  switch (event->type)
-    {
-    case GDK_MOTION_NOTIFY:
-      printf ("Motion event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_BUTTON_PRESS:
-      printf ("Button press at char %d tag `%s'\n",
-             char_index, tag->name);
-	    switch(event->button.button){
-		    case 1:
-			//return do_something_with_tag(tag, iter, user_data);
-		        break;
-		    case 2:
-		    case 3:
-		        break;
-	    
-	}
-	
-    	return TRUE;	
-      break;
-        
-    case GDK_2BUTTON_PRESS:
-      printf ("Double click at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_3BUTTON_PRESS:
-      printf ("Triple click at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_BUTTON_RELEASE:
-      printf ("Button release at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_KEY_PRESS:
-    case GDK_KEY_RELEASE:
-      printf ("Key event at char %d tag `%s'\n",
-              char_index, tag->name);
-    	return TRUE;
-      break;
-      
-    case GDK_ENTER_NOTIFY:
-      printf ("enter event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-	    
-    case GDK_LEAVE_NOTIFY:
-      printf ("leave event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-	    
-    case GDK_PROPERTY_NOTIFY:
-    case GDK_SELECTION_CLEAR:
-    case GDK_SELECTION_REQUEST:
-    case GDK_SELECTION_NOTIFY:
-    case GDK_PROXIMITY_IN:
-    case GDK_PROXIMITY_OUT:
-    case GDK_DRAG_ENTER:
-    case GDK_DRAG_LEAVE:
-    case GDK_DRAG_MOTION:
-    case GDK_DRAG_STATUS:
-    case GDK_DROP_START:
-    case GDK_DROP_FINISHED:
-    	return FALSE;
-    default:
-    	return FALSE;
-      break;
-    }    
-    return FALSE;
-}
-
-static void setup_tag (GtkTextTag *tag, gpointer user_data)
-{
-	g_signal_connect (G_OBJECT (tag),
-		    "event",
-		    G_CALLBACK (tag_event_handler),
-		    user_data);
-}
-
-static void create_text_tags(GtkTextBuffer * buffer)
-{
-	GtkTextTag *tag;
-	GdkColor color;
-	GdkColor color2;
-	GdkColor color_red;
-	GdkColor colorLink;
-	PangoFontDescription *font_desc;
-	
-		
-		
-	/* verse number tag verse style*/
-	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
-	setup_tag (tag, buffer);  
-	color.red = color.green = 0;
-	color.blue = 0xffff;
-		"scale", PANGO_SCALE_XX_SMALL,
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);	
-			
-	/* verse number tag verse style*/
-	/*tag = gtk_text_buffer_create_tag (buffer, "verse", NULL);
-	setup_tag (tag, buffer); 
-	g_object_set (G_OBJECT (tag),	
-                NULL);	*/
-		
-	/* current verse color tag */	
-	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
-	color.blue = 0;
-	color.green = 0xbbbb;
-	color.red = 0;
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-		
-	/*  verse color tag */	
-	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
-	color.blue = 0;
-	color.green = 0;
-	color.red = 0;
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-		
-	/* right to left tag */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
-        g_object_set (G_OBJECT (tag),
-		//"font", rtl_font,
-                "wrap_mode", GTK_WRAP_WORD,
-                "direction", GTK_TEXT_DIR_RTL,
-                "indent", 0,
-                "left_margin", 0,
-                "right_margin", 0,
-                NULL);	
-		
-	/* large tag */
-	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
-        g_object_set (G_OBJECT (tag),
-		"scale", (double)1.928, //PANGO_SCALE_XX_LARGE,
-                NULL);			
-}
-	
-
-/******************************************************************************
- * Name
  *   create_mainwindow
  *
  * Synopsis
@@ -884,7 +569,7 @@ static void create_text_tags(GtkTextBuffer * buffer)
  *   void create_mainwindow(void)
  *
  * Description
- *    create gnomesword gui 
+ *    create gnomesword gui
  *
  * Return value
  *   void
@@ -899,17 +584,11 @@ void create_mainwindow(void)
 	GtkWidget *hbox2;
 	GtkWidget *nav_toolbar;
 	GtkWidget *swInt;
-	GtkWidget *label41;
-	GtkWidget *label185;
-	GtkWidget *label197;
 	GtkWidget *hbox25;
 	GtkWidget *hboxtb;
-	GtkWidget *scrolledwindow;
 	GtkWidget *tab_button_icon;
-	GdkColor transparent = { 0 };
-	gint page_num = 0;
 	GtkTooltips *tooltips;
-	
+
 	tooltips = gtk_tooltips_new ();
 
 	g_print("%s\n", "Building GnomeSword interface");
@@ -953,7 +632,7 @@ void create_mainwindow(void)
 	vboxMain = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vboxMain);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vboxMain, TRUE, TRUE, 0);
-	
+
 	/*
 	 * notebook to have separate passages opened at once
 	 * the passages are not actually open but are switched
@@ -963,11 +642,11 @@ void create_mainwindow(void)
 	if(settings.browsing)
 		gtk_widget_show(widgets.hboxtb);
 	gtk_box_pack_start(GTK_BOX(vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
-	
+
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
-	
-//	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_NEW, 
+
+//	tab_button_icon = gtk_image_new_from_stock(GTK_STOCK_NEW,
 //					GTK_ICON_SIZE_SMALL_TOOLBAR);
 	tab_button_icon = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
 						"/new_tab_button.png");
@@ -975,9 +654,9 @@ void create_mainwindow(void)
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
 	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
 	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, widgets.button_new_tab, _("Open a new tab"), 
+	gtk_tooltips_set_tip(tooltips, widgets.button_new_tab, _("Open a new tab"),
 				NULL);
-	
+
 	widgets.notebook_main = gtk_notebook_new();gtk_widget_show(widgets.notebook_main);
 	gtk_box_pack_start(GTK_BOX(widgets.hboxtb),
 			   widgets.notebook_main, TRUE, TRUE, 0);
@@ -987,14 +666,14 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_main));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
 	/* main passage tabbed notebook end */
-	
+
 	/*
-	 * nav toolbar 
+	 * nav toolbar
 	 */
 	nav_toolbar = gui_create_nav_toolbar(widgets.app);
 	/* gtk_box_pack_start(GTK_BOX(vboxMain),nav_toolbar,FALSE,FALSE,0); */
 	/*
-	 * end nav toolbar 
+	 * end nav toolbar
 	 */
 
 	widgets.vpaned = gtk_vpaned_new();
@@ -1012,10 +691,10 @@ void create_mainwindow(void)
 
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
-	gtk_paned_pack1(GTK_PANED(widgets.hpaned), 
+	gtk_paned_pack1(GTK_PANED(widgets.hpaned),
 					widgets.vbox_text, FALSE, TRUE);
 
-	 
+
 	/*
 	 * text/parallel notebook
 	 */
@@ -1031,106 +710,29 @@ void create_mainwindow(void)
 
 	/*
 	 * text notebook
-	 */
-	widgets.notebook_text = gtk_notebook_new();
-	gtk_widget_show(widgets.notebook_text);
-	label41 = gtk_label_new(_("Biblical Text"));
-	gtk_widget_show(label41);
-
-	gtk_notebook_append_page(GTK_NOTEBOOK
-				 (widgets.
-				  notebook_parallel_text),
-				 widgets.notebook_text, label41);
+	 */	 
+	widgets.notebook_text = gui_create_bible_pane();      
+        gtk_container_add(GTK_CONTAINER(widgets.notebook_parallel_text),
+			  widgets.notebook_text);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK
 				    (widgets.notebook_text), TRUE);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_text),FALSE); 
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
 	gtk_notebook_popup_disable(GTK_NOTEBOOK(widgets.notebook_text));
-				     
-	
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
-			  scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
 
-	widgets.html_text = gtk_html_new();
-	gtk_widget_show(widgets.html_text);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_text);
-			  
-			  
-	
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
-			  scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	widgets.textview = gtk_text_view_new ();
-	gtk_widget_show(widgets.textview);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.textview);
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (widgets.textview), FALSE);
-	text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (widgets.textview));
-	
-	create_text_tags(text_buffer);
-	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (widgets.textview), GTK_WRAP_WORD);	
-			  
-	
-	g_signal_connect(GTK_OBJECT(widgets.textview),
-				   "button_release_event",
-				   G_CALLBACK
-				   (textview_button_release_event),
-				  NULL);
-	g_signal_connect(GTK_OBJECT(widgets.textview),
-				   "button_press_event",
-				   G_CALLBACK
-				   (textview_button_press_event),
-				  NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
-				   G_CALLBACK(gui_url),
-				   GINT_TO_POINTER(TEXT_TYPE));
-	g_signal_connect(GTK_OBJECT(widgets.html_text),
-				   "button_press_event",
-				   G_CALLBACK
-				   (on_text_button_press_event),
-				   NULL);
-	g_signal_connect(GTK_OBJECT(widgets.html_text),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_text_button_release_event),
-				   NULL);
-	
-	
+
 	/*
 	 * commentary notebook
 	 */
-	widgets.notebook_comm = gtk_notebook_new();
-	gtk_widget_show(widgets.notebook_comm);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_comm), TRUE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_comm));
-	gtk_notebook_set_show_border(GTK_NOTEBOOK
-				     (widgets.notebook_comm), FALSE);
-
+	widgets.box_comm = gui_create_commentary_pane();
 	gtk_paned_pack2(GTK_PANED(widgets.hpaned),
-			widgets.notebook_comm, TRUE, TRUE);
+			widgets.box_comm, TRUE, TRUE);
 
 	/*
 	 * lower_workbook
 	 */
 	widgets.workbook_lower = gtk_notebook_new();
 	gtk_widget_show(widgets.workbook_lower);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.workbook_lower));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.workbook_lower), FALSE);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
@@ -1140,45 +742,17 @@ void create_mainwindow(void)
 			widgets.workbook_lower, TRUE, TRUE);
 
 	/*
-	 * dict/lex  
-	 */
-	widgets.notebook_dict = gtk_notebook_new();
-	gtk_widget_show(widgets.notebook_dict);
-	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
-			  widgets.notebook_dict);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_dict), TRUE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_dict));
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_dict),
-				   settings.dict_tabs);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK
-				     (widgets.notebook_dict), FALSE);
-
-	label41 = gtk_label_new(_("Dict/Lex"));
-	gtk_widget_show(label41);
-
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK
-				   (widgets.workbook_lower),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.workbook_lower),
-				    page_num), label41);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.
-					  workbook_lower),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.
-					   workbook_lower),
-					  page_num), _("Dict/Lex"));
-	++page_num;
+	 * dict/lex
+         */
+	widgets.box_dict = gui_create_dictionary_pane();        
+        gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
+			  widgets.box_dict);
 	/*
-	 * end  dict/lex  
+	 * end  dict/lex
 	 */
 
 	/*
-	 * gbs notebook 
+	 * gbs notebook
 	 */
 
 	widgets.notebook_gbs = gtk_notebook_new();
@@ -1193,61 +767,10 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_gbs));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.notebook_gbs), FALSE);
-
-	label185 = gtk_label_new(_("Books"));
-	gtk_widget_show(label185);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK
-				   (widgets.workbook_lower),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.workbook_lower),
-				    page_num), label185);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.
-					  workbook_lower),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.
-					   workbook_lower),
-					  page_num), _("Books"));
-	++page_num;
 	/*
-	 * end gbs 
+	 * end gbs
 	 */
 
-	/*
-	 * percomm 
-	 */
-	if (!settings.use_percomm_dialog) {
-		gui_percomm_in_workbook(widgets.workbook_lower,
-					page_num);
-		++page_num;
-	}
-
-	/*
-	 * studypad editor 
-	 */
-	if (settings.use_studypad) {
-		if (!settings.use_studypad_dialog) {
-			settings.studypad_dialog_exist = FALSE;
-			gui_open_studypad(widgets.
-					  workbook_lower,
-					  settings.
-					  studypadfilename, page_num);
-			++page_num;
-		}
-	}
-	/*
-	 * end studypad editor 
-	 */
-
-	/*
-	 * parallel page 
-	 */
-
-	/*
-	 * end parallel page 
-	 */
 
 	widgets.appbar = gnome_appbar_new(FALSE, TRUE,
 					  GNOME_PREFERENCES_NEVER);
@@ -1277,7 +800,7 @@ void create_mainwindow(void)
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "hpaned1");
-			   
+
 	gtk_widget_grab_focus(nav_bar.lookup_entry);
 
 	gtk_widget_set_size_request(widgets.app, settings.gs_width,
