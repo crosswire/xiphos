@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
   /*
     * GnomeSword Bible Study Tool
     * gs_shortcutbar.c
@@ -91,13 +92,23 @@ static void on_item_removed(EShortcutModel * shortcut_model,
 /*** set shortcut bar to verse list group ***/
 void showSBVerseList(SETTINGS * s)
 {
-	EShortcutBar *bar1;
-
-	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
-	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
-					  groupnum7, TRUE);
+	showSBGroup(s, groupnum7);
 	changegroupnameSB(s, s->groupName, groupnum7);
 }
+
+/*** set shortcut bar group ***/
+void showSBGroup(SETTINGS * s, gint groupnum)
+{
+	EShortcutBar *bar1;
+	if(!s->showshortcutbar) {
+		e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
+		s->showshortcutbar = TRUE;	
+	}
+	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
+	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
+					  groupnum, TRUE);
+}
+
 
 void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)
 {
