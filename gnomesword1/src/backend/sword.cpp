@@ -120,12 +120,12 @@ char *backend_get_sword_locale(void)
 		}
 	}
 	retval = strdup(sys_local);
-	
+	LocaleMgr::getSystemLocaleMgr()->loadConfigDir("/usr/share/sword/locales.d");
 	LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_local);
 	SWLocale *sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_local);
-	if(sw_locale)
+	if(sw_locale) {
 		OLD_CODESET = (char*)sw_locale->getEncoding();
-	else {
+	} else {
 		OLD_CODESET = "iso8859-1";
 #ifdef DEBUG
 		g_print("locale not found\n");
@@ -155,7 +155,9 @@ void backend_init(void)
 	char *sword_locale = NULL;
 	char *sys_locale = NULL;
 	const char *sword_version = get_sword_version();
-	
+	SWMgr mgr;
+	const char *path = mgr.prefixPath;
+	g_message(path);
 #ifdef DEBUG	
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sword_version);
@@ -167,6 +169,7 @@ void backend_init(void)
 	sword_locale = backend_get_sword_locale();
 	settings.spell_language = strdup(sys_locale);	
 #ifdef DEBUG	
+	g_print("OLD_CODESET = %s\n", OLD_CODESET);
 	g_print("%s %s\n", _("System locale is"),sys_locale);
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
 	g_print("%s\n", _("Checking for SWORD Modules"));

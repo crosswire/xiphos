@@ -33,6 +33,8 @@
 #include <swbuf.h>
 #include <gnome.h>
 
+#include "editor/editor.h"
+
 #include "gui/about_modules.h"
 #include "gui/html.h"
 #include "gui/history.h"
@@ -45,6 +47,8 @@
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
 #include "gui/main_window.h"
+#include "gui/studypad.h"
+#include "gui/studypad_dialog.h"
 #include "gui/toolbar_nav.h"
 
 #include "main/url.hh"
@@ -147,6 +151,37 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	}
 	g_free(text);
 }
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/url.hh"
+ *
+ *   gint (const gchar * filename, gboolean clicked)
+ *
+ * Description
+ *  
+ *
+ * Return value
+ *   gint
+ */
+ 
+ static gint show_studypad(const gchar * filename, gboolean clicked)
+{
+	if (settings.studypad_dialog_exist) {
+		gtk_widget_show(widgets.studypad_dialog);
+		load_file((gchar*) filename, editor_cd);
+		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->
+				 window);
+	} else {
+		settings.studypad_dialog_exist =
+			  gui_open_studypad_dialog((gchar*)filename);
+	}
+	return 1;
+}
+
 
 
 /******************************************************************************
@@ -873,6 +908,11 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		
 		if(!strcmp(action,"showParallel")) {
 			show_parallel(value, type, clicked);
+		}
+				
+		
+		if(!strcmp(action,"showStudypad")) {
+			show_studypad(value, clicked);
 		}
 		
 		if(action) g_free(action);

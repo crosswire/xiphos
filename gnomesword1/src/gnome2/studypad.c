@@ -39,11 +39,7 @@
 #include "gtkhtml/htmlsettings.h"
 #include "gtkhtml/htmlpainter.h"
 #include "gtkhtml/htmlplainpainter.h"
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
+
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -70,7 +66,6 @@
 
 #define BUFFER_SIZE 4096
 
-GSHTMLEditorControlData *editor_cd;
 
 static GtkHTMLEditorAPI *editor_api;
 
@@ -204,7 +199,7 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	int fd;
 	GString *str;
 	
-	g_warning(filename);
+//	g_warning(filename);
 	if(!g_file_test((const gchar*)filename, G_FILE_TEST_EXISTS)) {
 		str = g_string_new(" ");
 		g_string_printf(str, "file not found: %s",filename);
@@ -219,10 +214,11 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 		g_string_free(str,TRUE);
 		return 0;
 	}
-	
-	settings.studypadfilename = filename;
+	gui_studypad_can_close();
+	//settings.studypadfilename = filename;
 	xml_set_value("GnomeSword", "studypad", "lastfile", filename);
-
+	settings.studypadfilename = xml_get_value("studypad", "lastfile");
+	
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

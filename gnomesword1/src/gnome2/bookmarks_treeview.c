@@ -829,13 +829,22 @@ static gboolean button_release_event(GtkWidget * widget,
 	if (is_selected) {
 		if (!gtk_tree_model_iter_has_child
 		    (GTK_TREE_MODEL(model), &selected) && key != NULL) {
-			url =
-			    g_strdup_printf
-			    ("gnomesword.url?action=showBookmark&"
-			     "type=%s&value=%s&module=%s",
-			     (button_one) ? "currentTab" : "newTab",
-			     main_url_encode(key),
-			     main_url_encode(module));
+			if(!strcmp(module,"studypad"))
+				url =
+				    g_strdup_printf
+				    ("gnomesword.url?action=showStudypad&"
+				     "type=9&value=%s&module=%s",
+				     main_url_encode(key),
+				     main_url_encode(module));
+				
+			else
+				url =
+				    g_strdup_printf
+				    ("gnomesword.url?action=showBookmark&"
+				     "type=%s&value=%s&module=%s",
+				     (button_one) ? "currentTab" : "newTab",
+				     main_url_encode(key),
+				     main_url_encode(module));
 			main_url_handler(url, FALSE);
 			g_free(url);
 
@@ -995,8 +1004,13 @@ void add_bookmark_button(void)
 						(entry6)));
 	data->module = g_strdup((gchar *)gtk_entry_get_text(GTK_ENTRY
 						   (entry7)));
-	data->module_desc =
-	    main_get_module_description(data->module);
+	
+	if(!strcmp(data->module,"studypad"))
+		data->module_desc = "studypad";
+	else
+		data->module_desc =
+		    	main_get_module_description(data->module);
+	
 	data->description = g_strdup((gchar *)gtk_entry_get_text
 				     (GTK_ENTRY(entry5)));
 

@@ -51,8 +51,10 @@ using namespace std;
 BackEnd *backend = NULL;
 
  
-//static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
- 
+#ifdef DEBUG 
+static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
+#endif
+
 BackEnd::BackEnd() {
 //#ifdef USE_MOZILLA
 //	SWMgr mgr(0, 0, true, new GS_MarkupFilterMgr(FMT_HTMLHREF));
@@ -730,17 +732,25 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 		char *mykey;                                                 
         	gsize bytes_read;
        	 	gsize bytes_written;
-        	GError **error = NULL;
-		//g_message(f_message,583,"key",key);
+        	GError *error = NULL;
+#ifdef DEBUG 
+		g_message(f_message,734,"key",key);
+#endif
 		mykey = g_convert(key,
                              -1,
                              OLD_CODESET,
                              UTF_8,
                              &bytes_read,
                              &bytes_written,
-                             error);
+                             &error);
+		if(error) {
+			g_print ("error: %s\n", error->message);
+			g_error_free (error);	
+		}
 		display_mod->setKey(mykey);
-		//g_message(f_message,592,"mykey",mykey);
+#ifdef DEBUG 
+		g_message(f_message,743,"mykey",mykey);
+#endif
 		g_free(mykey);
 		return 1;
 	}
@@ -751,7 +761,26 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 
 int BackEnd::set_key(const char *key) {
 	if (display_mod) {
-		display_mod->setKey(key);
+		char *mykey;                                                 
+        	gsize bytes_read;
+       	 	gsize bytes_written;
+        	GError **error = NULL;
+#ifdef DEBUG 
+		g_message(f_message,758,"key",key);
+#endif
+		mykey = g_convert(key,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		display_mod->setKey(mykey);
+#ifdef DEBUG 
+		g_message(f_message,767,"mykey",mykey);
+#endif
+		g_free(mykey);
+		//display_mod->setKey(key);
 		return 1;
 	}
 	else 
