@@ -347,7 +347,7 @@ static void radiobutton_search_toggled(GtkToggleButton * togglebutton,
 
 void gui_create_search_sidebar(void)
 {
-	GtkWidget *frame1;
+//	GtkWidget *frame1;
 	GtkWidget *vbox1;
 	GtkWidget *vbox90;
 	GSList *vbox90_group = NULL;
@@ -396,15 +396,10 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(viewport_search);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_search),
 			  viewport_search);
-
-	frame1 = gtk_frame_new(NULL);
-	gtk_widget_show(frame1);
-	gtk_container_add(GTK_CONTAINER(viewport_search), frame1);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame1), GTK_SHADOW_NONE);
-
+			  
 	vbox1 = gtk_vbox_new(FALSE, 4);
 	gtk_widget_show(vbox1);
-	gtk_container_add(GTK_CONTAINER(frame1), vbox1);
+	gtk_container_add(GTK_CONTAINER(viewport_search), vbox1);
 	
 	vbox5 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox5);

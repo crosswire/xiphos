@@ -1268,7 +1268,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (gpointer) on_bookmarks_activate,
 	 NULL,
 	 NULL, GNOME_APP_PIXMAP_STOCK,
-	 "gnome-stock-book-open", 0,
+	 "epiphany-bookmarks", 0,
 	 (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM,
