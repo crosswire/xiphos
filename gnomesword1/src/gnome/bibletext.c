@@ -41,7 +41,9 @@
 #include "main/lists.h"
 #include "main/sword.h"
 
-
+static void on_notebook_text_switch_page(GtkNotebook * notebook,
+				  GtkNotebookPage * page,
+				  gint page_num, GList * tl);
 /******************************************************************************
  * externs
  */
@@ -134,8 +136,15 @@ static void set_page_text(gchar * modname, GList * text_list)
 		++page;
 		text_list = g_list_next(text_list);
 	}
-	cur_t = t;
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_text), page);
+	if(page)
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+				  widgets.notebook_text), page);
+	else
+		on_notebook_text_switch_page(GTK_NOTEBOOK(
+				  widgets.notebook_text),
+				  NULL,
+				  page, 
+				  text_list);
 	settings.text_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 			settings.text_tabs);
@@ -162,11 +171,7 @@ static void text_page_changed(gint page_num, TEXT_DATA *t)
 	/*
 	 * remember new module name
 	 */
-	sprintf(settings.MainWindowModule, "%s", t->mod_name);
-	/*
-	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
-	 */
-	cur_t = t;
+	sprintf(settings.MainWindowModule, "%s", t->mod_name);	
 	/*
 	 * remember page number
 	 */
@@ -233,6 +238,10 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
 	if(!t->frame)
 		gui_add_new_text_pane(t);
+	/*
+	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
+	 */
+	cur_t = t;
 	/*
 	 * do work that's non gui
 	 */
@@ -1404,12 +1413,11 @@ void gui_set_text_frame_label(void)
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
-	 */	
+	 */
 	if (settings.text_tabs)
 		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
 	else
 		gtk_frame_set_label(GTK_FRAME(cur_t->frame), cur_t->mod_name);
-	
 }
 
 /******************************************************************************
@@ -1573,7 +1581,6 @@ void gui_setup_text(GList *mods)
 	gint count = 0;
 
 	text_list = NULL;
-	
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -1591,7 +1598,7 @@ void gui_setup_text(GList *mods)
 		++count;
 		tmp = g_list_next(tmp);
 	}
-
+	//g_warning("count = %d module = %s",count,t->mod_name);
 	gtk_signal_connect(GTK_OBJECT(widgets.notebook_text),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
