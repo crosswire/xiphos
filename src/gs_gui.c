@@ -123,16 +123,16 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static GnomeUIInfo language_options1_menu_uiinfo[] = {
+static GnomeUIInfo module_options_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
 };
 
 static GnomeUIInfo settings1_menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_SUBTREE, N_("Language Options"),
+	 GNOME_APP_UI_SUBTREE, N_("Module Options"),
 	 NULL,
-	 language_options1_menu_uiinfo, NULL, NULL,
+	 module_options_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CONVERT,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
@@ -1268,7 +1268,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(s->htmlInterlinear);
 	
-		gtk_container_add(GTK_CONTAINER
+	gtk_container_add(GTK_CONTAINER
 			  (swInt),
 			  s->htmlInterlinear);
 			  
@@ -1543,10 +1543,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_signal_connect(GTK_OBJECT(s->htmlInterlinear), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
 	gtk_signal_connect(GTK_OBJECT(s->htmlInterlinear), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);
-	/*gtk_signal_connect(GTK_OBJECT(s->htmlInterlinear), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
-			   
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	
 	gtk_widget_grab_focus(s->app);
 	if (s->showsplash) {
 		e_splash_set_icon_highlight(E_SPLASH(splash), 0, TRUE);
