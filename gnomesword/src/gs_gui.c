@@ -37,9 +37,10 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
+#include "gs_gui.h"
 #include "callback.h"
 #include "gs_studypad.h"
-#include "interface.h"
+//#include "interface.h"
 #include "support.h"
 #include "gs_shortcutbar.h"
 #include "gs_sword.h"
