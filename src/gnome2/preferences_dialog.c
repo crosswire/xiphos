@@ -734,7 +734,8 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 			xml_set_value("GnomeSword", "tabs", "browsing",
 				      "1");
 			settings.browsing = TRUE;
-			gui_notebook_main_setup(NULL);
+			//gui_notebook_main_setup();
+			gui_open_tabs();
 			gtk_widget_show(widgets.hboxtb);
 		} else {
 			xml_set_value("GnomeSword", "tabs", "browsing",

@@ -265,7 +265,9 @@ echo
 
   echo "Building for Gnome:  2.x"  
 
-
+  echo "CFLAGS:   $CFLAGS"
+  echo "CPPFLAGS: @CPPFLAGS"
+  echo "CXXFLAGS: $CXXFLAGS"
 if test "x$have_speller" = xyes; then
   echo "Spellchecking:         enabled"
   echo "using:                      $speller"
