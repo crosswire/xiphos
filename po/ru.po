@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword 0.7.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-16 15:59-0500\n"
+"POT-Creation-Date: 2005-03-19 19:08-0500\n"
 "PO-Revision-Date: 2003-06-05 15:31+0300\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -72,7 +72,7 @@ msgid "Parallel View"
 msgstr ""
 
 #: src/main/sidebar.cc:580 src/main/sidebar.cc:854 src/main/sidebar.cc:855
-#: src/main/sidebar.cc:856 src/gnome2/main_window.c:603
+#: src/main/sidebar.cc:856 src/gnome2/main_window.c:604
 msgid "Standard View"
 msgstr ""
 
@@ -1162,10 +1162,6 @@ msgstr ""
 msgid "Note for"
 msgstr "Сохранить заметку"
 
-#: src/gnome2/dialog.c:159
-msgid " "
-msgstr ""
-
 #: src/gnome2/dialog.c:799
 msgid "Close _without Saving"
 msgstr ""
@@ -1473,22 +1469,32 @@ msgstr "История"
 msgid "_Help"
 msgstr ""
 
-#: src/gnome2/main_window.c:479
+#: src/gnome2/main_window.c:472
+#, fuzzy
+msgid "Starting"
+msgstr "О GnomeSword"
+
+#: src/gnome2/main_window.c:473
+#, fuzzy
+msgid "Building GnomeSword interface"
+msgstr "Интерфейс"
+
+#: src/gnome2/main_window.c:480
 #, fuzzy
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSWORD - программа по изучению Библии"
 
-#: src/gnome2/main_window.c:533
+#: src/gnome2/main_window.c:534
 #, fuzzy
 msgid "Open a new tab"
 msgstr "Открыть файл"
 
-#: src/gnome2/main_window.c:669
+#: src/gnome2/main_window.c:670
 #, fuzzy
 msgid "Commentary View"
 msgstr "Комментарии"
 
-#: src/gnome2/main_window.c:686
+#: src/gnome2/main_window.c:687
 msgid "Book View"
 msgstr ""
 
@@ -1716,7 +1722,7 @@ msgstr ""
 msgid "Delete Note"
 msgstr "Удалить заметку"
 
-#: src/gnome2/parallel_dialog.c:590 src/gnome2/preferences_dialog.c:945
+#: src/gnome2/parallel_dialog.c:591 src/gnome2/preferences_dialog.c:945
 msgid "Parallel"
 msgstr ""
 
@@ -2709,6 +2715,14 @@ msgstr "Изменить подстрочный 1"
 #: src/gnome2/toolbar_nav.c:539
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Initiating SWORD"
+#~ msgstr "О GnomeSword"
+
+#, fuzzy
+#~ msgid "Checking for SWORD Modules"
+#~ msgstr "О модулях Sword"
 
 #~ msgid "Sync"
 #~ msgstr "Синхронизация"

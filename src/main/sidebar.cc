@@ -46,7 +46,7 @@
 #include "main/url.hh"
 #include "main/xml.h"
 
-#include "backend/sword.h"
+//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
 

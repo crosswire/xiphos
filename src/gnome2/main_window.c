@@ -469,7 +469,8 @@ void create_mainwindow(void)
 
 	tooltips = gtk_tooltips_new ();
 #ifdef DEBUG
-	g_print("%s\n", "Building GnomeSword interface");
+	g_print("%s gnomesword-%s\n", _("Starting"), VERSION);
+	g_print("%s\n\n", _("Building GnomeSword interface"));
 #endif
 
 	widgets.studypad_dialog = NULL;

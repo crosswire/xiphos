@@ -36,7 +36,7 @@
 #include "main/settings.h"
 #include "main/parallel_view.h"
 
-#include "backend/sword.h"
+//#include "backend/sword.h"
 #include "backend/sword_main.hh"
 
 static int of2tf(const gchar * on_off)
