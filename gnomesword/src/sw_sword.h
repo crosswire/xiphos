@@ -53,6 +53,7 @@ extern "C" {
 	void changecomp2ModSWORD(gchar * modName);
 	void changecomp3ModSWORD(gchar * modName);
 	void setversestyleSWORD(gboolean choice);
+  void backend_set_locale(char *locale);
 	/*** change Bible book ***/
 	void bookSWORD(void);
 	gchar *intchangeverseSWORD(GtkWidget *book, 
