@@ -631,6 +631,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 			  set_font);
 	gtk_tooltips_set_tip(tooltips, set_font,
 			     _("Set font for this module"), NULL);
+			     
 
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);

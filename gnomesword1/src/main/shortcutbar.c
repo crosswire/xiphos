@@ -54,7 +54,7 @@
  * Return value
  *  GList * 
  */
-
+/*
 GList *load_sb_group(gchar * file_name, gchar * group_name,
 		     gchar * icon_size)
 {
@@ -78,7 +78,7 @@ GList *load_sb_group(gchar * file_name, gchar * group_name,
 	return glist;
 	//return backend_load_sb_group(filename, group_name, icon_size);
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -96,7 +96,7 @@ GList *load_sb_group(gchar * file_name, gchar * group_name,
  * Return value
  *   void
  */
-
+/*
 void save_sb_group(GList * group_list, gchar * file_name, 
 		gchar * group_name, char *large_icons)
 {
@@ -125,12 +125,8 @@ void save_sb_group(GList * group_list, gchar * file_name,
 	}
 	g_list_free(tmp);
 	backend_close_config_file();
-	/*
-	backend_save_sb_group(group_list, file_name, group_name,
-			      large_icons);
-	*/
 }
-
+/*
 
 /******************************************************************************
  * Name
@@ -148,7 +144,7 @@ void save_sb_group(GList * group_list, gchar * file_name,
  *   void
  */
 
-void save_sb_iconsize(gchar * file_name, char *icons)
+/*void save_sb_iconsize(gchar * file_name, char *icons)
 {
 	
 	char conf_file[256];
@@ -159,10 +155,8 @@ void save_sb_iconsize(gchar * file_name, char *icons)
 					"Large Icon", icons);	
 	backend_close_config_file();
 	
-	/*backend_save_sb_iconsize(file_name, icons);*/
-	
 }
-
+*/
 
 /******************************************************************************
  * Name

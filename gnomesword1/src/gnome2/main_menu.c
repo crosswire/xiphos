@@ -512,6 +512,28 @@ static void view_lower_workbook(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *   on_mod_mgr
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void on_mod_mgr(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void on_mod_mgr(GtkMenuItem * menuitem,
+				gpointer user_data)
+{
+	gui_open_mod_mgr();
+}
+
+/******************************************************************************
+ * Name
  *   open_studypad
  *
  * Synopsis
@@ -632,6 +654,12 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate,
 					  NULL),
+	{
+	 GNOME_APP_UI_ITEM, N_("Module Manager"),
+	 N_("Use module manager to install and remove Sword modules"),
+	 on_mod_mgr, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-preferences",
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
