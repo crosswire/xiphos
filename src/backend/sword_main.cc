@@ -290,8 +290,20 @@ char *BackEnd::get_render_text(const char *module_name, const char *key) {
 	it = display_mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != display_mgr->Modules.end()) {
+		char *mykey;                                                 
+		gsize bytes_read;
+		gsize bytes_written;
+		GError **error = NULL;		
+		mykey = g_convert(key,
+				     -1,
+				     OLD_CODESET,
+				     UTF_8,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
 		mod = (*it).second;
-		mod->setKey(key);
+		mod->setKey(mykey);
+		g_free(mykey);
 		return strdup((char *) mod->RenderText());
 	}
 	return NULL;	
@@ -305,8 +317,20 @@ char *BackEnd::get_strip_text(const char *module_name, const char *key) {
 	it = main_mgr->Modules.find(module_name);
 	//-- if we find the module
 	if (it != main_mgr->Modules.end()) {
+		char *mykey;                                                 
+		gsize bytes_read;
+		gsize bytes_written;
+		GError **error = NULL;		
+		mykey = g_convert(key,
+				     -1,
+				     OLD_CODESET,
+				     UTF_8,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
 		mod = (*it).second;
-		mod->setKey(key);
+		mod->setKey(mykey);
+		g_free(mykey);
 		return strdup((char *) mod->StripText());
 	}
 	return NULL;	
@@ -318,7 +342,7 @@ char *BackEnd::get_valid_key(const char *key) {
 	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	
 	mykey = g_convert(key,
                              -1,
@@ -349,7 +373,7 @@ char *BackEnd::key_get_book(const char *key) {
 	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	
 	mykey = g_convert(key,
                              -1,
@@ -378,7 +402,7 @@ int BackEnd::key_get_chapter(const char *key) {
 	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	
 	mykey = g_convert(key,
                              -1,
@@ -398,7 +422,7 @@ int BackEnd::key_get_verse(const char *key) {
 	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	
 	mykey = g_convert(   key,
                              -1,
@@ -418,7 +442,7 @@ const unsigned int BackEnd::key_chapter_count(const char *key) {
 	char *mykey;                                                 
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	
 	mykey = g_convert(   key,
                              -1,
@@ -442,7 +466,7 @@ const unsigned int BackEnd::key_verse_count(const char *key) {
 	char *mykey;                                                   
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	
 	mykey = g_convert(   key,
                              -1,
@@ -466,7 +490,7 @@ char *BackEnd::get_module_key() {
 	char *mykey;                                                   
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
 	(const char *) *display_mod;
 	
 	mykey = g_convert(   (char*)display_mod->KeyText(),
@@ -642,7 +666,7 @@ int BackEnd::set_module_key(const char *module_name, const char *key) {
 		char *mykey;                                                 
         	gsize bytes_read;
        	 	gsize bytes_written;
-        	GError **error;
+        	GError **error = NULL;
 		//g_message(f_message,583,"key",key);
 		mykey = g_convert(key,
                              -1,
@@ -672,7 +696,10 @@ int BackEnd::set_key(const char *key) {
 }
 
 char *BackEnd::get_key_form_offset(unsigned long offset) {
-	char *retval = NULL;
+	char *retval = NULL;                                      
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error = NULL;
 	if (tree_key) {
                 TreeKeyIdx treenode = *tree_key;
                 treenode.setOffset(offset);
@@ -680,8 +707,15 @@ char *BackEnd::get_key_form_offset(unsigned long offset) {
                 if (treenode.getOffset() > 0) {
                         display_mod->SetKey(treenode);
                         display_mod->KeyText();      //snap to entry
-                }
-		retval = strdup(display_mod->KeyText());
+                }		
+		retval = g_convert( (char *) display_mod->KeyText(),
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
+		//retval = strdup(display_mod->KeyText());
         }
         return retval;
 }
@@ -749,6 +783,10 @@ int BackEnd::treekey_next_sibling(unsigned long offset) {
 
 
 char *BackEnd::navigate_module(int direction) {
+	char *retval = NULL;                                      
+        gsize bytes_read;
+        gsize bytes_written;
+        GError **error = NULL;
 	if (direction == -1)
 		return strdup((char *) display_mod->KeyText());
 
@@ -761,7 +799,14 @@ char *BackEnd::navigate_module(int direction) {
 		break;
 	}
 	display_mod->Error();
-	return strdup((char *) display_mod->KeyText());
+	retval = g_convert( (char *) display_mod->KeyText(),
+			     -1,
+			     UTF_8,
+			     OLD_CODESET,
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	return retval; //strdup((char *) display_mod->KeyText());
 }
 
 
@@ -775,22 +820,31 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
 	ListKey vs;                                                   
         gsize bytes_read;
         gsize bytes_written;
-        GError **error;
+        GError **error = NULL;
+	char *m_current_key = g_convert(current_key,
+				     -1,
+				     OLD_CODESET,
+				     UTF_8,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
 	
-	key.setText(current_key);
+	key.setText(m_current_key);
 	vs = key.ParseVerseList(list, key);
+	g_free(m_current_key);
+	error = NULL;
 	if(!vs.Count())
 		return retlist;
 	while(!vs.Error()) {
-		char *mykey = g_convert((char*)vs.getText(),
-                             -1,
-                             OLD_CODESET,
-                             UTF_8,
-                             &bytes_read,
-                             &bytes_written,
-                             error);
+		char *m_key = g_convert((char*)vs.getText(),
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
 
-		retlist = g_list_append(retlist, (char*)mykey);
+		retlist = g_list_append(retlist, (char*)m_key);
 		vs++;
 	}
 	return retlist;
