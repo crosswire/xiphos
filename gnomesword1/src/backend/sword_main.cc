@@ -644,7 +644,6 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
         gsize bytes_read;
         gsize bytes_written;
         GError **error;
-
 	
 	key.setText(current_key);
 	vs = key.ParseVerseList(list, key);
