@@ -645,18 +645,18 @@ void create_mainwindow(SETTINGS *s)
 	 */
 	
 	/*
-	 * GBS html display 
+	 * gbs notebook 
 	 */
 	
-	s->notebookGBS = gtk_notebook_new ();
-	gtk_widget_ref (s->notebookGBS);
-	gtk_object_set_data_full (GTK_OBJECT (s->app), "s->notebookGBS", s->notebookGBS,
+	s->notebook_gbs = gtk_notebook_new ();
+	gtk_widget_ref (s->notebook_gbs);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "s->notebookGBS", s->notebook_gbs,
 			    (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (s->notebookGBS);
-	gtk_container_add (GTK_CONTAINER (s->workbook_lower), s->notebookGBS);
-	GTK_WIDGET_UNSET_FLAGS (s->notebookGBS, GTK_CAN_FOCUS);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS), FALSE);	
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->notebookGBS));	
+	gtk_widget_show (s->notebook_gbs);
+	gtk_container_add (GTK_CONTAINER (s->workbook_lower), s->notebook_gbs);
+	GTK_WIDGET_UNSET_FLAGS (s->notebook_gbs, GTK_CAN_FOCUS);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_gbs), FALSE);	
+	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->notebook_gbs));	
 	
 	label185 = gtk_label_new(_("Books"));
 	gtk_widget_ref(label185);
@@ -673,7 +673,7 @@ void create_mainwindow(SETTINGS *s)
 							    (s->workbook_lower),
 							    1), _("Books"));
 	/*
-	 * end GBS html editor/display 
+	 * end gbs 
 	 */
 	
 	

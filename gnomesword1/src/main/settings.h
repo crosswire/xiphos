@@ -39,7 +39,7 @@ struct _settings {
 		*ctree_widget_books, /* books tree */
 		*workbook, /* notebook - commentaries and editors */	
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
-		*notebookGBS, /* notebook - gbs */
+		*notebook_gbs, /* notebook - gbs */
 		*notebookDL,  /* notebook - dict/lex */
 		*notebook_comm,  /* notebook - commentaries */
 		*notebook_text,  /* notebook - texts */
@@ -159,7 +159,7 @@ struct _settings {
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
 		intCurVerse,    /* detached interlinear current verse */
-		gbsLastPage,    /* last notebook page before change */
+		book_last_page,    /* last notebook page before change */
 		dict_last_page,     /* last notebook page before change */
 		commLastPage,     /* last notebook page before change */
 		text_last_page,     /* last notebook page before change */

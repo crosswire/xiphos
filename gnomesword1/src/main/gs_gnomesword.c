@@ -33,7 +33,6 @@
 #include "gs_interlinear.h"
 #include "gs_history.h"
 #include "gs_gui_cb.h"
-#include "gs_gbs.h"
 #include "support.h"
 #include "gs_info_box.h"
 #include "gs_html.h"
@@ -48,11 +47,12 @@
 /*
  * main
  */ 
-#include "percomm.h"
-#include "bibletext.h"
 #include "settings.h"
+#include "bibletext.h"
 #include "commentary.h"
+#include "percomm.h"
 #include "dictlex.h"
+#include "gbs.h"
  
 /*
  * backend
@@ -61,8 +61,9 @@
 #include "sword.h"
 #include "interlinear.h"
 #include "bibletext_.h"
+#include "commentary_.h"
 #include "percomm_.h"
-#include "gbs.h"
+#include "gbs_.h"
 #include "dictlex_.h"
  
  
@@ -158,7 +159,7 @@ void init_gnomesword(SETTINGS * s)
 	 *  setup general book gui support 
 	 */
 	if(havebook)
-		mod_lists->bookmods = gui_setup_gbs(s);
+		mod_lists->bookmods = setup_gbs(s);
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
@@ -245,7 +246,7 @@ void gnomesword_shutdown(SETTINGS * s)
 	if(havebible)
 		shutdown_text();
 	if(havebook)
-		gui_shutdownGBS();
+		shutdown_gbs();
 	if(havedict)
 		shutdown_dictlex();
 	if(havecomm)
@@ -808,10 +809,10 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			    backend_get_module_page(module_name, 
 							BOOK_MODS);
 			if(key)
-				gui_set_book_page_and_key(page_num, key);
+				set_book_page_and_key(page_num, key);
 			else {
 				gtk_notebook_set_page(GTK_NOTEBOOK(
-					settings.notebookGBS),
+					settings.notebook_gbs),
 					page_num);
 			}
 		}
