@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * bibletext_dialog.h - view Bible text module in a dialog
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
