@@ -37,6 +37,10 @@ extern "C" {
 
 #include <string.h>
 
+#ifdef USE_SWORD_CVS	
+#include <url.h>
+#endif
+
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
@@ -1095,6 +1099,64 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 	
 }
 
+
+static gint new_url_handler(const gchar * url, gboolean clicked)
+{
+
+	gchar* action = NULL;
+	gchar* type = NULL;
+	gchar* value = NULL;
+	gchar* module = NULL;
+	gchar* passage = NULL;
+	gchar *buf = NULL;
+#ifdef USE_SWORD_CVS	
+	URL* m_url;
+	
+#ifdef DEBUG	
+	//g_warning("url = %s",url);
+#endif
+	m_url = new URL((const char*)url);	
+	action = g_strdup(m_url->getParameterValue("action"));
+	type = g_strdup((gchar*)m_url->getParameterValue("type"));
+	value = g_strdup((gchar*)m_url->getParameterValue("value"));
+	
+#ifdef DEBUG
+	g_warning("action = %s",action);
+	g_warning("type = %s",type);  
+	g_warning("value = %s",value);
+#endif	
+
+ 
+	if(!strcmp(action,"showStrongs")) {
+		//new_strongs_uri(type,value,clicked);
+	}
+	
+	
+	if(!strcmp(action,"showMorph")) {
+		//new_morph_uri(type, value,clicked);
+	}
+	
+	if(!strcmp(action,"showNote")) {	
+		module = g_strdup(m_url->getParameterValue("module"));
+		passage = g_strdup((gchar*)m_url->getParameterValue("passage"));
+		//new_note_uri(module, passage, type, value, clicked);
+		if(module) g_free(module);
+		if(passage) g_free(passage);
+	}
+	
+	if(!strcmp(action,"showRef")) {	
+		module = g_strdup(m_url->getParameterValue("module"));
+		//new_reference_uri(module,value,clicked);
+		if(module) g_free(module);
+	}
+	
+	if(action) g_free(action);
+	if(type) g_free(type);
+	if(value) g_free(value);
+#endif
+	return 1;
+}
+
 /******************************************************************************
  * Name
  *   gui_url_handler
@@ -1114,6 +1176,10 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {		
 	//g_warning(url);
+#ifdef USE_SWORD_CVS
+	if(strstr(url,"passagestudy.jsp")) /* passagestudy.jsp?action=showStrongs&type= */
+		return new_url_handler(url,clicked);
+#endif
 	if(strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);
 	if(strstr(url,"strongs://"))

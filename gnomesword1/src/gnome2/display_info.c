@@ -208,6 +208,8 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				       (scrolledwindow70),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow70,
+                                             settings.shadow_type);
 
 	html_widget = gtk_html_new();
 	gtk_widget_show(html_widget);

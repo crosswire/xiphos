@@ -826,12 +826,12 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 					near_misses_scrolled_window),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)spc_gui.near_misses_scrolled_window,
+                                             settings.shadow_type);
 	gtk_widget_show(spc_gui.near_misses_scrolled_window);
 	gtk_box_pack_start(GTK_BOX(hbox),
 			   spc_gui.near_misses_scrolled_window, TRUE, TRUE,
 			   0);
-	gtk_container_set_border_width(GTK_CONTAINER(
-				spc_gui.near_misses_scrolled_window), 2);
 		
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
