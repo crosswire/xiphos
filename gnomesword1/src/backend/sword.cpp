@@ -1243,58 +1243,7 @@ void changepercomModSWORD(gchar * modName)	//-- change personal comments module
 	}
 }
 
-//-------------------------------------------------------------------------------------------
-void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module information in an about dialog
-{
-/*	GtkWidget * aboutbox;	//-- pointer to about dialog        
-	GtkWidget * text;	//-- pointer to text widget of dialog
-	gchar * buf,		//-- pointer to text buffer for label (mod name)
-	    *bufabout,		//-- pointer to text buffer for text widget (mod about)
-	    *newbuf, discription[500];
-	gint len;
-	ModMap::iterator it;	//-- module iterator
-	SectionMap::iterator sit;	//--  iterator
-	ConfigEntMap::iterator cit;	//-- iterator
 
-	bufabout = "oops";
-	buf = mainMgr->Modules[modName]->Description();
-	bufabout = (gchar*)mainMgr->Modules[modName]->getConfigEntry("About");
-	
-	sprintf(discription,
-		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
-		buf);
-	if(!isGBS) {
-		aboutbox = gui_create_about_modules();
-		gtk_widget_show(aboutbox);
-	}
-	
-	if (strcmp(bufabout, "oops")) {
-		len = strlen(bufabout);
-		newbuf = new char[len + 600];
-		
-		if(!isGBS) {
-			text = lookup_widget(aboutbox, "textModAbout");	//-- get text widget
-		}
-		
-		else {
-			text = settings->htmlBook;
-		}
-		
-		AboutModsDisplayHTML(newbuf, bufabout);	//-- send about info and alocated new text buffer to display function (sw_display.cpp)
-		beginHTML(text, FALSE);
-		displayHTML(text, "<html><body>", strlen("<html><body>"));
-		displayHTML(text, discription, strlen(discription));
-		displayHTML(text, newbuf, strlen(newbuf));
-		displayHTML(text, "</body></html>",
-			    strlen("</body></html>"));
-		endHTML(text);
-		delete[]newbuf;		
-	} 
-	
-	else
-		g_warning(bufabout);
-*/
-}
 
 /******************************************************************************
  * setglobalopsSWORD
@@ -1792,7 +1741,7 @@ GList* backend_get_mod_description_list_SWORD(char *modType) {
     return mods;    
 }
 
-gchar *backend_getmodDescriptionSWORD(gchar *modName) {
+gchar *backend_get_module_description(gchar *modName) {
     ModMap::iterator it;	//-- iteratior
           
     it = mainMgr->Modules.find(modName);
@@ -1803,13 +1752,28 @@ gchar *backend_getmodDescriptionSWORD(gchar *modName) {
 }
 /***  returns path to sword modules must be freed by calling function  ***/
 gchar *backend_getPathToModsSWORD(void) {
-    char *retval;
-    SWMgr *mgr;
-    
-    mgr = new SWMgr();
-    retval = g_strdup(mgr->prefixPath);
-    delete mgr;    
-    return retval;    
+    return g_strdup(mainMgr->prefixPath);
 }
+
+/******************************************************************************
+ * Name
+ *   backend_get_mod_aboutSWORD
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   gchar *backend_get_mod_aboutSWORD(gchar *modname)
+ *
+ * Description
+ *   return the about information from the <module>.conf
+ *
+ * Return value
+ *   gchar *
+ */
+gchar *backend_get_mod_aboutSWORD(gchar *modname) 
+{
+      return g_strdup((gchar*)mainMgr->Modules[modname]->getConfigEntry("About"));  
+}
+
 /******   end of file   ******/
 

@@ -463,7 +463,7 @@ void gui_setupDL(SETTINGS * s)
 	modname = (gchar *) tmp->data;
 	dl = g_new(DL_DATA, 1);
 	dl->modName = modname;
-	dl->modDescription = backend_getmodDescriptionSWORD(modname);
+	dl->modDescription = backend_get_module_description(modname);
 	dl->searchstring = NULL;
 	create_DictLexPane(s, mods, dl, count);
 	backend_newDisplayDL(dl->html, dl->modName, s);

@@ -89,7 +89,7 @@ GtkWidget *gui_create_about_modules(void)
         GtkWidget *label97;
         GtkWidget *pixmap4;
         GtkWidget *scrolledwindow30;
-        GtkWidget *textModAbout;
+        GtkWidget *text;
         GtkWidget *dialog_action_area8;
         GtkWidget *btn_ok;
 
@@ -164,14 +164,14 @@ GtkWidget *gui_create_about_modules(void)
                                        GTK_POLICY_NEVER,
                                        GTK_POLICY_ALWAYS);
 
-        textModAbout = gtk_html_new();
-        gtk_widget_ref(textModAbout);
+        text = gtk_html_new();
+        gtk_widget_ref(text);
         gtk_object_set_data_full(GTK_OBJECT(aboutmodules),
-                                 "textModAbout", textModAbout,
+                                 "text", text,
                                  (GtkDestroyNotify) gtk_widget_unref);
-        gtk_widget_show(textModAbout);
+        gtk_widget_show(text);
         gtk_container_add(GTK_CONTAINER(scrolledwindow30),
-                          textModAbout);
+                          text);
 
         dialog_action_area8 = GNOME_DIALOG(aboutmodules)->action_area;
         gtk_object_set_data(GTK_OBJECT(aboutmodules),

@@ -260,7 +260,7 @@ gint string_is_color(gchar *color);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
-
+void display_about_module_dialog(gchar *modname, gboolean isGBS);
 
 #ifdef __cplusplus
 }

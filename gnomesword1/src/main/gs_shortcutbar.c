@@ -308,7 +308,7 @@ static void on_about_item_activate ( GtkMenuItem * menuitem,
         gint group_num, item_num;
         gchar *item_url, *item_name;
         EShortcutBar *bar1;
-        gchar modName[16];
+        gchar modname[16];
 
         item_num = GPOINTER_TO_INT ( data );
         bar1 = E_SHORTCUT_BAR ( shortcut_bar );
@@ -318,9 +318,9 @@ static void on_about_item_activate ( GtkMenuItem * menuitem,
                                          ( shortcut_bar )->model,
                                          group_num, item_num, &item_url,
                                          &item_name, NULL );
-        memset ( modName, 0, 16 );
-        modNameFromDesc ( modName, item_name );
-        showmoduleinfoSWORD ( modName, FALSE );
+        memset ( modname, 0, 16 );
+        modNameFromDesc ( modname, item_name );
+        display_about_module_dialog(modname, FALSE);
         g_free ( item_url );
         g_free ( item_name );
 }

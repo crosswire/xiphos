@@ -71,8 +71,7 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 };
 
 
-//----------------------------------------------------------------------------------------------
-void AboutModsDisplayHTML(char *to, char *text);
+
 char IntDisplay(SETTINGS *s);
 
 
