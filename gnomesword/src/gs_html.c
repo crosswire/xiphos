@@ -166,19 +166,19 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->greek, buf);  
+			gotoBookmarkSWORD(p_gslexicon->greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->hebrew, buf);  
+			gotoBookmarkSWORD(p_gslexicon->hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
-		buf = g_strdup(url);
-		changcurdictModSWORD("Packard", buf);  
+		buf = g_strdup(url); 
+		gotoBookmarkSWORD("Packard", buf);  
 		g_free(buf);
 	} 
 	
@@ -199,19 +199,19 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'G'){
 			++url; 
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->greek, buf);  
+			gotoBookmarkSWORD(p_gslexicon->greek, buf);  
 			g_free(buf);
 		}
 		if(*url == 'H'){
 			++url;  		
 			buf = g_strdup(url);
-			changcurdictModSWORD(p_gslexicon->hebrew, buf);  
+			gotoBookmarkSWORD(p_gslexicon->hebrew, buf);  
 			g_free(buf);
 		}		  		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
-		changcurdictModSWORD("Packard", buf);  
+		gotoBookmarkSWORD("Packard", buf);  
 		g_free(buf);
 	} else  if(*url == '*')   {
 		++url;
