@@ -104,14 +104,7 @@ static void applyoptions(SETTINGS * s)
 					     (lookup_widget
 					      (s->app, "epaned")), 1);
 		}
-		/* set height of bible and commentary pane */
-		e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "vpaned1")),
-				     s->upperpane_hight);
-		/* set width of bible pane */
-		e_paned_set_position(E_PANED
-				     (lookup_widget(s->app, "hpaned1")),
-				     s->biblepane_width);
+                setbiblecommlayoutSWORD();		
 		updatelayout = FALSE;
 	}
 	if (s->text_tabs) {
@@ -136,6 +129,10 @@ static void applyoptions(SETTINGS * s)
 	}
 
 	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
+        GTK_CHECK_MENU_ITEM(s->viewtexts_item)->active = s->showtexts;
+        GTK_CHECK_MENU_ITEM(s->viewcomms_item)->active = s->showcomms;
+        GTK_CHECK_MENU_ITEM(s->viewdicts_item)->active = s->showdicts;
+
 	if (updatehtml)
 		applyfontcolorandsizeSWORD();
 	if (updateSB)
@@ -266,6 +263,12 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnUseDefaultDict"))->active;
 	s->versestyle =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton9"))->active;
+       s->showtexts =
+           GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton10"))->active;
+       s->showcomms =
+           GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton11"))->active;
+       s->showdicts =
+           GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton12"))->active;
 	s->showfavoritesgroup =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnFavoritesGroup"))->
 	    active;
@@ -550,6 +553,11 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   GtkWidget *cbtnInViewer;
   GtkWidget *cbtnInDictPane;
   GtkWidget *frame25;
+  GtkWidget *frame45;
+  GtkWidget *vbox56;
+  GtkWidget *checkbutton10;
+  GtkWidget *checkbutton11;
+  GtkWidget *checkbutton12;
   GtkWidget *vbox37;
   GtkWidget *cbtnPNformat;
   GtkWidget *checkbutton8;
@@ -1128,7 +1136,51 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (cbtnShowBooktabs);
   gtk_box_pack_start (GTK_BOX (vbox54), cbtnShowBooktabs, FALSE, FALSE, 0);
+  
+  
 
+  frame45 = gtk_frame_new (_("Show"));
+  gtk_widget_ref (frame45);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "frame45", frame45,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (frame45);
+  gtk_box_pack_start (GTK_BOX (vbox28), frame45, FALSE, FALSE, 0);
+
+  vbox56 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox56);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "vbox56", vbox56,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox56);
+  gtk_container_add (GTK_CONTAINER (frame45), vbox56);
+
+  checkbutton10 = gtk_check_button_new_with_label (_("Show Bible Texts"));
+  gtk_widget_ref (checkbutton10);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "checkbutton10", checkbutton10,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (checkbutton10);
+  gtk_box_pack_start (GTK_BOX (vbox56), checkbutton10, FALSE, FALSE, 0);
+  gtk_widget_set_usize (checkbutton10, 202, -2);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbutton10), TRUE);
+
+  checkbutton11 = gtk_check_button_new_with_label (_("Show Commentaries"));
+  gtk_widget_ref (checkbutton11);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "checkbutton11", checkbutton11,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (checkbutton11);
+  gtk_box_pack_start (GTK_BOX (vbox56), checkbutton11, FALSE, FALSE, 0);
+  gtk_widget_set_usize (checkbutton11, 202, -2);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbutton11), TRUE);
+
+  checkbutton12 = gtk_check_button_new_with_label (_("Show Dictionaries"));
+  gtk_widget_ref (checkbutton12);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "checkbutton12", checkbutton12,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (checkbutton12);
+  gtk_box_pack_start (GTK_BOX (vbox56), checkbutton12, FALSE, FALSE, 0);
+  gtk_widget_set_usize (checkbutton12, 202, -2);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbutton12), TRUE);
+
+  
   frame43 = gtk_frame_new (_("Misc"));
   gtk_widget_ref (frame43);
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "frame43", frame43,
@@ -2014,6 +2066,14 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				     s->book_tabs);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton9),
 				     s->versestyle);
+       gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton10),
+                                    s->showtexts);
+       gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton11),
+                                    s->showcomms);
+       gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton12),
+                                    s->showdicts);
+	
+	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDevotion),
 				     s->showdevotional);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnFavoritesGroup),
@@ -2164,6 +2224,17 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(checkbutton9), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));
+	
+       gtk_signal_connect(GTK_OBJECT(checkbutton10), "toggled",
+                          GTK_SIGNAL_FUNC(on_button_toggled),
+                          GINT_TO_POINTER(1));
+       gtk_signal_connect(GTK_OBJECT(checkbutton11), "toggled",
+                          GTK_SIGNAL_FUNC(on_button_toggled),
+                          GINT_TO_POINTER(1));
+       gtk_signal_connect(GTK_OBJECT(checkbutton12), "toggled",
+                           GTK_SIGNAL_FUNC(on_button_toggled),
+                           GINT_TO_POINTER(1));		   
+			   
 	gtk_signal_connect(GTK_OBJECT(cbtnShowDevotion), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));

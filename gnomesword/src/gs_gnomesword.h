@@ -89,6 +89,10 @@ struct _settings {
 		*unlockcommmod_item, /* unlock module menu item */
 		*unlockdictmod_item, /* unlock module menu item */
 	
+               *viewtexts_item, /* widget to access toggle menu - for showtexts */
+               *viewcomms_item, /* widget to access toggle menu - for showcommss */
+               *viewdicts_item, /* widget to access toggle menu - for showdicts */
+
 	/* global option menu check item widgets */
 		*strongsnum,
 		*footnotes,
@@ -195,6 +199,9 @@ struct _settings {
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		book_tabs, /* show module tabs in books if true  */
+                showtexts, /* show bible texts if true  */
+                showcomms, /* show commentaries if true  */
+                showdicts, /* show dictionaries/lexicons if true */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		notefollow, /* notes follow Bible text when true */
