@@ -29,7 +29,7 @@ anjuta.compatibility.level=1
 project.name=gnomesword
 project.type=GNOME
 project.target.type=EXECUTABLE
-project.version=2.0.0
+project.version=2.1.2
 project.author=The GnomeSword Team
 project.source.target=src/gnome2/gnomesword2
 project.has.gettext=1
@@ -42,9 +42,9 @@ project.config.extra.modules.after=
 project.config.blocked=1
 project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
 
-project.menu.entry=gnomesword Version 2.0.0
+project.menu.entry=gnomesword Version 2.1.2
 project.menu.group=Application
-project.menu.comment=gnomesword Version 2.0.0
+project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
@@ -88,10 +88,6 @@ module.include.files=\
 	src/gui/gbs.h\
 	src/gui/gbs_dialog.h\
 	src/gui/cipher_key_dialog.h\
-	src/gui/editor.h\
-	src/gui/editor_menu.h\
-	src/gui/editor_replace.h\
-	src/gui/editor_spell.h\
 	src/gui/fileselection.h\
 	src/gui/find_dialog.h\
 	src/gui/gnomesword.h\
@@ -110,9 +106,7 @@ module.include.files=\
 	src/gui/shortcutbar_viewer.h\
 	src/gui/studypad.h\
 	src/gui/studypad_dialog.h\
-	src/gui/toolbar_edit.h\
 	src/gui/toolbar_nav.h\
-	src/gui/toolbar_style.h\
 	src/gui/utilities.h\
 	src/main/bibletext.h\
 	src/main/commentary.h\
@@ -137,9 +131,6 @@ module.include.files=\
 	src/main/global_ops.hh\
 	src/backend/sword_main.hh\
 	src/main/module_dialogs.h\
-	src/gui/note_editor.h\
-	src/gui/note_toolbar_edit.h\
-	src/gui/note_toolbar_style.h\
 	src/main/mod_search.h\
 	src/gui/search_sidebar.h\
 	src/main/search_dialog.h\
@@ -150,7 +141,23 @@ module.include.files=\
 	src/backend/gs_gbfhtmlhref.h\
 	src/backend/gs_markupfiltmgr.h\
 	src/backend/gs_osishtmlhref.h\
-	src/backend/gs_thmlhtmlhref.h
+	src/backend/gs_thmlhtmlhref.h\
+	src/editor/editor.h\
+	src/editor/editor_menu.h\
+	src/editor/editor_replace.h\
+	src/editor/editor_spell.h\
+	src/editor/gi-color-combo.h\
+	src/editor/gi-color-group.h\
+	src/editor/gi-color-palette.h\
+	src/editor/gi-colors.h\
+	src/editor/gi-combo-box.h\
+	src/editor/gi-utils.h\
+	src/editor/note_editor.h\
+	src/editor/note_toolbar_edit.h\
+	src/editor/note_toolbar_style.h\
+	src/editor/spell.h\
+	src/editor/toolbar_edit.h\
+	src/editor/toolbar_style.h
 
 module.source.name=.
 module.source.type=
@@ -179,10 +186,6 @@ module.source.files=\
 	src/gnome2/history.c\
 	src/gnome2/html.c\
 	src/gnome2/cipher_key_dialog.c\
-	src/gnome2/editor.c\
-	src/gnome2/editor_menu.c\
-	src/gnome2/editor_replace.c\
-	src/gnome2/editor_spell.c\
 	src/gnome2/fileselection.c\
 	src/gnome2/find_dialog.c\
 	src/gnome2/gui.c\
@@ -194,9 +197,7 @@ module.source.files=\
 	src/gnome2/studypad.c\
 	src/gnome2/studypad_dialog.c\
 	src/gnome2/splash.c\
-	src/gnome2/toolbar_edit.c\
 	src/gnome2/toolbar_nav.c\
-	src/gnome2/toolbar_style.c\
 	src/gnome2/utilities.c\
 	src/gnome2/sidebar.c\
 	src/gnome2/parallel_dialog.c\
@@ -219,9 +220,6 @@ module.source.files=\
 	src/main/sidebar.cc\
 	src/main/module_dialogs.cc\
 	src/gnome2/gbs_dialog.c\
-	src/gnome2/note_editor.c\
-	src/gnome2/note_toolbar_edit.c\
-	src/gnome2/note_toolbar_style.c\
 	src/main/search_dialog.cc\
 	src/main/search_sidebar.cc\
 	src/main/parallel_view.cc\
@@ -231,7 +229,22 @@ module.source.files=\
 	src/main/configs.cc\
 	src/main/mod_mgr.cc\
 	src/gnome2/sidebar_dialog.c\
-	src/main/navbar.cc
+	src/main/navbar.cc\
+	src/editor/editor.c\
+	src/editor/editor_menu.c\
+	src/editor/editor_replace.c\
+	src/editor/editor_spell.c\
+	src/editor/gi-color-combo.c\
+	src/editor/gi-color-group.c\
+	src/editor/gi-color-palette.c\
+	src/editor/gi-colors.c\
+	src/editor/gi-combo-box.c\
+	src/editor/note_toolbar_edit.c\
+	src/editor/note_toolbar_style.c\
+	src/editor/spell.c\
+	src/editor/toolbar_edit.c\
+	src/editor/toolbar_style.c\
+	src/editor/note_editor.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -337,6 +337,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *label205;
 	GtkWidget *scrolledwindow;
+	GtkWidget *frame;
 	GtkListStore *model;
 	GtkWidget *eventbox;
 	GtkListStore *store;
@@ -382,10 +383,15 @@ GtkWidget *gui_create_dictionary_pane(void)
 	gtk_widget_show(image2);
 	gtk_container_add(GTK_CONTAINER(button11), image2);
 
-#ifdef USE_MOZILLA	
+#ifdef USE_MOZILLA
+	frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);
+	gtk_box_pack_start(GTK_BOX(box_dict), frame, TRUE, TRUE, 0);
+	gtk_widget_show(frame);
+	
 	eventbox = gtk_event_box_new ();
+	gtk_container_add(GTK_CONTAINER(frame), eventbox);
 	gtk_widget_show (eventbox);
-	gtk_box_pack_start(GTK_BOX(box_dict), eventbox, TRUE, TRUE, 0);
 	
 	widgets.html_dict = embed_new(DICTIONARY_TYPE);
 	gtk_widget_show(widgets.html_dict);

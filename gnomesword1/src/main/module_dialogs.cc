@@ -38,14 +38,14 @@ extern "C" {
 
 #include <string.h>
 
+#include "editor/editor.h"
+#include "editor/note_editor.h"
 
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/display_info.h"
-#include "gui/editor.h"
-#include "gui/note_editor.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/hints.h"

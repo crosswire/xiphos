@@ -27,12 +27,13 @@
 #include <gal/widgets/widget-color-combo.h>
 #endif
 
+#include "gi-color-combo.h"
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-#include "gui/toolbar_style.h"
+#include "editor/toolbar_style.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
@@ -380,13 +381,12 @@ static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
 
 /******************************************************************************
  * Name
- *   color_changed
+ *   
  *
  * Synopsis
  *   #include "editor_toolbar.h"
  *
- *   void color_changed (GtkWidget *w, GdkColor *gdk_color, 
- *			gboolean by_user, GSHTMLEditorControlData *cd)
+ *   
  *
  * Description
  *   
@@ -395,29 +395,75 @@ static GtkWidget *setup_font_size_option_menu(GSHTMLEditorControlData *
  *   void
  */
 
-static void color_changed(GtkWidget * w, GdkColor * gdk_color,
-			gboolean custom,	
-			  gboolean by_user,
-			  gboolean is_default,
-			  GSHTMLEditorControlData * cd)
+
+static void
+apply_color (GdkColor *gdk_color, GSHTMLEditorControlData *cd)
 {
 	HTMLColor *color;
+	
+	color = gdk_color
+		&& gdk_color != &html_colorset_get_color (cd->html->engine->settings->color_set, HTMLTextColor)->color
+		? html_color_new_from_gdk_color (gdk_color) : NULL;
 
-	/* If the color was changed programatically 
-	   there's no need to set things */ 
+	gtk_html_set_color (cd->html, color);
+	if (color)
+		html_color_unref (color);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "editor_toolbar.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void
+toolbar_apply_color (GSHTMLEditorControlData *cd)
+{
+	GdkColor *color;
+	gboolean default_color;
+
+	color = color_combo_get_color (COLOR_COMBO (cd->combo), &default_color);
+	apply_color (color, cd);
+	if (color)
+		gdk_color_free (color);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "editor_toolbar.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void
+color_changed (GtkWidget *w, GdkColor *gdk_color, gboolean custom, gboolean by_user, gboolean is_default,
+	       GSHTMLEditorControlData *cd)
+{
+	/* If the color was changed programatically there's no need to set things */
 	if (!by_user)
 		return;
-
-	color = gdk_color && gdk_color !=
-	    &html_colorset_get_color(cd->html->engine->settings->
-				     color_set,
-				     HTMLTextColor)->
-	    color ? html_color_new_from_gdk_color(gdk_color) : NULL;
-	if (color) {
-		gtk_html_set_color(cd->html, color);
-		html_color_unref(color);
-	}
+	apply_color (gdk_color, cd);
 }
+
 
 /******************************************************************************
  * Name
@@ -445,12 +491,12 @@ static void unset_focus(GtkWidget * w, gpointer data)
 
 /******************************************************************************
  * Name
- *   set_color_combo
+ *   
  *
  * Synopsis
  *   #include "editor_toolbar.h"
  *
- *   void set_color_combo (GtkHTML *html, GSHTMLEditorControlData *cd)
+ *   
  *
  * Description
  *   
@@ -459,25 +505,14 @@ static void unset_focus(GtkWidget * w, gpointer data)
  *   void
  */
 
-static void set_color_combo(GtkHTML * html,
-			    GSHTMLEditorControlData * cd)
+static void
+set_color_combo (GtkHTML *html, GSHTMLEditorControlData *cd)
 {
-#ifdef USE_GTKHTML30
-	color_combo_set_color(COLOR_COMBO(cd->combo),
-			      &html_colorset_get_color_allocated
-			      (html->engine->painter,
-			       HTMLTextColor)->color);
-#endif
-#ifdef USE_GTKHTML31
-/*
 	color_combo_set_color (COLOR_COMBO (cd->combo),
-			       &html_colorset_get_color_allocated 
-				(html->engine->settings->color_set,
-				html->engine->painter, 
-				HTMLTextColor)->color);
-*/
-#endif
+			       &html_colorset_get_color_allocated (html->engine->settings->color_set,
+								   html->engine->painter, HTMLTextColor)->color);
 }
+
 
 /******************************************************************************
  * Name
@@ -531,12 +566,12 @@ static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
 
 /******************************************************************************
  * Name
- *   setup_color_combo
+ *   
  *
  * Synopsis
  *   #include "editor_toolbar.h"
  *
- *   GtkWidget *setup_color_combo (GSHTMLEditorControlData *cd)
+ *   
  *
  * Description
  *   
@@ -545,7 +580,8 @@ static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
  *   GtkWidget *
  */
 
-static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
+static GtkWidget *
+setup_color_combo (GSHTMLEditorControlData *cd)
 {
 	HTMLColor *color;
 
@@ -556,17 +592,13 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 		g_signal_connect (cd->html, "realize", G_CALLBACK (realize_engine), cd);
         g_signal_connect (cd->html, "load_done", G_CALLBACK (load_done), cd);
 
-#ifdef USE_GTKHTML30
 	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, color_group_fetch ("toolbar_text", cd));
-	
-	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
-	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
-#endif	
         g_signal_connect (cd->combo, "color_changed", G_CALLBACK (color_changed), cd);
 
 	gtk_widget_show_all (cd->combo);
 	return cd->combo;
 }
+
 
 /******************************************************************************
  * Name
@@ -1120,10 +1152,14 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 	gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(cd->toolbar_style),
 					 editor_toolbar_style_uiinfo,
 					 NULL, cd);
-	coloritem = setup_color_combo(cd);
+/*	coloritem = setup_color_combo(cd);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(cd->toolbar_style),
 				  coloritem, NULL, NULL);
- 
+*/ 
+	gtk_toolbar_append_widget (GTK_TOOLBAR (cd->toolbar_style),
+				   setup_color_combo (cd),
+				   NULL, NULL);
+
 	cd->font_style_changed_connection_id
 	    =
 	    g_signal_connect(G_OBJECT(cd->htmlwidget),

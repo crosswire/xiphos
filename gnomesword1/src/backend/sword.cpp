@@ -40,6 +40,7 @@
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/display.hh"
+#include "main/settings.h"
 
 #include "backend/sword.h"
 #include "backend/sword_main.hh"
@@ -167,7 +168,8 @@ void backend_init(void)
 #ifdef DEBUG	
 	g_print("%s %s\n", _("System locale is"),sys_locale);
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
-	g_print("%s\n", _("Checking for SWORD Modules"));	
+	g_print("%s\n", _("Checking for SWORD Modules"));
+	settings.spell_language = strdup(sys_locale);	
 #endif
 	free((char*)sword_locale);
 	free(sys_locale);

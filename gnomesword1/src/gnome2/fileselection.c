@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <stdio.h>
 
-#include "gui/editor.h"
+#include "editor/editor.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 

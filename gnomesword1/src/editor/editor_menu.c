@@ -50,11 +50,11 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#include "gui/editor.h"
-#include "gui/toolbar_style.h"
-#include "gui/editor_menu.h"
-#include "gui/editor_replace.h"
-#include "gui/editor_spell.h"
+#include "editor/editor.h"
+#include "editor/toolbar_style.h"
+#include "editor/editor_menu.h"
+#include "editor/editor_replace.h"
+#include "editor/editor_spell.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
