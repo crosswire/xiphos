@@ -81,8 +81,8 @@ GtkWidget *gui_create_about_sword(void)
 	GtkWidget *pixmap1;
 	GtkWidget *version_label;
 	GtkWidget *scrolledwindow26;
-	GtkWidget *txtAboutSword;
 	GtkWidget *label95;
+	GtkWidget *textview1;
 	GtkWidget *href1;
 	GtkWidget *dialog_action_area27;
 	GtkWidget *hbuttonbox6;
@@ -96,7 +96,7 @@ GtkWidget *gui_create_about_sword(void)
 	     "The SWORD Bible Framework allows easy manipulation of Bible "
 	     "texts, commentaries, lexicons, dictionaries, etc.  Many "
 	     "frontends are build using this framework. An installed "
-	     "module set may be shared between any frontend using the"
+	     "module set may be shared between any frontend using the "
 	     "framework.");
 
 	/* 
@@ -143,17 +143,16 @@ GtkWidget *gui_create_about_sword(void)
 				       (scrolledwindow26),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-/*
-	txtAboutSword = gtk_text_new(NULL, NULL);
-	gtk_widget_show(txtAboutSword);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow26),
-			  txtAboutSword);
-	gtk_widget_set_usize(txtAboutSword, -2, 103);
-	gtk_text_set_word_wrap (GTK_TEXT(txtAboutSword),
-                                             TRUE);
-	gtk_text_insert(GTK_TEXT(txtAboutSword), NULL, NULL, NULL,
-			about, strlen(about));
-*/
+  	gtk_widget_set_size_request (scrolledwindow26, 160, 160);
+  	gtk_container_set_border_width (GTK_CONTAINER (scrolledwindow26), 4);
+	
+	textview1 = gtk_text_view_new ();
+	gtk_widget_show (textview1);
+	gtk_container_add (GTK_CONTAINER (scrolledwindow26), textview1);
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview1), GTK_WRAP_WORD);
+	gtk_text_buffer_set_text (gtk_text_view_get_buffer 
+				(GTK_TEXT_VIEW (textview1)), about, -1);	
+	
 	label95 =
 	    gtk_label_new(_
 			  ("Modules can be downloaded from the Sword Project "));

@@ -439,7 +439,7 @@ static void setup_tag (GtkTextTag *tag, gpointer user_data)
 		    user_data);
 }
 
-void create_text_tags(GtkTextBuffer *buffer)
+static void create_text_tags(GtkTextBuffer *buffer)
 {
 	GtkTextTag *tag;
 	GdkColor color;
