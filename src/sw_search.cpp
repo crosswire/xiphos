@@ -61,7 +61,7 @@
 extern SWModule *curMod, *curcomMod, *percomMod;
 extern gboolean firstsearch;
 extern SETTINGS *settings;
-
+extern GtkWidget *clistSearchResults;
 /***********************************************************************************************
  static
 ***********************************************************************************************/
@@ -82,8 +82,9 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	
 	VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
         ListKey	searchScopeList; //----------- search list for searching verses found on last search
-        SWKey	*currentScope; //----------- use to set scope of search
-	SWModule *searchMod;
+        SWKey	*currentScope; //----------- use to set scope of search	
+	SWModule *searchMod,
+			*tmpMod;
 	SWMgr *searchMgr;
 	ModMap::iterator 
 		it;
@@ -104,7 +105,9 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	const gchar	
 		*resultText;   //-- temp storage for verse found
 	gchar     
-		buf[256],
+		buf[256], 
+		buf2[256], 
+		*mybuf[2],
 		*entryText,	//-- pointer to text in searchText entry
 	        scount[5],	//-- string from gint count for label
 		*utf8str,
@@ -134,18 +137,22 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		  it = searchMgr->Modules.find (curcomMod->Name ());	/* find commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current commentary module */
+			    tmpMod = (*it).second;
 		  }
 	} else if (GTK_TOGGLE_BUTTON (percomToggle)->active) {	/* if true search personal commentary */	  
 		  it = searchMgr->Modules.find (percomMod->Name ());	/* find personal commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
+			    tmpMod = (*it).second;
 		  }
 	} else {			/* if neither commertary nor personal check box checked */	 
 		  it = searchMgr->Modules.find (curMod->Name ());	/* find personal commentary module */
 		  if (it != searchMgr->Modules.end ()) {
 			    searchMod = (*it).second;	/* set search module to current personalcommentary module */
+			    tmpMod = (*it).second;
 		  }
 	}
+	
 	if (GTK_TOGGLE_BUTTON (bounds)->active) {
 		  lowerbound = lookup_widget (widget, "entryLower");	/* get Lower bounds entry widget from search form */
 		  upperbound = lookup_widget (widget, "entryUpper");	/* get Upper bounds entry widget from search form */
@@ -174,16 +181,8 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		int searchParams =
 			  GTK_TOGGLE_BUTTON (caseSensitive)->
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
-		beginHTML(s->srhtml, TRUE);
-		sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\" vlink=\"#459BD0\" alink=\"#208796\">",
-		s->bible_bg_color, 
-		s->bible_text_color,
-		s->link_color,
-		s->bible_verse_num_color,
-		searchMod->Name());
-		utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
-		displayHTML(s->srhtml, utf8str, strlen(utf8str));
 		//-- give search string to sword for search
+		gtk_clist_clear(GTK_CLIST(clistSearchResults));
 		for (ListKey & searchResults = searchMod->Search (entryText,
 		                                                searchType,
 		                                                searchParams,
@@ -198,24 +197,31 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 						searchMod->Name(),
 						resultText,
 						searchMod->Name());
-			list = g_list_append(list,g_strdup(tmpbuf->str));
-			sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
-			s->verselist_font_size,
-			resultText,
-			resultText);
-			utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
-			displayHTML(s->srhtml, utf8str, strlen(utf8str));
-			searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope
-			                                                           in case we want to use them */
+			list = g_list_append(list,g_strdup(tmpbuf->str)); //-- list retruned so user can save search results as bookmarks
+			/* fill clist */
+			tmpMod->SetKey((const char *)searchResults);
+			VerseKey *key = (VerseKey *) &tmpMod->Key();
+			int curVerse = key->Verse();
+			int curChapter = key->Chapter();
+			GString* vref = g_string_new((const char *)searchResults);
+			/* let's shorten the book name */
+			vref = g_string_truncate (vref, 5);
+			sprintf(buf,"%s %d:%d",vref->str,curChapter,curVerse);				
+			mybuf[0] = buf; 							
+			g_string_free(vref,TRUE);
+			vref = g_string_new((char *)tmpMod->StripText());			
+			vref = g_string_truncate (vref, 45);
+			sprintf(buf2,"%s....",vref->str);	
+			mybuf[1] = buf2;
+			gtk_clist_insert(GTK_CLIST(clistSearchResults), count, mybuf);
+			g_string_free(vref,TRUE);
+			/* remember finds for next search's scope in case we want to use them */						
+			searchScopeList << (const char *) searchResults;	
 			if(!count) 
 				sprintf(firstkey,"%s",(const char *)searchResults);
 			++count;	
                 }
         } 
-	sprintf(buf,"</body</html>");	
-	utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
-	displayHTML(s->srhtml, utf8str, strlen(utf8str));
-	endHTML(s->srhtml);
 	if(count){
 		ModMap::iterator it; 	
 		it = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
@@ -231,12 +237,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 1);
 		showSBVerseList(s);
-		
-		beginHTML(s->htmlRP, TRUE);
-		sprintf(buf,"</body</html>");	
-		utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
-		displayHTML(s->srhtml, utf8str, strlen(utf8str));
-		endHTML(s->srhtml);		
 	}
 	beginHTML(s->htmlRP, TRUE);
 	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
