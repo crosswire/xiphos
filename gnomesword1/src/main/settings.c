@@ -492,6 +492,20 @@ void load_settings_structure(void)
 	    atoi(xml_get_value("layout", "shortcutbar"));
 	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
 	settings.gs_width = atoi(xml_get_value("layout", "width"));
+	
+	if(xml_get_value("layout", "app_x"))
+		settings.app_x = atoi(xml_get_value("layout", "app_x"));
+	else {
+		xml_add_new_item_to_section("layout", "app_x", "40");
+		settings.app_x = 40;
+	}
+	if(xml_get_value("layout", "app_y"))
+		settings.app_y = atoi(xml_get_value("layout", "app_y"));
+	else{
+		xml_add_new_item_to_section("layout", "app_y", "40");
+		settings.app_y = 40;
+	}
+	
 	settings.biblepane_width =
 	    atoi(xml_get_value("layout", "textpane"));
 	settings.upperpane_hight =

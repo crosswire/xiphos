@@ -189,6 +189,10 @@ struct _settings {
 	
 	/* is Bibletime on the system */
 	int have_bibletime;
+	
+	/* window location at close */
+	int app_x;
+	int app_y;
 };
 
 extern SETTINGS settings;

@@ -41,6 +41,7 @@ struct  _app_widgets {
 		*notebook_gbs, /* notebook - gbs */
 		*notebook_dict,  /* notebook - dict/lex */
 		*notebook_comm,  /* notebook - commentaries */
+		*notebook_parallel_text,  /* notebook -  */
 		*notebook_text,  /* notebook - texts */
 		*notebook_percomm,  /* notebook - personal comments */
 		*notebook_sidebar,  /* notebook - sidebar */
@@ -75,7 +76,9 @@ struct  _app_widgets {
                 *viewtexts_item, /* widget to access toggle menu - for showtexts */
                 *viewcomms_item, /* widget to access toggle menu - for showcommss */
                 *viewdicts_item, /* widget to access toggle menu - for showdicts */
-		*versestyle_item;	/* widget to access toggle menu - for versestyle */
+		*versestyle_item,	/* widget to access toggle menu - for versestyle */
+		
+		*button_parallel_view; /* main toolbar togglebutton */
 };
 extern WIDGETS widgets;	
 

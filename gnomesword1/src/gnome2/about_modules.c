@@ -207,7 +207,7 @@ static GtkWidget *gui_create_about_modules(void)
 
 	pixmap =
 	    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
-				       "/sword3.xpm");
+				       "/sword3.png");
 	gtk_widget_show(pixmap);
 	gtk_box_pack_start(GTK_BOX(hbox21), pixmap, TRUE, TRUE, 0);
 
