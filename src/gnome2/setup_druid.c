@@ -560,7 +560,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	vbox26 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox26);
 	gtk_box_pack_start(GTK_BOX(druid_vbox1), vbox26, TRUE, TRUE, 0);
-/*
+
 	label701 = gtk_label_new(NULL);
 
 	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Settings to use when GnomeSword starts"));
@@ -569,6 +569,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	gtk_widget_show(label701);
 	gtk_box_pack_start(GTK_BOX(vbox26), label701, FALSE, FALSE, 8);
+/*
 
 	widgets.radiobutton_use_default =
 	    gtk_radio_button_new_with_label(vbox26_group,
@@ -1012,6 +1013,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	widgets.combo_entry_devotion = GTK_COMBO(combo_devotion)->entry;
 	gtk_widget_show(widgets.combo_entry_devotion);
 
+	/*
 	label111 =
 	    gtk_label_new(_
 			  ("These settings will be the defaults if you choose to use default settings."));
@@ -1020,6 +1022,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			   0);
 	gtk_label_set_justify(GTK_LABEL(label111), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap(GTK_LABEL(label111), TRUE);
+	*/
 
 	druidpagefinish1 = gnome_druid_page_edge_new (GNOME_EDGE_FINISH);
 	gtk_widget_show(druidpagefinish1);
