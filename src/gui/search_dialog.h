@@ -60,7 +60,7 @@ struct _search_dialog {
 	GtkWidget *rb_words;
 	GtkWidget *rb_regexp;
 	GtkWidget *rb_exact_phrase;
-	GtkWidget *rb_attribute;
+	GtkWidget *rb_attributes;
 	GtkWidget *cb_case_sensitive;
 	GtkWidget *ctree;
 	GtkWidget *treeview;

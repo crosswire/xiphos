@@ -85,34 +85,34 @@ int main(int argc, char *argv[])
 	 * check for directories and files
 	 */   
     	settings_init(newconfigs,newbookmarks);
-#ifdef USE_GTKHTML30	
+//#ifdef USE_GTKHTML30	
 	gui_splash_init();
 
 	gui_splash_step1();
-#endif	
+//#endif	
 	create_mainwindow();
 
-#ifdef USE_GTKHTML30	
+//#ifdef USE_GTKHTML30	
 	gui_splash_step2();
-#endif	
+//#endif	
 		
 	backend_init();
 	
-#ifdef USE_GTKHTML30	
+//#ifdef USE_GTKHTML30	
 	gui_splash_step3();
-#endif	
+//#endif	
 
 	frontend_init();
 	
-#ifdef USE_GTKHTML30	
+//#ifdef USE_GTKHTML30	
 	gui_splash_step4();
-#endif	
+//#endif	
 	
 	//frontend_display();
 	
-#ifdef USE_GTKHTML30	
+//#ifdef USE_GTKHTML30	
 	gui_splash_done();
-#endif	
+//#endif	
 	
 	frontend_display();
 	
