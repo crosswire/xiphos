@@ -72,7 +72,7 @@ static gchar *change_verse_parallel(void)
 	const gchar *bookname;
 	gchar buf[256];
 	gint chapter, verse;
-	const char *newbook;
+	char *newbook;
 
 	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
 	chapter =
@@ -96,6 +96,7 @@ static gchar *change_verse_parallel(void)
 	sprintf(buf, "%s %d:%d", newbook, chapter, verse);
 	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
 	retval = buf;
+	g_free(newbook);
 	return retval;
 }
 
@@ -123,7 +124,7 @@ static gchar *update_controls_parallel(const gchar * ref)
 	const gchar *bookname;
 	gchar buf[256];
 	gint chapter, verse;
-	const char *newbook;
+	char *newbook;
 
 	newbook = get_book_from_key(ref); 
 	chapter = get_chapter_from_key(ref);
@@ -137,7 +138,7 @@ static gchar *update_controls_parallel(const gchar * ref)
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
 	sprintf(buf, "%s %d:%d", newbook, chapter, verse);
 	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
-
+	g_free(newbook);
 	return g_strdup(buf);
 }
 

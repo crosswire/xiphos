@@ -115,7 +115,20 @@ char *get_commentary_text(char * mod_name, char * key)
 
 char *get_book_heading(char * mod_name, char * key)
 {
-	return backend_get_book_heading(1, mod_name, key);
+	gchar *retval = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     error);	
+	retval = backend_get_book_heading(1, mod_name, mykey);
+	g_free(mykey);
+	return retval;
 }
 
 /******************************************************************************
@@ -136,7 +149,20 @@ char *get_book_heading(char * mod_name, char * key)
 
 char *get_chapter_heading(char * mod_name, char * key)
 {
-	return backend_get_chap_heading(1, mod_name, key);
+	gchar *retval = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	retval = backend_get_chap_heading(1, mod_name, mykey);
+	g_free(mykey);
+	return retval;
 }
 
 /******************************************************************************

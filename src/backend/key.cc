@@ -379,13 +379,12 @@ char *backend_get_valid_key(const char *key)
  *   char *
  */
 
-const char *backend_get_book_from_key(const char *key)
+char *backend_get_book_from_key(const char *key)
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return vkey.books[vkey.Testament() - 1][vkey.Book() -
-							 1].name;
+	return (char*) vkey.books[vkey.Testament() - 1][vkey.Book() -1].name;
 }
 
 
@@ -407,7 +406,6 @@ const char *backend_get_book_from_key(const char *key)
 
 int backend_get_chapter_from_key(const char *key)
 {
-	unsigned char chapters;
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
@@ -523,9 +521,8 @@ const char *backend_get_next_book_of_bible(void)
 {
 	static VerseKey key;
 	static int i = 0, j = 0;
-	
 	while(i < 2) {
-		while(j < key.BMAX[i]) {
+		while(j < key.BMAX[i]) { 
 			return (const char *)key.books[i][j++].name;
 		}
 		j = 0;
