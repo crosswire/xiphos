@@ -92,9 +92,10 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
-
+	
+	if(!cur_t->html) return;
+	
 	mod_name = module_name_from_description(dict_mod_description);
-
 	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
@@ -831,6 +832,7 @@ void gui_setup_text(GList * mods)
 		t->key = NULL;
 		t->cipher_key = NULL;
 		t->is_dialog = FALSE;
+		t->html = NULL;
 		t->is_rtol = is_module_rtl(t->mod_name);
 		if (has_cipher_tag(t->mod_name)) {
 			t->is_locked = module_is_locked(t->mod_name);

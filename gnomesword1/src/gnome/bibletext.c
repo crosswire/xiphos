@@ -145,6 +145,7 @@ static void set_page_text(gchar * modname, GList * text_list)
 		t = (TEXT_DATA *) text_list->data;
 		page = 0;
 	}
+	cur_t = t;
 	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
