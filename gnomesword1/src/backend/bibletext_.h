@@ -30,6 +30,7 @@ void backend_setup_bibletext(void);
 void backend_shutdown_bibletext(void);
 const char* backend_get_text_module_description(char * mod_name);
 char *backend_get_bibletext_text(char *mod_name, char *key);
+char *backend_get_bibletext_striptext(char *mod_name, char *key);
 void backend_set_text_global_option(char *option, char *yesno);
 void backend_set_module_unlocked(char *mod_name, int mod_num,char *key);
 int backend_check_for_global_option(char * mod_name, char * option);

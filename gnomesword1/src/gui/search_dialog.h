@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * shortcutbar.h - glue
+ * search_dialog.h - gui for searching Sword modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,28 +19,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _SHORTCUTBAR_H__
-#define _SHORTCUTBAR_H__
+#ifndef _SEARCH_DIALOG_
+#define _SEARCH_DIALOG_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <glib-1.2/glib.h>
-
-/*** function prototypes ***/
-
-GList *load_sb_group(gchar *filename, gchar *group_name, 
-						gchar *icon_size);
-void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
-						     char *large_icons);
-void save_sb_iconsize(gchar *file_name, char *icons);
-gint get_num_shortcut_items(gint group_num); 
-void get_shortcut_item_info(gint group_num,
-				     gint item_num,
-				     gchar ** item_url,
-				     gchar ** item_name);
-
+	
+void gui_search_dialog_appbar_update(char percent, void *userData);
+void gui_do_dialog_search(void);
+void gui_add_to_found_list(gchar * result_text, gchar * module);
+	
 #ifdef __cplusplus
 }
 #endif

@@ -35,7 +35,7 @@
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"
-//#include "main/gs_gnomesword.h"
+#include "main/search.h"
 #include "main/settings.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
@@ -134,6 +134,7 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so)
 
 static void fill_ss(SEARCH_SWORD *ss, SEARCH_OPT * so)
 {
+	ss->modules = NULL;
 	ss->module_name = so->module_name;
 	ss->upper_bond = so->upper_bond; 
 	ss->lower_bond = so->lower_bond;

@@ -131,6 +131,34 @@ char *backend_get_bibletext_text(char *mod_name, char *key)
 	return strdup((char *) mod->RenderText());
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_get_bibletext_striptext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   char *backend_get_bibletext_striptext(char *mod_name, char *key)	
+ *
+ * Description
+ *   return formated text for a verse
+ *
+ * Return value
+ *   char *
+ */
+
+char *backend_get_bibletext_striptext(char *mod_name, char *key)
+{
+	SWModule *mod = mgr->Modules[mod_name];
+	if (mod)
+		mod->SetKey(key);
+	else
+		return NULL;
+	return strdup((char *) mod->StripText());
+}
+
+
 /******************************************************************************
  * Name
  *  backend_set_text_global_option

@@ -144,20 +144,21 @@ AC_MSG_RESULT([$sword_incdir])
 dnl looking for sword library 
 AC_MSG_CHECKING([for sword library]) 
 sword_libdirs="${prefix}/lib $ac_sword_dir/lib /usr/lib /usr/sword/lib /usr/local/lib /usr/local/sword/lib /usr/lib/sword/lib /usr/local/share/sword/lib /opt/sword/lib" 
- 
-AC_FIND_FILE(libsword.so, $sword_libdirs, sword_libdir) 
-if test -r $sword_libdir/libsword.so; then 
- HAVE_SWORD_LIB=yes 
- SWORD_LIB_TYPE="shared" 
-elif test ! -r $sword_libdir/libsword.so; then 
- HAVE_SWORD_LIB=no 
+sword_file="libsword.so"
+AC_FIND_FILE($sword_file, $sword_libdirs, sword_libdir) 
+if test -r $sword_libdir/$sword_file; then 
+  HAVE_SWORD_LIB=yes 
+  SWORD_LIB_TYPE="shared" 
+elif test ! -r $sword_libdir/$sword_file; then 
+  HAVE_SWORD_LIB=no 
 fi 
  
 if test $HAVE_SWORD_LIB = no; then 
- AC_FIND_FILE(libsword.a, $sword_libdirs, sword_libdir) 
- if test -r $sword_libdir/libsword.a; then 
- HAVE_SWORD_LIB=yes 
- SWORD_LIB_TYPE="static" 
+  sword_file="libsword.a"
+  AC_FIND_FILE($sword_file, $sword_libdirs, sword_libdir) 
+  if test -r $sword_libdir/$sword_file; then 
+   HAVE_SWORD_LIB=yes 
+   SWORD_LIB_TYPE="static" 
  fi 
 fi 
  
@@ -166,13 +167,17 @@ if test $HAVE_SWORD_LIB = no; then
 fi 
  
 SWORD_CPPFLAGS="'-I$sword_incdir' -g" 
-SWORD_LIBS="-L$sword_libdir -lsword -lz" 
+SWORD_LIBS="$sword_libdir/$sword_file" 
  
 AC_SUBST(SWORD_CPPFLAGS) 
 AC_SUBST(SWORD_LIBS) 
  
 AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
 
+
+dnl ******************************
+dnl spell checking
+dnl ******************************
 AC_ARG_ENABLE(use_ispell,[--enable-use_ispell enable use_ispell],use_ispell=$enableval,use_ispell="no") 
 
 PSPELL_LIBS=""
