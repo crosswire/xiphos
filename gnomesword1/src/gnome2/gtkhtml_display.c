@@ -215,9 +215,9 @@ static void mark_search_words(GString * str)
 void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key)
 {
-	gchar tmpBuf[500];
 	gchar *use_font = FALSE;
 	gchar *use_font_size = NULL;
+	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
 	gboolean use_gtkhtml_font = FALSE;
@@ -228,10 +228,8 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	GtkHTMLStream *htmlstream;
 
 	mf = get_font(mod_name);
-	//if(mf->old_font)
 	use_font = g_strdup(mf->old_font);
-	//g_warning("mod = %s use_font = %s", mod_name,use_font);
-	//g_warning("use_font = %s",use_font);
+	
 	if (use_font) {
 		if (!strncmp(use_font, "none", 4))
 			use_gtkhtml_font = TRUE;
@@ -253,17 +251,17 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
 
 
-	sprintf(tmpBuf,
+	g_string_printf(tmp_str,
 		HTML_START
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
 
-	str = g_string_new(tmpBuf);
+	str = g_string_new(tmp_str->str);
 	/* show key in html widget  */
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
-			sprintf(tmpBuf,
+			g_string_printf(tmp_str,
 				"<a href=\"version=%s passage=%s\">"
 				"<font color=\"%s\">[%s] %s </font></A>",
 				mod_name,
@@ -273,7 +271,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		}
 
 		else {
-			sprintf(tmpBuf,
+			g_string_printf(tmp_str,
 				"<a href=\"[%s] %s\">"
 				"<font color=\"%s\">[%s]</a></font>[%s] ",
 				mod_name,
@@ -282,16 +280,16 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 				mod_name, 
 				key);
 		}
-		str = g_string_append(str, tmpBuf);
+		str = g_string_append(str, tmp_str->str);
 	}
 
 
 	if (use_gtkhtml_font)
-		sprintf(tmpBuf, "<font size=\"%s\">", use_font_size);
+		g_string_printf(tmp_str, "<font size=\"%s\">", use_font_size);
 	else
-		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
+		g_string_printf(tmp_str, "<font face=\"%s\" size=\"%s\">",
 			use_font, use_font_size);
-	str = g_string_append(str, tmpBuf);
+	str = g_string_append(str, tmp_str->str);
 
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
@@ -301,8 +299,8 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		str = g_string_append(str, text);
 	}
 
-	sprintf(tmpBuf, " %s", "</font></body></html>");
-	str = g_string_append(str, tmpBuf);
+	g_string_printf(tmp_str, " %s", "</font></body></html>");
+	str = g_string_append(str, tmp_str->str);
 
 	if (str->len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
@@ -318,9 +316,9 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		free(use_font_size);
 	if (use_font)
 		free(use_font);
-	//free_font(mf);
 	free_font(mf);
 	g_string_free(str, TRUE);
+	g_string_free(tmp_str, TRUE);
 }
 
 
