@@ -64,7 +64,7 @@ extern gboolean file_changed;	/* set to TRUE if text is study pad has changed
 					- and file is not saved */
 
 extern GtkWidget *text3;
-extern GtkWidget *statusbar2;
+extern GtkWidget *statusbarSP;
 /******************************************************************************
 *******************************************************************************
  *callbacks fileselection dialogs
@@ -353,7 +353,7 @@ void saveFile(gchar * filename)
 	gint bytes_written, len;
 	gint context_id2;
 	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbarSP),
 					 "GnomeSword");
 	if (current_filename == NULL || strcmp(current_filename, filename)) {
 		g_free(current_filename);
@@ -372,14 +372,14 @@ void saveFile(gchar * filename)
 	bytes_written = fwrite(data, sizeof(gchar), len, fp);
 	fclose(fp);
 	g_free(data);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbarSP), context_id2);
 	if (len != bytes_written) {
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
 				   "Error saving file.");
 		return;
 	}
 	sprintf(charbuf, "%s - saved.", current_filename);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2, charbuf);
+	gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2, charbuf);
 	file_changed = FALSE;
 }
 
@@ -397,12 +397,12 @@ void loadFile(GtkWidget * filesel)
 	
 	
 	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbarSP),
 					 "GnomeSword");
 	sprintf(filename, "%s",
 		gtk_file_selection_get_filename(GTK_FILE_SELECTION
 						(filesel)));
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbarSP), context_id2);
 	gtk_text_freeze(GTK_TEXT(text3));
 	gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 	g_free(current_filename);
@@ -411,7 +411,7 @@ void loadFile(GtkWidget * filesel)
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
 		gtk_text_thaw(GTK_TEXT(text3));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
 				   "Could not open file");
 		return;
 	}
@@ -429,15 +429,15 @@ void loadFile(GtkWidget * filesel)
 		fclose(fp);
 		gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 		gtk_text_thaw(GTK_TEXT(text3));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
 				   "Error loading file.");
 		return;
 	}
 	fclose(fp);
 	gtk_text_thaw(GTK_TEXT(text3));
 	current_filename = g_strdup(filename);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbarSP), context_id2);
+	gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
 			   current_filename);
 }
 
@@ -446,18 +446,18 @@ void loadFile(GtkWidget * filesel)
  *****************************************************************************/
 void loadStudyPadFile(gchar * filename)
 {	
-	FILE *fp;
+/*	FILE *fp;
 	gchar buffer[BUFFER_SIZE];
 	gint bytes_read;
 	gint context_id2;
 
 	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar2),
-					 "GnomeSword");
-/*	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbarSP),
+					 "GnomeSword");*/
+/*	gtk_statusbar_pop(GTK_STATUSBAR(statusbarSP), context_id2);gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
 			   current_filename);*/
 	
-	gtk_text_freeze(GTK_TEXT(text3));
+/*	gtk_text_freeze(GTK_TEXT(text3));
 	gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 	g_free(current_filename);
 	current_filename = NULL;
@@ -465,8 +465,8 @@ void loadStudyPadFile(gchar * filename)
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
 		gtk_text_thaw(GTK_TEXT(text3));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2, filename);	/* Could not open file */
-		return;
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2, filename);	*/ /* Could not open file */
+	/*	return;
 	}
 	for (;;) {
 		bytes_read = fread(buffer, sizeof(gchar), BUFFER_SIZE, fp);
@@ -476,22 +476,22 @@ void loadStudyPadFile(gchar * filename)
 
 		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
 			break;
-	}
+	}*/
 	/* If there is an error while loading, we reset everything to a good state */
-	if (ferror(fp)) {
+	/*if (ferror(fp)) {
 		fclose(fp);
 		gtk_editable_delete_text(GTK_EDITABLE(text3), 0, -1);
 		gtk_text_thaw(GTK_TEXT(text3));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
 				   "Error loading file.");
 		return;
 	}
 	fclose(fp);
 	gtk_text_thaw(GTK_TEXT(text3));
 	current_filename = g_strdup(filename);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar2), context_id2);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar2), context_id2,
-			   current_filename);
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbarSP), context_id2);
+	gtk_statusbar_push(GTK_STATUSBAR(statusbarSP), context_id2,
+			   current_filename);*/
 }
 
 /*****************************************************************************

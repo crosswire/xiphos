@@ -1107,7 +1107,7 @@ GtkWidget *create_mainwindow(void)
 	ed_pc.notebook = gtk_notebook_new();
 	ed_pc.note_editor = TRUE;*/
 	
-	PCEditor = create_editor (vbox8,TRUE);
+	PCEditor = create_editor (mainwindow,vbox8,TRUE);
 	gtk_widget_show(PCEditor);
 	/*statusbarNE = ed_pc.statusbar;
 	textComments = ed_pc.text;	*/	
@@ -1206,7 +1206,7 @@ studypad editor
 	statusbar2 = ed_sp.statusbar;
 	text3 = ed_sp.text;   */
 	
-         SPEditor = create_editor (vbox6,FALSE);
+         SPEditor = create_editor (mainwindow,vbox6,FALSE);
 	gtk_widget_show(SPEditor);
 	
 	label41 = gtk_label_new("Study Pad");
@@ -1464,18 +1464,15 @@ studypad editor
 	gtk_signal_connect(GTK_OBJECT(notebook1), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook1_switch_page),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(btnComPrev), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnComNext_clicked), NULL);
+	
 #ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(btnSpell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),
 			   (gchar *) "text3");
 #endif				/* USE_SPELL */
 
-	gtk_signal_connect(GTK_OBJECT(text3), "changed",
-			   GTK_SIGNAL_FUNC(on_text3_changed), NULL);
+	/*gtk_signal_connect(GTK_OBJECT(text3), "changed",
+			   GTK_SIGNAL_FUNC(on_text3_changed), NULL);*/
 	gtk_signal_connect(GTK_OBJECT(notebook4), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook4_switch_page),
 			   NULL);

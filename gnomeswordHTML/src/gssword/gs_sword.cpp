@@ -72,7 +72,7 @@ SWDisplay *comp1Display; /* to display modules using GtkText a verse at a time *
 SWDisplay *comDisplay; /* to display modules using GtkText a verse at a time */
 SWDisplay *percomDisplay; /* to display personal comment modules using GtkText a verse at a time */
 SWDisplay *dictDisplay; /* to display modules using GtkText a verse at a time */
-SWDisplay *FPNDisplay; /* to display formatted personal notes using GtkText */
+//SWDisplay *FPNDisplay; /* to display formatted personal notes using GtkText */
 SWDisplay *HTMLDisplay; /* to display formatted html */
 SWDisplay *HTMLchapDisplay; /* to display formatted html */
 SWDisplay *listDisplay;	/* to display modules in list editor */
@@ -168,7 +168,8 @@ extern gchar *gSwordDir,		/* store GnomeSword directory */
 	*fnconfigure;
 //extern EDITOR *ed1;
 extern GList *cbBook_items;
-extern GtkWidget *textedit;
+//extern GtkWidget *textedit;
+extern GtkWidget *pcHTML;
 static void addtoModList(SWModule *mod, GList *list);
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -213,7 +214,7 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay     = 0;// set in create	
 	percomDisplay   = 0;// set in create
 	percomtextDisplay = 0;// set in create
-	FPNDisplay			= 0;
+//	FPNDisplay			= 0;
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
 	biblemods = NULL;
@@ -233,12 +234,12 @@ initSWORD(GtkWidget *mainform)
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize();
 	
-	percomDisplay = new  ComEntryDisp(htmlComments);
-	percomtextDisplay = new  GTKEntryDisp(textedit);
+	percomDisplay = new  ComEntryDisp(pcHTML);	
+	percomtextDisplay = new  GtkHTMLEntryDisp(pcHTML);     
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
-	FPNDisplay = new GtkHTMLEntryDisp(htmlComments);
+//	FPNDisplay = new GtkHTMLEntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
@@ -507,8 +508,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete dictDisplay;
 	if(percomDisplay)
 		delete percomDisplay;
-	if(FPNDisplay)
-		delete FPNDisplay;		
+	/*if(FPNDisplay)
+		delete FPNDisplay;*/		
 	if(HTMLDisplay)
 		delete HTMLDisplay;
 	if(HTMLchapDisplay)
