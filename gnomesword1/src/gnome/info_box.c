@@ -31,7 +31,6 @@
 #include <string.h>
 
 #include "gui/info_box.h"
-#include "main/support.h"
 
 /******************************************************************************
  * Name

@@ -36,9 +36,9 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/_editor.h"
 #include "gui/bookmarks.h"
+#include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/support.h"
 #include "main/gbs.h"
 #include "main/gs_html.h"
 #include "main/settings.h"
@@ -112,7 +112,7 @@ void showSBGroup(gint groupnum)
 		e_paned_set_position(E_PANED(settings.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (lookup_widget
+				     (gui_lookup_widget
 				      (settings.app, "hpaned1")),
 				     biblepanesize);
 		settings.showshortcutbar = TRUE;
@@ -1775,7 +1775,7 @@ void gui_shortcutbar_showhide(void)
 		gtk_widget_hide(settings.shortcut_bar);
 		e_paned_set_position(E_PANED(settings.epaned), 0);
 		e_paned_set_position(E_PANED
-				     (lookup_widget
+				     (gui_lookup_widget
 				      (settings.app, "hpaned1")),
 				     settings.biblepane_width);
 	} else {
@@ -1785,7 +1785,7 @@ void gui_shortcutbar_showhide(void)
 		e_paned_set_position(E_PANED(settings.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (lookup_widget(settings.app, "hpaned1")),
+				     (gui_lookup_widget(settings.app, "hpaned1")),
 				     settings.biblepane_width);
 		gtk_widget_show(settings.shortcut_bar);
 	}

@@ -33,10 +33,10 @@
 #include <unistd.h>
 
 #include "gui/bookmarks.h"
+#include "gui/utilities.h"
 
 #include "main/bookmarks.h"
 #include "main/gs_gnomesword.h"
-#include "main/support.h"
 #include "main/settings.h"
 
 /******************************************************************************
@@ -200,7 +200,7 @@ static void addnewgrouptoMenus(GtkWidget * pmMenu,
 	GtkWidget *menu;
 	GtkWidget *item;
 
-	menu = lookup_widget(pmMenu, "add_bookmark_menu");
+	menu = gui_lookup_widget(pmMenu, "add_bookmark_menu");
 	if (!node)
 		return;
 
@@ -567,8 +567,8 @@ static void on_entryBM_changed(GtkEditable * editable,
 	GtkWidget *dlg, *btnok, *btnapply;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(editable));
-	btnok = lookup_widget(dlg, "btnBMok");
-	btnapply = lookup_widget(dlg, "btnBMapply");
+	btnok = gui_lookup_widget(dlg, "btnBMok");
+	btnapply = gui_lookup_widget(dlg, "btnBMapply");
 	gtk_widget_set_sensitive(btnok, TRUE);
 	gtk_widget_set_sensitive(btnapply, TRUE);
 
@@ -596,9 +596,9 @@ static void on_btnBMok_clicked(GtkButton * button, gchar * buf[3])
 	GtkWidget *dlg, *labelentry, *keyentry, *modentry;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	labelentry = lookup_widget(dlg, "entryBMLabel");
-	keyentry = lookup_widget(dlg, "entryBMKey");
-	modentry = lookup_widget(dlg, "entryBMMod");
+	labelentry = gui_lookup_widget(dlg, "entryBMLabel");
+	keyentry = gui_lookup_widget(dlg, "entryBMKey");
+	modentry = gui_lookup_widget(dlg, "entryBMMod");
 	/*** freed in addbookmarktotree() ***/
 	buf[0] = g_strdup(gtk_entry_get_text(GTK_ENTRY(labelentry)));
 	buf[1] = g_strdup(gtk_entry_get_text(GTK_ENTRY(keyentry)));
@@ -630,11 +630,11 @@ static void on_btnBMapply_clicked(GtkButton * button, gchar * buf[3])
 	    * dlg, *btnok, *btnapply, *labelentry, *keyentry, *modentry;
 
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	btnok = lookup_widget(dlg, "btnBMok");
-	btnapply = lookup_widget(dlg, "btnBMapply");
-	labelentry = lookup_widget(dlg, "entryBMLabel");
-	keyentry = lookup_widget(dlg, "entryBMKey");
-	modentry = lookup_widget(dlg, "entryBMMod");
+	btnok = gui_lookup_widget(dlg, "btnBMok");
+	btnapply = gui_lookup_widget(dlg, "btnBMapply");
+	labelentry = gui_lookup_widget(dlg, "entryBMLabel");
+	keyentry = gui_lookup_widget(dlg, "entryBMKey");
+	modentry = gui_lookup_widget(dlg, "entryBMMod");
 	/*** freed in addbookmarktotree() ***/
 	buf[0] = g_strdup(gtk_entry_get_text(GTK_ENTRY(labelentry)));
 	buf[1] = g_strdup(gtk_entry_get_text(GTK_ENTRY(keyentry)));
@@ -1636,3 +1636,18 @@ void create_add_bookmark_menu(GtkWidget * menu,
 				  item);
 	}
 }
+
+/*
+bookmarks from Bibletime
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DOC>
+<SwordBookmarks syntaxVersion="1" >
+ <Folder caption="Jesus" >
+  <Bookmark modulename="WEB" key="John 1:1" moduledescription="World English Bible" description="" />
+  <Folder caption="Son of God" >
+   <Bookmark modulename="WEB" key="John 3:16" moduledescription="World English Bible" description="" />
+  </Folder>
+ </Folder>
+ <Bookmark modulename="WEB" key="Revelation of John 1:1" moduledescription="World English Bible" description="" />
+</SwordBookmarks>
+*/

@@ -61,14 +61,11 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/interlinear.h"
+#include "gui/utilities.h"
 
 #include "main/gs_html.h"
-#include "main/support.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
-
-#include "backend/shortcutbar.h"
-#include "backend/sword.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -206,7 +203,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(newref);
 		sprintf(settings.groupName, "%s", "Verse List");
 
-		if (backend_get_mod_type(modbuf) == DICTIONARY_TYPE) {
+		if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
 			gui_display_dictlex_in_viewer(modbuf, buf);
@@ -561,10 +558,10 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	GtkHTML *html;
 	gchar *buf, *modbuf;
 
-	widget = lookup_widget(settings.app, (gchar *) user_data);
+	widget = gui_lookup_widget(settings.app, (gchar *) user_data);
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
-	entry = lookup_widget(settings.app, "cbeFreeformLookup");
+	entry = gui_lookup_widget(settings.app, "cbeFreeformLookup");
 	/* clear entry */
 	gtk_entry_set_text(GTK_ENTRY(entry), "");
 	/* put selected ref in entry */

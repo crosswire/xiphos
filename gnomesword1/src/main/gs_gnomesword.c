@@ -48,6 +48,9 @@
 #include "gui/percomm.h"
 #include "gui/interlinear.h"
 #include "gui/bookmarks.h"
+#include "gui/history.h"
+#include "gui/toolbar_nav.h"
+#include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -56,9 +59,7 @@
 #include "main/commentary.h"
 #include "main/percomm.h"
 #include "main/dictlex.h"
-#include "main/gs_history.h"
 #include "main/settings.h"
-#include "main/support.h"
 #include "main/gs_html.h"
 #include "main/gs_menu.h"
  
@@ -89,11 +90,6 @@ extern gboolean
  
 extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
-
-/******************************************************************************
- * static
- */
-static gchar *update_nav_controls(gchar * key);
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
@@ -158,22 +154,13 @@ void init_gnomesword(void)
 	}
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
-		
-	settings.displaySearchResults = FALSE;
 
 	/*
 	 *  add modules to about modules menus -- gs_menu.c 
 	 */
 	addmodstomenus(get_list(TEXT_LIST), get_list(COMM_LIST),
 			get_list(DICT_LIST), get_list(GBS_LIST));
-		
-	settings.versestyle_item =
-	    additemtooptionmenu(settings.app, _("_Settings/"),
-				_("Verse Style"), (GtkMenuCallback)
-				on_verse_style1_activate);
-
-
-
+	
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */
@@ -333,11 +320,11 @@ void UpdateChecks(void)
 	}
 
 	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(lookup_widget(settings.app, "vpaned1")),
+	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "vpaned1")),
 			     settings.upperpane_hight);
 
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(lookup_widget(settings.app, "hpaned1")),
+	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "hpaned1")),
 			     settings.biblepane_width);
 
 	if (!settings.docked) {
@@ -604,7 +591,7 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
 		}
 
 		if (!isGBS) {
-			text = lookup_widget(aboutbox, "text");	/* get text widget */
+			text = gui_lookup_widget(aboutbox, "text");	/* get text widget */
 		} else {
 			text = settings.html_book;
 		}
@@ -710,35 +697,6 @@ void module_name_from_description(gchar *mod_name, gchar *description)
 	backend_module_name_from_description(mod_name, description);
 }
 
-static gchar *update_nav_controls(gchar * key)
-{
-	char *val_key;
-	gint cur_chapter = 8, cur_verse = 28;
-
-	settings.apply_change = FALSE;
-	val_key = backend_get_valid_key(key);
-	cur_chapter = backend_get_chapter_from_key(val_key);
-	cur_verse = backend_get_verse_from_key(val_key);
-	/* 
-	 *  remember last verse 
-	 */
-	strcpy(settings.currentverse, val_key);
-	/* 
-	 *  set book, chapter,verse and freeform lookup entries
-	 *  to new verse - settings.apply_change is set to false so we don't
-	 *  start a loop
-	 */
-	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook),
-			   backend_get_book_from_key(val_key));
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (settings.spbChapter), cur_chapter);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (settings.spbVerse), cur_verse);
-	gtk_entry_set_text(GTK_ENTRY
-			   (settings.cbeFreeformLookup), val_key);
-	settings.apply_change = TRUE;
-	return val_key;
-}
 
 
 int get_module_page(char *module_name, char *module_type)
@@ -759,7 +717,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			page_num =
 			    backend_get_module_page(module_name, 
 							TEXT_MODS);
-			val_key = update_nav_controls(key);
+			val_key = gui_update_nav_controls(key);
 			gui_set_text_page_and_key(page_num, val_key);
 			free(val_key);
 		}
@@ -801,11 +759,11 @@ void change_verse(gchar * key)
 {
 	gchar *val_key;
 
-	val_key = update_nav_controls(key);
+	val_key = gui_update_nav_controls(key);
 
 	settings.apply_change = FALSE;
 	
-	if (havebible) {
+	if(havebible) {
 		/* add item to history */
 		if (addhistoryitem) {
 			if (strcmp

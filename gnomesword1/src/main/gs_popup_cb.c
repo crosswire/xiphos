@@ -39,11 +39,11 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/interlinear.h"
 #include "gui/bookmarks.h"
+#include "gui/utilities.h"
 
 #include "main/gs_popup_cb.h"
 #include "main/gs_html.h"
 #include "main/gs_gnomesword.h"
-#include "main/support.h"
 #include "main/settings.h"
 
 #include "backend/sword.h"
@@ -77,7 +77,7 @@ void on_undockInt_activate(GtkMenuItem *menuitem)
 
 void on_print_item_activate(GtkMenuItem *menuitem, gchar *html)
 {
-	html_print(lookup_widget(settings.app, html));
+	html_print(gui_lookup_widget(settings.app, html));
 }
 
 void on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -95,7 +95,7 @@ void on_john_3_1_activate(GtkMenuItem *menuitem, gpointer user_data)
 void on_copy4_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	GtkWidget *text;
-	text = lookup_widget(settings.app, "textComments");
+	text = gui_lookup_widget(settings.app, "textComments");
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
@@ -103,7 +103,7 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 /*	GtkWidget *text;
 
-	text = lookup_widget(settings.app, "textComments");
+	text = gui_lookup_widget(settings.app, "textComments");
 	gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
 			gs_clipboard->str, -1); */
 }
@@ -129,7 +129,7 @@ void on_auto_scroll1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *toolbar;
 
-	toolbar = lookup_widget(settings.app, "handlebox17");
+	toolbar = gui_lookup_widget(settings.app, "handlebox17");
 
 	autoscroll = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	if (autoscroll)
@@ -144,10 +144,10 @@ void on_auto_scroll1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		gtk_widget_show(lookup_widget
+		gtk_widget_show(gui_lookup_widget
 				(settings.app, (gchar *) user_data));
 	else
-		gtk_widget_hide(lookup_widget
+		gtk_widget_hide(gui_lookup_widget
 				(settings.app, (gchar *) user_data));
 	if (!strcmp((gchar *) user_data, "notebook4"))
 		settings.dict_tabs =
@@ -164,7 +164,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 
 	memset(modName, 0, 16);
-	backend_module_name_from_description(modName,
+	module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear1Module, "%s", modName);
@@ -185,7 +185,7 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 
 	memset(modName, 0, 16);
-	backend_module_name_from_description(modName,
+	module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear2Module, "%s", modName);
@@ -205,7 +205,7 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 
 	memset(modName, 0, 16);
-	backend_module_name_from_description(modName,
+	module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear3Module, "%s", modName);
@@ -225,7 +225,7 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 
 	memset(modName, 0, 16);
-	backend_module_name_from_description(modName,
+	module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear4Module, "%s", modName);
@@ -245,7 +245,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 
 	memset(modName, 0, 16);
-	backend_module_name_from_description(modName,
+	module_name_from_description(modName,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear5Module, "%s", modName);
@@ -273,7 +273,7 @@ void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint modNum;
 
 	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(settings.app, "notebook4");	//-- get notebook
+	notebook = gui_lookup_widget(settings.app, "notebook4");	//-- get notebook
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 

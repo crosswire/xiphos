@@ -497,21 +497,23 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		} 
 		
 		text_str = get_bibletext_text(mod_name, tmpkey);
-		if((settings.displaySearchResults) && (i == cur_verse)){
+		if(settings.displaySearchResults) {
+			if(i == cur_verse) {
+				str = g_string_append (str,text_str);
+				mark_search_words(str);
+				utf8str = str->str;			
+			} else {			
+				str = g_string_append (str,text_str);
+				mark_search_words(str);		
+				utf8str = str->str;			
+			}
+		}
+		else {
 			str = g_string_append (str,text_str);
-			mark_search_words(str);
-			utf8str = str->str;			
-		} else {			
-			str = g_string_append (str,text_str);
-			mark_search_words(str);		
-			utf8str = str->str;			
+			utf8str = str->str;
 		}
 		free(text_str);
-		/*
-		if (strlen(utf8str)) {			
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-		}
-		*/	
+		
 		if (settings.versestyle) {
 			if ((strstr(utf8str , "<BR>") == NULL ) && (strstr(utf8str, "<!P>") == NULL))  {
 				sprintf(tmpbuf, " %s", "</font><br>");

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * toolbar_nav.h - Bible text navigation toolbar
+ * utilities.h - support functions
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,21 +19,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __TOOLBAR_NAV_H_
-#define __TOOLBAR_NAV_H_
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	
 #include <gnome.h>
+
 	
-gchar *gui_update_nav_controls(gchar * key);
-GtkWidget *gui_create_nav_toolbar(void);
-	
+GtkWidget *gui_lookup_widget(GtkWidget * widget,
+				  const gchar * widget_name);
+
 #ifdef __cplusplus
 }
-#endif
-
 #endif
 
