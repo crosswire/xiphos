@@ -6,13 +6,13 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=1
+0=33
 1=34
-2=68
-3=44
-4=58
-5=27
-6=425
+2=1317
+3=95
+4=160
+5=57
+6=1
 7=156
 8=34
 9=366
@@ -45,38 +45,37 @@ ShowLocals=true
 16=
 17=
 
+[breakpoints]
+0=2,,1,3,0,,settings.c,153,32,0,settings_init,,1030198628,
+
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/gui/search_dialog.h
-1=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
-2=/home/terry/gnomesword/gnomesword1/src/backend/search.cpp
-3=/home/terry/gnomesword/gnomesword1/src/main/search.c
-4=/home/terry/gnomesword/gnomesword1/src/main/search.h
-5=/home/terry/gnomesword/gnomesword1/src/backend/search.h
-6=/home/terry/gnomesword/gnomesword1/src/gnome/shortcutbar_search.c
-7=/home/terry/gnomesword/gnomesword1/src/main/sword.c
-8=/home/terry/gnomesword/gnomesword1/src/main/settings.h
-9=/home/terry/gnomesword/gnomesword1/src/gnome/shortcutbar_viewer.c
-10=/home/terry/gnomesword/gnomesword1/src/gnome/main_window.c
+0=/home/terry/gnomesword/gnomesword1/src/main/shortcutbar.h
+1=/home/terry/gnomesword/gnomesword1/src/backend/shortcutbar.h
+2=/home/terry/gnomesword/gnomesword1/src/gnome/shortcutbar_main.c
+3=/home/terry/gnomesword/gnomesword1/src/main/shortcutbar.c
+4=/home/terry/gnomesword/gnomesword1/src/backend/shortcutbar.cpp
+5=/home/terry/gnomesword/gnomesword1/src/main/settings.c
+6=/home/terry/gnomesword/gnomesword1/src/main/sword.c
 
 [replace_text]
-0=button_close
-1=show_in_statusbar
-2=vt->statusbar
-3=notebook_search
-4=gtk_radio_button_new(_201_group);
-5=dlg->dialog
-6=dlg->get_input_dialog
-7=get_input_dialog
+0=oldbmfiles
+1=frame_search
+2=settings.frame_search
+3=so.frame_search
+4=button_close
+5=show_in_statusbar
+6=vt->statusbar
+7=notebook_search
 
 [find_text]
-0=p_so->ckbCommentary
-1=REG_ICASE
-2=entry_list_modules
-3=frame67
-4=entry_text
-5=clist_range
-6=set_range
-7=add_ranges
+0=bmfiles
+1=group_num
+2=dir
+3=group_name
+4=filename
+5=text
+6=settings.frame_search
+7=so.frame_search
 
 [executer args]
 0=newconfigs
