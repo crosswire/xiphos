@@ -102,7 +102,7 @@ GtkWidget *gui_create_about_sword(void)
 	 * get sword version 
 	 */
 	ver = get_sword_version();
-	sprintf(version, "<b>Sword-%s</b>", ver);
+	sprintf(version, "<b>SWORD-%s</b>", ver);
 	
 	dialog_about_sword = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog_about_sword),
@@ -155,13 +155,13 @@ GtkWidget *gui_create_about_sword(void)
 	
 	label95 =
 	    gtk_label_new(_
-			  ("Modules can be downloaded from the Sword Project"));
+			  ("Modules can be downloaded from the SWORD Project"));
 	gtk_widget_show(label95);
 	gtk_box_pack_start(GTK_BOX(vbox21), label95, FALSE, FALSE, 0);
 	gtk_widget_set_usize(label95, -2, 24);
 
 	href1 =
-	    gnome_href_new("www.crosswire.org", _("The Sword Project"));
+	    gnome_href_new("www.crosswire.org", _("The SWORD Project"));
 	gtk_widget_show(href1);
 	gtk_box_pack_start(GTK_BOX(vbox21), href1, FALSE, FALSE, 0);
 
