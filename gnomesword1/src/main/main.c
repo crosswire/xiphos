@@ -30,6 +30,7 @@
 #include <gconf/gconf.h>
 #endif
 
+#include "splash.h"
 #include "sword.h"
 #include "gs_gnomesword.h"
 #include "gs_file.h"
@@ -39,7 +40,6 @@
 #include "gs_setup.h"
 #include "gs_bookmarks.h"
 #include "bookmarks.h"
-#include "e-splash.h"
 
 extern SETTINGS *settings;
 extern GList *biblemods;
@@ -56,7 +56,6 @@ int main(int argc, char *argv[])
 	gint icreatefiles = 0;
 	gboolean newconfigs = FALSE;
 	gboolean newbookmarks = FALSE;
-	GtkWidget *splash = NULL;
 
 #ifdef GTKHTML_HAVE_GCONF
 	GError *gconf_error = NULL;
@@ -68,32 +67,36 @@ int main(int argc, char *argv[])
 #endif
 
 	gnome_init("GnomeSword", VERSION, argc, argv);
+	
 	if (argc > 1) {
-	/*
-	 * these args are for broken configs or bookmarks - ie gnomesword will not start
-	 */
-	if (!strcmp(argv[1], "newconfigs")) {
-	    newconfigs = TRUE;
+		/*
+		 * these args are for broken configs or bookmarks -
+		 * ie gnomesword will not start
+		 */
+		if (!strcmp(argv[1], "newconfigs")) {
+			newconfigs = TRUE;
+		}
+		if (!strcmp(argv[1], "newbookmarks")) {
+			newbookmarks = TRUE;
+		}
+		if (!strcmp(argv[1], "newfiles")) {
+			newconfigs = TRUE;
+			newbookmarks = TRUE;
+		}
 	}
-	if (!strcmp(argv[1], "newbookmarks")) {
-	    newbookmarks = TRUE;
-	}
-	if (!strcmp(argv[1], "newfiles")) {
-	    newconfigs = TRUE;
-	    newbookmarks = TRUE;
-	}
-	}
+	
 #ifdef GTKHTML_HAVE_GCONF
 	/* 
 	 * This is needed for gtkhtml.
 	 */
 
 	if (!gconf_init(argc, argv, &gconf_error)) {
-	g_assert(gconf_error != NULL);
-	g_error("GConf init failed:\n  %s", gconf_error->message);
-	return FALSE;
+		g_assert(gconf_error != NULL);
+		g_error("GConf init failed:\n  %s", gconf_error->message);
+		return FALSE;
 	}
 #endif
+	
 	/* 
 	 * start swmgrs so they can be used by setup druid
 	 */
@@ -103,16 +106,18 @@ int main(int argc, char *argv[])
 	 * check for directories and files
 	 */    
 	icreatefiles = setDiretory();
+
 	if (newconfigs) {
-	gui_firstRunSETUP(); //gs_firstrunSWORD();
+		gui_firstRunSETUP(); //gs_firstrunSWORD();
 	}
+	
 	if (newbookmarks) {
-	createbookmarksBM(swbmDir);
+		createbookmarksBM(swbmDir);
 	}
 
 	/*icreatefiles = 1;*/ /* please comment me - i am for testing */
 	if (icreatefiles == 1 || icreatefiles == 3) {
-	 gui_firstRunSETUP();  //gs_firstrunSWORD();
+		gui_firstRunSETUP();  //gs_firstrunSWORD();
 	}
 
 	/*
@@ -125,49 +130,32 @@ int main(int argc, char *argv[])
 	 * If we have a new version run setup druid FIXME: do we need this?
 	 */
 	if (strcmp(VERSION, settings->gs_version)) {
-	 gui_firstRunSETUP(); 
+		gui_firstRunSETUP(); 
 	}
 
-	/*
-	 * Splash screen.
-	 */
-	if (settings->showsplash) {
-	splash = e_splash_new();
-	gtk_widget_show(splash);
-	gtk_object_ref(GTK_OBJECT(splash));
-	while (gtk_events_pending()) {
-	    gtk_main_iteration();
-	}
-	}
+	gui_splash_init();
 
-	mainwindow = create_mainwindow(splash, settings);
+	gui_splash_step1();
+
+	mainwindow = create_mainwindow(settings);
 	add_gtkhtml_widgets(mainwindow);/*FIXME: add these widgets to create_mainwindow() */
 
-	if (settings->showsplash) {
-	e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);
-	}
-
+	gui_splash_step2();
+	
 	initSWORD(settings);
 
-	if (settings->showsplash) {
-	e_splash_set_icon_highlight(E_SPLASH(splash), 3, TRUE);
-	}
+	gui_splash_step3();
 
 	initGnomeSword(settings, biblemods, commentarymods, dictionarymods,
-		   percommods, splash);
+		   percommods);
 
+	gui_splash_step4();
+	
 	if (icreatefiles == 2 || icreatefiles == 3) {
-	createbookmarksBM(swbmDir);
+		createbookmarksBM(swbmDir);
 	}
 
-	while (gtk_events_pending()) {
-	gtk_main_iteration();
-	}
-
-	if (settings->showsplash) {
-	gtk_widget_unref(splash);
-	gtk_widget_destroy(splash);
-	}
+	gui_splash_done();
 
 	/*
 	 * Set the main window size.
@@ -184,7 +172,7 @@ int main(int argc, char *argv[])
 	   it will mess up the shortcut bar display */
 	/* FIXME: maybe we need to move the devotional ? */
 	if (settings->showdevotional) {
-	displayDevotional();
+		displayDevotional();
 	}
 	
 	gtk_main();
