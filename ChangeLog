@@ -3,6 +3,8 @@
 	*  Changed Font= and Font size= for module conf files
 	   to GSFont= and GSFont size= to avoid conflicts since we
 	   use different froms.
+	* Fixed not remembered morph tags state bug
+	
 
 2001-08-23 Terry Biggs <tbiggs@users.sourceforge.net>
 
