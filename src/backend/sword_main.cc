@@ -841,6 +841,10 @@ GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
         gsize bytes_read;
         gsize bytes_written;
         GError **error = NULL;
+	
+	if(!list)
+		return retlist;
+	
 	char *m_current_key = g_convert(current_key,
 				     -1,
 				     OLD_CODESET,
