@@ -175,16 +175,16 @@ void backend_init(void)
 	ModMap::iterator it; 
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sw.version);
-	g_print("%s\n", "Initiating Sword\n");
+	g_print("Initiating SWORD\n\n");
 	g_print("System locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 	sword_locale = get_sword_locale();
-	g_print("Sword locale is %s\n", sword_locale);
-	g_print("%s\n", "Checking for SWORD Modules");
+	g_print("SWORD locale is %s\n", sword_locale);
+	g_print("Checking for SWORD Modules\n");
 	free((char*)sword_locale);
 	backend_init_language_map();
 	/*
-	 *create sword mgrs
+	 * create sword mgrs
 	 */
 	backend_init_managers();
 	
@@ -224,7 +224,7 @@ void backend_shutdown(int save_properties)
 	 * delete Sword managers
 	 */
 	backend_delete_managers();
-	g_print("\nSword is shutdown\n");
+	g_print("\nSWORD is shutdown\n");
 }
 
 

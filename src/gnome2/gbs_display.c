@@ -190,7 +190,7 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 		}
 	}
 
-	str = g_string_append(str, "</font></body>");
+	str = g_string_append(str, "</body></html>");
 #ifdef USE_GTKEMBEDMOZ
 	if (!gbs->is_rtol) {
 		htmlstream =
@@ -224,6 +224,10 @@ void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
 	}
 	gtk_html_end(GTK_HTML(gbs->html), htmlstream, status1);
 	gtk_html_jump_to_anchor(GTK_HTML(gbs->html), anchor);
+	
+	/* andyp - inserted for debugging, remove */
+	//g_print(str->str); 
+
 	//gtk_html_set_editable(html, was_editable);    
 
 #endif

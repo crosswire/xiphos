@@ -310,6 +310,10 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	}
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
+
+	/* andyp - inserted for debugging, remove */
+	//g_print(str->str); 
+
 	if (use_font_size)
 		free(use_font_size);
 	if (use_font)
