@@ -66,15 +66,25 @@ char *get_footnote_body(char *note)
 	gchar *key;
 	
 	token = strtok(note, ".");
-	book = g_strdup(token);
+	if(token)
+		book = g_strdup(token);
+	else return NULL;
 	token = strtok(NULL, ".");
-	chapter = g_strdup(token);
+	if(token)
+		chapter = g_strdup(token);
+	else return NULL;
 	token = strtok(NULL, ".");
-	verse = g_strdup(token);
+	if(token)
+		verse = g_strdup(token);
+	else return NULL;
 	token = strtok(NULL, ".");
-	type = g_strdup(token);
+	if(token)
+		type = g_strdup(token);
+	else return NULL;
 	token = strtok(NULL, ".");
-	note_number = strdup(token);
+	if(token)
+		note_number = strdup(token);
+	else return NULL;
 	
 	key = g_strdup_printf("%s %s:%s",book,chapter,verse);
 		
