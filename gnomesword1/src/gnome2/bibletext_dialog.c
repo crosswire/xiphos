@@ -38,7 +38,6 @@
 #include "gui/utilities.h"
 #include "gui/widgets.h"
 
-#include "main/bibletext.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/settings.h"

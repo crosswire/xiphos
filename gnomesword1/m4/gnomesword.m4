@@ -149,7 +149,7 @@ if test "x$ac_cv_sword_libdir" = "xNO"; then
 fi
 
 if test "x$ac_static_sword" = "xYES"; then
-	LIB_SWORD="$ac_cv_sword_libdir/libsword.a";
+	LIB_SWORD="-static $ac_cv_sword_libdir/libsword.a";
 else
 	LIB_SWORD="-lsword";
 fi

@@ -152,7 +152,7 @@ static void fill_search_results_list(int finds)
 	gtk_list_store_clear(list_store);
 	backendSearch->set_listkey_position((char) 1);	/* TOP */
 	while ((key_buf = backendSearch->get_next_listkey()) != NULL) {
-		tmpbuf = (gchar *) key_buf;
+		tmpbuf = (gchar*) key_buf;
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 					   tmpbuf, -1);
@@ -161,6 +161,8 @@ static void fill_search_results_list(int finds)
 		list_item->key = tmpbuf;
 		list_of_verses = g_list_append(list_of_verses, 
 						(RESULTS *) list_item);
+		if(key_buf) /* allocated by g_convert() in BackEnd::get_next_listkey() */
+			g_free((gchar*)key_buf);
 	}
 	
 	sprintf(buf, "%d %s", finds, buf1);

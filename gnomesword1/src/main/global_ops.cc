@@ -76,6 +76,47 @@ static void set_global_option(int manager, char * option, gboolean choice)
 	on_off = tf2of(choice);
 	mgr->setGlobalOption(option, on_off);
 }
+
+
+/******************************************************************************
+ * Name
+ *   main_save_module_options
+ *
+ * Synopsis
+ *   #include "main/global_ops.h"
+ *
+ *   int main_save_module_options(char * mod_name, char * option, 
+ *				    int choice)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
+int main_save_module_options(char * mod_name, char * option, int choice)
+{
+	char *on_off;
+	gchar *buf = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
+	SWConfig module_options(buf);
+	
+	module_options.Load();
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+	
+	module_options[mod_name][option] = on_off;
+
+	module_options.Save();
+	return true;
+	/*return backend_save_module_options(mod_name, option, on_off, 
+				settings.gSwordDir , "modops.conf");*/
+}
+
 /******************************************************************************
  * Name
  *  gui_set_global_options

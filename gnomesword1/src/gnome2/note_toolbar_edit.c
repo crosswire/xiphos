@@ -36,14 +36,12 @@
 #include "gui/editor_spell.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
-//#include "gui/percomm.h"
 #include "gui/commentary_dialog.h"
 #include "gui/fileselection.h"
 #include "gui/editor_menu.h"
 #include "gui/find_dialog.h"
 
 #include "main/settings.h"
-#include "main/percomm.h"
 #include "main/module_dialogs.h"
 
 static void on_btn_save_clicked(GtkButton * button,

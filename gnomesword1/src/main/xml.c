@@ -365,12 +365,10 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 
 void xml_write_bookmark_doc(const xmlChar * xml_filename)
 {	
+#ifdef DEBUG	
 	g_print("\nsaving = %s\n", xml_filename);
-#ifdef USE_GNOME2
+#endif	
 	xmlSaveFormatFile(xml_filename, bookmark_doc,1);
-#else
-	xmlSaveFile(xml_filename, bookmark_doc);
-#endif
 }
 
 /******************************************************************************
@@ -550,6 +548,7 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "shortcutbar", "178");
 	xmlNewTextChild(section_node, NULL, "uperpane", "210");
 	xmlNewTextChild(section_node, NULL, "vltoppaneheight", "210");
+	xmlNewTextChild(section_node, NULL, "sidebar_notebook_hight", "250");
 
 
 	section_node = xmlNewChild(root_node, NULL, "lexicons", NULL);

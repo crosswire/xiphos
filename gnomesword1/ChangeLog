@@ -1,3 +1,20 @@
+2004-08-19  terry <terry470@users.sf.net>
+
+	* removed files - backend/gs_thmlhtml.*, backend/gs_osishtmlhref.*,
+	  backend/gs_gbfhtmlhref.* and backend/gs_markupfiltmgr.*
+	* removed files - main/bibletext.*, main/commentary.*, main/dictlex.*
+	  and main/percomm.*
+	* replaced hint dialog with Information Viewer (moved the viewer 
+	  from the sidebar notebook to it's own location at bottom of sidebar
+	  but alway visible)
+	
+
+2004-08-12  terry <terry470@users.sf.net>
+
+	* bumped to 2.1.2
+	* made gs cvs dependant on sword-1.5.8 (sword-cvs)
+	
+
 2004-08-10  terry <terry470@users.sf.net>
 
 	* added shadows (borders) to most of the scroll windows can be turned 

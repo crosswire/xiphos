@@ -49,7 +49,6 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
-#include "main/dictlex.h"
 #include "main/sidebar.h"
 #include "main/url.hh"
 #include "main/xml.h"
@@ -556,18 +555,27 @@ static void on_viewer_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void create_viewer_page(GtkWidget * notebook)
+static void create_viewer_page(GtkWidget * vpaned_sidebar)
 {
-	GtkWidget *frame;
+	GtkWidget *vbox;
+	GtkWidget *label;
 	GtkWidget *scrolledwindow;
 
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_container_add(GTK_CONTAINER(notebook), frame);
 
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox);
+	gtk_paned_pack2(GTK_PANED(vpaned_sidebar), vbox, FALSE, TRUE);
+	
+	label = gtk_label_new (_("Information Viewer"));	
+	gtk_widget_show (label);
+	gtk_box_pack_start (GTK_BOX (vbox), 
+				label,
+				FALSE, FALSE, 0);
+	gtk_misc_set_alignment((GtkMisc *)label, 0, 0);
+	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(frame), scrolledwindow);
+	gtk_widget_show(scrolledwindow);	
+	gtk_box_pack_start (GTK_BOX (vbox), scrolledwindow, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow),
 				       GTK_POLICY_NEVER,
@@ -580,17 +588,6 @@ static void create_viewer_page(GtkWidget * notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
 			  sidebar.html_viewer_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_viewer_widget));
-/*
-	g_signal_connect(GTK_OBJECT(sidebar.btn_save), "clicked",
-			   G_CALLBACK(on_btnSBSaveVL_clicked), NULL);
-
-	g_signal_connect(GTK_OBJECT(sidebar.tbtn_view_main), "toggled",
-			   G_CALLBACK
-			   (on_tbtnSBViewMain_toggled), NULL);
-
-	g_signal_connect(GTK_OBJECT(sidebar.html_widget), "on_url",
-			   G_CALLBACK(gui_url), widgets.app);
-	*/
 }
 
 
@@ -1117,6 +1114,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(notebook), vbox);
+	
 	vpaned_srch_rslt = gtk_vpaned_new();
 	gtk_widget_show(vpaned_srch_rslt);
 	gtk_box_pack_start(GTK_BOX(vbox), vpaned_srch_rslt, TRUE,
@@ -1125,15 +1123,11 @@ static void create_search_results_page(GtkWidget * notebook)
 		settings.verselist_toppane_height = 100;
 	gtk_paned_set_position(GTK_PANED(vpaned_srch_rslt),
 				settings.verselist_toppane_height);
-
-	frame3 = gtk_frame_new(NULL);
-	gtk_widget_show(frame3);
-	gtk_paned_pack1(GTK_PANED(vpaned_srch_rslt), frame3, TRUE,
-			TRUE);
-
+	
 	scrolledwindow3 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow3);
-	gtk_container_add(GTK_CONTAINER(frame3), scrolledwindow3);
+	gtk_paned_pack1(GTK_PANED(vpaned_srch_rslt), scrolledwindow3, TRUE,
+			TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow3),
 				       GTK_POLICY_AUTOMATIC,
@@ -1160,18 +1154,13 @@ static void create_search_results_page(GtkWidget * notebook)
 	selection = gtk_tree_view_get_selection
 			     (GTK_TREE_VIEW(sidebar.results_list));
 
-	frame4 = gtk_frame_new(NULL);
-	gtk_widget_show(frame4);
-	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), frame4, TRUE,
-			TRUE);
-//	gtk_widget_set_size_request (frame4, 100, -1);
-
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app),
 				     results_menu_uiinfo);
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow4);
-	gtk_container_add(GTK_CONTAINER(frame4), scrolledwindow4);
+	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), scrolledwindow4, TRUE,
+			TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow4),
 				       GTK_POLICY_NEVER,
@@ -1357,7 +1346,7 @@ static GnomeUIInfo menu_uiinfo[] = {
 	 GNOME_STOCK_TEXT_BULLETED_LIST,
 	 0,
 	 (GdkModifierType) 0, NULL},
-	{
+	/*{
 	 GNOME_APP_UI_ITEM,
 	 N_("_Viewer"),
 	 NULL,
@@ -1367,7 +1356,7 @@ static GnomeUIInfo menu_uiinfo[] = {
 	 0,
 	 (GdkModifierType)
 	 0,
-	 NULL},
+	 NULL},*/
 	GNOMEUIINFO_END
 };
 
@@ -1401,6 +1390,44 @@ static GtkWidget* create_menu(void)
 
 /******************************************************************************
  * Name
+ *   on_epaned_button_release_event
+ *
+ * Synopsis
+ *   #include "gui/main_window.h"
+ *
+ *   gboolean on_epaned_button_release_event(GtkWidget * widget,
+ *			GdkEventButton * event, gpointer user_data)
+ *
+ * Description
+ *    get and store pane sizes
+ *
+ * Return value
+ *   void
+ */
+
+static gboolean paned_button_release_event(GtkWidget * widget,
+					    GdkEventButton * event,
+					    gpointer user_data)
+{
+	gint panesize;
+	gchar layout[80];
+
+	panesize = gtk_paned_get_position(GTK_PANED(widget));
+
+	if (panesize > 15) {		
+		//g_warning("paned_viewer = %d",panesize);
+		settings.sidebar_notebook_hight = panesize;
+		sprintf(layout, "%d", settings.sidebar_notebook_hight);
+		xml_set_value("GnomeSword", "layout",
+			      "sidebar_notebook_hight", layout);
+		
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_create_sidebar
  *
  * Synopsis
@@ -1420,13 +1447,13 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox1;
 	GtkWidget *toolbar2;
 	GtkWidget *scrolledwindow4;
-	GtkWidget *label2;
 	GtkWidget *scrolledwindow_bm;
 	GtkWidget *scrolledwindow5;
 	GtkWidget *treeview2;
 	GtkWidget *label3;
 	GtkWidget *empty_notebook_page;
 	GtkWidget *label4;
+	GtkWidget *vpaned_sidebar;
 	GtkWidget *vbox2;
 	GtkWidget *vbox_search_results;
 	GtkWidget *vbox_verse_list;
@@ -1513,10 +1540,22 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			  TRUE, TRUE, 0);
 
 /***/
+
+	vpaned_sidebar = gtk_vpaned_new();
+	gtk_widget_show(vpaned_sidebar);
+	gtk_box_pack_start(GTK_BOX(vbox1), vpaned_sidebar, TRUE,
+			   TRUE, 0);
+	if (settings.sidebar_notebook_hight == 0)
+		settings.sidebar_notebook_hight = 250;
+	gtk_paned_set_position(GTK_PANED(vpaned_sidebar),
+				settings.sidebar_notebook_hight);
+	
+	
+
 	widgets.notebook_sidebar = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_sidebar);
-	gtk_box_pack_start(GTK_BOX(vbox1), widgets.notebook_sidebar,
-			   TRUE, TRUE, 0);
+	gtk_paned_pack1(GTK_PANED(vpaned_sidebar), widgets.notebook_sidebar, TRUE,
+			TRUE);
 	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_sidebar, GTK_CAN_FOCUS);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 				   (widgets.notebook_sidebar), FALSE);
@@ -1566,10 +1605,16 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gui_create_search_sidebar();
 
 	create_search_results_page(widgets.notebook_sidebar);
-	create_viewer_page(widgets.notebook_sidebar);
+	create_viewer_page(vpaned_sidebar);
 	
 	main_load_module_tree(sidebar.module_list);
-		     
+		    
+	g_signal_connect(GTK_OBJECT(vpaned_sidebar),
+			   "button_release_event",
+			   G_CALLBACK
+			   (paned_button_release_event),
+			   NULL);
+			   
 	g_signal_connect_after((gpointer) sidebar.module_list,
 			 "button_release_event",
 			 G_CALLBACK(on_modules_list_button_release),
