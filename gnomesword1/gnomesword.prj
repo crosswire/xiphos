@@ -84,7 +84,7 @@ module.source.files=\
 	src/backend/dictlex.cpp\
 	src/backend/commentary.cpp\
 	src/backend/bookmarks.cpp\
-	src/backend/information_dlg.cpp\
+	src/backend/display_info.cpp\
 	src/backend/shortcutbar.cpp\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
