@@ -26,12 +26,26 @@
 extern "C"
 {
 #endif
-#ifdef USE_GNOME2
-#include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 	
+#include <glib-2.0/glib.h>
+
+typedef struct _module_lists MOD_LISTS;
+struct _module_lists {
+	GList
+	    *biblemods,
+	    *commentarymods,
+	    *dictionarymods,
+	    *bookmods,
+	    *percommods,
+	    *devotionmods,
+	    *text_descriptions,
+	    *dict_descriptions,
+	    *comm_descriptions,
+	    *book_descriptions, 
+	    *bible_books, 
+	    *options;
+};
+
 /* list types */
 #define TEXT_LIST 0 
 #define TEXT_DESC_LIST 1 

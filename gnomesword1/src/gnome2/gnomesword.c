@@ -65,7 +65,7 @@
  * Synopsis
  *   #include "gnomesword.h"
  *
- *   void init_gnomesword(void)	
+ *   void init_gnomesword(void)
  *
  * Description
  *    sets up the interface
@@ -77,31 +77,31 @@
 
 void frontend_init(void)
 {
-	guint number_of_pages = 0; 
+	guint number_of_pages = 0;
 	g_print("%s\n", _("Initiating GnomeSword"));
-	
+
 	hint.in_popup = FALSE;
 	hint.use_hints = FALSE;
-	
+
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");
 	settings.havebdb = check_for_module("BDB");
 
 	/*
-	 *  setup sidebar 
+	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
 
 	/*
-	 *  setup commentary gui support 
+	 *  setup commentary gui support
 	 */
 	if (settings.havecomm) {
-		gui_setup_commentary(get_list(COMM_LIST));
+//		gui_setup_commentary(get_list(COMM_LIST));
 		gui_setup_commentary_dialog(get_list(COMM_LIST));
 	}
 
 	/*
-	 *  setup personal comments gui support 
+	 *  setup personal comments gui support
 	 */
 	if (settings.havepercomm) {
 		//gui_setup_percomm_dialog();
@@ -115,32 +115,32 @@ void frontend_init(void)
 	}
 
 	/*
-	 *  setup Dict/Lex gui support 
+	 *  setup Dict/Lex gui support
 	 */
 	if (settings.havedict) {
-		number_of_pages = gui_setup_dictlex(get_list(DICT_LIST));
+		//number_of_pages = gui_setup_dictlex(get_list(DICT_LIST));
 		gui_setup_dictlex_dialog(get_list(DICT_LIST));
 	}
 
 	/*
-	 *  setup general book gui support 
+	 *  setup general book gui support
 	 */
 	if (settings.havebook) {
 		gui_setup_gbs(get_list(GBS_LIST),number_of_pages);
 		gui_setup_gbs_dialog(get_list(GBS_LIST));
 	}
-	
+
 	/*
-	 *  setup Bible text gui 
+	 *  setup Bible text gui
 	 */
 	if (settings.havebible) {
 	//	gui_setup_bibletext();//gui_setup_text(get_list(TEXT_LIST));
 	//	gui_open_bibletext(settings.MainWindowModule);
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
-	
+
 	/*
-	 *  parallel stuff 
+	 *  parallel stuff
 	 */
 	if (settings.havebible) {
 		gui_check_parallel_modules();
@@ -148,7 +148,7 @@ void frontend_init(void)
 		gui_create_parallel_page();
 		gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
-	
+
 	// setup passage notebook
 	if(settings.browsing)
 		gui_notebook_main_setup(NULL);
@@ -159,15 +159,15 @@ void frontend_init(void)
 
 /******************************************************************************
  * Name
- *  
+ *
  *
  * Synopsis
  *   #include "gnomesword.h"
  *
- *   void (void)	
+ *   void (void)
  *
  * Description
- *    
+ *
  *
  * Return value
  *   void
@@ -179,7 +179,7 @@ void frontend_display(void)
 	gint test;
 	GS_DIALOG *info;
 	GString *str;
-	
+
 	g_print("%s\n", _("Displaying GnomeSword"));
 	gui_show_main_window();
 
@@ -187,9 +187,9 @@ void frontend_display(void)
 	settings.addhistoryitem = FALSE;
 	gui_change_verse(settings.currentverse);
 
-	gui_change_module_and_key(settings.DictWindowModule, 
+	gui_change_module_and_key(settings.DictWindowModule,
 						settings.dictkey);
-	
+
 	if(!settings.havebible){
 		settings.showtexts = FALSE;
 		gui_show_hide_texts(FALSE);
@@ -203,7 +203,7 @@ void frontend_display(void)
 	if((!settings.havedict)&&(!settings.havebook)) {
 		gui_show_hide_dicts(FALSE);
 		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
-		gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);		
+		gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);
 	}
 	if((!settings.havedict)&&(settings.havebook)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
@@ -217,7 +217,7 @@ void frontend_display(void)
 					      0);
 		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
 	}
-	
+
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -227,12 +227,12 @@ void frontend_display(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewdicts_item),
 				       settings.showdicts);
-	
+
 	/* showing the devotional must come after the the app is shown or
-	 *  it will mess up the shortcut bar display 
+	 *  it will mess up the shortcut bar display
 	 */
-	/* 
-	 * FIXME: maybe we need to move the devotional ? 
+	/*
+	 * FIXME: maybe we need to move the devotional ?
 	 */
 	if (settings.showdevotional) {
 		gui_display_devotional_in_sidebar();
@@ -253,7 +253,7 @@ void frontend_display(void)
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			gui_setup_preferences_dialog();
-		}		
+		}
 		g_free(info);
 		g_string_free(str,TRUE);
 		settings.setup_canceled = FALSE;
@@ -282,14 +282,14 @@ void frontend_display(void)
  */
 
 void shutdown_frontend(void)
-{	
+{
 	if(pixbufs->pixbuf_closed)
-		g_object_unref(pixbufs->pixbuf_closed);	
+		g_object_unref(pixbufs->pixbuf_closed);
 	if(pixbufs->pixbuf_opened)
-		g_object_unref(pixbufs->pixbuf_opened);	
+		g_object_unref(pixbufs->pixbuf_opened);
 	if(pixbufs->pixbuf_helpdoc)
 		g_object_unref(pixbufs->pixbuf_helpdoc);
-	
+
 	/* free verse list used for saving search results */
 	if(list_of_verses) {
 		while(list_of_verses) {
@@ -299,15 +299,15 @@ void shutdown_frontend(void)
 		g_list_free(list_of_verses);
 	}
 	list_of_verses = NULL;
-	
+
 	gui_save_bookmarks_treeview();
-	
+
 	/* if study pad file has changed since last save */
 	gui_studypad_can_close();
-	
+
 	xml_save_settings_doc(settings.fnconfigure);
 	xml_free_settings_doc();
-	
+
 	shutdown_list();
 
 	/* free dir and file stuff */
@@ -327,21 +327,21 @@ void shutdown_frontend(void)
 	}
 
 	if (settings.havecomm) {
-		gui_shutdown_commentary();
+//		gui_shutdown_commentary();
 		gui_shutdown_commentary_dialog();
 	}
 
 	if (settings.havedict) {
-		gui_shutdown_dictlex();
+//		gui_shutdown_dictlex();
 		gui_shutdown_dictlex_dialog();
 	}
 
 	if (settings.havepercomm)
 		gui_shutdown_percomm();
-	
+
 	if(settings.browsing)
 		gui_notebook_main_shutdown();
 
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
-	
+
 }

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "gui/commentary.h"
+#include "gui/commentary_dialog.h"
 	
 GtkWidget *gui_create_pm_comm(COMM_DATA *c);
 void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c);	
@@ -35,4 +35,3 @@ void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c);
 #endif
 
 #endif
-

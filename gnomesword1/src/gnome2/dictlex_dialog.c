@@ -442,6 +442,28 @@ static void add_columns(GtkTreeView * treeview)
 
 /******************************************************************************
  * Name
+ *  on_btnSyncDL_clicked
+ *
+ * Synopsis
+ *   #include "gui/dictlex.h"
+ *
+ *   void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)	
+ *
+ * Description
+ *    sync current module with current key
+ *
+ * Return value
+ *   void
+ */
+
+void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
+{
+	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_create_dictlex_dialog
  *
  * Synopsis

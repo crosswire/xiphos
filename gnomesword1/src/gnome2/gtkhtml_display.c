@@ -169,41 +169,17 @@ static void mark_search_words(GString * str)
 void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key)
 {
-	gchar *use_font = FALSE;
-	gchar *use_font_size = NULL;
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
-	gboolean use_gtkhtml_font = FALSE;
 	gboolean was_editable = FALSE;
-	MOD_FONT *mf;
-	//GtkHTMLStreamStatus status1 = 0;
-	GtkHTML *html;
-	//GtkHTMLStream *htmlstream;
-
-	mf = get_font(mod_name);
-	use_font = g_strdup(mf->old_font);
-	
-	if (use_font) {
-		if (!strncmp(use_font, "none", 4))
-			use_gtkhtml_font = TRUE;
-		else
-			use_gtkhtml_font = FALSE;
-
-	} else {
-		use_gtkhtml_font = TRUE;
-
-	}
-	use_font_size = g_strdup(mf->old_font_size);
+	MOD_FONT *mf = get_font(mod_name);
+	GtkHTML *html = GTK_HTML(html_widget);
 
 	/* setup gtkhtml widget */
-	html = GTK_HTML(html_widget);
 	was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-	/*htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");*/
-
 
 	g_string_printf(tmp_str,
 		HTML_START
@@ -222,9 +198,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 				key,
 				settings.bible_verse_num_color,
 				mod_name, key);
-		}
-
-		else {
+		} else {
 			g_string_printf(tmp_str,
 				"<a href=\"about://%s/%s\">"
 				"<font color=\"%s\">[%s]</a></font>[%s] ",
@@ -236,15 +210,13 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		}
 		str = g_string_append(str, tmp_str->str);
 	}
-
-
-	if (use_gtkhtml_font)
-		g_string_printf(tmp_str, "<font size=\"%s\">", use_font_size);
-	else
-		g_string_printf(tmp_str, "<font face=\"%s\" size=\"%s\">",
-			use_font, use_font_size);
+	
+	g_string_printf(tmp_str, 
+			"<font face=\"%s\" size=\"%s\">",
+			(mf->old_font)?mf->old_font:"none", 
+			(mf->old_font_size)?mf->old_font_size:"+0");
 	str = g_string_append(str, tmp_str->str);
-
+	
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
 		mark_search_words(search_str);
@@ -258,19 +230,12 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 
 	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
-		/*gtk_html_write(GTK_HTML(html), htmlstream, str->str,
-			       str->len);*/
 	}
-	//gtk_html_end(GTK_HTML(html), htmlstream, status1);
 	gtk_html_set_editable(html, was_editable);
 
 	/* andyp - inserted for debugging, remove */
 	//g_print(str->str); 
-
-	if (use_font_size)
-		free(use_font_size);
-	if (use_font)
-		free(use_font);
+	
 	free_font(mf);
 	g_string_free(str, TRUE);
 	g_string_free(tmp_str, TRUE);

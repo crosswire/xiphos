@@ -36,7 +36,8 @@ extern "C" {
 #define SEARCH_MGR 5
 #define MODULE_MGR 6
 #define PERCOM_MGR 7
-#define INTER_MGR 8 	
+#define INTER_MGR 8 
+#define DISPLAY_MGR 9 	
 
 
 	
@@ -48,13 +49,12 @@ void backend_new_module_mgr(void);
 void backend_delete_module_mgr(void);
  
 void backend_set_global_option_iterator(void);
-char *backend_get_next_global_option(void);
 char *backend_get_path_to_mods(void);	
 
 void backend_set_global_option(int manager, char *option, char *yesno);
 
 void backend_set_module_unlocked(char *mod_name, char *key);	
-
+void backend_get_global_options_list(GList * list);
 
 #ifdef __cplusplus
 }
