@@ -18,6 +18,18 @@
 #ifndef __LISTEDITOR_H__
 #define __LISTEDITOR_H__
 
+
+typedef struct _listitem LISTITEM;
+struct _listitem {
+	gint type;
+	gint level;
+	gchar item[80];
+	gchar preitem[80];
+	gchar subitem[80];
+	gchar menu[80];
+};
+
+
 void editbookmarksSave(GtkWidget *editdlg);
 void loadbookmarkslevel(GtkWidget *list, gint level, gchar *submenu);
 void addsubitme(GtkWidget *list, gint row);

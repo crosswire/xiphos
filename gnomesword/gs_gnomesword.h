@@ -72,7 +72,8 @@ void initGnomeSword(GtkWidget *app,
 		GList *commentarymods , 
 		GList *dictionarymods, 
 		GList *percommods);
-void addnotebookpages(GtkWidget *notebook, GList *list);
+void addnotebookpages(GtkWidget *notebook, 
+		GList *list);
 void UpdateChecks(GtkWidget * mainform);
 void applyoptions(GtkWidget *app,
 		gboolean showshortcut,
@@ -83,8 +84,33 @@ void applyoptions(GtkWidget *app,
 	     	gboolean showdictgroup, 
 	     	gboolean showhistorygroup);
 gint add_sb_group(EShortcutBar * shortcut_bar, 
-		gchar * group_name);
-		
+		gchar * group_name);		
+gint getversenumber(GtkWidget * text);
+gint getdictnumber(GtkWidget * text);
+void sbchangeModSword(GtkWidget *app, 
+		GtkWidget *shortcut_bar, 
+		gint group_num, 
+		gint item_num);		
+void setformatoption(GtkWidget * button);		
+void newSP(GtkWidget * text);
+void changepagenotebook(GtkNotebook * notebook, 
+		gint page_num);
+void openpropertiesbox(void);
+void clearhistory(GtkWidget *app, 
+		GtkWidget *shortcut_bar);
+void editbookmarksLoad(GtkWidget * editdlg);
+void addBookmark(GtkWidget *app);
+
+void addHistoryItem(GtkWidget *app, 
+		GtkWidget *shortcut_bar, 
+		gchar *ref);
+void showIntPage(GtkWidget *app, 
+		gboolean choice);
+void setcurrentversecolor(gint arg1, 
+		gint arg2, 
+		gint arg3);
+void setautosave(gboolean choice);
+
 #ifdef __cplusplus
 }
 #endif
