@@ -29,6 +29,7 @@
 #include "gui/about_modules.h"
 #include "gui/html.h"
 #include "gui/utilities.h"
+#include "gui/gnomesword.h"
 
 #include "main/sword.h"
 //#include "main/gs_gnomesword.h"
@@ -340,7 +341,7 @@ void gui_display_about_module_dialog(gchar * modname, gboolean isGBS)
 		if (!isGBS) {
 			text = gui_lookup_widget(aboutbox, "text");	/* get text widget */
 		} else {
-			text = settings.html_book;
+			text = widgets.html_book;
 		}
 
 		about_module_display(to, bufabout);	/* send about info to display function */

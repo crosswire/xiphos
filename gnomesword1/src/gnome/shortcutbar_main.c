@@ -40,9 +40,9 @@
 #include "gui/html.h"
 #include "gui/about_modules.h"
 #include "gui/main_window.h"
+#include "gui/gnomesword.h"
 
 #include "main/shortcutbar.h"
-//#include "main/gs_gnomesword.h"
 #include "main/sword.h"
 #include "main/gbs.h"
 #include "main/settings.h"
@@ -114,15 +114,15 @@ void showSBGroup(gint groupnum)
 		biblepanesize =
 		    (settings.gs_width -
 		     settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(settings.epaned),
+		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
 				     (gui_lookup_widget
-				      (settings.app, "hpaned1")),
+				      (widgets.app, "hpaned1")),
 				     biblepanesize);
 		settings.showshortcutbar = TRUE;
 	}
-	bar1 = E_SHORTCUT_BAR(settings.shortcut_bar);
+	bar1 = E_SHORTCUT_BAR(widgets.shortcutbar);
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 					  groupnum, TRUE);
 }
@@ -148,7 +148,7 @@ void changegroupnameSB(gchar * groupName, gint groupNum)
 	GtkWidget *label;
 	EShortcutBar *bar1;
 
-	bar1 = E_SHORTCUT_BAR(settings.shortcut_bar);
+	bar1 = E_SHORTCUT_BAR(widgets.shortcutbar);
 	//g_warning(groupName);
 	label = gtk_label_new(groupName);
 	gtk_widget_show(label);
@@ -1000,11 +1000,11 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 //      if(item_num == -1) {
 //              if(group_num == groupnum2) /* change work space notebook to commentary page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_upper),0);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_upper),0);
 //              if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower),0);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower),0);
 //              if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower),1);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower),1);
 //      }
 
 	if (event->button.button == 1) {
@@ -1033,7 +1033,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				else if (sbtype == 3) {
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings.workbook_lower), 1);
+					     (widgets.workbook_lower), 1);
 					gui_change_module_and_key(modName,
 							  NULL);
 				}
@@ -1056,7 +1056,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 							  settings.currentverse);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings.workbook_upper), 0);
+					     (widgets.workbook_upper), 0);
 				}
 			}
 
@@ -1066,7 +1066,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 							  settings.dictkey);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings.workbook_lower), 0);
+					     (widgets.workbook_lower), 0);
 				}
 			}
 
@@ -1077,7 +1077,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			if (group_num == groupnum8) {
 				gui_change_module_and_key(modName, NULL);
 				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (settings.workbook_lower),
+						      (widgets.workbook_lower),
 						      1);
 			}
 			g_free(type);
@@ -1113,7 +1113,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 gint gui_get_num_shortcut_items(gint group_num)
 {
 	return e_shortcut_model_get_num_items(E_SHORTCUT_BAR
-					      (settings.shortcut_bar)->
+					      (widgets.shortcutbar)->
 					      model, group_num);
 
 }
@@ -1139,7 +1139,7 @@ void gui_get_shortcut_item_info(gint group_num, gint item_num,
 				gchar **item_url, gchar **item_name)
 {
 	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-				(settings.shortcut_bar)->model,
+				(widgets.shortcutbar)->model,
 				group_num,
 				item_num,
 				item_url, item_name, NULL);
@@ -1187,9 +1187,9 @@ void gui_setup_shortcut_bar(void)
 	else
 		gtk_widget_hide(shortcut_bar);
 
-	settings.shortcut_bar = shortcut_bar;
+	widgets.shortcutbar = shortcut_bar;
 
-	e_paned_pack1(E_PANED(settings.epaned), shortcut_bar, FALSE, TRUE);
+	e_paned_pack1(E_PANED(widgets.epaned), shortcut_bar, FALSE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
 	/*
 	 * end shortcut bar 
@@ -1385,7 +1385,7 @@ void gui_setup_shortcut_bar(void)
 	/*** add bookmark group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindow1", scrolledwindow1,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1393,7 +1393,7 @@ void gui_setup_shortcut_bar(void)
 
 	ctree = gtk_ctree_new(3, 0);
 	gtk_widget_ref(ctree);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "ctree",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "ctree",
 				 ctree, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(ctree);
@@ -1402,11 +1402,11 @@ void gui_setup_shortcut_bar(void)
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 1, 80);
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 2, 80);
 
-	settings.ctree_widget = ctree;
+	widgets.ctree_widget = ctree;
 
 	button = gtk_button_new_with_label(_("Bookmarks"));
 	gtk_widget_ref(button);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "button",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "button",
 				 button, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(button);
@@ -1418,7 +1418,7 @@ void gui_setup_shortcut_bar(void)
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow2);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindow2", scrolledwindow2,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1426,7 +1426,7 @@ void gui_setup_shortcut_bar(void)
 
 	vpSearch = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpSearch);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vpSearch",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vpSearch",
 				 vpSearch, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vpSearch);
@@ -1434,7 +1434,7 @@ void gui_setup_shortcut_bar(void)
 
 	searchbutton = gtk_button_new_with_label(_("Search"));
 	gtk_widget_ref(searchbutton);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "searchbutton", searchbutton,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1451,14 +1451,14 @@ void gui_setup_shortcut_bar(void)
 
 	vboxVL = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxVL);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vboxVL",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxVL",
 				 vboxVL, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vboxVL);
 
 	vpVL = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpVL);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vpVL", vpVL,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vpVL", vpVL,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vpVL);
@@ -1466,7 +1466,7 @@ void gui_setup_shortcut_bar(void)
 
 	VLbutton = gtk_button_new_with_label(_("Verse List"));
 	gtk_widget_ref(VLbutton);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "VLbutton",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "VLbutton",
 				 VLbutton, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(VLbutton);
@@ -1820,29 +1820,29 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 void gui_shortcutbar_showhide(void)
 {
 	if (!settings.docked) {
-		gdk_window_raise(GTK_WIDGET(settings.dockSB)->window);
+		gdk_window_raise(GTK_WIDGET(widgets.dock_sb)->window);
 		return;
 	}
 
 	if (settings.showshortcutbar) {
 		settings.showshortcutbar = FALSE;
 		settings.biblepane_width = settings.gs_width / 2;
-		gtk_widget_hide(settings.shortcut_bar);
-		e_paned_set_position(E_PANED(settings.epaned), 0);
+		gtk_widget_hide(widgets.shortcutbar);
+		e_paned_set_position(E_PANED(widgets.epaned), 0);
 		e_paned_set_position(E_PANED
 				     (gui_lookup_widget
-				      (settings.app, "hpaned1")),
+				      (widgets.app, "hpaned1")),
 				     settings.biblepane_width);
 	} else {
 		settings.showshortcutbar = TRUE;
 		settings.biblepane_width =
 		    (settings.gs_width - settings.shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(settings.epaned),
+		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget(settings.app, "hpaned1")),
+				     (gui_lookup_widget(widgets.app, "hpaned1")),
 				     settings.biblepane_width);
-		gtk_widget_show(settings.shortcut_bar);
+		gtk_widget_show(widgets.shortcutbar);
 	}
 }
 
@@ -1869,28 +1869,28 @@ void gui_set_shortcutbar_porgram_start(void)
 	 *  show hide shortcut bar - set to options setting 
 	 */
 	if (settings.showshortcutbar) {
-		gtk_widget_show(settings.shortcut_bar);
-		e_paned_set_position(E_PANED(settings.epaned),
+		gtk_widget_show(widgets.shortcutbar);
+		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
 	}
 
 	else if (!settings.showshortcutbar && settings.showdevotional) {
-		gtk_widget_show(settings.shortcut_bar);
+		gtk_widget_show(widgets.shortcutbar);
 		gui_shortcutbar_showhide();
 	}
 
 	else {
-		gtk_widget_hide(settings.shortcut_bar);
-		e_paned_set_position(E_PANED(settings.epaned),
+		gtk_widget_hide(widgets.shortcutbar);
+		e_paned_set_position(E_PANED(widgets.epaned),
 				     1);
 	}
 
 	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "vpaned1")),
+	e_paned_set_position(E_PANED(gui_lookup_widget(widgets.app, "vpaned1")),
 			     settings.upperpane_hight);
 
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "hpaned1")),
+	e_paned_set_position(E_PANED(gui_lookup_widget(widgets.app, "hpaned1")),
 			     settings.biblepane_width);
 
 	if (!settings.docked) {

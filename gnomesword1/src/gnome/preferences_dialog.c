@@ -35,6 +35,7 @@
 #include <gtk/gtk.h>
 
 #include "gui/bibletext.h"
+#include "gui/gnomesword.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
 #include "gui/preferences_dialog.h"
@@ -276,43 +277,43 @@ static void applyoptions(void)
 	GtkWidget *dict;
 	GtkWidget *comm;
 
-	dict = settings.notebookDL;
-	comm = settings.notebook_comm;
+	dict = widgets.notebook_dict;
+	comm = widgets.notebook_comm;
 
 	/*  */
 	if (updatelayout) {
 		/* set the main window size */
-		gtk_widget_set_usize(settings.app, settings.gs_width,
+		gtk_widget_set_usize(widgets.app, settings.gs_width,
 				settings.gs_hight);
 
 		if (settings.showshortcutbar && settings.docked) {
-			e_paned_set_position(E_PANED(settings.epaned),
+			e_paned_set_position(E_PANED(widgets.epaned),
 					     settings.shortcutbar_width);
 		} else {
-			e_paned_set_position(E_PANED(settings.epaned), 1);
+			e_paned_set_position(E_PANED(widgets.epaned), 1);
 		}
 		/* set height of bible and commentary pane */
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget(settings.app, "vpaned1")),
+				     (gui_lookup_widget(widgets.app, "vpaned1")),
 				     settings.upperpane_hight);
 		/* set width of bible pane */
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget(settings.app, "hpaned1")),
+				     (gui_lookup_widget(widgets.app, "hpaned1")),
 				     settings.biblepane_width);
 		updatelayout = FALSE;
 	}
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_text),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs); 
 	gui_set_text_frame_label();
 	
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_gbs),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebookDL),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 				   settings.dict_tabs);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_comm),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
 
-	GTK_CHECK_MENU_ITEM(settings.versestyle_item)->active =
+	GTK_CHECK_MENU_ITEM(widgets.versestyle_item)->active =
 		settings.versestyle;
 
 	if (updatehtml) {	

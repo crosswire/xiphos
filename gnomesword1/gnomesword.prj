@@ -127,6 +127,7 @@ module.include.files=\
 	src/main/lists.h\
 	src/main/settings.h\
 	src/main/shortcutbar.h\
+	src/main/spell.h\
 	src/main/sword.h
 
 module.source.name=.
@@ -201,6 +202,7 @@ module.source.files=\
 	src/main/percomm.c\
 	src/main/settings.c\
 	src/main/shortcutbar.c\
+	src/main/spell_pspell.c\
 	src/main/sword.c
 
 module.pixmap.name=.

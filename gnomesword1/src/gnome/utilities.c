@@ -31,6 +31,7 @@
 #include <gnome.h>
 
 #include "gui/utilities.h"
+#include "gui/gnomesword.h"
 #include "main/settings.h"
 
 
@@ -175,7 +176,7 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 	
 	tmp = modlist;
 	while (tmp != NULL) {	
-		gui_add_item2gnome_menu(settings.app, 
+		gui_add_item2gnome_menu(widgets.app, 
 			(gchar *) tmp->data, 
 			(gchar *) tmp->data,
 			view_remember_last_item, 
@@ -209,7 +210,7 @@ void gui_add_mods_to_menus(GList * modlist, gchar * menu,
 
 void gui_remove_menu_items(gchar * startitem, gint numberofitems)
 {				
-	gnome_app_remove_menus(GNOME_APP(settings.app), startitem,
+	gnome_app_remove_menus(GNOME_APP(widgets.app), startitem,
 			       numberofitems);
 }
 

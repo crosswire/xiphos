@@ -27,6 +27,7 @@ extern "C" {
 #endif	
 
 #include <glib-1.2/glib.h>
+#include "main/lists.h"
 	
 	
 void backend_first_init(void);

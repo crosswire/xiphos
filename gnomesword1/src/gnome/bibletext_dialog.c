@@ -33,6 +33,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
+#include "gui/gnomesword.h"
 
 #include "main/bibletext.h"
 #include "main/sword.h"
@@ -485,7 +486,7 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 		    gtk_check_menu_item_new_with_label((gchar *) 
 				(gchar *)tmp->data);
 		sprintf(menuName, "ModuleNum%d", view_number);
-		gtk_object_set_data(GTK_OBJECT(settings.app), menuName,
+		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
@@ -963,7 +964,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Strongs Numbers"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_strongs);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_strongs",
 					 vt->t->tgs->t_btn_strongs,
 					 (GtkDestroyNotify)
@@ -990,7 +991,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Morph Tags"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_morphs);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_morphs",
 					 vt->t->tgs->t_btn_morphs,
 					 (GtkDestroyNotify)
@@ -1017,7 +1018,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Footnotes"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_footnotes);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_footnotes",
 					 vt->t->tgs->t_btn_footnotes,
 					 (GtkDestroyNotify)
@@ -1045,7 +1046,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Greek Accents"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_accents);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_accents",
 					 vt->t->tgs->t_btn_accents,
 					 (GtkDestroyNotify)
@@ -1073,7 +1074,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Lemmas"), NULL,
 					       NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_lemmas);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_lemmas",
 					 vt->t->tgs->t_btn_lemmas,
 					 (GtkDestroyNotify)
@@ -1102,7 +1103,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Scripture References"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_scripturerefs);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_scripturerefs",
 					 vt->t->tgs->t_btn_scripturerefs,
 					 (GtkDestroyNotify)
@@ -1132,7 +1133,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Hebrew Vowel Points"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_points);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_points",
 					 vt->t->tgs->t_btn_points,
 					 (GtkDestroyNotify)
@@ -1161,7 +1162,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       ("Toggle Hebrew Cantillation"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_cant);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_cant", vt->t->tgs->t_btn_cant,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -1187,7 +1188,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 					       _("Toggle Headings"),
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_headings);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_headings",
 					 vt->t->tgs->t_btn_headings,
 					 (GtkDestroyNotify)
@@ -1209,7 +1210,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 	if (vt->t->tgs->variants) {
 		variant_menu = gtk_menu_bar_new();
 		gtk_widget_ref(variant_menu);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "variant_menu", variant_menu,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -1221,14 +1222,14 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 				    0);
 
 		gtk_widget_ref(variant_menu_uiinfo[0].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "textual_variants",
 					 variant_menu_uiinfo[0].widget,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 
 		gtk_widget_ref(primary_reading_uiinfo[0].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "primary_reading",
 					 primary_reading_uiinfo[0].
 					 widget, (GtkDestroyNotify)
@@ -1241,7 +1242,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 		
 
 		gtk_widget_ref(primary_reading_uiinfo[1].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "secondary_reading",
 					 primary_reading_uiinfo[1].
 					 widget, (GtkDestroyNotify)
@@ -1250,7 +1251,7 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 		vt->t->tgs->t_btn_secondary = primary_reading_uiinfo[1].widget;
 
 		gtk_widget_ref(primary_reading_uiinfo[2].widget);
-		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "all_readings",
 					 primary_reading_uiinfo[2].
 					 widget, (GtkDestroyNotify)

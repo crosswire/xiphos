@@ -39,11 +39,6 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#ifdef USE_SPELL
-//#include "main/spell.h"
-//#include "main/spell_gui.h"
-#endif	/* USE_SPELL */
-
 #include "gui/_editor.h"
 #include "gui/editor_toolbar.h"
 #include "gui/editor_menu.h"
@@ -57,9 +52,9 @@
 #include "gui/info_box.h"
 #include "gui/html.h"
 #include "gui/utilities.h"
+#include "gui/gnomesword.h"
 
 #include "main/percomm.h"
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 /****************************************************************************** 
@@ -597,12 +592,12 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
 			gtk_widget_show(ecd->frame_toolbar);
-			gtk_widget_show(settings.toolbarBooks);
+			//gtk_widget_show(settings.toolbarBooks);
 		}
 
 		else {
 			gtk_widget_show(ecd->frame_toolbar);
-			gtk_widget_hide(settings.toolbarBooks);
+			//gtk_widget_hide(settings.toolbarBooks);
 		}
 	}
 	gtk_html_set_editable(GTK_HTML(ecd->html),

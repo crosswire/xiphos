@@ -30,8 +30,8 @@
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
 #include "gui/utilities.h"
+#include "gui/gnomesword.h"
 
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 #include <gal/e-paned/e-hpaned.h>
@@ -95,7 +95,7 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	}
 	historylist[historyitems].itemnum = historyitems;	
 	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
-	                        GTK_NOTEBOOK(settings.notebook_comm));		
+	                        GTK_NOTEBOOK(widgets.notebook_comm));		
 	sprintf(historylist[historyitems].verseref,"%s",ref); 
 	sprintf(historylist[historyitems].textmod,"%s",settings.MainWindowModule);	
 	sprintf(historylist[historyitems].commod,"%s", settings.CommWindowModule);
