@@ -63,15 +63,15 @@ static void old_2_new_shortcut_file(gchar * old_file, gchar * new_file);
 static int init_old(void);
 static int init_bookmarks(int new_bookmarks, int have_old);
 
-static 	gchar *old_prefs  = NULL;
-static 	gchar *old_dir    = NULL;
-static 	gchar *old_bm     = NULL;
-static 	gchar *old_sb     = NULL;
-static 	gchar *old_fav    = NULL;
-static 	gchar *old_text   = NULL;
-static 	gchar *old_comm   = NULL;
-static 	gchar *old_dict   = NULL;
-static 	gchar *old_gbs    = NULL;
+static gchar *old_prefs = NULL;
+static gchar *old_dir = NULL;
+static gchar *old_bm = NULL;
+static gchar *old_sb = NULL;
+static gchar *old_fav = NULL;
+static gchar *old_text = NULL;
+static gchar *old_comm = NULL;
+static gchar *old_dict = NULL;
+static gchar *old_gbs = NULL;
 
 
 /******************************************************************************
@@ -112,28 +112,27 @@ gint settings_init(int new_configs, int new_bookmarks)
 	settings.gSwordDir = g_new(char, strlen(settings.homedir) +
 				   strlen(GS_DIR) + 2);
 	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, GS_DIR);
-	
+
 	/* if gSwordDir does not exist create it */
-	if (access(settings.gSwordDir, F_OK) == -1) {	
+	if (access(settings.gSwordDir, F_OK) == -1) {
 		if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
 			printf("can not create  .gnomesword-1.0");
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
-		} 
-		else 
+		} else
 			need_old = TRUE;
 	}
-	
+
 	/* shortcutbar dir */
 	settings.shortcutbarDir =
 	    g_new(char,
 		  strlen(settings.gSwordDir) + strlen("shortcutbar") +
 		  2);
 	sprintf(settings.shortcutbarDir, "%s/%s", settings.gSwordDir,
-							"shortcutbar");
-	
+		"shortcutbar");
 
-	if(need_old) {
+
+	if (need_old) {
 		have_old = init_old();
 	}
 
@@ -150,10 +149,9 @@ gint settings_init(int new_configs, int new_bookmarks)
 
 	/* set fnconfigure to gSwordDir and settings.xml */
 	settings.fnconfigure = g_new(char, strlen(settings.gSwordDir) +
-				     strlen("settings.xml") + 
-				     2);
+				     strlen("settings.xml") + 2);
 	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
-						"settings.xml");
+		"settings.xml");
 
 	/* if gSwordDir does not exist create it */
 	if (access(settings.fnconfigure, F_OK) == -1) {
@@ -167,12 +165,12 @@ gint settings_init(int new_configs, int new_bookmarks)
 		backend_delete_main_mgr();
 		xml_save_settings_doc(settings.fnconfigure);
 		xml_free_settings_doc();
-		
+
 	}
-	
+
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
-	
+
 	if (have_old) {
 		g_free(old_prefs);
 		g_free(old_bm);
@@ -184,8 +182,8 @@ gint settings_init(int new_configs, int new_bookmarks)
 		g_free(old_gbs);
 	}
 
-	
-	if(old_dir)
+
+	if (old_dir)
 		g_free(old_dir);
 	return retval;
 }
@@ -216,8 +214,8 @@ int init_old(void)
 
 	if (access(old_dir, F_OK) == -1)
 		return 0;
-	
-	
+
+
 	old_bm = g_new(char, strlen(old_dir) +
 		       strlen("/bookmarks") + 2);
 	sprintf(old_bm, "%s/%s", old_dir, "bookmarks");
@@ -228,9 +226,8 @@ int init_old(void)
 
 	old_prefs = g_new(char, strlen(old_dir) +
 			  strlen("preferences.conf") + 2);
-	sprintf(old_prefs, "%s/%s", old_dir,
-		"preferences.conf");
-	
+	sprintf(old_prefs, "%s/%s", old_dir, "preferences.conf");
+
 	old_fav = g_new(char, strlen(old_sb) +
 			strlen("Favorites.conf") + 2);
 	sprintf(old_fav, "%s/%s", old_sb, "Favorites.conf");
@@ -250,28 +247,27 @@ int init_old(void)
 	old_gbs = g_new(char, strlen(old_sb) +
 			strlen("Books.conf") + 3);
 	sprintf(old_gbs, "%s/%s", old_sb, "Books.conf");
-	
+
 	if (access(settings.shortcutbarDir, F_OK) == -1) {
 		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) == 0) {
-			if (access(old_fav, F_OK) == 0) 
-			       old_2_new_shortcut_file(old_fav, 
-					"Favorites.conf");
-			if (access(old_text, F_OK) == 0) 
-			       old_2_new_shortcut_file(old_text, 
-					"BibleText.conf");
-			if (access(old_comm, F_OK) == 0) 
-			       old_2_new_shortcut_file(old_comm, 
-					"Commentaries.conf");
-			if (access(old_dict, F_OK) == 0) 
-			       old_2_new_shortcut_file(old_dict,
-					"Dictionaries.conf");
-			if (access(old_gbs, F_OK) == 0) 
-			       old_2_new_shortcut_file(old_gbs, 
-					"Books.conf");
-			
+			if (access(old_fav, F_OK) == 0)
+				old_2_new_shortcut_file(old_fav,
+						"Favorites.conf");
+			if (access(old_text, F_OK) == 0)
+				old_2_new_shortcut_file(old_text,
+						"BibleText.conf");
+			if (access(old_comm, F_OK) == 0)
+				old_2_new_shortcut_file(old_comm,
+						"Commentaries.conf");
+			if (access(old_dict, F_OK) == 0)
+				old_2_new_shortcut_file(old_dict,
+						"Dictionaries.conf");
+			if (access(old_gbs, F_OK) == 0)
+				old_2_new_shortcut_file(old_gbs,
+						"Books.conf");
+
 		}
-	} 
-	else {
+	} else {
 		printf("can't create shortcutbar dir");
 		return 0;
 	}
@@ -300,37 +296,35 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	GNode *bookmark_tree = NULL;
 	gchar *file_buf = NULL;
 	gint load_old = FALSE;
-	
+
 	settings.load_xml_bookmarks = FALSE;
-	
+
 	/* set bookmarks dir to settings.gSwordDir + /bookmarks */
 	settings.swbmDir = g_new(char, strlen(settings.gSwordDir) +
 				 strlen("/bookmarks") + 2);
 	sprintf(settings.swbmDir, "%s/%s", settings.gSwordDir,
 		"bookmarks");
-	
+
 	/* if .gnomesword-1.0/bookmarks does not exist create it */
 	if (access(settings.swbmDir, F_OK) == -1) {
 		if ((mkdir(settings.swbmDir, S_IRWXU)) == 0) {
 			/* if we have old style bookmarks from a 
 			   previous version of gnomesword load them */
-			load_old = TRUE;			
-			
+			load_old = TRUE;
+
 		} else {
 			g_warning("can't create bookmarks dir");
 			return 0;
 		}
 	}
-	
-	if(new_bookmarks) {
+
+	if (new_bookmarks) {
 		gui_new_xml_bookmark_file();
-	}
-	else if(load_old) {
-		if(have_old) {			
-			backend_init_main_mgr();	
-			bookmark_tree =
-			    backend_load_bookmarks(old_bm);
-			gui_save_old_bookmarks_to_new(bookmark_tree);		
+	} else if (load_old) {
+		if (have_old) {
+			backend_init_main_mgr();
+			bookmark_tree = backend_load_bookmarks(old_bm);
+			gui_save_old_bookmarks_to_new(bookmark_tree);
 			backend_delete_main_mgr();
 		}
 	}
@@ -338,40 +332,41 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	file_buf = g_new(char, strlen(settings.swbmDir) +
 			 strlen("/bookmarks.xml") + 2);
 	sprintf(file_buf, "%s/bookmarks.xml", settings.swbmDir);
-	
+
 	if (access(file_buf, F_OK) == 0) {
 		settings.load_xml_bookmarks = TRUE;
-	}	
+	}
 	g_free(file_buf);
-	
-	if(!settings.load_xml_bookmarks) {
+
+	if (!settings.load_xml_bookmarks) {
 		file_buf = g_new(char, strlen(settings.swbmDir) +
-			 strlen("/personal.conf") + 2);
+				 strlen("/personal.conf") + 2);
 		sprintf(file_buf, "%s/personal.conf", settings.swbmDir);
 		backend_init_main_mgr();
 		if (access(file_buf, F_OK) == 0) {
 			bookmark_tree =
 			    backend_load_bookmarks(settings.swbmDir);
 			gui_save_old_bookmarks_to_new(bookmark_tree);
-		}
-		else
+		} else
 			gui_new_xml_bookmark_file();
-				
-		backend_delete_main_mgr();	
+
+		backend_delete_main_mgr();
 		settings.load_xml_bookmarks = TRUE;
 		g_free(file_buf);
 	}
-	
+
 	/* check for Bibletime bookmarks */
 	settings.have_bibletime = FALSE;
-	file_buf = g_new(char, strlen(settings.homedir) + 
-		 strlen("/.kde/share/apps/bibletime/bookmarks.xml") + 2);
-	sprintf(file_buf, "%s/.kde/share/apps/bibletime/bookmarks.xml", 
-					settings.homedir);
+	file_buf = g_new(char, strlen(settings.homedir) +
+			 strlen
+			 ("/.kde/share/apps/bibletime/bookmarks.xml") +
+			 2);
+	sprintf(file_buf, "%s/.kde/share/apps/bibletime/bookmarks.xml",
+		settings.homedir);
 	if (access(file_buf, F_OK) == 0) {
 		settings.have_bibletime = TRUE;
 	}
-	if(file_buf)	
+	if (file_buf)
 		g_free(file_buf);
 	return 1;
 }
@@ -396,7 +391,7 @@ int init_bookmarks(int new_bookmarks, int have_old)
 void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
 {
 	gchar group_name[256], icon_size[10];
-	GList *glist = NULL;	
+	GList *glist = NULL;
 
 	glist = load_sb_group(old_file, group_name, icon_size);
 	save_sb_group(glist, new_file, group_name, icon_size);
@@ -420,7 +415,7 @@ void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
  *   
  */
 
-void load_settings_structure(void) 
+void load_settings_structure(void)
 {
 	settings.gs_version = VERSION;
 	settings.MainWindowModule = xml_get_value("modules", "text");
@@ -432,96 +427,130 @@ void load_settings_structure(void)
 	settings.Interlinear3Module = xml_get_value("modules", "int3");
 	settings.Interlinear4Module = xml_get_value("modules", "int4");
 	settings.Interlinear5Module = xml_get_value("modules", "int5");
-	settings.personalcommentsmod = xml_get_value("modules", "percomm");	
+	settings.personalcommentsmod =
+	    xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
-	
-	
+
+
 	settings.lex_greek = xml_get_value("lexicons", "greek");
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
-	settings.lex_greek_viewer = xml_get_value("lexicons", "greekviewer");
-	settings.lex_hebrew_viewer = xml_get_value("lexicons", "hebrewviewer");
-	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
+	settings.lex_greek_viewer =
+	    xml_get_value("lexicons", "greekviewer");
+	settings.lex_hebrew_viewer =
+	    xml_get_value("lexicons", "hebrewviewer");
+	settings.DefaultDict =
+	    xml_get_value("lexicons", "defaultdictionary");
 	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
-	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
-	settings.useDefaultDict = atoi(xml_get_value("lexicons", "usedefaultdict"));
-	
-	
+	settings.inDictpane =
+	    atoi(xml_get_value("lexicons", "indictpane"));
+	settings.useDefaultDict =
+	    atoi(xml_get_value("lexicons", "usedefaultdict"));
+
+
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
 	settings.book_key = xml_get_value("keys", "book");
-	
-	
-	settings.shortcutbar_width = atoi(xml_get_value("layout", "shortcutbar"));
+
+
+	settings.shortcutbar_width =
+	    atoi(xml_get_value("layout", "shortcutbar"));
 	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
 	settings.gs_width = atoi(xml_get_value("layout", "width"));
-	settings.biblepane_width = atoi(xml_get_value("layout", "textpane"));
-	settings.upperpane_hight = atoi(xml_get_value("layout", "uperpane"));
-	
-	
-	settings.verse_num_font_size = xml_get_value("fontsize", "versenum");
-	
-	
+	settings.biblepane_width =
+	    atoi(xml_get_value("layout", "textpane"));
+	settings.upperpane_hight =
+	    atoi(xml_get_value("layout", "uperpane"));
+
+
+	settings.verse_num_font_size =
+	    xml_get_value("fontsize", "versenum");
+
+
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text");
-	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
-	settings.currentverse_color = xml_get_value("HTMLcolors", "currentverse");
+	settings.bible_bg_color =
+	    xml_get_value("HTMLcolors", "background");
+	settings.currentverse_color =
+	    xml_get_value("HTMLcolors", "currentverse");
 	settings.link_color = xml_get_value("HTMLcolors", "link");
-	settings.bible_verse_num_color = xml_get_value("HTMLcolors", "versenum");
+	settings.bible_verse_num_color =
+	    xml_get_value("HTMLcolors", "versenum");
 	settings.found_color = xml_get_value("HTMLcolors", "found");
-	
-	
-	settings.strongsint = atoi(xml_get_value("interlinear", "strongs"));
-	settings.morphsint = atoi(xml_get_value("interlinear", "morphs"));
-	settings.hebrewpointsint = atoi(xml_get_value("interlinear", "points"));
-	settings.cantillationmarksint = atoi(xml_get_value("interlinear", "cantillation"));
-	settings.footnotesint = atoi(xml_get_value("interlinear", "footnotes"));
-	settings.interlinearpage = atoi(xml_get_value("interlinear", "interlinear"));
-	
-	
+
+
+	settings.strongsint =
+	    atoi(xml_get_value("interlinear", "strongs"));
+	settings.morphsint =
+	    atoi(xml_get_value("interlinear", "morphs"));
+	settings.hebrewpointsint =
+	    atoi(xml_get_value("interlinear", "points"));
+	settings.cantillationmarksint =
+	    atoi(xml_get_value("interlinear", "cantillation"));
+	settings.footnotesint =
+	    atoi(xml_get_value("interlinear", "footnotes"));
+	settings.interlinearpage =
+	    atoi(xml_get_value("interlinear", "interlinear"));
+
+
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
 	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
-	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));	
+	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
 	settings.showsplash = atoi(xml_get_value("misc", "splash"));
-	settings.showdevotional = atoi(xml_get_value("misc", "dailydevotional"));
+	settings.showdevotional =
+	    atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
-	
-	
-	settings.use_studypad = atoi(xml_get_value("editor", "UseStudyPad"));
-	settings.use_studypad_dialog = atoi(xml_get_value("editor", "UseStudypadDialog"));
-	settings.use_percomm_dialog = atoi(xml_get_value("editor", "UsePercommDialog"));
-		
-	
-	settings.studypadfilename = xml_get_value("studypad", "lastfile");
+
+
+	settings.use_studypad =
+	    atoi(xml_get_value("editor", "UseStudyPad"));
+	settings.use_studypad_dialog =
+	    atoi(xml_get_value("editor", "UseStudypadDialog"));
+	settings.use_percomm_dialog =
+	    atoi(xml_get_value("editor", "UsePercommDialog"));
+
+
+	settings.studypadfilename =
+	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
-	settings.show_style_bar_sp = atoi(xml_get_value("studypad", "stylebar"));
-	settings.show_edit_bar_sp = atoi(xml_get_value("studypad", "editbar"));
-	
-	
-	settings.showshortcutbar = atoi(xml_get_value("shortcutbar", "shortcutbar"));
-	settings.showfavoritesgroup = atoi(xml_get_value("shortcutbar", "favo"));
-	settings.showtextgroup = atoi(xml_get_value("shortcutbar", "text"));
-	settings.showcomgroup = atoi(xml_get_value("shortcutbar", "comm"));
-	settings.showdictgroup = atoi(xml_get_value("shortcutbar", "dict"));
-	settings.showbookgroup = atoi(xml_get_value("shortcutbar", "book"));
-	settings.showbookmarksgroup = atoi(xml_get_value("shortcutbar", "bookmark"));
-	settings.showhistorygroup = atoi(xml_get_value("shortcutbar", "history"));
+	settings.show_style_bar_sp =
+	    atoi(xml_get_value("studypad", "stylebar"));
+	settings.show_edit_bar_sp =
+	    atoi(xml_get_value("studypad", "editbar"));
+
+
+	settings.showshortcutbar =
+	    atoi(xml_get_value("shortcutbar", "shortcutbar"));
+	settings.showfavoritesgroup =
+	    atoi(xml_get_value("shortcutbar", "favo"));
+	settings.showtextgroup =
+	    atoi(xml_get_value("shortcutbar", "text"));
+	settings.showcomgroup =
+	    atoi(xml_get_value("shortcutbar", "comm"));
+	settings.showdictgroup =
+	    atoi(xml_get_value("shortcutbar", "dict"));
+	settings.showbookgroup =
+	    atoi(xml_get_value("shortcutbar", "book"));
+	settings.showbookmarksgroup =
+	    atoi(xml_get_value("shortcutbar", "bookmark"));
+	settings.showhistorygroup =
+	    atoi(xml_get_value("shortcutbar", "history"));
 	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
-	
-	
+
+
 	settings.text_tabs = atoi(xml_get_value("tabs", "text"));
-	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));	
+	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));
 	settings.dict_tabs = atoi(xml_get_value("tabs", "dict"));
 	settings.book_tabs = atoi(xml_get_value("tabs", "book"));
 	settings.percomm_tabs = atoi(xml_get_value("tabs", "percomm"));
-	
-	
+
+
 	/*
-	settings. = xml_get_value("", "");
-	settings. = xml_get_value("", "");
-	settings. = xml_get_value("", "");
-	settings. = xml_get_value("", "");
-	settings. = xml_get_value("", "");
-	*/
+	   settings. = xml_get_value("", "");
+	   settings. = xml_get_value("", "");
+	   settings. = xml_get_value("", "");
+	   settings. = xml_get_value("", "");
+	   settings. = xml_get_value("", "");
+	 */
 }
 
 

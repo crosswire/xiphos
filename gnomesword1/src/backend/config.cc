@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * config.cc - search Sword modules
+ * config.cc - 
  *
  * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
@@ -348,8 +348,10 @@ void backend_save_module_key(char *mod_name, char *key)
 					    find("CipherKey");
 					if (entry !=
 					    section->second.end()) {
-						entry->second = key;	//-- set cipher key
-						myConfig->Save();	//-- save config file
+						//-- set cipher key
+						entry->second = key;
+						//-- save config file						    
+						myConfig->Save();
 					}
 				}
 				delete myConfig;
@@ -358,7 +360,6 @@ void backend_save_module_key(char *mod_name, char *key)
 	}
 	closedir(dir);
 }
-
 
 
 /******************************************************************************
@@ -427,7 +428,6 @@ char *backend_get_module_font_size(char *mod_name, char * dir)
 	else
 		return NULL;
 }
-
 
 
 /******************************************************************************

@@ -75,16 +75,14 @@ gboolean in_url;
  *   void
  */
 
-static void show_in_appbar(GtkWidget * appbar, gchar * key, 
-							gchar * mod)
+static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 {
 	gchar *str;
 	gchar *text;
 	text = get_striptext(4, mod, key);
 	str = remove_linefeeds(text);
-	if(str) {
-		gnome_appbar_set_status(GNOME_APPBAR(appbar),
-			str);
+	if (str) {
+		gnome_appbar_set_status(GNOME_APPBAR(appbar), str);
 		g_free(str);
 	}
 	g_free(text);
@@ -106,11 +104,11 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key,
  * Return value
  *   void
  */
- 
+
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar buf[255], *buf1;	
-	
+	gchar buf[255], *buf1;
+
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
@@ -138,74 +136,92 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		else if (*url == '*') {
 			++url;
 			sprintf(buf, "%s", url);
-		}/***  gbf strongs  ***/
+		} /***  gbf strongs  ***/
 		else if (*url == '#') {
-			++url;		/* remove # */
+			++url;	/* remove # */
 			if (*url == 'T') {
 				++url;	/* remove T */
 				if (*url == 'G') {
 					++url;	/* remove G */
 					if (settings.havethayer) {
 						buf1 = g_strdup(url);
-						show_in_appbar(widgets.appbar, buf1, "Thayer");
+						show_in_appbar(widgets.
+							       appbar,
+							       buf1,
+							       "Thayer");
 						g_free(buf1);
 						return;
 					}
-	
+
 					else
 						return;
 				}
-	
+
 				if (*url == 'H') {
 					++url;	/* remove H */
 					if (settings.havebdb) {
 						buf1 = g_strdup(url);
-						show_in_appbar(widgets.appbar, buf1, "BDB");
+						show_in_appbar(widgets.
+							       appbar,
+							       buf1,
+							       "BDB");
 						g_free(buf1);
 						return;
 					}
-	
+
 					else
 						return;
 				}
 			}
-	
+
 			if (*url == 'G') {
 				++url;	/* remove G */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 5624) {
 					if (settings.havethayer) {
-						show_in_appbar(widgets.appbar, buf1, "Thayer");
-						g_free(buf1);						
+						show_in_appbar(widgets.
+							       appbar,
+							       buf1,
+							       "Thayer");
+						g_free(buf1);
 						return;
 					} else
 						return;
-	
+
 				}
-	
+
 				else {
-					show_in_appbar(widgets.appbar, buf1, settings.lex_greek);
-					g_free(buf1);		
+					show_in_appbar(widgets.appbar,
+						       buf1,
+						       settings.
+						       lex_greek);
+					g_free(buf1);
 					return;
 				}
 			}
-	
+
 			if (*url == 'H') {
 				++url;	/* remove H */
 				buf1 = g_strdup(url);
 				if (atoi(buf1) > 8674) {
 					if (settings.havebdb) {
-						show_in_appbar(widgets.appbar, buf1, "BDB");
+						show_in_appbar(widgets.
+							       appbar,
+							       buf1,
+							       "BDB");
 						g_free(buf1);
 						return;
 					}
-	
+
 					else
 						return;
 				}
-	
+
 				else {
-					show_in_appbar(widgets.appbar, buf1, settings.lex_hebrew);
+					show_in_appbar(widgets.appbar,
+						       buf1,
+						       settings.
+						       lex_hebrew);
 					g_free(buf1);
 					return;
 				}
@@ -216,7 +232,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
 			gchar *myurl = NULL;
-			
+
 			myurl = g_strdup(url);
 			buf1 = g_strdup(myurl);
 			mybuf = strstr(myurl, "class=");
@@ -224,19 +240,20 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				gint i;
 				modbuf = strchr(mybuf, '=');
 				++modbuf;
-				if(!strncmp(modbuf,"none", 5)) {    // gbf 
+				if (!strncmp(modbuf, "none", 5)) {	// gbf 
 					modbuf = "Packard";
-				}
-				else {
-					for (i = 0; i < strlen(modbuf); i++) {
+				} else {
+					for (i = 0; i < strlen(modbuf);
+					     i++) {
 						if (modbuf[i] == ' ') {
-							modbuf[i] = '\0';
+							modbuf[i] =
+							    '\0';
 							break;
 						}
 					}
 				}
 			}
-	
+
 			mybuf = NULL;
 			mybuf = strstr(buf1, "value=");
 			if (mybuf) {
@@ -244,8 +261,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				++mybuf;
 			}
 			buf1 = g_strdup(mybuf);
-			show_in_appbar(widgets.appbar, buf1, modbuf);			
-			g_free(buf1);			
+			show_in_appbar(widgets.appbar, buf1, modbuf);
+			g_free(buf1);
 			g_free(myurl);
 			return;
 		}
@@ -270,22 +287,23 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				sprintf(newref, "%5.5d", atoi(mybuf));
 			}
 			if (type)
-				if((atoi(mybuf) > 5624) && (settings.havethayer))
+				if ((atoi(mybuf) > 5624)
+				    && (settings.havethayer))
 					modbuf = "Thayer";
 				else
 					modbuf = settings.lex_greek;
 			else
 				modbuf = settings.lex_hebrew;
-	
+
 			buf1 = g_strdup(newref);
-			show_in_appbar(widgets.appbar, buf1, modbuf);				
+			show_in_appbar(widgets.appbar, buf1, modbuf);
 			g_free(buf1);
-			return;	
+			return;
 		}
-	
+
 		else if (*url == 'U') {
 			++url;
-			sprintf(buf,"%s %s", _("Unlock "),url);
+			sprintf(buf, "%s %s", _("Unlock "), url);
 		}
 		/***  any other link  ***/
 		else
@@ -293,7 +311,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
-		
+
 	}
 }
 
@@ -318,7 +336,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
 	gchar newmod[80], newref[80];
-	gint i = 0, havemod = 0;
+	gint i = 0;
 
 	if (*url == '@') {
 		++url;
@@ -362,7 +380,6 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				newmod[i] = mybuf[i];
 				newmod[i + 1] = '\0';
 				++i;
-				++havemod;
 			}
 		}
 		mybuf = NULL;
@@ -377,10 +394,10 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				++i;
 			}
 		}
-		if (havemod > 2) {
+		if (check_for_module(newmod)) {
 			modbuf = newmod;
 		} else {
-			modbuf = xml_get_value("modules", "text");//settings.MainWindowModule;
+			modbuf = xml_get_value("modules", "text");	//settings.MainWindowModule;
 		}
 		buf = g_strdup(newref);
 		sprintf(settings.groupName, "%s", "Verse List");
@@ -396,20 +413,19 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 	}
 	/***  thml morph tag  ***/
-	else if (!strncmp(url, "type=morph", 10)) { //sync type="morph" class="Robinson" value="T-GSM" 
+	else if (!strncmp(url, "type=morph", 10)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
-		
+
 		buf = g_strdup(url);
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			if(!strncmp(modbuf,"none", 5)) { /* gbf */
+			if (!strncmp(modbuf, "none", 5)) { /* gbf */
 				modbuf = "Packard";
-			}
-			else {
+			} else {
 				for (i = 0; i < strlen(modbuf); i++) {
 					if (modbuf[i] == ' ') {
 						modbuf[i] = '\0';
@@ -453,16 +469,16 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(newref, "%5.5d", atoi(mybuf));
 		}
 		if (type) {
-			if((atoi(mybuf) > 5624) && (settings.havethayer)) {
+			if ((atoi(mybuf) > 5624)
+			    && (settings.havethayer)) {
 				modbuf = "Thayer";
 				modbuf_viewer = "Thayer";
-			}
-			else {
-				modbuf_viewer = settings.lex_greek_viewer;
+			} else {
+				modbuf_viewer =
+				    settings.lex_greek_viewer;
 				modbuf = settings.lex_greek;
 			}
-		}
-		else {
+		} else {
 			modbuf = settings.lex_hebrew;
 			modbuf_viewer = settings.lex_hebrew_viewer;
 		}
@@ -471,7 +487,8 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings.inDictpane)
 			gui_change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(modbuf_viewer, buf);
+			gui_display_dictlex_in_viewer(modbuf_viewer,
+						      buf);
 		g_free(buf);
 	}
 	/***  gbf strongs  ***/
@@ -484,12 +501,11 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings.havethayer) {
 					buf = g_strdup(url);
 					if (settings.inDictpane)
-						gui_change_module_and_key("Thayer",
-								  buf);
+						gui_change_module_and_key
+						    ("Thayer", buf);
 					if (settings.inViewer)
 						gui_display_dictlex_in_viewer
-						    ("Thayer", buf
-						     );
+						    ("Thayer", buf);
 					g_free(buf);
 					return;
 				}
@@ -503,12 +519,11 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings.havebdb) {
 					buf = g_strdup(url);
 					if (settings.inDictpane)
-						gui_change_module_and_key("BDB",
-								  buf);
+						gui_change_module_and_key
+						    ("BDB", buf);
 					if (settings.inViewer)
-						gui_display_dictlex_in_viewer("BDB",
-								   buf
-								   );
+						gui_display_dictlex_in_viewer
+						    ("BDB", buf);
 					g_free(buf);
 					return;
 				}
@@ -525,12 +540,11 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings.havethayer) {
 					buf = g_strdup(url);
 					if (settings.inDictpane)
-						gui_change_module_and_key("Thayer",
-								  buf);
+						gui_change_module_and_key
+						    ("Thayer", buf);
 					if (settings.inViewer)
 						gui_display_dictlex_in_viewer
-						    ("Thayer", buf
-						     );
+						    ("Thayer", buf);
 					g_free(buf);
 					return;
 				} else
@@ -540,10 +554,12 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 			else {
 				if (settings.inDictpane)
-					gui_change_module_and_key(settings.lex_greek, buf);
+					gui_change_module_and_key
+					    (settings.lex_greek, buf);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer(settings.lex_greek_viewer,
-							   buf);
+					gui_display_dictlex_in_viewer
+					    (settings.lex_greek_viewer,
+					     buf);
 				g_free(buf);
 			}
 		}
@@ -555,12 +571,11 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				if (settings.havebdb) {
 					buf = g_strdup(url);
 					if (settings.inDictpane)
-						gui_change_module_and_key("BDB",
-								  buf);
+						gui_change_module_and_key
+						    ("BDB", buf);
 					if (settings.inViewer)
-						gui_display_dictlex_in_viewer("BDB",
-								   buf
-								   );
+						gui_display_dictlex_in_viewer
+						    ("BDB", buf);
 					g_free(buf);
 					return;
 				}
@@ -571,10 +586,12 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 
 			else {
 				if (settings.inDictpane)
-					gui_change_module_and_key(settings.lex_hebrew, buf);
+					gui_change_module_and_key
+					    (settings.lex_hebrew, buf);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer(settings.lex_hebrew_viewer,
-							   buf);
+					gui_display_dictlex_in_viewer
+					    (settings.lex_hebrew_viewer,
+					     buf);
 				g_free(buf);
 			}
 		}
@@ -589,14 +606,13 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gui_display_dictlex_in_viewer("Packard", buf);
 		g_free(buf);
 	}
-	
+
 	else if (*url == 'U') {
 		++url;		/* remove U */
 		buf = g_strdup(url);
-		if(get_mod_type(buf) == TEXT_TYPE) {
+		if (get_mod_type(buf) == TEXT_TYPE) {
 			gui_unlock_bibletext(NULL, (TEXT_DATA *) data);
-		}
-		else if(get_mod_type(buf) == COMMENTARY_TYPE) {
+		} else if (get_mod_type(buf) == COMMENTARY_TYPE) {
 			gui_unlock_commentary(NULL, (COMM_DATA *) data);
 		}
 		g_free(buf);
@@ -651,32 +667,32 @@ void gui_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkHTML *html;
 
-	switch(settings.whichwindow) {
-		case MAIN_TEXT_WINDOW:
-			html = GTK_HTML(widgets.html_text);
+	switch (settings.whichwindow) {
+	case MAIN_TEXT_WINDOW:
+		html = GTK_HTML(widgets.html_text);
 		break;
-		case INTERLINEAR_WINDOW:
-			html = GTK_HTML(widgets.html_interlinear);
+	case INTERLINEAR_WINDOW:
+		html = GTK_HTML(widgets.html_interlinear);
 		break;
-		case COMMENTARY_WINDOW:
-			html = GTK_HTML(widgets.html_comm);
+	case COMMENTARY_WINDOW:
+		html = GTK_HTML(widgets.html_comm);
 		break;
-		case DICTIONARY_WINDOW:
-			html = GTK_HTML(widgets.html_dict);
+	case DICTIONARY_WINDOW:
+		html = GTK_HTML(widgets.html_dict);
 		break;
-		case BOOK_WINDOW:
-			html = GTK_HTML(widgets.html_book);
+	case BOOK_WINDOW:
+		html = GTK_HTML(widgets.html_book);
 		break;
-		case PERCOMM_WINDOW:
-			html = GTK_HTML(widgets.html_percomm);
+	case PERCOMM_WINDOW:
+		html = GTK_HTML(widgets.html_percomm);
 		break;
-		case STUDYPAD_WINDOW:
-			html = GTK_HTML(widgets.html_studypad);
+	case STUDYPAD_WINDOW:
+		html = GTK_HTML(widgets.html_studypad);
 		break;
-		default: 
-			html = GTK_HTML(widgets.html_text);
+	default:
+		html = GTK_HTML(widgets.html_text);
 	}
-		
+
 	gtk_html_copy(html);
 }
 
@@ -742,7 +758,8 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 		gtk_html_select_word(html);
 		if (html_engine_is_selection_active(html->engine)) {
 			key =
-			    html_engine_get_selection_string(html->engine);
+			    html_engine_get_selection_string(html->
+							     engine);
 			key = g_strdelimit(key, ".,\"<>;:?", ' ');
 			key = g_strstrip(key);
 			return g_strdup(key);	/* must be freed by calling function */
@@ -856,8 +873,8 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
 static gint page_num;
 static GnomeFont *font;
 static void print_footer(GtkHTML * html, GnomePrintContext * context,
-		gdouble x, gdouble y, gdouble width, gdouble height,
-						gpointer user_data)
+			 gdouble x, gdouble y, gdouble width,
+			 gdouble height, gpointer user_data)
 {
 	gchar *text = g_strdup_printf("- %d -", page_num);
 	gdouble tw = gnome_font_get_width_string(font, "text");
@@ -893,7 +910,7 @@ static void print_footer(GtkHTML * html, GnomePrintContext * context,
  * Return value
  *   void
  */
- 
+
 void gui_html_print(GtkWidget * htmlwidget)
 {
 	GnomePrintMaster *print_master;
@@ -908,8 +925,7 @@ void gui_html_print(GtkWidget * htmlwidget)
 
 	page_num = 1;
 	font =
-	    gnome_font_new_closest("Times", GNOME_FONT_BOOK, FALSE,
-				   12);
+	    gnome_font_new_closest("Times", GNOME_FONT_BOOK, FALSE, 12);
 	gtk_html_print_with_header_footer(html, print_context, .0, .03,
 					  NULL, print_footer, NULL);
 	if (font)

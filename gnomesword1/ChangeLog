@@ -1,3 +1,9 @@
+2003-04-07  Terry <tbiggs@users.sf.net>
+
+	* module opions are now saved
+	
+
+
 2003-04-05  Terry <tbiggs@users.sf.net>
 
 	* removed gui/editor_search.h and gnome/editor_search.c
