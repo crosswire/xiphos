@@ -87,6 +87,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	char *gs_old = NULL;
 	char *tabs = NULL;
 
+	settings.first_run = FALSE;
 	/* set program title */
 	strcpy(settings.program_title, "GnomeSword");
 
@@ -159,13 +160,16 @@ int settings_init(int new_configs, int new_bookmarks)
 	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
 		"settings.xml");
 	
-	/* if gSwordDir does not exist create it */
+	/* if settings.xml does not exist create it */
 	if (access(settings.fnconfigure, F_OK) == -1) {
 		/* must be first run */
+#ifdef DEBUG 
 		g_print("\nFirst Run: need to create settings!\n");
-		xml_create_settings_file(settings.fnconfigure);
+#endif
+		settings.first_run = TRUE;
 		main_init_lists();
-		retval = gui_first_run();
+		xml_create_settings_file(settings.fnconfigure);
+		//retval = gui_first_run();
 		main_shutdown_list();
 		xml_save_settings_doc(settings.fnconfigure);
 		xml_free_settings_doc();
@@ -304,17 +308,12 @@ void load_settings_structure(void)
 	
 	settings.lex_greek = xml_get_value("lexicons", "greek");
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
-	settings.lex_greek_viewer =
-	    xml_get_value("lexicons", "greekviewer");
-	settings.lex_hebrew_viewer =
-	    xml_get_value("lexicons", "hebrewviewer");
-	settings.DefaultDict =
-	    xml_get_value("lexicons", "defaultdictionary");
+	settings.lex_greek_viewer = xml_get_value("lexicons", "greekviewer");
+	settings.lex_hebrew_viewer = xml_get_value("lexicons", "hebrewviewer");
+	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
 	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
-	settings.inDictpane =
-	    atoi(xml_get_value("lexicons", "indictpane"));
-	settings.useDefaultDict =
-	    atoi(xml_get_value("lexicons", "usedefaultdict"));
+	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
+	settings.useDefaultDict = atoi(xml_get_value("lexicons","usedefaultdict"));
 
 
 	settings.currentverse = xml_get_value("keys", "verse");
@@ -374,7 +373,7 @@ void load_settings_structure(void)
 		settings.biblepane_hight = atoi(xml_get_value("layout", "biblehight"));
 	else {
 		xml_add_new_item_to_section("layout", "biblehight", "340");
-		settings.biblepane_hight = 340;
+		settings.biblepane_hight = 250;
 	}
 
 	if(xml_get_value("layout", "commentaryhight"))
@@ -464,47 +463,10 @@ void load_settings_structure(void)
 	settings.studypadfilename =
 	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
-	
-	buf = xml_get_value("studypad", "stylebar");
-	if(buf)
-		settings.show_style_bar_sp =  atoi(buf);
-	
-	buf = xml_get_value("studypad", "editbar");
-	if(buf)
-		settings.show_edit_bar_sp =  atoi(buf);
-
 
 	buf = xml_get_value("shortcutbar", "shortcutbar");
 	if(buf)
 		settings.showshortcutbar = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "favo");
-	if(buf)
-		settings.showfavoritesgroup = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "bible");
-	if(buf)
-		settings.showtextgroup = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "comm");
-	if(buf)
-		settings.showcomgroup = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "dict");
-	if(buf)
-		settings.showdictgroup = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "book");
-	if(buf)
-		settings.showbookgroup = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "bookmark");
-	if(buf)
-		settings.showbookmarksgroup = atoi(buf);
-	
-	buf = xml_get_value("shortcutbar", "history");
-	if(buf)
-		settings.showhistorygroup = atoi(buf);
 	
 	buf = xml_get_value("shortcutbar", "docked");
 	if(buf)
@@ -519,25 +481,6 @@ void load_settings_structure(void)
 		settings.browsing = 1;
 	}
 	
-	buf = xml_get_value("tabs", "bible");
-	if(buf)
-		settings.text_tabs =  atoi(buf);
-	
-	buf = xml_get_value("tabs", "comm");
-	if(buf)
-		settings.comm_tabs =  atoi(buf);
-	
-	buf = xml_get_value("tabs", "dict");
-	if(buf)
-		settings.dict_tabs =  atoi(buf);
-	
-	buf = xml_get_value("tabs", "book");
-	if(buf)
-		settings.book_tabs =  atoi(buf);
-	
-	buf = xml_get_value("tabs", "percomm");
-	if(buf)
-		settings.percomm_tabs =  atoi(buf);
 	
 
 	/*
