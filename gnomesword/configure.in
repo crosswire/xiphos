@@ -12,6 +12,71 @@ AC_ISC_POSIX
 AC_PROG_CC
 AC_HEADER_STDC
 
+dnl ------------------------------------------------------------------------
+dnl Find a file (or one of more files in a list of dirs)
+dnl ------------------------------------------------------------------------
+dnl
+AC_DEFUN(AC_FIND_FILE,
+[
+$3=NO
+for i in $2; do
+  for j in $1; do
+    if test -r "$i/$j"; then
+      $3=$i
+      break 2
+    fi
+  done
+done
+])
+ 
+dnl looking for general SWORD path 
+ 
+AC_ARG_WITH(sworddir, 
+[  --with-sworddir=DIR     path where swordlib is beeing installed (default=/usr/local/sword) ], 
+[ 
+  ac_sword_dir=$withval 
+], ac_sword_dir=/usr/local/sword 
+) 
+ 
+dnl looking for sword includes 
+AC_MSG_CHECKING([for sword headers]) 
+sword_incdirs="${prefix}/include $ac_sword_dir/include $ac_sword_dir/include/sword /usr/include/sword /usr/include /usr/local/include /usr/local/sword/include /usr/local/include/sword /opt/sword/include /usr/local/include/sword /usr/local/sword/include/sword /opt/sword/include/sword" 
+AC_FIND_FILE(swmgr.h, $sword_incdirs, sword_incdir) 
+ 
+AC_MSG_RESULT([$sword_incdir]) 
+ 
+dnl looking for sword library 
+AC_MSG_CHECKING([for sword library]) 
+sword_libdirs="${prefix}/lib $ac_sword_dir/lib /usr/lib /usr/local/lib /usr/local/sword/lib /usr/lib/sword/lib /usr/local/share/sword/lib /opt/sword/lib" 
+ 
+AC_FIND_FILE(libsword.so, $sword_libdirs, sword_libdir) 
+if test -r $sword_libdir/libsword.so; then 
+ HAVE_SWORD_LIB=yes 
+ SWORD_LIB_TYPE="shared" 
+elif test ! -r $sword_libdir/libsword.so; then 
+ HAVE_SWORD_LIB=no 
+fi 
+ 
+if test $HAVE_SWORD_LIB = no; then 
+ AC_FIND_FILE(libsword.a, $sword_libdirs, sword_libdir) 
+ if test -r $sword_libdir/libsword.a; then 
+ HAVE_SWORD_LIB=yes 
+ SWORD_LIB_TYPE="static" 
+ fi 
+fi 
+ 
+if test $HAVE_SWORD_LIB = no; then 
+ AC_MSG_ERROR(SWORD library not found.Try to use configure with --with-sworddir=/your/sword/prefix) 
+fi 
+ 
+SWORD_CPPFLAGS="-I$sword_incdir" 
+SWORD_LIBS="-L$sword_libdir -lsword -lz" 
+ 
+AC_SUBST(SWORD_CPPFLAGS) 
+AC_SUBST(SWORD_LIBS) 
+ 
+AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
+ 
 
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
@@ -48,7 +113,7 @@ EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gdk_pixbuf gnomecanvaspixbuf
 AC_SUBST(EXTRA_GNOME_LIBS)
 AC_SUBST(EXTRA_GNOME_CFLAGS)
 
-LIBS="$LIBS -L/usr/local/lib -L/usr/lib -lsword -lz"
+LIBS="$LIBS -L/usr/local/lib -L/usr/lib"
 
 dnl Only use -Wall if we have gcc
 if test "x$GCC" = "xyes"; then

@@ -51,7 +51,7 @@ s%@CXXFLAGS@%-g -O2%g
 s%@FFLAGS@%%g
 s%@DEFS@%-DHAVE_CONFIG_H%g
 s%@LDFLAGS@%%g
-s%@LIBS@% -L/usr/local/lib -L/usr/lib -lsword -lz -laspell -lgnomeprint -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl -L/usr/lib -lxml -lz%g
+s%@LIBS@% -L/usr/local/lib -L/usr/lib -laspell -lgnomeprint -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl -L/usr/lib -lxml -lz%g
 s%@exec_prefix@%${prefix}%g
 s%@prefix@%/usr/local%g
 s%@program_transform_name@%s,x,x,%g
@@ -103,6 +103,8 @@ s%@GNOME_DOCKLETS_LIBS@%%g
 s%@GNOME_CAPPLET_LIBS@%%g
 s%@CC@%gcc%g
 s%@CPP@%gcc -E%g
+s%@SWORD_CPPFLAGS@%-I/usr/include/sword%g
+s%@SWORD_LIBS@%-L/usr/lib -lsword -lz%g
 s%@cflags_set@%yes%g
 s%@GTK_CONFIG@%/usr/bin/gtk-config%g
 s%@GTK_CFLAGS@%-I/usr/lib/glib/include -I/usr/X11R6/include%g
