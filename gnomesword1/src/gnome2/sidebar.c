@@ -43,10 +43,9 @@
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
 #include "gui/html.h"
-#include "gui/url.h"
 
 
-
+#include "main/url.h"
 #include "main/sword.h"
 #include "main/gbs.h"
 #include "main/settings.h"

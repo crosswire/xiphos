@@ -52,6 +52,7 @@
 
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/url.h"
 #include "main/xml.h"
 
 static GtkHTMLStream *htmlstream;
