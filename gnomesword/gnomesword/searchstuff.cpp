@@ -37,7 +37,7 @@
 #include "interface.h"
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
-#include "gs_thmlplain.h"
+
 
 SearchWindow *searchWindow;
 extern SWModule *curMod, *curcomMod, *percomMod;
