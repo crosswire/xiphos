@@ -104,7 +104,7 @@ static void on_btn_open_clicked(GtkButton * button,
 		GS_DIALOG *info;
 
 		info = gui_new_dialog();
-		if (strlen(settings.studypadfilename) > 0)
+		if (settings.studypadfilename)
 			info->label_top = settings.studypadfilename;
 		else
 			info->label_top = N_("File");
@@ -153,10 +153,16 @@ static void on_btn_save_clicked(GtkButton * button,
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 	} else if (ecd->studypad) {
-		if (strlen(settings.studypadfilename) > 0) {
-			filename = g_strdup(settings.studypadfilename);
-			save_file(filename, ecd);
-		} else {
+		if(settings.studypadfilename) {
+			if (strlen(settings.studypadfilename) > 0) {
+				filename = g_strdup(settings.studypadfilename);
+				save_file(filename, ecd);
+			} 
+			else {
+				gui_fileselection_save(ecd);
+			}
+		}
+		else {
 			gui_fileselection_save(ecd);
 		}
 	}

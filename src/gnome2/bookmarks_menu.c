@@ -57,6 +57,8 @@ BOOKMARK_MENU menu;
 
 gboolean bookmarks_changed;
 
+static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data);
+
 /******************************************************************************
  * Name
  *  parse_treeview
@@ -162,7 +164,6 @@ static void save_iter_to_xml_removed(GtkTreeIter * iter)
 	xmlFreeDoc(root_doc);
 	
 	bookmarks_changed = FALSE;
-	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
 }
 
 /******************************************************************************
@@ -226,10 +227,8 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
 	
 	xmlSaveFormatFile(xml_filename, root_doc,1);
 	xmlFreeDoc(root_doc);
-	g_free(filename);
-	
+	g_free(filename);	
 	bookmarks_changed = FALSE;
-	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
 }
 
 
@@ -449,7 +448,8 @@ static void on_point_to_here_activate(GtkMenuItem * menuitem,
 		cell1->text = g_strdup(key);
 		cell2->text = g_strdup(modName);
 		bookmarks_changed = TRUE;
-		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+		save_bookmarks(NULL, NULL);
+//		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
 	}
 	g_free(yes_no_dialog);
 	*/
@@ -632,7 +632,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 			   COL_MODULE, data->module,
 			   -1);	
 		bookmarks_changed = TRUE;
-		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+		save_bookmarks(NULL, NULL);
 		g_free(data);
 	}
 	g_free(info->text1);	// we used g_strdup() 
@@ -684,6 +684,7 @@ static void on_remove_folder_activate(GtkMenuItem * menuitem,
 	save_iter_to_xml_removed(&selected);
 	gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
 	bookmarks_changed = TRUE;
+	save_bookmarks(NULL, NULL);
 	g_free(caption);
 }
 
@@ -715,6 +716,7 @@ static void restore_ok(GtkButton * button, GtkWidget * filesel)
 	gui_load_removed(file);
 	
 	bookmarks_changed = TRUE;
+	save_bookmarks(NULL, NULL);
 	gtk_widget_destroy(filesel);
 }
 
@@ -846,7 +848,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if (test == GS_YES) {
 		gtk_tree_store_remove(GTK_TREE_STORE(model), &selected);
 		bookmarks_changed = TRUE;
-		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+		save_bookmarks(NULL, NULL);
 	}
 	g_free(yes_no_dialog);
 	g_free(caption);
@@ -871,7 +873,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
+void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 {
 	
 	GtkTreeIter root;
@@ -886,7 +888,6 @@ static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 
 	sprintf(buf, "%s/bookmarks/%s", settings.gSwordDir,"bookmarks.xml");
 	save_treeview_to_xml_bookmarks(&first_child, g_strdup(buf));
-	
 }
 
 /******************************************************************************
@@ -908,7 +909,6 @@ static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 void gui_save_bookmarks_treeview(void)
 {
 	save_bookmarks(NULL, NULL);
-	
 }
 
 
@@ -1018,7 +1018,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 			data->closed = NULL;			
 			add_item_to_tree(&iter,&selected, data);			
 			bookmarks_changed = TRUE;
-			gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+			save_bookmarks(NULL, NULL);
 		}
 		g_free(info->text1);	/* we used g_strdup() */
 		g_free(info->text2);
@@ -1102,7 +1102,7 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 			data->closed = pixbufs->pixbuf_closed;			
 			add_item_to_tree(&iter,&selected, data);
 			bookmarks_changed = TRUE;
-			gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+			save_bookmarks(NULL, NULL);
 		}
 		if(data->caption) g_free(data->caption);
 		g_free(data);
@@ -1192,12 +1192,6 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
-	 GNOME_APP_UI_ITEM, N_("Save Bookmarks"),
-	 N_("Save all bookmark files"),
-	 (gpointer) save_bookmarks, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
-	 0, (GdkModifierType) 0, NULL},
-	{
 	 GNOME_APP_UI_ITEM, N_("Expand All"),
 	 N_("Expand all Bookmarks groups"),
 	 (gpointer) on_expand_activate, NULL, NULL,
@@ -1266,15 +1260,13 @@ void gui_create_bookmark_menu(void)
 	menu.edit = pmBookmarkTree_uiinfo[4].widget;
 	menu.point = pmBookmarkTree_uiinfo[5].widget;
 	menu.delete = pmBookmarkTree_uiinfo[6].widget;
+	
+	
+	
+	menu.reorder = pmBookmarkTree_uiinfo[11].widget;
 
-	menu.save = pmBookmarkTree_uiinfo[8].widget;
-	
-	
-	
-	menu.reorder = pmBookmarkTree_uiinfo[12].widget;
-
-	menu.bibletime = pmBookmarkTree_uiinfo[14].widget;
-	menu.rr_submenu = pmBookmarkTree_uiinfo[15].widget;
+	menu.bibletime = pmBookmarkTree_uiinfo[13].widget;
+	menu.rr_submenu = pmBookmarkTree_uiinfo[14].widget;
 
 	menu.remove = rr_menu_uiinfo[0].widget;
 	menu.restore = rr_menu_uiinfo[2].widget;
@@ -1286,7 +1278,6 @@ void gui_create_bookmark_menu(void)
 	gtk_widget_set_sensitive(menu.edit, FALSE);
 	gtk_widget_set_sensitive(menu.point, FALSE);
 	gtk_widget_set_sensitive(menu.delete, FALSE);
-	gtk_widget_set_sensitive(menu.save, FALSE);
 	gtk_widget_set_sensitive(menu.bibletime,
 				 settings.have_bibletime);
 

@@ -87,7 +87,10 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 	necd->gbs = FALSE;
 	necd->personal_comments = FALSE;
 	necd->studypad = FALSE;
-	sprintf(necd->filename, "%s", settings.studypadfilename);
+	if(settings.studypadfilename)
+		sprintf(necd->filename, "%s", settings.studypadfilename);
+	else
+		strcpy(necd->filename, "nome");
 	return necd;
 }
 
