@@ -54,6 +54,8 @@ SIDEBAR sidebar;
 static GtkWidget *vl_html;
 static GtkWidget *menu1;
 static gchar *s_module_name;
+static gint button_mod_list;
+static gchar *buf_module;
 
 /******************************************************************************
  * Name
@@ -447,36 +449,66 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 	GtkTreeIter selected;
 	gchar *mod = NULL;
 	gint mod_type;
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+	GtkTreeModel *model;
+
+
+
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 
 	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		if (gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
+						  &selected))
+			return;
+
 		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0,
 				   &mod, -1);
+
 		if (mod) {
+			if (button_mod_list == 3) {
+				if (!g_utf8_collate(mod, _("Parallel Page"))) {
+					g_free(mod);
+					return;
+				}
+				buf_module = g_strdup(mod);
+				gtk_menu_popup(GTK_MENU
+					       (sidebar.menu_modules),
+					       NULL, NULL, NULL, NULL,
+					       0,
+					       gtk_get_current_event_time
+					       ());
+				return;
+			}
+			if (!g_utf8_collate(mod, _("Parallel Page"))) {
+				gtk_notebook_set_page(GTK_NOTEBOOK
+						      (widgets.
+						       notebook_text),
+						      settings.
+						      parallel_page);
+				//g_warning("Parallel Page");
+			}
 			sbtype = get_mod_type(mod);
-			switch(sbtype) {
-				case 0:
-				case 1:
-					gui_change_module_and_key(mod,
+			switch (sbtype) {
+			case 0:
+			case 1:
+				gui_change_module_and_key(mod,
 							  settings.
 							  currentverse);
-					break;
-				case 2:
-					gtk_notebook_set_page
-					    (GTK_NOTEBOOK
-					     (widgets.workbook_lower), 0);
-					gui_change_module_and_key(mod,
+				break;
+			case 2:
+				gtk_notebook_set_page
+				    (GTK_NOTEBOOK
+				     (widgets.workbook_lower), 0);
+				gui_change_module_and_key(mod,
 							  settings.
 							  dictkey);
-					break;
-				case 3:
-					gtk_notebook_set_page
-					    (GTK_NOTEBOOK
-					     (widgets.workbook_lower), 1);
-					gui_change_module_and_key(mod, NULL);
-					break;
-			//g_warning("mod = %s\nkey = %s",mod,settings.dictkey);
+				break;
+			case 3:
+				gtk_notebook_set_page
+				    (GTK_NOTEBOOK
+				     (widgets.workbook_lower), 1);
+				gui_change_module_and_key(mod, NULL);
+				break;
+				//g_warning("mod = %s\nkey = %s",mod,settings.dictkey);
 			}
 			g_free(mod);
 		}
@@ -680,6 +712,118 @@ static void create_viewer_page(GtkWidget * notebook)
 
 /******************************************************************************
  * Name
+ *   on_modules_list_button_release_event
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gboolean on_modules_list_button_release_event(GtkWidget *widget,
+ *                          GdkEventButton  *event, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_modules_list_button_release_event(GtkWidget * widget,
+						     GdkEventButton *
+						     event,
+						     gpointer user_data)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	gchar *key = NULL;
+	gchar *text = NULL;
+
+/*
+	selection =
+	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.results_list);
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return FALSE;
+
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key, -1);
+	if (!key)
+		return FALSE;
+
+
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		gui_change_module_and_key(settings.sb_search_mod, key);
+		break;
+	case 3:
+
+		break;
+	default:
+		break;
+	}
+
+	text = get_search_results_text(settings.sb_search_mod, key);
+	if (text) {
+		settings.displaySearchResults = TRUE;
+		entry_display(sidebar.html_widget,
+			      settings.sb_search_mod, text, key, TRUE);
+		settings.displaySearchResults = FALSE;
+		free(text);
+	}
+	free(key);*/
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   on_modules_list_button_press_event
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gboolean on_modules_list_button_press_event(GtkWidget *widget,
+ *                           GdkEventButton  *event, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_modules_list_button_press_event(GtkWidget * widget,
+						   GdkEventButton *
+						   event,
+						   gpointer user_data)
+{
+	button_mod_list = 1;
+
+	switch (event->button) {
+	case 1:
+		button_mod_list = 1;
+		break;
+	case 2:
+		button_mod_list = 2;
+		break;
+	case 3:
+		button_mod_list = 3;	/*
+					   gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
+					   NULL, NULL, NULL, NULL,
+					   event->button, event->time); */
+		//return TRUE;
+		break;
+	default:
+		break;
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
  *   on_treeview_button_release_event
  *
  * Synopsis
@@ -695,45 +839,51 @@ static void create_viewer_page(GtkWidget * notebook)
  *   gboolean
  */
 
-static gboolean on_treeview_button_release_event(GtkWidget *widget,
-                           GdkEventButton  *event, gpointer user_data)
-{	
-	GtkTreeSelection* selection;
+static gboolean on_treeview_button_release_event(GtkWidget * widget,
+						 GdkEventButton * event,
+						 gpointer user_data)
+{
+	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	GtkTreeIter selected;
 	gchar *key = NULL;
 	gchar *text = NULL;
-	
-	
-	selection = gtk_tree_view_get_selection((GtkTreeView*)sidebar.results_list);	
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
-	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+
+
+	selection =
+	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.
+					results_list);
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (sidebar.results_list));
+	if (!gtk_tree_selection_get_selected
+	    (selection, NULL, &selected))
 		return FALSE;
-	
-	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0,&key, -1);
+
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key,
+			   -1);
 	if (!key)
 		return FALSE;
-	
-	
+
+
 	switch (event->button) {
-	case 1:		
+	case 1:
 		break;
-	case 2:		
+	case 2:
 		gui_change_module_and_key(settings.sb_search_mod, key);
 		break;
 	case 3:
-		
+
 		break;
 	default:
 		break;
 	}
-	
-	text = get_search_results_text(settings.sb_search_mod, key);	
-	if (text) {		
+
+	text = get_search_results_text(settings.sb_search_mod, key);
+	if (text) {
 		settings.displaySearchResults = TRUE;
 		entry_display(sidebar.html_widget,
-				settings.sb_search_mod,
-				text, key, TRUE);
+			      settings.sb_search_mod, text, key, TRUE);
 		settings.displaySearchResults = FALSE;
 		free(text);
 	}
@@ -759,16 +909,17 @@ static gboolean on_treeview_button_release_event(GtkWidget *widget,
  *   gboolean
  */
 
-static gboolean on_treeview_button_press_event(GtkWidget *widget,
-                           GdkEventButton  *event, gpointer user_data)
-{	
-	
-	
+static gboolean on_treeview_button_press_event(GtkWidget * widget,
+					       GdkEventButton * event,
+					       gpointer user_data)
+{
+
+
 	switch (event->button) {
-	case 1:		
+	case 1:
 		break;
-	case 2:		
-		
+	case 2:
+
 		break;
 	case 3:
 		return TRUE;
@@ -797,22 +948,53 @@ static gboolean on_treeview_button_press_event(GtkWidget *widget,
  *   void
  */
 
-void on_save_list_as_bookmarks_activate (GtkMenuItem *menuitem,
-                                        gpointer user_data)
+void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
+					gpointer user_data)
 {
 	gui_verselist_to_bookmarks(settings.sb_search_mod);
 }
 
-static GnomeUIInfo results_menu_uiinfo[] =
+
+void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-  {
-    GNOME_APP_UI_ITEM, N_("Save List"),
-    N_("Save the search results as bookmarks"),
-    (gpointer) on_save_list_as_bookmarks_activate, NULL, NULL,
-    GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
-    0, (GdkModifierType) 0, NULL
-  },
-  GNOMEUIINFO_END
+	gint module_type;
+	
+	module_type = get_mod_type(buf_module);
+	switch (module_type) {
+		case -1:
+			break;
+		case TEXT_TYPE:
+			gui_open_bibletext_dialog(buf_module);
+			break;
+		case COMMENTARY_TYPE:
+			gui_open_commentary_dialog(buf_module);
+			break;
+		case DICTIONARY_TYPE:
+			gui_open_dictlex_dialog(buf_module);			
+			break;
+		case BOOK_TYPE:
+			gui_open_gbs_dialog(buf_module);
+			break;
+	}
+	g_free(buf_module);
+}
+
+
+void on_about2_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_display_about_module_dialog(buf_module, FALSE);
+	g_free(buf_module);
+}
+
+
+static GnomeUIInfo results_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Save List"),
+	 N_("Save the search results as bookmarks"),
+	 (gpointer) on_save_list_as_bookmarks_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
 };
 
 
@@ -832,18 +1014,59 @@ static GnomeUIInfo results_menu_uiinfo[] =
  *   GtkWidget*
  */
 
-GtkWidget* create_results_menu (void)
+GtkWidget *create_results_menu(void)
 {
-  GtkWidget *menu1;
+	GtkWidget *menu1;
 
-  menu1 = gtk_menu_new ();
-  gnome_app_fill_menu (GTK_MENU_SHELL (menu1), results_menu_uiinfo,
-                       NULL, FALSE, 0);
+	menu1 = gtk_menu_new();
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), results_menu_uiinfo,
+			    NULL, FALSE, 0);
 	sidebar.menu_item_save_search = results_menu_uiinfo[0].widget;
-	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
-  return menu1;
+	gtk_widget_set_sensitive(sidebar.menu_item_save_search, FALSE);
+	return menu1;
 }
 
+static GnomeUIInfo menu_modules_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Open in dialog"),
+	 N_("Open selected module in a dialog"),
+	 (gpointer) on_open_in_dialog_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/dlg-un.png",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("About"),
+	 N_("View information about the selected dialog"),
+	 (gpointer) on_about2_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+/******************************************************************************
+ * Name
+ *   create_menu_modules
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *    GtkWidget* create_menu_modules (void)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   GtkWidget*
+ */
+
+GtkWidget *create_menu_modules(void)
+{
+	GtkWidget *menu_modules;
+
+	menu_modules = gtk_menu_new();
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu_modules),
+			    menu_modules_uiinfo, NULL, FALSE, 0);
+	return menu_modules;
+}
 
 /******************************************************************************
  * Name
@@ -874,7 +1097,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	GtkListStore *model;
 	GObject *selection;
 	GtkWidget *menu = create_results_menu();
-	
+
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(notebook), vbox);
@@ -921,25 +1144,29 @@ static void create_search_results_page(GtkWidget * notebook)
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
 	sidebar.results_list =
-			gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(sidebar.results_list);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.results_list);
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(sidebar.results_list), TRUE);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow3),
+			  sidebar.results_list);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW
+				     (sidebar.results_list), TRUE);
 
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(sidebar.results_list),
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
+					  (sidebar.results_list),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(sidebar.results_list));
 
 	selection = G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(sidebar.results_list)));
+			     (GTK_TREE_VIEW(sidebar.results_list)));
 
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
 	gtk_paned_pack2(GTK_PANED(vpaned_srch_rslt), frame4, TRUE,
 			TRUE);
-			
+
 	gnome_popup_menu_attach(menu, sidebar.results_list, NULL);
-	gnome_app_install_menu_hints(GNOME_APP(widgets.app), results_menu_uiinfo);
+	gnome_app_install_menu_hints(GNOME_APP(widgets.app),
+				     results_menu_uiinfo);
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow4);
 	gtk_container_add(GTK_CONTAINER(frame4), scrolledwindow4);
@@ -954,14 +1181,16 @@ static void create_search_results_page(GtkWidget * notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow4),
 			  sidebar.html_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
-	
 
-	g_signal_connect((gpointer)sidebar.results_list, "button_release_event",
-                    G_CALLBACK (on_treeview_button_release_event),
-                    NULL);
-	g_signal_connect((gpointer)sidebar.results_list, "button_press_event",
-                    G_CALLBACK (on_treeview_button_press_event),
-                    NULL);
+
+	g_signal_connect((gpointer) sidebar.results_list,
+			 "button_release_event",
+			 G_CALLBACK(on_treeview_button_release_event),
+			 NULL);
+	g_signal_connect((gpointer) sidebar.results_list,
+			 "button_press_event",
+			 G_CALLBACK(on_treeview_button_press_event),
+			 NULL);
 }
 
 
@@ -1109,7 +1338,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *vbox1;
 	GtkWidget *toolbar2;
 	GtkWidget *scrolledwindow4;
-	GtkWidget *treeview1;
 	GtkWidget *label2;
 	GtkWidget *scrolledwindow_bm;
 	GtkWidget *scrolledwindow5;
@@ -1130,7 +1358,8 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	sidebar.optionmenu1 = gtk_option_menu_new();
 	gtk_widget_show(sidebar.optionmenu1);
-	gtk_box_pack_start(GTK_BOX(vbox1), sidebar.optionmenu1, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox1), sidebar.optionmenu1, FALSE,
+			   TRUE, 0);
 
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
@@ -1158,11 +1387,12 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
-	treeview1 = gtk_tree_view_new();
-	gtk_widget_show(treeview1);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow4), treeview1);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview1),
-					  FALSE);
+	sidebar.module_list = gtk_tree_view_new();
+	gtk_widget_show(sidebar.module_list);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow4),
+			  sidebar.module_list);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
+					  (sidebar.module_list), FALSE);
 
 
 	scrolledwindow_bm = gtk_scrolled_window_new(NULL, NULL);
@@ -1191,14 +1421,27 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
 			  vbox_viewer);
 
-	gui_load_module_tree(treeview1);
+	gui_load_module_tree(sidebar.module_list, TRUE);
 	mod_selection =
-	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview1)));
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(sidebar.module_list)));
+
+/*
+	g_signal_connect((gpointer) sidebar.module_list,
+			 "button_release_event",
+			 G_CALLBACK(on_modules_list_button_release_event),
+			 NULL);*/
+	g_signal_connect((gpointer) sidebar.module_list,
+			 "button_press_event",
+			 G_CALLBACK(on_modules_list_button_press_event),
+			 NULL);
 
 	g_signal_connect(mod_selection, "changed",
-			 G_CALLBACK(mod_selection_changed), treeview1);
-//	gui_load_bookmark_tree();
+			 G_CALLBACK(mod_selection_changed),
+			 sidebar.module_list);
 
+//      gui_load_bookmark_tree();
+	sidebar.menu_modules = create_menu_modules();
 
 	return vbox1;
 

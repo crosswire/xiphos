@@ -580,7 +580,7 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 open_studypad, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SEPARATOR,/*
 	{
 	 GNOME_APP_UI_SUBTREE, N_("Open Bibletext Dialog"),
 	 NULL,
@@ -605,7 +605,7 @@ static GnomeUIInfo file1_menu_uiinfo[] = {
 	 open_book_dialog1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BOOK_YELLOW,
 	 0, (GdkModifierType) 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SEPARATOR,*/
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit_activate, NULL),
 	GNOMEUIINFO_END
 };
@@ -758,14 +758,14 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 on_help_contents_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_HELP,
 	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SEPARATOR,/*
 	{
 	 GNOME_APP_UI_SUBTREE, N_("About Sword Modules"),
 	 N_("Information about the installed modules"),
 	 about_sword_modules1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_SEPARATOR,*/
 	{
 	 GNOME_APP_UI_ITEM, N_("About the Sword Project..."),
 	 N_("Infotmation About The Sword Project"),
@@ -835,7 +835,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 void gui_create_main_menu(GtkWidget * app)
 {
 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
-
+/*
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
 			      _("_File/Open Bibletext Dialog/"),
 			      (GtkMenuCallback)
@@ -854,6 +854,7 @@ void gui_create_main_menu(GtkWidget * app)
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_File/Open Book Dialog/"),
 			      (GtkMenuCallback) on_book_item_activate);
+	*/
 	widgets.viewtexts_item = view1_menu_uiinfo[4].widget;
 	widgets.viewcomms_item = view1_menu_uiinfo[5].widget;
 	widgets.viewdicts_item = view1_menu_uiinfo[6].widget;
@@ -865,7 +866,7 @@ void gui_create_main_menu(GtkWidget * app)
 	/*gtk_menu_item_right_justify(GTK_MENU_ITEM
 				    (menubar1_uiinfo[4].widget));*/
 	//gtk_widget_set_sensitive(help1_menu_uiinfo[0].widget, FALSE);
-
+/*
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
 			      _
 			      ("_Help/About Sword Modules/Bible Texts/"),
@@ -884,7 +885,7 @@ void gui_create_main_menu(GtkWidget * app)
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_Help/About Sword Modules/Books/"),
 			      (GtkMenuCallback) gui_about_activate);
-
+*/
 	gtk_signal_connect(GTK_OBJECT(widgets.versestyle_item),
 			   "toggled",
 			   G_CALLBACK(on_verse_style1_activate),

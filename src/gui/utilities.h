@@ -27,7 +27,7 @@ extern "C" {
 #include "main/configs.h"
 
 
-void gui_load_module_tree(GtkWidget * tree);
+void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar);
 MOD_FONT *get_font(gchar * mod_name);
 void free_font(MOD_FONT *mf);
 gchar * remove_linefeeds(gchar * buf);	

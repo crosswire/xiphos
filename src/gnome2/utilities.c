@@ -157,7 +157,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
  *   void
  */
 
-void gui_load_module_tree(GtkWidget * tree)
+void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 {
 	gint i;
 	static gboolean need_column = TRUE;
@@ -175,6 +175,12 @@ void gui_load_module_tree(GtkWidget * tree)
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, "Biblical Texts", -1);
 
+	if(is_sidebar) {
+		
+		gtk_tree_store_append(store, &child_iter, &iter);
+		gtk_tree_store_set(store, &child_iter, 0,
+				   _("Parallel Page"), -1);
+	}
 	/*  add language folders Biblical Texts folder */
 	tmp = get_list(TEXT_LIST);
 	while (tmp != NULL) {
@@ -257,7 +263,8 @@ void gui_load_module_tree(GtkWidget * tree)
 					      (gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
-
+	
+	
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
 				GTK_TREE_MODEL(store));
 	if (need_column) {
