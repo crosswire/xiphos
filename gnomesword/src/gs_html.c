@@ -75,7 +75,10 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 			++url;
 			//str = showfirstlineStrongsSWORD(atoi(url));
 			sprintf(buf,"Go to Strongs %s",url);
-			
+		}else if (*url == 'M') {
+			++url;
+			//str = showfirstlineStrongsSWORD(atoi(url));
+			sprintf(buf,"Morph Tag: %s",url);	
 		} else if(*url == '[') {
 			++url;
 			while(*url != ']') {
@@ -142,7 +145,28 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(newref);
 		changeVerseSWORD(buf);
 		g_free(buf);
-	}
+	}else if (*url == '#') {
+		++url;		/* remove # */
+		if(*url == 'T') ++url;
+		if(*url == 'G'){
+			++url; 
+			buf = g_strdup(url);
+			changcurdictModSWORD("StrongsGreek", buf, 1);  
+			g_free(buf);
+		}
+		if(*url == 'H'){
+			++url;  		
+			buf = g_strdup(url);
+			changcurdictModSWORD("StrongsHebrew", buf, 1);  
+			g_free(buf);
+		}		  		
+	} else if (*url == 'M') {
+		++url;		/* remove M */
+		buf = g_strdup(url);
+		changcurdictModSWORD("Packard", buf, 1);  
+		g_free(buf);
+	} 
+	
 }
 
 /***************************************************************************************************
@@ -157,8 +181,23 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	if (*url == '#') {
 		++url;		/* remove # */
 		if(*url == 'T') ++url;
-		if(*url == 'G' || *url == 'H') ++url;  		/* remove G and H until we decide what to do with them */
-		lookupStrongsSWORD(atoi(url));  		
+		if(*url == 'G'){
+			++url; 
+			buf = g_strdup(url);
+			changcurdictModSWORD("StrongsGreek", buf, 1);  
+			g_free(buf);
+		}
+		if(*url == 'H'){
+			++url;  		
+			buf = g_strdup(url);
+			changcurdictModSWORD("StrongsHebrew", buf, 1);  
+			g_free(buf);
+		}		  		
+	} else if (*url == 'M') {
+		++url;		/* remove M */
+		buf = g_strdup(url);
+		changcurdictModSWORD("Packard", buf, 1);  
+		g_free(buf);
 	} else  if(*url == '*')   {
 		++url;
 		while(*url != ']') {			
@@ -183,6 +222,25 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	}
 }
 
+/******************************************************************************
+ * 
+ ******************************************************************************/
+static gint
+html_button_pressed(GtkWidget * html, GdkEventButton * event,
+		    gpointer *data)
+{
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		//gtk_html_select_word(GTK_HTML(html));
+		break;
+	}
+	return 0;
+	
+}
 /***************************************************************************************************
  *copy menu item clicked in any html window
  *user_data - window (GtkHTML widget) to copy from
@@ -196,6 +254,7 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	widget = lookup_widget(MainFrm, (gchar *) user_data);
 
 	html = GTK_HTML(widget);
+	gtk_html_copy(html);
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
@@ -213,9 +272,11 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	GtkWidget *widget;
 	gchar *buf;
 	GtkHTML *html;
-
+	
 	widget = lookup_widget(MainFrm, (gchar *) user_data);
+	
 	html = GTK_HTML(widget);
+	gtk_html_select_word(GTK_HTML(html));
 	buf = NULL;
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
@@ -303,7 +364,9 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
 	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
+	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
 
 	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);

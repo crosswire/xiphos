@@ -224,7 +224,6 @@ GtkWidget *create_aboutmodules(void)
 	GtkWidget *pixmap3;
 	GtkWidget *label97;
 	GtkWidget *pixmap4;
-	GtkWidget *lbModName;
 	GtkWidget *scrolledwindow30;
 	GtkWidget *textModAbout;
 	GtkWidget *dialog_action_area8;
@@ -284,15 +283,6 @@ GtkWidget *create_aboutmodules(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pixmap4);
 	gtk_box_pack_start(GTK_BOX(hbox21), pixmap4, TRUE, TRUE, 0);
-
-	lbModName = gtk_label_new("KJV");
-	gtk_widget_ref(lbModName);
-	gtk_object_set_data_full(GTK_OBJECT(aboutmodules), "lbModName",
-				 lbModName,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(lbModName);
-	gtk_box_pack_start(GTK_BOX(vbox25), lbModName, FALSE, FALSE, 0);
-	gtk_widget_set_usize(lbModName, -2, 21);
 
 	scrolledwindow30 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow30);
