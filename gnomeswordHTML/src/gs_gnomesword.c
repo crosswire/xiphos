@@ -32,7 +32,7 @@
 
 
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "callback.h"
 #include "support.h"
 #include "interface.h"
@@ -56,7 +56,8 @@ GtkWidget	*versestyle,	/* widget to access toggle menu - for versestyle */
 	    	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
 	    	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
 		*studypad,  /* studypad text widget */
-		*notes;    /* notes text widget */
+		*notes,   /* notes text widget */
+		*morphs;
 
 
 GString *gs_clipboard; /* for copying from the html widgets freed in shutdownSWORD in gs_sword.cpp*/
@@ -143,6 +144,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_verse_style1_activate);
 	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes",
 				(GtkMenuCallback)on_footnotes1_activate);
+	morphs   = additemtooptionmenu(app, "_Settings/", "Show Morphological Tags",
+				(GtkMenuCallback)on_morphs_activate);			
  	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers",
  				(GtkMenuCallback)on_strongs_numbers1_activate); 		
 /* set dictionary key */

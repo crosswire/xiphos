@@ -20,7 +20,7 @@
 #include <gnome.h>
 
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "gs_history.h"
 #include "callback.h"
 #include "gs_menu.h"

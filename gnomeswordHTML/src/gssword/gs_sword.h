@@ -30,7 +30,7 @@ extern "C" {
 
 
 #include <gnome.h>
-#include "gs_viewtext_dlg.h"
+#include "gsdialogs/gs_viewtext_dlg.h"
 	
 void initSWORD(GtkWidget *mainform);
 void shutdownSWORD(void);
@@ -41,6 +41,7 @@ void resultsListSWORD(GtkWidget * searchFrm,
 		gint row, 
 		gint column);
 void strongsSWORD(gboolean choice);
+void morphsSWORD(gboolean choice) ;
 void footnotesSWORD(gboolean choice);
 void changecurModSWORD(gchar *modName, gboolean showchange);
 void navcurcomModSWORD(gint direction);

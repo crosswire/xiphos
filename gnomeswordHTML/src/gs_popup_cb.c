@@ -28,7 +28,7 @@
 
 #include "gs_popup_cb.h"
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "gs_html.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_viewcomm_dlg.h"

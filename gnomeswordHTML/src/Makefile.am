@@ -1,3 +1,7 @@
+
+SUBDIRS = gsdialogs \
+          gssword
+
 INCLUDES =  \
     $(GNOME_INCLUDEDIR) \
     $(EXTRA_GNOME_CFLAGS) \
@@ -6,24 +10,16 @@ INCLUDES =  \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
     -I$(top_srcdir)/html \
-    -I /usr/include/gtkhtml 
+    -I$(top_srcdir)/src/gsdialogs \
+    -I$(top_srcdir)/src/gssword \
+    -I /usr/include/gtkhtml
     
     
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE =  \
-    gs_abouts.c \
-    gs_abouts.h \
     gs_ui.c \
     gs_ui.h \
-    gs_viewtext_sw.cpp \
-    gs_viewtext_sw.h \
-    gs_viewtext_dlg.c \
-    gs_viewtext_dlg.h \
-    gs_viewcomm_dlg.c \
-    gs_viewcomm_dlg.h \
-    gs_viewdict_dlg.c \
-    gs_viewdict_dlg.h \
     gs_studypad.c \
     gs_studypad.h \
     gs_gnomesword.c \
@@ -32,18 +28,10 @@ COMMON_SOURCE =  \
     gs_history.h \
     callback.c \
     callback.h \
-    display.cpp \
-    display.h \
-    gs_display.cpp \
-    gs_display.h \
     gs_file.c \
     gs_file.h \
-    gs_sword.cpp \
-    gs_sword.h \
     interface.c \
     interface.h \
-    gs_listeditor.c \
-    gs_listeditor.h \
     main.c \
     gs_menu.c \
     gs_menu.h \
@@ -57,14 +45,8 @@ COMMON_SOURCE =  \
     support.h \
     gs_html.c \
     gs_html.h \
-    sw_utility.cpp\
-    sw_utility.h \
     printstuff.c \
-    printstuff.h \
-    gs_gbfhtml.cpp \
-    gs_gbfhtml.h \
-   gs_wgsil.cpp \
-   gs_wgsil.h
+    printstuff.h 
 
 SPELLING_SOURCE =  \
     debug.h \
@@ -86,7 +68,9 @@ gnomesword_LDADD = \
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS)\
     $(GNOME_APP_LIBS)\
-    $(top_builddir)/html/libhtmleditor.a 
+    $(top_builddir)/html/libhtmleditor.a \
+    $(top_builddir)/src/gsdialogs/libgsdialogs.a \
+    $(top_builddir)/src/gssword/libgssword.a
     
 if SPELLING
 gnomesword_SOURCES = \
