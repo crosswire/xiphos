@@ -32,8 +32,14 @@
 
 #include "main/sword.h"
 #include "main/lists.h"
+#include "main/navbar.h"
 #include "main/parallel_view.h"
 #include "main/settings.h"
+#include "main/xml.h"
+
+
+
+extern gboolean do_display;
 
 GtkWidget *entrycbIntBook;
 GtkWidget *sbIntChapter;
@@ -46,7 +52,8 @@ GtkWidget *entryIntLookup;
 static GtkWidget *parallel_UnDock_Dialog;
 static GtkWidget *vboxInt;
 static gboolean ApplyChangeBook;
-
+static GtkWidget *sync_button;
+static NAVBAR navbar;
 
 
 /******************************************************************************
@@ -75,8 +82,8 @@ void gui_undock_parallel_page(void)
 	gtk_widget_reparent(widgets.frame_parallel, vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 				 1);
-	settings.cvparallel =
-	    main_parallel_update_controls(settings.currentverse);
+	//settings.cvparallel =
+	//    main_parallel_update_controls(settings.currentverse);
 	gtk_widget_show(parallel_UnDock_Dialog);
 	main_update_parallel_page_detached();
 	g_free(settings.cvparallel);
@@ -148,207 +155,402 @@ static void on_dlgparallel_destroy(GtkObject * object,
 	main_update_parallel_page();
 }
 
+
 /******************************************************************************
  * Name
- *   on_buttonIntSync_clicked
+ *   sync_with_main
  *
  * Synopsis
- *   #include "parallel_dialog.h"
- *   
- *   void on_buttonIntSync_clicked(GtkButton * button, gpointer user_data)
+ *   #include "gui/parallel_dialog.h"
+ *
+ *   void sync_with_main(DIALOG_DATA * c)	
+ *
+ * Descriptionc->navbar.lookup_entry
+ *   bring the the View Commentay Dialog module into sync with main window
+ *
+ * Return value
+ *   void
+ */
+
+static void sync_with_main(void)
+{
+	gchar *url =
+	    g_strdup_printf("gnomesword.url?action=showParallel&"
+				"type=verse&value=%s",
+				main_url_encode(xml_get_value("keys", "verse")));
+	main_url_handler(url, TRUE);
+	//main_navbar_set(navbar, xml_get_value("keys", "verse"));
+	g_free(url);
+}
+/******************************************************************************
+ * Name
+ *   gui_keep_parallel_dialog_in_sync
+ *
+ * Synopsis
+ *   #include "gui/parallel_dialog.h"
+ *
+ *   void gui_keep_parallel_dialog_in_sync(const char * key)
+ *
+ * 
+ *
+ * Return value
+ *   void
+ */
+
+void gui_keep_parallel_dialog_in_sync(void)
+{
+	if(GTK_TOGGLE_BUTTON(sync_button)->active)
+		sync_with_main();
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_set_parallel_navbar
+ *
+ * Synopsis
+ *   #include "gui/parallel_dialog.h"
+ *
+ *   void gui_set_parallel_navbar(const char key)	
+ *
+ * 
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_parallel_navbar(const char * key)
+{
+	main_navbar_set(navbar, key);
+}
+
+
+
+
+/******************************************************************************
+ * Name
+ *   sync_toggled
+ *
+ * Synopsis
+ *   #include "gui/parallel_dialog.h"
+ *
+ *   void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)	
  *
  * Description
- *   
- *
- *
  *   
  *
  * Return value
  *   void
  */
 
-static void on_buttonIntSync_clicked(GtkButton * button,
-				     gpointer user_data)
+static void sync_toggled(GtkToggleButton * button, gpointer data)
 {
-	ApplyChangeBook = FALSE;
-	settings.cvparallel =
-	    main_parallel_update_controls(settings.currentverse);
-	main_update_parallel_page_detached();
-	g_free(settings.cvparallel);
-	ApplyChangeBook = TRUE;
+	if (button->active)
+		sync_with_main();
 }
 
 /******************************************************************************
  * Name
- *   on_entrycbIntBook_changed
+ *   on_entry_activate
  *
  * Synopsis
  *   #include "parallel_dialog.h"
- *   
- *   void on_entrycbIntBook_changed(GtkEditable *editable, gpointer user_data)
+ *
+ *   void on_entry_activate(GtkEntry * entry, DIALOG_DATA * c)	
  *
  * Description
- *   
- *
- *
- *   
+ *   go to verse in free form entry if user hit <enter>
  *
  * Return value
  *   void
  */
 
-static void on_entrycbIntBook_changed(GtkEditable * editable,
-				      gpointer user_data)
+static void on_entry_activate(GtkEntry * entry, gpointer data)
 {
-	if (ApplyChangeBook) {
-		const gchar *bookname;
-		char buf[256];
-		bookname = gtk_entry_get_text(GTK_ENTRY(editable));
-		sprintf(buf, "%s %d:%d", bookname, 1, 1);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
-					  1);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse),
-					  1);
-		gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
-		settings.cvparallel = buf;
-		main_update_parallel_page_detached();
-	}
+	
+	const gchar *buf = gtk_entry_get_text(entry);
+	if (navbar.key)
+		g_free(navbar.key);
+	navbar.key = g_strdup(buf);
+	gchar *url =
+	    g_strdup_printf("gnomesword.url?action=showParallel&"
+				"type=verse&value=%s",
+				main_url_encode(buf));
+	main_url_handler(url, TRUE);
+	g_free(url);
+	//main_navbar_set(navbar, navbar.key);
+}
+
+static void on_comboboxentry4_changed(GtkComboBox * combobox, gpointer data)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+
+	if (!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry4_changed");
+#endif
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &book, -1);
+
+	//url = g_strdup_printf("sword:///%s 1:1", book);
+	buf = g_strdup_printf("%s 1:1", book);
+	url = g_strdup_printf("gnomesword.url?action=showParallel&"
+				"type=verse&value=%s",
+				main_url_encode(buf));
+	main_url_handler(url, TRUE);
+	//main_navbar_set(navbar, buf);
+	g_free(url);
+	g_free(book);
+	g_free(buf);
+}
+
+
+static void on_comboboxentry5_changed(GtkComboBox * combobox, gpointer data)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (navbar.comboboxentry_book));
+
+
+	if (!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry5_changed");
+#endif
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (navbar.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter,
+			   0, &chapter, -1);
+
+	buf = g_strdup_printf("%s %s:1", book, chapter);
+	url = g_strdup_printf("gnomesword.url?action=showParallel&"
+				"type=verse&value=%s",
+				main_url_encode(buf));
+	main_url_handler(url, TRUE);
+	//main_dialogs_url_handler(c, url, TRUE);
+	//main_navbar_set(navbar, buf);
+
+	g_free(url);
+	g_free(book);
+	g_free(chapter);
+	g_free(buf);
+}
+
+
+static void on_comboboxentry6_changed(GtkComboBox * combobox, gpointer data)
+{
+	gchar *url = NULL;
+	gchar *book = NULL;
+	gchar *chapter = NULL;
+	gchar *verse = NULL;
+	gchar *buf = NULL;
+	GtkTreeIter iter;
+
+	GtkTreeModel *model = gtk_combo_box_get_model(combobox);
+	GtkTreeModel *book_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (navbar.comboboxentry_book));
+	GtkTreeModel *chapter_model =
+	    gtk_combo_box_get_model(GTK_COMBO_BOX
+				    (navbar.comboboxentry_chapter));
+
+
+	if (!do_display)
+		return;
+#ifdef DEBUG
+	g_message("on_comboboxentry6_changed");
+#endif
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (navbar.comboboxentry_book),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(book_model), &iter, 0, &book,
+			   -1);
+
+	gtk_combo_box_get_active_iter(GTK_COMBO_BOX
+				      (navbar.comboboxentry_chapter),
+				      &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(chapter_model), &iter, 0,
+			   &chapter, -1);
+
+	gtk_combo_box_get_active_iter(combobox, &iter);
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &iter, 0, &verse, -1);
+
+	buf = g_strdup_printf("%s %s:%s", book, chapter, verse);
+	url = g_strdup_printf("gnomesword.url?action=showParallel&"
+				"type=verse&value=%s",
+				main_url_encode(buf));
+	main_url_handler(url, TRUE);
+	//main_dialogs_url_handler(c, url, TRUE);
+	//main_navbar_set(navbar, buf);
+
+	g_free(url);
+	g_free(book);
+	g_free(chapter);
+	g_free(verse);
+	g_free(buf);
 }
 
 /******************************************************************************
  * Name
- *   on_sbIntChapter_button_release_event
+ *   create_nav_toolbar
  *
  * Synopsis
- *   #include "parallel_dialog.h"
- *   
- *   gboolean on_sbIntChapter_button_release_event(GtkWidget *widget,
- *   			GdkEventButton *event, gpointer user_data)
+ *   #include ".h"
+ *
+ *   GtkWidget *create_nav_toolbar(void)	
  *
  * Description
- *   
- *
- *
- *   
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
-						     GdkEventButton *
-						     event,
-						     gpointer user_data)
-{
-	ApplyChangeBook = FALSE;
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
-	settings.cvparallel = main_parallel_change_verse();
-	main_update_parallel_page_detached();
-	ApplyChangeBook = TRUE;
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_sbIntVerse_button_release_event
- *
- * Synopsis
- *   #include "parallel_dialog.h"
- *   
- *   gboolean on_sbIntVerse_button_release_event(GtkWidget *widget,
- *			GdkEventButton *event, gpointer user_data)
- *
- * Description
- *
- *
- *   
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
-						   GdkEventButton *
-						   event,
-						   gpointer user_data)
-{
-	ApplyChangeBook = FALSE;
-	settings.cvparallel = main_parallel_change_verse();
-	main_update_parallel_page_detached();
-	ApplyChangeBook = TRUE;
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_entryIntLookup_key_press_event
- *
- * Synopsis
- *   #include "parallel_dialog.h"
- *   
- *   gboolean on_entryIntLookup_key_press_event(GtkWidget *widget,
- *                                      GdkEventKey *event, gpointer user_data)
- *
- * Description
- *
- *
- *   
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
-						  GdkEventKey * event,
-						  gpointer user_data)
-{
-	const gchar *buf;
-	ApplyChangeBook = FALSE;
-	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));
-	if (event->keyval == 65293 || event->keyval == 65421) {
-		settings.cvparallel =
-		    main_parallel_update_controls(buf); 
-		main_update_parallel_page_detached();
-		g_free(settings.cvparallel);
-		ApplyChangeBook = TRUE;
-	}
-	ApplyChangeBook = TRUE;
-	return FALSE;
-}
-
-/******************************************************************************
- * Name
- *   on_btnIntGotoVerse_clicked
- *
- * Synopsis
- *   #include "parallel_dialog.h"
- *   
- *   void on_btnIntGotoVerse_clicked(GtkButton *button, gpointer user_data)
- *
- * Description
- *   
- *
- *
- *   
+ *    create navigation toolbar and 
  *
  * Return value
  *   void
  */
 
-static void on_btnIntGotoVerse_clicked(GtkButton * button,
-				       gpointer user_data)
+static GtkWidget *create_nav_toolbar(void)
 {
-	const gchar *buf;		//-- pointer to entry string
-	//-- pointer to entry string
-	ApplyChangeBook = FALSE;
-	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
+	GtkWidget *hbox3;
+	GtkWidget *image;
+	GtkWidget *separatortoolitem;
+	GtkListStore *store;
+	GtkCellRenderer *renderer;
 
-	settings.cvparallel = main_parallel_update_controls(buf);
+	hbox3 = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox3);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox3), 3);
 
-	main_update_parallel_page_detached();	//-- change verse to entry text 
-	g_free(settings.cvparallel);
-	ApplyChangeBook = TRUE;
+	sync_button = gtk_toggle_button_new();
+	gtk_widget_show(sync_button);
+	gtk_box_pack_start(GTK_BOX(hbox3), sync_button, FALSE, FALSE,
+			   0);
+	gtk_button_set_relief(GTK_BUTTON(sync_button), GTK_RELIEF_NONE);
+
+	image =
+	    gtk_image_new_from_stock("gtk-refresh",
+				     GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image);
+	gtk_container_add(GTK_CONTAINER(sync_button), image);
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	navbar.comboboxentry_book =
+	    gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));
+	gtk_widget_show(navbar.comboboxentry_book);
+	gtk_box_pack_start(GTK_BOX(hbox3), navbar.comboboxentry_book,
+			   TRUE, TRUE, 0);
+	gtk_widget_set_size_request(navbar.comboboxentry_book, -1,
+				    6);
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (navbar.comboboxentry_book),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (navbar.comboboxentry_book),
+				       renderer, "text", 0, NULL);
+
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+
+	navbar.comboboxentry_chapter = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
+	gtk_widget_show(navbar.comboboxentry_chapter);
+	gtk_box_pack_start(GTK_BOX(hbox3),
+			   navbar.comboboxentry_chapter, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(navbar.comboboxentry_chapter, 61,
+				    -1);
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (navbar.comboboxentry_chapter),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (navbar.
+					comboboxentry_chapter),
+				       renderer, "text", 0, NULL);
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+	gtk_widget_set_size_request(separatortoolitem, 6, -1);
+	gtk_separator_tool_item_set_draw(GTK_SEPARATOR_TOOL_ITEM
+					 (separatortoolitem), FALSE);
+
+	store = gtk_list_store_new(1, G_TYPE_STRING);
+	navbar.comboboxentry_verse = gtk_combo_box_new_with_model(GTK_TREE_MODEL(store));	//gtk_combo_box_entry_new();
+	gtk_widget_show(navbar.comboboxentry_verse);
+	gtk_box_pack_start(GTK_BOX(hbox3),
+			   navbar.comboboxentry_verse, FALSE, TRUE,
+			   0);
+	gtk_widget_set_size_request(navbar.comboboxentry_verse, 61,
+				    -1);
+
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_cell_layout_pack_start(GTK_CELL_LAYOUT
+				   (navbar.comboboxentry_verse),
+				   renderer, TRUE);
+	gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT
+				       (navbar.comboboxentry_verse),
+				       renderer, "text", 0, NULL);
+
+
+	separatortoolitem = (GtkWidget *) gtk_separator_tool_item_new();
+	gtk_widget_show(separatortoolitem);
+	gtk_box_pack_start(GTK_BOX(hbox3), separatortoolitem, FALSE,
+			   TRUE, 0);
+
+	navbar.lookup_entry = gtk_entry_new();
+	gtk_widget_show(navbar.lookup_entry);
+	gtk_box_pack_start(GTK_BOX(hbox3), navbar.lookup_entry, TRUE,
+			   TRUE, 0);
+
+	g_signal_connect(GTK_OBJECT(sync_button),
+			 "toggled", G_CALLBACK(sync_toggled), NULL);
+	g_signal_connect((gpointer) navbar.comboboxentry_book,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry4_changed), NULL);
+	g_signal_connect((gpointer) navbar.comboboxentry_chapter,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry5_changed), NULL);
+	g_signal_connect((gpointer) navbar.comboboxentry_verse,
+			 "changed",
+			 G_CALLBACK(on_comboboxentry6_changed), NULL);
+	g_signal_connect((gpointer) navbar.lookup_entry, "activate",
+			 G_CALLBACK(on_entry_activate), NULL);
+	return hbox3;
 }
+
 
 /******************************************************************************
  * Name
@@ -405,78 +607,16 @@ GtkWidget *gui_create_parallel_dialog(void)
 	gtk_widget_show(vboxInt);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox25), vboxInt, TRUE, TRUE,
 			   0);
-
-	toolbar29 =
-	    gtk_toolbar_new();
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar29), GTK_TOOLBAR_ICONS);
+	toolbar29 =create_nav_toolbar();
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar29),
-				      GTK_RELIEF_NONE);*/
-
+			   
+		
+	navbar.key = g_strdup(settings.currentverse);
+	navbar.module_name = g_strdup(settings.parallel1Module);	   
+	main_navbar_fill_book_combo(navbar);
 	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_REFRESH, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar29)));
-	buttonIntSync =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Sync"), NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(buttonIntSync);
-
-	cbIntBook = gtk_combo_new();
-	gtk_widget_show(cbIntBook);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), cbIntBook,
-				  NULL, NULL);
-	gtk_widget_set_size_request(cbIntBook, 154, -1);
-
-	/*** get and load books of the Bible ***/
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbIntBook),
-				      get_list(BOOKS_LIST));
-
-	entrycbIntBook = GTK_COMBO(cbIntBook)->entry;
-	gtk_widget_show(entrycbIntBook);
-	gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), _("Romans"));
-
-	sbIntChapter_adj = gtk_adjustment_new(8, 0, 151, 1, 10, 10);
-	sbIntChapter =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(sbIntChapter_adj), 1, 0);
-	gtk_widget_show(sbIntChapter);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), sbIntChapter,
-				  NULL, NULL);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(sbIntChapter),
-				    TRUE);
-
-	sbIntVerse_adj = gtk_adjustment_new(28, 0, 180, 1, 10, 10);
-	sbIntVerse =
-	    gtk_spin_button_new(GTK_ADJUSTMENT(sbIntVerse_adj), 1, 0);
-	gtk_widget_show(sbIntVerse);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), sbIntVerse,
-				  NULL, NULL);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(sbIntVerse), TRUE);
-
-	entryIntLookup = gtk_entry_new();
-	gtk_widget_show(entryIntLookup);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29),
-				  entryIntLookup, NULL, NULL);
-	gtk_widget_set_size_request(entryIntLookup, 190, -1);
-	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), _("Romans 8:28"));
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			GTK_STOCK_JUMP_TO, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar29)));
-	btnIntGotoVerse =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Goto verse"),
-				       _
-				       ("Go to verse in free form lookup and add verse to history"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_show(btnIntGotoVerse);
-
 	dialog_action_area25 =
 	    GTK_DIALOG(dialog_parallel)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
@@ -501,28 +641,6 @@ GtkWidget *gui_create_parallel_dialog(void)
 
 	g_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
 			   G_CALLBACK(on_dlgparallel_destroy),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(buttonIntSync), "clicked",
-			   G_CALLBACK(on_buttonIntSync_clicked),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(entrycbIntBook), "changed",
-			   G_CALLBACK(on_entrycbIntBook_changed),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(sbIntChapter),
-			   "button_release_event",
-			   G_CALLBACK
-			   (on_sbIntChapter_button_release_event),
-			   NULL);
-	g_signal_connect(GTK_OBJECT(sbIntVerse),
-			   "button_release_event",
-			   G_CALLBACK
-			   (on_sbIntVerse_button_release_event), NULL);
-	g_signal_connect(GTK_OBJECT(entryIntLookup),
-			   "key_press_event",
-			   G_CALLBACK
-			   (on_entryIntLookup_key_press_event), NULL);
-	g_signal_connect(GTK_OBJECT(btnIntGotoVerse), "clicked",
-			   G_CALLBACK(on_btnIntGotoVerse_clicked),
 			   NULL);
 	g_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
 			   G_CALLBACK(gui_btnDockInt_clicked),
