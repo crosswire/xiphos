@@ -24,11 +24,11 @@
 
 #include <swmgr.h>
 
-//#ifdef USE_MOZILLA
-//#include "backend/gs_markupfiltmgr.h"
-//#else
+#ifdef USE_MOZILLA
+#include "backend/gs_markupfiltmgr.h"
+#else
 #include <markupfiltmgr.h>
-//#endif
+#endif
 
 #include <gnome.h>
 #include <versekey.h>
@@ -54,13 +54,13 @@ BackEnd *backend = NULL;
 //static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
  
 BackEnd::BackEnd() {
-//#ifdef USE_MOZILLA
-//	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-//	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
-//#else
+#ifdef USE_MOZILLA
+	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+#else
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-//#endif
+#endif
 	display_mod = NULL;
 	
 	tree_key = NULL;

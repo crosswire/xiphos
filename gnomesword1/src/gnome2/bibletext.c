@@ -664,18 +664,13 @@ static void on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 #ifdef USE_MOZILLA
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
-	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);	
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	gtk_widget_activate(widgets.entry_dict);
 #else
 	gchar *dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
 	if (dict_key) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(settings.
-						      DictWindowModule,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(settings.
-						  DictWindowModule,
-						  dict_key);
+		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
+		gtk_widget_activate(widgets.entry_dict);
 		g_free(dict_key);
 	}
 #endif
@@ -754,16 +749,14 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_text));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
-	dict_key = gtk_editable_get_chars((GtkEditable *)widgets.entry_dict,0,-1);
+	dict_key = 
+		g_strdup(gtk_editable_get_chars(
+			(GtkEditable *)widgets.entry_dict,0,-1));
 #else
 	dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
 #endif
 	if (dict_key && mod_name) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(mod_name,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(mod_name, dict_key);
+		main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}

@@ -261,11 +261,24 @@ gint embed_dom_mouse_down_cb(GtkMozEmbed *embed, gpointer dom_event, gpointer da
 				shift_key_presed = TRUE;*/
 				break;
 			case 2:
-				if(settings.comm_showing)
-					gui_create_pm_commentary(); //gui_popup_pm_comm(event);
+				gui_create_pm_commentary(); 
+				break;
+		}
+	} else if(pane == BOOK_TYPE) {
+		switch(button) {
+			case 0:	
+				/*if(aShiftKey) {
+					shift_key_presed = TRUE;
+					return TRUE;
+				}
 				else
-					gui_popup_menu_gbs();
-				//gui_create_pm_commentary();
+					shift_key_presed = FALSE;*/
+				break;
+			case 1:/*
+				shift_key_presed = TRUE;*/
+				break;
+			case 2:
+				gui_popup_menu_gbs();
 				break;
 		}
 	} else if(pane == DICTIONARY_TYPE) {

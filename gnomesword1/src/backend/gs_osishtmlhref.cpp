@@ -251,17 +251,17 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		}
 		// <p> paragraph tag
 		else if (!strcmp(tag.getName(), "p")) {
-			if ((!tag.isEndTag()) && (!tag.isEmpty()) && !settings.versestyle) {	// non-empty 
+			if ((!tag.isEndTag()) && (!tag.isEmpty())) {	// non-empty 
 				// 
 				// 
 				// start
 				// tag
-				buf += "<p>";
+				buf += (settings.versestyle)?"<!p>":"<p>";
 			} else if (tag.isEndTag() && !settings.versestyle) {	// end tag
 				buf += "</p>";
 				userData->supressAdjacentWhitespace = true;
-			} else if (!settings.versestyle) {	// empty paragraph break marker
-				buf += "<p>";
+			} else {	// empty paragraph break marker
+				buf += (settings.versestyle)?"<!p>":"<p>";
 				userData->supressAdjacentWhitespace = true;
 			}
 		}
@@ -296,11 +296,8 @@ GS_OSISHTMLHREF::handleToken(SWBuf & buf, const char *token, BasicFilterUserData
 		else if (!strcmp(tag.getName(), "title")) {
 			if ((!tag.isEndTag()) && (!tag.isEmpty())) {
 				buf += "<b>";
-			} else if (tag.isEndTag()) { 
-				if(!settings.versestyle)
-					buf += "</b><br />";
-				else 
-					buf += "</b>";					
+			} else if (tag.isEndTag()) {
+				buf += (settings.versestyle)?"</b>":"</b><br />";
 			}
 		}
 		// <hi> hi? hi contrast?
