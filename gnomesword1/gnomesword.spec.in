@@ -1,7 +1,7 @@
 %define release 1
 
 Summary:	GNOME-based Bible research tool
-Name:		gnomesword2
+Name:		gnomesword
 Prefix:		/usr
 Version:	@VERSION@
 Release:	%{release}
@@ -21,6 +21,7 @@ BuildRequires:	gtkhtml3-devel >= 3.0
 BuildRequires:	bonobo-devel >= 1.0
 BuildRequires:	gnome-spell
 BuildRequires:	scrollkeeper >= 0.3.5
+Obsoletes:	gnomesword2
 
 %description
 Bible Study Software for the Linux community. Lookup and search Bible texts and
@@ -34,19 +35,14 @@ by Crosswire Bible Society through the SWORD Project.
 %setup -q -n %{name}-%{version}
 
 %build
-export PACKAGE_DOC_DIR=$RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
 ./configure --prefix=%{prefix} --sysconfdir=/etc
 make
 
 %install
-export PACKAGE_DOC_DIR=$RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
 make DESTDIR=$RPM_BUILD_ROOT install
-./configure --prefix=$RPM_BUILD_ROOT%{prefix} --sysconfdir=$RPM_BUILD_ROOT/etc
-make DESTDIR=$RPM_BUILD_ROOT%{prefix} install-data-local
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
 mv $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}/* $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
-rm -rf $RPM_BUILD_ROOT/%{prefix}/var
 rmdir $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}
 cd $RPM_BUILD_ROOT%{prefix}
 
@@ -72,6 +68,9 @@ if which scrollkeeper-update>/dev/null 2>&1; then scrollkeeper-update -q; fi
 %{prefix}/share/applications/%{name}.desktop
 
 %changelog
+* Wed Jan 14 2004 Andy Piper <andyp@users.sf.net>
+- cleaned build statements thanks to Hugo (will now build as user)
+- changed package name
 * Wed Dec 31 2003 Andy Piper <andyp@users.sf.net>
 - Better checking for SWORD version
 - tidied up macros
