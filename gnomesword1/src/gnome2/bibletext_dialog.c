@@ -561,7 +561,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 		update_controls(vt);
 		g_free(val_key);
 	}
-	return TRUE;
+	return FALSE;
 }
 
 /******************************************************************************
