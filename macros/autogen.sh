@@ -105,7 +105,7 @@ do
       aclocalinclude="$ACLOCAL_FLAGS"
       for k in $aclocalinclude; do
   	if test -d $k; then
-	  if [ -f $k/gnome.m4 -a "$GNOME_INTERFACE_VERSION" = "1.0" ]; then
+	  if [ -f $k/gnome.m4 -a "$GNOME_INTERFACE_VERSION" = "1" ]; then
 	    rm -f $DELETEFILES
 	  fi
         fi
@@ -113,7 +113,7 @@ do
       for k in $macrodirs; do
   	if test -d $k; then
           aclocalinclude="$aclocalinclude -I $k"
-	  if [ -f $k/gnome.m4 -a "$GNOME_INTERFACE_VERSION" = "1.0" ]; then
+	  if [ -f $k/gnome.m4 -a "$GNOME_INTERFACE_VERSION" = "1" ]; then
 	    rm -f $DELETEFILES
 	  fi
         fi
@@ -139,20 +139,32 @@ do
 	test -r $dr/aclocal.m4 && chmod u+w $dr/aclocal.m4
       fi
       if grep "^AM_PROG_LIBTOOL" configure.in >/dev/null; then
-	echo "Running libtoolize..."
-	libtoolize --force --copy
+	if test -z "$NO_LIBTOOLIZE" ; then 
+	  echo "Running libtoolize..."
+	  libtoolize --force --copy
+	fi
       fi
       echo "Running aclocal $aclocalinclude ..."
-      aclocal $aclocalinclude
+      aclocal $aclocalinclude || {
+	echo
+	echo "**Error**: aclocal failed. This may mean that you have not"
+	echo "installed all of the packages you need, or you may need to"
+	echo "set ACLOCAL_FLAGS to include \"-I \$prefix/share/aclocal\""
+	echo "for the prefix where you installed the packages whose"
+	echo "macros were not found"
+	exit 1
+      }
+
       if grep "^AM_CONFIG_HEADER" configure.in >/dev/null; then
 	echo "Running autoheader..."
-	autoheader
+	autoheader || { echo "**Error**: autoheader failed."; exit 1; }
       fi
       echo "Running automake --gnu $am_opt ..."
-      automake --add-missing --gnu $am_opt
+      automake --add-missing --gnu $am_opt ||
+	{ echo "**Error**: automake failed."; exit 1; }
       echo "Running autoconf ..."
-      autoconf
-    )
+      autoconf || { echo "**Error**: autoconf failed."; exit 1; }
+    ) || exit 1
   fi
 done
 

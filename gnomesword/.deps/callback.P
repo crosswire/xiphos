@@ -204,9 +204,16 @@ callback.o: callback.cpp ../config.h /usr/include/gnome.h \
  /usr/include/g++-2/stl_map.h /usr/include/g++-2/stl_multimap.h \
  /usr/include/sword/swconfig.h /usr/include/sword/swlog.h \
  /usr/include/sword/versekey.h /usr/include/sword/swmacs.h \
- /usr/include/regex.h callback.h GnomeSword.h support.h interface.h \
- filestuff.h display.h listeditor.h noteeditor.h searchstuff.h \
- printstuff.h spellcheck.h
+ /usr/include/regex.h ../widgets/shortcut-bar/e-shortcut-bar.h \
+ ../widgets/shortcut-bar/e-group-bar.h \
+ ../widgets/shortcut-bar/e-icon-bar.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf-features.h \
+ ../widgets/shortcut-bar/../../e-util/e-canvas.h \
+ ../widgets/shortcut-bar/e-shortcut-model.h \
+ ../widgets/e-paned/e-hpaned.h ../widgets/e-paned/e-paned.h callback.h \
+ GnomeSword.h support.h interface.h filestuff.h display.h listeditor.h \
+ noteeditor.h searchstuff.h printstuff.h spellcheck.h
 callback.cpp :
 ../config.h :
 /usr/include/gnome.h :
@@ -519,6 +526,15 @@ callback.cpp :
 /usr/include/sword/versekey.h :
 /usr/include/sword/swmacs.h :
 /usr/include/regex.h :
+../widgets/shortcut-bar/e-shortcut-bar.h :
+../widgets/shortcut-bar/e-group-bar.h :
+../widgets/shortcut-bar/e-icon-bar.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf-features.h :
+../widgets/shortcut-bar/../../e-util/e-canvas.h :
+../widgets/shortcut-bar/e-shortcut-model.h :
+../widgets/e-paned/e-hpaned.h :
+../widgets/e-paned/e-paned.h :
 callback.h :
 GnomeSword.h :
 support.h :

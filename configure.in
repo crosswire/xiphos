@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.1.8i)
+AM_INIT_AUTOMAKE(gnomesword, 0.2.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -16,14 +16,37 @@ AC_HEADER_STDC
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
+dnl GdkPixbuf checking
+
+dnl ******************************
+AC_MSG_CHECKING(for Gdkpixbuf libraries)
+if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
+    AC_MSG_RESULT(found)
+else
+    AC_MSG_ERROR(Did not find gdkpixbuf installed)
+fi
+
 dnl Subst PACKAGE_PIXMAPS_DIR.
 PACKAGE_PIXMAPS_DIR="`gnome-config --datadir`/pixmaps/${PACKAGE}"
 AC_SUBST(PACKAGE_PIXMAPS_DIR)
+
+dnl Initialize libtool
+AM_PROG_LIBTOOL
 
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking w/aspell],spellchecking=$enableval,spellchecking="no")
 AC_ARG_ENABLE(printing,[--enable-printing		enable printing w/gnome-print-0.20],printing=$enableval,printing="no")
+
+GNOME_PRINT_LIBS=`gnome-config --libs print`
+GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
+AC_SUBST(GNOME_PRINT_LIBS)
+AC_SUBST(GNOME_PRINT_CFLAGS)
+
+EXTRA_GNOME_LIBS="`gnome-config --libs libglade gdk_pixbuf gnomecanvaspixbuf gnomeui ` $THREADS_LIBS `unicode-config --libs`"
+EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gdk_pixbuf gnomecanvaspixbuf gnomeui ` $THREADS_CFLAGS `unicode-config --cflags`"
+AC_SUBST(EXTRA_GNOME_LIBS)
+AC_SUBST(EXTRA_GNOME_CFLAGS)
 
 LIBS="$LIBS -L/usr/local/lib -L/usr/lib -lsword -lz"
 
@@ -57,6 +80,12 @@ AC_OUTPUT([
 Makefile
 macros/Makefile
 gnomesword/Makefile
+e-util/Makefile
+widgets/Makefile
+widgets/e-paned/Makefile
+widgets/e-text/Makefile
+widgets/misc/Makefile
+widgets/shortcut-bar/Makefile
 ])
 
 
