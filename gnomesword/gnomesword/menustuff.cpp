@@ -69,14 +69,9 @@ void
 addseparator(GtkWidget *MainFrm, gchar *subtreelabel)
 {
 	GnomeUIInfo *bookmarkitem;
-
 	bookmarkitem = g_new(GnomeUIInfo,2);
 	bookmarkitem->type = GNOME_APP_UI_SEPARATOR;
-//	bookmarkitem->moreinfo=(gpointer)on_john_3_1_activate;
-//	bookmarkitem->user_data=g_strdup(itemlabel);
-//	bookmarkitem->label = itemlabel;
 	bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
-//	bookmarkitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;
 	bookmarkitem->accelerator_key = 0;
 	bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO;
 	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),subtreelabel,bookmarkitem,NULL);	

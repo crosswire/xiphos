@@ -299,6 +299,68 @@ loadFile (GtkWidget *filesel)  //-- load file into studypad
   	gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2, current_filename);
 }
 
+//-------------------------------------------------------------------------------------------
+void
+loadStudyPadFile (gchar *filename)  //-- load file into studypad during program startup
+{
+ 	GtkWidget 	*statusbar,
+ 				 	 *text;
+  	//gchar filename[255];
+  	FILE *fp;
+  	gchar buffer[BUFFER_SIZE];
+  	gint bytes_read;
+  	gint  context_id2;
+
+  	
+  	
+  	statusbar = lookup_widget(MainFrm,"statusbar2");
+  	text  = lookup_widget(MainFrm,"text3");
+  	context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");
+  	//sprintf(filename,"%s", file_name);
+  	
+  	gtk_statusbar_pop (GTK_STATUSBAR (statusbar),context_id2 );
+  	gtk_text_freeze (GTK_TEXT (text));
+  	gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);
+  	g_free (current_filename);
+  	current_filename = NULL;
+  	file_changed = FALSE;
+  	fp = fopen (filename, "r");
+  	if (fp == NULL)
+    {
+      gtk_text_thaw (GTK_TEXT (text));
+      gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2,filename); // "Could not open file");
+      return;
+    }
+  	for (;;)
+    {
+	    bytes_read = fread (buffer, sizeof (gchar), BUFFER_SIZE, fp);
+      	if (bytes_read > 0)
+			gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL, buffer,
+			 	bytes_read);
+
+      	if (bytes_read != BUFFER_SIZE && (feof (fp) || ferror (fp)))
+			break;
+	}
+
+
+  	// If there is an error while loading, we reset everything to a good state.   	
+
+  	if (ferror (fp))
+    {
+      	fclose (fp);
+      	gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);
+      	gtk_text_thaw (GTK_TEXT (text));
+      	gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2, "Error loading file.");
+      	return;
+    }
+
+  	fclose (fp);
+  	gtk_text_thaw (GTK_TEXT (text));
+  	current_filename = g_strdup (filename);
+  	gtk_statusbar_pop (GTK_STATUSBAR (statusbar), context_id2);
+  	gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2, current_filename);
+}
+
 //----------------------------------------------------------------------------------------------
 void                     //-- save our settings
 writesettings(SETTINGS settings)
@@ -345,6 +407,7 @@ createsettings(void)
 	strcpy(p_settings->personalcommentsmod, "-+*Personal*+-"); //-- personal comments module
 	strcpy(p_settings->currentverse,"Romans 8:28"); //-- set openning verse
 	strcpy(p_settings->dictkey, "GRACE"); //-- dictionary key to use at program startup - the one we shut down with
+	strcpy(p_settings->studypadfilename, ""); //-- name of file in open in study when we closed or last file in studypad
 	p_settings->currentverse_red = 0x0000;  //-- set current verse color to green
 	p_settings->currentverse_green = 0x7777;
 	p_settings->currentverse_blue = 0x0000;

@@ -552,6 +552,52 @@ GTKChapDisp::Display(SWModule &imodule)
 	key->Verse(curVerse);
 }
 
+
+//-------------------------------------------------------------------------------------------
+void
+AboutModsDisplay(GtkWidget* text, gchar *aboutinfo) //-- to display Sword module about information
+{
+	gchar 	textBuf[800]; //-- text buffer to play with
+	gint  	i,            //-- counter
+					j,            //-- counter
+					len;          //-- length of string aboutinfo
+	bool 		printnow = false;  //-- tells us when to put our text to the screen
+	
+   	i=j=0;     //-- set to 0
+		textBuf[0]='\0'; //-- empty text buffer
+		gtk_text_set_point(GTK_TEXT(text), 0); //-- set position to begining of text widget
+		gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text)))); //-- clear text widget
+		len = strlen(aboutinfo);  //-- set len to length of aboutinfo
+		while(i<len) //-- loop through string aboutinfo
+		{
+			if(aboutinfo[i] == '\\' && aboutinfo[i+1] =='p' && aboutinfo[i+2]=='a' && aboutinfo[i+3]=='r') //-- if we find \par replace with /n
+   		{				
+				if(aboutinfo[i+4] == 'd') i=i+4; //-- fix our counter to jump over \pard
+				else i=i+3;		//-- fix our counter to jump over \par	
+				aboutinfo[i]='\n'; //-- add the \n (new line)
+				printnow = true;	//-- we want to show this much now			
+    	}
+    	if(aboutinfo[i] == '\\' && aboutinfo[i+1] =='q' && aboutinfo[i+2]=='c') //-- replace \qc with nothing
+   		{				
+				i=i+3;	//-- fix counter to jump over \qc
+    	}					
+			textBuf[j] = aboutinfo[i]; //-- move aboutinfo to textBuf one char at a time			
+	 		++i;   //-- add one to i
+	 		++j;   //-- add one to j		
+	  	textBuf[j] = '\0';	//-- terminate our string with \0 (null)
+	  	if(printnow)  //-- if true we print to text widget	
+	  	{
+	  		printnow = false; //-- set to false now
+	  		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	  //-- put string to text widget
+	  		 textBuf[0]='\0'; //-- set string to null
+	  		 j = 0;  //-- set j to 0
+	  	}
+		}
+		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	//-- incase there is no \par at end of info	
+		textBuf[0]='\0';	
+}
+
+
 /*
 //-------------------------------------------------------------------------------------------
 void
