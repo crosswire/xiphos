@@ -1,5 +1,11 @@
 2004-01-05  Terry <tbiggs@users.sf.net>
 
+	* added check for ".sword/InstallMgr/InstallMgr.conf" in users home 
+	  directory.
+	
+
+2004-01-05  Terry <tbiggs@users.sf.net>
+
 	* added module manager
 	  backend/module_mangger.cc
 	  backend/module_mangger.hh
