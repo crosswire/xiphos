@@ -86,7 +86,7 @@ module.include.files=\
 	src/gui/commentary.h\
 	src/gui/commentary_dialog.h\
 	src/gui/commentary_find.h\
-	src/gui/_dictlex.h\
+	src/gui/dictlex.h\
 	src/gui/dictlex_dialog.h\
 	src/gui/_display_info.h\
 	src/gui/_editor.h\
@@ -167,7 +167,7 @@ module.source.files=\
 	src/gnome/commentary.c\
 	src/gnome/commentary_dialog.c\
 	src/gnome/commentary_find.c\
-	src/gnome/_dictlex.c\
+	src/gnome/dictlex.c\
 	src/gnome/dictlex_dialog.c\
 	src/gnome/_display_info.c\
 	src/gnome/_editor.c\

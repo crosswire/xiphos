@@ -40,7 +40,7 @@
 #include "gui/gbs.h"
 #include "gui/bibletext.h"
 #include "gui/commentary.h"
-#include "gui/_dictlex.h"
+#include "gui/dictlex.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"

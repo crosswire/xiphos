@@ -34,7 +34,7 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 
 #include "backend/sword.h"
 #include "backend/display.h"
@@ -98,7 +98,7 @@ void backend_new_dictlex_display(GtkWidget * html, int mod_num)
  *   void
  */
  
-void backend_setup_dictlex(SETTINGS * s)
+void backend_setup_dictlex(void)
 {
 	ModMap::iterator it;	//-- iteratior
 	gint count = 0;
@@ -110,9 +110,9 @@ void backend_setup_dictlex(SETTINGS * s)
 		if (!strcmp
 		    ((*it).second->Type(), "Lexicons / Dictionaries")) {	    
 			if(!strcmp((*it).second->Name(),"Thayer"))
-				s->havethayer = true;
+				settings.havethayer = true;
 			if(!strcmp((*it).second->Name(),"BDB"))
-				s->havebdb = true;
+				settings.havebdb = true;
 			BE_DL *be_dl = new BE_DL;
 			be_dl->mod = (*it).second;
 			be_dl->num = count;
