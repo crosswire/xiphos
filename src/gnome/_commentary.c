@@ -28,6 +28,7 @@
 /* frontend */
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
+#include "commentary_dialog.h"
 #include "commentary_find.h"
 #include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
@@ -35,7 +36,6 @@
 /* main */
 #include "commentary.h"
 #include "gs_html.h"
-#include "gs_viewcomm_dlg.h"
 #include "settings.h"
 #include "lists.h"
 
@@ -350,7 +350,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	gdk_window_set_cursor(s->app->window,cursor);
 	
 	if(!isrunningVC) {
-		dlg = create_dlgViewComm(s);
+		dlg = gui_create_commentary_dialog(s);
 		isrunningVC = TRUE;
 	}
 	gtk_widget_show(dlg);

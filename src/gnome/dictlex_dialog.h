@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_gui.c - main window gui 
+ * dictlex_dialog.h - dialog for displaying a dictlex module
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -17,22 +17,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
-
-#ifndef __GS_GUI_H_
-#define __GS_GUI_H_ 
+ */ 
+#ifndef __DICTLEX_DIALOG_H_
+#define __DICTLEX_DIALOG_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "settings.h"
 
-void on_btnSB_clicked(GtkButton * button, SETTINGS * s);
-void create_mainwindow(SETTINGS *s);
+GtkWidget *gui_create_dictlex_dialog(GtkWidget * app);
+void initSD(gchar * modName);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /*__GS_GUI_H_  */
-
+#endif	/* __DICTLEX_DIALOG_H_ */

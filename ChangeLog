@@ -3,6 +3,8 @@
 	* renamed gnome/create_shortcutbar_search.* to gnome/shortcutbar_search.*
 	* moved main/gs_shortcutbar.* to gnome/shortcutbar_main.*
 	* added function headers to shortcutbar files
+	* moved main/gs_viewcomm_dlg.* to gnome/commentary_dialog.*
+	* moved main/gs_viewdict_dlg.* to gnome/dictlex_dialog.*
 	
 
 2002-06-03  Terry Biggs <tbiggs@users.sourceforge.net>

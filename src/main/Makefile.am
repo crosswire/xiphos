@@ -44,10 +44,6 @@ COMMON_SOURCE =  \
     gs_popup_cb.h \
     setup.c \
     setup.h \
-    gs_viewcomm_dlg.c \
-    gs_viewcomm_dlg.h \
-    gs_viewdict_dlg.c \
-    gs_viewdict_dlg.h \
     lists.c \
     lists.h \
     main.c \
