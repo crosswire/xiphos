@@ -34,7 +34,7 @@
 #include "gs_menu.h"
 #include "gs_gui_cb.h"
 #include "gs_mainmenu_cb.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "support.h"

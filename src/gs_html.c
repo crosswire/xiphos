@@ -59,7 +59,7 @@
 
 #include "gs_html.h"
 #include "support.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_gnomesword.h"
 #include "gs_editor.h"
 #include "sw_verselist_sb.h"

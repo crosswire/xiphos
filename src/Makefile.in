@@ -184,8 +184,6 @@ COMMON_SOURCE = \
     gs_info_box.h\
     gs_information_dlg.c \
     gs_information_dlg.h \
-    gs_information_sw.cpp \
-    gs_information_sw.h \
     gs_mainmenu_cb.c \
     gs_mainmenu_cb.h\
     gs_menu.c \
@@ -219,8 +217,8 @@ COMMON_SOURCE = \
     sw_display.h \
     sw_gbs.cpp \
     sw_gbs.h \
-    sw_gnomesword.cpp \
-    sw_gnomesword.h \
+    sw_information_dlg.cpp \
+    sw_information_dlg.h \
     sw_module_options.cpp \
     sw_module_options.h \
     sw_properties.cpp \
@@ -229,6 +227,8 @@ COMMON_SOURCE = \
     sw_search.h \
     sw_shortcutbar.cpp \
     sw_shortcutbar.h \
+    sw_sword.cpp \
+    sw_sword.h \
     sw_utility.cpp\
     sw_utility.h \
     sw_verselist_sb.cpp \
@@ -289,17 +289,17 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_file.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
 	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
 	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
-	gs_information_dlg.$(OBJEXT) gs_information_sw.$(OBJEXT) \
-	gs_mainmenu_cb.$(OBJEXT) gs_menu.$(OBJEXT) \
-	gs_preferences_dlg.$(OBJEXT) gs_popup_cb.$(OBJEXT) \
-	gs_setup.$(OBJEXT) gs_shortcutbar.$(OBJEXT) \
-	gs_undock_int.$(OBJEXT) gs_undock_sb.$(OBJEXT) \
-	gs_unlockkey_dlg.$(OBJEXT) gs_viewcomm_dlg.$(OBJEXT) \
-	gs_viewdict_dlg.$(OBJEXT) gs_viewtext_dlg.$(OBJEXT) \
-	main.$(OBJEXT) support.$(OBJEXT) sw_bookmarks.$(OBJEXT) \
-	sw_display.$(OBJEXT) sw_gbs.$(OBJEXT) sw_gnomesword.$(OBJEXT) \
-	sw_module_options.$(OBJEXT) sw_properties.$(OBJEXT) \
-	sw_search.$(OBJEXT) sw_shortcutbar.$(OBJEXT) \
+	gs_information_dlg.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
+	gs_menu.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
+	gs_popup_cb.$(OBJEXT) gs_setup.$(OBJEXT) \
+	gs_shortcutbar.$(OBJEXT) gs_undock_int.$(OBJEXT) \
+	gs_undock_sb.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
+	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
+	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT) \
+	sw_bookmarks.$(OBJEXT) sw_display.$(OBJEXT) sw_gbs.$(OBJEXT) \
+	sw_information_dlg.$(OBJEXT) sw_module_options.$(OBJEXT) \
+	sw_properties.$(OBJEXT) sw_search.$(OBJEXT) \
+	sw_shortcutbar.$(OBJEXT) sw_sword.$(OBJEXT) \
 	sw_utility.$(OBJEXT) sw_verselist_sb.$(OBJEXT) \
 	sw_viewcomm_dlg.$(OBJEXT) sw_viewdict_dlg.$(OBJEXT) \
 	sw_viewtext_dlg.$(OBJEXT)
@@ -323,7 +323,6 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_gui_cb.Po $(DEPDIR)/gs_history.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_html.Po $(DEPDIR)/gs_info_box.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_information_dlg.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_information_sw.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_mainmenu_cb.Po $(DEPDIR)/gs_menu.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_popup_cb.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_preferences_dlg.Po \
@@ -337,10 +336,11 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/spell.Po $(DEPDIR)/spell_gui.Po \
 @AMDEP_TRUE@	$(DEPDIR)/support.Po $(DEPDIR)/sw_bookmarks.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_display.Po $(DEPDIR)/sw_gbs.Po \
-@AMDEP_TRUE@	$(DEPDIR)/sw_gnomesword.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sw_information_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_module_options.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_properties.Po $(DEPDIR)/sw_search.Po \
-@AMDEP_TRUE@	$(DEPDIR)/sw_shortcutbar.Po $(DEPDIR)/sw_utility.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sw_shortcutbar.Po $(DEPDIR)/sw_sword.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sw_utility.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_verselist_sb.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_viewcomm_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_viewdict_dlg.Po \
@@ -436,7 +436,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_html.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_info_box.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_information_dlg.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_information_sw.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_mainmenu_cb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_menu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_popup_cb.Po@am__quote@
@@ -456,11 +455,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_bookmarks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_gbs.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_gnomesword.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_information_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_module_options.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_properties.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_shortcutbar.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_sword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_utility.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_verselist_sb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_viewcomm_dlg.Po@am__quote@

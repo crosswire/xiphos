@@ -32,7 +32,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_gnomesword.h"
 
 	typedef struct _bmtree BM_TREE;

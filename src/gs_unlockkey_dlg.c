@@ -34,7 +34,7 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gs_unlockkey_dlg.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_gnomesword.h"
 #include "support.h"
 

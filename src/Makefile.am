@@ -43,8 +43,6 @@ COMMON_SOURCE =  \
     gs_info_box.h\
     gs_information_dlg.c \
     gs_information_dlg.h \
-    gs_information_sw.cpp \
-    gs_information_sw.h \
     gs_mainmenu_cb.c \
     gs_mainmenu_cb.h\
     gs_menu.c \
@@ -78,8 +76,8 @@ COMMON_SOURCE =  \
     sw_display.h \
     sw_gbs.cpp \
     sw_gbs.h \
-    sw_gnomesword.cpp \
-    sw_gnomesword.h \
+    sw_information_dlg.cpp \
+    sw_information_dlg.h \
     sw_module_options.cpp \
     sw_module_options.h \
     sw_properties.cpp \
@@ -88,6 +86,8 @@ COMMON_SOURCE =  \
     sw_search.h \
     sw_shortcutbar.cpp \
     sw_shortcutbar.h \
+    sw_sword.cpp \
+    sw_sword.h \
     sw_utility.cpp\
     sw_utility.h \
     sw_verselist_sb.cpp \

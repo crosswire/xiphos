@@ -41,7 +41,7 @@
 #include <unixstr.h>
 #endif
 
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "sw_utility.h"
 
 

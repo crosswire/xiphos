@@ -242,7 +242,8 @@ on_edit_current_node_activate(GtkMenuItem * menuitem, gpointer user_data)
 	/* get book name */
 
 	p_info = &info;
-	p_info->text[0] = "";
+	p_info->text[0] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
+				     cell[0])->text;
 	p_info->text[1] = "";
 	p_info->text[2] = "0";
 	p_info->howmany = 1;
@@ -255,13 +256,8 @@ on_edit_current_node_activate(GtkMenuItem * menuitem, gpointer user_data)
 	dlg = create_dlgGetTextInfo(p_info);
 	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
-	/*
-
-	   node = gtk_ctree_insert_node(GTK_CTREE(settings->ctree_widget_books),
-	   NULL, NULL, p_info->text, 3,
-	   pixmap1, mask1, pixmap2,
-	   mask2, FALSE, FALSE);
-	 */
+	
+	changeNodeNameSW_GBS(settings, p_info->text[0]);
 	
 	g_free(p_info->text[0]);
 	g_free(p_info->text[1]);
@@ -364,8 +360,8 @@ void setitemssensitivityGS_GBS(GSHTMLEditorControlData *gbsecd, gint iswritable)
 			sensitive);
 	gtk_widget_set_sensitive(GTK_WIDGET(pmGBS_uiinfo[5].widget), /* Edit Current Node */
 			sensitive);
-	gtk_widget_set_sensitive(GTK_WIDGET(pmGBS_uiinfo[6].widget), /* Delete Current Node */
-			sensitive);
+	//gtk_widget_set_sensitive(GTK_WIDGET(pmGBS_uiinfo[6].widget), /* Delete Current Node */
+	//		sensitive);
 	gtk_widget_set_sensitive(GTK_WIDGET(gbsecd->editnote), /* edit book */
 			sensitive);
 	gtk_widget_set_sensitive(GTK_WIDGET(gbsecd->file), /* file menu */

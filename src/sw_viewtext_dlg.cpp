@@ -39,7 +39,7 @@
 #include <markupfiltmgr.h>
 
 #include "sw_viewtext_dlg.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "sw_display.h"
 #include "sw_utility.h"
 
