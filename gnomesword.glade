@@ -2282,8 +2282,8 @@ Revelation
   <border_width>4</border_width>
   <modal>True</modal>
   <logo>GnomeSword.png</logo>
-  <copyright>                Copyright                 2000</copyright>
-  <authors>			  Terry Biggs    tbiggs@infinet.com
+  <copyright>                       Copyright                 2000</copyright>
+  <authors>Terry Biggs    tbiggs@users.sourceforge.net
 </authors>
   <comments>This is a faithful saying,and worthy of all acceptation, that Christ Jesus came into the world to save sinners; of whom I am chief. - I Timothy 1:15</comments>
 </widget>

@@ -89,8 +89,7 @@ SWMgr
 	*mainMgr, /* sword mgr for curMod - curcomMod - curdictMod */
 	*mainMgr1, /* sword mgr for comp1Mod - first interlinear module */
 	*percomMgr, /* sword mgr for percomMod - personal comments editor */
-	*listMgr;	/* sword mgr for ListEditor */
-	
+	*listMgr;	/* sword mgr for ListEditor */	
 VerseKey 
 	swKey = "Romans 8:28";	/* temp storage for verse keys */
 SWModule 
@@ -100,7 +99,6 @@ SWModule
 	*percomMod, /* module for personal commentary  window */	
 	*curdictMod, /* module for dict window */
 	*listMod;  /* module for ListEditor */
-
 SWFilter 
 	*gbftohtml, /* sword render filters */
 	*plaintohtml,
@@ -1461,42 +1459,4 @@ applyfontcolorandsizeSWORD(void)
 	updateinterlinearpage();	
 }
 
-/******************************************************************************
- * we come here first to get module lists to pass to the shortcut bar
- ******************************************************************************/
-void
-updateshortcutbarSWORD(void)
-{
-	ModMap::iterator it; //-- iteratior
-	SWMgr *mgr;
-	GList *favoMods = NULL;
-	GList *textMods = NULL;
-	GList *commMods = NULL;
-	GList *dictMods = NULL;
-	GList *percomMods = NULL;
-		
-	mgr = new SWMgr();	//-- create sword mgrs
-	/*** get module lists ***/
-	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
-		if(!strcmp((*it).second->Type(), "Biblical Texts")){
-			textMods = g_list_append(textMods,(*it).second->Description());
-		}if(!strcmp((*it).second->Type(), "Commentaries")){
-			commMods = g_list_append(commMods,(*it).second->Description());
-		}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
-			dictMods = g_list_append(dictMods,(*it).second->Description());
-		} 
-	}
-	/*** send the lists to the shortcut bar ***/
-/*  	update_shortcut_bar(settings,
-				favoMods,
-				textMods, 
-				commMods, 
-				dictMods);*/
-	/*** free GLists ***/
-	g_list_free(textMods); 
-        g_list_free(commMods);
-        g_list_free(dictMods);
-	/*** delete Sword manager ***/
-	delete mgr;
-}
 
