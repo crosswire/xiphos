@@ -44,6 +44,7 @@
 #include "sw_gnomesword.h"
 #include "sw_utility.h"
 
+//extern SWFilter *swbasicfilter;
 extern SWFilter *gbftohtml;
 extern SWFilter *plaintohtml;
 extern SWFilter *thmltohtml;
@@ -109,6 +110,19 @@ gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	return retval;
 }
 
+/* path to sword modules */
+char *pathtomods(void)
+{		
+	SWMgr *mgr;
+	gchar buf[255], *retval;
+	
+	mgr = new SWMgr();	//-- create sword mgrs
+	sprintf(buf,"%s",mgr->prefixPath);
+	retval = buf;
+	delete mgr;
+	return retval;
+}
+
 void
 changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
 {
@@ -116,7 +130,7 @@ changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
 	
 	it = Mgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 	if (it != Mgr->Modules.end()){ //-- if we find the module	
-		module = (*it).second;  //-- change current module to new module
+		module = (*it).second;  //-- change module to new module
 	}		
 }
 

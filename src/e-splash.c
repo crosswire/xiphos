@@ -23,7 +23,7 @@
  
 /*
  * added to gnomesword 2001-07-25 by terry
- * only changed a couple of line of code in e_splash_new
+ * only changed a couple of lines of code in e_splash_new
  * to find splash.png
  */
  

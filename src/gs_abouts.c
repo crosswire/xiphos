@@ -71,24 +71,21 @@ void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
 GtkWidget *create_about(void)
 {
 	const gchar *authors[] = {
-		"Terry Biggs   tbiggs@users.sourceforge.net",
+		"Terry Biggs tbiggs@users.sourceforge.net",
 		NULL
 	};
 	GtkWidget *about;
 
 	about = gnome_about_new("gnomesword", VERSION,
-				 "                              Copyright\t  2000",
+				 "                   Copyright\t  2000-2001",
 				 authors,
-				"This is a faithful saying,and worthy of all acceptation,\
-				that Christ Jesus came into the world to save sinners;\
-				of whom I am chief. - I Timothy 1:15",
+				"We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project.",
 				 "gnomesword/about.png");
 	gtk_object_set_data(GTK_OBJECT(about), "about", about);
 	gtk_container_set_border_width(GTK_CONTAINER(about), 4);
 	gtk_window_set_modal(GTK_WINDOW(about), TRUE);
 	return about;
 }
-
 
 GtkWidget *create_AboutSword(void)
 {
