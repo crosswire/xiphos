@@ -20,7 +20,11 @@ in PDF format, please email one of the Documentation developers.
 	" yelp filename.xml" 
 
 This also helps with finding errors and debugging. 
-
+3. Please make sure that you have properly edited gnomesword-manual-(lang).omf and Makefile.am.
+-----------------
+Translations
+-----------------
+1. 
 -----------------
 Files:
 ----------------
@@ -35,14 +39,12 @@ simply edit the "preferences.xml" file.
 ------------------
 Screenshots:
 -------------------
-1. screenshots will only be accepted if it is in the "Traditional" theme. It can be
+1. screenshots will only be accepted if it is in the "Simple" theme. It can be
 accessed by going:
 
 	Applications -> Desktop Preferences -> Theme
 	or 
 	by simply running the command "gnome-theme-manager" in the terminal.
-
-This is to comply with the Gnome Documentation Project standards. 
 
 2.Please use discretion about image sizes. This includes file size and images size ( length
 and height). While there is no rule or standard to how big the image must be, visibility of the
