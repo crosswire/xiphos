@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+<omf>
+  <resource>
+    <creator>terafoil@yahoo.com</creator>
+    
+    <title>Gnomesword2 manual</title>
+    <date>2003-11-17</date>
+    
+    <version identifier="1.0" date="2003-11-17" description="First Release"/>
+    
+    <subject category="Bible Study Environment"/>
+    <description>
+      This manual describes development version of Gnomesword2
+    </description>
+    <type>
+     manual
+    </type>
+    <format mime="text/xml" dtd="-//OASIS//DTD DocBook XML V4.1.2//EN"/>
+    <identifier url=""/>
+    <language code="C"/>
+    <relation seriesid="f5b1de52-afee-11d7-813f-fcb0fd1dad15"/>
+    <rights type="GNU FDL" license.version="1.1" license="http://www.gnu.org/licenses/fdl.html" holder="Mike Hearn"/>
+  </resource>
+</omf>
