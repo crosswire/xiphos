@@ -153,8 +153,10 @@ void gui_update_statusbar(GSHTMLEditorControlData * ecd)
 
 	context_id2 =
 	    gtk_statusbar_get_context_id(GTK_STATUSBAR(ecd->statusbar),
-					 "GnomeSword");/* string not seen */
+					 "GnomeSword");
 	gtk_statusbar_pop(GTK_STATUSBAR(ecd->statusbar), context_id2);
+	g_warning(ecd->filename);
+	g_warning(ecd->key);
 
 	if (ecd->personal_comments) {
 		sprintf(buf3,"[%s] %s", ecd->filename, ecd->key);
@@ -183,6 +185,7 @@ void gui_update_statusbar(GSHTMLEditorControlData * ecd)
 
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), context_id2,
 			   buf);
+			  
 }
 
 /******************************************************************************
