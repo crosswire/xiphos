@@ -30,8 +30,8 @@ extern "C" {
 
 #include "settings.h"
 
-	gboolean backend_load_properties(SETTINGS * s);
-	gboolean backend_save_properties(SETTINGS * s, gboolean shutdown);
+	gboolean backend_load_properties(void);
+	gboolean backend_save_properties(gboolean shutdown);
 	gboolean backend_create_properties_from_setup(void);
 	gboolean backend_create_properties(void);
 

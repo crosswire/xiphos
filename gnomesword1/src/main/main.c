@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 	/* 
 	 * start swmgrs so they can be used by setup druid
 	 */
-	backend_first_init(&settings); /* light-up swmgrs */
+	backend_first_init();
 	
 	/* 
 	 * check for directories and files
@@ -92,21 +92,21 @@ int main(int argc, char *argv[])
 		first_run();
 	}
 
-	backend_load_properties(&settings);
+	backend_load_properties();
 
 	gui_splash_init();
 
 	gui_splash_step1();
 	
-	backend_init_sword(&settings);
+	backend_init_sword();
 
 	gui_splash_step2();
 		
-	create_mainwindow(&settings);
+	create_mainwindow();
 
 	gui_splash_step3();
 
-	init_gnomesword(&settings);
+	init_gnomesword();
 
 	gui_splash_step4();
 	
@@ -116,3 +116,4 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
