@@ -468,7 +468,7 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
 	GtkWidget *label;
-	GtkWidget *btn_close;
+	//GtkWidget *btn_close;
 	GtkListStore *model;
 	
 	dlg->dialog = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -512,7 +512,7 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 				      GTK_RELIEF_NONE);*/
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-refresh", 
+			GTK_STOCK_REFRESH, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbarDLKey)));			      
 	btnSyncDL =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
@@ -531,20 +531,21 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarDLKey), dlg->entry,
 				  NULL, NULL);
 				  
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-exit", 
+/*	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_QUIT, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbarDLKey)));
 	btn_close =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
 				       GTK_TOOLBAR_CHILD_BUTTON, 
 				       NULL,
 				       _("Close"), 
-				       _("Close Dialog"),
+				       _("Close dialog"),
 				       NULL, 
 				       tmp_toolbar_icon, 
 				       NULL,
 				       NULL);
 	gtk_widget_show(btn_close);
+*/
 /*
 	dlg->clist = gtk_clist_new(1);
 	gtk_widget_show(dlg->clist);
@@ -605,9 +606,9 @@ static void create_dictlex_dialog(DL_DATA *dlg)
 	gtk_signal_connect (GTK_OBJECT (dlg->dialog), "destroy",
                       G_CALLBACK (dialog_destroy),
                       dlg);
-	gtk_signal_connect (GTK_OBJECT (btn_close), "clicked",
+	/*gtk_signal_connect (GTK_OBJECT (btn_close), "clicked",
                       G_CALLBACK (on_btn_close_clicked),
-                      dlg);
+                      dlg);*/
 		      
 			/*
 	gtk_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
