@@ -205,7 +205,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 		info->stock_icon = "gtk-dialog-warning";
 		g_string_printf(str,"<span weight=\"bold\">%s</span>\n\n%s %s",
 						_("Delete Note?"), 
-			_("Are you sure you wantto delete the note for\n"), ecd->key);
+			_("Are you sure you want to delete the note for\n"), ecd->key);
 		info->label_top = str->str;
 		info->yes = TRUE;
 		info->no = TRUE;
@@ -474,7 +474,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       (ecd->toolbar_edit),
 					       GTK_TOOLBAR_CHILD_BUTTON,
 					       NULL, _("Save"),
-					       _("Save Curent File"),
+					       _("Save Current File"),
 					       NULL, tmp_toolbar_icon,
 					       NULL, NULL);
 		gtk_widget_show(ecd->btn_save);

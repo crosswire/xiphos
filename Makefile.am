@@ -47,4 +47,4 @@ dist-hook:
 
 ACLOCAL_AMFLAGS = -I m4
 
-EXTRA_DIST = ${PACKAGE}.desktop.in
+EXTRA_DIST = ${PACKAGE}.desktop.in ${PACKAGE}.spec.in

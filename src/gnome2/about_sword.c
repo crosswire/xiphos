@@ -90,11 +90,11 @@ GtkWidget *gui_create_about_sword(void)
 	gchar version[40];
 	gchar *about =
 	    _
-	    ("The SWORD Project is an effort to create an ever expanding "
+	    ("The SWORD Project is an effort to create an ever-expanding "
 	     "software package for research and study of God and His Word. "
 	     "The SWORD Bible Framework allows easy manipulation of Bible "
-	     "texts, commentaries, lexicons, dictionaries, etc.  Many "
-	     "frontends are built using this framework. An installed "
+	     "texts, commentaries, lexicons, dictionaries, and other books. "
+	     "Many frontends are built using this framework. An installed "
 	     "module set may be shared between any frontend using the "
 	     "framework.");
 
@@ -155,7 +155,7 @@ GtkWidget *gui_create_about_sword(void)
 	
 	label95 =
 	    gtk_label_new(_
-			  ("Modules can be downloaded from the Sword Project "));
+			  ("Modules can be downloaded from the Sword Project"));
 	gtk_widget_show(label95);
 	gtk_box_pack_start(GTK_BOX(vbox21), label95, FALSE, FALSE, 0);
 	gtk_widget_set_usize(label95, -2, 24);
