@@ -154,6 +154,8 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE = \
     e-splash.c \
     e-splash.h \
+    gs_dock_dlg.c \
+    gs_dock_dlg.h \
     gs_gui.c \
     gs_gui.h \
     gs_setup.c \
@@ -275,8 +277,8 @@ bin_PROGRAMS = gnomesword$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
 am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
-	char_table.$(OBJEXT) e-splash.$(OBJEXT) gs_gui.$(OBJEXT) \
-	gs_setup.$(OBJEXT) gs_abouts.$(OBJEXT) \
+	char_table.$(OBJEXT) e-splash.$(OBJEXT) gs_dock_dlg.$(OBJEXT) \
+	gs_gui.$(OBJEXT) gs_setup.$(OBJEXT) gs_abouts.$(OBJEXT) \
 	gs_editor_replace.$(OBJEXT) gs_editor_toolbar.$(OBJEXT) \
 	gs_html_editor.$(OBJEXT) gs_info_box.$(OBJEXT) \
 	gs_mainmenu_cb.$(OBJEXT) gs_viewcomm_dlg.$(OBJEXT) \
@@ -306,6 +308,7 @@ LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/char_table.Po $(DEPDIR)/e-splash.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_abouts.Po $(DEPDIR)/gs_bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_dock_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_replace.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_toolbar.Po $(DEPDIR)/gs_file.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gnomesword.Po $(DEPDIR)/gs_gui.Po \
@@ -411,6 +414,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/e-splash.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_abouts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bookmarks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_dock_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_replace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_toolbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_file.Po@am__quote@

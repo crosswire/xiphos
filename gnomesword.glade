@@ -528,15 +528,15 @@
 	<widget>
 	  <class>GtkButton</class>
 	  <child_name>Toolbar:button</child_name>
-	  <name>btnSearch</name>
-	  <tooltip>Search current text or commentary module</tooltip>
+	  <name>btnSBDock</name>
+	  <tooltip>Dock/Undock Shortcut Bar</tooltip>
 	  <signal>
 	    <name>clicked</name>
-	    <handler>on_btnSearch_clicked</handler>
-	    <last_modification_time>Wed, 02 Feb 2000 19:05:05 GMT</last_modification_time>
+	    <handler>on_btnSBDock_clicked</handler>
+	    <last_modification_time>Sun, 03 Feb 2002 01:18:59 GMT</last_modification_time>
 	  </signal>
-	  <label>Search</label>
-	  <stock_pixmap>GNOME_STOCK_PIXMAP_SEARCH</stock_pixmap>
+	  <label>Dock</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_HOME</stock_pixmap>
 	</widget>
 
 	<widget>
@@ -900,7 +900,7 @@ Preformat
 	    <border_width>1</border_width>
 	    <handle_size>10</handle_size>
 	    <gutter_size>10</gutter_size>
-	    <position>195</position>
+	    <position>291</position>
 	    <child>
 	      <padding>0</padding>
 	      <expand>True</expand>
@@ -1199,7 +1199,7 @@ Revelation
 		<widget>
 		  <class>GtkHPaned</class>
 		  <name>hpaned1</name>
-		  <height>318</height>
+		  <height>186</height>
 		  <signal>
 		    <name>button_release_event</name>
 		    <handler>on_hpaned1_button_release_event</handler>
@@ -1207,7 +1207,7 @@ Revelation
 		  </signal>
 		  <handle_size>10</handle_size>
 		  <gutter_size>10</gutter_size>
-		  <position>290</position>
+		  <position>305</position>
 		  <child>
 		    <padding>0</padding>
 		    <expand>True</expand>
@@ -9176,6 +9176,34 @@ Click Finish to close this dialog and run GnomeSword.</text>
 	  </widget>
 	</widget>
       </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>dlgDock</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_dlgDock_delete_event</handler>
+    <last_modification_time>Sat, 02 Feb 2002 23:00:06 GMT</last_modification_time>
+  </signal>
+  <title>GnomeSWORD</title>
+  <type>GTK_WINDOW_DIALOG</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vboxDock</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>Placeholder</class>
     </widget>
   </widget>
 </widget>

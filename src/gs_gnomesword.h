@@ -49,6 +49,8 @@ struct _settings {
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
 		*hboxToolbar, /* for editor toolbars ??? */
+		*dockSB, /* dock for shortcut bar */
+		*vboxDock, 
 	
 	/* html widgets */
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
@@ -163,6 +165,7 @@ struct _settings {
 		editnote, /* true when percom html widget is in edit mode */
 		editgbs, /* true when percom html widget is in edit mode */
 		notefollow, /* notes follow Bible text when true */
+		docked, /* true when shortcut bar is docked */
 		modifiedSP; /* studypad file have been modified */
 		
 	GList 
