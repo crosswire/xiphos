@@ -128,15 +128,13 @@ static void open_cancel(GtkButton * button, gpointer user_data)
 static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *filesel;
+	gchar *filename = NULL;
 
 	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	sprintf(ecd->filename, "%s", gtk_file_selection_get_filename(
+	filename = g_strdup(gtk_file_selection_get_filename(
 				GTK_FILE_SELECTION(filesel)));
-	settings.studypadfilename = ecd->filename;
-	xml_set_value("GnomeSword", "studypad", "lastfile", 
-							ecd->filename);
 	gtk_widget_destroy(filesel);
-	save_file(ecd->filename, ecd);
+	save_file(filename, ecd);
 }
 
 
@@ -287,13 +285,15 @@ gint gui_fileselection_save(GSHTMLEditorControlData *ecd)
 	if(!is_running) {
 		gchar buf[256];
 		window = create_fileselection_save(ecd);
-		sprintf(buf, "%s/.pad", settings.homedir);
+		if(ecd->studypad)
+			sprintf(buf, "%s/.pad", settings.studypaddir);
+		else
+			sprintf(buf, "%s/.html", settings.studypaddir);
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION
 						(window), buf);
 		retval = 4;
 		is_running = TRUE;
 		gtk_main();
-//		g_warning("fileselection dialog closed");
 		is_running = FALSE;
 		return retval;
 	}
