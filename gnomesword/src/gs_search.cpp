@@ -32,7 +32,7 @@
 
 #include "gs_search.h"
 #include "gs_search_cb.h"
-#include "display.h"
+#include "sw_display.h"
 #include "callback.h"
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"

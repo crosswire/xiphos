@@ -34,8 +34,6 @@ COMMON_SOURCE =  \
     gs_history.h \
     callback.c \
     callback.h \
-    display.cpp \
-    display.h \
     sw_display.cpp \
     sw_display.h \
     gs_file.c \

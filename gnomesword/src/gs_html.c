@@ -595,6 +595,19 @@ void gotoanchorHTML(GtkWidget * html_widget, gchar * verse)
  ***************************************************************************************************/
 void sethtmltoeditHTML(gboolean choice)
 {
-	/* gtk_html_set_default_background_color (GTK_HTML (html_widget), &bgColor); */
 	gtk_html_set_editable(GTK_HTML(htmlComments), choice);
 }
+
+/***************************************************************************************************
+ * get html fontname from x fontname (gnome font picker name)
+ ***************************************************************************************************/
+gchar *gethtmlfontnameHTML(gchar *xfontname)
+{
+	gchar *token, *retval;
+	++xfontname;
+	token=strtok(xfontname,"-");
+	token = strtok(NULL,"-");
+	retval = token;
+	return retval;
+}
+

@@ -49,7 +49,7 @@
 #include "sw_latin1utf8.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
-#include "display.h"
+//#include "display.h"
 #include "sw_display.h"
 #include "callback.h"
 #include "sw_gnomesword.h"
@@ -74,7 +74,7 @@ typedef map < string, string > modDescMap;
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
-SWDisplay *chapDisplay;		/* to display modules using GtkText a chapter at a time */
+//SWDisplay *chapDisplay;		/* to display modules using GtkText a chapter at a time */
 SWDisplay * entryDisplay,	/* to display modules using GtkText a verse at a time */
     *comp1Display,		/* to display modules using GtkText a verse at a time */
     *comp2Display,		/* to display modules using GtkText a verse at a time */
@@ -91,14 +91,19 @@ SWMgr * mainMgr,		/* sword mgr for curMod - curcomMod - curdictMod */
     *percomMgr,			/* sword mgr for percomMod - personal comments editor */
     *listMgr;			/* sword mgr for ListEditor */
 VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
-SWModule * curMod,		/* module for main text window */
+SWModule 
+    * curMod,		/* module for main text window */
     *comp1Mod,			/* module for first interlinear window */
     *curcomMod,			/* module for commentary  window */
     *percomMod,			/* module for personal commentary  window */
     *curdictMod,		/* module for dict window */
     *listMod;			/* module for ListEditor */
-SWFilter * gbftohtml,		/* sword render filters */
-    *plaintohtml, *thmltohtml, *rwptohtml, *lattoutf8;
+SWFilter 
+    * gbftohtml,		/* sword render filters */
+    *plaintohtml, 
+    *thmltohtml, 
+    *rwptohtml, 
+    *lattoutf8;
 
 modDescMap descriptionMap;
 
@@ -177,7 +182,6 @@ void initSWORD(GtkWidget * mainform)
 	curdictMod = NULL;
 	percomMod = NULL;
 
-	chapDisplay = 0;	// set in create
 	entryDisplay = 0;	// set in create
 	comp1Display = 0;	// set in create
 	comp2Display = 0;	// set in create
@@ -201,9 +205,7 @@ void initSWORD(GtkWidget * mainform)
 	MainFrm = lookup_widget(mainform, "settings->app");	//-- save mainform for use latter
 	NEtext = lookup_widget(mainform, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
-	GTKEntryDisp::__initialize();	//-- this is for gtktext
-	chapDisplay =
-	    new GTKhtmlChapDisp(lookup_widget(mainform, "htmlTexts"));
+	GTKEntryDisp::__initialize();	//-- this is for gtktext	
 	percomDisplay =
 	    new GTKPerComDisp(lookup_widget(mainform, "textComments"));
 	UTF8Display =
@@ -576,8 +578,6 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	if (lattoutf8 != 0)
 		delete lattoutf8;
 	//-- delete Sword displays
-	if (chapDisplay)
-		delete chapDisplay;
 	if (entryDisplay)
 		delete entryDisplay;
 	if (comp1Display)
