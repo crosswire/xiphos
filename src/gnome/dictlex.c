@@ -251,11 +251,11 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	/*
 	 * set search module to current dict/lex module 
 	 */
-	strcpy(settings.sb_search_mod, d->mod_name);
+//	strcpy(settings.sb_search_mod, d->mod_name);
 	/*
 	 * set search frame label to current dict/lex module 
 	 */
-	gui_set_search_label(d->mod_name);
+	gui_set_search_label();
 	
 	gui_set_dict_frame_label();
 	
@@ -405,11 +405,11 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 	/*
 	 * set search module to current dict/lex module 
 	 */
-	strcpy(settings.sb_search_mod, dl->mod_name);
+//	strcpy(settings.sb_search_mod, dl->mod_name);
 	/*
 	 * set search frame label to current dict/lex module 
 	 */
-	gui_set_search_label(dl->mod_name);	
+//	gui_set_search_label(dl->mod_name);	
 	
 	switch (event->button) {
 	case 1:

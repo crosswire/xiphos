@@ -220,6 +220,9 @@
 /* Define if you want to use the GtkHTML-1.1 */
 #undef USE_GTKHTML1
 
+/* Define if you want to use the GtkHTML-1.1 */
+#undef USE_GTKEMBEDMOZ
+
 /* Define if you want to use ispell */
 #undef USE_ISPELL
 

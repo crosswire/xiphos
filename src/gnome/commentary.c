@@ -226,11 +226,11 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	/*
 	 * set search module to current text module 
 	 */
-	strcpy(settings.sb_search_mod, c->mod_name);
+	//strcpy(settings.sb_search_mod, c->mod_name);
 	/*
 	 * set search frame label to current commentary module 
 	 */
-	gui_set_search_label(c->mod_name);
+	gui_set_search_label();
 
 	settings.comm_last_page = page_num;
 	/*
@@ -282,11 +282,11 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	/*
 	 * set search module to current commentary module 
 	 */
-	strcpy(settings.sb_search_mod, c->mod_name);
+//	strcpy(settings.sb_search_mod, c->mod_name);
 	/*
 	 * set search frame label to current commentary module 
 	 */
-	gui_set_search_label(c->mod_name);
+//	gui_set_search_label(c->mod_name);
 
 	switch (event->button) {
 	case 1:

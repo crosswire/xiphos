@@ -25,7 +25,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-int create_xml_file(char * filename, char * name);
+	
+char *xml_get_list_from_label(char * section, char * item, char * label);
+int xml_set_section_ptr(char * section);
+void xml_set_list_item(char * section, char * item, char * label, 
+				char * value);
+int xml_next_item(void);
+char *xml_get_label(void);
+char *xml_get_list(void);
 int xml_create_settings_file(char * file_name);
 int xml_parse_settings_file(char *file_name);
 char *xml_get_value(char *section, char *item);
