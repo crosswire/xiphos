@@ -24,10 +24,12 @@
 #endif
 
 #include <gnome.h>
+#include <libxml/parser.h>
 #include <ctype.h>
 #include <time.h>
 
 #include "gui/gnomesword.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/about_modules.h"
@@ -271,7 +273,13 @@ void frontend_display(void)
  */
 
 void shutdown_frontend(void)
-{
+{	
+	if(pixbufs->pixbuf_closed)
+		g_object_unref(pixbufs->pixbuf_closed);	
+	if(pixbufs->pixbuf_opened)
+		g_object_unref(pixbufs->pixbuf_opened);	
+	if(pixbufs->pixbuf_helpdoc)
+		g_object_unref(pixbufs->pixbuf_helpdoc);
 	
 	gui_save_bookmarks_treeview();
 	/* if study pad file has changed since last save */
