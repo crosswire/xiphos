@@ -31,9 +31,6 @@ extern "C" {
 typedef struct _search_opt SEARCH_OPT;
 struct _search_opt {
 	GtkWidget
-	    *ckbCommentary,
-	    *ckbPerCom, 
-	    *ckbGBS, 
 	    *rbPhraseSearch;
 
 	gchar
@@ -51,6 +48,7 @@ struct _search_opt {
 	    use_bonds, 
 	    use_lastsearch_for_bonds;
 };
+
 
 void showSBGroup(gint groupnum);
 void changegroupnameSB(gchar * groupName, gint groupNum);

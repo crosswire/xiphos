@@ -35,6 +35,7 @@
 #include "gui/html.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
+#include "gui/shortcutbar_search.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -42,8 +43,8 @@
 #include "main/sword.h"
 
 static void on_notebook_text_switch_page(GtkNotebook * notebook,
-				  GtkNotebookPage * page,
-				  gint page_num, GList * tl);
+					 GtkNotebookPage * page,
+					 gint page_num, GList * tl);
 /******************************************************************************
  * externs
  */
@@ -87,20 +88,17 @@ void gui_get_module_global_options(TEXT_DATA * t)
 	t->tgs->gbffootnotes =
 	    check_for_global_option(t->mod_name, "GBFFootnotes");
 	t->tgs->thmlfootnotes =
-	    check_for_global_option(t->mod_name,"ThMLFootnotes");
+	    check_for_global_option(t->mod_name, "ThMLFootnotes");
 	t->tgs->greekaccents =
-	    check_for_global_option(t->mod_name,
-					    "UTF8GreekAccents");
+	    check_for_global_option(t->mod_name, "UTF8GreekAccents");
 	t->tgs->lemmas =
 	    check_for_global_option(t->mod_name, "ThMLLemma");
 	t->tgs->scripturerefs =
 	    check_for_global_option(t->mod_name, "ThMLScripref");
 	t->tgs->hebrewpoints =
-	    check_for_global_option(t->mod_name,
-					    "UTF8HebrewPoints");
+	    check_for_global_option(t->mod_name, "UTF8HebrewPoints");
 	t->tgs->hebrewcant =
-	    check_for_global_option(t->mod_name,
-					    "UTF8Cantillation");
+	    check_for_global_option(t->mod_name, "UTF8Cantillation");
 	t->tgs->headings =
 	    check_for_global_option(t->mod_name, "ThMLHeadings");
 	t->tgs->variants =
@@ -123,7 +121,7 @@ void gui_get_module_global_options(TEXT_DATA * t)
  *   void
  */
 
-static void set_page_text(gchar * modname, GList * text_list) 
+static void set_page_text(gchar * modname, GList * text_list)
 {
 	gint page = 0;
 	TEXT_DATA *t = NULL;
@@ -136,18 +134,16 @@ static void set_page_text(gchar * modname, GList * text_list)
 		++page;
 		text_list = g_list_next(text_list);
 	}
-	if(page)
-		gtk_notebook_set_page(GTK_NOTEBOOK(
-				  widgets.notebook_text), page);
+	if (page)
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.notebook_text), page);
 	else
-		on_notebook_text_switch_page(GTK_NOTEBOOK(
-				  widgets.notebook_text),
-				  NULL,
-				  page, 
-				  text_list);
+		on_notebook_text_switch_page(GTK_NOTEBOOK
+					     (widgets.notebook_text),
+					     NULL, page, text_list);
 	settings.text_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
-			settings.text_tabs);
+				   settings.text_tabs);
 }
 
 /******************************************************************************
@@ -165,13 +161,13 @@ static void set_page_text(gchar * modname, GList * text_list)
  * Return value
  *   void
  */
- 
-static void text_page_changed(gint page_num, TEXT_DATA *t)
+
+static void text_page_changed(gint page_num, TEXT_DATA * t)
 {
 	/*
 	 * remember new module name
 	 */
-	sprintf(settings.MainWindowModule, "%s", t->mod_name);	
+	sprintf(settings.MainWindowModule, "%s", t->mod_name);
 	/*
 	 * remember page number
 	 */
@@ -180,8 +176,9 @@ static void text_page_changed(gint page_num, TEXT_DATA *t)
 	 * display new module with current verse
 	 */
 	if (display_change) {
-		gui_set_text_page_and_key(page_num,settings.currentverse);
-	}	
+		gui_set_text_page_and_key(page_num,
+					  settings.currentverse);
+	}
 }
 
 /******************************************************************************
@@ -200,10 +197,11 @@ static void text_page_changed(gint page_num, TEXT_DATA *t)
  *   void
  */
 
-static void set_text_variant_global_option(gchar * option, gchar * choice)
+static void set_text_variant_global_option(gchar * option,
+					   gchar * choice)
 {
 	set_text_global_option(option, choice);
-	chapter_display(cur_t->html, cur_t->mod_name, 
+	chapter_display(cur_t->html, cur_t->mod_name,
 			cur_t->tgs, settings.currentverse, TRUE);
 }
 
@@ -227,16 +225,15 @@ static void set_text_variant_global_option(gchar * option, gchar * choice)
  */
 
 static void on_notebook_text_switch_page(GtkNotebook * notebook,
-				  GtkNotebookPage * page,
-				  gint page_num, GList * tl)
+					 GtkNotebookPage * page,
+					 gint page_num, GList * tl)
 {
 	TEXT_DATA *t;
-	gchar title[200];
 	/*
 	 * get data structure for new module 
 	 */
 	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
-	if(!t->frame)
+	if (!t->frame)
 		gui_add_new_text_pane(t);
 	/*
 	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
@@ -249,21 +246,29 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	/*
 	 * set program title to GnomeSWORD + current text module name 
 	 */
-	sprintf(title, "GnomeSWORD - %s", text_get_description(t->mod_name));
-	gtk_window_set_title(GTK_WINDOW(widgets.app), title);
+	gui_change_window_title(t->mod_name);
+	/*
+	 * set search module to current text module 
+	 */
+	strcpy(settings.sb_search_mod, t->mod_name);
+	/*
+	 * set search frame label to current text module 
+	 */
+	gui_set_search_label(t->mod_name);
 	/*
 	 *  hide/show toolbar 
 	 */
-	if(settings.text_tool)
+	if (settings.text_tool)
 		gtk_widget_show(t->frame_toolbar);
 	else
 		gtk_widget_hide(t->frame_toolbar);
-	GTK_CHECK_MENU_ITEM(t->showtoolbar)->active = settings.text_tool;
+	GTK_CHECK_MENU_ITEM(t->showtoolbar)->active =
+	    settings.text_tool;
 	/*
 	 *  keep showtabs menu item current 
 	 */
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
-	
+
 	gui_set_text_frame_label();
 	widgets.html_text = t->html;
 }
@@ -327,17 +332,18 @@ static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  */
 
 static void on_lookup_selection_activate(GtkMenuItem * menuitem,
-				  gchar * dict_mod_description)
+					 gchar * dict_mod_description)
 {
 	gchar *dict_key, mod_name[16];
 
 	memset(mod_name, 0, 16);
 	module_name_from_description(mod_name, dict_mod_description);
-	
+
 	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name, dict_key);
+			gui_display_dictlex_in_viewer(mod_name,
+						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
@@ -362,16 +368,18 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
  */
 
 static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
-				       TEXT_DATA * t)
+					      TEXT_DATA * t)
 {
 	gchar *dict_key = gui_get_word_or_selection(t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(settings.DictWindowModule,
-						  dict_key);
+			gui_display_dictlex_in_viewer(settings.
+						      DictWindowModule,
+						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(settings.DictWindowModule,
-					      dict_key);
+			gui_change_module_and_key(settings.
+						  DictWindowModule,
+						  dict_key);
 		g_free(dict_key);
 	}
 }
@@ -418,12 +426,12 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_text_showtabs_activate(GtkMenuItem *menuitem,
-		gpointer user_data)
+static void on_text_showtabs_activate(GtkMenuItem * menuitem,
+				      gpointer user_data)
 {
 	settings.text_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
-				   settings.text_tabs); 
+				   settings.text_tabs);
 	gui_set_text_frame_label();
 }
 
@@ -445,10 +453,10 @@ static void on_text_showtabs_activate(GtkMenuItem *menuitem,
  */
 
 static void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
-						TEXT_DATA * t)
+					 TEXT_DATA * t)
 {
 	settings.text_tool = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	if(settings.text_tool)
+	if (settings.text_tool)
 		gtk_widget_show(t->frame_toolbar);
 	else
 		gtk_widget_hide(t->frame_toolbar);
@@ -471,7 +479,7 @@ static void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
  */
 
 static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
-{	
+{
 	gui_open_bibletext_dialog(t->mod_name);
 }
 
@@ -756,13 +764,12 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 	gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_text_showtabs_activate), NULL);
-	
+
 	gtk_signal_connect(GTK_OBJECT(t->showtoolbar), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_text_showtoolbar_activate), t);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_view_new_activate), t);
+			   GTK_SIGNAL_FUNC(on_view_new_activate), t);
 	return pm_text;
 }
 
@@ -791,6 +798,18 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	gchar *key;
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
+	/*
+	 * set program title to GnomeSWORD + current text module name 
+	 */
+	gui_change_window_title(t->mod_name);
+	/*
+	 * set search module to current text module 
+	 */
+	strcpy(settings.sb_search_mod, t->mod_name);
+	/*
+	 * set search frame label to current text module 
+	 */	
+	gui_set_search_label(t->mod_name);
 
 	switch (event->button) {
 	case 1:
@@ -799,15 +818,19 @@ static gboolean on_button_release_event(GtkWidget * widget,
 			if (key) {
 				gchar *dict = NULL;
 				if (settings.useDefaultDict)
-					dict = g_strdup(settings.DefaultDict);
+					dict =
+					    g_strdup(settings.
+						     DefaultDict);
 				else
-					dict = g_strdup(settings.DictWindowModule);
+					dict =
+					    g_strdup(settings.
+						     DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer(dict,
-								  key);
+					gui_display_dictlex_in_viewer
+					    (dict, key);
 				if (settings.inDictpane)
 					gui_change_module_and_key(dict,
-							      key);
+								  key);
 				g_free(key);
 				if (dict)
 					g_free(dict);
@@ -845,10 +868,10 @@ static void on_t_btn_toggled(GtkToggleButton * togglebutton,
 			     gchar * option)
 {
 	set_text_module_global_option(option, togglebutton->active);
-	save_module_options(cur_t->mod_name, option, 
-				    togglebutton->active);
-	chapter_display(cur_t->html, cur_t->mod_name, cur_t->tgs, 
-				settings.currentverse, TRUE);
+	save_module_options(cur_t->mod_name, option,
+			    togglebutton->active);
+	chapter_display(cur_t->html, cur_t->mod_name, cur_t->tgs,
+			settings.currentverse, TRUE);
 }
 
 /******************************************************************************
@@ -869,7 +892,7 @@ static void on_t_btn_toggled(GtkToggleButton * togglebutton,
  */
 
 static void on_primary_reading_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+					gpointer user_data)
 {
 	set_text_variant_global_option("Textual Variants",
 				       "Primary Reading");
@@ -893,7 +916,7 @@ static void on_primary_reading_activate(GtkMenuItem * menuitem,
  */
 
 static void on_secondary_reading_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+					  gpointer user_data)
 {
 	set_text_variant_global_option("Textual Variants",
 				       "Secondary Reading");
@@ -917,7 +940,7 @@ static void on_secondary_reading_activate(GtkMenuItem * menuitem,
  */
 
 static void on_all_readings_activate(GtkMenuItem * menuitem,
-						gpointer user_data)
+				     gpointer user_data)
 {
 	set_text_variant_global_option("Textual Variants",
 				       "All Readings");
@@ -982,14 +1005,14 @@ static GnomeUIInfo variant_menu_uiinfo[] = {
  *   void
  */
 
-void gui_add_global_option_buttons(GtkWidget * toolbar, 
-				      gchar * mod_name, 
-				      TEXT_GLOBALS * tgs, 
-				      GtkMenuCallback callback)
-{	
-	gint active = 0;	
+void gui_add_global_option_buttons(GtkWidget * toolbar,
+				   gchar * mod_name,
+				   TEXT_GLOBALS * tgs,
+				   GtkMenuCallback callback)
+{
+	gint active = 0;
 	GtkWidget *variant_menu;
-	
+
 	if (tgs->gbfstrongs || tgs->thmlstrongs) {
 		tgs->t_btn_strongs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -1006,13 +1029,14 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_strongs);
 		gtk_widget_set_usize(tgs->t_btn_strongs, 24, 24);
-		
-		active = load_module_options(mod_name, "Strong's Numbers");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_strongs),
-                                        active);
-		
+
+		active =
+		    load_module_options(mod_name, "Strong's Numbers");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_strongs),
+					     active);
+
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_strongs),
 				   "toggled",
 				   GTK_SIGNAL_FUNC(callback),
@@ -1033,12 +1057,13 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_morphs);
 		gtk_widget_set_usize(tgs->t_btn_morphs, 24, 24);
-		
-		active = load_module_options(mod_name, "Morphological Tags");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_morphs),
-                                        active);
+
+		active =
+		    load_module_options(mod_name, "Morphological Tags");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_morphs),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_morphs),
 				   "toggled",
@@ -1060,12 +1085,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_footnotes);
 		gtk_widget_set_usize(tgs->t_btn_footnotes, 24, 24);
-		
+
 		active = load_module_options(mod_name, "Footnotes");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_footnotes),
-                                        active);
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_footnotes),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_footnotes),
 				   "toggled",
@@ -1088,12 +1113,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_accents);
 		gtk_widget_set_usize(tgs->t_btn_accents, 24, 24);
-		
+
 		active = load_module_options(mod_name, "Greek Accents");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_accents),
-                                        active);
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_accents),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_accents),
 				   "toggled",
@@ -1116,17 +1141,16 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_lemmas);
 		gtk_widget_set_usize(tgs->t_btn_lemmas, 24, 24);
-		
+
 		active = load_module_options(mod_name, "Lemmas");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_lemmas),
-                                        active);
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_lemmas),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_lemmas),
 				   "toggled",
-				   GTK_SIGNAL_FUNC(callback),
-				   "Lemmas");
+				   GTK_SIGNAL_FUNC(callback), "Lemmas");
 
 	}
 	if (tgs->scripturerefs) {
@@ -1145,12 +1169,14 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_scripturerefs);
 		gtk_widget_set_usize(tgs->t_btn_scripturerefs, 24, 24);
-		
-		active = load_module_options(mod_name, "Scripture Cross-references");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_scripturerefs),
-                                        active);
+
+		active =
+		    load_module_options(mod_name,
+					"Scripture Cross-references");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_scripturerefs),
+					     active);
 
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_scripturerefs),
@@ -1175,12 +1201,14 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_points);
 		gtk_widget_set_usize(tgs->t_btn_points, 24, 24);
-		
-		active = load_module_options(mod_name, "Hebrew Vowel Points");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_points),
-                                        active);
+
+		active =
+		    load_module_options(mod_name,
+					"Hebrew Vowel Points");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_points),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_points),
 				   "toggled",
@@ -1198,20 +1226,22 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       NULL, NULL, NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_cant);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "tgs->t_btn_cant", tgs->t_btn_cant,
+					 "tgs->t_btn_cant",
+					 tgs->t_btn_cant,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_cant);
 		gtk_widget_set_usize(tgs->t_btn_cant, 24, 24);
-		
-		active = load_module_options(mod_name, "Hebrew Cantillation");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_cant),
-                                        active);
 
-		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_cant), "toggled",
-				   GTK_SIGNAL_FUNC(callback),
+		active =
+		    load_module_options(mod_name,
+					"Hebrew Cantillation");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_cant), active);
+
+		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_cant),
+				   "toggled", GTK_SIGNAL_FUNC(callback),
 				   "Hebrew Cantillation");
 
 	}
@@ -1230,12 +1260,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					 gtk_widget_unref);
 		gtk_widget_show(tgs->t_btn_headings);
 		gtk_widget_set_usize(tgs->t_btn_headings, 24, 24);
-		
+
 		active = load_module_options(mod_name, "Headings");
-		
-		gtk_toggle_button_set_active(
-				GTK_TOGGLE_BUTTON(tgs->t_btn_headings),
-                                        active);
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (tgs->t_btn_headings),
+					     active);
 
 		gtk_signal_connect(GTK_OBJECT(tgs->t_btn_headings),
 				   "toggled",
@@ -1274,7 +1304,7 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 						[0].widget), TRUE);
 
 		tgs->t_btn_primary = primary_reading_uiinfo[0].widget;
-		
+
 
 		gtk_widget_ref(primary_reading_uiinfo[1].widget);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -1318,7 +1348,7 @@ static void create_text_pane(TEXT_DATA * t)
 	GtkWidget *vbox;
 	GtkWidget *toolbar;
 	GtkWidget *scrolledwindow;
-	
+
 	t->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(t->frame);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "t->frame",
@@ -1336,10 +1366,12 @@ static void create_text_pane(TEXT_DATA * t)
 
 	t->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(t->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "t->frame_toolbar", t->frame_toolbar,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "t->frame_toolbar", t->frame_toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	//gtk_widget_show(t->frame_toolbar);
-	gtk_box_pack_start(GTK_BOX(vbox), t->frame_toolbar, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), t->frame_toolbar, FALSE, TRUE,
+			   0);
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -1352,17 +1384,18 @@ static void create_text_pane(TEXT_DATA * t)
 	gtk_container_add(GTK_CONTAINER(t->frame_toolbar), toolbar);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
 				      GTK_RELIEF_NONE);
-				      
-	
-	/* add global option buttons to toolbar */			 
-	gui_add_global_option_buttons(toolbar, t->mod_name, t->tgs, 
-				(GtkMenuCallback)on_t_btn_toggled);
 
-	
+
+	/* add global option buttons to toolbar */
+	gui_add_global_option_buttons(toolbar, t->mod_name, t->tgs,
+				      (GtkMenuCallback)
+				      on_t_btn_toggled);
+
+
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "scrolledwindow",
-				 scrolledwindow,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "scrolledwindow", scrolledwindow,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledwindow, TRUE, TRUE,
@@ -1385,11 +1418,11 @@ static void create_text_pane(TEXT_DATA * t)
 	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
-			   GTK_SIGNAL_FUNC(gui_url), (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(t->html),
-			   "button_release_event",
-			   GTK_SIGNAL_FUNC
-			   (on_button_release_event), (TEXT_DATA *) t);
+			   GTK_SIGNAL_FUNC(gui_url),
+			   (gpointer) widgets.app);
+	gtk_signal_connect(GTK_OBJECT(t->html), "button_release_event",
+			   GTK_SIGNAL_FUNC(on_button_release_event),
+			   (TEXT_DATA *) t);
 }
 
 /******************************************************************************
@@ -1417,7 +1450,8 @@ void gui_set_text_frame_label(void)
 	if (settings.text_tabs)
 		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(cur_t->frame), cur_t->mod_name);
+		gtk_frame_set_label(GTK_FRAME(cur_t->frame),
+				    cur_t->mod_name);
 }
 
 /******************************************************************************
@@ -1436,7 +1470,7 @@ void gui_set_text_frame_label(void)
  *   void
  */
 
-void gui_set_text_page_and_key(gint page_num, gchar * key) 
+void gui_set_text_page_and_key(gint page_num, gchar * key)
 {
 	/*
 	 * we don't want backend_dispaly_text to be
@@ -1450,13 +1484,13 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 	}
 
 	if (cur_t->is_locked) {
-		GtkWidget *dlg;	
+		GtkWidget *dlg;
 		dlg = gui_create_cipher_key_dialog(cur_t->mod_name);
 		gtk_widget_show(dlg);
 
 	} else
-		chapter_display(cur_t->html, cur_t->mod_name, 
-					cur_t->tgs, key, TRUE);
+		chapter_display(cur_t->html, cur_t->mod_name,
+				cur_t->tgs, key, TRUE);
 	display_change = TRUE;
 }
 
@@ -1476,9 +1510,9 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
  *   void
  */
 
-void gui_display_text(gchar * key) 
+void gui_display_text(gchar * key)
 {
-	chapter_display(cur_t->html, cur_t->mod_name, 
+	chapter_display(cur_t->html, cur_t->mod_name,
 			cur_t->tgs, key, TRUE);
 }
 
@@ -1499,9 +1533,9 @@ void gui_display_text(gchar * key)
  */
 
 void gui_add_new_text_pane(TEXT_DATA * t)
-{	
+{
 	GtkWidget *popupmenu;
-	
+
 	gui_get_module_global_options(t);
 	create_text_pane(t);
 	popupmenu = create_pm_text(t);
@@ -1525,18 +1559,19 @@ void gui_add_new_text_pane(TEXT_DATA * t)
  */
 
 static void add_vbox_to_notebook(TEXT_DATA * t)
-{	
+{
 	GtkWidget *label;
-	
+
 	t->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(t->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
-			"t->vbox", t->vbox,
-			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "t->vbox", t->vbox,
+				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(t->vbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_text), t->vbox);
-	
-	
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
+			  t->vbox);
+
+
 	label = gtk_label_new(t->mod_name);
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
@@ -1572,9 +1607,9 @@ static void add_vbox_to_notebook(TEXT_DATA * t)
  *   void
  */
 
-void gui_setup_text(GList *mods) 
+void gui_setup_text(GList * mods)
 {
-	
+
 	GList *tmp = NULL;
 	gchar *modbuf;
 	TEXT_DATA *t;
@@ -1628,7 +1663,7 @@ void gui_setup_text(GList *mods)
  *   void
  */
 
-void gui_shutdown_text(void) 
+void gui_shutdown_text(void)
 {
 	text_list = g_list_first(text_list);
 	while (text_list != NULL) {
@@ -1637,17 +1672,13 @@ void gui_shutdown_text(void)
 		 * free any search dialogs created 
 		 */
 		if (t->find_dialog)
-			 g_free(t->find_dialog);
+			g_free(t->find_dialog);
 		g_free(t->tgs);
 		/* 
 		 * free each TEXT_DATA item created 
 		 */
-		 g_free((TEXT_DATA *) text_list->data);
-		 text_list = g_list_next(text_list);
-	} g_list_free(text_list);
+		g_free((TEXT_DATA *) text_list->data);
+		text_list = g_list_next(text_list);
+	}
+	g_list_free(text_list);
 }
-
-
-
-
-

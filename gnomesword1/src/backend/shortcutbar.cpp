@@ -60,15 +60,15 @@
  *   void
  */
 
-void backend_save_sb_iconsize(char * filename, char * large_icons)
+void backend_save_sb_iconsize(char *filename, char *large_icons)
 {
-    char conffile[256];
-    int j = 0;
+	char conffile[256];
+	int j = 0;
 
-    sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
-    SWConfig sbInfo(conffile);
-    sbInfo["Shortcut Info"]["Large Icon"] = large_icons;
-    sbInfo.Save();
+	sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
+	SWConfig sbInfo(conffile);
+	sbInfo["Shortcut Info"]["Large Icon"] = large_icons;
+	sbInfo.Save();
 }
 
 /******************************************************************************
@@ -88,39 +88,43 @@ void backend_save_sb_iconsize(char * filename, char * large_icons)
  *   GList *
  */
 
-GList *backend_load_sb_group(char * filename, char * group_name,
-			 char * use_largeicons)
+GList *backend_load_sb_group(char *filename, char *group_name,
+			     char *use_largeicons)
 {
-    SectionMap::iterator sit;
-    ConfigEntMap::iterator eit;
-    SWConfig *sbconf;
-    ConfigEntMap emap;
-    char *buf, conffile[256];
-    int j = 0;
-    GList *list;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+	SWConfig *sbconf;
+	ConfigEntMap emap;
+	char *buf, conffile[256];
+	int j = 0;
+	GList *list;
 
-    list = NULL;
-    sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
+	list = NULL;
+	strcpy(conffile, filename);
 
-    SWConfig sbInfo(conffile);
-    sprintf(group_name, "%s",
-	    sbInfo["Shortcut Info"]["Group Name"].c_str());
-    sprintf(use_largeicons, "%s",
-	    sbInfo["Shortcut Info"]["Large Icon"].c_str());
-    
+	SWConfig sbInfo(conffile);
+	sprintf(group_name, "%s",
+		sbInfo["Shortcut Info"]["Group Name"].c_str());
+	sprintf(use_largeicons, "%s",
+		sbInfo["Shortcut Info"]["Large Icon"].c_str());
 
-    sbconf = new SWConfig(conffile);
-    if ((sit = sbconf->Sections.find("ROOT")) != sbconf->Sections.end()) {
-	if ((eit = (*sit).second.begin()) != (*sit).second.end()) {
-	    for (eit = (*sit).second.begin(); eit != (*sit).second.end();
-		 eit++) {
-		buf = g_strdup((char *) (*eit).second.c_str());
-		list = g_list_append(list, buf);
-	    }
+
+	sbconf = new SWConfig(conffile);
+	if ((sit =
+	     sbconf->Sections.find("ROOT")) != sbconf->Sections.end()) {
+		if ((eit =
+		     (*sit).second.begin()) != (*sit).second.end()) {
+			for (eit = (*sit).second.begin();
+			     eit != (*sit).second.end(); eit++) {
+				buf =
+				    g_strdup((char *) (*eit).second.
+					     c_str());
+				list = g_list_append(list, buf);
+			}
+		}
 	}
-    }
-    delete sbconf;
-    return list;
+	delete sbconf;
+	return list;
 }
 
 /******************************************************************************
@@ -140,41 +144,44 @@ GList *backend_load_sb_group(char * filename, char * group_name,
  *   void
  */
 
-void backend_save_sb_group(char * filename, char * group_name, 
-			int group_num, char * large_icons)
+void backend_save_sb_group(GList * items, char *filename,
+			   char *group_name, int group_num,
+			   char *large_icons)
 {
-    SectionMap::iterator sit;
-    ConfigEntMap::iterator eit;
-    SWConfig *sbconf;
-    ConfigEntMap emap;
-    char buf[500], conffile[256], *item_url, *item_name;
-    int j = 0, number_of_items;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+	SWConfig *sbconf;
+	ConfigEntMap emap;
+	GList *tmp = NULL;
+	char buf[500], conffile[256], *item_url, *item_name;
+	int j = 0, number_of_items;
 
-    sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
-    unlink(conffile);
 
-    SWConfig sbInfo(conffile);
-    sbInfo["Shortcut Info"]["Group Name"] = group_name;
-    sbInfo["Shortcut Info"]["Large Icon"] = large_icons;
-    sbInfo.Save();
+	sprintf(conffile, "%s/%s", settings.shortcutbarDir, filename);
+	unlink(conffile);
 
-    sbconf = new SWConfig(conffile);
-    emap = sbconf->Sections["ROOT"];
+	SWConfig sbInfo(conffile);
+	sbInfo["Shortcut Info"]["Group Name"] = group_name;
+	sbInfo["Shortcut Info"]["Large Icon"] = large_icons;
+	sbInfo.Save();
 
-    number_of_items =
-	get_num_shortcut_items(group_num);
-
-    for (j = 0; j < number_of_items; j++) {
-	get_shortcut_item_info(group_num, j, &item_url, &item_name);
-	sprintf(buf, "branch%d", j);
-	emap.erase(buf);
-	emap.insert(ConfigEntMap::value_type(buf, (char *) item_name));
-	g_print("saving list item: %s\n", (char *) item_name);
-    }
-
-    sbconf->Sections["ROOT"] = emap;
-    sbconf->Save();
-    delete sbconf;
+	sbconf = new SWConfig(conffile);
+	emap = sbconf->Sections["ROOT"];
+	tmp = g_list_first(items);
+	while(tmp != NULL) {
+		sprintf(buf, "branch%d", j++);
+		emap.erase(buf);
+		emap.
+		    insert(ConfigEntMap::
+			   value_type(buf, (char *) tmp->data));
+		g_print("saving list item: %s\n", (char *) tmp->data);
+		g_free((char *) tmp->data);
+		tmp = g_list_next(tmp);		
+	}
+	g_list_free(tmp);
+	sbconf->Sections["ROOT"] = emap;
+	sbconf->Save();
+	delete sbconf;
 }
 
 
@@ -194,7 +201,7 @@ void backend_save_sb_group(char * filename, char * group_name,
  *   GList *
  */
 
-GList *backend_get_verse_list(char * module_name, char * vlist)
+GList *backend_get_verse_list(char *module_name, char *vlist)
 {
 	GList *retval = NULL;
 	char firstkey[256];
@@ -213,10 +220,8 @@ GList *backend_get_verse_list(char * module_name, char * vlist)
 					     default_verse_key);
 
 	while (!tmp_verse_list.Error()) {
-		retval =
-		    g_list_append(retval,
-				  g_strdup((const char *)
-					   tmp_verse_list));
+		retval = g_list_append(retval, g_strdup((const char *)
+							tmp_verse_list));
 		if (!count)
 			sprintf(firstkey, "%s",
 				(const char *) tmp_verse_list);
@@ -225,5 +230,3 @@ GList *backend_get_verse_list(char * module_name, char * vlist)
 	}
 	return retval;
 }
-
-

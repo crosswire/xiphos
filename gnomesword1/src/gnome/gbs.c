@@ -39,6 +39,8 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/bookmarks.h"
 #include "gui/html.h"
+#include "gui/main_window.h"
+#include "gui/shortcutbar_search.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
@@ -389,7 +391,15 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	} else {
 		settings.book_key[0] = '\0';
 	}
-	
+	gui_change_window_title(g->mod_name);
+	/*
+	 * set search module to current gbs module 
+	 */
+	strcpy(settings.sb_search_mod, g->mod_name);
+	/*
+	 * set search frame label to current gbs module 
+	 */
+	gui_set_search_label(g->mod_name);
 	
 	strcpy(settings.BookWindowModule, g->mod_name);
 
@@ -641,6 +651,15 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	gchar *key;
 	
 	settings.whichwindow = BOOK_WINDOW;
+	gui_change_window_title(g->mod_name);
+	/*
+	 * set search module to current gbs module 
+	 */
+	strcpy(settings.sb_search_mod, g->mod_name);
+	/*
+	 * set search frame label to current gbs module 
+	 */
+	gui_set_search_label(g->mod_name);
 	
 	switch (event->button) {
 	case 1:
