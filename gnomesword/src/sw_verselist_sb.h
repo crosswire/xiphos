@@ -1,12 +1,13 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                                  gs_shordcutbar.h
+                                 sw_verselist_sb.h
                              -------------------
-    begin                : Thu Jun 14 2001
-    copyright            : (C) 2001 by tbiggs
-    email                : tbiggs@users.sf.net
+    begin                : Thur Aug 02 2001
+    copyright            : (C) 2001 by Terry Biggs
+    email                : tbiggs@infinet.com
  ***************************************************************************/
 
- /*
+/*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -21,35 +22,26 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef __GS_SHORTCUTBAR_H_
-#define __GS_SHORTCUTBAR_H_
+#ifndef __SW_VERSELIST_SB_H__
+#define __SW_VERSELIST_SB_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
+#include <gnome.h>	
 #include "gs_gnomesword.h"
+
+gboolean getVerseListSBSWORD(gchar *modName, 
+					gchar *vlist, 
+					SETTINGS *s);
+void setupVerseListSBSWORD(GtkWidget *html_widget);
+void shutdownverselistSBSWORD(void);
+void changeVerseListSBSWORD(gchar *url);
 	
-void showSBVerseList(SETTINGS *s);
-void on_btnSB_clicked(GtkButton * button, gpointer user_data);
-void setupSB(GList *text, GList *commentary, GList *dictionary);
-/*void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
-				       GdkEvent * event,
-				       gint group_num, gint item_num);
-*/
-void update_shortcut_bar(SETTINGS *s,
-					GList *text, 
-					GList *commentary, 
-					GList *dictionary);
-		
-	
+
 #ifdef __cplusplus
 }
 #endif
-
-#endif  /* __GS_SHORTCUTBAR_H_ */
-
-
+#endif /* __SW_VERSELIST_SB_H__ */
 
