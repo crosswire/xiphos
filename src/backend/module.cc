@@ -32,6 +32,7 @@
 
 #include <swmodule.h>
 #include <versekey.h>
+#include <utf8html.h>
 
 
 #include "backend/mgr.hh"
@@ -65,7 +66,6 @@ static ModMap::iterator begin;
 static ModMap::iterator end;
 static VerseKey versekey;
 
-
 /******************************************************************************
  * externs
  */
@@ -73,6 +73,43 @@ static VerseKey versekey;
 extern ListKey results;
 extern ListKey search_scope_list;
 extern SWKey *current_scope;
+
+
+/******************************************************************************
+ * Name
+ *   backend_get_preverse_header
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   char *backend_get_preverse_header(char * module_name, char * key, int pvHeading)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char*
+ */
+
+char *backend_get_preverse_header(char * module_name, char * key, int pvHeading)
+{
+	UTF8HTML u2html;
+	SWBuf newtext;
+	char buf[12];
+	char *retval = NULL;	
+	SWModule *module = sw.text_mgr->Modules[module_name];
+	
+	sprintf(buf, "%i", pvHeading);  
+	module->SetKey(key);	
+	module->RenderText();                 	
+	SWBuf preverseHeading = module->getEntryAttributes()
+					   ["Heading"]["Preverse"][buf].c_str();
+	u2html.processText(preverseHeading);
+	if (preverseHeading.length()) {  
+		retval = strdup(preverseHeading.c_str());
+	}  
+	return retval;	
+}
 
 
 /******************************************************************************
@@ -101,8 +138,7 @@ char *backend_get_footnote_body(char *module_name,
 	module->RenderText();
 	keybuf = module->getKey();
 	SWBuf body =
-	    module->getEntryAttributes()["Footnote"][note]["body"].
-	    c_str();
+	    module->getEntryAttributes()["Footnote"][note]["body"].c_str();
 	module->renderFilter(body, keybuf);
 	if (body)
 		return strdup(body.c_str());

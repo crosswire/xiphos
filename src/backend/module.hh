@@ -32,6 +32,8 @@ struct _name_type {
 	int type;
 };
 
+
+char *backend_get_preverse_header(char * module_name, char * key, int pvHeading);
 char *backend_get_footnote_body(char *module_name, 
 					char *key, char *note);
 int backend_get_display_level(char * module_name);
