@@ -162,7 +162,7 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
  *   goto_bookmark
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void goto_bookmark(gchar * mod_name, gchar * key)
  *
@@ -211,7 +211,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
  *   get_xml_folder_data
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
  *
@@ -242,7 +242,7 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
  *    get_xml_bookmark_data
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)	
  *
@@ -295,7 +295,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
  *  free_bookmark_data
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void free_bookmark_data(BOOKMARK_DATA *data)
  *
@@ -321,7 +321,7 @@ static void free_bookmark_data(BOOKMARK_DATA * data)
  *  add_node_to_ctree
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   GtkCTreeNode *add_node_to_ctree(GtkCTree * ctree, 
  *			GtkCTreeNode *node, BOOKMARK_DATA * data)	
@@ -352,7 +352,7 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DAT
  *  add_node
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void add_node(xmlDocPtr doc, xmlNodePtr cur, GtkCTree * ctree,
 						GtkCTreeNode *node)	
@@ -564,7 +564,7 @@ static void tree_selection_changed(GtkTreeSelection * selection,
  *  load_xml_bookmarks
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void load_xml_bookmarks(GtkCTree * ctree)	
  *
@@ -587,12 +587,13 @@ static void load_xml_bookmarks(GtkTreeView *tree, GtkTreeIter *iter)
 	g_string_free(str, TRUE);
 }
 
+
 /******************************************************************************
  * Name
  *   row_changed
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void row_changed(GtkTreeModel *treemodel, GtkTreePath *arg1,
  *                             GtkTreeIter *arg2, gpointer user_data)
@@ -604,20 +605,44 @@ static void load_xml_bookmarks(GtkTreeView *tree, GtkTreeIter *iter)
  *   void
  */
 
-void row_changed(GtkTreeModel *treemodel, GtkTreePath *arg1,
-                             GtkTreeIter *arg2, gpointer user_data)
+static void row_changed(GtkTreeModel * treemodel, GtkTreePath * arg1,
+                             GtkTreeIter * arg2, gpointer user_data)
 {
 	bookmarks_changed = TRUE;
-	gui_save_bookmarks_treeview();
-	bookmarks_changed = TRUE;
 }
+
+
+/******************************************************************************
+ * Name
+ *   row_changed
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_treeview.h"
+ *
+ *   void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1, 
+ *							gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1, 
+							gpointer user_data)
+{
+	bookmarks_changed = TRUE;
+	gui_save_bookmarks_treeview();	
+}
+
 
 /******************************************************************************
  * Name
  *   create_pixbufs
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void create_pixbufs(void)
  *
@@ -647,7 +672,7 @@ static void create_pixbufs(void)
  *   add_columns
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   void add_columns(GtkTreeView * tree)
  *
@@ -706,7 +731,7 @@ static void add_columns(GtkTreeView * tree)
  *   create_model
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   GtkTreeModel *create_model(void)
  *
@@ -735,7 +760,7 @@ static GtkTreeModel *create_model(void)
  *   button_press_event
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   gboolean button_press_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer user_data)
@@ -792,7 +817,7 @@ static gboolean button_press_event(GtkWidget * widget,
  *   gui_create_bookmark_tree
  *
  * Synopsis
- *   #include "gui/bookmarks_menu.h"
+ *   #include "gui/bookmarks_treeview.h"
  *
  *   GtkWidget *gui_create_bookmark_tree(void)
  *
@@ -843,6 +868,8 @@ GtkWidget *gui_create_bookmark_tree(void)
 	
 	g_signal_connect(model, "row-changed",
 			 G_CALLBACK(row_changed), NULL);
+	g_signal_connect(model, "row-deleted",
+			 G_CALLBACK(row_deleted), NULL);
 	
 	return tree;
 }
