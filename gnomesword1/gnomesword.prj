@@ -168,7 +168,7 @@ module.source.files=\
 	src/gnome/_commentary.c\
 	src/gnome/commentary_find.c\
 	src/gnome/_dictlex.c\
-	src/gnome/_display_info.h\
+	src/gnome/_display_info.c\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\
 	src/gnome/_percomm.c\
@@ -205,7 +205,6 @@ module.source.files=\
 	src/main/gs_history.c\
 	src/main/gs_html.c\
 	src/main/gs_info_box.c\
-	src/main/gs_information_dlg.c\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
 	src/main/gs_preferences_dlg.c\

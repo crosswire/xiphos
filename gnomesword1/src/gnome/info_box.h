@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * studypad.h - studypad gui
+ * info_box.h - information dialog - (ie do you want to save studypad file)
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,16 +19,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __STUDYPAD_H_
-#define __STUDYPAD_H_
+#ifndef __INFO_BOX_H_
+#define __INFO_BOX_H_
 
-#include <gnome.h>
-#include "settings.h"
-#include "_editor.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
-gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
-gint load_file(gchar * filename, GSHTMLEditorControlData * ecd);
-GtkWidget *gui_create_studypad_control(GtkWidget * notebook, SETTINGS * s);
+GtkWidget *gui_create_info_box(void);
 
-#endif	/* __STUDYPAD_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __INFO_BOX_H_ */
+

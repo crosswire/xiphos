@@ -60,6 +60,8 @@ libgui_a_SOURCES =  \
     gbs_find.h \
     gui.c \
     gui.h \
+    info_box.c \
+    info_box.h \
     interlinear_dialog.c \
     interlinear_dialog.h \
     link_dialog.c \

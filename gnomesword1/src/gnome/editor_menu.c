@@ -44,21 +44,22 @@
 #include "spell_gui.h"
 #endif	/* USE_SPELL */
 
-/* gnome */
+/* frontend */
 #include "_editor.h"
 #include "editor_toolbar.h"
 #include "editor_menu.h"
 #include "editor_replace.h"
 #include "editor_search.h"
+#include "_percomm.h"
 #include "link_dialog.h"
 #include "fileselection.h"
 #include "studypad.h"
+#include "info_box.h"
 
 /* main */
 #include "percomm.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
-#include "gs_info_box.h"
 #include "settings.h"
 
 /****************************************************************************** 
