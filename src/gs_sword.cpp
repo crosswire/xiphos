@@ -1,10 +1,10 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                                  gs_sword.cpp 
+                                    gs_sword.cpp 
                              -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
+ 				Mon May 8 2000
+    		   copyright (C) 2000 by Terry Biggs
+ 			    tbiggs@infinet.com
  ***************************************************************************/
  
 /*
@@ -178,11 +178,6 @@ extern GString
 	*gs_clipboard;	
 extern HISTORY 
 	historylist[];  /* sturcture for storing history items */
-extern GList 
-	*langlistfavorites,
-	*langlisttext,
-	*langlistcomm,
-	*langlistdict;
 
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -200,7 +195,8 @@ initSWORD(GtkWidget *mainform)
 	int   	
 		i, //-- counter
 		j; //-- counter	
-	gchar *font, *lang;
+	gchar 
+		*lang;
 	
   	g_print("Initiating Sword\n"); 
 	
@@ -240,10 +236,6 @@ initSWORD(GtkWidget *mainform)
 	sbbiblemods 		= NULL;
 	sbcommods 		= NULL;
 	sbdictmods 		= NULL;
-	langlistfavorites	= NULL;
-	langlisttext 		= NULL;
-	langlistcomm 		= NULL;
-	langlistdict		= NULL;
 	
 	MainFrm = lookup_widget(mainform,"settings->app"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
@@ -265,7 +257,6 @@ initSWORD(GtkWidget *mainform)
 	}
 	g_print("Loading SWORD Moudules\n"); 
 	g_print("gnomesword-%s\n",VERSION);
-	font = "roman";
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){		
 		descriptionMap[string((char *)(*it).second->Description())] = string((char *)(*it).second->Name());		
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
@@ -276,12 +267,8 @@ initSWORD(GtkWidget *mainform)
 			++textpages;
 			biblemods = g_list_append(biblemods,curMod->Name());
 			sbbiblemods = g_list_append(sbbiblemods,curMod->Description());
-			lang = addrenderfiltersSWORD(curMod, section);
-			//if(!strcmp(lang,"grc")){
-				//curMod->Disp(chapDisplay);
-			// /*}else{
-				curMod->Disp(UTF8Display);
-			//}*/
+			addrenderfiltersSWORD(curMod, section);
+			curMod->Disp(UTF8Display);
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
@@ -290,7 +277,7 @@ initSWORD(GtkWidget *mainform)
 			++compages; //-- how many pages do we have  
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
-			langlistcomm = g_list_append(langlistcomm, addrenderfiltersSWORD(curcomMod, section)); 
+			addrenderfiltersSWORD(curcomMod, section); 
 			curcomMod->Disp(HTMLDisplay);
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules	
 			havedict = TRUE; //-- we have at least one lex / dict module
@@ -300,7 +287,7 @@ initSWORD(GtkWidget *mainform)
 			sbdictmods = g_list_append(sbdictmods,curdictMod->Description());
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
 			ConfigEntMap &section = (*sit).second;
-			langlistdict = g_list_append(langlistdict, addrenderfiltersSWORD(curdictMod, section));
+			addrenderfiltersSWORD(curdictMod, section);
 			curdictMod->Disp(dictDisplay);
 		}
 	} 		
@@ -553,11 +540,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	}  
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
-	g_string_free(gs_clipboard,TRUE);
-	g_list_free(langlisttext);
-	g_list_free(langlistcomm);
-	g_list_free(langlistdict);
-	
+	g_string_free(gs_clipboard,TRUE);	
 	//-- delete Sword managers
 	delete mainMgr;   
 	delete mainMgr1;
@@ -1515,7 +1498,7 @@ getSwordVerionSWORD(void)
 {
 	gfloat retval;
 	
-	retval = 0.0; //mainMgr->Version();
+	retval = mainMgr->Version();
 	return retval;
 }
 
