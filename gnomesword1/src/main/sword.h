@@ -27,7 +27,6 @@ extern "C" {
 #endif
 #include <gnome.h>
 	
-#include "main/key.h"	
 #include "main/configs.h"	
 /*** these defs need to be seen by gui and backend ***/
 	

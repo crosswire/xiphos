@@ -135,18 +135,6 @@ void main_dialog_set_global_options(DIALOG_DATA * t)
 			  t->ops->headings);
 	set_dialog_global_option(t, "Words of Christ in Red",
 			  t->ops->words_in_red);
-
-//	if (!ops->module_type) {	/* if we have Biblical text */
-/*		if (ops->variants_primary)
-			set_text_global_option("Textual Variants",
-					       "Primary Reading");
-		else if (ops->variants_secondary)
-			set_text_global_option("Textual Variants",
-					       "Secondary Reading");
-		else
-			set_text_global_option("Textual Variants",
-					       "All Readings");
-*/
 	
 }
 
@@ -190,18 +178,6 @@ void main_set_global_options(GLOBAL_OPS * ops)
 	set_global_option(ops->module_type, "Words of Christ in Red",
 			  ops->words_in_red);
 
-	if (!ops->module_type) {	/* if we have Biblical text */
-/*		if (ops->variants_primary)
-			set_text_global_option("Textual Variants",
-					       "Primary Reading");
-		else if (ops->variants_secondary)
-			set_text_global_option("Textual Variants",
-					       "Secondary Reading");
-		else
-			set_text_global_option("Textual Variants",
-					       "All Readings");
-*/
-	}
 }
 
 
