@@ -647,3 +647,15 @@ on_btnSpellNotes_clicked               (GtkButton       *button,
 void
 on_btnSpellNotes_clicked               (GtkButton       *button,
                                         gpointer         user_data);
+
+void
+on_fpMainwindowitalic_font_set         (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data);
+
+void
+save_changes_handler         					(int reply, gpointer data);
+
+void
+on_auto_save_notes1_activate			(GtkMenuItem     *menuitem,
+                                        gpointer         user_data);

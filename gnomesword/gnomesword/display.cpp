@@ -25,7 +25,7 @@
 /********************************************************************\
 **********************************************************************
 **  this code was taken from the Sword Cheatah program							**
-**  and modfied to handle some of the BTF stuff. Also added	 				**
+**  and modfied to handle some of the GBF stuff. Also added	 				**
 **  suport for the x symbol font when using greek modules.     			**
 **                             																			**                                                    	 **
 **********************************************************************
@@ -37,6 +37,8 @@
 #include <versekey.h>
 
 #include "display.h"
+#include "support.h"
+#include "GnomeSword.h"
 
 GdkColor GTKEntryDisp::colourBlue;
 GdkColor GTKEntryDisp::colourGreen;
@@ -55,7 +57,7 @@ gchar			*font_mainwindow ="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8
 extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
 extern bool bVerseStyle;
-
+extern GtkWidget *MainFrm; //-- pointer to app -- declared in GnomeSword.cpp
 //-----------------------------------------------------------------------------------------------
 char 
 GTKEntryDisp::Display(SWModule &imodule) 
@@ -63,6 +65,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 	char tmpBuf[255];
 	GdkFont *sword_font;
 
+	
     /* Load a  font */
 	sword_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
 
@@ -72,10 +75,23 @@ GTKEntryDisp::Display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 	gtk_text_freeze (GTK_TEXT(gtkText));
 	sprintf(tmpBuf, "[%s][ %s] ", imodule.Name(),imodule.KeyText());
-	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);	
-
+	if(((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&  //-- check for personal comments by finding ModDrv=RawFiles
+				      (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active))            //-- check for edit mode
+	{
+	  GtkWidget *statusbar;  //-- pointer to comments statusbar
+  	gint  context_id2;     //-- statusbar context_id ???
+   	//-- setup statusbar for personal comments
+		statusbar = lookup_widget(MainFrm, "sbNotes"); //-- get stutusbar
+		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword"); //-- get context id
+		gtk_statusbar_pop (GTK_STATUSBAR (statusbar),context_id2 );   //-- ready status
+		gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2, tmpBuf); //-- show modName and verse ref in statusbar		
+	}
+	else //-- not useing personal comment module in edit mode
+	{	
+		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);	//-- show modName and verse ref in text widget
+	}
+  //-- show module text for current key
 	gtk_text_insert(GTK_TEXT(gtkText),sword_font , &gtkText->style->black, NULL, (const char *)imodule, -1);
-
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
 }
