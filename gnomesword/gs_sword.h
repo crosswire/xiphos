@@ -35,109 +35,46 @@ extern "C" {
 
 
 
-typedef struct _listitem LISTITEM;
-struct _listitem {
-	gint type;
-	gint level;
-	gchar item[80];
-	gchar preitem[80];
-	gchar subitem[80];
-	gchar menu[80];
-};
-
 void initSword(GtkWidget *mainform);
-
-
-void FillDictKeys(char *ModName);
-
-void changeVerse(gchar * ref);
 
 void ShutItDown(void);
 
-
-
+void FillDictKeys(char *ModName);
+void changeVerse(gchar * ref);
 void searchSWORD(GtkWidget * searchFrm);
-
-void resultsListSWORD(GtkWidget * searchFrm, gint row, gint column);
-
+void resultsListSWORD(GtkWidget * searchFrm, 
+		gint row, 
+		gint column);
 void setupSearchDlg(GtkWidget * searchDlg);
-
 void strongsSWORD(gboolean choice);
-
-void addBookmark(void);
-
-void editbookmarksLoad(GtkWidget * editdlg);
-
 void footnotesSWORD(gboolean choice);
-
 void changecurModSWORD(gchar * modName);
-
 void navcurcomModSWORD(gint direction);
-
 void changecomp1ModSWORD(gchar * modName);
-
 void changecomp2ModSWORD(gchar * modName);
-
 void changecomp3ModSWORD(gchar * modName);
-
 void setversestyleSWORD(gboolean choice);
-
-void showIntPage(gboolean choice);
-
 void chapterSWORD(void);
-
 void verseSWORD(void);
-
 void btnlookupSWORD(void);
-
 void freeformlookupSWORD(GdkEventKey * event);
-
-void changcurcomModSWORD(gchar * modName, gint page_num);
-
+void changcurcomModSWORD(gchar * modName, 
+		gint page_num);
 void editnoteSWORD(gboolean editbuttonactive);
-
 void savenoteSWORD(gboolean noteModified);
-
 void deletenoteSWORD(void);
-
-void changcurdictModSWORD(gchar * modName, gchar* keyText, gint page_num);
+void changcurdictModSWORD(gchar * modName, 
+		gchar* keyText, 
+		gint page_num);
 void dictSearchTextChangedSWORD(gchar * mytext);
-
 void dictchangekeySWORD(gint direction);
-
-void addHistoryItem(gchar *ref);
-
-void changepercomModSWORD(gchar * modName);
-
-void setcurrentversecolor(gint arg1, gint arg2, gint arg3);
-
-void setautosave(gboolean choice);
-
-void clearhistory(void);
-
-void printfile(void);
-
-void openpropertiesbox(void);
-
-void changepagenotebook(GtkNotebook * notebook, gint page_num);
-
 void showmoduleinfoSWORD(char *modName);
-
-void showinfoSWORD(GtkWidget * text, GtkLabel * label);
-
-void newSP(GtkWidget * text);
-
-void setformatoption(GtkWidget * button);
-
-gint getversenumber(GtkWidget * text);
-
-gint getdictnumber(GtkWidget * text);
-
-void sbchangeModSword(gint group_num, gint item_num);
+void showinfoSWORD(GtkWidget * text, 
+		GtkLabel * label);
 void lookupStrongsSWORD(gint theNumber);
 void setglobalopsSWORD(gchar *option,
-			gchar *yesno);
-
+		gchar *yesno);
+void changepercomModSWORD(gchar * modName);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
