@@ -348,6 +348,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	gchar *text_str = NULL;
 	gchar *paragraphMark;
 	gchar *preverse = NULL;
+	gchar *br = NULL;
 	gint count;
 	gboolean was_editable = FALSE;
 	gboolean newparagraph = FALSE;
@@ -474,7 +475,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			     (strstr(text_str, "</p>") == NULL)  ) {
 				sprintf(tmpbuf, " %s", "</font><br>");
 			} else {
-				sprintf(tmpbuf, " %s", "</font>");
+				br = g_strrstr(text_str, "<br"); /* last occurance */
+				if(strlen(br) > 6)					
+					sprintf(tmpbuf, " %s", "</font><br>");
+				else
+					sprintf(tmpbuf, " %s", "</font>");
 			}
 			if ((strstr(text_str, "<!P>") == NULL) &&
 			     (strstr(text_str, "<p>") == NULL) ) {
