@@ -42,12 +42,7 @@
 
 #include "gnome/shortcutbar.h"
 
-//extern gint groupnum6;
-
 SEARCH_OPT so, *p_so;
-
-GList *sblist;			/* for saving search results to bookmarks */
-
 
 static GtkWidget *rrbUseBounds;
 static GtkWidget *entrySearch;
@@ -65,7 +60,6 @@ static GtkWidget *radiobutton_search_comm;
 
 //static GtkWidget *radiobutton_search_dict;
 //static GtkWidget *radiobutton_search_book;
-
 
 void gui_search_update_sidebar(char percent, void *userData)
 {
@@ -238,7 +232,9 @@ static void fill_search_results_list(int finds)
 	gchar *buf2 = N_("Occurrences of");
 	gchar *buf3 = N_("found in");
 
-
+	//g_list_free(sblist);
+	//sblist = NULL;
+	
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
 	list_store = GTK_LIST_STORE(model);
 	//gtk_clist_clear(GTK_CLIST(sidebar.clist));
@@ -249,6 +245,7 @@ static void fill_search_results_list(int finds)
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 					   tmpbuf, -1);
+		//sblist = g_list_append(sblist,(gchar *)tmpbuf);
 	}
 
 	strcpy(settings.groupName, buf0);
@@ -318,9 +315,7 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 			settings.CommWindowModule);
 		strcpy(settings.sb_search_mod,
 		       settings.CommWindowModule);
-	} 
-		
-	
+	} 	
 	
 	search_module = settings.sb_search_mod;
 	p_so->module_name = search_module;
@@ -343,7 +338,6 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 	if (GTK_TOGGLE_BUTTON(rbLastSearch)->active)
 		set_scope2last_search();
 
-
 	search_string = gtk_entry_get_text(GTK_ENTRY(entrySearch));
 	sprintf(settings.searchText, "%s", search_string);
 
@@ -354,14 +348,12 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 	search_params =
 	    GTK_TOGGLE_BUTTON(ckbCaseSensitive)->active ? 0 : REG_ICASE;
 
-	//clear_search_list();
-
 	finds = do_module_search(search_module, search_string,
 				 settings.searchType, search_params,
 				 FALSE);
 
 	fill_search_results_list(finds);
-
+	gtk_widget_set_sensitive(sidebar.menu_item_save_search,finds);
 }
 
 
