@@ -572,8 +572,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 "toolbarOptions", toolbarOptions,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarOptions);
-	gtk_container_add(GTK_CONTAINER(handleboxOptionsBar),
-			  toolbarOptions);
+	gtk_container_add(GTK_CONTAINER(handleboxOptionsBar),toolbarOptions);
 	gtk_widget_set_usize(toolbarOptions, -2, 34);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarOptions),
 				      GTK_RELIEF_NONE);
@@ -1117,9 +1116,18 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (notebook3),
 							     0), label64);
-
+	/************************************************************************** GBS html editor/display */
 	settings->htmlBook = gbs_control(notebook3, settings);
-
+	
+	gtk_box_pack_start(GTK_BOX(hboxToolbar), settings->toolbarBooks, TRUE,
+			   TRUE, 0);
+/*
+	gnome_app_add_toolbar (GNOME_APP (settings->app), 
+				GTK_TOOLBAR (settings->toolbarBooks),
+			        GS_DOCK_GBS,
+			        GNOME_DOCK_ITEM_BEH_NORMAL,
+			        GNOME_DOCK_TOP, 1, 1, 0);
+*/	
 	label185 = gtk_label_new(_("Books"));
 	gtk_widget_ref(label185);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label185",
@@ -1131,7 +1139,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 							     (notebook3),
 							     1), label185);
 
-
+	/*********************************************************************** end GBS html editor/display */
 	vbox2 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox2);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vbox2", vbox2,
@@ -1172,8 +1180,17 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(vboxPC);
 	gtk_container_add(GTK_CONTAINER(nbPerCom), vboxPC);
 
-	percom_control(vboxPC, settings);
-
+	/************************************************************************** percom html editor/display */
+	percom_control(vboxPC, settings);	
+	gtk_box_pack_start(GTK_BOX(hboxToolbar), settings->toolbarComments, TRUE,
+			   TRUE, 0);
+/*
+	gnome_app_add_toolbar (GNOME_APP (settings->app), 
+				GTK_TOOLBAR (settings->toolbarComments),
+			        GS_DOCK_PC,
+			        GNOME_DOCK_ITEM_BEH_NORMAL,
+			        GNOME_DOCK_TOP, 1, 2, 0);
+*/	
 	label = gtk_label_new("label");
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label", label,
@@ -1183,7 +1200,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (nbPerCom),
 							     0), label);
-
+	/***************************************************************** end percom html editor/display */
 	scrolledwindow11 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow11);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app),
@@ -1283,9 +1300,17 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (notebook3),
 							     3), label12);
-
+	/********************************************************************** studypad editor */
 	settings->htmlSP = studypad_control(notebook3, settings);
-
+	gtk_box_pack_start(GTK_BOX(hboxToolbar), settings->toolbarStudypad, TRUE,
+			   TRUE, 0);
+/*	
+	gnome_app_add_toolbar (GNOME_APP (settings->app), 
+				GTK_TOOLBAR (settings->toolbarStudypad),
+			        GS_DOCK_SP,
+			        GNOME_DOCK_ITEM_BEH_NORMAL,
+			        GNOME_DOCK_TOP, 1, 3, 0);
+*/				
 	label41 = gtk_label_new(_("Study Pad"));
 	gtk_widget_ref(label41);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label41",
@@ -1296,12 +1321,13 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							     (notebook3),
 							     4), label41);
+	/************************************************************** end studypad editor */
+							     
 	hbox8 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox8);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "hbox8", hbox8,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox8);
-
 
 
 	e_paned_pack2(E_PANED(vpaned1), hbox8, TRUE, TRUE);
