@@ -126,6 +126,12 @@ class HTMLentryDisp:public GTKEntryDisp { public:
 };
 
 //----------------------------------------------------------------------------------------------
+class GTKRWPDisp:public GTKEntryDisp { public:
+	GTKRWPDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
 class GTKInterlinearDisp:public GTKEntryDisp { public:
 	GTKInterlinearDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
