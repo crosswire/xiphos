@@ -50,87 +50,6 @@
 
 WIDGETS widgets;
 
-static char *book_open_xpm[] = {
-	"16 16 4 1",
-	"       c None s None",
-	".      c black",
-	"X      c #808080",
-	"o      c white",
-	"                ",
-	"  ..            ",
-	" .Xo.    ...    ",
-	" .Xoo. ..oo.    ",
-	" .Xooo.Xooo...  ",
-	" .Xooo.oooo.X.  ",
-	" .Xooo.Xooo.X.  ",
-	" .Xooo.oooo.X.  ",
-	" .Xooo.Xooo.X.  ",
-	" .Xooo.oooo.X.  ",
-	"  .Xoo.Xoo..X.  ",
-	"   .Xo.o..ooX.  ",
-	"    .X..XXXXX.  ",
-	"    ..X.......  ",
-	"     ..         ",
-	"                "
-};
-
-static char *book_closed_xpm[] = {
-	"16 16 6 1",
-	"       c None s None",
-	".      c black",
-	"X      c red",
-	"o      c yellow",
-	"O      c #808080",
-	"#      c white",
-	"                ",
-	"       ..       ",
-	"     ..XX.      ",
-	"   ..XXXXX.     ",
-	" ..XXXXXXXX.    ",
-	".ooXXXXXXXXX.   ",
-	"..ooXXXXXXXXX.  ",
-	".X.ooXXXXXXXXX. ",
-	".XX.ooXXXXXX..  ",
-	" .XX.ooXXX..#O  ",
-	"  .XX.oo..##OO. ",
-	"   .XX..##OO..  ",
-	"    .X.#OO..    ",
-	"     ..O..      ",
-	"      ..        ",
-	"                "
-};
-
-static char *mini_page_xpm[] = {
-	"16 16 4 1",
-	"       c None s None",
-	".      c black",
-	"X      c white",
-	"o      c #808080",
-	"                ",
-	"   .......      ",
-	"   .XXXXX..     ",
-	"   .XoooX.X.    ",
-	"   .XXXXX....   ",
-	"   .XooooXoo.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   .XooooooX.o  ",
-	"   .XXXXXXXX.o  ",
-	"   ..........o  ",
-	"    oooooooooo  ",
-	"                "
-};
-
-GdkPixmap *pixmap1;
-GdkPixmap *pixmap2;
-GdkPixmap *pixmap3;
-GdkBitmap *mask1;
-GdkBitmap *mask2;
-GdkBitmap *mask3;
-
 extern HISTORY history_list[];	/* sturcture for storing history items */
 extern gint history_items;
 
@@ -635,7 +554,7 @@ void create_mainwindow(void)
 	GtkWidget *label197;
 	GtkWidget *hbox25;
 	GtkWidget *notebook;
-  GtkWidget *empty_notebook_page;
+	GtkWidget *empty_notebook_page;
 	GdkColor transparent = { 0 };
 	gint page_num = 0;
 
@@ -687,7 +606,8 @@ void create_mainwindow(void)
 	gtk_box_pack_start(GTK_BOX(vboxMain),
 			   notebook, FALSE,
 			  FALSE , 0);
-	gtk_widget_set_size_request(notebook, -1, 26);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook), FALSE);
+	//gtk_widget_set_size_request(notebook, -1, 18);
 	
 	empty_notebook_page = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (empty_notebook_page);
@@ -695,6 +615,7 @@ void create_mainwindow(void)
 	
 	label41 = gtk_label_new(_("//KJV/John 3:16"));
 	gtk_widget_show(label41);
+	gtk_widget_set_size_request(notebook, -1, 20);
 
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK
 				   (notebook),
@@ -702,7 +623,6 @@ void create_mainwindow(void)
 				   (GTK_NOTEBOOK
 				    (notebook),
 				    0), label41);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook), FALSE);
 	/* tabbed notebook end */
 	
 	/*
@@ -898,44 +818,7 @@ void create_mainwindow(void)
 	/*
 	 * parallel page 
 	 */
-/*
-	widgets.frame_parallel = gtk_frame_new(NULL);
-	gtk_widget_show(widgets.frame_parallel);
-	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
-			  widgets.frame_parallel);
 
-	swInt = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(swInt);
-	gtk_container_add(GTK_CONTAINER(widgets.frame_parallel),
-			  swInt);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swInt),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_ALWAYS);
-
-	settings.dockedInt = TRUE;
-
-	widgets.html_parallel = gtk_html_new();
-	gtk_widget_show(widgets.html_parallel);
-	gtk_html_load_empty(GTK_HTML(widgets.html_parallel));
-	gtk_container_add(GTK_CONTAINER(swInt),
-			  widgets.html_parallel);
-
-
-	label197 = gtk_label_new(_("Parallel View"));
-	gtk_widget_show(label197);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.workbook_lower),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK
-				    (widgets.workbook_lower), page_num),
-				   label197);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.workbook_lower),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.workbook_lower),
-					  page_num), _("Parallel View"));
-	settings.parallel_page = page_num;
-*/
 	/*
 	 * end parallel page 
 	 */
@@ -947,25 +830,6 @@ void create_mainwindow(void)
 
 	gui_install_menu_hints(widgets.app);
 
-	/*
-	 * create pixmaps for ctrees
-	 */
-
-	/* added to stop annoying gdk warning on startup */
-	gtk_widget_realize(widgets.app);
-	/* when these pixmaps are created */
-	pixmap1 =
-	    gdk_pixmap_create_from_xpm_d(widgets.app->window,
-					 &mask1, &transparent,
-					 book_closed_xpm);
-	pixmap2 =
-	    gdk_pixmap_create_from_xpm_d(widgets.app->window,
-					 &mask2, &transparent,
-					 book_open_xpm);
-	pixmap3 =
-	    gdk_pixmap_create_from_xpm_d(widgets.app->window,
-					 &mask3, &transparent,
-					 mini_page_xpm);
 
 	g_signal_connect(GTK_OBJECT(widgets.app), "destroy",
 			   G_CALLBACK(on_mainwindow_destroy), NULL);
@@ -987,15 +851,7 @@ void create_mainwindow(void)
 			   G_CALLBACK
 			   (epaned_button_release_event),
 			   (gchar *) "hpaned1");
-
-/*
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
-			   "on_url", G_CALLBACK(gui_url),
-			   (gpointer) widgets.app);
-	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
-			   "link_clicked",
-			   G_CALLBACK(gui_link_clicked), NULL);
-*/
+			   
 	gtk_widget_grab_focus(nav_bar.lookup_entry);
 
 	gtk_widget_set_size_request(widgets.app, settings.gs_width,
