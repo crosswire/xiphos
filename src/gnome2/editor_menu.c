@@ -93,7 +93,8 @@ void gui_new_activate(GtkMenuItem * menuitem,
 		gint test;
 
 		info = gui_new_dialog();
-		info->title = N_("Save File?");
+		info->stock_icon = "gtk-save";
+		info->title = N_("Studypad");
 		info->label_top = ecd->filename;
 		info->label_middle = N_("has been modified.");
 		info->label_bottom = N_("Do you wish to save it?");
@@ -149,9 +150,10 @@ static void on_open_activate(GtkMenuItem * menuitem,
 		gint test;
 
 		info = gui_new_dialog();
-		info->title = N_("Save File?");
+		info->stock_icon = "gtk-save";
+		info->title = N_("Studypad");
 		info->label_top = ecd->filename;
-		info->label_middle = N_("has been modified.");
+		info->label_middle = N_("has been modified. ");
 		info->label_bottom = N_("Do you wish to save it?");
 		info->yes = TRUE;
 		info->no = TRUE;
@@ -250,13 +252,11 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
-		//gchar *key;
 
-		//key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
-		info->title = N_("Delete Note?");
-		info->label_top = N_("Are you sure you want");
-		info->label_middle = N_("to delete the note for");
+		info->stock_icon = "gtk-delete";
+		info->label_top = N_("Delete Note?");
+		info->label_middle = N_("Are you sure you want\nto delete the note for");
 		info->label_bottom = ecd->key;
 		info->yes = TRUE;
 		info->no = TRUE;
@@ -273,7 +273,6 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 		g_free(info);
-		//g_free(key);
 	}
 }
 
@@ -580,8 +579,8 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
-	info->title = N_("Link?");
-	info->label_top = N_("Add Reference Link");
+	info->stock_icon = "gtk-add";
+	info->label_top = N_("Add reference Link");
 	info->text1 = g_strdup("");
 	info->label1 = N_("Reference: ");
 	info->text2 = g_strdup("");

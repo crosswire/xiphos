@@ -250,7 +250,8 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * filename)
  *   GtkCTreeNode
  */
 
-static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DATA * data)
+static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, 
+							BOOKMARK_DATA * data)
 {
 	gtk_tree_store_append(GTK_TREE_STORE(model), iter,
 			      parent);
