@@ -29,7 +29,7 @@
 extern "C" {
 #endif
 	
-void createbookmarksBM(void);
+void createbookmarksBM(gchar *dir);
 void loadbookmarks(GtkWidget *ctree_widget);
 void savebookmarks(GtkWidget *ctree_widget);
 				
