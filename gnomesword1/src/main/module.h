@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-
+char *get_key_from_module(int manager, char *module_name);
 char *get_preverse_header(char * module_name, char * key, int pvHeading);
 char *get_module_key(void);
 char *get_module_name(void);

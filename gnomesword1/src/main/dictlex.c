@@ -34,7 +34,6 @@
 
 #include "main/dictlex.h"
 
-
 /******************************************************************************
  * Name
  *   get_dictlex_key
@@ -76,4 +75,3 @@ char *get_dictlex_text(char * module_name, char * key)
 {
 	return backend_get_module_text(2, module_name, key);
 }
-

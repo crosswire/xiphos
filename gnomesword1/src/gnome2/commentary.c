@@ -384,13 +384,12 @@ static void create_commentary_pane(COMM_DATA * c)
 			  c->html);
 	gtk_html_load_empty(GTK_HTML(c->html));
 
-
 	g_signal_connect(GTK_OBJECT(c->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked),
 			   (COMM_DATA *) c);
 	g_signal_connect(GTK_OBJECT(c->html), "on_url",
 			   G_CALLBACK(gui_url),
-			   (gpointer) widgets.app);
+			   GINT_TO_POINTER(COMMENTARY_TYPE));
 	g_signal_connect(GTK_OBJECT(c->html), "button_release_event",
 			   G_CALLBACK(on_button_release_event),
 			   (COMM_DATA *) c);

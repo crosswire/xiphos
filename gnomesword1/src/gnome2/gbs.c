@@ -699,7 +699,7 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 				   G_CALLBACK(gui_link_clicked), NULL);
 		g_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
 				   G_CALLBACK(gui_url),
-				   (gpointer) widgets.app);
+				   GINT_TO_POINTER(BOOK_TYPE));
 		g_signal_connect(GTK_OBJECT(p_gbs->html),
 				   "button_release_event",
 				   G_CALLBACK(on_button_release_event),
