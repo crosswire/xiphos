@@ -1,3 +1,9 @@
+2003-12-12  Terry <tbiggs@users.sf.net>
+
+	* made preferences dialog instant apply and replaced the apply, ok and
+	  cancel buttons with a close button
+
+
 2003-12-10  Andy <andyp@users.sf.net>
 
 	* fix bug reporting URL in configure.in (the project is not hosted at 
@@ -11,7 +17,7 @@
 	* bumped to 0.9.dev19
 	* added get_sword_locale() to backend/sword.cpp to help with the
 	  books of the bible problem.
-	* added de_DE.po and fr_FR.po to gettext happy
+	* added de_DE.po and fr_FR.po to make gettext happy
 
 
 2003-12-09  Andy <andyp@users.sf.net>
