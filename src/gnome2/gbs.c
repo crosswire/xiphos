@@ -39,7 +39,7 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/find_dialog.h"
 #include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/bookmarks.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
@@ -484,7 +484,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 		if (!in_url) {
 			key = gui_button_press_lookup(g->html);
 			if (key) {
-				gui_display_dictlex_in_viewer(
+				gui_display_dictlex_in_sidebar(
 					settings.DictWindowModule,
 					key);
 				g_free(key);

@@ -30,9 +30,6 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "gui/sidebar.h"
-#include "gui/shortcutbar_dialog.h"
-#include "gui/shortcutbar_search.h"
-#include "gui/shortcutbar_viewer.h"
 #include "gui/editor.h"
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
@@ -50,10 +47,291 @@
 #include "main/gbs.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/dictlex.h"
+
+SIDEBAR sidebar;
+static GtkWidget *vl_html;
+static GtkWidget *menu1;
+
+void gui_display_devotional_in_sidebar(void)
+{
+	gchar buf[80];
+	time_t curtime;
+	struct tm *loctime;
+
+	/* 
+	 * Get the current time. 
+	 */
+	curtime = time(NULL);
+
+	/* 
+	 * Convert it to local time representation. 
+	 */
+	loctime = localtime(&curtime);
+
+	/* 
+	 * Print it out in a nice format. 
+	 */
+	strftime(buf, 80, "%m.%d", loctime);
+	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
+					4);
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (widgets.notebook_sidebar), 4);	
+	gui_display_dictlex_in_sidebar(settings.devotionalmod, buf);
+}
 
 
-static SB_VIEWER sb_v;
+void gui_set_sidebar_porgram_start(void)
+{
+	/*
+	 *  show hide shortcut bar - set to options setting 
+	 */
+	if (settings.showshortcutbar) {
+		gtk_widget_show(widgets.shortcutbar);
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
+				     settings.shortcutbar_width);
+	}
 
+	else if (!settings.showshortcutbar && settings.showdevotional) {
+		gtk_widget_show(widgets.shortcutbar);
+		gui_sidebar_showhide();
+	}
+
+	else {
+		gtk_widget_hide(widgets.shortcutbar);
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
+				     1);
+	}
+
+	/* set hight of bible and commentary pane */
+	gtk_paned_set_position(GTK_PANED(widgets.vpaned),
+			     settings.upperpane_hight);
+
+	/* set width of bible pane */
+	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
+			     settings.biblepane_width);
+
+	if (!settings.docked) {
+		settings.docked = TRUE;
+		//gui_attach_detach_shortcutbar();
+	}
+}
+
+void gui_sidebar_showhide(void)
+{
+	if (!settings.docked) {
+		gdk_window_raise(GTK_WIDGET(widgets.dock_sb)->window);
+		return;
+	}
+
+	if (settings.showshortcutbar) {
+		settings.showshortcutbar = FALSE;
+		settings.biblepane_width = settings.gs_width / 2;
+		gtk_widget_hide(widgets.shortcutbar);
+		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
+		gtk_paned_set_position(GTK_PANED
+				     (widgets.hpaned),
+				     settings.biblepane_width);
+	} else {
+		settings.showshortcutbar = TRUE;
+		settings.biblepane_width =
+		    (settings.gs_width - settings.shortcutbar_width) / 2;
+		gtk_paned_set_position(GTK_PANED(widgets.epaned),
+				     settings.shortcutbar_width);
+		gtk_paned_set_position(GTK_PANED
+				     (widgets.hpaned),
+				     settings.biblepane_width);
+		gtk_widget_show(widgets.shortcutbar);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *   gui_display_dictlex_in_sidebar
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key) 
+{
+	if (settings.showshortcutbar) {	
+		gchar *text;
+		gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
+						4);
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.notebook_sidebar), 4);
+		text = get_dictlex_text(mod_name, key);
+		if(text) {
+			entry_display(sidebar.html_viewer_widget, mod_name,
+				   text, key, TRUE);
+			free(text);
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void verse_list_link_clicked(GtkHTML * html, const gchar * url,
+ *				    SB_VIEWER * sv)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void verse_list_link_clicked(GtkHTML * html, const gchar * url,
+				    gpointer data)
+{
+	int type;
+	gchar *text = NULL;
+
+	type = get_mod_type(sidebar.mod_name);
+	switch (type) {
+	case TEXT_TYPE:
+		chapter_display(sidebar.htmlshow, sidebar.mod_name,
+				NULL, (gchar *) url, FALSE);
+		break;
+	case COMMENTARY_TYPE:
+	case DICTIONARY_TYPE:
+		text = get_module_text(4, sidebar.mod_name, (gchar *) url);
+		if (text) {
+			entry_display(sidebar.htmlshow, sidebar.mod_name,
+				      text, (gchar *) url, TRUE);
+			free(text);
+		}
+		break;
+	default:
+		break;
+	}
+
+	if (settings.showinmain)
+		gui_change_verse((gchar *) url);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
+ *				       gchar * verse_list)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
+				       gchar * verse_list)
+{
+	GList *tmp = NULL;
+	gboolean oddkey = TRUE;
+	gchar buf[256], *utf8str, *colorkey;
+	gchar *first_key = NULL;
+	gchar *next_verse = NULL;
+	gint i = 0;
+	gint count = 0;
+	GString *str;
+
+	str = g_string_new("");
+	strcpy(sidebar.mod_name, module_name);
+	if (verse_list[0] == 'S' && verse_list[1] == 'e'
+	    && verse_list[2] == 'e') {
+		verse_list += 4;
+	}
+	if (verse_list[0] == 'c' && verse_list[1] == 'h'
+	    && verse_list[2] == '.') {
+		verse_list += 4;
+		g_string_sprintf(str, "%s %s", get_book_from_key(key),
+				 verse_list);
+		verse_list = str->str;
+
+	}
+	for (i = 0; i < strlen(verse_list); i++) {
+		if (verse_list[i] == '+')
+			verse_list[i] = ' ';
+		if (verse_list[i] == ',')
+			verse_list[i] = ';';
+	}
+	i = 0;
+	//tmp = get_verse_list(module_name, verse_list);
+	count = start_parse_verse_list(verse_list);
+	while (count--) {
+		next_verse = get_next_verse_list_element(i++);
+		if (!next_verse)
+			break;
+		tmp = g_list_append(tmp, (gchar *) next_verse);
+		//g_free(next_verse);
+	}
+
+	i = 0;
+	gui_begin_html(vl_html, TRUE);
+	g_string_printf(str,
+			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
+			settings.bible_bg_color,
+			settings.bible_text_color, settings.link_color,
+			settings.bible_verse_num_color, module_name);
+	gui_display_html(vl_html, str->str, str->len);
+
+	while (tmp != NULL) {
+		if (oddkey) {
+			colorkey = settings.link_color;
+			oddkey = FALSE;
+		} else {
+			colorkey = settings.bible_text_color;
+			oddkey = TRUE;
+		}
+		g_string_printf(str,
+				"<a href=\"%s\"><font color=\"%s\"size=\"%s\">%s</font></a><br>",
+				(const char *) tmp->data, colorkey,
+				"+0", (const char *) tmp->data);
+		if (i == 0)
+			first_key = g_strdup((const char *) tmp->data);
+		++i;
+
+		gui_display_html(vl_html, str->str, str->len);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	g_string_printf(str, "%s", "</table></body</html>");
+	gui_display_html(vl_html, str->str, str->len);
+	gui_end_html(vl_html);
+
+	//gui_show_sb_verseList();
+	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
+					5);
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (widgets.notebook_sidebar), 5);
+	if (first_key) {
+		verse_list_link_clicked(NULL,
+					(const gchar *) first_key, NULL);
+		g_free(first_key);
+	}
+	g_string_free(str, TRUE);
+}
 
 /******************************************************************************
  * Name
@@ -351,7 +629,6 @@ static void on_verse_list_activate(GtkMenuItem * menuitem,
 {
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      5);
-
 }
 
 /******************************************************************************
@@ -387,20 +664,20 @@ static void create_viewer_page(GtkWidget * notebook)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	sv->html_viewer_widget = gtk_html_new();
-	gtk_widget_show(sv->html_viewer_widget);
+	sidebar.html_viewer_widget = gtk_html_new();
+	gtk_widget_show(sidebar.html_viewer_widget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  sv->html_viewer_widget);
-	gtk_html_load_empty(GTK_HTML(sv->html_viewer_widget));
+			  sidebar.html_viewer_widget);
+	gtk_html_load_empty(GTK_HTML(sidebar.html_viewer_widget));
 /*			   
-	gtk_signal_connect(GTK_OBJECT(sv->btn_save), "clicked",
+	gtk_signal_connect(GTK_OBJECT(sidebar.btn_save), "clicked",
 			   G_CALLBACK(on_btnSBSaveVL_clicked), NULL);
 			   
-	gtk_signal_connect(GTK_OBJECT(sv->tbtn_view_main), "toggled",
+	gtk_signal_connect(GTK_OBJECT(sidebar.tbtn_view_main), "toggled",
 			   G_CALLBACK
 			   (on_tbtnSBViewMain_toggled), NULL);
 			   
-	gtk_signal_connect(GTK_OBJECT(sv->html_widget), "on_url",
+	gtk_signal_connect(GTK_OBJECT(sidebar.html_widget), "on_url",
 			   G_CALLBACK(gui_url), widgets.app);
 	*/
 }
@@ -474,11 +751,11 @@ static void create_search_results_page(GtkWidget * notebook)
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
-	sv->clist = gtk_clist_new(1);
-	gtk_widget_show(sv->clist);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sv->clist);
-	gtk_clist_set_column_width(GTK_CLIST(sv->clist), 0, 100);
-	gtk_clist_column_titles_hide(GTK_CLIST(sv->clist));
+	sidebar.clist = gtk_clist_new(1);
+	gtk_widget_show(sidebar.clist);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.clist);
+	gtk_clist_set_column_width(GTK_CLIST(sidebar.clist), 0, 100);
+	gtk_clist_column_titles_hide(GTK_CLIST(sidebar.clist));
 
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
@@ -494,13 +771,13 @@ static void create_search_results_page(GtkWidget * notebook)
 				       GTK_POLICY_AUTOMATIC);
 
 
-	sv->html_widget = gtk_html_new();
-	gtk_widget_show(sv->html_widget);
+	sidebar.html_widget = gtk_html_new();
+	gtk_widget_show(sidebar.html_widget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow4),
-			  sv->html_widget);
-	gtk_html_load_empty(GTK_HTML(sv->html_widget));
+			  sidebar.html_widget);
+	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
 	/*
-	   gtk_signal_connect(GTK_OBJECT(sv->clist),
+	   gtk_signal_connect(GTK_OBJECT(sidebar.clist),
 	   "select_row",
 	   G_CALLBACK
 	   (on_clistSearchResults_select_row), NULL); */
@@ -529,10 +806,8 @@ static void create_verse_list_page(GtkWidget * notebook)
 	GtkWidget *vbox;
 	GtkWidget *frame1;
 	GtkWidget *scrolledwindow1;
-	GtkWidget *vl_html;
 	GtkWidget *frame2;
 	GtkWidget *scrolledwindow2;
-
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
@@ -567,13 +842,13 @@ static void create_verse_list_page(GtkWidget * notebook)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	sv->htmlshow = gtk_html_new();
-	gtk_widget_show(sv->htmlshow);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow2), sv->htmlshow);
-	/*
-	   gtk_signal_connect(GTK_OBJECT(vl_html), "link_clicked",
-	   G_CALLBACK(verse_list_link_clicked), sv);
-	 */
+	sidebar.htmlshow = gtk_html_new();
+	gtk_widget_show(sidebar.htmlshow);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow2), sidebar.htmlshow);
+
+	gtk_signal_connect(GTK_OBJECT(vl_html), "link_clicked",
+			   G_CALLBACK(verse_list_link_clicked), NULL);
+
 }
 
 static GnomeUIInfo menu1_uiinfo[] = {
@@ -636,8 +911,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 {
 	GtkWidget *vbox1;
 	GtkWidget *toolbar2;
-	GtkWidget *optionmenu1;
-	GtkWidget *menu1;
 	GtkWidget *scrolledwindow4;
 	GtkWidget *treeview1;
 	GtkWidget *label2;
@@ -647,14 +920,12 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *label3;
 	GtkWidget *empty_notebook_page;
 	GtkWidget *label4;
-	GtkWidget *scrolledwindow_search;
-	GtkWidget *viewport_search;
 	GtkWidget *vbox2;
 	GtkWidget *vbox_search_results;
 	GtkWidget *vbox_verse_list;
 	GtkWidget *vbox_viewer;
 
-	sv = &sb_v;
+	//sv = &sb_v;
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
@@ -665,16 +936,16 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_box_pack_start(GTK_BOX(vbox1), toolbar2, FALSE, FALSE, 0);
 	gtk_toolbar_set_style(GTK_TOOLBAR(toolbar2), GTK_TOOLBAR_BOTH);
 
-	optionmenu1 = gtk_option_menu_new();
-	gtk_widget_show(optionmenu1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar2), optionmenu1,
+	sidebar.optionmenu1 = gtk_option_menu_new();
+	gtk_widget_show(sidebar.optionmenu1);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar2), sidebar.optionmenu1,
 				  NULL, NULL);
 
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
 
-	gtk_option_menu_set_menu(GTK_OPTION_MENU(optionmenu1), menu1);
+	gtk_option_menu_set_menu(GTK_OPTION_MENU(sidebar.optionmenu1), menu1);
 
 	widgets.notebook_sidebar = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_sidebar);
@@ -723,20 +994,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 				   80);
 
 
-	scrolledwindow_search = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_search);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
-			  scrolledwindow_search);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_search),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	viewport_search = gtk_viewport_new(NULL, NULL);
-	gtk_widget_show(viewport_search);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow_search),
-			  viewport_search);
-
+	gui_create_search_sidebar();
 
 	create_search_results_page(widgets.notebook_sidebar);
 	create_viewer_page(widgets.notebook_sidebar);
@@ -749,7 +1007,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	load_module_tree(treeview1);
 	gui_load_bookmark_tree();
-	gui_create_shortcutbar_search(viewport_search);
 
 
 	return vbox1;

@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * sidebar.h - create and maintain the sidebar
+ * search_sidebar.h - sidebar search gui
  *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,37 +19,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __SIDEBAR_H_
-#define __SIDEBAR_H_
+#ifndef _SEARCH_SIDEBAR_H
+#define _SEARCH_SIDEBAR_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-typedef struct _sitebar SIDEBAR;
-struct _sitebar {
-	GtkWidget
-		*clist,
-		*notebook,
-		*tbtn_view_main,
-		*btn_save,
-		*htmlshow,
-		*html_widget,
-		*html_viewer_widget;
-	GtkWidget *optionmenu1;
-	gchar   mod_name[80];
-};
-extern SIDEBAR sidebar;
-
-
-void gui_display_devotional_in_sidebar(void);
-void gui_set_sidebar_porgram_start(void);
-void gui_sidebar_showhide(void);
-gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key);
-GtkWidget *gui_create_sidebar(GtkWidget * paned);
-void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name, 
-						gchar * verse_list);	
+#endif	
 	
+void gui_search_update_sidebar(char percent, void *userData);	
+void gui_set_search_label_sidebar(void);	
+void gui_create_search_sidebar(void);
 
 #ifdef __cplusplus
 }

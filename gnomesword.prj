@@ -106,8 +106,6 @@ module.include.files=\
 	src/gui/hints.h\
 	src/gui/history.h\
 	src/gui/html.h\
-	src/gui/interlinear.h\
-	src/gui/interlinear_dialog.h\
 	src/gui/main_menu.h\
 	src/gui/main_window.h\
 	src/gui/preferences_dialog.h\
@@ -264,10 +262,6 @@ module.source.files=\
 	src/gnome2/preferences_dialog.c\
 	src/gnome2/search_dialog.c\
 	src/gnome2/setup_druid.c\
-	src/gnome2/shortcutbar_dialog.c\
-	src/gnome2/shortcutbar_main.c\
-	src/gnome2/shortcutbar_search.c\
-	src/gnome2/shortcutbar_viewer.c\
 	src/gnome2/studypad.c\
 	src/gnome2/studypad_dialog.c\
 	src/gnome2/splash.c\
@@ -279,7 +273,8 @@ module.source.files=\
 	src/gnome/parallel_dialog.c\
 	src/gnome/parallel_view.c\
 	src/gnome2/parallel_dialog.c\
-	src/gnome2/parallel_view.c
+	src/gnome2/parallel_view.c\
+	src/gnome2/search_sidebar.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

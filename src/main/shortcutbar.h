@@ -35,9 +35,9 @@ GList *load_sb_group(gchar *filename, gchar *group_name,
 void save_sb_group(GList * group_list, gchar *file_name, 
 		gchar *group_name, gchar *large_icons);
 void save_sb_iconsize(gchar *file_name, gchar *icons);
-gint get_num_shortcut_items(gint group_num); 
-void get_shortcut_item_info(gint group_num, gint item_num,
-			gchar ** item_url, gchar ** item_name);
+/*gint get_num_shortcut_items(gint group_num); */
+/*void get_shortcut_item_info(gint group_num, gint item_num,
+			gchar ** item_url, gchar ** item_name);*/
 
 #ifdef __cplusplus
 }

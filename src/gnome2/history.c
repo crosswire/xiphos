@@ -83,7 +83,7 @@ void clearhistory(GtkWidget * app, GtkWidget * shortcut_bar)
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-
+/*
 	if (settings.showhistorygroup) {
 		for (i = historyitems - 1; i >= 0; i--) {
 			e_shortcut_model_remove_item(E_SHORTCUT_BAR
@@ -92,6 +92,7 @@ void clearhistory(GtkWidget * app, GtkWidget * shortcut_bar)
 						     i);
 		}
 	}
+*/
 	historyitems = 0;
 	currenthistoryitem = 0;
 	firstbackclick = TRUE;
@@ -297,7 +298,7 @@ void updatehistorymenu(GtkWidget * app)
 
 void updatehistoryshortcutbar(GtkWidget * app, GtkWidget * shortcut_bar)
 {
-	gint i;
+/*	gint i;
 	GdkPixbuf *icon_pixbuf = NULL;
 	GError **error;
 	
@@ -316,5 +317,5 @@ void updatehistoryshortcutbar(GtkWidget * app, GtkWidget * shortcut_bar)
 					  historylist[i].verseref,
 					  historylist[i].verseref,
 					  icon_pixbuf);
-	}
+	}*/
 }

@@ -50,12 +50,9 @@ gnomesword2_SOURCES =  \
     percomm.c \
     preferences_dialog.c \
     search_dialog.c \
+    search_sidebar.c \
     setup_druid.c \
     sidebar.c \
-    shortcutbar_dialog.c \
-    shortcutbar_main.c \
-    shortcutbar_search.c \
-    shortcutbar_viewer.c \
     splash.c \
     studypad.c \
     studypad_dialog.c \

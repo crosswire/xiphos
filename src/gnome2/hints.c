@@ -27,7 +27,7 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/hints.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
@@ -66,7 +66,7 @@ void gui_display_hint_in_viewer(gchar * text)
 		
 		sprintf(settings.groupName, "%s", "Viewer");
 		
-		html = GTK_HTML(sv->html_viewer_widget);
+		html = GTK_HTML(sidebar.html_viewer_widget);
 		htmlstream =
 		    gtk_html_begin_content(html, "text/html; charset=utf-8");
 		g_string_sprintf(str, "<body bgcolor=\"yellow\">%s</body>",
@@ -230,8 +230,12 @@ void gui_destroy_hint_window(void)
 
 void gui_open_hint_viewer(void)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(
+	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
+					4);
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (widgets.notebook_sidebar), 4);
+/*	gtk_notebook_set_page(GTK_NOTEBOOK(
 			sv->notebook), 2);
 	sprintf(settings.groupName, "%s", "Viewer");
-	gui_show_sb_verseList();
+	gui_show_sb_verseList();*/
 }
