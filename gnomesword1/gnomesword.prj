@@ -267,7 +267,10 @@ module.doc.files=\
 	doc/help/C/gnomesword2.xml\
 	doc/help/C/legal.xml\
 	doc/help/C/gnomesword2-C.omf\
-	COPYING-DOCS
+	COPYING-DOCS\
+	doc/help/fr/gnomesword2-fr.omf\
+	doc/help/fr/gnomesword2.xml\
+	doc/help/fr/legal.xml
 
 module.po.files=\
 	bg.po\
