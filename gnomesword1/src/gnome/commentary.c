@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _commentary.c - gui for commentary modules
+ * commentary.c - gui for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -24,7 +24,10 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
+#include <gal/widgets/e-unicode.h>
 
+#include "gui/gtkhtml_display.h"
 #include "gui/commentary.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/commentary_dialog.h"
@@ -40,9 +43,6 @@
 /******************************************************************************
  * externs
  */ 
-extern gboolean isrunningVC;
-extern COMM_DATA *cur_c;
-extern gboolean comm_display_change;
 extern gboolean comm_find_running;
 
 /******************************************************************************
@@ -50,6 +50,48 @@ extern gboolean comm_find_running;
  */
 static GList *comm_list;
 static COMM_DATA *cur_c;
+static gboolean comm_display_change;
+
+
+/******************************************************************************
+ * Name
+ *  display
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void display(COMM_DATA *c, gchar * key)	
+ *
+ * Description
+ *   calls entry_display to display a commentary entry 
+ *
+ * Return value
+ *   void
+ */
+ 
+static void display(COMM_DATA *c, gchar * key)
+{
+	gchar *text_str = NULL;
+	gchar *strkey;
+	
+	strkey = get_valid_key(key);
+	if(c->book_heading){
+		c->book_heading = FALSE;
+		text_str = get_book_heading(c->mod_name, strkey);
+	}
+	
+	else if(c->chapter_heading){
+		c->chapter_heading = FALSE;
+		text_str = get_chapter_heading(c->mod_name, strkey);
+	}
+	
+	else {
+		text_str = get_commentary_text(c->mod_name, strkey);
+	}
+	entry_display(c->html, c->mod_name, text_str, key);
+	free(text_str);
+	
+}
 
 /******************************************************************************
  * Name
@@ -75,7 +117,7 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 	comm_list = g_list_first(comm_list);
 	while (comm_list != NULL) {
 		c = (COMM_DATA *) comm_list->data;
-		if (!strcmp(c->modName, modname))
+		if (!strcmp(c->mod_name, modname))
 			break;
 		++page;
 		comm_list = g_list_next(comm_list);
@@ -114,7 +156,7 @@ static void set_comm_frame_label(COMM_DATA *c)
 	if (settings.comm_tabs)
 		gtk_frame_set_label(GTK_FRAME(c->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(c->frame), c->modName);
+		gtk_frame_set_label(GTK_FRAME(c->frame), c->mod_name);
 	
 }
 
@@ -145,7 +187,7 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 					 settings.comm_last_page);
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
-	strcpy(settings.CommWindowModule, c->modName);
+	strcpy(settings.CommWindowModule, c->mod_name);
 	
 	set_comm_frame_label(c);
 	
@@ -163,7 +205,7 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	
 	if(comm_display_change) {
 		if ((c->key[0] == '\0') && (settings.currentverse != NULL)) {
-			gui_display_commentary(settings.currentverse);
+			display(c, settings.currentverse);
 			strcpy(settings.comm_key,settings.currentverse);
 			strcpy(c->key, settings.comm_key);
 		}
@@ -374,24 +416,9 @@ static void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_view_new_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	static GtkWidget *dlg;
-        GdkCursor *cursor;	
-	
-	gtk_widget_show(settings.app);
-	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(settings.app->window,cursor);
-	
-	if(!isrunningVC) {
-		dlg = gui_create_commentary_dialog();
-		isrunningVC = TRUE;
-	}
-	gtk_widget_show(dlg);
-	gtk_widget_show(settings.app);
-	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(settings.app->window,cursor);
-
+	gui_open_commentary_dialog(c->modnum);
 }
 
 /******************************************************************************
@@ -414,7 +441,7 @@ static void on_unlock_key_activate(GtkMenuItem *menuitem, COMM_DATA *c)
 {
 	GtkWidget *dlg;
 	
-	dlg = gui_create_cipher_key_dialog(c->modName);
+	dlg = gui_create_cipher_key_dialog(c->mod_name);
 	gtk_widget_show(dlg);
 }
 
@@ -673,7 +700,7 @@ static GtkWidget *create_pm(COMM_DATA * c)
 			c);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			GTK_SIGNAL_FUNC(on_view_new_activate), 
-			NULL);
+			c);
 	return pm;
 }
 
@@ -716,10 +743,15 @@ static void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
 
 static void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 {
-	const gchar *key = navigate_commentary(c->modnum, 0);
+	gchar *key;
+	
+	set_commentary_key(c->mod_name, c->key);	
+	key = navigate_commentary(c->mod_name, 0);
 	if(key) {
 		strcpy(settings.comm_key,key);
 		strcpy(cur_c->key, settings.comm_key);
+		display(c,key);
+		free(key);
 	}
 }
 
@@ -741,10 +773,15 @@ static void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 
 static void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 {
-	const gchar *key = navigate_commentary(c->modnum, 1);
+	gchar *key;
+	
+	set_commentary_key(c->mod_name, c->key);	
+	key = navigate_commentary(c->mod_name, 1);
 	if(key) {
 		strcpy(settings.comm_key,key);
 		strcpy(cur_c->key, settings.comm_key);
+		display(c,key);
+		free(key);
 	}
 }
 
@@ -787,7 +824,8 @@ static void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
 
 static void on_btn_book_heading_clicked(GtkButton *button, COMM_DATA *c)
 {
-	display_book_heading(c->modnum);
+	c->book_heading = TRUE;
+	display(c,settings.currentverse);
 }
 
 /******************************************************************************
@@ -808,7 +846,8 @@ static void on_btn_book_heading_clicked(GtkButton *button, COMM_DATA *c)
 
 static void on_btn_chap_heading_clicked(GtkButton *button, COMM_DATA *c)
 {
-	display_chap_heading(c->modnum);
+	c->chapter_heading = TRUE;
+	display(c,settings.currentverse);
 }
 
 /******************************************************************************
@@ -1073,7 +1112,7 @@ static void create_commentary_pane(COMM_DATA *c, gint count)
 			  c->html);
 	gtk_html_load_empty(GTK_HTML(c->html));
 
-	label = gtk_label_new(c->modName);
+	label = gtk_label_new(c->mod_name);
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
 				 label, (GtkDestroyNotify)
@@ -1088,7 +1127,7 @@ static void create_commentary_pane(COMM_DATA *c, gint count)
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
 					  (settings.notebook_comm),
-					  count), (gchar *) c->modName);
+					  count), (gchar *) c->mod_name);
 
 	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
@@ -1140,7 +1179,7 @@ void gui_set_commentary_page_and_key(gint page_num, gchar *key)
 	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key,key);
 	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page_num);
-	display_comm(page_num,key);
+	display(cur_c,key);
 	comm_display_change = TRUE;
 }
 
@@ -1165,7 +1204,7 @@ void gui_display_commentary(gchar * key)
         if(!cur_c) return;
 	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key, key);
-	display_comm(settings.comm_last_page, key);
+	display(cur_c, key);
 } 
 
 /******************************************************************************
@@ -1203,16 +1242,17 @@ void gui_setup_commentary(GList *mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		c = g_new(COMM_DATA, 1);
-		c->modName = modname;
+		c->mod_name = modname;
 		c->modnum = count;
-		c->searchstring = NULL;
+		c->search_string = NULL;
 		c->key[0] = '\0';
+		c->book_heading = FALSE;
+		c->chapter_heading = FALSE;
 		c->find_dialog = NULL;		
-		c->has_key = module_is_locked(c->modName);
+		c->has_key = module_is_locked(c->mod_name);
 		create_commentary_pane(c, count);
 		popupmenu = create_pm(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);
-		new_display_commentary(c->html, c->modName);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
 		++count;
 		tmp = g_list_next(tmp);

@@ -26,7 +26,28 @@
 extern "C" {
 #endif
 
-GtkWidget *gui_create_commentary_dialog(void);
+typedef struct _viewcomm VIEW_COMM;
+struct _viewcomm {
+	GtkWidget *dialog;
+	GtkWidget *btn_sync;
+	GtkWidget *btn_goto;
+	GtkWidget *btn_prev;
+	GtkWidget *btn_next;
+	GtkWidget *btn_close;
+	GtkWidget *entry_key;
+	GtkWidget *html;
+	GtkWidget *btn_print;
+	gchar *mod_name;
+	gchar key[80];
+	gint dialog_number;
+	gboolean has_key;
+	gboolean book_heading;
+	gboolean chapter_heading;
+};
+
+void gui_open_commentary_dialog(gint mod_num);
+void gui_setup_commentary_dialog(GList *mods);
+void gui_shutdown_commentary_dialog(void);
 
 #ifdef __cplusplus
 }

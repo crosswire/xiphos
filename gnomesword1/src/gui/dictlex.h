@@ -39,15 +39,22 @@ struct _dldata {
 	GtkWidget *clist;
 	GtkWidget *entry;
 	GtkWidget *showtabs;
-	gchar *modName;
-	gchar *searchstring;
+	gchar *mod_name;
+	gchar *search_string;
 	int mod_num;
 	gboolean has_key;
 	DLFindDialog *find_dialog;
 };
+
+void gui_display_dictlex(gchar * key);
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
 void gui_setup_dictlex(GList *mods);
 void gui_shutdown_dictlex(void);
+void on_entryDictLookup_changed(GtkEditable * editable,
+						       DL_DATA * d);
+void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d);
+void on_clistDictLex_select_row(GtkCList * clist, gint row,
+			   gint column, GdkEvent * event, DL_DATA * d);
 
 #endif
 

@@ -33,7 +33,7 @@ struct _gbsdata {
 	GtkWidget *ctree;
 	GtkWidget *showtabs;
 	gchar *bookName;
-	gchar *searchstring;
+	gchar *search_string;
 	gint booknum;
 	gboolean has_key;
 	GBF_FIND_DIALOG *find_dialog;

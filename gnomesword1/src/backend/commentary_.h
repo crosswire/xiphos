@@ -25,16 +25,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "main/gs_gnomesword.h"
 	
-void backend_display_book_heading(gint modnum);	
-void backend_display_chap_heading(gint modnum);
-const char *backend_nav_commentary(gint modnum, gint direction);
-void backend_new_display_commentary(GtkWidget *html, char *modname);
+void backend_set_commentary_key(char * mod_name, char * key);	
+char *backend_get_commentary_key(char *mod_name);	
+char *backend_get_commentary_text(char *mod_name, char *key);	
+char *backend_get_book_heading(char * mod_name, char * key);
+char *backend_get_chap_heading(char * mod_name, char * key);
+char *backend_nav_commentary(char * mod_name, int direction);
 void backend_setup_commentary(void);
-void backend_shutdown_commentary( void );
-void backend_display_commentary( int modnnum, gchar * key );
+void backend_shutdown_commentary(void);
 
 #ifdef __cplusplus
 }

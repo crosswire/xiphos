@@ -25,18 +25,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-void display_book_heading(int mod_num);
-void display_chap_heading(int mod_num);
-const char* navigate_commentary(gint modnum, gint direction);
-void display_comm(gint page_num, gchar * key);
-void new_display_commentary(GtkWidget * html, gchar * modName);
-void shutdown_viewcomm(void);
-void goto_verse_viewcomm(gchar *verse);
-void load_module_viewcomm(gchar *module_name);
-void nav_module_viewcomm(gint direction);
-void setup_viewcomm(GtkWidget * text);
-
+	
+void set_commentary_key(char * mod_name, char * key);
+char *get_commentary_key(char *mod_name);	
+char *get_commentary_text(char * mod_name, char * key);
+char *get_book_heading(char * mod_name, char * key);
+char *get_chapter_heading(char * mod_name, char * key);
+char *navigate_commentary(char * mod_name, int direction);
+	
 #ifdef __cplusplus
 }
 #endif

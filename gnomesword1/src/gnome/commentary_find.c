@@ -213,7 +213,7 @@ void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text)
 {
 	gchar buf[256];
 	
-	sprintf(buf,"%s in %s", _("Find"), c->modName);
+	sprintf(buf,"%s in %s", _("Find"), c->mod_name);
 	
 	FIND_DIALOG(find, buf);
 	

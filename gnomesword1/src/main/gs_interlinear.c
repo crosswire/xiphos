@@ -41,7 +41,7 @@ GtkHTMLStream *htmlstream;
 void update_interlinear_page()
 {
 	gchar tmpBuf[256], *rowcolor, *font_size;
-	gchar *utf8str,*mod_name, *font_name;
+	gchar *utf8str,*mod_name, *font_name = NULL;
 	gint utf8len, i, j;
 	gboolean was_editable, use_gtkhtml_font;
 	
@@ -172,6 +172,8 @@ void update_interlinear_page()
 		gtk_html_set_editable(html, was_editable);
 	}
 	gtk_frame_set_label(GTK_FRAME(settings.frameInt), settings.currentverse);
+	if(font_name)
+		free(font_name);
 }
 
 static void int_display(gchar *key)
@@ -210,7 +212,7 @@ static void int_display(gchar *key)
 	
 	for (i = 1; ; i++) {	
 		sprintf(tmpbuf,"%s %d:%d",cur_book,cur_chapter,i);
-		g_free(tmpkey);
+		free(tmpkey);
 		tmpkey = backend_get_valid_key(tmpbuf);
 		if(cur_chapter != backend_get_chapter_from_key(tmpkey))
 			break;
@@ -298,7 +300,7 @@ static void int_display(gchar *key)
 			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 		}
 	}	
-	g_free(tmpkey);
+	free(tmpkey);
 }
 
 void update_interlinear_page_detached(void)

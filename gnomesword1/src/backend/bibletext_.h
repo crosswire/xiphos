@@ -25,6 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
 void backend_setup_bibletext(void);
 void backend_shutdown_bibletext(void);
 const char* backend_get_text_module_description(char * mod_name);
