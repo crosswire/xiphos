@@ -338,6 +338,27 @@ void mod_mgr_init(const char *dir)
 	backend_init_module_mgr(dir);
 }
 
+/******************************************************************************
+ * Name
+ *   mod_mgr_terminate
+ *
+ * Synopsis
+ *   #include "main/mod_mgr.hh"
+ *
+ *   void mod_mgr_terminate(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void mod_mgr_terminate(void)
+{
+	backend_terminate_module_mgr();
+}
+
 
 /******************************************************************************
  * Name
