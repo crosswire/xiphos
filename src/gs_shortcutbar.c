@@ -46,7 +46,10 @@ extern gboolean havecomm;	/* let us know if we have at least one commentary modu
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
 extern EShortcutModel *shortcut_model;
 GList 
-	*sblist; /* for building verselist */
+	*sblist, /* for building verselist */
+	*langlisttext,
+	*langlistcomm,
+	*langlistdict;
 gint 
 	groupnum1 = -1,
     	groupnum2 = -1,
@@ -206,25 +209,29 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 					       (shortcut_bar)->model,
 					       group_num, item_num, &type,
 					       &ref);
-		if (!strcmp(type, "bible:")) {
+		//if (!strcmp(type, "bible:")) {
+		if(group_num == groupnum1){
 			if (havebible) {	/* let's don't do this if we don't have at least one Bible text */
 				notebook = lookup_widget(app, "nbTextMods");	/* get notebook */
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
 			}
 		}
-		if (!strcmp(type, "commentary:")) {
+		//if (!strcmp(type, "commentary:")) 
+		if(group_num == groupnum2){
 			if (havecomm) {	/* let's don't do this if we don't have at least one commentary */
 				notebook = lookup_widget(app, "notebook1");	/* get notebook */
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
 			}
 		}
-		if (!strcmp(type, "dict/lex:")) {
+		//if (!strcmp(type, "dict/lex:")) {
+		if(group_num == groupnum3){
 			if (havedict) {	/* let's don't do this if we don't have at least one dictionary / lexicon */
 				notebook = lookup_widget(app, "notebook4");	/* get notebook */
 				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
 			}
 		}
-		if (!strcmp(type, "history:")) {
+		//if (!strcmp(type, "history:")) {
+		if(group_num == groupnum4){
 			changeVerseSWORD(ref);
 		}
 		g_free(type);
@@ -719,27 +726,40 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 void
 setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 {
-	GList * tmp;
+	GList 
+		*tmplang,
+		*tmp;
 	GtkWidget
 	    * button,
 	    *searchbutton,
 	    *ctree,
 	    *scrolledwindow1,
 	    *scrolledwindow2, *vpSearch, *vboxVL, *vpVL, *html, *VLbutton;
-
+	gint
+		sbtype = 0;
+	
+	tmplang = NULL;
 	tmp = NULL;
 	if (settings->showtextgroup) {
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Bible Text");
 		tmp = textlist;
+		tmplang = langlisttext;
 		while (tmp != NULL) {
+			//if((gchar *) tmplang->data = NULL) sbtype = 4;
+			if(!strcmp((gchar *) tmplang->data,"en")) sbtype = 0;
+			else if(!strcmp((gchar *) tmplang->data,"grc")) sbtype = 1;	
+			else if(!strcmp((gchar *) tmplang->data,"he")) sbtype = 2;	
+			else if(!strcmp((gchar *) tmplang->data,"de")) sbtype = 3;
+			else sbtype = 4;				
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum1, -1,
-						  shortcut_types[0],
+						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
 			tmp = g_list_next(tmp);
+			tmplang = g_list_next(tmplang);
 		}
 	}
 	if (settings->showcomgroup) {
@@ -747,13 +767,20 @@ setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Commentaries");
 		tmp = commentarylist;
+		tmplang = langlistcomm;
 		while (tmp != NULL) {
+			if(!strcmp((gchar *) tmplang->data,"en")) sbtype = 0;
+			else if(!strcmp((gchar *) tmplang->data,"grc")) sbtype = 1;	
+			else if(!strcmp((gchar *) tmplang->data,"he")) sbtype = 2;	
+			else if(!strcmp((gchar *) tmplang->data,"de")) sbtype = 3;
+			else sbtype = 4;
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum2, -1,
-						  shortcut_types[1],
+						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
 			tmp = g_list_next(tmp);
+			tmplang = g_list_next(tmplang);
 		}
 	}
 	if (settings->showdictgroup) {
@@ -761,13 +788,20 @@ setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Dict/Lex");
 		tmp = dictionarylist;
+		tmplang = langlistdict;		
 		while (tmp != NULL) {
+			if(!strcmp((gchar *) tmplang->data,"en")) sbtype = 0;
+			else if(!strcmp((gchar *) tmplang->data,"grc")) sbtype = 1;	
+			else if(!strcmp((gchar *) tmplang->data,"he")) sbtype = 2;	
+			else if(!strcmp((gchar *) tmplang->data,"de")) sbtype = 3;
+			else sbtype = 4;
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum3, -1,
-						  shortcut_types[2],
+						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
 			tmp = g_list_next(tmp);
+			tmplang = g_list_next(tmplang);
 		}
 	}
 	if (settings->showhistorygroup) {
@@ -775,6 +809,7 @@ setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 		    add_sb_group((EShortcutBar *) shortcut_bar, "History");
 	}
 	g_list_free(tmp);
+	g_list_free(tmplang);
 	/*** add bookmark group to shortcut bar ***/
 	//treebar = e_group_bar_new();
 

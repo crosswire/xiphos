@@ -30,7 +30,7 @@ extern "C" {
 #include <swmodule.h>
 #include <swmgr.h>	
 
-void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section);
+gchar* addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section);
 void changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName);
 	
 #ifdef __cplusplus
