@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * spell_pspell.c - spell checking using pspell
+ * spell_gnome_spell.c - spell checking using gnome-spell
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *

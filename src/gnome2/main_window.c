@@ -462,6 +462,7 @@ static void on_mainwindow_destroy(GtkObject * object,
 	shutdown_frontend();
 	/* shutdown the sword stuff */
 	shutdown_backend();
+	gtk_main_quit();
 	gtk_exit(0);
 }
 
