@@ -85,6 +85,7 @@ extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gn
 extern GtkWidget *htmlCommentaries;
 extern gchar *mycolor;
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
+extern GS_LAYOUT gslayout;
 
 
 /*********************************************************************************
@@ -1031,11 +1032,15 @@ on_epaned_button_release_event(GtkWidget       *widget,
                                gpointer         user_data)
 {
         gint panesize;
-
-        panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
+	panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,(gchar *)user_data)));
+	
         if(panesize > 15 )
-        {
-        	settings->shortcutbarsize = panesize;        	
+        {	if(!strcmp((gchar *)user_data,"epaned"))
+        		gslayout.shortcutbar_width = panesize; 
+		if(!strcmp((gchar *)user_data,"vpaned1"))
+        		gslayout.upperpane_hight = panesize; 
+		if(!strcmp((gchar *)user_data,"hpaned1"))
+        		gslayout.biblepane_width = panesize; 
         }
         return TRUE;
 }

@@ -35,7 +35,7 @@ class GtkHTMLEntryDisp:public SWDisplay {
 		this->gtkText = gtkText;
 	}
 	virtual char Display(SWModule & imodule);
-	gchar *gbftohtml(gchar * text, gint maxlen);
+	//gchar *ProcessText(gchar * text, gint maxlen);
 };
 
 //----------------------------------------------------------------------------------------------

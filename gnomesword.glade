@@ -192,9 +192,9 @@
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
-  <default_width>640</default_width>
-  <default_height>480</default_height>
-  <allow_shrink>False</allow_shrink>
+  <default_width>700</default_width>
+  <default_height>500</default_height>
+  <allow_shrink>True</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
   <enable_layout_config>True</enable_layout_config>
@@ -1039,6 +1039,7 @@ Revelation
 	    <widget>
 	      <class>GtkHPaned</class>
 	      <name>hpaned1</name>
+	      <height>318</height>
 	      <signal>
 		<name>button_release_event</name>
 		<handler>on_hpaned1_button_release_event</handler>
@@ -1091,6 +1092,7 @@ Revelation
 		  <class>GtkFrame</class>
 		  <name>frame9</name>
 		  <width>325</width>
+		  <height>226</height>
 		  <label></label>
 		  <label_xalign>0</label_xalign>
 		  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -2015,7 +2017,7 @@ Revelation
 	      <class>GtkFrame</class>
 	      <name>frame10</name>
 	      <border_width>2</border_width>
-	      <height>205</height>
+	      <height>169</height>
 	      <label>Dictionaries - Lexicons</label>
 	      <label_xalign>0</label_xalign>
 	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>

@@ -42,6 +42,8 @@
 #include "gs_html.h"
 #include "support.h"
 #include "gs_sword.h"
+#include "gs_gnomesword.h"
+
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -57,6 +59,7 @@ extern GtkWidget *MainFrm;
 extern GtkWidget *textDict;
 GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern GtkWidget *appbar1;
+extern GS_APP gs;
 
 /***************************************************************************************************
  *on_url taken form gtkhtml project
