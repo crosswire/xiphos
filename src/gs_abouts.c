@@ -73,6 +73,10 @@ GtkWidget *create_about(void)
 	const gchar *authors[] = {
 		"Terry Biggs  tbiggs@users.sf.net",
 		"Moses McKnight  m_mcknight@users.sf.net",
+		"Jan Paul Schmidt japas@users.sf.net",
+		"Victor Porton  porton@users.sf.net",
+		"Stephen Binks steveb@icenet.com.au",
+		"Carl Constantine duckwing@users.sf.net",
 		NULL
 	};
 	GtkWidget *about;
