@@ -333,7 +333,7 @@ void spell_check_cb(GtkWidget * w, gpointer data)
 {
 	/* checks if the text is empty */
 	text_widget = lookup_widget(gtk_widget_get_toplevel(w), (gchar *)data);
-	g_warning((gchar *)data);
+//	g_warning((gchar *)data);
 	if (gtk_text_get_length(GTK_TEXT(text_widget)) != 0) {
 		spc_gui.window = create_spc_window();
 		//spc_gui.status_bar_count = bf_statusbar_message(("checking spelling"));

@@ -189,16 +189,16 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	/*** read font pickers ***/	
 	font = gnome_font_picker_get_font_name(GNOME_FONT_PICKER(lookup_widget(d,"fpDefaultFont")));	
 	sprintf(s->default_font,"%s",font);
-	g_warning(s->default_font );
+//	g_warning(s->default_font );
 	font = gnome_font_picker_get_font_name(GNOME_FONT_PICKER(lookup_widget(d,"fpGreekFont")));	
 	sprintf(s->greek_font,"%s",font);
-	g_warning(s->greek_font);	
+//	g_warning(s->greek_font);	
 	font = gnome_font_picker_get_font_name(GNOME_FONT_PICKER(lookup_widget(d,"fpHebrewFont")));	
 	sprintf(s->hebrew_font,"%s",font);	
-	g_warning(s->hebrew_font);
+//	g_warning(s->hebrew_font);
 	font = gnome_font_picker_get_font_name(GNOME_FONT_PICKER(lookup_widget(d,"fpUnicodeFont")));	
 	sprintf(s->unicode_font,"%s", font);	
-	g_warning(s->unicode_font);
+//	g_warning(s->unicode_font);
 	/*** read html colors ***/
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
 				 (lookup_widget(d, "gcpText")), &color[0],
