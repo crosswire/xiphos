@@ -37,6 +37,7 @@
 #include <gtkhtml/htmlsettings.h>
 
 #include "./pixmaps/tt.xpm"
+#include "settings.h"
 
 
 #define EDITOR_TOOLBAR_PATH "/HTMLEditor"
@@ -601,7 +602,7 @@ create_style_toolbar (GSHTMLEditorControlData *cd)
 	gtk_signal_connect (GTK_OBJECT (cd->html), "current_paragraph_alignment_changed",
 			    GTK_SIGNAL_FUNC (paragraph_alignment_changed_cb), cd);
 
-	gtk_box_pack_start(GTK_BOX(settings->hbox_toolbar), cd->handlebox_toolbar, TRUE,
+	gtk_box_pack_start(GTK_BOX(settings.hbox_toolbar), cd->handlebox_toolbar, TRUE,
 			   TRUE, 0);
 	return cd->handlebox_toolbar;
 }

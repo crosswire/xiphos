@@ -1,33 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_shortcutbar.c
-     * -------------------
-     * Thu Jun 14 2001
-     * copyright (C) 2001 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_shortcutbar.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -52,6 +45,7 @@
 #include "gs_editor.h"
 #include "create_shortcutbar_search.h"
 #include "create_shortcutbar_viewer.h"
+#include "settings.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
@@ -63,7 +57,6 @@ SEARCH_OPT so, *p_so;
 extern SB_VIEWER sb_v, *sv ;
 
 extern gchar *shortcut_types[];
-extern SETTINGS *settings;
 extern gboolean havedict;	/* let us know if we have at least one lex/dict module */
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
@@ -187,13 +180,13 @@ void change_viewer_page(GtkWidget *notebook, gint page)
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
 	switch(page) {
 		case 0:
-			changegroupnameSB(settings, _("Verse List"), groupnum7);
+			changegroupnameSB(&settings, _("Verse List"), groupnum7);
 			break;
 		case 1:
-			changegroupnameSB(settings, _("Search Results"), groupnum7);
+			changegroupnameSB(&settings, _("Search Results"), groupnum7);
 			break;
 		case 2:
-			changegroupnameSB(settings, _("Viewer"), groupnum7);
+			changegroupnameSB(&settings, _("Viewer"), groupnum7);
 			break;
 			
 	}	
@@ -297,8 +290,8 @@ void showSBGroup(SETTINGS * s, gint groupnum)
 	if (!s->showshortcutbar) {
 		gint biblepanesize;
 		biblepanesize =
-		    (settings->gs_width -
-		     settings->shortcutbar_width) / 2;
+		    (settings.gs_width -
+		     settings.shortcutbar_width) / 2;
 		e_paned_set_position(E_PANED(s->epaned),
 				     s->shortcutbar_width);
 		e_paned_set_position(E_PANED
@@ -744,7 +737,7 @@ void dock_undock(SETTINGS * s)
 		biblepanesize = s->gs_width / 2;
 		s->dockSB = create_dlgDock(s);
 		gtk_widget_reparent(shortcut_bar, s->vboxDock);
-		settings->showshortcutbar = TRUE;
+		settings.showshortcutbar = TRUE;
 		gtk_widget_show(shortcut_bar);
 		e_paned_set_position(E_PANED(s->epaned), 0);
 		e_paned_set_position(E_PANED
@@ -777,8 +770,8 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS * s)
 		return;
 	}
 
-	if (settings->showshortcutbar) {
-		settings->showshortcutbar = FALSE;
+	if (settings.showshortcutbar) {
+		settings.showshortcutbar = FALSE;
 		s->biblepane_width = s->gs_width / 2;
 		gtk_widget_hide(shortcut_bar);
 		e_paned_set_position(E_PANED(s->epaned), 0);
@@ -1041,11 +1034,11 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 //      if(item_num == -1) {
 //              if(group_num == groupnum2) /* change work space notebook to commentary page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook),0);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook),0);
 //              if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),0);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower),0);
 //              if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings->workbook_lower),1);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower),1);
 //      }
 
 	if (event->button.button == 1) {
@@ -1068,51 +1061,44 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				sbtype = backend_sb_type_from_modname(modName);
 				if (sbtype == 0 || sbtype == 1)
 					change_module_and_key(modName,
-							  settings->
-							  currentverse);
+							  settings.currentverse);
 				else if (sbtype == 3) {
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings->
-					      workbook_lower), 1);
+					     (settings.workbook_lower), 1);
 					change_module_and_key(modName,
 							  NULL);
 				}
 
 				else
 					change_module_and_key(modName,
-							  settings->
-							  dictkey);
+							  settings.dictkey);
 			}
 
 			if (group_num == groupnum1) {
 				if (havebible) {
 					change_module_and_key(modName,
-							  settings->
-							  currentverse);
+							  settings.currentverse);
 				}
 			}
 
 			if (group_num == groupnum2) {
 				if (havecomm) {
 					change_module_and_key(modName,
-							  settings->
-							  currentverse);
+							  settings.currentverse);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings->workbook), 0);
+					     (settings.workbook), 0);
 				}
 			}
 
 			if (group_num == groupnum3) {
 				if (havedict) {
 					change_module_and_key(modName,
-							  settings->
-							  dictkey);
+							  settings.dictkey);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings->
-					      workbook_lower), 0);
+					     (settings.workbook_lower), 0);
 				}
 			}
 
@@ -1123,8 +1109,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			if (group_num == groupnum8) {
 				change_module_and_key(modName, NULL);
 				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (settings->
-						       workbook_lower),
+						      (settings.workbook_lower),
 						      1);
 			}
 			g_free(type);
@@ -1440,7 +1425,7 @@ void setupSB(SETTINGS * s)
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 				  scrolledwindow1, button, -1);
 
-	loadtree(settings);
+	loadtree(&settings);
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow2);
@@ -1466,7 +1451,7 @@ void setupSB(SETTINGS * s)
 				 gtk_widget_unref);
 	gtk_widget_show(searchbutton);
 
-	gui_create_shortcutbar_search(vpSearch, settings);
+	gui_create_shortcutbar_search(vpSearch, &settings);
 
 	groupnum6 =
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
@@ -1496,7 +1481,7 @@ void setupSB(SETTINGS * s)
 	gtk_widget_show(VLbutton);
 
 	/*** create viewer group and add to shortcut bar ****/
-	html = gui_create_shortcutbar_viewer(vboxVL, settings);
+	html = gui_create_shortcutbar_viewer(vboxVL, &settings);
 
 	
 	/* setup shortcut bar verse list sword stuff */
