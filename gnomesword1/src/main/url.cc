@@ -32,6 +32,7 @@
 
 #include "gui/about_modules.h"
 #include "gui/html.h"
+#include "gui/history.h"
 #include "gui/gtkhtml_display.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
@@ -55,6 +56,9 @@
 #include "backend/sword_main.hh"
 
 
+
+extern HISTORY history_list[];	/* sturcture for storing history items */
+extern gint history_items;
 
 /******************************************************************************
  * Name
@@ -474,57 +478,58 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			case TEXT_TYPE:	
 				key = gui_update_nav_controls(tmpkey);
 				main_display_bible(work_buf[MODULE], key);
+				main_display_commentary(
+						settings.CommWindowModule, key);
 				if(key) g_free((gchar*)key);
 			break;
 			case COMMENTARY_TYPE:				
-				key = backend->get_valid_key(tmpkey);
-				xml_set_value("GnomeSword", "modules", "comm",
-				      work_buf[MODULE]);
-				settings.CommWindowModule = work_buf[2];
-				if(strcmp(key,settings.currentverse))
-					change_verse = TRUE;
-				gui_change_module_and_key(
-					settings.CommWindowModule,
-					(gchar*)key);
-				if(change_verse) {
-					settings.currentverse = (gchar*)key;
-					gui_change_verse(settings.currentverse);
-				}
+				key = gui_update_nav_controls(tmpkey);
+				main_display_bible(
+						settings.MainWindowModule, key);
+				main_display_commentary(work_buf[MODULE], key);
 				if(key) g_free((gchar*)key);	
 			break;
 			case DICTIONARY_TYPE:
-				settings.dictkey = tmpkey;/*
-				xml_set_value("GnomeSword", "modules", "dict",
-				      work_buf[MODULE]);
-				settings.DictWindowModule = work_buf[2];
-				gui_change_module_and_key(
-					settings.DictWindowModule,
-					settings.dictkey);*/
 				main_display_dictionary(work_buf[MODULE],
 							tmpkey);
 			break;
 			case BOOK_TYPE:
-				settings.book_key = tmpkey;
-				xml_set_value("GnomeSword", "modules", "book",
-				      work_buf[MODULE]);
-				settings.book_mod = work_buf[2];
-				gui_change_module_and_key(
-					settings.book_mod,
-					settings.book_key); 
+				main_display_book(work_buf[MODULE], tmpkey); 
 			break;
 		}
 	} else { /* module name not found or not given */
 		if(verse_count) { 
-			key = backend->get_valid_key(tmpkey); 
-			settings.currentverse = (gchar*)key;
+			key = gui_update_nav_controls(tmpkey);
 			/* display in current Bible and Commentary */
-			gui_change_verse(settings.currentverse);
+			main_display_bible(settings.MainWindowModule, key);
+			main_display_commentary(settings.CommWindowModule, key);
 			if(key) g_free((gchar*)key);
 		} else {
 			alert_url_not_found(url);
 		}
 	} 
 	g_strfreev(work_buf);
+	
+	/*
+	 * change parallel verses
+	 */
+	if (settings.dockedInt) {
+		gui_update_parallel_page();
+	}
+	
+	/* 
+	 * add item to history 
+	 */
+	if (settings.addhistoryitem) {
+		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
+			g_warning("currentverse = %s",settings.currentverse);
+			gui_add_history_Item(widgets.app,
+				       GTK_WIDGET
+				       (widgets.shortcutbar),
+				       settings.currentverse);
+	}
+	settings.addhistoryitem = TRUE;
+	
 	return 1;
 	
 }

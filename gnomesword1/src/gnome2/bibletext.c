@@ -317,6 +317,21 @@ static gboolean textview_button_press_event(GtkWidget * widget,
 	return FALSE;
 }
 
+gboolean on_motion_notify_event
+                                        (GtkWidget       *widget,
+                                        GdkEventMotion  *event,
+                                        gpointer         user_data)
+{
+	static gulong delay = 5000000;	
+			
+	while(delay != 0) {
+			--delay;
+	} 
+	delay = 5000000; //g_warning("on_motion_notify_event");
+	return FALSE;
+}
+
+
 
 static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
 	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
@@ -551,6 +566,9 @@ GtkWidget *gui_create_bible_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   NULL);
+  g_signal_connect ((gpointer)widgets.html_text , "motion_notify_event",
+                    G_CALLBACK (on_motion_notify_event),
+                    NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_text), "on_url",
 				   G_CALLBACK(gui_url),
 				   GINT_TO_POINTER(TEXT_TYPE));

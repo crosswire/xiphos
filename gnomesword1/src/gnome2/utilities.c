@@ -180,7 +180,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  add language folders Biblical Texts folder */
 	tmp = get_list(TEXT_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
 	}
@@ -188,7 +188,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  add modules to Biblical Texts language folders */
 	tmp = get_list(TEXT_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
@@ -201,7 +201,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 	tmp = get_list(COMM_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
 	}
@@ -209,7 +209,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  add modules to Commentaries language folders */
 	tmp = get_list(COMM_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
@@ -222,7 +222,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 	tmp = get_list(DICT_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
 
@@ -231,7 +231,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  add modules to Dict/Lex language folders */
 	tmp = get_list(DICT_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);
@@ -245,7 +245,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  add language folders Books folder */
 	tmp = get_list(GBS_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
 	}
@@ -253,7 +253,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	/*  add modules to Books language folders */
 	tmp = get_list(GBS_LIST);
 	while (tmp != NULL) {
-		const gchar *buf = get_module_language((gchar *) tmp->data);
+		const gchar *buf = main_get_module_language((gchar *) tmp->data);
 		add_module_to_language_folder(GTK_TREE_MODEL(store),
 					      iter, buf,
 					      (gchar *) tmp->data);

@@ -185,16 +185,24 @@ void frontend_display(void)
 	gint test;
 	GS_DIALOG *info;
 	GString *str;
+	gchar *url;
 
 	g_print("%s\n", _("Displaying GnomeSword"));
 	gui_show_main_window();
 
 	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
 	settings.addhistoryitem = FALSE;
-	gui_change_verse(settings.currentverse);
-
-	gui_change_module_and_key(settings.DictWindowModule,
-						settings.dictkey);
+	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
+					      settings.currentverse);
+	//gui_change_verse(settings.currentverse);
+	main_url_handler(url);
+	g_free(url);
+	
+	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
+					      settings.dictkey);
+	main_url_handler(url);
+	g_free(url);
+	//gui_change_module_and_key(settings.DictWindowModule,settings.dictkey);
 
 	if(!settings.havebible){
 		settings.showtexts = FALSE;

@@ -61,12 +61,15 @@ void shutdown_backend(void);
 char *get_text_from_offset(char * module_name, unsigned long offset);
 int set_module(int manager, char * module_name);
 void main_setup_displays(void);
-void main_display_book(void);
+void main_display_book(const char * mod_name, char * key);
 void main_display_commentary(const char * mod_name, const char * key);
 void main_display_dictionary(char * mod_name, char * key);
 void main_display_bible(const char * mod_name, const char * key);
+void main_change_verse(const char * bible, const char * commentary, 
+						const char * key);
 void main_setup_new_displays(void);
 void main_dictionary_entery_changed(char * mod_name);
+const char *main_get_module_language(const char *module_name);
 
 #ifdef __cplusplus
 }

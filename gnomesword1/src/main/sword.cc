@@ -36,6 +36,7 @@
 #include "gui/widgets.h"
 #include "gui/commentary.h"
 #include "gui/tabbed_browser.h"
+#include "gui/gnomesword.h"
 
 #include "main/display.hh"
 #include "main/sword.h"
@@ -238,12 +239,28 @@ void main_dictionary_entery_changed(char * mod_name)
 } 
 
 
-void main_display_book(void)
+void main_display_book(const char * mod_name, char * key)
 {
-	//backend->set_module(settings.book_mod,settings.book_offset);
-	sw.gbs_mod->Display();
+	if(!settings.havebook)
+		return;
 	
-/*	if(settings.browsing)
+	//settings.comm_showing = FALSE;
+	settings.whichwindow = BOOK_WINDOW;
+	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
+	gui_change_window_title(settings.book_mod);
+	
+	xml_set_value("GnomeSword", "keys", "offset", key);
+	settings.book_offset = atol(xml_get_value( "keys", "offset"));
+	
+	if(strcmp(settings.book_mod,mod_name)) {
+		xml_set_value("GnomeSword", "modules", "book", mod_name);
+		settings.book_mod = xml_get_value( "modules", "book");
+	}
+	backend->set_module(mod_name);
+	backend->set_treekey(settings.book_offset);
+	backend->display_mod->Display();
+	
+	if(settings.browsing)
 		gui_update_tab_struct(NULL,
 				      NULL,
 				      NULL,
@@ -251,7 +268,7 @@ void main_display_book(void)
 				      NULL,
 				      key?key:NULL,
 				      FALSE);
-*/
+
 }
 
 void main_display_commentary(const char * mod_name, const char * key)
@@ -259,12 +276,16 @@ void main_display_commentary(const char * mod_name, const char * key)
 	if(!settings.havecomm)
 		return;
 	
+	//settings.comm_showing = TRUE;
+	settings.whichwindow = COMMENTARY_WINDOW;
+	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
+	gui_change_window_title(settings.CommWindowModule);
+	
 	if(strcmp(settings.CommWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);
 		settings.CommWindowModule = xml_get_value( "modules", "comm");
-		gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-		gui_change_window_title(settings.CommWindowModule);
 	}
+	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
@@ -317,12 +338,20 @@ void main_display_bible(const char * mod_name, const char * key)
 	if(!settings.havebible)
 		return;
 	
-	if(strcmp(settings.MainWindowModule,mod_name)) {
+	if(strcmp(settings.MainWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "bible",
 					mod_name);
 		settings.MainWindowModule = xml_get_value(
 					"modules", "bible");
 	}
+	
+	if(strcmp(settings.currentverse, key)) {
+		xml_set_value("GnomeSword", "keys", "verse",
+					key);
+		settings.currentverse = xml_get_value(
+					"keys", "verse");
+	}
+	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
 	
@@ -338,6 +367,14 @@ void main_display_bible(const char * mod_name, const char * key)
 	}
 }
 
+
+void main_change_verse(const char * bible, const char * commentary, 
+						const char * key)
+{
+	
+}
+
+
 void main_setup_displays(void)
 {
 	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm);
@@ -349,6 +386,11 @@ void main_setup_new_displays(void)
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict);
 	backend->textDisplay = new GTKChapDisp(widgets.html_text);
+}
+
+const char *main_get_module_language(const char *module_name)
+{
+	return backend->module_get_language(module_name);
 }
 
 

@@ -117,10 +117,7 @@ static void set_gbs_label(gchar * mod_name)
 
 void gui_set_book_mod_and_key(gchar * mod_name, gchar * key)
 {
-	settings.comm_showing = FALSE;
-	settings.whichwindow = BOOK_WINDOW;
-	main_display_book();
-	set_gbs_label(mod_name);
+	main_display_book(mod_name, key);
 }
 
 
@@ -179,7 +176,7 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
 	main_save_module_options_comm(settings.book_mod, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	main_display_book();
+	main_display_book(settings.book_mod,settings.book_key);
 	//gui_set_book_mod_and_key(settings.book_mod, settings.book_key);
 }
 

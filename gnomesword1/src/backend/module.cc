@@ -61,8 +61,8 @@ using std::map;
 using std::list;
 using namespace sword;
 
-typedef map < SWBuf, SWBuf > ModLanguageMap;
-ModLanguageMap languageMap;
+//typedef map < SWBuf, SWBuf > ModLanguageMap;
+//ModLanguageMap languageMap;
 
 #include "backend/mgr.hh"
 
@@ -912,55 +912,6 @@ int backend_get_mod_type(char *mod_name)
 	return -1;
 }
 
-/******************************************************************************
- * Name
- *   backend_get_module_language
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   char *backend_get_module_language(const char * mod_name)
- *
- * Description
- *   we come here to get module language - 
- *   Bible text, Commentary, Dict/Lex or Book 
- *
- * Return value
- *   char
- */
-
-const char *backend_get_module_language(const char *module_name)
-{
-	ModMap::iterator it;	//-- iteratior
-	//-- iterate through the modules until we find modName  
-	it = sw.main_mgr->Modules.find(module_name);
-	//-- if we find the module
-	if (it != sw.main_mgr->Modules.end())
-		return languageMap[(*it).second->Lang()].c_str();
-	return "unknown";
-}
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   const char *backend_get_language_map(const char *language)
- *
- * Description
- *   we come here to get language map - 
- *   Bible text, Commentary, Dict/Lex or Book 
- *
- * Return value
- *   char
- */
-
-const char *backend_get_language_map(const char *language)
-{
-	return languageMap[language].c_str();
-}
 
 /******************************************************************************
  * Name
@@ -1603,7 +1554,7 @@ char *backend_get_percomm_text(char *key)
 void backend_init_language_map(void)
 {
 	/* --list form Bibletime-1.3-- */
-	//languageMap[SWBuf("aa")] = SWBuf("Afar");
+/*	//languageMap[SWBuf("aa")] = SWBuf("Afar");
 	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
 	//languageMap[SWBuf("ae")] = SWBuf("Avestan");
 	languageMap[SWBuf("af")] = SWBuf(_("Afrikaans"));
@@ -1789,4 +1740,5 @@ void backend_init_language_map(void)
 	//languageMap[SWBuf("za")] = SWBuf("Zhuang");
 	languageMap[SWBuf("zh")] = SWBuf(_("Chinese"));
 	languageMap[SWBuf("zu")] = SWBuf(_("Zulu"));
+	*/
 }
