@@ -59,7 +59,7 @@
 #include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "gs_html.h"
-#include "gs_search.h"
+//#include "gs_search.h"
 #include "gs_abouts.h"
 #include "gs_info_box.h"
 #include "gs_setup.h"
@@ -83,7 +83,6 @@ SWDisplay * entryDisplay,	/* to display modules using GtkText a verse at a time 
     *dictDisplay,		/* to display modules using GtkText a verse at a time */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *HTMLDisplay,		/* to display formatted html */
-    *listDisplay,		/* to display modules in list editor */
     *RWPDisplay,		/* to display rwp module in gtktext window */
     *UTF8Display;		/* to display modules in utf8 */
 SWMgr * mainMgr,		/* sword mgr for curMod - curcomMod - curdictMod */
@@ -1247,56 +1246,6 @@ void navcurcommModSWORD(gint backfoward)
 }
 
 /******************************************************************************
- *setuplisteditSWORD
- *
- *
-******************************************************************************/
-void setuplisteditSWORD(GtkWidget * text)
-{
-	listMgr = new SWMgr();
-	listMod = NULL;
-	ModMap::iterator it;	/* sword manager iterator */
-	SectionMap::iterator sit;	//-- iteratior        
-
-	/* set sword display */
-	listDisplay = new HTMLentryDisp(text);
-	/* iterator through modules */
-	for (it = listMgr->Modules.begin(); it != listMgr->Modules.end();
-	     it++) {
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
-			listMod = (*it).second;	/* set listMod  */
-			sit = listMgr->config->Sections.find((*it).second->Name());	//-- check to see if we need render filters
-			if (sit != listMgr->config->Sections.end()) {
-				ConfigEntMap & section = (*sit).second;
-				addrenderfiltersSWORD(listMod, section);
-				listMod->Disp(listDisplay);
-			}
-		}
-	}
-	it = listMgr->Modules.find(curMod->Name());	/* set listMod to curMod */
-	if (it != listMgr->Modules.end()) {
-		listMod = (*it).second;
-	}
-}
-
-//-------------------------------------------------------------------------------------------
-void changeLEverseSWORD(gchar * verse)
-{
-	if (listMod) {
-		listMod->SetKey(verse);
-		listMod->Display();
-	}
-}
-
-//-------------------------------------------------------------------------------------------
-void destroyListEditorSWORD(void)	//-- destroy ListEditor
-{
-	delete listMgr;
-	if (listDisplay)	//-- delete Sword display
-		delete listDisplay;
-}
-
-/******************************************************************************
  * returns the name of the current commentary module
  ******************************************************************************/
 gchar *getcommodSWORD(void)
@@ -1328,34 +1277,6 @@ gchar *getcommodDescriptionSWORD(void)
 {
 	return (char *) curcomMod->Description();;
 }
-
-
-/******************************************************************************  
- * 
- ******************************************************************************/
-GtkWidget *createSearchDlgSWORD(void)
-{
-	GtkWidget *searchDlg;
-
-	searchDlg = create_dlgSearch();
-	searchWindow->initsearchWindow(searchDlg);
-	firstsearch = FALSE;
-	gtk_signal_connect(GTK_OBJECT(searchDlg), "destroy",
-			   GTK_SIGNAL_FUNC(on_dlgSearch_destroy), NULL);
-	return searchDlg;
-}
-
-/* *****************************************************************************
- *
- ******************************************************************************/
-void startsearchSWORD(GtkWidget * searchFrm)
-{
-	gtk_clist_clear(GTK_CLIST(searchWindow->resultList));
-	searchWindow->searchSWORD(searchFrm);
-}
-
-
-
 
 /******************************************************************************
 * returns a list of the books of the Bible

@@ -1684,7 +1684,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_signal_connect(GTK_OBJECT(btnStrongs), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnStrongs_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSB), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSB_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_btnSB_clicked), 
+			   settings);
 	gtk_signal_connect(GTK_OBJECT(cbeBook), "changed",
 			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(spbChapter), "button_release_event",

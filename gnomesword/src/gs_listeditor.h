@@ -48,8 +48,6 @@ void on_btnLEup_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEdown_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEleft_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEright_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEgotoverse_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEAddVerse_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEAddItem_clicked(GtkButton * button, gpointer user_data);
 void on_clLElist_select_row(GtkCList * clist,
 				gint row,
