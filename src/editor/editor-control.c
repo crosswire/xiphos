@@ -406,7 +406,7 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type,
 #endif
 
 //      cd->stylebar = settings.show_style_bar_sp;
-	cd->editbar = settings.show_edit_bar_sp;
+	cd->editbar = TRUE; //settings.show_edit_bar_sp;
 
 	gtk_widget_show(vboxSP);
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);

@@ -116,16 +116,10 @@ struct _settings {
 	        showhistorygroup, /* display shortcut bar group if true */
 		showsplash, /* show splash on program start if true */
 		showdevotional, /* show devotional on program start if true */
-		text_tabs, /* show module tabs in text window if true  */
 		text_tool, /* show toolbar in text window if true  */
-		comm_tabs, /* show module tabs in commentary window if true  */
-		comm_tool, /* show toolbar in commentary window if true  */
-		dict_tabs, /* show module tabs in text dict/lex if true  */
-		book_tabs, /* show module tabs in books if true  */
                 showtexts, /* show bible texts if true  */
                 showcomms, /* show commentaries if true  */
                 showdicts, /* show dictionaries/lexicons if true */
-		percomm_tabs, /* show module tabs in personal commentary if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
 		havethayer, /* for greek morph tags */
@@ -149,8 +143,6 @@ struct _settings {
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */
-		show_style_bar_sp, /* show style toolbar for studypad */
-		show_edit_bar_sp, /* show edit toolbar for studypad */
 		use_studypad, /* use studypad */
 		use_studypad_dialog, /* display studypad in a dialog */
 		studypad_dialog_exist, /* studypad dialog has been created */
@@ -217,6 +209,9 @@ struct _settings {
 	
 	/* set up druid canceled */
 	int setup_canceled;
+	
+	/* there is no settings.xml file */
+	int first_run;
 	
 	/* widget shadow type */
 	int shadow_type;
