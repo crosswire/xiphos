@@ -19,6 +19,8 @@ COMMON_SOURCE =  \
     commentary.h \
     dictlex.c \
     dictlex.h \
+    gbs.c \
+    gbs.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
     gs_detach_int.c \
@@ -35,8 +37,6 @@ COMMON_SOURCE =  \
     gs_editor_toolbar.h \
     gs_find_dlg.c \
     gs_find_dlg.h \
-    gs_gbs.c \
-    gs_gbs.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \

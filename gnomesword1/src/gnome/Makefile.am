@@ -22,6 +22,10 @@ libgui_a_SOURCES =  \
     _commentary.h \
     _dictlex.c \
     _dictlex.h \
+    _editor.c \
+    _editor.h \
+    _gbs.c \
+    _gbs.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
@@ -38,8 +42,6 @@ libgui_a_SOURCES =  \
     fileselection.h \
     gui.c \
     gui.h \
-    _editor.c \
-    _editor.h \
     editor_menu.c \
     editor_menu.h \
     link_dialog.c \

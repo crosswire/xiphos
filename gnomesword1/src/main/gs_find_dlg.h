@@ -35,7 +35,7 @@ extern "C" {
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 	
-#include "gs_gbs.h"
+#include "gbs.h"
 	
 typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
 
