@@ -1751,4 +1751,47 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 	g_list_free(glist);
 }
 
-/******   end of file   ******/
+/******************************************************************************
+ * Name
+ *    gui_shortcutbar_showhide
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   void gui_shortcutbar_showhide()	
+ *
+ * Description
+ *   Show/hide shortcutbar
+ *
+ * Return value
+ *   void
+ */
+
+void gui_shortcutbar_showhide(void)
+{
+	if (!settings.docked) {
+		gdk_window_raise(GTK_WIDGET(settings.dockSB)->window);
+		return;
+	}
+
+	if (settings.showshortcutbar) {
+		settings.showshortcutbar = FALSE;
+		settings.biblepane_width = settings.gs_width / 2;
+		gtk_widget_hide(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(settings.epaned), 0);
+		e_paned_set_position(E_PANED
+				     (lookup_widget
+				      (settings.app, "hpaned1")),
+				     settings.biblepane_width);
+	} else {
+		settings.showshortcutbar = TRUE;
+		settings.biblepane_width =
+		    (settings.gs_width - settings.shortcutbar_width) / 2;
+		e_paned_set_position(E_PANED(settings.epaned),
+				     settings.shortcutbar_width);
+		e_paned_set_position(E_PANED
+				     (lookup_widget(settings.app, "hpaned1")),
+				     settings.biblepane_width);
+		gtk_widget_show(settings.shortcut_bar);
+	}
+}
