@@ -41,6 +41,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
 #include "gui/widgets.h"
+#include "gui/html.h"
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"
@@ -49,6 +50,7 @@
 #include "main/lists.h"
 #include "main/dictlex.h"
 #include "main/module.h"
+#include "main/xml.h"
 
 SIDEBAR sidebar;
 static GtkWidget *vl_html;
@@ -58,6 +60,74 @@ static gint button_mod_list;
 static gint button_vl_html;
 static gchar *buf_module;
 GList *list_of_verses;
+
+/******************************************************************************
+ * Name
+ *   gui_link_clicked
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+ *
+ * Description
+ *   html link clicked
+ *
+ * Return value
+ *   void
+ */
+
+static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
+{
+	gchar *mybuf = NULL;
+	gchar *buf = NULL;
+	gchar *mod_name = NULL;
+	gchar *modbuf = NULL;
+	gchar newmod[80];
+	gchar newref[80];
+	gint i = 0;
+
+	
+	if (!strncmp(url, "version=", 7)
+		 || !strncmp(url, "passage=", 7)) {
+		mybuf = strstr(url, "version=");
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			i = 0;
+			while (mybuf[i] != ' ') {
+				newmod[i] = mybuf[i];
+				newmod[i + 1] = '\0';
+				++i;
+			}
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "passage=");
+		i = 0;
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			while (i < strlen(mybuf)) {
+				newref[i] = mybuf[i];
+				newref[i + 1] = '\0';
+				++i;
+			}
+		}
+		if (check_for_module(newmod)) {
+			modbuf = newmod;
+		} else {
+			modbuf = xml_get_value("modules", "bible");	//settings.MainWindowModule;
+		}
+		buf = g_strdup(newref);
+		mod_name = g_strdup(modbuf);
+		gui_change_module_and_key(mod_name, buf);
+		g_free(buf);
+		g_free(mod_name);
+
+	} 	
+	
+}
+
 
 /******************************************************************************
  * Name
@@ -850,10 +920,10 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 	if(event) {
 		switch (event->button) {
 		case 1: 
-			gui_change_module_and_key(settings.sb_search_mod, key);
+			//gui_change_module_and_key(settings.sb_search_mod, key);
 			break;
 		case 2:
-			//gui_change_module_and_key(settings.sb_search_mod, key);
+			gui_change_module_and_key(settings.sb_search_mod, key);
 			break;
 		case 3:
 	
@@ -1177,6 +1247,10 @@ static void create_search_results_page(GtkWidget * notebook)
 			  sidebar.html_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
 
+	gtk_signal_connect(GTK_OBJECT(sidebar.html_widget), 
+			 "link_clicked",
+			 G_CALLBACK(link_clicked),
+			 NULL);
 
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "button_release_event",
