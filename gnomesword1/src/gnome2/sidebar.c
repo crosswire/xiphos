@@ -62,11 +62,73 @@ static gchar *buf_module;
 GList *list_of_verses;
 
 
-static gchar *get_verse_from_url(const gchar * url)
+
+/******************************************************************************
+ * Name
+ *   get_module_from_url
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gchar *get_module_from_url(const gchar * url)
+ *
+ * Description
+ *   returns a module name when passed a url like:
+ *   version="KJV" passage="John 3:16"
+ *
+ * Return value
+ *   gchar*
+ */ 
+
+static gchar *get_module_from_url(const gchar * url)
 {
 	gchar *mybuf = NULL;
 	gchar *retval = NULL;
 	gchar newmod[80];
+	gint i = 0;
+	
+	mybuf = strstr(url, "version=");
+	if(mybuf != NULL) {
+		i = 0;
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			while (i < strlen(mybuf)) {
+				newmod[i] = mybuf[i];
+				newmod[i + 1] = '\0';
+				++i;
+			}
+		}
+		if (check_for_module(newmod))
+			retval = g_strdup(newmod);
+		else 
+			retval = g_strdup(xml_get_value("modules", "bible"));
+	} 
+	return retval;	
+}
+
+
+/******************************************************************************
+ * Name
+ *   get_verse_from_url
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   gchar *get_verse_from_url(const gchar * url)
+ *
+ * Description
+ *   returns a verse reference when passed a url like:
+ *   version="KJV" passage="John 3:16"
+ *
+ * Return value
+ *   gchar*
+ */ 
+
+static gchar *get_verse_from_url(const gchar * url)
+{
+	gchar *mybuf = NULL;
+	gchar *retval = NULL;
 	gchar newref[80];
 	gint i = 0;
 	
@@ -86,6 +148,8 @@ static gchar *get_verse_from_url(const gchar * url)
 	} 
 	return retval;	
 }
+
+
 /******************************************************************************
  * Name
  *   on_close_button_clicked
@@ -174,53 +238,19 @@ static void on_notebook_switch_page(GtkNotebook *notebook,
 
 static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *mybuf = NULL;
 	gchar *buf = NULL;
 	gchar *mod_name = NULL;
-	gchar *modbuf = NULL;
-	gchar newmod[80];
-	gchar newref[80];
-	gint i = 0;
-
+	gchar *key = NULL;
 	
-	if (!strncmp(url, "version=", 7)
-		 || !strncmp(url, "passage=", 7)) {
-		mybuf = strstr(url, "version=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			i = 0;
-			while (mybuf[i] != ' ') {
-				newmod[i] = mybuf[i];
-				newmod[i + 1] = '\0';
-				++i;
-			}
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "passage=");
-		i = 0;
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			while (i < strlen(mybuf)) {
-				newref[i] = mybuf[i];
-				newref[i + 1] = '\0';
-				++i;
-			}
-		}
-		if (check_for_module(newmod)) {
-			modbuf = newmod;
-		} else {
-			modbuf = xml_get_value("modules", "bible");	//settings.MainWindowModule;
-		}
-		buf = g_strdup(newref);
-		mod_name = g_strdup(modbuf);
-		gui_change_module_and_key(mod_name, buf);
-		g_free(buf);
-		g_free(mod_name);
-
-	} 	
-	
+	buf = g_strdup(url);
+	key = get_verse_from_url(buf);
+	if(buf) g_free(buf);
+	buf = g_strdup(url);
+	mod_name = get_module_from_url(buf);	
+	gui_change_module_and_key(mod_name, key);
+	g_free(buf);
+	g_free(mod_name);
+	g_free(key);
 }
 
 
@@ -1203,8 +1233,7 @@ GtkWidget *create_menu_modules(void)
 static gboolean on_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
 					gpointer data)
-{
-	
+{	
 	gchar *key;
 	const gchar *url;
 	gchar *buf = NULL;
