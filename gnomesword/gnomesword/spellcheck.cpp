@@ -43,6 +43,7 @@ extern bool noteModified;  //-- have notes been modified
 
 bool letscontinue = true;  //-- ????
 gint whichtextwidget = 0; //-- which text widget do we check - default - studypad
+bool bSpell = true; //-- are we running spellcheck
  //
 //
 // GtkTextIterator - an almost RandomAccessIterator for the GtkText widget
@@ -229,6 +230,7 @@ AspellDlg *spellapp;
 
 void destroy_main_dlg (GtkWidget *main_dlg, gpointer data)
 {
+	bSpell = false;
   gtk_widget_destroy(main_dlg);
   delete spellapp;
 }
@@ -258,15 +260,18 @@ item_clkd(lookup)  item_clkd(auto_lookup)
 
 #undef item_clkd
 
-void text_insert(GtkWidget *, const gchar *, gint, gint *, gpointer data) {
+void text_insert(GtkWidget *, const gchar *, gint, gint *, gpointer data)
+{
   static_cast<AspellCheck*>(data)->edit_mode();
 }
 
-void text_delete(GtkWidget *widget, gint, gint, gpointer data) {
+void text_delete(GtkWidget *widget, gint, gint, gpointer data)
+{
   static_cast<AspellCheck*>(data)->edit_mode();
 }
 
-int check_exit(GtkWidget *wid, GdkEvent *, gpointer data) {
+int check_exit(GtkWidget *wid, GdkEvent *, gpointer data)
+{
   return static_cast<AspellCheck*>(data)->exit();
 }
 
@@ -477,57 +482,67 @@ int AspellCheck::clear()
   return false;
 }
 
-
 //
 //
 // AspellCheck helper functions
 //
 //
 
-void AspellCheck::edit_mode() {
-  changed = true;
-  if(whichtextwidget == 1)noteModified = true; //-- notes have been changed
-  unhighlight_text();
-  /*
-  gtk_widget_set_sensitive(start_, true);
-  gtk_widget_set_sensitive(stop_, false);
-  gtk_widget_set_sensitive(change_, false);
-  gtk_widget_set_sensitive(change_all_, false);
-  gtk_widget_set_sensitive(ignore_, false);
-  gtk_widget_set_sensitive(ignore_all_, false);
-  gtk_widget_set_sensitive(learn_, false);
-  gtk_widget_set_sensitive(revert_, false);
-  */
+void AspellCheck::edit_mode()
+{
+	if(whichtextwidget == 1)noteModified = true; //-- notes have been changed
+	if(bSpell)
+	{
+  	changed = true;
+  	unhighlight_text();
+  	gtk_widget_set_sensitive(start_, true);
+  	gtk_widget_set_sensitive(stop_, false);
+  	gtk_widget_set_sensitive(change_, false);
+  	gtk_widget_set_sensitive(change_all_, false);
+  	gtk_widget_set_sensitive(ignore_, false);
+  	gtk_widget_set_sensitive(ignore_all_, false);
+  	gtk_widget_set_sensitive(learn_, false);
+  	gtk_widget_set_sensitive(revert_, false);
+  }
 }
 
-void AspellCheck::check_mode() {
-  g_free(word);
-  word = 0;
-  gtk_clist_clear(GTK_CLIST(suggestions));
-  gtk_widget_set_sensitive(start_, false);
-  gtk_widget_set_sensitive(stop_, false);
-  gtk_widget_set_sensitive(change_, false);
-  gtk_widget_set_sensitive(change_all_, false);
-  gtk_widget_set_sensitive(ignore_, false);
-  gtk_widget_set_sensitive(ignore_all_, false);
-  gtk_widget_set_sensitive(learn_, false);
-  gtk_widget_set_sensitive(revert_, false);
+void AspellCheck::check_mode()
+{
+	if(bSpell)
+	{
+  	g_free(word);
+  	word = 0;
+  	gtk_clist_clear(GTK_CLIST(suggestions));
+  	gtk_widget_set_sensitive(start_, false);
+  	gtk_widget_set_sensitive(stop_, false);
+  	gtk_widget_set_sensitive(change_, false);
+  	gtk_widget_set_sensitive(change_all_, false);
+  	gtk_widget_set_sensitive(ignore_, false);
+  	gtk_widget_set_sensitive(ignore_all_, false);
+  	gtk_widget_set_sensitive(learn_, false);
+  	gtk_widget_set_sensitive(revert_, false);
+  }
 }
 
-void AspellCheck::sug_mode() {
-  gtk_widget_set_sensitive(start_, false);
-  gtk_widget_set_sensitive(stop_, true);
-  gtk_widget_set_sensitive(change_, true);
-  gtk_widget_set_sensitive(change_all_, false);
-  gtk_widget_set_sensitive(ignore_, true);
-  gtk_widget_set_sensitive(ignore_all_, true);
-  gtk_widget_set_sensitive(learn_, true);
-  gtk_widget_set_sensitive(revert_, true);
+void AspellCheck::sug_mode()
+{
+	if(bSpell)
+	{
+  	gtk_widget_set_sensitive(start_, false);
+  	gtk_widget_set_sensitive(stop_, true);
+  	gtk_widget_set_sensitive(change_, true);
+  	gtk_widget_set_sensitive(change_all_, false);
+  	gtk_widget_set_sensitive(ignore_, true);
+  	gtk_widget_set_sensitive(ignore_all_, true);
+  	gtk_widget_set_sensitive(learn_, true);
+  	gtk_widget_set_sensitive(revert_, true);
+  }
 }
 
 void AspellCheck::unhighlight_text()
 {
-  if (mis_end != 0) {
+  if ((mis_end != 0)&&(bSpell))
+  {
     gtk_text_freeze(GTK_TEXT(text));
     guint p = gtk_text_get_point(GTK_TEXT(text));
     guint c = gtk_editable_get_position(GTK_EDITABLE(text));
@@ -759,7 +774,7 @@ GtkWidget*
 spellcheck(gint itext)
 {
   myoptions.set_extra(extra, extra+3);
-
+  bSpell = true;
   poptOption  * popt_opts;
   unsigned int popt_opts_size = 2;
   unsigned int popt_strs_size = 0;

@@ -30,6 +30,7 @@
 #include <swmgr.h>
 #include <swmodule.h>
 #include <versekey.h>
+#include <gbfplain.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -603,8 +604,6 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 	const gchar *resultText; //-- temp storage for verse found
 	gint count;              //-- number of hits
 
-
-
 	searchText = lookup_widget(searchFrm,"entry1"); //-- pointer to text entry
 	lbSearchHits = lookup_widget(searchFrm,"lbSearchHits");//-- pointer to count label
 	resultList = lookup_widget(searchFrm,"resultList");   //-- pointer to list
@@ -620,7 +619,6 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 	gtk_text_set_point(GTK_TEXT(textWindow), 0); //-- clear text window
 	gtk_text_forward_delete (GTK_TEXT (textWindow), gtk_text_get_length((GTK_TEXT(textWindow))));
 
-	
 	if(!GTK_TOGGLE_BUTTON(comToggle)->active)//-- search Bible text or commentary
 		searchMod = curMod; //-- set search module
 	else
