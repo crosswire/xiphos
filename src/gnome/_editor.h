@@ -39,6 +39,7 @@ struct _GSHTMLEditorControlData {
 	GtkWidget *htmlwidget;
 	GtkWidget *vbox;
 	GtkWidget *statusbar;
+	GtkWidget *frame;
 
 	GtkWidget *cpicker;
 	GtkWidget *combo;
@@ -71,6 +72,7 @@ struct _GSHTMLEditorControlData {
 	/* menu items */
 	 GtkWidget
 	    *editnote,
+	    *show_tabs,
 	    *file,
 	    *edit2,
 	    *link;
