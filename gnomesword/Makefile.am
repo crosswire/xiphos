@@ -9,10 +9,10 @@ EXTRA_DIST = gnomesword.glade gnomesword.kdevprj
 install-data-local:
 	@$(NORMAL_INSTALL)
 	if test -d $(srcdir)/pixmaps; then \
-	  $(mkinstalldirs) $(DESTDIR)@PACKAGE_PIXMAPS_DIR@; \
+	  $(mkinstalldirs) $(datadir)/pixmaps/gnomesword; \
 	  for pixmap in $(srcdir)/pixmaps/*; do \
 	    if test -f $$pixmap; then \
-	      $(INSTALL_DATA) $$pixmap $(DESTDIR)@PACKAGE_PIXMAPS_DIR@; \
+	      $(INSTALL_DATA) $$pixmap $(datadir)/pixmaps/gnomesword; \
 	    fi \
 	  done \
 	fi
