@@ -300,7 +300,13 @@ void gui_close_passage_tab(gint pagenum)
 	
 	PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)pagenum);
 	passage_list = g_list_remove(passage_list, pt);
-	
+	g_free(pt->text_mod);
+	g_free(pt->commentary_mod);
+	g_free(pt->dictlex_mod);
+	g_free(pt->book_mod);
+	g_free(pt->text_commentary_key);
+	g_free(pt->dictlex_key);
+	g_free(pt->book_key);
 	g_free(pt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
