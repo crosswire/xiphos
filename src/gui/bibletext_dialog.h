@@ -22,6 +22,8 @@
 #ifndef __BIBLETEXT_DIALOG_H__
 #define __BIBLETEXT_DIALOG_H__
 
+#include "gui/bibletext.h"
+
 typedef struct _viewtext VIEW_TEXT;
 struct _viewtext {
 	GtkWidget *dialog;
@@ -36,6 +38,7 @@ struct _viewtext {
 	gchar key[80];
 	gint dialog_number;
 	gboolean has_key;
+	TEXT_DATA *t;
 };	
 
 void gui_open_bibletext_dialog(gint mod_num);

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * viewtext.h - sword support for veiwtext dialog
+ * gtkhtml_dispaly.h - display Sword modules using GtkHTML
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,23 +19,24 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __VIEWTEXT_H__
-#define __VIEWTEXT_H__
+#ifndef _GTKHTML_DISPALY_H_
+#define _GTKHTML_DISPALY_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <gnome.h>
-
-void backend_setup_viewtext(void);
-void backend_shutdown_viewtext(void);
-void backend_set_global_options_viewtext(char * option, char * onoff);
-char *backend_get_viewtext_text(char *mod_name, char *key);	
+	
+#include "gui/bibletext.h"
+	
+#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
+	
+void entry_display(GtkWidget * html_widget, gchar * mod_name, 
+ 				        gchar * text, gchar * key);
+void chapter_display(GtkWidget * html_widget, gchar * module_name, 
+				  TEXT_GLOBALS * tgs, gchar * key);
 	
 #ifdef __cplusplus
 }
 #endif
 
-#endif
-
+#endif /* _GTKHTML_DISPALY_H_ */

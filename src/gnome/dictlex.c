@@ -25,6 +25,7 @@
 
 #include <gnome.h>
 
+#include "gui/gtkhtml_display.h"
 #include "gui/dictlex.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"
@@ -49,14 +50,36 @@ static GList *dl_list;
 static DL_DATA *cur_d;
 
 
+
 /******************************************************************************
  * Name
- *   set_dictionary_page_and_key
+ *   gui_display_dictlex
  *
  * Synopsis
  *   #include "dictlex.h"
  *
- *   void set_dictionary_page_and_key(gint page_num, gchar * key)
+ *   void gui_display_dictlex(gchar * key)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_dictlex(gchar * key)
+{
+	gui_set_dictionary_page_and_key(settings.dict_last_page, key);
+}
+
+/******************************************************************************
+ * Name
+ *   gui_set_dictionary_page_and_key
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
  *
  * Description
  *   change notebook page and set new key in entry widget
@@ -100,7 +123,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 	dl_list = g_list_first(dl_list);
 	while (dl_list != NULL) {
 		d = (DL_DATA *) dl_list->data;
-		if (!strcmp(d->modName, modname))
+		if (!strcmp(d->mod_name, modname))
 			break;
 		++page;
 		dl_list = g_list_next(dl_list);
@@ -136,7 +159,7 @@ static void gui_set_dict_frame_label(DL_DATA *d)
 	if (settings.dict_tabs)
 		gtk_frame_set_label(GTK_FRAME(d->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(d->frame), d->modName);
+		gtk_frame_set_label(GTK_FRAME(d->frame), d->mod_name);
 	
 }
 
@@ -165,23 +188,10 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
 	//-- change tab label to current book name
 	cur_d = d;
-	/*
-	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
-					(settings.workbook_lower),
-					gtk_notebook_get_nth_page
-					(GTK_NOTEBOOK
-					 (settings.workbook_lower), 0),
-					d->modName);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (settings.workbook_lower),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (settings.workbook_lower),
-					  0), d->modName);
-	*/
+	
 	gui_set_dict_frame_label(d);
 	
-	sprintf(settings.DictWindowModule, "%s", d->modName);
+	sprintf(settings.DictWindowModule, "%s", d->mod_name);
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
 	settings.html_dict = d->html;
@@ -204,38 +214,46 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
  *   void
  */
 
- static void on_entryDictLookup_changed(GtkEditable * editable,
+void on_entryDictLookup_changed(GtkEditable * editable,
 						       DL_DATA * d)
 {
-	gint count;
-	gchar *key;
-	char *text;
-	GList *dictkeys = NULL;
+	gint count, i;
+	gchar *key, *new_key, *text;
 	static gboolean firsttime = TRUE;
-
+	
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
 	strcpy(settings.dictkey, key);	
-	display_dictionary_page_and_key(d->mod_num, key);
+	
+	text = get_dictlex_text(d->mod_name, key);	
+	entry_display(d->html, d->mod_name,
+		   text, key);
+	free(text);
+		
 	if (firsttime)
-		count = 11;
+		count = 7;
 	else
 		count =
 		    GTK_CLIST(d->clist)->clist_window_height /
 		    GTK_CLIST(d->clist)->row_height;
+	
 	if (count) {
-		dictkeys = fill_dictlex_keys(d->mod_num, count);
-		if (dictkeys) {
-			dictkeys = g_list_first(dictkeys);
-			gtk_clist_clear(GTK_CLIST(d->clist));
-			while (dictkeys != NULL) {
-				text = (char*) dictkeys->data;
-				gtk_clist_append(GTK_CLIST(d->clist),
-						 &text);
-				g_free(text);
-				dictkeys = g_list_next(dictkeys);
-			}
-			g_list_free(dictkeys);
+		gtk_clist_clear(GTK_CLIST(d->clist));
+		set_dictlex_module(d->mod_name);
+		set_dictlex_key(key);
+		new_key = get_dictlex_key(-1);
+		
+		for (i = 0; i < (count / 2); i++) {
+			free(new_key);
+			new_key = get_dictlex_key(0);
 		}
+		
+		for (i = 0; i < count; i++) {
+			free(new_key);			
+			new_key = get_dictlex_key(1);
+			gtk_clist_append(GTK_CLIST(d->clist),
+						 &new_key);
+		}
+		free(new_key);		
 	}
 	
 	firsttime = FALSE;
@@ -258,7 +276,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
  *   void
  */
 
-static void on_clistDictLex_select_row(GtkCList * clist, gint row,
+void on_clistDictLex_select_row(GtkCList * clist, gint row,
 			   gint column, GdkEvent * event, DL_DATA * d)
 {
 	gchar *text;
@@ -374,28 +392,9 @@ static void on_showtabs_activate(GtkMenuItem *menuitem, gpointer user_data)
  *   void
  */
 
-static void on_view_new_activate(GtkMenuItem *menuitem, gpointer user_data)
+static void on_view_new_activate(GtkMenuItem *menuitem, DL_DATA * d)
 {
-	extern GtkWidget *frameShowDict;
-	static GtkWidget *dlg;
-	gchar *modName;
-        GdkCursor *cursor;	
-	gtk_widget_show(settings.app);
-	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(settings.app->window,cursor);
-	
-	if(!isrunningSD) {
-		dlg = gui_create_dictlex_dialog(settings.app);
-		modName = settings.DictWindowModule;
-		/* set frame label to current Module name  */
-		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  				
-		//initSD(modName);
-		isrunningSD = TRUE;
-	}
-	gtk_widget_show(dlg);
-	gtk_widget_show(settings.app);
-	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(settings.app->window,cursor);
+	gui_open_dictlex_dialog(d->mod_num);
 }
 
 /******************************************************************************
@@ -414,7 +413,7 @@ static void on_view_new_activate(GtkMenuItem *menuitem, gpointer user_data)
  *   void
  */
 
-static void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
+void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
 {
 	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 }
@@ -439,7 +438,7 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
 {
 	GtkWidget *dlg;
 	
-	dlg = gui_create_cipher_key_dialog(d->modName);
+	dlg = gui_create_cipher_key_dialog(d->mod_name);
 	gtk_widget_show(dlg);
 }
 
@@ -596,7 +595,7 @@ static GtkWidget *create_dictlex_pm(DL_DATA * dl, GList * mods)
 			   &settings);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC(on_view_new_activate),
-			   &settings);
+			   dl);
 	return pm;
 }
 
@@ -790,7 +789,7 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 			  dl->html);
 	gtk_html_load_empty(GTK_HTML(dl->html));
 
-	label = gtk_label_new(dl->modName);
+	label = gtk_label_new(dl->mod_name);
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -803,7 +802,7 @@ static void create_dictlex_pane(DL_DATA *dl, gint count)
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK(settings.notebookDL),
 					  count),
-					 (gchar *) dl->modName);
+					 (gchar *) dl->mod_name);
 
 	gtk_signal_connect(GTK_OBJECT(dl->html),
 			"button_press_event",
@@ -856,15 +855,14 @@ void gui_setup_dictlex(GList *mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		dl = g_new(DL_DATA, 1);
-		dl->modName = modname;
+		dl->mod_name = modname;
 		dl->mod_num = count;
-		dl->searchstring = NULL;
+		dl->search_string = NULL;
 		dl->find_dialog = NULL;	
-		dl->has_key = module_is_locked(dl->modName);
+		dl->has_key = module_is_locked(dl->mod_name);
 		create_dictlex_pane(dl, count);
 		popup = create_dictlex_pm(dl, mods);
 		gnome_popup_menu_attach(popup, dl->html, NULL);
-		new_dictlex_display(dl->html, dl->mod_num);
 		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
 		++count;
 		tmp = g_list_next(tmp);

@@ -363,6 +363,12 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 	return TRUE;
 }
 
+void on_mainwindow_set_focus(GtkWindow * window, GtkWidget * widget,
+						gpointer user_data)
+{
+	//g_warning("focus set to main window");
+}
+
 /******************************************************************************
  * Name
  *   create_mainwindow
@@ -915,6 +921,9 @@ void create_mainwindow(void)
 			GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
 	gtk_signal_connect(GTK_OBJECT(settings.app), "size_allocate",
 			GTK_SIGNAL_FUNC(on_mainwindow_size_allocate), NULL);
+	gtk_signal_connect (GTK_OBJECT (settings.app), "set_focus",
+                        GTK_SIGNAL_FUNC(on_mainwindow_set_focus),
+                        NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSBDock), "clicked",
 			GTK_SIGNAL_FUNC(on_btnSBDock_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSB), "clicked",

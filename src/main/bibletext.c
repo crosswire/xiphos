@@ -36,7 +36,6 @@
 #include "main/gs_html.h"
 
 #include "backend/bibletext_.h"
-#include "backend/bibletext_view_.h"
 #include "backend/sword.h"
 #include "backend/shortcutbar.h"
 
@@ -122,28 +121,74 @@ gint check_for_global_option(gchar * mod_name, gchar * option)
 
 void set_text_module_global_option(gchar * option, gboolean choice)
 {
-	gchar *on_off;
+	char *on_off;
 
 	if (choice) {
 		on_off = "On";
 	} else {
 		on_off = "Off";
 	}
-	
-	backend_save_module_options(settings.MainWindowModule,
-				    option, on_off);
 	backend_set_text_global_option(option, on_off);
-	gui_display_text(settings.currentverse);
 }
 
 /******************************************************************************
  * Name
- *  
+ *   save_module_options
  *
  * Synopsis
  *   #include "bibletext.h"
  *
- *   	
+ *   int save_module_options(char * mod_name, char * option, 
+ *				    int choice)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
+int save_module_options(char * mod_name, char * option, 
+				    int choice)
+{
+	char *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+	return backend_save_module_options(mod_name, option, on_off);
+}
+
+/******************************************************************************
+ * Name
+ *   load_module_options
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *  	int load_module_options(char * modName, char * option)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
+int load_module_options(char * modName, char * option)
+{
+	return backend_load_module_options(modName, option);
+}
+/******************************************************************************
+ * Name
+ *   set_text_global_option
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void set_text_global_option(gchar * option, gchar * choice)
  *
  * Description
  *   
@@ -155,53 +200,5 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 void set_text_global_option(gchar * option, gchar * choice)
 {
 	backend_set_text_global_option(option, choice);
-}
-
-/******************************************************************************
- * Name
- *   set_global_options_viewtext
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void set_global_options_viewtext(gchar *option, gboolean choice)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void set_global_options_viewtext(gchar *option, gboolean choice)
-{
-	if (choice) {	
-		backend_set_global_options_viewtext(option,
-						    "On");
-	} else {		
-		backend_set_global_options_viewtext(option,
-						    "Off");
-	}
-}
-
-/******************************************************************************
- * Name
- *  get_viewtext_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   char *get_viewtext_text(char *mod_name, char *key)	
- *
- * Description
- *    
- *
- * Return value
- *   char*
- */ 
-
-char *get_viewtext_text(char *mod_name, char *key)
-{
-	return backend_get_viewtext_text(mod_name, key);
 }
 

@@ -27,14 +27,14 @@ extern "C" {
 #endif
 
 char *get_bibletext_text(char *mod_name, char *key);
-void set_text_global_option(gchar * option, gchar * choice);
-void set_text_module_global_option(gchar * option,
-				   gboolean choice);
+void set_text_global_option(char * option, char * choice);
+void set_text_module_global_option(char * option,
+				   int choice);
 const char* text_get_description(char * mod_name);
-gint check_for_global_option(gchar * mod_name, gchar * option);
-	
-void set_global_options_viewtext(gchar *option, gboolean choice);
-char *get_viewtext_text(char *mod_name, char *key);
+int check_for_global_option(char * mod_name, char * option);
+int save_module_options(char * mod_name, char * option, 
+				    int choice);
+int load_module_options(char * modName, char * option);
 
 #ifdef __cplusplus
 }

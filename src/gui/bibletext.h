@@ -26,6 +26,36 @@
 extern "C" {
 #endif
 
+typedef struct _text_global_ops TEXT_GLOBALS;
+struct  _text_global_ops {
+	GtkWidget *t_btn_strongs;
+	GtkWidget *t_btn_morphs;
+	GtkWidget *t_btn_footnotes;
+	GtkWidget *t_btn_accents;
+	GtkWidget *t_btn_lemmas;
+	GtkWidget *t_btn_scripturerefs;
+	GtkWidget *t_btn_points;
+	GtkWidget *t_btn_cant;
+	GtkWidget *t_btn_headings;
+	GtkWidget *t_btn_primary;
+	GtkWidget *t_btn_secondary;
+	GtkWidget *t_btn_all;
+	gboolean
+	    gbfstrongs,
+	    thmlstrongs,
+	    gbfmorphs,
+	    thmlmorphs,
+	    gbffootnotes,
+	    thmlfootnotes,
+	    greekaccents,
+	    lemmas,
+	    scripturerefs,
+	    hebrewpoints, 
+	    hebrewcant, 
+	    headings, 
+	    variants;
+};
+
 typedef struct _text_find_dialog Text_Find_Dialog;
 struct _text_find_dialog {
 	GnomeDialog *dialog;
@@ -43,43 +73,23 @@ struct _text_data {
 	GtkWidget *frame_toolbar;
 	GtkWidget *showtabs;
 	GtkWidget *showtoolbar;
-	GtkWidget *t_btn_strongs;
-	GtkWidget *t_btn_morphs;
-	GtkWidget *t_btn_footnotes;
-	GtkWidget *t_btn_accents;
-	GtkWidget *t_btn_lemmas;
-	GtkWidget *t_btn_scripturerefs;
-	GtkWidget *t_btn_points;
-	GtkWidget *t_btn_cant;
-	GtkWidget *t_btn_headings;
-	GtkWidget *t_btn_primary;
-	GtkWidget *t_btn_secondary;
-	GtkWidget *t_btn_all;
 	gchar *mod_name;
 	gchar *search_string;
 	gchar *key;
 	gint mod_num;
 	gboolean is_locked;
-	gboolean
-	    gbfstrongs,
-	    thmlstrongs,
-	    gbfmorphs,
-	    thmlmorphs,
-	    gbffootnotes,
-	    thmlfootnotes,
-	    greekaccents,
-	    lemmas,
-	    scripturerefs,
-	    hebrewpoints, 
-	    hebrewcant, 
-	    headings, 
-	    variants;
+	TEXT_GLOBALS *tgs;
 	Text_Find_Dialog *find_dialog;
 };
 
+void gui_get_module_global_options(TEXT_DATA * t);
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
 void gui_display_text(gchar * key);
+void gui_add_global_option_buttons(GtkWidget * toolbar, 
+				      gchar * mod_name, 
+				      TEXT_GLOBALS * tgs, 
+				      GtkMenuCallback callback);
 void gui_setup_text(GList *mods);
 void gui_shutdown_text(void);
 	

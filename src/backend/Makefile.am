@@ -19,8 +19,6 @@ CXXFLAGS =  \
 libbackend_a_SOURCES =  \
     bibletext_.cpp \
     bibletext_.h \
-    bibletext_view_.cpp \
-    bibletext_view_.h \
     bookmarks.cpp \
     bookmarks.h \
     commentary_.cpp \
@@ -49,7 +47,3 @@ libbackend_a_SOURCES =  \
     sword.h \
     verselist.cpp \
     verselist.h \
-    viewcomm.cpp \
-    viewcomm.h \
-    viewdict.cpp \
-    viewdict.h

@@ -29,7 +29,6 @@
 
 #include "backend/sword.h"
 #include "backend/dictlex_.h"
-#include "backend/viewdict.h"
 
 #include "gui/dictlex_dialog.h"
 #include "gui/dictlex.h"
@@ -40,93 +39,90 @@
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 
-
 /******************************************************************************
  * Name
- *   
+ *  set_dictlex_module 
  *
  * Synopsis
  *   #include "dictlex.h"
  *
- *   
+ *   int set_dictlex_module(char * mod_name)
  *
  * Description
  *    
  *
  * Return value
- *   
+ *   int
  */
  
-void new_dictlex_display(GtkWidget * html, gint mod_num)
+int set_dictlex_module(char * mod_name)
 {
-	backend_new_dictlex_display(html, mod_num);
+	return backend_set_dictlex_module(mod_name);
 }
 
 /******************************************************************************
  * Name
- *   fill_dictlex_keys
+ *   set_dictlex_key
  *
  * Synopsis
  *   #include "dictlex.h"
  *
- *   GList *fill_dictlex_keys(int mod_num, int count)
+ *   int set_dictlex_key(char * key)
  *
  * Description
- *    get a list of dictlex key to fill clist widget by
- *    calling backend_fill_dictlex_keys();
+ *    
  *
  * Return value
- *   GList*
- */
-
-GList *fill_dictlex_keys(int mod_num, int count)
-{
-	return backend_fill_dictlex_keys(mod_num, count);
-}
-
-/******************************************************************************
- * Name
- *   display_dictionary_page_and_key
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void display_dictionary_page_and_key(gint page_num, gchar * key)
- *
- * Description
- *   calls backend_display_dictlex to display new module and key 
- *
- * Return value
- *   void
- */
-
-void display_dictionary_page_and_key(gint page_num, gchar * key)
-{
-	backend_display_dictlex(page_num, key);
-}
-
-
-/******************************************************************************
- * Name
- *   display_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void display_dictlex(gchar * key)	
- *
- * Description
- *    display new key in current dictionary
- *
- * Return value
- *   void
+ *   int
  */
  
-void display_dictlex(gchar * key)
+int set_dictlex_key(char * key)
 {
-	strcpy(settings.dictkey,key);
-	backend_display_dictlex(settings.dict_last_page, key);
+	return backend_set_dictlex_key(key);
 }
+
+/******************************************************************************
+ * Name
+ *   get_dictlex_key
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   char *get_dictlex_key(int direction)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+ 
+char *get_dictlex_key(int direction)
+{
+	return backend_get_dictlex_key(direction);
+}
+
+/******************************************************************************
+ * Name
+ *   get_dictlex_text
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   char *get_dictlex_text(char * mod_name, char * key)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+
+char *get_dictlex_text(char * mod_name, char * key)
+{
+	return backend_get_dictlex_text(mod_name, key);
+}
+
 
 /******************************************************************************
  * Name
@@ -144,9 +140,9 @@ void display_dictlex(gchar * key)
  *   gchar *
  */
 
-gchar *get_first_key_viewdict(void)
+gchar *get_first_dictlex_key(void)
 {
-	return backend_get_first_key_viewdict();
+	return backend_get_first_dictlex_key();
 }
 
 /******************************************************************************
@@ -165,113 +161,7 @@ gchar *get_first_key_viewdict(void)
  *   gchar *
  */
 
-gchar *get_next_key_viewdict(void)
+gchar *get_next_dictlex_key(void)
 {
-	return backend_get_next_key_viewdict();
+	return backend_get_next_dictlex_key();	
 }
-
-/******************************************************************************
- * Name
- *  search_text_changed_viewdict 
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void search_text_changed_viewdict(gchar * key)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void search_text_changed_viewdict(gchar * key)
-{
-	backend_search_text_changed_viewdict(key);
-}
-
-/******************************************************************************
- * Name
- *   shutdown_viewdict
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void shutdown_viewdict(void)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void shutdown_viewdict(void)
-{
-	backend_shutdown_viewdict();
-}
-
-/******************************************************************************
- * Name
- *   load_module_viewdict
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void load_module_viewdict(gchar * module_name)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void load_module_viewdict(gchar * module_name)
-{
-	backend_load_module_viewdict(module_name);
-}
-
-/******************************************************************************
- * Name
- *   goto_key_viewdict
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void goto_key_viewdict(gchar * key)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void goto_key_viewdict(gchar * key)
-{
-	backend_goto_key_viewdict(key);
-}
-
-/******************************************************************************
- * Name
- *  setup_viewdict 
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void setup_viewdict(GtkWidget * text)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void setup_viewdict(GtkWidget * text)
-{
-	backend_setup_viewdict(text);
-}
-
