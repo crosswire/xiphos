@@ -38,6 +38,7 @@
 #include "gs_gui_cb.h"
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
+#include "gs_popup_cb.h"
 #include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
@@ -512,7 +513,7 @@ void on_btnCommSyn_clicked                  (GtkButton       *button,
 void on_btnCommPrint_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+	on_print_item_activate(NULL, NULL);
 }
 
 

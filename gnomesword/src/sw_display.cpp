@@ -103,28 +103,18 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	gchar *utf8str;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	string lang, swfont, swfontsize;
-	bool use_gtkhtml_font = false;
-
-	swfont = load_module_font((gchar*)imodule.Name(),"GSFont");
-	swfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
-	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
+	string swfontsize;
 	
-	font = g_strdup("-adobe-helvetica-*-*");
+	use_gtkhtml_font = false;
+	use_font = pick_font(imodule);
+	swfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");	
+	
 	if (strcmp(swfontsize.c_str(), "")) {
 		use_font_size = (gchar *) swfontsize.c_str();
 	} else {
 		use_font_size = settings->bible_font_size;
 	}
 	
-	if (strcmp(swfont.c_str(), "")) {
-		use_font = (gchar *) swfont.c_str();
-		use_gtkhtml_font = false;
-	} else {
-		font = g_strdup(settings->default_font);
-		use_font = gethtmlfontnameHTML(font);
-		use_gtkhtml_font = true;
-	}
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	sprintf(tmpBuf,
@@ -158,8 +148,40 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	endHTML(GTK_WIDGET(gtkText));
-	g_free(font);
 	return 0;
+}
+
+gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
+{
+	gchar *font, *use_font, *retval = "test_font";
+	string lang, gsfont, gsfontsize;	
+	
+	gsfont = load_module_font((gchar*)imodule.Name(),"GSFont");
+	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
+	
+	font = g_strdup("-adobe-helvetica-*-*");
+	
+	if (strcmp(gsfont.c_str(), "")) {
+		retval = (gchar *)gsfont.c_str();
+		use_gtkhtml_font = false;
+	} else {
+		if (!stricmp(lang.c_str(), "") || !stricmp(lang.c_str(), "en") || !stricmp(lang.c_str(), "de")) {
+			use_gtkhtml_font = true;
+			font = g_strdup(settings->default_font);
+		} else if (!stricmp(lang.c_str(), "grc")) {
+			font = g_strdup(settings->greek_font);
+			use_gtkhtml_font = false;
+		} else if (!stricmp(lang.c_str(), "he")) {
+			font = g_strdup(settings->hebrew_font);
+			use_gtkhtml_font = false;
+		} else {
+			font = g_strdup(settings->unicode_font);
+			use_gtkhtml_font = false;
+		}
+		retval = gethtmlfontnameHTML(font);
+	}
+	g_free(font);	
+	return retval;
 }
 
 /****************************************************************************** 
@@ -178,46 +200,24 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	int curPos = 0;
 	gint len;
 	char *Buf, c;
-	gchar *utf8str, *use_font, *use_font_size, *font, *token, *bufstr;
+	gchar *utf8str, *use_font, *use_font_size, *token, *bufstr;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	bool newparagraph = false,
-		use_gtkhtml_font = false;
-	string lang, gsfont, gsfontsize;
+	bool newparagraph = false;
+	string gsfontsize;
 	GString *str;
 	
+	use_gtkhtml_font = false;
 	str = g_string_new("");
 	c = 182;  
-	gsfont = load_module_font((gchar*)imodule.Name(),"GSFont");
-	gsfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
-	lang = get_module_lang_UTILITY((gchar*)imodule.Name());	
-	//g_warning("%s font = %s",(gchar*)imodule.Name(), (gchar*)gsfont.c_str());
+	use_font = pick_font(imodule);
+	g_warning(use_font);
 	
-	font = g_strdup("-adobe-helvetica-*-*");
+	gsfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
 	if (strcmp(gsfontsize.c_str(), "")) {
 		use_font_size = (gchar *)gsfontsize.c_str();
 	} else {
 		use_font_size = settings->bible_font_size;
-	}
-	
-	if (strcmp(gsfont.c_str(), "")) {
-		use_font = (gchar *)gsfont.c_str();
-		use_gtkhtml_font = false;
-	} else {
-		if (!stricmp(lang.c_str(), "") || !stricmp(lang.c_str(), "en") || !stricmp(lang.c_str(), "de")) {
-			use_gtkhtml_font = true;
-			font = g_strdup(settings->default_font);
-		} else if (!stricmp(lang.c_str(), "grc")) {
-			font = g_strdup(settings->greek_font);
-			use_gtkhtml_font = false;
-		} else if (!stricmp(lang.c_str(), "he")) {
-			font = g_strdup(settings->hebrew_font);
-			use_gtkhtml_font = false;
-		} else {
-			font = g_strdup(settings->unicode_font);
-			use_gtkhtml_font = false;
-		}
-		use_font = gethtmlfontnameHTML(font);
 	}
 	
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
@@ -269,7 +269,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), utf8str,
 			    strlen(utf8str));
 		if (settings->versestyle) {
-			if (strstr((const char *) imodule, "<BR>") == NULL ) {
+			if ((strstr((const char *) imodule, "<BR>") == NULL ) && (strstr((const char *) imodule, "<!P>") == NULL))  {
 				sprintf(tmpBuf, " %s", "</font><br>");
 			} else {
 				sprintf(tmpBuf, " %s", "</font>");
@@ -300,7 +300,6 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	sprintf(tmpBuf, "%d", curVerse);
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(gtkText, tmpBuf);
-	g_free(font);
 	g_string_free(str,TRUE);
 	return 0;
 }

@@ -680,4 +680,10 @@ gchar *gethtmlfontnameHTML(gchar *xfontname)
 	return retval;
 }
 
+/*** set html default font ***/
+void set_gtkhtml_default_font_HTML(GtkWidget *html_widget, gchar *xfontname)
+{
+	
+}
+
 

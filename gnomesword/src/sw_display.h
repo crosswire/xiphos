@@ -36,10 +36,12 @@ class GtkHTMLEntryDisp:public SWDisplay {
 	GtkWidget * gtkText;
       public:
 	
+	bool use_gtkhtml_font;
 	GtkHTMLEntryDisp(GtkWidget * gtkText) {
 		this->gtkText = gtkText;
 	}
 	virtual char Display(SWModule & imodule);
+	virtual gchar* pick_font(SWModule & imodule);
 	//gchar *ProcessText(gchar * text, gint maxlen);
 };
 
