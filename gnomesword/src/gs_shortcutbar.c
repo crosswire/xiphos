@@ -171,6 +171,7 @@ void showSBVerseList(SETTINGS * s)
 /*** set shortcut bar to Daily Devotion group ***/
 void setupforDailyDevotion(SETTINGS * s)
 {
+	
 	showSBGroup(s, groupnum7);
 	changegroupnameSB(s, _("Daily Devotion"), groupnum7);
 }
@@ -622,7 +623,6 @@ void on_btnSBDock_clicked(GtkButton * button, SETTINGS *s)
 /*** show hide shortcut bar ***/
 void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 {
-	gint biblepanesize;
 	if(!s->docked) {
 		gdk_window_raise(GTK_WIDGET(s->dockSB)->window);
 		return;
@@ -630,23 +630,23 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 	
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = FALSE;
-		biblepanesize = settings->gs_width / 2;
+		s->biblepane_width = s->gs_width / 2;
 		gtk_widget_hide(shortcut_bar);
 		e_paned_set_position(E_PANED
 			     (lookup_widget(s->app, "epaned")),
 			     0);
 		e_paned_set_position(E_PANED
 			     (lookup_widget(s->app, "hpaned1")),
-			     biblepanesize);
+			     s->biblepane_width);
 	} else {
-		settings->showshortcutbar = TRUE;
-		biblepanesize = (settings->gs_width - settings->shortcutbar_width) / 2;
+		s->showshortcutbar = TRUE;
+		s->biblepane_width = (s->gs_width - s->shortcutbar_width) / 2;
 		e_paned_set_position(E_PANED
 			     (lookup_widget(s->app, "epaned")),
-			     settings->shortcutbar_width);
+			     s->shortcutbar_width);
 		e_paned_set_position(E_PANED
 			     (lookup_widget(s->app, "hpaned1")),
-			     biblepanesize);
+			     s->biblepane_width);
 		gtk_widget_show(shortcut_bar);
 	}
 }

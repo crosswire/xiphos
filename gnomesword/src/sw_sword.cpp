@@ -1831,7 +1831,10 @@ void displayDevotional(void)
 
 	/* Print it out in a nice format. */
 	strftime (buf, 80, "%m.%d", loctime);
-
+	
+	//if(!settings->showshortcutbar) /* if shortcut bar is not showing we must show it */
+	    //on_btnSB_clicked(NULL, settings);
+	
 	displaydictlexSBSW(settings->devotionalmod, buf, settings);
 	setupforDailyDevotion(settings);
 }
