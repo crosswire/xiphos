@@ -896,6 +896,31 @@ static void headings_toggled(GtkToggleButton * togglebutton,
 
 /******************************************************************************
  * Name
+ *  headings_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void redwords_toggled(GtkToggleButton *togglebutton, 
+ *						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when words in red button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void redwords_toggled(GtkToggleButton * togglebutton,
+			     VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Red letter words", togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+/******************************************************************************
+ * Name
  *   on_primary_reading_activate
  *
  * Synopsis
@@ -1536,6 +1561,36 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 				   GTK_SIGNAL_FUNC(headings_toggled),
 				   vt);
 	}
+	if (vt->t->tgs->words_in_red) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/r.xpm");
+		vt->t->tgs->t_btn_redwords =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("R"),
+					       _
+					       ("Toggle words of Christ in red"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
+		gtk_widget_show(vt->t->tgs->t_btn_redwords);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_redwords, 24, 24);
+
+		active =
+		    load_module_options(mod_name,
+					"Red letter words");
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (vt->t->tgs->t_btn_redwords),
+					     active);
+
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_redwords),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(redwords_toggled),
+				   vt);
+
+	}
 	if (vt->t->tgs->variants) {
 		variant_menu = gtk_menu_bar_new();
 		gtk_widget_ref(variant_menu);
@@ -1741,7 +1796,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	GtkAccelGroup *module_new_menu_accels;
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame21;
-	GtkWidget *swVText;
+	GtkWidget *swVText; 
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_DIALOG);
 
