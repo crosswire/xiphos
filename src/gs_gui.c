@@ -742,7 +742,8 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 	
 	/*** get and load books of the Bible ***/
 	cbBook_items = getBibleBooks();
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);	
+	g_list_free(cbBook_items);
 	
 	cbeBook = GTK_COMBO(cbBook)->entry;
 	gtk_widget_ref(cbeBook);
@@ -1861,10 +1862,10 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnExit), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnExit_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(moduleText), "button_press_event",
+/*	gtk_signal_connect(GTK_OBJECT(moduleText), "button_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_button_press_event), NULL);
-/*	gtk_signal_connect(GTK_OBJECT(moduleText), "drag_begin",
+	gtk_signal_connect(GTK_OBJECT(moduleText), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_moduleText_drag_begin),
 			   NULL);
 */			   
@@ -1923,11 +1924,6 @@ GtkWidget *create_mainwindow(GtkWidget *splash)
 			   (gchar *) "textComments");
 #endif				/* USE_SPELL */
 
-
-	gtk_signal_connect(GTK_OBJECT(moduleText), "button_press_event",
-			   GTK_SIGNAL_FUNC
-			   (on_moduleText_button_press_event), NULL);
-	 
 	gtk_signal_connect(GTK_OBJECT(moduleText), "enter_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_moduleText_enter_notify_event), NULL);
