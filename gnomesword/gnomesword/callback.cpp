@@ -926,10 +926,10 @@ on_inter1_module1_activate               (GtkMenuItem     *menuitem,
 
 //----------------------------------------------------------------------------------------------
 void
-on_clear1_activate               (GtkMenuItem     *menuitem,
+on_clear1_activate               (GtkMenuItem     *menuitem,    //-- clear history menu
                                         gpointer         user_data)
 {
-
+   clearhistory();
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1137,7 +1137,7 @@ on_btnEBMOK_clicked                    (GtkButton       *button,
 	GtkWidget	*dlg;
 
 	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));
-	editbookmarksSave(dlg);	
+	editbookmarksSave(dlg);	  //-- in filestuff.cpp
 	gtk_widget_destroy(dlg);
 }
 
@@ -1149,7 +1149,7 @@ on_btnEBMApply_clicked                 (GtkButton       *button,
 	GtkWidget	*dlg;
 
 	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));
-	editbookmarksSave(dlg);	
+	editbookmarksSave(dlg);	 //-- in filestuff.cpp
 }
 
 //----------------------------------------------------------------------------------------------

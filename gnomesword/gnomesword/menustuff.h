@@ -33,6 +33,9 @@ additemtopopupmenu		(GtkWidget *MainFrm,
 									GtkWidget *menu, 
 									gchar *itemname, 
 									GtkMenuCallback mycallback);
+void
+addseparator			(GtkWidget *MainFrm,
+									gchar *subtreelabel);
 
 void
 addsubtreeitem				(GtkWidget *MainFrm,
@@ -50,3 +53,9 @@ additemtooptionmenu		(GtkWidget *MainFrm,
 									gchar *itemlabel, 
 									GtkMenuCallback mycallback);
 
+void
+removemenuitems				(GtkWidget *MainFrm,
+											gchar *startitem,
+											gint numberofitems);
+											
+											

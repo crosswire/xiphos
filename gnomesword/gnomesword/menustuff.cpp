@@ -26,6 +26,8 @@
 #include "menustuff.h"
 #include "callback.h"
 
+//extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
+
 //----------------------------------------------------------------------------------
 void
 additemtognomemenu(GtkWidget *MainFrm, gchar *itemname, gchar *menuname, GtkMenuCallback mycallback)
@@ -35,7 +37,7 @@ additemtognomemenu(GtkWidget *MainFrm, gchar *itemname, gchar *menuname, GtkMenu
 	menuitem = g_new(GnomeUIInfo,2); 
 	menuitem->type = GNOME_APP_UI_ITEM;
 	menuitem->moreinfo=(gpointer)mycallback;
-	menuitem->user_data = itemname;
+	menuitem->user_data = g_strdup(itemname);
 	menuitem->label = itemname;
 	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
 	menuitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;
@@ -62,6 +64,23 @@ additemtopopupmenu(GtkWidget *MainFrm, GtkWidget *menu, gchar *itemname, GtkMenu
 	gtk_container_add (GTK_CONTAINER (menu), menuChoice); 	
 }
 
+//-------------------------------------------------------------------------------------------
+void
+addseparator(GtkWidget *MainFrm, gchar *subtreelabel)
+{
+	GnomeUIInfo *bookmarkitem;
+
+	bookmarkitem = g_new(GnomeUIInfo,2);
+	bookmarkitem->type = GNOME_APP_UI_SEPARATOR;
+//	bookmarkitem->moreinfo=(gpointer)on_john_3_1_activate;
+//	bookmarkitem->user_data=g_strdup(itemlabel);
+//	bookmarkitem->label = itemlabel;
+	bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
+//	bookmarkitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;
+	bookmarkitem->accelerator_key = 0;
+	bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO;
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),subtreelabel,bookmarkitem,NULL);	
+}
 //-------------------------------------------------------------------------------------------
 void
 addsubtreeitem(GtkWidget *MainFrm, gchar *menulabel, gchar *subtreelabel)
@@ -123,5 +142,12 @@ additemtooptionmenu(GtkWidget *MainFrm, gchar *subtreelabel, gchar *itemlabel, G
 	item = menuitem[0].widget;
 
 	return(item);
+}
+
+//-------------------------------------------------------------------------------------------
+void
+removemenuitems(GtkWidget *MainFrm, gchar *startitem, gint numberofitems)//-- remove a number(numberofitems) of items form
+{                                                                        //-- a menu or submenu(startitem)
+	gnome_app_remove_menus(GNOME_APP(MainFrm), startitem, numberofitems);
 }
 
