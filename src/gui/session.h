@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * gui.c - The heart of the gui.
+ * session.c - create and maintain a GNOME session
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,31 +19,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
+
+#ifndef __GS_SESSION_H__
+#define __GS_SESSION_H__
+
+void gs_session_init (const char *argv0);
+gboolean gs_session_is_restored (void);
+gboolean gs_session_load (void);
+
 #endif
-
-#include <gnome.h>
-#include <gtk/gtk.h>
-
-#include "gui/gui.h"
-#include "gui/session.h"
-
-void gui_init(int argc, char *argv[])
-{
-#ifdef ENABLE_NLS
-  bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
-#endif
-	gnome_program_init (PACKAGE, VERSION, LIBGNOMEUI_MODULE,
-                      argc, argv,
-                      GNOME_PROGRAM_STANDARD_PROPERTIES,
-                      NULL);
-	gs_session_init(argv[0]);
-}
-
-void gui_main(void)
-{
-	gtk_main();
-}
