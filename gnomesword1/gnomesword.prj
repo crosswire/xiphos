@@ -231,20 +231,18 @@ module.source.files=\
 module.pixmap.name=pixmaps
 module.pixmap.type=
 module.pixmap.files=\
-	pixmaps/tt.xpm\
-	pixmaps/about.png\
-	pixmaps/book-bl.png\
-	pixmaps/book-gold.png\
-	pixmaps/book-green.png\
-	pixmaps/book-un.png\
-	pixmaps/splash.png\
-	pixmaps/sword.xpm\
-	pixmaps/sword3.xpm\
-	doc/help/gs.png\
-	book_closed.png\
-	book_open.png\
-	helpdoc.png\
-	gs2-48x48.png
+	about.png\
+	book-bl.png\
+	book-gold.png\
+	book-green.png\
+	book-un.png\
+	dlg-bl.png\
+	dlg-un.png\
+	dock.png\
+	gs2-48x48.png\
+	splash.png\
+	sword.png\
+	sword3.png
 
 module.data.name=.
 module.data.type=
@@ -265,7 +263,11 @@ module.doc.files=\
 	README\
 	TODO\
 	po/ChangeLog\
-	doc/getting_started.txt
+	doc/getting_started.txt\
+	doc/help/C/gnomesword2.xml\
+	doc/help/C/legal.xml\
+	doc/help/C/gnomesword2-C.omf\
+	COPYING-DOCS
 
 module.po.files=\
 	bg.po\
@@ -274,7 +276,8 @@ module.po.files=\
 	es_ES.po\
 	fr.po\
 	sk.po\
-	ru.po
+	ru.po\
+	en_GB.po
 
 compiler.options.supports=
 compiler.options.include.paths=\
