@@ -79,15 +79,17 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DAT
  *   void
  */
 
-void gui_verselist_to_bookmarks(gchar * module_name)
+void gui_verselist_to_bookmarks(GList * verses)
 {
 	gint test;
 	const gchar *key_buf = NULL;
 	gchar *tmpbuf;
+	gchar *module_name;
 	GString *str;
 	GtkTreeIter parent;
 	GtkTreeIter iter;
 	GS_DIALOG *info;
+	RESULTS *list_item;
 	
 	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
 	info = gui_new_dialog();
@@ -98,7 +100,9 @@ void gui_verselist_to_bookmarks(gchar * module_name)
 	info->label1 = N_("Folder: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
+	
 	/*** open dialog to get name for root node ***/
+	
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
 		gtk_tree_store_append(GTK_TREE_STORE(model), &parent,
@@ -110,10 +114,12 @@ void gui_verselist_to_bookmarks(gchar * module_name)
 			   COL_KEY, NULL,
 			   COL_MODULE, NULL,
 			   -1);
-		set_results_position((char) 1);	/* TOP */
+		set_results_position((char) 1);	// TOP 
 		str = g_string_new(" ");
-		while ((key_buf = get_next_result_key()) != NULL) {
-			tmpbuf = (gchar *) key_buf;
+		while (verses) {
+			list_item = (RESULTS*) verses->data;
+			module_name = list_item->module;
+			tmpbuf = list_item->key;
 			g_string_sprintf(str, "%s, %s", tmpbuf,
 					 module_name);			
 			gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
@@ -125,6 +131,7 @@ void gui_verselist_to_bookmarks(gchar * module_name)
 				   COL_KEY, tmpbuf,
 				   COL_MODULE, module_name,
 				   -1);
+			verses = g_list_next(verses);
 		}
 		g_string_free(str, TRUE);
 		bookmarks_changed = TRUE;

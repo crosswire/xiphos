@@ -949,14 +949,19 @@ static void url(GtkHTML * html, const gchar * url, gpointer data)
 			buf = g_strdup(newref);
 
 			if (buf) {
-				gchar *str;
+				settings.displaySearchResults = TRUE;
+				text = get_module_text(5, modbuf, buf);
+				entry_display(search.preview_html, modbuf,
+			      		text, buf, TRUE);
+				/*gchar *str;
 				text = get_striptext(4, modbuf, buf);
 				str = remove_linefeeds(text);
 				gnome_appbar_set_status(GNOME_APPBAR
 							(search.
 							 progressbar),
-							str);
-				g_free(str);
+							str);*/
+				//g_free(str);
+				settings.displaySearchResults = FALSE;
 				g_free(buf);
 			}
 			if (text)
@@ -1027,7 +1032,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		}
 		buf = g_strdup(newref);
 		settings.displaySearchResults = TRUE;
-		if (GTK_TOGGLE_BUTTON(search.togglebutton_show_main)->
+		/*if (GTK_TOGGLE_BUTTON(search.togglebutton_show_main)->
 		    active) {
 			gui_change_module_and_key(modbuf, buf);
 
@@ -1035,15 +1040,15 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 
 		text = get_module_text(5, modbuf, buf);
 		entry_display(search.preview_html, modbuf,
-			      text, buf, TRUE);
+			      text, buf, TRUE);*/
 
-		if (search.show_in_main)
+		/*if (search.show_in_main)*/
 			gui_change_module_and_key(modbuf, buf);
 
 		settings.displaySearchResults = FALSE;
 
-		if (text)
-			free(text);
+		/*if (text)
+			free(text);*/
 		g_free(buf);
 
 	}
@@ -1216,9 +1221,8 @@ static void range_text_changed(GtkEditable * editable,
 		return;
 
 	gtk_list_store_clear(store_list_ranges);
-//      gtk_clist_clear((GtkCList *) search.list_ranges);
 	entry = gtk_entry_get_text(GTK_ENTRY(editable));
-	count = start_parse_verse_list(entry);
+	count = start_parse_range_list(entry);
 
 	while (count--) {
 		buf = get_next_verse_list_element(i++);
@@ -1227,8 +1231,6 @@ static void range_text_changed(GtkEditable * editable,
 		gtk_list_store_append(store_list_ranges, &iter);
 		gtk_list_store_set(store_list_ranges, &iter,
 				   0, buf, -1);
-		/*gtk_clist_append((GtkCList *) search.list_ranges,
-		   &buf); */
 		g_free(buf);
 	}
 

@@ -528,7 +528,7 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, "lexicons", NULL);
-	xmlNewTextChild(section_node, NULL, "indictpane", "0");
+	xmlNewTextChild(section_node, NULL, "indictpane", "1");
 	xmlNewTextChild(section_node, NULL, "inviewer", "0");
 	xmlNewTextChild(section_node, NULL, "usedefaultdict", "0");
 	xmlNewTextChild(section_node, NULL, "defaultdictionary", NULL);
