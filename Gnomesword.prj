@@ -134,7 +134,9 @@ module.source.files=\
 	gs_verselist_dlg.c\
 	gs_verselist_dlg.h\
 	gs_setup.c\
-	gs_setup.h
+	gs_setup.h\
+	e-splash.c\
+	e-splash.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -30,7 +30,11 @@ extern "C" {
 GtkWidget*
 create_dlgSetup (GList *biblemods, 
 			GList *commmods, 
-			GList *dictmods);	
+			GList *dictmods,
+				gchar *gtextmods,
+				gchar *gcommmods,
+				gchar *gdictmods,
+				gchar * pathtomods);	
 	
 		
 #ifdef __cplusplus

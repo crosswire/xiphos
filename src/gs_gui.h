@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-GtkWidget *create_mainwindow(void);
+GtkWidget *create_mainwindow(GtkWidget *splash);
 
 #ifdef __cplusplus
 }
