@@ -35,6 +35,14 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 	
+typedef struct _gbsdata GBS_DATA;
+struct _gbsdata {
+	GtkWidget *html;
+	GtkWidget *ctree;
+	gchar *bookName;
+	gchar *bookDescription;
+};	
+
 typedef struct _nodedata NODEDATA;
 struct _nodedata {
 	GtkCTreeNode *parent;
@@ -50,11 +58,6 @@ struct _nodedata {
 
 	void setupSW_GBS(SETTINGS *s);
 	void shutdownSW_GBS(void);
-	void on_ctreeGBS_select_row(GtkCList * clist,
-			gint row,
-			gint column, 
-			GdkEvent * event, 
-			GtkCTree *ctree);
 	void load_book_tree(SETTINGS *s,
 			GtkCTreeNode *node, 
 			gchar *bookName, 

@@ -419,7 +419,7 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		updateinterlinearpage();
 	else
-		updateIntDlg();
+		updateIntDlg(settings);
 }	
 		
 
@@ -439,7 +439,7 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		updateinterlinearpage();
 	else
-		updateIntDlg();
+		updateIntDlg(settings);
 }		
 
 /*******************************************************************************
@@ -458,7 +458,7 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		updateinterlinearpage();
 	else
-		updateIntDlg();
+		updateIntDlg(settings);
 }		
 
 /*******************************************************************************
@@ -477,7 +477,7 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		updateinterlinearpage();
 	else
-		updateIntDlg();
+		updateIntDlg(settings);
 }		
 
 /*******************************************************************************
@@ -496,7 +496,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	if(settings->dockedInt)
 		updateinterlinearpage();
 	else
-		updateIntDlg();
+		updateIntDlg(settings);
 }
 
 

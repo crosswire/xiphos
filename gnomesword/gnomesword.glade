@@ -9756,7 +9756,7 @@ Footnotes
 
 <widget>
   <class>GtkMenu</class>
-  <name>pmGBS</name>
+  <name>pmGBS_Ctree</name>
 
   <widget>
     <class>GtkPixmapMenuItem</class>
@@ -10174,6 +10174,107 @@ Footnotes
     </signal>
     <label>One More Time</label>
     <right_justify>False</right_justify>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>pmGBS</name>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>copy</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_copy_activate</handler>
+      <last_modification_time>Thu, 07 Mar 2002 03:50:08 GMT</last_modification_time>
+    </signal>
+    <label>Copy</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>separator27</name>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>lookup_word</name>
+    <label>Lookup Word</label>
+    <right_justify>False</right_justify>
+
+    <widget>
+      <class>GtkMenu</class>
+      <name>lookup_word_menu</name>
+
+      <widget>
+	<class>GtkMenuItem</class>
+	<name>item7</name>
+	<signal>
+	  <name>activate</name>
+	  <handler>on_item7_activate</handler>
+	  <last_modification_time>Thu, 07 Mar 2002 03:50:08 GMT</last_modification_time>
+	</signal>
+	<label>item7</label>
+	<right_justify>False</right_justify>
+      </widget>
+    </widget>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>lookup_selection</name>
+    <label>Lookup Selection</label>
+    <right_justify>False</right_justify>
+
+    <widget>
+      <class>GtkMenu</class>
+      <name>lookup_selection_menu</name>
+
+      <widget>
+	<class>GtkMenuItem</class>
+	<name>item8</name>
+	<signal>
+	  <name>activate</name>
+	  <handler>on_item8_activate</handler>
+	  <last_modification_time>Thu, 07 Mar 2002 03:50:08 GMT</last_modification_time>
+	</signal>
+	<label>item8</label>
+	<right_justify>False</right_justify>
+      </widget>
+    </widget>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>separator24</name>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>view_book</name>
+    <label>View Book</label>
+    <right_justify>False</right_justify>
+
+    <widget>
+      <class>GtkMenu</class>
+      <name>view_book_menu</name>
+
+      <widget>
+	<class>GtkMenuItem</class>
+	<name>item6</name>
+	<signal>
+	  <name>activate</name>
+	  <handler>on_item6_activate</handler>
+	  <last_modification_time>Thu, 07 Mar 2002 03:50:08 GMT</last_modification_time>
+	</signal>
+	<label>item</label>
+	<right_justify>False</right_justify>
+      </widget>
+    </widget>
   </widget>
 </widget>
 
