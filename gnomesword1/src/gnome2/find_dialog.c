@@ -28,7 +28,9 @@
 #include <gtkhtml/htmlengine.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlengine-search.h>
+#ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
+#endif
 
 #include "gui/find_dialog.h"
 #include "main/settings.h"
@@ -98,7 +100,7 @@ static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 	GtkHTML *html;
 
 	html = GTK_HTML(d->htmlwidget);
-	text = e_utf8_gtk_entry_get_text(GTK_ENTRY(d->entry));
+	text = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
 	html_engine_search(html->engine, text,
 			   GTK_TOGGLE_BUTTON(d->case_sensitive)->active,
 			   GTK_TOGGLE_BUTTON(d->backward)->active == 0,

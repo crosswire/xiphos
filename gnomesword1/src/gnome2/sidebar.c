@@ -26,9 +26,9 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
-#include <gal/shortcut-bar/e-shortcut-bar.h>
-#include <gal/shortcut-bar/e-vscrolled-bar.h>
+#ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
+#endif
 
 #include "gui/sidebar.h"
 #include "gui/editor.h"

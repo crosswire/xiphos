@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 #include <gtk/gtkwindow.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gal/util/e-util.h>
+//#include <gal/util/e-util.h>
 
 #ifdef USE_GTKHTML30
 #include "main/settings.h"
