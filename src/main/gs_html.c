@@ -576,7 +576,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	buf = gtk_entry_get_text(GTK_ENTRY(entry));
 	/* get name for current text module */
 	settings.whichwindow = MAIN_TEXT_WINDOW;
-	modbuf = get_module_name(&settings);
+	modbuf = get_module_name();
 	gui_display_verse_list(modbuf, buf, &settings);
 }
 
