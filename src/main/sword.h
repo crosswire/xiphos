@@ -50,6 +50,7 @@ extern "C" {
 
 /*** function prototypes ***/
 
+void delete_module_mgr(void);
 char *get_text(const char * module_name, const char *key);
 int gbs_treekey_get_parent(unsigned long offset);
 const char *get_sword_version(void);
