@@ -1259,7 +1259,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 	gtk_container_add(GTK_CONTAINER(navigate_menu), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
 
-	prev = gtk_menu_item_new_with_label(_("Prev Comment"));
+	prev = gtk_menu_item_new_with_label(_("Previous Comment"));
 	gtk_widget_show(prev);
 	gtk_container_add(GTK_CONTAINER(navigate_menu), prev);
 
