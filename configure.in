@@ -66,7 +66,7 @@ AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h ge
 
 
 dnl Languages which your application supports
-ALL_LINGUAS="en de sk"
+ALL_LINGUAS="sk"
 AM_GNOME_GETTEXT
 
 dnl Initialize xml-i18n-tools
