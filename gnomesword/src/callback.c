@@ -30,10 +30,8 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#if USE_SHORTCUTBAR
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
-#endif /* USE_SHORTCUTBAR */
 
 #include "callback.h"
 #include "gs_gnomesword.h"
@@ -41,7 +39,6 @@
 #include "gs_viewdict.h"
 #include "gs_history.h"
 #include "support.h"
-#include "interface.h"
 #include "gs_file.h"
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
@@ -82,12 +79,10 @@ extern gchar 	*font_mainwindow,
 extern gboolean noteModified;	/* personal comments window changed */
 extern gint answer;		/* do we save file on exit */
 extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
-//extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 extern GtkWidget *htmlCommentaries;
 extern gchar *mycolor;
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
-extern GS_LAYOUT gslayout;
-extern GS_TABS	*p_tabs;
+
 
 /*********************************************************************************
 **********************************************************************************
@@ -183,10 +178,11 @@ void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	openpropertiesbox();
-	texttabs = p_tabs->textwindow;
-	comtabs = p_tabs->commwindow;
-	dicttabs = p_tabs->dictwindow;
+	loadpreferencemodsSWORD();
+	/*openpropertiesbox();*/
+	texttabs = settings->text_tabs;
+	comtabs = settings->comm_tabs;
+	dicttabs = settings->dict_tabs;
 	bar = settings->showshortcutbar;
 	showtextgroup = settings->showtextgroup;
 	showcomgroup = settings->showcomgroup;
@@ -695,56 +691,6 @@ void on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data)
 {
 	answer = 1;
 }
-//----------------------------------------------------------------------------------------------
-void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	if (applycolor){
-		mycolor = tmpcolor;
-        	strcpy(settings->currentverse_color,mycolor);        	
-		setcurrentversecolor(num1, num2, num3); /* if color has changed  */
-		//g_free(tmpcolor);
-	}
-	applycolor = FALSE;
-	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
-	applyoptions(MainFrm, bar, texttabs, comtabs, dicttabs, showtextgroup, showcomgroup,
-		     showdictgroup, showhistorygroup);
-	gtk_widget_destroy(dlg);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_btnPropertyboxApply_clicked(GtkButton * button, gpointer user_data)
-{
-	if (applycolor){
-		mycolor = tmpcolor;		
-        	strcpy(settings->currentverse_color,mycolor);
-		setcurrentversecolor(num1, num2, num3);	/* if color has changed */
-		//g_free(tmpcolor);
-	}
-	applycolor = FALSE;
-	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
-	applyoptions(MainFrm,bar, texttabs, comtabs, dicttabs, showtextgroup, showcomgroup,
-		     showdictgroup, showhistorygroup);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_btnPropertyboxCancel_clicked(GtkButton * button, gpointer user_data)
-{
-	GtkWidget *dlg;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
-}
-
-
-
-
-//==============================================================================================
-
-
 
 //----------------------------------------------------------------------------------------------
 void
@@ -1075,11 +1021,11 @@ on_epaned_button_release_event(GtkWidget       *widget,
 	
         if(panesize > 15 )
         {	if(!strcmp((gchar *)user_data,"epaned"))
-        		gslayout.shortcutbar_width = panesize; 
+        		settings->shortcutbar_width = panesize; 
 		if(!strcmp((gchar *)user_data,"vpaned1"))
-        		gslayout.upperpane_hight = panesize; 
+        		settings->upperpane_hight = panesize; 
 		if(!strcmp((gchar *)user_data,"hpaned1"))
-        		gslayout.biblepane_width = panesize; 
+        		settings->biblepane_width = panesize; 
         }
         return TRUE;
 }

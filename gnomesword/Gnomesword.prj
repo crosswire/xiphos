@@ -74,7 +74,6 @@ module.source.files=\
 	gs_sword.cpp\
 	gs_viewdict.c\
 	gs_viewdict.h\
-	interface.c\
 	printstuff.c\
 	spell.c\
 	spell.h\
@@ -106,7 +105,6 @@ module.source.files=\
 	gs_viewcomm.h\
 	gs_history.h\
 	printstuff.h\
-	interface.h\
 	sw_utility.cpp\
 	sw_utility.h\
 	gs_shortcutbar.c\
@@ -136,7 +134,9 @@ module.source.files=\
 	gs_setup.c\
 	gs_setup.h\
 	e-splash.c\
-	e-splash.h
+	e-splash.h\
+	gs_preferences_dlg.c\
+	gs_preferences_dlg.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

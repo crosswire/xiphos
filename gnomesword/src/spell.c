@@ -61,9 +61,7 @@
 
 #include "spell.h"
 #include "debug.h"
-//#include "gtk_easy.h"
 #include "char_table.h"
-#include "interface.h"
 #include "support.h"
 
 #include <unistd.h>

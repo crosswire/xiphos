@@ -22,18 +22,16 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef __GS_GNOMESWORD_H__
+#define __GS_GNOMESWORD_H__
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
-//#include <gtkhtml/gtkhtml.h>
 #include "gs_sword.h"
 	
-#if USE_SHORTCUTBAR	
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
-#endif /* USE_SHORTCUTBAR */
-
 
 typedef struct _mods GS_MODS;
 struct _mods {
@@ -43,46 +41,7 @@ struct _mods {
 			*description;
 	gint		modnum;
 };
-//extern MODULES *textmodule;
-//extern MODULES *commmodule;
-//extern MODULES *dictmodule;
-typedef struct _gsfonts GS_FONTS;
-struct _gsfonts {
-	gchar	bible_font_size[4], /*** html font sizes ***/
-			commentary_font_size[4],
-			dictionary_font_size[4],
-			interlinear_font_size[4],
-			verselist_font_size[4];
-};
 
-
-typedef struct _gs_layout GS_LAYOUT;
-struct _gs_layout {
-	gint	shortcutbar_width,
-		upperpane_hight,
-		biblepane_width,
-		gs_width,
-		gs_hight;	
-};
-
-typedef struct _gs_lexicon GS_LEXICON;
-struct _gs_lexicon {
-	gchar 	greek[80],
-			hebrew[80];
-};
-
-typedef struct _gsnbpages GS_NB_PAGES;
-struct _gsnbpages {
-	gint	notebook3page; /* main notebook */	
-};
-
-typedef struct _gstabs GS_TABS;
-struct _gstabs {
-	gboolean 	textwindow, /* show module tabs in text window if true  */
-				commwindow, /* show module tabs in commentary window if true  */
-				dictwindow; /* show module tabs in text dict/lex if true  */
-};
- 
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar	MainWindowModule[80],	/* modules to open at program startup  */
@@ -94,16 +53,33 @@ struct _settings {
 	           	Interlinear4Module[80],
 	           	Interlinear5Module[80], 
 	           	personalcommentsmod[80], 
+			lex_greek[80],
+			lex_hebrew[80],
 	           	currentverse[80],	/* verse to use at program startup */
 	           	dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
 	           	studypadfilename[255],   /* name of file in studypad when we closed */
 			studypaddir[255],	    /* directory for studypad files */
-	           	currentverse_color[15];  /* color for current verse */
+	           	bible_text_color[15], /* color for text */
+	           	bible_bg_color[15],  /* color for background */
+	           	currentverse_color[15],  /* color for current verse */	
+	           	currentverse_bg_color[15],  /* color for current verse background */
+	           	link_color[15],  /* color for strongs, morph tags */	
+			bible_verse_num_color[15],
+			bible_font_size[4], /*** html font sizes ***/
+			commentary_font_size[4],
+			dictionary_font_size[4],
+			interlinear_font_size[4],
+			verselist_font_size[4],
+			verse_num_font_size[4];			
 	gint       	currentverse_red,	/* current verse colors */
 	           	currentverse_green, 
-	           	currentverse_blue;
-	gint       	notebook3page;	//-- notebook 3 page number
-	gint	   	shortcutbarsize;
+	           	currentverse_blue,
+			shortcutbar_width,
+			upperpane_hight,
+			biblepane_width,
+			gs_width,
+			gs_hight,	
+		  	notebook3page;	//-- notebook 3 page number
 	gboolean   usedefault,
 			strongs,	//-- toogle button and check menu states
 	           	footnotes,
@@ -119,7 +95,10 @@ struct _settings {
 	           	showdictgroup,
 	           	showbookmarksgroup,
 	        	showhistorygroup,
-			showsplash; 
+			showsplash,
+			text_tabs, /* show module tabs in text window if true  */
+			comm_tabs, /* show module tabs in commentary window if true  */
+			dict_tabs; /* show module tabs in text dict/lex if true  */; 
 };
 
 typedef struct _gs_app GS_APP;
@@ -143,6 +122,7 @@ struct _interlinear {
 };
 
 
+/*** function prototypes ***/
 
 void initGnomeSword(GtkWidget *app, 
 		SETTINGS *settings, 
@@ -155,16 +135,7 @@ gint addnotebookpages(GtkWidget *notebook,
 		GList *list,
 		gchar *modName); 
 void UpdateChecks(GtkWidget * mainform);
-void applyoptions(GtkWidget *app,
-		gboolean showshortcut,
-		gboolean showtexttabs,
-	     	gboolean showcomtabs,
-	     	gboolean showdicttabs,
-	     	gboolean showtextgroup, 
-	     	gboolean showcomgroup, 
-	     	gboolean showdictgroup, 
-	     	gboolean showhistorygroup);
-
+void applyoptions(void);
 gint getversenumber(GtkWidget * text);
 gint getdictnumber(GtkWidget * text);
 void sbchangeModSword(GtkWidget *app, 
@@ -174,7 +145,6 @@ void sbchangeModSword(GtkWidget *app,
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
-void openpropertiesbox(void);
 void editbookmarksLoad(GtkWidget * editdlg);
 void addBookmark(GtkWidget *app);
 void showIntPage(GtkWidget *app, 
@@ -188,10 +158,12 @@ void fillSBtoolbars(GtkWidget *app,
 		GList *commentarylist,
 		GList *dictionarylist);
 void setupSidebar(GtkWidget *app);
+gint string_is_color(gchar *color);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
-
+gdouble *hex_to_gdouble_arr(gchar *color);
 #ifdef __cplusplus
 }
 #endif
+#endif /* __GS_GNOMESWORD_H__ */
 

@@ -46,7 +46,7 @@
 #include "gs_sword.h"
 #include "e-splash.h"
 
-
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
@@ -59,10 +59,6 @@
 GtkWidget *shortcut_bar, *appbar1;
 extern GS_APP gs;
 extern SETTINGS *settings;
-
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
-
-//GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 
 #define NUM_SHORTCUT_TYPES 5
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {

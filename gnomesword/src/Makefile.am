@@ -41,8 +41,8 @@ COMMON_SOURCE =  \
     gs_file.h \
     gs_sword.cpp \
     gs_sword.h \
-    interface.c \
-    interface.h \
+    gs_preferences_dlg.c \
+    gs_preferences_dlg.h \
     gs_listeditor.c \
     gs_listeditor.h \
     main.c \

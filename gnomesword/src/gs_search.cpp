@@ -36,8 +36,6 @@
 #include "callback.h"
 #include "gs_sword.h"
 #include "support.h"
-#include "interface.h"
-//#include "gs_rwphtml.h"
 #include "sw_thmlhtml.h"
 #include "sw_utility.h"
 
