@@ -398,20 +398,19 @@ void display_text(gchar * key)
  * Synopsis
  *   #include "bibletext.h"
  *
- *   GList *setup_text(SETTINGS * s)
+ *   void setup_text(SETTINGS * s, GList *mods)
  *
  * Description
  *   set up gui for sword text modules - return list of text module names
  *
  * Return value
- *   GList *
+ *   void
  */
 
-GList *setup_text(SETTINGS * s) 
+void setup_text(SETTINGS * s, GList *mods) 
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
-	GList *mods = NULL;
 	gchar *modname;
 	gchar *modbuf;
 	gchar *keybuf;
@@ -420,7 +419,7 @@ GList *setup_text(SETTINGS * s)
 
 	text_list = NULL;
 
-	mods = backend_get_list_of_mods_by_type(TEXT_MODS);
+	//mods = backend_get_list_of_mods_by_type(TEXT_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -455,7 +454,6 @@ GList *setup_text(SETTINGS * s)
 	g_free(modbuf);
 	g_free(keybuf);
 	g_list_free(tmp);
-	return mods;
 }
 
 /******************************************************************************

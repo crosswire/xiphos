@@ -229,11 +229,10 @@ void display_commentary(gchar * key)
  *   void
  */
  
-GList* setup_commentary(SETTINGS * s)
+void setup_commentary(SETTINGS * s, GList *mods)
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
-	GList *mods = NULL;
 	gchar *modname;
 	gchar *modbuf;
 	gchar *keybuf;
@@ -244,7 +243,7 @@ GList* setup_commentary(SETTINGS * s)
 	comm_list = NULL;
 	comm_find_running = FALSE;
 	
-	mods = backend_get_list_of_mods_by_type(COMM_MODS);
+	//mods = backend_get_list_of_mods_by_type(COMM_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {

@@ -1,7 +1,6 @@
-
 /*
  * GnomeSword Bible Study Tool
- * properties.cpp - save gnomesword properties and settings
+ * setup.c gnomesword fristrun stuff
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -20,22 +19,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __PROPERTIES_H__
-#define __PROPERTIES_H__
-
-
+#ifndef __SETUP_H__
+#define __SETUP_H__  
+ 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "settings.h"
 
-	gboolean backend_load_properties(SETTINGS * s);
-	gboolean backend_save_properties(SETTINGS * s, gboolean shutdown);
-	gboolean backend_create_properties_from_setup(void);
-	gboolean backend_create_properties(void);
-
+#include "setup_druid.h"
+	
+void save_frist_run_settings(SETTINGS_DRUID widgets);
+void first_run(void);	
+gchar *get_path_to_mods(void);
+	
 #ifdef __cplusplus
 }
-#endif
-#endif				/* __PROPERTIES_H__ */
+#endif	
+
+#endif /* __SETUP_H__ */

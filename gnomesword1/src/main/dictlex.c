@@ -183,11 +183,10 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
  *   GList*
  */
 
-GList* setup_dictlex(SETTINGS * s)
+void setup_dictlex(SETTINGS * s, GList *mods)
 {
 	GtkWidget *popup;
 	GList *tmp = NULL;
-	GList *mods = NULL;
 	gchar *modname;
 	gchar *modbuf;
 	gchar *keybuf;
@@ -196,7 +195,7 @@ GList* setup_dictlex(SETTINGS * s)
 
 	dl_list = NULL;
 
-	mods = backend_get_list_of_mods_by_type(DICT_MODS);
+	//mods = backend_get_list_of_mods_by_type(DICT_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
