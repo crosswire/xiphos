@@ -20,32 +20,27 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
 
-/*
- * gnome
- */
+/* frontend */
 #include "_bibletext.h"
+
+/* main */
 #include "cipher_key_dialog.h"
-/*
- * main
- */
 #include "bibletext.h"
 
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_viewtext_dlg.h"
-
-
+#include "settings.h"
 
 /******************************************************************************
  * externs
  */
- 
-extern SETTINGS *settings;
+
 extern gboolean isrunningVT;
 extern GList *options;
 extern TEXT_DATA *cur_t;
@@ -78,7 +73,7 @@ void gui_set_text_frame_label(void)
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
 	 */	
-	if (settings->text_tabs)
+	if (settings.text_tabs)
 		gtk_frame_set_label(GTK_FRAME(cur_t->frame), NULL);
 	else
 		gtk_frame_set_label(GTK_FRAME(cur_t->frame), cur_t->mod_name);
@@ -121,11 +116,11 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 * set program title to GnomeSWORD + current text module name 
 	 */
 	sprintf(title, "GnomeSWORD - %s", t->mod_description);
-	gtk_window_set_title(GTK_WINDOW(settings->app), title);
+	gtk_window_set_title(GTK_WINDOW(settings.app), title);
 	/*
 	 *  keep showtabs menu item current 
 	 */
-	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings->text_tabs;
+	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
 	
 	gui_set_text_frame_label();	
 }
@@ -197,10 +192,10 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	    get_module_name_from_description(dict_mod_description);
 	dict_key = get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key) {
-		if (settings->inViewer)
+		if (settings.inViewer)
 			display_dictlex_in_viewer(dict_mod, dict_key,
-						  settings);
-		if (settings->inDictpane)
+						  &settings);
+		if (settings.inDictpane)
 			change_module_and_key(dict_mod, dict_key);
 		g_free(dict_key);
 		g_free(dict_mod);
@@ -215,7 +210,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
  *  #include "_bibletext.h"
  *
  *  void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
-				       TEXT_DATA * t) 	
+ *                                         TEXT_DATA * t) 	
  *
  * Description
  *   lookup seledtion in current dict/lex module
@@ -229,13 +224,11 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = get_word_or_selection(t->html, FALSE);
 	if (dict_key) {
-		if (settings->inViewer)
-			display_dictlex_in_viewer(settings->
-						  DictWindowModule,
-						  dict_key, settings);
-		if (settings->inDictpane)
-			change_module_and_key(settings->
-					      DictWindowModule,
+		if (settings.inViewer)
+			display_dictlex_in_viewer(settings.DictWindowModule,
+						  dict_key, &settings);
+		if (settings.inDictpane)
+			change_module_and_key(settings.DictWindowModule,
 					      dict_key);
 		g_free(dict_key);
 	}
@@ -263,7 +256,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_text),
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_text),
 			      page);
 }
 
@@ -598,10 +591,10 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 			   GTK_SIGNAL_FUNC(on_find_activate), t);
 	gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_text_showtabs_activate), settings);
+			   (on_text_showtabs_activate), &settings);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_view_new_activate), settings);
+			   (on_view_new_activate), &settings);
 	return pm_text;
 }
 
@@ -629,7 +622,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	extern gboolean in_url;
 	gchar *key;
 
-	settings->whichwindow = MAIN_TEXT_WINDOW;
+	settings.whichwindow = MAIN_TEXT_WINDOW;
 
 	switch (event->button) {
 	case 1:
@@ -637,17 +630,15 @@ static gboolean on_button_release_event(GtkWidget * widget,
 			key = buttonpresslookupGS_HTML(t->html);
 			if (key) {
 				gchar *dict = NULL;
-				if (settings->useDefaultDict)
-					dict = g_strdup(settings->
-							DefaultDict);
+				if (settings.useDefaultDict)
+					dict = g_strdup(settings.DefaultDict);
 				else
-					dict = g_strdup(settings->
-							DictWindowModule);
-				if (settings->inViewer)
+					dict = g_strdup(settings.DictWindowModule);
+				if (settings.inViewer)
 					display_dictlex_in_viewer(dict,
 								  key,
-								  settings);
-				if (settings->inDictpane)
+								  &settings);
+				if (settings.inDictpane)
 					change_module_and_key(dict,
 							      key);
 				g_free(key);
@@ -1109,5 +1100,3 @@ void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
 			   GTK_SIGNAL_FUNC
 			   (on_button_release_event), (TEXT_DATA *) t);
 }
-
-//******  end of file  ******/

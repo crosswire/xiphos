@@ -19,9 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -46,27 +45,19 @@
 #endif	/* USE_SPELL */
 
 #include "gs_gnomesword.h"
-#include "gs_file.h"
 #include "gs_html.h"
 #include "gs_editor.h"
 #include "gs_editor_toolbar.h"
 #include "gs_info_box.h"
+#include "settings.h"
 
-/*
- * gnome
- */
+/* gnome */
 #include "editor_menu.h"
 #include "link_dialog.h"
-/*
- * main
- */
+#include "fileselection.h"
+
+/* main */
 #include "percomm.h"
-
-/******************************************************************************
- * globals to this file only 
- */
-
-extern char *homedir; 
 
 /****************************************************************************** 
  * editor popup menu and call backs 
@@ -169,8 +160,8 @@ static void on_open_activate(GtkMenuItem * menuitem,
 			break;
 		}
 	}
-	sprintf(buf, "%s/*.pad", homedir);
-	openFile = create_fileselection1(ecd);
+	sprintf(buf, "%s/*.pad", settings.homedir);
+	openFile = gui_fileselection_open(ecd);
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
 					buf);
 	gtk_widget_show(openFile);
@@ -258,8 +249,8 @@ void on_save_activate(GtkMenuItem * menuitem,
 		save_file(ecd->filename, ecd);
 		return;
 	} else {
-		sprintf(buf, "%s/.pad", homedir);
-		savemyFile = create_fileselectionSave(ecd);
+		sprintf(buf, "%s/.pad", settings.homedir);
+		savemyFile = gui_fileselection_save(ecd);
 		gtk_file_selection_set_filename(GTK_FILE_SELECTION
 						(savemyFile), buf);
 		gtk_widget_show(savemyFile);
@@ -290,8 +281,8 @@ static void on_save_as_activate(GtkMenuItem * menuitem,
 	GtkWidget *savemyFile;
 	gchar buf[255];
 
-	sprintf(buf, "%s/.pad", homedir);
-	savemyFile = create_fileselectionSave(ecd);
+	sprintf(buf, "%s/.pad", settings.homedir);
+	savemyFile = gui_fileselection_save(ecd);
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(savemyFile),
 					buf);
 	gtk_widget_show(savemyFile);
@@ -534,7 +525,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 static void on_autoscroll_activate(GtkMenuItem * menuitem,
 				       GSHTMLEditorControlData * ecd)
 {
-	settings->notefollow = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	settings.notefollow = GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
 
 /******************************************************************************
@@ -558,7 +549,7 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 					GSHTMLEditorControlData * ecd)
 {
 	if (ecd->personal_comments) {
-		settings->editnote =
+		settings.editnote =
 		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
@@ -573,17 +564,17 @@ static void on_editnote_activate(GtkMenuItem * menuitem,
 	}
 
 	if (ecd->gbs) {
-		settings->editgbs =
+		settings.editgbs =
 		    GTK_CHECK_MENU_ITEM(menuitem)->active;
 
 		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
 			gtk_widget_show(ecd->frame_toolbar);
-			gtk_widget_show(settings->toolbarBooks);
+			gtk_widget_show(settings.toolbarBooks);
 		}
 
 		else {
 			gtk_widget_show(ecd->frame_toolbar);
-			gtk_widget_hide(settings->toolbarBooks);
+			gtk_widget_hide(settings.toolbarBooks);
 		}
 	}
 	gtk_html_set_editable(GTK_HTML(ecd->html),
