@@ -29,7 +29,6 @@ libmain_a_SOURCES =  \
     dictlex.c dictlex.h \
     display.cc display.hh \
     global_ops.cc global_ops.hh \
-    key.c key.h \
     lists.cc lists.h \
     main.c \
     module_dialogs.cc module_dialogs.h \

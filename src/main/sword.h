@@ -53,6 +53,7 @@ extern "C" {
 
 //void set_global_option(int manager, char * option, gboolean choice);
 //void delete_module_mgr(void);
+gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
 char *main_get_active_pane_module(void);
 const char *get_sword_version(void);

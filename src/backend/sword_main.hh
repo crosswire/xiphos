@@ -81,6 +81,7 @@ public:
 	char *get_valid_key(const char *key);
 	char *key_get_book(const char *key);
 	int key_get_chapter(const char *key);
+	int key_get_verse(const char *key);
 	const unsigned int key_chapter_count(const char *key);
 	const unsigned int key_verse_count(const char *key);
 	
@@ -111,6 +112,8 @@ public:
 	char *treekey_get_local_name(unsigned long offset);
 	int treekey_next_sibling(unsigned long offset);
 	
+	GList *parse_verse_list(const char * list, char * current_key);
+	GList *parse_range_list(const char * list);
 	void set_listkey_position(char pos);
 	const char *get_next_listkey(void);
 	int clear_scope(void);

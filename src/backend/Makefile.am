@@ -9,7 +9,6 @@ EXTRA_DIST =  \
 
 libbackend_a_SOURCES =  \
     config.cc config.hh \
-    key.cc key.hh \
     mgr.cc mgr.hh \
     module_manager.cc module_manager.hh \
     sword.cpp sword.h\
