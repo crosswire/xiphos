@@ -1,3 +1,14 @@
+2003-11-30  Andy <andyp@users.sf.net>
+
+	* stripped out the colour-changing code from the setup_druid as
+	  it is inconsistent to change the heading colour between pages
+	
+
+2003-11-29  Terry <tbiggs@users.sf.net>
+
+	* add gnome-spell support
+
+
 2003-11-28  Terry <tbiggs@users.sf.net>
 
 	* remove close button from the search dialog
