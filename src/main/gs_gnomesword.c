@@ -87,8 +87,6 @@ extern gint historyitems;
  * globals
  */
 gboolean ApplyChange;
-MOD_LISTS *mod_lists;
-MOD_LISTS mods;
 GList *sblist;	/* for saving search results to bookmarks */
 
 /******************************************************************************
@@ -102,35 +100,8 @@ static gchar *update_nav_controls(gchar * key);
 void init_gnomesword(SETTINGS * s)
 {	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
-	mod_lists = &mods;
-
-	/* set glist to null */
-	mod_lists->biblemods = NULL;
-	mod_lists->commentarymods = NULL;
-	mod_lists->dictionarymods = NULL;
-	mod_lists->percommods = NULL;
-	mod_lists->bookmods = NULL;
-	mod_lists->options = NULL;
-	mod_lists->text_descriptions = NULL;
-	mod_lists->comm_descriptions = NULL;
-	mod_lists->dict_descriptions = NULL;
-	mod_lists->book_descriptions = NULL;
-
-	/* fill module lists */
-	mod_lists->options = backend_get_global_options_list();
-	if(havebible)
-		mod_lists->text_descriptions 
-		    = backend_get_mod_description_list_SWORD(TEXT_MODS);
-	if(havecomm)
-		mod_lists->comm_descriptions 
-		    = backend_get_mod_description_list_SWORD(COMM_MODS);
-	if(havedict)
-		mod_lists->dict_descriptions 
-		    = backend_get_mod_description_list_SWORD(DICT_MODS);
-	if(havebook)
-		mod_lists->book_descriptions 
-		    = backend_get_mod_description_list_SWORD(BOOK_MODS);
 	
+
 	/*
 	 *  setup shortcut bar 
 	 */
@@ -143,28 +114,28 @@ void init_gnomesword(SETTINGS * s)
 	 *  setup Bible text gui 
 	 */
 	if(havebible)
-		mod_lists->biblemods = setup_text(s);
+		setup_text(s,mod_lists->biblemods);
 
 	/*
 	 *  setup commentary gui support 
 	 */
 	if(havecomm)
-		mod_lists->commentarymods = setup_commentary(s);
+		setup_commentary(s,mod_lists->commentarymods);
 	/*
 	 *  setup personal comments gui support 
 	 */
 	if(havepercomm)
-		mod_lists->percommods = setup_percomm(s);
+		setup_percomm(s,mod_lists->percommods);
 	/*
 	 *  setup general book gui support 
 	 */
 	if(havebook)
-		mod_lists->bookmods = setup_gbs(s);
+		setup_gbs(s,mod_lists->bookmods);
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
 	if(havedict)
-		mod_lists->dictionarymods = setup_dictlex(s);
+		setup_dictlex(s,mod_lists->dictionarymods);
 
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
@@ -236,7 +207,8 @@ void gnomesword_shutdown(SETTINGS * s)
 	g_list_free(mod_lists->book_descriptions);
 	g_list_free(mod_lists->options);
 	g_list_free(s->settingslist);
-
+	g_list_free(s->book_items);
+	
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
 	g_free(settings.shortcutbarDir);

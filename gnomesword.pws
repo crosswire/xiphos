@@ -6,12 +6,12 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=67
-1=26
-2=46
-3=169
-4=30
-5=96
+0=417
+1=1
+2=14
+3=925
+4=503
+5=24
 6=126
 7=41
 8=186
@@ -35,9 +35,13 @@ ShowLocals=true
 11=
 12=
 
+[breakpoints]
+0=2,,1,1651469415,0,,sword.cpp,187,8,1,backend_init_sword,,1020958906,
+1=4,,1,1953720684,0,,sword.cpp,175,9,1,backend_init_sword,,1020958906,
+
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/commentary_find_dialog.c
-1=/home/terry/Projects/gnomesword1/src/gnome/commentary_find_dialog.h
+0=/home/terry/Projects/gnomesword1/src/main/bibletext.c
+1=/home/terry/Projects/gnomesword1/src/gnome/_bibletext.c
 
 [replace_text]
 0=app
@@ -58,6 +62,9 @@ ShowLocals=true
 5=show_tabs_gbs
 6=pixmap3
 7=pixmap1
+
+[executer args]
+1=newconfigs
 
 [find_in_files]
 0=commLastPage

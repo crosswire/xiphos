@@ -341,19 +341,18 @@ GBS_DATA *get_gbs(GList * gbs)
  *   GList*
  */ 
  
-GList* setup_gbs(SETTINGS * s)
+void setup_gbs(SETTINGS * s, GList *mods)
 {
 	GtkWidget *popupmenu;
 	gint count = 0;
 	GList *tmp = NULL;
-	GList *mods = NULL;
 	gchar *bookname;
 	GBS_DATA *gbs;
 	
 	gbs_list = NULL;
 	gbs_find_running = FALSE;
 	
-	mods = backend_get_list_of_mods_by_type(BOOK_MODS);
+	//mods = backend_get_list_of_mods_by_type(BOOK_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {

@@ -42,7 +42,9 @@ typedef struct _text_data TEXT_DATA;
 struct _text_data {
 	GtkWidget *html;
 	GtkWidget *frame;
+	GtkWidget *frame_toolbar;
 	GtkWidget *showtabs;
+	GtkWidget *showtoolbar;
 	GtkWidget *t_btn_strongs;
 	GtkWidget *t_btn_morphs;
 	GtkWidget *t_btn_footnotes;
@@ -86,7 +88,7 @@ void set_text_module_global_option(gchar * option,
 void set_text_variant_global_option(gchar * option,
 				    gchar * choice);
 void set_options_on_page_change(TEXT_DATA * t);
-GList *setup_text(SETTINGS * s);
+void setup_text(SETTINGS * s, GList *mods);
 void shutdown_text(void);
 void display_text(gchar * key);
 

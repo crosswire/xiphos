@@ -97,6 +97,7 @@ module.include.files=\
 	src/gnome/link_dialog.h\
 	src/gnome/main_menu.h\
 	src/gnome/link_dialog.h\
+	src/gnome/setup_druid.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/gs_bookmarks.h\
@@ -123,7 +124,7 @@ module.include.files=\
 	src/main/gs_menu.h\
 	src/main/gs_popup_cb.h\
 	src/main/gs_preferences_dlg.h\
-	src/main/gs_setup.h\
+	src/main/setup.h\
 	src/main/gs_shortcutbar.h\
 	src/main/gs_viewcomm_dlg.h\
 	src/main/gs_viewdict_dlg.h\
@@ -174,6 +175,7 @@ module.source.files=\
 	src/gnome/link_dialog.c\
 	src/gnome/gui.c\
 	src/gnome/main_menu.c\
+	src/gnome/setup_druid.c\
 	src/gnome/splash.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
@@ -200,7 +202,7 @@ module.source.files=\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
 	src/main/gs_preferences_dlg.c\
-	src/main/gs_setup.c\
+	src/main/setup.c\
 	src/main/gs_shortcutbar.c\
 	src/main/gs_viewcomm_dlg.c\
 	src/main/gs_viewdict_dlg.c\

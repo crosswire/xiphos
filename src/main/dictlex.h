@@ -59,7 +59,7 @@ struct _dldata {
 };
 void display_dictionary_page_and_key(gint page_num, gchar * key);
 GList *fill_dictlex_keys(int mod_num, int count);
-GList* setup_dictlex(SETTINGS * s);
+void setup_dictlex(SETTINGS * s, GList *mods);
 void shutdown_dictlex(void);
 void set_dictionary_page_and_key(gint page_num,
 				     gchar * key);

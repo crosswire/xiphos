@@ -49,7 +49,36 @@ extern gboolean comm_find_running;
 /******************************************************************************
  * global to this file only 
  */
+ 
+ 
+/******************************************************************************
+ * Name
+ *  set_comm_frame_label
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void set_comm_frame_label(COMM_DATA *c)	
+ *
+ * Description
+ *   sets frame label to module name or null
+ *
+ * Return value
+ *   void
+ */
 
+static void set_comm_frame_label(COMM_DATA *c)
+{
+	/*
+	 * set frame label to NULL if tabs are showing
+	 * else set frame label to module name
+	 */	
+	if (settings.comm_tabs)
+		gtk_frame_set_label(GTK_FRAME(c->frame), NULL);
+	else
+		gtk_frame_set_label(GTK_FRAME(c->frame), c->modName);
+	
+}
 /******************************************************************************
  * Name
  *  on_notebook_comm_switch_page
@@ -78,7 +107,8 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
 	strcpy(settings.CommWindowModule, c->modName);
-	g_warning(c_old->modName);
+	
+	set_comm_frame_label(c);
 	
 	if(comm_find_running) {
 		gnome_dialog_close(c_old->find_dialog->dialog);
@@ -100,7 +130,13 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 		}
 	}
 	
-	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;	
+	if(settings.comm_tool)
+		gtk_widget_show(c->frame_toolbar);
+	else
+		gtk_widget_hide(c->frame_toolbar);
+	GTK_CHECK_MENU_ITEM(c->showtoolbar)->active = settings.comm_tool;
+	
+	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
 }
 
 /******************************************************************************
@@ -250,11 +286,39 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  */
 
 static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
-						SETTINGS * s)
+						COMM_DATA *c)
 {
-	s->comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
-				   s->comm_tabs);
+	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_comm),
+				   settings.comm_tabs);
+	set_comm_frame_label(c);
+}
+
+/******************************************************************************
+ * Name
+ *   on_comm_showtoolbar_activate
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
+ *						SETTINGS * s)
+ *
+ * Description
+ *   display/hide commentary toolbar
+ *
+ * Return value
+ *   void
+ */
+
+static void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
+						COMM_DATA * c)
+{
+	settings.comm_tool = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(settings.comm_tool)
+		gtk_widget_show(c->frame_toolbar);
+	else
+		gtk_widget_hide(c->frame_toolbar);
 }
 
 /******************************************************************************
@@ -384,6 +448,15 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 				 gtk_widget_unref);
 	gtk_widget_show(c->showtabs);
 	gtk_container_add(GTK_CONTAINER(pm), c->showtabs);
+
+	c->showtoolbar =
+	    gtk_check_menu_item_new_with_label(_("Show Toolbar"));
+	gtk_widget_ref(c->showtoolbar);
+	gtk_object_set_data_full(GTK_OBJECT(pm), "c->showtoolbar",
+				 c->showtoolbar, (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(c->showtoolbar);
+	gtk_container_add(GTK_CONTAINER(pm), c->showtoolbar);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
@@ -548,19 +621,22 @@ GtkWidget *gui_create_pm(COMM_DATA * c)
 	 * for using the current dictionary for lookup 
 	 */
 	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_same_lookup_selection_activate), c);
+			GTK_SIGNAL_FUNC
+			(on_same_lookup_selection_activate), c);
 
 	gtk_signal_connect(GTK_OBJECT(copy), "activate",
-			   GTK_SIGNAL_FUNC(on_copy_activate), c);
+			GTK_SIGNAL_FUNC(on_copy_activate), c);
 	gtk_signal_connect(GTK_OBJECT(find), "activate",
-			   GTK_SIGNAL_FUNC(on_find_activate), c);
+			GTK_SIGNAL_FUNC(on_find_activate), c);
 	gtk_signal_connect(GTK_OBJECT(c->showtabs), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_comm_showtabs_activate), &settings);
+			GTK_SIGNAL_FUNC(on_comm_showtabs_activate), 
+			c);
+	gtk_signal_connect(GTK_OBJECT(c->showtoolbar), "activate",
+			GTK_SIGNAL_FUNC(on_comm_showtoolbar_activate), 
+			c);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_view_new_activate), &settings);
+			GTK_SIGNAL_FUNC(on_view_new_activate), 
+			&settings);
 	return pm;
 }
 
@@ -672,7 +748,7 @@ static void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
  *   void
  */
 
-static void on_btn_book_heading_clicked(GtkButton * button, COMM_DATA * c)
+static void on_btn_book_heading_clicked(GtkButton *button, COMM_DATA *c)
 {
 	display_book_heading(c->modnum);
 }
@@ -693,7 +769,7 @@ static void on_btn_book_heading_clicked(GtkButton * button, COMM_DATA * c)
  *   void
  */
 
-static void on_btn_chap_heading_clicked(GtkButton * button, COMM_DATA * c)
+static void on_btn_chap_heading_clicked(GtkButton *button, COMM_DATA *c)
 {
 	display_chap_heading(c->modnum);
 }
@@ -775,23 +851,21 @@ static gboolean on_button_release_event(GtkWidget * widget,
 void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 							gint count)
 {
-	GtkWidget *frameCOMM;
 	GtkWidget *vbox57;
-	GtkWidget *frame;
-	GtkWidget *toolbarCOMM;
+	GtkWidget *toolbar;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator19;
 	GtkWidget *scrolledwindowCOMMhtml;
 	GtkWidget *label;
 
 
-	frameCOMM = gtk_frame_new(NULL);
-	gtk_widget_ref(frameCOMM);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameCOMM",
-				 frameCOMM, (GtkDestroyNotify)
+	c->frame = gtk_frame_new(NULL);
+	gtk_widget_ref(c->frame);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "c->frame",
+				 c->frame, (GtkDestroyNotify)
 				 gtk_widget_unref);
-	gtk_widget_show(frameCOMM);
-	gtk_container_add(GTK_CONTAINER(s->notebook_comm), frameCOMM);
+	gtk_widget_show(c->frame);
+	gtk_container_add(GTK_CONTAINER(s->notebook_comm), c->frame);
 
 	vbox57 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox57);
@@ -799,32 +873,34 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				 vbox57, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox57);
-	gtk_container_add(GTK_CONTAINER(frameCOMM), vbox57);
+	gtk_container_add(GTK_CONTAINER(c->frame), vbox57);
 
-	frame = gtk_frame_new(NULL);
-	gtk_widget_ref(frame);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame", frame,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame);
-	gtk_box_pack_start(GTK_BOX(vbox57), frame, FALSE, TRUE, 0);
+	c->frame_toolbar = gtk_frame_new(NULL);
+	gtk_widget_ref(c->frame_toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), 
+				"c->frame_toolbar", c->frame_toolbar,
+				(GtkDestroyNotify) gtk_widget_unref);
+	//gtk_widget_show(c->frame_toolbar);
+	gtk_box_pack_start(GTK_BOX(vbox57), 
+				c->frame_toolbar, FALSE, TRUE, 0);
 	
-	toolbarCOMM =
+	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbarCOMM);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbarCOMM",
-				 toolbarCOMM, (GtkDestroyNotify)
+	gtk_widget_ref(toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar",
+				 toolbar, (GtkDestroyNotify)
 				 gtk_widget_unref);
-	gtk_widget_show(toolbarCOMM);
-	gtk_container_add(GTK_CONTAINER(frame), toolbarCOMM);	
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarCOMM),
+	gtk_widget_show(toolbar);
+	gtk_container_add(GTK_CONTAINER(c->frame_toolbar), toolbar);	
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app,
 				      GNOME_STOCK_PIXMAP_REFRESH);
 	c->btnCOMMSync =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Sync"),
 				       _("Sync with Bible Text"),
@@ -840,7 +916,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_BACK);
 	c->btnCOMMBack =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Back"),
 				       _("Go to previous comment"),
@@ -857,7 +933,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	    gnome_stock_pixmap_widget(s->app,
 				      GNOME_STOCK_PIXMAP_FORWARD);
 	c->btnCOMMForward =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Forward"),
 				       _("Go to next comment"),
@@ -877,14 +953,14 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vseparator19);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarCOMM),
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar),
 				  vseparator19, NULL, NULL);
 	gtk_widget_set_usize(vseparator19, 5, 7);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_PRINT);
 	c->btnCOMMPrint =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Print"),
 				       _("Print Comment"), NULL,
@@ -903,14 +979,14 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vseparator19);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarCOMM),
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar),
 				  vseparator19, NULL, NULL);
 	gtk_widget_set_usize(vseparator19, 5, 7);
 	
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_TOP);
 	c->btn_book_heading =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Book"),
 				       _("Display Book Heading"), NULL,
@@ -925,7 +1001,7 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_UP);
 	c->btn_chap_heading =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Chapter"),
 				       _("Display Chapter Heading"), NULL,
