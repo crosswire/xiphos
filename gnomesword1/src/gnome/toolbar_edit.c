@@ -245,7 +245,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 static void on_btn_print_clicked(GtkButton * button,
 				 GSHTMLEditorControlData * ecd)
 {
-	gui_html_print(ecd->htmlwidget);
+	gui_html_print(ecd->htmlwidget, FALSE);
 }
 
 /******************************************************************************
