@@ -62,7 +62,6 @@
 #include "main/percomm.h"
 #include "main/dictlex.h"
 #include "main/settings.h"
-#include "main/gs_popup_cb.h"
  
 #include "backend/search_.h"
 #include "backend/sword.h"
@@ -156,16 +155,16 @@ void init_gnomesword(void)
 	 */	
 	gui_add_mods_to_menus(get_list(TEXT_LIST), 
 			_("_Help/About Sword Modules/Bible Texts/"),
-			(GtkMenuCallback)on_kjv1_activate);
+			(GtkMenuCallback)gui_about_activate);
 	gui_add_mods_to_menus(get_list(COMM_LIST), 
 			_("_Help/About Sword Modules/Commentaries/"),
-			(GtkMenuCallback)on_kjv1_activate);
+			(GtkMenuCallback)gui_about_activate);
 	gui_add_mods_to_menus(get_list(DICT_LIST), 
 			_("_Help/About Sword Modules/Dictionaries-Lexicons/"),
-			(GtkMenuCallback)on_kjv1_activate);
+			(GtkMenuCallback)gui_about_activate);
 	gui_add_mods_to_menus(get_list(GBS_LIST), 
 			_("_Help/About Sword Modules/Books/"),
-			(GtkMenuCallback)on_kjv1_activate);
+			(GtkMenuCallback)gui_about_activate);
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */

@@ -47,9 +47,30 @@
 
 GtkWidget *htmlTexts;
 
+
+
+
 /******************************************************************************
- * static - global to this file only
+ * Name
+ *  gui_about_activate
+ *
+ * Synopsis
+ *   #include "main_menu.h"
+ *
+ *   void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   display module about information
+ *
+ * Return value
+ *   void
  */
+ 
+void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	display_about_module_dialog((char *) user_data, FALSE);
+}
+
 
 /******************************************************************************
  * Name
