@@ -118,7 +118,7 @@ static gboolean on_book_button_release_event(GtkWidget * widget,
 	gchar *buf = NULL;
 	
 	settings.whichwindow = BOOK_WINDOW;
-	gui_change_window_title(settings.book_mod);
+	//gui_change_window_title(settings.book_mod);
 	
 	switch (event->button) {
 	case 1:
@@ -262,8 +262,8 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 				      gpointer user_data)
 {
 	//shift_key_presed = FALSE;
-	gtk_widget_grab_focus (widgets.html_book);
-	settings.whichwindow = BOOK_WINDOW;
+	//gtk_widget_grab_focus (widgets.html_book);
+	//settings.whichwindow = BOOK_WINDOW;
   	return FALSE;
 }
 

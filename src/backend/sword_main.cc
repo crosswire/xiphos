@@ -55,6 +55,7 @@ BackEnd *backend = NULL;
  
 BackEnd::BackEnd() {
 #ifdef USE_MOZILLA
+//	SWMgr mgr(0, 0, true, new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
 #else
@@ -1040,13 +1041,14 @@ void BackEnd::init_language_map(void) {
 	languageMap[SWBuf("haw")] = SWBuf(_("Hawaiian"));
 	//languageMap[SWBuf("hi")] = SWBuf("Hindi");
 	//languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-	//languageMap[SWBuf("hr")] = SWBuf("Croatian");
+	languageMap[SWBuf("hr")] = SWBuf("Croatian");
 	languageMap[SWBuf("hu")] = SWBuf(_("Hungarian"));
 	languageMap[SWBuf("hy")] = SWBuf(_("Armenian"));
 	//languageMap[SWBuf("hz")] = SWBuf("Herero");
 	//languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-	languageMap[SWBuf("id")] = SWBuf(_("Indonesian"));
+	languageMap[SWBuf("i-klingon")] = SWBuf(_("Klingon"));
 	//languageMap[SWBuf("ie")] = SWBuf("Interlingue");
+	languageMap[SWBuf("id")] = SWBuf(_("Indonesian"));
 	//languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
 	languageMap[SWBuf("is")] = SWBuf(_("Icelandic"));
 	languageMap[SWBuf("it")] = SWBuf(_("Italian"));
@@ -1069,7 +1071,7 @@ void BackEnd::init_language_map(void) {
 	//languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
 	//languageMap[SWBuf("ln")] = SWBuf("Lingala");
 	//languageMap[SWBuf("lo")] = SWBuf("Lao");
-	//languageMap[SWBuf("lt")] = SWBuf("Lithuanian");
+	languageMap[SWBuf("lt")] = SWBuf("Lithuanian");
 	languageMap[SWBuf("lv")] = SWBuf(_("Latvian"));
 	//languageMap[SWBuf("mg")] = SWBuf("Malagasy");
 	//languageMap[SWBuf("mh")] = SWBuf("Marshall");
@@ -1155,7 +1157,7 @@ void BackEnd::init_language_map(void) {
 	languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French"));
 	languageMap[SWBuf("x-E-ITZ")] = SWBuf(_("Itz"));
 	languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar"));
-	languageMap[SWBuf("x-E-KEK")] = SWBuf(_("Kekchí"));
+	languageMap[SWBuf("x-E-KEK")] = SWBuf(_("Kekchi"));
 	languageMap[SWBuf("x-E-LMO")] = SWBuf(_("Lombard"));
 	languageMap[SWBuf("x-E-MKJ")] = SWBuf(_("Macedonian"));
 	languageMap[SWBuf("x-E-PDG")] = SWBuf(_("Tok Pisin"));

@@ -173,7 +173,7 @@ static gint html_button_pressed(GtkWidget * html,
 {
 	settings.whichwindow = DICTIONARY_WINDOW;
 
-	gui_change_window_title(settings.DictWindowModule);
+	//gui_change_window_title(settings.DictWindowModule);
 
 	switch (event->button) {
 	case 1:
@@ -279,8 +279,8 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 				      GdkEventCrossing * event,
 				      gpointer user_data)
 {
-	gtk_widget_grab_focus (widgets.html_dict);
-	settings.whichwindow = DICTIONARY_WINDOW;
+	//gtk_widget_grab_focus (widgets.html_dict);
+	//settings.whichwindow = DICTIONARY_WINDOW;
 	//gui_change_window_title(settings.DictWindowModule);
   	return FALSE;
 }

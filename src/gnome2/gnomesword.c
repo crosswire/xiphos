@@ -95,8 +95,9 @@ void frontend_init(void)
 	/*
 	 * get and load books of the Bible 
 	 */
-	gtk_combo_set_popdown_strings(GTK_COMBO(widgets.cb_books),
-				      get_list(BOOKS_LIST));
+	main_navbar_fill_book_combo(navbar_main);
+	/*gtk_combo_set_popdown_strings(GTK_COMBO(widgets.cb_books),
+				      get_list(BOOKS_LIST));*/
 	/*
 	 *  setup sidebar
 	 */
@@ -144,7 +145,7 @@ void frontend_display(void)
 	GS_DIALOG *info;
 	GString *str;
 	gchar *url;
-
+	extern GList *passage_list;
 #ifdef DEBUG	
 	g_print("%s\n", _("Displaying GnomeSword"));
 #endif
@@ -158,20 +159,21 @@ void frontend_display(void)
 	url = g_strdup_printf("sword://%s/%s",settings.DictWindowModule,
 					      settings.dictkey);
 	main_url_handler(url);
-	g_free(url);
-					
+	g_free(url);	
+	
 	gtk_widget_realize(widgets.html_book);
 	url = g_strdup_printf("sword://%s/%d",settings.book_mod,
 					      settings.book_offset);
 	main_url_handler(url);
 	g_free(url);
-
+	
 	settings.addhistoryitem = FALSE;
 	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 					      settings.currentverse);
 	main_url_handler(url);
-	g_free(url);
-	
+	g_free(url);	
+			
+
 	if(!settings.havebible){
 		settings.showtexts = FALSE;
 		gui_show_hide_texts(FALSE);
@@ -229,11 +231,16 @@ void frontend_display(void)
 		settings.setup_canceled = FALSE;
 		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	}
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(
-					widgets.notebook_comm_book), 
-					0);
-	gtk_widget_grab_focus (sidebar.module_list);
 	
+	/*
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
+					      (widgets.notebook_comm_book),
+					      0);
+	gui_notebook_main_switch_page(GTK_NOTEBOOK(widgets.notebook_main),
+					 NULL,
+					 0, 
+					 &passage_list);*/
+	gtk_widget_grab_focus (sidebar.module_list);
 #ifdef DEBUG	
 	g_print("%s\n\n", _("done"));
 #endif
