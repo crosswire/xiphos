@@ -39,6 +39,7 @@
 
 #include "main/sidebar.h"
 #include "main/lists.h"
+#include "main/navbar.h"
 #include "main/settings.h"
 #include "main/sword.h"
 //#include "main/tab_struct.h"
@@ -601,10 +602,15 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		    (GTK_TREE_MODEL(model), &selected)
 		    && strstr(key, "chapter:"))
 			add_verses_to_chapter(model, selected, key);
+		
 		if (key)
 			main_url_handler(key, TRUE);
-		else
+		else {
+			navbar_main.module_name = g_strdup(mod);
+			main_navbar_fill_book_combo(navbar_main);
 			main_display_bible(mod, settings.currentverse);
+		}
+			
 		break;
 	case COMMENTARY_TYPE:
 	case PERCOM_TYPE:
