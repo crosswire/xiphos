@@ -45,7 +45,7 @@
 #include "gui/interlinear.h"
 
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/lists.h"
 #include "main/settings.h"
  
@@ -60,6 +60,146 @@ extern gchar *tmpcolor;
 static gboolean updatehtml, updateSB, updatelayout;
 static EShortcutModel *shortcut_model;
 static GtkWidget *notebook7;
+
+
+/******************************************************************************
+ * Name
+ *  string_is_color
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   	gint string_is_color(gchar * color)
+ *
+ * Description
+ *    this code is from bluefish-0.6
+ *
+ * Return value
+ *   gint
+ */
+
+
+static gint string_is_color(gchar * color)
+{
+	gint i;
+
+	if (!color) {
+		g_warning("string_is_color, pointer NULL\n");
+		return 0;
+	}
+	if (strlen(color) != 7) {
+		g_warning("string_is_color, strlen(%s) != 7\n", color);
+		return 0;
+	}
+	if (color[0] != '#') {
+		g_warning("string_is_color, 0 in %s is not #\n", color);
+		return 0;
+	}
+	for (i = 1; i < 7; i++) {
+		if ((color[i] > 102)
+		    || (color[i] < 48)
+		    || ((color[i] > 57) && (color[i] < 65))
+		    || ((color[i] > 70) && (color[i] < 97))) {
+			g_warning
+			    ("string_is_color, %d in %s is not from a color, it is %d\n",
+			     i, color, color[i]);
+			return 0;
+		}
+	}
+	//g_warning("string_is_color, %s is color\n", color);
+	return 1;
+
+}
+
+
+/******************************************************************************
+ * Name
+ *  gdouble_arr_to_hex
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)	
+ *
+ * Description
+ *    this code is from bluefish-0.6
+ *
+ * Return value
+ *   gchar *
+ */ 
+
+static gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
+{
+	gchar *tmpstr;
+	unsigned int red_int;
+	unsigned int green_int;
+	unsigned int blue_int;
+	gdouble red;
+	gdouble green;
+	gdouble blue;
+
+	red = color[0];
+	green = color[1];
+	blue = color[2];
+
+	if (websafe) {
+		red_int = 0x33 * ((unsigned int) (red * 255 / 0x33));
+		green_int =
+		    0x33 * ((unsigned int) (green * 255 / 0x33));
+		blue_int = 0x33 * ((unsigned int) (blue * 255 / 0x33));
+	} else {
+		red_int = (unsigned int) (red * 255);
+		green_int = (unsigned int) (green * 255);
+		blue_int = (unsigned int) (blue * 255);
+	}
+	tmpstr = g_malloc(8 * sizeof(char));
+	g_snprintf(tmpstr, 8, "#%.2X%.2X%.2X", red_int, green_int,
+		   blue_int);
+	return tmpstr;
+}
+
+
+/******************************************************************************
+ * Name
+ *  hex_to_gdouble_arr
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   gdouble *hex_to_gdouble_arr(gchar * color)	
+ *
+ * Description
+ *    hex_to_gdouble_arr -- this code is from bluefish-0.6
+ *
+ * Return value
+ *   gdouble *
+ */ 
+
+static gdouble *hex_to_gdouble_arr(gchar * color)
+{
+	static gdouble tmpcol[4];
+	gchar tmpstr[8];
+	long tmpl;
+
+
+	strncpy(tmpstr, &color[1], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[0] = (gdouble) tmpl;
+
+	strncpy(tmpstr, &color[3], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[1] = (gdouble) tmpl;
+
+	strncpy(tmpstr, &color[5], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[2] = (gdouble) tmpl;
+
+	tmpcol[3] = 0;
+
+	return tmpcol;
+}
+
+
 
 
 /******************************************************************************

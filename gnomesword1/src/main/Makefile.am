@@ -21,8 +21,6 @@ COMMON_SOURCE =  \
     dictlex.c \
     dictlex.h \
     gbs.c \
-    gs_gnomesword.c \
-    gs_gnomesword.h \
     lists.c \
     lists.h \
     main.c \

@@ -27,6 +27,8 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
+#include <ctype.h>
+#include <time.h>
 
 #include "gui/gtkhtml_display.h"
 #include "gui/shortcutbar_main.h"
@@ -37,7 +39,7 @@
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 #include "main/dictlex.h"
 
@@ -64,10 +66,53 @@ SB_VIEWER sb_v, *sv ;
  *   void
  */
 
-void set_sb_for_daily_devotion(void)
+static void set_sb_for_daily_devotion(void)
 {
 	showSBGroup(groupnum7);
 	changegroupnameSB(_("Daily Devotion"), groupnum7);
+}
+
+
+
+/******************************************************************************
+ * Name
+ *  display_devotional
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void display_devotional(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_display_devotional(void)
+{
+	gchar buf[80];
+	time_t curtime;
+	struct tm *loctime;
+
+	/* 
+	 * Get the current time. 
+	 */
+	curtime = time(NULL);
+
+	/* 
+	 * Convert it to local time representation. 
+	 */
+	loctime = localtime(&curtime);
+
+	/* 
+	 * Print it out in a nice format. 
+	 */
+	strftime(buf, 80, "%m.%d", loctime);
+
+	gui_display_dictlex_in_viewer(settings.devotionalmod, buf);
+	set_sb_for_daily_devotion();
 }
 
 

@@ -34,7 +34,7 @@
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
@@ -114,6 +114,39 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so)
 	gtk_clist_select_row(GTK_CLIST(sv->clist), 0, 0);	
 }
 
+
+/******************************************************************************
+ * Name
+ *    fill_ss
+ *
+ * Synopsis
+ *   #include "shortcutbar_search.h"
+ *
+ *    void fill_ss(SEARCH_SWORD *ss, SEARCH_OPT * so)
+ *
+ * Description
+ *   fill search information structure to pass to do_search();
+ *
+ * Return value
+ *   void
+ */
+
+static void fill_ss(SEARCH_SWORD *ss, SEARCH_OPT * so)
+{
+	ss->module_name = so->module_name;
+	ss->upper_bond = so->upper_bond; 
+	ss->lower_bond = so->lower_bond;
+	ss->search_string = so->search_string;
+
+	ss->search_type = so->search_type;
+	ss->search_params = so->search_params; 
+	ss->found_count = so->found_count;
+
+	ss->use_bonds = so->use_bonds;
+	ss->use_lastsearch_for_bonds = so->use_lastsearch_for_bonds;
+}
+
+
 /******************************************************************************
  * Name
  *   search_module 
@@ -132,10 +165,14 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so)
 
 static void search_module(SEARCH_OPT *so)
 {
+	SEARCH_SWORD *ptr_ss, ss;
+	
+	ptr_ss = &ss;
+	fill_ss(ptr_ss, so);
 	if (sblist)
 		g_list_free(sblist);
 	sblist = NULL;
-	sblist = do_search((gpointer*)so);
+	sblist = do_search((gpointer*)ptr_ss);
 	fill_search_results_clist(sblist, so);
 }
 

@@ -26,7 +26,7 @@
 #include <glib-1.2/glib.h>
 
 #include "main/lists.h"
-#include "main/gs_gnomesword.h"
+#include "main/sword.h"
 
 #include "backend/sword.h"
 	

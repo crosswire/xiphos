@@ -37,6 +37,7 @@
 #include "main/spell_gui.h"
 #endif
 
+#include "gui/gnomesword.h"
 #include "gui/studypad.h"
 #include "gui/_editor.h"
 #include "gui/editor_toolbar.h"
@@ -45,7 +46,6 @@
 #include "gui/info_box.h"
 #include "gui/html.h"
 
-#include "main/gs_gnomesword.h"
 #include "gui/fileselection.h"
 #include "main/settings.h"
 

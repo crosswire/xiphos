@@ -32,6 +32,7 @@
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
 #include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_viewer.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
@@ -39,9 +40,9 @@
 #include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
+#include "gui/gnomesword.h"
 
 #include "main/sword.h"
-#include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
@@ -182,7 +183,7 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
 						gpointer user_data)
 {	
-	display_devotional();
+	gui_display_devotional();
 }
 
 /******************************************************************************

@@ -41,6 +41,7 @@ libgui_a_SOURCES =  \
     fileselection.c \
     gbs.c \
     gbs_find.c \
+    gnomesword.c \
     gtkhtml_display.c \
     gui.c \
     history.c \
