@@ -1,3 +1,14 @@
+2003-12-09  Andy <andyp@users.sf.net>
+
+	* added manual to the build. Sweeping changes to the doc/ directory. 
+	  Plus, we now depend on scrollkeeper.
+	* updated .spec file for more prereqs and scrollkeeper scripts
+	* added COPYING-DOCS file
+	* updated POTFILES.in to include all source files in src/gnome2
+	* added en_GB translation
+	* updated typewriter icon to a nice PNG
+
+
 2003-12-08  Andy <andyp@users.sf.net>
 
 	* removed old html docs files - they were empty anyway
@@ -9,7 +20,7 @@
 	* enabled Help->Contents to actually launch the Help. This needed a
 	  patch on gui.c to fix gnome_program_init(), Makefile.am changes, and 
 	  a small change in main_menu.c.
-	
+
 
 2003-12-08  Terry <tbiggs@users.sf.net>
 
@@ -32,7 +43,7 @@
 	* started to update the preferences dialog. Removed the layout section
 	  as this is now done with the session. Removed frames and replaced 
 	  with bold headings. Layouts and indents still need updating.
-	
+
 
 2003-12-07  Terry <tbiggs@users.sf.net>
 
