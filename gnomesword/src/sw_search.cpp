@@ -29,10 +29,16 @@
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <gtkhtml/gtkhtml.h>
+#include <gal/widgets/e-unicode.h>
+
 
 #include "sw_search.h"
 #include "display.h"
+#include "sw_display.h"
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
+#include "gs_html.h"
 #include "sw_gnomesword.h"
 #include "support.h"
 #include "sw_utility.h"
@@ -44,6 +50,14 @@ static void percentUpdate(char percent, void *userData) ;
 extern gboolean firstsearch;
 static char printed = 0;
 extern SETTINGS *settings;
+
+static SWDisplay 
+	*searchresultssbDisplay,	/* to display modules in searchresults */
+	*searchresultstextsbDisplay;
+static SWMgr 
+	*searchresultssbMgr; 
+static SWModule 
+	*searchresultssbMod;   /* module for searchresults */
 
 //-------------------------------------------------------------------------------------------
 GList*   /* search Bible text or commentaries */
@@ -77,22 +91,20 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		buf[256],
 		*entryText,	//-- pointer to text in searchText entry
 	        scount[5],	//-- string from gint count for label
-		**clistText = (gchar **)&resultText;
+		*utf8str,
+		firstkey[80];
 	gint            
 		count;		//-- number of hits
-	GString 
-		*tmpbuf,
-		*string;
 	GList 
 		*list;
+	GString 
+		*tmpbuf;
 		
-	tmpbuf = g_string_new("");
+	tmpbuf = g_string_new("");	
 	list = NULL;	
 	searchMgr = new SWMgr();	//-- create sword mgrs
 	searchMod = NULL;
 	searchText = lookup_widget (widget, "entrySearch");	//-- pointer to text entry
-	//lbSearchHits = lookup_widget (widget, "lbSearchHits");	//-- pointer to count label
-	//resultList = lookup_widget (widget, "resultList");	//-- pointer to list
 	regexSearch = lookup_widget (widget, "rbRegExp");	//-- pointer to radio button
 	phraseSearch = lookup_widget (widget, "rbPhraseSearch");	//-- pointer to radio button
 	caseSensitive = lookup_widget (widget, "ckbCaseSensitive");	//-- pointer to check box
@@ -100,7 +112,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	lastsearch = lookup_widget (widget, "rbLastSearch");	//-- pointer to radio button
 	comToggle = lookup_widget (widget, "ckbCommentary");	//-- pointer to check box
 	percomToggle = lookup_widget (widget, "ckbPerCom");	//-- pointer to check box   
-	//textWindow = lookup_widget (widget, "txtSearch");	//-- pointer to text widget
 
 	if (GTK_TOGGLE_BUTTON (comToggle)->active) {	/* if true search commentary */	  
 		  it = searchMgr->Modules.find (curcomMod->Name ());	/* find commentary module */
@@ -136,8 +147,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 	count = 0;		/* we have not found anything yet */
 	printed = 0;
 	entryText = gtk_entry_get_text (GTK_ENTRY (searchText));	//-- what to search for
-	//gtk_label_set_text (GTK_LABEL (lbSearchHits), "0");	//-- set hits label to 0
-	string = g_string_new("");
 	if (searchMod) {		/* must have a good module - not null */	 
                 int searchType =
 			  GTK_TOGGLE_BUTTON (regexSearch)->
@@ -146,6 +155,15 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		int searchParams =
 			  GTK_TOGGLE_BUTTON (caseSensitive)->
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
+		beginHTML(s->srhtml, TRUE);
+		sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\" vlink=\"#459BD0\" alink=\"#208796\"><font color=\"%s\"><b>[%s]</b><br></font>",
+		s->bible_bg_color, 
+		s->bible_text_color,
+		s->link_color,
+		s->bible_verse_num_color,
+		searchMod->Name());
+		utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
+		displayHTML(s->srhtml, utf8str, strlen(utf8str));
 		//-- give search string to sword for search
 		for (ListKey & searchResults = searchMod->Search (entryText,
 		                                                searchType,
@@ -156,33 +174,47 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		                                                !searchResults.Error ();
 		                                                searchResults++) {		
 			resultText = (const char *)searchResults;	//-- put verse key string of find into a string
-			if(count){
-				sprintf(buf,";%s",resultText);
-				string = g_string_append(string,buf);
-			}else{
-				sprintf(buf,"%s",resultText);
-				string = g_string_append(string,buf);
-			}
 			g_string_sprintf(tmpbuf,"%s, %s|%s|%s",
 						resultText,
 						searchMod->Name(),
 						resultText,
 						searchMod->Name());
 			list = g_list_append(list,g_strdup(tmpbuf->str));
+			sprintf(buf,"<font size=\"%s\"><a href=\"%s\">%s</a></font><br>",
+			s->verselist_font_size,
+			resultText,
+			resultText);
+			utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
+			displayHTML(s->srhtml, utf8str, strlen(utf8str));
 			searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope
 			                                                           in case we want to use them */
+			if(!count) 
+				sprintf(firstkey,"%s",(const char *)searchResults);
 			++count;	
                 }
         }
+	sprintf(buf,"</body</html>");	
+	utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
+	displayHTML(s->srhtml, utf8str, strlen(utf8str));
+	endHTML(s->srhtml);
 	if(count){
+		ModMap::iterator it; 	
+		it = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
+		if (it != searchresultssbMgr->Modules.end()){ //-- if we find the module	
+			searchresultssbMod = (*it).second;  //-- change module to new module
+			searchresultssbMod->SetKey(firstkey); //-- set key to the first one in the list
+			searchresultssbMod->Display(); 		
+			/* cleanup appbar progress */
+		}
 		sprintf(s->groupName,"%s","Search Results");
-		getVerseListSBSWORD(searchMod->Name(), string->str, s);
 		sprintf(buf,"%d matches",count);
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
+		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 1);
+		showSBVerseList(s);
 	}
-	g_string_free(string,TRUE);
-	g_string_free(tmpbuf,TRUE);
+	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
 	delete searchMgr;
+	g_string_free(tmpbuf,TRUE);
 	return list;
 }
 
@@ -204,5 +236,51 @@ static void percentUpdate(char percent, void *userData)
 	} 
 	while (gtk_events_pending ())
 		gtk_main_iteration (); 
+}
+
+/****************************************************************************************
+ *setupVLSWORD - set up the sword stuff for the searchresults dialog
+ ****************************************************************************************/
+void setupsearchresultsSBSW(GtkWidget *html_widget)
+{	
+	ModMap::iterator it; //-- iteratior	
+	SectionMap::iterator sit; //-- iteratior
+	
+	searchresultssbMgr	= new SWMgr();
+	searchresultssbMod     = NULL;
+	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget);
+	searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
+	
+	for(it = searchresultssbMgr->Modules.begin(); it != searchresultssbMgr->Modules.end(); it++){
+		searchresultssbMod = (*it).second;
+		sit = searchresultssbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
+		ConfigEntMap &section = (*sit).second;
+		addrenderfiltersSWORD(searchresultssbMod, section);
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			searchresultssbMod->Disp(searchresultstextsbDisplay);			
+		}else{
+			searchresultssbMod->Disp(searchresultssbDisplay);
+		}
+	}
+}
+
+/*** close down searchresults dialog ***/
+void shutdownsearchresultsSBSW(void) 
+{	
+	delete searchresultssbMgr;	
+	if(searchresultssbDisplay)
+		delete searchresultssbDisplay;	
+	if(searchresultstextsbDisplay)
+		delete searchresultstextsbDisplay ;
+}
+
+void
+changesearchresultsSBSW(SETTINGS *s, gchar *url)
+{
+	
+	searchresultssbMod->SetKey(url);
+	searchresultssbMod->Display();
+	if(s->showinmain)
+		changeVerseSWORD(url);
 }
 

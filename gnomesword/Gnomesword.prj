@@ -89,8 +89,6 @@ module.source.files=\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
 	display.h\
-	gs_display.cpp\
-	gs_display.h\
 	gs_studypad.h\
 	gs_gnomesword.h\
 	gs_listeditor.h\
@@ -143,7 +141,10 @@ module.source.files=\
 	sw_viewcomm_dlg.h\
 	sw_gnomesword.cpp\
 	sw_gnomesword.h\
-	thmlhtmllink.cpp
+	thmlhtmlhref.cpp\
+	thmlhtmlhref.h\
+	gbfhtmlhref.cpp\
+	gbfhtmlhref.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -40,6 +40,7 @@ struct _settings {
 		*shortcut_bar,
 		*ctree_widget,
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
+		*srhtml,  /* html widget for serch results list in shortcut bar */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu, /* add bookmark menu item */
 		*unlockmod_item; /* unlock module menu item */

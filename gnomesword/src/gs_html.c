@@ -43,6 +43,7 @@
 #include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "sw_verselist_sb.h"
+#include "sw_shortcutbar.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -83,7 +84,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 				gchar *tmpbuf;
 				++url;
 				tmpbuf = g_strdup(url);
-				displaydictlexSBSWORD(settings->lex_greek,
+				displaydictlexSBSW(settings->lex_greek,
 						      tmpbuf, settings);
 				//gotoBookmarkSWORD(settings->lex_greek, buf);  
 				g_free(tmpbuf);
@@ -92,7 +93,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 				gchar *tmpbuf;
 				++url;
 				tmpbuf = g_strdup(url);
-				displaydictlexSBSWORD(settings->lex_hebrew,
+				displaydictlexSBSW(settings->lex_hebrew,
 						      tmpbuf, settings);
 				//gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 				g_free(tmpbuf);
@@ -103,7 +104,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 			gchar *tmpbuf;
 			++url;
 			tmpbuf = g_strdup(url);
-			displaydictlexSBSWORD("Packard", tmpbuf, settings);
+			displaydictlexSBSW("Packard", tmpbuf, settings);
 			g_free(tmpbuf);
 			sprintf(buf, "Morph Tag: %s", url);
 		} else if (*url == '[') {
@@ -227,7 +228,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		buf = g_strdup(newref);
 		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
-		displaydictlexSBSWORD(modbuf, buf, settings);
+		displaydictlexSBSW(modbuf, buf, settings);
 		g_free(buf);
 
 	} else if (*url == '#') {

@@ -27,11 +27,15 @@
 
 #include "gs_gnomesword.h"
 #include "gs_html.h"
-#include "gs_display.h"
+#include "sw_display.h"
 #include "gs_shortcutbar.h"
 
 #include "sw_utility.h"
 #include "sw_verselist_sb.h"
+#include "support.h"
+
+
+extern gint groupnum7;
 
 static SWDisplay 
 	*verselistsbDisplay,	/* to display modules in verselist dialog */
@@ -40,47 +44,7 @@ static SWMgr
 	*verselistsbMgr; 
 static SWModule 
 	*verselistsbMod;   /* module for verselist dialog */
-/*
- * 
- * 
- */
-gboolean
-displaydictlexSBSWORD(gchar *modName, gchar *key, SETTINGS *s)
-{
-	gchar 
-		buf[256], 
-		*utf8str,
-		tmpbuf[256];	
-	
-	beginHTML(s->vlsbhtml, TRUE);
-	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
-			s->bible_bg_color, 
-			s->bible_text_color,
-			s->link_color,
-			s->bible_verse_num_color,
-			modName);
-	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
-	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
-	sprintf(buf,"</body</html>");	
-	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
-	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));
-	endHTML(s->vlsbhtml);	
-	if(!strcmp(modName,verselistsbMod->Name())){
-		g_warning("in verselist key = %s",key);
-		verselistsbMod->SetKey(key); //-- set key to the first one in the list
-		verselistsbMod->Display(); 
-	}else{
-		ModMap::iterator it; 	
-		it = verselistsbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
-		if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	
-			verselistsbMod = (*it).second;  //-- change module to new module
-			g_warning("in verselist key = %s mod = %s",key,verselistsbMod->Name());
-			verselistsbMod->SetKey(key); //-- set key to the first one in the list
-			verselistsbMod->Display(); 
-		}
-	}
-	return TRUE;	
-}
+
 
 /*
  * parse vlist for verses and
@@ -134,6 +98,7 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 	endHTML(s->vlsbhtml);
 	if(count>0){ 
 		showSBVerseList(s);
+		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbVL")), 0);	
 		ModMap::iterator it; 	
 		it = verselistsbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 		if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	

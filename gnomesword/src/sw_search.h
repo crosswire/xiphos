@@ -25,7 +25,9 @@ extern "C" {
 
 GList*    /* search Bible text or commentaries */
 searchSWORD (GtkWidget *widget, SETTINGS *s);
-
+void setupsearchresultsSBSW(GtkWidget *html_widget);
+void shutdownsearchresultsSBSW(void);
+void changesearchresultsSBSW(SETTINGS *s, gchar *url);
 
 #ifdef __cplusplus
 }

@@ -36,8 +36,8 @@ COMMON_SOURCE =  \
     callback.h \
     display.cpp \
     display.h \
-    gs_display.cpp \
-    gs_display.h \
+    sw_display.cpp \
+    sw_display.h \
     gs_file.c \
     gs_file.h \
     gs_preferences_dlg.c \
@@ -77,12 +77,6 @@ COMMON_SOURCE =  \
     sw_properties.h \
     sw_bookmarks.cpp \
     sw_bookmarks.h \
-    sw_gbfhtml.cpp \
-    sw_gbfhtml.h \
-    thmlhtmllink.cpp \
-    thmlhtmllink.h\
-    sw_latin1utf8.cpp \
-    sw_latin1utf8.h \
     sw_search.cpp \
     sw_search.h \
     sw_shortcutbar.cpp \
@@ -92,7 +86,13 @@ COMMON_SOURCE =  \
     sw_viewcomm_dlg.cpp \
     sw_viewcomm_dlg.h\
     sw_viewdict_dlg.cpp \
-    sw_viewdict_dlg.h
+    sw_viewdict_dlg.h \
+    gbfhtmlhref.cpp \
+    gbfhtmlhref.h\
+    thmlhtmlhref.cpp \
+    thmlhtmlhref.h\
+    sw_latin1utf8.cpp \
+    sw_latin1utf8.h
 
 SPELLING_SOURCE =  \
     debug.h \
