@@ -1,7 +1,14 @@
 ==================================================================
 Please see INSTALL file before you start.
 ==================================================================
-
+******************************************************************
+you can start gnomesword with command line options
+1. gnomesword newconfigs - this will create a new configuration file
+with default settings - if gnomesword will not start this might help
+2. gnomesword newbookmarks - this will create a new bookmark file should
+the old get messed up.
+3. gnomesword newfiles - this will create both the above files
+******************************************************************
 ##################################################################
 Note:
 The NIV does not work right with GnomeSword. So far I have had no

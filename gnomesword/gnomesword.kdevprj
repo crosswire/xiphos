@@ -1,10 +1,10 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/listeditor.cpp,/home/tb/Projects2/gnomesword/gnomesword/dialogs.cpp,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/interface.cpp,/home/tb/Projects2/gnomesword/gnomesword/listeditor.cpp,/home/tb/Projects2/gnomesword/ChangeLog,/home/tb/Projects2/gnomesword/README,
 show_outputview=true
 show_treeview=true
-header_file=Untitled.h
-cpp_file=/home/tb/Projects2/gnomesword/gnomesword/listeditor.cpp
+header_file=/home/tb/Projects2/gnomesword/README
+cpp_file=/home/tb/Projects2/gnomesword/gnomesword/main.cpp
 browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/open.html
 [COPYING]
 install_location=
@@ -144,6 +144,7 @@ type=SOURCE
 [General]
 make_options=-j1
 makefiles=Makefile.am,gnomesword/Makefile.am,gnomesword/docs/Makefile.am,gnomesword/docs/en/Makefile.am,po/Makefile.am,
+execute_args=
 version_control=None
 author=Terry Biggs
 project_type=normal_empty
