@@ -47,6 +47,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/percomm.h"
 #include "gui/interlinear.h"
+//#include "gui/bookmarks.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -196,8 +197,8 @@ void gnomesword_shutdown(void)
 	GtkWidget *msgbox;
 	gint answer = 0;
 
-	backend_save_bookmarks(settings.ctree_widget);
-	
+	//backend_save_bookmarks(settings.ctree_widget);
+	gui_save_bookmarks(NULL,NULL);
 	/* if study pad file has changed since last save */
 	if (settings.modifiedSP) {
 		msgbox = gui_create_info_box();

@@ -35,11 +35,11 @@
 #include "gui/gbs_find.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
+#include "gui/bookmarks.h"
 
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/gbs.h"
-#include "main/gs_bookmarks.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 
@@ -438,7 +438,7 @@ static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 {
 	gchar *key = get_book_key(gbs->mod_name);
 	if(key){
-		add_bookmark_to_tree(NULL, gbs->mod_name, key);
+		gui_add_bookmark_to_tree(NULL, gbs->mod_name, key);
 		free(key);
 	}
 }

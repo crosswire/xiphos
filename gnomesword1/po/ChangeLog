@@ -6,6 +6,10 @@
 
 	* Makefile.in.in: Upgrade to gettext-0.10.38.
 
+2002-07-05  gettextize  <bug-gnu-utils@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.10.38.
+
 2002-07-02  gettextize  <bug-gnu-utils@gnu.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.10.38.

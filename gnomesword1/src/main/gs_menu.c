@@ -30,7 +30,7 @@
 #include "main/gs_popup_cb.h"
 #include "main/gs_html.h"
 #include "main/support.h"
-#include "main/gs_bookmarks.h"
+//#include "main/gs_bookmarks.h"
 #include "main/settings.h"
 
 GtkWidget *module_options_menu;

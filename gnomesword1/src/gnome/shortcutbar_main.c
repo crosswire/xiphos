@@ -35,10 +35,10 @@
 #include "gui/shortcutbar_search.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/_editor.h"
+#include "gui/bookmarks.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/support.h"
-#include "main/gs_bookmarks.h"
 #include "main/gbs.h"
 #include "main/gs_html.h"
 #include "main/settings.h"
@@ -1359,7 +1359,7 @@ void gui_setup_shortcut_bar(void)
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 				  scrolledwindow1, button, -1);
 
-	loadtree();
+	gui_load_bookmark_tree();
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow2);

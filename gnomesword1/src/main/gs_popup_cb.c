@@ -38,11 +38,11 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/interlinear.h"
+#include "gui/bookmarks.h"
 
 #include "main/gs_popup_cb.h"
 #include "main/gs_html.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_bookmarks.h"
 #include "main/support.h"
 #include "main/settings.h"
 
