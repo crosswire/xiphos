@@ -29,11 +29,16 @@
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include "gs_bookmarks.h"
 #include "sw_bookmarks.h"
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
+#include "gs_listeditor.h"
 
 GdkPixmap *pixmap1;
 GdkPixmap *pixmap2;
@@ -47,6 +52,7 @@ BM_TREE bmtree;
 BM_TREE *p_bmtree;
 extern GS_APP gs;
 extern GtkCTreeNode *personal_node;
+extern gchar *fnbookmarksnew;
 
 static char *book_open_xpm[] = {
 	"16 16 4 1",
@@ -153,8 +159,6 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
-
-
 
 
 /******************************************************************************
@@ -751,3 +755,64 @@ GtkWidget *create_pmBookmarkTree(void)
 
 	return pmBookmarkTree;
 }
+
+/*****************************************************************************
+ * load bookmarks program start
+ *****************************************************************************/
+gint 
+loadoldbookmarks(void)
+{
+	LISTITEM mylist;
+	LISTITEM *p_mylist;
+	int flbookmarksnew;
+	gchar *buf[2];
+	gint i = 0;
+	long filesize;
+	struct stat stat_p;
+	GtkCTreeNode 
+			*rootnode = NULL,
+			*node = NULL,
+			*parent = NULL;
+	gint ibookmarks;
+	
+	stat(fnbookmarksnew, &stat_p);
+	filesize = stat_p.st_size;
+	ibookmarks = (filesize / (sizeof(mylist)));
+	p_mylist = &mylist;
+        /* try to open file */ 
+	if ((flbookmarksnew = open(fnbookmarksnew, O_RDONLY)) == -1) {	
+	       return 0;	
+	}else{
+		buf[0] = "Personal";
+		buf[1] = "Personal.conf";
+		rootnode = gtk_ctree_insert_node(p_bmtree->ctree,NULL,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
+		while (i < ibookmarks) {
+			read(flbookmarksnew, (char *) &mylist, sizeof(mylist));		
+			if (p_mylist->type == 1) {  /* if type is 1 it is a subtree (submenu) */
+				buf[0] = p_mylist->item;
+				buf[1] = "GROUP";
+				if (p_mylist->level == 0) {
+					parent = gtk_ctree_insert_node(p_bmtree->ctree,rootnode,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
+				}else{
+					parent = gtk_ctree_insert_node(p_bmtree->ctree,parent,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
+				}
+			} else {
+				
+				buf[0] = p_mylist->item;
+				buf[1] = "KJV";
+				if (p_mylist->level == 0) {
+					node = gtk_ctree_insert_node(p_bmtree->ctree,rootnode,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
+				}else{
+					node = gtk_ctree_insert_node(p_bmtree->ctree,parent,NULL,buf, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
+				}
+			}
+			++i;
+		}
+		close(flbookmarksnew);
+	}
+	setleaf(p_bmtree->ctree_widget);
+	return 1;
+}
+
+
+

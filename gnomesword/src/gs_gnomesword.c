@@ -583,7 +583,7 @@ gint string_is_color(gchar *color)
 			return 0;
 		}
 	}
-	g_warning("string_is_color, %s is color\n", color);
+	//g_warning("string_is_color, %s is color\n", color);
 	return 1;
 
 }
@@ -643,7 +643,7 @@ gdouble *hex_to_gdouble_arr(gchar *color)
 	tmpl = strtol(tmpstr, NULL, 16);
 	tmpcol[2] = (gdouble) tmpl;
 
-	g_warning("hex_to_gdouble_arr, R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
+	//g_warning("hex_to_gdouble_arr, R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
 
 	tmpcol[3] = 0;
 	

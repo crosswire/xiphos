@@ -36,6 +36,7 @@ struct _bmtree {
 	GtkCTree *ctree;	
 };	
 
+
 void
 addbookmarktotree(gchar *modName, gchar *verse);
 void
@@ -58,6 +59,8 @@ on_delete_item_activate(GtkMenuItem     *menuitem,
 void
 on_allow_reordering_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
+gint 
+loadoldbookmarks(void); 
 
 #ifdef __cplusplus
 }
