@@ -36,12 +36,10 @@
 #include "gui/main_window.h"
 #include "gui/dialog.h"
 
-#include "main/search.h"
 #include "main/search_dialog.h"
 #include "main/configs.h"
 #include "main/lists.h"
 #include "main/key.h"
-#include "main/module.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/commentary.h"

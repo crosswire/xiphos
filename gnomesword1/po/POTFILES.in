@@ -4,25 +4,22 @@ gnomesword.desktop.in
 #src/backend/module.cc
 #src/backend/sword.cpp
 # shared source files
-src/main/lists.c
-src/main/sidebar.c
+src/main/lists.cc
+src/main/sidebar.cc
 # GNOME2 Source files
 src/gnome2/about_gnomesword.c
 src/gnome2/about_modules.c
 src/gnome2/about_sword.c
 src/gnome2/bibletext.c
 src/gnome2/bibletext_dialog.c
-src/gnome2/bibletext_menu.c
 src/gnome2/bookmarks_menu.c
 src/gnome2/bookmarks_treeview.c
 src/gnome2/cipher_key_dialog.c
 src/gnome2/commentary.c
 src/gnome2/commentary_dialog.c
-src/gnome2/commentary_menu.c
 src/gnome2/dialog.c
 src/gnome2/dictlex.c
 src/gnome2/dictlex_dialog.c
-src/gnome2/dictlex_menu.c
 src/gnome2/display_info.c
 src/gnome2/editor.c
 src/gnome2/editor_menu.c
@@ -33,10 +30,7 @@ src/gnome2/find_dialog.c
 src/gnome2/font_dialog.c
 src/gnome2/gbs.c
 src/gnome2/gbs_dialog.c
-src/gnome2/gbs_display.c
-src/gnome2/gbs_menu.c
 src/gnome2/gnomesword.c
-src/gnome2/gtkhtml_display.c
 src/gnome2/gui.c
 src/gnome2/hints.c
 src/gnome2/history.c
@@ -49,7 +43,6 @@ src/gnome2/note_toolbar_edit.c
 src/gnome2/note_toolbar_style.c
 src/gnome2/parallel_dialog.c
 src/gnome2/parallel_view.c
-src/gnome2/percomm.c
 src/gnome2/preferences_cell_renderer.c
 src/gnome2/preferences_dialog.c
 src/gnome2/search_dialog.c
@@ -65,5 +58,4 @@ src/gnome2/tabbed_browser.c
 src/gnome2/toolbar_edit.c
 src/gnome2/toolbar_nav.c
 src/gnome2/toolbar_style.c
-src/gnome2/url.c
 src/gnome2/utilities.c
