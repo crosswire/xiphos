@@ -3,7 +3,7 @@
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
   xmlns:rdfs="http://www.w3.org/1999/PR-rdf-schema-19990303#" 
   xmlns:doap="http://usefulinc.com/ns/doap#" 
-  xmlns:foaf="http://xmlns.com/foaf/0.1#" 
+  xmlns:foaf="http://xmlns.com/foaf/0.1/" 
   xml:lang="en">
   <doap:Project>
     <doap:name>GnomeSword</doap:name>
