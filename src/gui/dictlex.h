@@ -22,7 +22,7 @@
 #ifndef ___DICTLEX_H_
 #define ___DICTLEX_H_
 
-
+void gui_create_pm_dictionary(void);
 void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 				gchar * dict_mod_description);
 void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key);

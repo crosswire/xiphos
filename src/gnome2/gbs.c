@@ -67,9 +67,9 @@ static void create_menu(GdkEventButton * event);
  *   void
  */
 
-void gui_popup_menu_gbs(GdkEventButton * event)
+void gui_popup_menu_gbs(void)
 {
-	create_menu(event);
+	create_menu(NULL);
 }
 
 /******************************************************************************
@@ -767,10 +767,12 @@ static void create_menu(GdkEventButton * event)
 	 * menu1_uiinfo[7].widget, "separator7");
 	 * menu1_uiinfo[8].widget, "show_tabs");
 	 */
-	gnome_popup_menu_do_popup_modal(menu1, NULL,
+	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
-					widgets.html_text);
-	gtk_widget_destroy(menu1);
+					widgets.html_text);*/
+	//gtk_widget_destroy(menu1);
 	g_free(ops);
 }
 

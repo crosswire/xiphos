@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr --enable-debug
+project.configure.options=--prefix=/home/tee --enable-debug --enable-moz_embed
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -147,17 +147,18 @@ module.include.files=\
 	src/main/search_sidebar.h\
 	src/gui/splash.h\
 	src/main/parallel_view.h\
-	src/main/url.hh
+	src/main/url.hh\
+	src/backend/gs_gbfhtmlhref.h\
+	src/backend/gs_markupfiltmgr.h\
+	src/backend/gs_osishtmlhref.h\
+	src/backend/gs_thmlhtmlhref.h
 
 module.source.name=.
 module.source.type=
 module.source.files=\
 	src/backend/config.cc\
 	src/backend/sword.cpp\
-	src/main/bibletext.c\
-	src/main/dictlex.c\
 	src/main/main.c\
-	src/main/percomm.c\
 	src/main/settings.c\
 	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
@@ -221,14 +222,16 @@ module.source.files=\
 	src/main/url.cc\
 	src/main/sidebar.cc\
 	src/main/module_dialogs.cc\
-	src/main/commentary.cc\
 	src/gnome2/gbs_dialog.c\
 	src/gnome2/note_editor.c\
 	src/gnome2/note_toolbar_edit.c\
 	src/gnome2/note_toolbar_style.c\
 	src/main/search_dialog.cc\
 	src/main/search_sidebar.cc\
-	src/main/parallel_view.cc
+	src/main/parallel_view.cc\
+	src/main/embed.cc\
+	src/backend/gs_markupfiltmgr.cpp\
+	src/backend/gs_osishtmlhref.cpp
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -127,6 +127,9 @@
 /* Define if you want to use gnome-spell */
 #undef USE_GNOME_SPELL
 
+/* Define if you want to use moz_embed */
+#undef USE_MOZILLA
+
 /* Define if you want to use pspell */
 #undef USE_PSPELL
 

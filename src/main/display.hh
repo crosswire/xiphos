@@ -38,9 +38,24 @@ public:
 	virtual char Display(SWModule &imodule);
 };
 
+class GTKMozEntryDisp : public  SWDisplay{
+protected:
+	GtkWidget *gtkText;
+	BackEnd *be;
+public:
+	GTKMozEntryDisp(GtkWidget *gtkText, BackEnd *be) {this->gtkText = gtkText;this->be = be;}
+	virtual char Display(SWModule &imodule);
+};
+
 class GTKChapDisp : public GTKEntryDisp {
 public:
 	GTKChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
+	virtual char Display(SWModule &imodule);
+};
+
+class GtkMozChapDisp : public GTKEntryDisp {
+public:
+	GtkMozChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
 };
 
@@ -49,7 +64,6 @@ public:
 	GTKTextviewChapDisp(GtkWidget *gtkText, BackEnd *be) : GTKEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
 };
-
 
 class DialogEntryDisp : public SWDisplay {
 protected:

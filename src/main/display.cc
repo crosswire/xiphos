@@ -18,12 +18,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 
 #include <swmgr.h>
 #include <versekey.h>
+#include <gbfosis.h>
+#include <thmlosis.h>
+
 #include <regex.h>
 #include <string.h>
+
+#ifdef USE_MOZILLA
+#include <gtkmozembed.h>
+#include <nsIDOMHTMLAnchorElement.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,6 +47,7 @@ extern "C" {
 #endif
 	
 #include "main/display.hh"
+#include "main/embed.h"
 #include "main/settings.h"
 #include "main/global_ops.hh"
 #include "main/sword.h"
@@ -43,9 +56,11 @@ extern "C" {
 #include "gui/widgets.h"
 
 #include "backend/sword_main.hh"
+#include "backend/gs_osishtmlhref.h"
 
-	
-#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
+//"<STYLE type=\"text/css\"><!--A { text-decoration:none }--></STYLE>"
+//"<STYLE type=\"text/css\"><!--#nu { text-decoration:none }--></STYLE>"
+#define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"><STYLE type=\"text/css\"><!--A { text-decoration:none }--></STYLE></head>"
 
 using namespace sword;
 using namespace std;
@@ -53,7 +68,7 @@ using namespace std;
 	
 //static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
 
-
+ 
 char GTKEntryDisp::Display(SWModule &imodule) 
 {
 	GString *str = g_string_new(NULL);
@@ -89,15 +104,15 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	
 	g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<a href=\"about://%s/%s\"><font color=\"%s\">"
+				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
 				"[%s]</font></a>[%s]<br>"
 				"<font face=\"%s\" size=\"%s\">%s"
 				"</font></body></html>",
 				settings.bible_bg_color, 
 				settings.bible_text_color,
 				settings.link_color,
-				imodule.Name(),
 				imodule.Description(),
+				imodule.Name(),
 				settings.bible_verse_num_color,
 				imodule.Name(),
 				(gchar*)keytext,
@@ -270,6 +285,73 @@ char GTKChapDisp::Display(SWModule &imodule)
 	g_free(ops);
 }
 
+ 
+char GTKMozEntryDisp::Display(SWModule &imodule) 
+{
+#ifdef USE_MOZILLA
+	GString *str = g_string_new(NULL);
+	gchar *keytext = NULL;
+	int curPos = 0;                                         
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;		
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+	MOD_FONT *mf = get_font(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	
+	(const char *)imodule;	// snap to entry
+	main_set_global_options(ops);
+	if(backend->module_type(imodule.Name()) == BOOK_TYPE)
+		keytext = g_convert(backend->treekey_get_local_name(
+				settings.book_offset),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+	else
+		keytext = g_convert((char*)imodule.KeyText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		//keytext = imodule.KeyText();
+	
+	g_string_printf(str, 	HTML_START
+				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
+				"[%s]</font></a>[%s]<br>"
+				"<font face=\"%s\" size=\"%s\">%s"
+				"</font></body></html>",
+				settings.bible_bg_color, 
+				settings.bible_text_color,
+				settings.link_color,
+				imodule.Description(),
+				imodule.Name(),
+				settings.bible_verse_num_color,
+				imodule.Name(),
+				(gchar*)keytext,
+				(mf->old_font)?mf->old_font:"",
+				(mf->old_font_size)?mf->old_font_size:"+0",
+				(const char *)imodule);	
+	
+	
+	if (str->len)
+		gtk_moz_embed_render_data(new_browser, 
+						str->str, str->len,
+						"file:///sword", 
+						"text/html");
+	g_string_free(str, TRUE);
+	free_font(mf);	
+	g_free(ops);
+	if(keytext) g_free(keytext);
+#endif
+}
+
+
 /******************************************************************************
  * Name
  *   
@@ -411,6 +493,197 @@ char GTKTextviewChapDisp::Display(SWModule &imodule)
 
 
 
+char GtkMozChapDisp::Display(SWModule &imodule) 
+{
+#ifdef USE_MOZILLA
+	char tmpBuf[255];
+	VerseKey *key = (VerseKey *)(SWKey *)imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curPos = 0;
+	gfloat adjVal;
+	MOD_FONT *mf = get_font(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	GString *str = g_string_new(NULL);
+	GString *str_tmp = g_string_new(NULL);
+	gchar *utf8_key;
+	gchar *buf;
+	gchar *buf2;
+	gchar *preverse = NULL;
+	gchar *paragraphMark = "&para;";
+	gchar *br = NULL;
+	gchar heading[32];                                          
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
+	gboolean is_gbf = FALSE;
+	gboolean is_thml = FALSE;
+	gboolean is_osis = FALSE;		
+	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
+	gboolean newparagraph = FALSE;
+	
+	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+	
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
+	
+	g_string_printf(str,	HTML_START
+				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+				settings.bible_bg_color, 
+				settings.bible_text_color,
+				settings.bible_text_color);//settings.link_color);
+	if(is_rtol) 
+		str = g_string_append(str,"<DIV ALIGN=right>");	
+	
+	gtk_moz_embed_append_data(new_browser, str->str, str->len);
+	
+	main_set_global_options(ops);
+	//main_set_strongs_morphs_off(ops);
+	
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
+				== curChapter && !imodule.Error()); imodule++) {
+		int x = 0;
+		sprintf(heading,"%d",x);
+		while((preverse 
+			= backend->get_entry_attribute("Heading","Preverse",
+							    heading)) != NULL) {
+			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
+			str_tmp = g_string_append(str_tmp, buf);
+			g_free(preverse);
+			g_free(buf);						     
+			++x;
+			sprintf(heading,"%d",x);
+		}
+		
+		gtk_moz_embed_append_data(new_browser, str_tmp->str, str_tmp->len);
+		g_string_erase(str_tmp,0,-1);
+		
+		if(key->Verse() == curVerse)
+			settings.font_color = settings.currentverse_color;
+		else			
+			settings.font_color = settings.bible_text_color;
+		
+		utf8_key = g_convert((char*)key->getText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		g_string_printf(str,
+			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+			utf8_key,
+			key->Verse(),
+			settings.verse_num_font_size,
+			settings.bible_verse_num_color, 
+			key->Verse());
+		g_free(utf8_key);
+		//g_message(f_message,163,"buf",buf);
+		//gtk_moz_embed_append_data(new_browser, str->str, str->len);
+		
+		//str = g_string_append(str,buf);
+		//g_free(buf);
+		buf = g_strdup_printf(
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				(mf->old_font)?mf->old_font:"", 
+				(mf->old_font_size)?mf->old_font_size:"+0", 
+				(key->Verse() == curVerse)
+				?settings.currentverse_color
+				:settings.bible_text_color);
+		
+		//gtk_moz_embed_append_data(new_browser, str->str, str->len);
+		str = g_string_append(str,buf);
+		g_free(buf);	
+
+		if (newparagraph && settings.versestyle) {
+			newparagraph = FALSE;
+			str = g_string_append(str, paragraphMark);
+		}
+			
+		buf = g_strdup_printf("%s",(const char *)imodule);
+		str = g_string_append(str, buf);
+		/*if(key->Verse() == curVerse)
+			g_message(imodule.getRawEntry());*/
+		if (settings.versestyle) {
+			if ((strstr(buf, "<BR") == NULL) &&
+			    (strstr(buf, "<br") == NULL) &&
+			     (strstr(buf, "<!P") == NULL) &&
+			     (strstr(buf, "<!p") == NULL) &&
+			     (strstr(buf, "<!/P") == NULL) &&
+			     (strstr(buf, "<p") == NULL) &&
+			     (strstr(buf, "</p") == NULL)  ) {
+				buf2 = g_strdup_printf(" %s", "</font><br>");
+			} else {
+				br = g_strrstr(buf, "<br"); /* last occurance */
+				if(br && (strlen(br) > 6)) /* we have a new line that's
+						      not at the end of the string */					
+					buf2 = g_strdup_printf(" %s", 
+								"</font><br>");
+				else
+					buf2 = g_strdup_printf(" %s", "</font>");
+			}
+			if ((strstr(buf, "<!P>") == NULL) &&
+			     (strstr(buf, "<p>") == NULL) ) {
+				newparagraph = FALSE;
+			} else {
+				newparagraph = TRUE;
+			}
+		} else {
+			if (strstr(buf, "<!P>") == NULL)
+				buf2 = g_strdup_printf(" %s", "</font>");
+			else
+				buf2 = g_strdup_printf(" %s", "</font><p>");
+		}
+		str = g_string_append(str, buf2);
+		gtk_moz_embed_append_data(new_browser, str->str, str->len);
+		g_free(buf);
+		g_free(buf2);
+	}
+	if(is_rtol) 
+		g_string_printf(str,"</DIV></body></html>");
+	else	
+		g_string_printf(str, "</body></html>");
+	if (str->len) {
+		/*gtk_moz_embed_render_data(new_browser, 
+						str->str, str->len,
+						"file:///sword", 
+						"text/html");*/
+		gtk_moz_embed_append_data(new_browser, str->str, str->len);			
+		gtk_moz_embed_close_stream(new_browser);		
+		if(curVerse > 1) {
+			buf = g_strdup_printf("%d", curVerse);
+			embed_go_to_anchor(new_browser, buf);
+			g_free(buf);
+		}	
+		/*gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
+		gtk_moz_embed_append_data(new_browser, str->str, str->len);			
+		gtk_moz_embed_close_stream(new_browser);*/
+	}
+	
+	g_string_free(str, TRUE);
+	g_string_free(str_tmp, TRUE);
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+	free_font(mf);	
+	g_free(ops);
+/*	if(is_gbf || is_thml) {
+		delete to_osis;
+		delete osishtml;
+	}
+	if(is_osis) {
+		delete osishtml;
+	}
+*/
+#endif
+}
+
+
+
 char DialogEntryDisp::Display(SWModule &imodule) 
 {
 	GString *str = g_string_new(NULL);
@@ -445,15 +718,15 @@ char DialogEntryDisp::Display(SWModule &imodule)
 	else
 		g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
-				"<a href=\"about://%s/%s\"><font color=\"%s\">"
+				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
 				"[%s]</font></a>[%s]<br>"
 				"<font face=\"%s\" size=\"%s\">%s"
 				"</font></body></html>",
 				settings.bible_bg_color, 
 				settings.bible_text_color,
 				settings.link_color,
-				imodule.Name(),
 				imodule.Description(),
+				imodule.Name(),
 				settings.bible_verse_num_color,
 				imodule.Name(),
 				(gchar*)keytext,

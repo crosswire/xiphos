@@ -665,45 +665,35 @@ void main_free_on_destroy(DIALOG_DATA * t)
  *   void
  */
 
-void main_dialog_goto_bookmark(gchar * url)
+void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 {
 	GList *tmp = NULL;
-	gchar **work_buf = NULL;
-	
-	work_buf = g_strsplit (url,"/",4);
-	
-	if(!work_buf[MODULE] && !work_buf[KEY]) {
-		g_strfreev(work_buf);
-		return;
-	}
 	
 	tmp = g_list_first(list_dialogs);
 	while (tmp != NULL) {
 		DIALOG_DATA *t = (DIALOG_DATA *) tmp->data;
-		if(!strcmp(t->mod_name, work_buf[MODULE])) {
+		if(!strcmp(t->mod_name, module)) {
 			BackEnd* be = (BackEnd*)t->backend;
 			if(t->key)
 				g_free(t->key);
-			t->key = g_strdup(work_buf[KEY]);
+			t->key = g_strdup(key);
 			main_dialog_update_controls(t);
 			be->set_key(t->key);
 			be->display_mod->Display();
-			gdk_window_raise(t->dialog->window);	
-			g_strfreev(work_buf);
+			gdk_window_raise(t->dialog->window);
 			return;
 		}		
 		tmp = g_list_next(tmp);
 	}
 	
-	main_dialogs_open(work_buf[2]);
+	main_dialogs_open((gchar*)module);
 	BackEnd* be = (BackEnd*)dlg_bible->backend;
 	if(dlg_bible->key)
 		g_free(dlg_bible->key);
-	dlg_bible->key = g_strdup(work_buf[3]);
+	dlg_bible->key = g_strdup(key);
 	main_dialog_update_controls(dlg_bible);
 	be->set_key(dlg_bible->key);
-	be->display_mod->Display();	
-	g_strfreev(work_buf);
+	be->display_mod->Display();
 }
 
 
@@ -1166,7 +1156,7 @@ static gint new_url_handler(const gchar * url, gboolean clicked)
 gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 {		
 	//g_warning(url);
-	if(strstr(url,"passagestudy.jsp")) /* passagestudy.jsp?action=showStrongs&type= */
+	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url")) /* passagestudy.jsp?action=showStrongs&type= */
 		return new_url_handler(url,clicked);
 	if(strstr(url,"sword://"))
 		return sword_uri(t, url, clicked);

@@ -45,6 +45,7 @@ extern "C" {
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 
@@ -644,10 +645,10 @@ void main_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"about://%s/%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
 				rowcolor,
-				mod_name,
 				main_get_module_description(mod_name),
+				mod_name,
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size, mod_name);
 
@@ -707,7 +708,8 @@ void main_update_parallel_page(void)
 				}
 			}	
 			sprintf(tmpBuf,
-				"</font><small>[<a href=\"parallel://swap/%s\">view context</a>]</small></td></tr>",
+				"</font><small>[<a href=\"gnomesword.url?action=showParallel&"
+				"type=swap&value=%s\">view context</a>]</small></td></tr>",
 				mod_name);
 
 			utf8len = strlen(tmpBuf);
@@ -845,11 +847,12 @@ static void int_display(gchar * key)
 
 			g_string_printf(str,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
-				"<a href=\"parallel://verse/%s\" name=\"%d\">"
+				"<a href=\"gnomesword.url?action=showParallel&"
+				"type=verse&value=%s\" name=\"%d\">"
 				"<font color=\"%s\">%d. </font></a>"
 				"<font size=\"%s\" color=\"%s\">",
 				bgColor,
-				tmpkey,
+				main_url_encode(tmpkey),
 				i,
 				settings.bible_verse_num_color,
 				i, use_font_size, textColor);

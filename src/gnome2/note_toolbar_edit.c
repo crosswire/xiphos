@@ -203,11 +203,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
 			main_dialog_delete_note(d);
-			url = g_strdup_printf(	"sword://%s/%s",
-						ecd->filename,
-						ecd->key);
-			main_dialog_goto_bookmark(url);
-			g_free(url);
+			main_dialog_goto_bookmark(ecd->filename, ecd->key);
 		}
 		settings.percomverse = ecd->key;
 		ecd->changed = FALSE;
