@@ -403,29 +403,30 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	GtkWidget *label197;
 	GtkWidget *labelDict;
 	GtkWidget *hbox25;
-	gchar *pathname;
 	GdkPixbuf *icon_pixbuf;
 	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
 	if (s->showsplash) {
-		pathname = gnome_pixmap_file("gnomesword/GnomeSword.xpm");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+		icon_pixbuf =
+      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
-		pathname = gnome_pixmap_file("gnomesword/sword.xpm");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+
+		icon_pixbuf = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
-		pathname =
-		    gnome_pixmap_file("gnomesword/gnome-fontsel.xpm");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+
+		icon_pixbuf =
+      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/gnome-fontsel.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
-		pathname = gnome_pixmap_file("gnomesword/GnomeSword.xpm");
-		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+
+		icon_pixbuf =
+      gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
+
 		while (gtk_events_pending())
 			gtk_main_iteration();
 		e_splash_set_icon_highlight(E_SPLASH(splash), 1, TRUE);
@@ -657,11 +658,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarOptions),
 				      GTK_RELIEF_NONE);
 
-	tmp_toolbar_icon =
-	    create_pixmap(s->app, "gnomesword/dock.xpm", TRUE);
-	/*tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(s->app,
-				     GNOME_STOCK_PIXMAP_INDEX );*/
+  tmp_toolbar_icon =
+		gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/dock.xpm");
+    
 	btnSBDock =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -700,7 +699,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_widget_set_usize(vseparator13, 7, 7);
 
 	tmp_toolbar_icon =
-	    create_pixmap(s->app, "gnomesword/strongs.xpm", TRUE);
+		gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/strongs.xpm");
 	btnStrongs =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
@@ -714,7 +713,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_widget_show(btnStrongs);
 
 	tmp_toolbar_icon =
-	    create_pixmap(s->app, "gnomesword/morphs.xpm", TRUE);
+		gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/morphs.xpm");
 	btnMorphs =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
@@ -728,7 +727,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	gtk_widget_show(btnMorphs);
 
 	tmp_toolbar_icon =
-	    create_pixmap(s->app, "gnomesword/footnote3.xpm", TRUE);
+		gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR "/footnote3.xpm");
 	btnFootnotes =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
