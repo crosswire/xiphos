@@ -353,7 +353,11 @@ void gui_create_search_sidebar(void)
 	GSList *vbox90_group = NULL;
 	GtkWidget *frame_search;
 	GtkWidget *vbox5;
+	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSearch;
+	//GtkWidget *label_btnSearch;
+	//GtkWidget *alignment1;
+	//GtkWidget *hbox_alignment1;
 	GtkWidget *frame2;
 	GtkWidget *vbox2;
 	GSList *vbox2_group = NULL;
@@ -410,16 +414,32 @@ void gui_create_search_sidebar(void)
 	entrySearch = gtk_entry_new();
 	gtk_widget_show(entrySearch);
 	gtk_box_pack_start(GTK_BOX(vbox5), entrySearch, TRUE, TRUE, 0);
-	gtk_widget_set_usize(entrySearch, 130, -2);;
-
-
-	btnSearch = gtk_button_new_from_stock ("gtk-ok");
-	gtk_widget_show(btnSearch);
-	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, btnSearch, _("Begin Search"),
-			     NULL);
-	gtk_button_set_relief(GTK_BUTTON(btnSearch), GTK_RELIEF_HALF);
+	gtk_widget_set_usize(entrySearch, 130, -2);;	
 	
+	btnSearch = gtk_button_new ();
+	gtk_widget_show (btnSearch);
+	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
+	gtk_tooltips_set_tip (tooltips, btnSearch, _("Click to begin the search"), NULL);
+	gtk_button_set_relief (GTK_BUTTON (btnSearch), GTK_RELIEF_NONE);
+/*	
+	alignment1 = gtk_alignment_new (0.5, 0.5, 0, 0);
+	gtk_widget_show (alignment1);
+	gtk_container_add (GTK_CONTAINER (btnSearch), alignment1);
+	
+	hbox_alignment1 = gtk_hbox_new (FALSE, 2);
+	gtk_widget_show (hbox_alignment1);
+	gtk_container_add (GTK_CONTAINER (alignment1), hbox_alignment1);
+*/	
+	tmp_toolbar_icon = gtk_image_new_from_stock ("gtk-find", GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show (tmp_toolbar_icon);
+	gtk_container_add (GTK_CONTAINER (btnSearch), tmp_toolbar_icon);
+	//gtk_box_pack_start (GTK_BOX (hbox_alignment1), tmp_toolbar_icon, FALSE, FALSE, 0);
+/*	
+	label_btnSearch = gtk_label_new_with_mnemonic (_("Begin"));
+	gtk_widget_show (label_btnSearch);
+	gtk_box_pack_start (GTK_BOX (hbox_alignment1), label_btnSearch, FALSE, FALSE, 0);
+	gtk_label_set_justify (GTK_LABEL (label_btnSearch), GTK_JUSTIFY_LEFT);
+*/
 	progressbar_search = gtk_progress_bar_new();
 	gtk_widget_show(progressbar_search);
 	gtk_box_pack_start(GTK_BOX(vbox5), progressbar_search, FALSE, TRUE, 0);
