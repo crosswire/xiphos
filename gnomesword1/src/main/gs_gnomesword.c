@@ -47,7 +47,7 @@
 #include "gui/dictlex_dialog.h"
 #include "gui/percomm.h"
 #include "gui/interlinear.h"
-//#include "gui/bookmarks.h"
+#include "gui/bookmarks.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -958,7 +958,7 @@ GList *do_search(gpointer *usr_data)
 
 GList *get_verse_list(gchar* module_name, gchar *verse_list)
 {
-	return backend_get_verse_list(module_name, verse_list, &settings);
+	return backend_get_verse_list(module_name, verse_list);
 }
 
 GList *load_sb_group(gchar *filename, gchar *group_name, 

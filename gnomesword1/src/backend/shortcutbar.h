@@ -26,10 +26,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-
-#include "main/settings.h"
-
 	
 void backend_save_sb_iconsize(char *filename, char *large_icons);
 GList *backend_load_sb_group(char *filename, char *group_name,
@@ -38,7 +34,7 @@ void backend_save_sb_group(char *filename, char *group_name, int group_num,
 		char *large_icons);
 
 
-GList *backend_get_verse_list(char *modName, char *vlist, SETTINGS *s);
+GList *backend_get_verse_list(char *modName, char *vlist);
 	
 #ifdef __cplusplus
 }

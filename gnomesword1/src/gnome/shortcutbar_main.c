@@ -1150,8 +1150,8 @@ void gui_setup_shortcut_bar(void)
 		tmp =
 		    load_sb_group(filename, group_name, icon_size);
 		
-		g_warning("group = %s",group_name);
-		g_warning("size  = %s",icon_size);
+		//g_warning("group = %s",group_name);
+		//g_warning("size  = %s",icon_size);
 		
 		large_icons = atoi(icon_size);
 		if (large_icons == 1)
