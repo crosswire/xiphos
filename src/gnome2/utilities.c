@@ -68,7 +68,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	gboolean valid;
 
 	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = "Unknown";
+		language = N_("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -118,7 +118,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	gboolean valid;
 
 	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
-		language = "Unknown";
+		language = N_("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
 	while (valid) {
@@ -173,7 +173,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 	store = gtk_tree_store_new(1, G_TYPE_STRING);
 
 	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Biblical Texts", -1);
+	gtk_tree_store_set(store, &iter, 0, _("Biblical Texts"), -1);
 
 	if(is_sidebar) {
 		
@@ -201,7 +201,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 	/*  add language folders Commentaries folder */
 	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Commentaries", -1);
+	gtk_tree_store_set(store, &iter, 0, _("Commentaries"), -1);
 
 	tmp = get_list(COMM_LIST);
 	while (tmp != NULL) {
@@ -222,7 +222,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 	/*  add language folders Dictionaries folder */
 	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Dictionaries", -1);
+	gtk_tree_store_set(store, &iter, 0, _("Dictionaries"), -1);
 
 	tmp = get_list(DICT_LIST);
 	while (tmp != NULL) {
@@ -244,7 +244,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 
 	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "General Books", -1);
+	gtk_tree_store_set(store, &iter, 0, _("General Books"), -1);
 
 	/*  add language folders Books folder */
 	tmp = get_list(GBS_LIST);

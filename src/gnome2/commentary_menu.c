@@ -1451,7 +1451,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 					      (lookup_selection_menu));*/
 
 	usecurrent =
-	    gtk_menu_item_new_with_label("Use Current Dictionary");
+	    gtk_menu_item_new_with_label(_("Use Current Dictionary"));
 	gtk_widget_show(usecurrent);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
@@ -1483,8 +1483,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		gtk_widget_set_sensitive(separator, FALSE);
 
 		add_module_key =
-		    gtk_menu_item_new_with_label(_
-						 ("Unlock This Module"));
+		    gtk_menu_item_new_with_label(_("Unlock This Module"));
 		gtk_widget_show(add_module_key);
 		gtk_container_add(GTK_CONTAINER(pm), add_module_key);
 

@@ -633,7 +633,7 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 				  lookup_selection_menu);
 
 	usecurrent =
-	    gtk_menu_item_new_with_label("Use Current Dictionary");
+	    gtk_menu_item_new_with_label(_("Use Current Dictionary"));
 	gtk_widget_show(usecurrent);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
