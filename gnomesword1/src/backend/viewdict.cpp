@@ -56,14 +56,14 @@ static ModMap::iterator mdoule_iterator;
  * Return value
  *   void
  */
-void backend_setup_viewdict(GtkWidget * text, SETTINGS * s)
+void backend_setup_viewdict(GtkWidget * text)
 {
 	ModMap::iterator it;	//-- iteratior                     
 	SectionMap::iterator sit;	//-- iteratior
 
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	mod = NULL;
-	display = new GtkHTMLEntryDisp(text, s);
+	display = new GtkHTMLEntryDisp(text);
 	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
 		if (!strcmp
 		    ((*it).second->Type(), "Lexicons / Dictionaries")) {

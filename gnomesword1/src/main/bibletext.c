@@ -423,7 +423,7 @@ void setup_text(GList *mods)
 		t->search_string = NULL;
 		t->key = NULL;
 		t->find_dialog = NULL;
-		t->is_locked = backend_module_is_locked(t->mod_name);
+		t->is_locked = module_is_locked(t->mod_name);
 		get_module_global_options(t);
 		gui_create_text_pane(t);
 		popupmenu = gui_create_pm_text(t);

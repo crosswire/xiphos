@@ -58,16 +58,17 @@ struct _nodedata {
 	gboolean expanded;
 };
 
+void display_gbs(int page_num, char * key);
+int treekey_next_sibling(char * mod_name, unsigned long offset);
+int gbs_treekey_has_children(char * mod_name, 
+					unsigned long offset);
+char * gbs_get_treekey_local_name(char * mod_name, unsigned long offset);
+unsigned long gbs_get_treekey_offset(char *mod_name);
+int gbs_treekey_first_child(char * bookname, unsigned long offset);
 char *get_book_key(int book_num);
 gboolean display_row_gbs(gint book_num, gchar *offset);
 GBS_DATA *get_gbs(GList * gbs);
-void add_node_children(GtkCTreeNode *node, gchar *bookname,
-		unsigned long offset);
-void set_book_page_and_key(gint page_num, gchar * key);
-void setup_gbs(GList *mods);
-void shutdown_gbs(void);
-GtkCTreeNode *add_node_gbs(NODEDATA * data);
-
+void new_gbs_display(GtkWidget * html, char * mod_name);
 #ifdef __cplusplus
 }
 #endif

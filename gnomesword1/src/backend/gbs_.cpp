@@ -58,7 +58,6 @@ static SWMgr *mgr;
 static GList *be_gbs_list;
 
 
-
 /******************************************************************************
  * Name
  *  backend_get_book_key
@@ -80,9 +79,7 @@ char *backend_get_book_key(int book_num)
 	BE_GBS *g;
         g = (BE_GBS *) g_list_nth_data(be_gbs_list, book_num);
 	if(g->mod->KeyText())
-		return	g_strdup(g->mod->KeyText());
-	else
-		return NULL;
+		return	strdup(g->mod->KeyText());	
 }
 
 /******************************************************************************
@@ -160,17 +157,17 @@ static SWModule *backend_getModule(char *bookname)
  * Synopsis
  *   #include "gbs_.h"
  *
- *   gboolean backend_treekey_next_sibling(gchar * bookname,
+ *   int backend_treekey_next_sibling(gchar * bookname,
  *                                      unsigned long offset)	
  *
  * Description
  *    
  *
  * Return value
- *   gboolean
+ *   int
  */ 
  
-gboolean backend_treekey_next_sibling(gchar * bookname,
+int backend_treekey_next_sibling(gchar * bookname,
                                       unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -188,17 +185,17 @@ gboolean backend_treekey_next_sibling(gchar * bookname,
  * Synopsis
  *   #include "gbs_.h"
  *
- *   gboolean backend_gbs_treekey_has_children(gchar * bookname,
+ *   int backend_gbs_treekey_has_children(gchar * bookname,
   *                                      unsigned long offset)	
  *
  * Description
  *    
  *
  * Return value
- *   gboolean
+ *   int
  */ 
  
-gboolean backend_gbs_treekey_has_children(gchar * bookname,
+int backend_gbs_treekey_has_children(gchar * bookname,
                                        unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -233,7 +230,8 @@ char *backend_gbs_get_treekey_local_name(gchar * bookname,
         if (treeKey) {
                 treeKey->setOffset(offset);
                 //-- returned value must be freed by calling function
-                return g_strdup((char *) treeKey->getLocalName());
+                return strdup((char *) treeKey->getLocalName());
+                //return (const char *)treeKey->getLocalName();
         }
         return NULL;
 }
@@ -270,17 +268,17 @@ unsigned long backend_gbs_get_treekey_offset(gchar * bookname)
  * Synopsis
  *   #include "gbs_.h"
  *
- *   gboolean backend_gbs_treekey_first_child(char *bookname,
+ *   int backend_gbs_treekey_first_child(char *bookname,
   *                                     unsigned long offset)	
  *
  * Description
  *    
  *
  * Return value
- *   gboolean
+ *   int
  */ 
  
-gboolean backend_gbs_treekey_first_child(char *bookname,
+int backend_gbs_treekey_first_child(char *bookname,
                                       unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -308,8 +306,7 @@ gboolean backend_gbs_treekey_first_child(char *bookname,
  *   void
  */ 
  
-void backend_new_gbs_display(GtkWidget * html, char *bookname,
-						SETTINGS * s)
+void backend_new_gbs_display(GtkWidget * html, char *bookname)
 {
         GList *tmp = NULL;
         BE_GBS *g;
@@ -318,7 +315,7 @@ void backend_new_gbs_display(GtkWidget * html, char *bookname,
         while (tmp != NULL) {
                 g = (BE_GBS *) tmp->data;
                 if (!strcmp(g->mod->Name(), bookname)) {
-                        g->bookDisplay = new GtkHTMLEntryDisp(html, s);
+                        g->bookDisplay = new GtkHTMLEntryDisp(html);
                         g->mod->Disp(g->bookDisplay);
                 }
                 tmp = g_list_next(tmp);
@@ -351,6 +348,7 @@ void backend_display_gbs(gint booknum, gchar * key)
 	g->mod->Display();
 	      
 }
+
 /******************************************************************************
  * Name
  *  backend_display_row_gbs
@@ -358,25 +356,25 @@ void backend_display_gbs(gint booknum, gchar * key)
  * Synopsis
  *   #include "gbs_.h"
  *
- *   gboolean backend_display_row_gbs(gint booknum, gchar * offset)	
+ *   int backend_display_row_gbs(gint booknum, gchar * offset)	
  *
  * Description
  *    
  *
  * Return value
- *   gboolean
+ *   int
  */ 
  
-gboolean backend_display_row_gbs(gint booknum, gchar * offset)
+int backend_display_row_gbs(gint booknum, gchar * offset)
 {
         BE_GBS *g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
         TreeKeyIdx *treeKey = backend_get_tree_key(g->mod->Name());
         if (treeKey) {
                 TreeKeyIdx treenode = *treeKey;
                 treenode.setOffset(strtoul(offset, NULL, 0));
-                sprintf(settings.BookWindowModule, "%s",
-                        (gchar *) g->mod->Name());
-		sprintf(settings.book_key,"%s",treenode.getText());
+                strcpy(settings.BookWindowModule,
+				(gchar*)g->mod->Name());
+		strcpy(settings.book_key,treenode.getText());
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
                         g->mod->SetKey(treenode);

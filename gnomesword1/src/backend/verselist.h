@@ -30,7 +30,7 @@ extern "C" {
 #include "main/gs_gnomesword.h"
 
 GList *backend_get_verse_list(gchar *modName, gchar *vlist, SETTINGS *s);
-void backend_setup_verselist(GtkWidget *html_widget, SETTINGS *s);
+void backend_setup_verselist(GtkWidget *html_widget);
 void backend_shutdown_verselist(void);
 void backend_verselist_change_verse(SETTINGS *s, gchar *url);
 

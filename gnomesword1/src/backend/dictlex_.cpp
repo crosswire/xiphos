@@ -72,13 +72,12 @@ static GList *be_dl_list;
  *   void
  */
  
-void backend_new_dictlex_display(GtkWidget * html, int mod_num,
-							SETTINGS * s)
+void backend_new_dictlex_display(GtkWidget * html, int mod_num)
 {
 	BE_DL *d;
 
 	d = (BE_DL *) g_list_nth_data(be_dl_list, mod_num);
-	d->dlDisp = new GtkHTMLEntryDisp(html, s);
+	d->dlDisp = new GtkHTMLEntryDisp(html);
 	d->mod->Disp(d->dlDisp);
 		
 }
