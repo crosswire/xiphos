@@ -46,7 +46,6 @@
 #include "gs_rwphtml.h"
 #include "gs_thmlhtml.h"
 #include "gs_thmlplain.h"
-#include "gs_gbfhtml.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -172,8 +171,7 @@ initSWORD(GtkWidget *mainform)
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
   	
-  	gbftohtml	= new GS_GBFHTML(); //-- sword renderfilter gbf to html
-  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
+ 	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */
         thmltoplain	= new GS_ThMLPlain(); /* sword renderfilter thml to plain */  	
         rwphtml		= new GS_RWPHTML();
@@ -256,7 +254,7 @@ initSWORD(GtkWidget *mainform)
 				//g_warning(sourceformat);
 			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
-				curMod->AddRenderFilter(gbftohtml);
+				//curMod->AddRenderFilter(gbftohtml);
 				curMod->Disp(HTMLchapDisplay);
 			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
 			  	curMod->AddRenderFilter(plaintohtml);

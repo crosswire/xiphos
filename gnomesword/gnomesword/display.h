@@ -79,6 +79,7 @@ class GTKEntryDisp:public SWDisplay {
 	}
 	virtual char Display(SWModule & imodule);
 	gint gettags(gchar * text, gchar *tag, gint pos);
+	gchar *gbftohtml(gchar * text, gint maxlen);
 };
 
 //----------------------------------------------------------------------------------------------
