@@ -61,6 +61,7 @@ static TEXT_DATA *cur_vt;
 static gboolean dialog_freed;
 static gboolean apply_change;
 static gboolean in_url;
+GtkTextBuffer *text_buffer;
 /******************************************************************************
  * externs
  */
@@ -190,19 +191,14 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 
 static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
 {
-#ifdef USE_GTKEMBEDMOZ
 	if (!vt->is_rtol)
 		chapter_display(vt->html,
 			vt->mod_name, vt->tgs, key, show_key);
 	else
-		chapter_display_mozilla(vt->html,
+		chapter_display_textview(vt->text,
 					vt->mod_name,
 					vt->tgs, key, show_key);
 
-#else
-	chapter_display(vt->html,
-			vt->mod_name, vt->tgs, key, show_key);	
-#endif
 }
 
 
@@ -589,7 +585,6 @@ void gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt)
 	cur_vt->key = settings.currentverse;
 	update_controls(cur_vt);
 }
-
 
 
 /******************************************************************************
@@ -1088,6 +1083,188 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+static gboolean textview_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					TEXT_DATA * t)
+{
+	extern gboolean in_url;
+	gchar *key;
+
+	settings.whichwindow = MAIN_TEXT_WINDOW;
+	/*
+	 * set program title to current text module name 
+	 */
+	gui_change_window_title(t->mod_name);
+
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+	return FALSE;
+}
+
+
+
+static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
+	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
+{
+	gint char_index;
+	
+	char_index = gtk_text_iter_get_offset (iter);
+	//printf ("offset = %d", char_index);
+  switch (event->type)
+    {
+    case GDK_MOTION_NOTIFY:
+      printf ("Motion event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_BUTTON_PRESS:
+      printf ("Button press at char %d tag `%s'\n",
+             char_index, tag->name);
+	    switch(event->button.button){
+		    case 1:
+			//return do_something_with_tag(tag, iter, user_data);
+		        break;
+		    case 2:
+		    case 3:
+		        break;
+	    
+	}
+	
+    	return TRUE;	
+      break;
+        
+    case GDK_2BUTTON_PRESS:
+      printf ("Double click at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_3BUTTON_PRESS:
+      printf ("Triple click at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_BUTTON_RELEASE:
+      printf ("Button release at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+        
+    case GDK_KEY_PRESS:
+    case GDK_KEY_RELEASE:
+      printf ("Key event at char %d tag `%s'\n",
+              char_index, tag->name);
+    	return TRUE;
+      break;
+      
+    case GDK_ENTER_NOTIFY:
+      printf ("enter event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+	    
+    case GDK_LEAVE_NOTIFY:
+      printf ("leave event at char %d tag `%s'\n",
+             char_index, tag->name);
+    	return TRUE;
+      break;
+	    
+    case GDK_PROPERTY_NOTIFY:
+    case GDK_SELECTION_CLEAR:
+    case GDK_SELECTION_REQUEST:
+    case GDK_SELECTION_NOTIFY:
+    case GDK_PROXIMITY_IN:
+    case GDK_PROXIMITY_OUT:
+    case GDK_DRAG_ENTER:
+    case GDK_DRAG_LEAVE:
+    case GDK_DRAG_MOTION:
+    case GDK_DRAG_STATUS:
+    case GDK_DROP_START:
+    case GDK_DROP_FINISHED:
+    	return FALSE;
+    default:
+    	return FALSE;
+      break;
+    }    
+    return FALSE;
+}
+
+static void setup_tag (GtkTextTag *tag, gpointer user_data)
+{
+	g_signal_connect (G_OBJECT (tag),
+		    "event",
+		    G_CALLBACK (tag_event_handler),
+		    user_data);
+}
+
+static void create_text_tags(GtkTextBuffer *buffer)
+{
+	GtkTextTag *tag;
+	GdkColor color;
+	GdkColor color2;
+	GdkColor color_red;
+	GdkColor colorLink;
+	PangoFontDescription *font_desc;
+	
+		
+		
+	/* verse number tag verse style*/
+	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
+	setup_tag (tag, buffer);  
+	color.red = color.green = 0;
+	color.blue = 0xffff;
+		"scale", PANGO_SCALE_XX_SMALL,
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);	
+		
+	/* current verse color tag */	
+	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
+	color.blue = 0;
+	color.green = 0xbbbb;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+		
+	/*  verse color tag */	
+	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
+	color.blue = 0;
+	color.green = 0;
+	color.red = 0;
+	g_object_set (G_OBJECT (tag),
+                "foreground_gdk", &color,
+                NULL);
+		
+	/* right to left tag */
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_quote", NULL);
+        g_object_set (G_OBJECT (tag),
+		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
+		//"scale", PANGO_SCALE_XX_LARGE,
+                "wrap_mode", GTK_WRAP_WORD,
+                "direction", GTK_TEXT_DIR_RTL,
+                "indent", 0,
+                "left_margin", 0,
+                "right_margin", 0,
+                NULL);	
+		
+	/* large tag */
+	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
+        g_object_set (G_OBJECT (tag),
+		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
+		"scale", PANGO_SCALE_XX_LARGE,
+                NULL);			
+}
+	
+
 /******************************************************************************
  * Name
  *   create_bibletext_dialog
@@ -1110,12 +1287,6 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	GtkWidget *vbox33;
 	GtkWidget *frame21;
 	GtkWidget *swVText; 
-#ifdef USE_GTKEMBEDMOZ
-	GtkWidget *toolbar_moz;
-	GtkWidget *button_set_font;
-	GtkWidget *togglebutton_points;
-	GtkWidget *togglebutton_cant;
-#endif
 
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -1137,96 +1308,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_widget_show(vt->toolbar_nav);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->toolbar_nav, FALSE, FALSE,
 			   0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(vt->toolbar_nav),
-				      GTK_RELIEF_NONE);*/
-
-
-#ifdef USE_GTKEMBEDMOZ
-	if (!vt->is_rtol) {
-		frame21 = gtk_frame_new(NULL);
-		gtk_widget_show(frame21);
-		gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
-		gtk_widget_set_usize(frame21, -2, 400);
-	
-		swVText = gtk_scrolled_window_new(NULL, NULL);
-		gtk_widget_show(swVText);
-		gtk_container_add(GTK_CONTAINER(frame21), swVText);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
-					       GTK_POLICY_NEVER,
-					       GTK_POLICY_ALWAYS);
-	
-		vt->html = gtk_html_new();
-		gtk_widget_show(vt->html);
-		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-		gtk_html_load_empty(GTK_HTML(vt->html));
-		gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
-				   G_CALLBACK(dialog_url), (gpointer) vt);			   
-		gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
-				   G_CALLBACK(link_clicked), vt);
-	}
-	else {
-		toolbar_moz =
-		    gtk_toolbar_new();
-		gtk_toolbar_set_style (GTK_TOOLBAR (toolbar_moz), GTK_TOOLBAR_ICONS);
-		gtk_widget_show(toolbar_moz);
-		gtk_box_pack_start(GTK_BOX(vbox33), toolbar_moz, FALSE,
-				   FALSE, 0);
-/*		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_moz),
-					      GTK_RELIEF_NONE);*/
-
-		button_set_font =
-		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar_moz),
-					       GTK_TOOLBAR_CHILD_BUTTON,
-					       NULL, _("Font"), NULL,
-					       NULL, NULL, NULL, NULL);
-		gtk_widget_show(button_set_font);
-
-		gtk_signal_connect (GTK_OBJECT (button_set_font), "clicked",
-                      G_CALLBACK (set_module_font),
-                      		(TEXT_DATA *) vt);
-		
-		
-		if (check_for_global_option
-		    (vt->mod_name, "UTF8HebrewPoints")) {
-			togglebutton_points =
-			    gtk_toolbar_append_element(GTK_TOOLBAR
-						       (toolbar_moz),
-						       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-						       NULL,
-						       _
-						       ("Vowel Points"),
-						       NULL, NULL, NULL,
-						       NULL, NULL);
-			gtk_widget_show(togglebutton_points);
-			
-			gtk_signal_connect (GTK_OBJECT (togglebutton_points), "toggled",
-                      		G_CALLBACK (on_togglebutton_points_toggled),
-                      			(TEXT_DATA *) vt);
-		}
-
-		if (check_for_global_option
-		    (vt->mod_name, "UTF8Cantillation")) {
-			togglebutton_cant =
-			    gtk_toolbar_append_element(GTK_TOOLBAR
-						       (toolbar_moz),
-						       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-						       NULL,
-						       _("Cantilation"),
-						       NULL, NULL, NULL,
-						       NULL, NULL);
-			gtk_widget_show(togglebutton_cant);
-			
-  			gtk_signal_connect (GTK_OBJECT (togglebutton_cant), "toggled",
-                      		G_CALLBACK (on_togglebutton_cant_toggled),
-                      			(TEXT_DATA *) vt);
-		}
-		vt->html = gtk_moz_embed_new();
-		gtk_widget_show(vt->html);
-		gtk_box_pack_start(GTK_BOX(vbox33), vt->html, TRUE,
-				   TRUE, 0);
-		gtk_widget_realize(vt->html);
-	}
-#else
+			   
 	frame21 = gtk_frame_new(NULL);
 	gtk_widget_show(frame21);
 	gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
@@ -1238,16 +1320,36 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
+				      
+	if (!vt->is_rtol) {
+	
+		vt->html = gtk_html_new();
+		gtk_widget_show(vt->html);
+		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
+		gtk_html_load_empty(GTK_HTML(vt->html));
+		gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
+				   G_CALLBACK(dialog_url), (gpointer) vt);			   
+		gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
+				   G_CALLBACK(link_clicked), vt);
+	}
+	else { 
+		/* use gtktextview for right to left text */
+		vt->text = gtk_text_view_new ();
+		gtk_widget_show (vt->text);
+		gtk_container_add (GTK_CONTAINER (swVText), vt->text);
+		gtk_text_view_set_editable (GTK_TEXT_VIEW (vt->text), FALSE);
+		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (vt->text));
+		create_text_tags(text_buffer);
+		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (vt->text), GTK_WRAP_WORD);
+		/*
+		gtk_signal_connect(GTK_OBJECT(t->text),
+				   "button_release_event",
+				   G_CALLBACK
+				   (textview_button_release_event),
+				   (TEXT_DATA *) t);*/
 
-	vt->html = gtk_html_new();
-	gtk_widget_show(vt->html);
-	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
-	gtk_html_load_empty(GTK_HTML(vt->html));
-	gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
-			   G_CALLBACK(dialog_url), (gpointer) vt);			   
-	gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
-			   G_CALLBACK(link_clicked), vt);
-#endif
+	}
+	
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
@@ -1353,7 +1455,10 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 		vt->cipher_old = NULL;
 	}
 	popupmenu = gui_create_pm_text(vt);
-	gnome_popup_menu_attach(popupmenu, vt->html, NULL);
+	if(!vt->is_rtol)
+		gnome_popup_menu_attach(popupmenu, vt->html, NULL);
+	else
+		gnome_popup_menu_attach(popupmenu, vt->text, NULL);
 	gtk_widget_show(vt->dialog);
 	dialog_list = g_list_append(dialog_list, (TEXT_DATA *) vt);
 	cur_vt = vt;
