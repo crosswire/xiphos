@@ -140,7 +140,7 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 				   gpointer user_data)
 {
 	if (ApplyChange) {
-		chapterSWORD();
+		verseSWORD();
 		return TRUE;
 	}
 	return FALSE;
