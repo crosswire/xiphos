@@ -23,7 +23,6 @@ extern "C" {
 	
 GtkWidget *create_menu1(void);
 GtkWidget *create_wdwEditBookmarks(void);
-GtkWidget *create_InfoBox(void);
 GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
 	
