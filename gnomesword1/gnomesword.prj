@@ -60,7 +60,6 @@ module.include.name=.
 module.include.type=
 module.include.expanded=0
 module.include.files=\
-	src/backend/viewtext.h\
 	src/backend/viewdict.h\
 	src/backend/viewcomm.h\
 	src/backend/verselist.h\
@@ -71,6 +70,7 @@ module.include.files=\
 	src/backend/module_options.h\
 	src/backend/gbs_.h\
 	src/backend/bibletext_.h\
+	src/backend/bibletext_view_.h\
 	src/backend/interlinear.h\
 	src/backend/display.h\
 	src/backend/dictlex_.h\
@@ -82,12 +82,13 @@ module.include.files=\
 	src/gnome/about_modules.h\
 	src/gnome/about_sword.h\
 	src/gnome/_bibletext.h\
+	src/gnome/_bibletext_view.h\
 	src/gnome/_commentary.h\
-	src/gnome/commentary_find_dialog.h\
+	src/gnome/commentary_find.h\
 	src/gnome/_dictlex.h\
 	src/gnome/_editor.h\
 	src/gnome/_gbs.h\
-	src/gnome/gbs_find_dialog.h\
+	src/gnome/gbs_find.h\
 	src/gnome/create_shortcutbar_search.h\
 	src/gnome/create_shortcutbar_viewer.h\
 	src/gnome/cipher_key_dialog.h\
@@ -100,6 +101,7 @@ module.include.files=\
 	src/gnome/setup_druid.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
+	src/main/bibletext_view.h\
 	src/main/gs_bookmarks.h\
 	src/main/commentary.h\
 	src/main/gs_detach_int.h\
@@ -128,8 +130,8 @@ module.include.files=\
 	src/main/gs_shortcutbar.h\
 	src/main/gs_viewcomm_dlg.h\
 	src/main/gs_viewdict_dlg.h\
-	src/main/gs_viewtext_dlg.h\
 	src/main/percomm.h\
+	src/main/lists.h\
 	src/main/settings.h\
 	src/main/spell.h\
 	src/main/spell_gui.h\
@@ -150,6 +152,7 @@ module.source.files=\
 	src/backend/module_options.cpp\
 	src/backend/gbs_.cpp\
 	src/backend/bibletext_.cpp\
+	src/backend/bibletext_view_.cpp\
 	src/backend/interlinear.cpp\
 	src/backend/display.cpp\
 	src/backend/dictlex_.cpp\
@@ -161,15 +164,17 @@ module.source.files=\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
 	src/gnome/_bibletext.c\
+	src/gnome/_bibletext_view.c\
 	src/gnome/_commentary.c\
-	src/gnome/commentary_find_dialog.c\
+	src/gnome/commentary_find.c\
 	src/gnome/_dictlex.c\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\
-	src/gnome/gbs_find_dialog.c\
+	src/gnome/gbs_find.c\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
 	src/gnome/cipher_key_dialog.c\
+	src/gnome/text_view.c\
 	src/gnome/editor_menu.c\
 	src/gnome/fileselection.c\
 	src/gnome/link_dialog.c\
@@ -179,6 +184,7 @@ module.source.files=\
 	src/gnome/splash.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
+	src/main/bibletext_view.c\
 	src/main/gs_bookmarks.c\
 	src/main/commentary.c\
 	src/main/gs_detach_int.c\
@@ -206,7 +212,8 @@ module.source.files=\
 	src/main/gs_shortcutbar.c\
 	src/main/gs_viewcomm_dlg.c\
 	src/main/gs_viewdict_dlg.c\
-	src/main/gs_viewtext_dlg.c\
+	src/main/gs_viewtext.c\
+	src/main/lists.c\
 	src/main/main.c\
 	src/main/percomm.c\
 	src/main/settings.c\

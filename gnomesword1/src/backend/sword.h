@@ -48,9 +48,7 @@ extern "C" {
 				       gchar * yesno);
 	GList *backend_get_books(void);
 	const char *backend_get_sword_version(void);
-	void backend_display_new_font_color_and_size(SETTINGS * s);
 	void backend_save_module_key(char *mod_name, char *key);
-	void backend_display_devotional(SETTINGS * s);
 	int backend_get_mod_type(gchar * modName);
 	GList *backend_get_list_of_mods_by_type(char *mod_type);
 	GList *backend_get_list_of_devotion_modules(void);

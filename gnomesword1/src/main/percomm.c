@@ -376,7 +376,6 @@ void setup_percomm(SETTINGS * s, GList *mods)
 	g_free(modbuf);
 	g_free(keybuf);
 	g_list_free(tmp);
-	return mods;
 }
 
 /******************************************************************************

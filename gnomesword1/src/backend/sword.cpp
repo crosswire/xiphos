@@ -33,7 +33,6 @@
 #include <gnome.h>
 #include <swmgr.h>
 #include <markupfiltmgr.h>
-
 #include <swversion.h>
 #include <swmodule.h>
 #include <swconfig.h>
@@ -44,39 +43,24 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <string.h>
-#include <time.h>
-#include <gal/widgets/e-unicode.h>
 
-#include "gs_gnomesword.h"
-#include "gs_history.h"
-#include "display.h"
-#include "gs_gui_cb.h"
+/* main */ 
+#include "settings.h"
+#include "lists.h"
+
+/* backend */
 #include "sword.h"
-#include "support.h"
-#include "gs_preferences_dlg.h"
-#include "gs_menu.h"
-#include "gs_popup_cb.h"
-#include "gs_html.h"
-#include "gs_info_box.h"
-#include "gs_shortcutbar.h"
 #include "shortcutbar.h"
 #include "properties.h"
 #include "bookmarks.h"
 #include "verselist.h"
-#include "module_options.h"
-#include "gs_editor.h"
 #include "gbs_.h"
 #include "dictlex_.h"
-#include "dictlex.h"
 #include "commentary_.h"
-#include "bibletext.h"
 #include "bibletext_.h"
 #include "percomm_.h"
 #include "search_.h"
 #include "interlinear.h"
-#include "gs_interlinear.h"
-#include "bibletext.h"
-#include "settings.h"
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
@@ -95,8 +79,6 @@ static modDescMap descriptionMap;
 
 bookAbrevMap abrevationMap;
 
-MOD_LISTS *mod_lists;
-MOD_LISTS mods;
 
 gboolean 
  autoSave = true,	/* we want to auto save changes to personal comments */
@@ -136,8 +118,7 @@ void backend_first_init(SETTINGS * s)
 	   LocaleMgr::systemLocaleMgr.setDefaultLocaleName(buf);
 	   }
 	 */
-	s->book_items = NULL;
-	s->book_items = backend_get_books();
+	init_lists();
 	curMod = NULL;		//-- set mods to null
 }
 
@@ -175,18 +156,6 @@ void backend_init_sword(SETTINGS * s)
 	s->havethayer = false;
 	s->havebdb = false;
 	
-	mod_lists = &mods;
-	/* set glist to null */
-	mod_lists->biblemods = NULL;
-	mod_lists->commentarymods = NULL;
-	mod_lists->dictionarymods = NULL;
-	mod_lists->percommods = NULL;
-	mod_lists->bookmods = NULL;
-	mod_lists->options = NULL;
-	mod_lists->text_descriptions = NULL;
-	mod_lists->comm_descriptions = NULL;
-	mod_lists->dict_descriptions = NULL;
-	mod_lists->book_descriptions = NULL;
 
 		
 	g_print("Sword locale is %s\n",
@@ -202,11 +171,6 @@ void backend_init_sword(SETTINGS * s)
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 			curMod = (*it).second;
-			mod_lists->biblemods = g_list_append(mod_lists->biblemods,
-					(char*)(*it).second->Name());
-			mod_lists->text_descriptions
-				= g_list_append(mod_lists->text_descriptions,
-					(char*)(*it).second->Description());
 			havebible = TRUE;
 			++textpages;
 		}
@@ -214,45 +178,26 @@ void backend_init_sword(SETTINGS * s)
 		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			if ((*mainMgr->config->Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
-				mod_lists->percommods = 
-				     g_list_append(mod_lists->percommods,
-					(char*)(*it).second->Name());
 				havepercomm = TRUE;
 				++percommpages;
 			}
-			mod_lists->commentarymods = g_list_append(mod_lists->commentarymods,
-					(char*)(*it).second->Name());
-			mod_lists->comm_descriptions
-				= g_list_append(mod_lists->comm_descriptions,
-					(char*)(*it).second->Description());
 			havecomm = TRUE;//-- we have at least one commentay module
 			++compages;	
 		}
 
 		else if (!strcmp
 			 ((*it).second->Type(), DICT_MODS)) {
-			mod_lists->dictionarymods = g_list_append(mod_lists->dictionarymods,
-					(char*)(*it).second->Name());
-			mod_lists->dict_descriptions
-				= g_list_append(mod_lists->dict_descriptions,
-					(char*)(*it).second->Description());
 			havedict = TRUE;//-- we have at least one lex / dict module
 			++dictpages;	
 
 		}
 
 		else if (!strcmp((*it).second->Type(), BOOK_MODS)) {
-			mod_lists->bookmods = g_list_append(mod_lists->bookmods,
-					(char*)(*it).second->Name());
-			mod_lists->book_descriptions
-				= g_list_append(mod_lists->book_descriptions,
-					(char*)(*it).second->Description());
 			++bookpages;
 			havebook = TRUE;
 		}
 	}
 	
-	mod_lists->options = backend_get_global_options_list();
 	/*
 	 * report what was found
 	 */
@@ -469,15 +414,6 @@ const char *backend_get_sword_version(void)
 	return retval;
 }
 
-/*** the changes are already made we just need to show them ***/
-void backend_display_new_font_color_and_size(SETTINGS * s)
-{
-	curMod->Display();
-	backend_display_commentary(s->comm_last_page, s->currentverse);
-	backend_display_dictlex(s->dict_last_page, s->dictkey);
-	update_interlinear_page(&settings);
-}
-
 /*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
 void backend_save_module_key(char *mod_name, char *key)
 {
@@ -515,32 +451,6 @@ void backend_save_module_key(char *mod_name, char *key)
 		}
 	}
 	closedir(dir);
-}
-
-/*** display daily devotional ***/
-void backend_display_devotional(SETTINGS * s)
-{
-	gchar buf[80];
-	time_t curtime;
-	struct tm *loctime;
-
-	/* 
-	 * Get the current time. 
-	 */
-	curtime = time(NULL);
-
-	/* 
-	 * Convert it to local time representation. 
-	 */
-	loctime = localtime(&curtime);
-
-	/* 
-	 * Print it out in a nice format. 
-	 */
-	strftime(buf, 80, "%m.%d", loctime);
-
-	display_dictlex_in_viewer(s->devotionalmod, buf, s);
-	set_sb_for_daily_devotion(s);
 }
 
 /*** we come here to get module type - Bible text, Commentary, Dict/Lex or Book ***/

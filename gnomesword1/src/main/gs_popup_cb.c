@@ -41,7 +41,6 @@
 #include "sword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_viewcomm_dlg.h"
-#include "gs_viewtext_dlg.h"
 #include "gs_bookmarks.h"
 #include "gs_detach_int.h"
 #include "gs_interlinear.h"
@@ -304,16 +303,6 @@ void on_int_global_options_activate(GtkMenuItem * menuitem,
 					      GTK_CHECK_MENU_ITEM
 					      (menuitem)->active,
 						&settings);
-}
-
-void on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	static GtkWidget *dlg;
-
-	if (!isrunningVT) {
-		dlg = create_dlgViewText(mod_lists->options);
-	}
-	gtk_widget_show(dlg);
 }
 
 /***  ***/
