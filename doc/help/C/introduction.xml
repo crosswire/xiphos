@@ -2,32 +2,30 @@
 <chapter id="introduction">
 	<title>Introduction</title>
   	<para>
-		<application>&app;</application> est un outil de recherche et d'étude de la Bible basé sur 
-		le 'SWORD Project' et utilisant l'environnement de bureau GNOME. Avec 
-		<application>&app;</application> vous pouvez :
+	<application>GnomeSword</application> is a Bible study and research tool based upon the "SWORD Project" libraries
+    and the GNOME Desktop libraries. You can use <application>GnomeSword</application> to do the following:
 	</para>
 	<itemizedlist>
 		<listitem>
 			<para>
-				Afficher vos versets préférés
+			View your favorite Scripture verse
 			</para>
 		</listitem>
 		<listitem>
 			<para>
-				Préparer une étude ou ajouter des notes personelles à un passage
+			Make sermon or personal notes on selected passages
 			</para>
 		</listitem>
 	</itemizedlist>
 	<para>
-		Le but de <application>&app;</application> est de mettre à disposition de l'utilisateur 
-		un outil d'étude de la Bible puissant et personnalisable tout en bénéficiant d'une 
-		interface utilisateur simple et claire.
+	<application>GnomeSword</application> aims to provide a simple and clean user interface
+	whilst providing a powerful tool allowing a personalized Bible study environment.
 	</para>
 	<para>
   		<figure id="anjuta-scrshot">
-   			<title>GnomeSword en action</title>
+   			<title>GnomeSword in action</title>
    			<screenshot>
-   				<screeninfo>GnomeSword en action</screeninfo>
+   				<screeninfo>GnomeSword in action</screeninfo>
    				<graphic format="PNG" fileref="figures/interface" ></graphic>
    			</screenshot>
 		</figure>
@@ -36,12 +34,11 @@
  <!-- Where important notices are kept regarding Gnomesword  -->
    	<warning>
    		<para>
-			<application>&app;</application> est en cours de développement, il se peut 
-			donc que des dfférences apparaissent dans ce manuel par rapport au logiciel. 
-			Si cela est le cas, envoyez un rapport de bogue au <ulink type="http" 
-			url="http://sourceforge.net/projects/gnomesword"> site web du projet</ulink>, 
-			ou un email à <email>gnomesword-developers@lists.sourceforge.net</email>
-			Toute aide est appréciée, puisqu'elle permet d'améliorer le programme.
+		<application>GnomeSword</application> is currently in development, so this manual may not
+   	  	reflect the program as you see it. If it does not, please file a
+		bug at the <ulink type="http" url="http://sourceforge.net/projects/gnomesword">
+		project website</ulink>, or email <email>gnomesword-developers@lists.sourceforge.net</email>.
+		All help is appreciated, as it will improve the software.
 		</para>
   	</warning>
 </chapter>
