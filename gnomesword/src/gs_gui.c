@@ -300,7 +300,7 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("About the Sword Project..."),
-	 N_("Infotmation About The Sword Project"),
+	 N_("Information About The Sword Project"),
 	 on_about_the_sword_project1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
 	 0, 0, NULL},

@@ -49,17 +49,24 @@
 
 /*****************************************************************************
 * globals
-*****************************************************************************/
-GtkWidget *notepage,		/* widget to access toggle menu - for interlinear notebook page */
-*autosaveitem,			/* widget to access toggle menu - for personal comments auto save */
-*notes;				/* notes text widget */
+*/
+/* widget to access toggle menu - for interlinear notebook page */
+GtkWidget *notepage, 
+/* widget to access toggle menu - for personal comments auto save */
+*autosaveitem,
+/* notes text widget */
+*notes;				
 
-gboolean file_changed = FALSE,	/* set to true if text is study pad has changed - and file is not saved  */
- changemain = TRUE;		/* change verse of Bible text window */
+/* set to true if text is study pad has changed - and file is not saved  */
+gboolean file_changed = FALSE,	
+/* change verse of Bible text window */
+ changemain = TRUE;		
+/* filename for open file in study pad window */
+gchar *current_filename = NULL;	
 
-gchar *current_filename = NULL;	/* filename for open file in study pad window */
-
-gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
+/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - 
+   commentary window */   
+gchar current_verse[80];	
 
 gint dictpages, compages, textpages, bookpages;
 
