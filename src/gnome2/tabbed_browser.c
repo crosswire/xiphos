@@ -54,6 +54,9 @@
 static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
 					 gint page_num, GList **tl);
+//static void on_notebook_main_new_tab_clicked(GtkButton *button,
+//				   gpointer user_data);
+
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,const gchar *label_text);
 
 /******************************************************************************
@@ -311,6 +314,11 @@ void gui_close_passage_tab(gint pagenum)
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
 }
 
+static void on_notebook_main_new_tab_clicked(GtkButton *button, gpointer user_data)
+{
+	gui_open_verse_in_new_tab(settings.currentverse);
+}
+
 /******************************************************************************
  * Name
  *  gui_notebook_main_setup
@@ -365,7 +373,12 @@ void gui_notebook_main_setup(GList *ptlist)
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_main_switch_page), &passage_list);
+	g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
+			   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
 	
+	//show the new tab button here instead of in main_window.c so it
+	//doesn't get shown if !settings.browsing
+	gtk_widget_show(widgets.button_new_tab);
 	g_list_free(tmp);
 }
 
