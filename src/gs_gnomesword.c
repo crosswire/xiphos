@@ -130,7 +130,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	settings->settingslist = NULL;
 	/* set current verse color html */
 	mycolor = settings->currentverse_color;	
-	/* add modules to menus -- menu.c */
+	/* add modules to menus -- gs_menu.c */
 	addmodstomenus(app, 
 				settings, 
 				biblemods, 
@@ -140,7 +140,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				dictionarymods,
 				sbdictmods,
 				percommods);
-	/* create popup menus -- menu.c */
+	/* create popup menus -- gs_menu.c */
 	createpopupmenus(app, 
 				settings, 
 				sbbiblemods,
@@ -149,13 +149,10 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				percommods);
 	/* add pages to commentary and  dictionary notebooks */
 	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
-	//g_warning("%d",biblepage);
 	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
 	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);	
 	/*  set text windows to word warp */
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 	/* set main notebook page */
@@ -281,6 +278,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		while (gtk_events_pending ())
 				gtk_main_iteration ();
 	}
+	/*if(savefontinfoSWORD("KJV", "GSFont", "helvetica"))
+		g_warning("we wrote something");*/
 	g_print("done\n");
 }
 

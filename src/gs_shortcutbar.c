@@ -706,7 +706,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 	gchar *type, *ref;
 	gchar modName[16];
 	GdkPixbuf *icon_pixbuf = NULL;
-	if(item_num > 0) {
+	if(item_num > -1) {
 		if (event->button.button == 1) {
 			app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
 #ifdef USE_OLD_GAL
