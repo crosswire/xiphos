@@ -55,7 +55,7 @@
 #include "table.h"
 #include "text.h"
 
-#define ICONDIR "./art"
+//#define ICONDIR "./art"
 
 /* #define DEBUG */
 #ifdef DEBUG
@@ -104,7 +104,7 @@ insert_link (GtkWidget *mi, GSHTMLEditorControlData *cd)
 	if (cd->properties_dialog)
 		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
 
-	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), ICONDIR "/insert-link-24.png");
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-link-24.png");
 
 	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
 						   GTK_HTML_EDIT_PROPERTY_LINK, _("Link"),
@@ -266,7 +266,7 @@ link_prop_dialog (GtkWidget *mi, GSHTMLEditorControlData *cd)
 	if (cd->properties_dialog)
 		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
 
-	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Properties"), ICONDIR "/insert-link-24.png");
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Properties"), PACKAGE_PIXMAPS_DIR "/insert-link-24.png");
 
 	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
 						   GTK_HTML_EDIT_PROPERTY_LINK, _("Link"),
