@@ -58,6 +58,7 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
+preferences.autoformat.style=Custom style
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -232,8 +233,6 @@ module.pixmap.name=pixmaps
 module.pixmap.type=
 module.pixmap.files=\
 	pixmaps/tt.xpm\
-	pixmaps/GnomeSword.png\
-	pixmaps/GnomeSword.xpm\
 	pixmaps/about.png\
 	pixmaps/book-bl.png\
 	pixmaps/book-gold.png\
