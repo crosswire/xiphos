@@ -1,9 +1,17 @@
+2001-03-27 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* 0.3pre2
+	* added dialog for viewing commentary modules
+	* fixed delete note bug
+	* added files - gs_viewcomm.c and gs_viewcomm.h
+	
+
 2001-03-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* changes in the look of Bible text modules
 
 2001-03-17 Terry Biggs <tbiggs@users.sourceforge.net>
-	* 0.3pre2
+	
 	* added files  gs_display.cpp and gs_display.h 
 
 2001-03-15 Terry Biggs <tbiggs@users.sourceforge.net>
