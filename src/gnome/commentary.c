@@ -35,6 +35,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
+#include "gui/main_window.h"
 
 #include "main/commentary.h"
 #include "main/settings.h"
@@ -892,7 +893,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 				if (settings.inViewer)
 					gui_display_dictlex_in_viewer(dict, key);
 				if (settings.inDictpane)
-					change_module_and_key(dict, key);
+					gui_change_module_and_key(dict, key);
 				g_free(key);
 				if (dict)
 					g_free(dict);

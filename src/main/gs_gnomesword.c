@@ -26,9 +26,9 @@
 #include <gnome.h>
 #include <ctype.h>
 #include <time.h>
-#include <gal/widgets/e-unicode.h>
-#include <gal/e-paned/e-hpaned.h>
-#include <gal/shortcut-bar/e-shortcut-bar.h>
+//#include <gal/widgets/e-unicode.h>
+//#include <gal/e-paned/e-hpaned.h>
+//#include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
@@ -73,25 +73,26 @@
 #include "backend/properties.h"
 #include "backend/shortcutbar.h"
 #include "backend/bookmarks.h"
- 
-/*****************************************************************************
- * externs
- */
 
-extern gboolean 
- havebible, 
- havecomm, 
- havedict, 
- havebook, 
- havepercomm,
- addhistoryitem;	/* do we need to add item to history */
- 
-extern HISTORY historylist[];	/* sturcture for storing history items */
-extern gint historyitems;
+
 
 /******************************************************************************
- * initGnomeSword - sets up the interface
- *****************************************************************************/
+ * Name
+ *  init_gnomesword
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void init_gnomesword(void)	
+ *
+ * Description
+ *    sets up the interface
+ *
+ * Return value
+ *   void
+ */ 
+ 
+ 
 void init_gnomesword(void)
 {	
 	
@@ -112,7 +113,7 @@ void init_gnomesword(void)
 	/*
 	 *  setup Bible text gui 
 	 */
-	if (havebible) {
+	if (settings.havebible) {
 		gui_setup_text(get_list(TEXT_LIST));
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
@@ -120,7 +121,7 @@ void init_gnomesword(void)
 	/*
 	 *  setup commentary gui support 
 	 */
-	if (havecomm) {
+	if (settings.havecomm) {
 		gui_setup_commentary(get_list(COMM_LIST));	
 		gui_setup_commentary_dialog(get_list(COMM_LIST));
 	}
@@ -128,21 +129,21 @@ void init_gnomesword(void)
 	/*
 	 *  setup personal comments gui support 
 	 */
-	if (havepercomm) {
+	if (settings.havepercomm) {
 		gui_setup_percomm(get_list(PERCOMM_LIST));
 	}
 
 	/*
 	 *  setup general book gui support 
 	 */
-	if (havebook) {
+	if (settings.havebook) {
 		gui_setup_gbs(get_list(GBS_LIST));
 	}
 
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
-	if (havedict) {
+	if (settings.havedict) {
 		gui_setup_dictlex(get_list(DICT_LIST));
 		gui_setup_dictlex_dialog(get_list(DICT_LIST));
 	}
@@ -153,9 +154,9 @@ void init_gnomesword(void)
 	
 	gui_show_main_window();
 	
-	addhistoryitem = FALSE;
+	settings.addhistoryitem = FALSE;
 	
-	change_verse(settings.currentverse);
+	gui_change_verse(settings.currentverse);
 	
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
@@ -169,6 +170,23 @@ void init_gnomesword(void)
 	
 	g_print("done\n");
 }
+
+
+/******************************************************************************
+ * Name
+ *  gnomesword_shutdown
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void gnomesword_shutdown(void)
+ *
+ * Description
+ *    do an orderly shutdown
+ *
+ * Return value
+ *   void
+ */ 
 
 void gnomesword_shutdown(void)
 {
@@ -188,35 +206,65 @@ void gnomesword_shutdown(void)
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
 	
-	if(havebible){
+	if(settings.havebible){
 		gui_shutdown_text();
 		gui_shutdown_bibletext_dialog();
 	}
-	if(havebook)
+	if(settings.havebook)
 		gui_shutdown_gbs();
-	if(havecomm){
+	if(settings.havecomm){
 		gui_shutdown_commentary();
 		gui_shutdown_commentary_dialog();
 	}
-	if(havedict){
+	if(settings.havedict){
 		gui_shutdown_dictlex();
 		gui_shutdown_dictlex_dialog();
 	}
-	if(havepercomm)
+	if(settings.havepercomm)
 		gui_shutdown_percomm();
 	
 	g_print("\nGnomeSWORD is shutdown\n");
 }
+
+
+/******************************************************************************
+ * Name
+ *  search_percent_update
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void search_percent_update(char percent, void *userData)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void search_percent_update(char percent, void *userData)
 {
 	gui_search_appbar_update(percent, userData);
 }
 
+
 /******************************************************************************
- *   -string_is_color- this code is from bluefish-0.6
+ * Name
+ *  string_is_color
  *
- *****************************************************************************/
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   	gint string_is_color(gchar * color)
+ *
+ * Description
+ *    this code is from bluefish-0.6
+ *
+ * Return value
+ *   gint
+ */
+
 
 gint string_is_color(gchar * color)
 {
@@ -250,10 +298,22 @@ gint string_is_color(gchar * color)
 
 }
 
+
 /******************************************************************************
- * gdouble_arr_to_hex  -- this code is from bluefish-0.6
+ * Name
+ *  gdouble_arr_to_hex
  *
- *****************************************************************************/
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)	
+ *
+ * Description
+ *    this code is from bluefish-0.6
+ *
+ * Return value
+ *   gchar *
+ */ 
 
 gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
 {
@@ -285,10 +345,22 @@ gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
 	return tmpstr;
 }
 
+
 /******************************************************************************
- *  hex_to_gdouble_arr -- this code is from bluefish-0.6
+ * Name
+ *  hex_to_gdouble_arr
  *
- *****************************************************************************/
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gdouble *hex_to_gdouble_arr(gchar * color)	
+ *
+ * Description
+ *    hex_to_gdouble_arr -- this code is from bluefish-0.6
+ *
+ * Return value
+ *   gdouble *
+ */ 
 
 gdouble *hex_to_gdouble_arr(gchar * color)
 {
@@ -309,24 +381,31 @@ gdouble *hex_to_gdouble_arr(gchar * color)
 	tmpl = strtol(tmpstr, NULL, 16);
 	tmpcol[2] = (gdouble) tmpl;
 
-	//g_warning("hex_to_gdouble_arr, R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
-
 	tmpcol[3] = 0;
 
 	return tmpcol;
 }
 
 
-
 /******************************************************************************
+ * Name
+ *  get_module_key
  *
- * num
- * returns module key
- *****************************************************************************/
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gchar *get_module_key(void)	
+ *
+ * Description
+ *    returns module key
+ *
+ * Return value
+ *   gchar *
+ */ 
 
 gchar *get_module_key(void)
 {
-	if (havebible) {
+	if (settings.havebible) {
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
 			return (gchar *) settings.currentverse;
@@ -348,14 +427,26 @@ gchar *get_module_key(void)
 	return NULL;
 }
 
+
 /******************************************************************************
- * num
- * returns module name
- *****************************************************************************/
+ * Name
+ *  get_module_name
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gchar *get_module_name(void)	
+ *
+ * Description
+ *    returns module name
+ *
+ * Return value
+ *   gchar *
+ */ 
 
 gchar *get_module_name(void)
 {
-	if (havebible) {
+	if (settings.havebible) {
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
 			return (gchar *) settings.MainWindowModule;
@@ -374,23 +465,22 @@ gchar *get_module_name(void)
 	return NULL;
 }
 
+
 /******************************************************************************
+ * Name
+ *  module_name_from_description
  *
- * 
- * 
- */
-
-/*gchar *get_module_name_from_description(gchar *description)
-{
-	gchar mod_name[16];
-
-	memset(mod_name, 0, 16);
-	backend_module_name_from_description(mod_name, description);
-	if(mod_name)
-		return g_strdup(mod_name);
-	else 
-		return NULL;
-}*/
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void module_name_from_description(gchar *mod_name, gchar *description)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void module_name_from_description(gchar *mod_name, gchar *description)
 {
@@ -398,113 +488,43 @@ void module_name_from_description(gchar *mod_name, gchar *description)
 }
 
 
+/******************************************************************************
+ * Name
+ *  get_module_number
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   int get_module_number(char *module_name, char *module_type)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
 
 int get_module_number(char *module_name, char *module_type)
 {
 	return backend_get_module_page(module_name, module_type);
 }
 
-void change_module_and_key(gchar * module_name, gchar * key)
-{
-	gint mod_type;
-	gint page_num;
-	gchar *val_key = NULL;
 
-	mod_type = backend_get_mod_type(module_name);
-
-	switch (mod_type) {
-	case TEXT_TYPE:
-		if(havebible) {
-			page_num =
-			    backend_get_module_page(module_name, 
-							TEXT_MODS);
-			val_key = gui_update_nav_controls(key);
-			gui_set_text_page_and_key(page_num, val_key);
-			free(val_key);
-		}
-		break;
-	case COMMENTARY_TYPE:
-		if(havecomm) {
-			page_num =
-			    backend_get_module_page(module_name, 
-							COMM_MODS);
-			gui_set_commentary_page_and_key(page_num, key);
-		}
-		break;
-	case DICTIONARY_TYPE:
-		if(havedict) {
-			page_num =
-			    backend_get_module_page(module_name, 
-							DICT_MODS);
-			gui_set_dictionary_page_and_key(page_num, key);
-		}
-		break;
-	case BOOK_TYPE:
-		if(havebook) {
-			page_num =
-			    backend_get_module_page(module_name, 
-							BOOK_MODS);
-			if(key)
-				gui_set_book_page_and_key(page_num, key);
-			else {
-				gtk_notebook_set_page(GTK_NOTEBOOK(
-					settings.notebook_gbs),
-					page_num);
-			}
-		}
-		break;
-	}
-}
-
-void change_verse(gchar * key)
-{
-	gchar *val_key;
-
-	val_key = gui_update_nav_controls(key);
-
-	settings.apply_change = FALSE;
-	
-	if(havebible) {
-		/* add item to history */
-		if (addhistoryitem) {
-			if (strcmp
-			    (settings.currentverse,
-			     historylist[historyitems - 1].verseref))
-				addHistoryItem(settings.app,
-					       GTK_WIDGET
-					       (settings.shortcut_bar),
-					       settings.currentverse);
-		}
-		addhistoryitem = TRUE;
-
-		/* change main window */
-		gui_display_text(val_key);
-	}
-
-	/* 
-	 * change interlinear verses 
-	 */
-	if (settings.dockedInt) {
-		gui_update_interlinear_page();
-	}
-
-	/* 
-	 * change personal notes editor   if not in edit mode 
-	 */
-	if (settings.notefollow) {	                  
-		if (!settings.editnote)
-			if (havepercomm)
-				gui_display_percomm(val_key);
-	}
-	/* 
-	 * set commentary module to current verse 
-	 */
-	if (havecomm)
-		gui_display_commentary(val_key);
-	
-	free(val_key);
-	settings.apply_change = TRUE;
-}
+/******************************************************************************
+ * Name
+ *  save_module_key
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void save_module_key(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void save_module_key(gchar * mod_name, gchar * key)
 {
@@ -513,25 +533,72 @@ void save_module_key(gchar * mod_name, gchar * key)
 	/* FIXME: we need to display change */
 }
 
+
 /******************************************************************************
- * set verse style -- verses or paragraphs
- *****************************************************************************/
+ * Name
+ *  set_verse_style
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void set_verse_style(gboolean choice)	
+ *
+ * Description
+ *    set verse style -- verses or paragraphs
+ *
+ * Return value
+ *   void
+ */ 
 
 void set_verse_style(gboolean choice)
 {
 	/* remember our choice for the next program startup */
 	settings.versestyle = choice;
 
-	if (havebible) {
+	if (settings.havebible) {
 		/* show the change */
 		gui_display_text(settings.currentverse);
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *  get_sword_version
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   const char *get_sword_version(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   const char *
+ */ 
+
 const char *get_sword_version(void)
 {
 	return backend_get_sword_version();
 }
+
+
+/******************************************************************************
+ * Name
+ *  display_devotional
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void display_devotional(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void display_devotional(void)
 {
@@ -558,7 +625,23 @@ void display_devotional(void)
 	set_sb_for_daily_devotion();
 }
 
-/*** the changes are already made we just need to show them ***/
+
+/******************************************************************************
+ * Name
+ *  display_new_font_color_and_size
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void display_new_font_color_and_size(void)	
+ *
+ * Description
+ *    the changes are already made we just need to show them
+ *
+ * Return value
+ *   void
+ */ 
+
 void display_new_font_color_and_size(void)
 {
 	gui_display_text(settings.currentverse);
@@ -567,33 +650,101 @@ void display_new_font_color_and_size(void)
 	gui_update_interlinear_page();
 }
 
+
+/******************************************************************************
+ * Name
+ *  get_module_description
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gchar *get_module_description(gchar * mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gchar *
+ */ 
+
 gchar *get_module_description(gchar * mod_name)
 {
 	return backend_get_module_description(mod_name);
 }
 
 
+/******************************************************************************
+ * Name
+ *  get_book_from_key
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   const char *get_book_from_key(char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   const char *
+ */ 
+
 const char *get_book_from_key(char *key)
 {
 	return backend_get_book_from_key(key);
 }
+
+
+/******************************************************************************
+ * Name
+ *  get_chapter_from_key
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   int get_chapter_from_key(char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
 
 int get_chapter_from_key(char *key)
 {
 	return backend_get_chapter_from_key(key);
 }
 
+
+/******************************************************************************
+ * Name
+ *  get_verse_from_key
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   int get_verse_from_key(char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+
 int get_verse_from_key(char *key)
 {
 	return backend_get_verse_from_key(key);
 }
+
 
 /******************************************************************************
  * Name
  *  save_properties
  *
  * Synopsis
- *   #include "gs_gnomesword.h"
+ *   #include "gnomesword.h"
  *
  *   void save_properties(gboolean use_default)	
  *
@@ -609,10 +760,44 @@ void save_properties(gboolean use_default)
 	backend_save_properties(use_default);
 }
 
+
+/******************************************************************************
+ * Name
+ *  do_search
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   GList *do_search(gpointer *usr_data)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *  GList * 
+ */ 
+
 GList *do_search(gpointer *usr_data)
 {
 	return backend_do_search(usr_data);
 }
+
+
+/******************************************************************************
+ * Name
+ *   get_verse_list
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   GList *get_verse_list(gchar* module_name, gchar *verse_list)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GList *
+ */ 
 
 
 GList *get_verse_list(gchar* module_name, gchar *verse_list)
@@ -620,93 +805,94 @@ GList *get_verse_list(gchar* module_name, gchar *verse_list)
 	return backend_get_verse_list(module_name, verse_list);
 }
 
-GList *load_sb_group(gchar *filename, gchar *group_name, 
-						gchar *icon_size)
-{	
-	return backend_load_sb_group(filename, group_name, icon_size);
-}
 
-void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
-						     char *large_icons)
-{
-	backend_save_sb_group(file_name, group_name, group_num, large_icons);
-}
-
-void save_sb_iconsize(gchar *file_name, char *icons)
-{
-	backend_save_sb_iconsize(file_name, icons);
-}
-
+/******************************************************************************
+ * Name
+ *  get_module_font_name
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   char *get_module_font_name(char *mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
 
 char *get_module_font_name(char *mod_name)
 {
 	return backend_get_module_font_name(mod_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *  get_module_font_size
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   char *get_module_font_size(char *mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *  char * 
+ */ 
+
 char *get_module_font_size(char *mod_name)
 {
 	return backend_get_module_font_size(mod_name);
 }
+
+
+/******************************************************************************
+ * Name
+ *  get_mod_type
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   int get_mod_type(char * mod_name)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
 
 int get_mod_type(char * mod_name)
 {
 	return backend_get_mod_type(mod_name);
 }
 
+
 /******************************************************************************
  * Name
- *    get_shortcut_item_info
+ *  module_is_locked
  *
  * Synopsis
  *   #include "gnomesword.h"
  *
- *   void get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
- *    gint group_num, gint item_num, gchar **item_url, gchar **item_name)	
+ *   int module_is_locked(char * mod_name)
  *
  * Description
- *   get shortcut item information
+ *    
  *
  * Return value
- *   void
- */
-
-void get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
-     gint group_num, gint item_num, gchar **item_url, gchar **item_name)
-{
-	gui_get_shortcut_item_info(shortcutbar_widget, 
-	     group_num, item_num, item_url, item_name);
-
-}
-
-/******************************************************************************
- * Name
- *    get_num_shortcut_items
- *
- * Synopsis
- *   #include "gnomesword.h"
- *
- *   gint get_num_shortcut_items(GtkWidget * shortcutbar_widget,
-						gint group_num)	
- *
- * Description
- *   returns the number of shortcut items in the current group
- *
- * Return value
- *   gint
- */
-
-gint get_num_shortcut_items(GtkWidget * shortcutbar_widget,
-						gint group_num)
-{
-	return gui_get_num_shortcut_items(shortcutbar_widget,
-						group_num);
-
-}
+ *   int
+ */ 
 
 int module_is_locked(char * mod_name)
 {
 	return backend_module_is_locked(mod_name);
 }
+
 
 /******************************************************************************
  * Name
@@ -729,6 +915,7 @@ char *get_valid_key(char *key)
 	return backend_get_valid_key(key);
 }
 
+
 /******************************************************************************
  * Name
  *   get_module_text
@@ -749,6 +936,7 @@ char *get_module_text(char * mod_name, char * key)
 {
 	backend_get_module_text(mod_name, key);	
 }
+
 
 /******************************************************************************
  * Name
@@ -774,18 +962,18 @@ char *get_search_results_text(char * mod_name, char * key)
 
 /******************************************************************************
  * Name
- *   
+ *   create_properties_from_setup
  *
  * Synopsis
  *   #include "gnomesword.h"
  *
- *   	
+ *   int create_properties_from_setup(void)	
  *
  * Description
  *    
  *
  * Return value
- *   
+ *   int
  */
 
 int create_properties_from_setup(void)
@@ -807,19 +995,55 @@ int create_properties_from_setup(void)
  *    returns the path to the sword modules
  *
  * Return value
- *   get_path_to_mods
+ *   gchar *
  */ 
 
 gchar *get_path_to_mods(void)
 {
 	return backend_get_path_to_mods();
 }
+
+
+/******************************************************************************
+ * Name
+ *  get_list_of_mods_by_type
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   GList *get_list_of_mods_by_type(char *mod_type)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GList *
+ */ 
+
 GList *get_list_of_mods_by_type(char *mod_type)
 {
 	return backend_get_list_of_mods_by_type(mod_type);
 }
 
+
+/******************************************************************************
+ * Name
+ *  get_mod_about_info
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gchar *get_mod_about_info(char * mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gchar *
+ */ 
+
 gchar *get_mod_about_info(char * mod_name)
 {
 	return backend_get_mod_about_info(mod_name);
 }
+
