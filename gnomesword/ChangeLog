@@ -6,6 +6,7 @@
 	  preferences dialog.
 	* added choice for viewer lex modules - you can now view one 
 	  module in the viewer and another in the Dict/Lex pane.
+	* hopefully fixed the detach interlinear crash.
 
 2002-03-28  Terry Biggs <tbiggs@users.sourceforge.net>
 
