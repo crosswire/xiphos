@@ -37,6 +37,7 @@
 #include "shortcutbar_dialog.h"
 #include "studypad.h"
 #include "info_box.h"
+#include "shortcutbar_viewer.h"
 
 /* main */ 
 #include "gs_gnomesword.h"
@@ -52,6 +53,7 @@
 #include "support.h"
 #include "gs_html.h"
 #include "gs_menu.h"
+#include "gs_gui.h"
 #include "gs_shortcutbar.h"
  
 /* backend */
@@ -64,6 +66,8 @@
 #include "gbs_.h"
 #include "dictlex_.h"
 #include "properties.h"
+#include "verselist.h"
+#include "shortcutbar.h"
  
  
 /*****************************************************************************
@@ -86,7 +90,6 @@ extern gint historyitems;
  * globals
  */
 gboolean ApplyChange;
-GList *sblist;	/* for saving search results to bookmarks */
 
 /******************************************************************************
  * static
@@ -103,7 +106,7 @@ void init_gnomesword(SETTINGS * s)
 	/*
 	 *  setup shortcut bar 
 	 */
-	setupSB(s);
+	gui_setup_shortcut_bar(s);
 	/*
 	 *  create popup menus -- gs_menu.c 
 	 */
@@ -693,7 +696,7 @@ gchar *get_module_name(SETTINGS * s)
  * 
  */
 
-gchar *get_module_name_from_description(gchar *description)
+/*gchar *get_module_name_from_description(gchar *description)
 {
 	gchar mod_name[16];
 
@@ -703,6 +706,11 @@ gchar *get_module_name_from_description(gchar *description)
 		return g_strdup(mod_name);
 	else 
 		return NULL;
+}*/
+
+void module_name_from_description(gchar *mod_name, gchar *description)
+{
+	backend_module_name_from_description(mod_name, description);
 }
 
 static gchar *update_nav_controls(gchar * key)
@@ -884,7 +892,7 @@ void display_devotional(SETTINGS * s)
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
 
-	display_dictlex_in_viewer(s->devotionalmod, buf, s);
+	gui_display_dictlex_in_viewer(s->devotionalmod, buf, s);
 	set_sb_for_daily_devotion(s);
 }
 /*** the changes are already made we just need to show them ***/
@@ -936,4 +944,117 @@ int get_verse_from_key(char *key)
 void save_properties(gboolean use_default)
 {
 	backend_save_properties(&settings, use_default);
+}
+GList *do_search(gpointer *usr_data)
+{
+	return backend_do_search(&settings, usr_data);
+}
+
+void display_sb_dictlex(gchar *modName, gchar *key)
+{
+	backend_display_sb_dictlex(modName, key);
+}
+
+GList *get_verse_list(gchar* module_name, gchar *verse_list)
+{
+	return backend_get_verse_list(module_name, verse_list, &settings);
+}
+
+void verselist_change_verse(gchar * url)
+{
+	backend_verselist_change_verse(&settings, url);
+}
+
+void display_search_results_item(gchar * key)
+{
+	backend_search_results_item_display(key);
+}
+
+GList *load_sb_group(gchar *filename, gchar *group_name, 
+						gchar *icon_size)
+{	
+	return backend_load_sb_group(filename, group_name, icon_size);
+}
+
+void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
+						     char *large_icons)
+{
+	backend_save_sb_group(file_name, group_name, group_num, large_icons);
+}
+
+void save_sb_iconsize(gchar *file_name, char *icons)
+{
+	backend_save_sb_iconsize(file_name, icons);
+}
+
+gint get_sb_type_from_modname(gchar *modName)
+{
+	return backend_sb_type_from_modname(modName);
+}
+
+void setup_shortcutbar_backend(GtkWidget *html, GtkWidget *html2, 
+						GtkWidget *html3)
+{
+	backend_setup_verselist(html,&settings);
+	backend_setup_search_results_display(html2);
+	backend_setup_viewer(html3);
+}
+
+
+
+
+
+/******************************************************************************
+ * Name
+ *    get_shortcut_item_info
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   void get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
+ *    gint group_num, gint item_num, gchar **item_url, gchar **item_name)	
+ *
+ * Description
+ *   get shortcut item information
+ *
+ * Return value
+ *   void
+ */
+
+void get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
+     gint group_num, gint item_num, gchar **item_url, gchar **item_name)
+{
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+				       (shortcutbar_widget)->model,
+				       group_num,
+				       item_num,
+				       item_url, item_name, NULL);
+
+
+}
+
+/******************************************************************************
+ * Name
+ *    get_num_shortcut_items
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gint get_num_shortcut_items(GtkWidget * shortcutbar_widget,
+						gint group_num)	
+ *
+ * Description
+ *   returns the number of shortcut items in the current group
+ *
+ * Return value
+ *   gint
+ */
+
+gint get_num_shortcut_items(GtkWidget * shortcutbar_widget,
+						gint group_num)
+{
+	return e_shortcut_model_get_num_items(E_SHORTCUT_BAR
+					      (shortcutbar_widget)->
+					      model, group_num);
+
 }

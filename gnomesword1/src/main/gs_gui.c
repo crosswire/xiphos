@@ -190,6 +190,51 @@ static void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 
 /******************************************************************************
  * Name
+ *    on_btnSB_clicked
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   void on_btnSB_clicked(GtkButton * button, SETTINGS * s)	
+ *
+ * Description
+ *   show hide shortcut bar
+ *
+ * Return value
+ *   void
+ */
+
+void on_btnSB_clicked(GtkButton * button, SETTINGS * s)
+{
+	if (!s->docked) {
+		gdk_window_raise(GTK_WIDGET(s->dockSB)->window);
+		return;
+	}
+
+	if (settings.showshortcutbar) {
+		settings.showshortcutbar = FALSE;
+		s->biblepane_width = s->gs_width / 2;
+		gtk_widget_hide(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(s->epaned), 0);
+		e_paned_set_position(E_PANED
+				     (lookup_widget
+				      (s->app, "hpaned1")),
+				     s->biblepane_width);
+	} else {
+		s->showshortcutbar = TRUE;
+		s->biblepane_width =
+		    (s->gs_width - s->shortcutbar_width) / 2;
+		e_paned_set_position(E_PANED(s->epaned),
+				     s->shortcutbar_width);
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "hpaned1")),
+				     s->biblepane_width);
+		gtk_widget_show(settings.shortcut_bar);
+	}
+}
+
+/******************************************************************************
+ * Name
  *   on_btn_search_clicked
  *
  * Synopsis

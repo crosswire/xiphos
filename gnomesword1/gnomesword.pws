@@ -6,19 +6,19 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=61
-1=3
-2=93
-3=89
-4=55
-5=617
-6=76
-7=42
-8=50
-9=802
-10=41
-11=1
-12=406
+0=54
+1=36
+2=33
+3=41
+4=42
+5=994
+6=30
+7=1
+8=68
+9=139
+10=1
+11=58
+12=302
 13=29
 
 [filemarkers]
@@ -38,40 +38,40 @@ ShowLocals=true
 13=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/preferences_dialog.c
-1=/home/terry/Projects/gnomesword1/src/gnome/preferences_dialog.h
-2=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-3=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
+0=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
+1=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
+2=/home/terry/Projects/gnomesword1/src/gnome/_bibletext_view.c
+3=/home/terry/Projects/gnomesword1/src/main/gs_html.c
 
 [replace_text]
-0=_percomm
-1=pcecd
-2=vboxPC
-3=settings.
-4=workbook_upper_switch_page
-5=s->workbook
-6=dl->frame
-7=c->frame
+0=shortcutbar_viewer.h
+1=_percomm
+2=pcecd
+3=vboxPC
+4=settings.
+5=workbook_upper_switch_page
+6=s->workbook
+7=dl->frame
 
 [find_text]
-0=backend_
-1=vseparator
-2=_editor
-3=htmlwidget
-4=necd
-5=vbox
-6=frame34
-7=display_change
+0=create_shortcutbar_viewer.h
+1=change_viewer_page
+2=fill_search_results_clist
+3=HTML_START
+4=so
+5=p_so
+6=on_item_added
+7=sblist
 
 [executer args]
 0=newconfigs
 
 [find_in_files]
-0=preferences_dlg
-1=gs_info_box.h
-2=create_InfoBox
-3=create_InfoBoxf
-4=find_dlg_defs.h
-5=create_dlgInformation
-6=loadmodandkey
-7=workbook
+0=create_shortcutbar_viewer.h
+1=preferences_dlg
+2=gs_info_box.h
+3=create_InfoBox
+4=create_InfoBoxf
+5=find_dlg_defs.h
+6=create_dlgInformation
+7=loadmodandkey

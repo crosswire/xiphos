@@ -28,6 +28,7 @@
 /* frontend */
 #include "_bibletext.h"
 #include "_bibletext_view.h"
+#include "shortcutbar_viewer.h"
 
 /* main */
 #include "cipher_key_dialog.h"
@@ -178,7 +179,7 @@ static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  *  on_lookup_selection_activate
  *
  * Synopsis
- *   #include "gs_bibletext.h"
+ *   #include "_bibletext.h"
  *   void on_lookup_selection_activate(GtkMenuItem * menuitem,
  *				  gchar * modDescription)   	
  *
@@ -192,19 +193,19 @@ static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 				  gchar * dict_mod_description)
 {
-	gchar *dict_key, *dict_mod;
+	gchar *dict_key, mod_name[16];
 
-	dict_mod =
-	    get_module_name_from_description(dict_mod_description);
+	memset(mod_name, 0, 16);
+	module_name_from_description(mod_name, dict_mod_description);
+	
 	dict_key = get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			display_dictlex_in_viewer(dict_mod, dict_key,
+			gui_display_dictlex_in_viewer(mod_name, dict_key,
 						  &settings);
 		if (settings.inDictpane)
-			change_module_and_key(dict_mod, dict_key);
+			change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
-		g_free(dict_mod);
 	}
 }
 
@@ -231,7 +232,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 	gchar *dict_key = get_word_or_selection(t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			display_dictlex_in_viewer(settings.DictWindowModule,
+			gui_display_dictlex_in_viewer(settings.DictWindowModule,
 						  dict_key, &settings);
 		if (settings.inDictpane)
 			change_module_and_key(settings.DictWindowModule,
@@ -681,7 +682,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 				else
 					dict = g_strdup(settings.DictWindowModule);
 				if (settings.inViewer)
-					display_dictlex_in_viewer(dict,
+					gui_display_dictlex_in_viewer(dict,
 								  key,
 								  &settings);
 				if (settings.inDictpane)

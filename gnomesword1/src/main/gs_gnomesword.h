@@ -74,7 +74,8 @@ gdouble *hex_to_gdouble_arr(gchar *color);
 void display_about_module_dialog(gchar *modname, gboolean isGBS);
 gchar *get_module_key(SETTINGS *s);
 gchar *get_module_name(SETTINGS *s);
-gchar *get_module_name_from_description(gchar *description);
+//gchar *get_module_name_from_description(gchar *description);
+void module_name_from_description(gchar *mod_name, gchar *description);
 void change_module_and_key(gchar *module_name, gchar *key);
 void change_verse(gchar *key);
 void set_verse_style(gboolean choice);
@@ -87,7 +88,27 @@ const char *get_book_from_key(char *key);
 int get_chapter_from_key(char *key);
 int get_verse_from_key(char *key);
 void save_properties(gboolean use_default);
+GList *do_search(gpointer *usr_data);
+void display_sb_dictlex(gchar *modName, gchar *key);
+GList *get_verse_list(gchar* module_name, gchar *verse_list);
+void verselist_change_verse(gchar * url);
+void display_search_results_item(gchar * key);
+GList *load_sb_group(gchar *filename, gchar *group_name, 
+						gchar *icon_size);
+void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
+						     char *large_icons);
+void save_sb_iconsize(gchar *file_name, char *icons);
+gint get_sb_type_from_modname(gchar *modName);
+void setup_shortcutbar_backend(GtkWidget *html, GtkWidget *html2, 
+						GtkWidget *html3);
+gint get_num_shortcut_items(GtkWidget *shortcutbar_widget,
+				     gint group_num);
 
+void get_shortcut_item_info(GtkWidget *shortcutbar_widget,
+				     gint group_num,
+				     gint item_num,
+				     gchar ** item_url,
+				     gchar ** item_name);
 #ifdef __cplusplus
 }
 #endif
