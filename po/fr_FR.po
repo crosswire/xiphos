@@ -22,7 +22,6 @@
 # Lemmas			-> Déclinaisons
 # <>, 2004.
 # Dominique Corbex <domcox@sourceforge.net>, 2004.
-# Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2004.
 # 
 # 
 msgid ""
