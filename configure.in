@@ -67,7 +67,6 @@ AM_PROG_LIBTOOL
 dnl Pick up the Gnome macros.
 AM_ACLOCAL_INCLUDE(macros)
 
-
 GNOME_INIT
 AC_ISC_POSIX
 AC_HEADER_STDC
@@ -129,9 +128,9 @@ done
 dnl looking for general SWORD path 
  
 AC_ARG_WITH(sworddir, 
-[  --with-sworddir=DIR     path where swordlib is installed (default=/usr/local/sword) ], 
+[ Â --with-sworddir=DIR Â Â Â Â path where swordlib is installed (default=/usr/local/sword) ], 
 [ 
-  ac_sword_dir=$withval 
+ Â ac_sword_dir=$withval 
 ], ac_sword_dir=/usr/local/sword 
 ) 
  

@@ -243,9 +243,65 @@ void gui_remove_menu_items(gchar * startitem, gint numberofitems)
 {				
 	gnome_app_remove_menus(GNOME_APP(widgets.app), startitem,
 			       numberofitems);
+}			
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/utilities.h
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+GList *gui_fill_count_list(int count)
+{
+	GList *glist = NULL;
+	gint start;
+	gchar buf[32];
+	
+	for(start = 1; start <= count ; start++) {
+		sprintf(buf, "%d", start);
+		glist = g_list_append(glist,
+				 (gchar *) g_strdup(buf));
+	}
+	return glist;
+}			
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/utilities.h
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+void gui_free_count_list(GList *glist)
+{
+	glist = g_list_first(glist);
+	while (glist != NULL) {
+		gchar *buf = (gchar *) glist->data;
+		g_free(buf);
+		glist = g_list_next(glist);
+	}
+	g_list_free(glist);
 }
-
-
-
 
 /******   end of file   ******/

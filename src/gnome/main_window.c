@@ -347,9 +347,8 @@ void gui_change_verse(gchar * key)
 {
 	gchar *val_key;
 
-	val_key = gui_update_nav_controls(key);
-
 	settings.apply_change = FALSE;
+	val_key = gui_update_nav_controls(key);
 
 	if (settings.havebible) {
 		/* add item to history */
@@ -390,7 +389,6 @@ void gui_change_verse(gchar * key)
 		gui_display_commentary(val_key);
 
 	free(val_key);
-	settings.apply_change = TRUE;
 }
 
 
