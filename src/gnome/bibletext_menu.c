@@ -956,6 +956,29 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 	gui_open_bibletext_dialog(module_name);
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "gui/bibletext_menu.h"
+ *
+ *  void (GtkMenuItem * menuitem, 
+						gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_sync_activate(GtkMenuItem * menuitem, 
+						gpointer user_data)
+{
+	gui_sync_bibletext_dialog();
+}
 /******************************************************************************
  * Name
  *  gui_create_pm_text
@@ -980,6 +1003,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	GtkWidget *file;
 	GtkWidget *file_menu;
 	GtkWidget *print;
+	GtkWidget *sync_with_main;
 	GtkWidget *close;
 	GtkWidget *show;
 	GtkWidget *show_menu;
@@ -1024,7 +1048,22 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	file_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file),
 				  file_menu);	
-	if (t->is_dialog) {
+				  
+	if (t->is_dialog) {	
+		sync_with_main = gtk_menu_item_new_with_label(_("Sync with Main Window"));
+		gtk_widget_show(sync_with_main);
+		gtk_container_add(GTK_CONTAINER(file_menu), sync_with_main);
+		
+		gtk_signal_connect(GTK_OBJECT(sync_with_main),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_sync_activate), t);
+		
+		separator = gtk_menu_item_new();
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(file_menu), separator);
+		gtk_widget_set_sensitive(separator, FALSE);	
+		
 		view_text = gtk_menu_item_new_with_label(_("Open New Dialog"));
 		gtk_widget_show(view_text);
 		gtk_container_add(GTK_CONTAINER(file_menu), view_text);

@@ -137,16 +137,13 @@ extern gint historyitems;
 /* Show/hide bible texts */
 void gui_show_hide_texts(gboolean choice)
 {
-	GtkWidget *texts;
-	texts = gui_lookup_widget(widgets.app, "vbox_text");
 	settings.showtexts = choice;
 	if (choice == FALSE) {
-		gtk_widget_hide(texts);
+		gtk_widget_hide(widgets.vbox_text);
 	} else {
-		gtk_widget_show(texts);
+		gtk_widget_show(widgets.vbox_text);
 	}
 	gui_set_bible_comm_layout();
-
 }
 
 
@@ -179,53 +176,38 @@ void gui_set_bible_comm_layout(void)
 	if ((settings.showtexts == FALSE)
 	    && (settings.showcomms == FALSE)) {
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "vpaned1")), 0);
+				     (widgets.vpaned), 0);
 	} else if (settings.showdicts == FALSE) {
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "vpaned1")),
+				     (widgets.vpaned), 
 				     settings.gs_hight);
 	} else {
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "vpaned1")),
+				     (widgets.vpaned),
 				     settings.upperpane_hight);
 	}
 
 	if ((settings.showtexts == FALSE)
 	    && (settings.showcomms == TRUE)) {
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")), 0);
+		e_paned_set_position(E_PANED(widgets.hpaned),
+				      0);
 	} else if (settings.showtexts == FALSE) {
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else if ((settings.showtexts == TRUE)
 		   && (settings.showcomms == FALSE)) {
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else if ((settings.showtexts == TRUE)
 		   && (settings.showcomms == TRUE)) {
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.biblepane_width);
 	}
-
 	else if (settings.showtexts == TRUE) {
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else {
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+		e_paned_set_position(E_PANED(widgets.hpaned),
 				     settings.biblepane_width);
 	}
 }
@@ -506,15 +488,8 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 					    gpointer user_data)
 {
 	gint panesize;
-	if (!strcmp((gchar *) user_data, "epaned"))
-		panesize =
-		    e_paned_get_position(E_PANED(widgets.epaned));
-	else
-		panesize =
-		    e_paned_get_position(E_PANED(gui_lookup_widget
-						 (widgets.app,
-						  (gchar *)
-						  user_data)));
+		
+	panesize = e_paned_get_position(E_PANED(widget));
 
 	if (panesize > 15) {
 		if (!strcmp((gchar *) user_data, "epaned"))
@@ -525,13 +500,6 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 			settings.biblepane_width = panesize;
 	}
 	return TRUE;
-}
-
-static void on_mainwindow_set_focus(GtkWindow * window,
-				    GtkWidget * widget,
-				    gpointer user_data)
-{
-	//g_warning("focus set to main window");
 }
 
 
@@ -578,11 +546,8 @@ void create_mainwindow(void)
 	GtkWidget *vbox_gs;
 	GtkWidget *mainPanel;
 	GtkWidget *vboxMain;
-	GtkWidget *vpaned1;
 	GtkWidget *hbox2;
 	GtkWidget *nav_toolbar;
-	GtkWidget *hpaned1;
-	GtkWidget *vbox_text;
 	GtkWidget *swInt;
 	GtkWidget *label41;
 	GtkWidget *label185;
@@ -614,39 +579,22 @@ void create_mainwindow(void)
 
 	gui_create_main_menu(widgets.app);
 
-
 	vbox_gs = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox_gs);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox_gs",
-				 vbox_gs,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox_gs);
 	gnome_app_set_contents(GNOME_APP(widgets.app), vbox_gs);
 
 
 	widgets.hbox_toolbar = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(widgets.hbox_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.hbox_toolbar",
-				 widgets.hbox_toolbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.hbox_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox_gs), widgets.hbox_toolbar,
 			   FALSE, TRUE, 0);
-
+	
+	
 	hbox25 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox25);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hbox25",
-				 hbox25,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox25);
 	gtk_box_pack_start(GTK_BOX(vbox_gs), hbox25, TRUE, TRUE, 0);
 
 	widgets.epaned = e_hpaned_new();
-	gtk_widget_ref(widgets.epaned);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.epaned", widgets.epaned,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.epaned);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE,
 			   0);
@@ -660,10 +608,6 @@ void create_mainwindow(void)
 	gtk_widget_show(mainPanel);
 
 	vboxMain = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vboxMain);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vboxMain", vboxMain,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxMain);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vboxMain, TRUE, TRUE, 0);
 
@@ -680,52 +624,31 @@ void create_mainwindow(void)
 	 */
 
 
-	vpaned1 = e_vpaned_new();
-	gtk_widget_ref(vpaned1);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vpaned1",
-				 vpaned1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vpaned1);
-	gtk_box_pack_end(GTK_BOX(vboxMain), vpaned1, TRUE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(vpaned1), 1);
+	widgets.vpaned = e_vpaned_new();
+	gtk_widget_show(widgets.vpaned);
+	gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.vpaned), 1);
 
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox2);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hbox2",
-				 hbox2,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox2);
-	e_paned_pack1(E_PANED(vpaned1), hbox2, TRUE, TRUE);
+	e_paned_pack1(E_PANED(widgets.vpaned), hbox2, TRUE, TRUE);
 
-	hpaned1 = e_hpaned_new();
-	gtk_widget_ref(hpaned1);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hpaned1",
-				 hpaned1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(hpaned1);
-	gtk_box_pack_start(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
+	widgets.hpaned = e_hpaned_new();
+	gtk_widget_show(widgets.hpaned);
+	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE, TRUE, 0);
 
 
-	vbox_text = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox_text);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox_text",
-				 vbox_text,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox_text);
-	e_paned_pack1(E_PANED(hpaned1), vbox_text, FALSE, TRUE);
+	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(widgets.vbox_text);
+	e_paned_pack1(E_PANED(widgets.hpaned), widgets.vbox_text, FALSE, TRUE);
 
 	/*
 	 * text notebook
 	 */
 	widgets.notebook_text = gtk_notebook_new();
-	gtk_widget_ref(widgets.notebook_text);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.notebook_text",
-				 widgets.notebook_text,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.notebook_text);
-	gtk_box_pack_start(GTK_BOX(vbox_text), widgets.notebook_text,
+	gtk_box_pack_start(GTK_BOX(widgets.vbox_text), widgets.notebook_text,
 			   TRUE, TRUE, 0);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_text),
 				    TRUE);
@@ -736,28 +659,22 @@ void create_mainwindow(void)
 	 * commentary notebook
 	 */
 	widgets.notebook_comm = gtk_notebook_new();
-	gtk_widget_ref(widgets.notebook_comm);
 	gtk_widget_show(widgets.notebook_comm);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(widgets.notebook_comm),
 				    TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_comm));
 
-	e_paned_pack2(E_PANED(hpaned1), widgets.notebook_comm, TRUE,
+	e_paned_pack2(E_PANED(widgets.hpaned), widgets.notebook_comm, TRUE,
 		      TRUE);
 
 	/*
 	 * lower_workbook
 	 */
 	widgets.workbook_lower = gtk_notebook_new();
-	gtk_widget_ref(widgets.workbook_lower);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.workbook_lower",
-				 widgets.workbook_lower,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.workbook_lower);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.workbook_lower));
 
-	e_paned_pack2(E_PANED(vpaned1), widgets.workbook_lower, TRUE,
+	e_paned_pack2(E_PANED(widgets.vpaned), widgets.workbook_lower, TRUE,
 		      TRUE);
 
 	/*
@@ -765,11 +682,6 @@ void create_mainwindow(void)
 	 */
 
 	widgets.notebook_dict = gtk_notebook_new();
-	gtk_widget_ref(widgets.notebook_dict);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.notebook_dict",
-				 widgets.notebook_dict,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.notebook_dict);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
 			  widgets.notebook_dict);
@@ -780,10 +692,6 @@ void create_mainwindow(void)
 				   settings.dict_tabs);
 
 	label41 = gtk_label_new(_("Dict/Lex"));
-	gtk_widget_ref(label41);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label41",
-				 label41,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label41);
 
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.workbook_lower),
@@ -807,11 +715,6 @@ void create_mainwindow(void)
 	 */
 
 	widgets.notebook_gbs = gtk_notebook_new();
-	gtk_widget_ref(widgets.notebook_gbs);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "settings.notebookGBS",
-				 widgets.notebook_gbs,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.notebook_gbs);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
 			  widgets.notebook_gbs);
@@ -821,10 +724,6 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_gbs));
 
 	label185 = gtk_label_new(_("Books"));
-	gtk_widget_ref(label185);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label185",
-				 label185,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label185);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.workbook_lower),
 				   gtk_notebook_get_nth_page
@@ -872,20 +771,11 @@ void create_mainwindow(void)
 	 * interlinear page 
 	 */
 	widgets.frame_interlinear = gtk_frame_new(NULL);
-	gtk_widget_ref(widgets.frame_interlinear);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.frame_interlinear",
-				 widgets.frame_interlinear,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.frame_interlinear);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
 			  widgets.frame_interlinear);
 
 	swInt = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(swInt);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "swInt", swInt,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(swInt);
 	gtk_container_add(GTK_CONTAINER(widgets.frame_interlinear),
 			  swInt);
@@ -896,30 +786,19 @@ void create_mainwindow(void)
 	settings.dockedInt = TRUE;
 
 	widgets.html_interlinear = gtk_html_new();
-	gtk_widget_ref(widgets.html_interlinear);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.html_interlinear",
-				 widgets.html_interlinear,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.html_interlinear);
 	gtk_html_load_empty(GTK_HTML(widgets.html_interlinear));
-
 	gtk_container_add(GTK_CONTAINER(swInt),
 			  widgets.html_interlinear);
 
 
 	label197 = gtk_label_new(_("Interlinear"));
-	gtk_widget_ref(label197);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label197",
-				 label197,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label197);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.workbook_lower),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK
 				    (widgets.workbook_lower), page_num),
 				   label197);
-
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
 					 (widgets.workbook_lower),
 					 gtk_notebook_get_nth_page
@@ -934,10 +813,6 @@ void create_mainwindow(void)
 
 	widgets.appbar = gnome_appbar_new(TRUE, TRUE,
 					  GNOME_PREFERENCES_NEVER);
-	gtk_widget_ref(widgets.appbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "widgets.appbar", widgets.appbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(widgets.appbar);
 	gnome_app_set_statusbar(GNOME_APP(widgets.app), widgets.appbar);
 
@@ -966,18 +841,15 @@ void create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(widgets.app), "size_allocate",
 			   GTK_SIGNAL_FUNC(on_mainwindow_size_allocate),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(widgets.app), "set_focus",
-			   GTK_SIGNAL_FUNC(on_mainwindow_set_focus),
-			   NULL);
 
 	gtk_signal_connect(GTK_OBJECT(widgets.epaned),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "epaned");
-	gtk_signal_connect(GTK_OBJECT(vpaned1), "button_release_event",
+	gtk_signal_connect(GTK_OBJECT(widgets.vpaned), "button_release_event",
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
-			   (gchar *) "vpaned1");
-	gtk_signal_connect(GTK_OBJECT(hpaned1), "button_release_event",
+			   (gchar *) "vpaned");
+	gtk_signal_connect(GTK_OBJECT(widgets.hpaned), "button_release_event",
 			   GTK_SIGNAL_FUNC(epaned_button_release_event),
 			   (gchar *) "hpaned1");
 

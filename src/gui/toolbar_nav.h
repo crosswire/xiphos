@@ -27,7 +27,14 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-	
+
+typedef struct _toolbar_nav NAV_BAR;
+struct  _toolbar_nav {
+	GtkWidget *button_back;
+	GtkWidget *button_forward;
+};
+extern NAV_BAR nav_bar;
+
 gchar *gui_update_nav_controls(gchar * key);
 GtkWidget *gui_create_nav_toolbar(void);
 	

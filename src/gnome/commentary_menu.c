@@ -897,12 +897,12 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  
+ *  on_sync_activate
  *
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void (GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)	
  *
  * Description
  *   
@@ -1165,11 +1165,14 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 	navigate_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(navigate),
 				  navigate_menu); 
-				  
-	sync = gtk_menu_item_new_with_label(_("Sync with NavBar"));
+	
+	if (c->is_dialog) 			  
+		sync = gtk_menu_item_new_with_label(_("Sync with Main Window"));
+	else				  
+		sync = gtk_menu_item_new_with_label(_("Sync with NavBar"));
 	gtk_widget_show(sync);
 	gtk_container_add(GTK_CONTAINER(navigate_menu), sync);
-		
+	
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(navigate_menu), separator);
