@@ -528,18 +528,16 @@ char GtkMozChapDisp::Display(SWModule &imodule)
 	gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	GtkMozEmbed *new_browser = GTK_MOZ_EMBED(gtkText);
 	gboolean newparagraph = FALSE;
-	//char *my_key = be->get_valid_key(key->getText());
+	
 	gtk_moz_embed_open_stream(new_browser, "file:///sword", "text/html");
-	//SWMgr *mgr = be->get_main_mgr();
-	//gchar *verse_before = getVerseBefore(imodule);
-	//g_message("verse_before = %s ", verse_before);
+	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text), 0);
 	
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
 				settings.bible_text_color,
-				settings.link_color);//settings.link_color);
+				settings.link_color);
 	if(is_rtol) 
 		str = g_string_append(str,"<DIV ALIGN=right>");	
 	
