@@ -453,6 +453,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		   
 			   		   
 }
+
 /***************************************************************************************************
  *beginHTML - start loading html widget
  ***************************************************************************************************/
@@ -463,7 +464,7 @@ void beginHTML(GtkWidget *html_widget, gboolean isutf8)
 	html = GTK_HTML(html_widget);
 	//was_editable = gtk_html_get_editable (html);
 	/*if (was_editable)
-		gtk_html_set_editable (html, FALSE);*/
+		gtk_html_set_editable (html, FALSE);*/	
 	if(isutf8){
 		htmlstream = gtk_html_begin_content (html, "text/html; charset=utf-8");		
 	}else{

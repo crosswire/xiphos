@@ -370,7 +370,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	const gchar **end;
 
 	//c = 182;       
-
+ 	
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbText")), 1);
 
@@ -411,12 +411,12 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
 			    strlen((const char *) imodule));
 		if (settings->versestyle) {
-			if (strstr((const char *) imodule, "<BR>") == NULL
-			    && strstr((const char *) imodule,
-				      "<P>") == NULL)
+			if(strstr((const char *) imodule, "<BR>") == NULL){
 				sprintf(tmpBuf, " %s", "</font><br>");
-			else
+			}else{
 				sprintf(tmpBuf, " %s", "</font>");
+				//g_warning(tmpBuf);
+			}
 		} else
 			sprintf(tmpBuf, " %s", "</font>");
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
