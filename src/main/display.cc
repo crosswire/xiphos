@@ -121,6 +121,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 	gchar heading[32];
 	gboolean newparagraph = FALSE;
 	gboolean was_editable = gtk_html_get_editable(html);
+	
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
@@ -225,10 +226,71 @@ char GTKChapDisp::Display(SWModule &imodule)
 	g_free(ops);
 }
 
+char DialogEntryDisp::Display(SWModule &imodule) 
+{
+	GString *str = g_string_new(NULL);
+	const gchar *keytext = NULL;
+	int curPos = 0;
+	int type = be->module_type();
+	GtkHTML *html = GTK_HTML(gtkText);
+	MOD_FONT *mf = get_font(imodule.Name());
+	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
+	
+	(const char *)imodule;	// snap to entry
+	main_set_global_options(ops);
+	
+	if(type == 3)
+		keytext = be->treekey_get_local_name(be->get_treekey_offset());
+	else
+		keytext = imodule.KeyText();
+	
+	if(type == 4)
+		
+		g_string_printf(str, 	HTML_START
+				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+				"<font face=\"%s\" size=\"%s\">%s"
+				"</font></body></html>",
+				settings.bible_bg_color, 
+				settings.bible_text_color,
+				settings.link_color,
+				(mf->old_font)?mf->old_font:"",
+				(mf->old_font_size)?mf->old_font_size:"+0",
+				(const char *)imodule);	
+		
+	else
+		g_string_printf(str, 	HTML_START
+				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
+				"<a href=\"about://%s/%s\"><font color=\"%s\">"
+				"[%s]</font></a>[%s]<br>"
+				"<font face=\"%s\" size=\"%s\">%s"
+				"</font></body></html>",
+				settings.bible_bg_color, 
+				settings.bible_text_color,
+				settings.link_color,
+				imodule.Name(),
+				imodule.Description(),
+				settings.bible_verse_num_color,
+				imodule.Name(),
+				(gchar*)keytext,
+				(mf->old_font)?mf->old_font:"",
+				(mf->old_font_size)?mf->old_font_size:"+0",
+				(const char *)imodule);	
+	
+	gboolean was_editable = gtk_html_get_editable(html);
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+	if (str->len)
+		gtk_html_load_from_string(html,str->str,str->len);
+	gtk_html_set_editable(html, was_editable);
+	g_string_free(str, TRUE);
+	free_font(mf);	
+	g_free(ops);
+}
+
+
 
 char DialogChapDisp::Display(SWModule &imodule) 
 {
-	char tmpBuf[255];
 	VerseKey *key = (VerseKey *)(SWKey *)imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -237,7 +299,6 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gfloat adjVal;
 	MOD_FONT *mf = get_font(imodule.Name());
 	GtkHTML *html = GTK_HTML(gtkText);
-	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	GString *str = g_string_new(NULL);
 	gchar *buf;
 	gchar *buf2;
@@ -247,19 +308,19 @@ char DialogChapDisp::Display(SWModule &imodule)
 	gchar heading[32];
 	gboolean newparagraph = FALSE;
 	gboolean was_editable = gtk_html_get_editable(html);
+	
 	g_string_printf(str,	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 				settings.bible_bg_color, 
 				settings.bible_text_color,
 				settings.link_color);
 
-	main_set_global_options(ops);
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() 
 				== curChapter && !imodule.Error()); imodule++) {
 		int x = 0;
 		sprintf(heading,"%d",x);
 		while((preverse 
-			= backend->get_entry_attribute("Heading","Preverse",
+			= be->get_entry_attribute("Heading","Preverse",
 							    heading)) != NULL) {
 			buf = g_strdup_printf("<br><b>%s</b><br><br>",preverse);
 			str = g_string_append(str, buf);
@@ -348,5 +409,4 @@ char DialogChapDisp::Display(SWModule &imodule)
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
 	free_font(mf);	
-	g_free(ops);
 }

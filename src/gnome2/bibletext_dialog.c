@@ -47,12 +47,12 @@
 #include "main/key.h"
 #include "main/xml.h"
 
-static void create_menu(TEXT_DATA * t ,GdkEventButton * event);
+static void create_menu(DIALOG_DATA * t ,GdkEventButton * event);
 
 /******************************************************************************
  * static - global to this file only
  */
-static TEXT_DATA *cur_vt;
+static DIALOG_DATA *cur_vt;
 static gboolean in_url;
 GtkTextBuffer *text_buffer;
 /******************************************************************************
@@ -111,7 +111,7 @@ void gui_on_lookup_bibletext_dialog_selection
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void btn_close_clicked(GtkButton * button,TEXT_DATA * vt)	
+ *   void btn_close_clicked(GtkButton * button,DIALOG_DATA * vt)	
  *
  * Description
  *   call gtk_widget_destroy to destroy the bibletext dialog
@@ -121,7 +121,7 @@ void gui_on_lookup_bibletext_dialog_selection
  *   void
  */
 
-static void close_text_dialog(TEXT_DATA * t)
+static void close_text_dialog(DIALOG_DATA * t)
 {
 	if (t->dialog) {
 		bible_freed = FALSE;
@@ -177,7 +177,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void display(TEXT_DATA * vt, gchar * key, gboolean show_key)	
+ *   void display(DIALOG_DATA * vt, gchar * key, gboolean show_key)	
  *
  * Description
  *   calls chapter_display to display module text
@@ -186,7 +186,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
  *   void
  */
 
-static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
+static void display(DIALOG_DATA * vt, gchar * key, gboolean show_key)
 {
 	if (!vt->is_rtol)
 		chapter_display(vt->html,
@@ -217,12 +217,12 @@ static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
  */
 
 static void link_clicked(GtkHTML * html, const gchar * url,
-			 TEXT_DATA * vt)
+			 DIALOG_DATA * vt)
 {
 	gchar *buf, *modName;
 	gchar newref[80];
 	static GtkWidget *dlg;
-//	cur_vt = vt;
+	cur_vt = vt;
 	
 	if(main_dialogs_url_handler(vt, url, TRUE))
 		return;
@@ -375,7 +375,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
  *   void
  */
 
-static void book_changed(GtkEditable * editable, TEXT_DATA * vt)
+static void book_changed(GtkEditable * editable, DIALOG_DATA * vt)
 {
 	gchar buf[256];
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
@@ -405,7 +405,7 @@ static void book_changed(GtkEditable * editable, TEXT_DATA * vt)
 
 static gboolean chapter_button_release_event(GtkWidget * widget,
 					     GdkEventButton * event,
-					     TEXT_DATA * vt)
+					     DIALOG_DATA * vt)
 {
 	G_CONST_RETURN gchar *bookname;
 	gchar *val_key;
@@ -442,7 +442,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 
 static gboolean verse_button_release_event(GtkWidget * widget,
 					   GdkEventButton * event,
-					   TEXT_DATA * vt)
+					   DIALOG_DATA * vt)
 {
 	const gchar *bookname;
 	gchar buf[256], *val_key;
@@ -481,7 +481,7 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 
 static gboolean entry_key_press_event(GtkWidget * widget,
 				      GdkEventKey * event,
-				      TEXT_DATA * vt)
+				      DIALOG_DATA * vt)
 {
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {
@@ -509,7 +509,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  *   void
  */
 
-static void dialog_destroy(GtkObject * object, TEXT_DATA * vt)
+static void dialog_destroy(GtkObject * object, DIALOG_DATA * vt)
 {
 	if (!bible_freed)
 		main_free_on_destroy(vt);
@@ -519,7 +519,7 @@ static void dialog_destroy(GtkObject * object, TEXT_DATA * vt)
 
 static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      GdkEventMotion * event,
-					      TEXT_DATA * vt)
+					      DIALOG_DATA * vt)
 {
 	cur_vt = vt;
 	return FALSE;
@@ -532,7 +532,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void dialog_url(GtkHTML * html, const gchar * url, TEXT_DATA * vt)	
+ *   void dialog_url(GtkHTML * html, const gchar * url, DIALOG_DATA * vt)	
  *
  * Description
  *   
@@ -542,7 +542,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  */
 
 static void dialog_url(GtkHTML * html, const gchar * url,
-		       TEXT_DATA * vt)
+		       DIALOG_DATA * vt)
 {
 	gchar buf[255], *buf1;
 	gchar *url_buf = NULL;
@@ -747,7 +747,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
+static GtkWidget *create_nav_toolbar(DIALOG_DATA * vt)
 {
 	GtkWidget *toolbar_nav;
 	GtkWidget *cbBook;
@@ -856,7 +856,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
  *   #include ".h"
  *
  *  gboolean on_text_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)
+			    GdkEventButton * event, DIALOG_DATA * t)
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -866,7 +866,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
  */
 static gboolean on_text_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
-					TEXT_DATA * t)
+					DIALOG_DATA * t)
 {
 	switch (event->button) {
 	case 1:
@@ -889,7 +889,7 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
  *   #include "gui/bibletext_dialog.h"
  *
  *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)	
+			    GdkEventButton * event, DIALOG_DATA * t)	
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -900,7 +900,7 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
 
 static gboolean on_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
-					TEXT_DATA * t)
+					DIALOG_DATA * t)
 {
 	
 	gchar *key;
@@ -947,7 +947,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 
 static gboolean textview_button_release_event(GtkWidget * widget,
 					GdkEventButton * event,
-					TEXT_DATA * t)
+					DIALOG_DATA * t)
 {
 	extern gboolean in_url;
 	gchar *key;
@@ -1137,7 +1137,7 @@ static void create_text_tags(GtkTextBuffer *buffer, gchar * rtl_font)
  * Synopsis
  *   #include "gui/bibletext_dialog.h"
  *
- *   void create_bibletext_dialog(TEXT_DATA * vt)	
+ *   void create_bibletext_dialog(DIALOG_DATA * vt)	
  *
  * Description
  *   create a text dialog
@@ -1146,7 +1146,7 @@ static void create_text_tags(GtkTextBuffer *buffer, gchar * rtl_font)
  *   void 
  */
 
-void gui_create_bibletext_dialog(TEXT_DATA * vt)
+void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 {
 
 	GtkWidget *vbox33;
@@ -1205,12 +1205,12 @@ void gui_create_bibletext_dialog(TEXT_DATA * vt)
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_button_release_event),
-				   (TEXT_DATA *) vt);
+				   (DIALOG_DATA *) vt);
 		g_signal_connect(GTK_OBJECT(vt->html),
 				   "button_press_event",
 				   G_CALLBACK
 				   (on_text_button_press_event),
-				   (TEXT_DATA *) vt);
+				   (DIALOG_DATA *) vt);
 	}
 	else { 
 		/* use gtktextview for right to left text */
@@ -1228,7 +1228,7 @@ void gui_create_bibletext_dialog(TEXT_DATA * vt)
 				   "button_release_event",
 				   G_CALLBACK
 				   (textview_button_release_event),
-				   (TEXT_DATA *) t);*/
+				   (DIALOG_DATA *) t);*/
 		if(gdk_font) g_free(gdk_font);
 
 	}
@@ -1425,8 +1425,8 @@ static void lookup_bibletext_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (settings.use_percomm_dialog)
-		gui_open_commentary_editor((gchar *) user_data);
+//	if (settings.use_percomm_dialog)
+//		gui_open_commentary_editor((gchar *) user_data);
 /*	else {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.workbook_lower),
@@ -1482,7 +1482,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void global_option_red_words(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_red_words(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->words_in_red = menuitem->active;
@@ -1508,7 +1508,7 @@ static void global_option_red_words(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void global_option_strongs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_strongs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->strongs = menuitem->active;
@@ -1534,7 +1534,7 @@ static void global_option_strongs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void global_option_morphs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_morphs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->morphs = menuitem->active;
@@ -1560,7 +1560,7 @@ static void global_option_morphs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void global_option_footnotes(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_footnotes(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->footnotes = menuitem->active;
@@ -1586,7 +1586,7 @@ static void global_option_footnotes(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void global_option_greekaccents(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_greekaccents(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->greekaccents = menuitem->active;
@@ -1612,7 +1612,7 @@ static void global_option_greekaccents(GtkCheckMenuItem * menuitem, TEXT_DATA * 
  *   void
  */
 
-static void global_option_lemmas(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_lemmas(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->lemmas = menuitem->active;
@@ -1638,7 +1638,7 @@ static void global_option_lemmas(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void global_option_scripturerefs(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_scripturerefs(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->scripturerefs = menuitem->active;
@@ -1664,7 +1664,7 @@ static void global_option_scripturerefs(GtkCheckMenuItem * menuitem, TEXT_DATA *
  *   void
  */
 
-static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->hebrewpoints = menuitem->active;
@@ -1690,7 +1690,7 @@ static void global_option_hebrewpoints(GtkCheckMenuItem * menuitem, TEXT_DATA * 
  *   void
  */
 
-static void global_option_hebrewcant(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_hebrewcant(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->hebrewcant = menuitem->active;
@@ -1716,7 +1716,7 @@ static void global_option_hebrewcant(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void global_option_headings(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+static void global_option_headings(GtkCheckMenuItem * menuitem, DIALOG_DATA * t)
 {
 	gchar *url = g_strdup_printf("sword://%s/%s", t->mod_name, t->key);
 	t->ops->headings = menuitem->active;
@@ -1732,7 +1732,7 @@ static void global_option_headings(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  * Synopsis
  *   #include "gui/bibletext_menu.h"
  *
- *   void (GtkMenuItem * menuitem, TEXT_DATA * t)	
+ *   void (GtkMenuItem * menuitem, DIALOG_DATA * t)	
  *
  * Description
  *   
@@ -1741,7 +1741,7 @@ static void global_option_headings(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
  *   void
  */
 
-static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+static void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * t)
 {
 	close_text_dialog(cur_vt);
 }
@@ -1755,7 +1755,7 @@ static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  *   #include "gui/bibletext_menu.h"
  *
  *  void on_sync_activate(GtkMenuItem * menuitem, 
-						TEXT_DATA * vt)	
+						DIALOG_DATA * vt)	
  *
  * Description
  *   
@@ -2024,7 +2024,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
+static void create_menu(DIALOG_DATA * t ,GdkEventButton * event)
 {
 	GtkWidget *menu1;
 	GtkWidget *lookup_selection_menu;
@@ -2114,7 +2114,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[2].widget),
 				"activate",
 				G_CALLBACK(global_option_red_words), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if ((check_for_global_option
 	     (mod_name, "GBFStrongs"))
@@ -2131,7 +2131,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[3].widget),
 				"activate",
 				G_CALLBACK(global_option_strongs), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if ((check_for_global_option(mod_name, "GBFMorph")) ||
 	    (check_for_global_option(mod_name, "ThMLMorph")) ||
@@ -2143,7 +2143,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[4].widget),
 				"activate",
 				G_CALLBACK(global_option_morphs), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if ((check_for_global_option(mod_name, "GBFFootnotes")) ||
 	    (check_for_global_option(mod_name, "ThMLFootnotes")) ||
@@ -2155,7 +2155,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[5].widget),
 				"activate",
 				G_CALLBACK(global_option_footnotes), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "UTF8GreekAccents")) {
 		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
@@ -2165,7 +2165,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[6].widget),
 				"activate",
 				G_CALLBACK(global_option_greekaccents), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLLemma")) {
 		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
@@ -2175,7 +2175,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[7].widget),
 				"activate",
 				G_CALLBACK(global_option_lemmas), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLScripref") ||
 	    (check_for_global_option(mod_name, "OSISScripref"))) {
@@ -2186,7 +2186,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[8].widget),
 				"activate",
 				G_CALLBACK(global_option_scripturerefs), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
@@ -2196,7 +2196,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[9].widget),
 				"activate",
 				G_CALLBACK(global_option_hebrewpoints), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "UTF8Cantillation")) {
 		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
@@ -2206,7 +2206,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[10].widget),
 				"activate",
 				G_CALLBACK(global_option_hebrewcant), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLHeadings") ||
 	    (check_for_global_option(mod_name, "OSISHeadings"))) {
@@ -2217,7 +2217,7 @@ static void create_menu(TEXT_DATA * t ,GdkEventButton * event)
 		g_signal_connect(GTK_OBJECT(module_options_menu_uiinfo[11].widget),
 				"activate",
 				G_CALLBACK(global_option_headings), 
-				(TEXT_DATA *)t);
+				(DIALOG_DATA *)t);
 	}
 	if (check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");

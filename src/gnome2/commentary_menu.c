@@ -26,7 +26,7 @@
 #include <gnome.h>
 
 #include "gui/commentary.h"
-#include "gui/commentary_dialog.h"
+//#include "gui/commentary_dialog.h"
 #include "gui/commentary_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/gtkhtml_display.h"
@@ -57,7 +57,7 @@
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *   void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)	
+ *   void on_copy_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   copy selected text to clipboard
@@ -66,7 +66,7 @@
  *   void
  */
 
-static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_copy_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gui_copy_html(c->html);
 }
@@ -78,7 +78,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *   void on_print_activate(GtkMenuItem * menuitem, COMM_DATA * c)	
+ *   void on_print_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   send contents of Bible pane (window) to the printer
@@ -87,7 +87,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   void
  */
 
-static void on_print_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_print_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gui_html_print(c->html, FALSE);
 }
@@ -100,7 +100,7 @@ static void on_print_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void on_find_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   opens find dialog
@@ -109,7 +109,7 @@ static void on_print_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   
  */
 
-static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_find_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gui_find_dlg(c->html, c->mod_name, FALSE, NULL);
 }
@@ -160,7 +160,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
  *  #include "gui/commentary_menu.h"
  *
  *  void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
- *                                         COMM_DATA * c) 	
+ *                                         DIALOG_DATA * c) 	
  *
  * Description
  *   lookup seledtion in current dict/lex module
@@ -170,7 +170,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
  */
 
 static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
-					      COMM_DATA * c)
+					      DIALOG_DATA * c)
 {
 	gchar *dict_key = gui_get_word_or_selection(c->html, FALSE);
 	if (dict_key) {
@@ -233,8 +233,8 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (settings.use_percomm_dialog)
-		gui_open_commentary_editor((gchar *) user_data);
+//	if (settings.use_percomm_dialog)
+//		gui_open_commentary_editor((gchar *) user_data);
 /*	else {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.workbook_lower),
@@ -252,7 +252,7 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void on_view_new_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   opens view text dialog
@@ -261,9 +261,9 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-static void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_view_new_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
-	gui_open_commentary_dialog(c->mod_name);
+//	gui_open_commentary_dialog(c->mod_name);
 }
 
 /******************************************************************************
@@ -273,7 +273,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *   void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c)
+ *   void gui_unlock_commentary(GtkMenuItem *menuitem, DIALOG_DATA *c)
  *
  * Description
  *   open cipher dialog to add cipher key to unlock module
@@ -282,7 +282,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   void
  */
 
-void gui_unlock_commentary(GtkMenuItem * menuitem, COMM_DATA * c)
+void gui_unlock_commentary(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gchar *cipher_key;
 
@@ -304,7 +304,7 @@ void gui_unlock_commentary(GtkMenuItem * menuitem, COMM_DATA * c)
  *   #include "gui/commentary_menu.h"
  *
  *   void set_module_font_activate(GtkMenuItem * menuitem,
-				     COMM_DATA * c)
+				     DIALOG_DATA * c)
  *
  * Description
  *   
@@ -314,7 +314,7 @@ void gui_unlock_commentary(GtkMenuItem * menuitem, COMM_DATA * c)
  */
 
 static void set_module_font_activate(GtkMenuItem * menuitem,
-				     COMM_DATA * c)
+				     DIALOG_DATA * c)
 {
 	gui_set_module_font(c->mod_name);
 
@@ -331,7 +331,7 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
  *   #include "gui/commentary_menu.h"
  *
  *   void on_comm_showtabs_activate(GtkMenuItem * menuitem,
- *				      COMM_DATA * c)
+ *				      DIALOG_DATA * c)
  *
  * Description
  *   
@@ -341,7 +341,7 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
  */
 
 static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
-				      COMM_DATA * c)
+				      DIALOG_DATA * c)
 {
 	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 /*	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
@@ -356,7 +356,7 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void on_sync_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -365,7 +365,7 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_sync_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	if (c->is_dialog)
 		gui_display_commentary_in_dialog(settings.currentverse);
@@ -383,7 +383,7 @@ static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void on_sync_toggle(GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void on_sync_toggle(GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -392,7 +392,7 @@ static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   void
  */
 
-static void on_sync_toggle(GtkCheckMenuItem * menuitem, COMM_DATA * c)
+static void on_sync_toggle(GtkCheckMenuItem * menuitem, DIALOG_DATA * c)
 {
 /*	c->sync = menuitem->active;
 	if (c->sync)
@@ -408,7 +408,7 @@ static void on_sync_toggle(GtkCheckMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void (GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void (GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -417,7 +417,7 @@ static void on_sync_toggle(GtkCheckMenuItem * menuitem, COMM_DATA * c)
  *   void
  */
 
-static void on_prev_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_prev_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gchar *key;
 
@@ -439,7 +439,7 @@ static void on_prev_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void (GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void (GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -448,7 +448,7 @@ static void on_prev_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   void
  */
 
-static void on_next_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_next_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gchar *key;
 
@@ -471,7 +471,7 @@ static void on_next_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void (GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void (GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -481,7 +481,7 @@ static void on_next_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  */
 
 static void on_chapter_heading_activate(GtkMenuItem * menuitem,
-					COMM_DATA * c)
+					DIALOG_DATA * c)
 {
 	c->chapter_heading = TRUE;
 	if (c->is_dialog)
@@ -500,7 +500,7 @@ static void on_chapter_heading_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *  void (GtkMenuItem * menuitem, COMM_DATA * c)	
+ *  void (GtkMenuItem * menuitem, DIALOG_DATA * c)	
  *
  * Description
  *   
@@ -510,7 +510,7 @@ static void on_chapter_heading_activate(GtkMenuItem * menuitem,
  */
 
 static void on_book_heading_activate(GtkMenuItem * menuitem,
-				     COMM_DATA * c)
+				     DIALOG_DATA * c)
 {
 	c->book_heading = TRUE;
 //	gui_display_commentary_with_struct(c, settings.currentverse);
@@ -542,7 +542,7 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 	module_name = module_name_from_description((gchar *) user_data);
 	if(!module_name) 
 		return;
-	gui_open_commentary_dialog(module_name);
+//	gui_open_commentary_dialog(module_name);
 	if(module_name) g_free(module_name);
 }
 
@@ -555,7 +555,7 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *   void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)	
+ *   void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * t)	
  *
  * Description
  *   
@@ -564,7 +564,7 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_close_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gui_close_comm_dialog(c);
 }
@@ -578,7 +578,7 @@ static void on_close_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   #include "gui/commentary_menu.h"
  *
  *  void on_about_module_activate(GtkMenuItem * menuitem, 
-						TEXT_DATA * vt)	
+						DIALOG_DATA * vt)	
  *
  * Description
  *   
@@ -587,7 +587,7 @@ static void on_close_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   void
  */
 
-static void on_about_module_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static void on_about_module_activate(GtkMenuItem * menuitem, DIALOG_DATA * c)
 {
 	gui_display_about_module_dialog(c->mod_name, FALSE);
 }
@@ -599,7 +599,7 @@ static void on_about_module_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  * Synopsis
  *   #include "gui/commentary_menu.h"
  *
- *   GtkWidget *gui_create_pm_text(COMM_DATA * c)
+ *   GtkWidget *gui_create_pm_text(DIALOG_DATA * c)
  *
  * Description
  *   create popup menu for text module - attached to html widget
@@ -608,7 +608,7 @@ static void on_about_module_activate(GtkMenuItem * menuitem, COMM_DATA * c)
  *   GtkWidget*
  */
 
-GtkWidget *gui_create_pm_comm(COMM_DATA * c)
+GtkWidget *gui_create_pm_comm(DIALOG_DATA * c)
 {
 	GtkWidget *pm;
 	GtkAccelGroup *pm_accels;

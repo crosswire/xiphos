@@ -26,13 +26,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#include "gui/bibletext.h"
-
-#include "main/global_ops.hh"
+	
 #include "main/module_dialogs.h"
 
 
-void gui_create_bibletext_dialog(TEXT_DATA * vt);
+void gui_create_bibletext_dialog(DIALOG_DATA * vt);
 void gui_on_lookup_bibletext_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
 

@@ -184,6 +184,11 @@ char *ModuleDialogs::get_module_key() {
 }
 
 
+void ModuleDialogs::save_entry(const char * entry) {
+	mod->setEntry((const char *) entry);
+}
+
+
 int ModuleDialogs::is_module(const char *mod_name) {
 	SWMgr *tmp_mgr = new SWMgr();
 	ModMap::iterator it = tmp_mgr->Modules.find(mod_name);
@@ -200,6 +205,8 @@ int ModuleDialogs::module_type(void) {
 	if (!strcmp(mod->Type(), TEXT_MODS)) {
 		return TEXT_TYPE;
 	} else if (!strcmp(mod->Type(), COMM_MODS)) {
+		if (!strcmp((char *) mod->getConfigEntry("ModDrv"), "RawFiles")) 
+			return PERCOM_TYPE;		
 		return COMMENTARY_TYPE;
 	} else if (!strcmp(mod->Type(), DICT_MODS)) {
 		return DICTIONARY_TYPE;

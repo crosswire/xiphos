@@ -28,8 +28,8 @@ extern "C" {
 
 #include "gui/commentary_dialog.h"
 	
-GtkWidget *gui_create_pm_comm(COMM_DATA *c);
-void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c);	
+GtkWidget *gui_create_pm_comm(DIALOG_DATA *c);
+void gui_unlock_commentary(GtkMenuItem *menuitem, DIALOG_DATA *c);	
 #ifdef __cplusplus
 }
 #endif

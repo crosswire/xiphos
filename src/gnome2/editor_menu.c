@@ -57,7 +57,7 @@
 #include "gui/gnomesword.h"
 #include "gui/dialog.h"
 #include "gui/find_dialog.h"
-#include "gui/commentary_dialog.h"
+//#include "gui/commentary_dialog.h"
 #include "gui/widgets.h"
 
 #include "main/percomm.h"
