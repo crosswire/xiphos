@@ -37,6 +37,7 @@ struct _viewtext {
 	TEXT_DATA *t;
 };
 
+void gui_sync_bibletext_dialog(void);
 void gui_on_lookup_bibletext_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
 void gui_close_text_dialog(void);

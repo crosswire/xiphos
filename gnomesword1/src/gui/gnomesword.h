@@ -42,6 +42,8 @@ struct  _app_widgets {
 		*app,  /* main form */
 		*appbar, /* gnome status/progress bar */
 		*epaned, /* shortcut bar and main panle */
+		*vpaned, /* shortcut bar and main panle */
+		*hpaned, /* shortcut bar and main panle */
 		*shortcutbar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
@@ -53,6 +55,7 @@ struct  _app_widgets {
 		*notebook_text,  /* notebook - texts */
 		*notebook_percomm,  /* notebook - personal comments */
 		*vbox_percomm,  /* vbox for personal comments notebook */
+		*vbox_text,  /* vbox for  */
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */

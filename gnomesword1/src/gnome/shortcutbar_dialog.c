@@ -68,8 +68,7 @@ void gui_attach_detach_shortcutbar(void)
 		gtk_widget_show(widgets.shortcutbar);
 		e_paned_set_position(E_PANED(widgets.epaned), 0);
 		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+				     (widgets.hpaned),
 				     biblepanesize);
 		gtk_widget_show(widgets.dock_sb);
 	} else {
@@ -78,9 +77,7 @@ void gui_attach_detach_shortcutbar(void)
 		    (settings.gs_width - settings.shortcutbar_width) / 2;
 		e_paned_set_position(E_PANED(widgets.epaned),
 				     settings.shortcutbar_width);
-		e_paned_set_position(E_PANED
-				     (gui_lookup_widget
-				      (widgets.app, "hpaned1")),
+		e_paned_set_position(E_PANED(widgets.hpaned),
 				     biblepanesize);
 		gtk_widget_reparent(widgets.shortcutbar,
 				    widgets.epaned);

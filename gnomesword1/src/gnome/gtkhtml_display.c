@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * gtkhtml_dispaly.c - display Sword modules using GtkHTML 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -403,7 +403,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	    buf[500],
 	    *tmpkey, tmpbuf[256], *use_font, *use_font_size, *text_str;
 	gchar *paragraphMark;
-
+	gint count;
 	gboolean was_editable = FALSE;
 	gboolean newparagraph = FALSE;
 	gboolean use_gtkhtml_font = FALSE;
@@ -469,13 +469,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
 			       utf8len);
 	}
-
-	for (i = 1;; i++) {
+	count  = verse_count(tmpkey);
+	for (i = 1 ;i <= count; i++) {
 		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		g_free(tmpkey);
 		tmpkey = get_valid_key(tmpbuf);
-		if (cur_chapter != get_chapter_from_key(tmpkey))
-			break;
 
 		if (i == cur_verse)
 			textColor = settings.currentverse_color;
