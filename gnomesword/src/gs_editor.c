@@ -452,8 +452,6 @@ static gint
 html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		    GSHTMLEditorControlData * cd)
 {
-	//HTMLEngine *engine = cd->html->engine;
-
 	switch (event->button) {
 	case 1:
 		if (event->type == GDK_2BUTTON_PRESS && cd->obj
@@ -463,7 +461,6 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 					       "button_release_event",
 					       GTK_SIGNAL_FUNC(release),
 					       cd);
-
 		}
 
 		else
@@ -477,6 +474,7 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 					     "button_press_event");
 		break;
 	default:
+		break;
 	}
 
 	return FALSE;
