@@ -40,6 +40,9 @@
 /* Define if you have the <dirent.h> header file. */
 #undef HAVE_DIRENT_H
 
+/* Define if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
 /* Define if you have the <errno.h> header file. */
 #undef HAVE_ERRNO_H
 
@@ -57,6 +60,9 @@
 
 /* Define if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
+
+/* Define if your <locale.h> file defines LC_MESSAGES. */
+#undef HAVE_LC_MESSAGES
 
 /* Define if you have the `i' library (-li). */
 #undef HAVE_LIBI
@@ -206,9 +212,6 @@
 
 /* Define if you want to use spell checking */
 #undef WITH_SPC
-
-/* Define if you need to in order for stat and other things to work. */
-#undef _POSIX_SOURCE
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const
