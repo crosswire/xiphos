@@ -89,12 +89,17 @@ char SW_GBFHTML::ProcessText(char *text, int maxlen, const SWKey *key)
 										to += strlen(to);              
 										break;
 									default: //-- morphological tags
-										strcpy(to," <small><em>(");	
+										strcpy(to," <small><em>(<a href=\"M");	
 										to += strlen(to);
 										for (i=2; i < strlen(token); i++) 
 							       				*to++ = token[i];
-										strcpy(to,")</em></small> ");
+										strcpy(to," \">");
+										to += strlen(to);
+										for (i = 2;	i < strlen(token); i++)
+											*to++ = token[i];
+										strcpy(to,"</a>)</em></small> ");
 										to += strlen(to);  
+										break;
 							}
 						continue; 	
 					}										

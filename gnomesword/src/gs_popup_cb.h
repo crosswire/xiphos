@@ -44,15 +44,7 @@ void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_about_this_module1_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-void on_about_this_module2_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-void on_about_this_module3_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-void on_about_this_module4_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-void on_about_this_module6_activate(GtkMenuItem * menuitem,
+void on_about_this_module_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
 void on_auto_scroll1_activate(GtkMenuItem * menuitem,
 				  gpointer user_data);					

@@ -42,6 +42,7 @@
       <last_modification_time>Fri, 09 Jul 1999 18:26:02 GMT</last_modification_time>
     </signal>
     <stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 
   <widget>
@@ -56,6 +57,7 @@
       <last_modification_time>Fri, 09 Jul 1999 18:26:11 GMT</last_modification_time>
     </signal>
     <stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 </widget>
 
@@ -84,6 +86,7 @@
       <last_modification_time>Sat, 10 Jul 1999 16:55:06 GMT</last_modification_time>
     </signal>
     <stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 
   <widget>
@@ -98,6 +101,7 @@
       <last_modification_time>Sat, 10 Jul 1999 16:55:12 GMT</last_modification_time>
     </signal>
     <stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 </widget>
 
@@ -1050,13 +1054,10 @@ Revelation
 	      </child>
 
 	      <widget>
-		<class>GtkFrame</class>
-		<name>frame9</name>
-		<border_width>2</border_width>
-		<width>325</width>
-		<label>KJV</label>
-		<label_xalign>0</label_xalign>
-		<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+		<class>GtkVBox</class>
+		<name>vbox32</name>
+		<homogeneous>False</homogeneous>
+		<spacing>0</spacing>
 		<child>
 		  <shrink>True</shrink>
 		  <resize>False</resize>
@@ -1064,14 +1065,40 @@ Revelation
 
 		<widget>
 		  <class>GtkNotebook</class>
-		  <name>nbText</name>
-		  <show_tabs>False</show_tabs>
-		  <show_border>False</show_border>
+		  <name>nbTextMods</name>
+		  <height>31</height>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>switch_page</name>
+		    <handler>on_nbTextMods_switch_page</handler>
+		    <last_modification_time>Mon, 02 Jul 2001 17:01:52 GMT</last_modification_time>
+		  </signal>
+		  <show_tabs>True</show_tabs>
+		  <show_border>True</show_border>
 		  <tab_pos>GTK_POS_TOP</tab_pos>
-		  <scrollable>False</scrollable>
+		  <scrollable>True</scrollable>
 		  <tab_hborder>2</tab_hborder>
 		  <tab_vborder>2</tab_vborder>
 		  <popup_enable>False</popup_enable>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>True</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkFrame</class>
+		  <name>frame9</name>
+		  <width>325</width>
+		  <label></label>
+		  <label_xalign>0</label_xalign>
+		  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+		  <child>
+		    <padding>0</padding>
+		    <expand>True</expand>
+		    <fill>True</fill>
+		  </child>
 
 		  <widget>
 		    <class>GtkScrolledWindow</class>
@@ -1085,78 +1112,6 @@ Revelation
 		    <widget>
 		      <class>Placeholder</class>
 		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label131</name>
-		    <label>label131</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-
-		  <widget>
-		    <class>GtkVBox</class>
-		    <name>vbox19</name>
-		    <homogeneous>False</homogeneous>
-		    <spacing>0</spacing>
-
-		    <widget>
-		      <class>GtkScrolledWindow</class>
-		      <name>scrolledwindow18</name>
-		      <border_width>2</border_width>
-		      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-		      <child>
-			<padding>0</padding>
-			<expand>True</expand>
-			<fill>True</fill>
-		      </child>
-
-		      <widget>
-			<class>GtkText</class>
-			<name>moduleText</name>
-			<can_focus>True</can_focus>
-			<has_focus>True</has_focus>
-			<signal>
-			  <name>button_press_event</name>
-			  <handler>on_moduleText_button_press_event</handler>
-			  <last_modification_time>Tue, 20 Apr 1999 20:08:53 GMT</last_modification_time>
-			</signal>
-			<signal>
-			  <name>drag_begin</name>
-			  <handler>on_moduleText_drag_begin</handler>
-			  <last_modification_time>Sat, 15 Jul 2000 16:56:59 GMT</last_modification_time>
-			</signal>
-			<signal>
-			  <name>enter_notify_event</name>
-			  <handler>on_moduleText_enter_notify_event</handler>
-			  <last_modification_time>Wed, 19 Jul 2000 15:45:08 GMT</last_modification_time>
-			</signal>
-			<editable>False</editable>
-			<text></text>
-		      </widget>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label132</name>
-		    <label>label132</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
 		  </widget>
 		</widget>
 	      </widget>
