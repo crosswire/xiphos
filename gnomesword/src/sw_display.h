@@ -60,6 +60,12 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 	InterlinearDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
 };
+//----------------------------------------------------------------------------------------------
+class SearchResultsDisp:public GtkHTMLEntryDisp { public:
+	SearchResultsDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);

@@ -618,3 +618,4 @@ gdouble *hex_to_gdouble_arr(gchar *color)
 	
 	return tmpcol;
 }
+

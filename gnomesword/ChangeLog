@@ -1,3 +1,7 @@
+2001-10-02 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* change look of search results - to give preview of verses found
+
 2001-10-01 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* fixed another shortcut bar bug - caused crash when deleting last 
