@@ -1,0 +1,128 @@
+<!-- Preferences -->
+<chapter id="preferences">
+	<title>Preferences</title>
+
+<!-- Introduction -->
+	<sect1 id="preferences-introduction">
+  		<title>Introduction To Preferences</title>
+		<figure>
+			<title>The Preference Dialog</title>
+	        <screenshot>
+	        	<mediaobject>
+	         		<imageobject>
+		     	    	<imagedata fileref="figures/preferences" format="PNG"/>
+					</imageobject>
+		        	<textobject>
+			        	<phrase>The Preference Dialog</phrase>
+					</textobject>
+		        </mediaobject>
+		 	</screenshot>
+		</figure>
+	</sect1>
+	
+<!-- Fonts And Colors -->
+	<sect1 id="fonts-and-colors">
+		<title>Fonts And Colors</title>
+		<sect2 id="font-color">
+			<title>Setting Font Colors</title>
+			<figure>
+	        	<title>Fonts Colors</title>
+     			<screenshot>
+		       		<mediaobject>
+			       		<imageobject>
+			 	       		<imagedata fileref="figures/preferences_fonts-color" format="PNG"/>
+			        	</imageobject>
+		         		<textobject>
+		     	 	    	<phrase>Font Colors Settings</phrase>
+			        	</textobject>
+				    </mediaobject>
+				</screenshot>
+			</figure>
+		</sect2>
+		
+		<sect2 id="font-misc">
+			<title>Miscellaneous Font Settings</title>
+			<figure>
+	        	<title>Misc Font Settings</title>
+     			<screenshot>
+			    	<mediaobject>
+		       			<imageobject>
+				 	    	<imagedata fileref="figures/preferences_fonts-misc" format="PNG"/>
+			        	</imageobject>
+		         		<textobject>
+			     	 		<phrase>Misc Font Settings</phrase>
+			        	</textobject>
+		        	</mediaobject>
+				</screenshot>
+			</figure>
+		</sect2>
+	</sect1>
+	
+<!-- General Settings -->
+	<sect1 id="general-settings">
+		<title>General Settings</title>
+		<sect2 id="tab-pane">
+			<title>Tabs and Pane Settings</title>
+			<figure>
+	        	<title>Tab and Pane Settings</title>
+	   			<screenshot>
+			    	<mediaobject>
+		       			<imageobject>
+				 	    	<imagedata fileref="figures/preferences_general-tabs" format="PNG"/>
+			        	</imageobject>	
+			         	<textobject>
+		     	 			<phrase>Tab and Pane Settings</phrase>
+			        	</textobject>
+		       		</mediaobject>
+		 		</screenshot>
+			</figure>
+		</sect2>
+	</sect1>
+	
+<!-- Module Settings -->
+	<sect1 id="module-settings">
+		<title>Module Settings</title>
+		<sect2 id="main-modules">
+			<title>Main Module Settings</title>
+			<figure>
+	        	<title></title>
+    			<screenshot>
+			    	<mediaobject>
+		       			<imageobject>
+			 	       		<imagedata fileref="figures/preferences_modules-main" format="PNG"/>
+			        	</imageobject>
+		         		<textobject>
+		     	 	    	<phrase></phrase>
+			        	</textobject>
+		       		</mediaobject>
+		 		</screenshot>
+			</figure>
+			<figure>
+	        	<title></title>
+    			<screenshot>
+			    	<mediaobject>
+		       			<imageobject>
+			 	       		<imagedata fileref="figures/preferences_modules-parallel" format="PNG"/>
+			        	</imageobject>
+		         		<textobject>
+		     	 	    	<phrase></phrase>
+			        	</textobject>
+		       		</mediaobject>
+		 		</screenshot>
+			</figure>
+			<figure>
+	        	<title></title>
+    			<screenshot>
+			    	<mediaobject>
+		       			<imageobject>
+			 	       		<imagedata fileref="figures/preferences_modules-misc" format="PNG"/>
+			        	</imageobject>
+		         		<textobject>
+		     	 	    	<phrase></phrase>
+			        	</textobject>
+		       		</mediaobject>
+		 		</screenshot>
+			</figure>
+		</sect2>
+	</sect1>
+</chapter>

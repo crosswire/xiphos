@@ -1,0 +1,381 @@
+<chapter id="interface">
+	<title>The GnomeSword Interface</title>
+	
+ <!-- ============= Menubar  ============-->
+	<sect1 id="menubar">
+   		<title>Menubar</title>
+   		<para>
+   		At the top of the <application>GnomeSword</application> main window is the menubar. 
+   		Almost all of the functions are available by activating the appropriate 
+   		menu item. The functions have been grouped according to their type. For 
+   		example, the file operations have been grouped into 
+   		the <guisubmenu>File</guisubmenu> menu.
+   		</para>
+        <figure id="menubar">
+			<title>Menubar</title>
+	  		<screenshot>
+	      		<screeninfo>GnomeSword menubar</screeninfo>
+    	   		<graphic fileref="figures/interface_menubar" format="PNG" ></graphic>
+	      	</screenshot>
+    	</figure>
+	</sect1>
+	
+<!-- ============= Toolbars  ============-->
+	<sect1 id="toolbars">
+   		<title>Toolbars</title>
+   		<para>
+    	The function of the Toolbar is to allow quick and easy control over the Bible Pane.
+		Activation of the Toolbar option is done by simply moving the mouse cursor over the 
+		desired toolbar button and selecting it. A tooltip will appear if the mouse cursor 
+		is held stationary over a toolbar button, describing the function of the button. 
+    	</para>
+		<figure id="toolbar">
+			<title>ToolBar</title>
+			<screenshot>
+      				<mediaobject>
+						<imageobject>
+	    					<imagedata fileref="figures/interface_toolbar" format="PNG"/>
+						</imageobject>
+						<textobject>
+				        	<phrase>The Toolbar </phrase>
+						</textobject>
+			       </mediaobject>
+			</screenshot>
+		</figure>			
+		<para>
+		The <interface>Toolbar</interface> consists of the following functions:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+				History View Toggle
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Bible Book Selector
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Bible Chapter Selector
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Bible Verse Selector
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+				Bible Passage Summary
+				</para>
+			</listitem>
+		</itemizedlist>
+		
+		<sect2>
+			<title>History Forward/Backward Selector</title>
+			<para>
+			Allows quick and easy switching between current and previous passage selections.
+			</para>
+		</sect2>
+			
+		<sect2 id="gnomesword-toolbar-parallel">
+			<title>Parallel View Toggle</title>
+			<para>
+			Allows quick switching between single translation and multiple translation displays.
+			</para>		
+		</sect2>
+			
+		<sect2 id="gnomesword-toolbar-book">
+			<title>Bible Book Selector</title>
+			<para>		
+			Allows quick selection of the Biblical book to be displayed in the <interface>Bible Text Pane</interface> and 
+			<interface>Commentary Pane</interface>. Changes take immediate effect.
+			</para>
+		</sect2>
+			
+		<sect2 id="gnomesword-toolbar-chapter">
+			<title>Bible Chapter Selector</title>
+			<para>
+			Allows quick selection of Biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and 
+			<interface>Commentary Pane</interface>. Changes take immediate effect.
+			</para>
+		</sect2>
+			
+		<sect2 id="gnomesword-toolbar-verse">
+			<title>Bible Verse Selector</title>
+			<para>
+			Allows quick selection of Biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and 
+			<interface>Commentary Pane</interface>. Changes take immediate effect.
+			</para>
+		</sect2>
+		
+		<sect2 id="gnomesword-toolbar-summary">
+			<title>Bible Passage Summary</title>
+			<para>
+			Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and 
+			<interface>Commentary Pane</interface>. Changes only take effect once button on the right is clicked.
+			</para>
+			<warning>
+				<para>
+				Ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information
+				will be displayed.
+				</para>
+			</warning>
+		</sect2>
+	</sect1>
+   
+<!-- ============= Sidepane  ============-->  
+	<sect1 id="gnomesword-sidepane">
+   	 	<title>The Sidebar</title>
+		<figure>
+			<title>The Sidebar</title>
+   		  	<screenshot>
+			   	<mediaobject>
+					<imageobject>
+         				<imagedata fileref="figures/interface_sidepane" format="PNG"/>
+					</imageobject>
+	 				<textobject>
+						<phrase>The Sidebar</phrase>
+					</textobject>
+				</mediaobject>
+     		</screenshot>
+		</figure>
+		<para>
+     	On the left hand side of <application>GnomeSword2</application> there is the shortcut bar. Here the
+     	user can quickly and easily switch between the different Bible texts,
+     	commentaries, dictionaries and general books. You can also select and
+     	edit your bookmarks, view search results, view verse lists and view your
+     	daily devotional book by simply clicking on the <guibutton>module</guibutton>
+     	icon and select your selection.
+   		</para>
+	</sect1>
+<!-- ============= Bible Text Pane  ============--> 
+	<sect1 id="gnomesword-bible">
+   		<title>The Bible Text Pane</title>
+  		<figure>
+   			<title>The Bible Text Pane</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_biblepane" format="PNG"/>
+ 					</imageobject>
+					<textobject>
+   						<phrase>The Bible Text Pane</phrase>
+	 				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+		Positioned to the right of the Shortcut bar is the Bible text pane. All your different translations
+		will be displayed for full viewing. When starting <application>GnomeSword2</application> either your default Bible translation or the translation
+		last used will be displayed.
+		</para>
+		
+		<sect2 id="gnomesword-bible-open">
+			<title>Opening A Specific Bible Translation</title>
+			<para>
+			In order to change the current Bible translation to another of your choice simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the	<interface> Bible Text Pane </interface>.In the popup menu choose
+					<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open Module</guimenuitem></menuchoice>
+					and select your specific translation that you want to view.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
+					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
+					and select your specific translation.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-open-seperate">
+			<title>Opening A Seperate Bible Translation</title>
+			<para>
+			In order to view a Bible translation separate from the <application>GnomeSword2</application> interface,simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Bible Text pane</interface>. In the popup menu choose
+					<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open current in a dialog Module
+					</guimenuitem></menuchoice>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
+					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
+					. Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
+					option.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-about">
+			<title>Finding Out About The Current Translation</title>
+			<para>
+			To find out about the Bible translation currently being displayed simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Bible Text pane</interface>.In the popup menu choose
+					<guimenuitem>About </guimenuitem> module name.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-options">
+			<title>Module Options</title>
+			<para>
+			Most Bible translations have additional options which the user can enable or disable. These include:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					Words Of Christ In Red
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Strong's Numbers
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Morphological Tags
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+					Footnotes
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+					Scripture Cross-Reference
+					</para>
+				</listitem>
+				<listitem>	
+					<para>
+					Headings
+					</para>
+				</listitem>
+			</itemizedlist>
+			<note>
+				<para>
+				Translations in other languages such as Greek or Hebrew have specific options which deal only with the specific language.
+				</para>
+			</note>
+			<para>
+				In order to access these options simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Bible Text pane</interface>. In the popup menu choose <guibutton>Module
+					Options</guibutton> and select the specific option.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-dictionary">
+			<title>Specific Word Meanings</title>
+			<para>
+			In order to check the meaning of a specific word, simply click on the desired word you wish to lookup. The word should then highlight itself and the
+			explanation should be displayed, if available, in the <interface>Dictionary Pane</interface>. 
+			</para>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-find">
+			<title>Finding A Specific Word</title>
+			<para>
+			To find a specific word within a passage, simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Bible Text Pane</interface>.In the popup menu, choose <guibutton>Edit</guibutton>-&gt;							<guibutton>Find</guibutton>. A separate dialog will appear,which will allow single or multi word searches. Simply fill out 
+					dialog and click the <guibutton>Find</guibutton> button.
+					</para>	
+				</listitem>
+			</itemizedlist>
+		</sect2>
+	</sect1>
+<!-- ============= Commentary Pane  ============--> 
+	<sect1 id="gnomesword-commentaries">
+   		<title>The Commentary Pane</title>
+  		<figure>
+   			<title>The Commentary Pane</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_commentarypane" format="PNG"/>
+	 				</imageobject>
+					<textobject>
+         				<phrase>The Commentary Pane</phrase>
+	 				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+		The <interface>Commentary pane</interface> is where the commentary modules are displayed. This provides easy
+		reading, reference and  access to different commentaries currently installed. The passage viewed by the 
+		<interface>Commentary pane</interface> is directly controlled by the current passage viewed in the <interface>Bible
+		Text pane</interface>, so in order to change to a different passage commentary, simply select the desired passage
+		on the <interface>Toolbar</interface>.
+		</para>
+		<note>
+			<para>
+			By changing to passage settings on the <interface>Toolbar</interface>, the contents in the 
+			<interface>Bible Text pane</interface> and the <interface>Commentary Pane</interface> will be changed. 	
+			</para>
+		</note>
+		
+		<sect2 id="gnomesword-commentary-about">
+			<title>Finding Out About The Commentary Module</title>
+			<para>
+			To find out about the commentary currently being displayed simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Commentary Pane</interface>. In the popup menu choose
+					<guimenuitem>About </guimenuitem> module name.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-commentary-headings">
+			<title>Commentary Headings.</title>	
+			<para>
+			Most commentaries have additional headings which enable introductory information about the book and chapter currently
+			being displayed in the <interface>Bible Text pane</interface>. In order to view them, simply:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+					right-click in the <interface>Commentary Pane</interface>. In the popup menu choose <guimenuitem>File-&gt;Navigate
+					-&gt;Chapter Heading</guimenuitem>
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+			Repeat the steps above and choose <guimenuitem>Book Heading</guimenuitem>, instead of <guimenuitem>Chapter Heading
+			</guimenuitem>, if you want view the Book Headings.
+			</para>
+		</sect2>
+	</sect1>
+</chapter>
