@@ -7,6 +7,7 @@ src/gs_gnomesword.c
 src/gs_gui.c
 src/gs_history.c
 src/gs_html.c
+src/gs_html_editor.c
 src/gs_info_box.c
 src/gs_listeditor.c
 src/gs_mainmenu_cb.c
@@ -14,7 +15,6 @@ src/gs_menu.c
 src/gs_preferences_dlg.c
 src/gs_setup.c
 src/gs_shortcutbar.c
-src/gs_studypad.c
 src/gs_unlockkey_dlg.c
 src/gs_viewcomm_dlg.c
 src/gs_viewdict_dlg.c

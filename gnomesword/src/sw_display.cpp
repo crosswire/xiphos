@@ -64,32 +64,20 @@ extern SETTINGS *settings;
  *****************************************************************************/
 char ComEntryDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[255], *font, *buf;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator eit;
+	//gchar tmpBuf[255], *buf;
 	GString *strbuf;
-	//SWMgr *Mgr;
 
-	//Mgr = new SWMgr();	//-- create sword mgr
-	font = "Roman";
-	buf = (char *) imodule.Description();
+	//buf = (char *) imodule.Description();
 		
 	(const char *) imodule;	/* snap to entry */
-	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
-	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
-		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
-	strbuf = g_string_append(strbuf, tmpBuf);
-	/* show verse ref in text widget  */
+	settings->percomverse = (gchar*)imodule.KeyText();
 	/* show module text for current key */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
-	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-	g_string_free(strbuf, TRUE);
 	strbuf = g_string_new((const char *) imodule);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	
 	endHTML(GTK_WIDGET(gtkText));
-	//delete Mgr;
 	return 0;
 }
 
@@ -106,7 +94,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	string swfontsize;
 	
 	use_gtkhtml_font = false;
-	use_font = pick_font(imodule);
+	use_font = g_strdup(pick_font(imodule));
 	swfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");	
 	
 	if (strcmp(swfontsize.c_str(), "")) {
@@ -148,12 +136,13 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	endHTML(GTK_WIDGET(gtkText));
+	g_free(use_font);
 	return 0;
 }
 
 gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 {
-	gchar *font, *use_font, *retval = "test_font";
+	gchar *font, *use_font, *retval = "";
 	string lang, gsfont, gsfontsize;	
 	
 	gsfont = load_module_font((gchar*)imodule.Name(),"GSFont");
@@ -163,6 +152,7 @@ gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
 	
 	if (strcmp(gsfont.c_str(), "")) {
 		retval = (gchar *)gsfont.c_str();
+		//g_warning("retval = %s",retval);
 		use_gtkhtml_font = false;
 	} else {
 		if (!stricmp(lang.c_str(), "") || !stricmp(lang.c_str(), "en") || !stricmp(lang.c_str(), "de")) {
@@ -209,9 +199,10 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	
 	use_gtkhtml_font = false;
 	str = g_string_new("");
-	c = 182;  
-	use_font = pick_font(imodule);
-	g_warning(use_font);
+	//c = 182;  
+	c = 0x00b6;  
+	use_font = g_strdup(pick_font(imodule));
+	
 	
 	gsfontsize = load_module_font((gchar*)imodule.Name(),"GSFont size");
 	if (strcmp(gsfontsize.c_str(), "")) {
@@ -244,9 +235,10 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 		if(use_gtkhtml_font)
-			sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">", versecolor, use_font_size);   //face=\"%s\" use_font, 
-		else
-			sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);   //face=\"%s\" use_font, 
+			sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">", versecolor, use_font_size);    
+		else 
+			sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);   
+		
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -301,6 +293,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	endHTML(GTK_WIDGET(gtkText));
 	gotoanchorHTML(gtkText, tmpBuf);
 	g_string_free(str,TRUE);
+	g_free(use_font);
 	return 0;
 }
 
