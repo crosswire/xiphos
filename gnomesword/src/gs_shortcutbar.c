@@ -257,15 +257,22 @@ static void
 on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *group_name, *item_url, *item_name;
-	gint group_num, number_of_items, j;
+	gint group_num, number_of_items, j, sbtype;
 	GList *list;
 	EShortcutBar *bar1;
+	gchar modName[16];
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
-
+	memset(modName,0,16); 
+	modNameFromDesc(modName, (gchar *)user_data);
+	sbtype = 0;
+	sbtype = sbtypefromModNameSBSW(modName);
+	if(sbtype < 0) sbtype = 0;
+	
+	
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-				  group_num, -1, shortcut_types[0],
+				  group_num, -1, shortcut_types[sbtype],
 				  (gchar *) user_data);
 	list = NULL;
 	group_name = "";
@@ -657,7 +664,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 {
 	GtkWidget *app;
 	gchar *type, *ref;
-	gchar modName[16];	//, *modDesc;
+	gchar modName[16];	
 
 
 	if (event->button.button == 1) {
@@ -666,8 +673,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 					       (shortcut_bar)->model,
 					       group_num, item_num, &type,
 					       &ref);
-		bzero(modName, 16);
-		//modDesc = ref;
+		memset(modName,0,16); 
 		modNameFromDesc(modName, ref);
 		if (group_num == groupnum0) {
 			gotoBookmarkSWORD(modName, settings->currentverse);
@@ -1188,8 +1194,7 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 }
 
 void
-setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
-	GList * dictionarylist)
+setupSB(SETTINGS *s)
 {
 	GList *tmplang, *tmp;
 	GtkWidget
@@ -1200,17 +1205,22 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 	    *scrolledwindow2, *vpSearch, *vboxVL, *vpVL, *html, *VLbutton;
 	gint sbtype = 0, large_icons = 0;
 	gchar *filename, group_name[256], icon_size[10];
-
+	gchar modName[16];
+	
 	tmplang = NULL;
 	tmp = NULL;
-	if (settings->showfavoritesgroup) {
+	if (s->showfavoritesgroup) {
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Favorites");
 		filename = "Favorites.conf";
 		tmp = loadshortcutbarSW(filename, group_name, icon_size);
 		while (tmp != NULL) {
+			memset(modName,0,16); 
+			modNameFromDesc(modName, (gchar *) tmp->data);
 			sbtype = 0;
+			sbtype = sbtypefromModNameSBSW(modName);
+			if(sbtype < 0) sbtype = 0;
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum0, -1,
@@ -1225,7 +1235,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 						     groupnum0,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showtextgroup) {
+	if (s->showtextgroup) {
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Bible Text");
@@ -1247,7 +1257,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 						     groupnum1,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showcomgroup) {
+	if (s->showcomgroup) {
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Commentaries");
@@ -1269,7 +1279,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 						     groupnum2,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showdictgroup) {
+	if (s->showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Dict/Lex");
@@ -1291,7 +1301,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 						     groupnum3,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showhistorygroup) {
+	if (s->showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar, "History");
 	}
@@ -1322,10 +1332,10 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 2, 80);
 	//gtk_clist_column_titles_show (GTK_CLIST (ctree1));
 	//gs.ctree_widget = ctree;
-	settings->ctree_widget = lookup_widget(settings->app, "ctree");
+	s->ctree_widget = lookup_widget(s->app, "ctree");
 	button = gtk_button_new_with_label("Bookmarks");
 	gtk_widget_ref(button);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "button",
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "button",
 				 button,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button);
@@ -1339,7 +1349,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);	//gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow2);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app),
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
 				 "scrolledwindow2", scrolledwindow2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow2);
@@ -1351,7 +1361,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 
 	vpSearch = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpSearch);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vpSearch",
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vpSearch",
 				 vpSearch,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vpSearch);
@@ -1370,13 +1380,13 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 	groupnum6 = e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
 					  scrolledwindow2,
 					  searchbutton, -1);
-	settings->searchbargroup = groupnum6;
+	s->searchbargroup = groupnum6;
 
 	//verselistbar = e_group_bar_new();  
 
 	vboxVL = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxVL);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vboxVL",
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vboxVL",
 				 vboxVL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxVL);
@@ -1384,7 +1394,7 @@ setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist,
 
 	vpVL = gtk_viewport_new(NULL, NULL);
 	gtk_widget_ref(vpVL);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vpVL", vpVL,
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vpVL", vpVL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vpVL);
 	gtk_container_add(GTK_CONTAINER(vpVL), vboxVL);
@@ -1443,7 +1453,7 @@ void update_shortcut_bar(SETTINGS * s)
 					      (shortcut_model), i);
 	}
 	tmp = NULL;
-	if (settings->showfavoritesgroup) {
+	if (s->showfavoritesgroup) {
 		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Favorites");
@@ -1465,7 +1475,7 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum0,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showtextgroup) {
+	if (s->showtextgroup) {
 		groupnum1 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Bible Text");
@@ -1487,7 +1497,7 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum1,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showcomgroup) {
+	if (s->showcomgroup) {
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Commentaries");
@@ -1509,7 +1519,7 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum2,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showdictgroup) {
+	if (s->showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Dict/Lex");
@@ -1531,7 +1541,7 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum3,
 						     E_ICON_BAR_LARGE_ICONS);
 	}
-	if (settings->showhistorygroup) {
+	if (s->showhistorygroup) {
 		groupnum4 =
 		    add_sb_group((EShortcutBar *) shortcut_bar, "History");
 	}
