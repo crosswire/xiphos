@@ -419,7 +419,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		/***  any other link  ***/
 		else
-			sprintf(buf, "%s %s", _("Go to "), url);
+			sprintf(buf, "%s", "");
 
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
