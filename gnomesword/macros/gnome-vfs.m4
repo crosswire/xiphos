@@ -48,7 +48,13 @@ AC_DEFUN([GNOME_WITH_VFS],[
 	  ])])
       AC_CHECK_FUNCS(pmap_getport pmap_getmaps rresvport)
       dnl add for source routing support setsockopt
-      AC_CHECK_HEADERS(rpc/pmap_clnt.h)
+      AC_CHECK_HEADERS(rpc/pmap_clnt.h, , , [
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <rpc/rpc.h>
+#include <rpc/pmap_prot.h>
+					    ])
       vfs_flags="$vfs_flags, mcfs, ftpfs, fish"
       use_net_code=true
   fi
@@ -60,7 +66,7 @@ AC_DEFUN([GNOME_WITH_VFS],[
   SAMBAFILES=""
   AC_ARG_WITH(samba,
   	  [--with-samba	            Support smb virtual file system],[
-  	  if test "x$withval != xno"; then
+  	  if test "x$withval" != "xno"; then
   		  AC_DEFINE(WITH_SMBFS)
 	          vfs_flags="$vfs_flags, smbfs"
 		  smbfs="smbfs.o"

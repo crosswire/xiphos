@@ -35,7 +35,12 @@ CC = @CC@
 GMSGFMT = @GMSGFMT@
 MSGFMT = @MSGFMT@
 XGETTEXT = @XGETTEXT@
-MSGMERGE = msgmerge
+XML_I18N_UPDATE = @XML_I18N_UPDATE@
+XML_I18N_EXTRACT = @XML_I18N_EXTRACT@
+
+MSGMERGE = XML_I18N_EXTRACT=$(XML_I18N_EXTRACT) $(XML_I18N_UPDATE) --dist
+GENPOT   = XML_I18N_EXTRACT=$(XML_I18N_EXTRACT) $(XML_I18N_UPDATE) --pot
+
 
 DEFS = @DEFS@
 CFLAGS = @CFLAGS@
@@ -82,12 +87,7 @@ all-no:
 # have been downloaded.
 
 $(srcdir)/$(PACKAGE).pot: $(POTFILES) $(srcdir)/POTFILES.in
-	$(XGETTEXT) --default-domain=$(PACKAGE) --directory=$(top_srcdir) \
-	  --add-comments --keyword=_ --keyword=N_ \
-	  --files-from=$(srcdir)/POTFILES.in \
-	&& test ! -f $(PACKAGE).po \
-	   || ( rm -f $(srcdir)/$(PACKAGE).pot \
-		&& mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot )
+	$(GENPOT)
 
 
 install: install-exec install-data
@@ -173,15 +173,29 @@ update-po: Makefile
 	for cat in $$catalogs; do \
 	  cat=`basename $$cat`; \
 	  lang=`echo $$cat | sed 's/\.gmo$$//'`; \
+	  cp $$lang.po $$lang.old.po; \
 	  echo "$$lang:"; \
-	  if $(MSGMERGE) $$lang.po $(PACKAGE).pot -o $$lang.new.po; then \
-	    mv -f $$lang.new.po $$lang.po; \
+	  if $(MSGMERGE) $$lang ; then \
+ 	    rm -f $$lang.old.po; \
 	  else \
 	    echo "msgmerge for $$cat failed!"; \
-	    rm -f $$lang.new.po; \
+ 	    mv $$lang.old.po $$lang.po; \
 	  fi; \
 	done
 	$(MAKE) update-gmo
+
+.po: Makefile
+	$(MAKE)  $(PACKAGE).pot;
+	PATH=`pwd`/../src:$$PATH; \
+	echo; printf "$*: "; \
+	if $(MSGMERGE) $*; then \
+	  rm -f $*.old.po; \
+	  else \
+	    echo "msgmerge for * failed!"; \
+	    mv $*.old.po $*.po; \
+	fi; \
+	msgfmt --statistics $*.po; echo;
+
 
 update-gmo: Makefile $(GMOFILES)
 	@:

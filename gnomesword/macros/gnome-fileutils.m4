@@ -216,7 +216,7 @@ fi
 if test -z "$list_mounted_fs"; then
 AC_MSG_ERROR([could not determine how to read list of mounted filesystems])
 # FIXME -- no need to abort building the whole package
-# Can't build mountlist.c or anything that needs its functions
+# Cannot build mountlist.c or anything that needs its functions
 fi
 
 AC_CHECKING(how to get filesystem space usage)
@@ -250,11 +250,11 @@ AC_CACHE_VAL(fu_cv_sys_stat_statfs3_osf1,
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/mount.h>
-main ()
+int main ()
 {
 struct statfs fsd;
 fsd.f_fsize = 0;
-exit (statfs (".", &fsd, sizeof (struct statfs)));
+return (statfs (".", &fsd, sizeof (struct statfs)));
 }],
 fu_cv_sys_stat_statfs3_osf1=yes,
 fu_cv_sys_stat_statfs3_osf1=no,
@@ -281,11 +281,11 @@ AC_CACHE_VAL(fu_cv_sys_stat_statfs2_bsize,
 #ifdef HAVE_SYS_VFS_H
 #include <sys/vfs.h>
 #endif
-main ()
+int main ()
 {
 struct statfs fsd;
 fsd.f_bsize = 0;
-exit (statfs (".", &fsd));
+return (statfs (".", &fsd));
 }],
 fu_cv_sys_stat_statfs2_bsize=yes,
 fu_cv_sys_stat_statfs2_bsize=no,
@@ -303,10 +303,10 @@ AC_MSG_CHECKING([for four-argument statfs (AIX-3.2.5, SVR3)])
 AC_CACHE_VAL(fu_cv_sys_stat_statfs4,
 [AC_TRY_RUN([#include <sys/types.h>
 #include <sys/statfs.h>
-main ()
+int main ()
 {
 struct statfs fsd;
-exit (statfs (".", &fsd, sizeof fsd, 0));
+return (statfs (".", &fsd, sizeof fsd, 0));
 }],
 fu_cv_sys_stat_statfs4=yes,
 fu_cv_sys_stat_statfs4=no,
@@ -330,11 +330,11 @@ AC_CACHE_VAL(fu_cv_sys_stat_statfs2_fsize,
 #ifdef HAVE_SYS_MOUNT_H
 #include <sys/mount.h>
 #endif
-main ()
+int main ()
 {
 struct statfs fsd;
 fsd.f_fsize = 0;
-exit (statfs (".", &fsd));
+return (statfs (".", &fsd));
 }],
 fu_cv_sys_stat_statfs2_fsize=yes,
 fu_cv_sys_stat_statfs2_fsize=no,
@@ -360,12 +360,12 @@ AC_CACHE_VAL(fu_cv_sys_stat_fs_data,
 #ifdef HAVE_SYS_FS_TYPES_H
 #include <sys/fs_types.h>
 #endif
-main ()
+int main ()
 {
 struct fs_data fsd;
 /* Ultrix's statfs returns 1 for success,
 0 for not mounted, -1 for failure.  */
-exit (statfs (".", &fsd) != 1);
+return (statfs (".", &fsd) != 1);
 }],
 fu_cv_sys_stat_fs_data=yes,
 fu_cv_sys_stat_fs_data=no,

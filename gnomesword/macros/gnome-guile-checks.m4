@@ -6,6 +6,18 @@ dnl
 
 AC_DEFUN([GNOME_CHECK_GUILE],
 [
+dnl	AC_MSG_WARN([Withval is: $withval])
+	guile_msg = 'Huh?'
+if test x$withval = xno ; then
+	guile_msg = 'disabled'
+	GUILE_LIBS=
+	GUILE_INCS=
+	AC_SUBST(GUILE_LIBS)
+	AC_SUBST(GUILE_INCS)
+	AM_CONDITIONAL(GUILE, /bin/false)
+else
+	guile_msg="no"
+
 	saved_ldflags="$LDFLAGS"
 	saved_cppflags="$CPPFLAGS"
 	LDFLAGS="$LDFLAGS $GNOME_LIBDIR"
@@ -100,6 +112,8 @@ AC_DEFUN([GNOME_CHECK_GUILE],
 	])
 	AC_MSG_RESULT($ac_cv_guile_found)
 
+	guile_msg=$ac_cv_guile_found
+
 	if test x$ac_cv_guile_found = xno ; then
 		if test x$1 = xfail ; then
 		  AC_MSG_ERROR(Can not find Guile on this system)
@@ -116,4 +130,5 @@ AC_DEFUN([GNOME_CHECK_GUILE],
 
 	AC_SUBST(GUILE_LIBS)
 	AM_CONDITIONAL(GUILE, test x$ac_cv_guile_found = xyes)
+fi
 ])
