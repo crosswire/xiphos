@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "gui/_gbs.h"
+#include "gui/gbs.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/gbs_find.h"
 #include "gui/shortcutbar_main.h"

@@ -37,7 +37,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/studypad.h"
 #include "gui/info_box.h"
-#include "gui/_gbs.h"
+#include "gui/gbs.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
