@@ -37,21 +37,18 @@ struct _history {
         gchar commod[80];
 };
 
-void clearhistory(GtkWidget *app,
+void gui_clear_history(GtkWidget *app,
 		GtkWidget *shortcut_bar);
-void updatehistorymenu(GtkWidget *app);
 void updatehistoryshortcutbar(GtkWidget *app,
                 GtkWidget *shortcut_bar);
-void updatehistorysidebar(GtkWidget *app);
-void addHistoryItem(GtkWidget *app,
+void gui_add_history_Item(GtkWidget *app,
 		GtkWidget *shortcut_bar,
 		gchar *ref);
-void historynav(GtkWidget *app, gint direction);
-void changeverseHistory(gint historynum);		
+void gui_navigate_history(GtkWidget *app, gint direction);
+void gui_change_verse_history(gint historynum);		
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
