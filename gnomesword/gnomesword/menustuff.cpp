@@ -444,3 +444,99 @@ GtkWidget *create_pmDict(GList * mods)
 			   GTK_SIGNAL_FUNC(on_show_tabs2_activate), NULL);
 	return pmDict;
 }
+
+//-------------------------------------------------------------------------------------------
+GtkWidget*
+create_pmBible(GList *mods)
+{
+  GtkWidget *pmBible;
+  GtkAccelGroup *pmBible_accels;
+  GtkWidget *copy7;
+  GtkWidget *lookup_selection;
+  GtkWidget *about_this_module1;
+  GtkWidget *separator2;
+  GtkWidget *view_module3;
+  GtkWidget *view_module3_menu;
+  GtkAccelGroup *view_module3_menu_accels;
+  GtkWidget *item3;
+
+  pmBible = gtk_menu_new ();
+  gtk_object_set_data (GTK_OBJECT (pmBible), "pmBible", pmBible);
+  pmBible_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmBible));
+
+  copy7 = gtk_menu_item_new_with_label ("Copy");
+  gtk_widget_ref (copy7);
+  gtk_object_set_data_full (GTK_OBJECT (pmBible), "copy7", copy7,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (copy7);
+  gtk_container_add (GTK_CONTAINER (pmBible), copy7);
+
+  lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
+  gtk_widget_ref (lookup_selection);
+  gtk_object_set_data_full (GTK_OBJECT (pmBible), "lookup_selection", lookup_selection,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (lookup_selection);
+  gtk_container_add (GTK_CONTAINER (pmBible), lookup_selection);
+
+  about_this_module1 = gtk_menu_item_new_with_label ("About this module");
+  gtk_widget_ref (about_this_module1);
+  gtk_object_set_data_full (GTK_OBJECT (pmBible), "about_this_module1", about_this_module1,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (about_this_module1);
+  gtk_container_add (GTK_CONTAINER (pmBible), about_this_module1);
+
+  separator2 = gtk_menu_item_new ();
+  gtk_widget_ref (separator2);
+  gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (separator2);
+  gtk_container_add (GTK_CONTAINER (pmBible), separator2);
+  gtk_widget_set_sensitive (separator2, FALSE);
+
+  view_module3 = gtk_menu_item_new_with_label ("View Module");
+  gtk_widget_ref (view_module3);
+  gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3", view_module3,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (view_module3);
+  gtk_container_add (GTK_CONTAINER (pmBible), view_module3);
+
+  view_module3_menu = gtk_menu_new ();
+  gtk_widget_ref (view_module3_menu);
+  gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3_menu", view_module3_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
+  view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
+	GList *tmp;
+	tmp = mods;
+	gint i = 0;
+	gchar buf[80];
+	while (tmp != NULL) {
+		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_ref(item3);
+		gtk_object_set_data_full(GTK_OBJECT(pmBible), "item3",
+					 item3,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(item3);		
+		gtk_signal_connect(GTK_OBJECT(item3), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_mainText_activate),
+				   g_strdup((gchar *)tmp->data ));
+
+		gtk_container_add(GTK_CONTAINER(view_module3_menu), item3);
+		++i;
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+
+  gtk_signal_connect (GTK_OBJECT (copy7), "activate",
+                      GTK_SIGNAL_FUNC (on_copy3_activate),
+                      (gchar *)"moduleText");
+  gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
+                      GTK_SIGNAL_FUNC (on_lookup_selection_activate),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
+                      GTK_SIGNAL_FUNC (on_about_this_module1_activate),
+                      NULL);
+  return pmBible;
+}
