@@ -42,6 +42,7 @@
 #include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
+#include "gs_shortcutbar.h"
 #include "support.h"
 #include "gs_file.h"
 //#include "gs_listeditor.h"
@@ -161,8 +162,9 @@ void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 		
 	s = settings;
 	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
-	e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
-	s->showshortcutbar = TRUE;		
+	if(!s->showshortcutbar){
+		on_btnSB_clicked(NULL,s);
+	}
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 						 s->searchbargroup,
 						 TRUE);

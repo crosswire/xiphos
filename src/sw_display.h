@@ -31,6 +31,8 @@
 #include <gnome.h>
 #include <swmodule.h>
 
+
+
 class GtkHTMLEntryDisp:public SWDisplay {
       protected:
 	GtkWidget * gtkText;
@@ -54,19 +56,22 @@ class ComEntryDisp:public GtkHTMLEntryDisp { public:
 //----------------------------------------------------------------------------------------------
 class GTKutf8ChapDisp:public GtkHTMLEntryDisp { public:
 	GTKutf8ChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
+	} 
+	virtual char Display(SWModule & imodule);
 	void marksearchwords( GString *str );
 };
 
 //----------------------------------------------------------------------------------------------
 class InterlinearDisp:public GtkHTMLEntryDisp { public:
 	InterlinearDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
+	} 
+	virtual char Display(SWModule & imodule);
 };
+
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);
-
+char IntDisplay(GList *modList);
 
 class GTKEntryDisp:public SWDisplay {
       protected:

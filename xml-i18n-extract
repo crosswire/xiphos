@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w 
+#!@XML_I18N_TOOLS_PERL@ -w 
 # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
 
 #

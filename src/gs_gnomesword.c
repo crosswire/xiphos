@@ -111,7 +111,7 @@ extern gint
  *****************************************************************************/
 void
 initGnomeSword(GtkWidget *app, 
-			SETTINGS *settings,
+			SETTINGS *s,
 			GList *biblemods, 
 			GList *commentarymods ,
 			GList *dictionarymods, 
@@ -127,69 +127,69 @@ initGnomeSword(GtkWidget *app,
 	
 	g_print("%s\n", "Initiating GnomeSword\n");
 	/* setup shortcut bar */
-	setupSB(settings);
-	settings->settingslist = NULL;
+	setupSB(s);
+	s->settingslist = NULL;
 	/* set current verse color html */
-	mycolor = settings->currentverse_color;	
+	mycolor = s->currentverse_color;	
 	/* add modules to menus -- gs_menu.c */
 	addmodstomenus(app, 
-				settings, 
-				biblemods, 
-				commentarymods,
-				dictionarymods,
-				bookmods,
-				percommods);
+			s, 
+			biblemods, 
+			commentarymods,
+			dictionarymods,
+			bookmods,
+			percommods);
 	/* create popup menus -- gs_menu.c */
 	createpopupmenus(app, 
-				settings, 
-				sbbiblemods,
-				sbcommods,
-				sbdictmods,
-				sbbookmods,
-				percommods,
-				options);
-	additemstooptionsmenu(options,settings);			
-	/* add pages module notebooks */
-	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
-	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
-	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);
+			s, 
+			sbbiblemods,
+			sbcommods,
+			sbdictmods,
+			sbbookmods,
+			percommods,
+			options);
+	additemstooptionsmenu(options,s);			
+	/* add pages to module notebooks */
+	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, s->MainWindowModule);
+	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, s->CommWindowModule);
+	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, s->DictWindowModule);
 	
 	
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);	
 	/*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	/* set main notebook page */
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")), settings->notebook3page );
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")), s->notebook3page );
 	/* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");		
 	/* Add options to Options Menu and get toggle item widget */
 	/*autosaveitem = additemtooptionmenu(app, _("_Settings/"), _("Auto Save Personal Comments"),
 				(GtkMenuCallback)on_auto_save_notes1_activate);
 	*/
-	notepage  = additemtooptionmenu(app, _("_Settings/"), _("Show Interlinear Page"),
-				(GtkMenuCallback)on_show_interlinear_page1_activate);
+	/*notepage  = additemtooptionmenu(app, _("_Settings/"), _("Show Interlinear Page"),
+				(GtkMenuCallback)on_show_interlinear_page1_activate);*/
 	settings->versestyle_item = additemtooptionmenu(app, _("_Settings/"), _("Verse Style"),
 				(GtkMenuCallback)on_verse_style1_activate);
 	/* set dictionary key */
-        gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
-        loadquickmarks_programstart(settings->app); /* add quickmarks to menubar */
-        changeVerseSWORD(settings->currentverse); /* set Text */
+        gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),s->dictkey);
+        loadquickmarks_programstart(s->app); /* add quickmarks to menubar */
+        changeVerseSWORD(s->currentverse); /* set Text */
 	/* show hide shortcut bar - set to options setting */
-        if(settings->showshortcutbar){
-                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbar_width);
+        if(s->showshortcutbar){
+                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), s->shortcutbar_width);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
 	/* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), settings->upperpane_hight);
+	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), s->upperpane_hight);
 	/* set width of bible pane */
-	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")), settings->biblepane_width);
+	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")), s->biblepane_width);
 	
 	/* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
 	if(havebible){ 	
 		if(biblepage == 0)
-			changecurModSWORD(settings->MainWindowModule, TRUE); 
+			changecurModSWORD(s->MainWindowModule, TRUE); 
 		/* get notebook */
 		notebook = lookup_widget(app,"nbTextMods");
 		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
@@ -207,7 +207,7 @@ initGnomeSword(GtkWidget *app,
 	/* let's don't do this if we don't have at least one dictionary / lexicon */	
 	if(havedict){ 	
 		if(dictpage == 0) 
-			changcurdictModSWORD(settings->DictWindowModule, settings->dictkey);
+			changcurdictModSWORD(s->DictWindowModule, s->dictkey);
 		/* get notebook */
 		notebook = lookup_widget(app,"notebook4");
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
@@ -226,7 +226,7 @@ initGnomeSword(GtkWidget *app,
 	/* set com module to open notebook page */	
 	if(havecomm){ /* let's don't do this if we don't have at least one commentary */ 
 		if(commpage == 0)
-			changcurcomModSWORD(settings->CommWindowModule, TRUE);  		
+			changcurcomModSWORD(s->CommWindowModule, TRUE);  		
 		notebook = lookup_widget(app,"notebook1");
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), commpage);		
                 if(settings->comm_tabs) {
@@ -242,7 +242,7 @@ initGnomeSword(GtkWidget *app,
 	/* set personal commets notebook label and display module */
 	if(usepersonalcomments){
 		 /* change personal comments module */
-		changepercomModSWORD(settings->personalcommentsmod);	
+		changepercomModSWORD(s->personalcommentsmod);	
 	}
 	
 	/* free module lists */
@@ -312,14 +312,7 @@ void UpdateChecks(SETTINGS *s)
 {
 	/* does user want verses or paragraphs */
 	GTK_CHECK_MENU_ITEM (s->versestyle_item)->active = s->versestyle;		
-	/* set interlinear page to last setting */
-	if(s->interlinearpage)
-		gtk_widget_show(lookup_widget(s->app,"vboxInt"));	
-	else
-		gtk_widget_hide(lookup_widget(s->app,"vboxInt"));	
-	/* set interlinear page menu check item */		
-	GTK_CHECK_MENU_ITEM (notepage)->active = s->interlinearpage; 
-	/* set interlinear footnotes to last setting used */
+	
 	if(s->footnotesint)  
 		setglobalopsSWORD(INTERLINEAR_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
@@ -368,7 +361,7 @@ void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
         settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
-        if(page_num < 4 && page_num != 2) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
+        if(page_num == 4) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
 

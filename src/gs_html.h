@@ -37,7 +37,11 @@ extern "C" {
 #include <gtkhtml/gtkhtml.h>
 
 	void on_url(GtkHTML * html, const gchar * url, gpointer data);
-	void on_link_clicked(GtkHTML * html, const gchar * url,
+	void on_link_clicked(GtkHTML * html, 
+				const gchar * url,
+				gpointer data);
+	void on_link2_clicked(GtkHTML * html, 
+				const gchar * url, 
 				gpointer data);
 	void add_gtkhtml_widgets(GtkWidget * app);
 	void beginHTML(GtkWidget * html, gboolean utf8);
