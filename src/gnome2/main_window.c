@@ -131,8 +131,8 @@ GdkBitmap *mask1;
 GdkBitmap *mask2;
 GdkBitmap *mask3;
 
-extern HISTORY historylist[];	/* sturcture for storing history items */
-extern gint historyitems;
+extern HISTORY history_list[];	/* sturcture for storing history items */
+extern gint history_items;
 
 
 /******************************************************************************
@@ -400,8 +400,8 @@ void gui_change_verse(const gchar * key)
 		/* add item to history */
 		if (settings.addhistoryitem) {
 			if (strcmp(settings.currentverse,
-			     historylist[historyitems - 1].verseref))
-				addHistoryItem(widgets.app,
+			     history_list[history_items - 1].verseref))
+				gui_add_history_Item(widgets.app,
 					       GTK_WIDGET
 					       (widgets.shortcutbar),
 					       settings.currentverse);
