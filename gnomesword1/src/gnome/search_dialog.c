@@ -46,6 +46,7 @@
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
 #define FINDS N_("finds in ")
+
 typedef struct _search_dialog SEARCH_DIALOG;
 struct _search_dialog {
 	GtkWidget *dialog;
@@ -60,6 +61,7 @@ struct _search_dialog {
 	GtkWidget *rb_custom_list;
 	GtkWidget *rb_last;
 	GtkWidget *rb_no_scope;
+	GtkToggleButton *which_scope;
 	GtkWidget *combo_range;
 	GtkWidget *combo_entry_range;
 	GtkWidget *clist_range;
@@ -265,7 +267,9 @@ static void add_ranges(void)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-	gtk_combo_set_popdown_strings(GTK_COMBO(search.combo_range),
+	
+	if(items != NULL)
+		gtk_combo_set_popdown_strings(GTK_COMBO(search.combo_range),
 				      items);
 	g_list_free(items);
 
@@ -503,7 +507,7 @@ static void on_button_begin_search(GtkButton * button,
 	
 	search_string =
 	    gtk_entry_get_text(GTK_ENTRY(search.search_entry));
-	for (i = 0; i < search.module_count; i++) {
+	for (i = 0; i < search.module_count; i++) {		
 		gtk_clist_get_text(GTK_CLIST(search.clist_modules),
 				   i, 1, &module);
 		
@@ -1156,6 +1160,63 @@ static gint button_release_event(GtkWidget * html, GdkEventButton * event,
 	}
 
 	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   scope_toggled
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void scope_toggled(GtkToggleButton *togglebutton,
+						gpointer user_data)
+ *
+ * Description
+ *   remember which scope button was pressed last
+ *   does not remember rb_last
+ *
+ * Return value
+ *   void
+ */
+
+static void scope_toggled(GtkToggleButton *togglebutton,
+						gpointer user_data)
+{
+	search.which_scope = togglebutton;
+}
+
+
+/******************************************************************************
+ * Name
+ *   current_module_toggled
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void current_module_toggled(GtkToggleButton *togglebutton,
+						gpointer user_data)
+ *
+ * Description
+ *   sets rb_last to insensitive if either use module list
+ *   or use custom list is clicked
+ *   also set scope button to last one used before rb_last
+ *
+ * Return value
+ *   void
+ */
+
+static void current_module_toggled(GtkToggleButton *togglebutton,
+						gpointer user_data)
+{
+	if(togglebutton->active)
+		gtk_widget_set_sensitive(search.rb_last, TRUE);
+	else {
+		gtk_widget_set_sensitive(search.rb_last, FALSE);
+		gtk_toggle_button_set_active(search.which_scope,
+                                TRUE);
+	}
 }
 
 
@@ -2622,6 +2683,8 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(search.shortcut_bar);
 	gtk_paned_pack1(GTK_PANED(hpaned8), search.shortcut_bar, TRUE,
 			TRUE);
+			
+	search.which_scope = search.rb_no_scope;
 	/*
 	 * get and load books of the Bible 
 
@@ -2669,7 +2732,16 @@ static GtkWidget *create_search_dialog(void)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_results),
 			  search.results_html);
 
-/*	gtk_signal_connect(GTK_OBJECT(search.results_html),
+  gtk_signal_connect (GTK_OBJECT (search.rb_current_module), "toggled",
+                      GTK_SIGNAL_FUNC (current_module_toggled),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (search.rb_no_scope), "toggled",
+                      GTK_SIGNAL_FUNC (scope_toggled),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (search.rb_custom_range), "toggled",
+                      GTK_SIGNAL_FUNC (scope_toggled),
+                      NULL);
+/*	gtk_signal_connect(GTK_OBJECT(search.),
 			"button_release_event",
 			GTK_SIGNAL_FUNC(button_release_event), NULL);
 			*/
