@@ -416,7 +416,7 @@ static void on_save_as_activate(GtkMenuItem * menuitem,
 static void on_print_activate(GtkMenuItem * menuitem,
 			      GSHTMLEditorControlData * ecd)
 {
-	gui_html_print(ecd->htmlwidget);	/* gs_html.c */
+	gui_html_print(ecd->htmlwidget, FALSE);	/* gs_html.c */
 }
 
 /******************************************************************************

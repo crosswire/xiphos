@@ -29,6 +29,8 @@
 #include <gtkhtml/htmlselection.h>
 #include <gal/widgets/e-unicode.h>
 #include <libgnomeprint/gnome-print.h>
+#include <libgnomeprintui/gnome-print-dialog.h>
+#include <libgnomeprintui/gnome-print-job-preview.h>
 #include <fcntl.h>
 
 #include "gui/html.h"
@@ -1000,34 +1002,72 @@ void gui_display_html(GtkWidget * html, const gchar * txt, gint lentxt)
  *						gpointer user_data)
  *
  * Description
- *   printing stuff
+ *   printing stuff - take from Evolution 1.4.x
  *
  * Return value
  *   void
  */
 
-static gint page_num;
-static GnomeFont *font;
-static void print_footer(GtkHTML * html, GnomePrintContext * context,
-			 gdouble x, gdouble y, gdouble width,
-			 gdouble height, gpointer user_data)
+struct footer_info {
+	GnomeFont *local_font;
+	gint page_num, pages;
+};
+
+static void print_footer(GtkHTML * html,
+			 GnomePrintContext * print_context, gdouble x,
+			 gdouble y, gdouble width, gdouble height,
+			 gpointer user_data)
 {
-	//gchar *text = g_strdup_printf("- %d -", page_num);
-	/*gdouble tw = gnome_font_get_width_string(font, "text");
+	struct footer_info *info = (struct footer_info *) user_data;
 
-	   if (font) {
-	   gnome_print_newpath(context);
-	   gnome_print_setrgbcolor(context, .0, .0, .0);
-	   gnome_print_moveto(context, x + (width - tw) / 2,
-	   y - (height +
-	   gnome_font_get_ascender(font)) /
-	   2);
-	   gnome_print_setfont(context, font);
-	   gnome_print_show(context, text);
-	   }
+	if (info->local_font) {
+		char *text =
+		    g_strdup_printf(_("Page %d of %d"), info->page_num,
+				    info->pages);
+		gdouble tw = strlen(text) * 8;
 
-	   g_free(text);
-	   page_num++; */
+		gnome_print_gsave(print_context);
+		gnome_print_newpath(print_context);
+		gnome_print_setrgbcolor(print_context, .0, .0, .0);
+		gnome_print_moveto(print_context, x + width - tw,
+				   y -
+				   gnome_font_get_ascender(info->
+							   local_font));
+		gnome_print_setfont(print_context, info->local_font);
+		gnome_print_show(print_context, text);
+		gnome_print_grestore(print_context);
+
+		g_free(text);
+		info->page_num++;
+	}
+}
+
+static void footer_info_free(struct footer_info *info)
+{
+	if (info->local_font)
+		gnome_font_unref(info->local_font);
+	g_free(info);
+}
+
+static struct footer_info *footer_info_new(GtkHTML * html,
+					   GnomePrintContext * pc,
+					   gdouble * line)
+{
+	struct footer_info *info;
+
+	info = g_new(struct footer_info, 1);
+	info->local_font = gnome_font_find_closest("Helvetica", 10.0);
+
+	if (info->local_font)
+		*line =
+		    gnome_font_get_ascender(info->local_font) -
+		    gnome_font_get_descender(info->local_font);
+
+	info->page_num = 1;
+	info->pages =
+	    gtk_html_print_get_pages_num(html, pc, 0.0, *line);
+
+	return info;
 }
 
 
@@ -1047,50 +1087,78 @@ static void print_footer(GtkHTML * html, GnomePrintContext * context,
  *   void
  */
 
-void gui_html_print(GtkWidget * htmlwidget)
+void gui_html_print(GtkWidget * htmlwidget, gboolean preview)
 {
-/*	GnomePrintMaster *print_master;
-	GnomePrintContext *print_context;
-	GtkWidget *preview;
-	GtkWidget *print_dialog;
 	GtkHTML *html;
-	gint ret;
+	GtkWidget *w = NULL;
+	GnomePrintContext *print_context;
+	GnomePrintJob *print_master;
+	GnomePrintConfig *config = NULL;
+	GtkDialog *dialog;
+	gdouble line = 0.0;
+	struct footer_info *info;
+
+	if (!preview) {
+		dialog =
+		    (GtkDialog *) gnome_print_dialog_new(NULL,
+						 _("Print"),
+						 GNOME_PRINT_DIALOG_COPIES);
+		gtk_dialog_set_default_response(dialog,
+					GNOME_PRINT_DIALOG_RESPONSE_PRINT);
+		gtk_window_set_transient_for((GtkWindow *) dialog,
+					     (GtkWindow *)
+					     gtk_widget_get_toplevel
+					     (widgets.app));
+
+		switch (gtk_dialog_run(dialog)) {
+		case GNOME_PRINT_DIALOG_RESPONSE_PRINT:
+			break;
+		case GNOME_PRINT_DIALOG_RESPONSE_PREVIEW:
+			preview = TRUE;
+			break;
+		default:
+			gtk_widget_destroy((GtkWidget *) dialog);
+			return;
+		}
+
+		config =
+		    gnome_print_dialog_get_config((GnomePrintDialog *)
+						  dialog);
+		gtk_widget_destroy((GtkWidget *) dialog);
+	}
+
+	if (config) {
+		print_master = gnome_print_job_new(config);
+		gnome_print_config_unref(config);
+	} else
+		print_master = gnome_print_job_new(NULL);
+
+	print_context = gnome_print_job_get_context(print_master);
 
 	html = GTK_HTML(htmlwidget);
 
-	print_master = gnome_print_master_new();
-	print_context = gnome_print_master_get_context(print_master);
+	gtk_html_print_set_master(html, print_master);
 
-	print_dialog = gnome_print_dialog_new(_("Print"), 0);
+	info = footer_info_new(html, print_context, &line);
+	gtk_html_print_with_header_footer(html, print_context, 0.0,
+					  line, NULL, print_footer,
+					  info);
+	footer_info_free(info);
 
-	page_num = 1;
-	font =
-	    gnome_font_new_closest("Times", GNOME_FONT_BOOK, FALSE, 12);
-	ret = gnome_dialog_run(GNOME_DIALOG(print_dialog));
-	print_master =
-	    gnome_print_master_new_from_dialog(GNOME_PRINT_DIALOG
-					       (print_dialog));
-	print_context = gnome_print_master_get_context(print_master);
-	gtk_html_print_with_header_footer(html, print_context, .0,
-					  .03, NULL, print_footer,
-					  NULL);
+	gnome_print_job_close(print_master);
 
-	switch (ret) {
-	case GNOME_PRINT_PRINT:
-		gnome_print_master_print(print_master);
-		break;
-	case GNOME_PRINT_PREVIEW:
-		preview = GTK_WIDGET(gnome_print_master_preview_new
-				     (print_master,
-				      _("GnomeSword Print Preview")));
-		gtk_widget_show(preview);
-		break;
-	case GNOME_PRINT_CANCEL:
-		break;
+	if (preview) {
+		GtkWidget *pw;
+
+		pw = gnome_print_job_preview_new(print_master,
+						 _("Print Preview"));
+		gtk_widget_show(pw);
+	} else {
+		int result = gnome_print_job_print(print_master);
+
+		if (result == -1)
+			g_warning(_("Printing of document failed"));
 	}
-	gtk_widget_destroy(print_dialog);
-	
-	if (font)
-		gtk_object_unref(GTK_OBJECT(font));
-	gtk_object_unref(GTK_OBJECT(print_master));*/
+
+	g_object_unref(print_master);
 }
