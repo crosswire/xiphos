@@ -57,8 +57,9 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
-#include "noteeditor.h"
+//#include "noteeditor.h"
 #include "gs_html.h"
+#include "gs_search.h"
 
 /***********************************************************************************************
 Sword global to this file
@@ -142,7 +143,7 @@ INTERLINEAR interlinearMods;
  externals
 ***********************************************************************************************/
 extern gboolean changemain; /* change verse of Bible text window */
-extern NoteEditor *noteeditor; /* we need this to set up sword display */
+//extern NoteEditor *noteeditor; /* we need this to set up sword display */
 extern gint 	dictpages, /* number of dictionaries */
 	 	compages;  /* number of commentaries */
 extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved */
@@ -160,6 +161,7 @@ extern HISTORY historylist[];  /* sturcture for storing history items */
 extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
 extern GString *gs_clipboard;
+extern gboolean firstsearch;
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -234,7 +236,7 @@ initSWORD(GtkWidget *mainform)
 	}
 #endif /* USE_SHORTCUTBAR */
         //-- setup displays for sword modules
-    	noteeditor = new NoteEditor();
+    	//noteeditor = new NoteEditor();
 	GTKEntryDisp::__initialize();
 	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
 	
@@ -656,8 +658,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 		delete HTMLchapDisplay;	
 	if(RWPDisplay)
 		delete RWPDisplay;		
-	if(noteeditor)
-		delete noteeditor;	
+	/*if(noteeditor)
+		delete noteeditor;	*/
 	gtk_exit(0);           //-- exit	
 }
 
@@ -1344,3 +1346,35 @@ void SDdictSearchTextChangedSWORD(char* newkey)
 	}
 }
 
+/*  
+ * 
+ */
+GtkWidget *createSearchDlgSWORD(void)
+{
+	GtkWidget* searchDlg;
+	
+	searchDlg = create_dlgSearch();
+	searchWindow->initsearchWindow(searchDlg);
+	firstsearch = FALSE;
+	gtk_signal_connect(GTK_OBJECT(searchDlg), "destroy",
+				GTK_SIGNAL_FUNC(on_dlgSearch_destroy),
+				 NULL);
+	return searchDlg;
+}
+
+/* 
+ *
+ */
+void startsearchSWORD(GtkWidget *searchFrm)
+{	
+	gtk_clist_clear(GTK_CLIST(searchWindow->resultList));
+	searchWindow->searchSWORD(searchFrm);	
+}
+
+/* 
+ *searchWindow->resultsListSWORD(searchFrm, row, column);
+ */
+void rlclickedSWORD(GtkWidget *searchFrm)
+{	
+	
+}

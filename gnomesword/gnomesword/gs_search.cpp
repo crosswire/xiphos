@@ -1,5 +1,5 @@
 /***************************************************************************
-                          searchstuff.cpp  -  description
+                          gs_search.cpp  -  description
                              -------------------
     begin                : Wed Jul 26 2000
     copyright            : (C) 2000 by Terry Biggs
@@ -29,7 +29,8 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "searchstuff.h"
+#include "gs_search.h"
+#include "gs_search_cb.h"
 #include "display.h"
 #include "callback.h"
 #include "gs_sword.h"
@@ -42,6 +43,7 @@
 SearchWindow *searchWindow;
 extern SWModule *curMod, *curcomMod, *percomMod;
 static void percentUpdate(char percent, void *userData) ;
+extern gboolean firstsearch;
 
 SearchWindow::SearchWindow ()
 {
@@ -234,27 +236,6 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 		sprintf (scount, "%d", count);	//-- put count into string
 		gtk_label_set_text (GTK_LABEL (lbSearchHits), scount);	//-- tell user how many hits we had
         }
-}
-
-//-------------------------------------------------------------------------------------------
-void
-SearchWindow::resultsListSWORD (GtkWidget * searchFrm, gint row, gint column)	//-- someone clicked the results list
-{				                                                //-- from our search and sent us here
-	GtkWidget       *resultList,	//-- pointer to resultlist        
-	                *contextToggle;	//-- pointer to context check box        
-	gchar           *text;		//-- pointer to resultlist key text
-
-	resultList = lookup_widget (searchFrm, "resultList");	//-- set pointer to resultList
-	contextToggle = lookup_widget (searchFrm, "cbContext");	//-- set pointer to context check box     
-	gtk_clist_get_text (GTK_CLIST (resultList), row, column, &text);	//-- get key text from resultlist
-	if (searchMod) {	/* make sure module is not null */	  
-		  searchMod->SetKey (text);	//-- set module to verse key text
-		  searchMod->Display ();	//-- show verse or commentary
-	}
-	if (GTK_TOGGLE_BUTTON (contextToggle)->active) {	/* check state of context check box */        
-		  /* if true */
-		  changeVerseSWORD(text);	/* show selection in main window */
-	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -710,6 +691,3 @@ SearchWindow::create ()
 
 	return dlgSearch;
 }
-
-
-

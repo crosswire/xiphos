@@ -1,9 +1,9 @@
 /***************************************************************************
-                          noteeditor.h  -  description
+                          gs_search_cb.h  -  description
                              -------------------
-    begin                : Tue Jul 18 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
+    begin                : Mon Mar 12 2001
+    copyright            : (C) 2001 by Terry Biggs
+    email                : tbiggs@users.sourceforge.net
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,17 +14,19 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-class NoteEditor
-{
-    public:
-        NoteEditor();
-        ~NoteEditor();
-        bool setBOLD(GtkWidget *text);
-        bool setITALIC(GtkWidget *text);
-        bool setREFERENCE(GtkWidget *text);
-        bool setUNDERLINE(GtkWidget *text);
-        bool setGREEK(GtkWidget *text);
-        bool setNEWLINE(GtkWidget *text); 		
-};
+#include <gnome.h>
+	
+void on_btnSearchOK_clicked(GtkButton * button, gpointer user_data);
+void on_btnSearchSaveList_clicked(GtkButton * button, gpointer user_data);
+void on_btnSearch1_clicked(GtkButton * button, gpointer user_data);
+void on_resultList_select_row(GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data);
+void on_dlgSearch_destroy(GtkObject * object, gpointer user_data);
+
+#ifdef __cplusplus
+}
+#endif
 
