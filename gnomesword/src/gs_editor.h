@@ -68,6 +68,10 @@ struct _GSHTMLEditorControlData {
 	 GtkWidget * toolbar_commands, *toolbar_style;
 	/* toolbars buttons */
 	 GtkWidget
+	    *editnote,
+	    *file,
+	    *edit2,
+	    *link,
 	    * tt_button,
 	    *bold_button,
 	    *italic_button,
