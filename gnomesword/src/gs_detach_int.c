@@ -32,7 +32,7 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include "gs_undock_int.h"
+#include "gs_detach_int.h"
 #include "gs_gnomesword.h"
 #include "sw_sword.h"
 
@@ -287,7 +287,7 @@ create_dlgInterlinear (SETTINGS *s)
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area19), 8);
 
   gnome_dialog_append_button_with_pixmap (GNOME_DIALOG (dlgInterlinear),
-                                          _("Dock"), GNOME_STOCK_PIXMAP_HOME);
+                                          _("Attach"), GNOME_STOCK_PIXMAP_HOME);
   btnDockInt = GTK_WIDGET (g_list_last (GNOME_DIALOG (dlgInterlinear)->buttons)->data);
   gtk_widget_ref (btnDockInt);
   gtk_object_set_data_full (GTK_OBJECT (dlgInterlinear), "btnDockInt", btnDockInt,
