@@ -43,7 +43,9 @@ struct _passage_tab_info {
 };
 extern PASSAGE_TAB_INFO *cur_passage_tab; //need to update this every time one of the variables changes (i.e. new verse selected)
 
-void gui_set_tab_label(const gchar * key);
+void gui_save_tabs(gchar *filename);
+void gui_load_tabs(gchar *filename);
+void gui_set_tab_label(const gchar *key);
 void gui_open_module_in_new_tab(gchar *module);
 void gui_open_passage_in_new_tab(gchar *key);
 void gui_close_passage_tab(gint pagenum);
@@ -54,10 +56,11 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   const gchar * dictlex_key, 
 			   const gchar * book_offset,
 			   gboolean comm_showing);
+void gui_close_all_tabs(void);
+void gui_open_tabs(void);
 
-void gui_notebook_main_setup(GList *ptlist);
+void gui_notebook_main_setup(void);
 void gui_notebook_main_shutdown(void);
-
 
 #ifdef __cplusplus
 }
