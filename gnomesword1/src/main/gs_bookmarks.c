@@ -43,7 +43,6 @@
  * externals
  *****************************************************************************/
 
-extern GtkWidget *MainFrm;
 extern GtkCTreeNode *personal_node;
 extern gchar *fnquickmarks;
 extern GdkPixmap *pixmap1;
@@ -525,7 +524,7 @@ void on_new_subgroup_activate(GtkMenuItem * menuitem, gpointer user_data)
 				 "Enter SubGroup Name - use no \'|\'",
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
-				 GINT_TO_POINTER(0), GTK_WINDOW(MainFrm));
+				 GINT_TO_POINTER(0), GTK_WINDOW(settings.app));
 }
 
 /*
@@ -540,7 +539,7 @@ void on_add_new_group1_activate(GtkMenuItem * menuitem, gpointer user_data)
 				 "Enter Group Name - use no \'|\'",
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
-				 GINT_TO_POINTER(1), GTK_WINDOW(MainFrm));
+				 GINT_TO_POINTER(1), GTK_WINDOW(settings.app));
 }
 
 /*
@@ -701,7 +700,7 @@ void addverselistBM(SETTINGS * s, GList * list)
 				 "Enter Root Group Name - use no \'|\'",
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
-				 GINT_TO_POINTER(1), GTK_WINDOW(MainFrm));
+				 GINT_TO_POINTER(1), GTK_WINDOW(s->app));
 	/*** wait here until dialog is closed ***/
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dialog));

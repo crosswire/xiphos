@@ -40,7 +40,7 @@ extern "C" {
 	void backend_shutdown(SETTINGS * s);
 	void backend_set_locale(char *locale);
 	char *backend_get_valid_key(char *key);
-	char *backend_get_book_from_key(char *key);
+	const char *backend_get_book_from_key(char *key);
 	int backend_get_chapter_from_key(char *key);
 	int backend_get_verse_from_key(char *key);
 	void backend_change_percom_module(gchar * modName);

@@ -88,6 +88,8 @@ module.include.files=\
 	src/gnome/create_shortcutbar_viewer.h\
 	src/gnome/cipher_key_dialog.h\
 	src/gnome/editor_menu.h\
+	src/gnome/fileselection.h\
+	src/gnome/gui.h\
 	src/gnome/link_dialog.h\
 	src/gnome/main_menu.h\
 	src/gnome/link_dialog.h\
@@ -102,7 +104,6 @@ module.include.files=\
 	src/main/gs_editor_replace.h\
 	src/main/gs_editor_search.h\
 	src/main/gs_editor_toolbar.h\
-	src/main/gs_file.h\
 	src/main/gs_find_dlg.h\
 	src/main/gs_gbs.h\
 	src/main/gs_interlinear.h\
@@ -124,6 +125,7 @@ module.include.files=\
 	src/main/gs_viewdict_dlg.h\
 	src/main/gs_viewtext_dlg.h\
 	src/main/percomm.h\
+	src/main/settings.h\
 	src/main/spell.h\
 	src/main/spell_gui.h\
 	src/main/support.h
@@ -160,7 +162,9 @@ module.source.files=\
 	src/gnome/create_shortcutbar_viewer.c\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/editor_menu.c\
+	src/gnome/fileselection.c\
 	src/gnome/link_dialog.c\
+	src/gnome/gui.c\
 	src/gnome/main_menu.c\
 	src/gnome/splash.c\
 	src/main/char_table.c\
@@ -174,7 +178,6 @@ module.source.files=\
 	src/main/gs_editor_replace.c\
 	src/main/gs_editor_search.c\
 	src/main/gs_editor_toolbar.c\
-	src/main/gs_file.c\
 	src/main/gs_find_dlg.c\
 	src/main/gs_gbs.c\
 	src/main/gs_interlinear.c\
@@ -197,6 +200,7 @@ module.source.files=\
 	src/main/gs_viewtext_dlg.c\
 	src/main/main.c\
 	src/main/percomm.c\
+	src/main/settings.c\
 	src/main/spell.c\
 	src/main/spell_gui.c\
 	src/main/support.c

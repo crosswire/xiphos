@@ -178,7 +178,6 @@ static void int_display(SETTINGS *s, gchar * key)
 		buf[500], 
 		*tmpkey,
 		tmpbuf[256],
-		*cur_book,
 		*mod_name,
 		*use_font_size;
 	
@@ -191,6 +190,8 @@ static void int_display(SETTINGS *s, gchar * key)
 		cur_verse,
 		cur_chapter,
 		i = 1,j;
+	
+	const char *cur_book;
 	
 	GtkHTML *html = GTK_HTML(s->htmlInterlinear);
 	

@@ -147,12 +147,12 @@ void backend_setup_verselist(GtkWidget * html_widget, SETTINGS * s)
 
 /******************************************************************************
  * Name
- *   backend_shut_down_verselist
+ *   backend_shutdown_verselist
  *
  * Synopsis
  *   #include "verselist.h"
  *
- *   void backend_shut_down_verselist(void)	
+ *   void backend_shutdown_verselist(void)	
  *
  * Description
  *   shutdown verse list display
@@ -160,7 +160,7 @@ void backend_setup_verselist(GtkWidget * html_widget, SETTINGS * s)
  * Return value
  *   void
  */
-void backend_shut_down_verselist(void)
+void backend_shutdown_verselist(void)
 {
 	delete mgr;
 	if (entry_display)

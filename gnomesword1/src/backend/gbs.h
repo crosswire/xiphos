@@ -45,8 +45,8 @@ extern "C" {
 			unsigned long offset);
 	gboolean backend_displayRowGBS(gint booknum,
 			gchar *offset);
-	void backend_setupGBS(SETTINGS *s);
-	void backend_shutdownGBS(void);
+	void backend_setup_books(SETTINGS *s);
+	void backend_shutdown_books(void);
 	//void displayinGBS(gchar *key);
 
 #ifdef __cplusplus

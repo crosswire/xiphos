@@ -85,47 +85,27 @@ typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
 
 /******************************************************************************
- * Sword globals 
+ * static  global to this file only 
  */
-SWDisplay *FPNDisplay; /* to display formatted personal notes */
 
-SWMgr * percomMgr,  /* sword mgr for personal comments editor */
-    *mainMgr;		/* sword mgr for curMod */
-
-VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
- vkText, vkComm;
-SWModule *curMod,		/* module for main text window */
-*percomMod;			/* module for personal commentary  window */
-
-modDescMap descriptionMap;
-bookAbrevMap abrevationMap;
+static SWMgr *mainMgr;		/* sword mgr for curMod */
+static SWModule *curMod;		/* module for main text window */
+static modDescMap descriptionMap;
 
 /******************************************************************************
  * globals
  */
 
+bookAbrevMap abrevationMap;
 
-GtkWidget *NEtext,		/* note edit widget */
-*MainFrm;			/* main form widget  */
+gboolean 
+ autoSave = true,	/* we want to auto save changes to personal comments */
+ havebible = false,	/* do we have at least one bibletext module */
+ havedict = false,	/* do we have at least one lex-dict module */
+ havecomm = false,	/* do we have at least one commentary module */
+ havebook = false,	/* do we have at least one book module */
+ havepercomm = false;	/* do we have at least one personal commentary module */
 
-gboolean noteModified = false,	/* set to true is personal note has changed */
- usepersonalcomments = false,	/* do we setup for personal comments - default is false  */
- autoSave = true,		/* we want to auto save changes to personal comments */
- havebible = false,		/* let us know if we have at least one bibletext module */
- havedict = false,		/* let us know if we have at least one lex-dict module */
- havecomm = false;		/* let us know if we have at least one commentary module */
-
-gchar com_key[80] = "Rom 8:28",	/* current commentary key */
-*textmod, *commod, *dictmod;
-
-gint 
- dictpages,		/* number of dictionaries */
- compages,			/* number of commentaries */
- textpages,			/* number of Bible text */
- bookpages;
-
-extern GtkWidget *htmlComments;
-extern gchar current_verse[80];	
 
 /******************************************************************************
  * Name
@@ -144,8 +124,7 @@ extern gchar current_verse[80];
  */
 void backend_first_init(void)
 {
-	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
-	percomMgr = new SWMgr();
+	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgr
 	/*
 	   char locale_name[40];
 	   sprintf(locale_name,"%s",(char *)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
@@ -158,9 +137,6 @@ void backend_first_init(void)
 	   }
 	 */
 	curMod = NULL;		//-- set mods to null
-	percomMod = NULL;
-
-	FPNDisplay = 0;
 }
 
 /******************************************************************************
@@ -180,38 +156,22 @@ void backend_first_init(void)
  */
 void backend_init_sword(SETTINGS * s)
 {
-	ModMap::iterator it;	//-- iteratior
-	ConfigEntMap::iterator eit;	//-- iteratior
-	int i,			//-- counter
-	 j;			//-- counter 
-	GList *tmp;
+	ModMap::iterator it;
 	
+	gint 
+	 dictpages = 0,		/* number of dictionaries */
+	 compages = 0,			/* number of commentaries */
+	 textpages = 0,			/* number of Bible text */
+	 bookpages = 0,
+	 percommpages = 0;
 	
 		
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n", "Initiating Sword\n");
 
-	//-- setup versekeys for text and comm windows
-	vkText.Persist(1);
-	vkComm.Persist(1);
-	vkText = settings.currentverse;
-	vkComm = settings.currentverse;
-
-
 	s->displaySearchResults = false;
 	s->havethayer = false;
 	s->havebdb = false;
-
-	MainFrm = s->app;	//-- save mainform for use latter
-//	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
-
-	//-- setup displays for sword modules
-	FPNDisplay = new GtkHTMLEntryDisp(htmlComments, s);
-	compages = 0;
-	dictpages = 0;
-	textpages = 0;
-	bookpages = 0;
-
 
 	if (s->showsplash) {
 		while (gtk_events_pending())
@@ -221,7 +181,7 @@ void backend_init_sword(SETTINGS * s)
 	g_print("Sword locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 
-	g_print("%s\n", "Loading SWORD Modules");
+	g_print("%s\n", "Check for SWORD Modules");
 
 	for (it = mainMgr->Modules.begin();
 	     it != mainMgr->Modules.end(); it++) {
@@ -236,50 +196,52 @@ void backend_init_sword(SETTINGS * s)
 		}
 
 		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
-			havecomm = TRUE;	//-- we have at least one commentay module
-			++compages;	//-- how many pages do we have 
+			if ((*mainMgr->config->Sections[(*it).second->Name()].
+			     find("ModDrv")).second == "RawFiles") {
+				havepercomm = TRUE;
+				++percommpages;
+			}
+			havecomm = TRUE;//-- we have at least one commentay module
+			++compages;	
 		}
 
 		else if (!strcmp
 			 ((*it).second->Type(), DICT_MODS)) {
-			havedict = TRUE;	//-- we have at least one lex / dict module
-			++dictpages;	//-- how many pages do we have
+			havedict = TRUE;//-- we have at least one lex / dict module
+			++dictpages;	
 
 		}
 
 		else if (!strcmp((*it).second->Type(), BOOK_MODS)) {
 			++bookpages;
+			havebook = TRUE;
 		}
 	}
-
+	/*
+	 * report what was found
+	 */
 	g_print("\nNumber of Text modules = %d\n", textpages);
 	g_print("Number of Commentary modules = %d\n", compages);
+	g_print("Number of Personal Commentary modules = %d\n", percommpages);
 	g_print("Number of Dict/Lex modules = %d\n", dictpages);
 	g_print("Number of Book modules = %d\n\n", bookpages);
 
-	//-- setup Commentary Support, Generic Book Support and Dict/Lex Support
-	backend_setup_text(s);
-	backend_setup_commentary(s);
-	backend_setupDL(s);
-	backend_setupGBS(s);
-	backend_setup_interlinear(s);
-	backend_setup_percomm(s);
 	/*
-	//-- set up percom editor module
-	for (it = percomMgr->Modules.begin();
-	     it != percomMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Commentaries")) {
-			//-- if driver is RawFiles                     
-			if ((*percomMgr->config->
-			     Sections[(*it).second->Name()].
-			     find("ModDrv")).second == "RawFiles") {
-				percomMod = (*it).second;
-				percomMod->Disp(FPNDisplay);
-				usepersonalcomments = TRUE;	
-				percomMod->SetKey(s->currentverse);
-			}
-		}
-	}*/
+	 * setup Bible text, Commentary, Personal Comments
+	 * Generic Book and Dict/Lex Support
+	 */	
+	if(havebible)
+		backend_setup_text(s);
+	if(havecomm)
+		backend_setup_commentary(s);
+	if(havepercomm)
+		backend_setup_percomm(s);
+	if(havedict)
+		backend_setup_dictlex(s);
+	if(havebook)
+		backend_setup_books(s);
+	if(havebible)
+		backend_setup_interlinear(s);
 }
 
 GList * backend_get_global_options_list(void)
@@ -336,27 +298,39 @@ void backend_shutdown(SETTINGS * s)
 	savebookmarks(s->ctree_widget);
 	backend_save_properties(s, true);
 
-	backend_shut_down_verselist();
 	backend_shutdown_text();
-	backend_shutdownGBS();
-	backend_shutdownDL();
 	backend_shutdown_commentary();
+	backend_shutdown_percomm();
+	backend_shutdown_dictlex();
+	backend_shutdown_books();
 	backend_shutdown_search_results_display();
 	backend_shutdown_sb_viewer();
 	backend_shutdown_interlinear();
-	backend_shutdown_percomm();
+	backend_shutdown_verselist();
 	
-	//-- delete Sword managers
+	/*
+	 * delete Sword manager
+	 */
 	delete mainMgr;
-	delete percomMgr;
 
-	//-- delete Sword displays
-	if (FPNDisplay)
-		delete FPNDisplay;
-	g_print("\nwe are done with Sword\n");
+	g_print("\nSword is shutdown\n");
 }
 
-
+/******************************************************************************
+ * Name
+ *   backend_get_valid_key
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   char *backend_get_valid_key(char *key)	
+ *
+ * Description
+ *    returns a valid Bible reference - must be freed by calling function
+ *
+ * Return value
+ *   char *
+ */
 
 char *backend_get_valid_key(char *key)
 {
@@ -366,12 +340,12 @@ char *backend_get_valid_key(char *key)
 	return g_strdup((char *) vkey.getText());
 }
 
-char *backend_get_book_from_key(char *key)
+const char *backend_get_book_from_key(char *key)
 {
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return (char *) vkey.books[vkey.Testament() - 1][vkey.Book() -
+	return vkey.books[vkey.Testament() - 1][vkey.Book() -
 							 1].name;
 }
 
@@ -629,7 +603,7 @@ GList *backend_get_list_of_percom_modules(void)
 	     it != mainMgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			//-- if driver is RawFiles                     
-			if ((*percomMgr->config->
+			if ((*mainMgr->config->
 			     Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
 				mods =
