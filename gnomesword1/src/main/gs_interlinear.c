@@ -45,7 +45,7 @@ void update_interlinear_page(SETTINGS * s)
 {
 	gchar tmpBuf[256], *rowcolor, *font_size;
 	gchar *utf8str,*mod_name, *font_name;
-	gint utf8len, i;
+	gint utf8len, i, j;
 	gboolean was_editable, use_gtkhtml_font;
 	
 	if (havebible) {
@@ -71,7 +71,7 @@ void update_interlinear_page(SETTINGS * s)
 				       utf8str, utf8len);
 		}
 		
-		for(i = 0; i < 5; i++) {
+		for(i = 0, j = 0; i < 5; i++) {
 			mod_name = NULL;
 			switch(i) {
 				case 0:
@@ -91,6 +91,10 @@ void update_interlinear_page(SETTINGS * s)
 				break;
 			}
 			
+			if(!*mod_name) continue;
+
+			++j;
+			
 			if((font_name = backend_get_module_font_name(mod_name)) != NULL)
 				use_gtkhtml_font = FALSE;
 			else
@@ -98,12 +102,12 @@ void update_interlinear_page(SETTINGS * s)
 			
 			font_size = s->interlinear_font_size; 
 			
-			if (i == 0 || i == 2 || i == 4)
+			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
 			else
 				rowcolor = s->bible_bg_color;
 			
-			if (i == 0) {
+			if (j == 0) {
 				sprintf(tmpBuf,
 					"<tr><td><i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i></td></tr>",
 					s->bible_verse_num_color,
@@ -141,7 +145,7 @@ void update_interlinear_page(SETTINGS * s)
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 			}
 				
-			 utf8str = backend_get_interlinear_module_text(mod_name, s->currentverse);
+			utf8str = backend_get_interlinear_module_text(mod_name, s->currentverse);
 			if (strlen(utf8str)) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
 				g_free(utf8str);
