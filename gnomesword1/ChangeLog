@@ -1,3 +1,8 @@
+2003-05-13  Terry <tbiggs@users.sf.net>
+
+	* added studypad default directory entry to preferences_dialog.c
+
+
 2003-05-12  Terry <tbiggs@users.sf.net>
 
 	* added m4/gnomesword.m4

@@ -70,7 +70,7 @@ struct _preferences_entry {
 	GtkWidget *hebrew_lex__module;
 	GtkWidget *greek_lex_viewer_module;
 	GtkWidget *hebrew_lex_viewer_module;
-
+	GtkWidget *combo_entry_sp_dir;
 	GtkWidget *verse_number_size;
 };
 
@@ -482,7 +482,12 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	gchar *buf;
 	gchar layout[80];
 	gdouble color[4];
-
+	
+	/*** read default dir entry ***/
+	buf = gtk_entry_get_text(GTK_ENTRY(entry.combo_entry_sp_dir));
+	xml_set_value("GnomeSword", "studypad", "directory", buf);
+	settings.studypaddir = xml_get_value("studypad", "directory");
+	
 	/*** read modules ***/
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.text_module));
 	xml_set_value("GnomeSword", "modules", "text", buf);
@@ -1183,6 +1188,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkWidget *label146;
 	GtkWidget *label152;
 	GtkWidget *label147;
+	GtkWidget *hbox_default_dir;
+	GtkWidget *fileentry1;
+	GtkWidget *label;
 	GtkWidget *gcpCurrentverseBG;
 	GtkWidget *cmbVerseNumSize;
 	GList *cmbVerseNumSize_items = NULL;
@@ -1765,6 +1773,25 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.percomm_formatting),
 				     TRUE);
+
+
+  hbox_default_dir = gtk_hbox_new (FALSE, 0);
+  gtk_widget_show (hbox_default_dir);
+  gtk_box_pack_start (GTK_BOX (vbox89), hbox_default_dir, FALSE, FALSE, 0);
+
+  label = gtk_label_new (_("Default Directory"));
+  gtk_widget_show (label);
+  gtk_box_pack_start (GTK_BOX (hbox_default_dir), label, FALSE, FALSE, 0);
+  gtk_misc_set_padding (GTK_MISC (label), 3, 0);
+
+  fileentry1 = gnome_file_entry_new (NULL, _("StudyPad Default Directory"));
+  gtk_widget_show (fileentry1);
+  gtk_box_pack_start (GTK_BOX (hbox_default_dir), fileentry1, TRUE, TRUE, 0);
+  gnome_file_entry_set_directory (GNOME_FILE_ENTRY (fileentry1), TRUE);
+
+  entry.combo_entry_sp_dir = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (fileentry1));
+  gtk_widget_show (entry.combo_entry_sp_dir);
+
 
 	label123 = gtk_label_new(_("Interface"));
 	gtk_widget_show(label123);
@@ -2454,6 +2481,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   settings.lex_hebrew);
 	gtk_entry_set_text(GTK_ENTRY(entry.devotion_module),
 			   settings.devotionalmod);
+	gtk_entry_set_text(GTK_ENTRY(entry.combo_entry_sp_dir),
+			   settings.studypaddir);
 
 	/********************************************* end settings */
 
@@ -2658,6 +2687,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   "changed", GTK_SIGNAL_FUNC(on_Entry_changed),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(entry.devotion_module), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(entry.combo_entry_sp_dir), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	/*** OK - Apply - Cancel ***/
 	gtk_signal_connect(GTK_OBJECT(button.ok), "clicked",
