@@ -43,7 +43,6 @@
 #include "sw_display.h"
 #include "gs_shortcutbar.h"
 
-#include "sw_utility.h"
 #include "sw_verselist_sb.h"
 #include "support.h"
 

@@ -40,7 +40,6 @@
 #include "sw_viewdict_dlg.h"
 #include "sw_sword.h"
 #include "sw_display.h"
-#include "sw_utility.h"
 
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWMgr *SDMgr;	/* sword mgr for view dict dialog */
