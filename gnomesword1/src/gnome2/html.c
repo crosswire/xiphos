@@ -458,7 +458,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		if (url == NULL)
 			return;
 	} 
-	delay = 500000;
+	delay = 500000; 
 */
 	if (url == NULL) { /* moved out of url - clear appbar */
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
