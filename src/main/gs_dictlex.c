@@ -86,7 +86,7 @@ void on_notebookDL_switch_page(GtkNotebook * notebook,
 			       GtkNotebookPage * page,
 			       gint page_num, GList * dl_list)
 {
-	DL_DATA *d, *d_old;
+	DL_DATA *d; //, *d_old;
 
 //      d_old = (DL_DATA*)g_list_nth_data(tmp, settings->dlLastPage);
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);

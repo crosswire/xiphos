@@ -39,6 +39,7 @@
 
 
 #include "search_.h"
+#include "sword.h"
 #include "gs_shortcutbar.h"
 #include "gs_gnomesword.h"
 #include "support.h"
@@ -63,12 +64,9 @@ extern SB_VIEWER sb_v, *sv ;
 
 extern gchar *shortcut_types[];
 extern SETTINGS *settings;
-extern gboolean havedict;	/* let us know if we have at least one lex-dict module */
+extern gboolean havedict;	/* let us know if we have at least one lex/dict module */
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
-extern GList *bookmods;
-extern GList *sbbookmods;
-
 
 extern GList *sblist;			/* for saving search results to bookmarks  */
 gint 
@@ -301,9 +299,7 @@ void showSBGroup(SETTINGS * s, gint groupnum)
 		biblepanesize =
 		    (settings->gs_width -
 		     settings->shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "epaned")),
+		e_paned_set_position(E_PANED(s->epaned),
 				     s->shortcutbar_width);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
@@ -738,7 +734,7 @@ static gint add_sb_group(EShortcutBar * shortcut_bar,
 }
 
 /*** dock/undock shortcut bar ***/
-void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
+void dock_undock(SETTINGS * s)
 {
 	gint biblepanesize;
 
@@ -750,9 +746,7 @@ void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 		gtk_widget_reparent(shortcut_bar, s->vboxDock);
 		settings->showshortcutbar = TRUE;
 		gtk_widget_show(shortcut_bar);
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "epaned")), 0);
+		e_paned_set_position(E_PANED(s->epaned), 0);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
 				      (s->app, "hpaned1")),
@@ -763,16 +757,14 @@ void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 		s->docked = TRUE;
 		biblepanesize =
 		    (s->gs_width - s->shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "epaned")),
+		e_paned_set_position(E_PANED(s->epaned),
 				     s->shortcutbar_width);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
 				      (s->app, "hpaned1")),
 				     biblepanesize);
 		gtk_widget_reparent(shortcut_bar,
-				    lookup_widget(s->app, "epaned"));
+				    s->epaned);
 		gtk_widget_destroy(s->dockSB);
 	}
 }
@@ -789,9 +781,7 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS * s)
 		settings->showshortcutbar = FALSE;
 		s->biblepane_width = s->gs_width / 2;
 		gtk_widget_hide(shortcut_bar);
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "epaned")), 0);
+		e_paned_set_position(E_PANED(s->epaned), 0);
 		e_paned_set_position(E_PANED
 				     (lookup_widget
 				      (s->app, "hpaned1")),
@@ -800,13 +790,10 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS * s)
 		s->showshortcutbar = TRUE;
 		s->biblepane_width =
 		    (s->gs_width - s->shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "epaned")),
+		e_paned_set_position(E_PANED(s->epaned),
 				     s->shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "hpaned1")),
+				     (lookup_widget(s->app, "hpaned1")),
 				     s->biblepane_width);
 		gtk_widget_show(shortcut_bar);
 	}
@@ -1228,6 +1215,27 @@ void setupSB(SETTINGS * s)
 	gchar *filename, group_name[256], icon_size[10], modName[16];
 	GdkPixbuf *icon_pixbuf = NULL;
 
+	/*
+	 * shortcut bar 
+	 */
+	shortcut_model = e_shortcut_model_new();
+
+	shortcut_bar = e_shortcut_bar_new();
+	e_shortcut_bar_set_model(E_SHORTCUT_BAR(shortcut_bar),
+				 shortcut_model);
+	if(s->showshortcutbar)
+		gtk_widget_show(shortcut_bar);
+	else
+		gtk_widget_hide(shortcut_bar);
+
+	s->shortcut_bar = shortcut_bar;
+
+	e_paned_pack1(E_PANED(s->epaned), shortcut_bar, FALSE, TRUE);
+	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
+	/*
+	 * end shortcut bar 
+	*/
+	
 
 	tmp = NULL;
 	if (s->showfavoritesgroup) {

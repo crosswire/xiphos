@@ -58,7 +58,6 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_popup_cb.h"
-#include "gs_mainmenu_cb.h"
 #include "gs_html.h"
 #include "gs_info_box.h"
 #include "gs_setup.h"
@@ -102,9 +101,10 @@ SWModule *curMod,		/* module for main text window */
 
 modDescMap descriptionMap;
 bookAbrevMap abrevationMap;
-/***********************************************************************************************
- * GnomeSword globals
-***********************************************************************************************/
+
+/******************************************************************************
+ * globals
+ */
 
 
 GtkWidget *NEtext,		/* note edit widget */
@@ -119,21 +119,19 @@ gboolean noteModified = false,	/* set to true is personal note has changed */
 
 gchar com_key[80] = "Rom 8:28",	/* current commentary key */
 *textmod, *commod, *dictmod;
-
-/***********************************************************************************************
- externals
-***********************************************************************************************/
-//extern GList * options;
-
-extern gint dictpages,		/* number of dictionaries */
+gint 
+ dictpages,		/* number of dictionaries */
  compages,			/* number of commentaries */
  textpages,			/* number of Bible text */
  bookpages;
 
+/******************************************************************************
+ externals
+ */
+
 extern SETTINGS *settings;
 extern GtkWidget *htmlComments;
-extern gchar current_verse[80];	/* current verse showing in main window, interlinear window - commentary window */
-
+extern gchar current_verse[80];	
 
 /******************************************************************************
  * Name

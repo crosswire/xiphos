@@ -88,7 +88,8 @@ module.include.files=\
 	src/gnome/cipher_key_dialog.h\
 	src/gnome/editor_menu.h\
 	src/gnome/link_dialog.h\
-	src/gnome/splash.h\
+	src/gnome/main_menu.h\
+	src/gnome/link_dialog.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/gs_bookmarks.h\
@@ -158,6 +159,7 @@ module.source.files=\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/editor_menu.c\
 	src/gnome/link_dialog.c\
+	src/gnome/main_menu.c\
 	src/gnome/splash.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
