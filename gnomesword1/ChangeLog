@@ -1,3 +1,15 @@
+2003-04-01  Terry <tbiggs@users.sf.net>
+
+	* settings now saved in settings.xml using gnome-xml
+	* removed backend/prevences.*
+	
+
+2003-03-27  Terry <tbiggs@users.sf.net>
+
+	* removed backend/shortcutbar.*
+	* removed backend/interlinear.*
+	
+
 2003-03-13  Terry <tbiggs@users.sf.net>
 
 	* bumped to dev3
@@ -1264,6 +1276,3 @@
 
 2000-05-17  	-added spellchecking - not perfect but seems to work
 		ok in studypad.
-						
-
-

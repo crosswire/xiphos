@@ -47,6 +47,7 @@
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/key.h"
+#include "main/xml.h"
 
 
 COMM_DATA *cur_c;
@@ -213,8 +214,8 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
 
-	strcpy(settings.CommWindowModule, c->mod_name);
-
+	settings.CommWindowModule = c->mod_name;
+	xml_set_value("GnomeSword", "modules", "comm",c->mod_name);
 	if (!c->frame)
 		gui_add_new_comm_pane(c);
 
@@ -624,7 +625,7 @@ void gui_setup_commentary(GList * mods)
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_comm_switch_page), comm_list);
 
-	modbuf = g_strdup(settings.CommWindowModule);
+	modbuf = g_strdup(xml_get_value("modules", "comm"));//settings.CommWindowModule);
 	keybuf = g_strdup(settings.currentverse);
 
 	set_commentary_page(modbuf, comm_list);

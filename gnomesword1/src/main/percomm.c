@@ -27,9 +27,9 @@
 #include <glib-1.2/glib.h>
 #include "main/percomm.h"
 #include "main/settings.h"
+#include "main/sword.h"
 
 #include "backend/percomm_.h"
-#include "backend/module_options.h"
 #include "backend/sword.h"
 
 /******************************************************************************
@@ -102,9 +102,9 @@ int load_percomm_options(char * modName, char * option)
  *   char *
  */ 
 
-char *get_percomm_key(void)
+char *get_percomm_key(char * module_name)
 {
-	backend_get_percomm_key();
+	return backend_get_key_from_module(4, module_name);
 }
 
 /******************************************************************************
@@ -188,7 +188,7 @@ void change_percomm_module(char * mod_name)
 
 int is_personal_comment(char * mod_name)
 {
-	return backend_is_personal_comment(mod_name);
+	return backend_is_personal_comment_module(mod_name);
 }
 
 
@@ -235,4 +235,3 @@ void delete_percomm_note(void)
 {		
 	backend_delete_personal_comment();
 }
-

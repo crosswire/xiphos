@@ -27,8 +27,7 @@
 
 #include "main/commentary.h"
 
-#include "backend/sword.h"
-#include "backend/commentary_.h"
+#include "backend/sword.h" 
 
 
 /******************************************************************************
@@ -112,7 +111,7 @@ char *get_commentary_text(char * mod_name, char * key)
 
 char *get_book_heading(char * mod_name, char * key)
 {
-	return backend_get_book_heading(mod_name, key);
+	return backend_get_book_heading(1, mod_name, key);
 }
 
 /******************************************************************************
@@ -133,7 +132,7 @@ char *get_book_heading(char * mod_name, char * key)
 
 char *get_chapter_heading(char * mod_name, char * key)
 {
-	return backend_get_chap_heading(mod_name, key);
+	return backend_get_chap_heading(1, mod_name, key);
 }
 
 /******************************************************************************
@@ -154,7 +153,7 @@ char *get_chapter_heading(char * mod_name, char * key)
  
 char* navigate_commentary(char * mod_name, gint direction)
 {
-	return backend_nav_commentary(mod_name, direction);
+	return backend_nav_module(1, mod_name, direction);
 }
 
 /******  end of file  ******/

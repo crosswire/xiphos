@@ -33,18 +33,46 @@ struct _name_type {
 };
 
 
+void backend_module_name_from_description(char * mod_name, 
+						char * mod_desc);
 int backend_do_module_search(char * module_name ,char *search_string, 
 		int search_type, int search_params);
 char *backend_get_search_results_text(char * mod_name, char * key);
 void backend_set_module_iterators(void);
 NAME_TYPE *backend_get_next_module_name(void);
 NAME_TYPE *backend_get_next_module_description(void);
+
+int backend_is_personal_comment_module(char * mod_name);
 char *backend_get_next_percom_name(void);
 char *backend_get_next_devotion_name(void);
-	
+char *backend_get_module_description(char * module_name);
+int backend_has_cipher_tag(char *mod_name);
+int backend_module_is_locked(char *mod_name);
+char *backend_get_cipher_key(char *mod_name);	
+int backend_check_for_module(char * mod_name);
+char *backend_get_mod_about_info(char * modname);
+int backend_get_module_page(char *module_name, char *module_type);
+int backend_get_mod_type(char * mod_name);
+
+
+char *backend_get_module_text(int manager, char * mod_name, char * key);
+char *backend_get_striptext(int manager, char *module_name, char *key);
+
+int backend_check_for_global_option(char * mod_name, char * option);
+
+char *backend_nav_module(int manager, char * mod_name, int direction);
+char *backend_get_chap_heading(int manager, char * mod_name, char * key);	
+char *backend_get_book_heading(int manager, char * mod_name, char * key);
+void backend_set_commentary_key(char * mod_name, char * key);
+		
+char *backend_get_commentary_key(char *mod_name);	
+char *backend_get_commentary_text(char *mod_name, char *key);
+
+char *backend_get_key_from_module(int manager, char * module_name);
+
+int backend_set_module(int manager, char * module_name);
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

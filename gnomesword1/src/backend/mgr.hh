@@ -26,18 +26,38 @@
 extern "C" {
 #endif
 
+
+/* managers */
+#define TEXT_MGR 0 
+#define COMM_MGR 1
+#define DICT_MGR 2
+#define GBS_MGR 3
+#define MAIN_MGR 4
+#define SEARCH_MGR 5
+#define MODULE_MGR 6
+#define PERCOM_MGR 7
+#define INTER_MGR 8 	
+
+
+	
+void backend_init_managers(void);
+void backend_delete_managers(void);	
 void backend_init_main_mgr(void);
 void backend_delete_main_mgr(void);	
 void backend_new_module_mgr(void);
 void backend_delete_module_mgr(void);
  
 void backend_set_global_option_iterator(void);
-char *backend_get_next_global_option(void);	
+char *backend_get_next_global_option(void);
+char *backend_get_path_to_mods(void);	
 
-	
+void backend_set_global_option(int manager, char *option, char *yesno);
+
+void backend_set_module_unlocked(char *mod_name, char *key);	
+
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

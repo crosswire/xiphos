@@ -19,6 +19,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <glib-1.2/glib.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -33,10 +38,10 @@
 
 #include "main/settings.h"
 #include "main/search.h"
+#include "main/shortcutbar.h"
+#include "main/xml.h"
 
-#include "backend/properties.h"
 #include "backend/bookmarks.h"
-#include "backend/shortcutbar.h"
 #include "backend/sword.h"
 #include "backend/mgr.hh"
 
@@ -120,7 +125,7 @@ gint settings_init(int new_configs, int new_bookmarks)
 		else 
 			need_old = TRUE;
 	}
-
+	
 	/* shortcutbar dir */
 	settings.shortcutbarDir =
 	    g_new(char,
@@ -145,34 +150,30 @@ gint settings_init(int new_configs, int new_bookmarks)
 	}
 
 
-	/* set fnconfigure to gSwordDir and preferences.conf */
+	/* set fnconfigure to gSwordDir and settings.xml */
 	settings.fnconfigure = g_new(char, strlen(settings.gSwordDir) +
-				     strlen("preferences-1.0.conf") +
+				     strlen("settings.xml") + 
 				     2);
 	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
-						"preferences-1.0.conf");
+						"settings.xml");
 
 	/* if gSwordDir does not exist create it */
 	if (access(settings.fnconfigure, F_OK) == -1) {
 		/* must be first run */
 		g_print("\nFirst Run: need to create settings!\n");
-		if (access(old_prefs, F_OK) == 0) {
-			g_print
-			    ("\nFirst Run: have old settings will load them\n");
-			backend_load_properties(old_prefs);
-			backend_save_properties(TRUE);
-		}
-	}
-
-
-	if ((access(settings.fnconfigure, F_OK) == -1) || new_configs) {
+		xml_create_settings_file(settings.fnconfigure);
 		backend_init_main_mgr();
 		init_lists();
 		retval = gui_first_run();
 		shutdown_list();
 		backend_delete_main_mgr();
+		xml_save_settings_doc(settings.fnconfigure);
+		xml_free_settings_doc();
+		
 	}
 	
+	xml_parse_settings_file(settings.fnconfigure);
+	load_settings_structure();
 	
 	if (have_old) {
 		g_free(old_prefs);
@@ -399,7 +400,149 @@ void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
 	gchar group_name[256], icon_size[10];
 	GList *glist = NULL;	
 
-	glist = backend_load_sb_group(old_file, group_name, icon_size);
-	backend_save_sb_group(glist, new_file, group_name, icon_size);
+	glist = load_sb_group(old_file, group_name, icon_size);
+	save_sb_group(glist, new_file, group_name, icon_size);
 	g_list_free(glist);
 }
+
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "main/settings.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+int load_settings_structure(void) 
+{
+	settings.gs_version = VERSION;
+	settings.MainWindowModule = xml_get_value("modules", "text");
+	settings.CommWindowModule = xml_get_value("modules", "comm");
+	settings.DictWindowModule = xml_get_value("modules", "dict");
+	settings.BookWindowModule = xml_get_value("modules", "book");
+	settings.Interlinear1Module = xml_get_value("modules", "int1");
+	settings.Interlinear2Module = xml_get_value("modules", "int2");
+	settings.Interlinear3Module = xml_get_value("modules", "int3");
+	settings.Interlinear4Module = xml_get_value("modules", "int4");
+	settings.Interlinear5Module = xml_get_value("modules", "int5");
+	settings.personalcommentsmod = xml_get_value("modules", "percomm");	
+	settings.devotionalmod = xml_get_value("modules", "devotional");
+	settings.lex_greek = xml_get_value("lexicons", "greek");
+	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
+	settings.lex_greek_viewer = xml_get_value("lexicons", "greekviewer");
+	settings.lex_hebrew_viewer = xml_get_value("lexicons", "hebrewviewer");
+	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
+	
+	settings.currentverse = xml_get_value("keys", "verse");
+	settings.dictkey = xml_get_value("keys", "dictionary");
+	settings.book_key = xml_get_value("keys", "book");
+	
+	settings.studypadfilename = xml_get_value("studypad", "lastfile");
+	settings.studypaddir = xml_get_value("studypad", "directory");
+	
+	
+	settings.shortcutbar_width = atoi(xml_get_value("layout", "shortcutbar"));
+	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
+	settings.gs_width = atoi(xml_get_value("layout", "width"));
+	settings.biblepane_width = atoi(xml_get_value("layout", "textpane"));
+	settings.upperpane_hight = atoi(xml_get_value("layout", "uperpane"));
+	
+	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
+	settings.verse_num_font_size = xml_get_value("fontsize", "versenum");
+	
+	settings.bible_text_color = xml_get_value("HTMLcolors", "text");
+	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
+	settings.currentverse_color = xml_get_value("HTMLcolors", "currentverse");
+	settings.link_color = xml_get_value("HTMLcolors", "link");
+	settings.bible_verse_num_color = xml_get_value("HTMLcolors", "versenum");
+	settings.found_color = xml_get_value("HTMLcolors", "found");
+	
+	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
+	settings.strongsint = atoi(xml_get_value("interlinear", "strongs"));
+	settings.morphsint = atoi(xml_get_value("interlinear", "morphs"));
+	settings.hebrewpointsint = atoi(xml_get_value("interlinear", "points"));
+	settings.cantillationmarksint = atoi(xml_get_value("interlinear", "cantillation"));
+	settings.footnotesint = atoi(xml_get_value("interlinear", "footnotes"));
+	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
+	settings.showshortcutbar = atoi(xml_get_value("shortcutbar", "shortcutbar"));
+	settings.showfavoritesgroup = atoi(xml_get_value("shortcutbar", "favo"));
+	settings.showtextgroup = atoi(xml_get_value("shortcutbar", "text"));
+	settings.showcomgroup = atoi(xml_get_value("shortcutbar", "comm"));
+	settings.showdictgroup = atoi(xml_get_value("shortcutbar", "dict"));
+	settings.showbookgroup = atoi(xml_get_value("shortcutbar", "book"));
+	settings.showbookmarksgroup = atoi(xml_get_value("shortcutbar", "bookmark"));
+	settings.showhistorygroup = atoi(xml_get_value("shortcutbar", "history"));
+	
+	settings.showsplash = atoi(xml_get_value("misc", "splash"));
+	settings.showdevotional = atoi(xml_get_value("misc", "dailydevotional"));
+	settings.text_tabs = atoi(xml_get_value("tabs", "text"));
+	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));
+	
+	settings.dict_tabs = atoi(xml_get_value("tabs", "dict"));
+	settings.book_tabs = atoi(xml_get_value("tabs", "book"));
+	settings.percomm_tabs = atoi(xml_get_value("tabs", "percomm"));
+	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
+	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
+	settings.useDefaultDict = atoi(xml_get_value("lexicons", "usedefaultdict"));
+	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
+	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
+	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
+	settings.use_studypad = atoi(xml_get_value("editor", "UseStudyPad"));
+	settings.show_style_bar_sp = atoi(xml_get_value("studypad", "stylebar"));
+	settings.show_edit_bar_sp = atoi(xml_get_value("studypad", "editbar"));
+	settings.use_studypad_dialog = atoi(xml_get_value("editor", "UseStudypadDialog"));
+	settings.use_percomm_dialog = atoi(xml_get_value("editor", "UsePercommDialog"));
+		
+	settings.interlinearpage = atoi(xml_get_value("interlinear", "interlinear"));
+	/*
+	settings. = xml_get_value("", "");
+	settings. = xml_get_value("", "");
+	settings. = xml_get_value("", "");
+	settings. = xml_get_value("", "");
+	settings. = xml_get_value("", "");
+	*/
+}
+
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "main/settings.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+
+
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "main/settings.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */

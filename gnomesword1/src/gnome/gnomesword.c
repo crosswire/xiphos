@@ -51,6 +51,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/xml.h"
 
 
 
@@ -147,7 +148,9 @@ void init_gnomesword(void)
 
 	gui_change_verse(settings.currentverse);
 
-
+	gui_change_module_and_key(settings.DictWindowModule, 
+						settings.dictkey);
+	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -191,7 +194,8 @@ void init_gnomesword(void)
 void shutdown_gnomesword(void)
 {
 	gui_save_bookmarks(NULL, NULL);
-
+	xml_save_settings_doc(settings.fnconfigure);
+	xml_free_settings_doc();
 	/* if study pad file has changed since last save */
 	if (widgets.studypad_dialog)
 		gtk_widget_destroy(widgets.studypad_dialog);

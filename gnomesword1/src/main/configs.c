@@ -28,6 +28,7 @@
 #include "backend/config.hh"
 
 #include "main/configs.h"
+#include "main/settings.h"
 #include "main/sword.h"
 
 
@@ -36,7 +37,7 @@
  *   backend_save_custom_modlist
  *
  * Synopsis
- *   #include "backend/config.hh"
+ *   #include "main/configs.h"
  *
  *   void backend_save_custom_modlist(GList * modlist)
  *
@@ -53,15 +54,66 @@ int open_config_file(char *file)
 	
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 void erase_config_section(char *section)
 {
 	backend_erase_config_section(section);
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 int close_config_file(void)
 {
 	return backend_close_config_file();
 }
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
 
 void add_to_config_file(char * section, 
 					char * label, char * value)
@@ -70,19 +122,181 @@ void add_to_config_file(char * section,
 	
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 const char *get_config_value(char * section, char * label)
 {
 	return backend_get_config_value(section, label);
 	
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 int set_config_to_get_labels(char * section)
 {
 	backend_set_config_to_get_labels(section);
 }
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
 
 const char *get_next_config_label(void)
 {
 	return backend_get_next_config_label();
 }
 
+
+/******************************************************************************
+ * Name
+ *  get_module_font_name
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   char *get_module_font_name(char *mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
+
+char *get_module_font_name(char *mod_name)
+{
+	return backend_get_module_font_name(mod_name, settings.gSwordDir);
+}
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
+void get_font_info(MOD_FONT *mf)
+{
+	backend_load_font_info(mf, settings.gSwordDir);
+}
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
+void save_font_info(MOD_FONT *mf)
+{
+	backend_save_font_info(mf, settings.gSwordDir);
+}
+
+
+/******************************************************************************
+ * Name
+ *  get_module_font_size
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   char *get_module_font_size(char *mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *  char * 
+ */ 
+
+char *get_module_font_size(char *mod_name)
+{
+	return backend_get_module_font_size(mod_name, settings.gSwordDir);
+}
+
+
+/******************************************************************************
+ * Name
+ *  save_module_key
+ *
+ * Synopsis
+ *   #include "main/configs.h"
+ *
+ *   void save_module_key(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void save_module_key(char * mod_name, char * key)
+{
+	backend_save_module_key(mod_name, key);
+
+	/* FIXME: we need to display change */
+}

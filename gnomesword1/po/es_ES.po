@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-0.9.1\n"
-"POT-Creation-Date: 2003-03-03 17:45-0500\n"
+"POT-Creation-Date: 2003-03-13 10:56-0500\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Jorge Chacón <jgchacon@itelgua.com>\n"
 "Language-Team: Gnomesword Project <tbiggs@users.sf.net>\n"
@@ -71,21 +71,21 @@ msgid "The Sword Project"
 msgstr "El Proyecto Sword"
 
 # src/gs_html.c
-#: src/gnome/bibletext_dialog.c:813 src/gnome/html.c:291
+#: src/gnome/bibletext_dialog.c:814 src/gnome/html.c:291
 #, fuzzy
 msgid "Go to "
 msgstr "Ir a %s"
 
 # src/gs_gui.c
-#: src/gnome/bibletext_dialog.c:871 src/gnome/interlinear_dialog.c:532
-#: src/gnome/toolbar_nav.c:344
+#: src/gnome/bibletext_dialog.c:872 src/gnome/interlinear_dialog.c:533
+#: src/gnome/toolbar_nav.c:345
 msgid "Romans"
 msgstr "Romanos"
 
 # src/gs_gnomesword.c
 # src/gs_gui.c
-#: src/gnome/bibletext_dialog.c:896 src/gnome/commentary_dialog.c:606
-#: src/gnome/interlinear_dialog.c:556 src/gnome/toolbar_nav.c:370
+#: src/gnome/bibletext_dialog.c:897 src/gnome/commentary_dialog.c:607
+#: src/gnome/interlinear_dialog.c:557 src/gnome/toolbar_nav.c:371
 msgid "Romans 8:28"
 msgstr "Romanos 8:28"
 
@@ -235,7 +235,7 @@ msgstr "Imprimir"
 
 #: src/gnome/bibletext_menu.c:1144 src/gnome/commentary_menu.c:1244
 #: src/gnome/dictlex_dialog.c:408 src/gnome/editor_spell.c:632
-#: src/gnome/find_dialog.c:268 src/gnome/search_dialog.c:2052
+#: src/gnome/find_dialog.c:268 src/gnome/search_dialog.c:2125
 msgid "Close"
 msgstr ""
 
@@ -313,218 +313,218 @@ msgid "Tabs"
 msgstr "Mostrar Lengüetas"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:1404
+#: src/gnome/bookmarks.c:1413
 #, fuzzy
 msgid "Enter Folder Name - use no '|'"
 msgstr "Ingrese el Nombre del Grupo - no utilice '|'"
 
-#: src/gnome/bookmarks.c:1405
+#: src/gnome/bookmarks.c:1414
 msgid "Folder Name"
 msgstr ""
 
 # src/gs_bookmarks.c src/gs_html_editor.c
-#: src/gnome/bookmarks.c:1406
+#: src/gnome/bookmarks.c:1415
 #, fuzzy
 msgid "Folder: "
 msgstr "Módulo"
 
-#: src/gnome/bookmarks.c:1586
+#: src/gnome/bookmarks.c:1595
 #, fuzzy
 msgid "Edit Bookmark"
 msgstr "Añadir Marca de Libro"
 
-#: src/gnome/bookmarks.c:1702
+#: src/gnome/bookmarks.c:1713
 msgid "Really REMOVE the selected item (and all its subitems)?"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1754
+#: src/gnome/bookmarks.c:1765
 msgid "Make the selected bookmark point to the current Module and Key?"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1869
+#: src/gnome/bookmarks.c:1879
 msgid "Add Bookmark"
 msgstr "Añadir Marca de Libro"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:1874
+#: src/gnome/bookmarks.c:1884
 #, fuzzy
 msgid "Label: "
 msgstr "Etiqueta"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/bookmarks.c:1875
+#: src/gnome/bookmarks.c:1885
 #, fuzzy
 msgid "Verse: "
 msgstr "Lista de Versos"
 
 # src/gs_bookmarks.c src/gs_html_editor.c
-#: src/gnome/bookmarks.c:1876 src/gnome/editor_menu.c:582
+#: src/gnome/bookmarks.c:1886 src/gnome/editor_menu.c:582
 #, fuzzy
 msgid "Module: "
 msgstr "Módulo"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:1940
+#: src/gnome/bookmarks.c:1954
 msgid "Enter Root Group Name - use no '|'"
 msgstr "Ingrese el Nombre del Grupo Base - no use '|'"
 
-#: src/gnome/bookmarks.c:1941
+#: src/gnome/bookmarks.c:1955
 msgid "Group Name"
 msgstr ""
 
 # src/gs_viewdict_dlg.c
-#: src/gnome/bookmarks.c:1942
+#: src/gnome/bookmarks.c:1956
 #, fuzzy
 msgid "Group: "
 msgstr "Búsqueda: "
 
 # src/gs_html_editor.c
-#: src/gnome/bookmarks.c:2074
+#: src/gnome/bookmarks.c:2092
 #, fuzzy
 msgid "Remove Folder"
 msgstr "Fichero"
 
-#: src/gnome/bookmarks.c:2075
+#: src/gnome/bookmarks.c:2093
 msgid "Remove folder and save it"
 msgstr ""
 
 # src/gs_html_editor.c
-#: src/gnome/bookmarks.c:2081
+#: src/gnome/bookmarks.c:2099
 #, fuzzy
 msgid "Restore Folder"
 msgstr "Fichero"
 
-#: src/gnome/bookmarks.c:2082
+#: src/gnome/bookmarks.c:2100
 msgid "Restore saved folder"
 msgstr ""
 
 # src/gs_gui.c
-#: src/gnome/bookmarks.c:2091
+#: src/gnome/bookmarks.c:2109
 #, fuzzy
 msgid "Open in a dialog"
 msgstr "Abrir el diálogo de búsqueda"
 
 # src/gs_gui.c
-#: src/gnome/bookmarks.c:2092
+#: src/gnome/bookmarks.c:2110
 #, fuzzy
 msgid "Open this bookmark in a dialog"
 msgstr "Abrir el diálogo de búsqueda"
 
 # src/gs_html_editor.c
-#: src/gnome/bookmarks.c:2097
+#: src/gnome/bookmarks.c:2115
 #, fuzzy
 msgid "New Folder"
 msgstr "Fichero"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2098
+#: src/gnome/bookmarks.c:2116
 #, fuzzy
 msgid "Add new Folder to selected Folder"
 msgstr "Añadir un nuevo Subgrupo al grupo elegido"
 
-#: src/gnome/bookmarks.c:2103
+#: src/gnome/bookmarks.c:2121
 msgid "Insert Item"
 msgstr "Insertar Ítem"
 
-#: src/gnome/bookmarks.c:2104
+#: src/gnome/bookmarks.c:2122
 msgid "Insert new bookmark here"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2109
+#: src/gnome/bookmarks.c:2127
 msgid "Add Item at Root"
 msgstr "Añadir Ítem en la Raíz"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2110
+#: src/gnome/bookmarks.c:2128
 #, fuzzy
 msgid "Add new bookmark item"
 msgstr "Editar un ítem de marca de libro"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2115
+#: src/gnome/bookmarks.c:2133
 #, fuzzy
 msgid "_Edit Item"
 msgstr "Editar un Ítem"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2116
+#: src/gnome/bookmarks.c:2134
 msgid "Edit bookmark item"
 msgstr "Editar un ítem de marca de libro"
 
-#: src/gnome/bookmarks.c:2121
+#: src/gnome/bookmarks.c:2139
 #, fuzzy
 msgid "Make _Point to New "
 msgstr "Apuntar aquí"
 
-#: src/gnome/bookmarks.c:2123
+#: src/gnome/bookmarks.c:2141
 msgid "Change the bookmark to point to the current reading point"
 msgstr ""
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2128
+#: src/gnome/bookmarks.c:2146
 msgid "Delete Item(s)"
 msgstr "Borrar Ítem(es)"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2129
+#: src/gnome/bookmarks.c:2147
 msgid "Delete item and it's siblings"
 msgstr "Borrar un ítem y sus hermanos"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2135
+#: src/gnome/bookmarks.c:2153
 msgid "Save Bookmarks"
 msgstr "Guardar Marcas de Libro"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2136
+#: src/gnome/bookmarks.c:2154
 msgid "Save all bookmark files"
 msgstr "Guardar todas las marcas de libro"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2141
+#: src/gnome/bookmarks.c:2159
 msgid "Expand All"
 msgstr "Expandirlos Todos"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2142
+#: src/gnome/bookmarks.c:2160
 msgid "Expand all Bookmarks groups"
 msgstr "Expandir todos los grupos de Marcas de Libro"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2147
+#: src/gnome/bookmarks.c:2165
 msgid "Collapse All"
 msgstr "Colapsarlos Todos"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2148
+#: src/gnome/bookmarks.c:2166
 msgid "Collapse all Bookmarks groups"
 msgstr "Colapsar todos los grupos de Marcas de Libro"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2154
+#: src/gnome/bookmarks.c:2172
 msgid "Allow Reordering"
 msgstr "Permitir Reordenamiento"
 
 # src/gs_bookmarks.c
-#: src/gnome/bookmarks.c:2155
+#: src/gnome/bookmarks.c:2174
 #, fuzzy
 msgid "Toggle Reording - allow items to be moved from one folder to another"
 msgstr ""
 "Activar/Desactivar Reordenamiento - permitir que los ítemes sean movidos "
 "por arrastre"
 
-#: src/gnome/bookmarks.c:2161
+#: src/gnome/bookmarks.c:2180
 #, fuzzy
 msgid "Bibletime Bookmarks"
 msgstr "Añadir Marca de Libro"
 
-#: src/gnome/bookmarks.c:2162
+#: src/gnome/bookmarks.c:2181
 #, fuzzy
 msgid "Load Bibletime Bookmarks"
 msgstr "Añadir Marca de Libro"
 
-#: src/gnome/bookmarks.c:2167
+#: src/gnome/bookmarks.c:2186
 msgid "Remove - Restore"
 msgstr ""
 
@@ -564,7 +564,7 @@ msgstr "Encabezados"
 # src/gs_viewdict_dlg.c
 # src/gs_viewtext_dlg.c
 #: src/gnome/dictlex.c:490 src/gnome/dictlex_dialog.c:393
-#: src/gnome/interlinear_dialog.c:516
+#: src/gnome/interlinear_dialog.c:517
 msgid "Sync"
 msgstr "Sincronizar"
 
@@ -658,8 +658,8 @@ msgid "Delete Entry"
 msgstr "Borrar Nota"
 
 # src/gs_html_editor.c
-#: src/gnome/editor_menu.c:1057 src/gnome/search_dialog.c:2313
-#: src/gnome/search_dialog.c:2532 src/gnome/toolbar_edit.c:426
+#: src/gnome/editor_menu.c:1057 src/gnome/search_dialog.c:2386
+#: src/gnome/search_dialog.c:2605 src/gnome/toolbar_edit.c:426
 msgid "New"
 msgstr "Nuevo"
 
@@ -775,7 +775,7 @@ msgid "Start"
 msgstr ""
 
 # src/gs_viewtext_dlg.c
-#: src/gnome/editor_spell.c:641 src/gnome/search_dialog.c:2243
+#: src/gnome/editor_spell.c:641 src/gnome/search_dialog.c:2316
 #, fuzzy
 msgid "Options"
 msgstr "Opciones del Módulo"
@@ -837,8 +837,8 @@ msgstr "Ingrese Palabra o Frase"
 
 # src/gs_html_editor.c
 # src/gs_shortcutbar.c
-#: src/gnome/find_dialog.c:226 src/gnome/search_dialog.c:2252
-#: src/gnome/shortcutbar_search.c:463
+#: src/gnome/find_dialog.c:226 src/gnome/search_dialog.c:2325
+#: src/gnome/shortcutbar_search.c:392
 msgid "Case Sensitive"
 msgstr "Sensible a mayúsculas/minúsculas"
 
@@ -865,37 +865,37 @@ msgstr "Mostrar %s en la ventana principal"
 msgid "Go to %s"
 msgstr "Ir a %s"
 
-#: src/gnome/gtkhtml_display.c:625 src/gnome/gtkhtml_display.c:640
+#: src/gnome/gtkhtml_display.c:626 src/gnome/gtkhtml_display.c:641
 msgid "The"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:627
+#: src/gnome/gtkhtml_display.c:628
 msgid "module is locked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:643
+#: src/gnome/gtkhtml_display.c:644
 msgid "module has been unlocked."
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:660
+#: src/gnome/gtkhtml_display.c:661
 msgid "If you have the cipher key you can"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:664
+#: src/gnome/gtkhtml_display.c:665
 msgid "click here"
 msgstr ""
 
-#: src/gnome/gtkhtml_display.c:665
+#: src/gnome/gtkhtml_display.c:666
 #, fuzzy
 msgid "to unlock the module"
 msgstr "Quitarle llave a este Módulo"
 
-#: src/gnome/gtkhtml_display.c:678
+#: src/gnome/gtkhtml_display.c:679
 msgid "You will have to restart GnomeSword after you unlock it."
 msgstr ""
 
 # src/gs_setup.c
-#: src/gnome/gtkhtml_display.c:693
+#: src/gnome/gtkhtml_display.c:694
 #, fuzzy
 msgid "You need to restart GnomeSword to view it"
 msgstr "Desea que GnomeSword inicie con"
@@ -945,23 +945,23 @@ msgid "Change Interlinear 5"
 msgstr "Cambiar Interlineal 5"
 
 # src/gs_gui.c
-#: src/gnome/interlinear_dialog.c:220 src/gnome/interlinear_dialog.c:479
+#: src/gnome/interlinear_dialog.c:221 src/gnome/interlinear_dialog.c:480
 #: src/gnome/main_window.c:797 src/gnome/main_window.c:809
 msgid "Interlinear"
 msgstr "Interlineal"
 
-#: src/gnome/interlinear_dialog.c:222
+#: src/gnome/interlinear_dialog.c:223
 msgid "Interlinear Page"
 msgstr "Página Interlineal"
 
 # src/gs_viewtext_dlg.c
-#: src/gnome/interlinear_dialog.c:564 src/gnome/toolbar_nav.c:378
+#: src/gnome/interlinear_dialog.c:565 src/gnome/toolbar_nav.c:379
 #, fuzzy
 msgid "Goto verse"
 msgstr "Ir a un verso"
 
 # src/gs_gui.c
-#: src/gnome/interlinear_dialog.c:566 src/gnome/toolbar_nav.c:379
+#: src/gnome/interlinear_dialog.c:567 src/gnome/toolbar_nav.c:380
 msgid "Go to verse in free form lookup and add verse to history"
 msgstr ""
 "Ver este verso en la búsqueda de formato libre y añadirlo al historial de "
@@ -1011,9 +1011,9 @@ msgstr "Copiar el texto resaltado de la ventana principal"
 
 # src/gs_gui.c
 # src/gs_shortcutbar.c
-#: src/gnome/main_menu.c:601 src/gnome/search_dialog.c:1956
-#: src/gnome/search_dialog.c:1984 src/gnome/shortcutbar_main.c:1443
-#: src/gnome/shortcutbar_search.c:120
+#: src/gnome/main_menu.c:601 src/gnome/search_dialog.c:2029
+#: src/gnome/search_dialog.c:2057 src/gnome/shortcutbar_main.c:1445
+#: src/gnome/shortcutbar_search.c:104
 msgid "Search"
 msgstr "Búsqueda"
 
@@ -1115,7 +1115,7 @@ msgstr "Información acerca de los Textos Bíblicos"
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
 #: src/gnome/main_menu.c:706 src/gnome/preferences_dialog.c:1412
-#: src/gnome/shortcutbar_main.c:1377 src/gnome/shortcutbar_main.c:1560
+#: src/gnome/shortcutbar_main.c:1379 src/gnome/shortcutbar_main.c:1562
 msgid "Commentaries"
 msgstr "Comentarios"
 
@@ -1233,7 +1233,7 @@ msgstr "GnomeSword - Programa de Estudio Bíblico"
 # src/gs_menu.c
 #: src/gnome/main_window.c:694 src/gnome/main_window.c:707
 #: src/gnome/preferences_dialog.c:1827 src/gnome/setup_druid.c:1111
-#: src/gnome/shortcutbar_main.c:1391 src/gnome/shortcutbar_main.c:1573
+#: src/gnome/shortcutbar_main.c:1393 src/gnome/shortcutbar_main.c:1575
 msgid "Dict/Lex"
 msgstr "Diccionarios/Léxica"
 
@@ -1722,336 +1722,336 @@ msgid "Shortcut Bar Settings"
 msgstr "Atajo de la Barra de Opciones"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:46
+#: src/gnome/search_dialog.c:49
 #, fuzzy
 msgid "Searching the "
 msgstr "Tipo de Búsqueda"
 
 # src/gs_bookmarks.c src/gs_html_editor.c
-#: src/gnome/search_dialog.c:47
+#: src/gnome/search_dialog.c:50
 #, fuzzy
 msgid " Module"
 msgstr "Módulo"
 
-#: src/gnome/search_dialog.c:48
+#: src/gnome/search_dialog.c:51
 msgid "finds in "
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:813
+#: src/gnome/search_dialog.c:853
 #, fuzzy
 msgid "Search Finished"
 msgstr "Opciones de Búsqueda"
 
-#: src/gnome/search_dialog.c:1298
+#: src/gnome/search_dialog.c:1337
 msgid "Do you really want to CLEAR the module list?"
 msgstr ""
 
-#: src/gnome/search_dialog.c:1333
+#: src/gnome/search_dialog.c:1372
 msgid "Do you really want to REMOVE the selected item?"
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:1428 src/gnome/search_dialog.c:2336
-#: src/gnome/search_dialog.c:2544 src/gnome/shortcutbar_viewer.c:626
+#: src/gnome/search_dialog.c:1474 src/gnome/search_dialog.c:2409
+#: src/gnome/search_dialog.c:2617 src/gnome/shortcutbar_viewer.c:608
 msgid "Save List"
 msgstr "Guardar Lista"
 
-#: src/gnome/search_dialog.c:1430
+#: src/gnome/search_dialog.c:1476
 msgid "Enter List Name: "
 msgstr ""
 
-#: src/gnome/search_dialog.c:1581
+#: src/gnome/search_dialog.c:1632
 msgid "Are you sure you want ot delete this range?"
 msgstr ""
 
-#: src/gnome/search_dialog.c:1625
+#: src/gnome/search_dialog.c:1676
 msgid "Are you sure you want ot delete this list?"
 msgstr ""
 
 # src/gs_bookmarks.c src/gs_html_editor.c
-#: src/gnome/search_dialog.c:1993
+#: src/gnome/search_dialog.c:2066
 #, fuzzy
 msgid "<Module>"
 msgstr "Módulo"
 
-#: src/gnome/search_dialog.c:2013
+#: src/gnome/search_dialog.c:2086
 msgid " for "
 msgstr ""
 
-#: src/gnome/search_dialog.c:2035
+#: src/gnome/search_dialog.c:2108
 msgid "Begin"
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2035
+#: src/gnome/search_dialog.c:2108
 #, fuzzy
 msgid "Begin search"
 msgstr "Iniciar Búsqueda"
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2053
+#: src/gnome/search_dialog.c:2126
 #, fuzzy
 msgid "Close search dialog"
 msgstr "Abrir el diálogo de búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2076
+#: src/gnome/search_dialog.c:2149
 #, fuzzy
 msgid "Scope"
 msgstr "Sin Alcance"
 
-#: src/gnome/search_dialog.c:2091
+#: src/gnome/search_dialog.c:2164
 #, fuzzy
 msgid "Entire Module   "
 msgstr "Ver módulo"
 
-#: src/gnome/search_dialog.c:2097
+#: src/gnome/search_dialog.c:2170
 msgid "Search entire module(s)"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2103
+#: src/gnome/search_dialog.c:2176
 msgid "Current Results   "
 msgstr ""
 
-#: src/gnome/search_dialog.c:2110
+#: src/gnome/search_dialog.c:2183
 msgid "Use the results of the last search for the search scope"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2115
+#: src/gnome/search_dialog.c:2188
 msgid "Custom Range   "
 msgstr ""
 
-#: src/gnome/search_dialog.c:2122
+#: src/gnome/search_dialog.c:2195
 msgid "Use a custom search range"
 msgstr ""
 
 # src/gs_bookmarks.c src/gs_html_editor.c
-#: src/gnome/search_dialog.c:2141 src/gnome/search_dialog.c:2427
-#: src/gnome/search_dialog.c:2843
+#: src/gnome/search_dialog.c:2214 src/gnome/search_dialog.c:2500
+#: src/gnome/search_dialog.c:2916
 #, fuzzy
 msgid "Modules"
 msgstr "Módulo"
 
-#: src/gnome/search_dialog.c:2156
+#: src/gnome/search_dialog.c:2229
 #, fuzzy
 msgid "Single Module"
 msgstr "Ver módulo"
 
-#: src/gnome/search_dialog.c:2162
+#: src/gnome/search_dialog.c:2235
 msgid "Use a single module for the search"
 msgstr ""
 
 # src/gs_viewtext_dlg.c
-#: src/gnome/search_dialog.c:2169
+#: src/gnome/search_dialog.c:2242
 #, fuzzy
 msgid "Module List"
 msgstr "Opciones del Módulo"
 
-#: src/gnome/search_dialog.c:2176
+#: src/gnome/search_dialog.c:2249
 msgid "Use current module list for search"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2181
+#: src/gnome/search_dialog.c:2254
 msgid "Custom List"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2189
+#: src/gnome/search_dialog.c:2262
 msgid "Use a custom module list for the search"
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2211 src/gnome/shortcutbar_search.c:415
+#: src/gnome/search_dialog.c:2284 src/gnome/shortcutbar_search.c:344
 msgid "Search Type"
 msgstr "Tipo de Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2221 src/gnome/shortcutbar_search.c:425
+#: src/gnome/search_dialog.c:2294 src/gnome/shortcutbar_search.c:354
 msgid "Multi Word"
 msgstr "Multi-Palabra"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2228 src/gnome/shortcutbar_search.c:437
+#: src/gnome/search_dialog.c:2301 src/gnome/shortcutbar_search.c:366
 msgid "Regular Expression"
 msgstr "Expresión Regular"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2236 src/gnome/shortcutbar_search.c:446
+#: src/gnome/search_dialog.c:2309 src/gnome/shortcutbar_search.c:375
 msgid "Exact Phrase"
 msgstr "Frase Exacta"
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2259
+#: src/gnome/search_dialog.c:2332
 #, fuzzy
 msgid "Include Strongs Numbers"
 msgstr "Mostrar/Esconder Números de Strong"
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2264
+#: src/gnome/search_dialog.c:2337
 #, fuzzy
 msgid "In modules that have Strongs Numbers"
 msgstr "Mostrar/Esconder Números de Strong"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/search_dialog.c:2268
+#: src/gnome/search_dialog.c:2341
 #, fuzzy
 msgid "Include Morph Tags"
 msgstr "Números de Strong & Etiquetas Morfológicas"
 
-#: src/gnome/search_dialog.c:2273
+#: src/gnome/search_dialog.c:2346
 msgid "In modules that have Morph Tags"
 msgstr ""
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2277
+#: src/gnome/search_dialog.c:2350
 #, fuzzy
 msgid "Include Footnotes"
 msgstr "Mostrar/Esconder Notas de Pié de Página"
 
-#: src/gnome/search_dialog.c:2282
+#: src/gnome/search_dialog.c:2355
 msgid "In modules that have Footnotes"
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2284
+#: src/gnome/search_dialog.c:2357
 #, fuzzy
 msgid "Search Criteria"
 msgstr "Buscar en Personal"
 
-#: src/gnome/search_dialog.c:2314
+#: src/gnome/search_dialog.c:2387
 msgid "Create new module list"
 msgstr ""
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2325 src/gnome/search_dialog.c:2326
-#: src/gnome/search_dialog.c:2449
+#: src/gnome/search_dialog.c:2398 src/gnome/search_dialog.c:2399
+#: src/gnome/search_dialog.c:2522
 #, fuzzy
 msgid "Clear Module List"
 msgstr "Borrar lista de historial"
 
-#: src/gnome/search_dialog.c:2337
+#: src/gnome/search_dialog.c:2410
 msgid "Save list of modules"
 msgstr ""
 
 # src/gs_html_editor.c
-#: src/gnome/search_dialog.c:2347
+#: src/gnome/search_dialog.c:2420
 #, fuzzy
 msgid "Save As"
 msgstr "Guardar COMO"
 
-#: src/gnome/search_dialog.c:2349
+#: src/gnome/search_dialog.c:2422
 msgid "Save current list of modules as..."
 msgstr ""
 
 # src/gs_html_editor.c
-#: src/gnome/search_dialog.c:2366 src/gnome/search_dialog.c:2467
-#: src/gnome/search_dialog.c:2561 src/gnome/toolbar_edit.c:505
+#: src/gnome/search_dialog.c:2439 src/gnome/search_dialog.c:2540
+#: src/gnome/search_dialog.c:2634 src/gnome/toolbar_edit.c:505
 #, fuzzy
 msgid "Delete"
 msgstr "Borrar Nota"
 
-#: src/gnome/search_dialog.c:2367
+#: src/gnome/search_dialog.c:2440
 msgid "Delete selected list"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2419
+#: src/gnome/search_dialog.c:2492
 msgid "List Name"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2450
+#: src/gnome/search_dialog.c:2523
 msgid "Clear all modules from list"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2469
+#: src/gnome/search_dialog.c:2542
 msgid "Remove selected module from list"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2502
+#: src/gnome/search_dialog.c:2575
 msgid "Custom Lists"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2533
+#: src/gnome/search_dialog.c:2606
 msgid "Create new custom range"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2545
+#: src/gnome/search_dialog.c:2618
 msgid "Save custom range"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2562
+#: src/gnome/search_dialog.c:2635
 msgid "Delete selected range"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2609
+#: src/gnome/search_dialog.c:2682
 msgid "Range Name"
 msgstr ""
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2619
+#: src/gnome/search_dialog.c:2692
 #, fuzzy
 msgid "Range Text"
 msgstr "Texto Bíblico"
 
-#: src/gnome/search_dialog.c:2629
+#: src/gnome/search_dialog.c:2702
 msgid "eg. Matt-John;Rev4"
 msgstr ""
 
-#: src/gnome/search_dialog.c:2655
+#: src/gnome/search_dialog.c:2728
 msgid "Custom Ranges"
 msgstr ""
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2680
+#: src/gnome/search_dialog.c:2753
 #, fuzzy
 msgid "Show Context"
 msgstr "Contenidos"
 
 # src/gs_html.c
-#: src/gnome/search_dialog.c:2681
+#: src/gnome/search_dialog.c:2754
 #, fuzzy
 msgid "Show In Main window"
 msgstr "Mostrar %s en la ventana principal"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2697
+#: src/gnome/search_dialog.c:2770
 #, fuzzy
 msgid "Save Results"
 msgstr "Resultados de la Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2699
+#: src/gnome/search_dialog.c:2772
 #, fuzzy
 msgid "Save Search Results as Bookmarks"
 msgstr "Ver Resultados de la Búsqueda"
 
 # src/gs_gui.c
-#: src/gnome/search_dialog.c:2717
+#: src/gnome/search_dialog.c:2790
 #, fuzzy
 msgid "Clear"
 msgstr "_Borrar"
 
-#: src/gnome/search_dialog.c:2718
+#: src/gnome/search_dialog.c:2791
 msgid "clear lists for new search"
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2741 src/gnome/shortcutbar_viewer.c:327
+#: src/gnome/search_dialog.c:2814 src/gnome/shortcutbar_viewer.c:327
 msgid "Search Results"
 msgstr "Resultados de la Búsqueda"
 
-#: src/gnome/search_dialog.c:2756
+#: src/gnome/search_dialog.c:2829
 msgid "Preview"
 msgstr ""
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2769
+#: src/gnome/search_dialog.c:2842
 #, fuzzy
 msgid "Found"
 msgstr "Límites"
 
 # src/gs_shortcutbar.c
-#: src/gnome/search_dialog.c:2788
+#: src/gnome/search_dialog.c:2861
 #, fuzzy
 msgid "Results"
 msgstr "Resultados de la Búsqueda"
@@ -2198,184 +2198,184 @@ msgstr ""
 "Haga click en Finalizar para cerrar este diálogo y ejecutar GnomeSword."
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:934
+#: src/gnome/shortcutbar_main.c:936
 msgid "Large Icons"
 msgstr "Iconos Grandes"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:941
+#: src/gnome/shortcutbar_main.c:943
 msgid "Small Icons"
 msgstr "Iconos Pequeños"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:955
+#: src/gnome/shortcutbar_main.c:957
 msgid "Add Bible Text"
 msgstr "Añadir un Texto Bíblico"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:971
+#: src/gnome/shortcutbar_main.c:973
 msgid "Add Commentary"
 msgstr "Añadir un Comentario"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:988
+#: src/gnome/shortcutbar_main.c:990
 msgid "Add Dictionary"
 msgstr "Añadir un Diccionario"
 
-#: src/gnome/shortcutbar_main.c:1004
+#: src/gnome/shortcutbar_main.c:1006
 msgid "Add Book"
 msgstr "Añadir Libro"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1022
+#: src/gnome/shortcutbar_main.c:1024
 msgid "Add Shortcut"
 msgstr "Añadir un Atajo"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1082
+#: src/gnome/shortcutbar_main.c:1084
 msgid "About this Module"
 msgstr "Acerca de este Módulo"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1095
+#: src/gnome/shortcutbar_main.c:1097
 msgid "Remove from Shortcut Bar"
 msgstr "Quitar de la Barra de Atajos"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1350 src/gnome/shortcutbar_main.c:1534
+#: src/gnome/shortcutbar_main.c:1352 src/gnome/shortcutbar_main.c:1536
 msgid "Favorites"
 msgstr "Favoritos"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1364 src/gnome/shortcutbar_main.c:1547
+#: src/gnome/shortcutbar_main.c:1366 src/gnome/shortcutbar_main.c:1549
 msgid "Bible Text"
 msgstr "Texto Bíblico"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1404 src/gnome/shortcutbar_main.c:1586
+#: src/gnome/shortcutbar_main.c:1406 src/gnome/shortcutbar_main.c:1588
 msgid "Book"
 msgstr "Libro"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1412 src/gnome/shortcutbar_main.c:1594
+#: src/gnome/shortcutbar_main.c:1414 src/gnome/shortcutbar_main.c:1596
 msgid "History"
 msgstr "Historia"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1428
+#: src/gnome/shortcutbar_main.c:1430
 msgid "Bookmarks"
 msgstr "Marcas de Libro"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1462 src/gnome/shortcutbar_viewer.c:324
+#: src/gnome/shortcutbar_main.c:1464 src/gnome/shortcutbar_viewer.c:324
 msgid "Verse List"
 msgstr "Lista de Versos"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_main.c:1634
+#: src/gnome/shortcutbar_main.c:1636
 msgid "Add All Modules"
 msgstr "Añadir todos los Módulos"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:409
+#: src/gnome/shortcutbar_search.c:338
 msgid "Begin Search"
 msgstr "Iniciar Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:454
+#: src/gnome/shortcutbar_search.c:383
 msgid "Search Options"
 msgstr "Opciones de Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:470
+#: src/gnome/shortcutbar_search.c:399
 msgid "Search Scope"
 msgstr "Alcance de la Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:479
+#: src/gnome/shortcutbar_search.c:408
 msgid "No Scope"
 msgstr "Sin Alcance"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:490
+#: src/gnome/shortcutbar_search.c:419
 msgid "Use Bounds"
 msgstr "Utilizar Límites"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:500
+#: src/gnome/shortcutbar_search.c:429
 msgid "Last Search"
 msgstr "Última Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:508
+#: src/gnome/shortcutbar_search.c:437
 msgid "Bounds"
 msgstr "Límites"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:517
+#: src/gnome/shortcutbar_search.c:446
 msgid "Lower"
 msgstr "Inferior"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:524
+#: src/gnome/shortcutbar_search.c:453
 msgid "Upper "
 msgstr "Superior "
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:537
+#: src/gnome/shortcutbar_search.c:466
 msgid "Genesis"
 msgstr "Génesis"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_search.c:545
+#: src/gnome/shortcutbar_search.c:474
 msgid "Revelation"
 msgstr "Apocalipsis"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:330 src/gnome/shortcutbar_viewer.c:682
+#: src/gnome/shortcutbar_viewer.c:330 src/gnome/shortcutbar_viewer.c:664
 msgid "Viewer"
 msgstr "Visualizador"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:628
+#: src/gnome/shortcutbar_viewer.c:610
 msgid "Save the current verse list as a bookmark file"
 msgstr "Guardar la lista de versos actual como un archivo de marcas de libro"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:640
+#: src/gnome/shortcutbar_viewer.c:622
 msgid "Main Form"
 msgstr "Forma Principal"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:642
+#: src/gnome/shortcutbar_viewer.c:624
 msgid "Toggle to show results in Main Form"
 msgstr "Activar/desactivar el mostrar los resultados en la Forma Principal"
 
 # src/gs_shortcutbar.c
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:659
+#: src/gnome/shortcutbar_viewer.c:641
 #, fuzzy
 msgid "VerseList"
 msgstr "Lista de Versos"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:660
+#: src/gnome/shortcutbar_viewer.c:642
 msgid "View Verse List"
 msgstr "Ver Lista de Versos"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:670
+#: src/gnome/shortcutbar_viewer.c:652
 #, fuzzy
 msgid "SearchResults"
 msgstr "Resultados de la Búsqueda"
 
 # src/gs_shortcutbar.c
-#: src/gnome/shortcutbar_viewer.c:671
+#: src/gnome/shortcutbar_viewer.c:653
 msgid "View Search Results"
 msgstr "Ver Resultados de la Búsqueda"
 
@@ -2433,22 +2433,22 @@ msgid "Spell check note"
 msgstr "Revisar Ortografía"
 
 # src/gs_gui.c
-#: src/gnome/toolbar_nav.c:390
+#: src/gnome/toolbar_nav.c:391
 msgid "Back"
 msgstr "Atrás"
 
 # src/gs_gui.c
-#: src/gnome/toolbar_nav.c:392
+#: src/gnome/toolbar_nav.c:393
 msgid "Go backward through history list"
 msgstr "Ir hacia atrás en la lista del historial"
 
 # src/gs_gui.c
-#: src/gnome/toolbar_nav.c:404
+#: src/gnome/toolbar_nav.c:405
 msgid "Foward"
 msgstr "Adelante"
 
 # src/gs_gui.c
-#: src/gnome/toolbar_nav.c:406
+#: src/gnome/toolbar_nav.c:407
 msgid "Go foward through history list"
 msgstr "Ir hacia adelante en la lista del historial"
 

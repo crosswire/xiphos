@@ -14,7 +14,7 @@ libmain_a_SOURCES =  \
     key.c key.h \
     lists.c lists.h \
     main.c \
-    module.c modue.h \
+    module.c module.h \
     percomm.c percomm.h \
     search.c search.h \
     settings.c settings.h \

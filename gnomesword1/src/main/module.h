@@ -27,11 +27,19 @@ extern "C" {
 #endif
 	
 
+int get_module_number(char *module_name, char *module_type);
+int get_mod_type(char * mod_name);
 int do_module_search(char * module_name ,char *search_string, 
 		  int search_type, int search_params, int dialog);
+char *get_module_description(char * module_name);
+int module_is_locked(char * mod_name);
+char *get_cipher_key(char *mod_name);
+int has_cipher_tag(char *mod_name);
+int check_for_module(char * mod_name);
+char *get_mod_about_info(char * mod_name);
 
-
-
+char *get_module_text(int manager, char * module_name, char * key);
+char *get_striptext(int manager, char *module_name, char *key);
 
 #ifdef __cplusplus
 }

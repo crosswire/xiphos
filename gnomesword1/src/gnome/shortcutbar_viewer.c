@@ -209,7 +209,7 @@ static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
 			break;
 		case COMMENTARY_TYPE:	
 		case DICTIONARY_TYPE:	
-			text = get_module_text(sv->mod_name, (gchar *) url);
+			text = get_module_text(4, sv->mod_name, (gchar *) url);
 			if(text) {
 				entry_display(sv->htmlshow, sv->mod_name,
 				   text, (gchar *) url, TRUE);
@@ -249,11 +249,30 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 		*utf8str,
 		*colorkey;
 	gchar *first_key = NULL;
+	gchar *next_verse = NULL;
 	gint    i = 0;
+	gint    count = 0;
 	
 	strcpy(sv->mod_name, module_name);
-	tmp = get_verse_list(module_name, verse_list);
 	
+	for (i = 0; i < strlen(verse_list); i++) {
+		if (verse_list[i] == '+')
+			verse_list[i] = ' ';
+		if (verse_list[i] == ',')
+			verse_list[i] = ';';
+	}
+	i = 0;
+	//tmp = get_verse_list(module_name, verse_list);
+	count = start_parse_verse_list(verse_list);
+	while (count--) {
+		next_verse = get_next_verse_list_element(i++);
+		if(!next_verse)
+			break;
+		tmp = g_list_append(tmp,(gchar*)next_verse);
+		//g_free(next_verse);
+	}
+	
+	i = 0;
 	gui_begin_html(vl_html, TRUE);
 	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
 			settings.bible_bg_color, 
@@ -275,7 +294,7 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 		sprintf(buf,"<a href=\"%s\"><font color=\"%s\"size=\"%s\">%s</font></a><br>",
 					(const char *)tmp->data,
 					colorkey,
-					settings.verselist_font_size,
+					"+0",
 					(const char *)tmp->data);
 		if(i == 0)
 			first_key = g_strdup((const char *)tmp->data);
@@ -855,4 +874,3 @@ GtkWidget * gui_create_shortcutbar_viewer(GtkWidget *vboxVL)
 			   GTK_SIGNAL_FUNC(gui_url), widgets.app);
 	return sv->htmlshow;
 }
-
