@@ -39,8 +39,6 @@ COMMON_SOURCE =  \
     gs_display.h \
     gs_file.c \
     gs_file.h \
-    gs_sword.cpp \
-    gs_sword.h \
     gs_preferences_dlg.c \
     gs_preferences_dlg.h \
     gs_listeditor.c \
@@ -60,14 +58,16 @@ COMMON_SOURCE =  \
     gs_html.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
-    gs_viewtext_sw.cpp \
-    gs_viewtext_sw.h \
+    sw_viewtext_dlg.cpp \
+    sw_viewtext_dlg.h \
     gs_information_dlg.c \
     gs_information_dlg.h \
     gs_information_sw.cpp \
     gs_information_sw.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
+    sw_gnomesword.cpp \
+    sw_gnomesword.h \
     sw_utility.cpp\
     sw_utility.h \
     sw_properties.cpp \
@@ -85,7 +85,11 @@ COMMON_SOURCE =  \
     sw_shortcutbar.cpp \
     sw_shortcutbar.h \
     sw_verselist_sb.cpp \
-    sw_verselist_sb.h
+    sw_verselist_sb.h\
+    sw_viewcomm_dlg.cpp \
+    sw_viewcomm_dlg.h\
+    sw_viewdict_dlg.cpp \
+    sw_viewdict_dlg.h
 
 SPELLING_SOURCE =  \
     debug.h \

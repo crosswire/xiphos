@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                            gs_viewtext_sw.cpp
+                            sw_viewtext_dlg.cpp
                              -------------------
     begin                : Tue June 12 2001
     copyright            : (C) 2001 by Terry Biggs
@@ -34,8 +34,8 @@
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
-#include "gs_viewtext_sw.h"
-#include "gs_sword.h"
+#include "sw_viewtext_dlg.h"
+#include "sw_gnomesword.h"
 #include "gs_display.h"
 #include "sw_utility.h"
 

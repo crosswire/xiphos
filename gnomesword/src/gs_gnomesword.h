@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
  
 typedef struct _settings SETTINGS;
 struct _settings {
