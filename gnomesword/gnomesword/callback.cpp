@@ -149,7 +149,7 @@ on_ok_button4_clicked(GtkButton * button, gpointer user_data) //-- user data is 
 
 //----------------------------------------------------------------------------------------------
 void
-//-- fileselection dialog cancel button clicked-------------------------------------------------
+//-- fileselection dialog cancel button clicked
 on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));	//--destroy fileselection dialog
