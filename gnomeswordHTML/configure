@@ -3432,6 +3432,7 @@ fi
 
 
 
+
 LIBS="$LIBS -L/usr/local/lib -L/usr/lib `xml-config --libs`"
 
 if test "x$GCC" = "xyes"; then

@@ -6,7 +6,7 @@ INCLUDES =  \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
     -I$(top_srcdir)/html \
-        -I /usr/include/gtkhtml 
+    -I /usr/include/gtkhtml 
     
     
 bin_PROGRAMS = gnomesword
@@ -14,6 +14,8 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     gs_abouts.c \
     gs_abouts.h \
+    gs_ui.c \
+    gs_ui.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     gs_viewcomm_dlg.c \
@@ -82,7 +84,7 @@ gnomesword_LDADD = \
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS)\
     $(GNOME_APP_LIBS)\
-    $(top_builddir)/html/libhtmleditor.a
+    $(top_builddir)/html/libhtmleditor.a 
     
 if SPELLING
 gnomesword_SOURCES = \

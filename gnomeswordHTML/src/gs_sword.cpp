@@ -178,6 +178,7 @@ extern gchar *gSwordDir,		/* store GnomeSword directory */
 //extern EDITOR *ed1;
 
 
+static void addtoModList(SWModule *mod, GList *list);
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -620,9 +621,9 @@ changecomp1ModSWORD(gint num)  //-- change sword module for 1st interlinear wind
 	gint i;
 	gchar *modName;
 	GString *strbuf;
-	
+	 
 	beginHTML(lookup_widget(MainFrm,"textComp1"));	
-	strbuf = g_string_new("<HTML><HEAD><STYLE type=\"text/css\">DIV.Abstract { text-align: justify }</STYLE></HEAD><BODY>");
+	strbuf = g_string_new("<HTML><HEAD></HEAD><BODY>");
 	displayHTML(GTK_WIDGET(lookup_widget(MainFrm,"textComp1")), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
 	for(i=0; i < 5; i++) {
@@ -1431,6 +1432,10 @@ gboolean loadconfig(void)
 	SWConfig settingsInfo(buf); 
 	settingsInfo.Load();
 	//g_warning("buf = %s",buf);
+	
+	sprintf(settings->bible_font_size, "%s", settingsInfo["FontSize"]["BibleWindow"].c_str()); 
+	sprintf(settings->commentary_font_size, "%s", settingsInfo["FontSize"]["CommentaryWindow"].c_str()); 
+    	sprintf(settings->dictionary_font_size, "%s", settingsInfo["FontSize"]["DictionaryWindow"].c_str()); 
     	sprintf(settings->MainWindowModule, "%s",settingsInfo["Modules"]["MainWindow"].c_str());
     	sprintf(settings->Interlinear1Module, "%s",settingsInfo["Modules"]["Interlinear1"].c_str());
 	sprintf(settings->Interlinear2Module, "%s",settingsInfo["Modules"]["Interlinear2"].c_str() );
@@ -1487,11 +1492,15 @@ gboolean saveconfig(void)
     	settingsInfo["Modules"]["PerComments"] = settings->personalcommentsmod; 
 	settingsInfo["Modules"]["Commentary"] = curcomMod->Name(); 
 	settingsInfo["Modules"]["Dict/Lex"] = curdictMod->Name(); 
-	
+		
 	settingsInfo["Keys"]["verse"] = settings->currentverse; 
 	settingsInfo["Keys"]["dictionarykey"] = settings->dictkey; 
 	
 	settingsInfo["StudyPad"]["lastfile"] = settings->studypadfilename;
+	
+	settingsInfo["FontSize"]["BibleWindow"] = settings->bible_font_size; 
+	settingsInfo["FontSize"]["CommentaryWindow"] = settings->commentary_font_size; 
+    	settingsInfo["FontSize"]["DictionaryWindow"] = settings->dictionary_font_size; 
 	
 	settingsInfo["User Options"]["currentVerseColor"] = settings->currentverse_color;
 	
@@ -1567,5 +1576,15 @@ gboolean saveconfig(void)
 	
     	settingsInfo.Save();
 	return true;
+}
+
+/******************************************************************************
+ * addtoModList -- add a module to a list
+ * mod - module to add
+ * list - module list
+ ******************************************************************************/
+void addtoModList(SWModule *mod, GList *list)
+{
+	g_list_append(list,(SWModule *)mod); 
 }
 

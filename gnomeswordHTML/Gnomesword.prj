@@ -115,7 +115,9 @@ module.source.files=\
 	gs_viewdict_dlg.c\
 	gs_viewdict_dlg.h\
 	gs_viewtext_dlg.c\
-	gs_viewtext_dlg.h
+	gs_viewtext_dlg.h\
+	gs_ui.c\
+	gs_ui.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
