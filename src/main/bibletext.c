@@ -133,7 +133,7 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 	backend_save_module_options(settings.MainWindowModule,
 				    option, on_off);
 	backend_set_text_global_option(option, on_off);
-	//gui_display_text(settings.currentverse);
+	gui_display_text(settings.currentverse);
 }
 
 /******************************************************************************
@@ -155,132 +155,6 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 void set_text_global_option(gchar * option, gchar * choice)
 {
 	backend_set_text_global_option(option, choice);
-}
-
-/******************************************************************************
- * Name
- *  get_book_viewtext 
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *    const char *get_book_viewtext(void)	
- *
- * Description
- *   get current book displayed in veiw text dialog
- *
- * Return value
- *   const char *
- */
-
-const char *get_book_viewtext(void)
-{
-	return backend_get_book_viewtext();
-}
-
-/******************************************************************************
- * Name
- *  get_chapter_viewtext 
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   int get_chapter_viewtext(void)	
- *
- * Description
- *   get current chapter displayed in veiw text dialog
- *
- * Return value
- *   int
- */
-
-int get_chapter_viewtext(void)
-{
-	return backend_get_chapter_viewtext();
-}
-
-/******************************************************************************
- * Name
- *   get_verse_viewtext
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   int get_verse_viewtext(void)	
- *
- * Description
- *   get current verse displayed in veiw text dialog
- *
- * Return value
- *   int
- */
-
-int get_verse_viewtext(void)
-{	
-	return backend_get_verse_viewtext();
-}
-
-/******************************************************************************
- * Name
- *   goto_verse_viewtext
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void goto_verse_viewtext(gchar * verse)	
- *
- * Description
- *   find and display new verse for view text dialog
- *
- * Return value
- *   void
- */
-
-void goto_verse_viewtext(char * verse)
-{
-	backend_goto_verse_viewtext(verse);
-}
-
-/******************************************************************************
- * Name
- *   load_module_viewtext
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void load_module_viewtext(gchar * modName)	
- *
- * Description
- *   load a text module into the view text dialog
- *
- * Return value
- *   void
- */
-
-void load_module_viewtext(char * module_name)
-{
-	backend_load_module_viewtext(module_name);
-}
-
-/******************************************************************************
- * Name
- *   shutdown_viewtext
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void shutdown_viewtext(void)	
- *
- * Description
- *   shutdown down sword viewtext support
- *
- * Return value
- *   void
- */
-
-void shutdown_viewtext(void)
-{
-	backend_shutdown_viewtext();
 }
 
 /******************************************************************************
@@ -312,21 +186,22 @@ void set_global_options_viewtext(gchar *option, gboolean choice)
 
 /******************************************************************************
  * Name
- *   setup_viewtext
+ *  get_viewtext_text
  *
  * Synopsis
  *   #include "bibletext.h"
  *
- *   void setup_viewtext(GtkWidget * text)	
+ *   char *get_viewtext_text(char *mod_name, char *key)	
  *
  * Description
- *   setup the viewtext sword display
+ *    
  *
  * Return value
- *   void
- */
+ *   char*
+ */ 
 
-void setup_viewtext(GtkWidget * text)
+char *get_viewtext_text(char *mod_name, char *key)
 {
-	backend_setup_viewtext(text);
+	return backend_get_viewtext_text(mod_name, key);
 }
+

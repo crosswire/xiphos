@@ -28,17 +28,10 @@ extern "C" {
 
 #include <gnome.h>
 
-void backend_setup_viewtext(GtkWidget * text);
+void backend_setup_viewtext(void);
 void backend_shutdown_viewtext(void);
-void backend_goto_verse_viewtext(char * newkey);
-void backend_load_module_viewtext(char * modName);
-const char *backend_get_book_viewtext(void);
-int backend_get_chapter_viewtext(void);
-int backend_get_verse_viewtext(void);
-void backend_set_global_options_viewtext(char * option,
-					 char * onoff);
-char *backend_get_first_module_viewtext(void);
-char *backend_get_next_module_viewtext(void);
+void backend_set_global_options_viewtext(char * option, char * onoff);
+char *backend_get_viewtext_text(char *mod_name, char *key);	
 	
 #ifdef __cplusplus
 }
