@@ -202,8 +202,8 @@ display.o: display.cpp /usr/include/gnome.h \
  /usr/include/g++-2/stl_tree.h /usr/include/g++-2/stl_function.h \
  /usr/include/g++-2/stl_map.h /usr/include/g++-2/stl_multimap.h \
  /usr/include/sword/swconfig.h /usr/include/sword/swlog.h \
- /usr/include/sword/versekey.h /usr/include/sword/swmacs.h display.h \
- support.h GnomeSword.h
+ /usr/include/sword/versekey.h /usr/include/sword/swmacs.h \
+ /usr/include/sword/thmlgbf.h display.h support.h GnomeSword.h
 display.cpp :
 /usr/include/gnome.h :
 /usr/lib/gnome-libs/include/gnomesupport.h :
@@ -513,6 +513,7 @@ display.cpp :
 /usr/include/sword/swlog.h :
 /usr/include/sword/versekey.h :
 /usr/include/sword/swmacs.h :
+/usr/include/sword/thmlgbf.h :
 display.h :
 support.h :
 GnomeSword.h :

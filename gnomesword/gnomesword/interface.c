@@ -1530,6 +1530,9 @@ create_mainwindow (void)
   gtk_signal_connect (GTK_OBJECT (cbeFreeformLookup), "key_press_event",
                       GTK_SIGNAL_FUNC (on_cbeFreeformLookup_key_press_event),
                       NULL);
+  gtk_signal_connect (GTK_OBJECT (cbeFreeformLookup), "drag_drop",
+                      GTK_SIGNAL_FUNC (on_cbeFreeformLookup_drag_drop),
+                      NULL);
   gtk_signal_connect (GTK_OBJECT (btnLookup), "clicked",
                       GTK_SIGNAL_FUNC (on_btnLookup_clicked),
                       NULL);
@@ -1538,6 +1541,9 @@ create_mainwindow (void)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (moduleText), "button_press_event",
                       GTK_SIGNAL_FUNC (on_moduleText_button_press_event),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (moduleText), "drag_begin",
+                      GTK_SIGNAL_FUNC (on_moduleText_drag_begin),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (notebook3), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook3_switch_page),
@@ -1551,11 +1557,29 @@ create_mainwindow (void)
   gtk_signal_connect (GTK_OBJECT (textCommentaries), "button_release_event",
                       GTK_SIGNAL_FUNC (on_textComments_button_release_event),
                       NULL);
+  gtk_signal_connect (GTK_OBJECT (textCommentaries), "drag_begin",
+                      GTK_SIGNAL_FUNC (on_textCommentaries_drag_begin),
+                      NULL);
   gtk_signal_connect (GTK_OBJECT (textComments), "changed",
                       GTK_SIGNAL_FUNC (on_textComments_changed),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (textComments), "button_release_event",
                       GTK_SIGNAL_FUNC (on_textComments_button_release_event),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (textComments), "drag_begin",
+                      GTK_SIGNAL_FUNC (on_textComments_drag_begin),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (textComments), "drag_data_get",
+                      GTK_SIGNAL_FUNC (on_textComments_drag_data_get),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (textComments), "drag_data_received",
+                      GTK_SIGNAL_FUNC (on_textComments_drag_data_received),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (textComments), "drag_drop",
+                      GTK_SIGNAL_FUNC (on_textComments_drag_drop),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (textComments), "key_press_event",
+                      GTK_SIGNAL_FUNC (on_textComments_key_press_event),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (tbtnFollow), "toggled",
                       GTK_SIGNAL_FUNC (on_tbtnFollow_toggled),
@@ -1625,6 +1649,9 @@ create_mainwindow (void)
                       NULL);
   gtk_signal_connect (GTK_OBJECT (textDict), "selection_received",
                       GTK_SIGNAL_FUNC (on_moduleText_selection_received),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (textDict), "drag_begin",
+                      GTK_SIGNAL_FUNC (on_textDict_drag_begin),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnKeyPrev), "clicked",
                       GTK_SIGNAL_FUNC (on_btnKeyPrev_clicked),
@@ -3884,5 +3911,131 @@ create_listeditor (void)
                       NULL);
 
   return listeditor;
+}
+
+static GnomeUIInfo pmNE_uiinfo[] =
+{
+  {
+    GNOME_APP_UI_ITEM, "Bold",
+    "Make selected text bold",
+    on_boldNE_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "Italic",
+    "Make selected text Italic",
+    on_italicNE_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "Reference",
+    "Make selected text a reference",
+    on_referenceNE_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "Underline",
+    "Underline selected text",
+    on_underlineNE_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "Greek",
+    "Use greek font",
+    on_greekNE_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  GNOMEUIINFO_SEPARATOR,
+  {
+    GNOME_APP_UI_ITEM, "Goto Reference",
+    "Go to selected reference",
+    on_goto_reference_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+GtkWidget*
+create_pmNE (void)
+{
+  GtkWidget *pmNE;
+
+  pmNE = gtk_menu_new ();
+  gtk_object_set_data (GTK_OBJECT (pmNE), "pmNE", pmNE);
+  gnome_app_fill_menu (GTK_MENU_SHELL (pmNE), pmNE_uiinfo,
+                       NULL, FALSE, 0);
+
+  gtk_widget_ref (pmNE_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "boldNE",
+                            pmNE_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmNE_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "italicNE",
+                            pmNE_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmNE_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "referenceNE",
+                            pmNE_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmNE_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "underlineNE",
+                            pmNE_uiinfo[3].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmNE_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "greekNE",
+                            pmNE_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmNE_uiinfo[5].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "separator18",
+                            pmNE_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmNE_uiinfo[6].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmNE), "goto_reference",
+                            pmNE_uiinfo[6].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  return pmNE;
+}
+
+static GnomeUIInfo pmComments_uiinfo[] =
+{
+  {
+    GNOME_APP_UI_ITEM, "Goto Reference",
+    "Go to the selected reference",
+    on_goto_reference_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+GtkWidget*
+create_pmComments (void)
+{
+  GtkWidget *pmComments;
+
+  pmComments = gtk_menu_new ();
+  gtk_object_set_data (GTK_OBJECT (pmComments), "pmComments", pmComments);
+  gnome_app_fill_menu (GTK_MENU_SHELL (pmComments), pmComments_uiinfo,
+                       NULL, FALSE, 0);
+
+  gtk_widget_ref (pmComments_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "goto_reference",
+                            pmComments_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  return pmComments;
 }
 

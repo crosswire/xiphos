@@ -92,10 +92,10 @@ INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword
 
 bin_PROGRAMS = gnomesword
 
-@SPELLING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
-@PRINTING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	printstuff.c printstuff.h
-@SPELLING_PRINTING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.c printstuff.h
-@NO_OPS_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h
+@SPELLING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	thmlgbf.cpp	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
+@PRINTING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	thmlgbf.cpp	printstuff.c printstuff.h
+@SPELLING_PRINTING_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	thmlgbf.cpp	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.c printstuff.h
+@NO_OPS_TRUE@gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	thmlgbf.cpp
 
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
@@ -112,16 +112,17 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 @PRINTING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
 @PRINTING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@PRINTING_TRUE@menustuff.o listeditor.o printstuff.o
+@PRINTING_TRUE@menustuff.o listeditor.o thmlgbf.o printstuff.o
 @NO_OPS_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
 @NO_OPS_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@NO_OPS_TRUE@menustuff.o listeditor.o
+@NO_OPS_TRUE@menustuff.o listeditor.o thmlgbf.o
 @SPELLING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
 @SPELLING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@SPELLING_TRUE@menustuff.o listeditor.o spellcheck.o DICTClient.o
+@SPELLING_TRUE@menustuff.o listeditor.o thmlgbf.o spellcheck.o \
+@SPELLING_TRUE@DICTClient.o
 @SPELLING_PRINTING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
 @SPELLING_PRINTING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
-@SPELLING_PRINTING_TRUE@menustuff.o listeditor.o spellcheck.o \
+@SPELLING_PRINTING_TRUE@menustuff.o listeditor.o thmlgbf.o spellcheck.o \
 @SPELLING_PRINTING_TRUE@DICTClient.o printstuff.o
 gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
@@ -142,7 +143,7 @@ GZIP_ENV = --best
 DEP_FILES =  .deps/DICTClient.P .deps/GnomeSword.P .deps/callback.P \
 .deps/display.P .deps/filestuff.P .deps/interface.P .deps/listeditor.P \
 .deps/main.P .deps/menustuff.P .deps/printstuff.P .deps/spellcheck.P \
-.deps/support.P
+.deps/support.P .deps/thmlgbf.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
