@@ -951,12 +951,10 @@ const char *backend_get_module_language(const char *module_name)
 char *backend_get_module_text(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
-	int is_text = false;
 	
 	switch (manager) {
 	case TEXT_MGR:
 		mod = sw.text_mgr->Modules[module_name];
-		is_text = true;
 		break;
 	case COMM_MGR:
 		mod = sw.comm_mgr->Modules[module_name];
@@ -982,10 +980,13 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 		// work-a-round for bug in thmlhtmlhref filter
 		if(!strcmp(sw.version,"1.5.6")) {
 			if ((!strcmp(mod->Name(), "AmTract")) ||
-			    (!strcmp(mod->Name(), "Scofield")))
+			    (!strcmp(mod->Name(), "Scofield"))) 
 				return strdup((char *) mod->getRawEntry());
+			else
+				return strdup((char *) mod->RenderText());
 		} else
 			return strdup((char *) mod->RenderText());
+		
 	}
 	return NULL;
 }
@@ -1324,8 +1325,12 @@ char *backend_get_commentary_text(char *mod_name, char *key)
 			if ((!strcmp(mod->Name(), "AmTract"))
 			    || (!strcmp(mod->Name(), "Scofield")))
 				return strdup(mod->getRawEntry());
-		} else
+			else 
+				return strdup(mod->RenderText());
+			
+		} else 
 			return strdup(mod->RenderText());
+			
 	}
 	return NULL;
 }
