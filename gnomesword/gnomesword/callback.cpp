@@ -54,10 +54,12 @@ bool firstsearch = TRUE;  //-- search dialog is not running when true
 bool firstLE = true; //-- ListEditor in not running when true
 GtkWidget *searchDlg; //-- pointer to search dialog
 GtkWidget *listeditor; //-- pointer to ListEditor
+extern SETTINGS *settings; //-- pointer to settings structure - (declared in GnomeSword.cpp)
 extern bool ApplyChange;  //-- to keep form looping when book combobox is changed - do we still need this ???
 extern bool file_changed; //-- ???
 extern gchar *current_filename; //-- file in studypad
 extern GtkWidget *MainFrm;      //-- GnomeSword widget (gnome app)(declared and set in GnomeSword.cpp)
+extern GtkWidget *NEtext;
 extern GtkWidget *bookmark_mnu; //-- ???
 extern GtkWidget *strongsnum; //-- menu check item (declared in GnomeSword.cpp)
 extern gchar	*font_mainwindow, //--
@@ -601,7 +603,7 @@ void
 on_textComments_changed                (GtkEditable     *editable,
                                         gpointer         user_data)
 {
-	noteModified = TRUE;
+	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2287,27 +2289,18 @@ on_textDict_drag_begin                 (GtkWidget       *widget,
 
 }
 
- /* //----------------------------------------------------------------------------------------------
-void
-on_cbtnPNformat_toggled                (GtkToggleButton *togglebutton,
-                                        gpointer         user_data)
-{
-
-}
-*/
 //----------------------------------------------------------------------------------------------
 void
 on_boldNE_activate                     (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget	*text;
-	gchar			*buf;
-	
-	text = lookup_widget(MainFrm, "textComments");	
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<B>", -1);
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</b>", -1);
+	if(!settings->formatpercom) return;  //-- do we want formatting?
+	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
+	noteModified = true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2315,14 +2308,13 @@ void
 on_italicNE_activate                   (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget	*text;
-	gchar			*buf;
-	
-	text = lookup_widget(MainFrm, "textComments");	
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<I>", -1);
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</i>", -1);
+	if(!settings->formatpercom) return;   //-- do we want formatting?
+	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
+	noteModified = true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2330,29 +2322,31 @@ void
 on_referenceNE_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget	*text;
-	gchar			*buf;
-	
-	text = lookup_widget(MainFrm, "textComments");	
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<a href=\"", -1);
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "\"></a>", -1);
+	gchar			*buf,
+						tmpbuf[256];
+	if(!settings->formatpercom) return;   //-- do we want formatting?
+	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
+	buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
+	sprintf(tmpbuf,"<a href=\"%s\">",buf);
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
+	noteModified = true;
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_underlineNE_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
-{
-	GtkWidget	*text;
-	gchar			*buf;
-	
-	text = lookup_widget(MainFrm, "textComments");	
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<U>", -1);
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</u>", -1);
+{ 	
+	if(!settings->formatpercom) return;  //-- do we want formatting?
+	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<U>", -1);
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</u>", -1);
+	noteModified = true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2360,14 +2354,13 @@ void
 on_greekNE_activate                    (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget	*text;
-	gchar			*buf;
-	
-	text = lookup_widget(MainFrm, "textComments");	
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_start_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
-	gtk_text_set_point(GTK_TEXT(text), GTK_EDITABLE(text)->selection_end_pos);
-	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "</font>", -1);
+	if(!settings->formatpercom) return;   //-- do we want formatting?
+	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
+	gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+	gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
+	noteModified = true;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2375,7 +2368,27 @@ void
 on_goto_reference_activate             (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+	gchar *buf;
+	
+	if(!GTK_EDITABLE(NEtext)->has_selection) return; //-- do we have a selection?
+	buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
+	
+	changeVerse(buf);
+}
 
+//----------------------------------------------------------------------------------------------
+void
+on_goto_reference2_activate             (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget *text;
+	gchar *buf;
+	
+	text = lookup_widget(MainFrm,"textCommentaries");
+	if(!GTK_EDITABLE(text)->has_selection) return; //-- do we have a selection?
+	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+	
+	changeVerse(buf);
 }
 
 
@@ -2431,16 +2444,73 @@ gboolean
 on_textComments_key_press_event        (GtkWidget       *widget,
                                         GdkEventKey     *event,
                                         gpointer         user_data)
-{
-	GtkWidget	*text;
-	
-	
-  if(event->keyval == 65293 || event->keyval == 65421)  //-- if user hit return key continue
-	{
-	  text = lookup_widget(widget,"textComments");
-		gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<br>", -1);			
-		return true;
+{ 	
+	gchar *buf;
+	static gboolean needsecond = false;
+		
+	if(!settings->formatpercom) return false;   //-- do we want formatting?
+	if(event->keyval == 65293 || event->keyval == 65421) //-- return key
+	{ 	
+	  gtk_text_set_point( GTK_TEXT(NEtext), gtk_editable_get_position(GTK_EDITABLE(NEtext)));
+		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<br>", -1);
+		noteModified = true;
+		return true;	
 	}
-  return FALSE;
+	if(GTK_EDITABLE(NEtext)->has_selection)  //-- do we have a selection?
+	{	
+  	if(event->keyval == 65507)   //-- ctrl key pressed
+  	{
+     	needsecond = true;
+			return false;
+  	}
+  }  		
+		
+	noteModified = true;		
+	if(needsecond)
+	{
+	  switch(event->keyval)
+		{
+		   case 98:   //-- bold
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<B>", -1);
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</b>", -1);
+				break;
+			case 105:	 //-- italics
+			  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<I>", -1);
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</i>", -1);
+			  break;
+			case 114:   //-- reference
+			  gchar		tmpbuf[256];
+	
+				buf = gtk_editable_get_chars(GTK_EDITABLE(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos, GTK_EDITABLE(NEtext)->selection_end_pos);	
+				sprintf(tmpbuf,"<a href=\"%s\">",buf);
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, tmpbuf, -1);
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</a>", -1);
+				break;
+			case 108:  //-- underline -- broken using l not u - u removes line
+			  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<U>", -1);
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</u>", -1);
+				break;
+			case 103:	 //-- greek font
+			  gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_start_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<FONT FACE=\"symbol\">", -1);
+				gtk_text_set_point(GTK_TEXT(NEtext), GTK_EDITABLE(NEtext)->selection_end_pos);
+				gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "</font>", -1);
+				break;			
+			
+			default: break;
+		}
+		needsecond = false;
+	}
+  return true;
 }
+
+
 

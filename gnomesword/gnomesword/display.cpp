@@ -35,8 +35,8 @@
 #include <swmodule.h>
 #include <swmgr.h>
 #include <versekey.h>
-#include <thmlgbf.h>
-//#include <thmlplain.h>
+//#include <thmlgbf.h>
+//#include <gbfplain.h>
 
 #include "display.h"
 #include "support.h"
@@ -503,7 +503,7 @@ GBFentryDisp::Display(SWModule &imodule)
 }
 
 //-----------------------------------------------------------------------------------------------
-char                                   //-- this will handle some of the GBF format
+char                                   //-- this will handle some of the html formatting
 HTMLentryDisp::Display(SWModule &imodule)
 {
 	char tmpBuf[256];
@@ -551,7 +551,7 @@ HTMLentryDisp::Display(SWModule &imodule)
 		verseBuf[0]='\0';
 		while(i<len)
 		{ //-------------------------------------------------------------------------- italic
-			if(myverse[i] == '<' && myverse[i+1] =='I' && myverse[i+2]=='>')
+			if((myverse[i] == '<' && myverse[i+1] =='I' && myverse[i+2]=='>')||(myverse[i] == '<' && myverse[i+1] =='i' && myverse[i+2]=='>'))
    		{				
 				i=i+3;
 				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
@@ -582,14 +582,18 @@ HTMLentryDisp::Display(SWModule &imodule)
     	//-------------------------------------------------------------------------- reference
 			if((myverse[i] == '<' && myverse[i+1] =='a')||(myverse[i] == '<' && myverse[i+1] =='A')) 			
    		{				
-				i=i+9;
+				while(myverse[i] != '>')
+				{
+					++i;
+				}	
+				++i;			
 				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
 				verseBuf[0]='\0';
     	}
-			if(myverse[i] == '\"' && myverse[i+1] =='>' && myverse[i+2]=='<')
+			if(myverse[i] == '<' && myverse[i+1] =='/' && myverse[i+2]=='a')
    		{ 				
-				i=i+6;
+				i=i+4;
 				gtk_text_insert(GTK_TEXT(gtkText), roman_font, &colourRed, NULL, verseBuf, -1);
 				j=0;
 				verseBuf[0]='\0';
@@ -618,7 +622,7 @@ HTMLentryDisp::Display(SWModule &imodule)
 				verseBuf[0]='\0';
     	}
     	//----------------------------------------------------------------------- bold
-			if(myverse[i] == '<' && myverse[i+1] =='B' && myverse[i+2]=='>')
+			if((myverse[i] == '<' && myverse[i+1] =='B' && myverse[i+2]=='>')||(myverse[i] == '<' && myverse[i+1] =='b' && myverse[i+2]=='>'))
    		{				
 				i=i+3;
 				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
