@@ -172,23 +172,24 @@ void frontend_display(void)
 					      settings.currentverse);
 	main_url_handler(url);
 	g_free(url);	
-			
-
-	if(!settings.havebible){
-		settings.showtexts = FALSE;
-		gui_show_hide_texts(FALSE);
-		gtk_widget_set_sensitive(widgets.viewtexts_item, FALSE);
+/*			
+	if(!settings.first_run) {
+		if(!settings.havebible){
+			settings.showtexts = FALSE;
+			gui_show_hide_texts(FALSE);
+			gtk_widget_set_sensitive(widgets.viewtexts_item, FALSE);
+		}
+		if(!settings.havecomm) {
+			settings.showcomms = FALSE;
+			gui_show_hide_comms(FALSE);
+			gtk_widget_set_sensitive(widgets.viewcomms_item, FALSE);
+		}
+		if(!settings.havedict) {
+			gui_show_hide_dicts(FALSE);
+			gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);
+		}
 	}
-	if(!settings.havecomm) {
-		settings.showcomms = FALSE;
-		gui_show_hide_comms(FALSE);
-		gtk_widget_set_sensitive(widgets.viewcomms_item, FALSE);
-	}
-	if(!settings.havedict) {
-		gui_show_hide_dicts(FALSE);
-		gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);
-	}
-	
+*/		
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);

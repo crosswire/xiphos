@@ -564,66 +564,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 			      gpointer user_data)
 {
 	switch (GPOINTER_TO_INT(user_data)) {
-	case SHOW_BIBLE_TABS:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "tabs", "bible",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "tabs", "bible",
-				      "0");
-		settings.text_tabs =
-		    atoi(xml_get_value("tabs", "bible"));
-		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-					   (widgets.notebook_text),
-					   settings.text_tabs);
-/*		if (settings.havebible)
-			gui_set_text_frame_label(cur_t);*/
-		break;
-	case SHOW_COMMENTARY_TABS:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "tabs", "comm",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "tabs", "comm",
-				      "0");
-		settings.comm_tabs =
-		    atoi(xml_get_value("tabs", "comm"));
-		/*gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-					   (widgets.notebook_comm),
-					   settings.comm_tabs);*/
-		/*if (settings.havecomm)
-			gui_set_comm_frame_label(settings.CommWindowModule);*/
-		break;
-	case SHOW_DICTIONARY_TABS:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "tabs", "dict",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "tabs", "dict",
-				      "0");
-		settings.dict_tabs =
-		    atoi(xml_get_value("tabs", "dict"));
-		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-					   (widgets.notebook_dict),
-					   settings.dict_tabs);
-//		if (settings.havedict)
-//			gui_set_dict_frame_label();
-		break;
-	case SHOW_BOOK_TABS:
-		if (togglebutton->active)
-			xml_set_value("GnomeSword", "tabs", "book",
-				      "1");
-		else
-			xml_set_value("GnomeSword", "tabs", "book",
-				      "0");
-		settings.book_tabs =
-		    atoi(xml_get_value("tabs", "book"));
-		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-					   (widgets.notebook_gbs),
-					   settings.book_tabs);
-//		if (settings.havebook)
-//			gui_set_gbs_frame_label();
-		break;
+	
 	case USE_DEFAULT_DICTIONARY:
 		if (togglebutton->active)
 			xml_set_value("GnomeSword", "lexicons",
@@ -696,17 +637,6 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		    settings.showdicts;
 		gui_set_bible_comm_layout();
 		break;
-/*	case SHOW_IN_VIEWER:
-		if (GTK_TOGGLE_BUTTON(check_button.show_in_viewer)->
-		    active)
-			xml_set_value("GnomeSword", "lexicons",
-				      "inviewer", "1");
-		else
-			xml_set_value("GnomeSword", "lexicons",
-				      "inviewer", "0");
-		settings.inViewer =
-		    atoi(xml_get_value("lexicons", "inviewer"));
-		break;*/
 	case SHOW_IN_DICTIONARY:
 		if (GTK_TOGGLE_BUTTON(check_button.show_in_dictionary)->
 		    active)
@@ -2433,7 +2363,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	else
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 					     (rbtnNoDefaults), TRUE);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+/*	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_bible_tabs),
 				     settings.text_tabs);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -2446,7 +2376,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     settings.dict_tabs);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_book_tabs),
-				     settings.book_tabs);
+				     settings.book_tabs);*/
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_verse_style),
 				     settings.versestyle);

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-11 12:52-0500\n"
+"POT-Creation-Date: 2005-03-15 12:11-0500\n"
 "PO-Revision-Date: 2003-12-9 12:21:00+0200\n"
 "Last-Translator: Andy Piper <andyp@users.sf.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -106,19 +106,18 @@ msgstr ""
 msgid "H_istory/C_lear"
 msgstr ""
 
-#: src/editor/editor-control.c:341 src/editor/editor_menu.c:107
+#: src/editor/editor-control.c:344 src/editor/editor_menu.c:107
 #: src/editor/editor_menu.c:182 src/editor/editor_menu.c:688
 #: src/editor/toolbar_edit.c:233 src/gnome2/bibletext.c:1030
 #: src/gnome2/bibletext_dialog.c:2205 src/gnome2/commentary.c:740
 #: src/gnome2/commentary_dialog.c:1730 src/gnome2/dictlex.c:918
-#: src/gnome2/gbs.c:839 src/gnome2/note_editor.c:1147 src/gnome2/studypad.c:88
-#: src/gnome2/studypad.c:145
+#: src/gnome2/gbs.c:839 src/gnome2/note_editor.c:1147
+#: src/gnome2/studypad.c:103
 msgid "File"
 msgstr ""
 
-#: src/editor/editor-control.c:346 src/editor/toolbar_edit.c:237
-#: src/gnome2/commentary_dialog.c:122 src/gnome2/studypad.c:92
-#: src/gnome2/studypad.c:149
+#: src/editor/editor-control.c:349 src/editor/toolbar_edit.c:237
+#: src/gnome2/commentary_dialog.c:122 src/gnome2/studypad.c:107
 msgid "has been modified. Do you wish to save it?"
 msgstr ""
 
@@ -1055,6 +1054,10 @@ msgstr ""
 
 #: src/gnome2/dialog.c:159
 msgid " "
+msgstr ""
+
+#: src/gnome2/dialog.c:799
+msgid "Close _without Saving"
 msgstr ""
 
 #: src/gnome2/fileselection.c:215
@@ -2376,7 +2379,7 @@ msgstr ""
 msgid "Starting Sword"
 msgstr ""
 
-#: src/gnome2/studypad.c:481
+#: src/gnome2/studypad.c:439
 msgid "StudyPad"
 msgstr ""
 

@@ -372,12 +372,12 @@ void dict_key_entry_changed(GtkEntry * entry, gpointer data)
 
 void button_back_clicked(GtkButton * button, gpointer user_data)
 {
-	main_dictionary_button_clicked(0);
+	if(settings.havedict) main_dictionary_button_clicked(0);
 }
 
 void button_forward_clicked(GtkButton * button, gpointer user_data)
 {
-	main_dictionary_button_clicked(1);
+	if(settings.havedict) main_dictionary_button_clicked(1);
 }
 
 static void on_entry_activate(GtkEntry * entry,

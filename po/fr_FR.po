@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-11 12:52-0500\n"
+"POT-Creation-Date: 2005-03-15 12:11-0500\n"
 "PO-Revision-Date: 2005-03-09 20:54+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
@@ -127,19 +127,18 @@ msgstr "H_istorique/<Separator>"
 msgid "H_istory/C_lear"
 msgstr "H_istorique/_Effacer"
 
-#: src/editor/editor-control.c:341 src/editor/editor_menu.c:107
+#: src/editor/editor-control.c:344 src/editor/editor_menu.c:107
 #: src/editor/editor_menu.c:182 src/editor/editor_menu.c:688
 #: src/editor/toolbar_edit.c:233 src/gnome2/bibletext.c:1030
 #: src/gnome2/bibletext_dialog.c:2205 src/gnome2/commentary.c:740
 #: src/gnome2/commentary_dialog.c:1730 src/gnome2/dictlex.c:918
-#: src/gnome2/gbs.c:839 src/gnome2/note_editor.c:1147 src/gnome2/studypad.c:88
-#: src/gnome2/studypad.c:145
+#: src/gnome2/gbs.c:839 src/gnome2/note_editor.c:1147
+#: src/gnome2/studypad.c:103
 msgid "File"
 msgstr "Fichier"
 
-#: src/editor/editor-control.c:346 src/editor/toolbar_edit.c:237
-#: src/gnome2/commentary_dialog.c:122 src/gnome2/studypad.c:92
-#: src/gnome2/studypad.c:149
+#: src/editor/editor-control.c:349 src/editor/toolbar_edit.c:237
+#: src/gnome2/commentary_dialog.c:122 src/gnome2/studypad.c:107
 msgid "has been modified. Do you wish to save it?"
 msgstr "a été modifié.  Voulez-vous l'enregistrer?"
 
@@ -1102,6 +1101,10 @@ msgstr "Note pour"
 
 #: src/gnome2/dialog.c:159
 msgid " "
+msgstr ""
+
+#: src/gnome2/dialog.c:799
+msgid "Close _without Saving"
 msgstr ""
 
 #: src/gnome2/fileselection.c:215
@@ -2466,7 +2469,7 @@ msgstr ""
 msgid "Starting Sword"
 msgstr "Démarrage de Sword"
 
-#: src/gnome2/studypad.c:481
+#: src/gnome2/studypad.c:439
 msgid "StudyPad"
 msgstr "Bloc-notes d'étude"
 
