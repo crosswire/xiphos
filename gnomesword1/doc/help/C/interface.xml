@@ -1,5 +1,5 @@
 <chapter id="interface">
-	<title>The GnomeSword Interface</title>
+	<title>Interface</title>
 	
  <!-- ============= Menubar  ============-->
 	<sect1 id="menubar">
@@ -143,13 +143,21 @@
      		</screenshot>
 		</figure>
 		<para>
-     	On the left hand side of <application>GnomeSword2</application> there is the shortcut bar. Here the
-     	user can quickly and easily switch between the different Bible texts,
-     	commentaries, dictionaries and general books. You can also select and
-     	edit your bookmarks, view search results, view verse lists and view your
-     	daily devotional book by simply clicking on the <guibutton>module</guibutton>
-     	icon and select your selection.
-   		</para>
+	     	On the left hand side of <application>GnomeSword2</application> there is the Side Pane. Here the
+	     	user can quickly and easily switch between the different Sword modules, view your bookmarks, do simple searches and view verse lists.
+		To switch between all Side Pane functions, shortcuts have been placed at the bottom of the Side Pane to allow easy access to them.Simply 
+		clicking on the shortcut activates the option.
+		</para>
+		<figure>
+			<title>Side Pane Shortcuts</title>
+			<screenshot>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="figures/interface_shortcut" format="PNG"/>
+					</imageobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
 	</sect1>
 <!-- ============= Bible Text Pane  ============--> 
 	<sect1 id="gnomesword-bible">
@@ -181,7 +189,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-					right-click in the	<interface> Bible Text Pane </interface>.In the popup menu choose
+					right-click in the <interface>Bible Text Pane</interface>.In the popup menu choose
 					<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open Module</guimenuitem></menuchoice>
 					and select your specific translation that you want to view.
 					</para>
@@ -190,10 +198,35 @@
 					<para>
 					under the <guibutton>Modules</guibutton> option in the <interface>Sidebar</interface>,choose <menuchoice>
 					<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
-					and select your specific translation.
+					and select your specific translation. 
 					</para>
 				</listitem>
 			</itemizedlist>
+		</sect2>
+		
+		<sect2 id="gnomesword-bible-parallel">
+			<title>Using the Parallel View Mode</title>
+			<para>
+			A nice function in <application>GnomeSword2</application> is the ability to view your specified bible text in parallel with five other
+			translations of your choice. The Parallel View mode can be easily access by selecting <guimenuitem>Parallel View</guimenuitem> just
+			below the <interface>Bible Text Pane</interface>, next to the <guimenuitem>Standard View</guimenuitem> tab. Please note that you
+			can only view one verse at a time. You can change the verse by simply selecting another verse, chapter or book at the toolbar. Please note 
+			that modules that are Old Testament or New Testament only (eg Westminster Leningrad Codex and Byzantine Majority Text ) will not be able
+			to display books, chapters or verses that they don't have.  
+			</para>
+			<figure>
+   			<title>The Bible Text Pane</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_parallel" format="PNG"/>
+ 					</imageobject>
+					<textobject>
+   						<phrase>The Bible Text Pane</phrase>
+	 				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
 		</sect2>
 		
 		<sect2 id="gnomesword-bible-open-seperate">
@@ -313,6 +346,26 @@
 			</itemizedlist>
 		</sect2>
 	</sect1>
+<!-- ============= Viewer Pane	================ -->
+	<sect1 id="gnomesword-viewer">
+		<title>Viewer Pane</title>
+	<figure>
+   			<title>The Viewer Pane</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_viewer" format="PNG"/>
+	 				</imageobject>
+					<textobject>
+         				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+		The Viewer Pane allows the user to view strong numbers, morphological tags, footnotes and cross-references that the <interface>Bible Text
+		Pane</interface> provides. 
+		</para>
+	</sect1>	
 <!-- ============= Commentary Pane  ============--> 
 	<sect1 id="gnomesword-commentaries">
    		<title>The Commentary Pane</title>
@@ -377,5 +430,22 @@
 			</guimenuitem>, if you want view the Book Headings.
 			</para>
 		</sect2>
+	</sect1>
+
+	<sect1 id="gnomesword-dictionary">
+		<title>Dictionary Pane</title>
+		<figure>
+   			<title>The Dictionary Pane</title>
+   			<screenshot>
+       			<mediaobject>
+					<imageobject>
+          				<imagedata fileref="figures/interface_dictionary" format="PNG"/>
+	 				</imageobject>
+					<textobject>
+         				<phrase>The Commentary Pane</phrase>
+	 				</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
 	</sect1>
 </chapter>

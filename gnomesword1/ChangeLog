@@ -1,3 +1,9 @@
+2005-02-08  pierre <pierrebenz@users.sf.net>
+	* removed obsolete doc images
+	* added new doc images
+	* updated doc
+	* moved and updated doc Guidelines
+
 2005-02-05  terry <tbiggs@users.sf.net>
 
 	* added new navbar for main window.
@@ -27,9 +33,7 @@
 	* added documentation patch from Peter von Kaehne
 	* fixed documentation build for book format (translators,
 	  gnomesword.xml is now depreciated, translate to  new format please)
-	* 
 	
-
 2005-01-18  pierre <pierrebenz@users.sf.net>
 
 	* added documentation guidelines (still incomplete)

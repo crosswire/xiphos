@@ -10,7 +10,7 @@
      				<screenshot>
       					<mediaobject>
 						<imageobject>
-	      						<imagedata fileref="figures/gnomesword_personal_commentary" format="PNG"/>
+	      						<imagedata fileref="figures/personal" format="PNG"/>
 						</imageobject>
 						<textobject>
 					        	<phrase>Personal Commentary Editor </phrase>
