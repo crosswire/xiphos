@@ -165,10 +165,12 @@ void gui_add_history_Item(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref
 	    gtk_notebook_get_current_page(GTK_NOTEBOOK
 					  (widgets.notebook_comm));
 	sprintf(history_list[history_items].verseref, "%s", ref);
-	sprintf(history_list[history_items].textmod, "%s",
-		xml_get_value("modules", "bible"));
-	sprintf(history_list[history_items].commod, "%s",
-		xml_get_value("modules", "comm"));
+	if(xml_get_value("modules", "bible"))
+		sprintf(history_list[history_items].textmod, "%s",
+			xml_get_value("modules", "bible"));
+	if(xml_get_value("modules", "comm"))
+		sprintf(history_list[history_items].commod, "%s",
+			xml_get_value("modules", "comm"));
 
 	++history_items;
 	current_history_item = history_items;
