@@ -27,6 +27,8 @@
 #include <sys/stat.h>
 #include "support.h"
 #include "filestuff.h"
+#include "menustuff.h"
+#include "GnomeSword.h"
 
 #define BUFFER_SIZE 8192	//-- input buffer size	
 extern GtkWidget *MainFrm; //-- main window (form) widget
@@ -42,7 +44,7 @@ FILE 		 *configfile, //--  file pointer to configuration file - options
 				*flbookmarks;	 //-- file pointer to bookmarks file	
 		
 gint 			ibookmarks;	//-- number of bookmark menu items		
-
+gchar remembersubtree[256];
 
 /*-----------------------------------------------------
 check for GnomeSword dir
@@ -99,9 +101,9 @@ loadbookmarkarray(void) //------------------------------------------- load bookm
 		}
 		for(j=0;j<79;j++)   //-- remove '\n' line feed
 		{
-			if(mybuf[j] =='\n')
+			if(mybuf[j] =='\n') //-- when we find a line feed
 			{
- 				mybuf[j] = '\0';
+ 				mybuf[j] = '\0';  //-- replace it with a null
 				break;
 			}			
 		}
@@ -125,15 +127,18 @@ editbookmarksSave(GtkWidget *editdlg)  //-------------------------- save bookmar
 	text = lookup_widget(editdlg,"text4"); //-- get text widget
  	data = gtk_editable_get_chars (GTK_EDITABLE (text), 0, -1);	//-- get data from text widget
 	flbookmarks = fopen (fnbookmarks, "w"); //-- open bookmarks file
-  	if (flbookmarks == NULL) //-- return if we don't get a handle
-    {
-      g_free (data);
-      return;
-    }
-  	len = strlen (data); //-- get length of text data
-  	bytes_written = fwrite (data, sizeof (gchar), len, flbookmarks ); //-- write data to file
-  	fclose (flbookmarks); //-- close bookmarks file
-  	g_free (data); //-- free data - do we need to do this?
+	if (flbookmarks == NULL) //-- return if we don't get a handle
+ 	{
+ 		g_free (data);
+  	return;
+ 	}
+ 	len = strlen (data); //-- get length of text data
+ 	bytes_written = fwrite (data, sizeof (gchar), len, flbookmarks ); //-- write data to file
+ 	fclose (flbookmarks); //-- close bookmarks file
+ 	g_free (data); //-- free data - do we need to do this?
+  removemenuitems(MainFrm, remembersubtree, ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
+  loadbookmarkarray(); //-- load edited bookmarks  -- filestuff.cpp
+  loadbookmarks(MainFrm); //-- let's show what we did -- GnomeSword.cpp
 }
 
 //--------------------------------------------------------------------------------------------

@@ -106,7 +106,7 @@ GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
 						*notepage,	//-- widget to access toggle menu - for interlinear notebook page
 						*autosaveitem; //-- widget to access toggle menu - for personal comments auto save
 			
-extern gint ibookmarks;	//-- number of items in bookmark menu
+extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
 extern GdkColor myGreen; //-- current verse color
 GtkWidget* studypad;  //-- studypad text widget
 GtkWidget* notes;    //-- notes text widget
@@ -115,6 +115,8 @@ bool waitonmessage = true; //-- wait for user input
 //gboolean saveChanges = true; //-- save changes to personal comments
 gboolean autoSave = true; //-- we want to auto save changes to personal comments
 //gboolean personalCom = true; //-- let us know if curcomMod is a personal comment mod
+extern gchar remembersubtree[256];
+gint historyitems = 0;
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- app's main form
@@ -406,23 +408,32 @@ initSword(GtkWidget *mainform,  //-- app's main form
 
 //-------------------------------------------------------------------------------------------
 void
-loadbookmarks(GtkWidget *MainFrm)
+loadbookmarks(GtkWidget *MainFrm) //-- load bookmarks into menu
 {
-	gchar 	 subtreelabel[255];
-	gint       i;	
+	gchar 	  subtreelabel[255],
+						firstsubtree[255];
+	gint      i,
+						ifirsttime = 1;	
 		
-	sprintf(subtreelabel, "%s","_Bookmarks/Edit Bookmarks");	//--- create label for menu subtree
+	sprintf(subtreelabel, "%s","_Bookmarks/<Separator>");	//--- create label for menu subtree
 	for(i=0;i<ibookmarks;i++)
 	{		
 		if(bmarks[i][0] == '[')  //--- if item starts with a '[' it is a subtree (submenu)
 		{			
-			addsubtreeitem(MainFrm, "_Bookmarks/", bmarks[i]);
+			addsubtreeitem(MainFrm, "_Bookmarks/Edit Bookmarks", bmarks[i]);
 			sprintf(subtreelabel, "%s/%s/","_Bookmarks" ,bmarks[i] );
+			sprintf(remembersubtree,"%s/%s","_Bookmarks" ,bmarks[i]);
+			if(ifirsttime) //-- we need to remember the first subtree because it will really be last
+			{              //-- and we want to put a separator after it
+				 sprintf(firstsubtree,"%s/%s","_Bookmarks" ,bmarks[i]);
+				 ifirsttime = 0;
+			}
 		}
 		else if(bmarks[i][0] == '<')  //--- if item starts with '<' remaining items are added to _Bookmarks menu
 																	//---  below Edit Bookmarks item
 		{
-			sprintf(subtreelabel, "%s","_Bookmarks/Edit Bookmarks");			
+			addseparator(MainFrm,firstsubtree);
+			sprintf(subtreelabel, "%s","_Bookmarks/<Separator>");			
 		}
 		else
 		{
@@ -845,19 +856,12 @@ addBookmark(void)  //-- someone clicked add bookmark to get us here
 		iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number
 		iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- get chapter
 		sprintf(bmarks[ibookmarks],"%s %d:%d\0",bookname, iChap,iVerse ); //-- put book chapter and verse into bookmarks array
-		bookmarkitem = g_new(GnomeUIInfo,2); //-- create new gnome menu item
-		bookmarkitem->type = GNOME_APP_UI_ITEM; //-- type is regular menu item
-		bookmarkitem->moreinfo=(gpointer)on_john_3_1_activate; //-- set call back function
-		bookmarkitem->user_data=g_strdup(bmarks[ibookmarks]);  //-- set user data to bookmark for use in call back
-		bookmarkitem->label = bmarks[ibookmarks]; //-- set label for menu item
-		bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;  //-- stock gnome pixmap
-		bookmarkitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN; //-- open book pixmap
-		bookmarkitem->accelerator_key = 0;  //-- stop wild generation of accelerator keys
-		bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO; //-- last item
-		gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),"_Bookmarks/",bookmarkitem,NULL);	//-- insert into bookmarks menu
-		 ++ibookmarks;  //-- increment number of bookmark item + 1
+	  ++ibookmarks;  //-- increment number of bookmark item + 1
 	}
 	savebookmarks();  //-- save to file so we don't forget -- function in filestuff.cpp
+	removemenuitems(MainFrm, remembersubtree, ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
+  loadbookmarkarray(); //-- load edited bookmarks  -- filestuff.cpp
+  loadbookmarks(MainFrm); //-- let's show what we did -- GnomeSword.cpp
 }
 
 //-------------------------------------------------------------------------------------------
@@ -897,17 +901,10 @@ addHistoryItem(void)  //-- add an item to the history menu
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number from verse spin button
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")));//-- get chapter number from chapter spin button
 	sprintf(ref,"%s %d:%d",bookname, iChap,iVerse ); //-- store book, chapter and verse in ref string
-	historyitem = g_new(GnomeUIInfo,2); //-- create new gnome menu item structure
-	historyitem->type = GNOME_APP_UI_ITEM; //-- set type of of menu to item
-	historyitem->moreinfo=(gpointer)on_john_3_1_activate; //-- set callback function
-	historyitem->user_data=g_strdup(ref); //-- set user date to ref to use in call back
-	historyitem->label = ref;  //-- set item label to ref
-	historyitem->pixmap_type = GNOME_APP_PIXMAP_STOCK; //-- set type of pixmap to stock gnome
-	historyitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN; //-- open book pixmap
-	historyitem->accelerator_key = 0; //-- do not create accelerator key
-	historyitem[1].type=GNOME_APP_UI_ENDOFINFO; //-- mark end item
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),"_History/C_lear",historyitem,NULL); //--	add item to history menu
+	additemtognomemenu(MainFrm, ref, "_History/<Separator>",(GtkMenuCallback) on_john_3_1_activate); //-- add item to history menu
+	++historyitems;
 }
+
 //-------------------------------------------------------------------------------------------
 void
 changecurModSWORD(gchar *modName) //-- change sword module for main window
@@ -932,14 +929,14 @@ changecomp1ModSWORD(gchar *modName)  //-- change sword module for 1st interlinea
 {
 	ModMap::iterator it;
 
-	it = mainMgr1->Modules.find(modName);
-	if (it != mainMgr1->Modules.end())
+	it = mainMgr1->Modules.find(modName);  //-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr1->Modules.end())     //-- if we find the module
 	{
-		comp1Mod = (*it).second;
-		comp1Mod->SetKey(current_verse);
-		comp1Mod->Display();
+		comp1Mod = (*it).second;    //-- change current module to new module
+		comp1Mod->SetKey(current_verse);  //-- set key to current verse
+		comp1Mod->Display();              //-- show it to the world
 	}
-	strcpy(options[2],comp1Mod->Name());
+	strcpy(options[2],comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
 
 //-------------------------------------------------------------------------------------------
@@ -948,14 +945,14 @@ changecomp2ModSWORD(gchar *modName)  //-- change sword module for 2nd interlinea
 {
 	ModMap::iterator it;
 
-	it = mainMgr2->Modules.find(modName);
-	if (it != mainMgr2->Modules.end())
+	it = mainMgr2->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr2->Modules.end())    //-- if we find the module
 	{
-		comp2Mod = (*it).second;
-		comp2Mod->SetKey(current_verse);
-		comp2Mod->Display();
+		comp2Mod = (*it).second;    //-- change current module to new module
+		comp2Mod->SetKey(current_verse); //-- set key to current verse
+		comp2Mod->Display();            //-- show it to the world
 	}
-	strcpy(options[3],comp2Mod->Name());
+	strcpy(options[3],comp2Mod->Name());  //-- remember where we are so we can open here next time we startup
 }
 
 //-------------------------------------------------------------------------------------------
@@ -964,14 +961,14 @@ changecomp3ModSWORD(gchar *modName)   //-- change sword module for 3rd interline
 {
 	ModMap::iterator it;
 
-	it = mainMgr3->Modules.find(modName);
-	if (it != mainMgr3->Modules.end())
+	it = mainMgr3->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != mainMgr3->Modules.end())    //-- if we find the module
 	{
-		comp3Mod = (*it).second;
-		comp3Mod->SetKey(current_verse);
-		comp3Mod->Display();
+		comp3Mod = (*it).second;     //-- change current module to new module
+		comp3Mod->SetKey(current_verse); //-- set key to current verse
+		comp3Mod->Display();          //-- show it to the world
 	}
-	strcpy(options[4],comp3Mod->Name());
+	strcpy(options[4],comp3Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1245,6 +1242,15 @@ setautosave(gboolean choice)    //-- someone clicked auto save personal  comment
 		autoSave = false;
 		strcpy(options[14], "FALSE");
 	}
+}
+
+//-------------------------------------------------------------------------------------------
+void
+clearhistory(void)    //-- someone clicked clear history
+{
+  removemenuitems(MainFrm, "_History/<Separator>", historyitems+1);
+  historyitems = 0;
+  addseparator(MainFrm, "_History/C_lear");
 }
 
 
