@@ -21,6 +21,11 @@
 #endif
 
 #include <gnome.h>
+#include <gtk/gtk.h>
+
+#ifdef GTKHTML_HAVE_GCONF
+#include <gconf/gconf.h>
+#endif /* GTKHTML_HAVE_GCONF */
 
 #include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
@@ -56,7 +61,10 @@ main (int argc, char *argv[])
 		newbookmarks = FALSE;
 	gint 
 		icreatefiles=0;
-	
+#ifdef GTKHTML_HAVE_GCONF
+	GError  *gconf_error  = NULL;
+#endif	
+
 	gnome_init("GnomeSword", VERSION, argc, argv);		
 	if(argc > 1) {			
 		if(!strcmp(argv[1],"newconfigs")) newconfigs = TRUE;
@@ -66,7 +74,14 @@ main (int argc, char *argv[])
   			newconfigs = TRUE;
   			newbookmarks = TRUE;
 		}
-	}  	
+	} 
+#ifdef GTKHTML_HAVE_GCONF
+	if (!gconf_init (argc, argv, &gconf_error)) {
+		g_assert (gconf_error != NULL);
+		g_error ("GConf init failed:\n  %s", gconf_error->message);
+		return FALSE;
+	}
+#endif	
   	icreatefiles = setDiretory(); /*** gs_file.c ***/  
   	if(newconfigs)
   	{

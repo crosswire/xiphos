@@ -494,7 +494,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 /* --------------------------------------------------------------------------------------------- */
 char InterlinearDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[800], *buf;
+	gchar tmpBuf[800], *buf, *rowcolor;
 	gint i;
 	bool utf = false;
 	gint len;
@@ -504,6 +504,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
+	static gint row=1;
 	
 	Mgr = new SWMgr();	//-- create sword mgr
 	gtk_notebook_set_page(GTK_NOTEBOOK
@@ -530,25 +531,41 @@ char InterlinearDisp::Display(SWModule & imodule)
 	use_font = token;
 	use_font = strtok(NULL,"-");
 	//g_warning("use_font = %s",use_font);
-	
+	if(row == 6) 
+		row = 1;
+	if(row == 1|| row == 3||row==5)
+		rowcolor = "#F1F1F1";
+	else
+		rowcolor = settings->bible_bg_color;
 
 	//buf = (char *) imodule.Description(); 
 	(const char *) imodule;
+	if(row == 1){
 	sprintf(tmpBuf,
-		"<B><A HREF=\"[%s]%s\"><FONT COLOR=\"%s\" SIZE=\"%s\"> [%s]</font></a></b><FONT COLOR=\"%s\">[%s] </font>",
+		"<i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i>",
+		settings->bible_verse_num_color,
+		settings->verse_num_font_size,
+		imodule.KeyText());
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);	
+	}
+	++row;
+	sprintf(tmpBuf,
+		"<tr bgcolor=\"%s\"><td><B><A HREF=\"[%s]%s\"><FONT COLOR=\"%s\" SIZE=\"%s\"> [%s]</font></a></b>",
+		rowcolor,
 		imodule.Name(),
 		imodule.Description(),
 		settings->bible_verse_num_color,
-		settings->bible_font_size,
+		settings->verse_num_font_size,
 		imodule.Name(), 
-		settings->bible_verse_num_color,
-		imodule.KeyText());
+		settings->bible_verse_num_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
-		use_font, settings->interlinear_font_size);
+		use_font, "+1"); //, settings->interlinear_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -557,7 +574,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		    strlen((const char *) imodule));
 
 	sprintf(tmpBuf,
-		" [<A HREF=\"@%s\">view context</a>]</font><br><hr>",
+		" [<A HREF=\"@%s\">view context</a>]</font><br></td></tr>",
 		imodule.Name());
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, strlen(utf8str));

@@ -181,6 +181,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			//g_warning("modbuf = %s",modbuf);
 		}
 		buf = g_strdup(newref);
+		sprintf(settings->groupName,"%s","Verse List");
 		getVerseListSBSWORD(modbuf, buf, settings);
 		g_free(buf);
 	 /*** let's seperate mod version and passage ***/

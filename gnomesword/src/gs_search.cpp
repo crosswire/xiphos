@@ -37,7 +37,7 @@
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"
 #include "support.h"
-#include "sw_thmlhtml.h"
+//#include "thmlhtmllink.h"
 #include "sw_utility.h"
 
 
