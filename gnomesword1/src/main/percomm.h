@@ -28,7 +28,7 @@ extern "C" {
 int save_percomm_options(char * mod_name, char * option, 
 				    int choice);
 int load_percomm_options(char * modName, char * option);
-char *get_percomm_key(void);
+char *get_percomm_key(char * module_name);
 char *get_percomm_text(char * key);	
 void set_percomm_key(char * key);
 void change_percomm_module(char * mod_name);

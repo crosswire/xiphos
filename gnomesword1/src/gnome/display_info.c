@@ -57,7 +57,7 @@ void gui_display_mod_and_key(gchar * mod_name, gchar * key)
 {
 	gchar *text = NULL;
 
-	text = get_module_text(mod_name, key);
+	text = get_module_text(4, mod_name, key);
 	if (text) {
 		entry_display(html_widget, mod_name, text, key, TRUE);
 		free(text);

@@ -31,46 +31,44 @@ extern "C" {
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar	
-		gs_version[16], 	/* GnomeSword version */
-		MainWindowModule[80],	/* module to open at program startup  */
-		CommWindowModule[80],	/* module to open at program startup  */
-		DictWindowModule[80],	/* module to open at program startup  */
-		BookWindowModule[80],	/* module to open at program startup  */
-	        Interlinear1Module[80],	/* module to open at program startup  */
-	        Interlinear2Module[80],	/* module to open at program startup  */
-	        Interlinear3Module[80], /* module to open at program startup  */
-	        Interlinear4Module[80],	/* module to open at program startup  */
-	        Interlinear5Module[80], /* module to open at program startup  */
-	        personalcommentsmod[80],/* module to open at program startup  */
+		*gs_version, 	/* GnomeSword version */
+		*MainWindowModule,	/* module to open at program startup  */
+		*CommWindowModule,	/* module to open at program startup  */
+		*DictWindowModule,	/* module to open at program startup  */
+		*BookWindowModule,	/* module to open at program startup  */
+	        *Interlinear1Module,	/* module to open at program startup  */
+	        *Interlinear2Module,	/* module to open at program startup  */
+	        *Interlinear3Module, /* module to open at program startup  */
+	        *Interlinear4Module,	/* module to open at program startup  */
+	        *Interlinear5Module, /* module to open at program startup  */
+	        *personalcommentsmod,/* module to open at program startup  */
 		sb_search_mod[80], 	/* module to use for shortcut bar search */
-	        devotionalmod[80], 	/* module to use for devotional */
-	        DefaultDict[80], 	/* module to use for devotional */
-		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
-		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/	        
-		lex_greek_viewer[80], /* module to use for greek lexicon - strongs or thayers - in viewer */
-		lex_hebrew_viewer[80], /* module to use for hebrew lexicon - strongs or BDB - in viewer */
-	        currentverse[80],	/* verse to use at program startup */
+	        *devotionalmod, 	/* module to use for devotional */
+	        *DefaultDict, 	/* module to use for devotional */
+		*lex_greek, /* module to use for greek lexicon - strongs or thayers*/
+		*lex_hebrew, /* module to use for hebrew lexicon - strongs or BDB*/	        
+		*lex_greek_viewer, /* module to use for greek lexicon - strongs or thayers - in viewer */
+		*lex_hebrew_viewer, /* module to use for hebrew lexicon - strongs or BDB - in viewer */
+	        *currentverse,	/* verse to use at program startup */
 		comm_key[80],	/* verse to use at program startup */
-		book_key[256],
+		*book_key,
 	        *cvInterlinear,	/* current verse for detached interlinear */
 		*percomverse, /* current verse for personal comments */
-	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
-	        studypadfilename[255],   /* name of file in studypad when we closed */
-		studypaddir[255],	    /* directory for studypad files */
+	        *dictkey,		/* dictionary key to use at program startup - the one we shut down with */
+	        *studypadfilename,   /* name of file in studypad when we closed */
+		*studypaddir,	    /* directory for studypad files */
 		groupName[50], /* ??? */
 		searchText[256], /* ??? */
 		findText[256],
 		
 	/* fonts, font colors and font sizes */
-	        bible_text_color[15], /* color for text */
-	        bible_bg_color[15],  /* color for background */
-	        currentverse_color[15],  /* color for current verse */	
-	        currentverse_bg_color[15],  /* color for current verse background */
-	        link_color[15],  /* color for strongs, morph tags */	
-		bible_verse_num_color[15], /* verse number color */
-		found_color[15], /* color to use for search word in results display */
-		verselist_font_size[4],
-		verse_num_font_size[4];		
+	        *bible_text_color, /* color for text */
+	        *bible_bg_color,  /* color for background */
+	        *currentverse_color,  /* color for current verse */
+	        *link_color,  /* color for strongs, morph tags */	
+		*bible_verse_num_color, /* verse number color */
+		*found_color, /* color to use for search word in results display */
+		*verse_num_font_size;		
 		
 	gint 
       		shortcutbar_width,
@@ -204,10 +202,10 @@ struct _settings {
 extern SETTINGS settings;
 
 gint settings_init(int new_configs, int new_bookmarks);
+int load_settings_structure(void);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

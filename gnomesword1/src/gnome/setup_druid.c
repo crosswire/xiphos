@@ -30,6 +30,7 @@
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/settings.h"
+#include "main/xml.h"
 
 
 
@@ -63,59 +64,119 @@ static GtkWidget *dialog_setup;
 
 static void save_frist_run_settings(SETTINGS_DRUID widgets)
 {
-	strcpy(settings.MainWindowModule,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_text)));
-	strcpy(settings.DictWindowModule,
+	
+	xml_set_value("GnomeSword", "modules", "text",
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_text)));
+	
+	
+	xml_set_value("GnomeSword", "modules", "dict",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_dict)));
-	strcpy(settings.CommWindowModule,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_comm)));
-	strcpy(settings.Interlinear1Module,
+	
+	
+	xml_set_value("GnomeSword", "modules", "comm", 
+	     	gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_comm)));
+	
+	
+	xml_set_value("GnomeSword", "modules", "int1",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int1)));
-	strcpy(settings.Interlinear2Module,
+	
+	
+	xml_set_value("GnomeSword", "modules", "int2",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int2)));
-	strcpy(settings.Interlinear3Module,
+	
+	
+	xml_set_value("GnomeSword", "modules", "int3",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int3)));
-	strcpy(settings.Interlinear4Module,
+	
+	
+	xml_set_value("GnomeSword", "modules", "int4",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int4)));
-	strcpy(settings.Interlinear5Module,
+	
+	
+	xml_set_value("GnomeSword", "modules", "int5",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int5)));
-	strcpy(settings.personalcommentsmod,
+	
+	
+	xml_set_value("GnomeSword", "modules", "percom",
 	       gtk_entry_get_text(GTK_ENTRY
 				  (widgets.combo_entry_personal)));
-	strcpy(settings.BookWindowModule,
+				  
+	
+	xml_set_value("GnomeSword", "modules", "book",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_gbs)));
-	strcpy(settings.personalcommentsmod,
-	       gtk_entry_get_text(GTK_ENTRY
-				  (widgets.combo_entry_personal)));
-	strcpy(settings.devotionalmod,
+	
+	
+	xml_set_value("GnomeSword", "modules", "devotional",
 	       gtk_entry_get_text(GTK_ENTRY
 				  (widgets.combo_entry_devotion)));
-	strcpy(settings.lex_greek,
+	
+	xml_set_value("GnomeSword", "modules", "greek",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.entry_greek_lex)));
-	strcpy(settings.lex_hebrew,
+	
+	xml_set_value("GnomeSword", "modules", "hebrew",
 	       gtk_entry_get_text(GTK_ENTRY(widgets.entry_hebrew_lex)));
 
 
 	settings.usedefault =
 	    GTK_TOGGLE_BUTTON(widgets.radiobutton_use_default)->active;
+	if(GTK_TOGGLE_BUTTON(widgets.radiobutton_use_default)->active)	    
+		xml_set_value("GnomeSword", "misc", "usedefault","1");
+	else
+		xml_set_value("GnomeSword", "misc", "usedefault","0");	
+	
 	settings.text_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active)	    
+		xml_set_value("GnomeSword", "tabs", "text","1");
+	else
+		xml_set_value("GnomeSword", "tabs", "text","0");
+	    
 	settings.comm_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_comm_tabs)->active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_comm_tabs)->active)	    
+		xml_set_value("GnomeSword", "tabs", "comm","1");
+	else
+		xml_set_value("GnomeSword", "tabs", "comm","0");
+	    
 	settings.dict_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_dict_tabs)->active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_dict_tabs)->active)	    
+		xml_set_value("GnomeSword", "tabs", "dict","1");
+	else
+		xml_set_value("GnomeSword", "tabs", "dict","0");
+	    
 	settings.versestyle =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_verse_style)->active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_verse_style)->active)	    
+		xml_set_value("GnomeSword", "misc", "versestyle","1");
+	else
+		xml_set_value("GnomeSword", "misc", "versestyle","0");
 
 
 	settings.showtexts =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_window)->active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_text_window)->active)	    
+		xml_set_value("GnomeSword", "misc", "showtexts","1");
+	else
+		xml_set_value("GnomeSword", "misc", "showtexts","0");
+	    
 	settings.showcomms =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_upper_workbook)->
 	    active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_upper_workbook)->
+	    active)	    
+		xml_set_value("GnomeSword", "misc", "showcomms","1");
+	else
+		xml_set_value("GnomeSword", "misc", "showcomms","0");
+	    
 	settings.showdicts =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_lower_workbook)->
 	    active;
+	if(GTK_TOGGLE_BUTTON(widgets.checkbutton_lower_workbook)->
+	    active)	    
+		xml_set_value("GnomeSword", "misc", "showdicts","1");
+	else
+		xml_set_value("GnomeSword", "misc", "showdicts","0");
 
 
 	/*
@@ -124,8 +185,6 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 	   settings.interlinearpage =
 	   GTK_TOGGLE_BUTTON(widgets.checkbutton3)->active;
 	 */
-
-	create_properties_from_setup();
 }
 
 

@@ -51,6 +51,7 @@
 
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/xml.h"
 
 static GtkHTMLStream *htmlstream;
 static GtkHTMLStreamStatus status1;
@@ -79,7 +80,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key,
 {
 	gchar *str;
 	gchar *text;
-	text = get_striptext(mod, key);
+	text = get_striptext(4, mod, key);
 	str = remove_linefeeds(text);
 	if(str) {
 		gnome_appbar_set_status(GNOME_APPBAR(appbar),
@@ -379,7 +380,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (havemod > 2) {
 			modbuf = newmod;
 		} else {
-			modbuf = settings.MainWindowModule;
+			modbuf = xml_get_value("modules", "text");//settings.MainWindowModule;
 		}
 		buf = g_strdup(newref);
 		sprintf(settings.groupName, "%s", "Verse List");
@@ -921,6 +922,3 @@ void gui_html_print(GtkWidget * htmlwidget)
 
 	gtk_object_unref(GTK_OBJECT(print_master));
 }
-
-
-

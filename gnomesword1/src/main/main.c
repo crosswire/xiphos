@@ -37,7 +37,6 @@
 #include "gui/gnomesword.h"
 
 #include "backend/sword.h"
-#include "backend/properties.h"
 
 #include "main/settings.h"
  
@@ -99,7 +98,7 @@ int main(int argc, char *argv[])
 	 */   
     	first_run = settings_init(newconfigs,newbookmarks);
     
-	backend_load_properties(settings.fnconfigure);
+//	backend_load_properties(settings.fnconfigure); //settings.fnconfigure);
 	
 	gui_splash_init();
 
@@ -123,4 +122,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-

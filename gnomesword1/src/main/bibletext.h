@@ -27,12 +27,11 @@ extern "C" {
 #endif
 	
 void set_module_unlocked(char * mod_name, char * key);
-char *get_bibletext_text(char *mod_name, char *key);
-char *get_bibletext_striptext(char *mod_name, char *key);
+//char *get_bibletext_text(char *mod_name, char *key);
+//char *get_bibletext_striptext(char *mod_name, char *key);
 void set_text_global_option(char * option, char * choice);
 void set_text_module_global_option(char * option,
 				   int choice);
-const char* text_get_description(char * mod_name);
 int check_for_global_option(char * mod_name, char * option);
 int save_module_options(char * mod_name, char * option, 
 				    int choice);

@@ -402,7 +402,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	    *bgColor,
 	    *textColor,
 	    buf[500],
-	    *tmpkey, tmpbuf[256], *use_font, *use_font_size, *text_str;
+	    *tmpkey, tmpbuf[256], *use_font, *use_font_size;
+	gchar *text_str = NULL;
 	gchar *paragraphMark;
 	gint count;
 	gboolean was_editable = FALSE;
@@ -525,7 +526,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		}
 
 		/* get module text and prepare to display it */
-		text_str = get_bibletext_text(mod_name, tmpkey); //get_bibletext_text
+		text_str = get_module_text(0, mod_name, tmpkey); //get_bibletext_text
+		
 		str = g_string_append(str, text_str);
 		if (settings.displaySearchResults)
 			mark_search_words(str);

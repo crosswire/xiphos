@@ -120,18 +120,18 @@ static void on_entry_lookup_changed(GtkEditable * editable,
 	
 	if (count) {
 		gtk_clist_clear(GTK_CLIST(d->clist));
-		set_dictlex_module(d->mod_name);
-		set_dictlex_key(key);
-		new_key = get_dictlex_key(-1);
+		//set_dictlex_module(d->mod_name);
+		//set_dictlex_key(key);
+		new_key = get_dictlex_key(2, d->mod_name, -1);
 		
 		for (i = 0; i < (count / 2); i++) {
 			free(new_key);
-			new_key = get_dictlex_key(0);
+			new_key = get_dictlex_key(2, d->mod_name, 0);
 		}
 		
 		for (i = 0; i < count; i++) {
 			free(new_key);			
-			new_key = get_dictlex_key(1);
+			new_key = get_dictlex_key(2, d->mod_name, 1);
 			gtk_clist_append(GTK_CLIST(d->clist),
 						 &new_key);
 		}
@@ -642,4 +642,3 @@ void gui_shutdown_dictlex_dialog(void)
 }
 
 //******  end of file  ******/
-

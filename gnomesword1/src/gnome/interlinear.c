@@ -37,6 +37,7 @@
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/key.h"
+#include "main/xml.h"
 
 
 
@@ -223,7 +224,9 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	memset(modName, 0, 16);
 	module_name_from_description(modName,
 					     (gchar *) user_data);
-	sprintf(settings.Interlinear1Module, "%s", modName);
+	
+	xml_set_value("GnomeSword", "modules", "int1",modName);
+	settings.Interlinear1Module = xml_get_value("modules", "int1");
 	interlinear1 = check_for_module(settings.Interlinear1Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
@@ -258,7 +261,8 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	memset(modName, 0, 16);
 	module_name_from_description(modName,
 					     (gchar *) user_data);
-	sprintf(settings.Interlinear2Module, "%s", modName);
+	xml_set_value("GnomeSword", "modules", "int2",modName);
+	settings.Interlinear2Module = xml_get_value("modules", "int2"); 
 	interlinear2 = check_for_module(settings.Interlinear2Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
@@ -292,7 +296,9 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	memset(modName, 0, 16);
 	module_name_from_description(modName,
 					     (gchar *) user_data);
-	sprintf(settings.Interlinear3Module, "%s", modName);
+	
+	xml_set_value("GnomeSword", "modules", "int3",modName);
+	settings.Interlinear3Module = xml_get_value("modules", "int3"); 
 	interlinear3 = check_for_module(settings.Interlinear3Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
@@ -326,7 +332,9 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	memset(modName, 0, 16);
 	module_name_from_description(modName,
 					     (gchar *) user_data);
-	sprintf(settings.Interlinear4Module, "%s", modName);
+	
+	xml_set_value("GnomeSword", "modules", "int4",modName);
+	settings.Interlinear4Module = xml_get_value("modules", "int4");
 	interlinear4 = check_for_module(settings.Interlinear4Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
@@ -360,7 +368,9 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	memset(modName, 0, 16);
 	module_name_from_description(modName,
 					     (gchar *) user_data);
-	sprintf(settings.Interlinear5Module, "%s", modName);
+	
+	xml_set_value("GnomeSword", "modules", "int5",modName);
+	settings.Interlinear5Module = xml_get_value("modules", "int5");
 	interlinear5 = check_for_module(settings.Interlinear5Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
@@ -889,21 +899,21 @@ void gui_swap_interlinear_with_main(char * intmod)
 {
 	char *modname;
 
-	modname = settings.MainWindowModule;
+	modname = xml_get_value("modules", "text");//settings.MainWindowModule;
 	if (!strcmp(settings.Interlinear5Module, intmod)) {
-		sprintf(settings.Interlinear5Module, "%s", modname);
+		settings.Interlinear5Module = modname;
 	}
 	if (!strcmp(settings.Interlinear4Module, intmod)) {
-		sprintf(settings.Interlinear4Module, "%s", modname);
+		settings.Interlinear4Module = modname;
 	}
 	if (!strcmp(settings.Interlinear3Module, intmod)) {
-		sprintf(settings.Interlinear3Module, "%s", modname);
+		settings.Interlinear3Module = modname;
 	}
 	if (!strcmp(settings.Interlinear2Module, intmod)) {
-		sprintf(settings.Interlinear2Module, "%s", modname);
+		settings.Interlinear2Module = modname;
 	}
 	if (!strcmp(settings.Interlinear1Module, intmod)) {
-		sprintf(settings.Interlinear1Module, "%s", modname);
+		settings.Interlinear1Module = modname;
 	}
 	gui_change_module_and_key(intmod, settings.currentverse);
 	gui_update_interlinear_page();
