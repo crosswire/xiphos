@@ -100,10 +100,13 @@ void
 freeformlookupSWORD		  (GdkEventKey  *event);
 
 void
-changcurcomModSWORD	 (gchar *modName);
+changcurcomModSWORD	 	(gchar *modName);
 
 void
-savenoteSWORD				(bool noteModified);
+editnoteSWORD					(bool editbuttonactive);
+
+void
+savenoteSWORD					(bool noteModified);
 
 void
 deletenoteSWORD				(void);
