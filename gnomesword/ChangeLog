@@ -1,6 +1,8 @@
 2001-08-21Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*release  0.5.2
+	* added files gs_mainmenu_cb.*
+	* renamed callback.* to gs_gui_cb.*
 
 
 2001-08-18 Terry Biggs <tbiggs@users.sourceforge.net>

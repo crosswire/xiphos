@@ -37,7 +37,7 @@
 #include <gtk/gtk.h>
 
 #include "gs_info_box.h"
-#include "callback.h"
+#include "gs_gui_cb.h"
 #include "gs_studypad.h"
 #include "support.h"
 

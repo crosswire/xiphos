@@ -20,6 +20,8 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_info_box.c \
     gs_info_box.h\
+    gs_mainmenu_cb.c \
+    gs_mainmenu_cb.h\
     gs_viewcomm_dlg.c \
     gs_viewcomm_dlg.h \
     gs_viewdict_dlg.c \
@@ -32,8 +34,8 @@ COMMON_SOURCE =  \
     gs_gnomesword.h \
     gs_history.c \
     gs_history.h \
-    callback.c \
-    callback.h \
+    gs_gui_cb.c \
+    gs_gui_cb.h \
     sw_display.cpp \
     sw_display.h \
     gs_file.c \
