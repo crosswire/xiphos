@@ -28,6 +28,7 @@
 /* gnome */
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
+#include "commentary_find_dialog.h"
 
 /* main */
 #include "commentary.h"
@@ -44,7 +45,7 @@
 extern gboolean isrunningVC;
 extern COMM_DATA *cur_c;
 extern gboolean comm_display_change;
-
+extern gboolean comm_find_running;
 /******************************************************************************
  * global to this file only 
  */
@@ -71,26 +72,35 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl)
 {
-	COMM_DATA *c;
-	
+	COMM_DATA *c, *c_old;
+	c_old = (COMM_DATA *) g_list_nth_data(cl,
+					 settings.comm_last_page);
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
 	strcpy(settings.CommWindowModule, c->modName);
+	g_warning(c_old->modName);
+	
+	if(comm_find_running) {
+		gnome_dialog_close(c_old->find_dialog->dialog);
+		search_comm_find_dlg(c, FALSE, settings.findText);
+	}
+		
+	settings.comm_last_page = page_num;
 	/*
 	 * set settings.comm_key to current module key
 	 */
 	if(c->key)
 		strcpy(settings.comm_key,c->key);
-	settings.commLastPage = page_num;
+	
 	if(comm_display_change) {
 		if ((c->key[0] == '\0') && (settings.currentverse != NULL)) {
-			set_commentary_page_and_key(c->modnum,
-					      settings.currentverse);
+			display_commentary(settings.currentverse);
 			strcpy(settings.comm_key,settings.currentverse);
 			strcpy(c->key, settings.comm_key);
 		}
 	}
-	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
+	
+	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;	
 }
 
 /******************************************************************************
@@ -132,7 +142,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 
 static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	//searchGS_FIND_DLG(c, FALSE, NULL);
+	search_comm_find_dlg(c, FALSE, NULL);
 }
 
 /******************************************************************************
@@ -648,6 +658,48 @@ static void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
 
 /******************************************************************************
  * Name
+ *   on_btn_book_heading_clicked
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_btn_book_heading_clicked(GtkButton * button, COMM_DATA * c)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btn_book_heading_clicked(GtkButton * button, COMM_DATA * c)
+{
+	display_book_heading(c->modnum);
+}
+
+/******************************************************************************
+ * Name
+ *   on_btn_chap_heading_clicked
+ *
+ * Synopsis
+ *   #include "_commentary.h"
+ *
+ *   void on_btn_chap_heading_clicked(GtkButton * button, COMM_DATA * c)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btn_chap_heading_clicked(GtkButton * button, COMM_DATA * c)
+{
+	display_chap_heading(c->modnum);
+}
+
+/******************************************************************************
+ * Name
  *  on_button_release_event
  *
  * Synopsis
@@ -844,6 +896,47 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 				 gtk_widget_unref);
 	gtk_widget_show(c->btnCOMMPrint);
 
+	vseparator19 = gtk_vseparator_new();
+	gtk_widget_ref(vseparator19);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "vseparator19", vseparator19,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(vseparator19);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarCOMM),
+				  vseparator19, NULL, NULL);
+	gtk_widget_set_usize(vseparator19, 5, 7);
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_TOP);
+	c->btn_book_heading =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Book"),
+				       _("Display Book Heading"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(c->btn_book_heading);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "c->btn_book_heading", c->btn_book_heading,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(c->btn_book_heading);
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_UP);
+	c->btn_chap_heading =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarCOMM),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Chapter"),
+				       _("Display Chapter Heading"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(c->btn_chap_heading);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "c->btn_chap_heading", c->btn_chap_heading,
+				 (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(c->btn_chap_heading);
+	
 	scrolledwindowCOMMhtml = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowCOMMhtml);
 	gtk_object_set_data_full(GTK_OBJECT(s->app),
@@ -887,33 +980,32 @@ void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
 					  (s->notebook_comm),
 					  count), (gchar *) c->modName);
 
-
-
 	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(c->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
-	gtk_signal_connect(GTK_OBJECT(c->html),
-			   "button_release_event",
-			   GTK_SIGNAL_FUNC
-			   (on_button_release_event), (COMM_DATA *) c);
-
-
+			   GTK_SIGNAL_FUNC(on_url), 
+			   (gpointer) s->app);
+	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
+			   GTK_SIGNAL_FUNC(on_button_release_event), 
+			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMSync), "clicked",
 			   GTK_SIGNAL_FUNC(on_btn_sync_clicked),
 			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMBack), "clicked",
 			   GTK_SIGNAL_FUNC(on_btn_back_clicked),
 			   (COMM_DATA *) c);
-	gtk_signal_connect(GTK_OBJECT(c->btnCOMMForward),
-			   "clicked",
-			   GTK_SIGNAL_FUNC
-			   (on_btn_forward_clicked),
+	gtk_signal_connect(GTK_OBJECT(c->btnCOMMForward),"clicked",
+			   GTK_SIGNAL_FUNC(on_btn_forward_clicked),
 			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMPrint), "clicked",
-			   GTK_SIGNAL_FUNC
-			   (on_btn_print_clicked), (COMM_DATA *) c);
-
+			   GTK_SIGNAL_FUNC(on_btn_print_clicked), 
+			   (COMM_DATA *) c);
+	gtk_signal_connect(GTK_OBJECT(c->btn_chap_heading), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_chap_heading_clicked),
+			   (COMM_DATA *) c);
+	gtk_signal_connect(GTK_OBJECT(c->btn_book_heading), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_book_heading_clicked),
+			   (COMM_DATA *) c);
 }
 
 //******  end of file  ******/

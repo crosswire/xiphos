@@ -26,8 +26,8 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
-
+#include "settings.h"
+		
 typedef struct _COMMFindDialog COMMFindDialog;
 struct _COMMFindDialog {
 	GnomeDialog *dialog;
@@ -38,6 +38,7 @@ struct _COMMFindDialog {
 	gboolean regular;
 };
 
+
 typedef struct _commdata COMM_DATA;
 struct _commdata {
 	GtkWidget *html;
@@ -45,6 +46,8 @@ struct _commdata {
 	GtkWidget *btnCOMMBack;
 	GtkWidget *btnCOMMForward;
 	GtkWidget *btnCOMMPrint;
+	GtkWidget *btn_book_heading;
+	GtkWidget *btn_chap_heading;
 	GtkWidget *showtabs;
 	gchar *modName;
 	gchar *searchstring;
@@ -52,7 +55,10 @@ struct _commdata {
 	gint modnum;
 	gboolean has_key;
 	COMMFindDialog *find_dialog;
-};
+};	
+
+void display_book_heading(int mod_num);
+void display_chap_heading(int mod_num);
 const char* navigate_commentary(gint modnum, gint direction);
 void set_commentary_page_and_key(gint page_num,
 				     gchar * key);

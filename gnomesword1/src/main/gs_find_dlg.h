@@ -36,13 +36,15 @@ extern "C" {
 #include <gtkhtml/gtkhtml.h>
 	
 #include "gbs.h"
-	
+#include "commentary.h"
+
 typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
 
 #define FIND_DIALOG(name,title) find_dialog ((GnomeDialog ***)&g-> name ## _dialog, g->html, (DialogCtor) gs_ ## name ## _dialog_new, title)
 
 
 
+void close_dialog(GtkWidget *but, GSFindDialog *d);
 GSFindDialog * gs_find_dialog_new(GtkWidget *htmlwidget);
 void gs_find_dialog_destroy(GtkWidget *dialog, GSFindDialog *d);
 void searchGS_FIND_DLG(GBS_DATA *g, gboolean regular, gchar *text);

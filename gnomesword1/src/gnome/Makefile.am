@@ -21,6 +21,8 @@ libgui_a_SOURCES =  \
     _commentary.c \
     _commentary.h \
     _dictlex.c \
+    commentary_find_dialog.c \
+    commentary_find_dialog.h \
     _dictlex.h \
     _editor.c \
     _editor.h \
