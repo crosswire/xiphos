@@ -43,7 +43,7 @@ char *backend_get_search_results_text(char * mod_name, char * key);
 void backend_set_module_iterators(void);
 NAME_TYPE *backend_get_next_module_name(NAME_TYPE *nt);
 NAME_TYPE *backend_get_next_module_description(NAME_TYPE *nt);
-
+const char *backend_get_module_language(const char *module_name);
 int backend_is_personal_comment_module(char * mod_name);
 char *backend_get_next_percom_name(void);
 char *backend_get_next_devotion_name(void);
@@ -51,9 +51,9 @@ char *backend_get_module_description(char * module_name);
 int backend_has_cipher_tag(char *mod_name);
 int backend_module_is_locked(char *mod_name);
 char *backend_get_cipher_key(char *mod_name);	
-int backend_check_for_module(char * mod_name);
+int backend_check_for_module(const char * mod_name);
 char *backend_get_mod_about_info(char * modname);
-int backend_get_module_page(char *module_name, char *module_type);
+int backend_get_module_page(const char *module_name, const char *module_type);
 int backend_get_mod_type(char * mod_name);
 
 
@@ -77,6 +77,7 @@ void backend_set_percomm_key(char * key);
 void backend_save_personal_comment(char * note);
 void backend_delete_personal_comment(void);
 char *backend_get_percomm_text(char * key);
+void backend_init_language_map(void);
 
 #ifdef __cplusplus
 }

@@ -547,7 +547,7 @@ void gui_open_dictlex_dialog(gchar * mod_name)
 	DL_DATA *dlg;
 	GtkWidget *popupmenu;
 	
-	dlg = g_new(DL_DATA, 1);
+	dlg = g_new0(DL_DATA, 1);
 	dlg->mod_num = get_module_number(mod_name, DICT_MODS);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;

@@ -25,7 +25,11 @@
 
 
 
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
 #include <string.h>
 
 #include "main/module.h"
@@ -186,6 +190,10 @@ char *get_module_description(char * module_name)
 }
 
 
+char *get_module_language(const char *module_name)
+{
+	return backend_get_module_language(module_name);
+}
 
 /******************************************************************************
  * Name
@@ -269,7 +277,7 @@ int check_for_module(char * mod_name)
  *   int
  */ 
 
-int get_module_number(char *module_name, char *module_type)
+int get_module_number(const char *module_name, const char *module_type)
 {
 	return backend_get_module_page(module_name, module_type);
 }

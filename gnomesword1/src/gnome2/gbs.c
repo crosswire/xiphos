@@ -833,7 +833,7 @@ void gui_setup_gbs(GList *mods)
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
 		bookname = (gchar *)tmp->data;
-		gbs = g_new(GBS_DATA, 1);
+		gbs = g_new0(GBS_DATA, 1);
 		gbs->frame = NULL;
 		gbs->mod_name = bookname;
 		gbs->search_string = NULL;

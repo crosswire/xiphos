@@ -506,7 +506,7 @@ GS_DIALOG *gui_new_dialog(void)
 {
 	GS_DIALOG * info;
 	
-	info = g_new(GS_DIALOG, 1);
+	info = g_new0(GS_DIALOG, 1);
 	
 	info->dialog = NULL;
 	info->text1 = NULL;
