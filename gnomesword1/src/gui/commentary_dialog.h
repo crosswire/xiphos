@@ -27,9 +27,9 @@ extern "C" {
 #endif
 
 #include "gui/editor.h"
-#include "gui/mod_global_ops.h"
-//#include "gui/commentary.h"
-	
+
+#include "main/global_ops.hh"
+		
 typedef struct _commdata COMM_DATA;
 struct _commdata {
 	/* for commentary dialogs */

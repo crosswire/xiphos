@@ -26,7 +26,8 @@
 extern "C" {
 #endif
 	
-#include "gui/bibletext.h"
+
+#include "main/global_ops.hh"
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 	
