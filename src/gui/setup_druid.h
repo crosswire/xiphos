@@ -48,10 +48,10 @@ struct _settings_druid {
 
 GtkWidget *gui_create_setup_druid(GList *biblemods, GList *commmods, 
 						GList *dictmods);
-	
-		
+
 #ifdef __cplusplus
 }
 #endif	
 
-#endif /* __SETUP_DRUID_H__ */
+#endif
+

@@ -22,11 +22,8 @@
 #ifndef ___DICTLEX_H_
 #define ___DICTLEX_H_
 
-/*
- * main
- */
-#include "settings.h"
-#include "dictlex.h"
+#include "main/settings.h"
+#include "main/dictlex.h"
 
 void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 			       GtkNotebookPage * page,
@@ -35,5 +32,5 @@ GtkWidget *gui_create_dictlex_pm(DL_DATA * dl, GList * mods);
 void gui_create_dictlex_pane(SETTINGS * s,DL_DATA * dl, 
 						gint count);
 							
+#endif
 
-#endif	/* ___DICTLEX_H_ */

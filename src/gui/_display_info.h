@@ -26,11 +26,11 @@
 extern "C" {
 #endif
 
-GtkWidget*  gui_create_display_informtion_dialog (void);
+GtkWidget *gui_create_display_informtion_dialog(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* ___DISPLAY_INFO_H__ */
+#endif
 

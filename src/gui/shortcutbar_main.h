@@ -37,5 +37,6 @@ void gui_shortcutbar_showhide(void);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __SHORTCUTBAR_MAIN_H_ */
+
+#endif
 

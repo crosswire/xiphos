@@ -24,13 +24,14 @@
 
 #include <gnome.h>
 
-/* main */
-#include "find_dlg_defs.h"
+#include "main/find_dlg_defs.h"
+
 typedef struct _gs_find_dialog COMMFindDialog;
-/* main */
-#include "commentary.h"	
+
+#include "main/commentary.h"	
 
 void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d);
 void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text);
 			
-#endif /* _COMMENTARY_FIND_H_ */
+#endif
+

@@ -23,11 +23,12 @@
 #define __LINK_DIALOG_H_
 
 #include <gnome.h>
-#include "gs_gnomesword.h"
-#include "_editor.h"
+#include "main/gs_gnomesword.h"
+#include "gui/_editor.h"
 
-void set_link_to_module(gchar * linkref, gchar * linkmod,
-			GSHTMLEditorControlData * ecd);
-GtkWidget *create_link_dialog(GSHTMLEditorControlData * ecd);
+void set_link_to_module(gchar *linkref, gchar *linkmod,
+		GSHTMLEditorControlData *ecd);
+GtkWidget *create_link_dialog(GSHTMLEditorControlData *ecd);
 
-#endif	/* __LINK_DIALOG_H_ */
+#endif
+

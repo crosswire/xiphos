@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifndef __COMMENTARY_DIALOG_H_
 #define __COMMENTARY_DIALOG_H_
 
@@ -27,11 +26,13 @@
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 	
 GtkWidget *gui_create_commentary_dialog(SETTINGS * s);
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* __COMMENTARY_DIALOG_H_ */
+
+#endif
+

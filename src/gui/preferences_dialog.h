@@ -25,12 +25,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "settings.h"
+
+#include "main/settings.h"
 
 void gui_setup_preferences_dialog(SETTINGS *s);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __PREFERENCES_DIALOG_H_ */
+#endif
 

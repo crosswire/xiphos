@@ -30,11 +30,11 @@ extern "C" {
 
 #include <gnome.h>
 
-        GtkWidget *gui_create_about_modules(void);
+GtkWidget *gui_create_about_modules(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif  /* __ABOUT_MODULES_H_ */
 
-/******  end of file  ******/
+#endif
+
