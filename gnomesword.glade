@@ -793,6 +793,11 @@ Revelation
 	    <handler>on_cbeFreeformLookup_key_press_event</handler>
 	    <last_modification_time>Tue, 22 Feb 2000 03:18:31 GMT</last_modification_time>
 	  </signal>
+	  <signal>
+	    <name>drag_drop</name>
+	    <handler>on_cbeFreeformLookup_drag_drop</handler>
+	    <last_modification_time>Sat, 15 Jul 2000 16:59:21 GMT</last_modification_time>
+	  </signal>
 	  <editable>True</editable>
 	  <text_visible>True</text_visible>
 	  <text_max_length>0</text_max_length>
@@ -919,6 +924,11 @@ Revelation
 		      <name>button_press_event</name>
 		      <handler>on_moduleText_button_press_event</handler>
 		      <last_modification_time>Tue, 20 Apr 1999 20:08:53 GMT</last_modification_time>
+		    </signal>
+		    <signal>
+		      <name>drag_begin</name>
+		      <handler>on_moduleText_drag_begin</handler>
+		      <last_modification_time>Sat, 15 Jul 2000 16:56:59 GMT</last_modification_time>
 		    </signal>
 		    <editable>False</editable>
 		    <text></text>
@@ -1052,6 +1062,11 @@ Revelation
 			  <handler>on_textComments_button_release_event</handler>
 			  <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
 			</signal>
+			<signal>
+			  <name>drag_begin</name>
+			  <handler>on_textCommentaries_drag_begin</handler>
+			  <last_modification_time>Sat, 15 Jul 2000 16:55:24 GMT</last_modification_time>
+			</signal>
 			<editable>False</editable>
 			<text></text>
 		      </widget>
@@ -1132,6 +1147,31 @@ Revelation
 			  <name>button_release_event</name>
 			  <handler>on_textComments_button_release_event</handler>
 			  <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>drag_begin</name>
+			  <handler>on_textComments_drag_begin</handler>
+			  <last_modification_time>Mon, 17 Jul 2000 13:02:11 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>drag_data_get</name>
+			  <handler>on_textComments_drag_data_get</handler>
+			  <last_modification_time>Mon, 17 Jul 2000 13:02:28 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>drag_data_received</name>
+			  <handler>on_textComments_drag_data_received</handler>
+			  <last_modification_time>Mon, 17 Jul 2000 13:02:36 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>drag_drop</name>
+			  <handler>on_textComments_drag_drop</handler>
+			  <last_modification_time>Mon, 17 Jul 2000 13:02:52 GMT</last_modification_time>
+			</signal>
+			<signal>
+			  <name>key_press_event</name>
+			  <handler>on_textComments_key_press_event</handler>
+			  <last_modification_time>Mon, 17 Jul 2000 13:03:15 GMT</last_modification_time>
 			</signal>
 			<editable>False</editable>
 			<text></text>
@@ -1740,6 +1780,11 @@ Revelation
 		      <name>selection_received</name>
 		      <handler>on_moduleText_selection_received</handler>
 		      <last_modification_time>Tue, 06 Jul 1999 19:46:14 GMT</last_modification_time>
+		    </signal>
+		    <signal>
+		      <name>drag_begin</name>
+		      <handler>on_textDict_drag_begin</handler>
+		      <last_modification_time>Sat, 15 Jul 2000 16:57:13 GMT</last_modification_time>
 		    </signal>
 		    <editable>False</editable>
 		    <text></text>
@@ -5068,6 +5113,113 @@ Revelation
 	</widget>
       </widget>
     </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>pmNE</name>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>boldNE</name>
+    <tooltip>Make selected text bold</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_boldNE_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:17:45 GMT</last_modification_time>
+    </signal>
+    <label>Bold</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>italicNE</name>
+    <tooltip>Make selected text Italic</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_italicNE_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:19:36 GMT</last_modification_time>
+    </signal>
+    <label>Italic</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>referenceNE</name>
+    <tooltip>Make selected text a reference</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_referenceNE_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:20:15 GMT</last_modification_time>
+    </signal>
+    <label>Reference</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>underlineNE</name>
+    <tooltip>Underline selected text</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_underlineNE_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:20:56 GMT</last_modification_time>
+    </signal>
+    <label>Underline</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>greekNE</name>
+    <tooltip>Use greek font</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_greekNE_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:21:33 GMT</last_modification_time>
+    </signal>
+    <label>Greek</label>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>separator18</name>
+    <right_justify>False</right_justify>
+  </widget>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>goto_reference</name>
+    <tooltip>Go to selected reference</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_goto_reference_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:30:28 GMT</last_modification_time>
+    </signal>
+    <label>Goto Reference</label>
+    <right_justify>False</right_justify>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkMenu</class>
+  <name>pmComments</name>
+
+  <widget>
+    <class>GtkMenuItem</class>
+    <name>goto_reference</name>
+    <tooltip>Go to the selected reference</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_goto_reference_activate</handler>
+      <last_modification_time>Sun, 16 Jul 2000 16:29:04 GMT</last_modification_time>
+    </signal>
+    <label>Goto Reference</label>
+    <right_justify>False</right_justify>
   </widget>
 </widget>
 

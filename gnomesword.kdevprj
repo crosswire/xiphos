@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/projects/gnomesword/gnomesword/main.cpp,/home/tb/projects/gnomesword/gnomesword/interface.c,/home/tb/projects/gnomesword/gnomesword/support.c,/home/tb/projects/gnomesword/gnomesword/interface.h,/home/tb/projects/gnomesword/gnomesword/callback.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.h,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/projects/gnomesword/gnomesword/main.cpp,/home/tb/projects/gnomesword/gnomesword/interface.c,/home/tb/projects/gnomesword/gnomesword/support.c,/home/tb/projects/gnomesword/gnomesword/callback.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/projects/gnomesword/gnomesword/display.cpp,/home/tb/projects/gnomesword/gnomesword/GnomeSword.h,/home/tb/projects/gnomesword/gnomesword/Makefile.am,/home/tb/projects/gnomesword/config.h,/home/tb/projects/gnomesword/configure.in,
 show_outputview=true
 show_treeview=true
-header_file=/home/tb/projects/gnomesword/gnomesword/GnomeSword.h
-cpp_file=/home/tb/projects/gnomesword/gnomesword/GnomeSword.cpp
-browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/open.html
+header_file=/home/tb/projects/gnomesword/configure.in
+cpp_file=/home/tb/projects/gnomesword/gnomesword/display.cpp
+browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/CPLUSPLUS/SYNTAX/new.html
 [COPYING]
 install_location=
 dist=true
@@ -154,7 +154,7 @@ dist=true
 install=false
 type=SOURCE
 [gnomesword/Makefile.am]
-files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,gnomesword/printstuff.h,gnomesword/listeditor.h,gnomesword/listeditor.cpp,gnomesword/interface.c,gnomesword/support.c,gnomesword/printstuff.c,
+files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,gnomesword/printstuff.h,gnomesword/listeditor.h,gnomesword/listeditor.cpp,gnomesword/interface.c,gnomesword/support.c,gnomesword/printstuff.c,gnomesword/thmlgbf.cpp,
 type=prog_main
 sub_dirs=
 [gnomesword/docs/Makefile.am]
@@ -170,6 +170,11 @@ install_location=
 dist=true
 install=false
 type=DATA
+[gnomesword/thmlgbf.cpp]
+install_location=
+dist=true
+install=false
+type=SOURCE
 [gnomesword.lsm]
 install_location=
 dist=true
