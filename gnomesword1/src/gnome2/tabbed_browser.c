@@ -33,9 +33,9 @@
 #include "gui/bibletext_menu.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary.h"
-//#include "gui/shortcutbar_main.h"
-//#include "gui/sidebar.h"
-//#include "gui/cipher_key_dialog.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/sidebar.h"
+#include "gui/cipher_key_dialog.h"
 #include "gui/html.h"
 #include "gui/main_menu.h"
 #include "gui/main_window.h"
@@ -53,8 +53,7 @@
 
 static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
-					 gint page_num, GList * tl);
-static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
+					 gint page_num, GList **tl);
 
 /******************************************************************************
  * externs
@@ -91,26 +90,63 @@ static GList *passage_list;
  */
 static void on_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
-					 gint page_num, GList * tl)
+					 gint page_num, GList **tl)
 {
 	PASSAGE_TAB_INFO *pt;
 	
 	/* get data structure for new passage */
-	pt = (PASSAGE_TAB_INFO*)g_list_nth_data(tl, page_num);
+	pt = (PASSAGE_TAB_INFO*)g_list_nth_data(*tl, page_num);
 	
 	/* point PASSAGE_TAB_INFO *cur_passage_tab to pt - cur_passage_tab is global to this file */
 	cur_passage_tab = pt;
 
 	//sets the text mod and key
-	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
+	gui_change_module_and_key(pt->text_mod, pt->text_commentary_key);
+	gui_change_verse(pt->text_commentary_key);
+
+//	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
 	
 	//sets the commentary mod and key
-	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
+//	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
-	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
+//	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
 	
 	//sets the book mod and key
+}
+
+/******************************************************************************
+ * Name
+ *  notebook_main_add_page
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
+ *
+ * Description
+ *   adds a new page and label to the main notebook for a new scripture passage
+ *
+ * Return value
+ *   void
+ */
+static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
+{
+	GtkWidget *label;
+	int i;
+
+	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show(tbinf->page_widget);
+
+	label = gtk_label_new(tbinf->text_mod);
+	gtk_widget_show(label);
+	
+	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
+				 tbinf->page_widget, label);
+	
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
+					tbinf->page_widget,
+					(gchar*)tbinf->text_mod);
 }
 
 /******************************************************************************
@@ -143,10 +179,11 @@ void gui_open_verse_in_new_tab(gchar *verse_key)
 	pt->dictlex_key = cur_d->key;
 	pt->book_key = NULL;
 	
-	notebook_main_add_page(pt);
-	
 	passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 	cur_passage_tab = pt;
+
+	notebook_main_add_page(pt);
+	
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_main),
 				gtk_notebook_page_num
 				(GTK_NOTEBOOK(widgets.notebook_main),
@@ -178,40 +215,6 @@ void gui_close_passage_tab(gint pagenum)
 	
 	g_free(pt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), pagenum);
-}
-
-/******************************************************************************
- * Name
- *  notebook_main_add_page
- *
- * Synopsis
- *   #include "tabbed_browser.h"
- *
- *   void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
- *
- * Description
- *   adds a new page and label to the main notebook for a new scripture passage
- *
- * Return value
- *   void
- */
-static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
-{
-	GtkWidget *label;
-	int i;
-
-	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show(tbinf->page_widget);
-
-	label = gtk_label_new(tbinf->text_mod);
-	gtk_widget_show(label);
-
-	gtk_notebook_append_page(GTK_NOTEBOOK(widgets.notebook_main),
-				 tbinf->page_widget, label);
-	
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
-					tbinf->page_widget,
-					(gchar*)tbinf->text_mod);
 }
 
 /******************************************************************************
@@ -259,8 +262,8 @@ void gui_notebook_main_setup(GList *ptlist)
 	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
 			   "switch_page",
 			   G_CALLBACK
-			   (on_notebook_main_switch_page), passage_list);
-
+			   (on_notebook_main_switch_page), &passage_list);
+	
 	g_list_free(tmp);
 }
 
