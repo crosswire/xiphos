@@ -36,7 +36,8 @@
 #include "gs_sword.h"
 #include "support.h"
 #include "sw_utility.h"
-#include "sw_verselist_dlg.h"
+//#include "sw_verselist_dlg.h"
+#include "sw_verselist_sb.h"
 
 
 extern SWModule *curMod, *curcomMod, *percomMod;
@@ -166,7 +167,7 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
                 }
         }
 	if(count){
-		getVerseListSWORD(searchMod->Name(), string->str, s);
+		getVerseListSBSWORD(searchMod->Name(), string->str, s);
 		//g_warning("count = %d\nstring = %s",count,string->str);
 		sprintf(buf,"%d found",count);
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);

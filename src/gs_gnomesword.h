@@ -39,6 +39,7 @@ struct _settings {
 		*appbar, /* gnome status/progress bar */
 		*shortcut_bar,
 		*ctree_widget,
+		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
 		*versestyle_item;	/* widget to access toggle menu - for versestyle */
 	gchar	
 		MainWindowModule[80],	/* modules to open at program startup  */
