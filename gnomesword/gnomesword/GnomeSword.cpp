@@ -54,7 +54,7 @@
 #include "noteeditor.h"
 
 //------------------------------------------------- sword global to this file
-SWDisplay *chapDisplay; //--- to display modules using GtkText a chapter at a time
+SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
 SWDisplay *entryDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *comp1Display; //--- to display modules using GtkText a verse at a time
 SWDisplay *comp2Display; //--- to display modules using GtkText a verse at a time
@@ -288,8 +288,8 @@ initSword(GtkWidget *mainform)
 			}
 			else if(!strcmp(sourceformat,"ThML")) curcomMod->Disp(HTMLDisplay);
 			else if(!strcmp(curcomMod->Name(),"RWP")) curcomMod->Disp(RWPDisplay);
-			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){  /* if driver is RawFiles */
-				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
+			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){  /* if driver is RawFiles - personal notes*/
+				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay); 
 				 else curcomMod->Disp(comDisplay);
 			}else curcomMod->Disp(comDisplay);
 			
@@ -314,14 +314,14 @@ initSword(GtkWidget *mainform)
 			}
 		}
 	} 		
-  	//-- set up percom editor module and menu
+  	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin(); it != percomMgr->Modules.end(); it++){
 		if (!strcmp((*it).second->Type(), "Commentaries")){ //-- if type is Commentaries
 		 	 //-- if driver is RawFiles			
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
 				 percomMod = (*it).second;
 				 if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formatted display
-				 else percomMod->Disp(percomDisplay);                     //-- else standard displey
+				 else percomMod->Disp(percomDisplay);                     //-- else standard display
 				 percommods = g_list_append(percommods,percomMod->Name());
 				 usepersonalcomments = true; //-- used by verseChange function (GnomeSword.cpp)
 				 percomMod->SetKey(settings->currentverse);
@@ -776,7 +776,7 @@ addBookmark(void)  //-- someone clicked add bookmark to get us here
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- get chapter
 	sprintf(buf,"%s %d:%d\0",bookname, iChap,iVerse ); //-- put book chapter and verse into bookmarks array
 	 ++ibookmarks;  //-- increment number of bookmark item + 1	
-	savebookmark(buf);  //-- save to file so we don't forget -- function in filestuff.cpp
+	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
 	removemenuitems(MainFrm, "_Bookmarks/<Separator>", ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
         sprintf(buf,"%s%s", "_Bookmarks/",remembersubtree);
         addseparator(MainFrm, buf);
@@ -1417,13 +1417,13 @@ sbchangeModSword(gint group_num, gint item_num)
 		changecurModSWORD(ref[0]);
 	}
 	if(!strcmp(type[0],"commentary:")) {
-		if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
+		if(havecomm) { /* let's don't do this if we don't have at least one commentary */	           			            	
 			notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
 		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
     		}
     	}
 	if(!strcmp(type[0],"dict/lex:")) {
-		if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
+		if(havedict) { /* let's don't do this if we don't have at least one dictionary / lexicon */	           			            	
 			notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
 		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
   		}
@@ -1483,8 +1483,7 @@ add_sb_group (EShortcutBar *shortcut_bar,gchar *group_name)
 
 //---------------------------------------------------------------------------------------------
 void
-lookupStrongsSWORD(gint theNumber) //-- theNumber - strongs number was double clicked selected and
-                                    //-- sent here
+lookupStrongsSWORD(gint theNumber) /* theNumber - strongs number was double clicked selected and sent here */
 {
         GtkWidget       *notebook, //-- pointer to dict/lex notebook (we use the notebook even if it is not showing)
                         *entry;    //-- pointer to dictionarySearchText entry
@@ -1497,7 +1496,7 @@ lookupStrongsSWORD(gint theNumber) //-- theNumber - strongs number was double cl
         a = key->Testament();  //-- find out if we are in old or new testament
         if(a == 001) pagenum = hebrewpage; //-- if old testament use hebrew lex
         else pagenum = greekpage;          //-- if new testament use greek lex
-        if(havedict){ //-- let's don't do this if we don't have at least one dictionary / lexicon    			            	
+        if(havedict){ /* let's don't do this if we don't have at least one dictionary / lexicon */    			            	
                 notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
                 gtk_notebook_set_page(GTK_NOTEBOOK(notebook), pagenum); //-- set notebook page
                 entry = lookup_widget(MainFrm,"dictionarySearchText"); //-- get the entry so we can send it the new key

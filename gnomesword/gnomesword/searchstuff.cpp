@@ -39,6 +39,7 @@
 
 SearchWindow *searchWindow;
 extern SWModule *curMod, *curcomMod, *percomMod;
+static void percentUpdate(char percent, void *userData) ;
 
 SearchWindow::SearchWindow ()
 {
@@ -143,7 +144,7 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 	                *percomToggle;	//-- do we want to search personal commentary - check box
 	gchar           *entryText,	//-- pointer to text in searchText entry
 	                scount[5];	//-- string from gint count for label
-	gchar           *resultText;	//-- temp storage for verse found
+	const char      *resultText;	//-- temp storage for verse found
 	gint            count;		//-- number of hits
 
 	searchText = lookup_widget (searchFrm, "entry1");	//-- pointer to text entry
@@ -193,7 +194,7 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 		  searchScopeList.ClearList ();	//------------ clear scope search list
 		  currentScope = 0;	//------------ clear scope
 	  }
-
+	char progressunits = 70;
 	count = 0;		/* we have not found anything yet */
 	gtk_clist_clear (GTK_CLIST (resultList));	//-- clear list widget for new results
 	entryText = gtk_entry_get_text (GTK_ENTRY (searchText));	//-- what to search for
@@ -207,12 +208,14 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 			  GTK_TOGGLE_BUTTON (caseSensitive)->active ? 0 : REG_ICASE;	//-- get search params - case sensitive
 		gtk_clist_freeze (GTK_CLIST (resultList));	//-- keep list form scrolling until we are done
 		//-- give search string to module to search
-		for (ListKey & searchResults = searchMod->Search (entryText, searchType, searchParams, currentScope);
+		for (ListKey & searchResults = searchMod->Search (entryText, searchType, searchParams, 
+											currentScope, 0, 
+											&percentUpdate,  (void*)&progressunits);
 		       !searchResults.Error (); 
 		       searchResults++) {		    
-			    resultText = g_strdup ((const char *) searchResults);	//-- put verse key string of find into a string
+			    resultText = (const char *) searchResults;	//-- put verse key string of find into a string
 			    gtk_clist_append (GTK_CLIST (resultList), &resultText);	//-- store find in list
-			    searchScopeList << (const char *) searchResults;	//-- remember finds for next search's scope
+			    searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope */
 			    ++count;	//-- if we want to use them
                 }
 		gtk_clist_thaw (GTK_CLIST (resultList));	//-- thaw list so we can look through the results
@@ -243,6 +246,20 @@ SearchWindow::resultsListSWORD (GtkWidget * searchFrm, gint row, gint column)	//
 }
 
 //-------------------------------------------------------------------------------------------
+static void percentUpdate(char percent, void *userData) {
+	/*static char printed = 0;
+	char maxHashes = *((char *)userData);
+	char buf[80];
+	
+	while ((((float)percent)/100) * maxHashes > printed) {
+		gtk_progress_set_value(GTK_PROGRESS(searchWindow->progressbar),(float)percent) ;
+		gtk_widget_grab_focus(searchWindow->progressbar);
+		sprintf(buf,"%f",(((float)percent)/100));
+		cout << buf << '\n';
+		printed++;	
+	}*/
+}
+//-------------------------------------------------------------------------------------------
 GtkWidget *
 SearchWindow::create ()
 {
@@ -256,7 +273,25 @@ SearchWindow::create ()
 	gtk_object_set_data (GTK_OBJECT (dlgSearch), "dialog_vbox1",
 			     dialog_vbox1);
 	gtk_widget_show (dialog_vbox1);
+  	/* Create a GtkAdjusment object to hold the range of the
+           * progress bar */
+          //adj = (GtkAdjustment *) gtk_adjustment_new (0, 1, 100, 0, 0, 0);
 
+          /* Create the GtkProgressBar using the adjustment */
+        /* progressbar = gtk_progress_bar_new_with_adjustment (adj);
+
+ 
+  	//progressbar = gtk_progress_bar_new ();
+  	gtk_widget_ref (progressbar);
+  	gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "progressbar", progressbar,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (progressbar);
+  	gtk_box_pack_end (GTK_BOX (dialog_vbox1), progressbar, FALSE, TRUE, 0);
+  	gtk_progress_set_show_text (GTK_PROGRESS (progressbar), TRUE);
+	gtk_progress_bar_set_bar_style (GTK_PROGRESS_BAR (progressbar),
+                                          GTK_PROGRESS_CONTINUOUS);	
+        */		      
+				      
 	frame8 = gtk_frame_new (NULL);
 	gtk_widget_ref (frame8);
 	gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "frame8", frame8,
