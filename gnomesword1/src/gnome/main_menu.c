@@ -306,6 +306,11 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 	gtk_widget_show(AboutBox);
 }
 
+
+/******************************************************************************
+ * gnome menu structures
+ */
+
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
@@ -436,12 +441,6 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_MENU_FILE_TREE(file1_menu_uiinfo),
 	GNOMEUIINFO_MENU_EDIT_TREE(edit1_menu_uiinfo),
-	/*{
-	 GNOME_APP_UI_SUBTREE, N_("_Quickmarks"),
-	 NULL,
-	 quickmarks_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},*/
 	{
 	 GNOME_APP_UI_SUBTREE, N_("_History"),
 	 NULL,
@@ -453,6 +452,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_MENU_HELP_TREE(help1_menu_uiinfo),
 	GNOMEUIINFO_END
 };
+	
 
 /******************************************************************************
  * Name

@@ -22,8 +22,8 @@ libbackend_a_SOURCES =  \
     bibletext_.h \
     bookmarks.cpp \
     bookmarks.h \
-    commentary.cpp \
-    commentary.h \
+    commentary_.cpp \
+    commentary_.h \
     dictlex.cpp \
     dictlex.h \
     display.cpp \

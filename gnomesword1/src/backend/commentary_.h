@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * commentary.h - support for Sword commentary modules
+ * commentary_.h - support for Sword commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -29,7 +29,7 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-        char* backend_nav_commentary_COMM ( gint modnum,
+        const char* backend_nav_commentary( gint modnum,
                                            gint direction );
         void backend_newDisplayCOMM ( GtkWidget * html, char *modname,
                                       SETTINGS * s );
