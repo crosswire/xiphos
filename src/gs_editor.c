@@ -2,7 +2,7 @@
 
   /*
      * GnomeSword Bible Study Tool
-     * gs_html_editor.c
+     * gs_editor.c
      * -------------------
      * Mon Dec 10 2001
      * copyright (C) 2001 by Terry Biggs
@@ -73,7 +73,6 @@ extern GtkWidget *toolbarBooks;
 extern GtkWidget *toolbarStudypad;
 
 static GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd);
-static GtkWidget *create_dlgSearch(GSHTMLEditorControlData * ecd);
 static GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd);
 
 
@@ -91,6 +90,7 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
 	sprintf(necd->filename, "%s", s->studypadfilename);
 	return necd;
 }
+ 
 
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
 {
@@ -756,17 +756,14 @@ on_undo_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 static void
 on_find_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *dlg;
-
-	dlg = create_dlgSearch(ecd);
-	gtk_widget_show(dlg);
+	search(ecd, FALSE, NULL);
 }
 
 static void
 on_find_again_activate(GtkMenuItem * menuitem,
 		       GSHTMLEditorControlData * ecd)
 {
-	html_engine_search_next(ecd->html->engine);
+	search_next(ecd);
 }
 
 
@@ -854,6 +851,9 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	GtkWidget *find_again;
 	GtkWidget *replace;
 	//GtkWidget *link;
+	GtkAccelGroup *accel_group;
+
+	accel_group = gtk_accel_group_new ();
 
 	ecd->editnote = NULL;
 	
@@ -1112,6 +1112,10 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(find_again);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), find_again);
+	gtk_widget_add_accelerator (find_again, "activate", accel_group,
+                              GDK_n, GDK_CONTROL_MASK,
+                              GTK_ACCEL_VISIBLE);
+	
 
 	replace = gtk_menu_item_new_with_label(_("Replace"));
 	gtk_widget_ref(replace);
@@ -1193,177 +1197,10 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	
 	gtk_signal_connect(GTK_OBJECT(ecd->link), "activate",
 			   GTK_SIGNAL_FUNC(on_link_activate), ecd);
-			  
+	gtk_menu_set_accel_group (GTK_MENU (pmEditor), accel_group);		  
 	return pmEditor;
 }
 
-/*************************************************************************** search dialog and call backs */
-static gboolean
-on_entry12_key_press_event(GtkWidget * widget,
-			   GdkEventKey * event,
-			   GSHTMLEditorControlData * ecd)
-{
-
-	return FALSE;
-}
-
-static void
-on_btnFindOK_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
-{
-	GtkWidget *dlg;
-	gchar *buf;
-
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	buf =
-	    e_utf8_gtk_entry_get_text(GTK_ENTRY
-				      (lookup_widget
-				       (GTK_WIDGET(button), "entry12")));
-	html_engine_search(ecd->html->engine, buf, 0,	/* not case sen */
-			   1,	/* foward search */
-			   0);	/* not regex */
-	g_free(buf);
-	gtk_widget_destroy(dlg);
-}
-
-
-static void
-on_cancel_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
-{
-	GtkWidget *dlg;
-	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	gtk_widget_destroy(dlg);
-}
-
-
-GtkWidget *create_dlgSearch(GSHTMLEditorControlData * ecd)
-{
-	GtkWidget *dlgSearch;
-	GtkWidget *dialog_vbox16;
-	GtkWidget *vbox45;
-	GtkWidget *label180;
-	GtkWidget *entry12;
-	GtkWidget *hbox66;
-	GtkWidget *cbtnSearchCase;
-	GtkWidget *cbtnSearchDir;
-	GtkWidget *cbtnSearchRegex;
-	GtkWidget *dialog_action_area16;
-	GtkWidget *btnFindOK;
-	GtkWidget *btnFindCancel;
-			
-	dlgSearch = gnome_dialog_new(_("GnomeSWORD Find"), NULL);
-	gtk_object_set_data(GTK_OBJECT(dlgSearch), "dlgSearch", dlgSearch);
-	gtk_window_set_default_size(GTK_WINDOW(dlgSearch), 350, -1);
-
-	dialog_vbox16 = GNOME_DIALOG(dlgSearch)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dlgSearch), "dialog_vbox16",
-			    dialog_vbox16);
-	gtk_widget_show(dialog_vbox16);
-
-	vbox45 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox45);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "vbox45", vbox45,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox45);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox16), vbox45, TRUE, TRUE, 0);
-
-	label180 = gtk_label_new(_("Enter Word or Phrase"));
-	gtk_widget_ref(label180);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "label180",
-				 label180,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label180);
-	gtk_box_pack_start(GTK_BOX(vbox45), label180, FALSE, FALSE, 0);
-
-	entry12 = gtk_entry_new();
-	gtk_widget_ref(entry12);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "entry12", entry12,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(entry12);
-	gtk_box_pack_start(GTK_BOX(vbox45), entry12, FALSE, FALSE, 0);
-//	gtk_widget_set_usize(entry12, 291, -2);
-	
-	hbox66 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox66);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "hbox66", hbox66,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(hbox66);
-	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
-
-	cbtnSearchCase =
-	    gtk_check_button_new_with_label(_("Case Sensitive"));
-	gtk_widget_ref(cbtnSearchCase);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "cbtnSearchCase",
-				 cbtnSearchCase,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(cbtnSearchCase);
-	gtk_box_pack_start(GTK_BOX(hbox66), cbtnSearchCase, FALSE, FALSE,
-			   0);
-
-	cbtnSearchDir =
-	    gtk_check_button_new_with_label(_("Foward Search"));
-	gtk_widget_ref(cbtnSearchDir);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "cbtnSearchDir",
-				 cbtnSearchDir,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(cbtnSearchDir);
-	gtk_box_pack_start(GTK_BOX(hbox66), cbtnSearchDir, FALSE, FALSE,
-			   0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnSearchDir),
-				     TRUE);
-
-	cbtnSearchRegex =
-	    gtk_check_button_new_with_label(_("Regular Expresion"));
-	gtk_widget_ref(cbtnSearchRegex);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "cbtnSearchRegex",
-				 cbtnSearchRegex,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(cbtnSearchRegex);
-	gtk_box_pack_start(GTK_BOX(hbox66), cbtnSearchRegex, FALSE, FALSE,
-			   0);
-
-	dialog_action_area16 = GNOME_DIALOG(dlgSearch)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dlgSearch), "dialog_action_area16",
-			    dialog_action_area16);
-	gtk_widget_show(dialog_action_area16);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area16),
-				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area16),
-				   8);
-
-	gnome_dialog_append_button(GNOME_DIALOG(dlgSearch),
-				   GNOME_STOCK_BUTTON_OK);
-	btnFindOK =
-	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgSearch)->buttons)->
-		       data);
-	gtk_widget_ref(btnFindOK);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "btnFindOK",
-				 btnFindOK,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnFindOK);
-	GTK_WIDGET_SET_FLAGS(btnFindOK, GTK_CAN_DEFAULT);
-
-	gnome_dialog_append_button(GNOME_DIALOG(dlgSearch),
-				   GNOME_STOCK_BUTTON_CANCEL);
-	btnFindCancel =
-	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgSearch)->buttons)->
-		       data);
-	gtk_widget_ref(btnFindCancel);
-	gtk_object_set_data_full(GTK_OBJECT(dlgSearch), "btnFindCancel",
-				 btnFindCancel,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnFindCancel);
-	GTK_WIDGET_SET_FLAGS(btnFindCancel, GTK_CAN_DEFAULT);
-
-	gtk_signal_connect(GTK_OBJECT(entry12), "key_press_event",
-			   GTK_SIGNAL_FUNC(on_entry12_key_press_event),
-			   ecd);
-	gtk_signal_connect(GTK_OBJECT(btnFindOK), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnFindOK_clicked), ecd);
-	gtk_signal_connect(GTK_OBJECT(btnFindCancel), "clicked",
-			   GTK_SIGNAL_FUNC(on_cancel_clicked), ecd);
-
-	return dlgSearch;
-}
 
 /*************************************************************************** link dialog create and call backs */
 /*** set link module and key ***/
@@ -1406,6 +1243,13 @@ on_btnLinkOK_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 	updatestatusbar(ecd);
 }
 
+static void
+on_cancel_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
+{
+	GtkWidget *dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	
+	gtk_widget_destroy(dlg);
+}
 /*** create dialog for setting up links in text ***/
 GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 {
@@ -1650,3 +1494,25 @@ GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 
 	return htmlwidget;
 }
+
+void
+run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title)
+{
+	if (*dialog) {
+		gtk_window_set_title (GTK_WINDOW (**dialog), title);
+		gtk_widget_show (GTK_WIDGET (**dialog));
+		gdk_window_raise (GTK_WIDGET (**dialog)->window);
+	} else {
+		*dialog = ctor (html);
+		gtk_window_set_title (GTK_WINDOW (**dialog), title);
+		gtk_widget_show (GTK_WIDGET (**dialog));
+	}
+}
+
+
+void searchgbsGS_EDITOR(gchar *searchstring)
+{
+	search(gbsecd, FALSE, searchstring);
+}
+
+

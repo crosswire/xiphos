@@ -54,104 +54,93 @@ project.config.disable.overwriting=1 1 1 1 1 1 1 1 0
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 
-module.include.name=include
+module.include.name=src
 module.include.type=
 module.include.expanded=0
-module.include.files=
+module.include.files=\
+	char_table.h\
+	gs_html.h\
+	spell.h\
+	spell_gui.h\
+	support.h\
+	gs_abouts.h\
+	gs_file.h\
+	gs_popup_cb.h\
+	gs_gnomesword.h\
+	gs_history.h\
+	gs_menu.h\
+	sw_utility.h\
+	gs_shortcutbar.h\
+	gs_gui.h\
+	gs_viewtext_dlg.h\
+	gs_info_box.h\
+	sw_properties.h\
+	gs_bookmarks.h\
+	sw_bookmarks.h\
+	gs_information_dlg.h\
+	gs_setup.h\
+	e-splash.h\
+	gs_preferences_dlg.h\
+	sw_search.h\
+	sw_verselist_sb.h\
+	sw_shortcutbar.h\
+	sw_viewtext_dlg.h\
+	gs_viewcomm_dlg.h\
+	gs_viewdict_dlg.h\
+	sw_viewdict_dlg.h\
+	sw_display.h
 
 module.source.name=src
 module.source.type=
 module.source.expanded=1
 module.source.files=\
 	char_table.c\
-	char_table.h\
 	gs_file.c\
 	gs_gnomesword.c\
 	gs_history.c\
 	gs_html.c\
-	gs_html.h\
 	gs_menu.c\
 	spell.c\
-	spell.h\
 	spell_gui.c\
-	spell_gui.h\
-	support.h\
 	support.c\
 	main.c\
 	gs_abouts.c\
-	gs_abouts.h\
-	gs_file.h\
 	gs_popup_cb.c\
-	gs_popup_cb.h\
-	gs_gnomesword.h\
-	gs_menu.h\
-	gs_history.h\
 	sw_utility.cpp\
-	sw_utility.h\
 	gs_shortcutbar.c\
-	gs_shortcutbar.h\
 	gs_gui.c\
-	gs_gui.h\
 	gs_viewtext_dlg.c\
-	gs_viewtext_dlg.h\
 	gs_info_box.c\
-	gs_info_box.h\
 	sw_properties.cpp\
-	sw_properties.h\
 	gs_bookmarks.c\
-	gs_bookmarks.h\
 	sw_bookmarks.cpp\
-	sw_bookmarks.h\
 	gs_information_dlg.c\
-	gs_information_dlg.h\
 	gs_setup.c\
-	gs_setup.h\
 	e-splash.c\
-	e-splash.h\
 	gs_preferences_dlg.c\
-	gs_preferences_dlg.h\
 	sw_search.cpp\
-	sw_search.h\
-	sw_verselist_sb.h\
 	sw_verselist_sb.cpp\
 	sw_shortcutbar.cpp\
-	sw_shortcutbar.h\
 	sw_viewtext_dlg.cpp\
-	sw_viewtext_dlg.h\
 	gs_viewcomm_dlg.c\
-	gs_viewcomm_dlg.h\
 	gs_viewdict_dlg.c\
-	gs_viewdict_dlg.h\
 	sw_viewdict_dlg.cpp\
-	sw_viewdict_dlg.h\
 	sw_viewcomm_dlg.cpp\
-	sw_viewcomm_dlg.h\
-	sw_gnomesword.cpp\
-	sw_gnomesword.h\
 	sw_display.cpp\
-	sw_display.h\
 	gs_unlockkey_dlg.c\
-	gs_unlockkey_dlg.h\
 	gs_mainmenu_cb.c\
-	gs_mainmenu_cb.h\
 	gs_gui_cb.c\
-	gs_gui_cb.h\
 	sw_module_options.cpp\
-	sw_module_options.h\
 	gs_editor_replace.c\
-	gs_editor_replace.h\
 	gs_editor_toolbar.c\
-	gs_editor_toolbar.h\
 	sw_gbs.cpp\
-	sw_gbs.h\
 	gs_gbs.c\
 	gs_getinfo_dlg.c\
-	gs_getinfo_dlg.h\
 	gs_editor.c\
-	gs_editor.h\
-	sw_sword.h\
-	gs_gbs.h\
-	sw_sword.cpp
+	sw_sword.cpp\
+	gs_detach_int.c\
+	gs_editor_search.c\
+	gs_editor_search.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

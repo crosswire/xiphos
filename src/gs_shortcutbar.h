@@ -39,7 +39,8 @@ struct  _search_opt{
 	GtkWidget 
 		*ckbCommentary,
 		*ckbPerCom,
-		*ckbGBS;
+		*ckbGBS,
+		*rbPhraseSearch;
 };
 
 	void setupforDailyDevotion(SETTINGS * s);

@@ -2,7 +2,7 @@
 
   /*
      * GnomeSword Bible Study Tool
-     * gs_html_editor.h
+     * gs_editor.h
      * -------------------
      * Mon Dec 10 2001
      * copyright (C) 2001 by Terry Biggs
@@ -26,12 +26,19 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __GS_HTML_EDITOR_H_
-#define __GS_HTML_EDITOR_H_
+#ifndef __GS_EDITOR_H_
+#define __GS_EDITOR_H_
 
+#include <gnome.h>
 #include <gtkhtml/htmlgdkpainter.h>
 #include "gs_gnomesword.h"
 #include "gs_editor_replace.h"
+#include "gs_editor_search.h"
+
+
+typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
+
+#define RUN_DIALOG(name,title) run_dialog ((GnomeDialog ***)&ecd-> name ## _dialog, ecd->html, (DialogCtor) gs_editor_ ## name ## _dialog_new, title)
 
 
 //typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
@@ -51,7 +58,7 @@ struct _GSHTMLEditorControlData {
 	GSList *paragraph_group;
 
 	/* search & replace dialogs */
-	//GtkHTMLSearchDialog     *search_dialog;
+	GSHTMLSearchDialog  *search_dialog;
 	GtkHTMLReplaceDialog *replace_dialog;
 
 	/* html/plain mode settings */
@@ -110,6 +117,8 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s);
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * cd);
 
 void replace(GSHTMLEditorControlData * ecd);
+void search(GSHTMLEditorControlData *ecd, gboolean regular, gchar *text);
+void search_next(GSHTMLEditorControlData *ecd);
 /*** create editor ui ***/
 GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			 SETTINGS * s, GSHTMLEditorControlData * necd);
@@ -136,5 +145,7 @@ gboolean load_text_for_spell_EDITOR(GtkWidget * text,
 /*** save studypad file ***/
 void on_save_activate(GtkMenuItem * menuitem,
 		      GSHTMLEditorControlData * ecd);
-		      
-#endif				/* __GS_HTML_EDITOR_H_ */
+void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title);
+void searchgbsGS_EDITOR(gchar *searchstring);
+
+#endif				/* __GS_EDITOR_H_ */

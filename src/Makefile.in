@@ -166,6 +166,8 @@ COMMON_SOURCE = \
     gs_editor.h \
     gs_editor_replace.c \
     gs_editor_replace.h \
+    gs_editor_search.c \
+    gs_editor_search.h \
     gs_editor_toolbar.c \
     gs_editor_toolbar.h \
     gs_file.c \
@@ -286,10 +288,11 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	char_table.$(OBJEXT) e-splash.$(OBJEXT) gs_abouts.$(OBJEXT) \
 	gs_bookmarks.$(OBJEXT) gs_detach_int.$(OBJEXT) \
 	gs_detach_sb.$(OBJEXT) gs_editor.$(OBJEXT) \
-	gs_editor_replace.$(OBJEXT) gs_editor_toolbar.$(OBJEXT) \
-	gs_file.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
-	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
-	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
+	gs_editor_replace.$(OBJEXT) gs_editor_search.$(OBJEXT) \
+	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) gs_gbs.$(OBJEXT) \
+	gs_getinfo_dlg.$(OBJEXT) gs_gnomesword.$(OBJEXT) \
+	gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) gs_history.$(OBJEXT) \
+	gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
 	gs_information_dlg.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
 	gs_menu.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
 	gs_popup_cb.$(OBJEXT) gs_setup.$(OBJEXT) \
@@ -318,6 +321,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_int.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_sb.Po $(DEPDIR)/gs_editor.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_replace.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_toolbar.Po $(DEPDIR)/gs_file.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gbs.Po $(DEPDIR)/gs_getinfo_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_gnomesword.Po $(DEPDIR)/gs_gui.Po \
@@ -426,6 +430,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_sb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_replace.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_toolbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_file.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_gbs.Po@am__quote@
