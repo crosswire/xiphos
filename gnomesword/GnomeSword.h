@@ -109,16 +109,16 @@ editbookmarksLoad			(GtkWidget *editdlg);
 
 gchar *
 getlistitem						(GtkWidget *list,
-											gint row);
-/*
-void
-loadbookmarks			(GtkWidget *MainFrm);
-*/
-void
-footnotesSWORD		  (bool choice);
+								gint row);
 
 void
-changecurModSWORD	  (gchar *modName);
+footnotesSWORD		  	(bool choice);
+
+void
+changecurModSWORD	  	(gchar *modName);
+
+void
+navcurcomModSWORD		(gint direction);
 
 void
 changecomp1ModSWORD(gchar *modName);
@@ -206,5 +206,8 @@ newSP										(GtkWidget *text);
 
 void
 setformatoption					(GtkWidget *button);
+
+gint
+getversenumber					(GtkWidget *text);
 
 #endif /* __GNOMESWORD_H__ */

@@ -81,7 +81,7 @@ ORBIT_LIBS = -L/usr/lib -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lglib -lnsl
 PACKAGE = gnomesword
 PACKAGE_PIXMAPS_DIR = /usr/share/pixmaps/gnomesword
 PTHREAD_LIB = -lpthread
-VERSION = 0.1.8h
+VERSION = 0.1.8g
 XPM_LIBS = -lXpm
 ZVT_LIBS = -rdynamic -lzvt -lutil -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
 cflags_set = yes
@@ -92,10 +92,10 @@ INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword
 
 bin_PROGRAMS = gnomesword
 
-#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
-#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	printstuff.c printstuff.h
-gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.c printstuff.h
-#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h	printstuff.c printstuff.h
+gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.c printstuff.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	noteeditor.cpp noteeditor.h	searchstuff.cpp searchstuff.h
 
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
@@ -112,17 +112,20 @@ LDFLAGS =
 LIBS =  -L/usr/local/lib -L/usr/lib -lsword -lz -laspell -lgnomeprint -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl -L/usr/lib -lxml -lz
 #gnomesword_OBJECTS =  main.o support.o display.o \
 #GnomeSword.o callback.o interface.o filestuff.o \
-#menustuff.o listeditor.o printstuff.o
+#menustuff.o listeditor.o noteeditor.o searchstuff.o \
+#printstuff.o
 #gnomesword_OBJECTS =  main.o support.o display.o \
 #GnomeSword.o callback.o interface.o filestuff.o \
-#menustuff.o listeditor.o
+#menustuff.o listeditor.o noteeditor.o searchstuff.o
 #gnomesword_OBJECTS =  main.o support.o display.o \
 #GnomeSword.o callback.o interface.o filestuff.o \
-#menustuff.o listeditor.o spellcheck.o DICTClient.o
+#menustuff.o listeditor.o noteeditor.o searchstuff.o \
+#spellcheck.o DICTClient.o
 gnomesword_OBJECTS =  main.o support.o display.o \
 GnomeSword.o callback.o interface.o filestuff.o \
-menustuff.o listeditor.o spellcheck.o \
-DICTClient.o printstuff.o
+menustuff.o listeditor.o noteeditor.o \
+searchstuff.o spellcheck.o DICTClient.o \
+printstuff.o
 gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -141,8 +144,8 @@ TAR = gtar
 GZIP_ENV = --best
 DEP_FILES =  .deps/DICTClient.P .deps/GnomeSword.P .deps/callback.P \
 .deps/display.P .deps/filestuff.P .deps/interface.P .deps/listeditor.P \
-.deps/main.P .deps/menustuff.P .deps/printstuff.P .deps/spellcheck.P \
-.deps/support.P
+.deps/main.P .deps/menustuff.P .deps/noteeditor.P .deps/printstuff.P \
+.deps/searchstuff.P .deps/spellcheck.P .deps/support.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
