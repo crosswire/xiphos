@@ -1,6 +1,13 @@
+2001-03-15 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* 0.3pre2
+	* Added a number of files gs_rwphtml.cpp  gs_rwphtml.h
+	  gs_thmlhtml.cpp gs_thmlhtml.h gs_popup_cb.c gs_popup_cb.h 
+	  gs_abouts.c gs_abouts.h
+
+
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
 		
-	* 0.3pre2
 	* changed main.cpp to main.c
 
 

@@ -63,6 +63,65 @@ extern gchar bmarks[50][80];	/* array to store bookmarks - read in form file
 extern gboolean file_changed;	/* set to TRUE if text is study pad has changed
 					- and file is not saved */
 
+/******************************************************************************
+*******************************************************************************
+ *callbacks fileselection dialogs
+*******************************************************************************
+******************************************************************************/
+
+/******************************************************************************
+ *on_ok_button1_clicked - fileselection dialog
+******************************************************************************/
+static void on_ok_button1_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *filesel;
+
+	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	loadFile(filesel);
+	gtk_widget_destroy(filesel);
+}
+
+//----------------------------------------------
+static void on_cancel_button1_clicked(GtkButton * button, gpointer user_data)
+{
+	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
+}
+
+//----------------------------------------------
+void on_ok_button2_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *filesel;
+	gchar filename[255];
+
+	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	sprintf(filename, "%s",
+		gtk_file_selection_get_filename(GTK_FILE_SELECTION
+						(filesel)));
+	gtk_widget_destroy(filesel);
+	saveFile(filename);
+}
+
+ //------------------------------------------
+ //-- save verse list - fileselection dialog ok button clicke
+ //-- user data - the list widget dialog ok button clicked
+void on_ok_button4_clicked(GtkButton * button, gpointer user_data)
+{
+	GtkWidget *filesel;	//-- pointer to fileselection dialog
+	gchar filename[255];	//-- string to store filename from fileselection dialog
+
+	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));	//-- get fileselection dialog
+	sprintf(filename, "%s",
+		gtk_file_selection_get_filename(GTK_FILE_SELECTION(filesel)));	//-- get filename
+	gtk_widget_destroy(filesel);	//-- destroy fileselection dialog
+	savelist(filename, (GtkWidget *) user_data);	//-- send filename and list widget to savelist function (gs_file.c)
+}
+
+/* fileselection dialog cancel button clicked */
+static void
+on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
+{	//--destroy fileselection dialog
+	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET(button)));
+}
 
 /*****************************************************************************
  * check for GnomeSword dir
@@ -572,4 +631,76 @@ void savelist(gchar * filename, GtkWidget * list)
 	fputs("-end-", fp);	/* mark end -  */
 	fclose(fp);		/* close file (filename) */
 }
+
+
+GtkWidget *create_fileselection1(void)
+{
+	GtkWidget *fileselection1;
+	GtkWidget *ok_button1;
+	GtkWidget *cancel_button1;
+
+	fileselection1 =
+	    gtk_file_selection_new("GtkSword - Open Note File");
+	gtk_object_set_data(GTK_OBJECT(fileselection1), "fileselection1",
+			    fileselection1);
+	gtk_container_set_border_width(GTK_CONTAINER(fileselection1), 10);
+	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION
+					       (fileselection1));
+
+	ok_button1 = GTK_FILE_SELECTION(fileselection1)->ok_button;
+	gtk_object_set_data(GTK_OBJECT(fileselection1), "ok_button1",
+			    ok_button1);
+	gtk_widget_show(ok_button1);
+	GTK_WIDGET_SET_FLAGS(ok_button1, GTK_CAN_DEFAULT);
+
+	cancel_button1 = GTK_FILE_SELECTION(fileselection1)->cancel_button;
+	gtk_object_set_data(GTK_OBJECT(fileselection1), "cancel_button1",
+			    cancel_button1);
+	gtk_widget_show(cancel_button1);
+	GTK_WIDGET_SET_FLAGS(cancel_button1, GTK_CAN_DEFAULT);
+
+	gtk_signal_connect(GTK_OBJECT(ok_button1), "clicked",
+			   GTK_SIGNAL_FUNC(on_ok_button1_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(cancel_button1), "clicked",
+			   GTK_SIGNAL_FUNC(on_cancel_button1_clicked),
+			   NULL);
+
+	return fileselection1;
+}
+
+GtkWidget *create_fileselectionSave(void)
+{
+	GtkWidget *fileselectionSave;
+	GtkWidget *ok_button2;
+	GtkWidget *cancel_button2;
+
+	fileselectionSave =
+	    gtk_file_selection_new("GtkSword - Save Note File");
+	gtk_object_set_data(GTK_OBJECT(fileselectionSave),
+			    "fileselectionSave", fileselectionSave);
+	gtk_container_set_border_width(GTK_CONTAINER(fileselectionSave),
+				       10);
+
+	ok_button2 = GTK_FILE_SELECTION(fileselectionSave)->ok_button;
+	gtk_object_set_data(GTK_OBJECT(fileselectionSave), "ok_button2",
+			    ok_button2);
+	gtk_widget_show(ok_button2);
+	GTK_WIDGET_SET_FLAGS(ok_button2, GTK_CAN_DEFAULT);
+
+	cancel_button2 =
+	    GTK_FILE_SELECTION(fileselectionSave)->cancel_button;
+	gtk_object_set_data(GTK_OBJECT(fileselectionSave),
+			    "cancel_button2", cancel_button2);
+	gtk_widget_show(cancel_button2);
+	GTK_WIDGET_SET_FLAGS(cancel_button2, GTK_CAN_DEFAULT);
+
+	gtk_signal_connect(GTK_OBJECT(ok_button2), "clicked",
+			   GTK_SIGNAL_FUNC(on_ok_button2_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(cancel_button2), "clicked",
+			   GTK_SIGNAL_FUNC(on_cancel_button2_clicked),
+			   NULL);
+
+	return fileselectionSave;
+}
+
 

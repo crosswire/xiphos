@@ -36,7 +36,7 @@
 #include <gnome.h>
  
 #include "gs_abouts.h"
-
+#include "support.h"
 
 
 
@@ -121,7 +121,7 @@ GtkWidget *create_AboutSword(void)
 	gtk_widget_show(vbox21);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox7), vbox21, TRUE, TRUE, 0);
 
-	pixmap1 = create_pixmap(AboutSword, "gnomesword/sword.xpm", FALSE);
+	pixmap1 = create_pixmap(AboutSword, "gnomesword/sword2.xpm", FALSE);
 	gtk_widget_ref(pixmap1);
 	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "pixmap1",
 				 pixmap1,

@@ -113,6 +113,7 @@ AC_SUBST(SWORD_LIBS)
  
 AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
 
+AC_ARG_ENABLE(gtkhtml,[--enable-gtkhtml		 enable gtkhtml],gtkhtml=$enableval,gtkhtml="no") 
 AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking],spellchecking=$enableval,spellchecking="no") 
 AC_ARG_ENABLE(printing,[--enable-printing		enable printing],printing=$enableval,printing="no")
 AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
@@ -210,17 +211,19 @@ fi
 dnl ******************************
 dnl GtkHTML checking
 dnl ******************************
-
-AC_MSG_CHECKING(for GtkHTML)
-if gnome-config --libs gtkhtml > /dev/null 2>&1; then
+gtkhtml_ok="false"
+if test "x$gtkhtml" = xyes || test "x$all" = xyes; then
+  AC_MSG_CHECKING(for GtkHTML)
+  if gnome-config --libs gtkhtml > /dev/null 2>&1; then
 	vers=`gnome-config --modversion gtkhtml`
 	case $vers
 	in
 	    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
 	    *) gtkhtml_ok=true ;;
 	esac
-else
+  else
 	gtkhtml_ok=false
+  fi
 fi
 
 if $gtkhtml_ok; then
