@@ -1,3 +1,8 @@
+2002-05-08  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added gnome/commentary_find_dialog.*
+	
+
 2002-05-07  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* split gs_gbs.* into main/gbs.* and gnome/_gbs.*

@@ -1,32 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_find_dlg.c
-    * -------------------
-    * Sun Mar 10 20:21:17 2002
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
+/*
+ * GnomeSword Bible Study Tool
+ * commentary_find_dialog.c 
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU Library General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
-
-
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -38,10 +29,11 @@
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlengine-search.h>
 #include <gal/widgets/e-unicode.h>
-#include "gs_gnomesword.h"
-#include "gs_find_dlg.h"
+//#include "gs_gnomesword.h"
+#include "commentary_find_dialog.h"
 #include "settings.h"
 
+gboolean comm_find_running;
 
 static void
 next_button_cb(GtkWidget *but,  GtkWidget *htmlwidget)
@@ -54,7 +46,7 @@ next_button_cb(GtkWidget *but,  GtkWidget *htmlwidget)
 }
 
 static void
-search_cb(GtkWidget *but, GSFindDialog *d)
+search_cb(GtkWidget *but, COMMFindDialog *d)
 {
 	char *text;
 	GtkHTML *html;
@@ -69,26 +61,27 @@ search_cb(GtkWidget *but, GSFindDialog *d)
 }
 
 void
-close_dialog(GtkWidget *but, GSFindDialog *d)
+comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d)
 {
+	comm_find_running = FALSE;
 	gnome_dialog_close(d->dialog);
 }
 
 static void
-entry_changed (GtkWidget *entry, GSFindDialog *d)
+entry_changed (GtkWidget *entry, COMMFindDialog *d)
 {
 }
 
 static void
-entry_activate (GtkWidget *entry, GSFindDialog *d)
+entry_activate (GtkWidget *entry, COMMFindDialog *d)
 {
 	search_cb (NULL, d);
 }
 
-GSFindDialog *
-gs_find_dialog_new(GtkWidget *htmlwidget)
+COMMFindDialog *
+comm_find_dialog_new(GtkWidget *htmlwidget)
 {
-	GSFindDialog *dialog = g_new (GSFindDialog, 1); /* must be freed by calling module */
+	COMMFindDialog *dialog = g_new (COMMFindDialog, 1); /* must be freed by calling module */
 	GtkWidget *hbox;
 	
 	dialog->dialog         = GNOME_DIALOG (gnome_dialog_new (NULL, _("Find"), _("Find Next"), GNOME_STOCK_BUTTON_CANCEL, NULL));
@@ -110,8 +103,8 @@ gs_find_dialog_new(GtkWidget *htmlwidget)
 
 	gnome_dialog_button_connect (dialog->dialog, 0, search_cb, dialog);
 	gnome_dialog_button_connect (dialog->dialog, 1, next_button_cb, dialog->htmlwidget);
-	gnome_dialog_button_connect (dialog->dialog, 2, close_dialog, dialog);
-	gnome_dialog_close_hides (dialog->dialog, FALSE);	
+	gnome_dialog_button_connect (dialog->dialog, 2, comm_find_close_dialog, dialog);
+	gnome_dialog_close_hides (dialog->dialog, TRUE);	
 	gnome_dialog_set_close (dialog->dialog, FALSE);
 
 	gnome_dialog_set_default (dialog->dialog, 0);
@@ -127,50 +120,36 @@ gs_find_dialog_new(GtkWidget *htmlwidget)
 }
 
 void
-gs_find_dialog_destroy(GtkWidget *dialog, GSFindDialog *d)
+comm_find_dialog_destroy(GtkWidget *dialog,  COMMFindDialog*d)
 {
-	g_free (d);
-	d = NULL;
+	//g_free (d);
 }
 
-void
-searchGS_FIND_DLG(GBS_DATA *g, gboolean regular, gchar *text)
+void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text)
 {
 	gchar buf[256];
 	
-	sprintf(buf,"%s in %s", _("Find"), g->bookName);
+	sprintf(buf,"%s in %s", _("Find"), c->modName);
 	
 	FIND_DIALOG(find, buf);//regular ? _("Find Regular Expression") :  _("Find"));
 	
-	if (g->find_dialog)
-		g->find_dialog->regular = regular;
+	if (c->find_dialog)
+		c->find_dialog->regular = regular;
 
-	if (g->find_dialog) {
+	if (c->find_dialog) {
 		if(text)
-			gtk_entry_set_text(GTK_ENTRY(g->find_dialog->entry),text);
+			gtk_entry_set_text(GTK_ENTRY(c->find_dialog->entry),text);
 		
-		gtk_widget_grab_focus(g->find_dialog->entry);
-		//settings.book_find_dialog = TRUE;
-		//g->find_dialog->type = BOOK_TYPE;
+		gtk_widget_grab_focus(c->find_dialog->entry);
+		comm_find_running = TRUE;
+		//g->find_dialog->type = COMMENTARY_TYPE;
 		//gtk_widget_show(GTK_WIDGET(g->find_dialog->dialog));
 		//gdk_window_raise(GTK_WIDGET(g->find_dialog->dialog)->window);		
 	}
 }
 
 void
-search_nextGS_FIND_DLG(GtkWidget *html_widget)
-{
-	GtkHTML *html;
-	html = GTK_HTML(html_widget);
-	if (html->engine->search_info) {
-		html_engine_search_next (html->engine);
-	} else {
-		//searchGS_FIND_DLG(html_widget, FALSE, NULL);
-	}
-}
-
-void
-find_dialog(GnomeDialog ***dialog, GtkWidget *html, DialogCtor ctor, const gchar *title)
+comm_find_dialog(GnomeDialog ***dialog, GtkWidget *html, DialogCtor ctor, const gchar *title)
 {
 	if (*dialog) {
 		gtk_window_set_title (GTK_WINDOW (**dialog), title);

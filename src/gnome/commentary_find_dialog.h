@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _commentary.h - gui for commentary modules
+ * commentary_find_dialog.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,22 +19,25 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___COMMENTARY_H_
-#define ___COMMENTARY_H_
+#ifndef _COMMENTARY_FIND_DIALOG_H_
+#define _COMMENTARY_FIND_DIALOG_H_
 
+#include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 
-#include "settings.h"
-/*
- * main
- */
-#include "commentary.h"
+#include "commentary.h"	
 
-void on_notebook_comm_switch_page(GtkNotebook * notebook,
-				 GtkNotebookPage * page,
-				 gint page_num, GList * cl);
-GtkWidget *gui_create_pm(COMM_DATA * c);
-void gui_create_commentary_pane(SETTINGS * s, COMM_DATA * c,
-						gint count);
-							
+typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
 
-#endif	/* ___COMMENTARY_H_ */
+#define FIND_DIALOG(name,title) comm_find_dialog ((GnomeDialog ***)&c-> name ## _dialog, c->html, (DialogCtor) comm_ ## name ## _dialog_new, title)
+
+void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d);
+COMMFindDialog * comm_find_dialog_new(GtkWidget *htmlwidget);
+void comm_find_dialog_destroy(GtkWidget *dialog, COMMFindDialog *d);
+void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text);
+void comm_find_dialog(GnomeDialog ***dialog, 
+			GtkWidget *html, 
+			DialogCtor ctor,
+			const gchar *title); 
+
+#endif /* _COMMENTARY_FIND_DIALOG_H_ */

@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
+#include "settings.h"
 
 typedef struct _search_opt SEARCH_OPT;
 struct _search_opt {

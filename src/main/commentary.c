@@ -31,10 +31,10 @@
 #include "gs_html.h"
 #include "shortcutbar.h"
 #include "gs_viewcomm_dlg.h"
-#include "cipher_key_dialog.h"
 
 /* gnome */
 #include "_commentary.h"
+#include "cipher_key_dialog.h"
 
 /* main */
 #include "commentary.h"
@@ -63,6 +63,47 @@ gboolean comm_display_change = TRUE;
  
 static GList *comm_list;
 
+/******************************************************************************
+ * Name
+ *   backend_display_book_heading
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void backend_display_book_heading(gint modnum)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void display_book_heading(int mod_num)
+{
+	backend_display_book_heading(mod_num);
+}
+
+/******************************************************************************
+ * Name
+ *   display_chap_heading
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   	void display_chap_heading(int mod_num)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void display_chap_heading(int mod_num)
+{
+	backend_display_chap_heading(mod_num);
+}
 
 /******************************************************************************
  * Name
@@ -144,7 +185,7 @@ static void set_commentary_page(gchar * modname, GList * comm_list,
 	}
 
 	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebook_comm), page);
-	s->commLastPage = page;
+	s->comm_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
 				   s->comm_tabs);
 }
@@ -169,7 +210,7 @@ void display_commentary(gchar * key)
 {
 	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key, key);
-	backend_display_commentary(settings.commLastPage, key);
+	backend_display_commentary(settings.comm_last_page, key);
 }
 
 /******************************************************************************
@@ -198,9 +239,11 @@ GList* setup_commentary(SETTINGS * s)
 	gchar *keybuf;
 	COMM_DATA *c;
 	gint count = 0;
-
+	extern gboolean comm_find_running;
+	
 	comm_list = NULL;
-
+	comm_find_running = FALSE;
+	
 	mods = backend_get_list_of_mods_by_type(COMM_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
@@ -260,7 +303,7 @@ void shutdown_commentary(void)
 	while (comm_list != NULL) {
 		COMM_DATA *c = (COMM_DATA *) comm_list->data;
 		/* 
-		 * free any search dialogs created 
+		 * free any find dialogs created 
 		 */
 		if (c->find_dialog)	
 			g_free(c->find_dialog);
