@@ -1,5 +1,10 @@
 2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* add French translation from Dominique Corbex <dominique.corbex@wanadoo.fr>
+	* change verse style menu item to be added in create_mainwindow
+
+2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* bumped to 0.7.3
 	* work on German and Spanish translations
 
