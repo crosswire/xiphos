@@ -33,14 +33,13 @@
 #include <unistd.h>
 #include <string.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
+#include <gal/e-paned/e-hpaned.h>
 
 #include <gnome.h>
 #include <gtk/gtk.h>
 
 #include "gs_preferences_dlg.h"
-
-#include "callback.h"
-#include "gs_studypad.h"
+#include "gs_sword.h"
 #include "gs_gnomesword.h"
 #include "sw_properties.h"
 #include "support.h"
@@ -85,7 +84,7 @@ static GdkPixbuf *icon_callback1(EShortcutBar * shortcut_bar,
  * group_name - name of the group to be added
  *****************************************************************************/
 static gint
-add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
+add_sb_group2(EShortcutBar *shortcut_bar,gchar *group_name)
 {
 	gint group_num;
 	
@@ -110,6 +109,45 @@ static void set_preferences_to_current(SETTINGS * s)
 
 }
 */
+
+
+static void
+applyoptions(SETTINGS *s)
+{
+         GtkWidget    	*text,
+				*dict,
+                      		*comm;
+	
+	text = lookup_widget(s->app,"nbTextMods");
+        dict = lookup_widget(s->app,"notebook4");
+        comm = lookup_widget(s->app,"notebook1");
+	/*  */	
+	if(s->text_tabs) {
+                gtk_widget_show(text);
+        } else {
+                gtk_widget_hide(text);
+        }
+        if(s->comm_tabs) {
+                gtk_widget_show(comm);
+        } else {
+                gtk_widget_hide(comm);
+        }
+        if(s->dict_tabs) {
+                gtk_widget_show(dict);
+        } else {
+                gtk_widget_hide(dict);
+        }
+        if(s->showshortcutbar){
+               e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
+        } else {
+               e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), 1);
+        }
+	GTK_CHECK_MENU_ITEM (s->versestyle_item)->active = s->versestyle;	
+	applyfontcolorandsizeSWORD();
+	updateshortcutbarSWORD();
+}
+
+
 static void get_preferences_from_dlg(GtkWidget *d ,SETTINGS * s)
 {
 	/************************************************************
@@ -209,7 +247,8 @@ static void get_preferences_from_dlg(GtkWidget *d ,SETTINGS * s)
 					 "checkbutton8"))->active;
 	
 	saveconfig();
-	applyoptions();
+	applyoptions(s);
+	
 }
  
 
@@ -1434,7 +1473,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
 			   NULL);
-	groupnum = add_sb_group((EShortcutBar *)shortcut_bar, "Preferences");
+	groupnum = add_sb_group2((EShortcutBar *)shortcut_bar, "Preferences");
 	e_shortcut_bar_set_view_type((EShortcutBar*)shortcut_bar,
 						      groupnum,
 						      E_ICON_BAR_LARGE_ICONS);

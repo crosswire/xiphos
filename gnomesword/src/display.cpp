@@ -74,12 +74,12 @@ gchar *font_mainwindow =
 
 extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
-extern bool bVerseStyle;
+//extern bool bVerseStyle;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
 extern INTERLINEAR interlinearMods;
-
+extern SETTINGS *settings;
 
 /* --------------------------------------------------------------------------------------------- */
 char GTKEntryDisp::Display(SWModule & imodule)
@@ -453,7 +453,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-o-normal-*-*-100-*-*-p-*-iso8859-1");
 	/* Load a verse number font */
-	if (bVerseStyle)
+	if (settings->versestyle)
 		versenum_font =
 		    gdk_font_load
 		    ("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
@@ -742,7 +742,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 							cite_on = true;
 							j = 0;
 							verseBuf[0] = '\0';
-							if ((!bVerseStyle)
+							if ((!settings->versestyle)
 							    || poetry_on) {	/* we only need new line if we are not in versestyle or poetry is on */
 								myverse[i]
 								    = '\t';	/* add a tab to beginning of next line */
@@ -779,7 +779,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 							cite_on = false;
 							j = 0;
 							verseBuf[0] = '\0';
-							if ((!bVerseStyle)
+							if ((!settings->versestyle)
 							    || poetry_on) {	/* we only need new line if we are not in versestyle or poetry is on */
 								myverse[i]
 								    = '\t';	/* add a tab to beginning of next line */
@@ -789,7 +789,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 							}
 						} else
 						    if (!strcmp(tag, "<P>")) {	/* new paragraph  */
-							if ((!bVerseStyle)
+							if ((!settings->versestyle)
 							    || poetry_on) {	/* we only need new line if we are not in versestyle or poetry is on  */
 								myverse[i]
 								    = '\t';	/* add a tab to beginning of next line */
@@ -989,7 +989,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 							verseBuf[0] = '\0';
 						} else
 						    if (!strcmp(tag, "<BR>")) {	/*** new line ***/
-							if ((!bVerseStyle)
+							if ((!settings->versestyle)
 							    || poetry_on) {
 								/*** we only need new line if we are using paragraph style ***/
 								verseBuf[j]
@@ -1029,7 +1029,7 @@ char HTMLChapDisp::Display(SWModule & imodule)
 			g_free(myverse);
 		}
 		/*** toggle paragraph style ***/
-		if (bVerseStyle && (!poetry_on))
+		if (settings->versestyle && (!poetry_on))
 			gtk_text_insert(GTK_TEXT(gtkText), roman_font,
 					&gtkText->style->black, NULL, "\n",
 					-1);

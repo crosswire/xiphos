@@ -62,8 +62,7 @@
 #include "gs_info_box.h"
 #include "gs_verselist_dlg.h"
 #include "gs_setup.h"
-//#include "e-splash.h"
-
+#include "gs_shortcutbar.h"
 #include "sw_utility.h"
 #include "sw_properties.h"
 #include "sw_bookmarks.h"
@@ -124,7 +123,7 @@ GList 	*biblemods,
 	*sbcommods;
 GtkWidget *NEtext;  /* note edit widget */
 gboolean ApplyChange = true;	/* should we make changes when cbBook is changed */
-gboolean bVerseStyle = true;	/* should we show verses or paragraphs in main text window */
+//gboolean bVerseStyle = true;	/* should we show verses or paragraphs in main text window */
 gint curChapter = 8;	/* keep up with current chapter */
 gint curVerse =28;	/* keep up with current verse */
 gboolean noteModified = false; /* set to true is personal note has changed */
@@ -233,7 +232,7 @@ initSWORD(GtkWidget *mainform)
 	sbcommods = NULL;
 	sbdictmods = NULL;
 	
-	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
+	MainFrm = lookup_widget(mainform,"settings->app"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
 	//mycolor = settings->currentverse_color; /* for GtkHTML widgets */
 	textmodule.name = NULL;
@@ -423,10 +422,17 @@ updateinterlinearpage(void)
 	if(settings->notebook3page == 2){
 		html_widget = lookup_widget(MainFrm,"textComp1");
 		beginHTML(html_widget,TRUE);
-		sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">");		
+		sprintf(tmpBuf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings->bible_bg_color, settings->bible_text_color,
+		settings->link_color);
+		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(html_widget), utf8str, utf8len);
+		/*sprintf(tmpBuf,"<html><body text=\"#151515\" link=\"#898989\">");		
 		utf8str = e_utf8_from_gtk_string (html_widget, tmpBuf);
 		utf8len = strlen(utf8str); //g_utf8_strlen (utf8str , -1) ;
-		displayHTML(GTK_WIDGET(html_widget),utf8str , utf8len ); 
+		displayHTML(GTK_WIDGET(html_widget),utf8str , utf8len ); */
 		
 		changecomp1ModSWORD(settings->Interlinear1Module);
 		changecomp1ModSWORD(settings->Interlinear2Module);
@@ -767,11 +773,6 @@ changecomp1ModSWORD(gchar *modName)  //-- change sword module for 1st interlinea
 void
 setversestyleSWORD(gboolean choice)  //-- set verse style -- verses or paragraphs
 {
-	if(choice){
-		bVerseStyle = TRUE;  //-- tells chapter display we want verses
-	} else {
-		bVerseStyle = false;     //-- tells chapter display we want paragraphs
-	}
 	settings->versestyle = choice; //-- remember our choice for the next program startup
  	if(havebible) curMod->Display(); //-- show the change
 }
@@ -1745,3 +1746,39 @@ applyfontcolorandsizeSWORD(void)
 	curdictMod->Display();
 	updateinterlinearpage();	
 }
+
+void
+updateshortcutbarSWORD(void)
+{
+	ModMap::iterator it; //-- iteratior
+	SWMgr *mgr;
+	
+	GList *textMods = NULL;
+	GList *commMods = NULL;
+	GList *dictMods = NULL;
+	GList *percomMods = NULL;
+		
+	mgr = new SWMgr();	//-- create sword mgrs
+	
+	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			textMods = g_list_append(textMods,(*it).second->Description());
+		}if(!strcmp((*it).second->Type(), "Commentaries")){
+			commMods = g_list_append(commMods,(*it).second->Description());
+		}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
+			dictMods = g_list_append(dictMods,(*it).second->Description());
+		} 
+	}
+  	update_shortcut_bar(settings,
+				textMods, 
+				commMods, 
+				dictMods);
+	g_list_free(textMods); //-- free GLists
+        g_list_free(commMods);
+        g_list_free(dictMods);
+	delete mgr;   //-- delete Sword manager		
+	
+	
+}
+
+
