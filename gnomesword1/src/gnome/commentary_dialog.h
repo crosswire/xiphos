@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_gui.c - main window gui 
+ * commentary_dialog.h - dialog for a commentary module
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,20 +19,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GS_GUI_H_
-#define __GS_GUI_H_ 
+
+#ifndef __COMMENTARY_DIALOG_H_
+#define __COMMENTARY_DIALOG_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "settings.h"
 
-void on_btnSB_clicked(GtkButton * button, SETTINGS * s);
-void create_mainwindow(SETTINGS *s);
+#include "settings.h"
+	
+GtkWidget *gui_create_commentary_dialog(SETTINGS * s);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif /*__GS_GUI_H_  */
-
+#endif /* __COMMENTARY_DIALOG_H_ */

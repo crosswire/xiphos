@@ -1,30 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-    * GnomeSword Bible Study Tool
-    * gs_viewcomm_dlg.c
-    * -------------------
-    * Sat Mar 24 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-    *
+/*
+ * GnomeSword Bible Study Tool
+ * commentary_dialog.c - dialog for a commentary module
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -33,21 +26,25 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "viewcomm.h"
+#include "commentary_dialog.h"
+
+#include "commentary.h"
 #include "gs_gnomesword.h"
-#include "gs_viewcomm_dlg.h"
-#include "sword.h"
 #include "gs_html.h"
+#include "lists.h"
 
 /****************************************************************************************
  *globals
- ****************************************************************************************/
+ */
 gboolean isrunningVC = FALSE;	/* is the view commentary dialog runing */
-GtkWidget *text8;
-GtkWidget *cbChangeMod;
-GtkWidget *cbEntry;
-GList *commList;
-GtkWidget *dlgViewComm;
+
+/****************************************************************************************
+ * static - global to this file only
+ */
+static GtkWidget *text8;
+static GtkWidget *cbChangeMod;
+static GtkWidget *cbEntry;
+static GtkWidget *dlgViewComm;
 
 /******************************************************************************
  * externs
@@ -55,87 +52,192 @@ GtkWidget *dlgViewComm;
 
 
 /******************************************************************************
- *callbacks
- */
- 
-/*
+ * Name
+ *   on_btnVCClose_clicked
  *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_btnVCClose_clicked(GtkButton * button, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   hide the dialog but do not destroy
+ *
+ * Return value
+ *   void
  */
-void on_btnVCClose_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnVCClose_clicked(GtkButton * button, 
+						gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
-/*
- * shut down the View Commentay Dialog
+/******************************************************************************
+ * Name
+ *   on_dlgViewComm_destroy
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_dlgViewComm_destroy(GtkObject * object, 
+ *						gpointer user_data)	
+ *
+ * Description
+ *   shut down the View Commentay Dialog
+ *
+ * Return value
+ *   void
  */
-static
-void on_dlgViewComm_destroy(GtkObject * object, gpointer user_data)
+
+static void on_dlgViewComm_destroy(GtkObject * object, 
+						gpointer user_data)
 {
 	isrunningVC = FALSE;
-	backend_shutdown_viewcomm();
+	shutdown_viewcomm();
 }
 
-/*
- * bring the the View Commentay Dialog module into sync with main window
+/******************************************************************************
+ * Name
+ *   on_btnSync_clicked
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_btnSync_clicked(GtkButton * button, gpointer user_data)	
+ *
+ * Description
+ *   bring the the View Commentay Dialog module into sync with main window
+ *
+ * Return value
+ *   void
  */
-void on_btnSync_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnSync_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_goto_verse_viewcomm(settings.currentverse);
+	goto_verse_viewcomm(settings.currentverse);
 }
 
-/*
- * load new commentary module
+/******************************************************************************
+ * Name
+ *   on_cbEntry_changed
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_cbEntry_changed(GtkEditable * editable, 
+ *					gpointer user_data)	
+ *
+ * Description
+ *   load new commentary module
+ *
+ * Return value
+ *   void
  */
-void on_cbEntry_changed(GtkEditable * editable, gpointer user_data)
+
+static void on_cbEntry_changed(GtkEditable * editable, 
+					gpointer user_data)
 {
 	gchar *buf, *module_name, title[256];
 	static gboolean firsttime = TRUE;
 
 	module_name = gtk_entry_get_text(GTK_ENTRY(editable));
 	if (!firsttime) {
-		backend_load_module_viewcomm(module_name);
+		load_module_viewcomm(module_name);
 		buf = gtk_entry_get_text(GTK_ENTRY(GTK_WIDGET(user_data)));
-		backend_goto_verse_viewcomm(buf);
+		goto_verse_viewcomm(buf);
 	}
 	sprintf(title, "GnomeSword - %s", 
-		backend_get_module_description(module_name));
+		get_module_description(module_name));
 	gtk_window_set_title(GTK_WINDOW(dlgViewComm), title);
 	firsttime = FALSE;
 }
 
-/*
- * goto new versekey
+/******************************************************************************
+ * Name
+ *   on_btnGoto_clicked
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_btnGoto_clicked(GtkButton * button, gpointer user_data)	
+ *
+ * Description
+ *   goto new versekey
+ *
+ * Return value
+ *   void
  */
-void on_btnGoto_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnGoto_clicked(GtkButton * button, gpointer user_data)
 {
 	gchar *buf;
 
 	buf = gtk_entry_get_text(GTK_ENTRY(GTK_WIDGET(user_data)));
-	backend_goto_verse_viewcomm(buf);
+	goto_verse_viewcomm(buf);
 	//g_warning(buf);
 }
 
-/*
- * goto previous module key
+/******************************************************************************
+ * Name
+ *   on_btnPrev_clicked
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_btnPrev_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *   goto previous module key
+ *
+ * Return value
+ *   void
  */
-void on_btnPrev_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnPrev_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_nav_module_viewcomm(0);
+	nav_module_viewcomm(0);
 }
 
-/*
- * goto next module key
+/******************************************************************************
+ * Name
+ *   on_btnNext_clicked
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void on_btnNext_clicked(GtkButton * button, gpointer user_data)	
+ *
+ * Description
+ *   goto next module key
+ *
+ * Return value
+ *   void
  */
-void on_btnNext_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnNext_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_nav_module_viewcomm(1);
+	nav_module_viewcomm(1);
 }
 
-/*
- * create the View Commentary Dialog
+/******************************************************************************
+ * Name
+ *   gui_create_commentary_dialog
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   GtkWidget *gui_create_commentary_dialog(SETTINGS * s)	
+ *
+ * Description
+ *   create the View Commentary Dialog
+ *
+ * Return value
+ *   GtkWidget *
  */
-GtkWidget *create_dlgViewComm(SETTINGS * s)
+
+GtkWidget *gui_create_commentary_dialog(SETTINGS * s)
 {
 	GtkWidget *dialog_vbox11;
 	GtkWidget *vbox30;
@@ -150,7 +252,7 @@ GtkWidget *create_dlgViewComm(SETTINGS * s)
 	GtkWidget *scrolledwindow38;
 	GtkWidget *dialog_action_area11;
 	GtkWidget *btnClose;
-	gchar *listitem;
+	GList *commList;
 
 	dlgViewComm =
 	    gnome_dialog_new(_("GnomeSword - View Commentary"), NULL);
@@ -330,32 +432,16 @@ GtkWidget *create_dlgViewComm(SETTINGS * s)
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)s->app);
 
 	commList = NULL;
-	listitem = NULL;
 	
-	backend_setup_viewcomm(text8);	
+	setup_viewcomm(text8);
 	
-	listitem = backend_get_first_module_viewcomm();
-	if(listitem) {
-		commList = g_list_append(commList, (gchar*)listitem);
-		
-		while((listitem = backend_get_next_module_viewcomm()) != NULL) {
-			commList = g_list_append(commList, (gchar*)listitem);
-		}
-	}
-	
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbChangeMod), commList);
-	
-	commList = g_list_first(commList);
-	while(commList != NULL) {
-		g_free(commList->data); /* free mem allocated by g_strdup() */
-		commList = g_list_next(commList);
-	}
+	commList = get_list(COMM_LIST);
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbChangeMod), commList);	
 	g_list_free(commList);	
 	
 	gtk_entry_set_text(GTK_ENTRY(cbEntry), s->CommWindowModule);
 	gtk_entry_set_text(GTK_ENTRY(entry1), settings.currentverse);
-	backend_goto_verse_viewcomm(settings.currentverse);
-	g_list_free(commList);
+	goto_verse_viewcomm(settings.currentverse);
 	isrunningVC = TRUE;
 	return dlgViewComm;
 }

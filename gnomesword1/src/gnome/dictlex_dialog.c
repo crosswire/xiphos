@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_viewdict_dlg.c - SHORT DESCRIPTION
+ * dictlex_dialog.c - dialog for displaying a dictlex module
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -26,36 +26,51 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gs_viewdict_dlg.h"
-#include "viewdict.h"
-#include "sword.h"
+/* frontend */
+#include "dictlex_dialog.h"
+
+/* main */
+#include "dictlex.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "settings.h"
+#include "lists.h"
 
 /******************************************************************************
  * globals
  */
-
-GtkWidget *clKeys;
-GtkWidget *textSDmodule;
-GtkWidget *cbSDMods;
-GtkWidget *ceSDMods;
-GtkWidget *frameShowDict;
-GtkWidget *hpaned2;
-GList *dictList;
-GtkWidget *dlgViewDict;
 gboolean isrunningSD = FALSE;	/* is the view dictionary dialog runing */
+GtkWidget *frameShowDict;
 
 /******************************************************************************
- * callbacks
- *****************************************************************************/
-
-/*
- *
+ * static - global to this file only
  */
-static void
-on_btnLoadKeys_clicked(GtkButton * button, gpointer user_data)
+static GtkWidget *clKeys;
+static GtkWidget *textSDmodule;
+static GtkWidget *cbSDMods;
+static GtkWidget *ceSDMods;
+static GtkWidget *hpaned2;
+static GtkWidget *dlgViewDict;
+
+/******************************************************************************
+ * Name
+ *  on_btnLoadKeys_clicked 
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_btnLoadKeys_clicked(GtkButton * button, 
+ *					gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btnLoadKeys_clicked(GtkButton * button, 
+					gpointer user_data)
 {
 	gchar *key;
 	
@@ -63,11 +78,11 @@ on_btnLoadKeys_clicked(GtkButton * button, gpointer user_data)
 	gtk_clist_clear(GTK_CLIST(clKeys));
 	gtk_clist_freeze(GTK_CLIST(clKeys));
 	
-	key = backend_get_first_key_viewdict();
+	key = get_first_key_viewdict();
 	gtk_clist_append(GTK_CLIST(clKeys), &key);
 	g_free(key);
 	
-	while((key = backend_get_next_key_viewdict()) != NULL) {
+	while((key = get_next_key_viewdict()) != NULL) {
 		gtk_clist_append(GTK_CLIST(clKeys), &key);
 		g_free(key);
 	}
@@ -75,36 +90,91 @@ on_btnLoadKeys_clicked(GtkButton * button, gpointer user_data)
 	gtk_clist_thaw(GTK_CLIST(clKeys));
 }
 
-/*
+/******************************************************************************
+ * Name
+ *   on_btnClose_clicked
  *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_btnClose_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
  */
-void on_btnClose_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnClose_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
-/*
+/******************************************************************************
+ * Name
+ *   on_btnVDSync_clicked
  *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_btnVDSync_clicked(GtkButton * button, gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
  */
-void on_btnVDSync_clicked(GtkButton * button, gpointer user_data)
+
+static void on_btnVDSync_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_search_text_changed_viewdict(settings.dictkey);
+	search_text_changed_viewdict(settings.dictkey);
 }
 
-/*
+/******************************************************************************
+ * Name
+ *  on_dlgViewDict_destroy 
  *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_dlgViewDict_destroy(GtkObject * object,
+ *				   gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
  */
+
 static void on_dlgViewDict_destroy(GtkObject * object,
 				   gpointer user_data)
 {
 	isrunningSD = FALSE;
-	backend_shutdown_viewdict();
+	shutdown_viewdict();
 }
 
-/*
+/******************************************************************************
+ * Name
+ *   on_ceSDMods_changed
  *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_ceSDMods_changed(GtkEditable * editable, 
+ *						gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
  */
-void on_ceSDMods_changed(GtkEditable * editable, gpointer user_data)
+
+static void on_ceSDMods_changed(GtkEditable * editable, 
+						gpointer user_data)
 {
 	gchar *buf, *module_name, title[256];
 	static gboolean firsttime = TRUE;
@@ -112,67 +182,135 @@ void on_ceSDMods_changed(GtkEditable * editable, gpointer user_data)
 	module_name = gtk_entry_get_text(GTK_ENTRY(editable));
 	if (!firsttime) {		
 		gtk_paned_set_position(GTK_PANED(hpaned2), 0);
-		backend_load_module_viewdict(module_name);
+		load_module_viewdict(module_name);
 		/* set frame label to current Module name  */
 		gtk_frame_set_label(GTK_FRAME(frameShowDict),
 				    module_name);
 		buf =
 		    gtk_entry_get_text(GTK_ENTRY
 				       (GTK_WIDGET(user_data)));
-		backend_search_text_changed_viewdict(buf);
+		search_text_changed_viewdict(buf);
 	}
-	sprintf(title, "GnomeSword - %s", backend_get_module_description
+	sprintf(title, "GnomeSword - %s", get_module_description
 		(module_name));
 	gtk_window_set_title(GTK_WINDOW(dlgViewDict), title);
 	firsttime = FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   on_entrySDLookup_changed
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_entrySDLookup_changed(GtkEditable * editable,
+ *						gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
 
-void on_entrySDLookup_changed(GtkEditable * editable,
-			      gpointer user_data)
+static void on_entrySDLookup_changed(GtkEditable * editable,
+						gpointer user_data)
 {
 	gchar *buf;
 	buf = gtk_entry_get_text(GTK_ENTRY(editable));
-	backend_search_text_changed_viewdict(buf);
+	search_text_changed_viewdict(buf);
 }
 
 
-gboolean
-on_entrySDLookup_key_release_event(GtkWidget * widget,
-				   GdkEventKey * event,
-				   gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_entrySDLookup_key_release_event
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   gboolean on_entrySDLookup_key_release_event(GtkWidget * widget,
+				GdkEventKey * event, gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean on_entrySDLookup_key_release_event(GtkWidget * widget,
+				GdkEventKey * event, gpointer user_data)
 {
 
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   on_clKeys_select_row
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void on_clKeys_select_row(GtkCList *clist, gint row, gint column,
+ *				GdkEvent * event, gpointer user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
 
-void
-on_clKeys_select_row(GtkCList * clist,
-		     gint row,
-		     gint column, GdkEvent * event, gpointer user_data)
+static void on_clKeys_select_row(GtkCList *clist, gint row, gint column,
+				GdkEvent * event, gpointer user_data)
 {
 	gchar *buf;
 	gtk_clist_get_text(clist, row, 0, &buf);
-	backend_goto_key_viewdict(buf);
+	goto_key_viewdict(buf);
 }
 
 
-/****************************************************************************************
- *initSD
- *modName - name of module to show in dialog
+/******************************************************************************
+ * Name
+ *   initSD
  *
- ****************************************************************************************/
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void initSD(gchar * modName)
+ *
+ * Description
+ *    load first module
+ *
+ * Return value
+ *   void
+ */
+
 void initSD(gchar * modName)
 {
-	backend_load_module_viewdict(modName);
+	load_module_viewdict(modName);
 }
 
-/****************************************************************************************
- *create_dlgViewDict - create the interface
+/******************************************************************************
+ * Name
+ *   gui_create_dictlex_dialog
  *
- ****************************************************************************************/
-GtkWidget *create_dlgViewDict(GtkWidget * app)
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   GtkWidget *gui_create_dictlex_dialog(GtkWidget * app)
+ *
+ * Description
+ *    create the interface
+ *
+ * Return value
+ *   GtkWidget *
+ */
+
+GtkWidget *gui_create_dictlex_dialog(GtkWidget * app)
 {
 	GtkWidget *dialog_vbox13;
 	GtkWidget *vbox31;
@@ -189,7 +327,8 @@ GtkWidget *create_dlgViewDict(GtkWidget * app)
 	GtkWidget *scrolledwindow36;
 	GtkWidget *dialog_action_area13;
 	GtkWidget *btnClose;
-	gchar *listitem;
+	GList *dictList;
+	
 	dlgViewDict =
 	    gnome_dialog_new(_("GnomeSwrod - View Dictionary"), NULL);
 	gtk_object_set_data(GTK_OBJECT(dlgViewDict), "dlgViewDict",
@@ -410,31 +549,17 @@ GtkWidget *create_dlgViewDict(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(textSDmodule), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	dictList = NULL;
-	listitem = NULL;
 	
-	backend_setup_viewdict(textSDmodule, &settings);
-	listitem = backend_get_first_module_viewdict();
-	if(listitem) {
-		dictList = g_list_append(dictList, (gchar*)listitem);
-		
-		while((listitem = backend_get_next_module_viewdict()) != NULL) {
-			dictList = g_list_append(dictList, (gchar*)listitem);
-		}
-	}		
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbSDMods), dictList);
+	setup_viewdict(textSDmodule, &settings);
 	
-	dictList = g_list_first(dictList);
-	while(dictList != NULL) {
-		g_free(dictList->data); /* free mem allocated by g_strdup() */
-		dictList = g_list_next(dictList);
-	}
+	dictList = get_list(DICT_LIST);
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbSDMods), dictList);	
 	g_list_free(dictList);
 	
 	gtk_entry_set_text(GTK_ENTRY(ceSDMods),
 			   settings.DictWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entrySDLookup), settings.dictkey);
-	
-	backend_search_text_changed_viewdict(settings.dictkey);
+	gtk_entry_set_text(GTK_ENTRY(entrySDLookup), settings.dictkey);	
+	search_text_changed_viewdict(settings.dictkey);
 	isrunningSD = TRUE;
 	return dlgViewDict;
 }
