@@ -17,6 +17,7 @@ gnomesword_SOURCES = \
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
 	dialogs.cpp dialogs.h\
+	listeditor.cpp listeditor.h\
 	spellcheck.cpp spellcheck.h\
 	DICTClient.cpp DICTClient.h
 endif
@@ -32,6 +33,7 @@ gnomesword_SOURCES = \
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
 	dialogs.cpp dialogs.h\
+	listeditor.cpp listeditor.h\
 	printstuff.cpp printstuff.h
 endif
 
@@ -46,6 +48,7 @@ gnomesword_SOURCES = \
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
 	dialogs.cpp dialogs.h\
+	listeditor.cpp listeditor.h\
 	spellcheck.cpp spellcheck.h\
 	DICTClient.cpp DICTClient.h\
 	printstuff.cpp printstuff.h
@@ -61,7 +64,8 @@ gnomesword_SOURCES = \
 	interface.cpp interface.h\
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
-	dialogs.cpp dialogs.h
+	dialogs.cpp dialogs.h\
+	listeditor.cpp listeditor.h
 endif
 
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g

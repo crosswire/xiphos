@@ -44,6 +44,7 @@
 #include "filestuff.h"
 #include "menustuff.h"
 #include "dialogs.h"
+#include "listeditor.h"
 
 /*
  *
@@ -63,13 +64,15 @@ SWDisplay *comp3Display; //--- to display modules using GtkText a verse at a tim
 SWDisplay *comDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *percomDisplay; //--- to display personal comment modules using GtkText a verse at a time
 SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *BTFcomDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *BTFsearchDisplay; //--- to display modules using GtkText a verse at a time
+SWDisplay *GBFcomDisplay; //--- to display modules using GtkText a verse at a time
+SWDisplay *GBFsearchDisplay; //--- to display modules using GtkText a verse at a time
+
 SWMgr *mainMgr; //-- sword mgr for curMod - curcomMod - curdictMod
 SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
 SWMgr *mainMgr2; //-- sword mgr for comp2Mod - second interlinear module 
 SWMgr *mainMgr3; //-- sword mgr for comp3Mod - third interlinear module 
 SWMgr *searchMgr; //-- sword mgr for searchMod - module used for searching
+
 VerseKey vsKey; //-- ??
 SWModule *curMod; //-- module for main text window
 SWModule *comp1Mod; //-- module for first interlinear window
@@ -79,6 +82,7 @@ SWModule *curcomMod; //-- module for commentary  window
 SWModule *percomMod; //-- module for personal commentary  window	
 SWModule *curdictMod; //-- module for dict window
 SWModule *searchMod; //-- module for searching and search window
+
 
 VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
 ListKey	searchScopeList; //----------- search list for searching verses found on last search
@@ -122,7 +126,8 @@ bool usepersonalcomments = false; //-- do we setup for personal comments - defau
 //gboolean saveChanges = true; //-- save changes to personal comments
 gboolean autoSave = true; //-- we want to auto save changes to personal comments
 //gboolean personalCom = true; //-- let us know if curcomMod is a personal comment mod
-extern gchar remembersubtree[256];
+extern gchar rememberlastitem[255]; //-- used for bookmark menus declared in filestuff.cpp
+extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
 gint historyitems = 0;
 gint answer;
 //----------------------------------------------------------------------------------------------
@@ -163,23 +168,26 @@ initSword(GtkWidget *mainform,  //-- app's main form
 
 	GnomeUIInfo *menuitem; //--  gnome menuitem
 
-  myset = readsettings();
-  settings = &myset;
+  myset = readsettings();  //-- load settings into structure
+  settings = &myset;       //-- set pointer to structure
+
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
 	mainMgr2        = new SWMgr();
 	mainMgr3        = new SWMgr();
-	searchMgr		= new SWMgr();
+	searchMgr				= new SWMgr();
+
 	
 	curMod           = NULL; //-- set mods to null
 	comp1Mod      = NULL;
 	comp2Mod      = NULL;
 	comp3Mod      = NULL;
 	curcomMod     = NULL;
-	curdictMod      = NULL;
-	searchMod      = NULL;
+	curdictMod    = NULL;
+	searchMod     = NULL;
 	percomMod     = NULL;
+
 	
 	chapDisplay    = 0;// set in create
 	entryDisplay    = 0;// set in create
@@ -188,9 +196,10 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	comp3Display    = 0;// set in create
 	comDisplay   	  = 0;// set in create
 	dictDisplay   	   = 0;// set in create
-	BTFcomDisplay = 0; // set in create
-	BTFsearchDisplay =0; // set in create
+	GBFcomDisplay = 0; // set in create
+	GBFsearchDisplay =0; // set in create
   percomDisplay   	  = 0;// set in create
+
 
 //	gtk_rc_parse( "gsword.rc" );
 
@@ -206,7 +215,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textComments"));
-	BTFcomDisplay = new  GTKInterlinearDisp(lookup_widget(mainform,"textCommentaries"));
+	GBFcomDisplay = new  GTKInterlinearDisp(lookup_widget(mainform,"textCommentaries"));
 	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
@@ -225,9 +234,9 @@ initSword(GtkWidget *mainform,  //-- app's main form
   studypad = lookup_widget(mainform,"text3");
 	//-------------------------------------------------------------- set main window modules and add to menus	
 	sprintf(rememberlastitem,"%s","_View/Main Window/");
-	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/");
-	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/");
-	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/");
+	sprintf(aboutrememberlastitem,"%s","_Help/About Sword Modules/Bible Texts/<Separator>");
+	sprintf(aboutrememberlastitem2,"%s","_Help/About Sword Modules/Commentaries/<Separator>");
+	sprintf(aboutrememberlastitem3,"%s","_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>");
 	
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++)
 	{
@@ -274,7 +283,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 				  additemtognomemenu(MainFrm,curcomMod->Name(), aboutrememberlastitem2 , (GtkMenuCallback)on_kjv1_activate );
 				 	sprintf(aboutrememberlastitem2,"%s%s","_Help/About Sword Modules/Commentaries/",curcomMod->Name());	
 					if(!strcmp(curcomMod->Name(),"Family"))
-						curcomMod->Disp(BTFcomDisplay);
+						curcomMod->Disp(GBFcomDisplay);
 					else
 						curcomMod->Disp(comDisplay);
 				}
@@ -441,12 +450,13 @@ initSword(GtkWidget *mainform,  //-- app's main form
   //----------------------------------------------------------------------- set dictionary key
   gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"dictionarySearchText")),settings->dictkey);
 
-  loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
+  //loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
+  loadbookmarks_programstart(); //--------------------------------- add bookmarks to menubar
   changeVerse(settings->currentverse); //---------------------------------------------- set Text
 
   if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); //-- load last used file into studypad
 
-//-- hide buttons only show them if their options are enabled
+//-- hide buttons - only show them if their options are enabled
 	gtk_widget_hide(lookup_widget(MainFrm,"btnPrint"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpell"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpellNotes"));
@@ -459,43 +469,6 @@ initSword(GtkWidget *mainform,  //-- app's main form
   gtk_widget_show (lookup_widget(MainFrm,"btnSpell"));
   gtk_widget_show (lookup_widget(MainFrm,"btnSpellNotes"));
 #endif /* USE_ASPELL */
-}
-
-
-//-------------------------------------------------------------------------------------------
-void
-loadbookmarks(GtkWidget *MainFrm) //-- load bookmarks into menu
-{
-	gchar 	  subtreelabel[255],
-						firstsubtree[255];
-	gint      i,
-						ifirsttime = 1;	
-		
-	sprintf(subtreelabel, "%s","_Bookmarks/<Separator>");	//--- create label for menu subtree
-	for(i=0;i<ibookmarks;i++)
-	{		
-		if(bmarks[i][0] == '[')  //--- if item starts with a '[' it is a subtree (submenu)
-		{			
-			addsubtreeitem(MainFrm, "_Bookmarks/Edit Bookmarks", bmarks[i]);
-			sprintf(subtreelabel, "%s/%s/","_Bookmarks" ,bmarks[i] );
-			sprintf(remembersubtree,"%s/%s","_Bookmarks" ,bmarks[i]);
-			if(ifirsttime) //-- we need to remember the first subtree because it will really be last
-			{              //-- and we want to put a separator after it
-				 sprintf(firstsubtree,"%s/%s","_Bookmarks" ,bmarks[i]);
-				 ifirsttime = 0;
-			}
-		}
-		else if(bmarks[i][0] == '<')  //--- if item starts with '<' remaining items are added to _Bookmarks menu
-																	//---  below Edit Bookmarks item
-		{
-			addseparator(MainFrm,firstsubtree);
-			sprintf(subtreelabel, "%s","_Bookmarks/<Separator>");			
-		}
-		else
-		{
-			additemtosubtree(MainFrm, subtreelabel, bmarks[i]); //--- add menu item to subtree
-		}	
-	}
 }
 
 //-------------------------------------------------------------------------------------------
@@ -716,12 +689,12 @@ ShutItDown(void)  //------------- close down GnomeSword program
 		delete comp2Display;
 	if(comDisplay)
 		delete comDisplay;
-	if(BTFcomDisplay)
-		delete BTFcomDisplay;
+	if(GBFcomDisplay)
+		delete GBFcomDisplay;
 	if(dictDisplay)
 		delete dictDisplay;
-	if(BTFsearchDisplay)
-		delete BTFsearchDisplay;
+	if(GBFsearchDisplay)
+		delete GBFsearchDisplay;
 	if(percomDisplay)
 		delete percomDisplay;
 	gtk_exit(0);           //-- exit
@@ -881,8 +854,9 @@ resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone click
 
 //-------------------------------------------------------------------------------------------
 void
-savelistinfo(GtkWidget *list) //-- get info we need to save search results list
+savelistinfo(gchar *filename, GtkWidget *list) //-- get info we need to save search results list
 {
+/*
 	GtkWidget 	*label;
 	gchar 			*text;
 	gint				howmany;
@@ -890,20 +864,22 @@ savelistinfo(GtkWidget *list) //-- get info we need to save search results list
 	label = lookup_widget(list,"lbSearchHits");
 	text = (char *)GTK_LABEL(label)->label;
 	howmany = atoi(text);
-	savelist(list,howmany);	
+	savelist(filename, list, howmany);	
+*/
 }
+
 //-------------------------------------------------------------------------------------------
 void
 setupSearchDlg(GtkWidget *searchDlg) //-- init search dialog
 {
 		ModMap::iterator it;  //-- sword manager iterator
 		gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(searchDlg,"txtSearch")) , TRUE ); //-- set text window to word wrap
-		BTFsearchDisplay = new GTKInterlinearDisp(lookup_widget(searchDlg,"txtSearch")); //-- set sword display
+		GBFsearchDisplay = new GTKInterlinearDisp(lookup_widget(searchDlg,"txtSearch")); //-- set sword display
     	//--------------------------------------------------------------------------------------- searchmodule	
 		for (it = searchMgr->Modules.begin(); it != searchMgr->Modules.end(); it++) //-- iterator through modules
 		{
 			searchMod  = (*it).second;  //-- set searchMod
-			searchMod->Disp(BTFsearchDisplay); //-- set search display for modules
+			searchMod->Disp(GBFsearchDisplay); //-- set search display for modules
 		}
 }
 
@@ -943,23 +919,24 @@ footnotesSWORD(bool choice) //-- toogle gbf footnotes for modules that have them
 void
 addBookmark(void)  //-- someone clicked add bookmark to get us here
 {
-	GnomeUIInfo *bookmarkitem;  //-- pointer to gnome menu item structure
+	//GnomeUIInfo *bookmarkitem;  //-- pointer to gnome menu item structure
 	gchar    		*bookname;      //-- pointer to the Bible book we want to mark
 	gint       	iVerse,         //-- verse we want to mark
 							iChap;          //-- chapter we want to mark
+	gchar				buf[255];
 
-	if(ibookmarks < 49) //-- keep items in footnote menu to 48 + 1
-	{
-		bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook"))); //-- get book name
-		iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number
-		iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- get chapter
-		sprintf(bmarks[ibookmarks],"%s %d:%d\0",bookname, iChap,iVerse ); //-- put book chapter and verse into bookmarks array
-	  ++ibookmarks;  //-- increment number of bookmark item + 1
-	}
-	savebookmarks();  //-- save to file so we don't forget -- function in filestuff.cpp
-	removemenuitems(MainFrm, remembersubtree, ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
-  loadbookmarkarray(); //-- load edited bookmarks  -- filestuff.cpp
-  loadbookmarks(MainFrm); //-- let's show what we did -- GnomeSword.cpp
+	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook"))); //-- get book name
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- get chapter
+	sprintf(buf,"%s %d:%d\0",bookname, iChap,iVerse ); //-- put book chapter and verse into bookmarks array
+	 ++ibookmarks;  //-- increment number of bookmark item + 1
+	
+	savebookmark(buf);  //-- save to file so we don't forget -- function in filestuff.cpp
+	removemenuitems(MainFrm, "_Bookmarks/<Separator>", ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
+  sprintf(buf,"%s%s", "_Bookmarks/",remembersubtree);
+  addseparator(MainFrm, buf);
+  //loadbookmarkarray(); //-- load edited bookmarks  -- filestuff.cpp
+  loadbookmarks_afterSeparator(); //-- let's show what we did -- GnomeSword.cpp
 }
 
 //-------------------------------------------------------------------------------------------
@@ -983,6 +960,34 @@ editbookmarksLoad(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
 	gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); //-- add to text widget
 	gtk_text_thaw (GTK_TEXT (text)); //-- thaw text widget so we can work
 }
+
+
+//-------------------------------------------------------------------------------------------
+void
+editbookmarks(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
+{
+	GtkWidget *list;
+	struct LISTITEM listitems[ibookmarks];
+	list = lookup_widget(editdlg,"clLElist");
+	loadbookmarksnew(list);
+}
+//-------------------------------------------------------------------------------------------
+gchar *
+getlistitem(GtkWidget *list, gint row) //--
+{
+  /* 	gchar *buf,
+   				*returnbuf[0][5];
+   	
+   	gtk_clist_get_text(GTK_CLIST(list), row, 0, &buf); //-- get item from list
+		gtk_clist_get_text(GTK_CLIST(list), row, 1, &buf); //-- get type from list
+		gtk_clist_get_text(GTK_CLIST(list), row, 2, &buf); //-- get level from list
+		gtk_clist_get_text(GTK_CLIST(list), row, 3, &buf); //-- get item from list
+		gtk_clist_get_text(GTK_CLIST(list), row, 4, &buf); //-- get item from list
+		return(&returnbuf);
+	*/
+}
+
+
 
 //-------------------------------------------------------------------------------------------
 void
@@ -1416,6 +1421,34 @@ showmoduleinfoSWORD(char *modName) //--  show module about information in an abo
 	label = lookup_widget(aboutbox,"lbModName");    //-- get label
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
 	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to true for text widget
-	AboutModsDisplay(text, bufabout) ; //-- sent about info and text widget to display function (display.cpp)
-	gtk_widget_show(aboutbox); //-- show the about dialog
+	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
+	gtk_widget_show(aboutbox); //-- show the about dialog   	
+}
+
+//-------------------------------------------------------------------------------------------
+void
+showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about information in the Sword Project about dialog
+{
+	char 			*buf,       //-- pointer to text buffer for label (mod name)
+ 						*bufabout;  //-- pointer to text buffer for text widget (mod about)
+  ModMap::iterator it; //-- module iterator
+	SectionMap::iterator sit; //--
+	ConfigEntMap::iterator cit; //--
+	
+	it = mainMgr->Modules.find(curMod->Name()); //-- find module (modName)
+	if (it != mainMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
+	{
+	    buf = (char *)(*it).second->Description();  //-- get discription of module
+	    sit = mainMgr->config->Sections.find((*it).second->Name());
+	    if (sit !=mainMgr->config->Sections.end())
+	    {
+	    	cit = (*sit).second.find("About");
+					if (cit != (*sit).second.end()) 				
+						bufabout = (*cit).second.c_str(); //-- get module about information
+	    }
+	}
+	
+	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
+	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE ); //-- set word wrap to true for text widget
+	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
 }

@@ -204,7 +204,8 @@ GnomeSword.o: GnomeSword.cpp ../config.h /usr/include/gnome.h \
  /usr/include/sword/versekey.h /usr/include/sword/swmacs.h \
  /usr/include/sword/gbfplain.h /usr/include/regex.h \
  /usr/include/sys/stat.h /usr/include/bits/stat.h display.h callback.h \
- GnomeSword.h support.h interface.h filestuff.h menustuff.h dialogs.h
+ GnomeSword.h support.h interface.h filestuff.h menustuff.h dialogs.h \
+ listeditor.h
 GnomeSword.cpp :
 ../config.h :
 /usr/include/gnome.h :
@@ -527,3 +528,4 @@ interface.h :
 filestuff.h :
 menustuff.h :
 dialogs.h :
+listeditor.h :

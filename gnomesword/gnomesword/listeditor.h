@@ -1,7 +1,7 @@
 /***************************************************************************
-                          dialogs.h  -  description
+                          listeditor.h  -  description
                              -------------------
-    begin                : Fri Jun 16 2000
+    begin                : Wed Jun 21 2000
     copyright            : (C) 2000 by Terry Biggs
     email                : tbiggs@infinet.com
  ***************************************************************************/
@@ -14,11 +14,44 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <gnome.h>
+
+#ifndef __LISTEDITOR_H__
+#define __LISTEDITOR_H__
+
+void
+addsubitme										(GtkWidget *list,
+															gint row);
+
+void
+addverse											(GtkWidget *list,
+															gint row,
+															gchar *item);
+
+void
+changeLEverse									(gchar *verse);
+
+GtkWidget *
+createListEditor							(void);
+
+void
+destroyListEditor							(void);
+
+void
+applylistchanges							(GtkWidget *widget,
+															gint row);
+
+void
+selectrow											(GtkWidget *widget,
+															gint row,
+															gint column);
+
+void
+movelistitem									(GtkWidget *widget,
+															gint direction,
+															gint listrow);
 
 GtkWidget*
-create_propertybox1				(void);
+create_ListEditor   					(void);
 
+#endif /* __LISTEDITOR_H__ */
 
-GtkWidget*
-create_BMEditor						(void);

@@ -51,6 +51,18 @@ struct _settings
 						autosavepersonalcomments;
 };
 
+typedef struct _listitem LISTITEM;
+struct _listitem
+{
+	gint 	type;
+	gint  level;
+	gchar item[80];
+	gchar preitem[80];
+	gchar subitem[80];
+	gchar menu[80];
+};
+
+
 void 
 FillDictKeys(char *ModName);
 
@@ -79,7 +91,8 @@ void
 resultsListSWORD	  (GtkWidget *searchFrm, gint row, gint column);
 
 void
-savelistinfo							(GtkWidget *list);
+savelistinfo							(gchar *filename,
+														GtkWidget *list);
 
 void
 setupSearchDlg		   (GtkWidget *searchDlg);
@@ -94,8 +107,15 @@ void
 editbookmarksLoad			(GtkWidget *editdlg);
 
 void
-loadbookmarks			(GtkWidget *MainFrm);
+editbookmarks					(GtkWidget *editdlg);
 
+gchar *
+getlistitem						(GtkWidget *list,
+											gint row);
+/*
+void
+loadbookmarks			(GtkWidget *MainFrm);
+*/
 void
 footnotesSWORD		  (bool choice);
 
@@ -179,5 +199,7 @@ changepagenotebook			(GtkNotebook *notebook,
 void
 showmoduleinfoSWORD			(char *modName);
 
-
+void
+showinfoSWORD						(GtkWidget *text,
+												GtkLabel *label);
 #endif /* __GNOMESWORD_H__ */
