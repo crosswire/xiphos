@@ -432,8 +432,7 @@ on_moduleText_button_press_event(GtkWidget * widget,
 }
 
 //----------------------------------------------------------------------------------------------
-void
-//-- commentary notebook page changed-----------------------------------------------------------
+void /* commentary notebook page changed */
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)

@@ -22,20 +22,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	 typedef enum {
+		PRINT_ORIENT_LANDSCAPE,
+		PRINT_ORIENT_PORTRAIT
+	} PrintOrientation;
 
-typedef enum {
-	PRINT_ORIENT_LANDSCAPE,
-	PRINT_ORIENT_PORTRAIT
-} PrintOrientation;
-
-void
-file_print			(GtkWidget *widget,
-					gchar *currentfilename,
-					gint file_printpreview);
-
+void    file_print(GtkWidget * widget,
+		    gchar * currentfilename, gint file_printpreview);
 
 #ifdef __cplusplus
 }
 #endif
- 
-#endif /* __PRINTSTUFF_H__ */
+#endif	/* __PRINTSTUFF_H__ */
