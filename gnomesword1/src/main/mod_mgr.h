@@ -35,6 +35,7 @@ struct  _mm {
 	char *new_version;
 	char *description;
 	int installed;
+	int locked;
 };
 
 typedef struct _mms MOD_MGR_SOURCE;
@@ -50,10 +51,10 @@ void update_install_progress(double fraction);
 GList *mod_mgr_list_local_modules(const char *dir);
 GList *mod_mgr_list_remote_sources(void);
 int mod_mgr_uninstall(const char *mod_name);
-void mod_mgr_remote_install(const char *source_name, const char *mod_name);
-void mod_mgr_local_install_module(const char *dir, const char *mod_name);
+int mod_mgr_remote_install(const char *source_name, const char *mod_name);
+int mod_mgr_local_install_module(const char *dir, const char *mod_name);
 GList *mod_mgr_remote_list_modules(const char *source_name);
-void mod_mgr_refresh_remote_source(const char *source_name);
+int mod_mgr_refresh_remote_source(const char *source_name);
 void mod_mgr_init_config(void);
 void mod_mgr_init(const char *dir);
 void mod_mgr_shut_down(void);
