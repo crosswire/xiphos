@@ -25,13 +25,13 @@ install-data-local:
           done \
 	fi
 
-	$(mkinstalldirs) $(datadir)/gnome/apps/Applications
-	$(INSTALL_DATA) ${PACKAGE}.desktop $(datadir)/gnome/apps/Applications
+	$(mkinstalldirs) $(datadir)/applications
+	$(INSTALL_DATA) ${PACKAGE}.desktop $(datadir)/applications
 
 uninstall-local:
 	@$(NORMAL_UNINSTALL)
 	rm -f -r $(datadir)/pixmaps/${PACKAGE}
-	rm -f $(datadir)/gnome/apps/Applications/${PACKAGE}.desktop
+	rm -f $(datadir)/applications/${PACKAGE}.desktop
 	rm -f -r $(datadir)/gnome/help/${PACKAGE}
 
 dist-hook:
