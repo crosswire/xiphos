@@ -139,7 +139,7 @@ void gui_create_search_sidebar(void)
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
 			  scrolledwindow_search);
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (
-					scrolledwindow_search), GTK_SHADOW_IN);
+					scrolledwindow_search), settings.shadow_type);
 	gtk_container_set_border_width (GTK_CONTAINER (scrolledwindow_search), 2);
 
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW

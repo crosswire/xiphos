@@ -1037,6 +1037,8 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)swVText,
+                                             settings.shadow_type);
 				      
 	if (!vt->is_rtol) {	
 		vt->html = gtk_html_new();

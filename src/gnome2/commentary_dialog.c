@@ -745,6 +745,8 @@ void gui_create_commentary_dialog(DIALOG_DATA * vc, gboolean do_edit)
 				       (scrolledwindow38),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow38,
+                                             settings.shadow_type);
 
 
 	if (do_edit) {

@@ -548,6 +548,8 @@ void gui_create_note_editor(DIALOG_DATA * d)
 				       (scrolledwindow38),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow38,
+                                             settings.shadow_type);
 
 
 	

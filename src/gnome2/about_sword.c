@@ -27,6 +27,7 @@
 
 #include "gui/about_sword.h"
 
+#include "main/settings.h"
 #include "main/sword.h"
 
 /******************************************************************************
@@ -143,6 +144,8 @@ GtkWidget *gui_create_about_sword(void)
 				       GTK_POLICY_AUTOMATIC);
   	gtk_widget_set_size_request (scrolledwindow26, 160, 160);
   	gtk_container_set_border_width (GTK_CONTAINER (scrolledwindow26), 4);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow26,
+                                             settings.shadow_type);
 	
 	textview1 = gtk_text_view_new ();
 	gtk_widget_show (textview1);

@@ -418,6 +418,15 @@ void create_mainwindow(void)
 	GtkWidget *hboxtb;
 	GtkWidget *tab_button_icon;
 	GtkTooltips *tooltips;
+	
+	/*
+	GTK_SHADOW_NONE
+  	GTK_SHADOW_IN
+  	GTK_SHADOW_OUT
+  	GTK_SHADOW_ETCHED_IN
+  	GTK_SHADOW_ETCHED_OUT
+	*/
+	settings.shadow_type = GTK_SHADOW_IN;
 
 	tooltips = gtk_tooltips_new ();
 

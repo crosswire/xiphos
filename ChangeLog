@@ -1,3 +1,9 @@
+2004-08-10  terry <terry470@users.sf.net>
+
+	* added shadows (borders) to most of the scroll windows can be turned 
+	  off by setting settings.shadow_type=GTK_SHADOW_NONE (0) in 
+	  main_window.c create_mainwindow(). Default=GTK_SHADOW_IN (1).
+
 2004-08-07  terry <terry470@users.sf.net>
 
 	* added doc patch from Jeff Ratliff - covers the sidebar search.
