@@ -501,9 +501,11 @@ SETTINGS createsettings(void)
 	return (settings);	/* return settings structure to readsettings(void) */
 }
 
-//---------------------------------------------------------------------------------------------
-/* save results list form search dialog *filename = pointer to filename from fileselection dialogure
- *list is results list widget where results are storednter to filename from fileselection dialogure */
+
+/* 
+ * save results list form search dialog *filename = pointer to filename from fileselection dialogure
+ * list is results list widget where results are stored 
+ */
 void savelist(gchar * filename, GtkWidget * list)
 {
 	GtkWidget *label;	/* label from search dialog that show number of finds */

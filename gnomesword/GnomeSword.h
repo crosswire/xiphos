@@ -70,7 +70,11 @@ struct _listitem {
 	gchar menu[80];
 };
 
+void initSword(GtkWidget *mainform);
 
+void initGnomeSword(GtkWidget *app);
+void addnotebookpages(GtkWidget *notebook, GList *list);
+		
 void FillDictKeys(char *ModName);
 
 void changeVerse(gchar * ref);
@@ -78,8 +82,6 @@ void changeVerse(gchar * ref);
 void ShutItDown(void);
 
 void UpdateChecks(GtkWidget * mainform);
-
-void initSword(GtkWidget *mainform);
 
 void searchSWORD(GtkWidget * searchFrm);
 
@@ -166,7 +168,8 @@ applyoptions(gboolean showshortcut,
 	     gboolean showdicttabs,
 	     gboolean showtextgroup, 
 	     gboolean showcomgroup, 
-	     gboolean showdictgroup);
+	     gboolean showdictgroup, 
+	     gboolean showhistorygroup);
 
 gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
 
