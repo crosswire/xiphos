@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-GtkWidget*  create_dlgInformation (void);
+GtkWidget*  gui_create_display_informtion_dialog (void);
 
 #ifdef __cplusplus
 }

@@ -25,24 +25,73 @@
 
 #include <gnome.h>
 
-#include "display_info.h"
-
+/* frontend */
 #include "_display_info.h"
 
+/* main */ 
+#include "display_info.h"
+
+/* backend */
 #include "display_info_.h"
 
-//gboolean gsI_isrunning = FALSE;
+
+/******************************************************************************
+ * Name
+ *   loadmodandkey
+ *
+ * Synopsis
+ *   #include "display_info.h"
+ *
+ *   void loadmodandkey(gchar * modName, gchar * newkey)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void loadmodandkey(gchar * modName, gchar * newkey)
 {
-        /* backend/display_info.cpp */
 	backend_dispaly_info_load_modudle(modName, newkey);
 }
+
+/******************************************************************************
+ * Name
+ *   display_info_setup
+ *
+ * Synopsis
+ *   #include "display_info.h"
+ *
+ *   void display_info_setup(GtkWidget * text)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void display_info_setup(GtkWidget * text)
 {
 	backend_display_info_setup(text);
 }
+
+/******************************************************************************
+ * Name
+ *   dispaly_info_shutdown
+ *
+ * Synopsis
+ *   #include "display_info.h"
+ *
+ *   void dispaly_info_shutdown(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void dispaly_info_shutdown(void)
 {
