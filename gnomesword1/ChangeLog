@@ -1,6 +1,8 @@
-2005-03-15  User <Email>
+2005-03-15  terry <tbiggs@users.sf.net>
 
 	* added cancel button to studypad's close confirmation dialog
+	* disabled the setup_druid - use some sane settings on first run
+	  instead.
 	
 
 2005-03-05  terry <tbiggs@users.sf.net>
