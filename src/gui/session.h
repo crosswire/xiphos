@@ -1,6 +1,11 @@
 /*
  * GnomeSword Bible Study Tool
- * session.c - create and maintain a GNOME session
+ * session.h - create and maintain a GNOME session
+ *
+ * based on code from gedit
+ * gedit-session - Basic session management for gedit
+ * Copyright (C) 2002 Ximian, Inc.
+ * Authors Federico Mena-Quintero <federico@ximian.com>
  *
  * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
