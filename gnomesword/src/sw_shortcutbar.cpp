@@ -176,7 +176,7 @@ saveshortcutbarSW(gchar *filename, gchar *group_name, gint group_num, gchar *lar
 					       NULL);
 		sprintf(buf, "branch%d", j);
 		emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, (gchar *) item_name));	
-		g_warning("saving list item: %s",(gchar*)item_name);
+		g_print("saving list item: %s\n",(gchar*)item_name);
 	}	
 	
 	sbconf->Sections["ROOT"] = emap;

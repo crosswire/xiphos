@@ -829,9 +829,9 @@ Preformat
 
 	  <widget>
 	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow42</name>
-	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <name>scrolledwindow47</name>
+	    <hscrollbar_policy>GTK_POLICY_ALWAYS</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
 	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 	    <child>
@@ -841,146 +841,43 @@ Preformat
 
 	    <widget>
 	      <class>GtkViewport</class>
-	      <name>vpSearch</name>
-	      <width>291</width>
+	      <name>viewport3</name>
 	      <shadow_type>GTK_SHADOW_IN</shadow_type>
 
 	      <widget>
-		<class>GtkHBox</class>
-		<name>hbox65</name>
-		<homogeneous>False</homogeneous>
-		<spacing>0</spacing>
+		<class>GtkScrolledWindow</class>
+		<name>scrolledwindow48</name>
+		<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+		<vscrollbar_policy>GTK_POLICY_NEVER</vscrollbar_policy>
+		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 
 		<widget>
-		  <class>GtkVBox</class>
-		  <name>vbox44</name>
-		  <homogeneous>False</homogeneous>
-		  <spacing>0</spacing>
-		  <child>
-		    <padding>0</padding>
-		    <expand>True</expand>
-		    <fill>True</fill>
-		  </child>
+		  <class>GtkCTree</class>
+		  <name>bookTree</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>tree_select_row</name>
+		    <handler>on_bookTree_tree_select_row</handler>
+		    <last_modification_time>Sat, 26 Jan 2002 02:27:24 GMT</last_modification_time>
+		  </signal>
+		  <columns>1</columns>
+		  <column_widths>80</column_widths>
+		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		  <show_titles>True</show_titles>
+		  <shadow_type>GTK_SHADOW_IN</shadow_type>
 
 		  <widget>
-		    <class>GtkFrame</class>
-		    <name>frame31</name>
-		    <label_xalign>0</label_xalign>
-		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		    <child>
-		      <padding>0</padding>
-		      <expand>True</expand>
-		      <fill>True</fill>
-		    </child>
-
-		    <widget>
-		      <class>GtkScrolledWindow</class>
-		      <name>scrolledwindow44</name>
-		      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		      <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
-		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-		      <widget>
-			<class>GtkText</class>
-			<name>text10</name>
-			<can_focus>True</can_focus>
-			<editable>False</editable>
-			<text></text>
-		      </widget>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkFrame</class>
-		    <name>frame32</name>
-		    <label_xalign>0</label_xalign>
-		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		    <child>
-		      <padding>0</padding>
-		      <expand>True</expand>
-		      <fill>True</fill>
-		    </child>
-
-		    <widget>
-		      <class>GtkScrolledWindow</class>
-		      <name>scrolledwindow45</name>
-		      <hscrollbar_policy>GTK_POLICY_ALWAYS</hscrollbar_policy>
-		      <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
-		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-		      <widget>
-			<class>GtkCList</class>
-			<name>clistSearchResults</name>
-			<can_focus>True</can_focus>
-			<signal>
-			  <name>select_row</name>
-			  <handler>on_clistSearchResults_select_row</handler>
-			  <last_modification_time>Sat, 03 Nov 2001 02:08:48 GMT</last_modification_time>
-			</signal>
-			<columns>2</columns>
-			<column_widths>80,80</column_widths>
-			<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-			<show_titles>False</show_titles>
-			<shadow_type>GTK_SHADOW_IN</shadow_type>
-
-			<widget>
-			  <class>GtkLabel</class>
-			  <child_name>CList:title</child_name>
-			  <name>label178</name>
-			  <label>label178</label>
-			  <justify>GTK_JUSTIFY_CENTER</justify>
-			  <wrap>False</wrap>
-			  <xalign>0.5</xalign>
-			  <yalign>0.5</yalign>
-			  <xpad>0</xpad>
-			  <ypad>0</ypad>
-			</widget>
-
-			<widget>
-			  <class>GtkLabel</class>
-			  <child_name>CList:title</child_name>
-			  <name>label179</name>
-			  <label>label179</label>
-			  <justify>GTK_JUSTIFY_CENTER</justify>
-			  <wrap>False</wrap>
-			  <xalign>0.5</xalign>
-			  <yalign>0.5</yalign>
-			  <xpad>0</xpad>
-			  <ypad>0</ypad>
-			</widget>
-		      </widget>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkFrame</class>
-		    <name>frame33</name>
-		    <label_xalign>0</label_xalign>
-		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		    <child>
-		      <padding>0</padding>
-		      <expand>True</expand>
-		      <fill>True</fill>
-		    </child>
-
-		    <widget>
-		      <class>GtkScrolledWindow</class>
-		      <name>scrolledwindow43</name>
-		      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		      <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
-		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-		      <widget>
-			<class>GtkText</class>
-			<name>text9</name>
-			<can_focus>True</can_focus>
-			<editable>False</editable>
-			<text></text>
-		      </widget>
-		    </widget>
+		    <class>GtkLabel</class>
+		    <child_name>CTree:title</child_name>
+		    <name>label186</name>
+		    <label>label186</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
 		  </widget>
 		</widget>
 	      </widget>
@@ -2327,13 +2224,16 @@ Revelation
 		</child>
 
 		<widget>
-		  <class>GtkFrame</class>
-		  <name>frame10</name>
-		  <border_width>2</border_width>
-		  <height>169</height>
-		  <label>Dictionaries - Lexicons</label>
-		  <label_xalign>0</label_xalign>
-		  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+		  <class>GtkNotebook</class>
+		  <name>notebook8</name>
+		  <can_focus>True</can_focus>
+		  <show_tabs>True</show_tabs>
+		  <show_border>True</show_border>
+		  <tab_pos>GTK_POS_TOP</tab_pos>
+		  <scrollable>False</scrollable>
+		  <tab_hborder>2</tab_hborder>
+		  <tab_vborder>2</tab_vborder>
+		  <popup_enable>False</popup_enable>
 		  <child>
 		    <padding>0</padding>
 		    <expand>True</expand>
@@ -2396,16 +2296,20 @@ Revelation
 			</child>
 
 			<widget>
-			  <class>GtkText</class>
-			  <name>textDict</name>
-			  <can_focus>True</can_focus>
-			  <signal>
-			    <name>drag_begin</name>
-			    <handler>on_textDict_drag_begin</handler>
-			    <last_modification_time>Sat, 15 Jul 2000 16:57:13 GMT</last_modification_time>
-			  </signal>
-			  <editable>False</editable>
-			  <text></text>
+			  <class>GtkViewport</class>
+			  <name>viewport2</name>
+			  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+			  <widget>
+			    <class>GtkFrame</class>
+			    <name>frame35</name>
+			    <label_xalign>0</label_xalign>
+			    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+
+			    <widget>
+			      <class>Placeholder</class>
+			    </widget>
+			  </widget>
 			</widget>
 		      </widget>
 		    </widget>
@@ -2538,6 +2442,52 @@ Revelation
 			</widget>
 		      </widget>
 		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>Notebook:tab</child_name>
+		    <name>label184</name>
+		    <label>Dictionaries/Lexicons</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		  </widget>
+
+		  <widget>
+		    <class>GtkFrame</class>
+		    <name>frame36</name>
+		    <label_xalign>0</label_xalign>
+		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+
+		    <widget>
+		      <class>GtkScrolledWindow</class>
+		      <name>scrolledwindow46</name>
+		      <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+		      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+		      <widget>
+			<class>Placeholder</class>
+		      </widget>
+		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>Notebook:tab</child_name>
+		    <name>label185</name>
+		    <label>Books</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
 		  </widget>
 		</widget>
 	      </widget>
@@ -9105,6 +9055,163 @@ Click Finish to close this dialog and run GnomeSword.</text>
 	  <expand>False</expand>
 	  <fill>False</fill>
 	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>dlgBookView</name>
+  <signal>
+    <name>close</name>
+    <handler>on_dlgBookView_close</handler>
+    <last_modification_time>Sat, 26 Jan 2002 02:41:53 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>destroy_event</name>
+    <handler>on_dlgBookView_destroy_event</handler>
+    <last_modification_time>Sat, 26 Jan 2002 02:42:13 GMT</last_modification_time>
+  </signal>
+  <title>GnomeSWORD - Book View</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>490</default_width>
+  <default_height>430</default_height>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox18</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area18</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>btnBookViewClose</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_btnBookViewClose_clicked</handler>
+	  <last_modification_time>Sat, 26 Jan 2002 02:40:40 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>btnBookViewHelp</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_btnBookViewHelp_clicked</handler>
+	  <last_modification_time>Sat, 26 Jan 2002 02:41:08 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_HELP</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHPaned</class>
+      <name>hpaned4</name>
+      <handle_size>10</handle_size>
+      <gutter_size>6</gutter_size>
+      <position>157</position>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow49</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <shrink>True</shrink>
+	  <resize>False</resize>
+	</child>
+
+	<widget>
+	  <class>GtkCTree</class>
+	  <name>ctree2</name>
+	  <can_focus>True</can_focus>
+	  <columns>1</columns>
+	  <column_widths>80</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>labelBook</name>
+	    <label></label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame37</name>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <shrink>True</shrink>
+	  <resize>True</resize>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow50</name>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+	  <widget>
+	    <class>Placeholder</class>
+	  </widget>
+	</widget>
       </widget>
     </widget>
   </widget>
