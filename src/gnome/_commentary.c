@@ -25,20 +25,17 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "_commentary.h"
-#include "cipher_key_dialog.h"
-#include "commentary_dialog.h"
-#include "commentary_find.h"
-#include "shortcutbar_main.h"
-#include "shortcutbar_viewer.h"
+#include "gui/_commentary.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/commentary_dialog.h"
+#include "gui/commentary_find.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_viewer.h"
 
-/* main */
-#include "commentary.h"
-#include "gs_html.h"
-#include "settings.h"
-#include "lists.h"
-
+#include "main/commentary.h"
+#include "main/gs_html.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
 /******************************************************************************
  * externs

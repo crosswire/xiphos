@@ -26,15 +26,13 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-/* frontend */
-#include "dictlex_dialog.h"
+#include "gui/dictlex_dialog.h"
 
-/* main */
-#include "dictlex.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "settings.h"
-#include "lists.h"
+#include "main/dictlex.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
 /******************************************************************************
  * globals

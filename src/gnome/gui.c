@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "gui.h"
+#include "gui/gui.h"
 
 void gui_init(int argc, char *argv[])
 {

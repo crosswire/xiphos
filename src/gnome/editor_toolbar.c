@@ -30,14 +30,12 @@
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-/* frontend */
-#include "editor_toolbar.h"
+#include "gui/editor_toolbar.h"
 
-/* main */
-#include "settings.h"
-
+#include "main/settings.h"
 
 #include "./pixmaps/tt.xpm"
+
 static struct {
 	GtkHTMLParagraphStyle style;
 	const gchar *description;
