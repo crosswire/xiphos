@@ -1,3 +1,11 @@
+2002-06-08  Victor Porton  <porton@localhost>
+
+	* fixed src/main/commentary.c: crashed displaying the commentary
+	when no commentary
+
+	* fixed src/main/gs_interlinear.c: again works when not all
+	interlinear modules are present
+
 2002-06-05  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed gnome/_bibletext_view.* to gnome/bibletext_dialog.*

@@ -207,6 +207,7 @@ static void set_commentary_page(gchar * modname, GList * comm_list,
  
 void display_commentary(gchar * key)
 {
+        if(!cur_c) return;
 	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key, key);
 	backend_display_commentary(settings.comm_last_page, key);
