@@ -31,10 +31,12 @@
 #endif
 #include <gnome.h>
 #include <ctype.h>
+#include <gal/widgets/e-unicode.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
+#include "gs_history.h"
 #include "sword.h"
 #include "gs_gui_cb.h"
 #include "gs_commentary.h"
@@ -54,22 +56,21 @@
 /*****************************************************************************
 * globals
 *****************************************************************************/
-GtkWidget *notepage,            /* widget to access toggle menu - for interlinear notebook page */
-*autosaveitem,                  /* widget to access toggle menu - for personal comments auto save */
-*notes;                         /* notes text widget */
+GtkWidget *notepage,		/* widget to access toggle menu - for interlinear notebook page */
+*autosaveitem,			/* widget to access toggle menu - for personal comments auto save */
+*notes;				/* notes text widget */
 
-gboolean file_changed = FALSE,  /* set to true if text is study pad has changed - and file is not saved  */
- changemain = TRUE;             /* change verse of Bible text window */
+gboolean file_changed = FALSE,	/* set to true if text is study pad has changed - and file is not saved  */
+ changemain = TRUE;		/* change verse of Bible text window */
 
-gchar *current_filename = NULL; /* filename for open file in study pad window */
+gchar *current_filename = NULL;	/* filename for open file in study pad window */
 
-gchar current_verse[80] = N_("Romans 8:28");    /* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
+gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 
 gint dictpages, compages, textpages;
 
 SETTINGS *settings;
 GList *sblist;			/* for saving search results to bookmarks  */
-
 /*****************************************************************************
 * externs
 *****************************************************************************/
@@ -84,146 +85,145 @@ extern GList
 
 extern gchar *mydictmod, *shortcut_types[], rememberlastitem[];
 
-extern gboolean havedict, /* let us know if we have at least one lex-dict module */
- havecomm,                /* let us know if we have at least one commentary module */
- havebible,               /* let us know if we have at least one Bible text module */
- usepersonalcomments,     /* do we setup for personal comments - default is FALSE */
- autoSave, addhistoryitem; /* do we need to add item to history */
-
-extern gint 
-	groupnum4, 
-	iquickmarks; /* number of items in bookmark menu  
-			-- declared in gs_file.c */
+extern gboolean havedict,	/* let us know if we have at least one lex-dict module */
+ havecomm,			/* let us know if we have at least one commentary module */
+ havebible,			/* let us know if we have at least one Bible text module */
+ usepersonalcomments,		/* do we setup for personal comments - default is FALSE */
+ autoSave, addhistoryitem,	/* do we need to add item to history */
+ ApplyChange;
+extern gint groupnum4, iquickmarks;	/* number of items in bookmark menu -- declared in gs_file.c */
+extern HISTORY historylist[];	/* sturcture for storing history items */
+extern gint historyitems;
+extern GtkWidget *shortcut_bar;
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
 void
 initGnomeSword(SETTINGS * s,
-               GList * biblemods,
-               GList * commentarymods,
-               GList * dictionarymods,
-               GList * percommods)
+	       GList * biblemods,
+	       GList * commentarymods,
+	       GList * dictionarymods, GList * percommods)
 {
-        GtkWidget *notebook;
+	GtkWidget *notebook;
 
-        gint biblepage;
+	gint biblepage;
 
 
-        g_print("%s\n", "Initiating GnomeSword\n");
+	g_print("%s\n", "Initiating GnomeSword\n");
 
-        /*
-           setup shortcut bar 
-         */
-        setupSB(s);
-        /*
-           setup commentary gui support 
-         */
-        gui_setupCOMM(s);
-        /*
-           setup general book gui support 
-         */
-        gui_setupGBS(s);
-        /*
-           setup Dict/Lex gui support 
-         */
-        gui_setupDL(s);
-        s->settingslist = NULL;
-        s->displaySearchResults = FALSE;
-        /*
-           add modules to menus -- gs_menu.c 
-         */
-        addmodstomenus(s,
-                       biblemods,
-                       commentarymods, dictionarymods, bookmods,
-                       percommods);
-        /*
-           create popup menus -- gs_menu.c 
-         */
-        createpopupmenus(s, sbbiblemods, sbcommods, sbdictmods,
-                         options);
-        additemstooptionsmenu(options, s);
-        /*
-           add pages to module notebooks 
-         */
-        biblepage =
-            addnotebookpages(lookup_widget(s->app, "nbTextMods"),
-                             biblemods, s->MainWindowModule);
-        
-        gtk_notebook_set_page(GTK_NOTEBOOK
-                              (lookup_widget(s->app, "nbPerCom")), 0);
-        /*
-           set text windows to word warp 
-         */
-        gtk_text_set_word_wrap(GTK_TEXT
-                               (lookup_widget(s->app, "textComments")),
-                               TRUE);
-        /*
-           store text widgets for spell checker 
-         */
-        notes = lookup_widget(s->app, "textComments");
+	/*
+	   setup shortcut bar 
+	 */
+	setupSB(s);
+	/*
+	   setup commentary gui support 
+	 */
+	gui_setupCOMM(s);
+	/*
+	   setup general book gui support 
+	 */
+	gui_setupGBS(s);
+	/*
+	   setup Dict/Lex gui support 
+	 */
+	gui_setupDL(s);
+	s->settingslist = NULL;
+	s->displaySearchResults = FALSE;
+	/*
+	   add modules to menus -- gs_menu.c 
+	 */
+	addmodstomenus(s,
+		       biblemods,
+		       commentarymods, dictionarymods, bookmods,
+		       percommods);
+	/*
+	   create popup menus -- gs_menu.c 
+	 */
+	createpopupmenus(s, sbbiblemods, sbcommods, sbdictmods,
+			 options);
+	additemstooptionsmenu(options, s);
+	/*
+	   add pages to module notebooks 
+	 */
+	biblepage =
+	    addnotebookpages(lookup_widget(s->app, "nbTextMods"),
+			     biblemods, s->MainWindowModule);
 
-        s->versestyle_item =
-            additemtooptionmenu(s->app, _("_Settings/"),
-                                _("Verse Style"),
-                                (GtkMenuCallback)
-                                on_verse_style1_activate);
-        
-        /*
-           set Bible module to open notebook page 
-         */
-        /*
-           let's don't do this if we don't have at least one text module 
-         */
-        if (havebible) {
-                if (biblepage == 0)
-                        backend_change_text_module(s->MainWindowModule, TRUE);
-                /*
-                   get notebook 
-                 */
-                notebook = lookup_widget(s->app, "nbTextMods");
-                gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
-                                   GTK_SIGNAL_FUNC
-                                   (on_nbTextMods_switch_page), NULL);
-                /*
-                   set notebook page 
-                 */
-                gtk_notebook_set_page(GTK_NOTEBOOK(notebook),
-                                      biblepage);
-                if (settings->text_tabs)
-                        gtk_widget_show(notebook);
-                else
-                        gtk_widget_hide(notebook);
-        }
-	
-        if (usepersonalcomments) {
-                /*
-                   change personal comments module 
-                 */
-                backend_change_percom_module(s->personalcommentsmod);
-        }
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(s->app, "nbPerCom")), 0);
+	/*
+	   set text windows to word warp 
+	 */
+	gtk_text_set_word_wrap(GTK_TEXT
+			       (lookup_widget(s->app, "textComments")),
+			       TRUE);
+	/*
+	   store text widgets for spell checker 
+	 */
+	notes = lookup_widget(s->app, "textComments");
 
-        /*
-           free module lists 
-         */
-        g_list_free(biblemods);
-        g_list_free(commentarymods);
-        g_list_free(dictionarymods);
-        g_list_free(percommods);
-        g_list_free(sbbiblemods);
-        g_list_free(sbcommods);
-        g_list_free(sbdictmods);
-        g_list_free(bookmods);
-        g_list_free(sbbookmods);
-        // options list freed on exit
+	s->versestyle_item =
+	    additemtooptionmenu(s->app, _("_Settings/"),
+				_("Verse Style"), (GtkMenuCallback)
+				on_verse_style1_activate);
 
-        g_print("done\n");
+	/*
+	   set Bible module to open notebook page 
+	 */
+	/*
+	   let's don't do this if we don't have at least one text module 
+	 */
+	if (havebible) {
+		if (biblepage == 0)
+			backend_change_text_module(s->MainWindowModule,
+						   TRUE);
+		/*
+		   get notebook 
+		 */
+		notebook = lookup_widget(s->app, "nbTextMods");
+		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
+				   GTK_SIGNAL_FUNC
+				   (on_nbTextMods_switch_page), NULL);
+		/*
+		   set notebook page 
+		 */
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),
+				      biblepage);
+		if (settings->text_tabs)
+			gtk_widget_show(notebook);
+		else
+			gtk_widget_hide(notebook);
+	}
+
+	if (usepersonalcomments) {
+		/*
+		   change personal comments module 
+		 */
+		backend_change_percom_module(s->personalcommentsmod);
+	}
+
+	/*
+	   free module lists 
+	 */
+	g_list_free(biblemods);
+	g_list_free(commentarymods);
+	g_list_free(dictionarymods);
+	g_list_free(percommods);
+	g_list_free(sbbiblemods);
+	g_list_free(sbcommods);
+	g_list_free(sbdictmods);
+	g_list_free(bookmods);
+	g_list_free(sbbookmods);
+	// options list freed on exit
+
+	g_print("done\n");
 
 	/*
 	 * Set toggle state of buttons and menu items.
 	 */
 	UpdateChecks(s);
-	
+
 	/* showing the devotional must come after the the app is shown or
 	   it will mess up the shortcut bar display */
 	/* FIXME: maybe we need to move the devotional ? */
@@ -236,39 +236,39 @@ void gnomesword_shutdown(SETTINGS * s)
 {
 	GtkWidget *msgbox;
 	extern gchar
-		*gSwordDir,
-		*shortcutbarDir,
-		*fnconfigure,
-		*swbmDir;
+	    * gSwordDir, *shortcutbarDir, *fnconfigure, *swbmDir;
 	gint answer = 0;
-	
+
 	if (s->modifiedSP) {	//-- if study pad file has changed since last save  
 		msgbox = create_InfoBox();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
-		
+		answer =
+		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+
 		switch (answer) {
 		case 0:
-			if (s->studypadfilename) 
-				save_file_program_end(s->htmlSP, s->studypadfilename);
+			if (s->studypadfilename)
+				save_file_program_end(s->htmlSP,
+						      s->
+						      studypadfilename);
 			break;
 		default:
 			break;
 		}
 	}
-	g_warning("we are done with Gnomesword");
 	//-- free dir and file stuff 
 	g_free(gSwordDir);
 	g_free(shortcutbarDir);
 	g_free(fnconfigure);
 	g_free(swbmDir);
-	
+
 	//-- free glist
 	g_list_free(options);
 	g_list_free(s->settingslist);
 	gui_shutdownGBS();
 	gui_shutdownDL();
 	gui_shutdownCOMM();
+	g_print("\nwe are done with Gnomesword\n");
 }
 
 /*****************************************************************************
@@ -279,37 +279,37 @@ void gnomesword_shutdown(SETTINGS * s)
 gint
 addnotebookpages(GtkWidget * notebook, GList * modlist, gchar * modName)
 {
-        GList *tmp;
-        gint pg = 0, retVal = 0;
-        GtkWidget *empty_notebook_page, /* used to create new pages */
-        *label;
-        GtkLabel *mylabel;
+	GList *tmp;
+	gint pg = 0, retVal = 0;
+	GtkWidget *empty_notebook_page,	/* used to create new pages */
+	*label;
+	GtkLabel *mylabel;
 
-        tmp = modlist;
-        while (tmp != NULL) {
-                empty_notebook_page = gtk_vbox_new(FALSE, 0);
-                gtk_widget_show(empty_notebook_page);
-                gtk_container_add(GTK_CONTAINER(notebook),
-                                  empty_notebook_page);
-                label = gtk_label_new((gchar *) tmp->data);
-                mylabel = GTK_LABEL(label);
-                if (!strcmp((gchar *) mylabel->label, modName)) /* set retVal to saved mod's page number */
-                        retVal = pg;
-                gtk_widget_show(label);
-                gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook),
-                                           gtk_notebook_get_nth_page
-                                           (GTK_NOTEBOOK(notebook), pg),
-                                           label);
-                gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook),
-                                                 gtk_notebook_get_nth_page
-                                                 (GTK_NOTEBOOK
-                                                  (notebook), pg),
-                                                 (gchar *) tmp->data);
-                ++pg;
-                tmp = g_list_next(tmp);
-        }
-        g_list_free(tmp);
-        return retVal;
+	tmp = modlist;
+	while (tmp != NULL) {
+		empty_notebook_page = gtk_vbox_new(FALSE, 0);
+		gtk_widget_show(empty_notebook_page);
+		gtk_container_add(GTK_CONTAINER(notebook),
+				  empty_notebook_page);
+		label = gtk_label_new((gchar *) tmp->data);
+		mylabel = GTK_LABEL(label);
+		if (!strcmp((gchar *) mylabel->label, modName))	/* set retVal to saved mod's page number */
+			retVal = pg;
+		gtk_widget_show(label);
+		gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook),
+					   gtk_notebook_get_nth_page
+					   (GTK_NOTEBOOK(notebook), pg),
+					   label);
+		gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(notebook),
+						 gtk_notebook_get_nth_page
+						 (GTK_NOTEBOOK
+						  (notebook), pg),
+						 (gchar *) tmp->data);
+		++pg;
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	return retVal;
 }
 
 /*****************************************************************************
@@ -318,114 +318,114 @@ addnotebookpages(GtkWidget * notebook, GList * modlist, gchar * modName)
  *****************************************************************************/
 void UpdateChecks(SETTINGS * s)
 {
-        /*
-           does user want verses or paragraphs 
-         */
-        GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
+	/*
+	   does user want verses or paragraphs 
+	 */
+	GTK_CHECK_MENU_ITEM(s->versestyle_item)->active = s->versestyle;
 
-        if (s->footnotesint)
-                backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "On");       /* keep footnotes in sync with menu */
-        else
-                backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "Off");      /* keep footnotes in sync with menu */
+	if (s->footnotesint)
+		backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "On");	/* keep footnotes in sync with menu */
+	else
+		backend_set_global_option(INTERLINEAR_WINDOW, "Footnotes", "Off");	/* keep footnotes in sync with menu */
 
-        /*
-           set interlinear Strong's Numbers to last setting used 
-         */
-        if (s->strongsint)
-                backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "On");        /* keep Strongs in sync with menu */
-        else
-                backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "Off");       /* keep Strongs in sync with menu */
+	/*
+	   set interlinear Strong's Numbers to last setting used 
+	 */
+	if (s->strongsint)
+		backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "On");	/* keep Strongs in sync with menu */
+	else
+		backend_set_global_option(INTERLINEAR_WINDOW, "Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
 
-        /*
-           set interlinear morph tags to last setting used 
-         */
-        if (s->morphsint)
-                backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "On");      /* keep Morph Tags in sync with menu */
-        else
-                backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "Off");     /* keep Morph Tag in sync with menu */
+	/*
+	   set interlinear morph tags to last setting used 
+	 */
+	if (s->morphsint)
+		backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
+	else
+		backend_set_global_option(INTERLINEAR_WINDOW, "Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
 
-        /*
-           set interlinear Hebrew Vowel Points to last setting used 
-         */
-        if (s->hebrewpointsint)
-                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "On");     /* keep Hebrew Vowel Points in sync with menu */
-        else
-                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "Off");    /* keep Hebrew Vowel Points in sync with menu */
+	/*
+	   set interlinear Hebrew Vowel Points to last setting used 
+	 */
+	if (s->hebrewpointsint)
+		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
+	else
+		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
 
-        /*
-           set interlinear Hebrew Cantillation to last setting used 
-         */
-        if (s->cantillationmarksint)
-                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "On");     /* keep Hebrew Cantillation in sync with menu */
-        else
-                backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "Off");    /* keep Hebrew Cantillation in sync with menu */
+	/*
+	   set interlinear Hebrew Cantillation to last setting used 
+	 */
+	if (s->cantillationmarksint)
+		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
+	else
+		backend_set_global_option(INTERLINEAR_WINDOW, "Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
 
-        /*
-           set interlinear Greek Accents to last setting used 
-         */
-        if (s->greekaccentsint)
-                backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "On");   /* keep Greek Accents in sync with menu */
-        else
-                backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "Off");  /* keep Greek Accents in sync with menu */
+	/*
+	   set interlinear Greek Accents to last setting used 
+	 */
+	if (s->greekaccentsint)
+		backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "On");	/* keep Greek Accents in sync with menu */
+	else
+		backend_set_global_option(INTERLINEAR_WINDOW, "Greek Accents", "Off");	/* keep Greek Accents in sync with menu */
 
-        /*
-           set auto save personal comments to last setting 
-         */
-        autoSave = s->autosavepersonalcomments;
-        /*
-           set auto save menu check item 
-         */
-        //GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments;  
+	/*
+	   set auto save personal comments to last setting 
+	 */
+	autoSave = s->autosavepersonalcomments;
+	/*
+	   set auto save menu check item 
+	 */
+	//GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments;  
 
-        /*
-           show hide shortcut bar - set to options setting 
-         */
-        if (s->showshortcutbar) {
-                gtk_widget_show(s->shortcut_bar);
-                e_paned_set_position(E_PANED
-                                     (lookup_widget(s->app, "epaned")),
-                                     s->shortcutbar_width);
-        }
+	/*
+	   show hide shortcut bar - set to options setting 
+	 */
+	if (s->showshortcutbar) {
+		gtk_widget_show(s->shortcut_bar);
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "epaned")),
+				     s->shortcutbar_width);
+	}
 
-        else if (!s->showshortcutbar && s->showdevotional) {
-                gtk_widget_show(s->shortcut_bar);
-                on_btnSB_clicked(NULL, settings);
-        }
+	else if (!s->showshortcutbar && s->showdevotional) {
+		gtk_widget_show(s->shortcut_bar);
+		on_btnSB_clicked(NULL, settings);
+	}
 
-        else {
-                gtk_widget_hide(s->shortcut_bar);
-                e_paned_set_position(E_PANED
-                                     (lookup_widget(s->app, "epaned")),
-                                     1);
-        }
+	else {
+		gtk_widget_hide(s->shortcut_bar);
+		e_paned_set_position(E_PANED
+				     (lookup_widget(s->app, "epaned")),
+				     1);
+	}
 
-        /*
-           set hight of bible and commentary pane 
-         */
-        e_paned_set_position(E_PANED(lookup_widget(s->app, "vpaned1")),
-                             s->upperpane_hight);
-        /*
-           set width of bible pane 
-         */
-        e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")),
-                             s->biblepane_width);
+	/*
+	   set hight of bible and commentary pane 
+	 */
+	e_paned_set_position(E_PANED(lookup_widget(s->app, "vpaned1")),
+			     s->upperpane_hight);
+	/*
+	   set width of bible pane 
+	 */
+	e_paned_set_position(E_PANED(lookup_widget(s->app, "hpaned1")),
+			     s->biblepane_width);
 
-        if (!s->docked) {
-                s->docked = TRUE;
-                on_btnSBDock_clicked(NULL, s);
-        }
-        gtk_widget_show(s->app); /** display the whole thing **/
+	if (!s->docked) {
+		s->docked = TRUE;
+		on_btnSBDock_clicked(NULL, s);
+	}
+	gtk_widget_show(s->app); /** display the whole thing **/
 
-        /*
-           fill the dict key clist 
-         */
-        /*
-           if (havedict)
-           FillDictKeysSWORD();
-         */
+	/*
+	   fill the dict key clist 
+	 */
+	/*
+	   if (havedict)
+	   FillDictKeysSWORD();
+	 */
 
-        addhistoryitem = FALSE;
-        changeVerseSWORD(s->currentverse);
+	addhistoryitem = FALSE;
+	change_verse(s->currentverse);
 }
 
 /*****************************************************************************
@@ -434,8 +434,8 @@ void UpdateChecks(SETTINGS * s)
 *****************************************************************************/
 void setformatoption(GtkWidget * button)
 {
-        settings->formatpercom =
-            GTK_TOGGLE_BUTTON(GTK_BUTTON(button))->active;
+	settings->formatpercom =
+	    GTK_TOGGLE_BUTTON(GTK_BUTTON(button))->active;
 }
 
 /*****************************************************************************
@@ -445,9 +445,9 @@ void setformatoption(GtkWidget * button)
 *****************************************************************************/
 void changepagenotebook(GtkNotebook * notebook, gint page_num)
 {
-        settings->notebook3page = page_num;     /* store the page number so we can open to it the next time we start */
-        changemain = FALSE;     /* we don't want to cause the Bible text window to scrool */
-        //if(page_num == 4) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
+	settings->notebook3page = page_num;	/* store the page number so we can open to it the next time we start */
+	changemain = FALSE;	/* we don't want to cause the Bible text window to scrool */
+	//if(page_num == 4) change_verse(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
 
@@ -457,18 +457,18 @@ void changepagenotebook(GtkNotebook * notebook, gint page_num)
 *****************************************************************************/
 void showIntPage(GtkWidget * app, gboolean choice)
 {
-        GtkWidget *intpage, *frame;     /* pointer to interlinear notebook page */
+	GtkWidget *intpage, *frame;	/* pointer to interlinear notebook page */
 
-        intpage = lookup_widget(app, "vboxInt");        /* set pointer to page */
-        frame = lookup_widget(app, "frame2");   /* set pointer to page */
-        if (choice) {
-                gtk_widget_show(intpage);       /* show page */
-                gtk_widget_show(frame); /* show page */
-        } else {
-                gtk_widget_hide(intpage);       /* hide page */
-                gtk_widget_hide(frame);
-        }
-        settings->interlinearpage = choice;     /* remember choice for next program startup */
+	intpage = lookup_widget(app, "vboxInt");	/* set pointer to page */
+	frame = lookup_widget(app, "frame2");	/* set pointer to page */
+	if (choice) {
+		gtk_widget_show(intpage);	/* show page */
+		gtk_widget_show(frame);	/* show page */
+	} else {
+		gtk_widget_hide(intpage);	/* hide page */
+		gtk_widget_hide(frame);
+	}
+	settings->interlinearpage = choice;	/* remember choice for next program startup */
 }
 
 
@@ -478,33 +478,34 @@ void showIntPage(GtkWidget * app, gboolean choice)
 *****************************************************************************/
 void setautosave(gboolean choice)
 {
-        if (choice) {           /* if choice was to autosave */
-                autoSave = TRUE;
-        } else {                /* if choice was not to autosave    */
-                autoSave = FALSE;
-        }
-        settings->autosavepersonalcomments = choice;    /* remember our choice for next startup */
+	if (choice) {		/* if choice was to autosave */
+		autoSave = TRUE;
+	} else {		/* if choice was not to autosave    */
+		autoSave = FALSE;
+	}
+	settings->autosavepersonalcomments = choice;	/* remember our choice for next startup */
 }
 
 
 
-void percent_update(char percent, void *userData) 
-{	
-	char maxHashes = *((char *)userData);
+void percent_update(char percent, void *userData)
+{
+	char maxHashes = *((char *) userData);
 	float num;
-	char buf[80];	
+	char buf[80];
 	static char printed = 0;
 
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-	while ((((float)percent)/100) * maxHashes > printed) {
-		sprintf(buf,"%f",(((float)percent)/100));
-		num = (float)percent/100;
-		gnome_appbar_set_progress((GnomeAppBar *)settings->appbar,num);
-		printed++;	
-	} 
-	while (gtk_events_pending ())
-		gtk_main_iteration (); 
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	while ((((float) percent) / 100) * maxHashes > printed) {
+		sprintf(buf, "%f", (((float) percent) / 100));
+		num = (float) percent / 100;
+		gnome_appbar_set_progress((GnomeAppBar *) settings->
+					  appbar, num);
+		printed++;
+	}
+	while (gtk_events_pending())
+		gtk_main_iteration();
 	printed = 0;
 }
 
@@ -514,33 +515,33 @@ void percent_update(char percent, void *userData)
 *****************************************************************************/
 gint string_is_color(gchar * color)
 {
-        gint i;
+	gint i;
 
-        if (!color) {
-                g_warning("string_is_color, pointer NULL\n");
-                return 0;
-        }
-        if (strlen(color) != 7) {
-                g_warning("string_is_color, strlen(%s) != 7\n", color);
-                return 0;
-        }
-        if (color[0] != '#') {
-                g_warning("string_is_color, 0 in %s is not #\n", color);
-                return 0;
-        }
-        for (i = 1; i < 7; i++) {
-                if ((color[i] > 102)
-                    || (color[i] < 48)
-                    || ((color[i] > 57) && (color[i] < 65))
-                    || ((color[i] > 70) && (color[i] < 97))) {
-                        g_warning
-                            ("string_is_color, %d in %s is not from a color, it is %d\n",
-                             i, color, color[i]);
-                        return 0;
-                }
-        }
-        //g_warning("string_is_color, %s is color\n", color);
-        return 1;
+	if (!color) {
+		g_warning("string_is_color, pointer NULL\n");
+		return 0;
+	}
+	if (strlen(color) != 7) {
+		g_warning("string_is_color, strlen(%s) != 7\n", color);
+		return 0;
+	}
+	if (color[0] != '#') {
+		g_warning("string_is_color, 0 in %s is not #\n", color);
+		return 0;
+	}
+	for (i = 1; i < 7; i++) {
+		if ((color[i] > 102)
+		    || (color[i] < 48)
+		    || ((color[i] > 57) && (color[i] < 65))
+		    || ((color[i] > 70) && (color[i] < 97))) {
+			g_warning
+			    ("string_is_color, %d in %s is not from a color, it is %d\n",
+			     i, color, color[i]);
+			return 0;
+		}
+	}
+	//g_warning("string_is_color, %s is color\n", color);
+	return 1;
 
 }
 
@@ -550,32 +551,32 @@ gint string_is_color(gchar * color)
 *****************************************************************************/
 gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
 {
-        gchar *tmpstr;
-        unsigned int red_int;
-        unsigned int green_int;
-        unsigned int blue_int;
-        gdouble red;
-        gdouble green;
-        gdouble blue;
+	gchar *tmpstr;
+	unsigned int red_int;
+	unsigned int green_int;
+	unsigned int blue_int;
+	gdouble red;
+	gdouble green;
+	gdouble blue;
 
-        red = color[0];
-        green = color[1];
-        blue = color[2];
+	red = color[0];
+	green = color[1];
+	blue = color[2];
 
-        if (websafe) {
-                red_int = 0x33 * ((unsigned int) (red * 255 / 0x33));
-                green_int =
-                    0x33 * ((unsigned int) (green * 255 / 0x33));
-                blue_int = 0x33 * ((unsigned int) (blue * 255 / 0x33));
-        } else {
-                red_int = (unsigned int) (red * 255);
-                green_int = (unsigned int) (green * 255);
-                blue_int = (unsigned int) (blue * 255);
-        }
-        tmpstr = g_malloc(8 * sizeof(char));
-        g_snprintf(tmpstr, 8, "#%.2X%.2X%.2X", red_int, green_int,
-                   blue_int);
-        return tmpstr;
+	if (websafe) {
+		red_int = 0x33 * ((unsigned int) (red * 255 / 0x33));
+		green_int =
+		    0x33 * ((unsigned int) (green * 255 / 0x33));
+		blue_int = 0x33 * ((unsigned int) (blue * 255 / 0x33));
+	} else {
+		red_int = (unsigned int) (red * 255);
+		green_int = (unsigned int) (green * 255);
+		blue_int = (unsigned int) (blue * 255);
+	}
+	tmpstr = g_malloc(8 * sizeof(char));
+	g_snprintf(tmpstr, 8, "#%.2X%.2X%.2X", red_int, green_int,
+		   blue_int);
+	return tmpstr;
 }
 
 /*****************************************************************************
@@ -584,173 +585,173 @@ gchar *gdouble_arr_to_hex(gdouble * color, gint websafe)
 *****************************************************************************/
 gdouble *hex_to_gdouble_arr(gchar * color)
 {
-        static gdouble tmpcol[4];
-        gchar tmpstr[8];
-        long tmpl;
+	static gdouble tmpcol[4];
+	gchar tmpstr[8];
+	long tmpl;
 
 
-        strncpy(tmpstr, &color[1], 2);
-        tmpl = strtol(tmpstr, NULL, 16);
-        tmpcol[0] = (gdouble) tmpl;
+	strncpy(tmpstr, &color[1], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[0] = (gdouble) tmpl;
 
-        strncpy(tmpstr, &color[3], 2);
-        tmpl = strtol(tmpstr, NULL, 16);
-        tmpcol[1] = (gdouble) tmpl;
+	strncpy(tmpstr, &color[3], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[1] = (gdouble) tmpl;
 
-        strncpy(tmpstr, &color[5], 2);
-        tmpl = strtol(tmpstr, NULL, 16);
-        tmpcol[2] = (gdouble) tmpl;
+	strncpy(tmpstr, &color[5], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[2] = (gdouble) tmpl;
 
-        //g_warning("hex_to_gdouble_arr, R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
+	//g_warning("hex_to_gdouble_arr, R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
 
-        tmpcol[3] = 0;
+	tmpcol[3] = 0;
 
-        return tmpcol;
+	return tmpcol;
 }
 
 
 /*
  * to display Sword module about information
  */
-static void about_module_display(gchar *to, gchar *text)
+static void about_module_display(gchar * to, gchar * text)
 {
-        gint len, maxlen, i;
-        gboolean center = FALSE;
+	gint len, maxlen, i;
+	gboolean center = FALSE;
 
-        len = strlen(text);
+	len = strlen(text);
 
-        maxlen = len * 80;
+	maxlen = len * 80;
 
-       
-        // -------------------------------
-        for (i = 0; i < strlen(text) - 1; i++) {
-                if (text[i] == '\\')    // a RTF command
-                {
-                        if ((text[i + 1] == 'p') && 
-                                (text[i + 2] == 'a') && 
-                                (text[i + 3] == 'r') && 
-                                (text[i + 4] == 'd')) {     
 
-                                if (center) {
-                                        *to++ = '<';
-                                        *to++ = '/';
-                                        *to++ = 'C';
-                                        *to++ = 'E';
-                                        *to++ = 'N';
-                                        *to++ = 'T';
-                                        *to++ = 'E';
-                                        *to++ = 'R';
-                                        *to++ = '>';
-                                        center = FALSE;
-                                }
-                                i += 4;
-                                continue;
-                        }
-                        if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
-                            && (text[i + 3] == 'r')) {
-                                *to++ = '<';
-                                *to++ = 'b';
-                                *to++ = 'r';
-                                *to++ = '>';
-                                *to++ = '\n';
-                                i += 3;
-                                continue;
-                        }
-                        if (text[i + 1] == ' ') {
-                                i += 1;
-                                continue;
-                        }
-                        if (text[i + 1] == '\n') {
-                                i += 1;
-                                continue;
-                        }
-                        if ((text[i + 1] == 'q') && (text[i + 2] == 'c'))  
-                        {
-                                if (!center) {
-                                        *to++ = '<';
-                                        *to++ = 'C';
-                                        *to++ = 'E';
-                                        *to++ = 'N';
-                                        *to++ = 'T';
-                                        *to++ = 'E';
-                                        *to++ = 'R';
-                                        *to++ = '>';
-                                        center = TRUE;
-                                }
-                                i += 2;
-                                continue;
-                        }
-                }
-                *to++ = text[i];
-        }
-        *to++ = 0;
+	// -------------------------------
+	for (i = 0; i < strlen(text) - 1; i++) {
+		if (text[i] == '\\')	// a RTF command
+		{
+			if ((text[i + 1] == 'p') &&
+			    (text[i + 2] == 'a') &&
+			    (text[i + 3] == 'r') &&
+			    (text[i + 4] == 'd')) {
+
+				if (center) {
+					*to++ = '<';
+					*to++ = '/';
+					*to++ = 'C';
+					*to++ = 'E';
+					*to++ = 'N';
+					*to++ = 'T';
+					*to++ = 'E';
+					*to++ = 'R';
+					*to++ = '>';
+					center = FALSE;
+				}
+				i += 4;
+				continue;
+			}
+			if ((text[i + 1] == 'p') && (text[i + 2] == 'a')
+			    && (text[i + 3] == 'r')) {
+				*to++ = '<';
+				*to++ = 'b';
+				*to++ = 'r';
+				*to++ = '>';
+				*to++ = '\n';
+				i += 3;
+				continue;
+			}
+			if (text[i + 1] == ' ') {
+				i += 1;
+				continue;
+			}
+			if (text[i + 1] == '\n') {
+				i += 1;
+				continue;
+			}
+			if ((text[i + 1] == 'q')
+			    && (text[i + 2] == 'c')) {
+				if (!center) {
+					*to++ = '<';
+					*to++ = 'C';
+					*to++ = 'E';
+					*to++ = 'N';
+					*to++ = 'T';
+					*to++ = 'E';
+					*to++ = 'R';
+					*to++ = '>';
+					center = TRUE;
+				}
+				i += 2;
+				continue;
+			}
+		}
+		*to++ = text[i];
+	}
+	*to++ = 0;
 }
 
 void display_about_module_dialog(gchar * modname, gboolean isGBS)
 {
-        GtkWidget *aboutbox = NULL;     //-- pointer to about dialog        
-        GtkWidget *text;        //-- pointer to text widget of dialog
-        gchar *buf, *to = NULL,             //-- pointer to text buffer for label (mod name)
-        *bufabout,              //-- pointer to text buffer for text widget (mod about)
-        discription[500];
-        gint len, maxlen;
+	GtkWidget *aboutbox = NULL;	//-- pointer to about dialog        
+	GtkWidget *text;	//-- pointer to text widget of dialog
+	gchar *buf, *to = NULL,	//-- pointer to text buffer for label (mod name)
+	*bufabout,		//-- pointer to text buffer for text widget (mod about)
+	 discription[500];
+	gint len, maxlen;
 
-        bufabout = NULL;
+	bufabout = NULL;
 
-        buf = backend_get_module_description(modname);
-        bufabout = backend_get_mod_aboutSWORD(modname);
+	buf = backend_get_module_description(modname);
+	bufabout = backend_get_mod_aboutSWORD(modname);
 
-        sprintf(discription,
-                "<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
-                buf);
-        if (!isGBS) {
-                aboutbox = gui_create_about_modules();
-                gtk_widget_show(aboutbox);
-        }
+	sprintf(discription,
+		"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",
+		buf);
+	if (!isGBS) {
+		aboutbox = gui_create_about_modules();
+		gtk_widget_show(aboutbox);
+	}
 
-        if (bufabout) { 
-                                
-                len = strlen(bufabout);
-                maxlen = len * 8;
-                
-                if ((to = (gchar *) malloc(maxlen)) == NULL) {
-                        return ;
-                }
-                
-                if (!isGBS) {
-                        text = lookup_widget(aboutbox, "text"); /* get text widget */
-                } else {
-                        text = settings->htmlBook;
-                }
+	if (bufabout) {
 
-                about_module_display(to, bufabout); /* send about info to display function */
-                beginHTML(text, FALSE);
-                displayHTML(text, "<html><body>",
-                            strlen("<html><body>"));
-                displayHTML(text, discription, strlen(discription));
-                if (to)
-                        displayHTML(text, to, strlen(to));
-                displayHTML(text, "</body></html>",
-                            strlen("</body></html>"));
-                endHTML(text);
-        }
+		len = strlen(bufabout);
+		maxlen = len * 8;
 
-        else
-                g_warning("oops");
+		if ((to = (gchar *) malloc(maxlen)) == NULL) {
+			return;
+		}
 
-        if (bufabout)
-                g_free(bufabout);
-        if (to)
-                free(to);
+		if (!isGBS) {
+			text = lookup_widget(aboutbox, "text");	/* get text widget */
+		} else {
+			text = settings->htmlBook;
+		}
+
+		about_module_display(to, bufabout);	/* send about info to display function */
+		beginHTML(text, FALSE);
+		displayHTML(text, "<html><body>",
+			    strlen("<html><body>"));
+		displayHTML(text, discription, strlen(discription));
+		if (to)
+			displayHTML(text, to, strlen(to));
+		displayHTML(text, "</body></html>",
+			    strlen("</body></html>"));
+		endHTML(text);
+	}
+
+	else
+		g_warning("oops");
+
+	if (bufabout)
+		g_free(bufabout);
+	if (to)
+		free(to);
 }
 
-void search_module(SETTINGS *s, SEARCH_OPT *so)
-{	
-	if(sblist)
+void search_module(SETTINGS * s, SEARCH_OPT * so)
+{
+	if (sblist)
 		g_list_free(sblist);
 	sblist = NULL;
 	sblist = backend_do_search(s, so);
-	fill_search_results_clist(sblist, so, s);	
+	fill_search_results_clist(sblist, so, s);
 }
 
 /******************************************************************************
@@ -758,10 +759,10 @@ void search_module(SETTINGS *s, SEARCH_OPT *so)
  * num
  * returns module key
 ******************************************************************************/
-gchar *get_module_key(SETTINGS *s)
+gchar *get_module_key(SETTINGS * s)
 {
 	if (havebible) {
-		switch(s->whichwindow) {
+		switch (s->whichwindow) {
 		case MAIN_TEXT_WINDOW:
 			return (gchar *) s->currentverse;
 			break;
@@ -781,15 +782,16 @@ gchar *get_module_key(SETTINGS *s)
 	}
 	return NULL;
 }
+
 /******************************************************************************
  *
  * num
  * returns module name
 ******************************************************************************/
-gchar *get_module_name(SETTINGS *s)
+gchar *get_module_name(SETTINGS * s)
 {
 	if (havebible) {
-		switch(s->whichwindow) {
+		switch (s->whichwindow) {
 		case MAIN_TEXT_WINDOW:
 			return (gchar *) s->MainWindowModule;
 			break;
@@ -810,40 +812,351 @@ gchar *get_module_name(SETTINGS *s)
 void gui_set_text_mod_page(gint page)
 {
 	GtkWidget *notebook = lookup_widget(settings->app,
-						  "nbTextMods");
+					    "nbTextMods");
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
-	ChangeVerseSWORD();
+	backend_text_module_change_verse(settings->currentverse);
 }
 
-void change_module_and_key(gchar *module_name, gchar *key)
+void change_module_and_key(gchar * module_name, gchar * key)
 {
 	gint mod_type;
 	gint page_num;
 	GtkWidget *notebook;
-	
+
 	mod_type = backend_get_mod_type(module_name);
-	
-	switch(mod_type) {
-		case TEXT_TYPE:
-			page_num = backend_get_module_page(module_name, TEXT_MODS);
-			notebook = lookup_widget(settings->app, "nbTextMods");
-			gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page_num);
-			changeVerseSWORD(key);
-			break;
-		case COMMENTARY_TYPE:
-			page_num = backend_get_module_page(module_name, COMM_MODS);
-			gui_set_commentary_page_and_key(page_num, key);
-			break;
-		case DICTIONARY_TYPE:
-			page_num = backend_get_module_page(module_name, DICT_MODS);
-			gui_set_dictionary_page_and_key(page_num, key);
-			break;
-		case BOOK_TYPE:
-			page_num = backend_get_module_page(module_name, BOOK_MODS);
-			gui_set_book_page_and_key(page_num, key);
-			break;		
+
+	switch (mod_type) {
+	case TEXT_TYPE:
+		page_num =
+		    backend_get_module_page(module_name, TEXT_MODS);
+		notebook = lookup_widget(settings->app, "nbTextMods");
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page_num);
+		change_verse(key);
+		break;
+	case COMMENTARY_TYPE:
+		page_num =
+		    backend_get_module_page(module_name, COMM_MODS);
+		gui_set_commentary_page_and_key(page_num, key);
+		break;
+	case DICTIONARY_TYPE:
+		page_num =
+		    backend_get_module_page(module_name, DICT_MODS);
+		gui_set_dictionary_page_and_key(page_num, key);
+		break;
+	case BOOK_TYPE:
+		page_num =
+		    backend_get_module_page(module_name, BOOK_MODS);
+		gui_set_book_page_and_key(page_num, key);
+		break;
 	}
 }
 
+void set_module_global_options(gchar * option, gint window,
+			       gboolean choice, gboolean showchange)
+{
+	gchar *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+
+	backend_set_global_option(window, option, on_off);
+
+	switch (window) {
+	case MAIN_TEXT_WINDOW:
+		backend_save_module_options(settings->MainWindowModule,
+					    option, on_off);
+
+		if (!strcmp(option, "Strong's Numbers")) {
+			GTK_CHECK_MENU_ITEM(settings->strongsnum)->
+			    active = choice;
+			/* set strongs toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "btnStrongs")),
+						     choice);
+		}
+
+		if (!strcmp(option, "Footnotes")) {
+			GTK_CHECK_MENU_ITEM(settings->footnotes)->
+			    active = choice;
+			/* set footnotes toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "btnFootnotes")),
+						     choice);
+		}
+
+		if (!strcmp(option, "Morphological Tags")) {
+			GTK_CHECK_MENU_ITEM(settings->morphs)->active =
+			    choice;
+			/* set morphs toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+						     (lookup_widget
+						      (settings->app,
+						       "btnMorphs")),
+						     choice);
+		}
+
+		if (!strcmp(option, "Hebrew Vowel Points")) {
+			GTK_CHECK_MENU_ITEM(settings->hebrewpoints)->
+			    active = choice;
+			//settings->hebrewpoints = choice;
+		}
+
+		if (!strcmp(option, "Hebrew Cantillation")) {
+			GTK_CHECK_MENU_ITEM(settings->
+					    cantillationmarks)->active =
+			    choice;
+			//settings->cantillationmarks = choice;
+		}
+
+		if (!strcmp(option, "Greek Accents")) {
+			GTK_CHECK_MENU_ITEM(settings->greekaccents)->
+			    active = choice;
+			//settings->greekaccents = choice;
+		}
+
+		if (havebible && showchange) {	/* display change */
+			backend_text_module_change_verse(settings->
+							 currentverse);
+		}
+
+		break;
+
+	case INTERLINEAR_WINDOW:
+
+		if (!strcmp(option, "Strong's Numbers")) {
+			settings->strongsint = choice;
+		}
+
+		if (!strcmp(option, "Footnotes")) {
+			settings->footnotesint = choice;
+		}
+
+		if (!strcmp(option, "Morphological Tags")) {
+			settings->morphsint = choice;
+		}
+
+		if (!strcmp(option, "Hebrew Vowel Points")) {
+			settings->hebrewpointsint = choice;
+		}
+
+		if (!strcmp(option, "Hebrew Cantillation")) {
+			settings->cantillationmarksint = choice;
+		}
+
+		if (!strcmp(option, "Greek Accents")) {
+			settings->greekaccentsint = choice;
+		}
+
+		if (settings->dockedInt && havebible)	/* display change */
+			update_interlinear_page(settings);
+		else
+			updateIntDlg(settings);
+
+		break;
+	}
+
+}
+
+void change_verse(gchar * key)
+{
+	gchar *val_key;
+	gint cur_chapter = 8,	/* keep up with current chapter */
+	 cur_verse = 28;	/* keep up with current verse */
+	gchar s1[255];
+
+	val_key = backend_get_valid_key(key);
+	sprintf(current_verse, "%s", val_key);
+	g_warning(val_key);
+	ApplyChange = FALSE;
+	/* change main window */
+	if (havebible) { //changemain && 
+		if (addhistoryitem) {
+			if (strcmp
+			    (settings->currentverse,
+			     historylist[historyitems - 1].verseref))
+				addHistoryItem(settings->app,
+					       GTK_WIDGET
+					       (shortcut_bar),
+					       settings->currentverse);
+		}
+		addhistoryitem = TRUE;
+		/* remember last verse */
+		sprintf(settings->currentverse, "%s", val_key);
+		cur_chapter = backend_get_chapter_from_key(val_key);
+		cur_verse = backend_get_verse_from_key(val_key);
+		sprintf(s1, "%s", val_key);
+		/* set book, chapter,verse and freeform lookup entries to new verse */
+		gtk_entry_set_text(GTK_ENTRY(lookup_widget
+					     (settings->app,
+					      "cbeBook")),
+				   backend_get_book_from_key(val_key));
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON
+					  (lookup_widget
+					   (settings->app,
+					    "spbChapter")),
+					  cur_chapter);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON
+					  (lookup_widget
+					   (settings->app,
+					    "spbVerse")), cur_verse);
+		gtk_entry_set_text(GTK_ENTRY
+				   (lookup_widget
+				    (settings->app,
+				     "cbeFreeformLookup")), val_key);
+		backend_text_module_change_verse(val_key);
+	}
+	changemain = TRUE;
+
+	/* change interlinear verses */
+	if (settings->dockedInt)
+		update_interlinear_page(settings);
+
+	/* change personal notes editor   if not in edit mode */
+	
+	/* set commentary module to current verse */
+	gui_displayCOMM(settings->currentverse);
+	g_free(val_key);
+	ApplyChange = TRUE;
+}
+
+void update_interlinear_page(SETTINGS * s)
+{
+	gchar tmpBuf[256], *rowcolor, *font_size;
+	gchar *utf8str,*mod_name, *font_name;
+	gint utf8len, i;
+	gboolean was_editable, use_gtkhtml_font;
+	
+	if (havebible) {
+		/* setup gtkhtml widget */
+		GtkHTMLStream *htmlstream;
+		GtkHTMLStreamStatus status1;
+		GtkHTML *html = GTK_HTML(settings->htmlInterlinear);
+		was_editable = gtk_html_get_editable(html);
+		if (was_editable)
+			gtk_html_set_editable(html, FALSE);
+		htmlstream =
+		    gtk_html_begin_content(html,
+					   "text/html; charset=utf-8");
+		sprintf(tmpBuf,
+			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+			settings->bible_bg_color,
+			settings->bible_text_color,
+			settings->link_color);
+		utf8str =
+		    e_utf8_from_gtk_string(settings->htmlInterlinear,
+					   tmpBuf);
+		utf8len = strlen(utf8str);      
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
+		}
+		
+		for(i = 0; i < 5; i++) {
+			mod_name = NULL;
+			switch(i) {
+				case 0:
+					mod_name = settings->Interlinear1Module;					
+				break;
+				case 1:
+					mod_name = settings->Interlinear2Module;
+				break;
+				case 2:
+					mod_name = settings->Interlinear3Module;
+				break;
+				case 3:
+					mod_name = settings->Interlinear4Module;
+				break;
+				case 4:
+					mod_name = settings->Interlinear5Module;
+				break;
+			}
+			
+			if((font_name = backend_get_module_font_name(mod_name)) != NULL)
+				use_gtkhtml_font = FALSE;
+			else
+				use_gtkhtml_font = TRUE;
+			
+			font_size = s->interlinear_font_size; 
+			
+			if (i == 0 || i == 2 || i == 4)
+				rowcolor = "#F1F1F1";
+			else
+				rowcolor = s->bible_bg_color;
+			
+			if (i == 0) {
+				sprintf(tmpBuf,
+					"<tr><td><i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i></td></tr>",
+					s->bible_verse_num_color,
+					s->verse_num_font_size, 
+					current_verse);
+				utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
+				utf8len = strlen(utf8str);
+				if (utf8len) {
+					gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+				}	
+			}
+			
+			sprintf(tmpBuf,
+				"<tr bgcolor=\"%s\"><td><B><A HREF=\"[%s]%s\"><FONT COLOR=\"%s\" SIZE=\"%s\"> [%s]</font></a></b>",
+				rowcolor,
+				mod_name,
+				backend_get_module_description(mod_name),
+				s->bible_verse_num_color,
+				s->verse_num_font_size,
+				mod_name);
+			utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
+			utf8len = strlen(utf8str);
+			if (utf8len) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+			}			
+				
+			if(use_gtkhtml_font)
+				sprintf(tmpBuf, "<font size=\"%s\">", font_size);
+			else
+				sprintf(tmpBuf, "<font face=\"%s\"size=\"%s\">", font_name, font_size);
+				
+			utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
+			utf8len = strlen(utf8str);
+			if (utf8len) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+			}
+				
+			 utf8str = backend_get_interlinear_module_text(mod_name, current_verse);
+			if (strlen(utf8str)) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
+				g_free(utf8str);
+			}
+			
+			sprintf(tmpBuf,
+				"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
+				mod_name);
+			utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, tmpBuf);
+			utf8len = strlen(utf8str);
+			if (utf8len) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+			}
+		}		
+		
+		sprintf(tmpBuf, "</table></body></html>");
+		utf8str =
+		    e_utf8_from_gtk_string(settings->htmlInterlinear,
+					   tmpBuf);
+		utf8len = strlen(utf8str);       
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream,
+				       utf8str, utf8len);
+		}
+
+		gtk_html_end(GTK_HTML(html), htmlstream, status1);
+		gtk_html_set_editable(html, was_editable);
+	}
+}
 
 /*****   end of file   ******/

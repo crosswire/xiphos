@@ -147,7 +147,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 
 	c = getCOMM(comm_list);
 	memset(modName, 0, 16);
-	modNameFromDesc(modName, modDescription);
+	backend_module_name_from_description(modName, modDescription);
 	key = lookupGS_HTML(c->html, FALSE);
 	if (key) {
 		display_dictlex_in_viewer(modName, key, settings);
