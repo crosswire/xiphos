@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                            gs_viewtext_sw.h
+                            sw_viewtext_dlg.h
                              -------------------
     begin                : Tue June 12 2001
     copyright            : (C) 2001 by Terry Biggs

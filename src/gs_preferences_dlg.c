@@ -39,7 +39,7 @@
 #include <gtk/gtk.h>
 
 #include "gs_preferences_dlg.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "sw_properties.h"
 #include "support.h"

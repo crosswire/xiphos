@@ -36,7 +36,7 @@
 
 #include "gs_bookmarks.h"
 #include "sw_bookmarks.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "gs_listeditor.h"
 #include "support.h"

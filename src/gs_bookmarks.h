@@ -28,7 +28,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 
 	typedef struct _bmtree BM_TREE;

@@ -31,9 +31,9 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gs_viewtext_sw.h"
+#include "sw_viewtext_dlg.h"
 #include "gs_viewtext_dlg.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "gs_information_dlg.h"

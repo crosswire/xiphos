@@ -30,7 +30,7 @@
 #include <sys/stat.h>
 #include "gs_search_cb.h"
 #include "gs_search.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "gs_file.h"
 #include "callback.h"
