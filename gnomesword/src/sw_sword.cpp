@@ -520,7 +520,7 @@ void updateIntDlg(SETTINGS *s)
 	
 	
 	sprintf(buf,
-	 "<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+	 HTML_START "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 			s->bible_bg_color,
 			s->bible_text_color, s->link_color);
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
@@ -624,7 +624,7 @@ void updateinterlinearpage(void)
 		
 		
 		sprintf(tmpBuf,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
+			HTML_START "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings->bible_bg_color,
 			settings->bible_text_color, settings->link_color);
 		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
@@ -1091,9 +1091,9 @@ void verseSWORD(void)		//-- someone clicked the verse spin button
 	vkText = buf;
 	vkComm = buf;
 		
-	ChangeVerseSWORD();
 	vkText.AutoNormalize(1);
 	vkComm.AutoNormalize(1);
+	ChangeVerseSWORD();
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1383,7 +1383,7 @@ void showmoduleinfoSWORD(char *modName, gboolean isGBS)	//--  show module inform
 		
 		AboutModsDisplayHTML(newbuf, bufabout);	//-- send about info and alocated new text buffer to display function (sw_display.cpp)
 		beginHTML(text, FALSE);
-		displayHTML(text, "<html><body>", strlen("<html><body>"));
+		displayHTML(text, HTML_START "<body>", strlen(HTML_START "<body>"));
 		displayHTML(text, discription, strlen(discription));
 		displayHTML(text, newbuf, strlen(newbuf));
 		displayHTML(text, "</body></html>",
