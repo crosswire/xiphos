@@ -28,6 +28,8 @@
 #endif
 #include <gnome.h>
 #include <ctype.h>
+//#include <gtkhtml/gtkhtml.h>
+
 
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
@@ -35,7 +37,7 @@
 #include "support.h"
 #include "interface.h"
 #include "gs_file.h"
-#include "menustuff.h"
+#include "gs_menu.h"
 #include "gs_listeditor.h"
 
 #if USE_SHORTCUTBAR
@@ -120,9 +122,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
 /*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp1")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp2")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp3")) , TRUE );
+	//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp1")) , TRUE );
+	//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp2")) , TRUE );
+	//gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComp3")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textDict")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
@@ -818,4 +820,3 @@ void setautosave(gboolean choice)
 	}
 	settings->autosavepersonalcomments = choice; /* remember our choice for next startup */
 }
-
