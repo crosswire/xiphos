@@ -46,6 +46,7 @@
 #endif /* USE_SHORTCUTBAR */
 
 #include "gs_gnomesword.h"
+#include "gs_history.h"
 #include "display.h"
 #include "callback.h"
 #include "gs_sword.h"
@@ -131,6 +132,7 @@ gint    groupnum1 = 0,
 gchar *textmod,
         *commod,
         *dictmod;
+GtkWidget *MainFrm; /* main form widget  */
 
 /***********************************************************************************************
  externals
@@ -145,15 +147,12 @@ extern SETTINGS myset;
 extern GtkWidget *shortcut_bar;
 #if USE_SHORTCUTBAR
 extern gchar *shortcut_types[];
-extern GtkWidget *MainFrm; /* main form widget  */
-#else
-GtkWidget *MainFrm; /* main form widget  */
 #endif /* USE_SHORTCUTBAR */
 extern gchar *current_filename;	/* filename for open file in study pad window  */
 extern gchar current_verse[80];	/* current verse showing in main window - 1st - 2nd - 3rd
 				   interlinear window - commentary window */
-extern gint historyitems;
-extern HISTORY historylist[];
+extern gint historyitems;      /* number of history items */
+extern HISTORY historylist[];  /* sturcture for storing history items */
 extern gboolean addhistoryitem; /* do we need to add item to history */
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff

@@ -69,14 +69,6 @@ struct _settings {
 	        	//------- 28
 };
 
-typedef struct _history HISTORY;
-struct _history {
-        gint itemnum;
-        gint compagenum;
-        gchar verseref[80];
-        gchar textmod[80];
-        gchar commod[80];
-};
 
 void initGnomeSword(GtkWidget *app, 
 		SETTINGS *settings, 
@@ -113,17 +105,6 @@ void changepagenotebook(GtkNotebook * notebook,
 void openpropertiesbox(void);
 void editbookmarksLoad(GtkWidget * editdlg);
 void addBookmark(GtkWidget *app);
-void clearhistory(GtkWidget *app,
-		GtkWidget *shortcut_bar);
-void updatehistorymenu(GtkWidget *app);
-void updatehistoryshortcutbar(GtkWidget *app,
-                GtkWidget *shortcut_bar);
-void updatehistorysidebar(GtkWidget *app);
-void addHistoryItem(GtkWidget *app,
-		GtkWidget *shortcut_bar,
-		gchar *ref);
-void historynav(GtkWidget *app, gint direction);
-void changeverseHistory(gint historynum);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);
 void setcurrentversecolor(gint arg1, 
