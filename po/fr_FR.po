@@ -30,12 +30,12 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-02-10 20:36-0500\n"
-"PO-Revision-Date: 2005-02-06 21:06+0100\n"
+"PO-Revision-Date: 2005-02-23 19:44+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: gnomesword.desktop.in.h:1
 msgid "GnomeSword2 Bible Guide"
@@ -88,7 +88,7 @@ msgstr "Vue parallèle"
 #: src/main/sidebar.cc:553 src/main/sidebar.cc:825 src/main/sidebar.cc:826
 #: src/main/sidebar.cc:827 src/gnome2/main_window.c:600
 msgid "Standard View"
-msgstr ""
+msgstr "Vue simple"
 
 #: src/main/sidebar.cc:558 src/main/sidebar.cc:854 src/main/sidebar.cc:856
 #: src/gnome2/mod_mgr.c:645 src/gnome2/preferences_dialog.c:1744
@@ -1174,13 +1174,12 @@ msgid "Open a new tab"
 msgstr "Ouvrir un nouvel onglet"
 
 #: src/gnome2/main_window.c:666
-#, fuzzy
 msgid "Commentary View"
 msgstr "Commentaires"
 
 #: src/gnome2/main_window.c:683
 msgid "Book View"
-msgstr ""
+msgstr "Livres d'étude"
 
 #: src/gnome2/mod_mgr.c:209
 msgid "Install the following modules:"
@@ -2277,11 +2276,9 @@ msgid "Change Verse"
 msgstr "Change de verset"
 
 #: src/gnome2/toolbar_nav.c:501
-#, fuzzy
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
-"Saisir un verset au format <livre> <chap>:<verset>(ex: Jn 3:16) puis cliquer "
-"sur le bouton «Aller à»"
+"Saisir un verset au format <livre> <chap>:<verset>(ex: Jn 3:16) puis valider"
 
 #~ msgid "Toggle sync with main window"
 #~ msgstr "Synchroniser avec la fenêtre principale"
