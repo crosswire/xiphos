@@ -138,6 +138,7 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	GTK_CHECK_MENU_ITEM(c->showtoolbar)->active = settings.comm_tool;
 	
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
+	settings.html_comm = c->html;
 }
 
 /******************************************************************************

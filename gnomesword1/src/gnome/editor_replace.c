@@ -28,9 +28,7 @@
 
 /* frontend */
 #include "editor_replace.h"
-
-/* main */
-#include "gs_editor.h"
+#include "_editor.h"
 
 
 struct _GtkHTMLReplaceAskDialog {

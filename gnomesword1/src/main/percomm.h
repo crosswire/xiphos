@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 #include "settings.h"
-#include "gs_editor.h"
+#include "_editor.h"
 
 typedef struct _percomm_data PC_DATA;
 struct _percomm_data {
@@ -43,6 +43,7 @@ struct _percomm_data {
 	GSHTMLEditorControlData *ec;
 };
 
+void editor_save_note(GtkWidget * html_widget);
 void save_percomm_note(gchar *note);
 void delete_percomm_note(void);
 void percomm_page_changed(gint page_num, PC_DATA * p);

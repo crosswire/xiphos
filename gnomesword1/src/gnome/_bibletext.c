@@ -32,7 +32,6 @@
 /* main */
 #include "cipher_key_dialog.h"
 #include "bibletext.h"
-
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "bibletext_view.h"
@@ -47,10 +46,6 @@ extern gboolean isrunningVT;
 extern GList *options;
 extern TEXT_DATA *cur_t;
 extern gboolean display_change;
-
-/******************************************************************************
- * global to this file only 
- */
 
 
 /******************************************************************************
@@ -132,7 +127,8 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 */
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
 	
-	gui_set_text_frame_label();	
+	gui_set_text_frame_label();
+	settings.html_text = t->html;
 }
 
 /******************************************************************************

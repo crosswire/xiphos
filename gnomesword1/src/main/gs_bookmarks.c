@@ -375,9 +375,9 @@ static void stringCallback(gchar * str, gpointer data)
 						  mask1, pixmap2, mask2,
 						  FALSE, FALSE);
 			gtk_ctree_select(p_bmtree->ctree, newrootnode);
-			addnewgrouptoMenus(settings.menuBible, newrootnode, str);
-			addnewgrouptoMenus(settings.menuhtmlcom, newrootnode, str);
-			addnewgrouptoMenus(settings.menuDict, newrootnode, str);
+//			addnewgrouptoMenus(settings.menuBible, newrootnode, str);
+//			addnewgrouptoMenus(settings.menuhtmlcom, newrootnode, str);
+//			addnewgrouptoMenus(settings.menuDict, newrootnode, str);
 			break;
 		}
 	}

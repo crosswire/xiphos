@@ -42,6 +42,8 @@
 /* gnome */
 #include "main_menu.h"
 
+GtkWidget *htmlTexts;
+
 /******************************************************************************
  * static - global to this file only
  */

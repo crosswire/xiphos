@@ -35,6 +35,7 @@
 #include "main_menu.h"
 #include "about_modules.h"
 #include "shortcutbar_dialog.h"
+#include "studypad.h"
 
 /* main */ 
 #include "gs_gnomesword.h"
@@ -186,7 +187,7 @@ void gnomesword_shutdown(SETTINGS * s)
 		switch (answer) {
 		case 0:
 			if (s->studypadfilename)
-				save_file_program_end(s->htmlSP,
+				save_file_program_end(s->html_studypad,
 						      s->
 						      studypadfilename);
 			break;
@@ -600,7 +601,7 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
 		if (!isGBS) {
 			text = lookup_widget(aboutbox, "text");	/* get text widget */
 		} else {
-			text = settings.htmlBook;
+			text = settings.html_book;
 		}
 
 		about_module_display(to, bufabout);	/* send about info to display function */

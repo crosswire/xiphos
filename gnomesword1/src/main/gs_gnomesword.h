@@ -33,6 +33,8 @@ extern "C" {
 #define COMMENTARY_WINDOW 2
 #define DICTIONARY_WINDOW 3
 #define BOOK_WINDOW 4
+#define PERCOMM_WINDOW 5
+#define STUDYPAD_WINDOW 6
     
 /* module types */
 #define TEXT_TYPE 0 

@@ -105,13 +105,13 @@ module.include.files=\
 	src/gnome/link_dialog.h\
 	src/gnome/setup_druid.h\
 	src/gnome/shortcutbar_dialog.h\
+	src/gnome/studypad.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/bibletext_view.h\
 	src/main/gs_bookmarks.h\
 	src/main/commentary.h\
 	src/main/dictlex.h\
-	src/main/gs_editor.h\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_interlinear.h\
@@ -170,7 +170,7 @@ module.source.files=\
 	src/gnome/_dictlex.c\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\
-	src/gnome/_percomm.h\
+	src/gnome/_percomm.c\
 	src/gnome/gbs_find.c\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
@@ -187,6 +187,7 @@ module.source.files=\
 	src/gnome/main_menu.c\
 	src/gnome/setup_druid.c\
 	src/gnome/shortcutbar_dialog.c\
+	src/gnome/studypad.c\
 	src/gnome/splash.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
@@ -194,7 +195,6 @@ module.source.files=\
 	src/main/gs_bookmarks.c\
 	src/main/commentary.c\
 	src/main/dictlex.c\
-	src/main/gs_editor.c\
 	src/main/gbs.c\
 	src/main/gs_interlinear.c\
 	src/main/gs_getinfo_dlg.c\
@@ -221,6 +221,7 @@ module.source.files=\
 	src/main/spell.c\
 	src/main/spell_gui.c\
 	src/main/support.c
+
 
 module.pixmap.name=.
 module.pixmap.type=
@@ -280,7 +281,9 @@ module.doc.files=\
 module.po.expanded=0
 module.po.files=\
 	de.po\
-	sk.po
+	sk.po\
+	es.po\
+	es_ES.po
 
 compiler.options.supports=
 
