@@ -83,6 +83,7 @@ SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
+SWDisplay *UTF8Display;	/* to display modules in utf8 */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
@@ -214,6 +215,8 @@ initSWORD(GtkWidget *mainform)
 	FPNDisplay			= 0;
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
+	UTF8Display	= 0;
+	
 	biblemods = NULL;
 	commentarymods = NULL;
 	dictionarymods = NULL;
@@ -232,7 +235,7 @@ initSWORD(GtkWidget *mainform)
 	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
-
+	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
@@ -248,10 +251,12 @@ initSWORD(GtkWidget *mainform)
 			havebible = TRUE;
 			biblemods = g_list_append(biblemods,curMod->Name());
 			font = "roman";
-			addrenderfiltersSWORD(curMod, section);
-			curMod->Disp(HTMLchapDisplay);
-				
-
+			if(!strcmp(curMod->Name(), "LXX")) {
+				curMod->Disp(UTF8Display);
+			}else{
+				addrenderfiltersSWORD(curMod, section);
+				curMod->Disp(HTMLchapDisplay);
+			}
 	  			
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
