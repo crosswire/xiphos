@@ -108,7 +108,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 }
 
 //-----------------------------------------------------------------------------------------------
-char 
+char                                   //-- this will handle some of the GBF format
 GTKInterlinearDisp::Display(SWModule &imodule) 
 {
 	char tmpBuf[255];
@@ -292,7 +292,7 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 }
 
 //-----------------------------------------------------------------------------------------------
-char 
+char                                //-- this will handle some GBF format a chapter at a time
 GTKChapDisp::Display(SWModule &imodule) 
 {
 	char tmpBuf[255];
@@ -571,7 +571,7 @@ AboutModsDisplay(GtkWidget* text, gchar *aboutinfo) //-- to display Sword module
 		len = strlen(aboutinfo);  //-- set len to length of aboutinfo
 		while(i<len) //-- loop through string aboutinfo
 		{
-			if(aboutinfo[i] == '\\' && aboutinfo[i+1] =='p' && aboutinfo[i+2]=='a' && aboutinfo[i+3]=='r') //-- if we find \par replace with /n
+			if(aboutinfo[i] == '\\' && aboutinfo[i+1] =='p' && aboutinfo[i+2]=='a')//-- if we find \par replace with /n
    		{				
 				if(aboutinfo[i+4] == 'd') i=i+4; //-- fix our counter to jump over \pard
 				else i=i+3;		//-- fix our counter to jump over \par	
@@ -595,14 +595,14 @@ AboutModsDisplay(GtkWidget* text, gchar *aboutinfo) //-- to display Sword module
 	  	}
 		}
 		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	//-- incase there is no \par at end of info	
-		textBuf[0]='\0';	
+		textBuf[0]='\0';
 }
 
 
 /*
 //-------------------------------------------------------------------------------------------
 void
-BFTextVerse(char* key, GtkWidget* textWindow, SWModule *module)
+GBFTextVerse(char* key, GtkWidget* textWindow, SWModule *module)
 {
 
 	char tmpBuf[255];

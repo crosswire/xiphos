@@ -26,6 +26,7 @@
 #include "menustuff.h"
 #include "callback.h"
 #include "dialogs.h"
+#include "listeditor.h"
 
 //extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
 
