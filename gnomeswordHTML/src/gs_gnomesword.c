@@ -98,7 +98,7 @@ extern GtkWidget *htmlComments;
 extern GtkWidget *htmltext3;
 //gboolean firstbackclick = TRUE;
 extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved  */
-extern GList *cbBook_items;
+
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
@@ -148,7 +148,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 /* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
         loadbookmarks_programstart(); /* add bookmarks to menubar */
-        changeVerseSWORD(settings->currentverse); /* set Text */
+        //changeVerseSWORD(settings->currentverse); /* set Text */
 /* show hide shortcut bar - set to options setting */
 #if USE_SHORTCUTBAR
         if(settings->showshortcutbar){
@@ -238,7 +238,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         setupSidebar(app);
         fillSBtoolbars(app,biblemods , commentarymods, dictionarymods);
 #endif /* USE_SHORTCUTBAR */
-	gtk_combo_set_popdown_strings(GTK_COMBO(lookup_widget(app,"cbBook")), cbBook_items);
+
 /* free module lists */
         g_list_free(biblemods);
         g_list_free(commentarymods);
@@ -319,6 +319,7 @@ void UpdateChecks(GtkWidget *app)
         if(havedict) FillDictKeysSWORD();
         /* set Text - apply changes */
         addhistoryitem = FALSE;
+	
         changeVerseSWORD(settings->currentverse);
         //addHistoryItem(app, lookup_widget(app, "shortcut_bar"), settings->currentverse);
 }

@@ -196,7 +196,6 @@ initSWORD(GtkWidget *mainform)
 		*font;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
-  	VerseKey DefaultVSKey;
 	GString *s1;
 	
  	plaintohtml   	= new PLAINHTML(); /* sword renderfilter plain to html */
@@ -264,17 +263,8 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
-	/*** load Bible books ***/
-	DefaultVSKey = TOP;
-	cbBook_items = NULL;
-	while (!DefaultVSKey.Error()) {
-		s1 = g_string_new((const char *)DefaultVSKey);
-		s1 = g_string_truncate(s1, (s1->len - 4));
-		cbBook_items = g_list_append(cbBook_items, s1->str);
-		//g_warning(s1->str);
-		DefaultVSKey.Book(DefaultVSKey.Book() + 1);
-		g_string_free(s1,FALSE);
-	}
+
+	
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			curMod = (*it).second;
@@ -1616,3 +1606,21 @@ void addtoModList(SWModule *mod, GList *list)
 	g_list_append(list,(SWModule *)mod); 
 }
 
+
+GList *getBibleBooks(void)
+{	
+  	VerseKey DefaultVSKey;
+	GList *list = NULL;
+	GString *s1;
+		/*** load Bible books ***/
+	DefaultVSKey = TOP;	
+	while (!DefaultVSKey.Error()) {
+		s1 = g_string_new((const char *)DefaultVSKey);
+		s1 = g_string_truncate(s1, (s1->len - 4));
+		list = g_list_append(list, s1->str);
+		//g_warning(s1->str);
+		DefaultVSKey.Book(DefaultVSKey.Book() + 1);
+		g_string_free(s1,FALSE);
+	}
+	return list;	
+}
