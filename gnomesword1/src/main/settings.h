@@ -26,8 +26,6 @@
 extern "C" {
 #endif
 
-//#include <gtk/gtk.h>
-
 typedef struct _settings SETTINGS;
 struct _settings {
 	char	
@@ -42,7 +40,7 @@ struct _settings {
 	        *parallel4Module,	/* module to open at program startup  */
 	        *parallel5Module, /* module to open at program startup  */
 	        *personalcommentsmod,/* module to open at program startup  */
-		sb_search_mod[80], 	/* module to use for shortcut bar search */
+		sb_search_mod[80], 	/* module to use for sidebar search */
 	        *devotionalmod, 	/* module to use for devotional */
 	        *DefaultDict, 	/* module to use for devotional */
 		*lex_greek, /* module to use for greek lexicon - strongs or thayers*/
@@ -50,16 +48,16 @@ struct _settings {
 		*lex_greek_viewer, /* module to use for greek lexicon - strongs or thayers - in viewer */
 		*lex_hebrew_viewer, /* module to use for hebrew lexicon - strongs or BDB - in viewer */
 	        *currentverse,	/* verse to use at program startup */
-		comm_key[80],	/* verse to use at program startup */
-		*book_key,
+		comm_key[80],	/*  */
+		*book_key,     /*  */
 	        *cvparallel,	/* current verse for detached parallel */
 		*percomverse, /* current verse for personal comments */
 	        *dictkey,		/* dictionary key to use at program startup - the one we shut down with */
 	        *studypadfilename,   /* name of file in studypad when we closed */
 		*studypaddir,	    /* directory for studypad files */
-		groupName[50], /* ??? */
-		searchText[256], /* ??? */
-		findText[256],
+		groupName[50], /* shortcut bar group name (viewer, verse list) */
+		searchText[256], /* search string used by sidebar search */
+		findText[256],   /* string used by find dialog */
 		
 	/* fonts, font colors and font sizes */
 	        *bible_text_color, /* color for text */
@@ -77,16 +75,10 @@ struct _settings {
 		gs_width,
 		tmp_width,
 		gs_hight,	
-		notebook3page,	//-- notebook 3 page number
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
 		intCurVerse,    /* detached parallel current verse */
-		book_last_page,    /* last notebook page before change */
-		dict_last_page,     /* last notebook page before change */
-		comm_last_page,     /* last notebook page before change */
-		text_last_page,     /* last notebook page before change */
-		percomm_last_page,  /* last notebook page before change */
 		parallel_page,   /* parallel workbook page number */
 		studypad_page,   /* studypad workbook page number */
 		percomm_page;   /* percomm editor workbook page number */

@@ -63,9 +63,6 @@ void gui_display_hint_in_viewer(gchar * text)
 
 	str = g_string_new("");
 	if (hint.use_hints) {
-
-		sprintf(settings.groupName, "%s", "Viewer");
-
 		html = GTK_HTML(sidebar.html_viewer_widget);
 		htmlstream =
 		    gtk_html_begin_content(html,
@@ -235,8 +232,4 @@ void gui_open_hint_viewer(void)
 				    (sidebar.optionmenu1), 4);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      4);
-/*	gtk_notebook_set_page(GTK_NOTEBOOK(
-			sv->notebook), 2);
-	sprintf(settings.groupName, "%s", "Viewer");
-	gui_show_sb_verseList();*/
 }

@@ -975,7 +975,7 @@ void gui_swap_parallel_with_main(char *intmod)
 {
 	char *modname;
 
-	modname = xml_get_value("modules", "text");	//settings.MainWindowModule;
+	modname = xml_get_value("modules", "bible");	//settings.MainWindowModule;
 	if (!strcmp(settings.parallel5Module, intmod)) {
 		settings.parallel5Module = modname;
 	}
