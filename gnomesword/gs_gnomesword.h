@@ -26,6 +26,8 @@
 extern "C" {
 #endif
 
+
+//#include <gtkhtml/gtkhtml.h>
 #include "gs_sword.h"
 	
 #if USE_SHORTCUTBAR	
@@ -116,6 +118,7 @@ void fillSBtoolbars(GtkWidget *app,
 		GList *commentarylist,
 		GList *dictionarylist);
 void setupSidebar(GtkWidget *app);
+
 
 #ifdef __cplusplus
 }

@@ -198,6 +198,33 @@ if test "x$shortcutbar" = xyes || test "x$all" = xyes; then
     AC_MSG_RESULT(Did not find GnomeAppLib (GAL) installed)
  fi
 fi
+dnl ******************************
+dnl GtkHTML checking
+dnl ******************************
+
+AC_MSG_CHECKING(for GtkHTML)
+if gnome-config --libs gtkhtml > /dev/null 2>&1; then
+	vers=`gnome-config --modversion gtkhtml`
+	case $vers
+	in
+	    gtkhtml-0.[012345678]) gtkhtml_ok=false ;;
+	    *) gtkhtml_ok=true ;;
+	esac
+else
+	gtkhtml_ok=false
+fi
+
+if $gtkhtml_ok; then
+	AC_MSG_RESULT($vers found)
+	GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
+	GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
+	AC_SUBST(GTKHTML_CFLAGS)
+	AC_SUBST(GTKHTML_LIBS)
+        AC_DEFINE(USE_GTKHTML, 1, [Define if you want to use the GtkHTML])
+else
+	AC_MSG_ERROR(GtkHTML 0.8 is required to build gnomesword with GtkHtml)
+fi
+
 
 
 dnl Subst PACKAGE_PIXMAPS_DIR.
@@ -211,8 +238,8 @@ AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
 
-EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
-EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+EXTRA_GNOME_LIBS="`gnome-config --libs libglade gtkhtml gnomeui` $THREADS_LIBS `unicode-config --libs`"
+EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
 AC_SUBST(EXTRA_GNOME_LIBS)
 AC_SUBST(EXTRA_GNOME_CFLAGS)
 

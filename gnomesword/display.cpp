@@ -44,6 +44,7 @@
 #include "support.h"
 #include "interface.h"
 #include "gs_sword.h"
+#include "gs_html.h"
 
 GdkColor GTKEntryDisp::colourBlue;
 GdkColor GTKEntryDisp::colourGreen;
@@ -71,23 +72,158 @@ extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
 extern bool bVerseStyle;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
-
+extern SWModule *comp1Mod;
+extern gchar *current_verse;
 /* --------------------------------------------------------------------------------------------- */
 char
- GTKEntryDisp::Display(SWModule & imodule)
+ ComEntryDisp::Display(SWModule & imodule)
+{
+	gchar tmpBuf[255], *font;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+        GString *strbuf;
+
+	font = "Roman";
+	if ((sit = mainMgr1->config->Sections.find(imodule.Name())) !=
+	    mainMgr1->config->Sections.end()) {
+		if ((eit = (*sit).second.find("Font")) !=
+		    (*sit).second.end()) {
+			font = (char *) (*eit).second.c_str();
+		}
+	} 	
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbCom")), 0);
+	(const char *) imodule;	/* snap to entry */
+	strbuf = g_string_new( "<B><FONT COLOR=\"#000FCF\">" );
+	sprintf(tmpBuf,"[%s][%s] </b>",imodule.Name(), imodule.KeyText());
+	strbuf = g_string_append( strbuf,tmpBuf);	
+	/* show verse ref in text widget  */
+	/* show module text for current key */
+	beginHTML(GTK_WIDGET(gtkText));
+	displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len );
+	g_string_free( strbuf,TRUE);
+	if(!strcmp(font,"Symbol")) {
+		strbuf = g_string_new( "<FONT FACE=\"symbol\">" );
+	     	strbuf = g_string_append( strbuf,(const char *) imodule);
+             	strbuf = g_string_append( strbuf,"</font>");
+	     	displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);				
+              	g_string_free( strbuf,TRUE);
+	} else if (!strcmp(font,"Greek")) {
+	      	strbuf = g_string_new( "<FONT FACE=\"greek\">" );
+	     	strbuf = g_string_append( strbuf,(const char *) imodule);
+             	strbuf = g_string_append( strbuf,"</font>");
+	     	displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);				
+              	g_string_free( strbuf,TRUE);
+	} else {
+		strbuf = g_string_new( (const char *) imodule );
+		displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);
+		g_string_free( strbuf,TRUE);
+	}
+	endHTML(GTK_WIDGET(gtkText));
+	
+
+}
+
+/* ----------------------------------------------------------------------------------------- */
+char GTKhtmlChapDisp::Display(SWModule & imodule)
+{
+	char tmpBuf[500],
+		*buf,
+		*font;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+	GString *strbuf;
+	VerseKey *key = (VerseKey *) (SWKey *) imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curPos = 0;
+	gint len;
+	
+	
+	font = "Roman";
+	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
+	    mainMgr->config->Sections.end()) {
+		if ((eit = (*sit).second.find("Font")) !=
+		    (*sit).second.end()) {
+			font = (char *) (*eit).second.c_str();
+		}
+	}
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbText")), 1);
+			      	
+			      
+	beginHTML(GTK_WIDGET(gtkText));
+	strbuf = g_string_new( "<HTML><BODY>" );
+	displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);	
+	g_string_free( strbuf,TRUE);
+	
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error());
+				imodule++) {
+		/* verse number */
+		strbuf = g_string_new( "" );
+		g_string_sprintf(strbuf,"<A HREF=\"%s\" NAME=\"%d\"><B>%d</B></A> ",
+				imodule.KeyText(), key->Verse(), key->Verse());
+		displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
+		g_string_free( strbuf,TRUE);				
+		if (key->Verse() == curVerse) {
+			if(!strcmp(font,"Symbol")){
+			        strbuf = g_string_new("<FONT COLOR=\"#000FCF\" FACE=\"symbol\">"); 			        	
+			} else {
+				strbuf = g_string_new("<FONT COLOR=\"#000FCF\" >");
+			}
+			strbuf = g_string_append( strbuf,(const char *) imodule);
+			strbuf = g_string_append( strbuf,"</font><br>" );			
+			displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
+			g_string_free( strbuf,TRUE);			
+		} else {
+		        if(!strcmp(font,"Symbol")){
+			        strbuf = g_string_new("<FONT FACE=\"symbol\">");
+			        strbuf = g_string_append( strbuf, (const char *) imodule );
+			        if (bVerseStyle) strbuf = g_string_append( strbuf,"</font><br>" );
+			        else  g_string_append( strbuf,"</font>" );			        	
+			} else {
+		                strbuf = g_string_new( (const char *) imodule );
+		                if (bVerseStyle) strbuf = strbuf = g_string_append( strbuf,"<br>" ); 		
+		        }  						
+			displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
+			g_string_free( strbuf,TRUE);
+		}
+	}
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse); 	
+	strbuf = g_string_new( "</body></html>" );		
+	displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
+	g_string_free( strbuf,TRUE);
+	sprintf(tmpBuf,"%d",curVerse);
+	endHTML(GTK_WIDGET(gtkText));
+	gotoanchorHTML(tmpBuf);	
+	return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+char GTKEntryDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[255], *sourceType;
 	GdkFont *sword_font;
 	ModMap::iterator it;
+
 
 	/* Load a  font */
 	sword_font =
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
 
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbCom")), 1);
+
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
 	gtk_text_forward_delete(GTK_TEXT(gtkText),
 				gtk_text_get_length((GTK_TEXT(gtkText))));
+
 	int curPos = 0;
 	(const char *) imodule;	/* snap to entry */
 	gtk_text_freeze(GTK_TEXT(gtkText));
@@ -103,6 +239,7 @@ char
 			(const char *) imodule, -1);
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -127,8 +264,8 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	/* let's find out if we have a comment or dict module */
 	it = mainMgr->Modules.find(imodule.Name());
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* else just the keytext */
-	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == 
-	   "RawFiles") && /* check for personal comments by finding ModDrv=RawFiles */
+	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).
+	     second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
 	    (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)) {	/* check for edit mode */
 		GtkWidget *statusbar;	/* pointer to comments statusbar */
 		gint context_id2;	/* statusbar context_id ??? */
@@ -136,8 +273,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 		/* setup statusbar for personal comments */
 		statusbar = lookup_widget(MainFrm, "sbNotes");	/*        get stutusbar */
 		context_id2 =
-		    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-						 "GnomeSword");	/* get context id */
+		    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");	/* get context id */
 		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	/* ready status */
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);	/* show modName and verse ref in statusbar */
 		gtk_text_insert(GTK_TEXT(gtkText), sword_font,
@@ -161,7 +297,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 
 /* --------------------------------------------------------------------------------------------- */
 /* this will handle some of the GBF format */
-char  GTKInterlinearDisp::Display(SWModule & imodule)
+char GTKInterlinearDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[800];
 	GdkFont *sword_font, *greek_font;
@@ -208,11 +344,12 @@ char  GTKInterlinearDisp::Display(SWModule & imodule)
 	if (!strcmp(font, "Symbol")) {
 		greek = TRUE;
 		sword_font = greek_font;
-	} else if(!strcmp(font, "Greek")) {
-	        sword_font =  gdk_font_load
-	        ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
-	        if(sword_font == NULL) sword_font = greek_font;
-	        greek = TRUE;
+	} else if (!strcmp(font, "Greek")) {
+		sword_font = gdk_font_load
+		    ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
+		if (sword_font == NULL)
+			sword_font = greek_font;
+		greek = TRUE;
 	} else {
 		sword_font = roman_font;
 		greek = FALSE;
@@ -367,219 +504,6 @@ char  GTKInterlinearDisp::Display(SWModule & imodule)
 	gtk_text_thaw(GTK_TEXT(gtkText));
 }
 
-/* --------------------------------------------------------------------------------------------- */
-/* this will handle  Robertson's Word Pictures in the New Testament (RWP) format????????? */
-char GTKRWPDisp::Display(SWModule & imodule)
-{
-	GdkFont *sword_font,	/* pointers to fonts */
-	*greek_font;
-	gchar *myname;
-	bool italics_on = FALSE,	/* boolean switches */
-	 greek_on = false, bold_on = false, first_time =
-	    true, first_letter = true;
-	char *verseBuf,		/* work strings */
-	 tmpBuf[800], buf[800];
-	char *myverse,		/* pointers to strings */
-	*font;
-	int i, j, len;		/* integer vars */
-        bool greek2_on = false;
-	/* Load a italic font */
-	
-	italic_font =
-	    gdk_font_load
-	    ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
-	/* Load a bold font */
-	bold_font =
-	    gdk_font_load
-	    ("-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1");
-	/* Load a roman font */
-	roman_font = gdk_font_load(font_interlinear);
-	/* Load a verse number font */
-	versenum_font =
-	    gdk_font_load
-	    ("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-	/* Load a greek font */
-	greek_font =
-	    gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-	    //gdk_font_load ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
-	/* prepare text widget  */
-	gtk_text_set_point(GTK_TEXT(gtkText), 0);	/* set position to begining of text */
-	gtk_text_forward_delete(GTK_TEXT(gtkText),
-				gtk_text_get_length((GTK_TEXT(gtkText))));	/* clear to end of text */
-	gtk_text_freeze(GTK_TEXT(gtkText));	/* to pervent flicker and movement */
-
-	(const char *) imodule;	/*  snap to entry */
-
-	i = j = 0;		/* set counters to 0 - i is counter for myverse[] - j is counter for verseBuf */
-
-	myverse = g_strdup((const char *) imodule);	/* get string from sword module */
-	len = strlen(myverse);	/* get length of string */
-	verseBuf = new char[len + 1];	/* init a string the size of myverse */
-	verseBuf[0] = '\0';
-	while (i < len) {	/* loop until we reach the end of the text string   */
-		if (myverse[i] == 32 || myverse[i] == '\\')
-			first_letter = true;	/* we need to know if we have a space or a backslash -- first letter of a word follows */
-		if (myverse[i] == '{') {	/* remove the open curly bracket ({)  */
-			++i;	/* increment i to revome the { */
-			if (first_time) {	/* this is the first line to go to the text widget - we don't want any line feed here */
-				sprintf(tmpBuf, "%s", verseBuf);
-				first_time = false;
-			} else {	/* else add two line feeds to seperate sections of text */
-
-				sprintf(tmpBuf, "%s\n\n", verseBuf);
-			}
-			gtk_text_insert(GTK_TEXT(gtkText), roman_font,
-					&gtkText->style->black, NULL,
-					tmpBuf, -1);	/* print what is in the buffer  so we can bold the what follows (text between {}) */
-			j = 0;	/* set verseBuf counter to 0 */
-			verseBuf[0] = '\0';	/* empty verseBuf  */
-			bold_on = true;
-		}
-		if (myverse[i] == '}') {	/* remove the close curly bracket (}) and print bold text */
-			++i;	/* increment i to revome the } */
-			gtk_text_insert(GTK_TEXT(gtkText), bold_font,
-					&gtkText->style->black, NULL,
-					verseBuf, -1);	/* print what is in the buffer */
-			j = 0;	/* set verseBuf counter to 0 */
-			verseBuf[0] = '\0';	/* empty verseBuf  */
-			bold_on = false;	/* turn bold font off */
-		}
-		if (myverse[i] == '\\') {	/* remove first backslash and turn greek font on */
-			if (!greek_on) {	/* we don't want to be here is greek is already on */
-				++i;	/* increment i to remove the backslash */
-				gtk_text_insert(GTK_TEXT(gtkText),
-						roman_font,
-						&gtkText->style->black, NULL, verseBuf, -1);	/* print what is in the buffer so we can use greek font */
-				j = 0;	/* set verseBuf counter to 0 */
-				verseBuf[0] = '\0';	/* empty verseBuf  */
-				greek_on = TRUE;
-			}
-		}
-		if (myverse[i] == '\\') {	/* remove secound backslash and turn greek font off */
-			if (greek_on) {	/* only go here is greek is on */
-				++i;	/* increment i to remove the backslash */
-				gtk_text_insert(GTK_TEXT(gtkText),
-						greek_font,
-						&gtkText->style->black,
-						NULL, verseBuf, -1);
-				j = 0;	/* set verseBuf counter to 0; */
-				verseBuf[0] = '\0';	/* empty verseBuf */
-				greek_on = FALSE;	/* turn greet font off */
-			}
-		}
-		if (greek_on) {	/* if greek is on let's try to replace characters that don't print right with the symbol font with some that will */
-			/*gchar buftext[80];                            
-			   sprintf(buftext,"%3.3d\n",myverse[i]);
-			   cout << buftext;  */
-			if (myverse[i] == 't' && myverse[i + 1] == 'h') {	/* replace th with q (theta) */
-				++i;
-				myverse[i] = 'q';
-			}
-			if (myverse[i] == 's') {	/* end of word s with V *//* sigma with end of word sigma */
-				if (myverse[i + 1] == ' '
-				    || myverse[i + 1] == ')'
-				    || myverse[i + 1] == '\\')
-					myverse[i] = 'V';
-			}
-			if (myverse[i] == 'c' && myverse[i + 1] == 'h') {	/* ch with c (chi) */
-				++i;
-				myverse[i] = 'c';
-			}
-			if (myverse[i] == 'p' && myverse[i + 1] == 'h') {	/* ph with f (phi) */
-				++i;
-				myverse[i] = 'f';
-			}
-			if (myverse[i] == 39) {	/* skip ' (39)  - i don't know what this is */
-				++i;
-			}
-			if (myverse[i] == -120) {	/* replace nonprintable with h (eta) */
-				if (myverse[i + 1] == 'i')
-					++i;
-				myverse[i] = 'h';
-			}
-			if (myverse[i] == -125) {	/* replace nonprintable with a (alpha) */
-				if (myverse[i + 1] == 'i')
-					++i;
-				myverse[i] = 'a';
-			}
-			if (myverse[i] == -109) {	/* replace nonprintable with w (omega) */
-				if (myverse[i + 1] == 'i')
-					++i;
-				myverse[i] = 'w';
-			}
-			if (first_letter) {	/* if first letter of greek word -- if a vowel we must remove the h 
-						   which i guess to be a rough breathing 
-						   we can not show this with the symbol font so we remove it */
-				if (myverse[i] == 'h'
-				    && myverse[i + 1] == 'o') {
-					++i;
-					first_letter = false;
-				}
-				if (myverse[i] == 'h'
-				    && myverse[i + 1] == 'a') {
-					++i;
-					first_letter = false;
-				}
-				if (myverse[i] == 'h'
-				    && myverse[i + 1] == 'w') {
-					++i;
-					first_letter = false;
-				}
-				if (myverse[i] == 'h'
-				    && myverse[i + 1] == 'u') {
-					++i;
-					first_letter = false;
-				}
-				if (myverse[i] == 'h'
-				    && myverse[i + 1] == -120) {
-					++i;
-					myverse[i] = 'h';
-					first_letter = false;
-				}
-				if (myverse[i] == 'h'
-				    && myverse[i + 1] == 'i') {
-					++i;
-					first_letter = false;
-				}
-			}
-		}
-		if (myverse[i] == '#') {	/* remove # and start reference and red font */
-			++i;	/* remove # */
-			gtk_text_insert(GTK_TEXT(gtkText), roman_font,
-					&gtkText->style->black, NULL,
-					verseBuf, -1);	/* print current buffer and start new for reference */
-			j = 0;
-			verseBuf[0] = '\0';
-		}
-		if (myverse[i] == '|') {	/* remove | and end reference and red font */
-			++i;	/* remove # */
-			gtk_text_insert(GTK_TEXT(gtkText), roman_font,
-					&colourRed, NULL, verseBuf, -1);	/* show ref */
-			j = 0;
-			verseBuf[0] = '\0';
-		}
-		verseBuf[j] = myverse[i];	/* move current char form myverse to verseBuf */
-		++i;
-		verseBuf[j + 1] = '\0';	/* put null at end of verseBuf */
-		++j;
-	}
-	/* lets print what ever is left  */
-	if (greek_on)
-		sword_font = greek_font;
-	else if (bold_on)
-		sword_font = bold_font;
-	else
-		sword_font = roman_font;
-	gtk_text_insert(GTK_TEXT(gtkText), sword_font,
-			&gtkText->style->black, NULL, verseBuf, -1);
-	delete[]verseBuf;
-	verseBuf = NULL;
-	g_free(myverse);
-	/* finish with the text widget */
-	gtk_text_set_point(GTK_TEXT(gtkText), 0);
-	gtk_text_thaw(GTK_TEXT(gtkText));
-}
-
 /* ----------------------------------------------------------------------------------------- */
 char GTKChapDisp::Display(SWModule & imodule)
 {
@@ -631,20 +555,20 @@ char GTKChapDisp::Display(SWModule & imodule)
 
 /* --------------------------------------------------------------------------------------------- */
 /* this will handle some of the html formatting */
-char  HTMLentryDisp::Display(SWModule & imodule)
+char HTMLentryDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[256];
 	GdkFont *sword_font, *greek_font, *foreign_font;
 	gchar *myname;
-	bool greek, greek_on, findclose, italics_on = FALSE, scriptureref=FALSE,
-		fontsize=FALSE;
+	bool greek, greek_on, findclose, italics_on = FALSE, scriptureref =
+	    FALSE, fontsize = FALSE;
 	gchar *verseBuf, *buf, *myverse, *font, *sourceType, tag[256];
 	int i, j, len, taglen;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
-	
+
 	font = "Roman";
-	
+
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
@@ -669,19 +593,19 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	versenum_font =
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-	/* Load a greek font  (symbol)*/
+	/* Load a greek font  (symbol) */
 	greek_font =
 	    gdk_font_load
 	    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-	 	    	
+
 	if (!strcmp(font, "Symbol")) {
 		greek_on = true;
 	} else if (!strcmp(font, "Greek")) {
 		greek_on = true;
 	} else {
 		greek_on = false;
-	}	
-	
+	}
+
 	sword_font = roman_font;
 	findclose = FALSE;
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
@@ -692,11 +616,7 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	gtk_text_freeze(GTK_TEXT(gtkText));
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());
 	gtk_text_insert(GTK_TEXT(gtkText),
-			NULL,
-			&colourBlue,
-			NULL,
-			tmpBuf,
-			-1);
+			NULL, &colourBlue, NULL, tmpBuf, -1);
 	i = j = 0;
 	len = strlen((const char *) imodule);
 	myverse = new char[len + 1];
@@ -704,13 +624,14 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	verseBuf = new char[len + 1];
 	verseBuf[0] = '\0';
 	if ((!strcmp(imodule.Name(), "TFG"))
-	    && (!strcmp(imodule.KeyText(), "Romans 1:1"))) { /* gnomeswrod will crash in TFG mod at Rom 1:1 */
+	    && (!strcmp(imodule.KeyText(), "Romans 1:1"))) {	/* gnomeswrod will crash in TFG mod at Rom 1:1 */
 		sprintf(myverse, "%s", " ");
 	} else {
 		sprintf(myverse, "%s", (const char *) imodule);
-		if(greek_on) {
+		if (greek_on) {
 			gtk_text_insert(GTK_TEXT(gtkText), greek_font,
-			&gtkText->style->black, NULL, myverse, -1);
+					&gtkText->style->black, NULL,
+					myverse, -1);
 			delete[]verseBuf;
 			verseBuf = NULL;
 			delete[]myverse;
@@ -718,13 +639,15 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 			gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 			gtk_text_thaw(GTK_TEXT(gtkText));
 			return 't';
-		}		
+		}
 	}
 	while (i < len) {
-		if(myverse[i] == '\n') myverse[i] = ' ';
-		if((myverse[i] == '&') &&  (myverse[i+1] == 'n') && (myverse[i+2] == 'b') && (myverse[i+3] == 's') && 
-			(myverse[i+4] == 'p')  && (myverse[i+5] == ';')) {
-			i = i+6;		
+		if (myverse[i] == '\n')
+			myverse[i] = ' ';
+		if ((myverse[i] == '&') && (myverse[i + 1] == 'n')
+		    && (myverse[i + 2] == 'b') && (myverse[i + 3] == 's')
+		    && (myverse[i + 4] == 'p') && (myverse[i + 5] == ';')) {
+			i = i + 6;
 		}
 		//g_warning("%c",myverse[i]);
 		if (myverse[i] == '<') {
@@ -732,14 +655,15 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 			taglen = gettags(myverse, tag, i);	/* get html tags */
 			i = i + taglen;	/* remove tags (we do not want to see them) */
 			/* italic */
-			if (!strcmp(tag, "<I>") || !strcmp(tag, "<TR><TD><FONT SIZE=+1><I>")) {
+			if (!strcmp(tag, "<I>")
+			    || !strcmp(tag, "<TR><TD><FONT SIZE=+1><I>")) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strncmp(tag, "</I>",4)) {
+			} else if (!strncmp(tag, "</I>", 4)) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						italic_font,
 						&gtkText->style->black,
@@ -762,7 +686,8 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if ((!strncmp(tag, "<A HREF", 6)) || (!strncmp(tag,"<SCRIPREF",9))) {	/*  reference */
+			} else if ((!strncmp(tag, "<A HREF", 6))
+				   || (!strncmp(tag, "<SCRIPREF", 9))) {	/*  reference */
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
 						&gtkText->style->black,
@@ -770,19 +695,23 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 				scriptureref = TRUE;
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if ((!strcmp(tag, "</A>")) || (!strcmp(tag, "</SCRIPREF>"))) { /*  end reference */
+			} else if ((!strcmp(tag, "</A>"))
+				   || (!strcmp(tag, "</SCRIPREF>"))) {	/*  end reference */
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font, &colourRed,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
 				scriptureref = FALSE;
-			} else if (!strncmp(tag, "<TD ALIGN=RIGHT><FONT SIZE=",26)) {
+			} else
+			    if (!strncmp
+				(tag, "<TD ALIGN=RIGHT><FONT SIZE=", 26)) {
 				fontsize = TRUE;
-			} else if (!strncmp(tag, "<TR><TD><FONT SIZE=",18)) {
+			} else
+			    if (!strncmp(tag, "<TR><TD><FONT SIZE=", 18)) {
 				fontsize = TRUE;
-			} else if (!strncmp(tag, "<FONT SIZE=",10)) {
-				fontsize = TRUE;							
+			} else if (!strncmp(tag, "<FONT SIZE=", 10)) {
+				fontsize = TRUE;
 			} else if (!strcmp(tag, "<FONT FACE=\"SYMBOL\">")) {	/*  greek */
 				foreign_font = greek_font;
 				gtk_text_insert(GTK_TEXT(gtkText),
@@ -793,22 +722,23 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 				verseBuf[0] = '\0';
 				fontsize = FALSE;
 			} else if (!strcmp(tag, "</FONT>")) {
-				if(!fontsize) {
+				if (!fontsize) {
 					gtk_text_insert(GTK_TEXT(gtkText),
-						foreign_font,
-						&gtkText->style->black,
-						NULL, verseBuf, -1);
-					verseBuf[0] = '\0'; 				
-				        //fontsize = TRUE;	
-					
-				}  /*else {
-				        gtk_text_insert(GTK_TEXT(gtkText),
-						roman_font,
-						&gtkText->style->black,
-						NULL, verseBuf, -1); 				
-				}  */
+							foreign_font,
+							&gtkText->style->
+							black, NULL,
+							verseBuf, -1);
+					verseBuf[0] = '\0';
+					//fontsize = TRUE;      
+
+				}	/*else {
+					   gtk_text_insert(GTK_TEXT(gtkText),
+					   roman_font,
+					   &gtkText->style->black,
+					   NULL, verseBuf, -1);                          
+					   }  */
 				//j = 0;
-				//verseBuf[0] = '\0'; 				
+				//verseBuf[0] = '\0';                           
 				fontsize = TRUE;
 			} else if (!strcmp(tag, "<B>")) {	/*  bold */
 				gtk_text_insert(GTK_TEXT(gtkText),
@@ -825,7 +755,9 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 				j = 0;
 				verseBuf[0] = '\0';
 			} else if (!strcmp(tag, "<BR>")
-				   || !strcmp(tag, "<BR><B>") || !strcmp(tag, "<P>") || !strcmp(tag, "</P>")) {	/* new line */
+				   || !strcmp(tag, "<BR><B>")
+				   || !strcmp(tag, "<P>")
+				   || !strcmp(tag, "</P>")) {	/* new line */
 				--i;
 				myverse[i] = '\n';
 			}
@@ -847,7 +779,7 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 
 /* --------------------------------------------------------------------------------------------- */
 /* this will handle some html format a chapter at a time */
-char  HTMLChapDisp::Display(SWModule & imodule)
+char HTMLChapDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[255];
 	char *verseBuf, tag[255];
@@ -855,8 +787,7 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 	int i, j, taglen;
 	bool greek_on = FALSE,
 	    italics_on = FALSE,
-	    poetry_on = FALSE, Fo_on = false, cite_on =
-	    false;
+	    poetry_on = FALSE, Fo_on = false, cite_on = false;
 	GdkFont *sword_font, *greek_font, *fo_font, *fo_italic_font,
 	    *cite_font, *cite_italic_font;;
 	ModMap::iterator it;
@@ -864,7 +795,7 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 	ConfigEntMap::iterator eit;
 
 	font = "Roman";
-	
+
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
 		if ((eit = (*sit).second.find("Font")) !=
@@ -903,16 +834,17 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 		versenum_font =
 		    gdk_font_load
 		    ("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
-	/* Load a greek font if needed*/   	
+	/* Load a greek font if needed */
 	if (!strcmp(font, "Symbol")) {
-		sword_font =  gdk_font_load
-	        ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
+		sword_font = gdk_font_load
+		    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 		greek_on = true;
 	} else if (!strcmp(font, "Greek")) {
 		sword_font = gdk_font_load
-	        ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
-	        if(sword_font == NULL) sword_font =  gdk_font_load
-	                                ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
+		    ("--greek-medium-r-normal-*-*-140-*-*-p-*-unknown-unknown");
+		if (sword_font == NULL)
+			sword_font = gdk_font_load
+			    ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 		greek_on = true;
 	} else {
 		sword_font = roman_font;
@@ -942,12 +874,12 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 				adjVal = GTK_TEXT(gtkText)->vadj->upper;
 				curPos =
 				    gtk_text_get_length(GTK_TEXT(gtkText));
-				gtk_text_freeze(GTK_TEXT(gtkText));    // GDB    
+				gtk_text_freeze(GTK_TEXT(gtkText));	// GDB    
 				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font, &myGreen, NULL,
 						(const char *) imodule,
 						-1);
-// GDB  		  gtk_text_freeze(GTK_TEXT(gtkText));
+// GDB                    gtk_text_freeze(GTK_TEXT(gtkText));
 			} else
 				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font,
@@ -984,7 +916,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     roman_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1012,7 +946,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     fo_italic_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1035,7 +971,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     roman_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1063,7 +1001,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     fo_italic_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1086,7 +1026,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     roman_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1111,7 +1053,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     roman_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1135,7 +1079,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     fo_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1160,7 +1106,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     roman_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1195,7 +1143,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     cite_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
@@ -1224,23 +1174,26 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 						    if (!strcmp(tag, "<I>")) {	/* italic */
 							if (Fo_on) {
 								if
-								    (key->Verse
-								     () ==
+								    (key->
+								    Verse()
+								     ==
 								     curVerse)
-									    gtk_text_insert
-									    (GTK_TEXT
-									     (gtkText),
-									     fo_font,
-									     &myGreen,
-									     NULL,
-									     verseBuf,
-									     -1);
+									 gtk_text_insert
+								      (GTK_TEXT
+								       (gtkText),
+								       fo_font,
+								       &myGreen,
+								       NULL,
+								       verseBuf,
+								       -1);
 								else
 									gtk_text_insert
 									    (GTK_TEXT
 									     (gtkText),
 									     fo_font,
-									     &gtkText->style->black,
+									     &gtkText->
+									     style->
+									     black,
 									     NULL,
 									     verseBuf,
 									     -1);
@@ -1249,29 +1202,34 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     cite_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
 							} else {
 								if
-								    (key->Verse
-								     () ==
+								    (key->
+								    Verse()
+								     ==
 								     curVerse)
-									    gtk_text_insert
-									    (GTK_TEXT
-									     (gtkText),
-									     roman_font,
-									     &myGreen,
-									     NULL,
-									     verseBuf,
-									     -1);
+									 gtk_text_insert
+								      (GTK_TEXT
+								       (gtkText),
+								       roman_font,
+								       &myGreen,
+								       NULL,
+								       verseBuf,
+								       -1);
 								else
 									gtk_text_insert
 									    (GTK_TEXT
 									     (gtkText),
 									     roman_font,
-									     &gtkText->style->black,
+									     &gtkText->
+									     style->
+									     black,
 									     NULL,
 									     verseBuf,
 									     -1);
@@ -1283,23 +1241,26 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 						    if (!strcmp(tag, "</I>")) {	/* end italic */
 							if (Fo_on) {
 								if
-								    (key->Verse
-								     () ==
+								    (key->
+								    Verse()
+								     ==
 								     curVerse)
-									    gtk_text_insert
-									    (GTK_TEXT
-									     (gtkText),
-									     fo_italic_font,
-									     &myGreen,
-									     NULL,
-									     verseBuf,
-									     -1);
+									 gtk_text_insert
+								      (GTK_TEXT
+								       (gtkText),
+								       fo_italic_font,
+								       &myGreen,
+								       NULL,
+								       verseBuf,
+								       -1);
 								else
 									gtk_text_insert
 									    (GTK_TEXT
 									     (gtkText),
 									     fo_italic_font,
-									     &gtkText->style->black,
+									     &gtkText->
+									     style->
+									     black,
 									     NULL,
 									     verseBuf,
 									     -1);
@@ -1308,29 +1269,34 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     cite_italic_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
 								     -1);
 							} else {
 								if
-								    (key->Verse
-								     () ==
+								    (key->
+								    Verse()
+								     ==
 								     curVerse)
-									    gtk_text_insert
-									    (GTK_TEXT
-									     (gtkText),
-									     italic_font,
-									     &myGreen,
-									     NULL,
-									     verseBuf,
-									     -1);
+									 gtk_text_insert
+								      (GTK_TEXT
+								       (gtkText),
+								       italic_font,
+								       &myGreen,
+								       NULL,
+								       verseBuf,
+								       -1);
 								else
 									gtk_text_insert
 									    (GTK_TEXT
 									     (gtkText),
 									     italic_font,
-									     &gtkText->style->black,
+									     &gtkText->
+									     style->
+									     black,
 									     NULL,
 									     verseBuf,
 									     -1);
@@ -1344,8 +1310,9 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 							    (GTK_TEXT
 							     (gtkText),
 							     roman_font,
-							     &gtkText->style->
-							     black, NULL,
+							     &gtkText->
+							     style->black,
+							     NULL,
 							     verseBuf, -1);
 							j = 0;
 							verseBuf[0] = '\0';
@@ -1355,14 +1322,15 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 							    (GTK_TEXT
 							     (gtkText),
 							     bold_font,
-							     &gtkText->style->
-							     black, NULL,
+							     &gtkText->
+							     style->black,
+							     NULL,
 							     verseBuf, -1);
 							j = 0;
 							verseBuf[0] = '\0';
 						} else
-						    	if (!strcmp(tag, "<FONT COLOR=\"#800000\">")) {	/* foot note color  */ 						    	
-						    	if (key->Verse() ==
+						    if (!strcmp(tag, "<FONT COLOR=\"#800000\">")) {	/* foot note color  */
+							if (key->Verse() ==
 							    curVerse)
 								    gtk_text_insert
 								    (GTK_TEXT
@@ -1377,19 +1345,23 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 								    (GTK_TEXT
 								     (gtkText),
 								     roman_font,
-								     &gtkText->style->black,
+								     &gtkText->
+								     style->
+								     black,
 								     NULL,
 								     verseBuf,
-								     -1);						    	
+								     -1);
 							j = 0;
 							verseBuf[0] = '\0';
 						} else
-						    if (!strcmp(tag, "</FONT>")) {	/* end foot note color */ 						
-								gtk_text_insert(GTK_TEXT(gtkText),
-								cite_font,
-							     	&colourBlue,
-							     	NULL,
-							     	verseBuf, -1);
+						    if (!strcmp(tag, "</FONT>")) {	/* end foot note color */
+							gtk_text_insert
+							    (GTK_TEXT
+							     (gtkText),
+							     cite_font,
+							     &colourBlue,
+							     NULL,
+							     verseBuf, -1);
 							j = 0;
 							verseBuf[0] = '\0';
 						} else
@@ -1418,11 +1390,11 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 				adjVal = GTK_TEXT(gtkText)->vadj->upper;
 				curPos =
 				    gtk_text_get_length(GTK_TEXT(gtkText));
-				gtk_text_freeze(GTK_TEXT(gtkText));  // GDB    
-				gtk_text_insert(GTK_TEXT(gtkText),				
+				gtk_text_freeze(GTK_TEXT(gtkText));	// GDB    
+				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font, &myGreen, NULL,
 						verseBuf, -1);
-// GDB			    gtk_text_freeze(GTK_TEXT(gtkText));
+// GDB                      gtk_text_freeze(GTK_TEXT(gtkText));
 			} else {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font,
@@ -1461,7 +1433,7 @@ gint GTKEntryDisp::gettags(gchar * text, gchar * tag, gint pos)
 	len = strlen(text);
 	tag[0] = '\0';
 	for (i = pos; i < len; i++) {
-		if(isalpha(text[i])) {
+		if (isalpha(text[i])) {
 			tag[j] = toupper(text[i]); /*** make all tags upper case ***/
 		} else {
 			tag[j] = text[i];
@@ -1522,4 +1494,66 @@ void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo)
 	gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	/* incase there is no \par at end of info */
 	delete[]textBuf;
 	textBuf = NULL;
+}
+/* --------------------------------------------------------------------------------------------- */
+
+void interlinearDisplay(GList *mods)
+{
+	gchar tmpBuf[255], *font;
+	gint i;
+	GtkWidget *gtkText;
+	ModMap::iterator it;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+        GString *strbuf;
+
+        //gint g_list_length( GList *list );
+        gtkText = lookup_widget(MainFrm,"textComp1");
+        beginHTML(GTK_WIDGET(gtkText));
+
+        for(i = 0;i < 1; i++)
+        {
+        	it = mainMgr1->Modules.find("KJV"); //-- iterate through the modules until we find modName - modName was passed by the callback
+	        if (it != mainMgr1->Modules.end()){ //-- if we find the module	
+		        comp1Mod = (*it).second;  //-- change current module to new module		
+		        comp1Mod->SetKey(current_verse); //-- set key to current verse
+		}
+	
+                /*
+		font = "Roman";
+		if ((sit = mainMgr1->config->Sections.find(comp1Mod->Name())) !=
+	    		mainMgr1->config->Sections.end()) {
+			if ((eit = (*sit).second.find("Font")) !=
+		    		(*sit).second.end()) {
+					font = (char *) (*eit).second.c_str();
+			}
+		} 	
+	        */
+		(const char *) comp1Mod;	
+		strbuf = g_string_new( "<B><FONT COLOR=\"#000FCF\">" );
+		sprintf(tmpBuf,"[%s][%s] </b>",comp1Mod->Name(), comp1Mod->KeyText());
+		strbuf = g_string_append( strbuf,tmpBuf);
+		
+		displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len );
+		g_string_free( strbuf,TRUE);
+		
+		if(!strcmp(font,"Symbol")) {
+			strbuf = g_string_new( "<FONT FACE=\"symbol\">" );
+	     		strbuf = g_string_append( strbuf,(const char *) comp1Mod);
+             		strbuf = g_string_append( strbuf,"</font>");
+	     		displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);				
+              		g_string_free( strbuf,TRUE);
+		} else if (!strcmp(font,"Greek")) {
+	      		strbuf = g_string_new( "<FONT FACE=\"greek\">" );
+	     		strbuf = g_string_append( strbuf,(const char *) comp1Mod);
+             		strbuf = g_string_append( strbuf,"</font>");
+	     		displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);				
+              		g_string_free( strbuf,TRUE);
+		} else {
+			strbuf = g_string_new( (const char *) comp1Mod);
+			displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);
+			g_string_free( strbuf,TRUE);
+		}
+	}
+	endHTML(GTK_WIDGET(gtkText));
 }

@@ -33,9 +33,8 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <gbfhtml.h>
-#include <thmlhtml.h>
- #include <thmlplain.h>
 #include <plainhtml.h>
+
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -45,6 +44,9 @@
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
+#include "gs_rwphtml.h"
+#include "gs_thmlhtml.h"
+#include "gs_thmlplain.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -53,7 +55,7 @@
 #include "support.h"
 #include "interface.h"
 #include "gs_file.h"
-#include "menustuff.h"
+#include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "noteeditor.h"
 
@@ -68,7 +70,6 @@ SWDisplay *comp3Display; /* to display modules using GtkText a verse at a time *
 SWDisplay *comDisplay; /* to display modules using GtkText a verse at a time */
 SWDisplay *percomDisplay; /* to display personal comment modules using GtkText a verse at a time */
 SWDisplay *dictDisplay; /* to display modules using GtkText a verse at a time */
-SWDisplay *RWPDisplay; /* to display Robertsons Word Pictures in the New Testament using GtkText */
 SWDisplay *FPNDisplay; /* to display formatted personal notes using GtkText */
 SWDisplay *HTMLDisplay; /* to display formatted html */
 SWDisplay *HTMLchapDisplay; /* to display formatted html */
@@ -99,7 +100,7 @@ SWFilter *gbftohtml;
 SWFilter *plaintohtml;
 SWFilter *thmltohtml;
 SWFilter *thmltoplain;
-
+SWFilter *rwphtml;
 /***********************************************************************************************
 GnomeSword global to this file
 ***********************************************************************************************/ 	
@@ -172,8 +173,9 @@ initSWORD(GtkWidget *mainform)
   	
   	gbftohtml	= new GBFHTML(); //-- sword renderfilter gbf to html
   	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
-  	thmltohtml	= new ThMLHTML(); /* sword renderfilter thml to html */
-        thmltoplain	= new ThMLPlain(); /* sword renderfilter thml to plain */  	
+  	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */
+        thmltoplain	= new GS_ThMLPlain(); /* sword renderfilter thml to plain */  	
+        rwphtml		= new GS_RWPHTML();
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -198,7 +200,6 @@ initSWORD(GtkWidget *mainform)
 	comDisplay      = 0;// set in create
 	dictDisplay     = 0;// set in create	
 	percomDisplay   = 0;// set in create
-	RWPDisplay			= 0;
 	FPNDisplay			= 0;
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
@@ -230,13 +231,14 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
-	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
-	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
-	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
-	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
-	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
-	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));
-	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
+	comp1Display = new ComEntryDisp(lookup_widget(mainform,"textComp1"));
+	comp2Display = new ComEntryDisp(lookup_widget(mainform,"textComp2"));
+	comp3Display = new ComEntryDisp(lookup_widget(mainform,"textComp3"));
+	//RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries")); 	
+	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
+	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
+
+	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	compages = 0;
 	dictpages = 0;
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
@@ -249,6 +251,7 @@ initSWORD(GtkWidget *mainform)
 	    	    		cit = (*sit).second.find("SourceType");
 				if(cit != (*sit).second.end()) sourceformat = (char *)(*cit).second.c_str();
 				else sourceformat = "Plain";
+				//g_warning(sourceformat);
 			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				curMod->AddRenderFilter(gbftohtml);
@@ -256,8 +259,8 @@ initSWORD(GtkWidget *mainform)
 			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
 			  	curMod->AddRenderFilter(plaintohtml);
 				curMod->Disp(HTMLchapDisplay);
-			}else			
-				curMod->Disp(chapDisplay);
+			} /*else			
+				curMod->Disp(chapDisplay); */
 #if USE_SHORTCUTBAR			
 		  	//--  add choice to shortcut bar
 		  	if(settings->showtextgroup){
@@ -278,24 +281,24 @@ initSWORD(GtkWidget *mainform)
 	    			cit = (*sit).second.find("SourceType");
 				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
 				else sourceformat ="Plain";
-			}
-			if (!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter
-			
+			}			
+			if (!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				curcomMod->AddRenderFilter(gbftohtml);
 				curcomMod->Disp(HTMLDisplay);
-			}
-			else if(!strcmp(sourceformat,"ThML")) {
-			        //curcomMod->AddRenderFilter(thmltoplain);
+			} else if(!strcmp(sourceformat,"ThML")) {
 				curcomMod->AddRenderFilter(thmltohtml);
 				curcomMod->Disp(HTMLDisplay);				
-			}
-			else if(!strcmp(sourceformat,"HTML")) {
-			        curcomMod->AddRenderFilter(thmltoplain);
-				curcomMod->Disp(HTMLDisplay);				
-			}
-			else if(!strcmp(curcomMod->Name(),"RWP")) curcomMod->Disp(RWPDisplay);
+			} else if(!strcmp(sourceformat,"HTML")) {
+			        //curcomMod->AddRenderFilter(thmltoplain);
+				curcomMod->Disp(HTMLDisplay);			
+			} else if(!strcmp(sourceformat,"Plain")&& strcmp(curcomMod->Name(),"RWP")) {
+			        curcomMod->AddRenderFilter(plaintohtml);
+				curcomMod->Disp(HTMLDisplay);
+			} else if(!strcmp(curcomMod->Name(),"RWP")){   			
+			        curcomMod->AddRenderFilter(rwphtml);
+				curcomMod->Disp(HTMLDisplay);	//RWPDisplaycomDisplay		
 			/* if driver is RawFiles - personal notes*/
-			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){  
+			}else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay);
 				 else curcomMod->Disp(comDisplay);
 			}else curcomMod->Disp(comDisplay);
@@ -340,24 +343,52 @@ initSWORD(GtkWidget *mainform)
 	  	}
 	}	
 	//-- interlinear 1
+	
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++){	
 		comp1Mod = (*it).second;
-		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
+		if (!strcmp((*it).second->Type(), "Biblical Texts")){
+		        sit = mainMgr1->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	        	if(sit !=mainMgr1->config->Sections.end()){
+	    	    		cit = (*sit).second.find("SourceType");
+				if(cit != (*sit).second.end()) sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat = "Plain";
+				//g_warning(sourceformat);
+			}
+			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
+				comp1Mod->AddRenderFilter(gbftohtml);
 				comp1Mod->Disp(comp1Display);
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			  	comp1Mod->AddRenderFilter(plaintohtml);
+				comp1Mod->Disp(comp1Display);
+			}
 		}
 	}
 	//-- interlinear 2	
 	for (it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
 		comp2Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
-			 comp2Mod->Disp(comp2Display);
+		
+			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
+				comp2Mod->AddRenderFilter(gbftohtml);
+				comp2Mod->Disp(comp2Display);
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			  	comp2Mod->AddRenderFilter(plaintohtml);
+				comp2Mod->Disp(comp2Display);
+			}	
 		}
 	}
 	//-- interlinear 3	
 	for (it = mainMgr3->Modules.begin(); it != mainMgr3->Modules.end(); it++){
 		comp3Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){
-			comp3Mod->Disp(comp3Display);
+		
+			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
+				comp3Mod->AddRenderFilter(gbftohtml);
+				comp3Mod->Disp(comp3Display);
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			  	comp3Mod->AddRenderFilter(plaintohtml);
+				comp3Mod->Disp(comp3Display);
+			}	
 		}
 	}	
 }
@@ -371,8 +402,6 @@ initSWORD(GtkWidget *mainform)
 void 
 changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commentary text together
 {
-	//string keyText; //-- string for verse key text to change to
-//	GtkWidget *msgBox;
 	int l;
 
 	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
@@ -386,9 +415,8 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	if(changemain && havebible) {
 		if(curMod){  //--------------------------------------------------- change main window
 		
-			curMod->SetKey(ref); //keyText.c_str());
-			curMod->Display();
-			//gtk_label_set(GTK_LABEL(lookup_widget(MainFrm,"lbText")),curMod->KeyText( )); //------- set text label to current verse
+			curMod->SetKey(ref);
+			curMod->Display();			
 			swKey = curMod->KeyText();
 			if(addhistoryitem){
 			        if(strcmp(settings->currentverse,historylist[historyitems-1].verseref))
@@ -418,16 +446,17 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->notebook3page == 2){
+		//interlinearDisplay(mods);
 		if(comp1Mod){
-			comp1Mod->SetKey(swKey);   //-- interlinear1
+			comp1Mod->SetKey(current_verse);   //-- interlinear1
 			comp1Mod->Display();
 		}
 		if(comp2Mod){
-			comp2Mod->SetKey(swKey);  //-- interlinear2
+			comp2Mod->SetKey(current_verse);  //-- interlinear2
 			comp2Mod->Display();
 		}		
 		if(comp3Mod){
-			comp3Mod->SetKey(swKey);  //-- interlinear3
+			comp3Mod->SetKey(current_verse);  //-- interlinear3
 			comp3Mod->Display();
 		}
 	}
@@ -438,7 +467,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 					//-- do nothing
 			}else{
 				if(usepersonalcomments && percomMod){
-					percomMod->SetKey(ref); //-- set personal module to current verse
+					percomMod->SetKey(current_verse); //-- set personal module to current verse
 					percomMod->Display();            //-- show change
 					noteModified = false; //-- we just loaded comment so it is not modified	
 				}
@@ -447,9 +476,10 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	}
 	if(settings->notebook3page == 0 && autoscroll){
 		if(curcomMod){	
-			curcomMod->SetKey(ref); //keyText.c_str()); //-- set comments module to current verse
+			curcomMod->SetKey(current_verse); //keyText.c_str()); //-- set comments module to current verse
 			curcomMod->Display(); //-- show change
-			strcpy(com_key,ref);
+			strcpy(com_key,swKey);
+			//g_warning(current_verse);
 		}
 	}			
 	ApplyChange = TRUE;	
@@ -560,9 +590,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	if(percomDisplay)
 		delete percomDisplay;
 	if(FPNDisplay)
-		delete FPNDisplay;
-	if(RWPDisplay)
-		delete RWPDisplay;		
+		delete FPNDisplay;		
 	if(HTMLDisplay)
 		delete HTMLDisplay;
 	if(HTMLchapDisplay)
@@ -752,7 +780,7 @@ changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- so
 		                if(autoscroll) curcomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
 		                curcomMod->Display(); //-- show the change
 		        }
-		        gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
+		        //gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
 	        }
 	}	
 }
@@ -775,13 +803,17 @@ navcurcomModSWORD(gint direction)  //-- navigate the current commentary module
 void
 editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit button
 {
- 	if(editbuttonactive){	
+ 	if(editbuttonactive){
+ 		gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),1);
 		percomMod->Disp(percomDisplay);
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), TRUE); //-- set text widget to editable	
 		gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
         } else {	
-		if(settings->formatpercom) percomMod->Disp(FPNDisplay);
+		if(settings->formatpercom) {
+			percomMod->Disp(FPNDisplay);
+			gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(MainFrm,"nbPerCom")),0);
+		}
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), false); //-- set text widget to not editable
 		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
 	}

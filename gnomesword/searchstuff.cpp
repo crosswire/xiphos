@@ -25,7 +25,6 @@
 #include <versekey.h>
 #include <plainhtml.h>
 #include <gbfhtml.h>
-//#include <thmlgbf.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -36,6 +35,9 @@
 #include "gs_sword.h"
 #include "support.h"
 #include "interface.h"
+#include "gs_rwphtml.h"
+#include "gs_thmlhtml.h"
+#include "gs_thmlplain.h"
 
 SearchWindow *searchWindow;
 extern SWModule *curMod, *curcomMod, *percomMod;
@@ -49,9 +51,10 @@ SearchWindow::SearchWindow ()
 	searchMod = NULL;
 	plaintohtml = new PLAINHTML ();	/* sword renderfilter Plain to html */
 	gbftohtml = new GBFHTML ();	/* sword renderfilter gbf to html */
+	rwphtml = new GS_RWPHTML();  /* sword renderfilter rwp to html */
 	PLAINsearchDisplay = 0;	/* set in create */
 	HTMLsearchDisplay = 0;
-	RWPsearchDisplay = 0;
+	//RWPsearchDisplay = 0;
 }
 
 
@@ -63,12 +66,14 @@ SearchWindow::~SearchWindow ()
 		delete plaintohtml;
 	if (gbftohtml != 0)	/* delete Sword render filters */
 		delete gbftohtml;
+	if (rwphtml != 0)	/* delete Sword render filters */
+		delete rwphtml;
 	if (PLAINsearchDisplay)
 		delete PLAINsearchDisplay;
 	if (HTMLsearchDisplay)
 		delete HTMLsearchDisplay;
-	if (RWPsearchDisplay)
-		delete RWPsearchDisplay;
+	/*if (RWPsearchDisplay)
+		delete RWPsearchDisplay;   */
 }
 
 GtkWidget *
@@ -92,7 +97,7 @@ SearchWindow::initsearchWindow (GtkWidget * searchDlg)	//-- init search dialog
 	gtk_text_set_word_wrap (GTK_TEXT(lookup_widget (searchDlg, "txtSearch")), TRUE); //-- set text window to word wrap
 	PLAINsearchDisplay = new GTKEntryDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for gbf
 	HTMLsearchDisplay = new HTMLentryDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for html
-	RWPsearchDisplay = new GTKRWPDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for html
+//	RWPsearchDisplay = new GTKRWPDisp (lookup_widget (searchDlg, "txtSearch"));	//-- set sword display for html
 	//--------------------------------------------------------------------------------------- searchmodule      
         for (it = searchMgr->Modules.begin (); it != searchMgr->Modules.end (); it++) {	/* iterate through modules */	  
 		searchMod = (*it).second;	//-- set searchMod
@@ -113,9 +118,10 @@ SearchWindow::initsearchWindow (GtkWidget * searchDlg)	//-- init search dialog
 			searchMod->Disp (HTMLsearchDisplay);
 		} else if ((*searchMgr->config->Sections[(*it).second->Name ()].find ("ModDrv")).second == "RawFiles") {	/* if driver is RawFiles */		    
 			searchMod->Disp (HTMLsearchDisplay);	//-- no filter needed
-		} else if (!strcmp (searchMod->Name (), "RWP"))	/* the rwp to html filter needs work */
-			searchMod->Disp (RWPsearchDisplay);	//-- so we will use our own
-                else {
+		} else if (!strcmp (searchMod->Name (), "RWP")) {
+			searchMod->AddRenderFilter(rwphtml);
+			searchMod->Disp (HTMLsearchDisplay);	
+                } else {
 			//searchMod->AddRenderFilter(plaintohtml);
 			searchMod->Disp (PLAINsearchDisplay);
 			//cout << searchMod->Name() << '\n';                                    
