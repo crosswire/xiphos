@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.4 
+# Anjuta Version 0.1.5 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -22,7 +22,7 @@ Compatibility Level: 1
 
 props.file.type=project
 
-anjuta.version=0.1.4
+anjuta.version=0.1.5
 anjuta.compatibility.level=1
 
 project.name=Gnomesword
@@ -72,8 +72,6 @@ module.source.files=\
 	gs_menu.c\
 	gs_studypad.c\
 	gs_sword.cpp\
-	gs_viewdict.c\
-	gs_viewdict.h\
 	interface.c\
 	printstuff.c\
 	spell.c\
@@ -89,8 +87,6 @@ module.source.files=\
 	gs_search_cb.cpp\
 	gs_abouts.c\
 	gs_abouts.h\
-	gs_rwphtml.cpp\
-	gs_thmlhtml.cpp\
 	gs_file.h\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
@@ -103,15 +99,23 @@ module.source.files=\
 	gs_listeditor.h\
 	gs_menu.h\
 	gs_search.h\
-	gs_viewcomm.c\
-	gs_viewcomm.h\
 	gs_history.h\
 	printstuff.h\
 	interface.h\
 	sw_utility.cpp\
 	sw_utility.h\
 	gs_toolbarEditor.c\
-	gs_toolbarEditor.h
+	gs_toolbarEditor.h\
+	gs_gbfhtml.cpp\
+	gs_gbfhtml.h\
+	gs_wgsil.cpp\
+	gs_wgsil.h\
+	gs_viewcomm_dlg.c\
+	gs_viewcomm_dlg.h\
+	gs_viewdict_dlg.c\
+	gs_viewdict_dlg.h\
+	gs_viewtext_dlg.c\
+	gs_viewtext_dlg.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

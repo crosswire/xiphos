@@ -29,6 +29,8 @@ extern "C" {
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+
+
 	
 typedef struct _editor EDITOR;
 struct _editor {
@@ -43,6 +45,7 @@ struct _editor {
 
 GtkWidget *create_editor(GtkWidget *app1, 
 				EDITOR ed);	
+
 
 #ifdef __cplusplus
 }

@@ -168,7 +168,7 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 {
 	GtkWidget 
 		*menu2, 
-		*menu5,
+		//*menu5,
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	

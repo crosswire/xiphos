@@ -24,6 +24,7 @@
 #ifndef _CONTROL_DATA_H
 #define _CONTROL_DATA_H
 
+
 typedef struct _GtkHTMLControlData            GtkHTMLControlData;
 typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
 typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
@@ -38,7 +39,6 @@ typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
 #include "rule.h"
 //#include "engine.h"
 //#include "Spell.h"
-
 
 struct _GtkHTMLControlData {
 	GtkHTML   *html;
@@ -84,7 +84,9 @@ struct _GtkHTMLControlData {
 	GtkWidget *italic_button;
 	GtkWidget *underline_button;
 	GtkWidget *strikeout_button;
-
+	
+	GtkWidget *code_view_button;
+	
 	GtkWidget *left_align_button;
 	GtkWidget *center_button;
 	GtkWidget *right_align_button;

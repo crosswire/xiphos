@@ -30,6 +30,6 @@
 #include "control-data.h"
 
 GtkWidget *toolbar_file (GtkHTMLControlData *cd);
-
+void updatestatusbar(GtkHTMLControlData * cd);
 #endif /* _FILEBAR_H */
 

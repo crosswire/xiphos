@@ -14,10 +14,12 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     gs_abouts.c \
     gs_abouts.h \
-    gs_viewcomm.c \
-    gs_viewcomm.h \
-    gs_viewdict.c \
-    gs_viewdict.h \
+    gs_viewtext_dlg.c \
+    gs_viewtext_dlg.h \
+    gs_viewcomm_dlg.c \
+    gs_viewcomm_dlg.h \
+    gs_viewdict_dlg.c \
+    gs_viewdict_dlg.h \
     gs_studypad.c \
     gs_studypad.h \
     gs_gnomesword.c \
@@ -56,7 +58,9 @@ COMMON_SOURCE =  \
     printstuff.c \
     printstuff.h \
     gs_gbfhtml.cpp \
-    gs_gbfhtml.h
+    gs_gbfhtml.h \
+   gs_wgsil.cpp \
+   gs_wgsil.h
 
 SPELLING_SOURCE =  \
     debug.h \
