@@ -447,8 +447,9 @@ GList *backend_module_mgr_list_local_sources(void)
 
 int backend_module_mgr_refresh_remote_source(const char *sourceName)
 {
-	InstallSourceMap::iterator source =
-	    installMgr->sources.find(sourceName);
+	InstallSourceMap::iterator source = installMgr->sources.begin();
+	
+	source = installMgr->sources.find(sourceName);
 	if (source == installMgr->sources.end()) {
 		printf("Couldn't find remote source [%s]\n",
 			sourceName);
@@ -490,7 +491,7 @@ void backend_init_module_mgr_config(void)
 	is.source = "ftp.crosswire.org";
 	is.directory = "/pub/sword/raw";
 	
-	config["General"]["PassiveFTF"] = "true";
+	config["General"]["PassiveFTP"] = "true";
 	config["Sources"]["FTPSource"] = is.getConfEnt();
 	config.Save();
 	
@@ -529,7 +530,7 @@ void backend_module_mgr_clear_config(void)
 	
 	SWConfig config(confPath.c_str());
 	
-	config["General"]["PassiveFTF"] = "true";
+	config["General"]["PassiveFTP"] = "true";
 	config.Save();	
 }
 
