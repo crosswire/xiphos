@@ -1,7 +1,7 @@
 /*
  * GnomeSword Bible Study Tool
- * toolbar_style.h - style toolbar for editors
- *               
+ * editor_menu.h - popup menu for html editor
+ *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,12 +19,20 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _TOOLBAR_STYLE_H
-#define _TOOLBAR_STYLE_H
+#ifndef __NOTE_EDITOR_H_
+#define __NOTE_EDITOR_H_
 
-#include "gui/editor.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-GtkWidget *gui_toolbar_style(GSHTMLEditorControlData *ecd);
-//void toolbar_update_format(GSHTMLEditorControlData *ecd);
+#include <gnome.h>
+#include "main/module_dialogs.h"
+
+void gui_create_note_editor(DIALOG_DATA * d);
+
+#ifdef __cplusplus
+}
+#endif	
 
 #endif

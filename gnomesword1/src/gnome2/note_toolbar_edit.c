@@ -29,7 +29,7 @@
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-#include "gui/toolbar_edit.h"
+#include "gui/note_toolbar_edit.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
@@ -47,7 +47,7 @@
 #include "main/module_dialogs.h"
 
 static void on_btn_save_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd);
+				DIALOG_DATA * d);
 
 /******************************************************************************
  * Name
@@ -57,7 +57,7 @@ static void on_btn_save_clicked(GtkButton * button,
  *   #include "toolbar_edit.h"
  *
  *   void new_clicked(GtkButton * button,
-					GSHTMLEditorControlData * ecd)	
+					DIALOG_DATA * d)	
  *
  * Description
  *     
@@ -67,8 +67,9 @@ static void on_btn_save_clicked(GtkButton * button,
  */
 
 static void new_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd)
+				DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gui_new_activate(NULL, ecd);
 }
 
@@ -81,7 +82,7 @@ static void new_clicked(GtkButton * button,
  *   #include "studypad.h"
  *
  *   void on_btn_open_clicked(GtkButton * button,
-					GSHTMLEditorControlData * ecd)	
+					DIALOG_DATA * d)	
  *
  * Description
  *    open file dialog 
@@ -91,8 +92,9 @@ static void new_clicked(GtkButton * button,
  */
 
 static void on_btn_open_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd)
+				DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	GtkWidget *openFile;
 	gchar buf[255];
 	gchar *tmp_buf = NULL;
@@ -121,7 +123,7 @@ static void on_btn_open_clicked(GtkButton * button,
 
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
-			on_btn_save_clicked(NULL, ecd);
+			on_btn_save_clicked(NULL, d);
 		}
 		g_free(info);
 		g_string_free(str,TRUE);
@@ -142,7 +144,7 @@ static void on_btn_open_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_save_clicked(GtkButton * button,
-					GSHTMLEditorControlData * ecd)	
+					DIALOG_DATA * d)	
  *
  * Description
  *    save contents of editor
@@ -152,23 +154,15 @@ static void on_btn_open_clicked(GtkButton * button,
  */
 
 static void on_btn_save_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd)
+				DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gchar *filename = NULL;
-	if (ecd->studypad) {
-		if(settings.studypadfilename) {
-			if (strlen(settings.studypadfilename) > 0) {
-				filename = g_strdup(settings.studypadfilename);
-				save_file(filename, ecd);
-			} 
-			else {
-				gui_fileselection_save(ecd,TRUE);
-			}
-		}
-		else {
-			gui_fileselection_save(ecd,TRUE);
-		}
-	}
+	if (ecd->personal_comments) {
+		main_dialog_save_note(d);
+		ecd->changed = FALSE;
+		gui_update_statusbar(ecd);
+	} 
 }
 
 /******************************************************************************
@@ -179,7 +173,7 @@ static void on_btn_save_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_delete_clicked(GtkButton * button,
-					GSHTMLEditorControlData * ecd)	
+					DIALOG_DATA * d)	
  *
  * Description
  *    delete personal commnet
@@ -189,9 +183,10 @@ static void on_btn_save_clicked(GtkButton * button,
  */
 
 static void on_btn_delete_clicked(GtkButton * button,
-				  GSHTMLEditorControlData * ecd)
+				  DIALOG_DATA * d)
 {
-/*	if (ecd->personal_comments) {
+	GSHTMLEditorControlData *ecd = d->editor;
+	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
 		GString *str;
@@ -209,7 +204,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
-			main_dialog_delete_note();
+			main_dialog_delete_note(d);
 			url = g_strdup_printf(	"sword://%s/%s",
 						ecd->filename,
 						ecd->key);
@@ -222,7 +217,6 @@ static void on_btn_delete_clicked(GtkButton * button,
 		g_free(info);
 		g_string_free(str,TRUE);
 	}
-	*/
 
 }
 
@@ -234,7 +228,7 @@ static void on_btn_delete_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_print_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
+ *					DIALOG_DATA * d)	
  *
  * Description
  *    print the editor text
@@ -244,8 +238,9 @@ static void on_btn_delete_clicked(GtkButton * button,
  */
 
 static void on_btn_print_clicked(GtkButton * button,
-				 GSHTMLEditorControlData * ecd)
+				 DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gui_html_print(ecd->htmlwidget, FALSE);
 }
 
@@ -257,7 +252,7 @@ static void on_btn_print_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_cut_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
+ *					DIALOG_DATA * d)	
  *
  * Description
  *    cut selected text to clipboard
@@ -267,8 +262,9 @@ static void on_btn_print_clicked(GtkButton * button,
  */
 
 static void on_btn_cut_clicked(GtkButton * button,
-			       GSHTMLEditorControlData * ecd)
+			       DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gtk_html_cut(ecd->html);
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
@@ -282,7 +278,7 @@ static void on_btn_cut_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_copy_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
+ *					DIALOG_DATA * d)	
  *
  * Description
  *    copy selected text to clipboard
@@ -292,8 +288,9 @@ static void on_btn_cut_clicked(GtkButton * button,
  */
 
 static void on_btn_copy_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd)
+				DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gtk_html_copy(ecd->html);
 }
 
@@ -306,7 +303,7 @@ static void on_btn_copy_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_paste_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
+ *					DIALOG_DATA * d)	
  *
  * Description
  *    paste contents of clipboard into editor
@@ -316,8 +313,9 @@ static void on_btn_copy_clicked(GtkButton * button,
  */
 
 static void on_btn_paste_clicked(GtkButton * button,
-				 GSHTMLEditorControlData * ecd)
+				 DIALOG_DATA * d)
 {	
+	GSHTMLEditorControlData *ecd = d->editor;
 	gtk_html_paste(ecd->html,FALSE);
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
@@ -332,7 +330,7 @@ static void on_btn_paste_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_undo_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
+ *					DIALOG_DATA * d)	
  *
  * Description
  *    undo changes in the editor
@@ -342,8 +340,9 @@ static void on_btn_paste_clicked(GtkButton * button,
  */
 
 static void on_btn_undo_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd)
+				DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gtk_html_undo(ecd->html);
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
@@ -368,8 +367,9 @@ static void on_btn_undo_clicked(GtkButton * button,
  */
 
 static void on_btn_Find_clicked(GtkButton * button,
-				GSHTMLEditorControlData * ecd)
+				DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	gui_find_dlg(ecd->htmlwidget, ecd->filename,
 		  FALSE, NULL);
 	//search(ecd, FALSE, NULL);
@@ -384,7 +384,7 @@ static void on_btn_Find_clicked(GtkButton * button,
  *   #include "_percomm.h"
  *
  *   void on_btn_replace_clicked(GtkButton * button,
-		       GSHTMLEditorControlData * ecd)	
+		       DIALOG_DATA * d)	
  *
  * Description
  *    open find and replace dialog
@@ -394,8 +394,9 @@ static void on_btn_Find_clicked(GtkButton * button,
  */
 
 static void on_btn_replace_clicked(GtkButton * button,
-				   GSHTMLEditorControlData * ecd)
+				   DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	replace(ecd);
 }
 
@@ -416,8 +417,9 @@ static void on_btn_replace_clicked(GtkButton * button,
  *   GtkWidget *
  */
 
-static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
+static GtkWidget *create_toolbar_edit(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator;
 
@@ -427,14 +429,16 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	ecd->toolbar_edit =
 	    gtk_toolbar_new();
 	gtk_widget_show(ecd->toolbar_edit);
-	gtk_toolbar_set_style (GTK_TOOLBAR (ecd->toolbar_edit), GTK_TOOLBAR_ICONS);
+	gtk_toolbar_set_style (GTK_TOOLBAR (ecd->toolbar_edit), 
+				GTK_TOOLBAR_ICONS);
 /*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(ecd->toolbar_edit),
 				      GTK_RELIEF_NONE);*/
 
 	if (ecd->studypad) {
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_NEW, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
+						(ecd->toolbar_edit)));
 		ecd->btn_new =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
@@ -451,7 +455,8 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 		
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_OPEN, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
+						(ecd->toolbar_edit)));
 		ecd->btn_open =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
@@ -467,7 +472,8 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				   ecd);
 		tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_SAVE, 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
+						(ecd->toolbar_edit)));
 		ecd->btn_save =
 		    gtk_toolbar_append_element(GTK_TOOLBAR
 					       (ecd->toolbar_edit),
@@ -507,7 +513,8 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 		g_signal_connect(GTK_OBJECT(ecd->btn_delete),
 				   "clicked",
 				   G_CALLBACK
-				   (on_btn_delete_clicked), ecd);
+				   (on_btn_delete_clicked), 
+				   (DIALOG_DATA *) d);
 
 	}
 	tmp_toolbar_icon = gtk_image_new_from_stock (
@@ -619,20 +626,20 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 #endif
 
 	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
-			   G_CALLBACK(on_btn_save_clicked), ecd);
+			   G_CALLBACK(on_btn_save_clicked), (DIALOG_DATA *) d);
 
 	g_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
-			   G_CALLBACK(on_btn_print_clicked), ecd);
+			   G_CALLBACK(on_btn_print_clicked), (DIALOG_DATA *) d);
 	g_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
-			   G_CALLBACK(on_btn_cut_clicked), ecd);
+			   G_CALLBACK(on_btn_cut_clicked), (DIALOG_DATA *) d);
 	g_signal_connect(GTK_OBJECT(ecd->btn_copy), "clicked",
-			   G_CALLBACK(on_btn_copy_clicked), ecd);
+			   G_CALLBACK(on_btn_copy_clicked), (DIALOG_DATA *) d);
 	g_signal_connect(GTK_OBJECT(ecd->btn_paste), "clicked",
-			   G_CALLBACK(on_btn_paste_clicked), ecd);
+			   G_CALLBACK(on_btn_paste_clicked), (DIALOG_DATA *) d);
 	g_signal_connect(GTK_OBJECT(ecd->btn_undo), "clicked",
-			   G_CALLBACK(on_btn_undo_clicked), ecd);
+			   G_CALLBACK(on_btn_undo_clicked), (DIALOG_DATA *) d);
 	g_signal_connect(GTK_OBJECT(ecd->btn_Find), "clicked",
-			   G_CALLBACK(on_btn_Find_clicked), ecd);
+			   G_CALLBACK(on_btn_Find_clicked), (DIALOG_DATA *) d);
 	g_signal_connect(GTK_OBJECT(ecd->btn_replace), "clicked",
 			   G_CALLBACK(on_btn_replace_clicked),
 			   ecd);
@@ -663,10 +670,11 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
  *   GtkWidget *
  */
 
-GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData * ecd)
+GtkWidget *gui_note_toolbar_edit(DIALOG_DATA * d)
 {
+	GSHTMLEditorControlData *ecd = d->editor;
 	g_return_val_if_fail(ecd->html != NULL, NULL);
 	g_return_val_if_fail(GTK_IS_HTML(ecd->html), NULL);
 
-	return create_toolbar_edit(ecd);
+	return create_toolbar_edit(d);
 }

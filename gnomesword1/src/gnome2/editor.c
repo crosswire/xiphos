@@ -82,6 +82,7 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 	necd->block_font_style_change = FALSE;
 	necd->gdk_painter = NULL;
 	necd->plain_painter = NULL;
+	necd->key = NULL;
 	necd->format_html = FALSE;
 	necd->changed = FALSE;
 	necd->gbs = FALSE;
@@ -122,6 +123,8 @@ void gui_html_editor_control_data_destroy(GtkObject * object,
 
 /*	if(ecd->changed && ecd->studypad)
 		gui_studypad_can_close(ecd);*/
+	if(ecd->key)
+		g_free(ecd->key);
 	
 	if (ecd->plain_painter)
 		gtk_object_unref(GTK_OBJECT(ecd->plain_painter));

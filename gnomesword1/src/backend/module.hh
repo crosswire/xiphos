@@ -77,8 +77,6 @@ char *backend_get_key_from_module(int manager, char * module_name);
 
 int backend_set_module(int manager, char * module_name);
 void backend_set_percomm_key(char * key);
-void backend_save_personal_comment(char * note);
-void backend_delete_personal_comment(void);
 char *backend_get_percomm_text(char * key);
 //void backend_init_language_map(void);
 //void backend_get_module_lists(MOD_LISTS * mods);
