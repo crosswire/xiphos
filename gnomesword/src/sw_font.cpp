@@ -62,10 +62,11 @@ void load_module_font_info(MOD_FONT *mf)
 {
 	gchar buf[255];
 	
-	sprintf(buf, "%s/modops.conf", gSwordDir);
+	sprintf(buf, "%s/fonts.conf", gSwordDir);
 	SWConfig module_options(buf);
 	module_options.Load();	
 	mf->old_font = (gchar*)module_options[mf->mod_name]["Font"].c_str();
+	mf->old_gdk_font = (gchar*)module_options[mf->mod_name]["GtkFont"].c_str();
 	mf->old_font_size = (gchar*)module_options[mf->mod_name]["Fontsize"].c_str();
 }
  
@@ -77,10 +78,11 @@ void save_module_font_info(MOD_FONT *mf)
 {
 	gchar buf[80], buf2[255];
 
-	sprintf(buf, "%s/modops.conf", gSwordDir);
+	sprintf(buf, "%s/fonts.conf", gSwordDir);
 	SWConfig module_options(buf);
 	
 	module_options[mf->mod_name]["Font"] = mf->new_font;
+	module_options[mf->mod_name]["GtkFont"] = mf->new_gdk_font;
 	module_options[mf->mod_name]["Fontsize"] = mf->new_font_size;	
 	
 	module_options.Save();
