@@ -31,7 +31,7 @@
 #include <treekeyidx.h>
 #include <rawgenbook.h>
 
-#include "backend/sword.h"
+//#include "backend/sword.h"
 #include "backend/gbs_.h"
 
 

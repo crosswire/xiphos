@@ -26,9 +26,9 @@
 extern "C" {
 #endif
 	
-void backend_create_bookmarks(gchar * dir);
-void backend_save_bookmarks(GNode * bookmark_tree);
-GNode * backend_load_bookmarks(void);
+void backend_create_bookmarks(char * dir);
+void backend_save_bookmarks(GNode * bookmark_tree, char *dir);
+GNode * backend_load_bookmarks(char *dir);
 
 #ifdef __cplusplus
 }

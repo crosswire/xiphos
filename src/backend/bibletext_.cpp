@@ -27,14 +27,8 @@
 #include <markupfiltmgr.h>
 #include <swconfig.h>
 #include <swmodule.h>
-#include <versekey.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <string.h>
 
 #include "backend/bibletext_.h"
-#include "backend/sword.h"
 #include "backend/sword_defs.h"
 
 
