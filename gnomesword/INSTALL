@@ -7,9 +7,11 @@ You need at least one each text ,commentary and dictionary module also.
 Sword-1.5.1a and the modules can be found at www.crosswire.org in the Sword Project.
 
 if you want build to gnomesword with the Evolution shortcut bar you need these packages
-You need gal-0.4.1 or later -- helix
+You need gal-0.4.99.7 or later -- helix  ftp://spidermonkey.ximian.com/ximian/
+                                                evolution-snapshots/distributions/RedHat-6
 You need gnome-print-0.25 or later -- http://www.gnome.org/
 You need gdk-pixbuf-0.9 or later -- http://www.gnome.org/
+
 
 ======================================================================
 
