@@ -1,5 +1,5 @@
 /***************************************************************************
-                          menustuff.h  -  description
+                          gs_menu.h  -  description
                              -------------------
     begin                : Mon May 8 2000
     copyright            : (C) 2000 by  Terry Biggs

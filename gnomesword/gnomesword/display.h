@@ -31,6 +31,7 @@
 **********************************************************************
 \********************************************************************/
 
+
 #include <gnome.h>
 #include <swmodule.h>
 
@@ -81,6 +82,18 @@ class GTKEntryDisp:public SWDisplay {
 };
 
 //----------------------------------------------------------------------------------------------
+class ComEntryDisp:public GTKEntryDisp { public:
+	ComEntryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class GTKhtmlChapDisp:public GTKEntryDisp { public:
+	GTKhtmlChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
 class GTKPerComDisp:public GTKEntryDisp { public:
 	GTKPerComDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
@@ -100,12 +113,6 @@ class HTMLChapDisp:public GTKEntryDisp {
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKRWPDisp:public GTKEntryDisp { public:
-	GTKRWPDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
 class HTMLentryDisp:public GTKEntryDisp { public:
 	HTMLentryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
@@ -119,3 +126,5 @@ class GTKInterlinearDisp:public GTKEntryDisp { public:
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
+void interlinearDisplay(GList *mods);
+

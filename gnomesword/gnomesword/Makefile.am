@@ -30,14 +30,22 @@ COMMON_SOURCE =  \
     gs_listeditor.c \
     gs_listeditor.h \
     main.cpp \
-    menustuff.c \
-    menustuff.h \
+    gs_menu.c \
+    gs_menu.h \
     noteeditor.cpp \
     noteeditor.h \
     searchstuff.cpp \
     searchstuff.h \
     support.c \
-    support.h
+    support.h \
+    gs_html.c \
+    gs_html.h \
+    gs_rwphtml.cpp \
+    gs_rwphtml.h \
+    gs_thmlhtml.cpp \
+    gs_thmlhtml.h \
+    gs_thmlplain.cpp \
+    gs_thmlplain.h
 
 SPELLING_SOURCE =  \
     debug.h \
@@ -95,7 +103,7 @@ endif
 if SPELLING_PRINTING
 gnomesword_SOURCES = \
     $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE)	 \
+    $(PRINT_SOURCE) \
     $(COMMON_SOURCE)
 
 gnomesword_LDADD =  \

@@ -34,7 +34,7 @@
 #include "support.h"
 #include "gs_listeditor.h"
 #include "gs_file.h"
-#include "menustuff.h"
+#include "gs_menu.h"
 
 
 /*****************************************************************************

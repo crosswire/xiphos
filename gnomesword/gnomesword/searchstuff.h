@@ -80,7 +80,7 @@ class SearchWindow
         SWKey	*currentScope; //----------- use to set scope of search
         SWFilter *plaintohtml;
         SWFilter *gbftohtml;
-        
+        SWFilter *rwphtml;
 	//void percentUpdate(char percent, void *userData); 
 public:
 	SearchWindow();

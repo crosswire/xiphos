@@ -26,11 +26,12 @@
 
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
-#include "menustuff.h"
+#include "gs_menu.h"
 #include "support.h"
 #include "callback.h"
 #include "interface.h"
 #include "gs_file.h"
+#include "gs_html.h"
 
 extern SETTINGS *settings;
 SETTINGS myset;	
@@ -65,6 +66,7 @@ main (int argc, char *argv[])
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	*/
   	mainwindow = create_mainwindow ();
+  	add_gtkhtml_widgets(mainwindow);
   	setDiretory();
   	if(newconfigs)
   	{
@@ -80,6 +82,7 @@ main (int argc, char *argv[])
   	settings = &myset;       
   	initSWORD(mainwindow);
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
+  	
   	gtk_widget_show(mainwindow);
   	/* set toggle state of buttons and menu items */
   	UpdateChecks(mainwindow);    	
