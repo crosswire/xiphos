@@ -1,0 +1,37 @@
+
+GnomeSword started life as the Sword Project cheatah program and
+some of the cheatah code is still used in GnomeSword.
+
+I took the code for setting the scope of a search from
+the Bibletime program.
+
+I think I may have taken some code form the Sword Project's windoze
+programs also.
+
+I wish to thank the folks who have put so much time and work into the
+Sword Project and then giving it to the world! God Bless you!
+
+If you look at my code you will be glad to know that I make my living
+as a preacher - not a programmer.
+
+Installing:
+############
+You need to have the Sword Project (sword-1.5.0) installed.
+You need a least one each text ,commentary and dictionary module also.
+Sword-1.5.0 and the modules can be found at www.crosswire.org in the Sword Project.
+
+You must also have gnome up and running.
+If you are using RedHat you need to have the gnome and gtk dev packages
+installed.
+It all worked on my RedHat 6.2 system.
+
+First, be sure to read INSTALL in the root of the Sword project
+directory for instructions on how to make sure the API
+libraries are installed and configured properly.
+
+Then do a:
+
+./configure
+make
+su
+make install
