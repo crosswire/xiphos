@@ -189,13 +189,13 @@ char *get_book_key(char * book_name)
  * Synopsis
  *   #include "gbs.h"
  *
- *   gboolean display_row_gbs(gint book_num, gchar *offset)	
+ *    char * display_row_gbs(gint book_num, gchar *offset)	
  *
  * Description
  *    
  *
  * Return value
- *   gboolean
+ *   char * 
  */ 
  
 char * display_row_gbs(char * book_name, char *offset)

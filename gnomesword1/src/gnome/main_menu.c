@@ -36,6 +36,7 @@
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
+#include "gui/gbs_dialog.h"
 #include "gui/history.h"
 #include "gui/html.h"
 #include "gui/utilities.h"
@@ -419,7 +420,7 @@ static void on_dictlex_item_activate(GtkMenuItem * menuitem,
 static void on_book_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
-	
+	gui_open_gbs_dialog((gchar *)user_data);
 }
 
 /******************************************************************************

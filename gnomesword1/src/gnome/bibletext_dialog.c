@@ -34,10 +34,10 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
+#include "gui/utilities.h"
 
 #include "main/bibletext.h"
 #include "main/sword.h"
-//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
@@ -54,6 +54,46 @@ static gboolean dialog_freed;
  *****************************************************************************/
 extern gboolean gsI_isrunning; /* information dialog */
 
+
+
+/******************************************************************************
+ * Name
+ *   show_in_statusbar
+ *
+ * Synopsis
+ *   #include "gui/bibletext_dialog.h"
+ *
+ *   void show_in_statusbar(GtkWidget * statusbar, gchar * key, 
+ *							gchar * mod)
+ *
+ * Description
+ *   display information (morph or strongs) in statusbar
+ *
+ * Return value
+ *   void
+ */
+
+static void show_in_statusbar(GtkWidget * statusbar, gchar * key, 
+							gchar * mod)
+{
+	gchar *str;
+	gchar *text;
+	gint context_id2;
+	
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
+	
+	text = get_striptext(mod, key);
+	str = remove_linefeeds(text);
+	if(str) {
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
+					str);
+		g_free(str);
+	}
+	g_free(text);
+}
 
 
 /******************************************************************************
@@ -840,7 +880,7 @@ static void on_all_readings_activate(GtkMenuItem * menuitem,
 static void dialog_url(GtkHTML * html, const gchar * url, 
 						VIEW_TEXT * vt)
 {
-	gchar buf[255];
+	gchar buf[255], *buf1;
 	gint context_id2;
 	
 	
@@ -859,32 +899,143 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	}
 	/***  we are in an url  ***/
 	else {
-		//in_url = TRUE;	/* we need this for html_button_released */
-		/***  swap interlinear and main text mods link ***/
-		if (*url == '@') {
-			++url;
-			sprintf(buf, _("Show %s in main window"), url);
-		}
-		/***  module name link  ***/
-		else if (*url == '[') {
-			++url;
-			while (*url != ']') {
-				++url;
+		
+		if (*url == '#') {
+			++url;		/* remove # */
+			if (*url == 'T') {
+				++url;	/* remove T */
+				if (*url == 'G') {
+					++url;	/* remove G */
+					if (settings.havethayer) {
+						buf1 = g_strdup(url);
+						show_in_statusbar(vt->statusbar, buf1, "Thayer");
+						g_free(buf1);
+						return;
+					}
+	
+					else
+						return;
+				}
+	
+				if (*url == 'H') {
+					++url;	/* remove H */
+					if (settings.havebdb) {
+						buf1 = g_strdup(url);
+						show_in_statusbar(vt->statusbar, buf1, "BDB");
+						g_free(buf1);
+						return;
+					}
+	
+					else
+						return;
+				}
 			}
-			++url;
-			sprintf(buf, "%s", url);
+	
+			if (*url == 'G') {
+				++url;	/* remove G */
+				buf1 = g_strdup(url);
+				if (atoi(buf1) > 5624) {
+					if (settings.havethayer) {
+						show_in_statusbar(vt->statusbar, buf1, "Thayer");
+						g_free(buf1);						
+						return;
+					} else
+						return;
+	
+				}
+	
+				else {
+					show_in_statusbar(vt->statusbar, buf1, settings.lex_greek);
+					g_free(buf1);		
+					return;
+				}
+			}
+	
+			if (*url == 'H') {
+				++url;	/* remove H */
+				buf1 = g_strdup(url);
+				if (atoi(buf1) > 8674) {
+					if (settings.havebdb) {
+						show_in_statusbar(vt->statusbar, buf1, "BDB");
+						g_free(buf1);
+						return;
+					}
+	
+					else
+						return;
+				}
+	
+				else {
+					show_in_statusbar(vt->statusbar, buf1, settings.lex_hebrew);
+					g_free(buf1);
+					return;
+				}
+			}
 		}
-		/***  verse number link  ***/
-		else if (*url == '*') {
-			++url;
-			sprintf(buf, "%s", url);
+		/***  thml morph tag  ***/
+		else if (!strncmp(url, "type=morph", 10)) {
+			gchar *modbuf = NULL;
+			gchar *mybuf = NULL;
+			buf1 = g_strdup(url);
+			mybuf = strstr(url, "class=");
+			if (mybuf) {
+				gint i;
+				modbuf = strchr(mybuf, '=');
+				++modbuf;
+				for (i = 0; i < strlen(modbuf); i++) {
+					if (modbuf[i] == ' ') {
+						modbuf[i] = '\0';
+						break;
+					}
+				}
+			}
+	
+			mybuf = NULL;
+			mybuf = strstr(buf1, "value=");
+			if (mybuf) {
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+			}
+			buf1 = g_strdup(mybuf);
+			show_in_statusbar(vt->statusbar, buf1, modbuf);			
+			g_free(buf1);
+			return;
+		}
+		/*** thml strongs ***/
+		else if (!strncmp(url, "type=Strongs", 12)) {
+			gchar *modbuf = NULL;
+			gchar *mybuf = NULL;
+			gchar newref[80];
+			gint type = 0;
+			//buf = g_strdup(url);
+			mybuf = NULL;
+			mybuf = strstr(url, "value=");
+			//i = 0;
+			if (mybuf) {
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+				if (mybuf[0] == 'H')
+					type = 0;
+				if (mybuf[0] == 'G')
+					type = 1;
+				++mybuf;
+				sprintf(newref, "%5.5d", atoi(mybuf));
+			}
+			if (type)
+				modbuf = settings.lex_greek;
+			else
+				modbuf = settings.lex_hebrew;
+	
+			buf1 = g_strdup(newref);
+			show_in_statusbar(vt->statusbar, buf1, modbuf);				
+			g_free(buf1);
+			return;	
 		}
 		/***  any other link  ***/
 		else
 			sprintf(buf, _("Go to %s"), url);
-
 		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
-			   buf);
+			  buf);
 	}
 }
 
