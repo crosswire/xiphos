@@ -452,10 +452,10 @@ GList *backend_module_mgr_list_remote_sources(void)
 	     inst_mgr->sources.begin();
 	     it != inst_mgr->sources.end(); it++) {
 		mms = g_new(MOD_MGR_SOURCE, 1);
-		mms->caption = it->second->caption;
-		mms->type = it->second->type;
-		mms->source = it->second->source;
-		mms->directory = it->second->directory;
+		mms->caption = g_strdup(it->second->caption);
+		mms->type = g_strdup(it->second->type);
+		mms->source = g_strdup(it->second->source);
+		mms->directory = g_strdup(it->second->directory);
 		retval = g_list_append(retval, (MOD_MGR_SOURCE *) mms);
 	}
 	delete inst_mgr;

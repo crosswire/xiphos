@@ -177,7 +177,7 @@ link_widget (GtkHTMLEditLinkProperties *d, gboolean insert)
 	GtkWidget *link_page, *button;
 	GladeXML *xml;
 
-	xml = glade_xml_new ("gtkhtml-editor-properties.glade", "link_page", NULL);
+	xml = glade_xml_new (GTKHTML_DATA_DIR"/gtkhtml-editor-properties.glade", "link_page", NULL);
 	if (!xml)
 		g_error (_("Could not load glade file."));
 

@@ -259,7 +259,7 @@ prop_dialog (GtkWidget *mi, GSHTMLEditorControlData *cd)
 {
 	show_prop_dialog (cd, GPOINTER_TO_INT (g_object_get_data (G_OBJECT (mi), "type")));
 }
-
+// gnome_icon_theme_lookup_icon ()
 static void
 link_prop_dialog (GtkWidget *mi, GSHTMLEditorControlData *cd)
 {
