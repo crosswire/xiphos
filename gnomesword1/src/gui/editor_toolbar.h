@@ -18,12 +18,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
 #ifndef _EDITOR_TOOLBAR_H
 #define _EDITOR_TOOLBAR_H
 
-#include "_editor.h"
+#include "gui/_editor.h"
 
-GtkWidget *toolbar_style (GSHTMLEditorControlData * ecd);
-void toolbar_update_format (GSHTMLEditorControlData * ecd);
+GtkWidget *toolbar_style(GSHTMLEditorControlData *ecd);
+void toolbar_update_format(GSHTMLEditorControlData *ecd);
 
-#endif /* _EDITOR_TOOLBAR_H */
+#endif
+

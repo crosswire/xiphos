@@ -32,5 +32,5 @@ GtkWidget *gui_create_info_box(void);
 }
 #endif
 
-#endif /* __INFO_BOX_H_ */
+#endif
 

@@ -5,3 +5,4 @@ void gui_init(int argc, char*argv[]);
 void gui_main(void);
 
 #endif
+

@@ -33,4 +33,6 @@ GtkWidget *gui_create_nav_toolbar(void);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __TOOLBAR_NAV_H_ */
+
+#endif
+

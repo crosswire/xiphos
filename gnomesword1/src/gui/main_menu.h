@@ -19,11 +19,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifndef __MAIN_MENU__H_
 #define __MAIN_MENU__H_
 
-#include "gs_gnomesword.h"
+#include "main/gs_gnomesword.h"
 
 void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
 				gpointer user_data);	
@@ -49,4 +48,6 @@ void on_search_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void gui_create_main_menu(GtkWidget *app);
 void gui_install_menu_hints(GtkWidget *app);
-#endif	/* __MAIN_MENU__H_ */
+
+#endif
+
