@@ -638,7 +638,7 @@ GtkWidget *create_pmBookmarkTree(void)
 }
 
 /*****************************************************************************
- * load bookmarks program start
+ * load old bookmarks on first run of gnomesword
  *****************************************************************************/
 gint loadoldbookmarks(void)
 {

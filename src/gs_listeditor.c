@@ -259,7 +259,7 @@ void editbookmarksSave(GtkWidget * editdlg)
 		p_mylistitem->type = atoi(buf[1]);
 		p_mylistitem->level = atoi(buf[2]);
 		strcpy(p_mylistitem->subitem, buf[3]);
-		strcpy(p_mylistitem->menu, "_Bookmarks/");
+		strcpy(p_mylistitem->menu, "_Quickmarks/");
 		strcpy(p_mylistitem->preitem, buf[5]);
 		write(flbookmarksnew, (char *) &mylistitem,
 		      sizeof(mylistitem));
@@ -275,7 +275,7 @@ void editbookmarksSave(GtkWidget * editdlg)
 void getitem(gchar * buf[6])
 {
 	static gchar subs[6][80],
-	    tmpbuf[255], *preitem = "", *presubitem = "Edit Bookmarks";
+	    tmpbuf[255], *preitem = "", *presubitem = "Edit Quickmarks";
 	static gint oldlevel = 0;
 	gint level, type;
 	static gboolean firsttime = TRUE, firstsub = TRUE, first0item =
@@ -288,7 +288,7 @@ void getitem(gchar * buf[6])
 			sprintf(subs[i], "%s", "");
 		sprintf(tmpbuf, "%s", "");
 		preitem = "";
-		presubitem = "Edit Bookmarks";
+		presubitem = "Edit Quickmarks";
 		oldlevel = 0;
 		firsttime = TRUE;
 		firstsub = TRUE;
@@ -474,7 +474,7 @@ GtkWidget *createListEditor(void)
 {
 	GtkWidget *ListEditor, *text;
 
-	title = "GnomeSword - Bookmark Editor";
+	title = "GnomeSword - Quickmark Editor";
 	p_mylistitem = &mylistitem;
 	ListEditor = create_listeditor();
 	text = lookup_widget(ListEditor, "text7");
@@ -513,11 +513,11 @@ void applychanges(GtkWidget * widget)
 	editbookmarksSave(listeditor);
 	getrow(list, 0, buf);
 	getitem(buf);
-	sprintf(tmpbuf, "%s%s", "_Bookmarks/", buf[0]);
+	sprintf(tmpbuf, "%s%s", "_Quickmarks/", buf[0]);
 	/* remove old bookmarks form menu -- menustuff.cpp */
 	removemenuitems(MainFrm, tmpbuf, ibookmarks);
 	/* add Separator it was deleted with old menus */
-	addseparator(MainFrm, "_Bookmarks/Edit Bookmarks");
+	addseparator(MainFrm, "_Quickmarks/Edit Quickmarks");
 	/* let's show what we did -- filestuff.cpp */
 	loadbookmarks_programstart();
 	loadbookmarksnew(list);
@@ -1132,7 +1132,7 @@ GtkWidget *create_listeditor(void)
 	gtk_widget_show(hbox1);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox1), hbox1, TRUE, TRUE, 0);
 
-	frame3 = gtk_frame_new("Bookmarks");
+	frame3 = gtk_frame_new("Quickmarks");
 	gtk_widget_ref(frame3);
 	gtk_object_set_data_full(GTK_OBJECT(listeditor), "frame3", frame3,
 				 (GtkDestroyNotify) gtk_widget_unref);

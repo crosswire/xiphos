@@ -300,7 +300,7 @@ void savebookmark(gchar * item)
 	strcpy(p_mylist->item, item);	/* bookmark label (verse) */
 	strcpy(p_mylist->preitem, rememberlastitem),	/* item in menu to follow (you have to tell gnome where to insert the item) */
 	    strcpy(p_mylist->subitem, "");	/* item does not belong to a submenu */
-	strcpy(p_mylist->menu, "_Bookmarks/");	/* item does belong to the bookmark menu */
+	strcpy(p_mylist->menu, "_Quickmarks/");	/* item does belong to the bookmark menu */
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));	/* write the record to the bookmark file */
 	close(flbookmarksnew);	/* close the file we are done for now */
 }
@@ -321,9 +321,9 @@ void createFiles(void)
 	p_mylist->type = 1;
 	p_mylist->level = 0;
 	strcpy(p_mylist->item, "[What must I do to be saved?]");
-	strcpy(p_mylist->preitem, "Edit Bookmarks"),
+	strcpy(p_mylist->preitem, "Edit Quickmarks"),
 	    strcpy(p_mylist->subitem, "");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 0;
@@ -331,7 +331,7 @@ void createFiles(void)
 	strcpy(p_mylist->item, "Romans 1:16");
 	strcpy(p_mylist->preitem, ""),
 	    strcpy(p_mylist->subitem, "[What must I do to be saved?]/");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 0;
@@ -339,7 +339,7 @@ void createFiles(void)
 	strcpy(p_mylist->item, "Eph 2:8");
 	strcpy(p_mylist->preitem, "Romans 1:16"),
 	    strcpy(p_mylist->subitem, "[What must I do to be saved?]/");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 0;
@@ -347,7 +347,7 @@ void createFiles(void)
 	strcpy(p_mylist->item, "Acts  16:31");
 	strcpy(p_mylist->preitem, "Eph 2:8"),
 	    strcpy(p_mylist->subitem, "[What must I do to be saved?]/");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 1;
@@ -355,7 +355,7 @@ void createFiles(void)
 	strcpy(p_mylist->item, "[What is the Gospel?]");
 	strcpy(p_mylist->preitem, "[What must I do to be saved?]"),
 	    strcpy(p_mylist->subitem, "");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 0;
@@ -363,14 +363,14 @@ void createFiles(void)
 	strcpy(p_mylist->item, "1 Cor 15:1");
 	strcpy(p_mylist->preitem, ""),
 	    strcpy(p_mylist->subitem, "[What is the Gospel?]/");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 0;
 	p_mylist->level = 0;
 	strcpy(p_mylist->item, "Romans 8:28");
 	strcpy(p_mylist->preitem, ""), strcpy(p_mylist->subitem, "");
-	strcpy(p_mylist->menu, "_Bookmarks/<Separator>");
+	strcpy(p_mylist->menu, "_Quickmarks/<Separator>");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	p_mylist->type = 0;
@@ -378,7 +378,7 @@ void createFiles(void)
 	strcpy(p_mylist->item, "Rev 1:5");
 	strcpy(p_mylist->preitem, "Romans 8:28"),
 	    strcpy(p_mylist->subitem, "");
-	strcpy(p_mylist->menu, "_Bookmarks/");
+	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	close(flbookmarksnew);
