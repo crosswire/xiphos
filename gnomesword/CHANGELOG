@@ -1,6 +1,10 @@
 CHANGELOG for gnomesword
 ========================
 
+Version 0.3pre2 -- Wed, Mar 28, 2001 08:51:17 PM
+------------------------------------------------
+new view dict and comm dialogs
+
 Version 0.3pre1 -- Thu, Mar 01, 2001 12:12:12 PM
 ------------------------------------------------
 added html widgets using GtkHTML 
