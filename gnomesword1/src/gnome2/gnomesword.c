@@ -333,4 +333,5 @@ void shutdown_frontend(void)
 		gui_shutdown_percomm();
 
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
+	
 }
