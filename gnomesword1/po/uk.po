@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword2-2.1.dev1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 16:14-0400\n"
+"POT-Creation-Date: 2004-07-13 16:02-0400\n"
 "PO-Revision-Date: 2004-01-20 15:31+0200\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -48,53 +48,53 @@ msgstr "Кількість модулів особистих коментарі�
 msgid "Number of Devotion modules"
 msgstr "Кількість молитовних модулів:"
 
-#: src/main/sidebar.cc:355
+#: src/main/sidebar.cc:356
 msgid "verse"
 msgstr "вірш"
 
-#: src/main/sidebar.cc:415
+#: src/main/sidebar.cc:416
 msgid "chapter"
 msgstr "розділ"
 
 #.
 #. * parallel page
 #.
-#: src/main/sidebar.cc:543 src/main/sidebar.cc:790 src/main/sidebar.cc:791
-#: src/main/sidebar.cc:792 src/gnome2/parallel_dialog.c:133
+#: src/main/sidebar.cc:544 src/main/sidebar.cc:791 src/main/sidebar.cc:792
+#: src/main/sidebar.cc:793 src/gnome2/parallel_dialog.c:133
 #: src/gnome2/parallel_dialog.c:135 src/gnome2/parallel_view.c:365
 #: src/gnome2/parallel_view.c:390 src/gnome2/sidebar.c:642
 #: src/gnome2/sidebar.c:651 src/gnome2/utilities.c:177
 msgid "Parallel View"
 msgstr "Паралельний перегляд"
 
-#: src/main/sidebar.cc:549 src/main/sidebar.cc:798 src/main/sidebar.cc:799
-#: src/main/sidebar.cc:800
+#: src/main/sidebar.cc:550 src/main/sidebar.cc:799 src/main/sidebar.cc:800
+#: src/main/sidebar.cc:801
 msgid "Standard View"
 msgstr "Стандартний перегляд"
 
-#: src/main/sidebar.cc:555 src/main/sidebar.cc:827 src/main/sidebar.cc:829
+#: src/main/sidebar.cc:556 src/main/sidebar.cc:828 src/main/sidebar.cc:830
 #: src/gnome2/mod_mgr.c:614 src/gnome2/preferences_dialog.c:1739
 #: src/gnome2/utilities.c:199
 msgid "Commentaries"
 msgstr "Коментарі"
 
-#: src/main/sidebar.cc:564 src/main/sidebar.cc:884 src/main/sidebar.cc:886
+#: src/main/sidebar.cc:565 src/main/sidebar.cc:885 src/main/sidebar.cc:887
 #: src/gnome2/mod_mgr.c:624 src/gnome2/utilities.c:242
 msgid "General Books"
 msgstr "Загальні книги"
 
-#: src/main/sidebar.cc:666 src/main/sidebar.cc:718 src/gnome2/mod_mgr.c:445
+#: src/main/sidebar.cc:667 src/main/sidebar.cc:719 src/gnome2/mod_mgr.c:445
 #: src/gnome2/mod_mgr.c:513 src/gnome2/utilities.c:69
 #: src/gnome2/utilities.c:119
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: src/main/sidebar.cc:782 src/main/sidebar.cc:784 src/gnome2/mod_mgr.c:610
+#: src/main/sidebar.cc:783 src/main/sidebar.cc:785 src/gnome2/mod_mgr.c:610
 #: src/gnome2/utilities.c:171
 msgid "Biblical Texts"
 msgstr "Біблійні тексти"
 
-#: src/main/sidebar.cc:855 src/main/sidebar.cc:857 src/gnome2/mod_mgr.c:619
+#: src/main/sidebar.cc:856 src/main/sidebar.cc:858 src/gnome2/mod_mgr.c:619
 #: src/gnome2/utilities.c:220
 msgid "Dictionaries"
 msgstr "Словники"
@@ -108,8 +108,8 @@ msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
 msgstr ""
-"Ми би хотіли висловити подяку Трою Гриффиттсу та всім іншим людям, які надали "
-"нам проект SWORD."
+"Ми би хотіли висловити подяку Трою Гриффиттсу та всім іншим людям, які "
+"надали нам проект SWORD."
 
 #: src/gnome2/about_modules.c:162
 msgid "About Sword Module"
@@ -123,12 +123,12 @@ msgid ""
 "other books. Many frontends are built using this framework. An installed "
 "module set may be shared between any frontend using the framework."
 msgstr ""
-"Проект SWORD є спробою створення програми для дослідження та "
-"пізнання Бога і Його Слова, яка весь час розширюється. Базовий модуль SWORD Біблії дозволяє легко "
-"маніпулювати біблійними текстами, коментарями, лексіконами, словниками та "
-"іншими книгами. Більшість фронтендів створені з використанням цього "
-"модуля. Набір інстальованих на його основі модулів, може "
-"розподілятися між будь-якими фронтендами."
+"Проект SWORD є спробою створення програми для дослідження та пізнання Бога і "
+"Його Слова, яка весь час розширюється. Базовий модуль SWORD Біблії дозволяє "
+"легко маніпулювати біблійними текстами, коментарями, лексіконами, словниками "
+"та іншими книгами. Більшість фронтендів створені з використанням цього "
+"модуля. Набір інстальованих на його основі модулів, може розподілятися між "
+"будь-якими фронтендами."
 
 #: src/gnome2/about_sword.c:111
 msgid "About the SWORD Project"
@@ -260,7 +260,7 @@ msgstr "Заголовки"
 msgid "Variants"
 msgstr "Варіанти"
 
-#: src/gnome2/bibletext.c:943 src/gnome2/bibletext.c:1056
+#: src/gnome2/bibletext.c:943 src/gnome2/bibletext.c:1057
 #: src/gnome2/bibletext_dialog.c:1833 src/gnome2/bibletext_dialog.c:1942
 #: src/gnome2/commentary.c:687 src/gnome2/commentary.c:806
 #: src/gnome2/commentary_dialog.c:1515 src/gnome2/commentary_dialog.c:1619
@@ -815,11 +815,11 @@ msgstr "Помічник встановлення був скасований."
 msgid "Do you wish to set preferences now?"
 msgstr "Ви бажаєте зараз встановити параметри?"
 
-#: src/gnome2/gnomesword.c:219
+#: src/gnome2/gnomesword.c:220
 msgid "done"
 msgstr "готово"
 
-#: src/gnome2/gnomesword.c:281
+#: src/gnome2/gnomesword.c:282
 msgid "GnomeSword is shutdown"
 msgstr "GnomeSword вимкнено"
 
@@ -883,7 +883,8 @@ msgstr "Менеджер модулів: "
 
 #: src/gnome2/main_menu.c:523
 msgid "Use module manager to install and remove Sword modules"
-msgstr "Використовуйте менеджер модулів для встановлення та видалення модулів Sword "
+msgstr ""
+"Використовуйте менеджер модулів для встановлення та видалення модулів Sword "
 
 #: src/gnome2/main_menu.c:532
 msgid "C_lear"
@@ -1105,7 +1106,9 @@ msgstr "ПОПЕРЕДЖЕННЯ:"
 
 #: src/gnome2/mod_mgr.c:1987
 msgid "If you live in a persecuted country use with care."
-msgstr "Якщо ви живете в країні, де переслідують за переконання, використовуйте обережно."
+msgstr ""
+"Якщо ви живете в країні, де переслідують за переконання, використовуйте "
+"обережно."
 
 #: src/gnome2/mod_mgr.c:1995
 msgid "Cover"
@@ -1135,7 +1138,10 @@ msgstr "Встановити вказане"
 msgid ""
 "If you live in a persecuted country and do not wish to risk detection you "
 "should NOT use  the remote installation feature! "
-msgstr "Якщо ви живете у країні, в якій переслідують за переконання, і не бажаєте, щоби вас викрили, ви НЕ повинні користуватися функцією дистанційного встановлення! "
+msgstr ""
+"Якщо ви живете у країні, в якій переслідують за переконання, і не бажаєте, "
+"щоби вас викрили, ви НЕ повинні користуватися функцією дистанційного "
+"встановлення! "
 
 #: src/gnome2/mod_mgr.c:2160
 msgid "Install Modules"
@@ -1463,7 +1469,7 @@ msgstr "Вкладки та панелі"
 
 #: src/gnome2/preferences_dialog.c:1007 src/gnome2/search_dialog.c:1375
 #: src/gnome2/search_dialog.c:2037 src/gnome2/sidebar.c:208
-#: src/gnome2/sidebar.c:1409
+#: src/gnome2/sidebar.c:1470
 msgid "Modules"
 msgstr "Модулі"
 
@@ -1550,7 +1556,8 @@ msgstr "Так, використовувати типові"
 
 #: src/gnome2/preferences_dialog.c:1634
 msgid "No, use settings saved the last time I used GnomeSword"
-msgstr "Ні, використовувати налаштування, збережені під час останнього використання"
+msgstr ""
+"Ні, використовувати налаштування, збережені під час останнього використання"
 
 #: src/gnome2/preferences_dialog.c:1668
 msgid "Use tabbed browsing"
@@ -1685,8 +1692,8 @@ msgid ""
 "Which Greek Lexicon to display in Dictionary/Lexicon window when a link or "
 "word is clicked"
 msgstr ""
-"Котрий грецький лексикон відображати у вікні Словник/Лексикон при клацанні на "
-"ланці чи слові"
+"Котрий грецький лексикон відображати у вікні Словник/Лексикон при клацанні "
+"на ланці чи слові"
 
 #: src/gnome2/preferences_dialog.c:2284
 msgid "Hebrew Lexicon Viewer"
@@ -1709,7 +1716,9 @@ msgstr "Переглядач грецького лексикона"
 
 #: src/gnome2/preferences_dialog.c:2350
 msgid "Which Greek Lexicon to display in viewer when a link or word is clicked"
-msgstr "Який грецький лексикон відображати у переглядачі при клацанні на ланці або слові"
+msgstr ""
+"Який грецький лексикон відображати у переглядачі при клацанні на ланці або "
+"слові"
 
 #: src/gnome2/search_dialog.c:48
 msgid "Searching the "
@@ -2034,8 +2043,8 @@ msgid ""
 msgstr ""
 "Оскільки це ваш перший запуск GnomeSword, цей помічник поставить вам "
 "декілька простих питань для початкового встановлення.\n"
-"Коли ви пройдете ці кроки, пізніше ви завжди матимете змогу змінити налаштування "
-"за допомогою діалогу 'Вподобання'."
+"Коли ви пройдете ці кроки, пізніше ви завжди матимете змогу змінити "
+"налаштування за допомогою діалогу 'Вподобання'."
 
 #: src/gnome2/setup_druid.c:447
 msgid "GnomeSword Configuration - Page 2 of 5"
@@ -2134,8 +2143,8 @@ msgid ""
 "Which Greek Lexicon to display in Dictionary/Lexicon Window when a link or "
 "word is clicked"
 msgstr ""
-"Який грецький лексикон відображати у вікні Словнику/Лексикону при клацанні на "
-"ланці або слові"
+"Який грецький лексикон відображати у вікні Словнику/Лексикону при клацанні "
+"на ланці або слові"
 
 #: src/gnome2/setup_druid.c:994
 msgid ""
@@ -2195,23 +2204,23 @@ msgstr "Відкрити вибраний модуль в диалозі"
 msgid "View information about the selected dialog"
 msgstr "Перегляд информации о выбранном диалоге"
 
-#: src/gnome2/sidebar.c:1260
+#: src/gnome2/sidebar.c:1321
 msgid "_Modules"
 msgstr "_Модулі"
 
-#: src/gnome2/sidebar.c:1268
+#: src/gnome2/sidebar.c:1329
 msgid "_Bookmarks"
 msgstr "_Закладки"
 
-#: src/gnome2/sidebar.c:1276
+#: src/gnome2/sidebar.c:1337
 msgid "_Search"
 msgstr "_Пошук"
 
-#: src/gnome2/sidebar.c:1285
+#: src/gnome2/sidebar.c:1346
 msgid "Verse _List"
 msgstr "Список _віршів"
 
-#: src/gnome2/sidebar.c:1295
+#: src/gnome2/sidebar.c:1356
 msgid "_Viewer"
 msgstr "_Переглядач"
 
@@ -2248,9 +2257,9 @@ msgid ""
 "Enter a Verse reference in Book 1:1 format and press Return or click the Go "
 "to Verse button"
 msgstr ""
-"Введіть посилання на вірш в форматі Книга 1:1 і натисніть Enter або кнопку Перейти до вірша"
+"Введіть посилання на вірш в форматі Книга 1:1 і натисніть Enter або кнопку "
+"Перейти до вірша"
 
 #: src/gnome2/toolbar_nav.c:489
 msgid "Go to verse"
 msgstr "Перейти до вірша"
-
