@@ -121,7 +121,7 @@ static void applyoptions(SETTINGS * s)
 				   s->text_tabs); 
 	gui_set_text_frame_label();
 	
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookGBS),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_gbs),
 				   s->book_tabs);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookDL),
 				   s->dict_tabs);

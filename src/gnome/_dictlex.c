@@ -685,7 +685,6 @@ void gui_create_dictlex_pane(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(dl->clist), "select_row",
 			   GTK_SIGNAL_FUNC(on_clistDictLex_select_row),
 			   dl);
-	return frameDict;
 }
 
 //******  end of file  ******/

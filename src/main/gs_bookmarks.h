@@ -32,46 +32,46 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-//#include "sword.h"
-#include "gs_gnomesword.h"
 
-	typedef struct _bmtree BM_TREE;
-	struct _bmtree {
-		GtkWidget *ctree_widget;
-		GtkCTree *ctree;
-	};
-	
-	void add_bookmark_to_tree(GtkCTreeNode * node,
-			   gchar * modName, gchar * verse);
-	void loadtree(SETTINGS * s);
-	GtkWidget *create_pmBookmarkTree(void);
-	void
-	 on_new_subgroup_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
-	void
-	 on_add_new_group1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data);
-	void
-	 on_save_bookmarks1_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
-	void
-	 on_edit_item_activate(GtkMenuItem * menuitem,
-			       gpointer user_data);
-	void
-	 on_delete_item_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
-	void
-	 on_allow_reordering_activate(GtkMenuItem * menuitem,
-				      gpointer user_data);
-	void
-	 addverselistBM(SETTINGS * s, GList * list);
-	// gint loadoldbookmarks(void);
-	GtkWidget *create_dlgEditBookMark(gchar * text[3],
-					  gboolean newbookmark);
-	void
-	 create_addBookmarkMenuBM(GtkWidget * menu,
-				  GtkWidget * bookmark_menu_widget,
-				  SETTINGS *);
+#include "settings.h"
+
+typedef struct _bmtree BM_TREE;
+struct _bmtree {
+	GtkWidget *ctree_widget;
+	GtkCTree *ctree;
+};
+
+void add_bookmark_to_tree(GtkCTreeNode * node,
+		   gchar * modName, gchar * verse);
+void loadtree(SETTINGS * s);
+GtkWidget *create_pmBookmarkTree(void);
+void
+ on_new_subgroup_activate(GtkMenuItem * menuitem,
+			  gpointer user_data);
+void
+ on_add_new_group1_activate(GtkMenuItem * menuitem,
+			    gpointer user_data);
+void
+ on_save_bookmarks1_activate(GtkMenuItem * menuitem,
+			     gpointer user_data);
+void
+ on_edit_item_activate(GtkMenuItem * menuitem,
+		       gpointer user_data);
+void
+ on_delete_item_activate(GtkMenuItem * menuitem,
+			 gpointer user_data);
+void
+ on_allow_reordering_activate(GtkMenuItem * menuitem,
+			      gpointer user_data);
+void
+ addverselistBM(SETTINGS * s, GList * list);
+// gint loadoldbookmarks(void);
+GtkWidget *create_dlgEditBookMark(gchar * text[3],
+				  gboolean newbookmark);
+void
+ create_addBookmarkMenuBM(GtkWidget * menu,
+			  GtkWidget * bookmark_menu_widget,
+			  SETTINGS *);
 
 
 #ifdef __cplusplus
