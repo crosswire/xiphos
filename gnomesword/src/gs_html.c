@@ -91,87 +91,43 @@ GtkWidget *gs_new_html_widget(SETTINGS *s) {
 	return html;
 }
 
-/***************************************************************************************************
+/*
  *
- ***************************************************************************************************/
-void on_url(GtkHTML * html, const gchar * url, gpointer data) {
-	//GnomeApp *app;
-	gchar buf[255];	
+ */
+void on_url(GtkHTML * html, const gchar * url, gpointer data) 
+{	
+	gchar buf[255];		
 	
-	//app = GNOME_APP(data);
+	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
 		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
 					"");
 		in_url = FALSE;
 	}
+	/***  we are in an url  ***/
 	else {
-		in_url = TRUE;
-		
+		in_url = TRUE; /* we need this for html_button_released */
+		/***  swap interlinear and main text mods link ***/
 		if (*url == '@') {
 			++url;
 			sprintf(buf, _("Show %s in main window"), url);
-		/*
-		} else if (!strncmp(url, "type=morph", 10)) {
-			gchar *modbuf = NULL;
-			gchar *mybuf = NULL;
-			mybuf = strstr(url, "class=Packard");
-			if (mybuf) {
-				modbuf = "Packard";
-			}
-			mybuf = NULL;
-			mybuf = strstr(url, "value=");
-			if (mybuf) {
-				gint i;
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				for(i=0;i<strlen(mybuf);i++){
-					if(mybuf[i]=='-') 
-						mybuf[i]=' ';
-				}
-			}
-			sprintf(buf,"%s",url); 		
-			displaydictlexSBSW(modbuf, mybuf, settings);			
-			return;
-		} else if (*url == '#') {
-			++url;
-			if (*url == 'T')
-				++url;
-			if (*url == 'G') {
-				gchar *tmpbuf;
-				++url;
-				tmpbuf = g_strdup(url);
-				displaydictlexSBSW(settings->lex_greek,
-						      tmpbuf, settings);
-				g_free(tmpbuf);
-			}
-			if (*url == 'H') {
-				gchar *tmpbuf;
-				++url;
-				tmpbuf = g_strdup(url);
-				displaydictlexSBSW(settings->lex_hebrew,
-						      tmpbuf, settings);
-				g_free(tmpbuf);
-			}
-			sprintf(buf, _("Go to Strongs %s"), url);
-		} else if (*url == 'M') {
-			gchar *tmpbuf;
-			++url;
-			tmpbuf = g_strdup(url);
-			displaydictlexSBSW("Packard", tmpbuf, settings);
-			g_free(tmpbuf);
-			sprintf(buf, "Morph Tag: %s", url);
-		*/
-		} else if (*url == '[') {
+		} 
+		/***  module name link  ***/		
+		else if (*url == '[') {
 			++url;
 			while (*url != ']') {
 				++url;
 			}
 			++url;
 			sprintf(buf, "%s", url);
-		} else if (*url == '*') {
+		} 
+		/***  verse number link  ***/
+		else if (*url == '*') {
 			++url;
 			sprintf(buf, "%s", url);
-		} else
+		} 
+		/***  any other link  ***/
+		else
 			sprintf(buf, _("Go to %s"), url);
 		
 		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
@@ -179,9 +135,9 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data) {
 	}
 }
 
-/***************************************************************************************************
+/*
  *link in commentary module clicked
- ***************************************************************************************************/
+ */
 void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf = NULL, *modbuf = NULL, tmpbuf[255];
@@ -193,7 +149,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		++url;
 		swapmodsSWORD((gchar *) url);
 	} 
-		
+	/***  verse numbers in Bible Text window  ***/	
 	else if (*url == '*') {
 		++url;
 		while (*url != ']') {
@@ -212,7 +168,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		changeVerseSWORD(buf);
 		g_free(buf);
 	}
-	
+	/***  module name  ***/
 	else if (*url == '[') {
 		++url;
 		while (*url != ']') {
@@ -223,7 +179,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		showmoduleinfoSWORD(tmpbuf,FALSE);
 	 
 	} 
-	/*** let's seperate mod version and passage ***/
+	/*** thml verse reference ***/
 	else if (!strncmp(url, "version=", 7)
 		   || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
@@ -270,7 +226,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		g_free(buf);
 		
 	} 
-	
+	/***  thml morph tag  ***/
 	else if (!strncmp(url, "type=morph", 10)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
@@ -299,7 +255,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(settings->inViewer) displaydictlexSBSW(modbuf, buf, settings);
 		g_free(buf);
 	} 
-	/*** l ***/
+	/*** thml strongs ***/
 	else if (!strncmp(url, "type=Strongs", 12)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
@@ -329,7 +285,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		g_free(buf);
 
 	} 
-	
+	/***  gbf strongs  ***/
 	else if (*url == '#') {
 		++url;		/* remove # */
 		if (*url == 'T') {
@@ -409,7 +365,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			}
 		}
 	} 
-	
+	/***  gbf morph tag  ***/
 	else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
@@ -419,9 +375,9 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	}
 }
 
-/******************************************************************************
+/*
  * 
- ******************************************************************************/
+ */
 static gint
 html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		    gpointer * data)
