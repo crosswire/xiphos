@@ -367,7 +367,6 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 			       utf8len);
 	}
 
-
 	if (settings.displaySearchResults) {
 		str = g_string_new(text);
 		mark_search_words(str);

@@ -1,3 +1,12 @@
+2002-12-23  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed gui/editor_toolbar.h and gnome/editor_toolbar.c
+	* added gui/toolbar_style.h and gui/toolbar_edit.h
+	* added gnome/toolbar_style.c and gnome/toolbar_edit.c
+	* added menu items to editors to toggle toolbars on and off
+
+
+
 2002-12-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* moved editors from upper workbook to lower workbook
