@@ -41,7 +41,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <gal/widgets/e-unicode.h>
-//#include <g++-3/string>
 
 #include "sw_gbfhtml.h"
 #include "sw_thmlhtml.h"
@@ -51,7 +50,7 @@
 #include "display.h"
 #include "gs_display.h"
 #include "callback.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "support.h"
 #include "gs_preferences_dlg.h"
 #include "gs_file.h"
@@ -84,17 +83,14 @@ SWDisplay
 	*FPNDisplay, /* to display formatted personal notes using GtkText */
 	*HTMLDisplay, /* to display formatted html */
 	*listDisplay,	/* to display modules in list editor */
-	*SDDisplay,	/* to display modules in view dict dialog */
 	*RWPDisplay,	/* to display rwp module in gtktext window */
-	*VCDisplay,	/* to display modules in view comm dialog */
 	*UTF8Display;	/* to display modules in utf8 */ 
 SWMgr 
 	*mainMgr, /* sword mgr for curMod - curcomMod - curdictMod */
 	*mainMgr1, /* sword mgr for comp1Mod - first interlinear module */
 	*percomMgr, /* sword mgr for percomMod - personal comments editor */
-	*listMgr,	/* sword mgr for ListEditor */
-	*SDMgr,	/* sword mgr for view dict dialog */
-	*VCMgr;	/* sword mgr for view comm dialog */
+	*listMgr;	/* sword mgr for ListEditor */
+	
 VerseKey 
 	swKey = "Romans 8:28";	/* temp storage for verse keys */
 SWModule 
@@ -103,9 +99,8 @@ SWModule
 	*curcomMod, /* module for commentary  window */	
 	*percomMod, /* module for personal commentary  window */	
 	*curdictMod, /* module for dict window */
-	*listMod,   /* module for ListEditor */
-	*SDMod,   /* module for view dict dialog */
-	*VCMod;   /* module for view comm dialog */
+	*listMod;  /* module for ListEditor */
+
 SWFilter 
 	*gbftohtml, /* sword render filters */
 	*plaintohtml,
@@ -504,15 +499,6 @@ FillDictKeysSWORD(void)
 	}
 }
 
-
-//-------------------------------------------------------------------------------------------
-void
-shutdownSDSWORD(void)  //-- close down show dict/lex dialog
-{	
-	delete SDMgr;	
-	if(SDDisplay)
-		delete SDDisplay;	
-}
 
 
 //-------------------------------------------------------------------------------------------
@@ -1225,33 +1211,12 @@ void destroyListEditorSWORD(void)	//-- destroy ListEditor
 	if (listDisplay)	//-- delete Sword display
 		delete listDisplay;
 }
-
-/****************************************************************************************
- *setupSDSWORD - set up the sword stuff for the view dictionary dialog
- *returns a list of dict modules
- ****************************************************************************************/
-GList* setupSDSWORD(GtkWidget *text)
+/******************************************************************************
+ * returns the name of the current commentary module
+ ******************************************************************************/
+gchar* getcommodSWORD(void)
 {
-	GList *list;
-	ModMap::iterator it; //-- iteratior			
-	SectionMap::iterator sit; //-- iteratior
-	
-	SDMgr	= new SWMgr();
-	SDMod     = NULL;
-	SDDisplay = new  GtkHTMLEntryDisp(text);
-	//SDDisplay = new  GtkHTMLEntryDisp(text);
-	list = NULL;
-	for(it = SDMgr->Modules.begin(); it != SDMgr->Modules.end(); it++){
-		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
-			SDMod = (*it).second;
-			list = g_list_append(list,SDMod->Name());
-			sit = SDMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(SDMod, section);		
-			SDMod->Disp(SDDisplay);
-		}
-	}
-	return list;
+	return curcomMod->Name();
 }
 
 /****************************************************************************** 
@@ -1270,13 +1235,6 @@ gchar* gettextmodSWORD(void)
 	return curMod->Name();    
 }
 
-/******************************************************************************
- * returns the name of the current commentary module
- ******************************************************************************/
-gchar* getcommodSWORD(void)
-{
-	return curcomMod->Name();
-}
 
 /******************************************************************************
  * returns the description of the current commentary module
@@ -1286,85 +1244,6 @@ gchar* getcommodDescriptionSWORD(void)
 	return (char *) curcomMod->Description();;
 }
 
-/******************************************************************************
- * returns the description of the view commentary dialog module
- ******************************************************************************/
-gchar* getVCmodDescriptionSWORD(void)
-{
-	return (char *) VCMod->Description();;
-}
-
-/******************************************************************************
- * returns the description of the view commentary dialog module
- ******************************************************************************/
-gchar* getSDmodDescriptionSWORD(void)
-{
-	return (char *) SDMod->Description();;
-}
-
-/******************************************************************************
- *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
- *
- ******************************************************************************/
-void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
-{
-	ModMap::iterator it;
-        
-        
-        gtk_clist_clear( GTK_CLIST(clist)); //-- start with empty list	
-        it = SDMgr->Modules.find(modName);  //-- find module we want to use
-	if (it != SDMgr->Modules.end()){		
-		SDMod = (*it).second;  //-- set curdictMod to new choice
-		SDMod->SetKey("");		
-		SDMod->Display();	 //-- display new dict		
-	}
-}
-
-/******************************************************************************
- *loadSDkeysSWORD - load a dictionary keys into clist
- *returns a list of keys
- ******************************************************************************/
-void loadSDkeysSWORD(GtkWidget *clist)
-{
-	gchar *listitem;
-	//SDMod->SetKey("A");
-	if(!stricmp(SDMod->Name(),"WebstersDict"))
-		SDMod->SetKey("A");
-	else
-		(*SDMod)=TOP; 
-	SDMod->Display();
-	SDMod->Error();
-	for (;!SDMod->Error();(*SDMod)++){
-		listitem = g_strdup((const char *)SDMod->KeyText()); //-- key to listitem
-		gtk_clist_append(GTK_CLIST(clist) , &listitem); //-- listitem to list
-		if(listitem)
-			g_free(listitem);
-	}
-}
-
-/******************************************************************************
- *gotokeySWORD - find new key for view dictionary dialog
- *
- ******************************************************************************/
-void gotokeySWORD(gchar *newkey)
-{
-        SDMod->SetKey(newkey); //-- set key to our text
-        SDMod->Display();
-}
-
-/******************************************************************************
- * SDdictSearchTextChangedSWORD - dict lookup text changed
- *  newkey from the dict lookup entry
- ******************************************************************************/
-void SDdictSearchTextChangedSWORD(char* newkey)
-{		
-	if (SDMod){ //-- if we have a dict module	
-		if(strcmp(newkey,"")){  //-- if text is not null		
-			SDMod->SetKey(newkey); //-- set key to our text
-			SDMod->Display();	//-- show what we found	
-		}
-	}
-}
 
 /******************************************************************************  
  * 
@@ -1392,81 +1271,7 @@ void startsearchSWORD(GtkWidget *searchFrm)
 }
 
 
-/****************************************************************************************
- *setupCommSWORD - set up the sword stuff for the view commentary dialog
- *returns a list of commentary modules
- ****************************************************************************************/
-GList* setupCommSWORD(GtkWidget *text)
-{
-	GList *list;
-	ModMap::iterator it; //-- iteratior	
-	SectionMap::iterator sit; //-- iteratior
-	
-	VCMgr	= new SWMgr();
-	VCMod     = NULL;
-	VCDisplay = new  GtkHTMLEntryDisp(text);
-	//VCDisplay = new  GtkHTMLEntryDisp(text);
-	list = NULL;
-	for(it = VCMgr->Modules.begin(); it != VCMgr->Modules.end(); it++){
-		if(!strcmp((*it).second->Type(), "Commentaries")){
-			VCMod = (*it).second;
-			sit = VCMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(VCMod, section);
-			havebible = TRUE;		
-			list = g_list_append(list,VCMod->Name());
-			VCMod->Disp(VCDisplay);
-		}
-	}
-	return list;
-}
 
-//-------------------------------------------------------------------------------------------
-void shutdownVCSWORD(void)  //-- close down view comm dialog program
-{	
-	delete VCMgr;	
-	if(VCDisplay)
-		delete VCDisplay;	
-}
-
-/******************************************************************************
- *loadVCmodSWORD - load a commentary module into the view commentary dialog
- *
- ******************************************************************************/
-void loadVCmodSWORD(gchar *modName)
-{
-        ModMap::iterator it;
-        
-        it = VCMgr->Modules.find(modName);  //-- find module we want to use
-	if (it != VCMgr->Modules.end()){
-		
-		VCMod = (*it).second;  //-- set curdictMod to new choice
-		VCMod->SetKey("");		
-		VCMod->Display();	 //-- display new dict
-	}
-}
-
-/******************************************************************************
- *gotoverseVCSWORD - find new verse for view commentary dialog
- *
- ******************************************************************************/
-void gotoverseVCSWORD(gchar *newkey)
-{
-        VCMod->SetKey(newkey); //-- set key to our text
-        VCMod->Display();
-}
-
-void navVCModSWORD(gint direction)  //-- navigate the current commentary module
-{
-        switch(direction){   
-		case 0: (*VCMod)--;
-			break;
-		case 1: (*VCMod)++;
-			break;
-        }
-        VCMod->Error(); //-- clear any errors
-        VCMod->Display();
-}
 
 /******************************************************************************
 * returns a list of the books of the Bible

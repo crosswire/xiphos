@@ -1,9 +1,9 @@
 /***************************************************************************
-                                     gs_sword.h
+                                  sw_gnomesword.h
                              -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
+  				   Mon May 8 2000
+    			copyright  (C) 2000 by Terry Biggs
+ 				tbiggs@infinet.com
  ***************************************************************************/
 
  /*
@@ -21,8 +21,8 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-#ifndef __GS_SWORD_H__
-#define __GS_SWORD_H__  
+#ifndef __SW_GNOMESWORD_H__
+#define __SW_GNOMESWORD_H__  
 
 #ifdef __cplusplus
 extern "C" {
@@ -78,31 +78,18 @@ void navcurcommModSWORD(gint backfoward);
 void setuplisteditSWORD(GtkWidget *text);
 void changeLEverseSWORD(gchar *verse);
 void destroyListEditorSWORD(void);
-GList* setupSDSWORD(GtkWidget *text);
-void loadSDmodSWORD(GtkWidget *clist,gchar *modName);
 gchar* getdictmodSWORD(void);
 gchar* gettextmodSWORD(void);
 gchar* getcommodSWORD(void);
 gchar* getcommodDescriptionSWORD(void);
-void gotokeySWORD(gchar *newkey);
-void shutdownSDSWORD(void);
-void SDdictSearchTextChangedSWORD(char* newkey);
 GtkWidget *createSearchDlgSWORD(void);
 void startsearchSWORD(GtkWidget *searchFrm);
-GList* setupCommSWORD(GtkWidget *text);
-void shutdownVCSWORD(void) ;
-void loadVCmodSWORD(gchar *modName);
-void gotoverseVCSWORD(gchar *newkey);
-void navVCModSWORD(gint direction);
-gchar* getVCmodDescriptionSWORD(void);
-gchar* getSDmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
 void morphsSWORD(gint window, gboolean choice) ;
 void gotoBookmarkSWORD(gchar *modName, gchar *key);
 gchar* getmodkeySWORD(gint num);
 gfloat getSwordVerionSWORD(void);
 void swapmodsSWORD(gchar *intmod);
-void loadSDkeysSWORD(GtkWidget *clist);
 void loadpreferencemodsSWORD(void);
 void gs_firstrunSWORD(void);
 void applyfontcolorandsizeSWORD(void);
@@ -111,4 +98,4 @@ void updateshortcutbarSWORD(void);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __GS_SWORD_H__ */
+#endif	/* __SW_GNOMESWORD_H__ */

@@ -43,7 +43,7 @@
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_shortcutbar.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "e-splash.h"
 
 #include  <gal/shortcut-bar/e-shortcut-bar.h>

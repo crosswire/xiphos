@@ -39,7 +39,7 @@
 #include <unixstr.h>
 #endif
 
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "sw_utility.h"
 
 extern SWFilter *gbftohtml;

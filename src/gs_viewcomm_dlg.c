@@ -31,8 +31,9 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+#include "sw_viewcomm_dlg.h"
 #include "gs_viewcomm_dlg.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_html.h"
 
 /****************************************************************************************

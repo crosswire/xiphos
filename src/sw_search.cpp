@@ -33,7 +33,7 @@
 #include "sw_search.h"
 #include "display.h"
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "support.h"
 #include "sw_utility.h"
 #include "sw_verselist_sb.h"
