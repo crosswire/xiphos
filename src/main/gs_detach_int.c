@@ -43,7 +43,7 @@ GtkWidget *sbIntVerse;
 GtkWidget *entryIntLookup;
 gboolean ApplyChangeBook;
 
-static gchar *change_verse(void)
+static gchar *change_verse_interlinear(void)
 {	
 	gchar *retval;
 	gchar *bookname, *newbook, buf[256];
@@ -129,7 +129,7 @@ static void on_dlgInterlinear_destroy(GtkObject * object, SETTINGS * s)
 	gtk_widget_reparent(s->frameInt, vbox);
 	gtk_notebook_set_page(GTK_NOTEBOOK(s->workbook_lower), 2); 
 	s->dockedInt = TRUE;
-	updateinterlinearpage();
+	update_interlinear_page(s);
 }
 
 static void on_buttonIntSync_clicked(GtkButton * button, SETTINGS * s)
@@ -164,7 +164,7 @@ on_sbIntChapter_button_release_event(GtkWidget * widget,
 {		
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
-	s->cvInterlinear = change_verse();
+	s->cvInterlinear = change_verse_interlinear();
 	updateIntDlg(s);
 	ApplyChangeBook = TRUE;
 	return TRUE;
@@ -176,7 +176,7 @@ on_sbIntVerse_button_release_event(GtkWidget * widget,
 				 SETTINGS * s)
 {	
 	ApplyChangeBook = FALSE;
-	s->cvInterlinear = change_verse();
+	s->cvInterlinear = change_verse_interlinear();
 	updateIntDlg(s);
 	ApplyChangeBook = TRUE;
 	return TRUE;

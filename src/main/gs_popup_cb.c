@@ -134,7 +134,7 @@ void on_goto_reference_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    gtk_editable_get_chars(GTK_EDITABLE(NEtext),
 				   GTK_EDITABLE(NEtext)->selection_start_pos,
 				   GTK_EDITABLE(NEtext)->selection_end_pos);
-	//changeVerseSWORD(buf);
+	//change_verse(buf);
 		
 }
 
@@ -154,7 +154,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GTK_EDITABLE(text)->selection_end_pos);
 
 	
-	changeVerseSWORD(buf);*/
+	change_verse(buf);*/
 }
 
 //----------------------------------------------------------------------------------------------
@@ -212,7 +212,7 @@ on_lookup_selection2_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	changeVerseSWORD((gchar *) user_data);
+	change_verse((gchar *) user_data);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -326,12 +326,12 @@ void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 	
 	memset(modName,0,16); 
-	modNameFromDesc(modName, (gchar *) user_data);
+	backend_module_name_from_description(modName, (gchar *) user_data);
 //	g_warning(modName);
 	sprintf(settings->Interlinear1Module,"%s",modName);
-	//changeVerseSWORD(current_verse);
+	//change_verse(current_verse);
 	if(settings->dockedInt)
-		updateinterlinearpage();
+		update_interlinear_page(settings);
 	else
 		updateIntDlg(settings);
 }	
@@ -346,12 +346,12 @@ void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 	
 	memset(modName,0,16); 
-	modNameFromDesc(modName, (gchar *) user_data);
+	backend_module_name_from_description(modName, (gchar *) user_data);
 //	g_warning(modName);
 	sprintf(settings->Interlinear2Module,"%s",modName);
-	//changeVerseSWORD(current_verse);
+	//change_verse(current_verse);
 	if(settings->dockedInt)
-		updateinterlinearpage();
+		update_interlinear_page(settings);
 	else
 		updateIntDlg(settings);
 }		
@@ -365,12 +365,12 @@ void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 	
 	memset(modName,0,16); 
-	modNameFromDesc(modName, (gchar *) user_data);
+	backend_module_name_from_description(modName, (gchar *) user_data);
 //	g_warning(modName);
 	sprintf(settings->Interlinear3Module,"%s",modName);
-	//changeVerseSWORD(current_verse);
+	//change_verse(current_verse);
 	if(settings->dockedInt)
-		updateinterlinearpage();
+		update_interlinear_page(settings);
 	else
 		updateIntDlg(settings);
 }		
@@ -384,12 +384,12 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 	
 	memset(modName,0,16); 
-	modNameFromDesc(modName, (gchar *) user_data);
+	backend_module_name_from_description(modName, (gchar *) user_data);
 //	g_warning(modName);
 	sprintf(settings->Interlinear4Module,"%s",modName);
-	//changeVerseSWORD(current_verse);
+	//change_verse(current_verse);
 	if(settings->dockedInt)
-		updateinterlinearpage();
+		update_interlinear_page(settings);
 	else
 		updateIntDlg(settings);
 }		
@@ -403,12 +403,12 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	gchar modName[16];
 	
 	memset(modName,0,16); 
-	modNameFromDesc(modName, (gchar *) user_data);
+	backend_module_name_from_description(modName, (gchar *) user_data);
 //	g_warning(modName);
 	sprintf(settings->Interlinear5Module,"%s",modName);
-	//changeVerseSWORD(current_verse);
+	//change_verse(current_verse);
 	if(settings->dockedInt)
-		updateinterlinearpage();
+		update_interlinear_page(settings);
 	else
 		updateIntDlg(settings);
 }
@@ -417,7 +417,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 /*** toogle global options in interlinear window ***/
 void on_int_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	globaloptionsSWORD((gchar *)user_data, INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active, FALSE);	
+	set_module_global_options((gchar *)user_data, INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active, FALSE);	
 }
 
 void
