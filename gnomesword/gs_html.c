@@ -41,7 +41,7 @@
 #include <gtkhtml/htmlcolorset.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlcursor.h>
-#endif				/* GTK_HTML */
+#endif	/* GTK_HTML */
 
 #include "gs_html.h"
 #include "support.h"
@@ -50,25 +50,73 @@
 #ifdef USE_GTKHTML
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
-#endif				/* GTK_HTML */
+#endif	/* GTK_HTML */
 
 GtkWidget *htmlCommentaries;
 GtkWidget *htmlTexts;
+GtkWidget *htmlDict;
+GtkWidget *textDict;
+
 
 extern GtkWidget *MainFrm;
+extern GtkWidget *textDict;
+GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
+extern GtkWidget *appbar1;
+
+#ifdef USE_GTKHTML
+/***************************************************************************************************
+ *on_url taken form gtkhtml project
+ ***************************************************************************************************/
+static void
+on_url (GtkHTML *html, const gchar *url, gpointer data)
+{
+	GnomeApp *app;
+	gchar *str, buf[255];
+	
+	app = GNOME_APP (data);
+	if (url == NULL)
+		gnome_appbar_set_status (GNOME_APPBAR (appbar1), "");
+	else{
+		if (*url == '#') {
+			++url;
+			//str = showfirstlineStrongsSWORD(atoi(url));
+			sprintf(buf,"Go to Strongs %s",url);
+			
+		} else if(*url == '[') {
+			++url;
+			while(*url != ']') {
+				++url;
+			}
+			++url;
+			sprintf(buf,"%s",url);		
+		} else 
+			sprintf(buf,"Go to Reference  %s",url);
+		gnome_appbar_set_status (GNOME_APPBAR (appbar1), buf);
+	}
+}
 
 /***************************************************************************************************
  *link in commentary module clicked
  ***************************************************************************************************/
-#ifdef USE_GTKHTML
 static void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf;
-
-	buf = g_strdup(url);
-	changeVerseSWORD(buf);
-	g_free(buf);
+	gchar *buf, tmpbuf[255];
+	gint i=0;
+	
+	if(*url == '[')   {
+		++url;
+		while(*url != ']') {
+			tmpbuf[i++] = *url;
+			tmpbuf[i+1] = '\0';
+			++url;
+		}		
+		showmoduleinfoSWORD(tmpbuf); 
+	} else {
+		buf = g_strdup(url);
+		changeVerseSWORD(buf);
+		g_free(buf);
+	}
 }
 
 /***************************************************************************************************
@@ -104,8 +152,9 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
-
-	//g_warning(buf);
+	g_string_free(gs_clipboard,TRUE);
+	gs_clipboard = g_string_new(buf);
+	//g_print(gs_clipboard->str);
 }
 
 /***************************************************************************************************
@@ -200,37 +249,37 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER
 			  (lookup_widget(app, "scrolledwindow15")),
 			  textComp1);
-
-	textComp2 = gtk_html_new();
-	gtk_widget_ref(textComp2);
-	gtk_object_set_data_full(GTK_OBJECT(app), "textComp2",
-				 textComp2,
+			  
+	htmlDict = gtk_html_new();
+	gtk_widget_ref(htmlDict);	
+	gtk_object_set_data_full(GTK_OBJECT(app), "htmlDict",
+				 htmlDict,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(textComp2);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "scrolledwindow16")),
-			  textComp2);
+	gtk_widget_show(htmlDict);
+	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "scrolledwindow8")), htmlDict);
 
-	textComp3 = gtk_html_new();
-	gtk_widget_ref(textComp3);
-	gtk_object_set_data_full(GTK_OBJECT(app), "textComp3",
-				 textComp3,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(textComp3);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "scrolledwindow21")),
-			  textComp3);
 
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
+	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
 
 	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
 
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	gtk_signal_connect (GTK_OBJECT (htmlComments), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
 
-#else
+	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
+	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);			   
+
+#else	/* !USE_GTKHTML */
 	textComp1 = gtk_text_new(NULL, NULL);
 	gtk_widget_ref(textComp1);
 	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
@@ -261,9 +310,17 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			  (lookup_widget(app, "scrolledwindow21")),
 			  textComp3);
 
+	textDict = gtk_text_new(NULL, NULL);
+	gtk_widget_ref(textDict);
+	gtk_object_set_data_full(GTK_OBJECT(app), "textDict",
+				 textDict,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(textDict);
 
+	gtk_container_add(GTK_CONTAINER
+			(lookup_widget(app, "scrolledwindow8")), textDict);
 
-#endif				/* GTK_HTML */
+#endif	/* USE_GTKHTML */
 
 }
 
