@@ -163,7 +163,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
-#else
+#else /* !USE_SHORTCUTBAR */
         if(settings->showshortcutbar){
                 gtk_paned_set_position(GTK_PANED(lookup_widget(app,"hpaned2")), 106);
         }else{
