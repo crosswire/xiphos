@@ -1551,8 +1551,10 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_sidebar, GTK_CAN_FOCUS);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 				   (widgets.notebook_sidebar), FALSE);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_sidebar), TRUE);
+	/*gtk_notebook_set_scrollable(GTK_NOTEBOOK
+				    (widgets.notebook_sidebar), TRUE);*/
+	gtk_notebook_set_show_border(GTK_NOTEBOOK
+				     (widgets.notebook_sidebar), FALSE);
 
 	g_signal_connect ((gpointer) widgets.notebook_sidebar, "switch-page",
                     G_CALLBACK (on_notebook_switch_page),
@@ -1593,25 +1595,18 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	create_search_results_page(widgets.notebook_sidebar);
 	create_viewer_page(widgets.notebook_sidebar);
-
+/*
 	vbox_viewer = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_viewer);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
 			  vbox_viewer);
-
+*/
 	gui_load_module_tree(sidebar.module_list, TRUE);
-	/*mod_selection =
-	    G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(sidebar.module_list)));*/
 		     
 	g_signal_connect((gpointer) sidebar.module_list,
 			 "button_release_event",
 			 G_CALLBACK(on_modules_list_button_release),
 			 NULL);
-
-	/*g_signal_connect(mod_selection, "changed",
-			 G_CALLBACK(mod_selection_changed),
-			 sidebar.module_list);*/
 
 	sidebar.optionmenu1 = create_menu();
 	g_signal_connect (sidebar.optionmenu1,
@@ -1621,5 +1616,4 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	sidebar.menu_modules = create_menu_modules();
 
 	return vbox1;
-
 }
