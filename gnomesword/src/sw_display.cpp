@@ -130,22 +130,11 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 
 	Mgr = new SWMgr();	//-- create sword mgr
 
-	if ((sit =
-	     Mgr->config->Sections.find(imodule.Name())) !=
-	    Mgr->config->Sections.end()) {
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap & section = (*sit).second;
-		swfont =
-		    ((entry =
-		      section.find("Font")) !=
-		     section.end())? (*entry).second : (string) "";
-		swfontsize =
-		    ((entry =
-		      section.find("Font size")) !=
-		     section.end())? (*entry).second : (string) "";
-		lang =
-		    ((entry =
-		      section.find("Lang")) !=
-		     section.end())? (*entry).second : (string) "";
+		swfont = ((entry = section.find("GSFont")) != section.end())? (*entry).second : (string) "";
+		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
+		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
 	}
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (strcmp(swfontsize.c_str(), "")) {
@@ -211,14 +200,16 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	int curPos = 0;
 	gint len;
 	char *Buf, c;
-	gchar *utf8str, *use_font, *use_font_size, *font, *token;
+	gchar *utf8str, *use_font, *use_font_size, *font, *token, *bufstr;
 	gint mybuflen, utf8len;
 	const gchar **end;
+	bool newparagraph = false;
 	string lang, swfont, swfontsize;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
-	//c = 182;  
+	
+	c = 182;  
 	Mgr = new SWMgr();	//-- create sword mgr
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(settings->app, "nbText")), 1);
@@ -229,11 +220,11 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		ConfigEntMap & section = (*sit).second;
 		swfont =
 		    ((entry =
-		      section.find("Font")) !=
+		      section.find("GSFont")) !=
 		     section.end())? (*entry).second : (string) "";
 		swfontsize =
 		    ((entry =
-		      section.find("Font size")) !=
+		      section.find("GSFont size")) !=
 		     section.end())? (*entry).second : (string) "";
 		lang =
 		    ((entry =
@@ -295,17 +286,34 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-
-		displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
-			    strlen((const char *) imodule));
+		
+		if(newparagraph && settings->versestyle) {
+			newparagraph = false;
+			sprintf(tmpBuf,  "%c ", c);
+			utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+			utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+			displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+		} 
+		
+		utf8str = (char *) imodule;
+		displayHTML(GTK_WIDGET(gtkText), utf8str,
+			    strlen(utf8str));
 		if (settings->versestyle) {
-			if (strstr((const char *) imodule, "<BR>") == NULL) {
+			if (strstr((const char *) imodule, "<BR>") == NULL ) {
 				sprintf(tmpBuf, " %s", "</font><br>");
 			} else {
 				sprintf(tmpBuf, " %s", "</font>");
 			}
+			if (strstr((const char *) imodule, "<!P>") == NULL) {
+				newparagraph = false;
+			} else {
+				newparagraph = true;
+			}
 		} else
-			sprintf(tmpBuf, " %s", "</font>");
+			if (strstr((const char *) imodule, "<!P>") == NULL)
+				sprintf(tmpBuf, " %s", "</font>");
+			else 
+				sprintf(tmpBuf, " %s", "</font><p>");
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -352,11 +360,11 @@ char InterlinearDisp::Display(SWModule & imodule)
 		ConfigEntMap & section = (*sit).second;
 		swfont =
 		    ((entry =
-		      section.find("Font")) !=
+		      section.find("GSFont")) !=
 		     section.end())? (*entry).second : (string) "";
 		swfontsize =
 		    ((entry =
-		      section.find("Font size")) !=
+		      section.find("GSFont size")) !=
 		     section.end())? (*entry).second : (string) "";
 		lang =
 		    ((entry =

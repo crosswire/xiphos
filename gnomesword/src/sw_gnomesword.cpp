@@ -36,11 +36,13 @@
 #include <swconfig.h>
 #include <versekey.h>
 #include <dirent.h> 
+#include <swbasicfilter.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-#include <gbfhtmlhref.h>
+#include "gbfhtmlhref.h"
 #include <rwphtml.h>
-#include <thmlhtmlhref.h>
+#include <thmlhtml.h>
+#include "thmlhtmlhref.h"
 //#include <latin1utf8.h>
 #include <regex.h>
 #include <stdio.h>
@@ -97,6 +99,7 @@ SWModule
     *curdictMod,		/* module for dict window */
     *listMod;			/* module for ListEditor */
 SWFilter 
+    //*swbasicfilter,
     * gbftohtml,		/* sword render filters */
     *plaintohtml, 
     *thmltohtml, 
@@ -154,17 +157,17 @@ extern HISTORY historylist[];	/* sturcture for storing history items */
  *mainform - sent here by main.cpp
  ***********************************************************************************************/
 void initSWORD(GtkWidget * mainform)
-{
+{ 
 	ModMap::iterator it;	//-- iteratior
 	SectionMap::iterator sit;	//-- iteratior
 	ConfigEntMap::iterator eit;	//-- iteratior
 	int i,			//-- counter
 	 j;			//-- counter 
 	gchar * lang;
-
+ 
 	g_print("Initiating Sword\n");
-
-	plaintohtml = new PLAINHTML();	//-- sword renderfilter plain to html
+	//swbasicfilter = new SWBasicFilter();
+	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
 	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
 	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
 	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
@@ -1473,6 +1476,44 @@ void savekeySWORD(gchar * key)
 	//-- display module with new cipher key in text window and interlinear window
 	curMod->Display();
 	updateinterlinearpage();
+}
+
+/*** write individual module font information to <module>.conf ***/
+bool savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
+{
+	ModMap::iterator it; 
+	SectionMap::iterator section;
+	ConfigEntMap::iterator entry;
+	DIR *dir;
+	//SWModule *module;
+	gchar buf[256], conffile[256];
+	struct dirent *ent;	
+		
+	sprintf(buf,"%s/mods.d",pathtomods());
+	dir = opendir(buf);	
+	char *modFile;
+	if (dir) {		//-- find and update .conf file
+		rewinddir(dir);
+		while ((ent = readdir(dir))) {
+			if ((strcmp(ent->d_name, "."))
+			    && (strcmp(ent->d_name, ".."))) {
+				sprintf(conffile,"%s/%s",buf,ent->d_name);
+				SWConfig *myConfig = new SWConfig(conffile);
+				section =
+				    myConfig->Sections.find(modName);
+				if (section != myConfig->Sections.end()) {
+					entry = section->second.find(modtag);
+					if (entry != section->second.end()) {
+						entry->second = fontinfo;	//-- set font info
+						myConfig->Save();	//-- save config file
+					}
+				}
+				delete myConfig;
+			}
+		}
+	}
+	closedir(dir);
+	return true;
 }
 
 /*
