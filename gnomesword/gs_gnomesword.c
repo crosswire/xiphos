@@ -202,7 +202,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
 		/*label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		changcurcomModSWORD(label1->label, pagenum);   */
+		changcurcomModSWORD(label1->label, pagenum, TRUE);   */
 		
                 if(settings->showcomtabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
@@ -214,7 +214,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		changepercomModSWORD(settings->personalcommentsmod);	
 	}
 /* set text modules to last used */
-	changecurModSWORD(settings->MainWindowModule);
+	changecurModSWORD(settings->MainWindowModule,TRUE);
 	changecomp1ModSWORD(settings->Interlinear1Module);
 	changecomp2ModSWORD(settings->Interlinear2Module);
 	changecomp3ModSWORD(settings->Interlinear3Module);
@@ -619,7 +619,7 @@ void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, g
 						  ref);
 					  	
 	if(!strcmp(type[0],"bible:")) {
-		changecurModSWORD(ref[0]);
+		changecurModSWORD(ref[0],TRUE);
 	}
 	if(!strcmp(type[0],"commentary:")) {
 		if(havecomm) { /* let's don't do this if we don't have at least one commentary */	           			            	
@@ -723,6 +723,52 @@ void openpropertiesbox(void)
 	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; /* set Personal note format check button */
 	gtk_widget_show(Propertybox); /* show propertybox */
 }
+/*****************************************************************************
+ *editbookmarksLoad - load bookmarks into an editor dialog
+ *editdlg
+*****************************************************************************/
+void editbookmarksLoad(GtkWidget *editdlg) 
+{
+	GtkWidget *text;  /* pointer to text widget for editing */
+	gchar buf[255];   /* temp storage of each bookmark */
+	gint i=0;         /* counter */
+
+	text = lookup_widget(editdlg,"text4");  /* set text widger pointer */
+ 	gtk_text_freeze (GTK_TEXT (text));    /* freeze text until all bookmarks are loaded */
+  	gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);  /* clear text widget */
+	while(i < ibookmarks){  /* loop through bookmarks - ibookmarks the number of bookmarks we have */	 	
+		sprintf(buf,"%s\n",bmarks[i]); /* copy bookmark string from array to buf and add newline */
+		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); /* put buf into text wigdet */
+		++i;	/* increment our counter   */   	
+	}
+	sprintf(buf,"%s\n","-end-");  /* last item to add to text widget '-end-' is used to signal last item */
+	gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); /* add to text widget */
+	gtk_text_thaw (GTK_TEXT (text)); /* thaw text widget so we can work */
+}
+
+/*****************************************************************************
+ *addBookmark - someone clicked add bookmark to get us here
+*****************************************************************************/
+void addBookmark(GtkWidget *app)  
+{
+	gchar    *bookname;      /* pointer to the Bible book we want to mark */
+	gint     iVerse,         /* verse we want to mark */
+		 iChap;          /* chapter we want to mark */
+	gchar	 buf[255];
+
+	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(app,"cbeBook"))); /* get book name */
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbVerse"))); /* get verse number */
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbChapter"))); /* get chapter */
+	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' ); /* put book chapter and verse into bookmarks array */
+	 ++ibookmarks;  /* increment number of bookmark item + 1 */	
+	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
+	removemenuitems(app, "_Bookmarks/<Separator>", ibookmarks); /* remove old bookmarks form menu -- menustuff.cpp */	
+        sprintf(buf,"%s%s", "_Bookmarks/",remembersubtree);
+        addseparator(app, buf);
+        /* loadbookmarkarray(); */ /* load edited bookmarks  -- filestuff.cpp */
+        loadbookmarks_afterSeparator(); /* let's show what we did -- GnomeSword.cpp */
+}
+
 
 /*****************************************************************************
  *clearhistory - someone clicked clear history
@@ -785,52 +831,6 @@ void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
 }
 
 /*****************************************************************************
- *editbookmarksLoad - load bookmarks into an editor dialog
- *editdlg
-*****************************************************************************/
-void editbookmarksLoad(GtkWidget *editdlg) 
-{
-	GtkWidget *text;  /* pointer to text widget for editing */
-	gchar buf[255];   /* temp storage of each bookmark */
-	gint i=0;         /* counter */
-
-	text = lookup_widget(editdlg,"text4");  /* set text widger pointer */
- 	gtk_text_freeze (GTK_TEXT (text));    /* freeze text until all bookmarks are loaded */
-  	gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);  /* clear text widget */
-	while(i < ibookmarks){  /* loop through bookmarks - ibookmarks the number of bookmarks we have */	 	
-		sprintf(buf,"%s\n",bmarks[i]); /* copy bookmark string from array to buf and add newline */
-		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); /* put buf into text wigdet */
-		++i;	/* increment our counter   */   	
-	}
-	sprintf(buf,"%s\n","-end-");  /* last item to add to text widget '-end-' is used to signal last item */
-	gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); /* add to text widget */
-	gtk_text_thaw (GTK_TEXT (text)); /* thaw text widget so we can work */
-}
-
-/*****************************************************************************
- *addBookmark - someone clicked add bookmark to get us here
-*****************************************************************************/
-void addBookmark(GtkWidget *app)  
-{
-	gchar    *bookname;      /* pointer to the Bible book we want to mark */
-	gint     iVerse,         /* verse we want to mark */
-		 iChap;          /* chapter we want to mark */
-	gchar	 buf[255];
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(app,"cbeBook"))); /* get book name */
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbVerse"))); /* get verse number */
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(app,"spbChapter"))); /* get chapter */
-	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' ); /* put book chapter and verse into bookmarks array */
-	 ++ibookmarks;  /* increment number of bookmark item + 1 */	
-	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
-	removemenuitems(app, "_Bookmarks/<Separator>", ibookmarks); /* remove old bookmarks form menu -- menustuff.cpp */	
-        sprintf(buf,"%s%s", "_Bookmarks/",remembersubtree);
-        addseparator(app, buf);
-        /* loadbookmarkarray(); */ /* load edited bookmarks  -- filestuff.cpp */
-        loadbookmarks_afterSeparator(); /* let's show what we did -- GnomeSword.cpp */
-}
-
-/*****************************************************************************
  * addHistoryItem - add an item to the history menu
  * ref
 *****************************************************************************/
@@ -846,9 +846,12 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	        historyitems = 24;
 	}
 	historylist[historyitems].itemnum = historyitems;	
-	sprintf(historylist[historyitems].verseref,"%s",ref);
-	sprintf(historylist[historyitems].textmod,"%s",(gchar *)gettextmodSWORD);
-	sprintf(historylist[historyitems].commod,"%s",(gchar *)getcommodSWORD);
+	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
+	                        GTK_NOTEBOOK(lookup_widget(app,"notebook1")));	
+	sprintf(historylist[historyitems].verseref,"%s",ref); 	
+	//g_warning("savemod = %s", getcommodSWORD());
+	sprintf(historylist[historyitems].textmod,"%s",gettextmodSWORD());	
+	sprintf(historylist[historyitems].commod,"%s", getcommodSWORD());
 	
 	++historyitems;	
 	currenthistoryitem = historyitems;
@@ -876,8 +879,12 @@ void changeverseHistory(gint historynum)
                  addhistoryitem = TRUE;
                  firstbackclick = FALSE;
         } else   addhistoryitem = FALSE;
+        //g_warning("change mod = %s\n",historylist[historynum].textmod);
+        changecurModSWORD(historylist[historynum].textmod,FALSE);
+        changcurcomModSWORD(historylist[historynum].commod,historylist[historynum].compagenum, FALSE);
         changeVerseSWORD(historylist[historynum].verseref);
 }
+
 /*
  *
  */
@@ -887,7 +894,8 @@ void historynav(GtkWidget *app, gint direction)
         if(direction){
                 if(currenthistoryitem < historyitems-1){
                         ++currenthistoryitem;
-                        changeVerseSWORD(historylist[currenthistoryitem].verseref);
+                        changeverseHistory(currenthistoryitem);
+                        //changeVerseSWORD(historylist[currenthistoryitem].verseref);
 
                 }
                 /* set sensitivity of history buttons */
@@ -901,7 +909,8 @@ void historynav(GtkWidget *app, gint direction)
                 if(currenthistoryitem > 0){
                         --currenthistoryitem;
                         if(firstbackclick) addhistoryitem = TRUE;
-                        changeVerseSWORD(historylist[currenthistoryitem].verseref);
+                        changeverseHistory(currenthistoryitem);
+                        //changeVerseSWORD(historylist[currenthistoryitem].verseref);
                         firstbackclick = FALSE;
                 }
                 /* set sensitivity of history buttons */
