@@ -426,6 +426,7 @@ static void on_point_to_here_activate(GtkMenuItem * menuitem,
 	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text;
 
 	yes_no_dialog = gui_new_dialog();
+	yes_no_dialog->title = N_("Bookmark?");
 	yes_no_dialog->label_top =
 	    N_
 	    ("Make the selected bookmark point to the current Module and Key?");
@@ -603,6 +604,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 		is_leaf = FALSE;		
 	
 	info = gui_new_dialog();
+	info->title = N_("Edit?");
 	info->label_top = N_("Edit Bookmark");	
 	info->text1 = g_strdup(caption);
 	info->text2 = g_strdup(key);
@@ -842,6 +844,7 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
+	yes_no_dialog->title = N_("Remove Item(s)?");
 	yes_no_dialog->label_top =
 	    N_
 	    ("Really REMOVE the selected item (and all its subitems)?");
@@ -1001,6 +1004,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		key = get_module_key();		
 		data = g_new(BOOKMARK_DATA,1);
 		info = gui_new_dialog();
+		info->title = N_("Bookmark?");
 		info->label_top = N_("Add Bookmark");
 		sprintf(buf, "%s, %s", key, mod_name);
 	
@@ -1088,6 +1092,7 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if (gtk_tree_selection_get_selected(current_selection, NULL, &selected)) {		
 		t = "|";
 		info = gui_new_dialog();
+		info->title = N_("Folder Name?");
 		info->label_top = N_("Enter Folder Name - use no \'|\'");
 		info->text1 = g_strdup(_("Folder Name"));
 		info->label1 = N_("Folder: ");
