@@ -39,6 +39,8 @@
 #include "gs_sword.h"
 #include "gs_gnomesword.h"
 #include "gs_listeditor.h"
+#include "support.h"
+
 
 GdkPixmap *pixmap1;
 GdkPixmap *pixmap2;
@@ -144,6 +146,12 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 N_("Save all bookmark files"),
 	 (gpointer) on_save_bookmarks1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Eidt Item"),
+	 N_("Edit bookmark item"),
+	 (gpointer) on_edit_item_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Delete Item(s)"),
@@ -632,7 +640,51 @@ void on_add_new_group1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_save_bookmarks1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+	savebookmarks(p_bmtree->ctree_widget);  /*** sw_bookmarks.cpp ***/
+}
 
+static gboolean applychangestobookmark;
+
+void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkCList 
+		*clist;
+	GtkWidget 
+		*dlg;
+	GtkCTreeNode 
+		*node;
+	gchar 
+		*text[3];
+	
+	applychangestobookmark = FALSE;
+	clist = GTK_CLIST(p_bmtree->ctree);
+	gtk_clist_freeze(clist);
+
+	node = clist->selection->data;
+	text[0] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
+				     cell[0])->text;
+	text[1] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
+				     cell[1])->text;		
+	text[2] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
+				     cell[2])->text;
+	
+	dlg = create_dlgEditBookMark (text,FALSE);
+  		gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
+		gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
+	if(applychangestobookmark){
+		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
+				     cell[0])->text = g_strdup(text[0]);
+		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
+				     cell[1])->text = g_strdup(text[1]);
+		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
+				     cell[2])->text = g_strdup(text[2]);			      
+		g_free(text[0]); /*** we used g_strdup() in  on_btnBMok_clicked() ***/	
+		g_free(text[1]);
+		g_free(text[2]);
+		applychangestobookmark = FALSE;
+	}	
+	gtk_clist_thaw(clist);
+	after_press(p_bmtree->ctree, NULL);
 }
 
 
@@ -654,6 +706,7 @@ on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data)
  ******************************************************************************/
 void addbookmarktotree(gchar * modName, gchar * verse)
 {
+	GtkWidget *dlg;
 	gchar 
 		*text[3],
 		buf[256];
@@ -661,9 +714,26 @@ void addbookmarktotree(gchar * modName, gchar * verse)
 	text[0] = buf;
 	text[1] = verse;
 	text[2] = modName;
-	
-	gtk_ctree_insert_node(p_bmtree->ctree, personal_node, NULL, text,
-			      3, pixmap3, mask3, NULL, NULL, TRUE, FALSE);
+	applychangestobookmark = FALSE;
+	dlg = create_dlgEditBookMark (text,TRUE);
+  		gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
+		gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
+	if(applychangestobookmark){
+		gtk_ctree_insert_node(p_bmtree->ctree, 
+						personal_node, 
+						NULL, text,
+			      			3, 
+						pixmap3, 
+						mask3, 
+						NULL, 
+						NULL, 
+						TRUE, 
+						FALSE);
+		g_free(text[0]); /*** we used g_strdup() in  on_btnBMok_clicked() ***/
+		g_free(text[1]);
+		g_free(text[2]);		
+		applychangestobookmark = FALSE;
+	}
 }
  
 void loadtree(GtkWidget * ctree1)
@@ -829,6 +899,237 @@ loadoldbookmarks(void)
 	}
 	setleaf(p_bmtree->ctree_widget);
 	return 1;
+}
+
+
+static void
+on_entryBM_changed                (GtkEditable     *editable,
+                                        gpointer         user_data)
+{
+	GtkWidget *dlg, *btnok, *btnapply;
+
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(editable));
+	btnok = lookup_widget(dlg, "btnBMok");
+	btnapply = lookup_widget(dlg, "btnBMapply");
+	gtk_widget_set_sensitive(btnok, TRUE);
+	gtk_widget_set_sensitive(btnapply, TRUE);
+	
+}
+
+
+static void
+on_btnBMok_clicked      (GtkButton       *button,
+                                        gchar *buf[3])
+{
+	GtkWidget 
+		*dlg, 
+		*labelentry, 
+		*keyentry, 
+		*modentry;
+	
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));	
+	labelentry = lookup_widget(dlg, "entryBMLabel");
+	keyentry = lookup_widget(dlg, "entryBMKey");
+	modentry= lookup_widget(dlg, "entryBMMod");
+	/*** freed in addbookmarktotree() ***/
+	buf[0] = g_strdup(gtk_entry_get_text(GTK_ENTRY(labelentry)));
+	buf[1] = g_strdup(gtk_entry_get_text(GTK_ENTRY(keyentry)));
+	buf[2] = g_strdup(gtk_entry_get_text(GTK_ENTRY(modentry)));
+	applychangestobookmark = TRUE;
+	gtk_widget_destroy(dlg);
+	//g_warning("buf1 = %s, buf2 = %s, buf3 = %s",buf[0],buf[1],buf[2]);
+}
+
+
+static void
+on_btnBMapply_clicked  (GtkButton       *button,
+                                        gchar *buf[3])
+{
+	GtkWidget 
+		*dlg, 
+		*btnok, 
+		*btnapply,
+		*labelentry, 
+		*keyentry, 
+		*modentry;
+
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	btnok = lookup_widget(dlg, "btnBMok");
+	btnapply = lookup_widget(dlg, "btnBMapply");	
+	labelentry = lookup_widget(dlg, "entryBMLabel");
+	keyentry = lookup_widget(dlg, "entryBMKey");
+	modentry= lookup_widget(dlg, "entryBMMod");
+	/*** freed in addbookmarktotree() ***/
+	buf[0] = g_strdup(gtk_entry_get_text(GTK_ENTRY(labelentry)));
+	buf[1] = g_strdup(gtk_entry_get_text(GTK_ENTRY(keyentry)));
+	buf[2] = g_strdup(gtk_entry_get_text(GTK_ENTRY(modentry)));	
+	gtk_widget_set_sensitive(btnok, FALSE);
+	gtk_widget_set_sensitive(btnapply, FALSE);
+	applychangestobookmark = TRUE;
+}
+
+
+static void
+on_btnEBMcancel_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget 
+		*dlg;
+	
+	applychangestobookmark = FALSE;
+	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	gtk_widget_destroy(dlg);
+}
+
+/*** open dialog to allow editing of a bookmark ***/
+GtkWidget*
+create_dlgEditBookMark (gchar *text[3], gboolean newbookmark)
+{
+  GtkWidget *dlgEditBookMark;
+  GtkWidget *dialog_vbox14;
+  GtkWidget *table11;
+  GtkWidget *label170;
+  GtkWidget *label171;
+  GtkWidget *label172;
+  GtkWidget *entryBMLabel;
+  GtkWidget *entryBMKey;
+  GtkWidget *entryBMMod;
+  GtkWidget *dialog_action_area14;
+  GtkWidget *btnBMok;
+  GtkWidget *btnBMapply;
+  GtkWidget *btnEBMcancel;
+
+  dlgEditBookMark = gnome_dialog_new (_("GnomeSword - Edit Bookmark"), NULL);
+  gtk_object_set_data (GTK_OBJECT (dlgEditBookMark), "dlgEditBookMark", dlgEditBookMark);
+  gtk_window_set_policy (GTK_WINDOW (dlgEditBookMark), FALSE, FALSE, FALSE);
+
+  dialog_vbox14 = GNOME_DIALOG (dlgEditBookMark)->vbox;
+  gtk_object_set_data (GTK_OBJECT (dlgEditBookMark), "dialog_vbox14", dialog_vbox14);
+  gtk_widget_show (dialog_vbox14);
+
+  table11 = gtk_table_new (3, 2, FALSE);
+  gtk_widget_ref (table11);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "table11", table11,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (table11);
+  gtk_box_pack_start (GTK_BOX (dialog_vbox14), table11, TRUE, TRUE, 0);
+
+  label170 = gtk_label_new (_("Label"));
+  gtk_widget_ref (label170);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "label170", label170,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label170);
+  gtk_table_attach (GTK_TABLE (table11), label170, 0, 1, 0, 1,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (label170), 0, 0.5);
+
+  label171 = gtk_label_new (_("Reference  "));
+  gtk_widget_ref (label171);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "label171", label171,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label171);
+  gtk_table_attach (GTK_TABLE (table11), label171, 0, 1, 1, 2,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (label171), 0, 0.5);
+
+  label172 = gtk_label_new (_("Module"));
+  gtk_widget_ref (label172);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "label172", label172,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label172);
+  gtk_table_attach (GTK_TABLE (table11), label172, 0, 1, 2, 3,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (label172), 0, 0.5);
+
+  entryBMLabel = gtk_entry_new ();
+  gtk_widget_ref (entryBMLabel);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "entryBMLabel", entryBMLabel,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryBMLabel);
+  gtk_table_attach (GTK_TABLE (table11), entryBMLabel, 1, 2, 0, 1,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_entry_set_text(GTK_ENTRY(entryBMLabel), text[0]);
+
+  entryBMKey = gtk_entry_new ();
+  gtk_widget_ref (entryBMKey);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "entryBMKey", entryBMKey,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryBMKey);
+  gtk_table_attach (GTK_TABLE (table11), entryBMKey, 1, 2, 1, 2,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_entry_set_text(GTK_ENTRY(entryBMKey), text[1]);
+  
+  entryBMMod = gtk_entry_new ();
+  gtk_widget_ref (entryBMMod);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "entryBMMod", entryBMMod,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entryBMMod);
+  gtk_table_attach (GTK_TABLE (table11), entryBMMod, 1, 2, 2, 3,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_entry_set_text(GTK_ENTRY(entryBMMod), text[2]);
+
+  dialog_action_area14 = GNOME_DIALOG (dlgEditBookMark)->action_area;
+  gtk_object_set_data (GTK_OBJECT (dlgEditBookMark), "dialog_action_area14", dialog_action_area14);
+  gtk_widget_show (dialog_action_area14);
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area14), GTK_BUTTONBOX_END);
+  gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area14), 8);
+
+  gnome_dialog_append_button (GNOME_DIALOG (dlgEditBookMark), GNOME_STOCK_BUTTON_OK);
+  btnBMok = GTK_WIDGET (g_list_last (GNOME_DIALOG (dlgEditBookMark)->buttons)->data);
+  gtk_widget_ref (btnBMok);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "btnBMok", btnBMok,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnBMok);
+  if(newbookmark)
+  	gtk_widget_set_sensitive (btnBMok, TRUE);
+  else
+	gtk_widget_set_sensitive (btnBMok, FALSE);
+  
+  GTK_WIDGET_SET_FLAGS (btnBMok, GTK_CAN_DEFAULT);
+
+  gnome_dialog_append_button (GNOME_DIALOG (dlgEditBookMark), GNOME_STOCK_BUTTON_APPLY);
+  btnBMapply = GTK_WIDGET (g_list_last (GNOME_DIALOG (dlgEditBookMark)->buttons)->data);
+  gtk_widget_ref (btnBMapply);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "btnBMapply", btnBMapply,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnBMapply);
+  gtk_widget_set_sensitive (btnBMapply, FALSE);
+  GTK_WIDGET_SET_FLAGS (btnBMapply, GTK_CAN_DEFAULT);
+
+  gnome_dialog_append_button (GNOME_DIALOG (dlgEditBookMark), GNOME_STOCK_BUTTON_CANCEL);
+  btnEBMcancel = GTK_WIDGET (g_list_last (GNOME_DIALOG (dlgEditBookMark)->buttons)->data);
+  gtk_widget_ref (btnEBMcancel);
+  gtk_object_set_data_full (GTK_OBJECT (dlgEditBookMark), "btnEBMcancel", btnEBMcancel,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (btnEBMcancel);
+  GTK_WIDGET_SET_FLAGS (btnEBMcancel, GTK_CAN_DEFAULT);
+
+  gtk_signal_connect (GTK_OBJECT (entryBMLabel), "changed",
+                      GTK_SIGNAL_FUNC (on_entryBM_changed),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (entryBMKey), "changed",
+                      GTK_SIGNAL_FUNC (on_entryBM_changed),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (entryBMMod), "changed",
+                      GTK_SIGNAL_FUNC (on_entryBM_changed),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (btnBMok), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnBMok_clicked),
+                      text);
+  gtk_signal_connect (GTK_OBJECT (btnBMapply), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnBMapply_clicked),
+                      text);
+  gtk_signal_connect (GTK_OBJECT (btnEBMcancel), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnEBMcancel_clicked),
+                      NULL);
+
+  return dlgEditBookMark;
 }
 
 

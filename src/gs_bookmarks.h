@@ -52,15 +52,19 @@ on_add_new_group1_activate(GtkMenuItem     *menuitem,
 void
 on_save_bookmarks1_activate(GtkMenuItem     *menuitem,
                                         gpointer         user_data);
+void 
+on_edit_item_activate(GtkMenuItem * menuitem, 
+					gpointer user_data);
 void
 on_delete_item_activate(GtkMenuItem     *menuitem,
                                         gpointer         user_data);
-
 void
 on_allow_reordering_activate           (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 gint 
 loadoldbookmarks(void); 
+GtkWidget*
+create_dlgEditBookMark (gchar *text[3], gboolean newbookmark);
 
 #ifdef __cplusplus
 }
