@@ -188,7 +188,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				gnome_appbar_set_status(GNOME_APPBAR(
 					widgets.appbar),tmpbuf);
 				if(hint.use_hints) {
-					gui_display_footnote_in_hint(tmpbuf);
+					//gui_display_hint_in_viewer(tmpbuf);
+					gui_display_in_hint_window(tmpbuf);
 				}
 				
 				g_free(tmpbuf);				
@@ -346,7 +347,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			if(hint.use_hints) {
 				mybuf = get_module_text(get_mod_type(modbuf), modbuf, buf1);
 				if(mybuf) {
-					gui_display_footnote_in_hint(mybuf);
+					gui_display_in_hint_window(mybuf);
+					//gui_display_hint_in_viewer(mybuf);
 					g_free(mybuf);
 				}
 			}
@@ -392,7 +394,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			if(hint.use_hints) {
 				mybuf = get_module_text(get_mod_type(modbuf), modbuf, buf1);
 				if(mybuf) {
-					gui_display_footnote_in_hint(mybuf);
+					//gui_display_hint_in_viewer(mybuf);
+					gui_display_in_hint_window(mybuf);
 					g_free(mybuf);
 				}
 			}

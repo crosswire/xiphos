@@ -27,6 +27,7 @@ extern "C" {
 #include "main/configs.h"
 
 MOD_FONT *get_font(gchar * mod_name);
+void free_font(MOD_FONT *mf);
 gchar * remove_linefeeds(gchar * buf);	
 void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
      gchar * itemdata, gchar * submenuname, GtkMenuCallback mycallback);

@@ -247,7 +247,7 @@ int init_old(void)
 	old_gbs = g_new(char, strlen(old_sb) +
 			strlen("Books.conf") + 3);
 	sprintf(old_gbs, "%s/%s", old_sb, "Books.conf");
-
+/*
 	if (access(settings.shortcutbarDir, F_OK) == -1) {
 		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) == 0) {
 			if (access(old_fav, F_OK) == 0)
@@ -271,6 +271,7 @@ int init_old(void)
 		printf("can't create shortcutbar dir");
 		return 0;
 	}
+*/
 	return 1;
 }
 

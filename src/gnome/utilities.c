@@ -57,10 +57,12 @@
 MOD_FONT *get_font(gchar * mod_name)
 {
 	MOD_FONT *mf;
+	gchar file[250];
+
+	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 
 	mf = g_new(MOD_FONT, 1);
 	mf->mod_name = mod_name;
-	//g_warning(mf->mod_name);
 	mf->old_font = NULL;
 	mf->old_gdk_font = NULL;
 	mf->old_font_size = NULL;
@@ -68,13 +70,47 @@ MOD_FONT *get_font(gchar * mod_name)
 	mf->new_gdk_font = NULL;
 	mf->new_font_size = NULL;
 	mf->no_font = 0;
-	get_font_info(mf);
-	if (strlen(mf->old_font) < 2)
-		mf->old_font = "none";
+	
+	mf->old_font = get_conf_file_item(file, mod_name, "Font");
+	mf->old_gdk_font = get_conf_file_item(file, mod_name, "GdkFont");
+	mf->old_font_size = get_conf_file_item(file, mod_name, "Fontsize");
 	//g_warning("mf->old_font = %s",mf->old_font);
+	if (mf->old_font == NULL)
+		mf->old_font = g_strdup("none");
+	if(mf->old_font_size == NULL)
+		mf->old_font_size = g_strdup("+0");
+	
 	return mf;
 }
 
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void free_font(MOD_FONT *mf)
+{
+	
+	if(mf->old_font) g_free(mf->old_font);
+	if(mf->old_gdk_font) g_free(mf->old_gdk_font);
+	if(mf->old_font_size) g_free(mf->old_font_size);
+	//mf->new_font = NULL;
+	//mf->new_gdk_font = NULL;
+	//mf->new_font_size = NULL;
+	//mf->no_font = 0;
+	g_free(mf);
+}
 /******************************************************************************
  * Name
  *   remove_linefeeds
