@@ -93,6 +93,7 @@ void swapmodsSWORD(gchar *intmod);
 void loadpreferencemodsSWORD(void);
 void gs_firstrunSWORD(void);
 void applyfontcolorandsizeSWORD(void);
+void savekeySWORD(gchar *key);
 
 #ifdef __cplusplus
 }
