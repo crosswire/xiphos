@@ -98,6 +98,7 @@ void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, tmpbuf[255];
+	gchar newmod[80], newref[80];
 	gint i=0;
 	
 	if(*url == '[')   {
@@ -108,8 +109,36 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++url;
 		}		
 		showmoduleinfoSWORD(tmpbuf); 
-	} else {
-		buf = g_strdup(url);
+	 /*** let's seperate mod version and passage ***/	
+	} else if(!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7) ) {	 	
+		gchar *mybuf = NULL;
+		//g_warning(url);
+		mybuf = strstr(url, "version=") ;
+		if(mybuf){
+			mybuf = strchr(mybuf,'=');
+			++mybuf;
+			i=0;
+			while(mybuf[i] != ' ') {
+				newmod[i] = mybuf[i];
+				newmod[i+1] = '\0';
+				++i;
+			}
+			//g_warning(newmod);
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "passage=") ;
+		if(mybuf){
+			mybuf = strchr(mybuf,'=');
+			++mybuf;
+			i=0;
+			while(i < strlen(mybuf)) {
+				newref[i] = mybuf[i];
+				newref[i+1] = '\0';
+				++i;
+			}
+			//g_warning(newref);
+		} 
+		buf = g_strdup(newref);
 		changeVerseSWORD(buf);
 		g_free(buf);
 	}
@@ -295,13 +324,22 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
 }
-
 /***************************************************************************************************
- *beginHTML
+ *beginHTML - start loading html widget
  ***************************************************************************************************/
-void beginHTML(GtkWidget * html, gboolean utf8)
+void beginHTML(GtkWidget *html_widget, gboolean isutf8)
 {
-	htmlstream = gtk_html_begin(GTK_HTML(html));
+	GtkHTML *html;
+	
+	html = GTK_HTML(html_widget);
+	//was_editable = gtk_html_get_editable (html);
+	/*if (was_editable)
+		gtk_html_set_editable (html, FALSE);*/
+	if(isutf8){
+		htmlstream = gtk_html_begin_content (html, "text/html; charset=utf-8");
+	}else{
+		htmlstream = gtk_html_begin(html);
+	}
 }
 
 /***************************************************************************************************
@@ -315,7 +353,7 @@ void endHTML(GtkWidget * html)
 /***************************************************************************************************
  *displayHTML
  ***************************************************************************************************/
-void displayHTML(GtkWidget * html, gchar * txt, gint lentxt)
+void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt)
 {
 	if (strlen(txt)) {
 		gtk_html_write(GTK_HTML(html), htmlstream, txt, lentxt);
