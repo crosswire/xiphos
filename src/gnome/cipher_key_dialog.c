@@ -28,6 +28,7 @@
 
 #include "gui/cipher_key_dialog.h"
 #include "main/sword.h"
+#include "main/bibletext.h"
 //#include "main/gs_gnomesword.h"
 
 static GtkWidget *entryKey;
@@ -56,6 +57,7 @@ static void on_btkUKok_clicked(GtkButton * button, gchar *mod_name)
 	gchar *buf;
 	
 	buf = gtk_entry_get_text(GTK_ENTRY(entryKey));
+	set_module_unlocked(mod_name, buf);
 	save_module_key(mod_name, buf);
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	gtk_widget_destroy(dlg);
