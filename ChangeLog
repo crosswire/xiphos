@@ -1,3 +1,8 @@
+2003-11-28  Terry <tbiggs@users.sf.net>
+
+	* remove close button from the search dialog
+
+
 2003-11-27  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev16
