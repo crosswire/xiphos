@@ -35,7 +35,7 @@
 
 #include "callback.h"
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
 #include "support.h"

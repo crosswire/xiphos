@@ -32,7 +32,7 @@
 #include <swmgr.h>
 #include <versekey.h>
 
-#include "gs_sword.h"
+#include "gs_gnomesword.h"
 #include "gs_information_sw.h"
 #include "sw_utility.h"
 #include "gs_display.h"

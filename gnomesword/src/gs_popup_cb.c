@@ -23,7 +23,7 @@
 
 #include "gs_popup_cb.h"
 #include "gs_gnomesword.h"
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_viewcomm_dlg.h"
 #include "gs_viewtext_dlg.h"

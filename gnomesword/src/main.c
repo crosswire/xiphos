@@ -22,7 +22,7 @@
 
 #include <gnome.h>
 
-#include "gs_sword.h"
+#include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
 #include "gs_file.h"
 #include "gs_html.h"

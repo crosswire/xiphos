@@ -71,9 +71,6 @@ module.source.files=\
 	gs_listeditor.c\
 	gs_menu.c\
 	gs_studypad.c\
-	gs_sword.cpp\
-	gs_viewdict.c\
-	gs_viewdict.h\
 	printstuff.c\
 	spell.c\
 	spell.h\
@@ -95,14 +92,11 @@ module.source.files=\
 	display.h\
 	gs_display.cpp\
 	gs_display.h\
-	gs_sword.h\
 	gs_studypad.h\
 	gs_gnomesword.h\
 	gs_listeditor.h\
 	gs_menu.h\
 	gs_search.h\
-	gs_viewcomm.c\
-	gs_viewcomm.h\
 	gs_history.h\
 	printstuff.h\
 	sw_utility.cpp\
@@ -115,8 +109,6 @@ module.source.files=\
 	sw_gbfhtml.cpp\
 	gs_viewtext_dlg.c\
 	gs_viewtext_dlg.h\
-	gs_viewtext_sw.cpp\
-	gs_viewtext_sw.h\
 	gs_info_box.c\
 	gs_info_box.h\
 	sw_properties.cpp\
@@ -140,7 +132,19 @@ module.source.files=\
 	sw_verselist_sb.h\
 	sw_verselist_sb.cpp\
 	sw_shortcutbar.cpp\
-	sw_shortcutbar.h
+	sw_shortcutbar.h\
+	sw_viewtext_dlg.cpp\
+	sw_viewtext_dlg.h\
+	gs_viewcomm_dlg.c\
+	gs_viewcomm_dlg.h\
+	gs_viewdict_dlg.c\
+	gs_viewdict_dlg.h\
+	sw_viewdict_dlg.cpp\
+	sw_viewdict_dlg.h\
+	sw_viewcomm_dlg.cpp\
+	sw_viewcomm_dlg.h\
+	sw_gnomesword.cpp\
+	sw_gnomesword.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
