@@ -183,7 +183,6 @@ void UpdateChecks(GtkWidget * mainform);
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
 		gint page_num);
-void editbookmarksLoad(GtkWidget * editdlg);
 void addQuickmark(GtkWidget *app);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);

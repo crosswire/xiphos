@@ -40,7 +40,6 @@
 #include "support.h"
 #include "gs_file.h"
 #include "gs_menu.h"
-//#include "gs_listeditor.h"
 #include "gs_shortcutbar.h"
 #include "e-splash.h"
 
@@ -50,30 +49,26 @@
 /*****************************************************************************
 * globals
 *****************************************************************************/	
-GtkWidget	
-	*footnotes,	/* widget to access toggle menu - for footnotes */
-  	*strongsnum,/* widget to access toggle menu - for strongs numbers */
-	*hebrewpoints,
-	*cantillationmarks,
-	*greekaccents,
+GtkWidget
 	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
 	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
-	*studypad,  /* studypad text widget */
-	*notes,    /* notes text widget */
-	*morphs;
+	*notes;    /* notes text widget */
+	
 gboolean 
-	isstrongs = FALSE,/* main window selection is not storngs number */
 	file_changed = FALSE, /* set to true if text is study pad has changed - and file is not saved  */
 	changemain = TRUE; /* change verse of Bible text window */
+	
 gchar 
 	*current_filename= NULL;	/* filename for open file in study pad window */
+	
 gchar 
-	current_verse[80]=N_("Romans 8:28"),	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
-	bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
+	current_verse[80]=N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
+	
 gint 
 	dictpages,
 	compages,
 	textpages;
+	
 SETTINGS 
 	*settings;
 		
@@ -90,13 +85,13 @@ extern GList
 	*sbdictmods,
 	*sbcommods,
 	*options;
+	
 extern gchar 
 	*mydictmod,
 	*shortcut_types[],
-	remembersubtree[256],  /* used for bookmark menus declared in filestuff.cpp */
-	*mycolor;
-extern GdkColor 
-	myGreen; /* current verse color */
+	*mycolor,
+	rememberlastitem[];
+	
 extern gboolean 
 	havedict, /* let us know if we have at least one lex-dict module */
 	havecomm, /* let us know if we have at least one commentary module */
@@ -104,9 +99,10 @@ extern gboolean
 	usepersonalcomments, /* do we setup for personal comments - default is FALSE */
 	autoSave,
 	addhistoryitem; /* do we need to add item to history */
+	
 extern gint 
 	groupnum4,
-	ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
+	iquickmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
@@ -172,7 +168,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_verse_style1_activate);
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
-        loadbookmarks_programstart(); /* add bookmarks to menubar */
+        loadquickmarks_programstart(); /* add bookmarks to menubar */
         changeVerseSWORD(settings->currentverse); /* set Text */
 	/* show hide shortcut bar - set to options setting */
         if(settings->showshortcutbar){
@@ -370,29 +366,6 @@ void changepagenotebook(GtkNotebook *notebook,gint page_num)
 
 
 /*****************************************************************************
- *editbookmarksLoad - load bookmarks into an editor dialog
- *editdlg
-*****************************************************************************/
-void editbookmarksLoad(GtkWidget *editdlg) 
-{
-	GtkWidget *text;  /* pointer to text widget for editing */
-	gchar buf[255];   /* temp storage of each bookmark */
-	gint i=0;         /* counter */
-
-	text = lookup_widget(editdlg,"text4");  /* set text widger pointer */
- 	gtk_text_freeze (GTK_TEXT (text));    /* freeze text until all bookmarks are loaded */
-  	gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);  /* clear text widget */
-	while(i < ibookmarks){  /* loop through bookmarks - ibookmarks the number of bookmarks we have */	 	
-		sprintf(buf,"%s\n",bmarks[i]); /* copy bookmark string from array to buf and add newline */
-		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); /* put buf into text wigdet */
-		++i;	/* increment our counter   */   	
-	}
-	sprintf(buf,"%s\n","-end-");  /* last item to add to text widget '-end-' is used to signal last item */
-	gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); /* add to text widget */
-	gtk_text_thaw (GTK_TEXT (text)); /* thaw text widget so we can work */
-}
-
-/*****************************************************************************
  *addQuickmark - someone clicked add quickmark to get us here
 *****************************************************************************/
 void addQuickmark(GtkWidget *app)  
@@ -410,15 +383,18 @@ void addQuickmark(GtkWidget *app)
 	/* put book chapter and verse into bookmarks array */
 	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' );
 	/* increment number of bookmark item + 1 */
-	 ++ibookmarks; 
+	 ++iquickmarks; 
+	if(iquickmarks == 1)
+		sprintf(rememberlastitem,"%s","<Separator>");
 	 /* save to file so we dont forget -- function in gs_file.c */
 	savequickmark(buf); 
 	//-- remove old bookmarks from menu -- gs_menu.c
-	removemenuitems(app, _("_Quickmarks/<Separator>"), ibookmarks); 
-        sprintf(buf,"%s%s", _("_Quickmarks/"),"Clear Quickmarks");
+	removemenuitems(app, _("_Quickmarks/<Separator>"), iquickmarks); 
+        sprintf(buf,"%s", _("_Quickmarks/Clear Quickmarks"));
         addseparator(app, buf);
+	
 	/* let's show what we did -- gs_file.c */
-        loadbookmarks_afterSeparator(); 
+        loadquickmarks_afterSeparator(); 
 }
 
 /*****************************************************************************
