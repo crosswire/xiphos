@@ -119,7 +119,7 @@ void
 on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {	
-	displayDevotional();
+	backend_display_devotional(settings);
 }
 
 
@@ -182,9 +182,9 @@ on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 /*** do a nice orderly shut down and exit gnomesword ***/
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	shutdownSWORD();
+	gtk_widget_destroy(settings->app); 
+	/* this will send us to on_mainwindow_destroy() */
 }
-
 
 /*** remove all items from history list ***/
 void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu

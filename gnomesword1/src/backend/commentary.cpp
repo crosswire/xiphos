@@ -39,7 +39,6 @@
 #include "sword.h"
 #include "display.h"
 #include "commentary.h"
-//#include "gs_gbs.h"
 
 typedef struct _backend_comm BE_COMM;
 struct _backend_comm {

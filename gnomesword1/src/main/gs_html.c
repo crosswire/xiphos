@@ -63,7 +63,7 @@
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_editor.h"
-#include "verselist_sb.h"
+#include "verselist.h"
 #include "shortcutbar.h"
 
 GtkHTMLStream *htmlstream;
@@ -217,10 +217,10 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(newref);
 		sprintf(settings->groupName, "%s", "Verse List");
 
-		if (get_mod_typeSWORD(modbuf) == 2) {
+		if (backend_get_mod_type(modbuf) == 2) {
 			/* we have a dict/lex module 
 			   so we don't need to get a verse list */
-			displaydictlexSBSW(modbuf, buf, settings);
+			display_dictlex_in_viewer(modbuf, buf, settings);
 		} else {
 			display_verse_list(modbuf, buf, settings);
 		}
@@ -255,7 +255,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings->inDictpane)
 			gotoBookmarkSWORD(modbuf, buf);
 		if (settings->inViewer)
-			displaydictlexSBSW(modbuf, buf, settings);
+			display_dictlex_in_viewer(modbuf, buf, settings);
 		g_free(buf);
 	}
 	/*** thml strongs ***/
@@ -286,7 +286,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings->inDictpane)
 			gotoBookmarkSWORD(modbuf, buf);
 		if (settings->inViewer)
-			displaydictlexSBSW(modbuf, buf, settings);
+			display_dictlex_in_viewer(modbuf, buf, settings);
 		g_free(buf);
 
 	}
@@ -303,7 +303,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gotoBookmarkSWORD("Thayer",
 								  buf);
 					if (settings->inViewer)
-						displaydictlexSBSW
+						display_dictlex_in_viewer
 						    ("Thayer", buf,
 						     settings);
 					g_free(buf);
@@ -322,7 +322,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gotoBookmarkSWORD("BDB",
 								  buf);
 					if (settings->inViewer)
-						displaydictlexSBSW("BDB",
+						display_dictlex_in_viewer("BDB",
 								   buf,
 								   settings);
 					g_free(buf);
@@ -344,7 +344,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gotoBookmarkSWORD("Thayer",
 								  buf);
 					if (settings->inViewer)
-						displaydictlexSBSW
+						display_dictlex_in_viewer
 						    ("Thayer", buf,
 						     settings);
 					g_free(buf);
@@ -359,7 +359,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 					gotoBookmarkSWORD(settings->
 							  lex_greek, buf);
 				if (settings->inViewer)
-					displaydictlexSBSW(settings->
+					display_dictlex_in_viewer(settings->
 							   lex_greek_viewer,
 							   buf, settings);
 				g_free(buf);
@@ -376,7 +376,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 						gotoBookmarkSWORD("BDB",
 								  buf);
 					if (settings->inViewer)
-						displaydictlexSBSW("BDB",
+						display_dictlex_in_viewer("BDB",
 								   buf,
 								   settings);
 					g_free(buf);
@@ -392,7 +392,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 					gotoBookmarkSWORD(settings->
 							  lex_hebrew, buf);
 				if (settings->inViewer)
-					displaydictlexSBSW(settings->
+					display_dictlex_in_viewer(settings->
 							   lex_hebrew_viewer,
 							   buf, settings);
 				g_free(buf);
@@ -406,7 +406,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (settings->inDictpane)
 			gotoBookmarkSWORD("Packard", buf);
 		if (settings->inViewer)
-			displaydictlexSBSW("Packard", buf, settings);
+			display_dictlex_in_viewer("Packard", buf, settings);
 		g_free(buf);
 	}
 }
@@ -459,7 +459,7 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 					    g_strdup(settings->
 						     DictWindowModule);
 				if (settings->inViewer)
-					displaydictlexSBSW(dict, key,
+					display_dictlex_in_viewer(dict, key,
 							   settings);
 				if (settings->inDictpane)
 					gotoBookmarkSWORD(dict, key);
@@ -580,7 +580,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 						in a html window  ***/
 	if (key) {
 		if (settings->inViewer)
-			displaydictlexSBSW(modName, key, settings);
+			display_dictlex_in_viewer(modName, key, settings);
 		if (settings->inDictpane)
 			gotoBookmarkSWORD(modName, key);
 		g_free(key);
@@ -611,7 +611,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 						in a html window  ***/
 	if (key) {
 		if (settings->inViewer)
-			displaydictlexSBSW(modName, key, settings);
+			display_dictlex_in_viewer(modName, key, settings);
 		if (settings->inDictpane)
 			gotoBookmarkSWORD(modName, key);
 		g_free(key);

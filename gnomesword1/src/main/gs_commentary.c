@@ -34,6 +34,7 @@
 
 
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "sword.h"
 #include "gs_commentary.h"
@@ -137,7 +138,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	modNameFromDesc(modName, modDescription);
 	key = lookupGS_HTML(c->html, FALSE);
 	if (key) {
-		displaydictlexSBSW(modName, key, settings);
+		display_dictlex_in_viewer(modName, key, settings);
 		g_free(key);
 	}
 }
@@ -148,7 +149,7 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = lookupGS_HTML(c->html, FALSE);
 	if (key) {
-		displaydictlexSBSW(settings->DictWindowModule, key,
+		display_dictlex_in_viewer(settings->DictWindowModule, key,
 				   settings);
 		g_free(key);
 	}
@@ -439,7 +440,7 @@ on_button_release_event(GtkWidget * widget,
 					dict = g_strdup(settings->
 							DictWindowModule);
 				if (settings->inViewer)
-					displaydictlexSBSW(dict, key,
+					display_dictlex_in_viewer(dict, key,
 							   settings);
 				if (settings->inDictpane)
 					gotoBookmarkSWORD(dict, key);
@@ -669,7 +670,7 @@ void gui_setupCOMM(SETTINGS * s)
 
 	comm_list = NULL;
 
-	mods = backend_getModListOfTypeSWORD(COMM_MODS);
+	mods = backend_get_list_of_mods_by_type(COMM_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {

@@ -40,7 +40,7 @@
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_information_dlg.h"
-#include "verselist_sb.h"
+#include "verselist.h"
 #include "support.h"
 
 /****************************************************************************************
