@@ -31,9 +31,6 @@ void
 changeVerse(gchar *ref);
 
 void 
-setHistory(void);
-
-void 
 ShutItDown(void);
 
 void 
@@ -119,4 +116,7 @@ dictSearchTextChangedSWORD(gchar *mytext);
 
 void
 addHistoryItem					(void);
+
+void
+setsensitive						(bool editbtnactive);
 
