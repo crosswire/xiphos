@@ -24,8 +24,11 @@
 #define PACKAGE "gnomesword"
 
 /* Version number of package */
-#define VERSION "0.1.7"
+#define VERSION "0.1.8"
 
 /* Define if you want to use aspell spell checking */
 #define USE_ASPELL 1
+
+/* Define if you want to use printing w/gnome-print */
+#define USE_GNOMEPRINT 1
 

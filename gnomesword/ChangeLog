@@ -1,3 +1,7 @@
+2000-06-09  - added printing using gnome-print-0.20. You can print the text in
+						studypad. Print needs more work - later.
+						- added scroll buttons to dictionary-lexicon key entry.
+
 2000-06-06  - cleaned up bookmarks menu - edit bookmarks now applies changes when
 						you click ok.
 						- clear history works
