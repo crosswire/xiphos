@@ -31,7 +31,7 @@
 #include "gui/splash.h"
 #include "gui/gnomesword.h"
 
-#include "main/url.h"
+#include "main/url.hh"
 
 #include "backend/sword.h"
  

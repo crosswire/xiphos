@@ -124,7 +124,7 @@ public:
 	int do_module_search(char *module_name, const char *search_string, 
 				int search_type, int search_params, int is_dialog);
 	
-	
+	char *url_encode(const char * pram);
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
 	SWMgr *get_main_mgr(void) {return(main_mgr);};
 };

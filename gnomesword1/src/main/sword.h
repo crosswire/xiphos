@@ -43,8 +43,8 @@ extern "C" {
 #define DICT_MODS "Lexicons / Dictionaries"
 #define BOOK_MODS "Generic Books"
 
-#define OLD_CODESET "iso8859-1"
 #define UTF_8 "UTF-8" 
+extern char *OLD_CODESET;
 /*** end defs ***/
 
 
