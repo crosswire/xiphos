@@ -35,14 +35,13 @@ extern "C" {
 }
 #endif	
 
-
-//#include <gal/widgets/e-unicode.h>
 #include <string.h>
-
 
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
+#include "gui/dictlex_dialog.h"
+#include "gui/gbs_dialog.h"
 #include "gui/display_info.h"
 #include "gui/editor.h"
 #include "gui/font_dialog.h"
@@ -57,6 +56,7 @@ extern "C" {
 #include "main/bibletext.h"
 #include "main/module_dialogs.h"
 #include "main/sword.h"
+#include "main/sidebar.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/key.h"
@@ -64,10 +64,29 @@ extern "C" {
 #include "main/display.hh"
 #include "main/global_ops.hh"
 
-
-
 #include "backend/dialogs.hh"
 #include "backend/sword_main.hh"
+
+
+typedef struct _treeitem TreeItem;
+struct _treeitem {
+	gchar *module_name;
+	gchar *item_name;
+	gchar *offset;
+	gboolean is_leaf;
+	gboolean expanded;
+        GdkPixbuf *pixbuf_opened;
+        GdkPixbuf *pixbuf_closed;
+};
+
+enum {
+	COL_OPEN_PIXBUF,
+	COL_CLOSED_PIXBUF,
+	COL_TITLE,
+	COL_BOOK,
+	COL_OFFSET,
+	N_COLUMNS
+}; 
 
 enum {
 	TYPE_URI,
@@ -95,6 +114,280 @@ static gboolean bible_in_url;
  * externs
  */
 extern gboolean gsI_isrunning;	/* information dialog */
+
+
+
+/******************************************************************************
+ * Name
+ *  add_tree_item
+ *
+ * Synopsis
+ *   #include "gui/gbs.h"
+ *
+ *   void add_tree_item()	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GtkCTreeNode*
+ */ 
+ 
+static void add_tree_item(GtkTreeModel * model, TreeItem *item, GtkTreeIter parent)
+{
+	
+	GtkTreeIter iter;
+	
+	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, &parent);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				COL_OPEN_PIXBUF,item->pixbuf_opened,
+				COL_CLOSED_PIXBUF,item->pixbuf_closed,
+				COL_TITLE, item->item_name, 
+				COL_BOOK, item->module_name, 
+				COL_OFFSET, item->offset, 
+				-1);
+	
+}
+
+/******************************************************************************
+ * Name
+ *  add_children_to_root
+ *
+ * Synopsis
+ *   #include "gui/gbs.h"
+ *
+ *   void add_children_to_root(gchar *bookname,
+ *   				unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
+	  unsigned long offset, gboolean is_dialog, DIALOG_DATA * d)
+{
+	gchar buf[256];
+	gchar *tmpbuf;
+	gchar *mod_name;
+	TreeItem treeitem, *p_treeitem;
+	GdkPixbuf *open;
+	GdkPixbuf *closed;
+	ModuleDialogs *be = (ModuleDialogs *)d->backend;
+	
+	p_treeitem = &treeitem;
+	p_treeitem->module_name = d->mod_name;
+	
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   -1);
+	
+	if (be->treekey_first_child(offset)) {
+		offset = be->get_treekey_offset();
+		sprintf(buf, "%lu", offset);
+		p_treeitem->offset = buf;
+		tmpbuf = be->treekey_get_local_name(offset);
+		p_treeitem->item_name = (gchar*)tmpbuf;
+		if (be->treekey_has_children(offset)) {
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
+			p_treeitem->is_leaf = FALSE;
+			p_treeitem->expanded = FALSE;
+		} else {
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_helpdoc;
+			p_treeitem->pixbuf_closed = NULL;
+			p_treeitem->is_leaf = TRUE;
+			p_treeitem->expanded = FALSE;
+		}
+		add_tree_item(model, p_treeitem, iter);
+		free(tmpbuf);
+	}	
+	
+	while (be->treekey_next_sibling(offset)) {
+		offset = be->get_treekey_offset();
+		sprintf(buf, "%lu", offset);
+		p_treeitem->offset = buf;
+		tmpbuf = be->treekey_get_local_name(offset);
+		p_treeitem->item_name = (gchar*)tmpbuf;
+		if (be->treekey_has_children(offset)) {
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
+			p_treeitem->is_leaf = FALSE;
+			p_treeitem->expanded = FALSE;
+		} else {
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_helpdoc;
+			p_treeitem->pixbuf_closed = NULL;
+			p_treeitem->is_leaf = TRUE;
+			p_treeitem->expanded = FALSE;
+		}
+		add_tree_item(model, p_treeitem, iter);
+		free(tmpbuf);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  add_book_to_tree
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void add_book_to_tree(GtkWidget * tree, gchar * mod_name)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void main_dialogs_add_book_to_tree(GtkWidget * tree, gchar * mod_name, 
+			     gboolean is_dialog, DIALOG_DATA * d)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree));	
+	ModuleDialogs *be = (ModuleDialogs *) d->backend;	
+	
+	gtk_tree_store_append(GTK_TREE_STORE(model), &iter, NULL);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				    COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+				    COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+				    COL_TITLE,d->mod_name,
+				    COL_BOOK,d->mod_name,
+				    COL_OFFSET,NULL,
+				    -1);
+	be->set_module(d->mod_name);
+	be->set_treekey(0);
+	main_dialogs_add_children_to_tree(model, iter, be->get_treekey_offset(),
+				is_dialog, d);
+	
+}
+
+
+/******************************************************************************
+ * Name
+ *   tree_selection_changed
+ *
+ * Synopsis
+ *   #include "main/gbs_main.h"
+ *
+ *   void tree_selection_changed(GtkTreeModel * model, 
+ *        GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialogs_tree_selection_changed(GtkTreeModel * model, 
+	    GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g)
+{
+	GtkTreeIter selected;
+	GtkTreePath *path;
+	gchar *name = NULL;
+	gchar *book = NULL;
+	gchar *offset = NULL;	
+	unsigned long l_offset;
+	ModuleDialogs *be = (ModuleDialogs *) g->backend;
+	
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		path = gtk_tree_model_get_path(model, &selected);
+		//tree_level = gtk_tree_path_get_depth(path);
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 
+					2,&name,
+					3,&book, 
+					4,&offset, 
+					-1);
+		gtk_tree_path_free(path);
+		
+		if (offset) {
+			l_offset = strtoul(offset, NULL, 0);
+			g->offset = l_offset;			
+			be->set_module(book);
+			be->set_treekey(l_offset);
+			settings.book_key = be->treekey_get_local_name(l_offset);
+			if( !gtk_tree_model_iter_has_child(model, &selected) &&
+				be->treekey_has_children(l_offset)) {
+				main_dialogs_add_children_to_tree(model, selected, 
+						l_offset, is_dialog, g);
+			}
+			//is_leaf = gtk_tree_model_iter_has_child(model, &selected);
+			be->mod->Display();
+			g_free(name);
+			g_free(book);
+			g_free(offset);
+		}
+	}
+}
+
+
+void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)
+{
+	gint count = 7, i;
+	gchar *new_key, *text = NULL;
+	gchar *key = NULL;
+	static gboolean firsttime = TRUE;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
+	gint height;
+	gchar * mod_name = d->mod_name;
+	ModuleDialogs *be = (ModuleDialogs*)d->backend;
+	
+	//g_warning(be->mod->Name());
+	
+	if(!backend->is_module(mod_name))
+		return;
+	
+	//key = (gchar*)gtk_entry_get_text(GTK_ENTRY(d->entry));
+	be->set_module_key(mod_name, d->key);
+	key = be->get_module_key();
+	
+			
+//	xml_set_value("GnomeSword", "keys", "dictionary", key);
+//	settings.dictkey = xml_get_value("keys", "dictionary");
+	
+	be->set_module_key(mod_name, key);
+	be->mod->Display();
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
+	list_store = GTK_LIST_STORE(model);
+	
+	if (!firsttime) {
+		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
+                                             NULL,
+                                             &height);
+		count = height / settings.cell_height;
+	}	 
+
+	if (count) {
+		gtk_list_store_clear(list_store);
+		new_key = be->navigate_module(-1);
+
+		for (i = 0; i < (count / 2); i++) {
+			free(new_key);
+			new_key = be->navigate_module(0);
+		}
+
+		for (i = 0; i < count; i++) {
+			free(new_key);
+			new_key = be->navigate_module(1);
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 0,
+					   new_key, -1);
+		}
+		free(new_key);
+	}
+	firsttime = FALSE;
+} 
+
 
 void main_dialog_save_note(const gchar * note)
 {
@@ -802,6 +1095,7 @@ void main_dialogs_open(gchar * mod_name)
 			be->init_SWORD(t->mod_name);
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
+			dlg_bible = t;
 		break;
 		case COMMENTARY_TYPE:
 			gui_create_commentary_dialog(t, FALSE);
@@ -827,16 +1121,39 @@ void main_dialogs_open(gchar * mod_name)
 			settings.percomm_dialog_exist = TRUE;
 			dlg_percom = t;
 		break;
+		case DICTIONARY_TYPE:
+			gui_create_dictlex_dialog(t);
+			be->entryDisplay = new DialogEntryDisp(t->html, be); 
+			be->init_SWORD(t->mod_name);
+			t->key = g_strdup(settings.dictkey);
+		break;
+		case BOOK_TYPE:
+			gui_create_gbs_dialog(t);
+			be->entryDisplay = new DialogEntryDisp(t->html, be); 
+			be->init_SWORD(t->mod_name);
+			t->key = g_strdup(settings.book_key);
+			if(settings.book_offset)
+				t->offset = settings.book_offset;
+			else
+				t->offset = 0;
+		break;
 	}
 		
 	gtk_widget_show(t->dialog);
 	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
-	dlg_bible = t;
 	be->set_key(t->key);
+	if(type == BOOK_TYPE)
+		be->set_treekey(t->offset);
 	be->mod->Display();
 	bible_apply_change = TRUE;
 	if(type == PERCOM_TYPE)
 		gtk_html_set_editable(ec->html, TRUE);
+	if(type == DICTIONARY_TYPE)
+		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);
+	
+	if(type == BOOK_TYPE)
+		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
+			     TRUE, t);
 }
 
 

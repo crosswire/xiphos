@@ -123,7 +123,6 @@ module.include.files=\
 	src/main/bibletext.h\
 	src/main/commentary.h\
 	src/main/dictlex.h\
-	src/main/gbs.h\
 	src/main/percomm.h\
 	src/main/lists.h\
 	src/main/search.h\
@@ -154,7 +153,8 @@ module.include.files=\
 	src/main/global_ops.hh\
 	src/main/url.h\
 	src/backend/sword_main.hh\
-	src/main/module_dialogs.h
+	src/main/module_dialogs.h\
+	src/main/gbs_main.h
 
 module.source.name=.
 module.source.type=
@@ -167,7 +167,6 @@ module.source.files=\
 	src/backend/tree.cc\
 	src/main/bibletext.c\
 	src/main/dictlex.c\
-	src/main/gbs.c\
 	src/main/main.c\
 	src/main/percomm.c\
 	src/main/search.c\
@@ -197,7 +196,6 @@ module.source.files=\
 	src/gnome2/gbs_dialog.c\
 	src/gnome2/gbs_menu.c\
 	src/gnome2/gnomesword.c\
-	src/gnome2/gtkhtml_display.c\
 	src/gnome2/hints.c\
 	src/gnome2/history.c\
 	src/gnome2/html.c\
@@ -248,7 +246,8 @@ module.source.files=\
 	src/main/sidebar.cc\
 	src/main/module_dialogs.cc\
 	src/main/commentary.cc\
-	src/backend/dialogs.cc
+	src/backend/dialogs.cc\
+	src/main/gbs_main.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

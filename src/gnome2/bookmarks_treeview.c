@@ -49,12 +49,13 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/sidebar.h"
 #include "main/sword.h"
 #include "main/key.h"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 
-TreePixbufs *pixbufs;
+//TreePixbufs *pixbufs;
 GtkTreeStore *model;
 gboolean button_one;
 gboolean button_two;
@@ -64,7 +65,7 @@ GtkTreeView *bookmark_tree;
 static gboolean save_reorderable;
 static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DATA * data);
 
-
+BookMarksPixbufs *bm_pixbufs;
 /******************************************************************************
  * Name
  *   gui_verselist_to_bookmarks
@@ -110,8 +111,8 @@ void gui_verselist_to_bookmarks(GList * verses)
 		gtk_tree_store_append(GTK_TREE_STORE(model), &parent,
 			      &iter);	
 		gtk_tree_store_set(GTK_TREE_STORE(model), &parent, 
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, bm_pixbufs->pixbuf_closed,
 			   COL_CAPTION, info->text1, 
 			   COL_KEY, NULL,
 			   COL_MODULE, NULL,
@@ -127,7 +128,7 @@ void gui_verselist_to_bookmarks(GList * verses)
 			gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
 				      &parent);		
 			gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
-				   COL_OPEN_PIXBUF, pixbufs->pixbuf_helpdoc,
+				   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_helpdoc,
 				   COL_CLOSED_PIXBUF, NULL,
 				   COL_CAPTION, str->str, 
 				   COL_KEY, tmpbuf,
@@ -203,14 +204,11 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 				break;
 			case TEXT_TYPE:
 			case COMMENTARY_TYPE:
+			case DICTIONARY_TYPE:
 				main_dialog_goto_bookmark(url);
 				break;
-			case DICTIONARY_TYPE:
-				gui_dictionary_dialog_goto_bookmark(mod_name,
-								    key);
-				break;
 			case BOOK_TYPE:
-				gui_gbs_dialog_goto_bookmark(mod_name, key);
+				//gui_gbs_dialog_goto_bookmark(mod_name, key);
 				break;
 		}
 	} else  {
@@ -273,8 +271,8 @@ static void get_xml_folder_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	data->module_desc = NULL; //g_strdup("GROUP");
 	data->description = NULL; //g_strdup("GROUP");
 	data->is_leaf = FALSE;
-	data->opened = pixbufs->pixbuf_opened;
-	data->closed = pixbufs->pixbuf_closed;
+	data->opened = bm_pixbufs->pixbuf_opened;
+	data->closed = bm_pixbufs->pixbuf_closed;
 }
 
 
@@ -304,7 +302,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	gchar buf[500];
 	gchar *url = NULL;
 
-	data->opened = pixbufs->pixbuf_helpdoc;
+	data->opened = bm_pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
 	mod1 = xmlGetProp(cur, "modulename");
 	key = xmlGetProp(cur, "key");
@@ -660,28 +658,28 @@ static void create_pixbufs(void)
 {
 	//GtkWidget *image;
 	
-	pixbufs = g_new0(TreePixbufs, 1);
-	pixbufs->pixbuf_closed = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
+	bm_pixbufs = g_new0(BookMarksPixbufs, 1);
+	bm_pixbufs->pixbuf_closed = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
                                              "/epiphany-bookmarks.png",
                                              NULL);
-	if(!pixbufs->pixbuf_closed)
-		pixbufs->pixbuf_closed 
+	if(!bm_pixbufs->pixbuf_closed)
+		bm_pixbufs->pixbuf_closed 
 			= gtk_widget_render_icon(widgets.app,
                                              GNOME_STOCK_BOOK_BLUE, 
                                              GTK_ICON_SIZE_MENU,
                                              NULL);
 		
-	pixbufs->pixbuf_opened =
+	bm_pixbufs->pixbuf_opened =
 		gtk_widget_render_icon(widgets.app,
                                              GNOME_STOCK_BOOK_OPEN, 
                                              GTK_ICON_SIZE_MENU,
                                              NULL);
-	pixbufs->pixbuf_helpdoc =
+	bm_pixbufs->pixbuf_helpdoc =
 		gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
                                              "/epiphany-bookmark-page.png",
                                              NULL);
-	if(!pixbufs->pixbuf_helpdoc)
-		pixbufs->pixbuf_helpdoc 
+	if(!bm_pixbufs->pixbuf_helpdoc)
+		bm_pixbufs->pixbuf_helpdoc 
 			= gtk_widget_render_icon(widgets.app,
                                              GTK_STOCK_DND,
                                              GTK_ICON_SIZE_MENU,
@@ -947,8 +945,8 @@ GtkWidget *gui_create_bookmark_tree(void)
 	gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
 			      NULL);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, bm_pixbufs->pixbuf_closed,
 			   COL_CAPTION,"Bookmarks", 
 			   COL_KEY, NULL,
 			   COL_MODULE,NULL,
