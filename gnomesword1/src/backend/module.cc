@@ -1371,6 +1371,10 @@ char *backend_get_key_from_module(int manager, char *module_name)
 	case COMM_MGR:
 		mod = sw.comm_mgr->Modules[module_name];
 		break;
+	case DICT_MGR:
+		mod = sw.dict_mgr->Modules[module_name];
+		(const char *)mod;
+		break;
 	case GBS_MGR:
 		mod = sw.gbs_mgr->Modules[module_name];
 		break;
