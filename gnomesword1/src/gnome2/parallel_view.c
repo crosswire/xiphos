@@ -294,7 +294,7 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
 {
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description((gchar *) user_data);
+	mod_name = main_module_name_from_description((gchar *) user_data);
 	if(!mod_name) 
 		return;
 	if (mod_name) {
@@ -336,7 +336,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 {
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description((gchar *) user_data);
+	mod_name = main_module_name_from_description((gchar *) user_data);
 	if(!mod_name) 
 		return;
 	if (mod_name) {
@@ -377,7 +377,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 {
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description((gchar *) user_data);
+	mod_name = main_module_name_from_description((gchar *) user_data);
 	if(!mod_name) 
 		return;
 	if (mod_name) {
@@ -418,7 +418,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 {
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description((gchar *) user_data);
+	mod_name = main_module_name_from_description((gchar *) user_data);
 	if(!mod_name) 
 		return;
 	if (mod_name) {
@@ -459,7 +459,7 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 {
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description((gchar *) user_data);
+	mod_name = main_module_name_from_description((gchar *) user_data);
 
 	if(!mod_name) 
 		return;

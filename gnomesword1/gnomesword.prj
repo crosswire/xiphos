@@ -154,7 +154,8 @@ module.include.files=\
 	src/gui/search_sidebar.h\
 	src/backend/module_search.hh\
 	src/main/search_dialog.h\
-	src/main/search_sidebar.h
+	src/main/search_sidebar.h\
+	src/gui/splash.h
 
 module.source.name=.
 module.source.type=

@@ -35,7 +35,6 @@
 
 #include "backend/sword.h"
 #include "backend/mgr.hh"
-#include "backend/module.hh"
 #include "backend/key.hh"
 #include "backend/sword_main.hh"
 

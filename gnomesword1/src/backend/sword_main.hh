@@ -61,9 +61,11 @@ public:
 	const char *version;	
 	SWDisplay *commDisplay;	
 	SWDisplay *dictDisplay;
-	SWDisplay *textDisplay;	
+	SWDisplay *textDisplay;
+	SWDisplay *RTOLDisplay;
 	SWDisplay *entryDisplay;		
-	SWDisplay *chapDisplay;
+	SWDisplay *chapDisplay;		
+	SWDisplay *dialogRTOLDisplay;
 
 	BackEnd();
 	~BackEnd();
@@ -98,6 +100,7 @@ public:
 	
 	int module_type(char *mod_name);
 	char *module_description(char *mod_name);
+	char *module_name_from_description(char *description);
 	const char *module_get_language(const char *module_name);
 	int module_has_testament(const char * module_name,  int testament);
 	const char *get_language_map(const char *language);
