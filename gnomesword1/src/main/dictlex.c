@@ -40,21 +40,27 @@
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 
-/******************************************************************************
- * externs
- */ 
-extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 
 /******************************************************************************
- * global to this file only 
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
  */
-static GList *dl_list;
-
-/******************************************************************************
- * globals
- */
-DL_DATA *cur_d;
-
+ 
+void new_dictlex_display(GtkWidget * html, gint mod_num)
+{
+	backend_new_dictlex_display(html, mod_num);
+}
 
 /******************************************************************************
  * Name
@@ -99,162 +105,6 @@ void display_dictionary_page_and_key(gint page_num, gchar * key)
 	backend_display_dictlex(page_num, key);
 }
 
-/******************************************************************************
- * Name
- *   set_dictionary_page_and_key
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void set_dictionary_page_and_key(gint page_num, gchar * key)
- *
- * Description
- *   change notebook page and set new key in entry widget
- *
- * Return value
- *   void
- */
-
-void set_dictionary_page_and_key(gint page_num, gchar * key)
-{
-	DL_DATA *d;
-
-	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL),
-			      page_num);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
-
-}
-
-/******************************************************************************
- * Name
- *   set_page_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void set_page_dictlex(gchar * modname, GList * dl_list)
- *
- * Description
- *    set dictlex notebook page on startup
- *
- * Return value
- *   void
- */
-
-static void set_page_dictlex(gchar * modname, GList * dl_list)
-{
-	gint page = 0;
-	DL_DATA *d = NULL;
-
-	dl_list = g_list_first(dl_list);
-	while (dl_list != NULL) {
-		d = (DL_DATA *) dl_list->data;
-		if (!strcmp(d->modName, modname))
-			break;
-		++page;
-		dl_list = g_list_next(dl_list);
-	}
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
-
-	settings.dict_last_page = page;
-}
-
-/******************************************************************************
- * Name
- *   setup_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void setup_dictlex(GList *mods)
- *
- * Description
- *   setup dictlex support 
- *
- * Return value
- *  void
- */
-
-void setup_dictlex(GList *mods)
-{
-	GtkWidget *popup;
-	GList *tmp = NULL;
-	gchar *modname;
-	gchar *modbuf;
-	gchar *keybuf;
-	DL_DATA *dl;
-	gint count = 0;
-
-	dl_list = NULL;
-
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		modname = (gchar *) tmp->data;
-		dl = g_new(DL_DATA, 1);
-		dl->modName = modname;
-		dl->mod_num = count;
-		dl->searchstring = NULL;
-		dl->find_dialog = NULL;	
-		dl->has_key = backend_module_is_locked(dl->modName);
-		gui_create_dictlex_pane(dl, count);
-		popup = gui_create_dictlex_pm(dl, mods);
-		gnome_popup_menu_attach(popup, dl->html, NULL);
-		backend_new_dictlex_display(dl->html, dl->mod_num);
-		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
-		++count;
-		tmp = g_list_next(tmp);
-	}
-
-
-	gtk_signal_connect(GTK_OBJECT(settings.notebookDL), "switch_page",
-			   GTK_SIGNAL_FUNC(on_notebook_dictlex_switch_page),
-			   dl_list);
-
-	modbuf = g_strdup(settings.DictWindowModule);
-	keybuf = g_strdup(settings.dictkey);
-
-	set_page_dictlex(modbuf, dl_list);
-
-	g_free(modbuf);
-	g_free(keybuf);
-	g_list_free(tmp);
-	settings.dict_last_page = 0;
-}
-
-/******************************************************************************
- * Name
- *   shutdown_dictlex
- *
- * Synopsis
- *   #include "dictlex.h"
- *
- *   void shutdown_dictlex(void)
- *
- * Description
- *    shutdown and cleanup dictlex support
- *
- * Return value
- *   void
- */
-
-void shutdown_dictlex(void)
-{
-	dl_list = g_list_first(dl_list);
-	while (dl_list != NULL) {
-		DL_DATA *d = (DL_DATA *) dl_list->data;
-		/* free any search dialogs created */
-		if (d->find_dialog)
-			g_free(d->find_dialog);
-		g_free((DL_DATA *) dl_list->data);
-		dl_list = g_list_next(dl_list);
-	}
-	g_list_free(dl_list);
-
-}
 
 /******************************************************************************
  * Name

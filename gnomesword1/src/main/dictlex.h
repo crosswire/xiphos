@@ -26,38 +26,11 @@
 extern "C" {
 #endif
 
-#include "main/settings.h"
 
-typedef struct _DLFindDialog DLFindDialog;
-struct _DLFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget *htmlwidget;
-	GtkWidget *entry;
-	GtkWidget *backward;
-	GtkWidget *case_sensitive;
-	gboolean regular;
-};
-
-typedef struct _dldata DL_DATA;
-struct _dldata {
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *clist;
-	GtkWidget *entry;
-	GtkWidget *showtabs;
-	gchar *modName;
-	gchar *searchstring;
-	int mod_num;
-	gboolean has_key;
-	DLFindDialog *find_dialog;
-};
 void display_dictionary_page_and_key(gint page_num, gchar * key);
 GList *fill_dictlex_keys(int mod_num, int count);
-void setup_dictlex(GList *mods);
-void shutdown_dictlex(void);
-void set_dictionary_page_and_key(gint page_num,
-				     gchar * key);
 void display_dictlex(gchar * key);
+void new_dictlex_display(GtkWidget * html, gint mod_num);
 
 gchar *get_first_key_viewdict(void);
 gchar *get_next_key_viewdict(void);

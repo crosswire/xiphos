@@ -22,12 +22,31 @@
 #ifndef ___DICTLEX_H_
 #define ___DICTLEX_H_
 
-#include "main/dictlex.h"
+typedef struct _DLFindDialog DLFindDialog;
+struct _DLFindDialog {
+	GnomeDialog *dialog;
+	GtkWidget *htmlwidget;
+	GtkWidget *entry;
+	GtkWidget *backward;
+	GtkWidget *case_sensitive;
+	gboolean regular;
+};
 
-void on_notebook_dictlex_switch_page(GtkNotebook *notebook,
-		GtkNotebookPage *page, gint page_num, GList *dl_list);
-GtkWidget *gui_create_dictlex_pm(DL_DATA *dl, GList *mods);
-void gui_create_dictlex_pane(DL_DATA *dl, gint count);
-							
+typedef struct _dldata DL_DATA;
+struct _dldata {
+	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *clist;
+	GtkWidget *entry;
+	GtkWidget *showtabs;
+	gchar *modName;
+	gchar *searchstring;
+	int mod_num;
+	gboolean has_key;
+	DLFindDialog *find_dialog;
+};
+void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
+void gui_setup_dictlex(GList *mods);
+void gui_shutdown_dictlex(void);							
 #endif
 
