@@ -85,8 +85,14 @@ void AddSection(GtkCTree *ctree, SWConfig *config, const gchar *section, GtkCTre
 			text[1] = token;
 			token=strtok(NULL,t);
 			text[2] = token;
-			is_leaf = false;
-			node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
+			if(!strcmp(text[2],"GROUP"))
+				is_leaf = false;
+			else
+				is_leaf = true;
+			if(is_leaf)
+				node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap3,mask3,NULL, NULL, is_leaf, FALSE);
+			else
+				node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
 			gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
 			AddSection(ctree,config,(*eit).first.c_str(),node);
 		}
@@ -141,7 +147,7 @@ void loadbookmarks(GtkWidget *ctree_widget)
 	if(dir = opendir(swbmDir)){
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
-			if ((strcmp(ent->d_name, "personal.conf")) && (strcmp(ent->d_name, "."))&& (strcmp(ent->d_name, ".."))) {
+			if ((strcmp(ent->d_name, "root.conf")) && (strcmp(ent->d_name, "personal.conf")) && (strcmp(ent->d_name, "."))&& (strcmp(ent->d_name, ".."))) {
 				sprintf(conffile,"%s%s",swbmDir,ent->d_name);
 				bookmarkInfo = new SWConfig(conffile);
 				if ((sit = bookmarkInfo->Sections.find("ROOT")) != bookmarkInfo->Sections.end()) {
@@ -164,6 +170,31 @@ void loadbookmarks(GtkWidget *ctree_widget)
 		}
 		closedir(dir);
 	}
+	
+	sprintf(conffile,"%sroot.conf", swbmDir);		
+	if (access(conffile, F_OK) == -1) return;		
+	bookmarkInfo = new SWConfig(conffile);	 
+	if((sit = bookmarkInfo->Sections.find("ROOT")) != bookmarkInfo->Sections.end()){
+		for(eit = (*sit).second.begin(); eit != (*sit).second.end(); eit++){
+		//if((eit = (*sit).second.begin()) != (*sit).second.end()){
+			char *token, *text[3];
+			token=strtok((char *)(*eit).second.c_str(),t);
+			text[0] = token;
+			token=strtok(NULL,t);
+			text[1] = token;
+			token=strtok(NULL,t);
+			text[2] = token;
+			*bmfiles.insert(bmfiles.begin(),conffile);
+			personal_node = gtk_ctree_insert_node(ctree,NULL,NULL,text, 3, pixmap3,mask3,NULL, NULL, TRUE, FALSE);
+			style = gtk_style_new();
+			style->base[GTK_STATE_NORMAL].red = 0;
+			style->base[GTK_STATE_NORMAL].green = 45000;
+			style->base[GTK_STATE_NORMAL].blue = 55000;
+			gtk_ctree_node_set_row_data_full(ctree,personal_node, style,(GtkDestroyNotify) gtk_style_unref);			
+		}
+	}  
+	delete bookmarkInfo;
+	
 	gtk_clist_thaw(GTK_CLIST(ctree));
 	delete style;
 }
@@ -202,6 +233,7 @@ void savebookmarks(GtkWidget *ctree_widget)
 {
 	GtkCTreeNode *node;
 	GtkCTree *ctree;
+	gboolean is_leaf;
 	gchar persfile[256], 
 			buf[80],
 			tmpbuf[500],
@@ -213,34 +245,61 @@ void savebookmarks(GtkWidget *ctree_widget)
 	
 	sprintf(persfile,"%spersonal.conf",swbmDir);
 	
-	/*** delete all bookmark files before saving in case a top level was deleter ***/	
+	/*** delete all bookmark files before saving in case a top level was deleted ***/	
 	for( it = bmfiles.begin(); it != bmfiles.end(); it++){
-		//g_warning((*it).c_str());
 		if((!strcmp((*it).c_str(),persfile)) || (strcmp((*it).c_str(), persfile))) /* we used this code so we can add autosave options */
 			unlink((*it).c_str());
 	}
+	
 	ctree = GTK_CTREE(ctree_widget);
 	/* collapse tree so we only iterate through the roots */
 	gtk_ctree_collapse_recursive (ctree, NULL); 	
 	/*******************************************************************/
-	int j=0;
+	int j=0,x=0;
 	for(int i=0; i< GTK_CLIST(ctree)->rows; i++){
 		node = gtk_ctree_node_nth(ctree, i);
   		if (!node)
     			return;
-		//g_warning("ROOT");	
-		sprintf(conffile,"%s%s", swbmDir, GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text);
-		 bmconf = new SWConfig(conffile);
-		emap = bmconf->Sections["ROOT"];
-		sprintf(buf, "branch%d", j++);
-		sprintf(tmpbuf,"%s|%s|%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text,
-					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text,
-					GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[2])->text);
-		emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, tmpbuf));	
-		AddSectionToConf(bmconf, buf, node, j);
-		bmconf->Sections["ROOT"] = emap;
-		bmconf->Save();
-		delete bmconf;  		
+		gtk_ctree_get_node_info(ctree,
+					node,
+					NULL,
+					NULL,
+					NULL,
+					NULL,
+					NULL,
+					NULL,
+					&is_leaf,
+					NULL);
+		if(is_leaf) {
+			//g_warning("is_leaf");
+			sprintf(conffile,"%s%s.conf", swbmDir, "root");
+			bmconf = new SWConfig(conffile);
+			emap = bmconf->Sections["ROOT"];
+			sprintf(buf, "branch%d", x++);
+			sprintf(tmpbuf,"%s|%s|%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text,
+						GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text,
+						GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[2])->text);
+			emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, tmpbuf));	
+			//AddSectionToConf(bmconf, buf, node, j);
+			bmconf->Sections["ROOT"] = emap;
+			bmconf->Save();
+			delete bmconf;  
+		}
+		
+		else {
+			sprintf(conffile,"%s%s", swbmDir, GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text);
+			bmconf = new SWConfig(conffile);
+			emap = bmconf->Sections["ROOT"];
+			sprintf(buf, "branch%d", j++);
+			sprintf(tmpbuf,"%s|%s|%s", GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text,
+						GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text,
+						GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[2])->text);
+			emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, tmpbuf));	
+			AddSectionToConf(bmconf, buf, node, j);
+			bmconf->Sections["ROOT"] = emap;
+			bmconf->Save();
+			delete bmconf;  
+		}
 	}
     /***************************************************************************/	
 }
