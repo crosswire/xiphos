@@ -606,8 +606,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods, GList *comDescription)
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	gint i = 0;
-	gchar buf[80];
-	
+		
 	tooltips = gtk_tooltips_new();
 	pmCommentsHtml = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "pmCommentsHtml",
@@ -732,10 +731,9 @@ static GtkWidget *create_pmCommentsHtml(GList * mods, GList *comDescription)
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(item1);
-		sprintf(buf, "%d", i); 
 		gtk_signal_connect(GTK_OBJECT(item1), "activate",
 				   GTK_SIGNAL_FUNC(on_com_select_activate),
-				   g_strdup((gchar *) buf));
+				   GINT_TO_POINTER(i));
 
 		gtk_container_add(GTK_CONTAINER(view_module1_menu), item1);
 		gtk_tooltips_set_tip(tooltips, item1, (gchar *) tmp2->data,
@@ -794,8 +792,7 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	gint i = 0;
-	gchar buf[80];
-
+	
 	tooltips = gtk_tooltips_new();
 	pmDict = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmDict), "pmDict", pmDict);
@@ -899,11 +896,10 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(item3);
-		sprintf(buf, "%d", i);
 		gtk_signal_connect(GTK_OBJECT(item3), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_dict_select_activate),
-				   g_strdup((gchar *) buf));
+				   GINT_TO_POINTER(i));
 
 		gtk_container_add(GTK_CONTAINER(view_module2_menu), item3);
 		gtk_tooltips_set_tip(tooltips, item3, (gchar *) tmp2->data,
@@ -1036,7 +1032,7 @@ static GtkWidget* create_pmBible(GList *mods, GList *bibleDescription)
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
   	view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 
-	
+	i=0;
 	tmp = mods;
 	tmp2 = bibleDescription;
 	while (tmp != NULL) {
@@ -1050,7 +1046,7 @@ static GtkWidget* create_pmBible(GList *mods, GList *bibleDescription)
 		gtk_signal_connect(GTK_OBJECT(item3), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_mainText_activate),
-				   g_strdup((gchar *)tmp->data ));
+				   GINT_TO_POINTER(i));
 
 		gtk_container_add(GTK_CONTAINER(view_module3_menu), item3);
 		gtk_tooltips_set_tip(tooltips, item3, (gchar *) tmp2->data,

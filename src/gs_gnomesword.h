@@ -72,10 +72,7 @@ struct _gs_lexicon {
 
 typedef struct _gsnbpages GS_NB_PAGES;
 struct _gsnbpages {
-	gint	nbTextModspage, /* Bible window */
-		notebook1page, /* commentary window  */
-		notebook2page, /* dict/lex window  */
-		notebook3page; /* main notebook */	
+	gint	notebook3page; /* main notebook */	
 };
 
 typedef struct _gstabs GS_TABS;
@@ -88,6 +85,8 @@ struct _gstabs {
 typedef struct _settings SETTINGS;
 struct _settings {
 	gchar	   MainWindowModule[80],	/* modules to open at program startup  */
+			CommWindowModule[80],
+			DictWindowModule[80],
 	           Interlinear1Module[80],
 	           Interlinear2Module[80],
 	           Interlinear3Module[80], 
@@ -149,8 +148,9 @@ void initGnomeSword(GtkWidget *app,
 		GList *commentarymods , 
 		GList *dictionarymods, 
 		GList *percommods);
-void addnotebookpages(GtkWidget *notebook, 
-		GList *list); 
+gint addnotebookpages(GtkWidget *notebook, 
+		GList *list,
+		gchar *modName); 
 void UpdateChecks(GtkWidget * mainform);
 void applyoptions(GtkWidget *app,
 		gboolean showshortcut,
@@ -187,7 +187,6 @@ void fillSBtoolbars(GtkWidget *app,
 void setupSidebar(GtkWidget *app);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
-
 
 #ifdef __cplusplus
 }

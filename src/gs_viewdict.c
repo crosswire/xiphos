@@ -398,7 +398,7 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
 	initSD(getdictmodSWORD());
 	gtk_entry_set_text(GTK_ENTRY(ceSDMods), getdictmodSWORD());
 	gtk_entry_set_text(GTK_ENTRY(entrySDLookup), settings->dictkey);	
-	g_warning(settings->dictkey);
+	//g_warning(settings->dictkey);
 	SDdictSearchTextChangedSWORD(settings->dictkey);
 	isrunningSD = TRUE;
 	return dlgViewDict;

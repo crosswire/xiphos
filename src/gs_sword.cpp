@@ -589,13 +589,54 @@ footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have 
 }
 
 /* 
- *
+ * gotoBookmarkSWORD - bad hack but it works
+ * 
  */
 void
-gotBookmarkSWORD(gchar *modName, gchar *key)
+gotoBookmarkSWORD(gchar *modName, gchar *key)
 {
+	GtkWidget *page, *entry, *notebook;
+	GtkNotebookPage *realpage;
+	GtkLabel *reallabel;
 	ModMap::iterator it;
+	gint bibleindex = 0;
+	gint commindex = 0;
+	gint dictindex = 0;	
 	
+	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			if(!strcmp((*it).second->Name(), modName)){
+				curMod = (*it).second;
+				notebook = lookup_widget(MainFrm,"nbTextMods");
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),bibleindex ); 
+				changeVerseSWORD(key);
+			}				
+			++bibleindex;
+		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
+			if(!strcmp((*it).second->Name(), modName)){
+				curcomMod = (*it).second;  //-- change current module to new module				
+				notebook = lookup_widget(MainFrm,"notebook1");
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),commindex ); 
+				changeVerseSWORD(key);
+			}
+			++commindex;
+		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules	
+			if(!strcmp((*it).second->Name(), modName)){
+				curdictMod = (*it).second;  //-- change current module to new module
+				curdictMod->SetKey(key);
+				entry = lookup_widget(MainFrm,"dictionarySearchText"); 
+				gtk_entry_set_text(GTK_ENTRY(entry), key);
+				notebook = lookup_widget(MainFrm,"notebook4");
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook),dictindex ); 				
+			}
+			++dictindex;
+		}
+	} 		
+	
+	
+	
+	
+	/*
 	it = mainMgr->Modules.find(modName);
 	if(it != mainMgr->Modules.end()){ //-- if we find the module	
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
@@ -612,7 +653,7 @@ gotBookmarkSWORD(gchar *modName, gchar *key)
 			FillDictKeysSWORD();
 			curdictMod->Display();
 		}
-	}
+	}*/
 }
 
 //-------------------------------------------------------------------------------------------
@@ -659,37 +700,8 @@ changecomp1ModSWORD(gchar *modName)  //-- change sword module for 1st interlinea
 	}
 	//strcpy(settings->Interlinear1Module, comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
-/*
-//-------------------------------------------------------------------------------------------
-void
-changecomp2ModSWORD(gchar *modName)  //-- change sword module for 2nd interlinear window
-{
-	ModMap::iterator it;
 
-	it = mainMgr2->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr2->Modules.end()){    //-- if we find the module	
-		comp2Mod = (*it).second;    //-- change current module to new module
-		comp2Mod->SetKey(current_verse); //-- set key to current verse
-		comp2Mod->Display();            //-- show it to the world
-	}
-	strcpy(settings->Interlinear2Module, comp2Mod->Name()); //-- remember where we are so we can open here next time we startup
-}
 
-//-------------------------------------------------------------------------------------------
-void
-changecomp3ModSWORD(gchar *modName)   //-- change sword module for 3rd interlinear window
-{
-	ModMap::iterator it;
-
-	it = mainMgr3->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
-	if (it != mainMgr3->Modules.end()){    //-- if we find the module	
-		comp3Mod = (*it).second;     //-- change current module to new module
-		comp3Mod->SetKey(current_verse); //-- set key to current verse
-		comp3Mod->Display();          //-- show it to the world
-	}
-	strcpy(settings->Interlinear3Module, comp3Mod->Name()); //-- remember where we are so we can open here next time we startup
-}
-*/
 //-------------------------------------------------------------------------------------------
 void
 setversestyleSWORD(gboolean choice)  //-- set verse style -- verses or paragraphs
@@ -763,14 +775,14 @@ freeformlookupSWORD(GdkEventKey  *event) //-- change to verse in freeformlookup 
 void
 nbchangecurModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
 {
-	nbpages->nbTextModspage = page_num;
+	//nbpages->nbTextModspage = page_num;
 	changecurModSWORD(modName, showchange); 
 }
 
 
 //-------------------------------------------------------------------------------------------
 void
-changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
+changcurcomModSWORD(gchar *modName, gboolean showchange)  //-- someone changed commentary notebook page (sent here by callback function notebook page change)
 {
 	ModMap::iterator it;
 	//GtkWidget *frame;//-- pointer to commentary frame *notebook, //-- pointer to commentary notebook
@@ -778,7 +790,7 @@ changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- so
 	if(havebible) {			
 	        //notebook = lookup_widget(MainFrm,"notebook1"); //-- set notebook pointer to commentary notebook
 	        //frame = lookup_widget(MainFrm,"framecom"); //-- set frame to commentary frame
-	        nbpages->notebook1page = page_num; //-- save current page
+	        //nbpages->notebook1page = page_num; //-- save current page
 	        //g_print("page=%d\n",settings->notebook1page);
 	        it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
 	        if (it != mainMgr->Modules.end()){	
@@ -786,6 +798,7 @@ changcurcomModSWORD(gchar *modName, gint page_num, gboolean showchange)  //-- so
 		        if(showchange) {
 		                if(autoscroll) curcomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
 		                curcomMod->Display(); //-- show the change
+				strcpy(settings->CommWindowModule, curcomMod->Name()); 
 		        }
 		        //gtk_frame_set_label( GTK_FRAME(frame),curcomMod->Name()); //-- set frame label
 		        //label = gtk_label_new(curcomMod->Name());
@@ -859,19 +872,20 @@ deletenoteSWORD(void)  //-- delete personal comment
 
 //-------------------------------------------------------------------------------------------
 void
-changcurdictModSWORD(gchar *modName, gchar *keyText, gint page_num) //-- someone changed dict notebook page - sent here by notebook callback
+changcurdictModSWORD(gchar *modName, gchar *keyText) //-- someone changed dict notebook page - sent here by notebook callback
 {	                    //-- modName form page label - keyText from dict lookup entry
 	ModMap::iterator it;
         //GtkWidget   *frame;  //-- pointer to dict&lex frame
             						
 	//frame = lookup_widget(MainFrm,"frame10"); //-- set frame to dict&lex frame
-	nbpages->notebook2page = page_num; //-- save current page
+	//nbpages->notebook2page = page_num; //-- save current page
 	it = mainMgr->Modules.find(modName);  //-- find module we want to use
 	if (it != mainMgr->Modules.end()){	
 		curdictMod = (*it).second;  //-- set curdictMod to new choice
 		curdictMod->SetKey(keyText);   //-- set key to text from lookup entry
 		curdictMod->Display();	 //-- display new dict
-		FillDictKeysSWORD(); //-- fill the list widget with keys	
+		FillDictKeysSWORD(); //-- fill the list widget with keys
+		strcpy(settings->DictWindowModule, curdictMod->Name()); 
 		//gtk_frame_set_label( GTK_FRAME(frame),curdictMod->Name()); //-- set frame label
 	}
 }
@@ -973,7 +987,7 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 		len = strlen(bufabout);
 		newbuf = new char[len + 600];
 		text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
-		AboutModsDisplayHTML(newbuf, bufabout) ; //-- send about info and text widget to display function (display.cpp)
+		AboutModsDisplayHTML(newbuf, bufabout) ; //-- send about info and alocated new text buffer to display function (gs_display.cpp)
 		beginHTML(text, FALSE);
 		displayHTML(text, "<html><body>", strlen("<html><body>"));
 		displayHTML(text, discription, strlen(discription));
@@ -981,19 +995,26 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 		displayHTML(text, "</body></html>", strlen("</body></html>"));
 		endHTML(text);
 		delete[]newbuf; 
-	}else g_warning(bufabout);
+	}else 
+		g_warning(bufabout);
 }
 
 
 //-------------------------------------------------------------------------------------------
 void
-showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about information in the Sword Project about dialog
+showinfoSWORD(GtkWidget *text, GtkLabel *label, GtkLabel *version_label) //--  show text module about information in the Sword Project about dialog
 {
 	char 	*buf,       //-- pointer to text buffer for label (mod name)
- 	        *bufabout;  //-- pointer to text buffer for text widget (mod about)
+ 	        *bufabout,  //-- pointer to text buffer for text widget (mod about)
+		version[40];
         ModMap::iterator it; //-- module iterator
 	SectionMap::iterator sit; //--
 	ConfigEntMap::iterator cit; //--
+	gfloat ver;
+	
+	ver = getSwordVerionSWORD();
+	sprintf(version,"Sword-%.2f",ver);
+	gtk_label_set_text( GTK_LABEL(version_label),version);  //-- set label to sword version
 	
 	it = mainMgr->Modules.find(curMod->Name()); //-- find module (modName)
 	if (it != mainMgr->Modules.end()){ //-- if we don't run out of mods before we find the one we are looking for	
@@ -1005,7 +1026,7 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 			        bufabout = (char *)(*cit).second.c_str(); //-- get module about information
 	        }
 	}	
-	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
+	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription	
 	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE ); //-- set word wrap to TRUE for text widget
 	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
 }
@@ -1494,3 +1515,11 @@ gboolean getVerseListSWORD(gchar *vlist)
 	return retval;
 }
 
+gfloat 
+getSwordVerionSWORD(void)
+{
+	gfloat retval;
+	
+	retval = mainMgr->Version();
+	return retval;
+}

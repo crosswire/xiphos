@@ -113,8 +113,10 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		GList *biblemods, GList *commentarymods ,
 		GList *dictionarymods, GList *percommods)
 {
-	GtkLabel *label1;
 	GtkWidget *notebook;
+	gint		biblepage,
+			commpage,
+			dictpage;
 	p_gslayout = &gslayout;
 	
 /* set the main window size */
@@ -148,9 +150,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				sbdictmods,
 				percommods);
 /* add pages to commentary and  dictionary notebooks */
-	addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods);
-	addnotebookpages(lookup_widget(app,"notebook1"), commentarymods);
-	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
+	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
+	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
+	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);	
 /*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
@@ -198,26 +200,20 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 /* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
 	if(havebible){ 			
-		/* set page to 0 (first page in notebook) */
-		gint pagenum = 0;
-		/* if save page is less than actual number of pages use saved page number else 0 */
-		if(nbpages->nbTextModspage < textpages) pagenum = nbpages->nbTextModspage;
+		gint pagenum;
+		
+		pagenum = biblepage; 
 		/* get notebook */
 		notebook = lookup_widget(app,"nbTextMods");
-		/* set notebook page */
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
-		/* get the label from the notebook page (module name) */	
-		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		nbchangecurModSWORD(label1->label, pagenum, TRUE); 	
-		
 		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
 			   GTK_SIGNAL_FUNC(on_nbTextMods_switch_page),
-			   NULL);	
+			   NULL);			
+		/* set notebook page */
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 
                 if(p_tabs->textwindow) 
 			gtk_widget_show(notebook);
-                else gtk_widget_hide(notebook);
-         /* hide dictionary section of window if we do not have at least one dict/lex */
+                else 
+			gtk_widget_hide(notebook);
 	}
 		
 /* set dict module to open notebook page */
@@ -225,54 +221,39 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	if(havedict){ 			
 		/* set page to 0 (first page in notebook) */
 		gint pagenum = 0;
-		/* if save page is less than actual number of pages use saved page number else 0 */
-		if(nbpages->notebook2page < dictpages) pagenum = nbpages->notebook2page;
+		pagenum = dictpage;
 		/* get notebook */
 		notebook = lookup_widget(app,"notebook4");
-		/* set notebook page */
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
-		/* get the label from the notebook page (module name) */	
-		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		changcurdictModSWORD(label1->label, settings->dictkey, pagenum);	
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook4_switch_page),
-                      NULL);
-                if(p_tabs->dictwindow) gtk_widget_show(notebook);
+                      NULL);		
+		/* set notebook page */
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
+		if(p_tabs->dictwindow) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
          /* hide dictionary section of window if we do not have at least one dict/lex */
-	}else gtk_widget_hide(lookup_widget(app,"hbox8"));
+	}else 
+		gtk_widget_hide(lookup_widget(app,"hbox8"));
 	
 /* set com module to open notebook page */	
 	if(havecomm){ /* let's don't do this if we don't have at least one commentary */  	
 		gint pagenum = 0;
-		
-		//g_warning("pages = %d : compgs = %d",settings->notebook1page,compages);
 		notebook = lookup_widget(app,"notebook1");
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                                         GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                                         NULL);
-		if(nbpages->notebook1page < compages) pagenum = nbpages->notebook1page;
-			
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
-		/*label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		changcurcomModSWORD(label1->label, pagenum, TRUE);   */
-		
+		pagenum = commpage;			
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );		
                 if(p_tabs->commwindow) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
-        }else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
+        }else 
+		gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
 		
 /* set personal commets notebook label and display module */
 	if(usepersonalcomments){
 		 /* change personal comments module */
 		changepercomModSWORD(settings->personalcommentsmod);	
 	}
-/* set text modules to last used */
-	//changecurModSWORD(settings->MainWindowModule,TRUE);
-	//changecomp1ModSWORD(settings->Interlinear1Module);
-	//changecomp2ModSWORD(settings->Interlinear2Module);
-	//changecomp3ModSWORD(settings->Interlinear3Module);
 	
 /* hide buttons - only show them if their options are enabled */
 	gtk_widget_hide(lookup_widget(app,"btnPrint"));
@@ -305,27 +286,32 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
  * notebook - notebook to add the pages to
  * list - list of modules - add one page per module
  *********************************************************************************************/
-void
-addnotebookpages(GtkWidget *notebook, GList *list)
+gint
+addnotebookpages(GtkWidget *notebook, GList *list, gchar *modName)
 {
 	GList *tmp;
-	gint pg = 0;
+	gint pg = 0, retVal;
 	GtkWidget
 		*empty_notebook_page, /* used to create new pages */
 		*label;
-		
+	GtkLabel *mylabel;
+	retVal = 0;	
 	tmp = list;
 	while (tmp != NULL) {
 		empty_notebook_page = gtk_vbox_new (FALSE, 0);
 		gtk_widget_show (empty_notebook_page);
 		gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
 		label = gtk_label_new ((gchar *) tmp->data);
+		mylabel = GTK_LABEL(label);
+		if(!strcmp((gchar*)mylabel->label, modName)) /* set retVal to saved mod's page number */
+			retVal = pg;
 		gtk_widget_show (label);
 		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook),
 			gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg++), label);
 		tmp = g_list_next(tmp);
 	}
-	g_list_free(tmp);	
+	g_list_free(tmp);
+	return retVal;
 }
 
 
