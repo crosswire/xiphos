@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+#include "GnomeSword.h"
 
 void
 additemtognomemenu(GtkWidget * MainFrm,
@@ -56,12 +57,10 @@ GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
 void
 removemenuitems(GtkWidget * MainFrm,
 		gchar * startitem, gint numberofitems);
-
-GtkWidget *create_pmComments2(GList * mods);
-
-GtkWidget *create_pmDict(GList * mods);
-
-GtkWidget* create_pmBible(GList * mods);
+		
+void createpopupmenus(GtkWidget *app, SETTINGS *settings,GList *biblelist, 
+		GList *commentarylist, GList *dictionarylist,
+		GList *percomlist);
 
 #ifdef __cplusplus
 }
