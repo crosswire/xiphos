@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/Gnomesword-0.3/gnomesword/main.cpp,/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_file.h,/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_file.c,/home/terry/Projects/Gnomesword-0.3/gnomesword/callback.cpp,/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_studypad.c,/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_listeditor.c,/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_gnomesword.c,/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_sword.cpp,/home/terry/Projects/Gnomesword-0.3/gnomesword/Makefile.am,
+openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/Gnomesword-0.3/gnomesword/main.cpp,
 show_outputview=true
 show_treeview=true
-header_file=/home/terry/Projects/Gnomesword-0.3/gnomesword/Makefile.am
-cpp_file=/home/terry/Projects/Gnomesword-0.3/gnomesword/gs_file.c
-browser_file=file:/home/terry/share/doc/HTML/default/kdevelop/index.html
+header_file=Untitled.h
+cpp_file=/home/terry/Projects/Gnomesword-0.3/gnomesword/main.cpp
+browser_file=
 [gnomesword/gs_file.c]
 install_location=
 dist=true
