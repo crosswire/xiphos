@@ -571,19 +571,23 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_window_set_title(GTK_WINDOW(dlg->dialog),
 			     get_module_description(dlg->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 525, 306);
+	gtk_window_set_policy(GTK_WINDOW(dlg->dialog), TRUE, TRUE,
+			      FALSE);
 
 	vbox_dialog = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_dialog);
 	gtk_container_add(GTK_CONTAINER(dlg->dialog), vbox_dialog);
-
+/*
 	frame_gbs = gtk_frame_new(NULL);
 	gtk_widget_show(frame_gbs);
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), frame_gbs, TRUE, TRUE,
 			   0);
-
+*/
 	hpaned = gtk_hpaned_new();
 	gtk_widget_show(hpaned);
-	gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);
+	gtk_box_pack_start(GTK_BOX(vbox_dialog), hpaned, TRUE, TRUE,
+			   0);
+	//gtk_container_add(GTK_CONTAINER(frame_gbs), hpaned);
 	gtk_paned_set_position(GTK_PANED(hpaned), 190);
 
 	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
@@ -592,7 +596,7 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 		      TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_ctree),
-				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);	
 				    
 	model = create_model();			       
@@ -642,10 +646,10 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 #else	   
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
-	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow_html, FALSE, TRUE);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_html),
-				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
 	dlg->html = gtk_html_new();

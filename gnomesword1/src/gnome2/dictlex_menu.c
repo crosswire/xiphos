@@ -187,14 +187,16 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
  */
 
 static void on_view_mod_activate(GtkMenuItem * menuitem,
-				 gpointer user_data)
+				 gchar * module_description)
 {
 
 	gchar *module_name = NULL;
-
-	module_name = module_name_from_description((gchar *) user_data);
-	gui_change_module_and_key(module_name, settings.dictkey);
-	if(module_name) g_free(module_name);
+	
+	module_name = module_name_from_description(module_description);	
+	if(module_name) {
+		gui_change_module_and_key(module_name, settings.dictkey);
+		g_free(module_name);
+	}
 }
 
 
@@ -357,6 +359,8 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 	gchar *module_name = NULL;
 
 	module_name = module_name_from_description((gchar *) user_data);
+	if(!module_name) 
+		return;
 	gui_open_dictlex_dialog(module_name);
 	if(module_name) g_free(module_name);
 }
@@ -438,8 +442,6 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 
 	pm_text = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
-/*	pm_text_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));*/
 
 	/*
 	 * file menu
@@ -477,9 +479,7 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 		view_text_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
 					  view_text_menu);
-/*		view_text_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU
-						      (view_text_menu));*/
+					  
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_text_menu,
 					(GtkMenuCallback)
 					on_new_dialog_activate);
@@ -498,9 +498,7 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 		view_text_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
 					  view_text_menu);
-		/*view_text_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU
-						      (view_text_menu));*/
+		
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_text_menu,
 					(GtkMenuCallback)
 					on_view_mod_activate);
@@ -580,9 +578,7 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 	gtk_container_add(GTK_CONTAINER(t->module_options_menu),
 			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-/*
-	add_global_option_items(t);
-*/
+	
 	/*
 	 * lookup menu
 	 */
@@ -594,9 +590,6 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 	lookup_selection_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(lookup_selection),
 				  lookup_selection_menu);
-/*	lookup_selection_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (lookup_selection_menu));*/
 
 	usecurrent =
 	    gtk_menu_item_new_with_label("Use Current Dictionary");

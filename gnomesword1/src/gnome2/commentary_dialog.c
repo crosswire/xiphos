@@ -81,6 +81,8 @@ void gui_on_lookup_commentary_dialog_selection
 	gchar *mod_name = NULL;
 
 	mod_name = module_name_from_description(dict_mod_description);
+	if(!mod_name) 
+		return;
 
 	dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
 	if (dict_key && mod_name) {
