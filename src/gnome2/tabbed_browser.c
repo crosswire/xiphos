@@ -488,8 +488,9 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 { 
 	gint number_of_pages = gtk_notebook_get_n_pages(notebook);
 	PASSAGE_TAB_INFO *pt;
+#ifdef DEBUG
 	printf("\n on_notebook_main_switch_page \n");
-	
+#endif	
 	page_change = TRUE;
 	/* get data structure for new passage */
 	/*

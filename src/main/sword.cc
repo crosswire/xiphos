@@ -901,6 +901,7 @@ void main_clear_viewer(void)
 	GString *str;
 	GString *search_str;
 	gboolean was_editable = FALSE;
+	gchar *buf;
 	
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 
@@ -916,9 +917,9 @@ void main_clear_viewer(void)
 		settings.link_color);
 
 	str = g_string_new(tmp_str->str);
-	
+	buf = N_("Previewer");
 	g_string_printf(tmp_str,
-	"<font color=\"grey\">" "<HR></font><br>");
+	"<b>%s</b><br><font color=\"grey\">" "<HR></font><br>", buf);
 	str = g_string_append(str, tmp_str->str);
 		
 	g_string_printf(tmp_str, " %s", "</font></body></html>");
@@ -935,69 +936,88 @@ void main_clear_viewer(void)
 }
 
 void main_dictionary_entery_changed(char * mod_name)
-{
+{	
 	gint count = 7, i;
 	gchar *new_key, *text = NULL;
 	gchar *key = NULL;
 	gchar *key2 = NULL;
-	static gboolean firsttime = TRUE;
+	gint height;
+	GtkTreeIter iter; 
 	GtkTreeModel *model;
 	GtkListStore *list_store;
-	GtkTreeIter iter;
-	gint height;
-	//StringMgr *strmgr;
 	
-	//strmgr = new StringMgr();
-	key = (gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
-	//g_warning(key);
+	g_signal_handler_block((gpointer)widgets.entry_dict,
+                         settings.signal_id);
+	
+	if(strcmp(settings.DictWindowModule,mod_name)) {
+		xml_set_value("GnomeSword", "modules", "dict",
+					mod_name);
+		settings.DictWindowModule = xml_get_value(
+					"modules", "dict");
+	}	
+	
+	key = g_strdup((gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict)));
+	
 	key2 = g_utf8_strup(key,strlen(key));
-	//key2 = toupperstr(key);
-//	g_warning(key2);
 	
-	//key = g_ascii_strup(key,strlen(key));
-	//g_warning(key);
 	backend->set_module_key(mod_name, key2);
 	g_free(key2);
-	//g_warning("mod = %s key = %s",mod_name, key);
+	g_free(key);
 	key = backend->get_module_key();
-	//g_warning(key);
+	
 	xml_set_value("GnomeSword", "keys", "dictionary", key);
 	settings.dictkey = xml_get_value("keys", "dictionary");
 	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
-	g_free(key);
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widgets.listview_dict));
-	list_store = GTK_LIST_STORE(model);
 	
-	if (!firsttime) {
-		gdk_drawable_get_size ((GdkDrawable *)widgets.listview_dict->window,
-                                             NULL,
-                                             &height);
-		count = height / settings.cell_height;
-	}	 
-
-	if (count) {
-		gtk_list_store_clear(list_store);
-		new_key = backend->navigate_module(-1);
-
-		for (i = 0; i < (count / 2); i++) {
-			free(new_key);
-			new_key = backend->navigate_module(0);
-		}
-
-		for (i = 0; i < count; i++) {
-			free(new_key);
-			new_key = backend->navigate_module(1);
-			gtk_list_store_append(list_store, &iter);
-			gtk_list_store_set(list_store, &iter, 0,
-					   new_key, -1);
-		}
+	model = gtk_combo_box_get_model(GTK_COMBO_BOX(widgets.comboboxentry_dict));
+	list_store = GTK_LIST_STORE(model);
+	gtk_list_store_clear(GTK_LIST_STORE(list_store));
+	
+	new_key = g_strdup((char*)backend->display_mod->KeyText());
+	
+	for (i = 0; i < (count / 2)+1; i++) {
 		free(new_key);
+		(*backend->display_mod)--;
+		new_key = g_strdup((char*)backend->display_mod->KeyText());
 	}
-	firsttime = FALSE;
+
+	for (i = 0; i < count; i++) {
+		free(new_key);			
+		(*backend->display_mod)++;
+		new_key = g_strdup((char*)backend->display_mod->KeyText());
+		gtk_list_store_append (GTK_LIST_STORE(list_store), &iter);
+		gtk_list_store_set(	GTK_LIST_STORE(list_store), 
+					&iter, 
+					0, 
+					(const char *)new_key, 
+					-1);
+	}
+	
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	free(new_key);
+	g_free(key);
+	
+	g_signal_handler_unblock((gpointer) widgets.entry_dict,
+                         settings.signal_id);
 } 
 
+
+
+void main_dictionary_button_clicked(gint direction)
+{	
+	gchar *key = NULL;
+	backend->set_module_key(settings.DictWindowModule, 
+				settings.dictkey);
+	if(direction == 0)
+		(*backend->display_mod)--;
+	else
+		(*backend->display_mod)++;
+	key = g_strdup((char*)backend->display_mod->KeyText());	
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
+	g_free(key);
+}
 
 void main_display_book(const char * mod_name, char * key)
 {
@@ -1010,7 +1030,7 @@ void main_display_book(const char * mod_name, char * key)
 	
 	//settings.comm_showing = FALSE;
 	settings.whichwindow = BOOK_WINDOW;
-	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
+//	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
 	gui_change_window_title(settings.book_mod);
 	
 	xml_set_value("GnomeSword", "keys", "offset", key);
@@ -1046,7 +1066,7 @@ void main_display_commentary(const char * mod_name, const char * key)
 	
 	//settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
-	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
+//	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
 	gui_change_window_title(settings.CommWindowModule);
 	
 	if(strcmp(settings.CommWindowModule,mod_name)) {
@@ -1083,7 +1103,7 @@ void main_display_dictionary(char * mod_name, char * key)
 		settings.DictWindowModule = xml_get_value(
 					"modules", "dict");
 	}
-	gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
+	//gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
 	
 	if(key == NULL)
 		key = "Grace";
@@ -1115,6 +1135,8 @@ void main_display_bible(const char * mod_name, const char * key)
 	if(!backend->is_module(mod_name))
 		return;
 
+	
+	
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	if(!settings.MainWindowModule)
 		settings.MainWindowModule = (char*)mod_name;
@@ -1187,11 +1209,13 @@ void main_setup_displays(void)
 	backend->textDisplay = new GtkMozChapDisp(widgets.html_text,backend);
 	backend->RTOLDisplay = new GtkMozChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKMozEntryDisp(widgets.html_comm,backend);
+	backend->bookDisplay = new GTKMozEntryDisp(widgets.html_book,backend);
 	backend->dictDisplay = new GTKMozEntryDisp(widgets.html_dict,backend);
 #else
 	backend->RTOLDisplay = new GTKTextviewChapDisp(widgets.textview,backend);
 	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
+	backend->bookDisplay = new GTKEntryDisp(widgets.html_book,backend);
 	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
 #endif
 }

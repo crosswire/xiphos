@@ -341,7 +341,9 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 			}
 		}
 	}
+#ifdef DEBUG
 	g_print("\nsaving = %s\n", xml_filename);
+#endif	
 	xmlSaveFile(xml_filename, root_doc);
 	xmlFreeDoc(root_doc);
 	g_free(file_buf);

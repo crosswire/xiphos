@@ -493,11 +493,20 @@ GtkWidget *gui_create_bible_pane(void)
 	GtkWidget *notebook_text;
 	GtkWidget *scrolledwindow;
 	GtkWidget *eventbox1;
+	GtkWidget *frame;
 	
 	notebook_text = gtk_notebook_new();
 	gtk_widget_show(notebook_text);
+	/*gtk_notebook_set_show_border((GtkNotebook *)notebook_text,
+                                             TRUE);*/
 
 #ifdef USE_MOZILLA	
+	
+/*	frame = gtk_frame_new(NULL);
+	gtk_widget_show(frame);
+	gtk_container_add(GTK_CONTAINER(notebook_text), frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), settings.shadow_type);*/
+	
 	eventbox1 = gtk_event_box_new ();
 	gtk_widget_show (eventbox1);
 	gtk_container_add(GTK_CONTAINER(notebook_text), eventbox1);
@@ -518,8 +527,8 @@ GtkWidget *gui_create_bible_pane(void)
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
-                                             settings.shadow_type);
+	/*gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
+                                             settings.shadow_type);*/
 	
 	widgets.html_text = gtk_html_new();
 	gtk_widget_show(widgets.html_text);

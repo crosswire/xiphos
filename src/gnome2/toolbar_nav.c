@@ -210,10 +210,10 @@ static void on_togglebutton_parallel_view_toggled(GtkToggleButton *
 						  gpointer user_data)
 {
 	if(togglebutton->active) 
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 						      1);
 	else
-		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_bible_parallel),
 						      0);
 }
 
@@ -361,12 +361,14 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	toolbarNav = gtk_toolbar_new();
 	gtk_widget_show(toolbarNav);
-
+	gtk_box_pack_start(GTK_BOX(app), toolbarNav, FALSE,
+			   FALSE, 0);
+/*
 	gnome_app_add_toolbar(GNOME_APP(app), GTK_TOOLBAR(toolbarNav),
 			      "toolbarNav",
 			      BONOBO_DOCK_ITEM_BEH_EXCLUSIVE,
 			      BONOBO_DOCK_TOP, 1, 0, 0);
-
+*/
 	gtk_toolbar_set_style(GTK_TOOLBAR(toolbarNav),
 			      GTK_TOOLBAR_ICONS);
 

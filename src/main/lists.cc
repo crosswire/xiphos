@@ -130,22 +130,23 @@ void main_init_lists(void)
 		delete backend;
 
 	settings.havebible = g_list_length(mods.biblemods);
-	g_print("\n%s = %d\n", _("Number of Text modules"), settings.havebible);
 	
 	settings.havecomm = g_list_length(mods.commentarymods);
-	g_print("%s = %d\n", _("Number of Commentary modules"), settings.havecomm);
 
 	settings.havedict = g_list_length(mods.dictionarymods);
-	g_print("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict);
 
 	settings.havebook = g_list_length(mods.bookmods);
-	g_print("%s = %d\n", _("Number of Book modules"), settings.havebook);
 
 	settings.havepercomm = g_list_length(mods.percommods);
+#ifdef DEBUG
+	g_print("\n%s = %d\n", _("Number of Text modules"), settings.havebible);
+	g_print("%s = %d\n", _("Number of Commentary modules"), settings.havecomm);
+	g_print("%s = %d\n", _("Number of Dict/lex modules"), settings.havedict);
+	g_print("%s = %d\n", _("Number of Book modules"), settings.havebook);
 	g_print("%s = %d\n", _("Number of Percomm modules"), settings.havepercomm);
-
 	g_print("%s = %d\n\n", _("Number of Devotion modules"), 
 					g_list_length(mods.devotionmods));
+#endif
 }
 
 void main_shutdown_list(void)
