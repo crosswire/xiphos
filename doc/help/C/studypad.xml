@@ -1,0 +1,26 @@
+<chapter id="studypad">
+	<title>The Studypad</title>
+<!-- ============= The Studypad ============================= -->
+    <sect1 id="gnomesword-studypad">
+		<title>Using The Studypad</title>
+		<para>
+		The Studypad can be opened by choosing <guibutton>File-&gt;Open Studypad</guibutton>
+		</para>
+		<para>
+		This is what the Studypad typically looks like:
+		</para>
+		<figure>
+			<title>The Studypad</title>
+			<screenshot>
+	 			<mediaobject>
+		    		<imageobject>
+						<imagedata fileref="figures/studypad" format="PNG"/>
+					</imageobject>
+			 		<textobject>
+		     			<phrase>The Studypad</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+	</sect1>
+</chapter>
