@@ -75,6 +75,12 @@ struct _settings {
 		*htmlBook, /* gbs html widget */
 		*htmlInterlinear, /* interlinear html widget */
 	
+	/* popup menu widgets */
+		*menuBible,
+		*menuhtmlcom,
+		*menuDict,
+		*menuInt,
+		
 	/* popup menu item widgets */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu, /* add bookmark menu item */
@@ -134,7 +140,8 @@ struct _settings {
 		default_font[126], /* use if no other font is requested */
 		greek_font[126],
 		hebrew_font[126],
-		unicode_font[126];		
+		unicode_font[126],
+		interlinear_font[126];		
 		
 	gint 
       		shortcutbar_width,

@@ -172,7 +172,6 @@ extern gint
 extern SETTINGS * settings, myset;
 extern GtkWidget 
         *lang_options_menu,
-	*menuInt,
 	*shortcut_bar,
 	*strongsnum,
 	*footnotes,
@@ -486,7 +485,8 @@ void updateIntDlg(SETTINGS *s)
 	interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
 	
 	beginHTML(settings->htmlInterlinear, TRUE);
-	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
+	sprintf(buf,
+	 "<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 			settings->bible_bg_color,
 			settings->bible_text_color, settings->link_color);
 	utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, buf);
