@@ -1,3 +1,7 @@
+2002-03-28  Victor Porton  <porton@localhost>
+
+	* rewritten some of bookmarks code
+
 2002-03-26 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed sw_utility.* it was no longer used
@@ -629,7 +633,7 @@
 
 	* widgets/Makefile.am (SUBDIRS): add e-paned back.
 
-2000-08-27  Michael Meeks  <michael@helixcode.com> 
+2000-08-27  Michael Meeks  <michael@helixcode.com> 
  
         * configure.in: Added sword seek and use logic, from 'BibleTime'
         * gnomesword/Makefile.am: Rationalize the conditionals, sort.
