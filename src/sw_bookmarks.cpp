@@ -44,6 +44,11 @@
 #include "sw_bookmarks.h"
 #include "gs_bookmarks.h"
 
+using std::string;
+using std::map;
+using std::list;
+using namespace sword;
+
 GtkStyle *style;
 extern gchar *swbmDir;
 extern SETTINGS *settings;

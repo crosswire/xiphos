@@ -618,6 +618,7 @@ void on_btnSBDock_clicked(GtkButton * button, SETTINGS *s)
                                              lookup_widget(s->app, "epaned"));		
 		gtk_widget_destroy(s->dockSB);
 	}
+        setbiblecommlayoutSWORD();
 }
 
 /*** show hide shortcut bar ***/
@@ -648,7 +649,9 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 			     (lookup_widget(s->app, "hpaned1")),
 			     s->biblepane_width);
 		gtk_widget_show(shortcut_bar);
+		
 	}
+        setbiblecommlayoutSWORD();
 }
 
 static void

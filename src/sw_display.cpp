@@ -48,6 +48,8 @@ extern "C" {
 #include <gtkhtml/gtkhtml.h>
 }
 
+using std::string;
+using namespace sword;
 #include "sw_display.h"
 
 /*
