@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bookmarks.h- functions to load and save bookmarks
+ * bookmarks.h- glue for loading and saveing bookmarks
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,16 +19,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
-#ifndef __BOOKMARKS_H_
-#define __BOOKMARKS_H_
+#ifndef _BOOKMARKS_H_
+#define _BOOKMARKS_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 	
-void backend_create_bookmarks(gchar * dir);
-void backend_save_bookmarks(GNode * bookmark_tree);
-GNode * backend_load_bookmarks(void);
+void create_bookmarks(gchar * dir);
+void save_bookmarks(GNode * bookmark_tree);
+GNode * load_bookmarks(void);
 
 #ifdef __cplusplus
 }

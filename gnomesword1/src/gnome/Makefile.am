@@ -27,6 +27,7 @@ libgui_a_SOURCES =  \
     about_sword.h \
     bibletext.c \
     bibletext_dialog.c \
+    bookmarks.c \
     cipher_key_dialog.c \
     commentary_dialog.c \
     commentary.c \
