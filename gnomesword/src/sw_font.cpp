@@ -43,8 +43,8 @@
 #include <sys/stat.h>
 
 #include "gs_gnomesword.h"
-#include "sw_module_options.h"
-#include "support.h"
+#include "font_dialog.h"
+#include "sw_font.h"
 
 
 using namespace sword;
@@ -52,42 +52,38 @@ using namespace sword;
  externals
 ***********************************************************************************************/
 extern gchar *gSwordDir;
-extern SETTINGS *settings;
+//extern SETTINGS *settings;
+
 
 /******************************************************************************
- * load module option - using sword SWConfig
+ * 
  ******************************************************************************/
-bool load_module_options(gchar *modName, gchar *option)
+void load_module_font_info(MOD_FONT *mf)
 {
-	gchar buf[255], *yesno;
-	bool retval = false;
+	gchar buf[255];
 	
 	sprintf(buf, "%s/modops.conf", gSwordDir);
 	SWConfig module_options(buf);
 	module_options.Load();	
-	yesno = (gchar*)module_options[modName][option].c_str();
-	if(!strcmp(yesno,"On"))
-		retval = true;
-	else
-		retval = false;
-	return retval;	
+	mf->old_font = (gchar*)module_options[mf->mod_name]["Font"].c_str();
+	mf->old_font_size = (gchar*)module_options[mf->mod_name]["Fontsize"].c_str();
 }
  
 
 /******************************************************************************
- * save module option - using sword SWConfig
+ * save module font - using sword SWConfig
  ******************************************************************************/
-bool save_module_options(gchar *modName, gchar *option, gchar *value)
+void save_module_font_info(MOD_FONT *mf)
 {
 	gchar buf[80], buf2[255];
 
 	sprintf(buf, "%s/modops.conf", gSwordDir);
 	SWConfig module_options(buf);
 	
-	module_options[modName][option] = value;	
+	module_options[mf->mod_name]["Font"] = mf->new_font;
+	module_options[mf->mod_name]["Fontsize"] = mf->new_font_size;	
 	
 	module_options.Save();
-	return true;
 }
 
 

@@ -42,6 +42,7 @@
 #include "sw_gbs.h"
 #include "gs_html.h"
 #include "gs_find_dlg.h"
+#include "font_dialog.h"
 
 
 /***  externs  ***/
@@ -61,7 +62,12 @@ extern gboolean in_url;
 GList *gbs_list;
 gboolean show_tabs_gbs;
 
-/***  start code  ***/
+/***  start code  ***/	
+static void set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_set_module_font(getmodnameSWORD(GPOINTER_TO_INT(user_data)));
+}
+
 static 
 void gui_addNodeChildrenGBS(SETTINGS *s, 
 			GtkCTreeNode *node, 
@@ -246,7 +252,7 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
                 gtk_notebook_get_nth_page(GTK_NOTEBOOK(settings->workbook_lower),1), 
 		g->bookName);
 	
-	sprintf(settings->BookWindowModule,"%s",g->bookName);
+	strcpy(settings->BookWindowModule, g->bookName);
 	
 	if(settings->finddialog) {
 		gnome_dialog_close(g_old->find_dialog->dialog);
@@ -254,6 +260,46 @@ void on_notebookGBS_switch_page(GtkNotebook * notebook,
 	}
 	GTK_CHECK_MENU_ITEM (g->showtabs)->active = show_tabs_gbs;
 	settings->gbsLastPage = page_num;
+}
+/******************************************************************************
+ * Name
+ *  set_gbs_page
+ *
+ * Synopsis
+ *   #include "gbs.h"
+ *
+ *   void set_gbs_page(gchar * modname, GList * comm_list)	
+ *
+ * Description
+ *    change gbs page without changing key
+ *
+ * Return value
+ *   void
+ */
+ 
+static void set_gbs_page(gchar * book_name, GList * gbs_list)
+{
+	gint page = 0;
+	GBS_DATA *g = NULL;
+
+	gbs_list = g_list_first(gbs_list);
+	while (gbs_list != NULL) {
+		g = (GBS_DATA *) gbs_list->data;
+		if (!strcmp(g->bookName, book_name))
+			break;
+		++page;
+		gbs_list = g_list_next(gbs_list);
+	}
+	if(page)
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+				  settings->notebookGBS), page);
+	else    
+		on_notebookGBS_switch_page(GTK_NOTEBOOK(
+				  settings->notebookGBS),
+				  NULL,
+				  page, 
+				  gbs_list);
+	settings->gbsLastPage = page;
 }
 
 /****  popup menu call backs  ****/
@@ -392,6 +438,8 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	GtkWidget *view_book;
 	GtkWidget *view_book_menu;
 	GtkAccelGroup *view_book_menu_accels;
+	GtkWidget *separator2;	
+	GtkWidget *set_font;
 	GtkWidget *find;
 	//GtkWidget *showtabs;
 	GList *tmp;
@@ -498,6 +546,28 @@ GtkWidget* create_pmGBS(GBS_DATA *gbs)
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_book), view_book_menu);
 	view_book_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_book_menu));
 	
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmGBS), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmGBS), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pmGBS), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pmGBS), set_font);
+	/*gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);*/
+		
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			GINT_TO_POINTER(4));
+			
 	tmp = sbdictmods;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -696,7 +766,7 @@ void gui_setupGBS(SETTINGS *s, GList *books)
 		createGBS_Pane(bookname, s, count, gbs);
 		backend_newDisplayGBS(gbs->html, gbs->bookName, s);
 		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);
-		sprintf(s->BookWindowModule,"%s",gbs->bookName);
+		//sprintf(s->BookWindowModule,"%s",gbs->bookName);
 		++count;
 		tmp = g_list_next(tmp);
 	}
@@ -707,8 +777,7 @@ void gui_setupGBS(SETTINGS *s, GList *books)
 			   gbs_list);
 	else
 		gtk_widget_hide(s->notebookGBS);
-	
-	settings->gbsLastPage = 0;
+	set_gbs_page(s->BookWindowModule, gbs_list);
 }
 
 void gui_shutdownGBS(void)

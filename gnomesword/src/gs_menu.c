@@ -473,6 +473,8 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	GtkWidget *view_module1;
 	GtkWidget *view_module1_menu;
 	GtkWidget *print_item;
+	GtkWidget *separator2;	
+	GtkWidget *set_font;
 	GtkAccelGroup *view_module1_menu_accels;
 	GtkWidget *separator22, *item1, *item3, *item4;
 	GtkTooltips *tooltips;
@@ -671,7 +673,28 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 				  view_module1_menu);
 	view_module1_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module1_menu));
-	    
+
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmCommentsHtml), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), set_font);
+	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);
+		
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			GINT_TO_POINTER(1));			     
 	i=0;
 	//tmp = dictmods;
 	tmp = dictDescription;
@@ -777,6 +800,8 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	GtkWidget *view_module2;
 	GtkWidget *view_module2_menu;
 	GtkAccelGroup *view_module2_menu_accels;
+	GtkWidget *separator2;	
+	GtkWidget *set_font;
 	GtkWidget *item3;
 	GtkTooltips *tooltips;
 	GList *tmp = NULL;
@@ -882,7 +907,29 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 				  view_module2_menu);
 	view_module2_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_module2_menu));
-	 
+	
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmDict), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmDict), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pmDict), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pmDict), set_font);
+	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);
+		
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			GINT_TO_POINTER(2));	
+			
 	tmp = modsdesc;
 	while (tmp != NULL) {
 		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
@@ -948,6 +995,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	GtkWidget *view_module3;
 	GtkWidget *view_module3_menu;
 	GtkAccelGroup *view_module3_menu_accels;
+	GtkWidget *set_font;
 	GtkWidget *item3;
 	GtkWidget *item4;
 	GtkTooltips *tooltips;
@@ -1106,6 +1154,23 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module3), view_module3_menu);
   	view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmBible), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pmBible), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pmBible), set_font);
+	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);			     
 	i=0;
 	tmp = dictDescription;
 	while (tmp != NULL) {
@@ -1170,6 +1235,9 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	gtk_signal_connect(GTK_OBJECT(show_tabs), "activate",
 			   GTK_SIGNAL_FUNC(on_show_tabs_activate), 
 			(gchar *)"nbTextMods");	
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			GINT_TO_POINTER(0));	
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)"htmlTexts");

@@ -26,26 +26,19 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __SW_MODULE_OPTIONS_H__
-#define __SW_MODULE_OPTIONS_H__
+#ifndef __SW_FONT_H__
+#define __SW_FONT_H__
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
-/******************************************************************************
- * load module option - using sword SWConfig
- ******************************************************************************/
-bool load_module_options(gchar *modName, gchar *option);
-
-/******************************************************************************
- * save module option - using sword SWConfig
- ******************************************************************************/
-bool save_module_options(gchar *modName, gchar *option, gchar *value);
-
+#include "font_dialog.h"
+void load_module_font_info(MOD_FONT *mf);	
+void save_module_font_info(MOD_FONT *mf);
+	
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __SW_MODULE_OPTIONS_H__ */
+#endif	/* __SW_FONT_H__ */
