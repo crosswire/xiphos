@@ -54,6 +54,9 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 	gint i,x;	
 	VerseKey vkey; 
 	
+	if(!navbar.module_name)
+		return;
+	
 	navbar.key = backend->get_valid_key(key);
 	
 	GtkTreeModel* chapter_store = gtk_combo_box_get_model(

@@ -561,7 +561,7 @@ int BackEnd::is_module(const char *mod_name) {
 }
 
 
-int BackEnd::module_type(char *mod_name) {
+int BackEnd::module_type(const char *mod_name) {
 	ModMap::iterator it;	//-- iteratior
 	if((!mod_name) || (strlen(mod_name) < 2)) 
 		return -1;
@@ -979,7 +979,7 @@ char *BackEnd::url_encode(const char * pram) {
 	retval = strdup(URL::encode(pram).c_str());
 	return retval;
 }
-
+ 
 void BackEnd::init_language_map(void) {
 	/* --list form Bibletime-1.3-- */
 	//languageMap[SWBuf("aa")] = SWBuf("Afar");

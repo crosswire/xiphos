@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.1.2
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/tee --enable-moz_embed --enable-debug
+project.configure.options=--prefix=/home/tee --enable-moz_embed
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -157,7 +157,9 @@ module.include.files=\
 	src/editor/note_toolbar_style.h\
 	src/editor/spell.h\
 	src/editor/toolbar_edit.h\
-	src/editor/toolbar_style.h
+	src/editor/toolbar_style.h\
+	src/editor/popup.h\
+	src/editor/dialog.h
 
 module.source.name=.
 module.source.type=
@@ -214,7 +216,6 @@ module.source.files=\
 	src/main/display.cc\
 	src/main/sword.cc\
 	src/main/global_ops.cc\
-	src/backend/sword_main.cc\
 	src/main/lists.cc\
 	src/main/url.cc\
 	src/main/sidebar.cc\
@@ -232,8 +233,6 @@ module.source.files=\
 	src/main/navbar.cc\
 	src/editor/editor.c\
 	src/editor/editor_menu.c\
-	src/editor/editor_replace.c\
-	src/editor/editor_spell.c\
 	src/editor/gi-color-combo.c\
 	src/editor/gi-color-group.c\
 	src/editor/gi-color-palette.c\
@@ -244,7 +243,32 @@ module.source.files=\
 	src/editor/spell.c\
 	src/editor/toolbar_edit.c\
 	src/editor/toolbar_style.c\
-	src/editor/note_editor.c
+	src/editor/note_editor.c\
+	src/editor/popup.c\
+	src/editor/properties.c\
+	src/editor/dialog.c\
+	src/editor/link.c\
+	src/editor/utils.c\
+	src/editor/text.c\
+	src/editor/body.c\
+	src/editor/cell.c\
+	src/editor/e-html-utils.c\
+	src/editor/engine.c\
+	src/editor/gnome-gtkhtml-editor.c\
+	src/editor/html-stream-mem.c\
+	src/editor/html-stream-mem.h\
+	src/editor/htmlsourceview.c\
+	src/editor/image.c\
+	src/editor/paragraph.c\
+	src/editor/persist-file.c\
+	src/editor/persist-stream.c\
+	src/editor/replace.c\
+	src/editor/rule.c\
+	src/editor/search.c\
+	src/editor/table.c\
+	src/editor/template.cmodule.pixmap.name=pixmaps\
+	src/editor/editor-control.c\
+	src/backend/sword_main.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

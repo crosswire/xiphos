@@ -33,13 +33,14 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
-#include "editor/editor_spell.h"
+//#include "editor/editor_spell.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
 #include "gui/commentary_dialog.h"
 #include "gui/fileselection.h"
 #include "editor/editor_menu.h"
-#include "gui/find_dialog.h"
+#include "editor/search.h"
+//#include "gui/find_dialog.h"
 
 #include "main/settings.h"
 #include "main/module_dialogs.h"
@@ -167,6 +168,11 @@ static void on_btn_save_clicked(GtkButton * button,
 			gui_fileselection_save(ecd,TRUE);
 		}
 	}
+	if (ecd->personal_comments) {
+		main_dialog_save_note(ecd);
+		ecd->changed = FALSE;
+		gui_update_statusbar(ecd);
+	}
 }
 
 /******************************************************************************
@@ -189,7 +195,7 @@ static void on_btn_save_clicked(GtkButton * button,
 static void on_btn_delete_clicked(GtkButton * button,
 				  GSHTMLEditorControlData * ecd)
 {
-/*	if (ecd->personal_comments) {
+	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
 		GString *str;
@@ -207,11 +213,11 @@ static void on_btn_delete_clicked(GtkButton * button,
 
 		test = gui_alert_dialog(info);
 		if (test == GS_YES) {
-			main_dialog_delete_note();
+			main_dialog_delete_note(ecd);
 			url = g_strdup_printf(	"sword://%s/%s",
 						ecd->filename,
 						ecd->key);
-			main_dialog_goto_bookmark(url);
+			main_dialog_goto_bookmark(ecd->filename,ecd->key);
 			g_free(url);
 		}
 		settings.percomverse = ecd->key;
@@ -220,7 +226,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 		g_free(info);
 		g_string_free(str,TRUE);
 	}
-	*/
+	
 
 }
 
@@ -368,9 +374,8 @@ static void on_btn_undo_clicked(GtkButton * button,
 static void on_btn_Find_clicked(GtkButton * button,
 				GSHTMLEditorControlData * ecd)
 {
-	gui_find_dlg(ecd->htmlwidget, ecd->filename,
-		  FALSE, NULL);
-	//search(ecd, FALSE, NULL);
+	//gui_find_dlg(ecd->htmlwidget, ecd->filename,FALSE, NULL);
+	search(ecd);
 }
 
 
@@ -392,9 +397,15 @@ static void on_btn_Find_clicked(GtkButton * button,
  */
 
 static void on_btn_replace_clicked(GtkButton * button,
-				   GSHTMLEditorControlData * ecd)
+				   GSHTMLEditorControlData * cd)
 {
-	replace(ecd);
+	replace(cd);
+}
+
+static void spell_check_cb(GtkButton * button,
+				   GSHTMLEditorControlData * cd)
+{
+	spell_check_dialog (cd, TRUE);
 }
 
 
@@ -642,6 +653,261 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 
 	return ecd->toolbar_edit;
 }
+//spell_check_dialog (cd, TRUE);
+
+/******************************************************************************
+ * Name
+ *   create_toolbar_edit
+ *
+ * Synopsis
+ *   #include "toolbar_edit.h"
+ *
+ *   GtkWidget *create_toolbar_edit (GSHTMLEditorControlData *cd)
+ *
+ * Description
+ *   create the edit toolbar
+ *
+ * Return value
+ *   GtkWidget *
+ */
+
+static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
+{
+	//GSHTMLEditorControlData *ecd = d->editor;
+	GtkWidget *tmp_toolbar_icon;
+	GtkWidget *vseparator;
+
+#ifdef DEBUG
+	g_message("create_note_toolbar_edit");
+#endif
+	/****************************************************** toolbar_edit */
+
+	ecd->toolbar_edit =
+	    gtk_toolbar_new();
+	gtk_widget_show(ecd->toolbar_edit);
+	gtk_toolbar_set_style (GTK_TOOLBAR (ecd->toolbar_edit), 
+				GTK_TOOLBAR_ICONS);
+/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(ecd->toolbar_edit),
+				      GTK_RELIEF_NONE);*/
+
+	if (ecd->studypad) {
+		tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_NEW, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
+						(ecd->toolbar_edit)));
+		ecd->btn_new =
+		    gtk_toolbar_append_element(GTK_TOOLBAR
+					       (ecd->toolbar_edit),
+					       GTK_TOOLBAR_CHILD_BUTTON,
+					       NULL, _("New"),
+					       _("Create a new file"), NULL,
+					       tmp_toolbar_icon, NULL,
+					       NULL);
+		gtk_widget_show(ecd->btn_new);
+		
+		g_signal_connect(GTK_OBJECT(ecd->btn_new), "clicked",
+				   G_CALLBACK(new_clicked),
+				   ecd);
+		
+		tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_OPEN, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
+						(ecd->toolbar_edit)));
+		ecd->btn_open =
+		    gtk_toolbar_append_element(GTK_TOOLBAR
+					       (ecd->toolbar_edit),
+					       GTK_TOOLBAR_CHILD_BUTTON,
+					       NULL, _("Open"),
+					       _("Open a file"), NULL,
+					       tmp_toolbar_icon, NULL,
+					       NULL);
+		gtk_widget_show(ecd->btn_open);
+
+		g_signal_connect(GTK_OBJECT(ecd->btn_open), "clicked",
+				   G_CALLBACK(on_btn_open_clicked),
+				   ecd);
+		tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_SAVE, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR 
+						(ecd->toolbar_edit)));
+		ecd->btn_save =
+		    gtk_toolbar_append_element(GTK_TOOLBAR
+					       (ecd->toolbar_edit),
+					       GTK_TOOLBAR_CHILD_BUTTON,
+					       NULL, _("Save"),
+					       _("Save the current file"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
+		gtk_widget_show(ecd->btn_save);
+	} else {
+		tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_SAVE, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+		ecd->btn_save =
+		    gtk_toolbar_append_element(GTK_TOOLBAR
+					       (ecd->toolbar_edit),
+					       GTK_TOOLBAR_CHILD_BUTTON,
+					       NULL, _("Save"),
+					       _("Save note"), NULL,
+					       tmp_toolbar_icon, NULL,
+					       NULL);
+		gtk_widget_show(ecd->btn_save);
+
+		tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_DELETE, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+		ecd->btn_delete =
+		    gtk_toolbar_append_element(GTK_TOOLBAR
+					       (ecd->toolbar_edit),
+					       GTK_TOOLBAR_CHILD_BUTTON,
+					       NULL, _("Delete"),
+					       _("Delete note"), NULL,
+					       tmp_toolbar_icon, NULL,
+					       NULL);
+		gtk_widget_show(ecd->btn_delete);
+
+		g_signal_connect(GTK_OBJECT(ecd->btn_delete),
+				   "clicked",
+				   G_CALLBACK
+				   (on_btn_delete_clicked), 
+				   ecd);
+
+	}
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_PRINT, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_print =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Print"),
+				       _("Print window contents"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_print);
+
+	vseparator = gtk_vseparator_new();
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
+				  vseparator, NULL, NULL);
+	gtk_widget_set_usize(vseparator, 5, 7);
+
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_CUT, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_cut =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Cut"), _("Cut"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_cut);
+
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_COPY, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_copy =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Copy"), _("Copy"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_copy);
+
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_PASTE, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_paste =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Paste"), _("Paste"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_paste);
+
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_UNDO, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_undo =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Undo"), _("Undo"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_undo);
+
+	vseparator = gtk_vseparator_new();
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
+				  vseparator, NULL, NULL);
+	gtk_widget_set_usize(vseparator, 5, 7);
+
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_FIND, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_Find =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Find"),
+				       _("Find in this note"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_Find);
+	
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_FIND_AND_REPLACE, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_replace =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Replace"),
+				       _("Find and Replace"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_replace);
+
+	vseparator = gtk_vseparator_new();
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
+				  vseparator, NULL, NULL);
+	gtk_widget_set_usize(vseparator, 5, 7);
+
+	tmp_toolbar_icon = gtk_image_new_from_stock (
+			GTK_STOCK_SPELL_CHECK, 
+			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
+	ecd->btn_spell =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Spell"),
+				       _("Check spelling in this note"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_spell);
+
+#ifdef USE_SPELL
+	gtk_widget_set_sensitive(ecd->btn_spell, 1);
+#else
+	gtk_widget_set_sensitive(ecd->btn_spell, 0);
+#endif
+
+	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
+			   G_CALLBACK(on_btn_save_clicked), ecd);
+
+	g_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
+			   G_CALLBACK(on_btn_print_clicked), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
+			   G_CALLBACK(on_btn_cut_clicked), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_copy), "clicked",
+			   G_CALLBACK(on_btn_copy_clicked), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_paste), "clicked",
+			   G_CALLBACK(on_btn_paste_clicked), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_undo), "clicked",
+			   G_CALLBACK(on_btn_undo_clicked), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_Find), "clicked",
+			   G_CALLBACK(on_btn_Find_clicked), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_replace), "clicked",
+			   G_CALLBACK(on_btn_replace_clicked),
+			   ecd);
+#ifdef USE_SPELL
+	g_signal_connect(GTK_OBJECT(ecd->btn_spell), "clicked",
+			   G_CALLBACK(spell_check_cb), ecd);
+#endif
+	/************************************************** end toolbar_edit */
+
+	return ecd->toolbar_edit;
+}
+
 
 
 
@@ -661,10 +927,13 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
  *   GtkWidget *
  */
 
-GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData * ecd)
+GtkWidget *gui_toolbar_edit(GSHTMLEditorControlData * cd)
 {
-	g_return_val_if_fail(ecd->html != NULL, NULL);
-	g_return_val_if_fail(GTK_IS_HTML(ecd->html), NULL);
+	g_return_val_if_fail(cd->html != NULL, NULL);
+	g_return_val_if_fail(GTK_IS_HTML(cd->html), NULL);
 
-	return create_toolbar_edit(ecd);
+	if(cd->personal_comments)
+		return create_note_toolbar_edit(cd);
+	else
+		return create_toolbar_edit(cd);
 }
