@@ -36,8 +36,7 @@ char *backend_get_footnote_body(char *module_name,
 					char *key, char *note);
 int backend_get_display_level(char * module_name);
 int backend_is_module_rtl(char * mod_name);
-void backend_module_name_from_description(char * mod_name, 
-						char * mod_desc);
+char *backend_module_name_from_description(char * mod_desc);
 int backend_do_module_search(char * module_name ,char *search_string, 
 		int search_type, int search_params);
 char *backend_get_search_results_text(char * mod_name, char * key);

@@ -39,7 +39,7 @@
 #include "main/bibletext.h"
 #include "main/settings.h"
 #include "main/key.h"
-   
+
 
 /******************************************************************************
  * Name
@@ -58,26 +58,32 @@
  */
 
 static void set_global_options(TEXT_GLOBALS * tgs)
-{	
-	set_text_module_global_option("Strong's Numbers",tgs->strongs);
-	set_text_module_global_option("Morphological Tags",tgs->morphs);
-	set_text_module_global_option("Footnotes",tgs->footnotes);
-	set_text_module_global_option("Greek Accents",tgs->greekaccents);
-	set_text_module_global_option("Lemmas",tgs->lemmas);
-	set_text_module_global_option("Scripture Cross-references",tgs->scripturerefs);
-	set_text_module_global_option("Hebrew Vowel Points",tgs->hebrewpoints);
-	set_text_module_global_option("Hebrew Cantillation",tgs->hebrewcant);
-	set_text_module_global_option("Headings",tgs->headings);
-	set_text_module_global_option("Words of Christ in Red",tgs->words_in_red);	
+{
+	set_text_module_global_option("Strong's Numbers", tgs->strongs);
+	set_text_module_global_option("Morphological Tags",
+				      tgs->morphs);
+	set_text_module_global_option("Footnotes", tgs->footnotes);
+	set_text_module_global_option("Greek Accents",
+				      tgs->greekaccents);
+	set_text_module_global_option("Lemmas", tgs->lemmas);
+	set_text_module_global_option("Scripture Cross-references",
+				      tgs->scripturerefs);
+	set_text_module_global_option("Hebrew Vowel Points",
+				      tgs->hebrewpoints);
+	set_text_module_global_option("Hebrew Cantillation",
+				      tgs->hebrewcant);
+	set_text_module_global_option("Headings", tgs->headings);
+	set_text_module_global_option("Words of Christ in Red",
+				      tgs->words_in_red);
 	if (tgs->variants_primary)
-			set_text_global_option("Textual Variants",
-					       "Primary Reading");
+		set_text_global_option("Textual Variants",
+				       "Primary Reading");
 	else if (tgs->variants_secondary)
-			set_text_global_option("Textual Variants",
-					       "Secondary Reading");
+		set_text_global_option("Textual Variants",
+				       "Secondary Reading");
 	else
 		set_text_global_option("Textual Variants",
-					       "All Readings");
+				       "All Readings");
 }
 
 
@@ -217,7 +223,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	GString *search_str;
 	gboolean use_gtkhtml_font = FALSE;
 	gboolean was_editable = FALSE;
-	MOD_FONT *mf;	
+	MOD_FONT *mf;
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream;
@@ -257,29 +263,29 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
-	
+
 	str = g_string_new(tmpBuf);
 	/* show key in html widget  */
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
 			sprintf(tmpBuf,
-					 "<A HREF=\"version=%s passage=%s\">"
-					 "<FONT COLOR=\"%s\">[%s] %s </font></A>",
-					 mod_name,
-					 key,
-					 settings.bible_verse_num_color,
-					 mod_name, key);
+				"<A HREF=\"version=%s passage=%s\">"
+				"<FONT COLOR=\"%s\">[%s] %s </font></A>",
+				mod_name,
+				key,
+				settings.bible_verse_num_color,
+				mod_name, key);
 		}
 
 		else {
 			sprintf(tmpBuf,
-					 "<A HREF=\"[%s] %s\">"
-					 "<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
-					 mod_name,
-					 get_module_description
-					 (mod_name),
-					 settings.bible_verse_num_color,
-					 mod_name, key);
+				"<A HREF=\"[%s] %s\">"
+				"<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
+				mod_name,
+				get_module_description
+				(mod_name),
+				settings.bible_verse_num_color,
+				mod_name, key);
 		}
 		str = g_string_append(str, tmpBuf);
 	}
@@ -291,18 +297,18 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
 			use_font, use_font_size);
 	str = g_string_append(str, tmpBuf);
-	
+
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
 		mark_search_words(search_str);
-		str = g_string_append(str,search_str->str);
+		str = g_string_append(str, search_str->str);
 	} else {
-		str = g_string_append(str,text);
+		str = g_string_append(str, text);
 	}
-	
+
 	sprintf(tmpBuf, " %s", "</font></body></html>");
 	str = g_string_append(str, tmpBuf);
-	
+
 	if (str->len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
 			       str->len);
@@ -333,7 +339,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
  *
  * Return value
  *   void
- */ 
+ */
 
 void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		     TEXT_GLOBALS * tgs, gchar * key,
@@ -357,11 +363,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	GtkHTML *html = GTK_HTML(html_widget);
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTMLStream *htmlstream;
-	
+
 	was_editable = gtk_html_get_editable(html);
-	
-	
-	
+
+
+
 	tmpkey = get_valid_key(key);
 
 	paragraphMark = "&para;";
@@ -371,7 +377,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	cur_chapter = get_chapter_from_key(tmpkey);
 	cur_book = get_book_from_key(tmpkey);
 
-	
+
 
 	mf = get_font(mod_name);
 
@@ -406,11 +412,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
-	
+
 	str = g_string_new(buf);
 	tmpkey = get_valid_key(key);
-	count  = verse_count(tmpkey);
-	for (i = 1 ;i <= count; i++) {
+	count = verse_count(tmpkey);
+	for (i = 1; i <= count; i++) {
 		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		g_free(tmpkey);
 		tmpkey = get_valid_key(tmpbuf);
@@ -427,44 +433,48 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			i,
 			settings.verse_num_font_size,
 			settings.bible_verse_num_color, i);
-		
-		str = g_string_append(str,buf);
-		
+
+		str = g_string_append(str, buf);
+
 		if (use_gtkhtml_font) {
 			sprintf(tmpbuf,
 				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				use_font, use_font_size, textColor);
 		} else {
 			sprintf(tmpbuf,
-			  "<font size=\"%s\" color=\"%s\">",
-				use_font_size,textColor);
+				"<font size=\"%s\" color=\"%s\">",
+				use_font_size, textColor);
 		}
-		str = g_string_append(str,tmpbuf);
-		
-		
+		str = g_string_append(str, tmpbuf);
+
+
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			strcpy(tmpbuf, paragraphMark);
-			str = g_string_append(str,tmpbuf);
+			str = g_string_append(str, tmpbuf);
 		}
 
 		/* get module text and prepare to display it */
 		text_str = get_module_text(0, mod_name, tmpkey);
 		str = g_string_append(str, text_str);
 		/*
-		if (settings.displaySearchResults)
-			mark_search_words(str);
-		utf8str = str->str;
-		*/
+		   if (settings.displaySearchResults)
+		   mark_search_words(str);
+		   utf8str = str->str;
+		 */
 
 		if (settings.versestyle) {
-			if ((strstr(text_str, "<BR>") == NULL)
-			    && (strstr(text_str, "<!P>") == NULL)) {
+			if ((strstr(text_str, "<BR>") == NULL) &&
+			    (strstr(text_str, "<br />") == NULL) &&
+			     (strstr(text_str, "<!P>") == NULL) &&
+			     (strstr(text_str, "<p>") == NULL) &&
+			     (strstr(text_str, "</p>") == NULL)  ) {
 				sprintf(tmpbuf, " %s", "</font><br>");
 			} else {
 				sprintf(tmpbuf, " %s", "</font>");
 			}
-			if (strstr(text_str, "<!P>") == NULL) {
+			if ((strstr(text_str, "<!P>") == NULL) &&
+			     (strstr(text_str, "<p>") == NULL) ) {
 				newparagraph = FALSE;
 			} else {
 				newparagraph = TRUE;
@@ -478,11 +488,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 				sprintf(tmpbuf, " %s", "</font><p>");
 		}
 		free(text_str);
-		str = g_string_append(str,tmpbuf);
+		str = g_string_append(str, tmpbuf);
 	}
 
 	sprintf(buf, "%s", "</body></html>");
-	str = g_string_append(str,buf);
+	str = g_string_append(str, buf);
 	if (str->len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
 			       str->len);
@@ -492,7 +502,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	gtk_html_set_editable(html, was_editable);
 	sprintf(buf, "%d", cur_verse);
 	gtk_html_jump_to_anchor(html, buf);
-	
+
 	g_string_free(str, TRUE);
 	if (use_font_size)
 		g_free(use_font_size);
@@ -522,7 +532,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
  */
 
 void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		   gchar * text, gchar * key, gboolean show_key)
+			   gchar * text, gchar * key, gboolean show_key)
 {
 	gchar tmpBuf[500];
 	gchar *use_font;
@@ -533,9 +543,9 @@ void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 	MOD_FONT *mf;
 
 
-	gtk_moz_embed_open_stream((GtkMozEmbed *)html_widget, 
-			"file://", "text/html");
-	
+	gtk_moz_embed_open_stream((GtkMozEmbed *) html_widget,
+				  "file://", "text/html");
+
 	mf = get_font(mod_name);
 
 	use_font = g_strdup(mf->old_font);
@@ -563,29 +573,29 @@ void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 		"<body  bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
-	
+
 	str = g_string_new(tmpBuf);
 	/* show key in html widget  */
 	if (show_key) {
 		if ((settings.displaySearchResults)) {
 			sprintf(tmpBuf,
-					 "<A HREF=\"version=%s passage=%s\">"
-					 "<FONT COLOR=\"%s\">[%s] %s </font></A>",
-					 mod_name,
-					 key,
-					 settings.bible_verse_num_color,
-					 mod_name, key);
+				"<A HREF=\"version=%s passage=%s\">"
+				"<FONT COLOR=\"%s\">[%s] %s </font></A>",
+				mod_name,
+				key,
+				settings.bible_verse_num_color,
+				mod_name, key);
 		}
 
 		else {
 			sprintf(tmpBuf,
-					 "<A HREF=\"[%s] %s\">"
-					 "<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
-					 mod_name,
-					 get_module_description
-					 (mod_name),
-					 settings.bible_verse_num_color,
-					 mod_name, key);
+				"<A HREF=\"[%s] %s\">"
+				"<FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
+				mod_name,
+				get_module_description
+				(mod_name),
+				settings.bible_verse_num_color,
+				mod_name, key);
 		}
 		str = g_string_append(str, tmpBuf);
 	}
@@ -597,26 +607,26 @@ void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
 			use_font, use_font_size);
 	str = g_string_append(str, tmpBuf);
-	
+
 	if (settings.displaySearchResults) {
 		search_str = g_string_new(text);
 		mark_search_words(search_str);
-		str = g_string_append(str,search_str->str);
+		str = g_string_append(str, search_str->str);
 	} else {
-		str = g_string_append(str,text);
+		str = g_string_append(str, text);
 	}
-	
+
 	sprintf(tmpBuf, " %s", "</font></body></html>");
 	str = g_string_append(str, tmpBuf);
-	
+
 	if (str->len) {
-		gtk_moz_embed_append_data((GtkMozEmbed *)html_widget,
-			str->str,str->len);
-		
+		gtk_moz_embed_append_data((GtkMozEmbed *) html_widget,
+					  str->str, str->len);
+
 	}
-	
-	gtk_moz_embed_close_stream((GtkMozEmbed *)html_widget);
-	
+
+	gtk_moz_embed_close_stream((GtkMozEmbed *) html_widget);
+
 	if (use_font_size)
 		free(use_font_size);
 	if (use_font)
@@ -640,17 +650,17 @@ void entry_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
  *
  * Return value
  *   void
- */ 
+ */
 
 
 void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals)
+			     TEXT_GLOBALS * tgs, gchar * key,
+			     gboolean use_globals)
 {
 	gchar
-	    *bgColor,
+	    * bgColor,
 	    *textColor,
-	    buf[500],
-	    *tmpkey, tmpbuf[256], *use_font, *use_font_size;
+	    buf[500], *tmpkey, tmpbuf[256], *use_font, *use_font_size;
 	gchar *text_str = NULL;
 	gchar *paragraphMark;
 	gchar *body;
@@ -663,13 +673,13 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 	gboolean r2l = FALSE;
 	MOD_FONT *mf;
 
-	gtk_moz_embed_open_stream((GtkMozEmbed *)html_widget, 
-			"file://", "text/html");
-		
-	if(is_module_rtl(mod_name))
+	gtk_moz_embed_open_stream((GtkMozEmbed *) html_widget,
+				  "file://", "text/html");
+
+	if (is_module_rtl(mod_name))
 		r2l = TRUE;
-	
-	
+
+
 	tmpkey = get_valid_key(key);
 
 	paragraphMark = "&para;";
@@ -679,7 +689,7 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 	cur_chapter = get_chapter_from_key(tmpkey);
 	cur_book = get_book_from_key(tmpkey);
 
-	
+
 
 	mf = get_font(mod_name);
 
@@ -702,29 +712,27 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 	else
 		use_font_size = g_strdup("+1");
 
-	
+
 	if (use_globals)
 		set_global_options(tgs);
 
-	if(r2l) {
+	if (r2l) {
 		body = "body dir=\"rtl\"";
-	}
-	else {
+	} else {
 		body = "body";
-		
+
 	}
 	sprintf(buf,
 		HTML_START
 		"<%s bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		body,
-		settings.bible_bg_color, 
-		settings.bible_text_color,
-		settings.link_color);
-	
+		settings.bible_bg_color,
+		settings.bible_text_color, settings.link_color);
+
 	str = g_string_new(buf);
 	tmpkey = get_valid_key(key);
-	count  = verse_count(tmpkey);
-	for (i = 1 ;i <= count; i++) {
+	count = verse_count(tmpkey);
+	for (i = 1; i <= count; i++) {
 		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
 		g_free(tmpkey);
 		tmpkey = get_valid_key(tmpbuf);
@@ -741,32 +749,32 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 			i,
 			settings.verse_num_font_size,
 			settings.bible_verse_num_color, i);
-		
-		str = g_string_append(str,buf);
-		
+
+		str = g_string_append(str, buf);
+
 		if (use_gtkhtml_font) {
 			sprintf(tmpbuf,
 				"<font size=\"%s\" color=\"%s\">",
 				use_font_size, textColor);
 		} else {
 			sprintf(tmpbuf,
-			  "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				"<font face=\"%s\" size=\"%s\" color=\"%s\">",
 				use_font, use_font_size, textColor);
 		}
-		
-		
-		str = g_string_append(str,tmpbuf);
-		
-		
+
+
+		str = g_string_append(str, tmpbuf);
+
+
 		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			strcpy(tmpbuf, paragraphMark);
-			str = g_string_append(str,tmpbuf);
+			str = g_string_append(str, tmpbuf);
 		}
 
-		
+
 		text_str = get_module_text(0, mod_name, tmpkey);
-		
+
 		str = g_string_append(str, text_str);
 
 		if (settings.versestyle) {
@@ -790,20 +798,20 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
 				sprintf(tmpbuf, " %s", "</font><p>");
 		}
 		free(text_str);
-		str = g_string_append(str,tmpbuf);
+		str = g_string_append(str, tmpbuf);
 	}
 
 	sprintf(buf, "%s", "</body></html>");
-	str = g_string_append(str,buf);
+	str = g_string_append(str, buf);
 	//utf8str = e_utf8_from_gtk_string(html_widget, str->str);
 	//utf8len = strlen(utf8str);
 	if (str->len) {
-		gtk_moz_embed_append_data((GtkMozEmbed *)html_widget,
-			str->str,str->len);		
+		gtk_moz_embed_append_data((GtkMozEmbed *) html_widget,
+					  str->str, str->len);
 	}
-	
-	gtk_moz_embed_close_stream((GtkMozEmbed *)html_widget);
-	
+
+	gtk_moz_embed_close_stream((GtkMozEmbed *) html_widget);
+
 	g_string_free(str, TRUE);
 	if (use_font_size)
 		g_free(use_font_size);
@@ -829,7 +837,7 @@ void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
  *
  * Return value
  *   void
- */ 
+ */
 /*
 #ifdef ICU_SWORD
 void chapter_display_icu(GtkWidget * html_widget, gchar * mod_name,
