@@ -149,7 +149,8 @@ void frontend_init(void)
 	}
 	
 	// setup passage notebook
-	gui_notebook_main_setup(NULL);
+	if(settings.browsing)
+		gui_notebook_main_setup(NULL);
 
 	gui_set_sidebar_porgram_start();
 }
@@ -336,7 +337,8 @@ void shutdown_frontend(void)
 	if (settings.havepercomm)
 		gui_shutdown_percomm();
 	
-	gui_notebook_main_shutdown();
+	if(settings.browsing)
+		gui_notebook_main_shutdown();
 
 	g_print("\n%s\n", _("GnomeSword is shutdown"));
 	
