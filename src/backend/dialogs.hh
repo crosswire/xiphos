@@ -47,7 +47,7 @@ public:
 
 	ModuleDialogs();
 	~ModuleDialogs();
-	void init_SWORD(const char * mod_name);
+	void init_SWORD();
 	void init_lists(MOD_LISTS * mods);
 	void setup_displays(void);
 
@@ -69,6 +69,7 @@ public:
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
 	void save_entry(const char * entry);
+	void delete_entry();
 	
 	int module_type(void);
 	const char *module_get_language(const char *module_name);

@@ -653,12 +653,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	g_signal_connect(GTK_OBJECT(container), "delete-event",
                 G_CALLBACK(on_studypad_delete),
 			   specd);
-
-	/*
-	g_signal_connect(GTK_OBJECT(vboxSP), "destroy",
-                G_CALLBACK(gui_html_editor_control_data_destroy),
-			   specd);
-	*/
+			   
 	hboxstyle = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hboxstyle);
 	gtk_box_pack_start(GTK_BOX(vboxSP), hboxstyle, TRUE, TRUE, 0);
@@ -696,14 +691,6 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	specd->pm = gui_create_editor_popup(specd);
 	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
 	
-/*
-	g_signal_connect(GTK_OBJECT(specd->html), "submit",
-			   G_CALLBACK(on_submit), specd);
-	g_signal_connect(GTK_OBJECT
-			   (specd->htmlwidget),
-			   "load_done",
-			   G_CALLBACK(html_load_done), specd);
-*/			  
 
 	g_signal_connect(GTK_OBJECT
 			   (specd->htmlwidget),
@@ -770,29 +757,13 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
  *   
  */
 
-gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
-		       gint page_num)
+gint gui_open_studypad(gchar * file_name)
 {
-	GtkWidget *label;
+/*	widgets.studypad_dialog = create_dialog();
 
-	settings.studypad_page = page_num;
-	
-	widgets.html_studypad = 
-			gui_create_studypad_control(notebook,file_name);
-
-
-	label = gtk_label_new(_("StudyPad"));
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK
-					(notebook),
-					gtk_notebook_get_nth_page
-					(GTK_NOTEBOOK(notebook), 
-					page_num), label);
-
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					(notebook),
-					gtk_notebook_get_nth_page
-					(GTK_NOTEBOOK(notebook),
-					page_num), _("StudyPad"));	
+	widgets.html_studypad =
+	  	gui_create_studypad_control(widgets.studypad_dialog,
+							  file_name);
+*/	
 	return TRUE;
 }

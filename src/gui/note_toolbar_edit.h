@@ -1,7 +1,7 @@
 /*
  * GnomeSword Bible Study Tool
- * _percom.c - personal comments gui
- *
+ * toolbar_edit.h - style toolbar for editors
+ *               
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,31 +19,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___PERCOMM_H_
-#define ___PERCOMM_H_
+#ifndef _NOTE_TOOLBAR_EDIT_H
+#define _NOTE_TOOLBAR_EDIT_H
 
-#include <gnome.h>
-#include "main/percomm.h"
-#include "gui/editor.h"
+#include "main/module_dialogs.h"
 
-typedef struct _percomm_data PC_DATA;
-struct _percomm_data {
-	GtkWidget *vbox;
-	GtkWidget *html;
-	gchar *mod_name;
-	gchar *search_string;
-	gint mod_num;
-	gboolean is_locked;
-	GSHTMLEditorControlData *ec;
-};
+GtkWidget *gui_note_toolbar_edit(DIALOG_DATA * d);
 
-void gui_save_note(GSHTMLEditorControlData * e);
-void gui_percomm_tabs(gboolean choice);
-void gui_display_percomm(gchar * key);
-void gui_set_percomm_page(gchar * mod_name);
-void gui_add_new_percomm_pane(PC_DATA *p);
-void gui_setup_percomm(GList *mods);
-void gui_shutdown_percomm(void);
-void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num);
 #endif
-

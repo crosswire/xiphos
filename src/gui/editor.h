@@ -135,7 +135,7 @@ struct _GSHTMLEditorControlData {
 	gboolean gbs; /** gen book support **/
 	gboolean studypad; 
 	gchar filename[256];
-	gchar key[256];
+	gchar *key;
 #ifdef USE_GNOME_SPELL	
 	CORBA_sequence_GNOME_Spell_Language *languages;
 	GNOME_Spell_Dictionary  dict;

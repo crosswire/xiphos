@@ -149,7 +149,10 @@ module.include.files=\
 	src/main/global_ops.hh\
 	src/main/url.h\
 	src/backend/sword_main.hh\
-	src/main/module_dialogs.h
+	src/main/module_dialogs.h\
+	src/gui/note_editor.h\
+	src/gui/note_toolbar_edit.h\
+	src/gui/note_toolbar_style.h
 
 module.source.name=.
 module.source.type=
@@ -237,7 +240,10 @@ module.source.files=\
 	src/main/module_dialogs.cc\
 	src/main/commentary.cc\
 	src/backend/dialogs.cc\
-	src/gnome2/gbs_dialog.c
+	src/gnome2/gbs_dialog.c\
+	src/gnome2/note_editor.c\
+	src/gnome2/note_toolbar_edit.c\
+	src/gnome2/note_toolbar_style.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
