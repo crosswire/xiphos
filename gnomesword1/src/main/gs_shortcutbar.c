@@ -523,7 +523,22 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	glist = NULL;
-	glist = backend_get_mod_description_list_SWORD((gchar *) user_data);
+	switch(GPOINTER_TO_INT(user_data)) {
+		case TEXT_TYPE:
+			glist = mod_lists->text_descriptions;
+		break;
+		case COMMENTARY_TYPE:
+			glist = mod_lists->comm_descriptions;
+		break;
+		case DICTIONARY_TYPE:
+			glist = mod_lists->dict_descriptions;
+		break;
+		case BOOK_TYPE:
+			glist = mod_lists->book_descriptions;
+		break;
+	}
+	
+	//glist = backend_get_mod_description_list_SWORD((gchar *) user_data);
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num =
@@ -880,7 +895,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Biblical Texts");	/* this string is used internally */
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, TEXT_TYPE);
 
 		menuitem =
 		    gtk_menu_item_new_with_label(_("Add Commentary"));
@@ -896,7 +911,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Commentaries");	/* this string is used internally */
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, COMMENTARY_TYPE);
 
 
 		menuitem =
@@ -913,8 +928,8 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Lexicons / Dictionaries");	/* this string is used internally */
-
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, DICTIONARY_TYPE);
+		
 
 		menuitem = gtk_menu_item_new_with_label(_("Add Book"));
 		gtk_widget_show(menuitem);
@@ -929,8 +944,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					 gtk_widget_unref);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
-		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Generic Books");	/* this string is used internally */
-
+		create_modlistmenu_sb(group_num, menuitem, menu_item_menu, BOOK_TYPE);	
 	}
 
 	else {
@@ -950,16 +964,16 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 					  menu_item_menu);
 	/*** add bookmark items ***/
 		if (group_num == groupnum1)
-			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Biblical Texts");	/* this string is used internally */
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, TEXT_TYPE);
 
 		if (group_num == groupnum2)
-			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Commentaries");	/* this string is used internally */
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, COMMENTARY_TYPE);
 
 		if (group_num == groupnum3)
-			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Lexicons / Dictionaries");	/* this string is used internally */
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, DICTIONARY_TYPE);	
 
 		if (group_num == groupnum8)
-			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, "Generic Books");	/* this string is used internally */
+			create_modlistmenu_sb(group_num, menuitem, menu_item_menu, BOOK_TYPE);
 
 	}
 	/* Save the group num so we can get it in the callbacks. */
@@ -1702,10 +1716,10 @@ void update_shortcut_bar(SETTINGS * s)
 
 void
 create_modlistmenu_sb(gint group_num, GtkWidget * menu,
-		      GtkWidget * shortcut_menu_widget, gchar * modtype)
+		      GtkWidget * shortcut_menu_widget, gint mod_type)
 {
 	GtkWidget *item;
-	GList *glist;
+	GList *glist = NULL;
 	if (group_num != groupnum0) {
 		item =
 		    gtk_menu_item_new_with_label(_("Add All Modules"));
@@ -1720,11 +1734,26 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_add_all_activate),
-				   (gchar *) modtype);
+				   GINT_TO_POINTER(mod_type));
 	}
 
-	glist = NULL;
-	glist = backend_get_mod_description_list_SWORD(modtype);	//backend_get_sb_mod_list(modtype);
+	
+	switch(mod_type) {
+		case TEXT_TYPE:
+			glist = mod_lists->text_descriptions;
+		break;
+		case COMMENTARY_TYPE:
+			glist = mod_lists->comm_descriptions;
+		break;
+		case DICTIONARY_TYPE:
+			glist = mod_lists->dict_descriptions;
+		break;
+		case BOOK_TYPE:
+			glist = mod_lists->book_descriptions;
+		break;
+	}
+	
+	//glist = backend_get_mod_description_list_SWORD(modtype);
 	while (glist != NULL) {
 		item =
 		    gtk_menu_item_new_with_label((gchar *) glist->data);

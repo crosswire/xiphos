@@ -50,7 +50,7 @@ extern SETTINGS *settings;
 /******************************************************************************
  * load module option - using sword SWConfig
  ******************************************************************************/
-bool backend_load_module_options(char * modName, char * option)
+gboolean backend_load_module_options(char * modName, char * option)
 {
 	char buf[255], *yesno;
 	bool retval = false;
@@ -69,7 +69,7 @@ bool backend_load_module_options(char * modName, char * option)
 /******************************************************************************
  * save module option - using sword SWConfig
  ******************************************************************************/
-bool backend_save_module_options(char * modName, char * option, char * value)
+gboolean backend_save_module_options(char * modName, char * option, char * value)
 {
 	char buf[80], buf2[255];
 

@@ -69,7 +69,7 @@ module.include.files=\
 	src/backend/properties.h\
 	src/backend/module_options.h\
 	src/backend/gbs.h\
-	src/backend/bibletext.h\
+	src/backend/bibletext_.h\
 	src/backend/interlinear.h\
 	src/backend/display.h\
 	src/backend/dictlex.h\
@@ -80,12 +80,13 @@ module.include.files=\
 	src/gnome/about_gnomesword.h\
 	src/gnome/about_modules.h\
 	src/gnome/about_sword.h\
+	src/gnome/_bibletext.h\
 	src/gnome/create_shortcutbar_search.h\
 	src/gnome/create_shortcutbar_viewer.h\
 	src/gnome/cipher_key_dialog.h\
 	src/gnome/splash.h\
 	src/main/char_table.h\
-	src/main/gs_bibletext.h\
+	src/main/bibletext.h\
 	src/main/gs_bookmarks.h\
 	src/main/gs_commentary.h\
 	src/main/gs_detach_int.h\
@@ -133,7 +134,7 @@ module.source.files=\
 	src/backend/properties.cpp\
 	src/backend/module_options.cpp\
 	src/backend/gbs.cpp\
-	src/backend/bibletext.cpp\
+	src/backend/bibletext_.cpp\
 	src/backend/interlinear.cpp\
 	src/backend/display.cpp\
 	src/backend/dictlex.cpp\
@@ -144,12 +145,13 @@ module.source.files=\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
+	src/gnome/_bibletext.cpp\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/splash.c\
 	src/main/char_table.c\
-	src/main/gs_bibletext.c\
+	src/main/bibletext.c\
 	src/main/gs_bookmarks.c\
 	src/main/gs_commentary.c\
 	src/main/gs_detach_int.c\

@@ -155,8 +155,8 @@ CXXFLAGS = \
 
 
 libbackend_a_SOURCES = \
-    bibletext.cpp \
-    bibletext.h \
+    bibletext_.cpp \
+    bibletext_.h \
     bookmarks.cpp \
     bookmarks.h \
     commentary.cpp \
@@ -198,7 +198,7 @@ LIBRARIES = $(noinst_LIBRARIES)
 
 libbackend_a_AR = $(AR) cru
 libbackend_a_LIBADD =
-am_libbackend_a_OBJECTS = bibletext.$(OBJEXT) bookmarks.$(OBJEXT) \
+am_libbackend_a_OBJECTS = bibletext_.$(OBJEXT) bookmarks.$(OBJEXT) \
 	commentary.$(OBJEXT) dictlex.$(OBJEXT) display.$(OBJEXT) \
 	display_info.$(OBJEXT) gbs.$(OBJEXT) interlinear.$(OBJEXT) \
 	module_options.$(OBJEXT) properties.$(OBJEXT) search.$(OBJEXT) \
@@ -212,7 +212,7 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
-@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bibletext.Po $(DEPDIR)/bookmarks.Po \
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bibletext_.Po $(DEPDIR)/bookmarks.Po \
 @AMDEP_TRUE@	$(DEPDIR)/commentary.Po $(DEPDIR)/dictlex.Po \
 @AMDEP_TRUE@	$(DEPDIR)/display.Po $(DEPDIR)/display_info.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gbs.Po $(DEPDIR)/interlinear.Po \
@@ -277,7 +277,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bibletext.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bibletext_.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bookmarks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/commentary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/dictlex.Po@am__quote@
