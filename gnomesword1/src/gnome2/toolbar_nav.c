@@ -419,7 +419,8 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	button_dict_book =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Dict/Book"), NULL, NULL,
+				       _("Dict/Book"), 
+				       _("Toggle Dictionary View"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_label_set_use_underline(GTK_LABEL
 				    (((GtkToolbarChild
