@@ -35,7 +35,7 @@ void updateinterlinearpage(void);
 void shutdownSWORD(void);
 void FillDictKeysSWORD(void);
 void changeVerseSWORD(gchar * ref);
-void searchSWORD(GtkWidget * searchFrm);
+//void searchSWORD(GtkWidget * searchFrm);
 void resultsListSWORD(GtkWidget * searchFrm, 
 		gint row, 
 		gint column);
@@ -97,7 +97,6 @@ GList *getBibleBooks(void);
 void morphsSWORD(gint window, gboolean choice) ;
 void gotoBookmarkSWORD(gchar *modName, gchar *key);
 gchar* getmodkeySWORD(gint num);
-gboolean getVerseListSWORD(gchar *vlist);
 gfloat getSwordVerionSWORD(void);
 void swapmodsSWORD(gchar *intmod);
 void loadSDkeysSWORD(GtkWidget *clist);

@@ -49,55 +49,60 @@
 * globals
 *****************************************************************************/	
 GtkWidget	
-		*footnotes,	/* widget to access toggle menu - for footnotes */
-  		*strongsnum,/* widget to access toggle menu - for strongs numbers */
-	    	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
-	    	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
-		*studypad,  /* studypad text widget */
-		*notes,    /* notes text widget */
-		*morphs;
-
-GString *gs_clipboard; /* for copying from the html widgets freed in shutdownSWORD in gs_sword.cpp*/
-
-gboolean isstrongs = FALSE; /* main window selection is not storngs number */
-gchar *current_filename= NULL;	/* filename for open file in study pad window */
-gboolean file_changed = FALSE;	/* set to true if text is study pad has changed - and file is not saved  */
-gchar current_verse[80]="Romans 8:28";	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
-gboolean changemain = TRUE; /* change verse of Bible text window */
-gint dictpages,
-	 compages,
-	 textpages;
-SETTINGS *settings;
-GS_APP gs;
-gchar 	 bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
-//GS_LAYOUT gslayout,
-//		   *p_gslayout;
-		   
+	*footnotes,	/* widget to access toggle menu - for footnotes */
+  	*strongsnum,/* widget to access toggle menu - for strongs numbers */
+	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
+	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
+	*studypad,  /* studypad text widget */
+	*notes,    /* notes text widget */
+	*morphs;
+GString 
+	*gs_clipboard; /* for copying from the html widgets freed in shutdownSWORD in gs_sword.cpp*/
+gboolean 
+	isstrongs = FALSE,/* main window selection is not storngs number */
+	file_changed = FALSE, /* set to true if text is study pad has changed - and file is not saved  */
+	changemain = TRUE; /* change verse of Bible text window */
+gchar 
+	*current_filename= NULL;	/* filename for open file in study pad window */
+gchar 
+	current_verse[80]="Romans 8:28",	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
+	bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
+gint 
+	dictpages,
+	compages,
+	textpages;
+SETTINGS 
+	*settings;
+		
 /*****************************************************************************
 * externs
 *****************************************************************************/
-extern GList 	*biblemods,
-			*commentarymods,
-			*dictionarymods,
-			*percommods,
-			*sbbiblemods,
-			*sbdictmods,
-			*sbcommods;
-extern gchar *mydictmod;						
-extern GdkColor myGreen; /* current verse color */
-extern gboolean havedict; /* let us know if we have at least one lex-dict module */
-extern gboolean havecomm; /* let us know if we have at least one commentary module */
-extern gboolean havebible; /* let us know if we have at least one Bible text module */
-extern gboolean usepersonalcomments; /* do we setup for personal comments - default is FALSE */
-//extern gboolean bVerseStyle;
-extern gboolean autoSave;
-extern gint groupnum4;
-extern gint ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
-extern gchar remembersubtree[256];  /* used for bookmark menus declared in filestuff.cpp */
-extern gchar *shortcut_types[];
-extern gboolean addhistoryitem; /* do we need to add item to history */
-extern gchar *mycolor;
-extern GtkWidget *MainFrm;
+extern GList 	
+	*biblemods,
+	*commentarymods,
+	*dictionarymods,
+	*percommods,
+	*sbbiblemods,
+	*sbdictmods,
+	*sbcommods;
+extern gchar 
+	*mydictmod,
+	*shortcut_types[],
+	remembersubtree[256],  /* used for bookmark menus declared in filestuff.cpp */
+	*mycolor;
+extern GdkColor 
+	myGreen; /* current verse color */
+extern gboolean 
+	havedict, /* let us know if we have at least one lex-dict module */
+	havecomm, /* let us know if we have at least one commentary module */
+	havebible, /* let us know if we have at least one Bible text module */
+	usepersonalcomments, /* do we setup for personal comments - default is FALSE */
+	autoSave,
+	addhistoryitem; /* do we need to add item to history */
+extern gint 
+	groupnum4,
+	ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
+
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
@@ -107,22 +112,21 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		GList *dictionarymods, GList *percommods,
 		GtkWidget *splash)
 {
-	GtkWidget *notebook;
-	gint		biblepage,
-			commpage,
-			dictpage;
+	GtkWidget 
+		*notebook;
+	gint		
+		biblepage,
+		commpage,
+		dictpage;
+	
 	g_print("Initiating GnomeSword\n");
-/* set the main window size */
+	/* set the main window size */
 	gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
-/* setup shortcut bar */
+	/* setup shortcut bar */
 	setupSB(sbbiblemods, sbcommods ,sbdictmods);
-/* set current verse color html */
-	mycolor = settings->currentverse_color;
-/* set color for current verse for gtktext widgets */
-  	//myGreen.red =  settings->currentverse_red;
-	//myGreen.green = settings->currentverse_green;
-	//myGreen.blue =  settings->currentverse_blue;		
-/* add modules to menus -- menu.c */
+	/* set current verse color html */
+	mycolor = settings->currentverse_color;	
+	/* add modules to menus -- menu.c */
 	addmodstomenus(app, 
 				settings, 
 				biblemods, 
@@ -132,7 +136,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				dictionarymods,
 				sbdictmods,
 				percommods);
-/* create popup menus -- menu.c */
+	/* create popup menus -- menu.c */
 	createpopupmenus(app, 
 				settings, 
 				biblemods,
@@ -142,24 +146,24 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				dictionarymods,
 				sbdictmods,
 				percommods);
-/* add pages to commentary and  dictionary notebooks */
+	/* add pages to commentary and  dictionary notebooks */
 	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
 	//g_warning("%d",biblepage);
 	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
 	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);	
-/*  set text windows to word warp */
+	/*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
-/* set main notebook page */
+	/* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
 			settings->notebook3page );
-/* store text widgets for spell checker */
+	/* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
-/* Add options to Options Menu and get toggle item widget */
+	/* Add options to Options Menu and get toggle item widget */
 	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments",
 				(GtkMenuCallback)on_auto_save_notes1_activate);
 	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page",
@@ -172,26 +176,26 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_morphs_activate);
  	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers",
  				(GtkMenuCallback)on_strongs_numbers1_activate); 		
-/* set dictionary key */
+	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
         loadbookmarks_programstart(); /* add bookmarks to menubar */
         changeVerseSWORD(settings->currentverse); /* set Text */
-/* show hide shortcut bar - set to options setting */
+	/* show hide shortcut bar - set to options setting */
         if(settings->showshortcutbar){
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbar_width);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
-/* set hight of bible and commentary pane */
+	/* set hight of bible and commentary pane */
 	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), settings->upperpane_hight);
-/* set width of bible pane */
+	/* set width of bible pane */
 	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")), settings->biblepane_width);
-/* load last used file into studypad */
+	/* load last used file into studypad */
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
-/* create gs_clipboard */
+	/* create gs_clipboard */
 	gs_clipboard = g_string_new("");
 	
-/* set Bible module to open notebook page */
+	/* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
 	if(havebible){ 	
 		if(biblepage == 0)
@@ -209,7 +213,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 			gtk_widget_hide(notebook);
 	}
 		
-/* set dict module to open notebook page */
+	/* set dict module to open notebook page */
 	/* let's don't do this if we don't have at least one dictionary / lexicon */	
 	if(havedict){ 	
 		if(dictpage == 0) 
@@ -229,7 +233,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	}else 
 		gtk_widget_hide(lookup_widget(app,"hbox8"));
 	 
-/* set com module to open notebook page */	
+	/* set com module to open notebook page */	
 	if(havecomm){ /* let's don't do this if we don't have at least one commentary */ 
 		if(commpage == 0)
 			changcurcomModSWORD(settings->CommWindowModule, TRUE);  		
@@ -245,29 +249,29 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         }else 
 		gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
 		
-/* set personal commets notebook label and display module */
+	/* set personal commets notebook label and display module */
 	if(usepersonalcomments){
 		 /* change personal comments module */
 		changepercomModSWORD(settings->personalcommentsmod);	
 	}
 	
-/* hide buttons - only show them if their options are enabled */
+	/* hide buttons - only show them if their options are enabled */
 	gtk_widget_hide(lookup_widget(app,"btnPrint"));
 	gtk_widget_hide(lookup_widget(app,"btnSpell"));
 	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
 	
-/* do not show print button if printing not enabled */
+	/* do not show print button if printing not enabled */
 #ifdef USE_GNOMEPRINT
         gtk_widget_show(lookup_widget(app,"btnPrint"));
 #endif /* USE_GNOMEPRINT */
 	
-/* do not show spell buttons if spellcheck not enabled */
+	/* do not show spell buttons if spellcheck not enabled */
 #ifdef USE_SPELL
         gtk_widget_show (lookup_widget(app,"btnSpell"));
         gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
 #endif /* USE_SPELL */	
 
-/* free module lists */
+	/* free module lists */
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
@@ -290,15 +294,21 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
  * list - list of modules - add one page per module
  *********************************************************************************************/
 gint
-addnotebookpages(GtkWidget *notebook, GList *list, gchar *modName)
+addnotebookpages(GtkWidget *notebook, 
+			GList *list, 
+			gchar *modName)
 {
-	GList *tmp;
-	gint pg = 0, retVal;
+	GList 
+		*tmp;
+	gint 
+		pg = 0, 
+		retVal = 0;
 	GtkWidget
 		*empty_notebook_page, /* used to create new pages */
 		*label;
-	GtkLabel *mylabel;
-	retVal = 0;	
+	GtkLabel 
+		*mylabel;
+	
 	tmp = list;
 	while (tmp != NULL) {
 		empty_notebook_page = gtk_vbox_new (FALSE, 0);
@@ -352,7 +362,8 @@ void UpdateChecks(GtkWidget *app)
 		setglobalopsSWORD("Strong's Numbers","Off"); /* ' */
 	/* set strongs toogle button */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
-	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;	
+	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
+	
         /* fill the dict key clist */
         if(havedict) FillDictKeysSWORD();
         /* set Text - apply changes */

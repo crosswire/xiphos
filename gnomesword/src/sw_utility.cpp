@@ -103,3 +103,14 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	}
 }
 
+void
+changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
+{
+	ModMap::iterator it; 
+	
+	it = Mgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != Mgr->Modules.end()){ //-- if we find the module	
+		module = (*it).second;  //-- change current module to new module
+	}		
+}
+

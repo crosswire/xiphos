@@ -34,6 +34,7 @@
 #include "gs_search_cb.h"
 #include "display.h"
 #include "callback.h"
+#include "gs_gnomesword.h"
 #include "gs_sword.h"
 #include "support.h"
 #include "sw_thmlhtml.h"
@@ -44,7 +45,9 @@ SearchWindow *searchWindow;
 extern SWModule *curMod, *curcomMod, *percomMod;
 static void percentUpdate(char percent, void *userData) ;
 extern gboolean firstsearch;
-
+static char printed = 0;
+extern SETTINGS *settings;
+	
 SearchWindow::SearchWindow ()
 {
 	searchType_group = NULL;
@@ -114,25 +117,30 @@ SearchWindow::initsearchWindow (GtkWidget * searchDlg)	//-- init search dialog
 void    /* search Bible text or commentaries */
 SearchWindow::searchSWORD (GtkWidget * searchFrm)	
 {
-	ModMap::iterator it;
-	GtkWidget       *searchText,	//-- what we want to find -text entry
-	                *lbSearchHits,	//-- label for showing how many verses we found
-	                *resultList,	//-- list of verses found
-	                *regexSearch,	//-- do we want to use regular expression search - radio button
-	                *phraseSearch,	//-- do we want to use phrase seach - radio button
-	                *caseSensitive,	//-- do we want search to be case sensitive - check box
-	                *comToggle,	//-- do we want to search current commentary - check box
-	                *bounds,	//-- do we want to use bounds for our search - check box
-	                *lowerbound,	//-------- lower bounds entry widget
-	                *upperbound,	//-------- upper bounds entry widget
-	                *lastsearch,	//-- use verses from last search for bounds of this search
-	                *textWindow,	//-- text widget to display verses
-	                *percomToggle;	//-- do we want to search personal commentary - check box
-	gchar           *entryText,	//-- pointer to text in searchText entry
-	                scount[5];	//-- string from gint count for label
-	const gchar	*resultText;   //-- temp storage for verse found
-	gchar 		**clistText = (gchar **)&resultText;
-	gint            count;		//-- number of hits
+	ModMap::iterator 
+		it;
+	GtkWidget       
+		*searchText,	//-- what we want to find -text entry
+	        *lbSearchHits,	//-- label for showing how many verses we found
+	        *resultList,	//-- list of verses found
+	        *regexSearch,	//-- do we want to use regular expression search - radio button
+	        *phraseSearch,	//-- do we want to use phrase seach - radio button
+	        *caseSensitive,	//-- do we want search to be case sensitive - check box
+	       	*comToggle,	//-- do we want to search current commentary - check box
+	       	*bounds,	//-- do we want to use bounds for our search - check box
+	       	*lowerbound,	//-------- lower bounds entry widget
+	        *upperbound,	//-------- upper bounds entry widget
+	        *lastsearch,	//-- use verses from last search for bounds of this search
+	        *textWindow,	//-- text widget to display verses
+	       *percomToggle;	//-- do we want to search personal commentary - check box	
+	const gchar	
+		*resultText;   //-- temp storage for verse found
+	gchar          
+		*entryText,	//-- pointer to text in searchText entry
+	        scount[5],	//-- string from gint count for label
+		**clistText = (gchar **)&resultText;
+	gint            
+		count;		//-- number of hits
 
 	searchText = lookup_widget (searchFrm, "entry1");	//-- pointer to text entry
 	lbSearchHits = lookup_widget (searchFrm, "lbSearchHits");	//-- pointer to count label
@@ -183,6 +191,7 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 	  }
 	char progressunits = 70;
 	count = 0;		/* we have not found anything yet */
+	printed = 0;
 	gtk_clist_clear (GTK_CLIST (resultList));	//-- clear list widget for new results
 	entryText = gtk_entry_get_text (GTK_ENTRY (searchText));	//-- what to search for
 	gtk_label_set_text (GTK_LABEL (lbSearchHits), "0");	//-- set hits label to 0
@@ -217,26 +226,27 @@ SearchWindow::searchSWORD (GtkWidget * searchFrm)
 }
 
 //-------------------------------------------------------------------------------------------
-static void percentUpdate(char percent, void *userData) {
-	/*
-	static char printed = 0;
+static void percentUpdate(char percent, void *userData) 
+{	
 	char maxHashes = *((char *)userData);
 	float num;
 	char buf[80];
 	
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
 	while ((((float)percent)/100) * maxHashes > printed) {
-		gtk_progress_set_value(GTK_PROGRESS(searchWindow->progressbar),(float)percent) ;
+		gtk_progress_set_value(GTK_PROGRESS(searchWindow->progressbar),(float)percent) ;		
 		gtk_widget_grab_focus(searchWindow->progressbar);
 		sprintf(buf,"%f",(((float)percent)/100));
 		num = (float)percent/100;
 		gtk_widget_grab_focus(searchWindow->progressbar);
 		gtk_progress_bar_update(GTK_PROGRESS_BAR(searchWindow->progressbar),
 				num);
-		
-		sprintf(buf,"%f",(((float)percent)/100));
-		cout << buf << '\n';
+		//gnome_appbar_set_progress ((GnomeAppBar *)settings->appbar, num );
 		printed++;	
-	}   */
+	} 
+	while (gtk_events_pending ())
+		gtk_main_iteration (); 
 }
 
 //-------------------------------------------------------------------------------------------
@@ -255,10 +265,10 @@ SearchWindow::create ()
 	gtk_widget_show (dialog_vbox1);
   	/* Create a GtkAdjusment object to hold the range of the
            * progress bar */
-        //adj = (GtkAdjustment *) gtk_adjustment_new (0, 1, 100, 0, 0, 0);
+        adj = (GtkAdjustment *) gtk_adjustment_new (0, 1, 100, 0, 0, 0);
 
           /* Create the GtkProgressBar using the adjustment */
-        /*
+        
         progressbar = gtk_progress_bar_new_with_adjustment (adj);
 
  
@@ -271,7 +281,7 @@ SearchWindow::create ()
   	gtk_progress_set_show_text (GTK_PROGRESS (progressbar), TRUE);
 	gtk_progress_bar_set_bar_style (GTK_PROGRESS_BAR (progressbar),
                                           GTK_PROGRESS_CONTINUOUS);	
-        */		
+        //*/		
 				
 	frame8 = gtk_frame_new (NULL);
 	gtk_widget_ref (frame8);
