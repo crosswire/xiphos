@@ -57,23 +57,35 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = i586-pc-linux-gnu
+host_triplet = i586-pc-linux-gnu
+AS = @AS@
 CC = gcc
 CXX = c++
+DLLTOOL = @DLLTOOL@
+EXTRA_GNOME_CFLAGS = -I/usr/include/gnome-xml -I/usr/include -I/usr/lib/glib/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/X11R6/include  
+EXTRA_GNOME_LIBS = -rdynamic -L/usr/lib -L/usr/X11R6/lib -lglade-gnome -lglade -lxml -lgdk_pixbuf -ltiff -ljpeg -lpng -lz -lgnomecanvaspixbuf -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl  
 GNOMEGNORBA_LIBS = -rdynamic -lgnorba -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lnsl -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GNOMEUI_LIBS = -rdynamic -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GNOME_APPLETS_LIBS = 
 GNOME_CAPPLET_LIBS = 
 GNOME_CONFIG = /usr/bin/gnome-config
+GNOME_DOCKLETS_LIBS = 
 GNOME_INCLUDEDIR = -I/usr/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/lib/glib/include -I/usr/X11R6/include
 GNOME_LIBDIR = -rdynamic -L/usr/lib -L/usr/X11R6/lib
 GNOME_LIBS = -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
+GNOME_PRINT_CFLAGS = -I/usr/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/lib/glib/include -I/usr/X11R6/include -I/usr/include/gnome-xml
+GNOME_PRINT_LIBS = -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnomeprint -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl -lxml -lz
 GNORBA_CFLAGS = -I/usr/include -DNEED_GNOMESUPPORT_H -I/usr/lib/gnome-libs/include -I/usr/lib/glib/include -I/usr/X11R6/include
 GNORBA_LIBS = -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnorba -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lnsl -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GTKXMHTML_LIBS = -rdynamic -lgtkxmhtml -lXpm -ljpeg -lpng -lz -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
 GTK_CFLAGS = -I/usr/lib/glib/include -I/usr/X11R6/include
 GTK_CONFIG = /usr/bin/gtk-config
 GTK_LIBS = -lSM -lICE -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
+LIBTOOL = $(SHELL) $(top_builddir)/libtool
+LN_S = ln -s
 MAKEINFO = makeinfo
+OBJDUMP = @OBJDUMP@
 ORBIT_CFLAGS = -I/usr/lib/glib/include -I/usr/include
 ORBIT_CONFIG = /usr/bin/orbit-config
 ORBIT_IDL = /usr/bin/orbit-idl
@@ -81,7 +93,8 @@ ORBIT_LIBS = -L/usr/lib -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lglib -lnsl
 PACKAGE = gnomesword
 PACKAGE_PIXMAPS_DIR = /usr/share/pixmaps/gnomesword
 PTHREAD_LIB = -lpthread
-VERSION = 0.1.8i
+RANLIB = ranlib
+VERSION = 0.2.0
 XPM_LIBS = -lXpm
 ZVT_LIBS = -rdynamic -lzvt -lutil -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
 cflags_set = yes
@@ -93,9 +106,9 @@ MACROS =    aclocal-include.m4				  compiler-flags.m4				  curses.m4					  gnome
 EXTRA_DIST = $(MACROS) gnome-common.m4 autogen.sh
 MAINTAINERCLEANFILES = macros.dep
 
-#gnome_aclocaldir = $(datadir)/aclocal/gnome
+#gnome_aclocaldir = $(datadir)/aclocal/gnome-macros
 
-#gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 autogen.sh
+#gnome_aclocal_DATA = $(MACROS) gnome-macros.dep gnome-common.m4 	autogen.sh
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -206,6 +219,7 @@ clean-am:  clean-generic mostlyclean-am
 clean: clean-am
 
 distclean-am:  distclean-generic clean-am
+	-rm -f libtool
 
 distclean: distclean-am
 

@@ -75,8 +75,8 @@ setDiretory(void)
 	fnbookmarksnew = g_new(char, strlen(gSwordDir) + strlen("bookmarksnew.gs")+ 2); //-- set fnbookmarks to gSwordDir + bookmarks.txt
 	sprintf(fnbookmarksnew, "%s/%s", gSwordDir,"bookmarksnew.gs" );
 	
-	fnconfigure = g_new(char, strlen(gSwordDir) + strlen("settings.cfg")+ 2); //-- set fnconfigure to gSwordDir + gsword.cfg
-	sprintf(fnconfigure, "%s/%s", gSwordDir,"settings.cfg" );
+	fnconfigure = g_new(char, strlen(gSwordDir) + strlen("settings3.cfg")+ 2); //-- set fnconfigure to gSwordDir + gsword.cfg
+	sprintf(fnconfigure, "%s/%s", gSwordDir,"settings3.cfg" );
 	if(access(gSwordDir,F_OK) == -1)  //-- if gSwordDir does not exist create it
 	{
 		if((mkdir(gSwordDir,S_IRWXU)) == 0)
@@ -506,6 +506,9 @@ createsettings(void)
 	p_settings->notebook3page = 0;  //-- notebook 3 page number
 	p_settings->notebook1page = 0;  //-- commentaries notebook
 	p_settings->notebook2page = 0;  //-- dict and lex notebook  	
+	p_settings->showcomtabs  = false;  //-- show tabs on commentary notebook
+	p_settings->showdicttabs = false;  //-- show tabs on dict/lex notebook
+	p_settings->showshortcutbar = true; //-- show the shortcut bar;
 	
 	fd = open(fnconfigure, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);  //-- create settings file (settings.cfg)
 	write(fd,(char *)&settings,sizeof(settings)); //-- save settings structrue to file
