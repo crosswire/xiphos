@@ -37,6 +37,7 @@
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
+#include "backend/sword_main.hh"
 
 #include "main/search.h"
 
@@ -113,6 +114,7 @@ void backend_setup_display_mgr(void)
 		}
 		if (!strcmp((*it).second->Type(), DICT_MODS)) {
 			sw.dict_mod = (*it).second;
+			sw.dict_mod->Disp(sw.dictDisplay);
 			
 		}
 		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
@@ -259,12 +261,15 @@ void backend_delete_module_mgr(void)
  
 void backend_get_global_options_list(GList * list)
 {
+	backend->get_module_options(list);
+	/*
 	StringList optionslist = sw.module_mgr->getGlobalOptions();
 	
 	for (StringList::iterator it = optionslist.begin(); 
 		it != optionslist.end(); it++) {
 		list = g_list_append(list, strdup((char *) (*it).c_str()));
 	}
+	*/
 }
 
 

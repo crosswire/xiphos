@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * sword_defs.h - backend defs
+ * sword_main.hh - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,25 +19,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _SWORD_DEFS_H_
-#define _SWORD_DEFS_H_
+#ifndef _SWORD_MAIN_HH_
+#define _SWORD_MAIN_HH_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 	
 #include <swmgr.h>
 #include <treekeyidx.h>
-	
-
+#include "main/lists.h"
 
 using namespace sword;
-typedef struct _sword SWORD;
-struct  _sword {	
+	
+
+class SwordMain {
 	SWMgr *main_mgr;
 	SWMgr *search_mgr;
 	SWMgr *module_mgr;
@@ -49,6 +42,7 @@ struct  _sword {
 	SWMgr *percom_mgr;
 	SWMgr *results;
 	SWMgr *display_mgr;
+public:
 	
 	SWModule *text_mod;
 	SWModule *comm_mod;
@@ -58,13 +52,18 @@ struct  _sword {
 	
 	TreeKeyIdx *treeKey;	
 	const char *version;	
-	SWDisplay *entryDisplay;	
+	SWDisplay *commDisplay;	
 	SWDisplay *dictDisplay;
-};	
-extern SWORD sw;
 
-#ifdef __cplusplus
-}
-#endif
+	SwordMain();
+	~SwordMain();
+	void init_SWORD();
+	void init_lists(MOD_LISTS * mods);
+	GList *fill_Bible_books(int testament);
+	void get_module_options(GList * options);
+	
+	SWMgr *get_display_mgr(void) {return(display_mgr);};
+};
+extern SwordMain *backend;
 
-#endif /* _SWORD_DEFS_H_ */
+#endif /* _SWORD_MAIN_HH_ */
