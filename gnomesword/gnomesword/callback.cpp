@@ -77,12 +77,14 @@ extern SWModule *curMod; //-- module for main text window (GnomeSword.cpp)
 extern SWModule *comp1Mod; //-- module for first interlinear window (GnomeSword.cpp)
 extern SWModule *comp2Mod; //-- module for second interlinear window (GnomeSword.cpp)	
 extern SWModule *comp3Mod;	 //-- module for third interlinear window (GnomeSword.cpp)
+extern SWModule *curcomMod;
 extern gint ibookmarks;    //-- number of bookmark menu items
 extern NoteEditor *noteeditor;
 extern gboolean autoscroll;
 guint		num1,
 				num2,
 				num3;
+bool buttonpressed=false;
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -871,6 +873,7 @@ on_dictionarySearchText_changed        (GtkEditable     *editable,
 
 	mytext = gtk_entry_get_text(GTK_ENTRY(editable));
 	dictSearchTextChangedSWORD(mytext);
+	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -886,11 +889,7 @@ on_list1_select_row                    (GtkCList        *clist,
 
 	gtk_clist_get_text(GTK_CLIST(lookup_widget(GTK_WIDGET(clist),"list1")), row, column, &text);
 	buf =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")));
-	if((strcmp(buf,text)))
-	{		
-		gtk_entry_set_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")), text);
-	}
-	//else gtk_entry_set_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")), text);
+	gtk_entry_set_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")), text);	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2514,6 +2513,7 @@ on_lookup_word1_activate               (GtkMenuItem     *menuitem,
   {   	
   	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
   	gtk_entry_set_text(GTK_ENTRY(entry),buf);
+  	dictSearchTextChangedSWORD(buf);
   }
 }
 
@@ -2522,7 +2522,11 @@ void
 on_btnBack_clicked                     (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+    if(curcomMod)
+    {
+        (*curcomMod)--;
+        curcomMod->Display();
+    }
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2530,7 +2534,11 @@ void
 on_btnFoward_clicked                   (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+    if(curcomMod)
+    {
+        (*curcomMod)++;
+        curcomMod->Display();
+    }
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2547,6 +2555,7 @@ on_lookup_selection_activate           (GtkMenuItem     *menuitem,
   if(GTK_EDITABLE(text)->has_selection)
   {   	
   	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+  	dictSearchTextChangedSWORD(buf);
   	gtk_entry_set_text(GTK_ENTRY(entry),buf);
   }
 }
@@ -2564,8 +2573,9 @@ on_lookup_selection2_activate          (GtkMenuItem     *menuitem,
   text  = lookup_widget(MainFrm, "textCommentaries");
   if(GTK_EDITABLE(text)->has_selection)
   {   	
-  	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	
+  	buf = gtk_editable_get_chars(GTK_EDITABLE(text), GTK_EDITABLE(text)->selection_start_pos, GTK_EDITABLE(text)->selection_end_pos);	  	
   	gtk_entry_set_text(GTK_ENTRY(entry),buf);
+  	dictSearchTextChangedSWORD(buf);
   }
 }
 
@@ -2603,9 +2613,9 @@ on_auto_scroll1_activate               (GtkMenuItem     *menuitem,
 	toolbar = lookup_widget(MainFrm,"handlebox17");
 	
 	autoscroll = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	/*if(autoscroll) gtk_widget_hide(toolbar);
+	if(autoscroll) gtk_widget_hide(toolbar);
 	else gtk_widget_show(toolbar);
-	*/
+	
 }
 
 
@@ -2622,5 +2632,34 @@ on_goto_reference3_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 
+}
+
+
+gboolean
+on_dictionarySearchText_key_press_event
+                                        (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+     gchar *mytext;
+
+     mytext = gtk_entry_get_text(GTK_ENTRY(widget));
+
+    if(event->keyval == 65293 || event->keyval == 65421) //-- return key
+    {   		
+        dictSearchTextChangedSWORD(mytext);
+        return true;	
+    }
+  return FALSE;
+}
+
+
+gboolean
+on_list1_button_press_event            (GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data)
+{
+
+  return FALSE;
 }
 

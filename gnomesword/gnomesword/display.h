@@ -24,15 +24,17 @@
 
 /********************************************************************\
 **********************************************************************
-**  this code was taken from the Sword Cheatah program							**
-**  and modfied to handle some of the BTF stuff. Also added	 				**
-**  suport for the x symbol font when using greek modules.     			**
-**   																																**                                                                              	 **
+**  this code was taken from the Sword Cheatah program				**
+**  and modfied to handle some of the HTML stuff. Also added		**
+**  suport for the x symbol font when using greek modules.  		**
+**  																**
 **********************************************************************
 \********************************************************************/
 
 #include <gnome.h>
 #include <swmodule.h>
+
+
 
 class GTKEntryDisp : public SWDisplay 
 {
@@ -42,6 +44,8 @@ public:
 	static GdkColor colourGreen;
 	static GdkColor colourBlue;
 	static GdkColor colourRed;
+	static GdkColor colourCur;
+	
 	static void __initialize()
 	{
 			GdkColormap *cmap;
@@ -56,6 +60,9 @@ public:
 			colourRed.red = 0xffff;
 			colourRed.green = 0;
 			colourRed.blue = 0;
+			colourCur.red = 0x0000;
+			colourCur.green = 0xbbbb;
+			colourCur.blue = 0x0000;
 			if (!gdk_color_alloc(cmap, &colourGreen))
 			{
 			  g_error("couldn't allocate colour");
@@ -68,9 +75,14 @@ public:
 			{
 			  g_error("couldn't allocate colour");
 			}
+			if (!gdk_color_alloc(cmap, &colourCur))
+			{
+			  g_error("couldn't allocate colour");
+			}
 	}
 	GTKEntryDisp(GtkWidget *gtkText) { this->gtkText = gtkText; }
 	virtual char Display(SWModule &imodule);
+	gchar *gettags(gchar *text, gint pos);
 };
 
 //----------------------------------------------------------------------------------------------
@@ -92,6 +104,7 @@ class GTKChapDisp : public GTKEntryDisp
 //----------------------------------------------------------------------------------------------
 class HTMLChapDisp : public GTKEntryDisp
 {
+    //gchar *GTKEntryDisp::gettags(gchar *text, gint pos);
   public:
 	HTMLChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
 	virtual char Display(SWModule &imodule);
@@ -110,14 +123,6 @@ class HTMLentryDisp : public GTKEntryDisp
 {
   public:
 	HTMLentryDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
-	virtual char Display(SWModule &imodule);
-};
-
-//----------------------------------------------------------------------------------------------
-class GBFentryDisp : public GTKEntryDisp
-{
-  public:
-	GBFentryDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
 	virtual char Display(SWModule &imodule);
 };
 

@@ -1348,6 +1348,18 @@ on_lookup_selection4_activate          (GtkMenuItem     *menuitem,
 void
 on_goto_reference3_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
+                                        
+gboolean
+on_dictionarySearchText_key_press_event
+                                        (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data);     
+                                        
+gboolean
+on_list1_button_press_event            (GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data);
+                                   
 
 #ifdef __cplusplus
 }
