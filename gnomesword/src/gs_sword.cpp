@@ -1515,7 +1515,7 @@ getSwordVerionSWORD(void)
 {
 	gfloat retval;
 	
-	retval = mainMgr->Version();
+	retval = 0.0; //mainMgr->Version();
 	return retval;
 }
 
