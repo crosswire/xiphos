@@ -250,6 +250,13 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 	switch (mod_type) {
 	case TEXT_TYPE:
 		if (settings.havebible) {
+			if(settings.browsing)
+				gui_update_tab_struct(module_name, 
+					      NULL, 
+					      NULL, 
+					      NULL, 
+					      NULL, 
+					      NULL);
 			page_num =
 			    get_module_number(module_name, TEXT_MODS);
 			val_key = gui_update_nav_controls(key);
@@ -259,6 +266,13 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		break;
 	case COMMENTARY_TYPE:
 		if (settings.havecomm) {
+			if(settings.browsing)
+				gui_update_tab_struct(NULL, 
+					      module_name, 
+					      NULL, 
+					      NULL, 
+					      NULL, 
+					      NULL);
 			page_num =
 			    get_module_number(module_name, COMM_MODS);
 			gui_set_commentary_page_and_key(page_num, key);
@@ -266,6 +280,13 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		break;
 	case DICTIONARY_TYPE:
 		if (settings.havedict) {
+			if(settings.browsing) 
+				gui_update_tab_struct(NULL, 
+					      NULL, 
+					      module_name, 
+					      NULL, 
+					      key, 
+					      NULL);
 			page_num =
 			    get_module_number(module_name, DICT_MODS);
 			if(page_num == -1)
@@ -275,6 +296,13 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		break;
 	case BOOK_TYPE:
 		if (settings.havebook) {
+			if(settings.browsing)
+				gui_update_tab_struct(NULL, 
+					      NULL,  
+					      NULL, 
+					      module_name,
+					      NULL,  
+					      key?key:NULL);
 			page_num =
 			    get_module_number(module_name, BOOK_MODS);
 			if (key)
@@ -608,9 +636,10 @@ void create_mainwindow(void)
 	 * the passages are not actually open but are switched
 	 * between similar to bookmarks
 	 */
-	hboxtb = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hboxtb);
-	gtk_box_pack_start(GTK_BOX(vboxMain), hboxtb, FALSE, FALSE, 0);
+	widgets.hboxtb = gtk_hbox_new(FALSE, 0);
+	if(settings.browsing)
+		gtk_widget_show(widgets.hboxtb);
+	gtk_box_pack_start(GTK_BOX(vboxMain), widgets.hboxtb, FALSE, FALSE, 0);
 	
 	widgets.button_new_tab = gtk_button_new();
 	//don't show button here in case !settings.browsing
@@ -622,14 +651,12 @@ void create_mainwindow(void)
 	gtk_widget_show(tab_button_icon);
 	gtk_container_add(GTK_CONTAINER(widgets.button_new_tab), tab_button_icon);
 	gtk_button_set_relief(GTK_BUTTON(widgets.button_new_tab), GTK_RELIEF_NONE);
-	gtk_box_pack_start(GTK_BOX(hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(widgets.hboxtb), widgets.button_new_tab, FALSE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, widgets.button_new_tab, _("Open a new tab"), 
 				NULL);
 	
-	widgets.notebook_main = gtk_notebook_new();
-	if(settings.browsing)
-		gtk_widget_show(widgets.notebook_main);
-	gtk_box_pack_start(GTK_BOX(hboxtb),
+	widgets.notebook_main = gtk_notebook_new();gtk_widget_show(widgets.notebook_main);
+	gtk_box_pack_start(GTK_BOX(widgets.hboxtb),
 			   widgets.notebook_main, TRUE, TRUE, 0);
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK(widgets.notebook_main),
