@@ -606,76 +606,49 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
         gtk_window_set_default_size (GTK_WINDOW (spc_gui.window), 300, 200);
 
 	spc_gui.vbox = gtk_vbox_new(FALSE, 0);
-	/*  gtk_widget_ref (spc_gui.vbox);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_vbox", spc_gui.vbox,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.vbox);
 	gtk_container_add(GTK_CONTAINER(spc_gui.window), spc_gui.vbox);
 	
 	spc_gui.hbuttonbox_top = gtk_hbutton_box_new();
-	/* gtk_widget_ref (spc_gui.hbuttonbox_top);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "sp_hbuttonbox_top", spc_gui.hbuttonbox_top,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.hbuttonbox_top);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.hbuttonbox_top,
 			   TRUE, TRUE, 0);
 
 	spc_gui.start_button = gtk_button_new_with_label(_("Start"));
-	/* gtk_widget_ref (spc_gui . start_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_start_button", spc_gui.start_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.start_button);
 	gtk_container_add(GTK_CONTAINER(spc_gui.hbuttonbox_top),
 			  spc_gui.start_button);
 	GTK_WIDGET_SET_FLAGS(spc_gui.start_button, GTK_CAN_DEFAULT);
 
 	spc_gui.close_button = gtk_button_new_with_label(_("Close"));
-	/* gtk_widget_ref (spc_gui.close_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_close_button", spc_gui.close_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.close_button);
 	gtk_container_add(GTK_CONTAINER(spc_gui.hbuttonbox_top),
 			  spc_gui.close_button);
 	GTK_WIDGET_SET_FLAGS(spc_gui.close_button, GTK_CAN_DEFAULT);
 
 	spc_gui.options_button = gtk_button_new_with_label(_("Options"));
-	/* gtk_widget_ref (spc_gui.options_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui. window), "spc_options_button", spc_gui.options_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.options_button);
 	gtk_container_add(GTK_CONTAINER(spc_gui.hbuttonbox_top),
 			  spc_gui.options_button);
 	GTK_WIDGET_SET_FLAGS(spc_gui.options_button, GTK_CAN_DEFAULT);
 
 	spc_gui.word_frame = gtk_frame_new(_("Word"));
-	/* gtk_widget_ref (spc_gui.word_frame);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "sp_word_frame", spc_gui.word_frame,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.word_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.word_frame, TRUE,
 			   TRUE, 0);
 
 	spc_gui.word_entry = gtk_entry_new();
-	/* gtk_widget_ref (spc_gui.word_entry);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_word_entry", spc_gui.word_entry,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_entry_set_editable(GTK_ENTRY(spc_gui.word_entry), 0);
 	gtk_widget_show(spc_gui.word_entry);
 	gtk_container_add(GTK_CONTAINER(spc_gui.word_frame),
 			  spc_gui.word_entry);
 
 	spc_gui.replace_frame = gtk_frame_new(_("Replace"));
-	/* gtk_widget_ref (spc_gui.replace_frame);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_replace_frame", spc_gui.replace_frame,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.replace_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.replace_frame,
 			   FALSE, FALSE, 0);
 
 	spc_gui.replace_entry = gtk_entry_new();
-	/* gtk_widget_ref (spc_gui.replace_entry);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "replace_combo", spc_gui.replace_entry,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.replace_entry);
 	gtk_container_add(GTK_CONTAINER(spc_gui.replace_frame),
 			  spc_gui.replace_entry);
@@ -688,10 +661,6 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_usize(spc_gui.near_misses_scrolled_window, 20, 100);
-	/* gtk_widget_ref (spc_gui.near_misses_scrolled_window);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.near_misses_scrolled_window),
-	   "spc_near_misses_scrolled_window", spc_gui.near_misses_scrolled_window,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.near_misses_scrolled_window);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox),
 			   spc_gui.near_misses_scrolled_window, TRUE, TRUE,
@@ -700,59 +669,38 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	spc_gui.near_misses_clist = gtk_clist_new(1);
 	gtk_clist_set_selection_mode(GTK_CLIST(spc_gui.near_misses_clist),
 				     GTK_SELECTION_SINGLE);
-	/* gtk_widget_ref (spc_gui.near_misses_clist);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.near_misses_clist), "near_misses_clist", spc_gui.near_misses_clist,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.near_misses_clist);
 	gtk_container_add(GTK_CONTAINER
 			  (spc_gui.near_misses_scrolled_window),
 			  spc_gui.near_misses_clist);
 
 	spc_gui.progress_frame = gtk_frame_new(_("Progress"));
-	/* gtk_widget_ref (spc_gui.progress_frame);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_progress_frame", spc_gui.progress_frame,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.progress_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.progress_frame,
 			   TRUE, TRUE, 0);
 
 	spc_gui.progress_bar = gtk_progress_bar_new();
-	/* gtk_widget_ref (spc_gui.progress_bar);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_progress_bar", spc_gui.progress_bar,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	gtk_widget_show(spc_gui.progress_bar);
 	gtk_container_add(GTK_CONTAINER(spc_gui.progress_frame),
 			  spc_gui.progress_bar);
 
 	spc_gui.accept_button =
 	    gtk_button_new_with_label(_("Accept word\nin this section"));
-	/* gtk_widget_ref (spc_gui.accept_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_accept_button", spc_gui.accept_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	GTK_WIDGET_SET_FLAGS(spc_gui.accept_button, GTK_CAN_DEFAULT);
 	gtk_widget_set_sensitive(spc_gui.accept_button, 0);
 
 	spc_gui.insert_button =
 	    gtk_button_new_with_label(_("Insert in Personal\nDictionary"));
-	/* gtk_widget_ref (spc_gui.insert_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_insert_button", spc_gui.insert_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	GTK_WIDGET_SET_FLAGS(spc_gui.insert_button, GTK_CAN_DEFAULT);
 	gtk_widget_set_sensitive(spc_gui.insert_button, 0);
 
 	spc_gui.ignore_button =
 	    gtk_button_new_with_label(_("Ignore\nWord"));
-	/* gtk_widget_ref (spc_gui.ignore_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_ignore_button", spc_gui.ignore_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	GTK_WIDGET_SET_FLAGS(spc_gui.ignore_button, GTK_CAN_DEFAULT);
 	gtk_widget_set_sensitive(spc_gui.ignore_button, 0);
 
 	spc_gui.replace_button =
 	    gtk_button_new_with_label(_("Replace\nWord"));
-	/* gtk_widget_ref (spc_gui.replace_button);
-	   gtk_object_set_data_full (GTK_OBJECT (spc_gui.window), "spc_replace_button", spc_gui.replace_button,
-	   (GtkDestroyNotify) gtk_widget_unref); */
 	GTK_WIDGET_SET_FLAGS(spc_gui.replace_button, GTK_CAN_DEFAULT);
 	gtk_widget_set_sensitive(spc_gui.replace_button, 0);
 

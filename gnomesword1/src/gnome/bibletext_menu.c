@@ -391,7 +391,7 @@ static void global_option_red_words(GtkMenuItem * menuitem,
 				    TEXT_DATA * t)
 {
 	t->tgs->words_in_red = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	save_module_options(t->mod_name, "Red letter words", 
+	save_module_options(t->mod_name, "Words of Christ in Red", 
 				    t->tgs->words_in_red);
 	display_text(t);
 }
@@ -748,11 +748,11 @@ static void add_global_option_items(TEXT_DATA * t)
 	if (check_for_global_option(t->mod_name, "GBFRedLetterWords")) {
 		t->tgs->words_in_red =
 		    load_module_options(t->mod_name,
-					"Red letter words");
+					"Words of Christ in Red");
 
 		item =
 		    gtk_check_menu_item_new_with_label(
-					_("Red letter words"));
+					_("Words of Christ in Red"));
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
 				  item);
@@ -805,7 +805,8 @@ static void add_global_option_items(TEXT_DATA * t)
 	}
 
 	if ((check_for_global_option(t->mod_name, "GBFFootnotes")) ||
-	    (check_for_global_option(t->mod_name, "ThMLFootnotes"))) {
+	    (check_for_global_option(t->mod_name, "ThMLFootnotes")) ||
+	    (check_for_global_option(t->mod_name, "OSISFootnotes"))) {
 		t->tgs->footnotes =
 		    load_module_options(t->mod_name, "Footnotes");
 
@@ -910,7 +911,8 @@ static void add_global_option_items(TEXT_DATA * t)
 				   (global_option_hebrewcant), t);
 	}
 
-	if (check_for_global_option(t->mod_name, "ThMLHeadings")) {
+	if ((check_for_global_option(t->mod_name, "ThMLHeadings")) ||
+		(check_for_global_option(t->mod_name, "OSISHeadings")) ) {
 		t->tgs->headings =
 		    load_module_options(t->mod_name, "Headings");
 
@@ -1042,7 +1044,7 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 
 static void on_sync_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	gui_sync_bibletext_dialog(t);
+	gui_sync_bibletext_dialog_with_main(t);
 }
 
 
@@ -1055,6 +1057,37 @@ on_menu_deactivate(GtkMenuShell * menushell, TEXT_DATA * t)
 	//if(t->is_rtol)
 		//gtk_widget_destroy(GTK_WIDGET(menushell));
 #endif
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   sync_toggled
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void sync_toggled(GtkToggleButton * button, COMM_DATA * vc)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void sync_toggled(GtkCheckMenuItem * menuitem, TEXT_DATA * t)
+{
+	if(menuitem->active) {
+		gui_sync_bibletext_dialog_with_main(t);
+		t->sync = TRUE;
+		gtk_widget_hide(t->toolbar_nav);
+	}
+	else {		
+		t->sync = FALSE;
+		gtk_widget_show(t->toolbar_nav);
+	}
 }
 
 /******************************************************************************
@@ -1083,6 +1116,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	GtkWidget *file_menu;
 	GtkWidget *print;
 	GtkWidget *sync_with_main;
+	GtkWidget *keep_in_sync_with_main;
 	GtkWidget *close;
 	GtkWidget *show;
 	GtkWidget *show_menu;
@@ -1139,7 +1173,18 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_sync_activate), t);
+		keep_in_sync_with_main =
+		    gtk_check_menu_item_new_with_label(_
+						 ("Keep in Sync"));
+		gtk_widget_show(keep_in_sync_with_main);
+		gtk_container_add(GTK_CONTAINER(file_menu),
+				  keep_in_sync_with_main);
 
+		gtk_signal_connect(GTK_OBJECT(keep_in_sync_with_main),
+				   "toggled",
+				   GTK_SIGNAL_FUNC
+				   (sync_toggled), t);
+		
 		separator = gtk_menu_item_new();
 		gtk_widget_show(separator);
 		gtk_container_add(GTK_CONTAINER(file_menu), separator);
@@ -1346,7 +1391,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				  t->showtabs);
 		gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
 				   GTK_SIGNAL_FUNC
-				   (on_text_showtabs_activate), NULL);
+				   (on_text_showtabs_activate), t);
 	}
 
   	gtk_signal_connect (GTK_OBJECT(pm_text), "deactivate",

@@ -393,7 +393,7 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 /*
 static void on_sync_activate(GtkMenuItem * menuitem, GBS_DATA * dlg)
 {
-	//gui_sync_bibletext_dialog();
+	//gui_sync_bibletext_dialog_with_main();
 }
 */
 

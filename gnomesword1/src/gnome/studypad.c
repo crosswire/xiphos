@@ -652,11 +652,6 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 
 
 	label = gtk_label_new(_("Study Pad"));
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT
-				 (widgets.app),
-				 "label", label, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK
 					(notebook),

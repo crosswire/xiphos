@@ -1104,26 +1104,15 @@ static void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
 	GtkAccelGroup *view_module_menu_accels;	
 	
 	view_module = gtk_menu_item_new_with_label (label);
-  	gtk_widget_ref (view_module);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module", view_module,
-                            (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (view_module);
   	gtk_container_add (GTK_CONTAINER (pmInt), view_module);
 
   	view_module_menu = gtk_menu_new ();
-  	gtk_widget_ref (view_module_menu);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module_menu", view_module_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module), view_module_menu);
   	view_module_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module_menu));
 	tmp = mods;
 	while (tmp != NULL) {
 		item = gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_ref(item);
-		gtk_object_set_data_full(GTK_OBJECT(pmInt), "item",
-					 item,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(item);		
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
 				   GTK_SIGNAL_FUNC(mycallback),

@@ -19,7 +19,7 @@ gnomesworddoc_DATA = \
 ${PACKAGE}.desktop: ${PACKAGE}.desktop.in
 	sed -e 's:@pixmapdir@:$(datadir)/pixmaps/${PACKAGE}:g' ${PACKAGE}.desktop.in > ${PACKAGE}.desktop
 	
-gnomesworddocdir = $(prefix)/doc/gnomesword-1.0
+gnomesworddocdir = $(prefix)/doc/${PACKAGE}
 
 install-data-local:
 	@$(NORMAL_INSTALL)
@@ -38,7 +38,7 @@ install-data-local:
 uninstall-local:
 	@$(NORMAL_UNINSTALL)
 	rm -f -r $(datadir)/pixmaps/${PACKAGE}
-	rm -f $(datadir)/gnome/apps/Applications/gnomesword-1.0.desktop
+	rm -f $(datadir)/gnome/apps/Applications/${PACKAGE}.desktop
 	rm -f -r $(datadir)/gnome/help/${PACKAGE}
 
 dist-hook:

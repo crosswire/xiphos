@@ -224,10 +224,6 @@ static void on_dlgInterlinear_destroy(GtkObject * object,
 	gtk_widget_show(menu_label);
 
 	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox",
-				 vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
 	gtk_notebook_insert_page_menu(GTK_NOTEBOOK
 				      (widgets.workbook_lower), vbox,

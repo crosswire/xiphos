@@ -163,13 +163,13 @@ AC_SUBST(GNOME_PRINT_CFLAGS)
 have_gnomeprint="yes"
 
   
-EXTRA_GNOME_LIBS="`gnome-config --libs ` $THREADS_LIBS `unicode-config --libs`"
-EXTRA_GNOME_CFLAGS="`gnome-config --cflags ` $THREADS_CFLAGS `unicode-config --cflags`"
+dnl EXTRA_GNOME_LIBS="`gnome-config --libs ` $THREADS_LIBS `unicode-config --libs`"
+dnl EXTRA_GNOME_CFLAGS="`gnome-config --cflags ` $THREADS_CFLAGS `unicode-config --cflags`"
 
-AC_SUBST(EXTRA_GNOME_LIBS)
-AC_SUBST(EXTRA_GNOME_CFLAGS)
+dnl AC_SUBST(EXTRA_GNOME_LIBS)
+dnl AC_SUBST(EXTRA_GNOME_CFLAGS)
 
-LIBS="$LIBS -L/usr/local/lib -L/usr/lib `xml-config --libs`"
+dnl LIBS="$LIBS -L/usr/local/lib -L/usr/lib `xml-config --libs`"
 
 dnl Only use -Wall if we have gcc
 if test "x$GCC" = "xyes"; then
@@ -197,7 +197,7 @@ echo
 echo "Summary of GnomeSword1 configuration:"
 echo
 if test "x$gtkembedmoz" = xyes; then
-	echo "gtkembedmoz:                enabled"
+	echo "gtkembedmoz:                 enabled"
 else
 	echo "gtkembedmoz:                disabled"
 fi
@@ -209,4 +209,5 @@ else
 fi
 
 echo "install directory:              ${prefix}/bin"
+echo "sword lib directory:          $ac_cv_sword_libdir"
 echo "swordlibs:                      $LIB_SWORD"

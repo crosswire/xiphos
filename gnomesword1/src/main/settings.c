@@ -295,6 +295,7 @@ int init_bookmarks(int new_bookmarks, int have_old)
 {
 	GNode *bookmark_tree = NULL;
 	gchar *file_buf = NULL;
+	gchar *removed = NULL;
 	gint load_old = FALSE;
 
 	settings.load_xml_bookmarks = FALSE;
@@ -317,7 +318,22 @@ int init_bookmarks(int new_bookmarks, int have_old)
 			return 0;
 		}
 	}
-
+					
+	/* set removed dir to settings.swbmDir + /removed */
+	removed = g_new(char, strlen(settings.swbmDir) +
+				 strlen("/removed") + 2);
+	sprintf(removed, "%s/%s", settings.swbmDir,
+		"removed");
+	if (access(removed, F_OK) == -1) {
+		if ((mkdir(removed, S_IRWXU)) == 0) {
+			/* this directory is used to save removed
+			   bookmark folders to be restored later */
+		} else {
+			g_warning("can't create removed dir");
+			//return 0;
+		}
+	}	
+	
 	if (new_bookmarks) {
 		gui_new_xml_bookmark_file();
 	} else if (load_old) {
@@ -368,6 +384,8 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	}
 	if (file_buf)
 		g_free(file_buf);
+	if (removed)
+		g_free(removed);
 	return 1;
 }
 

@@ -56,7 +56,7 @@ COMM_DATA *cur_c;
  * global to this file only 
  */
 static GList *comm_list;
-static gboolean comm_display_change;
+static gboolean comm_display_change = TRUE;
 
 
 static void on_notebook_comm_switch_page(GtkNotebook * notebook,
@@ -240,8 +240,7 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 		strcpy(settings.comm_key, c->key);
 
 	if (comm_display_change) {
-		if ((c->key[0] == '\0')
-		    && (settings.currentverse != NULL)) {
+		if ((c->sync) && (settings.currentverse != NULL)) {
 			display(c, settings.currentverse);
 			strcpy(settings.comm_key,
 			       settings.currentverse);
@@ -349,10 +348,6 @@ static void create_commentary_pane(COMM_DATA * c)
 
 
 	c->frame = gtk_frame_new(NULL);
-	gtk_widget_ref(c->frame);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "c->frame",
-				 c->frame, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(c->frame);
 	gtk_container_add(GTK_CONTAINER(c->vbox), c->frame);
 
@@ -447,9 +442,12 @@ void gui_display_commentary(gchar * key)
 {
 	if (!cur_c)
 		return;
-	strcpy(settings.comm_key, key);
-	strcpy(cur_c->key, key);
-	display(cur_c, key);
+	
+	if (cur_c->sync) {
+		strcpy(settings.comm_key, key);
+		strcpy(cur_c->key, key);
+		display(cur_c, key);
+	}
 }
 
 
@@ -528,19 +526,11 @@ static void add_vbox_to_notebook(COMM_DATA * c)
 	GtkWidget *label;
 
 	c->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(c->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->vbox", c->vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(c->vbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm),
 			  c->vbox);
 
 	label = gtk_label_new(c->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
-				 label, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm),
 				   gtk_notebook_get_nth_page
@@ -597,6 +587,7 @@ void gui_setup_commentary(GList * mods)
 		c->search_string = NULL;
 		c->is_percomm = is_personal_comment(c->mod_name);
 		c->is_dialog = FALSE;
+		c->sync = TRUE;
 		c->key[0] = '\0';
 		c->book_heading = FALSE;
 		c->chapter_heading = FALSE;
