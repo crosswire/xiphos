@@ -54,7 +54,7 @@ extern GdkBitmap *mask3;
 static GList *dialog_list;
 static GBS_DATA *cur_dlg;
 static gboolean dialog_freed;
-
+static GtkCTreeNode *rootnode;
 
 
 /******************************************************************************
@@ -74,9 +74,7 @@ static gboolean dialog_freed;
  */
 
 static void add_book_to_ctree(GtkWidget * ctree, gchar * mod_name)
-{
-
-	GtkCTreeNode *rootnode;
+{	
 	gchar *buf[3];
 
 	buf[0] = mod_name;
@@ -654,6 +652,7 @@ void gui_open_gbs_dialog(gchar * mod_name)
 	cur_dlg = dlg;
 	dialog_list = g_list_append(dialog_list, (GBS_DATA *) dlg);
 	add_book_to_ctree(dlg->ctree, dlg->mod_name);
+	gtk_ctree_select(GTK_CTREE(dlg->ctree), rootnode);
 }
 
 
