@@ -982,7 +982,7 @@ static void on_btnSBSaveVL_clicked(GtkButton * button, gpointer user_data)
 
 
 static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
-				      gpointer user_data)
+				      gpointer user_data) 
 {
 	SETTINGS *s;
 
