@@ -60,7 +60,7 @@ typedef enum {
 	SHOW_SPLASH_SCREEN,
 	SHOW_BIBLE_PANE,
 	SHOW_COMMENTARY_PANE,
-	SHOW_LOWER_WORKBOOK,
+	SHOW_DICTIONARY_PANE,
 	SHOW_IN_VIEWER,
 	SHOW_IN_DICTIONARY,
 	SHOW_DEVOTION,
@@ -145,7 +145,8 @@ struct _preferences_check_buttons {
 
 	GtkWidget *show_bible_pane;
 	GtkWidget *show_commentary_pane;
-	GtkWidget *show_lower_workbook;
+	GtkWidget *show_dictionary_pane;
+	//GtkWidget *show_lower_workbook;
 
 	//GtkWidget *show_favorites;
 	//GtkWidget *show_text_group;
@@ -682,7 +683,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		    settings.showcomms;
 		gui_set_bible_comm_layout();
 		break;
-	case SHOW_LOWER_WORKBOOK:
+	case SHOW_DICTIONARY_PANE:
 		if (togglebutton->active)
 			xml_set_value("GnomeSword", "misc", "showdicts",
 				      "1");
@@ -695,7 +696,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		    settings.showdicts;
 		gui_set_bible_comm_layout();
 		break;
-	case SHOW_IN_VIEWER:
+/*	case SHOW_IN_VIEWER:
 		if (GTK_TOGGLE_BUTTON(check_button.show_in_viewer)->
 		    active)
 			xml_set_value("GnomeSword", "lexicons",
@@ -705,7 +706,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 				      "inviewer", "0");
 		settings.inViewer =
 		    atoi(xml_get_value("lexicons", "inviewer"));
-		break;
+		break;*/
 	case SHOW_IN_DICTIONARY:
 		if (GTK_TOGGLE_BUTTON(check_button.show_in_dictionary)->
 		    active)
@@ -1749,23 +1750,23 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_tooltips_set_tip(tooltips,
 			     check_button.show_commentary_pane,
 			     _
-			     ("Commentaries, Personal Comments and StudyPad"),
+			     ("Display Commentary window"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.
 				      show_commentary_pane), TRUE);
 
-	check_button.show_lower_workbook =
-	    gtk_check_button_new_with_label(_("Lower workbook"));
-	gtk_widget_show(check_button.show_lower_workbook);
+	check_button.show_dictionary_pane =
+	    gtk_check_button_new_with_label(_("Dictionary/Lexicon"));
+	gtk_widget_show(check_button.show_dictionary_pane);
 	gtk_box_pack_start(GTK_BOX(vbox86),
-			   check_button.show_lower_workbook, FALSE,
+			   check_button.show_dictionary_pane, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, check_button.show_lower_workbook,
-			     _("Dictionary/Lexicon and generic books"),
+	gtk_tooltips_set_tip(tooltips, check_button.show_dictionary_pane,
+			     _("Dictionary/Lexicon"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_lower_workbook),
+				     (check_button.show_dictionary_pane),
 				     TRUE);
 
 /* end tabs and panes page */
@@ -1867,7 +1868,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	gtk_frame_set_label_widget(GTK_FRAME(frame41), label805);
 
-	gtk_widget_show(frame41);
+//	gtk_widget_show(frame41);
 	gtk_box_pack_start(GTK_BOX(vbox28), frame41, TRUE, FALSE, 6);
 
 	vbox53 = gtk_vbox_new(FALSE, 0);
@@ -1879,7 +1880,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.show_in_viewer =
 	    gtk_check_button_new_with_label(_("In Sidebar viewer"));
-	gtk_widget_show(check_button.show_in_viewer);
+//	gtk_widget_show(check_button.show_in_viewer);
 	gtk_box_pack_start(GTK_BOX(vbox53), check_button.show_in_viewer,
 			   FALSE, FALSE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -1889,7 +1890,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	check_button.show_in_dictionary =
 	    gtk_check_button_new_with_label(_
 					    ("In Dictionary/Lexicon window"));
-	gtk_widget_show(check_button.show_in_dictionary);
+//	gtk_widget_show(check_button.show_in_dictionary);
 	gtk_box_pack_start(GTK_BOX(vbox53),
 			   check_button.show_in_dictionary, FALSE,
 			   FALSE, 0);
@@ -2287,21 +2288,21 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
 	label = gtk_label_new(_("Hebrew Lexicon Viewer"));
-	gtk_widget_show(label);
+//	gtk_widget_show(label);
 	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
 	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
 	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	comboHebViewer = gtk_combo_new();
-	gtk_widget_show(comboHebViewer);
+//	gtk_widget_show(comboHebViewer);
 	gtk_box_pack_start(GTK_BOX(hbox), comboHebViewer, FALSE, TRUE,
 			   0);
 	gtk_widget_set_size_request(comboHebViewer, 209, -1);
 
 	entry.hebrew_lex_viewer_module =
 	    GTK_COMBO(comboHebViewer)->entry;
-	gtk_widget_show(entry.hebrew_lex_viewer_module);
+//	gtk_widget_show(entry.hebrew_lex_viewer_module);
 	gtk_tooltips_set_tip(tooltips, entry.hebrew_lex_viewer_module,
 			     _
 			     ("Which Hebrew Lexicon to display in viewer when a link or word is clicked"),
@@ -2335,21 +2336,21 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
 	label = gtk_label_new(_("Greek Lexicon Viewer"));
-	gtk_widget_show(label);
+//	gtk_widget_show(label);
 	gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
 	gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
 	gtk_misc_set_padding(GTK_MISC(label), 12, 0);
 
 	comboGreekViewer = gtk_combo_new();
-	gtk_widget_show(comboGreekViewer);
+	//gtk_widget_show(comboGreekViewer);
 	gtk_box_pack_start(GTK_BOX(hbox), comboGreekViewer, FALSE, TRUE,
 			   0);
 	gtk_widget_set_size_request(comboGreekViewer, 209, -1);
 
 	entry.greek_lex_viewer_module =
 	    GTK_COMBO(comboGreekViewer)->entry;
-	gtk_widget_show(entry.greek_lex_viewer_module);
+	//gtk_widget_show(entry.greek_lex_viewer_module);
 	gtk_tooltips_set_tip(tooltips, entry.greek_lex_viewer_module,
 			     _
 			     ("Which Greek Lexicon to display in viewer when a link or word is clicked"),
@@ -2405,12 +2406,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 		gtk_combo_set_popdown_strings(GTK_COMBO
 					      (comboDefaultDict),
 					      dictlist);
-		gtk_combo_set_popdown_strings(GTK_COMBO
+		/*gtk_combo_set_popdown_strings(GTK_COMBO
 					      (comboGreekViewer),
 					      dictlist);
-		gtk_combo_set_popdown_strings(GTK_COMBO(combo26),
-					      dictlist);
 		gtk_combo_set_popdown_strings(GTK_COMBO(comboHebViewer),
+					      dictlist);*/
+		gtk_combo_set_popdown_strings(GTK_COMBO(combo26),
 					      dictlist);
 		gtk_combo_set_popdown_strings(GTK_COMBO(combo27),
 					      dictlist);
@@ -2461,7 +2462,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				      show_commentary_pane),
 				     settings.showcomms);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.show_lower_workbook),
+				     (check_button.show_dictionary_pane),
 				     settings.showdicts);
 
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -2661,10 +2662,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			 "toggled",
 			 G_CALLBACK(on_button_toggled),
 			 GINT_TO_POINTER(SHOW_COMMENTARY_PANE));
-	g_signal_connect(GTK_OBJECT(check_button.show_lower_workbook),
+	g_signal_connect(GTK_OBJECT(check_button.show_dictionary_pane),
 			 "toggled",
 			 G_CALLBACK(on_button_toggled),
-			 GINT_TO_POINTER(SHOW_LOWER_WORKBOOK));
+			 GINT_TO_POINTER(SHOW_DICTIONARY_PANE));
 /*
 	g_signal_connect(GTK_OBJECT(check_button.use_studypad),
 			   "toggled",

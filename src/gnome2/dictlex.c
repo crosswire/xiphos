@@ -30,6 +30,7 @@
 #endif
 
 #include "gui/dictlex.h"
+#include "gui/bookmarks_treeview.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"
