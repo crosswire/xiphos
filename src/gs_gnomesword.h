@@ -88,7 +88,8 @@ struct _settings {
 		greek_font[126],
 		hebrew_font[126],
 		unicode_font[126],
-		groupName[50];			
+		groupName[50],
+		searchText[256];			
 	gint 
       		currentverse_red,	/* current verse colors */
 	        currentverse_green, 
@@ -100,6 +101,7 @@ struct _settings {
 		gs_hight,	
 		notebook3page,	//-- notebook 3 page number
 		searchbargroup,      //-- number of search group in shortcut bar
+		searchType,
 		whichwindow;      /* which of the main form html window is active */
 						/* 0=text, 1= comm, 2=dict */
 	gboolean   
@@ -165,6 +167,7 @@ gint string_is_color(gchar *color);
 gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
+
 
 #ifdef __cplusplus
 }
