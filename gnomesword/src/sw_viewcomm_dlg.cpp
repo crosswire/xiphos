@@ -42,6 +42,7 @@
 #include "sw_display.h"
 #include "sw_utility.h"
 
+extern SETTINGS *settings;
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
 SWMgr *VCMgr;	/* sword mgr for view comm dialog */
 SWModule *VCMod;   /* module for view comm dialog */
@@ -66,7 +67,7 @@ GList* setupCommSWORD(GtkWidget *text)
 	
 	VCMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	VCMod     = NULL;
-	VCDisplay = new  GtkHTMLEntryDisp(text);
+	VCDisplay = new  GtkHTMLEntryDisp(text,settings);
 	//VCDisplay = new  GtkHTMLEntryDisp(text);
 	list = NULL;
 	for(it = VCMgr->Modules.begin(); it != VCMgr->Modules.end(); it++){

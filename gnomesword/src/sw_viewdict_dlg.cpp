@@ -66,9 +66,11 @@ GList* setupSDSWORD(GtkWidget *text)
 	ModMap::iterator it; //-- iteratior			
 	SectionMap::iterator sit; //-- iteratior
 	
+	extern SETTINGS *settings;
+	
 	SDMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	SDMod     = NULL;
-	SDDisplay = new  GtkHTMLEntryDisp(text);
+	SDDisplay = new  GtkHTMLEntryDisp(text,settings);
 	//SDDisplay = new  GtkHTMLEntryDisp(text);
 	list = NULL;
 	for(it = SDMgr->Modules.begin(); it != SDMgr->Modules.end(); it++){

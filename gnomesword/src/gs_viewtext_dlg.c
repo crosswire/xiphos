@@ -94,6 +94,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, *modName;
 	static GtkWidget *dlg;
+	
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
@@ -109,7 +110,6 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			modName = g_strdup(settings->lex_greek);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
-//                      g_warning(modName);
 			g_free(buf);
 			g_free(modName);
 		}
@@ -124,8 +124,9 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			g_free(modName);
 		}
 		gtk_widget_show(dlg);
-		
-	} else if (*url == 'M') {
+	} 
+	
+	else if (*url == 'M') {
 		if (!gsI_isrunning) {
 			dlg = create_dlgInformation();
 		}
@@ -134,8 +135,9 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		loadmodandkey("Packard", buf);
 		g_free(buf);
 		gtk_widget_show(dlg);
-		
-	} else if (*url == '*') {
+	} 
+	
+	else if (*url == '*') {
 		++url;
 		while (*url != ']') {
 			++url;
@@ -145,9 +147,9 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		VTgotoverseSWORD(buf);
 		updatecontrols();
 		g_free(buf); 
+	} 
 	
-	/*** let's remove passage= verse list ***/
-	} else if (!strncmp(url, "passage=", 7)) {
+	else if (!strncmp(url, "passage=", 7)) {/*** let's remove passage= verse list ***/
 		gchar *mybuf = NULL;
 		gchar *modbuf = NULL;
 		mybuf = strchr(url, '=');
@@ -157,33 +159,38 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		getVerseListSBSWORD(modbuf, buf, settings);
 		g_free(buf);
 		
-	} else if (!strncmp(url, "type=morph", 10)) {
+	} 
+	
+	else if (!strncmp(url, "type=morph", 10)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
-		mybuf = strstr(url, "class=Packard");
-		if (mybuf) {
-			modbuf = "Packard";
-		}
-		mybuf = NULL;
-		mybuf = strstr(url, "value=");
-		
+		buf = g_strdup(url);
+		g_warning("mybuf = %s",url);
+		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			for(i=0;i<strlen(mybuf);i++){
-				if(mybuf[i]=='-') 
-					mybuf[i]=' ';
+			modbuf = strchr(mybuf, '=');
+			++modbuf;
+			for(i=0;i<strlen(modbuf);i++){
+				if(modbuf[i]==' ') {
+					modbuf[i]='\0';
+					break;
+				}
 			}
 		}
 		
-		if (!gsI_isrunning) {
-			dlg = create_dlgInformation();
-		}
+		mybuf = NULL;
+		mybuf = strstr(buf, "value=");
 		
-		buf = g_strdup(mybuf);
-		loadmodandkey(modbuf, buf);
-		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			buf = g_strdup(mybuf);
+			if (!gsI_isrunning) {
+				dlg = create_dlgInformation();
+			}
+			loadmodandkey(modbuf, buf);
+		}
 		g_free(buf);
 		gtk_widget_show(dlg);
 	} 
