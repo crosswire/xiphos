@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-22 10:43-0500\n"
+"POT-Creation-Date: 2003-11-23 23:55-0500\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -95,7 +95,7 @@ msgid "Go to "
 msgstr "Aller à %s"
 
 #: src/gnome2/bibletext_dialog.c:922 src/gnome2/parallel_dialog.c:534
-#: src/gnome2/toolbar_nav.c:416
+#: src/gnome2/toolbar_nav.c:472
 msgid "Romans"
 msgstr "Romains"
 
@@ -217,7 +217,7 @@ msgstr "Imprimer..."
 
 #: src/gnome2/bibletext_menu.c:1252 src/gnome2/commentary_menu.c:1330
 #: src/gnome2/dictlex_dialog.c:539 src/gnome2/editor_spell.c:623
-#: src/gnome2/find_dialog.c:268 src/gnome2/search_dialog.c:1950
+#: src/gnome2/find_dialog.c:268 src/gnome2/search_dialog.c:2200
 msgid "Close"
 msgstr ""
 
@@ -326,7 +326,7 @@ msgstr "Entrer le nom du groupe - ne pas utiliser '|'"
 msgid "Folder Name"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1093 src/gnome2/bookmarks_treeview.c:95
+#: src/gnome2/bookmarks_menu.c:1093 src/gnome2/bookmarks_treeview.c:96
 #, fuzzy
 msgid "Folder: "
 msgstr "Module"
@@ -456,7 +456,7 @@ msgid "Remove - Restore"
 msgstr ""
 
 # src/gs_bookmarks.c
-#: src/gnome2/bookmarks_treeview.c:93
+#: src/gnome2/bookmarks_treeview.c:94
 #, fuzzy
 msgid "Enter Folder Name"
 msgstr "Entrer le nom du groupe - ne pas utiliser '|'"
@@ -586,8 +586,8 @@ msgstr "Enregistrer l'entrée"
 msgid "Delete Entry"
 msgstr "Supprimer l'entrée"
 
-#: src/gnome2/editor_menu.c:983 src/gnome2/search_dialog.c:2350
-#: src/gnome2/search_dialog.c:2505 src/gnome2/toolbar_edit.c:434
+#: src/gnome2/editor_menu.c:983 src/gnome2/search_dialog.c:2600
+#: src/gnome2/search_dialog.c:2772 src/gnome2/toolbar_edit.c:434
 msgid "New"
 msgstr "Nouveau"
 
@@ -670,7 +670,7 @@ msgstr "Vérifier l'orthographe..."
 msgid "Start"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:629 src/gnome2/search_dialog.c:2141
+#: src/gnome2/editor_spell.c:629 src/gnome2/search_dialog.c:2391
 #, fuzzy
 msgid "Options"
 msgstr "Options du module"
@@ -725,7 +725,7 @@ msgstr "GnomeSword - Enregistrer un fichier de notes"
 msgid "Enter Word or Phrase"
 msgstr "Entrez un verset"
 
-#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2151
+#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2401
 #: src/gnome2/search_sidebar.c:550
 msgid "Case Sensitive"
 msgstr "Respect de la casse"
@@ -814,8 +814,8 @@ msgstr ""
 msgid "Copy highlighted text from main window"
 msgstr "Copier le texte en surbrillance depuis la fenêtre principale"
 
-#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:1859
-#: src/gnome2/search_dialog.c:1884 src/gnome2/search_sidebar.c:238
+#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:2109
+#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:238
 msgid "Search"
 msgstr "Rechercher"
 
@@ -913,8 +913,8 @@ msgstr "Commentaires"
 msgid "Dictionaries-Lexicons"
 msgstr "Dictionnaires - Lexiques"
 
-#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:731
-#: src/gnome2/main_window.c:743 src/gnome2/preferences_dialog.c:1818
+#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:832
+#: src/gnome2/main_window.c:847 src/gnome2/preferences_dialog.c:1818
 msgid "Books"
 msgstr "Livres"
 
@@ -961,12 +961,17 @@ msgstr "Afficheur"
 msgid "_Help"
 msgstr ""
 
-#: src/gnome2/main_window.c:562
+#: src/gnome2/main_window.c:644
 #, fuzzy
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Logiciel d'étude de la Bible"
 
-#: src/gnome2/main_window.c:697 src/gnome2/main_window.c:710
+#: src/gnome2/main_window.c:738
+#, fuzzy
+msgid "Biblical Text"
+msgstr "Bibles"
+
+#: src/gnome2/main_window.c:795 src/gnome2/main_window.c:811
 #: src/gnome2/preferences_dialog.c:2202 src/gnome2/setup_druid.c:936
 msgid "Dict/Lex"
 msgstr "Dict/Lex"
@@ -1001,10 +1006,13 @@ msgstr "Combiné Bible 4"
 msgid "Change parallel 5"
 msgstr "Combiné Bible 5"
 
-#: src/gnome2/parallel_view.c:1327 src/gnome2/parallel_view.c:1341
+#.
+#. * parallel page
+#.
+#: src/gnome2/parallel_view.c:1305 src/gnome2/parallel_view.c:1328
 #: src/gnome2/parallel_dialog.c:225 src/gnome2/parallel_dialog.c:227
-#: src/gnome2/sidebar.c:468 src/gnome2/sidebar.c:481
-#: src/gnome2/toolbar_nav.c:383 src/gnome2/utilities.c:182
+#: src/gnome2/sidebar.c:470 src/gnome2/sidebar.c:482
+#: src/gnome2/toolbar_nav.c:439 src/gnome2/utilities.c:182
 msgid "Parallel View"
 msgstr ""
 
@@ -1398,111 +1406,111 @@ msgstr "Module"
 msgid "finds in "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:805
+#: src/gnome2/search_dialog.c:833
 #, fuzzy
 msgid "Search Finished"
 msgstr "Options de la recherche"
 
-#: src/gnome2/search_dialog.c:1297
+#: src/gnome2/search_dialog.c:1301
 msgid "Do you really want to CLEAR the module list?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1339
+#: src/gnome2/search_dialog.c:1358
 msgid ""
 "Do you really want to REMOVE\n"
 " the selected module?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1492
+#: src/gnome2/search_dialog.c:1566
 msgid "Are you sure you want ot delete this range?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1537
+#: src/gnome2/search_dialog.c:1626
 msgid "Are you sure you want ot delete this list?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1893
+#: src/gnome2/search_dialog.c:2143
 #, fuzzy
 msgid "<Module>"
 msgstr "Module"
 
-#: src/gnome2/search_dialog.c:1911
+#: src/gnome2/search_dialog.c:2161
 msgid " for "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1933
+#: src/gnome2/search_dialog.c:2183
 msgid "Begin"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1933
+#: src/gnome2/search_dialog.c:2183
 #, fuzzy
 msgid "Begin search"
 msgstr "Lancer la recherche"
 
-#: src/gnome2/search_dialog.c:1951
+#: src/gnome2/search_dialog.c:2201
 #, fuzzy
 msgid "Close search dialog"
 msgstr "Ouvrir la boite de recherche"
 
-#: src/gnome2/search_dialog.c:1972
+#: src/gnome2/search_dialog.c:2222
 #, fuzzy
 msgid "Scope"
 msgstr "Pas de limites"
 
-#: src/gnome2/search_dialog.c:1988
+#: src/gnome2/search_dialog.c:2238
 #, fuzzy
 msgid "Entire Module   "
 msgstr "Afficher le module"
 
-#: src/gnome2/search_dialog.c:1994
+#: src/gnome2/search_dialog.c:2244
 msgid "Search entire module(s)"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2000
+#: src/gnome2/search_dialog.c:2250
 msgid "Current Results   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2006
+#: src/gnome2/search_dialog.c:2256
 msgid "Use the results of the last search for the search scope"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2011
+#: src/gnome2/search_dialog.c:2261
 msgid "Custom Range   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2018
+#: src/gnome2/search_dialog.c:2268
 msgid "Use a custom search range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2037 src/gnome2/search_dialog.c:2615
+#: src/gnome2/search_dialog.c:2287 src/gnome2/search_dialog.c:2883
 #, fuzzy
 msgid "Modules"
 msgstr "Module"
 
-#: src/gnome2/search_dialog.c:2053
+#: src/gnome2/search_dialog.c:2303
 #, fuzzy
 msgid "Single Module"
 msgstr "Afficher le module"
 
-#: src/gnome2/search_dialog.c:2059
+#: src/gnome2/search_dialog.c:2309
 msgid "Use a single module for the search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2066
+#: src/gnome2/search_dialog.c:2316
 #, fuzzy
 msgid "Module List"
 msgstr "Options du module"
 
-#: src/gnome2/search_dialog.c:2073
+#: src/gnome2/search_dialog.c:2323
 msgid "Use current module list for search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2078
+#: src/gnome2/search_dialog.c:2328
 #, fuzzy
 msgid "Custom List"
 msgstr "Numéro de liste"
 
-#: src/gnome2/search_dialog.c:2086
+#: src/gnome2/search_dialog.c:2336
 msgid "Use a custom module list for the search"
 msgstr ""
 
@@ -1530,173 +1538,174 @@ msgstr ""
 #. FALSE, FALSE, 0);
 #.
 #.
-#: src/gnome2/search_dialog.c:2108 src/gnome2/search_sidebar.c:500
+#: src/gnome2/search_dialog.c:2358 src/gnome2/search_sidebar.c:500
 msgid "Search Type"
 msgstr "Type de recherche"
 
-#: src/gnome2/search_dialog.c:2119 src/gnome2/search_sidebar.c:511
+#: src/gnome2/search_dialog.c:2369 src/gnome2/search_sidebar.c:511
 msgid "Multi Word"
 msgstr "Multi mots"
 
-#: src/gnome2/search_dialog.c:2126 src/gnome2/search_sidebar.c:523
+#: src/gnome2/search_dialog.c:2376 src/gnome2/search_sidebar.c:523
 msgid "Regular Expression"
 msgstr "Expression régulière"
 
-#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:532
+#: src/gnome2/search_dialog.c:2384 src/gnome2/search_sidebar.c:532
 msgid "Exact Phrase"
 msgstr "Phrase exacte"
 
-#: src/gnome2/search_dialog.c:2158
+#: src/gnome2/search_dialog.c:2408
 #, fuzzy
 msgid "Include Strongs Numbers"
 msgstr "Afficher/Cacher les nombres de Strong"
 
-#: src/gnome2/search_dialog.c:2163
+#: src/gnome2/search_dialog.c:2413
 #, fuzzy
 msgid "In modules that have Strongs Numbers"
 msgstr "Afficher/Cacher les nombres de Strong"
 
-#: src/gnome2/search_dialog.c:2167
+#: src/gnome2/search_dialog.c:2417
 #, fuzzy
 msgid "Include Morph Tags"
 msgstr "Nombres de Strong & Étiquettes morphologiques"
 
-#: src/gnome2/search_dialog.c:2172
+#: src/gnome2/search_dialog.c:2422
 msgid "In modules that have Morph Tags"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2176
+#: src/gnome2/search_dialog.c:2426
 #, fuzzy
 msgid "Include Footnotes"
 msgstr "Afficher/Cacher les notes de bas de page"
 
-#: src/gnome2/search_dialog.c:2181
+#: src/gnome2/search_dialog.c:2431
 msgid "In modules that have Footnotes"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2183
+#: src/gnome2/search_dialog.c:2433
 #, fuzzy
 msgid "Search Criteria"
 msgstr "Recherche Personnel"
 
-#: src/gnome2/search_dialog.c:2208
+#: src/gnome2/search_dialog.c:2458
 msgid "Show Context"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2209
+#: src/gnome2/search_dialog.c:2459
 #, fuzzy
 msgid "Show In Main window"
 msgstr "Afficher %s dans la fenêtre principale"
 
-#: src/gnome2/search_dialog.c:2226
+#: src/gnome2/search_dialog.c:2476
 #, fuzzy
 msgid "Save Results"
 msgstr "Résultats de la recherche"
 
-#: src/gnome2/search_dialog.c:2228
+#: src/gnome2/search_dialog.c:2478
 #, fuzzy
 msgid "Save Search Results as Bookmarks"
 msgstr "Afficher les résultats de la recherche"
 
-#: src/gnome2/search_dialog.c:2246
+#: src/gnome2/search_dialog.c:2496
 #, fuzzy
 msgid "Clear"
 msgstr "Effacer"
 
-#: src/gnome2/search_dialog.c:2247
+#: src/gnome2/search_dialog.c:2497
 msgid "clear lists for new search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2270 src/gnome2/search_sidebar.c:166
+#: src/gnome2/search_dialog.c:2520 src/gnome2/search_sidebar.c:166
 msgid "Search Results"
 msgstr "Résultats de la recherche"
 
-#: src/gnome2/search_dialog.c:2286
+#: src/gnome2/search_dialog.c:2536
 msgid "Preview"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2300
+#: src/gnome2/search_dialog.c:2550
 #, fuzzy
 msgid "Found"
 msgstr "Limites"
 
-#: src/gnome2/search_dialog.c:2320
+#: src/gnome2/search_dialog.c:2570
 #, fuzzy
 msgid "Results"
 msgstr "Résultats de la recherche"
 
-#: src/gnome2/search_dialog.c:2351
+#: src/gnome2/search_dialog.c:2601
 msgid "Create new custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2362 src/gnome2/search_dialog.c:2530
-#: src/gnome2/sidebar.c:991
+#: src/gnome2/search_dialog.c:2612 src/gnome2/search_dialog.c:2797
+#: src/gnome2/sidebar.c:1042
 msgid "Save List"
 msgstr "Enregistrer la liste"
 
-#: src/gnome2/search_dialog.c:2363
+#: src/gnome2/search_dialog.c:2613
 msgid "Save custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2380 src/gnome2/search_dialog.c:2548
-#: src/gnome2/search_dialog.c:2656 src/gnome2/toolbar_edit.c:493
+#: src/gnome2/search_dialog.c:2630 src/gnome2/search_dialog.c:2815
+#: src/gnome2/search_dialog.c:2924 src/gnome2/toolbar_edit.c:493
 #, fuzzy
 msgid "Delete"
 msgstr "Supprimer note"
 
-#: src/gnome2/search_dialog.c:2381
+#: src/gnome2/search_dialog.c:2631
 msgid "Delete selected range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2429
+#: src/gnome2/search_dialog.c:2685
 msgid "Range Name"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2439
+#: src/gnome2/search_dialog.c:2695
 msgid "Range Text"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2449
+#: src/gnome2/search_dialog.c:2705
 msgid "eg. Matt-John;Rev4"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2475
+#. ****************************************************************************
+#: src/gnome2/search_dialog.c:2742
 msgid "Custom Ranges"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2506
+#: src/gnome2/search_dialog.c:2773
 msgid "Create new module list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2518 src/gnome2/search_dialog.c:2519
-#: src/gnome2/search_dialog.c:2637
+#: src/gnome2/search_dialog.c:2785 src/gnome2/search_dialog.c:2786
+#: src/gnome2/search_dialog.c:2905
 #, fuzzy
 msgid "Clear Module List"
 msgstr "Effacer l'historique"
 
-#: src/gnome2/search_dialog.c:2531
+#: src/gnome2/search_dialog.c:2798
 msgid "Save list of modules"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2549
+#: src/gnome2/search_dialog.c:2816
 msgid "Delete selected list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2606
+#: src/gnome2/search_dialog.c:2874
 #, fuzzy
 msgid "List Name"
 msgstr "Liste"
 
-#: src/gnome2/search_dialog.c:2638
+#: src/gnome2/search_dialog.c:2906
 msgid "Clear all modules from list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2658
+#: src/gnome2/search_dialog.c:2926
 msgid "Remove selected module from list"
 msgstr ""
 
 #. ********************************************************************
-#: src/gnome2/search_dialog.c:2696
+#: src/gnome2/search_dialog.c:2959
 #, fuzzy
 msgid "Custom Lists"
 msgstr "Numéro de liste"
@@ -1887,56 +1896,56 @@ msgstr ""
 "Cliquez sur Terminer pour fermer cette boîte de dialogue\n"
 "et exécuter GnomeSword."
 
-#: src/gnome2/sidebar.c:992
+#: src/gnome2/sidebar.c:1043
 #, fuzzy
 msgid "Save the search results as bookmarks"
 msgstr "Afficher les résultats de la recherche"
 
-#: src/gnome2/sidebar.c:1030
+#: src/gnome2/sidebar.c:1081
 #, fuzzy
 msgid "Open in dialog"
 msgstr "Ouvrir la boite de recherche"
 
-#: src/gnome2/sidebar.c:1031
+#: src/gnome2/sidebar.c:1082
 #, fuzzy
 msgid "Open selected module in a dialog"
 msgstr "Ouvrir la boite de recherche"
 
-#: src/gnome2/sidebar.c:1036
+#: src/gnome2/sidebar.c:1087
 msgid "About"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1037
+#: src/gnome2/sidebar.c:1088
 #, fuzzy
 msgid "View information about the selected dialog"
 msgstr "Information à propos des modules installés"
 
-#: src/gnome2/sidebar.c:1266
+#: src/gnome2/sidebar.c:1317
 #, fuzzy
 msgid "_Modules"
 msgstr "Module"
 
-#: src/gnome2/sidebar.c:1274
+#: src/gnome2/sidebar.c:1325
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "Signets"
 
-#: src/gnome2/sidebar.c:1282
+#: src/gnome2/sidebar.c:1333
 #, fuzzy
 msgid "_Search"
 msgstr "Rechercher"
 
-#: src/gnome2/sidebar.c:1291
+#: src/gnome2/sidebar.c:1342
 #, fuzzy
 msgid "Search _Results"
 msgstr "Résultats de la recherche"
 
-#: src/gnome2/sidebar.c:1301
+#: src/gnome2/sidebar.c:1352
 #, fuzzy
 msgid "_Viewer"
 msgstr "Afficheur"
 
-#: src/gnome2/sidebar.c:1311
+#: src/gnome2/sidebar.c:1362
 #, fuzzy
 msgid "Verse _List"
 msgstr "Liste de versets"
@@ -1987,26 +1996,21 @@ msgstr "Vérifier l'orthographe..."
 msgid "Spell check note"
 msgstr "Vérifier l'orthographe..."
 
-#: src/gnome2/toolbar_nav.c:363
+#: src/gnome2/toolbar_nav.c:422
 #, fuzzy
 msgid "Dict/Book"
 msgstr "Livres"
 
-#: src/gnome2/toolbar_nav.c:365
-#, fuzzy
-msgid "Switch between Dict/Lex and Books"
-msgstr "Afficher les onglets des Dict/Lex"
-
-#: src/gnome2/toolbar_nav.c:384
+#: src/gnome2/toolbar_nav.c:440
 msgid "Toggle Parallel View"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:458
+#: src/gnome2/toolbar_nav.c:514
 #, fuzzy
 msgid "button5"
 msgstr "button3"
 
-#: src/gnome2/toolbar_nav.c:475
+#: src/gnome2/toolbar_nav.c:531
 #, fuzzy
 msgid "button6"
 msgstr "button3"
@@ -2146,6 +2150,10 @@ msgstr "Indenter"
 #: src/gnome2/toolbar_style.c:1044
 msgid "Indents the paragraphs more"
 msgstr "Augmenter l'indentation du texte"
+
+#, fuzzy
+#~ msgid "Switch between Dict/Lex and Books"
+#~ msgstr "Afficher les onglets des Dict/Lex"
 
 #, fuzzy
 #~ msgid ""
@@ -2306,9 +2314,6 @@ msgstr "Augmenter l'indentation du texte"
 
 #~ msgid "Favorites"
 #~ msgstr "Favoris"
-
-#~ msgid "Bible Text"
-#~ msgstr "Bibles"
 
 #~ msgid "History"
 #~ msgstr "Historique"
