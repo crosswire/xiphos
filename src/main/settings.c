@@ -467,11 +467,8 @@ void load_settings_structure(void)
 	settings.parallel3Module = xml_get_value("modules", "int3");
 	settings.parallel4Module = xml_get_value("modules", "int4");
 	settings.parallel5Module = xml_get_value("modules", "int5");
-	settings.personalcommentsmod =
-	    xml_get_value("modules", "percomm");
+	settings.personalcommentsmod = xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
-
-	/* books/gbs */
 	settings.book_mod = xml_get_value("modules", "book");
 	
 	
@@ -493,10 +490,10 @@ void load_settings_structure(void)
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
 
-	if(xml_get_value("keys", "book"))
+	if(xml_get_value("keys", "book")) {
 		settings.book_key = xml_get_value("keys", "book");
-	else {
-		xml_add_new_item_to_section("keys", "book", "none");
+	} else {
+		xml_add_new_item_to_section("keys", "book", "0");
 		settings.book_key = xml_get_value("keys", "book");
 	}
 	if(xml_get_value("keys", "offset"))

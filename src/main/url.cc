@@ -299,7 +299,7 @@ static gint strongs_uri(const gchar * url, gboolean clicked)
 		if(backend->is_module(settings.lex_hebrew)) 
 			modbuf = settings.lex_hebrew;
 	}
-		
+	
 	if (clicked) {
 		if (settings.inDictpane)
 			main_display_dictionary(modbuf, work_buf[3]);
