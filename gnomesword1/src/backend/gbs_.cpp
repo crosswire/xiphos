@@ -167,7 +167,7 @@ static SWModule *backend_getModule(char *bookname)
  *   int
  */ 
  
-int backend_treekey_next_sibling(gchar * bookname,
+int backend_treekey_next_sibling(char * bookname,
                                       unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -195,7 +195,7 @@ int backend_treekey_next_sibling(gchar * bookname,
  *   int
  */ 
  
-int backend_gbs_treekey_has_children(gchar * bookname,
+int backend_gbs_treekey_has_children(char * bookname,
                                        unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -223,7 +223,7 @@ int backend_gbs_treekey_has_children(gchar * bookname,
  *   char *
  */ 
  
-char *backend_gbs_get_treekey_local_name(gchar * bookname,
+char *backend_gbs_get_treekey_local_name(char * bookname,
                                      unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -252,7 +252,7 @@ char *backend_gbs_get_treekey_local_name(gchar * bookname,
  *   unsigned long
  */ 
  
-unsigned long backend_gbs_get_treekey_offset(gchar * bookname)
+unsigned long backend_gbs_get_treekey_offset(char * bookname)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
         if (treeKey) {
@@ -339,7 +339,7 @@ void backend_new_gbs_display(GtkWidget * html, char *bookname)
  *   void
  */ 
  
-void backend_display_gbs(gint booknum, gchar * key)
+void backend_display_gbs(int booknum, char * key)
 {
         BE_GBS *g;
         g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
@@ -365,7 +365,7 @@ void backend_display_gbs(gint booknum, gchar * key)
  *   int
  */ 
  
-int backend_display_row_gbs(gint booknum, gchar * offset)
+int backend_display_row_gbs(int booknum, char * offset)
 {
         BE_GBS *g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
         TreeKeyIdx *treeKey = backend_get_tree_key(g->mod->Name());
@@ -393,7 +393,7 @@ int backend_display_row_gbs(gint booknum, gchar * offset)
  * Synopsis
  *   #include "gbs_.h"
  *
- *   void backend_setup_books(SETTINGS * s)	
+ *   void backend_setup_books(void)	
  *
  * Description
  *    
@@ -402,7 +402,7 @@ int backend_display_row_gbs(gint booknum, gchar * offset)
  *   void
  */ 
  
-void backend_setup_books(SETTINGS * s)
+void backend_setup_books(void)
 {
         ModMap::iterator it;    //-- iteratior
         gint count = 0;
