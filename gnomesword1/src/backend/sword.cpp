@@ -198,7 +198,7 @@ void backend_init_sword(void)
 	 * Generic Book and Dict/Lex Support
 	 */	
 	if(havebible)
-		backend_setup_text(&settings);
+		backend_setup_text();
 	if(havecomm)
 		backend_setup_commentary(&settings);
 	if(havepercomm)
