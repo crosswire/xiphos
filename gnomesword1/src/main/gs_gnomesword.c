@@ -38,7 +38,7 @@
 #include "gui/studypad.h"
 #include "gui/info_box.h"
 #include "gui/gbs.h"
-#include "gui/_bibletext.h"
+#include "gui/bibletext.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"

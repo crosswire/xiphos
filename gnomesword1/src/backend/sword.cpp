@@ -206,7 +206,7 @@ void backend_init_sword(void)
 	if(havedict)
 		backend_setup_dictlex(&settings);
 	if(havebook)
-		backend_setup_books(&settings);
+		backend_setup_books();
 	if(havebible)
 		backend_setup_interlinear(&settings);
 }

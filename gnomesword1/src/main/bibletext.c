@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 
-#include "gui/_bibletext.h"
+#include "gui/bibletext.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/cipher_key_dialog.h"
 #include "backend/module_options.h"
