@@ -104,7 +104,6 @@ module.source.files=\
 	gs_shortcutbar.h\
 	gs_gui.c\
 	gs_gui.h\
-	sw_thmlhtml.cpp\
 	sw_gbfhtml.cpp\
 	gs_viewtext_dlg.c\
 	gs_viewtext_dlg.h\
@@ -143,7 +142,8 @@ module.source.files=\
 	sw_viewcomm_dlg.cpp\
 	sw_viewcomm_dlg.h\
 	sw_gnomesword.cpp\
-	sw_gnomesword.h
+	sw_gnomesword.h\
+	thmlhtmllink.cpp
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -43,7 +43,7 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "sw_gbfhtml.h"
-#include "sw_thmlhtml.h"
+#include "thmlhtmllink.h"
 #include "sw_latin1utf8.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
@@ -194,7 +194,7 @@ initSWORD(GtkWidget *mainform)
   	g_print("Initiating Sword\n"); 
 	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
-  	thmltohtml	= new SW_ThMLHTML(); /* sword renderfilter thml to html */	
+  	thmltohtml	= new ThMLHTMLLINK(); /* sword renderfilter thml to html */	
         rwptohtml	= new RWPHTML();
         gbftohtml		= new SW_GBFHTML();
         lattoutf8		= new SW_Latin1UTF8();
@@ -340,6 +340,11 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 		*mods;
 	gchar 
 		*currRef;
+	VerseKey VSKey;
+	
+	VSKey.AutoNormalize(0);
+	VSKey = ref;
+	
 	//-- save any changes to personal notes
 	if((GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnEditNote"))->active) && noteModified){ 		
 		if(autoSave){                          //-- if we are in edit mode
@@ -357,7 +362,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 				if(!stricmp(ref,"Gen 1:1") || !stricmp(ref,"Genesis 1:1") || !stricmp(ref,"Gene 1:1")){	
 				}else{
 					ref=currRef;
-					curMod->SetKey(ref);
+					curMod->SetKey(VSKey);
 					strcpy(current_verse,ref);
 				}	
 			}
@@ -408,12 +413,13 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	}
 	if(settings->notebook3page == 0 && autoscroll){
 		if(curcomMod){	
-			curcomMod->SetKey(current_verse); //-- set commentary module to current verse
+			curcomMod->SetKey(VSKey); //-- set commentary module to current verse
 			curcomMod->Display(); //-- show change
 			strcpy(com_key,swKey);
 		}
 	}			
 	ApplyChange = TRUE;	
+	VSKey.AutoNormalize(1);	
 }
 
 /*
@@ -431,7 +437,7 @@ updateinterlinearpage(void)
 		html_widget = lookup_widget(settings->app,"textComp1");
 		beginHTML(html_widget,TRUE);
 		sprintf(tmpBuf,
-		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table cellpadding=\"5\" align=\"left\" valign=\"middle\">",
 		settings->bible_bg_color, settings->bible_text_color,
 		settings->link_color);
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
@@ -442,6 +448,10 @@ updateinterlinearpage(void)
 		changecomp1ModSWORD(settings->Interlinear3Module);
 		changecomp1ModSWORD(settings->Interlinear4Module);
 		changecomp1ModSWORD(settings->Interlinear5Module);
+		sprintf(tmpBuf,	"</table></body></html>");
+		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(html_widget), utf8str, utf8len);	
 		endHTML(html_widget);
 	}
 }
@@ -780,9 +790,11 @@ chapterSWORD(void)  //-- someone clicked the chapter spin button
         gchar      *buf;
         //-- set iChap to value in spin button
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbChapter"))); 
-	swKey.Chapter(iChap); //-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
+	//-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
+	swKey.Chapter(iChap); 
 	buf = g_strdup(swKey); 
-	changeVerseSWORD(buf);	  //-- change all our modules to new chapter
+	 //-- change all our modules to new chapter
+	changeVerseSWORD(buf);	 
 	g_free(buf);
 }
 
@@ -792,11 +804,11 @@ verseSWORD(void)  //-- someone clicked the verse spin button
 {
 	gint       iVerse;
         gchar      *buf;
-        
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse"))); //-- set iVerse to value in spin button
-	swKey.Verse(iVerse ); //-- let sword set verse for us - sword knows when to go to next or previous chapter - so we don't have to keep up
+        //-- set iVerse to value in spin button
+	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(settings->app,"spbVerse"))); 
+	//-- let sword set verse for us - sword knows when to go to next or previous chapter - so we don't have to keep up
+	swKey.Verse(iVerse ); 
 	buf = g_strdup(swKey);	
-	
         changeVerseSWORD(buf);	//-- change all our modules to new verse		
         g_free(buf);
 }
@@ -1469,4 +1481,16 @@ applyfontcolorandsizeSWORD(void)
 	updateinterlinearpage();	
 }
 
+/*
+if (!(StrToInt(CHBox->Text)) || (!StrToInt(VSBox->Text)))
+		DefaultVSKey.AutoNormalize(0);
 
+	if (StrToInt(CHBox->Text) < 0)
+		CHBox->Text = StrToInt(CHBox->Text) + 1;
+	if (StrToInt(VSBox->Text) < 0)
+		VSBox->Text = StrToInt(VSBox->Text) + 1;
+
+	DefaultVSKey       = (cbBook->Text + " " + CHBox->Text + ":" + VSBox->Text).c_str();
+	TextKeyChanged();
+	DefaultVSKey.AutoNormalize(1);	
+*/

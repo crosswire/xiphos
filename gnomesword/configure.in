@@ -147,6 +147,7 @@ dnl looking for aspell
   fi
 
 
+
 dnl ******************************
 dnl GdkPixbuf checking
 dnl ******************************
@@ -190,24 +191,27 @@ have_gnomeprint="no"
 dnl ******************************
 dnl Gnome App Lib checking
 dnl ******************************
-AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.7.99.5)
+have_gal="no"
+AC_MSG_CHECKING(for Gnome App libraries (GAL))
 if gnome-config --libs gal > /dev/null 2>&1; then 
     vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-    if test "$vers" -ge 49905; then
-        AC_MSG_RESULT(found)
-        GNOME_APP_LIBS=`gnome-config --libs gal`
-        GNOME_APP_CFLAGS=`gnome-config --cflags gal`
-        AC_SUBST(GNOME_APP_LIBS)
-        AC_SUBST(GNOME_APP_CFLAGS)
+    if test "$vers" -ge 109902 ; then
         have_gal="yes"
-    else 
-        AC_MSG_ERROR(You need at least GNOME Application libs 0.7.99.5 for this version of GnomeSword)
+     else
+        have_gal="yes"
+	AC_DEFINE(USE_OLD_GAL, 1, [Define if you want to use pre 0.10.99.2 gal])
     fi
+fi 
+if test "x$have_gal" = xyes; then
+  AC_MSG_RESULT($vers found)
+  GNOME_APP_LIBS=`gnome-config --libs gal`
+  GNOME_APP_CFLAGS=`gnome-config --cflags gal`
+  AC_SUBST(GNOME_APP_LIBS)
+  AC_SUBST(GNOME_APP_CFLAGS)
 else
-    AC_MSG_ERROR(Did not find GnomeAppLibs (GAL) installed)
+   AC_MSG_ERROR(You need at least GNOME Application libs 0.7.99.5 for this version of GnomeSword)
 fi
-
 
 dnl ******************************
 dnl GtkHTML checking
@@ -231,14 +235,14 @@ else
 	AC_MSG_ERROR(GtkHTML 0.8.x is required to build gnomesword)
 fi
 
-if $gtkhtml_ok; then
-     AC_DEFINE(USE_GTKHTML, 1, [Define if you want to use the GtkHTML])
-    EXTRA_GNOME_LIBS="`gnome-config --libs libglade gtkhtml gnomeui` $THREADS_LIBS `unicode-config --libs`"
-    EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gtkhtml gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
-else
-    EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
-    EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
-fi
+GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
+GTKHTML_LIBS="`gnome-config --libs gtkhtml`"
+AC_SUBST(GTKHTML_CFLAGS)
+AC_SUBST(GTKHTML_LIBS)
+
+EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
+EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
+
 AC_SUBST(EXTRA_GNOME_LIBS)
 AC_SUBST(EXTRA_GNOME_CFLAGS)
 
@@ -255,9 +259,7 @@ if test "x$spellchecking" = xyes || test "x$all" = xyes; then
 	AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
 fi
 
-if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes || test "x$all" = xyes; then
-        AC_DEFINE(USE_SHORTCUTBAR, 1, [Define if you want to use the shortcutbar])
-fi
+AC_DEFINE(USE_SHORTCUTBAR, 1, [Define if you want to use the shortcutbar])
 
 AM_CONDITIONAL(SHORTCUTBAR,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xno)
 AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xyes)
