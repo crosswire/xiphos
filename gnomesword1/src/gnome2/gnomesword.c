@@ -232,11 +232,9 @@ void frontend_display(void)
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	if(settings.setup_canceled) {
 		info = gui_new_dialog();
+		info->stock_icon = "gtk-properties";
 		info->title = N_("Question?");
-		if (settings.studypadfilename)
-			info->label_top = settings.studypadfilename;
-		else
-			info->label_top = N_("The Setup Druid");
+		info->label_top = N_("The Setup Druid");
 		info->label_middle = N_("was canceled. Do you wish");
 		info->label_bottom = N_("to set preferences now?");
 		info->yes = TRUE;
