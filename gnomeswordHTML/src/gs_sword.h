@@ -93,7 +93,7 @@ gchar* getSDmodDescriptionSWORD(void);
 gboolean saveconfig(void);
 gboolean loadconfig(void);
 void shutdownVTSWORD(void);
-GList* setupVTSWORD(GtkWidget *text);
+GList* setupVTSWORD(GtkWidget *text, GtkWidget *cbBook);
 void gotoverseVTSWORD(gchar *newkey);
 void loadVTmodSWORD(gchar *modName);
 gchar* getVTmodDescriptionSWORD(void);

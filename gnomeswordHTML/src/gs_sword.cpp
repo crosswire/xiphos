@@ -1311,12 +1311,14 @@ void shutdownVTSWORD(void)  //-- close down viewtext dialog program
  *setupVTSWORD - set up the sword stuff for the viewtext dialog
  *returns a list of text modules
  ****************************************************************************************/
-GList* setupVTSWORD(GtkWidget *text)
+GList* setupVTSWORD(GtkWidget *text, GtkWidget *cbBook)
 {
 	GList *list;
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
+	/* fill book combo box */
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
 	VTMgr	= new SWMgr();
 	VTMod     = NULL;
 	VTDisplay = new  GTKhtmlChapDisp(text);
@@ -1343,6 +1345,7 @@ void gotoverseVTSWORD(gchar *newkey)
 {
         VTMod->SetKey(newkey); //-- set key to our text
         VTMod->Display();
+	
 }
 
 

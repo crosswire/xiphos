@@ -352,8 +352,7 @@ void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 	gchar *bookname, ref[255];
 
 	if (ApplyChange) {
-		bookname =
-		    gtk_entry_get_text(GTK_ENTRY
+		bookname = gtk_entry_get_text(GTK_ENTRY
 				       (lookup_widget
 					(GTK_WIDGET(editable),
 					 "cbeBook")));

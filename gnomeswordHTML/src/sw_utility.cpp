@@ -93,6 +93,7 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	if (!stricmp(sourceformat.c_str(), "ThML")) {
 		module->AddRenderFilter(thmltohtml);
 		noDriver = false;
+		//if(!stricmp(module->Name(),"TDavid") ) g_warning("TDavid");
 	}
 	
 	if (!stricmp(module->Name(), "RWP")) {
