@@ -1,10 +1,13 @@
+2000-08-25  - bug fixes
+            - double click on a Srongs number to look up number in Srongs lex
+
 2000-08-18  - bug fixes - misc segfaults and crashes (when using commentary modules)
             - enabled all menu items
             - added shortcut bar from the Evolution project
             - first 0.2 release
 
 2000-08-02  - bug fixes - misc segfaults and crashes
-            - double click the verse num in main text window make that verse
+            - double click the verse num in main text window to make that verse
             the current verse.
             - new popup menu items let you lookup a highlighted word or number
             in current dict/lex.

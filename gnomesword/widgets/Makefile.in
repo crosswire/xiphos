@@ -100,7 +100,7 @@ ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-SUBDIRS =  	misc				e-paned				e-text				shortcut-bar
+SUBDIRS =  	misc				e-text				shortcut-bar
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
