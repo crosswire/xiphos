@@ -28,6 +28,7 @@
 #include "gui/toolbar_nav.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/history.h"
+#include "gui/main_window.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -107,7 +108,7 @@ static void on_cbeBook_changed(GtkEditable * editable,
 		gchar *bookname =
 		    gtk_entry_get_text(GTK_ENTRY(settings.cbeBook));
 		sprintf(buf, "%s 1:1", bookname);
-		change_verse(buf);
+		gui_change_verse(buf);
 	}
 }
 
@@ -147,7 +148,7 @@ static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
 						     (settings.
 						      spbVerse));
 		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
-		change_verse(buf);
+		gui_change_verse(buf);
 		return TRUE;
 	}
 	return FALSE;
@@ -188,7 +189,7 @@ static gboolean on_spbVerse_button_release_event(GtkWidget * widget,
 						     (settings.
 						      spbVerse));
 		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
-		change_verse(buf);
+		gui_change_verse(buf);
 		return TRUE;
 	}
 	return FALSE;
@@ -215,7 +216,7 @@ static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 	gchar *buf;
 
 	buf = gtk_entry_get_text(GTK_ENTRY(settings.cbeFreeformLookup));
-	change_verse(buf);	//-- change verse to entry text 
+	gui_change_verse(buf);	//-- change verse to entry text 
 }
 
 /******************************************************************************
@@ -243,7 +244,7 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 	buf = gtk_entry_get_text(GTK_ENTRY(widget));
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {	
-		change_verse(buf);
+		gui_change_verse(buf);
 		return TRUE;
 	}
 	return FALSE;

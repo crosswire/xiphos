@@ -45,6 +45,7 @@
 #include <string.h>
 
 #include "main/gs_gnomesword.h"
+#include "main/settings.h"
 #include "main/lists.h"
 
 #include "backend/sword.h"
@@ -79,13 +80,6 @@ static modDescMap descriptionMap;
 
 bookAbrevMap abrevationMap;
 
-
-gboolean 
- havebible = false,	/* do we have at least one bibletext module */
- havedict = false,	/* do we have at least one lex-dict module */
- havecomm = false,	/* do we have at least one commentary module */
- havebook = false,	/* do we have at least one book module */
- havepercomm = false;	/* do we have at least one personal commentary module */
 
 
 /******************************************************************************
@@ -155,30 +149,30 @@ void backend_init_sword(void)
 		    string((char *) (*it).second->Name());		
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
-			havebible = TRUE;
+			settings.havebible = TRUE;
 			++textpages;
 		}
 
 		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			if ((*mainMgr->config->Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
-				havepercomm = TRUE;
+				settings.havepercomm = TRUE;
 				++percommpages;
 			}
-			havecomm = TRUE;//-- we have at least one commentay module
+			settings.havecomm = TRUE;//-- we have at least one commentay module
 			++compages;	
 		}
 
 		else if (!strcmp
 			 ((*it).second->Type(), DICT_MODS)) {
-			havedict = TRUE;//-- we have at least one lex / dict module
+			settings.havedict = TRUE;//-- we have at least one lex / dict module
 			++dictpages;	
 
 		}
 
 		else if (!strcmp((*it).second->Type(), BOOK_MODS)) {
 			++bookpages;
-			havebook = TRUE;
+			settings.havebook = TRUE;
 		}
 	}
 	
@@ -195,17 +189,17 @@ void backend_init_sword(void)
 	 * setup Commentary, Personal Comments
 	 * Generic Book and Dict/Lex Support
 	 */
-	if(havebible)
+	if(settings.havebible)
 		backend_setup_bibletext();
-	if(havecomm)
+	if(settings.havecomm)
 		backend_setup_commentary();
-	if(havepercomm)
+	if(settings.havepercomm)
 		backend_setup_percomm();
-	if(havedict)
+	if(settings.havedict)
 		backend_setup_dictlex();
-	if(havebook)
+	if(settings.havebook)
 		backend_setup_books();
-	if(havebible)
+	if(settings.havebible)
 		backend_setup_interlinear();
 }
 

@@ -28,6 +28,7 @@
 
 #include "gui/history.h"
 #include "gui/main_menu.h"
+#include "gui/main_window.h"
 #include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
@@ -39,7 +40,6 @@
 HISTORY historylist[25];
 gint historyitems = 0;
 gint currenthistoryitem = 0;
-gboolean addhistoryitem = FALSE; /* do we need to add item to history */
 gboolean firstbackclick = TRUE;
 
 extern gint groupnum4;
@@ -119,14 +119,14 @@ void changeverseHistory(gint historynum)
 {
         currenthistoryitem = historynum;
         if(firstbackclick){
-                 addhistoryitem = TRUE;                 
+                 settings.addhistoryitem = TRUE;                 
         } else { 
-		addhistoryitem = FALSE;
+		settings.addhistoryitem = FALSE;
 	}
 	/* change text mod */
-	change_module_and_key(historylist[historynum].textmod, historylist[historynum].verseref);
+	gui_change_module_and_key(historylist[historynum].textmod, historylist[historynum].verseref);
 	/* change commentary mod */
-	change_module_and_key(historylist[historynum].commod, historylist[historynum].verseref);
+	gui_change_module_and_key(historylist[historynum].commod, historylist[historynum].verseref);
 	if(firstbackclick){
                 --currenthistoryitem;
 		--currenthistoryitem;
@@ -139,7 +139,7 @@ void changeverseHistory(gint historynum)
  */
 void historynav(GtkWidget *app, gint direction)
 {
-        addhistoryitem = FALSE;
+        settings.addhistoryitem = FALSE;
         if(direction){
                 if(currenthistoryitem < historyitems-1){
                         ++currenthistoryitem;
@@ -153,7 +153,7 @@ void historynav(GtkWidget *app, gint direction)
         } else {
                 if(currenthistoryitem > 0){
                         --currenthistoryitem;
-			if(firstbackclick) addhistoryitem = TRUE;
+			if(firstbackclick) settings.addhistoryitem = TRUE;
                         changeverseHistory(currenthistoryitem);
                         firstbackclick = FALSE;
                 }
