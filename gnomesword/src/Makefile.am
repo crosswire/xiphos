@@ -58,8 +58,6 @@ COMMON_SOURCE =  \
     support.h \
     gs_html.c \
     gs_html.h \
-    gs_verselist_dlg.c \
-    gs_verselist_dlg.h \
     gs_viewtext_dlg.c \
     gs_viewtext_dlg.h \
     gs_viewtext_sw.cpp \
@@ -84,8 +82,6 @@ COMMON_SOURCE =  \
     sw_latin1utf8.h \
     sw_search.cpp \
     sw_search.h \
-    sw_verselist_dlg.cpp \
-    sw_verselist_dlg.h\
     sw_verselist_sb.cpp \
     sw_verselist_sb.h
 
