@@ -31,7 +31,7 @@ extern "C" {
 
 typedef struct _commdata COMM_DATA;
 /* gnome */
-#include "commentary_find_dialog.h"
+#include "commentary_find.h"
 struct _commdata {
 	GtkWidget *html;
 	GtkWidget *frame;

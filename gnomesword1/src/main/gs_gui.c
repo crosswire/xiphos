@@ -36,6 +36,7 @@
 #include "gs_shortcutbar.h"
 #include "sword.h"
 #include "settings.h"
+#include "lists.h"
 
 /*
  * gnome
@@ -139,7 +140,6 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *btnSBDock;
 	GtkWidget *btnSB;
 	GtkWidget *cbBook;
-	GList *cbBook_items = NULL;
 	GtkObject *spbChapter_adj;
 	GtkObject *spbVerse_adj;
 	GtkWidget *btnLookup;
@@ -342,7 +342,7 @@ void create_mainwindow(SETTINGS *s)
 	 * get and load books of the Bible 
 	 */
 	//cbBook_items = backend_get_books();
-	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), s->book_items);
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), get_list(BOOKS_LIST));
 	//g_list_free(cbBook_items);
 
 	s->cbeBook = GTK_COMBO(cbBook)->entry;

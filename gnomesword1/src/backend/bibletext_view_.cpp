@@ -33,9 +33,12 @@
 #include <versekey.h>
 #include <markupfiltmgr.h>
 
-#include "viewtext.h"
+/* backend */
+#include "bibletext_view_.h"
 #include "sword.h"
 #include "display.h"
+
+/* main */
 #include "settings.h"
 
 static SWDisplay *dispaly;	/* to display modules in view text dialog */
@@ -51,13 +54,13 @@ static ModMap::iterator mdoule_iterator;
  * Synopsis
  *   #include "viewtext.h"
  *
- *   GList *backend_setup_viewtext(GtkWidget * text)	
+ *   void backend_setup_viewtext(GtkWidget * text)	
  *
  * Description
  *   setup the viewtext sword display
  *
  * Return value
- *   GList *
+ *   void
  */
 
 void backend_setup_viewtext(GtkWidget * text)
@@ -165,20 +168,11 @@ void backend_load_module_viewtext(char * module_name)
  * Return value
  *   char * - must be freed by calling function
  */
-char *backend_get_book_viewtext(void)
+const char *backend_get_book_viewtext(void)
 {
-	char s1[255], s2[255];
-	gint l;
-
 	VerseKey key = mod->KeyText();
-	sprintf(s1, "%s", (const char *) key);
-	for (l = 0; l < strlen(s1); l++) {	//--  seperate book name                     
-		if (isdigit(s1[l]))
-			break;
-	}
-	strncpy(s2, s1, l);
-	s2[l] = '\0';
-	return g_strdup(s2);
+	
+	return key.books[key.Testament() - 1][key.Book() - 1].name;
 }
 
 /******************************************************************************

@@ -69,8 +69,6 @@ extern "C" {
 				       gpointer user_data);
 	void on_changeint5mod_activate(GtkMenuItem * menuitem,
 				       gpointer user_data);
-	void on_viewtext_activate(GtkMenuItem * menuitem,
-				  gpointer user_data);
 	void on_show_morphs_activate(GtkMenuItem * menuitem,
 				     gpointer user_data);
 	void on_show_strongs_activate(GtkMenuItem * menuitem,

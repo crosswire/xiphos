@@ -15,6 +15,8 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     bibletext.c \
     bibletext.h \
+    bibletext_view.c \
+    bibletext_view.h \
     commentary.c \
     commentary.h \
     dictlex.c \
@@ -68,15 +70,15 @@ COMMON_SOURCE =  \
     gs_viewcomm_dlg.h \
     gs_viewdict_dlg.c \
     gs_viewdict_dlg.h \
-    gs_viewtext_dlg.c \
-    gs_viewtext_dlg.h \
+    lists.c \
+    lists.h \
     main.c \
     percomm.c \
     percomm.h \
     support.c \
     support.h \
     settings.c \
-    settings.h
+    settings.h 
 
 SPELLING_SOURCE =  \
     debug.h \
