@@ -22,57 +22,23 @@
 #ifndef __BIBLETEXT_DIALOG_H__
 #define __BIBLETEXT_DIALOG_H__
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 //#include "gui/bibletext.h"
 
 #include "main/global_ops.hh"
+#include "main/module_dialogs.h"
 
 
-typedef struct _text_data TEXT_DATA;
-struct _text_data {
-	/* dialog widgets */
-	GtkWidget *dialog;
-	GtkWidget *toolbar_nav;
-	GtkWidget *cbe_book;
-	GtkWidget *spb_chapter;
-	GtkWidget *spb_verse;
-	GtkWidget *freeform_lookup;
-	GtkWidget *statusbar;
-	/* widgets for text panes */
-	GtkWidget *vbox;
-	GtkWidget *html;
-	GtkWidget *text;
-	GtkWidget *frame;
-	GtkWidget *showtabs;
-	GtkWidget *module_options_menu;
-	
-	gchar *mod_name;
-	gchar *search_string;
-	gchar *key;
-	gchar *cipher_key;
-	gchar *cipher_old;
-	
-	gint mod_num;
-	
-	gboolean is_locked;
-	gboolean is_dialog;
-	gboolean is_rtol;
-	gboolean sync;
-	
-	GLOBAL_OPS *ops;
-};
-extern TEXT_DATA *cur_t;
-
-
-
-void gui_keep_bibletext_dialog_in_sync(gchar * key);
-void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key);
-//void gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt);
+void gui_create_bibletext_dialog(TEXT_DATA * vt);
 void gui_on_lookup_bibletext_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
-//void gui_close_text_dialog(TEXT_DATA * vt);
-void gui_open_bibletext_dialog(gchar * mod_name);
-void gui_setup_bibletext_dialog(GList *mods);
-void gui_shutdown_bibletext_dialog(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

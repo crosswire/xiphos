@@ -31,7 +31,6 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/tabbed_browser.h"
 #include "gui/bibletext.h"
-#include "gui/bibletext_menu.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary.h"
 #include "gui/shortcutbar_main.h"
@@ -328,20 +327,18 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	set_current_tab (pt);
 	
 	//sets the text mod and key
-	gui_change_module_and_key(pt->text_mod, pt->text_commentary_key);
-//	gui_set_text_mod_and_key(pt->text_mod, pt->text_commentary_key);
+	main_display_bible(pt->text_mod, pt->text_commentary_key);
 	
 	//sets the commentary mod and key
 	if(pt->comm_showing)
-		gui_change_module_and_key(pt->commentary_mod, 
-					  pt->text_commentary_key);
+		main_display_commentary(pt->commentary_mod, 
+				pt->text_commentary_key);
 	else
-		gui_change_module_and_key(pt->book_mod, 
-					  pt->book_offset);
+		main_display_book(pt->book_mod, pt->book_offset);
 //	set_commentary_key(pt->commentary_mod, pt->text_commentary_key);
 	
 	//sets the dictionary mod and key
-	gui_change_module_and_key(pt->dictlex_mod, pt->dictlex_key);
+	main_display_dictionary(pt->dictlex_mod, pt->dictlex_key);
 //	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
 	page_change = FALSE;
 	//gtk_notebook_reorder_child(notebook,GTK_WIDGET(pt->page_widget),0);

@@ -52,6 +52,7 @@
 #include "main/sword.h"
 #include "main/key.h"
 #include "main/xml.h"
+#include "main/module_dialogs.h"
 
 TreePixbufs *pixbufs;
 GtkTreeStore *model;
@@ -196,13 +197,12 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 	
 	module_type = get_mod_type(mod_name);
 	if (use_dialog) {
-		module_type = get_mod_type(mod_name);
+		//module_type = get_mod_type(mod_name);
 		switch (module_type) {
 			case -1:
 				break;
 			case TEXT_TYPE:
-				gui_bibletext_dialog_goto_bookmark(mod_name,
-								   key);
+				//main_bibletext_dialog_goto_bookmark(mod_name, key);
 				break;
 			case COMMENTARY_TYPE:
 				gui_commentary_dialog_goto_bookmark(mod_name,
@@ -217,7 +217,10 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 				break;
 		}
 	} else  {
-		switch (module_type) {
+		url = g_strdup_printf("sword://%s/%s",mod_name,key);
+		main_url_handler(url, TRUE);
+		g_free(url);
+/*		switch (module_type) {
 			case -1:
 				break;
 			case TEXT_TYPE:
@@ -242,6 +245,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 				g_free(url);
 				break;
 		}
+*/
 	}
 }
 
@@ -302,6 +306,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 	xmlChar *mod_desc;
 	xmlChar *description;
 	gchar buf[500];
+	gchar *url = NULL;
 
 	data->opened = pixbufs->pixbuf_helpdoc;
 	data->closed = NULL;
@@ -329,11 +334,17 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 		} else
 			data->caption = g_strdup(key);
 //	}
+/*	if(strstr(key,"sword://"))
+		url = g_strdup(key);
+	else 
+		url = g_strdup_printf("sword://%s/%s",mod1,key);
+*/
 	data->key = g_strdup(key);
 	data->module = g_strdup(mod1);
 	data->description = g_strdup(description);
 	data->module_desc = g_strdup(mod_desc);
 	data->is_leaf = TRUE;
+//	if(url)	g_free(url);
 }
 
 

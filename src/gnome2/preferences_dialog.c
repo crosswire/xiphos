@@ -434,15 +434,18 @@ static void on_colorpicker_color_set(GnomeColorPicker *
 static void on_entry_changed(GtkEditable * editable, gpointer user_data)
 {
 	gchar *buf = NULL;
+	gchar *url = NULL;
 
-	buf = gtk_editable_get_chars(editable, 0, -1);	//tk_entry_get_text(GTK_ENTRY(entry.combo_entry_sp_dir));
+	buf = gtk_editable_get_chars(editable, 0, -1);
 	if (!buf)
 		return;
-
+	
 	switch (GPOINTER_TO_INT(user_data)) {
 	case TEXT_MODULE:
-		g_warning(buf);
-		gui_change_module_and_key(buf, settings.currentverse);
+		url = 
+		     g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
+		main_url_handler(url);
+		g_free(url);
 		break;
 	case PARALLEL_1_MODULE:
 		gui_change_parallel_module(PARALLEL1, buf);
@@ -460,10 +463,14 @@ static void on_entry_changed(GtkEditable * editable, gpointer user_data)
 		gui_change_parallel_module(PARALLEL5, buf);
 		break;
 	case COMMENTARY_MODULE:
-		gui_change_module_and_key(buf, settings.currentverse);
+		url = g_strdup_printf("sword://%s/%s",buf,settings.currentverse);
+		main_url_handler(url);
+		g_free(url);
 		break;
 	case DICTIONARY_MODULE:
-		gui_change_module_and_key(buf, settings.dictkey);
+		url = g_strdup_printf("sword://%s/%s",buf,settings.dictkey);
+		main_url_handler(url);
+		g_free(url);
 		break;
 	case DEFAULT_DICTIONARY_MODULE:
 		xml_set_value("GnomeSword", "lexicons",
