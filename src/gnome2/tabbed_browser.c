@@ -261,7 +261,8 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 {
 	GtkWidget *tab_widget;
-
+	GtkWidget *menu_label;
+	
 	tbinf->page_widget = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show(tbinf->page_widget);
 
@@ -273,6 +274,11 @@ static void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf)
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_main),
 					tbinf->page_widget,
 					(gchar*)tbinf->text_commentary_key);
+	
+	menu_label = gtk_label_new((gchar*)tbinf->text_commentary_key);	
+	gtk_notebook_set_menu_label(GTK_NOTEBOOK(widgets.notebook_main),
+                                             tbinf->page_widget,
+                                             menu_label);
 }
 
 
@@ -304,6 +310,10 @@ void gui_set_tab_label(const gchar * key)
 				cur_passage_tab->text_mod,
 				cur_passage_tab->text_commentary_key); 
 	gtk_label_set_text (cur_passage_tab->tab_label,str->str);
+	gtk_notebook_set_menu_label_text(
+					GTK_NOTEBOOK(widgets.notebook_main),
+                                        cur_passage_tab->page_widget,
+                                            str->str );
 	g_string_free(str,TRUE);
 }
 
