@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * commentary.cpp - support for Sword commentary modules
+ * commentary_.cpp - support for Sword commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -38,7 +38,7 @@
 #include "gs_gnomesword.h"
 #include "sword.h"
 #include "display.h"
-#include "commentary.h"
+#include "commentary_.h"
 
 typedef struct _backend_comm BE_COMM;
 struct _backend_comm {
@@ -76,7 +76,8 @@ GList *be_comm_list;
  * Return value
  *   char *
  */
-char* backend_nav_commentary_COMM(gint modnum, gint direction)
+ 
+const char* backend_nav_commentary(gint modnum, gint direction)
 {
 	BE_COMM *co;
 
@@ -91,10 +92,10 @@ char* backend_nav_commentary_COMM(gint modnum, gint direction)
 		break;
 	}
 
-	co->mod->Error();	//-- clear any errors
+	co->mod->Error();	
 	co->mod->Display();
 	if(co->mod->KeyText())
-		return g_strdup(co->mod->KeyText());
+		return co->mod->KeyText();
 	else
 		return NULL;
 }

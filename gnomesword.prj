@@ -1,4 +1,4 @@
-# Anjuta Version 0.1.10-pre 
+# Anjuta Version 0.1.9.99 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=0.1.10-pre
+anjuta.version=0.1.9.99
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -74,7 +74,7 @@ module.include.files=\
 	src/backend/interlinear.h\
 	src/backend/display.h\
 	src/backend/dictlex.h\
-	src/backend/commentary.h\
+	src/backend/commentary_.h\
 	src/backend/bookmarks.h\
 	src/backend/display_info.h\
 	src/backend/shortcutbar.h\
@@ -82,6 +82,7 @@ module.include.files=\
 	src/gnome/about_modules.h\
 	src/gnome/about_sword.h\
 	src/gnome/_bibletext.h\
+	src/gnome/_commentary.h\
 	src/gnome/_editor.h\
 	src/gnome/create_shortcutbar_search.h\
 	src/gnome/create_shortcutbar_viewer.h\
@@ -93,7 +94,7 @@ module.include.files=\
 	src/main/char_table.h\
 	src/main/bibletext.h\
 	src/main/gs_bookmarks.h\
-	src/main/gs_commentary.h\
+	src/main/commentary.h\
 	src/main/gs_detach_int.h\
 	src/main/gs_detach_sb.h\
 	src/main/gs_dictlex.h\
@@ -145,7 +146,7 @@ module.source.files=\
 	src/backend/interlinear.cpp\
 	src/backend/display.cpp\
 	src/backend/dictlex.cpp\
-	src/backend/commentary.cpp\
+	src/backend/commentary_.cpp\
 	src/backend/bookmarks.cpp\
 	src/backend/display_info.cpp\
 	src/backend/shortcutbar.cpp\
@@ -153,6 +154,7 @@ module.source.files=\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
 	src/gnome/_bibletext.c\
+	src/gnome/_commentary.c\
 	src/gnome/_editor.c\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
@@ -164,7 +166,7 @@ module.source.files=\
 	src/main/char_table.c\
 	src/main/bibletext.c\
 	src/main/gs_bookmarks.c\
-	src/main/gs_commentary.c\
+	src/main/commentary.c\
 	src/main/gs_detach_int.c\
 	src/main/gs_detach_sb.c\
 	src/main/gs_dictlex.c\
