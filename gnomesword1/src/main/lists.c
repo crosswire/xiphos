@@ -196,7 +196,7 @@ void init_lists(void)
 			break;
 		}
 	}
-
+	
 	backend_set_module_iterators();
 	while ((buf = backend_get_next_percom_name()) != NULL) {
 		if (!strcmp(buf, "+"))
