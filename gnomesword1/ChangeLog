@@ -1,3 +1,9 @@
+2003-12-05  Terry <tbiggs@users.sf.net>
+
+	* removed 'point to' and 'add to root' items form bookmark menus.
+	* removed 'view hints' from main menu.
+	
+
 2003-12-05  Andy <andyp@users.sf.net>
 
 	* string updates to editors and about boxes
