@@ -231,7 +231,8 @@ static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void gui_display_verse_list(gchar *module_name, gchar *verse_list)
+ *   void gui_display_verse_list(gchar * key, gchar *module_name, 
+ *                                                    gchar *verse_list)
  *
  * Description
  *   
@@ -240,7 +241,8 @@ static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
  *   void
  */
 
-void gui_display_verse_list(gchar * module_name, gchar * verse_list)
+void gui_display_verse_list(gchar * key, gchar * module_name, 
+						gchar * verse_list)
 {
 	GList * tmp = NULL;
 	gboolean oddkey = TRUE;
@@ -252,9 +254,21 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 	gchar *next_verse = NULL;
 	gint    i = 0;
 	gint    count = 0;
+	GString *str;
 	
+	str = g_string_new("");
 	strcpy(sv->mod_name, module_name);
-	
+	if(verse_list[0] == 'S' && verse_list[1] == 'e' 
+		&& verse_list[2] == 'e' ) {
+		verse_list += 4;
+	}
+	if(verse_list[0] == 'c' && verse_list[1] == 'h' 
+		&& verse_list[2] == '.' ) {
+		verse_list += 4;
+		g_string_sprintf(str,"%s %s",get_book_from_key(key),verse_list);
+		verse_list = str->str;
+		
+	}
 	for (i = 0; i < strlen(verse_list); i++) {
 		if (verse_list[i] == '+')
 			verse_list[i] = ' ';
@@ -317,6 +331,7 @@ void gui_display_verse_list(gchar * module_name, gchar * verse_list)
 			(const gchar *)first_key, sv);
 		g_free(first_key);
 	}
+	g_string_free(str,TRUE);
 }
 
 /******************************************************************************

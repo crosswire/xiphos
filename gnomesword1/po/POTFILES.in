@@ -26,6 +26,7 @@ src/gnome/gnomesword.c
 src/gnome/gtkhtml_display.c
 src/gnome/gui.c
 src/gnome/history.c
+src/gnome/hints.c
 src/gnome/html.c
 src/gnome/interlinear.c
 src/gnome/interlinear_dialog.c

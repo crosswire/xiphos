@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * module.h - SHORT DESCRIPTION
+ * hints.h - create hint_window dialog and display hints
  *
  * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
@@ -18,33 +18,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef _MODULE_H_
-#define _MODULE_H_
+#ifndef _HINTS_H
+#define _HINTS_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
+
+typedef struct _hint HINT;
+struct  _hint {
 	
-char *get_footnote_body(char *note);
-int get_display_level(char * module_name);	
-int is_module_rtl(char * mod_name);
-int get_module_number(char *module_name, char *module_type);
-int get_mod_type(char * mod_name);
-int do_module_search(char * module_name ,char *search_string, 
-		  int search_type, int search_params, int dialog);
-char *get_module_description(char * module_name);
-int module_is_locked(char * mod_name);
-char *get_cipher_key(char *mod_name);
-int has_cipher_tag(char *mod_name);
-int check_for_module(char * mod_name);
-char *get_mod_about_info(char * mod_name);
+	GtkWidget *hint_window;
+	GtkWidget *html_widget;
+	
+	gboolean in_popup;
+	gboolean use_hints;
+};
+extern HINT hint;
 
-char *get_module_text(int manager, char * module_name, char * key);
-char *get_striptext(int manager, char *module_name, char *key);
-
+void gui_show_footnote(gchar *note);
+	
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif /* _HINTS_H */

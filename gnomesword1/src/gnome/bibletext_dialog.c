@@ -332,7 +332,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		mybuf = strchr(url, '=');
 		++mybuf;
 		buf = g_strdup(mybuf);
-		gui_display_verse_list(xml_get_value("modules", "text"),buf);//settings.MainWindowModule, buf);
+		gui_display_verse_list(vt->key, xml_get_value("modules", "text"),buf);//settings.MainWindowModule, buf);
 		g_free(buf);
 
 	}
