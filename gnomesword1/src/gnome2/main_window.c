@@ -399,8 +399,7 @@ void gui_change_verse(const gchar * key)
 	if (settings.havebible) {
 		/* add item to history */
 		if (settings.addhistoryitem) {
-			if (strcmp
-			    (settings.currentverse,
+			if (strcmp(settings.currentverse,
 			     historylist[historyitems - 1].verseref))
 				addHistoryItem(widgets.app,
 					       GTK_WIDGET

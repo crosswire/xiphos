@@ -176,8 +176,8 @@ void frontend_display(void)
 	g_print("%s\n", "Displaying GnomeSword\n");
 	gui_show_main_window();
 
+	addHistoryItem(widgets.app, NULL, settings.currentverse);
 	settings.addhistoryitem = FALSE;
-
 	gui_change_verse(settings.currentverse);
 
 	gui_change_module_and_key(settings.DictWindowModule, 
