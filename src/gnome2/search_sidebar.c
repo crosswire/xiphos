@@ -40,7 +40,7 @@
 #include "main/search.h"
 #include "main/settings.h"
 
-#include "gnome/shortcutbar.h"
+#include "gnome2/shortcutbar.h"
 
 SEARCH_OPT so, *p_so;
 
