@@ -61,10 +61,9 @@ module.include.type=
 module.include.expanded=0
 module.include.files=
 
-
 module.source.name=.
 module.source.type=
-module.source.expanded=0
+module.source.expanded=1
 module.source.files=\
 	src/backend/viewtext_dlg.cpp\
 	src/backend/viewdict_dlg.cpp\
@@ -117,6 +116,8 @@ module.source.files=\
 	src/main/gs_viewdict_dlg.c\
 	src/main/gs_viewtext_dlg.c\
 	src/main/main.c\
+	src/main/create_shortcutbar_search.c\
+	src/main/create_shortcutbar_search.h\
 	src/main/spell.c\
 	src/main/spell_gui.c\
 	src/main/support.c
