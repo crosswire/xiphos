@@ -816,7 +816,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(frame9);
 	gtk_box_pack_start(GTK_BOX(vbox32), frame9, TRUE, TRUE, 0);
 
-	gtk_widget_set_usize(frame9, 380, -2);
+	//gtk_widget_set_usize(frame9, 380, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(frame9), 2);
 
 	swHtmlBible = gtk_scrolled_window_new(NULL, NULL);
@@ -955,7 +955,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frameCom);
   gtk_box_pack_start (GTK_BOX (hbox18), frameCom, TRUE, TRUE, 0);
-  gtk_frame_set_shadow_type (GTK_FRAME (frameCom), GTK_SHADOW_IN);
+  //gtk_frame_set_shadow_type (GTK_FRAME (frameCom), GTK_SHADOW_IN);
 
 
   swHtmlCom = gtk_scrolled_window_new (NULL, NULL);
