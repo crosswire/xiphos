@@ -44,6 +44,7 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
+#include "gui/_percomm.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -132,7 +133,7 @@ void init_gnomesword(void)
 	 *  setup personal comments gui support 
 	 */
 	if (havepercomm) {
-		setup_percomm(get_list(PERCOMM_LIST));
+		gui_setup_percomm(get_list(PERCOMM_LIST));
 	}
 
 	/*
@@ -235,7 +236,7 @@ void gnomesword_shutdown(void)
 		gui_shutdown_dictlex_dialog();
 	}
 	if(havepercomm)
-		shutdown_percomm();
+		gui_shutdown_percomm();
 	
 	g_print("\nGnomeSWORD is shutdown\n");
 }
@@ -827,7 +828,7 @@ void change_verse(gchar * key)
 	if (settings.notefollow) {	                  
 		if (!settings.editnote)
 			if (havepercomm)
-				display_percomm(val_key);
+				gui_display_percomm(val_key);
 	}
 	/* 
 	 * set commentary module to current verse 

@@ -25,22 +25,19 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-//#include "main/gs_gnomesword.h"
 	
-char *backend_get_book_key(int book_num);
-void backend_display_gbs(int booknum, char * key);
-int backend_treekey_next_sibling(char *bookname, unsigned long offset);
-int backend_gbs_treekey_has_children(char *bookname,
-		unsigned long offset);
-char *backend_gbs_get_treekey_local_name(char *bookname,
-		unsigned long offset);
-unsigned long backend_gbs_get_treekey_offset(char *bookname);
-void backend_new_gbs_display(GtkWidget *html, char *bookName);
-int backend_gbs_treekey_first_child(char *bookname, unsigned long offset);
-int backend_display_row_gbs(int booknum, char *offset);
+char *backend_get_book_key(char * book_name);
+char * backend_display_gbs(char * book_name, char * key);
+int backend_treekey_next_sibling(unsigned long offset);
+int backend_gbs_treekey_has_children(unsigned long offset);
+char *backend_gbs_get_treekey_local_name(unsigned long offset);
+unsigned long backend_gbs_get_treekey_offset(void);
+int backend_gbs_treekey_first_child(unsigned long offset);
+char * backend_display_row_gbs(char * book_name, char *offset);
 void backend_setup_books(void);
 void backend_shutdown_books(void);
+void backend_change_book(char * mod_name, unsigned long offset);
+
 
 #ifdef __cplusplus
 }
