@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/terry --enable-debug
+project.configure.options=--prefix=/usr
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -279,7 +279,11 @@ module.doc.files=\
 	COPYING-DOCS\
 	doc/help/fr/gnomesword2-fr.omf\
 	doc/help/fr/gnomesword2.xml\
-	doc/help/fr/legal.xml
+	doc/help/fr/legal.xml\
+	doc/help/C/gnomesword-C.omf\
+	doc/help/C/gnomesword.xml\
+	doc/help/fr/gnomesword.xml\
+	doc/help/fr/gnomesword-fr.omf
 
 module.po.files=\
 	bg.po\
