@@ -51,11 +51,17 @@ using namespace sword;
 using namespace std;
 
 	
+//static gchar *f_message = "main/display.cc line #%d \"%s\" = %s";
+
+
 char GTKEntryDisp::Display(SWModule &imodule) 
 {
 	GString *str = g_string_new(NULL);
-	const gchar *keytext = NULL;
-	int curPos = 0;
+	gchar *keytext = NULL;
+	int curPos = 0;                                         
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
 	GtkHTML *html = GTK_HTML(gtkText);
 	MOD_FONT *mf = get_font(imodule.Name());
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
@@ -63,10 +69,23 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	(const char *)imodule;	// snap to entry
 	main_set_global_options(ops);
 	if(backend->module_type(imodule.Name()) == BOOK_TYPE)
-		keytext = backend->treekey_get_local_name(
-				settings.book_offset);
+		keytext = g_convert(backend->treekey_get_local_name(
+				settings.book_offset),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 	else
-		keytext = imodule.KeyText();
+		keytext = g_convert((char*)imodule.KeyText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
+		//keytext = imodule.KeyText();
 	
 	g_string_printf(str, 	HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
@@ -95,6 +114,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	g_string_free(str, TRUE);
 	free_font(mf);	
 	g_free(ops);
+	if(keytext) g_free(keytext);
 }
 
 
@@ -112,12 +132,18 @@ char GTKChapDisp::Display(SWModule &imodule)
 	GtkHTML *html = GTK_HTML(gtkText);
 	GLOBAL_OPS * ops = main_new_globals(imodule.Name());
 	GString *str = g_string_new(NULL);
+	gchar *utf8_key;
 	gchar *buf;
 	gchar *buf2;
 	gchar *preverse = NULL;
 	gchar *paragraphMark = "&para;";
 	gchar *br = NULL;
-	gchar heading[32];
+	gchar heading[32];                                          
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
+		
+		
 	gboolean newparagraph = FALSE;
 	//gboolean is_rtol = main_is_mod_rtol(imodule.Name());
 	gboolean was_editable = gtk_html_get_editable(html);
@@ -149,14 +175,23 @@ char GTKChapDisp::Display(SWModule &imodule)
 			++x;
 			sprintf(heading,"%d",x);
 		}
+		utf8_key = g_convert((char*)key->getText(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);
 		buf = g_strdup_printf(
 			"&nbsp; <A HREF=\"sword:///%s\" NAME=\"%d\">"
 			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
-			(char*)key->getText(),
+			utf8_key,
 			key->Verse(),
 			settings.verse_num_font_size,
 			settings.bible_verse_num_color, 
 			key->Verse());
+		g_free(utf8_key);
+		//g_message(f_message,163,"buf",buf);
 		str = g_string_append(str,buf);
 		g_free(buf);
 		buf = g_strdup_printf(

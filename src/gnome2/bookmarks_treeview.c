@@ -53,6 +53,7 @@
 #include "main/sword.h"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
+#include "main/url.hh"
 
 //TreePixbufs *pixbufs;
 GtkTreeStore *model;
@@ -190,7 +191,7 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 {
 	gint module_type;
 	gchar *val_key;
-	gchar *url = g_strdup_printf("sword://%s/%s",mod_name,key);;
+	gchar *url = g_strdup_printf("sword://%s/%s",mod_name,key);
 	
 	if(!main_is_module(mod_name)) 
 		mod_name = settings.MainWindowModule;
@@ -798,6 +799,8 @@ static gboolean button_release_event(GtkWidget * widget,
 	button_one = FALSE;
 	button_two = FALSE;
 	
+	
+	//g_warning(main_url_encode("test this"));
 	
 	selection = gtk_tree_view_get_selection(bookmark_tree);	
 	current_selection = selection;

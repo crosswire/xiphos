@@ -41,7 +41,7 @@
 #include "main/lists.h"
 #include "main/settings.h"
 #include "main/sword.h"
-#include "main/url.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 #include "backend/sword.h"
@@ -135,6 +135,7 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	GtkTreePath *path;
 	GtkTreeIter iter;	
 	
+	//g_warning("verse_list = %s",verse_list);
 	list_of_verses = g_list_first(list_of_verses);
 	if(list_of_verses) {
 		while(list_of_verses) {

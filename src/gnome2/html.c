@@ -52,7 +52,7 @@
 #include "main/parallel_view.h"
 #include "main/sword.h"
 #include "main/settings.h"
-#include "main/url.h"
+#include "main/url.hh"
 #include "main/xml.h"
 
 static GtkHTMLStream *htmlstream;

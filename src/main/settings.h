@@ -210,6 +210,9 @@ struct _settings {
 	
 	/* set up druid canceled */
 	int setup_canceled;
+	
+	/* widget shadow type */
+	int shadow_type;
 };
 
 extern SETTINGS settings;
