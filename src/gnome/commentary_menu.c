@@ -892,7 +892,7 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
-	//set_comm_frame_label(c);
+	gui_set_comm_frame_label();
 }
 
 /******************************************************************************
@@ -913,7 +913,6 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 
 static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	//gui_set_commentary_page_and_key(c->modnum, settings.currentverse);
 	if(c->is_dialog)
 		gui_display_commentary_in_dialog(settings.currentverse);
 	else
@@ -1030,29 +1029,6 @@ static void on_book_heading_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 	c->book_heading = TRUE;
 	gui_display_commentary_with_struct(c, settings.currentverse);
 }
-
-
-/******************************************************************************
- * Name
- *  
- *
- * Synopsis
- *   #include "gui/commentary_menu.h"
- *
- *  void (GtkMenuItem * menuitem, COMM_DATA * c)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-/*
-static void on_sync_activate(GtkMenuItem * menuitem, COMM_DATA * c)
-{
-	
-}
-*/
 
 
 /******************************************************************************
