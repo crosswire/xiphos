@@ -400,6 +400,50 @@ void gui_open_verse_in_new_tab(gchar *verse_key)
 				pt->page_widget));
 }
 
+
+/******************************************************************************
+ * Name
+ *  gui_close_al_tabs
+ *
+ * Synopsis
+ *   #include "tabbed_browser.h"
+ *
+ *   void gui_close_all_tabs(void)
+ *
+ * Description
+ *   called from preferences dialog when disable browsing is choosen
+ *
+ * Return value
+ *   void
+ */
+
+void gui_close_all_tabs(void)
+{
+	gint i;
+	gint number_of_pages = 
+		gtk_notebook_get_n_pages(GTK_NOTEBOOK(widgets.notebook_main));
+	for(i = number_of_pages-1;i > -1;i--) {
+		PASSAGE_TAB_INFO *pt = 
+			(PASSAGE_TAB_INFO*)g_list_nth_data(passage_list, (guint)i);
+		passage_list = g_list_remove(passage_list, pt);
+		g_free(pt->text_mod);
+		g_free(pt->commentary_mod);
+		g_free(pt->dictlex_mod);
+		g_free(pt->book_mod);
+		g_free(pt->text_commentary_key);
+		g_free(pt->dictlex_key);
+		g_free(pt->book_key);
+		g_free(pt);
+		gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.notebook_main), i);
+		g_warning("i = %d",i);
+	}
+	
+	g_list_free(passage_list);
+	passage_list = NULL;
+	cur_passage_tab = NULL;
+}
+
+
 /******************************************************************************
  * Name
  *  gui_close_passage_tab
@@ -458,7 +502,9 @@ void gui_notebook_main_setup(GList *ptlist)
 {
 	GList *tmp = NULL;
 	PASSAGE_TAB_INFO *pt = NULL;
+	static gboolean connected = FALSE;
 	
+	cur_passage_tab = NULL;
 	passage_list = NULL;
 	tmp = ptlist;
 	tmp = g_list_first(tmp);
@@ -489,13 +535,23 @@ void gui_notebook_main_setup(GList *ptlist)
 		notebook_main_add_page(pt);
 	}
 	set_current_tab(pt);
-	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
-			   "switch_page",
-			   G_CALLBACK
-			   (on_notebook_main_switch_page), &passage_list);
-	g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
-			   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
-	
+	/*
+	 * this is ugly :(
+	 * but when browsing is truned off and then back on in preferences
+	 * we don't need to connect or bad things happen since we are already
+	 * connected.
+	 *
+	*/
+	if(!connected) {
+		g_signal_connect(GTK_OBJECT(widgets.notebook_main),
+				   "switch_page",
+				   G_CALLBACK
+				   (on_notebook_main_switch_page), &passage_list);
+		g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
+				   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
+		connected = TRUE;
+	}
+		
 	//show the new tab button here instead of in main_window.c so it
 	//doesn't get shown if !settings.browsing
 	gtk_widget_show(widgets.button_new_tab);
@@ -518,8 +574,7 @@ void gui_notebook_main_setup(GList *ptlist)
  *   void
  */
 void gui_notebook_main_shutdown(void)
-{
-	passage_list = g_list_first(passage_list);
+{	passage_list = g_list_first(passage_list);
 	while (passage_list != NULL) {
 		PASSAGE_TAB_INFO *pt = (PASSAGE_TAB_INFO*)passage_list->data;
 		g_free(pt->text_mod);
@@ -533,4 +588,5 @@ void gui_notebook_main_shutdown(void)
 		passage_list = g_list_next(passage_list);
 	}
 	g_list_free(passage_list);
+	cur_passage_tab = NULL;
 }

@@ -676,7 +676,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		} else {
 			xml_set_value("GnomeSword", "tabs", "browsing", "0");
 			gtk_widget_hide(widgets.hboxtb);
-			gui_notebook_main_shutdown();
+			gui_close_all_tabs();//gui_notebook_main_shutdown();
 		}
 		settings.browsing = atoi(xml_get_value("tabs", "browsing"));
 		break;
