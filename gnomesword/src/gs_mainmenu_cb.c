@@ -111,7 +111,17 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	gtk_widget_show(dlg);
 }
 
-/*** toogle footnotes in main text window ***/
+/*** display daily devotion in shortcut bar viewer ***/
+void
+on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{	
+	if(settings->showdevotional)
+		displayDevotional();
+}
+
+
+/*** toogle global options in main text window ***/
 void on_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	globaloptionsSWORD((gchar *)user_data, MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
