@@ -28,8 +28,6 @@
 #include <swconfig.h>
 #include <swmodule.h>
 
-#include <gnome.h>
-
 using namespace sword;
 
 #include "backend/bibletext_.h"
