@@ -15,9 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 #include <gnome.h>
-#include <swmodule.h>
+//#include <swmodule.h>
 
-
+/*
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
@@ -464,7 +464,7 @@ on_propertybox1_clicked                (GnomePropertyBox *gnomepropertybox,
 
 void
 on_fontpicker2_font_set                (GnomeFontPicker *gnomefontpicker,
-                                        string        arg1,
+                                        GString        arg1,
                                         gpointer         user_data);
 
 void
@@ -1174,3 +1174,13 @@ on_btnLErefresh_clicked                (GtkButton       *button,
 void
 on_btnLEsave_clicked                   (GtkButton       *button,
                                         gpointer         user_data);
+
+void
+on_tbtnFollow_toggled                  (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+void
+on_btnSPnew_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+                                        
+*/

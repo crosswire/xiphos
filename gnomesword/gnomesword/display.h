@@ -74,6 +74,14 @@ public:
 };
 
 //----------------------------------------------------------------------------------------------
+class GTKPerComDisp : public GTKEntryDisp
+{
+  public:
+	GTKPerComDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);	
+};
+ 
+//----------------------------------------------------------------------------------------------
 class GTKChapDisp : public GTKEntryDisp 
 {
   public:
@@ -89,5 +97,6 @@ class GTKInterlinearDisp : public GTKEntryDisp
 	virtual char Display(SWModule &imodule);
 };
 
+//----------------------------------------------------------------------------------------------
 void
 AboutModsDisplay		(GtkWidget* text, gchar *aboutinfo);

@@ -38,7 +38,6 @@
 #include "interface.h"
 #include "filestuff.h"
 #include "display.h"
-#include "dialogs.h"
 #include "listeditor.h"
 
 #ifdef  USE_GNOMEPRINT
@@ -865,10 +864,16 @@ on_list1_select_row                    (GtkCList        *clist,
                                         GdkEvent        *event,
                                         gpointer         user_data)
 {
-	gchar *text;
+	gchar   *text,
+			*buf;
 
-	gtk_clist_get_text(GTK_CLIST(lookup_widget(GTK_WIDGET(clist),"list1")), row, column, &text);	
-	gtk_entry_set_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")), text);
+	gtk_clist_get_text(GTK_CLIST(lookup_widget(GTK_WIDGET(clist),"list1")), row, column, &text);
+	buf =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")));
+	if((strcmp(buf,text)))
+	{		
+		gtk_entry_set_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")), text);
+	}
+	//else gtk_entry_set_text(GTK_ENTRY(lookup_widget(GTK_WIDGET(clist),"dictionarySearchText")), text);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2204,3 +2209,20 @@ on_btnLEsave_clicked                  (GtkButton       *button,
    listeditor = gtk_widget_get_toplevel (GTK_WIDGET (button));	
    editbookmarksSave(listeditor);
 }
+
+//----------------------------------------------------------------------------------------------
+void
+on_tbtnFollow_toggled                  (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+	
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnSPnew_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
