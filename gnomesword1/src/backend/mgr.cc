@@ -97,6 +97,33 @@ void backend_init_managers(void)
 	sw.display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));	
 }
 
+void backend_setup_display_mgr(void)
+{
+	main_setup_displays();
+	ModMap::iterator it;
+	for (it = sw.display_mgr->Modules.begin(); it != 
+				sw.display_mgr->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
+			sw.text_mod = (*it).second;
+			
+		}
+		if (!strcmp((*it).second->Type(), COMM_MODS)) {
+			sw.comm_mod = (*it).second;
+			sw.comm_mod->Disp(sw.entryDisplay);
+		}
+		if (!strcmp((*it).second->Type(), DICT_MODS)) {
+			sw.dict_mod = (*it).second;
+			
+		}
+		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+			sw.gbs_mod = (*it).second;
+			sw.gbs_mod->Disp(sw.entryDisplay);
+		}
+		
+	}	
+}
+
+
 /******************************************************************************
  * Name
  *   backend_delete_managers

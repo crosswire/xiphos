@@ -265,8 +265,8 @@ static void on_view_new_activate(GtkMenuItem * menuitem, DL_DATA * t)
 
 static void on_view_current_book_activate(GtkMenuItem * menuitem, DL_DATA * t)
 {
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.workbook_lower), 1);
+/*	gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.workbook_lower), 1);*/
 }
 
 /******************************************************************************

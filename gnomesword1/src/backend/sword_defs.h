@@ -57,7 +57,8 @@ struct  _sword {
 	SWModule *percom_mod;
 	
 	TreeKeyIdx *treeKey;	
-	const char *version;
+	const char *version;	
+	SWDisplay *entryDisplay;
 };	
 extern SWORD sw;
 

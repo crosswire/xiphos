@@ -535,6 +535,10 @@ int xml_create_settings_file(char *path)
 	xmlNewTextChild(section_node, NULL, "morphs", "0");
 	xmlNewTextChild(section_node, NULL, "strongs", "0");
 
+	section_node = xmlNewChild(root_node, NULL, "book", NULL);
+	xmlNewTextChild(section_node, NULL, "module", NULL);
+	xmlNewTextChild(section_node, NULL, "key", NULL);
+	xmlNewTextChild(section_node, NULL, "offset", "0");
 
 	section_node = xmlNewChild(root_node, NULL, "keys", NULL);
 	xmlNewTextChild(section_node, NULL, "book", "");

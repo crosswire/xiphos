@@ -44,6 +44,7 @@
 
 #include "main/sword.h"
 #include "main/lists.h"
+#include "main/display.hh"
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
@@ -177,7 +178,7 @@ void backend_init(void)
 	
 	init_lists();
 	backend_setup_treekey();
-	
+	backend_setup_display_mgr();
 }
 
 
@@ -200,7 +201,7 @@ void backend_init(void)
 void backend_shutdown(int save_properties)
 {
 	backend_shutdown_treekey();
-	
+	main_delete_displays();
 	/* delete Sword managers */
 	backend_delete_managers();
 	g_print("%s\n", _("SWORD is shutdown"));

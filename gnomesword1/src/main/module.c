@@ -150,7 +150,7 @@ char *get_module_name(void)
 			return (char *) settings.DictWindowModule;
 			break;
 		case BOOK_WINDOW:
-			return (char *) settings.BookWindowModule;
+			return (char *) settings.book_mod;
 			break;
 		}
 	}

@@ -850,7 +850,7 @@ void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num)
 	/*
 	 * personal comments editor goes here
 	 */
-
+/*
 	label = gtk_label_new(_("Personal Comments"));
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(workbook_lower),
@@ -866,6 +866,7 @@ void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num)
 					  (workbook_lower),
 					  page_num),
 					 _("Personal Comments"));
+*/
 }
 
 
