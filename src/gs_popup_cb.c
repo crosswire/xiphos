@@ -58,8 +58,6 @@ extern GtkWidget
 	*NEtext,
 	*htmlComments,
 	*htmlCommentaries;
-extern GString 
-	*gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern gboolean 
 	autoscroll,  /* is commentary window set to scroll with text window */
 	isrunningSD,    /* is the view dictionary dialog runing */

@@ -38,12 +38,13 @@
 
 #include "gs_mainmenu_cb.h"
 #include "gs_gnomesword.h"
+#include "gs_menu.h"
 #include "sw_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_history.h"
 #include "support.h"
 #include "gs_file.h"
-#include "gs_listeditor.h"
+//#include "gs_listeditor.h"
 #include "gs_abouts.h"
 
 /******************************************************************************
@@ -56,6 +57,8 @@ extern gboolean
 	firstLE;	  /* ListEditor in not running when TRUE */
 extern GtkWidget 
 	*listeditor;		/* pointer to ListEditor */
+extern gint 
+	ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
 	
 /******************************************************************************
 
@@ -139,14 +142,15 @@ void on_add_quickmark_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 /*** open guickmark editor dialog ***/
 void
-on_edit_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
+on_clear_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (firstLE) {
-		listeditor = createListEditor();
-		editbookmarks(listeditor);
-		firstLE = FALSE;
-	}
-	gtk_widget_show(listeditor);
+	gchar buf[80];
+	
+	gnome_app_remove_menus(GNOME_APP(settings->app), "_Quickmarks/<Separator>", ibookmarks+1);        
+	sprintf(buf,"%s%s", _("_Quickmarks/"),"Clear Quickmarks");
+        addseparator(settings->app, buf);	
+	ibookmarks = 0;
+	clearquickmarks();
 }
 
 /*** display search group in shortcut bar ***/

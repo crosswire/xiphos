@@ -547,8 +547,6 @@ void AboutModsDisplayHTML(char *to, char *text)
 		*to++ = text[i];
 	}
 	*to++ = 0;
-	//return to;
-
 }
 
 GdkColor GTKEntryDisp::colourBlue;
@@ -574,12 +572,6 @@ gchar *font_mainwindow =
     *font_italic_currentverse =
     "-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1";
 
-extern SWMgr *mainMgr;
-extern SWMgr *mainMgr1;
-extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
-extern SWModule *comp1Mod;
-extern gchar *current_verse;
-extern SETTINGS *settings;
 
 /* --------------------------------------------------------------------------------------------- */
 char GTKEntryDisp::Display(SWModule & imodule)
@@ -601,7 +593,7 @@ char GTKEntryDisp::Display(SWModule & imodule)
 	(const char *) imodule;	/* snap to entry */
 	gtk_text_freeze(GTK_TEXT(gtkText));
 	/* let's find out if we have a comment or dict module */
-	it = mainMgr->Modules.find(imodule.Name());
+	//it = mainMgr->Modules.find(imodule.Name());
 	sprintf(tmpBuf, "[%s][%s] ", imodule.Name(), imodule.KeyText());
 	/* show verse ref in text widget  */
 	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
@@ -621,7 +613,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	char tmpBuf[255];
 	GdkFont *sword_font;
 	ModMap::iterator it;
-
+	SWMgr *Mgr;
 	/* Load a  font */
 	sword_font =
 	    gdk_font_load
@@ -634,16 +626,16 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	(const char *) imodule;	/*  snap to entry */
 	gtk_text_freeze(GTK_TEXT(gtkText));
 
-	/* let's find out if we have a comment or dict module */
-	it = mainMgr->Modules.find(imodule.Name());
+	
+	//it = mainMgr->Modules.find(imodule.Name());
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* else just the keytext */
-	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
+	if (((*Mgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
 	    (settings->editnote)) {	/* check for edit mode */
 		GtkWidget *statusbar;	/* pointer to comments statusbar */
 		gint context_id2;	/* statusbar context_id ??? */
 		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* add module name and verse to edit note statusbar */
 		/* setup statusbar for personal comments */
-		statusbar = lookup_widget(MainFrm, "sbNotes");	/*        get stutusbar */
+		statusbar = lookup_widget(settings->app, "sbNotes");	/*        get stutusbar */
 		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");	/* get context id */
 		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	/* ready status */
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);	/* show modName and verse ref in statusbar */
@@ -661,6 +653,7 @@ char GTKPerComDisp::Display(SWModule & imodule)
 			(const char *) imodule, -1);
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
+	delete Mgr;
 	return 0;
 }
 

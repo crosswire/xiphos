@@ -63,7 +63,7 @@
 #include "gs_menu.h"
 #include "gs_popup_cb.h"
 #include "gs_mainmenu_cb.h"
-#include "gs_listeditor.h"
+//#include "gs_listeditor.h"
 #include "gs_html.h"
 #include "gs_abouts.h"
 #include "gs_info_box.h"
@@ -166,7 +166,6 @@ extern GtkWidget
 extern gchar * current_filename,	/* filename for open file in study pad window  */
  current_verse[80],		/* current verse showing in main window, interlinear window - commentary window */
 *mycolor, *mycolor;
-extern GString * gs_clipboard;
 extern HISTORY historylist[];	/* sturcture for storing history items */
 
 /***********************************************************************************************
@@ -176,7 +175,6 @@ extern HISTORY historylist[];	/* sturcture for storing history items */
 void initSWORD(GtkWidget * mainform)
 { 
 	ModMap::iterator it;	//-- iteratior
-	//SectionMap::iterator sit;	//-- iteratior
 	ConfigEntMap::iterator eit;	//-- iteratior
 	int i,			//-- counter
 	 j;			//-- counter 
@@ -232,8 +230,7 @@ void initSWORD(GtkWidget * mainform)
 	compages = 0;
 	dictpages = 0;
 
-//	initRenderFiltersUTIL();
-	
+
 	if (settings->showsplash) {
 		while (gtk_events_pending())
 			gtk_main_iteration();
@@ -419,7 +416,6 @@ void changeVerseComSWORD(void)
 	VerseKey key;
 	
 	key = current_verse;
-	//g_warning("chapter = %d",key.Chapter());
 	
 	if((!key.Chapter()) || (!key.Verse())) {
 		vkComm.AutoNormalize(0);
@@ -514,8 +510,6 @@ void FillDictKeysSWORD(void)
 	}
 }
 
-
-
 //-------------------------------------------------------------------------------------------
 void shutdownSWORD(void)	//-- close down GnomeSword program
 {
@@ -524,7 +518,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	extern gchar
 		*gSwordDir,
 		*shortcutbarDir,
-		*fnbookmarksnew,
+		*fnquickmarks,
 		*fnconfigure,
 		*swbmDir;
 	
@@ -548,19 +542,20 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 			break;
 		}
 	}
+	
 	g_free(gSwordDir);
 	g_free(shortcutbarDir);
-	g_free(fnbookmarksnew);
+	g_free(fnquickmarks);
 	g_free(fnconfigure);
 	g_free(swbmDir);
 	
 	g_list_free(options);
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
-	g_string_free(gs_clipboard, TRUE);	
-//	deleteRenderfilters();
+	
+
 	//-- delete Sword managers
-	delete mainMgr;
+//	delete mainMgr;
 	delete mainMgr1;
 	delete percomMgr;
 	//-- delete Sword displays
