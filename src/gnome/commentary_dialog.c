@@ -49,7 +49,7 @@
  * static - global to this file only
  */
 static GList *dialog_list;
-static VIEW_COMM *cur_vc;
+static COMM_DATA *cur_vc;
 static gboolean dialog_freed;
 static gboolean apply_change;
 
@@ -80,7 +80,7 @@ void gui_on_lookup_commentary_dialog_selection
 	memset(mod_name, 0, 16);
 	module_name_from_description(mod_name, dict_mod_description);
 
-	dict_key = gui_get_word_or_selection(cur_vc->c->html, FALSE);
+	dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(mod_name,
@@ -98,7 +98,7 @@ void gui_on_lookup_commentary_dialog_selection
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void display(VIEW_COMM *c, gchar * key)	
+ *   void display(COMM_DATA *c, gchar * key)	
  *
  * Description
  *   calls entry_display to display a commentary entry 
@@ -107,7 +107,7 @@ void gui_on_lookup_commentary_dialog_selection
  *   void
  */
 
-static void display(VIEW_COMM * vc, gchar * key)
+static void display(COMM_DATA * vc, gchar * key)
 {
 	gchar *text_str = NULL;
 	gchar *strkey;
@@ -115,27 +115,27 @@ static void display(VIEW_COMM * vc, gchar * key)
 	cur_vc = vc;
 
 	strkey = get_valid_key(key);
-	strcpy(vc->c->key, strkey);
+	strcpy(vc->key, strkey);
 
-	if (vc->c->book_heading) {
-		vc->c->book_heading = FALSE;
-		text_str = get_book_heading(vc->c->mod_name, strkey);
+	if (vc->book_heading) {
+		vc->book_heading = FALSE;
+		text_str = get_book_heading(vc->mod_name, strkey);
 	}
 
-	else if (vc->c->chapter_heading) {
-		vc->c->chapter_heading = FALSE;
-		text_str = get_chapter_heading(vc->c->mod_name, strkey);
+	else if (vc->chapter_heading) {
+		vc->chapter_heading = FALSE;
+		text_str = get_chapter_heading(vc->mod_name, strkey);
 	}
 
 	else {
 		if (vc->ec) {
 			settings.percomverse = key;
-			change_percomm_module(vc->c->mod_name);
+			change_percomm_module(vc->mod_name);
 			strcpy(vc->ec->key, key);
 			text_str = get_percomm_text(key);
 			if (text_str) {
 				entry_display(vc->ec->htmlwidget,
-					      vc->c->mod_name,
+					      vc->mod_name,
 					      text_str, key, FALSE);
 				free(text_str);
 				gui_update_statusbar(vc->ec);
@@ -143,13 +143,13 @@ static void display(VIEW_COMM * vc, gchar * key)
 			}
 		} else {
 			text_str =
-			    get_commentary_text(vc->c->mod_name,
+			    get_commentary_text(vc->mod_name,
 						strkey);
 		}
 	}
 
 	if (text_str) {
-		entry_display(vc->c->html, vc->c->mod_name,
+		entry_display(vc->html, vc->mod_name,
 			      text_str, key, TRUE);
 		free(text_str);
 	}
@@ -163,7 +163,7 @@ static void display(VIEW_COMM * vc, gchar * key)
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void free_on_destroy(VIEW_COMM * vc)
+ *   void free_on_destroy(COMM_DATA * vc)
  *
  * Description
  *   removes dialog from dialog_list when dialog is destroyed other than
@@ -173,9 +173,9 @@ static void display(VIEW_COMM * vc, gchar * key)
  *   void
  */
 
-static void free_on_destroy(VIEW_COMM * vc)
+static void free_on_destroy(COMM_DATA * vc)
 {
-	dialog_list = g_list_remove(dialog_list, (VIEW_COMM *) vc);
+	dialog_list = g_list_remove(dialog_list, (COMM_DATA *) vc);
 	g_free(vc);
 }
 
@@ -188,7 +188,7 @@ static void free_on_destroy(VIEW_COMM * vc)
  *   #include "commentary_dialog.h"
  *
  *   void on_dialog_destroy(GtkObject * object, 
- *						VIEW_COMM * vc)	
+ *						COMM_DATA * vc)	
  *
  * Description
  *   shut down the View Commentay Dialog
@@ -197,7 +197,7 @@ static void free_on_destroy(VIEW_COMM * vc)
  *   void
  */
 
-static void on_dialog_destroy(GtkObject * object, VIEW_COMM * vc)
+static void on_dialog_destroy(GtkObject * object, COMM_DATA * vc)
 {
 	if (!dialog_freed) {
 		if (vc->ec)
@@ -217,7 +217,7 @@ static void on_dialog_destroy(GtkObject * object, VIEW_COMM * vc)
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void gui_close_comm_dialog(void)	
+ *   void gui_close_comm_dialog(COMM_DATA * vc)	
  *
  * Description
  *   
@@ -226,11 +226,11 @@ static void on_dialog_destroy(GtkObject * object, VIEW_COMM * vc)
  *   void
  */
 
-void gui_close_comm_dialog(void)
+void gui_close_comm_dialog(COMM_DATA * vc)
 {
-	if (cur_vc->dialog) {
+	if (vc->dialog) {
 		dialog_freed = FALSE;
-		gtk_widget_destroy(cur_vc->dialog);
+		gtk_widget_destroy(vc->dialog);
 	}
 }
 
@@ -243,7 +243,7 @@ void gui_close_comm_dialog(void)
  *   #include "commentary_dialog.h"
  *
  *   gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-                      GdkEventMotion  *event, VIEW_COMM * vc)	
+                      GdkEventMotion  *event, COMM_DATA * vc)	
  *
  * Description
  *   
@@ -254,7 +254,7 @@ void gui_close_comm_dialog(void)
 
 static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      GdkEventMotion * event,
-					      VIEW_COMM * vc)
+					      COMM_DATA * vc)
 {
 	cur_vc = vc;
 	return TRUE;
@@ -269,7 +269,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  * Synopsis
  *   #include "commentary_dialog.h"
  *
- *   void dialog_url(GtkHTML * html, const gchar * url, VIEW_COMM * vc)	
+ *   void dialog_url(GtkHTML * html, const gchar * url, COMM_DATA * vc)	
  *
  * Description
  *   
@@ -279,7 +279,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
  */
 
 static void dialog_url(GtkHTML * html, const gchar * url,
-		       VIEW_COMM * vc)
+		       COMM_DATA * vc)
 {
 	cur_vc = vc;
 }
@@ -293,7 +293,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  *   #include "gui/commentary_dialog.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					VIEW_COMM * vc)	
+ *					COMM_DATA * vc)	
  *
  * Description
  *    mouse button pressed in window - used to set cur_vc to the current
@@ -304,7 +304,7 @@ static void dialog_url(GtkHTML * html, const gchar * url,
  */
 
 static gint button_press_event(GtkWidget * html,
-			       GdkEventButton * event, VIEW_COMM * vc)
+			       GdkEventButton * event, COMM_DATA * vc)
 {
 	cur_vc = vc;
 	return FALSE;
@@ -318,7 +318,7 @@ static gint button_press_event(GtkWidget * html,
  * Synopsis
  *   #include "bibletext_dialog.h"
  *
- *   void update_controls(VIEW_COMM * vc)	
+ *   void update_controls(COMM_DATA * vc)	
  *
  * Description
  *   update the book, chapter and verse contorls
@@ -327,15 +327,15 @@ static gint button_press_event(GtkWidget * html,
  *   void
  */
 
-static void update_controls(VIEW_COMM * vc)
+static void update_controls(COMM_DATA * vc)
 {
 	gchar *val_key;
 	gint cur_chapter, cur_verse;
 
 	cur_vc = vc;
 	apply_change = FALSE;
-	val_key = get_valid_key(vc->c->key);
-	//vc->c->key = vc->key;
+	val_key = get_valid_key(vc->key);
+	//vc->key = vc->key;
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
 	/* 
@@ -372,7 +372,7 @@ static void update_controls(VIEW_COMM * vc)
  *   void
  */
 
-static void book_changed(GtkEditable * editable, VIEW_COMM * vc)
+static void book_changed(GtkEditable * editable, COMM_DATA * vc)
 {
 	if (apply_change) {
 		gchar buf[256], *val_key;
@@ -381,7 +381,7 @@ static void book_changed(GtkEditable * editable, VIEW_COMM * vc)
 		sprintf(buf, "%s 1:1", bookname);
 		val_key = get_valid_key(buf);
 		display(vc, val_key);
-		strcpy(vc->c->key, val_key);
+		strcpy(vc->key, val_key);
 		update_controls(vc);
 		g_free(val_key);
 	}
@@ -407,7 +407,7 @@ static void book_changed(GtkEditable * editable, VIEW_COMM * vc)
 
 static gboolean chapter_button_release_event(GtkWidget * widget,
 					     GdkEventButton * event,
-					     VIEW_COMM * vc)
+					     COMM_DATA * vc)
 {
 	if (apply_change) {
 		gchar *bookname, *val_key;
@@ -421,7 +421,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 		sprintf(buf, "%s %d:1", bookname, chapter);
 		val_key = get_valid_key(buf);
 		display(vc, val_key);
-		strcpy(vc->c->key, val_key);
+		strcpy(vc->key, val_key);
 		update_controls(vc);
 		g_free(val_key);
 		return TRUE;
@@ -449,7 +449,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 
 static gboolean verse_button_release_event(GtkWidget * widget,
 					   GdkEventButton * event,
-					   VIEW_COMM * vc)
+					   COMM_DATA * vc)
 {
 	if (apply_change) {
 		gchar *bookname, buf[256], *val_key;
@@ -466,7 +466,7 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 
 		val_key = get_valid_key(buf);
 		display(vc, val_key);
-		strcpy(vc->c->key, val_key);
+		strcpy(vc->key, val_key);
 		update_controls(vc);
 		g_free(val_key);
 		return TRUE;
@@ -494,7 +494,7 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 
 static gboolean entry_key_press_event(GtkWidget * widget,
 				      GdkEventKey * event,
-				      VIEW_COMM * vc)
+				      COMM_DATA * vc)
 {
 	/* if <enter> key */
 	if (event->keyval == 65293 || event->keyval == 65421) {
@@ -502,7 +502,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 		buf = gtk_entry_get_text(GTK_ENTRY(widget));
 		val_key = get_valid_key(buf);
 		display(vc, val_key);
-		strcpy(vc->c->key, val_key);
+		strcpy(vc->key, val_key);
 		update_controls(vc);
 		g_free(val_key);
 	}
@@ -518,7 +518,7 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  * Synopsis
  *   #include "gui/commentary_dialog.h"
  *
- *   void sync_with_main(VIEW_COMM * vc)	
+ *   void sync_with_main(COMM_DATA * vc)	
  *
  * Description
  *   bring the the View Commentay Dialog module into sync with main window
@@ -527,11 +527,11 @@ static gboolean entry_key_press_event(GtkWidget * widget,
  *   void
  */
 
-static void sync_with_main(VIEW_COMM * vc)
+static void sync_with_main(COMM_DATA * vc)
 {
-	strcpy(vc->c->key, settings.currentverse);
+	strcpy(vc->key, settings.currentverse);
 	update_controls(vc);
-	display(vc, vc->c->key);
+	display(vc, vc->key);
 }
 
 /******************************************************************************
@@ -550,7 +550,7 @@ static void sync_with_main(VIEW_COMM * vc)
  *   void
  */
 
-static GtkWidget *create_nav_toolbar(VIEW_COMM * vc)
+static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 {
 	GtkWidget *toolbar_nav;
 	GtkWidget *cbBook;
@@ -639,7 +639,7 @@ static GtkWidget *create_nav_toolbar(VIEW_COMM * vc)
  *   void
  */
 
-static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
+static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 {
 	GtkWidget *vbox30;
 	GtkWidget *vbox_toolbars;
@@ -652,7 +652,7 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 	gtk_object_set_data(GTK_OBJECT(vc->dialog), "vc->dialog",
 			    vc->dialog);
 	gtk_window_set_title(GTK_WINDOW(vc->dialog),
-			     get_module_description(vc->c->mod_name));
+			     get_module_description(vc->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vc->dialog), 462, 280);
 	gtk_window_set_policy(GTK_WINDOW(vc->dialog), TRUE, TRUE,
 			      FALSE);
@@ -748,19 +748,19 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 		gtk_widget_hide(vc->ec->toolbar_edit);
 
 	} else {
-		vc->c->html = gtk_html_new();
-		gtk_widget_show(vc->c->html);
+		vc->html = gtk_html_new();
+		gtk_widget_show(vc->html);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
-				  vc->c->html);
-		gtk_html_load_empty(GTK_HTML(vc->c->html));
+				  vc->html);
+		gtk_html_load_empty(GTK_HTML(vc->html));
 
-		gtk_signal_connect(GTK_OBJECT(vc->c->html),
+		gtk_signal_connect(GTK_OBJECT(vc->html),
 				   "link_clicked",
 				   GTK_SIGNAL_FUNC(gui_link_clicked),
 				   vc);
-		gtk_signal_connect(GTK_OBJECT(vc->c->html), "on_url",
+		gtk_signal_connect(GTK_OBJECT(vc->html), "on_url",
 				   GTK_SIGNAL_FUNC(dialog_url), vc);
-		gtk_signal_connect(GTK_OBJECT(vc->c->html),
+		gtk_signal_connect(GTK_OBJECT(vc->html),
 				   "button_press_event",
 				   GTK_SIGNAL_FUNC(button_press_event),
 				   vc);
@@ -795,7 +795,7 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 void gui_display_commentary_in_dialog(gchar * key)
 {
 	strcpy(settings.comm_key, key);
-	strcpy(cur_vc->c->key, key);
+	strcpy(cur_vc->key, key);
 	display(cur_vc, key);
 }
 
@@ -818,33 +818,33 @@ void gui_display_commentary_in_dialog(gchar * key)
 
 void gui_open_commentary_dialog(gchar * mod_name)
 {
-	VIEW_COMM *vc;
+	COMM_DATA *vc;
 	GtkWidget *popupmenu;
 
-	vc = g_new(VIEW_COMM, 1);
+	vc = g_new(COMM_DATA, 1);
 
-	vc->c = g_new(COMM_DATA, 1);
-	vc->c->cgs = g_new(COMM_GLOBALS, 1);
+	vc = g_new(COMM_DATA, 1);
+	vc->cgs = g_new(COMM_GLOBALS, 1);
 	vc->ec = NULL;
 	vc->dialog = NULL;
-	vc->c->mod_name = g_strdup(mod_name);
-	vc->c->book_heading = FALSE;
-	vc->c->chapter_heading = FALSE;
-	vc->c->is_dialog = TRUE;
-	vc->c->is_percomm = is_personal_comment(vc->c->mod_name);
-	dialog_list = g_list_append(dialog_list, (VIEW_COMM *) vc);
+	vc->mod_name = g_strdup(mod_name);
+	vc->book_heading = FALSE;
+	vc->chapter_heading = FALSE;
+	vc->is_dialog = TRUE;
+	vc->is_percomm = is_personal_comment(vc->mod_name);
+	dialog_list = g_list_append(dialog_list, (COMM_DATA *) vc);
 	create_commentary_dialog(vc, FALSE);
 
-	if (has_cipher_tag(vc->c->mod_name)) {
-		vc->c->is_locked = module_is_locked(vc->c->mod_name);
-		vc->c->cipher_old = get_cipher_key(vc->c->mod_name);
+	if (has_cipher_tag(vc->mod_name)) {
+		vc->is_locked = module_is_locked(vc->mod_name);
+		vc->cipher_old = get_cipher_key(vc->mod_name);
 	} else {
-		vc->c->is_locked = 0;
-		vc->c->cipher_old = NULL;
+		vc->is_locked = 0;
+		vc->cipher_old = NULL;
 	}
 
-	popupmenu = gui_create_pm_comm(vc->c);
-	gnome_popup_menu_attach(popupmenu, vc->c->html, NULL);
+	popupmenu = gui_create_pm_comm(vc);
+	gnome_popup_menu_attach(popupmenu, vc->html, NULL);
 	sync_with_main(vc);
 	gtk_widget_show(vc->dialog);
 }
@@ -869,13 +869,13 @@ void gui_open_commentary_dialog(gchar * mod_name)
 
 void gui_open_commentary_editor(gchar * mod_name)
 {
-	VIEW_COMM *vc;
+	COMM_DATA *vc;
 
 	GList *tmp = g_list_first(dialog_list);
 	while (tmp != NULL) {
-		vc = (VIEW_COMM *) tmp->data;
-		if (!strcmp(vc->c->mod_name, mod_name)) {
-			gtk_entry_set_text(GTK_ENTRY(vc->entry_key),
+		vc = (COMM_DATA *) tmp->data;
+		if (!strcmp(vc->mod_name, mod_name)) {
+			gtk_entry_set_text(GTK_ENTRY(vc->freeform_lookup),
 					   settings.currentverse);
 			display(vc, settings.currentverse);
 			gdk_window_raise(GTK_WIDGET(vc->dialog)->
@@ -885,21 +885,22 @@ void gui_open_commentary_editor(gchar * mod_name)
 		tmp = g_list_next(tmp);
 	}
 
-	vc = g_new(VIEW_COMM, 1);
+	vc = g_new(COMM_DATA, 1);
+	vc->cgs = g_new(COMM_GLOBALS, 1);
 	vc->ec = gs_html_editor_control_data_new();
 	vc->dialog = NULL;
-	vc->c->is_dialog = TRUE;
-	vc->c->mod_name = g_strdup(mod_name);
+	vc->is_dialog = TRUE;
+	vc->mod_name = g_strdup(mod_name);
 
 	vc->ec->stylebar =
-	    load_percomm_options(vc->c->mod_name, "Style bar");
+	    load_percomm_options(vc->mod_name, "Style bar");
 	vc->ec->editbar =
-	    load_percomm_options(vc->c->mod_name, "Edit bar");
+	    load_percomm_options(vc->mod_name, "Edit bar");
 	vc->ec->personal_comments = TRUE;
-	strcpy(vc->ec->filename, vc->c->mod_name);
-	vc->c->book_heading = FALSE;
-	vc->c->chapter_heading = FALSE;
-	dialog_list = g_list_append(dialog_list, (VIEW_COMM *) vc);
+	strcpy(vc->ec->filename, vc->mod_name);
+	vc->book_heading = FALSE;
+	vc->chapter_heading = FALSE;
+	dialog_list = g_list_append(dialog_list, (COMM_DATA *) vc);
 	create_commentary_dialog(vc, TRUE);
 	sync_with_main(vc);
 
@@ -937,7 +938,7 @@ void gui_setup_commentary_dialog(GList * mods)
 	dialog_list = NULL;
 	dialog_freed = FALSE;
 	settings.percomm_dialog_exist = FALSE;
-	cur_vc = g_new(VIEW_COMM, 1);
+	cur_vc = g_new(COMM_DATA, 1);
 }
 
 
@@ -962,9 +963,8 @@ void gui_shutdown_commentary_dialog(void)
 
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
-		VIEW_COMM *vc = (VIEW_COMM *) dialog_list->data;
+		COMM_DATA *vc = (COMM_DATA *) dialog_list->data;
 		dialog_freed = TRUE;
-//              g_warning("shuting down %s dialog",vc->mod_name);
 		if (vc->ec)
 			gui_html_editor_control_data_destroy(NULL,
 							     vc->ec);
@@ -976,10 +976,9 @@ void gui_shutdown_commentary_dialog(void)
 		/* 
 		 * free each COMM_DATA item created 
 		 */
-		g_free(vc->c->mod_name);
-		g_free(vc->c->cgs);
-		g_free(vc->c);
-		g_free((VIEW_COMM *) dialog_list->data);
+		g_free(vc->mod_name);
+		g_free(vc->cgs);
+		g_free(vc);
 		dialog_list = g_list_next(dialog_list);
 	}
 	g_list_free(dialog_list);

@@ -26,33 +26,11 @@
 extern "C" {
 #endif
 
-#include "gui/editor.h"	
 #include "gui/commentary.h"
-	
-typedef struct _viewcomm VIEW_COMM;
-struct _viewcomm {
-	GtkWidget *dialog;
-	GtkWidget *btn_sync;
-	GtkWidget *btn_goto;
-	GtkWidget *btn_prev;
-	GtkWidget *btn_next;
-	GtkWidget *btn_close;
-	GtkWidget *entry_key;
-	GtkWidget *btn_print;
-	
-	GtkWidget *cbe_book;
-	GtkWidget *spb_chapter;
-	GtkWidget *spb_verse;
-	GtkWidget *freeform_lookup;
-	GtkWidget *statusbar;
-	gboolean has_key;
-	GSHTMLEditorControlData *ec;
-	COMM_DATA *c;
-};
 
 void gui_on_lookup_commentary_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
-void gui_close_comm_dialog(void);
+void gui_close_comm_dialog(COMM_DATA * vc);
 void gui_open_commentary_dialog(gchar * mod_name);
 void gui_open_commentary_editor(gchar * mod_name);
 void gui_setup_commentary_dialog(GList *mods);

@@ -32,7 +32,6 @@ extern "C" {
 #include <config.h>
 #endif
 
-//using namespace sword;
 
 using namespace sword;
 typedef struct _sword_managers MANAGERS;

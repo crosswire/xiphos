@@ -279,16 +279,15 @@ void gui_unlock_commentary(GtkMenuItem *menuitem, COMM_DATA *c)
 {
 	gchar *cipher_key;
 	
-//	g_warning(c->cipher_old);
-	
 	cipher_key = gui_add_cipher_key(c->mod_name, c->cipher_old);
 	if(cipher_key){
 		c->cipher_key = cipher_key;
-		//cur_c = c;
 		gui_module_is_locked_display(c->html, 
 				c->mod_name, c->cipher_key);		
 	}
 }
+
+
 /******************************************************************************
  * Name
  *  set_module_font_activate
@@ -892,7 +891,7 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
-	gui_set_comm_frame_label();
+	gui_set_comm_frame_label(c);
 }
 
 /******************************************************************************
@@ -1076,9 +1075,9 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+static void on_close_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	gui_close_comm_dialog();
+	gui_close_comm_dialog(c);
 }
 
 
@@ -1386,7 +1385,7 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 		gtk_container_add(GTK_CONTAINER(show_menu), c->showtabs);
 		gtk_signal_connect(GTK_OBJECT(c->showtabs), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_comm_showtabs_activate), NULL);
+			   (on_comm_showtabs_activate), c);
 	}
 	
 	gtk_signal_connect(GTK_OBJECT(sync), "activate",

@@ -94,6 +94,7 @@ struct _preferences_check_buttons {
 
 	GtkWidget *use_default_dictionary;
 	GtkWidget *use_verse_style;
+	GtkWidget *show_splash_screen;
 
 	GtkWidget *show_bible_pane;
 	GtkWidget *show_commentary_pane;
@@ -391,14 +392,19 @@ static void applyoptions(void)
 	}
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs);
-	gui_set_text_frame_label();
+	gui_set_text_frame_label(cur_t);
 
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
+	gui_set_gbs_frame_label();
+	
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 				   settings.dict_tabs);
+	gui_set_dict_frame_label();
+	
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
+	gui_set_comm_frame_label(cur_c);
 
 	GTK_CHECK_MENU_ITEM(widgets.versestyle_item)->active =
 	    settings.versestyle;
@@ -578,6 +584,9 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	settings.versestyle =
 	    GTK_TOGGLE_BUTTON(check_button.use_verse_style)->active;
 
+	settings.showsplash =
+	    GTK_TOGGLE_BUTTON(check_button.show_splash_screen)->active;
+	    
 	settings.showtexts =
 	    GTK_TOGGLE_BUTTON(check_button.show_bible_pane)->active;
 	settings.showcomms =
@@ -1451,7 +1460,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 
 	check_button.show_devotion =
-	    gtk_check_button_new_with_label(_("Show Daily Devotion"));
+	    gtk_check_button_new_with_label(_("Show Daily Devotion at start up"));
 	gtk_widget_show(check_button.show_devotion);
 	gtk_box_pack_start(GTK_BOX(vbox55), check_button.show_devotion,
 			   FALSE, FALSE, 0);
@@ -1459,6 +1468,16 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 		 _("Show Daily Devotion if you have a Devotion module"),
 			     NULL);
 
+	check_button.show_splash_screen =
+	    gtk_check_button_new_with_label(_("Show Splash Screen at start up"));
+	gtk_widget_show(check_button.show_splash_screen);
+	gtk_box_pack_start(GTK_BOX(vbox55), check_button.show_splash_screen,
+			   FALSE, FALSE, 0);
+	gtk_tooltips_set_tip(tooltips, check_button.show_splash_screen,
+		 _("Show Splash Screen at program start"),
+			     NULL);
+			     
+			     
 	frame41 = gtk_frame_new(
 		_("where to View Dict/Lex When Link or Word Clicked"));
 	gtk_widget_show(frame41);
@@ -2179,6 +2198,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     (check_button.
 				      use_default_dictionary),
 				     settings.useDefaultDict);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (check_button.show_splash_screen),
+				     settings.showsplash);
 
 	gtk_entry_set_text(GTK_ENTRY(entry.text_module),
 			   settings.MainWindowModule);
@@ -2303,6 +2325,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   GINT_TO_POINTER(1));
 	gtk_signal_connect(GTK_OBJECT
 			   (check_button.use_default_dictionary),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(0));
+	gtk_signal_connect(GTK_OBJECT
+			   (check_button.show_splash_screen),
 			   "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(0));

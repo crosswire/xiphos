@@ -181,6 +181,9 @@ struct _settings {
 
 	/* bookmarks directory */
 	char *swbmDir;
+	
+	/* xml bookmarks directory */
+	char *xml_bookmark_dir;
 
 	/* store dir name for shortcutbar files */
 	char *shortcutbarDir;
@@ -188,8 +191,15 @@ struct _settings {
 	/* store filename for configure file - options */
 	char *fnconfigure;
 
-	/* apply changes to what? the text navigation bar*/
+	/* apply changes to what? the text navigation bar */
 	gboolean apply_change;
+	
+	/* load xml bookmarks */
+	gboolean load_xml_bookmarks;
+	
+	/* is Bibletime on the system */
+	gboolean have_bibletime;
+	
 };
 
 extern SETTINGS settings;
