@@ -56,6 +56,7 @@ gchar * gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	GS_DIALOG *info;
 	
 	info = gui_new_dialog();
+	info->title = N_("Cipher Key?");
 	info->label_top = mod_name;
 	info->text1 = g_strdup(cipher_old);
 	info->label1 = N_("Enter Cipher Key: ");
@@ -72,4 +73,3 @@ gchar * gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	g_free(info);
 	return retval;
 }
-
