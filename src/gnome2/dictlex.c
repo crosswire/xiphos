@@ -59,7 +59,6 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
  * static
  */
 static void create_menu(GdkEventButton * event);
-static gint cell_height;
 
 
 
@@ -89,54 +88,7 @@ static void set_label(gchar * mod_name)
 
 void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
 {
-	gint count = 7, i;
-	const gchar *key;
-	gchar *new_key, *text = NULL;
-	static gboolean firsttime = TRUE;
-	GtkTreeModel *model;
-	GtkListStore *list_store;
-	GtkTreeIter iter;
-	gint height;
-	
-	key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));	
-	text = get_dictlex_text(settings.DictWindowModule, (gchar*)key);
-	g_free(text);
-	key = get_key_from_module(2, settings.DictWindowModule);
-	
-	xml_set_value("GnomeSword", "keys", "dictionary", key);
-	settings.dictkey = xml_get_value("keys", "dictionary");
-	
-	main_display_dictionary(settings.DictWindowModule, settings.dictkey);
-	
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widgets.listview_dict));
-	list_store = GTK_LIST_STORE(model);
-	
-	if (!firsttime) {
-		gdk_drawable_get_size ((GdkDrawable *)widgets.listview_dict->window,
-                                             NULL,
-                                             &height);
-		count = height / cell_height;
-	}	 
-
-	if (count) {
-		gtk_list_store_clear(list_store);
-		new_key = get_dictlex_key(2, settings.DictWindowModule, -1);
-
-		for (i = 0; i < (count / 2); i++) {
-			free(new_key);
-			new_key = get_dictlex_key(2, settings.DictWindowModule, 0);
-		}
-
-		for (i = 0; i < count; i++) {
-			free(new_key);
-			new_key = get_dictlex_key(2, settings.DictWindowModule, 1);
-			gtk_list_store_append(list_store, &iter);
-			gtk_list_store_set(list_store, &iter, 0,
-					   new_key, -1);
-		}
-		free(new_key);
-	}
-	firsttime = FALSE;
+	main_dictionary_entery_changed(settings.DictWindowModule);
 }
 
 /******************************************************************************
@@ -203,12 +155,11 @@ void gui_set_dictlex_mod_and_key(gchar *mod_name, gchar *key)
 {
 	const gchar *old_key;
 	
-	xml_set_value("GnomeSword", "modules", "dict", mod_name);
-	settings.DictWindowModule = xml_get_value("modules", "dict");
-	set_label(settings.DictWindowModule);
+	//xml_set_value("GnomeSword", "modules", "dict", mod_name);
+	//settings.DictWindowModule = xml_get_value("modules", "dict");
+	//set_label(settings.DictWindowModule);
 	if(key == NULL)
 		key = "Grace";
-	gui_display_dictlex(key);
 	
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
 	if(!strcmp(old_key, key))
@@ -338,7 +289,7 @@ static void add_columns(GtkTreeView * treeview)
                                     NULL,
                                     NULL,
                                     NULL,
-                                    &cell_height);
+                                    &settings.cell_height);
 }
 
 GtkWidget *gui_create_dictionary_pane(void)

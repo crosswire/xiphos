@@ -22,8 +22,11 @@
 #ifndef __URL_H_
 #define __URL_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <gnome.h>
-//#include "main/configs.h"
 
 enum {
 	TYPE_URI,
@@ -34,7 +37,11 @@ enum {
 	NOTE_NUM
 };
 
-gint gui_url_handler(const gchar * url, gboolean clicked);
+gint main_url_handler(const gchar * url, gboolean clicked);
 	
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -472,18 +472,17 @@ void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected)
 			&& strstr(key,"chapter:"))
 			add_verses_to_chapter(model, selected, key);
 		if(key)
-			gui_url_handler(key, TRUE);
+			main_url_handler(key, TRUE);
 		else
-			gui_change_module_and_key(mod, settings.currentverse);
+			main_display_bible(mod, settings.currentverse);
 		break;
 	case COMMENTARY_TYPE:
 		settings.comm_showing = TRUE;
 		gui_change_module_and_key(mod, settings.currentverse);
 		break;
 	case DICTIONARY_TYPE:
-		gtk_notebook_set_current_page
-		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
-		gui_change_module_and_key(mod, settings.dictkey);
+		//gui_change_module_and_key(mod, settings.dictkey);
+		main_display_dictionary(mod, settings.dictkey);
 		break;
 	case BOOK_TYPE:
 		main_set_book_mod(mod, (key)?atol(key):0);
