@@ -29,6 +29,7 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/commentary.h"
+#include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/commentary_find.h"

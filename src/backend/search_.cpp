@@ -34,8 +34,8 @@
 #include "backend/sword_defs.h"
 
 #include "main/settings.h"
-#include "main/gs_gnomesword.h"
 #include "main/sword.h"
+#include "main/shortcutbar.h"
 
 
 
@@ -46,7 +46,7 @@
  * Synopsis
  *   #include "search.h"
  *
- *   GList* backend_do_search(SEARCH_OPT *search_opts)	
+ *   GList* backend_do_search(gpointer *search_opts)	
  *
  * Description
  *   search Sword module for word(s), phrase, or reg_ex.
@@ -57,7 +57,7 @@
  
 GList* backend_do_search(gpointer *usr_data)	
 {	
-	SEARCH_OPT *search_opts;
+	SEARCH_SWORD *search_opts;
 	VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
         ListKey	searchScopeList; //----------- search list for searching verses found on last search
         SWKey	*currentScope; //----------- use to set scope of search	
@@ -81,7 +81,7 @@ GList* backend_do_search(gpointer *usr_data)
 	GString 
 		*tmpbuf;
 		
-	search_opts = (SEARCH_OPT *)usr_data;	
+	search_opts = (SEARCH_SWORD *)usr_data;	
 	tmpbuf = g_string_new("");	
 	list = NULL;	
 	

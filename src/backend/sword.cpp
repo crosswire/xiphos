@@ -44,7 +44,7 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#include "main/gs_gnomesword.h"
+#include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
@@ -63,6 +63,8 @@
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
+
+#define CIPHER_KEY_LEN 16
 
 MANAGERS sw_mgr,
 	 _mgr;
@@ -320,27 +322,6 @@ int backend_get_verse_from_key(char *key)
 	vkey.AutoNormalize(1);
 	vkey = key;
 	return vkey.Verse();
-}
-
-/******************************************************************************
- * 
- * option - option to set
- * yesno - yes or no
-******************************************************************************/
-void backend_set_global_option(int window, char * option,
-			       char * yesno)
-{
-	/* turn option on or off */
-	switch (window) {
-	case MAIN_TEXT_WINDOW:
-			      /*** Bible text window ***/
-		mainMgr->setGlobalOption(option, yesno);
-		break;
-	case INTERLINEAR_WINDOW:
-				/*** interlinear window ***/
-		backend_set_interlinear_global_option(option, yesno);
-		break;
-	}
 }
 
 /**********************************************************************

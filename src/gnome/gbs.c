@@ -31,6 +31,7 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
+#include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/gbs_find.h"
 #include "gui/shortcutbar_main.h"
@@ -41,7 +42,6 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/gbs.h"
-#include "main/gs_gnomesword.h"
 #include "main/sword.h"
 
 /******************************************************************************

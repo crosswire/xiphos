@@ -31,7 +31,7 @@
 #include "gui/main_window.h"
 #include "gui/utilities.h"
 
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
 #include <gal/e-paned/e-hpaned.h>

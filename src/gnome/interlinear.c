@@ -32,7 +32,7 @@
 #include "gui/html.h"
 #include "gui/main_window.h"
 
-#include "main/gs_gnomesword.h"
+//#include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "main/lists.h"
 #include "main/sword.h"
