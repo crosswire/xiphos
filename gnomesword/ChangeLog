@@ -1,3 +1,10 @@
+2000-08-02  - bug fixes - misc segfaults and crashes
+            - double click the verse num in main text window make that verse
+            the current verse.
+            - new popup menu items let you lookup a highlighted word or number
+            in current dict/lex.
+            - changes to display code.
+
 2000-07-18	- formatting of personal comments using html tags added
 						- fixed NIV problem
 

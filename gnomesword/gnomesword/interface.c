@@ -1744,11 +1744,17 @@ create_mainwindow (void)
   gtk_signal_connect (GTK_OBJECT (dictionarySearchText), "changed",
                       GTK_SIGNAL_FUNC (on_dictionarySearchText_changed),
                       NULL);
+  gtk_signal_connect (GTK_OBJECT (dictionarySearchText), "key_press_event",
+                      GTK_SIGNAL_FUNC (on_dictionarySearchText_key_press_event),
+                      NULL);
   gtk_signal_connect (GTK_OBJECT (btnKeyNext), "clicked",
                       GTK_SIGNAL_FUNC (on_btnKeyNext_clicked),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (list1), "select_row",
                       GTK_SIGNAL_FUNC (on_list1_select_row),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (list1), "button_press_event",
+                      GTK_SIGNAL_FUNC (on_list1_button_press_event),
                       NULL);
 
   gtk_widget_grab_focus (mainwindow);
