@@ -100,11 +100,75 @@ void main_dialog_search_percent_update(char percent, void *userData)
 	printed = 0;
 }
 
+/******************************************************************************
+ * Name
+ *   main_range_text_changed
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void main_range_text_changed(GtkEditable * editable,
+ *			       gpointer user_data)
+ *
+ * Description
+ *   text in the range text entry has changed
+ *   text is sent to the backend to get the search range list
+ *   then list_ranges is updated to the range list
+ *   and the range text in the clist_range is updated
+ *
+ * Return value
+ *   void
+ */
+
+void main_range_text_changed(GtkEditable * editable)
+{
+	const gchar *entry;
+	gchar *buf = NULL;
+	gint count;
+	gint i = 0;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeModel *model_list_ranges;
+	GtkListStore *store_list_ranges;
+	GtkTreeSelection *selection;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	GList *tmp = NULL;
+
+	/*    */
+	model_list_ranges =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_ranges));
+	store_list_ranges = GTK_LIST_STORE(model_list_ranges);
+	/*    */
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW
+				    (search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+	    (GTK_TREE_VIEW(search.list_range_name));
+	if (!gtk_tree_selection_get_selected
+	    (selection, NULL, &selected))
+		return;
+
+	gtk_list_store_clear(store_list_ranges);
+	entry = gtk_entry_get_text(GTK_ENTRY(editable));
+	//count = start_parse_range_list(entry);
+	tmp = backend->parse_range_list(entry);
+	while (tmp) {
+		buf = (gchar*)tmp->data;
+		if (!buf)
+			break;
+		gtk_list_store_append(store_list_ranges, &iter);
+		gtk_list_store_set(store_list_ranges, &iter,
+				   0, buf, -1);
+		g_free(buf);
+		tmp = g_list_next(tmp);
+	}
+
+	gtk_list_store_set(list_store, &selected, 1, entry, -1);
+}
 
 
-/**********************************************************************/
-/****************************** dialog search *************************/
-/**********************************************************************/
 
 /******************************************************************************
  * Name

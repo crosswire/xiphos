@@ -1,3 +1,9 @@
+2004-05-14 Terry <tbiggs@users.sf.net>
+
+	* revomed backend/key.hh and backend/key.cc
+	* revomed main/key.h and main/key.c
+	
+
 2004-05-13 Terry <tbiggs@users.sf.net>
 
 	* revomed main/search.h and main/search.c
