@@ -885,12 +885,12 @@ static void on_togglebutton_show_main(GtkToggleButton * togglebutton,
 
 /******************************************************************************
  * Name
- *   gui_url
+ *   url
  *
  * Synopsis
  *   #include "gui/search_dialog.h"
  *
- *   void gui_url(GtkHTML * html, const gchar * url, gpointer data)
+ *   void url(GtkHTML * html, const gchar * url, gpointer data)
  *
  * Description
  *   called when mouse moves over an url (link)
@@ -901,7 +901,7 @@ static void on_togglebutton_show_main(GtkToggleButton * togglebutton,
 
 static void url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	/***  moved out of url - clear appbar  ***/
+	/***  moved out of url  ***/
 	if (url == NULL) {
 
 
@@ -948,20 +948,20 @@ static void url(GtkHTML * html, const gchar * url, gpointer data)
 			}
 			buf = g_strdup(newref);
 
-			if (buf) {
+			if (buf) {/*
 				settings.displaySearchResults = TRUE;
 				text = get_module_text(5, modbuf, buf);
 				entry_display(search.preview_html, modbuf,
 			      		text, buf, TRUE);
-				/*gchar *str;
+				settings.displaySearchResults = FALSE;*/
+				gchar *str;
 				text = get_striptext(4, modbuf, buf);
 				str = remove_linefeeds(text);
 				gnome_appbar_set_status(GNOME_APPBAR
 							(search.
 							 progressbar),
-							str);*/
-				//g_free(str);
-				settings.displaySearchResults = FALSE;
+							str);
+				g_free(str);
 				g_free(buf);
 			}
 			if (text)
@@ -1032,19 +1032,27 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		}
 		buf = g_strdup(newref);
 		settings.displaySearchResults = TRUE;
-		/*if (GTK_TOGGLE_BUTTON(search.togglebutton_show_main)->
-		    active) {
-			gui_change_module_and_key(modbuf, buf);
-
+		
+		switch(GPOINTER_TO_INT(data)) {
+			case 0:
+			if (GTK_TOGGLE_BUTTON(search.togglebutton_show_main)->
+			    active) {
+				gui_change_module_and_key(modbuf, buf);
+	
+			}
+	
+			text = get_module_text(5, modbuf, buf);
+			entry_display(search.preview_html, modbuf,
+				      text, buf, TRUE);
+	
+			if (search.show_in_main)
+				gui_change_module_and_key(modbuf, buf);
+			break;
+			case 1:
+				gui_change_module_and_key(modbuf, buf);
+			break;
 		}
-
-		text = get_module_text(5, modbuf, buf);
-		entry_display(search.preview_html, modbuf,
-			      text, buf, TRUE);*/
-
-		/*if (search.show_in_main)*/
-			gui_change_module_and_key(modbuf, buf);
-
+	
 		settings.displaySearchResults = FALSE;
 
 		/*if (text)
@@ -3229,9 +3237,12 @@ static GtkWidget *create_search_dialog(void)
 			 G_CALLBACK(on_togglebutton_show_main), NULL);
 	g_signal_connect(G_OBJECT(button_begin_search), "clicked",
 			 G_CALLBACK(on_button_begin_search), NULL);
-	g_signal_connect(G_OBJECT(search.results_html),
-			 "link_clicked",
-			 G_CALLBACK(link_clicked), NULL);
+	g_signal_connect(G_OBJECT(search.results_html),"link_clicked",
+			 G_CALLBACK(link_clicked), 
+			 GINT_TO_POINTER(0));
+	g_signal_connect(G_OBJECT(search.preview_html),"link_clicked",
+			 G_CALLBACK(link_clicked), 
+			 GINT_TO_POINTER(1));
 	g_signal_connect(G_OBJECT(search.results_html), "on_url",
 			 G_CALLBACK(url), NULL);
 	g_signal_connect(G_OBJECT(search.report_html),

@@ -1,7 +1,11 @@
+2003-12-18  Terry <tbiggs@users.sf.net>
+
+	* clicking on verse (link) in preview pane (sidebar or search_dialog) 
+	  now displays verse in main text pane. 
+
+
 2003-12-17  Terry <tbiggs@users.sf.net>
 
-	* clicking on verse in verse list (sidebar or search_dialog) now
-	  displays verse in main text pane.
 	* fixed bug - Greek and Hebrew module not saved in setup_druid.
 	  
 
