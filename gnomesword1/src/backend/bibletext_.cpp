@@ -36,21 +36,57 @@
 
 #include "backend/bibletext_.h"
 #include "backend/sword.h"
-#include "backend/display.h"
 
-typedef struct _backend_text BE_TEXT;
-struct _backend_text {
-	SWModule *mod;
-	SWDisplay *disp;
-	int num;
-};
 
 /******************************************************************************
  * globals to this file only 
  */
 
 static SWMgr *mgr;
-static GList *be_text_list;
+
+
+/******************************************************************************
+ * Name
+ *   backend_setup_bibletext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void backend_setup_bibletext(void)	
+ *
+ * Description
+ *   setup the bibletext sword manager
+ *
+ * Return value
+ *   void
+ */
+
+void backend_setup_bibletext(void)
+{
+	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+}
+
+/******************************************************************************
+ * Name
+ *   backend_shutdown_bibletext
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void backend_shutdown_bibletext(void)	
+ *
+ * Description
+ *   shutdown down bibletext support
+ *
+ * Return value
+ *   void
+ */
+
+void backend_shutdown_bibletext(void)
+{
+	delete mgr;
+}
+
 /******************************************************************************
  * Name
  *  backend_get_text_module_description
@@ -58,7 +94,7 @@ static GList *be_text_list;
  * Synopsis
  *   #include "bibletext.h"
  *
- *   const char* backend_get_text_module_description(int modnum)	
+ *   const char* backend_get_text_module_description(char * mod_name)	
  *
  * Description
  *    
@@ -67,174 +103,39 @@ static GList *be_text_list;
  *   const char*
  */
  
-const char* backend_get_text_module_description(int modnum)
-{
-	BE_TEXT *t;
-
-	t = (BE_TEXT *) g_list_nth_data(be_text_list, modnum);
-
-	return t->mod->Description(); 
+const char* backend_get_text_module_description(char * mod_name)
+{	
+	SWModule *mod = mgr->Modules[mod_name];
+	if (mod)
+		return mod->Description(); 
+	else
+		return NULL;
 }
 
 /******************************************************************************
  * Name
- *  backend_nav_text_module
+ *   backend_get_bibletext_text
  *
  * Synopsis
  *   #include "bibletext.h"
  *
- *   void backend_nav_text_module(gint modnum, gint direction)	
+ *   char *backend_get_bibletext_text(char *mod_name, char *key)	
  *
  * Description
- *    navigate the current text module
+ *   return formated text for a verse
  *
  * Return value
- *   void
- */
- 
-void backend_nav_text_module(int modnum, int direction)
-{
-	BE_TEXT *t;
-
-	t = (BE_TEXT *) g_list_nth_data(be_text_list, modnum);
-
-	switch (direction) {
-	case 0:
-		(*t->mod)--;
-		break;
-	case 1:
-		(*t->mod)++;
-		break;
-	}
-
-	t->mod->Error(); /* clear any errors */
-	t->mod->Display();
-}
-
-/******************************************************************************
- * Name
- *  backend_new_text_display
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void backend_new_text_display(GtkWidget * html,char *modname,SETTINGS * s)	
- *
- * Description
- *   create new sword dispaly 
- *
- * Return value
- *   void
+ *   char *
  */
 
-void backend_new_text_display(GtkWidget * html, char *modname)
+char *backend_get_bibletext_text(char *mod_name, char *key)
 {
-	GList *tmp = NULL;
-	BE_TEXT *t;
-
-	tmp = g_list_first(be_text_list);
-	while (tmp != NULL) {
-		t = (BE_TEXT *) tmp->data;
-		if (!strcmp(t->mod->Name(), modname)) {
-			t->disp = new GtkHTMLChapDisp(html);
-			t->mod->Disp(t->disp);
-		}
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-}
-
-/******************************************************************************
- * Name
- *  backend_setup_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void backend_setup_text(void)	
- *
- * Description
- *   setup sword text module support
- *
- * Return value
- *   void
- */
-
-void backend_setup_text(void)
-{
-	ModMap::iterator it;
-	gint count = 0;
-
-	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	be_text_list = NULL;
-	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
-			BE_TEXT *t = new BE_TEXT;
-			t->mod = (*it).second;
-			t->num = count;
-			be_text_list =
-			    g_list_append(be_text_list, (BE_TEXT *) t);
-			++count;
-		}
-	}
-}
-
-/******************************************************************************
- * Name
- *  backend_shutdown_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void backend_shutdown_text(void)	
- *
- * Description
- *   shut down sword suppoet
- *
- * Return value
- *   void
- */
-
-void backend_shutdown_text(void)
-{
-	delete mgr;
-	/*
-	 * free the backend stuff
-	 */
-	be_text_list = g_list_first(be_text_list);
-	while (be_text_list != NULL) {
-		BE_TEXT *t = (BE_TEXT *) be_text_list->data;
-		if (t->disp)	//-- delete any swdisplays created
-			delete t->disp;
-		delete(BE_TEXT *) be_text_list->data;
-		be_text_list = g_list_next(be_text_list);
-	}
-	g_list_free(be_text_list);
-}
-
-/******************************************************************************
- * Name
- *  backend_displayin_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void backend_displayin_text(int modnum, gchar * key)	
- *
- * Description
- *   display new key or module
- *
- * Return value
- *   void
- */
-
-void backend_display_text(int modnum, char *key)
-{
-	BE_TEXT *t;
-	t = (BE_TEXT *) g_list_nth_data(be_text_list, modnum);
-
-	t->mod->SetKey(key);
-	t->mod->Display();
+	SWModule *mod = mgr->Modules[mod_name];
+	if (mod)
+		mod->SetKey(key);
+	else
+		return NULL;
+	return strdup((char *) mod->RenderText());
 }
 
 /******************************************************************************
@@ -277,9 +178,9 @@ void backend_set_text_global_option(char * option, char * yesno)
  *   void
  */
 
-void backend_set_module_unlocked(char *mod_name, char *key)
+void backend_set_module_unlocked(char * mod_name, char * key)
 {	/* this does not work */
-	g_warning("module is %s\nkey = %s",mod_name,key);
+	//g_warning("module is %s\nkey = %s",mod_name,key);
 	mgr->setCipherKey(mod_name, key);	
 }
 
@@ -299,10 +200,13 @@ void backend_set_module_unlocked(char *mod_name, char *key)
  *   int
  */
 
-int backend_check_for_global_option(int mod_num, char *option)
+int backend_check_for_global_option(char * mod_name, char * option)
 {		
-	BE_TEXT *t = (BE_TEXT *) g_list_nth_data(be_text_list, mod_num);
-	return t->mod->getConfig().has("GlobalOptionFilter",option);
+	SWModule *mod = mgr->Modules[mod_name];
+	if (mod)
+		return mod->getConfig().has("GlobalOptionFilter",option);
+	else
+		return 0;
 }
 
 /******   end of file   ******/

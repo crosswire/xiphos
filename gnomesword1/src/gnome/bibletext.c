@@ -24,6 +24,8 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
@@ -35,6 +37,7 @@
 #include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/gs_gnomesword.h"
 
 
 /******************************************************************************
@@ -50,6 +53,179 @@ extern gboolean gsI_isrunning;
 static GList *text_list;
 static TEXT_DATA *cur_t;
 static gboolean display_change = TRUE;
+
+/******************************************************************************
+ * Name
+ *   chapter_display
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void chapter_display(GtkWidget * html_widget, 
+ *			gchar * module_name, gchar *key)	
+ *
+ * Description
+ *   display bibletext a chapter at a time
+ *
+ * Return value
+ *   void
+ */
+
+static void chapter_display(GtkWidget * html_widget, 
+			gchar * module_name, gchar *key)
+{
+	gchar 
+		*utf8str,
+		*bgColor,
+		*textColor,
+		buf[500], 
+		*tmpkey,
+		tmpbuf[256],
+		*use_font_size;
+	gchar 	*paragraphMark;	
+	gint 
+		utf8len,
+		cur_verse,
+		cur_chapter,
+		i = 1;
+	gboolean newparagraph = FALSE;
+	
+	const char *cur_book;
+	
+	GtkHTMLStreamStatus status1 = 0;
+	GtkHTMLStream *htmlstream;
+	
+	GtkHTML *html = GTK_HTML(html_widget);
+	gboolean was_editable = gtk_html_get_editable(html);
+	
+	paragraphMark = "&para;"; 
+	
+	if (was_editable)
+		gtk_html_set_editable(html, FALSE);
+	htmlstream =
+	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+
+	
+	sprintf(buf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings.bible_bg_color, settings.bible_text_color, settings.link_color);
+	utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+	utf8len = strlen(utf8str);     
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+			       utf8len);
+	}	
+	
+	tmpkey = get_valid_key(key);
+	
+	bgColor = "#f1f1f1";
+	cur_verse = get_verse_from_key(tmpkey);
+	cur_chapter = get_chapter_from_key(tmpkey);
+	cur_book = get_book_from_key(tmpkey);
+	
+	for (i = 1; ; i++) {	
+		sprintf(tmpbuf,"%s %d:%d",cur_book,cur_chapter,i);
+		g_free(tmpkey);
+		tmpkey = get_valid_key(tmpbuf);
+		if(cur_chapter != get_chapter_from_key(tmpkey))
+			break;
+		sprintf(buf,"%s","<tr valign=\"top\">");		
+		utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}		
+				
+		if(i == cur_verse)
+			textColor = settings.currentverse_color;
+		else 
+			textColor = settings.bible_text_color;
+			
+					
+		use_font_size = settings.bible_font_size; 
+						
+		sprintf(buf,			
+			"&nbsp; <A HREF=\"I%s\" NAME=\"%d\">"
+			"<font color=\"%s\">%d</font></A>"
+			"<font size=\"%s\" color=\"%s\"> ", 
+			tmpkey,
+			i,				 
+			settings.bible_verse_num_color, 
+			i,
+			use_font_size,
+			textColor);	
+		
+		utf8str = e_utf8_from_gtk_string(html_widget, buf);
+		utf8len = strlen(utf8str);
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
+						
+		if(newparagraph && settings.versestyle) {
+			newparagraph = FALSE;
+			sprintf(tmpbuf,  "%s ", paragraphMark);
+			utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
+			utf8len = strlen(utf8str);		
+			if (utf8len) {
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+			}	
+		} 
+		
+		utf8str = get_bibletext_text(module_name, tmpkey);
+		if (strlen(utf8str)) {
+			
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
+			
+			if (settings.versestyle) {
+				if ((strstr(utf8str , "<BR>") == NULL ) && (strstr(utf8str, "<!P>") == NULL))  {
+					sprintf(tmpbuf, " %s", "</font><br>");
+				} else {
+					sprintf(tmpbuf, " %s", "</font>");
+				}
+				if (strstr(utf8str, "<!P>") == NULL) {
+					newparagraph = FALSE;
+				} else {
+					newparagraph = TRUE;
+				}
+			} 
+			
+			else
+				if (strstr(utf8str, "<!P>") == NULL)
+					sprintf(tmpbuf, " %s", "</font>");
+				else 
+					sprintf(tmpbuf, " %s", "</font><p>");
+					
+			free(utf8str);
+				
+			utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
+			utf8len = strlen(utf8str);		
+			if (utf8len) {
+				gtk_html_write(html, htmlstream, utf8str, utf8len);
+			}	
+		}
+		
+		sprintf(buf, "%s", "</font>");	
+		utf8str = e_utf8_from_gtk_string(html_widget, buf);
+		utf8len = strlen(utf8str);		
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
+		
+	}
+	sprintf(buf, "%s", "</body></html>");
+	utf8str = e_utf8_from_gtk_string(html_widget, buf);
+	utf8len = strlen(utf8str);       
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+			       utf8len);
+	}
+
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	gtk_html_set_editable(html, was_editable);
+	sprintf(buf, "%d", cur_verse);
+	gtk_html_jump_to_anchor(html, buf);		
+	g_free(tmpkey);
+}
 
 /******************************************************************************
  * Name
@@ -112,8 +288,8 @@ static void set_options_on_page_change(TEXT_DATA * t)
 			set_text_global_option("Textual Variants", "Secondary Reading");
 		else if(GTK_RADIO_MENU_ITEM(t->t_btn_all)->check_menu_item.active)
 			set_text_global_option("Textual Variants", "All Readings");
-		display_text(settings.currentverse);
 	}
+	chapter_display(t->html, t->mod_name, settings.currentverse);
 }
 
 /******************************************************************************
@@ -135,34 +311,34 @@ static void set_options_on_page_change(TEXT_DATA * t)
 static void get_module_global_options(TEXT_DATA * t)
 {
 	t->gbfstrongs =
-	    check_for_global_option(t->mod_num, "GBFStrongs");
+	    check_for_global_option(t->mod_name, "GBFStrongs");
 	t->thmlstrongs =
-	    check_for_global_option(t->mod_num, "ThMLStrongs");
+	    check_for_global_option(t->mod_name, "ThMLStrongs");
 	t->gbfmorphs =
-	    check_for_global_option(t->mod_num, "GBFMorph");
+	    check_for_global_option(t->mod_name, "GBFMorph");
 	t->thmlmorphs =
-	    check_for_global_option(t->mod_num, "ThMLMorph");
+	    check_for_global_option(t->mod_name, "ThMLMorph");
 	t->gbffootnotes =
-	    check_for_global_option(t->mod_num, "GBFFootnotes");
+	    check_for_global_option(t->mod_name, "GBFFootnotes");
 	t->thmlfootnotes =
-	    check_for_global_option(t->mod_num,"ThMLFootnotes");
+	    check_for_global_option(t->mod_name,"ThMLFootnotes");
 	t->greekaccents =
-	    check_for_global_option(t->mod_num,
+	    check_for_global_option(t->mod_name,
 					    "UTF8GreekAccents");
 	t->lemmas =
-	    check_for_global_option(t->mod_num, "ThMLLemma");
+	    check_for_global_option(t->mod_name, "ThMLLemma");
 	t->scripturerefs =
-	    check_for_global_option(t->mod_num, "ThMLScripref");
+	    check_for_global_option(t->mod_name, "ThMLScripref");
 	t->hebrewpoints =
-	    check_for_global_option(t->mod_num,
+	    check_for_global_option(t->mod_name,
 					    "UTF8HebrewPoints");
 	t->hebrewcant =
-	    check_for_global_option(t->mod_num,
+	    check_for_global_option(t->mod_name,
 					    "UTF8Cantillation");
 	t->headings =
-	    check_for_global_option(t->mod_num, "ThMLHeadings");
+	    check_for_global_option(t->mod_name, "ThMLHeadings");
 	t->variants =
-	    check_for_global_option(t->mod_num, "ThMLVariants");
+	    check_for_global_option(t->mod_name, "ThMLVariants");
 }
 
 /******************************************************************************
@@ -262,7 +438,7 @@ static void text_page_changed(gint page_num, TEXT_DATA *t)
 static void set_text_variant_global_option(gchar * option, gchar * choice)
 {
 	set_text_global_option(option, choice);
-	display_text(settings.currentverse);
+	chapter_display(cur_t->html, cur_t->mod_name, settings.currentverse);
 }
 
 
@@ -301,7 +477,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	/*
 	 * set program title to GnomeSWORD + current text module name 
 	 */
-	sprintf(title, "GnomeSWORD - %s", text_get_description(t->mod_num));
+	sprintf(title, "GnomeSWORD - %s", text_get_description(t->mod_name));
 	gtk_window_set_title(GTK_WINDOW(settings.app), title);
 	/*
 	 *  hide/show toolbar 
@@ -1447,10 +1623,30 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 		gtk_widget_show(dlg);
 
 	} else
-		display_text(key);
+		chapter_display(cur_t->html, cur_t->mod_name, key);
 	display_change = TRUE;
 }
 
+/******************************************************************************
+ * Name
+ *  gui_display_text
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *   void gui_display_text(gchar * key)
+ *  	
+ *
+ * Description
+ *   call chapter_display and pass html wigdet, module name and key
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_text(gchar * key) 
+{
+	chapter_display(cur_t->html, cur_t->mod_name, key);
+}
 
 /******************************************************************************
  * Name
@@ -1472,7 +1668,6 @@ void gui_setup_text(GList *mods)
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
-	gchar *modname;
 	gchar *modbuf;
 	TEXT_DATA *t;
 	gint count = 0;
@@ -1482,9 +1677,8 @@ void gui_setup_text(GList *mods)
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
-		modname = (gchar *) tmp->data;
 		t = g_new(TEXT_DATA, 1);
-		t->mod_name = modname;
+		t->mod_name = (gchar *) tmp->data;
 		t->mod_num = count;
 		t->search_string = NULL;
 		t->key = NULL;
@@ -1494,7 +1688,6 @@ void gui_setup_text(GList *mods)
 		create_text_pane(t);
 		popupmenu = create_pm_text(t);
 		gnome_popup_menu_attach(popupmenu, t->html, NULL);
-		new_text_display(t->html, t->mod_name);
 		text_list = g_list_append(text_list, (TEXT_DATA *) t);
 		++count;
 		tmp = g_list_next(tmp);

@@ -26,16 +26,12 @@
 extern "C" {
 #endif
 
-//#include "main/gs_gnomesword.h"
-//#include "main/settings.h"
-
+char *get_bibletext_text(char *mod_name, char *key);
 void set_text_global_option(gchar * option, gchar * choice);
 void set_text_module_global_option(gchar * option,
 				   gboolean choice);
-const char* text_get_description(int mod_num);
-gint check_for_global_option(gint mod_num, gchar * option);
-void display_text(gchar * key);
-void new_text_display(GtkWidget * html, gchar * mod_name);
+const char* text_get_description(char * mod_name);
+gint check_for_global_option(gchar * mod_name, gchar * option);
 	
 const char *get_book_viewtext(void);	
 int get_chapter_viewtext(void);

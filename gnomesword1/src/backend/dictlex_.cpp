@@ -34,7 +34,7 @@
 #include <sys/stat.h>
 #include <string.h>
 
-//#include "main/gs_gnomesword.h"
+#include "main/settings.h"
 
 #include "backend/sword.h"
 #include "backend/display.h"

@@ -248,7 +248,7 @@ void backend_new_display_commentary(GtkWidget * html, char *modname)
  * Synopsis
  *   #include "commentary_.h"
  *
- *   void backend_setup_commentary(SETTINGS * s)	
+ *   void backend_setup_commentary(void)	
  *
  * Description
  *   set up sword commentary support
@@ -258,7 +258,7 @@ void backend_new_display_commentary(GtkWidget * html, char *modname)
  *   void
  */
 
-void backend_setup_commentary(SETTINGS * s)
+void backend_setup_commentary(void)
 {
 	ModMap::iterator it;
 	gint count = 0;
@@ -272,7 +272,7 @@ void backend_setup_commentary(SETTINGS * s)
 			c->mod = (*it).second;
 			c->num = count;
 			c->vkey.Persist(1);
-			c->vkey = s->currentverse;
+			c->vkey = settings.currentverse;
 			c->mod->SetKey(c->vkey);
 			be_comm_list =
 			    g_list_append(be_comm_list, (BE_COMM *) c);

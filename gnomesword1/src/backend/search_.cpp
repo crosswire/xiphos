@@ -56,7 +56,7 @@ static SWModule
  * Synopsis
  *   #include "search.h"
  *
- *   GList* backend_do_search(SETTINGS *s, SEARCH_OPT *search_opts)	
+ *   GList* backend_do_search(SEARCH_OPT *search_opts)	
  *
  * Description
  *   search Sword module for word(s), phrase, or reg_ex.
@@ -64,7 +64,7 @@ static SWModule
  * Return value
  *   GList *
  */
-GList* backend_do_search(SETTINGS *s, gpointer *usr_data)	
+GList* backend_do_search(gpointer *usr_data)	
 {	
 	SEARCH_OPT *search_opts;
 	VerseKey searchScopeLowUp; //----------- sets lower and upper search bounds
@@ -128,7 +128,7 @@ GList* backend_do_search(SETTINGS *s, gpointer *usr_data)
 	char progressunits = 70;
 	count = 0;		
 	
-	sprintf(s->searchText, "%s",search_opts->search_string);
+	sprintf(settings.searchText, "%s",search_opts->search_string);
 	
 	if (searchMod) {		/* must have a good module - not null */	 
                 int searchType = search_opts->search_type;
