@@ -52,10 +52,12 @@ struct _dldata {
 	gboolean is_dialog;
 	gboolean is_rtol;
 };
+extern DL_DATA *cur_d;
 
 void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 					 gchar * dict_mod_description);
 void gui_set_dict_frame_label(void);
+void gui_set_dictlex_mod_and_key(gchar *mod, gchar *key);
 void gui_display_dictlex(gchar * key);
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
 void gui_add_new_dict_pane(DL_DATA *dl);
