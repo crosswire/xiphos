@@ -1,5 +1,5 @@
 
-AC_INIT(gnomesword2, 0.9.dev19, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
+AC_INIT(gnomesword2, 2.0.rc1, http://sourceforge.net/tracker/?group_id=5528&atid=105528)
 AC_CONFIG_SRCDIR(src/gnome2/gnomesword.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
