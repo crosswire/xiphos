@@ -78,7 +78,7 @@ GtkWidget *create_about(void)
 	GtkWidget *about;
 
 	about = gnome_about_new("gnomesword", VERSION,
-				 "                   Copyright\t  2000-2001",
+				 "                   Copyright\t  2000-2002",
 				 authors,
 				_("We would like to thank Troy Griffitts and all the other folks who have given us The SWORD Project."),
 				 "gnomesword/about.png");

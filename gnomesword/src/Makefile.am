@@ -101,7 +101,7 @@ SPELLING_SOURCE =  \
 EXTRA_DIST = \
     $(SPELLING_SOURCE)
     
-COMMON_LDADD = \
+gnomesword_LDADD = \
     $(GNOME_LIBDIR) \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
@@ -109,22 +109,11 @@ COMMON_LDADD = \
     $(GTKHTML_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
-    $(PIXBUF_LIBS) \
-    $(GNOME_APP_LIBS) 
+    $(PIXBUF_LIBS)
 	
-if SHORTCUTBAR_SPELL
 gnomesword_SOURCES = \
     $(SPELLING_SOURCE) \
     $(COMMON_SOURCE)
-endif
-
-if SHORTCUTBAR
-gnomesword_SOURCES = \
-    $(COMMON_SOURCE)
-endif
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) 
 
 CXXFLAGS =  \
     $(GTK_CFLAGS) \

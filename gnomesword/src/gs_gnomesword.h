@@ -56,7 +56,7 @@ struct _settings {
 		*unlockcommmod_item, /* unlock module menu item */
 		*unlockdictmod_item, /* unlock module menu item */
 		*htmlcomm, /* html commentary widget */
-		*vboxMain;
+		*hboxToolbar;
 	
 	GtkWidget  /* global option menu check items */
 		*strongsnum,
