@@ -67,7 +67,7 @@
 #include "module_options.h"
 #include "gs_editor.h"
 #include "gbs_.h"
-#include "gbs.h"
+//#include "gbs.h"
 #include "dictlex_.h"
 #include "dictlex.h"
 #include "commentary_.h"
