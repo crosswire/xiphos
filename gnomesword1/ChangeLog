@@ -1,3 +1,12 @@
+2003-01-22  Terry Biggs <tbiggs@users.sf.net>
+	
+	* removed strip_words_in_red() from 
+	  gnome/gtkhtml_display.c
+	* added "Red letter words" to module global options
+	  toolbar for modules that have words of Christ in red
+	* fixed to work with gtkhtml-1.1
+
+
 2003-01-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added strip_words_in_red() to gnome/gtkhtml_display.c
