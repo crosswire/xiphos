@@ -342,12 +342,26 @@
 
 	<widget>
 	  <class>GtkMenuItem</class>
-	  <name>settings1</name>
-	  <stock_item>GNOMEUIINFO_MENU_SETTINGS_TREE</stock_item>
+	  <name>settings2</name>
+	  <label>_Settings</label>
+	  <right_justify>False</right_justify>
 
 	  <widget>
 	    <class>GtkMenu</class>
-	    <name>settings1_menu</name>
+	    <name>settings2_menu</name>
+
+	    <widget>
+	      <class>GtkCheckMenuItem</class>
+	      <name>verse_style</name>
+	      <signal>
+		<name>activate</name>
+		<handler>on_verse_style1_activate</handler>
+		<last_modification_time>Tue, 04 Jun 2002 00:19:10 GMT</last_modification_time>
+	      </signal>
+	      <label>Verse Style</label>
+	      <active>True</active>
+	      <always_show_toggle>True</always_show_toggle>
+	    </widget>
 
 	    <widget>
 	      <class>GtkPixmapMenuItem</class>
@@ -1313,7 +1327,7 @@ Revelation
 		    <show_border>True</show_border>
 		    <tab_pos>GTK_POS_TOP</tab_pos>
 		    <scrollable>True</scrollable>
-		    <tab_hborder>2</tab_hborder>
+		    <tab_hborder>9</tab_hborder>
 		    <tab_vborder>2</tab_vborder>
 		    <popup_enable>True</popup_enable>
 		    <child>
@@ -2124,7 +2138,7 @@ Revelation
 		<show_border>True</show_border>
 		<tab_pos>GTK_POS_TOP</tab_pos>
 		<scrollable>False</scrollable>
-		<tab_hborder>2</tab_hborder>
+		<tab_hborder>9</tab_hborder>
 		<tab_vborder>2</tab_vborder>
 		<popup_enable>False</popup_enable>
 		<child>
@@ -2148,7 +2162,7 @@ Revelation
 		    <widget>
 		      <class>GtkHPaned</class>
 		      <name>hpaned6</name>
-		      <handle_size>10</handle_size>
+		      <handle_size>6</handle_size>
 		      <gutter_size>6</gutter_size>
 		      <position>207</position>
 		      <child>
@@ -2382,7 +2396,7 @@ Revelation
 		  <widget>
 		    <class>GtkHPaned</class>
 		    <name>hpanedGBS</name>
-		    <handle_size>10</handle_size>
+		    <handle_size>6</handle_size>
 		    <gutter_size>6</gutter_size>
 		    <position>189</position>
 
