@@ -890,17 +890,20 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 
 		break;
 	case 2:
-		yes_no_dialog = gui_new_dialog();
-		yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
-		g_string_printf(str,
+		if(!have_configs) {
+			yes_no_dialog = gui_new_dialog();
+			yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
+			g_string_printf(str,
 				"<span weight=\"bold\">%s</span>\n\n%s",
-				_("Please Refresh"), _("Your module list is not up to date!"));
-		yes_no_dialog->label_top = str->str;
-		yes_no_dialog->ok = TRUE;
-	
-		test = gui_alert_dialog(yes_no_dialog);
-		if (test != GS_OK) {
-			
+				_("Please Refresh"), 
+				_("Your module list is not up to date!"));
+			yes_no_dialog->label_top = str->str;
+			yes_no_dialog->ok = TRUE;
+		
+			test = gui_alert_dialog(yes_no_dialog);
+			if (test != GS_OK) {
+				
+			}
 		}
 		if (GTK_TOGGLE_BUTTON(radiobutton_dest)->active) {
 			destination =
