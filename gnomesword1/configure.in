@@ -1,6 +1,6 @@
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev17)
+AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev18)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
@@ -72,59 +72,63 @@ GNOME_SPELL_CFLAGS=""
 GNOME_SPELL_LIBS=""
 AC_SUBST(GNOME_SPELL_CFLAGS)
 AC_SUBST(GNOME_SPELL_LIBS)
-dnl have_speller="no"
-dnl AC_ARG_ENABLE(spell_check,[--disable-spell_check disable spell_check],spell_check=$enableval,spell_check="yes") 
+have_speller="no"
+use_gnome_spell="false"
+AC_ARG_ENABLE(pspell,[  --enable-pspell enable pspell],pspell=$enableval,pspell="no") 
 
-dnl if test "x$spell_check" = xyes; then
+if test "x$pspell" = xno; then
   GNOME_SPELL_MODULES="libgnomeui-2.0 >= 1.112.1 libbonoboui-2.0 >= 1.112.1 libglade-2.0 >= 1.99.9"
   PKG_CHECK_MODULES(GNOME_SPELL, $GNOME_SPELL_MODULES)
   AC_SUBST(GNOME_SPELL_CFLAGS)
   AC_SUBST(GNOME_SPELL_LIBS)
   have_speller="yes"
   speller="gnome-spell"
+  use_gnome_spell="true"
   AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
   AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
-
   ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
   AC_SUBST(ORBIT_IDL)
 
   BONOBO_IDL_INCLUDES="-I`$PKG_CONFIG --variable=idldir libbonobo-2.0` -I`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
   AC_SUBST(BONOBO_IDL_INCLUDES)
-dnl fi
+fi
 
-dnl SPELL_LIBS=""
-dnl AC_SUBST(SPELL_LIBS)
+AM_CONDITIONAL(GNOME_SPELL, test x$use_gnome_spell = xtrue)
 
-dnl AC_MSG_CHECKING([for pspell]) 
-dnl pspell_dirs="${prefix}/bin $ac_pspell_dir/bin /usr/bin /usr/local/bin /opt/bin" 
-dnl AC_FIND_FILE(pspell-compat-config, $pspell_dirs, pspell_dir) 
+SPELL_LIBS=""
+AC_SUBST(SPELL_LIBS)
 
-dnl if test -r $pspell_dir/pspell-compat-config; then 
-dnl   HAVE_PSPELL=yes 
-dnl   have_speller="yes"
-dnl   speller="pspell"
-dnl   AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
-dnl   AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
-dnl   SPELL_LIBS="-L$pspell_dir -lpspell-compat -laspell-compat -lltdl"
-dnl   AC_SUBST(SPELL_LIBS) 
-dnl   echo "found pspell-compat-config"
-dnl else
-dnl   AC_FIND_FILE(pspell-config, $pspell_dirs, pspell_dir) 
-dnl   if test -r $pspell_dir/pspell-config; then 
-dnl    AC_FIND_FILE(aspell, $pspell_dirs, pspell_dir)
-dnl    if test -r $pspell_dir/aspell; then 
-dnl       HAVE_PSPELL=yes 
-dnl      have_speller="yes"
-dnl      speller="gnome-spell"
-dnl      AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
-dnl      AC_DEFINE(USE_GNOME_SPELL, 1, [Define if you want to use gnome-spell])
-dnl      AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
-dnl       SPELL_LIBS="-L$pspell_dir -laspell -lltdl"
-dnl       AC_SUBST(SPELL_LIBS) 
-dnl       echo "found pspell-config"
-dnl     fi
-dnl   fi
-dnl fi
+if test "x$pspell" = xyes; then
+  AC_MSG_CHECKING([for pspell]) 
+  pspell_dirs="${prefix}/bin $ac_pspell_dir/bin /usr/bin /usr/local/bin /opt/bin" 
+  AC_FIND_FILE(pspell-compat-config, $pspell_dirs, pspell_dir) 
+
+  if test -r $pspell_dir/pspell-compat-config; then 
+    HAVE_PSPELL=yes 
+    have_speller="yes"
+    speller="pspell"
+    AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
+    AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+    SPELL_LIBS="-L$pspell_dir -lpspell-compat -laspell-compat -lltdl"
+    AC_SUBST(SPELL_LIBS) 
+    echo "found pspell-compat-config"
+  else
+    AC_FIND_FILE(pspell-config, $pspell_dirs, pspell_dir) 
+    if test -r $pspell_dir/pspell-config; then 
+     AC_FIND_FILE(aspell, $pspell_dirs, pspell_dir)
+     if test -r $pspell_dir/aspell; then 
+       HAVE_PSPELL=yes 
+       have_speller="yes"
+       speller="pspell"
+       AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
+       AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+       SPELL_LIBS="-L$pspell_dir -laspell -lltdl"
+       AC_SUBST(SPELL_LIBS) 
+       echo "found pspell-config"
+     fi
+   fi
+ fi
+fi
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
 if test "x${prefix}" = "xNONE"; then

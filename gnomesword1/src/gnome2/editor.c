@@ -87,7 +87,10 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(void)
 	necd->gbs = FALSE;
 	necd->personal_comments = FALSE;
 	necd->studypad = FALSE;
+
+#ifdef USE_GNOME_SPELL	
 	necd->has_spell_control_set = FALSE;
+#endif
 	necd->language = NULL;
 	if(settings.studypadfilename)
 		sprintf(necd->filename, "%s", settings.studypadfilename);
