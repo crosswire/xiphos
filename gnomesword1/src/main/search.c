@@ -33,23 +33,88 @@
 #include "backend/sword.h"
 #include "backend/search.h"
 
+
+/******************************************************************************
+ * Name
+ *   get_element
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   GList * get_element(char * entry)	
+ *
+ * Description
+ *    returns the elements of a search range (scope)
+ *
+ * Return value
+ *   GList *
+ */ 
+
 GList * get_element(char * entry)
 {
 	return backend_get_element(entry);
 }
 
 
-char * set_range(char * list)
+/******************************************************************************
+ * Name
+ *   set_range
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   int set_range(char * list)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+
+int set_range(char * list)
 {
-	backend_set_range(list);
+	return backend_set_range(list);
 }
 
+
+/******************************************************************************
+ * Name
+ *   save_custom_ranges
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void save_custom_ranges(GList * ranges)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void save_custom_ranges(GList * ranges)
 {
 	backend_save_custom_ranges(ranges);
 }
 
+
+/******************************************************************************
+ * Name
+ *   load_custom_ranges
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   GList * load_custom_ranges(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   GList *
+ */ 
 
 GList * load_custom_ranges(void)
 {
@@ -62,12 +127,12 @@ GList * load_custom_ranges(void)
  *  search_percent_update
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "main/search.h"
  *
  *   void search_percent_update(char percent, void *userData)	
  *
  * Description
- *    updates the progress bar during search
+ *    updates the progress bar during shortcut bar search
  *
  * Return value
  *   void
@@ -78,10 +143,28 @@ void search_percent_update(char percent, void *userData)
 	gui_search_appbar_update(percent, userData);
 }
 
+
+/******************************************************************************
+ * Name
+ *   search_dialog_appbar_update
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void search_dialog_appbar_update(char percent, void *userData)	
+ *
+ * Description
+ *    called by backend search to update progress during search
+ *
+ * Return value
+ *   void
+ */ 
+
 void search_dialog_appbar_update(char percent, void *userData)
 {
 	gui_search_dialog_appbar_update(percent, userData);
 }
+
 
 /******************************************************************************
  * Name
@@ -105,46 +188,87 @@ GList *do_search(gpointer *usr_data)
 }
 
 
+/******************************************************************************
+ * Name
+ *   clear_scope
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   int clear_scope(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+
 int clear_scope(void)
 {
-	backend_clear_scope();
+	return backend_clear_scope();
 }
 
+
+/******************************************************************************
+ * Name
+ *   clear_search_list
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   int clear_search_list(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
 
 int clear_search_list(void)
 {
-	backend_clear_search_list();
+	return backend_clear_search_list();
 }
 
 
-int clear_bounds(void)
-{
-	backend_clear_bounds();
-}
-
-
-int set_bounds_upper(char * bound)
-{
-	backend_set_bounds_upper(bound);
-}
-
-
-int set_bounds_lower(char * bound)
-{
-	backend_set_bounds_lower(bound);
-}
-
-
-int set_scope2bounds(void)
-{
-	backend_set_scope2bounds();
-}
-
+/******************************************************************************
+ * Name
+ *   set_scope2last_search
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   int set_scope2last_search(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
 
 int set_scope2last_search(void)
 {
-	backend_set_scope2last_search();
+	return backend_set_scope2last_search();
 }
+
+
+/******************************************************************************
+ * Name
+ *   set_scope2range
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void set_scope2range(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
 
 void set_scope2range(void)
 {
@@ -152,11 +276,44 @@ void set_scope2range(void)
 }
 
 
+/******************************************************************************
+ * Name
+ *   set_search_module
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   int set_search_module(char * module)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */ 
+
 int set_search_module(char * module)
 {
 	return backend_set_search_module(module);
 }
 
+
+/******************************************************************************
+ * Name
+ *   do_dialog_search
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   int do_dialog_search(char *search_string, int search_type, 
+ *						int search_params)	
+ *
+ * Description
+ *    returns the number of finds
+ *
+ * Return value
+ *   int
+ */ 
 
 int do_dialog_search(char *search_string, int search_type, 
 						int search_params)
@@ -164,6 +321,23 @@ int do_dialog_search(char *search_string, int search_type,
 	return backend_do_dialog_search(search_string, 
 					search_type, search_params);
 }
+
+
+/******************************************************************************
+ * Name
+ *   add_to_found_list
+ *
+ * Synopsis
+ *   #include "main/search.h"
+ *
+ *   void add_to_found_list(const char * result_text, const char * module)	
+ *
+ * Description
+ *   called by backend search when a find is made 
+ *
+ * Return value
+ *   void
+ */ 
 
 void add_to_found_list(const char * result_text, const char * module)
 {

@@ -26,16 +26,12 @@
 extern "C" {
 #endif	
 	
-char * backend_set_range(char * list)	;
+int backend_set_range(char * list)	;
 GList * backend_get_element(char * entry);
 void backend_save_custom_ranges(GList * ranges);
 GList * backend_load_custom_ranges(void);
 int backend_clear_scope(void);	
 int backend_clear_search_list(void);	
-int backend_clear_bounds(void);	
-int backend_set_bounds_upper(char * bound);	
-int backend_set_bounds_lower(char * bound);	
-int backend_set_scope2bounds(void);	
 int backend_set_scope2last_search(void);
 void backend_set_scope2range(void);	
 int backend_set_search_module(char * mod_name);	
