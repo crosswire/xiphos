@@ -281,11 +281,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *vboxPC;
 	GtkWidget *scrolledwindow11;
 	GtkWidget *textComments;
-	GtkWidget *sbNotes;
+	GtkWidget *sbNotes;/*
 	GtkWidget *handlebox16;
 	GtkWidget *tbNotes;
 	GtkWidget *tbtnFollow;
 	GtkWidget *btnEditNote;
+	*/
 	GtkWidget *label85;
 	GtkWidget *vboxInt;
 	GtkWidget *frame2;
@@ -725,6 +726,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(btnExit);
 
 //-------------------------------------------------------------
+
+/*	
 	settings->vboxMain = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(settings->vboxMain);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app),
@@ -733,6 +736,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_widget_show(settings->vboxMain);
 	gnome_app_set_contents(GNOME_APP(settings->app),
 			       settings->vboxMain);
+*/
 
 
 	hbox25 = gtk_hbox_new(FALSE, 0);
@@ -741,8 +745,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 hbox25,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox25);
-	gtk_box_pack_end(GTK_BOX(settings->vboxMain), hbox25, TRUE, TRUE,
-			   0);
+	gnome_app_set_contents(GNOME_APP(settings->app),
+			       hbox25);
 
 	epaned = e_hpaned_new();
 	gtk_widget_ref(epaned);
@@ -769,6 +773,14 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	mainPanel = gtk_vbox_new(FALSE, 0);
 	e_paned_pack2(E_PANED(epaned), mainPanel, TRUE, TRUE);
 	gtk_widget_show(mainPanel);
+		
+	settings->vboxMain = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(settings->vboxMain);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app),
+				 "settings->vboxMain", settings->vboxMain,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(settings->vboxMain);	
+	gtk_box_pack_start(GTK_BOX(mainPanel), settings->vboxMain, TRUE, TRUE, 0);
 //-----------------------------------------------------------------
 	vpaned1 = e_vpaned_new();
 	gtk_widget_ref(vpaned1);
@@ -776,10 +788,11 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 vpaned1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vpaned1);
-	gtk_box_pack_start(GTK_BOX(mainPanel), vpaned1, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(settings->vboxMain), vpaned1, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vpaned1), 1);
 	e_paned_set_position(E_PANED(vpaned1), 236);
-
+	
+	
 	hbox2 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox2);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "hbox2", hbox2,
@@ -794,7 +807,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_set_usize(hpaned1, -2, 380);
 	gtk_widget_show(hpaned1);
-	gtk_box_pack_end(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
 
 
 	vbox32 = gtk_vbox_new(FALSE, 0);
@@ -1112,7 +1125,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_box_pack_start(GTK_BOX(vbox8), sbNotes, FALSE, FALSE, 0);
 
-
+/*
 	handlebox16 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox16);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "handlebox16",
@@ -1169,7 +1182,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
 				      GNOME_STOCK_PIXMAP_SPELLCHECK);
-				      
+	*/			      
 	label85 = gtk_label_new(_("Personal Comments"));
 	gtk_widget_ref(label85);
 	gtk_object_set_data_full(GTK_OBJECT(settings->app), "label85",
@@ -1469,10 +1482,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gtk_signal_connect(GTK_OBJECT(textComments), "key_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_textComments_key_press_event), NULL);
+			   /*
 	gtk_signal_connect(GTK_OBJECT(tbtnFollow), "toggled",
 			   GTK_SIGNAL_FUNC(on_tbtnFollow_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnEditNote), "toggled",
 			   GTK_SIGNAL_FUNC(on_btnEditNote_toggled), NULL);
+			   */
 	gtk_signal_connect(GTK_OBJECT(notebook1), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook1_switch_page),
 			   NULL);

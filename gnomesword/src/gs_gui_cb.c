@@ -348,7 +348,7 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 	
 	gtk_widget_hide(toolbarComments);
 	gtk_widget_hide(toolbarStudypad);
-	if(page_num == 1 && GTK_TOGGLE_BUTTON(lookup_widget(settings->app, "btnEditNote"))->active) {
+	if(page_num == 1 && settings->editnote) {
 		gtk_widget_show(toolbarComments);
 	}
 	
