@@ -98,6 +98,22 @@ class GTKRWPDisp : public GTKEntryDisp
 };
 
 //----------------------------------------------------------------------------------------------
+class HTMLentryDisp : public GTKEntryDisp
+{
+  public:
+	HTMLentryDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class GBFentryDisp : public GTKEntryDisp
+{
+  public:
+	GBFentryDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	virtual char Display(SWModule &imodule);
+};
+
+//----------------------------------------------------------------------------------------------
 class GTKInterlinearDisp : public GTKEntryDisp 
 {
   public:
