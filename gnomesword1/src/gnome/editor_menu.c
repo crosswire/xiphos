@@ -158,7 +158,7 @@ static void on_open_activate(GtkMenuItem * menuitem,
 		}
 		g_free(info);
 	}
-	sprintf(buf, "%s/*.pad", settings.homedir);
+	sprintf(buf, "%s/*.pad", settings.studypaddir);
 	openFile = gui_fileselection_open(ecd);
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
 					buf);
@@ -193,6 +193,36 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 	}
 }
 
+/******************************************************************************
+ * Name
+ *  on_exportnote_activate
+ *
+ * Synopsis
+ *   #include "editor_menu.h"
+ *
+ *   void on_exportnote_activate(GtkMenuItem * menuitem,
+ *				     GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    export personal commentary note by calling ()
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void on_exportnote_activate(GtkMenuItem * menuitem,
+				 GSHTMLEditorControlData * ecd)
+{
+	if (ecd->personal_comments) {
+		if(ecd->changed) {
+			gui_save_note(ecd);
+			ecd->changed = FALSE;
+			gui_update_statusbar(ecd);
+		}
+		gui_fileselection_save(ecd);
+	}
+}
 /******************************************************************************
  * Name
  *  on_deletenote_activate
@@ -775,6 +805,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	GtkWidget *file_menu;
 	GtkAccelGroup *file_menu_accels;
 	GtkWidget *save_note = NULL;
+	GtkWidget *export_note = NULL;
 	GtkWidget *delete_note = NULL;
 	GtkWidget *new = NULL;
 	GtkWidget *open = NULL;
@@ -967,21 +998,16 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	if (ecd->personal_comments) {
 		save_note =
 		    gtk_menu_item_new_with_label(_("Save Note"));
-		gtk_widget_ref(save_note);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "save_note", save_note,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(save_note);
 		gtk_container_add(GTK_CONTAINER(file_menu), save_note);
+		
+		export_note =
+		    gtk_menu_item_new_with_label(_("Export Note"));
+		gtk_widget_show(export_note);
+		gtk_container_add(GTK_CONTAINER(file_menu), export_note);
 
 		delete_note =
 		    gtk_menu_item_new_with_label(_("Delete Note"));
-		gtk_widget_ref(delete_note);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
-					 "delete_note", delete_note,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(delete_note);
 		gtk_container_add(GTK_CONTAINER(file_menu),
 				  delete_note);
@@ -1161,6 +1187,9 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_savenote_activate), ecd);
+		gtk_signal_connect(GTK_OBJECT(export_note), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_exportnote_activate), ecd);
 		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_deletenote_activate), ecd);

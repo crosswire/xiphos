@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-13 11:44-0400\n"
+"POT-Creation-Date: 2003-05-13 16:24-0400\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Dominique Corbex <dominique@corbex.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgid "Secondary Readings"
 msgstr ""
 
 #: src/gnome/bibletext_menu.c:1110 src/gnome/commentary_menu.c:1142
-#: src/gnome/editor_menu.c:1031 src/gnome/toolbar_edit.c:447
+#: src/gnome/editor_menu.c:1057 src/gnome/toolbar_edit.c:449
 msgid "Open"
 msgstr "Ouvrir.."
 
@@ -194,7 +194,7 @@ msgstr "Ouvrir la boite de recherche"
 #. * file menu
 #.
 #: src/gnome/bibletext_menu.c:1123 src/gnome/commentary_menu.c:1154
-#: src/gnome/editor_menu.c:946 src/gnome/studypad.c:81
+#: src/gnome/editor_menu.c:977 src/gnome/studypad.c:81
 #: src/gnome/toolbar_edit.c:108
 msgid "File"
 msgstr "Fichier"
@@ -215,8 +215,8 @@ msgid "Open Module"
 msgstr "Afficher le module"
 
 #: src/gnome/bibletext_menu.c:1189 src/gnome/commentary_menu.c:1239
-#: src/gnome/editor_menu.c:1057 src/gnome/html.c:955
-#: src/gnome/toolbar_edit.c:528
+#: src/gnome/editor_menu.c:1083 src/gnome/html.c:955
+#: src/gnome/toolbar_edit.c:530
 msgid "Print"
 msgstr "Imprimer..."
 
@@ -235,15 +235,15 @@ msgid "Edit"
 msgstr "_Editer"
 
 #: src/gnome/bibletext_menu.c:1218 src/gnome/commentary_menu.c:1270
-#: src/gnome/editor_menu.c:1098 src/gnome/interlinear.c:1171
-#: src/gnome/main_menu.c:594 src/gnome/toolbar_edit.c:567
+#: src/gnome/editor_menu.c:1124 src/gnome/interlinear.c:1171
+#: src/gnome/main_menu.c:594 src/gnome/toolbar_edit.c:569
 msgid "Copy"
 msgstr "Copier"
 
 #: src/gnome/bibletext_menu.c:1222 src/gnome/commentary_menu.c:1274
-#: src/gnome/editor_menu.c:1133 src/gnome/find_dialog.c:185
+#: src/gnome/editor_menu.c:1159 src/gnome/find_dialog.c:185
 #: src/gnome/find_dialog.c:258 src/gnome/find_dialog.c:338
-#: src/gnome/toolbar_edit.c:619
+#: src/gnome/toolbar_edit.c:621
 msgid "Find"
 msgstr "Rechercher..."
 
@@ -279,7 +279,7 @@ msgid "Unlock This Module"
 msgstr "Déverrouiller ce module"
 
 #: src/gnome/bibletext_menu.c:1335 src/gnome/commentary_menu.c:1380
-#: src/gnome/preferences_dialog.c:1598
+#: src/gnome/preferences_dialog.c:1606
 #, fuzzy
 msgid "Show"
 msgstr "Afficher les onglets"
@@ -333,7 +333,7 @@ msgstr "Étiquette"
 msgid "Verse: "
 msgstr "Liste de versets"
 
-#: src/gnome/bookmarks.c:1886 src/gnome/editor_menu.c:549
+#: src/gnome/bookmarks.c:1886 src/gnome/editor_menu.c:579
 #, fuzzy
 msgid "Module: "
 msgstr "Module"
@@ -544,99 +544,104 @@ msgstr "``%s'' a été modifié.  Voulez-vous l'enregistrer?"
 msgid "-untitled-"
 msgstr "-sans titre-"
 
-#: src/gnome/editor_menu.c:223 src/gnome/toolbar_edit.c:188
+#: src/gnome/editor_menu.c:253 src/gnome/toolbar_edit.c:190
 msgid "Are you sure you want"
 msgstr ""
 
-#: src/gnome/editor_menu.c:224 src/gnome/toolbar_edit.c:189
+#: src/gnome/editor_menu.c:254 src/gnome/toolbar_edit.c:191
 msgid "to delete the note for"
 msgstr ""
 
-#: src/gnome/editor_menu.c:545
+#: src/gnome/editor_menu.c:575
 #, fuzzy
 msgid "Add Reference Link"
 msgstr "GnomeSword Ajouter un lien de référence"
 
-#: src/gnome/editor_menu.c:547
+#: src/gnome/editor_menu.c:577
 #, fuzzy
 msgid "Reference: "
 msgstr "Référence"
 
-#: src/gnome/editor_menu.c:807
+#: src/gnome/editor_menu.c:838
 #, fuzzy
 msgid "Toolbars"
 msgstr "Afficher les onglets"
 
-#: src/gnome/editor_menu.c:827
+#: src/gnome/editor_menu.c:858
 msgid "Style Bar"
 msgstr ""
 
-#: src/gnome/editor_menu.c:840
+#: src/gnome/editor_menu.c:871
 #, fuzzy
 msgid "Edit Bar"
 msgstr "Ajouter un signet"
 
-#: src/gnome/editor_menu.c:969 src/gnome/toolbar_edit.c:487
+#: src/gnome/editor_menu.c:1000 src/gnome/toolbar_edit.c:489
 msgid "Save Note"
 msgstr "Enregistrer note"
 
-#: src/gnome/editor_menu.c:979 src/gnome/toolbar_edit.c:505
+#: src/gnome/editor_menu.c:1005
+#, fuzzy
+msgid "Export Note"
+msgstr "Imprimer ce commentaire..."
+
+#: src/gnome/editor_menu.c:1010 src/gnome/toolbar_edit.c:507
 msgid "Delete Note"
 msgstr "Supprimer note"
 
-#: src/gnome/editor_menu.c:992 src/gnome/toolbar_edit.c:448
+#: src/gnome/editor_menu.c:1018 src/gnome/toolbar_edit.c:450
 msgid "Open File"
 msgstr "Ouvrir.."
 
-#: src/gnome/editor_menu.c:1001
+#: src/gnome/editor_menu.c:1027
 msgid "Save Entry"
 msgstr "Enregistrer l'entrée"
 
-#: src/gnome/editor_menu.c:1011
+#: src/gnome/editor_menu.c:1037
 msgid "Delete Entry"
 msgstr "Supprimer l'entrée"
 
-#: src/gnome/editor_menu.c:1023 src/gnome/search_dialog.c:2399
-#: src/gnome/search_dialog.c:2552 src/gnome/toolbar_edit.c:425
+#: src/gnome/editor_menu.c:1049 src/gnome/search_dialog.c:2399
+#: src/gnome/search_dialog.c:2552 src/gnome/toolbar_edit.c:427
 msgid "New"
 msgstr "Nouveau"
 
-#: src/gnome/editor_menu.c:1039 src/gnome/toolbar_edit.c:468
-#: src/gnome/toolbar_edit.c:486
+#: src/gnome/editor_menu.c:1065 src/gnome/toolbar_edit.c:470
+#: src/gnome/toolbar_edit.c:488
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/gnome/editor_menu.c:1048
+#: src/gnome/editor_menu.c:1074
 msgid "Save AS"
 msgstr "Enregistrer sous..."
 
-#: src/gnome/editor_menu.c:1068 src/gnome/main_menu.c:763
+#: src/gnome/editor_menu.c:1094 src/gnome/main_menu.c:763
 msgid "_Edit"
 msgstr "_Editer"
 
-#: src/gnome/editor_menu.c:1091 src/gnome/toolbar_edit.c:553
+#: src/gnome/editor_menu.c:1117 src/gnome/toolbar_edit.c:555
 msgid "Cut"
 msgstr "Couper"
 
-#: src/gnome/editor_menu.c:1105 src/gnome/toolbar_edit.c:581
+#: src/gnome/editor_menu.c:1131 src/gnome/toolbar_edit.c:583
 msgid "Paste"
 msgstr "Coller"
 
-#: src/gnome/editor_menu.c:1112
+#: src/gnome/editor_menu.c:1138
 msgid "Spell Check"
 msgstr "Vérifier l'orthographe..."
 
-#: src/gnome/editor_menu.c:1126 src/gnome/toolbar_edit.c:595
+#: src/gnome/editor_menu.c:1152 src/gnome/toolbar_edit.c:597
 msgid "Undo"
 msgstr "Annuler"
 
-#: src/gnome/editor_menu.c:1141 src/gnome/editor_replace.c:232
+#: src/gnome/editor_menu.c:1167 src/gnome/editor_replace.c:232
 #: src/gnome/editor_replace.c:407 src/gnome/editor_replace.c:529
-#: src/gnome/editor_spell.c:667 src/gnome/toolbar_edit.c:634
+#: src/gnome/editor_spell.c:667 src/gnome/toolbar_edit.c:636
 msgid "Replace"
 msgstr "Remplacer.."
 
-#: src/gnome/editor_menu.c:1149
+#: src/gnome/editor_menu.c:1175
 msgid "Link..."
 msgstr "Lien.."
 
@@ -718,12 +723,12 @@ msgid ""
 "Word"
 msgstr "Remplacer.."
 
-#: src/gnome/fileselection.c:188
+#: src/gnome/fileselection.c:186
 #, fuzzy
 msgid "Open StudyPad File"
 msgstr "GnomeSword - Ouvrir un fichier de notes"
 
-#: src/gnome/fileselection.c:238
+#: src/gnome/fileselection.c:236
 #, fuzzy
 msgid "GomeSword - Save StudyPad File"
 msgstr "GnomeSword - Enregistrer un fichier de notes"
@@ -936,7 +941,7 @@ msgid "Show the Daily Devotion for Today"
 msgstr "Afficher la méditation du jour pour aujourd'hui"
 
 #: src/gnome/main_menu.c:638 src/gnome/main_menu.c:700
-#: src/gnome/preferences_dialog.c:1572 src/gnome/preferences_dialog.c:1607
+#: src/gnome/preferences_dialog.c:1580 src/gnome/preferences_dialog.c:1615
 msgid "Bible Texts"
 msgstr "Textes Bibliques"
 
@@ -945,8 +950,8 @@ msgstr "Textes Bibliques"
 msgid "Show/Hide Bible texts window"
 msgstr "Fenêtre du Texte Biblique"
 
-#: src/gnome/main_menu.c:644 src/gnome/preferences_dialog.c:1579
-#: src/gnome/preferences_dialog.c:2033 src/gnome/setup_druid.c:976
+#: src/gnome/main_menu.c:644 src/gnome/preferences_dialog.c:1587
+#: src/gnome/preferences_dialog.c:2060 src/gnome/setup_druid.c:976
 #: src/gnome/shortcutbar_search.c:444
 msgid "Commentary"
 msgstr "Commentaires"
@@ -956,7 +961,7 @@ msgstr "Commentaires"
 msgid "Show/Hide Commentaries"
 msgstr "Onglets des Commentaires"
 
-#: src/gnome/main_menu.c:650 src/gnome/preferences_dialog.c:1634
+#: src/gnome/main_menu.c:650 src/gnome/preferences_dialog.c:1642
 msgid "Lower Workbook"
 msgstr ""
 
@@ -980,7 +985,7 @@ msgstr "Afficher/Cacher la barre de raccourcis"
 msgid "Information about Bible texts"
 msgstr "Information à propos des textes bibliques"
 
-#: src/gnome/main_menu.c:706 src/gnome/preferences_dialog.c:1619
+#: src/gnome/main_menu.c:706 src/gnome/preferences_dialog.c:1627
 #: src/gnome/shortcutbar_main.c:1379 src/gnome/shortcutbar_main.c:1562
 msgid "Commentaries"
 msgstr "Commentaires"
@@ -990,7 +995,7 @@ msgid "Dictionaries-Lexicons"
 msgstr "Dictionnaires - Lexiques"
 
 #: src/gnome/main_menu.c:718 src/gnome/main_window.c:727
-#: src/gnome/main_window.c:739 src/gnome/preferences_dialog.c:1593
+#: src/gnome/main_window.c:739 src/gnome/preferences_dialog.c:1601
 msgid "Books"
 msgstr "Livres"
 
@@ -1090,7 +1095,7 @@ msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - Logiciel d'étude de la Bible"
 
 #: src/gnome/main_window.c:693 src/gnome/main_window.c:706
-#: src/gnome/preferences_dialog.c:2040 src/gnome/setup_druid.c:1170
+#: src/gnome/preferences_dialog.c:2067 src/gnome/setup_druid.c:1170
 #: src/gnome/shortcutbar_main.c:1393 src/gnome/shortcutbar_main.c:1575
 msgid "Dict/Lex"
 msgstr "Dict/Lex"
@@ -1102,323 +1107,335 @@ msgstr "Dict/Lex"
 msgid "Personal Comments"
 msgstr "Commentaires personnels"
 
-#: src/gnome/preferences_dialog.c:1294
+#: src/gnome/preferences_dialog.c:1302
 msgid "dialog3"
 msgstr ""
 
-#: src/gnome/preferences_dialog.c:1327 src/gnome/preferences_dialog.c:2687
+#: src/gnome/preferences_dialog.c:1335 src/gnome/preferences_dialog.c:2718
 msgid "Font Colors and Sizes"
 msgstr "Tailles et couleurs des polices"
 
-#: src/gnome/preferences_dialog.c:1340
+#: src/gnome/preferences_dialog.c:1348
 msgid "Background Color"
 msgstr "Couleur du fond"
 
-#: src/gnome/preferences_dialog.c:1348
+#: src/gnome/preferences_dialog.c:1356
 msgid "Text Color"
 msgstr "Couleur du texte"
 
-#: src/gnome/preferences_dialog.c:1356
+#: src/gnome/preferences_dialog.c:1364
 msgid "Current Verse Color"
 msgstr "Couleur du verset courant"
 
-#: src/gnome/preferences_dialog.c:1364
+#: src/gnome/preferences_dialog.c:1372
 msgid "Current Verse Background Color"
 msgstr "Couleur de fond du verset courant"
 
-#: src/gnome/preferences_dialog.c:1373
+#: src/gnome/preferences_dialog.c:1381
 msgid "Verse Numbers"
 msgstr "Numéros de versets"
 
-#: src/gnome/preferences_dialog.c:1381
+#: src/gnome/preferences_dialog.c:1389
 msgid "Verse Number Font Size"
 msgstr "Taille de la police des numéros de verset"
 
-#: src/gnome/preferences_dialog.c:1389
+#: src/gnome/preferences_dialog.c:1397
 msgid "Link Color"
 msgstr "Couleur des liens"
 
-#: src/gnome/preferences_dialog.c:1405
+#: src/gnome/preferences_dialog.c:1413
 msgid "Pick a color for Background"
 msgstr "Choisir la couleur du fond"
 
-#: src/gnome/preferences_dialog.c:1414
+#: src/gnome/preferences_dialog.c:1422
 msgid "Pick a color for Bible Text"
 msgstr "Choisir la couleur du Texte Biblique"
 
-#: src/gnome/preferences_dialog.c:1424
+#: src/gnome/preferences_dialog.c:1432
 msgid "Pick a color - CurrentVerse BG"
 msgstr "Choisir une couleur - Fond du verset courant"
 
-#: src/gnome/preferences_dialog.c:1435
+#: src/gnome/preferences_dialog.c:1443
 msgid "Pick a color for Current Verse"
 msgstr "Choisissez la couleur du verset courant"
 
-#: src/gnome/preferences_dialog.c:1452
+#: src/gnome/preferences_dialog.c:1460
 msgid "Strongs Numbers & Morph Tags"
 msgstr "Nombres de Strong & Étiquettes morphologiques"
 
-#: src/gnome/preferences_dialog.c:1462
+#: src/gnome/preferences_dialog.c:1470
 msgid "-2"
 msgstr "-2"
 
-#: src/gnome/preferences_dialog.c:1464
+#: src/gnome/preferences_dialog.c:1472
 msgid "-1"
 msgstr "-1"
 
-#: src/gnome/preferences_dialog.c:1466 src/gnome/preferences_dialog.c:1487
+#: src/gnome/preferences_dialog.c:1474 src/gnome/preferences_dialog.c:1495
 msgid "+0"
 msgstr "+0"
 
-#: src/gnome/preferences_dialog.c:1468
+#: src/gnome/preferences_dialog.c:1476
 msgid "+1"
 msgstr "+1"
 
-#: src/gnome/preferences_dialog.c:1470
+#: src/gnome/preferences_dialog.c:1478
 msgid "+2"
 msgstr "+2"
 
-#: src/gnome/preferences_dialog.c:1472
+#: src/gnome/preferences_dialog.c:1480
 msgid "+3"
 msgstr "+3"
 
-#: src/gnome/preferences_dialog.c:1474
+#: src/gnome/preferences_dialog.c:1482
 msgid "+4"
 msgstr "+4"
 
-#: src/gnome/preferences_dialog.c:1476
+#: src/gnome/preferences_dialog.c:1484
 #, fuzzy
 msgid "+5"
 msgstr "+5"
 
-#: src/gnome/preferences_dialog.c:1485
+#: src/gnome/preferences_dialog.c:1493
 msgid "Zero is base font size Go up or down from there"
 msgstr ""
 "Zéro est la taille initiale de la police.  Incrémentez ou décrémentez-"
 "là."
 
-#: src/gnome/preferences_dialog.c:1490
+#: src/gnome/preferences_dialog.c:1498
 msgid "GnomeSword Defaults"
 msgstr "Options par défaut de GnomeSword"
 
-#: src/gnome/preferences_dialog.c:1497
+#: src/gnome/preferences_dialog.c:1505
 msgid "Use GnomeSword defaults for all settings on this page"
 msgstr ""
 "Utiliser les options par défaut de GnomeSword pour toutes les options de "
 "cette page"
 
-#: src/gnome/preferences_dialog.c:1502
+#: src/gnome/preferences_dialog.c:1510
 msgid "Bible Text Window"
 msgstr "Fenêtre du Texte Biblique"
 
-#: src/gnome/preferences_dialog.c:1534
+#: src/gnome/preferences_dialog.c:1542
 msgid "Use Defaults When Opening GnomeSword"
 msgstr "Utiliser les options par défaut au démarrage de GnomeSword"
 
-#: src/gnome/preferences_dialog.c:1545
+#: src/gnome/preferences_dialog.c:1553
 msgid "Yes, use defaults that I select"
 msgstr "Oui, utiliser les options par défaut que j'ai sélectionnées"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:1556
+#: src/gnome/preferences_dialog.c:1564
 msgid "No, use settings saved on last GnomeSword run"
 msgstr "Non, utiliser les options de la session précédente de GnomeSword"
 
-#: src/gnome/preferences_dialog.c:1563
+#: src/gnome/preferences_dialog.c:1571
 msgid "Show Tabs"
 msgstr "Afficher les onglets"
 
-#: src/gnome/preferences_dialog.c:1586
+#: src/gnome/preferences_dialog.c:1594
 #, fuzzy
 msgid "Dict/Lex "
 msgstr "Dict/Lex"
 
-#: src/gnome/preferences_dialog.c:1613
+#: src/gnome/preferences_dialog.c:1621
 #, fuzzy
 msgid "Display Bible text window"
 msgstr "Fenêtre du Texte Biblique"
 
-#: src/gnome/preferences_dialog.c:1627
+#: src/gnome/preferences_dialog.c:1635
 msgid "Commentaries, Personal Comments and StudyPad"
 msgstr ""
 
-#: src/gnome/preferences_dialog.c:1641
+#: src/gnome/preferences_dialog.c:1649
 msgid "Dict/Lex, Generic Books and Interlinear Page"
 msgstr ""
 
-#: src/gnome/preferences_dialog.c:1647
+#: src/gnome/preferences_dialog.c:1655
 msgid "Misc"
 msgstr ""
 
-#: src/gnome/preferences_dialog.c:1656 src/gnome/setup_druid.c:701
+#: src/gnome/preferences_dialog.c:1664 src/gnome/setup_druid.c:701
 msgid "Use Verse Style"
 msgstr "Utiliser le style Verset"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:1668
+#: src/gnome/preferences_dialog.c:1676
 msgid "Use Default Dictionary"
 msgstr "Utiliser le dictionnaire par défaut"
 
-#: src/gnome/preferences_dialog.c:1676
+#: src/gnome/preferences_dialog.c:1684
 #, fuzzy
 msgid "Show Daily Devotion at start up"
 msgstr "Afficher les Méditations du jour"
 
-#: src/gnome/preferences_dialog.c:1682
+#: src/gnome/preferences_dialog.c:1690
 msgid "Show Daily Devotion if you have a Devotion module"
 msgstr "Afficher les Méditations du jour si vous avez un module Méditations"
 
-#: src/gnome/preferences_dialog.c:1687
+#: src/gnome/preferences_dialog.c:1695
 msgid "Show Splash Screen at start up"
 msgstr ""
 
-#: src/gnome/preferences_dialog.c:1693
+#: src/gnome/preferences_dialog.c:1701
 msgid "Show Splash Screen at program start"
 msgstr ""
 
 # Added on 2002-06-06
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:1699
+#: src/gnome/preferences_dialog.c:1707
 msgid "where to View Dict/Lex When Link or Word Clicked"
 msgstr "Où afficher le Dict/Lex après avoir cliqué sur un mot ou un lien"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:1709
+#: src/gnome/preferences_dialog.c:1717
 msgid "In Shortcut bar Viewer"
 msgstr "Dans la barre de raccourcis"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:1718
+#: src/gnome/preferences_dialog.c:1726
 msgid "In Dict/Lex Window"
 msgstr "Dans la fenêtre Dict/Lex"
 
-#: src/gnome/preferences_dialog.c:1724
+#: src/gnome/preferences_dialog.c:1732
 #, fuzzy
 msgid "Editors"
 msgstr "_Editer"
 
-#: src/gnome/preferences_dialog.c:1733
+#: src/gnome/preferences_dialog.c:1741
 #, fuzzy
 msgid "Use StudyPad"
 msgstr "Notes d'étude"
 
-#: src/gnome/preferences_dialog.c:1742
+#: src/gnome/preferences_dialog.c:1750
 #, fuzzy
 msgid "Open StudyPad in a Dialog"
 msgstr "Ouvrir la boite de recherche"
 
-#: src/gnome/preferences_dialog.c:1750
+#: src/gnome/preferences_dialog.c:1758
 msgid "Open Personal Comments Editor in a Dialog"
 msgstr ""
 
-#: src/gnome/preferences_dialog.c:1758
+#: src/gnome/preferences_dialog.c:1766
 #, fuzzy
 msgid "Use Formatting in Personal Comments"
 msgstr "Commentaires personnels"
 
-#: src/gnome/preferences_dialog.c:1764
+#: src/gnome/preferences_dialog.c:1772
 msgid "Use HTML tags to format notes"
 msgstr "Utiliser les étiquettes HTML pour mettre en forme les notes"
 
-#: src/gnome/preferences_dialog.c:1769
+# src/gs_preferences_dlg.c
+#: src/gnome/preferences_dialog.c:1782
+#, fuzzy
+msgid "Default Directory"
+msgstr "Dictionnaire par défaut"
+
+# src/gs_preferences_dlg.c
+#: src/gnome/preferences_dialog.c:1787
+#, fuzzy
+msgid "StudyPad Default Directory"
+msgstr "Utiliser le dictionnaire par défaut"
+
+#: src/gnome/preferences_dialog.c:1796
 msgid "Interface"
 msgstr "Interface"
 
-#: src/gnome/preferences_dialog.c:1788 src/gnome/preferences_dialog.c:2699
+#: src/gnome/preferences_dialog.c:1815 src/gnome/preferences_dialog.c:2730
 msgid "Layout"
 msgstr "Disposition"
 
-#: src/gnome/preferences_dialog.c:1796
+#: src/gnome/preferences_dialog.c:1823
 msgid "App Width"
 msgstr "Largeur de l'appplication"
 
-#: src/gnome/preferences_dialog.c:1803
+#: src/gnome/preferences_dialog.c:1830
 msgid "ShortCut Bar Width"
 msgstr "Largeur de la barre de raccourcis"
 
-#: src/gnome/preferences_dialog.c:1810
+#: src/gnome/preferences_dialog.c:1837
 msgid "Upper Pane Height"
 msgstr "Hauteur du panneau supérieur"
 
-#: src/gnome/preferences_dialog.c:1842
+#: src/gnome/preferences_dialog.c:1869
 msgid "Bible Pane Width"
 msgstr "Largeur du panneau Bible"
 
-#: src/gnome/preferences_dialog.c:1858
+#: src/gnome/preferences_dialog.c:1885
 msgid "App Height"
 msgstr "Hauteur de l'application"
 
-#: src/gnome/preferences_dialog.c:1896
+#: src/gnome/preferences_dialog.c:1923
 msgid "Shortcut Bar"
 msgstr "Barre de raccourcis"
 
-#: src/gnome/preferences_dialog.c:1905
+#: src/gnome/preferences_dialog.c:1932
 msgid "Show Shortcut bar"
 msgstr "Afficher la barre de raccourcis"
 
-#: src/gnome/preferences_dialog.c:1915
+#: src/gnome/preferences_dialog.c:1942
 msgid "Show Favorites Group"
 msgstr "Afficher le groupe des favoris"
 
-#: src/gnome/preferences_dialog.c:1924
+#: src/gnome/preferences_dialog.c:1951
 msgid "Show Bible Text Group"
 msgstr "Afficher le groupe des Bibles"
 
-#: src/gnome/preferences_dialog.c:1931
+#: src/gnome/preferences_dialog.c:1958
 msgid "Show Commentary Group"
 msgstr "Afficher le groupe des Commentaires"
 
-#: src/gnome/preferences_dialog.c:1938
+#: src/gnome/preferences_dialog.c:1965
 msgid "Show Dict/Lex Group"
 msgstr "Afficher le groupe des Dictionnaires/Lexiques"
 
-#: src/gnome/preferences_dialog.c:1945
+#: src/gnome/preferences_dialog.c:1972
 #, fuzzy
 msgid "Show Books Group"
 msgstr "Afficher le groupe des Livres"
 
-#: src/gnome/preferences_dialog.c:1952
+#: src/gnome/preferences_dialog.c:1979
 msgid "Show History Group"
 msgstr "Afficher l'Historique"
 
-#: src/gnome/preferences_dialog.c:1959
+#: src/gnome/preferences_dialog.c:1986
 msgid "Dock Shortcut Bar"
 msgstr "Attacher la barre de raccourcis"
 
-#: src/gnome/preferences_dialog.c:1991
+#: src/gnome/preferences_dialog.c:2018
 msgid "Main Text Module"
 msgstr "Bible choix principal    "
 
-#: src/gnome/preferences_dialog.c:2047 src/gnome/setup_druid.c:1138
+#: src/gnome/preferences_dialog.c:2074 src/gnome/setup_druid.c:1138
 msgid "Personal"
 msgstr "Personnel"
 
-#: src/gnome/preferences_dialog.c:2090 src/gnome/setup_druid.c:1047
+#: src/gnome/preferences_dialog.c:2117 src/gnome/setup_druid.c:1047
 msgid "Interlinear 5"
 msgstr "Combiné Bible 5"
 
-#: src/gnome/preferences_dialog.c:2097 src/gnome/setup_druid.c:1058
+#: src/gnome/preferences_dialog.c:2124 src/gnome/setup_druid.c:1058
 msgid "Interlinear 4"
 msgstr "Combiné Bible 4"
 
-#: src/gnome/preferences_dialog.c:2104 src/gnome/setup_druid.c:1069
+#: src/gnome/preferences_dialog.c:2131 src/gnome/setup_druid.c:1069
 msgid "Interlinear 3"
 msgstr "Combiné Bible 3"
 
-#: src/gnome/preferences_dialog.c:2113 src/gnome/setup_druid.c:1082
+#: src/gnome/preferences_dialog.c:2140 src/gnome/setup_druid.c:1082
 msgid "Interlinear 2"
 msgstr "Combiné Bible 2"
 
-#: src/gnome/preferences_dialog.c:2122 src/gnome/setup_druid.c:1095
+#: src/gnome/preferences_dialog.c:2149 src/gnome/setup_druid.c:1095
 msgid "Interlinear 1"
 msgstr "Combiné Bible 1"
 
-#: src/gnome/preferences_dialog.c:2130 src/gnome/setup_druid.c:1274
+#: src/gnome/preferences_dialog.c:2157 src/gnome/setup_druid.c:1274
 msgid "Daily Devotional"
 msgstr "Méditation du jour"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2165 src/gnome/setup_druid.c:1234
+#: src/gnome/preferences_dialog.c:2192 src/gnome/setup_druid.c:1234
 msgid ""
 "Which Greek Lexicon to display in Dict/Lex Window when a link or word is "
 "clicked"
@@ -1426,12 +1443,12 @@ msgstr ""
 "Lexique Grec à afficher dans la fenêtre Dict/Lex quand un lien ou un mot "
 "est cliqué"
 
-#: src/gnome/preferences_dialog.c:2168 src/gnome/setup_druid.c:1237
+#: src/gnome/preferences_dialog.c:2195 src/gnome/setup_druid.c:1237
 msgid "Hebrew Lexicon"
 msgstr "Lexique Hébreu"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2185 src/gnome/setup_druid.c:1271
+#: src/gnome/preferences_dialog.c:2212 src/gnome/setup_druid.c:1271
 msgid ""
 "Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is "
 "clicked"
@@ -1440,53 +1457,53 @@ msgstr ""
 "mot est cliqué"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2188
+#: src/gnome/preferences_dialog.c:2215
 msgid "Greek Lex Viewer"
 msgstr "Voir le lexique Grec"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2195
+#: src/gnome/preferences_dialog.c:2222
 msgid "Hebrew Lex Viewer"
 msgstr "Voir le lexique Hébreu"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2213
+#: src/gnome/preferences_dialog.c:2240
 msgid "Which Greek Lecicon to display in viewer when a link or word is clicked"
 msgstr ""
 "Lexique Grec à visualiser dans l'afficheur quand un lien ou un mot est "
 "cliqué"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2227
+#: src/gnome/preferences_dialog.c:2254
 msgid ""
 "Which Hebrew Lexicon to display in viewer when a link or word is clicked"
 msgstr ""
 "Lexique Hébreu à visualiser dans l'afficheur quand un lien ou un mot est "
 "cliqué"
 
-#: src/gnome/preferences_dialog.c:2230 src/gnome/setup_druid.c:1201
+#: src/gnome/preferences_dialog.c:2257 src/gnome/setup_druid.c:1201
 msgid "Greek Lexicon"
 msgstr "Lexique Grec"
 
 # src/gs_preferences_dlg.c
-#: src/gnome/preferences_dialog.c:2237
+#: src/gnome/preferences_dialog.c:2264
 #, fuzzy
 msgid "Default Dict"
 msgstr "Dictionnaire par défaut"
 
-#: src/gnome/preferences_dialog.c:2254 src/gnome/preferences_dialog.c:2710
+#: src/gnome/preferences_dialog.c:2281 src/gnome/preferences_dialog.c:2741
 msgid "Sword Modules"
 msgstr "Modules de Sword"
 
-#: src/gnome/preferences_dialog.c:2678
+#: src/gnome/preferences_dialog.c:2709
 msgid "Preferences"
 msgstr "Preferences"
 
-#: src/gnome/preferences_dialog.c:2693
+#: src/gnome/preferences_dialog.c:2724
 msgid "Misc Interface Settings"
 msgstr "Interface utilisateur"
 
-#: src/gnome/preferences_dialog.c:2704
+#: src/gnome/preferences_dialog.c:2735
 msgid "Shortcut Bar Settings"
 msgstr "barre de raccourcis"
 
@@ -1746,7 +1763,7 @@ msgid "Save custom range"
 msgstr ""
 
 #: src/gnome/search_dialog.c:2428 src/gnome/search_dialog.c:2592
-#: src/gnome/search_dialog.c:2695 src/gnome/toolbar_edit.c:504
+#: src/gnome/search_dialog.c:2695 src/gnome/toolbar_edit.c:506
 #, fuzzy
 msgid "Delete"
 msgstr "Supprimer note"
@@ -2093,44 +2110,44 @@ msgstr "Afficher les résultats de la recherche"
 msgid "has been modified. "
 msgstr ""
 
-#: src/gnome/studypad.c:650 src/gnome/studypad.c:667
+#: src/gnome/studypad.c:654 src/gnome/studypad.c:671
 msgid "Study Pad"
 msgstr "Notes d'étude"
 
-#: src/gnome/toolbar_edit.c:426
+#: src/gnome/toolbar_edit.c:428
 #, fuzzy
 msgid "New File"
 msgstr "Ouvrir.."
 
-#: src/gnome/toolbar_edit.c:469
+#: src/gnome/toolbar_edit.c:471
 msgid "Save Curent File"
 msgstr ""
 
-#: src/gnome/toolbar_edit.c:529
+#: src/gnome/toolbar_edit.c:531
 #, fuzzy
 msgid "Print window contents"
 msgstr "Inprimer ce Commentaire"
 
-#: src/gnome/toolbar_edit.c:553
+#: src/gnome/toolbar_edit.c:555
 #, fuzzy
 msgid "Cut "
 msgstr "Couper"
 
-#: src/gnome/toolbar_edit.c:620
+#: src/gnome/toolbar_edit.c:622
 msgid "Find in this note"
 msgstr ""
 
-#: src/gnome/toolbar_edit.c:635
+#: src/gnome/toolbar_edit.c:637
 #, fuzzy
 msgid "Find and Replace"
 msgstr "Remplacer.."
 
-#: src/gnome/toolbar_edit.c:659
+#: src/gnome/toolbar_edit.c:661
 #, fuzzy
 msgid "Spell"
 msgstr "Vérifier l'orthographe..."
 
-#: src/gnome/toolbar_edit.c:660
+#: src/gnome/toolbar_edit.c:662
 #, fuzzy
 msgid "Spell check note"
 msgstr "Vérifier l'orthographe..."
@@ -2423,10 +2440,6 @@ msgstr "Augmenter l'indentation du texte"
 #, fuzzy
 #~ msgid "Search - GnomeSword"
 #~ msgstr "Bienvenue à GnomeSword"
-
-#, fuzzy
-#~ msgid "Print Note"
-#~ msgstr "Imprimer ce commentaire..."
 
 #~ msgid "GnomeSWORD"
 #~ msgstr "GnomeSword"

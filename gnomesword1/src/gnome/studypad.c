@@ -69,11 +69,11 @@ static GSHTMLEditorControlData *editor_cd;
 
 void gui_studypad_can_close(void)
 {
+	gchar *filename = NULL;
+	gint test;
+	GS_DIALOG *info;
+	
 	if (settings.modifiedSP) {
-
-		gint test;
-		GS_DIALOG *info;
-
 		info = gui_new_dialog();
 		if (strlen(settings.studypadfilename) > 0)
 			info->label_top = settings.studypadfilename;
@@ -87,8 +87,8 @@ void gui_studypad_can_close(void)
 		test = gui_gs_dialog(info);
 		if (test == GS_YES) {
 			if (strlen(settings.studypadfilename) > 0) {
-				save_file(editor_cd->filename,
-					  editor_cd);
+				g_strdup(settings.studypadfilename);
+				save_file(filename, editor_cd);
 			} else {
 				gui_fileselection_save(editor_cd);
 			}
@@ -268,9 +268,12 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	int fd;
 
 	if (filename) {
-		settings.studypadfilename = filename;
-		xml_set_value("GnomeSword", "studypad", "lastfile", 
+		if(ecd->studypad) {
+			settings.studypadfilename = filename;
+			xml_set_value("GnomeSword", "studypad", "lastfile", 
 							filename);
+		}
+			
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
 		if (fd == -1)
@@ -287,6 +290,7 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 		}
 
 		close(fd);
+		g_free(filename);
 	}
 	return retval;
 }
