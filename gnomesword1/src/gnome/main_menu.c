@@ -207,7 +207,7 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 	s = &settings;
 	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
 	if(!s->showshortcutbar){
-		on_btnSB_clicked(NULL,s);
+		gui_shortcutbar_showhide();
 	}
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 						 s->searchbargroup,

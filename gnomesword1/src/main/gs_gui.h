@@ -27,8 +27,7 @@ extern "C" {
 #endif
 #include "settings.h"
 
-void on_btnSB_clicked(GtkButton * button, SETTINGS * s);
-void create_mainwindow(SETTINGS *s);
+void create_mainwindow(void);
 
 #ifdef __cplusplus
 }
