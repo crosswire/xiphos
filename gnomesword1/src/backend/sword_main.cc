@@ -953,6 +953,7 @@ int BackEnd::set_scope2last_search(void) {
 	current_scope = &search_scope_list;//-- move searchlist into current_scope
 	return 1;
 }
+
 int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	
 	search_mod = main_mgr->Modules[module_name];
@@ -967,6 +968,17 @@ int BackEnd::do_module_index(char *module_name, int is_dialog) {
 	
 }
 
+int BackEnd::check_for_optimal_search(char * module_name) {
+	search_mod = main_mgr->Modules[module_name];
+	
+	if (!search_mod)
+		return -2;
+	if (search_mod->hasSearchFramework() && search_mod->isSearchOptimallySupported("God", -4, 0, 0))
+		return -4;
+	else
+		return -2; // ** word search **
+}
+
 int BackEnd::do_module_search(char *module_name, const char *search_string, 
 				int search_type, int search_params, int is_dialog) {
 	char progressunits = 70;
@@ -976,20 +988,19 @@ int BackEnd::do_module_search(char *module_name, const char *search_string,
 	search_mod = main_mgr->Modules[module_name];
 	if (!search_mod)
 		return -1;
-	//if(search_type == -4)
-	if (search_mod->hasSearchFramework() && search_mod->isSearchOptimallySupported("God", search_type, 0, 0)) 	
-		results = search_mod->search(search_string,
-					search_type,
-					search_params,
-					current_scope, 0,
-					(is_dialog)
-					?main_dialog_search_percent_update
-					:main_sidebar_search_percent_update,
-					(void *) &progressunits);
-		search_scope_list = results;
-	//}// else do_module_index(module_name, is_dialog);
+	
+	results = search_mod->search(search_string,
+				search_type,
+				search_params,
+				current_scope, 0,
+				(is_dialog)
+				?main_dialog_search_percent_update
+				:main_sidebar_search_percent_update,
+				(void *) &progressunits);
+	search_scope_list = results;
 	return results.Count();
 }
+
 char *BackEnd::url_encode(const char * pram) {
 	gchar *retval;
 	retval = strdup(URL::encode(pram).c_str());

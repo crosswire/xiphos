@@ -71,8 +71,8 @@ using namespace std;
  
 char GTKEntryDisp::Display(SWModule &imodule) 
 {
-	GString *str = g_string_new(NULL);
 	gchar *keytext = NULL;
+	SWBuf swbuf = "";
 	int curPos = 0;                                         
 	gsize bytes_read;
 	gsize bytes_written;
@@ -101,7 +101,7 @@ char GTKEntryDisp::Display(SWModule &imodule)
                              &bytes_written,
                              error);
 	
-	g_string_printf(str, 	HTML_START
+	swbuf.appendFormatted(HTML_START
 				"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">"
 				"<a href=\"gnomesword.url?action=showModInfo&value=%s&module=%s\"><font color=\"%s\">"
 				"[%s]</font></a>[%s]<br>"
@@ -122,10 +122,9 @@ char GTKEntryDisp::Display(SWModule &imodule)
 	gboolean was_editable = gtk_html_get_editable(html);
 	if (was_editable)
 		gtk_html_set_editable(html, FALSE);
-	if (str->len)
-		gtk_html_load_from_string(html,str->str,str->len);
+	if (swbuf.length())
+		gtk_html_load_from_string(html,swbuf.c_str(),swbuf.length());
 	gtk_html_set_editable(html, was_editable);
-	g_string_free(str, TRUE);
 	free_font(mf);	
 	g_free(ops);
 	if(keytext) g_free(keytext);

@@ -363,19 +363,18 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		
 		switch(GPOINTER_TO_INT(data)) {
 		case 0:
-			if (GTK_TOGGLE_BUTTON(search1.togglebutton_show_main)->
+			if (search1.show_in_main || GTK_TOGGLE_BUTTON(search1.togglebutton_show_main)->
 			    active) {
 				main_url_handler(url2,TRUE); //gui_change_module_and_key(modbuf, buf);
 	
-			}	
-			text = main_get_rendered_text(modbuf, buf);
+			}
+						
+			text = main_get_search_rendered_text(modbuf, buf);
 			if (text) {
 				main_entry_display(search1.preview_html, modbuf,
 				      text, buf, TRUE);
 				free(text);
 			}
-			if (search1.show_in_main)
-				main_url_handler(url2,TRUE); //gui_change_module_and_key(modbuf, buf);
 			break;
 		case 1:
 				main_url_handler(url2,TRUE); //gui_change_module_and_key(modbuf, buf);
@@ -602,6 +601,7 @@ static void new_modlist(GtkButton * button, gpointer user_data)
  * Return value
  *   void
  */
+//gtk_widget_set_sensitive
 
 static void clear_modules(GtkButton * button, gpointer user_data)
 {
@@ -946,6 +946,49 @@ static void current_module_toggled(GtkToggleButton * togglebutton,
 
 /******************************************************************************
  * Name
+ *   indexed_word_toggled
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void indexed_word_toggled(GtkToggleButton *togglebutton,
+						gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void indexed_word_toggled(GtkToggleButton * togglebutton,
+				   gpointer user_data)
+{
+/*	if (togglebutton->active) {
+		//main_change_mods_select_label(search1.search_mod);
+		gtk_widget_set_sensitive(search1.rb_last, FALSE);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(search1.rb_no_scope), TRUE);		
+		gtk_widget_set_sensitive(search1.rb_no_scope, FALSE);
+		gtk_widget_set_sensitive(search1.rb_custom_range, FALSE);
+		gtk_widget_set_sensitive(search1.cb_case_sensitive, FALSE);
+		gtk_widget_set_sensitive(search1.cb_include_strongs, FALSE);
+		gtk_widget_set_sensitive(search1.cb_include_morphs, FALSE);
+		gtk_widget_set_sensitive(search1.cb_include_footnotes, FALSE);
+	}
+	else {
+		gtk_widget_set_sensitive(search1.rb_last, TRUE);
+		gtk_widget_set_sensitive(search1.rb_no_scope, TRUE);
+		gtk_widget_set_sensitive(search1.rb_custom_range, TRUE);
+		gtk_widget_set_sensitive(search1.cb_case_sensitive, TRUE);
+		gtk_widget_set_sensitive(search1.cb_include_strongs, TRUE);
+		gtk_widget_set_sensitive(search1.cb_include_morphs, TRUE);
+		gtk_widget_set_sensitive(search1.cb_include_footnotes, TRUE);
+	}*/
+}
+
+
+/******************************************************************************
+ * Name
  *   mod_selection_changed
  *
  * Synopsis
@@ -1131,7 +1174,7 @@ GtkWidget *gui_create_search_dialog(void)
 	GtkWidget *rb_words;
 	GtkWidget *tb_regexp;
 	GtkWidget *rb_exact_phrase;
-	GtkWidget *rb_indexed_word;
+	//GtkWidget *rb_indexed_word;
 	GtkWidget *frame57;
 	GtkWidget *vbox64;
 	GtkWidget *cb_case_sensitive;
@@ -1494,14 +1537,14 @@ GtkWidget *gui_create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox63), search1.rb_attributes, FALSE,
 			   FALSE, 0);	
 	g_free(header);			   
-		
+/*		
 	rb_indexed_word = gtk_radio_button_new_with_label_from_widget
                                             ((GtkRadioButton *)rb_words,
                                              _("Indexed"));
 	gtk_widget_show(rb_indexed_word);
 	gtk_box_pack_start(GTK_BOX(vbox63), rb_indexed_word, FALSE,
 			   FALSE, 0);	   
-
+*/
 	frame57 = gtk_frame_new(NULL);
 	gtk_widget_show(frame57);
 	gtk_box_pack_start(GTK_BOX(hbox74), frame57, TRUE, TRUE, 0);
@@ -2169,7 +2212,7 @@ GtkWidget *gui_create_search_dialog(void)
 	search1.rb_words = rb_words;
 	search1.rb_regexp = tb_regexp;
 	search1.rb_exact_phrase = rb_exact_phrase;
-	search1.rb_indexed_word = rb_indexed_word;
+//	search1.rb_indexed_word = rb_indexed_word;
 	search1.cb_case_sensitive = cb_case_sensitive;
 	search1.progressbar = appbar_search;
 	search1.label_mod_select = label_search_module;
@@ -2247,6 +2290,10 @@ GtkWidget *gui_create_search_dialog(void)
 			 search1.treeview);
 	g_signal_connect(G_OBJECT(search1.rb_current_module), "toggled",
 			 G_CALLBACK(current_module_toggled), NULL);
+/*			 
+	g_signal_connect(G_OBJECT(search1.rb_indexed_word), "toggled",
+			 G_CALLBACK(indexed_word_toggled), NULL);
+*/			 
 	g_signal_connect(G_OBJECT(search1.rb_no_scope), "toggled",
 			 G_CALLBACK(scope_toggled), NULL);
 	g_signal_connect(G_OBJECT(search1.rb_mod_list), "toggled",
