@@ -370,7 +370,6 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			//-- this ugly bit of code is to keep us form going to Gen 1:1 if key is not a real verse
 			if(!stricmp(curMod->KeyText(),"Genesis 1:1")) 
 				if(!stricmp(ref,"Gen 1:1") || !stricmp(ref,"Genesis 1:1") || !stricmp(ref,"Gene 1:1")){	
-					g_warning("Genesis 1:1");
 				}else{
 					ref=currRef;
 					curMod->SetKey(ref);
@@ -931,7 +930,6 @@ savenoteSWORD(gboolean noteisModified) //-- save personal comments
 		//text = lookup_widget(settings->app,"textComments"); //-- get text widget
 		buf = gtk_editable_get_chars((GtkEditable *)NEtext,0,-1); //-- get comments from text widget
 		*percomMod << (const char *)buf; //-- save note!
-		//g_warning(buf);
 	}
 	noteModified = false; //-- we just saved the note so it has not been modified 	
 }
@@ -1572,7 +1570,6 @@ void loadpreferencemodsSWORD(void)
 		 	 //-- if driver is RawFiles			
 			if((*Mgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
 				 percomMods = g_list_append(percomMods,(*it).second->Name());	
-				g_warning((*it).second->Name());
 			} 	                                               
 	  	}
 	}
@@ -1635,7 +1632,6 @@ void gs_firstrunSWORD(void)
 			++idictmods;
 		} 
 	}
-	g_warning(pathtoswordmods);
 	sprintf(gtextmods,"%d",itextmods);
 	sprintf(gcommmods,"%d",icommmods);
 	sprintf(gdictmods,"%d",idictmods);
@@ -1696,11 +1692,11 @@ updateshortcutbarSWORD(void)
 		} 
 	}
 	/*** send the lists to the shortcut bar ***/
-  	update_shortcut_bar(settings,
+/*  	update_shortcut_bar(settings,
 				favoMods,
 				textMods, 
 				commMods, 
-				dictMods);
+				dictMods);*/
 	/*** free GLists ***/
 	g_list_free(textMods); 
         g_list_free(commMods);
