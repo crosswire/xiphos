@@ -41,6 +41,7 @@
 #include "backend/key.hh"
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
+#include "backend/sword_main.hh"
 
 
 using std::map;
@@ -514,13 +515,16 @@ int backend_get_verse_from_key(const char *key)
  *   GList*
  */
 
-GList *backend_get_books_of_bible(void)
+GList *backend_get_books_of_bible(int testament)
 {
+	return backend->fill_Bible_books(testament);
+/*
 	VerseKey key;
 	char *book = NULL;
-	char *tmp = NULL;
-	gsize bytes_read;
-	gsize bytes_written;
+	//char *tmp = NULL;
+	//unsigned int
+	unsigned int bytes_read;
+	unsigned int bytes_written;
 	GError *error;
 	GList * books = NULL;
 	int i = 0, j = 0;
@@ -544,4 +548,5 @@ GList *backend_get_books_of_bible(void)
 		i++;
 	}
 	return books;
+*/
 }
