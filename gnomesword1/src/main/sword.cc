@@ -1132,7 +1132,11 @@ void main_display_bible(const char * mod_name, const char * key)
 	gchar *file = NULL;
 	gchar *style = NULL;
 	gchar *val_key = NULL;
+	gchar *utf8_key = NULL;
+        gsize bytes_written;                                               
+        gsize bytes_read;
 	
+	GError *error = NULL;
 	if(!mod_name)
 		mod_name = xml_get_value("modules", "bible");	
 	
@@ -1142,8 +1146,12 @@ void main_display_bible(const char * mod_name, const char * key)
 	if(!backend->is_module(mod_name))
 		return;
 
-	
-	
+	/*utf8_key = g_convert(key,-1, UTF_8,
+                             OLD_CODESET,&bytes_read,&bytes_written,NULL);
+	if(error) {
+		g_print ("main_display_bible error: %s\n", error->message);
+		g_error_free (error);
+	}*/
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	if(!settings.MainWindowModule)
 		settings.MainWindowModule = (char*)mod_name;
@@ -1220,6 +1228,7 @@ void main_display_bible(const char * mod_name, const char * key)
 		main_update_parallel_page();
 	else
 		gui_keep_parallel_dialog_in_sync();
+	//g_free(utf8_key);
 
 }
 
