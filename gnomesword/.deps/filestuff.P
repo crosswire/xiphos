@@ -177,19 +177,20 @@ filestuff.o: filestuff.cpp /usr/include/gnome.h \
  /usr/include/libgnomeui/gnome-druid-page-start.h \
  /usr/include/libgnomeui/gnome-druid-page-standard.h \
  /usr/include/libgnomeui/gnome-druid-page-finish.h \
- /usr/include/sys/stat.h /usr/include/bits/stat.h support.h \
- filestuff.h menustuff.h GnomeSword.h /usr/include/g++-2/string \
- /usr/include/g++-2/std/bastring.h /usr/include/g++-2/cstddef \
- /usr/include/g++-2/std/straits.h /usr/include/g++-2/cctype \
- /usr/include/ctype.h /usr/include/g++-2/cstring \
- /usr/include/g++-2/alloc.h /usr/include/g++-2/stl_config.h \
- /usr/include/g++-2/stl_alloc.h /usr/include/g++-2/iostream.h \
- /usr/include/g++-2/streambuf.h /usr/include/assert.h \
- /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
- /usr/include/signal.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/sigthread.h /usr/include/g++-2/iterator \
- /usr/include/g++-2/stl_relops.h /usr/include/g++-2/stl_iterator.h \
- /usr/include/g++-2/std/bastring.cc
+ /usr/include/sys/stat.h /usr/include/bits/stat.h /usr/include/fcntl.h \
+ /usr/include/bits/fcntl.h support.h filestuff.h GnomeSword.h \
+ /usr/include/g++-2/string /usr/include/g++-2/std/bastring.h \
+ /usr/include/g++-2/cstddef /usr/include/g++-2/std/straits.h \
+ /usr/include/g++-2/cctype /usr/include/ctype.h \
+ /usr/include/g++-2/cstring /usr/include/g++-2/alloc.h \
+ /usr/include/g++-2/stl_config.h /usr/include/g++-2/stl_alloc.h \
+ /usr/include/g++-2/iostream.h /usr/include/g++-2/streambuf.h \
+ /usr/include/assert.h /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/bits/sched.h /usr/include/signal.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/sigthread.h \
+ /usr/include/g++-2/iterator /usr/include/g++-2/stl_relops.h \
+ /usr/include/g++-2/stl_iterator.h /usr/include/g++-2/std/bastring.cc \
+ menustuff.h
 filestuff.cpp :
 /usr/include/gnome.h :
 /usr/lib/gnome-libs/include/gnomesupport.h :
@@ -453,9 +454,10 @@ filestuff.cpp :
 /usr/include/libgnomeui/gnome-druid-page-finish.h :
 /usr/include/sys/stat.h :
 /usr/include/bits/stat.h :
+/usr/include/fcntl.h :
+/usr/include/bits/fcntl.h :
 support.h :
 filestuff.h :
-menustuff.h :
 GnomeSword.h :
 /usr/include/g++-2/string :
 /usr/include/g++-2/std/bastring.h :
@@ -480,3 +482,4 @@ GnomeSword.h :
 /usr/include/g++-2/stl_relops.h :
 /usr/include/g++-2/stl_iterator.h :
 /usr/include/g++-2/std/bastring.cc :
+menustuff.h :

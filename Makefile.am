@@ -2,6 +2,7 @@
 
 SUBDIRS = macros gnomesword
 
+EXTRA_DIST = gnomesword.glade gnomesword.kdevprj
 install-data-local:
 	@$(NORMAL_INSTALL)
 	if test -d $(srcdir)/pixmaps; then \

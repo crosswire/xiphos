@@ -16,6 +16,17 @@
  ***************************************************************************/
 
 
+#ifndef __PRINTSTUFF_H__
+#define __PRINTSTUFF_H__
+
+typedef enum {
+	PRINT_ORIENT_LANDSCAPE,
+	PRINT_ORIENT_PORTRAIT
+} PrintOrientation;
+
 void
-print_text			(GtkWidget *widget,
-								gchar *currentfilename);
+file_print			(GtkWidget *widget,
+					gchar *currentfilename,
+					gint file_printpreview);
+ 
+#endif /* __PRINTSTUFF_H__ */

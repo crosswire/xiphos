@@ -25,16 +25,21 @@
 #include <gnome.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 #include "support.h"
 #include "filestuff.h"
 #include "menustuff.h"
 #include "GnomeSword.h"
 
 #define BUFFER_SIZE 8192	//-- input buffer size	
+//extern SETTINGS *settings;
 extern GtkWidget *MainFrm; //-- main window (form) widget
 extern gchar *current_filename; //-- file loaded into study pad
 extern gchar bmarks[50][80];	//-- array to store bookmarks - read in form file when program starts - saved to file after edit
-extern gchar options[11][80];	//-- array to store a number of setting - read in form file when program starts - saved to file at normal shut down
 extern gboolean file_changed;	//-- set to true if text is study pad has changed - and file is not saved
 char	 	 *homedir,	//-- store $home directory
 				*gSwordDir,	//-- store GnomeSword directory
@@ -63,8 +68,8 @@ setDiretory(void)
 	sprintf(gSwordDir, "%s/%s", homedir,".GnomeSword" );
 	fnbookmarks = g_new(char, strlen(gSwordDir) + strlen("bookmarks.txt")+ 2); //-- set fnbookmarks to gSwordDir + bookmarks.txt
 	sprintf(fnbookmarks, "%s/%s", gSwordDir,"bookmarks.txt" );
-	fnconfigure = g_new(char, strlen(gSwordDir) + strlen("gsword.cfg")+ 2); //-- set fnconfigure to gSwordDir + gsword.cfg
-	sprintf(fnconfigure, "%s/%s", gSwordDir,"gsword.cfg" );
+	fnconfigure = g_new(char, strlen(gSwordDir) + strlen("settings.cfg")+ 2); //-- set fnconfigure to gSwordDir + gsword.cfg
+	sprintf(fnconfigure, "%s/%s", gSwordDir,"settings.cfg" );
 	if(access(gSwordDir,F_OK) == -1)  //-- if gSwordDir does not exist create it
 	{
 		if((mkdir(gSwordDir,S_IRWXU)) == 0)
@@ -143,35 +148,6 @@ editbookmarksSave(GtkWidget *editdlg)  //-------------------------- save bookmar
 
 //--------------------------------------------------------------------------------------------
 void
-loadoptionarray(void) //---------------------------------------------- load settings form file
-{
-	gint i,j;
-	gchar mybuf[255];
-	if((configfile = fopen(fnconfigure,"r")) == NULL)
-	{
-		printf("open failed!");
-		gtk_exit(1);
-	}
-	for(i=0;i<15;i++)
-	{
-		fgets(mybuf,79,configfile);
-		for(j=0;j<79;j++)
-		{
-			if(mybuf[j] =='\n')
-			{
- 				mybuf[j] = '\0';
-				break;
-			}
-			
-		}
-		strcpy(options[i],mybuf);
-		//++i;
-	}
-	fclose(configfile);		
-}
-
-//--------------------------------------------------------------------------------------------
-void
 savebookmarks(void) 
 {
 	gint i,j;
@@ -193,32 +169,6 @@ savebookmarks(void)
 	}
 	fputs("-end-",flbookmarks);
 	fclose(flbookmarks);		
-}
-
-//--------------------------------------------------------------------------------------------
-void
-saveoptions(void) 
-{
-	FILE *configfile;	
-	gint i = 0;
-	gint j;
-
-	configfile = fopen(fnconfigure,"w"); //-------------------------- save op setting, so we can open where we closed
-	while(i<15)
-	{
-		for(j=0;j<79;j++)
-		{
-			if(options[i][j] == '\0') 
-			{
-				options[i][j] = '\n';
-				options[i][j+1] = '\0';
-				break;
-			}
-		}
-		fputs(options[i],configfile);
-		++i;
-	}
-	fclose(configfile);	
 }
 
 //--------------------------------------------------------------------------------------------
@@ -245,26 +195,7 @@ createFiles(void) //--------------- files nessary for GomeSword if they do not e
 		fputs("John 3:16\n",f);
 		fputs("-end-\n",f);
 		fclose(f);	
-	}
-	if((f = fopen(fnconfigure,"w"))== NULL) //-------------------------- create settings file
-	{
-		printf("Can not create settings file");
-		gtk_exit(1);
-	}
-	else
-	{
-		fputs("[GnomeSword]\n",f);
-		fputs("KJV\n",f);
-		fputs("KJV\n",f);
-		fputs("KJV\n",f);
-		fputs("KJV\n",f);
-		fputs("TRUE\n",f);
-		fputs("FALSE\n",f);
-		fputs("FALSE\n",f);
-		fputs("TRUE\n",f);
-		fputs("Revelation of John 1:5\n",f);
-		fclose(f);
-	}
+	} 	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -367,3 +298,70 @@ loadFile (GtkWidget *filesel)  //-- load file into studypad
   	gtk_statusbar_pop (GTK_STATUSBAR (statusbar), context_id2);
   	gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2, current_filename);
 }
+
+//----------------------------------------------------------------------------------------------
+void                     //-- save our settings
+writesettings(SETTINGS settings)
+{
+   int fd;     //-- file handle
+
+   fd = open(fnconfigure, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);  //-- open file (settings.cfg)
+   write(fd,(char *)&settings,sizeof(settings)); //-- save structure to disk
+   close(fd);                     //-- close file
+}
+
+//----------------------------------------------------------------------------------------------
+SETTINGS                  //-- read settings.cfg into settings structure
+readsettings(void)
+{
+   int fd;           //-- file handle
+   SETTINGS settings; //-- settings structure
+
+   if((fd = open(fnconfigure, O_RDONLY))== -1) //-- try to open file
+   {
+   		settings = createsettings();  //-- if we cannot open file we will create new one
+   }
+   else
+   {     		
+	 		read(fd,(char *)&settings,sizeof(settings));  //-- read file into structure
+	 }
+	 close(fd);        //-- close file
+	 return(settings); //-- return settings structure to initSword() in GnomeSword.cpp	
+}
+
+//----------------------------------------------------------------------------------------------
+SETTINGS                    //-- create settings structure and settings.cfg file
+createsettings(void)
+{
+	SETTINGS settings;   //-- gnomesword settings structure
+	SETTINGS *p_settings; //-- pointer to settings structure
+	int fd;              //-- handle for settings file
+	
+	p_settings = &settings;    //-- set p_settings to point to settings structure - we have to do this set the values of the structure
+	strcpy(p_settings->MainWindowModule, "KJV");  //-- set main window module
+	strcpy(p_settings->Interlinear1Module, "KJV");//-- set first interlinear window module
+	strcpy(p_settings->Interlinear2Module, "KJV");//-- set second interlinear window module
+	strcpy(p_settings->Interlinear3Module, "KJV");//-- set third interlinear window module
+	strcpy(p_settings->personalcommentsmod, "-+*Personal*+-"); //-- personal comments module
+	strcpy(p_settings->currentverse,"Romans 8:28"); //-- set openning verse
+	strcpy(p_settings->dictkey, "GRACE"); //-- dictionary key to use at program startup - the one we shut down with
+	p_settings->currentverse_red = 0x0000;  //-- set current verse color to green
+	p_settings->currentverse_green = 0x7777;
+	p_settings->currentverse_blue = 0x0000;
+	p_settings->strongs = false;   //-- set strongs numbers to off
+	p_settings->footnotes = false; //-- set footnotes to off
+	p_settings->versestyle = true; //-- set versestyle to on
+	p_settings->interlinearpage = true; //-- set show interlinear page to on
+	p_settings->autosavepersonalcomments = true; //-- set autosave personal comments to on
+	p_settings->notebook3page = 0;  //-- notebook 3 page number
+	p_settings->notebook1page = 0;  //-- commentaries notebook
+	p_settings->notebook2page = 0;  //-- dict and lex notebook
+	
+	
+	
+	fd = open(fnconfigure, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);  //-- create settings file (settings.cfg)
+	write(fd,(char *)&settings,sizeof(settings)); //-- save settings structrue to file
+	close(fd);	                                  //-- close the file
+	return(settings);                             //-- return settings structure to readsettings(void)
+}
+

@@ -87,6 +87,8 @@ cflags_set = yes
 cxxflags_set = @cxxflags_set@
 
 SUBDIRS = macros gnomesword
+
+EXTRA_DIST = gnomesword.glade gnomesword.kdevprj
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
@@ -371,7 +373,6 @@ install-data install-am install uninstall-am uninstall all-redirect \
 all-am all installdirs-am installdirs mostlyclean-generic \
 distclean-generic clean-generic maintainer-clean-generic clean \
 mostlyclean distclean maintainer-clean
-
 
 install-data-local:
 	@$(NORMAL_INSTALL)
