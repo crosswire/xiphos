@@ -190,7 +190,7 @@ char *get_module_description(char * module_name)
 }
 
 
-char *get_module_language(const char *module_name)
+const char *get_module_language(const char *module_name)
 {
 	return backend_get_module_language(module_name);
 }
