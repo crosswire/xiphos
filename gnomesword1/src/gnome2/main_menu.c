@@ -797,17 +797,17 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_SUBTREE, N_("H_istory"),
-	 NULL,
-	 history1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
 	 GNOME_APP_UI_SUBTREE, N_("_View"),
 	 NULL,
 	 view1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Hi_story"),
+	 NULL,
+	 history1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_SUBTREE, N_("_Help"),
 	 NULL,
