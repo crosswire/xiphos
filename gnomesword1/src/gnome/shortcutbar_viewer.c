@@ -35,7 +35,6 @@
 
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
-#include "main/support.h"
 #include "main/settings.h"
 #include "main/dictlex.h"
 

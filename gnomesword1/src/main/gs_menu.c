@@ -29,7 +29,7 @@
 #include "backend/sword.h"
 #include "main/gs_popup_cb.h"
 #include "main/gs_html.h"
-#include "main/support.h"
+//#include "main/support.h"
 //#include "main/gs_bookmarks.h"
 #include "main/settings.h"
 
@@ -423,30 +423,6 @@ additemtosubtree(GtkWidget * MainFrm, gchar * subtreelabel,
 //      g_free(bookmarkitem);   
 }
 
-//-------------------------------------------------------------------------------------------
-//-- we need to return a widget so we can use it later as a toggle menu item
-GtkWidget *additemtooptionmenu(GtkWidget * MainFrm, gchar * subtreelabel,
-			       gchar * itemlabel,
-			       GtkMenuCallback mycallback)
-{
-	GtkWidget *item;
-	GnomeUIInfo *menuitem;
-
-	menuitem = g_new(GnomeUIInfo, 2);
-	menuitem->type = GNOME_APP_UI_TOGGLEITEM;
-	menuitem->user_data = NULL;
-	menuitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
-	menuitem->pixmap_info = NULL;
-	menuitem->accelerator_key = 0;
-	menuitem->label = itemlabel;
-	menuitem->moreinfo = (gpointer) mycallback;
-	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), subtreelabel,
-					 menuitem, NULL);
-	item = menuitem[0].widget;
-
-	return (item);
-}
 
 //-------------------------------------------------------------------------------------------
 void

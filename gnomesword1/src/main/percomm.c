@@ -33,7 +33,6 @@
 #include "main/percomm.h"
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
-#include "main/support.h"
 
 #include "backend/percomm_.h"
 #include "backend/sword.h"

@@ -29,9 +29,9 @@
 
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
+#include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/support.h"
 #include "main/settings.h"
 
 /******************************************************************************
@@ -64,7 +64,7 @@ void gui_attach_detach_shortcutbar(void)
 		gtk_widget_show(settings.shortcut_bar);
 		e_paned_set_position(E_PANED(settings.epaned), 0);
 		e_paned_set_position(E_PANED
-				     (lookup_widget
+				     (gui_lookup_widget
 				      (settings.app, "hpaned1")),
 				     biblepanesize);
 		gtk_widget_show(settings.dockSB);
@@ -75,7 +75,7 @@ void gui_attach_detach_shortcutbar(void)
 		e_paned_set_position(E_PANED(settings.epaned),
 				     settings.shortcutbar_width);
 		e_paned_set_position(E_PANED
-				     (lookup_widget
+				     (gui_lookup_widget
 				      (settings.app, "hpaned1")),
 				     biblepanesize);
 		gtk_widget_reparent(settings.shortcut_bar,

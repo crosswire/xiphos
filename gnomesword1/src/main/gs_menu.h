@@ -55,11 +55,6 @@ void addsubtreeitem(GtkWidget * MainFrm,
 void additemtosubtree(GtkWidget * MainFrm,
 		  gchar * subtreelabel, gchar * itemlabel);
 
-GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
-			       gchar * subtreelabel,
-			       gchar * itemlabel,
-			       GtkMenuCallback mycallback);
-
 void removemenuitems(GtkWidget *MainFrm, gchar *startitem, gint numberofitems);
 
 void createpopupmenus(GList * bilbeDescription, GList * options);
