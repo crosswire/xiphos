@@ -1,5 +1,5 @@
 /* 
- * added to gnomesword 2001-01-06  for spell checking
+ * added to gnomesword 2001-01-06 
 */
 
 /* Bluefish HTML Editor

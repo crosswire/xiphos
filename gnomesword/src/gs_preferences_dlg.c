@@ -453,6 +453,53 @@ on_fpUnicodeFont_font_set(GnomeFontPicker * gnomefontpicker,
 }
 */
 
+static void
+setcolorpickersColor(SETTINGS *s,
+				GtkWidget *gcpTextBG,
+				GtkWidget *gcpText,
+				GtkWidget *gcpCurrentverse,
+				GtkWidget *gcpTextVerseNums,
+				GtkWidget *gcpTextLinks)
+{
+	gdouble *color;
+	gushort a = 000000;
+	
+	if (string_is_color(s->bible_bg_color)) {
+		color = hex_to_gdouble_arr(s->bible_bg_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					(gcpTextBG), color[0], 
+					color[1], color[2], a);
+	}
+	
+	if (string_is_color(s->bible_text_color)) {
+		color = hex_to_gdouble_arr(s->bible_text_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpText),
+					  color[0], color[1], color[2], a);
+	}
+	
+	if (string_is_color(s->currentverse_color)) {
+		color = hex_to_gdouble_arr(s->currentverse_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpCurrentverse), color[0],
+					  color[1], color[2], a);
+	}
+	
+	if (string_is_color(s->bible_verse_num_color)) {
+		color = hex_to_gdouble_arr(s->bible_verse_num_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpTextVerseNums), color[0],
+					  color[1], color[2], a);
+	}
+	
+	if (string_is_color(s->link_color)) {
+		color = hex_to_gdouble_arr(s->link_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					(gcpTextLinks), color[0], 
+					color[1], color[2], a);
+	} 
+	
+}
+
 
 /***  ***/
 GtkWidget *create_dlgSettings(SETTINGS * s,
@@ -466,8 +513,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gint groupnum;
 	gchar *pathname;
 	GdkPixbuf *icon_pixbuf;
-	gdouble *color;
-	gushort a;
 	GtkWidget *shortcut_bar;
 	GtkWidget *dlgSettings;
 	GtkWidget *dialog_vbox9;
@@ -504,41 +549,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *label176;
 	GtkWidget *fpDefaultFont;
 	GtkWidget *btnSetToGSDefaults;
-
-
-
-
-/*	GtkWidget *vbox35;
-	GtkWidget *hbox34;
-	GtkWidget *label149;
-	GtkWidget *gcpTextBG;
-	GtkWidget *hbox30;
-	GtkWidget *label145;
-	GtkWidget *gcpText;
-	GtkWidget *hbox36;
-	GtkWidget *label151;
-	GtkWidget *cmbTextFontSize;
-	GList *cmbTextFontSize_items = NULL;
-	GtkWidget *cmbEntryTextSize;
-	GtkWidget *hbox35;
-	GtkWidget *label150;
-	GtkWidget *gcpCurrentverseBG;
-	GtkWidget *hbox23;
-	GtkWidget *label103;
-	GtkWidget *gcpCurrentverse;
-	GtkWidget *hbox31;
-	GtkWidget *label146;
-	GtkWidget *gcpTextVerseNums;
-	GtkWidget *hbox37;
-	GtkWidget *label152;
-	GtkWidget *cmbVerseNumSize;
-	GList *cmbVerseNumSize_items = NULL;
-	GtkWidget *cmbEentryVNSize;
-	GtkWidget *hbox32;
-	GtkWidget *label147;
-	GtkWidget *gcpTextLinks;
-	GtkWidget *btnSetToGSDefaults;
-	*/
 	GtkWidget *label98;
 	GtkWidget *hbox64;
 	GtkWidget *vbox28;
@@ -624,7 +634,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 
 	tooltips = gtk_tooltips_new();
 
-	a = 000000;
 	updatehtml = FALSE;
 	updateSB = FALSE;
 	updatelayout = FALSE;
@@ -715,11 +724,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpTextBG, 41, -2);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpTextBG),
 				     _("Pick a color for Background"));
-	if (string_is_color(s->bible_bg_color)) {
-		color = hex_to_gdouble_arr(s->bible_bg_color);
-		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpTextBG),
-					  color[0], color[1], color[2], a);
-	}
 	
 	gcpText = gnome_color_picker_new();
 	gtk_widget_ref(gcpText);
@@ -733,11 +737,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpText, 41, -2);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpText),
 				     _("Pick a color for Bible Text"));
-	if (string_is_color(s->bible_text_color)) {
-		color = hex_to_gdouble_arr(s->bible_text_color);
-		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpText),
-					  color[0], color[1], color[2], a);
-	}
 
 	cmbTextFontSize = gtk_combo_new();
 	gtk_widget_ref(cmbTextFontSize);
@@ -810,12 +809,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpCurrentverse, 41, -2);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER(gcpCurrentverse),
 				     _("Pick a color for Current Verse"));
-	if (string_is_color(s->currentverse_color)) {
-		color = hex_to_gdouble_arr(s->currentverse_color);
-		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
-					  (gcpCurrentverse), color[0],
-					  color[1], color[2], a);
-	}
 
 	gcpTextVerseNums = gnome_color_picker_new();
 	gtk_widget_ref(gcpTextVerseNums);
@@ -827,12 +820,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_usize(gcpTextVerseNums, 41, -2);
-	if (string_is_color(s->bible_verse_num_color)) {
-		color = hex_to_gdouble_arr(s->bible_verse_num_color);
-		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
-					  (gcpTextVerseNums), color[0],
-					  color[1], color[2], a);
-	}
 
 	cmbVerseNumSize = gtk_combo_new();
 	gtk_widget_ref(cmbVerseNumSize);
@@ -890,11 +877,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(gcpTextLinks, 41, -2);
 	gtk_tooltips_set_tip(tooltips, gcpTextLinks,
 			     _("Strongs Numbers & Morph Tags"), NULL);
-	if (string_is_color(s->link_color)) {
-		color = hex_to_gdouble_arr(s->link_color);
-		gnome_color_picker_set_i8(GNOME_COLOR_PICKER(gcpTextLinks),
-					  color[0], color[1], color[2], a);
-	}
 
 	fpGreekFont = gnome_font_picker_new();
 	gtk_widget_ref(fpGreekFont);
@@ -2076,5 +2058,12 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 #endif /* USE_OLD_GAL */
 	e_shortcut_bar_set_view_type((EShortcutBar *) shortcut_bar,
 				     groupnum, E_ICON_BAR_LARGE_ICONS);
+	setcolorpickersColor(s,
+	   			gcpTextBG,
+				gcpText,
+				gcpCurrentverse,
+				gcpTextVerseNums,
+				gcpTextLinks);
+
 	return dlgSettings;
 }
