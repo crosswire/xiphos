@@ -16,8 +16,6 @@ CXXFLAGS =  \
     $(GTK_CFLAGS) 
     
 libgui_a_SOURCES =  \
-    _dictlex.c \
-    _dictlex.h \
     _display_info.c \
     _display_info.h \
     _editor.c \
@@ -41,6 +39,7 @@ libgui_a_SOURCES =  \
     commentary_find.c \
     commentary_find.h \
     editor_menu.c \
+    dictlex.c \
     dictlex_dialog.c \
     dictlex_dialog.h \
     editor_menu.h \
