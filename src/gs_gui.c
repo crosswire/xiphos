@@ -326,7 +326,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	gchar *pathname;
 	GdkPixbuf *icon_pixbuf;
 
-	settings->docked = TRUE;
+	//settings->docked = TRUE;
 	g_print("%s\n", "Building GnomeSword interface");
 	if (settings->showsplash) {
 		pathname = gnome_pixmap_file("gnomesword/GnomeSword.xpm");
