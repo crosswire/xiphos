@@ -505,7 +505,7 @@ static gboolean on_html_enter_notify_event(GtkWidget * widget,
  *   GtkWidget *
  */
 
-static GtkWidget *create_studypad_control(GtkWidget * container,
+GtkWidget *gui_create_studypad_control(GtkWidget * container,
 				gchar * filename)
 {
 	GtkWidget *vbox;
@@ -531,6 +531,11 @@ static GtkWidget *create_studypad_control(GtkWidget * container,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxSP);
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);
+	
+	
+	gtk_signal_connect(GTK_OBJECT(vboxSP), "destroy",
+                GTK_SIGNAL_FUNC(gui_html_editor_control_data_destroy),
+			   specd);
 
 	hboxstyle = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hboxstyle);
@@ -664,8 +669,10 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 {
 	GtkWidget *label;
 
+	settings.studypad_page = page_num;
+	
 	widgets.html_studypad = 
-			create_studypad_control(notebook,file_name);
+			gui_create_studypad_control(notebook,file_name);
 
 
 	label = gtk_label_new(_("Study Pad"));
@@ -689,40 +696,4 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 	return TRUE;
 }
 
-/******************************************************************************
- * Name
- *  
- *
- * Synopsis
- *   #include "studypad.h"
- *
- *   	
- *
- * Description
- *    
- *
- * Return value
- *   
- */
 
-gint gui_open_studypad_dialog(gchar * file_name)
-{
-	widgets.studypad_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_object_set_data(GTK_OBJECT
-			    (widgets.studypad_dialog),
-			    "widgets.studypad_dialog",
-			    widgets.studypad_dialog);
-	gtk_widget_set_usize(widgets.studypad_dialog, 480, 280);
-	GTK_WIDGET_SET_FLAGS(widgets.studypad_dialog, GTK_CAN_FOCUS);
-	gtk_window_set_policy(GTK_WINDOW
-			      (widgets.studypad_dialog),
-			      TRUE, TRUE, TRUE);
-	gtk_window_set_title((GtkWindow *)widgets.studypad_dialog,
-                                (const gchar*)settings.program_title);
-	gtk_widget_show(widgets.studypad_dialog);
-
-	widgets.html_studypad =
-	  	create_studypad_control(widgets.studypad_dialog,
-							  file_name);
-	return TRUE;
-}

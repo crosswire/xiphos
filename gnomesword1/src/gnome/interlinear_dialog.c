@@ -161,7 +161,7 @@ void gui_undock_interlinear_page(void)
 	Interlinear_UnDock_Dialog = gui_create_interlinear_dialog();
 	gtk_widget_reparent(widgets.frame_interlinear, vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.workbook_lower),
-				 2);
+				 settings.interlinear_page);
 	settings.cvInterlinear =
 	    update_controls_interlinear(settings.currentverse);
 	gtk_widget_show(Interlinear_UnDock_Dialog);
@@ -230,9 +230,11 @@ static void on_dlgInterlinear_destroy(GtkObject * object,
 	gtk_widget_show(vbox);
 	gtk_notebook_insert_page_menu(GTK_NOTEBOOK
 				      (widgets.workbook_lower), vbox,
-				      tab_label, menu_label, 2);
+				      tab_label, menu_label, 
+					settings.interlinear_page);
 	gtk_widget_reparent(widgets.frame_interlinear, vbox);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower), 2);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower), 
+					settings.interlinear_page);
 	settings.dockedInt = TRUE;
 	gui_update_interlinear_page();
 }

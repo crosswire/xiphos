@@ -416,6 +416,34 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 			      page);
 }
 
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void (GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
+{
+	if(settings.use_percomm_dialog)
+		gui_open_commentary_editor((gchar *) user_data);
+	else {
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+			widgets.workbook_lower),settings.percomm_page);
+		gui_set_percomm_page((gchar *) user_data);		
+	}
+}
+
 /******************************************************************************
  * Name
  *  on_text_showtabs_activate
@@ -509,7 +537,7 @@ void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	gchar *cipher_key;
 
-//	g_warning(t->cipher_old);
+//      g_warning(t->cipher_old);
 
 	cipher_key = gui_add_cipher_key(t->mod_name, t->cipher_old);
 	if (cipher_key) {
@@ -567,6 +595,9 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 	GtkAccelGroup *pm_text_accels;
 	GtkWidget *copy;
 	GtkWidget *separator;
+	GtkWidget *edit_note;
+	GtkWidget *edit_note_menu;
+	GtkAccelGroup *edit_note_menu_accels;
 	GtkWidget *lookup_selection;
 	GtkWidget *lookup_selection_menu;
 	GtkAccelGroup *lookup_selection_menu_accels;
@@ -625,6 +656,41 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 				 gtk_widget_unref);
 	gtk_widget_show(t->showtoolbar);
 	gtk_container_add(GTK_CONTAINER(pm_text), t->showtoolbar);
+
+	if (settings.havepercomm) {
+		separator = gtk_menu_item_new();
+		gtk_widget_ref(separator);
+		gtk_object_set_data_full(GTK_OBJECT(pm_text),
+					 "separator", separator,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(pm_text), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+
+		edit_note =
+		    gtk_menu_item_new_with_label(_("Edit Note"));
+		gtk_widget_ref(edit_note);
+		gtk_object_set_data_full(GTK_OBJECT(pm_text),
+					 "edit_note", edit_note,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(edit_note);
+		gtk_container_add(GTK_CONTAINER(pm_text), edit_note);
+
+		edit_note_menu = gtk_menu_new();
+		gtk_widget_ref(edit_note_menu);
+		gtk_object_set_data_full(GTK_OBJECT(pm_text),
+					 "edit_note_menu",
+					 edit_note_menu,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit_note),
+					  edit_note_menu);
+		edit_note_menu_accels =
+		    gtk_menu_ensure_uline_accel_group(GTK_MENU
+						      (edit_note_menu));
+	}
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
@@ -695,7 +761,6 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(pm_text), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-
 
 	view_text = gtk_menu_item_new_with_label(_("View Text"));
 	gtk_widget_ref(view_text);
@@ -812,6 +877,33 @@ static GtkWidget *create_pm_text(TEXT_DATA * t)
 	}
 	g_list_free(tmp);
 
+	if (settings.havepercomm) {
+		i = 0;
+		tmp = get_list(PERCOMM_LIST);
+		while (tmp != NULL) {
+			item3 =
+			    gtk_menu_item_new_with_label((gchar *) tmp->
+							 data);
+			gtk_widget_ref(item3);
+			gtk_object_set_data_full(GTK_OBJECT(pm_text),
+						 "item3", item3,
+						 (GtkDestroyNotify)
+						 gtk_widget_unref);
+			gtk_widget_show(item3);
+
+			gtk_signal_connect(GTK_OBJECT(item3),
+					   "activate",
+					   GTK_SIGNAL_FUNC
+					   (edit_percomm),
+					   (gchar *) tmp->data);
+
+			gtk_container_add(GTK_CONTAINER(edit_note_menu),
+					  item3);
+			++i;
+			tmp = g_list_next(tmp);
+		}
+		g_list_free(tmp);
+	}
 	/*
 	 * for using the current dictionary for lookup 
 	 */
@@ -1132,13 +1224,13 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					       "/s.xpm");
 		tgs->t_btn_strongs =
-			gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("S"),
-				       _
-				       ("Toggle Strongs Numbers"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("S"),
+					       _
+					       ("Toggle Strongs Numbers"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_strongs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_strongs",
@@ -1166,11 +1258,11 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/m.xpm");
 		tgs->t_btn_morphs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("M"),
-				       _("Toggle Morph Tags"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("M"),
+					       _("Toggle Morph Tags"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_morphs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_morphs",
@@ -1198,11 +1290,11 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/f.xpm");
 		tgs->t_btn_footnotes =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("F"),
-				       _("Toggle Footnotes"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("F"),
+					       _("Toggle Footnotes"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_footnotes);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_footnotes",
@@ -1229,12 +1321,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/a.xpm");
 		tgs->t_btn_accents =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("A"),
-				       _
-				       ("Toggle Greek Accents"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("A"),
+					       _
+					       ("Toggle Greek Accents"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_accents);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_accents",
@@ -1262,11 +1354,11 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/l.xpm");
 		tgs->t_btn_lemmas =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("L"),
-				       _("Toggle Lemmas"), NULL,
-				       tmp_toolbar_icon, NULL,
-				       NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("L"),
+					       _("Toggle Lemmas"), NULL,
+					       tmp_toolbar_icon, NULL,
+					       NULL);
 		gtk_widget_ref(tgs->t_btn_lemmas);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_lemmas",
@@ -1293,12 +1385,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/r.xpm");
 		tgs->t_btn_scripturerefs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("R"),
-				       _
-				       ("Toggle Scripture References"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("R"),
+					       _
+					       ("Toggle Scripture References"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_scripturerefs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_scripturerefs",
@@ -1329,12 +1421,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/p.xpm");
 		tgs->t_btn_points =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("P"),
-				       _
-				       ("Toggle Hebrew Vowel Points"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("P"),
+					       _
+					       ("Toggle Hebrew Vowel Points"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_points);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_points",
@@ -1364,12 +1456,12 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/c.xpm");
 		tgs->t_btn_cant =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("C"),
-				       _
-				       ("Toggle Hebrew Cantillation"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("C"),
+					       _
+					       ("Toggle Hebrew Cantillation"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_cant);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_cant",
@@ -1397,11 +1489,11 @@ void gui_add_global_option_buttons(GtkWidget * toolbar,
 					       "/h.xpm");
 		tgs->t_btn_headings =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("H"),
-				       _("Toggle Headings"),
-				       NULL, tmp_toolbar_icon,
-				       NULL, NULL);
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("H"),
+					       _("Toggle Headings"),
+					       NULL, tmp_toolbar_icon,
+					       NULL, NULL);
 		gtk_widget_ref(tgs->t_btn_headings);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "tgs->t_btn_headings",
@@ -1551,7 +1643,7 @@ static void create_toolbar(TEXT_DATA * t)
 	gui_add_global_option_buttons(toolbar, t->mod_name, t->tgs,
 				      (GtkMenuCallback)
 				      on_t_btn_toggled);
-				      
+
 	gtk_signal_connect(GTK_OBJECT(print),
 			   "clicked",
 			   GTK_SIGNAL_FUNC(print_clicked), t);
@@ -1740,7 +1832,7 @@ void gui_display_text(gchar * key)
 		chapter_display(cur_t->html, cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
 	else if (cur_t->cipher_key) {
-//		g_warning(cur_t->cipher_key);
+//              g_warning(cur_t->cipher_key);
 		gui_module_is_locked_display(cur_t->html,
 					     cur_t->mod_name,
 					     cur_t->cipher_key);

@@ -590,39 +590,39 @@ void gui_display_percomm(gchar * key)
  * Synopsis
  *   #include "_percomm.h"
  *
- *  void gui_set_percomm_page_and_key(gint page_num, gchar * key)	
+ *  void gui_set_percomm_page(gchar * mod_name)	
  *
  * Description
- *   change percomm module notebook page and display new key (reference)
+ *   change percomm module notebook page
  *
  * Return value
  *   void
  */
 
-void gui_set_percomm_page_and_key(gint page_num, gchar * key)
+void gui_set_percomm_page(gchar * mod_name)
 {
-	gchar *text_str = NULL;
-	/*
-	 * we don't want backend_dispaly_percomm to be
-	 * called by on_notebook_percomm_switch_page
-	 */
-	percomm_display_change = FALSE;
-	strcpy(cur_p->ec->key, key);
-	settings.percomverse = key;
-	if (settings.text_last_page != page_num) {
+	gint page = 0;
+	PC_DATA *p = NULL;
+
+	percomm_list = g_list_first(percomm_list);
+	while (percomm_list != NULL) {
+		p = (PC_DATA *) percomm_list->data;
+		if (!strcmp(p->mod_name, mod_name))
+			break;
+		++page;
+		percomm_list = g_list_next(percomm_list);
+	}
+	
+	if (!p->ec->htmlwidget)
+		gui_add_new_percomm_pane(p);
+	
+	GTK_CHECK_MENU_ITEM(p->ec->editnote)->active = TRUE;
+	
+	if (settings.text_last_page != page) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_percomm),
-				      page_num);
+				      page);
 	}
-
-	text_str = get_percomm_text(key);
-	if (text_str) {
-		entry_display(cur_p->html, cur_p->mod_name, text_str,
-			      key, FALSE);
-		free(text_str);
-	}
-	gui_update_statusbar(cur_p->ec);
-	percomm_display_change = TRUE;
 }
 
 /******************************************************************************
@@ -675,7 +675,7 @@ static void set_page_percomm(gchar * modname, GList * percomm_list)
  *   void gui_add_new_pane(TEXT_DATA * t)
  *
  * Description
- *   creates a text pane when user selects a new text module
+ *   
  *
  * Return value
  *   void
@@ -763,6 +763,21 @@ void gui_setup_percomm(GList * mods)
 	percomm_list = NULL;
 	percomm_display_change = TRUE;
 
+	widgets.notebook_percomm = gtk_notebook_new();
+	gtk_widget_ref(widgets.notebook_percomm);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "widgets.notebook_percomm",
+				 widgets.notebook_percomm,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.notebook_percomm);
+	gtk_notebook_set_scrollable(GTK_NOTEBOOK
+				    (widgets.notebook_percomm), TRUE);
+	gtk_notebook_popup_enable(GTK_NOTEBOOK
+				  (widgets.notebook_percomm));
+	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_percomm, GTK_CAN_FOCUS);
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+				   (widgets.notebook_percomm), TRUE);
+
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -837,6 +852,62 @@ void gui_shutdown_percomm(void)
 		percomm_list = g_list_next(percomm_list);
 	}
 	g_list_free(percomm_list);
+}
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "percomm.h"
+ *
+ *  	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num)
+{
+	GtkWidget *label;
+	
+	settings.percomm_page = page_num;
+	
+	widgets.vbox_percomm = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(widgets.vbox_percomm);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "widgets.vbox_percomm",
+				 widgets.vbox_percomm,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.vbox_percomm);
+	gtk_container_add(GTK_CONTAINER(workbook_lower), widgets.vbox_percomm);
+
+	/*
+	 * personal comments editor goes here
+	 */
+
+	label = gtk_label_new(_("Personal Comments"));
+	gtk_widget_ref(label);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
+				 label,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(workbook_lower),
+				   gtk_notebook_get_nth_page
+				   (GTK_NOTEBOOK
+				    (workbook_lower), page_num),
+				   label);
+
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
+					 (workbook_lower),
+					 gtk_notebook_get_nth_page
+					 (GTK_NOTEBOOK
+					  (workbook_lower),
+					  page_num),
+					 _("Personal Comments"));
 }
 
 
