@@ -1,6 +1,6 @@
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.9.1)
+AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev5)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
@@ -150,7 +150,7 @@ src/backend/Makefile
 src/gnome/Makefile
 src/gnome2/Makefile
 src/main/Makefile
-gnomesword.desktop
+gnomesword-1.0.desktop
 ])
 
 echo

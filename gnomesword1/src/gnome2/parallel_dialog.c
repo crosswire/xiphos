@@ -337,7 +337,7 @@ static gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
 	settings.cvparallel = change_verse_parallel();
 	gui_update_parallel_page_detached();
 	ApplyChangeBook = TRUE;
-	return TRUE;
+	return FALSE;
 }
 
 /******************************************************************************
@@ -368,7 +368,7 @@ static gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
 	settings.cvparallel = change_verse_parallel();
 	gui_update_parallel_page_detached();
 	ApplyChangeBook = TRUE;
-	return TRUE;
+	return FALSE;
 }
 
 /******************************************************************************
@@ -403,7 +403,6 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 		gui_update_parallel_page_detached();
 		g_free(settings.cvparallel);
 		ApplyChangeBook = TRUE;
-		return TRUE;
 	}
 	ApplyChangeBook = TRUE;
 	return FALSE;

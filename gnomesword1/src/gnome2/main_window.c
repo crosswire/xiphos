@@ -395,26 +395,21 @@ static gint button_release_event(GtkWidget * html,
 				 GdkEventButton * event, gpointer data)
 {
 	settings.whichwindow = parallel_WINDOW;
-
+/*
 	switch (event->button) {
 	case 1:
-		return TRUE;
 		break;
 	case 2:
-		/* 
-		 * pass this for pasting 
-		 */
-		return TRUE;
+		
 		break;
 	case 3:
 		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
 					     "button_press_event");
-		return TRUE;
 		break;
 	default:
 		return FALSE;
 	}
-
+*/
 	return FALSE;
 }
 
@@ -501,7 +496,7 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 		if (!strcmp((gchar *) user_data, "hpaned1"))
 			settings.biblepane_width = panesize;
 	}
-	return TRUE;
+	return FALSE;
 }
 
 
@@ -651,6 +646,9 @@ void create_mainwindow(void)
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.notebook_text), FALSE);
 
+
+
+
 	/*
 	 * commentary notebook
 	 */
@@ -768,7 +766,6 @@ void create_mainwindow(void)
 	/*
 	 * end studypad editor 
 	 */
-
 
 	/*
 	 * parallel page 
