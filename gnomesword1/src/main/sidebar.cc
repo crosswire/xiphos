@@ -644,6 +644,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		gtk_tree_view_expand_row(GTK_TREE_VIEW(sidebar.module_list),
                                              path,
                                              FALSE);
+		gtk_tree_path_free(path);
 		break;
 	}
 	if (cap)
