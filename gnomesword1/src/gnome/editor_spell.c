@@ -35,12 +35,10 @@
 #include <gtkhtml/htmlselection.h>
 #include <gal/widgets/e-unicode.h>
 
-
-
-#include <pspell/pspell.h>
-
 #include "gui/_editor.h"
 #include "gui/editor_spell.h"
+
+#include "main/spell.h"
 
 /* messages to the spell checker */
 enum {
@@ -79,31 +77,6 @@ typedef struct {
 static Tspc_gui spc_gui;
 static gboolean spc_is_running;
 static gint spc_message; /* message from the spell checker GUI */
-
-
-/******************************************************************************
- * Name
- *   check_for_error
- *
- * Synopsis
- *   #include "gui/editor_spell.h"
- *
- *   void check_for_error(PspellManager * spell_checker)
- *
- * Description
- *   check for pspell error and print it if found
- *
- * Return value
- *   void
- */
-
-static void check_for_error(PspellManager * spell_checker)
-{
-	if (pspell_manager_error_number(spell_checker) != 0) {
-		g_warning("Pspell Error: %s\n", 
-			pspell_manager_error_message(spell_checker));
-	}
-}
 
 
 /******************************************************************************
@@ -168,7 +141,7 @@ static void change_word_color(GSHTMLEditorControlData * ecd)
  *   void
  */
 
-static void correct_word(PspellManager * spell_checker, const gchar * word,
+static void correct_word(const gchar * word,
 					GSHTMLEditorControlData * ecd)
 {
 	gboolean word_corrected = 0;
@@ -181,17 +154,14 @@ static void correct_word(PspellManager * spell_checker, const gchar * word,
 			gtk_main_iteration();
 		switch (spc_message) {
 		case SPC_INSERT:			
-			done = 
-			   pspell_manager_add_to_personal(spell_checker,
-						word, -1);
+			done = add_to_personal(word);
 			if(!done) g_warning("word not added to personal");
-			check_for_error(spell_checker);
+			check_for_error();
 			word_corrected = 1;
 			break;
 		case SPC_ACCEPT:
-			pspell_manager_add_to_session(spell_checker, 
-							word, -1);
-			check_for_error(spell_checker);
+			add_to_session(word);
+			check_for_error();
 			change_word_color(ecd);;
 			word_corrected = 1;
 			break;
@@ -202,9 +172,7 @@ static void correct_word(PspellManager * spell_checker, const gchar * word,
 		case SPC_REPLACE:{			
 			gchar *buf = gtk_entry_get_text(GTK_ENTRY
 					     (spc_gui.replace_entry));
-			pspell_manager_store_replacement(spell_checker,  
-                                word, -1, 
-                                buf, -1); 
+			store_replacement(word,buf);
 			html_engine_replace_spell_word_with(
 					ecd->html->engine,
 					buf);			
@@ -214,8 +182,6 @@ static void correct_word(PspellManager * spell_checker, const gchar * word,
 			break;
 		}
 		case SPC_CLOSE:
-			pspell_manager_save_all_word_lists(spell_checker); 
-			pspell_manager_clear_session(spell_checker);
 			change_word_color(ecd);
 			word_corrected = 1;	/* to exit the while loop */
 			break;
@@ -231,36 +197,32 @@ static void correct_word(PspellManager * spell_checker, const gchar * word,
  * Synopsis
  *   #include "gui/editor_spell.h"
  *
- *   void fill_near_misses_clist(PspellManager * spell_checker, 
- *						const gchar * word)
+ *   void fill_near_misses_clist(const gchar * word)
  *
  * Description
- *   
+ *   get a list of suggestions for a mispelling
+ *   and put them in the clist
  *
  * Return value
  *   void
  */
 
-static void fill_near_misses_clist(PspellManager * spell_checker, 
-						const gchar * word)
+static void fill_near_misses_clist(const gchar * word)
 {
-	const char * new_word; 
 	gchar * buf;
-	PspellWordList * suggestions;
-	PspellStringEmulation * elements;
-	
-	suggestions = pspell_manager_suggest(spell_checker, word, -1);
-        elements = pspell_word_list_elements(suggestions); 
-        	
-        while ( (new_word = pspell_string_emulation_next(elements)) 
-							!= NULL ) {
-		buf = g_strdup(new_word);
+	GList * tmp = get_suggest_list(word);
+        
+	tmp = g_list_first(tmp);
+        while ( tmp != NULL ) {
+		buf = (gchar*)tmp->data;
 		gtk_clist_append(GTK_CLIST
 			(spc_gui.near_misses_clist),
-			 &buf);
+			 &buf);						
 		g_free(buf);
+		tmp = g_list_next(tmp);
         } 
-        delete_pspell_string_emulation(elements); 
+	g_list_free(tmp);
+	
 	gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry),
 				   word);
 	gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry),
@@ -285,23 +247,19 @@ static void fill_near_misses_clist(PspellManager * spell_checker,
  *  void 
  */
 
-inline static void update_progress_bar(void)
+inline static void update_progress_bar(gint end, gint current)
 {
 	gfloat percentage;
 	gfloat current_position;
-	gfloat text_length;
+	gfloat text_length;	
 	
-	/*
-	current_position =
-	    (gfloat)
-	    gtk_text_get_point(GTK_TEXT(text_widget));
-	text_length =
-	    (gfloat)
-	    gtk_text_get_length(GTK_TEXT(text_widget));
-	*/
+	current_position = (gfloat)current;
+	text_length = (gfloat)end;	
 	
 	/* percentage is betweeen 0 and 1 */
 	percentage = current_position / text_length;
+	//g_warning("precentage = %f",percentage);
+	if(percentage > 1) percentage = 1.0;
 	gtk_progress_bar_update(GTK_PROGRESS_BAR(spc_gui.progress_bar),
 				percentage);
 };
@@ -326,70 +284,43 @@ inline static void update_progress_bar(void)
 static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 {
 	unsigned int word_count = 0;
-	GdkColormap *cmap;
-	PspellCanHaveError * ret;
-	PspellManager * manager;
-	PspellConfig * config;
-	gint have;
+	gint have, end, current;
 	const gchar *utf8str = NULL;
-	gchar *buf = NULL;
-	
-	
-	config = new_pspell_config();
-	pspell_config_replace(config, "language-tag", "en_US");  
-	pspell_config_replace(config, "spelling", "american");
-	pspell_config_replace(config, "encoding","utf-8");
-
-	ret = new_pspell_manager(config);
-	delete_pspell_config(config);
-	
-	if (pspell_error_number(ret) != 0) {
-		g_warning("pspell error %s",pspell_error_message(ret));
-		return -1;
-	}
-	
-	manager = to_pspell_manager(ret);
-	config = pspell_manager_config(manager);
-	
-	g_print("Using: \n");
-	g_print("language tag \"%s\"\n",pspell_config_retrieve(config, "language-tag"));
-	g_print("encoding \"%s\"\n",pspell_config_retrieve(config, "encoding"));
-	g_print("spelling \"%s\"\n",pspell_config_retrieve(config, "spelling"));
-	g_print("module \"%s\"\n",pspell_config_retrieve(config, "module"));
-	g_print("path \"%s\"\n",pspell_config_retrieve(config, "master"));
-	
+	gchar *buf = NULL;	
 	
 	html_engine_edit_cursor_position_save(ecd->html->engine);
-	cmap = gdk_colormap_get_system();
-	
+	html_engine_end_of_document(ecd->html->engine); 
+	end = html_cursor_get_position(ecd->html->engine->cursor); 
 	html_engine_beginning_of_document (ecd->html->engine);
+	
 	while(html_engine_forward_word (ecd->html->engine)){
 		if(html_engine_spell_word_is_valid (ecd->html->engine)) {
 			buf = html_engine_get_spell_word(ecd->html->engine);
 			utf8str = e_utf8_from_gtk_string(ecd->htmlwidget, buf);
 			if(utf8str)	{
-				if (strlen(utf8str) > 3) {
+				if (strlen(utf8str) > 2) {
 					word_count++;
 					spc_message = SPC_NONE;
-					have = pspell_manager_check(manager,  utf8str, strlen(utf8str));
+					have = check_word_spell(utf8str);
 					if (have == 0){
-						fill_near_misses_clist(manager, utf8str);
-						correct_word(manager, utf8str, ecd);
+						fill_near_misses_clist(utf8str);
+						correct_word(utf8str, ecd);
 						gtk_clist_clear(GTK_CLIST(spc_gui.near_misses_clist));							
 						gtk_entry_set_text(GTK_ENTRY(spc_gui.word_entry), "");
 						gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry), "");
 					}
 					else if (have == -1)
-						g_warning("Error: %s", pspell_manager_error_message(manager));
+						check_for_error();
 					if (spc_message == SPC_CLOSE) {
 						break;
-					};
-					//update_progress_bar();
+					}; 
 				}
 				utf8str = NULL;
 			}
 			
 		}
+					current = html_cursor_get_position(ecd->html->engine->cursor); 
+					update_progress_bar(end, current);
 	}
 	gtk_widget_set_sensitive(spc_gui.accept_button, 0);
 	gtk_widget_set_sensitive(spc_gui.replace_button, 0);
@@ -398,7 +329,6 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 	html_engine_unselect_all(ecd->html->engine);
 	html_engine_deactivate_selection (ecd->html->engine);
 	html_engine_edit_cursor_position_restore(ecd->html->engine);
-	delete_pspell_manager(manager);
 	return (spc_message != SPC_CLOSE);
 }	
 
@@ -461,8 +391,10 @@ static void spc_close_button_clicked_lcb(GtkButton * button,
 						gpointer user_data)
 {
 	spc_message = SPC_CLOSE;
-	if (!spc_is_running)
-		gtk_widget_destroy(spc_gui.window);
+	if (!spc_is_running){
+		gtk_widget_destroy(spc_gui.window);		
+		kill_spell();
+	}
 }
 
 
@@ -882,7 +814,8 @@ void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 {
 	spc_gui.window = create_spc_window(ecd);
 	gtk_widget_set_sensitive(spc_gui.options_button, 0);	
-	gtk_widget_show(spc_gui.window);	
+	gtk_widget_show(spc_gui.window);
+	init_spell();	
 }
 
 

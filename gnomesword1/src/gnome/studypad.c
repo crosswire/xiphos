@@ -85,7 +85,7 @@ void gui_studypad_can_close(void)
 		switch (answer) {
 		case 0:
 			if (settings.studypadfilename)
-				save_file_program_end(settings.html_studypad,
+				save_file_program_end(widgets.html_studypad,
 						      settings.studypadfilename);
 			break;
 		default:
@@ -780,7 +780,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 
 	specd->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(specd->frame);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->frame",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->frame",
 				 specd->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->frame);
@@ -788,14 +788,14 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 
 	vbox6 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox6);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox6", vbox6,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox6", vbox6,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox6);
 	gtk_container_add(GTK_CONTAINER(specd->frame), vbox6);
 
 	vboxSP = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxSP);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vboxSP", vboxSP,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxSP", vboxSP,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxSP);
 	gtk_box_pack_start(GTK_BOX(vbox6), vboxSP, TRUE, TRUE, 0);
@@ -804,7 +804,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	
 	specd->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(specd->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "specd->frame_toolbar",
 				 specd->frame_toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -817,7 +817,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbar", toolbar,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar", toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar);
 	gtk_container_add(GTK_CONTAINER(specd->frame_toolbar), toolbar);
@@ -825,14 +825,14 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				      GTK_RELIEF_NONE);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_OPEN);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_OPEN);
 	specd->btn_open =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Open"), _("Open File"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_open);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_open",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_open",
 				 specd->btn_open,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_open);
@@ -842,20 +842,20 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 		   specd);		
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_SAVE);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_SAVE);
 	specd->btn_save =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Save"), _("Save Note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_save);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_save",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_save",
 				 specd->btn_save,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_save);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_PRINT);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_PRINT);
 	specd->btn_print =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -863,14 +863,14 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(specd->btn_print);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_print",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_print",
 				 specd->btn_print,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_print);
 
 	vseparator19 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator19",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator19",
 				 vseparator19,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator19);
@@ -879,60 +879,60 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_widget_set_usize(vseparator19, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_CUT);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_CUT);
 	specd->btn_cut =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Cut"), _("Cut "), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_cut);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_cut",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_cut",
 				 specd->btn_cut,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_cut);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_COPY);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_COPY);
 	specd->btn_copy =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Copy"), _("Copy"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_copy);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_copy",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_copy",
 				 specd->btn_copy,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_copy);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_PASTE);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_PASTE);
 	specd->btn_paste =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Paste"), _("Paste"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_paste);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_paste",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_paste",
 				 specd->btn_paste,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_paste);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_UNDO);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_UNDO);
 	specd->btn_undo =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Undo"), _("Undo"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_undo);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_undo",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_undo",
 				 specd->btn_undo,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_undo);
 
 	vseparator20 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator20);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator20",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator20",
 				 vseparator20,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator20);
@@ -941,7 +941,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_widget_set_usize(vseparator20, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_SEARCH);
 	specd->btn_Find =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -950,13 +950,13 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				       _("Find in this note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_Find);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_Find",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_Find",
 				 specd->btn_Find,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_Find);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_SRCHRPL);
 	specd->btn_replace =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -965,14 +965,14 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				       _("Find and Replace"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_replace);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "specd->btn_replace", specd->btn_replace,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_replace);
 
 	vseparator21 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator21);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vseparator21",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator21",
 				 vseparator21,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator21);
@@ -981,7 +981,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_widget_set_usize(vseparator21, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_SPELLCHECK);
 	specd->btn_spell =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -990,7 +990,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				       _("Spell check note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(specd->btn_spell);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->btn_spell",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->btn_spell",
 				 specd->btn_spell,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_spell);
@@ -1003,14 +1003,14 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame34", frame34,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34", frame34,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame34);
 	gtk_box_pack_start(GTK_BOX(vboxSP), frame34, TRUE, TRUE, 0);
 
 	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow17);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindow17", scrolledwindow17,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow17);
@@ -1023,7 +1023,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	specd->htmlwidget = htmlwidget;
 	specd->html = GTK_HTML(specd->htmlwidget);
 	gtk_widget_ref(specd->htmlwidget);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "specd->htmlwidget", specd->htmlwidget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->htmlwidget);
@@ -1037,7 +1037,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	
 	specd->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(specd->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "specd->statusbar",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->statusbar",
 				 specd->statusbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->statusbar);
@@ -1095,8 +1095,8 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	
 	
 
-	settings.toolbarStudypad = toolbar_style(specd);
-	gtk_widget_hide(settings.toolbarStudypad);
+	widgets.toolbar_studypad = toolbar_style(specd);
+	gtk_widget_hide(widgets.toolbar_studypad);
 
 	if (settings.studypadfilename) {
 		load_file(settings.studypadfilename, specd);

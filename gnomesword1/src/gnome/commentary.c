@@ -126,9 +126,9 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 		comm_list = g_list_next(comm_list);
 	}
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm), page);
 	settings.comm_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_comm),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 			settings.comm_tabs);
 }
 
@@ -225,7 +225,7 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	GTK_CHECK_MENU_ITEM(c->showtoolbar)->active = settings.comm_tool;
 	
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
-	settings.html_comm = c->html;
+	widgets.html_comm = c->html;
 }
 
 /******************************************************************************
@@ -352,7 +352,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm),
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm),
 			      page);
 }
 
@@ -376,7 +376,7 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 						COMM_DATA *c)
 {
 	settings.comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_comm),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
 	set_comm_frame_label(c);
 }
@@ -940,7 +940,7 @@ static void create_commentary_pane(COMM_DATA *c)
 
 	c->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(c->frame);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "c->frame",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "c->frame",
 				 c->frame, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->frame);
@@ -948,7 +948,7 @@ static void create_commentary_pane(COMM_DATA *c)
 
 	vbox57 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox57);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox57",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox57",
 				 vbox57, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox57);
@@ -956,7 +956,7 @@ static void create_commentary_pane(COMM_DATA *c)
 
 	c->frame_toolbar = gtk_frame_new(NULL);
 	gtk_widget_ref(c->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
 				"c->frame_toolbar", c->frame_toolbar,
 				(GtkDestroyNotify) gtk_widget_unref);
 	//gtk_widget_show(c->frame_toolbar);
@@ -967,7 +967,7 @@ static void create_commentary_pane(COMM_DATA *c)
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbar",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar",
 				 toolbar, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(toolbar);
@@ -976,7 +976,7 @@ static void create_commentary_pane(COMM_DATA *c)
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_REFRESH);
 	c->btnCOMMSync =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -986,14 +986,14 @@ static void create_commentary_pane(COMM_DATA *c)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(c->btnCOMMSync);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->btnCOMMSync", c->btnCOMMSync,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->btnCOMMSync);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_BACK);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_BACK);
 	c->btnCOMMBack =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -1002,14 +1002,14 @@ static void create_commentary_pane(COMM_DATA *c)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(c->btnCOMMBack);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->btnCOMMBack", c->btnCOMMBack,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->btnCOMMBack);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_FORWARD);
 	c->btnCOMMForward =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
@@ -1019,7 +1019,7 @@ static void create_commentary_pane(COMM_DATA *c)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(c->btnCOMMForward);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->btnCOMMForward",
 				 c->btnCOMMForward, (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1027,7 +1027,7 @@ static void create_commentary_pane(COMM_DATA *c)
 
 	vseparator19 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "vseparator19", vseparator19,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1037,7 +1037,7 @@ static void create_commentary_pane(COMM_DATA *c)
 	gtk_widget_set_usize(vseparator19, 5, 7);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_PRINT);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_PRINT);
 	c->btnCOMMPrint =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -1045,7 +1045,7 @@ static void create_commentary_pane(COMM_DATA *c)
 				       _("Print Comment"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(c->btnCOMMPrint);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->btnCOMMPrint", c->btnCOMMPrint,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1053,7 +1053,7 @@ static void create_commentary_pane(COMM_DATA *c)
 
 	vseparator19 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator19);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "vseparator19", vseparator19,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1063,7 +1063,7 @@ static void create_commentary_pane(COMM_DATA *c)
 	gtk_widget_set_usize(vseparator19, 5, 7);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_TOP);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_TOP);
 	c->btn_book_heading =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -1071,14 +1071,14 @@ static void create_commentary_pane(COMM_DATA *c)
 				       _("Display Book Heading"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(c->btn_book_heading);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->btn_book_heading", c->btn_book_heading,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->btn_book_heading);
 	
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app, GNOME_STOCK_PIXMAP_UP);
+	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_UP);
 	c->btn_chap_heading =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -1086,7 +1086,7 @@ static void create_commentary_pane(COMM_DATA *c)
 				       _("Display Chapter Heading"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(c->btn_chap_heading);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->btn_chap_heading", c->btn_chap_heading,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -1094,7 +1094,7 @@ static void create_commentary_pane(COMM_DATA *c)
 	
 	scrolledwindowCOMMhtml = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowCOMMhtml);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindowCOMMhtml",
 				 scrolledwindowCOMMhtml,
 				 (GtkDestroyNotify)
@@ -1110,7 +1110,7 @@ static void create_commentary_pane(COMM_DATA *c)
 
 	c->html = gtk_html_new();
 	gtk_widget_ref(c->html);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "c->html", c->html, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->html);
@@ -1123,7 +1123,7 @@ static void create_commentary_pane(COMM_DATA *c)
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(c->html), "on_url",
 			   GTK_SIGNAL_FUNC(gui_url), 
-			   (gpointer) settings.app);
+			   (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event), 
 			   (COMM_DATA *) c);
@@ -1168,7 +1168,7 @@ void gui_set_commentary_page_and_key(gint page_num, gchar *key)
 	comm_display_change = FALSE;
 	strcpy(settings.comm_key,key);
 	strcpy(cur_c->key,key);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page_num);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_comm), page_num);
 	display(cur_c,key);
 	comm_display_change = TRUE;
 }
@@ -1244,29 +1244,27 @@ static void add_vbox_to_notebook(COMM_DATA *c)
 	
 	c->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(c->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
 			"c->vbox", c->vbox,
 			(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(c->vbox);
-	gtk_container_add(GTK_CONTAINER(settings.notebook_comm), c->vbox);
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_comm), c->vbox);
 	
 	label = gtk_label_new(c->mod_name);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
 				 label, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebook_comm),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_comm),
 				gtk_notebook_get_nth_page
-				(GTK_NOTEBOOK(settings.notebook_comm),
+				(GTK_NOTEBOOK(widgets.notebook_comm),
 				c->modnum), label);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-				(settings.notebook_comm),
+				(widgets.notebook_comm),
 				gtk_notebook_get_nth_page
-				(GTK_NOTEBOOK(settings.notebook_comm),
+				(GTK_NOTEBOOK(widgets.notebook_comm),
 				c->modnum), (gchar *) c->mod_name);
-	
-	
 }
 
 
@@ -1319,7 +1317,7 @@ void gui_setup_commentary(GList *mods)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(settings.notebook_comm),
+	gtk_signal_connect(GTK_OBJECT(widgets.notebook_comm),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_comm_switch_page), comm_list);
