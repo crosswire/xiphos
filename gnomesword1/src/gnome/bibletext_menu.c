@@ -363,6 +363,10 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 				     TEXT_DATA * t)
 {
 	gui_set_module_font(t->mod_name);
+	if(t->is_dialog)
+		gui_bibletext_dialog_goto_bookmark(t->mod_name, t->key);
+	else
+		gui_display_text(t->key);
 }
 
 

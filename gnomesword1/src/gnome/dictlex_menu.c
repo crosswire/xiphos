@@ -293,9 +293,21 @@ void gui_unlock_dictionary(GtkMenuItem * menuitem, DL_DATA * t)
  */
 
 static void set_module_font_activate(GtkMenuItem * menuitem,
-				     DL_DATA * t)
+				     DL_DATA * d)
 {
-	gui_set_module_font(t->mod_name);
+	gchar *text;
+	
+	gui_set_module_font(d->mod_name);
+	if(d->is_dialog)
+		gui_dictionary_dialog_goto_bookmark(d->mod_name, d->key);
+	else {
+		text = get_dictlex_text(d->mod_name, d->key);
+		if(text) {
+			entry_display(d->html, d->mod_name, text, 
+							d->key, TRUE);
+			g_free(text);
+		}
+	}
 }
 
 
@@ -447,7 +459,6 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_text_menu,
 					(GtkMenuCallback)
 					on_new_dialog_activate);
-
 	} else {
 		view_text =
 		    gtk_menu_item_new_with_label(_("Open Module"));

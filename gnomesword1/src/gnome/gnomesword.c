@@ -74,6 +74,8 @@
 
 void init_gnomesword(void)
 {
+	g_print("%s\n", "Initiating GnomeSword\n");
+	
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");
 	settings.havebdb = check_for_module("BDB");
@@ -136,7 +138,6 @@ void init_gnomesword(void)
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 
-	g_print("%s\n", "Initiating GnomeSword\n");
 
 	gui_set_shortcutbar_porgram_start();
 

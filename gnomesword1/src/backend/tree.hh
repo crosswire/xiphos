@@ -26,13 +26,13 @@
 extern "C" {
 #endif
 
-
+int backend_get_parent(unsigned long offset);
 int backend_treekey_next_sibling(unsigned long offset);
 int backend_gbs_treekey_has_children(unsigned long offset);
 char *backend_gbs_get_treekey_local_name(unsigned long offset);
 unsigned long backend_gbs_get_treekey_offset(void);
 int backend_gbs_treekey_first_child(unsigned long offset);
-char * backend_get_text_from_offset(char * module_name, char * offset);
+char * backend_get_text_from_offset(char * module_name, unsigned long offset);
 void backend_set_treekey(char * module_name, unsigned long offset);
 void backend_setup_treekey(void);
 void backend_shutdown_treekey(void);
@@ -43,4 +43,3 @@ void backend_shutdown_treekey(void);
 #endif
 
 #endif
-
