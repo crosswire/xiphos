@@ -198,6 +198,77 @@ static gint html_button_pressed(GtkWidget * html,
 }
 
 
+
+/******************************************************************************
+ * Name
+ *  html_button_released
+ *
+ * Synopsis
+ *   #include "gui/dictlex.h"
+ *
+ *   gint html_button_released(GtkWidget * html, GdkEventButton * event,
+ *					GSHTMLEditorControlData * d)	
+ *
+ * Description
+ *    mouse button released in dictionary / lexicon 
+ *
+ * Return value
+ *   gint
+ */
+
+static gint html_button_released(GtkWidget * html,
+				GdkEventButton * event, gpointer data)
+{
+	extern gboolean in_url;
+	gchar *key;
+	const gchar *url;
+	//gchar *buf = NULL;
+	
+	settings.whichwindow = DICTIONARY_WINDOW;
+
+	//gui_change_window_title(settings.DictWindowModule);
+
+	switch (event->button) {
+	case 1:
+		if (in_url) 
+			break;
+		key = gui_button_press_lookup(widgets.html_dict);
+		if (key) {
+			if(g_strstr_len(key,strlen(key),"*")) {
+				key = g_strdelimit(key, "*", ' ');
+				key = g_strstrip(key);
+				url = g_strdup_printf(
+					"gnomesword.url?action=showModInfo&value=1&module=%s",
+					key);
+				main_url_handler(url,TRUE);
+				g_free((gchar*)url);
+				g_free(key);
+				break;
+			}/*
+			gchar *dict = NULL;
+			if (settings.useDefaultDict)
+				dict =
+				    g_strdup(settings.
+					     DefaultDict);
+			else
+				dict =
+				    g_strdup(settings.
+					     DictWindowModule);
+			if (settings.inViewer)
+				main_sidebar_display_dictlex
+				    (dict, key);
+			if (settings.inDictpane)
+				main_display_dictionary(dict, key);
+			g_free(key);
+			if (dict)
+				g_free(dict);*/
+		}
+		break;
+	}
+
+	return FALSE;
+}
+
 /******************************************************************************
  * Name
  *  list_button_released
@@ -421,6 +492,9 @@ GtkWidget *gui_create_dictionary_pane(void)
 			 "button_press_event",
 			 G_CALLBACK(html_button_pressed), NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_dict),
+			 "button_release_event",
+			 G_CALLBACK(html_button_released), NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_dict),
 			 "url_requested",
 			 G_CALLBACK(url_requested), NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "on_url",
@@ -639,6 +713,20 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 }
 
 
+
+static void on_add_bookmark_activate(GtkMenuItem * menuitem,
+				 gpointer user_data)
+{
+	
+	gchar *label = g_strdup_printf("%s, %s",settings.dictkey,
+					settings.DictWindowModule);
+
+	gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
+			settings.DictWindowModule, settings.dictkey));
+	g_free(label);	
+	
+}
+
 static GnomeUIInfo view_text_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("item1"),
@@ -817,6 +905,13 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (gpointer) on_about_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
 	 0, (GdkModifierType) 0, NULL},
+	//GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_ITEM, N_("Bookmark"),
+	 NULL,
+	 (gpointer) on_add_bookmark_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-add",
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_SUBTREE, N_("File"),
@@ -885,9 +980,9 @@ void gui_create_pm_dictionary(void)
 	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation"        
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
-	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module" 
-	gtk_widget_hide(menu1_uiinfo[7].widget);
+	gtk_widget_hide(menu1_uiinfo[7].widget);	//"unlock_module" 
 	gtk_widget_hide(menu1_uiinfo[8].widget);
+	gtk_widget_hide(menu1_uiinfo[9].widget);
 
 
 
@@ -901,7 +996,7 @@ void gui_create_pm_dictionary(void)
 
 
 	lookup_selection_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu1_uiinfo[5].widget),
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu1_uiinfo[6].widget),
 				  lookup_selection_menu);
 
 	usecurrent =
@@ -997,7 +1092,7 @@ void gui_create_pm_dictionary(void)
 
 	}
 	if (main_has_cipher_tag(mod_name))
-		gtk_widget_show(menu1_uiinfo[6].widget);
+		gtk_widget_show(menu1_uiinfo[7].widget);
 
 	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
 		     			gtk_get_current_event_time());

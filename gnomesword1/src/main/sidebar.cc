@@ -606,6 +606,8 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 		if (key)
 			main_url_handler(key, TRUE);
 		else {
+			if(navbar_main.module_name) 
+				g_free(navbar_main.module_name);
 			navbar_main.module_name = g_strdup(mod);
 			main_navbar_fill_book_combo(navbar_main);
 			main_display_bible(mod, settings.currentverse);

@@ -49,6 +49,7 @@ extern GtkTreeStore *model;
 extern gboolean use_dialog;
 extern gboolean bookmarks_changed;
 
+void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data);
 void gui_create_bookmark_menu(void);
 void gui_save_bookmarks_treeview(void);
 

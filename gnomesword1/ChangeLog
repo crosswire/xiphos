@@ -1,3 +1,13 @@
+2005-02-24  terry <tbiggs@users.sf.net>
+
+	* added a bookmark dialog for adding bookmarks.
+	* added a bookmark item to the popup menus for bible, commentary, book 
+	  and dictionary panes that opens the bookmark dialog.	  
+	  
+2005-02-23  terry <tbiggs@users.sf.net>
+
+	* removed gtkhtml 3.0 tests from configure.in since 3.1 is needed 
+
 2005-02-21  terry <tbiggs@users.sf.net>
 
 	* fixed to take advantage of clucene searching if Sword is built using
