@@ -30,6 +30,13 @@
 #  include <config.h>
 #endif
 
+#ifndef __GNUC__
+#include <io.h>
+#else
+#include <unistd.h>
+#include <unixstr.h>
+#endif
+
 #include <gnome.h>
 #include <swmgr.h>
 #include <swmodule.h>
@@ -394,7 +401,8 @@ void changeVerseSWORD(gchar * ref)	//-- change main text, interlinear texts and 
 }
 
 /*
- *
+ * Sets up the interlinear html widget and calls changecomp1ModSWORD for each 
+ * interlinear module
  */
 void updateinterlinearpage(void)
 {
@@ -407,7 +415,7 @@ void updateinterlinearpage(void)
 		html_widget = lookup_widget(settings->app, "textComp1");
 		beginHTML(html_widget, TRUE);
 		sprintf(tmpBuf,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table cellpadding=\"5\" align=\"left\" valign=\"middle\">",
+			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings->bible_bg_color,
 			settings->bible_text_color, settings->link_color);
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpBuf);
