@@ -22,31 +22,32 @@
 #ifndef ___DICTLEX_H_
 #define ___DICTLEX_H_
 
-typedef struct _DLFindDialog DLFindDialog;
-struct _DLFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget *htmlwidget;
-	GtkWidget *entry;
-	GtkWidget *backward;
-	GtkWidget *case_sensitive;
-	gboolean regular;
-};
 
 typedef struct _dldata DL_DATA;
 struct _dldata {
+	GtkWidget *dialog;
 	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *clist;
 	GtkWidget *entry;
 	GtkWidget *showtabs;
+	GtkWidget *module_options_menu;
 	gchar *mod_name;
 	gchar *search_string;
+	gchar *key;
+	gchar *cipher_key;
+	gchar *cipher_old;
+	
 	int mod_num;
 	gboolean has_key;
-	DLFindDialog *find_dialog;
+	gboolean is_locked;
+	gboolean is_dialog;
 };
 
+void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
+					 gchar * dict_mod_description);
+void gui_set_dict_frame_label(void);
 void gui_display_dictlex(gchar * key);
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
 void gui_add_new_dict_pane(DL_DATA *dl);

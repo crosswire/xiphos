@@ -29,6 +29,7 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
+#include "gui/gbs_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/find_dialog.h"
@@ -268,16 +269,16 @@ void gui_set_book_page_and_key(gint page_num, gchar * key)
  *   void
  */
 
-void gui_set_gbs_frame_label(GBS_DATA *g)
+void gui_set_gbs_frame_label(void)
 {
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
 	 */	
 	if (settings.book_tabs)
-		gtk_frame_set_label(GTK_FRAME(g->frame), NULL);
+		gtk_frame_set_label(GTK_FRAME(cur_g->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(g->frame), g->mod_name);
+		gtk_frame_set_label(GTK_FRAME(cur_g->frame), cur_g->mod_name);
 	
 }
 
@@ -375,7 +376,7 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	
 	if(!g->frame)
 		gui_add_new_gbs_pane(g);
-	gui_set_gbs_frame_label(g);
+	gui_set_gbs_frame_label();
 	
 	change_book(g->mod_name, g->offset);
 	/*
@@ -407,27 +408,6 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 
 /******************************************************************************
  * Name
- *  on_copy_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   	void on_copy_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_copy_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
-{
-	gtk_html_copy(GTK_HTML(gbs->html));
-}
-
-/******************************************************************************
- * Name
  *  on_bookmark_activate
  *
  * Synopsis
@@ -451,175 +431,6 @@ static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 	}
 }
 
-/******************************************************************************
- * Name
- *  on_find_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_find_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_find_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
-{
-	gui_find_dlg(gbs->html, gbs->mod_name,  FALSE, NULL);
-}
-
-/******************************************************************************
- * Name
- *  on_lookup_word_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_lookup_word_activate(GtkMenuItem * menuitem,
-					gchar * modDescription)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_lookup_word_activate(GtkMenuItem * menuitem,
-					gchar * modDescription)
-{
-	gchar mod_name[16];
-	gchar *key;
-	
-	memset(mod_name, 0, 16);
-	module_name_from_description(mod_name, modDescription);
-	key = gui_get_word_or_selection(cur_g->html, TRUE);
-	if (key && mod_name) {
-		gui_display_dictlex_in_viewer(mod_name, key);
-		g_free(key);
-		g_free(mod_name);
-	}
-}
-
-/******************************************************************************
- * Name
- *  on_lookup_selection_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   	void on_lookup_selection_activate(GtkMenuItem * menuitem,
- *					gchar * modDescription)
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_lookup_selection_activate(GtkMenuItem * menuitem,
-					gchar * modDescription)
-{
-	gchar mod_name[16];
-	gchar *key;
-	
-	memset(mod_name, 0, 16);
-	module_name_from_description(mod_name, modDescription);	
-	key = gui_get_word_or_selection(cur_g->html, FALSE);
-	if (key && mod_name) {
-		gui_display_dictlex_in_viewer(mod_name, key);
-		g_free(key);
-		g_free(mod_name);
-	}
-}
-
-/******************************************************************************
- * Name
- *  on_same_lookup_word_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_same_lookup_word_activate(GtkMenuItem * menuitem, 
- *							GBS_DATA * g)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_same_lookup_word_activate(GtkMenuItem * menuitem, 
-							GBS_DATA * g)
-{
-	gchar *key = gui_get_word_or_selection(g->html, TRUE);
-	if (key) {
-		gui_display_dictlex_in_viewer(settings.DictWindowModule,
-					  key);
-		g_free(key);
-	}
-}
-
-/******************************************************************************
- * Name
- *  on_same_lookup_selection_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
- *							GBS_DATA * g)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
-							GBS_DATA * g)
-{
-	gchar *key = gui_get_word_or_selection(g->html, FALSE);
-	if (key) {
-		gui_display_dictlex_in_viewer(settings.DictWindowModule,
-					  key);
-		g_free(key);
-	}
-}
-
-/******************************************************************************
- * Name
- *  on_view_book_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_view_book_activate(GtkMenuItem * menuitem, 
- *						gpointer user_data)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_view_book_activate(GtkMenuItem * menuitem, 
-						gpointer user_data)
-{
-	gint page;
-
-	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_gbs),
-			      page);
-}
 
 /******************************************************************************
  * Name
@@ -642,7 +453,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 				GdkEventButton * event, GBS_DATA * g)
 {
 	gchar *key;
-	
+	cur_g = g;
 	settings.whichwindow = BOOK_WINDOW;
 	gui_change_window_title(g->mod_name);
 	/*
@@ -675,331 +486,6 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-/******************************************************************************
- * Name
- *  on_showtabs_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_showtabs_activate(GtkMenuItem *menuitem, GBS_DATA *g)
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_showtabs_activate(GtkMenuItem *menuitem, GBS_DATA *g)
-{
-	settings.book_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
-				   settings.book_tabs);
-	gui_set_gbs_frame_label(g);
-}
-
-/******************************************************************************
- * Name
- *  on_unlock_key_activate
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   void on_unlock_key_activate(GtkMenuItem * menuitem, GBS_DATA * g)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-static void on_unlock_key_activate(GtkMenuItem * menuitem, GBS_DATA * g)
-{
-	//gui_add_cipher_key(g->mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  view_new
- *
- * Synopsis
- *   #include "gbs.h"
- *
- *   void view_new(GtkMenuItem * menuitem, )	
- *
- * Description
- *    open view gbs dialog
- *
- * Return value
- *   void
- */
-
-static void view_new_dialog(GtkMenuItem *menuitem, GBS_DATA * g)
-{
-	gui_open_gbs_dialog(g->mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  set_module_font_activate
- *
- * Synopsis
- *   #include ".h"
- *
- *   void set_module_font_activate(GtkMenuItem * menuitem, 
-						GBS_DATA * g)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void set_module_font_activate(GtkMenuItem * menuitem, 
-						GBS_DATA * g)
-{
-	gui_set_module_font(g->mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  gui_create_pm_gbs
- *
- * Synopsis
- *   #include "_gbs.h"
- *
- *   GtkWidget *gui_create_pm_gbs(GBS_DATA * gbs)	
- *
- * Description
- *    
- *
- * Return value
- *   GtkWidget *
- */ 
-
-static GtkWidget *create_pm_gbs(GBS_DATA * gbs)
-{
-	GtkWidget *pmGBS;
-	GtkAccelGroup *pmGBS_accels;
-	GtkWidget *copy;
-	GtkWidget *separator;
-	GtkWidget *bookmark;
-	GtkWidget *lookup_word;
-	GtkWidget *lookup_word_menu;
-	GtkAccelGroup *lookup_word_menu_accels;
-	GtkWidget *usecurrent1;
-	GtkWidget *lookup_selection;
-	GtkWidget *lookup_selection_menu;
-	GtkAccelGroup *lookup_selection_menu_accels;
-	GtkWidget *usecurrent2;
-	GtkWidget *item3;
-	GtkWidget *item4;
-	GtkWidget *view_new;
-	GtkWidget *view_book;
-	GtkWidget *view_book_menu;
-	GtkAccelGroup *view_book_menu_accels;
-	GtkWidget *find;
-	GList *tmp;
-	gint i;
-	GtkWidget *set_font; 
-	GtkTooltips *tooltips;  
-	tooltips = gtk_tooltips_new();
-
-	tmp = NULL;
-
-	pmGBS = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pmGBS), "pmGBS", pmGBS);
-	pmGBS_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmGBS));
-
-	copy = gtk_menu_item_new_with_label(_("Copy"));
-	gtk_widget_show(copy);
-	gtk_container_add(GTK_CONTAINER(pmGBS), copy);
-	
-	bookmark = gtk_menu_item_new_with_label(_("Bookmark"));
-	gtk_widget_show(bookmark);
-	gtk_container_add(GTK_CONTAINER(pmGBS), bookmark);
-
-	find = gtk_menu_item_new_with_label(_("Find"));
-	gtk_widget_show(find);
-	gtk_container_add(GTK_CONTAINER(pmGBS), find);
-
-	gbs->showtabs =
-	    gtk_check_menu_item_new_with_label(_("Show Tabs"));
-	gtk_widget_show(gbs->showtabs);
-	gtk_container_add(GTK_CONTAINER(pmGBS), gbs->showtabs);
-
-	separator = gtk_menu_item_new();
-	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pmGBS), separator);
-	gtk_widget_set_sensitive(separator, FALSE);
-
-	lookup_word = gtk_menu_item_new_with_label(_("Lookup Word"));
-	gtk_widget_show(lookup_word);
-	gtk_container_add(GTK_CONTAINER(pmGBS), lookup_word);
-
-	lookup_word_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(lookup_word),
-				  lookup_word_menu);
-	lookup_word_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (lookup_word_menu));
-
-	usecurrent1 =
-	    gtk_menu_item_new_with_label("Use Current Dictionary");
-	gtk_widget_show(usecurrent1);
-	gtk_container_add(GTK_CONTAINER(lookup_word_menu), usecurrent1);
-
-
-	lookup_selection =
-	    gtk_menu_item_new_with_label(_("Lookup Selection"));
-	gtk_widget_show(lookup_selection);
-	gtk_container_add(GTK_CONTAINER(pmGBS), lookup_selection);
-
-	lookup_selection_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(lookup_selection),
-				  lookup_selection_menu);
-	lookup_selection_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU
-					      (lookup_selection_menu));
-
-	usecurrent2 =
-	    gtk_menu_item_new_with_label("Use Current Dictionary");
-	gtk_widget_show(usecurrent2);
-	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
-			  usecurrent2);
-
-	separator = gtk_menu_item_new();
-	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pmGBS), separator);
-	gtk_widget_set_sensitive(separator, FALSE);
-
-	view_new =
-	    gtk_menu_item_new_with_label(_("View in new window"));
-	gtk_widget_show(view_new);
-	gtk_container_add(GTK_CONTAINER(pmGBS), view_new);
-
-	separator = gtk_menu_item_new();
-	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pmGBS), separator);
-	gtk_widget_set_sensitive(separator, FALSE);
-	
-
-	view_book = gtk_menu_item_new_with_label(_("View Book"));
-	gtk_widget_show(view_book);
-	gtk_container_add(GTK_CONTAINER(pmGBS), view_book);
-
-	view_book_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_book),
-				  view_book_menu);
-	view_book_menu_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_book_menu));
-	
-	separator = gtk_menu_item_new ();
-  	gtk_widget_show (separator);
-  	gtk_container_add (GTK_CONTAINER (pmGBS), separator);
-  	gtk_widget_set_sensitive (separator, FALSE);
-	
-	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
-	gtk_widget_show(set_font);
-	gtk_container_add(GTK_CONTAINER(pmGBS), set_font);
-	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
-			     NULL);
-	
-	/*
-	   if module has cipher key include this item
-	 */
-	if(gbs->has_key) {
-		GtkWidget *add_module_key;
-		separator = gtk_menu_item_new();
-		gtk_widget_show(separator);	
-		gtk_container_add(GTK_CONTAINER(pmGBS), separator);
-		gtk_widget_set_sensitive(separator, FALSE);
-			
-		add_module_key = gtk_menu_item_new_with_label (
-					_("Unlock This Module"));
-		gtk_widget_show (add_module_key);
-		gtk_container_add (GTK_CONTAINER (pmGBS), add_module_key);
-			
-		gtk_signal_connect (GTK_OBJECT (add_module_key), "activate",
-                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
-                      	gbs);
-	}
-	
-	tmp = get_list(DICT_DESC_LIST);
-	while (tmp != NULL) {
-		item3 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		item4 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_show(item3);
-		gtk_widget_show(item4);
-		gtk_signal_connect(GTK_OBJECT(item3), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_lookup_word_activate),
-				   (gchar *) tmp->data);
-		gtk_signal_connect(GTK_OBJECT(item4), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_lookup_selection_activate),
-				   (gchar *) tmp->data);
-		gtk_container_add(GTK_CONTAINER(lookup_word_menu),
-				  item3);
-		gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
-				  item4);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-
-	i = 0;
-	tmp = get_list(GBS_DESC_LIST);
-	while (tmp != NULL) {
-		item3 =
-		    gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_show(item3);
-		gtk_signal_connect(GTK_OBJECT(item3), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_view_book_activate),
-				   GINT_TO_POINTER(i));
-		gtk_container_add(GTK_CONTAINER(view_book_menu), item3);
-		++i;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	/*** these two are for using the current dictionary for lookup ***/
-	gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_same_lookup_word_activate), gbs);
-	gtk_signal_connect(GTK_OBJECT(usecurrent2), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_same_lookup_selection_activate), gbs);
-
-	gtk_signal_connect(GTK_OBJECT(copy), "activate",
-			   GTK_SIGNAL_FUNC(on_copy_activate), gbs);
-	gtk_signal_connect(GTK_OBJECT(bookmark), "activate",
-			   GTK_SIGNAL_FUNC(on_bookmark_activate), gbs);
-	gtk_signal_connect(GTK_OBJECT(find), "activate",
-			   GTK_SIGNAL_FUNC(on_find_activate), gbs);
-	gtk_signal_connect(GTK_OBJECT(gbs->showtabs), "activate",
-			   GTK_SIGNAL_FUNC(on_showtabs_activate),
-			   gbs);
-	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
-			   GTK_SIGNAL_FUNC(view_new_dialog),
-			   gbs);
-			   
-			
-	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
-			   GTK_SIGNAL_FUNC(set_module_font_activate), 
-			gbs);
-	gtk_object_set_data(GTK_OBJECT(pmGBS), "tooltips", tooltips);
-	
-	return pmGBS;
-}
 
 /******************************************************************************
  * Name
@@ -1034,7 +520,6 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	gtk_widget_show(hpanedGBS);
 	gtk_container_add(GTK_CONTAINER(p_gbs->frame), hpanedGBS);	
 	e_paned_set_position(E_PANED(hpanedGBS),190);
-	//gtk_paned_set_position(GTK_PANED(hpanedGBS), 239);
 
 	scrolledwindowCTREE_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowCTREE_GBS);
@@ -1164,6 +649,7 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 		++page;
 		gbs_list = g_list_next(gbs_list);
 	}
+	cur_g = g;
 	if(page)
 		gtk_notebook_set_page(GTK_NOTEBOOK(
 				  widgets.notebook_gbs), page);
@@ -1173,7 +659,7 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 				  NULL,
 				  page, 
 				  gbs_list);	
-	gui_set_gbs_frame_label(g);
+	gui_set_gbs_frame_label();
 		
 	settings.book_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
@@ -1201,7 +687,7 @@ void gui_add_new_gbs_pane(GBS_DATA * g)
 	GtkWidget *popupmenu;
 	
 	create_gbs_pane(g);
-	popupmenu = create_pm_gbs(g);
+	popupmenu = gui_create_pm_gbs(g); 
 	gnome_popup_menu_attach(popupmenu, g->html, NULL);
 	add_book_to_ctree(g->ctree, g->mod_name);
 	
@@ -1228,19 +714,11 @@ static void add_vbox_to_notebook(GBS_DATA * g)
 	GtkWidget *label;
 	
 	g->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(g->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
-			"g->vbox", g->vbox,
-			(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(g->vbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_gbs), g->vbox);
 	
 	
 	label = gtk_label_new(g->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
-				 label, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   gtk_notebook_get_nth_page
@@ -1290,10 +768,21 @@ void gui_setup_gbs(GList *mods)
 		gbs->frame = NULL;
 		gbs->mod_name = bookname;
 		gbs->search_string = NULL;
+		gbs->key = NULL;
 		gbs->mod_num = count;
 		gbs->offset = 0;
-		//gbs->find_dialog = NULL;	
+		gbs->is_dialog = FALSE;	
 		gbs->has_key = module_is_locked(gbs->mod_name);
+		if (has_cipher_tag(gbs->mod_name)) {
+			gbs->is_locked = module_is_locked(gbs->mod_name);
+			gbs->cipher_old = get_cipher_key(gbs->mod_name);
+		}
+
+		else {
+
+			gbs->is_locked = 0;
+			gbs->cipher_old = NULL;
+		}
 		add_vbox_to_notebook(gbs);
 		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);		
 		++count;
