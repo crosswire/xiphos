@@ -505,13 +505,13 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			   
 	if(necd->personal_comments){
 		toolbarComments = toolbar_style(necd);
-		gtk_box_pack_end(GTK_BOX (settings->vboxMain), toolbarComments, FALSE, FALSE, 0);
+		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarComments, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarComments);
 	}
 	
 	else{
 		toolbarStudypad = toolbar_style(necd);
-		gtk_box_pack_end(GTK_BOX (settings->vboxMain), toolbarStudypad, FALSE, FALSE, 0);
+		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarStudypad, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarStudypad);
 	}
 	

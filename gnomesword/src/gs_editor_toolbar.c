@@ -551,21 +551,21 @@ html_destroy_cb (GtkObject *object,
 static GtkWidget *
 create_style_toolbar (GSHTMLEditorControlData *cd)
 {
-	GtkWidget *frame, *hbox;
+	GtkWidget *frame, *handleboxEditorBar;
 
-	hbox = gtk_hbox_new (FALSE, 0);
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	handleboxEditorBar = gtk_handle_box_new ();
+	//frame = gtk_frame_new (NULL);
+	//gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
 
 	cd->toolbar_style = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
 
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(cd->toolbar_style),
 				      GTK_RELIEF_NONE);
 	
-	gtk_container_add (GTK_CONTAINER (frame), cd->toolbar_style);
-	gtk_box_pack_start (GTK_BOX (hbox), frame, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (handleboxEditorBar), cd->toolbar_style);
+	//gtk_box_pack_start (GTK_BOX (handleboxEditorBar), frame, TRUE, TRUE, 0);
 
-	gtk_widget_show_all (hbox);
+	gtk_widget_show_all (handleboxEditorBar);
 
 	cd->paragraph_option = setup_paragraph_style_option_menu (cd->html),
 	gtk_toolbar_prepend_widget (GTK_TOOLBAR (cd->toolbar_style),
@@ -608,7 +608,7 @@ create_style_toolbar (GSHTMLEditorControlData *cd)
 	gtk_signal_connect (GTK_OBJECT (cd->html), "current_paragraph_alignment_changed",
 			    GTK_SIGNAL_FUNC (paragraph_alignment_changed_cb), cd);
 
-	return hbox;
+	return handleboxEditorBar;
 }
 
 static void
