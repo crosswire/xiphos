@@ -62,6 +62,7 @@
 #include "gs_info_box.h"
 #include "gs_verselist_dlg.h"
 #include "gs_setup.h"
+//#include "e-splash.h"
 
 #include "sw_utility.h"
 #include "sw_properties.h"
@@ -192,7 +193,9 @@ initSWORD(GtkWidget *mainform)
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
 	string encoding;
-  	 
+	
+  	g_print("Initiating Sword\n"); 
+	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new SW_ThMLHTML(); /* sword renderfilter thml to html */	
         rwptohtml	= new RWPHTML();
@@ -225,6 +228,8 @@ initSWORD(GtkWidget *mainform)
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
 	UTF8Display	= 0;
+	
+	
 	/* set glist to null */
 	biblemods = NULL;
 	commentarymods = NULL;
@@ -256,6 +261,13 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
+	
+	
+	if(settings->showsplash){
+		while (gtk_events_pending ())
+				gtk_main_iteration ();
+	}
+	g_print("Loading SWORD Moudules\n");
 	
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
@@ -317,6 +329,11 @@ initSWORD(GtkWidget *mainform)
 				comp1Mod->Disp(comp1Display);
 			}
 		}
+	}
+	
+	if(settings->showsplash){
+		while (gtk_events_pending ())
+				gtk_main_iteration ();
 	}
 }
 
@@ -1635,17 +1652,41 @@ void gs_firstrunSWORD(void)
 	GList *textMods = NULL;
 	GList *commMods = NULL;
 	GList *dictMods = NULL;
+	gint 
+		itextmods=0, 
+		icommmods=0, 
+		idictmods=0;
+	gchar 
+		*gtextmods,
+		*gcommmods,
+		*gdictmods,
+		*pathtoswordmods;
 	
+	pathtoswordmods = mainMgr->prefixPath;
+	g_warning(pathtoswordmods);
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			textMods = g_list_append(textMods,(*it).second->Name());
+			++itextmods;
 		}if(!strcmp((*it).second->Type(), "Commentaries")){
 			commMods = g_list_append(commMods,(*it).second->Name());
+			++icommmods;
 		}if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			dictMods = g_list_append(dictMods,(*it).second->Name());
-		}
+			++idictmods;
+		} 
 	}
-	setup = create_dlgSetup (textMods, commMods, dictMods);
+	sprintf(gtextmods,"%d",itextmods);
+	sprintf(gcommmods,"%d",icommmods);
+	sprintf(gdictmods,"%d",idictmods);
+	setup = create_dlgSetup (textMods, 
+					commMods, 
+					dictMods,
+					gtextmods,
+					gcommmods,
+					gdictmods,
+					pathtoswordmods
+					); 
   		gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	

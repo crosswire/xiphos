@@ -44,6 +44,7 @@
 #include "support.h"
 #include "gs_shortcutbar.h"
 #include "gs_sword.h"
+#include "e-splash.h"
 
 
 #include <gal/e-paned/e-hpaned.h>
@@ -57,6 +58,7 @@
 
 GtkWidget *shortcut_bar, *appbar1;
 extern GS_APP gs;
+extern SETTINGS *settings;
 
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 
@@ -275,7 +277,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-GtkWidget *create_mainwindow(void)
+GtkWidget *create_mainwindow(GtkWidget *splash)
 {
 	GtkWidget *mainwindow;
 	GtkWidget *dock1;
@@ -383,10 +385,36 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *list1;
 	GtkWidget *label58;
 	GtkWidget *hbox25;
-//#if USE_SHORTCUTBAR
 	gint i; 
 	gchar *pathname;
-//#endif				/* USE_SHORTCUTBAR */
+	GdkPixbuf *icon_pixbuf;	
+	
+	g_print("Building GnomeSword interface\n");
+	if(settings->showsplash){
+		pathname = gnome_pixmap_file("gnomesword/GnomeSword.xpm");	
+		icon_pixbuf = gdk_pixbuf_new_from_file (pathname);
+		e_splash_add_icon(E_SPLASH(splash),
+					icon_pixbuf );
+		gdk_pixbuf_unref (icon_pixbuf);
+		pathname = gnome_pixmap_file("gnomesword/sword.xpm");
+		icon_pixbuf = gdk_pixbuf_new_from_file (pathname);
+		e_splash_add_icon(E_SPLASH(splash),
+					icon_pixbuf );
+		gdk_pixbuf_unref (icon_pixbuf);
+		pathname = gnome_pixmap_file("gnomesword/sword.xpm");
+		icon_pixbuf = gdk_pixbuf_new_from_file (pathname);
+		e_splash_add_icon(E_SPLASH(splash),
+					icon_pixbuf );
+		gdk_pixbuf_unref (icon_pixbuf);
+		pathname = gnome_pixmap_file("gnomesword/GnomeSword.xpm");	
+		icon_pixbuf = gdk_pixbuf_new_from_file (pathname);
+		e_splash_add_icon(E_SPLASH(splash),
+					icon_pixbuf );
+		gdk_pixbuf_unref (icon_pixbuf);
+		while (gtk_events_pending ())
+				gtk_main_iteration ();
+	}
+		
 	mainwindow =
 	    gnome_app_new("gnomesword",
 			  "GnomeSword - Bible Study Software");
@@ -1986,6 +2014,12 @@ GtkWidget *create_mainwindow(void)
 //-------------------------------------------------------------------------------------------
 
 	gtk_widget_grab_focus(mainwindow);
+	if(settings->showsplash){
+		e_splash_set_icon_highlight (E_SPLASH(splash),0, TRUE);	
+		while (gtk_events_pending ())
+				gtk_main_iteration ();
+	}
+	
 	return mainwindow;
 }
 
