@@ -40,6 +40,7 @@
 #include <swversion.h>
 #include <swmodule.h>
 #include <localemgr.h>
+#include <flatapi.h>
 
 #include "main/sword.h"
 #include "main/lists.h"
@@ -48,7 +49,23 @@
 #include "backend/sword_defs.h"
 
 using namespace sword;
- 
+
+
+char *backend_get_text(const char * module_name, const char *key)
+{
+	SWHANDLE mgr;
+	SWHANDLE module;
+	char *retval = NULL;
+	
+	mgr = SWMgr_new();
+	module = SWMgr_getModuleByName(mgr, module_name);
+	SWModule_setKeyText(module, key);
+	retval = strdup(SWModule_getRenderText(module));
+	//g_warning(retval);
+	SWMgr_delete(mgr);
+	return retval;	
+}
+
 static char *get_sword_locale(void)
 {
 	const char *sys_local;

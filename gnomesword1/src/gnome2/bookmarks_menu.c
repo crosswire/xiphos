@@ -529,6 +529,10 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *key = NULL;
 	gchar *module = NULL;
 	gboolean is_leaf;
+	GString *str;
+	
+	str = g_string_new(NULL);
+	g_string_printf(str,"<span weight=\"bold\">%s</span>",_("Edit"));
 	
 	selection = gtk_tree_view_get_selection(bookmark_tree);
 	if(!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
@@ -538,17 +542,17 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	
 	info = gui_new_dialog();
 	info->title = N_("Bookmark");
-	info->label_top = N_("<b>Edit</b>");
+	info->label_top = str->str;
 	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
-		info->label1 = "Folder name: ";
+		info->label1 = N_("Folder name: ");
 		is_leaf = FALSE;		
 	}
 	else {
-		info->label1 = "Bookmark name: ";
+		info->label1 = N_("Bookmark name: ");
 		info->text2 = g_strdup(key);
 		info->text3 = g_strdup(module);
-		info->label2 = "Verse: ";
-		info->label3 = "Module: ";
+		info->label2 = N_("Verse: ");
+		info->label3 = N_("Module: ");
 		is_leaf = TRUE;		
 	}
 		
@@ -590,6 +594,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_free(caption);
 	g_free(key);
 	g_free(module);
+	g_string_free(str,TRUE);
 }
 
 
