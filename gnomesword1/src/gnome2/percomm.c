@@ -116,7 +116,7 @@ void gui_save_note(GSHTMLEditorControlData * e)
 	} else {
 		//change_percomm_module(e->filename);
 		//set_percomm_key(e->key);
-		save_percomm_note(gstr->str);
+		main_dialog_save_note(gstr->str);
 		
 		g_print("\nnote saved\n");
 	}
@@ -653,7 +653,7 @@ static void set_page_percomm(gchar * modname, GList * percomm_list)
  * Synopsis
  *   #include "_percomm.h"
  *
- *   void gui_add_new_pane(TEXT_DATA * t)
+ *   void gui_add_new_pane(DIALOG_DATA * t)
  *
  * Description
  *   
@@ -674,7 +674,7 @@ void gui_add_new_percomm_pane(PC_DATA * p)
  * Synopsis
  *   #include "_percomm.h"
  *
- *   void add_vbox_to_notebook(TEXT_DATA * t)
+ *   void add_vbox_to_notebook(DIALOG_DATA * t)
  *
  * Description
  *   adds a vbox and label to the text notebook for each text module
@@ -812,7 +812,7 @@ void gui_shutdown_percomm(void)
 		if (p->ec)
 			g_free(p->ec);
 		/* 
-		 * free each TEXT_DATA item created 
+		 * free each DIALOG_DATA item created 
 		 */
 		g_free((PC_DATA *) percomm_list->data);
 		percomm_list = g_list_next(percomm_list);

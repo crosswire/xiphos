@@ -50,6 +50,9 @@
 #include "backend/sword_main.hh"
 #include "backend/mgr.hh"
 
+
+gboolean style_display = TRUE;
+
 void delete_module_mgr(void)
 {
 	backend_delete_module_mgr();
@@ -336,8 +339,13 @@ void main_display_dictionary(char * mod_name, char * key)
 
 void main_display_bible(const char * mod_name, const char * key)
 {
+	
+	gchar *file = NULL;
+	gchar *style = NULL;
+	
 	if(!settings.havebible)
 		return;
+	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	
 	if(strcmp(settings.MainWindowModule, mod_name)) {
 		xml_set_value("GnomeSword", "modules", "bible",
@@ -352,6 +360,17 @@ void main_display_bible(const char * mod_name, const char * key)
 		settings.currentverse = xml_get_value(
 					"keys", "verse");
 	}
+	style = get_conf_file_item(file, mod_name, "style");
+	if((style) && strcmp(style,"verse"))
+		settings.versestyle = FALSE;
+	else	
+		settings.versestyle = TRUE;
+	
+	style_display = FALSE;
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.versestyle_item),
+				       settings.versestyle);
+	style_display = TRUE;
 	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
@@ -386,15 +405,15 @@ void main_change_verse(const char * bible, const char * commentary,
 
 void main_setup_displays(void)
 {
-	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm);
-	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict);
+	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm,backend);
+	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
 }
 
 void main_setup_new_displays(void)
 {
-	backend->commDisplay = new GTKEntryDisp(widgets.html_comm);
-	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict);
-	backend->textDisplay = new GTKChapDisp(widgets.html_text);
+	backend->commDisplay = new GTKEntryDisp(widgets.html_comm,backend);
+	backend->dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
+	backend->textDisplay = new GTKChapDisp(widgets.html_text,backend);
 }
 
 const char *main_get_module_language(const char *module_name)

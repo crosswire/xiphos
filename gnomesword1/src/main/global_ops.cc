@@ -56,7 +56,7 @@ static gchar *tf2of(int true_false)
 }
 
 
-static void set_dialog_global_option(TEXT_DATA * t, char * option, gboolean choice)
+static void set_dialog_global_option(DIALOG_DATA * t, char * option, gboolean choice)
 {
 	ModuleDialogs* be = (ModuleDialogs*)t->backend;	
 	SWMgr *mgr = be->get_mgr();
@@ -113,7 +113,7 @@ static void set_global_option(int manager, char * option, gboolean choice)
  *   void
  */
 
-void main_dialog_set_global_options(TEXT_DATA * t)
+void main_dialog_set_global_options(DIALOG_DATA * t)
 {
 	set_dialog_global_option(t, "Strong's Numbers",
 			  t->ops->strongs);

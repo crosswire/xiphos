@@ -992,10 +992,8 @@ static void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_dat
 	case -1:
 		break;
 	case TEXT_TYPE:
-		main_open_bibletext_dialog(buf_module);
-		break;
 	case COMMENTARY_TYPE:
-		gui_open_commentary_dialog(buf_module);
+		main_dialogs_open(buf_module);
 		break;
 	case DICTIONARY_TYPE:
 		gui_open_dictlex_dialog(buf_module);
@@ -1149,7 +1147,7 @@ GtkWidget *create_menu_modules(void)
  *   #include "_bibletext.h"
  *
  *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)	
+			    GdkEventButton * event, DIALOG_DATA * t)	
  *
  * Description
  *   called when mouse button is clicked in html widget

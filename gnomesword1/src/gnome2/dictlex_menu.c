@@ -397,7 +397,7 @@ static void on_sync_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   #include "gui/dictionary_menu.h"
  *
  *  void on_about_module_activate(GtkMenuItem * menuitem, 
-						TEXT_DATA * vt)	
+						DIALOG_DATA * vt)	
  *
  * Description
  *   
