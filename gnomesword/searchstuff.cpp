@@ -48,11 +48,11 @@ SearchWindow::SearchWindow()
 	_3_group 		= NULL;
 	searchMgr       	= new SWMgr();	
 	searchMod		= NULL;
-	plaintohtml		= new PLAINHTML(); //-- sword renderfilter Plain to html
-	gbftohtml		= new GBFHTML(); //-- sword renderfilter gbf to html
-	PLAINsearchDisplay 	=0; // set in create
-	HTMLsearchDisplay 	=0; // set in create
-	RWPsearchDisplay 	=0; // set in create	
+	plaintohtml		= new PLAINHTML(); /* sword renderfilter Plain to html */
+	gbftohtml		= new GBFHTML(); /* sword renderfilter gbf to html */
+	PLAINsearchDisplay 	=0; /* set in create */
+	HTMLsearchDisplay 	=0; 
+	RWPsearchDisplay 	=0; 	
 }
 
 
@@ -60,9 +60,9 @@ SearchWindow::~SearchWindow()
 {
 	delete searchMgr;
 	
-	if (plaintohtml != 0)  //-- delete Sword render filters
+	if (plaintohtml != 0)  /* delete Sword render filters */
 		delete plaintohtml;
-	if (gbftohtml != 0)  //-- delete Sword render filters
+	if (gbftohtml != 0)  /* delete Sword render filters */
 		delete gbftohtml;		
 	if(PLAINsearchDisplay)
 		delete PLAINsearchDisplay;
@@ -99,13 +99,13 @@ SearchWindow::initsearchWindow(GtkWidget *searchDlg) //-- init search dialog
 	{
 		searchMod  = (*it).second;  //-- set searchMod
 		sit = searchMgr->config->Sections.find((*it).second->Name()); /* check to see if we need render filters */
-	    if (sit !=searchMgr->config->Sections.end())
-	    {
-	    	cit = (*sit).second.find("SourceType");
-			if (cit != (*sit).second.end()) 				
+	        if (sit !=searchMgr->config->Sections.end())
+	        {
+	                cit = (*sit).second.find("SourceType");
+		        if (cit != (*sit).second.end()) 				
 				sourceformat = g_strdup((*cit).second.c_str());
 			else
-				sourceformat = "Plain";
+				sourceformat = g_strdup("Plain");
 		}
 		if (!strcmp(sourceformat, "GBF")) /* we need gbf to html filter */
 		{
@@ -130,6 +130,7 @@ SearchWindow::initsearchWindow(GtkWidget *searchDlg) //-- init search dialog
 			searchMod->Disp(PLAINsearchDisplay);
 			//cout << searchMod->Name() << '\n';					
 		}
+		g_free(sourceformat);
 	}
 }
 
@@ -170,7 +171,7 @@ SearchWindow::searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or comme
 	textWindow= lookup_widget(searchFrm,"txtSearch");	//-- pointer to text widget
 	
 	
-	gtk_text_set_point(GTK_TEXT(textWindow), 0); //-- clear text window
+	gtk_text_set_point(GTK_TEXT(textWindow), 0); /* clear text window */
 	gtk_text_forward_delete (GTK_TEXT (textWindow), gtk_text_get_length((GTK_TEXT(textWindow))));
 
 	if(GTK_TOGGLE_BUTTON(comToggle)->active) /* if true search commentary */
@@ -178,7 +179,7 @@ SearchWindow::searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or comme
 		it = searchMgr->Modules.find(curcomMod->Name()); /* find commentary module */
 		if (it != searchMgr->Modules.end())
 		{
-			searchMod = (*it).second;  //-- set search module to current commentary module
+			searchMod = (*it).second;  /* set search module to current commentary module */
 	 	}
 	} 		
 	else if(GTK_TOGGLE_BUTTON(percomToggle)->active) /* if true search personal commentary */
@@ -186,26 +187,26 @@ SearchWindow::searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or comme
 	        it = searchMgr->Modules.find(percomMod->Name()); /* find personal commentary module */
 		if (it != searchMgr->Modules.end())
 		{
-			searchMod = (*it).second;  //-- set search module to current personalcommentary module
+			searchMod = (*it).second;  /* set search module to current personalcommentary module */
 	 	} 	
 	}
 	else    /* if neither commertary nor personal check box checked */
 	{
-	        it = searchMgr->Modules.find(curMod->Name()); //-- find personal commentary module
+	        it = searchMgr->Modules.find(curMod->Name()); /* find personal commentary module */
 		if (it != searchMgr->Modules.end())
 		{
-			searchMod = (*it).second;  //-- set search module to current personalcommentary module
+			searchMod = (*it).second;  /* set search module to current personalcommentary module */
 	 	} 	
 	}
 	
 	if(GTK_TOGGLE_BUTTON(bounds)->active)  
 	{	
-		lowerbound = lookup_widget(searchFrm,"entryLower"); //----------- get Lower bounds entry widget from search form
-		upperbound = lookup_widget(searchFrm,"entryUpper"); //----------- get Upper bounds entry widget from search form	
-		searchScopeLowUp.ClearBounds(); //-------- clear old bounds
-		searchScopeLowUp.LowerBound(gtk_entry_get_text(GTK_ENTRY(lowerbound))); //--read lower bounds entry and set lower bounds for search
-		searchScopeLowUp.UpperBound(gtk_entry_get_text(GTK_ENTRY(upperbound))); //--read upper bounds entry and set upper bounds for search
-		currentScope = &searchScopeLowUp; //------------- set scope of search to use bounds	
+		lowerbound = lookup_widget(searchFrm,"entryLower"); /* get Lower bounds entry widget from search form */
+		upperbound = lookup_widget(searchFrm,"entryUpper"); /* get Upper bounds entry widget from search form */
+		searchScopeLowUp.ClearBounds(); /* clear old bounds */
+		searchScopeLowUp.LowerBound(gtk_entry_get_text(GTK_ENTRY(lowerbound))); /* read lower bounds entry and set lower bounds for search */
+		searchScopeLowUp.UpperBound(gtk_entry_get_text(GTK_ENTRY(upperbound))); /* read upper bounds entry and set upper bounds for search */
+		currentScope = &searchScopeLowUp; /* set scope of search to use bounds */
 	}
 	else if(GTK_TOGGLE_BUTTON(lastsearch)->active) /* check to see if we want to use results of search last for this search */
 	{
