@@ -263,12 +263,13 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 			sprintf(buf,"Go to Strongs %s",url);
 			
 		} else if(*url == '[') {
+			gint i = 0;
 			++url;
 			while(*url != ']') {
+				buf[i++] = *url;
+				buf[i+1] = '\0';			
 				++url;
 			}
-			++url;
-			sprintf(buf,"%s",url);	
 		} else if(*url == '*') {
 			++url;
 			sprintf(buf,"%s",url);		
@@ -285,21 +286,54 @@ void
 on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, tmpbuf[255];
+	gchar newmod[80], newref[80];
 	gint i=0;
 	
-	if(*url == '[')   {
+	if(*url == '[')   { /*** user clicked module name ***/
 		++url;
 		while(*url != ']') {
 			tmpbuf[i++] = *url;
 			tmpbuf[i+1] = '\0';
 			++url;
 		}		
-		showmoduleinfoSWORD(tmpbuf); 
-	} else {
-		buf = g_strdup(url);
+		showmoduleinfoSWORD(tmpbuf);  /*** show module information ***/
+	} else if(!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7) ) {		
+		gchar *mybuf = NULL;
+		//g_warning(url);
+		mybuf = strstr(url, "version=") ;
+		if(mybuf){
+			mybuf = strchr(mybuf,'=');
+			++mybuf;
+			i=0;
+			while(mybuf[i] != ' ') {
+				newmod[i] = mybuf[i];
+				newmod[i+1] = '\0';
+				++i;
+			}
+			//g_warning(newmod);
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "passage=") ;
+		if(mybuf){
+			mybuf = strchr(mybuf,'=');
+			++mybuf;
+			i=0;
+			while(i < strlen(mybuf)) {
+				newref[i] = mybuf[i];
+				newref[i+1] = '\0';
+				++i;
+			}
+			//g_warning(newref);
+		} 
+		/*
+		buf = g_strdup(newmod);		
+		openModSWORD(buf);
+		g_free(buf);
+		*/
+		buf = g_strdup(newref);		
 		changeVerseSWORD(buf);
 		g_free(buf);
-	}
+	} 
 }
 
 /***************************************************************************************************
@@ -312,6 +346,7 @@ void on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	
 	if (*url == '#') {
 		++url;		/* remove # */
+		if(*url == 'G' || *url == 'H') ++url;  		/* remove G and H until we decide what to do with them */
 		lookupStrongsSWORD(atoi(url));
 	} else  if(*url == '*')   {
 		++url;
