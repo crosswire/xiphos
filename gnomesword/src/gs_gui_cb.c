@@ -178,12 +178,6 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 
 
 //----------------------------------------------------------------------------------------------
-void on_btnExit_clicked(GtkButton * button, gpointer user_data)
-{
-    shutdownSWORD();
-}
-
-//----------------------------------------------------------------------------------------------
 void /* commentary notebook page changed */
 on_nbTextMods_switch_page(GtkNotebook * notebook,
 			  GtkNotebookPage * page, gint page_num,

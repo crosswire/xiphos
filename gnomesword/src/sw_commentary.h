@@ -1,15 +1,15 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
   /*
-    * GnomeSword Bible Study Tool
-    * gs_setup.h
-    * -------------------
-    * Sat July 21 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-    *
- */
- 
+     * GnomeSword Bible Study Tool
+     * sw_commentary.h
+     * -------------------
+     * Fri Apr 12 13:14:44 2002
+     * copyright (C) 2002 by Terry Biggs
+     * tbiggs@users.sourceforge.net
+     *
+   */
+
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -25,19 +25,26 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-  
-#ifndef __GS_SETUP_H__
-#define __GS_SETUP_H__  
- 
+
+#ifndef __SW_COMMENTARY_H_
+#define __SW_COMMENTARY_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void gui_firstRunSETUP(void);	
+#include "gs_gnomesword.h"
+
+void backend_newDisplayCOMM(GtkWidget *html, 
+		char *modname, 
+		SETTINGS *s);
+void backend_setupCOMM(SETTINGS *s);
+void backend_shutdownCOMM(void);
+void backend_displayinCOMM(int modnnum, gchar *key);	
 	
-		
 #ifdef __cplusplus
 }
-#endif	
+#endif
+#endif				/* __SW_COMMENTARY_H_ */
 
-#endif /* __GS_SETUP_H__ */
+/******  end of file  ******/

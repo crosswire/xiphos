@@ -36,7 +36,9 @@
 #include "gs_gnomesword.h"
 #include "sw_sword.h"
 #include "gs_gui_cb.h"
+#include "gs_commentary.h"
 #include "gs_gbs.h"
+#include "gs_dictlex.h"
 #include "gs_mainmenu_cb.h"
 #include "support.h"
 #include "gs_file.h"
@@ -100,14 +102,19 @@ initGnomeSword(SETTINGS * s,
 {
     GtkWidget * notebook;
 
-    gint biblepage, commpage, dictpage;
+    gint biblepage, commpage;
 
 
     g_print("%s\n", "Initiating GnomeSword\n");
 
     /* setup shortcut bar */
     setupSB(s);
-    gui_setupGBS(s, bookmods);
+    /* setup commentary gui support */
+    gui_setupCOMM(s);
+    /* setup general book gui support */
+    gui_setupGBS(s);
+    /* setup Dict/Lex gui support */
+    gui_setupDL(s);
     s->settingslist = NULL;
     s->displaySearchResults = FALSE;
     /* add modules to menus -- gs_menu.c */
@@ -121,13 +128,9 @@ initGnomeSword(SETTINGS * s,
     biblepage =
 	addnotebookpages(lookup_widget(s->app, "nbTextMods"), biblemods,
 			 s->MainWindowModule);
-    commpage =
+    /*commpage =
 	addnotebookpages(lookup_widget(s->app, "notebook1"),
-			 commentarymods, s->CommWindowModule);
-    dictpage =
-	addnotebookpages(lookup_widget(s->app, "notebook4"),
-			 dictionarymods, s->DictWindowModule);
-
+			 commentarymods, s->CommWindowModule);*/
 
     gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app, "nbPerCom")),
 			  0);
@@ -140,11 +143,8 @@ initGnomeSword(SETTINGS * s,
     s->versestyle_item =
 	additemtooptionmenu(s->app, _("_Settings/"), _("Verse Style"),
 			    (GtkMenuCallback) on_verse_style1_activate);
-    /* set dictionary key */
-    gtk_entry_set_text(GTK_ENTRY
-		       (lookup_widget(s->app, "dictionarySearchText")),
-		       s->dictkey);
-    loadquickmarks_programstart(s->app);	/* add quickmarks to menubar */
+
+    //loadquickmarks_programstart(s->app);	/* add quickmarks to menubar */
 
     /* set Bible module to open notebook page */
     /* let's don't do this if we don't have at least one text module */
@@ -164,30 +164,9 @@ initGnomeSword(SETTINGS * s,
 	    gtk_widget_hide(notebook);
     }
 
-    /* set dict module to open notebook page */
-    /* let's don't do this if we don't have at least one dictionary / lexicon */
-    if (havedict) {
-	if (dictpage == 0)
-	    changcurdictModSWORD(s->DictWindowModule, s->dictkey);
-	/* get notebook */
-	notebook = lookup_widget(s->app, "notebook4");
-	gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
-			   GTK_SIGNAL_FUNC(on_notebook4_switch_page),
-			   NULL);
-	/* set notebook page */
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), dictpage);
-	if (settings->dict_tabs)
-	    gtk_widget_show(notebook);
-	else
-	    gtk_widget_hide(notebook);
-	/* hide dictionary section of window if we do not have at least one dict/lex */
-    }
-
-    /*else 
-       gtk_widget_hide(lookup_widget(s->app,"hbox8"));
-     */
     /* set com module to open notebook page */
-    if (havecomm) {		/* let's don't do this if we don't have at least one commentary */
+    /*
+    if (havecomm) {		
 	if (commpage == 0)
 	    changcurcomModSWORD(s->CommWindowModule, TRUE);
 	notebook = lookup_widget(s->app, "notebook1");
@@ -200,7 +179,7 @@ initGnomeSword(SETTINGS * s,
 			   GTK_SIGNAL_FUNC(on_notebook1_switch_page),
 			   NULL);
     }
-
+*/
     /* set personal commets notebook label and display module */
     if (usepersonalcomments) {
 	/* change personal comments module */
@@ -346,8 +325,8 @@ void UpdateChecks(SETTINGS * s)
     gtk_widget_show(s->app);	 /** display the whole thing **/
         
     /* fill the dict key clist */
-    if (havedict)
-	FillDictKeysSWORD();
+   /* if (havedict)
+	FillDictKeysSWORD();*/
     
     addhistoryitem = FALSE;
     changeVerseSWORD(s->currentverse);
@@ -374,44 +353,6 @@ void changepagenotebook(GtkNotebook * notebook, gint page_num)
     //if(page_num == 4) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
-
-/*****************************************************************************
- *addQuickmark - someone clicked add quickmark to get us here
-*****************************************************************************/
-void addQuickmark(GtkWidget * app)
-{
-    gchar *bookname;		/* pointer to the Bible book we want to mark */
-    gint iVerse,		/* verse we want to mark */
-     iChap;			/* chapter we want to mark */
-    gchar buf[255];
-    /* get book name */
-    bookname =
-	gtk_entry_get_text(GTK_ENTRY(lookup_widget(app, "cbeBook")));
-    /* get verse number */
-    iVerse =
-	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					 (lookup_widget(app, "spbVerse")));
-    /* get chapter */
-    iChap =
-	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					 (lookup_widget
-					  (app, "spbChapter")));
-    /* put book chapter and verse into bookmarks array */
-    sprintf(buf, "%s %d:%d%c", bookname, iChap, iVerse, '\0');
-    /* increment number of bookmark item + 1 */
-    ++iquickmarks;
-    if (iquickmarks == 1)
-	sprintf(rememberlastitem, "%s", "<Separator>");
-    /* save to file so we dont forget -- function in gs_file.c */
-    savequickmark(buf);
-    //-- remove old bookmarks from menu -- gs_menu.c
-    removemenuitems(app, _("_Quickmarks/<Separator>"), iquickmarks);
-    sprintf(buf, "%s", _("_Quickmarks/Clear Quickmarks"));
-    addseparator(app, buf);
-
-    /* let's show what we did -- gs_file.c */
-    loadquickmarks_afterSeparator(app);
-}
 
 /*****************************************************************************
  * showIntPage - do we want to see interlinear page?

@@ -2,9 +2,9 @@
 
   /*
      * GnomeSword Bible Study Tool
-     * gs_gbs.h
+     * gs_commentary.h
      * -------------------
-     * Tue Apr  2 09:36:24 2002
+     * Wed Apr  3 16:18:53 2002
      * copyright (C) 2002 by Terry Biggs
      * tbiggs@users.sourceforge.net
      *
@@ -26,8 +26,8 @@
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
-#ifndef __GS_GBS_H_
-#define __GS_GBS_H_
+#ifndef __GS_COMMENTARY_H_
+#define __GS_COMMENTARY_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,48 +35,36 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-typedef struct _GSFindDialog  GSFindDialog;
-struct _GSFindDialog {
+    typedef struct _COMMFindDialog COMMFindDialog;
+    struct _COMMFindDialog {
 	GnomeDialog *dialog;
-	GtkWidget   *htmlwidget;
-	GtkWidget   *entry;
-	GtkWidget   *backward;
-	GtkWidget   *case_sensitive;
-	gboolean     regular;
-};
+	GtkWidget *htmlwidget;
+	GtkWidget *entry;
+	GtkWidget *backward;
+	GtkWidget *case_sensitive;
+	gboolean regular;
+    };
 
-typedef struct _gbsdata GBS_DATA;
-struct _gbsdata {
+    typedef struct _commdata COMM_DATA;
+    struct _commdata {
 	GtkWidget *html;
-	GtkWidget *ctree;
+	GtkWidget *btnCOMMSync;
+	GtkWidget *btnCOMMBack;
+	GtkWidget *btnCOMMForward;
+	GtkWidget *btnCOMMPrint;
 	GtkWidget *showtabs;
-	gchar *bookName;
-	gchar *bookDescription;
+	gchar *modName;
+	gchar *modDescription;
 	gchar *searchstring;
-	GSFindDialog *find_dialog;
-};	
+	COMMFindDialog *find_dialog;
+    };
 
 
-typedef struct _nodedata NODEDATA;
-struct _nodedata {
-	GtkCTreeNode *parent;
-	GtkCTreeNode *sibling;
-	gchar *buf[3];
-	GdkPixmap *pixmap1;
-	GdkPixmap *pixmap2;
-	GdkBitmap *mask1;
-	GdkBitmap *mask2;
-	gboolean is_leaf;
-	gboolean expanded;
-};
-
-void gui_setupGBS(SETTINGS *s);
-void gui_shutdownGBS(void);
-GtkWidget *createGBS_Pane(gchar *modName, SETTINGS *s,gint count, GBS_DATA *p_gbs);
-GtkCTreeNode *gui_addnodeGBS(SETTINGS *s, NODEDATA *data);
-void on_showtabs_activate(GtkMenuItem * menuitem, SETTINGS *s);
+    void gui_setupCOMM(SETTINGS * s);
+    void gui_shutdownCOMM(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_GBS_H_ */
+#endif				/* __GS_COMMENTARY_H_ */
+/******  end of file  ******/

@@ -17,10 +17,14 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
+    gs_commentary.c \
+    gs_commentary.h \
     gs_detach_int.c \
     gs_detach_int.h \
     gs_detach_sb.c \
     gs_detach_sb.h \
+    gs_dictlex.c \
+    gs_dictlex.h \
     gs_editor.c \
     gs_editor.h \
     gs_editor_replace.c \
@@ -76,6 +80,10 @@ COMMON_SOURCE =  \
     support.h \
     sw_bookmarks.cpp \
     sw_bookmarks.h \
+    sw_commentary.cpp \
+    sw_commentary.h \
+    sw_dictlex.cpp \
+    sw_dictlex.h \
     sw_display.cpp \
     sw_display.h \
     sw_gbs.cpp \
