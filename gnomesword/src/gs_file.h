@@ -33,7 +33,14 @@ extern "C" {
 #endif
 
 #include "gs_html_editor.h"
-	
+
+typedef struct _listitem LISTITEM;
+struct _listitem {
+	gchar item[80];
+	gchar preitem[80];
+	gchar menu[80];
+};
+
 //void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
 void loadFile(GtkWidget * filesel);
@@ -42,7 +49,8 @@ void loadbookmarkarray(void);
 void loadbookmarks_programstart(void);
 void loadbookmarks_afterSeparator(void);
 void loadoptionarray(void);
-void savebookmark(gchar * item);
+void clearquickmarks(void);
+void savequickmark(gchar * item);
 void saveoptions(void);
 void createFiles(void);
 void loadStudyPadFile(gchar * filename);

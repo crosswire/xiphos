@@ -1,5 +1,10 @@
 2001-12-18 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* added <clear Quickmarks> item to Quickmarks menu
+	* removed quickmark editor (gs_listedtion.c)
+
+2001-12-18 Terry Biggs <tbiggs@users.sourceforge.net>
+
 	*  added gs_html_editor.*, gs_editor_replace.* and gs_editor_toolbar.* most of this code is 
 	   from gtkhtml-1.0
 	* removed printer.*  - now using gtk_html_print_with_header_footer for printing.

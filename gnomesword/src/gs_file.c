@@ -38,7 +38,7 @@
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "sw_gnomesword.h"
-#include "gs_listeditor.h"
+//#include "gs_listeditor.h"
 #include "gs_setup.h"
 #include "sw_properties.h"
 
@@ -52,7 +52,7 @@ char
 	*gSwordDir,		/* store GnomeSword directory */
 	*swbmDir,		/* bookmarks directory */
 	*shortcutbarDir,		/* store dir name for shortcutbar files */
-	*fnbookmarksnew,
+	*fnquickmarks,
 	*fnconfigure;		/* store filename for configure file - options */
 FILE 	*configfile,		/*  file pointer to configuration file - options */
 	*flbookmarks;
@@ -60,6 +60,10 @@ gint 	ibookmarks;		/* number of bookmark menu items */
 gchar 	remembersubtree[256],	/* we need to use this when add to bookmarks */
  	rememberlastitem[255];	/* we need to use this when add to bookmarks */
 
+LISTITEM mylistitem;
+LISTITEM *p_mylistitem;
+LISTITEM listitem;		/* structure for ListEditor items
+				   (verse lists and bookmarks) */
 /*****************************************************************************
  *externals
 *****************************************************************************/
@@ -156,9 +160,9 @@ gint setDiretory(void)
 		}
 	} 	
         /* set fnbookmarks to gSwordDir + bookmarks.txt */
-	fnbookmarksnew =
-	    g_new(char, strlen(gSwordDir) + strlen("bookmarksnew.gs") + 2);	
-	sprintf(fnbookmarksnew, "%s/%s", gSwordDir, "bookmarksnew.gs");
+	fnquickmarks =
+	    g_new(char, strlen(gSwordDir) + strlen("quickmarks.gs") + 2);	
+	sprintf(fnquickmarks, "%s/%s", gSwordDir, "guickmarks.gs");
         /* set fnconfigure to gSwordDir + gsword.cfg */
 	fnconfigure =
 	    g_new(char, strlen(gSwordDir) + strlen("preferences.conf") + 2);	
@@ -221,39 +225,28 @@ void loadbookmarks_programstart(void)
 	long filesize;
 	struct stat stat_p;
 
-	stat(fnbookmarksnew, &stat_p);
+	stat(fnquickmarks, &stat_p);
 	filesize = stat_p.st_size;
 	ibookmarks = (filesize / (sizeof(mylist)));
 	p_mylist = &mylist;
         /* try to open file */
-	if ((flbookmarksnew = open(fnbookmarksnew, O_RDONLY)) == -1) {	
+	if ((flbookmarksnew = open(fnquickmarks, O_RDONLY)) == -1) {	
 	        /* create bookmark file if we cannot open the file */
 		createFiles();	
 	}
-	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
+	flbookmarksnew = open(fnquickmarks, O_RDONLY);
 	while (i < ibookmarks) {
-		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));		
-		if (p_mylist->type == 1) {  /* if type is 1 it is a subtree (submenu) */
-
-			if (p_mylist->level == 0) {
-				sprintf(subtreelabel, "%s%s",
-					p_mylist->menu, p_mylist->preitem);
-			} else {
-				sprintf(subtreelabel, "%s%s%s",
-					p_mylist->menu, p_mylist->subitem,
-					p_mylist->preitem);
-			}
-			sprintf(remembersubtree, p_mylist->item);
-			addsubtreeitem(MainFrm, subtreelabel,
-				       p_mylist->item);
-		} else {
-			sprintf(subtreelabel, "%s%s%s", p_mylist->menu,
-				p_mylist->subitem, p_mylist->preitem);	/* create subitem label */
-			additemtosubtree(MainFrm, subtreelabel, p_mylist->item);  /* add menu item to subtree */
-		}
+		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));	
+		sprintf(subtreelabel, "%s%s", p_mylist->menu,
+				p_mylist->preitem);	/* create subitem label */
+		additemtosubtree(MainFrm, subtreelabel, p_mylist->item);  /* add menu item to subtree */
 		++i;
 	}
-	sprintf(rememberlastitem, "%s", p_mylist->item);
+	if(ibookmarks < 1)
+		sprintf(rememberlastitem, "%s","<Separator>");
+		
+	else
+		sprintf(rememberlastitem, "%s", p_mylist->item);
 	close(flbookmarksnew);
 }
 
@@ -269,38 +262,50 @@ void loadbookmarks_afterSeparator(void)
 	gint i = 0;
 
 	p_mylist = &mylist;
-	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
+	flbookmarksnew = open(fnquickmarks, O_RDONLY);
 	while (i < ibookmarks) {
 		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-		if (p_mylist->type == 0 && p_mylist->level == 0) { /*- if type is 1 it is a subtree (submenu) */
-			sprintf(subtreelabel, "%s%s%s", p_mylist->menu,
-				p_mylist->subitem, p_mylist->preitem);	/* create subitem label */
+		sprintf(subtreelabel, "%s%s", p_mylist->menu,
+				p_mylist->preitem);	/* create subitem label */
 			additemtosubtree(MainFrm, subtreelabel, p_mylist->item);	/*- add menu item to subtree */
-		}
 		++i;
 	}
-	sprintf(rememberlastitem, "%s", p_mylist->item);
+	if(ibookmarks < 1)
+		sprintf(rememberlastitem, "%s", "<Separator>");
+	else
+		sprintf(rememberlastitem, "%s", p_mylist->item);
 	//ibookmarks = i+1;
 	close(flbookmarksnew);
 }
 
+void clearquickmarks(void)
+{				
+	int flquickmarks;	/* bookmark file handle */
+	
+	g_print("we got to clearquickmarks()");
+	remove(fnquickmarks);
+	flquickmarks = open(fnquickmarks, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);
+
+	//remove(fnquickmarks);
+	//flquickmarks = open(fnquickmarks, O_WRONLY | O_APPEND);	/* open file to append one record  */
+	close(flquickmarks);	/* close the file we are done for now */
+	//loadbookmarks_afterSeparator();
+	
+}
 /*****************************************************************************
- * save a bookmark that has been added to the bookmark menu
- * by the add bookmark item
+ * save a quickkmark that has been added to the quickkmark menu
+ * by the add quickkmark item
  *****************************************************************************/
-void savebookmark(gchar * item)
+void savequickmark(gchar * item)
 {				
 	LISTITEM mylist;	/* structure for bookmark item */
 	LISTITEM *p_mylist;	/* pointer to structure */
 	int flbookmarksnew;	/* bookmark file handle */
 
 	p_mylist = &mylist;	/* set pointer to structure */
-	flbookmarksnew = open(fnbookmarksnew, O_WRONLY | O_APPEND);	/* open file to append one record  */
-	p_mylist->type = 0;	/* item is bookmark not submenu   */
-	p_mylist->level = 0;	/* item is added at level one (show when you click bookmark menu) */
+	flbookmarksnew = open(fnquickmarks, O_WRONLY | O_APPEND);	/* open file to append one record  */
 	strcpy(p_mylist->item, item);	/* bookmark label (verse) */
-	strcpy(p_mylist->preitem, rememberlastitem),	/* item in menu to follow (you have to tell gnome where to insert the item) */
-	    strcpy(p_mylist->subitem, "");	/* item does not belong to a submenu */
+	strcpy(p_mylist->preitem, rememberlastitem);	/* item in menu to follow (you have to tell gnome where to insert the item) */
 	strcpy(p_mylist->menu, "_Quickmarks/");	/* item does belong to the bookmark menu */
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));	/* write the record to the bookmark file */
 	close(flbookmarksnew);	/* close the file we are done for now */
@@ -317,73 +322,20 @@ void createFiles(void)
 
 	p_mylist = &mylist;
 	flbookmarksnew =
-	    open(fnbookmarksnew, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);
+	    open(fnquickmarks, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);
 
-	p_mylist->type = 1;
-	p_mylist->level = 0;
-	strcpy(p_mylist->item, "[What must I do to be saved?]");
-	strcpy(p_mylist->preitem, "Edit Quickmarks"),
-	    strcpy(p_mylist->subitem, "");
-	strcpy(p_mylist->menu, "_Quickmarks/");
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-
-	p_mylist->type = 0;
-	p_mylist->level = 1;
-	strcpy(p_mylist->item, "Romans 1:16");
-	strcpy(p_mylist->preitem, ""),
-	    strcpy(p_mylist->subitem, "[What must I do to be saved?]/");
-	strcpy(p_mylist->menu, "_Quickmarks/");
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-
-	p_mylist->type = 0;
-	p_mylist->level = 1;
-	strcpy(p_mylist->item, "Eph 2:8");
-	strcpy(p_mylist->preitem, "Romans 1:16"),
-	    strcpy(p_mylist->subitem, "[What must I do to be saved?]/");
-	strcpy(p_mylist->menu, "_Quickmarks/");
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-
-	p_mylist->type = 0;
-	p_mylist->level = 1;
-	strcpy(p_mylist->item, "Acts  16:31");
-	strcpy(p_mylist->preitem, "Eph 2:8"),
-	    strcpy(p_mylist->subitem, "[What must I do to be saved?]/");
-	strcpy(p_mylist->menu, "_Quickmarks/");
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-
-	p_mylist->type = 1;
-	p_mylist->level = 0;
-	strcpy(p_mylist->item, "[What is the Gospel?]");
-	strcpy(p_mylist->preitem, "[What must I do to be saved?]"),
-	    strcpy(p_mylist->subitem, "");
-	strcpy(p_mylist->menu, "_Quickmarks/");
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-
-	p_mylist->type = 0;
-	p_mylist->level = 1;
-	strcpy(p_mylist->item, "1 Cor 15:1");
-	strcpy(p_mylist->preitem, ""),
-	    strcpy(p_mylist->subitem, "[What is the Gospel?]/");
-	strcpy(p_mylist->menu, "_Quickmarks/");
-	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
-
-	p_mylist->type = 0;
-	p_mylist->level = 0;
 	strcpy(p_mylist->item, "Romans 8:28");
-	strcpy(p_mylist->preitem, ""), strcpy(p_mylist->subitem, "");
+	strcpy(p_mylist->preitem, "");
 	strcpy(p_mylist->menu, "_Quickmarks/<Separator>");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
-	p_mylist->type = 0;
-	p_mylist->level = 0;
 	strcpy(p_mylist->item, "Rev 1:5");
-	strcpy(p_mylist->preitem, "Romans 8:28"),
-	    strcpy(p_mylist->subitem, "");
+	strcpy(p_mylist->preitem, "Romans 8:28");
 	strcpy(p_mylist->menu, "_Quickmarks/");
 	write(flbookmarksnew, (char *) &mylist, sizeof(mylist));
 
 	close(flbookmarksnew);
-	ibookmarks = 8;
+	ibookmarks = 2;
 }
 
 /*****************************************************************************

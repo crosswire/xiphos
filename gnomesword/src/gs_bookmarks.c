@@ -43,7 +43,7 @@
 #include "sw_bookmarks.h"
 #include "sw_gnomesword.h"
 #include "gs_gnomesword.h"
-#include "gs_listeditor.h"
+//#include "gs_listeditor.h"
 #include "support.h"
 
 /*
@@ -54,7 +54,7 @@
 extern SETTINGS *settings;
 extern GtkWidget *MainFrm;
 extern GtkCTreeNode *personal_node;
-extern gchar *fnbookmarksnew;
+extern gchar *fnquickmarks;
 
 
 /*
@@ -836,7 +836,7 @@ GtkWidget *create_pmBookmarkTree(void)
  */
 gint loadoldbookmarks(void)
 {
-	LISTITEM mylist;
+/*	LISTITEM mylist;
 	LISTITEM *p_mylist;
 	int flbookmarksnew;
 	gchar *buf[3], tmpbuf[256];
@@ -846,12 +846,12 @@ gint loadoldbookmarks(void)
 	GtkCTreeNode *rootnode = NULL, *node = NULL, *parent = NULL;
 	gint ibookmarks;
 
-	stat(fnbookmarksnew, &stat_p);
+	stat(fnquickmarks, &stat_p);
 	filesize = stat_p.st_size;
 	ibookmarks = (filesize / (sizeof(mylist)));
 	p_mylist = &mylist;
-	/* try to open file */
-	if ((flbookmarksnew = open(fnbookmarksnew, O_RDONLY)) == -1) {
+	
+	if ((flbookmarksnew = open(fnquickmarks, O_RDONLY)) == -1) {
 		return 0;
 	} else {
 		buf[0] = "Personal";
@@ -864,7 +864,7 @@ gint loadoldbookmarks(void)
 		while (i < ibookmarks) {
 			read(flbookmarksnew, (char *) &mylist,
 			     sizeof(mylist));
-			if (p_mylist->type == 1) {	/* if type is 1 it is a subtree (submenu) */
+			if (p_mylist->type == 1) {	
 				buf[0] = p_mylist->item;
 				buf[1] = "GROUP";
 				buf[2] = "GROUP";
@@ -905,7 +905,7 @@ gint loadoldbookmarks(void)
 		}
 		close(flbookmarksnew);
 	}
-	setleaf(p_bmtree->ctree_widget);
+	setleaf(p_bmtree->ctree_widget);*/
 	return 1;
 }
 
