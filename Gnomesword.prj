@@ -59,7 +59,6 @@ module.source.name=src
 module.source.type=
 module.source.expanded=1
 module.source.files=\
-	callback.h\
 	char_table.c\
 	char_table.h\
 	gs_file.c\
@@ -78,7 +77,6 @@ module.source.files=\
 	support.h\
 	support.c\
 	main.c\
-	callback.c\
 	gs_abouts.c\
 	gs_abouts.h\
 	gs_file.h\
@@ -142,7 +140,11 @@ module.source.files=\
 	sw_display.cpp\
 	sw_display.h\
 	gs_unlockkey_dlg.c\
-	gs_unlockkey_dlg.h
+	gs_unlockkey_dlg.h\
+	gs_mainmenu_cb.c\
+	gs_mainmenu_cb.h\
+	gs_gui_cb.c\
+	gs_gui_cb.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

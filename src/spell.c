@@ -288,7 +288,6 @@ void create_ispell_pipe()
 	char *argv[14];
 	int argc;
 	int i;
-
 	gchar buf[2048];
 	fd_set infds;
 	struct timeval tv;
@@ -332,9 +331,6 @@ void create_ispell_pipe()
 		/* child process */
 
 		/* NOTE: Don't use DEBUG_MSG in this part since the output is redirected! */
-
-
-
 		MY_DEBUG_MSG("Spell-checker child process \n");
 
 		dup2(pipein[0], STDIN_FILENO);
@@ -367,12 +363,7 @@ void create_ispell_pipe()
 */
 			/* Report run-together words with
 			   missing blanks as errors */
-			argv[argc++] = g_strdup("-B");
-
-		
-		
-
-		
+		argv[argc++] = g_strdup("-B");		
 		argv[argc++] = NULL;
 #ifdef DEBUG
 		MY_DEBUG_MSG("Executing:\n");
@@ -399,7 +390,7 @@ void create_ispell_pipe()
 
 #ifdef WITH_WARNINGS
 #warning verify that this works.
-#endif
+#endif 
 
 	FD_ZERO(&infds);
 	FD_SET(pipeout[0], &infds);
@@ -411,7 +402,7 @@ void create_ispell_pipe()
 	   the right typecast. */
 
 	retval = select((SELECT_TYPE_ARG1) (pipeout[0] + 1),
-			SELECT_TYPE_ARG234 (&infds),
+			&infds, //SELECT_TYPE_ARG234 (&infds),
 			0, 
 			0, 
 			SELECT_TYPE_ARG5(&tv));
