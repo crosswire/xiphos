@@ -40,7 +40,8 @@ struct _settings {
 		*shortcut_bar,
 		*ctree_widget,
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
-		*versestyle_item;	/* widget to access toggle menu - for versestyle */
+		*versestyle_item,	/* widget to access toggle menu - for versestyle */
+		*add_bookmark_menu; /* add bookmark menu item */
 	gchar	
 		MainWindowModule[80],	/* modules to open at program startup  */
 		CommWindowModule[80],
@@ -79,7 +80,9 @@ struct _settings {
 		gs_width,
 		gs_hight,	
 		notebook3page,	//-- notebook 3 page number
-		searchbargroup;       //-- number of search group in shortcut bar
+		searchbargroup,      //-- number of search group in shortcut bar
+		whichwindow;      /* which of the main form html window is active */
+						/* 0=text, 1= comm, 2=dict */
 	gboolean   
 		usedefault,
 		strongs,	//-- toogle button and check menu states
@@ -99,7 +102,9 @@ struct _settings {
 		showsplash,
 		text_tabs, /* show module tabs in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
-		dict_tabs; /* show module tabs in text dict/lex if true  */; 
+		dict_tabs, /* show module tabs in text dict/lex if true  */
+		showinmain; /* when verse list item clicked show in main form if true */
+	GList *settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
 
 

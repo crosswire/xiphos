@@ -129,18 +129,16 @@ module.source.files=\
 	sw_bookmarks.h\
 	gs_information_dlg.c\
 	gs_information_dlg.h\
-	gs_verselist_dlg.c\
-	gs_verselist_dlg.h\
 	gs_setup.c\
 	gs_setup.h\
 	e-splash.c\
 	e-splash.h\
 	gs_preferences_dlg.c\
 	gs_preferences_dlg.h\
-	sw_verselist_dlg.cpp\
-	sw_verselist_dlg.h\
 	sw_search.cpp\
-	sw_search.h
+	sw_search.h\
+	sw_verselist_sb.h\
+	sw_verselist_sb.cpp
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

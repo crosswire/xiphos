@@ -96,9 +96,8 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 			module->AddRenderFilter(plaintohtml);
 			noDriver = false;
 		}
-	}
-	
-	if(stricmp(encoding.c_str(), "UTF-8")){ // &&( !isGBF)) {
+	}	
+	if(!module->isUnicode()) {                                                     //(stricmp(encoding.c_str(), "UTF-8")){ // &&( !isGBF)) {
 		module->AddRenderFilter(lattoutf8);
 	}
 }
