@@ -208,7 +208,7 @@ void gui_update_statusbar(GSHTMLEditorControlData * ecd)
  *   void
  */
  
-void run_dialog(GnomeDialog *** dialog, GtkHTML * html, 
+void run_dialog(GtkWidget *** dialog, GtkHTML * html, 
 				DialogCtor ctor, const gchar * title)
 {
 	if (*dialog) {
