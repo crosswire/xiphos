@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:rdfs="http://www.w3.org/1999/PR-rdf-schema-19990303#" 
+  xmlns:doap="http://usefulinc.com/ns/doap#" 
+  xmlns:foaf="http://xmlns.com/foaf/0.1#" 
+  xml:lang="en">
+  <doap:Project>
+    <doap:name>GnomeSword</doap:name>
+    <doap:shortname>GnomeSword</doap:shortname>
+    <doap:homepage rdf:resource="http://gnomesword.sourceforge.net"/>
+    <doap:created>2000-09-05</doap:created>
+    <doap:description>Gnomesword is a Bible study application for GNOME. It is based on SWORD by the CrossWire Bible Society, a framework providing the possibility to study the Bible and additional information like commentaries, dictionaries and other texts using your computer. GnomeSword lets you read, search, add formatted notes to verses, bookmark passages, and reference commentary and lexicon modules.</doap:description>
+    <doap:shortdesc>Gnomesword is a Bible study application for GNOME.</doap:shortdesc>
+    <doap:bug-database rdf:resource="http://sourceforge.net/tracker/?group_id=5528&amp;atid=105528"/>
+    <doap:mailing-list rdf:resource="http://sourceforge.net/mail/?group_id=5528"/>
+    <doap:screenshots rdf:resource="http://gnomesword.sourceforge.net/about.html"/>
+    <doap:programming-language>C</doap:programming-language>
+    <doap:programming-language>C++</doap:programming-language>
+    <doap:license rdf:resource="http://usefulinc.com/doap/licenses/gpl"/>
+    <doap:download-page rdf:resource="http://sourceforge.net/project/showfiles.php?group_id=5528"/>
+    <doap:maintainer>
+      <foaf:Person>
+        <foaf:name>Andy Piper</foaf:name>
+        <foaf:nick>andyp</foaf:nick>
+        <foaf:mbox_sha1sum>c1d6a5b08664987f6273b820343dbd56fa4019a0</foaf:mbox_sha1sum>
+        <rdfs:seeAlso rdf:resource="http://jumpgate.homelinux.net/foaf.rdf"/>
+      </foaf:Person>
+    </doap:maintainer>
+    <doap:maintainer>
+      <foaf:Person>
+        <foaf:name>Terry Biggs</foaf:name>
+        <foaf:nick>tee</foaf:nick>
+        <foaf:mbox_sha1sum>ec2106517a9e11c45552eb8ef5451185133d98d1</foaf:mbox_sha1sum>
+      </foaf:Person>
+    </doap:maintainer>
+    <doap:repository>
+      <doap:CVSRepository>
+        <doap:anon-root>:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gnomesword</doap:anon-root>
+        <doap:module>gnomesword1</doap:module>
+        <doap:browse rdf:resource="http://cvs.sourceforge.net/viewcvs.py/gnomesword/"/>
+      </doap:CVSRepository>
+    </doap:repository>
+  </doap:Project>
+</rdf:RDF>
