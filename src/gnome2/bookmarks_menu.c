@@ -47,6 +47,7 @@
 #include "gui/widgets.h"
 
 #include "main/settings.h"
+#include "main/sidebar.h"
 #include "main/sword.h"
 #include "main/key.h"
 #include "main/xml.h"
@@ -58,7 +59,7 @@ BOOKMARK_MENU menu;
 
 gboolean bookmarks_changed;
 
-extern GtkTreeView *bookmark_tree;
+//extern GtkTreeView *bookmark_tree;
 
 static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data);
 
@@ -367,8 +368,8 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 	gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
 			      &parent);
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
-			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
-			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_OPEN_PIXBUF, bm_pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, bm_pixbufs->pixbuf_closed,
 			   COL_CAPTION, "BibleTime", 
 			   COL_KEY, NULL,
 			   COL_MODULE, NULL,
@@ -520,7 +521,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 		data->module_desc = NULL;
 		data->description = NULL;
 		if(is_leaf) {
-			data->opened = pixbufs->pixbuf_helpdoc;
+			data->opened = bm_pixbufs->pixbuf_helpdoc;
 			data->closed = NULL;	
 			data->key = info->text2; 		
 			data->module = info->text3; 
@@ -532,8 +533,8 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 				data->description = NULL;
 			data->is_leaf = TRUE;
 		} else {				
-			data->opened = pixbufs->pixbuf_opened;
-			data->closed = pixbufs->pixbuf_closed;
+			data->opened = bm_pixbufs->pixbuf_opened;
+			data->closed = bm_pixbufs->pixbuf_closed;
 			data->is_leaf = FALSE;
 		}
 			
@@ -956,7 +957,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		else
 			data->description = info->text1;
 		data->is_leaf = TRUE;
-		data->opened = pixbufs->pixbuf_helpdoc;
+		data->opened = bm_pixbufs->pixbuf_helpdoc;
 		data->closed = NULL;			
 		add_item_to_tree(&iter,&selected, data);			
 		bookmarks_changed = TRUE;
@@ -1050,8 +1051,8 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 		data->module_desc = NULL;
 		data->description = NULL;
 		data->is_leaf = FALSE;
-		data->opened = pixbufs->pixbuf_opened;
-		data->closed = pixbufs->pixbuf_closed;			
+		data->opened = bm_pixbufs->pixbuf_opened;
+		data->closed = bm_pixbufs->pixbuf_closed;			
 		add_item_to_tree(&iter,&selected, data);
 		bookmarks_changed = TRUE;
 		save_bookmarks(NULL, NULL);

@@ -29,7 +29,6 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/commentary_dialog.h"
-#include "gui/commentary_menu.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/editor_menu.h"

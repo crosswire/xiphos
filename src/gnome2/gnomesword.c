@@ -54,6 +54,7 @@
 
 #include "main/sword.h"
 #include "main/settings.h"
+#include "main/sidebar.h"
 #include "main/lists.h"
 #include "main/xml.h"
 
@@ -98,22 +99,6 @@ void frontend_init(void)
 	 */
 	gui_create_sidebar(widgets.epaned);
 	
-	/*
-	 *  setup Dict/Lex gui support
-	 */
-	if (settings.havedict) {
-		//number_of_pages = gui_setup_dictlex(get_list(DICT_LIST));
-		gui_setup_dictlex_dialog(get_list(DICT_LIST));
-	}
-
-	/*
-	 *  setup general book gui support
-	 */
-	if (settings.havebook) {
-		//gui_setup_gbs(get_list(GBS_LIST),number_of_pages);
-		gui_setup_gbs_dialog(get_list(GBS_LIST));
-	}
-
 	/*
 	 *  parallel stuff
 	 */
@@ -287,16 +272,6 @@ void shutdown_frontend(void)
 	g_free(settings.swbmDir);
 	
 	main_dialogs_shutdown();
-
-	if (settings.havebook) {
-		//gui_shutdown_gbs();
-		gui_shutdown_gbs_dialog();
-	}
-
-	if (settings.havedict) {
-//		gui_shutdown_dictlex();
-		gui_shutdown_dictlex_dialog();
-	}
 
 	if(settings.browsing)
 		gui_notebook_main_shutdown();
