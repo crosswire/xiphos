@@ -48,7 +48,7 @@ bool save_module_options(gchar *modName, gchar *option, gchar *value);
 /******************************************************************************
  * load module font - using sword SWConfig
  ******************************************************************************/
-string load_module_font(gchar *modName, gchar *font);	
+string load_module_font(gchar *modName, gchar *tag);	
  
 /******************************************************************************
  * save module font - using sword SWConfig

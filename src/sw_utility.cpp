@@ -33,10 +33,7 @@
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
-#include <gbfplain.h>
-#include <plainhtml.h>
-#include <gbfhtmlhref.h>
-#include <thmlhtmlhref.h>
+
 #ifndef __GNUC__
 #include <io.h>
 #else
@@ -47,94 +44,7 @@
 #include "sw_gnomesword.h"
 #include "sw_utility.h"
 
-/* sword render filters */
-SWFilter 
-    * gbftohtml,		
-    *plaintohtml, 
-    *thmltohtml;
-    
-/*** initRenderFiltersUTIL ***/
-void initRenderFiltersUTIL(void)
-{
-	plaintohtml = new PLAINHTML();	/* sword renderfilter plain to html */
-	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
-	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
-}
 
-/********************************************************************************************** 
- * addrenderfilters - 
- *           code originally taken form BibleTime 0.31    
- * 
- *********************************************************************************************/
-void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
-{
-	string sourceformat;
-	string moduleDriver;
-	string modDirection;
-	gchar *retval;
-	ConfigEntMap::iterator entry;
-	bool noDriver = true;	
-	
-	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
-	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
-	modDirection = ((entry = section.find("Direction")) != section.end()) ? (*entry).second : (string) "";
-	
-	/*
-	if (!stricmp(modDirection.c_str(), "RtoL")) {
-		module->Direction(DIRECTION_RTL);
-	}
-	*/
-	if (!stricmp(sourceformat.c_str(), "GBF")) {
-		module->AddRenderFilter(gbftohtml);//Markup(FMT_HTMLHREF);
-		noDriver = false; 
-	}
-
-	if (!stricmp(sourceformat.c_str(), "PLAIN")) {
-		module->AddRenderFilter(plaintohtml);
-		noDriver = false;
-	}
-
-	if (!stricmp(sourceformat.c_str(), "ThML")) {
-		module->AddRenderFilter(thmltohtml);
-		noDriver = false;
-	}
-	
-	if (noDriver){
-		if (!stricmp(moduleDriver.c_str(), "RawCom")) {
-			module->AddRenderFilter(plaintohtml);
-			noDriver = false;
-		}
-		if (!stricmp(moduleDriver.c_str(), "RawLD")) {
-			module->AddRenderFilter(plaintohtml);
-			noDriver = false;
-		}
-	}	
-	
-}
-
-void deleteRenderfilters(void)
-{
-	//-- delete render filters
-	if (thmltohtml != 0)
-		delete thmltohtml;
-	if (gbftohtml != 0)
-		delete gbftohtml;
-	if (plaintohtml != 0)
-		delete plaintohtml;
-}
-
-/* path to sword modules 
-void pathtomods(char *path)
-{		
-	SWMgr *mgr;
-	gchar buf[255];
-	
-	mgr = new SWMgr();	//-- create sword mgrs
-	sprintf(buf,"%s",mgr->prefixPath);
-	path = g_strdup(buf); 
-	delete mgr;
-}
-*/
 void
 changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
 {
@@ -144,5 +54,22 @@ changeModuleUTILITY(SWModule *module, SWMgr *Mgr, char *modName)
 	if (it != Mgr->Modules.end()){ //-- if we find the module	
 		module = (*it).second;  //-- change module to new module
 	}		
+}
+
+string
+get_module_lang_UTILITY(gchar *modName)
+{
+	string retval = "";	
+	SWMgr *Mgr;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;
+	
+	Mgr = new SWMgr();	//-- create sword mgr
+	if ((sit = Mgr->config->Sections.find(modName)) != Mgr->config->Sections.end()) {
+		ConfigEntMap & section = (*sit).second;
+		retval = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
+	}
+	delete Mgr;
+	return retval;
 }
 
