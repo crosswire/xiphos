@@ -43,6 +43,7 @@
 #include <versekey.h>
 #include <thmlgbf.h>
 #include <gbfplain.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "gs_display.h"
 #include "support.h"
@@ -344,7 +345,78 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	return 0;
 }
 
+/****************************************************************************** 
+ * GTKutf8ChapDisp - for displaying text modules 
+ * in a GtkHTML widget a chapter at a time 
+ * - the mods need to be filtered to html first
+ * imodule - the Sword module to display
+ ******************************************************************************/
+char GTKutf8ChapDisp::Display(SWModule & imodule)
+{
+	char tmpBuf[500], *buf, *font, *mybuf;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+	GString *strbuf;
+	VerseKey *key = (VerseKey *) (SWKey *) imodule;
+	int curVerse = key->Verse();
+	int curChapter = key->Chapter();
+	int curBook = key->Book();
+	int curPos = 0;
+	gint len;
+	char *Buf, c;
+	gchar *utf8str;
+	bool newparagraph = false;
+	gint mybuflen, utf8len;
+	const gchar **end;
+	
+	c = 182;
+	font = "Roman";
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbText")), 1);
+	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
+	    mainMgr->config->Sections.end()) {
+		if ((eit = (*sit).second.find("Font")) !=
+		    (*sit).second.end()) {
+			font = (char *) (*eit).second.c_str();
+		}
+	}
+	beginHTML(GTK_WIDGET(gtkText),TRUE);	
 
+	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter
+	      && !imodule.Error()); imodule++) {
+		/* verse number */
+		 if(g_utf8_validate ((const char *)imodule , -1 , NULL) ){
+			 sprintf(tmpBuf,
+					 " <b> </b><A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A>",
+					 imodule.Description(),
+					 imodule.KeyText(), key->Verse(),
+					 key->Verse());	
+			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+			utf8len = g_utf8_strlen (utf8str , -1) ;
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
+			utf8len = g_utf8_strlen ( (const char *)imodule , -1) ;
+			//displayHTML(GTK_WIDGET(gtkText),(const char *)imodule, utf8len ); 
+			  sprintf(tmpBuf, " %s", "<br>");
+			utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
+			utf8len = g_utf8_strlen (utf8str , -1) ;
+			displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
+		 }else{
+			 g_warning("not utf8 string!");
+			 //displayHTML(GTK_WIDGET(gtkText),"not utf8 string!" , strlen("not utf8 string!") ); 
+		 }
+		
+		
+	}
+	key->Verse(1);
+	key->Chapter(1);
+	key->Book(curBook);
+	key->Chapter(curChapter);
+	key->Verse(curVerse);
+	sprintf(tmpBuf, "%d", curVerse);
+	endHTML(GTK_WIDGET(gtkText));
+	//gotoanchorHTML(gtkText, tmpBuf);
+	return 0;
+}
 /* --------------------------------------------------------------------------------------------- */
 char InterlinearDisp::Display(SWModule & imodule)
 {
@@ -370,7 +442,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	} 
 	(const char *) imodule;
 	strbuf = g_string_new("");
-	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","+5");
+	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\" SIZE=\"%s\">","+3");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </font></b>",
 		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 	strbuf = g_string_append(strbuf, tmpBuf);
@@ -381,24 +453,10 @@ char InterlinearDisp::Display(SWModule & imodule)
 		
 		g_warning(font);
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, "+5");
+		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, "+3");
 	} 
 	/* body */
-	/*if(utf){
-		gchar *tmpstr;		
-		tmpstr = e_utf8_to_gtk_string (gtkText, (const char *) imodule);
-		strbuf = g_string_append(strbuf, tmpstr);
-		g_warning("unicode\\n");
-	} else 
-	if(!stricmp(font,"caslon")){
-			//if(g_utf8_validate((const char *) imodule)){
-			g_warning("caslon is here");
-			thebuf = e_utf8_to_gtk_string (gtkText, (const char *) imodule);
-			strbuf = g_string_append(strbuf, thebuf);	
-			//}
-		
-	} else */
-		strbuf = g_string_append(strbuf, (const char *) imodule);
+	strbuf = g_string_append(strbuf, (const char *) imodule);
 	/* closing */
 	if(font){
 		strbuf = g_string_append(strbuf, "</font><br><hr>");

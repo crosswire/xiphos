@@ -53,6 +53,12 @@ class GTKhtmlChapDisp:public GtkHTMLEntryDisp { public:
 };
 
 //----------------------------------------------------------------------------------------------
+class GTKutf8ChapDisp:public GtkHTMLEntryDisp { public:
+	GTKutf8ChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
 class InterlinearDisp:public GtkHTMLEntryDisp { public:
 	InterlinearDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
