@@ -270,7 +270,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 	gchar newref[80];
 	static GtkWidget *dlg;
 	cur_vt = vt;
-
+	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+			     " ");
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
@@ -286,6 +287,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			modName = g_strdup(settings.lex_greek);
 			buf = g_strdup(url);
 			gui_display_mod_and_key(modName, buf);
+			gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+			     modName);
 			g_free(buf);
 			g_free(modName);
 		}
@@ -295,6 +298,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			modName = g_strdup(settings.lex_hebrew);
 			buf = g_strdup(url);
 			gui_display_mod_and_key(modName, buf);
+			gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+			     modName);
 			g_free(buf);
 			g_free(modName);
 		}
@@ -368,6 +373,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			}
 			gui_display_mod_and_key(modbuf, buf);
 		}
+		gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+			     modbuf);
 		g_free(buf);
 		gtk_widget_show(dlg);
 	}
@@ -400,6 +407,8 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			}
 			buf = g_strdup(newref);
 			gui_display_mod_and_key(modbuf, buf);
+			gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+			     modbuf);
 			g_free(buf);
 			gtk_widget_show(dlg);
 		}

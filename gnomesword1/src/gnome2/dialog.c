@@ -121,7 +121,7 @@ static void get_entry_text(GS_DIALOG * info)
 static void on_dialog_response(GtkDialog * dialog, gint response_id,
 			       GS_DIALOG * info)
 {
-	g_warning("%d", response_id);
+	//g_warning("%d", response_id);
 	switch (response_id) {
 	case GTK_RESPONSE_OK:
 		retval = GS_OK;
