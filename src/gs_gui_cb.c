@@ -132,7 +132,7 @@ void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 {
 	if (ApplyChange) {
-		verseSWORD();
+		bookSWORD();
 	}
 }
 
@@ -143,7 +143,7 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 				   gpointer user_data)
 {
 	if (ApplyChange) {
-		verseSWORD();
+		chapterSWORD();
 		return TRUE;
 	}
 	return FALSE;

@@ -89,6 +89,28 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 			++url;
 			//str = showfirstlineStrongsSWORD(atoi(url));
 			sprintf(buf, _("Show %s in main window"), url);
+		
+		} else if (!strncmp(url, "type=morph", 10)) {
+			gchar *modbuf = NULL;
+			gchar *mybuf = NULL;
+			mybuf = strstr(url, "class=Packard");
+			if (mybuf) {
+				modbuf = "Packard";
+			}
+			mybuf = NULL;
+			mybuf = strstr(url, "value=");
+			if (mybuf) {
+				gint i;
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+				for(i=0;i<strlen(mybuf);i++){
+					if(mybuf[i]=='-') 
+						mybuf[i]=' ';
+				}
+			}
+			sprintf(buf,"%s",url); 		
+			displaydictlexSBSW(modbuf, mybuf, settings);			
+			return;
 		} else if (*url == '#') {
 			++url;
 			if (*url == 'T')
@@ -195,6 +217,29 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		sprintf(settings->groupName,"%s","Verse List");
 		getVerseListSBSWORD(modbuf, buf, settings);
 		g_free(buf);
+		
+	} else if (!strncmp(url, "type=morph", 10)) {
+		gchar *modbuf = NULL;
+		gchar *mybuf = NULL;
+		mybuf = strstr(url, "class=Packard");
+		if (mybuf) {
+			modbuf = "Packard";
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "value=");
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			for(i=0;i<strlen(mybuf);i++){
+				if(mybuf[i]=='-') 
+					mybuf[i]=' ';
+			}
+		}
+		buf = g_strdup(mybuf);
+		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
+		gotoBookmarkSWORD(modbuf, buf);
+		g_free(buf);
+	
 	 /*** let's seperate mod version and passage ***/
 	} else if (!strncmp(url, "type=", 5)) {
 		gchar *mybuf = NULL;
@@ -275,7 +320,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 static void
 on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar *buf, tmpbuf[255];
+	gchar *buf, *modbuf, tmpbuf[255];
 	gint i = 0;
 
 	if (*url == '#') {
@@ -319,11 +364,40 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			++url;
 		}
 		showmoduleinfoSWORD(tmpbuf);
-	} else {
-		buf = g_strdup(url);
-		changeVerseSWORD(buf);
+	
+	 /*** let's remove passage= verse list ***/
+	} else if (!strncmp(url, "passage=", 7)) {
+		gchar *mybuf = NULL;
+		mybuf = strchr(url, '=');
+		++mybuf;
+		buf = g_strdup(mybuf);
+		modbuf = getmodnameSWORD(0);
+		getVerseListSBSWORD(modbuf, buf, settings);
+		g_free(buf);
+		
+	} else if (!strncmp(url, "type=morph", 10)) {
+		gchar *modbuf = NULL;
+		gchar *mybuf = NULL;
+		mybuf = strstr(url, "class=Packard");
+		if (mybuf) {
+			modbuf = "Packard";
+		}
+		mybuf = NULL;
+		mybuf = strstr(url, "value=");
+		if (mybuf) {
+			mybuf = strchr(mybuf, '=');
+			++mybuf;
+			for(i=0;i<strlen(mybuf);i++){
+				if(mybuf[i]=='-') 
+					mybuf[i]=' ';
+			}
+		}
+		buf = g_strdup(mybuf);
+		//g_warning("newmod = %s newvalue = %s",modbuf,buf);
+		gotoBookmarkSWORD(modbuf, buf);
 		g_free(buf);
 	}
+
 }
 
 /******************************************************************************
@@ -423,16 +497,20 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
-	GtkWidget *widget;
-	gchar *buf;
+	GtkWidget *widget, *entry;
 	GtkHTML *html;
+	gchar *buf;
 
 	widget = lookup_widget(settings->app, (gchar *) user_data);
 	html = GTK_HTML(widget);
-	buf = NULL;
-	buf = html_object_get_selection_string(html->engine->clipboard, html->engine);
-	if (buf)
-		changeVerseSWORD(buf);
+	gtk_html_copy(html);
+	entry = lookup_widget(settings->app, "cbeFreeformLookup");
+	/* clear entry */
+	gtk_entry_set_text(GTK_ENTRY(entry), "");
+	/* put selected ref in entry */
+	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));	
+	buf = gtk_entry_get_text(GTK_ENTRY(entry));
+	changeVerseSWORD(buf);
 }
 
 /***************************************************************************************************
