@@ -19,27 +19,21 @@
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
 */
-
 /* 
- * added to gnomesword Fri Dec 14 21:53:23 2001
+ * added to gnomesword Fri Mar  1 12:45:30 2002
 */
+#ifndef _GS_EDITOR_SEARCH_H_
+#define _GS_EDITOR_SEARCH_H_
 
-#ifndef _GS_EDITOR_REPLACE_H_
-#define _GS_EDITOR_REPLACE_H_
+typedef struct _GSHTMLSearchDialog  GSHTMLSearchDialog;
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
 #include "gs_editor.h"
+//#include "control-data.h"
+
+GSHTMLSearchDialog * gs_editor_search_dialog_new(GtkHTML *html);
+void gs_editor_search_dialog_destroy(GSHTMLSearchDialog *d);
 
 
-typedef struct _GtkHTMLReplaceAskDialog GtkHTMLReplaceAskDialog;
-
-typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
-
-
-	
-
-GtkHTMLReplaceDialog * gtk_html_replace_dialog_new     (GtkHTML *html);
-void                   gtk_html_replace_dialog_destroy (GtkHTMLReplaceDialog *d);
-
-
-#endif /* _GS_EDITOR_REPLACE_H_ */
+#endif

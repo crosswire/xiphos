@@ -1,3 +1,8 @@
+2002-03-01 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added gs_editor_search.* (from GtkHTML editor)
+	
+
 2002-02-23 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* changed sw_gnomesword.* to sw_sword.*

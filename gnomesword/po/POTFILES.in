@@ -15,7 +15,6 @@ src/gs_gui.c
 src/gs_history.c 
 src/gs_html.c 
 src/gs_info_box.c 
-src/gs_interlinear_dlg.c 
 src/gs_mainmenu_cb.c 
 src/gs_menu.c 
 src/gs_preferences_dlg.c 
