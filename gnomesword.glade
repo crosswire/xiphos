@@ -5442,9 +5442,15 @@ Revelation
 	<widget>
 	  <class>GtkButton</class>
 	  <child_name>Toolbar:button</child_name>
-	  <name>button6</name>
+	  <name>btnLoadKeys</name>
+	  <tooltip>Load all keys for this module</tooltip>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_btnLoadKeys_clicked</handler>
+	    <last_modification_time>Fri, 20 Jul 2001 18:12:14 GMT</last_modification_time>
+	  </signal>
 	  <label>button6</label>
-	  <stock_pixmap>GNOME_STOCK_PIXMAP_JUMP_TO</stock_pixmap>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST</stock_pixmap>
 	</widget>
       </widget>
 

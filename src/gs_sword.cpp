@@ -1361,30 +1361,41 @@ gchar* getSDmodDescriptionSWORD(void)
 
 /******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
- *returns a list of keys
+ *
  ******************************************************************************/
 void loadSDmodSWORD(GtkWidget *clist, gchar *modName)
 {
 	ModMap::iterator it;
-        gchar *listitem;
+        
         
         gtk_clist_clear( GTK_CLIST(clist)); //-- start with empty list	
         it = SDMgr->Modules.find(modName);  //-- find module we want to use
-	if (it != SDMgr->Modules.end()){
-		
+	if (it != SDMgr->Modules.end()){		
 		SDMod = (*it).second;  //-- set curdictMod to new choice
 		SDMod->SetKey("");		
-		SDMod->Display();	 //-- display new dict
-		
-		SDMod->Error();
-		//(*SDMod)=TOP;
-		for (;!SDMod->Error();(*SDMod)++){
-		        listitem = g_strdup((const char *)SDMod->KeyText()); //-- key to listitem
-		        //g_warning(listitem);
-		        gtk_clist_append(GTK_CLIST(clist) , &listitem); //-- listitem to list
-		       if(listitem)
-			       g_free(listitem);
-		}
+		SDMod->Display();	 //-- display new dict		
+	}
+}
+
+/******************************************************************************
+ *loadSDkeysSWORD - load a dictionary keys into clist
+ *returns a list of keys
+ ******************************************************************************/
+void loadSDkeysSWORD(GtkWidget *clist)
+{
+	gchar *listitem;
+	//SDMod->SetKey("A");
+	if(!stricmp(SDMod->Name(),"WebstersDict"))
+		SDMod->SetKey("A");
+	else
+		(*SDMod)=TOP; 
+	SDMod->Display();
+	SDMod->Error();
+	for (;!SDMod->Error();(*SDMod)++){
+		listitem = g_strdup((const char *)SDMod->KeyText()); //-- key to listitem
+		gtk_clist_append(GTK_CLIST(clist) , &listitem); //-- listitem to list
+		if(listitem)
+			g_free(listitem);
 	}
 }
 
