@@ -59,10 +59,8 @@ SWDisplay *comp3Display; //--- to display modules using GtkText a verse at a tim
 SWDisplay *comDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *percomDisplay; //--- to display personal comment modules using GtkText a verse at a time
 SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *GBFcomDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *RWPDisplay; //--- to display Robertson's Word Pictures in the New Testament using GtkText
 SWDisplay *FPNDisplay; //--- to display formatted personal notes using GtkText
-SWDisplay *GBFDisplay; //--- to display formatted gbf
 SWDisplay *HTMLDisplay; //--- to display formatted html
 SWDisplay *HTMLchapDisplay; //--- to display formatted html
 
@@ -234,11 +232,11 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	comp3Display    = 0;// set in create
 	comDisplay      = 0;// set in create
 	dictDisplay     = 0;// set in create
-	GBFcomDisplay   = 0; // set in create 	
+	//GBFcomDisplay   = 0; // set in create 	
 	percomDisplay   = 0;// set in create
 	RWPDisplay			= 0;
 	FPNDisplay			= 0;
-	GBFDisplay			= 0;
+	//GBFDisplay			= 0;
 	HTMLDisplay			= 0;
 	HTMLchapDisplay			= 0;
 
@@ -256,13 +254,11 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
-	GBFcomDisplay = new  GTKInterlinearDisp(lookup_widget(mainform,"textCommentaries"));
 	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
 	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
 	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
-	//GBFDisplay = new GBFentryDisp(lookup_widget(mainform,"textCommentaries"));
 	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));
 	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 
@@ -817,7 +813,10 @@ ShutItDown(void)  //------------- close down GnomeSword program
 	delete mainMgr3;	
         if (gbftoplain != 0)  //-- delete Sword render filters
 		delete gbftoplain;
-	
+	if (gbftohtml != 0)
+		delete gbftohtml;
+	if (plaintohtml != 0)
+		delete plaintohtml;	
 	if (chapDisplay)    //-- delete Sword displays
 		delete chapDisplay;
 	if (entryDisplay)
@@ -826,18 +825,22 @@ ShutItDown(void)  //------------- close down GnomeSword program
 		delete comp1Display;
 	if(comp2Display)
 		delete comp2Display;
+	if(comp3Display)
+		delete comp3Display;	
 	if(comDisplay)
 		delete comDisplay;
-	if(GBFcomDisplay)
-		delete GBFcomDisplay;
 	if(dictDisplay)
 		delete dictDisplay;
 	if(percomDisplay)
 		delete percomDisplay;
+	if(FPNDisplay)
+		delete FPNDisplay;
+	if(RWPDisplay)
+		delete RWPDisplay;		
 	if(HTMLDisplay)
-		delete HTMLDisplay;	
-	if(GBFDisplay)
-		delete GBFDisplay;	
+		delete HTMLDisplay;
+	if(HTMLchapDisplay)
+		delete HTMLchapDisplay;	
 	if(noteeditor)
 		delete noteeditor;	
 	gtk_exit(0);           //-- exit
