@@ -162,9 +162,9 @@ MOD_MGR *backend_module_mgr_get_next_module(void)
 						&bytes_written,
 				      		error);
 			mod_info->old_version =
-			    backend_get_module_version(mod_info->name);
+			    backend->get_config_entry(mod_info->name, "Version"); //backend_get_module_version(mod_info->name);
 			mod_info->installed =
-			    backend_check_for_module(mod_info->name);
+			    backend->is_module(mod_info->name);
 			mod_info->description = module->Description();
 			mod_info->locked = 
 				(module->getConfigEntry("CipherKey")) ? 1 : 0;

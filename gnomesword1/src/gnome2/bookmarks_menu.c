@@ -313,7 +313,7 @@ static void goto_bookmark(gchar * url)
 	gint module_type;
 	
 	if (use_dialog) {
-		module_type = main_get_mod_type_from_url(url);
+		module_type = main_main_get_mod_type_from_url(url);
 		switch (module_type) {
 		case TEXT_TYPE:
 		case COMMENTARY_TYPE:
@@ -525,7 +525,7 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 			data->closed = NULL;	
 			data->key = info->text2; 		
 			data->module = info->text3; 
-			data->module_desc = get_module_description(info->text3);
+			data->module_desc = main_get_module_description(info->text3);
 			if((strlen(description) > 1) || (strcmp(caption,info->text1))) {
 				data->description = info->text1;
 			}
@@ -951,7 +951,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		data->caption = info->text1;
 		data->key = info->text2; 
 		data->module = info->text3; 
-		data->module_desc = get_module_description(info->text3);
+		data->module_desc = main_get_module_description(info->text3);
 		if(!strcmp(data->caption,buf))
 			data->description = NULL;
 		else

@@ -52,6 +52,7 @@
 #include "main/lists.h"
 #include "main/search.h"
 #include "main/sword.h"
+//#include "main/mod_search.h"
 
 
 #include "gui/widgets.h"
@@ -103,7 +104,7 @@ extern SWKey *current_scope;
  *   c
  */
 
-int backend_module_has_testament(const char * module_name,  int testament)
+/*int backend_module_has_testament(const char * module_name,  int testament)
 {
 	ModMap::iterator it;
 	SWModule *module;
@@ -141,7 +142,7 @@ int backend_module_has_testament(const char * module_name,  int testament)
 			return false;
 	}
 }
-
+*/
 /******************************************************************************
  * Name
  *   backend_get_module_config_entry
@@ -159,7 +160,7 @@ int backend_module_has_testament(const char * module_name,  int testament)
  *   const char *
  */
 
-const char *backend_get_module_config_entry(const char * module_name, 
+/*const char *backend_get_module_config_entry(const char * module_name, 
 					    const char * entry)
 {
 	const char *buf = NULL;
@@ -175,6 +176,7 @@ const char *backend_get_module_config_entry(const char * module_name,
 	}
 	return NULL;	
 }
+*/
 /******************************************************************************
  * Name
  *   
@@ -191,7 +193,7 @@ const char *backend_get_module_config_entry(const char * module_name,
  *   int
  */
 
-const char *backend_get_module_version(char *module_name)
+/*const char *backend_get_module_version(char *module_name)
 {
 	const char *buf = NULL;
 	ModMap::iterator it;
@@ -206,45 +208,7 @@ const char *backend_get_module_version(char *module_name)
 	}
 	return " ";	
 }
-
-
-/******************************************************************************
- * Name
- *   backend_get_preverse_header
- *
- * Synopsis
- *   #include ""
- *
- *   char *backend_get_preverse_header(char * module_name, char * key, int pvHeading)
- *
- * Description
- *   
- *
- * Return value
- *   char*
- */
-
-char *backend_get_preverse_header(char * module_name, char * key, int pvHeading)
-{
-	UTF8HTML u2html;
-	SWBuf newtext;
-	char buf[12];
-	char *retval = NULL;	
-	SWModule *module = sw.text_mgr->Modules[module_name];
-	
-	sprintf(buf, "%i", pvHeading);  
-	module->SetKey(key);	
-	module->RenderText();                 	
-	SWBuf preverseHeading = module->getEntryAttributes()
-					   ["Heading"]["Preverse"][buf].c_str();
-	u2html.processText(preverseHeading);
-	if (preverseHeading.length()) {  
-		retval = strdup(preverseHeading.c_str());
-	}  
-	return retval;	
-}
-
-
+*/
 /******************************************************************************
  * Name
  *   backend_get_footnote_type
@@ -262,7 +226,7 @@ char *backend_get_preverse_header(char * module_name, char * key, int pvHeading)
  *   char*
  */
 
-const char *backend_get_footnote_type(char *module_name,
+/*const char *backend_get_footnote_type(char *module_name,
 				char *key, char *note)
 {
 	SWModule *module = sw.text_mgr->Modules[module_name];
@@ -272,7 +236,7 @@ const char *backend_get_footnote_type(char *module_name,
 	
 	return module->getEntryAttributes()["Footnote"][note]["type"].c_str();
 }
-
+*/
 /******************************************************************************
  * Name
  *   backend_get_footnote_type
@@ -290,7 +254,7 @@ const char *backend_get_footnote_type(char *module_name,
  *   char*
  */
 
-char *backend_get_crossref(char *module_name, char *key, char *note)
+/*char *backend_get_crossref(char *module_name, char *key, char *note)
 {
 	SWModule *module = sw.text_mgr->Modules[module_name];
 	module->Error();
@@ -299,7 +263,7 @@ char *backend_get_crossref(char *module_name, char *key, char *note)
 	
 	return strdup(module->getEntryAttributes()["Footnote"][note]["refList"].c_str());
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -318,7 +282,7 @@ char *backend_get_crossref(char *module_name, char *key, char *note)
  *   char*
  */
 
-char *backend_get_footnote_body(char *module_name,
+/*char *backend_get_footnote_body(char *module_name,
 				char *key, char *note)
 {
 	SWKey *keybuf;
@@ -336,11 +300,11 @@ char *backend_get_footnote_body(char *module_name,
 	SWBuf body = module->getEntryAttributes()
 					["Footnote"][note]["body"].c_str();	
 	if (type == "crossReference") {
-/*		SWBuf refList = module->getEntryAttributes()["Footnote"][note]["refList"].c_str();
+		SWBuf refList = module->getEntryAttributes()["Footnote"][note]["refList"].c_str();
 		//tmpVerseList = DefaultVSKey->ParseVerseList(refList.c_str(), *DefaultVSKey);
 		if (tmpVerseList.Count())
 			printf("%s\n", refList.c_str());
-			return strdup(refList.c_str());*/
+			return strdup(refList.c_str());
 		module->stripFilter(body, keybuf);
 		
 	} else {
@@ -353,7 +317,7 @@ char *backend_get_footnote_body(char *module_name,
 	
 	return NULL;
 }
-
+*/
 
 /*
 char *backend_get_footnote_body_new(char *module_name,
@@ -409,7 +373,7 @@ char *backend_get_footnote_body_new(char *module_name,
  *   int
  */
 
-int backend_get_display_level(char *module_name)
+/*int backend_get_display_level(char *module_name)
 {
 	char *buf = NULL;
 	buf = (char *) sw.main_mgr->Modules[module_name]->
@@ -419,7 +383,7 @@ int backend_get_display_level(char *module_name)
 	else
 		return 0;
 }
-
+*/
 /******************************************************************************
  * Name
  *   
@@ -436,7 +400,7 @@ int backend_get_display_level(char *module_name)
  *   int
  */
 
-int backend_is_module_rtl(char *mod_name)
+/*int backend_is_module_rtl(char *mod_name)
 {
 	char *direction = NULL;
 
@@ -447,11 +411,9 @@ int backend_is_module_rtl(char *mod_name)
 	if (direction)
 		if (!strcmp(direction, "RtoL"))
 			return 1;
-
 	return 0;
-
 }
-
+*/
 
 
 /******************************************************************************
@@ -506,7 +468,7 @@ char *backend_module_name_from_description(char *mod_desc)
  *   int
  */
 
-int backend_do_module_search(char *module_name,
+/*int backend_do_module_search(char *module_name,
 			     const char *search_string, int search_type,
 			     int search_params)
 {
@@ -522,12 +484,12 @@ int backend_do_module_search(char *module_name,
 					search_type,
 					search_params,
 					current_scope, 0,
-					&search_percent_update,
+					&main_search_percent_update,
 					(void *) &progressunits);
 	search_scope_list = results;
 	return results.Count();
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -545,7 +507,7 @@ int backend_do_module_search(char *module_name,
  *   char *
  */
 
-char *backend_get_search_results_text(char *mod_name, char *key)
+/*char *backend_get_search_results_text(char *mod_name, char *key)
 {
 	SWModule *mod = sw.results->Modules[mod_name];
 
@@ -555,7 +517,7 @@ char *backend_get_search_results_text(char *mod_name, char *key)
 	}
 	return NULL;
 }
-
+*/
 
 
 /******************************************************************************
@@ -575,10 +537,10 @@ char *backend_get_search_results_text(char *mod_name, char *key)
  */
 
 
-void backend_get_module_lists(MOD_LISTS * mods)
+/*void backend_get_module_lists(MOD_LISTS * mods)
 {
 	backend->init_lists(mods);
-	/*	ModMap::iterator it;
+		ModMap::iterator it;
 	for (it = sw.module_mgr->Modules.begin(); it != 
 				sw.module_mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
@@ -633,9 +595,9 @@ void backend_get_module_lists(MOD_LISTS * mods)
 		}
 		
 	}	
-*/	
+	
 }
-
+*/
 /******************************************************************************
  * Name
  *  backend_is_personal_comment_module
@@ -652,7 +614,7 @@ void backend_get_module_lists(MOD_LISTS * mods)
  *   int
  */
 
-int backend_is_personal_comment_module(char *module_name)
+/*int backend_is_personal_comment_module(char *module_name)
 {
 	SWModule *module = sw.main_mgr->Modules[module_name];
 	if (!module)
@@ -664,7 +626,7 @@ int backend_is_personal_comment_module(char *module_name)
 	return FALSE;
 
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -682,7 +644,7 @@ int backend_is_personal_comment_module(char *module_name)
  *   char *
  */
 
-char *backend_get_module_description(char *module_name)
+/*char *backend_get_module_description(char *module_name)
 {
 	ModMap::iterator it;	//-- iteratior
 
@@ -692,7 +654,7 @@ char *backend_get_module_description(char *module_name)
 	}
 	return NULL;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -709,7 +671,7 @@ char *backend_get_module_description(char *module_name)
  * Return value
  *   int
  */
-
+/*
 int backend_module_is_locked(char *mod_name)
 {
 	char *tmpbuf = (char *) sw.main_mgr->Modules[mod_name]->
@@ -723,7 +685,7 @@ int backend_module_is_locked(char *mod_name)
 	}
 
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -741,12 +703,12 @@ int backend_module_is_locked(char *mod_name)
  *   char *
  */
 
-char *backend_get_cipher_key(char *mod_name)
+/*char *backend_get_cipher_key(char *mod_name)
 {
 	return strdup((char *) sw.main_mgr->Modules[mod_name]->
 		      getConfigEntry("CipherKey"));
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -763,7 +725,7 @@ char *backend_get_cipher_key(char *mod_name)
  * Return value
  *   int
  */
-
+/*
 int backend_has_cipher_tag(char *mod_name)
 {
 	char *tmpbuf = (char *) sw.main_mgr->Modules[mod_name]->
@@ -773,16 +735,16 @@ int backend_has_cipher_tag(char *mod_name)
 	else
 		return 0;
 }
-
+*/
 
 /******************************************************************************
  * Name
- *   backend_check_for_module
+ *   backend_main_is_module
  *
  * Synopsis
  *   #include "sword.h"
  *
- *   int backend_check_for_module(char * mod_name)
+ *   int backend_main_is_module(char * mod_name)
  *
  * Description
  *    check for presents of a module by name
@@ -790,8 +752,8 @@ int backend_has_cipher_tag(char *mod_name)
  * Return value
  *   int
  */
-
-int backend_check_for_module(const char *mod_name)
+/*
+int backend_main_is_module(const char *mod_name)
 {
 	ModMap::iterator it;
 	
@@ -801,7 +763,7 @@ int backend_check_for_module(const char *mod_name)
 	}
 	return 0;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -819,12 +781,12 @@ int backend_check_for_module(const char *mod_name)
  *   gchar *
  */
 
-char *backend_get_mod_about_info(char *modname)
+/*char *backend_get_mod_about_info(char *modname)
 {
 	return g_strdup((char *) sw.main_mgr->Modules[modname]->
 			getConfigEntry("About"));
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -842,7 +804,7 @@ char *backend_get_mod_about_info(char *modname)
  *   int
  */
 
-int backend_get_module_page(const char *module_name,
+/*int backend_get_module_page(const char *module_name,
 			    const char *module_type)
 {
 	ModMap::iterator it;
@@ -863,16 +825,16 @@ int backend_get_module_page(const char *module_name,
 	}
 	return -1;
 }
-
+*/
 
 /******************************************************************************
  * Name
- *   backend_get_mod_type
+ *   backend_main_get_mod_type
  *
  * Synopsis
  *   #include "backend/module.hh"
  *
- *   int backend_get_mod_type(char * mod_name)
+ *   int backend_main_get_mod_type(char * mod_name)
  *
  * Description
  *   we come here to get module type - 
@@ -881,8 +843,8 @@ int backend_get_module_page(const char *module_name,
  * Return value
  *   int
  */
-
-int backend_get_mod_type(char *mod_name)
+/*
+int backend_main_get_mod_type(char *mod_name)
 {
 
 	ModMap::iterator it;	//-- iteratior
@@ -911,7 +873,7 @@ int backend_get_mod_type(char *mod_name)
 	}
 	return -1;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -929,7 +891,7 @@ int backend_get_mod_type(char *mod_name)
  *   char *
  */
 
-char *backend_get_module_text(int manager, char *module_name, char *key)
+/*char *backend_get_module_text(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
 	bool if_true = false;
@@ -975,18 +937,17 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
 	}
 	return NULL;
 }
-
-
+*/
 
 
 /******************************************************************************
  * Name
- *   backend_get_striptext
+ *   backend_main_get_striptext
  *
  * Synopsis
  *   #include "backend/module.hh"
  *
- *   char *backend_get_striptext(char *module_name, char *key)	
+ *   char *backend_main_get_striptext(char *module_name, char *key)	
  *
  * Description
  *   return formated text for a verse
@@ -994,8 +955,8 @@ char *backend_get_module_text(int manager, char *module_name, char *key)
  * Return value
  *   char *
  */
-
-char *backend_get_striptext(int manager, char *module_name, char *key)
+/*
+char *backend_main_get_striptext(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
 	switch (manager) {
@@ -1019,17 +980,17 @@ char *backend_get_striptext(int manager, char *module_name, char *key)
 		return NULL;
 	return strdup((char *) mod->StripText());
 }
-
+*/
 
 
 /******************************************************************************
  * Name
- *  backend_check_for_global_option
+ *  backend_main_check_for_global_option
  *
  * Synopsis
  *   #include "backend/module.hh"
  *   
- *   int backend_check_for_global_option(int mod_num, char *option)	
+ *   int backend_main_check_for_global_option(int mod_num, char *option)	
  *
  * Description
  *   returns true is module has option
@@ -1037,8 +998,8 @@ char *backend_get_striptext(int manager, char *module_name, char *key)
  * Return value
  *   int
  */
-
-int backend_check_for_global_option(char *mod_name, char *option)
+/*
+int backend_main_check_for_global_option(char *mod_name, char *option)
 {
 	SWModule *mod = sw.main_mgr->Modules[mod_name];
 	if (mod)
@@ -1047,7 +1008,7 @@ int backend_check_for_global_option(char *mod_name, char *option)
 	else
 		return 0;
 }
-
+*/
 /******************************************************************************
  * Name
  *  backend_nav_commentary
@@ -1065,7 +1026,7 @@ int backend_check_for_global_option(char *mod_name, char *option)
  *   char *
  */
 
-char *backend_nav_module(int manager, char *module_name, int direction)
+/*char *backend_nav_module(int manager, char *module_name, int direction)
 {
 	SWModule *mod = NULL;
 	switch (manager) {
@@ -1103,7 +1064,7 @@ char *backend_nav_module(int manager, char *module_name, int direction)
 	}
 	return NULL;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -1121,7 +1082,7 @@ char *backend_nav_module(int manager, char *module_name, int direction)
  *   char *
  */
 
-char *backend_get_chap_heading(int manager, char *module_name,
+/*char *backend_get_chap_heading(int manager, char *module_name,
 			       char *key)
 {
 	char newkey[256];
@@ -1166,7 +1127,7 @@ char *backend_get_chap_heading(int manager, char *module_name,
 	}
 	return NULL;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -1184,7 +1145,7 @@ char *backend_get_chap_heading(int manager, char *module_name,
  *   char *
  */
 
-char *backend_get_book_heading(int manager, char *module_name,
+/*char *backend_get_book_heading(int manager, char *module_name,
 			       char *key)
 {
 	char newkey[256];
@@ -1225,7 +1186,7 @@ char *backend_get_book_heading(int manager, char *module_name,
 	}
 	return NULL;
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -1243,7 +1204,7 @@ char *backend_get_book_heading(int manager, char *module_name,
  *   void
  */
 
-void backend_set_commentary_key(char *mod_name, char *key)
+/*void backend_set_commentary_key(char *mod_name, char *key)
 {
 	sw.comm_mod = sw.display_mgr->Modules[mod_name];
 	if (sw.comm_mod) {
@@ -1251,7 +1212,7 @@ void backend_set_commentary_key(char *mod_name, char *key)
 		sw.comm_mod->SetKey(versekey);
 	}
 }
-
+*/
 
 
 /******************************************************************************
@@ -1270,7 +1231,7 @@ void backend_set_commentary_key(char *mod_name, char *key)
  *   char *
  */
 
-char *backend_get_commentary_key(char *mod_name)
+/*char *backend_get_commentary_key(char *mod_name)
 {
 	SWModule *mod = sw.display_mgr->Modules[mod_name];
 	if (mod) {
@@ -1280,7 +1241,7 @@ char *backend_get_commentary_key(char *mod_name)
 	}
 	return NULL;
 }
-
+*/
 /******************************************************************************
  * Name
  *   backend_get_commentary_text
@@ -1297,7 +1258,7 @@ char *backend_get_commentary_key(char *mod_name)
  *   char *
  */
 
-char *backend_get_commentary_text(char *mod_name, char *key)
+/*char *backend_get_commentary_text(char *mod_name, char *key)
 {
 	SWModule *mod = sw.comm_mgr->Modules[mod_name];
 	gsize bytes_read;
@@ -1329,7 +1290,7 @@ char *backend_get_commentary_text(char *mod_name, char *key)
 	}
 	return NULL;
 }
-
+*/
 /******************************************************************************
  * Name
  *  backend_get_key_from_module
@@ -1345,7 +1306,7 @@ char *backend_get_commentary_text(char *mod_name, char *key)
  * Return value
  *   char *
  */
-
+/*
 char *backend_get_key_from_module(int manager, char *module_name)
 {
 	SWModule *mod = NULL;
@@ -1379,12 +1340,13 @@ char *backend_get_key_from_module(int manager, char *module_name)
 	}
 	return NULL;
 }
-
-char *backend_get_book_key(void)
+*/
+/*char *backend_get_book_key(void)
 {
 	sw.gbs_mod->KeyText();;
 	return strdup(sw.gbs_mod->KeyText());
 }
+*/
 /******************************************************************************
  * Name
  *  backend_set_module
@@ -1401,7 +1363,7 @@ char *backend_get_book_key(void)
  *   int
  */
 
-int backend_set_module(int manager, char *module_name)
+/*int backend_set_module(int manager, char *module_name)
 {
 	switch (manager) {
 	case TEXT_MGR:
@@ -1432,264 +1394,4 @@ int backend_set_module(int manager, char *module_name)
 	}
 	return 0;
 }
-
-
-/******************************************************************************
- * Name
- *   backend_set_percomm_key
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   void backend_set_percomm_key(char * key)	
- *
- * Description
- *   set commentary key
- *
- * Return value
- *   void
- */
-
-void backend_set_percomm_key(char *key)
-{
-	if (sw.percom_mod) {
-		sw.percom_mod->SetKey(key);
-	}
-}
-
-
-
-
-/******************************************************************************
- * Name
- *   backend_get_percomm_text
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   char *backend_get_percomm_text(char *key)	
- *
- * Description
- *   
- *
- * Return value
- *   char *
- */
-
-char *backend_get_percomm_text(char *key)
-{
-	if (sw.percom_mod) {
-		sw.percom_mod->SetKey(key);
-		return strdup((char *) sw.percom_mod->getRawEntry());
-	}
-	return NULL;
-}
-
-
-/******************************************************************************
- * Name
- *   backend_init_language_map
- *
- * Synopsis
- *   #include "backend/module.hh"
- *
- *   void backend_init_language_map(void)	
- *
- * Description
- *   maps language abbreviation to language name - form Bibletime-1.3
- *
- * Return value
- *   void
- */
-
-void backend_init_language_map(void)
-{
-	/* --list form Bibletime-1.3-- */
-/*	//languageMap[SWBuf("aa")] = SWBuf("Afar");
-	//languageMap[SWBuf("ab")] = SWBuf("Abkhazian");
-	//languageMap[SWBuf("ae")] = SWBuf("Avestan");
-	languageMap[SWBuf("af")] = SWBuf(_("Afrikaans"));
-	//languageMap[SWBuf("am")] = SWBuf("Amharic");
-	languageMap[SWBuf("ang")] = SWBuf(_("English, Old (ca.450-1100)"));
-	languageMap[SWBuf("ar")] = SWBuf(_("Arabic"));
-	//languageMap[SWBuf("as")] = SWBuf("Assamese");
-	//languageMap[SWBuf("ay")] = SWBuf("Aymara");
-	languageMap[SWBuf("az")] = SWBuf(_("Azerbaijani"));
-	//languageMap[SWBuf("ba")] = SWBuf("Bashkir");
-	languageMap[SWBuf("be")] = SWBuf(_("Belarusian"));
-	languageMap[SWBuf("bg")] = SWBuf(_("Bulgarian"));
-	//languageMap[SWBuf("bh")] = SWBuf("Bihari");
-	//languageMap[SWBuf("bi")] = SWBuf("Bislama");
-	//languageMap[SWBuf("bn")] = SWBuf("Bengali");
-	//languageMap[SWBuf("bo")] = SWBuf("Tibetan");
-	languageMap[SWBuf("br")] = SWBuf(_("Breton"));
-	languageMap[SWBuf("bs")] = SWBuf(_("Bosnian"));
-	languageMap[SWBuf("ca")] = SWBuf(_("Catalan"));
-	//languageMap[SWBuf("ce")] = SWBuf("Chechen");
-	languageMap[SWBuf("ceb")] = SWBuf(_("Cebuano"));
-	//languageMap[SWBuf("ch")] = SWBuf("Chamorro");
-	//languageMap[SWBuf("co")] = SWBuf("Corsican");
-	languageMap[SWBuf("cop")] = SWBuf(_("Coptic"));
-	languageMap[SWBuf("cs")] = SWBuf(_("Czech"));
-	languageMap[SWBuf("cu")] = SWBuf(_("Church Slavic"));
-	//languageMap[SWBuf("cv")] = SWBuf("Chuvash");
-	languageMap[SWBuf("cy")] = SWBuf(_("Welsh"));
-	languageMap[SWBuf("da")] = SWBuf(_("Danish"));
-	languageMap[SWBuf("de")] = SWBuf(_("German"));
-	//languageMap[SWBuf("dz")] = SWBuf("Dzongkha");
-	languageMap[SWBuf("el")] = SWBuf(_("Greek, Modern (1453-)"));
-	languageMap[SWBuf("en")] = SWBuf(_("English"));
-	languageMap[SWBuf("en_US")] = SWBuf(_("American English"));
-	languageMap[SWBuf("enm")] =
-	    SWBuf(_("English, Middle (1100-1500)"));
-	languageMap[SWBuf("eo")] = SWBuf(_("Esperanto"));
-	languageMap[SWBuf("es")] = SWBuf(_("Spanish"));
-	languageMap[SWBuf("et")] = SWBuf(_("Estonian"));
-	languageMap[SWBuf("eu")] = SWBuf(_("Basque"));
-	//languageMap[SWBuf("fa")] = SWBuf("Persian");
-	languageMap[SWBuf("fi")] = SWBuf(_("Finnish"));
-	//languageMap[SWBuf("fj")] = SWBuf("Fijian");
-	//languageMap[SWBuf("fo")] = SWBuf("Faroese");
-	languageMap[SWBuf("fr")] = SWBuf(_("French"));
-	languageMap[SWBuf("fy")] = SWBuf(_("Frisian"));
-	languageMap[SWBuf("ga")] = SWBuf(_("Irish"));
-	languageMap[SWBuf("gd")] = SWBuf(_("Gaelic (Scots)"));
-	//languageMap[SWBuf("gl")] = SWBuf("Gallegan");
-	//languageMap[SWBuf("gn")] = SWBuf("Guarani");
-	//languageMap[SWBuf("gn")] = SWBuf("Gujarati");
-	languageMap[SWBuf("got")] = SWBuf(_("Gothic"));
-	languageMap[SWBuf("gv")] = SWBuf(_("Manx"));
-	languageMap[SWBuf("grc")] = SWBuf(_("Greek, Ancient (to 1453)"));
-	languageMap[SWBuf("he")] = SWBuf(_("Hebrew"));
-	languageMap[SWBuf("haw")] = SWBuf(_("Hawaiian"));
-	//languageMap[SWBuf("hi")] = SWBuf("Hindi");
-	//languageMap[SWBuf("ho")] = SWBuf("Hiri Motu");
-	//languageMap[SWBuf("hr")] = SWBuf("Croatian");
-	languageMap[SWBuf("hu")] = SWBuf(_("Hungarian"));
-	languageMap[SWBuf("hy")] = SWBuf(_("Armenian"));
-	//languageMap[SWBuf("hz")] = SWBuf("Herero");
-	//languageMap[SWBuf("ia")] = SWBuf("Interlingua");
-	languageMap[SWBuf("id")] = SWBuf(_("Indonesian"));
-	//languageMap[SWBuf("ie")] = SWBuf("Interlingue");
-	//languageMap[SWBuf("ik")] = SWBuf("Inupiaq");
-	languageMap[SWBuf("is")] = SWBuf(_("Icelandic"));
-	languageMap[SWBuf("it")] = SWBuf(_("Italian"));
-	//languageMap[SWBuf("iu")] = SWBuf("Inuktitut");
-	languageMap[SWBuf("ja")] = SWBuf(_("Japanese"));
-	languageMap[SWBuf("ka")] = SWBuf(_("Georgian"));
-	//languageMap[SWBuf("ki")] = SWBuf("Kikuyu");
-	//languageMap[SWBuf("kj")] = SWBuf("Kuanyama");
-	//languageMap[SWBuf("kk")] = SWBuf("Kazakh");
-	//languageMap[SWBuf("kl")] = SWBuf("Kalaallisut");
-	//languageMap[SWBuf("km")] = SWBuf("Khmer");
-	//languageMap[SWBuf("kn")] = SWBuf("Kannada");
-	languageMap[SWBuf("ko")] = SWBuf(_("Korean"));
-	//languageMap[SWBuf("ks")] = SWBuf("Kashmiri");
-	languageMap[SWBuf("ku")] = SWBuf(_("Kurdish"));
-	//languageMap[SWBuf("kv")] = SWBuf("Komi");
-	//languageMap[SWBuf("kw")] = SWBuf("Cornish");
-	languageMap[SWBuf("ky")] = SWBuf(_("Kirghiz"));
-	languageMap[SWBuf("la")] = SWBuf(_("Latin"));
-	//languageMap[SWBuf("lb")] = SWBuf("Letzeburgesch");
-	//languageMap[SWBuf("ln")] = SWBuf("Lingala");
-	//languageMap[SWBuf("lo")] = SWBuf("Lao");
-	//languageMap[SWBuf("lt")] = SWBuf("Lithuanian");
-	languageMap[SWBuf("lv")] = SWBuf(_("Latvian"));
-	//languageMap[SWBuf("mg")] = SWBuf("Malagasy");
-	//languageMap[SWBuf("mh")] = SWBuf("Marshall");
-	languageMap[SWBuf("mi")] = SWBuf(_("Maori"));
-	languageMap[SWBuf("mk")] = SWBuf(_("Macedonian"));
-	//languageMap[SWBuf("ml")] = SWBuf("Malayalam");
-	//languageMap[SWBuf("mn")] = SWBuf("Mongolian");
-	//languageMap[SWBuf("mo")] = SWBuf("Moldavian");
-	//languageMap[SWBuf("mr")] = SWBuf("Marathi");
-	languageMap[SWBuf("ms")] = SWBuf(_("Malay"));
-	languageMap[SWBuf("mt")] = SWBuf(_("Maltese"));
-	//languageMap[SWBuf("my")] = SWBuf("Burmese");
-	//languageMap[SWBuf("na")] = SWBuf("Nauru");
-	//languageMap[SWBuf("nb")] = SWBuf("Norwegian Bokm");
-	//languageMap[SWBuf("nd")] = SWBuf("Ndebele, North");
-	languageMap[SWBuf("nds")] = SWBuf(_("Low German; Low Saxon"));
-	//languageMap[SWBuf("ne")] = SWBuf("Nepali");
-	//languageMap[SWBuf("ng")] = SWBuf("Ndonga");
-	languageMap[SWBuf("nl")] = SWBuf(_("Dutch"));
-	//languageMap[SWBuf("nn")] = SWBuf("Norwegian Nynorsk");
-	languageMap[SWBuf("no")] = SWBuf(_("Norwegian"));
-	//languageMap[SWBuf("nr")] = SWBuf("Ndebele, South");
-	//languageMap[SWBuf("nv")] = SWBuf("Navajo");
-	//languageMap[SWBuf("ny")] = SWBuf("Chichewa; Nyanja");
-	//languageMap[SWBuf("oc")] = SWBuf("Occitan (post 1500); Proven");
-	//languageMap[SWBuf("om")] = SWBuf("Oromo");
-	//languageMap[SWBuf("or")] = SWBuf("Oriya");
-	//languageMap[SWBuf("os")] = SWBuf("Ossetian; Ossetic");
-	//languageMap[SWBuf("pa")] = SWBuf("Panjabi");
-	languageMap[SWBuf("pap")] = SWBuf(_("Papiamento"));
-	//languageMap[SWBuf("pi")] = SWBuf("Pali");
-	languageMap[SWBuf("pl")] = SWBuf(_("Polish"));
-	//languageMap[SWBuf("ps")] = SWBuf("Pushto");
-	languageMap[SWBuf("pt")] = SWBuf(_("Portuguese"));
-	//languageMap[SWBuf("qu")] = SWBuf("Quechua");
-	//languageMap[SWBuf("rm")] = SWBuf("Raeto-Romance");
-	//languageMap[SWBuf("rn")] = SWBuf("Rundi");
-	languageMap[SWBuf("ro")] = SWBuf(_("Romanian"));
-	languageMap[SWBuf("ru")] = SWBuf(_("Russian"));
-	//languageMap[SWBuf("rw")] = SWBuf("Kinyarwanda");
-	//languageMap[SWBuf("sa")] = SWBuf("Sanskrit");
-	//languageMap[SWBuf("sc")] = SWBuf("Sardinian");
-	languageMap[SWBuf("sco")] = SWBuf(_("Scots"));
-	//languageMap[SWBuf("sd")] = SWBuf("Sindhi");
-	//languageMap[SWBuf("se")] = SWBuf("Northern Sami");
-	//languageMap[SWBuf("sg")] = SWBuf("Sango");
-	//languageMap[SWBuf("si")] = SWBuf("Sinhalese");
-	languageMap[SWBuf("sk")] = SWBuf(_("Slovak"));
-	languageMap[SWBuf("sl")] = SWBuf(_("Slovenian"));
-	//languageMap[SWBuf("sm")] = SWBuf("Samoan");
-	//languageMap[SWBuf("sn")] = SWBuf("Shona");
-	languageMap[SWBuf("so")] = SWBuf(_("Somali"));
-	languageMap[SWBuf("sq")] = SWBuf(_("Albanian"));
-	//languageMap[SWBuf("sr")] = SWBuf("Serbian");
-	//languageMap[SWBuf("ss")] = SWBuf("Swati");
-	//languageMap[SWBuf("st")] = SWBuf("Sotho, Southern");
-	//languageMap[SWBuf("su")] = SWBuf("Sundanese");
-	languageMap[SWBuf("sv")] = SWBuf(_("Swedish"));
-	languageMap[SWBuf("sw")] = SWBuf(_("Swahili"));
-	languageMap[SWBuf("syr")] = SWBuf(_("Syriac"));
-	languageMap[SWBuf("ta")] = SWBuf(_("Tamil"));
-	//languageMap[SWBuf("te")] = SWBuf("Telugu");
-	//languageMap[SWBuf("tg")] = SWBuf("Tajik");
-	languageMap[SWBuf("th")] = SWBuf(_("Thai"));
-	//languageMap[SWBuf("tk")] = SWBuf("Turkmen");
-	languageMap[SWBuf("tl")] = SWBuf(_("Tagalog"));
-	languageMap[SWBuf("tn")] = SWBuf(_("Tswana"));
-	languageMap[SWBuf("tr")] = SWBuf(_("Turkish"));
-	//languageMap[SWBuf("ts")] = SWBuf("Tsonga");
-	//languageMap[SWBuf("tt")] = SWBuf("Tatar");
-	//languageMap[SWBuf("tw")] = SWBuf("Twi");
-	languageMap[SWBuf("ty")] = SWBuf(_("Tahitian"));
-	//languageMap[SWBuf("ug")] = SWBuf("Uighur");
-	languageMap[SWBuf("uk")] = SWBuf(_("Ukrainian"));
-	//languageMap[SWBuf("ur")] = SWBuf("Urdu");
-	//languageMap[SWBuf("uz")] = SWBuf("Uzbek");
-	languageMap[SWBuf("vi")] = SWBuf(_("Vietnamese"));
-	//languageMap[SWBuf("vo")] = SWBuf("Volapük");
-	//languageMap[SWBuf("wo")] = SWBuf("Wolof");
-	languageMap[SWBuf("xh")] = SWBuf(_("Xhosa"));
-	languageMap[SWBuf("x-E-BAR")] = SWBuf(_("Bavarian"));
-	languageMap[SWBuf("x-E-GSW")] = SWBuf(_("Alemannisch"));
-	languageMap[SWBuf("x-E-HAT")] = SWBuf(_("Haitian Creole French"));
-	languageMap[SWBuf("x-E-ITZ")] = SWBuf(_("Itz"));
-	languageMap[SWBuf("x-E-JIV")] = SWBuf(_("Shuar"));
-	languageMap[SWBuf("x-E-KEK")] = SWBuf(_("Kekchí"));
-	languageMap[SWBuf("x-E-LMO")] = SWBuf(_("Lombard"));
-	languageMap[SWBuf("x-E-MKJ")] = SWBuf(_("Macedonian"));
-	languageMap[SWBuf("x-E-PDG")] = SWBuf(_("Tok Pisin"));
-	languageMap[SWBuf("x-E-PPK")] = SWBuf(_("Uma"));
-	languageMap[SWBuf("x-E-RMY")] = SWBuf(_("Romani, Vlax"));
-	languageMap[SWBuf("x-E-SAJ")] = SWBuf(_("Sango"));
-	languageMap[SWBuf("x-E-SRN")] = SWBuf(_("Sranan"));
-	//languageMap[SWBuf("yi")] = SWBuf("Yiddish");
-	//languageMap[SWBuf("za")] = SWBuf("Zhuang");
-	languageMap[SWBuf("zh")] = SWBuf(_("Chinese"));
-	languageMap[SWBuf("zu")] = SWBuf(_("Zulu"));
-	*/
-}
+*/

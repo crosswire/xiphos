@@ -36,7 +36,8 @@ void main_create_pixbufs(void);
 void main_load_module_tree(GtkWidget * tree);
 void main_add_mod_tree_columns(GtkTreeView * tree);
 void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected);
-	
+gboolean main_sidebar_display_dictlex(char *mod_name, char *key);
+
 #ifdef __cplusplus
 }
 #endif

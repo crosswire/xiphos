@@ -34,7 +34,7 @@ using std::list;
 using namespace sword;
 	
 
-class SwordMain {
+class BackEnd {
 	SWMgr *main_mgr;
 	//SWMgr *search_mgr;
 //	SWMgr *module_mgr;
@@ -61,11 +61,13 @@ public:
 	const char *version;	
 	SWDisplay *commDisplay;	
 	SWDisplay *dictDisplay;
-	SWDisplay *textDisplay;
+	SWDisplay *textDisplay;	
+	SWDisplay *entryDisplay;		
+	SWDisplay *chapDisplay;
 
-	SwordMain();
-	~SwordMain();
-	void init_SWORD();
+	BackEnd();
+	~BackEnd();
+	void init_SWORD(int gsType);
 	void init_lists(MOD_LISTS * mods);
 	void init_language_map(void);
 	void setup_displays(void);
@@ -73,7 +75,11 @@ public:
 	GList *fill_Bible_books(int testament);
 
 	void get_module_options(GList * options);
+	int has_global_option(char *mod_name, char *option);
+	char *get_config_entry(char * module_name, char * entry);
 	int is_Bible_key(const char * list, char * current_key);
+	char *get_render_text(const char *module_name, const char *key);
+	char *get_strip_text(const char *module_name, const char *key);
 	char *get_valid_key(const char *key);
 	char *key_get_book(const char *key);
 	int key_get_chapter(const char *key);
@@ -82,12 +88,16 @@ public:
 	
 	
 	char *get_module_key(void);
+	void save_entry(const char * entry);
+	void delete_entry(void);
 	int set_module_key(const char *module_name, const char *key);
+	int set_key(const char *key);
 	int is_module(const char *mod_name);
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
 	
 	int module_type(char *mod_name);
+	char *module_description(char *mod_name);
 	const char *module_get_language(const char *module_name);
 	int module_has_testament(const char * module_name,  int testament);
 	const char *get_language_map(const char *language);
@@ -105,6 +115,6 @@ public:
 	
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
 };
-extern SwordMain *backend;
+extern BackEnd *backend;
 
 #endif /* _SWORD_MAIN_HH_ */

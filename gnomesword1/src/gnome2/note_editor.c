@@ -515,7 +515,7 @@ void gui_create_note_editor(DIALOG_DATA * d)
 	gtk_object_set_data(GTK_OBJECT(d->dialog), "d->dialog",
 			    d->dialog);
 	gtk_window_set_title(GTK_WINDOW(d->dialog),
-			     get_module_description(d->mod_name));
+			     main_get_module_description(d->mod_name));
 	gtk_window_set_policy(GTK_WINDOW(d->dialog), TRUE, TRUE,
 			      FALSE);
 	gtk_widget_set_size_request(d->dialog, 590, 380);

@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gui/gtkhtml_display.h"
+//#include "gui/gtkhtml_display.h"
 #include "gui/display_info.h"
 
 #include "main/sword.h"
@@ -59,9 +59,9 @@ void gui_display_mod_and_key(gchar * mod_name, gchar * key)
 {
 	gchar *text = NULL;
 
-	text = get_module_text(4, mod_name, key);
+	text = main_get_rendered_text(mod_name, key);
 	if (text) {
-		entry_display(html_widget, mod_name, text, key, TRUE);
+		main_entry_display(html_widget, mod_name, text, key, TRUE);
 		free(text);
 	}
 }

@@ -86,26 +86,7 @@ char *get_bibletext_striptext(char *mod_name, char *key)
 	return backend_get_bibletext_striptext(mod_name, key);
 }
 */
-/******************************************************************************
- * Name
- *  check_for_global_option
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *  	gint check_for_global_option(gchar * mod_name, gchar * option)
- *
- * Description
- *    get global options for a module
- *
- * Return value
- *   gint
- */
 
-gint check_for_global_option(gchar * mod_name, gchar * option)
-{
-	return backend_check_for_global_option(mod_name, option);
-}
 
 /******************************************************************************
  * Name
@@ -208,27 +189,6 @@ int load_module_options(char * modName, char * option)
 void set_text_global_option(gchar * option, gchar * choice)
 {
 	backend_set_global_option(0, option, choice);
-}
-
-/******************************************************************************
- * Name
- *  get_parallel_module_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   char *get_parallel_module_text(char * mod_name, char * tmpkey)	
- *
- * Description
- *    
- *
- * Return value
- *   char*
- */ 
-
-char *get_parallel_module_text(char * mod_name, char * tmpkey)
-{
-	return backend_get_module_text(8, mod_name, tmpkey);
 }
 
 /******************************************************************************

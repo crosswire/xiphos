@@ -28,7 +28,7 @@
 
 
 #include "gui/gnomesword.h"
-#include "gui/gtkhtml_display.h"
+//#include "gui/gtkhtml_display.h"
 #include "gui/tabbed_browser.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
@@ -554,7 +554,7 @@ void gui_open_module_in_new_tab(gchar *module)
 		return;
 	
 	pt = g_new0(PASSAGE_TAB_INFO, 1);
-	module_type = get_mod_type(module);
+	module_type = main_get_mod_type(module);
 	
 	switch (module_type) {
 	case -1:

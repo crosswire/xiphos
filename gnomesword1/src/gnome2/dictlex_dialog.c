@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gui/gtkhtml_display.h"
+//#include "gui/gtkhtml_display.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
@@ -76,7 +76,7 @@ void gui_lookup_dictlex_dialog_selection
 	dict_key = gui_get_word_or_selection(cur_dlg->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(mod_name,
+			main_sidebar_display_dictlex(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
@@ -387,7 +387,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA *dlg)
 	gtk_object_set_data(GTK_OBJECT(dlg->dialog), "dlg->dialog",
 			    dlg->dialog);
 	gtk_window_set_title (GTK_WINDOW (dlg->dialog), 
-			get_module_description(dlg->mod_name));
+			main_get_module_description(dlg->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 465, 275);
 	gtk_window_set_policy(GTK_WINDOW(dlg->dialog), TRUE, TRUE,
 			      FALSE);
