@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=730
-1=721
-2=459
-3=31
-4=153
-5=83
-6=60
-7=62
+0=43
+1=857
+2=873
+3=43
+4=533
+5=40
+6=1
+7=1
 8=42
-9=27
+9=50
 10=35
 11=1
 12=610
@@ -45,35 +45,29 @@ ShowLocals=true
 16=
 17=
 
-[breakpoints]
-0=3,,1,0,0,,editor_menu.c,698,2,0,edit_bar_activate,,1041110734,
-
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/editor_menu.c
-1=/home/terry/Projects/gnomesword1/src/gnome/studypad.c
-2=/home/terry/Projects/gnomesword1/src/gnome/main_menu.c
-3=/home/terry/Projects/gnomesword1/src/gui/studypad.h
-4=/home/terry/Projects/gnomesword1/src/gnome/editor.c
+0=/home/terry/Projects/gnomesword1/src/gui/commentary_dialog.h
+1=/home/terry/Projects/gnomesword1/src/gnome/commentary_dialog.c
 
 [replace_text]
-0=vbox
-1=toolbars_menu_accels
-2=toolbars_menu
-3=toolbars
-4=ecd->toolbar_edit
-5=ecd
-6=dialog->dialog
-7=cbtnShowGBSTabs
+0=vc->
+1=ecd->toolbars
+2=vpc->
+3=cur_vpc
+4=vpc
+5=VIEW_PERCOMM
+6=vbox
+7=toolbars_menu_accels
 
 [find_text]
-0=notebook
-1=showstylebar
-2=on_new_activate
-3=HAVE_SWORD_LIB
-4=sword_namespace
-5=vboxPC
-6=vbox_toolbars
-7=cbtnPNformat
+0=gui_update_statusbar
+1=vpc->
+2=display(
+3=editnote
+4=toolbars
+5=p->
+6=cur_vc
+7=vc
 
 [executer args]
 0=newconfigs
