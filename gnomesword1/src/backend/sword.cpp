@@ -68,8 +68,8 @@
 #include "gs_editor.h"
 #include "gbs.h"
 #include "gs_gbs.h"
+#include "dictlex_.h"
 #include "dictlex.h"
-#include "gs_dictlex.h"
 #include "commentary_.h"
 #include "commentary.h"
 #include "bibletext.h"
@@ -438,7 +438,7 @@ void backend_display_new_font_color_and_size(SETTINGS * s)
 {
 	curMod->Display();
 	display_commentary(s->currentverse);
-	backend_displayinDL(s->DictWindowModule, s->dictkey);
+	backend_display_dictlex(s->dict_last_page, s->dictkey);
 	update_interlinear_page(&settings);
 }
 

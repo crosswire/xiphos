@@ -20,6 +20,8 @@ libgui_a_SOURCES =  \
     _bibletext.h \
     _commentary.c \
     _commentary.h \
+    _dictlex.c \
+    _dictlex.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
