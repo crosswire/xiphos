@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * editor_replace.h - find and replace dialog for editors
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,4 +35,3 @@ void gs_editor_replace_dialog_destroy(GtkHTMLReplaceDialog *d);
 void replace(GSHTMLEditorControlData *ecd);
 
 #endif
-

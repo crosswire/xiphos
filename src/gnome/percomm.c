@@ -112,7 +112,11 @@ void gui_save_note(GSHTMLEditorControlData * e)
 	     GINT_TO_POINTER(0))) {
 		g_warning("file not writen");
 	} else {
+		//change_percomm_module(e->filename);
+		//set_percomm_key(e->key);
 		save_percomm_note(gstr->str);
+		/*g_print("\nmod = %s\nkey = %s\nnote = %s\n",e->filename, 
+				e->key,gstr->str); */
 		g_print("\nfile writen\n");
 	}
 	g_string_free(gstr, 0);
@@ -805,9 +809,7 @@ void gui_shutdown_percomm(void)
 		PC_DATA *p = (PC_DATA *) percomm_list->data;
 		/* 
 		 * free any search dialogs created 
-		 */
-		if (p->ec->search_dialog)
-			g_free(p->ec->search_dialog);
+		 */		
 		if (p->ec->replace_dialog)
 			g_free(p->ec->replace_dialog);
 		/* 

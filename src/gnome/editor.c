@@ -43,7 +43,6 @@
 #include "gui/editor.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
-#include "gui/editor_search.h"
 #include "gui/toolbar_style.h"
 #include "gui/toolbar_edit.h"
 #include "gui/fileselection.h"
@@ -208,4 +207,3 @@ void run_dialog(GnomeDialog *** dialog, GtkHTML * html,
 		gtk_widget_show(GTK_WIDGET(**dialog));
 	}
 }
-

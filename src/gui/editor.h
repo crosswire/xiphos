@@ -26,7 +26,6 @@
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 #include "gui/editor_replace.h"
-#include "gui/editor_search.h"
 
 typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
 
@@ -45,7 +44,6 @@ struct _GSHTMLEditorControlData {
 	GSList *paragraph_group;
 
 	/* search & replace dialogs */
-	GSHTMLSearchDialog  *search_dialog;
 	GtkHTMLReplaceDialog *replace_dialog;
 
 	/* html/plain mode settings */
@@ -139,4 +137,3 @@ void run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor,
 						const gchar *title);*/
 
 #endif
-
