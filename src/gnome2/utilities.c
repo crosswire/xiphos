@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * utilities.c - support functions
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,6 +54,7 @@
  * Description
  *   display a sword uri in the form 'sword://KJV/1John5:8'
  *                                   'sword://MHC/Genesis1:1'
+ *                                   'sword:///Romans8:28'
  *   in the appropriate pane
  *
  * Return value
@@ -135,6 +136,16 @@ gint sword_url_handler(const gchar * url)
 				return 1;	
 			break;
 		}
+	} else { /* module name not found or not given */
+		key = get_valid_key(work_buf[3]); 
+		if(strstr(key,_("Rev"))) { /* if valid key in in Rev */
+			if(!strstr(work_buf[3],_("Rev"))) { /* check for Rev in uri */
+				/* if not return */
+				return 0;
+			}
+		}
+		settings.currentverse = (gchar*)key;
+		gui_change_verse(settings.currentverse);
 	}
 	return 0;
 }
