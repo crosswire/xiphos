@@ -267,6 +267,9 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	s->showdictgroup =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDictGroup"))->
 	    active;
+	s->showbookgroup =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowBookGroup"))->
+	    active;
 	s->showhistorygroup =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowHistoryGroup"))->
 	    active;
@@ -553,6 +556,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *cbtnShowTextgroup;
 	GtkWidget *cbtnShowComGroup;
 	GtkWidget *cbtnShowDictGroup;
+	GtkWidget *cbtnShowBookGroup;
 	GtkWidget *cbtnShowHistoryGroup;
 	GtkWidget *checkbuttonSBDock;
 	GtkWidget *label189;
@@ -1306,7 +1310,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label166), 0, 0.5);
 
-	label167 = gtk_label_new(_("Upper Pane Hight"));
+	label167 = gtk_label_new(_("Upper Pane Height"));
 	gtk_widget_ref(label167);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label167",
 				 label167,
@@ -1353,7 +1357,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 
-	label168 = gtk_label_new(_("App Hight"));
+	label168 = gtk_label_new(_("App Height"));
 	gtk_widget_ref(label168);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label168",
 				 label168,
@@ -1499,6 +1503,16 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbtnShowDictGroup);
 	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowDictGroup, FALSE,
+			   FALSE, 0);
+	
+	cbtnShowBookGroup =
+	    gtk_check_button_new_with_label(_("Show Book Group"));
+	gtk_widget_ref(cbtnShowBookGroup);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings),
+				 "cbtnShowBookGroup", cbtnShowBookGroup,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cbtnShowBookGroup);
+	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowBookGroup, FALSE,
 			   FALSE, 0);
 
 	cbtnShowHistoryGroup =
@@ -2002,21 +2016,14 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 					s->unicode_font);
 	gnome_font_picker_set_font_name((GnomeFontPicker *) fpDefaultFont,
 					s->default_font);
-	if (s->usedefault)
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-					     (rbtnUsedefaults), TRUE);
-	else
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-					     (rbtnNoDefaults), TRUE);
-
+	
+	/* set toggle buttons */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbtnNoDefaults), 
+					s->usedefault);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowSCB),
 				     s->showshortcutbar);
-
-
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowBibletabs),
 				     s->text_tabs);
-
-
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowCOMtabs),
 				     s->comm_tabs);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDLtabs),
@@ -2025,15 +2032,17 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				     s->versestyle);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDevotion),
 				     s->showdevotional);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (cbtnFavoritesGroup),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnFavoritesGroup),
 				     s->showfavoritesgroup);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowTextgroup),
 				     s->showtextgroup);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowComGroup),
 				     s->showcomgroup);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (cbtnShowHistoryGroup),
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowDictGroup),
+				     s->showdictgroup);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowBookGroup),
+				     s->showbookgroup);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowHistoryGroup),
 				     s->showhistorygroup);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbuttonSBDock),
 				     s->docked);

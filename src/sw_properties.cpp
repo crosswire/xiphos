@@ -186,6 +186,8 @@ gboolean loadconfig(SETTINGS *s)
 	    atoi(settingsInfo["User Options"]["showcomgroup"].c_str());
 	settings->showdictgroup =
 	    atoi(settingsInfo["User Options"]["showdictgroup"].c_str());
+	settings->showbookgroup =
+	    atoi(settingsInfo["User Options"]["showbookgroup"].c_str());
 	settings->showbookmarksgroup =
 	    atoi(settingsInfo["User Options"]["showbookmarksgroup"].c_str());
 	settings->interlinearpage =
@@ -395,11 +397,14 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["showcomgroup"] = "0";
 
 		if (settings->showdictgroup)
-			settingsInfo["User Options"]["showdictgroup"] =
-			    "1";
+			settingsInfo["User Options"]["showdictgroup"] = "1";
 		else
-			settingsInfo["User Options"]["showdictgroup"] =
-			    "0";
+			settingsInfo["User Options"]["showdictgroup"] = "0";
+
+		if (settings->showbookgroup)
+			settingsInfo["User Options"]["showbookgroup"] = "1";
+		else
+			settingsInfo["User Options"]["showbookgroup"] = "0";
 
 		if (settings->showbookmarksgroup)
 			settingsInfo["User Options"]["showbookmarksgroup"]
@@ -547,6 +552,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["showtextgroup"] = "1";
 	settingsInfo["User Options"]["showcomgroup"] = "1";
 	settingsInfo["User Options"]["showdictgroup"] = "1";
+	settingsInfo["User Options"]["showbookgroup"] = "1";
 	settingsInfo["User Options"]["showbookmarksgroup"] = "1";
 	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
 	settingsInfo["User Options"]["BibleTextColor"] = "#000000";
@@ -632,6 +638,7 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["showtextgroup"] = "1";
 	settingsInfo["User Options"]["showcomgroup"] = "1";
 	settingsInfo["User Options"]["showdictgroup"] = "1";
+	settingsInfo["User Options"]["showbookgroup"] = "1";
 	settingsInfo["User Options"]["showbookmarksgroup"] = "1";
 	settingsInfo["User Options"]["interlinearpage"] = "1";
 	settingsInfo["User Options"]["showhistorygroup"] = "1";
