@@ -42,6 +42,12 @@ extern "C" {
 #define E_IS_TITLE_BAR_CLASS(klass)		(GTK_CHECK_CLASS_TYPE ((obj), E_TYPE_TITLE_BAR))
 
 
+enum _ETitleBarButtonMode {
+	E_TITLE_BAR_BUTTON_MODE_PIN,
+	E_TITLE_BAR_BUTTON_MODE_CLOSE
+};
+typedef enum _ETitleBarButtonMode ETitleBarButtonMode;
+
 typedef struct _ETitleBar        ETitleBar;
 typedef struct _ETitleBarPrivate ETitleBarPrivate;
 typedef struct _ETitleBarClass   ETitleBarClass;
@@ -57,20 +63,22 @@ struct _ETitleBarClass {
 
 	/* Signals.  */
 
-	void (* title_button_press_event) (ETitleBar *title_bar, GdkEventButton *event);
-	void (* close_button_clicked)     (ETitleBar *title_bar);
+	void (* label_button_press_event) (ETitleBar *title_bar, GdkEventButton *event);
+	void (* button_clicked)           (ETitleBar *title_bar);
 };
 
 
-GtkType    e_title_bar_get_type   (void);
-void       e_title_bar_construct  (ETitleBar  *title_bar,
-				   const char *title);
-GtkWidget *e_title_bar_new        (const char *title);
-
-void  e_title_bar_set_title          (ETitleBar  *title_bar,
-				      const char *title);
-void  e_title_bar_show_close_button  (ETitleBar  *title_bar,
-				      gboolean    show);
+GtkType              e_title_bar_get_type         (void);
+void                 e_title_bar_construct        (ETitleBar           *title_bar,
+						   const char          *title);
+GtkWidget           *e_title_bar_new              (const char          *title);
+void                 e_title_bar_set_title        (ETitleBar           *title_bar,
+						   const char          *title);
+void                 e_title_bar_show_button      (ETitleBar           *title_bar,
+						   gboolean             show);
+void                 e_title_bar_set_button_mode  (ETitleBar           *title_bar,
+						   ETitleBarButtonMode  button_mode);
+ETitleBarButtonMode  e_title_bar_get_button_mode  (ETitleBar           *title_bar);
 
 #ifdef __cplusplus
 }

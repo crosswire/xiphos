@@ -4650,6 +4650,11 @@ Revelation
   <class>GtkWindow</class>
   <name>dlgShowDict</name>
   <border_width>4</border_width>
+  <signal>
+    <name>destroy</name>
+    <handler>on_dlgShowDict_destroy</handler>
+    <last_modification_time>Sat, 06 Jan 2001 17:34:29 GMT</last_modification_time>
+  </signal>
   <title>GnomeSword - Show Dictionary</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -4797,35 +4802,44 @@ Revelation
 	  </child>
 
 	  <widget>
-	    <class>GtkCList</class>
-	    <name>clKeys</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>select_row</name>
-	      <handler>on_clKeys_select_row</handler>
-	      <last_modification_time>Wed, 29 Nov 2000 19:28:14 GMT</last_modification_time>
-	    </signal>
-	    <columns>1</columns>
-	    <column_widths>80</column_widths>
-	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	    <show_titles>False</show_titles>
-	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+	    <class>GtkScrolledWindow</class>
+	    <name>scrolledwindow37</name>
+	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 	    <child>
 	      <shrink>True</shrink>
 	      <resize>False</resize>
 	    </child>
 
 	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label125</name>
-	      <label>label125</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
+	      <class>GtkCList</class>
+	      <name>clKeys</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>select_row</name>
+		<handler>on_clKeys_select_row</handler>
+		<last_modification_time>Wed, 29 Nov 2000 19:28:14 GMT</last_modification_time>
+	      </signal>
+	      <columns>1</columns>
+	      <column_widths>80</column_widths>
+	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	      <show_titles>False</show_titles>
+	      <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<child_name>CList:title</child_name>
+		<name>label125</name>
+		<label>label125</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+	      </widget>
 	    </widget>
 	  </widget>
 

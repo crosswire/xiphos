@@ -1,12 +1,15 @@
-Basic Installation
+Basic Installation for GnomeSword 0.4.0 and later
 ==================
 ===================== notice =======================
 You need to have the Sword Project (sword-1.5.0) installed.
 (sword-1.5.1a for gnomesword-0.3.0 or later)
 You need at least one each text ,commentary and dictionary module also.
-Sword-1.5.0 and the modules can be found at www.crosswire.org in the Sword Project.
-You need gnome-print-0.20 or later -- http://www.gnome.org/
-You need gdk-pixbuf-0.8 of later -- http://www.gnome.org/
+Sword-1.5.1a and the modules can be found at www.crosswire.org in the Sword Project.
+
+if you want build to gnomesword with the Evolution shortcut bar you need these packages
+You need gal-0.4.1 or later -- helix
+You need gnome-print-0.25 or later -- http://www.gnome.org/
+You need gdk-pixbuf-0.9 or later -- http://www.gnome.org/
 
 ======================================================================
 
@@ -18,21 +21,18 @@ type:
 	gnome-config --sysconfdir
 
 and remember the answers, and pass them to "configure" and "autogen"
-when building gnome-print, gdk-pixbuf and gnomesword. Eg:
+when building gnome-print, gdk-pixbuf and gal. Eg:
 
 	./configure --prefix=/usr --sysconfdir=/etc
 These are the instructions from the Evolution readme.
 
-If you don't use this method you will likely have problems.
+If you don't use this method gnomesword will likely have problems finding
+everything it needs..
 **************************************************************************************************
 ======================================================================
 
 ============================================================================
-========= you need aspell.30 and pspell.10 to compile gnomesword ===========
-======================== with spellchecking ================================
-================= do ./configure --enable-spellchecking ====================
-===================== to compile with spell checking =======================
-=========== you can get aspell from - http://aspell.sourceforge.net/========
+ gnomesword will use ispell or aspell for spell checking if you enable spell checking. see below
 ============================================================================
 
 You must also have gnome up and running.
@@ -46,14 +46,24 @@ libraries are installed and configured properly.
 
 Then do a:
 
-./configure --prefix=/usr
+./configure 
 or
-./configure --prefix=/usr --enable-spellchecking
+./configure  --enable-spellchecking
+or
+./configure  --enable-printing
+or
+./configure  --enable-shortcutbar
+or
+./configure  --enable-all
 make
 su
 make install
 
-default is without spell checking
+default is without any options which should build if don't have gnomeprint,
+gdk_pixbuf nor gal.
+
+if you --enable-all the configure script will check to see is you have the needed
+packages. 
 
    ========================================================
      ====================================================
