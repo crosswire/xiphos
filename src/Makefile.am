@@ -17,6 +17,10 @@ COMMON_SOURCE =  \
     gs_abouts.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
+    gs_detach_int.c \
+    gs_detach_int.h \
+    gs_detach_sb.c \
+    gs_detach_sb.h \
     gs_editor.c \
     gs_editor.h \
     gs_editor_replace.c \
@@ -55,10 +59,6 @@ COMMON_SOURCE =  \
     gs_setup.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
-    gs_undock_int.c \
-    gs_undock_int.h \
-    gs_undock_sb.c \
-    gs_undock_sb.h \
     gs_unlockkey_dlg.c \
     gs_unlockkey_dlg.h \
     gs_viewcomm_dlg.c \

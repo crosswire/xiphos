@@ -35,11 +35,12 @@ extern "C" {
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
 	/* search Bible text or commentaries */
-	GList * searchSWORD(GtkWidget * widget, SETTINGS * s);
+	GList * searchSWORD(SETTINGS * s, SEARCH_OPT *so);
 	void setupsearchresultsSBSW(GtkWidget * html_widget);
 	void shutdownsearchresultsSBSW(void);
-	void changesearchresultsSBSW(SETTINGS * s, gchar * url);
+	void changesearchresultsSW_SEARCH(SETTINGS * s, SEARCH_OPT *so, gchar * url);
 
 #ifdef __cplusplus
 }
