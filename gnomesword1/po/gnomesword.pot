@@ -483,7 +483,7 @@ msgid "_Quickmarks/Clear Quickmarks"
 msgstr ""
 
 #: src/gs_gui.c:155
-msgid "Copy highlighted text form main window"
+msgid "Copy highlighted text from main window"
 msgstr ""
 
 #: src/gs_gui.c:161 src/gs_shortcutbar.c:2070
@@ -604,15 +604,15 @@ msgid "Hide/Show Shortcut Bar"
 msgstr ""
 
 #: src/gs_gui.c:708
-msgid "Toogle Strongs Numbers"
+msgid "Toggle Strongs Numbers"
 msgstr ""
 
 #: src/gs_gui.c:722
-msgid "Toogle Morphological Tags"
+msgid "Toggle Morphological Tags"
 msgstr ""
 
 #: src/gs_gui.c:736
-msgid "Toogle Footnotes"
+msgid "Toggle Footnotes"
 msgstr ""
 
 #: src/gs_gui.c:888
