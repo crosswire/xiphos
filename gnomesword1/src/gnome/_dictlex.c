@@ -54,6 +54,35 @@ extern gboolean dict_display_change;
 
 /******************************************************************************
  * Name
+ *  gui_set_dict_frame_label
+ *
+ * Synopsis
+ *   #include "_dictlex.h"
+ *
+ *   void gui_set_dict_frame_label(void)	
+ *
+ * Description
+ *   sets dict/lex frame label to module name or null
+ *
+ * Return value
+ *   void
+ */
+
+static void gui_set_dict_frame_label(DL_DATA *d)
+{
+	/*
+	 * set frame label to NULL if tabs are showing
+	 * else set frame label to module name
+	 */	
+	if (settings.dict_tabs)
+		gtk_frame_set_label(GTK_FRAME(d->frame), NULL);
+	else
+		gtk_frame_set_label(GTK_FRAME(d->frame), d->modName);
+	
+}
+
+/******************************************************************************
+ * Name
  *   on_notebook_dictlex_switch_page
  *
  * Synopsis
@@ -77,7 +106,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
 	//-- change tab label to current book name
 	cur_d = d;
-	
+	/*
 	gtk_notebook_set_tab_label_text(GTK_NOTEBOOK
 					(settings.workbook_lower),
 					gtk_notebook_get_nth_page
@@ -90,8 +119,9 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 					 (GTK_NOTEBOOK
 					  (settings.workbook_lower),
 					  0), d->modName);
-
-
+	*/
+	gui_set_dict_frame_label(d);
+	
 	sprintf(settings.DictWindowModule, "%s", d->modName);
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
@@ -531,7 +561,6 @@ void gui_create_dictlex_pane(SETTINGS * s,
 				     DL_DATA * dl, gint count)
 {
 
-	GtkWidget *frameDict;
 	GtkWidget *hpaned7;
 	GtkWidget *vbox56;
 	GtkWidget *toolbarDLKey;
@@ -542,13 +571,13 @@ void gui_create_dictlex_pane(SETTINGS * s,
 	GtkWidget *scrolledwindowDictHTML;
 	GtkWidget *label;
 
-	frameDict = gtk_frame_new(NULL);
-	gtk_widget_ref(frameDict);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frameDict",
-				 frameDict,
+	dl->frame = gtk_frame_new(NULL);
+	gtk_widget_ref(dl->frame);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "dl->frame",
+				 dl->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frameDict);
-	gtk_container_add(GTK_CONTAINER(s->notebookDL), frameDict);
+	gtk_widget_show(dl->frame);
+	gtk_container_add(GTK_CONTAINER(s->notebookDL), dl->frame);
 
 	hpaned7 = gtk_hpaned_new();
 	gtk_widget_ref(hpaned7);
@@ -556,7 +585,7 @@ void gui_create_dictlex_pane(SETTINGS * s,
 				 hpaned7,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpaned7);
-	gtk_container_add(GTK_CONTAINER(frameDict), hpaned7);
+	gtk_container_add(GTK_CONTAINER(dl->frame), hpaned7);
 	gtk_paned_set_position(GTK_PANED(hpaned7), 190);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);

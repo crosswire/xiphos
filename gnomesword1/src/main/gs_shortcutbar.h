@@ -59,7 +59,6 @@ struct _search_opt {
 	    use_lastsearch_for_bonds;
 };
 
-void dock_undock(SETTINGS * s);
 void search_module(SETTINGS * s, SEARCH_OPT * so);
 gboolean display_dictlex_in_viewer(char *modName,
 				   char *key, SETTINGS * s);

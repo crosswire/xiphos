@@ -30,23 +30,27 @@
 #include <gal/shortcut-bar/e-vscrolled-bar.h>
 #include <gal/widgets/e-unicode.h>
 
+/* frontend */
+#include "shortcutbar_dialog.h"
+#include "create_shortcutbar_search.h"
+#include "create_shortcutbar_viewer.h"
 
-#include "search_.h"
-#include "sword.h"
+/* main */ 
 #include "gs_shortcutbar.h"
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_bookmarks.h"
-#include "verselist.h"
-#include "shortcutbar.h"
 #include "gbs.h"
-#include "gs_detach_sb.h"
 #include "gs_html.h"
 #include "gs_editor.h"
-#include "create_shortcutbar_search.h"
-#include "create_shortcutbar_viewer.h"
 #include "settings.h"
 #include "lists.h"
+
+/* backend */
+#include "search_.h"
+#include "sword.h"
+#include "verselist.h"
+#include "shortcutbar.h"
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
@@ -727,41 +731,6 @@ static gint add_sb_group(EShortcutBar * shortcut_bar,
 	return group_num;
 }
 
-/*** dock/undock shortcut bar ***/
-void dock_undock(SETTINGS * s)
-{
-	gint biblepanesize;
-
-	if (s->docked) {
-		//s->showshortcutbar = FALSE;
-		s->docked = FALSE;
-		biblepanesize = s->gs_width / 2;
-		s->dockSB = create_dlgDock(s);
-		gtk_widget_reparent(shortcut_bar, s->vboxDock);
-		settings.showshortcutbar = TRUE;
-		gtk_widget_show(shortcut_bar);
-		e_paned_set_position(E_PANED(s->epaned), 0);
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "hpaned1")),
-				     biblepanesize);
-		gtk_widget_show(s->dockSB);
-	} else {
-		//s->showshortcutbar = TRUE;
-		s->docked = TRUE;
-		biblepanesize =
-		    (s->gs_width - s->shortcutbar_width) / 2;
-		e_paned_set_position(E_PANED(s->epaned),
-				     s->shortcutbar_width);
-		e_paned_set_position(E_PANED
-				     (lookup_widget
-				      (s->app, "hpaned1")),
-				     biblepanesize);
-		gtk_widget_reparent(shortcut_bar,
-				    s->epaned);
-		gtk_widget_destroy(s->dockSB);
-	}
-}
 
 /*** show hide shortcut bar ***/
 void on_btnSB_clicked(GtkButton * button, SETTINGS * s)

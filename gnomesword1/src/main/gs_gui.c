@@ -31,17 +31,14 @@
 #include "gs_gui_cb.h"
 #include "gs_editor.h"
 #include "gs_gnomesword.h"
-#include "support.h"
 #include "gs_html.h"
 #include "gs_shortcutbar.h"
-#include "sword.h"
 #include "settings.h"
 #include "lists.h"
 
-/*
- * gnome
- */
+/* frontend */
 #include "main_menu.h"
+#include "shortcutbar_dialog.h"
 
 
 static char *book_open_xpm[] = {
@@ -126,9 +123,8 @@ GdkBitmap *mask3;
 
 static void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 {
-	dock_undock(s);
+	gui_attach_detach_shortcutbar(s);
 }
-
 
 void create_mainwindow(SETTINGS *s)
 {
@@ -162,11 +158,10 @@ void create_mainwindow(SETTINGS *s)
 	GtkWidget *swInt;
 	GtkWidget *label41;
 	GtkWidget *hbox8;
-	GtkWidget *frame10;
+//	GtkWidget *frame10;
 	GtkWidget *label185;
 	GtkWidget *label197;
 	GtkWidget *hbox25;
-	GtkWidget *appbar1;
 	GdkColor transparent = { 0 };
 	
 	g_print("%s\n", "Building GnomeSword interface");
@@ -340,10 +335,8 @@ void create_mainwindow(SETTINGS *s)
 
 	/*
 	 * get and load books of the Bible 
-	 */
-	//cbBook_items = backend_get_books();
+	 */	
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), get_list(BOOKS_LIST));
-	//g_list_free(cbBook_items);
 
 	s->cbeBook = GTK_COMBO(cbBook)->entry;
 	gtk_widget_ref(s->cbeBook);
@@ -614,6 +607,7 @@ void create_mainwindow(SETTINGS *s)
 	/*
 	 * dict/lex  
 	 */
+	 /*
 	frame10 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame10);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame10",
@@ -621,7 +615,8 @@ void create_mainwindow(SETTINGS *s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame10);
 	gtk_container_add(GTK_CONTAINER(s->workbook_lower), frame10);
-	gtk_container_set_border_width(GTK_CONTAINER(frame10), 2);
+	*/
+	
 	
 	s->notebookDL = gtk_notebook_new();
 	gtk_widget_ref(s->notebookDL);
@@ -629,12 +624,23 @@ void create_mainwindow(SETTINGS *s)
 				 s->notebookDL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(s->notebookDL);
-	gtk_container_add(GTK_CONTAINER(frame10), s->notebookDL);
+	gtk_container_add(GTK_CONTAINER(s->workbook_lower), s->notebookDL);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(s->notebookDL), TRUE);
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->notebookDL));	
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookDL),
 					   s->dict_tabs);
-					   
+				
+	label41 = gtk_label_new(_("Dict/Lex"));
+	gtk_widget_ref(label41);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "label41",
+				 label41,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label41);
+	
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->workbook_lower),
+				   gtk_notebook_get_nth_page(GTK_NOTEBOOK
+							     (s->workbook_lower),
+							     0), label41);				   
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_lower),
                                    gtk_notebook_get_nth_page(GTK_NOTEBOOK
 							    (s->workbook_lower),
@@ -647,6 +653,15 @@ void create_mainwindow(SETTINGS *s)
 	/*
 	 * gbs notebook 
 	 */
+	 /*
+	frame10 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame10);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame10",
+				 frame10,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame10);
+	gtk_container_add(GTK_CONTAINER(s->workbook_lower), frame10);
+	*/
 	
 	s->notebook_gbs = gtk_notebook_new ();
 	gtk_widget_ref (s->notebook_gbs);
@@ -731,16 +746,15 @@ void create_mainwindow(SETTINGS *s)
 	 * end Interlinear page 
 	 */
 	 
-	appbar1 = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
-	gtk_widget_ref(appbar1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "appbar1",
-				 appbar1,
+	s->appbar = gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
+	gtk_widget_ref(s->appbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->appbar",
+				 s->appbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(appbar1);
-	gnome_app_set_statusbar(GNOME_APP(s->app), appbar1);
+	gtk_widget_show(s->appbar);
+	gnome_app_set_statusbar(GNOME_APP(s->app), s->appbar);
 
-	s->appbar = lookup_widget(s->app, "appbar1");
-	
+		
 	gui_install_menu_hints(s->app);
         /*
 	 * create pixmaps for ctrees
@@ -810,5 +824,5 @@ void create_mainwindow(SETTINGS *s)
 	
 	gtk_widget_grab_focus(s->app);
 
-	gtk_widget_set_usize(s->app, s->gs_width, settings.gs_hight);
+	gtk_widget_set_usize(s->app, s->gs_width, s->gs_hight);
 }
