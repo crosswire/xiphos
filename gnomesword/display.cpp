@@ -276,15 +276,21 @@ GTKChapDisp::Display(SWModule &imodule)
 	int i,j;	
 	bool 	findclose=FALSE,
 				italics_on=FALSE,
-				poetry_on=FALSE;
-	GdkFont *sword_font, *greek_font;
+				poetry_on=FALSE,
+				niv_on=false,
+				FO_on=false;
+	GdkFont *sword_font,
+					*greek_font,
+					*fo_font,
+					*fo_italic_font;
 	ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 
 	font = "Roman";
-
-
+  if(!strcmp(imodule.Name(),"NIV-GnomeSword")) niv_on=true; //-- we need to know if we are using the niv
+  else niv_on=false;
+	
 		if ((sit = mainMgr->config->Sections.find(imodule.Name())) != mainMgr->config->Sections.end()) 
 		{
 			if ((eit = (*sit).second.find("Font")) != (*sit).second.end()) 
@@ -294,17 +300,21 @@ GTKChapDisp::Display(SWModule &imodule)
 		}
 	
 	
-	// Load a italic font 
+	//-- Load an italic font
         italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
-	// Load a roman font 
+	//-- Load a roman font
         roman_font = gdk_font_load(font_mainwindow);
-	// Load a verse number font 
+ 	//-- Load FO font
+ 	     fo_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
+ 	//-- Load FO italic font
+ 	     fo_italic_font = gdk_font_load("-adobe-helvetica-medium-o-normal-*-*-80-*-*-p-*-iso8859-1");
+	//-- Load a verse number font
 	if(bVerseStyle)
         versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
 	else
         versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1");
 
-    /* Load a greek font */
+	//-- Load a greek font
 	greek_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
 	
 	if(!strcmp(font,"Symbol")) sword_font = greek_font;	
@@ -331,25 +341,63 @@ GTKChapDisp::Display(SWModule &imodule)
 		len = strlen(myverse);
 		while(i<len)
 		{
-			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='I')
-    		{				
-				i=i+4;
+			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='O') //-- begin gbf italic
+   		{				
+				i=i+8;
+				//-- we print what we have so far in standard font
 				if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
 				else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
-				verseBuf[0]='\0';
+				verseBuf[0]='\0'; //-- clear buffer and start over for italics
+				FO_on=true;
     				//myverse[i] = '[';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='i')
-    		{
-				i=i+4;
-				if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), italic_font, &myGreen,NULL , verseBuf, -1);
-				else gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, verseBuf, -1);
+    	}
+    	if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='o') //-- begin gbf italic
+   		{				
+				i=i+7;
+				//-- we print what we have so far in standard font
+				gtk_text_insert(GTK_TEXT(gtkText), fo_font, &gtkText->style->black, NULL, verseBuf, -1);
 				j=0;
-				verseBuf[0]='\0';
+				myverse[i]='\n';
+				verseBuf[0]='\0'; //-- clear buffer and start over for italics
+				FO_on=false;
+    				//myverse[i] = '[';
+    	}
+			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='I') //-- begin gbf italic
+   		{				
+				i=i+4;
+				//-- we print what we have so far in standard font
+				if(FO_on)
+				{
+				   gtk_text_insert(GTK_TEXT(gtkText),fo_font ,&gtkText->style->black, NULL, verseBuf, -1);
+				}
+				else
+				{
+					if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), roman_font, &myGreen, NULL, verseBuf, -1);
+					else gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+				}
+				j=0;
+				verseBuf[0]='\0'; //-- clear buffer and start over for italics
+    				//myverse[i] = '[';
+    	}
+			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='i') //-- end gbf italic
+   		{
+				i=i+4;
+				//-- we print what we have now in italic font
+				if(FO_on)
+				{
+				   gtk_text_insert(GTK_TEXT(gtkText),fo_italic_font , &gtkText->style->black, NULL, verseBuf, -1);
+				}
+				else
+				{
+					if (key->Verse() == curVerse) gtk_text_insert(GTK_TEXT(gtkText), italic_font, &myGreen,NULL , verseBuf, -1);
+					else gtk_text_insert(GTK_TEXT(gtkText), italic_font, &gtkText->style->black, NULL, verseBuf, -1);
+				}
+				j=0;
+				verseBuf[0]='\0'; //-- clear buffer and start over
     				//myverse[i] = ']';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='P')
+    	}
+			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='P') //-- start gbf poetry
    		{				
 				i=i+4;
 				sprintf(buf,"%s",verseBuf);
@@ -361,7 +409,7 @@ GTKChapDisp::Display(SWModule &imodule)
 				poetry_on = TRUE;
     				//myverse[i] = '[';
     	}
-			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='p')
+			if(myverse[i] == '<' && myverse[i+1] =='P' && myverse[i+2]=='p') //-- end gbf poetry
    		{
 				i=i+4;
 				sprintf(buf,"%s",verseBuf);
@@ -372,11 +420,11 @@ GTKChapDisp::Display(SWModule &imodule)
     		italics_on = FALSE;
     		poetry_on = FALSE;
     	}
-			if(myverse[i] == '<' && myverse[i+1] =='C' && myverse[i+2] == 'M')	
+			if(myverse[i] == '<' && myverse[i+1] =='C' && myverse[i+2] == 'M')	//-- gbf new line
 			{
-				if((!bVerseStyle) || poetry_on)
-				{
-					i=i+3;
+				if((!bVerseStyle) || poetry_on || niv_on) //-- we only need new line if we are not
+				{                                         //-- in verse style or poetry is on or
+					i=i+3;                                  //-- we are using the niv
 					myverse[i] = '\t';
 					verseBuf[j] = '\n';
 					++j;
