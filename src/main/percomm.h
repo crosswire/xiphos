@@ -46,8 +46,6 @@ struct _percomm_data {
 void editor_save_note(GtkWidget * html_widget);
 void save_percomm_note(gchar *note);
 void delete_percomm_note(void);
-void percomm_page_changed(gint page_num, PC_DATA * p);
-void tabs(gboolean choice);
 void set_percomm_page_and_key(gint page_num, gchar * key);
 void display_percomm(gchar * key);
 void setup_percomm(SETTINGS * s, GList *mods);

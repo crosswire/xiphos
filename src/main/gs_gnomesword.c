@@ -36,6 +36,7 @@
 #include "about_modules.h"
 #include "shortcutbar_dialog.h"
 #include "studypad.h"
+#include "info_box.h"
 
 /* main */ 
 #include "gs_gnomesword.h"
@@ -49,7 +50,6 @@
 #include "gs_interlinear.h"
 #include "gs_history.h"
 #include "support.h"
-#include "gs_info_box.h"
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"

@@ -27,6 +27,9 @@
 #include "percomm.h"
 
 void gui_set_percomm_frame_label(GtkWidget * frame, gchar *mod_name);
+void tabs(gboolean choice);
+void on_notebook_percomm_switch_page(GtkNotebook * notebook,
+		GtkNotebookPage * page, gint page_num, GList * pcl);
 GSHTMLEditorControlData *gui_percomm_control(SETTINGS * s, 
 					gchar *mod_name, gint page_num);
 #endif	/* ___PERCOMM_H_ */
