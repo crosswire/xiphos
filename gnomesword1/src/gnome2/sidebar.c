@@ -821,7 +821,13 @@ static gboolean on_modules_list_button_release(GtkWidget * widget,
 		button_mod_list = 1;
 		break;
 	case 2:
-		button_mod_list = 2;
+		if (!g_utf8_collate(mod, _("Parallel View"))) {
+			g_free(mod);
+			return FALSE;
+		}
+		gui_open_module_in_new_tab(mod);
+		g_free(mod);
+		return FALSE;
 		break;
 	case 3:
 		if (!g_utf8_collate(mod, _("Parallel View"))) {
@@ -844,14 +850,9 @@ static gboolean on_modules_list_button_release(GtkWidget * widget,
 					     (widgets. button_parallel_view),
 					     TRUE);
 	
-	
 	sbtype = get_mod_type(mod);
 	switch (sbtype) {
 	case 0:
-		if(button_mod_list == 2) {
-			gui_open_bibletext_dialog(mod);
-			break;
-		}
 		if (GTK_TOGGLE_BUTTON(widgets.button_parallel_view)->
 		    active) {
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
@@ -862,26 +863,14 @@ static gboolean on_modules_list_button_release(GtkWidget * widget,
 		gui_change_module_and_key(mod, settings.currentverse);
 		break;
 	case 1:
-		if(button_mod_list == 2) {
-			gui_open_commentary_dialog(mod);
-			break;
-		}
 		gui_change_module_and_key(mod, settings.currentverse);
 		break;
 	case 2:
-		if(button_mod_list == 2) {
-			gui_open_dictlex_dialog(mod);
-			break;
-		}
 		gtk_notebook_set_current_page
 		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
 		gui_change_module_and_key(mod, settings.dictkey);
 		break;
 	case 3:
-		if(button_mod_list == 2) {
-			gui_open_gbs_dialog(mod);
-			break;
-		}
 		gtk_notebook_set_current_page
 		    	(GTK_NOTEBOOK(widgets.workbook_lower), 1);
 		gui_change_module_and_key(mod, NULL);
@@ -938,7 +927,7 @@ gboolean gui_verselist_button_release_event(GtkWidget * widget,
 			//gui_change_module_and_key(settings.sb_search_mod, key);
 			break;
 		case 2:
-			gui_open_verse_in_new_tab(key);
+			gui_open_passage_in_new_tab(key);
 			break;
 		case 3:
 	
@@ -1099,6 +1088,28 @@ void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 /******************************************************************************
  * Name
+ *   on_open_in_tab_activate
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_open_module_in_new_tab(buf_module);
+}
+
+
+/******************************************************************************
+ * Name
  *   on_about2_activate
  *
  * Synopsis
@@ -1160,6 +1171,12 @@ GtkWidget *create_results_menu(void)
 }
 
 static GnomeUIInfo menu_modules_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
+	 N_("Open selected module in a new tab"),
+	 (gpointer) on_open_in_tab_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
+	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Open in dialog"),
 	 N_("Open selected module in a dialog"),
@@ -1236,7 +1253,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 					 event->y);
 		if(strstr(url,"sword://")) {
 			gchar **work_buf = g_strsplit (url,"/",4);			
-			gui_open_verse_in_new_tab(work_buf[KEY]);
+			gui_open_passage_in_new_tab(work_buf[KEY]);
 			g_strfreev(work_buf);
 		}			
 		break;

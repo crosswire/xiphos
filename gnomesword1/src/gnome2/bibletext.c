@@ -153,7 +153,12 @@ void gui_display_text(const gchar * val_key)
 				1);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text),
 				0);*/
-	chapter_display(widgets.html_text,
+	if(is_module_rtl(settings.MainWindowModule))
+		chapter_display(widgets.textview,
+			settings.MainWindowModule,
+			ops, (gchar *) val_key, TRUE);
+	else
+		chapter_display(widgets.html_text,
 			settings.MainWindowModule,
 			ops, (gchar *) val_key, TRUE);
 	g_free(ops);
