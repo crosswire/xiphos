@@ -1,30 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * main.c 
-     * -------------------
-     * Mon May 8 2000
-     * copyright (C) 2000 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * main.c - In the beginning... ;o)
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -35,7 +28,7 @@
 
 #ifdef GTKHTML_HAVE_GCONF
 #include <gconf/gconf.h>
-#endif				/* GTKHTML_HAVE_GCONF */
+#endif
 
 #include "sword.h"
 #include "gs_gnomesword.h"
@@ -59,23 +52,23 @@ SETTINGS myset;
 
 int main(int argc, char *argv[])
 {
-    GtkWidget *mainwindow;
-    gint icreatefiles = 0;
-    gboolean newconfigs = FALSE;
-    gboolean newbookmarks = FALSE;
-    GtkWidget *splash = NULL;
+	GtkWidget *mainwindow;
+	gint icreatefiles = 0;
+	gboolean newconfigs = FALSE;
+	gboolean newbookmarks = FALSE;
+	GtkWidget *splash = NULL;
 
 #ifdef GTKHTML_HAVE_GCONF
-    GError *gconf_error = NULL;
+	GError *gconf_error = NULL;
 #endif
 
 #if ENABLE_NLS
-    bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
-    textdomain(PACKAGE);
+	bindtextdomain(PACKAGE, PACKAGE_LOCALE_DIR);
+	textdomain(PACKAGE);
 #endif
 
-    gnome_init("GnomeSword", VERSION, argc, argv);
-    if (argc > 1) {
+	gnome_init("GnomeSword", VERSION, argc, argv);
+	if (argc > 1) {
 	/*
 	 * these args are for broken configs or bookmarks - ie gnomesword will not start
 	 */
@@ -89,112 +82,112 @@ int main(int argc, char *argv[])
 	    newconfigs = TRUE;
 	    newbookmarks = TRUE;
 	}
-    }
+	}
 #ifdef GTKHTML_HAVE_GCONF
-    /* 
-     * This is needed for gtkhtml.
-     */
+	/* 
+	 * This is needed for gtkhtml.
+	 */
 
-    if (!gconf_init(argc, argv, &gconf_error)) {
+	if (!gconf_init(argc, argv, &gconf_error)) {
 	g_assert(gconf_error != NULL);
 	g_error("GConf init failed:\n  %s", gconf_error->message);
 	return FALSE;
-    }
+	}
 #endif
-    /* 
-     * start swmgrs so they can be used by setup druid
-     */
-    backend_firstInitSWORD(); /* light-up swmgrs */
-    
-    /* 
-     * check for directories and files
-     */    
-    icreatefiles = setDiretory();
-    if (newconfigs) {
+	/* 
+	 * start swmgrs so they can be used by setup druid
+	 */
+	backend_firstInitSWORD(); /* light-up swmgrs */
+	
+	/* 
+	 * check for directories and files
+	 */    
+	icreatefiles = setDiretory();
+	if (newconfigs) {
 	gui_firstRunSETUP(); //gs_firstrunSWORD();
-    }
-    if (newbookmarks) {
+	}
+	if (newbookmarks) {
 	createbookmarksBM(swbmDir);
-    }
+	}
 
-    /*icreatefiles = 1;*/ /* please comment me - i am for testing */
-    if (icreatefiles == 1 || icreatefiles == 3) {
+	/*icreatefiles = 1;*/ /* please comment me - i am for testing */
+	if (icreatefiles == 1 || icreatefiles == 3) {
 	 gui_firstRunSETUP();  //gs_firstrunSWORD();
-    }
+	}
 
-    /*
-     * Set pointer to structure.
-     */
-    settings = &myset;
-    loadconfig(settings);
+	/*
+	 * Set pointer to structure.
+	 */
+	settings = &myset;
+	loadconfig(settings);
 
-    /*
-     * If we have a new version run setup druid FIXME: do we need this?
-     */
-    if (strcmp(VERSION, settings->gs_version)) {
+	/*
+	 * If we have a new version run setup druid FIXME: do we need this?
+	 */
+	if (strcmp(VERSION, settings->gs_version)) {
 	 gui_firstRunSETUP(); 
-    }
+	}
 
-    /*
-     * Splash screen.
-     */
-    if (settings->showsplash) {
+	/*
+	 * Splash screen.
+	 */
+	if (settings->showsplash) {
 	splash = e_splash_new();
 	gtk_widget_show(splash);
 	gtk_object_ref(GTK_OBJECT(splash));
 	while (gtk_events_pending()) {
 	    gtk_main_iteration();
 	}
-    }
+	}
 
-    mainwindow = create_mainwindow(splash, settings);
-    add_gtkhtml_widgets(mainwindow);/*FIXME: add these widgets to create_mainwindow() */
+	mainwindow = create_mainwindow(splash, settings);
+	add_gtkhtml_widgets(mainwindow);/*FIXME: add these widgets to create_mainwindow() */
 
-    if (settings->showsplash) {
+	if (settings->showsplash) {
 	e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);
-    }
+	}
 
-    initSWORD(settings);
+	initSWORD(settings);
 
-    if (settings->showsplash) {
+	if (settings->showsplash) {
 	e_splash_set_icon_highlight(E_SPLASH(splash), 3, TRUE);
-    }
+	}
 
-    initGnomeSword(settings, biblemods, commentarymods, dictionarymods,
+	initGnomeSword(settings, biblemods, commentarymods, dictionarymods,
 		   percommods, splash);
 
-    if (icreatefiles == 2 || icreatefiles == 3) {
+	if (icreatefiles == 2 || icreatefiles == 3) {
 	createbookmarksBM(swbmDir);
-    }
+	}
 
-    while (gtk_events_pending()) {
+	while (gtk_events_pending()) {
 	gtk_main_iteration();
-    }
+	}
 
-    if (settings->showsplash) {
+	if (settings->showsplash) {
 	gtk_widget_unref(splash);
 	gtk_widget_destroy(splash);
-    }
+	}
 
-    /*
-     * Set the main window size.
-     */
-    gtk_widget_set_usize(settings->app, settings->gs_width,
+	/*
+	 * Set the main window size.
+	 */
+	gtk_widget_set_usize(settings->app, settings->gs_width,
 			 settings->gs_hight);
 
-    /*
-     * Set toggle state of buttons and menu items.
-     */
-    UpdateChecks(settings);
-    
-    /* showing the devotional must come after the the app is shown or
-       it will mess up the shortcut bar display */
-    /* FIXME: maybe we need to move the devotional ? */
-    if (settings->showdevotional) {
+	/*
+	 * Set toggle state of buttons and menu items.
+	 */
+	UpdateChecks(settings);
+	
+	/* showing the devotional must come after the the app is shown or
+	   it will mess up the shortcut bar display */
+	/* FIXME: maybe we need to move the devotional ? */
+	if (settings->showdevotional) {
 	displayDevotional();
-    }
-    
-    gtk_main();
+	}
+	
+	gtk_main();
 
-    return 0;
+	return 0;
 }
