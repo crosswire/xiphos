@@ -59,15 +59,21 @@ static char *get_sword_locale(void)
 	char buf[32];
 	int i = 0;
 	
-	sys_local = LocaleMgr::systemLocaleMgr.getDefaultLocaleName();
+#ifdef USE_SWORD_CVS
+	sys_local = LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
+#else	
+	sys_local = LocaleMgr::systemLocaleMgr.getDefaultLocaleName();	
+#endif
+	
 	if(!strncmp(sys_local,"ru_RU",5)) {
 		/*if(strlen(sys_local) > 12 ) {
 			for(i = 0; i < 12; i++) {
 				buf[i] = sys_local[i];
 				buf[i+1] = '\0';
-			}*/
+			}
 			sys_local = "ru_RU-koi8-r";//buf;
-		//}
+		}*/
+		sys_local = "ru_RU-koi8-r";//buf;
 		
 	} else if(!strncmp(sys_local,"ru_RU-koi8-r",10)){
 		if(strlen(sys_local) >  12) {
@@ -122,8 +128,12 @@ static char *get_sword_locale(void)
 		}
 	}
 	retval = strdup(sys_local);
-		
+	
+#ifdef USE_SWORD_CVS
+	LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_local);
+#else	
 	LocaleMgr::systemLocaleMgr.setDefaultLocaleName(sys_local);
+#endif
 	return retval;
 }
 
@@ -152,7 +162,11 @@ void backend_init(void)
 	g_print("sword-%s\n", sw.version);
 	g_print("%s\n\n", _("Initiating SWORD"));
 	g_print("%s %s\n", _("System locale is"),
+#ifdef USE_SWORD_CVS
+		LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
+#else		
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+#endif
 	sword_locale = get_sword_locale();
 	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
 	g_print("%s\n", _("Checking for SWORD Modules"));
