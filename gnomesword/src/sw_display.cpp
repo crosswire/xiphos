@@ -298,7 +298,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	int curBook = key->Book();
 	int curPos = 0;
 	gint len;
-	char *Buf, c;
+	char *Buf, *paragraphMark;
 	gchar *utf8str, *use_font, *use_font_size, *token, *bufstr;
 	gint mybuflen, utf8len;
 	const gchar **end;
@@ -308,8 +308,8 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 	
 	use_gtkhtml_font = false;
 	str = g_string_new("");
-	//c = 182;  
-	c = 0x00b6;  
+	  
+	paragraphMark = "&para;";  
 	use_font = g_strdup(pick_font(imodule));
 	
 	use_font_size = NULL;
@@ -365,7 +365,7 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 						
 		if(newparagraph && s->versestyle) {
 			newparagraph = false;
-			sprintf(tmpBuf,  "%c ", c);
+			sprintf(tmpBuf,  "%s ", paragraphMark);
 			utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 			utf8len = strlen(utf8str);		
 			if (utf8len) {
