@@ -535,6 +535,34 @@ static void sync_with_main(COMM_DATA * vc)
 	display(vc, vc->key);
 }
 
+
+/******************************************************************************
+ * Name
+ *   sync_toggled
+ *
+ * Synopsis
+ *   #include "gui/commentary_dialog.h"
+ *
+ *   void sync_toggled(GtkToggleButton * button, COMM_DATA * vc)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void sync_toggled(GtkToggleButton * button, COMM_DATA * vc)
+{
+	if(button->active) {
+		sync_with_main(vc);
+		vc->sync = TRUE;
+	}
+	else		
+		vc->sync = FALSE;
+}
+
+
 /******************************************************************************
  * Name
  *   create_nav_toolbar
@@ -554,9 +582,12 @@ static void sync_with_main(COMM_DATA * vc)
 static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 {
 	GtkWidget *toolbar_nav;
+	GtkWidget *sync_button;
 	GtkWidget *cbBook;
 	GtkObject *spbChapter_adj;
 	GtkObject *spbVerse_adj;
+	GtkWidget *tmp_toolbar_icon;
+	GtkWidget *vseparator;
 
 	toolbar_nav =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -565,7 +596,30 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_widget_set_usize(toolbar_nav, -2, 34);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);
+	
+	
+	tmp_toolbar_icon =
+		gnome_stock_pixmap_widget(widgets.app,
+				      GNOME_STOCK_PIXMAP_REFRESH);
+	sync_button =
+		gtk_toolbar_append_element(GTK_TOOLBAR
+				       (toolbar_nav),
+				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+				       NULL, _("Sync"),
+				       _("Toggle Sync with main window"), 
+				       NULL,
+				       tmp_toolbar_icon, NULL,
+				       NULL);
+	gtk_widget_show(sync_button);
 
+
+	vseparator = gtk_vseparator_new();
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
+				  vseparator, NULL, NULL);
+	gtk_widget_set_usize(vseparator, 5, 7);
+	
+	
 	cbBook = gtk_combo_new();
 	gtk_widget_show(cbBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav), cbBook,
@@ -609,6 +663,11 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_signal_connect(GTK_OBJECT(vc->cbe_book),
 			   "changed",
 			   GTK_SIGNAL_FUNC(book_changed), vc);
+
+	gtk_signal_connect(GTK_OBJECT(sync_button),
+			   "toggled",
+			   GTK_SIGNAL_FUNC(sync_toggled), vc);
+			   
 	gtk_signal_connect(GTK_OBJECT(vc->spb_chapter),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
@@ -841,6 +900,36 @@ void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 
 /******************************************************************************
  * Name
+ *   gui_keep_comm_dialog_in_sync
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void gui_keep_comm_dialog_in_sync(gchar * key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_keep_comm_dialog_in_sync(gchar * key)
+{
+	GList *tmp = NULL;
+	tmp = g_list_first(dialog_list);
+	while (tmp != NULL) {
+		COMM_DATA *vc = (COMM_DATA *) tmp->data;
+		if(vc->sync) {
+			sync_with_main(vc);
+		}
+		tmp = g_list_next(tmp);
+	}
+}
+
+
+/******************************************************************************
+ * Name
  *   gui_open_commentary_dialog
  *
  * Synopsis
@@ -885,6 +974,7 @@ void gui_open_commentary_dialog(gchar * mod_name)
 
 	popupmenu = gui_create_pm_comm(vc);
 	gnome_popup_menu_attach(popupmenu, vc->html, NULL);
+	vc->sync = FALSE;
 	sync_with_main(vc);
 	gtk_widget_show(vc->dialog);
 }
@@ -942,6 +1032,7 @@ void gui_open_commentary_editor(gchar * mod_name)
 	vc->chapter_heading = FALSE;
 	dialog_list = g_list_append(dialog_list, (COMM_DATA *) vc);
 	create_commentary_dialog(vc, TRUE);
+	vc->sync = FALSE;
 	sync_with_main(vc);
 	cur_vc = vc;
 	

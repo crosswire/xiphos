@@ -47,7 +47,7 @@ project.menu.comment=gnomesword Version 0.9.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/terry --enable-gtkembedmoz 
+project.configure.options=--prefix=/home/terry --enable-static-sword
 anjuta.program.arguments=
 preferences.indent.automatic=1
 preferences.use.tabs=1
@@ -222,7 +222,7 @@ module.source.files=\
 
 module.pixmap.name=.
 module.pixmap.type=
-module.pixmap.expanded=0
+module.pixmap.expanded=1
 module.pixmap.files=\
 	pixmaps/tt.xpm\
 	pixmaps/GnomeSword.png\
@@ -232,18 +232,10 @@ module.pixmap.files=\
 	pixmaps/book-gold.png\
 	pixmaps/book-green.png\
 	pixmaps/book-un.png\
-	pixmaps/dock.xpm\
-	pixmaps/exit2.xpm\
-	pixmaps/footnote3.xpm\
 	pixmaps/gnome-fontsel.xpm\
-	pixmaps/morphs.xpm\
-	pixmaps/search1.xpm\
 	pixmaps/splash.png\
-	pixmaps/strongs.xpm\
 	pixmaps/sword.xpm\
-	pixmaps/sword2.xpm\
 	pixmaps/sword3.xpm\
-	pixmaps/yes.xpm\
 	doc/help/gs.png
 
 module.data.name=.
@@ -267,7 +259,6 @@ module.doc.files=\
 	NEWS\
 	README\
 	TODO\
-	macros/ChangeLog\
 	po/ChangeLog\
 	doc/head.txt\
 	doc/getting_started.txt\
@@ -278,7 +269,7 @@ module.doc.files=\
 	doc/help/search_dialog.html\
 	doc/help/template.html
 
-module.po.expanded=0
+module.po.expanded=1
 module.po.files=\
 	bg.po\
 	de.po\

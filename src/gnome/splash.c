@@ -473,17 +473,17 @@ void gui_splash_init() {
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+				PACKAGE_PIXMAPS_DIR "/book-gold.png");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/gnome-fontsel.xpm");
+				PACKAGE_PIXMAPS_DIR "/book-green.png");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+				PACKAGE_PIXMAPS_DIR "/GnomeSword.png");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 	}
@@ -532,8 +532,11 @@ void gui_splash_step4() {
 
 void gui_splash_done() {
 	if (settings.showsplash) {
+		
+		while (gtk_events_pending()) {
+			gtk_main_iteration();
+		}
 		gtk_widget_unref(splash);
 		gtk_widget_destroy(splash);
 	}
 }
-

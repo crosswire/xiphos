@@ -34,6 +34,10 @@ extern "C" {
 #define BOOK_WINDOW 4
 #define PERCOMM_WINDOW 5
 #define STUDYPAD_WINDOW 6
+#define BIBLE_DIALOG 7
+#define COMMENTARY_DIALOG 8
+#define DICTIONARY_DIALOG 9
+#define BOOK_DIALOG 10
     
  
 typedef struct _app_widgets WIDGETS;
@@ -89,12 +93,12 @@ struct  _app_widgets {
 extern WIDGETS widgets;		
 /*** function prototypes ***/
 
-void init_gnomesword(void);
-void shutdown_gnomesword(void);
+void frontend_init(void);
+void frontend_display(void);
+void shutdown_frontend(void);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
