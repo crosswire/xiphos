@@ -66,7 +66,7 @@ s%@INSTALL_PROGRAM@%${INSTALL}%g
 s%@INSTALL_SCRIPT@%${INSTALL_PROGRAM}%g
 s%@INSTALL_DATA@%${INSTALL} -m 644%g
 s%@PACKAGE@%gnomesword%g
-s%@VERSION@%0.1.8d%g
+s%@VERSION@%0.1.8f%g
 s%@ACLOCAL@%aclocal -I macros%g
 s%@AUTOCONF@%autoconf%g
 s%@AUTOMAKE@%automake%g
@@ -248,9 +248,9 @@ for ac_file in .. $CONFIG_HEADERS; do if test "x$ac_file" != x..; then
 ${ac_dA}PACKAGE${ac_dB}PACKAGE${ac_dC}"gnomesword"${ac_dD}
 ${ac_uA}PACKAGE${ac_uB}PACKAGE${ac_uC}"gnomesword"${ac_uD}
 ${ac_eA}PACKAGE${ac_eB}PACKAGE${ac_eC}"gnomesword"${ac_eD}
-${ac_dA}VERSION${ac_dB}VERSION${ac_dC}"0.1.8d"${ac_dD}
-${ac_uA}VERSION${ac_uB}VERSION${ac_uC}"0.1.8d"${ac_uD}
-${ac_eA}VERSION${ac_eB}VERSION${ac_eC}"0.1.8d"${ac_eD}
+${ac_dA}VERSION${ac_dB}VERSION${ac_dC}"0.1.8f"${ac_dD}
+${ac_uA}VERSION${ac_uB}VERSION${ac_uC}"0.1.8f"${ac_uD}
+${ac_eA}VERSION${ac_eB}VERSION${ac_eC}"0.1.8f"${ac_eD}
 ${ac_dA}STDC_HEADERS${ac_dB}STDC_HEADERS${ac_dC}1${ac_dD}
 ${ac_uA}STDC_HEADERS${ac_uB}STDC_HEADERS${ac_uC}1${ac_uD}
 ${ac_eA}STDC_HEADERS${ac_eB}STDC_HEADERS${ac_eC}1${ac_eD}
