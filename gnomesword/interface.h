@@ -13,5 +13,4 @@ GtkWidget* create_menuInt2 (void);
 GtkWidget* create_menuInt3 (void);
 GtkWidget* create_dlgSearch (void);
 GtkWidget* create_wdwEditBookmarks (void);
-GtkWidget* create_dlgSpell (void);
-GtkWidget* create_pumuBookmarks (void);
+GtkWidget* create_dlgAboutSword (void);

@@ -90,10 +90,8 @@ INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword
 
 
 bin_PROGRAMS = gnomesword
-
-gnomesword_SOURCES =  	main.cpp 	support.cpp support.h 	display.cpp display.h 	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h 	interface.cpp interface.h 	filestuff.cpp filestuff.h 	menustuff.cpp menustuff.h
-
-
+@SPELLING_TRUE@gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
+@SPELLING_FALSE@gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
 gnomesword_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) 
@@ -107,8 +105,12 @@ DEFS = @DEFS@ -I. -I$(srcdir) -I..
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-gnomesword_OBJECTS =  main.o support.o display.o GnomeSword.o callback.o \
-interface.o filestuff.o menustuff.o
+@SPELLING_FALSE@gnomesword_OBJECTS =  main.o support.o display.o \
+@SPELLING_FALSE@GnomeSword.o callback.o interface.o filestuff.o \
+@SPELLING_FALSE@menustuff.o
+@SPELLING_TRUE@gnomesword_OBJECTS =  main.o support.o display.o \
+@SPELLING_TRUE@GnomeSword.o callback.o interface.o filestuff.o \
+@SPELLING_TRUE@menustuff.o spellcheck.o DICTClient.o
 gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -125,9 +127,9 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = gtar
 GZIP_ENV = --best
-DEP_FILES =  .deps/GnomeSword.P .deps/callback.P .deps/display.P \
-.deps/filestuff.P .deps/interface.P .deps/main.P .deps/menustuff.P \
-.deps/support.P
+DEP_FILES =  .deps/DICTClient.P .deps/GnomeSword.P .deps/callback.P \
+.deps/display.P .deps/filestuff.P .deps/interface.P .deps/main.P \
+.deps/menustuff.P .deps/spellcheck.P .deps/support.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
