@@ -47,6 +47,7 @@ struct _dldata {
 };
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
 void gui_setup_dictlex(GList *mods);
-void gui_shutdown_dictlex(void);							
+void gui_shutdown_dictlex(void);
+
 #endif
 

@@ -1,5 +1,11 @@
 2002-06-22  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* renamed gui/_dictlex.h to gui/dictlex.h
+	* renamed gnome/_dictlex.c to gnome/dictlex.c
+	
+
+2002-06-22  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* renamed gui/_bibletext.h to gui/bibletext.h
 	* renamed gnome/_bibletext.c to gnome/bibletext.c
 	* renamed gui/_commentary.h to gui/commentary.h

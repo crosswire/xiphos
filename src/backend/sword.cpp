@@ -204,7 +204,7 @@ void backend_init_sword(void)
 	if(havepercomm)
 		backend_setup_percomm(&settings);
 	if(havedict)
-		backend_setup_dictlex(&settings);
+		backend_setup_dictlex();
 	if(havebook)
 		backend_setup_books();
 	if(havebible)
