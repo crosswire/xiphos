@@ -63,6 +63,13 @@ void on_btnLEapplylistchanges_clicked(GtkButton * button,
 void on_btnLEok_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEdelete_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEnew_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEopen_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
+void on_btnLErefresh_clicked(GtkButton * button, gpointer user_data);
+void on_btnLEsave_clicked(GtkButton * button, gpointer user_data);
+
 
 
 /*********************************************************************************

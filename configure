@@ -3342,10 +3342,14 @@ done
 #define USE_ASPELL 1
 EOF
 
+   cat >> confdefs.h <<\EOF
+#define USE_SPELL 1
+EOF
+
    echo "found"
   else
    echo $ac_n "checking for ispell""... $ac_c" 1>&6
-echo "configure:3349: checking for ispell" >&5 
+echo "configure:3353: checking for ispell" >&5 
    ispell_dirs="${prefix}/bin $ac_ispell_dir/bin /usr/bin /usr/local/bin" 
    
 ispell_dir=NO
@@ -3365,6 +3369,10 @@ done
 #define USE_ISPELL 1
 EOF
 
+    cat >> confdefs.h <<\EOF
+#define USE_SPELL 1
+EOF
+
     echo "found"
    fi
   fi
@@ -3372,7 +3380,7 @@ EOF
 
 have_pixbuf="no"
  echo $ac_n "checking for Gdkpixbuf libraries""... $ac_c" 1>&6
-echo "configure:3376: checking for Gdkpixbuf libraries" >&5
+echo "configure:3384: checking for Gdkpixbuf libraries" >&5
  if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
     echo "$ac_t""found" 1>&6
         PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
@@ -3387,7 +3395,7 @@ echo "configure:3376: checking for Gdkpixbuf libraries" >&5
 
 have_gnomeprint="no"
  echo $ac_n "checking for GnomePrint libraries >= 0.20""... $ac_c" 1>&6
-echo "configure:3391: checking for GnomePrint libraries >= 0.20" >&5
+echo "configure:3399: checking for GnomePrint libraries >= 0.20" >&5
  if gnome-config --libs print > /dev/null 2>&1; then 
     vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
@@ -3412,7 +3420,7 @@ EOF
 
 have_gal="no"
  echo $ac_n "checking for Gnome App libraries (GAL) >= 0.4.99.7""... $ac_c" 1>&6
-echo "configure:3416: checking for Gnome App libraries (GAL) >= 0.4.99.7" >&5
+echo "configure:3424: checking for Gnome App libraries (GAL) >= 0.4.99.7" >&5
  if gnome-config --libs gal > /dev/null 2>&1; then 
     vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
@@ -3432,7 +3440,7 @@ echo "configure:3416: checking for Gnome App libraries (GAL) >= 0.4.99.7" >&5
 
 gtkhtml_ok="false"
 echo $ac_n "checking for GtkHTML""... $ac_c" 1>&6
-echo "configure:3436: checking for GtkHTML" >&5
+echo "configure:3444: checking for GtkHTML" >&5
   if gnome-config --libs gtkhtml > /dev/null 2>&1; then
 	vers=`gnome-config --modversion gtkhtml`
 	case $vers

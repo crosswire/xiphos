@@ -22,7 +22,6 @@ extern "C" {
 	
 	
 GtkWidget *create_menu1(void);
-GtkWidget *create_mainwindow(void);
 GtkWidget *create_wdwEditBookmarks(void);
 GtkWidget *create_InfoBox(void);
 GtkWidget *create_dlgSettings(void);
@@ -167,19 +166,6 @@ void on_btnPropertyboxCancel_clicked(GtkButton * button,
 					 gpointer user_data);
 //==============================================================================================
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_btnLEdelete_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEok_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEopen_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEclose_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEok_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEapply_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEcancel_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEnew_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEopen_clicked(GtkButton * button, gpointer user_data);
-void on_btnLErefresh_clicked(GtkButton * button, gpointer user_data);
-void on_btnLEsave_clicked(GtkButton * button, gpointer user_data);
 void on_tbtnFollow_toggled(GtkToggleButton * togglebutton,
 			       gpointer user_data);
 void on_cbtnPNformat_toggled(GtkToggleButton * togglebutton,
@@ -256,33 +242,7 @@ gboolean on_epaned_button_release_event(GtkWidget *widget,
 		gpointer  user_data);                   
 void on_cbtnShowHistoryGroup_toggled(GtkToggleButton *togglebutton,
 		gpointer user_data);
-void on_btsText_clicked(GtkButton *button, gpointer user_data);
-void on_btsComms_clicked                    (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsDicts_clicked                    (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsBookmarks_clicked                (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsHistory_clicked                  (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btnClearHistory_clicked             (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsComms2_clicked                   (GtkButton       *button,
-                                        gpointer         user_data);
-void on_historybutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsDicts2_clicked                   (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsBookmarks2_clicked               (GtkButton       *button,
-                                        gpointer         user_data);
-void on_btsHistory2_clicked                 (GtkButton       *button,
-                 			gpointer         user_data);
-void on_textbutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data);
-void on_combutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data);
-void on_dictbutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data);
+
 void on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
                                         gpointer         user_data);
 void on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data);

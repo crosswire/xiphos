@@ -111,7 +111,9 @@ module.source.files=\
 	sw_utility.cpp\
 	sw_utility.h\
 	gs_shortcutbar.c\
-	gs_shortcutbar.h
+	gs_shortcutbar.h\
+	gs_gui.c\
+	gs_gui.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
