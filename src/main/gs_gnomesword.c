@@ -853,5 +853,13 @@ void set_verse_style(gboolean choice)
 		display_text(settings->currentverse);	//-- show the change
 }
 
+const char *get_sword_version(void)
+{
+	return backend_get_sword_version();
+}
 
+void display_devotional(SETTINGS * s)
+{
+	backend_display_devotional(s);
+}
 /*****   end of file   ******/

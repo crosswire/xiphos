@@ -3,6 +3,8 @@
 	* removed gs_mainmenu_cb.* added gnome/main_menu.*
 	  took menu creation from main/gs_gui.* put menu creation
 	  and call backs into gnome/main_menu.*
+	* added function headers to gnome/main_menu.* and removed
+	  calls to backend
 	
 
 

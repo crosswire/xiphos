@@ -47,7 +47,7 @@ extern "C" {
 	void backend_set_global_option(gint window, gchar * option,
 				       gchar * yesno);
 	GList *backend_get_books(void);
-	const char *backend_get_sword_verion(void);
+	const char *backend_get_sword_version(void);
 	void backend_display_new_font_color_and_size(SETTINGS * s);
 	void backend_save_module_key(char *mod_name, char *key);
 	void backend_display_devotional(SETTINGS * s);
