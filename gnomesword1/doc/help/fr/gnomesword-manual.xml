@@ -2,15 +2,15 @@
 <!DOCTYPE manual PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 <!ENTITY introduction SYSTEM "introduction.xml">
-<!ENTITY start SYSTEM "start.xml">
-<!ENTITY interface SYSTEM "interface.xml">
-<!ENTITY preferences SYSTEM "preferences.xml"> 
-<!ENTITY modules SYSTEM "modules.xml">
+<!ENTITY start SYSTEM "start.xml"><!-- done -->
+<!ENTITY interface SYSTEM "interface.xml"><!-- done -->
+<!ENTITY preferences SYSTEM "preferences.xml"<!-- done -->
+<!ENTITY modules SYSTEM "modules.xml"><!-- done -->
 <!ENTITY search SYSTEM "search.xml">
 <!ENTITY studypad SYSTEM "studypad.xml"> 
 <!ENTITY personal SYSTEM "personal.xml">
-<!ENTITY authors SYSTEM "authors.xml">
-<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY authors SYSTEM "authors.xml"><!-- done -->
+<!ENTITY legal SYSTEM "legal.xml"><!-- done -->
 <!ENTITY app "GnomeSword2">
 <!ENTITY appversion "2.1.1">
 <!ENTITY manrevision "2.1">
@@ -51,43 +51,43 @@
 				lettre en majuscule.
 			</para>
   		</legalnotice>
-<abstract>
-<para>
-Gnomesword est un logiciel d'aide à l'étude de la Bible..
-
-</para>
-</abstract>
+		<abstract>
+			<para>
+				Gnomesword est un logiciel d'aide à l'étude de la Bible..
+			</para>
+		</abstract>
 		<keywordset>
-<keyword>gnome</keyword>
-<keyword>gnomesword</keyword>
-<keyword>gnomesword2</keyword>
-<keyword>sword</keyword>
-<keyword>crosswire</keyword>
-<keyword>help dialog</keyword>
-</keywordset>
-<!-- this is the version of manual, not application --> 
-		<releaseinfo>Ceci est la version 2.1.1 du manuel de GnomeSword</releaseinfo>
- 		</bookinfo>
+			<keyword>gnome</keyword>
+			<keyword>gnomesword</keyword>
+			<keyword>gnomesword2</keyword>
+			<keyword>sword</keyword>
+			<keyword>crosswire</keyword>
+			<keyword>help dialog</keyword>
+		</keywordset>
 
-<!-- Document Body -->
-<!-- Introduction -->
+		<!-- this is the version of manual, not application --> 
+		<releaseinfo>Ceci est la version 2.1.1 du manuel de GnomeSword</releaseinfo>
+ 	</bookinfo>
+
+	<!-- Document Body -->
+	<!-- Introduction -->
 		&introduction;
-<!-- Getting Started with GnomeSword -->
+	<!-- Getting Started with GnomeSword -->
 		&start;
-<!-- Interface -->
+	<!-- Interface -->
 		&interface;
-<!-- Preferences -->
+	<!-- Preferences -->
 		&preferences;
-<!-- Modules -->
+	<!-- Modules -->
 		&modules;
-<!-- Searching -->
+	<!-- Searching -->
 		&search;
-<!-- Studypad -->
+	<!-- Studypad -->
 		&studypad;
-<!-- Personal Commentary -->
+	<!-- Personal Commentary -->
 		&personal;
-<!-- Authors -->
+	<!-- Authors -->
 		&authors;
-<!-- License -->
+	<!-- License -->
 		&license;
 </book>
