@@ -30,7 +30,6 @@
 #include "gui/history.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_popup_cb.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
