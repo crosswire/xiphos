@@ -2,8 +2,10 @@ Basic Installation
 ==================
 ===================== notice =======================
 You need to have the Sword Project (sword-1.5.0) installed.
+(sword-1.5.1a for gnomesword-0.3.0 or later)
 You need at least one each text ,commentary and dictionary module also.
 Sword-1.5.0 and the modules can be found at www.crosswire.org in the Sword Project.
+You need gnome-print-0.20 or later -- http://www.gnome.org/
 
 ============================================================================
 ========= you need aspell.30 and pspell.10 to compile gnomesword ===========
@@ -11,13 +13,6 @@ Sword-1.5.0 and the modules can be found at www.crosswire.org in the Sword Proje
 ================= do ./configure --enable-spellchecking ====================
 ===================== to compile with spell checking =======================
 =========== you can get aspell from - http://aspell.sourceforge.net/========
-============================================================================
-
-============================================================================
-=========== you need gnome-print-0.20 to compile with printing =============
-=================== do ./configure --enable-printing =======================
-======================== to compile with printing ==========================
-=========== you can get gnome-print from - http://www.gnome.org/============
 ============================================================================
 
 You must also have gnome up and running.
@@ -33,12 +28,12 @@ Then do a:
 
 ./configure
 or
-./configure --enable-spellchecking --enable-printing
+./configure --enable-spellchecking
 make
 su
 make install
 
-default is without spell checking or printing
+default is without spell checking
 
    ========================================================
      ====================================================

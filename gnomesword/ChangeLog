@@ -1,3 +1,13 @@
+2000-11-9  Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*release 0.3.0
+	*requires sword-1.5.1a
+	*requires gnome-print-0.20 or higher
+	*add some configuration options for the shortcut bar
+		show commentary group
+		show dictionary group
+
+
 2000-10-12  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*removed reference to unknown includes
