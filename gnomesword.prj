@@ -58,6 +58,7 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
+preferences.autoformat.style=Custom style
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -147,7 +148,10 @@ module.include.files=\
 	src/gui/parallel_view.h\
 	src/gui/widgets.h\
 	src/gui/preferences_cell_renderer.h\
-	src/gui/session.h
+	src/gui/session.h\
+	src/main/mod_mgr.h\
+	src/backend/module_manager.hh\
+	src/gui/mod_mgr.h
 
 module.source.name=.
 module.source.type=
@@ -228,7 +232,10 @@ module.source.files=\
 	src/gnome2/preferences_cell_renderer.c\
 	src/gnome2/bookmarks_menu.c\
 	src/gnome2/spell_gnome_spell.c\
-	src/gnome2/session.c
+	src/gnome2/session.c\
+	src/main/mod_mgr.c\
+	src/backend/module_manager.cc\
+	src/gnome2/mod_mgr.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

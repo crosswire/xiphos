@@ -32,6 +32,7 @@
 
 #ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
+#include <gnome.h>
 #else
 #include <glib-1.2/glib.h>
 #endif
@@ -61,7 +62,6 @@ char *backend_get_text(const char * module_name, const char *key)
 	module = SWMgr_getModuleByName(mgr, module_name);
 	SWModule_setKeyText(module, key);
 	retval = strdup(SWModule_getRenderText(module));
-	//g_warning(retval);
 	SWMgr_delete(mgr);
 	return retval;	
 }
@@ -175,12 +175,12 @@ void backend_init(void)
 	ModMap::iterator it; 
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sw.version);
-	g_print("Initiating SWORD\n\n");
-	g_print("System locale is %s\n",
+	g_print("%s\n\n", _("Initiating SWORD"));
+	g_print("%s %s\n", _("System locale is"),
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 	sword_locale = get_sword_locale();
-	g_print("SWORD locale is %s\n", sword_locale);
-	g_print("Checking for SWORD Modules\n");
+	g_print("%s %s\n\n", _("SWORD locale is"), sword_locale);
+	g_print("%s\n", _("Checking for SWORD Modules"));
 	free((char*)sword_locale);
 	backend_init_language_map();
 	/*
@@ -197,7 +197,6 @@ void backend_init(void)
 	if(settings.havepercomm)
 		backend_setup_percomm();*/
 }
-
 
 
 /******************************************************************************
@@ -224,7 +223,7 @@ void backend_shutdown(int save_properties)
 	 * delete Sword managers
 	 */
 	backend_delete_managers();
-	g_print("\nSWORD is shutdown\n");
+	g_print("%s\n", _("SWORD is shutdown"));
 }
 
 

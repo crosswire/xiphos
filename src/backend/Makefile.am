@@ -12,5 +12,6 @@ libbackend_a_SOURCES =  \
     key.cc key.hh \
     mgr.cc mgr.hh \
     module.cc module.hh \
+    module_manager.cc module_manager.hh \
     sword.cpp sword.h\
     tree.cc tree.hh

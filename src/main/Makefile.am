@@ -18,10 +18,10 @@ libmain_a_SOURCES =  \
     lists.c lists.h \
     main.c \
     module.c module.h \
+    mod_mgr.c mod_mgr.h \
     percomm.c percomm.h \
     search.c search.h \
     settings.c settings.h \
-    shortcutbar.c shortcutbar.h \
     spell_pspell.c \
     spell.h \
     sword.c sword.h\
