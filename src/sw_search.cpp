@@ -34,7 +34,7 @@
 
 
 #include "sw_search.h"
-#include "display.h"
+//#include "display.h"
 #include "sw_display.h"
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"

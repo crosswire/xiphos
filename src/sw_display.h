@@ -45,12 +45,6 @@ class ComEntryDisp:public GtkHTMLEntryDisp { public:
 };
 
 //----------------------------------------------------------------------------------------------
-class GTKhtmlChapDisp:public GtkHTMLEntryDisp { public:
-	GTKhtmlChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
-//----------------------------------------------------------------------------------------------
 class GTKutf8ChapDisp:public GtkHTMLEntryDisp { public:
 	GTKutf8ChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
@@ -64,4 +58,81 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);
+
+
+class GTKEntryDisp:public SWDisplay {
+      protected:
+	GtkWidget * gtkText;
+      public:
+	static GdkColor colourGreen;
+	static GdkColor colourBlue;
+	static GdkColor colourRed;
+	static GdkColor colourCur;
+
+	static void __initialize() { GdkColormap *cmap;
+
+		 cmap = gdk_colormap_get_system();
+		 colourGreen.red = 0x0000;
+		 colourGreen.green = 0xbbbb;
+		 colourGreen.blue = 0x0000;
+		 colourBlue.red = 0;
+		 colourBlue.green = 0;
+		 colourBlue.blue = 0xffff;
+		 colourRed.red = 0xffff;
+		 colourRed.green = 0;
+		 colourRed.blue = 0;
+		 colourCur.red = 0x0000;
+		 colourCur.green = 0xbbbb;
+		 colourCur.blue = 0x0000;
+		if (!gdk_color_alloc(cmap, &colourGreen)) {
+			g_error("couldn't allocate colour");
+		}
+		if (!gdk_color_alloc(cmap, &colourBlue)) {
+			g_error("couldn't allocate colour");
+		}
+		if (!gdk_color_alloc(cmap, &colourRed)) {
+			g_error("couldn't allocate colour");
+		}
+		if (!gdk_color_alloc(cmap, &colourCur)) {
+			g_error("couldn't allocate colour");
+		}
+	}
+	GTKEntryDisp(GtkWidget * gtkText) {
+		this->gtkText = gtkText;
+	}
+	virtual char Display(SWModule & imodule);
+	gint gettags(gchar * text, gchar *tag, gint pos);
+	//gchar *gbftohtml(gchar * text, gint maxlen);
+};
+
+
+//----------------------------------------------------------------------------------------------
+class GTKPerComDisp:public GTKEntryDisp { public:
+	GTKPerComDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class GTKChapDisp:public GTKEntryDisp { public:
+	GTKChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class HTMLChapDisp:public GTKEntryDisp {	
+      public:
+	HTMLChapDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+class HTMLentryDisp:public GTKEntryDisp { public:
+	HTMLentryDisp(GtkWidget * gtkText):GTKEntryDisp(gtkText) {
+	} virtual char Display(SWModule & imodule);
+};
+
+//----------------------------------------------------------------------------------------------
+void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo);
+
+
 
