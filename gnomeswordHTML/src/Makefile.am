@@ -35,6 +35,8 @@ COMMON_SOURCE =  \
     main.c \
     gs_menu.c \
     gs_menu.h \
+    gs_shortcutbar.c \
+    gs_shortcutbar.h \
     gs_popup_cb.c \
     gs_popup_cb.h \
     gs_search.cpp \

@@ -40,7 +40,7 @@
 #include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "gs_html.h"
-
+#include "gs_shortcutbar.h"
 
 #if USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
@@ -111,8 +111,8 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 {
 	GtkLabel *label1;
 	GtkWidget *notebook;
-	
-	
+/* setup shortcut bar */
+	setupSB(biblemods, commentarymods ,dictionarymods);
 /* set color for current verse */
   	myGreen.red =  settings->currentverse_red;
 	myGreen.green = settings->currentverse_green;
@@ -369,21 +369,8 @@ applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
 #endif /* USE_SHORTCUTBAR */
 }
 
-/******************************************************************************
- * add_sb_group - add group to shourtcut bar
- * shortcut_bar - shortcut bar to add group to
- * group_name - name of the group to be added
- *****************************************************************************/
+
 #if USE_SHORTCUTBAR
-gint
-add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
-{
-	gint group_num;
-	
-	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
-        e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
-        return group_num;
-}
 #else
 
 
@@ -602,7 +589,7 @@ gint getdictnumber (GtkWidget *text)
 }
 
 /*****************************************************************************
- * sbchangeModSword
+ * sbchangeModSword -- shortcut bar change sword module
  * group_num
  * item_num
 ******************************************************************************/
