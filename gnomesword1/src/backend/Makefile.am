@@ -4,12 +4,8 @@ INCLUDES = \
 
 noinst_LIBRARIES = libbackend.a
 
-EXTRA_DIST =  \
-    sword_defs.h
-
 libbackend_a_SOURCES =  \
     config.cc config.hh \
-    mgr.cc mgr.hh \
     module_manager.cc module_manager.hh \
     sword.cpp sword.h\
     sword_main.cc sword_main.hh \

@@ -43,14 +43,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
  
-#ifdef USE_GNOME2
 #include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 
 #include "config.hh"
-#include "sword_defs.h"
+#include "sword_main.hh"
 
 #include "main/sword.h"
 
@@ -325,11 +321,13 @@ void backend_save_module_key(char *mod_name, char *key)
 {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
+	return; // this needs help
+	
 	DIR *dir;
 	char buf[256], conffile[256];
 	struct dirent *ent;
 
-	strcpy(buf, sw.main_mgr->configPath);
+//	strcpy(buf, sw.main_mgr->configPath);
 	dir = opendir(buf);
 	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);

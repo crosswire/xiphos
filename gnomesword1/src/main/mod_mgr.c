@@ -212,8 +212,8 @@ GList *mod_mgr_list_local_modules(const char *dir)
 	GList *list = NULL;	
 	MOD_MGR *mod_info;
 	
-	backend_delete_main_mgr();
-	backend_init_main_mgr();
+//	backend_delete_main_mgr();
+//	backend_init_main_mgr();
 	backend_init_module_mgr(dir);
 	
 	backend_module_mgr_list_local_modules_init();
@@ -245,8 +245,8 @@ GList *mod_mgr_remote_list_modules(const char *source_name)
 	GList *list = NULL;	
 	MOD_MGR *mod_info;
 	
-	backend_delete_main_mgr();
-	backend_init_main_mgr();
+//	backend_delete_main_mgr();
+//	backend_init_main_mgr();
 	
 	backend_module_mgr_remote_list_modules_init(source_name);
 	while((mod_info = backend_module_mgr_get_next_module()) != NULL) {

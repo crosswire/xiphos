@@ -730,15 +730,7 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-//	if (settings.use_percomm_dialog)
-//		gui_open_commentary_editor((gchar *) user_data);
-/*	else {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.workbook_lower),
-				      settings.percomm_page);
-		gui_set_percomm_page((gchar *) user_data);
-	}
-*/
+	main_dialogs_open((gchar *) user_data);
 }
 
 /******************************************************************************
