@@ -652,7 +652,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		*swbmDir;
 	
 	savebookmarks(settings->ctree_widget);
-	saveconfig(settings, true);
+	backend_save_properties(settings, true);
 	
 	if (settings->modifiedSP) {	//-- if study pad file has changed since last save  
 		msgbox = create_InfoBox();
@@ -699,11 +699,8 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		delete comp1Display;
 	if (FPNDisplay)
 		delete FPNDisplay;
-	//if (commDisplay)
-	//	delete commDisplay;
-	
 	//-- we are done
-	gtk_exit(0);		//-- exit
+	gtk_exit(0);		//-- "even so come Lord Jesus"  :)
 }
 
 /*******************************************************************************
