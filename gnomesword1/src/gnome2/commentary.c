@@ -96,6 +96,7 @@ static void display(COMM_DATA * c, gchar * key)
 
 
 	strkey = get_valid_key(key);
+	//g_warning(strkey); 
 	if (c->book_heading) {
 		c->book_heading = FALSE;
 		text_str = get_book_heading(c->mod_name, strkey);
@@ -109,9 +110,10 @@ static void display(COMM_DATA * c, gchar * key)
 	else {
 		text_str = get_commentary_text(c->mod_name, strkey);
 	}
-	entry_display(c->html, c->mod_name, text_str, key, TRUE);
+	//g_warning(strkey); 
+	entry_display(c->html, c->mod_name, text_str, strkey, TRUE);
 	free(text_str);
-
+	free(strkey);
 }
 
 /******************************************************************************

@@ -1142,6 +1142,7 @@ char *backend_get_chap_heading(int manager, char *module_name,
 	char newkey[256];
 	char *buf;
 	SWModule *mod = NULL;
+	
 	switch (manager) {
 	case TEXT_MGR:
 		mod = sw.text_mgr->Modules[module_name];
@@ -1157,10 +1158,10 @@ char *backend_get_chap_heading(int manager, char *module_name,
 		break;
 	}
 
-
 	if (mod) {
 		versekey = key;
 		mod->SetKey(versekey);
+		mod->SetKey(key);
 
 		VerseKey vkey;
 		vkey = key;
@@ -1204,6 +1205,7 @@ char *backend_get_book_heading(int manager, char *module_name,
 	char newkey[256];
 	char *buf;
 	SWModule *mod = NULL;
+	
 	switch (manager) {
 	case TEXT_MGR:
 		mod = sw.text_mgr->Modules[module_name];
@@ -1222,17 +1224,14 @@ char *backend_get_book_heading(int manager, char *module_name,
 	if (mod) {
 		versekey = key;
 		mod->SetKey(versekey);
-
 		VerseKey vkey;
-		vkey = key;
-		const char *book =
+		vkey = key;		
+		SWBuf book =
 		    vkey.books[vkey.Testament() - 1][vkey.Book() -
 						     1].name;
-
-		sprintf(newkey, "%s 0:0", book);
-
+		book += "0:0";
 		versekey.AutoNormalize(0);
-		versekey = newkey;
+		versekey = book.c_str();
 		mod->SetKey(versekey);
 		mod->Error();
 		buf = (char *) mod->RenderText();
@@ -1316,10 +1315,22 @@ char *backend_get_commentary_key(char *mod_name)
 char *backend_get_commentary_text(char *mod_name, char *key)
 {
 	SWModule *mod = sw.comm_mgr->Modules[mod_name];
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     "iso8859-1",
+			     "UTF-8",
+			     &bytes_read,
+			     &bytes_written,
+			     error);
 	if (mod) {
 		versekey.Persist(1);
-		versekey = key;
+		versekey = mykey;
 		mod->SetKey(versekey);
+		mod->SetKey(mykey);
+		g_free(mykey);
 		// work-a-round for bug in thmlhtmlhref filter
 		if(!strcmp(sw.version,"1.5.6")) {
 			if ((!strcmp(mod->Name(), "AmTract"))
