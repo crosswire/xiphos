@@ -799,6 +799,44 @@ void gui_display_commentary_in_dialog(gchar * key)
 	display(cur_vc, key);
 }
 
+
+/******************************************************************************
+ * Name
+ *   gui_commentary_dialog_goto_bookmark
+ *
+ * Synopsis
+ *   #include "commentary_dialog.h"
+ *
+ *   void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
+{
+	GList *tmp = NULL;
+	tmp = g_list_first(dialog_list);
+	while (tmp != NULL) {
+		COMM_DATA *vc = (COMM_DATA *) tmp->data;
+		if(!strcmp(vc->mod_name, mod_name)) {
+			strcpy(vc->key, key);
+			display(vc, vc->key);
+			update_controls(vc);
+			return;
+		}		
+		tmp = g_list_next(tmp);
+	}
+	gui_open_commentary_dialog(mod_name);
+	strcpy(cur_vc->key, key);
+	display(cur_vc, cur_vc->key);
+	update_controls(cur_vc);
+}
+
+
 /******************************************************************************
  * Name
  *   gui_open_commentary_dialog
@@ -903,7 +941,8 @@ void gui_open_commentary_editor(gchar * mod_name)
 	dialog_list = g_list_append(dialog_list, (COMM_DATA *) vc);
 	create_commentary_dialog(vc, TRUE);
 	sync_with_main(vc);
-
+	cur_vc = vc;
+	
 	if (vc->ec->stylebar)
 		gtk_widget_show(vc->ec->toolbar_style);
 	if (vc->ec->editbar)

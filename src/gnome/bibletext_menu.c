@@ -1064,7 +1064,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
 	pm_text_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));
-	    
+	/*    
 	if (t->is_dialog) {
 		shortcut =
 		    gtk_menu_item_new_with_label(_
@@ -1082,7 +1082,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 		gtk_widget_show(separator);
 		gtk_container_add(GTK_CONTAINER(pm_text), separator);
 		gtk_widget_set_sensitive(separator, FALSE);
-	}
+	}*/
 	/*
 	 * file menu
 	 */
