@@ -32,6 +32,10 @@ libgui_a_SOURCES =  \
     create_shortcutbar_viewer.h \
     cipher_key_dialog.c \
     cipher_key_dialog.h \
+    fileselection.c \
+    fileselection.h \
+    gui.c \
+    gui.h \
     _editor.c \
     _editor.h \
     editor_menu.c \
@@ -42,5 +46,3 @@ libgui_a_SOURCES =  \
     main_menu.h \
     splash.c \
     splash.h
-
-
