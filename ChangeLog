@@ -1,3 +1,7 @@
+2002-03-26 Victor Porton <porton@narod.ru>
+
+	* fixed crash if an interlinear module is NULL
+
 2002-03-21 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* a single click with left button will lookup word under
