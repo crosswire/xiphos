@@ -63,7 +63,6 @@ GString *gs_clipboard; /* for copying from the html widgets freed in shutdownSWO
 
 gboolean isstrongs = FALSE; /* main window selection is not storngs number */
 gchar *current_filename= NULL;	/* filename for open file in study pad window */
-gboolean file_changed = FALSE;	/* set to true if text is study pad has changed - and file is not saved  */
 gchar current_verse[80]="Romans 8:28";	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 gboolean changemain = TRUE; /* change verse of Bible text window */
 gint dictpages,
@@ -98,6 +97,7 @@ extern gboolean addhistoryitem; /* do we need to add item to history */
 extern GtkWidget *htmlComments;
 extern GtkWidget *htmltext3;
 //gboolean firstbackclick = TRUE;
+extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved  */
 
 /******************************************************************************
  * initGnomeSword - sets up the interface

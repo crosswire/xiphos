@@ -40,15 +40,16 @@
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
+#include "filebar.h"
 
 #include "insertbar.h"
 #include "toolbar.h"
 #include "utils.h"
 #include "properties.h"
 #include "text.h"
-#include "gs_sword.h" 
+//#include "gs_sword.h" 
 #include "gs_editor.h" 
-
+#include "control-data.h"
 static void
 insert_toolbar_insert_image_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 {
@@ -66,6 +67,8 @@ insert_toolbar_insert_image_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 						   link_apply_cb,
 						   link_close_cb);
 	gtk_html_edit_properties_dialog_show (cd->properties_dialog);	
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 static void
@@ -89,6 +92,8 @@ insert_toolbar_insert_link_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 
 	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
 	gtk_html_edit_properties_dialog_set_page (cd->properties_dialog, GTK_HTML_EDIT_PROPERTY_LINK);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 
@@ -107,6 +112,8 @@ insert_toolbar_insert_rule_cb (GtkWidget *widget, GtkHTMLControlData *cd)
 						   rule_close_cb);
 
 	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
+	cd->html_modified = TRUE;
+	updatestatusbar(cd);
 }
 
 

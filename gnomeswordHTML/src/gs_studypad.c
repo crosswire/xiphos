@@ -174,7 +174,7 @@ void on_btnPaste_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void on_text3_changed(GtkEditable * editable, gpointer user_data)
 {
-	GtkWidget *statusbar;
+	//GtkWidget *statusbar;
 	gchar charbuf[255];
 
 	

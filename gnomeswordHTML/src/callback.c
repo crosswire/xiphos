@@ -74,7 +74,7 @@
 #include "callback.h"
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
-#include "gs_viewdict.h"
+#include "gs_viewdict_dlg.h"
 #include "gs_history.h"
 #include "support.h"
 #include "interface.h"
@@ -888,7 +888,6 @@ on_cbtnShowDLtabs_toggled(GtkToggleButton * togglebutton,
 //----------------------------------------------------------------------------------------------
 void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 {
-#if USE_SHORTCUTBAR
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = FALSE;
 		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 0);
@@ -896,19 +895,9 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 		settings->showshortcutbar = TRUE;
 		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbarsize);
 	}
-#else
-        if (settings->showshortcutbar) {
-		settings->showshortcutbar = FALSE;
-		gtk_paned_set_position(GTK_PANED(lookup_widget(MainFrm,"hpaned2")), 0);
-	} else {
-		settings->showshortcutbar = TRUE;
-		gtk_paned_set_position(GTK_PANED(lookup_widget(MainFrm,"hpaned2")), 106); //settings->shortcutbarsize);
-	} 	
-#endif /* USE_SHORTCUTBAR */
 }
 
 //----------------------------------------------------------------------------------------------
-#if USE_SHORTCUTBAR
 void
 on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			      GdkEvent * event,
@@ -916,7 +905,6 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 {
 	sbchangeModSword(MainFrm, GTK_WIDGET(shortcut_bar), group_num, item_num);
 }
-#endif /* USE_SHORTCUTBAR */
 
 
 //----------------------------------------------------------------------------------------------
@@ -969,7 +957,6 @@ on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 }
 
 //----------------------------------------------------------------------------------------------
-#if USE_SHORTCUTBAR
 gboolean
 on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
@@ -984,224 +971,7 @@ on_epaned_button_release_event(GtkWidget       *widget,
         }
         return TRUE;
 }
-#else
-/*******************************************************************************
- *
- *******************************************************************************/
-void
-on_btsText_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),0);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
-	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms2"));
-	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
-	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
-	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));
-	
-	
-	
-}
 
-
-void
-on_btsComms_clicked                    (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),1);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
-	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
-	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
-	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));	
-}
-
-
-void
-on_btsDicts_clicked                    (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),2);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
-	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
-	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));	
-}
-
-
-void
-on_btsBookmarks_clicked                (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),3);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory"));
-	if(settings->showhistorygroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory2"));
-}
-
-
-void
-on_btsHistory_clicked                  (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),4);
-}
-/*
- *
-*/
-void
-on_btnClearHistory_clicked             (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	clearhistory(MainFrm,MainFrm);
-}
-
-
-void
-on_btsComms2_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),1);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
-	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
-}
-
-
-void
-on_btsDicts2_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),2);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
-	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
-	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts"));
-}
-
-
-void
-on_btsBookmarks2_clicked               (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),3);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
-	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
-	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts"));
-	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
-}
-
-
-void
-on_btsHistory2_clicked                 (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	GtkWidget *sidebar;
-	
-	sidebar = lookup_widget(GTK_WIDGET(button), "nbSidebar");
-	gtk_notebook_set_page(GTK_NOTEBOOK(sidebar),4);
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsComms2"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsDicts2"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsBookmarks2"));
-	gtk_widget_hide(lookup_widget(GTK_WIDGET(button),"btsHistory2"));
-	
-	if(settings->showcomgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsComms"));
-	if(settings->showdictgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsDicts"));
-	if(settings->showbookmarksgroup) gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsBookmarks"));
-	gtk_widget_show(lookup_widget(GTK_WIDGET(button),"btsHistory"));
-}
-/*******************************************************************************
- *
- *******************************************************************************/
-void
-on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
-                                        gpointer         user_data)
-{
-    GtkWidget	*dlg,
-				*btnok,
-				*btnapply;
-							
-	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
-	btnok = lookup_widget(dlg,"btnPropertyboxOK");
-	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
-	gtk_widget_set_sensitive (btnok, TRUE);
-	gtk_widget_set_sensitive (btnapply, TRUE);
-	
-//	showbookmarksgroup = togglebutton->active;
-	
-}
-
-/*******************************************************************************
- *
- *******************************************************************************/
-void
-on_textbutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	changecurModSWORD((char *) user_data,TRUE);
-}
-
-/*******************************************************************************
- *
- *******************************************************************************/
-void
-on_combutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	sbchangeModSword(MainFrm,MainFrm,1, (gint)user_data);
-}
-
-/*******************************************************************************
- *
- *******************************************************************************/
-void
-on_dictbutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	sbchangeModSword(MainFrm,MainFrm,2, (gint)user_data);
-}
-
-/*******************************************************************************
- *
- *******************************************************************************/
-void
-on_historybutton_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-	changeverseHistory((gint)user_data);
-}
-
-
-
-#endif /* USE_SHORTCUTBAR */
 //----------------------------------------------------------------------------------------------
 void
 on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,

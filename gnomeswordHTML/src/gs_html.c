@@ -346,11 +346,10 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *widget;
-	gchar *buf;
+//	gchar *buf;
 	GtkHTML *html;
 
-	widget = lookup_widget(MainFrm, (gchar *) user_data);
-	
+	widget = lookup_widget(MainFrm, (gchar *) user_data);	
 	html = GTK_HTML(widget);
 	gtk_html_copy (html);
 	/*
