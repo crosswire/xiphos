@@ -14,14 +14,14 @@ bin_PROGRAMS = gnomesword
 COMMON_SOURCE =  \
     bibletext.c \
     bibletext.h \
+    bookmarks.c \
+    bookmarks.h \
     commentary.c \
     commentary.h \
     dictlex.c \
     dictlex.h \
     find_dlg_defs.h \
     gbs.c \
-    gs_bookmarks.c \
-    gs_bookmarks.h \
     gs_gnomesword.c \
     gs_gnomesword.h \
     gs_history.c \
