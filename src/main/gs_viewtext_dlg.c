@@ -33,7 +33,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "viewtext_dlg.h"
+#include "viewtext.h"
 #include "gs_viewtext_dlg.h"
 #include "sword.h"
 #include "gs_gnomesword.h"
@@ -70,12 +70,12 @@ static void updatecontrols(void)
 {
 	gchar *buf;
 
-	buf = VTgetbookSWORD();
+	buf = backend_get_book_viewtext();
 	gtk_entry_set_text(GTK_ENTRY(cbeBook), buf);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spbVTChapter),
-				  VTgetchapterSWORD());
+				  backend_get_chapter_viewtext());
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spbVTVerse),
-				  VTgetverseSWORD());
+				  backend_get_verse_viewtext());
 	/*** buf was allocated with g_strdup() in gs_viewtext_sw.cpp
 	       so we free it here ***/
 	g_free(buf);
@@ -95,17 +95,17 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, *modName;
 	static GtkWidget *dlg;
-	
+
 	if (*url == '#') {
 
 		if (!gsI_isrunning) {
 			dlg = create_dlgInformation();
 		}
 		++url;		/* remove # */
-		
+
 		if (*url == 'T')
 			++url;
-		
+
 		if (*url == 'G') {
 			++url;
 			modName = g_strdup(settings->lex_greek);
@@ -114,19 +114,18 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			g_free(buf);
 			g_free(modName);
 		}
-		
+
 		if (*url == 'H') {
 			++url;
 			modName = g_strdup(settings->lex_hebrew);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
-//                      g_warning(modName);
 			g_free(buf);
 			g_free(modName);
 		}
 		gtk_widget_show(dlg);
-	} 
-	
+	}
+
 	else if (*url == 'M') {
 		if (!gsI_isrunning) {
 			dlg = create_dlgInformation();
@@ -136,8 +135,8 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		loadmodandkey("Packard", buf);
 		g_free(buf);
 		gtk_widget_show(dlg);
-	} 
-	
+	}
+
 	else if (*url == '*') {
 		++url;
 		while (*url != ']') {
@@ -145,12 +144,12 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		++url;
 		buf = g_strdup(url);
-		VTgotoverseSWORD(buf);
+		backend_goto_verse_viewtext(buf);
 		updatecontrols();
-		g_free(buf); 
-	} 
-	
-	else if (!strncmp(url, "passage=", 7)) {/*** let's remove passage= verse list ***/
+		g_free(buf);
+	}
+
+	else if (!strncmp(url, "passage=", 7)) {/*** remove passage= verse list ***/
 		gchar *mybuf = NULL;
 		gchar *modbuf = NULL;
 		mybuf = strchr(url, '=');
@@ -159,30 +158,30 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		modbuf = getmodnameSWORD(0);
 		display_verse_list(modbuf, buf, settings);
 		g_free(buf);
-		
-	} 
-	
+
+	}
+
 	else if (!strncmp(url, "type=morph", 10)) {
 		gchar *modbuf = NULL;
 		gchar *mybuf = NULL;
 		buf = g_strdup(url);
-		g_warning("mybuf = %s",url);
+		g_warning("mybuf = %s", url);
 		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			for(i=0;i<strlen(modbuf);i++){
-				if(modbuf[i]==' ') {
-					modbuf[i]='\0';
+			for (i = 0; i < strlen(modbuf); i++) {
+				if (modbuf[i] == ' ') {
+					modbuf[i] = '\0';
 					break;
 				}
 			}
 		}
-		
-		
+
+
 		mybuf = NULL;
-		mybuf = strstr(buf, "value=");		
+		mybuf = strstr(buf, "value=");
 		if (mybuf) {
 			mybuf = strchr(mybuf, '=');
 			++mybuf;
@@ -194,16 +193,18 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		g_free(buf);
 		gtk_widget_show(dlg);
-	} 
+	}
 }
 
-static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
+static void on_cbeBook_changed(GtkEditable * editable,
+			       gpointer user_data)
 {
 
 }
 
 
-static void on_btnGotoVerse_clicked(GtkButton * button, gpointer user_data)
+static void on_btnGotoVerse_clicked(GtkButton * button,
+				    gpointer user_data)
 {
 	gchar *bookname, buf[120];
 	gint iChap, iVerse;
@@ -213,10 +214,11 @@ static void on_btnGotoVerse_clicked(GtkButton * button, gpointer user_data)
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (spbVTChapter));
 	iVerse =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spbVTVerse));
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+					     (spbVTVerse));
 	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
 	//g_warning(buf);
-	VTgotoverseSWORD(buf);
+	backend_goto_verse_viewtext(buf);
 	updatecontrols();
 }
 
@@ -228,9 +230,10 @@ on_cbeModule_changed(GtkEditable * editable, gpointer user_data)
 	gchar *buf, title[256];
 	static gboolean firsttime = TRUE;
 	buf = gtk_entry_get_text(GTK_ENTRY(editable));
-	VTloadmodSWORD(buf);
-	VTgotoverseSWORD(current_verse);
-	sprintf(title, "GnomeSword - %s", VTgetmodDescriptionSWORD());
+	backend_load_module_viewtext(buf);
+	backend_goto_verse_viewtext(current_verse);
+	sprintf(title, "GnomeSword - %s",
+		backend_get_module_description(buf));
 	gtk_window_set_title(GTK_WINDOW(dlgViewText), title);
 	firsttime = FALSE;
 }
@@ -238,17 +241,18 @@ on_cbeModule_changed(GtkEditable * editable, gpointer user_data)
 
 static void on_btnSync_clicked(GtkButton * button, gpointer user_data)
 {
-	VTgotoverseSWORD(current_verse);
+	backend_goto_verse_viewtext(current_verse);
 	updatecontrols();
 }
 
 /*
  * shut down the View Text Dialog
  */
-static void on_dlgViewText_destroy(GtkObject * object, gpointer user_data)
+static void on_dlgViewText_destroy(GtkObject * object,
+				   gpointer user_data)
 {
 	isrunningVT = FALSE;
-	VTshutdownSWORD();
+	backend_shutdown_viewtext();
 }
 
 
@@ -258,27 +262,30 @@ static void on_btnVTAdd_clicked(GtkButton * button, gpointer user_data)
 }
 
 
-static void on_btnVTClose_clicked(GtkButton * button, gpointer user_data)
+static void on_btnVTClose_clicked(GtkButton * button,
+				  gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
 
 /*** set SWORD module global options ***/
-static void on_modops_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_modops_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
 {
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active) {	//-- if choice is TRUE - we want option
-		//-- turn option on
-		VTsetGlobalOptionsSWORD((gchar*)user_data, "On");
+		backend_set_global_options_viewtext((gchar *) user_data,
+						    "On");
 	} else {		/* we don't want option */
-		//-- turn option off
-		VTsetGlobalOptionsSWORD((gchar*)user_data, "Off");
+		backend_set_global_options_viewtext((gchar *) user_data,
+						    "Off");
 	}
 }
 
 /*** add sword global options to menu ***/
-static void additemstooptionsmenu(GtkWidget * shellmenu, GList * options)
+static void additemstooptionsmenu(GtkWidget * shellmenu,
+				  GList * options)
 {
-	GtkWidget * menuChoice;
+	GtkWidget *menuChoice;
 	gchar menuName[64];
 	int viewNumber = 0;
 	GList *tmp;
@@ -290,7 +297,8 @@ static void additemstooptionsmenu(GtkWidget * shellmenu, GList * options)
 
 		/* add global option items to menu */
 		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *) (gchar *)
+		    gtk_check_menu_item_new_with_label((gchar *) (gchar
+								  *)
 						       tmp->data);
 		sprintf(menuName, "optionNum%d", viewNumber++);
 		gtk_object_set_data(GTK_OBJECT(settings->app), menuName,
@@ -367,6 +375,7 @@ GtkWidget *create_dlgViewText(GList * glist)
 	GtkAccelGroup *module_options_menu_accels;
 	GtkWidget *toolbar30;
 	GtkWidget *combo11;
+	GList *cbBook_items;
 	GtkObject *spbVTChapter_adj;
 	GtkObject *spbVTVerse_adj;
 	GtkWidget *btnGotoVerse;
@@ -382,7 +391,8 @@ GtkWidget *create_dlgViewText(GList * glist)
 	gtk_object_set_data(GTK_OBJECT(dlgViewText), "dlgViewText",
 			    dlgViewText);
 	gtk_window_set_default_size(GTK_WINDOW(dlgViewText), 370, 412);
-	gtk_window_set_policy(GTK_WINDOW(dlgViewText), TRUE, TRUE, FALSE);
+	gtk_window_set_policy(GTK_WINDOW(dlgViewText), TRUE, TRUE,
+			      FALSE);
 
 	dialog_vbox14 = GNOME_DIALOG(dlgViewText)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dlgViewText), "dialog_vbox14",
@@ -391,13 +401,16 @@ GtkWidget *create_dlgViewText(GList * glist)
 
 	vbox33 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox33);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "vbox33", vbox33,
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "vbox33",
+				 vbox33,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox33);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox14), vbox33, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox14), vbox33, TRUE, TRUE,
+			   0);
 
 	toolbar29 =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar29);
 	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "toolbar29",
 				 toolbar29,
@@ -425,7 +438,8 @@ GtkWidget *create_dlgViewText(GList * glist)
 	gtk_widget_show(cbeModule);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(dlgViewText, GNOME_STOCK_PIXMAP_ADD);
+	    gnome_stock_pixmap_widget(dlgViewText,
+				      GNOME_STOCK_PIXMAP_ADD);
 	btnVTAdd =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -454,8 +468,8 @@ GtkWidget *create_dlgViewText(GList * glist)
 
 	vseparator16 = gtk_vseparator_new();
 	gtk_widget_ref(vseparator16);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "vseparator16",
-				 vseparator16,
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText),
+				 "vseparator16", vseparator16,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator16);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), vseparator16,
@@ -471,10 +485,11 @@ GtkWidget *create_dlgViewText(GList * glist)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), menubar, NULL,
 				  NULL);
 
-	module_options = gtk_menu_item_new_with_label(_("Module Options"));
+	module_options =
+	    gtk_menu_item_new_with_label(_("Module Options"));
 	gtk_widget_ref(module_options);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "module_options",
-				 module_options,
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText),
+				 "module_options", module_options,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(module_options);
 	gtk_container_add(GTK_CONTAINER(menubar), module_options);
@@ -494,7 +509,8 @@ GtkWidget *create_dlgViewText(GList * glist)
 	additemstooptionsmenu(module_options_menu, glist);
 
 	toolbar30 =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar30);
 	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "toolbar30",
 				 toolbar30,
@@ -525,14 +541,15 @@ GtkWidget *create_dlgViewText(GList * glist)
 	spbVTChapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVTChapter_adj), 1, 0);
 	gtk_widget_ref(spbVTChapter);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "spbVTChapter",
-				 spbVTChapter,
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText),
+				 "spbVTChapter", spbVTChapter,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(spbVTChapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar30), spbVTChapter,
 				  NULL, NULL);
 	gtk_widget_set_usize(spbVTChapter, 53, -2);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spbVTChapter), TRUE);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spbVTChapter),
+				    TRUE);
 
 	spbVTVerse_adj = gtk_adjustment_new(1, 0, 100, 1, 10, 10);
 	spbVTVerse =
@@ -553,10 +570,11 @@ GtkWidget *create_dlgViewText(GList * glist)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar30),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("button7"), _("Go to verse"),
-				       NULL, tmp_toolbar_icon, NULL, NULL);
+				       NULL, tmp_toolbar_icon, NULL,
+				       NULL);
 	gtk_widget_ref(btnGotoVerse);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewText), "btnGotoVerse",
-				 btnGotoVerse,
+	gtk_object_set_data_full(GTK_OBJECT(dlgViewText),
+				 "btnGotoVerse", btnGotoVerse,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnGotoVerse);
 
@@ -589,7 +607,8 @@ GtkWidget *create_dlgViewText(GList * glist)
 
 	dialog_action_area14 = GNOME_DIALOG(dlgViewText)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dlgViewText),
-			    "dialog_action_area14", dialog_action_area14);
+			    "dialog_action_area14",
+			    dialog_action_area14);
 	gtk_widget_show(dialog_action_area14);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area14),
 				  GTK_BUTTONBOX_END);
@@ -609,35 +628,41 @@ GtkWidget *create_dlgViewText(GList * glist)
 	GTK_WIDGET_SET_FLAGS(btnVTClose, GTK_CAN_DEFAULT);
 
 	gtk_signal_connect(GTK_OBJECT(dlgViewText), "destroy",
-			   GTK_SIGNAL_FUNC(on_dlgViewText_destroy), NULL);
-
+			   GTK_SIGNAL_FUNC(on_dlgViewText_destroy),
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(text), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_linkVT_clicked), NULL);
-/*	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);			
-*/
+			   GTK_SIGNAL_FUNC(on_linkVT_clicked), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(cbeModule), "changed",
-			   GTK_SIGNAL_FUNC(on_cbeModule_changed), NULL);
+			   GTK_SIGNAL_FUNC(on_cbeModule_changed), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnVTAdd), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnVTAdd_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_btnVTAdd_clicked), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSync), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSync_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_btnSync_clicked), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(cbeBook), "changed",
-			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
+			   GTK_SIGNAL_FUNC(on_cbeBook_changed), 
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnGotoVerse), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnGotoVerse_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_btnGotoVerse_clicked),
+			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnVTClose), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnVTClose_clicked), NULL);
+			   GTK_SIGNAL_FUNC(on_btnVTClose_clicked),
+			   NULL);
 
 	textList = NULL;
-	textList = VTsetupSWORD(text, combo11);
+	textList = backend_setup_viewtext(text);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo10), textList);
 	gtk_entry_set_text(GTK_ENTRY(cbeModule), gettextmodSWORD());
-	VTgotoverseSWORD(current_verse);
+	cbBook_items = backend_get_books();
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), cbBook_items);
+	backend_goto_verse_viewtext(current_verse);
 	sprintf(vt_current_verse, "%s", current_verse);
 	updatecontrols();
 	g_list_free(textList);
 	isrunningVT = TRUE;
-
+	g_list_free(cbBook_items);
 	return dlgViewText;
 }

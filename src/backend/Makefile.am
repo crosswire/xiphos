@@ -46,6 +46,6 @@ libbackend_a_SOURCES =  \
     viewcomm_dlg.h\
     viewdict_dlg.cpp \
     viewdict_dlg.h \
-    viewtext_dlg.cpp \
-    viewtext_dlg.h 
+    viewtext.cpp \
+    viewtext.h 
 

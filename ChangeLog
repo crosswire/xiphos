@@ -2,6 +2,8 @@
 
 	* add files create_shortcutbar_viewer.* to src/gnome
 	* remove gui stuff from backend/verslist_sb.*
+	* rename backend/viewtext_dlg.* to backend/viewtext.*
+	* remove gui stuff form backend/viewtext.*
 
 2002-04-18  Terry Biggs <tbiggs@users.sourceforge.net>
 
