@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-03 17:07-0500\n"
+"POT-Creation-Date: 2003-12-03 22:40-0500\n"
 "PO-Revision-Date: 2002-06-06 21:58+0200\n"
 "Last-Translator: Jan Paul Schmidt <jps@methusalix.net>\n"
 "Language-Team: Gnomesword Project\n"
@@ -195,7 +195,6 @@ msgstr "Drucken"
 
 #: src/gnome2/bibletext_menu.c:1252 src/gnome2/commentary_menu.c:1334
 #: src/gnome2/dictlex_dialog.c:541 src/gnome2/editor_spell.c:669
-#: src/gnome2/find_dialog.c:268
 msgid "Close"
 msgstr ""
 
@@ -216,9 +215,8 @@ msgid "Copy"
 msgstr "Kopieren"
 
 #: src/gnome2/bibletext_menu.c:1275 src/gnome2/commentary_menu.c:1357
-#: src/gnome2/editor_menu.c:1128 src/gnome2/find_dialog.c:185
-#: src/gnome2/find_dialog.c:258 src/gnome2/find_dialog.c:338
-#: src/gnome2/toolbar_edit.c:583
+#: src/gnome2/editor_menu.c:1128 src/gnome2/find_dialog.c:199
+#: src/gnome2/find_dialog.c:364 src/gnome2/toolbar_edit.c:583
 msgid "Find"
 msgstr "Finden"
 
@@ -621,8 +619,8 @@ msgid "Undo"
 msgstr "Rückgängig"
 
 #: src/gnome2/editor_menu.c:1133 src/gnome2/editor_replace.c:224
-#: src/gnome2/editor_replace.c:382 src/gnome2/editor_replace.c:457
-#: src/gnome2/editor_spell.c:713 src/gnome2/toolbar_edit.c:594
+#: src/gnome2/editor_replace.c:405 src/gnome2/editor_spell.c:713
+#: src/gnome2/toolbar_edit.c:594
 msgid "Replace"
 msgstr "Ersetzen"
 
@@ -644,20 +642,20 @@ msgstr "Ersetzen"
 msgid "Next"
 msgstr "Finde nächste Stelle"
 
-#: src/gnome2/editor_replace.c:405
+#: src/gnome2/editor_replace.c:382 src/gnome2/toolbar_edit.c:595
 #, fuzzy
-msgid " Replace "
+msgid "Find and Replace"
 msgstr "Ersetzen"
 
-#: src/gnome2/editor_replace.c:418
-msgid "       with "
+#: src/gnome2/editor_replace.c:420
+msgid "with"
 msgstr ""
 
-#: src/gnome2/editor_replace.c:433
+#: src/gnome2/editor_replace.c:437
 msgid "search backward"
 msgstr ""
 
-#: src/gnome2/editor_replace.c:439
+#: src/gnome2/editor_replace.c:443
 #, fuzzy
 msgid "case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
@@ -725,25 +723,25 @@ msgstr "GnomeSword - Notizdatei öffnen"
 msgid "Save StudyPad File"
 msgstr "GnomeSword - Notizdatei öffnen"
 
-#: src/gnome2/find_dialog.c:211
+#: src/gnome2/find_dialog.c:217
 msgid "Enter Word or Phrase"
 msgstr "Wort oder Satz eingeben"
 
-#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2470
+#: src/gnome2/find_dialog.c:232 src/gnome2/search_dialog.c:2470
 #: src/gnome2/search_sidebar.c:551
 msgid "Case Sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
 
-#: src/gnome2/find_dialog.c:232
+#: src/gnome2/find_dialog.c:238
 #, fuzzy
 msgid "Backward Search"
 msgstr "Vorwärtssuche"
 
-#: src/gnome2/find_dialog.c:240
+#: src/gnome2/find_dialog.c:246
 msgid "Regular Expresion"
 msgstr "Regulärer Ausdruck"
 
-#: src/gnome2/find_dialog.c:263
+#: src/gnome2/find_dialog.c:287
 msgid "Find Next"
 msgstr "Finde nächste Stelle"
 
@@ -1970,11 +1968,6 @@ msgstr "Ausschneiden"
 msgid "Find in this note"
 msgstr ""
 
-#: src/gnome2/toolbar_edit.c:595
-#, fuzzy
-msgid "Find and Replace"
-msgstr "Ersetzen"
-
 #: src/gnome2/toolbar_edit.c:611
 #, fuzzy
 msgid "Spell"
@@ -2150,6 +2143,10 @@ msgstr ""
 #: src/gnome2/toolbar_style.c:1044
 msgid "Indents the paragraphs more"
 msgstr ""
+
+#, fuzzy
+#~ msgid " Replace "
+#~ msgstr "Ersetzen"
 
 #, fuzzy
 #~ msgid "Edit folder name"
