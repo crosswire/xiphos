@@ -5742,9 +5742,11 @@ Revelation
 <widget>
   <class>GnomeDialog</class>
   <name>dlgInformation</name>
-  <type>GTK_WINDOW_POPUP</type>
+  <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
+  <default_width>308</default_width>
+  <default_height>267</default_height>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>True</auto_shrink>
