@@ -160,7 +160,7 @@ struct _settings {
 						/* 0=text, 1= comm, 2=dict */
 		intCurVerse,    /* detached interlinear current verse */
 		gbsLastPage,    /* last notebook page before change */
-		iquickmarks;	/* number of items in bookmark menu */
+		iquickmarks;	/* number of items in quickmark menu */
 						
 	gboolean   
 		usedefault, /* use default settings in gnomesword or those used for last session */

@@ -193,6 +193,25 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		++url;
 		swapmodsSWORD((gchar *) url);
 	} 
+		
+	else if (*url == '*') {
+		++url;
+		while (*url != ']') {
+			++url;
+		}
+		++url;
+		buf = g_strdup(url);
+		changeVerseSWORD(buf);
+		g_free(buf);
+		
+	} 
+	
+	else if (*url == 'I') {
+		++url;
+		buf = g_strdup(url);
+		changeVerseSWORD(buf);
+		g_free(buf);
+	}
 	
 	else if (*url == '[') {
 		++url;
