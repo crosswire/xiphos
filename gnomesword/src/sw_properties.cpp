@@ -41,6 +41,7 @@
 
 #include "gs_gnomesword.h"
 #include "sw_properties.h"
+#include "support.h"
 
 extern gchar *gSwordDir;
 extern SETTINGS *settings;
@@ -99,7 +100,8 @@ gboolean loadconfig(void)
 	sprintf(settings->studypadfilename, "%s",settingsInfo["StudyPad"]["Lastfile"] .c_str());
 	sprintf(settings->studypaddir, "%s",settingsInfo["StudyPad"]["Directory"] .c_str());
 	/* misc user options */
-	sprintf(settings->currentverse_color, "%s",settingsInfo["User Options"]["currentVerseColor"].c_str()); 	 
+	sprintf(settings->currentverse_color, "%s",settingsInfo["User Options"]["currentVerseColor"].c_str()); 	
+	settings->usedefault = atoi(settingsInfo["User Options"]["UseDefault"].c_str());
 	settings->strongs = atoi(settingsInfo["User Options"]["strongs"].c_str());
 	settings->footnotes = atoi(settingsInfo["User Options"]["footnotes"].c_str());	
 	settings->versestyle = atoi(settingsInfo["User Options"]["versestyle"].c_str());
@@ -181,6 +183,11 @@ gboolean saveconfig(void)
 	
 	settingsInfo["User Options"]["currentVerseColor"] = settings->currentverse_color;
 	
+	if(settings->usedefault)
+		settingsInfo["User Options"]["UseDefault"] = "1";
+	else
+		settingsInfo["User Options"]["UseDefault"] = "0";
+	
 	if(settings->strongs)
 		settingsInfo["User Options"]["strongs"] = "1";
 	else
@@ -247,6 +254,82 @@ gboolean saveconfig(void)
 
 /******************************************************************************
  * create gnomesword configuration - using sword SWConfig
+ * and information from the setup dialog
+ ******************************************************************************/
+gboolean createfromsetupconfig(GtkWidget *setup)
+{
+	gchar buf[80], buf2[255];	 
+	
+	sprintf(buf2,"%s/preferences.conf",gSwordDir); 
+	SWConfig settingsInfo(buf2); 
+    	settingsInfo["Modules"]["MainWindow"]  = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry1"))); /* get mod name */
+    	settingsInfo["Modules"]["CommWindow"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry12"))); /* get mod name */
+    	settingsInfo["Modules"]["DictWindow"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry13"))); /* get mod name */
+    	settingsInfo["Modules"]["Interlinear1"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry2"))); /* get mod name */
+	settingsInfo["Modules"]["Interlinear2"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry3"))); /* get mod name */
+	settingsInfo["Modules"]["Interlinear3"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry4"))); /* get mod name */
+	settingsInfo["Modules"]["Interlinear4"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry10"))); /* get mod name */
+	settingsInfo["Modules"]["Interlinear5"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry11"))); /* get mod name */
+    	settingsInfo["Modules"]["PerComments"] =  gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup,"combo_entry14"))); /* get mod name */
+	
+	settingsInfo["LEXICONS"]["Greek"] = "Strongs Greek";
+	settingsInfo["LEXICONS"]["Hebrew"] = "Strongs Hebrew";
+		
+	settingsInfo["Notebooks"]["notebook3page"] = "0"; 		 
+	settingsInfo["Keys"]["verse"] = "Romans 8:28"; 
+	settingsInfo["Keys"]["dictionarykey"] = "GRACE"; 
+	
+	settingsInfo["StudyPad"]["Lastfile"] = "";
+	settingsInfo["StudyPad"]["Directory"] = "~";
+	
+	settingsInfo["FontSize"]["BibleWindow"] = "+1"; 
+	settingsInfo["FontSize"]["CommentaryWindow"] =  "+1"; 
+    	settingsInfo["FontSize"]["DictionaryWindow"] =  "+1"; 
+	settingsInfo["FontSize"]["InterlinearWindow"] =  "+1"; 
+	settingsInfo["FontSize"]["VerseListWindow"] =  "+1"; 	
+		
+	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
+	settingsInfo["LAYOUT"]["UperPane"] = "296";
+	settingsInfo["LAYOUT"]["BiblePane"] = "262";
+	settingsInfo["LAYOUT"]["AppWidth"] = "700";
+	settingsInfo["LAYOUT"]["AppHight"] = "550";
+	
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"radiobutton1"))->active)
+		settingsInfo["User Options"]["UseDefault"] = "1";
+	else
+		settingsInfo["User Options"]["UseDefault"] = "0";
+	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
+	settingsInfo["User Options"]["BibleTabs"]= "1";
+	settingsInfo["User Options"]["CommTabs"]= "1";
+	settingsInfo["User Options"]["DictTabs"]= "1";
+	settingsInfo["User Options"]["strongs"] = "0";
+	settingsInfo["User Options"]["footnotes"] = "0";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton2"))->active)
+		settingsInfo["User Options"]["versestyle"] = "1";
+	else
+		settingsInfo["User Options"]["versestyle"] = "0";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton1"))->active)
+		settingsInfo["User Options"]["autosavepersonalcomments"] = "1";
+	else 
+		settingsInfo["User Options"]["autosavepersonalcomments"] = "0";
+	settingsInfo["User Options"]["formatpercom"] = "0";
+	settingsInfo["User Options"]["showshortcutbar"] = "1";
+	settingsInfo["User Options"]["showtextgroup"] = "1";
+	settingsInfo["User Options"]["showcomgroup"] = "1";
+	settingsInfo["User Options"]["showdictgroup"] = "1";
+	settingsInfo["User Options"]["showbookmarksgroup"] = "1";
+	if(GTK_TOGGLE_BUTTON (lookup_widget(setup,"checkbutton3"))->active)
+		settingsInfo["User Options"]["interlinearpage"] = "1";
+	else
+		settingsInfo["User Options"]["interlinearpage"] = "0";
+	settingsInfo["User Options"]["showhistorygroup"] = "1";
+	
+    	settingsInfo.Save();
+	return true;
+}
+
+/******************************************************************************
+ * create gnomesword configuration - using sword SWConfig
  ******************************************************************************/
 gboolean createconfig(void)
 {
@@ -286,6 +369,7 @@ gboolean createconfig(void)
 	settingsInfo["LAYOUT"]["AppWidth"] = "700";
 	settingsInfo["LAYOUT"]["AppHight"] = "550";
 	
+	settingsInfo["User Options"]["UseDefault"] = "0";
 	settingsInfo["User Options"]["currentVerseColor"] = "#339966";
 	settingsInfo["User Options"]["BibleTabs"]= "1";
 	settingsInfo["User Options"]["CommTabs"]= "1";
@@ -306,3 +390,4 @@ gboolean createconfig(void)
     	settingsInfo.Save();
 	return true;
 }
+

@@ -102,11 +102,10 @@ struct _settings {
 	gint       	currentverse_red,	/* current verse colors */
 	           	currentverse_green, 
 	           	currentverse_blue;
-	gint       	notebook3page,	//-- notebook 3 page number
-	           	notebook1page,	//-- commentaries notebook
-	           	notebook2page;	//-- dict - lex notebook
+	gint       	notebook3page;	//-- notebook 3 page number
 	gint	   	shortcutbarsize;
-	gboolean   strongs,	//-- toogle button and check menu states
+	gboolean   usedefault,
+			strongs,	//-- toogle button and check menu states
 	           	footnotes,
 	           	versestyle,
 	           	interlinearpage,
