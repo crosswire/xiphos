@@ -35,12 +35,14 @@
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/sidebar.h"
+#include "gui/tabbed_browser.h"
 
 #include "main/sidebar.h"
 #include "main/lists.h"
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/url.h"
+#include "main/xml.h"
 
 #include "backend/sword.h"
 #include "backend/sword_main.hh"
@@ -57,6 +59,53 @@ enum {
 
 TreePixbufs *pixbufs;
 
+
+
+/******************************************************************************
+ * Name
+ *   main_open_bookmark_in_new_tab
+ *
+ * Synopsis
+ *   #include "main/sidebar.h"
+ *
+ *   void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
+
+void main_open_bookmark_in_new_tab(gchar * mod_name, gchar * key)
+{
+	gint module_type = backend->module_type(mod_name);
+	
+	switch (module_type) {
+	case -1:
+		return;
+		break;
+	case TEXT_TYPE:
+	case COMMENTARY_TYPE:		
+		if(strcmp(settings.currentverse, key)) {
+			xml_set_value("GnomeSword", "keys", "verse",
+						key);
+			settings.currentverse = xml_get_value(
+						"keys", "verse");
+		}
+		
+		break;
+	case DICTIONARY_TYPE:
+		xml_set_value("GnomeSword", "keys", "dictionary", key);
+		settings.dictkey = xml_get_value("keys", "dictionary");
+		break;
+	case BOOK_TYPE:
+		xml_set_value("GnomeSword", "keys", "offset", key);
+		settings.book_offset = atol(xml_get_value( "keys", "offset"));
+		break;
+	}
+	gui_open_module_in_new_tab(mod_name);
+}
 
 
 /******************************************************************************
@@ -80,20 +129,12 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 				       gchar * verse_list)
 {
 	GList *tmp = NULL;
-	gboolean oddkey = TRUE;
-	gchar buf[256], *utf8str, *colorkey;
-	//gchar *first_key = NULL;
-	gchar *next_verse = NULL;
 	gint i = 0;
-	gint count = 0;
-	GString *str;
 	GtkTreeModel *model;
 	GtkListStore *list_store;	
 	GtkTreeSelection *selection;
 	GtkTreePath *path;
-	GtkTreeIter iter;
-	RESULTS *list_item;
-	
+	GtkTreeIter iter;	
 	
 	list_of_verses = g_list_first(list_of_verses);
 	if(list_of_verses) {
@@ -118,27 +159,11 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 		verse_list += 4;
 	}
 	i = 0;
-/*	
-	count = start_parse_verse_list(verse_list,key);
-	while (count--) {
-		next_verse = get_next_verse_list_element(i++);
-		if (!next_verse)
-			break;
-		list_item = g_new(RESULTS,1);
-		list_item->module = module_name;
-		list_item->key = (gchar *) next_verse;
-		list_of_verses = g_list_append(list_of_verses, 
-						(RESULTS *) list_item);
-	}
-	*/
-	tmp = backend->parse_verse_list(verse_list, key);  //list_of_verses;
+	tmp = backend->parse_verse_list(verse_list, key);  
 	while (tmp != NULL) {
 		gtk_list_store_append(list_store, &iter);
 		gtk_list_store_set(list_store, &iter, 0,
 					   (const char *) tmp->data, -1);
-		
-		/*if (i == 0)
-			first_key = g_strdup((const char *) tmp->data);*/
 		++i;
 		tmp = g_list_next(tmp);
 	}
@@ -154,11 +179,8 @@ void main_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gtk_tree_path_free(path);
 	
 	gui_verselist_button_release_event(NULL,NULL,NULL);
-	/*gtk_option_menu_set_history(GTK_OPTION_MENU
-				    (sidebar.optionmenu1), 3);*/
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
-	//g_string_free(str, TRUE);
 }
 
 
