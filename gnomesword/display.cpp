@@ -1444,7 +1444,7 @@ gint GTKEntryDisp::gettags(gchar * text, gchar * tag, gint pos)
 	len = strlen(text);
 	tag[0] = '\0';
 	for (i = pos; i < len; i++) {
-		tag[j] = toupper(text[i]);
+		tag[j] = toupper(text[i]); /*** make all tags upper case ***/
 		++j;
 		tag[j] = '\0';
 		if (text[i] == '>' && text[i + 1] != '<') {
@@ -1455,25 +1455,24 @@ gint GTKEntryDisp::gettags(gchar * text, gchar * tag, gint pos)
 }
 
 //-------------------------------------------------------------------------------------------
-void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo) //-- to display Sword module about information---------------------------------------------------tyle /-- in versestyle or poetry is on                        ove it
+void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo) //-- to display Sword module about information                        ove it
 {
-	gchar textBuf[800];	//-- text buffer to play with
+	gchar *textBuf;	        //-- text buffer to play with
 	gint i,			//-- counter
 	    j,			//-- counter
 	    len;		//-- length of string aboutinfo
 	bool printnow = false;	//-- tells us when to put our text to the screen
 
-	i = j = 0;		//-- set to 0
-	textBuf[0] = '\0';	//-- empty text buffer
+	i = j = 0;		//-- set to 0	
 	gtk_text_set_point(GTK_TEXT(text), 0);	//-- set position to begining of text widget
 	gtk_text_forward_delete(GTK_TEXT(text),
 				gtk_text_get_length((GTK_TEXT(text))));	//-- clear text widget
 	len = strlen(aboutinfo);	//-- set len to length of aboutinfo
-	while (i < len)		//-- loop through string aboutinfo
-	{
+	textBuf = new char[len+1];
+	textBuf[0] = '\0';	//-- empty text buffer
+	while (i < len) {		//-- loop through string aboutinfo	
 		if (aboutinfo[i] == '\\' && aboutinfo[i + 1] == 'p'
-		    && aboutinfo[i + 2] == 'a')	//-- if we find \par replace with /n
-		{
+		    && aboutinfo[i + 2] == 'a')	{ //-- if we find \par replace with /n		
 			if (aboutinfo[i + 4] == 'd')
 				i = i + 4;	//-- fix our counter to jump over \pard
 			else
@@ -1482,16 +1481,15 @@ void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo) //-- to display Sword
 			printnow = true;	//-- we want to show this much now                      
 		}
 		if (aboutinfo[i] == '\\' && aboutinfo[i + 1] == 'q'
-		    && aboutinfo[i + 2] == 'c')	//-- replace \qc with nothing
-		{
+		    && aboutinfo[i + 2] == 'c') {	//-- replace \qc with nothing
+		
 			i = i + 3;	//-- fix counter to jump over \qc
 		}
 		textBuf[j] = aboutinfo[i];	//-- move aboutinfo to textBuf one char at a time                    
 		++i;		//-- add one to i
 		++j;		//-- add one to j                
 		textBuf[j] = '\0';	//-- terminate our string with \0 (null)
-		if (printnow)	//-- if true we print to text widget      
-		{
+		if (printnow) {	//-- if true we print to text widget		
 			printnow = false;	//-- set to false now
 			gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
 					textBuf, -1);	//-- put string to text widget
@@ -1499,6 +1497,7 @@ void AboutModsDisplay(GtkWidget * text, gchar * aboutinfo) //-- to display Sword
 			j = 0;	//-- set j to 0
 		}
 	}
-	gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	//-- incase there is no \par at end of info     
-	textBuf[0] = '\0';
+	gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	//-- incase there is no \par at end of info 
+	delete[]textBuf;    
+	textBuf = NULL;
 }
