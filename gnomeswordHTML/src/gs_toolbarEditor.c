@@ -32,6 +32,7 @@
 
 #include "gs_html.h"
 #include "support.h"
+#include "gs_toolbarEditor.h"
 
 static   GtkWidget *btnBold;
 static   GtkWidget *btnItalic;
