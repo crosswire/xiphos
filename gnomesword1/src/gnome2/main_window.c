@@ -404,6 +404,23 @@ static gboolean on_configure_event(GtkWidget * widget,
 	return FALSE;
 }
 
+static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
+					GtkNotebookPage * page,
+					gint page_num, GList **tl)
+{ 
+	if(page_num == 0)
+		settings.comm_showing = TRUE;
+	else
+		settings.comm_showing = FALSE;
+		
+	gui_update_tab_struct(NULL, 
+			   settings.CommWindowModule, 
+			   NULL, 
+			   NULL, 
+			   NULL,
+			   NULL,
+			   settings.comm_showing);
+}
 
 /******************************************************************************
  * Name
@@ -743,6 +760,11 @@ void create_mainwindow(void)
 
 	gui_install_menu_hints(widgets.app);
 
+	g_signal_connect(GTK_OBJECT(widgets.notebook_comm_book),
+			   "switch_page",
+			   G_CALLBACK
+			   (on_notebook_comm_book_switch_page), 
+			   NULL);
 
 	g_signal_connect(GTK_OBJECT(widgets.app), "destroy",
 			   G_CALLBACK(on_mainwindow_destroy), NULL);
