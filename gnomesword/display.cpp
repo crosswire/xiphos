@@ -94,14 +94,13 @@ char
 
 	//-- let's find out if we have a comment or dict module 
 	it = mainMgr->Modules.find(imodule.Name());
-	if (strcmp((*it).second->Type(), "Commentaries"))
+	/*if (strcmp((*it).second->Type(), "Commentaries"))
 		//-- if not commentaries add module name to text widget
 		sprintf(tmpBuf, "[%s][ %s] ", imodule.Name(),
 			imodule.KeyText());
-	else
-		//-- else just the keytext
-		sprintf(tmpBuf, "[%s] ", imodule.KeyText());
-	//-- show modName and verse ref in text widget          
+	else*/		
+	sprintf(tmpBuf, "[%s] ", imodule.KeyText());
+	//-- show verse ref in text widget          
 	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
 			-1);
 	//-- show module text for current key
@@ -133,20 +132,17 @@ char GTKPerComDisp::Display(SWModule & imodule)
 
 	//-- let's find out if we have a comment or dict module 
 	it = mainMgr->Modules.find(imodule.Name());
-	if (strcmp((*it).second->Type(), "Commentaries"))
-		sprintf(tmpBuf, "[%s][ %s] ", imodule.Name(),
-			imodule.KeyText());	//-- if not commentaries add module name to text widget
-	else
-		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	//-- else just the keytext
+	/*if (strcmp((*it).second->Type(), "Commentaries"))
+		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	//-- if not commentaries add module name to text widget
+	else*/
+	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	//-- else just the keytext
 	if (
 	    ((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).
-	     second == "RawFiles") &&	//-- check for personal comments by finding ModDrv=RawFiles
-	    (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active))	//-- check for edit mode
-	{
+	     second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
+	    (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)){ /* check for edit mode */	
 		GtkWidget *statusbar;	//-- pointer to comments statusbar
 		gint context_id2;	//-- statusbar context_id ???
-		sprintf(tmpBuf, "[%s][ %s] ", imodule.Name(),
-			imodule.KeyText());	//-- add module name and verse to edit note statusbar
+		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	//-- add module name and verse to edit note statusbar
 		//-- setup statusbar for personal comments
 		statusbar = lookup_widget(MainFrm, "sbNotes");	//-- get stutusbar
 		context_id2 =
@@ -156,13 +152,11 @@ char GTKPerComDisp::Display(SWModule & imodule)
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);	//-- show modName and verse ref in statusbar
 		gtk_text_insert(GTK_TEXT(gtkText), sword_font,
 				&gtkText->style->black, NULL, " ", -1);
-	} else			//-- not useing personal comment module in edit mode
-	{
+	} else {			/* not useing personal comment module in edit mode */	
 		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL,
 				tmpBuf, -1);	//-- show modName and verse ref in text widget
 	}
 	//-- show module text for current key
-
 	gtk_text_insert(GTK_TEXT(gtkText), sword_font,
 			&gtkText->style->black, NULL,
 			(const char *) imodule, -1);
@@ -377,22 +371,21 @@ char
 }
 
 //-----------------------------------------------------------------------------------------------
-char
-    //-- this will handle  Robertson's Word Pictures in the New Testament (RWP) format?????????------ use symbol font */
-    GTKRWPDisp::Display(SWModule & imodule)
+char /* this will handle  Robertson's Word Pictures in the New Testament (RWP) format????????? */
+GTKRWPDisp::Display(SWModule & imodule)
 {
-	GdkFont *sword_font,	//-- pointers to fonts
-	*greek_font;
+	GdkFont         *sword_font,	//-- pointers to fonts
+	                *greek_font;
 	//gchar         *myname; 
-	bool italics_on = FALSE,	//-- boolean switches
-	 greek_on = false,
-	    bold_on = false, first_time = true, first_letter = true;
-	char *verseBuf,		//-- work strings
-	 tmpBuf[800], buf[800];
-	char *myverse,		//-- pointers to strings
-	*font;
-	int i, j, len;		//-- integer vars     
-
+	bool            italics_on = FALSE,	//-- boolean switches
+	                greek_on = false,
+	                bold_on = false, first_time = true, first_letter = true;
+	char            *verseBuf,		//-- work strings
+	                tmpBuf[800], 
+	                buf[800];
+	char            *myverse,		//-- pointers to strings
+	                *font;
+	int             i, j, len;		//-- integer vars 
 
 	/* Load a italic font */
 	italic_font =
@@ -609,7 +602,7 @@ char
 
 //-------------------------------------------------------------------------------------------
 char
- GTKChapDisp::Display(SWModule & imodule)
+GTKChapDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[255];
 
@@ -658,18 +651,17 @@ char
 }
 
 //-----------------------------------------------------------------------------------------------
-char
-    //-- this will handle some of the html formatting
-    HTMLentryDisp::Display(SWModule & imodule)
+char //-- this will handle some of the html formatting
+HTMLentryDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[256];
 	GdkFont *sword_font, *greek_font, *foreign_font;
 	gchar *myname;
 	bool greek, findclose, italics_on = FALSE;
-	gchar *verseBuf, *buf, *myverse, *font, *sourceType, tag[255];
+	gchar *verseBuf, *buf, *myverse, *font, *sourceType, tag[256];
 	int i, j, len, taglen;
+	
 	font = "Roman";
-
 	/* Load a italic font */
 	italic_font =
 	    gdk_font_load
@@ -703,20 +695,21 @@ char
 	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
 			-1);
 	i = j = 0;
+	len = strlen((const char *) imodule);
+	myverse = new char[len+1];
+	myverse[0] = '\0';	
+	verseBuf = new char[len+1];
+	verseBuf[0] = '\0';
 	if ((!strcmp(imodule.Name(), "TFG"))
 	    && (!strcmp(imodule.KeyText(), "Romans 1:1"))) {
-		myverse = g_strdup(" ");
+		sprintf(myverse,"%s"," ");
 	} else
-		myverse = g_strdup((const char *) imodule);
-	len = strlen(myverse);
-	verseBuf = new char[len];
-	verseBuf[0] = '\0';
-
+		sprintf(myverse,"%s",(const char *) imodule);
 	while (i < len) {
 		if (myverse[i] == '<') {
 			tag[0] = '\0';
 			taglen = gettags(myverse, tag, i);	//-- get html tags
-			i = i + taglen;	//-- remove tags (we do not want to see them)
+			i = i + taglen;	/* remove tags (we do not want to see them) */
 			//-------------------------------------------------------------------------- italic
 			if (!strcmp(tag, "<I>")) {
 				gtk_text_insert(GTK_TEXT(gtkText),
@@ -810,27 +803,32 @@ char
 			&gtkText->style->black, NULL, verseBuf, -1);
 	delete[]verseBuf;
 	verseBuf = NULL;
-	g_free(myverse);
+	delete[]myverse;
+	myverse = NULL;
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));
 }
 
 //-----------------------------------------------------------------------------------------------
-char
-    //-- this will handle some html format a chapter at a time---------------------------------------; imodule++)
-    HTMLChapDisp::Display(SWModule & imodule)
+char  /* this will handle some html format a chapter at a time */
+HTMLChapDisp::Display(SWModule & imodule)
 {
-	char tmpBuf[255];
-	char *verseBuf, tag[255];
-	char *myverse, *font;
-	int i, j, taglen;
-	bool greek_on = FALSE,
-	    italics_on = FALSE,
-	    poetry_on = FALSE,
-	    niv_on = false, Fo_on = false, cite_on = false;
+	char    tmpBuf[255];
+	char    *verseBuf, tag[255];
+	char    *myverse, *font;
+	int     i, j, taglen;
+	bool    greek_on = FALSE,
+	        italics_on = FALSE,
+	        poetry_on = FALSE,
+	        niv_on = false, 
+	        Fo_on = false, 
+	        cite_on = false;
 	GdkFont *sword_font,
-	    *greek_font,
-	    *fo_font, *fo_italic_font, *cite_font, *cite_italic_font;;
+	        *greek_font,
+	        *fo_font, 
+	        *fo_italic_font, 
+	        *cite_font, 
+	        *cite_italic_font;;
 	ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
