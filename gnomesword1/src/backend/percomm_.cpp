@@ -32,6 +32,8 @@
 
 #include "backend/percomm_.h"
 
+using namespace sword;
+
 /******************************************************************************
  * globals to this file only 
  */

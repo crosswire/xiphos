@@ -58,8 +58,12 @@
 #include "backend/commentary_.h"
 #include "backend/bibletext_.h"
 #include "backend/percomm_.h"
-//#include "backend/search.h"
 #include "backend/interlinear.h"
+
+using std::string;
+using std::map;
+//using std::list;
+using namespace sword;
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;

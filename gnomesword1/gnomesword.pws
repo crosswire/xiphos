@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=35
-1=686
-2=1557
-3=564
-4=8650
-5=299
-6=41
-7=34
-8=56
-9=35
+0=1569
+1=1
+2=32
+3=48
+4=37
+5=45
+6=37
+7=49
+8=25
+9=151
 10=35
 11=1
 12=610
@@ -46,34 +46,27 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/main/settings.h
-1=/home/terry/gnomesword/gnomesword1/src/gnome/html.c
-2=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
-3=/home/terry/gnomesword/gnomesword1/src/gnome/editor_menu.c
-4=/home/terry/gnomesword/gnomesword1/save/interface.c
-5=/home/terry/gnomesword/gnomesword1/src/gnome/editor_replace.c
-6=/home/terry/gnomesword/gnomesword1/src/gnome/dialog.c
-7=/home/terry/gnomesword/gnomesword1/src/gui/dialog.h
-8=/home/terry/gnomesword/gnomesword1/src/main/lists.c
+0=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
 
 [replace_text]
-0=cbtnShowGBSTabs
-1=widgets.combo_entry_int1
-2=widgets.combo_entry_text
-3=frame_comm
-4=gui_unlock_commentary
-5=is_locked
-6=gui_unlock_key
+0=dialog->dialog
+1=cbtnShowGBSTabs
+2=widgets.combo_entry_int1
+3=widgets.combo_entry_text
+4=frame_comm
+5=gui_unlock_commentary
+6=is_locked
+7=gui_unlock_key
 
 [find_text]
-0=gtk_adjustment_new
-1=notebook7
-2=dlg
-3=label191
-4=comboDefaultDict
-5=cbtnShowBooktabs
-6=frame30
-7=button_cancel
+0=g_warning
+1=comm_find_running
+2=find_dialog_new
+3=dialog_destroy
+4=find_dialog
+5=find
+6=dialog_find
+7=pixmap1
 
 [executer args]
 0=newconfigs

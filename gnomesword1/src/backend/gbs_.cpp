@@ -34,6 +34,7 @@
 //#include "backend/sword.h"
 #include "backend/gbs_.h"
 
+using namespace sword;
 
 
 /******************************************************************************
