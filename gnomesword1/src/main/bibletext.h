@@ -89,7 +89,7 @@ void set_text_module_global_option(gchar * option,
 void set_text_variant_global_option(gchar * option,
 				    gchar * choice);
 void set_options_on_page_change(TEXT_DATA * t);
-void setup_text(SETTINGS * s, GList *mods);
+void setup_text(GList *mods);
 void shutdown_text(void);
 void display_text(gchar * key);
 

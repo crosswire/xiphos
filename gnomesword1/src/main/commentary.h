@@ -58,7 +58,7 @@ void display_chap_heading(int mod_num);
 const char* navigate_commentary(gint modnum, gint direction);
 void set_commentary_page_and_key(gint page_num,
 				     gchar * key);
-void setup_commentary(SETTINGS * s, GList *mods);
+void setup_commentary(GList *mods);
 void shutdown_commentary(void);
 void display_commentary(gchar * key);
 void shutdown_viewcomm(void);

@@ -169,7 +169,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
  * Synopsis
  *   #include "dictlex.h"
  *
- *   void setup_dictlex(SETTINGS * s)
+ *   void setup_dictlex(GList *mods)
  *
  * Description
  *   setup dictlex support 
@@ -178,7 +178,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
  *  void
  */
 
-void setup_dictlex(SETTINGS * s, GList *mods)
+void setup_dictlex(GList *mods)
 {
 	GtkWidget *popup;
 	GList *tmp = NULL;
@@ -200,29 +200,29 @@ void setup_dictlex(SETTINGS * s, GList *mods)
 		dl->searchstring = NULL;
 		dl->find_dialog = NULL;	
 		dl->has_key = backend_module_is_locked(dl->modName);
-		gui_create_dictlex_pane(s, dl, count);
+		gui_create_dictlex_pane(&settings, dl, count);
 		popup = gui_create_dictlex_pm(dl, mods);
 		gnome_popup_menu_attach(popup, dl->html, NULL);
-		backend_new_dictlex_display(dl->html, dl->mod_num, s);
+		backend_new_dictlex_display(dl->html, dl->mod_num, &settings);
 		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
 		++count;
 		tmp = g_list_next(tmp);
 	}
 
 
-	gtk_signal_connect(GTK_OBJECT(s->notebookDL), "switch_page",
+	gtk_signal_connect(GTK_OBJECT(settings.notebookDL), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook_dictlex_switch_page),
 			   dl_list);
 
-	modbuf = g_strdup(s->DictWindowModule);
-	keybuf = g_strdup(s->dictkey);
+	modbuf = g_strdup(settings.DictWindowModule);
+	keybuf = g_strdup(settings.dictkey);
 
 	set_page_dictlex(modbuf, dl_list);
 
 	g_free(modbuf);
 	g_free(keybuf);
 	g_list_free(tmp);
-	s->dict_last_page = 0;
+	settings.dict_last_page = 0;
 }
 
 /******************************************************************************
@@ -411,7 +411,7 @@ void goto_key_viewdict(gchar * key)
  * Synopsis
  *   #include "dictlex.h"
  *
- *   void setup_viewdict(GtkWidget * text, SETTINGS *s)
+ *   void setup_viewdict(GtkWidget * text)
  *
  * Description
  *   
@@ -420,8 +420,8 @@ void goto_key_viewdict(gchar * key)
  *   void
  */
 
-void setup_viewdict(GtkWidget * text, SETTINGS *s)
+void setup_viewdict(GtkWidget * text)
 {
-	backend_setup_viewdict(text, s);
+	backend_setup_viewdict(text, &settings);
 }
 

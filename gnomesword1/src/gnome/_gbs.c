@@ -121,7 +121,7 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 	/** fill ctree node with children **/
 		if ((GTK_CTREE_ROW(treeNode)->children == NULL)
 		    && (!GTK_CTREE_ROW(treeNode)->is_leaf)) {
-			add_node_children(&settings, treeNode, bookname, 
+			add_node_children(treeNode, bookname, 
 				    strtoul(offset, NULL, 0));     
 			gtk_ctree_expand(GTK_CTREE(gbs->ctree),
 					 treeNode);

@@ -100,48 +100,53 @@ void init_gnomesword(void)
 	/*
 	 *  create popup menus -- gs_menu.c 
 	 */
-	createpopupmenus(&settings, get_list(TEXT_DESC_LIST),
-			get_list(OPTIONS_LIST));
+	createpopupmenus(get_list(TEXT_DESC_LIST), get_list(OPTIONS_LIST));
 
 	/*
 	 *  setup Bible text gui 
 	 */
-	if(havebible)
-		setup_text(&settings, get_list(TEXT_LIST));
+	if (havebible) {
+		setup_text(get_list(TEXT_LIST));
+	}
 
 	/*
 	 *  setup commentary gui support 
 	 */
-	if(havecomm)
-		setup_commentary(&settings,get_list(COMM_LIST));
+	if (havecomm) {
+		setup_commentary(get_list(COMM_LIST));
+	}
+
 	/*
 	 *  setup personal comments gui support 
 	 */
-	if(havepercomm)
-		setup_percomm(&settings,get_list(PERCOMM_LIST));
+	if (havepercomm) {
+		setup_percomm(get_list(PERCOMM_LIST));
+	}
+
 	/*
 	 *  setup general book gui support 
 	 */
-	if(havebook)
-		setup_gbs(&settings,get_list(GBS_LIST));
+	if (havebook) {
+		setup_gbs(get_list(GBS_LIST));
+	}
+
 	/*
 	 *  setup Dict/Lex gui support 
 	 */
-	if(havedict)
-		setup_dictlex(&settings,get_list(DICT_LIST));
+	if (havedict) {
+		setup_dictlex(get_list(DICT_LIST));
+	}
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 	
 	settings.settingslist = NULL;
 	settings.displaySearchResults = FALSE;
+
 	/*
 	 *  add modules to about modules menus -- gs_menu.c 
 	 */
-	addmodstomenus(&settings,
-		       get_list(TEXT_LIST),
-		       get_list(COMM_LIST), 
-		       get_list(DICT_LIST), 
-		       get_list(GBS_LIST));
+	addmodstomenus(get_list(TEXT_LIST), get_list(COMM_LIST),
+			get_list(DICT_LIST), get_list(GBS_LIST));
 		
 	settings.versestyle_item =
 	    additemtooptionmenu(settings.app, _("_Settings/"),
@@ -790,8 +795,9 @@ void change_verse(gchar * key)
 	/* 
 	 * change interlinear verses 
 	 */
-	if (settings.dockedInt)
-		update_interlinear_page(&settings);
+	if (settings.dockedInt) {
+		update_interlinear_page();
+	}
 
 	/* 
 	 * change personal notes editor   if not in edit mode 
@@ -869,7 +875,7 @@ void display_new_font_color_and_size(void)
 	display_text(settings.currentverse);
 	display_commentary(settings.currentverse);
 	display_dictlex(settings.dictkey);
-	update_interlinear_page(&settings);
+	update_interlinear_page();
 }
 
 gchar *get_module_description(gchar * mod_name)
