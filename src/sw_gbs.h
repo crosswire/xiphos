@@ -34,8 +34,29 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
+
 	
+typedef struct _GSFindDialog  GSFindDialog;
+struct _GSFindDialog {
+	GnomeDialog *dialog;
+	GtkWidget   *htmlwidget;
+	GtkWidget   *entry;
+	GtkWidget   *backward;
+	GtkWidget   *case_sensitive;
+
+	gboolean     regular;
+};
+
 typedef struct _gbsdata GBS_DATA;
+struct _gbsdata {
+	GtkWidget *html;
+	GtkWidget *ctree;
+	gchar *bookName;
+	gchar *bookDescription;
+	gchar *searchstring;
+	GSFindDialog *find_dialog;
+};	
+
 
 typedef struct _nodedata NODEDATA;
 struct _nodedata {

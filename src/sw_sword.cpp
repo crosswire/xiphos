@@ -479,6 +479,12 @@ void updateIntDlg(SETTINGS *s)
 		buf[500], 
 		*tmpkey;
 	
+	interlinearMod0 = mainMgr1->Modules[settings->Interlinear1Module];
+	interlinearMod1 = mainMgr1->Modules[settings->Interlinear2Module];
+	interlinearMod2 = mainMgr1->Modules[settings->Interlinear3Module];
+	interlinearMod3 = mainMgr1->Modules[settings->Interlinear4Module];
+	interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
+	
 	beginHTML(settings->htmlInterlinear, TRUE);
 	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 			settings->bible_bg_color,
