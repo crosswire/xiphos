@@ -165,7 +165,7 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 	else
 		xml_set_value("GnomeSword", "misc", "usedefault", "0");
 */
-	settings.text_tabs =
+/*	settings.text_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active;
 	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active)
 		xml_set_value("GnomeSword", "tabs", "bible", "1");
@@ -185,7 +185,7 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 		xml_set_value("GnomeSword", "tabs", "dict", "1");
 	else
 		xml_set_value("GnomeSword", "tabs", "dict", "0");
-
+*/
 	settings.versestyle =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_verse_style)->active;
 	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_verse_style)->active)
@@ -302,7 +302,7 @@ static void on_cancel_clicked(GtkWidget * dialog, gint arg1,
  *   GtkWidget *
  */
 
-static GtkWidget *gui_create_setup_druid(GList * biblemods,
+static GtkWidget *create_setup_druid(GList * biblemods,
 					 GList * commmods,
 					 GList * dictmods,
 					 GList * percommods,
@@ -1100,7 +1100,7 @@ gint gui_first_run(void)
 	gbsmods = get_list(GBS_LIST);
 	devotionmods = get_list(DEVOTION_LIST);
 
-	dlg = gui_create_setup_druid(biblemods,
+	dlg = create_setup_druid(biblemods,
 				     commmods,
 				     dictmods,
 				     percommmods,
