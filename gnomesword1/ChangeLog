@@ -1,3 +1,11 @@
+2003-11-18  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev12
+	* changed configure.in so gnome2 build is the default
+	* added Andy's changes to gnomesword2.desktop.in
+	* fixed bugs 842314, 842319, 842324, 842677 and 842688	
+
+
 2003-11-13  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev11
