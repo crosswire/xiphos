@@ -601,21 +601,17 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	    gtk_toolbar_new();
 	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar_nav), GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar_nav);
-	gtk_widget_set_usize(toolbar_nav, -2, 34);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
-				      GTK_RELIEF_NONE);*/
-	
-	
+	gtk_widget_set_size_request(toolbar_nav, -1, 34);
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-refresh", 
+			GTK_STOCK_REFRESH, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar_nav)));
 	sync_button =
 		gtk_toolbar_append_element(GTK_TOOLBAR
 				       (toolbar_nav),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, _("Sync"),
-				       _("Toggle Sync with main window"), 
+				       _("Toggle sync with main window"), 
 				       NULL,
 				       tmp_toolbar_icon, NULL,
 				       NULL);
@@ -626,7 +622,7 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 	gtk_widget_show(vseparator);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
 				  vseparator, NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
+	gtk_widget_set_size_request(vseparator, 5, 7);
 	
 	
 	cbBook = gtk_combo_new();
@@ -641,7 +637,7 @@ static GtkWidget *create_nav_toolbar(COMM_DATA * vc)
 				      get_list(BOOKS_LIST));
 
 	vc->cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_set_usize(vc->cbe_book, 100, -2);
+	gtk_widget_set_size_request(vc->cbe_book, 100, -1);
 	gtk_widget_show(vc->cbe_book);
 
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
@@ -740,8 +736,6 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 	gtk_widget_show(toolbar_nav);
 	gtk_box_pack_start(GTK_BOX(vbox_toolbars), toolbar_nav, FALSE,
 			   FALSE, 0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
-				      GTK_RELIEF_NONE);*/
 
 	frame19 = gtk_frame_new(NULL);
 	gtk_widget_show(frame19);
@@ -763,7 +757,6 @@ static void create_commentary_dialog(COMM_DATA * vc, gboolean do_edit)
 		gtk_widget_show(vc->ec->htmlwidget);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
 				  vc->ec->htmlwidget);
-		//gtk_html_load_empty(vc->ec->html);
 
 		vc->ec->vbox = vbox30;
 
