@@ -32,6 +32,9 @@
 #include <regex.h>
 #include <pthread.h>
 #include <string.h>
+#include <dirent.h>
+#include <stdio.h>
+#include <sys/stat.h>
 
 #include "backend/config.hh"
 #include "backend/sword_defs.h"
@@ -48,6 +51,11 @@ using namespace sword;
 
 static SWConfig *config;
 static ConfigEntMap::iterator loop, end;
+
+
+
+extern SWMgr *main_mgr;
+
 /******************************************************************************
  * Name
  *   backend_save_custom_modlist
@@ -74,6 +82,23 @@ int backend_open_config_file(char *file)
 	
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
 void backend_erase_config_section(char *section)
 {
 	config->Sections[section].erase(
@@ -81,6 +106,23 @@ void backend_erase_config_section(char *section)
 		config->Sections[section].end());
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
 int backend_close_config_file(void)
 {
 	config->Save();	
@@ -88,6 +130,23 @@ int backend_close_config_file(void)
 	return 0;
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
 void backend_add_to_config_file(char * section, 
 					char * label, char * value)
 {
@@ -95,6 +154,48 @@ void backend_add_to_config_file(char * section,
 			ConfigEntMap::value_type(label, value));
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_save_value_to_config_file
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   void backend_save_value_to_config_file(char * section, 
+ *					char * label, char * value)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_save_value_to_config_file(char * section, 
+					char * label, char * value)
+{
+	config->Sections[section][label] = value;
+	
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
 const char *backend_get_config_value(char * section, char * label)
 {
 	ConfigEntMap::iterator loop, end;
@@ -109,6 +210,23 @@ const char *backend_get_config_value(char * section, char * label)
 	return NULL; 
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
 int backend_set_config_to_get_labels(char * section)
 {
 	loop = config->Sections[section].begin();
@@ -119,6 +237,23 @@ int backend_set_config_to_get_labels(char * section)
 		return 0;
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_get_next_config_label
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   const char *backend_get_next_config_label(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   const char*
+ */
+ 
 const char *backend_get_next_config_label(void)
 {
 	while (loop != end) {
@@ -127,3 +262,287 @@ const char *backend_get_next_config_label(void)
 	return NULL; 
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_get_next_config_value
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   const char *backend_get_next_config_value(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   const char*
+ */
+ 
+const char *backend_get_next_config_value(void)
+{
+	while (loop != end) {
+		return strdup((loop++)->second.c_str());
+	}
+	return NULL; 
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+/*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
+void backend_save_module_key(char *mod_name, char *key)
+{
+	SectionMap::iterator section;
+	ConfigEntMap::iterator entry;
+	DIR *dir;
+	char buf[256], conffile[256];
+	struct dirent *ent;
+
+	strcpy(buf, sw.main_mgr->configPath);
+	dir = opendir(buf);
+	if (dir) {		//-- find and update .conf file
+		rewinddir(dir);
+		while ((ent = readdir(dir))) {
+			if ((strcmp(ent->d_name, "."))
+			    && (strcmp(ent->d_name, ".."))) {
+				sprintf(conffile, "%s/%s", buf,
+					ent->d_name);
+				SWConfig *myConfig =
+				    new SWConfig(conffile);
+				section =
+				    myConfig->Sections.find(mod_name);
+				if (section != myConfig->Sections.end()) {
+					entry =
+					    section->second.
+					    find("CipherKey");
+					if (entry !=
+					    section->second.end()) {
+						entry->second = key;	//-- set cipher key
+						myConfig->Save();	//-- save config file
+					}
+				}
+				delete myConfig;
+			}
+		}
+	}
+	closedir(dir);
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+char *backend_get_module_font_name(char *mod_name, char * dir)
+{
+	char file[255];
+	char *buf = NULL;
+
+	sprintf(file, "%s/fonts.conf", dir);
+	SWConfig module_options(file);
+	module_options.Load();
+
+	buf =
+	    (char *) module_options[mod_name]["Font"].c_str();
+	if(buf)
+		return strdup(buf);
+	else
+		return NULL;
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+char *backend_get_module_font_size(char *mod_name, char * dir)
+{
+	char file[255];
+	char *buf = NULL;
+
+	sprintf(file, "%s/fonts.conf", dir);
+	SWConfig module_options(file);
+	module_options.Load();
+
+	buf =
+	    (char *) module_options[mod_name]["Fontsize"].c_str();
+	if(buf)
+		return strdup(buf);
+	else
+		return NULL;
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+void backend_load_font_info(MOD_FONT * mf, char * dir)
+{
+	char buf[255];
+	char *tmpbuf = NULL;
+
+	sprintf(buf, "%s/fonts.conf", dir);
+	SWConfig module_options(buf);
+	module_options.Load();
+
+	mf->old_font =
+	    (char *) module_options[mf->mod_name]["Font"].c_str();
+	mf->old_gdk_font =
+	    (char *) module_options[mf->mod_name]["GdkFont"].c_str();
+	mf->old_font_size =
+	    (char *) module_options[mf->mod_name]["Fontsize"].c_str();
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+void backend_save_font_info(MOD_FONT * mf, char * dir)
+{
+	char buf[80], buf2[255];
+
+	sprintf(buf, "%s/fonts.conf", dir);
+	SWConfig module_options(buf);
+
+	module_options[mf->mod_name]["Font"] = mf->new_font;
+	module_options[mf->mod_name]["GdkFont"] = mf->new_gdk_font;
+	module_options[mf->mod_name]["Fontsize"] = mf->new_font_size;
+
+	module_options.Save();
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+
+int backend_load_module_options(char * modName, char * option, 
+					char * dir, char * conf)
+{
+	char buf[255], *yesno;
+	bool retval = false;
+
+	sprintf(buf, "%s/%s", dir, conf);
+	SWConfig module_options(buf);
+	module_options.Load();
+	yesno = (char *) module_options[modName][option].c_str();
+	if (!strcmp(yesno, "On"))
+		retval = true;
+	else
+		retval = false;
+	return retval;
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   
+ */
+ 
+int backend_save_module_options(char * modName, char * option, 
+			char * value, char * dir, char * conf)
+{
+	char buf[80], buf2[255];
+
+	sprintf(buf, "%s/%s", dir, conf);
+	SWConfig module_options(buf);
+
+	module_options[modName][option] = value;
+
+	module_options.Save();
+	return true;
+}

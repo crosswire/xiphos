@@ -64,6 +64,7 @@
 
 #include "main/percomm.h"
 #include "main/settings.h"
+#include "main/xml.h"
 
 
 /******************************************************************************
@@ -106,8 +107,10 @@ void gui_new_activate(GtkMenuItem * menuitem,
 		}
 		g_free(info);
 	}
-	sprintf(settings.studypadfilename, "%s", "");
-	settings.studypadfilename[0] = '\0';
+	settings.studypadfilename = "";
+	xml_set_value("GnomeSword", "studypad", "lastfile", 
+							"");
+	
 	sprintf(ecd->filename, "%s", "");
 	ecd->filename[0] = '\0';
 	gtk_html_select_all(ecd->html);
@@ -220,7 +223,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 		gint test;
 		gchar *key;
 
-		key = get_percomm_key();
+		key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
 		info->label_top = N_("Are you sure you want");
 		info->label_middle = N_("to delete the note for");
@@ -591,7 +594,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 		    html_engine_get_selection_string(ecd->html->engine);
 		info->text1 = g_strdup(buf);
 	}
-	info->text2 = g_strdup(settings.MainWindowModule);
+	info->text2 = g_strdup(xml_get_value("modules", "text"));//settings.MainWindowModule);
 	/*** open dialog to get name for list ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {

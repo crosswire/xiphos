@@ -24,13 +24,16 @@
 #endif
 
 #include <glib-1.2/glib.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "gui/shortcutbar_main.h"
 
 #include "main/shortcutbar.h"
+#include "main/settings.h"
 
 #include "backend/sword.h"
-#include "backend/shortcutbar.h"
+//#include "backend/shortcutbar.h"
 
 /******************************************************************************
  * Name
@@ -49,10 +52,28 @@
  *  GList * 
  */
 
-GList *load_sb_group(gchar * filename, gchar * group_name,
+GList *load_sb_group(gchar * file_name, gchar * group_name,
 		     gchar * icon_size)
 {
-	return backend_load_sb_group(filename, group_name, icon_size);
+	GList *glist = NULL;
+	gchar conf_file[256];
+	const gchar *buf;
+	
+	strcpy(conf_file, file_name);
+	//g_warning(conf_file);
+	backend_open_config_file(conf_file);
+	sprintf(group_name, "%s",
+		backend_get_config_value("Shortcut Info","Group Name"));
+	sprintf(icon_size, "%s",
+		backend_get_config_value("Shortcut Info","Large Icon"));
+	
+	backend_set_config_to_get_labels("ROOT");
+	while ((buf = backend_get_next_config_value()) != NULL) {
+		glist = g_list_append(glist, (gchar*)buf);
+	}
+	backend_close_config_file();
+	return glist;
+	//return backend_load_sb_group(filename, group_name, icon_size);
 }
 
 
@@ -76,24 +97,35 @@ GList *load_sb_group(gchar * filename, gchar * group_name,
 void save_sb_group(GList * group_list, gchar * file_name, 
 		gchar * group_name, char *large_icons)
 {
-	/*gchar *item_url, *item_name;
-	gint j, number_of_items = 0;
-	GList *group_list = NULL;
-
-	number_of_items = get_num_shortcut_items(group_num);
-
-	for (j = 0; j < number_of_items; j++) {
-		get_shortcut_item_info(group_num, j, &item_url,
-				       &item_name);
-		
-		group_list = g_list_append(group_list, (char *) g_strdup(item_name));
-		//g_warning("%s", item_name);
-		g_free(item_url);
-		g_free(item_name);
-	}*/
+	GList *tmp = NULL;
+	char conf_file[256];
+	char buf[80];
+	int j = 0;
+	//const gchar *buf;
+	
+	sprintf(conf_file, "%s/%s", settings.shortcutbarDir, file_name);
+	
+	backend_open_config_file(conf_file);	
+	backend_save_value_to_config_file("Shortcut Info", 
+					"Group Name", group_name);
+	backend_save_value_to_config_file("Shortcut Info", 
+					"Large Icon", large_icons);
+	backend_erase_config_section("ROOT");
+	tmp = group_list;
+	while(tmp != NULL) {
+		sprintf(buf, "branch%d", j++);
+		backend_save_value_to_config_file("ROOT", 
+					buf, (char *) tmp->data);
+		g_print("saving list item: %s\n", (char *) tmp->data);
+		g_free((char *) tmp->data);
+		tmp = g_list_next(tmp);		
+	}
+	g_list_free(tmp);
+	backend_close_config_file();
+	/*
 	backend_save_sb_group(group_list, file_name, group_name,
 			      large_icons);
-	//g_list_free(group_list);
+	*/
 }
 
 
@@ -115,7 +147,17 @@ void save_sb_group(GList * group_list, gchar * file_name,
 
 void save_sb_iconsize(gchar * file_name, char *icons)
 {
-	backend_save_sb_iconsize(file_name, icons);
+	
+	char conf_file[256];
+	sprintf(conf_file, "%s/%s", settings.shortcutbarDir, file_name);
+	//g_warning(conf_file);
+	backend_open_config_file(conf_file);
+	backend_save_value_to_config_file("Shortcut Info", 
+					"Large Icon", icons);	
+	backend_close_config_file();
+	
+	/*backend_save_sb_iconsize(file_name, icons);*/
+	
 }
 
 

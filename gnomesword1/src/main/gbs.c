@@ -32,7 +32,7 @@
 #include "main/gbs.h"
 
 #include "backend/sword.h"
-#include "backend/gbs_.h"
+//#include "backend/tree.hh"
  
 
 /******************************************************************************
@@ -53,7 +53,7 @@
  
 char * display_gbs(char * book_name, char * key)
 {
-	return backend_display_gbs(book_name, key);
+	return backend_get_module_text(3, book_name, key);
 }
 
 /******************************************************************************
@@ -179,28 +179,7 @@ int gbs_treekey_first_child(unsigned long offset)
  
 char *get_book_key(char * book_name)
 {
-	return backend_get_book_key(book_name);
-}
-
-/******************************************************************************
- * Name
- *  display_row_gbs
- *
- * Synopsis
- *   #include "gbs.h"
- *
- *    char * display_row_gbs(gint book_num, gchar *offset)	
- *
- * Description
- *    
- *
- * Return value
- *   char * 
- */ 
- 
-char * display_row_gbs(char * book_name, char *offset)
-{
-	return backend_display_row_gbs(book_name, offset);
+	return backend_get_key_from_module(3, book_name);
 }
 
 /******************************************************************************
@@ -221,7 +200,7 @@ char * display_row_gbs(char * book_name, char *offset)
  
 void change_book(char * mod_name, unsigned long offset)
 {
-	backend_change_book(mod_name, offset);
+	backend_set_treekey(mod_name, offset);
 }
 
 

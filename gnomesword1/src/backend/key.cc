@@ -37,13 +37,10 @@
 #include <pthread.h>
 #include <string.h>
 
-#include "backend/key.hh"
-//#include "backend/module.hh"
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 
 #include "main/settings.h"
-#include "main/search.h"
 
 using std::string;
 using std::map;
@@ -64,7 +61,7 @@ SWKey *current_scope;
  *    backend_clear_scope
  *
  * Synopsis
- *   #include "backend/search.h"
+ *   #include "backend/key.hh"
  *
  *   int backend_clear_scope(void)
  *
@@ -77,9 +74,10 @@ SWKey *current_scope;
 
 int backend_clear_scope(void)
 {
-	current_scope = 0;	//------------ clear scope
+	current_scope = 0;	
 	return 1;
 }
+
 
 /******************************************************************************
  * Name
@@ -109,7 +107,7 @@ int backend_clear_results(void)
  *    backend_clear_search_list
  *
  * Synopsis
- *   #include "backend/search.h"
+ *   #include "backend/key.hh"
  *
  *   int backend_clear_search_list(void)
  *
@@ -122,7 +120,7 @@ int backend_clear_results(void)
 
 int backend_clear_search_list(void)
 {
-	search_scope_list.ClearList();	//------------ clear scope search list
+	search_scope_list.ClearList();
 	return search_scope_list.Count ();
 }
 
@@ -132,7 +130,7 @@ int backend_clear_search_list(void)
  *    backend_set_scope2last_search
  *
  * Synopsis
- *   #include "backend/search.h"
+ *   #include "backend/key.hh"
  *
  *   int backend_set_scope2last_search(void)
  *
@@ -155,7 +153,7 @@ int backend_set_scope2last_search(void)
  *    backend_set_scope2range
  *
  * Synopsis
- *   #include "backend/search.h"
+ *   #include "backend/key.hh"
  *
  *   void backend_set_scope2range(void)
  *
@@ -171,6 +169,22 @@ void backend_set_scope2range(void)
 	current_scope = &search_range;
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_set_results_position 
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   void backend_set_results_position(char pos)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
 
 void backend_set_results_position(char pos)
 {
@@ -231,6 +245,7 @@ int backend_set_range(char * list)
 	search_range = VerseKey().ParseVerseList(list, "", true);
 	return search_range.Count ();
 }
+
 
 /******************************************************************************
  * Name
@@ -300,7 +315,7 @@ char *backend_get_next_verse_list_element(int count)
  *   backend_get_valid_key
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include "backend/key.hh"
  *
  *   char *backend_get_valid_key(char *key)	
  *
@@ -319,6 +334,23 @@ char *backend_get_valid_key(char *key)
 	return strdup((char *) vkey.getText());
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_get_book_from_key
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   const char *backend_get_book_from_key(char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */
+
 const char *backend_get_book_from_key(char *key)
 {
 	VerseKey vkey;
@@ -327,6 +359,23 @@ const char *backend_get_book_from_key(char *key)
 	return vkey.books[vkey.Testament() - 1][vkey.Book() -
 							 1].name;
 }
+
+
+/******************************************************************************
+ * Name
+ *   backend_get_chapter_from_key
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   int backend_get_chapter_from_key(char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
 
 int backend_get_chapter_from_key(char *key)
 {
@@ -337,7 +386,23 @@ int backend_get_chapter_from_key(char *key)
 	return vkey.Chapter();
 }
 
-/** Returns the number of chapters for the given book. */
+
+/******************************************************************************
+ * Name
+ *   backend_chapter_count
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   	const unsigned int backend_chapter_count(char *key) 
+ *
+ * Description
+ *    Returns the number of chapters for the given book.
+ *
+ * Return value
+ *   unsigned int
+ */
+
 const unsigned int backend_chapter_count(char *key) 
 {
 	VerseKey vkey;
@@ -349,7 +414,23 @@ const unsigned int backend_chapter_count(char *key)
 	return (vkey.books[testament-1][book-1].chapmax);
 }
 
-/** Returns the number of verses  for the given chapter. */
+
+/******************************************************************************
+ * Name
+ *   backend_verse_count
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   	const unsigned int backend_verse_count(char *key)
+ *
+ * Description
+ *    Returns the number of verses  for the given chapter.
+ *
+ * Return value
+ *   unsigned int
+ */
+
 const unsigned int backend_verse_count(char *key) 
 {
 	VerseKey vkey;
@@ -368,6 +449,23 @@ const unsigned int backend_verse_count(char *key)
 	}*/
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_get_verse_from_key
+ *
+ * Synopsis
+ *   #include "backend/key.hh"
+ *
+ *   int backend_get_verse_from_key(char *key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   int
+ */
+
 int backend_get_verse_from_key(char *key)
 {
 	VerseKey vkey;
@@ -382,7 +480,7 @@ int backend_get_verse_from_key(char *key)
  *   backend_get_next_book_of_bible
  *
  * Synopsis
- *   #include "backend/sword.h"
+ *   #include "backend/key.hh"
  *   
  *   char *backend_get_next_book_of_bible(void)
  *
@@ -411,4 +509,3 @@ char *backend_get_next_book_of_bible(void)
 	return NULL;
 	
 }
-

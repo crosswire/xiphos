@@ -320,8 +320,9 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 	gbs->offset = strtoul(offset, NULL, 0);
 	
 	change_book(bookname, gbs->offset);
-
-	text = display_row_gbs(gbs->mod_name, offset);
+	
+	
+	text = get_text_from_offset(gbs->mod_name, offset);
 	if (text) {
 	/** fill ctree node with children **/
 		if ((GTK_CTREE_ROW(treeNode)->children == NULL)
@@ -333,9 +334,11 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 		}
 		key = get_book_key(gbs->mod_name);
 		if(key) {
-			strcpy(settings.book_key, key);
+			settings.book_key = key;
+			xml_set_value("GnomeSword", "key", "book", key);
 		} else {
 			settings.book_key[0] = '\0';
+			xml_set_value("GnomeSword", "key", "book",NULL);
 		}	
 		
 		entry_display(gbs->html, gbs->mod_name,
@@ -388,10 +391,12 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	 */
 	key = get_book_key(g->mod_name);
 	if(key) {
-		strcpy(settings.book_key, key);
+		settings.book_key = key;		
+		xml_set_value("GnomeSword", "key", "book", key);
 		free(key);
 	} else {
-		settings.book_key[0] = '\0';
+		settings.book_key = NULL;		
+		xml_set_value("GnomeSword", "key", "book", NULL);
 	}
 	gui_change_window_title(g->mod_name);
 	/*
@@ -403,7 +408,8 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	 */
 	gui_set_search_label(g->mod_name);
 	
-	strcpy(settings.BookWindowModule, g->mod_name);
+	settings.BookWindowModule = g->mod_name;	
+	xml_set_value("GnomeSword", "modules", "book",g->mod_name);
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;
 	settings.book_last_page = page_num;	
 	widgets.html_book = g->html;

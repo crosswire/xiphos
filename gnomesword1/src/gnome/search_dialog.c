@@ -946,7 +946,7 @@ static void url(GtkHTML * html, const gchar * url, gpointer data)
 
 			if (buf) {
 				gchar *str;
-				text = get_striptext(modbuf, buf);
+				text = get_striptext(4, modbuf, buf);
 				str = remove_linefeeds(text);
 				gnome_appbar_set_status(GNOME_APPBAR
 							(search.
@@ -1028,7 +1028,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			gui_change_module_and_key(modbuf, buf);
 
 		}
-		text = get_module_text(modbuf, buf);
+		text = get_module_text(5, modbuf, buf);
 		entry_display(search.preview_html, modbuf,
 			      text, buf, TRUE);
 		settings.displaySearchResults = FALSE;

@@ -18,20 +18,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
+
 #ifndef __XML_H__
 #define __XML_H__
 
 #ifdef __cplusplus
 extern "C" {
-#endif	
-
-
+#endif
+int create_xml_file(char * filename, char * name);
+int xml_create_settings_file(char * file_name);
+int xml_parse_settings_file(char *file_name);
+char *xml_get_value(char *section, char *item);
+void xml_set_value(char *type_doc, char *section, char *item,
+		  char *value);
+void xml_save_settings_doc(char *file_name);
+void xml_free_settings_doc(void);
 
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif
-

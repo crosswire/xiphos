@@ -25,18 +25,34 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
+#include "main/sword.h"
+
 int backend_open_config_file(char *file);
 void backend_erase_config_section(char *section);
 int backend_close_config_file(void);
 void backend_add_to_config_file(char * section, 
 				char * label, char * value);
+void backend_save_value_to_config_file(char * section, 
+				char * label, char * value);
 const char *backend_get_config_value(char * section, char * label);
 int backend_set_config_to_get_labels(char * section);
-const char *backend_get_next_config_label(void);	
+const char *backend_get_next_config_label(void);
+const char *backend_get_next_config_value(void);
+void backend_save_module_key(char *mod_name, char *key);
 	
+char *backend_get_module_font_name(char *mod_name, char * dir);
+char *backend_get_module_font_size(char *mod_name, char * dir);	
+void backend_load_font_info(MOD_FONT * mf, char * dir);
+void backend_save_font_info(MOD_FONT * mf, char * dir);
+
+
+int backend_load_module_options(char * modName, char * option, 
+					char * dir, char * conf);
+int backend_save_module_options(char * modName, char * option, 
+			char * value, char * dir, char * conf);
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

@@ -259,7 +259,9 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	
 	gui_set_dict_frame_label();
 	
-	sprintf(settings.DictWindowModule, "%s", d->mod_name);
+	settings.DictWindowModule = d->mod_name;
+	xml_set_value("GnomeSword", "modules", "dict",d->mod_name);
+	
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
 	widgets.html_dict = d->html;
@@ -290,7 +292,8 @@ void on_entryDictLookup_changed(GtkEditable * editable,
 	static gboolean firsttime = TRUE;
 	
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
-	strcpy(settings.dictkey, key);	
+	settings.dictkey = key;		
+	xml_set_value("GnomeSword", "key", "dictionary", key);
 	
 	text = get_dictlex_text(d->mod_name, key);	
 	entry_display(d->html, d->mod_name,
@@ -306,18 +309,18 @@ void on_entryDictLookup_changed(GtkEditable * editable,
 	
 	if (count) {
 		gtk_clist_clear(GTK_CLIST(d->clist));
-		set_dictlex_module(d->mod_name);
-		set_dictlex_key(key);
-		new_key = get_dictlex_key(-1);
+		//set_dictlex_module(d->mod_name);
+		//set_dictlex_key(key);
+		new_key = get_dictlex_key(2, d->mod_name, -1);
 		
 		for (i = 0; i < (count / 2); i++) {
 			free(new_key);
-			new_key = get_dictlex_key(0);
+			new_key = get_dictlex_key(2, d->mod_name, 0);
 		}
 		
 		for (i = 0; i < count; i++) {
 			free(new_key);			
-			new_key = get_dictlex_key(1);
+			new_key = get_dictlex_key(2, d->mod_name, 1);
 			gtk_clist_append(GTK_CLIST(d->clist),
 						 &new_key);
 		}
@@ -687,7 +690,7 @@ void gui_setup_dictlex(GList *mods)
 	g_free(modbuf);
 	g_free(keybuf);
 	g_list_free(tmp);
-	settings.dict_last_page = 0;
+	//settings.dict_last_page = 0;
 }
 
 /******************************************************************************
