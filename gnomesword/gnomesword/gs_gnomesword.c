@@ -40,7 +40,7 @@
 
 #if USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
 
 /*****************************************************************************

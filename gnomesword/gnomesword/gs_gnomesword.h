@@ -29,7 +29,7 @@ extern "C" {
 #include "gs_sword.h"
 	
 #if USE_SHORTCUTBAR	
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
 
 typedef struct _settings SETTINGS;

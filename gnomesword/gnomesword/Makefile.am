@@ -4,9 +4,7 @@ INCLUDES =  \
     $(EXTRA_PRINT_CFLAGS) \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
-    $(SWORD_CPPFLAGS) \
-    -I$(top_srcdir)/widgets/misc \
-    -I$(top_srcdir)/widgets/shortcut-bar
+    $(SWORD_CPPFLAGS)
 
 bin_PROGRAMS = gnomesword
 
@@ -69,9 +67,7 @@ PRINT_LDADD = \
     $(PIXBUF_LIBS)
 
 SHORTCUTBAR_LDADD = \
-    $(GNOME_APP_LIBS) \
-    $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a \
-    $(top_builddir)/widgets/misc/libemiscwidgets.a
+    $(GNOME_APP_LIBS)
 
 if SHORTCUTBAR_SPELL
 gnomesword_SOURCES = \

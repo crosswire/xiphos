@@ -21,7 +21,7 @@ extern "C" {
 #include <gnome.h>
 	
 #if USE_SHORTCUTBAR
-#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 #endif /* USE_SHORTCUTBAR */
 	
 GtkWidget *create_fileselection1(void);
