@@ -803,14 +803,14 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	pmDict = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmDict), "pmDict", pmDict);
 
-	copy5 = gtk_menu_item_new_with_label("Copy");
+	copy5 = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_ref(copy5);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "copy5", copy5,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(copy5);
 	gtk_container_add(GTK_CONTAINER(pmDict), copy5);
 
-	goto_reference3 = gtk_menu_item_new_with_label("Goto Reference");
+	goto_reference3 = gtk_menu_item_new_with_label(_("Goto Reference"));
 	gtk_widget_ref(goto_reference3);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "goto_reference3",
 				 goto_reference3,
@@ -818,7 +818,7 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	gtk_widget_show(goto_reference3);
 	gtk_container_add(GTK_CONTAINER(pmDict), goto_reference3);
 
-	lookup_word1 = gtk_menu_item_new_with_label("Lookup Word");
+	lookup_word1 = gtk_menu_item_new_with_label(_("Lookup Word"));
 	gtk_widget_ref(lookup_word1);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "lookup_word1",
 				 lookup_word1,
@@ -826,14 +826,14 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	gtk_widget_show(lookup_word1);
 	gtk_container_add(GTK_CONTAINER(pmDict), lookup_word1);
 
-	add_bookmark = gtk_menu_item_new_with_label("Add Bookmark");
+	add_bookmark = gtk_menu_item_new_with_label(_("Add Bookmark"));
 	gtk_widget_ref(add_bookmark);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "add_bookmark",
 				 add_bookmark, 
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(add_bookmark);
 	gtk_container_add(GTK_CONTAINER(pmDict), add_bookmark);
-	gtk_tooltips_set_tip(tooltips, add_bookmark, "Add dict/lex key and module to Presonal Bookmarks",
+	gtk_tooltips_set_tip(tooltips, add_bookmark, _("Add dict/lex key and module to Presonal Bookmarks"),
 			     NULL);	
 	
 	add_bookmark_menu = gtk_menu_new ();
@@ -845,7 +845,7 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	create_addBookmarkMenuBM(pmDict, add_bookmark_menu,settings);	
 	
 	about_this_module5 =
-	    gtk_menu_item_new_with_label("About this module");
+	    gtk_menu_item_new_with_label(_("About this module"));
 	gtk_widget_ref(about_this_module5);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "about_this_module5",
 				 about_this_module5,
@@ -853,24 +853,24 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	gtk_widget_show(about_this_module5);
 	gtk_container_add(GTK_CONTAINER(pmDict), about_this_module5);
 
-	show_tabs1 = gtk_check_menu_item_new_with_label("Show Tabs");
+	show_tabs1 = gtk_check_menu_item_new_with_label(_("Show Tabs"));
 	gtk_widget_ref(show_tabs1);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "show_tabs1",
 				 show_tabs1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(show_tabs1);
 	gtk_container_add(GTK_CONTAINER(pmDict), show_tabs1);
-	gtk_tooltips_set_tip(tooltips, show_tabs1, "Show notebook tabs",
+	gtk_tooltips_set_tip(tooltips, show_tabs1, _("Show notebook tabs"),
 			     NULL);
 			
-        view_in_new_window = gtk_menu_item_new_with_label("View in New Window");
+        view_in_new_window = gtk_menu_item_new_with_label(_("View in New Window"));
 	gtk_widget_ref(view_in_new_window);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "view_in_new_window",
 				 show_tabs1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(view_in_new_window);
 	gtk_container_add(GTK_CONTAINER(pmDict), view_in_new_window);
-	gtk_tooltips_set_tip(tooltips, view_in_new_window, "View this module in a new window",
+	gtk_tooltips_set_tip(tooltips, view_in_new_window, _("View this module in a new window"),
 			     NULL);
 
 	separator23 = gtk_menu_item_new();
@@ -882,7 +882,7 @@ static GtkWidget *create_pmDict(GList *modsdesc)
 	gtk_container_add(GTK_CONTAINER(pmDict), separator23);
 	gtk_widget_set_sensitive(separator23, FALSE);
 
-	view_module2 = gtk_menu_item_new_with_label("View Module");
+	view_module2 = gtk_menu_item_new_with_label(_("View Module"));
 	gtk_widget_ref(view_module2);
 	gtk_object_set_data_full(GTK_OBJECT(pmDict), "view_module2",
 				 view_module2,
@@ -977,14 +977,14 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	gtk_object_set_data (GTK_OBJECT (pmBible), "pmBible", pmBible);
 	pmBible_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmBible));
 
-	copy7 = gtk_menu_item_new_with_label ("Copy");
+	copy7 = gtk_menu_item_new_with_label (_("Copy"));
 	gtk_widget_ref (copy7);
 	gtk_object_set_data_full (GTK_OBJECT (pmBible), "copy7", copy7,
                             (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (copy7);
 	gtk_container_add (GTK_CONTAINER (pmBible), copy7);
 	
-	lookup_word = gtk_menu_item_new_with_label ("Lookup Word");
+	lookup_word = gtk_menu_item_new_with_label (_("Lookup Word"));
 	gtk_widget_ref (lookup_word);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "lookup_word", lookup_word,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -997,7 +997,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
                             (GtkDestroyNotify) gtk_widget_unref);
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_word), lookup_word_menu);
 	
-	usecurrent1 = gtk_menu_item_new_with_label ("Use Current Dictionary");
+	usecurrent1 = gtk_menu_item_new_with_label (_("Use Current Dictionary"));
 	gtk_widget_ref (usecurrent1);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "usecurrent1", usecurrent1,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1012,7 +1012,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_container_add (GTK_CONTAINER (lookup_word_menu), separator1);
   	gtk_widget_set_sensitive (separator1, FALSE);
 	
-	lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
+	lookup_selection = gtk_menu_item_new_with_label (_("Lookup Selection"));
 	gtk_widget_ref (lookup_selection);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "lookup_selection", lookup_selection,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1026,7 +1026,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_selection), lookup_selection_menu);
   	//view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 	
-	usecurrent2 = gtk_menu_item_new_with_label ("Use Current Dictionary");
+	usecurrent2 = gtk_menu_item_new_with_label (_("Use Current Dictionary"));
 	gtk_widget_ref (usecurrent2);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "usecurrent2", usecurrent2,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1042,14 +1042,14 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_widget_set_sensitive (separator3, FALSE);	
 	
 	/*** add bookmark menu ***/
-	add_bookmark = gtk_menu_item_new_with_label("Add Bookmark");
+	add_bookmark = gtk_menu_item_new_with_label(_("Add Bookmark"));
 	gtk_widget_ref(add_bookmark);
 	gtk_object_set_data_full(GTK_OBJECT(pmBible), "add_bookmark",
 				 add_bookmark, 
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(add_bookmark);
 	gtk_container_add(GTK_CONTAINER(pmBible), add_bookmark);
-	gtk_tooltips_set_tip(tooltips, add_bookmark, "Add current verse to Presonal Bookmarks",
+	gtk_tooltips_set_tip(tooltips, add_bookmark, _("Add current verse to Presonal Bookmarks"),
 			     NULL);
 	
 	add_bookmark_menu = gtk_menu_new ();
@@ -1061,24 +1061,24 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
 	/*** add bookmark items ***/
 	create_addBookmarkMenuBM(pmBible, add_bookmark_menu, settings);
 	
-	show_tabs = gtk_check_menu_item_new_with_label("Show Tabs");
+	show_tabs = gtk_check_menu_item_new_with_label(_("Show Tabs"));
 	gtk_widget_ref(show_tabs);
 	gtk_object_set_data_full(GTK_OBJECT(pmBible), "show_tabs",
 				 show_tabs,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(show_tabs);
 	gtk_container_add(GTK_CONTAINER(pmBible), show_tabs);
-	gtk_tooltips_set_tip(tooltips, show_tabs, "Show notebook tabs",
+	gtk_tooltips_set_tip(tooltips, show_tabs, _("Show notebook tabs"),
 			     NULL);
 				     
-  	about_this_module1 = gtk_menu_item_new_with_label ("About this module");
+  	about_this_module1 = gtk_menu_item_new_with_label (_("About this module"));
   	gtk_widget_ref (about_this_module1);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "about_this_module1", about_this_module1,
                             (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (about_this_module1);
   	gtk_container_add (GTK_CONTAINER (pmBible), about_this_module1);
 
-	viewtext = gtk_menu_item_new_with_label ("View Text in new window");
+	viewtext = gtk_menu_item_new_with_label (_("View Text in new window"));
   	gtk_widget_ref (viewtext);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "viewtext", viewtext,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1093,7 +1093,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_container_add (GTK_CONTAINER (pmBible), separator4);
   	gtk_widget_set_sensitive (separator4, FALSE);		
 			     
-  	settings->unlocktextmod_item = gtk_menu_item_new_with_label ("Unlock This Module");
+  	settings->unlocktextmod_item = gtk_menu_item_new_with_label (_("Unlock This Module"));
   	gtk_widget_ref (settings->unlocktextmod_item);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "settings->unlocktextmod_item",settings->unlocktextmod_item ,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1109,7 +1109,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_container_add (GTK_CONTAINER (pmBible), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);
 
-  	view_module3 = gtk_menu_item_new_with_label ("View Module");
+  	view_module3 = gtk_menu_item_new_with_label (_("View Module"));
   	gtk_widget_ref (view_module3);
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "view_module3", view_module3,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1226,7 +1226,7 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
 	gtk_object_set_data (GTK_OBJECT (pmInt), "pmInt", pmInt);
 	pmInt_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmInt));
 
-	copy7 = gtk_menu_item_new_with_label ("Copy");
+	copy7 = gtk_menu_item_new_with_label (_("Copy"));
 	gtk_widget_ref (copy7);
 	gtk_object_set_data_full (GTK_OBJECT (pmInt), "copy7", copy7,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -1241,14 +1241,14 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
   	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);
 	
-	undockInt = gtk_menu_item_new_with_label ("Detach/Attach");
+	undockInt = gtk_menu_item_new_with_label (_("Detach/Attach"));
 	gtk_widget_ref (undockInt);
 	gtk_object_set_data_full (GTK_OBJECT (pmInt), "undockInt",undockInt ,
                             (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (undockInt);
 	gtk_container_add (GTK_CONTAINER (pmInt), undockInt);
 	
-	module_options = gtk_menu_item_new_with_label ("Module Options");
+	module_options = gtk_menu_item_new_with_label (_("Module Options"));
 	gtk_widget_ref(module_options);
   	gtk_object_set_data_full (GTK_OBJECT (pmInt), "module_options", module_options,
                             (GtkDestroyNotify) gtk_widget_unref);

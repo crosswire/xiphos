@@ -94,7 +94,7 @@ sbtypefromModNameSBSW(gchar *modName)
 			retval = 2;
 		} 
 		
-		if(!strcmp(modType, "Generic Book")){
+		if(!strcmp(modType, "Generic Books")){
 			retval = 3;
 		} 
 	}
