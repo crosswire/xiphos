@@ -528,6 +528,7 @@ GList* backend_do_sb_search(gpointer *usr_data)
 				resultText,
 				searchMod->Name());
 			list = g_list_append(list,g_strdup(tmpbuf->str));
+			//g_warning(tmpbuf->str);
 			/* remember finds for next search's scope in case we want to use them */						
 			searchScopeList << (const char *) searchResults;	
 			if(!count) 

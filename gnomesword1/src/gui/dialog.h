@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_dialog.h - 
+ * dialog.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _GS_DIALOG_
-#define _GS_DIALOG_
+#ifndef _DIALOG_H_
+#define _DIALOG_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,8 +58,7 @@ struct _gs_dialog {
 	gboolean no;
 	gboolean apply;
 };
-	
-//GtkWidget * gs_dialog_build(GS_DIALOG * info);
+
 GS_DIALOG *gui_new_dialog(void);
 gint gui_gs_dialog(GS_DIALOG * info);
 
