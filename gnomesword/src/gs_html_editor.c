@@ -65,8 +65,11 @@
 #include "gs_info_box.h"
 #include "support.h"
 
+GSHTMLEditorControlData *specd;
+
 extern SETTINGS *settings;
 extern char *homedir;
+extern gchar * current_filename;	/* filename for open file in study pad window  */
 extern GtkWidget *htmlComments;
 extern GtkWidget *toolbarComments;
 extern GtkWidget *toolbarStudypad;
@@ -123,10 +126,13 @@ static void updatestatusbar(GSHTMLEditorControlData * ecd)
 	else
 		buf2 = ecd->filename;
 
-	if (ecd->changed)
+	if (ecd->changed){
 		sprintf(buf, "%s - modified", buf2);
-	else
+		settings->modifiedSP = TRUE;
+	} else {
 		sprintf(buf, "%s", buf2);
+		settings->modifiedSP = FALSE;
+	} 
 
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), context_id2,
 			   buf);
@@ -144,6 +150,9 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	gboolean was_editable;
 	int fd;
 
+	current_filename = filename;
+	sprintf(settings->studypadfilename,"%s",filename);	
+	//g_warning("filename = %s\n",current_filename);
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -241,21 +250,43 @@ void savenoteEDITOR(GtkWidget * html_widget)
 	     GINT_TO_POINTER(0))) {
 		g_warning("file not writen");
 	} else {
-		g_warning("file writen");
-		//g_warning(gstr->str);
+		g_print("file writen");
 		savenoteSWORD(gstr->str);
 	}
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(html, TRUE);
 }
 
-gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
-{
 
+gint save_file_program_end(GtkWidget *htmlwidget, gchar * filename)
+{
 	int retval = -1;
 	int fd;
 	if (filename) {
-		sprintf(ecd->filename, "%s", filename);
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+
+		if (fd == -1)
+			return -1;
+
+		if (!gtk_html_save
+		    (GTK_HTML(htmlwidget), (GtkHTMLSaveReceiverFn) save_receiver,
+		     GINT_TO_POINTER(fd)))
+			retval = -1;
+		else {
+			retval = 0;
+		}
+		close(fd);
+	}
+	return retval;
+}
+
+
+gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
+{
+	int retval = -1;
+	int fd;
+	if (filename) {
+		sprintf(settings->studypadfilename, "%s", filename);
 
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 
@@ -356,6 +387,7 @@ html_key_pressed(GtkWidget * html, GdkEventButton * event,
 		 GSHTMLEditorControlData * ecd)
 {
 	ecd->changed = TRUE;
+	//file_changed = TRUE;
 	updatestatusbar(ecd);
 	return 1;
 }
@@ -513,6 +545,8 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 		toolbarStudypad = toolbar_style(necd);
 		gtk_box_pack_end(GTK_BOX (settings->hboxToolbar), toolbarStudypad, FALSE, FALSE, 0);
 		gtk_widget_hide(toolbarStudypad);
+		if(settings->studypadfilename)
+			load_file(settings->studypadfilename,necd);
 	}
 	
 	return necd->htmlwidget;
@@ -603,7 +637,7 @@ on_deletenote_activate(GtkMenuItem * menuitem,
 }
 
 
-static void on_save_activate(GtkMenuItem * menuitem,
+void on_save_activate(GtkMenuItem * menuitem,
 			     GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *savemyFile;
@@ -1409,7 +1443,8 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 	    gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
-
+	
+	specd = gs_html_editor_control_data_new(s);
 	specd->personal_comments = FALSE;
 
 	frame12 = gtk_frame_new(NULL);

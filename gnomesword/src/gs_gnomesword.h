@@ -46,19 +46,24 @@ struct _settings {
 		*app,  /* main form */
 		*appbar, /* gnome status/progress bar */
 		*shortcut_bar,  /* the shortcut bar widget */
-		*ctree_widget,  /* bookmarks tree */
+		*ctree_widget, /* bookmarks tree */
+		*hboxToolbar, /* for editor toolbars ??? */
+	
+	/* html widgets */
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
 		*srhtml,  /* html widget for serch results list in shortcut bar */	
 		*htmlRP,  /* html widget for serch report shortcut bar */
+		*htmlcomm, /* html commentary widget */
+		*htmlSP, /* studypad html widger */
+	
+	/* popup menu item widgets */
 		*versestyle_item,	/* widget to access toggle menu - for versestyle */
 		*add_bookmark_menu, /* add bookmark menu item */
 		*unlocktextmod_item, /* unlock module menu item */
 		*unlockcommmod_item, /* unlock module menu item */
 		*unlockdictmod_item, /* unlock module menu item */
-		*htmlcomm, /* html commentary widget */
-		*hboxToolbar;
 	
-	GtkWidget  /* global option menu check items */
+	/* global option menu check item widgets */
 		*strongsnum,
 		*footnotes,
 		*hebrewpoints,
@@ -70,49 +75,48 @@ struct _settings {
 		*headings;
 		
 	gchar	
-		gs_version[16],
-		MainWindowModule[80],	/* modules to open at program startup  */
-		CommWindowModule[80],
-		DictWindowModule[80],
-	        Interlinear1Module[80],
-	        Interlinear2Module[80],
-	        Interlinear3Module[80], 
-	        Interlinear4Module[80],
-	        Interlinear5Module[80], 
-	        personalcommentsmod[80], 
-	        devotionalmod[80],
-		lex_greek[80],
-		lex_hebrew[80],
+		gs_version[16], /* GnomeSWORD version */
+		MainWindowModule[80],	/* module to open at program startup  */
+		CommWindowModule[80],	/* module to open at program startup  */
+		DictWindowModule[80],	/* module to open at program startup  */
+	        Interlinear1Module[80],	/* module to open at program startup  */
+	        Interlinear2Module[80],	/* module to open at program startup  */
+	        Interlinear3Module[80], 	/* module to open at program startup  */
+	        Interlinear4Module[80],	/* module to open at program startup  */
+	        Interlinear5Module[80], 	/* module to open at program startup  */
+	        personalcommentsmod[80], 	/* module to open at program startup  */
+	        devotionalmod[80], /* module to use for devotional */
+		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
+		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/
 	        currentverse[80],	/* verse to use at program startup */
-		*percomverse,
+		*percomverse, /* current verse for personal comments */
 	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
 	        studypadfilename[255],   /* name of file in studypad when we closed */
 		studypaddir[255],	    /* directory for studypad files */
+		groupName[50], /* ??? */
+		searchText[256]; /* ??? */	
+		
+	gchar /* fonts, font colors and font sizes */
 	        bible_text_color[15], /* color for text */
 	        bible_bg_color[15],  /* color for background */
 	        currentverse_color[15],  /* color for current verse */	
 	        currentverse_bg_color[15],  /* color for current verse background */
 	        link_color[15],  /* color for strongs, morph tags */	
-		bible_verse_num_color[15],
-		found_color[15],
+		bible_verse_num_color[15], /* verse number color */
+		found_color[15], /* color to use for search word in results display */
 		bible_font_size[4], /*** html font sizes ***/
 		commentary_font_size[4],
 		dictionary_font_size[4],
 		interlinear_font_size[4],
 		verselist_font_size[4],
 		verse_num_font_size[4],
-		default_font[126],
+		default_font[126], /* use if no other font is requested */
 		greek_font[126],
 		hebrew_font[126],
-		unicode_font[126],
-		groupName[50],
-		searchText[256];			
+		unicode_font[126];		
 		
 	gint 
-      		currentverse_red,	/* current verse colors */
-	        currentverse_green, 
-	        currentverse_blue,
-		shortcutbar_width,
+      		shortcutbar_width,
 		upperpane_hight,
 		biblepane_width,
 		gs_width,
@@ -121,45 +125,45 @@ struct _settings {
 		notebook3page,	//-- notebook 3 page number
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
-		whichwindow;      /* which of the main form html window is active */
+		whichwindow;      	/* which of the main form html windows is active */
 						/* 0=text, 1= comm, 2=dict */
 						
 	gboolean   
-		usedefault,
-		strongs,	//-- toogle button and check menu states
-		strongsint,
-		headingsint,	
-		crossrefint,	
-		lemmasint,		
-		morphsint,
-		hebrewpointsint,
-		cantillationmarksint,
-	        footnotesint,
-		greekaccentsint,
-	        versestyle,
-	        interlinearpage,
-	        autosavepersonalcomments,
-	        formatpercom,
-	        showcomtabs,
-	        showdicttabs,
-	        showshortcutbar,
-		showfavoritesgroup,
-	        showtextgroup,
-	        showcomgroup,
-	        showdictgroup,
-	        showbookmarksgroup,
-	        showhistorygroup,
-		showsplash,
-		showdevotional,
+		usedefault, /* use default settings in gnomesword or those used for last session */
+		strongs,	//-- toogle button and check menu state
+		strongsint, //-- check menu state interlinear mods
+		headingsint, //-- check menu state interlinear mods	
+		crossrefint, //-- check menu state interlinear mods	
+		lemmasint, //-- check menu state interlinear mods		
+		morphsint, //-- check menu state interlinear mods
+		hebrewpointsint, //-- check menu state interlinear mods
+		cantillationmarksint, //-- check menu state interlinear mods
+	        footnotesint, //-- check menu state interlinear mods
+		greekaccentsint, //-- check menu state interlinear mods
+	        versestyle, /* use verse style if true of paragraph style if not */
+	        interlinearpage, /* display interlinear page */
+	        autosavepersonalcomments, /* auto save personal notes */
+	        formatpercom, /* use html to format personal notes */
+	        showshortcutbar, /* display shortcut bar if true */
+		showfavoritesgroup, /* display shortcut bar group if true */
+	        showtextgroup, /* display shortcut bar group if true */
+	        showcomgroup, /* display shortcut bar group if true */
+	        showdictgroup, /* display shortcut bar group if true */
+	        showbookmarksgroup, /* display shortcut bar group if true */
+	        showhistorygroup, /* display shortcut bar group if true */
+		showsplash, /* show splash on program start if true */
+		showdevotional, /* show devotional on program start if true */
 		text_tabs, /* show module tabs in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
-		editnote,
-		notefollow;
+		editnote, /* true when percom html widget is in edit mode */
+		notefollow, /* notes follow Bible text when true */
+		modifiedSP; /* studypad file have been modified */
 		
-	GList *settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
+	GList 
+		*settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
 
 
@@ -183,9 +187,6 @@ void editbookmarksLoad(GtkWidget * editdlg);
 void addQuickmark(GtkWidget *app);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);
-void setcurrentversecolor(gint arg1, 
-		gint arg2, 
-		gint arg3);
 void setautosave(gboolean choice);
 void fillSBtoolbars(GtkWidget *app,
 		GList *biblelist,

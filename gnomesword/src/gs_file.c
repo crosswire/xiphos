@@ -144,7 +144,6 @@ gint setDiretory(void)
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
 	/* set bookmarks dir to swbmDir + .sword/bookmarks */
-	//swbmDir = g_new(char, strlen(homedir) + strlen(".sword/bookmarks") + 2);
 	sprintf(swDir, "%s/%s",homedir,".sword/bookmarks/");
 	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
 	gsbmDir = g_new(char, strlen(homedir) + strlen(".GnomeSword/bookmarks") + 2);
@@ -179,7 +178,6 @@ gint setDiretory(void)
 	
 	if (access(fnconfigure, F_OK) == -1) {
 		retval = 1; 
-		//createconfig();
 	}
 	
 	if (access(swDir, F_OK) == 0) {	/* if .sword/bookmarks does exist rename it to .GnomeSword/bookmarks*/
@@ -344,69 +342,6 @@ void createFiles(void)
 void saveFile(gchar * filename)
 {				
 
-}
-
-/*****************************************************************************
- * load file into studypad
- *****************************************************************************/
-void loadFile(GtkWidget * filesel)
-{				
-
-}
-
-/*****************************************************************************
- * load file into studypad during program startup
- *****************************************************************************/
-void loadStudyPadFile(gchar * filename)
-{				
-/*	GtkWidget *statusbar, *text;
-	FILE *fp;
-	gchar buffer[BUFFER_SIZE];
-	gint bytes_read;
-	gint context_id2;
-
-	statusbar = lookup_widget(MainFrm, "statusbar2");
-	text = lookup_widget(MainFrm, "text3");
-	context_id2 =
-	    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-					 "GnomeSword");
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_text_freeze(GTK_TEXT(text));
-	gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-	g_free(current_filename);
-	current_filename = NULL;
-	file_changed = FALSE;
-	fp = fopen(filename, "r");
-	if (fp == NULL) {
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, filename);	// Could not open file 
-		return;
-	}
-	for (;;) {
-		bytes_read = fread(buffer, sizeof(gchar), BUFFER_SIZE, fp);
-		if (bytes_read > 0)
-			gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
-					buffer, bytes_read);
-
-		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
-			break;
-	}*/
-	/* If there is an error while loading, we reset everything to a good state */
-	/*
-	if (ferror(fp)) {
-		fclose(fp);
-		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
-		gtk_text_thaw(GTK_TEXT(text));
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-				   "Error loading file.");
-		return;
-	}
-	fclose(fp);
-	gtk_text_thaw(GTK_TEXT(text));
-	current_filename = g_strdup(filename);
-	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
-	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
-			   current_filename);*/
 }
 
 GtkWidget *create_fileselection1(GSHTMLEditorControlData * ecd)
