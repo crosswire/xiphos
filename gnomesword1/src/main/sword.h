@@ -53,12 +53,13 @@ extern "C" {
 /*** function prototypes ***/
 
 //void set_global_option(int manager, char * option, gboolean choice);
-void delete_module_mgr(void);
+//void delete_module_mgr(void);
 const char *get_sword_version(void);
 char *get_path_to_mods(void);
 void init_sword(void);
 void shutdown_backend(void);
 //int set_module(int manager, char * module_name);
+char *main_module_name_from_description(char *description);
 char *main_get_crossref(char * mod_name, char * key, 
 						char * note_number);
 char *main_get_footnote_body(char * mod_name, char * key, 

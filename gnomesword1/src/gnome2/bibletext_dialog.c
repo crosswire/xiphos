@@ -88,7 +88,7 @@ void gui_on_lookup_bibletext_dialog_selection
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	if(!mod_name) 
 		return;
 
@@ -923,20 +923,27 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
-static gboolean textview_button_release_event(GtkWidget * widget,
+static gboolean textview_button_press_event(GtkWidget * widget,
 					GdkEventButton * event,
 					DIALOG_DATA * t)
 {
-	extern gboolean in_url;
-	gchar *key;
-	cur_vt = t;
+	switch (event->button) {
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		create_menu(t, event);
+		return TRUE;
+		break;
+	}
+	return FALSE;
+}
 
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name 
-	 */
-	gui_change_window_title(t->mod_name);
-
+static gboolean textview_button_release_event(GtkWidget * widget,
+					GdkEventButton * event,
+					gpointer data)
+{
 	switch (event->button) {
 	case 1:
 		break;
@@ -1046,7 +1053,7 @@ static void setup_tag (GtkTextTag *tag, gpointer user_data)
 		    user_data);
 }
 
-static void create_text_tags(GtkTextBuffer *buffer, gchar * rtl_font)
+static void create_text_tags(GtkTextBuffer *buffer)
 {
 	GtkTextTag *tag;
 	GdkColor color;
@@ -1095,11 +1102,6 @@ static void create_text_tags(GtkTextBuffer *buffer, gchar * rtl_font)
                 "right_margin", 0,
                 NULL);		
 		
-	/* right to left font */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
-        g_object_set (G_OBJECT (tag),
-		"font", rtl_font,
-                NULL);	
 		
 	/* large tag */
 	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
@@ -1131,7 +1133,7 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 	GtkWidget *vbox33;
 	GtkWidget *frame21;
 	GtkWidget *swVText; 
-	gchar *gdk_font = NULL;
+	//gchar *gdk_font = NULL;
 	gchar file[250];
 
 
@@ -1199,17 +1201,19 @@ void gui_create_bibletext_dialog(DIALOG_DATA * vt)
 		gtk_container_add (GTK_CONTAINER (swVText), vt->text);
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (vt->text), FALSE);
 		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (vt->text));
-		gdk_font = get_conf_file_item(file, vt->mod_name, "GdkFont");
-		create_text_tags(text_buffer, gdk_font);
+		create_text_tags(text_buffer);
 		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (vt->text), GTK_WRAP_WORD);
-		/*
-		g_signal_connect(GTK_OBJECT(t->text),
+		
+		g_signal_connect(GTK_OBJECT(vt->text),
+				   "button_press_event",
+				   G_CALLBACK
+				   (textview_button_press_event),
+				   (DIALOG_DATA *) vt);
+		g_signal_connect(GTK_OBJECT(vt->text),
 				   "button_release_event",
 				   G_CALLBACK
 				   (textview_button_release_event),
-				   (DIALOG_DATA *) t);*/
-		if(gdk_font) g_free(gdk_font);
-
+				   (DIALOG_DATA *) vt);
 	}
 	
 	vt->statusbar = gtk_statusbar_new();
@@ -1373,7 +1377,7 @@ static void lookup_bibletext_selection(GtkMenuItem * menuitem,
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
@@ -1434,7 +1438,7 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gchar *module_name = module_name_from_description((gchar *)user_data);
+	gchar *module_name = main_module_name_from_description((gchar *)user_data);
 	gchar *url = NULL;
 	if(module_name) {
 		url = g_strdup_printf("sword://%s/%s",

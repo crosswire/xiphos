@@ -442,7 +442,7 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 	
 	//if(!cur_t->html) return;
 	
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
@@ -499,7 +499,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	gchar *module_name = NULL;
 
-	module_name = module_name_from_description((gchar *) user_data);
+	module_name = main_module_name_from_description((gchar *) user_data);
 	if(module_name) {
 		main_display_commentary(module_name, settings.currentverse);
 		//gui_change_module_and_key(module_name, settings.currentverse);
