@@ -27,6 +27,7 @@ extern "C" {
 #endif
 struct _bookmark_menu {
 	GtkWidget *menu;
+	GtkWidget *in_tab;
 	GtkWidget *in_dialog;
 	GtkWidget *new;
 	GtkWidget *insert;
