@@ -6,15 +6,15 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=4
-1=195
-2=40
-3=38
-4=68
-5=808
-6=44
-7=153
-8=782
+0=55
+1=22
+2=182
+3=192
+4=98
+5=68
+6=808
+7=44
+8=1
 9=17
 10=48
 11=47
@@ -23,7 +23,7 @@ ShowLocals=true
 [filemarkers]
 0=
 1=
-2=
+2=1382,
 3=
 4=
 5=
@@ -35,29 +35,32 @@ ShowLocals=true
 11=
 12=
 
+[breakpoints]
+0=4,,1,0,0,,create_shortcutbar_search.c,73,83,0,on_btnSearch_clicked,,1019149070,
+
 [filelist]
-0=/home/terry/Projects/gnomesword1/doc/head.txt
-1=/home/terry/Projects/gnomesword1/src/backend/search.cpp
+0=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
+1=/home/terry/Projects/gnomesword1/src/backend/search.h
 2=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
-3=/home/terry/Projects/gnomesword1/src/backend/search.h
-4=/home/terry/Projects/gnomesword1/src/backend/commentary.cpp
-5=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
-6=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
-7=/home/terry/Projects/gnomesword/src/gs_shortcutbar.c
+3=/home/terry/Projects/gnomesword1/src/backend/search.cpp
+4=/home/terry/Projects/gnomesword1/src/gnome/create_shortcutbar_search.c
 
 [find_text]
-0=changesearchresultsSW_SEARCH
-1=ctree = user_data;
-2=discription
-3=false
-4=len
-5=textModAbout
-6=aboutbox
-7=notebook1
+0=frame1
+1=tmpbuf
+2=firstkey
+3=ckbCaseSensitive
+4=frame2
+5=rbPhraseSearch
+6=tmpMod
+7=setupSearchBar
 
 [find_in_files]
-0=display_about_module_dialog
-1=showmoduleinfoSWORD
-2=notebook1
-3=htmlCommentaries
-4=swHtmlCom
+0=gui_create_shortcutbar_search
+1=setupsearchresultsSBSW
+2=REG_ICASE
+3=display_about_module_dialog
+4=showmoduleinfoSWORD
+5=notebook1
+6=htmlCommentaries
+7=swHtmlCom
