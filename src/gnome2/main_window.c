@@ -566,7 +566,9 @@ void create_mainwindow(void)
 	GTK_WIDGET_SET_FLAGS(widgets.app, GTK_CAN_FOCUS);
 	gtk_window_set_policy(GTK_WINDOW(widgets.app), TRUE, TRUE,
 			      TRUE);
-
+	gnome_window_icon_set_default_from_file(
+			PACKAGE_PIXMAPS_DIR"/gs2-48x48.png");
+	
 	dock1 = GNOME_APP(widgets.app)->dock;
 	gtk_widget_show(dock1);
 
