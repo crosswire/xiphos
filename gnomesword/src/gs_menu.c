@@ -172,21 +172,24 @@ void createpopupmenus(GtkWidget *app,
 				GList *percomlist) 
 {
 	GtkWidget 
-		*menu2, 
+		*menuInt, 
 		*menu5,
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	
 	
-	menu2 = create_pmInt(bibleDescription, "textComp1"); 
+	menuInt = create_pmInt(bibleDescription, "textComp1"); 
 	menu5 = create_pmEditnote(app, percomlist);
 	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
 	menuBible = create_pmBible(bibleDescription, dictDescription);	
 	/* create popup menu for commentaries window */
 	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);			
-	/* attach popup menus */
-	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");	
+	/* attach popup menus and ajust checkmarks*/
+	gnome_popup_menu_attach(menuInt,lookup_widget(app,"textComp1"),(gchar*)"1");
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_strongs"))->active = settings->strongsint;
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_morphs"))->active = settings->morphsint;
+	GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_footnotes"))->active = settings->footnotesint;	
 	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;

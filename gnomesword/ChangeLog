@@ -1,3 +1,21 @@
+2001-08-13 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* changed main menu item 'Bookmarks' to 'Quickmarks' to
+	   avoid confusion with shortcut bar bookmarks
+	* added choice of Lexicon to be used when strongs number
+	  is clicked to preferences dialog
+	* when mouse is moved over strongs number of morph tag
+	  lexicon of choice will be displayed in the verse list window 
+	  if it is visible. Clicking will open lexicon in 'Dictionay / Lexicon"
+	  window.
+	* changed files gs_sword.cpp and gs_sword.h to sw_gnomesword.cpp
+	   and sw_gnomesword.h
+	* added files sw_viewcomm_dlg.cpp, sw_viewcomm_dlg.h, sw_viewdict_dlg.cpp,
+	   and sw_viewdict_dlg.h
+	* Strongs and footnotes settings for the interlinear window are now saved 
+	   and used on program start.
+
+
 2001-08-10 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added support for <sync type=Strongs> thml tags

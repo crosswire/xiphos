@@ -334,12 +334,12 @@ addnotebookpages(GtkWidget *notebook,
 void UpdateChecks(GtkWidget *app)
 {
 	GTK_CHECK_MENU_ITEM (settings->versestyle_item)->active = settings->versestyle;	
-	
-	if(settings->footnotes)  /* set footnotes to last setting used */
+	/* set footnotes to last setting used */
+	if(settings->footnotes)  
 		setglobalopsSWORD(0,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
 		setglobalopsSWORD(0,"Footnotes","Off" );	/* keep footnotes in sync with menu */			
-	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;
+	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;	
 	
 	/* set interlinear page to last setting */
 	if(settings->interlinearpage)
@@ -347,7 +347,17 @@ void UpdateChecks(GtkWidget *app)
 	else
 		gtk_widget_hide(lookup_widget(app,"vbox3"));	
 	/* set interlinear page menu check item */		
-	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 	
+	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 
+	/* set interlinear footnotes to last setting used */
+	if(settings->footnotesint)  
+		setglobalopsSWORD(1,"Footnotes","On" );	/* keep footnotes in sync with menu */		
+	else
+		setglobalopsSWORD(1,"Footnotes","Off" );	/* keep footnotes in sync with menu */	
+	/* set interlinear Strong's Numbers to last setting used */
+	if(settings->strongsint)  
+		setglobalopsSWORD(1,"Strong's Numbers","On" );	/* keep footnotes in sync with menu */		
+	else
+		setglobalopsSWORD(1,"Strong's Numbers","Off" );	/* keep footnotes in sync with menu */	
 	/* set auto save personal comments to last setting */
 	autoSave = settings->autosavepersonalcomments;
 	/* set auto save menu check item */	
@@ -419,9 +429,9 @@ void editbookmarksLoad(GtkWidget *editdlg)
 }
 
 /*****************************************************************************
- *addBookmark - someone clicked add bookmark to get us here
+ *addQuickmark - someone clicked add bookmark to get us here
 *****************************************************************************/
-void addBookmark(GtkWidget *app)  
+void addQuickmark(GtkWidget *app)  
 {
 	gchar    *bookname;      /* pointer to the Bible book we want to mark */
 	gint     iVerse,         /* verse we want to mark */
@@ -434,8 +444,8 @@ void addBookmark(GtkWidget *app)
 	sprintf(buf,"%s %d:%d%c",bookname, iChap,iVerse, '\0' ); /* put book chapter and verse into bookmarks array */
 	 ++ibookmarks;  /* increment number of bookmark item + 1 */	
 	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
-	removemenuitems(app, "_Bookmarks/<Separator>", ibookmarks); /* remove old bookmarks form menu -- menustuff.cpp */	
-        sprintf(buf,"%s%s", "_Bookmarks/",remembersubtree);
+	removemenuitems(app, "_Quickmarks/<Separator>", ibookmarks); /* remove old bookmarks form menu -- menustuff.cpp */	
+        sprintf(buf,"%s%s", "_Quickmarks/",remembersubtree);
         addseparator(app, buf);
         /* loadbookmarkarray(); */ /* load edited bookmarks  -- filestuff.cpp */
         loadbookmarks_afterSeparator(); /* let's show what we did -- GnomeSword.cpp */
