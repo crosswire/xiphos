@@ -23,6 +23,10 @@
 #ifndef ___MOD_GLOBAL_OPS_H_
 #define ___MOD_GLOBAL_OPS_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct _global_ops GLOBAL_OPS;
 struct  _global_ops {
 	gboolean words_in_red;
@@ -41,11 +45,15 @@ struct  _global_ops {
 	gint module_type;
 };
  
-void gui_set_global_options(GLOBAL_OPS * ops);
-GLOBAL_OPS *gui_new_globals(gchar * mod_name);
-void gui_add_global_option_items(gchar * mod_name, 
+void main_set_global_options(GLOBAL_OPS * ops);
+GLOBAL_OPS *main_new_globals(gchar * mod_name);
+void main_add_global_option_items(gchar * mod_name, 
 				GtkWidget * module_options_menu, 
 				gint type_module,
 				GLOBAL_OPS * ops);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -849,12 +849,12 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
 
-	gui_add_global_option_items(c->mod_name, 
+/*	gui_add_global_option_items(c->mod_name, 
 				c->module_options_menu, 
 				1,
 				c->ops);
 	//add_global_option_items(c);
-
+*/
 
 	/*
 	 * lookup menu

@@ -644,10 +644,10 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
 	
-	gui_add_global_option_items(t->mod_name, 
+/*	gui_add_global_option_items(t->mod_name, 
 				t->module_options_menu, 
 				3,
-				t->ops);
+				t->ops); */
 
 	/*
 	 * lookup menu

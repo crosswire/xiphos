@@ -28,7 +28,7 @@ extern "C" {
 
 #include "gui/gbs.h"
 
-#include "gui/mod_global_ops.h"
+#include "main/global_ops.hh"
 	
 typedef struct _gbsdata GBS_DATA;
 struct _gbsdata {
