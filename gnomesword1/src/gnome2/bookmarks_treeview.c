@@ -125,7 +125,7 @@ void gui_verselist_to_bookmarks(gchar * module_name)
 		}
 		g_string_free(str, TRUE);
 		bookmarks_changed = TRUE;
-		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+		gui_save_bookmarks_treeview();
 	}
 	g_free(info->text1);
 	g_free(info);
@@ -608,7 +608,8 @@ void row_changed(GtkTreeModel *treemodel, GtkTreePath *arg1,
                              GtkTreeIter *arg2, gpointer user_data)
 {
 	bookmarks_changed = TRUE;
-	gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+	gui_save_bookmarks_treeview();
+	bookmarks_changed = TRUE;
 }
 
 /******************************************************************************
@@ -769,7 +770,6 @@ static gboolean button_press_event(GtkWidget * widget,
 				gtk_widget_set_sensitive(menu.edit, FALSE);
 				gtk_widget_set_sensitive(menu.point, FALSE);
 				gtk_widget_set_sensitive(menu.delete, FALSE);
-				gtk_widget_set_sensitive(menu.save, FALSE);
 				gtk_widget_set_sensitive(menu.bibletime, FALSE);			
 				gtk_widget_set_sensitive(menu.rr_submenu,FALSE);
 				gtk_widget_set_sensitive(menu.remove, FALSE);

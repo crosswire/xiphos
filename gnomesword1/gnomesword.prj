@@ -235,7 +235,6 @@ module.source.files=\
 	src/gnome2/bibletext.c\
 	src/gnome2/bibletext_dialog.c\
 	src/gnome2/bibletext_menu.c\
-	src/gnome2/bookmarks.c\
 	src/gnome2/commentary.c\
 	src/gnome2/commentary_dialog.c\
 	src/gnome2/commentary_menu.c\
@@ -281,7 +280,8 @@ module.source.files=\
 	src/gnome2/parallel_view.c\
 	src/gnome2/search_sidebar.c\
 	src/gnome2/bookmarks_treeview.c\
-	src/gnome2/preferences_cell_renderer.c
+	src/gnome2/preferences_cell_renderer.c\
+	src/gnome2/bookmarks_menu.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
