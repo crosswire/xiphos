@@ -157,13 +157,14 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 					 (widgets.entry_hebrew_lex)));
 
 
-	settings.usedefault =
+	settings.usedefault = 0;
+/*
 	    GTK_TOGGLE_BUTTON(widgets.radiobutton_use_default)->active;
 	if (GTK_TOGGLE_BUTTON(widgets.radiobutton_use_default)->active)
 		xml_set_value("GnomeSword", "misc", "usedefault", "1");
 	else
 		xml_set_value("GnomeSword", "misc", "usedefault", "0");
-
+*/
 	settings.text_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active;
 	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active)
@@ -373,6 +374,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *label701;
 	GtkWidget *label702;
 	GtkWidget *label703;
+	GtkWidget *empty_label;
 	gchar *labeltext;
 
 
@@ -558,7 +560,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	vbox26 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox26);
 	gtk_box_pack_start(GTK_BOX(druid_vbox1), vbox26, TRUE, TRUE, 0);
-
+/*
 	label701 = gtk_label_new(NULL);
 
 	labeltext = g_strdup_printf("<span weight=\"bold\">%s</span>",_("Settings to use when GnomeSword starts"));
@@ -597,7 +599,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_widget_show(hseparator1);
 	gtk_box_pack_start(GTK_BOX(vbox26), hseparator1, FALSE, TRUE,
 			   0);
-
+*/
 	vbox34 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox34);
 	gtk_box_pack_start(GTK_BOX(vbox26), vbox34, FALSE, TRUE, 0);
@@ -612,7 +614,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(hbox27),
 			   widgets.checkbutton_verse_style, FALSE, TRUE,
 			   0);
-	gtk_widget_set_size_request(widgets.checkbutton_verse_style, 202, -1);
+	gtk_widget_set_size_request(widgets.checkbutton_verse_style, 212, -1);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (widgets.checkbutton_verse_style),
 				     TRUE);
@@ -623,7 +625,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(hbox27),
 			   widgets.checkbutton_text_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_size_request(widgets.checkbutton_text_tabs, 162, -1);
+	gtk_widget_set_size_request(widgets.checkbutton_text_tabs, 166, -1);
 
 	widgets.checkbutton_text_window =
 	    gtk_check_button_new_with_label(_("Show Bible window"));
@@ -638,14 +640,19 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	hbox28 = gtk_hbox_new(TRUE, 0);
 	gtk_widget_show(hbox28);
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox28, TRUE, TRUE, 0);
-
+	
+	empty_label = gtk_label_new(NULL);
+	gtk_widget_show(empty_label);
+	gtk_box_pack_start(GTK_BOX(hbox28), empty_label, FALSE, TRUE, 0);
+	
 	widgets.checkbutton_comm_tabs =
 	    gtk_check_button_new_with_label(_("Show Commentary tabs"));
 	gtk_widget_show(widgets.checkbutton_comm_tabs);
 	gtk_box_pack_start(GTK_BOX(hbox28),
 			   widgets.checkbutton_comm_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_size_request(widgets.checkbutton_comm_tabs, 162, -1);
+	gtk_widget_set_size_request(widgets.checkbutton_comm_tabs, 166, -1);
+
 
 	widgets.checkbutton_upper_workbook =
 	    gtk_check_button_new_with_label(_("Show upper workbook"));
@@ -661,6 +668,10 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	hbox29 = gtk_hbox_new(TRUE, 0);
 	gtk_widget_show(hbox29);
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox29, TRUE, TRUE, 0);
+	
+	empty_label = gtk_label_new(NULL);
+	gtk_widget_show(empty_label);
+	gtk_box_pack_start(GTK_BOX(hbox29), empty_label, FALSE, TRUE, 0);	
 
 	widgets.checkbutton_dict_tabs =
 	    gtk_check_button_new_with_label(_("Show Dictionary/Lexicon tabs"));
@@ -668,7 +679,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_box_pack_start(GTK_BOX(hbox29),
 			   widgets.checkbutton_dict_tabs, FALSE, TRUE,
 			   0);
-	gtk_widget_set_size_request(widgets.checkbutton_dict_tabs, 162, -1);
+	gtk_widget_set_size_request(widgets.checkbutton_dict_tabs, 212, -1);
 
 	widgets.checkbutton_lower_workbook =
 	    gtk_check_button_new_with_label(_("Show lower workbook"));
@@ -679,11 +690,16 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (widgets.
 				      checkbutton_lower_workbook),
-				     TRUE);
+			     TRUE);
+	
 
 	hbox84 = gtk_hbox_new(TRUE, 0);
 	gtk_widget_show(hbox84);
 	gtk_box_pack_start(GTK_BOX(vbox34), hbox84, TRUE, TRUE, 0);
+	
+	empty_label = gtk_label_new(NULL);
+	gtk_widget_show(empty_label);
+	gtk_box_pack_start(GTK_BOX(hbox84), empty_label, FALSE, TRUE, 0);
 
 	widgets.checkbutton_book_tabs =
 	    gtk_check_button_new_with_label(_("Show book tabs"));
@@ -692,6 +708,11 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			   widgets.checkbutton_book_tabs, FALSE, TRUE,
 			   0);
 	gtk_widget_set_size_request(widgets.checkbutton_book_tabs, 162, -1);
+	
+	empty_label = gtk_label_new(NULL);
+	gtk_widget_show(empty_label);
+	gtk_box_pack_start(GTK_BOX(hbox84), empty_label, FALSE, TRUE, 0);
+				     
 
 	druidpagestandard2 =
 	    gnome_druid_page_standard_new();

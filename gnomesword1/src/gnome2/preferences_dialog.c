@@ -161,10 +161,10 @@ struct _preferences_check_buttons {
 	GtkWidget *show_in_viewer;
 	GtkWidget *show_in_dictionary;
 	GtkWidget *show_devotion;
-	GtkWidget *percomm_formatting;
-	GtkWidget *use_studypad;
-	GtkWidget *use_studypad_dialog;
-	GtkWidget *use_percomm_dialog;
+	//GtkWidget *percomm_formatting;
+	//GtkWidget *use_studypad;
+	//GtkWidget *use_studypad_dialog;
+	//GtkWidget *use_percomm_dialog;
 
 	//GtkWidget *commentary_in_dialog;
 	//GtkWidget *dictionary_in_dialog;
@@ -666,7 +666,7 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 				      "0");
 		settings.showdevotional =
 		    atoi(xml_get_value("misc", "dailydevotional"));
-		break;
+		break;/*
 	case USE_STUDYPAD:	
 		if (GTK_TOGGLE_BUTTON(check_button.use_studypad)->active)
 			xml_set_value("GnomeSword", "editor", "UseStudyPad",
@@ -696,9 +696,11 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 				      "UsePercommDialog", "0");
 		settings.use_percomm_dialog =
 		    atoi(xml_get_value("editor", "UsePercommDialog"));
-		break;
+		break;*/
 	}
-	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
+	xml_set_value("GnomeSword", "editor", "UseStudyPad", "1");
+	xml_set_value("GnomeSword", "editor", "UseStudypadDialog", "1");
+	xml_set_value("GnomeSword", "editor", "UsePercommDialog", "1");
 }
 
 
@@ -911,6 +913,7 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 		xml_save_settings_doc(settings.fnconfigure);
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 	}
+	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 }
 
 
@@ -1273,7 +1276,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	
 	color_picker.text_current_verse = gnome_color_picker_new();
 	gtk_widget_show(color_picker.text_current_verse);
-	gtk_box_pack_start(GTK_BOX(hbox), color_picker.text_current_verse, TRUE, TRUE, 6);
+	gtk_box_pack_start(GTK_BOX(hbox), color_picker.text_current_verse, 
+								TRUE, TRUE, 6);
 	gnome_color_picker_set_title(GNOME_COLOR_PICKER
 				     (color_picker.text_current_verse),
 				     _("Pick the current Verse color"));
@@ -1304,7 +1308,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	
 	color_picker.verse_numbers = gnome_color_picker_new();
 	gtk_widget_show(color_picker.verse_numbers);
-	gtk_box_pack_start(GTK_BOX(hbox), color_picker.verse_numbers, TRUE, TRUE, 6);
+	gtk_box_pack_start(GTK_BOX(hbox), color_picker.verse_numbers, 
+								TRUE, TRUE, 6);
 	gtk_widget_set_size_request(color_picker.verse_numbers, 41, -1);
 
 	
@@ -1693,7 +1698,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox53),
 			   check_button.show_in_dictionary, FALSE,
 			   FALSE, 0);
-
+/*
 	//frame74 = gtk_frame_new(_("Editors"));
 	frame74 = gtk_frame_new(NULL);
 	
@@ -1754,7 +1759,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.percomm_formatting),
 				     TRUE);
-
+*/
 	hbox_default_dir = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox_default_dir);
 	gtk_box_pack_start(GTK_BOX(vbox41), hbox_default_dir, TRUE,
@@ -2200,6 +2205,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
 				     settings.showdicts);
+				     /*
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.percomm_formatting),
 				     settings.formatpercom);
@@ -2212,10 +2218,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_percomm_dialog),
 				     settings.use_percomm_dialog);
+				     */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_in_viewer),
 				     settings.inViewer);
-
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_in_dictionary),
 				     settings.inDictpane);
@@ -2395,7 +2401,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_LOWER_WORKBOOK));
-
+/*
 	gtk_signal_connect(GTK_OBJECT(check_button.use_studypad),
 			   "toggled",
 			   G_CALLBACK(on_button_toggled), 
@@ -2408,7 +2414,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   "toggled",
 			   G_CALLBACK(on_button_toggled), 
 			   GINT_TO_POINTER(USE_PERCOMM_DIALOG));
-
+*/
 	/*** module combos ***/
 	gtk_signal_connect(GTK_OBJECT(entry.text_module), "changed",
 			   G_CALLBACK(on_entry_changed), 
