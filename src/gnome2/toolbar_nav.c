@@ -483,7 +483,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 
 	cbe_book = GTK_COMBO(cbBook)->entry;
 	gtk_widget_show(cbe_book);
-	gtk_tooltips_set_tip (tooltips, cbe_book, _("Select a Book of the Bible"), 
+	gtk_tooltips_set_tip(tooltips, cbe_book, _("Select a Book of the Bible"), 
 				NULL);
 	gtk_entry_set_text(GTK_ENTRY(cbe_book), _("Romans"));
 
