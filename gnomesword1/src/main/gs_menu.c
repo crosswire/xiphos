@@ -480,7 +480,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	gtk_object_set_data(GTK_OBJECT(pmCommentsHtml), "pmCommentsHtml",
 			    pmCommentsHtml);
 			
-	copy6 = gtk_menu_item_new_with_label("Copy");
+	copy6 = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_ref(copy6);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "copy6", copy6,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -488,7 +488,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), copy6);
 
 
-	print_item = gtk_menu_item_new_with_label("Print Comment");
+	print_item = gtk_menu_item_new_with_label(_("Print Comment"));
 	gtk_widget_ref(print_item);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "print_item", print_item,
@@ -504,7 +504,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
   	gtk_container_add (GTK_CONTAINER (pmCommentsHtml), separator1);
   	gtk_widget_set_sensitive (separator1, FALSE);
 	
-	goto_reference = gtk_menu_item_new_with_label("Goto Reference");
+	goto_reference = gtk_menu_item_new_with_label(_("Goto Reference"));
 	gtk_widget_ref(goto_reference);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "goto_reference", goto_reference,
@@ -512,7 +512,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	gtk_widget_show(goto_reference);
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), goto_reference);
 		
-	lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
+	lookup_selection = gtk_menu_item_new_with_label (_("Lookup Selection"));
 	gtk_widget_ref (lookup_selection);
   	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "lookup_selection", lookup_selection,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -526,7 +526,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_selection), lookup_selection_menu);
   	//view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 	
-	usecurrent2 = gtk_menu_item_new_with_label ("Use Current Dictionary");
+	usecurrent2 = gtk_menu_item_new_with_label (_("Use Current Dictionary"));
 	gtk_widget_ref (usecurrent2);
   	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "usecurrent2", usecurrent2,
                             (GtkDestroyNotify) gtk_widget_unref);
@@ -541,7 +541,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
   	gtk_container_add (GTK_CONTAINER (lookup_selection_menu), separator3);
   	gtk_widget_set_sensitive (separator3, FALSE);	
 	
-	add_bookmark = gtk_menu_item_new_with_label("Add Bookmark");
+	add_bookmark = gtk_menu_item_new_with_label(_("Add Bookmark"));
 	gtk_widget_ref(add_bookmark);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml), "add_bookmark",
 				 add_bookmark, 
@@ -560,7 +560,7 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 	create_addBookmarkMenuBM(pmCommentsHtml, add_bookmark_menu,settings);		
 	
 	about_this_module6 =
-	    gtk_menu_item_new_with_label("About this module");
+	    gtk_menu_item_new_with_label(_("About this module"));
 	gtk_widget_ref(about_this_module6);
 	gtk_object_set_data_full(GTK_OBJECT(pmCommentsHtml),
 				 "about_this_module6", about_this_module6,
@@ -1044,11 +1044,11 @@ create_pmInt(GList *mods, GList *options, gchar *intWindow)
   	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);
   	/* build change interlinear modules submenu */
-	loadmenuformmodlist(pmInt, mods, "Change Interlinear 1", (GtkMenuCallback)on_changeint1mod_activate );  	
-	loadmenuformmodlist(pmInt, mods, "Change Interlinear 2", (GtkMenuCallback)on_changeint2mod_activate );	
-	loadmenuformmodlist(pmInt, mods, "Change Interlinear 3", (GtkMenuCallback)on_changeint3mod_activate );  	
-	loadmenuformmodlist(pmInt, mods, "Change Interlinear 4", (GtkMenuCallback)on_changeint4mod_activate );
-	loadmenuformmodlist(pmInt, mods, "Change Interlinear 5", (GtkMenuCallback)on_changeint5mod_activate );
+	loadmenuformmodlist(pmInt, mods, _("Change Interlinear 1"), (GtkMenuCallback)on_changeint1mod_activate );  	
+	loadmenuformmodlist(pmInt, mods, _("Change Interlinear 2"), (GtkMenuCallback)on_changeint2mod_activate );	
+	loadmenuformmodlist(pmInt, mods, _("Change Interlinear 3"), (GtkMenuCallback)on_changeint3mod_activate );  	
+	loadmenuformmodlist(pmInt, mods, _("Change Interlinear 4"), (GtkMenuCallback)on_changeint4mod_activate );
+	loadmenuformmodlist(pmInt, mods, _("Change Interlinear 5"), (GtkMenuCallback)on_changeint5mod_activate );
 
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),

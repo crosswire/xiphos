@@ -3,6 +3,74 @@
 # Jan Paul Schmidt <jps@methusalix.net>
 # jps4ks
 
+msgid "New Group"
+msgstr "Neue Gruppe"
+
+msgid "New SubGroup"
+msgstr "Neue Untergruppe"
+
+msgid "Add Item at Root"
+msgstr "Eintrag an oberster Ebene hinzufügen"
+
+msgid "Sync with Bible Text"
+msgstr "Synchronisiere mit Bibeltext"
+
+msgid "Go to previous comment"
+msgstr "Gehe zum vorigen Kommentar"
+
+msgid "Go to next comment"
+msgstr "Gehe zum nächsten Kommentar"
+
+msgid "Print Comment"
+msgstr "Drucke Kommentar"
+
+msgid "Dock"
+msgstr "Befestigen"
+
+msgid "Insert Item"
+msgstr "Eintrag einfügen"
+
+msgid "Add Book"
+msgstr "Buch hinzufügen"
+
+msgid "View Commentary"
+msgstr "Kommentar"
+
+msgid "Change Interlinear 1"
+msgstr "Interlinear 1"
+
+msgid "Change Interlinear 2"
+msgstr "Interlinear 2"
+
+msgid "Change Interlinear 3"
+msgstr "Interlinear 3"
+
+msgid "Change Interlinear 4"
+msgstr "Interlinear 4"
+
+msgid "Change Interlinear 5"
+msgstr "Interlinear 5"
+
+msgid "Change Interlinear 6"
+msgstr "Interlinear 6"
+
+msgid "Use Current Dictionary"
+msgstr "Benutze aktuelles Wörterbuch"
+
+msgid "Detach/Attach"
+msgstr "Abtrennen"
+
+msgid "Interlinear Page"
+msgstr "Interlinear"
+
+msgid "Lookup Selection"
+msgstr "Auswahl nachschlagen"
+
+msgid "View Dict/Lex"
+msgstr "Wörtbuch/Lexikon"
+
+####
+
 # src/gs_abouts.c
 msgid "About The Sword Project"
 msgstr "Über das Sword Projekt"
@@ -35,7 +103,7 @@ msgstr "Wörterbuchvorgabe"
 
 # src/gs_gui.c
 msgid "Detach/Attach Shortcut Bar"
-msgstr "Schnellzugriffsleiste abreißen/andocken"
+msgstr "Schnellzugriffsleiste abtrennen"
 
 # src/gs_menu.c
 msgid "Dict/Lex"
