@@ -137,12 +137,12 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 
 /******************************************************************************
  * Name
- *   deal_with_gbf_storngs
+ *   deal_with_notes
  *
  * Synopsis
  *   #include "gui/html.h"
  *
- *   void deal_with_gbf_storngs(const gchar *url)
+ *   void deal_with_notes(const gchar *url)
  *
  * Description
  *   
@@ -151,87 +151,207 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
  *   void
  */
 
-static void deal_with_gbf_storngs(const gchar *url)
+static void deal_with_notes(const gchar * url, gboolean clicked)
 {
-	gchar *buf1;
-		
-	if (*url == 'T') {
-		++url;	/* remove T */
-		if (*url == 'G') {
-			++url;	/* remove G */
-			if (settings.havethayer) {
-				buf1 = g_strdup(url);
-				show_in_appbar(widgets.
-					       appbar,
-					       buf1,
-					       "Thayer");
-				g_free(buf1);
-				return;
-			} else
-				return;
-		}
-		if (*url == 'H') {
-			++url;	/* remove H */
-			if (settings.havebdb) {
-				buf1 = g_strdup(url);
-				show_in_appbar(widgets.
-					       appbar,
-					       buf1,
-					       "BDB");
-				g_free(buf1);
-				return;
-			} else
-				return;
-		}
+	gchar *buf = NULL;
+	gchar *buf1 = NULL;
+	gchar *tmpbuf = NULL;
+	
+	if(!in_url) {
+		return;
 	}
-
-	if (*url == 'G') {
-		++url;	/* remove G */
-		buf1 = g_strdup(url);
-		if (atoi(buf1) > 5624) {
-			if (settings.havethayer) {
-				show_in_appbar(widgets.
-					       appbar,
-					       buf1,
-					       "Thayer");
-				g_free(buf1);
-				return;
-			} else
-				return;
-
-		} else {
-			show_in_appbar(widgets.appbar,
-				       buf1,
-				       settings.
-				       lex_greek);
-			g_free(buf1);
-			return;
-		}
+	if (hint.in_popup) {
+		gtk_widget_destroy(hint.hint_window);
+		hint.in_popup = FALSE;
 	}
-
-	if (*url == 'H') {
-		++url;	/* remove H */
-		buf1 = g_strdup(url);
-		if (atoi(buf1) > 8674) {
-			if (settings.havebdb) {
-				show_in_appbar(widgets.
-					       appbar,
-					       buf1,
-					       "BDB");
-				g_free(buf1);
-				return;
-			} else
-				return;
-		} else {
-			show_in_appbar(widgets.appbar,
-				       buf1,
-				       settings.
-				       lex_hebrew);
-			g_free(buf1);
+	buf1 = strchr(url, '=');
+	++buf1;
+	
+	if(clicked) {
+		tmpbuf = get_crossref(buf1);
+		if (!*tmpbuf)
 			return;
-		}
-	}	
+		else 
+			gui_display_verse_list_in_sidebar(settings.
+					  currentverse,
+					  xml_get_value("modules", 
+					  "bible"),
+					  tmpbuf);
+	} else {
+		tmpbuf = get_footnote_body(buf1);
+		if (tmpbuf == NULL)
+			return;
+		gui_display_in_hint_window(tmpbuf);
+	}
+	g_free(tmpbuf);
 }
+
+
+/******************************************************************************
+ * Name
+ *   deal_with_strongs
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void deal_with_strongs(const gchar *url)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void deal_with_storngs(const gchar * url, gboolean clicked)
+{
+	gchar *buf = NULL;
+	gchar *tmpbuf = NULL;
+	gchar *modbuf = NULL;
+	gchar *mybuf = NULL;
+	gchar *modbuf_viewer = NULL;
+	gchar newref[80];
+	gint type = 0;
+	
+	mybuf = NULL;
+	mybuf = strstr(url, "value=");
+	if (mybuf) {
+		mybuf = strchr(mybuf, '=');
+		++mybuf;
+		if (mybuf[0] == 'H')
+			type = 0;
+		if (mybuf[0] == 'G')
+			type = 1;
+		++mybuf;
+		sprintf(newref, "%5.5d", atoi(mybuf));
+	}
+	if (type) {
+		if ((atoi(mybuf) > 5624)
+		    && (settings.havethayer)) {
+			modbuf = "Thayer";
+			modbuf_viewer = "Thayer";
+		} else {
+			modbuf_viewer = settings.lex_greek_viewer;
+			modbuf = settings.lex_greek;
+		}
+	} else {
+		modbuf = settings.lex_hebrew;
+		modbuf_viewer = settings.lex_hebrew_viewer;
+	}
+
+	buf = g_strdup(newref);
+	if (clicked) {
+		if (settings.inDictpane)
+			gui_change_module_and_key(modbuf, buf);
+		if (settings.inViewer)
+			gui_display_dictlex_in_sidebar(modbuf_viewer, buf);		
+	} else {
+		mybuf =
+		    get_module_text(get_mod_type(modbuf), modbuf, buf);
+		if (mybuf) {
+			//gui_display_hint_in_viewer(mybuf);
+			show_in_appbar(widgets.appbar, buf, modbuf);
+			//gui_display_in_hint_window(mybuf);
+			g_free(mybuf);
+		}
+	}
+	g_free(buf);
+}
+
+
+/******************************************************************************
+ * Name
+ *   deal_with_morphs
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void deal_with_morphs(const gchar *url)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void deal_with_morphs(const gchar * url, gboolean clicked)
+{
+	gchar *modbuf = NULL;
+	gchar *mybuf = NULL;
+	gchar *buf = NULL;
+	gchar *myurl = NULL;
+	gchar *oldnew = NULL;
+	gboolean is_strongsmorph = FALSE;
+
+	oldnew = g_strdup(url);
+	myurl = g_strdup(url);
+	buf = g_strdup(myurl);
+
+	g_warning(url);
+	mybuf = strstr(myurl, "class=");
+	if (mybuf) {
+		modbuf = strchr(mybuf, '=');
+		++modbuf;
+		if (modbuf[0] == 'x' && modbuf[1] == '-')
+			modbuf += 2;
+		if (!strncmp(modbuf, "Robinson", 7)) {
+			if(check_for_module("Robinson"))
+				modbuf = "Robinson";
+			else
+				return;
+		} else if (!strncmp(modbuf, "none", 4)) {
+			if(check_for_module("Packard"))
+				modbuf = "Packard";
+			else			
+				return;
+		} else
+		    if (!strncmp
+			(modbuf, "StrongsMorph", 11)) {
+			is_strongsmorph = TRUE;
+			if (strstr(oldnew, "value=TH"))
+				modbuf =
+				    settings.lex_hebrew;
+			else
+				modbuf =
+				    settings.lex_greek;
+		}
+	} else
+		modbuf = "Robinson";
+
+	mybuf = NULL;
+	mybuf = strstr(buf, "value=");
+	if (mybuf) {
+		mybuf = strchr(mybuf, '=');
+		++mybuf;
+	}
+	if (is_strongsmorph) {
+		++mybuf;
+		++mybuf;
+	}
+	buf = g_strdup(mybuf);
+	mybuf = NULL;
+	if (clicked) {		
+		if (settings.inDictpane)
+			gui_change_module_and_key(modbuf, buf);
+		if (settings.inViewer)
+			gui_display_dictlex_in_sidebar(modbuf, buf);
+	} else {
+		mybuf =
+		    get_module_text(get_mod_type(modbuf), modbuf, buf);
+		if (mybuf) {
+			//gui_display_in_hint_window(mybuf);
+			show_in_appbar(widgets.appbar, buf, modbuf);
+			//gui_display_hint_in_viewer(mybuf);
+			g_free(mybuf);
+		}
+	}
+	show_in_appbar(widgets.appbar, buf, modbuf);
+	g_free(buf);
+	g_free(myurl);
+	g_free(oldnew);	
+}
+
 
 /******************************************************************************
  * Name
@@ -256,9 +376,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	gboolean is_strongsmorph = FALSE;
 	gint i,j;
 
-	
-	/***  moved out of url - clear appbar  ***/
-	if (url == NULL) {
+	if (url == NULL) { /***  moved out of url - clear appbar  ***/
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					"");
 		in_url = FALSE;
@@ -268,47 +386,12 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		}
 	} else {/***  we are in an url  ***/
 		in_url = TRUE;	/* we need this for html_button_released */
-		/***  swap parallel and main text mods link ***/
-		if (*url == '@') {
+		if (*url == '@') { /* swap parallel and main text mods link */
 			++url;
 			sprintf(buf, _("Show %s in main window"), url);
-		}
-		/***  osis footnote  ***/
-		else if (!strncmp(url, "noteID=", 7)) { /*noteID=Hebrews 1:2.n.1*/
-			//g_warning(url); 
-			if(!in_url) {
-				return;
-			}
-			if (hint.in_popup) {
-				gtk_widget_destroy(hint.hint_window);
-				hint.in_popup = FALSE;
-			}
-			buf1 = strchr(url, '=');
-			++buf1;
-			tmpbuf = get_footnote_body(buf1);
-			if (tmpbuf == NULL)
-				return;
-			else {
-				/*gnome_appbar_set_status(GNOME_APPBAR
-							(widgets.
-							 appbar),
-							tmpbuf);*/
-				gui_display_in_hint_window(tmpbuf);
-				g_free(tmpbuf);
-				return;
-			}
-		} else if (!strncmp(url, "note=", 5)) { 
-			//g_warning(url);               
-			buf1 = strchr(url, '=');
-			++buf1;
-			//tmpbuf = get_footnote_body(buf1);
-			//if (tmpbuf == NULL)
-				//return;
-			//else {
-			gui_display_in_hint_window(buf1);
-			//g_free(tmpbuf);
+		} else if (!strncmp(url, "noteID=", 7)) { /***  osis footnote  ***/
+			deal_with_notes(url, FALSE);
 			return;
-			//}
 		} else if (*url == '[') {  /***  module name link  ***/
 			++url;
 			while (*url != ']') {
@@ -319,165 +402,16 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		} else if (*url == '*') {/***  verse number link  ***/
 			++url;
 			sprintf(buf, "%s", url);
-		} else if (*url == '#') {/***  gbf strongs  ***/
-			++url;	/* remove # */
-			deal_with_gbf_storngs(url);
-		} else if (!strncmp(url, "type=morph", 10)) {/***  thml morph tag  ***/
-			gchar *modbuf = NULL;
-			gchar *mybuf = NULL;
-			gchar *myurl = NULL;
-			gchar *oldnew = NULL;
-
-			oldnew = g_strdup(url);
-			myurl = g_strdup(url);
-			buf1 = g_strdup(myurl);
-
-			mybuf = strstr(myurl, "class=");
-			if (mybuf) {
-				modbuf = strchr(mybuf, '=');
-				++modbuf;
-				if (modbuf[0] == 'x'
-				    && modbuf[1] == '-')
-					modbuf += 2;
-				if (!strncmp(modbuf, "Robinson", 7)) {
-					modbuf = "Robinson";
-				} else
-				    if (!strncmp
-					(modbuf, "StrongsMorph", 11)) {
-					is_strongsmorph = TRUE;
-					if (strstr(oldnew, "value=TH"))
-						modbuf =
-						    settings.lex_hebrew;
-					else
-						modbuf =
-						    settings.lex_greek;
-				}
-			} else
-				modbuf = "Robinson";
-
-			mybuf = NULL;
-			mybuf = strstr(buf1, "value=");
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-			}
-			if (is_strongsmorph) {
-				++mybuf;
-				++mybuf;
-			}
-			buf1 = g_strdup(mybuf);
-			/*g_warning("show %s in %s",buf1,modbuf); */
-			mybuf = NULL;
-			if (hint.use_hints) {
-				mybuf =
-				    get_module_text(get_mod_type
-						    (modbuf), modbuf,
-						    buf1);
-				if (mybuf) {
-					gui_display_in_hint_window
-					    (mybuf);
-					//gui_display_hint_in_viewer(mybuf);
-					g_free(mybuf);
-				}
-			}
-			show_in_appbar(widgets.appbar, buf1, modbuf);
-			g_free(buf1);
-			g_free(myurl);
-			g_free(oldnew);
+		} else if (!strncmp(url, "type=morph", 10)) {/***  thml and osis morph tag  ***/
+			deal_with_morphs(url, FALSE);
 			return;
-		} else if (!strncmp(url, "type=Strongs", 12)) {/*** thml strongs ***/
-			//g_warning(url);
-			//return;
-			gchar *modbuf = NULL;
-			gchar *mybuf = NULL;
-			gchar newref[80];
-			gint type = 0;
-			//buf = g_strdup(url);
-			mybuf = NULL;
-			mybuf = strstr(url, "value=");
-			//i = 0;
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				if (mybuf[0] == 'H')
-					type = 0;
-				if (mybuf[0] == 'G')
-					type = 1;
-				++mybuf;
-				sprintf(newref, "%5.5d", atoi(mybuf));
-			}
-			if (type)
-				if ((atoi(mybuf) > 5624)
-				    && (settings.havethayer))
-					modbuf = "Thayer";
-				else
-					modbuf = settings.lex_greek;
-			else
-				modbuf = settings.lex_hebrew;
-
-			buf1 = g_strdup(newref);
-			mybuf = NULL;
-			if (hint.use_hints) {
-				mybuf =
-				    get_module_text(get_mod_type
-						    (modbuf), modbuf,
-						    buf1);
-				if (mybuf) {
-					//gui_display_hint_in_viewer(mybuf);
-					gui_display_in_hint_window
-					    (mybuf);
-					g_free(mybuf);
-				}
-			}
-			show_in_appbar(widgets.appbar, buf1, modbuf);
-			g_free(buf1);
+		} else if (!strncmp(url, "type=Strongs", 12)) {/*** thml and osis strongs ***/
+			deal_with_storngs(url, FALSE);			
 			return;
-		} else if (!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7)) {
-			gchar *mybuf = NULL;
-			gchar *modbuf = NULL;
-			gchar *ref = NULL;
-			gchar *mod_name = NULL;
-			gchar *e_utf8;
-			gchar newmod[80], newref[80];
-			mybuf = strstr(url, "version=");
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				i = 0;
-				while (mybuf[i] != ' ') {
-					newmod[i] = mybuf[i];
-					newmod[i + 1] = '\0';
-					++i;
-				}
-			}
-			mybuf = NULL;
-			mybuf = strstr(url, "passage=");
-			i = 0;
-			if (mybuf) {
-				mybuf = strchr(mybuf, '=');
-				++mybuf;
-				while (i < strlen(mybuf)) {
-					newref[i] = mybuf[i];
-					newref[i + 1] = '\0';
-					++i;
-				}
-			}
-			if (check_for_module(newmod)) 
-				modbuf = newmod;
-			
-			ref = g_strdup(newref);
-			if(GPOINTER_TO_INT(data) == TEXT_TYPE) {//get_mod_type(modbuf) == TEXT_TYPE) {
-				e_utf8 = e_utf8_from_locale_string((const char *)ref);
-				gui_display_in_hint_window(e_utf8);
-			}
-			g_free(ref);
-			return;	
 		} else if (*url == 'U') {
 			++url;
 			sprintf(buf, "%s %s", _("Unlock "), url);
-		}
-		/***  any other link  ***/
-		else
+		} else /***  any other link  ***/
 			sprintf(buf, "%s", "");
 
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
@@ -510,33 +444,16 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar newmod[80], newref[80], tmpbuf[255];
 	gchar *oldnew = NULL;
 	gint i = 0;
-	gboolean is_strongsmorph = FALSE;
-	const char *type;
-
+	//gboolean is_strongsmorph = FALSE;
+	//const char *type;
+	
 	if (*url == '@') {
 		++url;
 		gui_swap_parallel_with_main((gchar *) url);
 	} else if (!strncmp(url, "noteID=", 7)) {
-		buf = strchr(url, '=');
-		++buf;
-		buf1 = g_strdup(buf);
-		type = get_footnote_type(NULL, NULL, buf);
-		if(!strcmp(type, "crossReference")) {
-			buf = get_footnote_body(buf1);
-			if (buf == NULL)
-				return;
-			else {
-				gui_display_verse_list_in_sidebar(settings.
-						  currentverse,
-						  xml_get_value("modules", 
-						  "bible"),
-						  buf);
-				g_free(buf);
-				return;
-			}
-		}
-		g_free(buf1);
-	} else if (*url == '*') {  /***  verse numbers in Bible Text window  ***/
+		deal_with_notes(url, TRUE);
+		return;
+	} else if (*url == '*') {  /* verse numbers in Bible Text window */
 		++url;
 		buf = g_strdup(url);
 		gui_change_verse(buf);
@@ -546,7 +463,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(url);
 		gui_change_verse(buf);
 		g_free(buf);
-	} else if (*url == '[') {/***  module name  ***/
+	} else if (*url == '[') {/* module name  */
 		++url;
 		while (*url != ']') {
 			tmpbuf[i++] = *url;
@@ -555,7 +472,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		gui_display_about_module_dialog(tmpbuf, FALSE);
 
-	} else if (!strncmp(url, "version=", 7)/*** thml verse reference ***/
+	} else if (!strncmp(url, "version=", 7)/* thml verse reference */
 		 || !strncmp(url, "passage=", 7)) {
 		gchar *mybuf = NULL;
 		gchar *mod_name = NULL;
@@ -585,7 +502,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (check_for_module(newmod)) {
 			modbuf = newmod;
 		} else {
-			modbuf = xml_get_value("modules", "bible");	//settings.MainWindowModule;
+			modbuf = xml_get_value("modules", "bible");
 		}
 		buf = g_strdup(newref);
 		mod_name = g_strdup(modbuf);
@@ -595,7 +512,6 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			   so we don't need to get a verse list */
 			gui_display_dictlex_in_sidebar(mod_name, buf);
 		} else {
-			/*g_warning("verse=%s\nmod=%s\nref=%s",settings.currentverse,mod_name,buf); */
 			gui_display_verse_list_in_sidebar(settings.
 							  currentverse,
 							  mod_name,
@@ -604,190 +520,12 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		g_free(buf);
 		g_free(mod_name);
 
-	} else if (!strncmp(url, "type=morph", 10)) {/***  thml morph tag  ***/
-		gchar *modbuf = NULL;
-		gchar *mybuf = NULL;
-
-		oldnew = g_strdup(url);
-		buf = g_strdup(url);
-		mybuf = strstr(url, "class=");
-		if (mybuf) {
-			modbuf = strchr(mybuf, '=');
-			++modbuf;
-			if (modbuf[0] == 'x' && modbuf[1] == '-')
-				modbuf += 2;
-			if (!strncmp(modbuf, "Robinson", 7)) {
-				modbuf = "Robinson";
-			} else if (!strncmp(modbuf, "StrongsMorph", 11)) {
-				is_strongsmorph = TRUE;
-				if (strstr(oldnew, "value=TH"))
-					modbuf = settings.lex_hebrew;
-				else
-					modbuf = settings.lex_greek;
-			}
-		} else
-			modbuf = "Robinson";
-		mybuf = NULL;
-		mybuf = strstr(buf, "value=");
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-		}
-		if (is_strongsmorph) {
-			++mybuf;
-			++mybuf;
-		}
-		buf = g_strdup(mybuf);
-		if (settings.inDictpane)
-			gui_change_module_and_key(modbuf, buf);
-		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(modbuf, buf);
-		g_free(buf);
-		g_free(oldnew);
-	} else if (!strncmp(url, "type=Strongs", 12)) {/*** thml strongs ***/
-		gchar *modbuf = NULL;
-		gchar *modbuf_viewer = NULL;
-		gchar *mybuf = NULL;
-		gint type = 0;
-		//buf = g_strdup(url);
-		mybuf = NULL;
-		mybuf = strstr(url, "value=");
-		i = 0;
-		if (mybuf) {
-			mybuf = strchr(mybuf, '=');
-			++mybuf;
-			if (mybuf[0] == 'H')
-				type = 0;
-			if (mybuf[0] == 'G')
-				type = 1;
-			++mybuf;
-			sprintf(newref, "%5.5d", atoi(mybuf));
-		}
-		if (type) {
-			if ((atoi(mybuf) > 5624)
-			    && (settings.havethayer)) {
-				modbuf = "Thayer";
-				modbuf_viewer = "Thayer";
-			} else {
-				modbuf_viewer =
-				    settings.lex_greek_viewer;
-				modbuf = settings.lex_greek;
-			}
-		} else {
-			modbuf = settings.lex_hebrew;
-			modbuf_viewer = settings.lex_hebrew_viewer;
-		}
-
-		buf = g_strdup(newref);
-		if (settings.inDictpane)
-			gui_change_module_and_key(modbuf, buf);
-		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(modbuf_viewer,
-						       buf);
-		g_free(buf);
-	} else if (*url == '#') {/***  gbf strongs  ***/
-		++url;		/* remove # */
-		if (*url == 'T') {
-			++url;	/* remove T */
-			if (*url == 'G') {
-				++url;	/* remove G */
-				if (settings.havethayer) {
-					buf = g_strdup(url);
-					if (settings.inDictpane)
-						gui_change_module_and_key
-						    ("Thayer", buf);
-					if (settings.inViewer)
-						gui_display_dictlex_in_sidebar
-						    ("Thayer", buf);
-					g_free(buf);
-					return;
-				} else
-					return;
-			}
-
-			if (*url == 'H') {
-				++url;	/* remove H */
-				if (settings.havebdb) {
-					buf = g_strdup(url);
-					if (settings.inDictpane)
-						gui_change_module_and_key
-						    ("BDB", buf);
-					if (settings.inViewer)
-						gui_display_dictlex_in_sidebar
-						    ("BDB", buf);
-					g_free(buf);
-					return;
-				} else
-					return;
-			}
-		}
-
-		if (*url == 'G') {
-			++url;	/* remove G */
-			buf = g_strdup(url);
-			if (atoi(buf) > 5624) {
-				if (settings.havethayer) {
-					buf = g_strdup(url);
-					if (settings.inDictpane)
-						gui_change_module_and_key
-						    ("Thayer", buf);
-					if (settings.inViewer)
-						gui_display_dictlex_in_sidebar
-						    ("Thayer", buf);
-					g_free(buf);
-					return;
-				} else
-					return;
-
-			}
-
-			else {
-				if (settings.inDictpane)
-					gui_change_module_and_key
-					    (settings.lex_greek, buf);
-				if (settings.inViewer)
-					gui_display_dictlex_in_sidebar
-					    (settings.lex_greek_viewer,
-					     buf);
-				g_free(buf);
-			}
-		}
-
-		if (*url == 'H') {
-			++url;	/* remove H */
-			buf = g_strdup(url);
-			if (atoi(buf) > 8674) {
-				if (settings.havebdb) {
-					buf = g_strdup(url);
-					if (settings.inDictpane)
-						gui_change_module_and_key
-						    ("BDB", buf);
-					if (settings.inViewer)
-						gui_display_dictlex_in_sidebar
-						    ("BDB", buf);
-					g_free(buf);
-					return;
-				} else
-					return;
-			} else {
-				if (settings.inDictpane)
-					gui_change_module_and_key
-					    (settings.lex_hebrew, buf);
-				if (settings.inViewer)
-					gui_display_dictlex_in_sidebar
-					    (settings.lex_hebrew_viewer,
-					     buf);
-				g_free(buf);
-			}
-		}
-	} else if (*url == 'M') {/***  gbf morph tag  ***/
-		++url;		/* remove M */
-		buf = g_strdup(url);
-		if (settings.inDictpane)
-			gui_change_module_and_key("Packard", buf);
-		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar("Packard", buf);
-		g_free(buf);
+	} else if (!strncmp(url, "type=morph", 10)) {/* thml and osis morph tag */
+		deal_with_morphs(url, TRUE);
+		return;
+	} else if (!strncmp(url, "type=Strongs", 12)) {/* gbf thml and osis strongs */		
+		deal_with_storngs(url, TRUE);
+		return;
 	} else if (*url == 'U') {
 		++url;		/* remove U */
 		buf = g_strdup(url);
