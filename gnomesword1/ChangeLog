@@ -1,3 +1,7 @@
+2004-08-07  terry <terry470@users.sf.net>
+
+	* added doc patch from Jeff Ratliff - covers the sidebar search.
+	
 2004-01-14  Andy <andyp@users.sf.net>
 
 	* added gnomesword.doap.rdf, the DOAP description for the project
