@@ -76,7 +76,7 @@ void gui_studypad_can_close(void)
 	
 	if (settings.modifiedSP) {
 		info = gui_new_dialog();
-		if (strlen(settings.studypadfilename) > 0)
+		if (settings.studypadfilename)
 			info->label_top = settings.studypadfilename;
 		else
 			info->label_top = N_("File");
@@ -87,7 +87,7 @@ void gui_studypad_can_close(void)
 
 		test = gui_gs_dialog(info);
 		if (test == GS_YES) {
-			if (strlen(settings.studypadfilename) > 0) {
+			if (settings.studypadfilename) {
 				g_strdup(settings.studypadfilename);
 				save_file(filename, editor_cd);
 			} else {
@@ -122,7 +122,14 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	ssize_t count;
 	gboolean was_editable;
 	int fd;
-
+	g_warning(filename);
+	if(!g_file_test((const gchar*)filename, G_FILE_TEST_EXISTS)) {
+		ecd->changed = FALSE;
+		gui_new_activate(NULL,ecd);
+		//gtk_html_load_from_string(ecd->html,"file not found",15);
+		return 0;
+	}
+	
 	settings.studypadfilename = filename;
 	xml_set_value("GnomeSword", "studypad", "lastfile", filename);
 
@@ -270,9 +277,11 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 
 	if (filename) {
 		if(ecd->studypad) {
-			settings.studypadfilename = filename;
 			xml_set_value("GnomeSword", "studypad", "lastfile", 
 							filename);
+			settings.studypadfilename = 
+					xml_get_value("studypad", "lastfile");
+			strcpy(ecd->filename, settings.studypadfilename);
 		}
 			
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
