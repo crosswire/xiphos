@@ -1,0 +1,166 @@
+# Anjuta Version 0.1.4 
+Compatibility Level: 1 
+
+<PROJECT_DESCRIPTION_START>
+<PROJECT_DESCRIPTION_END>
+<CONFIG_PROGS_START>
+<CONFIG_PROGS_END>
+<CONFIG_LIBS_START>
+<CONFIG_LIBS_END>
+<CONFIG_HEADERS_START>
+<CONFIG_HEADERS_END>
+<CONFIG_CHARACTERISTICS_START>
+<CONFIG_CHARACTERISTICS_END>
+<CONFIG_LIB_FUNCS_START>
+<CONFIG_LIB_FUNCS_END>
+<CONFIG_ADDITIONAL_START>
+<CONFIG_ADDITIONAL_END>
+<CONFIG_FILES_START>
+<CONFIG_FILES_END>
+<MAKEFILE_AM_START>
+<MAKEFILE_AM_END>
+
+props.file.type=project
+
+anjuta.version=0.1.4
+anjuta.compatibility.level=1
+
+project.name=GnomeswordLE
+project.type=GNOME
+project.target.type=EXECUTABLE
+project.version=0.4.0
+project.author=terry
+project.source.target=gnomeswordLE
+
+project.has.gettext=0
+
+project.programming.language=C
+
+project.menu.entry=GnomeswordLE
+project.menu.group=Applications
+project.menu.comment=No comment
+project.menu.icon=
+project.menu.need.terminal=1
+
+project.configure.options=
+
+anjuta.program.arguments=
+
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
+project.config.extra.modules.before=
+project.config.extra.modules.after=
+
+module.incude.name=include
+module.incude.type=
+module.incude.expanded=0
+module.incude.files=
+
+module.source.name=src
+module.source.type=
+module.source.expanded=1
+module.source.files=\
+	callback.h\
+	char_table.c\
+	char_table.h\
+	display.cpp\
+	gs_file.c\
+	gs_gnomesword.c\
+	gs_history.c\
+	gs_listeditor.c\
+	gs_menu.c\
+	gs_studypad.c\
+	gs_sword.cpp\
+	gs_viewdict.c\
+	gs_viewdict.h\
+	interface.c\
+	printstuff.c\
+	spell.c\
+	spell.h\
+	spell_gui.c\
+	spell_gui.h\
+	support.h\
+	support.c\
+	main.c\
+	callback.c\
+	gs_search.cpp\
+	gs_search_cb.h\
+	gs_search_cb.cpp\
+	gs_abouts.c\
+	gs_abouts.h\
+	gs_rwphtml.cpp\
+	gs_thmlhtml.cpp\
+	gs_file.h\
+	gs_popup_cb.c\
+	gs_popup_cb.h\
+	display.h\
+	gs_sword.h\
+	gs_studypad.h\
+	gs_gnomesword.h\
+	gs_listeditor.h\
+	gs_menu.h\
+	gs_search.h\
+	gs_viewcomm.c\
+	gs_viewcomm.h\
+	gs_history.h\
+	printstuff.h\
+	interface.h
+
+module.pixmap.name=pixmaps
+module.pixmap.type=
+module.pixmap.expanded=1
+module.pixmap.files=\
+	exit2.xpm\
+	footnote3.xpm\
+	GnomeSword2.xpm\
+	GnomeSword.png\
+	GnomeSword.xpm\
+	search1.xpm\
+	strongs2.png\
+	strongs2.xpm\
+	strongs3.xpm\
+	sword.xpm\
+	yes.xpm\
+	sword2.xpm
+
+module.data.name=data
+module.data.type=
+module.data.expanded=0
+module.data.files=
+
+module.help.name=help
+module.help.type=
+module.help.expanded=0
+module.help.files=
+
+module.doc.name=doc
+module.doc.type=
+module.doc.expanded=0
+module.doc.files=
+
+module.po.expanded=0
+module.po.files=
+
+compiler.options.supports=GNOME 
+
+compiler.options.include.paths=
+
+compiler.options.library.paths=
+
+compiler.options.libraries=
+compiler.options.libraries.selected=
+
+compiler.options.defines=\
+	HAVE_CONFIG_H
+
+compiler.options.warning.buttons=0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 1 
+
+compiler.options.optimize.buttons=0 1 0 0 
+
+compiler.options.other.buttons=1 0 
+
+compiler.options.other.c.options=
+
+compiler.options.other.l.options=
+
+project.source.paths=
+
