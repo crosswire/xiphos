@@ -26,7 +26,7 @@ endif
 
 libmain_a_SOURCES =  \
     $(IDL_GENERATED)\
-    configs.c configs.h \
+    configs.cc configs.h \
     display.cc display.hh \
     embed.cc embed.h \
     global_ops.cc global_ops.hh \

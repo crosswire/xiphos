@@ -36,6 +36,7 @@
 #include <string.h>
 #include <utf8html.h>
 #include <url.h>
+#include <dirent.h>
 
 #include "backend/sword_main.hh"
 
@@ -1157,5 +1158,63 @@ void BackEnd::init_language_map(void) {
 	languageMap[SWBuf("zu")] = SWBuf(_("Zulu"));
 }
 
+char *BackEnd::get_conf_file_item(const char * file, const char * mod_name, const char * item){
+	char *buf = NULL;
+	SWConfig conf_file(file);
+	conf_file.Load();
 
+	buf = (char *) conf_file[mod_name][item].c_str();
+	if(strlen(buf))
+		return strdup(buf);
+	else
+		return NULL;
+}
+
+void BackEnd::save_conf_file_item(const char * file, const char * mod_name, const char * item, const char * value) {
+	SWConfig conf_file(file);
+	conf_file[mod_name][item] = value;
+	conf_file.Save();
+}
+ 
+void BackEnd::save_module_key(char *mod_name, char *key)
+{
+	SectionMap::iterator section;
+	ConfigEntMap::iterator entry;
+	return; // this needs help
+	
+	DIR *dir;
+	char buf[256], conffile[256];
+	struct dirent *ent;
+
+//	strcpy(buf, sw.main_mgr->configPath);
+	dir = opendir(buf);
+	if (dir) {		//-- find and update .conf file
+		rewinddir(dir);
+		while ((ent = readdir(dir))) {
+			if ((strcmp(ent->d_name, "."))
+			    && (strcmp(ent->d_name, ".."))) {
+				sprintf(conffile, "%s/%s", buf,
+					ent->d_name);
+				SWConfig *myConfig =
+				    new SWConfig(conffile);
+				section =
+				    myConfig->Sections.find(mod_name);
+				if (section != myConfig->Sections.end()) {
+					entry =
+					    section->second.
+					    find("CipherKey");
+					if (entry !=
+					    section->second.end()) {
+						//-- set cipher key
+						entry->second = key;
+						//-- save config file						    
+						myConfig->Save();
+					}
+				}
+				delete myConfig;
+			}
+		}
+	}
+	closedir(dir);
+}
 /* end of file */

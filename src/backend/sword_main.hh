@@ -126,6 +126,9 @@ public:
 				int search_type, int search_params, int is_dialog);
 	
 	char *url_encode(const char * pram);
+	char *get_conf_file_item(const char * file, const char * mod_name, const char * item);
+	void save_conf_file_item(const char * file, const char * mod_name, const char * item, const char * value);
+	void save_module_key(char *mod_name, char *key);
 	SWMgr *get_display_mgr(void) {return(display_mgr);};
 	SWMgr *get_main_mgr(void) {return(main_mgr);};
 };
