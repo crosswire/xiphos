@@ -185,19 +185,12 @@ void initSWORD(GtkWidget * mainform)
 	NEtext = lookup_widget(mainform, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
 	GTKEntryDisp::__initialize();	//-- this is for gtktext	
-	percomDisplay =
-	    new GTKPerComDisp(lookup_widget(mainform, "textComments"));
-	UTF8Display =
-	    new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
-	HTMLDisplay =
-	    new
-	    GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
-	comp1Display =
-	    new InterlinearDisp(lookup_widget(mainform, "textComp1"));
-	FPNDisplay =
-	    new ComEntryDisp(lookup_widget(mainform, "htmlComments"));
-	dictDisplay =
-	    new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
+	percomDisplay = new GTKPerComDisp(lookup_widget(mainform, "textComments"));
+	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
+	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
+	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
+	FPNDisplay = new ComEntryDisp(lookup_widget(mainform, "htmlComments"));
+	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
 	compages = 0;
 	dictpages = 0;
 
@@ -207,39 +200,26 @@ void initSWORD(GtkWidget * mainform)
 	}
 	g_print("Loading SWORD Moudules\n");
 	g_print("gnomesword-%s\n", VERSION);
-	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end();
-	     it++) {
-		descriptionMap[string
-			       ((char *) (*it).second->Description())] =
+	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
+		descriptionMap[string ((char *) (*it).second->Description())] =
 		    string((char *) (*it).second->Name());
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			curMod = (*it).second;
-			sit =
-			    mainMgr->config->Sections.find((*it).second->
-							   Name());
+			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			havebible = TRUE;
 			++textpages;
-			biblemods =
-			    g_list_append(biblemods, curMod->Name());
-			sbbiblemods =
-			    g_list_append(sbbiblemods,
-					  curMod->Description());
+			biblemods = g_list_append(biblemods, curMod->Name());
+			sbbiblemods = g_list_append(sbbiblemods, curMod->Description());
 			addrenderfiltersSWORD(curMod, section);
 			curMod->Disp(UTF8Display);
 		} else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
 			curcomMod = (*it).second;
-			commentarymods =
-			    g_list_append(commentarymods,
-					  curcomMod->Name());
-			sbcommods =
-			    g_list_append(sbcommods,
-					  curcomMod->Description());
+			commentarymods =  g_list_append(commentarymods, curcomMod->Name());
+			sbcommods = g_list_append(sbcommods, curcomMod->Description());
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have  
-			sit =
-			    mainMgr->config->Sections.find((*it).second->
-							   Name());
+			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curcomMod, section);
 			curcomMod->Disp(HTMLDisplay);
@@ -247,15 +227,9 @@ void initSWORD(GtkWidget * mainform)
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
 			curdictMod = (*it).second;
-			dictionarymods =
-			    g_list_append(dictionarymods,
-					  curdictMod->Name());
-			sbdictmods =
-			    g_list_append(sbdictmods,
-					  curdictMod->Description());
-			sit =
-			    mainMgr->config->Sections.find((*it).second->
-							   Name());
+			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
+			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
+			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curdictMod, section);
 			curdictMod->Disp(dictDisplay);
@@ -266,47 +240,33 @@ void initSWORD(GtkWidget * mainform)
 	     it != percomMgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- if type is 
 			//-- if driver is RawFiles                     
-			if ((*percomMgr->config->
-			     Sections[(*it).second->Name()].
-			     find("ModDrv")).second == "RawFiles") {
+			if ((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") {
 				percomMod = (*it).second;
 				if (settings->formatpercom)
 					percomMod->Disp(FPNDisplay);	//-- if TRUE use formatted display
 				else
 					percomMod->Disp(percomDisplay);	//-- else standard display
-				percommods =
-				    g_list_append(percommods,
-						  percomMod->Name());
+				percommods = g_list_append(percommods, percomMod->Name());
 				usepersonalcomments = TRUE;	//-- used by verseChange function (GnomeSword.cpp)
 				percomMod->SetKey(settings->currentverse);
 				gtk_widget_show(lookup_widget(settings->app, "vbox2"));	//-- show personal comments page because we
 			}	//-- have at least one personl module
 		}
 	}
-	//-- interlinear 1
+	//-- interlinear
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end();
 	     it++) {
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			sit = mainMgr1->config->Sections.find((*it).second->Name());	//-- check to see if we need render filters
 			if (sit != mainMgr1->config->Sections.end()) {
-				sit =
-				    mainMgr1->config->Sections.find((*it).
-								    second->
-								    Name
-								    ());
+				sit = mainMgr1->config->Sections.find((*it).second->Name());
 				ConfigEntMap & section = (*sit).second;
 				addrenderfiltersSWORD(comp1Mod, section);
 				comp1Mod->Disp(comp1Display);
 			}
 		}
 	}
-/*
-	if (settings->showsplash) {
-		while (gtk_events_pending())
-			gtk_main_iteration();
-	}
-*/
 }
 
 void modNameFromDesc(gchar * modName, gchar * modDesc)
