@@ -64,6 +64,7 @@ module.include.files=\
 	src/backend/search.h\
 	src/backend/percomm_.h\
 	src/backend/properties.h\
+	src/backend/module_fonts.h\
 	src/backend/module_options.h\
 	src/backend/gbs_.h\
 	src/backend/bibletext_.h\
@@ -87,6 +88,7 @@ module.include.files=\
 	src/gui/dictlex_dialog.h\
 	src/gui/display_info.h\
 	src/gui/_editor.h\
+	src/gui/font_dialog.h\
 	src/gui/gbs.h\
 	src/gui/gbs_dialog.h\
 	src/gui/percomm.h\
@@ -136,6 +138,7 @@ module.source.files=\
 	src/backend/search.cpp\
 	src/backend/percomm_.cpp\
 	src/backend/properties.cpp\
+	src/backend/module_fonts.cpp\
 	src/backend/module_options.cpp\
 	src/backend/gbs_.cpp\
 	src/backend/bibletext_.cpp\
@@ -158,6 +161,7 @@ module.source.files=\
 	src/gnome/dictlex_dialog.c\
 	src/gnome/display_info.c\
 	src/gnome/_editor.c\
+	src/gnome/font_dialog.c\
 	src/gnome/gbs.c\
 	src/gnome/gbs_dialog.c\
 	src/gnome/gnomesword.c\
@@ -264,10 +268,12 @@ module.doc.files=\
 
 module.po.expanded=0
 module.po.files=\
+	bg.po\
 	de.po\
-	sk.po\
 	es.po\
-	es_ES.po
+	es_ES.po\
+	fr.po\
+	sk.po
 
 compiler.options.supports=
 

@@ -509,7 +509,7 @@ void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	gchar *cipher_key;
 
-	g_warning(t->cipher_old);
+//	g_warning(t->cipher_old);
 
 	cipher_key = gui_add_cipher_key(t->mod_name, t->cipher_old);
 	if (cipher_key) {
@@ -1740,7 +1740,7 @@ void gui_display_text(gchar * key)
 		chapter_display(cur_t->html, cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
 	else if (cur_t->cipher_key) {
-		g_warning(cur_t->cipher_key);
+//		g_warning(cur_t->cipher_key);
 		gui_module_is_locked_display(cur_t->html,
 					     cur_t->mod_name,
 					     cur_t->cipher_key);

@@ -304,7 +304,7 @@ static void ask(HTMLEngine * e, gpointer data)
 	GtkHTMLReplaceDialog *d = (GtkHTMLReplaceDialog *) data;
 
 	if (!d->ask_dialog) {
-		g_warning("new ask dialog!");
+//		g_warning("new ask dialog!");
 		d->ask_dialog = ask_dialog_new(e);
 		gtk_widget_show(GTK_WIDGET(d->ask_dialog->dialog));
 	} else {

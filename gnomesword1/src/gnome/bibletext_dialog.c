@@ -219,7 +219,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 
 	else if (*url == '*') {
 		++url;
-		g_warning(url);
+//		g_warning(url);
 		buf = g_strdup(url);
 		display(vt, buf, TRUE);
 		update_controls(vt);
@@ -438,7 +438,7 @@ static void free_on_destroy(VIEW_TEXT * vt)
 	g_free(vt->t->tgs);
 	g_free(vt->t);
 	dialog_list = g_list_remove(dialog_list, (VIEW_TEXT *) vt);
-		g_warning("shuting down %s dialog",vt->t->mod_name);
+//		g_warning("shuting down %s dialog",vt->t->mod_name);
 	g_free(vt);
 }
 
@@ -1105,15 +1105,20 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 {	
 	gint active = 0;	
 	GtkWidget *variant_menu;
+	GtkWidget *tmp_toolbar_icon;
 	
 	if (vt->t->tgs->gbfstrongs || vt->t->tgs->thmlstrongs) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/s.xpm");
 		vt->t->tgs->t_btn_strongs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("S"),
 					       _
 					       ("Toggle Strongs Numbers"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, 
+					NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_strongs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_strongs",
@@ -1135,12 +1140,16 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 				   vt);
 	}
 	if (vt->t->tgs->gbfmorphs || vt->t->tgs->thmlmorphs) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/m.xpm");
 		vt->t->tgs->t_btn_morphs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-					       NULL, _("M"),
-					       _("Toggle Morph Tags"),
-					       NULL, NULL, NULL, NULL);
+					GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					NULL, _("M"),
+					_("Toggle Morph Tags"),
+					NULL, tmp_toolbar_icon, 
+					NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_morphs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_morphs",
@@ -1162,12 +1171,15 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 				   vt);
 	}
 	if (vt->t->tgs->gbffootnotes || vt->t->tgs->thmlfootnotes) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/f.xpm");
 		vt->t->tgs->t_btn_footnotes =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("F"),
 					       _("Toggle Footnotes"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_footnotes);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_footnotes",
@@ -1189,13 +1201,16 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 				   vt);
 	}
 	if (vt->t->tgs->greekaccents) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/a.xpm");
 		vt->t->tgs->t_btn_accents =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("A"),
 					       _
 					       ("Toggle Greek Accents"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_accents);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_accents",
@@ -1218,12 +1233,15 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 
 	}
 	if (vt->t->tgs->lemmas) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/l.xpm");
 		vt->t->tgs->t_btn_lemmas =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("L"),
 					       _("Toggle Lemmas"), NULL,
-					       NULL, NULL, NULL);
+					       tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_lemmas);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_lemmas",
@@ -1246,13 +1264,16 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 
 	}
 	if (vt->t->tgs->scripturerefs) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/r.xpm");
 		vt->t->tgs->t_btn_scripturerefs =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("R"),
 					       _
 					       ("Toggle Scripture References"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_scripturerefs);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_scripturerefs",
@@ -1276,13 +1297,16 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 
 	}
 	if (vt->t->tgs->hebrewpoints) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/p.xpm");
 		vt->t->tgs->t_btn_points =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("P"),
 					       _
 					       ("Toggle Hebrew Vowel Points"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_points);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_points",
@@ -1305,13 +1329,16 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 
 	}
 	if (vt->t->tgs->hebrewcant) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/c.xpm");
 		vt->t->tgs->t_btn_cant =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("C"),
 					       _
 					       ("Toggle Hebrew Cantillation"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_cant);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_cant", vt->t->tgs->t_btn_cant,
@@ -1332,12 +1359,15 @@ static void add_global_option_buttons(GtkWidget * toolbar,
 
 	}
 	if (vt->t->tgs->headings) {
+		tmp_toolbar_icon =
+		    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+					       "/h.xpm");
 		vt->t->tgs->t_btn_headings =
 		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
 					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 					       NULL, _("H"),
 					       _("Toggle Headings"),
-					       NULL, NULL, NULL, NULL);
+					       NULL, tmp_toolbar_icon, NULL, NULL);
 		gtk_widget_ref(vt->t->tgs->t_btn_headings);
 		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 					 "vt->t->tgs->t_btn_headings",
@@ -1447,15 +1477,12 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	GtkWidget *btnGotoVerse;
 	GtkWidget *frame21;
 	GtkWidget *swVText;
-	gchar title[256];
-	
-	sprintf(title,"%s - %s",vt->t->mod_name, _("GnomeSword"));
 			      
 	vt->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
 	    
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
 			    vt->dialog);
-	gtk_window_set_title (GTK_WINDOW (vt->dialog), title);
+	gtk_window_set_title (GTK_WINDOW (vt->dialog), get_module_description(vt->t->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 335, 400);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
@@ -1471,7 +1498,7 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_BOTH);
+			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar);
 	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "toolbar",
 				 toolbar,
@@ -1806,7 +1833,7 @@ void gui_shutdown_bibletext_dialog(void)
 	while (dialog_list != NULL) {
 		VIEW_TEXT *vt = (VIEW_TEXT *) dialog_list->data;
 		dialog_freed = TRUE;
-		g_warning("shuting down %s dialog",vt->t->mod_name);
+//		g_warning("shuting down %s dialog",vt->t->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
