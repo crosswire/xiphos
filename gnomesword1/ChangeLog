@@ -1,12 +1,12 @@
-2004-07-14  terry <terry470@users.sf.net>
+2004-07-14  terry <tbiggs@users.sf.net>
 
-	fixed broken include in /backend/sword.cpp
-	bumped to 2.1.1 and released
+	* fixed broken include in /backend/sword.cpp
+	* bumped to 2.1.1 and released
 	
 	
-2004-07-13  terry <terry470@users.sf.net>
+2004-07-13  terry <tbiggs@users.sf.net>
 
-	bumped to 2.1.0 and released
+	* bumped to 2.1.0 and released
 	
 	
 2004-05-15  Pierre <pierrebenz@users.sf.net>
@@ -16,20 +16,20 @@
 	
 2004-05-15 Terry <tbiggs@users.sf.net>
 
-	* revomed backend/mgr.hh and backend/mgr.cc
-	* revomed backend/sword_defs.h
+	* removed backend/mgr.hh and backend/mgr.cc
+	* removed backend/sword_defs.h
 	
 	
 2004-05-14 Terry <tbiggs@users.sf.net>
 
-	* revomed backend/key.hh and backend/key.cc
-	* revomed main/key.h and main/key.c
+	* removed backend/key.hh and backend/key.cc
+	* removed main/key.h and main/key.c
 	
 
 2004-05-13 Terry <tbiggs@users.sf.net>
 
-	* revomed main/search.h and main/search.c
-	* revomed main/module.h and main/module.c
+	* removed main/search.h and main/search.c
+	* removed main/module.h and main/module.c
 	
 
 2004-04-21 Terry <tbiggs@users.sf.net>
