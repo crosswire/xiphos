@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include <gnome.h>
 #include <libxml/parser.h>
 enum {
 	COL_OPEN_PIXBUF,
