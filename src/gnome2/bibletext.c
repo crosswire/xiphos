@@ -67,6 +67,7 @@ GtkTextBuffer *text_buffer;
  */
 static GList *text_list;
 static gboolean display_change = TRUE;
+static gint text_last_page;
 
 
 
@@ -151,7 +152,7 @@ static void set_page_text(gchar * modname, GList * text_list)
 		on_notebook_text_switch_page(GTK_NOTEBOOK
 					     (widgets.notebook_text),
 					     NULL, page, text_list);
-	settings.text_last_page = page;
+	text_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs);
 }
@@ -183,7 +184,7 @@ static void text_page_changed(gint page_num, TEXT_DATA * t)
 	/*
 	 * remember page number
 	 */
-	settings.text_last_page = page_num;
+	text_last_page = page_num;
 	/*
 	 * display new module with current verse
 	 */
@@ -653,7 +654,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 	 */
 	page_num;
 	display_change = FALSE;
-	if (settings.text_last_page != page_num) {
+	if (text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_text),
 				      page_num);

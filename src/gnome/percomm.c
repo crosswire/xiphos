@@ -51,6 +51,7 @@ static PC_DATA *cur_p;
 static gboolean percomm_display_change;
 static GList *percomm_list;
 static GString *gstr;
+static gint percomm_last_page;
 
 
 
@@ -178,9 +179,7 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	/*
 	 * get data structure for new module 
 	 */
-	p_last = (PC_DATA *) g_list_nth_data(pcl,
-					     settings.
-					     percomm_last_page);
+	p_last = (PC_DATA *) g_list_nth_data(pcl, percomm_last_page);
 	p = (PC_DATA *) g_list_nth_data(pcl, page_num);
 	/*
 	 * point PC_DATA *cur_p to p - PC_DATA is global
@@ -202,7 +201,7 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	/*
 	 * remember page number
 	 */
-	settings.percomm_last_page = page_num;
+	percomm_last_page = page_num;
 	/*
 	 * display new module with current verse
 	 */
@@ -601,7 +600,7 @@ void gui_set_percomm_page(gchar * mod_name)
 	
 	GTK_CHECK_MENU_ITEM(p->ec->editnote)->active = TRUE;
 	
-	if (settings.text_last_page != page) {
+	if (percomm_last_page != page) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_percomm),
 				      page);
@@ -645,7 +644,7 @@ static void set_page_percomm(gchar * modname, GList * percomm_list)
 	else
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_percomm), page);
-	settings.percomm_last_page = page;
+	percomm_last_page = page;
 }
 
 /******************************************************************************

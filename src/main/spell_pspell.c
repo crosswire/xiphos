@@ -36,7 +36,7 @@
 #include "main/spell.h"
 
 static PspellManager * spell_checker;
-
+ 
 /******************************************************************************
  * Name
  *   check_for_error

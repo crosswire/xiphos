@@ -76,6 +76,7 @@ static GBS_DATA *cur_g;
 static gint tree_level;	
 /* list of gbs data structures */
 static GList *gbs_list;	
+static gint book_last_page;
 
 /*
 static void link_clicked(GtkHTML * html, const gchar * url, gpointer data)
@@ -392,7 +393,7 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	
 	g_old =
 	    (GBS_DATA *) g_list_nth_data(data_gbs,
-					 settings.book_last_page);
+					 book_last_page);
 	g = (GBS_DATA *) g_list_nth_data(data_gbs, page_num);
 	cur_g = g;
 	
@@ -427,7 +428,7 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	settings.BookWindowModule = g->mod_name;	
 	xml_set_value("GnomeSword", "modules", "book",g->mod_name);
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;
-	settings.book_last_page = page_num;	
+	book_last_page = page_num;	
 	widgets.html_book = g->html;
 }
 
@@ -730,7 +731,7 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
 				  gbs_list);	
 	gui_set_gbs_frame_label();
 		
-	settings.book_last_page = page;
+	book_last_page = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
 }

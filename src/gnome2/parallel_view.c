@@ -932,23 +932,20 @@ void gui_update_parallel_page_detached(void)
 
 void gui_swap_parallel_with_main(char *intmod)
 {
-	char *modname;
-        g_warning(intmod);
-	modname = xml_get_value("modules", "text");	//settings.MainWindowModule;
 	if (!strcmp(settings.parallel5Module, intmod)) {
-		settings.parallel5Module = modname;
+		settings.parallel5Module = xml_get_value("modules", "bible");
 	}
 	if (!strcmp(settings.parallel4Module, intmod)) {
-		settings.parallel4Module = modname;
+		settings.parallel4Module = xml_get_value("modules", "bible");
 	}
 	if (!strcmp(settings.parallel3Module, intmod)) {
-		settings.parallel3Module = modname;
+		settings.parallel3Module = xml_get_value("modules", "bible");
 	}
 	if (!strcmp(settings.parallel2Module, intmod)) {
-		settings.parallel2Module = modname;
+		settings.parallel2Module = xml_get_value("modules", "bible");
 	}
 	if (!strcmp(settings.parallel1Module, intmod)) {
-		settings.parallel1Module = modname;
+		settings.parallel1Module = xml_get_value("modules", "bible");
 	}
 	gui_change_module_and_key(intmod, settings.currentverse);
 	gui_update_parallel_page();

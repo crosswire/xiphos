@@ -64,7 +64,7 @@ static GList *dl_list;
 static DL_DATA *cur_d;
 static gint number_of_dictionaries;
 static gint cell_height;
-
+static gint dict_last_page;
 
 
 /******************************************************************************
@@ -122,7 +122,7 @@ void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 
 void gui_display_dictlex(gchar * key)
 {
-	gui_set_dictionary_page_and_key(settings.dict_last_page, key);
+	gui_set_dictionary_page_and_key(dict_last_page, key);
 }
 
 /******************************************************************************
@@ -206,7 +206,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 		gtk_entry_set_text(GTK_ENTRY(d->entry),
 				   settings.dictkey);
 
-	settings.dict_last_page = page;
+	dict_last_page = page;
 }
 
 /******************************************************************************
@@ -286,7 +286,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	xml_set_value("GnomeSword", "modules", "dict", d->mod_name);
 
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
-	settings.dict_last_page = page_num;
+	dict_last_page = page_num;
 	widgets.html_dict = d->html;
 }
 /******************************************************************************
@@ -769,14 +769,11 @@ gint gui_setup_dictlex(GList * mods)
 			   (on_notebook_dictlex_switch_page), dl_list);
 
 	modbuf = g_strdup(settings.DictWindowModule);
-	//keybuf = g_strdup(settings.dictkey);
 
 	set_page_dictlex(modbuf, dl_list);
 
 	g_free(modbuf);
-	//g_free(keybuf);
 	g_list_free(tmp);
-	//settings.dict_last_page = 0;
 	number_of_dictionaries = count;
 	return count;
 }
