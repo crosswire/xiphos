@@ -118,8 +118,8 @@ static void get_entry_text(GS_DIALOG * info)
  *   void
  */
 
-static void on_dialog1_response(GtkDialog * dialog, gint response_id,
-				GS_DIALOG * info)
+static void on_dialog_response(GtkDialog * dialog, gint response_id,
+			       GS_DIALOG * info)
 {
 	g_warning("%d", response_id);
 	switch (response_id) {
@@ -142,7 +142,7 @@ static void on_dialog1_response(GtkDialog * dialog, gint response_id,
 }
 
 
-GtkWidget *create_dialog_alert(GS_DIALOG * info)
+static GtkWidget *create_dialog_alert(GS_DIALOG * info)
 {
 	GtkWidget *dialog_alert;
 	GtkWidget *dialog_vbox2;
@@ -212,9 +212,179 @@ GtkWidget *create_dialog_alert(GS_DIALOG * info)
 				      GTK_STOCK_OK, GTK_RESPONSE_OK);
 
 	g_signal_connect((gpointer) dialog_alert, "response",
-			 G_CALLBACK(on_dialog1_response), NULL);
+			 G_CALLBACK(on_dialog_response), info);
 
 	return dialog_alert;
+}
+
+
+/******************************************************************************
+ * Name
+ *   create_dialog_request
+ *
+ * Synopsis
+ *   #include "gui/dialog.h"
+ *
+ *   GtkWidget *create_dialog_request(GS_DIALOG * info)
+ *
+ * Description
+ *   creates the dialog
+ *
+ * Return value
+ *   GtkWidget *
+ */
+
+static GtkWidget *create_dialog_request(GS_DIALOG * info)
+{
+	GtkWidget *dialog_request;
+	GtkWidget *dialog_vbox3;
+	GtkWidget *hbox4;
+	GtkWidget *image6;
+	GtkWidget *vbox3;
+	GtkWidget *label8;
+	GtkWidget *table2;
+	GtkWidget *label9;
+	GtkWidget *label10;
+	GtkWidget *label11;
+	GtkWidget *dialog_action_area3;
+	GtkWidget *cancelbutton2;
+	GtkWidget *okbutton3;
+
+	dialog_request = gtk_dialog_new();
+	info->dialog = dialog_request;
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_request),
+				       6);
+	gtk_window_set_title(GTK_WINDOW(dialog_request), 
+			     info->title ? info->title : " ");
+	gtk_window_set_modal(GTK_WINDOW(dialog_request), TRUE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_request), FALSE);
+	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_request), FALSE);
+
+	dialog_vbox3 = GTK_DIALOG(dialog_request)->vbox;
+	gtk_widget_show(dialog_vbox3);
+
+	hbox4 = gtk_hbox_new(FALSE, 12);
+	gtk_widget_show(hbox4);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox3), hbox4, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox4), 6);
+
+	if (info->stock_icon) {
+		image6 =
+		    gtk_image_new_from_stock(info->stock_icon,
+					     GTK_ICON_SIZE_DIALOG);
+		gtk_widget_show(image6);
+		gtk_box_pack_start(GTK_BOX(hbox4), image6, FALSE, TRUE,
+				   0);
+		gtk_misc_set_alignment(GTK_MISC(image6), 0.5, 0);
+		gtk_misc_set_padding(GTK_MISC(image6), 12, 0);
+	}
+	vbox3 = gtk_vbox_new(FALSE, 4);
+	gtk_widget_show(vbox3);
+	gtk_box_pack_start(GTK_BOX(hbox4), vbox3, TRUE, TRUE, 0);
+
+	label8 = gtk_label_new(info->label_top);
+	gtk_widget_show(label8);
+	gtk_box_pack_start(GTK_BOX(vbox3), label8, FALSE, FALSE, 0);
+	gtk_label_set_use_markup(GTK_LABEL(label8), TRUE);
+	gtk_label_set_justify(GTK_LABEL(label8), GTK_JUSTIFY_LEFT);
+	gtk_label_set_line_wrap(GTK_LABEL(label8), TRUE);
+	gtk_misc_set_alignment(GTK_MISC(label8), 0.5, 0);
+
+	table2 = gtk_table_new(3, 2, FALSE);
+	gtk_widget_show(table2);
+	gtk_box_pack_start(GTK_BOX(vbox3), table2, TRUE, TRUE, 0);
+	gtk_table_set_row_spacings(GTK_TABLE(table2), 3);
+	gtk_table_set_col_spacings(GTK_TABLE(table2), 3);
+
+	if (info->label1) {
+		label9 = gtk_label_new(info->label1);
+		gtk_widget_show(label9);
+		gtk_table_attach(GTK_TABLE(table2), label9, 0, 1, 0, 1,
+				 (GtkAttachOptions) (GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		gtk_label_set_justify(GTK_LABEL(label9),
+				      GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label9), 0, 0.5);
+
+		entry1 = gtk_entry_new();
+		gtk_widget_show(entry1);
+		gtk_table_attach(GTK_TABLE(table2), entry1, 1, 2, 0, 1,
+				 (GtkAttachOptions) (GTK_EXPAND |
+						     GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		if (info->text1)
+			gtk_entry_set_text(GTK_ENTRY(entry1),
+					   info->text1);
+	}
+
+	if (info->label2) {
+		label10 = gtk_label_new(info->label2);
+		gtk_widget_show(label10);
+		gtk_table_attach(GTK_TABLE(table2), label10, 0, 1, 1, 2,
+				 (GtkAttachOptions) (GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		gtk_label_set_justify(GTK_LABEL(label10),
+				      GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label10), 0, 0.5);
+
+		entry2 = gtk_entry_new();
+		gtk_widget_show(entry2);
+		gtk_table_attach(GTK_TABLE(table2), entry2, 1, 2, 1, 2,
+				 (GtkAttachOptions) (GTK_EXPAND |
+						     GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		if (info->text2)
+			gtk_entry_set_text(GTK_ENTRY(entry2),
+					   info->text2);
+
+	}
+
+	if (info->label3) {
+		label11 = gtk_label_new(info->label3);
+		gtk_widget_show(label11);
+		gtk_table_attach(GTK_TABLE(table2), label11, 0, 1, 2, 3,
+				 (GtkAttachOptions) (GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		gtk_label_set_justify(GTK_LABEL(label11),
+				      GTK_JUSTIFY_LEFT);
+		gtk_misc_set_alignment(GTK_MISC(label11), 0, 0.5);
+
+		entry3 = gtk_entry_new();
+		gtk_widget_show(entry3);
+		gtk_table_attach(GTK_TABLE(table2), entry3, 1, 2, 2, 3,
+				 (GtkAttachOptions) (GTK_EXPAND |
+						     GTK_FILL),
+				 (GtkAttachOptions) (0), 0, 0);
+		if (info->text3)
+			gtk_entry_set_text(GTK_ENTRY(entry3),
+					   info->text3);
+
+	}
+
+	dialog_action_area3 = GTK_DIALOG(dialog_request)->action_area;
+	gtk_widget_show(dialog_action_area3);
+	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area3),
+				  GTK_BUTTONBOX_END);
+
+	if (info->no)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      GTK_STOCK_NO, GTK_RESPONSE_NO);
+	if (info->yes)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      GTK_STOCK_YES, GTK_RESPONSE_YES);
+
+	if (info->cancel)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      GTK_STOCK_CANCEL,
+				      GTK_RESPONSE_CANCEL);
+	if (info->ok)
+		gtk_dialog_add_button(GTK_DIALOG(dialog_request),
+				      GTK_STOCK_OK, GTK_RESPONSE_OK);
+
+	g_signal_connect((gpointer) dialog_request, "response",
+			 G_CALLBACK(on_dialog_response), info);
+
+	return dialog_request;
 }
 
 
@@ -449,7 +619,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	 */
 	g_signal_connect((gpointer) gs_dialog, "response",
-			 G_CALLBACK(on_dialog1_response), info);
+			 G_CALLBACK(on_dialog_response), info);
 
 	gtk_widget_show_all(gs_dialog);
 	return gs_dialog;
@@ -525,7 +695,7 @@ GS_DIALOG *gui_new_dialog(void)
  *   
  *
  * Return value
- *   void
+ *   gint
  */
 
 gint gui_gs_dialog(GS_DIALOG * info)
@@ -534,7 +704,7 @@ gint gui_gs_dialog(GS_DIALOG * info)
 	static gboolean is_running = FALSE;
 
 	if (!is_running) {
-		dialog = gs_dialog_build(info);
+		dialog = create_dialog_request(info);
 		retval = 4;
 		is_running = TRUE;
 		gtk_dialog_run((GtkDialog *) dialog);
@@ -547,18 +717,18 @@ gint gui_gs_dialog(GS_DIALOG * info)
 
 /******************************************************************************
  * Name
- *   gui_gs_dialog
+ *   gui_alert_dialog
  *
  * Synopsis
  *   #include "gui/dialog.h"
  *
- *   gint gui_gs_dialog(GS_DIALOG * info)
+ *   gint gui_alert_dialog(GS_DIALOG * info)
  *
  * Description
  *   
  *
  * Return value
- *   void
+ *   gint
  */
 
 gint gui_alert_dialog(GS_DIALOG * info)

@@ -601,15 +601,12 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	
 	info = gui_new_dialog();
 	info->title = N_("Bookmark");
+	info->label_top = N_("<b>Edit</b>");
 	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
-		info->stock_icon = "gtk-open";
-		info->label_top = N_("Edit folder name");
 		info->label1 = "Folder name: ";
 		is_leaf = FALSE;		
 	}
 	else {
-		info->stock_icon = "gnome-stock-book-open";
-		info->label_top = N_("Edit bookmark");
 		info->label1 = "Bookmark name: ";
 		info->text2 = g_strdup(key);
 		info->text3 = g_strdup(module);
@@ -1018,44 +1015,49 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 	BOOKMARK_DATA * data;
 	GS_DIALOG *info;
 	gchar buf[256];
+	GString *str;
 	
 	
-	if (gtk_tree_selection_get_selected(current_selection, NULL, &selected)) {
-		mod_name = get_module_name();
-		key = get_module_key();		
-		data = g_new(BOOKMARK_DATA,1);
-		info = gui_new_dialog();
-		//info->title = N_("Bookmark");
-		info->stock_icon = "gtk-add";
-		info->label_top = N_("Add Bookmark");
-		sprintf(buf, "%s, %s", key, mod_name);
-	
-		info->text1 = g_strdup(buf);
-		info->text2 = g_strdup(key);
-		info->text3 = g_strdup(mod_name);
-		info->label1 = N_("Label: ");
-		info->label2 = N_("Verse: ");
-		info->label3 = N_("Module: ");
-		info->ok = TRUE;
-		info->cancel = TRUE;
-	
-		test = gui_gs_dialog(info);
-		if (test == GS_OK) {
-			data->caption = info->text1;
-			data->key = info->text2; 
-			data->module = info->text3; 
-			data->is_leaf = TRUE;
-			data->opened = pixbufs->pixbuf_helpdoc;
-			data->closed = NULL;			
-			add_item_to_tree(&iter,&selected, data);			
-			bookmarks_changed = TRUE;
-			save_bookmarks(NULL, NULL);
-		}
-		g_free(info->text1);	/* we used g_strdup() */
-		g_free(info->text2);
-		g_free(info->text3);
-		g_free(info);
+	if (!gtk_tree_selection_get_selected(current_selection,NULL,&selected))
+		return;
+
+	mod_name = get_module_name();
+	key = get_module_key();		
+	data = g_new(BOOKMARK_DATA,1);
+	str = g_string_new("");
+	info = gui_new_dialog();
+	info->title = N_("Bookmark");
+	//info->stock_icon = "gtk-dialog-info";
+	//info->stock_icon = "gtk-dialog-question";
+	g_string_printf(str, "<span weight=\"bold\">%s</span>", _("Add"));
+	info->label_top = str->str;
+	sprintf(buf, "%s, %s", key, mod_name);
+	info->text1 = g_strdup(buf);
+	info->text2 = g_strdup(key);
+	info->text3 = g_strdup(mod_name);
+	info->label1 = N_("Label: ");
+	info->label2 = N_("Verse: ");
+	info->label3 = N_("Module: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+
+	test = gui_gs_dialog(info);
+	if (test == GS_OK) {
+		data->caption = info->text1;
+		data->key = info->text2; 
+		data->module = info->text3; 
+		data->is_leaf = TRUE;
+		data->opened = pixbufs->pixbuf_helpdoc;
+		data->closed = NULL;			
+		add_item_to_tree(&iter,&selected, data);			
+		bookmarks_changed = TRUE;
+		save_bookmarks(NULL, NULL);
 	}
+	g_free(info->text1);	/* we used g_strdup() */
+	g_free(info->text2);
+	g_free(info->text3);
+	g_free(info);
+	g_string_free(str,TRUE);
 }
 
 /******************************************************************************
@@ -1110,16 +1112,19 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint test;
 	GS_DIALOG *info;
 	BOOKMARK_DATA * data;
+	GString *str;
 	
 	if(!gtk_tree_selection_get_selected(current_selection, NULL, &selected)) 
 		return;
 	
 	t = "|";
+	str = g_string_new("");
 	info = gui_new_dialog();
-	info->stock_icon = "gtk-open";
+	//info->stock_icon = "gtk-open";
 	info->title = N_("Bookmark");
-	info->label_top = N_("Enter Folder Name");
-	info->label_middle = N_("(use no \'|\')");
+	g_string_printf(str, "<span weight=\"bold\">%s</span>",
+			_("Enter Folder Name"));
+	info->label_top = str->str;
 	info->text1 = g_strdup(_("Folder Name"));
 	info->label1 = N_("Folder: ");
 	info->ok = TRUE;
@@ -1139,11 +1144,12 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 		add_item_to_tree(&iter,&selected, data);
 		bookmarks_changed = TRUE;
 		save_bookmarks(NULL, NULL);
+		g_free(data->caption);
 	}
-	if(data->caption) g_free(data->caption);
 	g_free(data);
 	g_free(info->text1);
 	g_free(info);
+	g_string_free(str,TRUE);
 }
 
 
