@@ -33,6 +33,29 @@ extern int search_dialog;
 
 
 
+
+/******************************************************************************
+ * Name
+ *   get_display_level
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   int get_display_level(gchar *modname)
+ *
+ * Description
+ *   return the DisplayLevel information from the <module>.conf
+ *
+ * Return value
+ *   int
+ */
+
+int get_display_level(char * module_name)
+{
+	return backend_get_display_level(module_name);
+}
+
+
 /******************************************************************************
  * Name
  *   is_module_rtl

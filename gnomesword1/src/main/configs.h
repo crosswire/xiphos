@@ -25,16 +25,17 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
+#include <glib-1.2/glib.h>
 typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
-	gchar *mod_name;
-	gchar *old_font;
-	gchar *old_gdk_font;
-	gchar *new_font;
-	gchar *new_gdk_font;
-	gchar *old_font_size;
-	gchar *new_font_size;
-	gint no_font;
+	char *mod_name;
+	char *old_font;
+	char *old_gdk_font;
+	char *new_font;
+	char *new_gdk_font;
+	char *old_font_size;
+	char *new_font_size;
+	int no_font;
 };
 
 void save_module_key(char * mod_name, char * key);
@@ -56,4 +57,3 @@ char *get_module_font_size(char *mod_name);
 #endif
 
 #endif
-

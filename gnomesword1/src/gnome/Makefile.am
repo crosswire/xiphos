@@ -38,6 +38,7 @@ gnomesword_1_0_SOURCES =  \
     font_dialog.c \
     gbs.c \
     gbs_dialog.c \
+    gbs_display.c \
     gbs_menu.c \
     gnomesword.c \
     gtkhtml_display.c \
@@ -71,7 +72,8 @@ gnomesword_1_0_LDADD = \
     $(PACKAGE_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS) \
-    $(SWORD_LIBS) \
     $(PSPELL_LIBS) \
     $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/backend/libbackend.a
+    $(top_builddir)/src/backend/libbackend.a\
+    $(SWORD_LIBRARY_PATH) \
+    $(LIB_SWORD)

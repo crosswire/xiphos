@@ -33,6 +33,7 @@
 #include <swmodule.h>
 #include <versekey.h>
 
+
 #include "backend/mgr.hh"
 #include "backend/module.hh"
 #include "backend/key.hh"
@@ -74,6 +75,35 @@ extern ListKey results;
 extern ListKey search_scope_list;
 extern SWKey *current_scope;
 
+
+
+
+/******************************************************************************
+ * Name
+ *   backend_get_display_level
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   int backend_get_display_level(gchar *modname)
+ *
+ * Description
+ *   return the DisplayLevel information from the <module>.conf
+ *
+ * Return value
+ *   int
+ */
+
+int backend_get_display_level(char * module_name)
+{
+	char *buf = NULL;
+	buf = (char *) sw.main_mgr->Modules[module_name]->
+			getConfigEntry("DisplayLevel");
+	if(buf)
+		return atoi(buf);
+	else
+		return 0;
+}
 
 /******************************************************************************
  * Name
@@ -703,6 +733,7 @@ int backend_get_mod_type(char * mod_name)
 char *backend_get_module_text(int manager, char * module_name, char * key)
 {
 	SWModule *mod = NULL;
+	
 	switch(manager) {
 		case TEXT_MGR:
 			mod = sw.text_mgr->Modules[module_name];
