@@ -988,3 +988,27 @@ void redisplayTextSWORD(void)
 {
 	curMod->Display();	
 }
+
+/*
+ *getmodnameSWORD
+ * num
+ * returns module name
+*/
+gchar* getmodnameSWORD(gint num)
+{
+	switch(num)
+	{
+		case 0: return curMod->Name();
+			break;
+		case 1: return curcomMod->Name();
+			break;
+		case 2: return curdictMod->Name();
+			break;
+		case 3: return comp1Mod->Name();
+			break;
+		case 4: return comp2Mod->Name();
+			break;	
+		case 5: return comp3Mod->Name();
+			break;
+	}		
+}
