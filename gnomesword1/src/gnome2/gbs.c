@@ -951,7 +951,7 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 	while (tmp != NULL) {
 		bookname = (gchar *) tmp->data;
 		gbs = g_new0(GBS_DATA, 1);
-		gbs->ops = gui_new_globals();
+		gbs->ops = gui_new_globals(bookname);
 		set_new_globals(gbs->ops);
 		gbs->frame = NULL;
 		gbs->mod_name = bookname;

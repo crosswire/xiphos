@@ -137,6 +137,7 @@ static void global_option_red_words(GtkMenuItem * menuitem,
 static void global_option_strongs(GtkMenuItem * menuitem,
 				  GLOBAL_OPS * ops)
 {
+	g_warning("Strong's Numbers");
 	ops->strongs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	switch (ops->module_type) {
 	case 0:
@@ -529,8 +530,7 @@ void gui_add_global_option_items(gchar * mod_name,
 	GSList *group = NULL;
 
 
-	if ((check_for_global_option(mod_name, "GBFRedLetterWords"))
-	    ||
+	if ((check_for_global_option(mod_name, "GBFRedLetterWords")) ||
 	    (check_for_global_option(mod_name, "OSISRedLetterWords"))) {
 		if (!ops->module_type)
 			ops->words_in_red =
@@ -814,23 +814,36 @@ void gui_add_global_option_items(gchar * mod_name,
  *   GLOBAL_OPS *
  */
 
-GLOBAL_OPS *gui_new_globals(void)
+GLOBAL_OPS *gui_new_globals(gchar * mod_name)
 {
 	GLOBAL_OPS *ops;
 	ops = g_new0(GLOBAL_OPS, 1);
 	ops->module_type = 0;
-	ops->words_in_red = FALSE;
-	ops->strongs = FALSE;
-	ops->morphs = FALSE;
-	ops->footnotes = FALSE;
-	ops->greekaccents = FALSE;
-	ops->lemmas = FALSE;
-	ops->scripturerefs = FALSE;
-	ops->hebrewpoints = FALSE;
-	ops->hebrewcant = FALSE;
-	ops->headings = FALSE;
-	ops->variants_all = FALSE;
-	ops->variants_primary = FALSE;
-	ops->variants_secondary = FALSE;
+	ops->words_in_red = 
+		load_module_options(mod_name, "Words of Christ in Red");
+	ops->strongs = 
+		load_module_options(mod_name, "Strong's Numbers");
+	ops->morphs = 
+		load_module_options(mod_name, "Morphological Tags");
+	ops->footnotes = 
+		load_module_options(mod_name, "Footnotes");
+	ops->greekaccents = 
+		load_module_options(mod_name, "Greek Accents");
+	ops->lemmas = 
+		load_module_options(mod_name, "Lemmas");
+	ops->scripturerefs = 
+		load_module_options(mod_name, "Scripture Cross-references");
+	ops->hebrewpoints = 
+		load_module_options(mod_name, "Hebrew Vowel Points");
+	ops->hebrewcant = 
+		load_module_options(mod_name, "Hebrew Cantillation");
+	ops->headings = 
+		load_module_options(mod_name, "Headings");
+	ops->variants_all = 
+		load_module_options(mod_name, "All Readings");
+	ops->variants_primary = 
+		load_module_options(mod_name, "Primary Reading");
+	ops->variants_secondary = 
+		load_module_options(mod_name, "Secondary Reading");
 	return ops;
 }

@@ -1,4 +1,4 @@
-# Anjuta Version 1.1.98 
+# Anjuta Version 1.2.1 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.1.98
+anjuta.version=1.2.1
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr
+project.configure.options=--prefix=/usr --enable-sword_cvs --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -58,7 +58,6 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
-preferences.autoformat.style=Custom style
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -239,7 +238,11 @@ module.source.files=\
 	src/gnome2/mod_mgr.c\
 	src/gnome2/mod_global_ops.c\
 	src/gnome2/tabbed_browser.c\
-	src/gnome2/url.c
+	src/gnome2/url.c\
+	src/backend/gs_gbfhtmlhref.cpp\
+	src/backend/gs_markupfiltmgr.cpp\
+	src/backend/gs_osishtmlhref.cpp\
+	src/backend/gs_thmlhtmlhref.cpp
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -635,7 +635,7 @@ void gui_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"<tr bgcolor=\"%s\"><td><b><a href=\"[%s]%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
+				"<tr bgcolor=\"%s\"><td><b><a href=\"about://%s/%s\"><font color=\"%s\" size=\"%s\"> [%s]</font></a></b>",
 				rowcolor,
 				mod_name,
 				get_module_description(mod_name),
@@ -678,7 +678,7 @@ void gui_update_parallel_page(void)
 			}
 
 			sprintf(tmpBuf,
-				"</font><small>[<a href=\"@%s\">view context</a>]</small></td></tr>",
+				"</font><small>[<a href=\"parallel://swap/%s\">view context</a>]</small></td></tr>",
 				mod_name);
 
 			utf8len = strlen(tmpBuf);
@@ -812,8 +812,8 @@ static void int_display(gchar * key)
 
 			g_string_printf(str,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
-				"<a href=\"I%s\" name=\"%d\">"
-				"<font color=\"%s\">%d. </font></A>"
+				"<a href=\"parallel://verse/%s\" name=\"%d\">"
+				"<font color=\"%s\">%d. </font></a>"
 				"<font size=\"%s\" color=\"%s\">",
 				bgColor,
 				tmpkey,

@@ -157,6 +157,7 @@ static void deal_with_notes(const gchar * url, gboolean clicked)
 	gchar *buf = NULL;
 	gchar *buf1 = NULL;
 	gchar *tmpbuf = NULL;
+	gchar **work_buf;
 	
 	if(!in_url) {
 		return;
@@ -168,23 +169,28 @@ static void deal_with_notes(const gchar * url, gboolean clicked)
 	buf1 = strchr(url, '=');
 	++buf1;
 	
-	if(clicked) {
-		tmpbuf = get_crossref(buf1);
-		if (!*tmpbuf)
-			return;
-		else 
+	work_buf = g_strsplit (buf1,".",3);
+	
+	if(clicked && !strcmp(work_buf[1], "x")) {
+		tmpbuf = get_crossref(settings.MainWindowModule,
+					work_buf[0],
+					work_buf[2]);
+		if (tmpbuf)
 			gui_display_verse_list_in_sidebar(settings.
 					  currentverse,
 					  xml_get_value("modules", 
 					  "bible"),
 					  tmpbuf);
-	} else {
-		tmpbuf = get_footnote_body(buf1);
+	} else if(!clicked){
+		tmpbuf = get_footnote_body(settings.MainWindowModule,
+					work_buf[0],
+					work_buf[2]);
 		if (tmpbuf == NULL)
 			return;
 		gui_display_in_hint_window(tmpbuf);
 	}
-	g_free(tmpbuf);
+	g_free(tmpbuf);	
+	g_strfreev(work_buf);
 }
 
 
@@ -443,11 +449,10 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	gchar buf[255];
-
+	gchar buf[500];
+	
 	if (url == NULL) { /* moved out of url - clear appbar */
-		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
-					"");
+		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
 		if (hint.in_popup) {
 			gtk_widget_destroy(hint.hint_window);
@@ -455,26 +460,18 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		}
 	} else {
 		in_url = TRUE;	/* we need this for html_button_released */
-		if (*url == '@') { /* swap parallel and main text mods */
-			++url;
-			sprintf(buf, _("Show %s in main window"), url);
+		if(gui_url_handler(url, FALSE))
+			return;
+		
+		if (*url == 'I') {
+			return;
 		} else if (!strncmp(url, "noteID=", 7)) { /* footnote */
 			deal_with_notes(url, FALSE);
 			return;
-		} else if (*url == '[') {  /* module name */
-			++url;
-			while (*url != ']') {
-				++url;
-			}
-			++url;
-			sprintf(buf, "%s", url);
-		} else if (*url == '*') {/* verse number link */
-			++url;
-			sprintf(buf, "%s", url);
 		} else if (!strncmp(url, "type=morph", 10)) {/* morph tag */
 			deal_with_morphs(url, FALSE);
 			return;
-		} else if (!strncmp(url, "type=Strongs", 12)) {/* strongs */
+		} else if (!strncmp(url, "type=Strongs", 10)) {/* strongs */
 			deal_with_storngs(url, FALSE);			
 			return;
 		} else if (*url == 'U') {
@@ -482,7 +479,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		} else /* any other link */
 			sprintf(buf, "%s", "");
-
+			
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 	}
@@ -511,33 +508,14 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar tmpbuf[255];
 	gint i = 0;
 	
+	if(gui_url_handler(url, TRUE))
+		return;
+	
 	if (*url == '@') {
 		++url;
 		gui_swap_parallel_with_main((gchar *) url);
 	} else if (!strncmp(url, "noteID=", 7)) {
 		deal_with_notes(url, TRUE);
-		return;
-	} else if (*url == '*') {  /* verse numbers in Bible Text window */
-		++url;
-		buf = g_strdup(url);
-		gui_change_verse(buf);
-		g_free(buf);
-		return;
-	} else if (*url == 'I') {
-		++url;
-		buf = g_strdup(url);
-		gui_change_verse(buf);
-		g_free(buf);
-		return;
-	} else if (*url == '[') {/* module name  */
-		++url;
-		i = 0;
-		while (*url != ']') {
-			tmpbuf[i++] = *url;
-			tmpbuf[i + 1] = '\0';
-			++url;
-		}
-		gui_display_about_module_dialog(tmpbuf, FALSE);
 		return;
 	} else if (!strncmp(url, "version=", 7)||!strncmp(url, "passage=", 7)) {
 		deal_with_refs(url);/* thml verse reference */
@@ -548,16 +526,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	} else if (!strncmp(url, "type=Strongs", 12)) {/* gbf thml and osis strongs */		
 		deal_with_storngs(url, TRUE);
 		return;
-	} else if (*url == 'U') {
-		++url;		/* remove U */
-		buf = g_strdup(url);
-		if (get_mod_type(buf) == TEXT_TYPE) {
-			gui_unlock_bibletext(NULL, (TEXT_DATA *) data);
-		} else if (get_mod_type(buf) == COMMENTARY_TYPE) {
-			gui_unlock_commentary(NULL, (COMM_DATA *) data);
-		}
-		g_free(buf);
-	}
+	} 
 }
 
 

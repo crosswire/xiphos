@@ -80,6 +80,41 @@ extern ListKey results;
 extern ListKey search_scope_list;
 extern SWKey *current_scope;
 
+
+
+/******************************************************************************
+ * Name
+ *   backend_get_module_config_entry
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   const char *backend_get_module_config_entry(const char * module_name, 
+ *					    const char * entry)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   const char *
+ */
+
+const char *backend_get_module_config_entry(const char * module_name, 
+					    const char * entry)
+{
+	const char *buf = NULL;
+	ModMap::iterator it;
+	
+	it = sw.main_mgr->Modules.find(module_name);
+	if (it != sw.main_mgr->Modules.end()) {
+		if (!strcmp((*it).second->Name(), module_name)){
+			buf = (*it).second->getConfigEntry(entry);
+			if(buf)
+				return buf;
+		}
+	}
+	return NULL;	
+}
 /******************************************************************************
  * Name
  *   
