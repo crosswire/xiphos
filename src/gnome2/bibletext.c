@@ -30,7 +30,6 @@
 
 
 #include "gui/gnomesword.h"
-//#include "gui/gtkhtml_display.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/shortcutbar_main.h"

@@ -63,8 +63,8 @@ static void create_menu(GdkEventButton * event);
 
 static void set_label(gchar * mod_name)
 {
-	gtk_label_set_text (GTK_LABEL(widgets.label_dict),mod_name);
-	
+	gtk_label_set_text(GTK_LABEL(widgets.label_dict), mod_name);
+
 }
 
 
@@ -150,18 +150,18 @@ void gui_display_dictlex(gchar * key)
  *   void
  */
 
-void gui_set_dictlex_mod_and_key(gchar *mod_name, gchar *key)
+void gui_set_dictlex_mod_and_key(gchar * mod_name, gchar * key)
 {
 	const gchar *old_key;
-	
+
 	//xml_set_value("GnomeSword", "modules", "dict", mod_name);
 	//settings.DictWindowModule = xml_get_value("modules", "dict");
 	//set_label(settings.DictWindowModule);
-	if(key == NULL)
+	if (key == NULL)
 		key = "Grace";
-	
+
 	old_key = gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
-	if(!strcmp(old_key, key))
+	if (!strcmp(old_key, key))
 		on_entryDictLookup_changed(NULL, NULL);
 	else
 		gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), key);
@@ -234,32 +234,35 @@ static gint html_button_pressed(GtkWidget * html,
  */
 
 static gint list_button_released(GtkWidget * treeview,
-				GdkEventButton * event, gpointer data)
+			 GdkEventButton * event, gpointer data)
 {
-	GtkTreeSelection* selection;
+	GtkTreeSelection *selection;
 	GtkTreeIter selected;
 	gchar *buf = NULL;
-	GtkTreeModel *model ;
-	
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-                        
-	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+	GtkTreeModel *model;
+
+	selection =
+	    gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+
+	if (!gtk_tree_selection_get_selected
+	    (selection, &model, &selected))
 		return;
-	
+
 	switch (event->button) {
 	case 1:
 		gtk_tree_model_get(model, &selected, 0, &buf, -1);
 		if (buf) {
-			gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), buf);
+			gtk_entry_set_text(GTK_ENTRY
+					   (widgets.entry_dict), buf);
 			g_free(buf);
-		}	 	
+		}
 		break;
 	case 2:
 	case 3:
 	default:
 		break;
 	}
-	
+
 	return FALSE;
 }
 
@@ -283,12 +286,10 @@ static void add_columns(GtkTreeView * treeview)
 	gtk_tree_view_append_column(treeview, column);
 	/* get cell (row) height */
 	gtk_cell_renderer_get_size(renderer,
-                                   GTK_WIDGET(treeview),
-                                    NULL,
-                                    NULL,
-                                    NULL,
-                                    NULL,
-                                    &settings.cell_height);
+				   GTK_WIDGET(treeview),
+				   NULL,
+				   NULL,
+				   NULL, NULL, &settings.cell_height);
 }
 
 GtkWidget *gui_create_dictionary_pane(void)
@@ -296,43 +297,42 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *box_dict;
 	GtkWidget *hpaned;
 	GtkWidget *vbox;
-	GtkWidget *hbox;
+	GtkWidget *frame_entry;
 	GtkWidget *toolbarDLKey;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *label205;
 	GtkWidget *scrolledwindow;
 	GtkListStore *model;
-	
+
 	box_dict = gtk_vbox_new(FALSE, 0);
-        gtk_widget_show(box_dict);
-			  
-        widgets.label_dict = gtk_label_new(settings.DictWindowModule);
-        gtk_widget_show(widgets.label_dict);
-        gtk_box_pack_start(GTK_BOX(box_dict),
-                           widgets.label_dict, FALSE,
-                           FALSE, 0);
-        gtk_label_set_justify (GTK_LABEL (widgets.label_dict), GTK_JUSTIFY_LEFT);
-        gtk_misc_set_alignment (GTK_MISC (widgets.label_dict), 0, 0.5);
+	gtk_widget_show(box_dict);
+
+	widgets.label_dict = gtk_label_new(settings.DictWindowModule);
+	gtk_widget_show(widgets.label_dict);
+	gtk_box_pack_start(GTK_BOX(box_dict),
+			   widgets.label_dict, FALSE, FALSE, 0);
+	gtk_label_set_justify(GTK_LABEL(widgets.label_dict),
+			      GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(widgets.label_dict), 0, 0.5);
 
 	hpaned = gtk_hpaned_new();
 	gtk_widget_show(hpaned);
-        gtk_box_pack_start(GTK_BOX(box_dict),
-                           hpaned, TRUE,
-                           TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(box_dict), hpaned, TRUE, TRUE, 0);
 	gtk_paned_set_position(GTK_PANED(hpaned), 195);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_paned_pack1(GTK_PANED(hpaned), vbox, TRUE, TRUE);
 
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_widget_show (hbox);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
-	
+	frame_entry = gtk_frame_new(NULL);
+	gtk_widget_show(frame_entry);
+	gtk_box_pack_start(GTK_BOX(vbox), frame_entry, FALSE, TRUE, 0);
+
 	widgets.entry_dict = gtk_entry_new();
 	gtk_widget_show(widgets.entry_dict);
-	gtk_box_pack_start (GTK_BOX (hbox), widgets.entry_dict, TRUE, TRUE, 0);
-	
+	gtk_container_add(GTK_CONTAINER(frame_entry),
+			  widgets.entry_dict);
+
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
 
@@ -340,49 +340,48 @@ GtkWidget *gui_create_dictionary_pane(void)
 	widgets.listview_dict =
 	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(widgets.listview_dict);
-	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(widgets.listview_dict), TRUE);
-	gtk_box_pack_start(GTK_BOX(vbox), widgets.listview_dict, TRUE, TRUE,
-			   0);
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(widgets.listview_dict),
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW
+				     (widgets.listview_dict), TRUE);
+	gtk_box_pack_start(GTK_BOX(vbox), widgets.listview_dict, TRUE,
+			   TRUE, 0);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
+					  (widgets.listview_dict),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(widgets.listview_dict));
 
-        scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-        gtk_widget_show(scrolledwindow);
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow);
 	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow, TRUE, TRUE);
-	
-        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-                                       (scrolledwindow),
-                                       GTK_POLICY_AUTOMATIC,
-                                       GTK_POLICY_AUTOMATIC);
 
-        widgets.html_dict = gtk_html_new();
-        gtk_widget_show(widgets.html_dict);
-        gtk_container_add(GTK_CONTAINER(scrolledwindow),
-                          widgets.html_dict);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+
+	widgets.html_dict = gtk_html_new();
+	gtk_widget_show(widgets.html_dict);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow),
+			  widgets.html_dict);
 
 	g_signal_connect(GTK_OBJECT(widgets.html_dict),
-			   "button_press_event",
-			   G_CALLBACK(html_button_pressed), NULL);
+			 "button_press_event",
+			 G_CALLBACK(html_button_pressed), NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_dict),
-			   "url_requested",
-			   G_CALLBACK(url_requested), NULL);
+			 "url_requested",
+			 G_CALLBACK(url_requested), NULL);
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "on_url",
-			   G_CALLBACK(gui_url), 
-			   GINT_TO_POINTER(DICTIONARY_TYPE));
+			 G_CALLBACK(gui_url),
+			 GINT_TO_POINTER(DICTIONARY_TYPE));
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
-			   G_CALLBACK(gui_link_clicked), NULL);
-
-
-	
+			 G_CALLBACK(gui_link_clicked), NULL);
 	g_signal_connect(GTK_OBJECT(widgets.entry_dict), "changed",
-			   G_CALLBACK(on_entryDictLookup_changed), NULL);
-	
+			 G_CALLBACK(on_entryDictLookup_changed), NULL);
 	g_signal_connect(G_OBJECT(widgets.listview_dict),
-			   "button_release_event",
-			   G_CALLBACK(list_button_released), NULL);
+			 "button_release_event",
+			 G_CALLBACK(list_button_released), NULL);
 	return box_dict;
 }
+
 /**
  **
  **
@@ -412,8 +411,8 @@ GtkWidget *gui_create_dictionary_pane(void)
 static void update_comm_global_ops(gchar * option, gboolean choice)
 {
 	/*g_warning("gui_update_text_global_ops");
-	save_module_options(settings.MainWindowModule, option, choice);
-	gui_display_text(settings.currentverse);*/
+	   save_module_options(settings.MainWindowModule, option, choice);
+	   gui_display_text(settings.currentverse); */
 }
 
 /******************************************************************************
@@ -459,37 +458,45 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 
 
 
-static void on_about_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_about_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
-	gui_display_about_module_dialog(settings.DictWindowModule, FALSE);
+	gui_display_about_module_dialog(settings.DictWindowModule,
+					FALSE);
 }
 
 
-static void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_item1_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
 
 }
 
 
-static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_print1_activate(GtkMenuItem * menuitem,
+			       gpointer user_data)
 {
 	gui_html_print(widgets.html_dict, FALSE);
 }
 
 
-static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_copy2_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
 	gui_copy_html(widgets.html_dict);
 }
 
 
-static void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_find1_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
-	gui_find_dlg(widgets.html_dict, settings.DictWindowModule, FALSE, NULL);
+	gui_find_dlg(widgets.html_dict, settings.DictWindowModule,
+		     FALSE, NULL);
 }
 
 
-static void on_item2_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_item2_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
 {
 
 }
@@ -507,16 +514,17 @@ static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar *dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+	gchar *dict_key =
+	    gui_get_word_or_selection(widgets.html_comm, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(settings.
-						      DictWindowModule,
-						      dict_key);
+						     DictWindowModule,
+						     dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(settings.
-						  DictWindowModule,
-						  dict_key);
+						DictWindowModule,
+						dict_key);
 		g_free(dict_key);
 	}
 }
@@ -527,18 +535,20 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gchar *cipher_key;
 	gchar *cipher_old;
-	
-//	cipher_old = get_cipher_key(settings.DictWindowModule);
-	cipher_key = gui_add_cipher_key(settings.DictWindowModule, cipher_old);
+
+//      cipher_old = get_cipher_key(settings.DictWindowModule);
+	cipher_key =
+	    gui_add_cipher_key(settings.DictWindowModule, cipher_old);
 	if (cipher_key) {
 		main_locked_module_display(widgets.html_dict,
-					     settings.DictWindowModule,
-					     cipher_key);
+					   settings.DictWindowModule,
+					   cipher_key);
 	}
 }
 
 
-static void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_show_tabs_activate(GtkMenuItem * menuitem,
+				  gpointer user_data)
 {
 
 }
@@ -573,8 +583,9 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	gchar *module_name = NULL;
 
-	module_name = main_module_name_from_description((gchar *) user_data);
-	if(module_name) {
+	module_name =
+	    main_module_name_from_description((gchar *) user_data);
+	if (module_name) {
 		main_display_dictionary(module_name, settings.dictkey);
 		g_free(module_name);
 	}
@@ -834,17 +845,18 @@ static void create_menu(GdkEventButton * event)
 
 
 	view_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM
+				  (file3_menu_uiinfo[0].widget),
 				  view_menu);
-	
+
 	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_menu,
 				(GCallback) on_view_mod_activate);
-								
-	
+
+
 	lookup_selection_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu1_uiinfo[5].widget),
 				  lookup_selection_menu);
-	
+
 	usecurrent =
 	    gtk_menu_item_new_with_label(_("Use Current Dictionary"));
 	gtk_widget_show(usecurrent);
@@ -859,24 +871,19 @@ static void create_menu(GdkEventButton * event)
 /*	
 	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
 				(GCallback)gui_lookup_dict_selection);
-*/			
-				
+*/
+
 	if ((main_check_for_global_option(mod_name,
-				     "GBFRedLetterWords")) ||
+					  "GBFRedLetterWords")) ||
 	    (main_check_for_global_option(mod_name,
-				     "OSISRedLetterWords"))) {
+					  "OSISRedLetterWords"))) {
 		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
 				    widget)->active = ops->words_in_red;
 	}
-	if ((main_check_for_global_option
-	     (mod_name, "GBFStrongs"))
-	    ||
-	    (main_check_for_global_option
-	     (mod_name, "ThMLStrongs"))
-	    ||
-	    (main_check_for_global_option
-	     (mod_name, "OSISStrongs"))) {
+	if ((main_check_for_global_option(mod_name, "GBFStrongs"))
+	    || (main_check_for_global_option(mod_name, "ThMLStrongs"))
+	    || (main_check_for_global_option(mod_name, "OSISStrongs"))) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
 				    widget)->active = ops->strongs;
@@ -909,7 +916,8 @@ static void create_menu(GdkEventButton * event)
 	    (main_check_for_global_option(mod_name, "OSISScripref"))) {
 		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
-				    widget)->active = ops->scripturerefs;
+				    widget)->active =
+		    ops->scripturerefs;
 	}
 	if (main_check_for_global_option(mod_name, "UTF8HebrewPoints")) {
 		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
@@ -924,8 +932,8 @@ static void create_menu(GdkEventButton * event)
 	if (main_check_for_global_option(mod_name, "ThMLHeadings") ||
 	    (main_check_for_global_option(mod_name, "OSISHeadings"))) {
 		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
-		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
-				    widget)->active = ops->headings;   
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
+				    widget)->active = ops->headings;
 	}
 	if (main_check_for_global_option(mod_name, "ThMLVariants")) {
 		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
@@ -935,11 +943,11 @@ static void create_menu(GdkEventButton * event)
 		gtk_widget_show(all_readings_uiinfo[1].widget);	//"primary_reading");
 
 		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
-		
+
 	}
-	if(main_has_cipher_tag(mod_name))
+	if (main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[6].widget);
-	
+
 	gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
 					widgets.html_text);
