@@ -22,6 +22,9 @@
 #ifndef __STUDYPAD_H_
 #define __STUDYPAD_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <gnome.h>
 #include "editor/editor.h"
 
@@ -35,4 +38,7 @@ gint gui_open_studypad(gchar * file_name);
 GtkWidget *gui_create_studypad_control(GtkWidget * container,
 				gchar * filename);
 
+#ifdef __cplusplus
+}
+#endif	
 #endif

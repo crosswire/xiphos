@@ -188,8 +188,7 @@ show_prop_dialog (GSHTMLEditorControlData *cd, GtkHTMLEditPropertyType start)
 
 	if (cd->properties_dialog)
 		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
-	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Properties"),
-								     gnome_icon_theme_lookup_icon (cd->icon_theme, "stock_properties", 16, NULL, NULL));
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Properties"),PACKAGE_PIXMAPS_DIR"/gs2-48x48.png");
 
 	cur = cd->properties_types;
 	while (cur) {
@@ -331,6 +330,27 @@ insert_html (GtkWidget *mi, GSHTMLEditorControlData *cd)
 }
 #endif
 */
+static void
+bookmark_item (GtkWidget *mi, GSHTMLEditorControlData *cd)
+{
+	gchar *label = NULL;
+	
+	if(cd->studypad) {
+		label = g_strdup_printf("%s, %s",cd->filename,
+					"studypad");
+		gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
+				"studypad", cd->filename));
+		g_free(label);
+		g_message("studypad");
+	} else if(cd->personal_comments) {
+		label = g_strdup_printf("%s, %s",cd->key,
+					cd->filename);
+		gtk_dialog_run((GtkDialog *)gui_create_dialog_add_bookmark(label,
+				cd->filename, cd->key));
+		g_free(label);	
+	}
+}
+
 #define ADD_ITEM_BASE(f,t) \
                 g_object_set_data (G_OBJECT (menuitem), "type", GINT_TO_POINTER (GTK_HTML_EDIT_PROPERTY_ ## t)); \
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem); \
@@ -436,6 +456,8 @@ prepare_properties_and_menu (GSHTMLEditorControlData *cd, guint *items, guint *p
 	active = html_engine_is_selection_active (e);
 	ADD_STOCK (GTK_STOCK_UNDO, undo); 
 	ADD_STOCK (GTK_STOCK_REDO, redo); 
+	ADD_SEP;
+	ADD_ITEM (_("Bookmark"), bookmark_item, NONE);
 
 	ADD_SEP;
 	ADD_STOCK_SENSITIVE (GTK_STOCK_CUT,  cut, active);
@@ -455,7 +477,7 @@ prepare_properties_and_menu (GSHTMLEditorControlData *cd, guint *items, guint *p
 			ADD_ITEM (_("Remove Link"), remove_link, NONE);
 		}
 	}
-
+	
 	if (obj) {
 		if (cd->format_html) {
 			ADD_SEP;
