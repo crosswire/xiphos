@@ -329,6 +329,7 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	gui_change_module_and_key(pt->dictlex_mod, pt->dictlex_key);
 //	gui_set_dictlex_mod_and_key(pt->dictlex_mod, pt->dictlex_key);
 	page_change = FALSE;
+	//gtk_notebook_reorder_child(notebook,GTK_WIDGET(pt->page_widget),0);
 	//sets the book mod and key
 }
 
@@ -426,7 +427,6 @@ void gui_update_tab_struct(const gchar * text_mod,
 			   const gchar * commentary_mod, 
 			   const gchar * dictlex_mod, 
 			   const gchar * book_mod, 
-			  // const gchar * text_commentary_key, 
 			   const gchar * dictlex_key,
 			   const gchar * book_key)
 {	
@@ -526,38 +526,36 @@ void gui_open_module_in_new_tab(gchar *module)
 {
 	PASSAGE_TAB_INFO *pt;
 	gint module_type;
-
-	module_type = get_mod_type(module);
 	
 	if(!settings.browsing)
 		return;
+	
 	pt = g_new0(PASSAGE_TAB_INFO, 1);
+	module_type = get_mod_type(module);
+	
 	switch (module_type) {
 	case -1:
+		return;
 		break;
 	case TEXT_TYPE:
 		pt->text_mod = g_strdup(module);
 		pt->commentary_mod = g_strdup(cur_c->mod_name);
 		pt->dictlex_mod = g_strdup(cur_d->mod_name);
 		pt->book_mod = NULL;
-		
 		break;
 	case COMMENTARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(module);
 		pt->dictlex_mod = g_strdup(cur_d->mod_name);
 		pt->book_mod = NULL;
-		
 		break;
 	case DICTIONARY_TYPE:
 		pt->text_mod = g_strdup(settings.MainWindowModule);
 		pt->commentary_mod = g_strdup(cur_c->mod_name);
 		pt->dictlex_mod = g_strdup(module);
 		pt->book_mod = NULL;
-		
 		break;
 	case BOOK_TYPE:
-		
 		break;
 	}
 		
