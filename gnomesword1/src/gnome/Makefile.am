@@ -24,6 +24,8 @@ libgui_a_SOURCES =  \
     about_sword.h \
     create_shortcutbar_search.c \
     create_shortcutbar_search.h \
+    create_shortcutbar_viewer.c \
+    create_shortcutbar_viewer.h \
     splash.c \
     splash.h
 

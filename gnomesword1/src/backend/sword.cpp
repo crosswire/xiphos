@@ -81,6 +81,7 @@
 #include "gs_dictlex.h"
 #include "commentary.h"
 #include "gs_commentary.h"
+#include "search.h"
 
 
 typedef map < string, string > modDescMap;
@@ -679,13 +680,14 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	g_list_free(options);
 	g_list_free(settings->settingslist);
 	
-	shutdownverselistSBSWORD();
+	backend_shut_down_verselist();
 	gui_shutdownGBS();
 	backend_shutdownGBS();
 	gui_shutdownDL();
 	backend_shutdownDL();
 	gui_shutdownCOMM();
 	backend_shutdownCOMM();
+	backend_shutdown_search_results_display();
 	
 	//-- delete Sword managers
 	delete mainMgr;

@@ -1,7 +1,7 @@
 
 /*
  * GnomeSword Bible Study Tool
- * create_shortcutbar_search.h - create search group gui
+ * create_shortcutbar_viewer.h - create viewer group gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,17 +19,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-#ifndef _CREATE_SHORTCUTBAR_SEARCH_H
-#define _CREATE_SHORTCUTBAR_SEARCH_H
+#ifndef _CREATE_SHORTCUTBAR_VIEWER_H
+#define _CREATE_SHORTCUTBAR_VIEWER_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif	
 	
-	void gui_create_shortcutbar_search(GtkWidget * vp, SETTINGS * s);
+
+typedef struct _shortcutbar_viewer SB_VIEWER;
+struct _shortcutbar_viewer {
+	GtkWidget
+		*clist,
+		*notebook,
+		*tbtn_view_main,
+		*btn_save,
+		*html_widget,
+		*html_viewer_widget;
+};
+
+
+GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vp, SETTINGS * s);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* _CREATE_SHORTCUTBAR_SEARCH_H */
+#endif				/* _CREATE_SHORTCUTBAR_VIEWER_H */
 

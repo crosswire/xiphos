@@ -65,6 +65,7 @@ struct _settings {
 		*notebookGBS, /* notebook - gbs */
 		*notebookDL,  /* notebook - dict/lex */
 		*notebookCOMM,  /* notebook - dict/lex */
+		*verse_list_notebook,  
     
 	/* dock/undock stuff */
 		*dockSB, /* dock for shortcut bar */
@@ -232,6 +233,30 @@ struct _settings {
 		*settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
 
+typedef struct _search_opt SEARCH_OPT;
+struct _search_opt {
+	GtkWidget
+		*ckbCommentary,
+		*ckbPerCom, 
+		*ckbGBS, 
+		*rbPhraseSearch;
+	
+	gchar 
+		*module_name,
+		*upper_bond,
+		*lower_bond,
+		*search_string;
+	
+	int 
+		search_type,
+		search_params,
+		found_count;
+	
+	gboolean 
+		use_bonds,
+		use_lastsearch_for_bonds;
+};
+
 /*** function prototypes ***/
 
 void initGnomeSword(SETTINGS *settings, 
@@ -250,6 +275,8 @@ void addQuickmark(GtkWidget *app);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);
 void setautosave(gboolean choice);
+void percent_update(char percent, void *userData) ;
+void set_appbar_progress(gint unit);
 void fillSBtoolbars(GtkWidget *app,
 		GList *biblelist,
 		GList *commentarylist,
@@ -260,6 +287,7 @@ gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
 void display_about_module_dialog(gchar *modname, gboolean isGBS);
+void search_module(SETTINGS *s, SEARCH_OPT *so);
 
 #ifdef __cplusplus
 }

@@ -46,6 +46,7 @@
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
 #include "about_modules.h"
+#include "search.h"
 
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
@@ -67,7 +68,7 @@ gchar current_verse[80] = N_("Romans 8:28");    /* current verse showing in main
 gint dictpages, compages, textpages;
 
 SETTINGS *settings;
-
+GList *sblist;			/* for saving search results to bookmarks  */
 
 /*****************************************************************************
 * externs
@@ -83,13 +84,16 @@ extern GList
 
 extern gchar *mydictmod, *shortcut_types[], rememberlastitem[];
 
-extern gboolean havedict,       /* let us know if we have at least one lex-dict module */
- havecomm,                      /* let us know if we have at least one commentary module */
- havebible,                     /* let us know if we have at least one Bible text module */
- usepersonalcomments,           /* do we setup for personal comments - default is FALSE */
- autoSave, addhistoryitem;      /* do we need to add item to history */
+extern gboolean havedict, /* let us know if we have at least one lex-dict module */
+ havecomm,                /* let us know if we have at least one commentary module */
+ havebible,               /* let us know if we have at least one Bible text module */
+ usepersonalcomments,     /* do we setup for personal comments - default is FALSE */
+ autoSave, addhistoryitem; /* do we need to add item to history */
 
-extern gint groupnum4, iquickmarks;     /* number of items in bookmark menu  -- declared in gs_file.c */
+extern gint 
+	groupnum4, 
+	iquickmarks; /* number of items in bookmark menu  
+			-- declared in gs_file.c */
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
@@ -145,12 +149,7 @@ initGnomeSword(SETTINGS * s,
         biblepage =
             addnotebookpages(lookup_widget(s->app, "nbTextMods"),
                              biblemods, s->MainWindowModule);
-        /*
-           commpage =
-           addnotebookpages(lookup_widget(s->app, "notebook1"),
-           commentarymods, s->CommWindowModule);
-         */
-
+        
         gtk_notebook_set_page(GTK_NOTEBOOK
                               (lookup_widget(s->app, "nbPerCom")), 0);
         /*
@@ -169,9 +168,7 @@ initGnomeSword(SETTINGS * s,
                                 _("Verse Style"),
                                 (GtkMenuCallback)
                                 on_verse_style1_activate);
-
-        //loadquickmarks_programstart(s->app);      /* add quickmarks to menubar */
-
+        
         /*
            set Bible module to open notebook page 
          */
@@ -198,28 +195,7 @@ initGnomeSword(SETTINGS * s,
                 else
                         gtk_widget_hide(notebook);
         }
-
-        /*
-           set com module to open notebook page 
-         */
-        /*
-           if (havecomm) {          
-           if (commpage == 0)
-           changcurcomModSWORD(s->CommWindowModule, TRUE);
-           notebook = lookup_widget(s->app, "notebook1");
-           gtk_notebook_set_page(GTK_NOTEBOOK(notebook), commpage);
-           if (settings->comm_tabs) {
-           gtk_widget_show(notebook);
-           } else
-           gtk_widget_hide(notebook);
-           gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
-           GTK_SIGNAL_FUNC(on_notebook1_switch_page),
-           NULL);
-           }
-         */
-        /*
-           set personal commets notebook label and display module 
-         */
+	
         if (usepersonalcomments) {
                 /*
                    change personal comments module 
@@ -256,7 +232,7 @@ initGnomeSword(SETTINGS * s,
 	}
 }
 
-/**********************************************************************************************
+/*****************************************************************************
  * addnotebookpages - add pages to commentary and dictionary notebooks
  * notebook - notebook to add the pages to
  * list - list of modules - add one page per module
@@ -471,6 +447,27 @@ void setautosave(gboolean choice)
         settings->autosavepersonalcomments = choice;    /* remember our choice for next startup */
 }
 
+
+
+void percent_update(char percent, void *userData) 
+{	
+	char maxHashes = *((char *)userData);
+	float num;
+	char buf[80];	
+	static char printed = 0;
+
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+	while ((((float)percent)/100) * maxHashes > printed) {
+		sprintf(buf,"%f",(((float)percent)/100));
+		num = (float)percent/100;
+		gnome_appbar_set_progress((GnomeAppBar *)settings->appbar,num);
+		printed++;	
+	} 
+	while (gtk_events_pending ())
+		gtk_main_iteration (); 
+	printed = 0;
+}
 
 /*****************************************************************************
  *   -string_is_color- this code is from bluefish-0.6
@@ -706,6 +703,15 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
                 g_free(bufabout);
         if (to)
                 free(to);
+}
+
+void search_module(SETTINGS *s, SEARCH_OPT *so)
+{	
+	if(sblist)
+		g_list_free(sblist);
+	sblist = NULL;
+	sblist = backend_do_search(s, so);
+	fill_search_results_clist(sblist, so, s);	
 }
 
 /*****   end of file   ******/

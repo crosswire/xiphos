@@ -37,6 +37,7 @@
 #include "gs_viewtext_dlg.h"
 #include "sword.h"
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_information_dlg.h"
 #include "verselist_sb.h"
@@ -156,7 +157,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		++mybuf;
 		buf = g_strdup(mybuf);
 		modbuf = getmodnameSWORD(0);
-		getVerseListSBSWORD(modbuf, buf, settings);
+		display_verse_list(modbuf, buf, settings);
 		g_free(buf);
 		
 	} 
