@@ -1,3 +1,9 @@
+2004-01-20  Terry <tbiggs@users.sf.net>
+
+	* added a 'Sources' item to the module manager - for adding and removing
+	  remote sources. (will only add at the moment)
+	  
+
 2004-01-15  Moses <m-mcknight@users.sf.net>
 
 	* added a setting to remember the dimensions of the search sidebar

@@ -50,6 +50,8 @@
 
 using namespace sword;
   
+  
+  
 static char *get_sword_locale(void)
 {
 	const char *sys_local;
@@ -59,8 +61,8 @@ static char *get_sword_locale(void)
 	
 	sys_local = LocaleMgr::systemLocaleMgr.getDefaultLocaleName();
 	if(!strncmp(sys_local,"ru_RU",5)) {
-		//if(strlen(sys_local) > 12 ) {
-			/*for(i = 0; i < 12; i++) {
+		/*if(strlen(sys_local) > 12 ) {
+			for(i = 0; i < 12; i++) {
 				buf[i] = sys_local[i];
 				buf[i+1] = '\0';
 			}*/
@@ -156,19 +158,12 @@ void backend_init(void)
 	g_print("%s\n", _("Checking for SWORD Modules"));
 	free((char*)sword_locale);
 	backend_init_language_map();
-	/*
-	 * create sword mgrs
-	 */
+	/* create sword mgrs */
 	backend_init_managers();
 	
 	init_lists();
 	backend_setup_treekey();
 	
-	/*
-	 *   setup Personal Comments
-	 	
-	if(settings.havepercomm)
-		backend_setup_percomm();*/
 }
 
 
@@ -192,9 +187,7 @@ void backend_shutdown(int save_properties)
 {
 	backend_shutdown_treekey();
 	
-	/*
-	 * delete Sword managers
-	 */
+	/* delete Sword managers */
 	backend_delete_managers();
 	g_print("%s\n", _("SWORD is shutdown"));
 }
