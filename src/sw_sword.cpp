@@ -1,6 +1,6 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-  /*
+ /*
      * GnomeSword Bible Study Tool
      * sw_gnomesword.cpp
      * -------------------
@@ -90,9 +90,9 @@ using namespace sword;
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
 
-/***********************************************************************************************
+/*******************************************************
  * Sword globals 
-***********************************************************************************************/
+********************************************************/
 SWDisplay * comp1Display,	/* to display interlinear modules  a verse at a time */
     *dictDisplay,		/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
@@ -807,7 +807,7 @@ void FillDictKeysSWORD(void)
 	}
 }
 
-//-------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 void shutdownSWORD(void)	//-- close down GnomeSword program
 {
 	//char *msg;

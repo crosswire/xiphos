@@ -239,7 +239,7 @@ GtkWidget *create_dlgInterlinear(SETTINGS * s)
 	buttonIntSync = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
 				GTK_TOOLBAR_CHILD_BUTTON,
 				NULL,
-				_("button6"),
+				_("Sync"),
 				NULL, NULL,
 				tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref (buttonIntSync);
