@@ -48,6 +48,7 @@ struct _DLFindDialog {
 typedef struct _dldata DL_DATA;
 struct _dldata {
 	GtkWidget *html;
+	GtkWidget *frame;
 	GtkWidget *clist;
 	GtkWidget *entry;
 	GtkWidget *showtabs;

@@ -31,15 +31,12 @@
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
 
-/*
- * frontend
- */
+/* frontend */
 #include "main_menu.h"
 #include "about_modules.h"
+#include "shortcutbar_dialog.h"
 
-/*
- * main
- */ 
+/* main */ 
 #include "gs_gnomesword.h"
 #include "settings.h"
 #include "lists.h"
@@ -56,9 +53,7 @@
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
  
-/*
- * backend
- */
+/* backend */
 #include "search_.h"
 #include "sword.h"
 #include "interlinear.h"
@@ -101,7 +96,7 @@ static gchar *update_nav_controls(gchar * key);
  *****************************************************************************/
 void init_gnomesword(SETTINGS * s)
 {	
-	g_print("%s\n", "Initiating GnomeSWORD\n");
+	
 
 	/*
 	 *  setup shortcut bar 
@@ -137,7 +132,9 @@ void init_gnomesword(SETTINGS * s)
 	 */
 	if(havedict)
 		setup_dictlex(s,get_list(DICT_LIST));
-
+	
+	g_print("%s\n", "Initiating GnomeSWORD\n");
+	
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
 	/*
@@ -154,7 +151,7 @@ void init_gnomesword(SETTINGS * s)
 				_("Verse Style"), (GtkMenuCallback)
 				on_verse_style1_activate);
 
-	g_print("done\n");
+
 
 	/*
 	 * Set toggle state of buttons and menu items.
@@ -170,6 +167,8 @@ void init_gnomesword(SETTINGS * s)
 	if (s->showdevotional) {
 		display_devotional(s);
 	}
+	
+	g_print("done\n");
 }
 
 void gnomesword_shutdown(SETTINGS * s)
@@ -313,7 +312,7 @@ void UpdateChecks(SETTINGS * s)
 
 	if (!s->docked) {
 		s->docked = TRUE;
-		dock_undock(s);
+		gui_attach_detach_shortcutbar(s);
 	}
 	gtk_widget_show(s->app);
 
@@ -895,4 +894,21 @@ gchar *get_module_description(gchar * mod_name)
 {
 	return backend_get_module_description(mod_name);
 }
+
+
+const char *get_book_from_key(char *key)
+{
+	return backend_get_book_from_key(key);
+}
+
+int get_chapter_from_key(char *key)
+{
+	return backend_get_chapter_from_key(key);
+}
+
+int get_verse_from_key(char *key)
+{
+	return backend_get_verse_from_key(key);
+}
+
 

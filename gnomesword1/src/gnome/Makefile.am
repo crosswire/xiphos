@@ -28,6 +28,8 @@ libgui_a_SOURCES =  \
     _editor.h \
     _gbs.c \
     _gbs.h \
+    _percomm.c \
+    _percomm.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
@@ -44,17 +46,27 @@ libgui_a_SOURCES =  \
     create_shortcutbar_viewer.h \
     editor_menu.c \
     editor_menu.h \
+    editor_replace.c \
+    editor_replace.h \
+    editor_search.c \
+    editor_search.h \
+    editor_toolbar.c \
+    editor_toolbar.h \
     fileselection.c \
     fileselection.h \
     gbs_find.c \
     gbs_find.h \
     gui.c \
     gui.h \
+    interlinear_dialog.c \
+    interlinear_dialog.h \
     link_dialog.c \
     link_dialog.h \
     main_menu.c \
     main_menu.h \
     setup_druid.c \
     setup_druid.h \
+    shortcutbar_dialog.c \
+    shortcutbar_dialog.h \
     splash.c \
     splash.h

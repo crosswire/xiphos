@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * percomm.h - support for personal commentary modules
+ * editor_search.h - search dialog for editors
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -18,40 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef _GS_EDITOR_SEARCH_H_
+#define _GS_EDITOR_SEARCH_H_
 
-#ifndef __PERCOMM_H_
-#define __PERCOMM_H_
+typedef struct _GSHTMLSearchDialog  GSHTMLSearchDialog;
 
-#ifdef __cplusplus
-extern "C" {
+#include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
+
+GSHTMLSearchDialog * gs_editor_search_dialog_new(GtkHTML *html);
+void gs_editor_search_dialog_destroy(GSHTMLSearchDialog *d);
+
+
 #endif
-
-#include "settings.h"
-#include "gs_editor.h"
-
-typedef struct _percomm_data PC_DATA;
-struct _percomm_data {
-	GtkWidget *html;
-	GtkWidget *frame;
-	GtkWidget *showtabs;
-	gchar *mod_name;
-	gchar *mod_description;
-	gchar *search_string;
-	gchar *key;
-	gint mod_num;
-	gboolean is_locked;
-	GSHTMLEditorControlData *ec;
-};
-
-void save_percomm_note(gchar *note);
-void delete_percomm_note(void);
-void percomm_page_changed(gint page_num, PC_DATA * p);
-void set_percomm_page_and_key(gint page_num, gchar * key);
-void display_percomm(gchar * key);
-void setup_percomm(SETTINGS * s, GList *mods);
-void shutdown_percomm(void);
-
-#ifdef __cplusplus
-}
-#endif
-#endif	/* __PERCOMM_H_ */

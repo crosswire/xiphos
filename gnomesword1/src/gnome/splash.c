@@ -467,12 +467,12 @@ void gui_splash_init() {
 		gtk_object_ref(GTK_OBJECT(splash));
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+				PACKAGE_PIXMAPS_DIR "/sword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
 		icon_pixbuf = gdk_pixbuf_new_from_file(
-				PACKAGE_PIXMAPS_DIR "/sword.xpm");
+				PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
 
