@@ -70,9 +70,7 @@ extern "C" {
 	void createpopupmenus(SETTINGS *s,
 			      GList * bilbeDescription,
 			      GList * comDescription,
-			      GList * dictDescription, 
-			      GList * bookDescription, 
-			      GList * percomlist, 
+			      GList * dictDescription,
 			      GList * options);
 
 	void addmodstomenus(SETTINGS * s,

@@ -34,7 +34,6 @@ extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
-
 	
 typedef struct _GSFindDialog  GSFindDialog;
 struct _GSFindDialog {
