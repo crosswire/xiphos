@@ -30,7 +30,7 @@
 #include <stringmgr.h>
 #include <localemgr.h>
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
 #include <nsIDOMMouseEvent.h>
@@ -1300,7 +1300,7 @@ void main_change_verse(const char * bible, const char * commentary,
 void main_setup_displays(void)
 { 
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	backend->textDisplay = new GtkMozChapDisp(widgets.html_text,backend);
 	backend->RTOLDisplay = new GtkMozChapDisp(widgets.html_text,backend);
 	backend->commDisplay = new GTKMozEntryDisp(widgets.html_comm,backend);

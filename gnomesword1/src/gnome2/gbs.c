@@ -29,7 +29,7 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #endif
 
@@ -306,7 +306,7 @@ GtkWidget *gui_create_book_pane(void)
 	gtk_widget_show(box);
 
 
-#ifdef USE_MOZILLA	
+#ifdef USE_GTKMOZEMBED	
 	eventbox = gtk_event_box_new ();
 	gtk_widget_show (eventbox);
 	gtk_box_pack_start(GTK_BOX(box),
@@ -451,7 +451,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 	g_message("book on_use_current_dictionary_activate");
 #endif
 	gchar *dict_key =NULL;
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -532,7 +532,7 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 		
 	mod_name = main_module_name_from_description(dict_mod_description);
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
