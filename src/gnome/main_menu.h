@@ -45,9 +45,8 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void on_auto_save_notes1_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
-void on_search1_activate(GtkMenuItem * menuitem,
+void on_search_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
-
 void gui_create_main_menu(GtkWidget *app);
 void gui_install_menu_hints(GtkWidget *app);
 #endif	/* __MAIN_MENU__H_ */
