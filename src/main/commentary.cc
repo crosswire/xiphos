@@ -92,11 +92,11 @@ int main_save_module_options_comm(char * mod_name, char * option, int choice)
  *   
  */ 
 
-void main_set_commentary_key(char * mod_name, char * key)
+/*void main_set_commentary_key(char * mod_name, char * key)
 {
 	backend_set_commentary_key(mod_name, key);
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_commentary_key
@@ -113,11 +113,11 @@ void main_set_commentary_key(char * mod_name, char * key)
  *   char *
  */ 
 
-char *get_commentary_key(char *mod_name)
+/*char *get_commentary_key(char *mod_name)
 {
 	return backend_get_commentary_key(mod_name);
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_commentary_text
@@ -134,11 +134,11 @@ char *get_commentary_key(char *mod_name)
  *   char *
  */ 
 
-char *get_commentary_text(char * mod_name, char * key)
+/*char *get_commentary_text(char * mod_name, char * key)
 {
 	return backend_get_commentary_text(mod_name, key);
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_book_heading
@@ -155,7 +155,7 @@ char *get_commentary_text(char * mod_name, char * key)
  *   char *
  */ 
 
-char *get_book_heading(char * mod_name, char * key)
+/*char *get_book_heading(char * mod_name, char * key)
 {
 	gchar *retval = NULL;
 	gsize bytes_read;
@@ -172,7 +172,7 @@ char *get_book_heading(char * mod_name, char * key)
 	g_free(mykey);
 	return retval;
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_chap_heading
@@ -189,7 +189,7 @@ char *get_book_heading(char * mod_name, char * key)
  *   char *
  */ 
 
-char *get_chapter_heading(char * mod_name, char * key)
+/*char *get_chapter_heading(char * mod_name, char * key)
 {
 	gchar *retval = NULL;
 	gsize bytes_read;
@@ -206,7 +206,7 @@ char *get_chapter_heading(char * mod_name, char * key)
 	g_free(mykey);
 	return retval;
 }
-
+*/
 /******************************************************************************
  * Name
  *   navigate_commentary
@@ -223,10 +223,10 @@ char *get_chapter_heading(char * mod_name, char * key)
  *   char*
  */
  
-char* navigate_commentary(char * mod_name, gint direction)
+/*char* navigate_commentary(char * mod_name, gint direction)
 {
 	return backend_nav_module(1, mod_name, direction);
 }
-
+*/
 
 /******  end of file  ******/

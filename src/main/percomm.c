@@ -89,68 +89,6 @@ int load_percomm_options(char * modName, char * option)
 }
 
 
-/******************************************************************************
- * Name
- *   get_percomm_key
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   char *get_percomm_key(void)
- *
- * Description
- *    
- *
- * Return value
- *   char *
- */ 
-
-char *get_percomm_key(char * module_name)
-{
-	return backend_get_key_from_module(4, module_name);
-}
-
-/******************************************************************************
- * Name
- *   get_percomm_text
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   char *get_percomm_text(char * key)
- *
- * Description
- *    
- *
- * Return value
- *   char *
- */ 
-
-char *get_percomm_text(char * key)
-{
-	return backend_get_percomm_text(key);
-}
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-void set_percomm_key(char * key)
-{
-	backend_set_percomm_key(key);
-}
 
 /******************************************************************************
  * Name
@@ -168,11 +106,11 @@ void set_percomm_key(char * key)
  *   void
  */ 
 
-void change_percomm_module(char * module_name)
+/*void change_percomm_module(char * module_name)
 {
 	backend_set_module(7, module_name);//backend_set_percomm_module(mod_name);
 }
-
+*/
 /******************************************************************************
  * Name
  *   is_personal_comment
@@ -189,11 +127,11 @@ void change_percomm_module(char * module_name)
  *   int
  */ 
 
-int is_personal_comment(char * mod_name)
+/*int is_personal_comment(char * mod_name)
 {
 	return backend_is_personal_comment_module(mod_name);
 }
-
+*/
 
 /******************************************************************************
  * Name

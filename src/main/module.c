@@ -44,39 +44,18 @@
 
 extern int search_dialog;
 
-
-const char *get_mod_config_entry(const char * module_name, const char * entry)
+/*
+const char *main_get_mod_config_entry(const char * module_name, const char * entry)
 {
 	return backend_get_module_config_entry(module_name, entry);
 }
+*/
 
-
-char *get_key_from_module(int manager, char *module_name)
+/*char *get_key_from_module(int manager, char *module_name)
 {
 	return backend_get_key_from_module(manager, module_name);
 }
-/******************************************************************************
- * Name
- *  get_preverse_header
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   char *get_preverse_header(char * module_name, char * key, int pvHeading)	
- *
- * Description
- *    
- *
- * Return value
- *   char *
- */
-
-char *get_preverse_header(char * module_name, char * key, int pvHeading)
-{
-	backend_get_preverse_header(module_name, key, pvHeading);
-}
-
-
+*/
 /******************************************************************************
  * Name
  *  get_module_key
@@ -154,10 +133,11 @@ char *get_module_name(void)
 	}
 	return NULL;
 }
-char *get_crossref(char * mod_name, char * key, char * note_number)
+/*char *get_crossref(char * mod_name, char * key, char * note_number)
 {
 	return backend_get_crossref(mod_name,  key, note_number);
 }
+*/
 /******************************************************************************
  * Name
  *   get_footnote_type
@@ -174,11 +154,11 @@ char *get_crossref(char * mod_name, char * key, char * note_number)
  *   char*
  */
 
-const char *get_footnote_type(char * module_name, char * key, char * note_number)
+/*const char *get_footnote_type(char * module_name, char * key, char * note_number)
 {	
 	return backend_get_footnote_type(module_name, key, note_number);
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_footnote_body
@@ -195,11 +175,11 @@ const char *get_footnote_type(char * module_name, char * key, char * note_number
  *   char*
  */
 
-char *get_footnote_body(char * mod_name, char * key, char * note_number)
+/*char *get_footnote_body(char * mod_name, char * key, char * note_number)
 {
 	return backend_get_footnote_body(mod_name, key, note_number);
 }
-
+*/
 /******************************************************************************
  * Name
  *   get_display_level
@@ -216,11 +196,11 @@ char *get_footnote_body(char * mod_name, char * key, char * note_number)
  *   int
  */
 
-int get_display_level(char * module_name)
+/*int get_display_level(char * module_name)
 {
 	return backend_get_display_level(module_name);
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -238,12 +218,12 @@ int get_display_level(char * module_name)
  *   int
  */
 
-int is_module_rtl(char * mod_name)
+/*int is_module_rtl(char * mod_name)
 {
 	return backend_is_module_rtl(mod_name);
 	
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -262,7 +242,7 @@ int is_module_rtl(char * mod_name)
  *   int
  */
 
-int do_module_search(char * module_name ,const char * search_string, 
+/*int do_module_search(char * module_name ,const char * search_string, 
 		int search_type, int search_params, int dialog)
 {
 	search_dialog = dialog;
@@ -271,27 +251,7 @@ int do_module_search(char * module_name ,const char * search_string,
 			     search_type, search_params);
 }
 
-
-/******************************************************************************
- * Name
- *  get_module_description
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   gchar *get_module_description(gchar * module_name)	
- *
- * Description
- *    
- *
- * Return value
- *   gchar *
- */ 
-
-char *get_module_description(char * module_name)
-{
-	return backend_get_module_description(module_name);
-}
+*/
 
 
 
@@ -312,7 +272,7 @@ char *get_module_description(char * module_name)
  *   char *
  */
  
-char *get_module_text(int manager, char * mod_name, char * key)
+/*char *get_module_text(int manager, char * mod_name, char * key)
 {
 	gchar *retval = NULL;
 	gsize bytes_read;
@@ -330,71 +290,7 @@ char *get_module_text(int manager, char * mod_name, char * key)
 	return retval;	
 }
 
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   	
- *
- * Description
- *   
- *
- * Return value
- *   char *
- */
-
-char *get_striptext(int manager, char *module_name, char *key)
-{
-	return backend_get_striptext(manager, module_name, key);
-}
-
-
-
-/******************************************************************************
- * Name
- *   check_for_module
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   int check_for_module(char * mod_name)
- *
- * Description
- *    check for presents of a module by name
- *
- * Return value
- *   int
- */
- 
-int check_for_module(char * mod_name)
-{
-	return backend_check_for_module(mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  get_module_number
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   int get_module_number(char *module_name, char *module_type)	
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int get_module_number(const char *module_name, const char *module_type)
-{
-	return backend_get_module_page(module_name, module_type);
-}
+*/
 
 
 
@@ -414,11 +310,11 @@ int get_module_number(const char *module_name, const char *module_type)
  *   gchar *
  */ 
 
-char *get_mod_about_info(char * mod_name)
+/*char *get_mod_about_info(char * mod_name)
 {
 	return backend_get_mod_about_info(mod_name);
 }
-
+*/
 
 
 /******************************************************************************
@@ -436,12 +332,12 @@ char *get_mod_about_info(char * mod_name)
  * Return value
  *   int
  */ 
-
+/*
 int module_is_locked(char * mod_name)
 {
 	return backend_module_is_locked(mod_name);
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -459,11 +355,11 @@ int module_is_locked(char * mod_name)
  *   char *
  */ 
 
-char *get_cipher_key(char *mod_name)
+/*char *get_cipher_key(char *mod_name)
 {
 	return backend_get_cipher_key(mod_name);
 }
-
+*/
 
 /******************************************************************************
  * Name
@@ -480,33 +376,13 @@ char *get_cipher_key(char *mod_name)
  * Return value
  *   int
  */ 
-
+/*
 int has_cipher_tag(char *mod_name)
 {
 	return backend_has_cipher_tag(mod_name);
 }
+*/
 
-
-/******************************************************************************
- * Name
- *  get_mod_type
- *
- * Synopsis
- *   #include "main/module.h"
- *
- *   int get_mod_type(char * mod_name)
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int get_mod_type(char * mod_name)
-{
-	return backend_get_mod_type(mod_name);
-}
 /******************************************************************************
  * Name
  *  module_name_from_description

@@ -40,38 +40,6 @@
 #include "backend/config.hh"
 #include "backend/sword.h"
 
-int search_dialog;
-/******************************************************************************
- * Name
- *  search_percent_update
- *
- * Synopsis
- *   #include "main/search.h"
- *
- *   void search_percent_update(char percent, void *userData)	
- *
- * Description
- *    updates the progress bar during shortcut bar search
- *
- * Return value
- *   void
- */ 
-
-void search_percent_update(char percent, void *userData)
-{
-	if(search_dialog)
-		gui_search_dialog_appbar_update(percent, userData);
-	else {
-#ifdef USE_GNOME2
-		gui_search_update_sidebar(percent, userData);
-#else
-		gui_search_update(percent, userData);
-#endif
-
-	}
-}
-
-
 /******************************************************************************
  * Name
  *   search_dialog_appbar_update
@@ -90,7 +58,7 @@ void search_percent_update(char percent, void *userData)
 
 void search_dialog_appbar_update(char percent, void *userData)
 {
-	gui_search_dialog_appbar_update(percent, userData);
+//	gui_search_dialog_appbar_update(percent, userData);
 }
 
 

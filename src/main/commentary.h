@@ -27,12 +27,12 @@ extern "C" {
 #endif
 	
 int main_save_module_options_comm(char * mod_name, char * option, int choice);	
-void main_set_commentary_key(char * mod_name, char * key);
-char *get_commentary_key(char *mod_name);	
-char *get_commentary_text(char * mod_name, char * key);
-char *get_book_heading(char * mod_name, char * key);
-char *get_chapter_heading(char * mod_name, char * key);
-char *navigate_commentary(char * mod_name, int direction);
+//void main_set_commentary_key(char * mod_name, char * key);
+//char *get_commentary_key(char *mod_name);	
+//char *get_commentary_text(char * mod_name, char * key);
+//char *get_book_heading(char * mod_name, char * key);
+//char *get_chapter_heading(char * mod_name, char * key);
+//char *navigate_commentary(char * mod_name, int direction);
 	
 #ifdef __cplusplus
 }

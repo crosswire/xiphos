@@ -36,7 +36,6 @@
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
-#include "backend/dialogs.hh"
 #include "backend/mgr.hh"
 
 static int of2tf(const gchar * on_off)
@@ -58,8 +57,8 @@ static gchar *tf2of(int true_false)
 
 static void set_dialog_global_option(DIALOG_DATA * t, char * option, gboolean choice)
 {
-	ModuleDialogs* be = (ModuleDialogs*)t->backend;	
-	SWMgr *mgr = be->get_mgr();
+	BackEnd* be = (BackEnd*)t->backend;	
+	SWMgr *mgr = be->get_display_mgr();
 	char *on_off;
 
 	on_off = tf2of(choice);

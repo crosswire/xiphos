@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include <gnome.h>
+	
 #include "main/module.h"
 #include "main/key.h"	
 #include "main/configs.h"	
@@ -53,14 +54,20 @@ extern "C" {
 
 //void set_global_option(int manager, char * option, gboolean choice);
 void delete_module_mgr(void);
-int gbs_treekey_get_parent(unsigned long offset);
 const char *get_sword_version(void);
-char *get_search_results_text(char * mod_name, char * key);
 char *get_path_to_mods(void);
 void init_sword(void);
 void shutdown_backend(void);
-char *get_text_from_offset(char * module_name, unsigned long offset);
-int set_module(int manager, char * module_name);
+//int set_module(int manager, char * module_name);
+char *main_get_crossref(char * mod_name, char * key, 
+						char * note_number);
+char *main_get_footnote_body(char * mod_name, char * key, 
+						char * note_number);
+char *main_get_search_results_text(char * mod_name, char * key);
+void main_locked_module_display(GtkWidget * html_widget,
+				  gchar * mod_name, gchar * cipher_key);
+void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
+		   gchar * text, gchar * key, gboolean show_key);
 void main_setup_displays(void);
 void main_display_book(const char * mod_name, char * key);
 void main_display_commentary(const char * mod_name, const char * key);
@@ -71,6 +78,16 @@ void main_change_verse(const char * bible, const char * commentary,
 void main_setup_new_displays(void);
 void main_dictionary_entery_changed(char * mod_name);
 const char *main_get_module_language(const char *module_name);
+int main_check_for_global_option(char * mod_name, char * option);
+int main_has_cipher_tag(char *mod_name);
+int main_is_module(char * mod_name);
+const char *main_get_mod_config_entry(const char * module_name, const char * entry);
+char *main_get_mod_about_info(char * mod_name);
+char *main_get_striptext(char *module_name, char *key);
+char *main_get_rendered_text(char *module_name, char *key);
+int main_get_mod_type(char * mod_name);
+char *main_get_module_description(char * module_name);
+
 
 #ifdef __cplusplus
 }

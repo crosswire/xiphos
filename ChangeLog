@@ -1,3 +1,16 @@
+2004-04-21 Terry <tbiggs@users.sf.net>
+
+	* added main/search_dialog.cc and main/search_dialog.h
+	* added main/search_sidebar.cc and main/search_sidebar.h
+	* removed backend/dialogs.cc and backend/dialogs.hh
+
+
+2004-04-07 Terry <tbiggs@users.sf.net>
+
+	* removed backend/tree.cc and backend/tree.hh
+	* removed gui/gtkhtml_display.h and gnome2/gtkhtml_display.c
+		
+
 2004-04-02 Terry <tbiggs@users.sf.net>
 
 	* added gnome2/note_editor.c and gui/note_editor.h
@@ -28,7 +41,6 @@
 	* completely reworked gnome2/bibletext_dialog.c
 	* removed gui/bibletext_menu.h and gnome2/bibletext_menu.c
 	* added main/module_dialogs.cc and main/module_dialogs.h
-	* added backend/dialogs.cc and backend/dialogs.hh
 	
 	
 2004-03-11  Terry <tbiggs@users.sf.net>

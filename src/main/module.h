@@ -26,29 +26,26 @@
 extern "C" {
 #endif
 
-const char *get_mod_config_entry(const char * module_name, const char * entry);
-char *get_key_from_module(int manager, char *module_name);
-char *get_preverse_header(char * module_name, char * key, int pvHeading);
+//const char *main_get_mod_config_entry(const char * module_name, const char * entry);
+//char *get_key_from_module(int manager, char *module_name);
 char *get_module_key(void);
 char *get_module_name(void);
-const char *get_footnote_type(char * module_name, char * key, char * note_number);
-char *get_crossref(char * mod_name, char * key, char * note_number);
-char *get_footnote_body(char * mod_name, char * key, char * note_number);
-int get_display_level(char * module_name);	
-int is_module_rtl(char * mod_name);
-int get_module_number(const char *module_name, const char *module_type);
-int get_mod_type(char * mod_name);
-int do_module_search(char * module_name ,const char *search_string, 
-		  int search_type, int search_params, int dialog);
-char *get_module_description(char * module_name);
-int module_is_locked(char * mod_name);
-char *get_cipher_key(char *mod_name);
-int has_cipher_tag(char *mod_name);
-int check_for_module(char * mod_name);
-char *get_mod_about_info(char * mod_name);
+//const char *get_footnote_type(char * module_name, char * key, char * note_number);
+//char *get_crossref(char * mod_name, char * key, char * note_number);
+//char *get_footnote_body(char * mod_name, char * key, char * note_number);
+//int get_display_level(char * module_name);	
+//int is_module_rtl(char * mod_name);
+//int get_module_number(const char *module_name, const char *module_type);
+//int do_module_search(char * module_name ,const char *search_string, int search_type, int search_params, int dialog);
+//char *get_module_description(char * module_name);
+//int module_is_locked(char * mod_name);
+//char *get_cipher_key(char *mod_name);
+//int has_cipher_tag(char *mod_name);
+//int main_is_module(char * mod_name);
+//char *get_mod_about_info(char * mod_name);
 
-char *get_module_text(int manager, char * module_name, char * key);
-char *get_striptext(int manager, char *module_name, char *key);
+//char *get_module_text(int manager, char * module_name, char * key);
+//char *get_striptext(int manager, char *module_name, char *key);
 char *module_name_from_description(char *description);
 
 #ifdef __cplusplus

@@ -126,7 +126,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 {
 	gchar *str;
 	gchar *text;
-	text = get_striptext(4, mod, key);
+	text = main_get_striptext(mod, key);
 	str = remove_linefeeds(text);
 	if (str) {
 		gnome_appbar_set_status(GNOME_APPBAR(appbar), str);
@@ -172,7 +172,7 @@ static void deal_with_notes(const gchar * url, gboolean clicked)
 	work_buf = g_strsplit (buf1,".",3);
 	
 	if(clicked && !strcmp(work_buf[1], "x")) {
-		tmpbuf = get_crossref(settings.MainWindowModule,
+		tmpbuf = main_get_crossref(settings.MainWindowModule,
 					work_buf[0],
 					work_buf[2]);
 		if (tmpbuf)
@@ -182,7 +182,7 @@ static void deal_with_notes(const gchar * url, gboolean clicked)
 					  "bible"),
 					  tmpbuf);
 	} else if(!clicked){
-		tmpbuf = get_footnote_body(settings.MainWindowModule,
+		tmpbuf = main_get_footnote_body(settings.MainWindowModule,
 					work_buf[0],
 					work_buf[2]);
 		if (tmpbuf == NULL)
@@ -243,7 +243,7 @@ static void deal_with_refs(const gchar * url)
 			++i;
 		}
 	}
-	if (check_for_module(newmod)) {
+	if (main_is_module(newmod)) {
 		modbuf = newmod;
 	} else {
 		modbuf = xml_get_value("modules", "bible");
@@ -251,10 +251,10 @@ static void deal_with_refs(const gchar * url)
 	buf = g_strdup(newref);
 	mod_name = g_strdup(modbuf);
 
-	if (get_mod_type(modbuf) == DICTIONARY_TYPE) {
+	if (main_get_mod_type(modbuf) == DICTIONARY_TYPE) {
 		/* we have a dict/lex module 
 		   so we don't need to get a verse list */
-		gui_display_dictlex_in_sidebar(mod_name, buf);
+		main_sidebar_display_dictlex(mod_name, buf);
 	} else {
 		gui_display_verse_list_in_sidebar(settings.currentverse,
 						  mod_name,
@@ -323,10 +323,10 @@ static void deal_with_storngs(const gchar * url, gboolean clicked)
 		if (settings.inDictpane)
 			main_display_dictionary(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(modbuf_viewer, buf);		
+			main_sidebar_display_dictlex(modbuf_viewer, buf);		
 	} else {
 		mybuf =
-		    get_module_text(get_mod_type(modbuf), modbuf, buf);
+		    main_get_rendered_text(modbuf, buf);
 		if (mybuf) {
 			//gui_display_hint_in_viewer(mybuf);
 			show_in_appbar(widgets.appbar, buf, modbuf);
@@ -374,12 +374,12 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 		if (modbuf[0] == 'x' && modbuf[1] == '-')
 			modbuf += 2;
 		if (!strncmp(modbuf, "Robinson", 7)) {
-			if(check_for_module("Robinson"))
+			if(main_is_module("Robinson"))
 				modbuf = "Robinson";
 			else
 				return;
 		} else if (!strncmp(modbuf, "none", 4)) {
-			if(check_for_module("Packard"))
+			if(main_is_module("Packard"))
 				modbuf = "Packard";
 			else			
 				return;
@@ -413,10 +413,10 @@ static void deal_with_morphs(const gchar * url, gboolean clicked)
 		if (settings.inDictpane)
 			main_display_dictionary(modbuf, buf);
 		if (settings.inViewer)
-			gui_display_dictlex_in_sidebar(modbuf, buf);
+			main_sidebar_display_dictlex(modbuf, buf);
 	} else {
 		mybuf =
-		    get_module_text(get_mod_type(modbuf), modbuf, buf);
+		    main_get_rendered_text(modbuf, buf);
 		if (mybuf) {
 			//gui_display_in_hint_window(mybuf);
 			show_in_appbar(widgets.appbar, buf, modbuf);
@@ -844,7 +844,7 @@ static struct footer_info *footer_info_new(GtkHTML * html,
 	struct footer_info *info;
 
 	info = g_new(struct footer_info, 1);
-	info->local_font = gnome_font_find_closest("Helvetica", 10.0);
+	info->local_font = gnome_font_find_closest("Luxi Sans", 10.0);
 
 	if (info->local_font)
 		*line =

@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gui/gtkhtml_display.h"
+//#include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
 #include "gui/html.h"
 #include "gui/widgets.h"
@@ -316,7 +316,7 @@ void gui_create_gbs_dialog(DIALOG_DATA * dlg)
 	gtk_object_set_data(GTK_OBJECT(dlg->dialog), "dlg->dialog",
 			    dlg->dialog);
 	gtk_window_set_title(GTK_WINDOW(dlg->dialog),
-			     get_module_description(dlg->mod_name));
+			     main_get_module_description(dlg->mod_name));
 	gtk_window_set_default_size(GTK_WINDOW(dlg->dialog), 525, 306);
 	gtk_window_set_policy(GTK_WINDOW(dlg->dialog), TRUE, TRUE,
 			      FALSE);

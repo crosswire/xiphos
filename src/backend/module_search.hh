@@ -19,14 +19,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _DIALOGS_HH_
-#define _DIALOGS_HH_
+#ifndef _MODULE_SEARCH_HH_
+#define _MODULE_SEARCH_HH_
 
 	
+#include <gnome.h>
 #include <swmgr.h>
 #include <swbuf.h>
 #include <treekeyidx.h>
-#include "main/lists.h"
+#include <versekey.h>
 
 using std::string;
 using std::map;
@@ -34,9 +35,16 @@ using std::list;
 using namespace sword;
 	
 
-class ModuleDialogs {
+class ModuleSearch {
 	SWMgr *mgr;
 	TreeKeyIdx *tree_key;
+	ListKey results;
+	ListKey search_range;
+	ListKey	search_scope_list; //--search list for searching verses found on last search
+	ListKey verses;
+	VerseKey search_scope_bounds; //----- sets lower and upper search bounds
+	SWKey *current_scope;
+	SWModule *search_module;	
 	
 public:	
 	SWModule *mod;
@@ -45,10 +53,12 @@ public:
 	SWDisplay *entryDisplay;	
 	SWDisplay *chapDisplay;
 
-	ModuleDialogs();
-	~ModuleDialogs();
+	ModuleSearch();
+	~ModuleSearch();
 	void init_SWORD();
-	void init_lists(MOD_LISTS * mods);
+//	void init_lists(MOD_LISTS * mods);
+
+	char *get_config_entry(char * entry);
 	void setup_displays(void);
 
 	GList *fill_Bible_books(int testament);
@@ -72,6 +82,7 @@ public:
 	void delete_entry();
 	
 	int module_type(void);
+	char *module_description(char *mod_name);
 	const char *module_get_language(const char *module_name);
 	int module_has_testament(int testament);
 	
@@ -84,7 +95,15 @@ public:
 	int treekey_first_child(unsigned long offset);
 	char *treekey_get_local_name(unsigned long offset);
 	int treekey_next_sibling(unsigned long offset);
-	
+	void set_listkey_position(char pos);
+	const char *get_next_listkey(void);
+	int clear_scope(void);
+	int clear_search_list(void);
+	int set_range(char * list);
+	void set_scope2range(void);
+	int set_scope2last_search(void);
+	int do_module_search(char *module_name, const char *search_string, 
+				int search_type, int search_params, int is_dialog);
 	
 	SWMgr *get_mgr(void) {return(mgr);};
 };
