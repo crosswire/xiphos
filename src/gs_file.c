@@ -127,6 +127,7 @@ gint setDiretory(void)
 	gint retval = 0;
 	gchar 
 		swDir[256],
+		*gsbmDir,		/* bookmarks directory for gnomesword-0.7.0 and up */
 		bmFile[300];
 	
 	/* get home dir */
@@ -138,15 +139,16 @@ gint setDiretory(void)
 	/* set gSwordDir to $home + .GnomeSword */
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
-	/* set bookmarks dir to swbmDir + .sword */
-	sprintf(swDir, "%s/%s",homedir,".sword/");
 	/* set bookmarks dir to swbmDir + .sword/bookmarks */
-	swbmDir = g_new(char, strlen(homedir) + strlen(".sword/bookmarks") + 2);
-	sprintf(swbmDir, "%s/%s",homedir,".sword/bookmarks/");
-	/*old bookmarks */
+	//swbmDir = g_new(char, strlen(homedir) + strlen(".sword/bookmarks") + 2);
+	sprintf(swDir, "%s/%s",homedir,".sword/bookmarks/");
+	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
+	gsbmDir = g_new(char, strlen(homedir) + strlen(".GnomeSword/bookmarks") + 2);
+	sprintf(gsbmDir, "%s/%s",homedir,".GnomeSword/bookmarks/");
+	/*shortcutbar dir */
 	shortcutbarDir = g_new(char, strlen(gSwordDir) + strlen("shortcutbar") + 2);	
 	sprintf(shortcutbarDir, "%s/%s", gSwordDir, "shortcutbar");	
-	if (access(shortcutbarDir, F_OK) == -1) {	/* if .sword does not exist create it */
+	if (access(shortcutbarDir, F_OK) == -1) {	/* if shortcutbar does not exist create it */
 		if ((mkdir(shortcutbarDir, S_IRWXU)) == 0) {
 			// do nothing
 		} else {
@@ -170,30 +172,39 @@ gint setDiretory(void)
 			gtk_exit(1);
 		}
 	}
+	
 	if (access(fnconfigure, F_OK) == -1) {
 		retval = 1; 
 		//createconfig();
 	}
-	if (access(swDir, F_OK) == -1) {	/* if .sword does not exist create it */
-		if ((mkdir(swDir, S_IRWXU)) == 0) {
+	
+	if (access(swDir, F_OK) == 0) {	/* if .sword/bookmarks does exist rename it to .GnomeSword/bookmarks*/
+		if ((rename(swDir, gsbmDir)) == 0) {
+			// do nothing
+		} else { 
+			g_warning("can't rename bookmarks dir");
+		}
+	}  
+	
+	/* set swbmDir to gsbmDir */	
+	swbmDir = g_new(char, strlen(gsbmDir) + 2);
+	sprintf(swbmDir, "%s",gsbmDir);
+	g_free(gsbmDir);
+	
+	if (access(swbmDir, F_OK) == -1) {	/* if .GnomeSword/bookmarks does not exist create it */
+		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
 			// do nothing
 		} else {
-			printf("can't create bookmarks dir and files");
+			g_warning("can't create bookmarks dir and files");
 		}
 	} 
-	if (access(swbmDir, F_OK) == -1) {	/* if swbmDir does not exist create it */
-		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
-			//have_bookmarks = 0;
-		} else { 
-			printf("can't create bookmarks dir and files");
-		}
-	} 
+	
 	sprintf(bmFile, "%s/%s",swbmDir,"personal.conf");
 	if (access(bmFile, F_OK) == -1) {	
 		if(retval == 1) retval = 3;
 			else retval = 2;		
 	} 
-	//g_warning("retval = %d",retval);
+	
 	return retval; 
 }
 

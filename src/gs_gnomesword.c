@@ -234,14 +234,15 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		if(commpage == 0)
 			changcurcomModSWORD(settings->CommWindowModule, TRUE);  		
 		notebook = lookup_widget(app,"notebook1");
-		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
-                                        GTK_SIGNAL_FUNC (on_notebook1_switch_page),
-                                        NULL);		
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), commpage);		
-                if(settings->comm_tabs) 
+                if(settings->comm_tabs) {
 			gtk_widget_show(notebook);
+		}
                 else 
 			gtk_widget_hide(notebook);
+		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
+                                        GTK_SIGNAL_FUNC (on_notebook1_switch_page),
+                                        NULL);	
         }else 
 		gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
 		
