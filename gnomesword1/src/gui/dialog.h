@@ -36,6 +36,8 @@ struct _gs_dialog {
 	
 	GtkWidget *dialog;
 	
+	gchar *title;
+	
 	gchar *text1;
 	gchar *text2;
 	gchar *text3;
@@ -68,4 +70,3 @@ gint gui_gs_dialog(GS_DIALOG * info);
 #endif
 
 #endif
-

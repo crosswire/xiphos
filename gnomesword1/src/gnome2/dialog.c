@@ -250,7 +250,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	gs_dialog = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(gs_dialog), "gs_dialog",
 			    gs_dialog);
-	gtk_window_set_title(GTK_WINDOW(gs_dialog), settings.program_title);
+	gtk_window_set_title(GTK_WINDOW(gs_dialog), info->title); //settings.program_title);
 	gtk_window_set_policy(GTK_WINDOW(gs_dialog), TRUE, TRUE, FALSE);
 
 	info->dialog = gs_dialog;
@@ -509,6 +509,7 @@ GS_DIALOG *gui_new_dialog(void)
 	info = g_new0(GS_DIALOG, 1);
 	
 	info->dialog = NULL;
+	info->title = NULL;
 	info->text1 = NULL;
 	info->text2 = NULL;
 	info->text3 = NULL;

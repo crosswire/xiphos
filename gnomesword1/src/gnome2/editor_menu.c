@@ -93,6 +93,7 @@ void gui_new_activate(GtkMenuItem * menuitem,
 		gint test;
 
 		info = gui_new_dialog();
+		info->title = N_("Save File?");
 		info->label_top = ecd->filename;
 		info->label_middle = N_("has been modified.");
 		info->label_bottom = N_("Do you wish to save it?");
@@ -148,6 +149,7 @@ static void on_open_activate(GtkMenuItem * menuitem,
 		gint test;
 
 		info = gui_new_dialog();
+		info->title = N_("Save File?");
 		info->label_top = ecd->filename;
 		info->label_middle = N_("has been modified.");
 		info->label_bottom = N_("Do you wish to save it?");
@@ -252,6 +254,7 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 
 		//key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
+		info->title = N_("Delete Note?");
 		info->label_top = N_("Are you sure you want");
 		info->label_middle = N_("to delete the note for");
 		info->label_bottom = ecd->key;
@@ -577,6 +580,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
+	info->title = N_("Link?");
 	info->label_top = N_("Add Reference Link");
 	info->text1 = g_strdup("");
 	info->label1 = N_("Reference: ");

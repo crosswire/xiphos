@@ -110,7 +110,7 @@ gint gui_open_studypad_dialog(gchar * file_name)
 			      (widgets.studypad_dialog),
 			      TRUE, TRUE, TRUE);
 	gtk_window_set_title((GtkWindow *)widgets.studypad_dialog,
-                                (const gchar*)settings.program_title);
+                                (const gchar*)N_("StudyPad"));
 	gtk_widget_show(widgets.studypad_dialog);
 
 	widgets.html_studypad =
