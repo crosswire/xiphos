@@ -202,7 +202,7 @@ static gint string_is_color(gchar * color)
 			return 0;
 		}
 	}
-	//g_warning("string_is_color, %s is color\n", color);
+	g_print("string_is_color, %s is color\n", color);
 	return 1;
 
 }
@@ -1107,8 +1107,14 @@ static void setcolorpickersColor(GtkWidget * gcpTextBG,
 	gdouble *color;
 	gushort a = 000000;
 
-	if (string_is_color(settings.bible_bg_color)) {
+	if (string_is_color(settings.bible_bg_color)) { 
 		color = hex_to_gdouble_arr(settings.bible_bg_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpTextBG), color[0],
+					  color[1], color[2], a);
+	}
+	else {
+		color = hex_to_gdouble_arr("#FFFFFF");
 		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
 					  (gcpTextBG), color[0],
 					  color[1], color[2], a);
@@ -1120,9 +1126,21 @@ static void setcolorpickersColor(GtkWidget * gcpTextBG,
 					  color[0], color[1], color[2],
 					  a);
 	}
+	else {
+		color = hex_to_gdouble_arr("#000000");
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpText), color[0],
+					  color[1], color[2], a);
+	}
 
 	if (string_is_color(settings.currentverse_color)) {
 		color = hex_to_gdouble_arr(settings.currentverse_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpCurrentverse), color[0],
+					  color[1], color[2], a);
+	}
+	else {
+		color = hex_to_gdouble_arr("#339766");
 		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
 					  (gcpCurrentverse), color[0],
 					  color[1], color[2], a);
@@ -1135,9 +1153,21 @@ static void setcolorpickersColor(GtkWidget * gcpTextBG,
 					  (gcpTextVerseNums), color[0],
 					  color[1], color[2], a);
 	}
+	else {
+		color = hex_to_gdouble_arr("#0000CF");
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpTextVerseNums), color[0],
+					  color[1], color[2], a);
+	}
 
 	if (string_is_color(settings.link_color)) {
 		color = hex_to_gdouble_arr(settings.link_color);
+		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
+					  (gcpTextLinks), color[0],
+					  color[1], color[2], a);
+	}
+	else {
+		color = hex_to_gdouble_arr("#878787");
 		gnome_color_picker_set_i8(GNOME_COLOR_PICKER
 					  (gcpTextLinks), color[0],
 					  color[1], color[2], a);

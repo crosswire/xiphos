@@ -849,6 +849,7 @@ void gui_setup_text(GList * mods)
 		tmp = g_list_next(tmp);
 	}
 
+	cur_t = t;
 	gtk_signal_connect(GTK_OBJECT(widgets.notebook_text),
 			   "switch_page",
 			   G_CALLBACK

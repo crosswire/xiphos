@@ -23,7 +23,7 @@
  */
 #include <config.h>
 #include <gnome.h>
-#include <gal/widgets/widget-color-combo.h>
+//#include <gal/widgets/widget-color-combo.h>
 
 #include <gtkhtml/htmlcolor.h>
 #include <gtkhtml/htmlcolorset.h>

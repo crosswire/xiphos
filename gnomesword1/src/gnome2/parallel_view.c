@@ -118,7 +118,7 @@ void gui_check_parallel_modules(void)
  *   void gui_set_parallel_options_at_start(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -133,7 +133,7 @@ void gui_set_parallel_options_at_start(void)
 		set_parallel_global_option("Footnotes", "Off");	/* keep footnotes in sync with menu */
 
 	/*
-	   set parallel Strong's Numbers to last setting used 
+	   set parallel Strong's Numbers to last setting used
 	 */
 	if (settings.strongsint)
 		set_parallel_global_option("Strong's Numbers", "On");	/* keep Strongs in sync with menu */
@@ -141,7 +141,7 @@ void gui_set_parallel_options_at_start(void)
 		set_parallel_global_option("Strong's Numbers", "Off");	/* keep Strongs in sync with menu */
 
 	/*
-	   set parallel morph tags to last setting used 
+	   set parallel morph tags to last setting used
 	 */
 	if (settings.morphsint)
 		set_parallel_global_option("Morphological Tags", "On");	/* keep Morph Tags in sync with menu */
@@ -149,7 +149,7 @@ void gui_set_parallel_options_at_start(void)
 		set_parallel_global_option("Morphological Tags", "Off");	/* keep Morph Tag in sync with menu */
 
 	/*
-	   set parallel Hebrew Vowel Points to last setting used 
+	   set parallel Hebrew Vowel Points to last setting used
 	 */
 	if (settings.hebrewpointsint)
 		set_parallel_global_option("Hebrew Vowel Points", "On");	/* keep Hebrew Vowel Points in sync with menu */
@@ -157,7 +157,7 @@ void gui_set_parallel_options_at_start(void)
 		set_parallel_global_option("Hebrew Vowel Points", "Off");	/* keep Hebrew Vowel Points in sync with menu */
 
 	/*
-	   set parallel Hebrew Cantillation to last setting used 
+	   set parallel Hebrew Cantillation to last setting used
 	 */
 	if (settings.cantillationmarksint)
 		set_parallel_global_option("Hebrew Cantillation", "On");	/* keep Hebrew Cantillation in sync with menu */
@@ -165,7 +165,7 @@ void gui_set_parallel_options_at_start(void)
 		set_parallel_global_option("Hebrew Cantillation", "Off");	/* keep Hebrew Cantillation in sync with menu */
 
 	/*
-	   set parallel Greek Accents to last setting used 
+	   set parallel Greek Accents to last setting used
 	 */
 	if (settings.greekaccentsint)
 		set_parallel_global_option("Greek Accents", "On");	/* keep Greek Accents in sync with menu */
@@ -217,7 +217,7 @@ static void on_undockInt_activate(GtkMenuItem * menuitem)
  *			       gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -257,7 +257,7 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
  *			       gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -296,7 +296,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -335,7 +335,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
  *			       gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -374,7 +374,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -436,7 +436,7 @@ static void on_int_global_options_activate(GtkMenuItem * menuitem,
  *   void gui_update_parallel_page(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -547,7 +547,7 @@ void gui_update_parallel_page(void)
 					settings.bible_verse_num_color,
 					settings.verse_num_font_size,
 					settings.currentverse);
-				
+
 				utf8len = strlen(tmpBuf);
 				if (utf8len) {
 					gtk_html_write(GTK_HTML(html),
@@ -564,7 +564,7 @@ void gui_update_parallel_page(void)
 				get_module_description(mod_name),
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size, mod_name);
-			
+
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
@@ -580,7 +580,7 @@ void gui_update_parallel_page(void)
 					"<font face=\"%s\"size=\"%s\">",
 					font_name, font_size);
 
-			
+
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
@@ -603,7 +603,7 @@ void gui_update_parallel_page(void)
 			sprintf(tmpBuf,
 				"</font><small>[<A HREF=\"@%s\">view context</a>]</small></td></tr>",
 				mod_name);
-			
+
 			utf8len = strlen(tmpBuf);
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html),
@@ -613,7 +613,7 @@ void gui_update_parallel_page(void)
 		}
 
 		sprintf(tmpBuf, "</table></body></html>");
-		
+
 		utf8len = strlen(tmpBuf);
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
@@ -642,7 +642,7 @@ void gui_update_parallel_page(void)
  *   void int_display(gchar *key)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -797,7 +797,7 @@ static void int_display(gchar * key)
  *   void gui_update_parallel_page_detached(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -822,7 +822,7 @@ void gui_update_parallel_page_detached(void)
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
 //	utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,
 			       utf8len);
@@ -832,8 +832,8 @@ void gui_update_parallel_page_detached(void)
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.parallel1Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+
+		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
 				       buf, utf8len);
@@ -844,8 +844,8 @@ void gui_update_parallel_page_detached(void)
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.parallel2Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+
+		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
 				       buf, utf8len);
@@ -856,8 +856,8 @@ void gui_update_parallel_page_detached(void)
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.parallel3Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+
+		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
 				       buf, utf8len);
@@ -868,8 +868,8 @@ void gui_update_parallel_page_detached(void)
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.parallel4Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+
+		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
 				       buf, utf8len);
@@ -880,8 +880,8 @@ void gui_update_parallel_page_detached(void)
 		sprintf(buf,
 			"<td valign=\"top\" width=\"20%%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",
 			settings.parallel5Module);
-		
-		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+
+		utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 		if (utf8len) {
 			gtk_html_write(GTK_HTML(html), htmlstream,
 				       buf, utf8len);
@@ -890,7 +890,7 @@ void gui_update_parallel_page_detached(void)
 
 	sprintf(buf, "%s", "</tr>");
 	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,
 			       utf8len);
@@ -902,7 +902,7 @@ void gui_update_parallel_page_detached(void)
 
 	sprintf(buf, "%s", "</table></body></html>");
 	//utf8str = e_utf8_from_gtk_string(widgets.html_parallel, buf);
-	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;        
+	utf8len = strlen(buf);	//g_utf8_strlen (utf8str , -1) ;
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, buf,
 			       utf8len);
@@ -933,7 +933,7 @@ void gui_update_parallel_page_detached(void)
 void gui_swap_parallel_with_main(char *intmod)
 {
 	char *modname;
-
+        g_warning(intmod);
 	modname = xml_get_value("modules", "text");	//settings.MainWindowModule;
 	if (!strcmp(settings.parallel5Module, intmod)) {
 		settings.parallel5Module = modname;
@@ -962,11 +962,11 @@ void gui_swap_parallel_with_main(char *intmod)
  * Synopsis
  *   #include "gui/parallel.h
  *
- *   void gui_set_parallel_module_global_options(gchar *option, 
+ *   void gui_set_parallel_module_global_options(gchar *option,
  *						gboolean choice)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1028,7 +1028,7 @@ void gui_set_parallel_module_global_options(gchar * option,
  *   void add_items_to_options_menu(void)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1122,11 +1122,11 @@ static void add_items_to_options_menu(void)
  * Synopsis
  *   #include "gui/parallel.h
  *
- *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,  
+ *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
  *			gchar *label, GtkMenuCallback mycallback)
  *
  * Description
- *   
+ *
  *
  * Return value
  *   void
@@ -1263,7 +1263,7 @@ static GtkWidget *create_parallel_popup(GList * mods)
  * Synopsis
  *   #include "gui/parallel.h
  *
- *   void gui_create_parallel_popup(GList *bible_description) 
+ *   void gui_create_parallel_popup(GList *bible_description)
  *
  * Description
  *   call create_parallel_popup() and attach menu to int html widget
