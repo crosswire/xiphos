@@ -416,7 +416,6 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			   2, &cap, 3, &mod, 4, &key, -1);
 	if (!cap)
 		return;
-
 	if (!g_utf8_collate(cap, _("Parallel View")))
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 					      (widgets.
@@ -477,6 +476,7 @@ void main_mod_treeview_button_one(GtkTreeModel * model,
 			main_display_bible(mod, settings.currentverse);
 		break;
 	case COMMENTARY_TYPE:
+	case PERCOM_TYPE:
 		settings.comm_showing = TRUE;
 		main_display_commentary(mod, settings.currentverse);
 		break;

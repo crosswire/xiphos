@@ -65,11 +65,7 @@ extern "C" {
 
 gboolean style_display = TRUE;
 
-/*void delete_module_mgr(void)
-{
-	backend_delete_module_mgr();
-}
-*/
+
 /******************************************************************************
  * Name
  *  module_name_from_description
@@ -553,6 +549,9 @@ void main_dictionary_entery_changed(char * mod_name)
 	gint height;
 	
 	key = (gchar*)gtk_entry_get_text(GTK_ENTRY(widgets.entry_dict));
+	//g_warning(key);
+	key = g_ascii_strup(key,strlen(key));
+	//g_warning(key);
 	backend->set_module_key(mod_name, key);
 	//g_warning("mod = %s key = %s",mod_name, key);
 	key = backend->get_module_key();
@@ -562,7 +561,7 @@ void main_dictionary_entery_changed(char * mod_name)
 	
 	backend->set_module_key(mod_name, key);
 	backend->display_mod->Display();
-	
+	g_free(key);
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(widgets.listview_dict));
 	list_store = GTK_LIST_STORE(model);
 	
@@ -599,6 +598,8 @@ void main_display_book(const char * mod_name, char * key)
 {
 	if(!settings.havebook || !mod_name)
 		return;
+	if(!backend->is_module(mod_name))
+		return;
 	if(!settings.book_mod)
 		settings.book_mod = (char*)mod_name;
 	
@@ -631,8 +632,9 @@ void main_display_book(const char * mod_name, char * key)
 
 void main_display_commentary(const char * mod_name, const char * key)
 {
-	
 	if(!settings.havecomm || !mod_name || !settings.comm_showing)
+		return;
+	if(!backend->is_module(mod_name))
 		return;
 	if(!settings.CommWindowModule)
 		settings.CommWindowModule = (char*)mod_name;
@@ -665,6 +667,8 @@ void main_display_dictionary(char * mod_name, char * key)
 	const gchar *old_key;
 	
 	if(!settings.havedict || !mod_name)
+		return;
+	if(!backend->is_module(mod_name))
 		return;
 	if(!settings.DictWindowModule)
 		settings.DictWindowModule = (char*)mod_name;
@@ -702,6 +706,8 @@ void main_display_bible(const char * mod_name, const char * key)
 	gchar *style = NULL;
 	
 	if(!settings.havebible || !mod_name)
+		return;
+	if(!backend->is_module(mod_name))
 		return;
 
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);

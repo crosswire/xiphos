@@ -166,6 +166,7 @@ static void book_changed(GtkEditable * editable, DIALOG_DATA * c)
 	gchar *url;
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
 	GSHTMLEditorControlData *ec = (GSHTMLEditorControlData*) c->editor;
+	
 	if (*bookname) {
 		url = g_strdup_printf("sword:///%s 1:1", bookname);
 		main_dialogs_url_handler(c, url, TRUE);

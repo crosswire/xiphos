@@ -1419,7 +1419,7 @@ static GnomeUIInfo menu_uiinfo[] = {
  *   GtkWidget* create_menu(void)
  *
  * Description
- *
+ *   main sidebar menu 
  *
  * Return value
  *   GtkWidget*

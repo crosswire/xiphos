@@ -63,22 +63,7 @@ SETTINGS settings;
 /******************************************************************************
  * static
  */
-#ifndef USE_GNOME2
-static void old_2_new_shortcut_file(char * old_file, char * new_file);
-#endif
-static int init_old(void);
-static int init_bookmarks(int new_bookmarks, int have_old);
-
-static char *old_prefs = NULL;
-static char *old_dir = NULL;
-static char *old_bm = NULL;
-static char *old_sb = NULL;
-static char *old_fav = NULL;
-static char *old_text = NULL;
-static char *old_comm = NULL;
-static char *old_dict = NULL;
-static char *old_gbs = NULL;
-
+static int init_bookmarks(int new_bookmarks);
 
 /******************************************************************************
  * Name
@@ -103,6 +88,7 @@ int settings_init(int new_configs, int new_bookmarks)
 	int retval = 0;
 	int have_old = FALSE;
 	int need_old = FALSE;
+	char *sword_dir = NULL;
 
 	/* set program title */
 	strcpy(settings.program_title, "GnomeSword");
@@ -125,53 +111,44 @@ int settings_init(int new_configs, int new_bookmarks)
 			printf("can not create  .gnomesword-1.0");
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
-		} else
-			need_old = TRUE;
+		} 
 	}
-
-	/* shortcutbar dir */
-	settings.shortcutbarDir =
-	    g_new(char,
-		  strlen(settings.gSwordDir) + strlen("shortcutbar") +
-		  2);
-	sprintf(settings.shortcutbarDir, "%s/%s", settings.gSwordDir,
-		"shortcutbar");
-
-
-	if (need_old) {
-		have_old = init_old();
+	
+	
+	/* if .sword does not exist create it */
+	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword");
+	if (access(sword_dir, F_OK) == -1) {
+		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
+			printf("can not create  .sword");
+		} 
 	}
-
-	init_bookmarks(new_bookmarks, have_old);
-
-	/* if shortcutbar dir does not exist create it */
-	if (access(settings.shortcutbarDir, F_OK) == -1) {
-		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) == -1) {
-			printf("can't create shortcutbar dir");
-			gtk_exit(1);
-		}
+	g_free(sword_dir);
+	/* if .sword/mods.d does not exist create it */
+	sword_dir = g_strdup_printf("%s/%s", settings.homedir, ".sword/mods.d");
+	if (access(sword_dir, F_OK) == -1) {
+		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
+			printf("can not create  .sword/mods.d");
+		} 
+	}	
+	g_free(sword_dir);
+	/* if .sword/modules does not exist create it */
+	sword_dir = g_strdup_printf("%s/%s", settings.homedir,".sword/modules");
+	if (access(sword_dir, F_OK) == -1) {
+		if ((mkdir(sword_dir, S_IRWXU)) != 0) {
+			printf("can not create  .sword/modules");
+		} 
 	}
-
+	g_free(sword_dir);
+	
+	
+	init_bookmarks(new_bookmarks);
 
 	/* set fnconfigure to gSwordDir and settings.xml */
 	settings.fnconfigure = g_new(char, strlen(settings.gSwordDir) +
 				     strlen("settings.xml") + 2);
 	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
 		"settings.xml");
-/*
-	if(new_configs){
-		// user ask for new configs 
-		g_print("\nCreate new configs: need to create settings!\n");
-		xml_create_settings_file(settings.fnconfigure);
-		backend_init_main_mgr();
-		init_lists();
-		retval = gui_first_run();
-		shutdown_list();
-		backend_delete_main_mgr();
-		xml_save_settings_doc(settings.fnconfigure);
-		xml_free_settings_doc();
-	}
-	*/
+	
 	/* if gSwordDir does not exist create it */
 	if (access(settings.fnconfigure, F_OK) == -1) {
 		/* must be first run */
@@ -188,110 +165,10 @@ int settings_init(int new_configs, int new_bookmarks)
 
 	xml_parse_settings_file(settings.fnconfigure);
 	load_settings_structure();
-
-	if (have_old) {
-		g_free(old_prefs);
-		g_free(old_bm);
-		g_free(old_sb);
-		g_free(old_fav);
-		g_free(old_text);
-		g_free(old_comm);
-		g_free(old_dict);
-		g_free(old_gbs);
-	}
-
-	if (old_dir)
-		g_free(old_dir);
+	
 	return retval;
 }
 
-/******************************************************************************
- * Name
- *    
- *
- * Synopsis
- *   #include "main/settings.h"
- *
- *   	
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-int init_old(void)
-{
-	/* set old_dir to $home + .GnomeSword */
-	old_dir = g_new(char, strlen(settings.homedir) +
-			strlen(".GnomeSword") + 2);
-	sprintf(old_dir, "%s/%s", settings.homedir, ".GnomeSword");
-
-	if (access(old_dir, F_OK) == -1)
-		return 0;
-
-
-	old_bm = g_new(char, strlen(old_dir) +
-		       strlen("/bookmarks") + 2);
-	sprintf(old_bm, "%s/%s", old_dir, "bookmarks");
-
-	old_sb = g_new(char, strlen(old_dir) +
-		       strlen("/shortcutbar") + 2);
-	sprintf(old_sb, "%s/%s", old_dir, "shortcutbar");
-
-	old_prefs = g_new(char, strlen(old_dir) +
-			  strlen("preferences.conf") + 2);
-	sprintf(old_prefs, "%s/%s", old_dir, "preferences.conf");
-
-	old_fav = g_new(char, strlen(old_sb) +
-			strlen("Favorites.conf") + 2);
-	sprintf(old_fav, "%s/%s", old_sb, "Favorites.conf");
-
-	old_text = g_new(char, strlen(old_sb) +
-			 strlen("BibleText.conf") + 3);
-	sprintf(old_text, "%s/%s", old_sb, "BibleText.conf");
-
-	old_comm = g_new(char, strlen(old_sb) +
-			 strlen("Commentaries.conf") + 3);
-	sprintf(old_comm, "%s/%s", old_sb, "Commentaries.conf");
-
-	old_dict = g_new(char, strlen(old_sb) +
-			 strlen("Dictionaries.conf") + 3);
-	sprintf(old_dict, "%s/%s", old_sb, "Dictionaries.conf");
-
-	old_gbs = g_new(char, strlen(old_sb) +
-			strlen("Books.conf") + 3);
-	sprintf(old_gbs, "%s/%s", old_sb, "Books.conf");
-	
-#ifndef USE_GNOME2
-	if (access(settings.shortcutbarDir, F_OK) == -1) {
-		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) == 0) {
-			if (access(old_fav, F_OK) == 0)
-				old_2_new_shortcut_file(old_fav,
-						"Favorites.conf");
-			if (access(old_text, F_OK) == 0)
-				old_2_new_shortcut_file(old_text,
-						"BibleText.conf");
-			if (access(old_comm, F_OK) == 0)
-				old_2_new_shortcut_file(old_comm,
-						"Commentaries.conf");
-			if (access(old_dict, F_OK) == 0)
-				old_2_new_shortcut_file(old_dict,
-						"Dictionaries.conf");
-			if (access(old_gbs, F_OK) == 0)
-				old_2_new_shortcut_file(old_gbs,
-						"Books.conf");
-
-		}
-	} else {
-		printf("can't create shortcutbar dir");
-		return 0;
-	}
-#endif
-	return 1;
-}
-
 
 /******************************************************************************
  * Name
@@ -309,29 +186,23 @@ int init_old(void)
  *   
  */
 
-int init_bookmarks(int new_bookmarks, int have_old)
+int init_bookmarks(int new_bookmarks)
 {
-	GNode *bookmark_tree = NULL;
+	//GNode *bookmark_tree = NULL;
 	char *file_buf = NULL;
 	char *removed = NULL;
-	int load_old = FALSE;
+	//int load_old = FALSE;
 
 	settings.load_xml_bookmarks = FALSE;
 
 	/* set bookmarks dir to settings.gSwordDir + /bookmarks */
 	settings.swbmDir = g_new(char, strlen(settings.gSwordDir) +
 				 strlen("/bookmarks") + 2);
-	sprintf(settings.swbmDir, "%s/%s", settings.gSwordDir,
-		"bookmarks");
+	sprintf(settings.swbmDir, "%s/%s", settings.gSwordDir, "bookmarks");
 
 	/* if .gnomesword-1.0/bookmarks does not exist create it */
 	if (access(settings.swbmDir, F_OK) == -1) {
-		if ((mkdir(settings.swbmDir, S_IRWXU)) == 0) {
-			/* if we have old style bookmarks from a 
-			   previous version of gnomesword load them */
-			load_old = TRUE;
-
-		} else {
+		if ((mkdir(settings.swbmDir, S_IRWXU)) == -1) {
 			g_warning("can't create bookmarks dir");
 			return 0;
 		}
@@ -340,28 +211,17 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	/* set removed dir to settings.swbmDir + /removed */
 	removed = g_new(char, strlen(settings.swbmDir) +
 				 strlen("/removed") + 2);
-	sprintf(removed, "%s/%s", settings.swbmDir,
-		"removed");
+	sprintf(removed, "%s/%s", settings.swbmDir, "removed");
 	if (access(removed, F_OK) == -1) {
-		if ((mkdir(removed, S_IRWXU)) == 0) {
-			/* this directory is used to save removed
-			   bookmark folders to be restored later */
-		} else {
+		if ((mkdir(removed, S_IRWXU)) == -1) {
 			g_warning("can't create removed dir");
 			//return 0;
 		}
 	}	
 	
-	if (new_bookmarks) {
+	if (new_bookmarks) 
 		xml_new_bookmark_file();
-	} else if (load_old) {
-		if (have_old) {
-			backend_init_main_mgr();
-			bookmark_tree = backend_load_bookmarks(old_bm);
-			gui_save_old_bookmarks_to_new(bookmark_tree);
-			backend_delete_main_mgr();
-		}
-	}
+		
 	/* check for xml bookmarks */
 	file_buf = g_new(char, strlen(settings.swbmDir) +
 			 strlen("/bookmarks.xml") + 2);
@@ -373,20 +233,8 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	g_free(file_buf);
 
 	if (!settings.load_xml_bookmarks) {
-		file_buf = g_new(char, strlen(settings.swbmDir) +
-				 strlen("/personal.conf") + 2);
-		sprintf(file_buf, "%s/personal.conf", settings.swbmDir);
-		backend_init_main_mgr();
-		if (access(file_buf, F_OK) == 0) {
-			bookmark_tree =
-			    backend_load_bookmarks(settings.swbmDir);
-			gui_save_old_bookmarks_to_new(bookmark_tree);
-		} else
-			xml_new_bookmark_file();
-
-		backend_delete_main_mgr();
+		xml_new_bookmark_file();
 		settings.load_xml_bookmarks = TRUE;
-		g_free(file_buf);
 	}
 
 	/* check for Bibletime bookmarks */
@@ -400,42 +248,15 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	if (access(file_buf, F_OK) == 0) {
 		settings.have_bibletime = TRUE;
 	}
+	
+	/* clean up */
 	if (file_buf)
 		g_free(file_buf);
 	if (removed)
 		g_free(removed);
+	
 	return 1;
 }
-
-
-/******************************************************************************
- * Name
- *    
- *
- * Synopsis
- *   #include "main/settings.h"
- *
- *   	
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-
-#ifndef USE_GNOME2
-void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
-{
-	gchar group_name[256], icon_size[10];
-	GList *glist = NULL;
-
-	glist = load_sb_group(old_file, group_name, icon_size);
-	save_sb_group(glist, new_file, group_name, icon_size);
-	g_list_free(glist);
-}
-#endif
 
 
 /******************************************************************************
