@@ -39,7 +39,7 @@
 
 #include "gui/gnomesword.h"
 #include "gui/studypad.h"
-#include "gui/_editor.h"
+#include "gui/editor.h"
 #include "gui/toolbar_style.h"
 #include "gui/toolbar_edit.h"
 #include "gui/editor_menu.h"
@@ -51,7 +51,7 @@
 #include "main/settings.h"
 
 #define BUFFER_SIZE 4096
-					
+
 static GSHTMLEditorControlData *editor_cd;
 
 
@@ -69,17 +69,17 @@ static GSHTMLEditorControlData *editor_cd;
  *
  * Return value
  *   void
- */ 
+ */
 
 void gui_studypad_can_close(void)
 {
 	if (settings.modifiedSP) {
-		
+
 		gint test;
 		GS_DIALOG *info;
-	
+
 		info = gui_new_dialog();
-		if (strlen(settings.studypadfilename) > 0 )
+		if (strlen(settings.studypadfilename) > 0)
 			info->label_top = settings.studypadfilename;
 		else
 			info->label_top = N_("File");
@@ -87,19 +87,21 @@ void gui_studypad_can_close(void)
 		info->label_bottom = N_("Do you wish to save it?");
 		info->yes = TRUE;
 		info->no = TRUE;
-	
+
 		test = gui_gs_dialog(info);
-		if (test == GS_YES){
-			if(strlen(settings.studypadfilename) > 0)  {
-				save_file(editor_cd->filename, editor_cd);
+		if (test == GS_YES) {
+			if (strlen(settings.studypadfilename) > 0) {
+				save_file(editor_cd->filename,
+					  editor_cd);
 			} else {
 				gui_fileselection_save(editor_cd);
 			}
 		}
-		
+
 		g_free(info);
 	}
 }
+
 /******************************************************************************
  * Name
  *   load_file
@@ -114,7 +116,7 @@ void gui_studypad_can_close(void)
  *
  * Return value
  *   gint
- */ 
+ */
 
 gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 {
@@ -123,9 +125,9 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	ssize_t count;
 	gboolean was_editable;
 	int fd;
-	
+
 	sprintf(settings.studypadfilename, "%s", filename);
-	
+
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -158,7 +160,7 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 		gtk_html_end(ecd->html, stream, GTK_HTML_STREAM_OK);
 		if (was_editable)
 			gtk_html_set_editable(ecd->html, TRUE);
-		update_statusbar(ecd);
+		gui_update_statusbar(ecd);
 		return 0;
 	} else {
 		gtk_html_end(ecd->html, stream, GTK_HTML_STREAM_ERROR);
@@ -184,10 +186,11 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
  *
  * Return value
  *   gboolean
- */ 
+ */
 
 static gboolean save_receiver(const HTMLEngine * engine,
-		const char *data, unsigned int len, void *user_data)
+			      const char *data, unsigned int len,
+			      void *user_data)
 {
 	int fd;
 
@@ -221,7 +224,7 @@ static gboolean save_receiver(const HTMLEngine * engine,
  *
  * Return value
  *   gint
- */ 
+ */
 
 gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename)
 {
@@ -260,13 +263,13 @@ gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename)
  *
  * Return value
  *   gint
- */ 
+ */
 
 gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 {
 	int retval = -1;
 	int fd;
-	
+
 	if (filename) {
 		sprintf(settings.studypadfilename, "%s", filename);
 
@@ -282,7 +285,7 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 		else {
 			retval = 0;
 			ecd->changed = FALSE;
-			update_statusbar(ecd);
+			gui_update_statusbar(ecd);
 		}
 
 		close(fd);
@@ -306,9 +309,9 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
  * Return value
  *   gint
  */
- 
+
 static gint release(GtkWidget * widget, GdkEventButton * event,
-					GSHTMLEditorControlData * cd)
+		    GSHTMLEditorControlData * cd)
 {
 
 	return FALSE;
@@ -330,13 +333,13 @@ static gint release(GtkWidget * widget, GdkEventButton * event,
  * Return value
  *   gint
  */
- 
+
 static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
-					GSHTMLEditorControlData * ecd)
+			     GSHTMLEditorControlData * ecd)
 {
 	ecd->changed = TRUE;
 	//file_changed = TRUE;
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 	return 1;
 }
 
@@ -356,11 +359,11 @@ static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
  * Return value
  *   void
  */
- 
+
 static void html_load_done(GtkWidget * html,
-					GSHTMLEditorControlData * ecd)
+			   GSHTMLEditorControlData * ecd)
 {
-	update_statusbar(ecd);
+	gui_update_statusbar(ecd);
 }
 
 /******************************************************************************
@@ -380,7 +383,7 @@ static void html_load_done(GtkWidget * html,
  * Return value
  *   void
  */
- 
+
 static void on_submit(GtkHTML * html, const gchar * method,
 		      const gchar * url, const gchar * encoding,
 		      GSHTMLEditorControlData * ecd)
@@ -418,14 +421,15 @@ static void on_submit(GtkHTML * html, const gchar * method,
  *
  * Return value
  *   gint
- */ 
+ */
 
-static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
-					GSHTMLEditorControlData * ecd)
-{	
-	if (ecd->personal_comments) 
+static gint html_button_pressed(GtkWidget * html,
+				GdkEventButton * event,
+				GSHTMLEditorControlData * ecd)
+{
+	if (ecd->personal_comments)
 		settings.whichwindow = PERCOMM_WINDOW;
-	if (ecd->studypad) 
+	if (ecd->studypad)
 		settings.whichwindow = STUDYPAD_WINDOW;
 	switch (event->button) {
 	case 1:
@@ -473,10 +477,11 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  * Return value
  *   gboolean
  */
- 
+
 static gboolean on_html_enter_notify_event(GtkWidget * widget,
-			   GdkEventCrossing * event,
-			   GSHTMLEditorControlData * ecd)
+					   GdkEventCrossing * event,
+					   GSHTMLEditorControlData *
+					   ecd)
 {
 	if (!ecd->personal_comments && !ecd->gbs)
 		if (!gtk_html_get_editable(ecd->html))
@@ -491,63 +496,67 @@ static gboolean on_html_enter_notify_event(GtkWidget * widget,
  * Synopsis
  *   #include "studypad.h"
  *
- *   GtkWidget *gui_create_studypad_control(GtkWidget *notebook)	
+ *   GtkWidget *gui_create_studypad_control(GtkWidget *container)	
  *
  * Description
  *    create studypad control
  *
  * Return value
  *   GtkWidget *
- */ 
+ */
 
-GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
+static GtkWidget *create_studypad_control(GtkWidget * container,
+				gchar * filename)
 {
 	GtkWidget *vbox;
 	GtkWidget *vboxSP;
 	GtkWidget *hboxstyle;
-	GtkWidget *htmlwidget;	
+	GtkWidget *htmlwidget;
 	GtkWidget *frame34;
 	GtkWidget *scrolledwindow17;
 	GtkWidget *toolbar;
-	
+
 	GSHTMLEditorControlData *specd =
-		gs_html_editor_control_data_new();
-	
-	
+	    gs_html_editor_control_data_new();
+
+
 	specd->studypad = TRUE;
 	specd->stylebar = settings.show_style_bar_sp;
 	specd->editbar = settings.show_edit_bar_sp;
-	
+
 	vboxSP = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxSP);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxSP", vboxSP,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxSP",
+				 vboxSP,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxSP);
-	gtk_container_add(GTK_CONTAINER(notebook), vboxSP);
+	gtk_container_add(GTK_CONTAINER(container), vboxSP);
 
 	hboxstyle = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hboxstyle);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hboxstyle", hboxstyle,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hboxstyle",
+				 hboxstyle,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hboxstyle);
-	gtk_box_pack_start(GTK_BOX(vboxSP), hboxstyle, TRUE, TRUE, 0);	
-  
+	gtk_box_pack_start(GTK_BOX(vboxSP), hboxstyle, TRUE, TRUE, 0);
+
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox", vbox,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
 	gtk_box_pack_start(GTK_BOX(hboxstyle), vbox, TRUE, TRUE, 0);
-  
+
 	htmlwidget = gtk_html_new();
-	
+
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34", frame34,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34",
+				 frame34,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame34);
 	gtk_box_pack_end(GTK_BOX(vbox), frame34, TRUE, TRUE, 0);
-	
+
 	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow17);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
@@ -570,22 +579,22 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  specd->htmlwidget);
 	gtk_html_load_empty(specd->html);
-	
-  	
-	
+
+
+
 	specd->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(specd->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "specd->statusbar",
-				 specd->statusbar,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "specd->statusbar", specd->statusbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->statusbar);
-	gtk_box_pack_start(GTK_BOX(vboxSP), specd->statusbar, FALSE, TRUE,
-			   0);
-			   
+	gtk_box_pack_start(GTK_BOX(vboxSP), specd->statusbar, FALSE,
+			   TRUE, 0);
+
 	specd->vbox = vboxSP;
 	specd->pm = gui_create_editor_popup(specd);
 	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
-	
+
 	gtk_signal_connect(GTK_OBJECT(specd->html), "submit",
 			   GTK_SIGNAL_FUNC(on_submit), specd);
 	gtk_signal_connect(GTK_OBJECT
@@ -608,29 +617,112 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", GTK_SIGNAL_FUNC(gui_url),	/* gs_html.c */
 			   NULL);
-	
+
 	/* create toolbars */
 	widgets.toolbar_studypad = gui_toolbar_style(specd);
-	if(settings.show_style_bar_sp)
+	if (settings.show_style_bar_sp)
 		gtk_widget_show(widgets.toolbar_studypad);
 	else
-		gtk_widget_hide(widgets.toolbar_studypad);	
-	gtk_box_pack_start(GTK_BOX(vbox), widgets.toolbar_studypad, FALSE,
-			   FALSE, 0);
-	
+		gtk_widget_hide(widgets.toolbar_studypad);
+	gtk_box_pack_start(GTK_BOX(vbox), widgets.toolbar_studypad,
+			   FALSE, FALSE, 0);
+
 	toolbar = gui_toolbar_edit(specd);
-	if(settings.show_edit_bar_sp)
+	if (settings.show_edit_bar_sp)
 		gtk_widget_show(toolbar);
 	else
 		gtk_widget_hide(toolbar);
-	gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);	
-	
+	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, FALSE, 0);
+
 	/* load last file */
-	if (settings.studypadfilename) {
-		load_file(settings.studypadfilename, specd);
+	if (filename) {
+		load_file(filename, specd);
 	}
-	editor_cd = specd;	
+	editor_cd = specd;
 	return htmlwidget;
 }
 
 
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+
+gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
+		       gint page_num)
+{
+	GtkWidget *label;
+
+	widgets.html_studypad = 
+			create_studypad_control(notebook,file_name);
+
+
+	label = gtk_label_new(_("Study Pad"));
+	gtk_widget_ref(label);
+	gtk_object_set_data_full(GTK_OBJECT
+				 (widgets.app),
+				 "label", label, (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(label);
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+					(notebook),
+					gtk_notebook_get_nth_page
+					(GTK_NOTEBOOK(notebook), 
+					page_num), label);
+
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
+					(notebook),
+					gtk_notebook_get_nth_page
+					(GTK_NOTEBOOK(notebook),
+					page_num), _("Study Pad"));
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */
+
+gint gui_open_studypad_dialog(gchar * file_name)
+{
+	widgets.studypad_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_object_set_data(GTK_OBJECT
+			    (widgets.studypad_dialog),
+			    "widgets.studypad_dialog",
+			    widgets.studypad_dialog);
+	gtk_widget_set_usize(widgets.studypad_dialog, 480, 280);
+	GTK_WIDGET_SET_FLAGS(widgets.studypad_dialog, GTK_CAN_FOCUS);
+	gtk_window_set_policy(GTK_WINDOW
+			      (widgets.studypad_dialog),
+			      TRUE, TRUE, TRUE);
+	gtk_window_set_title((GtkWindow *)widgets.studypad_dialog,
+                                (const gchar*)settings.program_title);
+	gtk_widget_show(widgets.studypad_dialog);
+
+	widgets.html_studypad =
+	  	create_studypad_control(widgets.studypad_dialog,
+							  file_name);
+	return TRUE;
+}

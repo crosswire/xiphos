@@ -180,7 +180,7 @@ int save_module_options(char * mod_name, char * option,
 		on_off = "Off";
 	}
 	return backend_save_module_options(mod_name, option, on_off, 
-					settings.gSwordDir );
+				settings.gSwordDir , "modops.conf");
 }
 
 /******************************************************************************
@@ -202,8 +202,10 @@ int save_module_options(char * mod_name, char * option,
 int load_module_options(char * modName, char * option)
 {
 	return backend_load_module_options(modName, option, 
-					settings.gSwordDir);
+				settings.gSwordDir, "modops.conf");
 }
+
+
 /******************************************************************************
  * Name
  *   set_text_global_option

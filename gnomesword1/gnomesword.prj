@@ -47,7 +47,7 @@ project.menu.comment=gnomesword Version 0.7.1
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/terry
+project.configure.options=--enable-use_aspell
 anjuta.program.arguments=
 preferences.indent.automatic=1
 preferences.use.tabs=1
@@ -90,13 +90,13 @@ module.include.files=\
 	src/gui/dictlex.h\
 	src/gui/dictlex_dialog.h\
 	src/gui/display_info.h\
-	src/gui/_editor.h\
 	src/gui/font_dialog.h\
 	src/gui/gbs.h\
 	src/gui/gbs_dialog.h\
 	src/gui/percomm.h\
 	src/gui/gtkhtml_display.h\
 	src/gui/cipher_key_dialog.h\
+	src/gui/editor.h\
 	src/gui/editor_menu.h\
 	src/gui/editor_replace.h\
 	src/gui/editor_search.h\
@@ -119,6 +119,7 @@ module.include.files=\
 	src/gui/shortcutbar_search.h\
 	src/gui/shortcutbar_viewer.h\
 	src/gui/studypad.h\
+	src/gui/studypad_dialog.h\
 	src/gui/toolbar_edit.h\
 	src/gui/toolbar_nav.h\
 	src/gui/toolbar_style.h\
@@ -164,7 +165,6 @@ module.source.files=\
 	src/gnome/dictlex.c\
 	src/gnome/dictlex_dialog.c\
 	src/gnome/display_info.c\
-	src/gnome/_editor.c\
 	src/gnome/font_dialog.c\
 	src/gnome/gbs.c\
 	src/gnome/gbs_dialog.c\
@@ -175,6 +175,7 @@ module.source.files=\
 	src/gnome/percomm.c\
 	src/gnome/cipher_key_dialog.c\
 	src/gnome/text_view.c\
+	src/gnome/editor.c\
 	src/gnome/editor_menu.c\
 	src/gnome/editor_replace.c\
 	src/gnome/editor_search.c\
@@ -195,6 +196,7 @@ module.source.files=\
 	src/gnome/shortcutbar_spell.c\
 	src/gnome/shortcutbar_viewer.c\
 	src/gnome/studypad.c\
+	src/gnome/studypad_dialog.c\
 	src/gnome/splash.c\
 	src/gnome/toolbar_edit.c\
 	src/gnome/toolbar_nav.c\

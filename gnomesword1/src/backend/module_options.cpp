@@ -32,12 +32,12 @@ using namespace sword;
 
 
 int backend_load_module_options(char * modName, char * option, 
-						char * dir)
+					char * dir, char * conf)
 {
 	char buf[255], *yesno;
 	bool retval = false;
 
-	sprintf(buf, "%s/modops.conf", dir);
+	sprintf(buf, "%s/%s", dir, conf);
 	SWConfig module_options(buf);
 	module_options.Load();
 	yesno = (char *) module_options[modName][option].c_str();
@@ -50,11 +50,11 @@ int backend_load_module_options(char * modName, char * option,
 
 
 int backend_save_module_options(char * modName, char * option, 
-				char * value, char * dir)
+			char * value, char * dir, char * conf)
 {
 	char buf[80], buf2[255];
 
-	sprintf(buf, "%s/modops.conf", dir);
+	sprintf(buf, "%s/%s", dir, conf);
 	SWConfig module_options(buf);
 
 	module_options[modName][option] = value;

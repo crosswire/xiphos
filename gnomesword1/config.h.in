@@ -202,11 +202,14 @@
 /* Define if your <locale.h> file defines LC_MESSAGES. */
 #undef HAVE_LC_MESSAGES
 
-/* Define if you want to use sword_namespace */
-#undef SWORD_NAMESPACE
-
 /* Define if you want to use ispell */
 #undef USE_ISPELL
+
+/* Define if you want to spell checking */
+#undef USE_SPELL
+
+/* Define if you want to use aspell */
+#undef USE_ASPELL
 
 /* Define if you want to spell checking */
 #undef USE_SPELL

@@ -57,6 +57,10 @@ struct  _app_widgets {
 		*dock_sb, /* dock for shortcut bar */
 		*frame_interlinear, /* frame for interlinear html  */ 
 	
+	/* editor_dialogs */
+		*studypad_dialog,
+		*percomm_dialog,
+	
 	/* toolbars */
 		*hbox_toolbar,
 		*toolbar_comments,

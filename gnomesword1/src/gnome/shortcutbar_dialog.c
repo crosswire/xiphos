@@ -136,7 +136,7 @@ GtkWidget* gui_create_shortcutbar_dialog(void)
 
 	dlgDock = gtk_window_new(GTK_WINDOW_DIALOG);
 	gtk_object_set_data(GTK_OBJECT(dlgDock), "dlgDock", dlgDock);
-	gtk_window_set_title(GTK_WINDOW(dlgDock), _("GnomeSword"));
+	gtk_window_set_title(GTK_WINDOW(dlgDock), settings.program_title);
 	gtk_window_set_policy(GTK_WINDOW(dlgDock), TRUE, TRUE, FALSE);
 	gtk_widget_set_usize(dlgDock, settings.shortcutbar_width,
 			settings.gs_hight);
