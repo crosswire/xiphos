@@ -116,6 +116,7 @@ gtk_html_edit_properties_dialog_new (GtkHTMLControlData *cd, gboolean insert, gc
 	d->notebook = gtk_notebook_new ();
 	gtk_signal_connect (GTK_OBJECT (d->notebook), "switch_page", switch_page, d);
 	gtk_box_pack_start_defaults (GTK_BOX (GNOME_DIALOG (d->dialog)->vbox), d->notebook);
+	gtk_widget_show (d->notebook);
 
 	gnome_dialog_button_connect (GNOME_DIALOG (d->dialog), 0, ok, d);
 	if (!insert)
@@ -179,7 +180,7 @@ gtk_html_edit_properties_dialog_show (GtkHTMLEditPropertiesDialog *d)
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (d->notebook), FALSE);
 		gtk_notebook_set_show_border (GTK_NOTEBOOK (d->notebook), FALSE);
 	}
-	gtk_widget_show_all (d->dialog);
+	gtk_widget_show (d->dialog);
 }
 
 void

@@ -21,9 +21,8 @@
 */
 
 #include <config.h>
-#include <htmlengine-edit-clueflowstyle.h>
-#include <htmlengine-save.h>
-
+#include "htmlengine-edit-clueflowstyle.h"
+#include "htmlengine-save.h"
 #include "paragraph.h"
 #include "properties.h"
 #include "utils.h"
@@ -115,25 +114,25 @@ paragraph_properties (GtkHTMLControlData *cd, gpointer *set_data)
 
 #undef ADD_ITEM
 #define ADD_ITEM(n,s) \
-	menuitem = gtk_menu_item_new_with_label (_(n)); \
+	menuitem = gtk_menu_item_new_with_label (n); \
         gtk_menu_append (GTK_MENU (menu), menuitem); \
         gtk_widget_show (menuitem); \
         if (data->style == s) h=i; i++; \
         gtk_signal_connect (GTK_OBJECT (menuitem), "activate", GTK_SIGNAL_FUNC (set_style), data); \
         gtk_object_set_data (GTK_OBJECT (menuitem), "style", GINT_TO_POINTER (s));
 
-	ADD_ITEM ("Normal",       GTK_HTML_PARAGRAPH_STYLE_NORMAL);
-	ADD_ITEM ("Header1",      GTK_HTML_PARAGRAPH_STYLE_H1);
-	ADD_ITEM ("Header2",      GTK_HTML_PARAGRAPH_STYLE_H2);
-	ADD_ITEM ("Header3",      GTK_HTML_PARAGRAPH_STYLE_H3);
-	ADD_ITEM ("Header4",      GTK_HTML_PARAGRAPH_STYLE_H4);
-	ADD_ITEM ("Header5",      GTK_HTML_PARAGRAPH_STYLE_H5);
-	ADD_ITEM ("Header6",      GTK_HTML_PARAGRAPH_STYLE_H6);
-	ADD_ITEM ("Address",      GTK_HTML_PARAGRAPH_STYLE_ADDRESS);
-	ADD_ITEM ("Pre",          GTK_HTML_PARAGRAPH_STYLE_PRE);
-	ADD_ITEM ("Item dot",     GTK_HTML_PARAGRAPH_STYLE_ITEMDOTTED);
-	ADD_ITEM ("Item roman",   GTK_HTML_PARAGRAPH_STYLE_ITEMROMAN);
-	ADD_ITEM ("Item digit",   GTK_HTML_PARAGRAPH_STYLE_ITEMDIGIT);
+	ADD_ITEM (_("Normal"),       GTK_HTML_PARAGRAPH_STYLE_NORMAL);
+	ADD_ITEM (_("Pre"),          GTK_HTML_PARAGRAPH_STYLE_PRE);
+	ADD_ITEM (_("Header 1"),     GTK_HTML_PARAGRAPH_STYLE_H1);
+	ADD_ITEM (_("Header 2"),     GTK_HTML_PARAGRAPH_STYLE_H2);
+	ADD_ITEM (_("Header 3"),     GTK_HTML_PARAGRAPH_STYLE_H3);
+	ADD_ITEM (_("Header 4"),     GTK_HTML_PARAGRAPH_STYLE_H4);
+	ADD_ITEM (_("Header 5"),     GTK_HTML_PARAGRAPH_STYLE_H5);
+	ADD_ITEM (_("Header 6"),     GTK_HTML_PARAGRAPH_STYLE_H6);
+	ADD_ITEM (_("Address"),      GTK_HTML_PARAGRAPH_STYLE_ADDRESS);
+	ADD_ITEM (_("Item dot"),     GTK_HTML_PARAGRAPH_STYLE_ITEMDOTTED);
+	ADD_ITEM (_("Item roman"),   GTK_HTML_PARAGRAPH_STYLE_ITEMROMAN);
+	ADD_ITEM (_("Item digit"),   GTK_HTML_PARAGRAPH_STYLE_ITEMDIGIT);
 
 	data->style_option = gtk_option_menu_new ();
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (data->style_option), menu);
@@ -163,6 +162,8 @@ paragraph_properties (GtkHTMLControlData *cd, gpointer *set_data)
 	gtk_table_attach (GTK_TABLE (table), frame, 1, 2, 0, 1, GTK_FILL | GTK_EXPAND, GTK_FILL, 0, 0);
 	gtk_table_attach (GTK_TABLE (table), sample_frame (&data->sample), 0, 2, 1, 2, GTK_FILL | GTK_EXPAND, 0, 0, 0);
 	fill_sample (data);
+
+	gtk_widget_show_all (table);
 
 	return table;
 }

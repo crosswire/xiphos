@@ -22,12 +22,12 @@
 
 #include <config.h>
 #include <gal/widgets/widget-color-combo.h>
-#include <htmlcolor.h>
-#include <htmlcolorset.h>
-#include <htmlengine-edit.h>
-#include <htmlengine-edit-fontstyle.h>
-#include <htmlengine-save.h>
-#include <htmlsettings.h>
+#include "htmlcolor.h"
+#include "htmlcolorset.h"
+#include "htmlengine-edit.h"
+#include "htmlengine-edit-fontstyle.h"
+#include "htmlengine-save.h"
+#include "htmlsettings.h"
 
 #include "text.h"
 #include "properties.h"
@@ -93,7 +93,7 @@ fill_sample (GtkHTMLEditTextProperties *d)
 }
 
 static void
-color_changed (GtkWidget *w, GdkColor *color, GtkHTMLEditTextProperties *data)
+color_changed (GtkWidget *w, GdkColor *color, gboolean by_user, GtkHTMLEditTextProperties *data)
 {
 	html_color_unref (data->color);
 	data->color = color
@@ -220,7 +220,8 @@ text_properties (GtkHTMLControlData *cd, gpointer *set_data)
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 3);
 	data->color_combo = color_combo_new (NULL, _("Automatic"),
 					     &html_colorset_get_color (data->cd->html->engine->settings->color_set,
-								       HTMLTextColor)->color, "text");
+								       HTMLTextColor)->color,
+					     color_group_fetch ("text", data->cd));
         gtk_signal_connect (GTK_OBJECT (data->color_combo), "changed", GTK_SIGNAL_FUNC (color_changed), data);
 
 	vbox = gtk_vbox_new (FALSE, 0);
@@ -233,6 +234,8 @@ text_properties (GtkHTMLControlData *cd, gpointer *set_data)
 	/* sample */
 	gtk_table_attach (GTK_TABLE (table), sample_frame (&data->sample), 0, 2, 2, 3, GTK_FILL | GTK_EXPAND, GTK_FILL, 0, 0);
 	fill_sample (data);
+
+	gtk_widget_show_all (table);
 
 	return table;
 }

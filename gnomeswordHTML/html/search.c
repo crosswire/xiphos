@@ -21,11 +21,9 @@
 */
 
 #include <config.h>
-#include <htmlengine-search.h>
-
-
 #include "search.h"
 #include "dialog.h"
+#include "htmlengine-search.h"
 
 struct _GtkHTMLSearchDialog {
 	GnomeDialog *dialog;
@@ -63,10 +61,10 @@ gtk_html_search_dialog_new (GtkHTML *html, gboolean regular)
 	GtkHTMLSearchDialog *dialog = g_new (GtkHTMLSearchDialog, 1);
 	GtkWidget *hbox;
 
-	dialog->dialog         = GNOME_DIALOG (gnome_dialog_new ((regular) ? _("Regex search") :  _("Search"), _("Search"),
+	dialog->dialog         = GNOME_DIALOG (gnome_dialog_new ((regular) ? _("Regex find") :  _("Find"), _("Find"),
 								 GNOME_STOCK_BUTTON_CANCEL, NULL));
 	dialog->entry          = gtk_entry_new_with_max_length (20);
-	dialog->backward       = gtk_check_button_new_with_label (_("search backward"));
+	dialog->backward       = gtk_check_button_new_with_label (_("backward"));
 	dialog->case_sensitive = gtk_check_button_new_with_label (_("case sensitive"));
 	dialog->html           = html;
 	dialog->regular        = regular;

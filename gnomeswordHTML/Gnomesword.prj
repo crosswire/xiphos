@@ -166,9 +166,9 @@ compiler.options.defines=\
 
 compiler.options.warning.buttons=0 0 1 1 1 1 1 1 1 1 1 0 1 1 0 1 
 
-compiler.options.optimize.buttons=0 1 0 0 
+compiler.options.optimize.buttons=1 0 0 0 
 
-compiler.options.other.buttons=1 0 
+compiler.options.other.buttons=1 1 
 
 compiler.options.other.c.options=
 

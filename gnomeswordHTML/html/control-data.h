@@ -24,14 +24,13 @@
 #ifndef _CONTROL_DATA_H
 #define _CONTROL_DATA_H
 
-
 typedef struct _GtkHTMLControlData            GtkHTMLControlData;
 typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
 typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
 
-#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml.h>
 //#include <bonobo.h>
-#include <htmlgdkpainter.h>
+#include "htmlgdkpainter.h"
 #include "search.h"
 #include "replace.h"
 #include "image.h"
@@ -41,10 +40,11 @@ typedef struct _GtkHTMLEditPropertiesDialog   GtkHTMLEditPropertiesDialog;
 //#include "Spell.h"
 
 struct _GtkHTMLControlData {
-	GtkHTML   *html;
-	GtkWidget 	*vbox, 
-				*cpicker, 
-				*combo, 
+	GtkHTML    *html;
+	GtkWidget  *vbox;
+	GtkWidget  *cpicker;
+	GtkWidget  *combo;
+	GtkWidget  *paragraph_option, 
 				*notebook,
 				*gtktext,
 				*statusbar;
@@ -57,9 +57,10 @@ struct _GtkHTMLControlData {
 	GtkHTMLReplaceDialog    *replace_dialog;
 
 	/* html/plain mode settings */
-	gboolean 	format_html,
+	gboolean format_html,
 				html_modified,
 				note_editor;
+				
 	HTMLGdkPainter *gdk_painter;
 	HTMLGdkPainter *plain_painter;
 
@@ -68,7 +69,6 @@ struct _GtkHTMLControlData {
 
 	/* button release signal id */
 	guint releaseId;
-
 	/* filename */
 	gchar *filename;
 	
@@ -78,27 +78,31 @@ struct _GtkHTMLControlData {
 			*toolbar_edit,
 			*toolbar_file,
 			*toolbar_insert;
+	
 
 	GtkWidget *tt_button;
 	GtkWidget *bold_button;
 	GtkWidget *italic_button;
 	GtkWidget *underline_button;
 	GtkWidget *strikeout_button;
-	
+
 	GtkWidget *code_view_button;
-	
 	GtkWidget *left_align_button;
 	GtkWidget *center_button;
 	GtkWidget *right_align_button;
+
+	GtkWidget *indent_button;
+	GtkWidget *unindent_button;
 
 	GtkWidget *font_size_menu;
 
 	guint font_style_changed_connection_id;
 	gboolean block_font_style_change;
 
-//	GNOME_Spell_Dictionary  dict;
-//	BonoboObjectClient     *dict_client;
-//	EditorEngine       *editor_bonobo_engine;
+	//GNOME_Spell_Dictionary  dict;
+	//BonoboObjectClient     *dict_client;
+	//EditorEngine           *editor_bonobo_engine;
+	//BonoboControl          *control;
 };
 
 GtkHTMLControlData * gtk_html_control_data_new       (GtkHTML *html, GtkWidget *vbox);

@@ -110,6 +110,7 @@ sample_frame (GtkHTML **html)
 	gtk_container_add (GTK_CONTAINER (scroll_frame), GTK_WIDGET (*html));
 	gtk_container_add (GTK_CONTAINER (frame), scroll_frame);
 	gtk_signal_connect (GTK_OBJECT (*html), "url_requested", url_requested, NULL);
+	gtk_widget_set_usize (frame, -1, 120);
 
 	return frame;
 }

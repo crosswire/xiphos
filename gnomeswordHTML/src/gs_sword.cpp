@@ -619,8 +619,12 @@ changecomp1ModSWORD(gint num)  //-- change sword module for 1st interlinear wind
 	ModMap::iterator it;
 	gint i;
 	gchar *modName;
+	GString *strbuf;
 	
 	beginHTML(lookup_widget(MainFrm,"textComp1"));	
+	strbuf = g_string_new("<HTML><HEAD><STYLE type=\"text/css\">DIV.Abstract { text-align: justify }</STYLE></HEAD><BODY>");
+	displayHTML(GTK_WIDGET(lookup_widget(MainFrm,"textComp1")), strbuf->str, strbuf->len);
+	g_string_free(strbuf, TRUE);
 	for(i=0; i < 5; i++) {
 		switch(i) {
 			case 0: modName = settings->Interlinear1Module;
@@ -642,6 +646,9 @@ changecomp1ModSWORD(gint num)  //-- change sword module for 1st interlinear wind
 			comp1Mod->Display();              //-- show it to the world
 		}
 	}
+	strbuf = g_string_new("</body></HTML>");
+	displayHTML(GTK_WIDGET(lookup_widget(MainFrm,"textComp1")), strbuf->str, strbuf->len);
+	g_string_free(strbuf, TRUE);	
 	endHTML(lookup_widget(MainFrm,"textComp1"));
 	//strcpy(settings->Interlinear1Module, comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
@@ -1184,6 +1191,14 @@ gchar* getSDmodDescriptionSWORD(void)
 }
 
 /******************************************************************************
+ * returns the description of the view text dialog module
+ ******************************************************************************/
+gchar* getVTmodDescriptionSWORD(void)
+{
+	return (char *) VTMod->Description();;
+}
+
+/******************************************************************************
  *loadSDmodSWORD - load a dictionary module into the view dictionary dialog
  *returns a list of keys
  ******************************************************************************/
@@ -1285,7 +1300,7 @@ GList* setupVTSWORD(GtkWidget *text)
 	
 	VTMgr	= new SWMgr();
 	VTMod     = NULL;
-	VTDisplay = new  GtkHTMLEntryDisp(text);
+	VTDisplay = new  GTKhtmlChapDisp(text);
 	list = NULL;
 	for(it = VTMgr->Modules.begin(); it != VTMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
@@ -1300,6 +1315,17 @@ GList* setupVTSWORD(GtkWidget *text)
 	}
 	return list;
 }
+
+/******************************************************************************
+ *gotoverseVTSWORD - find new verse for view text dialog
+ *
+ ******************************************************************************/
+void gotoverseVTSWORD(gchar *newkey)
+{
+        VTMod->SetKey(newkey); //-- set key to our text
+        VTMod->Display();
+}
+
 
 
 /****************************************************************************************
@@ -1336,6 +1362,23 @@ void shutdownVCSWORD(void)  //-- close down view comm dialog program
 	delete VCMgr;	
 	if(VCDisplay)
 		delete VCDisplay;	
+}
+
+/******************************************************************************
+ *loadVTmodSWORD - load a text module into the view commentary dialog
+ *
+ ******************************************************************************/
+void loadVTmodSWORD(gchar *modName)
+{
+        ModMap::iterator it;
+        
+        it = VTMgr->Modules.find(modName);  //-- find module we want to use
+	if (it != VTMgr->Modules.end()){
+		
+		VTMod = (*it).second;  //-- set curdictMod to new choice
+		VTMod->SetKey("");		
+		VTMod->Display();	 //-- display new dict
+	}
 }
 
 /******************************************************************************

@@ -31,19 +31,17 @@ gtk_html_control_data_new (GtkHTML *html, GtkWidget *vbox)
 	GtkHTMLControlData * ncd = g_new0 (GtkHTMLControlData, 1);
 
 	ncd->html                    = html;
-	ncd->vbox                    = vbox;
-	//ncd->notebook		= notebook;
+	ncd->vbox                    = vbox; 
+	ncd->paragraph_option        = NULL;
 	ncd->properties_dialog       = NULL;
 	ncd->properties_types        = NULL;
 	ncd->block_font_style_change = FALSE;
-//	ncd->dict_client             = spell_new_dictionary ();
-//	ncd->dict                    = ncd->dict_client ? bonobo_object_corba_objref (BONOBO_OBJECT (ncd->dict_client)) : NULL;
+	//ncd->dict_client             = spell_new_dictionary ();
+	//ncd->dict                    = ncd->dict_client ? bonobo_object_corba_objref (BONOBO_OBJECT (ncd->dict_client)) : NULL;
 	ncd->gdk_painter             = NULL;
 	ncd->plain_painter           = NULL;
 	ncd->format_html             = FALSE;
-	ncd->html_modified	= FALSE;
-	ncd->note_editor	= FALSE;
-
+	//ncd->control                 = NULL;
 	return ncd;
 }
 
@@ -58,8 +56,16 @@ gtk_html_control_data_destroy (GtkHTMLControlData *cd)
 	if (cd->replace_dialog)
 		gtk_html_replace_dialog_destroy (cd->replace_dialog);
 
-/*	if (cd->dict_client)
+	/*if (cd->dict_client)
 		bonobo_object_unref (BONOBO_OBJECT (cd->dict_client));
 */
+	if (cd->plain_painter) 
+		gtk_object_unref (GTK_OBJECT (cd->plain_painter));
+
+	if (cd->gdk_painter) 
+		gtk_object_unref (GTK_OBJECT (cd->gdk_painter));
+
 	g_free (cd);
 }
+
+

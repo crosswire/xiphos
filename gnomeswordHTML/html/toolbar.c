@@ -213,15 +213,22 @@ setup_font_size_option_menu (GtkHTMLControlData *cd)
 }
 
 static void
-color_changed (GtkWidget *w, GdkColor *gdk_color, GtkHTMLControlData *cd)
+color_changed (GtkWidget *w, GdkColor *gdk_color, gboolean by_user, GtkHTMLControlData *cd)
 {
-	HTMLColor *color = gdk_color
+	HTMLColor *color;
+	
+	/* If the color was changed programatically there's not need to set things */
+	if (!by_user)
+		return;
+		
+	color = gdk_color
 		&& gdk_color != &html_colorset_get_color (cd->html->engine->settings->color_set, HTMLTextColor)->color
 		? html_color_new_from_gdk_color (gdk_color) : NULL;
 
 	gtk_html_set_color (cd->html, color);
 	if (color)
 		html_color_unref (color);
+
 	cd->html_modified = TRUE;
 	updatestatusbar(cd);
 }
@@ -264,7 +271,7 @@ setup_color_combo (GtkHTMLControlData *cd)
 		gtk_signal_connect (GTK_OBJECT (cd->html), "realize", realize_engine, cd);
         gtk_signal_connect (GTK_OBJECT (cd->html), "load_done", GTK_SIGNAL_FUNC (load_done), cd);
 
-	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, "toolbar_text");
+	cd->combo = color_combo_new (NULL, _("Automatic"), &color->color, color_group_fetch ("toolbar_text", cd));
 	GTK_WIDGET_UNSET_FLAGS (cd->combo, GTK_CAN_FOCUS);
 	gtk_container_forall (GTK_CONTAINER (cd->combo), unset_focus, NULL);
         gtk_signal_connect (GTK_OBJECT (cd->combo), "changed", GTK_SIGNAL_FUNC (color_changed), cd);

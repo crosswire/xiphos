@@ -201,6 +201,14 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 */
 }
 
+void
+on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *dlg;
+	
+	dlg = create_dlgViewText ();
+	gtk_widget_show(dlg);
+}
 //----------------------------------------------------------------------------------------------
 void
 on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
