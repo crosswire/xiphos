@@ -1,3 +1,11 @@
+2005-02-21  terry <tbiggs@users.sf.net>
+
+	* fixed to take advantage of clucene searching if Sword is built using
+	  clucene and the module being search has the search frame work 
+	  (lucene indexes). The frame work is built using mkfastmod.
+	  "mkfastmod KJV"
+	  
+	  
 2005-02-10  terry <tbiggs@users.sf.net>
 
 	* moved editor files to src/editor

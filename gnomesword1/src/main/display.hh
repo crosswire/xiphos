@@ -50,7 +50,6 @@ public:
 	virtual void getVerseBefore(SWModule &imodule);
 	virtual void getVerseAfter(SWModule &imodule);
 	MOD_FONT *mf;
-	GString *str;
 	SWBuf swbuf;
 };
 
