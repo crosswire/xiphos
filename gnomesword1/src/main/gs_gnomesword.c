@@ -39,6 +39,7 @@
 #include "gui/info_box.h"
 #include "gui/gbs.h"
 #include "gui/bibletext.h"
+#include "gui/_commentary.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -114,7 +115,7 @@ void init_gnomesword(void)
 	 *  setup commentary gui support 
 	 */
 	if (havecomm) {
-		setup_commentary(get_list(COMM_LIST));
+		gui_setup_commentary(get_list(COMM_LIST));
 	}
 
 	/*
@@ -139,8 +140,7 @@ void init_gnomesword(void)
 	}
 	
 	g_print("%s\n", "Initiating GnomeSWORD\n");
-	
-	settings.settingslist = NULL;
+		
 	settings.displaySearchResults = FALSE;
 
 	/*
@@ -202,7 +202,6 @@ void gnomesword_shutdown(void)
 	backend_shutdown();
 	
 	shutdown_list();
-	g_list_free(settings.settingslist);
 	
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
@@ -214,10 +213,10 @@ void gnomesword_shutdown(void)
 		gui_shutdown_text();
 	if(havebook)
 		gui_shutdown_gbs();
+	if(havecomm)
+		gui_shutdown_commentary();
 	if(havedict)
 		shutdown_dictlex();
-	if(havecomm)
-		shutdown_commentary();
 	if(havepercomm)
 		shutdown_percomm();
 	
@@ -740,7 +739,7 @@ void change_module_and_key(gchar * module_name, gchar * key)
 			page_num =
 			    backend_get_module_page(module_name, 
 							COMM_MODS);
-			set_commentary_page_and_key(page_num, key);
+			gui_set_commentary_page_and_key(page_num, key);
 		}
 		break;
 	case DICTIONARY_TYPE:
@@ -812,7 +811,7 @@ void change_verse(gchar * key)
 	 * set commentary module to current verse 
 	 */
 	if (havecomm)
-		display_commentary(val_key);
+		gui_display_commentary(val_key);
 	
 	g_free(val_key);
 	settings.apply_change = TRUE;
@@ -874,7 +873,7 @@ void display_devotional(void)
 void display_new_font_color_and_size(void)
 {
 	display_text(settings.currentverse);
-	display_commentary(settings.currentverse);
+	gui_display_commentary(settings.currentverse);
 	display_dictlex(settings.dictkey);
 	update_interlinear_page();
 }

@@ -2,6 +2,8 @@
 
 	* renamed gui/_bibletext.h to gui/bibletext.h
 	* renamed gnome/_bibletext.c to gnome/bibletext.c
+	* renamed gui/_commentary.h to gui/commentary.h
+	* renamed gnome/_commentary.c to gnome/commentary.c
 
 2002-06-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
