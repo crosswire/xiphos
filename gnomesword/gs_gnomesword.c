@@ -28,7 +28,7 @@
 #endif
 #include <gnome.h>
 #include "gs_gnomesword.h"
-#include "GnomeSword.h"
+#include "gs_sword.h"
 #include "callback.h"
 #include "support.h"
 #include "interface.h"

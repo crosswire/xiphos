@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "GnomeSword.h"
+#include "gs_sword.h"
 
 
 typedef struct _settings SETTINGS;
