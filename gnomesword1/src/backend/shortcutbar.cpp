@@ -31,7 +31,6 @@
 #endif
 
 #include <glib-1.2/glib.h>
-#include <swmgr.h>
 #include <swconfig.h>
 #include <versekey.h>
 #include <stdio.h>
@@ -39,6 +38,7 @@
 #include <dirent.h>
 #include <string.h>
 
+#include "main/shortcutbar.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
@@ -163,12 +163,10 @@ void backend_save_sb_group(char * filename, char * group_name,
     emap = sbconf->Sections["ROOT"];
 
     number_of_items =
-	get_num_shortcut_items(settings.shortcut_bar, group_num);
+	get_num_shortcut_items(group_num);
 
     for (j = 0; j < number_of_items; j++) {
-	get_shortcut_item_info(settings.shortcut_bar,
-					group_num,
-					j, &item_url, &item_name);
+	get_shortcut_item_info(group_num, j, &item_url, &item_name);
 	sprintf(buf, "branch%d", j);
 	emap.erase(buf);
 	emap.insert(ConfigEntMap::value_type(buf, (char *) item_name));

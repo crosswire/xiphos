@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * main_window.h - main window gui 
+ * shortcutbar.h - glue
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,20 +19,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MAIN_WINDOW_H_
-#define __MAIN_WINDOW_H_
+#ifndef _SHORTCUTBAR_H__
+#define _SHORTCUTBAR_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "main/settings.h"
+#include <glib-1.2/glib.h>
+ 
+/*** function prototypes ***/
 
-void gui_change_module_and_key(gchar *module_name, gchar *key);
-void gui_change_verse(gchar *key);	
-void gui_search_appbar_update(char percent, void *userData);
-void create_mainwindow(void);
-void gui_show_main_window(void);
+GList *load_sb_group(gchar *filename, gchar *group_name, 
+						gchar *icon_size);
+void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
+						     char *large_icons);
+void save_sb_iconsize(gchar *file_name, char *icons);
+gint get_num_shortcut_items(gint group_num); 
+void get_shortcut_item_info(gint group_num,
+				     gint item_num,
+				     gchar ** item_url,
+				     gchar ** item_name);
 
 #ifdef __cplusplus
 }

@@ -30,13 +30,13 @@
 #include "gui/interlinear.h"
 #include "gui/interlinear_dialog.h"
 #include "gui/html.h"
+#include "gui/main_window.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "main/lists.h"
 
 
-extern gboolean havebible;
 
 /******************************************************************************
  * static
@@ -365,7 +365,7 @@ void gui_update_interlinear_page(void)
 	gint utf8len, i, j;
 	gboolean was_editable, use_gtkhtml_font;
 	
-	if (havebible) {
+	if (settings.havebible) {
 		/* setup gtkhtml widget */
 		GtkHTML *html = GTK_HTML(settings.htmlInterlinear);
 		was_editable = gtk_html_get_editable(html);
@@ -808,7 +808,7 @@ void gui_swap_interlinear_with_main(char * intmod)
 	if (!strcmp(settings.Interlinear1Module, intmod)) {
 		sprintf(settings.Interlinear1Module, "%s", modname);
 	}
-	change_module_and_key(intmod, settings.currentverse);
+	gui_change_module_and_key(intmod, settings.currentverse);
 	gui_update_interlinear_page();
 }
 

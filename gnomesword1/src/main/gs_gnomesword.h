@@ -94,8 +94,6 @@ int get_mod_type(char * mod_name);
 char *get_module_font_name(char *mod_name);
 char *get_module_font_size(char *mod_name);
 void module_name_from_description(gchar *mod_name, gchar *description);
-void change_module_and_key(gchar *module_name, gchar *key);
-void change_verse(gchar *key);
 void set_verse_style(gboolean choice);
 void save_module_key(gchar * mod_name, gchar * key);
 const char *get_sword_version(void);
@@ -108,18 +106,6 @@ int get_verse_from_key(char *key);
 void save_properties(gboolean use_default);
 GList *do_search(gpointer *usr_data);
 GList *get_verse_list(gchar* module_name, gchar *verse_list);
-GList *load_sb_group(gchar *filename, gchar *group_name, 
-						gchar *icon_size);
-void save_sb_group(gchar *file_name, gchar *group_name, gint group_num,
-						     char *large_icons);
-void save_sb_iconsize(gchar *file_name, char *icons);
-gint get_num_shortcut_items(GtkWidget *shortcutbar_widget,
-				     gint group_num); 
-void get_shortcut_item_info(GtkWidget *shortcutbar_widget,
-				     gint group_num,
-				     gint item_num,
-				     gchar ** item_url,
-				     gchar ** item_name);
 int module_is_locked(char * mod_name);
 char *get_valid_key(char *key);
 int get_module_number(char *module_name, char *module_type);

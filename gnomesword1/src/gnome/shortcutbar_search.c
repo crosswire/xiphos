@@ -32,6 +32,7 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
 
+#include "main/shortcutbar.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
