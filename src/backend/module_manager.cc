@@ -358,10 +358,14 @@ GList *backend_module_mgr_list_remote_sources(void)
 {
 	MOD_MGR_SOURCE *mms;
 	GList *retval = NULL;
-
+	char *envhomedir = getenv("HOME");
+	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
+	baseDir += "/.sword/InstallMgr";
+	InstallMgr *inst_mgr = new InstallMgr(baseDir);
+	
 	for (InstallSourceMap::iterator it =
-	     installMgr->sources.begin();
-	     it != installMgr->sources.end(); it++) {
+	     inst_mgr->sources.begin();
+	     it != inst_mgr->sources.end(); it++) {
 		mms = g_new(MOD_MGR_SOURCE, 1);
 		mms->caption = it->second->caption;
 		mms->type = it->second->type;
@@ -369,6 +373,7 @@ GList *backend_module_mgr_list_remote_sources(void)
 		mms->directory = it->second->directory;
 		retval = g_list_append(retval, (MOD_MGR_SOURCE *) mms);
 	}
+	delete inst_mgr;
 	return retval;
 }
 
@@ -497,10 +502,25 @@ void backend_init_module_mgr_config(void)
 	config.Save();
 }
 
-void backend_module_mgr_save_config(GList *local, GList *remote)
+
+/******************************************************************************
+ * Name
+ *   backend_module_mgr_clear_config
+ *
+ * Synopsis
+ *   #include "backend/module_manager.hh"
+ *
+ *   void backend_module_mgr_clear_config(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void backend_module_mgr_clear_config(void)
 {
-	MOD_MGR_SOURCE *mms;
-	GList *tmp = NULL;
 	char *envhomedir = getenv("HOME");
 	SWBuf confPath = (envhomedir) ? envhomedir : ".";
 	confPath += "/.sword/InstallMgr/InstallMgr.conf";
@@ -510,23 +530,32 @@ void backend_module_mgr_save_config(GList *local, GList *remote)
 	SWConfig config(confPath.c_str());
 	
 	config["General"]["PassiveFTF"] = "true";
-	
-	tmp = remote;
-	while(tmp) {
-		mms = (MOD_MGR_SOURCE*) tmp->data;
-		InstallSource is(mms->type);
-		is.caption = mms->caption;
-		is.source = mms->source;
-		is.directory = mms->directory;
-		config.Sections["Sources"].insert(
-				ConfigEntMap::value_type("FTPSource", 
-				is.getConfEnt().c_str()));
-		tmp = g_list_next(tmp);
-	}		
-	config.Save();
+	config.Save();	
 }
 
-void backend_module_mgr_add_source(const char * type,
+
+/******************************************************************************
+ * Name
+ *   backend_module_mgr_add_source
+ *
+ * Synopsis
+ *   #include "backend/module_manager.hh"
+ *
+ *   backend_module_mgr_add_source(const char * vtype,
+ *				   const char * type,
+ *				   const char * caption,
+ *				   const char * source,
+ *				   const char * directory)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void backend_module_mgr_add_source(const char * vtype,
+				   const char * type,
 				   const char * caption,
 				   const char * source,
 				   const char * directory)
@@ -542,7 +571,7 @@ void backend_module_mgr_add_source(const char * type,
 	is.caption = caption;
 	is.source = source;
 	is.directory = directory;
-	config.Sections["Sources"].insert(ConfigEntMap::value_type("FTPSource", 
+	config.Sections["Sources"].insert(ConfigEntMap::value_type(vtype, 
 		is.getConfEnt().c_str()));	
 	config.Save();
 }
