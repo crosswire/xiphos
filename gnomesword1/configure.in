@@ -14,7 +14,7 @@ DIRS="backend main gnome2"
 AC_SUBST(DIRS)
 gnomesword_exec="gnomesword2"
 AC_SUBST(gnomesword_exec)	
-PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libgtkhtml-3.0 gal-2.0 libxml-2.0 ,,exit)
+PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 gtk+-2.0 libxml-2.0 ,,exit)
 AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
@@ -47,6 +47,21 @@ dnl Languages which your application supports
 	ALL_LINGUAS="de de_DE en_GB fr_FR ru uk"
 
 AM_GLIB_GNU_GETTEXT
+
+dnl ================================================================
+dnl check for GtkHtml
+dnl ================================================================
+GTKHTML_LIBS=""
+GTKHTML_CFLAGS=""
+PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.0 gal-2.0, have_gtkhtml=yes,have_gtkhtml=no)
+if test "x$have_gtkhtml" = xyes; then
+   AC_DEFINE(USE_GTKHTML30, 1, [Define if you want to use GtkHtml-3.0])	
+else
+   PKG_CHECK_MODULES(GTKHTML, libgtkhtml-3.1, have_gtkhtml=yes,exit)
+   AC_DEFINE(USE_GTKHTML31, 1, [Define if you want to use GtkHtml-3.1])
+fi
+AC_SUBST(GTKHTML_LIBS)
+AC_SUBST(GTKHTML_CFLAGS)
 
 MOZILLA_LIBS=""
 MOZILLA_CFLAGS=""
@@ -271,6 +286,11 @@ echo "Sword libs              $LIB_SWORD"
 if test "x$debug" = xyes; then
   echo "debug:                    enabled"
 fi
+
+if test "x$have_gtkhtml" = xyes; then
+  echo "GTKHTML_CFLAGS        $GTKHTML_CFLAGS"
+fi
+
 if test "x$moz_embed" = xyes; then
   echo "use mozilla:              enabled"
   echo "MOZILLA_CFLAGS        $MOZILLA_CFLAGS"
