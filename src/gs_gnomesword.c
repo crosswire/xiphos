@@ -61,7 +61,7 @@ gchar * current_filename = NULL;	/* filename for open file in study pad window *
 
 gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
 
-gint dictpages, compages, textpages;
+gint dictpages, compages, textpages, bookpages;
 
 SETTINGS * settings;
 
