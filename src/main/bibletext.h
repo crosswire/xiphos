@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_bibletext.h - support for commentary modules
+ * bibletext.h - support for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GS_BIBLETEXT_H_
-#define __GS_BIBLETEXT_H_
+#ifndef __BIBLETEXT_H_
+#define __BIBLETEXT_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,35 +43,53 @@ extern "C" {
 		GtkWidget *html;
 		GtkWidget *frame;
 		GtkWidget *showtabs;
+		GtkWidget *t_btn_strongs;
+		GtkWidget *t_btn_morphs;
+		GtkWidget *t_btn_footnotes;
+		GtkWidget *t_btn_accents;
+		GtkWidget *t_btn_lemmas;
+		GtkWidget *t_btn_scripturerefs;
+		GtkWidget *t_btn_points;
+		GtkWidget *t_btn_cant;
+		GtkWidget *t_btn_headings;
+		GtkWidget *t_btn_primary;
+		GtkWidget *t_btn_secondary;
+		GtkWidget *t_btn_all;
 		gchar *mod_name;
 		gchar *mod_description;
 		gchar *search_string;
 		gchar *key;
 		gint mod_num;
 		gboolean is_locked;
-		/*
-		   gboolean
-		   strongs,
-		   morphs,
-		   footnotes,
-		   greekaccents,
-		   lemmas,
-		   scripturerefs, 
-		   hebrewpoints, 
-		   hebrewcant, 
-		   headings;
-		 */
+		gboolean
+		    gbfstrongs,
+		    thmlstrongs,
+		    gbfmorphs,
+		    thmlmorphs,
+		    gbffootnotes,
+		    thmlfootnotes,
+		    greekaccents,
+		    lemmas,
+		    scripturerefs,
+		    hebrewpoints, 
+		    hebrewcant, 
+		    headings, 
+		    variants;
 		Text_Find_Dialog *find_dialog;
 	};
-
-	void set_text_module_global_options(gchar * option,
-					    gboolean choice);
-	void gui_set_text_page_and_key(gint page_num, gchar * key);
-	GList *gui_setup_text(SETTINGS * s);
-	void gui_shutdown_text(void);
-	void gui_display_text(gchar * key);
+	
+	void text_page_changed(gint page_num, TEXT_DATA *t);
+	void set_text_page_and_key(gint page_num, gchar * key);
+	void set_text_module_global_option(gchar * option,
+					   gboolean choice);
+	void set_text_variant_global_option(gchar * option,
+					    gchar * choice);
+	void set_options_on_page_change(TEXT_DATA * t);
+	GList *setup_text(SETTINGS * s);
+	void shutdown_text(void);
+	void display_text(gchar * key);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_BIBLETEXT_H_ */
+#endif				/* __BIBLETEXT_H_ */

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bibletext.h - support for Sword commentary modules
+ * bibletext_.h - support for Sword commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -20,8 +20,8 @@
  */
 
 
-#ifndef __BIBLETEXT_H_
-#define __BIBLETEXT_H_
+#ifndef __BIBLETEXT__H_
+#define __BIBLETEXT__H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,10 +34,13 @@ extern "C" {
 				      SETTINGS * s);
 	void backend_setup_text(SETTINGS * s);
 	void backend_shutdown_text(void);
-	void backend_display_text(int modnum, char * key);
-	void backend_set_text_global_option(char * option, char * yesno);
-	void backend_set_module_unlocked(char *mod_name, int mod_num, char *key);
+	void backend_display_text(int modnum, char *key);
+	void backend_set_text_global_option(char *option, char *yesno);
+	void backend_set_module_unlocked(char *mod_name, int mod_num,
+					 char *key);
+	gboolean backend_check_for_global_option(int mod_num,
+						 char *option);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __BIBLETEXT_H_ */
+#endif				/* __BIBLETEXT__H_ */

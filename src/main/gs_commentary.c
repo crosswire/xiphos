@@ -38,11 +38,11 @@
 
 extern SETTINGS *settings;
 extern gboolean isrunningVC;  
-
+COMM_DATA *cur_c;
 GList *comm_list;
 static gboolean display_change = TRUE;
 
-static void on_notebookCOMM_switch_page(GtkNotebook * notebook,
+static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl);
 				 
@@ -56,7 +56,7 @@ void gui_set_commentary_page_and_key(gint page_num, gchar *key)
 }
 
 static
-COMM_DATA *getCOMM(GList * cl)
+COMM_DATA *get_comm_struct(GList * cl)
 {
 	GList *tmp;
 	COMM_DATA *c = NULL;
@@ -76,14 +76,14 @@ COMM_DATA *getCOMM(GList * cl)
 }
 
 static
-void on_notebookCOMM_switch_page(GtkNotebook * notebook,
+void on_notebook_comm_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl)
 {
 	COMM_DATA *c;
 	
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
-
+	cur_c = c;
 	sprintf(settings->CommWindowModule, "%s", c->modName);
 
 	settings->commLastPage = page_num;
@@ -133,19 +133,16 @@ void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 
 static
 void on_lookup_selection_activate(GtkMenuItem * menuitem,
-				  gchar * modDescription)
+				  gchar * dict_mod_description)
 {
-	COMM_DATA *c;
-	gchar modName[16];
-	gchar *key;
+	gchar *dict_key, *dict_mod;
 
-	c = getCOMM(comm_list);
-	memset(modName, 0, 16);
-	backend_module_name_from_description(modName, modDescription);
-	key = lookupGS_HTML(c->html, FALSE);
-	if (key) {
-		display_dictlex_in_viewer(modName, key, settings);
-		g_free(key);
+	dict_mod = get_module_name_from_description(dict_mod_description);
+	dict_key = get_word_or_selection(cur_c->html, FALSE);
+	if (dict_key) {
+		display_dictlex_in_viewer(dict_mod, dict_key, settings);
+		g_free(dict_key);
+		g_free(dict_mod);
 	}
 }
 
@@ -153,7 +150,7 @@ static
 void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 				       COMM_DATA * c)
 {
-	gchar *key = lookupGS_HTML(c->html, FALSE);
+	gchar *key = get_word_or_selection(c->html, FALSE);
 	if (key) {
 		display_dictlex_in_viewer(settings->DictWindowModule, key,
 				   settings);
@@ -161,8 +158,8 @@ void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 	}
 }
 
-static void
-on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
+static 
+void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gint page;
 
@@ -171,7 +168,8 @@ on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
 			      page);
 }
 
-static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
+static 
+void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 				      SETTINGS * s)
 {
 	s->comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
@@ -179,7 +177,8 @@ static void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 				   s->comm_tabs);
 }
 
-static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
+static 
+void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 {
 	static GtkWidget *dlg;
         GdkCursor *cursor;	
@@ -199,18 +198,19 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 
 }
 
-static void on_unlock_key_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+static 
+void on_unlock_key_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
 	GtkWidget *dlg;
 	
-	dlg = gui_create_unlock_key_dialog(c->modName);
+	dlg = gui_create_cipher_key_dialog(c->modName);
 	gtk_widget_show(dlg);
 }
 static
-GtkWidget *create_pmCOMM(COMM_DATA * c)
+GtkWidget *create_pm(COMM_DATA * c)
 {
-	GtkWidget *pmCOMM;
-	GtkAccelGroup *pmCOMM_accels;
+	GtkWidget *pm;
+	GtkAccelGroup *pm_accels;
 	GtkWidget *copy;
 	GtkWidget *separator;
 	GtkWidget *lookup_selection;
@@ -229,76 +229,76 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 
 	tmp = NULL;
 
-	pmCOMM = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pmCOMM), "pmCOMM", pmCOMM);
-	pmCOMM_accels =
-	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmCOMM));
+	pm = gtk_menu_new();
+	gtk_object_set_data(GTK_OBJECT(pm), "pm", pm);
+	pm_accels =
+	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm));
 
 	copy = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_ref(copy);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "copy", copy,
+	gtk_object_set_data_full(GTK_OBJECT(pm), "copy", copy,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(copy);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), copy);
+	gtk_container_add(GTK_CONTAINER(pm), copy);
 
 	find = gtk_menu_item_new_with_label(_("Find"));
 	gtk_widget_ref(find);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "find", find,
+	gtk_object_set_data_full(GTK_OBJECT(pm), "find", find,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(find);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), find);
+	gtk_container_add(GTK_CONTAINER(pm), find);
 
 	c->showtabs =
 	    gtk_check_menu_item_new_with_label(_("Show Tabs"));
 	gtk_widget_ref(c->showtabs);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "c->showtabs",
+	gtk_object_set_data_full(GTK_OBJECT(pm), "c->showtabs",
 				 c->showtabs, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(c->showtabs);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), c->showtabs);
+	gtk_container_add(GTK_CONTAINER(pm), c->showtabs);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "separator",
+	gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
 				 separator, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), separator);
+	gtk_container_add(GTK_CONTAINER(pm), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
 
 	view_new = gtk_menu_item_new_with_label("View in new window");
 	gtk_widget_ref(view_new);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "view_new",
+	gtk_object_set_data_full(GTK_OBJECT(pm), "view_new",
 				 view_new, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(view_new);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), view_new);
+	gtk_container_add(GTK_CONTAINER(pm), view_new);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "separator",
+	gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
 				 separator, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), separator);
+	gtk_container_add(GTK_CONTAINER(pm), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
 
 
 	lookup_selection =
 	    gtk_menu_item_new_with_label(_("Lookup Selection"));
 	gtk_widget_ref(lookup_selection);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM),
+	gtk_object_set_data_full(GTK_OBJECT(pm),
 				 "lookup_selection", lookup_selection,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(lookup_selection);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), lookup_selection);
+	gtk_container_add(GTK_CONTAINER(pm), lookup_selection);
 
 	lookup_selection_menu = gtk_menu_new();
 	gtk_widget_ref(lookup_selection_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM),
+	gtk_object_set_data_full(GTK_OBJECT(pm),
 				 "lookup_selection_menu",
 				 lookup_selection_menu,
 				 (GtkDestroyNotify)
@@ -312,7 +312,7 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 	usecurrent =
 	    gtk_menu_item_new_with_label("Use Current Dictionary");
 	gtk_widget_ref(usecurrent);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "usecurrent",
+	gtk_object_set_data_full(GTK_OBJECT(pm), "usecurrent",
 				 usecurrent, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(usecurrent);
@@ -322,27 +322,27 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "separator",
+	gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
 				 separator, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), separator);
+	gtk_container_add(GTK_CONTAINER(pm), separator);
 	gtk_widget_set_sensitive(separator, FALSE);
 
 
 	view_commentary =
 	    gtk_menu_item_new_with_label(_("View Commentary"));
 	gtk_widget_ref(view_commentary);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM),
+	gtk_object_set_data_full(GTK_OBJECT(pm),
 				 "view_commentary", view_commentary,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(view_commentary);
-	gtk_container_add(GTK_CONTAINER(pmCOMM), view_commentary);
+	gtk_container_add(GTK_CONTAINER(pm), view_commentary);
 
 	view_commentary_menu = gtk_menu_new();
 	gtk_widget_ref(view_commentary_menu);
-	gtk_object_set_data_full(GTK_OBJECT(pmCOMM),
+	gtk_object_set_data_full(GTK_OBJECT(pm),
 				 "view_commentary_menu",
 				 view_commentary_menu,
 				 (GtkDestroyNotify)
@@ -359,30 +359,30 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 		GtkWidget *add_module_key;
 		separator = gtk_menu_item_new();
 		gtk_widget_ref(separator);
-		gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "separator",
+		gtk_object_set_data_full(GTK_OBJECT(pm), "separator",
 					 separator, (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(separator);	
-		gtk_container_add(GTK_CONTAINER(pmCOMM), separator);
+		gtk_container_add(GTK_CONTAINER(pm), separator);
 		gtk_widget_set_sensitive(separator, FALSE);
 			
 		add_module_key = gtk_menu_item_new_with_label (_("Unlock This Module"));
 		gtk_widget_ref (add_module_key);
-		gtk_object_set_data_full (GTK_OBJECT (pmCOMM), "add_module_key",add_module_key ,
+		gtk_object_set_data_full (GTK_OBJECT (pm), "add_module_key",add_module_key ,
 				    (GtkDestroyNotify) gtk_widget_unref);
 		gtk_widget_show (add_module_key);
-		gtk_container_add (GTK_CONTAINER (pmCOMM), add_module_key);
+		gtk_container_add (GTK_CONTAINER (pm), add_module_key);
 			
 		gtk_signal_connect (GTK_OBJECT (add_module_key), "activate",
                       	GTK_SIGNAL_FUNC (on_unlock_key_activate),
                       	c);
 	}
-	tmp = backend_get_mod_description_list_SWORD(DICT_MODS);
+	tmp = mod_lists->dict_descriptions; //backend_get_mod_description_list_SWORD(DICT_MODS);
 	while (tmp != NULL) {
 		item4 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item4);
-		gtk_object_set_data_full(GTK_OBJECT(pmCOMM),
+		gtk_object_set_data_full(GTK_OBJECT(pm),
 					 "item4", item4,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -398,12 +398,12 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 	g_list_free(tmp);
 
 	i = 0;
-	tmp = backend_get_mod_description_list_SWORD(COMM_MODS);
+	tmp = mod_lists->comm_descriptions;
 	while (tmp != NULL) {
 		item3 =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_ref(item3);
-		gtk_object_set_data_full(GTK_OBJECT(pmCOMM),
+		gtk_object_set_data_full(GTK_OBJECT(pm),
 					 "item3", item3,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
@@ -433,34 +433,38 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_view_new_activate), settings);
-	return pmCOMM;
+	return pm;
 }
 
 
 
 
-static void on_btnCOMMSync_clicked(GtkButton * button, COMM_DATA * c)
+static 
+void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
 {
 	backend_displayinCOMM(c->modnum, settings->currentverse);
 }
 
-static void on_btnCOMMBack_clicked(GtkButton * button, COMM_DATA * c)
+static 
+void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 {
 	backend_nav_commentary_COMM(c->modnum, 0);
 }
 
-static void on_btnCOMMForward_clicked(GtkButton * button, COMM_DATA * c)
+static 
+void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 {
 	backend_nav_commentary_COMM(c->modnum, 1);
 }
 
-static void on_btnCOMMPrint_clicked(GtkButton * button, COMM_DATA * c)
+static 
+void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
 {
 	html_print(c->html);
 }
 
-static gboolean
-on_button_release_event(GtkWidget * widget,
+static 
+gboolean on_button_release_event(GtkWidget * widget,
 			GdkEventButton * event, COMM_DATA * c)
 {
 	extern gboolean in_url;
@@ -503,11 +507,13 @@ on_button_release_event(GtkWidget * widget,
 }
 
 
-static GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
+static 
+GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 				 gint count)
 {
 	GtkWidget *frameCOMM;
 	GtkWidget *vbox57;
+	GtkWidget *frame;
 	GtkWidget *toolbarCOMM;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *vseparator19;
@@ -531,6 +537,13 @@ static GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 	gtk_widget_show(vbox57);
 	gtk_container_add(GTK_CONTAINER(frameCOMM), vbox57);
 
+	frame = gtk_frame_new(NULL);
+	gtk_widget_ref(frame);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame", frame,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame);
+	gtk_box_pack_start(GTK_BOX(vbox57), frame, FALSE, TRUE, 0);
+	
 	toolbarCOMM =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
@@ -539,8 +552,7 @@ static GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 				 toolbarCOMM, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(toolbarCOMM);
-	gtk_box_pack_start(GTK_BOX(vbox57), toolbarCOMM, FALSE,
-			   TRUE, 0);
+	gtk_container_add(GTK_CONTAINER(frame), toolbarCOMM);	
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarCOMM),
 				      GTK_RELIEF_NONE);
 
@@ -676,19 +688,19 @@ static GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 
 
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMSync), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnCOMMSync_clicked),
+			   GTK_SIGNAL_FUNC(on_btn_sync_clicked),
 			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMBack), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnCOMMBack_clicked),
+			   GTK_SIGNAL_FUNC(on_btn_back_clicked),
 			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMForward),
 			   "clicked",
 			   GTK_SIGNAL_FUNC
-			   (on_btnCOMMForward_clicked),
+			   (on_btn_forward_clicked),
 			   (COMM_DATA *) c);
 	gtk_signal_connect(GTK_OBJECT(c->btnCOMMPrint), "clicked",
 			   GTK_SIGNAL_FUNC
-			   (on_btnCOMMPrint_clicked), (COMM_DATA *) c);
+			   (on_btn_print_clicked), (COMM_DATA *) c);
 
 	return frameCOMM;
 }
@@ -726,7 +738,7 @@ GList* gui_setup_comm(SETTINGS * s)
 		c->find_dialog = NULL;		
 		c->has_key = backend_module_is_locked(c->modName);
 		createPaneCOMM(s, c, count);
-		popupmenu = create_pmCOMM(c);
+		popupmenu = create_pm(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);
 		backend_newDisplayCOMM(c->html, c->modName, s);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
@@ -737,7 +749,7 @@ GList* gui_setup_comm(SETTINGS * s)
 	gtk_signal_connect(GTK_OBJECT(s->notebookCOMM),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
-			   (on_notebookCOMM_switch_page), comm_list);
+			   (on_notebook_comm_switch_page), comm_list);
 
 	modbuf = g_strdup(s->CommWindowModule);
 	keybuf = g_strdup(s->currentverse);

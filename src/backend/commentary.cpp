@@ -59,7 +59,22 @@ SWMgr *swmgrCOMM;
 GList *be_comm_list;
 
 /***  start code  ***/
-/*** navigate the current commentary module ***/
+
+/******************************************************************************
+ * Name
+ *  backend_nav_commentary_COMM
+ *
+ * Synopsis
+ *   #include "commentary.h"
+ *
+ *   void backend_nav_commentary_COMM(gint modnum, gint direction)	
+ *
+ * Description
+ *    navigate the current commentary module
+ *
+ * Return value
+ *   void
+ */
 void backend_nav_commentary_COMM(gint modnum, gint direction)
 {
 	BE_COMM *co;
@@ -79,7 +94,7 @@ void backend_nav_commentary_COMM(gint modnum, gint direction)
 	co->mod->Display();
 }
 
-static SWModule *backend_getModule(char *modname)
+static SWModule *backend_get_module(char *modname)
 {
 	GList *tmp = NULL;
 	BE_COMM *c;

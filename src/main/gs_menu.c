@@ -48,7 +48,7 @@ gint	greekpage,
  * static function prototypes
  *******************************************************************************
  */
-static GtkWidget* create_pmInt(GList *mods, GList *options, gchar *intWindow);
+static GtkWidget* create_pmInt(GList *mods, gchar *intWindow);
 static GtkWidget* create_pmBible(GList * bibleDescription,
 				GList *dictDescription);
 static void loadmenuformmodlist(GtkWidget *pmInt, 
@@ -78,22 +78,7 @@ additemstooptionsmenu(GList *options, SETTINGS *s)
 
 	tmp = options;
 	while (tmp != NULL) {
-		menu = _("_Settings/Module Options/");
-		shellmenu =  module_options_menu;
-				
-		menuitem = g_new(GnomeUIInfo, 2);
-		menuitem->type = GNOME_APP_UI_TOGGLEITEM;
-		menuitem->user_data = (gchar *)(gchar *) tmp->data;
-		menuitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
-		menuitem->pixmap_info = NULL;
-		menuitem->accelerator_key = 0;
-		menuitem->label = (gchar *)(gchar *) tmp->data;
-		menuitem->moreinfo = (gpointer) (GtkMenuCallback)on_global_options_activate;
-		menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
-		gnome_app_insert_menus_with_data(GNOME_APP(s->app), menu,
-					 menuitem, NULL);
-		item = menuitem[0].widget;
-		
+		shellmenu =  module_options_menu;		
 			
 		/* add global option items to interlinear popup menu */
 		menuChoice = gtk_check_menu_item_new_with_label((gchar *)(gchar *) tmp->data);	
@@ -108,47 +93,38 @@ additemstooptionsmenu(GList *options, SETTINGS *s)
                                              1);  	      
 				
 		if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
-			s->strongsnum =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->strongsint;		
 		}
 		
-		if(!strcmp((gchar *) tmp->data, "Footnotes")) {
-			s->footnotes =  menuitem[0].widget;			
+		if(!strcmp((gchar *) tmp->data, "Footnotes")) {		
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->footnotesint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
-			s->morphs =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->morphsint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
-			s->hebrewpoints =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->hebrewpointsint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
-			s->cantillationmarks =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->cantillationmarksint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
-			s->greekaccents =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->greekaccentsint;
 		}	
 		
 		if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
-			s->crossrefs =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->crossrefint;
 		}	
 		
 		if(!strcmp((gchar *) tmp->data, "Lemmas")) {
-			s->lemmas =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->lemmasint;
 		}		
 		
 		if(!strcmp((gchar *) tmp->data, "Headings")) {
-			s->headings =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->headingsint;
 		}	
 		
@@ -271,17 +247,12 @@ void createpopupmenus(SETTINGS *s,
 		GList *bibleDescription,
 		GList *options) 
 {
-	/* create popup menu for Bible window */
-	//s->menuBible = create_pmBible(bibleDescription, dictDescription);
 	/* create popup menu for interlinear window */
-	s->menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
+	s->menuInt = create_pmInt(bibleDescription, "textComp1"); 
 	
 	/* attach popup menus */
 	gnome_popup_menu_attach(s->menuInt,s->htmlInterlinear,(gchar*)"1");
-//	gnome_popup_menu_attach(s->menuBible,lookup_widget(s->app,"htmlTexts"),(gchar*)"1");
-	
-	/* ajust checkmarks */
-	//GTK_CHECK_MENU_ITEM (lookup_widget(s->menuBible,"show_tabs"))->active = s->text_tabs;
+	additemstooptionsmenu(options, s);
 }
 
 /*
@@ -700,7 +671,7 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
  * GtkMenuCallback mycallback - callback for copy text
  ******************************************************************************/
 static GtkWidget*
-create_pmInt(GList *mods, GList *options, gchar *intWindow)
+create_pmInt(GList *mods, gchar *intWindow)
 {
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;

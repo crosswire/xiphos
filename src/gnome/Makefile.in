@@ -153,6 +153,8 @@ CXXFLAGS = \
 
 
 libgui_a_SOURCES = \
+    _bibletext.c \
+    _bibletext.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
@@ -176,8 +178,9 @@ LIBRARIES = $(noinst_LIBRARIES)
 
 libgui_a_AR = $(AR) cru
 libgui_a_LIBADD =
-am_libgui_a_OBJECTS = about_gnomesword.$(OBJEXT) about_modules.$(OBJEXT) \
-	about_sword.$(OBJEXT) create_shortcutbar_search.$(OBJEXT) \
+am_libgui_a_OBJECTS = _bibletext.$(OBJEXT) about_gnomesword.$(OBJEXT) \
+	about_modules.$(OBJEXT) about_sword.$(OBJEXT) \
+	create_shortcutbar_search.$(OBJEXT) \
 	create_shortcutbar_viewer.$(OBJEXT) cipher_key_dialog.$(OBJEXT) \
 	splash.$(OBJEXT)
 libgui_a_OBJECTS = $(am_libgui_a_OBJECTS)
@@ -188,7 +191,8 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
-@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/about_gnomesword.Po \
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/_bibletext.Po \
+@AMDEP_TRUE@	$(DEPDIR)/about_gnomesword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/about_modules.Po $(DEPDIR)/about_sword.Po \
 @AMDEP_TRUE@	$(DEPDIR)/cipher_key_dialog.Po \
 @AMDEP_TRUE@	$(DEPDIR)/create_shortcutbar_search.Po \
@@ -242,6 +246,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/_bibletext.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_gnomesword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_modules.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_sword.Po@am__quote@
