@@ -9,6 +9,8 @@ INCLUDES =  \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE =  \
+    gs_gui.c \
+    gs_gui.h \
     gs_abouts.c \
     gs_abouts.h \
     gs_viewcomm.c \
