@@ -320,7 +320,7 @@ msgstr "Romanos 8:28"
 # src/gs_gnomesword.c
 # src/gs_gnomesword.c
 msgid "_Settings/"
-msgstr "_Opciones/"
+msgstr "_Configuración/"
 
 # src/gs_gnomesword.c
 msgid "Auto Save Personal Comments"

@@ -6,29 +6,29 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=51
-1=73
-2=259
-3=1
-4=38
-5=117
-6=194
-7=303
-8=21
-9=27
-10=38
-11=47
+0=305
+1=32
+2=31
+3=660
+4=432
+5=38
+6=4
+7=259
+8=73
+9=51
+10=59
+11=4
 12=89
 
 [filemarkers]
 0=
 1=
-2=1164,1452,
+2=
 3=
 4=
 5=
 6=
-7=
+7=1164,1452,
 8=
 9=
 10=
@@ -36,16 +36,11 @@ ShowLocals=true
 12=
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/backend/shortcutbar.h
-1=/home/terry/Projects/gnomesword1/src/backend/shortcutbar.cpp
-2=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.c
-3=/home/terry/Projects/gnomesword1/ChangeLog
-4=/home/terry/Projects/gnomesword1/src/main/gs_shortcutbar.h
-5=/home/terry/Projects/gnomesword1/src/main/gs_preferences_dlg.c
-6=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.h
-7=/home/terry/Projects/gnomesword1/src/main/gs_popup_cb.c
-8=/home/terry/Projects/gnomesword1/src/backend/viewtext.cpp
-9=/home/terry/Projects/gnomesword1/src/backend/viewtext.h
+0=/home/terry/Projects/gnomesword1/src/backend/viewtext.cpp
+1=/home/terry/Projects/gnomesword1/src/backend/viewdict.cpp
+2=/home/terry/Projects/gnomesword1/src/backend/viewtext.h
+3=/home/terry/Projects/gnomesword1/src/main/gs_viewtext_dlg.c
+4=/home/terry/Projects/gnomesword1/src/main/gs_viewdict_dlg.c
 
 [replace_text]
 0=mod
@@ -58,21 +53,21 @@ ShowLocals=true
 7=sv->btn_save
 
 [find_text]
-0=viewersbMod
-1=viewersbMgr
-2=viewersbDisplay
-3=verselistsbMod
-4=verselistsbMgr
-5=verselisttextsbDisplay
-6=verselistsbDisplay
-7=count
+0=backend_setup_viewdict
+1=backend_setup_viewtext
+2=ModList_iterator_next
+3=SWMgr_getModulesIterator
+4=backend_loadkeys_viewdict
+5=text
+6=clKeys
+7=The SWORD Project is an effort
 
 [find_in_files]
-0=notebook4
-1=displaydictlexSBSW
-2=showSBVerseList
-3=setupviewerSBSW
-4=shutdownverselistSBSWORD
-5=setupVerseListSBSWORD
-6=getVerseListSBSWORD
-7=changeVerseListSBSWORD
+0=SDdictSearchTextChangedSWORD
+1=gotokeySWORD
+2=loadSDmodSWORD
+3=loadSDkeysSWORD
+4=getSDmodDescriptionSWORD
+5=shutdownSDSWORD
+6=setupSDSWORD
+7=form main window

@@ -56,18 +56,74 @@ project.config.disable.overwriting=1 1 1 1 1 1 1 1 1
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 
-module.include.name=include
+module.include.name=.
 module.include.type=
 module.include.expanded=0
-module.include.files=
+module.include.files=\
+	src/backend/viewtext.h\
+	src/backend/viewdict.h\
+	src/backend/viewcomm.h\
+	src/backend/verselist_sb.h\
+	src/backend/sword.h\
+	src/backend/search.h\
+	src/backend/properties.h\
+	src/backend/module_options.h\
+	src/backend/gbs.h\
+	src/backend/display.h\
+	src/backend/dictlex.h\
+	src/backend/commentary.h\
+	src/backend/bookmarks.h\
+	src/backend/display_info.h\
+	src/backend/shortcutbar.h\
+	src/gnome/about_gnomesword.h\
+	src/gnome/about_modules.h\
+	src/gnome/about_sword.h\
+	src/gnome/create_shortcutbar_search.h\
+	src/gnome/create_shortcutbar_viewer.h\
+	src/gnome/splash.h\
+	src/main/char_table.h\
+	src/main/gs_bookmarks.h\
+	src/main/gs_commentary.h\
+	src/main/gs_detach_int.h\
+	src/main/gs_detach_sb.h\
+	src/main/gs_dictlex.h\
+	src/main/gs_editor.h\
+	src/main/gs_editor_replace.h\
+	src/main/gs_editor_search.h\
+	src/main/gs_editor_toolbar.h\
+	src/main/gs_file.h\
+	src/main/gs_find_dlg.h\
+	src/main/gs_gbs.h\
+	src/main/gs_getinfo_dlg.h\
+	src/main/gs_gnomesword.h\
+	src/main/gs_gui.h\
+	src/main/gs_gui_cb.h\
+	src/main/gs_history.h\
+	src/main/gs_html.h\
+	src/main/gs_info_box.h\
+	src/main/gs_information_dlg.h\
+	src/main/gs_mainmenu_cb.h\
+	src/main/gs_menu.h\
+	src/main/gs_popup_cb.h\
+	src/main/gs_preferences_dlg.h\
+	src/main/gs_setup.h\
+	src/main/gs_shortcutbar.h\
+	src/main/gs_unlockkey_dlg.h\
+	src/main/gs_viewcomm_dlg.h\
+	src/main/gs_viewdict_dlg.h\
+	src/main/gs_viewtext_dlg.h\
+	src/main/spell.h\
+	src/main/spell_gui.h\
+	src/main/support.h
+
 
 module.source.name=.
 module.source.type=
 module.source.expanded=1
 module.source.files=\
 	src/backend/viewtext.cpp\
-	src/backend/viewdict_dlg.cpp\
-	src/backend/viewcomm_dlg.cpp\
+	src/backend/viewdict.cpp\
+	src/backend/viewcomm.cpp\
 	src/backend/verselist_sb.cpp\
 	src/backend/sword.cpp\
 	src/backend/search.cpp\

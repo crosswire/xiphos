@@ -1,5 +1,10 @@
 2002-04-20  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* renamed backend/viewcomm_dlg.* to backend/viewcomm.* 
+	* removed gui stuff from viewcomm.*
+
+2002-04-20  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* added es.po from Jorge Chacon <jgchacon@itelgua.com>
 	* corrected some spelling error in gui
 

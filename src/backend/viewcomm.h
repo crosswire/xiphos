@@ -1,6 +1,7 @@
+
 /*
  * GnomeSword Bible Study Tool
- * viewtext.h - sword support for veiwtext dialog
+ * viewcomm.cpp - sword support for veiwcomm dialog
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,28 +20,22 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __VIEWTEXT_H__
-#define __VIEWTEXT_H__
+#ifndef __VIEWCOMM_H__
+#define __VIEWCOMM_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <gnome.h>
+	void backend_setup_viewcomm(GtkWidget * text);
+	void backend_shutdown_viewcomm(void);
+	void backend_load_module_viewcomm(gchar * modName);
+	void backend_goto_verse_viewcomm(gchar * newkey);
+	void backend_nav_module_viewcomm(gint direction);
+	char *backend_get_first_module_viewcomm(void);
+	char *backend_get_next_module_viewcomm(void);
 
-	void backend_setup_viewtext(GtkWidget * text);
-	void backend_shutdown_viewtext(void);
-	void backend_goto_verse_viewtext(char * newkey);
-	void backend_load_module_viewtext(char * modName);
-	char *backend_get_book_viewtext(void);
-	int backend_get_chapter_viewtext(void);
-	int backend_get_verse_viewtext(void);
-	void backend_set_global_options_viewtext(char * option,
-						 char * onoff);
-	char *backend_get_first_module_viewtext(void);
-	char *backend_get_next_module_viewtext(void);
-	
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __VIEWTEXT_H__ */
+#endif				/* __VIEWCOMM_H__ */

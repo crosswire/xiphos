@@ -50,7 +50,7 @@ extern "C" {
 	void
 	 on_btnNext_clicked(GtkButton * button, gpointer user_data);
 
-	GtkWidget *create_dlgViewComm(GtkWidget * app);
+	GtkWidget *create_dlgViewComm(SETTINGS * s);
 
 #ifdef __cplusplus
 }
