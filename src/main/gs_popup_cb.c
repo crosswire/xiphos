@@ -35,11 +35,11 @@
 /* frontend */
 #include "interlinear_dialog.h"
 #include "cipher_key_dialog.h"
+#include "_editor.h"
 
 /* main */ 
 #include "gs_popup_cb.h"
 #include "gs_html.h"
-#include "gs_editor.h"
 #include "gs_gnomesword.h"
 #include "gs_viewdict_dlg.h"
 #include "gs_viewcomm_dlg.h"
@@ -80,19 +80,6 @@ void on_undockInt_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	}
 }
 
-
-//----------------------------------------------------------------------------------------------
-void on_edit_book_activate(GtkMenuItem * menuitem, gchar * user_data)
-{
-	set_html_edit(lookup_widget(settings.app, user_data));
-}
-
-
-//----------------------------------------------------------------------------------------------
-void on_save_book_activate(GtkMenuItem * menuitem, gchar * user_data)
-{
-	savebookEDITOR(lookup_widget(settings.app, user_data));
-}
 
 
 

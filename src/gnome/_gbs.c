@@ -110,7 +110,6 @@ static void on_ctreeGBS_select_row(GtkCList * clist, gint row,
 	
 	treeNode = gtk_ctree_node_nth(GTK_CTREE(gbs->ctree), row);
 	settings.ctree_widget_books = gbs->ctree;
-	settings.htmlBook = gbs->html;
 
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 					cell[0])->text;
@@ -200,7 +199,8 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 		search_gbs_find_dlg(g, FALSE, settings.findText);
 	}
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;
-	settings.book_last_page = page_num;
+	settings.book_last_page = page_num;	
+	settings.html_book = g->html;
 }
 
 /******************************************************************************
@@ -898,7 +898,8 @@ void gui_create_gbs_pane(gchar * modName, SETTINGS * s, gint count,
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
-	p_gbs->html = gs_new_html_widget(s);
+	p_gbs->html = gtk_html_new();
+	
 	gtk_widget_ref(p_gbs->html);
 	gtk_object_set_data_full(GTK_OBJECT(s->app),
 				 "p_gbs->html", p_gbs->html,
@@ -906,6 +907,7 @@ void gui_create_gbs_pane(gchar * modName, SETTINGS * s, gint count,
 	gtk_widget_show(p_gbs->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
 			  p_gbs->html);
+	gtk_html_load_empty(GTK_HTML(p_gbs->html));
 
 	label = gtk_label_new(modName);
 	gtk_widget_ref(label);
@@ -924,7 +926,12 @@ void gui_create_gbs_pane(gchar * modName, SETTINGS * s, gint count,
 	gtk_signal_connect(GTK_OBJECT(p_gbs->ctree), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctreeGBS_select_row),
 			   p_gbs);
-
+	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
+			   GTK_SIGNAL_FUNC(on_url), 
+			   (gpointer) s->app);
 	gtk_signal_connect(GTK_OBJECT(p_gbs->html),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event),

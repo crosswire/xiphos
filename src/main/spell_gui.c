@@ -39,7 +39,7 @@
 #include <gtk/gtk.h>
 
 #include "debug.h"
-#include "gs_editor.h"
+#include "_editor.h"
 #include "spell.h"
 #include "spell_gui.h"
 #include "support.h"
@@ -352,7 +352,7 @@ GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 {
 	spc_gui.window = create_spc_window(ecd);
-	load_text_for_spell_EDITOR(spc_gui.text,ecd);	
+	load_text_for_spell(spc_gui.text,ecd);	
 	text_widget = spc_gui.text;
 	html_widget = ecd->htmlwidget;
 	gtk_widget_show(spc_gui.window);

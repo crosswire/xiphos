@@ -26,8 +26,9 @@
 #include <gnome.h>
 #include <stdio.h>
 
-#include "gs_editor.h"
+#include "_editor.h"
 #include "fileselection.h"
+#include "studypad.h"
 
 #define BUFFER_SIZE 8192	/* input buffer size */
 

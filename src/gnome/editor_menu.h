@@ -23,8 +23,7 @@
 #define __EDITOR_MENU_H_
 
 #include <gnome.h>
-#include "gs_gnomesword.h"
-#include "gs_editor.h"
+#include "_editor.h"
 
 void on_save_activate(GtkMenuItem * menuitem,
 		      GSHTMLEditorControlData * ecd);		      

@@ -29,7 +29,6 @@
 
 #include "gs_gui.h"
 #include "gs_gui_cb.h"
-#include "gs_editor.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "gs_shortcutbar.h"
@@ -39,6 +38,7 @@
 /* frontend */
 #include "main_menu.h"
 #include "shortcutbar_dialog.h"
+#include "studypad.h"
 
 
 static char *book_open_xpm[] = {
@@ -120,6 +120,49 @@ GdkPixmap *pixmap3;
 GdkBitmap *mask1;
 GdkBitmap *mask2;
 GdkBitmap *mask3;
+
+/******************************************************************************
+ * Name
+ *  html_button_pressed
+ *
+ * Synopsis
+ *   #include "gs_gui.h"
+ *
+ *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
+ *					gpointer *data)	
+ *
+ * Description
+ *    mouse button pressed in interlinear window 
+ *
+ * Return value
+ *   gint
+ */ 
+
+static gint button_release_event(GtkWidget * html, GdkEventButton * event,
+					gpointer data)
+{	
+	settings.whichwindow = INTERLINEAR_WINDOW;
+	
+	switch (event->button) {
+	case 1:
+		return TRUE;
+		break;
+	case 2:
+		/* 
+		 * pass this for pasting 
+		 */
+		return TRUE;
+		break;
+	case 3:
+		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
+					     "button_press_event");
+		return TRUE;
+		break;
+	default:
+	}
+
+	return FALSE;
+}
 
 static void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 {
@@ -565,7 +608,7 @@ void create_mainwindow(SETTINGS *s)
 	/*
 	 * studypad editor 
 	 */
-	s->htmlSP = studypad_control(notebook3, s);
+	s->html_studypad = studypad_control(notebook3, s);
 	
 				
 	label41 = gtk_label_new(_("Study Pad"));
@@ -728,14 +771,15 @@ void create_mainwindow(SETTINGS *s)
 	gtk_container_add(GTK_CONTAINER
 			  (swInt),
 			  s->htmlInterlinear);
-			  
-	  label197 = gtk_label_new (_("Interlinear"));
-	  gtk_widget_ref (label197);
-	  gtk_object_set_data_full (GTK_OBJECT (s->app), "label197", label197,
-				    (GtkDestroyNotify) gtk_widget_unref);
-	  gtk_widget_show (label197);
-	  gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->workbook_lower), 
-		gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->workbook_lower), 2), label197);
+		
+		
+	label197 = gtk_label_new (_("Interlinear"));
+	gtk_widget_ref (label197);
+	gtk_object_set_data_full (GTK_OBJECT (s->app), "label197", label197,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (label197);
+	gtk_notebook_set_tab_label (GTK_NOTEBOOK (s->workbook_lower), 
+	gtk_notebook_get_nth_page (GTK_NOTEBOOK (s->workbook_lower), 2), label197);
 
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(s->workbook_lower),
                                     gtk_notebook_get_nth_page(GTK_NOTEBOOK
@@ -821,6 +865,9 @@ void create_mainwindow(SETTINGS *s)
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) s->app);
 	gtk_signal_connect(GTK_OBJECT(s->htmlInterlinear), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	gtk_signal_connect(GTK_OBJECT(s->htmlInterlinear), "button_release_event",
+			   GTK_SIGNAL_FUNC(button_release_event), 
+			   NULL);
 	
 	gtk_widget_grab_focus(s->app);
 
