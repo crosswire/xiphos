@@ -462,7 +462,6 @@ void load_settings_structure(void)
 	settings.MainWindowModule = xml_get_value("modules", "bible");
 	settings.CommWindowModule = xml_get_value("modules", "comm");
 	settings.DictWindowModule = xml_get_value("modules", "dict");
-	settings.BookWindowModule = xml_get_value("modules", "book");
 	settings.parallel1Module = xml_get_value("modules", "int1");
 	settings.parallel2Module = xml_get_value("modules", "int2");
 	settings.parallel3Module = xml_get_value("modules", "int3");
@@ -472,7 +471,10 @@ void load_settings_structure(void)
 	    xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
 
-
+	/* books/gbs */
+	settings.book_mod = xml_get_value("modules", "book");
+	
+	
 	settings.lex_greek = xml_get_value("lexicons", "greek");
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
 	settings.lex_greek_viewer =
@@ -490,8 +492,19 @@ void load_settings_structure(void)
 
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
-	settings.book_key = xml_get_value("keys", "book");
 
+	if(xml_get_value("keys", "book"))
+		settings.book_key = xml_get_value("keys", "book");
+	else {
+		xml_add_new_item_to_section("keys", "book", "none");
+		settings.book_key = xml_get_value("keys", "book");
+	}
+	if(xml_get_value("keys", "offset"))
+		settings.book_offset = atol(xml_get_value("keys", "offset"));
+	else {
+		xml_add_new_item_to_section("keys", "offset", "0");
+		settings.book_offset = 0;
+	}
 
 	settings.shortcutbar_width =
 		atoi(xml_get_value("layout", "shortcutbar"));

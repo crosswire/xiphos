@@ -216,22 +216,35 @@ int backend_gbs_treekey_first_child(unsigned long offset)
  
 char * backend_get_text_from_offset(char * module_name, unsigned long offset)
 {        
-	SWModule *mod = sw.gbs_mgr->Modules[module_name];
+	//SWModule *mod = sw.gbs_mgr->Modules[module_name];
 	if (sw.treeKey) {
                 TreeKeyIdx treenode = *sw.treeKey;
                 treenode.setOffset(offset);
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
-                        mod->SetKey(treenode);
-                        mod->KeyText();      //snap to entry
+                        sw.gbs_mod->SetKey(treenode);
+                        sw.gbs_mod->KeyText();      //snap to entry
                 }
-		//g_print("\n%s\n",(char *) mod->getRawEntry());
-		//g_print("\n%s\n",(char *) mod->RenderText());
-		return strdup(mod->RenderText());
+		return strdup(sw.gbs_mod->RenderText());
         }
         return NULL;
 }
 
+char * backend_get_key_from_offset(unsigned long offset)
+{        
+	//SWModule *mod = sw.gbs_mgr->Modules[module_name];
+	if (sw.treeKey) {
+                TreeKeyIdx treenode = *sw.treeKey;
+                treenode.setOffset(offset);
+                /** if not root node then display **/
+                if (treenode.getOffset() > 0) {
+                        sw.gbs_mod->SetKey(treenode);
+                        sw.gbs_mod->KeyText();      //snap to entry
+                }
+		return strdup(sw.gbs_mod->KeyText());
+        }
+        return NULL;
+}
 
 /******************************************************************************
  * Name
@@ -251,12 +264,18 @@ char * backend_get_text_from_offset(char * module_name, unsigned long offset)
  
 void backend_set_treekey(char * module_name, unsigned long offset)
 {
-	SWModule *mod = sw.gbs_mgr->Modules[module_name];
+	//sw.gbs_mod = sw.display_mgr->Modules[module_name];
 	if (sw.treeKey)
                 delete sw.treeKey; 
 	
-	sw.treeKey = (TreeKeyIdx *) mod->CreateKey();
+	sw.treeKey = (TreeKeyIdx *) sw.gbs_mod->CreateKey();
+       // TreeKeyIdx treenode = *sw.treeKey;
+	//treenode.setOffset(offset); 
 	sw.treeKey->setOffset(offset);
+	
+	sw.gbs_mod->SetKey(backend_get_key_from_offset(offset));
+        g_warning("backend_set_treekey = %s",sw.gbs_mod->KeyText());  
+	//(const char *) *sw.gbs_mod;
 }
 
 

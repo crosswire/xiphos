@@ -605,8 +605,8 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 					   (widgets.notebook_gbs),
 					   settings.book_tabs);
-		if (settings.havebook)
-			gui_set_gbs_frame_label();
+//		if (settings.havebook)
+//			gui_set_gbs_frame_label();
 		break;
 	case USE_DEFAULT_DICTIONARY:
 		if (togglebutton->active)

@@ -5,6 +5,7 @@ gnomesword.desktop.in
 #src/backend/sword.cpp
 # shared source files
 src/main/lists.c
+src/main/sidebar.c
 # GNOME2 Source files
 src/gnome2/about_gnomesword.c
 src/gnome2/about_modules.c

@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * gbs.h - generic book support - the gui
+ * utilities.h - support functions
  *
- * Copyright (C) 2000,2001,2002,2003,2004 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,11 +19,23 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef ___GBS_H_
-#define ___GBS_H_
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
+#include <gnome.h>
 
-
-void gui_update_gbs_global_ops(gchar * option, gboolean choice);
-void gui_set_book_page_and_key(gchar * mod_name, gchar * key);
-
+void main_create_pixbufs(void);
+void main_load_module_tree(GtkWidget * tree);
+void main_add_mod_tree_columns(GtkTreeView * tree);
+void main_add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
+				const gchar * mod_name);
+void main_add_chapters_to_book(GtkTreeModel * model, GtkTreeIter iter, 
+				const gchar * key);
+void main_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
+				 gchar *mod_name, unsigned long offset);
+void main_mod_treeview_button_one(GtkTreeModel *model, GtkTreeIter selected);
+	
+#ifdef __cplusplus
+}
 #endif

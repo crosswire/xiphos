@@ -23,22 +23,27 @@
 #include <config.h>
 #endif
 
-#ifdef USE_GNOME2
-#include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
+
+#include <gnome.h>
+#include <swmgr.h>
+#include <swmodule.h>
+//#include <glib-2.0/glib.h>
+
 #include <ctype.h>
 #include <time.h>
 
 #include "gui/main_window.h"
 #include "gui/font_dialog.h"
+#include "gui/widgets.h"
 
+#include "main/display.hh"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
+#include "main/xml.h"
  
 #include "backend/sword.h"
+#include "backend/sword_defs.h"
 
 void set_global_option(int manager, char * option, gboolean choice)
 {
@@ -174,10 +179,40 @@ void shutdown_backend(void)
  
 char * get_text_from_offset(char * module_name, unsigned long offset)
 {        
+	gchar * buf;
+	
+	xml_set_value("GnomeSword", "keys", "book", 
+			backend_get_key_from_offset (offset));
+	settings.book_key = xml_get_value( "key", "book");
+	
+	buf = g_strdup_printf("%lu", offset);
+	xml_set_value("GnomeSword", "keys", "offset", buf);
+	settings.book_offset = atol(xml_get_value( "keys", "offset"));
+	g_free(buf);
+	
 	return backend_get_text_from_offset(module_name, offset);
 }
 
+void main_display_book(void)
+{
+	sw.gbs_mod->Display();
+}
 
+void main_display_commentary(void)
+{
+	sw.comm_mod->Display();
+}
+
+void main_setup_displays(void)
+{
+	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm);
+}
+
+void main_delete_displays(void)
+{
+	if(sw.entryDisplay)
+		delete sw.entryDisplay;
+}
 /******************************************************************************
  * Name
  *  
