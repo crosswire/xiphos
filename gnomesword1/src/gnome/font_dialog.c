@@ -26,8 +26,10 @@
 #include <gnome.h>
 
 #include "gui/font_dialog.h"
+#include "gui/utilities.h"
 
 #include "main/sword.h"
+#include "main/settings.h"
 
 static GtkWidget *dlg;
 static GtkWidget *combo_entry_size;
@@ -83,6 +85,10 @@ static gchar *get_html_font_name(gchar *fontname)
 
 static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 {
+	gchar file[250];
+
+	sprintf(file, "%s/fonts.conf", settings.gSwordDir);
+	
 	if (!mf->no_font && new_font_set) {
 		gchar *new_font = g_strdup(mf->new_gdk_font);
 		mf->new_font = g_strdup(get_html_font_name(new_font));
@@ -93,7 +99,13 @@ static void ok_clicked(GtkButton * button, MOD_FONT * mf)
 	}
 	mf->new_font_size =
 	    gtk_entry_get_text(GTK_ENTRY(combo_entry_size));
-	save_font_info(mf);
+	
+	save_conf_file_item(file, mf->mod_name, "Font",
+			mf->new_font);
+	save_conf_file_item(file, mf->mod_name, "GdkFont",
+			mf->new_gdk_font);
+	save_conf_file_item(file, mf->mod_name, "Fontsize",
+			mf->new_font_size);
 	
 	gtk_widget_destroy(dlg);
 	g_free(mf->new_font);
@@ -140,7 +152,7 @@ static void cancel_clicked(GtkButton * button, MOD_FONT * mf)
 
 static void dialog_destroy(GtkObject * object, MOD_FONT * mf)
 {
-	g_free(mf);
+	free_font(mf);
 	new_font_set = 0;
 	gtk_main_quit();
 	
@@ -434,23 +446,7 @@ void gui_set_module_font(gchar * mod_name)
 	gchar buf[256];
 	MOD_FONT *mf;
 
-	mf = g_new(MOD_FONT, 1);
-	mf->mod_name = mod_name;
-	mf->old_font = NULL;
-	mf->old_gdk_font = NULL;
-	mf->old_font_size = NULL;
-	mf->new_font = NULL;
-	mf->new_gdk_font = NULL;
-	mf->new_font_size = NULL;
-	mf->no_font = 0;
-	get_font_info(mf);
-
-	new_font_set = 0;
-
-	if (mf->old_font)
-		sprintf(buf, "Current Font: %s", mf->old_font);
-	else
-		sprintf(buf, "Current Font: %s", "none");
+	mf = get_font(mod_name);
 
 	if (!strncmp(mf->old_font, "none", 4))
 		mf->no_font = 1;
@@ -459,7 +455,7 @@ void gui_set_module_font(gchar * mod_name)
 	gtk_widget_show(dlg);
 
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
-	gtk_label_set_text(GTK_LABEL(label_current_font), buf);
+	gtk_label_set_text(GTK_LABEL(label_current_font), mf->old_font);
 	if(mf->old_gdk_font[0] == '-'){
 		gnome_font_picker_set_font_name ((GnomeFontPicker *)fontpicker,
                                              mf->old_gdk_font);
@@ -468,4 +464,5 @@ void gui_set_module_font(gchar * mod_name)
 	   so it can display the module with the new font - if there is a
 	   better way please fix it :) */
 	gtk_main ();
+	
 }

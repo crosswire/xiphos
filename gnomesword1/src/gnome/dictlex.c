@@ -305,8 +305,9 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 	xml_set_value("GnomeSword", "key", "dictionary", key);
 	d->key = g_strdup(key);
 	
-	text = get_dictlex_text(d->mod_name, key);
-	entry_display(d->html, d->mod_name, text, key, TRUE);
+	text = get_dictlex_text(d->mod_name, d->key);
+	//g_warning("d->mod_name = %s d->key = %s", d->mod_name, d->key);
+	entry_display(d->html, d->mod_name, text, d->key, TRUE);
 	free(text);
 
 	if (firsttime)
@@ -684,7 +685,7 @@ void gui_setup_dictlex(GList * mods)
 	GList *tmp = NULL;
 	gchar *modname;
 	gchar *modbuf;
-	gchar *keybuf;
+//	gchar *keybuf;
 	DL_DATA *dl;
 	gint count = 0;
 
@@ -697,7 +698,7 @@ void gui_setup_dictlex(GList * mods)
 		dl = g_new(DL_DATA, 1);
 		dl->frame = NULL;
 		dl->mod_num = count;
-		dl->mod_name = modname;
+		dl->mod_name = modname;//g_strdup(modname);
 		dl->search_string = NULL;
 		dl->key = NULL;
 		dl->cipher_key = NULL;
@@ -727,12 +728,12 @@ void gui_setup_dictlex(GList * mods)
 			   (on_notebook_dictlex_switch_page), dl_list);
 
 	modbuf = g_strdup(settings.DictWindowModule);
-	keybuf = g_strdup(settings.dictkey);
+	//keybuf = g_strdup(settings.dictkey);
 
 	set_page_dictlex(modbuf, dl_list);
 
 	g_free(modbuf);
-	g_free(keybuf);
+	//g_free(keybuf);
 	g_list_free(tmp);
 	//settings.dict_last_page = 0;
 }
@@ -759,6 +760,7 @@ void gui_shutdown_dictlex(void)
 	while (dl_list != NULL) {
 		DL_DATA *d = (DL_DATA *) dl_list->data;
 		if(d->key) g_free(d->key);
+		//if(d->mod_name) g_free(d->mod_name);
 		g_free(d);
 		dl_list = g_list_next(dl_list);
 	}

@@ -228,31 +228,33 @@ char *get_module_font_name(char *mod_name)
  *   
  */ 
 
-void get_font_info(MOD_FONT *mf)
+char *get_conf_file_item(char * file, char * mod_name, char * item)
 {
-	backend_load_font_info(mf, settings.gSwordDir);
+	return backend_get_conf_item(file, mod_name, item);
 }
 
 
 /******************************************************************************
  * Name
- *  
+ *  save_conf_file_item
  *
  * Synopsis
  *   #include "main/configs.h"
  *
- *   
+ *   void save_conf_file_item(char * file, char * mod_name, char * item,
+ *			char * value)
  *
  * Description
  *    
  *
  * Return value
- *   
+ *   void
  */ 
 
-void save_font_info(MOD_FONT *mf)
+void save_conf_file_item(char * file, char * mod_name, char * item,
+			char * value)
 {
-	backend_save_font_info(mf, settings.gSwordDir);
+	backend_save_conf_item(file, mod_name, item, value);
 }
 
 
