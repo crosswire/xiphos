@@ -1,3 +1,9 @@
+2005-03-16  terry <tbiggs@users.sf.net>
+
+	* changed to new nabar in parallel dialog. I think that this was the
+	  last of the old style navbars.
+	
+
 2005-03-15  terry <tbiggs@users.sf.net>
 
 	* added cancel button to studypad's close confirmation dialog
