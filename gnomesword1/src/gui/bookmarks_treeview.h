@@ -42,7 +42,7 @@ typedef struct {
 	GdkPixbuf *pixbuf_opened;
 	GdkPixbuf *pixbuf_closed;
 	GdkPixbuf *pixbuf_helpdoc;
-} TreePixbufs;
+} BookMarksPixbufs;
 
 struct _bookmark_data {
 	xmlNodePtr parent;
@@ -57,8 +57,7 @@ struct _bookmark_data {
 };
 typedef struct _bookmark_data BOOKMARK_DATA;
 
-
-extern TreePixbufs *pixbufs;
+extern BookMarksPixbufs *bm_pixbufs;
 extern GtkTreeView *bookmark_tree;
 
 void gui_verselist_to_bookmarks(GList * verses);	

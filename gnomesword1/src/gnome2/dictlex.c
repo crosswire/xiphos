@@ -27,7 +27,6 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/dictlex.h"
-#include "gui/dictlex_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/shortcutbar_main.h"

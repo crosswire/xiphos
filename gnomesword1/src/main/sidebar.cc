@@ -55,13 +55,7 @@ enum {
 	N_COLUMNS
 };
 
-typedef struct {
-	GdkPixbuf *pixbuf_opened;
-	GdkPixbuf *pixbuf_closed;
-	GdkPixbuf *pixbuf_helpdoc;
-} TreePixbufs;
-
-static TreePixbufs *pixbufs;
+TreePixbufs *pixbufs;
 
 
 /******************************************************************************
