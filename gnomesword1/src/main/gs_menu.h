@@ -25,17 +25,17 @@
   */
 
 #ifndef __GS_MENU_H_
-#define __GS_MENU_H_ 
+#define __GS_MENU_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "sword.h"
-		
-	/*** add sword global options to menus ***/	
-	void additemstooptionsmenu(GList *options, SETTINGS *s);
-	
+
+	/*** add sword global options to menus ***/
+	void additemstooptionsmenu(GList * options, SETTINGS * s);
+
 	void
 	 additemtognomemenu(GtkWidget * MainFrm,
 			    gchar * itemname,
@@ -46,7 +46,8 @@ extern "C" {
 	void
 	 additemtopopupmenu(GtkWidget * MainFrm,
 			    GtkWidget * menu,
-			    gchar * itemname, GtkMenuCallback mycallback);
+			    gchar * itemname,
+			    GtkMenuCallback mycallback);
 
 	void addseparator(GtkWidget * MainFrm, gchar * subtreelabel);
 
@@ -67,23 +68,20 @@ extern "C" {
 	 removemenuitems(GtkWidget * MainFrm,
 			 gchar * startitem, gint numberofitems);
 
-	void createpopupmenus(SETTINGS *s,
+	void createpopupmenus(SETTINGS * s,
 			      GList * bilbeDescription,
 			      GList * comDescription,
-			      GList * dictDescription,
-			      GList * options);
+			      GList * dictDescription, GList * options);
 
 	void addmodstomenus(SETTINGS * s,
 			    GList * biblelist,
 			    GList * commentarylist,
 			    GList * dictionarylist,
-			    GList *booklist, 
-			    GList * percomlist);
+			    GList * booklist, GList * percomlist);
 	GtkWidget *create_shortcutbarMenu(gint barnum);
 
 
 #ifdef __cplusplus
 }
 #endif
-
 #endif /*__GS_MENU_H_  */
