@@ -162,7 +162,7 @@ void gui_on_lookup_commentary_dialog_selection
 			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(mod_name, dict_key);
+			main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}

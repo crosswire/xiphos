@@ -515,7 +515,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						      DictWindowModule,
 						      dict_key);
 		if (settings.inDictpane)
-			gui_change_module_and_key(settings.
+			main_display_dictionary(settings.
 						  DictWindowModule,
 						  dict_key);
 		g_free(dict_key);
@@ -576,7 +576,7 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
 
 	module_name = module_name_from_description((gchar *) user_data);
 	if(module_name) {
-		gui_change_module_and_key(module_name, settings.dictkey);
+		main_display_dictionary(module_name, settings.dictkey);
 		g_free(module_name);
 	}
 }

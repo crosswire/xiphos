@@ -98,10 +98,8 @@ char *get_module_key(void)
 	if (settings.havebible) {
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			return (char *) settings.currentverse;
-			break;
 		case COMMENTARY_WINDOW:
-			return (char *) settings.comm_key;
+			return (char *) settings.currentverse;
 			break;
 		case DICTIONARY_WINDOW:
 			return (char *) settings.dictkey;

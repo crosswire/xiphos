@@ -20,6 +20,7 @@ libmain_a_SOURCES =  \
     lists.cc lists.h \
     main.c \
     module.c module.h \
+    module_dialogs.cc module_dialogs.h \
     mod_mgr.c mod_mgr.h \
     percomm.c percomm.h \
     search.c search.h \
