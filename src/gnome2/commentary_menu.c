@@ -89,7 +89,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 
 static void on_print_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	gui_html_print(c->html);
+	gui_html_print(c->html, FALSE);
 }
 
 
