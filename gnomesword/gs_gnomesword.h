@@ -40,6 +40,8 @@ struct _settings {
 	           Interlinear1Module[80],
 	           Interlinear2Module[80],
 	           Interlinear3Module[80], 
+	           Interlinear4Module[80],
+	           Interlinear5Module[80], 
 	           personalcommentsmod[80], 
 	           currentverse[80],	/* verse to use at program startup */
 	           dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
@@ -67,6 +69,27 @@ struct _settings {
 	           showbookmarksgroup,
 	           showhistorygroup;
 };
+
+typedef struct _gs_app GNOMESWORD;
+struct _gs_app {
+	GtkWidget  *app,
+			*Bible,
+			*Commentary,
+			*Dicttionary,
+			*Interlinear,
+			*Percom;
+			
+	
+};
+typedef struct _interlinear INTERLINEAR;
+struct _interlinear {
+	gchar 	ver1[80],
+		ver2[80],
+		ver3[80],
+		ver4[80],
+		ver5[80];
+};
+
 
 
 void initGnomeSword(GtkWidget *app, 

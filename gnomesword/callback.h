@@ -72,7 +72,16 @@ void on_verse_style1_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
 void on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
-
+void on_changeint1mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_changeint2mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_changeint3mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_changeint4mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void on_changeint5mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
 
 void
  on_cbeBook_changed(GtkEditable * editable, gpointer user_data);
