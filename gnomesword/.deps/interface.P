@@ -187,8 +187,7 @@ interface.o: interface.c ../config.h /usr/include/sys/types.h \
  /usr/include/gdk-pixbuf/gdk-pixbuf.h \
  /usr/include/gdk-pixbuf/gdk-pixbuf-features.h \
  ../widgets/shortcut-bar/../../e-util/e-canvas.h \
- ../widgets/shortcut-bar/e-shortcut-model.h \
- ../widgets/e-paned/e-hpaned.h ../widgets/e-paned/e-paned.h support.h
+ ../widgets/shortcut-bar/e-shortcut-model.h support.h
 interface.c :
 ../config.h :
 /usr/include/sys/types.h :
@@ -466,6 +465,4 @@ interface.h :
 /usr/include/gdk-pixbuf/gdk-pixbuf-features.h :
 ../widgets/shortcut-bar/../../e-util/e-canvas.h :
 ../widgets/shortcut-bar/e-shortcut-model.h :
-../widgets/e-paned/e-hpaned.h :
-../widgets/e-paned/e-paned.h :
 support.h :

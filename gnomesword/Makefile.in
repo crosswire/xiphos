@@ -100,7 +100,7 @@ ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword 	-I$(top_srcdir)/widgets/misc 	-I$(top_srcdir)/widgets/shotrcur-bar 	-I$(top_srcdir)/widgets/e-paned
+INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword 	-I/usr/local/include/sword 	-I$(top_srcdir)/widgets/misc 	-I$(top_srcdir)/widgets/shotrcur-bar
 
 
 bin_PROGRAMS = gnomesword
@@ -112,7 +112,7 @@ bin_PROGRAMS = gnomesword
 
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
-gnomesword_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) 		    $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a 			$(top_builddir)/widgets/e-paned/libepaned.a				$(top_builddir)/widgets/e-text/libetext.a 			$(top_builddir)/widgets/misc/libemiscwidgets.a 			$(top_builddir)/e-util/libeutil.la 			$(EXTRA_GNOME_LIBS)		
+gnomesword_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) 		    $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a 			$(top_builddir)/widgets/e-text/libetext.a 			$(top_builddir)/widgets/misc/libemiscwidgets.a 			$(top_builddir)/e-util/libeutil.la 			$(EXTRA_GNOME_LIBS)		
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
@@ -142,7 +142,6 @@ LIBS = @LIBS@
 @SPELLING_PRINTING_TRUE@printstuff.o
 gnomesword_DEPENDENCIES =  \
 $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a \
-$(top_builddir)/widgets/e-paned/libepaned.a \
 $(top_builddir)/widgets/e-text/libetext.a \
 $(top_builddir)/widgets/misc/libemiscwidgets.a \
 $(top_builddir)/e-util/libeutil.la

@@ -26,6 +26,7 @@
 
 #include <gnome.h>
 #include <string>
+#include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
 typedef struct _settings SETTINGS;
 struct _settings
@@ -52,7 +53,10 @@ struct _settings
 	            formatpercom,
 	            showcomtabs,
 	            showdicttabs,
-	            showshortcutbar;
+	            showshortcutbar,
+	            showtextgroup,
+	            showcomgroup,
+	            showdictgroup;
 };
 
 typedef struct _listitem LISTITEM;
@@ -220,6 +224,17 @@ sbchangeModSword                (gint group_num,
 void
 applyoptions                    (bool showshortcut,
                                 bool showcomtabs,
-                                bool showdicttabs);
+                                bool showdicttabs,
+                                bool showtextgroup,
+                                bool showcomgroup,
+                                bool showdictgroup);
 
+void
+add_test_group                  (EShortcutBar *shortcut_bar,
+			                    gchar *group_name);
+			
+void
+lookupStrongsSWORD              (gint theNumber);
+
+			
 #endif /* __GNOMESWORD_H__ */

@@ -38,7 +38,7 @@
 #include <sys/stat.h>
 
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-#include <widgets/e-paned/e-hpaned.h>
+
 
 #include "display.h"
 #include "callback.h"
@@ -144,7 +144,14 @@ gint dictpages,
 	 compages;
 gchar com_key[80] ="Rom 8:28"; //-- current commentary key
 extern GnomeUIInfo pmDict_uiinfo[5];
-extern GnomeUIInfo pmComments_uiinfo[5];
+extern GnomeUIInfo pmComments_uiinfo[7];
+extern GnomeUIInfo view_module1_menu_uiinfo[2];
+extern GtkWidget *pmComments;
+gint    groupnum1 = 0,
+        groupnum2 = 0,
+        groupnum3 = 0,
+        greekpage = 0,
+        hebrewpage = 0;
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- apps main form
@@ -189,6 +196,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					itemNum3 = 0,//-- for numbering shortbar items
 					i, //-- counter
 					j; //-- counter
+					
    	gchar *sourceformat;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   GtkWidget *menu_items;
@@ -265,6 +273,35 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	
 	gnome_popup_menu_attach(menu1,lookup_widget(mainform,"moduleText"),(gchar*)"1");
 	
+	//--------------------------------------------------------------- create shortcut bar groups
+	if(settings->showtextgroup)
+	{
+	    add_test_group((EShortcutBar *)shortcut_bar, "Bible Text");
+	    groupnum1 = 0;
+	}
+	else
+	{
+	   groupnum1 = -1;
+	}
+	
+	if(settings->showcomgroup)
+	{
+	    add_test_group((EShortcutBar *)shortcut_bar, "Commentaries");
+	    if(groupnum1 == 0) groupnum2 = 1;
+	    else groupnum2 = 0;
+	}
+	else
+	{
+	   groupnum2 = -1;
+	}
+	if(settings->showdictgroup)
+	{
+	    add_test_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
+	    if(groupnum2 == 1) groupnum3 = 2;
+	    if(groupnum2 == 0) groupnum3 = 1;
+	    if(groupnum2 == -1 && groupnum1 == 0) groupnum3 = 1;
+	    if(groupnum2 == -1 && groupnum1 == -1) groupnum3 = 0;
+	}
   //------------------------------------------------------------------ store text widgets for spell checker
   notes =  lookup_widget(mainform,"textComments");
   studypad = lookup_widget(mainform,"text3");
@@ -315,12 +352,15 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			}
 			else			
 				curMod->Disp(chapDisplay);
-		
-		  sprintf(groupitems[0][itemNum++], "%s", curMod->Name());
-		  e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      0, -1,
+		  //-----------   add choice to shortcut bar
+		  if(settings->showtextgroup)
+		  {
+		    sprintf(groupitems[groupnum1][itemNum++], "%s", curMod->Name());
+		    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+						      groupnum1, -1,
 						      shortcut_types[0],
-						      curMod->Name());  		
+						      curMod->Name());
+		  }		
 		}
 		else if (!strcmp((*it).second->Type(), "Commentaries")) //-- set commentary modules and add to notebook
 		{
@@ -351,7 +391,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 					else
 						sourceformat = "Plain";
 			}
-			cout << sourceformat << '\n';
+			//cout << sourceformat << '\n';
 			if (!strcmp(sourceformat, "GBF")) //-- we need gbf to html filter
 			{
 			  curcomMod->AddRenderFilter(gbftohtml);
@@ -371,15 +411,18 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			}			  		
 			else
 				curcomMod->Disp(comDisplay);
-			
-			sprintf(groupitems[1][itemNum2++], "%s", curcomMod->Name());
-			e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      1, -1,
+			if(settings->showcomgroup)
+		    {
+			    sprintf(groupitems[groupnum2][itemNum2++], "%s", curcomMod->Name());
+			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+						      groupnum2, -1,
 						      shortcut_types[0],
 						      curcomMod->Name());
+			}
 		}
 		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) //-- set dictionary modules and add to notebook
 		{	
+		
 			havedict = true; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
@@ -392,15 +435,21 @@ initSword(GtkWidget *mainform,  //-- apps main form
 			label = gtk_label_new (curdictMod->Name());
 			gtk_widget_show (label);
 			sprintf(mybuf,"%d",pg2);
+			
+			if(!strcmp(curdictMod->Name(),"StrongsHebrew")) hebrewpage = pg2;
+			if(!strcmp(curdictMod->Name(),"StrongsGreek")) greekpage = pg2;
 			additemtognomemenu(MainFrm, curdictMod->Name(), mybuf, rememberlastitemDict, (GtkMenuCallback)on_dict_select_activate );
 			gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg2++), label);
 			sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",curdictMod->Name());
-			curdictMod->Disp(dictDisplay); 			
-			sprintf(groupitems[2][itemNum3++], "%s", curdictMod->Name());
-			e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      2, -1,
+			curdictMod->Disp(dictDisplay);
+			if(settings->showcomgroup)
+		    {			
+			    sprintf(groupitems[groupnum3][itemNum3++], "%s", curdictMod->Name());
+			    e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+						      groupnum3, -1,
 						      shortcut_types[0],
 						      curdictMod->Name());
+			}
 		}
 	} 		
   //----------------------------------------------------------------- set up percom editor module and menu
@@ -1273,10 +1322,8 @@ void
 changcurdictModSWORD(gchar *modName, string keyText, gint page_num) //-- someone changed dict notebook page - sent here by notebook callback
 {	                    //-- modName form page label - keyText from dict lookup entry
 	ModMap::iterator it;
-    GtkWidget   *notebook, //-- pointer to dict&lex notebook
-                *frame;  //-- pointer to dict&lex frame
+    GtkWidget   *frame;  //-- pointer to dict&lex frame
             						
-	notebook = lookup_widget(MainFrm,"notebook4"); //-- set notebook to dict&lex notebook
 	frame = lookup_widget(MainFrm,"frame10"); //-- set frame to dict&lex frame
 	settings->notebook2page = page_num; //-- save current page
 	it = mainMgr->Modules.find(modName);  //-- find module we want to use
@@ -1412,7 +1459,10 @@ openpropertiesbox(void)    //-- someone clicked properties
                 *cpcurrentverse,  //-- pointer to current verse color picker
                 *comtabsbutton,  //-- show commentary notebook tabs toggle button
                 *dicttabsbutton, //-- show dict/lex notebook tabs toggle button
-                *shortcutbarbutton; //-- show shortcut bar toggle button
+                *shortcutbarbutton, //-- show shortcut bar toggle button
+                *textgroupbutton,   //-- show text group toggle button
+                *comgroupbutton,    //-- show commentary group toggle button
+                *dictgroupbutton;   //-- show dict/lex group toggle button
 
 	gushort 	red,       //-- vars for setting color
 						green,
@@ -1424,6 +1474,10 @@ openpropertiesbox(void)    //-- someone clicked properties
 	comtabsbutton = lookup_widget(Propertybox,"cbtnShowCOMtabs");
 	dicttabsbutton  = lookup_widget(Propertybox,"cbtnShowDLtabs");
 	cpcurrentverse = lookup_widget(Propertybox,"cpfgCurrentverse"); //-- set cpcurrentverse to point to color picker
+    textgroupbutton = lookup_widget(Propertybox,"cbtnShowTextgroup");
+	//comgroupbutton  = lookup_widget(Propertybox,"cbtnShowComGroup");
+	//dictgroupbutton = lookup_widget(Propertybox,"cbtnShowDictGroup");
+
     a = 000000;
     //-- setup current verse color picker
 	red = settings->currentverse_red;  //-- get color from settings structure
@@ -1433,7 +1487,11 @@ openpropertiesbox(void)    //-- someone clicked properties
 	//-- set toggle buttons to settings structur
 	GTK_TOGGLE_BUTTON(shortcutbarbutton)->active = settings->showshortcutbar;
 	GTK_TOGGLE_BUTTON(comtabsbutton)->active = settings->showcomtabs;
-	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = settings->showdicttabs; 	
+	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = settings->showdicttabs;
+	GTK_TOGGLE_BUTTON(textgroupbutton)->active = settings->showtextgroup;
+	/*GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
+	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;*/
+		
 	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; //-- set Personal note format check button	
 	gtk_widget_show(Propertybox); //-- show propertybox
 }
@@ -1556,6 +1614,7 @@ getversenumber(GtkWidget *text)
 	 while(isdigit(cbuf)) //-- loop until cbuf is not a number
 	 {
 	 		cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); //-- get next char
+	 		if(cbuf == ')' || cbuf == '>') isstrongs = true;
 	 		++endindex;   //-- increment endindex
 	 } 	
 	 --endindex; //-- our last char was not a number so back up one
@@ -1564,11 +1623,14 @@ getversenumber(GtkWidget *text)
 	  while(isdigit(cbuf))  //-- loop backward util cbuf is not a number
 	 {
 	 		cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get previous char
-	 		--startindex; //-- decrement startindex
+	 		if(cbuf == '(' || cbuf == '<') isstrongs = true;
+	 		--startindex; //-- decrement startindex  	 		
 	 }
-	 if(cbuf == '(' || cbuf == '{') isstrongs = true;
+	
+	 ++startindex; //-- last char (cbuf) was not a number
 	 ++startindex; //-- last char (cbuf) was not a number
 	 buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
+	 //cout << buf << '\n';
 	 return atoi(buf); //-- send it back as an integer
 }
 
@@ -1577,12 +1639,17 @@ void
 sbchangeModSword(gint group_num, gint item_num)
 {
     GtkWidget *notebook;
+    gint num = 0;
 
-    switch(group_num)
+    if(groupnum3 == 2) num = group_num;
+    else if( groupnum3 == 1)num = group_num + 1;
+    else if( groupnum3 == 0)num = group_num + 2;
+
+    switch(num)
     {
         case 0: changecurModSWORD(groupitems[0][item_num]);
                 break;
-        case 1: if(havecomm) //-- let's don't do this if we don't have at least one dictionary / lexicon
+        case 1: if(havecomm) //-- let's don't do this if we don't have at least one commentary
 	            {			            	
 		            notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
 		            gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
@@ -1603,15 +1670,24 @@ sbchangeModSword(gint group_num, gint item_num)
 
 //---------------------------------------------------------------------------------------------
 void
-applyoptions(bool showshortcut, bool showcomtabs, bool showdicttabs)
+applyoptions(bool showshortcut, bool showcomtabs, bool showdicttabs, bool showtextgroup,
+                bool showcomgroup, bool showdictgroup)
 {
-   GtkWidget *dict, *comm;
+   GtkWidget    *dict,
+                *comm;
 
    dict = lookup_widget(MainFrm,"notebook4");
    comm = lookup_widget(MainFrm,"notebook1");
+
    settings->showshortcutbar = showshortcut;
    settings->showcomtabs = showcomtabs;
    settings->showdicttabs = showdicttabs;
+
+   settings->showtextgroup = showtextgroup;
+   settings->showcomgroup =  showcomgroup;
+   settings->showdictgroup = showdictgroup;
+
+
    if(settings->showshortcutbar)
    {
         gtk_widget_show(shortcut_bar);
@@ -1636,4 +1712,41 @@ applyoptions(bool showshortcut, bool showcomtabs, bool showdicttabs)
    {
         gtk_widget_hide(dict);
    }
+}
+
+//---------------------------------------------------------------------------------------------
+void
+add_test_group (EShortcutBar *shortcut_bar,gchar *group_name)
+{
+	gint group_num;
+	
+	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1,
+						group_name); 	
+    e_shortcut_bar_set_view_type (shortcut_bar, group_num,
+					      E_ICON_BAR_SMALL_ICONS);
+}
+//---------------------------------------------------------------------------------------------
+void
+lookupStrongsSWORD(gint theNumber) //-- theNumber - strongs number was double clicked selected and
+                                    //-- sent here
+{
+    GtkWidget   *notebook, //-- pointer to dict/lex notebook (we use the notebook even if it is not showing)
+                *entry;    //-- pointer to dictionarySearchText entry
+    gint pagenum;  //-- temp storage for notebook page num
+    gchar buf[40]; //-- char string to put our strongs number in
+    char a;        //-- char to store testament (old - 001 or new - 002)
+
+    VerseKey *key = (VerseKey *)(SWKey *)(*curMod); //-- get a versekey form the current text module
+                                                    //-- so we can find which testament we are using
+    a = key->Testament();  //-- find out if we are in old or new testament
+    if(a == 001) pagenum = hebrewpage; //-- if old testament use hebrew lex
+    else pagenum = greekpage;          //-- if new testament use greek lex
+    if(havedict) //-- let's don't do this if we don't have at least one dictionary / lexicon
+    {			            	
+        notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
+        gtk_notebook_set_page(GTK_NOTEBOOK(notebook), pagenum); //-- set notebook page
+        entry = lookup_widget(MainFrm,"dictionarySearchText"); //-- get the entry so we can send it the new key
+        sprintf(buf,"%d",theNumber); //-- put the number into a string
+        gtk_entry_set_text(GTK_ENTRY(entry),buf); //-- put key string into the dict entry (which will cause a on_dictionarySearchText_changed event)
+    }
 }
