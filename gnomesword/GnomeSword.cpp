@@ -22,6 +22,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -403,6 +404,20 @@ initSword(GtkWidget *mainform,  //-- app's main form
 
 	loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
   changeVerse(options[9]); //-------------------------------------------------- set Text
+
+//-- hide buttons only show them if their options are enabled
+	gtk_widget_hide(lookup_widget(MainFrm,"btnPrint"));
+	gtk_widget_hide(lookup_widget(MainFrm,"btnSpell"));
+	gtk_widget_hide(lookup_widget(MainFrm,"btnSpellNotes"));
+		
+#ifdef  USE_GNOMEPRINT                   //-- don't show print button if printing not enabled
+  gtk_widget_show(lookup_widget(MainFrm,"btnPrint"));
+#endif /* USE_GNOMEPRINT */
+
+#ifdef USE_ASPELL                         //-- don't show spell buttons if spellcheck not enabled
+  gtk_widget_show (lookup_widget(MainFrm,"btnSpell"));
+  gtk_widget_show (lookup_widget(MainFrm,"btnSpellNotes"));
+#endif /* USE_ASPELL */
 }
 
 
@@ -569,6 +584,7 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
                             0,
                             0.5,
                             0.0 );
+		mod->SetKey(saveKey);
 	}
 }
 
@@ -1184,6 +1200,23 @@ dictSearchTextChangedSWORD(char* mytext)   //-- dict lookup text changed
 
 //-------------------------------------------------------------------------------------------
 void
+dictchangekeySWORD(gint direction)   //-- dict change key up or down -- arrow buttons
+{	
+   if(direction == 1) //-- next key
+   {
+			(*curdictMod)++;  //-- move up one
+   }
+   else if(direction == 0)      //-- previous key
+   {
+      (*curdictMod)--;  //-- move down one
+   }
+   curdictMod->Display(); //-- show the changes
+	//-- put new key into dictionary text entry
+   gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"dictionarySearchText")), curdictMod->KeyText());
+}
+
+//-------------------------------------------------------------------------------------------
+void
 changepercomModSWORD(gchar* modName)   //-- change personal comments module
 {	
 	GtkWidget *notebook, //-- pointer to a notebook widget
@@ -1251,6 +1284,19 @@ clearhistory(void)    //-- someone clicked clear history
   removemenuitems(MainFrm, "_History/<Separator>", historyitems+1);
   historyitems = 0;
   addseparator(MainFrm, "_History/C_lear");
+}
+
+//-------------------------------------------------------------------------------------------
+void
+printfile(void)    //-- someone clicked print in studypad
+{
+  if(current_filename != NULL)
+  {
+  	gchar buf[255];
+  	
+  	sprintf(buf,"lpr %s",current_filename);
+  	//system(buf);
+  }
 }
 
 

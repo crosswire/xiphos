@@ -682,3 +682,14 @@ void
 on_fbMainwindowbold_font_set           (GnomeFontPicker *gnomefontpicker,
                                         GString        arg1,
                                         gpointer         user_data);
+
+void
+on_btnKeyPrev_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnKeyNext_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+void
+on_search1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);

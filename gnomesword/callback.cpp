@@ -39,6 +39,10 @@
 #include "filestuff.h"
 #include "display.h"
 
+#ifdef  USE_GNOMEPRINT
+#include "printstuff.h"
+#endif /* USE_GNOMEPRINT */
+
 #ifdef USE_ASPELL
 #include "spellcheck.h"
 #endif /* USE_ASPELL */
@@ -154,7 +158,9 @@ void
 on_copy_verse1_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+  GtkWidget *text;
+	text = lookup_widget(MainFrm,"moduleText");
+	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -685,7 +691,9 @@ void
 on_btnPrint_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+#ifdef  USE_GNOMEPRINT
+	print_text(GTK_WIDGET(button),current_filename); //-- pass studypad text widget to print
+#endif  /*USE_GNOMEPRINT*/
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1400,6 +1408,8 @@ on_change_module_activate               (GtkMenuItem     *menuitem,
 {
   changepercomModSWORD((gchar*)user_data);
 }
+
+//----------------------------------------------------------------------------------------------
 void
 on_fbMainwindowbold_font_set           (GnomeFontPicker *gnomefontpicker,
                                         GString        arg1,
@@ -1407,4 +1417,39 @@ on_fbMainwindowbold_font_set           (GnomeFontPicker *gnomefontpicker,
 {
 
 }
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnKeyPrev_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   dictchangekeySWORD(0);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnKeyNext_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   dictchangekeySWORD(1);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_search1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	if(firstsearch)
+	{
+		searchDlg = create_dlgSearch();
+		setupSearchDlg(searchDlg);
+		firstsearch = FALSE;
+		gtk_signal_connect (GTK_OBJECT (searchDlg), "destroy",
+                      GTK_SIGNAL_FUNC (on_dlgSearch_destroy),
+                      NULL);
+	}
+	gtk_widget_show (searchDlg); 	
+}
+
+
 
