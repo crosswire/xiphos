@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-int backend_load_properties(void);
+int backend_load_properties(char * path);
 int backend_save_properties(int shutdown);
 int backend_create_properties_from_setup(void);
 int backend_create_properties(void);

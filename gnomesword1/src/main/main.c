@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 		first_run = gui_first_run();
 	}
 
-	backend_load_properties();
+	backend_load_properties(settings.fnconfigure);
 	
 	gui_splash_init();
 
