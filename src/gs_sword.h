@@ -99,7 +99,8 @@ gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
 void morphsSWORD(gboolean choice) ;
-
+void gotBookmarkSWORD(gchar *modName, gchar *key);
+gchar* getmodkeySWORD(gint num);
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

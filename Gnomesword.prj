@@ -128,7 +128,9 @@ module.source.files=\
 	sw_latin1utf8.cpp\
 	sw_latin1utf8.h\
 	sw_bookmarks.cpp\
-	sw_bookmarks.h
+	sw_bookmarks.h\
+	gs_information_dlg.c\
+	gs_information_dlg.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -62,7 +62,8 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
 	VTMgr	= new SWMgr();
 	VTMod     = NULL;
-	VTDisplay = new  GTKhtmlChapDisp(text);
+	VTDisplay = new  GTKutf8ChapDisp(text);
+	//VTDisplay = new  GTKhtmlChapDisp(text);
 	list = NULL;
 	for(it = VTMgr->Modules.begin(); it != VTMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){

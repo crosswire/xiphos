@@ -26,6 +26,7 @@
 #include "gs_viewdict.h"
 #include "gs_viewcomm.h"
 #include "gs_viewtext_dlg.h"
+#include "gs_bookmarks.h"
 #include "support.h"
 
 
@@ -246,7 +247,7 @@ on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
 	modName = (gchar *) user_data;
 	changecomp1ModSWORD(modName);
 }
-
+/*
 //----------------------------------------------------------------------------------------------
 void
 on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
@@ -268,7 +269,7 @@ on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
 	modName = (gchar *) user_data;
 	changecomp3ModSWORD(modName);
 }
-
+*/
 //----------------------------------------------------------------------------------------------
 void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -371,6 +372,19 @@ void on_goto_reference3_activate(GtkMenuItem * menuitem, gpointer user_data)
 				   GTK_EDITABLE(text)->selection_end_pos);
 	
 	changeVerseSWORD(buf);
+}
+		
+/*******************************************************************************
+ * show add bookmark - popup menu choice
+ *******************************************************************************/	
+void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gchar *modName;
+	gchar *key;
+	
+	modName = getmodnameSWORD(atoi(user_data));
+	key = getmodkeySWORD(atoi(user_data));
+	addbookmarktotree(modName,key);
 }
 		
 
