@@ -134,6 +134,7 @@ gboolean havedict = false; //-- let us know if we have at least one lex-dict mod
 gboolean havecomm = false; //-- let us know if we have at least one commentary module
 gboolean autoscroll = true; //-- commentary module auto scroll when true -- in sync with main text window
 gboolean isstrongs = false; //-- main window selection is not storngs number
+gboolean changemain = true; //-- change verse of Bible text window
 extern gchar rememberlastitem[255]; //-- used for bookmark menus declared in filestuff.cpp
 extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
 extern NoteEditor *noteeditor;
@@ -631,12 +632,11 @@ initSword(GtkWidget *mainform,  //-- apps main form
 #endif /* USE_ASPELL */
 }
 
-/* ------------------------------------------------------------------------------------------- */
-/* 
+/********************************************************************************************** 
  * changeVerse - this function changes all currently used sword Bible and commentary modules 
  *               to (ref)
  * gchar *ref - pointer to new module key (verse)
- */
+ *********************************************************************************************/
 void 
 changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary text together
 {
@@ -644,35 +644,39 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 //	GtkWidget *msgBox;
 	int l;
 
-
 	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
 		if(autoSave){                          //-- if we are in edit mode
 			savenoteSWORD(noteModified); 	//-- save if text in note window has changed			
 		}
 	}		
 	strcpy(current_verse,ref);		
-	ApplyChange = FALSE;		
-	if(curMod){  //--------------------------------------------------- change main window		
-		curMod->SetKey(ref); //keyText.c_str());
-		curMod->Display();
-		//gtk_label_set(GTK_LABEL(lookup_widget(MainFrm,"lbText")),curMod->KeyText( )); //------- set text label to current verse
-		swKey = curMod->KeyText();
-		strcpy(settings->currentverse, curMod->KeyText()); //----------------------- remember last verse
-		char s1[255],s2[255];
-		curVerse = swKey.Verse();
-		curChapter = swKey.Chapter();		
-		sprintf(s1,"%s",(const char *)swKey);
-		for(l=0;l<strlen(s1);l++){ //------------------------ seperate book name			
-			if(isdigit(s1[l])) break;
+	ApplyChange = FALSE;
+	if(changemain) {
+		if(curMod){  //--------------------------------------------------- change main window
+			if(strcmp(settings->currentverse,ref)) addHistoryItem(ref); //-- verse to history menu		
+			curMod->SetKey(ref); //keyText.c_str());
+			curMod->Display();
+			//gtk_label_set(GTK_LABEL(lookup_widget(MainFrm,"lbText")),curMod->KeyText( )); //------- set text label to current verse
+			swKey = curMod->KeyText();
+			strcpy(settings->currentverse, curMod->KeyText()); //----------------------- remember last verse
+			char s1[255],s2[255];
+			curVerse = swKey.Verse();
+			curChapter = swKey.Chapter();		
+			sprintf(s1,"%s",(const char *)swKey);
+			for(l=0;l<strlen(s1);l++){ //------------------------ seperate book name			
+				if(isdigit(s1[l])) break;
+			}
+			strncpy(s2,s1,l);
+			s2[l] = '\0';
+			//------------------------- set book, chapter,verse and freeform lookup entries to new verse
+			ApplyChange = false;
+			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook")),s2);
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")),curChapter);
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),curVerse);
+			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")),swKey);
 		}
-		strncpy(s2,s1,l);
-		s2[l] = '\0';
-		//------------------------- set book, chapter,verse and freeform lookup entries to new verse
-		gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook")),s2);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")),curChapter);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")),curVerse);
-		gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")),swKey);
 	}
+	changemain = true;
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->notebook3page == 2){
 		if(comp1Mod){
@@ -929,10 +933,10 @@ editbookmarksLoad(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
 
 //-------------------------------------------------------------------------------------------
 void
-addHistoryItem(void)  //-- add an item to the history menu
+addHistoryItem(gchar *ref)  //-- add an item to the history menu
 {
 	GnomeUIInfo *historyitem;  //-- pointer to gnome menu item structure
-	gchar   *bookname,        //-- pointer to name of book of Bible to add to history
+/*	gchar   *bookname,        //-- pointer to name of book of Bible to add to history
 		ref[255];            //-- string to store Bible ref
 	gint    iVerse,         //-- varible to store verse number
 		iChap;               //-- varible to store chapter number
@@ -942,6 +946,7 @@ addHistoryItem(void)  //-- add an item to the history menu
 	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number from verse spin button
 	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")));//-- get chapter number from chapter spin button
 	sprintf(ref,"%s %d:%d",bookname, iChap,iVerse ); //-- store book, chapter and verse in ref string
+*/
 	additemtognomemenu(MainFrm, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); //-- add item to history menu
 	++historyitems;
 	
@@ -1078,8 +1083,8 @@ btnlookupSWORD(void)  //-- add current verse to history menu
 
 	ApplyChange = FALSE;	//-- do not want to start loop with book combo box
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
-	changeVerse(buf);	//-- change verse to entry text
-	addHistoryItem(); //-- verse to history menu
+	changeVerse(buf);	//-- change verse to entry text	
+	//addHistoryItem();
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1092,7 +1097,7 @@ freeformlookupSWORD(GdkEventKey  *event) //-- change to verse in freeformlookup 
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
 	if(event->keyval == 65293 || event->keyval == 65421){  //-- if user hit return key continue	
 		changeVerse(buf);	//-- change verse to entry text
-		addHistoryItem(); //-- add verse to history menu
+		//addHistoryItem(); //-- add verse to history menu
 	}	
 }
 
@@ -1359,6 +1364,7 @@ void
 changepagenotebook(GtkNotebook *notebook,gint page_num) //-- someone changed the page in the main notebook
 {
         settings->notebook3page = page_num; //-- store the page number so we can open to it the next time we start
+        changemain = false;
         changeVerse(current_verse);
 }
 
