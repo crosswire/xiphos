@@ -44,7 +44,6 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <string.h>
-//#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
 #include "sw_shortcutbar.h"
@@ -58,9 +57,9 @@ extern SETTINGS *settings;
 
 list < string > sbfiles;
 
-static SWDisplay *viewersbDisplay;	/* to display modules in viewer dialog */
+static SWDisplay *viewersbDisplay;	//-- to display modules in viewer 
 static SWMgr *viewersbMgr;
-static SWModule *viewersbMod;	/* module for viewer dialog */
+static SWModule *viewersbMod;	//-- module for viewer 
 
 gint sbtypefromModNameSBSW(gchar * modName)
 {
@@ -170,17 +169,11 @@ saveshortcutbarSW(gchar * filename, gchar * group_name, gint group_num,
 
     number_of_items =
 	gs_shortcut_model_get_num_items(settings->shortcut_bar, group_num);
-    //e_shortcut_model_get_num_items(E_SHORTCUT_BAR(settings->shortcut_bar)->model, group_num);
 
     for (j = 0; j < number_of_items; j++) {
 	gs_shortcut_model_get_item_info(settings->shortcut_bar,
 					group_num,
 					j, &item_url, &item_name);
-	/*e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-	   (settings->shortcut_bar)->model,
-	   group_num,
-	   j, &item_url, &item_name,
-	   NULL); */
 	sprintf(buf, "branch%d", j);
 	emap.erase(buf);
 	emap.insert(ConfigEntMap::value_type(buf, (gchar *) item_name));
@@ -235,7 +228,7 @@ gboolean displaydictlexSBSW(gchar * modName, gchar * key, SETTINGS * s)
 	    it = viewersbMgr->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
 	    if (it != viewersbMgr->Modules.end()) {	//-- if we find the module       
 		viewersbMod = (*it).second;	//-- change module to new module
-		viewersbMod->SetKey(key);	//-- set key to the first one in the list
+		viewersbMod->SetKey(key);	//-- set key
 		viewersbMod->Display();
 	    }
 	}
