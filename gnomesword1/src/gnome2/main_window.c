@@ -324,7 +324,7 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
  *   void
  */
 
-void gui_change_verse(gchar * key)
+void gui_change_verse(const gchar * key)
 {
 	gchar *val_key;
 

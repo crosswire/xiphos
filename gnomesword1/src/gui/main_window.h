@@ -34,7 +34,7 @@ void gui_show_hide_dicts(int choice);
 void gui_set_bible_comm_layout(void);	
 void gui_change_window_title(char * module_name);
 void gui_change_module_and_key(char *module_name, char *key);
-void gui_change_verse(char *key);	
+void gui_change_verse(const char *key);	
 void gui_search_appbar_update(char percent, void *userData);
 void create_mainwindow(void);
 void gui_show_main_window(void);

@@ -6,9 +6,9 @@ EXTRA_DIST =  \
 	$(top_builddir)/src/gui/*.h \
 	shortcutbar.h 
 
-bin_PROGRAMS = gnomesword
+bin_PROGRAMS = gnomesword2
 
-gnomesword_SOURCES =  \
+gnomesword2_SOURCES =  \
     about_gnomesword.c \
     about_modules.c \
     about_sword.c \
@@ -63,7 +63,7 @@ gnomesword_SOURCES =  \
     toolbar_style.c \
     utilities.c
     
-gnomesword_LDADD = \
+gnomesword2_LDADD = \
     $(GNOME_LIBS)\
     $(PSPELL_LIBS) \
     $(top_builddir)/src/main/libmain.a \
