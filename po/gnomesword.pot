@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-09-30 16:11-0400\n"
+"POT-Creation-Date: 2001-10-04 19:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Copy highlighted text form main window"
 msgstr ""
 
-#: src/gs_gui.c:84 src/gs_shortcutbar.c:1826
+#: src/gs_gui.c:84 src/gs_shortcutbar.c:1843
 msgid "Search"
 msgstr ""
 
@@ -204,9 +204,9 @@ msgstr ""
 msgid "Information about Bible texts"
 msgstr ""
 
-#: src/gs_gui.c:148 src/gs_gui.c:892 src/gs_shortcutbar.c:613
-#: src/gs_shortcutbar.c:648 src/gs_shortcutbar.c:1708
-#: src/gs_shortcutbar.c:2003
+#: src/gs_gui.c:148 src/gs_gui.c:892 src/gs_shortcutbar.c:615
+#: src/gs_shortcutbar.c:650 src/gs_shortcutbar.c:1725
+#: src/gs_shortcutbar.c:2020
 msgid "Commentaries"
 msgstr ""
 
@@ -402,17 +402,17 @@ msgstr ""
 msgid "_History/C_lear"
 msgstr ""
 
-#: src/gs_html.c:89
+#: src/gs_html.c:91
 #, c-format
 msgid "Show %s in main window"
 msgstr ""
 
-#: src/gs_html.c:113
+#: src/gs_html.c:115
 #, c-format
 msgid "Go to Strongs %s"
 msgstr ""
 
-#: src/gs_html.c:132
+#: src/gs_html.c:134
 #, c-format
 msgid "Go to %s"
 msgstr ""
@@ -700,8 +700,8 @@ msgstr ""
 msgid "Commentary"
 msgstr ""
 
-#: src/gs_preferences_dlg.c:1586 src/gs_setup.c:556 src/gs_shortcutbar.c:1742
-#: src/gs_shortcutbar.c:2037
+#: src/gs_preferences_dlg.c:1586 src/gs_setup.c:556 src/gs_shortcutbar.c:1759
+#: src/gs_shortcutbar.c:2054
 msgid "Dict/Lex"
 msgstr ""
 
@@ -834,195 +834,206 @@ msgid ""
 "Click Finish to close this dialog and run GnomeSword."
 msgstr ""
 
-#: src/gs_shortcutbar.c:567
+#: src/gs_shortcutbar.c:569
 msgid "Large Icons"
 msgstr ""
 
-#: src/gs_shortcutbar.c:573
+#: src/gs_shortcutbar.c:575
 msgid "Small Icons"
 msgstr ""
 
-#: src/gs_shortcutbar.c:585
+#: src/gs_shortcutbar.c:587
 msgid "Add Bible Text"
 msgstr ""
 
-#: src/gs_shortcutbar.c:598 src/gs_shortcutbar.c:645
+#: src/gs_shortcutbar.c:600 src/gs_shortcutbar.c:647
 msgid "Biblical Texts"
 msgstr ""
 
-#: src/gs_shortcutbar.c:600
+#: src/gs_shortcutbar.c:602
 msgid "Add Commentary"
 msgstr ""
 
-#: src/gs_shortcutbar.c:615
+#: src/gs_shortcutbar.c:617
 msgid "Add Dictionary"
 msgstr ""
 
-#: src/gs_shortcutbar.c:628 src/gs_shortcutbar.c:651
+#: src/gs_shortcutbar.c:630 src/gs_shortcutbar.c:653
 msgid "Lexicons / Dictionaries"
 msgstr ""
 
-#: src/gs_shortcutbar.c:630
+#: src/gs_shortcutbar.c:632
 msgid "Add Shortcut"
 msgstr ""
 
-#: src/gs_shortcutbar.c:670
+#: src/gs_shortcutbar.c:672
 msgid "About this Module"
 msgstr ""
 
-#: src/gs_shortcutbar.c:683
+#: src/gs_shortcutbar.c:685
 msgid "Remove from Shortcut Bar"
 msgstr ""
 
-#: src/gs_shortcutbar.c:813 src/gs_shortcutbar.c:1856
+#: src/gs_shortcutbar.c:815 src/gs_shortcutbar.c:1873
 msgid "Verse List"
 msgstr ""
 
-#: src/gs_shortcutbar.c:820
+#: src/gs_shortcutbar.c:822
 msgid "Search Results"
 msgstr ""
 
-#: src/gs_shortcutbar.c:827 src/gs_shortcutbar.c:1014
+#: src/gs_shortcutbar.c:829 src/gs_shortcutbar.c:1019
 msgid "Viewer"
 msgstr ""
 
-#: src/gs_shortcutbar.c:930
+#: src/gs_shortcutbar.c:935
 msgid "Save List"
 msgstr ""
 
-#: src/gs_shortcutbar.c:931
+#: src/gs_shortcutbar.c:936
 msgid "Save the current verse list as a bookmark file"
 msgstr ""
 
-#: src/gs_shortcutbar.c:945
+#: src/gs_shortcutbar.c:950
 msgid "Main Form"
 msgstr ""
 
-#: src/gs_shortcutbar.c:946
+#: src/gs_shortcutbar.c:951
 msgid "Toggle to show results in Main Form"
 msgstr ""
 
-#: src/gs_shortcutbar.c:959
+#: src/gs_shortcutbar.c:964
 msgid "UpdateMain"
 msgstr ""
 
-#: src/gs_shortcutbar.c:960
+#: src/gs_shortcutbar.c:965
 msgid "Show current verse list verse in Main Form"
 msgstr ""
 
-#: src/gs_shortcutbar.c:984
+#: src/gs_shortcutbar.c:989
 msgid "VerseList"
 msgstr ""
 
-#: src/gs_shortcutbar.c:985
+#: src/gs_shortcutbar.c:990
 msgid "View Verse List"
 msgstr ""
 
-#: src/gs_shortcutbar.c:999
+#: src/gs_shortcutbar.c:1004
 msgid "SearchResults"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1000
+#: src/gs_shortcutbar.c:1005
 msgid "View Search Results"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1094
+#: src/gs_shortcutbar.c:1099
 msgid "label1"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1167
+#: src/gs_shortcutbar.c:1173
 msgid "label2"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1206
+#: src/gs_shortcutbar.c:1212
 msgid "label3"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1326
+#: src/gs_shortcutbar.c:1333
 msgid "Begin Search"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1329
+#: src/gs_shortcutbar.c:1336
 msgid "Search Type"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1344
+#: src/gs_shortcutbar.c:1351
 msgid "Multi Word"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1358
+#: src/gs_shortcutbar.c:1365
 msgid "Regular Expression"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1369
+#: src/gs_shortcutbar.c:1376
 msgid "Exact Phrase"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1381
+#: src/gs_shortcutbar.c:1388
 msgid "Search Options"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1396
+#: src/gs_shortcutbar.c:1403
 msgid "Case Sensitive"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1407
+#: src/gs_shortcutbar.c:1414
 msgid "Search Commentary"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1416
+#: src/gs_shortcutbar.c:1423
 msgid "Search Personal"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1425
+#.
+#. ckbMarkResults = gtk_check_button_new_with_label(_("Mark Resluts"));
+#. gtk_widget_ref(ckbMarkResults);
+#. gtk_object_set_data_full(GTK_OBJECT(s->app), "ckbMarkResults",
+#. ckbMarkResults,
+#. (GtkDestroyNotify) gtk_widget_unref);
+#. gtk_widget_show(ckbMarkResults);
+#. gtk_tooltips_set_tip (tooltips, ckbMarkResults, _("Marks search words in results - makes search very slow!"), NULL);
+#. gtk_box_pack_start(GTK_BOX(vbox3), ckbMarkResults, FALSE, FALSE, 0);
+#. gtk_widget_set_usize(ckbMarkResults, -2, 20);
+#.
+#: src/gs_shortcutbar.c:1442
 msgid "Search Scope"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1440
+#: src/gs_shortcutbar.c:1457
 msgid "No Scope"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1452
+#: src/gs_shortcutbar.c:1469
 msgid "Use Bounds"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1464
+#: src/gs_shortcutbar.c:1481
 msgid "Last Search"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1475
+#: src/gs_shortcutbar.c:1492
 msgid "Bounds"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1489
+#: src/gs_shortcutbar.c:1506
 msgid "Lower"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1499
+#: src/gs_shortcutbar.c:1516
 msgid "Upper "
 msgstr ""
 
-#: src/gs_shortcutbar.c:1519
+#: src/gs_shortcutbar.c:1536
 msgid "Genesis"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1531
+#: src/gs_shortcutbar.c:1548
 msgid "Revelation"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1613
+#: src/gs_shortcutbar.c:1630
 msgid "Favorites"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1674 src/gs_shortcutbar.c:1969
+#: src/gs_shortcutbar.c:1691 src/gs_shortcutbar.c:1986
 msgid "Bible Text"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1776 src/gs_shortcutbar.c:2070
+#: src/gs_shortcutbar.c:1793 src/gs_shortcutbar.c:2087
 msgid "History"
 msgstr ""
 
-#: src/gs_shortcutbar.c:1799
+#: src/gs_shortcutbar.c:1816
 msgid "Bookmarks"
 msgstr ""
 

@@ -129,6 +129,7 @@ struct _settings {
 		text_tabs, /* show module tabs in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */
+		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain; /* when verse list item clicked show in main form if true */
 	GList *settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
