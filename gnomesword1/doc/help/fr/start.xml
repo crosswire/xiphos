@@ -1,0 +1,129 @@
+<chapter id="familiar">
+	<title>Débuter avec &app;</title>
+<!-- ============= Getting Started with GnomeSword  ============-->
+	<sect1 id="gnomesword-getting-started">
+  		<title>Démarrage</title>
+			<para>
+				Vous pouvez démarrer <application>&app;</application> en utilisant l'une des méthodes suivantes :
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Menu Applications</term>
+					<listitem>
+						<para>
+							Sélectionnez <menuchoice><guisubmenu>Accessoires</guisubmenu><guimenuitem>
+							Gnomesword</guimenuitem>
+							</menuchoice>.
+			         		</para>
+    				</listitem>
+    			</varlistentry>
+    			<varlistentry>
+    				<term>Ligne de commande</term>
+    				<listitem>
+    					<para>
+						Entrez <command>gnomesword2</command>, puis appuyez sur <keycap>Return</keycap>.
+					</para>
+    				</listitem>
+    			</varlistentry>
+  		  	</variablelist>
+    </sect1>
+<!--Starting Gnomesword for the First Time  -->
+  	<sect1 id="gnomesword-first-start">
+  		<title>Premier démarrage de &app;</title>
+		<para>
+			Un <interface>assistant</interface> de configuration apparaît au premier démarrage de 
+			<application>&app;</application>. Il permet de choisir les modules à installer parmi 
+			les nombreux modules du <application>SWORD Project</application> et de définir les 
+			options de base de l'interface utilisateur.
+			Une fois configuré, <application>&app;</application> affiche ensuite la fenêtre principale.
+			
+		</para>
+	 </sect1>
+<!-- GnomeSword on first time use -->
+   	 <sect1 id="gnomesword-when-you-start">
+	 <title>Après avoir démarré &app;</title>
+		<para>
+			Quand vous démarrez <application>&app;</application>, l'écran suivant est affiché : 
+		</para>
+		<figure id="gnomesword-start-interface">
+			<title>Interface de &app;</title>
+			<screenshot>
+				<mediaobject>
+			 		<imageobject>
+						<imagedata fileref="figures/interface" format="PNG"/>
+					</imageobject>
+					<textobject>
+        				<phrase>GnomeSword window</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+		</figure>
+		<para>
+			L'interface de <application>&app;</application> est constituée des éléments suivants :
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Barre de menu</term>
+				<listitem>
+					<para>
+						Les menus donnent accès au bloc notes d'étude et aux fonctions de 
+						recherche avancée. Les menus permettent aussi de personnaliser 
+						l'utilisation de <application>&app;</application>.
+			 		</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Barre d'outils</term>
+				<listitem>
+					<para>
+					 	La <interface>barre d'outils</interface> permet de naviguer 
+						facilement parmi les versets de la Bible.
+					</para>
+				</listitem>
+		 	</varlistentry>
+                	<varlistentry>
+				<term>Volet latéral</term>
+				<listitem>
+					<para>
+						Le <interface>volet latéral</interface> permet de gérer les 
+						modules de textes installés, d'enregistrer et d'utiliser des
+						signets pointant sur les versets de la Bible, et offre la 
+						possibilité de réaliser des recherches simples. 
+					</para>
+				</listitem>
+		  	</varlistentry>
+		  	<varlistentry>
+				<term>Volet d'affichage des textes bibliques</term>
+				<listitem>
+					<para>
+						Le <interface>volet d'affichage des textes bibliques</interface> présente 
+						le texte de la version de la Bible préalablement sélectionnée.
+					</para>
+			    </listitem>
+		  	 </varlistentry>
+		  	 <varlistentry>
+			 	<term>Volet d'affichage des commentaires</term>
+			 	<listitem>
+					<para>
+						Le <interface>volet d'affichage des commentaires</interface> affiche 
+						le commentaire relatif au texte biblique présenté.
+					</para>
+			 	</listitem>
+			</varlistentry>
+			<varlistentry>
+			 	<term>Volet d'affichage des dictionnaires et livres d'étude</term>
+			 	<listitem>
+					<para>
+						Le <interface>volet d'affichage des dictionnaires et livres d'étude</interface> 
+						affiche l'entrée du dictionnaire relative au mot selectionné ou affiche le 
+						contenu du livre d'étude choisi.
+					</para>
+			 	</listitem>
+			</varlistentry>
+			</variablelist>
+			<para>
+				Un click du bouton droit sur les différents volets d'affichage provoque
+				l'apparition d'un menu de commande par <application>&app;</application>
+			</para>
+	</sect1>
+</chapter>

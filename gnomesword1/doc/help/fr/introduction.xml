@@ -1,0 +1,47 @@
+<!-- ============= Introduction ============================== -->
+<chapter id="introduction">
+	<title>Introduction</title>
+  	<para>
+		<application>&app;</application> est un outil de recherche et d'étude de la Bible basé sur 
+		le 'SWORD Project' et utilisant l'environnement de bureau GNOME. Avec 
+		<application>&app;</application> vous pouvez :
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				Afficher vos versets préférés
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Préparer une étude ou ajouter des notes personelles à un passage
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+		Le but de <application>&app;</application> est de mettre à disposition de l'utilisateur 
+		un outil d'étude de la Bible puissant et personnalisable tout en bénéficiant d'une 
+		interface utilisateur simple et claire.
+	</para>
+	<para>
+  		<figure id="anjuta-scrshot">
+   			<title>GnomeSword en action</title>
+   			<screenshot>
+   				<screeninfo>GnomeSword en action</screeninfo>
+   				<graphic format="PNG" fileref="figures/interface" ></graphic>
+   			</screenshot>
+		</figure>
+  	</para>
+
+ <!-- Where important notices are kept regarding Gnomesword  -->
+   	<warning>
+   		<para>
+			<application>&app;</application> est en cours de développement, il se peut 
+			donc que des dfférences apparaissent dans ce manuel par rapport au logiciel. 
+			Si cela est le cas, envoyez un rapport de bogue au <ulink type="http" 
+			url="http://sourceforge.net/projects/gnomesword"> site web du projet</ulink>, 
+			ou un email à <email>gnomesword-developers@lists.sourceforge.net</email>
+			Toute aide est appréciée, puisqu'elle permet d'améliorer le programme.
+		</para>
+  	</warning>
+</chapter>

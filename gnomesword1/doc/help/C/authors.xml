@@ -1,8 +1,8 @@
 <!-- Authors -->
-<chapter id="authors" lang="fr">
-	<title>Auteurs</title>
+<chapter id="authors" lang="en">
+	<title>Authors</title>
 		<para>
-    	Ce manuel a été ecrit par:
+    	This manual was written by:
 		</para>
 		<itemizedlist>
 		<listitem>
@@ -17,24 +17,20 @@
 		</listitem>
 		<listitem>
 			<para>
-			Peter von Kaehne
+			Dr Peter von Kaehne
 			</para>
 		</listitem>
 	</itemizedlist>
 	<para>
-		Pour nous signaler un problème ou nous faire part de suggestions concernant l'application 
-		<application>GnomeSword</application> ou le présent manuel, envoyez un message sur la liste de diffusion 
-    		 <email>gnomesword-developers@lists.sourceforge.net</email>. 
-		Vous pouvez aussi soumettre vos commentaires sur la page Tracker du site Internet 
-		de développement de <application>GnomeSword</application> à <ulink type="http" 
-		url="http://sourceforge.net/projects/gnomesword/">
-		http://sourceforge.net/projects/gnomesword/</ulink>.
-   	</para> 
-	<para>
-		Pour plus d'informations, visitez le site Internet de <application>GnomeSword</application> à 
-		<ulink type="http" url="http://gnomesword.sf.net/">http://gnomesword.sf.net</ulink>.
-		Les rapports de bogue sont à soumettre à la page Bug du site Internet de développement du projet à 
-		<ulink type="http" url="http://www.sourceforge.net/projects/gnomesword">
-		http://www.sourceforge.net/projects/gnomesword</ulink>.
-	</para>
+	Please send all comments and suggestions regarding 
+    	this manual to GnomeSword Development list <email>gnomesword-developers@lists.sourceforge.net</email>. 
+	Comments may also be submitted via the project trackers at SourceForge.
+   		</para> 
+<para>
+    	For more information on <application>GnomeSword</application>, please visit the project 
+    	website at <ulink type="http" url="http://gnomesword.sf.net/">http://gnomesword.sf.net</ulink>. 
+    	Bug reports should be made using the Bug Tracker at the project development site 
+    	<ulink type="http" url="http://www.sourceforge.net/projects/gnomesword">
+    	http://www.sourceforge.net/projects/gnomesword</ulink>
+		</para>
 </chapter>
