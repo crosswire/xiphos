@@ -172,7 +172,7 @@ void showSBVerseList(SETTINGS * s)
 void setupforDailyDevotion(SETTINGS * s)
 {
 	showSBGroup(s, groupnum7);
-	changegroupnameSB(s, "Daily Devotion", groupnum7);
+	changegroupnameSB(s, _("Daily Devotion"), groupnum7);
 }
 
 /*** set shortcut bar group ***/
