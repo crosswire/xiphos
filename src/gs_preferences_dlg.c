@@ -864,7 +864,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	cmbVerseNumSize_items =
 	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+4"));
 	cmbVerseNumSize_items =
-	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+5\r"));
+	    g_list_append(cmbVerseNumSize_items, (gpointer) _("+5"));
 	gtk_combo_set_popdown_strings(GTK_COMBO(cmbVerseNumSize),
 				      cmbVerseNumSize_items);
 	g_list_free(cmbVerseNumSize_items);
