@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
   /*
     * GnomeSword Bible Study Tool
     * gs_setup.h

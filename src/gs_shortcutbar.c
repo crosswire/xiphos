@@ -140,18 +140,11 @@ static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 							 (shortcut_bar)->
 							 model, group_num);
 	for (j = 0; j < number_of_items; j++) {
-#ifdef USE_OLD_GAL
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       j, &item_url, &item_name);
-#else				/* USE_OLD_GAL */
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
 					       NULL);
-#endif				/* USE_OLD_GAL */
 	}
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
@@ -220,10 +213,6 @@ on_shortcut_dropped(EShortcutBar * shortcut_bar,
 
 	g_print("In on_shortcut_dropped Group:%i Item:%i\n", group_num,
 		item_num);
-#ifdef USE_OLD_GAL
-	e_shortcut_model_add_item(shortcut_bar->model,
-				  group_num, item_num, url, name);
-#else				/* USE_OLD_GAL */
 	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 				       (shortcut_bar)->model,
 				       group_num,
@@ -231,7 +220,6 @@ on_shortcut_dropped(EShortcutBar * shortcut_bar,
 	e_shortcut_model_add_item(shortcut_bar->model,
 				  group_num, item_num, url, name,
 				  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 	savegroup((EShortcutBar *) shortcut_bar, group_num);
 }
 
@@ -245,18 +233,11 @@ static void on_about_item_activate(GtkMenuItem * menuitem, gpointer data)
 	item_num = GPOINTER_TO_INT(data);
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
-#ifdef USE_OLD_GAL
-	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-				       (shortcut_bar)->model,
-				       group_num,
-				       item_num, &item_url, &item_name);
-#else				/* USE_OLD_GAL */
 	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 				       (shortcut_bar)->model,
 				       group_num,
 				       item_num,
 				       &item_url, &item_name, NULL);
-#endif				/* USE_OLD_GAL */
 	memset(modName, 0, 16);
 	modNameFromDesc(modName, item_name);
 	showmoduleinfoSWORD(modName);
@@ -283,17 +264,11 @@ static void on_remove_item_activate(GtkMenuItem * menuitem, gpointer data)
 	number_of_items = e_shortcut_model_get_num_items(shortcut_model,
 							 group_num);
 	for (j = 0; j < number_of_items; j++) {
-#ifdef USE_OLD_GAL
-		e_shortcut_model_get_item_info(shortcut_model,
-					       group_num,
-					       j, &item_url, &item_name);
-#else				/* USE_OLD_GAL */
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
 					       NULL);
-#endif				/* USE_OLD_GAL */
 		list = g_list_append(list, item_name);
 	}
 	
@@ -365,11 +340,6 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 	if (sbtype < 0)
 		sbtype = 0;
 
-#ifdef USE_OLD_GAL
-	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-				  group_num, -1, shortcut_types[sbtype],
-				  (gchar *) user_data);
-#else				/* USE_OLD_GAL */
 	switch (sbtype) {
 	case 0:
 		pathname = gnome_pixmap_file("gnomesword/book-un.png");
@@ -388,7 +358,6 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  group_num, -1, "not null",
 				  (gchar *) user_data, icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 	list = NULL;
 	group_name = "";
 	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR
@@ -398,18 +367,11 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 							 (shortcut_bar)->
 							 model, group_num);
 	for (j = 0; j < number_of_items; j++) {
-#ifdef USE_OLD_GAL
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       j, &item_url, &item_name);
-#else				/* USE_OLD_GAL */
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
 					       NULL);
-#endif				/* USE_OLD_GAL */
 		list = g_list_append(list, item_name);
 	}
 	if (group_num == groupnum0) {
@@ -720,17 +682,10 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 		if (event->button.button == 1) {
 			if(item_num > -1) {
 				app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
-#ifdef USE_OLD_GAL
-				e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-						       (shortcut_bar)->model,
-						       group_num, item_num, &type,
-						       &ref);
-#else				/* USE_OLD_GAL */
 				e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 						       (shortcut_bar)->model,
 						       group_num, item_num, &type,
 						       &ref, &icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 				memset(modName, 0, 16);
 				modNameFromDesc(modName, ref);
 				if (group_num == groupnum0) {
@@ -1582,40 +1537,6 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 	gtk_object_set_data(GTK_OBJECT(s->app), "tooltips", tooltips);
 }
 
-#ifdef USE_OLD_GAL
-#define NUM_SHORTCUT_TYPES 5
-gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
-	"bible:", "commentary:", "dictionary:",
-	"greek:", "hebrew:"
-};
-gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
-	"gnomesword/book-un.png",
-	"gnomesword/book-bl.png",
-	"gnomesword/book-green.png",
-	"gnomesword/book-un.png",
-	"gnomesword/book-un.png"
-};
-
-GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
-static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
-				const gchar * url, gpointer data);
-
-static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
-				const gchar * url, gpointer data)
-{
-	gint i;
-
-	for (i = 0; i < NUM_SHORTCUT_TYPES; i++) {
-		if (!strncmp(url, shortcut_types[i],
-			     strlen(shortcut_types[i]))) {
-			gdk_pixbuf_ref(icon_pixbufs[i]);
-			return icon_pixbufs[i];
-		}
-	}
-	return NULL;
-}
-#endif				/* USE_OLD_GAL */
-
 
 void setupSB(SETTINGS * s)
 {
@@ -1629,29 +1550,8 @@ void setupSB(SETTINGS * s)
 	gint sbtype = 0, large_icons = 0;
 	gchar *filename, group_name[256], icon_size[10];
 	gchar modName[16], *pathname;
-#ifdef USE_OLD_GAL
-	gint i;
-#endif				/*USE_OLD_GAL  */
 	GdkPixbuf *icon_pixbuf = NULL;
 
-
-#ifdef USE_OLD_GAL
-/************************************************************/
-	gtk_widget_pop_visual();
-	gtk_widget_pop_colormap();
-	/* Load our default icons. */
-	for (i = 0; i < NUM_SHORTCUT_TYPES; i++) {
-		pathname = gnome_pixmap_file(icon_filenames[i]);
-		if (pathname)
-			icon_pixbufs[i] =
-			    gdk_pixbuf_new_from_file(pathname);
-		else
-			icon_pixbufs[i] = NULL;
-	}
-	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
-					 icon_callback, NULL);
-/***********************************************************/
-#endif				/* USE_OLD_GAL */
 	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
@@ -1673,13 +1573,6 @@ void setupSB(SETTINGS * s)
 			sbtype = sbtypefromModNameSBSW(modName);
 			if (sbtype < 0)
 				sbtype = 0;
-#ifdef USE_OLD_GAL
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum0, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/*  USE_OLD_GAL */
 			switch (sbtype) {
 			case 0:
 				pathname =
@@ -1710,7 +1603,6 @@ void setupSB(SETTINGS * s)
 						  "favorite",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 
 		}
@@ -1728,14 +1620,6 @@ void setupSB(SETTINGS * s)
 						     groupnum1,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-#ifdef USE_OLD_GAL
-			sbtype = 0;
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum1, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/* USE_OLD_GAL */
 			pathname =
 			    gnome_pixmap_file("gnomesword/book-un.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
@@ -1745,7 +1629,6 @@ void setupSB(SETTINGS * s)
 						  "bible text",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -1762,14 +1645,6 @@ void setupSB(SETTINGS * s)
 						     groupnum2,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-#ifdef USE_OLD_GAL
-			sbtype = 1;
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum2, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/* USE_OLD_GAL */
 			pathname =
 			    gnome_pixmap_file("gnomesword/book-bl.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
@@ -1779,7 +1654,6 @@ void setupSB(SETTINGS * s)
 						  "commentary",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -1796,14 +1670,6 @@ void setupSB(SETTINGS * s)
 						     groupnum3,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-#ifdef USE_OLD_GAL
-			sbtype = 2;
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum3, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/* USE_OLD_GAL */
 			pathname =
 			    gnome_pixmap_file("gnomesword/book-green.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
@@ -1813,7 +1679,6 @@ void setupSB(SETTINGS * s)
 						  "dictionary",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 
 			tmp = g_list_next(tmp);
 		}
@@ -1969,13 +1834,6 @@ void update_shortcut_bar(SETTINGS * s)
 			sbtype = sbtypefromModNameSBSW(modName);
 			if (sbtype < 0)
 				sbtype = 0;
-#ifdef USE_OLD_GAL
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum0, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/*  USE_OLD_GAL */
 			switch (sbtype) {
 			case 0:
 				pathname =
@@ -2006,7 +1864,6 @@ void update_shortcut_bar(SETTINGS * s)
 						  "favorites",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -2023,14 +1880,6 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum1,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-#ifdef USE_OLD_GAL
-			sbtype = 0;
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum1, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/* USE_OLD_GAL */
 			pathname =
 			    gnome_pixmap_file("gnomesword/book-un.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
@@ -2040,7 +1889,6 @@ void update_shortcut_bar(SETTINGS * s)
 						  "bible text",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -2057,14 +1905,6 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum2,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-#ifdef USE_OLD_GAL
-			sbtype = 1;
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum2, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/* USE_OLD_GAL */
 			pathname =
 			    gnome_pixmap_file("gnomesword/book-bl.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
@@ -2074,7 +1914,6 @@ void update_shortcut_bar(SETTINGS * s)
 						  "commentary",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 	}
@@ -2091,14 +1930,6 @@ void update_shortcut_bar(SETTINGS * s)
 						     groupnum3,
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
-#ifdef USE_OLD_GAL
-			sbtype = 2;
-			e_shortcut_model_add_item(E_SHORTCUT_BAR
-						  (shortcut_bar)->model,
-						  groupnum3, -1,
-						  shortcut_types[sbtype],
-						  (gchar *) tmp->data);
-#else				/* USE_OLD_GAL */
 			pathname =
 			    gnome_pixmap_file("gnomesword/book-green.png");
 			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
@@ -2108,7 +1939,6 @@ void update_shortcut_bar(SETTINGS * s)
 						  "dictionary",
 						  (gchar *) tmp->data,
 						  icon_pixbuf);
-#endif				/* USE_OLD_GAL */
 			tmp = g_list_next(tmp);
 		}
 	}

@@ -219,9 +219,10 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		it = searchresultssbMgr->Modules.find(searchMod->Name()); //-- iterate through the modules until we find modName - modName was passed by the callback
 		if (it != searchresultssbMgr->Modules.end()){ //-- if we find the module	
 			searchresultssbMod = (*it).second;  //-- change module to new module
-			searchresultssbMod->SetKey(firstkey); //-- set key to the first one in the list
+			searchresultssbMod->SetKey(firstkey); //-- set key to the first one in the list			
+			settings->displaySearchResults = TRUE;
 			searchresultssbMod->Display(); 		
-			/* cleanup appbar progress */
+			settings->displaySearchResults = FALSE;	
 		}
 		sprintf(s->groupName,"%s","Search Results");
 		sprintf(buf,"%d matches",count);
@@ -233,15 +234,14 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		sprintf(buf,"</body</html>");	
 		utf8str = e_utf8_from_gtk_string(s->srhtml, buf);
 		displayHTML(s->srhtml, utf8str, strlen(utf8str));
-		endHTML(s->srhtml);
-		
+		endHTML(s->srhtml);		
 	}
 	beginHTML(s->htmlRP, TRUE);
 	sprintf(buf,"<html><body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found!</center></body</html>", count, s->found_color,s->searchText);	
 	utf8str = e_utf8_from_gtk_string(s->htmlRP, buf);
 	displayHTML(s->htmlRP, utf8str, strlen(utf8str));
-	endHTML(s->htmlRP);
-	
+	endHTML(s->htmlRP);			
+	/* cleanup appbar progress */
 	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
 	delete searchMgr;
 	g_string_free(tmpbuf,TRUE);
@@ -306,8 +306,7 @@ void shutdownsearchresultsSBSW(void)
 
 void
 changesearchresultsSBSW(SETTINGS *s, gchar *url)
-{
-	
+{	
 	searchresultssbMod->SetKey(url);
 	searchresultssbMod->Display();
 	if(s->showinmain)

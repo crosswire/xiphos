@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
  
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.5.2)
+AM_INIT_AUTOMAKE(gnomesword, 0.5.2a)
 AM_CONFIG_HEADER(config.h)
 
 dnl 
@@ -94,9 +94,9 @@ AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
 
-GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.8.0)
-GS_CHECK_LIB(GAL, gal, 0.7.9.5)
-GS_CHECK_LIB(GtkHTML, gtkhtml, 0.9.0.0)
+GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
+GS_CHECK_LIB(GAL, gal, 0.13.9.0)
+GS_CHECK_LIB(GtkHTML, gtkhtml, 0.14.9.0)
 GS_CHECK_LIB(GnomePrint, print, 0.25.0.0)
 
 dnl **************************
@@ -231,32 +231,15 @@ AC_SUBST(GTKHTML_CFLAGS)
 AC_SUBST(GTKHTML_LIBS)
 
 dnl ******************************
-dnl Gnome App Lib checking
+dnl Gnome App Lib 
 dnl ******************************
-have_gal="no"
-AC_MSG_CHECKING(for Gnome App libraries (GAL))
-if gnome-config --libs gal > /dev/null 2>&1; then 
-    vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
-        awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-    if test "$vers" -ge 109902 ; then
-        have_gal="yes"
-     else
-        have_gal="yes"
-	AC_DEFINE(USE_OLD_GAL, 1, [Define if you want to use pre 0.10.99.2 gal])
-    fi
-fi 
-if test "x$have_gal" = xyes; then
-  AC_MSG_RESULT($vers found)
-  GNOME_APP_LIBS=`gnome-config --libs gal`
-  GNOME_APP_CFLAGS=`gnome-config --cflags gal`
-  AC_SUBST(GNOME_APP_LIBS)
-  AC_SUBST(GNOME_APP_CFLAGS)
-else
-   AC_MSG_ERROR(You need at least GNOME Application libs 0.7.99.5 for this version of GnomeSword)
-fi
 
-
-
+AC_MSG_RESULT($vers found)
+GNOME_APP_LIBS=`gnome-config --libs gal`
+GNOME_APP_CFLAGS=`gnome-config --cflags gal`
+AC_SUBST(GNOME_APP_LIBS)
+AC_SUBST(GNOME_APP_CFLAGS)
+  
 EXTRA_GNOME_LIBS="`gnome-config --libs libglade gnomeui` $THREADS_LIBS `unicode-config --libs`"
 EXTRA_GNOME_CFLAGS="`gnome-config --cflags libglade gnomeui` $THREADS_CFLAGS `unicode-config --cflags`"
 
@@ -272,8 +255,8 @@ if test "x$GCC" = "xyes"; then
   fi
 fi
 
-AM_CONDITIONAL(SHORTCUTBAR,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xno)
-AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xyes)
+AM_CONDITIONAL(SHORTCUTBAR,test "x$have_speller" = xno)
+AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_speller" = xyes)
 
 AC_OUTPUT([
 Makefile
