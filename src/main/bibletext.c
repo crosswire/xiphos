@@ -38,6 +38,8 @@
 #include "backend/bibletext_.h"
 #include "backend/sword.h"
 #include "backend/shortcutbar.h"
+#include "backend/interlinear.h"
+
 
 
 /******************************************************************************
@@ -201,4 +203,47 @@ void set_text_global_option(gchar * option, gchar * choice)
 {
 	backend_set_text_global_option(option, choice);
 }
+
+/******************************************************************************
+ * Name
+ *  get_interlinear_module_text
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   char *get_interlinear_module_text(char * mod_name, char * tmpkey)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char*
+ */ 
+
+char *get_interlinear_module_text(char * mod_name, char * tmpkey)
+{
+	return backend_get_interlinear_module_text(mod_name, tmpkey);
+}
+
+/******************************************************************************
+ * Name
+ *  set_interlinear_global_option
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   void set_interlinear_global_option(char * option, char * yesno)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char*
+ */ 
+
+void set_interlinear_global_option(char * option, char * yesno)
+{
+	backend_set_interlinear_global_option(option, yesno);
+}
+
 

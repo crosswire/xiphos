@@ -26,12 +26,14 @@
 #include <glib-1.2/glib.h>
 
 #include "gui/gui.h"
+#include "gui/main_window.h"
 #include "gui/splash.h"
+
 #include "backend/sword.h"
 #include "backend/bookmarks.h"
-#include "main/setup.h"
 #include "backend/properties.h"
-#include "main/gs_gui.h"
+
+#include "main/setup.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 

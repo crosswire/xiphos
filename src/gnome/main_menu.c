@@ -28,6 +28,7 @@
 #include <gal/e-paned/e-vpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
+#include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
 #include "gui/shortcutbar_main.h"
@@ -40,7 +41,6 @@
 #include "main/gs_html.h"
 #include "main/bibletext.h"
 #include "main/gs_menu.h"
-#include "main/gs_gui.h"
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
 #include "main/gs_history.h"
