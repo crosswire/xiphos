@@ -194,14 +194,14 @@ AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.7.99.5)
 if gnome-config --libs gal > /dev/null 2>&1; then 
     vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-    if test "$vers" -ge 79905; then
+    if test "$vers" -ge 49905; then
         AC_MSG_RESULT(found)
         GNOME_APP_LIBS=`gnome-config --libs gal`
         GNOME_APP_CFLAGS=`gnome-config --cflags gal`
         AC_SUBST(GNOME_APP_LIBS)
         AC_SUBST(GNOME_APP_CFLAGS)
         have_gal="yes"
-    else
+    else 
         AC_MSG_ERROR(You need at least GNOME Application libs 0.7.99.5 for this version of GnomeSword)
     fi
 else

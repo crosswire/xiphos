@@ -1,9 +1,9 @@
 /***************************************************************************
                                     gs_shortcutbar.c
                              -------------------
-    begin                : Thu Jun 14 2001
-    copyright            : (C) 2001 by tbiggs
-    email                : tbiggs@users.sf.net
+                                  Thu Jun 14 2001
+                          copyright (C) 2001 by tbiggs
+                                tbiggs@users.sf.net
  ***************************************************************************/
  /*
     *  This program is free software; you can redistribute it and/or modify
@@ -36,6 +36,7 @@
 #include "gs_bookmarks.h"
 #include "sw_search.h"
 #include "sw_verselist_sb.h"
+#include "sw_shortcutbar.h"
 
 extern gchar *shortcut_types[];
 extern GtkWidget *shortcut_bar;
@@ -47,10 +48,12 @@ extern gboolean havebible;	/* let us know if we have at least one Bible text mod
 extern EShortcutModel *shortcut_model;
 GList 
 	*sblist, /* for building verselist */
+	*langlistfavorites,
 	*langlisttext,
 	*langlistcomm,
 	*langlistdict;
 gint 
+	groupnum0 = -1,
 	groupnum1 = -1,
     	groupnum2 = -1,
     	groupnum3 = -1,
@@ -73,11 +76,21 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 					  gint item_num);
 static void show_standard_popup(EShortcutBar * shortcut_bar,
 				GdkEvent * event, gint group_num);
+static void show_context_popup (EShortcutBar *shortcut_bar,
+		    		GdkEvent *event,
+		    		gint group_num,
+		    		gint item_num);
 static void set_small_icons(GtkWidget * menuitem,
 			    EShortcutBar * shortcut_bar);
 static void set_large_icons(GtkWidget * menuitem,
 			    EShortcutBar * shortcut_bar);
 static gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
+static void on_item_added (EShortcutModel *shortcut_model,
+			   gint group_num,
+			   gint item_num);
+static void on_item_removed (EShortcutModel *shortcut_model,
+			     gint group_num,
+			     gint item_num);
 
 /*** set shortcut bar to verse list group ***/
 void showSBVerseList(SETTINGS * s)
@@ -89,6 +102,124 @@ void showSBVerseList(SETTINGS * s)
 					  groupnum7, TRUE);
 }
 
+static void 
+on_remove_item_activate(GtkMenuItem * menuitem, 
+			  gpointer data)
+{
+	EGroupBar *bar;
+	gint group_num,
+		item_num,
+		number_of_items,
+		j;
+	GList *list;
+	gchar *group_name,
+		*item_url,
+		*item_name;
+	
+	item_num = GPOINTER_TO_INT(data);
+	bar = E_GROUP_BAR(shortcut_bar);
+	group_num = e_group_bar_get_current_group_num(bar);	
+	g_warning("removing group = %d item = %d\nfrom the shortcut bar",group_num,item_num);
+	e_shortcut_model_remove_item(shortcut_model,
+						  group_num,
+						 item_num);	
+	list = NULL;
+	group_name = "";
+		group_name = e_shortcut_model_get_group_name(shortcut_model,
+						group_num);	
+	number_of_items = e_shortcut_model_get_num_items (shortcut_model,
+						group_num);
+	for(j=0; j<number_of_items;j++){
+			e_shortcut_model_get_item_info (shortcut_model,
+						group_num,
+						j,
+						&item_url,
+						&item_name);
+			list = g_list_append(list,item_name);	
+	}
+	if(group_num == groupnum0)
+		saveshortcutbarSW("Favorites.conf",group_name, list);
+	if(group_num == groupnum1)
+		saveshortcutbarSW("BibleText.conf",group_name, list);
+	if(group_num == groupnum2)
+		saveshortcutbarSW("Commentaries.conf",group_name, list);
+	if(group_num == groupnum3)
+		saveshortcutbarSW("Dictionaries.conf",group_name, list);
+	g_list_free(list);
+	g_free(item_url);
+	g_free(item_name);
+	
+}
+
+
+static void 
+on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	EGroupBar *bar;
+	gint group_num;
+	
+	bar = E_GROUP_BAR(shortcut_bar);
+	group_num = e_group_bar_get_current_group_num(bar);
+
+	e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						 group_num , -1,
+						  shortcut_types[0],
+						  (gchar *) user_data);
+
+}
+
+static void
+on_item_added (EShortcutModel *model,
+	       gint group_num,
+	       gint item_num)
+{
+	gchar 
+		*group_name,
+		*item_url,
+		*item_name;
+	gint 
+		number_of_items,
+		j;
+	GList *list;
+	
+	list = NULL;
+	group_name = "";
+		group_name = e_shortcut_model_get_group_name(model,
+						group_num);	
+	number_of_items = e_shortcut_model_get_num_items (model,
+						group_num);
+	for(j=0; j<number_of_items;j++){
+			e_shortcut_model_get_item_info (model,
+						group_num,
+						j,
+						&item_url,
+						&item_name);
+			list = g_list_append(list,item_name);	
+	}
+		if(group_num == groupnum0)
+			saveshortcutbarSW("Favorites.conf",group_name, list);
+		if(group_num == groupnum1)
+			saveshortcutbarSW("BibleText.conf",group_name, list);
+		if(group_num == groupnum2)
+			saveshortcutbarSW("Commentaries.conf",group_name, list);
+		if(group_num == groupnum3)
+			saveshortcutbarSW("Dictionaries.conf",group_name, list);
+	g_list_free(list);
+	g_free(item_url);
+	g_free(item_name);
+
+}
+
+
+static void
+on_item_removed (EShortcutModel *shortcut_model,
+		 gint group_num,
+		 gint item_num)
+{
+	
+	g_print ("In on_item_removed Group:%i Item:%i\n", group_num, item_num);
+}
 
 /******************************************************************************
  * add_sb_group - add group to shourtcut bar
@@ -107,6 +238,7 @@ static gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name)
 	return group_num;
 }
 
+
 /*** show hide shortcut bar ***/
 void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 {
@@ -122,7 +254,49 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 				     settings->shortcutbar_width);
 	}
 }
-
+static void
+on_save_shortcutbar(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
+{	
+	gchar 
+		*group_name,
+		*item_url,
+		*item_name;
+	gint 
+		number_of_groups,
+		number_of_items,
+		i,
+		j;
+	GList *list;
+	
+	list = NULL;
+	group_name = "";
+	number_of_groups = e_shortcut_model_get_num_groups(shortcut_model);
+	for(i=0; i<number_of_groups; i++){	
+		group_name = e_shortcut_model_get_group_name(shortcut_model,
+						i);	
+		 number_of_items = e_shortcut_model_get_num_items (shortcut_model,
+						i);
+		for(j=0; j<number_of_items;j++){
+			e_shortcut_model_get_item_info (shortcut_model,
+						i,
+						j,
+						&item_url,
+						&item_name);
+			list = g_list_append(list,item_name);	
+		}
+		if(i == groupnum0)
+			saveshortcutbarSW("Favorites.conf",group_name, list);
+		if(i == groupnum1)
+			saveshortcutbarSW("BibleText.conf",group_name, list);
+		if(i == groupnum2)
+			saveshortcutbarSW("Commentaries.conf",group_name, list);
+		if(i == groupnum3)
+			saveshortcutbarSW("Dictionaries.conf",group_name, list);
+		list = NULL;
+		
+	}
+	g_list_free(list);
+}
 
 static void
 set_large_icons(GtkWidget * menuitem, EShortcutBar * shortcut_bar)
@@ -163,7 +337,8 @@ static void
 show_standard_popup(EShortcutBar * shortcut_bar,
 		    GdkEvent * event, gint group_num)
 {
-	GtkWidget *menu, *menuitem;
+	GtkWidget *menu, *menuitem, *saveitem,
+		*menu_item_menu;
 
 	/* We don't have any commands if there aren't any groups yet. */
 	if (group_num == -1)
@@ -182,7 +357,35 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 	gtk_menu_append(GTK_MENU(menu), menuitem);
 	gtk_signal_connect(GTK_OBJECT(menuitem), "activate",
 			   GTK_SIGNAL_FUNC(set_small_icons), shortcut_bar);
-
+	
+	menuitem = gtk_menu_item_new_with_label ("Add Shortcut");
+	gtk_widget_show (menuitem);
+	gtk_menu_append (GTK_MENU (menu), menuitem);
+	
+	menu_item_menu = gtk_menu_new ();
+  	gtk_widget_ref (menu_item_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (menu), "menu_item_menu",menu_item_menu ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem), menu_item_menu);
+	/*** add bookmark items ***/
+	if(group_num == groupnum1)
+		create_modlistmenu_sb(menuitem,menu_item_menu ,"Biblical Texts");
+	if(group_num == groupnum2)
+		create_modlistmenu_sb(menuitem,menu_item_menu ,"Commentaries");
+	if(group_num == groupnum3)
+		create_modlistmenu_sb(menuitem,menu_item_menu ,"Lexicons / Dictionaries");
+	menuitem = gtk_menu_item_new ();
+	gtk_widget_set_sensitive (menuitem, FALSE);
+	gtk_widget_show (menuitem);
+	gtk_menu_append (GTK_MENU (menu), menuitem);
+	
+	saveitem = gtk_menu_item_new_with_label("Save Shortcut Bar");
+	gtk_widget_show(saveitem);
+	gtk_menu_append(GTK_MENU(menu), saveitem);
+	
+	gtk_signal_connect(GTK_OBJECT(saveitem), "activate",
+			   GTK_SIGNAL_FUNC(on_save_shortcutbar), shortcut_bar);
+			   
 	/* Save the group num so we can get it in the callbacks. */
 	gtk_object_set_data(GTK_OBJECT(menu), "group_num",
 			    GINT_TO_POINTER(group_num));
@@ -190,6 +393,33 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 	/* FIXME: Destroy menu when finished with it somehow? */
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
 		       event->button.button, event->button.time);
+}
+
+static void
+show_context_popup (EShortcutBar *shortcut_bar,
+		    GdkEvent *event,
+		    gint group_num,
+		    gint item_num)
+{
+	GtkWidget *menu, *menuitem, *label, *pixmap;
+
+	menu = gtk_menu_new ();
+
+	menuitem = gtk_menu_item_new_with_label ("Remove from Shortcut Bar");
+	gtk_widget_show (menuitem);
+	gtk_menu_append (GTK_MENU (menu), menuitem);
+	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
+			    GTK_SIGNAL_FUNC (on_remove_item_activate), GINT_TO_POINTER(item_num));
+	
+	/* Save the group & item nums so we can get them in the callbacks. */
+	gtk_object_set_data (GTK_OBJECT (menu), "group_num",
+			     GINT_TO_POINTER (group_num));
+	gtk_object_set_data (GTK_OBJECT (menu), "item_num",
+			     GINT_TO_POINTER (item_num));
+
+	/* FIXME: Destroy menu when finished with it somehow? */
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
+			event->button.button, event->button.time);
 }
 
 /*****************************************************************************
@@ -200,37 +430,35 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			      GdkEvent * event,
 			      gint group_num, gint item_num)
 {
-	GtkWidget *notebook, *app;
+	GtkWidget *app;
 	gchar *type, *ref;
-
+	gchar modName[16]; //, *modDesc;
+	
+	
 	if (event->button.button == 1) {
 		app = gtk_widget_get_toplevel(GTK_WIDGET(shortcut_bar));
 		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (shortcut_bar)->model,
 					       group_num, item_num, &type,
 					       &ref);
-		//if (!strcmp(type, "bible:")) {
+		bzero(modName, 16);
+    		//modDesc = ref;
+    		modNameFromDesc(modName, ref);
 		if(group_num == groupnum1){
 			if (havebible) {	/* let's don't do this if we don't have at least one Bible text */
-				notebook = lookup_widget(app, "nbTextMods");	/* get notebook */
-				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+				gotoBookmarkSWORD(modName,settings->currentverse);
 			}
 		}
-		//if (!strcmp(type, "commentary:")) 
 		if(group_num == groupnum2){
 			if (havecomm) {	/* let's don't do this if we don't have at least one commentary */
-				notebook = lookup_widget(app, "notebook1");	/* get notebook */
-				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+				gotoBookmarkSWORD(modName,settings->currentverse);
 			}
 		}
-		//if (!strcmp(type, "dict/lex:")) {
 		if(group_num == groupnum3){
 			if (havedict) {	/* let's don't do this if we don't have at least one dictionary / lexicon */
-				notebook = lookup_widget(app, "notebook4");	/* get notebook */
-				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num);	/* set notebook page */
+				gotoBookmarkSWORD(modName,settings->dictkey);
 			}
 		}
-		//if (!strcmp(type, "history:")) {
 		if(group_num == groupnum4){
 			changeVerseSWORD(ref);
 		}
@@ -240,6 +468,9 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 		if (item_num == -1)
 			show_standard_popup(shortcut_bar, event,
 					    group_num);
+		else
+			show_context_popup (shortcut_bar, event, group_num,
+					    item_num);
 	}
 }
 
@@ -724,7 +955,7 @@ static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
 }
 
 void
-setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
+setupSB(GList * favoriteslist, GList * textlist, GList * commentarylist, GList * dictionarylist)
 {
 	GList 
 		*tmplang,
@@ -737,15 +968,17 @@ setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 	    *scrolledwindow2, *vpSearch, *vboxVL, *vpVL, *html, *VLbutton;
 	gint
 		sbtype = 0;
+	gchar 
+		*filename;
 	
 	tmplang = NULL;
 	tmp = NULL;
-	if (settings->showtextgroup) {
-		groupnum1 =
+	if (settings->showfavoritesgroup) {
+		groupnum0 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 "Bible Text");
-		tmp = textlist;
-		tmplang = langlisttext;
+				 "Favorites");
+		tmp = favoriteslist;
+		tmplang = langlistfavorites;
 		while (tmp != NULL) {
 			//if((gchar *) tmplang->data = NULL) sbtype = 4;
 			if(!strcmp((gchar *) tmplang->data,"en")) sbtype = 0;
@@ -755,53 +988,60 @@ setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 			else sbtype = 4;				
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
-						  groupnum1, -1,
+						  groupnum0, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
 			tmp = g_list_next(tmp);
 			tmplang = g_list_next(tmplang);
+		}
+	}
+	if (settings->showtextgroup) {
+		groupnum1 =
+		    add_sb_group((EShortcutBar *) shortcut_bar,
+				 "Bible Text");
+		filename = "BibleText.conf";
+		tmp = loadshortcutbarSW(filename);
+		while (tmp  != NULL) { 
+			sbtype = 0;
+			e_shortcut_model_add_item(E_SHORTCUT_BAR
+						  (shortcut_bar)->model,
+						  groupnum1, -1,
+						  shortcut_types[sbtype],
+						  (gchar *) tmp ->data);
+			tmp  = g_list_next(tmp );
 		}
 	}
 	if (settings->showcomgroup) {
 		groupnum2 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Commentaries");
-		tmp = commentarylist;
-		tmplang = langlistcomm;
+		filename = "Commentaries.conf";
+		tmp = loadshortcutbarSW(filename);
 		while (tmp != NULL) {
-			if(!strcmp((gchar *) tmplang->data,"en")) sbtype = 0;
-			else if(!strcmp((gchar *) tmplang->data,"grc")) sbtype = 1;	
-			else if(!strcmp((gchar *) tmplang->data,"he")) sbtype = 2;	
-			else if(!strcmp((gchar *) tmplang->data,"de")) sbtype = 3;
-			else sbtype = 4;
+			sbtype = 1;
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum2, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
 			tmp = g_list_next(tmp);
-			tmplang = g_list_next(tmplang);
 		}
 	}
 	if (settings->showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
 				 "Dict/Lex");
-		tmp = dictionarylist;
-		tmplang = langlistdict;		
+		filename = "Dictionaries.conf";
+		tmp = loadshortcutbarSW(filename);
 		while (tmp != NULL) {
-			if(!strcmp((gchar *) tmplang->data,"en")) sbtype = 0;
-			else if(!strcmp((gchar *) tmplang->data,"grc")) sbtype = 1;	
-			else if(!strcmp((gchar *) tmplang->data,"he")) sbtype = 2;	
-			else if(!strcmp((gchar *) tmplang->data,"de")) sbtype = 3;
-			else sbtype = 4;
+			sbtype = 2;		
+			g_warning((gchar *) tmp->data);
 			e_shortcut_model_add_item(E_SHORTCUT_BAR
 						  (shortcut_bar)->model,
 						  groupnum3, -1,
 						  shortcut_types[sbtype],
 						  (gchar *) tmp->data);
 			tmp = g_list_next(tmp);
-			tmplang = g_list_next(tmplang);
 		}
 	}
 	if (settings->showhistorygroup) {
@@ -917,11 +1157,30 @@ setupSB(GList * textlist, GList * commentarylist, GList * dictionarylist)
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
 			   NULL);
+	gtk_signal_connect (GTK_OBJECT (shortcut_model), "item_added",
+			    GTK_SIGNAL_FUNC (on_item_added), NULL);
+	gtk_signal_connect (GTK_OBJECT (shortcut_model), "item_removed",
+			    GTK_SIGNAL_FUNC (on_item_removed), NULL);
+			    /*
+	gtk_signal_connect (GTK_OBJECT (shortcut_model), "group_added",
+			    GTK_SIGNAL_FUNC (on_group_added), NULL);
+	gtk_signal_connect (GTK_OBJECT (shortcut_model), "group_removed",
+			    GTK_SIGNAL_FUNC (on_group_removed), NULL);
+
+	gtk_signal_connect (GTK_OBJECT (shortcut_bar), "shortcut_dragged",
+			    GTK_SIGNAL_FUNC (on_shortcut_dragged), NULL);
+	gtk_signal_connect (GTK_OBJECT (shortcut_bar), "shortcut_dropped",
+			    GTK_SIGNAL_FUNC (on_shortcut_dropped), NULL);
+			    */
+
 }
 
 void
 update_shortcut_bar(SETTINGS * s,
-		    GList * text, GList * commentary, GList * dictionary)
+		    	GList * favorites,
+			GList * text, 
+			GList * commentary, 
+			GList * dictionary)
 {
 	gint count, i, current_group;
 	GList *tmp;
@@ -989,3 +1248,37 @@ update_shortcut_bar(SETTINGS * s,
 					  current_group, TRUE);
 	g_list_free(tmp);
 }
+
+
+void
+create_modlistmenu_sb(GtkWidget *menu, 
+					GtkWidget *shortcut_menu_widget, 
+					gchar *modtype)
+{
+	GtkWidget *item;
+	gint i;
+	GList *list;
+	
+	list = NULL;
+	
+	list = getModlistSW(modtype);
+	while (list != NULL) {
+		item = gtk_menu_item_new_with_label((gchar *) list->data);
+		gtk_widget_ref(item);
+		gtk_object_set_data_full(GTK_OBJECT(menu), "item",
+					 item,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(item);	
+		gtk_container_add(GTK_CONTAINER(shortcut_menu_widget), item);
+		
+		gtk_signal_connect(GTK_OBJECT(item), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_add_shortcut_activate),
+				   (gchar *) list->data);
+		list = g_list_next(list);
+	}
+	g_list_free(list);
+}
+
+

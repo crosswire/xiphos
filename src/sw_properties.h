@@ -1,9 +1,9 @@
 /***************************************************************************
                                       sw_properties.h
                              -------------------
-    begin                : Sat June 30 2001
-    copyright            : (C) 2001 by Terry Biggs
-    email                : tbiggs@users.sf.net
+				    Sat June 30 2001
+			       (C) 2001 by Terry Biggs
+			         tbiggs@users.sf.net
  ***************************************************************************/
 
 /*
