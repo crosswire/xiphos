@@ -146,7 +146,7 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		int searchParams =
 			  GTK_TOGGLE_BUTTON (caseSensitive)->
 			  active ? 0 : REG_ICASE;	/* get search params - case sensitive */
-		//-- give search string to module to search
+		//-- give search string to sword for search
 		for (ListKey & searchResults = searchMod->Search (entryText,
 		                                                searchType,
 		                                                searchParams,
@@ -168,7 +168,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 						searchMod->Name(),
 						resultText,
 						searchMod->Name());
-			g_warning("tmpbuf = %s",tmpbuf->str);
 			list = g_list_append(list,g_strdup(tmpbuf->str));
 			searchScopeList << (const char *) searchResults;	/* remember finds for next search's scope
 			                                                           in case we want to use them */
@@ -177,7 +176,6 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
         }
 	if(count){
 		getVerseListSBSWORD(searchMod->Name(), string->str, s);
-		//g_warning("count = %d\nstring = %s",count,string->str);
 		sprintf(buf,"%d found",count);
 		gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
 	}

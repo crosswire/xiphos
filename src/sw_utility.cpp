@@ -103,6 +103,7 @@ gchar *addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 		module->AddRenderFilter(lattoutf8);
 	}
 	retval = (char*)lang.c_str();
+	//g_warning(retval);
 	return retval;
 }
 

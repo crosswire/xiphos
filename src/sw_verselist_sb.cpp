@@ -99,7 +99,10 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 		if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	
 			verselistsbMod = (*it).second;  //-- change module to new module
 			verselistsbMod->SetKey(firstkey); //-- set key to the first one in the list
-			verselistsbMod->Display(); 
+			verselistsbMod->Display(); 		
+			/* cleanup appbar progress */
+			gnome_appbar_set_progress ((GnomeAppBar *)s->appbar,
+					  0);
 		}
 	}	
 	return retval;

@@ -200,7 +200,7 @@ initSWORD(GtkWidget *mainform)
 	int   	
 		i, //-- counter
 		j; //-- counter	
-	gchar *font;
+	gchar *font, *lang;
 	
   	g_print("Initiating Sword\n"); 
 	
@@ -249,7 +249,7 @@ initSWORD(GtkWidget *mainform)
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize(); //-- this is for gtktext
-	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
+	chapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
@@ -264,6 +264,7 @@ initSWORD(GtkWidget *mainform)
 				gtk_main_iteration ();
 	}
 	g_print("Loading SWORD Moudules\n"); 
+	g_print("gnomesword-%s\n",VERSION);
 	font = "roman";
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){		
 		descriptionMap[string((char *)(*it).second->Description())] = string((char *)(*it).second->Name());		
@@ -275,8 +276,12 @@ initSWORD(GtkWidget *mainform)
 			++textpages;
 			biblemods = g_list_append(biblemods,curMod->Name());
 			sbbiblemods = g_list_append(sbbiblemods,curMod->Description());
-			langlisttext = g_list_append(langlisttext, addrenderfiltersSWORD(curMod, section));	
-			curMod->Disp(UTF8Display);
+			lang = addrenderfiltersSWORD(curMod, section);
+			//if(!strcmp(lang,"grc")){
+				//curMod->Disp(chapDisplay);
+			// /*}else{
+				curMod->Disp(UTF8Display);
+			//}*/
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
@@ -360,8 +365,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 		if(autoSave){                          //-- if we are in edit mode
 			savenoteSWORD(noteModified); 	//-- save if text in note window has changed			
 		}
-	}
-	 		
+	}	 		
 	strcpy(current_verse,ref);		
 	ApplyChange = false;
 	if(changemain && havebible) {
@@ -553,6 +557,7 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	g_list_free(langlisttext);
 	g_list_free(langlistcomm);
 	g_list_free(langlistdict);
+	
 	//-- delete Sword managers
 	delete mainMgr;   
 	delete mainMgr1;
