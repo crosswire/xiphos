@@ -1,4 +1,9 @@
-2004-01-06  Andy <andyp@users.sf.net>
+2004-01-15  Moses <m-mcknight@users.sf.net>
+
+	* added a setting to remember the dimensions of the search sidebar
+
+
+2004-01-14  Andy <andyp@users.sf.net>
 
 	* updated spec file to fix build for users and support the renaming of
 	  the package to gnomesword. We now obsolete gnomesword2 (weird but 
