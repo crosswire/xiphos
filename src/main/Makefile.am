@@ -48,8 +48,6 @@ gnomesword1_LDADD = \
     $(GNOME_PRINT_LIBS) \
     $(PSPELL_LIBS) \
     $(PIXBUF_LIBS) \
+    $(SWORD_LIBS) \
     $(top_builddir)/src/backend/libbackend.a \
-    $(top_builddir)/src/gnome/libgui.a 
-
-
-
+    $(top_builddir)/src/gnome/libgui.a

@@ -46,7 +46,3 @@ libbackend_a_SOURCES =  \
     shortcutbar.h \
     sword.cpp \
     sword.h 
-
-libbackend_a_LIBADD = \
-   $(SWORD_LIBS)
-   
