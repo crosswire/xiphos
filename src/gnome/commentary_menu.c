@@ -132,19 +132,20 @@ static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 					 gchar * dict_mod_description)
 {
-	gchar *dict_key, mod_name[16];
+	gchar *dict_key = NULL;
+	gchar *mod_name = NULL;
 
-	memset(mod_name, 0, 16);
-	module_name_from_description(mod_name, dict_mod_description);
+	mod_name = module_name_from_description(dict_mod_description);
 
 	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
-	if (dict_key) {
+	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
+		g_free(mod_name);
 	}
 }
 
@@ -201,11 +202,13 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gchar module_name[16];
+	gchar *module_name = NULL;
 
-	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);
-	gui_change_module_and_key(module_name, settings.currentverse);
+	module_name = module_name_from_description((gchar *) user_data);
+	if(module_name) {
+		gui_change_module_and_key(module_name, settings.currentverse);
+		g_free(module_name);
+	}
 }
 
 
@@ -1116,11 +1119,11 @@ static void on_book_heading_activate(GtkMenuItem * menuitem,
 static void on_new_dialog_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar module_name[16];
+	gchar *module_name = NULL;
 
-	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);
+	module_name = module_name_from_description((gchar *) user_data);
 	gui_open_commentary_dialog(module_name);
+	if(module_name) g_free(module_name);
 }
 
 

@@ -309,7 +309,7 @@ static void load_group_shortcuts_from_list(gchar * path, gint group_num)
 	gchar *token;
 	gchar *item_url;
 	gchar *item_name;
-	gchar mod_name[16];
+	gchar *mod_name = NULL;
 	gchar group_name[256];
 	gchar icon_size[10];
 	gint sbtype = 0;
@@ -332,8 +332,8 @@ static void load_group_shortcuts_from_list(gchar * path, gint group_num)
 		token = strtok(NULL, "@");
 		item_url = strdup(token);
 		
-		memset(mod_name, 0, 16);
-		module_name_from_description(mod_name, item_name);
+		
+		mod_name = module_name_from_description(item_name);
 		sbtype = 0;
 		sbtype = get_mod_type(mod_name);
 		
@@ -348,6 +348,7 @@ static void load_group_shortcuts_from_list(gchar * path, gint group_num)
 					  item_name, icon_pixbuf);
 		g_free(item_url);
 		g_free(item_name);
+		if(mod_name) g_free(mod_name);
 		g_free((gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
@@ -520,7 +521,7 @@ static void on_about_item_activate(GtkMenuItem * menuitem,
 	gint group_num, item_num;
 	gchar *item_url, *item_name;
 	EShortcutBar *bar1;
-	gchar modname[16];
+	gchar *mod_name = NULL;
 
 	item_num = GPOINTER_TO_INT(data);
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
@@ -530,11 +531,11 @@ static void on_about_item_activate(GtkMenuItem * menuitem,
 				       (shortcut_bar)->model,
 				       group_num, item_num, &item_url,
 				       &item_name, NULL);	
-	memset(modname, 0, 16);
-	module_name_from_description(modname, item_name);
-	gui_display_about_module_dialog(modname, FALSE);
+	mod_name = module_name_from_description(item_name);
+	gui_display_about_module_dialog(mod_name, FALSE);
 	g_free(item_url);
 	g_free(item_name);
+	if(mod_name) g_free(mod_name);
 }
 
 /******************************************************************************
@@ -668,7 +669,8 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GList *glist;
 	gint group_num, sbtype;
 	EShortcutBar *bar1;
-	gchar *group_name, modName[16];
+	gchar *group_name;
+	gchar *mod_name;
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	glist = NULL;
@@ -697,11 +699,10 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 					    group_num);
 	remove_all_items(group_num);
 
-	while (glist != NULL) {		
-		memset(modName, 0, 16);
-		module_name_from_description(modName, (gchar *) glist->data);
+	while (glist != NULL) {	
+		mod_name = module_name_from_description((gchar *) glist->data);
 		sbtype = 0;
-		sbtype = get_mod_type(modName);
+		sbtype = get_mod_type(mod_name);
 		
 		if (sbtype < 0)
 			sbtype = 0;
@@ -716,6 +717,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	}
 	//g_list_free(glist);
 	savegroup(E_SHORTCUT_BAR(shortcut_bar), group_num);
+	if(mod_name) g_free(mod_name);
 }
 
 /******************************************************************************
@@ -803,13 +805,12 @@ void gui_add_sb_item(gchar * url, gchar * name,
 	
 	EShortcutBar *bar1;
 	GdkPixbuf *icon_pixbuf = NULL;
-	gchar modName[16];
+	gchar *mod_name = NULL;
 	gint sbtype;
 	
-	memset(modName, 0, 16);
-	module_name_from_description(modName, name);
+	mod_name = module_name_from_description(name);
 	sbtype = 0;
-	sbtype = get_mod_type(modName);
+	sbtype = get_mod_type(mod_name);
 	
 	if (sbtype < 0)
 		sbtype = 0;
@@ -820,6 +821,7 @@ void gui_add_sb_item(gchar * url, gchar * name,
 				  model, group_num, -1, url,
 				  name, icon_pixbuf);
 	savegroup(bar1, group_num);
+	if(mod_name) g_free(mod_name);
 }
 
 
@@ -1104,7 +1106,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			GdkEvent * event,gint group_num, gint item_num)
 {
 	gchar *item_url, *item_name;
-	gchar mod_name[16];
+	gchar *mod_name = NULL;
 	gint remItemNum = 0;
 	gint sbtype;
 	GdkPixbuf *icon_pixbuf = NULL;
@@ -1123,8 +1125,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 						       &item_name,
 						       &icon_pixbuf);
 			
-			memset(mod_name, 0, 16);
-			module_name_from_description(mod_name, item_name);
+			mod_name = module_name_from_description(item_name);
 			
 			if(!strcmp(item_url,"main")){	
 				if (group_num == groupnum0) {
@@ -1208,7 +1209,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			show_context_popup(shortcut_bar, event,
 					   group_num, item_num);
 	}
-
+	if(mod_name) g_free(mod_name);
 }
 
 /******************************************************************************

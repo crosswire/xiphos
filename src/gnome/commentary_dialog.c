@@ -76,19 +76,20 @@ static gboolean apply_change;
 void gui_on_lookup_commentary_dialog_selection
     (GtkMenuItem * menuitem, gchar * dict_mod_description) 
 {
-	gchar *dict_key, mod_name[16];
+	gchar *dict_key = NULL;
+	gchar *mod_name = NULL;
 
-	memset(mod_name, 0, 16);
-	module_name_from_description(mod_name, dict_mod_description);
+	mod_name = module_name_from_description(dict_mod_description);
 
 	dict_key = gui_get_word_or_selection(cur_vc->html, FALSE);
-	if (dict_key) {
+	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
+		g_free(mod_name);
 	}
 }
 

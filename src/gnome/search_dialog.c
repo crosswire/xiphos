@@ -1706,7 +1706,7 @@ static void on_ctree_select_row(GtkCTree * ctree,
 {
 	gchar *mod_desc = NULL;
 	gchar *mod_list = NULL;
-	gchar mod_name[16];
+	gchar *mod_name = NULL;
 	gchar *text[2];
 	GtkCTreeNode *selected_node;
 	GList *mods = NULL;
@@ -1723,8 +1723,8 @@ static void on_ctree_select_row(GtkCTree * ctree,
 	}
 
 	if (mod_desc) {
-		memset(mod_name, 0, 16);
-		module_name_from_description(mod_name, mod_desc);
+		
+		mod_name = module_name_from_description(mod_desc);
 	}
 	if (mod_name) {
 		text[0] = mod_desc;
@@ -1753,6 +1753,7 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		++search.module_count;
 	}
 	change_mods_select_label(mod_name);
+	g_free(mod_name);
 }
 
 

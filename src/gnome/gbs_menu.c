@@ -236,11 +236,11 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-
-	gchar module_name[16];
-	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);
+	gchar *module_name = NULL;
+	
+	module_name = module_name_from_description((gchar *) user_data);
 	gui_change_module_and_key(module_name, NULL);
+	if(module_name) g_free(module_name);
 }
 
 
@@ -366,11 +366,11 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 static void on_new_dialog_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar module_name[16];
+	gchar *module_name = NULL;
 
-	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);
+	module_name = module_name_from_description((gchar *) user_data);
 	gui_open_gbs_dialog(module_name);
+	if(module_name) g_free(module_name);
 }
 
 

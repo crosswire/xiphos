@@ -31,6 +31,7 @@
 #endif
 
 #include <swmodule.h>
+#include <glib-1.2/glib.h>
 
 #include <versekey.h>
 #include <regex.h>
@@ -42,7 +43,6 @@
 
 #include "main/settings.h"
 
-using std::string;
 using std::map;
 using std::list;
 using namespace sword;
@@ -296,9 +296,8 @@ char *backend_get_next_verse_list_element(int count)
 		VerseKey *element = SWDYNAMIC_CAST(VerseKey, 
 					verses.GetElement(count));
 		if (element) {
-			retval = strdup((char *)
-				(string(element->LowerBound()) + " - " + 
-				string(element->UpperBound())).c_str());
+			retval = g_strdup_printf("%s - %s",(const char *)element->LowerBound(),
+				(const char *)element->UpperBound());
 		}
 		else	
 			retval = strdup((const char *)
