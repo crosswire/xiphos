@@ -172,53 +172,6 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
 
 /******************************************************************************
  * Name
- *   goto_bookmark
- *
- * Synopsis
- *   #include "gui/bookmarks_treeview.h"
- *
- *   void goto_bookmark(gchar * mod_name, gchar * key)
- *
- * Description
- *   test for module type and call the appropriate function to
- *   display bookmark
- *
- * Return value
- *   void
- */
-
-static void goto_bookmark(gchar * mod_name, gchar * key)
-{
-	gint module_type;
-	gchar *val_key;
-	gchar *url = g_strdup_printf("sword://%s/%s",mod_name,key);
-	
-	if(!main_is_module(mod_name)) 
-		mod_name = settings.MainWindowModule;
-	
-	module_type = main_get_mod_type(mod_name);
-	if (use_dialog) {
-		//module_type = main_get_mod_type(mod_name);
-		switch (module_type) {
-			case -1:
-				break;
-			case TEXT_TYPE:
-			case COMMENTARY_TYPE:
-			case DICTIONARY_TYPE:
-				main_dialog_goto_bookmark(url);
-				break;
-			case BOOK_TYPE:
-				//gui_gbs_dialog_goto_bookmark(mod_name, key);
-				break;
-		}
-	} else  {
-		main_url_handler(url, TRUE);
-	}
-	g_free(url);
-}
-
-/******************************************************************************
- * Name
  *   get_xml_folder_data
  *
  * Synopsis
@@ -796,6 +749,7 @@ static gboolean button_release_event(GtkWidget * widget,
 	gchar *module = NULL;
 	gchar *mod_desc = NULL;
 	gchar *description = NULL;
+	gchar *url = NULL;
 	button_one = FALSE;
 	button_two = FALSE;
 	
@@ -873,12 +827,13 @@ static gboolean button_release_event(GtkWidget * widget,
 	if (is_selected) {
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 				     &selected) && key != NULL) {
-			gchar *url = g_strdup_printf("bookmark://%s/%s",module,key);
-			if(button_one)
-				main_url_handler(url, FALSE);
-			else if(button_two) 	
-				main_open_bookmark_in_new_tab(module,key);
-				//main_url_handler(url, TRUE);
+			url = g_strdup_printf(
+					"gnomesword.url?action=showBookmark&"
+					"type=%s&value=%s&module=%s",
+					(button_one)?"currentTab":"newTab",
+					main_url_encode(key), 
+					main_url_encode(module));
+			main_url_handler(url, FALSE);
 			g_free(url);
 			
 		}
@@ -888,6 +843,21 @@ static gboolean button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
+
+/*
+gboolean
+on_treeview_modules_drag_drop          (GtkWidget       *widget,
+                                        GdkDragContext  *drag_context,
+                                        gint             x,
+                                        gint             y,
+                                        guint            time,
+                                        gpointer         user_data)
+{
+g_message("on_treeview_modules_drag_drop");
+  return FALSE;
+}
+*/
+
 
 /******************************************************************************
  * Name
@@ -934,6 +904,11 @@ GtkWidget *gui_create_bookmark_tree(void)
 				 "row-collapsed", 
 				G_CALLBACK(expand_release_cursor_row),
 				 NULL);*/
+				 /*
+  g_signal_connect (G_OBJECT(tree) , "drag_drop",
+                    G_CALLBACK (on_treeview_modules_drag_drop),
+                    NULL);
+		    */
 	g_signal_connect_after(G_OBJECT(tree),
 				 "button_release_event",
 				G_CALLBACK(button_release_event),

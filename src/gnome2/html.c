@@ -134,7 +134,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	if (url == NULL) { /* moved out of url - clear appbar - info viewer*/
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar), "");
 		in_url = FALSE;
-		main_clear_viewer();
+		if(GPOINTER_TO_INT(data) == TEXT_TYPE)
+			main_clear_viewer();
 		/*
 		if (hint.in_popup) {
 			gtk_widget_destroy(hint.hint_window);
@@ -157,9 +158,9 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					buf);
 
-//#ifdef DEBUG	
-	//g_warning("link not handled");
-//#endif		
+#ifdef DEBUG	
+	g_warning("link not handled");
+#endif		
 	}
 }
 

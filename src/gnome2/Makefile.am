@@ -1,5 +1,6 @@
 INCLUDES =  \
     $(GNOME_CFLAGS) \
+    $(MOZILLA_CFLAGS) \
     -I$(top_srcdir)/src \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
@@ -67,7 +68,8 @@ gnomesword2_SOURCES =  \
     utilities.c
     
 gnomesword2_LDADD = \
-    $(GNOME_LIBS)\
+    $(GNOME_LIBS) \
+    $(MOZILLA_LIBS) \
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\
     $(LIB_SWORD) \
