@@ -151,9 +151,10 @@ module.include.files=\
 	src/backend/module_manager.hh\
 	src/gui/mod_mgr.h\
 	src/gui/tabbed_browser.h\
-	src/gui/url.h\
 	src/main/display.hh\
-	src/main/global_ops.hh
+	src/main/global_ops.hh\
+	src/main/url.h\
+	src/backend/sword_main.hh
 
 module.source.name=.
 module.source.type=
@@ -168,7 +169,6 @@ module.source.files=\
 	src/main/commentary.c\
 	src/main/dictlex.c\
 	src/main/gbs.c\
-	src/main/lists.c\
 	src/main/main.c\
 	src/main/percomm.c\
 	src/main/search.c\
@@ -237,14 +237,16 @@ module.source.files=\
 	src/backend/module_manager.cc\
 	src/gnome2/mod_mgr.c\
 	src/gnome2/tabbed_browser.c\
-	src/gnome2/url.c\
 	src/backend/gs_gbfhtmlhref.cpp\
 	src/backend/gs_markupfiltmgr.cpp\
 	src/backend/gs_osishtmlhref.cpp\
 	src/backend/gs_thmlhtmlhref.cpp\
 	src/main/display.cc\
 	src/main/sword.cc\
-	src/main/global_ops.cc
+	src/main/global_ops.cc\
+	src/main/url.c\
+	src/backend/sword_main.cc\
+	src/main/lists.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
