@@ -116,7 +116,7 @@ INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_
 
 bin_PROGRAMS = gnomesword
 
-COMMON_SOURCE =      gs_ui.c     gs_ui.h     gs_studypad.c     gs_studypad.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     gs_file.c     gs_file.h     interface.c     interface.h     main.c     gs_menu.c     gs_menu.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     printstuff.c     printstuff.h 
+COMMON_SOURCE =      gs_ui.c     gs_ui.h     gs_studypad.c     gs_studypad.h     gs_gnomesword.c     gs_gnomesword.h     gs_history.c     gs_history.h     callback.c     callback.h     gs_file.c     gs_file.h     interface.c     interface.h     main.c     gs_menu.c     gs_menu.h     gs_shortcutbar.c     gs_shortcutbar.h     gs_popup_cb.c     gs_popup_cb.h     gs_search.cpp     gs_search.h     gs_search_cb.cpp     gs_search_cb.h     support.c     support.h     gs_html.c     gs_html.h     printstuff.c     printstuff.h 
 
 
 SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell_gui.h     char_table.c     char_table.h 
@@ -144,13 +144,14 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 @SPELLING_FALSE@gnomesword_OBJECTS =  gs_ui.o gs_studypad.o \
 @SPELLING_FALSE@gs_gnomesword.o gs_history.o callback.o gs_file.o \
-@SPELLING_FALSE@interface.o main.o gs_menu.o gs_popup_cb.o gs_search.o \
-@SPELLING_FALSE@gs_search_cb.o support.o gs_html.o printstuff.o
+@SPELLING_FALSE@interface.o main.o gs_menu.o gs_shortcutbar.o \
+@SPELLING_FALSE@gs_popup_cb.o gs_search.o gs_search_cb.o support.o \
+@SPELLING_FALSE@gs_html.o printstuff.o
 @SPELLING_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o char_table.o \
 @SPELLING_TRUE@gs_ui.o gs_studypad.o gs_gnomesword.o gs_history.o \
 @SPELLING_TRUE@callback.o gs_file.o interface.o main.o gs_menu.o \
-@SPELLING_TRUE@gs_popup_cb.o gs_search.o gs_search_cb.o support.o \
-@SPELLING_TRUE@gs_html.o printstuff.o
+@SPELLING_TRUE@gs_shortcutbar.o gs_popup_cb.o gs_search.o \
+@SPELLING_TRUE@gs_search_cb.o support.o gs_html.o printstuff.o
 gnomesword_DEPENDENCIES =  $(top_builddir)/html/libhtmleditor.a \
 $(top_builddir)/src/gsdialogs/libgsdialogs.a \
 $(top_builddir)/src/gssword/libgssword.a
@@ -174,9 +175,9 @@ GZIP_ENV = --best
 DEP_FILES =  .deps/callback.P .deps/char_table.P .deps/gs_file.P \
 .deps/gs_gnomesword.P .deps/gs_history.P .deps/gs_html.P \
 .deps/gs_menu.P .deps/gs_popup_cb.P .deps/gs_search.P \
-.deps/gs_search_cb.P .deps/gs_studypad.P .deps/gs_ui.P \
-.deps/interface.P .deps/main.P .deps/printstuff.P .deps/spell.P \
-.deps/spell_gui.P .deps/support.P
+.deps/gs_search_cb.P .deps/gs_shortcutbar.P .deps/gs_studypad.P \
+.deps/gs_ui.P .deps/interface.P .deps/main.P .deps/printstuff.P \
+.deps/spell.P .deps/spell_gui.P .deps/support.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 
