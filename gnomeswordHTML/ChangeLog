@@ -1,0 +1,304 @@
+2001-04-05 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* release 0.4.0
+	* added addrenderfilterSWORD function
+	* gnomesword requires GtkHTML-0.8.0 or newer
+
+
+2001-03-28 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added check for save if studypad file is modified on open and new
+
+
+2001-03-27 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* 0.3pre2
+	* added dialog for viewing commentary modules
+	* added files - gs_viewcomm.c and gs_viewcomm.h
+	* fixed delete note bug
+	
+
+2001-03-20 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* changes in the look of Bible text modules
+
+2001-03-17 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	* added files  gs_display.cpp and gs_display.h 
+
+2001-03-15 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	* Added a number of files gs_rwphtml.cpp, gs_rwphtml.h,
+	  gs_thmlhtml.cpp and gs_thmlhtml.h which are filters and
+	  will be removed with the next release of sword - also added
+	  gs_popup_cb.c, gs_popup_cb.h,gs_abouts.c and gs_abouts.h
+
+
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+		
+	* changed main.cpp to main.c
+
+
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added html window for dict/lex modules
+	* changed the html interlinear window to a single window that will
+	  display five Bible text modules
+		
+	
+	
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*release 0.3.9pre1
+	*GtkHTML-0.8.0 is not required to build gnomesword
+	*but gnomesword can be built with GtkHTML
+	*gs_rwphtml.cpp works now.
+	
+
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*GtkHTML-0.8.0 is now required to build gnomesword
+	*GtkHTML is to display Bible texts and commentaries
+	
+	
+2001-02-08 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*added GtkHTML to display commentaries
+	
+
+2001-02-03 Terry Biggs <tbiggs@users.sourceforge.net>
+
+        *gal-0.4.99.7 is required to build with gnomesword the Evolution
+        shortcut-bar.
+        *revomed all the Evolution code
+
+
+2001-01-30 Terry Biggs <tbiggs@users.sourceforge.net>
+
+        *added history list and buttons
+
+
+2001-01-08 Terry Biggs <tbiggs@users.sourceforge.net>
+        	
+	*fixed listeditor bug - crashed with seg fault
+	 when last item was moved up.
+	 
+
+2001-01-05 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*merged gnomesword and gnomeswordLE
+	*removed spellcheck.cpp, spellcheck.h, DICTClient.cpp and DICTClient..h
+	*gnomesword will use ispell or aspell for spell checking
+	*added files from Bluefish HTML Editor:
+	spell.c, spell.h, spell_gui.c, spell_gui.h, char_table.c and char_table.h
+	for spell checking
+	*added dialog for viewing dictionary modules
+	
+
+2000-12-23 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*now using gal 4.0 
+	*removed all of the Evolution code but 
+	/widgets/shortcut-bar and /widgets/misc.
+	 
+
+2000-12-15 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*changed filestuff.cpp to gs_file.c
+	*changed filestuff.h to gs_file.c
+	
+
+2000-12-13 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*changed listeditor.cpp to gs_listeditor.c
+	*added gs_studypad.c and gs_studypad.h
+	
+
+2000-12-08 Terry Biggs <tbiggs@users.sourceforge.net> 
+
+	* shortcut bar bug fixed - really
+	* release 0.3.7a
+		
+
+2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* release 0.3.7	
+	* shortcut bar bug fixed	
+	panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
+        if(panesize > 0 )
+        {
+        	settings->shortcutbarsize = panesize;
+        	return true;
+        }
+        
+
+2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* release 0.3.6
+	* fixed show print button in studypad
+	
+
+2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* release 0.3.5
+	* split GnomeSword.cpp into gs_sword.cpp and gs_gnomesword.c
+	* split GnomeSword.h into gs_sword.h and gs_gnomesword.h
+
+
+2000-12-04 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*release 0.3.4
+	*scroll bug fixed in display.cpp - thanks to Gregg Berg
+	for finding and fixing this bug.
+	
+
+2000-11-20 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*release 0.3.2
+	*fixed crash with seg fault on initial startup after build,
+	 thanks to Fred Smith <fredex@fcshome.stoneham.ma.us> 
+	 for finding and fixing this bug.
+	 
+
+2000-11-14 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*separate initSword() and initGnomeSword()
+	
+
+2000-11-09 Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*add a configuration option for the shortcut bar
+		show history group
+
+
+
+2000-11-9  Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*release 0.3.0
+	*requires sword-1.5.1a
+	*requires gnome-print-0.20 or higher
+	*add some configuration options for the shortcut bar
+		show commentary group
+		show dictionary group
+
+
+2000-10-12  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*removed reference to unknown includes
+	#include  <widgets/e-paned/e-hpaned.h/>
+	#include  <widgets/e-paned/e-vpaned.h/>
+	in GnomeSword.cpp, callback.cpp and interface.c
+	changed to 
+	#include  <widgets/e-paned/e-hpaned.h>
+	#include  <widgets/e-paned/e-vpaned.h>
+
+
+2000-10-05  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*release 0.2.5
+
+2000-10-03  Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*added history group to shortcut bar
+
+2000-09-29  Terry Biggs <tbiggs@users.sourceforge.net>
+	
+	*patch supplied by Chad Thomas <cbthomas@students.uiuc.edu>
+	to allow lookup of Strongs numbers in dict/lex text by
+	double clicking the number.
+
+2000-09-27  Terry Biggs <tbiggs@users.sourceforge.net>
+        
+        *changed panes to e-panes from the evolution package
+
+2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        *note editor no longer adds spaces to beginning of note
+        *studypad's open and save dialogs look in home dir
+
+2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        * moved module lists to submenu of Bible window popup menu
+
+2000-09-20  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        * added module lists to commentary and dictionary window popup menus
+
+2000-09-15  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        * release 0.2.4
+        *display.cpp changed to handle upper or lower case html tags
+        *fixed history menu - clicking on verse ref will no longer
+        send you to Gen 1:1.
+
+2000-09-06  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        * fixed a segfault that cause gnomesword to crash while
+        displaying verses from a search. 
+
+2000-09-03  Terry Biggs <tbiggs@users.sourceforge.net>
+
+        * coding style changes 
+        * fixed some code problems - memory not freed
+        
+2000-08-30  Michael Meeks  <michael@helixcode.com>
+
+	* widgets/Makefile.am (SUBDIRS): add e-paned back.
+
+2000-08-27  Michael Meeks  <michael@helixcode.com> 
+ 
+        * configure.in: Added sword seek and use logic, from 'BibleTime'
+        * gnomesword/Makefile.am: Rationalize the conditionals, sort.
+ 
+2000-08-28  - you can now change the size of the search dialog
+            - note editor will now save note when formatting is off
+
+2000-08-25  - bug fixes
+            - double click on a Srongs number to look up number in Srongs lex
+
+2000-08-18  - bug fixes - misc segfaults and crashes (when using commentary modules)
+            - enabled all menu items
+            - added shortcut bar from the Evolution project
+            - first 0.2 release
+
+2000-08-02  - bug fixes - misc segfaults and crashes
+            - double click the verse num in main text window to make that verse
+            the current verse.
+            - new popup menu items let you lookup a highlighted word or number
+            in current dict/lex.
+            - changes to display code.
+
+2000-07-18	- formatting of personal comments using html tags added
+						- fixed NIV problem
+
+2000-07-10	- bug fixes
+		- button to create new file in studypad added
+		- follow button added to notes editor
+		
+2000-07-03  	- new bookmark editor
+		- added command line options to set options and bookmark files to defalt settings
+												
+2000-06-15  	- changed from options array to settings structure - stored in binary file
+		- added module About Dialog to show module information
+		- word wrap added to printing - using printing code from gedit-0.7.9
+						
+2000-06-09  	- added printing using gnome-print-0.20. You can print the text in
+		studypad. Print needs more work - later.
+		- added scroll buttons to dictionary-lexicon key entry.
+
+2000-06-06  	- cleaned up bookmarks menu - edit bookmarks now applies changes when
+		you click ok.
+		- clear history works
+		- personal comments page moved - if you have more than one personal module
+		you can switch using popup menu on comments page.
+		- spellchecking works for personal comments now.
+
+2000-06-05  	you can set the color for the current verse
+
+2000-06-02  	fixed some bugs in the personal comments editor
+
+2000-05-17  	-added spellchecking - not perfect but seems to work
+		ok in studypad.
+						
+
+

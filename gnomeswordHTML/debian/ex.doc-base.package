@@ -1,0 +1,22 @@
+Document: gnomesword
+Title: Debian gnomesword Manual
+Author: <insert document author here>
+Abstract: This manual describes what gnomesword is
+ and how it can be used to
+ manage online manuals on Debian systems.
+Section: unknown
+
+Format: debiandoc-sgml
+Files: /usr/doc/gnomesword/gnomesword.sgml.gz
+
+Format: postscript
+Files: /usr/doc/gnomesword/gnomesword.ps.gz
+
+Format: text
+Files: /usr/doc/gnomesword/gnomesword.text.gz
+
+Format: HTML
+Index: /usr/doc/gnomesword/html/index.html
+Files: /usr/doc/gnomesword/html/*.html
+
+  
