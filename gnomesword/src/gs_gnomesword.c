@@ -55,6 +55,7 @@ GtkWidget
   	*strongsnum,/* widget to access toggle menu - for strongs numbers */
 	*hebrewpoints,
 	*cantillationmarks,
+	*greekaccents,
 	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
 	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
 	*studypad,  /* studypad text widget */
@@ -89,7 +90,8 @@ extern GList
 	*sbfavoritesmods,
 	*sbbiblemods,
 	*sbdictmods,
-	*sbcommods;
+	*sbcommods,
+	*options;
 extern gchar 
 	*mydictmod,
 	*shortcut_types[],
@@ -148,7 +150,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				sbbiblemods,
 				sbcommods,
 				sbdictmods,
-				percommods);
+				percommods,
+				options);
+	additemstooptionsmenu(options);			
 	/* add pages to commentary and  dictionary notebooks */
 	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
 	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
@@ -170,13 +174,14 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_show_interlinear_page1_activate);
 	settings->versestyle_item = additemtooptionmenu(app, _("_Settings/"), _("Verse Style"),
 				(GtkMenuCallback)on_verse_style1_activate);
-	footnotes   = additemtooptionmenu(app, _("_Settings/"), _("Show Footnotes"),
+	/*footnotes   = additemtooptionmenu(app, _("_Settings/"), _("Show Footnotes"),
 				(GtkMenuCallback)on_footnotes1_activate);
 	morphs   = additemtooptionmenu(app, _("_Settings/"), _("Show Morphological Tags"),
 				(GtkMenuCallback)on_morphs_activate);
  	strongsnum   = additemtooptionmenu(app, _("_Settings/"), _("Show Strongs Numbers"),
  				(GtkMenuCallback)on_strongs_numbers1_activate); 
-	/*
+	
+	
  	hebrewpoints   = additemtooptionmenu(app, _("_Settings/Language Options/"), _("Show Hebrew Points"),
  				(GtkMenuCallback)on_hebrew_points_activate); 	
  	cantillationmarks   = additemtooptionmenu(app, _("_Settings/Language Options/"), _("Show Cantillation Marks"),
@@ -280,6 +285,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         g_list_free(sbbiblemods);
         g_list_free(sbcommods);
         g_list_free(sbdictmods);
+        g_list_free(options);
 	
 	if(settings->showsplash){
 		//e_splash_set_icon_highlight (E_SPLASH(splash),4, TRUE);	
@@ -342,8 +348,6 @@ void UpdateChecks(GtkWidget *app)
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","On" );	/* keep footnotes in sync with menu */		
 	else
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Footnotes","Off" );	/* keep footnotes in sync with menu */
-	/* set footnote menu checkitem */			
-	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;
 	
 	//GTK_CHECK_MENU_ITEM (hebrewpoints)->active = settings->hebrewpoints;
 	//GTK_CHECK_MENU_ITEM (cantillationmarks)->active = settings->cantillationmarks;
@@ -371,17 +375,11 @@ void UpdateChecks(GtkWidget *app)
 	else
 		/* keep strongs numbers in sync with menu */
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Strong's Numbers","Off");	
-	/* set strongs toogle button */
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
-	/* set strongs menu checkitem */
-	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
 	/* set  morph tags to last setting used */
 	if(settings->morphs)  
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","On" );	/* keep footnotes in sync with menu */		
 	else
 		setglobalopsSWORD(MAIN_TEXT_WINDOW,"Morphological Tags","Off" );	/* keep footnotes in sync with menu */
-	/* set morphs menu checkitem */
-	GTK_CHECK_MENU_ITEM (morphs)->active = settings->morphs;	
 	
 	/* set interlinear page to last setting */
 	if(settings->interlinearpage)

@@ -558,6 +558,11 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 }
 
 
+/*** toogle global options in interlinear window ***/
+void on_int_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	globaloptionsSWORD((gchar *)user_data, INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+}
 
 void
 on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -568,22 +573,6 @@ on_viewtext_activate(GtkMenuItem * menuitem, gpointer user_data)
 		dlg = create_dlgViewText ();
 	}
 	gtk_widget_show(dlg);
-}
-
-void
-on_show_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	morphsSWORD( INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
-}
-void
-on_show_strongs_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	strongsSWORD( INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
-}
-void
-on_show_footnotes_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	footnotesSWORD( INTERLINEAR_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 /***  ***/

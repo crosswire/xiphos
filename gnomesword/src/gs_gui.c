@@ -228,6 +228,8 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSearch;
 	GtkWidget *btnStrongs;
+	GtkWidget *btnMorphs;
+	GtkWidget *btnFootnotes;
 	GtkWidget *btnSB;
 	GtkWidget *cbBook;
 	GList *cbBook_items = NULL;
@@ -333,7 +335,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
-		pathname = gnome_pixmap_file("gnomesword/sword.xpm");
+		pathname = gnome_pixmap_file("gnomesword/gnome-fontsel.xpm");
 		icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
 		e_splash_add_icon(E_SPLASH(splash), icon_pixbuf);
 		gdk_pixbuf_unref(icon_pixbuf);
@@ -347,7 +349,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	}
 
 	settings->app =
-	    gnome_app_new("gnomesword", _("GnomeSword - Bible Study Software"));
+	    gnome_app_new("gnomesword", _("GnomeSWORD - Bible Study Software"));
 	gtk_object_set_data(GTK_OBJECT(settings->app), "settings->app",
 			    settings->app);
 	gtk_widget_set_usize(settings->app, 680, 480);
@@ -547,7 +549,36 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 btnStrongs,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnStrongs);
-
+	
+	tmp_toolbar_icon =
+	    create_pixmap(settings->app, "gnomesword/morphs.xpm", TRUE);
+	btnMorphs =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar20),
+				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+				       NULL, "Morphological",
+				       "Toogle Morphological Tags", NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(btnMorphs);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnMorphs",
+				 btnMorphs,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(btnMorphs);
+	
+	tmp_toolbar_icon =
+	    create_pixmap(settings->app, "gnomesword/footnote3.xpm", TRUE);
+	btnFootnotes =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar20),
+				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+				       NULL, "Footnotes",
+				       "Toogle Footnotes", NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(btnFootnotes);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app), "btnFootnotes",
+				btnFootnotes ,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(btnFootnotes);
+	
+	
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(settings->app,
 				      GNOME_STOCK_PIXMAP_INDEX);
@@ -1558,6 +1589,9 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 
 	gtk_signal_connect(GTK_OBJECT(settings->app), "destroy",
 			   GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
+	gtk_signal_connect (GTK_OBJECT (settings->app), "draw",
+			      GTK_SIGNAL_FUNC (on_mainwindow_draw),
+			      NULL);
 	gnome_app_install_menu_hints(GNOME_APP(settings->app),
 				     menubar1_uiinfo);
 	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",

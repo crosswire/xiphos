@@ -91,40 +91,6 @@ on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	changeverseHistory(atoi((gchar *)user_data));
 }
 
-/*** toogle strongs numvbers in main text window ***/
-void
-on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	/* we change the state of strongs toogle buttn to match the menu item this will 
-	    activate on_btnStrongs_toogled  which will do the work */
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (lookup_widget
-				      (settings->app, "btnStrongs")),
-				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
-}
-
-/*** toogle morph tags in main text window ***/
-void
-on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	morphsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
-}
-
-/*** toogle hebrew points in main text window ***/
-void
-on_hebrew_points_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	hebrewpointsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
-}
-
-/*** toogle cantillation marks in main text window ***/
-void
-on_cantillation_marks_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	cantillationmarksSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
-}
-
-
 /*** display - The SWORD Project - about information ***/
 void
 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
@@ -146,9 +112,9 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 }
 
 /*** toogle footnotes in main text window ***/
-void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
+void on_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	footnotesSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+	globaloptionsSWORD((gchar *)user_data, MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 /*** open preferences dialog ***/

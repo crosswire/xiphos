@@ -50,11 +50,7 @@ extern "C" {
 					gpointer user_data);
 	void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
-	void on_strongs_numbers1_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-	void on_hebrew_points_activate(GtkMenuItem * menuitem, 
-					gpointer user_data);
-	void on_footnotes1_activate(GtkMenuItem * menuitem,
+	void on_global_options_activate(GtkMenuItem * menuitem,
 				    	gpointer user_data);
 	void on_preferences1_activate(GtkMenuItem * menuitem,
 				      	gpointer user_data);
@@ -64,10 +60,6 @@ extern "C" {
 					gpointer user_data);
 	void on_search1_activate(GtkMenuItem * menuitem,
 				 	gpointer user_data);
-	void on_morphs_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
-	/*** toogle cantillation marks in main text window ***/
-	void on_cantillation_marks_activate(GtkMenuItem * menuitem, gpointer user_data);
 
 #ifdef __cplusplus
 }
