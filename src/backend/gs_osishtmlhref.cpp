@@ -92,7 +92,9 @@ bool GSOSISHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserD
 					int count = tag.getAttributePartCount("lemma");
 					int i = (count > 1) ? 0 : -1;		// -1 for whole value cuz it's faster, but does the same thing as 0
 					do {
+						//printf("\ni = %d count = %d\n", i,count);
 						attrib = tag.getAttribute("lemma", i);
+						//printf("tag = %s\n",attrib);
 						if (i < 0) i = 0;	// to handle our -1 condition
 						val = strchr(attrib, ':');
 						val = (val) ? (val + 1) : attrib;
@@ -108,6 +110,7 @@ bool GSOSISHTMLHREF::handleToken(SWBuf &buf, const char *token, BasicFilterUserD
 							show = false;
 						else	buf.appendFormatted(" <small><em>&lt;<a href=\"strongs://%s/%s\">%s</a>&gt;</em></small> ", (gh.length()) ? gh.c_str() : "", val2, val2);
 					} while (++i < count);
+					//printf("new\n");
 				}
 				if ((attrib = tag.getAttribute("morph")) && (show)) {
 					SWBuf savelemma = tag.getAttribute("savlm");

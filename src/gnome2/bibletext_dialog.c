@@ -348,11 +348,13 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 static void book_changed(GtkEditable * editable, DIALOG_DATA * vt)
 {
 	gchar buf[256];
+	gchar *url;
 	gchar *bookname = gtk_editable_get_chars(editable, 0, -1);
 	cur_vt = vt;
 	if (*bookname) {
-		sprintf(buf, "%s 1:1", bookname);
-		main_bible_dialog_passage_changed(vt, buf);
+		url = g_strdup_printf("sword:///%s 1:1", bookname);
+		main_dialogs_url_handler(vt, url, TRUE);
+		g_free(url);
 	}
 }
 
@@ -380,6 +382,7 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 {
 	G_CONST_RETURN gchar *bookname;
 	gchar *val_key;
+	gchar *url;
 	gchar buf[256];
 	gint chapter;
 	cur_vt = vt;
@@ -388,9 +391,9 @@ static gboolean chapter_button_release_event(GtkWidget * widget,
 	chapter =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (vt->spb_chapter));
-	sprintf(buf, "%s %d:1", bookname, chapter);
-	
-	main_bible_dialog_passage_changed(vt, buf);
+	url = g_strdup_printf("sword:///%s %d:1", bookname, chapter);
+	main_dialogs_url_handler(vt, url, TRUE);
+	g_free(url);
 	return FALSE;
 }
 
@@ -419,6 +422,7 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	const gchar *bookname;
 	gchar buf[256], *val_key;
 	gint chapter, verse;
+	gchar *url;
 	cur_vt = vt;
 
 	bookname = gtk_entry_get_text(GTK_ENTRY(vt->cbe_book));
@@ -428,9 +432,10 @@ static gboolean verse_button_release_event(GtkWidget * widget,
 	verse =
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (vt->spb_verse));
-	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
 	
-	main_bible_dialog_passage_changed(vt, buf);
+	url = g_strdup_printf("sword:///%s %d:%d", bookname, chapter, verse);	
+	main_dialogs_url_handler(vt, url, TRUE);
+	g_free(url);	
 	return FALSE;
 }
 
@@ -459,9 +464,10 @@ static gboolean entry_key_press_event(GtkWidget * widget,
 	/* if <enter> key */
 	cur_vt = vt;
 	if (event->keyval == 65293 || event->keyval == 65421) {
-		const gchar *buf;
-		buf = gtk_entry_get_text(GTK_ENTRY(widget));
-		main_bible_dialog_passage_changed(vt, (gchar*)buf);
+		const gchar *buf = gtk_entry_get_text(GTK_ENTRY(widget));
+		gchar *url = g_strdup_printf("sword:///%s", buf);
+		main_dialogs_url_handler(vt, url, TRUE);
+		g_free(url);
 	}
 	return FALSE;
 }
@@ -1750,19 +1756,21 @@ static void on_close_activate(GtkMenuItem * menuitem, DIALOG_DATA * t)
 
 static void on_sync_activate(GtkMenuItem * menuitem, gpointer data)
 {
-	main_sync_bibletext_dialog_with_main(cur_vt);
+	gchar *url = g_strdup_printf("sword:///%s", settings.currentverse);
+	main_dialogs_url_handler(cur_vt, url, TRUE);
+	g_free(url);
 }
 
 static void sync_toggled(GtkCheckMenuItem * menuitem, gpointer data)
 {
 	if(menuitem->active) {
-		main_sync_bibletext_dialog_with_main(cur_vt);
+		gchar *url 
+			= g_strdup_printf("sword:///%s", settings.currentverse);
+		main_dialogs_url_handler(cur_vt, url, TRUE);
+		g_free(url);
 		cur_vt->sync = TRUE;
-		//gtk_widget_hide(cur_vt->toolbar_nav);
-	}
-	else {		
+	} else {		
 		cur_vt->sync = FALSE;
-		//gtk_widget_show(cur_vt->toolbar_nav);
 	}
 }
 
