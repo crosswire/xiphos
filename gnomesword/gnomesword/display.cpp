@@ -879,11 +879,12 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 				adjVal = GTK_TEXT(gtkText)->vadj->upper;
 				curPos =
 				    gtk_text_get_length(GTK_TEXT(gtkText));
+				gtk_text_freeze(GTK_TEXT(gtkText));    // GDB    
 				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font, &myGreen, NULL,
 						(const char *) imodule,
 						-1);
-				gtk_text_freeze(GTK_TEXT(gtkText));
+// GDB  		  gtk_text_freeze(GTK_TEXT(gtkText));
 			} else
 				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font,
@@ -1344,10 +1345,11 @@ char  HTMLChapDisp::Display(SWModule & imodule)
 				adjVal = GTK_TEXT(gtkText)->vadj->upper;
 				curPos =
 				    gtk_text_get_length(GTK_TEXT(gtkText));
-				gtk_text_insert(GTK_TEXT(gtkText),
+				gtk_text_freeze(GTK_TEXT(gtkText));  // GDB    
+				gtk_text_insert(GTK_TEXT(gtkText),				
 						sword_font, &myGreen, NULL,
 						verseBuf, -1);
-				gtk_text_freeze(GTK_TEXT(gtkText));
+// GDB			    gtk_text_freeze(GTK_TEXT(gtkText));
 			} else {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						sword_font,

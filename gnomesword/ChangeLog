@@ -1,3 +1,10 @@
+2000-12-04 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*release 0.3.4
+	*scroll bug fixed in display.cpp - thanks to Gregg Berg
+	for finding and fixing this bug.
+	
+
 2000-11-20 Terry Biggs <tbiggs@users.sourceforge.net>
 	
 	*release 0.3.2
