@@ -162,8 +162,9 @@ module.data.files=
 
 module.help.name=help
 module.help.type=
-module.help.expanded=0
-module.help.files=
+module.help.expanded=1
+module.help.files=\
+	help00.html
 
 module.doc.name=doc
 module.doc.type=

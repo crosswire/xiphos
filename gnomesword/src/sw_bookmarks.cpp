@@ -71,16 +71,9 @@ void AddSection(GtkCTree *ctree, SWConfig *config, const gchar *section, GtkCTre
 				text[1] = token;
 				token=strtok(NULL,",");
 			}
-			if(!strcmp(text[1],"GROUP")){
-				is_leaf = false;
-				node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
-				gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
-			}else{
-				is_leaf = true;
-				node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap3,mask3,NULL, NULL, is_leaf, FALSE);
-				gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
-			}
-			//node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);			
+			is_leaf = false;
+			node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
+			gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
 			AddSection(ctree,config,(*eit).first.c_str(),node);
 		}
 	}
@@ -121,9 +114,9 @@ void loadbookmarks(GtkWidget *ctree_widget)
 			personal_node = gtk_ctree_insert_node(ctree,NULL,NULL,text, 3, pixmap1,mask1,pixmap2, mask2, FALSE, FALSE);
 			style = gtk_style_new();
 			style->base[GTK_STATE_NORMAL].red = 0;
-						style->base[GTK_STATE_NORMAL].green = 45000;
-						style->base[GTK_STATE_NORMAL].blue = 55000;
-						gtk_ctree_node_set_row_data_full(ctree,personal_node, style,(GtkDestroyNotify) gtk_style_unref);
+			style->base[GTK_STATE_NORMAL].green = 45000;
+			style->base[GTK_STATE_NORMAL].blue = 55000;
+			gtk_ctree_node_set_row_data_full(ctree,personal_node, style,(GtkDestroyNotify) gtk_style_unref);
 			AddSection(ctree, bookmarkInfo,(*eit).first.c_str(),personal_node);
 		}
 	}  

@@ -48,8 +48,6 @@ BM_TREE *p_bmtree;
 extern GS_APP gs;
 extern GtkCTreeNode *personal_node;
 
-static gint books = 0;
-static gint pages = 0;
 static char *book_open_xpm[] = {
 	"16 16 4 1",
 	"       c None s None",
@@ -168,6 +166,31 @@ static void after_press(GtkCTree * ctree, gpointer data)
 
 
 }
+
+static GtkCTreeNode *node2;
+static void
+setleaf(GtkWidget * ctree_widget)
+{
+	GtkCTree *ctree;
+	int i;
+	
+	ctree = GTK_CTREE(ctree_widget);
+	gtk_ctree_expand_recursive (ctree, NULL); 
+	//g_warning("setleaf rows=%d",GTK_CLIST(ctree)->rows);
+	for(i=0; i< GTK_CLIST(ctree)->rows; i++){
+		node2 = gtk_ctree_node_nth(ctree, i);
+		if(GTK_CTREE_ROW(node2)->children == NULL){
+			//g_warning("no children");
+			GTK_CTREE_ROW(node2)->pixmap_closed = pixmap3;
+			GTK_CTREE_ROW(node2)->mask_closed = mask3;
+			GTK_CTREE_ROW(node2)->pixmap_opened = pixmap3;
+			GTK_CTREE_ROW(node2)->mask_opened = mask3;
+			GTK_CTREE_ROW(node2)->is_leaf = TRUE;
+			GTK_CTREE_ROW(node2)->expanded = FALSE;
+		}
+	}
+	gtk_ctree_collapse_recursive (ctree, NULL); 
+}
 static GtkCTreeNode *selected_node;
 static void
 on_ctree_select_row(GtkCList * clist,
@@ -180,6 +203,8 @@ on_ctree_select_row(GtkCList * clist,
 
 	ctree = user_data;
 	selected_node = gtk_ctree_node_nth(p_bmtree->ctree, row);
+	//if(GTK_CTREE_ROW(selected_node)->children == NULL){
+		//g_warning("no children");
 	if (GTK_CTREE_ROW(selected_node)->is_leaf) {	/* if node is leaf we need to change mod and key */
 		key =
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
@@ -224,10 +249,11 @@ void after_move(GtkCTree * ctree, GtkCTreeNode * child,
 
 static void count_items(GtkCTree * ctree, GtkCTreeNode * list)
 {
-	if (GTK_CTREE_ROW(list)->is_leaf)
+	/* if (GTK_CTREE_ROW(list)->is_leaf)
 		pages--;
 	else
 		books--;
+	*/
 }
 /*
 static void expand_all(GtkWidget * widget, GtkCTree * ctree)
@@ -306,8 +332,9 @@ remove_selection(GtkWidget * widget, GtkCTree * ctree)
 	while (clist->selection) {
 		node = clist->selection->data;
 
-		if (GTK_CTREE_ROW(node)->is_leaf)
-			pages--;
+		if (GTK_CTREE_ROW(node)->is_leaf){
+			//do nothing
+		}
 		else
 			gtk_ctree_post_recursive(ctree, node,
 						 (GtkCTreeFunc)
@@ -584,7 +611,7 @@ void on_add_new_group1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	dialog =
 	    gnome_request_dialog(FALSE,
-				 "Enter SubGroup Name - use no commas",
+				 "Enter Group Name - use no commas",
 				 NULL, 79,
 				 (GnomeStringCallback) stringCallback,
 				 GINT_TO_POINTER(1), GTK_WINDOW(MainFrm));
@@ -612,12 +639,8 @@ on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 /******************************************************************************
- *
+ * add leaf node to personal root
  ******************************************************************************/
-
-/*
- *
- */
 void addbookmarktotree(gchar * modName, gchar * verse)
 {
 	gchar *text[2];
@@ -643,7 +666,7 @@ void loadtree(GtkWidget * ctree1)
 	    gdk_pixmap_create_from_xpm_d(MainFrm->window, &mask2,
 					 &transparent, book_open_xpm);
 	pixmap3 =
-	    gdk_pixmap_create_from_xpm_d(MainFrm->window, &mask2,
+	    gdk_pixmap_create_from_xpm_d(MainFrm->window, &mask3,
 					 &transparent, mini_page_xpm);
 
 	gtk_signal_connect_after(GTK_OBJECT(p_bmtree->ctree_widget),
@@ -672,6 +695,7 @@ void loadtree(GtkWidget * ctree1)
 				 GTK_SIGNAL_FUNC(after_press), NULL);
 
 	loadbookmarks(gs.ctree_widget);
+	setleaf(ctree1);
 
 	gtk_signal_connect(GTK_OBJECT(gs.ctree_widget), "select_row",
 			   GTK_SIGNAL_FUNC(on_ctree_select_row),
