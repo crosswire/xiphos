@@ -189,15 +189,13 @@ void main_save_module_key(char * mod_name, char * key)
 
 gchar *main_update_nav_controls(const gchar * key)
 {
-	char *val_key;
 	gint cur_chapter = 8, cur_verse = 28;
-
-	settings.apply_change = FALSE;
-	val_key = backend->get_valid_key(key);
-	//g_warning(key);
-	//g_warning("key = %s val_key = %s",key,val_key);
+	char *val_key = backend->get_valid_key(key);
 	cur_chapter = backend->key_get_chapter(val_key);
 	cur_verse = backend->key_get_verse(val_key);
+	//sword::VerseKey key( val_key );
+	/*g_message("module has vese = %d",backend->module_has_testament(settings.MainWindowModule,
+		backend->get_key_testament(val_key)));*/
 	/* 
 	 *  remember last verse 
 	 */
@@ -208,6 +206,7 @@ gchar *main_update_nav_controls(const gchar * key)
 	 *  to new verse - settings.apply_change is set to false so we don't
 	 *  start a loop
 	 */
+	settings.apply_change = FALSE;
 	gtk_entry_set_text(GTK_ENTRY(cbe_book),
 			   backend->key_get_book(val_key));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
@@ -1030,7 +1029,7 @@ void main_dictionary_entery_changed(char * mod_name)
  * Description
  *   The back or foward dictinary key button was clicked.
  *   the module key is set to the current dictkey.
- *   then the module is incremented or dincremented.
+ *   then the module is incremented or decremented.
  *   the new key is returned from the module and the dictionary entry is set
  *   to the new key. The entry is then activated.
  *
@@ -1166,6 +1165,7 @@ void main_display_bible(const char * mod_name, const char * key)
 {
 	gchar *file = NULL;
 	gchar *style = NULL;
+	gchar *val_key = NULL;
 	
 	if(!settings.havebible || !mod_name)
 		return;
@@ -1206,8 +1206,20 @@ void main_display_bible(const char * mod_name, const char * key)
 				       settings.versestyle);
 	style_display = TRUE;
 	
-	backend->set_module_key(mod_name, key);
-	backend->display_mod->Display();
+	if(backend->module_has_testament(mod_name,
+		backend->get_key_testament(key))) {
+			backend->set_module_key(mod_name, key);
+			backend->display_mod->Display();
+	} else {
+		if(backend->get_key_testament(key) == 1)
+			val_key = main_update_nav_controls("Matthew 1:1");
+		else
+			val_key = main_update_nav_controls("Genesis 1:1");
+		
+		backend->set_module_key(mod_name, val_key);
+		backend->display_mod->Display();
+		g_free(val_key);			
+	}
 	
 	if(settings.browsing) {
 		gui_update_tab_struct(mod_name,
