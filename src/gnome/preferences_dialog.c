@@ -34,7 +34,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "gui/_bibletext.h"
+#include "gui/bibletext.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_dialog.h"
 #include "gui/preferences_dialog.h"
