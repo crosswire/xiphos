@@ -257,6 +257,16 @@ void gui_update_gbs_global_ops(gchar * option, gboolean choice)
 
 
 
+static gboolean on_enter_notify_event(GtkWidget * widget,
+				      GdkEventCrossing * event,
+				      gpointer user_data)
+{
+	//shift_key_presed = FALSE;
+	gtk_widget_grab_focus (widgets.html_book);
+	settings.whichwindow = BOOK_WINDOW;
+  	return FALSE;
+}
+
 
 /******************************************************************************
  * Name
@@ -290,15 +300,15 @@ GtkWidget *gui_create_book_pane(void)
 	gtk_box_pack_start(GTK_BOX(box),
 			   eventbox, TRUE,
 			   TRUE, 0);
-	widgets.html_book = embed_new(COMMENTARY_TYPE);
+	widgets.html_book = embed_new(BOOK_TYPE);
 	gtk_widget_show(widgets.html_book);
 	gtk_container_add(GTK_CONTAINER(eventbox),
 			 widgets.html_book);
-/*	
+	
 	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
 		    G_CALLBACK (on_enter_notify_event),
 		    NULL);
-*/
+
 #else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
@@ -425,18 +435,21 @@ static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar *dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
-	if (dict_key) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(settings.
-						      DictWindowModule,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(settings.
-						  DictWindowModule,
-						  dict_key);
-		g_free(dict_key);
-	}
+#ifdef DEBUG
+	g_message("book on_use_current_dictionary_activate");
+#endif
+	gchar *dict_key =NULL;
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	gtk_widget_activate(widgets.entry_dict);	
+#else
+	dict_key = gui_get_word_or_selection(widgets.html_book, FALSE);
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
+	gtk_widget_activate(widgets.entry_dict);
+	g_free(dict_key);
+#endif
 }
 
 
@@ -505,6 +518,26 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
+		
+	mod_name = main_module_name_from_description(dict_mod_description);
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_book));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	dict_key = 
+		g_strdup(gtk_editable_get_chars(
+			(GtkEditable *)widgets.entry_dict,0,-1));
+#else	
+	dict_key = gui_get_word_or_selection(widgets.html_book, FALSE);
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
+#endif
+	if (dict_key && mod_name) {
+		main_display_dictionary(mod_name, dict_key);
+		g_free(dict_key);
+		g_free(mod_name);
+	}
+/*	gchar *dict_key = NULL;
+	gchar *mod_name = NULL;
 	
 	//if(!cur_t->html) return;
 	
@@ -519,6 +552,7 @@ void gui_lookup_gbs_selection(GtkMenuItem * menuitem,
 		g_free(dict_key);
 		g_free(mod_name);
 	}
+*/
 }
 
 /******************************************************************************
@@ -852,6 +886,10 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_show(usecurrent);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
+
+	g_signal_connect(GTK_OBJECT(usecurrent),
+			   "activate",
+			   G_CALLBACK(on_use_current_dictionary_activate), NULL);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
