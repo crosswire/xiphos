@@ -38,7 +38,7 @@
 
 #include "gs_mainmenu_cb.h"
 #include "gs_gnomesword.h"
-#include "gs_bibletext.h"
+#include "bibletext.h"
 #include "gs_menu.h"
 #include "sword.h"
 #include "gs_viewdict_dlg.h"
@@ -128,7 +128,7 @@ on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
 /*** toogle global options in main text window ***/
 void on_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	set_text_module_global_options((gchar *)user_data, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+//	set_text_module_global_options((gchar *)user_data, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 

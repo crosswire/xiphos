@@ -13,8 +13,8 @@ INCLUDES =  \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE =  \
-    gs_bibletext.c \
-    gs_bibletext.h \
+    bibletext.c \
+    bibletext.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
     gs_commentary.c \

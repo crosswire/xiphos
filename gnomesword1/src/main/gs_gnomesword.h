@@ -1,33 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_gnomesword.h
-    * -------------------
-    * Tue Dec 05 2000
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
- */
-
 /*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * GnomeSword Bible Study Tool
+ * gnomesword.h - support for commentary modules
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
-#ifndef __GS_GNOMESWORD_H__
-#define __GS_GNOMESWORD_H__
+
+#ifndef __GNOMESWORD_H__
+#define __GNOMESWORD_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,19 +32,30 @@ extern "C" {
 #define DICTIONARY_WINDOW 3
 #define BOOK_WINDOW 4
     
-/* module types */
+/* 
+   module types 
+ */
 #define TEXT_TYPE 0 
 #define COMMENTARY_TYPE 1
 #define DICTIONARY_TYPE 2
 #define BOOK_TYPE 3
 	
-/* these strings are not seen by users */    
+/* 
+   these strings are not seen by users 
+ */    
 #define GS_DOCK_OPTIONS "dockOptions"
 #define GS_DOCK_GBS "dockGBSEditor"
 #define GS_DOCK_PC "dockPCEditor"
 #define GS_DOCK_SP "dockSPEditor"
-    
-    
+       
+/* 
+   these strings are not seen by users
+ */
+#define TEXT_MODS "Biblical Texts"
+#define COMM_MODS "Commentaries"
+#define DICT_MODS "Lexicons / Dictionaries"
+#define BOOK_MODS "Generic Books"
+#define CIPHER_KEY_LEN 16
     
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -266,7 +270,26 @@ struct _search_opt {
 		use_bonds,
 		use_lastsearch_for_bonds;
 };
+/******************************************************************************
+ *  lists to keep for the life of the program
+ *   
+ */
+typedef struct _module_lists MOD_LISTS;
+struct _module_lists {
+	GList	
+	*biblemods,
+	*commentarymods,
+	*dictionarymods, 
+	*bookmods, 
+	*percommods, 
+	*text_descriptions, 
+	*dict_descriptions,
+	*comm_descriptions,
+	*book_descriptions,
+	*options;	
+};
 
+extern MOD_LISTS *mod_lists;
 /*** function prototypes ***/
 
 void initGnomeSword(SETTINGS *settings);
@@ -297,6 +320,7 @@ void display_about_module_dialog(gchar *modname, gboolean isGBS);
 void search_module(SETTINGS *s, SEARCH_OPT *so);
 gchar *get_module_key(SETTINGS *s);
 gchar *get_module_name(SETTINGS *s);
+gchar *get_module_name_from_description(gchar *description);
 void change_module_and_key(gchar *module_name, gchar *key);
 void change_verse(gchar *key);
 void set_verse_style(gboolean choice);
@@ -305,5 +329,5 @@ void set_verse_style(gboolean choice);
 }
 #endif
 
-#endif /* __GS_GNOMESWORD_H__ */
+#endif /* __GNOMESWORD_H__ */
 

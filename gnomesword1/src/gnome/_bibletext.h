@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * cipher_key_dialog.h  - asks for key to unlock sword module
+ * _bibletext.h - gui for commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,17 +19,26 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __CIPHER_KEY_DIALOG_H__
-#define __CIPHER_KEY_DIALOG_H__
+#ifndef ___BIBLETEXT_H_
+#define ___BIBLETEXT_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "gs_gnomesword.h"
-	GtkWidget *gui_create_cipher_key_dialog(gchar *mod_name);
 
+#include "gs_gnomesword.h"
+/*
+   main
+ */
+#include "bibletext.h"
+	
+	void on_notebook_text_switch_page(GtkNotebook * notebook,
+				  GtkNotebookPage * page,
+				  gint page_num, GList * tl); 
+	void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t);
+	GtkWidget *gui_create_pm_text(TEXT_DATA * t);
+	
 #ifdef __cplusplus
 }
 #endif
-
-#endif				/* __CIPHER_KEY_DIALOG_H__ */
+#endif				/* ___BIBLETEXT_H_ */

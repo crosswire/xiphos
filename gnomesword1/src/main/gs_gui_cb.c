@@ -89,7 +89,7 @@ on_btnStrongs_toggled(GtkToggleButton * togglebutton,
 {
 	if (settings->strongsnum) {
 		GTK_CHECK_MENU_ITEM(settings->strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-		set_text_module_global_options("Strong's Numbers", togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)      
+//		set_text_module_global_options("Strong's Numbers", togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)      
 	}
 }
 
@@ -99,7 +99,7 @@ on_btnMorphs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
 	if (settings->morphs) {
 		GTK_CHECK_MENU_ITEM(settings->morphs)->active = togglebutton->active;	//-- change menu check item to match button
-		set_text_module_global_options("Morphological Tags",togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)      
+//		set_text_module_global_options("Morphological Tags",togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)      
 	}
 }
 
@@ -110,7 +110,7 @@ on_btnFootnotes_toggled(GtkToggleButton * togglebutton,
 {
 	if (settings->footnotes) {
 		GTK_CHECK_MENU_ITEM(settings->footnotes)->active = togglebutton->active;	//-- change menu check item to match button
-		set_text_module_global_options("Footnotes", togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)
+//		set_text_module_global_options("Footnotes", togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)
 	}
 }
 
