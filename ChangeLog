@@ -1,3 +1,9 @@
+2003-10-27  Terry <tbiggs@users.sf.net>
+
+	* bumped gnome2 port to 0.9.dev9
+	* fixed a couple of crashes
+	
+
 2003-10-21  Terry <tbiggs@users.sf.net>
 
 	* bumped gnome2 port to 0.9.dev8

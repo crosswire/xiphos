@@ -134,15 +134,22 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 {
 	gint page = 0;
 	COMM_DATA *c = NULL;
-
+	
 	comm_list = g_list_first(comm_list);
-	while (comm_list != NULL) {
-		c = (COMM_DATA *) comm_list->data;
-		if (!strcmp(c->mod_name, modname))
-			break;
-		++page;
-		comm_list = g_list_next(comm_list);
+	if(modname) {
+		while (comm_list != NULL) {
+			c = (COMM_DATA *) comm_list->data;
+			if (!strcmp(c->mod_name, modname))
+				break;
+			++page;
+			comm_list = g_list_next(comm_list);
+		}
 	}
+	else {
+		c = (COMM_DATA *) comm_list->data;
+		page = 0;
+	}
+	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_comm), page);

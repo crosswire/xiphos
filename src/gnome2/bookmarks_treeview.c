@@ -104,25 +104,30 @@ void gui_save_old_bookmarks_to_new(GNode * gnode)
 static void goto_bookmark(gchar * mod_name, gchar * key)
 {
 	gint module_type;
-
+	
+	if(!check_for_module(mod_name)) 
+		mod_name = settings.MainWindowModule;
+	
 	if (use_dialog) {
 		module_type = get_mod_type(mod_name);
 		switch (module_type) {
-		case TEXT_TYPE:
-			gui_bibletext_dialog_goto_bookmark(mod_name,
-							   key);
-			break;
-		case COMMENTARY_TYPE:
-			gui_commentary_dialog_goto_bookmark(mod_name,
-							    key);
-			break;
-		case DICTIONARY_TYPE:
-			gui_dictionary_dialog_goto_bookmark(mod_name,
-							    key);
-			break;
-		case BOOK_TYPE:
-			gui_gbs_dialog_goto_bookmark(mod_name, key);
-			break;
+			case -1:
+				break;
+			case TEXT_TYPE:
+				gui_bibletext_dialog_goto_bookmark(mod_name,
+								   key);
+				break;
+			case COMMENTARY_TYPE:
+				gui_commentary_dialog_goto_bookmark(mod_name,
+								    key);
+				break;
+			case DICTIONARY_TYPE:
+				gui_dictionary_dialog_goto_bookmark(mod_name,
+								    key);
+				break;
+			case BOOK_TYPE:
+				gui_gbs_dialog_goto_bookmark(mod_name, key);
+				break;
 		}
 	} else
 		gui_change_module_and_key(mod_name, key);

@@ -175,13 +175,20 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 	DL_DATA *d = NULL;
 
 	dl_list = g_list_first(dl_list);
-	while (dl_list != NULL) {
-		d = (DL_DATA *) dl_list->data;
-		if (!strcmp(d->mod_name, modname))
-			break;
-		++page;
-		dl_list = g_list_next(dl_list);
+	if(modname) {
+		while (dl_list != NULL) {
+			d = (DL_DATA *) dl_list->data;
+			if (!strcmp(d->mod_name, modname))
+				break;
+			++page;
+			dl_list = g_list_next(dl_list);
+		}
 	}
+	else {
+		d = (DL_DATA *) dl_list->data;
+		page = 0;
+	}
+	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_dict), page);
