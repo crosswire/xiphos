@@ -115,7 +115,18 @@ char GTKEntryDisp::Display(SWModule &imodule)
 				(gchar*)keytext,
 				(mf->old_font)?mf->old_font:"",
 				(mf->old_font_size)?mf->old_font_size:"+0");
-	swbuf.append((const char *)imodule);
+	if(backend->module_type(imodule.Name()) == PERCOM_TYPE)	{
+		/*keytext = g_convert((const char *)imodule.getRawEntry(),
+                             -1,
+                             UTF_8,
+                             OLD_CODESET,
+                             &bytes_read,
+                             &bytes_written,
+                             error);*/	
+		swbuf.append((const char *)(const char *)imodule.getRawEntry());  //keytext);
+	}
+	else
+		swbuf.append((const char *)imodule);
 	swbuf.append("</font></body></html>");	
 	
 	gboolean was_editable = gtk_html_get_editable(html);
