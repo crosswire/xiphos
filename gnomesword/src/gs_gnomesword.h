@@ -85,40 +85,41 @@ struct _gstabs {
  
 typedef struct _settings SETTINGS;
 struct _settings {
-	gchar	   MainWindowModule[80],	/* modules to open at program startup  */
+	gchar	MainWindowModule[80],	/* modules to open at program startup  */
 			CommWindowModule[80],
 			DictWindowModule[80],
-	           Interlinear1Module[80],
-	           Interlinear2Module[80],
-	           Interlinear3Module[80], 
-	           Interlinear4Module[80],
-	           Interlinear5Module[80], 
-	           personalcommentsmod[80], 
-	           currentverse[80],	/* verse to use at program startup */
-	           dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
-	           studypadfilename[255],   /* name of file in studypad when we closed */
-	           currentverse_color[15];  /* color for current verse */
-	gint       currentverse_red,	/* current verse colors */
-	           currentverse_green, 
-	           currentverse_blue;
-	gint       notebook3page,	//-- notebook 3 page number
-	           notebook1page,	//-- commentaries notebook
-	           notebook2page;	//-- dict - lex notebook
-	gint	   shortcutbarsize;
+	           	Interlinear1Module[80],
+	           	Interlinear2Module[80],
+	           	Interlinear3Module[80], 
+	           	Interlinear4Module[80],
+	           	Interlinear5Module[80], 
+	           	personalcommentsmod[80], 
+	           	currentverse[80],	/* verse to use at program startup */
+	           	dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
+	           	studypadfilename[255],   /* name of file in studypad when we closed */
+			studypaddir[255],	    /* directory for studypad files */
+	           	currentverse_color[15];  /* color for current verse */
+	gint       	currentverse_red,	/* current verse colors */
+	           	currentverse_green, 
+	           	currentverse_blue;
+	gint       	notebook3page,	//-- notebook 3 page number
+	           	notebook1page,	//-- commentaries notebook
+	           	notebook2page;	//-- dict - lex notebook
+	gint	   	shortcutbarsize;
 	gboolean   strongs,	//-- toogle button and check menu states
-	           footnotes,
-	           versestyle,
-	           interlinearpage,
-	           autosavepersonalcomments,
-	           formatpercom,
-	           showcomtabs,
-	           showdicttabs,
-	           showshortcutbar,
-	           showtextgroup,
-	           showcomgroup,
-	           showdictgroup,
-	           showbookmarksgroup,
-	           showhistorygroup;
+	           	footnotes,
+	           	versestyle,
+	           	interlinearpage,
+	           	autosavepersonalcomments,
+	           	formatpercom,
+	           	showcomtabs,
+	           	showdicttabs,
+	           	showshortcutbar,
+	           	showtextgroup,
+	           	showcomgroup,
+	           	showdictgroup,
+	           	showbookmarksgroup,
+	        	showhistorygroup; 
 };
 
 typedef struct _gs_app GS_APP;

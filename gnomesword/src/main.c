@@ -32,7 +32,7 @@
 #include "gs_html.h"
 #include "gs_gui.h"
 #include "sw_properties.h"
-
+//#include "gs_setup.h"
 
 extern SETTINGS *settings;
 SETTINGS myset;	
@@ -44,8 +44,8 @@ int
 main (int argc, char *argv[])
 {
 	GtkWidget 
-		*mainwindow;
-	//	*setup;
+		*mainwindow,
+		*setup;
 	gboolean 		
 		newconfigs = FALSE,	
 		newbookmarks = FALSE;
@@ -61,7 +61,7 @@ main (int argc, char *argv[])
 		}
 	}		
   	/*
-  	setup = create_dialog1();
+  	setup = create_dlgSetup ();
   	gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	*/

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                          gs_file.c  -  description
+                                         gs_file.c 
                              -------------------
     begin                : Mon May 8 2000
     copyright            : (C) 2000 by Terry Biggs
@@ -36,6 +36,8 @@
 #include "gs_menu.h"
 #include "gs_sword.h"
 #include "gs_listeditor.h"
+#include "gs_setup.h"
+#include "sw_properties.h"
 
 #define BUFFER_SIZE 8192	/* input buffer size */
 
@@ -153,8 +155,8 @@ void setDiretory(void)
 	sprintf(fnbookmarksnew, "%s/%s", gSwordDir, "bookmarksnew.gs");
         /* set fnconfigure to gSwordDir + gsword.cfg */
 	fnconfigure =
-	    g_new(char, strlen(gSwordDir) + strlen("settings3.cfg") + 2);	
-	sprintf(fnconfigure, "%s/%s", gSwordDir, "settings3.cfg");
+	    g_new(char, strlen(gSwordDir) + strlen("preferences.conf") + 2);	
+	sprintf(fnconfigure, "%s/%s", gSwordDir, "preferences.conf");
 	if (access(gSwordDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
 		if ((mkdir(gSwordDir, S_IRWXU)) == 0) {
 			createFiles();
@@ -163,6 +165,13 @@ void setDiretory(void)
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
 		}
+	}
+	if (access(fnconfigure, F_OK) == -1) {
+		/*GtkWidget *setup;
+		setup = create_dlgSetup();
+  		gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
+		gnome_dialog_run_and_close(GNOME_DIALOG(setup));*/
+		createconfig();
 	}
 	if (access(swbmDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
 		if ((mkdir(swbmDir, S_IRWXU)) == 0) {

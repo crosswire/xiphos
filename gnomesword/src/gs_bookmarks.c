@@ -293,7 +293,8 @@ static void change_style(GtkWidget * widget, GtkCTree * ctree)
 					     style2);
 }
 */
-void remove_selection(GtkWidget * widget, GtkCTree * ctree)
+static void 
+remove_selection(GtkWidget * widget, GtkCTree * ctree)
 {
 	GtkCList *clist;
 	GtkCTreeNode *node;

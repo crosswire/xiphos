@@ -1,5 +1,5 @@
 /***************************************************************************
-                          gs_history.h  -  description
+                          	        gs_history.h 
                              -------------------
     begin                : Thu Feb 1 2001
     copyright            : (C) 2001 by Terry Biggs
