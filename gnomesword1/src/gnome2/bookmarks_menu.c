@@ -500,7 +500,6 @@ static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 			   -1);	
 	parse_bookmarks(bookmark_tree, file, &iter);
 	g_string_free(str, TRUE);
-	
 }
 
 
