@@ -476,9 +476,7 @@ static GtkWidget *create_dialog(void)
 	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(dialog),"dialog",dialog);
 	gtk_widget_set_size_request(dialog, 600, 300);
-	gtk_window_set_policy(GTK_WINDOW
-			      (dialog),
-			      TRUE, TRUE, FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog), TRUE);
 	gtk_window_set_title((GtkWindow *)dialog,
                                 (const gchar*)N_("StudyPad"));
 	gtk_widget_show(dialog);

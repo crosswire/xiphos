@@ -162,8 +162,7 @@ static GtkWidget *gui_create_about_modules(void)
 			     _("About Sword Module"));
 	gtk_window_set_default_size(GTK_WINDOW(dialog_about_mods), 324,
 				    304);
-	gtk_window_set_policy(GTK_WINDOW(dialog_about_mods), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_about_mods), TRUE);
 
 	dialog_vbox28 = GTK_DIALOG(dialog_about_mods)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dialog_about_mods),

@@ -178,8 +178,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_window_set_default_size(GTK_WINDOW
 				    (dialog_display_info), 350,
 				    200);
-	gtk_window_set_policy(GTK_WINDOW(dialog_display_info),
-			      TRUE, TRUE, FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_display_info), TRUE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info), FALSE);
 
 	dialog_vbox23 = GTK_DIALOG(dialog_display_info)->vbox;

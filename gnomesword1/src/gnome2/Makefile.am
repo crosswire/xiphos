@@ -36,7 +36,6 @@ gnomesword2_SOURCES =  \
     gnomesword.c \
     gui.c \
     hints.c \
-    history.c \
     html.c \
     main_menu.c \
     main_window.c \

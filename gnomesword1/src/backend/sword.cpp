@@ -120,7 +120,6 @@ char *backend_get_sword_locale(void)
 		}
 	}
 	retval = strdup(sys_local);
-	LocaleMgr::getSystemLocaleMgr()->loadConfigDir("/usr/share/sword/locales.d");
 	LocaleMgr::getSystemLocaleMgr()->setDefaultLocaleName(sys_local);
 	SWLocale *sw_locale = LocaleMgr::getSystemLocaleMgr()->getLocale(sys_local);
 	if(sw_locale) {
@@ -156,14 +155,28 @@ void backend_init(void)
 	char *sys_locale = NULL;
 	const char *sword_version = get_sword_version();
 	SWMgr mgr;
+	char *buf = NULL;
 	const char *path = mgr.prefixPath;
-	g_message(path);
 #ifdef DEBUG	
+	g_message(path);
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sword_version);
 	g_print("%s\n\n", _("Initiating SWORD"));
-#endif
-	 
+#endif 
+	SWConfig conf_file("/etc/sword.conf");
+	
+	if(g_file_test("/usr/etc/sword.conf",G_FILE_TEST_EXISTS))
+		SWConfig conf_file("/usr/etc/sword.conf");
+	if(g_file_test("/usr/local/etc/sword.conf",G_FILE_TEST_EXISTS))
+		SWConfig conf_file("/usr/local/etc/sword.conf");
+		
+	
+	conf_file.Load();
+	buf = g_strdup_printf("%slocales.d/",(char *) conf_file["Install"]["DataPath"].c_str());
+#ifdef DEBUG	
+	g_print("path to locales %s\n", buf);
+#endif	
+	LocaleMgr::getSystemLocaleMgr()->loadConfigDir(buf); 
 	sys_locale = strdup((char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName());
 
 	sword_locale = backend_get_sword_locale();
@@ -179,6 +192,7 @@ void backend_init(void)
 	backend = new BackEnd();
 	backend->init_SWORD(0);
 	main_init_lists();
+	g_free(buf);
 }
 
 

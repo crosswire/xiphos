@@ -93,7 +93,6 @@ module.include.files=\
 	src/gui/gnomesword.h\
 	src/gui/gui.h\
 	src/gui/hints.h\
-	src/gui/history.h\
 	src/gui/html.h\
 	src/gui/main_menu.h\
 	src/gui/main_window.h\
@@ -158,7 +157,8 @@ module.include.files=\
 	src/editor/toolbar_edit.h\
 	src/editor/toolbar_style.h\
 	src/editor/popup.h\
-	src/editor/dialog.h
+	src/editor/dialog.h\
+	src/main/tab_history.h
 
 module.source.name=.
 module.source.type=
@@ -166,8 +166,6 @@ module.source.files=\
 	src/backend/sword.cpp\
 	src/main/main.c\
 	src/main/settings.c\
-	src/main/spell_ispell.c\
-	src/main/spell_pspell.c\
 	src/main/xml.c\
 	src/gnome2/about_gnomesword.c\
 	src/gnome2/about_modules.c\
@@ -184,7 +182,6 @@ module.source.files=\
 	src/gnome2/gbs.c\
 	src/gnome2/gnomesword.c\
 	src/gnome2/hints.c\
-	src/gnome2/history.c\
 	src/gnome2/html.c\
 	src/gnome2/cipher_key_dialog.c\
 	src/gnome2/fileselection.c\
@@ -260,7 +257,8 @@ module.source.files=\
 	src/editor/template.cmodule.pixmap.name=pixmaps\
 	src/editor/editor-control.c\
 	src/backend/sword_main.cc\
-	src/gnome2/note_editor.c
+	src/gnome2/note_editor.c\
+	src/main/tab_history.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

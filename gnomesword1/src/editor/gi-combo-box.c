@@ -427,8 +427,7 @@ gal_combo_box_init (GalComboBox *combo_box)
 	combo_box->priv->toplevel = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_ref (combo_box->priv->toplevel);
 	gtk_object_sink (GTK_OBJECT (combo_box->priv->toplevel));
-	gtk_window_set_policy (GTK_WINDOW (combo_box->priv->toplevel),
-			       FALSE, TRUE, FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(combo_box->priv->toplevel),FALSE);
 
 	combo_box->priv->popup = gtk_event_box_new ();
 	gtk_container_add (GTK_CONTAINER (combo_box->priv->toplevel),

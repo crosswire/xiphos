@@ -1180,8 +1180,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_window_set_title(GTK_WINDOW(dialog_prefs),
 			     _("Preferences"));
 	gtk_window_set_default_size(GTK_WINDOW(dialog_prefs), 600, 345);
-	gtk_window_set_policy(GTK_WINDOW(dialog_prefs), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_prefs), TRUE);
 	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_prefs), FALSE);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog_prefs), 12);
 

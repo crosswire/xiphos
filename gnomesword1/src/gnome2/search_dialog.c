@@ -1267,8 +1267,7 @@ GtkWidget *gui_create_search_dialog(void)
 			     _("Advanced Search"));
 	gtk_window_set_default_size(GTK_WINDOW(search_dialog), 598,
 				    400);
-	gtk_window_set_policy(GTK_WINDOW(search_dialog), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(search_dialog), TRUE);
 
 	hbox_search = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox_search);

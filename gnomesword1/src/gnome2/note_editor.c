@@ -544,8 +544,7 @@ void gui_create_note_editor(DIALOG_DATA * d)
 			    d->dialog);
 	gtk_window_set_title(GTK_WINDOW(d->dialog),
 			     main_get_module_description(d->mod_name));
-	gtk_window_set_policy(GTK_WINDOW(d->dialog), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(d->dialog), TRUE);
 	gtk_widget_set_size_request(d->dialog, 600, 380);
 	
 	vbox = gtk_vbox_new(FALSE, 0);
