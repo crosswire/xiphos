@@ -341,7 +341,7 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 static void on_button_back_clicked(GtkButton * button,
 				   gpointer user_data)
 {
-	historynav(widgets.app, 0);
+	gui_navigate_history(widgets.app, 0);
 }
 
 /******************************************************************************
@@ -363,7 +363,7 @@ static void on_button_back_clicked(GtkButton * button,
 static void on_button_forward_clicked(GtkButton * button,
 				      gpointer user_data)
 {
-	historynav(widgets.app, 1);
+	gui_navigate_history(widgets.app, 1);
 }
 
 

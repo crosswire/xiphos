@@ -73,7 +73,6 @@
 
 void frontend_init(void)
 {
-	//gint number_of_pages = 0;
 	guint number_of_pages = 0; 
 	g_print("%s\n", "Initiating GnomeSword\n");
 	
@@ -85,9 +84,8 @@ void frontend_init(void)
 	settings.havebdb = check_for_module("BDB");
 
 	/*
-	 *  setup shortcut bar 
+	 *  setup sidebar 
 	 */
-	//gui_setup_shortcut_bar();
 	gui_create_sidebar(widgets.epaned);
 
 	/*
@@ -176,7 +174,7 @@ void frontend_display(void)
 	g_print("%s\n", "Displaying GnomeSword\n");
 	gui_show_main_window();
 
-	addHistoryItem(widgets.app, NULL, settings.currentverse);
+	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
 	settings.addhistoryitem = FALSE;
 	gui_change_verse(settings.currentverse);
 
