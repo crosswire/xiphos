@@ -1,3 +1,13 @@
+2005-01-28  terry <terry470@users.sf.net>
+
+	* made changes to gui:
+	  moved viewer below text pane
+	  moved dict below commentary/book notebook
+	  put text/parallel panes in a notebook with tabs
+	  put commentary/book panes in a notebook with tabs
+	  changed option menu in sidebar to buttons at the bottom
+	  changed dictionary entry and listview to a combo box entry
+
 2005-01-19  pierre <pierrebenz@users.sf.net>
 	* add personal commentary documentation files
 	* added documentation patch from Peter von Kaehne
