@@ -249,11 +249,11 @@ void initSWORD(SETTINGS *s)
 	MainFrm = s->app;	//-- save mainform for use latter
 	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
-	UTF8Display = new GTKutf8ChapDisp(lookup_widget(s->app, "htmlTexts"));
-	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"));
-	comp1Display = new InterlinearDisp(s->htmlInterlinear);
-	FPNDisplay = new EntryDisp(htmlComments);
-	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"));
+	UTF8Display = new GtkHTMLChapDisp(lookup_widget(s->app, "htmlTexts"),s);
+	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"),s);
+	comp1Display = new InterlinearDisp(s->htmlInterlinear,s);
+	FPNDisplay = new EntryDisp(htmlComments,s);
+	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"),s);
 	compages = 0;
 	dictpages = 0;
 
@@ -321,7 +321,8 @@ void initSWORD(SETTINGS *s)
 			}	//-- have at least one personl module
 		}
 	}
-	//-- interlinear
+	
+	//-- interlinear	
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++) {
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
@@ -474,6 +475,7 @@ void changeVerseComSWORD(void)
 	vkComm.AutoNormalize(1);
 }
 
+GtkHTMLStream *htmlstream;
 /*** please fix me ***/
 void updateIntDlg(SETTINGS *s)
 {	
@@ -483,6 +485,15 @@ void updateIntDlg(SETTINGS *s)
 		*textColor,
 		buf[500], 
 		*tmpkey;
+	gint utf8len;
+	
+	//-- setup gtkhtml widget
+	GtkHTMLStreamStatus status1;	
+	GtkHTML *html = GTK_HTML(settings->htmlInterlinear);
+	gboolean was_editable = gtk_html_get_editable (html);	
+	if (was_editable)
+	   gtk_html_set_editable (html, FALSE); 
+	htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
 	
 	interlinearMod0 = mainMgr1->Modules[s->Interlinear1Module];
 	interlinearMod1 = mainMgr1->Modules[s->Interlinear2Module];
@@ -490,46 +501,79 @@ void updateIntDlg(SETTINGS *s)
 	interlinearMod3 = mainMgr1->Modules[s->Interlinear4Module];
 	interlinearMod4 = mainMgr1->Modules[s->Interlinear5Module];
 	
-	beginHTML(settings->htmlInterlinear, TRUE);
+	
 	sprintf(buf,
 	 "<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table align=\"left\" valign=\"top\"><tr valign=\"top\" >",
 			s->bible_bg_color,
 			s->bible_text_color, s->link_color);
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 
 	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear1Module);		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear2Module);		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear3Module);		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear4Module);		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	sprintf(buf,"<td valign=\"top\" width=\"20%\" bgcolor=\"#f1f1f1\"><b>%s</b></td>",s->Interlinear5Module);		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	sprintf(buf,"%s","</tr>");		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
 	
 	/******      ******/
 	IntDisplay(s);
 	
 	sprintf(buf,"%s","</table></body></html>");		
 	utf8str = e_utf8_from_gtk_string(s->htmlInterlinear, buf);
-	displayHTML(s->htmlInterlinear, utf8str, strlen(utf8str));
-	endHTML(s->htmlInterlinear);	
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+	}
+	
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	gtk_html_set_editable(html, was_editable); 
 	sprintf(buf, "%d", s->intCurVerse);
-	gotoanchorHTML(s->htmlInterlinear, buf);
+	gtk_html_jump_to_anchor(html, buf);
 }
 
 /*
- * Sets up the interlinear html widget and calls changecomp1ModSWORD for each 
+ * Sets up the interlinear html widget for each 
  * interlinear module
  */
 void updateinterlinearpage(void)
@@ -537,22 +581,32 @@ void updateinterlinearpage(void)
 	gchar tmpBuf[256];
 	gchar *utf8str;
 	gint utf8len;
-
+	
 	if(havebible) {
 		interlinearMod0 = mainMgr1->Modules[settings->Interlinear1Module];
 		interlinearMod1 = mainMgr1->Modules[settings->Interlinear2Module];
 		interlinearMod2 = mainMgr1->Modules[settings->Interlinear3Module];
 		interlinearMod3 = mainMgr1->Modules[settings->Interlinear4Module];
 		interlinearMod4 = mainMgr1->Modules[settings->Interlinear5Module];
+		//-- setup gtkhtml widget
+		GtkHTMLStreamStatus status1;	
+		GtkHTML *html = GTK_HTML(settings->htmlInterlinear);
+		gboolean was_editable = gtk_html_get_editable (html);	
+		if (was_editable)
+		   gtk_html_set_editable (html, FALSE); 
+		htmlstream = gtk_html_begin_content(html, "text/html; charset=utf-8");
 		
-		beginHTML(settings->htmlInterlinear, TRUE);
+		
 		sprintf(tmpBuf,
 			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><table>",
 			settings->bible_bg_color,
 			settings->bible_text_color, settings->link_color);
 		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
+		
 		interlinearMod0->SetKey(current_verse);
 		interlinearMod1->SetKey(current_verse);
 		interlinearMod2->SetKey(current_verse);
@@ -565,9 +619,13 @@ void updateinterlinearpage(void)
 		interlinearMod4->Display();
 		sprintf(tmpBuf, "</table></body></html>");
 		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-		displayHTML(settings->htmlInterlinear, utf8str, utf8len);
-		endHTML(settings->htmlInterlinear);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+		}
+		
+		gtk_html_end(GTK_HTML(html), htmlstream, status1);
+		gtk_html_set_editable(html, was_editable); 		
 	}
 }
 

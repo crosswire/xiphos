@@ -625,7 +625,7 @@ GtkWidget *createGBS_Pane(SWModule *mod, SETTINGS *s,gint count, GBS_DATA *p_gbs
 	gtk_signal_connect (GTK_OBJECT (p_gbs->html), "button_release_event",
                       GTK_SIGNAL_FUNC (on_button_release_event), p_gbs);
 		      
-	SWDisplay *disp = new EntryDisp(p_gbs->html);
+	SWDisplay *disp = new EntryDisp(p_gbs->html,s);
 	mod->Disp(disp);
 	displays.insert(displays.begin(), disp);
 	addbooktoCTree(p_gbs->ctree, (gchar*)mod->Name());

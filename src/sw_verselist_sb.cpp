@@ -52,7 +52,7 @@
  externals
 ***********************************************************************************************/
 extern gint groupnum7;
-
+extern SETTINGS *settings;
 /***********************************************************************************************
  static
 ***********************************************************************************************/
@@ -152,8 +152,8 @@ void setupVerseListSBSWORD(GtkWidget *html_widget)
 	
 	verselistsbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
 	verselistsbMod     = NULL;
-	verselistsbDisplay = new  GtkHTMLEntryDisp(html_widget);
-	verselisttextsbDisplay = new  GTKutf8ChapDisp(html_widget);
+	verselistsbDisplay = new  GtkHTMLEntryDisp(html_widget,settings);
+	verselisttextsbDisplay = new  GtkHTMLChapDisp(html_widget,settings);
 	
 	for(it = verselistsbMgr->Modules.begin(); it != verselistsbMgr->Modules.end(); it++){
 		verselistsbMod = (*it).second;

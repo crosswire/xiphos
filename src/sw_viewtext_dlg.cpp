@@ -59,16 +59,17 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	GList *cbBook_items;
-
+	extern SETTINGS *settings;
+	
 	++numinst;
 	/* fill book combo box */
 	cbBook_items = getBibleBooksSWORD();
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
 	VTMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	VTMod     = NULL;
-	VTDisplay = new  GTKutf8ChapDisp(text);
-	//VTDisplay = new  GTKhtmlChapDisp(text);
+	VTDisplay = new  GtkHTMLChapDisp(text,settings);
 	glist = NULL;
+	
 	for(it = VTMgr->Modules.begin(); it != VTMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			VTMod = (*it).second;

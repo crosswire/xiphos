@@ -46,7 +46,7 @@ SWDisplay *VIDDisplay;  /* to display modules in view comm dialog */
 SWMgr *VIDMgr;  /* sword mgr for view comm dialog */
 SWModule *VIDMod;   /* module for view text dialog */
 
-
+extern SETTINGS *settings;
 /******************************************************************************
  *loadVIDmodSWORD - load a module into the information dialog
  ******************************************************************************/
@@ -73,7 +73,7 @@ void VIDsetupSWORD(GtkWidget *text)
 	
 	VIDMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgr
 	VIDMod     = NULL;
-	VIDDisplay = new  GtkHTMLEntryDisp(text);
+	VIDDisplay = new  GtkHTMLEntryDisp(text,settings);
 	for(it = VIDMgr->Modules.begin(); it != VIDMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			VIDMod = (*it).second;
