@@ -49,14 +49,14 @@ GtkWidget *cbEntry;
 GList *commList;
 GtkWidget *dlgViewComm;
 
-/****************************************************************************************
+/******************************************************************************
  * externs
- ****************************************************************************************/
-extern gchar current_verse[];
+ */
 
-/****************************************************************************************
+
+/******************************************************************************
  *callbacks
- ****************************************************************************************/
+ */
  
 /*
  *
@@ -81,7 +81,7 @@ void on_dlgViewComm_destroy(GtkObject * object, gpointer user_data)
  */
 void on_btnSync_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_goto_verse_viewcomm(current_verse);
+	backend_goto_verse_viewcomm(settings.currentverse);
 }
 
 /*
@@ -353,8 +353,8 @@ GtkWidget *create_dlgViewComm(SETTINGS * s)
 	g_list_free(commList);	
 	
 	gtk_entry_set_text(GTK_ENTRY(cbEntry), s->CommWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entry1), current_verse);
-	backend_goto_verse_viewcomm(current_verse);
+	gtk_entry_set_text(GTK_ENTRY(entry1), settings.currentverse);
+	backend_goto_verse_viewcomm(settings.currentverse);
 	g_list_free(commList);
 	isrunningVC = TRUE;
 	return dlgViewComm;

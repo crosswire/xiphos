@@ -62,8 +62,6 @@ extern gboolean isrunningSD,	/* is the view dictionary dialog runing */
  isrunningVT,			/* is the view text dialog runing */
  noteModified;			/* personal comments window changed */
 
-extern gchar current_verse[80];
-
 extern GList * options;
 
 /*** undock/dock interlinear page ***/
@@ -103,43 +101,6 @@ void on_print_item_activate(GtkMenuItem * menuitem, gchar * html)
 
 
 //----------------------------------------------------------------------------------------------
-void on_goto_reference_activate(GtkMenuItem * menuitem,
-				gpointer user_data)
-{
-	gchar *buf;
-
-	if (!GTK_EDITABLE(NEtext)->has_selection)
-		return;		//-- do we have a selection?
-	buf =
-	    gtk_editable_get_chars(GTK_EDITABLE(NEtext),
-				   GTK_EDITABLE(NEtext)->
-				   selection_start_pos,
-				   GTK_EDITABLE(NEtext)->
-				   selection_end_pos);
-	//change_verse(buf);
-
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-/*	GtkWidget *text;
-	gchar *buf;
-
-	text = lookup_widget(settings.app, "textCommentaries");
-	if (!GTK_EDITABLE(text)->has_selection)
-		return;		//-- do we have a selection?
-	buf =
-	    gtk_editable_get_chars(GTK_EDITABLE(text),
-				   GTK_EDITABLE(text)->selection_start_pos,
-				   GTK_EDITABLE(text)->selection_end_pos);
-
-	
-	change_verse(buf);*/
-}
-
-//----------------------------------------------------------------------------------------------
 void
 on_about_this_module5_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
@@ -148,49 +109,6 @@ on_about_this_module5_activate(GtkMenuItem * menuitem,
 	//display_about_module_dialog(getmodnameSWORD(2),FALSE);
 }
 
-
-//----------------------------------------------------------------------------------------------
-void
-on_lookup_selection_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-/*	GtkWidget *entry, *text;
-	gchar *buf;
-
-	entry = lookup_widget(settings.app, "dictionarySearchText");
-	text = lookup_widget(settings.app, "moduleText");
-	if (GTK_EDITABLE(text)->has_selection) {
-		buf =
-		    gtk_editable_get_chars(GTK_EDITABLE(text),
-					   GTK_EDITABLE(text)->
-					   selection_start_pos,
-					   GTK_EDITABLE(text)->
-					   selection_end_pos);
-		dictSearchTextChangedSWORD(buf);
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-	}*/
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_lookup_selection2_activate(GtkMenuItem * menuitem,
-			      gpointer user_data)
-{
-/*	GtkWidget *entry, *text;
-	gchar *buf;
-
-	entry = lookup_widget(settings.app, "dictionarySearchText");
-	text = lookup_widget(settings.app, "textCommentaries");
-	if (GTK_EDITABLE(text)->has_selection) {
-		buf =
-		    gtk_editable_get_chars(GTK_EDITABLE(text),
-					   GTK_EDITABLE(text)->
-					   selection_start_pos,
-					   GTK_EDITABLE(text)->
-					   selection_end_pos);
-		gtk_entry_set_text(GTK_ENTRY(entry), buf);
-		dictSearchTextChangedSWORD(buf);
-	}*/
-}
 
 
 //----------------------------------------------------------------------------------------------
@@ -350,7 +268,7 @@ void on_changeint4mod_activate(GtkMenuItem * menuitem,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear4Module, "%s", modName);
-	//change_verse(current_verse);
+	//change_verse(settings.currentverse);
 	if (settings.dockedInt)
 		update_interlinear_page(&settings);
 	else
@@ -370,7 +288,7 @@ void on_changeint5mod_activate(GtkMenuItem * menuitem,
 					     (gchar *) user_data);
 //      g_warning(modName);
 	sprintf(settings.Interlinear5Module, "%s", modName);
-	//change_verse(current_verse);
+	//change_verse(settings.currentverse);
 	if (settings.dockedInt)
 		update_interlinear_page(&settings);
 	else

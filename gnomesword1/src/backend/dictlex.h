@@ -38,8 +38,8 @@ extern "C" {
 void backend_newDisplayDL(GtkWidget *html, 
 		char *bookname, 
 		SETTINGS *s);
-void backend_setupDL(SETTINGS *s);
-void backend_shutdownDL(void);
+void backend_setup_dictlex(SETTINGS *s);
+void backend_shutdown_dictlex(void);
 void backend_displayinDL(gchar *modname, gchar *key);
 GList* backend_fillDictKeysDL(char *modname, gint count);
 void backend_dictentryTextChangedDL(gchar *modname, char *mytext);	

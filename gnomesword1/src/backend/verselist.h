@@ -34,7 +34,7 @@ extern "C" {
 			      gchar * vlist, SETTINGS * s);
 	void backend_setup_verselist(GtkWidget * html_widget,
 				     SETTINGS * s);
-	void backend_shut_down_verselist(void);
+	void backend_shutdown_verselist(void);
 	void backend_verselist_change_verse(SETTINGS * s, gchar * url);
 
 #ifdef __cplusplus
