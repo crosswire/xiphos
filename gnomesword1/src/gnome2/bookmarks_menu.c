@@ -1226,8 +1226,8 @@ void gui_create_bookmark_menu(void)
 	
 	menu.reorder = pmBookmarkTree_uiinfo[9].widget;
 
-	menu.bibletime = pmBookmarkTree_uiinfo[10].widget;
-	menu.rr_submenu = pmBookmarkTree_uiinfo[11].widget;
+	menu.bibletime = pmBookmarkTree_uiinfo[11].widget;
+	menu.rr_submenu = pmBookmarkTree_uiinfo[12].widget;
 
 	menu.remove = rr_menu_uiinfo[0].widget;
 	menu.restore = rr_menu_uiinfo[2].widget;
