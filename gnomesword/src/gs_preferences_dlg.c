@@ -43,6 +43,7 @@
 #include "gs_gnomesword.h"
 #include "sw_properties.h"
 #include "support.h"
+#include "gs_shortcutbar.h"
 
 GtkWidget *notebook7;
 extern gchar *tmpcolor;
@@ -174,7 +175,7 @@ static void applyoptions(SETTINGS * s)
 	if (updatehtml)
 		applyfontcolorandsizeSWORD();
 	if (updateSB)
-		updateshortcutbarSWORD();
+		update_shortcut_bar(s);
 	updatehtml = FALSE;
 	updateSB = FALSE;
 }
@@ -270,6 +271,9 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowDLtabs"))->active;
 	s->versestyle =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "checkbutton9"))->active;
+	s->showfavoritesgroup =
+	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowFavoritesgroup"))->
+	    active;   
 	s->showtextgroup =
 	    GTK_TOGGLE_BUTTON(lookup_widget(d, "cbtnShowTextgroup"))->
 	    active;
@@ -307,8 +311,6 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 					     (lookup_widget
 					      (d, "sbtnUpPaneHight")));
-
-
 	saveconfig();
 	applyoptions(s);
 
@@ -461,6 +463,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	GtkWidget *vbox41;
 	GtkWidget *frame24;
 	GtkWidget *vbox29;
+	GtkWidget *cbtnShowFavoritesgroup;
 	GtkWidget *cbtnShowTextgroup;
 	GtkWidget *cbtnShowComGroup;
 	GtkWidget *cbtnShowDictGroup;
@@ -1079,6 +1082,18 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox29);
 	gtk_container_add(GTK_CONTAINER(frame24), vbox29);
+
+	cbtnShowFavoritesgroup =
+	    gtk_check_button_new_with_label(_("Show Favorites Group"));
+	gtk_widget_ref(cbtnShowFavoritesgroup);
+	gtk_object_set_data_full(GTK_OBJECT(dlgSettings),
+				 "cbtnShowFavoritesgroup", cbtnShowFavoritesgroup,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(cbtnShowFavoritesgroup);
+	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowFavoritesgroup, FALSE,
+			   FALSE, 0);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnShowFavoritesgroup),
+				     s->showfavoritesgroup);
 
 	cbtnShowTextgroup =
 	    gtk_check_button_new_with_label(_("Show Bible Text Group"));
@@ -1755,7 +1770,10 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			   GINT_TO_POINTER(0));
 	gtk_signal_connect(GTK_OBJECT(cbtnShowDLtabs), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
-			   GINT_TO_POINTER(0));
+			   GINT_TO_POINTER(0));			   
+	gtk_signal_connect(GTK_OBJECT(cbtnShowFavoritesgroup), "toggled",
+			   GTK_SIGNAL_FUNC(on_button_toggled),
+			   GINT_TO_POINTER(1));		   
 	gtk_signal_connect(GTK_OBJECT(cbtnShowTextgroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_button_toggled),
 			   GINT_TO_POINTER(1));

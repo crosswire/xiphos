@@ -150,6 +150,8 @@ gboolean loadconfig(void)
 	    atoi(settingsInfo["User Options"]["formatpercom"].c_str());
 	settings->showshortcutbar =
 	    atoi(settingsInfo["User Options"]["showshortcutbar"].c_str());
+	settings-> showfavoritesgroup=
+	    atoi(settingsInfo["User Options"]["showfavogroup"].c_str());
 	settings->showtextgroup =
 	    atoi(settingsInfo["User Options"]["showtextgroup"].c_str());
 	settings->showcomgroup =
@@ -305,6 +307,13 @@ gboolean saveconfig(void)
 			settingsInfo["User Options"]["showshortcutbar"] =
 			    "0";
 
+		if (settings->showfavoritesgroup)
+			settingsInfo["User Options"]["showfavogroup"] =
+			    "1";
+		else
+			settingsInfo["User Options"]["showfavogroup"] =
+			    "0";
+
 		if (settings->showtextgroup)
 			settingsInfo["User Options"]["showtextgroup"] =
 			    "1";
@@ -446,6 +455,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["footnotes"] = "0";
 	settingsInfo["User Options"]["formatpercom"] = "0";
 	settingsInfo["User Options"]["showshortcutbar"] = "1";
+	settingsInfo["User Options"]["showfavogroup"] = "0";
 	settingsInfo["User Options"]["showtextgroup"] = "1";
 	settingsInfo["User Options"]["showcomgroup"] = "1";
 	settingsInfo["User Options"]["showdictgroup"] = "1";
@@ -519,6 +529,7 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["autosavepersonalcomments"] = "1";
 	settingsInfo["User Options"]["formatpercom"] = "0";
 	settingsInfo["User Options"]["showshortcutbar"] = "1";
+	settingsInfo["User Options"]["showfavogroup"] = "1";
 	settingsInfo["User Options"]["showtextgroup"] = "1";
 	settingsInfo["User Options"]["showcomgroup"] = "1";
 	settingsInfo["User Options"]["showdictgroup"] = "1";

@@ -47,9 +47,24 @@
 
 extern gchar *gSwordDir;
 extern SETTINGS *settings;
-list <string> sbfiles;
+list <string> sbfiles;	
 
-GList *loadshortcutbarSW(gchar *filename)
+void
+save_iconsizeSW(gchar *filename, gchar *large_icons)
+{
+	gchar 
+		conffile[256];
+	gint 
+		j=0;
+	
+	sprintf(conffile,"%s/shortcutbar/%s", gSwordDir, filename);	
+	SWConfig sbInfo(conffile);
+	sbInfo["Shortcut Info"]["Large Icon"] = large_icons;	
+	sbInfo.Save();
+}
+
+
+GList *loadshortcutbarSW(gchar *filename, gchar *group_name, gchar *use_largeicons)
 {
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
@@ -63,10 +78,15 @@ GList *loadshortcutbarSW(gchar *filename)
 	
 	list = NULL;
 	sprintf(conffile,"%s/shortcutbar/%s", gSwordDir, filename);
+	
+	SWConfig sbInfo(conffile);
+	sprintf(group_name,"%s", sbInfo["Shortcut Info"]["Group Name"].c_str());
+	sprintf(use_largeicons,"%s",  sbInfo["Shortcut Info"]["Large Icon"].c_str());	
+	sbInfo.Save();
+	
 	sbconf = new SWConfig(conffile);	
 	if ((sit = sbconf->Sections.find("ROOT")) != sbconf->Sections.end()) {
-		if ((eit = (*sit).second.begin()) != (*sit).second.end()) {	// Currently supports only ONE topsection per file because on save, each topsection designates which file to rewrite
-			//list = g_list_append(list,(char*)(*eit).second.c_str());
+		if ((eit = (*sit).second.begin()) != (*sit).second.end()) {	
 			for(eit = (*sit).second.begin(); eit != (*sit).second.end(); eit++){					
 				buf = g_strdup((char*)(*eit).second.c_str());
 				list = g_list_append(list,buf);
@@ -79,7 +99,7 @@ GList *loadshortcutbarSW(gchar *filename)
 	
 
 void
-saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list)
+saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_icons)
 {	
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
@@ -92,6 +112,12 @@ saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list)
 	
 	sprintf(conffile,"%s/shortcutbar/%s", gSwordDir, filename);
 	unlink(conffile);
+	
+	SWConfig sbInfo(conffile);
+	sbInfo["Shortcut Info"]["Group Name"] = group_name;
+	sbInfo["Shortcut Info"]["Large Icon"] = large_icons;	
+	sbInfo.Save();
+	
 	sbconf = new SWConfig(conffile);
 	emap = sbconf->Sections["ROOT"];
 	while (list != NULL) { 

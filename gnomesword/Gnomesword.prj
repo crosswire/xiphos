@@ -138,7 +138,9 @@ module.source.files=\
 	sw_search.cpp\
 	sw_search.h\
 	sw_verselist_sb.h\
-	sw_verselist_sb.cpp
+	sw_verselist_sb.cpp\
+	sw_shortcutbar.cpp\
+	sw_shortcutbar.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
