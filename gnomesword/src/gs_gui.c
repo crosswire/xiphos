@@ -67,8 +67,8 @@ gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 	"gnomesword/book-un.png",
-	"gnomesword/book-un.png",
-	"gnomesword/book-un.png",
+	"gnomesword/book-bl.png",
+	"gnomesword/book-green.png",
 	"gnomesword/book-gr.png",
 	"gnomesword/book-he.png"
 };
