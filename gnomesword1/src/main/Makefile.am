@@ -7,8 +7,6 @@ noinst_LIBRARIES = libmain.a
 libmain_a_SOURCES =  \
     bibletext.c \
     bibletext.h \
-    bookmarks.c \
-    bookmarks.h \
     commentary.c \
     commentary.h \
     dictlex.c \

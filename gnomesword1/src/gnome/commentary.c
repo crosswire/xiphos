@@ -170,17 +170,17 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
  *   void
  */
 
-void gui_set_comm_frame_label(void)
+void gui_set_comm_frame_label(COMM_DATA * c)
 {
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
 	 */
 	if (settings.comm_tabs)
-		gtk_frame_set_label(GTK_FRAME(cur_c->frame), NULL);
+		gtk_frame_set_label(GTK_FRAME(c->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(cur_c->frame),
-				    cur_c->mod_name);
+		gtk_frame_set_label(GTK_FRAME(c->frame),
+				    c->mod_name);
 
 }
 
@@ -218,7 +218,7 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 		gui_add_new_comm_pane(c);
 
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings.comm_tabs;
-	gui_set_comm_frame_label();
+	gui_set_comm_frame_label(c);
 
 	gui_change_window_title(c->mod_name);
 	/*
@@ -588,6 +588,8 @@ void gui_setup_commentary(GList * mods)
 		c = g_new(COMM_DATA, 1);
 		c->cgs = g_new(COMM_GLOBALS, 1);
 		c->frame = NULL;
+		c->ec = NULL;
+		c->dialog = NULL;
 		c->mod_name = modname;
 		c->modnum = count;
 		c->search_string = NULL;

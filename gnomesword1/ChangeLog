@@ -1,7 +1,20 @@
+2003-02-21  Terry Biggs <tbiggs@users.sf.net>
+
+	* added show splash screen button to preferences dialog
+
+2003-02-21  Terry Biggs <tbiggs@users.sf.net>
+
+	* removed main/bookmark.c and main/bookmark.h
+
+2003-02-18  Terry Biggs <tbiggs@users.sf.net>
+
+	* bookmarks changed to xml (compatible with BibleTime)
+
 2003-02-10  Terry Biggs <tbiggs@users.sf.net>
 
 	* changed popup menu in gbs pane to new style
-	* added popup menu to gbs dialog
+	  to match Bible and commentary popups
+	* added popup menu to gbs dialog 
 
 2003-02-08  Terry Biggs <tbiggs@users.sf.net>
 
