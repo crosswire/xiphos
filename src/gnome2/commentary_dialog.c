@@ -734,31 +734,11 @@ static GtkWidget *create_nav_toolbar(DIALOG_DATA * c)
 
 /****************************************************************************/
 	GtkWidget *hbox3;
-//	GtkWidget *sync_button;
 	GtkWidget *image;
 	GtkWidget *separatortoolitem;
-/*	
-	GtkWidget *button12;
-	GtkWidget *image3;
-	GtkWidget *button13;
-	GtkWidget *image4;
-	GtkWidget *separatortoolitem4;
-*/
-//	GtkWidget *comboboxentry4;
-	//GtkWidget *separatortoolitem6;
-//	GtkWidget *comboboxentry5;
-	//GtkWidget *separatortoolitem5;
-//	GtkWidget *comboboxentry6;
-	//GtkWidget *separatortoolitem7;
-	//GtkWidget *entry1;
 	GtkListStore *store;
 	GtkCellRenderer *renderer;
-	//GtkListStore *book_store;
-//	GtkListStore *chapter_store;
-//	GtkListStore *verse_store;
-/****************************************************************************/
-		
-/****************************************************************************/
+	
 	hbox3 = gtk_hbox_new(FALSE, 2);
 	gtk_widget_show(hbox3);
 	//gtk_box_pack_start(GTK_BOX(), hbox3, FALSE, FALSE, 0);

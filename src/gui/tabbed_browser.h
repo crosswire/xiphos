@@ -62,7 +62,9 @@ void gui_open_tabs(void);
 
 void gui_notebook_main_setup(void);
 void gui_notebook_main_shutdown(void);
-
+void gui_notebook_main_switch_page(GtkNotebook * notebook,
+					GtkNotebookPage * page,
+					gint page_num, GList **tl);
 #ifdef __cplusplus
 }
 #endif

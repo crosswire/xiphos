@@ -550,6 +550,8 @@ void create_mainwindow(void)
 	 * nav toolbar
 	 */
 	nav_toolbar = gui_create_nav_toolbar(vboxMain);
+	gtk_box_pack_start(GTK_BOX(vboxMain), nav_toolbar, FALSE,
+			   FALSE, 0);
 	/* gtk_box_pack_start(GTK_BOX(vboxMain),nav_toolbar,FALSE,FALSE,0); */
 	/*
 	 * end nav toolbar
@@ -730,28 +732,6 @@ void create_mainwindow(void)
 	/*
 	 * end  dict/lex
 	 */
-
-	/*
-	 * gbs notebook
-	 */
-
-/*	widgets.notebook_gbs = gtk_notebook_new();
-	gtk_widget_show(widgets.notebook_gbs);
-	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
-			  widgets.notebook_gbs);
-	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_gbs, GTK_CAN_FOCUS);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_gbs), TRUE);
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
-				   (widgets.notebook_gbs), FALSE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_gbs));
-	gtk_notebook_set_show_border(GTK_NOTEBOOK
-				     (widgets.notebook_gbs), FALSE);
-*/	
-	/*
-	 * end gbs
-	 */
-
 
 	widgets.appbar = gnome_appbar_new(FALSE, TRUE,
 					  GNOME_PREFERENCES_NEVER);
