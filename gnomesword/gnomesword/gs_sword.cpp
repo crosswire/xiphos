@@ -129,7 +129,7 @@ gboolean autoscroll = true; /* commentary module auto scroll when true -- in syn
 
 gint answer; /* do we want to save studybad file on shutdown */
 gchar com_key[80] ="Rom 8:28"; /* current commentary key */
-gint    groupnum1 = 0,
+gint	groupnum1 = 0,
         groupnum2 = 0,
         groupnum3 = 0,
         groupnum4 = 0,
@@ -399,7 +399,7 @@ initSWORD(GtkWidget *mainform)
 			}
 		}
 	}
-#else  /* USE_GTKHTML */
+#else  /* !USE_GTKHTML */
 	//-- interlinear 1
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++){
 		comp1Mod = (*it).second;
@@ -413,7 +413,13 @@ initSWORD(GtkWidget *mainform)
 				comp1Mod->Disp(comp1Display);
 			}	
 		}
-	}	
+	} 
+	if(havebible) {
+	        it = mainMgr1->Modules.find(settings->Interlinear1Module); //-- iterate through the modules until we find modName - modName was passed by the callback
+	        if (it != mainMgr1->Modules.end()) { //-- if we find the module	
+		        comp1Mod = (*it).second;  //-- change current module to new module		       
+	        }
+	}
 	//-- interlinear 2	
 	for (it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
 		comp2Mod = (*it).second;
@@ -428,6 +434,13 @@ initSWORD(GtkWidget *mainform)
 			}	
 		}
 	}
+	
+	if(havebible) {
+	        it = mainMgr2->Modules.find(settings->Interlinear2Module); //-- iterate through the modules until we find modName - modName was passed by the callback
+	        if (it != mainMgr2->Modules.end()) { //-- if we find the module	
+		        comp2Mod = (*it).second;  //-- change current module to new module		       
+	        }
+	}
 	//-- interlinear 3	
 	for (it = mainMgr3->Modules.begin(); it != mainMgr3->Modules.end(); it++){
 		comp3Mod = (*it).second;
@@ -441,6 +454,12 @@ initSWORD(GtkWidget *mainform)
 				comp3Mod->Disp(comp3Display);
 			}	
 		}
+	}
+	if(havebible) {
+	        it = mainMgr3->Modules.find(settings->Interlinear3Module); //-- iterate through the modules until we find modName - modName was passed by the callback
+	        if (it != mainMgr3->Modules.end()) { //-- if we find the module	
+		        comp3Mod = (*it).second;  //-- change current module to new module		       
+	        }
 	}
 #endif /* USE_GTKHTML */
 }
