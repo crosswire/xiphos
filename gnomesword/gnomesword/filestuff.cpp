@@ -476,6 +476,7 @@ readsettings(void)
 	 return(settings); //-- return settings structure to initSword() in GnomeSword.cpp	
 }
 
+
 //----------------------------------------------------------------------------------------------
 SETTINGS                    //-- create settings structure and settings.cfg file
 createsettings(void)

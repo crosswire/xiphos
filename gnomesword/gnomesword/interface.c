@@ -2370,59 +2370,6 @@ create_wdwEditBookmarks (void)
   return wdwEditBookmarks;
 }
 
-static GnomeUIInfo edit2_menu_uiinfo[] =
-{
-  GNOMEUIINFO_MENU_CUT_ITEM (on_cut1_activate, NULL),
-  GNOMEUIINFO_MENU_COPY_ITEM (on_copy4_activate, NULL),
-  GNOMEUIINFO_MENU_PASTE_ITEM (on_paste1_activate, NULL),
-  GNOMEUIINFO_END
-};
-
-static GnomeUIInfo pmEditnote_uiinfo[] =
-{
-  GNOMEUIINFO_SEPARATOR,
-  GNOMEUIINFO_MENU_EDIT_TREE (edit2_menu_uiinfo),
-  GNOMEUIINFO_END
-};
-
-GtkWidget*
-create_pmEditnote (void)
-{
-  GtkWidget *pmEditnote;
-
-  pmEditnote = gtk_menu_new ();
-  gtk_object_set_data (GTK_OBJECT (pmEditnote), "pmEditnote", pmEditnote);
-  gnome_app_fill_menu (GTK_MENU_SHELL (pmEditnote), pmEditnote_uiinfo,
-                       NULL, FALSE, 0);
-
-  gtk_widget_ref (pmEditnote_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "separator13",
-                            pmEditnote_uiinfo[0].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (pmEditnote_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "edit2",
-                            pmEditnote_uiinfo[1].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (edit2_menu_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "cut1",
-                            edit2_menu_uiinfo[0].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (edit2_menu_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "copy4",
-                            edit2_menu_uiinfo[1].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  gtk_widget_ref (edit2_menu_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "paste1",
-                            edit2_menu_uiinfo[2].widget,
-                            (GtkDestroyNotify) gtk_widget_unref);
-
-  return pmEditnote;
-}
-
 GtkWidget*
 create_InfoBox (void)
 {
@@ -3913,8 +3860,18 @@ create_listeditor (void)
   return listeditor;
 }
 
-static GnomeUIInfo pmNE_uiinfo[] =
+static GnomeUIInfo edit2_menu_uiinfo[] =
 {
+  GNOMEUIINFO_MENU_CUT_ITEM (on_cut1_activate, NULL),
+  GNOMEUIINFO_MENU_COPY_ITEM (on_copy4_activate, NULL),
+  GNOMEUIINFO_MENU_PASTE_ITEM (on_paste1_activate, NULL),
+  GNOMEUIINFO_END
+};
+
+static GnomeUIInfo pmEditnote_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_MENU_EDIT_TREE (edit2_menu_uiinfo),
   {
     GNOME_APP_UI_ITEM, "Bold",
     "Make selected text bold",
@@ -3962,51 +3919,76 @@ static GnomeUIInfo pmNE_uiinfo[] =
 };
 
 GtkWidget*
-create_pmNE (void)
+create_pmEditnote (void)
 {
-  GtkWidget *pmNE;
+  GtkWidget *pmEditnote;
 
-  pmNE = gtk_menu_new ();
-  gtk_object_set_data (GTK_OBJECT (pmNE), "pmNE", pmNE);
-  gnome_app_fill_menu (GTK_MENU_SHELL (pmNE), pmNE_uiinfo,
+  pmEditnote = gtk_menu_new ();
+  gtk_object_set_data (GTK_OBJECT (pmEditnote), "pmEditnote", pmEditnote);
+  gnome_app_fill_menu (GTK_MENU_SHELL (pmEditnote), pmEditnote_uiinfo,
                        NULL, FALSE, 0);
 
-  gtk_widget_ref (pmNE_uiinfo[0].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "boldNE",
-                            pmNE_uiinfo[0].widget,
+  gtk_widget_ref (pmEditnote_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "separator19",
+                            pmEditnote_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  gtk_widget_ref (pmNE_uiinfo[1].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "italicNE",
-                            pmNE_uiinfo[1].widget,
+  gtk_widget_ref (pmEditnote_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "edit2",
+                            pmEditnote_uiinfo[1].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  gtk_widget_ref (pmNE_uiinfo[2].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "referenceNE",
-                            pmNE_uiinfo[2].widget,
+  gtk_widget_ref (edit2_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "cut1",
+                            edit2_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  gtk_widget_ref (pmNE_uiinfo[3].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "underlineNE",
-                            pmNE_uiinfo[3].widget,
+  gtk_widget_ref (edit2_menu_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "copy4",
+                            edit2_menu_uiinfo[1].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  gtk_widget_ref (pmNE_uiinfo[4].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "greekNE",
-                            pmNE_uiinfo[4].widget,
+  gtk_widget_ref (edit2_menu_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "paste1",
+                            edit2_menu_uiinfo[2].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  gtk_widget_ref (pmNE_uiinfo[5].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "separator18",
-                            pmNE_uiinfo[5].widget,
+  gtk_widget_ref (pmEditnote_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "boldNE",
+                            pmEditnote_uiinfo[2].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  gtk_widget_ref (pmNE_uiinfo[6].widget);
-  gtk_object_set_data_full (GTK_OBJECT (pmNE), "goto_reference",
-                            pmNE_uiinfo[6].widget,
+  gtk_widget_ref (pmEditnote_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "italicNE",
+                            pmEditnote_uiinfo[3].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
-  return pmNE;
+  gtk_widget_ref (pmEditnote_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "referenceNE",
+                            pmEditnote_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmEditnote_uiinfo[5].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "underlineNE",
+                            pmEditnote_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmEditnote_uiinfo[6].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "greekNE",
+                            pmEditnote_uiinfo[6].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmEditnote_uiinfo[7].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "separator18",
+                            pmEditnote_uiinfo[7].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmEditnote_uiinfo[8].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmEditnote), "goto_reference",
+                            pmEditnote_uiinfo[8].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  return pmEditnote;
 }
 
 static GnomeUIInfo pmComments_uiinfo[] =
@@ -4014,7 +3996,7 @@ static GnomeUIInfo pmComments_uiinfo[] =
   {
     GNOME_APP_UI_ITEM, "Goto Reference",
     "Go to the selected reference",
-    on_goto_reference_activate, NULL, NULL,
+    on_goto_reference2_activate, NULL, NULL,
     GNOME_APP_PIXMAP_NONE, NULL,
     0, 0, NULL
   },
