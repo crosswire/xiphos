@@ -34,6 +34,7 @@
 #include "filestuff.h"
 #include "menustuff.h"
 #include "GnomeSword.h"
+#include "dialogs.h"
 
 #define BUFFER_SIZE 8192	//-- input buffer size	
 //extern SETTINGS *settings;
@@ -428,3 +429,9 @@ createsettings(void)
 	return(settings);                             //-- return settings structure to readsettings(void)
 }
 
+//---------------------------------------------------------------------------------------------
+void
+savelist(GtkWidget *list,gint howmany)
+{
+
+}
