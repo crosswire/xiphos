@@ -79,13 +79,22 @@ extern gint
 **********************************************************************************
 *********************************************************************************/
 
+void
+on_mainwindow_draw                     (GtkWidget       *widget,
+                                        GdkRectangle    *area,
+                                        gpointer         user_data)
+{
+	settings->gs_width = area->width;
+	settings->gs_hight = area->height;
+	g_warning("gs hight = %d\ngs width = %d", settings->gs_hight,settings->gs_width);
+}
+
 //----------------------------------------------------------------------------------------------
 void
 on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-
 	GTK_CHECK_MENU_ITEM(strongsnum)->active = togglebutton->active;	//-- change menu check item to match button
-	strongsSWORD(0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
+	globaloptionsSWORD("Strong's Numbers", 0, togglebutton->active);	//-- trun strongs numbers on and off(gs_sword.cpp)	
 }
 
 //----------------------------------------------------------------------------------------------

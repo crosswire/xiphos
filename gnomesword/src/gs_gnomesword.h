@@ -100,6 +100,7 @@ struct _settings {
 		upperpane_hight,
 		biblepane_width,
 		gs_width,
+		tmp_width,
 		gs_hight,	
 		notebook3page,	//-- notebook 3 page number
 		searchbargroup,      //-- number of search group in shortcut bar
@@ -112,12 +113,14 @@ struct _settings {
 		morphs,
 		hebrewpoints,
 		cantillationmarks,
+		greekaccents,
 	        footnotes,
 		strongsint,	
 		morphsint,
 		hebrewpointsint,
 		cantillationmarksint,
 	        footnotesint,
+		greekaccentsint,
 	        versestyle,
 	        interlinearpage,
 	        autosavepersonalcomments,

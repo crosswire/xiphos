@@ -35,15 +35,11 @@
 #include <swmgr.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-//#include <gbfhtmlhref.h>
-#include "gbfhtmlhref.h"
+#include <gbfhtmlhref.h>
 #include <rwphtml.h>
 #include <thmlhtml.h>
-//#include <thmlhtmlhref.h>
-#include "thmlhtmlhref.h"
-//#include <latin1utf8.h>
-#include "sw_latin1utf8.h"
-
+#include <thmlhtmlhref.h>
+#include <latin1utf8.h>
 #ifndef __GNUC__
 #include <io.h>
 #else
@@ -69,7 +65,7 @@ void initRenderFiltersUTIL(void)
 	thmltohtml = new ThMLHTMLHREF();	/* sword renderfilter thml to html */
 	rwptohtml = new RWPHTML();  /* sword renderfilter rwp to html */
 	gbftohtml = new GBFHTMLHREF();  /* sword renderfilter gbf to html */
-	lattoutf8 = new SW_Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
+	lattoutf8 = new Latin1UTF8();  /* sword renderfilter latin1 to utf8 */
 }
 
 /********************************************************************************************** 
