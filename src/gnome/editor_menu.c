@@ -947,7 +947,7 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(spell);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), spell);
 	
-#ifdef USE_PSPELL	
+#ifdef USE_SPELL	
 	gtk_widget_set_sensitive(spell, 1);
 #else
 	gtk_widget_set_sensitive(spell, 0);
@@ -1054,10 +1054,10 @@ GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd)
 	gtk_signal_connect(GTK_OBJECT(paste), "activate",
 			   GTK_SIGNAL_FUNC(on_paste_activate), ecd);
 	
-#ifdef USE_PSPELL
+#ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(spell), "activate",
 			   GTK_SIGNAL_FUNC(spell_check_cb), ecd);
-#endif	/* USE_PSPELL */
+#endif	/* USE_SPELL */
 	
 	gtk_signal_connect(GTK_OBJECT(undo), "activate",
 			   GTK_SIGNAL_FUNC(on_undo_activate), ecd);

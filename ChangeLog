@@ -1,10 +1,15 @@
+2002-07-30  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added main/spell_ispell.c for ispell support
+	* ispell support requires ./configure --enable-with_ispell
+
 2002-07-29  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added main/spell_pspell.c and main/spell.h
 	* moved widgets from settings structure to
 	  a widgets structure in gui/gnomesword.h
 	* combined backend_first_init() and backend_init_sword()
-	
+	  into backend_init()	
 	
 
 2002-07-27  Terry Biggs <tbiggs@users.sourceforge.net>

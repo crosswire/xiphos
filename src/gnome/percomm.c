@@ -924,7 +924,7 @@ static void create_percomm_pane(PC_DATA *p)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->ec->btn_spell);
 	
-#ifdef USE_PSPELL	
+#ifdef USE_SPELL	
 	gtk_widget_set_sensitive(p->ec->btn_spell, 1);
 #else
 	gtk_widget_set_sensitive(p->ec->btn_spell, 0);
@@ -1023,7 +1023,7 @@ static void create_percomm_pane(PC_DATA *p)
 	gtk_signal_connect(GTK_OBJECT(p->ec->btn_replace), "clicked",
 			   GTK_SIGNAL_FUNC(on_btn_replace_clicked),
 			   p->ec);
-#ifdef USE_PSPELL			   
+#ifdef USE_SPELL			   
 	gtk_signal_connect(GTK_OBJECT(p->ec->btn_spell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb), p->ec);
 #endif	
