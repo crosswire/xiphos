@@ -345,10 +345,6 @@ void gui_display_devotional_in_sidebar(void)
 	 * Print it out in a nice format.
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
-	/*gtk_option_menu_set_history(GTK_OPTION_MENU
-	   (sidebar.optionmenu1), 4); */
-	gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_sidebar), 4);
 	main_sidebar_display_dictlex(settings.devotionalmod, buf);
 }
 
