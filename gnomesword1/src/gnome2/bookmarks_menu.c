@@ -58,6 +58,8 @@ BOOKMARK_MENU menu;
 
 gboolean bookmarks_changed;
 
+extern GtkTreeView *bookmark_tree;
+
 static void save_bookmarks(GtkMenuItem * menuitem, gpointer user_data);
 
 /******************************************************************************
@@ -305,33 +307,28 @@ static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent,
  *   void
  */
 
-static void goto_bookmark(gchar * mod_name, gchar * key)
+static void goto_bookmark(gchar * url)
 {
 	gint module_type;
-	gchar *url = g_strdup_printf("sword://%/%s",mod_name,key);
-
+	
 	if (use_dialog) {
-		module_type = get_mod_type(mod_name);
+		module_type = main_get_mod_type_from_url(url);
 		switch (module_type) {
 		case TEXT_TYPE:
-			//main_bibletext_dialog_goto_bookmark(mod_name, key);
+			main_bibletext_dialog_goto_bookmark(url);
 			break;
 		case COMMENTARY_TYPE:
-			gui_commentary_dialog_goto_bookmark(mod_name,
-							    key);
+			//gui_commentary_dialog_goto_bookmark(mod_name, key);
 			break;
 		case DICTIONARY_TYPE:
-			gui_dictionary_dialog_goto_bookmark(mod_name,
-							    key);
+			//gui_dictionary_dialog_goto_bookmark(mod_name, key);
 			break;
 		case BOOK_TYPE:
-			gui_gbs_dialog_goto_bookmark(mod_name, key);
+			//gui_gbs_dialog_goto_bookmark(mod_name, key);
 			break;
 		}
 	} else
 		main_url_handler(url);
-	g_free(url);
-		//gui_change_module_and_key(mod_name, key);
 }
 
 
@@ -427,18 +424,26 @@ static void on_allow_reordering_activate(GtkMenuItem * menuitem,
 static void on_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {	
 	GtkTreeIter selected;
-	gchar *caption = NULL;
 	gchar *key = NULL;
-	gchar *module = NULL;
+	gchar *module = NULL;	
+	gchar *url = NULL;
+	
+	GtkTreeSelection* selection= gtk_tree_view_get_selection(bookmark_tree);
 	
 	use_dialog = TRUE; 
-	
-	if (gtk_tree_selection_get_selected(current_selection, NULL, &selected)) {
-		gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
-				   2, &caption, 3, &key, 4, &module, -1);
-		goto_bookmark(module, key);
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) {
+		gtk_tree_model_get(GTK_TREE_MODEL(model), 
+					&selected,
+					3, &key, 
+					4, &module, 
+					-1);
+		url = g_strdup_printf("bookmark://%s/%s",module,key);
+		main_url_handler(url, TRUE);
+		g_free(url);
 	}
 	use_dialog = FALSE;
+	g_free(module);
+	g_free(key);
 }
 
 

@@ -73,15 +73,15 @@ void main_dialog_update_controls(TEXT_DATA * vt);
 void main_bible_dialog_display(TEXT_DATA * t);
 void main_bible_dialog_passage_changed(TEXT_DATA * t, gchar * passage);
 void main_sync_bibletext_dialog_with_main(TEXT_DATA * vt);
-//void gui_keep_bibletext_dialog_in_sync(gchar * key);
-//void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key);
-//void gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt);
-//void gui_close_text_dialog(TEXT_DATA * vt);
+void main_keep_bibletext_dialog_in_sync(gchar * key);
 void main_setup_bibletext_dialog(GList *mods);
 void main_shutdown_bibletext_dialog(void);
 void main_free_on_destroy(TEXT_DATA * vt);
 void main_open_bibletext_dialog(gchar * mod_name);
-	
+void main_bibletext_dialog_goto_bookmark(gchar * url);
+void main_dialog_set_global_opt(gboolean choice);
+gint main_dialogs_url_handler(TEXT_DATA * t, const gchar * url, gboolean clicked);
+
 #ifdef __cplusplus
 }
 #endif	

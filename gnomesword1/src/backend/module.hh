@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "main/lists.h"
+//#include "main/lists.h"
 
 char *backend_get_book_key(void);
 int backend_module_has_testament(const char * module_name,  int testament);

@@ -84,7 +84,7 @@ public:
 	int treekey_next_sibling(unsigned long offset);
 	
 	
-	//SWMgr *get_display_mgr(void) {return(display_mgr);};
+	SWMgr *get_mgr(void) {return(mgr);};
 };
 
 #endif /* _SWORD_MAIN_HH_ */

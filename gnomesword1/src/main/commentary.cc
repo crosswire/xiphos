@@ -31,6 +31,7 @@
 
 #include "main/commentary.h"
 #include "main/settings.h"
+#include "main/sword.h"
 
 #include "backend/sword.h" 
 
