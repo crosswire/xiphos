@@ -26,6 +26,8 @@
 extern "C" {
 #endif
 
+#include <gnome.h>
+	
 #define MAIN_TEXT_WINDOW 0 
 #define INTERLINEAR_WINDOW 1
 #define COMMENTARY_WINDOW 2
