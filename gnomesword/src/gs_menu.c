@@ -58,8 +58,6 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 		GList *mods, 
 		gchar *labelGtkWidget, 
 		GtkMenuCallback mycallback);
-static GtkWidget *create_popupmenu(gchar *window, GList *comDescription, 
-				GList *dictDescription);
 /******************************************************************************/
 extern gint	greekpage,
         	hebrewpage;
@@ -302,23 +300,20 @@ void createpopupmenus(GtkWidget *app,
 	GtkWidget 
 		*menuDict,
 		*menuBible,
-		*menuhtmlcom,
-		*menuBook;	
+		*menuhtmlcom;	
 	
 	menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
 	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
 	menuBible = create_pmBible(bibleDescription, dictDescription);	
 	/* create popup menu for commentaries window */
-	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);	
-	//menuBook = create_popupmenu("htmlBooks",bookDescription, dictDescription);		
+	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);			
 	/* attach popup menus and ajust checkmarks*/
 	gnome_popup_menu_attach(menuInt,lookup_widget(app,"textComp1"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = settings->comm_tabs;
-	//gnome_popup_menu_attach(menuBook,lookup_widget(app,"htmlBooks"),(gchar*)"1");
 	gnome_popup_menu_attach(menuDict,lookup_widget(app,"htmlDict"),(gchar*)"1");	
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->dict_tabs;
 
@@ -1309,266 +1304,5 @@ void loadmenuformmodlist(GtkWidget *pmInt, GList *mods,  gchar *label, GtkMenuCa
 	}
 	g_list_free(tmp); 
 } 
-
-//-------------------------------------------------------------------------------------------
-static GtkWidget *create_popupmenu(gchar *window, GList *Description1, 
-						GList *Description2)
-{
-	GtkWidget *popupmenu;
-	GtkWidget *copy6;
-	GtkWidget *edit;
-	GtkWidget *open;
-	GtkWidget *save;
-	GtkWidget *goto_reference;
-	GtkWidget *lookup_word;
-	GtkWidget *lookup_word_menu;
-	GtkWidget *usecurrent1;
-	GtkWidget *separator1;
-	GtkWidget *lookup_selection;
-	GtkWidget *lookup_selection_menu;
-	GtkWidget *usecurrent2;
-	GtkWidget *separator3;	
-	GtkWidget *add_bookmark;
-	GtkWidget *add_bookmark_menu;
-	GtkWidget *about_this_module6;
-	GtkWidget *view_in_new_window;
-	GtkWidget *print_item;
-	GtkWidget *separator22, *item3, *item4;
-	GtkTooltips *tooltips;
-	GList *tmp = NULL;
-	gint i = 0;
-		
-	tooltips = gtk_tooltips_new();
-	popupmenu = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(popupmenu), "popupmenu",
-			    popupmenu);
-			
-	copy6 = gtk_menu_item_new_with_label("Copy");
-	gtk_widget_ref(copy6);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "copy6", copy6,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(copy6);
-	gtk_container_add(GTK_CONTAINER(popupmenu), copy6);
-
-	edit = gtk_check_menu_item_new_with_label("Edit");
-	gtk_widget_ref(edit);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "edit",
-				edit ,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(edit);
-	gtk_container_add(GTK_CONTAINER(popupmenu),edit );
-			     
-	open = gtk_menu_item_new_with_label("Open");
-	gtk_widget_ref(open);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "open", open,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(open);
-	gtk_container_add(GTK_CONTAINER(popupmenu), open);
-	
-			     
-	save = gtk_menu_item_new_with_label("Save");
-	gtk_widget_ref(save);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "save", save,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(save);
-	gtk_container_add(GTK_CONTAINER(popupmenu), save);
-	
-	print_item = gtk_menu_item_new_with_label("Print Comment");
-	gtk_widget_ref(print_item);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu),
-				 "print_item", print_item,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(print_item);
-	gtk_container_add(GTK_CONTAINER(popupmenu),print_item);
-		
-	separator1 = gtk_menu_item_new ();
-  	gtk_widget_ref (separator1);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "separator1", separator1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (separator1);
-  	gtk_container_add (GTK_CONTAINER (popupmenu), separator1);
-  	gtk_widget_set_sensitive (separator1, FALSE);
-	
-	goto_reference = gtk_menu_item_new_with_label("Goto Reference");
-	gtk_widget_ref(goto_reference);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu),
-				 "goto_reference", goto_reference,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(goto_reference);
-	gtk_container_add(GTK_CONTAINER(popupmenu), goto_reference);
-	
-	lookup_word = gtk_menu_item_new_with_label ("Lookup Word");
-	gtk_widget_ref (lookup_word);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "lookup_word", lookup_word,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (lookup_word);
-  	gtk_container_add (GTK_CONTAINER (popupmenu), lookup_word);
-	
-	lookup_word_menu = gtk_menu_new ();
-  	gtk_widget_ref (lookup_word_menu);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "lookup_word_menu", lookup_word_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_word), lookup_word_menu);
-	
-	usecurrent1 = gtk_menu_item_new_with_label ("Use Current Dictionary");
-	gtk_widget_ref (usecurrent1);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "usecurrent1", usecurrent1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (usecurrent1);
-  	gtk_container_add (GTK_CONTAINER (lookup_word_menu), usecurrent1);
-	
-	separator1 = gtk_menu_item_new ();
-  	gtk_widget_ref (separator1);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "separator1", separator1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (separator1);
-  	gtk_container_add (GTK_CONTAINER (lookup_word_menu), separator1);
-  	gtk_widget_set_sensitive (separator1, FALSE);
-	
-	lookup_selection = gtk_menu_item_new_with_label ("Lookup Selection");
-	gtk_widget_ref (lookup_selection);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "lookup_selection", lookup_selection,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (lookup_selection);
-  	gtk_container_add (GTK_CONTAINER (popupmenu), lookup_selection);
-	
-	lookup_selection_menu = gtk_menu_new ();
-  	gtk_widget_ref (lookup_selection_menu);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "lookup_selection_menu", lookup_selection_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (lookup_selection), lookup_selection_menu);
-  	//view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
-	
-	usecurrent2 = gtk_menu_item_new_with_label ("Use Current Dictionary");
-	gtk_widget_ref (usecurrent2);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "usecurrent2", usecurrent2,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (usecurrent2);
-  	gtk_container_add (GTK_CONTAINER (lookup_selection_menu), usecurrent2);
-	
-	separator3 = gtk_menu_item_new ();
-  	gtk_widget_ref (separator3);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "separator3", separator3,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (separator3);
-  	gtk_container_add (GTK_CONTAINER (lookup_selection_menu), separator3);
-  	gtk_widget_set_sensitive (separator3, FALSE);	
-	
-	add_bookmark = gtk_menu_item_new_with_label("Add Bookmark");
-	gtk_widget_ref(add_bookmark);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "add_bookmark",
-				 add_bookmark, 
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(add_bookmark);
-	gtk_container_add(GTK_CONTAINER(popupmenu), add_bookmark);
-	gtk_tooltips_set_tip(tooltips, add_bookmark, "Add current verse and module to Presonal Bookmarks",
-			     NULL);
-	
-	add_bookmark_menu = gtk_menu_new ();
-  	gtk_widget_ref (add_bookmark_menu);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "add_bookmark_menu", add_bookmark_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (add_bookmark), add_bookmark_menu);
-	/*** add bookmark items ***/
-	create_addBookmarkMenuBM(popupmenu, add_bookmark_menu,settings);		
-	
-	about_this_module6 =
-	    gtk_menu_item_new_with_label("About this module");
-	gtk_widget_ref(about_this_module6);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu),
-				 "about_this_module6", about_this_module6,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(about_this_module6);
-	gtk_container_add(GTK_CONTAINER(popupmenu), about_this_module6);
-
-	view_in_new_window = gtk_menu_item_new_with_label("View in New Window");
-	gtk_widget_ref(view_in_new_window);
-	gtk_object_set_data_full(GTK_OBJECT(popupmenu), "view_in_new_window",
-				 view_in_new_window,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(view_in_new_window);
-	gtk_container_add(GTK_CONTAINER(popupmenu), view_in_new_window);
-	gtk_tooltips_set_tip(tooltips, view_in_new_window, "View this module in a new window",
-			     NULL);
-		
-	separator22 = gtk_menu_item_new ();
-  	gtk_widget_ref (separator22);
-  	gtk_object_set_data_full (GTK_OBJECT (popupmenu), "separator22", separator22,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (separator22);
-  	gtk_container_add (GTK_CONTAINER (popupmenu), separator22);
-  	gtk_widget_set_sensitive (separator22, FALSE);		
-		     
-
-	i=0;
-	//tmp = dictmods;
-	tmp = Description2;
-	while (tmp != NULL) {
-		item3 = gtk_menu_item_new_with_label((gchar *) tmp->data);
-		item4 = gtk_menu_item_new_with_label((gchar *) tmp->data);
-		gtk_widget_ref(item3);
-		gtk_widget_ref(item4);
-		gtk_object_set_data_full(GTK_OBJECT(popupmenu), "item3",
-					 item3,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_object_set_data_full(GTK_OBJECT(popupmenu), "item4",
-					 item4,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
-		gtk_widget_show(item3);	
-		gtk_widget_show(item4);
-		gtk_signal_connect(GTK_OBJECT(item3), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_html_lookup_word_activate),
-				   GINT_TO_POINTER(i));
-		gtk_signal_connect(GTK_OBJECT(item4), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_html_lookup_selection_activate),
-				   GINT_TO_POINTER(i));
-		gtk_container_add(GTK_CONTAINER(lookup_word_menu), item3);
-		gtk_container_add(GTK_CONTAINER(lookup_selection_menu), item4);
-		   
-		++i;
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	
-	gtk_signal_connect(GTK_OBJECT(print_item), "activate",
-			   GTK_SIGNAL_FUNC(on_print_item_activate),
-			   (gchar *) window);
-	gtk_signal_connect(GTK_OBJECT(usecurrent1), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_html_lookup_word_activate),
-				   GINT_TO_POINTER(1001));
-	gtk_signal_connect(GTK_OBJECT(usecurrent2), "activate",
-				   GTK_SIGNAL_FUNC
-				   (on_html_lookup_selection_activate),
-				   GINT_TO_POINTER(1001));	
-	gtk_signal_connect(GTK_OBJECT(copy6), "activate",
-			   GTK_SIGNAL_FUNC(on_copyhtml_activate),
-			   (gchar *) window);
-	gtk_signal_connect(GTK_OBJECT(goto_reference), "activate",
-			   GTK_SIGNAL_FUNC(on_html_goto_reference_activate),
-			   (gchar *) window);
-	gtk_signal_connect(GTK_OBJECT(about_this_module6), "activate",
-			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
-			   "commentary");
-			   
-	gtk_signal_connect(GTK_OBJECT(edit), "activate",
-			   GTK_SIGNAL_FUNC(on_edit_book_activate),
-			   (gchar*)"htmlBooks");	
-	/*		  
-	gtk_signal_connect (GTK_OBJECT (open), "activate",
-                      	GTK_SIGNAL_FUNC (on_open_book_activate),
-                      	(gchar*)"htmlBooks");
-	*/					   
-	gtk_signal_connect (GTK_OBJECT (save), "activate",
-                      	GTK_SIGNAL_FUNC (on_save_book_activate),
-                      	(gchar*)"htmlBooks");
-			
-	gtk_object_set_data(GTK_OBJECT(popupmenu), "tooltips", tooltips);
-	return popupmenu;
-}
 
 
