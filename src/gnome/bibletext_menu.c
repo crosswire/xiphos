@@ -72,28 +72,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 	gui_copy_html(t->html);
 }
 
-/******************************************************************************
- * Name
- *  on_shortcut_activate
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *
- *   void on_shortcut_activate(GtkMenuItem * menuitem, TEXT_DATA * t)	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
 
-static void on_shortcut_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
-{
-	gchar * module_description;
-	module_description = get_module_description(t->mod_name);
-	gui_add_sb_item("dialog", module_description, 0);
-}
 /******************************************************************************
  * Name
  *  
@@ -1025,7 +1004,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 {
 	GtkWidget *pm_text;
 	GtkAccelGroup *pm_text_accels;
-	GtkWidget *shortcut;
+//	GtkWidget *shortcut;
 	GtkWidget *separator;
 	GtkWidget *file;
 	GtkWidget *file_menu;

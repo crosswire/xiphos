@@ -424,7 +424,7 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
  * Return value
  *   void
  */ 
-
+/*
 static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 {
 	gchar *key = get_book_key(gbs->mod_name);
@@ -433,7 +433,7 @@ static void on_bookmark_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 		free(key);
 	}
 }
-
+*/
 
 /******************************************************************************
  * Name

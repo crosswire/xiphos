@@ -1028,6 +1028,7 @@ void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 			vt->key = key;
 			display(vt, vt->key, TRUE);
 			update_controls(vt);
+			gdk_window_raise(vt->dialog->window);
 			return;
 		}		
 		tmp = g_list_next(tmp);

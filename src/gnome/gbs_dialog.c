@@ -597,7 +597,7 @@ void gui_gbs_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 				   text, key, TRUE);
 				free(text);
 			}
-			
+			gdk_window_raise(dlg->dialog->window);			
 			return;
 		}		
 		tmp = g_list_next(tmp);
