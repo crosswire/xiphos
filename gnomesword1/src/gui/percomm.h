@@ -40,9 +40,10 @@ struct _percomm_data {
 void gui_save_note(GSHTMLEditorControlData * e);
 void gui_percomm_tabs(gboolean choice);
 void gui_display_percomm(gchar * key);
-void gui_set_percomm_page_and_key(gint page_num, gchar * key);
+void gui_set_percomm_page(gchar * mod_name);
 void gui_add_new_percomm_pane(PC_DATA *p);
 void gui_setup_percomm(GList *mods);
 void gui_shutdown_percomm(void);
+void gui_percomm_in_workbook(GtkWidget * workbook_lower, gint page_num);
 #endif
 

@@ -51,7 +51,7 @@
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
- 
+
 
 
 /******************************************************************************
@@ -68,17 +68,17 @@
  *
  * Return value
  *   void
- */ 
- 
- 
+ */
+
+
 void init_gnomesword(void)
-{	
-	
-	
+{
+
+
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");
 	settings.havebdb = check_for_module("BDB");
-	
+
 	/*
 	 *  setup shortcut bar 
 	 */
@@ -90,20 +90,27 @@ void init_gnomesword(void)
 	gui_check_interlinear_modules();
 	gui_set_interlinear_options_at_start();
 	gui_create_interlinear_popup(get_list(TEXT_DESC_LIST));
-	
+
 	/*
 	 *  setup commentary gui support 
 	 */
 	if (settings.havecomm) {
-		gui_setup_commentary(get_list(COMM_LIST));	
+		gui_setup_commentary(get_list(COMM_LIST));
 		gui_setup_commentary_dialog(get_list(COMM_LIST));
 	}
-	
+
 	/*
 	 *  setup personal comments gui support 
 	 */
 	if (settings.havepercomm) {
-		gui_setup_percomm(get_list(PERCOMM_LIST));
+		//gui_setup_percomm_dialog();
+		if (!settings.use_percomm_dialog) {
+			gui_setup_percomm(get_list(PERCOMM_LIST));
+			gtk_box_pack_start(GTK_BOX
+					   (widgets.vbox_percomm),
+					   widgets.notebook_percomm,
+					   TRUE, TRUE, 0);
+		}
 	}
 
 	/*
@@ -120,8 +127,8 @@ void init_gnomesword(void)
 	if (settings.havedict) {
 		gui_setup_dictlex(get_list(DICT_LIST));
 		gui_setup_dictlex_dialog(get_list(DICT_LIST));
-	}	
-	
+	}
+
 	/*
 	 *  setup Bible text gui 
 	 */
@@ -129,25 +136,28 @@ void init_gnomesword(void)
 		gui_setup_text(get_list(TEXT_LIST));
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
-	
+
 	g_print("%s\n", "Initiating GnomeSword\n");
 
 	gui_set_shortcutbar_porgram_start();
-	
+
 	gui_show_main_window();
-	
+
 	settings.addhistoryitem = FALSE;
-	
+
 	gui_change_verse(settings.currentverse);
-	
-			    
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
-			widgets.viewtexts_item), settings.showtexts);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
-			widgets.viewcomms_item), settings.showcomms);
-	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
-			widgets.viewdicts_item), settings.showdicts);
-	
+
+
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewtexts_item),
+				       settings.showtexts);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewcomms_item),
+				       settings.showcomms);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (widgets.viewdicts_item),
+				       settings.showdicts);
+
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
 	 */
@@ -157,7 +167,7 @@ void init_gnomesword(void)
 	if (settings.showdevotional) {
 		gui_display_devotional();
 	}
-	
+
 	g_print("done\n");
 }
 
@@ -176,54 +186,51 @@ void init_gnomesword(void)
  *
  * Return value
  *   void
- */ 
+ */
 
 void shutdown_gnomesword(void)
 {
-	gui_save_bookmarks(NULL,NULL);
-	
+	gui_save_bookmarks(NULL, NULL);
+
 	/* if study pad file has changed since last save */
-	if(settings.use_studypad) {
+	if (widgets.studypad_dialog)
+		gtk_widget_destroy(widgets.studypad_dialog);
+	else
 		gui_studypad_can_close();
-		if(widgets.studypad_dialog)
-			gtk_widget_destroy(widgets.studypad_dialog);
-	}
-	if(widgets.percomm_dialog)
-		gtk_widget_destroy(widgets.percomm_dialog);
-	
+
 	/* shutdown the sword stuff */
 	shutdown_sword();
-	
+
 	shutdown_list();
-	
+
 	/* free dir and file stuff */
 	g_free(settings.gSwordDir);
 	g_free(settings.shortcutbarDir);
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
-	
-	if(settings.havebible){
+
+	if (settings.havebible) {
 		gui_shutdown_text();
 		gui_shutdown_bibletext_dialog();
 	}
-	
-	if(settings.havebook){
+
+	if (settings.havebook) {
 		gui_shutdown_gbs();
 		gui_shutdown_gbs_dialog();
 	}
-	
-	if(settings.havecomm){
+
+	if (settings.havecomm) {
 		gui_shutdown_commentary();
 		gui_shutdown_commentary_dialog();
 	}
-	
-	if(settings.havedict){
+
+	if (settings.havedict) {
 		gui_shutdown_dictlex();
 		gui_shutdown_dictlex_dialog();
 	}
-	
-	if(settings.havepercomm)
+
+	if (settings.havepercomm)
 		gui_shutdown_percomm();
-	
+
 	g_print("\nGnomeSword is shutdown\n");
 }

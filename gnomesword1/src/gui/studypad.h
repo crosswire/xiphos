@@ -31,7 +31,8 @@ gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint load_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint gui_open_studypad(GtkWidget *notebook, gchar * file_name, 
 						gint page_num);
-gint gui_open_studypad_dialog(gchar * file_name);
+GtkWidget *gui_create_studypad_control(GtkWidget * container,
+				gchar * filename);
 
 #endif
 

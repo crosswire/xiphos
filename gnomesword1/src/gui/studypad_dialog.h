@@ -20,12 +20,14 @@
  */
 
 #ifndef __STUDYPAD_DIALOG_H__
-#define __EDITOR_DIALOG_H__
+#define __STUDYPAD_DIALOG_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+
+gint gui_open_studypad_dialog(gchar * file_name);
 void gui_attach_detach_studypad(void);
 
 #ifdef __cplusplus
