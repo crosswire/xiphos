@@ -970,30 +970,6 @@ void navcurcomModSWORD(gint direction)	//-- navigate the current commentary modu
 	curcomMod->Display();
 }
 
-//-------------------------------------------------------------------------------------------
-void editnoteSWORD(gboolean editbuttonactive)	//-- someone clicked the note edit button
-{
-	if (editbuttonactive) {
-		gtk_notebook_set_page(GTK_NOTEBOOK
-				      (lookup_widget
-				       (settings->app, "nbPerCom")), 1);
-		percomMod->Disp(percomDisplay);
-		gtk_text_set_editable(GTK_TEXT(lookup_widget(settings->app, "textComments")), TRUE);	//-- set text widget to editable  
-		gtk_widget_show(lookup_widget(settings->app, "sbNotes"));	//-- show comments status bar
-		noteModified = false;	//-- we just turned edit mode on no changes yet
-	} else {
-		if (settings->formatpercom) {
-			percomMod->Disp(FPNDisplay);
-			gtk_notebook_set_page(GTK_NOTEBOOK
-					      (lookup_widget
-					       (settings->app,
-						"nbPerCom")), 0);
-		}
-		gtk_text_set_editable(GTK_TEXT(lookup_widget(settings->app, "textComments")), false);	//-- set text widget to not editable
-		gtk_widget_hide(lookup_widget(settings->app, "sbNotes"));	//-- hide comments status bar
-	}
-	percomMod->Display();
-}
 
 //-------------------------------------------------------------------------------------------
 void savenoteSWORD(gchar *buf)	//-- save personal comments

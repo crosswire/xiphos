@@ -738,8 +738,6 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 				   GTK_SIGNAL_FUNC
 				   (on_html_lookup_selection_activate),
 				   GINT_TO_POINTER(1001));	
-/*	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
-			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), (gchar *)"1");*/
 	gtk_signal_connect(GTK_OBJECT(copy6), "activate",
 			   GTK_SIGNAL_FUNC(on_copyhtml_activate),
 			   (gchar *) "htmlCommentaries");
