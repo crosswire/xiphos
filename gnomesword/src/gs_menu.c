@@ -152,12 +152,14 @@ additemstooptionsmenu(GList *options)
 			footnotes =  menuitem[0].widget;			
 			GTK_CHECK_MENU_ITEM(item)->active = settings->footnotes;			
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->footnotesint;
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), settings->footnotes);
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
 			morphs =  menuitem[0].widget;
 			GTK_CHECK_MENU_ITEM(item)->active = settings->morphs;
 			GTK_CHECK_MENU_ITEM(menuChoice)->active = settings->morphsint;
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {

@@ -72,15 +72,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 	Mgr = new SWMgr();	//-- create sword mgr
 	font = "Roman";
 	buf = (char *) imodule.Description();
-	
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) !=
-	    Mgr->config->Sections.end()) {
-		if ((eit = (*sit).second.find("Font")) !=
-		    (*sit).second.end()) {
-			font = (char *) (*eit).second.c_str();
-		}
-	}
-	
+		
 	(const char *) imodule;	/* snap to entry */
 	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
 	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
@@ -91,23 +83,10 @@ char ComEntryDisp::Display(SWModule & imodule)
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
-	if (!strcmp(font, "Symbol")) {
-		strbuf = g_string_new("<FONT FACE=\"symbol\">");
-		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else if (!strcmp(font, "Greek")) {
-		strbuf = g_string_new("<FONT FACE=\"greek1\">");
-		strbuf = g_string_append(strbuf, (const char *) imodule);
-		strbuf = g_string_append(strbuf, "</font>");
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	} else {
-		strbuf = g_string_new((const char *) imodule);
-		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-		g_string_free(strbuf, TRUE);
-	}
+	strbuf = g_string_new((const char *) imodule);
+	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
+	g_string_free(strbuf, TRUE);
+	
 	endHTML(GTK_WIDGET(gtkText));
 	delete Mgr;
 	return 0;
@@ -142,6 +121,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	} else {
 		use_font_size = settings->bible_font_size;
 	}
+	
 	if (strcmp(swfont.c_str(), "")) {
 		use_font = (gchar *) swfont.c_str();
 	} else {
@@ -167,8 +147,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
-		use_font, use_font_size);
+	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -214,22 +193,11 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	c = 182;  
 	Mgr = new SWMgr();	//-- create sword mgr
 
-	if ((sit =
-	     Mgr->config->Sections.find(imodule.Name())) !=
-	    Mgr->config->Sections.end()) {
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap & section = (*sit).second;
-		swfont =
-		    ((entry =
-		      section.find("GSFont")) !=
-		     section.end())? (*entry).second : (string) "";
-		swfontsize =
-		    ((entry =
-		      section.find("GSFont size")) !=
-		     section.end())? (*entry).second : (string) "";
-		lang =
-		    ((entry =
-		      section.find("Lang")) !=
-		     section.end())? (*entry).second : (string) "";
+		swfont = ((entry = section.find("GSFont")) != section.end())? (*entry).second : (string) "";
+		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
+		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
 	}
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (strcmp(swfontsize.c_str(), "")) {
@@ -237,6 +205,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	} else {
 		use_font_size = settings->bible_font_size;
 	}
+	
 	if (strcmp(swfont.c_str(), "")) {
 		use_font = (gchar *) swfont.c_str();
 	} else {
@@ -253,6 +222,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		}
 		use_font = gethtmlfontnameHTML(font);
 	}
+	
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	sprintf(tmpBuf,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
@@ -276,9 +246,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-		sprintf(tmpBuf,
-			"<font face=\"%s\" color=\"%s\" size=\"%s\">",
-			use_font, versecolor, use_font_size);
+		sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -436,28 +404,18 @@ char InterlinearDisp::Display(SWModule & imodule)
 
 	Mgr = new SWMgr();	//-- create sword mgr
 
-	if ((sit =
-	     Mgr->config->Sections.find(imodule.Name())) !=
-	    Mgr->config->Sections.end()) {
+	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
 		ConfigEntMap & section = (*sit).second;
-		swfont =
-		    ((entry =
-		      section.find("GSFont")) !=
-		     section.end())? (*entry).second : (string) "";
-		swfontsize =
-		    ((entry =
-		      section.find("GSFont size")) !=
-		     section.end())? (*entry).second : (string) "";
-		lang =
-		    ((entry =
-		      section.find("Lang")) !=
-		     section.end())? (*entry).second : (string) "";
+		swfont = ((entry = section.find("GSFont")) != section.end())? (*entry).second : (string) "";
+		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
+		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
 	}
 	if (strcmp(swfontsize.c_str(), "")) {
 		use_font_size = (gchar *) swfontsize.c_str();
 	} else {
 		use_font_size = settings->interlinear_font_size;
 	}
+	
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (strcmp(swfont.c_str(), "")) {
 		use_font = (gchar *) swfont.c_str();

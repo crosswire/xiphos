@@ -32,6 +32,7 @@
 
 #include <gnome.h>
 #include <swmgr.h>
+#include <swmarkupmgr.h>
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
@@ -58,7 +59,7 @@ list <string> sbfiles;
 
 static SWDisplay 
 	*viewersbDisplay;	/* to display modules in viewer dialog */
-static SWMgr 
+static SWMarkupMgr 
 	*viewersbMgr; 
 static SWModule 
 	*viewersbMod;   /* module for viewer dialog */
@@ -237,7 +238,8 @@ void setupviewerSBSW(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	viewersbMgr	= new SWMgr();
+	viewersbMgr	= new SWMarkupMgr();	//-- create sword mgrs
+	viewersbMgr->Markup(FMT_HTMLHREF);
 	viewersbMod     = NULL;
 	viewersbDisplay = new  GtkHTMLEntryDisp(html_widget);
 	
@@ -245,7 +247,7 @@ void setupviewerSBSW(GtkWidget *html_widget)
 		viewersbMod = (*it).second;
 		sit = viewersbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
 		ConfigEntMap &section = (*sit).second;
-		addrenderfiltersSWORD(viewersbMod, section);
+		//addrenderfiltersSWORD(viewersbMod, section);
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			viewersbMod->Disp(viewersbDisplay);
 		}

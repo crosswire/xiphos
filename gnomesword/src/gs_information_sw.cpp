@@ -34,6 +34,7 @@
 
 #include <swmodule.h>
 #include <swmgr.h>
+#include <swmarkupmgr.h>
 #include <versekey.h>
 
 #include "gs_gnomesword.h"
@@ -42,7 +43,7 @@
 #include "sw_display.h"
 
 SWDisplay *VIDDisplay;  /* to display modules in view comm dialog */
-SWMgr *VIDMgr;  /* sword mgr for view comm dialog */
+SWMarkupMgr *VIDMgr;  /* sword mgr for view comm dialog */
 SWModule *VIDMod;   /* module for view text dialog */
 
 
@@ -70,7 +71,8 @@ void VIDsetupSWORD(GtkWidget *text)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior    	
 	
-	VIDMgr	= new SWMgr();
+	VIDMgr	= new SWMarkupMgr();	//-- create sword mgr
+	VIDMgr->Markup(FMT_HTMLHREF);
 	VIDMod     = NULL;
 	VIDDisplay = new  GtkHTMLEntryDisp(text);
 	for(it = VIDMgr->Modules.begin(); it != VIDMgr->Modules.end(); it++){
@@ -78,7 +80,7 @@ void VIDsetupSWORD(GtkWidget *text)
 			VIDMod = (*it).second;
 			sit = VIDMgr->config->Sections.find((*it).second->Name()); //-- add render filters
 			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(VIDMod, section);
+			//addrenderfiltersSWORD(VIDMod, section);
 			VIDMod->Disp(VIDDisplay);
 		}
 	}

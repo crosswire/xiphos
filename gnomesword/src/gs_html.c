@@ -99,7 +99,6 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 				tmpbuf = g_strdup(url);
 				displaydictlexSBSW(settings->lex_greek,
 						      tmpbuf, settings);
-				//gotoBookmarkSWORD(settings->lex_greek, buf);  
 				g_free(tmpbuf);
 			}
 			if (*url == 'H') {
@@ -108,10 +107,8 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 				tmpbuf = g_strdup(url);
 				displaydictlexSBSW(settings->lex_hebrew,
 						      tmpbuf, settings);
-				//gotoBookmarkSWORD(settings->lex_hebrew, buf);  
 				g_free(tmpbuf);
 			}
-			//str = showfirstlineStrongsSWORD(atoi(url));
 			sprintf(buf, _("Go to Strongs %s"), url);
 		} else if (*url == 'M') {
 			gchar *tmpbuf;

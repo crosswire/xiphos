@@ -39,6 +39,8 @@
 
 #include <gnome.h>
 #include <swmgr.h>
+#include <swmarkupmgr.h>
+
 #include <swmodule.h>
 #include <swconfig.h>
 #include <versekey.h>
@@ -76,20 +78,22 @@ typedef map < string, string > modDescMap;
  * Sword globals 
 ***********************************************************************************************/
 //SWDisplay *chapDisplay;		/* to display modules using GtkText a chapter at a time */
-SWDisplay * entryDisplay,	/* to display modules using GtkText a verse at a time */
-    *comp1Display,		/* to display modules using GtkText a verse at a time */
-    *comp2Display,		/* to display modules using GtkText a verse at a time */
-    *comp3Display,		/* to display modules using GtkText a verse at a time */
+SWDisplay 
+    *comp1Display,		/* to display interlinear modules  a verse at a time */
     *percomDisplay,		/* to display personal comment modules using GtkText a verse at a time */
-    *dictDisplay,		/* to display modules using GtkText a verse at a time */
+    *dictDisplay,			/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
-    *HTMLDisplay,		/* to display formatted html */
-    *RWPDisplay,		/* to display rwp module in gtktext window */
+    *commDisplay,		/* to display commentary modules */
     *UTF8Display;		/* to display modules in utf8 */
-SWMgr * mainMgr,		/* sword mgr for curMod - curcomMod - curdictMod */
-    *mainMgr1,			/* sword mgr for comp1Mod - first interlinear module */
+    
+SWMgr 
     *percomMgr,			/* sword mgr for percomMod - personal comments editor */
     *listMgr;			/* sword mgr for ListEditor */
+    
+SWMarkupMgr  
+    *mainMgr1,			/* sword mgr for comp1Mod - first interlinear module */
+    *mainMgr;		/* sword mgr for curMod - curcomMod - curdictMod */
+
 VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
     vkText,
     vkComm;
@@ -176,8 +180,9 @@ void initSWORD(GtkWidget * mainform)
  
 	g_print("%s\n","Initiating Sword\n");
 
-	mainMgr = new SWMgr();	//-- create sword mgrs
-	mainMgr1 = new SWMgr();
+	mainMgr = new SWMarkupMgr();	//-- create sword mgrs
+	//mainMgr->Markup(FMT_HTMLHREF);
+	mainMgr1 = new SWMarkupMgr();
 	percomMgr = new SWMgr();
 
 	curMod = NULL;		//-- set mods to null
@@ -186,14 +191,11 @@ void initSWORD(GtkWidget * mainform)
 	curdictMod = NULL;
 	percomMod = NULL;
 
-	entryDisplay = 0;	// set in create
 	comp1Display = 0;	// set in create
-	comp2Display = 0;	// set in create
-	comp3Display = 0;	// set in create
 	dictDisplay = 0;	// set in create    
 	percomDisplay = 0;	// set in create
 	FPNDisplay = 0;
-	HTMLDisplay = 0;
+	commDisplay = 0;
 	UTF8Display = 0;
 	/* setup versekeys for text and comm windows */
 	vkText.Persist(1);
@@ -218,7 +220,7 @@ void initSWORD(GtkWidget * mainform)
 	GTKEntryDisp::__initialize();	//-- this is for gtktext	
 	percomDisplay = new GTKPerComDisp(lookup_widget(mainform, "textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform, "htmlTexts"));
-	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
+	commDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform, "textComp1"));
 	FPNDisplay = new ComEntryDisp(lookup_widget(mainform, "htmlComments"));
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform, "htmlDict"));
@@ -258,7 +260,7 @@ void initSWORD(GtkWidget * mainform)
 			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curcomMod, section);
-			curcomMod->Disp(HTMLDisplay);
+			curcomMod->Disp(commDisplay);
 			curcomMod->SetKey(vkComm);
 		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
 			havedict = TRUE;	//-- we have at least one lex / dict module
@@ -323,7 +325,6 @@ void ChangeVerseSWORD(void)
 	int l;
 	GList * mods;
 	gchar * currRef;
-
 	
 	//-- save any changes to personal notes
 	if ((GTK_TOGGLE_BUTTON
@@ -394,7 +395,7 @@ void ChangeVerseSWORD(void)
 		if (curcomMod) {
 			curcomMod->SetKey(vkComm);	
 			curcomMod->Display();	//-- show change
-			strcpy(com_key, vkComm);		
+			strcpy(com_key, vkComm);
 		}
 	}
 	
@@ -424,6 +425,25 @@ void changeVerseSWORD(gchar * ref)
 	ChangeVerseSWORD();
 	
 	vkText.AutoNormalize(1);
+	vkComm.AutoNormalize(1);
+}
+
+void changeVerseComSWORD(void)	
+{
+	VerseKey key;
+	
+	key = current_verse;
+	//g_warning("chapter = %d",key.Chapter());
+	
+	if((!key.Chapter()) || (!key.Verse())) {
+		vkComm.AutoNormalize(0);
+	}
+	
+	vkComm = current_verse;
+	
+	curcomMod->SetKey(vkComm);
+	curcomMod->Display();
+	
 	vkComm.AutoNormalize(1);
 }
 
@@ -545,25 +565,19 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	delete mainMgr1;
 	delete percomMgr;
 	//-- delete Sword displays
-	if (entryDisplay)
-		delete entryDisplay;
+	if (UTF8Display)
+		delete UTF8Display;
 	if (comp1Display)
 		delete comp1Display;
-	if (comp2Display)
-		delete comp2Display;
-	if (comp3Display)
-		delete comp3Display;
 	if (dictDisplay)
 		delete dictDisplay;
 	if (percomDisplay)
 		delete percomDisplay;
 	if (FPNDisplay)
 		delete FPNDisplay;
-	if (HTMLDisplay)
-		delete HTMLDisplay;
-	if (RWPDisplay)
-		delete RWPDisplay;
-	gtk_exit(0);		//-- exit        
+	if (commDisplay)
+		delete commDisplay;
+	gtk_exit(0);		//-- exit
 }
 
 /*******************************************************************************
@@ -589,12 +603,16 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice)
 		}
 		
 		if(!strcmp(option,"Footnotes" )) {
-			settings->footnotes = choice;
+			settings->footnotes = choice;		
+			/* set footnotes toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), settings->footnotes);	
 		}
 		
 		if(!strcmp(option, "Morphological Tags")) {
-			settings->morphs = choice;
-		}			
+			settings->morphs = choice;	
+			/* set morphs toogle button */
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);	
+		}	
 		
 		if(!strcmp(option, "Hebrew Vowel Points")) {
 			settings->hebrewpoints = choice;
@@ -653,7 +671,11 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice)
 
 /* 
  * gotoBookmarkSWORD - bad hack but it works
- * bad name we it for more than bookmarks
+ * bad name since we now use it for more than bookmarks
+ *
+ * searchs for module by modName - increments bibleindex, commindex or dictindex
+ * until module is found then sets the text, comm or dict notebook page to index. 
+ * key is new verse or dict/lex key
  */
 void gotoBookmarkSWORD(gchar * modName, gchar * key)
 {
@@ -661,16 +683,14 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 	ModMap::iterator it;
 	gint bibleindex = 0, commindex = 0, dictindex = 0;
 
-	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end();
-	     it++) {
+	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
+		     
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
+			
 			if (!strcmp((*it).second->Name(), modName)) {
 				notebook =
-				    lookup_widget(settings->app,
-						  "nbTextMods");
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (notebook),
-						      bibleindex);
+				    lookup_widget(settings->app, "nbTextMods");
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), bibleindex);
 				vkText = key;
 				if (settings->notebook3page == 0 && autoscroll) 
 					vkComm = key;
@@ -678,14 +698,12 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 				return;
 			}
 			++bibleindex;
+			
 		} else if (!strcmp((*it).second->Type(), "Commentaries")) {
 			if (!strcmp((*it).second->Name(), modName)) {
 				notebook =
-				    lookup_widget(settings->app,
-						  "notebook1");
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (notebook),
-						      commindex);
+				    lookup_widget(settings->app, "notebook1");
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), commindex);
 				vkComm = key;
 				if (autoscroll) 
 					vkText = key;
@@ -693,20 +711,14 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 				return;
 			}
 			++commindex;
-		} else
-		    if (!strcmp
-			((*it).second->Type(),
-			 "Lexicons / Dictionaries")) {
+			
+		} else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {
 			if (!strcmp((*it).second->Name(), modName)) {
 				entry =
-				    lookup_widget(settings->app,
-						  "dictionarySearchText");
+				    lookup_widget(settings->app, "dictionarySearchText");
 				notebook =
-				    lookup_widget(settings->app,
-						  "notebook4");
-				gtk_notebook_set_page(GTK_NOTEBOOK
-						      (notebook),
-						      dictindex);
+				    lookup_widget(settings->app, "notebook4");
+				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), dictindex);
 				gtk_entry_set_text(GTK_ENTRY(entry), key);
 				return;
 			}
@@ -888,7 +900,7 @@ void changcurcomModSWORD(gchar * modName, gboolean showchange)	//-- someone chan
 		
 	}
 	
-	frame = lookup_widget(settings->app, "framecom");
+	frame = lookup_widget(settings->app, "frameCom");
 	if (settings->comm_tabs) {
 		gtk_frame_set_label(GTK_FRAME(frame), NULL);	//-- set frame label
 	} else {

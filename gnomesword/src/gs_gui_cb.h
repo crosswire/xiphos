@@ -34,8 +34,8 @@ extern "C" {
 
 #include <gnome.h>
 
-	void on_mainwindow_draw(GtkWidget *widget,
-                                        GdkRectangle    *area,
+	void on_mainwindow_size_allocate(GtkWidget       *widget,
+                                        GtkAllocation   *allocation,
                                         gpointer         user_data);
 	void on_nbTextMods_switch_page(GtkNotebook * notebook,
 				       GtkNotebookPage * page,
@@ -55,6 +55,10 @@ extern "C" {
 	void on_dlgSearch_destroy(GtkObject * object, gpointer user_data);
 	void on_btnSearch_clicked(GtkButton * button, gpointer user_data);
 	void on_btnStrongs_toggled(GtkToggleButton * togglebutton,
+				   gpointer user_data);
+	void on_btnMorphs_toggled(GtkToggleButton * togglebutton,
+				   gpointer user_data);
+	void on_btnFootnotes_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data);
 	void on_cbeBook_changed(GtkEditable * editable,
 				gpointer user_data);
@@ -141,6 +145,10 @@ extern "C" {
 	gboolean on_epaned_button_release_event(GtkWidget * widget,
 						GdkEventButton * event,
 						gpointer user_data);
+	void on_btnCommSyn_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+	void on_btnCommPrint_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
 
 #ifdef __cplusplus
 }
