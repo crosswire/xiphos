@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.2.6)
+AM_INIT_AUTOMAKE(gnomesword, 0.2.7)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -87,8 +87,10 @@ dnl ******************************
 AC_MSG_CHECKING(for Gdkpixbuf libraries)
 if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
     AC_MSG_RESULT(found)
+    pixbuf_ok=true
 else
-    AC_MSG_ERROR(Did not find gdkpixbuf installed)
+    AC_MSG_RESULT(Did not find gdkpixbuf installed)
+    pixbuf_ok=false
 fi
 
 dnl *******************************
@@ -115,11 +117,8 @@ if gnome-config --libs print > /dev/null 2>&1; then
 
 	AC_MSG_RESULT([found ("$vers")])
 else
-	AC_MSG_RESULT([not found])
-	gnomeprint_ok=false
+	AC_MSG_ERROR(gnome-print not found)	
 fi
-
-
 
 dnl Subst PACKAGE_PIXMAPS_DIR.
 PACKAGE_PIXMAPS_DIR="`gnome-config --datadir`/pixmaps/${PACKAGE}"
@@ -166,11 +165,10 @@ if test "x$gnomeprint_ok" = xtrue; then
 	AC_DEFINE(USE_GNOMEPRINT, 1, [Define if you want to use printing w/gnome-print])
 fi
 
-AM_CONDITIONAL(SPELLING,test x$spellchecking = xyes && test "x$gnomeprint_ok" = xfalse)
-AM_CONDITIONAL(PRINTING,test x$gnomeprint_ok = xtrue && test "x$spellchecking" = xno)
-AM_CONDITIONAL(SPELLING_PRINTING,test x$gnomeprint_ok = xtrue && test "x$spellchecking" = xyes)
-AM_CONDITIONAL(NO_OPS,test x$gnomeprint_ok = xfalse && test "x$spellchecking" = xno)
-
+AM_CONDITIONAL(SPELLING,test "x$spellchecking" = xyes && test "x$gnomeprint_ok" = xfalse)
+AM_CONDITIONAL(PRINTING,test "x$gnomeprint_ok" = xtrue && test "x$spellchecking" = xno)
+AM_CONDITIONAL(SPELLING_PRINTING,test "x$gnomeprint_ok" = xtrue && test "x$spellchecking" = xyes)
+AM_CONDITIONAL(NO_OPS,test "x$gnomeprint_ok" = xfalse && test "x$spellchecking" = xno)
 
 AC_OUTPUT([
 Makefile

@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
                             interface.c
                              -------------------
@@ -40,11 +41,12 @@
 #include "interface.h"
 #include "support.h"
 
+//#ifdef  USE_SHORTCUTBAR 
 #include  <widgets/e-paned/e-paned.h>
 #include  <widgets/e-paned/e-hpaned.h>
 #include  <widgets/e-paned/e-vpaned.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-
+//#endif
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 
 #define NUM_SHORTCUT_TYPES 4
@@ -57,23 +59,13 @@ gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 	    "gnomesword/GnomeSword.png",
 	    "gnome-folder.png"
 };
+
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
-
 GtkWidget *main_label, *MainFrm, *shortcut_bar;
-
 EShortcutModel *shortcut_model;
-
 static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 				const gchar * url, gpointer data);
-static void on_item_added(EShortcutModel * shortcut_model,
-			  gint group_num, gint item_num);
-static void on_item_removed(EShortcutModel * shortcut_model,
-			    gint group_num, gint item_num);
-static void on_group_added(EShortcutModel * shortcut_model,
-			   gint group_num);
-static void on_group_removed(EShortcutModel * shortcut_model,
-			     gint group_num);
-			     
+			    			     
 static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 				const gchar * url, gpointer data)
 {
@@ -89,39 +81,6 @@ static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 
 	return NULL;
 }
-
-static void
-on_item_added(EShortcutModel * shortcut_model,
-	      gint group_num, gint item_num)
-{
-	g_print("In on_item_added Group:%i Item:%i\n", group_num,
-		item_num);
-}
-
-
-static void
-on_item_removed(EShortcutModel * shortcut_model,
-		gint group_num, gint item_num)
-{
-	g_print("In on_item_removed Group:%i Item:%i\n", group_num,
-		item_num);
-}
-
-
-static void on_group_added(EShortcutModel * shortcut_model, gint group_num)
-{
-	g_print("In on_group_added Group:%i\n", group_num);
-}
-
-
-static void
-on_group_removed(EShortcutModel * shortcut_model, gint group_num)
-{
-	g_print("In on_group_removed Group:%i\n", group_num);
-}
-
-
-
 
 GtkWidget *create_fileselection1(void)
 {
@@ -1066,18 +1025,10 @@ GtkWidget *create_mainwindow(void)
 	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
 					 icon_callback, NULL);
 
-	gtk_signal_connect(GTK_OBJECT(shortcut_model), "item_added",
-			   GTK_SIGNAL_FUNC(on_item_added), NULL);
-	gtk_signal_connect(GTK_OBJECT(shortcut_model), "item_removed",
-			   GTK_SIGNAL_FUNC(on_item_removed), NULL);
-	gtk_signal_connect(GTK_OBJECT(shortcut_model), "group_added",
-			   GTK_SIGNAL_FUNC(on_group_added), NULL);
-	gtk_signal_connect(GTK_OBJECT(shortcut_model), "group_removed",
-			   GTK_SIGNAL_FUNC(on_group_removed), NULL);
-
 #if 0
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
 #endif
+
 	mainPanel = gtk_vbox_new(FALSE, 0);
 	e_paned_pack2(E_PANED (epaned), mainPanel, TRUE, TRUE);
 	//gtk_box_pack_start(GTK_BOX(hbox25), mainPanel, TRUE, TRUE, 0);
@@ -2501,8 +2452,8 @@ GtkWidget *create_dlgSettings(void)
 	GtkWidget *label123;
 	GtkWidget *vbox29;
 	GtkWidget *cbtnShowTextgroup;
-//  GtkWidget *cbtnShowComGroup;
-//  GtkWidget *cbtnShowDictGroup;
+	GtkWidget *cbtnShowComGroup;
+	GtkWidget *cbtnShowDictGroup;
 	GtkWidget *label124;
 	GtkWidget *hbox24;
 	GtkWidget *cbtnPNformat;
@@ -2648,21 +2599,21 @@ GtkWidget *create_dlgSettings(void)
 	gtk_widget_show(cbtnShowTextgroup);
 	gtk_box_pack_start(GTK_BOX(vbox29), cbtnShowTextgroup, FALSE,
 			   FALSE, 0);
-/*
-  cbtnShowComGroup = gtk_check_button_new_with_label ("Show Commentary Group in Shortcut Bar");
-  gtk_widget_ref (cbtnShowComGroup);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowComGroup", cbtnShowComGroup,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (cbtnShowComGroup);
-  gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowComGroup, FALSE, FALSE, 0);
 
-  cbtnShowDictGroup = gtk_check_button_new_with_label ("Show Dict/Lex Group in Shortcut bar");
-  gtk_widget_ref (cbtnShowDictGroup);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowDictGroup", cbtnShowDictGroup,
+  	cbtnShowComGroup = gtk_check_button_new_with_label ("Show Commentary Group in Shortcut Bar");
+  	gtk_widget_ref (cbtnShowComGroup);
+  	gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowComGroup", cbtnShowComGroup,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (cbtnShowDictGroup);
-  gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowDictGroup, FALSE, FALSE, 0);
-*/
+ 	 gtk_widget_show (cbtnShowComGroup);
+ 	 gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowComGroup, FALSE, FALSE, 0);
+
+	  cbtnShowDictGroup = gtk_check_button_new_with_label ("Show Dict/Lex Group in Shortcut bar");
+ 	 gtk_widget_ref (cbtnShowDictGroup);
+ 	 gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowDictGroup", cbtnShowDictGroup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+ 	 gtk_widget_show (cbtnShowDictGroup);
+ 	 gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowDictGroup, FALSE, FALSE, 0);
+
 	label124 = gtk_label_new("Shortcut Bar");
 	gtk_widget_ref(label124);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSettings), "label124",
@@ -2758,12 +2709,12 @@ GtkWidget *create_dlgSettings(void)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(cbtnShowTextgroup), "toggled",
 			   GTK_SIGNAL_FUNC(on_cbtnShowTextgroup_toggled), NULL);
-/*      gtk_signal_connect (GTK_OBJECT (cbtnShowComGroup), "toggled",
+	gtk_signal_connect (GTK_OBJECT (cbtnShowComGroup), "toggled",
 	                   GTK_SIGNAL_FUNC (on_cbtnShowComGroup_toggled),
 		           NULL);
 	gtk_signal_connect (GTK_OBJECT (cbtnShowDictGroup), "toggled",
 			GTK_SIGNAL_FUNC (on_cbtnShowDictGroup_toggled),
-			NULL); */	
+			NULL); 	
 	gtk_signal_connect(GTK_OBJECT(cbtnPNformat), "toggled",
 			   GTK_SIGNAL_FUNC(on_cbtnPNformat_toggled), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxOK), "clicked",
