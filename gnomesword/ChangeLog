@@ -1,3 +1,8 @@
+2002-07-01  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added ability to search for strongs numbers
+
+
 2002-06-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added lookup default text module to preferences
