@@ -28,7 +28,7 @@
    			<title>GnomeSword en action</title>
    			<screenshot>
    				<screeninfo>GnomeSword en action</screeninfo>
-   				<graphic format="PNG" fileref="figures/interface" ></graphic>
+   				<graphic format="PNG" fileref="figures/interface.png" ></graphic>
    			</screenshot>
 		</figure>
   	</para>
