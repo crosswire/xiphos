@@ -127,8 +127,9 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 			gtk_tree_store_append(GTK_TREE_STORE(model),
 					      &child_iter, &iter_iter);
 			gtk_tree_store_set(GTK_TREE_STORE(model),
-					   &child_iter, 0,
-					   (gchar *) module_name, -1);
+					   &child_iter, 
+					   0, (gchar *) module_name, 
+					   -1);
 			g_free(str_data);
 			return;
 		}
