@@ -5554,4 +5554,78 @@ Revelation
   </widget>
 </widget>
 
+<widget>
+  <class>GtkMenu</class>
+  <name>pmBookmarkTree</name>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>new</name>
+    <tooltip>Add new SubGroup to selected gourp</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_new_activate</handler>
+      <last_modification_time>Fri, 13 Jul 2001 23:59:24 GMT</last_modification_time>
+    </signal>
+    <stock_item>GNOMEUIINFO_MENU_NEW_ITEM</stock_item>
+    <label>_New SubGroup</label>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>add_new_group1</name>
+    <tooltip>Add a new root group and file</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_add_new_group1_activate</handler>
+      <last_modification_time>Fri, 13 Jul 2001 23:59:24 GMT</last_modification_time>
+    </signal>
+    <label>Add New Group</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_NEW</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>save_bookmarks1</name>
+    <tooltip>Save all bookmark files</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_save_bookmarks1_activate</handler>
+      <last_modification_time>Fri, 13 Jul 2001 23:59:24 GMT</last_modification_time>
+    </signal>
+    <label>Save Bookmarks</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_SAVE</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>delete_item</name>
+    <tooltip>Delete item and it's siblings</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_delete_item_activate</handler>
+      <last_modification_time>Fri, 13 Jul 2001 23:59:24 GMT</last_modification_time>
+    </signal>
+    <label>Delete Item(s)</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_CUT</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkCheckMenuItem</class>
+    <name>allow_reordering</name>
+    <tooltip>Toggle Reording - allow items to be moved by draging</tooltip>
+    <signal>
+      <name>activate</name>
+      <handler>on_allow_reordering_activate</handler>
+      <last_modification_time>Sat, 14 Jul 2001 00:01:53 GMT</last_modification_time>
+    </signal>
+    <label>Allow Reordering</label>
+    <active>False</active>
+    <always_show_toggle>True</always_show_toggle>
+  </widget>
+</widget>
+
 </GTK-Interface>
