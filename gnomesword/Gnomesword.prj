@@ -55,7 +55,7 @@ module.incude.type=
 module.incude.expanded=0
 module.incude.files=
 
-module.source.name=gnomesword
+module.source.name=src
 module.source.type=
 module.source.expanded=1
 module.source.files=\

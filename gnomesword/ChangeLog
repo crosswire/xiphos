@@ -1,6 +1,16 @@
+2001-04-09 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* release 0.4.1
+	* added include for stricmp <>
+	* fixed view/interlinear menu bug - caused segfault and crash.
+	* add 4th and 5th view/interlinear menus
+
+
 2001-04-05 Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* release 0.4.0
 	* added addrenderfilterSWORD function
+	* gnomesword requires GtkHTML-0.8.0 or later
 
 
 2001-03-28 Terry Biggs <tbiggs@users.sourceforge.net>
