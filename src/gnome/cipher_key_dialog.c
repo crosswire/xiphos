@@ -27,6 +27,7 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/cipher_key_dialog.h"
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 
 static GtkWidget *entryKey;

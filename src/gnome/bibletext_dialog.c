@@ -35,6 +35,7 @@
 #include "gui/html.h"
 
 #include "main/bibletext.h"
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 #include "main/lists.h"
@@ -186,13 +187,10 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 
 	else if (!strncmp(url, "passage=", 7)) {/*** remove passage= verse list ***/
 		gchar *mybuf = NULL;
-		gchar *modbuf = NULL;
 		mybuf = strchr(url, '=');
 		++mybuf;
 		buf = g_strdup(mybuf);
-		settings.whichwindow = 0;
-		modbuf = get_module_name();
-		gui_display_verse_list(modbuf, buf);
+		gui_display_verse_list(settings.MainWindowModule, buf);
 		g_free(buf);
 
 	}

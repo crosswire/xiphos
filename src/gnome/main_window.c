@@ -27,6 +27,7 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 

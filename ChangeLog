@@ -1,3 +1,10 @@
+2002-07-24  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added main/swprd.c and main/sword.h
+	* moved functions that access backend from main/gs_gnomesword.c
+	  to main/sword.c
+
+
 2002-07-23  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added main/shortcutbar.c and main/shortcutbar.h
