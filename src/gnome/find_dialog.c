@@ -72,7 +72,7 @@ static void dialog_destroy(GtkObject * object, gpointer data)
 {
 	g_free(dialog);
 	dialog = NULL;
-	g_warning("all done");
+	g_print("\nall done\n");
 }
 
 

@@ -1,3 +1,14 @@
+2002-12-21  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added gnome/font_dialog.c and gui/font_dialog.h
+	* added backend/module_fonts.cpp and backend/module_fonts.h
+
+
+2002-10-31  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* updated to use sword-1.5.5
+
+
 2002-10-19  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gnome/find_dialog.c and gui/find_dialog.h

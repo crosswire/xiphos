@@ -216,6 +216,7 @@ static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
 			}
 			break;
 		default:
+			break;
 	}
 	
 	if(settings.showinmain)

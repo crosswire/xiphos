@@ -290,7 +290,7 @@ gint gui_fileselection_save(GSHTMLEditorControlData *ecd)
 		retval = 4;
 		is_running = TRUE;
 		gtk_main();
-		g_warning("fileselection dialog closed");
+//		g_warning("fileselection dialog closed");
 		is_running = FALSE;
 		return retval;
 	}
