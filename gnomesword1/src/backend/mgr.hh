@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+#include <glib-2.0/glib.h>
 
 /* managers */
 #define TEXT_MGR 0 

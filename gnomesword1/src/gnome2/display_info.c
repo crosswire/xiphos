@@ -66,6 +66,33 @@ void gui_display_mod_and_key(gchar * mod_name, gchar * key)
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "display_info.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void gui_display_text_information(gchar * information)
+{
+	gboolean was_editable = gtk_html_get_editable(GTK_HTML(html_widget));
+	if (was_editable)
+		gtk_html_set_editable(GTK_HTML(html_widget), FALSE);
+	
+	gtk_html_load_from_string(GTK_HTML(html_widget),information,strlen(information));
+	gtk_html_set_editable(GTK_HTML(html_widget), was_editable);
+}
+
 /******************************************************************************
  * Name
  *   on_dlgInformation_destroy
@@ -218,6 +245,7 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 			   NULL);
 
 
+	gtk_widget_show(dialog_display_info);
 	gsI_isrunning = TRUE;
 	return dialog_display_info;
 }

@@ -5,6 +5,7 @@
 	* added main/module_dialogs.cc and main/module_dialogs.h
 	* added backend/dialogs.cc and backend/dialogs.hh
 	
+	
 2004-03-11  Terry <tbiggs@users.sf.net>
 
 	* added backend/sword_main.cc and backend/sword_main.hh
