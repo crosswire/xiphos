@@ -1397,7 +1397,7 @@ void gui_setup_shortcut_bar(void)
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 1, 80);
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 2, 80);
 
-	widgets.ctree_widget = ctree;
+	widgets.bookmark_tree = ctree;
 
 	button = gtk_button_new_with_label(_("Bookmarks"));
 	gtk_widget_show(button);
