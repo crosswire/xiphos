@@ -2,8 +2,8 @@
                           callback.cpp  -  description
                              -------------------
     begin                : Mon May 8 2000
-    copyright            : (C) 2000 by 
-    email                : 
+    copyright            : (C) 2000 by Terry Biggs
+    email                :  tbiggs@infinet.com
  ***************************************************************************/
 
 /* 
@@ -1240,9 +1240,7 @@ on_cpfgCurrentverse_color_set          (GnomeColorPicker *gnomecolorpicker,
                                         guint            arg4,
                                         gpointer         user_data)
 {
-	myGreen.red = arg1;
-	myGreen.green = arg2;
-	myGreen.blue = arg3;
+	setcurrentversecolor(arg1,arg2,arg3);
 	gnome_property_box_changed(GNOME_PROPERTY_BOX(gtk_widget_get_toplevel(GTK_WIDGET(gnomecolorpicker))));
 }
 
@@ -1359,6 +1357,54 @@ void
 on_auto_save_notes1_activate			(GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	if(GTK_CHECK_MENU_ITEM(menuitem)->active) autoSave = true;
-	else autoSave = false;
+	setautosave(GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBack_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cut1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_copy4_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_paste1_activate                     (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+
+//----------------------------------------------------------------------------------------------
+void
+on_change_module_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+  changepercomModSWORD((gchar*)user_data);
+}
+void
+on_fbMainwindowbold_font_set           (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data)
+{
+
+}
+

@@ -1,3 +1,19 @@
+##################################################################
+Note:
+The NIV does not work right with GnomeSword. So far I have had no
+problem viewing the text - the problem is searching. GomeSword will
+crash if you try to search the NIV. I can search Gen to Job and
+Prov to Rev without a problem, but if I include Psa in the search
+the program crashes.
+
+I can work around this on my system by removing the 'SourceType=GBF'
+line from the niv.conf file. All works well then.
+
+If you use Bibletime this work around will cause the Titles in Psalms
+to look like part of the text.
+
+If there is a way to fix this please let me know.
+#####################################################################
 
 GnomeSword started life as the Sword Project cheatah program and
 some of the cheatah code is still used in GnomeSword.
