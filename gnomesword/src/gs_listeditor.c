@@ -30,7 +30,6 @@
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
 #include "callback.h"
-#include "interface.h"
 #include "support.h"
 #include "gs_listeditor.h"
 #include "gs_file.h"

@@ -23,7 +23,6 @@ extern "C" {
 	
 GtkWidget *create_menu1(void);
 GtkWidget *create_wdwEditBookmarks(void);
-GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
 
 void
@@ -162,12 +161,6 @@ void on_notebook3_switch_page(GtkNotebook * notebook,
 				  gint page_num, gpointer user_data);
 void on_btnInfoBoxYes_clicked(GtkButton * button, gpointer user_data);
 void on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data);
-void on_btnPropertyboxOK_clicked(GtkButton * button,
-				     gpointer user_data);
-void on_btnPropertyboxApply_clicked(GtkButton * button,
-					gpointer user_data);
-void on_btnPropertyboxCancel_clicked(GtkButton * button,
-					 gpointer user_data);
 //==============================================================================================
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_tbtnFollow_toggled(GtkToggleButton * togglebutton,

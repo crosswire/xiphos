@@ -168,22 +168,19 @@ gint setDiretory(void)
 		}
 	}
 	if (access(fnconfigure, F_OK) == -1) {
-		/*GtkWidget *setup;
-		setup = create_dlgSetup();
-  		gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
-		gnome_dialog_run_and_close(GNOME_DIALOG(setup));*/
 		++retval;
 		//createconfig();
 	}
 	if (access(swbmDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
+		//sprintf(swbmDir, "%s/%s",homedir,".sword/");
 		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
 			//createbookmarks();
 			++retval;
 		} else {
 			printf("can't create bookmarks dir and files");
 		}
-	}
-	return retval;
+	} 
+	return retval; 
 }
 
 /*****************************************************************************

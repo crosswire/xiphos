@@ -35,17 +35,15 @@
 #include "gs_sword.h"
 #include "callback.h"
 #include "support.h"
-#include "interface.h"
+//#include "interface.h"
 #include "gs_file.h"
 #include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "gs_shortcutbar.h"
 #include "e-splash.h"
 
-#if USE_SHORTCUTBAR
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
-#endif /* USE_SHORTCUTBAR */
 
 /*****************************************************************************
 * globals
@@ -72,14 +70,9 @@ gint dictpages,
 SETTINGS *settings;
 GS_APP gs;
 gchar 	 bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
-GS_LAYOUT gslayout,
-		   *p_gslayout;
-GS_NB_PAGES *nbpages,
-			npages;
-GS_TABS		tabs,
-			*p_tabs;
-GS_LEXICON 	*p_gslexicon,
-			gslexicon;
+//GS_LAYOUT gslayout,
+//		   *p_gslayout;
+		   
 /*****************************************************************************
 * externs
 *****************************************************************************/
@@ -104,8 +97,7 @@ extern gchar remembersubtree[256];  /* used for bookmark menus declared in files
 extern gchar *shortcut_types[];
 extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
-//gboolean firstbackclick = TRUE;
-
+extern GtkWidget *MainFrm;
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
@@ -119,11 +111,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gint		biblepage,
 			commpage,
 			dictpage;
-	p_gslayout = &gslayout;
 	g_print("Initiating GnomeSword\n");
 /* set the main window size */
-	gtk_window_set_default_size(GTK_WINDOW(app), p_gslayout->gs_width, p_gslayout->gs_hight);
-	//g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
+	gtk_window_set_default_size(GTK_WINDOW(app), settings->gs_width, settings->gs_hight);
 /* setup shortcut bar */
 	setupSB(sbbiblemods, sbcommods ,sbdictmods);
 /* set current verse color html */
@@ -164,7 +154,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 /* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
-			nbpages->notebook3page );
+			settings->notebook3page );
 /* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
@@ -187,14 +177,14 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         changeVerseSWORD(settings->currentverse); /* set Text */
 /* show hide shortcut bar - set to options setting */
         if(settings->showshortcutbar){
-                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), p_gslayout->shortcutbar_width);
+                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbar_width);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
 /* set hight of bible and commentary pane */
-	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), p_gslayout->upperpane_hight);
+	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), settings->upperpane_hight);
 /* set width of bible pane */
-	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")),p_gslayout->biblepane_width);
+	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")), settings->biblepane_width);
 /* load last used file into studypad */
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
 /* create gs_clipboard */
@@ -213,7 +203,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 			   NULL);			
 		/* set notebook page */
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 
-                if(p_tabs->textwindow) 
+                if(settings->text_tabs) 
 			gtk_widget_show(notebook);
                 else 
 			gtk_widget_hide(notebook);
@@ -232,7 +222,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
                       NULL);		
 		/* set notebook page */
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
-		if(p_tabs->dictwindow) gtk_widget_show(notebook);
+		if(settings->dict_tabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
          /* hide dictionary section of window if we do not have at least one dict/lex */
 	}else 
@@ -247,7 +237,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
                                         NULL);
 		pagenum = commpage;			
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );		
-                if(p_tabs->commwindow) gtk_widget_show(notebook);
+                if(settings->comm_tabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
         }else 
 		gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
@@ -374,54 +364,39 @@ void UpdateChecks(GtkWidget *app)
 }
 
 void
-applyoptions(GtkWidget *app,
-		gboolean showshortcut, 
-		gboolean showtexttabs,
-		gboolean showcomtabs,
-		gboolean showdicttabs, 
-		gboolean showtextgroup,
-                gboolean showcomgroup, 
-		gboolean showdictgroup,
-                gboolean showhistorygroup)
+applyoptions(void)
 {
          GtkWidget    	*text,
 				*dict,
                       		*comm;
-	text = lookup_widget(app,"nbTextMods");
-        dict = lookup_widget(app,"notebook4");
-        comm = lookup_widget(app,"notebook1");
-/*  */
-        settings->showshortcutbar = showshortcut;
 	
-	p_tabs->textwindow = showtexttabs;
-        p_tabs->commwindow = showcomtabs;
-        p_tabs->dictwindow = showdicttabs;
-
-        settings->showtextgroup = showtextgroup;
-        settings->showcomgroup =  showcomgroup;
-        settings->showdictgroup = showdictgroup;
-        settings->showhistorygroup = showhistorygroup;
-	
-	if(p_tabs->textwindow) {
+	text = lookup_widget(MainFrm,"nbTextMods");
+        dict = lookup_widget(MainFrm,"notebook4");
+        comm = lookup_widget(MainFrm,"notebook1");
+	/*  */	
+	if(settings->text_tabs) {
                 gtk_widget_show(text);
         } else {
                 gtk_widget_hide(text);
         }
-        if(p_tabs->commwindow) {
+        if(settings->comm_tabs) {
                 gtk_widget_show(comm);
         } else {
                 gtk_widget_hide(comm);
         }
-        if(p_tabs->dictwindow) {
+        if(settings->dict_tabs) {
                 gtk_widget_show(dict);
         } else {
                 gtk_widget_hide(dict);
         }
         if(settings->showshortcutbar){
-               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), p_gslayout->shortcutbar_width);
+               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), settings->shortcutbar_width);
         } else {
-               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
+               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1);
         }
+	GTK_CHECK_MENU_ITEM (versestyle)->active = settings->versestyle;
+	bVerseStyle = settings->versestyle;
+	applyfontcolorandsizeSWORD();
 }
 
 /*****************************************************************************		
@@ -555,60 +530,12 @@ void setformatoption(GtkWidget *button)
 *****************************************************************************/
 void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
-        nbpages->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
+        settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
         if(page_num < 3) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
-/******************************************************************************
- *openpropertiesbox - someone clicked properties
-******************************************************************************/
-void openpropertiesbox(void)
-{
-	GtkWidget   *Propertybox, 	/* pointer to propertybox dialog */
-                *cpcurrentverse, 	   /* pointer to current verse color picker */
-		*texttabsbutton,	/* show textwindow notebook tabs toggle button */
-                *comtabsbutton,  	   /* show commentary notebook tabs toggle button */
-                *dicttabsbutton, 	     /* show dict/lex notebook tabs toggle button */
-                *shortcutbarbutton, 	   /* show shortcut bar toggle button */
-                *textgroupbutton,   	   /* show text group toggle button */
-                *comgroupbutton,    	 /* show commentary group toggle button */
-                *dictgroupbutton,  	   /* show dict/lex group toggle button */
-                *historygroupbutton;
 
-	gushort red,       /* vars for setting color */
-		green,
-		blue,
-		a;
-	
-	Propertybox = create_dlgSettings(); /* create propertybox dialog */
-	shortcutbarbutton = lookup_widget(Propertybox,"cbtnShowSCB");
-	texttabsbutton = lookup_widget(Propertybox,"cbtnShowTXtabs");
-	comtabsbutton = lookup_widget(Propertybox,"cbtnShowCOMtabs");
-	dicttabsbutton  = lookup_widget(Propertybox,"cbtnShowDLtabs");
-	cpcurrentverse = lookup_widget(Propertybox,"cpfgCurrentverse"); /* set cpcurrentverse to point to color picker */
-        textgroupbutton = lookup_widget(Propertybox,"cbtnShowTextgroup");
-	comgroupbutton  = lookup_widget(Propertybox,"cbtnShowComGroup");
-	dictgroupbutton = lookup_widget(Propertybox,"cbtnShowDictGroup");
-	historygroupbutton = lookup_widget(Propertybox,"cbtnShowHistoryGroup");
-        a = 000000;
-        /* setup current verse color picker */
-	red = settings->currentverse_red;  /* get color from settings structure */
-	green = settings->currentverse_green;
-	blue =settings->currentverse_blue;
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); /* set color of current verse color picker button */
-	/* set toggle buttons to settings structur */
-	GTK_TOGGLE_BUTTON(shortcutbarbutton)->active = settings->showshortcutbar;
-	GTK_TOGGLE_BUTTON(texttabsbutton)->active = p_tabs->textwindow;
-	GTK_TOGGLE_BUTTON(comtabsbutton)->active = p_tabs->commwindow;
-	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = p_tabs->dictwindow;
-	GTK_TOGGLE_BUTTON(textgroupbutton)->active = settings->showtextgroup;
-	GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
-	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;
-	GTK_TOGGLE_BUTTON(historygroupbutton)->active = settings->showhistorygroup;	
-	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; /* set Personal note format check button */
-	gtk_widget_show(Propertybox); /* show propertybox */
-}
 /*****************************************************************************
  *editbookmarksLoad - load bookmarks into an editor dialog
  *editdlg
@@ -705,6 +632,41 @@ void setautosave(gboolean choice)
 	settings->autosavepersonalcomments = choice; /* remember our choice for next startup */
 }
 
+
+/*****************************************************************************
+ *   -string_is_color- this code is from bluefish-0.6
+ *
+*****************************************************************************/
+gint string_is_color(gchar *color) 
+{
+	gint i;
+
+	if (!color) {
+		g_warning("string_is_color, pointer NULL\n");
+		return 0;
+	}
+	if (strlen(color) != 7) {
+		g_warning("string_is_color, strlen(%s) != 7\n", color);
+		return 0;
+	}
+	if (color[0] != '#') {
+		g_warning("string_is_color, 0 in %s is not #\n", color);
+		return 0;
+	}
+	for (i = 1; i <7 ; i++) {
+		if ((color[i] > 102) 
+				|| (color[i] < 48) 
+				|| ((color[i] > 57) && (color[i] < 65))
+				|| ((color[i] > 70) && (color[i] < 97))) {
+			g_warning("string_is_color, %d in %s is not from a color, it is %d\n", i, color, color[i]);
+			return 0;
+		}
+	}
+	g_warning("string_is_color, %s is color\n", color);
+	return 1;
+
+}
+
 /*****************************************************************************
  * gdouble_arr_to_hex  -- this code is from bluefish-0.6
  *
@@ -737,3 +699,32 @@ gchar *gdouble_arr_to_hex(gdouble *color, gint websafe)
 	return tmpstr;
 }
 
+/*****************************************************************************
+ *  hex_to_gdouble_arr -- this code is from bluefish-0.6
+ *
+*****************************************************************************/
+gdouble *hex_to_gdouble_arr(gchar *color)
+{
+	static gdouble tmpcol[4];
+	gchar tmpstr[8];
+	long tmpl;
+	
+	
+	strncpy(tmpstr, &color[1], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[0] = (gdouble) tmpl;
+	
+	strncpy(tmpstr, &color[3], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[1] = (gdouble) tmpl;
+	
+	strncpy(tmpstr, &color[5], 2);
+	tmpl = strtol(tmpstr, NULL, 16);
+	tmpcol[2] = (gdouble) tmpl;
+
+	g_warning("hex_to_gdouble_arr, R=%d, G=%d, B=%d\n", color[0], color[1], color[2]);
+
+	tmpcol[3] = 0;
+	
+	return tmpcol;
+}

@@ -38,13 +38,9 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
-//#include "bluefish.h"
-//#include "intl.h"
 #include "debug.h"
 #include "spell.h"
 #include "spell_gui.h"
-//#include "configure.h"
-#include "interface.h"
 #include "support.h"
 
 extern GtkWidget *text_widget;
