@@ -28,6 +28,8 @@ libgui_a_SOURCES =  \
     _editor.h \
     _gbs.c \
     _gbs.h \
+    gbs_find_dialog.c \
+    gbs_find_dialog.h \
     about_gnomesword.c \
     about_gnomesword.h \
     about_modules.c \
