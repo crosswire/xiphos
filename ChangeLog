@@ -1,3 +1,8 @@
+2002-10-08  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed gnome/info_box.c and gui/info_box.h
+
+
 2002-09-16  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gnome/dialog.c and gui/dialog.h this is to

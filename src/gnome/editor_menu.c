@@ -49,7 +49,6 @@
 #include "gui/link_dialog.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
-#include "gui/info_box.h"
 #include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
@@ -258,18 +257,11 @@ static void on_deletenote_activate(GtkMenuItem * menuitem,
 void on_save_activate(GtkMenuItem * menuitem,
 				      GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *savemyFile;
-	gchar buf[255];
-
 	if (ecd->filename) {
 		save_file(ecd->filename, ecd);
 		return;
 	} else {
-		sprintf(buf, "%s/.pad", settings.homedir);
-//		savemyFile = gui_fileselection_save(ecd);
-		gtk_file_selection_set_filename(GTK_FILE_SELECTION
-						(savemyFile), buf);
-		gtk_widget_show(savemyFile);
+		gui_fileselection_save(ecd);
 	}
 }
 
@@ -294,14 +286,7 @@ void on_save_activate(GtkMenuItem * menuitem,
 static void on_save_as_activate(GtkMenuItem * menuitem,
 					GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *savemyFile;
-	gchar buf[255];
-
-	sprintf(buf, "%s/.pad", settings.homedir);
-//	savemyFile = gui_fileselection_save(ecd);
-	gtk_file_selection_set_filename(GTK_FILE_SELECTION(savemyFile),
-					buf);
-	gtk_widget_show(savemyFile);
+	gui_fileselection_save(ecd);
 }
 
 /******************************************************************************
