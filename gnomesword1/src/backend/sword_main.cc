@@ -27,6 +27,7 @@
 #include <gbfplain.h>
 #include <thmlplain.h>
 #include <string.h>
+#include <utf8html.h>
 
 #include "backend/sword_main.hh"
 
@@ -53,6 +54,7 @@ SwordMain::SwordMain() {
 	
 	commDisplay      = 0;	// set in create
 	dictDisplay     = 0;	// set in create
+	textDisplay     = 0;	// set in create
 }
 
 
@@ -67,31 +69,28 @@ SwordMain::~SwordMain() {
 		delete commDisplay;
 	if (dictDisplay)
 		delete dictDisplay;
+	if (textDisplay)
+		delete textDisplay;
 }
+
 
 void SwordMain::init_SWORD() {
 	ModMap::iterator it;
-	
+	main_setup_new_displays();
 	for (it = display_mgr->Modules.begin();
 				it != display_mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
-			if (!strcmp((*it).second->Name(), settings.MainWindowModule))	
-				text_mod = (*it).second;
+		display_mod = (*it).second;
+		if (!strcmp(display_mod->Type(), TEXT_MODS)) {
+			display_mod->Disp(textDisplay);
 		}
-		if (!strcmp((*it).second->Type(), COMM_MODS)) {
-			if (!strcmp((*it).second->Name(), settings.CommWindowModule))	
-				comm_mod = (*it).second;
-			(*it).second->Disp(commDisplay);
+		if (!strcmp(display_mod->Type(), COMM_MODS)) {
+			display_mod->Disp(commDisplay);
 		}
-		if (!strcmp((*it).second->Type(), DICT_MODS)) {
-			if (!strcmp((*it).second->Name(), settings.DictWindowModule))	
-				dict_mod = (*it).second;
-			(*it).second->Disp(dictDisplay);
+		if (!strcmp(display_mod->Type(), DICT_MODS)) {
+			display_mod->Disp(dictDisplay);
 		}
-		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
-			if (!strcmp((*it).second->Name(), settings.book_mod))	
-				gbs_mod = (*it).second;
-			(*it).second->Disp(commDisplay);
+		if (!strcmp(display_mod->Type(), BOOK_MODS)) {
+			display_mod->Disp(commDisplay);
 		}			
 	}
 }
@@ -203,5 +202,114 @@ void SwordMain::get_module_options(GList * options) {
 		options = g_list_append(options, strdup((char *) (*it).c_str()));
 	}
 }
+
+
+int SwordMain::is_Bible_key(const char * list, char * current_key) {
+	VerseKey key;
+	
+	key.setText(current_key);
+	ListKey verses = key.ParseVerseList(list, key);
+	return verses.Count();
+}
+
+
+char *SwordMain::get_valid_key(const char *key) {
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	return strdup((char *) vkey.getText());
+}
+
+
+char *SwordMain::get_module_key() {
+	(const char *) *display_mod;
+	return strdup(display_mod->KeyText());
+}
+
+int SwordMain::is_module(const char *mod_name) {
+	ModMap::iterator it = main_mgr->Modules.find(mod_name);
+	if (it != main_mgr->Modules.end()) {
+		return 1;
+	}
+	return 0;
+}
+
+
+int SwordMain::module_type(char *mod_name) {
+	ModMap::iterator it;	//-- iteratior
+	if((!mod_name) || (strlen(mod_name) < 2)) 
+		return -1;
+	//-- iterate through the modules until we find modName 
+	it = main_mgr->Modules.find(mod_name);
+	//-- if we find the module
+	if (it != main_mgr->Modules.end()) {
+
+		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
+			return TEXT_TYPE;
+		}
+
+		if (!strcmp((*it).second->Type(), COMM_MODS)) {
+			return COMMENTARY_TYPE;
+		}
+
+		if (!strcmp((*it).second->Type(), DICT_MODS)) {
+			return DICTIONARY_TYPE;
+		}
+
+		if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+			return BOOK_TYPE;
+		}
+	}
+	return -1;
+}
+
+
+char *SwordMain::get_entry_attribute(const char *level1, const char *level2, const char *level3) {
+	UTF8HTML u2html;	
+	display_mod->RenderText();                 	
+	SWBuf preverseHeading = display_mod->getEntryAttributes()
+					   [level1][level2][level3].c_str();
+	u2html.processText(preverseHeading);
+	if (preverseHeading.length()) {  
+		return strdup(preverseHeading.c_str());
+	}  
+	return NULL;	
+}
+
+
+int SwordMain::set_module_key(const char *module_name, const char *key) {
+	display_mod = display_mgr->Modules[module_name];
+	if (display_mod) {
+		display_mod->setKey(key);
+		//printf("mod = %s\n",display_mod->Name());
+		return 1;
+	}
+	else 
+		return 0;
+	
+}
+
+
+char *SwordMain::navigate_module(int direction) {
+	if (direction == -1)
+		return strdup((char *) display_mod->KeyText());
+
+	switch (direction) {
+	case 0:
+		(*display_mod)--;
+		break;
+	case 1:
+		(*display_mod)++;
+		break;
+	}
+	display_mod->Error();
+	return strdup((char *) display_mod->KeyText());
+}
+
+
+void SwordMain::setup_displays(void) {
+	
+}
+
 
 /* end of file */

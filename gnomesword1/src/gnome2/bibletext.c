@@ -149,12 +149,9 @@ void gui_set_text_mod_and_key(gchar * mod_name, gchar * val_key)
 
 void gui_display_text(const gchar * val_key)
 {
+	main_display_bible(settings.MainWindowModule, val_key);
+	/*
 	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
-/*
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
-				1);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text),
-				0);*/
 	if(is_module_rtl(settings.MainWindowModule))
 		chapter_display(widgets.textview,
 			settings.MainWindowModule,
@@ -164,6 +161,7 @@ void gui_display_text(const gchar * val_key)
 			settings.MainWindowModule,
 			ops, (gchar *) val_key, TRUE);
 	g_free(ops);
+	*/
 }
 
 
