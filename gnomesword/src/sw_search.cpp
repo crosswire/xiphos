@@ -68,8 +68,8 @@ extern GtkWidget *clistSearchResults;
 static void percentUpdate(char percent, void *userData) ;
 static char printed = 0;
 static SWDisplay 
-	*searchresultssbDisplay,	/* to display modules in searchresults */
-	*searchresultstextsbDisplay;
+	*searchresultssbDisplay;	/* to display modules in searchresults */
+	//*searchresultstextsbDisplay;
 static SWMgr 
 	*searchresultssbMgr; 
 static SWModule 
@@ -187,37 +187,40 @@ searchSWORD (GtkWidget *widget, SETTINGS *s)
 		//-- give search string to sword for search
 		gtk_clist_clear(GTK_CLIST(clistSearchResults));
 		for (ListKey & searchResults = searchMod->Search (entryText,
-		                                                searchType,
-		                                                searchParams,
-		                                                currentScope, 0,
-		                                                &percentUpdate,
-		                                                (void*)&progressunits);
-		                                                !searchResults.Error ();
-		                                                searchResults++) {		
+				searchType,
+				searchParams,
+				currentScope, 0,
+				&percentUpdate,
+				(void*)&progressunits);
+				!searchResults.Error ();
+				searchResults++) {		
 			resultText = (const char *)searchResults;	//-- put verse key string of find into a string
 			g_string_sprintf(tmpbuf,"%s, %s|%s|%s",
-						resultText,
-						searchMod->Name(),
-						resultText,
-						searchMod->Name());
+				resultText,
+				searchMod->Name(),
+				resultText,
+				searchMod->Name());
 			list = g_list_append(list,g_strdup(tmpbuf->str)); //-- list retruned so user can save search results as bookmarks
 			/* fill clist */
 			tmpMod->SetKey((const char *)searchResults);
 			VerseKey *key = (VerseKey *) &tmpMod->Key();
 			int curVerse = key->Verse();
 			int curChapter = key->Chapter();
-			GString* vref = g_string_new((const char *)searchResults);
+			//GString* vref = g_string_new((const char *)searchResults);
 			/* let's shorten the book name */
-			vref = g_string_truncate (vref, 5);
-			sprintf(buf,"%s %d:%d",vref->str,curChapter,curVerse);				
+			/*vref = g_string_truncate (vref, 4);*/
+			sprintf(buf,"%s",(const char *)searchResults);	
+					
 			mybuf[0] = buf; 							
-			g_string_free(vref,TRUE);
+			//g_string_free(vref,TRUE);
+			/*
 			vref = g_string_new((char *)tmpMod->StripText());			
 			vref = g_string_truncate (vref, 45);
 			sprintf(buf2,"%s....",vref->str);	
 			mybuf[1] = buf2;
+			*/
 			gtk_clist_insert(GTK_CLIST(clistSearchResults), count, mybuf);
-			g_string_free(vref,TRUE);
+			//g_string_free(vref,TRUE);
 			/* remember finds for next search's scope in case we want to use them */						
 			searchScopeList << (const char *) searchResults;	
 			if(!count) 
@@ -286,15 +289,15 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	searchresultssbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
 	searchresultssbMod     = NULL;
 	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget);
-	searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
+	//searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
 	
 	for(it = searchresultssbMgr->Modules.begin(); it != searchresultssbMgr->Modules.end(); it++){
 		searchresultssbMod = (*it).second;
-		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+		/*if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			searchresultssbMod->Disp(searchresultstextsbDisplay);			
-		}else{
+		}else{*/
 			searchresultssbMod->Disp(searchresultssbDisplay);
-		}
+		//}
 	}
 }
 
@@ -304,8 +307,10 @@ void shutdownsearchresultsSBSW(void)
 	delete searchresultssbMgr;	
 	if(searchresultssbDisplay)
 		delete searchresultssbDisplay;	
+	/*
 	if(searchresultstextsbDisplay)
-		delete searchresultstextsbDisplay ;
+		delete searchresultstextsbDisplay;
+	*/
 }
 
 void
@@ -313,7 +318,8 @@ changesearchresultsSBSW(SETTINGS *s, gchar *url)
 {	
 	searchresultssbMod->SetKey(url);
 	searchresultssbMod->Display();
+	
 	if(s->showinmain)
-		changeVerseSWORD(url);
+		changeVerseSWORD(url);	
 }
 

@@ -63,14 +63,14 @@ int
 main (int argc, char *argv[])
 {
 	GtkWidget 
-		*mainwindow;
-	GtkWidget 
+		*mainwindow,	
 		*splash;
 	gboolean 		
 		newconfigs = FALSE,	
 		newbookmarks = FALSE;
 	gint 
 		icreatefiles=0;
+	
 #ifdef GTKHTML_HAVE_GCONF
 	GError  *gconf_error  = NULL;
 #endif	
@@ -107,9 +107,9 @@ main (int argc, char *argv[])
 	}
   	/* set pointer to structure */
   	settings = &myset; 
-	loadconfig(); /* new */  /*** sw_propertiew.cpp ***/  
+	loadconfig(settings); /* new */  /*** sw_propertiew.cpp ***/  
 	if(strcmp(VERSION,settings->gs_version))
-		gs_firstrunSWORD(); /*** gs_sword.cpp ***/ 		
+		gs_firstrunSWORD(); /*** sw_gnomesword.cpp ***/ 		
 	/* splash screen */	
 	splash = e_splash_new (); /*** e-splash.c ***/ 
 	if(settings->showsplash){	
@@ -125,7 +125,7 @@ main (int argc, char *argv[])
   	initSWORD(settings); /*** sw_gnomesword.cpp ***/  
 	if(settings->showsplash)
 		e_splash_set_icon_highlight (E_SPLASH(splash),3, TRUE);
-  	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
+  	initGnomeSword(settings,biblemods,commentarymods,dictionarymods,percommods,splash); /*** gs_gnomesword.c ***/ 
 	if(icreatefiles == 2 || icreatefiles == 3 ){		
 		createbookmarksBM(swbmDir); /*** sw_bookmarks.cpp ***/ 
 	}

@@ -60,10 +60,10 @@ gchar *mycolor;
 extern SETTINGS *settings;
 
 /***************************************************************************** 
- * ComEntryDisp - for displaying commentary modules in a GtkHTML widget
+ * EntryDisp - for displaying modules in a GtkHTML widget wo/displaying the key
  * imodule - the Sword module to display
  *****************************************************************************/
-char ComEntryDisp::Display(SWModule & imodule)
+char EntryDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[255], *utf8str;
 	GString *strbuf;
@@ -96,11 +96,24 @@ char ComEntryDisp::Display(SWModule & imodule)
  *****************************************************************************/
 char GtkHTMLEntryDisp::Display(SWModule & imodule)
 {
-	gchar tmpBuf[500], *buf, *font, *use_font, *use_font_size, *token;
-	gchar *utf8str;
-	gint mybuflen, utf8len;
-	const gchar **end;
-	string swfontsize;
+	gchar 
+		tmpBuf[500], 
+		*buf,  
+		*strkey, 
+		*font, 
+		*use_font, 
+		*use_font_size, 
+		*token,
+		*utf8str;
+	gint 
+		mybuflen, 
+		utf8len;
+	const gchar 
+		**end;
+	string 
+		swfontsize;
+	GString 
+		*str;
 	
 	use_gtkhtml_font = false;
 	use_font = g_strdup(pick_font(imodule));
@@ -116,35 +129,68 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 	sprintf(tmpBuf,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
-		settings->bible_bg_color, settings->bible_text_color,
+		settings->bible_bg_color, 
+		settings->bible_text_color,
 		settings->link_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str);	
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	/* show verse ref in text widget  */
-	sprintf(tmpBuf,
-		"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
-		imodule.Name(), imodule.Description(),
-		settings->bible_verse_num_color, imodule.Name(),
-		imodule.KeyText());
-	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	str = g_string_new("");
+	
+	/* show verse ref in html widget  */
+	strkey = g_strdup((const char *)imodule.KeyText());
+	if((settings->displaySearchResults)){	
+		g_string_sprintf(str,
+			"<A HREF=\"version=%s passage=%s\"><FONT COLOR=\"%s\">[%s] %s </font></A>",
+			(const char *)imodule.Name(), 
+			strkey,
+			settings->bible_verse_num_color, 
+			(const char *)imodule.Name(),
+			strkey);
+	}
+	
+	else {
+		g_string_sprintf(str,
+			"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
+			(const char *)imodule.Name(), 
+			(const char *)imodule.Description(),
+			settings->bible_verse_num_color, 
+			(const char *)imodule.Name(),
+			strkey);
+	}
+	g_free(strkey);
+	
+	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
+	utf8len = strlen(utf8str);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
+	g_string_free(str,TRUE);
 	
 	if(use_gtkhtml_font)
 		sprintf(tmpBuf, "<font size=\"%s\">", use_font_size);
 	else
 		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);
+	
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str);
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-	displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
-		    strlen((const char *) imodule));
+	
+	if((settings->displaySearchResults)){	
+		str = g_string_new((const char *) imodule);
+		marksearchwords(str);
+		utf8str = str->str;			
+	} else {
+		str = g_string_new((const char *) imodule);		
+		utf8str = str->str;			
+	}
+		
+	displayHTML(GTK_WIDGET(gtkText), utf8str,
+		    strlen(utf8str));
 	sprintf(tmpBuf, " %s", "</font></body></html>");
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	endHTML(GTK_WIDGET(gtkText));
+	g_string_free(str,TRUE);
 	g_free(use_font);
 	return 0;
 }
@@ -191,7 +237,7 @@ gchar* GtkHTMLEntryDisp::pick_font(SWModule & imodule)
  ******************************************************************************/
 char GTKutf8ChapDisp::Display(SWModule & imodule)
 {
-	char tmpBuf[500], *buf, *mybuf, versecolor[80];
+	char tmpBuf[80], *buf, *mybuf, versecolor[80];
 	VerseKey *key = (VerseKey *) (SWKey *) imodule;
 	int curVerse = key->Verse();
 	int curChapter = key->Chapter();
@@ -221,12 +267,12 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	}
 	
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
-	sprintf(tmpBuf,
+	g_string_sprintf(str,
 		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings->bible_bg_color, settings->bible_text_color,
 		settings->link_color);
-	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
+	utf8len = strlen(utf8str);	
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++) {
@@ -234,38 +280,40 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			sprintf(versecolor, "%s", settings->currentverse_color);
 		else
 			sprintf(versecolor, "%s", settings->bible_text_color);
-		sprintf(tmpBuf,
+		g_string_sprintf(str,
 			"&nbsp; <A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"%s\"><B>  %d</B></font></A> ",
 			imodule.Description(), imodule.KeyText(),
 			key->Verse(), settings->bible_verse_num_color,
 			key->Verse());
-		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		utf8str = e_utf8_from_gtk_string(gtkText, str->str);
+		utf8len = strlen(utf8str);	
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
 		if(use_gtkhtml_font)
-			sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">", versecolor, use_font_size);    
+			g_string_sprintf(str, "<font color=\"%s\" size=\"%s\">", versecolor, use_font_size);    
 		else 
-			sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);   
+			g_string_sprintf(str, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);   
 		
-		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		utf8str = e_utf8_from_gtk_string(gtkText, str->str);
+		utf8len = strlen(utf8str);	
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 		
 		if(newparagraph && settings->versestyle) {
 			newparagraph = false;
 			sprintf(tmpBuf,  "%c ", c);
 			utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-			utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+			utf8len = strlen(utf8str);	
 			displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 		} 
-		if((settings->displaySearchResults) && (key->Verse() == curVerse)){
-			g_string_erase(str,0,str->len);
-			g_string_append(str,(char *) imodule);
+		if((settings->displaySearchResults) && (key->Verse() == curVerse)){			
+			g_string_free(str,TRUE);
+			str = g_string_new((const char *) imodule);
 			marksearchwords(str);
 			utf8str = str->str;			
 		} else {
-				utf8str = (char *) imodule;			
+			g_string_free(str,TRUE);
+			str = g_string_new((const char *) imodule);		
+			utf8str = str->str;			
 		}
 		displayHTML(GTK_WIDGET(gtkText), utf8str,
 			    strlen(utf8str));
@@ -286,12 +334,12 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 			else 
 				sprintf(tmpBuf, " %s", "</font><p>");
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		utf8len = strlen(utf8str);	
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	}
 	sprintf(tmpBuf, " %s", "</body></html>");
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	utf8len = strlen(utf8str);	
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	key->Verse(1);
 	key->Chapter(1);
@@ -308,9 +356,9 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 
 /*
  * marks search word(s) or phrase in results view 
- * *str is current verse in chapter display
+ * str is current verse 
 */
-void GTKutf8ChapDisp::marksearchwords( GString *str )
+void GtkHTMLEntryDisp::marksearchwords( GString *str )
 {
 	gchar *tmpbuf, *buf, *searchbuf;
 	gint len1, len2, len3, len4;
@@ -655,114 +703,6 @@ void AboutModsDisplayHTML(char *to, char *text)
 		*to++ = text[i];
 	}
 	*to++ = 0;
-}
-
-GdkColor GTKEntryDisp::colourBlue;
-GdkColor GTKEntryDisp::colourGreen;
-GdkColor GTKEntryDisp::colourRed;
-GdkColor GTKEntryDisp::colourCur;
-
-GdkColor myGreen;
-GdkColor BGcolor;
-GdkFont *roman_font, *italic_font, *versenum_font, *bold_font;
-
-
-gchar *font_mainwindow =
-    "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
-    *font_italic_mainwindow =
-    "-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1",
-    *font_interlinear =
-    "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
-    *font_italic_interlinear =
-    "-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1",
-    *font_currentverse =
-    "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
-    *font_italic_currentverse =
-    "-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1";
-
-
-/* --------------------------------------------------------------------------------------------- */
-char GTKEntryDisp::Display(SWModule & imodule)
-{
-	char tmpBuf[255], *sourceType;
-	GdkFont *sword_font;
-	ModMap::iterator it;
-
-
-	/* Load a  font */
-	sword_font =
-	    gdk_font_load
-	    ("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
-	gtk_text_set_point(GTK_TEXT(gtkText), 0);
-	gtk_text_forward_delete(GTK_TEXT(gtkText),
-				gtk_text_get_length((GTK_TEXT(gtkText))));
-
-	int curPos = 0;
-	(const char *) imodule;	/* snap to entry */
-	gtk_text_freeze(GTK_TEXT(gtkText));
-	/* let's find out if we have a comment or dict module */
-	//it = mainMgr->Modules.find(imodule.Name());
-	sprintf(tmpBuf, "[%s][%s] ", imodule.Name(), imodule.KeyText());
-	/* show verse ref in text widget  */
-	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
-			-1);
-	/* show module text for current key */
-	gtk_text_insert(GTK_TEXT(gtkText), sword_font,
-			&gtkText->style->black, NULL,
-			(const char *) imodule, -1);
-	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
-	gtk_text_thaw(GTK_TEXT(gtkText));
-	return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-char GTKPerComDisp::Display(SWModule & imodule)
-{
-	char tmpBuf[255];
-	GdkFont *sword_font;
-	ModMap::iterator it;
-	SWMgr *Mgr;
-	/* Load a  font */
-	sword_font =
-	    gdk_font_load
-	    ("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
-
-	gtk_text_set_point(GTK_TEXT(gtkText), 0);
-	gtk_text_forward_delete(GTK_TEXT(gtkText),
-				gtk_text_get_length((GTK_TEXT(gtkText))));
-	int curPos = 0;
-	(const char *) imodule;	/*  snap to entry */
-	gtk_text_freeze(GTK_TEXT(gtkText));
-
-	
-	//it = mainMgr->Modules.find(imodule.Name());
-	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* else just the keytext */
-	if (((*Mgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
-	    (settings->editnote)) {	/* check for edit mode */
-		GtkWidget *statusbar;	/* pointer to comments statusbar */
-		gint context_id2;	/* statusbar context_id ??? */
-		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* add module name and verse to edit note statusbar */
-		/* setup statusbar for personal comments */
-		statusbar = lookup_widget(settings->app, "sbNotes");	/*        get stutusbar */
-		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");	/* get context id */
-		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	/* ready status */
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);	/* show modName and verse ref in statusbar */
-		gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, " ", -1);	/* change font color to black for editing */
-		gtk_text_set_point(GTK_TEXT(gtkText), 0);
-		gtk_text_forward_delete(GTK_TEXT(gtkText),
-					gtk_text_get_length((GTK_TEXT
-							     (gtkText))));
-	} else {		/* not useing personal comment module in edit mode */
-		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);	/* show modName and verse ref in text widget */
-	}
-	/* show module text for current key */
-	gtk_text_insert(GTK_TEXT(gtkText), sword_font,
-			&gtkText->style->black, NULL,
-			(const char *) imodule, -1);
-	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
-	gtk_text_thaw(GTK_TEXT(gtkText));
-	delete Mgr;
-	return 0;
 }
 
 
