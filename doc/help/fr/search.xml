@@ -3,117 +3,141 @@
 	<title>Fonctions de recherche</title>
 	<sect1 id="gnomesword-searchpane">
 		<title>Recherches simples</title>
-			<para> To conduct a quick search within the current module the 'Search Bar' in the 'Side Pane' should usually be absolutely adequate. 	Click either in the menu bar <guimenuitem>Edit-&gt;Search</guimenuitem> or in the 'Side Pane' <guimenuitem> Modules -&gt;Search</guimenuitem> to access it.
-
+			<para>
+				Pour rechercher rapidement un mot ou une expression dans le module en cours, 
+				le plus approprié est d'utiliser la fonction recherche du volet latéral. 
+				Cette fonction recherche est activée par le menu 
+				<guimenuitem>Editer-&gt;Rechercher</guimenuitem> ou par le bouton 
+				<guimenuitem>Search</guimenuitem> du volet latéral.
 			</para>
 		<figure>
-		<title>The Search Bar</title>
+		<title>Le formulaire de recherche</title>
 		<screenshot>
 	 	       <mediaobject>
 		      		<imageobject>
 				        <imagedata fileref="figures/interface_searchpane" format="PNG"/>
 				</imageobject>
 			 	<textobject>
-		     			<phrase>The Search Bar</phrase>
+		     			<phrase>Le formulaire de recherche</phrase>
 				</textobject>
 		       </mediaobject>
 		 </screenshot>
 	    </figure>
 	   <para>
-		La <interface>Rechercher</interface> est constituée des parties suivantes :
+		Le formulaire <interface>Rechercher</interface> est constituée des parties suivantes :
 		</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-					Search Key Entry box
+						Zone de saisie de l'expression à rechercher
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-					Search Module Selector
+						Rechercher dans
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-					Search Type Selector
+						Type de recherche
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-					Search Options Checkbox
+						Options de la recherche
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-					Search Scope Selector
+						Étendue de la recherche
 					</para>
 				</listitem>
 			</itemizedlist>			
 		<sect2 id="gnomesword-search-key">
-			<title>Search Key Entry Box</title>
-			<para>Allows entry of the key for which you would like to search. The 
-			search key can be a word, part of a word, several words, a phrase, or 
-			a regular expression depending on the type of search selected. When 
-			the search key is entered and all other selections in the search dialog 
-			are complete, click the <guibutton>Find</guibutton> button to begin 
-			the search.</para>
-			</sect2>
+			<title>Zone de saisie de l'expression à rechercher</title>
+			<para>
+				La zone de saisie se situe au-dessus du bouton <guibutton>Rechercher</guibutton>.
+				L'expression à rechercher peut être un mot, une partie de mot, plusieurs mots,
+				une phrase, ou une expression régulière suivant le type de recherche sélectionné.
+				Un click sur le bouton <guibutton>Rechercher</guibutton> démarre la recherche.
+			</para>
+		</sect2>
 		
 		<sect2 id="gnomesword-search-modselect">
-			<title>Search Module Selector</title>
-			<para>Allows selection of which modules	you would like to search. 
-			Select <guibutton>Bible</guibutton> to search Bible versions or 
-			<guibutton>Commentary</guibutton> to search commentaries. Only 
-			the currently active module will be searched.</para>
+			<title>Rechercher dans</title>
+			<para>
+				Cette option permet de désigner le texte dans lequel la recherche sera effectuée.
+				Les deux modules possibles, texte biblique ou commentaire, sont ceux en cours d'utilisation,
+			</para>
 		</sect2>
 		
 		<sect2 id="gnomesword-search-typeselect">
-		<title>Search Type Selector</title>
-		<para>Allows selection of the type of search. There are three search
-		types available:
+		<title>Type de recherche</title>
+		<para>
+		<!-- Allows selection of the type of search. There are three search
+		types available: -->
 		</para>
 			<variablelist>
 				<varlistentry>
-					<term><guibutton>Multi word</guibutton></term> 
-					<listitem><para>This type will match any verse that has 
-					all the words in the search key, regardless of where 
-					they appear in the verse.</para></listitem>
+					<term><guibutton>Mots multiples</guibutton></term> 
+					<listitem>
+						<para>
+							Cette recherche s'effectue à l'aide d'un mot, d'une partie de mot, 
+							ou de plusieurs mots.
+							Les versets comprenant tous les mots à rechercher seront
+							obtenus, quelque soit l'ordre dans lequel ces mots apparaissent 
+							dans le verset.
+						</para>
+					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Regular expression</guibutton></term> 
-					<listitem><para>This search uses a regular expression
+					<term><guibutton>Expression régulière</guibutton></term> 
+					<listitem>
+						<para>
+							This search uses a regular expression
 					as a search key. A regular expression is a pattern used 
 					to match a string of text. A regular expression can be 
 					used to find verses with words that match a particular 
 					pattern. For example the regular expression <example>
 					\ A[a-z]*iah </example> will match verses that contain
-					the words Aiah, Ahaziah, Athaliah and Amariah.</para>
-					<para>A complete discussion of regular expressions is 
+					the words Aiah, Ahaziah, Athaliah and Amariah.
+						</para>
+						<para>
+							A complete discussion of regular expressions is 
 					beyond the scope of this manual, but more information 
-					can be found in the grep man page.</para></listitem>
+					can be found in the grep man page.
+						</para>
+					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><guibutton>Exact phrase</guibutton></term> 
-					<listitem><para>This type will match the search key
-					exatly as entered. If the search key is <userinput>
-					it is good</userinput>, this search would match a verse
-					which contains "<emphasis>it is good</emphasis>," but 
-					would not match a verse	which contains "<emphasis>
-					good</emphasis>, and doeth <emphasis>it</emphasis> not, 
-					to him it <emphasis>is</emphasis> sin."</para></listitem>
+					<term><guibutton>Phrase exacte</guibutton></term> 
+					<listitem>
+						<para>
+							Seuls les versets qui contiennent exactement
+							la phrase à rechercher seront obtenus.
+							Si la phrase à rechercher est <userinput>
+							en liberté</userinput>, les versets obtenus
+							contiendront  "<emphasis>en liberté</emphasis>,"
+							mais pas "<emphasis>en</emphasis> toute 
+							<emphasis>liberté</emphasis>".
+				
+						</para>
+					</listitem>
 				</varlistentry>
 			</variablelist>
  		</sect2>
 
 		<sect2 id="gnomesword-search-options">
-			<title>Search Options Checkbox</title>
-			<para>Allows selecting of search options. The only available option 
+			<title>Options de la recherche</title>
+			<para>
+			<!-- Allows selecting of search options. The only available option 
 			is <guibutton>Match case</guibutton>. Check this box to make the 
-			search case sensitive.</para>
+			search case sensitive.--> 
+			</para>
 		</sect2>
 		
 		<sect2 id="gnomesword-search-scopeselect">
-			<title>Search Scope Selector</title>
+			<title>Étendue de la recherche</title>
 			<para>Allows defining the range within the specificed module that will
 			be searched. There are three search scopes available:</para>
 			<variablelist>
