@@ -68,9 +68,10 @@ gboolean changemain = TRUE; /* change verse of Bible text window */
 gint dictpages,
 	 compages;
 SETTINGS *settings;
-
+GS_APP gs;
 gchar 	 bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
-
+GS_LAYOUT gslayout,
+		   *p_gslayout;
 
 
 /*****************************************************************************
@@ -106,7 +107,11 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 {
 	GtkLabel *label1;
 	GtkWidget *notebook;
+	p_gslayout = &gslayout;
 	
+	
+	gtk_window_set_default_size(GTK_WINDOW(app), p_gslayout->gs_width, p_gslayout->gs_hight);
+	g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
 /* setup shortcut bar */
 	setupSB(biblemods, commentarymods ,dictionarymods);	
 /* set color for current verse */
@@ -160,6 +165,10 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
+	/* set size of bible and commentary pane */
+	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), p_gslayout->upperpane_hight);
+	/* set size of bible pane */
+	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")),p_gslayout->biblepane_width);
 #else /* !USE_SHORTCUTBAR */
         if(settings->showshortcutbar){
                 gtk_paned_set_position(GTK_PANED(lookup_widget(app,"hpaned2")), 106);

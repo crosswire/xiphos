@@ -47,6 +47,8 @@ extern SETTINGS *settings;
 
 GS_FONTS *gsfonts,
 		mfonts;
+		
+extern GS_LAYOUT gslayout;
 /******************************************************************************
  * load gnomesword configuration - using sword SWConfig
  ******************************************************************************/
@@ -58,6 +60,13 @@ gboolean loadconfig(void)
 	SWConfig settingsInfo(buf); 
 	settingsInfo.Load();
 	//g_warning("buf = %s",buf);
+	
+	gslayout.shortcutbar_width = atoi(settingsInfo["LAYOUT"]["Shortcutbar"].c_str()); 
+	gslayout.upperpane_hight = atoi(settingsInfo["LAYOUT"]["UperPane"].c_str()); 
+	gslayout.biblepane_width = atoi(settingsInfo["LAYOUT"]["BiblePane"].c_str()); 
+	gslayout.gs_width = atoi(settingsInfo["LAYOUT"]["AppWidth"].c_str()); 
+	gslayout.gs_hight = atoi(settingsInfo["LAYOUT"]["AppHight"].c_str()); 
+	
 	
 	sprintf(mfonts.bible_font_size, "%s", settingsInfo["FontSize"]["BibleWindow"].c_str()); 
 	sprintf(mfonts.commentary_font_size, "%s", settingsInfo["FontSize"]["CommentaryWindow"].c_str()); 
@@ -94,7 +103,7 @@ gboolean loadconfig(void)
 	settings->interlinearpage = atoi(settingsInfo["User Options"]["interlinearpage"].c_str());
 	settings->showhistorygroup = atoi(settingsInfo["User Options"]["showhistorygroup"].c_str());
 	settings->shortcutbarsize = atoi(settingsInfo["User Options"]["shortcutbarsize"].c_str());   
-  	
+  	//g_warning(settingsInfo["TEST"]["mytest"].c_str());
 	settings->notebook3page = atoi(settingsInfo["Notebooks"]["notebook3page"].c_str());
 	gsfonts = &mfonts;
 	return true;
@@ -130,6 +139,17 @@ gboolean saveconfig(void)
 	settingsInfo["FontSize"]["CommentaryWindow"] = gsfonts->commentary_font_size; 
     	settingsInfo["FontSize"]["DictionaryWindow"] = gsfonts->dictionary_font_size; 
 	settingsInfo["FontSize"]["InterlinearWindow"] = gsfonts->interlinear_font_size;
+	
+	sprintf(buf,"%d",gslayout.shortcutbar_width);	
+	settingsInfo["LAYOUT"]["Shortcutbar"] = buf ;
+	sprintf(buf,"%d",gslayout.upperpane_hight);
+	settingsInfo["LAYOUT"]["UperPane"] = buf ;
+	sprintf(buf,"%d",gslayout.biblepane_width);
+	settingsInfo["LAYOUT"]["BiblePane"] = buf ;
+	sprintf(buf,"%d",gslayout.gs_width); 
+	settingsInfo["LAYOUT"]["AppWidth"] = buf ;
+	sprintf(buf,"%d",gslayout.gs_hight);
+	settingsInfo["LAYOUT"]["AppHight"] = buf ;
 	
 	settingsInfo["User Options"]["currentVerseColor"] = settings->currentverse_color;
 	
@@ -199,7 +219,7 @@ gboolean saveconfig(void)
 	sprintf(buf, "%d",settings->notebook3page);
 	settingsInfo["Notebooks"]["notebook3page"] = buf; 
 	
-	
+	//settingsInfo["TEST"]["mytest"] = "KJV,ROM 3:23, MHC, John 3:16";
 	
     	settingsInfo.Save();
 	return true;
