@@ -349,23 +349,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 	if (font) {
 		//g_warning(font);
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
-	} /*else if (!stricmp(font, "greek1")) { 
-		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
-		//g_string_sprintf(strbuf,"<div style=\"font-family: greek1; font-size: 16pt\">",settings->bible_font_size);
-	} else if (!stricmp(font, "BSTHebrew")) {
-		strbuf = g_string_new("");	
-		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
-	} else if (!stricmp(font, "arial unicode ms")) {
-		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT FACE=\"%s\" SIZE=\"%s\">", font, settings->bible_font_size);
-		utf = TRUE;
-	} else {
-		g_warning("no font");
-		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,"<FONT SIZE=\"%s\">",settings->bible_font_size);
-	}*/
+		g_string_sprintf(strbuf,"<font face=\"%s\" size=\"%s\">", font, settings->bible_font_size);
+	} 
 	/* body */
 	/*if(utf){
 		gchar *tmpstr;		

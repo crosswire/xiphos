@@ -47,7 +47,7 @@
 #include "utils.h"
 #include "properties.h"
 #include "text.h"
-#include "gs_sword.h" 
+#include "./src/gssword/gs_sword.h" 
 #include "gs_editor.h" 
 
 #define BUFFER_SIZE 4096

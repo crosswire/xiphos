@@ -3568,6 +3568,8 @@ trap 'rm -fr `echo "
 Makefile
 macros/Makefile
 html/Makefile
+src/gsdialogs/Makefile
+src/gssword/Makefile
 src/Makefile
  config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
@@ -3716,6 +3718,8 @@ cat >> $CONFIG_STATUS <<EOF
 CONFIG_FILES=\${CONFIG_FILES-"Makefile
 macros/Makefile
 html/Makefile
+src/gsdialogs/Makefile
+src/gssword/Makefile
 src/Makefile
 "}
 EOF

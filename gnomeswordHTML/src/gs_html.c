@@ -41,7 +41,7 @@
 
 #include "gs_html.h"
 #include "support.h"
-#include "gs_sword.h"
+#include "gssword/gs_sword.h"
 #include "gs_editor.h"
 
 

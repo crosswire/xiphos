@@ -49,7 +49,7 @@
 //#include "menubar.h"
 //#include "persist-file-impl.h"
 //#include "persist-stream-impl.h"
-#include "gs_sword.h"
+#include "./src/gssword/gs_sword.h"
 #include "gs_editor.h"
 #include "control-data.h"
 #include "popup.h"
