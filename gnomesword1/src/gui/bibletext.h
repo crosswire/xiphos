@@ -34,6 +34,7 @@ typedef struct _text_data TEXT_DATA;
 struct _text_data {
 	/* dialog widgets */
 	GtkWidget *dialog;
+	GtkWidget *toolbar_nav;
 	GtkWidget *cbe_book;
 	GtkWidget *spb_chapter;
 	GtkWidget *spb_verse;
@@ -46,7 +47,6 @@ struct _text_data {
 	GtkWidget *frame;
 	GtkWidget *showtabs;
 	GtkWidget *module_options_menu;
-	GtkWidget *toolbar_nav;
 	
 	gchar *mod_name;
 	gchar *search_string;

@@ -66,7 +66,8 @@ typedef enum
 	SHOW_DEVOTION,
 	USE_STUDYPAD,
 	USE_STUDYPAD_DIALOG,
-	USE_PERCOMM_DIALOG
+	USE_PERCOMM_DIALOG,
+	TABBED_BROWSING
 	
 }which_check_button;
 
@@ -136,7 +137,7 @@ typedef struct _preferences_check_buttons CHECK_BUTTONS;
 struct _preferences_check_buttons {
 	GtkWidget *use_defaults;	/* radio button */
 
-	//GtkWidget *show_shortcut_bar;
+	GtkWidget *enable_tabbed_browsing;
 	GtkWidget *show_bible_tabs;
 	GtkWidget *show_commentary_tabs;
 	GtkWidget *show_dictionary_tabs;
@@ -666,7 +667,23 @@ static void on_button_toggled(GtkToggleButton * togglebutton,
 				      "0");
 		settings.showdevotional =
 		    atoi(xml_get_value("misc", "dailydevotional"));
-		break;/*
+		break;
+	case TABBED_BROWSING:	
+		if (GTK_TOGGLE_BUTTON(check_button.enable_tabbed_browsing)->active) {
+			xml_set_value("GnomeSword", "tabs", "browsing",
+				      "1");
+			gui_notebook_main_setup(NULL);
+			gtk_widget_show(widgets.notebook_main);
+		} else {
+			xml_set_value("GnomeSword", "tabs", "browsing",
+				      "0");
+			gtk_widget_hide(widgets.notebook_main);
+			gui_notebook_main_shutdown();
+		}
+		settings.browsing = atoi(xml_get_value("tabs", "browsing"));
+		break;
+	
+	/*
 	case USE_STUDYPAD:	
 		if (GTK_TOGGLE_BUTTON(check_button.use_studypad)->active)
 			xml_set_value("GnomeSword", "editor", "UseStudyPad",
@@ -1503,6 +1520,12 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_container_set_border_width(GTK_CONTAINER(vbox54), 6);
 
 
+	check_button.enable_tabbed_browsing =
+	    gtk_check_button_new_with_label(_("Use tabbed browsing"));
+	gtk_widget_show(check_button.enable_tabbed_browsing);
+	gtk_box_pack_start(GTK_BOX(vbox54),
+			   check_button.enable_tabbed_browsing, FALSE, FALSE,
+			   0);
 
 	check_button.show_bible_tabs =
 	    gtk_check_button_new_with_label(_("Bible texts"));
@@ -2205,10 +2228,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
 				     settings.showdicts);
-				     /*
+				     
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (check_button.percomm_formatting),
-				     settings.formatpercom);
+				     (check_button.enable_tabbed_browsing),
+				     settings.browsing);
+				     /*
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.use_studypad),
 				     settings.use_studypad);
@@ -2387,6 +2411,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   "toggled",
 			   G_CALLBACK(on_button_toggled),
 			   GINT_TO_POINTER(SHOW_DEVOTION));
+	g_signal_connect(GTK_OBJECT(check_button.enable_tabbed_browsing),
+			   "toggled",
+			   G_CALLBACK(on_button_toggled),
+			   GINT_TO_POINTER(TABBED_BROWSING));
 
 	g_signal_connect(GTK_OBJECT(check_button.show_bible_pane),
 			   "toggled",
