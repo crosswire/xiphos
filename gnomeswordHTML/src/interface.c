@@ -164,6 +164,16 @@ static GnomeUIInfo interlinear3_window1_menu_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
+static GnomeUIInfo interlinear4_window1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo interlinear5_window1_menu_uiinfo[] = {
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
 static GnomeUIInfo commentary_window1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -200,6 +210,18 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{
+	 GNOME_APP_UI_SUBTREE, "Interlinear4 Window",
+	 "Select text module for 4th Interlinear window",
+	 interlinear4_window1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, "Interlinear5 Window",
+	 "Select text module for 5th Interlinear window",
+	 interlinear5_window1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
+	{		
 	 GNOME_APP_UI_SUBTREE, "Commentary Window",
 	 "Seledect commentary module",
 	 commentary_window1_menu_uiinfo, NULL, NULL,
@@ -590,6 +612,30 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_ref(interlinear3_window1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "separator11",
 				 interlinear3_window1_menu_uiinfo
+				 [0].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(view1_menu_uiinfo[4].widget);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
+				 "interlinear4_window1",
+				 view1_menu_uiinfo[4].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(interlinear4_window1_menu_uiinfo[0].widget);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "separator11",
+				 interlinear4_window1_menu_uiinfo
+				 [0].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(view1_menu_uiinfo[5].widget);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
+				 "interlinear5_window1",
+				 view1_menu_uiinfo[5].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(interlinear5_window1_menu_uiinfo[0].widget);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "separator11",
+				 interlinear5_window1_menu_uiinfo
 				 [0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 

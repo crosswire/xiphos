@@ -34,12 +34,6 @@ void on_lookup_word1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_john_3_1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data);
-void on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
-void on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
-		gpointer user_data);
 void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_copy4_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data);
