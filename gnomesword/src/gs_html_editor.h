@@ -28,13 +28,14 @@
 #ifndef __GS_HTML_EDITOR_H_
 #define __GS_HTML_EDITOR_H_
 
-#include "gs_gnomesword.h"
 #include <gtkhtml/htmlgdkpainter.h>
+#include "gs_gnomesword.h"
+#include "gs_editor_replace.h"
 
 
 //typedef enum   _GtkHTMLEditPropertyType       GtkHTMLEditPropertyType;
-typedef struct _GSHTMLEditorControlData            GSHTMLEditorControlData;	
 
+typedef struct _GSHTMLEditorControlData            GSHTMLEditorControlData;	
 struct _GSHTMLEditorControlData {
 	GtkHTML    *html;
 	GtkWidget  *htmlwidget;
@@ -47,10 +48,11 @@ struct _GSHTMLEditorControlData {
 
 	GList                         *properties_types;
 	GSList                         *paragraph_group;
+	
 	/* search & replace dialogs */
-	GtkWidget     *search_dialog;
-	gboolean    replace;
-
+	//GtkHTMLSearchDialog     *search_dialog;
+	GtkHTMLReplaceDialog    *replace_dialog;
+	
 	/* html/plain mode settings */
 	gboolean format_html;
 	HTMLGdkPainter *gdk_painter;
@@ -91,6 +93,7 @@ struct _GSHTMLEditorControlData {
 GSHTMLEditorControlData * gs_html_editor_control_data_new(SETTINGS *s);
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData *cd);
 
+void replace(GSHTMLEditorControlData *ecd);
 /*** create editor ui ***/
 GtkWidget *create_editor(GtkWidget *htmlwidget, GtkWidget *vbox, SETTINGS *s, GSHTMLEditorControlData *necd);
 void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData *ecd);
