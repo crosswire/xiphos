@@ -354,6 +354,9 @@ static gint note_uri(const gchar * module, const gchar * passage,
 {	
 	gchar *tmpbuf = NULL;
 	gchar *buf = NULL;
+	GString *str = g_string_new(NULL);
+	GList *tmp = NULL;
+	gint i = 0;
 	
 	if(!in_url)
 		return 1;	
@@ -378,7 +381,7 @@ static gint note_uri(const gchar * module, const gchar * passage,
 					  tmpbuf);
 			g_free(tmpbuf);
 		}
-	} else if(!clicked) {
+	} else if(strstr(type,"n") && !clicked) {
 		backend->set_module_key((gchar*)module, (gchar*)passage);		
 		tmpbuf = backend->get_entry_attribute("Footnote",
 						(gchar*)value,
@@ -395,7 +398,59 @@ static gint note_uri(const gchar * module, const gchar * passage,
 			//gui_display_in_hint_window(tmpbuf);
 			if(buf) g_free(buf);	
 		}			
+	} else if(strstr(type,"x") && !clicked) {
+		backend->set_module_key((gchar*)module, (gchar*)passage);		
+		tmpbuf = backend->get_entry_attribute("Footnote",
+						(gchar*)value,
+						"refList");
+		
+		
+		list_of_verses = g_list_first(list_of_verses);
+		if(list_of_verses) {
+			while(list_of_verses) {
+				g_free(list_of_verses->data);
+				list_of_verses = g_list_next(list_of_verses);
+			}
+			g_list_free(list_of_verses);
+		}
+		list_of_verses = NULL;
+		
+		tmp = backend->parse_verse_list(tmpbuf, settings.currentverse);  
+		while (tmp != NULL) {
+			buf = g_strdup_printf("<a href=\"sword://%s/%s\">%s</a><br>",
+				(gchar*)module,
+					(const char *) tmp->data,
+					(const char *) tmp->data);
+			str = g_string_append(str,buf);
+			if(buf) g_free(buf);
+			buf = NULL;
+			++i;
+			g_free((char *) tmp->data);
+			tmp = g_list_next(tmp);
+		}
+		g_list_free(tmp);
+		
+		buf = g_strdup_printf("<a href=\"sword://%s/%s\">%s%s</a><br>",
+				(gchar*)module,
+				settings.currentverse,
+				_("Back to "),
+				settings.currentverse);
+		str = g_string_append(str,buf);
+		if(buf) g_free(buf);
+		
+		//buf = backend->render_this_text((gchar*)module,(gchar*)tmpbuf);
+		if(tmpbuf) g_free(tmpbuf);	
+		if (str) {
+
+			main_information_viewer((gchar*)module, 
+					str->str, 
+					(gchar*)value,
+					"showNote",			
+					(gchar*)type);
+			//gui_display_in_hint_window(tmpbuf);
+		}			
 	}
+	g_string_free(str, 1);
 	return 1;
 	
 }
