@@ -128,7 +128,6 @@ struct _settings {
 		percomm_tabs, /* show module tabs in personal commentary if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
-		notefollow, /* notes follow Bible text when true */
 		havethayer, /* for greek morph tags */
 		havebdb, /* for hebrew morph tags */
 		inViewer, /* display dict/lex in viewer when word or link clicked */
@@ -148,8 +147,10 @@ struct _settings {
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
 		modifiedSP, /* studypad file modified */
-		show_style_bar, /* show style toolbar for editors */
-		show_edit_bar, /* show edit toolbar for editors */
+		show_style_bar, /* show style toolbar for percomm editors */
+		show_edit_bar, /* show edit toolbar for percomm editors */
+		show_style_bar_sp, /* show style toolbar for studypad */
+		show_edit_bar_sp, /* show edit toolbar for studypad */
 		
 		/** do we have these modules **/
 		havebible, 

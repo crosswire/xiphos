@@ -31,7 +31,6 @@
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 
-//#include "main/gs_gnomesword.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
@@ -313,7 +312,7 @@ static void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 GtkWidget *gui_create_nav_toolbar(void)
 {
 
-	GtkWidget *handleboxNavBar;
+	//GtkWidget *handleboxNavBar;
 	GtkWidget *toolbarNav;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *cbBook;
@@ -322,14 +321,14 @@ GtkWidget *gui_create_nav_toolbar(void)
 	GtkWidget *btnLookup;
 	GtkWidget *btnBack;
 	GtkWidget *btnFoward;
-
+/*
 	handleboxNavBar = gtk_handle_box_new();
 	gtk_widget_ref(handleboxNavBar);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "handleboxNavBar", handleboxNavBar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(handleboxNavBar);
-
+*/
 	toolbarNav =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
@@ -338,7 +337,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 				 toolbarNav,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarNav);
-	gtk_container_add(GTK_CONTAINER(handleboxNavBar), toolbarNav);
+	//gtk_container_add(GTK_CONTAINER(handleboxNavBar), toolbarNav);
 	gtk_widget_set_usize(toolbarNav, -2, 34);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarNav),
 				      GTK_RELIEF_NONE);
@@ -480,5 +479,5 @@ GtkWidget *gui_create_nav_toolbar(void)
 	gtk_signal_connect(GTK_OBJECT(btnFoward), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
 
-	return handleboxNavBar;
+	return toolbarNav; //handleboxNavBar;
 }
