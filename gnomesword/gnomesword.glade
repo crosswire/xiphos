@@ -1018,148 +1018,6 @@ Revelation
 	  </child>
 
 	  <widget>
-	    <class>GtkToolbar</class>
-	    <name>toolbarEditor</name>
-	    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	    <type>GTK_TOOLBAR_ICONS</type>
-	    <space_size>5</space_size>
-	    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	    <tooltips>True</tooltips>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkOptionMenu</class>
-	      <name>opmenuEditorFontSize</name>
-	      <can_focus>True</can_focus>
-	      <items>-2
--1
-+0
-+1
-+2
-+3
-+4
-</items>
-	      <initial_choice>2</initial_choice>
-	    </widget>
-
-	    <widget>
-	      <class>GtkOptionMenu</class>
-	      <name>opmenuEditorHeadings</name>
-	      <can_focus>True</can_focus>
-	      <items>Normal
-Preformat
-</items>
-	      <initial_choice>0</initial_choice>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>togglebutton1</name>
-	      <label>togglebutton1</label>
-	      <active>False</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>togglebutton2</name>
-	      <label>togglebutton2</label>
-	      <active>False</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>togglebutton3</name>
-	      <label>togglebutton3</label>
-	      <active>False</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>togglebutton4</name>
-	      <label>togglebutton4</label>
-	      <active>False</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkToggleButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>togglebutton5</name>
-	      <label>togglebutton5</label>
-	      <active>False</active>
-	    </widget>
-
-	    <widget>
-	      <class>GtkVSeparator</class>
-	      <name>vseparator15</name>
-	      <width>7</width>
-	      <height>11</height>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>button1</name>
-	      <label>button1</label>
-	      <child>
-		<new_group>True</new_group>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>button2</name>
-	      <label>button2</label>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>button3</name>
-	      <label>button3</label>
-	    </widget>
-
-	    <widget>
-	      <class>GtkVSeparator</class>
-	      <name>vseparator16</name>
-	      <width>7</width>
-	      <height>11</height>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>button4</name>
-	      <label>button4</label>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <child_name>Toolbar:button</child_name>
-	      <name>button5</name>
-	      <label>button5</label>
-	    </widget>
-
-	    <widget>
-	      <class>GnomeColorPicker</class>
-	      <name>colorpicker1</name>
-	      <can_focus>True</can_focus>
-	      <dither>True</dither>
-	      <use_alpha>False</use_alpha>
-	      <title>Pick a color</title>
-	    </widget>
-	  </widget>
-
-	  <widget>
 	    <class>GtkVPaned</class>
 	    <name>vpaned1</name>
 	    <border_width>1</border_width>
@@ -1183,16 +1041,10 @@ Preformat
 	      </child>
 
 	      <widget>
-		<class>GtkHPaned</class>
-		<name>hpaned1</name>
-		<height>318</height>
-		<signal>
-		  <name>button_release_event</name>
-		  <handler>on_hpaned1_button_release_event</handler>
-		  <last_modification_time>Thu, 28 Sep 2000 16:08:08 GMT</last_modification_time>
-		</signal>
-		<handle_size>10</handle_size>
-		<gutter_size>10</gutter_size>
+		<class>GtkVBox</class>
+		<name>vbox47</name>
+		<homogeneous>False</homogeneous>
+		<spacing>0</spacing>
 		<child>
 		  <padding>0</padding>
 		  <expand>True</expand>
@@ -1201,106 +1053,183 @@ Preformat
 		</child>
 
 		<widget>
-		  <class>GtkVBox</class>
-		  <name>vbox32</name>
-		  <homogeneous>False</homogeneous>
-		  <spacing>0</spacing>
+		  <class>GtkToolbar</class>
+		  <name>toolbarEditor</name>
+		  <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+		  <type>GTK_TOOLBAR_ICONS</type>
+		  <space_size>5</space_size>
+		  <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+		  <relief>GTK_RELIEF_NORMAL</relief>
+		  <tooltips>True</tooltips>
 		  <child>
-		    <shrink>True</shrink>
-		    <resize>False</resize>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
 		  </child>
 
 		  <widget>
-		    <class>GtkNotebook</class>
-		    <name>nbTextMods</name>
-		    <height>31</height>
+		    <class>GtkOptionMenu</class>
+		    <name>opmenuEditorFontSize</name>
 		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>switch_page</name>
-		      <handler>on_nbTextMods_switch_page</handler>
-		      <last_modification_time>Mon, 02 Jul 2001 17:01:52 GMT</last_modification_time>
-		    </signal>
-		    <show_tabs>True</show_tabs>
-		    <show_border>True</show_border>
-		    <tab_pos>GTK_POS_TOP</tab_pos>
-		    <scrollable>True</scrollable>
-		    <tab_hborder>2</tab_hborder>
-		    <tab_vborder>2</tab_vborder>
-		    <popup_enable>True</popup_enable>
+		    <items>-2
+-1
++0
++1
++2
++3
++4
+</items>
+		    <initial_choice>2</initial_choice>
+		  </widget>
+
+		  <widget>
+		    <class>GtkOptionMenu</class>
+		    <name>opmenuEditorHeadings</name>
+		    <can_focus>True</can_focus>
+		    <items>Normal
+Preformat
+</items>
+		    <initial_choice>0</initial_choice>
+		  </widget>
+
+		  <widget>
+		    <class>GtkToggleButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>togglebutton1</name>
+		    <label>togglebutton1</label>
+		    <active>False</active>
+		  </widget>
+
+		  <widget>
+		    <class>GtkToggleButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>togglebutton2</name>
+		    <label>togglebutton2</label>
+		    <active>False</active>
+		  </widget>
+
+		  <widget>
+		    <class>GtkToggleButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>togglebutton3</name>
+		    <label>togglebutton3</label>
+		    <active>False</active>
+		  </widget>
+
+		  <widget>
+		    <class>GtkToggleButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>togglebutton4</name>
+		    <label>togglebutton4</label>
+		    <active>False</active>
+		  </widget>
+
+		  <widget>
+		    <class>GtkToggleButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>togglebutton5</name>
+		    <label>togglebutton5</label>
+		    <active>False</active>
+		  </widget>
+
+		  <widget>
+		    <class>GtkVSeparator</class>
+		    <name>vseparator15</name>
+		    <width>7</width>
+		    <height>11</height>
+		  </widget>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>button1</name>
+		    <label>button1</label>
 		    <child>
-		      <padding>0</padding>
-		      <expand>False</expand>
-		      <fill>True</fill>
+		      <new_group>True</new_group>
 		    </child>
 		  </widget>
 
 		  <widget>
-		    <class>GtkFrame</class>
-		    <name>frame9</name>
-		    <width>325</width>
-		    <height>226</height>
-		    <label></label>
-		    <label_xalign>0</label_xalign>
-		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		    <child>
-		      <padding>0</padding>
-		      <expand>True</expand>
-		      <fill>True</fill>
-		    </child>
+		    <class>GtkButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>button2</name>
+		    <label>button2</label>
+		  </widget>
 
-		    <widget>
-		      <class>GtkScrolledWindow</class>
-		      <name>swHtmlBible</name>
-		      <border_width>2</border_width>
-		      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		      <vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
-		      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		  <widget>
+		    <class>GtkButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>button3</name>
+		    <label>button3</label>
+		  </widget>
 
-		      <widget>
-			<class>Placeholder</class>
-		      </widget>
-		    </widget>
+		  <widget>
+		    <class>GtkVSeparator</class>
+		    <name>vseparator16</name>
+		    <width>7</width>
+		    <height>11</height>
+		  </widget>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>button4</name>
+		    <label>button4</label>
+		  </widget>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <child_name>Toolbar:button</child_name>
+		    <name>button5</name>
+		    <label>button5</label>
+		  </widget>
+
+		  <widget>
+		    <class>GnomeColorPicker</class>
+		    <name>colorpicker1</name>
+		    <can_focus>True</can_focus>
+		    <dither>True</dither>
+		    <use_alpha>False</use_alpha>
+		    <title>Pick a color</title>
 		  </widget>
 		</widget>
 
 		<widget>
-		  <class>GtkNotebook</class>
-		  <name>notebook3</name>
-		  <border_width>2</border_width>
-		  <can_focus>True</can_focus>
+		  <class>GtkHPaned</class>
+		  <name>hpaned1</name>
+		  <height>318</height>
 		  <signal>
-		    <name>switch_page</name>
-		    <handler>on_notebook3_switch_page</handler>
-		    <last_modification_time>Wed, 14 Jun 2000 19:34:56 GMT</last_modification_time>
+		    <name>button_release_event</name>
+		    <handler>on_hpaned1_button_release_event</handler>
+		    <last_modification_time>Thu, 28 Sep 2000 16:08:08 GMT</last_modification_time>
 		  </signal>
-		  <show_tabs>True</show_tabs>
-		  <show_border>True</show_border>
-		  <tab_pos>GTK_POS_TOP</tab_pos>
-		  <scrollable>True</scrollable>
-		  <tab_hborder>2</tab_hborder>
-		  <tab_vborder>2</tab_vborder>
-		  <popup_enable>True</popup_enable>
+		  <handle_size>10</handle_size>
+		  <gutter_size>10</gutter_size>
 		  <child>
-		    <shrink>True</shrink>
-		    <resize>True</resize>
+		    <padding>0</padding>
+		    <expand>True</expand>
+		    <fill>True</fill>
 		  </child>
 
 		  <widget>
 		    <class>GtkVBox</class>
-		    <name>vbox22</name>
+		    <name>vbox32</name>
 		    <homogeneous>False</homogeneous>
 		    <spacing>0</spacing>
+		    <child>
+		      <shrink>True</shrink>
+		      <resize>False</resize>
+		    </child>
 
 		    <widget>
 		      <class>GtkNotebook</class>
-		      <name>notebook1</name>
+		      <name>nbTextMods</name>
 		      <height>31</height>
 		      <can_focus>True</can_focus>
 		      <signal>
 			<name>switch_page</name>
-			<handler>on_notebook1_switch_page</handler>
-			<last_modification_time>Fri, 31 Dec 1999 16:47:29 GMT</last_modification_time>
+			<handler>on_nbTextMods_switch_page</handler>
+			<last_modification_time>Mon, 02 Jul 2001 17:01:52 GMT</last_modification_time>
 		      </signal>
 		      <show_tabs>True</show_tabs>
 		      <show_border>True</show_border>
@@ -1317,10 +1246,13 @@ Preformat
 		    </widget>
 
 		    <widget>
-		      <class>GtkVBox</class>
-		      <name>vbox43</name>
-		      <homogeneous>False</homogeneous>
-		      <spacing>0</spacing>
+		      <class>GtkFrame</class>
+		      <name>frame9</name>
+		      <width>325</width>
+		      <height>226</height>
+		      <label></label>
+		      <label_xalign>0</label_xalign>
+		      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 		      <child>
 			<padding>0</padding>
 			<expand>True</expand>
@@ -1328,94 +1260,76 @@ Preformat
 		      </child>
 
 		      <widget>
-			<class>GtkHandleBox</class>
-			<name>handlebox17</name>
-			<visible>False</visible>
-			<shadow_type>GTK_SHADOW_OUT</shadow_type>
-			<handle_position>GTK_POS_LEFT</handle_position>
-			<snap_edge>GTK_POS_TOP</snap_edge>
+			<class>GtkScrolledWindow</class>
+			<name>swHtmlBible</name>
+			<border_width>2</border_width>
+			<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			<vscrollbar_policy>GTK_POLICY_ALWAYS</vscrollbar_policy>
+			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			<widget>
+			  <class>Placeholder</class>
+			</widget>
+		      </widget>
+		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkNotebook</class>
+		    <name>notebook3</name>
+		    <border_width>2</border_width>
+		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>switch_page</name>
+		      <handler>on_notebook3_switch_page</handler>
+		      <last_modification_time>Wed, 14 Jun 2000 19:34:56 GMT</last_modification_time>
+		    </signal>
+		    <show_tabs>True</show_tabs>
+		    <show_border>True</show_border>
+		    <tab_pos>GTK_POS_TOP</tab_pos>
+		    <scrollable>True</scrollable>
+		    <tab_hborder>2</tab_hborder>
+		    <tab_vborder>2</tab_vborder>
+		    <popup_enable>True</popup_enable>
+		    <child>
+		      <shrink>True</shrink>
+		      <resize>True</resize>
+		    </child>
+
+		    <widget>
+		      <class>GtkVBox</class>
+		      <name>vbox22</name>
+		      <homogeneous>False</homogeneous>
+		      <spacing>0</spacing>
+
+		      <widget>
+			<class>GtkNotebook</class>
+			<name>notebook1</name>
+			<height>31</height>
+			<can_focus>True</can_focus>
+			<signal>
+			  <name>switch_page</name>
+			  <handler>on_notebook1_switch_page</handler>
+			  <last_modification_time>Fri, 31 Dec 1999 16:47:29 GMT</last_modification_time>
+			</signal>
+			<show_tabs>True</show_tabs>
+			<show_border>True</show_border>
+			<tab_pos>GTK_POS_TOP</tab_pos>
+			<scrollable>True</scrollable>
+			<tab_hborder>2</tab_hborder>
+			<tab_vborder>2</tab_vborder>
+			<popup_enable>True</popup_enable>
 			<child>
 			  <padding>0</padding>
 			  <expand>False</expand>
 			  <fill>True</fill>
 			</child>
-
-			<widget>
-			  <class>GtkToolbar</class>
-			  <name>toolbar26</name>
-			  <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-			  <type>GTK_TOOLBAR_ICONS</type>
-			  <space_size>5</space_size>
-			  <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-			  <relief>GTK_RELIEF_NORMAL</relief>
-			  <tooltips>True</tooltips>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnCommSyn</name>
-			    <tooltip>Synchronize Commentary with Bible Text</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnCommSyn_clicked</handler>
-			      <last_modification_time>Fri, 26 Oct 2001 21:26:37 GMT</last_modification_time>
-			    </signal>
-			    <label>Synchronize</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_REFRESH</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnComPrev</name>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnComPrev_clicked</handler>
-			      <last_modification_time>Tue, 25 Jul 2000 19:37:17 GMT</last_modification_time>
-			    </signal>
-			    <label>button2</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_BACK</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnComNext</name>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnComNext_clicked</handler>
-			      <last_modification_time>Tue, 25 Jul 2000 19:37:10 GMT</last_modification_time>
-			    </signal>
-			    <label>button3</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_FORWARD</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkVSeparator</class>
-			    <name>vseparator14</name>
-			    <width>6</width>
-			    <height>15</height>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnCommPrint</name>
-			    <tooltip>Print this Comment</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnCommPrint_clicked</handler>
-			      <last_modification_time>Fri, 26 Oct 2001 21:28:20 GMT</last_modification_time>
-			    </signal>
-			    <label>Print</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_PRINT</stock_pixmap>
-			  </widget>
-			</widget>
 		      </widget>
 
 		      <widget>
-			<class>GtkHBox</class>
-			<name>hbox18</name>
+			<class>GtkVBox</class>
+			<name>vbox43</name>
 			<homogeneous>False</homogeneous>
 			<spacing>0</spacing>
 			<child>
@@ -1425,10 +1339,245 @@ Preformat
 			</child>
 
 			<widget>
-			  <class>GtkFrame</class>
-			  <name>frameCom</name>
-			  <label_xalign>0</label_xalign>
-			  <shadow_type>GTK_SHADOW_IN</shadow_type>
+			  <class>GtkHandleBox</class>
+			  <name>handlebox17</name>
+			  <visible>False</visible>
+			  <shadow_type>GTK_SHADOW_OUT</shadow_type>
+			  <handle_position>GTK_POS_LEFT</handle_position>
+			  <snap_edge>GTK_POS_TOP</snap_edge>
+			  <child>
+			    <padding>0</padding>
+			    <expand>False</expand>
+			    <fill>True</fill>
+			  </child>
+
+			  <widget>
+			    <class>GtkToolbar</class>
+			    <name>toolbar26</name>
+			    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+			    <type>GTK_TOOLBAR_ICONS</type>
+			    <space_size>5</space_size>
+			    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+			    <relief>GTK_RELIEF_NORMAL</relief>
+			    <tooltips>True</tooltips>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnCommSyn</name>
+			      <tooltip>Synchronize Commentary with Bible Text</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnCommSyn_clicked</handler>
+				<last_modification_time>Fri, 26 Oct 2001 21:26:37 GMT</last_modification_time>
+			      </signal>
+			      <label>Synchronize</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_REFRESH</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnComPrev</name>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnComPrev_clicked</handler>
+				<last_modification_time>Tue, 25 Jul 2000 19:37:17 GMT</last_modification_time>
+			      </signal>
+			      <label>button2</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_BACK</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnComNext</name>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnComNext_clicked</handler>
+				<last_modification_time>Tue, 25 Jul 2000 19:37:10 GMT</last_modification_time>
+			      </signal>
+			      <label>button3</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_FORWARD</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkVSeparator</class>
+			      <name>vseparator14</name>
+			      <width>6</width>
+			      <height>15</height>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnCommPrint</name>
+			      <tooltip>Print this Comment</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnCommPrint_clicked</handler>
+				<last_modification_time>Fri, 26 Oct 2001 21:28:20 GMT</last_modification_time>
+			      </signal>
+			      <label>Print</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_PRINT</stock_pixmap>
+			    </widget>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkHBox</class>
+			  <name>hbox18</name>
+			  <homogeneous>False</homogeneous>
+			  <spacing>0</spacing>
+			  <child>
+			    <padding>0</padding>
+			    <expand>True</expand>
+			    <fill>True</fill>
+			  </child>
+
+			  <widget>
+			    <class>GtkFrame</class>
+			    <name>frameCom</name>
+			    <label_xalign>0</label_xalign>
+			    <shadow_type>GTK_SHADOW_IN</shadow_type>
+			    <child>
+			      <padding>0</padding>
+			      <expand>True</expand>
+			      <fill>True</fill>
+			    </child>
+
+			    <widget>
+			      <class>GtkNotebook</class>
+			      <name>nbCom</name>
+			      <border_width>2</border_width>
+			      <signal>
+				<name>switch_page</name>
+				<handler>on_nbCom_switch_page</handler>
+				<last_modification_time>Thu, 08 Feb 2001 10:16:06 GMT</last_modification_time>
+			      </signal>
+			      <show_tabs>False</show_tabs>
+			      <show_border>True</show_border>
+			      <tab_pos>GTK_POS_TOP</tab_pos>
+			      <scrollable>False</scrollable>
+			      <tab_hborder>2</tab_hborder>
+			      <tab_vborder>2</tab_vborder>
+			      <popup_enable>False</popup_enable>
+
+			      <widget>
+				<class>Placeholder</class>
+			      </widget>
+
+			      <widget>
+				<class>GtkLabel</class>
+				<child_name>Notebook:tab</child_name>
+				<name>label127</name>
+				<label>label127</label>
+				<justify>GTK_JUSTIFY_CENTER</justify>
+				<wrap>False</wrap>
+				<xalign>0.5</xalign>
+				<yalign>0.5</yalign>
+				<xpad>0</xpad>
+				<ypad>0</ypad>
+			      </widget>
+
+			      <widget>
+				<class>GtkVBox</class>
+				<name>vbox23</name>
+				<homogeneous>False</homogeneous>
+				<spacing>0</spacing>
+
+				<widget>
+				  <class>GtkScrolledWindow</class>
+				  <name>scrolledwindow28</name>
+				  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+				  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+				  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+				  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+				  <child>
+				    <padding>0</padding>
+				    <expand>True</expand>
+				    <fill>True</fill>
+				  </child>
+
+				  <widget>
+				    <class>GtkText</class>
+				    <name>textCommentaries</name>
+				    <can_focus>True</can_focus>
+				    <signal>
+				      <name>changed</name>
+				      <handler>on_textComments_changed</handler>
+				      <last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
+				    </signal>
+				    <signal>
+				      <name>button_release_event</name>
+				      <handler>on_textComments_button_release_event</handler>
+				      <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
+				    </signal>
+				    <signal>
+				      <name>drag_begin</name>
+				      <handler>on_textCommentaries_drag_begin</handler>
+				      <last_modification_time>Sat, 15 Jul 2000 16:55:24 GMT</last_modification_time>
+				    </signal>
+				    <editable>False</editable>
+				    <text></text>
+				  </widget>
+				</widget>
+			      </widget>
+
+			      <widget>
+				<class>GtkLabel</class>
+				<child_name>Notebook:tab</child_name>
+				<name>label128</name>
+				<label>label128</label>
+				<justify>GTK_JUSTIFY_CENTER</justify>
+				<wrap>False</wrap>
+				<xalign>0.5</xalign>
+				<yalign>0.5</yalign>
+				<xpad>0</xpad>
+				<ypad>0</ypad>
+			      </widget>
+			    </widget>
+			  </widget>
+			</widget>
+		      </widget>
+		    </widget>
+
+		    <widget>
+		      <class>GtkLabel</class>
+		      <child_name>Notebook:tab</child_name>
+		      <name>label64</name>
+		      <label>Commentaries</label>
+		      <justify>GTK_JUSTIFY_CENTER</justify>
+		      <wrap>True</wrap>
+		      <xalign>0.5</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		    </widget>
+
+		    <widget>
+		      <class>GtkVBox</class>
+		      <name>vbox2</name>
+		      <visible>False</visible>
+		      <homogeneous>False</homogeneous>
+		      <spacing>0</spacing>
+
+		      <widget>
+			<class>GtkHBox</class>
+			<name>hbox11</name>
+			<homogeneous>False</homogeneous>
+			<spacing>0</spacing>
+			<child>
+			  <padding>0</padding>
+			  <expand>True</expand>
+			  <fill>True</fill>
+			</child>
+
+			<widget>
+			  <class>GtkVBox</class>
+			  <name>vbox8</name>
+			  <homogeneous>False</homogeneous>
+			  <spacing>0</spacing>
 			  <child>
 			    <padding>0</padding>
 			    <expand>True</expand>
@@ -1437,12 +1586,12 @@ Preformat
 
 			  <widget>
 			    <class>GtkNotebook</class>
-			    <name>nbCom</name>
+			    <name>nbPerCom</name>
 			    <border_width>2</border_width>
 			    <signal>
 			      <name>switch_page</name>
-			      <handler>on_nbCom_switch_page</handler>
-			      <last_modification_time>Thu, 08 Feb 2001 10:16:06 GMT</last_modification_time>
+			      <handler>on_nbPerCom_switch_page</handler>
+			      <last_modification_time>Thu, 08 Feb 2001 10:15:19 GMT</last_modification_time>
 			    </signal>
 			    <show_tabs>False</show_tabs>
 			    <show_border>True</show_border>
@@ -1451,16 +1600,28 @@ Preformat
 			    <tab_hborder>2</tab_hborder>
 			    <tab_vborder>2</tab_vborder>
 			    <popup_enable>False</popup_enable>
+			    <child>
+			      <padding>0</padding>
+			      <expand>True</expand>
+			      <fill>True</fill>
+			    </child>
 
 			    <widget>
-			      <class>Placeholder</class>
+			      <class>GtkVBox</class>
+			      <name>vboxPC</name>
+			      <homogeneous>False</homogeneous>
+			      <spacing>0</spacing>
+
+			      <widget>
+				<class>Placeholder</class>
+			      </widget>
 			    </widget>
 
 			    <widget>
 			      <class>GtkLabel</class>
 			      <child_name>Notebook:tab</child_name>
-			      <name>label127</name>
-			      <label>label127</label>
+			      <name>label129</name>
+			      <label>label129</label>
 			      <justify>GTK_JUSTIFY_CENTER</justify>
 			      <wrap>False</wrap>
 			      <xalign>0.5</xalign>
@@ -1470,54 +1631,62 @@ Preformat
 			    </widget>
 
 			    <widget>
-			      <class>GtkVBox</class>
-			      <name>vbox23</name>
-			      <homogeneous>False</homogeneous>
-			      <spacing>0</spacing>
+			      <class>GtkScrolledWindow</class>
+			      <name>scrolledwindow11</name>
+			      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 
 			      <widget>
-				<class>GtkScrolledWindow</class>
-				<name>scrolledwindow28</name>
-				<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-				<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-				<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-				<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-				<child>
-				  <padding>0</padding>
-				  <expand>True</expand>
-				  <fill>True</fill>
-				</child>
-
-				<widget>
-				  <class>GtkText</class>
-				  <name>textCommentaries</name>
-				  <can_focus>True</can_focus>
-				  <signal>
-				    <name>changed</name>
-				    <handler>on_textComments_changed</handler>
-				    <last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
-				  </signal>
-				  <signal>
-				    <name>button_release_event</name>
-				    <handler>on_textComments_button_release_event</handler>
-				    <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
-				  </signal>
-				  <signal>
-				    <name>drag_begin</name>
-				    <handler>on_textCommentaries_drag_begin</handler>
-				    <last_modification_time>Sat, 15 Jul 2000 16:55:24 GMT</last_modification_time>
-				  </signal>
-				  <editable>False</editable>
-				  <text></text>
-				</widget>
+				<class>GtkText</class>
+				<name>textComments</name>
+				<can_focus>True</can_focus>
+				<signal>
+				  <name>changed</name>
+				  <handler>on_textComments_changed</handler>
+				  <last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
+				</signal>
+				<signal>
+				  <name>button_release_event</name>
+				  <handler>on_textComments_button_release_event</handler>
+				  <last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
+				</signal>
+				<signal>
+				  <name>drag_begin</name>
+				  <handler>on_textComments_drag_begin</handler>
+				  <last_modification_time>Mon, 17 Jul 2000 13:02:11 GMT</last_modification_time>
+				</signal>
+				<signal>
+				  <name>drag_data_get</name>
+				  <handler>on_textComments_drag_data_get</handler>
+				  <last_modification_time>Mon, 17 Jul 2000 13:02:28 GMT</last_modification_time>
+				</signal>
+				<signal>
+				  <name>drag_data_received</name>
+				  <handler>on_textComments_drag_data_received</handler>
+				  <last_modification_time>Mon, 17 Jul 2000 13:02:36 GMT</last_modification_time>
+				</signal>
+				<signal>
+				  <name>drag_drop</name>
+				  <handler>on_textComments_drag_drop</handler>
+				  <last_modification_time>Mon, 17 Jul 2000 13:02:52 GMT</last_modification_time>
+				</signal>
+				<signal>
+				  <name>key_press_event</name>
+				  <handler>on_textComments_key_press_event</handler>
+				  <last_modification_time>Mon, 17 Jul 2000 13:03:15 GMT</last_modification_time>
+				</signal>
+				<editable>False</editable>
+				<text></text>
 			      </widget>
 			    </widget>
 
 			    <widget>
 			      <class>GtkLabel</class>
 			      <child_name>Notebook:tab</child_name>
-			      <name>label128</name>
-			      <label>label128</label>
+			      <name>label130</name>
+			      <label>label130</label>
 			      <justify>GTK_JUSTIFY_CENTER</justify>
 			      <wrap>False</wrap>
 			      <xalign>0.5</xalign>
@@ -1526,47 +1695,142 @@ Preformat
 			      <ypad>0</ypad>
 			    </widget>
 			  </widget>
+
+			  <widget>
+			    <class>GtkStatusbar</class>
+			    <name>sbNotes</name>
+			    <visible>False</visible>
+			    <child>
+			      <padding>0</padding>
+			      <expand>False</expand>
+			      <fill>False</fill>
+			    </child>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkHandleBox</class>
+			  <name>handlebox16</name>
+			  <shadow_type>GTK_SHADOW_NONE</shadow_type>
+			  <handle_position>GTK_POS_TOP</handle_position>
+			  <snap_edge>GTK_POS_TOP</snap_edge>
+			  <child>
+			    <padding>0</padding>
+			    <expand>False</expand>
+			    <fill>False</fill>
+			  </child>
+
+			  <widget>
+			    <class>GtkToolbar</class>
+			    <name>tbNotes</name>
+			    <orientation>GTK_ORIENTATION_VERTICAL</orientation>
+			    <type>GTK_TOOLBAR_ICONS</type>
+			    <space_size>5</space_size>
+			    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+			    <relief>GTK_RELIEF_NONE</relief>
+			    <tooltips>True</tooltips>
+
+			    <widget>
+			      <class>GtkToggleButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>tbtnFollow</name>
+			      <tooltip>Follow Main Text Window</tooltip>
+			      <signal>
+				<name>toggled</name>
+				<handler>on_tbtnFollow_toggled</handler>
+				<last_modification_time>Thu, 06 Jul 2000 16:38:15 GMT</last_modification_time>
+			      </signal>
+			      <label>togglebutton1</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_JUMP_TO</stock_pixmap>
+			      <active>True</active>
+			    </widget>
+
+			    <widget>
+			      <class>GtkToggleButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnEditNote</name>
+			      <tooltip>Edit note</tooltip>
+			      <signal>
+				<name>toggled</name>
+				<handler>on_btnEditNote_toggled</handler>
+				<last_modification_time>Fri, 31 Dec 1999 05:31:09 GMT</last_modification_time>
+			      </signal>
+			      <label>Edit</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_PROPERTIES</stock_pixmap>
+			      <active>False</active>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnSaveNote</name>
+			      <tooltip>Save note</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnSaveNote_clicked</handler>
+				<last_modification_time>Fri, 31 Dec 1999 05:31:31 GMT</last_modification_time>
+			      </signal>
+			      <label>Save</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_ADD</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnDeleteNote</name>
+			      <tooltip>Delete note</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnDeleteNote_clicked</handler>
+				<last_modification_time>Fri, 31 Dec 1999 05:31:48 GMT</last_modification_time>
+			      </signal>
+			      <label>Delete</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_REMOVE</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnSpellNotes</name>
+			      <tooltip>Start Spell Check</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnSpellNotes_clicked</handler>
+				<last_modification_time>Tue, 16 May 2000 23:26:46 GMT</last_modification_time>
+			      </signal>
+			      <label>button1</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_SPELLCHECK</stock_pixmap>
+			    </widget>
+			  </widget>
 			</widget>
 		      </widget>
 		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label64</name>
-		    <label>Commentaries</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>True</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-
-		  <widget>
-		    <class>GtkVBox</class>
-		    <name>vbox2</name>
-		    <visible>False</visible>
-		    <homogeneous>False</homogeneous>
-		    <spacing>0</spacing>
 
 		    <widget>
-		      <class>GtkHBox</class>
-		      <name>hbox11</name>
+		      <class>GtkLabel</class>
+		      <child_name>Notebook:tab</child_name>
+		      <name>label85</name>
+		      <label>Personal Comments</label>
+		      <justify>GTK_JUSTIFY_CENTER</justify>
+		      <wrap>False</wrap>
+		      <xalign>0.5</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		    </widget>
+
+		    <widget>
+		      <class>GtkVBox</class>
+		      <name>vbox3</name>
 		      <homogeneous>False</homogeneous>
 		      <spacing>0</spacing>
-		      <child>
-			<padding>0</padding>
-			<expand>True</expand>
-			<fill>True</fill>
-		      </child>
 
 		      <widget>
-			<class>GtkVBox</class>
-			<name>vbox8</name>
-			<homogeneous>False</homogeneous>
-			<spacing>0</spacing>
+			<class>GtkFrame</class>
+			<name>frame2</name>
+			<height>67</height>
+			<label_xalign>0</label_xalign>
+			<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 			<child>
 			  <padding>0</padding>
 			  <expand>True</expand>
@@ -1574,564 +1838,44 @@ Preformat
 			</child>
 
 			<widget>
-			  <class>GtkNotebook</class>
-			  <name>nbPerCom</name>
-			  <border_width>2</border_width>
-			  <signal>
-			    <name>switch_page</name>
-			    <handler>on_nbPerCom_switch_page</handler>
-			    <last_modification_time>Thu, 08 Feb 2001 10:15:19 GMT</last_modification_time>
-			  </signal>
-			  <show_tabs>False</show_tabs>
-			  <show_border>True</show_border>
-			  <tab_pos>GTK_POS_TOP</tab_pos>
-			  <scrollable>False</scrollable>
-			  <tab_hborder>2</tab_hborder>
-			  <tab_vborder>2</tab_vborder>
-			  <popup_enable>False</popup_enable>
-			  <child>
-			    <padding>0</padding>
-			    <expand>True</expand>
-			    <fill>True</fill>
-			  </child>
-
-			  <widget>
-			    <class>GtkVBox</class>
-			    <name>vboxPC</name>
-			    <homogeneous>False</homogeneous>
-			    <spacing>0</spacing>
-
-			    <widget>
-			      <class>Placeholder</class>
-			    </widget>
-			  </widget>
-
-			  <widget>
-			    <class>GtkLabel</class>
-			    <child_name>Notebook:tab</child_name>
-			    <name>label129</name>
-			    <label>label129</label>
-			    <justify>GTK_JUSTIFY_CENTER</justify>
-			    <wrap>False</wrap>
-			    <xalign>0.5</xalign>
-			    <yalign>0.5</yalign>
-			    <xpad>0</xpad>
-			    <ypad>0</ypad>
-			  </widget>
+			  <class>GtkVBox</class>
+			  <name>vbox4</name>
+			  <homogeneous>False</homogeneous>
+			  <spacing>0</spacing>
 
 			  <widget>
 			    <class>GtkScrolledWindow</class>
-			    <name>scrolledwindow11</name>
+			    <name>scrolledwindow15</name>
 			    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
 			    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 			    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 			    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+			    <child>
+			      <padding>0</padding>
+			      <expand>True</expand>
+			      <fill>True</fill>
+			    </child>
 
 			    <widget>
 			      <class>GtkText</class>
-			      <name>textComments</name>
+			      <name>textComp1</name>
 			      <can_focus>True</can_focus>
 			      <signal>
-				<name>changed</name>
-				<handler>on_textComments_changed</handler>
-				<last_modification_time>Sun, 25 Jul 1999 02:31:42 GMT</last_modification_time>
-			      </signal>
-			      <signal>
-				<name>button_release_event</name>
-				<handler>on_textComments_button_release_event</handler>
-				<last_modification_time>Tue, 22 Feb 2000 03:13:53 GMT</last_modification_time>
-			      </signal>
-			      <signal>
-				<name>drag_begin</name>
-				<handler>on_textComments_drag_begin</handler>
-				<last_modification_time>Mon, 17 Jul 2000 13:02:11 GMT</last_modification_time>
-			      </signal>
-			      <signal>
-				<name>drag_data_get</name>
-				<handler>on_textComments_drag_data_get</handler>
-				<last_modification_time>Mon, 17 Jul 2000 13:02:28 GMT</last_modification_time>
-			      </signal>
-			      <signal>
-				<name>drag_data_received</name>
-				<handler>on_textComments_drag_data_received</handler>
-				<last_modification_time>Mon, 17 Jul 2000 13:02:36 GMT</last_modification_time>
-			      </signal>
-			      <signal>
-				<name>drag_drop</name>
-				<handler>on_textComments_drag_drop</handler>
-				<last_modification_time>Mon, 17 Jul 2000 13:02:52 GMT</last_modification_time>
-			      </signal>
-			      <signal>
-				<name>key_press_event</name>
-				<handler>on_textComments_key_press_event</handler>
-				<last_modification_time>Mon, 17 Jul 2000 13:03:15 GMT</last_modification_time>
+				<name>button_press_event</name>
+				<handler>on_textComp1_button_press_event</handler>
+				<last_modification_time>Mon, 14 Feb 2000 20:59:09 GMT</last_modification_time>
 			      </signal>
 			      <editable>False</editable>
 			      <text></text>
 			    </widget>
-			  </widget>
-
-			  <widget>
-			    <class>GtkLabel</class>
-			    <child_name>Notebook:tab</child_name>
-			    <name>label130</name>
-			    <label>label130</label>
-			    <justify>GTK_JUSTIFY_CENTER</justify>
-			    <wrap>False</wrap>
-			    <xalign>0.5</xalign>
-			    <yalign>0.5</yalign>
-			    <xpad>0</xpad>
-			    <ypad>0</ypad>
-			  </widget>
-			</widget>
-
-			<widget>
-			  <class>GtkStatusbar</class>
-			  <name>sbNotes</name>
-			  <visible>False</visible>
-			  <child>
-			    <padding>0</padding>
-			    <expand>False</expand>
-			    <fill>False</fill>
-			  </child>
-			</widget>
-		      </widget>
-
-		      <widget>
-			<class>GtkHandleBox</class>
-			<name>handlebox16</name>
-			<shadow_type>GTK_SHADOW_NONE</shadow_type>
-			<handle_position>GTK_POS_TOP</handle_position>
-			<snap_edge>GTK_POS_TOP</snap_edge>
-			<child>
-			  <padding>0</padding>
-			  <expand>False</expand>
-			  <fill>False</fill>
-			</child>
-
-			<widget>
-			  <class>GtkToolbar</class>
-			  <name>tbNotes</name>
-			  <orientation>GTK_ORIENTATION_VERTICAL</orientation>
-			  <type>GTK_TOOLBAR_ICONS</type>
-			  <space_size>5</space_size>
-			  <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-			  <relief>GTK_RELIEF_NONE</relief>
-			  <tooltips>True</tooltips>
-
-			  <widget>
-			    <class>GtkToggleButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>tbtnFollow</name>
-			    <tooltip>Follow Main Text Window</tooltip>
-			    <signal>
-			      <name>toggled</name>
-			      <handler>on_tbtnFollow_toggled</handler>
-			      <last_modification_time>Thu, 06 Jul 2000 16:38:15 GMT</last_modification_time>
-			    </signal>
-			    <label>togglebutton1</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_JUMP_TO</stock_pixmap>
-			    <active>True</active>
-			  </widget>
-
-			  <widget>
-			    <class>GtkToggleButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnEditNote</name>
-			    <tooltip>Edit note</tooltip>
-			    <signal>
-			      <name>toggled</name>
-			      <handler>on_btnEditNote_toggled</handler>
-			      <last_modification_time>Fri, 31 Dec 1999 05:31:09 GMT</last_modification_time>
-			    </signal>
-			    <label>Edit</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_PROPERTIES</stock_pixmap>
-			    <active>False</active>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnSaveNote</name>
-			    <tooltip>Save note</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnSaveNote_clicked</handler>
-			      <last_modification_time>Fri, 31 Dec 1999 05:31:31 GMT</last_modification_time>
-			    </signal>
-			    <label>Save</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_ADD</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnDeleteNote</name>
-			    <tooltip>Delete note</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnDeleteNote_clicked</handler>
-			      <last_modification_time>Fri, 31 Dec 1999 05:31:48 GMT</last_modification_time>
-			    </signal>
-			    <label>Delete</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_REMOVE</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnSpellNotes</name>
-			    <tooltip>Start Spell Check</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnSpellNotes_clicked</handler>
-			      <last_modification_time>Tue, 16 May 2000 23:26:46 GMT</last_modification_time>
-			    </signal>
-			    <label>button1</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_SPELLCHECK</stock_pixmap>
-			  </widget>
-			</widget>
-		      </widget>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label85</name>
-		    <label>Personal Comments</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-
-		  <widget>
-		    <class>GtkVBox</class>
-		    <name>vbox3</name>
-		    <homogeneous>False</homogeneous>
-		    <spacing>0</spacing>
-
-		    <widget>
-		      <class>GtkFrame</class>
-		      <name>frame2</name>
-		      <height>67</height>
-		      <label_xalign>0</label_xalign>
-		      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		      <child>
-			<padding>0</padding>
-			<expand>True</expand>
-			<fill>True</fill>
-		      </child>
-
-		      <widget>
-			<class>GtkVBox</class>
-			<name>vbox4</name>
-			<homogeneous>False</homogeneous>
-			<spacing>0</spacing>
-
-			<widget>
-			  <class>GtkScrolledWindow</class>
-			  <name>scrolledwindow15</name>
-			  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-			  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-			  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-			  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-			  <child>
-			    <padding>0</padding>
-			    <expand>True</expand>
-			    <fill>True</fill>
-			  </child>
-
-			  <widget>
-			    <class>GtkText</class>
-			    <name>textComp1</name>
-			    <can_focus>True</can_focus>
-			    <signal>
-			      <name>button_press_event</name>
-			      <handler>on_textComp1_button_press_event</handler>
-			      <last_modification_time>Mon, 14 Feb 2000 20:59:09 GMT</last_modification_time>
-			    </signal>
-			    <editable>False</editable>
-			    <text></text>
-			  </widget>
-			</widget>
-		      </widget>
-		    </widget>
-
-		    <widget>
-		      <class>GtkFrame</class>
-		      <name>frame17</name>
-		      <height>73</height>
-		      <label_xalign>0</label_xalign>
-		      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		      <child>
-			<padding>0</padding>
-			<expand>True</expand>
-			<fill>True</fill>
-		      </child>
-
-		      <widget>
-			<class>GtkScrolledWindow</class>
-			<name>scrolledwindow16</name>
-			<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-			<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-			<widget>
-			  <class>GtkText</class>
-			  <name>textComp2</name>
-			  <can_focus>True</can_focus>
-			  <signal>
-			    <name>button_press_event</name>
-			    <handler>on_textComp2_button_press_event</handler>
-			    <last_modification_time>Mon, 14 Feb 2000 20:59:21 GMT</last_modification_time>
-			  </signal>
-			  <editable>False</editable>
-			  <text></text>
-			</widget>
-		      </widget>
-		    </widget>
-
-		    <widget>
-		      <class>GtkFrame</class>
-		      <name>frame18</name>
-		      <height>76</height>
-		      <label_xalign>0</label_xalign>
-		      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		      <child>
-			<padding>0</padding>
-			<expand>True</expand>
-			<fill>True</fill>
-		      </child>
-
-		      <widget>
-			<class>GtkScrolledWindow</class>
-			<name>scrolledwindow21</name>
-			<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-			<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-			<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-			<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-
-			<widget>
-			  <class>GtkText</class>
-			  <name>textComp3</name>
-			  <can_focus>True</can_focus>
-			  <signal>
-			    <name>button_press_event</name>
-			    <handler>on_textComp3_button_press_event</handler>
-			    <last_modification_time>Mon, 14 Feb 2000 20:59:34 GMT</last_modification_time>
-			  </signal>
-			  <editable>False</editable>
-			  <text></text>
-			</widget>
-		      </widget>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label12</name>
-		    <label>Interlinear</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-
-		  <widget>
-		    <class>GtkFrame</class>
-		    <name>frame12</name>
-		    <label_xalign>0</label_xalign>
-		    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-
-		    <widget>
-		      <class>GtkVBox</class>
-		      <name>vbox6</name>
-		      <homogeneous>False</homogeneous>
-		      <spacing>0</spacing>
-
-		      <widget>
-			<class>GtkHandleBox</class>
-			<name>handlebox10</name>
-			<shadow_type>GTK_SHADOW_NONE</shadow_type>
-			<handle_position>GTK_POS_LEFT</handle_position>
-			<snap_edge>GTK_POS_LEFT</snap_edge>
-			<child>
-			  <padding>0</padding>
-			  <expand>False</expand>
-			  <fill>True</fill>
-			</child>
-
-			<widget>
-			  <class>GtkToolbar</class>
-			  <name>toolbar5</name>
-			  <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-			  <type>GTK_TOOLBAR_ICONS</type>
-			  <space_size>5</space_size>
-			  <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-			  <relief>GTK_RELIEF_NONE</relief>
-			  <tooltips>True</tooltips>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnSPnew</name>
-			    <tooltip>Start new document</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnSPnew_clicked</handler>
-			      <last_modification_time>Thu, 06 Jul 2000 16:39:13 GMT</last_modification_time>
-			    </signal>
-			    <label>button1</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_NEW</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnOpenFile</name>
-			    <tooltip>Open File</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnOpenFile_clicked</handler>
-			      <last_modification_time>Fri, 31 Dec 1999 06:01:04 GMT</last_modification_time>
-			    </signal>
-			    <label>Open</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_OPEN</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnSaveFile</name>
-			    <tooltip>Save</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnSaveFile_clicked</handler>
-			      <last_modification_time>Fri, 31 Dec 1999 06:00:54 GMT</last_modification_time>
-			    </signal>
-			    <label>Save</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_SAVE</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnSaveFileAs</name>
-			    <tooltip>Save as</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnSaveFileAs_clicked</handler>
-			      <last_modification_time>Fri, 31 Dec 1999 06:00:44 GMT</last_modification_time>
-			    </signal>
-			    <label>Save As</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_SAVE_AS</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkVSeparator</class>
-			    <name>vseparator9</name>
-			    <width>7</width>
-			    <height>17</height>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnPrint</name>
-			    <visible>False</visible>
-			    <tooltip>Print </tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnPrint_clicked</handler>
-			      <last_modification_time>Tue, 11 Jan 2000 20:38:59 GMT</last_modification_time>
-			    </signal>
-			    <label>Print</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_PRINT</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkVSeparator</class>
-			    <name>vseparator10</name>
-			    <width>7</width>
-			    <height>17</height>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnCut</name>
-			    <tooltip>Cut to clipboard</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnCut_clicked</handler>
-			      <last_modification_time>Sat, 08 Jan 2000 14:29:00 GMT</last_modification_time>
-			    </signal>
-			    <label>Cut</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_CUT</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnCopy</name>
-			    <tooltip>Copy to clipboard</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnCopy_clicked</handler>
-			      <last_modification_time>Sat, 08 Jan 2000 14:29:25 GMT</last_modification_time>
-			    </signal>
-			    <label>Copy</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_COPY</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnPaste</name>
-			    <tooltip>Paste from clipborad</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnPaste_clicked</handler>
-			      <last_modification_time>Sat, 08 Jan 2000 14:29:40 GMT</last_modification_time>
-			    </signal>
-			    <label>Paste</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_PASTE</stock_pixmap>
-			  </widget>
-
-			  <widget>
-			    <class>GtkVSeparator</class>
-			    <name>vseparator11</name>
-			    <height>17</height>
-			  </widget>
-
-			  <widget>
-			    <class>GtkButton</class>
-			    <child_name>Toolbar:button</child_name>
-			    <name>btnSpell</name>
-			    <visible>False</visible>
-			    <tooltip>Start Spell Check</tooltip>
-			    <signal>
-			      <name>clicked</name>
-			      <handler>on_btnSpell_clicked</handler>
-			      <last_modification_time>Thu, 30 Mar 2000 18:03:25 GMT</last_modification_time>
-			    </signal>
-			    <label>button8</label>
-			    <stock_pixmap>GNOME_STOCK_PIXMAP_SPELLCHECK</stock_pixmap>
 			  </widget>
 			</widget>
 		      </widget>
 
 		      <widget>
 			<class>GtkFrame</class>
-			<name>frame34</name>
+			<name>frame17</name>
+			<height>73</height>
 			<label_xalign>0</label_xalign>
 			<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 			<child>
@@ -2142,7 +1886,7 @@ Preformat
 
 			<widget>
 			  <class>GtkScrolledWindow</class>
-			  <name>scrolledwindow17</name>
+			  <name>scrolledwindow16</name>
 			  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
 			  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 			  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
@@ -2150,47 +1894,315 @@ Preformat
 
 			  <widget>
 			    <class>GtkText</class>
-			    <name>text3</name>
+			    <name>textComp2</name>
 			    <can_focus>True</can_focus>
 			    <signal>
-			      <name>changed</name>
-			      <handler>on_text3_changed</handler>
-			      <last_modification_time>Sun, 09 Jan 2000 03:01:52 GMT</last_modification_time>
+			      <name>button_press_event</name>
+			      <handler>on_textComp2_button_press_event</handler>
+			      <last_modification_time>Mon, 14 Feb 2000 20:59:21 GMT</last_modification_time>
 			    </signal>
-			    <signal>
-			      <name>enter_notify_event</name>
-			      <handler>on_text3_enter_notify_event</handler>
-			      <last_modification_time>Wed, 12 Dec 2001 17:24:43 GMT</last_modification_time>
-			    </signal>
-			    <editable>True</editable>
+			    <editable>False</editable>
 			    <text></text>
 			  </widget>
 			</widget>
 		      </widget>
 
 		      <widget>
-			<class>GtkStatusbar</class>
-			<name>statusbar2</name>
+			<class>GtkFrame</class>
+			<name>frame18</name>
+			<height>76</height>
+			<label_xalign>0</label_xalign>
+			<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 			<child>
 			  <padding>0</padding>
-			  <expand>False</expand>
+			  <expand>True</expand>
 			  <fill>True</fill>
 			</child>
+
+			<widget>
+			  <class>GtkScrolledWindow</class>
+			  <name>scrolledwindow21</name>
+			  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			  <widget>
+			    <class>GtkText</class>
+			    <name>textComp3</name>
+			    <can_focus>True</can_focus>
+			    <signal>
+			      <name>button_press_event</name>
+			      <handler>on_textComp3_button_press_event</handler>
+			      <last_modification_time>Mon, 14 Feb 2000 20:59:34 GMT</last_modification_time>
+			    </signal>
+			    <editable>False</editable>
+			    <text></text>
+			  </widget>
+			</widget>
 		      </widget>
 		    </widget>
-		  </widget>
 
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label41</name>
-		    <label>Study Pad</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
+		    <widget>
+		      <class>GtkLabel</class>
+		      <child_name>Notebook:tab</child_name>
+		      <name>label12</name>
+		      <label>Interlinear</label>
+		      <justify>GTK_JUSTIFY_CENTER</justify>
+		      <wrap>False</wrap>
+		      <xalign>0.5</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		    </widget>
+
+		    <widget>
+		      <class>GtkFrame</class>
+		      <name>frame12</name>
+		      <label_xalign>0</label_xalign>
+		      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+
+		      <widget>
+			<class>GtkVBox</class>
+			<name>vbox6</name>
+			<homogeneous>False</homogeneous>
+			<spacing>0</spacing>
+
+			<widget>
+			  <class>GtkHandleBox</class>
+			  <name>handlebox10</name>
+			  <shadow_type>GTK_SHADOW_NONE</shadow_type>
+			  <handle_position>GTK_POS_LEFT</handle_position>
+			  <snap_edge>GTK_POS_LEFT</snap_edge>
+			  <child>
+			    <padding>0</padding>
+			    <expand>False</expand>
+			    <fill>True</fill>
+			  </child>
+
+			  <widget>
+			    <class>GtkToolbar</class>
+			    <name>toolbar5</name>
+			    <orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+			    <type>GTK_TOOLBAR_ICONS</type>
+			    <space_size>5</space_size>
+			    <space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
+			    <relief>GTK_RELIEF_NONE</relief>
+			    <tooltips>True</tooltips>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnSPnew</name>
+			      <tooltip>Start new document</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnSPnew_clicked</handler>
+				<last_modification_time>Thu, 06 Jul 2000 16:39:13 GMT</last_modification_time>
+			      </signal>
+			      <label>button1</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_NEW</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnOpenFile</name>
+			      <tooltip>Open File</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnOpenFile_clicked</handler>
+				<last_modification_time>Fri, 31 Dec 1999 06:01:04 GMT</last_modification_time>
+			      </signal>
+			      <label>Open</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_OPEN</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnSaveFile</name>
+			      <tooltip>Save</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnSaveFile_clicked</handler>
+				<last_modification_time>Fri, 31 Dec 1999 06:00:54 GMT</last_modification_time>
+			      </signal>
+			      <label>Save</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_SAVE</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnSaveFileAs</name>
+			      <tooltip>Save as</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnSaveFileAs_clicked</handler>
+				<last_modification_time>Fri, 31 Dec 1999 06:00:44 GMT</last_modification_time>
+			      </signal>
+			      <label>Save As</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_SAVE_AS</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkVSeparator</class>
+			      <name>vseparator9</name>
+			      <width>7</width>
+			      <height>17</height>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnPrint</name>
+			      <visible>False</visible>
+			      <tooltip>Print </tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnPrint_clicked</handler>
+				<last_modification_time>Tue, 11 Jan 2000 20:38:59 GMT</last_modification_time>
+			      </signal>
+			      <label>Print</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_PRINT</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkVSeparator</class>
+			      <name>vseparator10</name>
+			      <width>7</width>
+			      <height>17</height>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnCut</name>
+			      <tooltip>Cut to clipboard</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnCut_clicked</handler>
+				<last_modification_time>Sat, 08 Jan 2000 14:29:00 GMT</last_modification_time>
+			      </signal>
+			      <label>Cut</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_CUT</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnCopy</name>
+			      <tooltip>Copy to clipboard</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnCopy_clicked</handler>
+				<last_modification_time>Sat, 08 Jan 2000 14:29:25 GMT</last_modification_time>
+			      </signal>
+			      <label>Copy</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_COPY</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnPaste</name>
+			      <tooltip>Paste from clipborad</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnPaste_clicked</handler>
+				<last_modification_time>Sat, 08 Jan 2000 14:29:40 GMT</last_modification_time>
+			      </signal>
+			      <label>Paste</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_PASTE</stock_pixmap>
+			    </widget>
+
+			    <widget>
+			      <class>GtkVSeparator</class>
+			      <name>vseparator11</name>
+			      <height>17</height>
+			    </widget>
+
+			    <widget>
+			      <class>GtkButton</class>
+			      <child_name>Toolbar:button</child_name>
+			      <name>btnSpell</name>
+			      <visible>False</visible>
+			      <tooltip>Start Spell Check</tooltip>
+			      <signal>
+				<name>clicked</name>
+				<handler>on_btnSpell_clicked</handler>
+				<last_modification_time>Thu, 30 Mar 2000 18:03:25 GMT</last_modification_time>
+			      </signal>
+			      <label>button8</label>
+			      <stock_pixmap>GNOME_STOCK_PIXMAP_SPELLCHECK</stock_pixmap>
+			    </widget>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkFrame</class>
+			  <name>frame34</name>
+			  <label_xalign>0</label_xalign>
+			  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+			  <child>
+			    <padding>0</padding>
+			    <expand>True</expand>
+			    <fill>True</fill>
+			  </child>
+
+			  <widget>
+			    <class>GtkScrolledWindow</class>
+			    <name>scrolledwindow17</name>
+			    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+			    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+			    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+			    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+			    <widget>
+			      <class>GtkText</class>
+			      <name>text3</name>
+			      <can_focus>True</can_focus>
+			      <signal>
+				<name>changed</name>
+				<handler>on_text3_changed</handler>
+				<last_modification_time>Sun, 09 Jan 2000 03:01:52 GMT</last_modification_time>
+			      </signal>
+			      <signal>
+				<name>enter_notify_event</name>
+				<handler>on_text3_enter_notify_event</handler>
+				<last_modification_time>Wed, 12 Dec 2001 17:24:43 GMT</last_modification_time>
+			      </signal>
+			      <editable>True</editable>
+			      <text></text>
+			    </widget>
+			  </widget>
+			</widget>
+
+			<widget>
+			  <class>GtkStatusbar</class>
+			  <name>statusbar2</name>
+			  <child>
+			    <padding>0</padding>
+			    <expand>False</expand>
+			    <fill>True</fill>
+			  </child>
+			</widget>
+		      </widget>
+		    </widget>
+
+		    <widget>
+		      <class>GtkLabel</class>
+		      <child_name>Notebook:tab</child_name>
+		      <name>label41</name>
+		      <label>Study Pad</label>
+		      <justify>GTK_JUSTIFY_CENTER</justify>
+		      <wrap>False</wrap>
+		      <xalign>0.5</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		    </widget>
 		  </widget>
 		</widget>
 	      </widget>

@@ -192,7 +192,6 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				++i;
 				++havemod;
 			}
-			//g_warning(newmod);
 		}
 		mybuf = NULL;
 		mybuf = strstr(url, "passage=");
@@ -205,18 +204,22 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				newref[i + 1] = '\0';
 				++i;
 			}
-			//g_warning(newref);
 		}
 		if (havemod > 2) {
 			modbuf = newmod;
-			//g_warning("newmod = %s",newmod);
 		} else {
 			modbuf = settings->MainWindowModule;
-			//g_warning("modbuf = %s",modbuf);
 		}
 		buf = g_strdup(newref);
 		sprintf(settings->groupName,"%s","Verse List");
-		getVerseListSBSWORD(modbuf, buf, settings);
+		
+		if(get_mod_typeSWORD(modbuf) == 2){
+			/* we have a dict/lex module 
+			    so we don't need to get a verse list */
+			displaydictlexSBSW(modbuf, buf, settings);
+		} else {
+			getVerseListSBSWORD(modbuf, buf, settings);
+		}
 		g_free(buf);
 		
 	} else if (!strncmp(url, "type=morph", 10)) {
@@ -500,7 +503,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 {
 	GtkWidget *widget, *entry;
 	GtkHTML *html;
-	gchar *buf;
+	gchar *buf, *modbuf;
 
 	widget = lookup_widget(settings->app, (gchar *) user_data);
 	html = GTK_HTML(widget);
@@ -510,8 +513,10 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	gtk_entry_set_text(GTK_ENTRY(entry), "");
 	/* put selected ref in entry */
 	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_ENTRY(entry)));	
-	buf = gtk_entry_get_text(GTK_ENTRY(entry));
-	changeVerseSWORD(buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(entry));	
+	/* get name for current text module */
+	modbuf = getmodnameSWORD(0);
+	getVerseListSBSWORD(modbuf, buf, settings);
 }
 
 /***************************************************************************************************
@@ -541,20 +546,6 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			  htmlCommentaries);
 
 	usehtml = htmlTexts;
-
-
-	//htmlComments = percom_control(lookup_widget(settings->app,"vboxPC"), settings);
-	
-	
-	/*gtk_html_new();
-	gtk_widget_ref(htmlComments);
-	gtk_object_set_data_full(GTK_OBJECT(app), "htmlComments",
-				 htmlComments,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlComments);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "swHtmlPerCom")),
-			  htmlComments);*/
 
 	textComp1 = gtk_html_new();
 	gtk_widget_ref(textComp1);

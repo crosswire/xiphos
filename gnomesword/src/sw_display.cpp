@@ -64,15 +64,23 @@ extern SETTINGS *settings;
  *****************************************************************************/
 char ComEntryDisp::Display(SWModule & imodule)
 {
-	//gchar tmpBuf[255], *buf;
+	gchar tmpBuf[255], *utf8str;
 	GString *strbuf;
+	gint utf8len;
 
-	//buf = (char *) imodule.Description();
-		
+			
 	(const char *) imodule;	/* snap to entry */
 	settings->percomverse = (gchar*)imodule.KeyText();
 	/* show module text for current key */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
+	sprintf(tmpBuf,
+		"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		settings->bible_bg_color, settings->bible_text_color,
+		settings->link_color);
+	
+	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	strbuf = g_string_new((const char *) imodule);
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 	g_string_free(strbuf, TRUE);
