@@ -426,7 +426,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	cur_chapter = get_chapter_from_key(tmpkey);
 	cur_book = get_book_from_key(tmpkey);
 
-	str = g_string_new("");
+	str = g_string_new(" ");
 
 	mf = get_font(mod_name);
 
@@ -508,8 +508,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
-			g_string_free(str, TRUE);
-			str = g_string_new(utf8str);
+			g_string_sprintf(str,"%s",utf8str);
+			//str = g_string_new(utf8str);
 		}
 
 		if (newparagraph && settings.versestyle) {
@@ -524,7 +524,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		}
 
 		/* get module text and prepare to display it */
-		text_str = get_bibletext_text(mod_name, tmpkey);
+		text_str = get_bibletext_text(mod_name, tmpkey); //get_bibletext_text
 		str = g_string_append(str, text_str);
 		if (settings.displaySearchResults)
 			mark_search_words(str);
@@ -573,7 +573,8 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	gtk_html_set_editable(html, was_editable);
 	sprintf(buf, "%d", cur_verse);
 	gtk_html_jump_to_anchor(html, buf);
-
+	
+	g_string_free(str, TRUE);
 	if (use_font_size)
 		free(use_font_size);
 	if (use_font)

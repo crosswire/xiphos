@@ -544,6 +544,7 @@ void gui_update_interlinear_page(void)
 			}
 				
 			utf8str = get_interlinear_module_text(mod_name, settings.currentverse);
+			//g_warning(utf8str);
 			if (strlen(utf8str)) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
 				free(utf8str);
@@ -999,12 +1000,13 @@ static void add_items_to_options_menu(void)
 	
 	tmp = NULL;
 
-	tmp = get_list(OPTIONS_LIST);
+	tmp = get_list(OPTIONS_LIST); /* this is the only place this
+                                         list is used */
 	while (tmp != NULL) {
 		shellmenu =  module_options_menu;		
 			
 		/* add global option items to interlinear popup menu */
-		menuChoice = gtk_check_menu_item_new_with_label((gchar *)(gchar *) tmp->data);	
+		menuChoice = gtk_check_menu_item_new_with_label((gchar *) tmp->data);
 		sprintf(menuName, "optionNum%d", viewNumber++);
 		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName, menuChoice);
 		gtk_widget_show(menuChoice);
@@ -1059,7 +1061,7 @@ static void add_items_to_options_menu(void)
 			GTK_CHECK_MENU_ITEM(menuChoice)->active =
 				settings.headingsint;
 		}	
-		
+		g_free((gchar *) tmp->data);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
