@@ -63,5 +63,5 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 };
 
 //----------------------------------------------------------------------------------------------
-void AboutModsDisplayHTML(GString *text);
+void AboutModsDisplayHTML(char *to, char *text);
 

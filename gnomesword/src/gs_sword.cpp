@@ -243,6 +243,7 @@ initSWORD(GtkWidget *mainform)
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
+	
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			curMod = (*it).second;
@@ -372,7 +373,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->notebook3page == 2){
-		beginHTML(lookup_widget(MainFrm,"textComp1"),FALSE);		
+		beginHTML(lookup_widget(MainFrm,"textComp1"),TRUE);		
 		changecomp1ModSWORD(settings->Interlinear1Module);
 		changecomp1ModSWORD(settings->Interlinear2Module);
 		changecomp1ModSWORD(settings->Interlinear3Module);
@@ -893,17 +894,20 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 void
 showmoduleinfoSWORD(char *modName) //--  show module information in an about dialog
 {
-	GtkWidget *aboutbox,  //-- pointer to about dialog
- 		*text,       //-- pointer to text widget of dialog
-    		*label;     //-- pointer to label in dialog
-	char 	*buf,       //-- pointer to text buffer for label (mod name)
- 		*bufabout;  //-- pointer to text buffer for text widget (mod about)
-	GString *string;
+	GtkWidget *aboutbox;  //-- pointer to about dialog
+	
+ 	GtkWidget	*text;       //-- pointer to text widget of dialog
+	gchar 		*buf,       //-- pointer to text buffer for label (mod name)
+ 				*bufabout,  //-- pointer to text buffer for text widget (mod about)
+				*newbuf,
+				discription[500];
+	gint 		len;
 	
         ModMap::iterator it; //-- module iterator
 	SectionMap::iterator sit; //--
 	ConfigEntMap::iterator cit; //--
-	
+		
+	bufabout = "oops";
 	it = mainMgr->Modules.find(modName); //-- find module (modName)
 	if (it != mainMgr->Modules.end()){ //-- if we don't run out of mods before we find the one we are looking for	
 	        buf = (char *)(*it).second->Description();  //-- get discription of module
@@ -911,21 +915,27 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	        if (sit !=mainMgr->config->Sections.end()){
 	                cit = (*sit).second.find("About");
 			if (cit != (*sit).second.end()) 				
-				string = g_string_new((char *)(*cit).second.c_str()); //-- get module about information
+				 bufabout = (char *)(*cit).second.c_str(); //-- get module about information
 				//cout << bufabout << '\n';
 	        }
 	}
+	
+	sprintf(discription,"<FONT COLOR=\"#000FCF\"><center><b>%s</b></center></font><HR>",buf); 
 	aboutbox = create_aboutmodules(); //-- create about dialog
-	text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
-	label = lookup_widget(aboutbox,"lbModName");    //-- get label
-	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
-	//gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to TRUE for text widget
-	AboutModsDisplayHTML(string) ; //-- send about info and text widget to display function (display.cpp)
-	beginHTML(text, FALSE);
-	displayHTML(text, string->str,string->len);
-	endHTML(text);
-	gtk_widget_show(aboutbox); //-- show the about dialog   
-	if(string->str != NULL) g_string_free(string,FALSE);
+	gtk_widget_show(aboutbox);
+	if(strcmp(bufabout,"oops")){
+		len = strlen(bufabout);
+		newbuf = new char[len + 600];
+		text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
+		AboutModsDisplayHTML(newbuf, bufabout) ; //-- send about info and text widget to display function (display.cpp)
+		beginHTML(text, FALSE);
+		displayHTML(text, "<html><body>", strlen("<html><body>"));
+		displayHTML(text, discription, strlen(discription));
+		displayHTML(text, newbuf,strlen(newbuf));
+		displayHTML(text, "</body></html>", strlen("</body></html>"));
+		endHTML(text);
+		delete[]newbuf; 
+	}else g_warning(bufabout);
 }
 
 
