@@ -408,6 +408,7 @@ apply_color (GdkColor *gdk_color, GSHTMLEditorControlData *cd)
 	gtk_html_set_color (cd->html, color);
 	if (color)
 		html_color_unref (color);
+
 }
 
 /******************************************************************************
@@ -436,6 +437,7 @@ toolbar_apply_color (GSHTMLEditorControlData *cd)
 	apply_color (color, cd);
 	if (color)
 		gdk_color_free (color);
+
 }
 
 /******************************************************************************
@@ -461,6 +463,9 @@ color_changed (GtkWidget *w, GdkColor *gdk_color, gboolean custom, gboolean by_u
 	/* If the color was changed programatically there's no need to set things */
 	if (!by_user)
 		return;
+#ifdef DEBUG
+	g_message("color_changed");
+#endif	
 	apply_color (gdk_color, cd);
 }
 
@@ -1134,6 +1139,7 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 {
 	GtkWidget *fontitem;
 	GtkWidget *coloritem;
+	//GtkToolItem *
 	cd->toolbar_style =
 	    gtk_toolbar_new();
 	gtk_widget_show_all(cd->toolbar_style);
@@ -1152,13 +1158,15 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 	gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(cd->toolbar_style),
 					 editor_toolbar_style_uiinfo,
 					 NULL, cd);
-/*	coloritem = setup_color_combo(cd);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(cd->toolbar_style),
+	coloritem = setup_color_combo(cd);
+/*	gtk_toolbar_append_widget(GTK_TOOLBAR(cd->toolbar_style),
 				  coloritem, NULL, NULL);
 */ 
+	//GtkToolItem* gtk_tool_item_new              (void);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (cd->toolbar_style),
-				   setup_color_combo (cd),
+				   coloritem,
 				   NULL, NULL);
+
 
 	cd->font_style_changed_connection_id
 	    =
@@ -1195,6 +1203,7 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
 			   
 	return cd->toolbar_style;
 }
+
 
 /******************************************************************************
  * Name
@@ -1287,6 +1296,5 @@ GtkWidget *gui_toolbar_style(GSHTMLEditorControlData * cd)
 {
 	g_return_val_if_fail(cd->html != NULL, NULL);
 	g_return_val_if_fail(GTK_IS_HTML(cd->html), NULL);
-
 	return create_style_toolbar(cd);
 }

@@ -98,7 +98,7 @@ public:
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
 	
-	int module_type(char *mod_name);
+	int module_type(const char *mod_name);
 	char *module_description(char *mod_name);
 	char *module_name_from_description(char *description);
 	const char *module_get_language(const char *module_name);

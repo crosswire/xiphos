@@ -26,11 +26,8 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gtkhtml/htmlengine.h>
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
+
+
 #include "gui/sidebar.h"
 #include "editor/editor.h"
 #include "gui/bookmarks_treeview.h"
@@ -906,7 +903,7 @@ static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 static void on_open_in_dialog_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	main_dialogs_open(buf_module);
+	main_dialogs_open(buf_module,NULL);
 	g_free(buf_module);
 }
 
@@ -1570,6 +1567,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 				   (widgets.notebook_sidebar), FALSE);
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.notebook_sidebar), FALSE);
+	gtk_container_set_border_width(GTK_CONTAINER(widgets.notebook_sidebar), 2);
 
 	scrolledwindow4 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow4);
@@ -1628,7 +1626,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	table2 = gtk_table_new(2, 2, TRUE);
 	gtk_widget_show(table2);
 	gtk_box_pack_start(GTK_BOX(vbox1), table2, FALSE, TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(table2), 6);
+	gtk_container_set_border_width(GTK_CONTAINER(table2), 2);
 	gtk_table_set_row_spacings(GTK_TABLE(table2), 6);
 	gtk_table_set_col_spacings(GTK_TABLE(table2), 6);
 

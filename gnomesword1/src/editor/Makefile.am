@@ -29,26 +29,34 @@ noinst_LIBRARIES = libeditor.a
 
 libeditor_a_SOURCES =				\
 	$(SPELL_IDL_GENERATED)			\
+	body.c body.h				\
+	cell.c cell.h				\
+	dialog.c dialog.h			\
+	editor-control.c editor-control.h	\
 	editor.c editor.h			\
 	editor_menu.c editor_menu.h		\
-	editor_replace.c editor_replace.h	\
-	editor_spell.c editor_spell.h		\
-	note_editor.c note_editor.h		\
-	note_toolbar_edit.c note_toolbar_edit.h	\
-	note_toolbar_style.c note_toolbar_style.h \
-	toolbar_edit.c toolbar_edit.h		\
-	toolbar_style.c toolbar_style.h		\
-	spell.c	 spell.h			\
 	gi-utils.h				\
 	gi-colors.c gi-colors.h			\
 	gi-color-palette.c gi-color-palette.h	\
 	gi-color-group.c gi-color-group.h	\
 	gi-combo-box.c	 gi-combo-box.h		\
-	gi-color-combo.c gi-color-combo.h
+	gi-color-combo.c gi-color-combo.h	\
+	image.c	image.h				\
+	link.c link.h				\
+	paragraph.c paragraph.h			\
+	popup.c popup.h 			\
+	properties.c properties.h 		\
+	replace.c replace.h			\
+	rule.c rule.h				\
+	search.c search.h			\
+	spell.c	 spell.h			\
+	table.c table.h				\
+	template.c template.h			\
+	text.c text.h 				\
+	toolbar_edit.c toolbar_edit.h		\
+	toolbar_style.c toolbar_style.h		\
+	utils.c utils.h
 
-
-# test_editor_LDADD = $(LDADD) libgnome-gtkhtml-editor.la \
-# 	@PACKAGE_LIBS@
 
 # Extra stuff to distribute.
 
