@@ -42,10 +42,10 @@ libbackend_a_SOURCES =  \
     sword.h \
     verselist_sb.cpp \
     verselist_sb.h\
-    viewcomm_dlg.cpp \
-    viewcomm_dlg.h\
-    viewdict_dlg.cpp \
-    viewdict_dlg.h \
+    viewcomm.cpp \
+    viewcomm.h\
+    viewdict.cpp \
+    viewdict.h \
     viewtext.cpp \
     viewtext.h 
 

@@ -305,56 +305,6 @@ void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 	
 /*******************************************************************************
- * display new dictionary window
- *******************************************************************************/
-void on_view_in_new_window_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	extern GtkWidget *frameShowDict;
-	static GtkWidget *dlg;
-	gchar *modName;
-        GdkCursor *cursor;	
-	gtk_widget_show(settings->app);
-	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(settings->app->window,cursor);
-	
-	if(!isrunningSD) {
-		dlg = create_dlgViewDict(settings->app);
-		modName = getdictmodSWORD();
-		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  /* set frame label to current Module name  */				
-		//initSD(modName);
-		isrunningSD = TRUE;
-	}
-	gtk_widget_show(dlg);
-	gtk_widget_show(settings->app);
-	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(settings->app->window,cursor);
-}
-
-/*******************************************************************************
- * display new commentary window
- *******************************************************************************/
-void on_view_in_new_window2_activate(GtkMenuItem * menuitem,
-		gpointer user_data)
-{
-	static GtkWidget *dlg;
-        GdkCursor *cursor;	
-	
-	gtk_widget_show(settings->app);
-	cursor = gdk_cursor_new(GDK_WATCH);
-	gdk_window_set_cursor(settings->app->window,cursor);
-	
-	if(!isrunningVC) {
-		dlg = create_dlgViewComm(settings->app);
-		isrunningVC = TRUE;
-	}
-	gtk_widget_show(dlg);
-	gtk_widget_show(settings->app);
-	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor(settings->app->window,cursor);
-}
-
-/*******************************************************************************
  *
  *******************************************************************************/
 void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)

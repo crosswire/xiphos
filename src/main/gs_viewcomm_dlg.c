@@ -33,7 +33,8 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "viewcomm_dlg.h"
+#include "viewcomm.h"
+#include "gs_gnomesword.h"
 #include "gs_viewcomm_dlg.h"
 #include "sword.h"
 #include "gs_html.h"
@@ -72,7 +73,7 @@ static
 void on_dlgViewComm_destroy(GtkObject * object, gpointer user_data)
 {
 	isrunningVC = FALSE;
-	shutdownVCSWORD();
+	backend_shutdown_viewcomm();
 }
 
 /*
@@ -80,7 +81,7 @@ void on_dlgViewComm_destroy(GtkObject * object, gpointer user_data)
  */
 void on_btnSync_clicked(GtkButton * button, gpointer user_data)
 {
-	gotoverseVCSWORD(current_verse);
+	backend_goto_verse_viewcomm(current_verse);
 }
 
 /*
@@ -88,16 +89,17 @@ void on_btnSync_clicked(GtkButton * button, gpointer user_data)
  */
 void on_cbEntry_changed(GtkEditable * editable, gpointer user_data)
 {
-	gchar *buf, title[256];
+	gchar *buf, *module_name, title[256];
 	static gboolean firsttime = TRUE;
 
+	module_name = gtk_entry_get_text(GTK_ENTRY(editable));
 	if (!firsttime) {
-		buf = gtk_entry_get_text(GTK_ENTRY(editable));
-		loadVCmodSWORD(buf);
+		backend_load_module_viewcomm(module_name);
 		buf = gtk_entry_get_text(GTK_ENTRY(GTK_WIDGET(user_data)));
-		gotoverseVCSWORD(buf);
+		backend_goto_verse_viewcomm(buf);
 	}
-	sprintf(title, "GnomeSword - %s", getVCmodDescriptionSWORD());
+	sprintf(title, "GnomeSword - %s", 
+		backend_get_module_description(module_name));
 	gtk_window_set_title(GTK_WINDOW(dlgViewComm), title);
 	firsttime = FALSE;
 }
@@ -110,7 +112,7 @@ void on_btnGoto_clicked(GtkButton * button, gpointer user_data)
 	gchar *buf;
 
 	buf = gtk_entry_get_text(GTK_ENTRY(GTK_WIDGET(user_data)));
-	gotoverseVCSWORD(buf);
+	backend_goto_verse_viewcomm(buf);
 	//g_warning(buf);
 }
 
@@ -119,7 +121,7 @@ void on_btnGoto_clicked(GtkButton * button, gpointer user_data)
  */
 void on_btnPrev_clicked(GtkButton * button, gpointer user_data)
 {
-	navVCModSWORD(0);
+	backend_nav_module_viewcomm(0);
 }
 
 /*
@@ -127,13 +129,13 @@ void on_btnPrev_clicked(GtkButton * button, gpointer user_data)
  */
 void on_btnNext_clicked(GtkButton * button, gpointer user_data)
 {
-	navVCModSWORD(1);
+	backend_nav_module_viewcomm(1);
 }
 
 /*
  * create the View Commentary Dialog
  */
-GtkWidget *create_dlgViewComm(GtkWidget *app)
+GtkWidget *create_dlgViewComm(SETTINGS * s)
 {
 	GtkWidget *dialog_vbox11;
 	GtkWidget *vbox30;
@@ -148,6 +150,7 @@ GtkWidget *create_dlgViewComm(GtkWidget *app)
 	GtkWidget *scrolledwindow38;
 	GtkWidget *dialog_action_area11;
 	GtkWidget *btnClose;
+	gchar *listitem;
 
 	dlgViewComm =
 	    gnome_dialog_new(_("GnomeSword - View Commentary"), NULL);
@@ -324,14 +327,34 @@ GtkWidget *create_dlgViewComm(GtkWidget *app)
 	gtk_signal_connect(GTK_OBJECT(text8), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);			   
 	gtk_signal_connect (GTK_OBJECT (text8), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)s->app);
 
 	commList = NULL;
-	commList = setupCommSWORD(text8);
+	listitem = NULL;
+	
+	backend_setup_viewcomm(text8);	
+	
+	listitem = backend_get_first_module_viewcomm();
+	if(listitem) {
+		commList = g_list_append(commList, (gchar*)listitem);
+		
+		while((listitem = backend_get_next_module_viewcomm()) != NULL) {
+			commList = g_list_append(commList, (gchar*)listitem);
+		}
+	}
+	
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbChangeMod), commList);
-	gtk_entry_set_text(GTK_ENTRY(cbEntry), getcommodSWORD());
+	
+	commList = g_list_first(commList);
+	while(commList != NULL) {
+		g_free(commList->data); /* free mem allocated by g_strdup() */
+		commList = g_list_next(commList);
+	}
+	g_list_free(commList);	
+	
+	gtk_entry_set_text(GTK_ENTRY(cbEntry), s->CommWindowModule);
 	gtk_entry_set_text(GTK_ENTRY(entry1), current_verse);
-	gotoverseVCSWORD(current_verse);
+	backend_goto_verse_viewcomm(current_verse);
 	g_list_free(commList);
 	isrunningVC = TRUE;
 	return dlgViewComm;
