@@ -97,29 +97,7 @@ void frontend_init(void)
 	 *  setup sidebar
 	 */
 	gui_create_sidebar(widgets.epaned);
-
-	/*
-	 *  setup commentary gui support
-	 */
-	if (settings.havecomm) {
-//		gui_setup_commentary(get_list(COMM_LIST));
-		gui_setup_commentary_dialog(get_list(COMM_LIST));
-	}
-
-	/*
-	 *  setup personal comments gui support
-	 */
-	if (settings.havepercomm) {
-		//gui_setup_percomm_dialog();
-		if (!settings.use_percomm_dialog) {
-			gui_setup_percomm(get_list(PERCOMM_LIST));
-			gtk_box_pack_start(GTK_BOX
-					   (widgets.vbox_percomm),
-					   widgets.notebook_percomm,
-					   TRUE, TRUE, 0);
-		}
-	}
-
+	
 	/*
 	 *  setup Dict/Lex gui support
 	 */
@@ -137,15 +115,6 @@ void frontend_init(void)
 	}
 
 	/*
-	 *  setup Bible text gui
-	 */
-	if (settings.havebible) {
-	//	gui_setup_bibletext();//gui_setup_text(get_list(TEXT_LIST));
-	//	gui_open_bibletext(settings.MainWindowModule);
-		main_setup_bibletext_dialog(get_list(TEXT_LIST));
-	}
-
-	/*
 	 *  parallel stuff
 	 */
 	if (settings.havebible) {
@@ -155,6 +124,7 @@ void frontend_init(void)
 		gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 	}
 
+	main_dialogs_setup();
 	// setup passage notebook
 	if(settings.browsing)
 		gui_notebook_main_setup(NULL);
@@ -191,10 +161,10 @@ void frontend_display(void)
 	gui_show_main_window();
 
 	gui_add_history_Item(widgets.app, NULL, settings.currentverse);
+	
 	settings.addhistoryitem = FALSE;
 	url = g_strdup_printf("sword://%s/%s",settings.MainWindowModule,
 					      settings.currentverse);
-	//gui_change_verse(settings.currentverse);
 	main_url_handler(url);
 	g_free(url);
 	
@@ -202,7 +172,6 @@ void frontend_display(void)
 					      settings.dictkey);
 	main_url_handler(url);
 	g_free(url);
-	//gui_change_module_and_key(settings.DictWindowModule,settings.dictkey);
 
 	if(!settings.havebible){
 		settings.showtexts = FALSE;
@@ -214,25 +183,11 @@ void frontend_display(void)
 		gui_show_hide_comms(FALSE);
 		gtk_widget_set_sensitive(widgets.viewcomms_item, FALSE);
 	}
-	if((!settings.havedict)&&(!settings.havebook)) {
+	if(!settings.havedict) {
 		gui_show_hide_dicts(FALSE);
-		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
 		gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);
 	}
-/*	if((!settings.havedict)&&(settings.havebook)) {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.workbook_lower),
-					      1);
-		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
-	}
-*/
-/*	if((settings.havedict)&&(!settings.havebook)) {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.workbook_lower),
-					      0);
-		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
-	}
-*/
+	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -252,6 +207,7 @@ void frontend_display(void)
 	if (settings.showdevotional) {
 		gui_display_devotional_in_sidebar();
 	}
+	
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
 	if(settings.setup_canceled) {
 		str = g_string_new("");
@@ -329,29 +285,18 @@ void shutdown_frontend(void)
 	g_free(settings.shortcutbarDir);
 	g_free(settings.fnconfigure);
 	g_free(settings.swbmDir);
-
-	if (settings.havebible) {
-//		gui_shutdown_text();
-		main_shutdown_bibletext_dialog();
-	}
+	
+	main_dialogs_shutdown();
 
 	if (settings.havebook) {
 		//gui_shutdown_gbs();
 		gui_shutdown_gbs_dialog();
 	}
 
-	if (settings.havecomm) {
-//		gui_shutdown_commentary();
-		gui_shutdown_commentary_dialog();
-	}
-
 	if (settings.havedict) {
 //		gui_shutdown_dictlex();
 		gui_shutdown_dictlex_dialog();
 	}
-
-	if (settings.havepercomm)
-		gui_shutdown_percomm();
 
 	if(settings.browsing)
 		gui_notebook_main_shutdown();

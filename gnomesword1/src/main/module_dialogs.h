@@ -26,14 +26,11 @@
 extern "C" {
 #endif
 
-//#include "gui/bibletext.h"
-
-#include "main/global_ops.hh"
+typedef struct _dialog_data DIALOG_DATA;
 	
+#include "main/global_ops.hh"
 
-
-typedef struct _text_data TEXT_DATA;
-struct _text_data {
+struct _dialog_data {
 	/* dialog widgets */
 	GtkWidget *dialog;
 	GtkWidget *toolbar_nav;
@@ -59,28 +56,35 @@ struct _text_data {
 	gint mod_num;
 	
 	gboolean is_locked;
+	gboolean is_percomm;
 	gboolean is_dialog;
 	gboolean is_rtol;
+	gboolean book_heading;
+	gboolean chapter_heading;
 	gboolean sync;
 	
 	gpointer backend;
+	gpointer editor;
 	
 	GLOBAL_OPS *ops;
 };
-extern TEXT_DATA *cur_t;	
+extern DIALOG_DATA *cur_t;
+extern DIALOG_DATA *cur_c;	
 
-void main_dialog_update_controls(TEXT_DATA * vt);
-void main_bible_dialog_display(TEXT_DATA * t);
-void main_bible_dialog_passage_changed(TEXT_DATA * t, gchar * passage);
-void main_sync_bibletext_dialog_with_main(TEXT_DATA * vt);
+
+void main_dialog_save_note(const gchar * note);
+void main_dialog_update_controls(DIALOG_DATA * vt);
+void main_bible_dialog_display(DIALOG_DATA * t);
+void main_bible_dialog_passage_changed(DIALOG_DATA * t, gchar * passage);
+void main_sync_bibletext_dialog_with_main(DIALOG_DATA * vt);
 void main_keep_bibletext_dialog_in_sync(gchar * key);
-void main_setup_bibletext_dialog(GList *mods);
-void main_shutdown_bibletext_dialog(void);
-void main_free_on_destroy(TEXT_DATA * vt);
-void main_open_bibletext_dialog(gchar * mod_name);
-void main_bibletext_dialog_goto_bookmark(gchar * url);
+void main_dialogs_setup(void);
+void main_dialogs_shutdown(void);
+void main_free_on_destroy(DIALOG_DATA * vt);
+void main_dialog_goto_bookmark(gchar * url);
 void main_dialog_set_global_opt(gboolean choice);
-gint main_dialogs_url_handler(TEXT_DATA * t, const gchar * url, gboolean clicked);
+gint main_dialogs_url_handler(DIALOG_DATA * t, const gchar * url, gboolean clicked);
+void main_dialogs_open(gchar * mod_name);
 
 #ifdef __cplusplus
 }

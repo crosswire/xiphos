@@ -23,24 +23,41 @@
 #include <gtk/gtk.h>
 #include <swmgr.h>
 #include <swdisp.h>
+#include "backend/dialogs.hh"
+#include "backend/sword_main.hh"
+
 using namespace sword;
 
 class GTKEntryDisp : public SWDisplay {
 protected:
 	GtkWidget *gtkText;
+	SwordMain *be;
 public:	
-	GTKEntryDisp(GtkWidget *gtkText) { this->gtkText = gtkText; }
+	GTKEntryDisp(GtkWidget *gtkText, SwordMain *sm) 
+					 { this->gtkText = gtkText; 
+					   this->be = be;}
 	virtual char Display(SWModule &imodule);
 };
 
 class GTKChapDisp : public GTKEntryDisp {
 public:
-	GTKChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	GTKChapDisp(GtkWidget *gtkText, SwordMain *be) : GTKEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
 };
 
-class DialogChapDisp : public GTKEntryDisp {
+
+
+class DialogEntryDisp : public SWDisplay {
+protected:
+	GtkWidget *gtkText;
+	ModuleDialogs *be;
 public:
-	DialogChapDisp(GtkWidget *gtkText) : GTKEntryDisp(gtkText) {}
+	DialogEntryDisp(GtkWidget *gtkText, ModuleDialogs *be) {this->gtkText = gtkText;this->be = be;}
+	virtual char Display(SWModule &imodule);
+};
+
+class DialogChapDisp : public  DialogEntryDisp {
+public:
+	DialogChapDisp(GtkWidget *gtkText, ModuleDialogs *be) : DialogEntryDisp(gtkText,be) {}
 	virtual char Display(SWModule &imodule);
 };

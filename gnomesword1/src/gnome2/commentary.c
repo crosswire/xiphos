@@ -31,7 +31,7 @@
 #include "gui/commentary.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
-#include "gui/commentary_dialog.h"
+//#include "gui/commentary_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
@@ -109,7 +109,7 @@ static void popup_pm_comm(GdkEventButton * event)
  *   #include ".h"
  *
  *  gboolean on_comm_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)
+			    GdkEventButton * event, DIALOG_DATA * t)
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -145,7 +145,7 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
  *   #include "_bibletext.h"
  *
  *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)
+			    GdkEventButton * event, DIALOG_DATA * t)
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -474,7 +474,7 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_open_commentary_editor((gchar *) user_data);
+//	gui_open_commentary_editor((gchar *) user_data);
 }
 
 /******************************************************************************
@@ -772,6 +772,8 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
+	gtk_widget_hide(menu1_uiinfo[7].widget);
+	gtk_widget_hide(menu1_uiinfo[8].widget);
 
 
 	if(settings.comm_showing) {

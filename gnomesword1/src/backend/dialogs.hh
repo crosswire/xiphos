@@ -68,6 +68,7 @@ public:
 	int is_module(const char *mod_name);
 	int set_module(const char *module_name);
 	char *navigate_module(int direction);
+	void save_entry(const char * entry);
 	
 	int module_type(void);
 	const char *module_get_language(const char *module_name);

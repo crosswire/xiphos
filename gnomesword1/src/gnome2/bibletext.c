@@ -142,7 +142,7 @@ void gui_popup_pm_text(gchar * mod_name, GdkEventButton * event)
  *   #include ".h"
  *
  *  gboolean on_text_button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)
+			    GdkEventButton * event, DIALOG_DATA * t)
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -175,7 +175,7 @@ static gboolean on_text_button_press_event(GtkWidget * widget,
  *   #include "_bibletext.h"
  *
  *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)
+			    GdkEventButton * event, DIALOG_DATA * t)
  *
  * Description
  *   called when mouse button is clicked in html widget
@@ -731,8 +731,8 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (settings.use_percomm_dialog)
-		gui_open_commentary_editor((gchar *) user_data);
+//	if (settings.use_percomm_dialog)
+//		gui_open_commentary_editor((gchar *) user_data);
 /*	else {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.workbook_lower),
@@ -1036,6 +1036,8 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"
 	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
+	gtk_widget_hide(menu1_uiinfo[7].widget);
+	gtk_widget_hide(menu1_uiinfo[8].widget);
 
 
 

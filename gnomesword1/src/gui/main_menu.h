@@ -30,8 +30,8 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
 			        gpointer user_data);
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
-void on_verse_style1_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
+/*void on_verse_style1_activate(GtkCheckMenuItem * menuitem,
+				gpointer user_data);*/
 void on_exit1_activate(GtkMenuItem * menuitem, 
 				gpointer user_data);
 void on_clear1_activate(GtkMenuItem * menuitem,
@@ -50,4 +50,3 @@ void gui_create_main_menu(GtkWidget *app);
 void gui_install_menu_hints(GtkWidget *app);
 
 #endif
-
