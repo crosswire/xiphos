@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * interlinear_dialog.h - dialog for detached interlinear
+ * parallel.h - support for displaying multiple modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -18,21 +18,26 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
-#ifndef __INTERLINEAR_DIALOG_H__
-#define __INTERLINEAR_DIALOG_H__
+
+#ifndef ___parallel_H_
+#define ___parallel_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void gui_undock_interlinear_page(void);
-void gui_btnDockInt_clicked(GtkButton *button, gpointer user_data);
-GtkWidget *gui_create_interlinear_dialog(void);
-
+#include "main/settings.h"
+	
+void gui_check_parallel_modules(void);	
+void gui_set_parallel_options_at_start(void);
+void gui_update_parallel_page(void);
+void gui_update_parallel_page_detached(void);
+void gui_swap_parallel_with_main(char *intmod);
+void gui_set_parallel_module_global_options(gchar * option, gboolean choice);
+void gui_create_parallel_popup(GList *bible_description);
+	
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
