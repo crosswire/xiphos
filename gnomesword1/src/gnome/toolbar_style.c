@@ -534,7 +534,7 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 		html_color_alloc(color, cd->html->engine->painter);
 	else
 		gtk_signal_connect(GTK_OBJECT(cd->html), "realize",
-				   realize_engine, cd);
+				   GTK_SIGNAL_FUNC(realize_engine), cd);
 	gtk_signal_connect(GTK_OBJECT(cd->html), "load_done",
 			   GTK_SIGNAL_FUNC(load_done), cd);
 

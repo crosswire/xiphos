@@ -479,7 +479,7 @@ static void realize_engine(GtkHTML * html, GSHTMLEditorControlData * cd)
 {
 	set_color_combo(html, cd);
 	gtk_signal_disconnect_by_func(GTK_OBJECT(html),
-				      realize_engine, cd);
+				      G_CALLBACK(realize_engine), cd);
 }
 
 /******************************************************************************
@@ -504,7 +504,7 @@ static void load_done(GtkHTML * html, GSHTMLEditorControlData * cd)
 		set_color_combo(html, cd);
 	else
 		gtk_signal_connect(GTK_OBJECT(cd->html), "realize",
-				   realize_engine, cd);
+				   G_CALLBACK(realize_engine), cd);
 }
 
 /******************************************************************************
@@ -534,7 +534,7 @@ static GtkWidget *setup_color_combo(GSHTMLEditorControlData * cd)
 		html_color_alloc(color, cd->html->engine->painter);
 	else
 		gtk_signal_connect(GTK_OBJECT(cd->html), "realize",
-				   realize_engine, cd);
+				   G_CALLBACK(realize_engine), cd);
 	gtk_signal_connect(GTK_OBJECT(cd->html), "load_done",
 			   G_CALLBACK(load_done), cd);
 
@@ -1140,7 +1140,7 @@ static GtkWidget *create_style_toolbar(GSHTMLEditorControlData * cd)
  */
 
 static void toolbar_item_update_sensitivity(GtkWidget * widget,
-					    gpointer data)
+					    gpointer data) 
 {
 	GSHTMLEditorControlData *cd = (GSHTMLEditorControlData *) data;
 	gboolean sensitive;
