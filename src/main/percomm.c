@@ -24,7 +24,11 @@
 #endif
 
 
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
 #include <glib-1.2/glib.h>
+#endif
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/sword.h"

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include <glib-1.2/glib.h>
+#include <glib.h>
 typedef struct _shortcut_item SHORTCUT_ITEM;
 struct  _shortcut_item {
 	gchar *url;

@@ -1435,8 +1435,8 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	TEXT_DATA *vt;
 	GtkWidget *popupmenu;
 
-	vt = g_new(TEXT_DATA, 1);
-	vt->tgs = g_new(TEXT_GLOBALS, 1);
+	vt = g_new0(TEXT_DATA, 1);
+	vt->tgs = g_new0(TEXT_GLOBALS, 1);
 	vt->mod_num = get_module_number(mod_name, TEXT_MODS);
 	vt->search_string = NULL;
 	vt->dialog = NULL;

@@ -327,7 +327,8 @@ module.po.files=\
 	es.po\
 	es_ES.po\
 	fr.po\
-	sk.po
+	sk.po\
+	ru.po
 
 compiler.options.supports=
 compiler.options.include.paths=\
