@@ -487,12 +487,14 @@ SETTINGS createsettings(void)
 	p_settings->notebook3page = 0;	/* notebook 3 page number */
 	p_settings->notebook1page = 0;	/* commentaries notebook */
 	p_settings->notebook2page = 0;	/* dict and lex notebook  */
+	p_settings->shortcutbarsize = 120; /*width of shortcutbar */
 	p_settings->showcomtabs = false;	/* show tabs on commentary notebook */
 	p_settings->showdicttabs = false;	/* show tabs on dict/lex notebook */
 	p_settings->showshortcutbar = true;	/* show the shortcut bar */
 	p_settings->showtextgroup = false;	/* show text group */
 	p_settings->showcomgroup = true;	/* show com group */
 	p_settings->showdictgroup = true;	/* show dict/lex group */
+	p_settings->showhistorygroup = true;	/* show history group */
 	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* create settings file (settings.cfg) */
 	write(fd, (char *) &settings, sizeof(settings));	/* save settings structrue to file */
 	close(fd);		/* close the file */

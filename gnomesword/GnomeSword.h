@@ -43,6 +43,7 @@ struct _settings {
 	gint    notebook3page,	//-- notebook 3 page number
 	        notebook1page,		//-- commentaries notebook
 	        notebook2page;		//-- dict - lex notebook
+	gint	shortcutbarsize;
 	gboolean strongs,	//-- toogle button and check menu state
 	        footnotes,
 	        versestyle,
@@ -51,7 +52,11 @@ struct _settings {
 	        formatpercom,
 	        showcomtabs,
 	        showdicttabs,
-	        showshortcutbar, showtextgroup, showcomgroup, showdictgroup;
+	        showshortcutbar,
+	        showtextgroup,
+	        showcomgroup,
+	        showdictgroup,
+	        showhistorygroup;
 };
 
 typedef struct _listitem LISTITEM;
@@ -166,7 +171,7 @@ applyoptions(bool showshortcut,
 	     bool showdicttabs,
 	     bool showtextgroup, bool showcomgroup, bool showdictgroup);
 
-void add_test_group(EShortcutBar * shortcut_bar, gchar * group_name);
+void add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
 
 void lookupStrongsSWORD(gint theNumber);
 
