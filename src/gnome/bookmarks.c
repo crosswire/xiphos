@@ -34,6 +34,7 @@
 
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
+#include "gui/main_window.h"
 
 #include "main/bookmarks.h"
 #include "main/gs_gnomesword.h"
@@ -289,7 +290,7 @@ on_ctree_select_row(GtkCList * clist,
 				     cell[2])->text;
 		gtk_widget_set_sensitive(new_widget, FALSE);
 		gtk_widget_set_sensitive(insert_item_widget, FALSE);
-		change_module_and_key(modName, key);
+		gui_change_module_and_key(modName, key);
 	} else {
 		gtk_widget_set_sensitive(new_widget, TRUE);
 		gtk_widget_set_sensitive(insert_item_widget, TRUE);

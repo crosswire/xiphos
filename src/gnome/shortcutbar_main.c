@@ -39,7 +39,9 @@
 #include "gui/utilities.h"
 #include "gui/html.h"
 #include "gui/about_modules.h"
+#include "gui/main_window.h"
 
+#include "main/shortcutbar.h"
 #include "main/gs_gnomesword.h"
 #include "main/gbs.h"
 #include "main/settings.h"
@@ -48,9 +50,6 @@
 extern SB_VIEWER sb_v, *sv ;
 
 extern gchar *shortcut_types[];
-extern gboolean havedict;	/* let us know if we have at least one lex/dict module */
-extern gboolean havecomm;	/* let us know if we have at least one commentary module */
-extern gboolean havebible;	/* let us know if we have at least one Bible text module */
 
 
 GtkWidget *shortcut_bar;
@@ -85,7 +84,11 @@ static gint add_sb_group(EShortcutBar * shortcut_bar,
 static void on_add_all_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 static void remove_all_items(gint group_num);
-
+static void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
+		      GtkWidget * shortcut_menu_widget, gint mod_type);
+		      
+		      
+		      
 /******************************************************************************
  * Name
  *   showSBGroup 
@@ -1024,31 +1027,31 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				gint sbtype;
 				sbtype = get_mod_type(modName);
 				if (sbtype == 0 || sbtype == 1)
-					change_module_and_key(modName,
+					gui_change_module_and_key(modName,
 							  settings.currentverse);
 				else if (sbtype == 3) {
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
 					     (settings.workbook_lower), 1);
-					change_module_and_key(modName,
+					gui_change_module_and_key(modName,
 							  NULL);
 				}
 
 				else
-					change_module_and_key(modName,
+					gui_change_module_and_key(modName,
 							  settings.dictkey);
 			}
 
 			if (group_num == groupnum1) {
-				if (havebible) {
-					change_module_and_key(modName,
+				if (settings.havebible) {
+					gui_change_module_and_key(modName,
 							  settings.currentverse);
 				}
 			}
 
 			if (group_num == groupnum2) {
-				if (havecomm) {
-					change_module_and_key(modName,
+				if (settings.havecomm) {
+					gui_change_module_and_key(modName,
 							  settings.currentverse);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
@@ -1057,8 +1060,8 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			}
 
 			if (group_num == groupnum3) {
-				if (havedict) {
-					change_module_and_key(modName,
+				if (settings.havedict) {
+					gui_change_module_and_key(modName,
 							  settings.dictkey);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
@@ -1067,11 +1070,11 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			}
 
 			if (group_num == groupnum4) {
-				change_verse(ref);
+				gui_change_verse(ref);
 			}
 
 			if (group_num == groupnum8) {
-				change_module_and_key(modName, NULL);
+				gui_change_module_and_key(modName, NULL);
 				gtk_notebook_set_page(GTK_NOTEBOOK
 						      (settings.workbook_lower),
 						      1);
@@ -1097,8 +1100,7 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
  * Synopsis
  *   #include "gnomesword.h"
  *
- *   gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
-						gint group_num)	
+ *   gint gui_get_num_shortcut_items(gint group_num)	
  *
  * Description
  *   returns the number of shortcut items in the current group
@@ -1107,11 +1109,10 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
  *   gint
  */
 
-gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
-						gint group_num)
+gint gui_get_num_shortcut_items(gint group_num)
 {
 	return e_shortcut_model_get_num_items(E_SHORTCUT_BAR
-					      (shortcutbar_widget)->
+					      (settings.shortcut_bar)->
 					      model, group_num);
 
 }
@@ -1123,8 +1124,8 @@ gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
  * Synopsis
  *   #include "shortcutbar_main.h"
  *
- *   void gui_get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
- *    gint group_num, gint item_num, gchar **item_url, gchar **item_name)	
+ *   void gui_get_shortcut_item_info(gint group_num, gint item_num, 
+ *				gchar **item_url, gchar **item_name)	
  *
  * Description
  *   get shortcut item information
@@ -1133,11 +1134,11 @@ gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
  *   void
  */
 
-void gui_get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
-     gint group_num, gint item_num, gchar **item_url, gchar **item_name)
+void gui_get_shortcut_item_info(gint group_num, gint item_num, 
+				gchar **item_url, gchar **item_name)
 {
 	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-				(shortcutbar_widget)->model,
+				(settings.shortcut_bar)->model,
 				group_num,
 				item_num,
 				item_url, item_name, NULL);

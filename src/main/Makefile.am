@@ -29,8 +29,10 @@ COMMON_SOURCE =  \
     percomm.c \
     percomm.h \
     settings.c \
-    settings.h 
-
+    settings.h \
+    shortcutbar.c \
+    shortcutbar.h 
+    
 SPELLING_SOURCE =  \
     debug.h \
     spell.c \

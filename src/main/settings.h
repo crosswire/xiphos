@@ -207,7 +207,17 @@ struct _settings {
 		editgbs, /* true when percom html widget is in edit mode */
 		modifiedGBS, /* book entry modified */
 		modifiedPC, /* personal note modified */
-		modifiedSP; /* studypad file modified */
+		modifiedSP, /* studypad file modified */
+		
+		/** do we have these modules **/
+		havebible, 
+		havecomm, 
+		havedict, 
+		havebook, 
+		havepercomm,
+		
+		/* do we need to add item to history */
+		addhistoryitem;
 		
 	/* store $home directory */
 	char *homedir;
