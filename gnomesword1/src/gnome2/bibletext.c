@@ -52,6 +52,7 @@
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/xml.h"
+#include "main/global_ops.hh"
 
 static void create_menu(GdkEventButton * event);
 
@@ -123,7 +124,7 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 
 void gui_popup_pm_text(gchar * mod_name, GdkEventButton * event)
 {
-	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
+	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
 	create_menu(event);	
 	g_free(ops);
 }
@@ -148,7 +149,7 @@ void gui_set_text_mod_and_key(gchar * mod_name, gchar * val_key)
 
 void gui_display_text(const gchar * val_key)
 {
-	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
+	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
 /*
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
 				1);
@@ -1024,7 +1025,7 @@ static void create_menu(GdkEventButton * event)
 	GtkWidget *edit_per_menu;
 	GnomeUIInfo *menuitem;
 	gchar *mod_name = settings.MainWindowModule;
-	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
+	GLOBAL_OPS *ops = main_new_globals(settings.MainWindowModule);
 	
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,

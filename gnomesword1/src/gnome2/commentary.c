@@ -28,17 +28,13 @@
 #include <gtkhtml/htmlengine.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "gui/gtkhtml_display.h"
 #include "gui/commentary.h"
-#include "gui/commentary_menu.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/commentary_dialog.h"
-#include "gui/shortcutbar_main.h"
 #include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
-#include "gui/shortcutbar_search.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
@@ -50,64 +46,12 @@
 #include "main/sword.h"
 #include "main/key.h"
 #include "main/xml.h"
+#include "main/global_ops.hh"
 
 
 
 
 static void create_menu(GdkEventButton * event);
-
-/******************************************************************************
- * Name
- *  display
- *
- * Synopsis
- *   #include "commentary.h"
- *
- *   void display(COMM_DATA *c, gchar * key)	
- *
- * Description
- *   calls entry_display to display a commentary entry 
- *
- * Return value
- *   void
- */
-
-static void display(gchar * key)
-{
-	gchar *text_str = NULL;
-	gchar *strkey;
-/*
-	if (c->is_locked) {
-		return;
-	} else if (c->cipher_key) {
-		gui_module_is_locked_display(c->html,
-					     c->mod_name,
-					     c->cipher_key);
-		return;
-	}
-*/
-
-	strkey = get_valid_key(key);
-	//g_warning(strkey); 
-/*	if (c->book_heading) {
-		c->book_heading = FALSE;
-		text_str = get_book_heading(c->mod_name, strkey);
-	}
-
-	else if (c->chapter_heading) {
-		c->chapter_heading = FALSE;
-		text_str = get_chapter_heading(settings.CommWindowModule, strkey);
-	}
-
-	else {
-*/
-	text_str = get_commentary_text(settings.CommWindowModule, strkey);
-	
-	//g_warning(strkey); 
-	entry_display(widgets.html_comm, settings.CommWindowModule, text_str, strkey, TRUE);
-	free(text_str);
-	free(strkey);
-}
 
 
 /******************************************************************************
@@ -176,9 +120,10 @@ void gui_update_comm_global_ops(gchar * option, gboolean choice)
 
 static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 {
-/*	save_module_options(settings.MainWindowModule, (gchar *) data,
+	
+	main_save_module_options_comm(settings.MainWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
-	gui_display_text(settings.currentverse);*/
+	main_display_commentary();
 }
 
 
@@ -192,13 +137,13 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
  *   
  *
  * Description
- *   add global module options to popup menus
+ *   
  *
  * Return value
  *   void
  */
 
-void gui_popup_pm_comm(gchar * mod_name, GdkEventButton * event)
+static void popup_pm_comm(GdkEventButton * event)
 {
 	create_menu(event);
 }
@@ -251,7 +196,9 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 		break;
 	case 3:
 		if(settings.comm_showing)
-			gui_popup_pm_comm(settings.CommWindowModule, event);
+			create_menu(event); //gui_popup_pm_comm(event);
+		else
+			gui_popup_menu_gbs(event);
 		break;
 	}
 	return FALSE;
@@ -424,7 +371,8 @@ GtkWidget *gui_create_commentary_pane(void)
 
 static void on_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_display_about_module_dialog(settings.CommWindowModule, FALSE);
+	gui_display_about_module_dialog((settings.comm_showing)?
+			settings.CommWindowModule:settings.book_mod, FALSE);
 }
 
 
@@ -448,7 +396,8 @@ static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_find_dlg(widgets.html_comm, settings.CommWindowModule, FALSE, NULL);
+	gui_find_dlg(widgets.html_comm, (settings.comm_showing)?
+			settings.CommWindowModule:settings.book_mod, FALSE, NULL);
 }
 
 
@@ -461,7 +410,8 @@ static void on_item2_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_set_module_font(settings.CommWindowModule);
+	gui_set_module_font((settings.comm_showing)?
+			settings.CommWindowModule:settings.book_mod);
 	gui_display_text(settings.currentverse);
 }
 
@@ -491,11 +441,14 @@ on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gchar *cipher_key;
 	gchar *cipher_old;
 	
-	cipher_old = get_cipher_key(settings.CommWindowModule);
-	cipher_key = gui_add_cipher_key(settings.CommWindowModule, cipher_old);
+	cipher_old = get_cipher_key((settings.comm_showing)?
+			settings.CommWindowModule:settings.book_mod);
+	cipher_key = gui_add_cipher_key((settings.comm_showing)?
+			settings.CommWindowModule:settings.book_mod, cipher_old);
 	if (cipher_key) {
 		gui_module_is_locked_display(widgets.html_text,
-					     settings.CommWindowModule,
+				(settings.comm_showing)?
+			settings.CommWindowModule:settings.book_mod,
 					     cipher_key);
 	}
 }
@@ -861,8 +814,9 @@ static void create_menu(GdkEventButton * event)
 	GtkWidget *separator;
 	GtkWidget *edit_per_menu;
 	GnomeUIInfo *menuitem;
-	gchar *mod_name = settings.CommWindowModule;
-	GLOBAL_OPS *ops = gui_new_globals(settings.CommWindowModule);
+	gchar *mod_name = 
+	    (settings.comm_showing)?settings.CommWindowModule:settings.book_mod;
+	GLOBAL_OPS *ops = main_new_globals(mod_name);
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
@@ -883,20 +837,26 @@ static void create_menu(GdkEventButton * event)
 	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
 
 
-
-	view_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
-				  view_menu);
-	
-	gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_menu,
-				(GCallback) on_view_mod_activate);
-	
-	edit_per_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
-				  edit_per_menu);
-				  
-	gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_per_menu,
-				(GCallback) edit_percomm);
+	if(settings.comm_showing) {
+		view_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+					  view_menu);
+		
+		gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_menu,
+					(GCallback) on_view_mod_activate);
+		
+		edit_per_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
+					  edit_per_menu);
+					  
+		gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_per_menu,
+					(GCallback) edit_percomm);
+	} else {
+		gtk_widget_hide(file3_menu_uiinfo[0].widget);
+		gtk_widget_hide(file3_menu_uiinfo[1].widget);
+		gtk_widget_hide(edit3_menu_uiinfo[2].widget);
+		//gtk_widget_hide();
+	}
 				
 								
 	
@@ -920,22 +880,22 @@ static void create_menu(GdkEventButton * event)
 				(GCallback)gui_lookup_comm_selection);
 			
 				
-	if ((check_for_global_option(settings.CommWindowModule,
+	if ((check_for_global_option(mod_name,
 				     "GBFRedLetterWords")) ||
-	    (check_for_global_option(settings.CommWindowModule,
+	    (check_for_global_option(mod_name,
 				     "OSISRedLetterWords"))) {
 		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
 				    widget)->active = ops->words_in_red;
 	}
 	if ((check_for_global_option
-	     (settings.CommWindowModule, "GBFStrongs"))
+	     (mod_name, "GBFStrongs"))
 	    ||
 	    (check_for_global_option
-	     (settings.CommWindowModule, "ThMLStrongs"))
+	     (mod_name, "ThMLStrongs"))
 	    ||
 	    (check_for_global_option
-	     (settings.CommWindowModule, "OSISStrongs"))) {
+	     (mod_name, "OSISStrongs"))) {
 		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
 		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
 				    widget)->active = ops->strongs;
