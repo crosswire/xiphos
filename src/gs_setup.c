@@ -818,8 +818,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 
 
 	label111 =
-	    gtk_label_new(_
-			  ("These setting will be the default settings if you chose to use default settings. "));
+	    gtk_label_new(_("These setting will be the default settings if you chose to use default settings. "));
 	gtk_widget_ref(label111);
 	gtk_object_set_data_full(GTK_OBJECT(dlgSetup), "label111",
 				 label111,
@@ -855,8 +854,7 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 					  _("GnomeSword-0.5.0"));
 	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
-					 _
-					 ("            Thank-you for using GnomeSword.\nClick Finish to close this dialog and run GnomeSword."));
+					 _("            Thank-you for using GnomeSword.\nClick Finish to close this dialog and run GnomeSword."));
 	gnome_druid_page_finish_set_logo(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 create_image

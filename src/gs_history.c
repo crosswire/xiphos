@@ -62,8 +62,8 @@ void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
 {
         gint i;
 
-        removemenuitems(app, "_History/<Separator>", historyitems+1);
-        addseparator(app, "_History/C_lear");
+        removemenuitems(app, _("_History/<Separator>"), historyitems+1);
+        addseparator(app, _("_History/C_lear"));
         /* set sensitivity of history buttons */
         gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), FALSE);
 	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
@@ -181,11 +181,11 @@ void updatehistorymenu(GtkWidget *app)
         gint i;
         gchar buf[80];
 
-        removemenuitems(app, "_History/<Separator>", historyitems+1);
-        addseparator(app, "_History/C_lear");
+        removemenuitems(app, _("_History/<Separator>"), historyitems+1);
+        addseparator(app, _("_History/C_lear"));
         for(i=0;i<historyitems;i++) {
                 sprintf(buf,"%d",historylist[i].itemnum);
-                additemtognomemenu(app, historylist[i].verseref, buf, "_History/<Separator>",
+                additemtognomemenu(app, historylist[i].verseref, buf, _("_History/<Separator>"),
 					(GtkMenuCallback) on_mnuHistoryitem1_activate);
         }
 }

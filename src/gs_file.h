@@ -33,7 +33,6 @@ extern "C" {
 #endif
 	
 void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
-void on_ok_button4_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
 void loadFile(GtkWidget * filesel);
 gint setDiretory(void);
@@ -45,7 +44,6 @@ void savebookmark(gchar * item);
 void saveoptions(void);
 void createFiles(void);
 void loadStudyPadFile(gchar * filename);
-void savelist(gchar * filename, GtkWidget * list);
 GtkWidget *create_fileselection1(void);
 GtkWidget *create_fileselectionSave(void);
 
