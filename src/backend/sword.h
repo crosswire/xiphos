@@ -32,7 +32,7 @@ extern "C" {
 #include "gs_gnomesword.h"
 
 
-	void backend_first_init(void);
+	void backend_first_init(SETTINGS * s);
 	void backend_init_sword(SETTINGS * s);
 	GList * backend_get_global_options_list(void);
 	void backend_module_name_from_description(gchar * mod_name,

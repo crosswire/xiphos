@@ -42,10 +42,8 @@
 /******************************************************************************
  * locals
  */
-static SWMgr *mgr;		/* sword mgr for view text dialog */
-static SWModule *mod;		/* module for view text dialog */
-//static ModMap::iterator mdoule_iterator;
-
+static SWMgr *mgr;
+static SWModule *mod;
 
 /******************************************************************************
  * Name
@@ -99,7 +97,6 @@ void backend_shutdown_interlinear(void)
 {
 	delete mgr;
 }
-
 
 /******************************************************************************
  * Name

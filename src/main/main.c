@@ -29,7 +29,7 @@
 #include "splash.h"
 #include "sword.h"
 #include "bookmarks.h"
-#include "gs_setup.h"
+#include "setup.h"
 #include "properties.h"
 #include "gs_gui.h"
 #include "gs_gnomesword.h"
@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 	/* 
 	 * start swmgrs so they can be used by setup druid
 	 */
-	backend_first_init(); /* light-up swmgrs */
+	backend_first_init(&settings); /* light-up swmgrs */
 	
 	/* 
 	 * check for directories and files
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (icreatefiles == 1 || icreatefiles == 3 || newconfigs) {
-		gui_firstRunSETUP();
+		first_run();
 	}
 
 	backend_load_properties(&settings);

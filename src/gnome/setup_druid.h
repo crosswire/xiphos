@@ -1,7 +1,6 @@
-
 /*
  * GnomeSword Bible Study Tool
- * properties.cpp - save gnomesword properties and settings
+ * setup_druid.h gnomesword fristrun druid
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,23 +18,40 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef __PROPERTIES_H__
-#define __PROPERTIES_H__
-
-
+ 
+#ifndef __SETUP_DRUID_H__
+#define __SETUP_DRUID_H__
+ 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "settings.h"
+typedef struct _settings_druid SETTINGS_DRUID;
+struct _settings_druid {
+	GtkWidget *combo_entry1;
+	GtkWidget *combo_entry2;
+	GtkWidget *combo_entry3;
+	GtkWidget *combo_entry4;
+	GtkWidget *combo_entry10;
+	GtkWidget *combo_entry11;
+	GtkWidget *combo_entry12;
+	GtkWidget *combo_entry13;
+	GtkWidget *combo_entry14;
+	GtkWidget *radiobutton1;
+	GtkWidget *checkbutton1;
+	GtkWidget *checkbutton3;
+	GtkWidget *checkbutton2;
+	GtkWidget *checkbutton4;
+	GtkWidget *checkbutton5;
+	GtkWidget *checkbutton6;
+};
 
-	gboolean backend_load_properties(SETTINGS * s);
-	gboolean backend_save_properties(SETTINGS * s, gboolean shutdown);
-	gboolean backend_create_properties_from_setup(void);
-	gboolean backend_create_properties(void);
-
+GtkWidget *gui_create_setup_druid(GList *biblemods, GList *commmods, 
+						GList *dictmods);
+	
+		
 #ifdef __cplusplus
 }
-#endif
-#endif				/* __PROPERTIES_H__ */
+#endif	
+
+#endif /* __SETUP_DRUID_H__ */
