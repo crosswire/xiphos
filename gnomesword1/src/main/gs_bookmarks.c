@@ -185,7 +185,6 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 };
 
 
-
 static void addnewgrouptoMenus(GtkWidget *pmMenu, 
 				GtkCTreeNode *node, 
 				gchar *str) 
@@ -496,12 +495,15 @@ on_add_bookmark_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
 	GtkCTreeNode *node;
-	gchar *modName, *key;
+	gchar *mod_name, *key;
 	
-	node = (GtkCTreeNode *)user_data;
-	modName = get_module_name(settings);
+	if(user_data)
+		node = (GtkCTreeNode *)user_data;
+	else
+		node = NULL;
+	mod_name = get_module_name(settings);
 	key = get_module_key(settings);
-	addbookmarktotree(node, modName, key);
+	add_bookmark_to_tree(node, mod_name, key);
 }
 
 static void
@@ -653,7 +655,7 @@ void on_allow_reordering_activate(GtkMenuItem * menuitem, gpointer user_data)
 /*
  * add leaf node to a root node
  */
-void addbookmarktotree(GtkCTreeNode *node, gchar *modName, gchar *verse)
+void add_bookmark_to_tree(GtkCTreeNode *node, gchar *modName, gchar *verse)
 {
 	GtkWidget *dlg;
 	gchar *text[3], buf[256];
@@ -668,16 +670,22 @@ void addbookmarktotree(GtkCTreeNode *node, gchar *modName, gchar *verse)
 	if (applychangestobookmark) {
 		GtkCTreeNode *newnode;
 		newnode = gtk_ctree_insert_node(p_bmtree->ctree,
-					     node,
-					     NULL, text,
-					     3,
-					     pixmap3,
-					     mask3, NULL, NULL, TRUE, FALSE);
+						node,
+						NULL, 
+						text,
+						3,
+						pixmap3,
+						mask3, 
+						NULL, 
+						NULL, 
+						TRUE, 
+						FALSE);
 		g_free(text[0]); /*** we used g_strdup() in  on_btnBMok_clicked() ***/
 		g_free(text[1]);
 		g_free(text[2]);
 		gtk_ctree_select(p_bmtree->ctree, newnode);
-		gtk_ctree_expand(p_bmtree->ctree, node);
+		if(node)
+			gtk_ctree_expand(p_bmtree->ctree, node);
 		applychangestobookmark = FALSE;
 	}
 }

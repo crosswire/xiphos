@@ -70,12 +70,13 @@ GList *be_comm_list;
  *   void backend_nav_commentary_COMM(gint modnum, gint direction)	
  *
  * Description
- *    navigate the current commentary module
+ *    navigate the current commentary module and return key
+ *    return value must be freed by calling function
  *
  * Return value
- *   void
+ *   char *
  */
-void backend_nav_commentary_COMM(gint modnum, gint direction)
+char* backend_nav_commentary_COMM(gint modnum, gint direction)
 {
 	BE_COMM *co;
 
@@ -92,6 +93,10 @@ void backend_nav_commentary_COMM(gint modnum, gint direction)
 
 	co->mod->Error();	//-- clear any errors
 	co->mod->Display();
+	if(co->mod->KeyText())
+		return g_strdup(co->mod->KeyText());
+	else
+		return NULL;
 }
 
 static SWModule *backend_get_module(char *modname)

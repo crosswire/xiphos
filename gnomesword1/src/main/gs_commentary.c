@@ -50,7 +50,9 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 void gui_set_commentary_page_and_key(gint page_num, gchar *key)
 {
 	display_change = FALSE;
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookCOMM), page_num);
+	strcpy(settings->comm_key,key);
+	strcpy(cur_c->key,key);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_comm), page_num);
 	backend_displayinCOMM(page_num,key);
 	display_change = TRUE;
 }
@@ -84,13 +86,20 @@ void on_notebook_comm_switch_page(GtkNotebook * notebook,
 	
 	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 	cur_c = c;
-	sprintf(settings->CommWindowModule, "%s", c->modName);
-
+	strcpy(settings->CommWindowModule, c->modName);
+	/*
+	   set settings->comm_key to current module key
+	 */
+	if(c->key)
+		strcpy(settings->comm_key,c->key);
 	settings->commLastPage = page_num;
 	if(display_change) {
-		if ((c->key == NULL) && (settings->currentverse != NULL))
+		if ((c->key[0] == '\0') && (settings->currentverse != NULL)) {
 			backend_displayinCOMM(c->modnum,
 					      settings->currentverse);
+			strcpy(settings->comm_key,settings->currentverse);
+			strcpy(c->key, settings->comm_key);
+		}
 	}
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings->comm_tabs;
 }
@@ -111,9 +120,9 @@ static void setPageCOMM(gchar * modname, GList * comm_list,
 		comm_list = g_list_next(comm_list);
 	}
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebookCOMM), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebook_comm), page);
 	s->commLastPage = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookCOMM),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
 				   s->comm_tabs);
 }
 
@@ -164,7 +173,7 @@ void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookCOMM),
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebook_comm),
 			      page);
 }
 
@@ -173,7 +182,7 @@ void on_comm_showtabs_activate(GtkMenuItem * menuitem,
 				      SETTINGS * s)
 {
 	s->comm_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookCOMM),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
 				   s->comm_tabs);
 }
 
@@ -448,13 +457,23 @@ void on_btn_sync_clicked(GtkButton * button, COMM_DATA * c)
 static 
 void on_btn_back_clicked(GtkButton * button, COMM_DATA * c)
 {
-	backend_nav_commentary_COMM(c->modnum, 0);
+	gchar *key = backend_nav_commentary_COMM(c->modnum, 0);
+	if(key) {
+		strcpy(settings->comm_key,key);
+		strcpy(cur_c->key,settings->comm_key);
+		g_free(key);
+	}
 }
 
 static 
 void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 {
-	backend_nav_commentary_COMM(c->modnum, 1);
+	gchar *key = backend_nav_commentary_COMM(c->modnum, 1);
+	if(key) {
+		strcpy(settings->comm_key,key);
+		strcpy(cur_c->key,settings->comm_key);
+		g_free(key);
+	}
 }
 
 static 
@@ -527,7 +546,7 @@ GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 				 frameCOMM, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frameCOMM);
-	gtk_container_add(GTK_CONTAINER(s->notebookCOMM), frameCOMM);
+	gtk_container_add(GTK_CONTAINER(s->notebook_comm), frameCOMM);
 
 	vbox57 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox57);
@@ -664,15 +683,15 @@ GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 				 label, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->notebookCOMM),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(s->notebook_comm),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(s->notebookCOMM),
+				   (GTK_NOTEBOOK(s->notebook_comm),
 				    count), label);
 	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (s->notebookCOMM),
+					 (s->notebook_comm),
 					 gtk_notebook_get_nth_page
 					 (GTK_NOTEBOOK
-					  (s->notebookCOMM),
+					  (s->notebook_comm),
 					  count), (gchar *) c->modName);
 
 
@@ -705,8 +724,10 @@ GtkWidget *createPaneCOMM(SETTINGS * s, COMM_DATA * c,
 	return frameCOMM;
 }
 
-void gui_displayCOMM(gchar * key)
+void display_commentary(gchar * key)
 {
+	strcpy(settings->comm_key,key);
+	strcpy(cur_c->key, key);
 	backend_displayinCOMM(settings->commLastPage, key);
 }
 
@@ -734,7 +755,7 @@ GList* gui_setup_comm(SETTINGS * s)
 		    backend_get_module_description(modname);
 		c->modnum = count;
 		c->searchstring = NULL;
-		c->key = NULL;
+		c->key[0] = '\0';
 		c->find_dialog = NULL;		
 		c->has_key = backend_module_is_locked(c->modName);
 		createPaneCOMM(s, c, count);
@@ -746,7 +767,7 @@ GList* gui_setup_comm(SETTINGS * s)
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(s->notebookCOMM),
+	gtk_signal_connect(GTK_OBJECT(s->notebook_comm),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_comm_switch_page), comm_list);

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bibletext_.h - support for Sword commentary modules
+ * percomm_.h - support for Sword personal commentary modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -20,26 +20,27 @@
  */
 
 
-#ifndef __BIBLETEXT__H_
-#define __BIBLETEXT__H_
+#ifndef __PERCOMM__H_
+#define __PERCOMM__H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "gs_gnomesword.h"
-
-void backend_nav_text_module(int modnum, int direction);
-void backend_new_text_display(GtkWidget * html, char *modname,
+	
+const char *backend_get_percomm_key(int mod_num);
+void backend_save_personal_comment(int mod_num, char * buf);
+void backend_delete_personal_comment(int mod_num);
+void backend_nav_percomm_module(int mod_num, int direction);
+void backend_new_percomm_display(GtkWidget * html, char *mod_name,
 					      SETTINGS * s);
-void backend_setup_text(SETTINGS * s);
-void backend_shutdown_text(void);
-void backend_display_text(int modnum, char *key);
-void backend_set_text_global_option(char *option, char *yesno);
-void backend_set_module_unlocked(char *mod_name, int mod_num,char *key);
-gboolean backend_check_for_global_option(int mod_num, char *option);
+void backend_setup_percomm(SETTINGS * s);
+void backend_shutdown_percomm(void);
+void backend_display_percomm(int mod_num, char *key);
+	
 	
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __BIBLETEXT__H_ */
+#endif	/* __PERCOMM__H_ */

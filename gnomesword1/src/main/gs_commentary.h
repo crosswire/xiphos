@@ -49,7 +49,7 @@ extern "C" {
 		gchar *modName;
 		gchar *modDescription;
 		gchar *searchstring;
-		gchar *key;
+		gchar key[80];
 		gint modnum;
 		gboolean has_key;
 		COMMFindDialog *find_dialog;
@@ -58,7 +58,7 @@ extern "C" {
 					     gchar * key);
 	GList* gui_setup_comm(SETTINGS * s);
 	void gui_shutdownCOMM(void);
-	void gui_displayCOMM(gchar * key);
+	void display_commentary(gchar * key);
 
 #ifdef __cplusplus
 }

@@ -52,8 +52,9 @@
 #include "gs_shortcutbar.h"
 #include "bibletext.h"
 #include "about_modules.h"
-#include "search.h"
+#include "search_.h"
 #include "interlinear.h"
+#include "percomm.h"
 
 
 /*****************************************************************************
@@ -123,17 +124,7 @@ void initGnomeSword(SETTINGS * s)
 	mod_lists->comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);
 	mod_lists->dict_descriptions = backend_get_mod_description_list_SWORD(DICT_MODS);
 	mod_lists->book_descriptions = backend_get_mod_description_list_SWORD(BOOK_MODS);
-	mod_lists->percommods = backend_get_list_of_percom_modules();
-	if (mod_lists->percommods) {
-		/*
-		   show personal comments page 
-		 */
-		gtk_widget_show(lookup_widget(s->app, "vbox2"));
-		/*
-		   change personal comments module 
-		 */
-		backend_change_percom_module(s->personalcommentsmod);
-	}
+	
 	/*
 	   setup shortcut bar 
 	 */
@@ -152,6 +143,10 @@ void initGnomeSword(SETTINGS * s)
 	   setup commentary gui support 
 	 */
 	mod_lists->commentarymods = gui_setup_comm(s);
+	/*
+	   setup personal comments gui support 
+	 */
+	mod_lists->percommods = setup_percomm(s);
 	/*
 	   setup general book gui support 
 	 */
@@ -173,18 +168,18 @@ void initGnomeSword(SETTINGS * s)
 		       mod_lists->bookmods);
 	 
 
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(s->app, "nbPerCom")), 0);
+	/*gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(s->app, "nbPerCom")), 0);*/
 	/*
 	   set text windows to word warp 
 	 */
-	gtk_text_set_word_wrap(GTK_TEXT
+/*	gtk_text_set_word_wrap(GTK_TEXT
 			       (lookup_widget(s->app, "textComments")),
-			       TRUE);
+			       TRUE);*/
 	/*
 	   store text widgets for spell checker 
 	 */
-	notes = lookup_widget(s->app, "textComments");
+//	notes = lookup_widget(s->app, "textComments");
 
 	s->versestyle_item =
 	    additemtooptionmenu(s->app, _("_Settings/"),
@@ -256,6 +251,8 @@ void gnomesword_shutdown(SETTINGS * s)
 	gui_shutdownGBS();
 	gui_shutdownDL();
 	gui_shutdownCOMM();
+	shutdown_percomm();
+	
 	g_print("\nwe are done with Gnomesword\n");
 }
 
@@ -726,14 +723,6 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
 		free(to);
 }
 
-void search_module(SETTINGS * s, SEARCH_OPT * so)
-{
-	if (sblist)
-		g_list_free(sblist);
-	sblist = NULL;
-	sblist = backend_do_search(s, so);
-	fill_search_results_clist(sblist, so, s);
-}
 
 /******************************************************************************
  *
@@ -839,7 +828,6 @@ void change_module_and_key(gchar * module_name, gchar * key)
 {
 	gint mod_type;
 	gint page_num;
-	GtkWidget *notebook;
 	gchar *val_key = NULL;
 
 	mod_type = backend_get_mod_type(module_name);
@@ -865,7 +853,12 @@ void change_module_and_key(gchar * module_name, gchar * key)
 	case BOOK_TYPE:
 		page_num =
 		    backend_get_module_page(module_name, BOOK_MODS);
-		gui_set_book_page_and_key(page_num, key);
+		if(key)
+			gui_set_book_page_and_key(page_num, key);
+		else {
+			gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookGBS),
+			      page_num);
+		}
 		break;
 	}
 }
@@ -910,12 +903,12 @@ void change_verse(gchar * key)
 	 */
 	if (settings->notefollow) {	                  
 		if (!settings->editnote)
-			backend_change_verse_percom(val_key);
+			display_percomm(val_key);
 	}
 	/* 
 	   set commentary module to current verse 
 	 */
-	gui_displayCOMM(settings->currentverse);
+	display_commentary(settings->currentverse);
 	
 	g_free(val_key);
 	ApplyChange = TRUE;
@@ -939,5 +932,6 @@ void set_verse_style(gboolean choice)
 	if (havebible)
 		display_text(settings->currentverse);	//-- show the change
 }
+
 
 /*****   end of file   ******/
