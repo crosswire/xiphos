@@ -37,10 +37,7 @@
 
 #include "main/settings.h"
 
-static SWDisplay *dispaly;	/* to display modules in view text dialog */
 static SWMgr *mgr;		/* sword mgr for view text dialog */
-static SWModule *mod;		/* module for view text dialog */
-static ModMap::iterator mdoule_iterator;
 
 
 /******************************************************************************
@@ -59,23 +56,10 @@ static ModMap::iterator mdoule_iterator;
  *   void
  */
 
-void backend_setup_viewtext(GtkWidget * text)
+void backend_setup_viewtext(void)
 {
-	ModMap::iterator it;	//-- iteratior     
-	SectionMap::iterator sit;	//-- iteratior
-
 	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	mod = NULL;
-	dispaly = new GtkHTMLChapDisp(text);
-
-	for (it = mgr->Modules.begin(); it != mgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
-			mod = (*it).second;
-			mod->Disp(dispaly);
-		}
-	}
 }
-
 
 /******************************************************************************
  * Name
@@ -95,124 +79,7 @@ void backend_setup_viewtext(GtkWidget * text)
 void backend_shutdown_viewtext(void)
 {
 	delete mgr;
-	if (dispaly)
-		delete dispaly;
 }
-
-/******************************************************************************
- * Name
- *   backend_goto_verse_viewtext
- *
- * Synopsis
- *   #include "viewtext.h"
- *
- *   void backend_goto_verse_viewtext(gchar * newkey)	
- *
- * Description
- *   find and display new verse for view text dialog
- *
- * Return value
- *   void
- */
-void backend_goto_verse_viewtext(char * newkey)
-{
-	mod->SetKey(newkey);	//-- set key to our text
-	mod->Display();
-
-}
-
-/******************************************************************************
- * Name
- *   backend_load_module_viewtext
- *
- * Synopsis
- *   #include "viewtext.h"
- *
- *   void backend_load_module_viewtext(gchar * modName)	
- *
- * Description
- *   load a text module into the view text dialog
- *
- * Return value
- *   void
- */
-void backend_load_module_viewtext(char * module_name)
-{
-	ModMap::iterator it;
-
-	it = mgr->Modules.find(module_name);	//-- find module we want to use
-	if (it != mgr->Modules.end()) {
-
-		mod = (*it).second;	//-- set mod to new choice
-		mod->SetKey("");
-		mod->Display();	//-- display new dict
-	}
-}
-
-/******************************************************************************
- * Name
- *   backend_get_book_viewtext
- *
- * Synopsis
- *   #include "viewtext.h"
- *
- *   gchar * backend_get_book_viewtext(void)	
- *
- * Description
- *   get current book displayed in veiw text dialog
- *
- * Return value
- *   char * - must be freed by calling function
- */
-const char *backend_get_book_viewtext(void)
-{
-	VerseKey key = mod->KeyText();
-	
-	return key.books[key.Testament() - 1][key.Book() - 1].name;
-}
-
-/******************************************************************************
- * Name
- *  backend_get_chapter_viewtext 
- *
- * Synopsis
- *   #include "viewtext.h"
- *
- *   int backend_get_chapter_viewtext(void)	
- *
- * Description
- *   get current chapter displayed in veiw text dialog
- *
- * Return value
- *   int
- */
-int backend_get_chapter_viewtext(void)
-{
-	VerseKey key = mod->KeyText();
-	return key.Chapter();
-}
-
-/******************************************************************************
- * Name
- *   backend_get_verse_viewtext
- *
- * Synopsis
- *   #include "viewtext.h"
- *
- *   int backend_get_verse_viewtext(void)	
- *
- * Description
- *   get current verse displayed in veiw text dialog
- *
- * Return value
- *   int
- */
-int backend_get_verse_viewtext(void)
-{
-	VerseKey key = mod->KeyText();
-	return key.Verse();
-}
-
 /******************************************************************************
  * Name
  *   backend_set_global_options_viewtext
@@ -232,74 +99,31 @@ int backend_get_verse_viewtext(void)
 void backend_set_global_options_viewtext(char * option, char * onoff)
 {
 	mgr->setGlobalOption(option, onoff);
-	mod->Display();		//-- we need to show change
 }
 
 /******************************************************************************
  * Name
- *   backend_get_first_module_viewtext
+ *   backend_get_viewtext_text
  *
  * Synopsis
- *   #include "viewdict.h"
+ *   #include "bibletext.h"
  *
- *   char * backend_get_first_module_viewtext(void)	
+ *   char *backend_get_viewtext_text(char *mod_name, char *key)	
  *
  * Description
- *    returns the first module in the modmap
- * 
+ *   return formated text for a verse
+ *
  * Return value
  *   char *
  */
-char *backend_get_first_module_viewtext(void)
-{
-	char *retval = NULL;
 
-	for (mdoule_iterator = mgr->Modules.begin();
-	     mdoule_iterator != mgr->Modules.end(); mdoule_iterator++) {
-		if (!strcmp
-		    ((*mdoule_iterator).second->Type(),
-		     "Biblical Texts")) {
-			//- retval must be freed by calling function
-			retval =
-			    g_strdup((const char *) (*mdoule_iterator).
-				     second->Name());
-			return retval;
-		}
-	}
-	return retval;
+char *backend_get_viewtext_text(char *mod_name, char *key)
+{
+	SWModule *mod = mgr->Modules[mod_name];
+	if (mod)
+		mod->SetKey(key);
+	else
+		return NULL;
+	return strdup((char *) mod->RenderText());
 }
 
-/******************************************************************************
- * Name
- *   backend_get_next_module_viewtext
- *
- * Synopsis
- *   #include "viewtext.h"
- *
- *   char * backend_get_next_module_viewtext(void)	
- *
- * Description
- *    returns the first module in the modmap
- * 
- * Return value
- *   char *
- */
-char *backend_get_next_module_viewtext(void)
-{
-	char *retval = NULL;
-
-	++mdoule_iterator;
-
-	for (; mdoule_iterator != mgr->Modules.end(); mdoule_iterator++) {
-		if (!strcmp
-		    ((*mdoule_iterator).second->Type(),
-		     "Biblical Texts")) {
-			//- retval must be freed by calling function
-			retval =
-			    g_strdup((const char *) (*mdoule_iterator).
-				     second->Name());
-			return retval;
-		}
-	}
-	return retval;
-}
