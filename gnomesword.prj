@@ -1,0 +1,214 @@
+# Anjuta Version 0.1.10-pre 
+Compatibility Level: 1 
+
+<PROJECT_DESCRIPTION_START>
+Bible Study and Research Tool for Linux
+<PROJECT_DESCRIPTION_END>
+<CONFIG_PROGS_START>
+<CONFIG_PROGS_END>
+<CONFIG_LIBS_START>
+<CONFIG_LIBS_END>
+<CONFIG_HEADERS_START>
+<CONFIG_HEADERS_END>
+<CONFIG_CHARACTERISTICS_START>
+<CONFIG_CHARACTERISTICS_END>
+<CONFIG_LIB_FUNCS_START>
+<CONFIG_LIB_FUNCS_END>
+<CONFIG_ADDITIONAL_START>
+<CONFIG_ADDITIONAL_END>
+<CONFIG_FILES_START>
+<CONFIG_FILES_END>
+<MAKEFILE_AM_START>
+<MAKEFILE_AM_END>
+
+props.file.type=project
+
+anjuta.version=0.1.10-pre
+anjuta.compatibility.level=1
+
+project.name=gnomesword
+project.type=GNOME
+project.target.type=EXECUTABLE
+project.version=0.7.1
+project.author=The GnomeSWORD Team
+project.source.target=src/main/gnomesword
+
+project.excluded.modules=\
+	intl
+
+project.has.gettext=1
+
+project.programming.language=C
+
+project.menu.entry=gnomesword Version 0.7.1
+project.menu.group=Application
+project.menu.comment=gnomesword Version 0.7.1
+project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
+project.menu.need.terminal=0
+
+project.configure.options=
+
+anjuta.program.arguments=
+
+project.config.blocked=1
+
+project.config.disable.overwriting=1 1 1 1 1 1 1 1 1 
+project.config.extra.modules.before=
+project.config.extra.modules.after=
+
+module.include.name=include
+module.include.type=
+module.include.expanded=0
+module.include.files=
+
+module.source.name=.
+module.source.type=
+module.source.expanded=0
+module.source.files=\
+	intl/dcigettext.c\
+	intl/dcngettext.c\
+	intl/dngettext.c\
+	intl/localcharset.c\
+	intl/ngettext.c\
+	intl/plural.c\
+	src/backend/viewtext_dlg.cpp\
+	src/backend/viewdict_dlg.cpp\
+	src/backend/viewcomm_dlg.cpp\
+	src/backend/verselist_sb.cpp\
+	src/backend/sword.cpp\
+	src/backend/search.cpp\
+	src/backend/properties.cpp\
+	src/backend/module_options.cpp\
+	src/backend/gbs.cpp\
+	src/backend/display.cpp\
+	src/backend/dictlex.cpp\
+	src/backend/commentary.cpp\
+	src/backend/bookmarks.cpp\
+	src/backend/information_dlg.cpp\
+	src/backend/shortcutbar.cpp\
+	src/gnome/about_gnomesword.c\
+	src/gnome/about_modules.c\
+	src/gnome/about_sword.c\
+	src/main/char_table.c\
+	src/main/e-splash.c\
+	src/main/gs_bookmarks.c\
+	src/main/gs_commentary.c\
+	src/main/gs_detach_int.c\
+	src/main/gs_detach_sb.c\
+	src/main/gs_dictlex.c\
+	src/main/gs_editor.c\
+	src/main/gs_editor_replace.c\
+	src/main/gs_editor_search.c\
+	src/main/gs_editor_toolbar.c\
+	src/main/gs_file.c\
+	src/main/gs_find_dlg.c\
+	src/main/gs_gbs.c\
+	src/main/gs_getinfo_dlg.c\
+	src/main/gs_gnomesword.c\
+	src/main/gs_gui.c\
+	src/main/gs_gui_cb.c\
+	src/main/gs_history.c\
+	src/main/gs_html.c\
+	src/main/gs_info_box.c\
+	src/main/gs_information_dlg.c\
+	src/main/gs_mainmenu_cb.c\
+	src/main/gs_menu.c\
+	src/main/gs_popup_cb.c\
+	src/main/gs_preferences_dlg.c\
+	src/main/gs_setup.c\
+	src/main/gs_shortcutbar.c\
+	src/main/gs_unlockkey_dlg.c\
+	src/main/gs_viewcomm_dlg.c\
+	src/main/gs_viewdict_dlg.c\
+	src/main/gs_viewtext_dlg.c\
+	src/main/main.c\
+	src/main/spell.c\
+	src/main/spell_gui.c\
+	src/main/support.c
+
+module.pixmap.name=.
+module.pixmap.type=
+module.pixmap.expanded=0
+module.pixmap.files=\
+	pixmaps/tt.xpm\
+	pixmaps/GnomeSword.png\
+	pixmaps/GnomeSword.xpm\
+	pixmaps/about.png\
+	pixmaps/book-bl.png\
+	pixmaps/book-gold.png\
+	pixmaps/book-green.png\
+	pixmaps/book-un.png\
+	pixmaps/dock.xpm\
+	pixmaps/exit2.xpm\
+	pixmaps/footnote3.xpm\
+	pixmaps/gnome-fontsel.xpm\
+	pixmaps/morphs.xpm\
+	pixmaps/search1.xpm\
+	pixmaps/splash.png\
+	pixmaps/strongs.xpm\
+	pixmaps/sword.xpm\
+	pixmaps/sword2.xpm\
+	pixmaps/sword3.xpm\
+	pixmaps/yes.xpm\
+	doc/help/gs.png
+
+module.data.name=.
+module.data.type=
+module.data.expanded=0
+module.data.files=
+
+module.help.name=.
+module.help.type=
+module.help.expanded=0
+module.help.files=
+
+module.doc.name=.
+module.doc.type=
+module.doc.expanded=0
+module.doc.files=\
+	AUTHORS\
+	COPYING\
+	ChangeLog\
+	INSTALL\
+	NEWS\
+	README\
+	TODO\
+	macros/ChangeLog\
+	po/ChangeLog\
+	doc/help/index.html\
+	doc/help/intro.html\
+	doc/help/template.html
+
+module.po.expanded=0
+module.po.files=\
+	de.po\
+	sk.po
+
+compiler.options.supports=
+
+compiler.options.include.paths=\
+	.\
+	..
+
+compiler.options.library.paths=
+
+compiler.options.libraries=
+compiler.options.libraries.selected=
+
+compiler.options.defines=\
+	HAVE_CONFIG_H
+
+compiler.options.warning.buttons=0 0 1 1 0 1 0 0 0 0 0 0 0 1 0 0 
+
+compiler.options.optimize.buttons=0 0 1 0 
+
+compiler.options.other.buttons=1 0 
+
+compiler.options.other.c.flags=
+
+compiler.options.other.l.flags=
+
+compiler.options.other.l.libs=
+
+project.source.paths=
+
