@@ -268,7 +268,8 @@ module.source.files=\
 	src/editor/table.c\
 	src/editor/template.cmodule.pixmap.name=pixmaps\
 	src/editor/editor-control.c\
-	src/backend/sword_main.cc
+	src/backend/sword_main.cc\
+	src/gnome2/note_editor.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

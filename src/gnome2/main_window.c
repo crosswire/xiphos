@@ -57,6 +57,7 @@ extern HISTORY history_list[];	/* sturcture for storing history items */
 extern gint history_items;
 
 
+static GtkWidget *nav_toolbar;
 /******************************************************************************
  * Name
  *  gui_show_hide_texts
@@ -205,6 +206,11 @@ void gui_set_bible_comm_layout(void)
 				       (widgets.hpaned),
 				       settings.biblepane_width);	   
 	}
+	if((settings.showcomms == FALSE) && (settings.showtexts == FALSE))
+		gtk_widget_hide(nav_toolbar);
+	else
+		gtk_widget_show(nav_toolbar);
+		
 }
 
 
@@ -424,6 +430,7 @@ static void on_notebook_comm_book_switch_page(GtkNotebook * notebook,
 			   settings.comm_showing);
 }
 
+
 /******************************************************************************
  * Name
  *   create_mainwindow
@@ -446,7 +453,6 @@ void create_mainwindow(void)
 	GtkWidget *vbox_gs;
 	GtkWidget *vboxMain;
 	GtkWidget *hbox2;
-	GtkWidget *nav_toolbar;
 	GtkWidget *swInt;
 	GtkWidget *hbox25;
 	GtkWidget *hboxtb;
