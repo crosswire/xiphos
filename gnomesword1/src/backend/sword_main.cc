@@ -22,7 +22,6 @@
 #include <swmgr.h>
 
 #include <gnome.h>
-#include <gs_markupfiltmgr.h>
 #include <versekey.h>
 #include <regex.h>
 #include <gbfplain.h>
@@ -31,6 +30,7 @@
 #include <utf8html.h>
 
 #include "backend/sword_main.hh"
+#include "backend/gs_markupfiltmgr.h"
 
 #include "main/settings.h"
 #include "main/sword.h"
@@ -45,9 +45,9 @@ SwordMain *backend = NULL;
 SwordMain::SwordMain() {
 	main_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-//	search_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-//	results = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
-//	percom_mgr = new SWMgr(new GSMarkupFilterMgr(FMT_HTMLHREF));
+//	search_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+//	results = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+//	percom_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	
 //	text_mod = NULL;
 //	comm_mod = NULL;
