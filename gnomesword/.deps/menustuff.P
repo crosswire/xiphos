@@ -178,7 +178,15 @@ menustuff.o: menustuff.cpp /usr/include/gnome.h \
  /usr/include/libgnomeui/gnome-druid-page-start.h \
  /usr/include/libgnomeui/gnome-druid-page-standard.h \
  /usr/include/libgnomeui/gnome-druid-page-finish.h menustuff.h \
- interface.h callback.h listeditor.h
+ interface.h ../widgets/shortcut-bar/e-shortcut-bar.h \
+ ../widgets/shortcut-bar/e-group-bar.h \
+ ../widgets/shortcut-bar/e-icon-bar.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf-features.h \
+ ../widgets/shortcut-bar/../../e-util/e-canvas.h \
+ ../widgets/shortcut-bar/e-shortcut-model.h \
+ ../widgets/e-paned/e-hpaned.h ../widgets/e-paned/e-paned.h callback.h \
+ listeditor.h
 menustuff.cpp :
 /usr/include/gnome.h :
 /usr/lib/gnome-libs/include/gnomesupport.h :
@@ -443,5 +451,14 @@ menustuff.cpp :
 /usr/include/libgnomeui/gnome-druid-page-finish.h :
 menustuff.h :
 interface.h :
+../widgets/shortcut-bar/e-shortcut-bar.h :
+../widgets/shortcut-bar/e-group-bar.h :
+../widgets/shortcut-bar/e-icon-bar.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf-features.h :
+../widgets/shortcut-bar/../../e-util/e-canvas.h :
+../widgets/shortcut-bar/e-shortcut-model.h :
+../widgets/e-paned/e-hpaned.h :
+../widgets/e-paned/e-paned.h :
 callback.h :
 listeditor.h :

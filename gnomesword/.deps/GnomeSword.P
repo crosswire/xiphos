@@ -205,8 +205,16 @@ GnomeSword.o: GnomeSword.cpp ../config.h /usr/include/gnome.h \
  /usr/include/sword/versekey.h /usr/include/sword/swmacs.h \
  /usr/include/sword/gbfplain.h /usr/include/sword/gbfhtml.h \
  /usr/include/sword/plainhtml.h /usr/include/regex.h \
- /usr/include/sys/stat.h /usr/include/bits/stat.h display.h callback.h \
- GnomeSword.h support.h interface.h filestuff.h menustuff.h \
+ /usr/include/sys/stat.h /usr/include/bits/stat.h \
+ ../widgets/shortcut-bar/e-shortcut-bar.h \
+ ../widgets/shortcut-bar/e-group-bar.h \
+ ../widgets/shortcut-bar/e-icon-bar.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf.h \
+ /usr/include/gdk-pixbuf/gdk-pixbuf-features.h \
+ ../widgets/shortcut-bar/../../e-util/e-canvas.h \
+ ../widgets/shortcut-bar/e-shortcut-model.h \
+ ../widgets/e-paned/e-hpaned.h ../widgets/e-paned/e-paned.h display.h \
+ callback.h GnomeSword.h support.h interface.h filestuff.h menustuff.h \
  listeditor.h noteeditor.h
 GnomeSword.cpp :
 ../config.h :
@@ -525,6 +533,15 @@ GnomeSword.cpp :
 /usr/include/regex.h :
 /usr/include/sys/stat.h :
 /usr/include/bits/stat.h :
+../widgets/shortcut-bar/e-shortcut-bar.h :
+../widgets/shortcut-bar/e-group-bar.h :
+../widgets/shortcut-bar/e-icon-bar.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf.h :
+/usr/include/gdk-pixbuf/gdk-pixbuf-features.h :
+../widgets/shortcut-bar/../../e-util/e-canvas.h :
+../widgets/shortcut-bar/e-shortcut-model.h :
+../widgets/e-paned/e-hpaned.h :
+../widgets/e-paned/e-paned.h :
 display.h :
 callback.h :
 GnomeSword.h :

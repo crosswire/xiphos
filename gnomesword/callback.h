@@ -140,10 +140,6 @@ on_1st_interlinear_window1_activate    (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
 void
-on_item2_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data);
-
-void
 on_2nd_interlinear_window1_activate    (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
@@ -153,10 +149,6 @@ on_item3_activate                      (GtkMenuItem     *menuitem,
 
 void
 on_3rd_interlinear_window1_activate    (GtkMenuItem     *menuitem,
-                                        gpointer         user_data);
-
-void
-on_item4_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
 void
@@ -423,10 +415,6 @@ on_item1_activate                      (GtkMenuItem     *menuitem,
 
 void
 on_item3_activate                      (GtkMenuItem     *menuitem,
-                                        gpointer         user_data);
-
-void
-on_item4_activate                      (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
 void

@@ -1,6 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = macros gnomesword
+SUBDIRS = 	macros \
+		e-util \
+		widgets \
+		gnomesword
 
 EXTRA_DIST = gnomesword.glade gnomesword.kdevprj
 install-data-local:
