@@ -67,8 +67,7 @@ extern "C" {
 	 removemenuitems(GtkWidget * MainFrm,
 			 gchar * startitem, gint numberofitems);
 
-	void createpopupmenus(GtkWidget * app,
-			      SETTINGS * settings,
+	void createpopupmenus(SETTINGS *s,
 			      GList * bilbeDescription,
 			      GList * comDescription,
 			      GList * dictDescription, 
@@ -76,8 +75,7 @@ extern "C" {
 			      GList * percomlist, 
 			      GList * options);
 
-	void addmodstomenus(GtkWidget * app,
-			    SETTINGS * settings,
+	void addmodstomenus(SETTINGS * s,
 			    GList * biblelist,
 			    GList * commentarylist,
 			    GList * dictionarylist,

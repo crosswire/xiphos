@@ -85,7 +85,6 @@ typedef map < string, string > bookAbrevMap;
 //SWDisplay *chapDisplay;		/* to display modules using GtkText a chapter at a time */
 SWDisplay 
     *comp1Display,		/* to display interlinear modules  a verse at a time */
-    *percomDisplay,		/* to display personal comment modules using GtkText a verse at a time */
     *dictDisplay,			/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *commDisplay,		/* to display commentary modules */
@@ -209,8 +208,7 @@ void initSWORD(SETTINGS *s)
 	percomMod = NULL;
 
 	comp1Display = 0;	// set in create
-	dictDisplay = 0;	// set in create    
-	percomDisplay = 0;	// set in create
+	dictDisplay = 0;	// set in create   
 	FPNDisplay = 0;
 	commDisplay = 0;
 	bookDisplay = 0;
@@ -236,13 +234,11 @@ void initSWORD(SETTINGS *s)
 	MainFrm = s->app;	//-- save mainform for use latter
 	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
-	GTKEntryDisp::__initialize();	//-- this is for gtktext	
-	percomDisplay = new GTKPerComDisp(lookup_widget(s->app, "textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(s->app, "htmlTexts"));
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"));
-	bookDisplay = new ComEntryDisp(s->htmlBook);
+	bookDisplay = new EntryDisp(s->htmlBook);
 	comp1Display = new InterlinearDisp(s->htmlInterlinear);
-	FPNDisplay = new ComEntryDisp(htmlComments);
+	FPNDisplay = new EntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"));
 	compages = 0;
 	dictpages = 0;
@@ -295,10 +291,7 @@ void initSWORD(SETTINGS *s)
 			//-- if driver is RawFiles                     
 			if ((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles") {
 				percomMod = (*it).second;
-				if (s->formatpercom)
-					percomMod->Disp(FPNDisplay);	//-- if TRUE use formatted display
-				else
-					percomMod->Disp(percomDisplay);	//-- else standard display
+				percomMod->Disp(FPNDisplay);	
 				percommods = g_list_append(percommods, percomMod->Name());
 				usepersonalcomments = TRUE;	//-- used by verseChange function (sw_gnomesword.cpp)
 				percomMod->SetKey(s->currentverse);
@@ -332,6 +325,7 @@ void ChangeVerseSWORD(void)
 {
 	int l;
 	GList * mods;
+	gboolean searchresults = FALSE;
 	//gchar * currRef;
 	
 	strcpy(current_verse, vkText);
@@ -389,11 +383,17 @@ void ChangeVerseSWORD(void)
 	
 	//-- set commentary module to current verse
 	if (settings->notebook3page == 0 && autoscroll) {
+		
+		searchresults = settings->displaySearchResults;
+		settings->displaySearchResults = FALSE;
+		
 		if (curcomMod) {
 			curcomMod->SetKey(vkComm);	
 			curcomMod->Display();	//-- show change
 			strcpy(com_key, vkComm);
 		}
+				
+		settings->displaySearchResults = searchresults;
 	}
 	
 	ApplyChange = TRUE;
@@ -621,8 +621,8 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		delete comp1Display;
 	if (dictDisplay)
 		delete dictDisplay;
-	if (percomDisplay)
-		delete percomDisplay;
+//	if (percomDisplay)
+//		delete percomDisplay;
 	if (FPNDisplay)
 		delete FPNDisplay;
 	if (commDisplay)
