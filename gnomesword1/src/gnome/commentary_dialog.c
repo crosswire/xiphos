@@ -348,7 +348,7 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
  *   void
  */
 
-void create_commentary_dialog(VIEW_COMM * vc)
+static void create_commentary_dialog(VIEW_COMM * vc)
 {
 	GtkWidget *dialog_vbox11;
 	GtkWidget *vbox30;

@@ -28,24 +28,14 @@
 #endif
 
 #include <gnome.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
 
 #include "gui/gbs.h"
-#include "gui/cipher_key_dialog.h"
-#include "gui/shortcutbar_main.h"
 
-#include "main/settings.h"
-#include "main/gs_bookmarks.h"
-#include "main/gs_gnomesword.h"
 #include "main/gbs.h"
-#include "main/gs_html.h"
 
 #include "backend/sword.h"
-#include "backend/shortcutbar.h"
 #include "backend/gbs_.h"
-
+ 
 
 /******************************************************************************
  * Name
@@ -54,7 +44,7 @@
  * Synopsis
  *   #include "gbs.h"
  *
- *   void display_gbs(int page_num, char * key)	
+ *   void display_gbs(char * book_name, char * key)	
  *
  * Description
  *    
@@ -63,9 +53,9 @@
  *   void
  */ 
  
-void display_gbs(int page_num, char * key)
+char * display_gbs(char * book_name, char * key)
 {
-	backend_display_gbs(page_num, key);
+	return backend_display_gbs(book_name, key);
 }
 
 /******************************************************************************
@@ -75,7 +65,7 @@ void display_gbs(int page_num, char * key)
  * Synopsis
  *   #include "gbs.h"
  *
- *   int treekey_next_sibling(char * mod_name, unsigned long offset)	
+ *   int treekey_next_sibling(unsigned long offset)	
  *
  * Description
  *    
@@ -84,9 +74,9 @@ void display_gbs(int page_num, char * key)
  *   int
  */ 
  
-int treekey_next_sibling(char * mod_name, unsigned long offset)
+int treekey_next_sibling(unsigned long offset)
 {
-	return backend_treekey_next_sibling(mod_name, offset);
+	return backend_treekey_next_sibling(offset);
 }
 
 /******************************************************************************
@@ -96,7 +86,7 @@ int treekey_next_sibling(char * mod_name, unsigned long offset)
  * Synopsis
  *   #include "gbs.h"
  *
- *   int gbs_treekey_has_children(char * mod_name, unsigned long offset)	
+ *   int gbs_treekey_has_children(unsigned long offset)	
  *
  * Description
  *    
@@ -105,10 +95,9 @@ int treekey_next_sibling(char * mod_name, unsigned long offset)
  *   int
  */ 
  
-int gbs_treekey_has_children(char * mod_name, unsigned long offset)
+int gbs_treekey_has_children(unsigned long offset)
 {
-	return backend_gbs_treekey_has_children(mod_name, 
-					offset);
+	return backend_gbs_treekey_has_children(offset);
 }
 
 /******************************************************************************
@@ -118,8 +107,7 @@ int gbs_treekey_has_children(char * mod_name, unsigned long offset)
  * Synopsis
  *   #include "gbs.h"
  *
- *   char * gbs_get_treekey_local_name(char *mod_name, 
- *					unsigned long offset)	
+ *   char * gbs_get_treekey_local_name(unsigned long offset)	
  *
  * Description
  *    
@@ -128,10 +116,9 @@ int gbs_treekey_has_children(char * mod_name, unsigned long offset)
  *   char *
  */ 
  
-char * gbs_get_treekey_local_name(char *mod_name, 
-					unsigned long offset)
+char * gbs_get_treekey_local_name(unsigned long offset)
 {
-	return backend_gbs_get_treekey_local_name(mod_name, offset);
+	return backend_gbs_get_treekey_local_name(offset);
 }
 
 /******************************************************************************
@@ -141,7 +128,7 @@ char * gbs_get_treekey_local_name(char *mod_name,
  * Synopsis
  *   #include "gbs.h"
  *
- *   unsigned long gbs_get_treekey_offset(char *mod_name)	
+ *   unsigned long gbs_get_treekey_offset(void)	
  *
  * Description
  *    
@@ -150,9 +137,9 @@ char * gbs_get_treekey_local_name(char *mod_name,
  *   unsigned long
  */ 
  
-unsigned long gbs_get_treekey_offset(char *mod_name)
+unsigned long gbs_get_treekey_offset(void)
 {
-	return backend_gbs_get_treekey_offset(mod_name);
+	return backend_gbs_get_treekey_offset();
 }
 
 /******************************************************************************
@@ -162,7 +149,7 @@ unsigned long gbs_get_treekey_offset(char *mod_name)
  * Synopsis
  *   #include "gbs.h"
  *
- *   int gbs_treekey_first_child(char * mod_name, unsigned long offset)	
+ *   int gbs_treekey_first_child(unsigned long offset)	
  *
  * Description
  *    
@@ -171,9 +158,9 @@ unsigned long gbs_get_treekey_offset(char *mod_name)
  *   int
  */ 
  
-int gbs_treekey_first_child(char * mod_name, unsigned long offset)
+int gbs_treekey_first_child(unsigned long offset)
 {
-	return backend_gbs_treekey_first_child(mod_name, offset);
+	return backend_gbs_treekey_first_child(offset);
 }
  
 /******************************************************************************
@@ -183,7 +170,7 @@ int gbs_treekey_first_child(char * mod_name, unsigned long offset)
  * Synopsis
  *   #include "gbs.h"
  *
- *   char *get_book_key(int book_num)	
+ *   char *get_book_key(char * book_name)	
  *
  * Description
  *    
@@ -192,9 +179,9 @@ int gbs_treekey_first_child(char * mod_name, unsigned long offset)
  *   char *
  */ 
  
-char *get_book_key(int book_num)
+char *get_book_key(char * book_name)
 {
-	return backend_get_book_key(book_num);
+	return backend_get_book_key(book_name);
 }
 
 /******************************************************************************
@@ -213,20 +200,19 @@ char *get_book_key(int book_num)
  *   gboolean
  */ 
  
-gboolean display_row_gbs(gint book_num, gchar *offset)
+char * display_row_gbs(char * book_name, char *offset)
 {
-	return backend_display_row_gbs(book_num, offset);
+	return backend_display_row_gbs(book_name, offset);
 }
-
 
 /******************************************************************************
  * Name
- *  new_gbs_display 
+ *  change_book
  *
  * Synopsis
  *   #include "gbs.h"
  *
- *   void new_gbs_display(GtkWidget * html, char * mod_name)	
+ *   void change_book(char * mod_name, unsigned long offset)	
  *
  * Description
  *    
@@ -235,8 +221,10 @@ gboolean display_row_gbs(gint book_num, gchar *offset)
  *   void
  */ 
  
-void new_gbs_display(GtkWidget * html, char * mod_name)
+void change_book(char * mod_name, unsigned long offset)
 {
-	backend_new_gbs_display(html, mod_name);
+	backend_change_book(mod_name, offset);
 }
+
+
 

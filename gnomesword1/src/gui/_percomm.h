@@ -24,12 +24,28 @@
 
 #include <gnome.h>
 #include "main/percomm.h"
+#include "gui/_editor.h"
 
-void gui_set_percomm_frame_label(GtkWidget *frame, gchar *mod_name);
-void tabs(gboolean choice);
-void on_notebook_percomm_switch_page(GtkNotebook *notebook,
-		GtkNotebookPage *page, gint page_num, GList *pcl);
-GSHTMLEditorControlData *gui_percomm_control(gchar *mod_name, gint page_num);
+typedef struct _percomm_data PC_DATA;
+struct _percomm_data {
+	GtkWidget *vbox;
+	GtkWidget *html;
+	//GtkWidget *frame;
+	//GtkWidget *showtabs;
+	gchar *mod_name;
+	gchar *mod_description;
+	gchar *search_string;
+	gchar *key;
+	gint mod_num;
+	gboolean is_locked;
+	GSHTMLEditorControlData *ec;
+};
 
+void gui_percomm_tabs(gboolean choice);
+void gui_display_percomm(gchar * key);
+void gui_set_percomm_page_and_key(gint page_num, gchar * key);
+void gui_add_new_percomm_pane(PC_DATA *p);
+void gui_setup_percomm(GList *mods);
+void gui_shutdown_percomm(void);
 #endif
 

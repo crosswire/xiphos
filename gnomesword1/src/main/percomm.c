@@ -41,14 +41,8 @@
 /******************************************************************************
  * globals to this file only 
  */ 
-static GList *percomm_list;
-static GString *gstr;
 
-/******************************************************************************
- * globals
- */ 
-PC_DATA *cur_p;
-gboolean percomm_display_change = TRUE;
+static GString *gstr;
 
 /******************************************************************************
  * Name
@@ -100,7 +94,7 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
  *   void
  */ 
 
-void editor_save_note(GtkWidget * html_widget)
+void editor_save_note(GtkWidget * html_widget, char * mod_name)
 {
 	GtkHTML *html;
 
@@ -112,13 +106,12 @@ void editor_save_note(GtkWidget * html_widget)
 	     GINT_TO_POINTER(0))) {
 		g_warning("file not writen");
 	} else {
-		save_percomm_note(gstr->str);
+		save_percomm_note(gstr->str, mod_name);
 		g_print("\nfile writen\n");
 	}
 	g_string_free(gstr, 1);
 	gtk_html_set_editable(html, TRUE);
 }
-
 
 /******************************************************************************
  * Name
@@ -137,10 +130,9 @@ void editor_save_note(GtkWidget * html_widget)
  *   void
  */ 
 
-void save_percomm_note(gchar *note)
+void save_percomm_note(gchar *note, char * mod_name)
 {
-	backend_save_personal_comment(cur_p->mod_num, note);
-	cur_p->ec->changed = FALSE;
+	backend_save_personal_comment(mod_name, note);
 }
 
 /******************************************************************************
@@ -160,13 +152,13 @@ void save_percomm_note(gchar *note)
  *   void
  */ 
 
-void delete_percomm_note(void)
+void delete_percomm_note(char * mod_name)
 {	
 	GtkWidget *label1, *label2, *label3, *msgbox;
 	gint answer = -1;
-	const gchar *key;
+	gchar *key;
 	
-	key = backend_get_percomm_key(cur_p->mod_num);
+	key = backend_get_percomm_key(mod_name);
 	
 	msgbox = gui_create_info_box();
 	label1 = lookup_widget(msgbox, "lbInfoBox1");
@@ -180,206 +172,11 @@ void delete_percomm_note(void)
 	answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
 	switch (answer) {
 	case 0:
-		backend_delete_personal_comment(cur_p->mod_num);
-		cur_p->ec->changed = FALSE;
+		backend_delete_personal_comment(mod_name);
 		break;
 	default:
 		break;
 	}
-}
-
-
-/******************************************************************************
- * Name
- *  set_percomm_page_and_key
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *  void set_percomm_page_and_key(gint page_num, gchar * key)	
- *
- * Description
- *   change percomm module notebook page and display new key (reference)
- *
- * Return value
- *   void
- */
-
-void set_percomm_page_and_key(gint page_num, gchar * key)
-{
-	/*
-	 * we don't want backend_dispaly_percomm to be
-	 * called by on_notebook_percomm_switch_page
-	 */
-	percomm_display_change = FALSE;
-	if (settings.text_last_page != page_num) {
-		gtk_notebook_set_page(GTK_NOTEBOOK
-				      (settings.notebook_percomm),
-				      page_num);
-	}
-	backend_display_percomm(page_num, key);
-	percomm_display_change = TRUE;
-}
-
-/******************************************************************************
- * Name
- *  set_page_percomm
- *
- * Synopsis
- *   #include "percomm.h"
- *   
- *   static void set_page_percomm(gchar * modname, GList * percomm_list)
- *
- * Description
- *   change percomm module by finding page number from module name
- *
- * Return value
- *   void
- */
-
-static void set_page_percomm(gchar * modname, GList * percomm_list)
-{
-	gint page = 0;
-	PC_DATA *p = NULL;
-
-	percomm_list = g_list_first(percomm_list);
-	while (percomm_list != NULL) {
-		p = (PC_DATA *) percomm_list->data;
-		if (!strcmp(p->mod_name, modname))
-			break;
-		++page;
-		percomm_list = g_list_next(percomm_list);
-	}
-	cur_p = p;
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_percomm), page);
-	settings.percomm_last_page = page;
-}
-
-/******************************************************************************
- * Name
- *  display_percomm
- *
- * Synopsis
- *   #include "percomm.h"
- *   
- *   void display_percomm(gchar * key)	
- *
- * Description
- *   call backend_display_percomm and pass module page num and key
- *
- * Return value
- *   void
- */
-
-void display_percomm(gchar *key)
-{
-	backend_display_percomm(settings.percomm_last_page, key);
-}
-
-/******************************************************************************
- * Name
- *  setup_percomm
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *   GList *setup_percomm(GList *mods)
- *
- * Description
- *   set up gui for sword personal comments modules - 
- *   return list of percomm module names
- *
- * Return value
- *   GList *
- */
-
-void setup_percomm(GList *mods)
-{
-	GList *tmp = NULL;
-	gchar *mod_name;
-	gchar *modbuf;
-	gchar *keybuf;
-	PC_DATA *p;
-	gint count = 0;
-
-	percomm_list = NULL;
-	
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		mod_name = (gchar *) tmp->data;
-		p = g_new(PC_DATA, 1);
-		p->mod_name = mod_name;
-		p->mod_description =
-		    backend_get_module_description(mod_name);
-		p->mod_num = count;
-		p->search_string = NULL;
-		p->key = NULL;
-		p->ec = gui_percomm_control(p->mod_name,count);
-		p->html = p->ec->htmlwidget;
-		backend_new_percomm_display(p->ec->htmlwidget,
-					    p->mod_name);
-		percomm_list =
-		    g_list_append(percomm_list, (PC_DATA *) p);
-		++count;
-		tmp = g_list_next(tmp);
-	}
-
-	gtk_signal_connect(GTK_OBJECT(settings.notebook_percomm),
-			   "switch_page",
-			   GTK_SIGNAL_FUNC
-			   (on_notebook_percomm_switch_page),
-			   percomm_list);
-
-	modbuf = g_strdup(settings.personalcommentsmod);
-	keybuf = g_strdup(settings.currentverse);
-
-	set_page_percomm(modbuf, percomm_list);
-
-	g_free(modbuf);
-	g_free(keybuf);
-	g_list_free(tmp);
-}
-
-/******************************************************************************
- * Name
- *  shutdown_percomm
- *
- * Synopsis
- *   #include "percomm.h"
- *
- *  void shutdown_percomm(void)	
- *
- * Description
- *   shut down text module support clean mem
- *
- * Return value
- *   void
- */
-
-void shutdown_percomm(void)
-{
-	percomm_list = g_list_first(percomm_list);
-	while (percomm_list != NULL) {
-		PC_DATA *p = (PC_DATA *) percomm_list->data;
-		/* 
-		 * free any search dialogs created 
-		 */		
-		if (p->ec->search_dialog)
-			g_free(p->ec->search_dialog);		
-		if (p->ec->replace_dialog)
-			g_free(p->ec->replace_dialog);		
-		/* 
-		 * free editor controls 
-		 */
-		if (p->ec)
-			g_free(p->ec);
-		/* 
-		 * free each TEXT_DATA item created 
-		 */
-		g_free((PC_DATA *) percomm_list->data);
-		percomm_list = g_list_next(percomm_list);
-	}
-	g_list_free(percomm_list);
+	free(key);
 }
 

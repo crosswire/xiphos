@@ -213,7 +213,7 @@ void search_gbs_find_dlg(GBS_DATA *c, gboolean regular, gchar *text)
 {
 	gchar buf[256];
 	
-	sprintf(buf,"%s in %s", _("Find"), c->bookName);
+	sprintf(buf,"%s in %s", _("Find"), c->mod_name);
 	
 	FIND_DIALOG(find, buf);//regular ? _("Find Regular Expression") :  _("Find"));
 	
