@@ -23,6 +23,7 @@
  */
 
 #include <gnome.h>
+#include <string>
 
 void 
 FillDictKeys(char *ModName);
@@ -128,3 +129,6 @@ setcurrentversecolor		(gint arg1, gint arg2, gint arg3);
 
 void
 setautosave							(gboolean choice);
+
+void
+clearhistory						(void);
