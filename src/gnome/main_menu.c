@@ -47,6 +47,7 @@
 #include "gui/studypad_dialog.h"
 #include "gui/about_gnomesword.h"
 #include "gui/about_sword.h"
+#include "gui/hints.h"
 
 #include "main/sword.h"
 #include "main/bibletext.h"
@@ -420,6 +421,27 @@ static void on_book_item_activate(GtkMenuItem * menuitem,
 	gui_open_gbs_dialog((gchar *) user_data);
 }
 
+/******************************************************************************
+ * Name
+ *  view_hints
+ *
+ * Synopsis
+ *   #include "gui/main_menu.h"
+ *
+ *   void view_hints(GtkMenuItem * menuitem, gpointer user_data)	
+ *
+ * Description
+ *    toogle view hints in texts window
+ *
+ * Return value
+ *   void
+ */
+
+static void view_hints(GtkMenuItem * menuitem, gpointer user_data)
+{
+	hint.use_hints = GTK_CHECK_MENU_ITEM(menuitem)->active;
+}
+
 
 /******************************************************************************
  * Name
@@ -635,6 +657,13 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Main Window Hints"),
+	 N_("Show/Hide Hints in text windows"),
+	 (gpointer) view_hints, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Bible Texts"),
 	 N_("Show/Hide Bible texts window"),
 	 (gpointer) view_bible_texts, NULL, NULL,
@@ -825,10 +854,10 @@ void gui_create_main_menu(GtkWidget * app)
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_File/Open Book Dialog/"),
 			      (GtkMenuCallback) on_book_item_activate);
-	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
-	widgets.viewcomms_item = view1_menu_uiinfo[3].widget;
-	widgets.viewdicts_item = view1_menu_uiinfo[4].widget;
-	widgets.versestyle_item = view1_menu_uiinfo[6].widget;
+	widgets.viewtexts_item = view1_menu_uiinfo[4].widget;
+	widgets.viewcomms_item = view1_menu_uiinfo[5].widget;
+	widgets.viewdicts_item = view1_menu_uiinfo[6].widget;
+	widgets.versestyle_item = view1_menu_uiinfo[8].widget;
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);

@@ -47,6 +47,7 @@
 #include "gui/studypad.h"
 #include "gui/interlinear.h"
 #include "gui/dialog.h"
+#include "gui/hints.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -75,6 +76,9 @@
 void frontend_init(void)
 {
 	g_print("%s\n", "Initiating GnomeSword\n");
+	
+	hint.in_popup = FALSE;
+	hint.use_hints = FALSE;
 	
 	settings.displaySearchResults = FALSE;
 	settings.havethayer = check_for_module("Thayer");

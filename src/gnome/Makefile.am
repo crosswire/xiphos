@@ -43,6 +43,7 @@ gnomesword_1_0_SOURCES =  \
     gnomesword.c \
     gtkhtml_display.c \
     gui.c \
+    hints.c \
     history.c \
     html.c \
     interlinear.c \

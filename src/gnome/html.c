@@ -28,6 +28,7 @@
 #include <gtkhtml/htmlengine-print.h>
 #include <gtkhtml/htmlselection.h>
 #include <gal/widgets/e-unicode.h>
+#include <gal/unicode/gunicode.h>
 #include <libgnomeprint/gnome-printer.h>
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-printer-dialog.h>
@@ -49,6 +50,7 @@
 #include "gui/dialog.h"
 #include "gui/bibletext.h"
 #include "gui/commentary_menu.h"
+#include "gui/hints.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -56,11 +58,29 @@
 
 static GtkHTMLStream *htmlstream;
 static GtkHTMLStreamStatus status1;
-
 gboolean in_url;
 
-void
-url_requested (GtkHTML *html, const gchar *url, GtkHTMLStream *handle)
+
+
+/******************************************************************************
+ * Name
+ *   url_requested
+ *
+ * Synopsis
+ *   #include "gui/html.h"
+ *
+ *   void url_requested (GtkHTML *html, const gchar *url, 
+ *					GtkHTMLStream *handle)
+ *
+ * Description
+ *   needed for displaying images
+ *
+ * Return value
+ *   void
+ */
+
+void url_requested (GtkHTML *html, const gchar *url, 
+					GtkHTMLStream *handle)
 {
 	GtkHTMLStreamStatus status;
 	gint fd;
@@ -135,12 +155,17 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar buf[255], *buf1;
+	gchar *tmpbuf;
 
 	/***  moved out of url - clear appbar  ***/
 	if (url == NULL) {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					"");
 		in_url = FALSE;
+		if(hint.in_popup) {
+			gtk_widget_destroy(hint.hint_window);
+			hint.in_popup = FALSE;
+		}
 	}
 	/***  we are in an url  ***/
 	else {
@@ -149,6 +174,26 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		if (*url == '@') {
 			++url;
 			sprintf(buf, _("Show %s in main window"), url);
+		}
+		/***  osis footnote  ***/
+		else if (!strncmp(url, "noteID=", 7)) {
+			//g_warning(url);
+			buf1 = strchr(url,'=');
+			++buf1;
+			tmpbuf = get_footnote_body(buf1);
+			//tmpbuf = gui_show_footnote(buf1);
+			if(tmpbuf == NULL)
+				return;	
+			else {
+				gnome_appbar_set_status(GNOME_APPBAR(
+					widgets.appbar),tmpbuf);
+				if(hint.use_hints) {
+					gui_show_footnote(tmpbuf);
+				}
+				
+				g_free(tmpbuf);				
+				return;				
+			}					
 		}
 		/***  module name link  ***/
 		else if (*url == '[') {
@@ -439,7 +484,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			   so we don't need to get a verse list */
 			gui_display_dictlex_in_viewer(modbuf, buf);
 		} else {
-			gui_display_verse_list(modbuf, buf);
+			gui_display_verse_list(settings.currentverse, modbuf, buf);
 		}
 		g_free(buf);
 
@@ -785,6 +830,7 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 {
 	gchar *key = NULL;
 	GtkHTML *html;
+	gint len;
 
 	html = GTK_HTML(html_widget);
 	if (!html_engine_is_selection_active(html->engine)) {
@@ -795,6 +841,13 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 							     engine);
 			key = g_strdelimit(key, ".,\"<>;:?", ' ');
 			key = g_strstrip(key);
+			len = strlen(key);
+			g_warning("len = %d",len);
+			if (key[len-1] == 's' || key[len-1] == 'd') 
+				key[len-1] = '\0';
+			if (key[len-1] == 'h' && key[len-2] == 't' 
+				&& key[len-3] == 'e') 
+					key[len-3] = '\0';
 			return g_strdup(key);	/* must be freed by calling function */
 		}
 

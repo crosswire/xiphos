@@ -76,6 +76,40 @@ extern ListKey search_scope_list;
 extern SWKey *current_scope;
 
 
+/******************************************************************************
+ * Name
+ *   backend_get_footnote_body
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   char *backend_get_footnote_body(char * module_name, 
+ *                                       char * key, char * note)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char*
+ */
+
+char *backend_get_footnote_body(char * module_name, 
+				char * key, char * note)
+{	
+	SWModule *module = sw.main_mgr->Modules[module_name];
+	module->SetKey(key);
+	module->RenderText();
+	
+	SWBuf body =
+	    module->getEntryAttributes()["Footnote"][note]["body"].
+	    c_str();
+	//printf("\n%s %s\n%s\n",key,note,body.c_str());
+	if(body)
+		return strdup(body.c_str());
+	else
+		return NULL;
+}
+
 
 
 /******************************************************************************
@@ -94,12 +128,12 @@ extern SWKey *current_scope;
  *   int
  */
 
-int backend_get_display_level(char * module_name)
+int backend_get_display_level(char *module_name)
 {
 	char *buf = NULL;
 	buf = (char *) sw.main_mgr->Modules[module_name]->
-			getConfigEntry("DisplayLevel");
-	if(buf != NULL)
+	    getConfigEntry("DisplayLevel");
+	if (buf != NULL)
 		return atoi(buf);
 	else
 		return 0;
@@ -121,19 +155,20 @@ int backend_get_display_level(char * module_name)
  *   int
  */
 
-int backend_is_module_rtl(char * mod_name)
+int backend_is_module_rtl(char *mod_name)
 {
 	char *direction = NULL;
-	
+
 	SWModule *module = sw.main_mgr->Modules[mod_name];
-	if(module)
-		direction = (char*)module->getConfigEntry("Direction");
-	if(direction)
-		if(!strcmp(direction,"RtoL"))
+	if (module)
+		direction =
+		    (char *) module->getConfigEntry("Direction");
+	if (direction)
+		if (!strcmp(direction, "RtoL"))
 			return 1;
-		
+
 	return 0;
-		
+
 }
 
 
@@ -154,8 +189,8 @@ int backend_is_module_rtl(char * mod_name)
  *   void
  */
 
-void backend_module_name_from_description(char * mod_name,
-					  char * mod_desc)
+void backend_module_name_from_description(char *mod_name,
+					  char *mod_desc)
 {
 	strcpy(mod_name, descriptionMap[mod_desc].c_str());
 }
@@ -176,7 +211,7 @@ void backend_module_name_from_description(char * mod_name,
  *
  * Return value
  *   int
- */	
+ */
 
 int backend_do_module_search(char *module_name, char *search_string,
 			     int search_type, int search_params)
@@ -244,7 +279,7 @@ char *backend_get_search_results_text(char *mod_name, char *key)
  *
  * Return value
  *   void
- */	
+ */
 
 void backend_set_module_iterators(void)
 {
@@ -275,11 +310,12 @@ NAME_TYPE *backend_get_next_module_name(void)
 	retval = &nt;
 
 	if (begin != end) {
-		
+
 		descriptionMap[string
-			((char *)(*begin).second->Description())] =
-			    string((char *) (*begin).second->Name());
-		
+			       ((char *) (*begin).second->
+				Description())] =
+		    string((char *) (*begin).second->Name());
+
 		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
 			nt.type = TEXT_TYPE;
 			nt.name =
@@ -330,7 +366,7 @@ NAME_TYPE *backend_get_next_module_description(void)
 	retval = &nt;
 
 	if (begin != end) {
-		
+
 		if (!strcmp((*begin).second->Type(), TEXT_MODS)) {
 			nt.type = TEXT_TYPE;
 			nt.name =
@@ -377,18 +413,18 @@ NAME_TYPE *backend_get_next_module_description(void)
  * Return value
  *   int
  */
- 
-int backend_is_personal_comment_module(char * module_name)
+
+int backend_is_personal_comment_module(char *module_name)
 {
 	SWModule *module = sw.main_mgr->Modules[module_name];
-	if(!module)
+	if (!module)
 		return FALSE;
-	if (!strcmp((char*)module->getConfigEntry("ModDrv"),
-							"RawFiles")) {
-		     return TRUE;
+	if (!strcmp((char *) module->getConfigEntry("ModDrv"),
+		    "RawFiles")) {
+		return TRUE;
 	}
 	return FALSE;
-		
+
 }
 
 
@@ -486,7 +522,7 @@ char *backend_get_next_devotion_name(void)
  *   char *
  */
 
-char *backend_get_module_description(char * module_name)
+char *backend_get_module_description(char *module_name)
 {
 	ModMap::iterator it;	//-- iteratior
 
@@ -512,21 +548,20 @@ char *backend_get_module_description(char * module_name)
  *
  * Return value
  *   int
- */	
+ */
 
 int backend_module_is_locked(char *mod_name)
 {
 	char *tmpbuf = (char *) sw.main_mgr->Modules[mod_name]->
-				getConfigEntry("CipherKey");
-	if(tmpbuf != NULL) {
+	    getConfigEntry("CipherKey");
+	if (tmpbuf != NULL) {
 		if (strlen(tmpbuf) == CIPHER_KEY_LEN) {
-		/* the key is the right length so we assume it is right */
+			/* the key is the right length so we assume it is right */
 			return false;
-		}
-		else
+		} else
 			return true;
 	}
-	
+
 }
 
 
@@ -544,12 +579,12 @@ int backend_module_is_locked(char *mod_name)
  *
  * Return value
  *   char *
- */	
+ */
 
 char *backend_get_cipher_key(char *mod_name)
 {
 	return strdup((char *) sw.main_mgr->Modules[mod_name]->
-				getConfigEntry("CipherKey"));
+		      getConfigEntry("CipherKey"));
 }
 
 
@@ -567,15 +602,15 @@ char *backend_get_cipher_key(char *mod_name)
  *
  * Return value
  *   int
- */	
+ */
 
 int backend_has_cipher_tag(char *mod_name)
 {
 	char *tmpbuf = (char *) sw.main_mgr->Modules[mod_name]->
-				getConfigEntry("CipherKey");	
-	if(tmpbuf != NULL)
+	    getConfigEntry("CipherKey");
+	if (tmpbuf != NULL)
 		return 1;
-	else 
+	else
 		return 0;
 }
 
@@ -595,13 +630,13 @@ int backend_has_cipher_tag(char *mod_name)
  * Return value
  *   int
  */
- 
-int backend_check_for_module(char * mod_name)
+
+int backend_check_for_module(char *mod_name)
 {
 	SWModule *mod = sw.main_mgr->Modules[mod_name];
-	
-	if(mod) {
-		
+
+	if (mod) {
+
 		return 1;
 	}
 	return 0;
@@ -624,7 +659,7 @@ int backend_check_for_module(char * mod_name)
  *   gchar *
  */
 
-char *backend_get_mod_about_info(char * modname)
+char *backend_get_mod_about_info(char *modname)
 {
 	return g_strdup((char *) sw.main_mgr->Modules[modname]->
 			getConfigEntry("About"));
@@ -645,7 +680,7 @@ char *backend_get_mod_about_info(char * modname)
  *
  * Return value
  *   int
- */	
+ */
 
 int backend_get_module_page(char *module_name, char *module_type)
 {
@@ -682,16 +717,16 @@ int backend_get_module_page(char *module_name, char *module_type)
  *
  * Return value
  *   int
- */	
+ */
 
-int backend_get_mod_type(char * mod_name)
+int backend_get_mod_type(char *mod_name)
 {
 
 	ModMap::iterator it;	//-- iteratior
-	//-- iterate through the modules until we find modName	
+	//-- iterate through the modules until we find modName  
 	it = sw.main_mgr->Modules.find(mod_name);
 	//-- if we find the module
-	if (it != sw.main_mgr->Modules.end()) {	   
+	if (it != sw.main_mgr->Modules.end()) {
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 			return TEXT_TYPE;
@@ -729,37 +764,37 @@ int backend_get_mod_type(char * mod_name)
  * Return value
  *   char *
  */
- 
-char *backend_get_module_text(int manager, char * module_name, char * key)
+
+char *backend_get_module_text(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
-	
-	switch(manager) {
-		case TEXT_MGR:
-			mod = sw.text_mgr->Modules[module_name];
-			break;
-		case COMM_MGR:
-			mod = sw.comm_mgr->Modules[module_name];
-			break;
-		case DICT_MGR:
-			mod = sw.dict_mgr->Modules[module_name];
-			break;
-		case GBS_MGR:
-			mod = sw.gbs_mgr->Modules[module_name];
-			break;
-		case MAIN_MGR:
-			mod = sw.main_mgr->Modules[module_name];
-			break;
-		case SEARCH_MGR:
-			mod = sw.search_mgr->Modules[module_name];
-			break;
-		case INTER_MGR:
-			mod = sw.inter_mgr->Modules[module_name];
-			break;
+
+	switch (manager) {
+	case TEXT_MGR:
+		mod = sw.text_mgr->Modules[module_name];
+		break;
+	case COMM_MGR:
+		mod = sw.comm_mgr->Modules[module_name];
+		break;
+	case DICT_MGR:
+		mod = sw.dict_mgr->Modules[module_name];
+		break;
+	case GBS_MGR:
+		mod = sw.gbs_mgr->Modules[module_name];
+		break;
+	case MAIN_MGR:
+		mod = sw.main_mgr->Modules[module_name];
+		break;
+	case SEARCH_MGR:
+		mod = sw.search_mgr->Modules[module_name];
+		break;
+	case INTER_MGR:
+		mod = sw.inter_mgr->Modules[module_name];
+		break;
 	}
-	if(mod) {
+	if (mod) {
 		mod->SetKey(key);
-		return strdup((char*)mod->RenderText());
+		return strdup((char *) mod->RenderText());
 	}
 	return NULL;
 }
@@ -786,21 +821,21 @@ char *backend_get_module_text(int manager, char * module_name, char * key)
 char *backend_get_striptext(int manager, char *module_name, char *key)
 {
 	SWModule *mod = NULL;
-	switch(manager) {
-		case TEXT_MGR:
-			mod = sw.text_mgr->Modules[module_name];
-			break;
-		case COMM_MGR:
-			mod = sw.comm_mgr->Modules[module_name];
-			break;
-		case MAIN_MGR:
-			mod = sw.main_mgr->Modules[module_name];
-			break;
-		case SEARCH_MGR:
-			mod = sw.search_mgr->Modules[module_name];
-			break;
+	switch (manager) {
+	case TEXT_MGR:
+		mod = sw.text_mgr->Modules[module_name];
+		break;
+	case COMM_MGR:
+		mod = sw.comm_mgr->Modules[module_name];
+		break;
+	case MAIN_MGR:
+		mod = sw.main_mgr->Modules[module_name];
+		break;
+	case SEARCH_MGR:
+		mod = sw.search_mgr->Modules[module_name];
+		break;
 	}
-	
+
 	if (mod)
 		mod->SetKey(key);
 	else
@@ -826,11 +861,12 @@ char *backend_get_striptext(int manager, char *module_name, char *key)
  *   int
  */
 
-int backend_check_for_global_option(char * mod_name, char * option)
-{		
+int backend_check_for_global_option(char *mod_name, char *option)
+{
 	SWModule *mod = sw.main_mgr->Modules[mod_name];
 	if (mod)
-		return mod->getConfig().has("GlobalOptionFilter",option);
+		return mod->getConfig().has("GlobalOptionFilter",
+					    option);
 	else
 		return 0;
 }
@@ -851,32 +887,32 @@ int backend_check_for_global_option(char * mod_name, char * option)
  * Return value
  *   char *
  */
- 
-char* backend_nav_module(int manager, char * module_name, int direction)
+
+char *backend_nav_module(int manager, char *module_name, int direction)
 {
 	SWModule *mod = NULL;
-	switch(manager) {
-		case TEXT_MGR:
-			mod = sw.text_mgr->Modules[module_name];
-			break;
-		case COMM_MGR:
-			mod = sw.comm_mgr->Modules[module_name];
-			break;
-		case DICT_MGR:
-			mod = sw.dict_mgr->Modules[module_name];
-			break;
-		case MAIN_MGR:
-			mod = sw.main_mgr->Modules[module_name];
-			break;
-		case SEARCH_MGR:
-			mod = sw.search_mgr->Modules[module_name];
-			break;
+	switch (manager) {
+	case TEXT_MGR:
+		mod = sw.text_mgr->Modules[module_name];
+		break;
+	case COMM_MGR:
+		mod = sw.comm_mgr->Modules[module_name];
+		break;
+	case DICT_MGR:
+		mod = sw.dict_mgr->Modules[module_name];
+		break;
+	case MAIN_MGR:
+		mod = sw.main_mgr->Modules[module_name];
+		break;
+	case SEARCH_MGR:
+		mod = sw.search_mgr->Modules[module_name];
+		break;
 	}
-	
-	if (mod){
-		if(direction == -1)
-			return strdup((char*)mod->KeyText());
-		
+
+	if (mod) {
+		if (direction == -1)
+			return strdup((char *) mod->KeyText());
+
 		switch (direction) {
 		case 0:
 			(*mod)--;
@@ -884,7 +920,7 @@ char* backend_nav_module(int manager, char * module_name, int direction)
 		case 1:
 			(*mod)++;
 			break;
-		}	
+		}
 		mod->Error();
 		return strdup((char *) mod->KeyText());
 	}
@@ -907,43 +943,45 @@ char* backend_nav_module(int manager, char * module_name, int direction)
  * Return value
  *   char *
  */
- 
-char *backend_get_chap_heading(int manager, char * module_name, char * key)
+
+char *backend_get_chap_heading(int manager, char *module_name,
+			       char *key)
 {
 	char newkey[256];
-	char *buf;	
+	char *buf;
 	SWModule *mod = NULL;
-	switch(manager) {
-		case TEXT_MGR:
-			mod = sw.text_mgr->Modules[module_name];
-			break;
-		case COMM_MGR:
-			mod = sw.comm_mgr->Modules[module_name];
-			break;
-		case MAIN_MGR:
-			mod = sw.main_mgr->Modules[module_name];
-			break;
-		case SEARCH_MGR:
-			mod = sw.search_mgr->Modules[module_name];
-			break;
+	switch (manager) {
+	case TEXT_MGR:
+		mod = sw.text_mgr->Modules[module_name];
+		break;
+	case COMM_MGR:
+		mod = sw.comm_mgr->Modules[module_name];
+		break;
+	case MAIN_MGR:
+		mod = sw.main_mgr->Modules[module_name];
+		break;
+	case SEARCH_MGR:
+		mod = sw.search_mgr->Modules[module_name];
+		break;
 	}
-	
-	
+
+
 	if (mod) {
 		versekey = key;
 		mod->SetKey(versekey);
-		
+
 		VerseKey vkey;
-		vkey = key; 
-		const char *book = 
-			vkey.books[vkey.Testament() - 1][vkey.Book() - 1].name;
+		vkey = key;
+		const char *book =
+		    vkey.books[vkey.Testament() - 1][vkey.Book() -
+						     1].name;
 		int chapter = vkey.Chapter();
-		sprintf(newkey,"%s %d:0",book,chapter);
-		
+		sprintf(newkey, "%s %d:0", book, chapter);
+
 		versekey.AutoNormalize(0);
 		versekey = newkey;
 		mod->SetKey(versekey);
-		mod->Error();	
+		mod->Error();
 		buf = (char *) mod->RenderText();
 		versekey.AutoNormalize(1);
 		return strdup(buf);
@@ -967,42 +1005,44 @@ char *backend_get_chap_heading(int manager, char * module_name, char * key)
  * Return value
  *   char *
  */
- 
-char *backend_get_book_heading(int manager, char * module_name, char * key)
+
+char *backend_get_book_heading(int manager, char *module_name,
+			       char *key)
 {
 	char newkey[256];
-	char *buf;	
+	char *buf;
 	SWModule *mod = NULL;
-	switch(manager) {
-		case TEXT_MGR:
-			mod = sw.text_mgr->Modules[module_name];
-			break;
-		case COMM_MGR:
-			mod = sw.comm_mgr->Modules[module_name];
-			break;
-		case MAIN_MGR:
-			mod = sw.main_mgr->Modules[module_name];
-			break;
-		case SEARCH_MGR:
-			mod = sw.search_mgr->Modules[module_name];
-			break;
+	switch (manager) {
+	case TEXT_MGR:
+		mod = sw.text_mgr->Modules[module_name];
+		break;
+	case COMM_MGR:
+		mod = sw.comm_mgr->Modules[module_name];
+		break;
+	case MAIN_MGR:
+		mod = sw.main_mgr->Modules[module_name];
+		break;
+	case SEARCH_MGR:
+		mod = sw.search_mgr->Modules[module_name];
+		break;
 	}
-	
+
 	if (mod) {
 		versekey = key;
 		mod->SetKey(versekey);
-		
+
 		VerseKey vkey;
-		vkey = key; 
-		const char *book = 
-			vkey.books[vkey.Testament() - 1][vkey.Book() - 1].name;
-		
-		sprintf(newkey,"%s 0:0",book);
-		
+		vkey = key;
+		const char *book =
+		    vkey.books[vkey.Testament() - 1][vkey.Book() -
+						     1].name;
+
+		sprintf(newkey, "%s 0:0", book);
+
 		versekey.AutoNormalize(0);
 		versekey = newkey;
 		mod->SetKey(versekey);
-		mod->Error();	
+		mod->Error();
 		buf = (char *) mod->RenderText();
 		versekey.AutoNormalize(1);
 		return strdup(buf);
@@ -1027,10 +1067,10 @@ char *backend_get_book_heading(int manager, char * module_name, char * key)
  *   void
  */
 
-void backend_set_commentary_key(char * mod_name, char * key)
+void backend_set_commentary_key(char *mod_name, char *key)
 {
 	SWModule *mod = sw.comm_mgr->Modules[mod_name];
-	if (mod){
+	if (mod) {
 		versekey = key;
 		mod->SetKey(versekey);
 	}
@@ -1054,13 +1094,13 @@ void backend_set_commentary_key(char * mod_name, char * key)
  *   char *
  */
 
-char *backend_get_commentary_key(char * mod_name)
+char *backend_get_commentary_key(char *mod_name)
 {
 	SWModule *mod = sw.comm_mgr->Modules[mod_name];
-	if (mod){
-		char *key = (char *)mod->KeyText();
-		if(key)
-			return strdup(key);		
+	if (mod) {
+		char *key = (char *) mod->KeyText();
+		if (key)
+			return strdup(key);
 	}
 	return NULL;
 }
@@ -1081,14 +1121,14 @@ char *backend_get_commentary_key(char * mod_name)
  *   char *
  */
 
-char *backend_get_commentary_text(char * mod_name, char * key)
+char *backend_get_commentary_text(char *mod_name, char *key)
 {
 	SWModule *mod = sw.comm_mgr->Modules[mod_name];
-	if (mod){
+	if (mod) {
 		versekey.Persist(1);
 		versekey = key;
 		mod->SetKey(versekey);
-		return strdup((char *) mod->RenderText());		
+		return strdup((char *) mod->RenderText());
 	}
 	return NULL;
 }
@@ -1107,33 +1147,33 @@ char *backend_get_commentary_text(char * mod_name, char * key)
  *
  * Return value
  *   char *
- */ 
- 
-char *backend_get_key_from_module(int manager, char * module_name)
+ */
+
+char *backend_get_key_from_module(int manager, char *module_name)
 {
 	SWModule *mod = NULL;
-	switch(manager) {
-		case TEXT_MGR:
-			mod = sw.text_mgr->Modules[module_name];
-			break;
-		case COMM_MGR:
-			mod = sw.comm_mgr->Modules[module_name];
-			break;
-		case GBS_MGR:
-			mod = sw.gbs_mgr->Modules[module_name];
-			break;
-		case MAIN_MGR:
-			mod = sw.main_mgr->Modules[module_name];
-			break;
-		case SEARCH_MGR:
-			mod = sw.search_mgr->Modules[module_name];
-			break;
-		default:
-			mod = sw.main_mgr->Modules[module_name];
+	switch (manager) {
+	case TEXT_MGR:
+		mod = sw.text_mgr->Modules[module_name];
+		break;
+	case COMM_MGR:
+		mod = sw.comm_mgr->Modules[module_name];
+		break;
+	case GBS_MGR:
+		mod = sw.gbs_mgr->Modules[module_name];
+		break;
+	case MAIN_MGR:
+		mod = sw.main_mgr->Modules[module_name];
+		break;
+	case SEARCH_MGR:
+		mod = sw.search_mgr->Modules[module_name];
+		break;
+	default:
+		mod = sw.main_mgr->Modules[module_name];
 	}
-		
-	if(mod->KeyText())
-		return	strdup(mod->KeyText());	
+
+	if (mod->KeyText())
+		return strdup(mod->KeyText());
 	return NULL;
 }
 
@@ -1152,32 +1192,37 @@ char *backend_get_key_from_module(int manager, char * module_name)
  *
  * Return value
  *   int
- */ 
- 
-int backend_set_module(int manager, char * module_name)
+ */
+
+int backend_set_module(int manager, char *module_name)
 {
-	switch(manager) {
-		case TEXT_MGR:
-			sw.text_mod = sw.text_mgr->Modules[module_name];
-			if(sw.text_mod) return 1;
-			break;
-		case COMM_MGR:
-			sw.comm_mod = sw.comm_mgr->Modules[module_name];
-			if(sw.comm_mod) return 1;
-			break;
-		case DICT_MGR:
-			sw.dict_mod = sw.dict_mgr->Modules[module_name];
-			if(sw.dict_mod) return 1;
-			break;
-		case PERCOM_MGR:
-			sw.percom_mod = sw.percom_mgr->Modules[module_name];
-			if(sw.percom_mod) return 1;
-			break;
-		case GBS_MGR:
-			sw.gbs_mod = sw.gbs_mgr->Modules[module_name];
-			if(sw.gbs_mod) return 1;
-			break;
-	}	
+	switch (manager) {
+	case TEXT_MGR:
+		sw.text_mod = sw.text_mgr->Modules[module_name];
+		if (sw.text_mod)
+			return 1;
+		break;
+	case COMM_MGR:
+		sw.comm_mod = sw.comm_mgr->Modules[module_name];
+		if (sw.comm_mod)
+			return 1;
+		break;
+	case DICT_MGR:
+		sw.dict_mod = sw.dict_mgr->Modules[module_name];
+		if (sw.dict_mod)
+			return 1;
+		break;
+	case PERCOM_MGR:
+		sw.percom_mod = sw.percom_mgr->Modules[module_name];
+		if (sw.percom_mod)
+			return 1;
+		break;
+	case GBS_MGR:
+		sw.gbs_mod = sw.gbs_mgr->Modules[module_name];
+		if (sw.gbs_mod)
+			return 1;
+		break;
+	}
 	return 0;
 }
 
@@ -1198,9 +1243,9 @@ int backend_set_module(int manager, char * module_name)
  *   void
  */
 
-void backend_set_percomm_key(char * key)
+void backend_set_percomm_key(char *key)
 {
-	if (sw.percom_mod){
+	if (sw.percom_mod) {
 		sw.percom_mod->SetKey(key);
 	}
 }
@@ -1221,12 +1266,12 @@ void backend_set_percomm_key(char * key)
  * Return value
  *   void
  */
- 
-void backend_save_personal_comment(char * note)
-{	
-	
-	
-	if(note) {
+
+void backend_save_personal_comment(char *note)
+{
+
+
+	if (note) {
 		sw.percom_mod->setEntry((const char *) note);
 /*		g_warning("mod = %s\nkey = %s\nnote = %s",sw.percom_mod->Name(),
 					sw.percom_mod->KeyText(),note);
@@ -1249,12 +1294,12 @@ void backend_save_personal_comment(char * note)
  * Return value
  *   void
  */
- 
+
 void backend_delete_personal_comment(void)
 {
 	sw.percom_mod->deleteEntry();
 	g_print("\nkey %s of module %s has been deleted\n",
-			sw.percom_mod->KeyText(),sw.percom_mod->Name());
+		sw.percom_mod->KeyText(), sw.percom_mod->Name());
 }
 
 /******************************************************************************
@@ -1273,11 +1318,11 @@ void backend_delete_personal_comment(void)
  *   char *
  */
 
-char *backend_get_percomm_text(char * key)
+char *backend_get_percomm_text(char *key)
 {
-	if (sw.percom_mod){
+	if (sw.percom_mod) {
 		sw.percom_mod->SetKey(key);
-		return strdup((char *) sw.percom_mod->getRawEntry());		
+		return strdup((char *) sw.percom_mod->getRawEntry());
 	}
 	return NULL;
 }

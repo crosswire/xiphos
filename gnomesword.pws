@@ -6,20 +6,20 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=809
-1=31
-2=30
-3=1407
-4=345
-5=399
-6=201
-7=400
-8=70
-9=93
-10=489
-11=486
-12=31
-13=37
+0=26
+1=29
+2=21
+3=25
+4=104
+5=34
+6=35
+7=28
+8=257
+9=268
+10=43
+11=335
+12=915
+13=31
 14=31
 15=402
 16=37
@@ -51,13 +51,25 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/bibletext_menu.c
-1=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
-2=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
+0=/home/terry/Projects/gnomesword1/src/gnome/hints.c
+1=/home/terry/Projects/gnomesword1/src/gui/hints.h
+2=/home/terry/Projects/gnomesword1/doc/h.txt
+3=/home/terry/Projects/gnomesword1/src/gnome/html.c
+4=/home/terry/Projects/gnomesword1/src/backend/module.cc
+5=/home/terry/Projects/gnomesword1/src/backend/module.hh
+6=/home/terry/Projects/gnomesword1/src/main/module.c
+7=/home/terry/Projects/gnomesword1/src/main/module.h
+8=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
+9=/home/terry/Projects/gnomesword1/src/gnome/shortcutbar_viewer.c
+10=/home/terry/Projects/gnomesword1/src/main/key.h
+11=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
+12=/home/terry/Projects/gnomesword1/src/gnome/bibletext_menu.c
+13=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
 
 [Project Tree]
 0=0
-1=0:1
+1=0:0
+2=0:1
 
 [Symbol Tree]
 0=5

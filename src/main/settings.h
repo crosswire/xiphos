@@ -166,7 +166,9 @@ struct _settings {
 		havepercomm,
 		
 		/* do we need to add item to history */
-		addhistoryitem;
+		addhistoryitem,
+		/* does user want main window hints */
+		use_hints;
 	
 	/* store program title */
 	char program_title[256];

@@ -32,6 +32,8 @@ struct _name_type {
 	int type;
 };
 
+char *backend_get_footnote_body(char *module_name, 
+					char *key, char *note);
 int backend_get_display_level(char * module_name);
 int backend_is_module_rtl(char * mod_name);
 void backend_module_name_from_description(char * mod_name, 
