@@ -30,7 +30,7 @@ extern "C" {
 
 typedef struct _settings SETTINGS;
 struct _settings {
-	gchar	
+	char	
 		*gs_version, 	/* GnomeSword version */
 		*MainWindowModule,	/* module to open at program startup  */
 		*CommWindowModule,	/* module to open at program startup  */
@@ -70,7 +70,7 @@ struct _settings {
 		*found_color, /* color to use for search word in results display */
 		*verse_num_font_size;		
 		
-	gint 
+	int 
       		shortcutbar_width,
 		upperpane_hight,
 		biblepane_width,
@@ -201,8 +201,8 @@ struct _settings {
 
 extern SETTINGS settings;
 
-gint settings_init(int new_configs, int new_bookmarks);
-int load_settings_structure(void);
+int settings_init(int new_configs, int new_bookmarks);
+void load_settings_structure(void);
 
 #ifdef __cplusplus
 }

@@ -41,9 +41,7 @@
 #include "main/shortcutbar.h"
 #include "main/xml.h"
 
-#include "backend/bookmarks.h"
 #include "backend/sword.h"
-#include "backend/mgr.hh"
 
 
 /******************************************************************************
@@ -422,7 +420,7 @@ void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
  *   
  */
 
-int load_settings_structure(void) 
+void load_settings_structure(void) 
 {
 	settings.gs_version = VERSION;
 	settings.MainWindowModule = xml_get_value("modules", "text");
@@ -436,18 +434,21 @@ int load_settings_structure(void)
 	settings.Interlinear5Module = xml_get_value("modules", "int5");
 	settings.personalcommentsmod = xml_get_value("modules", "percomm");	
 	settings.devotionalmod = xml_get_value("modules", "devotional");
+	
+	
 	settings.lex_greek = xml_get_value("lexicons", "greek");
 	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
 	settings.lex_greek_viewer = xml_get_value("lexicons", "greekviewer");
 	settings.lex_hebrew_viewer = xml_get_value("lexicons", "hebrewviewer");
 	settings.DefaultDict = xml_get_value("lexicons", "defaultdictionary");
+	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
+	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
+	settings.useDefaultDict = atoi(xml_get_value("lexicons", "usedefaultdict"));
+	
 	
 	settings.currentverse = xml_get_value("keys", "verse");
 	settings.dictkey = xml_get_value("keys", "dictionary");
 	settings.book_key = xml_get_value("keys", "book");
-	
-	settings.studypadfilename = xml_get_value("studypad", "lastfile");
-	settings.studypaddir = xml_get_value("studypad", "directory");
 	
 	
 	settings.shortcutbar_width = atoi(xml_get_value("layout", "shortcutbar"));
@@ -456,8 +457,9 @@ int load_settings_structure(void)
 	settings.biblepane_width = atoi(xml_get_value("layout", "textpane"));
 	settings.upperpane_hight = atoi(xml_get_value("layout", "uperpane"));
 	
-	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
+	
 	settings.verse_num_font_size = xml_get_value("fontsize", "versenum");
+	
 	
 	settings.bible_text_color = xml_get_value("HTMLcolors", "text");
 	settings.bible_bg_color = xml_get_value("HTMLcolors", "background");
@@ -466,13 +468,35 @@ int load_settings_structure(void)
 	settings.bible_verse_num_color = xml_get_value("HTMLcolors", "versenum");
 	settings.found_color = xml_get_value("HTMLcolors", "found");
 	
-	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
+	
 	settings.strongsint = atoi(xml_get_value("interlinear", "strongs"));
 	settings.morphsint = atoi(xml_get_value("interlinear", "morphs"));
 	settings.hebrewpointsint = atoi(xml_get_value("interlinear", "points"));
 	settings.cantillationmarksint = atoi(xml_get_value("interlinear", "cantillation"));
 	settings.footnotesint = atoi(xml_get_value("interlinear", "footnotes"));
+	settings.interlinearpage = atoi(xml_get_value("interlinear", "interlinear"));
+	
+	
+	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
+	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
+	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));	
+	settings.showsplash = atoi(xml_get_value("misc", "splash"));
+	settings.showdevotional = atoi(xml_get_value("misc", "dailydevotional"));
 	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
+	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
+	
+	
+	settings.use_studypad = atoi(xml_get_value("editor", "UseStudyPad"));
+	settings.use_studypad_dialog = atoi(xml_get_value("editor", "UseStudypadDialog"));
+	settings.use_percomm_dialog = atoi(xml_get_value("editor", "UsePercommDialog"));
+		
+	
+	settings.studypadfilename = xml_get_value("studypad", "lastfile");
+	settings.studypaddir = xml_get_value("studypad", "directory");
+	settings.show_style_bar_sp = atoi(xml_get_value("studypad", "stylebar"));
+	settings.show_edit_bar_sp = atoi(xml_get_value("studypad", "editbar"));
+	
+	
 	settings.showshortcutbar = atoi(xml_get_value("shortcutbar", "shortcutbar"));
 	settings.showfavoritesgroup = atoi(xml_get_value("shortcutbar", "favo"));
 	settings.showtextgroup = atoi(xml_get_value("shortcutbar", "text"));
@@ -481,28 +505,16 @@ int load_settings_structure(void)
 	settings.showbookgroup = atoi(xml_get_value("shortcutbar", "book"));
 	settings.showbookmarksgroup = atoi(xml_get_value("shortcutbar", "bookmark"));
 	settings.showhistorygroup = atoi(xml_get_value("shortcutbar", "history"));
+	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
 	
-	settings.showsplash = atoi(xml_get_value("misc", "splash"));
-	settings.showdevotional = atoi(xml_get_value("misc", "dailydevotional"));
+	
 	settings.text_tabs = atoi(xml_get_value("tabs", "text"));
-	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));
-	
+	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));	
 	settings.dict_tabs = atoi(xml_get_value("tabs", "dict"));
 	settings.book_tabs = atoi(xml_get_value("tabs", "book"));
 	settings.percomm_tabs = atoi(xml_get_value("tabs", "percomm"));
-	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
-	settings.inDictpane = atoi(xml_get_value("lexicons", "indictpane"));
-	settings.useDefaultDict = atoi(xml_get_value("lexicons", "usedefaultdict"));
-	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
-	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
-	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
-	settings.use_studypad = atoi(xml_get_value("editor", "UseStudyPad"));
-	settings.show_style_bar_sp = atoi(xml_get_value("studypad", "stylebar"));
-	settings.show_edit_bar_sp = atoi(xml_get_value("studypad", "editbar"));
-	settings.use_studypad_dialog = atoi(xml_get_value("editor", "UseStudypadDialog"));
-	settings.use_percomm_dialog = atoi(xml_get_value("editor", "UsePercommDialog"));
-		
-	settings.interlinearpage = atoi(xml_get_value("interlinear", "interlinear"));
+	
+	
 	/*
 	settings. = xml_get_value("", "");
 	settings. = xml_get_value("", "");

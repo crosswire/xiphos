@@ -315,7 +315,7 @@ char *xml_get_value(char *section, char *item)
 			   (xmlChar *) section,
 			   (xmlChar *) item)) != NULL) {
 		results = xmlNodeListGetString(xml_settings_doc,cur->xmlChildrenNode,1);
-		g_warning("%s = %s", item, results);
+		//g_warning("%s = %s", item, results);
 		if(results)
 			return results;
 	}
@@ -348,9 +348,7 @@ void xml_set_value(char *type_doc, char *section, char *item,
 			   (xmlChar *) section,
 			   (xmlChar *) item)) != NULL) {
 		xmlNodeSetContent(cur,value);
-		g_warning("setting %s to %s",cur->name,value);
-		/*xmlSetProp(cur, (const xmlChar *) "value",
-			   (const xmlChar *) value);*/
+		//g_warning("setting %s to %s",cur->name,value);
 	}
 }
 

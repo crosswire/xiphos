@@ -35,6 +35,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/key.h"
+#include "main/xml.h"
 
 NAV_BAR nav_bar;
 static GtkWidget * cbe_book;
@@ -71,8 +72,9 @@ gchar *gui_update_nav_controls(gchar * key)
 	/* 
 	 *  remember last verse 
 	 */
-	settings.currentverse = val_key;
-	xml_set_value("GnomeSword", "key", "verse", val_key);
+	xml_set_value("GnomeSword", "keys", "verse", val_key);
+	settings.currentverse = xml_get_value("keys","verse");
+	//g_warning("cv = %s\nval_key = %s",settings.currentverse,val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries
 	 *  to new verse - settings.apply_change is set to false so we don't
@@ -334,7 +336,8 @@ GtkWidget *gui_create_nav_toolbar(void)
 	gtk_widget_show(cbBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
 				  NULL);
-
+	gtk_widget_set_usize (cbBook, 130, -2);
+	
 	/*
 	 * get and load books of the Bible 
 	 */
@@ -370,6 +373,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 				  NULL);
 	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup),
 			   _("Romans 8:28"));
+	gtk_widget_set_usize (cbe_freeform_lookup, 150, -2);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(widgets.app,

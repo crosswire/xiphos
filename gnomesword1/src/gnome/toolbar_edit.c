@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * toolbar_edit.c - style toolbar for editors
  *               
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 /* 
- * most of this code is from the GtkHTML library.
+ * this code originally came from the GtkHTML library.
  */
 #include <config.h>
 #include <gnome.h>
@@ -39,6 +39,7 @@
 #include "gui/percomm.h"
 #include "gui/fileselection.h"
 #include "gui/editor_menu.h"
+#include "gui/find_dialog.h"
 
 #include "main/settings.h"
 #include "main/percomm.h"
@@ -352,7 +353,9 @@ static void on_btn_undo_clicked(GtkButton * button,
 static void on_btn_Find_clicked(GtkButton * button,
 				GSHTMLEditorControlData * ecd)
 {
-	search(ecd, FALSE, NULL);
+	gui_find_dlg(ecd->htmlwidget, ecd->filename,
+		  FALSE, NULL);
+	//search(ecd, FALSE, NULL);
 }
 
 

@@ -29,7 +29,6 @@
 #include "main/settings.h"
 #include "main/sword.h"
 
-#include "backend/percomm_.h"
 #include "backend/sword.h"
 
 /******************************************************************************
@@ -165,9 +164,9 @@ void set_percomm_key(char * key)
  *   void
  */ 
 
-void change_percomm_module(char * mod_name)
+void change_percomm_module(char * module_name)
 {
-	backend_change_percomm_module(mod_name);
+	backend_set_module(7, module_name);//backend_set_percomm_module(mod_name);
 }
 
 /******************************************************************************

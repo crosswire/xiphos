@@ -43,8 +43,6 @@
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
-#include "backend/bookmarks.h"
-#include "backend/percomm_.h"
 
 using namespace sword;
 
@@ -85,9 +83,9 @@ void backend_init(void)
 	
 	/*
 	 *   setup Personal Comments
-	 */	
+	 	
 	if(settings.havepercomm)
-		backend_setup_percomm();
+		backend_setup_percomm();*/
 }
 
 
@@ -110,8 +108,7 @@ void backend_init(void)
 
 void backend_shutdown(int save_properties)
 {
-	backend_shutdown_treekey();	
-	backend_shutdown_percomm();
+	backend_shutdown_treekey();
 	
 	/*
 	 * delete Sword managers

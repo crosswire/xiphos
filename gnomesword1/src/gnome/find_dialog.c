@@ -94,7 +94,7 @@ static void dialog_destroy(GtkObject * object, gpointer data)
 
 static void find_clicked(GtkButton * button, FIND_DIALOG * d)
 {
-	char *text;
+	gchar *text;
 	GtkHTML *html;
 
 	html = GTK_HTML(d->htmlwidget);
@@ -234,7 +234,7 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->backward, FALSE,
 			   FALSE, 0);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (dialog->backward), TRUE);
+				     (dialog->backward), FALSE);
 
 	dialog->regex =
 	    gtk_check_button_new_with_label(_("Regular Expresion"));
