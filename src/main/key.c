@@ -22,12 +22,18 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#ifdef USE_GNOME2
+#include <glib-2.0/glib.h>
+#else
+#include <glib-1.2/glib.h>
+#endif
 
 
 
 #include "backend/key.hh"
 
 #include "main/key.h"
+#include "main/sword.h"
 
 /******************************************************************************
  * Name
@@ -257,7 +263,26 @@ int start_parse_range_list(const char * list)
 
 char *get_valid_key(const char *key)
 {
-	return backend_get_valid_key(key); 
+	gchar *buf;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	buf = g_convert((char *) backend_get_valid_key(mykey),
+			     -1,
+			     UTF_8,
+			     OLD_CODESET,
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	g_free(mykey);	
+	return  buf;
 }
 
 
@@ -277,9 +302,30 @@ char *get_valid_key(const char *key)
  *   const char *
  */ 
 
-const char *get_book_from_key(const char *key)
+char *get_book_from_key(const char *key)
 {
-	return backend_get_book_from_key(key);
+	gchar *buf;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	buf = 
+		g_convert((char *) backend_get_book_from_key(mykey),
+			     -1,
+			     UTF_8,
+			     OLD_CODESET,
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	g_free(mykey);
+	
+	return buf;
 }
 
 
@@ -301,7 +347,20 @@ const char *get_book_from_key(const char *key)
 
 int get_chapter_from_key(const char *key)
 {
-	return backend_get_chapter_from_key(key);
+	gint retval = 0;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     "iso8859-1",
+			     "UTF-8",
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	retval = backend_get_chapter_from_key(mykey);
+	g_free(mykey);
+	return retval;
 }
 
 
@@ -323,7 +382,20 @@ int get_chapter_from_key(const char *key)
 
 int get_verse_from_key(const char *key)
 {
-	return backend_get_verse_from_key(key);
+	gint retval = 0;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     "iso8859-1",
+			     "UTF-8",
+			     &bytes_read,
+			     &bytes_written,
+			     error);
+	retval = backend_get_verse_from_key(mykey);
+	g_free(mykey);
+	return retval;
 }
 
 

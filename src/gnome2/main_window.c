@@ -394,8 +394,8 @@ void gui_change_verse(const gchar * key)
 	gchar *val_key;
 
 	settings.apply_change = FALSE;
+	//g_warning(key);
 	val_key = gui_update_nav_controls(key);
-
 	if (settings.havebible) {
 		/* add item to history */
 		if (settings.addhistoryitem) {

@@ -818,8 +818,7 @@ static gboolean button_press_event(GtkWidget * widget,
 			}
 			break;
 		
-	}
-	
+	}	
 	
 	if (is_selected) {
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),

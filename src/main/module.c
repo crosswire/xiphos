@@ -36,6 +36,7 @@
 
 #include "main/module.h"
 #include "main/settings.h"
+#include "main/sword.h"
 #include "main/xml.h"
 
 #include "backend/module.hh"
@@ -406,7 +407,20 @@ const char *get_module_language(const char *module_name)
  
 char *get_module_text(int manager, char * mod_name, char * key)
 {
-	backend_get_module_text(manager, mod_name, key);	
+	gchar *retval = NULL;
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error;	
+	char *mykey = g_convert(key,
+			     -1,
+			     OLD_CODESET,
+			     UTF_8,
+			     &bytes_read,
+			     &bytes_written,
+			     error);	 
+	retval = backend_get_module_text(manager, mod_name, mykey); 
+	g_free(mykey);
+	return retval;	
 }
 
 /******************************************************************************

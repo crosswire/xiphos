@@ -355,7 +355,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	GString *str;
 	gint cur_verse, cur_chapter, i = 1;
 	gint x = 0;
-	const char *cur_book;
+	gchar *cur_book;
 	MOD_FONT *mf;
 
 	GtkHTML *html = GTK_HTML(html_widget);
@@ -374,6 +374,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	cur_verse = get_verse_from_key(tmpkey);
 	cur_chapter = get_chapter_from_key(tmpkey);
 	cur_book = get_book_from_key(tmpkey);
+	//g_warning("%s %d:%d", cur_book,cur_chapter,cur_verse);
 
 
 
@@ -514,6 +515,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		g_free(use_font);
 	free_font(mf);
 	g_free(tmpkey);
+	g_free(cur_book);
 }
 
 
@@ -539,7 +541,7 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 			     TEXT_GLOBALS * tgs, gchar * key,
 			     gboolean use_globals)
 {
-	const gchar *cur_book;
+	gchar *cur_book;
 	const gchar *mark_name = "CurrentVerse";
 	gchar *tmpkey;
 	gchar *text_str;
@@ -646,6 +648,7 @@ void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
 				0.0);
 	gtk_text_buffer_delete_mark(buffer,mark);
 	g_free(tmpkey);	
+	g_free(cur_book);
 }
 
 /*

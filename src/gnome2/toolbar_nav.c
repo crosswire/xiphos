@@ -69,6 +69,7 @@ gchar *gui_update_nav_controls(const gchar * key)
 
 	settings.apply_change = FALSE;
 	val_key = get_valid_key(key);
+	//g_warning(val_key);
 	//g_warning("key = %s val_key = %s",key,val_key);
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
@@ -122,7 +123,8 @@ static void on_cbeBook_changed(GtkEditable * editable,
 		//g_warning(bookname);
 		if (*bookname) {
 			sprintf(buf, "%s 1:1", bookname);
-			/* g_warning(bookname); */
+			//g_warning(bookname);
+			//g_warning(buf);
 			gui_change_verse(buf);
 		}
 	}
