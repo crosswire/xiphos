@@ -35,6 +35,7 @@
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
 #include "gui/find_dialog.h"
+#include "gui/font_dialog.h"
 
 #include "main/sword.h"
 #include "main/settings.h"
@@ -467,6 +468,31 @@ static void on_unlock_key_activate(GtkMenuItem * menuitem, DL_DATA * d)
 	//gui_add_cipher_key(d->mod_name);
 }
 
+	
+/******************************************************************************
+ * Name
+ *  set_module_font_activate
+ *
+ * Synopsis
+ *   #include "dictlex.h"
+ *
+ *   void set_module_font_activate(GtkMenuItem * menuitem, 
+						DL_DATA * d)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void set_module_font_activate(GtkMenuItem * menuitem, 
+						DL_DATA * d)
+{
+	gui_set_module_font(d->mod_name);
+}
+
+
 /******************************************************************************
  * Name
  *   gui_create_dictlex_pm
@@ -497,6 +523,9 @@ static GtkWidget *create_dictlex_pm(DL_DATA * dl)
 	GtkWidget *find;
 	GList *tmp;
 	gint i;
+	GtkWidget *set_font; 
+	GtkTooltips *tooltips;  
+	tooltips = gtk_tooltips_new();
 
 	tmp = NULL;
 
@@ -566,6 +595,24 @@ static GtkWidget *create_dictlex_pm(DL_DATA * dl)
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(view), view_menu);
 	view_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_menu));
+	
+  	separator = gtk_menu_item_new ();
+  	gtk_widget_ref (separator);
+  	gtk_object_set_data_full (GTK_OBJECT (pm), "separator", separator,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator);
+  	gtk_container_add (GTK_CONTAINER (pm), separator);
+  	gtk_widget_set_sensitive (separator, FALSE);
+	
+	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
+	gtk_widget_ref(set_font);
+	gtk_object_set_data_full(GTK_OBJECT(pm), "set_font",
+				 set_font,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(set_font);
+	gtk_container_add(GTK_CONTAINER(pm), set_font);
+	gtk_tooltips_set_tip(tooltips, set_font, _("Set font for this module"),
+			     NULL);
 
 	/* if module has cipher key include this item */
 	if(dl->has_key) {
@@ -621,6 +668,12 @@ static GtkWidget *create_dictlex_pm(DL_DATA * dl)
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC(on_view_new_activate),
 			   dl);
+			
+	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+			   GTK_SIGNAL_FUNC(set_module_font_activate), 
+			dl);
+	gtk_object_set_data(GTK_OBJECT(pm), "tooltips", tooltips);
+
 	return pm;
 }
 
@@ -672,6 +725,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		return TRUE;
 		break;
 	default:
+		break;
 	}
 
 	return FALSE;

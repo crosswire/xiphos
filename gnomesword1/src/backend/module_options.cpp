@@ -27,13 +27,10 @@
 #include <swconfig.h>
 
 #include "backend/module_options.h"
-//#include "main/settings.h"
 
 using namespace sword;
 
-/******************************************************************************
- * load module option - using sword SWConfig
- ******************************************************************************/
+
 int backend_load_module_options(char * modName, char * option, 
 						char * dir)
 {
@@ -51,9 +48,7 @@ int backend_load_module_options(char * modName, char * option,
 	return retval;
 }
 
-/******************************************************************************
- * save module option - using sword SWConfig
- ******************************************************************************/
+
 int backend_save_module_options(char * modName, char * option, 
 				char * value, char * dir)
 {

@@ -44,11 +44,26 @@ extern "C" {
 
 /*** end defs ***/
 
+//#include "gui/font_dialog.h"
+
+typedef struct _mod_font MOD_FONT;
+struct  _mod_font {
+	gchar *mod_name;
+	gchar *old_font;
+	gchar *old_gdk_font;
+	gchar *new_font;
+	gchar *new_gdk_font;
+	gchar *old_font_size;
+	gchar *new_font_size;
+	gint no_font;
+};
 
 /*** function prototypes ***/
 
 int get_mod_type(char * mod_name);
 char *get_module_font_name(char *mod_name);
+void get_font_info(MOD_FONT *mf);
+void save_font_info(MOD_FONT *mf);
 char *get_module_font_size(char *mod_name);
 void module_name_from_description(char *mod_name, char *description);
 void save_module_key(char * mod_name, char * key);

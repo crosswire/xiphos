@@ -442,7 +442,7 @@ static void on_int_global_options_activate(GtkMenuItem * menuitem,
 
 void gui_update_interlinear_page(void)
 {
-	gchar tmpBuf[256], *rowcolor, *font_size;
+	gchar tmpBuf[256], *rowcolor, *font_size = NULL;
 	gchar *utf8str,*mod_name, *font_name = NULL;
 	gint utf8len, i, j;
 	gboolean was_editable, use_gtkhtml_font;
@@ -509,12 +509,25 @@ void gui_update_interlinear_page(void)
 
 			++j;
 			
-			if((font_name = get_module_font_name(mod_name)) != NULL)
-				use_gtkhtml_font = FALSE;
-			else
-				use_gtkhtml_font = TRUE;
+			font_name = get_module_font_name(mod_name); 
+			if(strlen(font_name) < 2) {
+					use_gtkhtml_font = TRUE;
+					g_warning("use_gtkhtml_font = TRUE");
+			}
+			else {
+				if(!strncmp(font_name,"none",4)) {
+					use_gtkhtml_font = TRUE;
+					g_warning("use_gtkhtml_font = TRUE");
+				}
+				else {
+					use_gtkhtml_font = FALSE;
+					g_warning("use_gtkhtml_font = FALSE");
+				}
+			}
 			
-			font_size = settings.interlinear_font_size; 
+			font_size = get_module_font_size(mod_name);  
+			if(strlen(font_size) < 2)	
+				font_size = g_strdup("+1");
 			
 			if (j == 0 || j == 2 || j == 4)
 				rowcolor = "#F1F1F1";
@@ -591,6 +604,8 @@ void gui_update_interlinear_page(void)
 	gtk_frame_set_label(GTK_FRAME(widgets.frame_interlinear), settings.currentverse);
 	if(font_name)
 		free(font_name);
+	if(font_size)
+		free(font_size);
 }
 
 
@@ -697,7 +712,10 @@ static void int_display(gchar *key)
 				break;
 			}
 			
-			use_font_size = settings.interlinear_font_size;
+			use_font_size = get_module_font_size(mod_name);  
+			if(strlen(use_font_size) < 2)	
+				use_font_size = g_strdup("+1");
+			//use_font_size = "+1"; //settings.interlinear_font_size;
 							
 			sprintf(buf,
 				"<td width=\"20%%\" bgcolor=\"%s\">"
@@ -732,6 +750,8 @@ static void int_display(gchar *key)
 			if (utf8len) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 			}
+			if(use_font_size)
+				free(use_font_size);
 		}
 				
 		sprintf(buf,"%s","</tr>");		
