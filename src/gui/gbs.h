@@ -65,6 +65,8 @@ struct _nodedata {
 };
 
 GBS_DATA *get_gbs(GList * gbs);
+void gui_update_gbs_display(GBS_DATA * g);
+void gui_update_gbs_global_ops(gchar * option, gboolean choice);
 void gui_set_book_page_and_key(gint page_num, gchar * key);
 void gui_set_gbs_frame_label(void);
 void on_notebook_gbs_switch_page(GtkNotebook *notebook, 

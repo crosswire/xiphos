@@ -151,7 +151,8 @@ module.include.files=\
 	src/gui/session.h\
 	src/main/mod_mgr.h\
 	src/backend/module_manager.hh\
-	src/gui/mod_mgr.h
+	src/gui/mod_mgr.h\
+	src/gui/mod_global_ops.h
 
 module.source.name=.
 module.source.type=
@@ -235,7 +236,8 @@ module.source.files=\
 	src/gnome2/session.c\
 	src/main/mod_mgr.c\
 	src/backend/module_manager.cc\
-	src/gnome2/mod_mgr.c
+	src/gnome2/mod_mgr.c\
+	src/gnome2/mod_global_ops.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
