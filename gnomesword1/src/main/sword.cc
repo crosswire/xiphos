@@ -35,49 +35,6 @@
 #include <nsIDOMMouseEvent.h>
 #include <dom/nsIDOMKeyEvent.h>
 #endif
-/*#include <nsCOMPtr.h>
-#include <nsIDOMDocument.h>
-#include <content/nsIDocumentViewer.h>
-#include <content/nsIContent.h>
-#include <nsIWebBrowser.h>
-#include <content/nsIDocument.h>
-#include <nsIDOMMouseEvent.h>
-#include <dom/nsIDOMKeyEvent.h>
-#include <nsIDOMEventTarget.h>
-#include <dom/nsIDOMNSHTMLElement.h>  
-#include <nsIDOMHTMLElement.h>  
-#include <nsIDOMHTMLTextAreaElement.h>  
-#include <nsIDOMNamedNodeMap.h>
-#include <webbrowserpersist/nsIWebBrowserPersist.h>
-#include <necko/nsNetUtil.h>
-#include <nsIWebBrowserFind.h>
-#include <dom/nsIDOMNSDocument.h>
-#include <dom/nsIDOMNSEvent.h>
-#include <docshell/nsIDocShell.h>
-#include <docshell/nsIDocShellTreeItem.h>
-#include <docshell/nsIDocShellTreeOwner.h>
-#include <nsIDOMNodeList.h>
-#include <nsIDOMWindow.h>
-#include <nsISelection.h>
-#include <nsIDOMRange.h>
-#include <nsIWebBrowserFind.h>
-#include <necko/nsNetUtil.h>
-#include <uconv/nsICharsetConverterManager.h>
-#if MOZILLA_SNAPSHOT < 10
-#	include <uconv/nsICharsetConverterManager2.h>
-#endif
-#include <nsIDOMWindow.h>
-#include <nsISelection.h>
-#include <nsISHistory.h>
-#include <nsIHistoryEntry.h>
-#include <nsISHEntry.h>
-#include <nsIWebNavigation.h>
-#include <nsCWebBrowserPersist.h>
-#include <widget/nsIBaseWindow.h>
-#include <nsIWebPageDescriptor.h>
-#include <nsIPresContext.h>
-#include <nsIEventStateManager.h>
-*/
 
 #ifdef __cplusplus
 extern "C" {
@@ -103,9 +60,10 @@ extern "C" {
 #include "gui/html.h"
 
 #include "main/display.hh"
-#include "main/sword.h"
-#include "main/settings.h"
 #include "main/lists.h"
+#include "main/navbar.h"
+#include "main/settings.h"
+#include "main/sword.h"
 #include "main/xml.h"
  
 #include "main/parallel_view.h"
@@ -189,33 +147,16 @@ void main_save_module_key(char * mod_name, char * key)
 
 gchar *main_update_nav_controls(const gchar * key)
 {
-	gint cur_chapter = 8, cur_verse = 28;
 	char *val_key = backend->get_valid_key(key);
-	cur_chapter = backend->key_get_chapter(val_key);
-	cur_verse = backend->key_get_verse(val_key);
-	//sword::VerseKey key( val_key );
-	/*g_message("module has vese = %d",backend->module_has_testament(settings.MainWindowModule,
-		backend->get_key_testament(val_key)));*/
+	
 	/* 
-	 *  remember last verse 
+	 *  remember verse 
 	 */
 	xml_set_value("GnomeSword", "keys", "verse", val_key);
 	settings.currentverse = xml_get_value("keys", "verse");
-	/* 
-	 *  set book, chapter,verse and freeform lookup entries
-	 *  to new verse - settings.apply_change is set to false so we don't
-	 *  start a loop
-	 */
+	
 	settings.apply_change = FALSE;
-	gtk_entry_set_text(GTK_ENTRY(cbe_book),
-			   backend->key_get_book(val_key));
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (spb_chapter), cur_chapter);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (spb_verse), cur_verse);
-	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup), val_key);
-	if(settings.browsing)
-		gui_set_tab_label(val_key);
+	main_navbar_set(navbar_main, val_key);
 	settings.apply_change = TRUE;
 	return val_key;
 }
@@ -796,14 +737,14 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	GString *tmp_str = g_string_new(NULL);
 	GString *str;
 	GString *search_str;
-	gboolean was_editable = FALSE;
+	//gboolean was_editable = FALSE;
 	MOD_FONT *mf = get_font(mod_name);
 	GtkHTML *html = GTK_HTML(sidebar.html_viewer_widget);
 
 	/* setup gtkhtml widget */
-	was_editable = gtk_html_get_editable(html);
-	if (was_editable)
-		gtk_html_set_editable(html, FALSE);
+	//was_editable = gtk_html_get_editable(html);
+	//if (was_editable)
+	//	gtk_html_set_editable(html, FALSE);
 
 	g_string_printf(tmp_str,
 		HTML_START
@@ -870,7 +811,7 @@ void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
 	if (str->len) {
 		gtk_html_load_from_string(html,str->str,str->len);
 	}
-	gtk_html_set_editable(html, was_editable);
+	//gtk_html_set_editable(html, was_editable);
 	
 	free_font(mf);
 	g_string_free(str, TRUE);
@@ -1065,7 +1006,7 @@ void main_display_book(const char * mod_name, char * key)
 	//settings.comm_showing = FALSE;
 	settings.whichwindow = BOOK_WINDOW;
 //	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-	gui_change_window_title(settings.book_mod);
+	//gui_change_window_title(settings.book_mod);
 	
 	xml_set_value("GnomeSword", "keys", "offset", key);
 	settings.book_offset = atol(xml_get_value( "keys", "offset"));
@@ -1098,10 +1039,10 @@ void main_display_commentary(const char * mod_name, const char * key)
 	if(!settings.CommWindowModule)
 		settings.CommWindowModule = (char*)mod_name;
 	
-	//settings.comm_showing = TRUE;
+	settings.comm_showing = TRUE;
 	settings.whichwindow = COMMENTARY_WINDOW;
 //	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-	gui_change_window_title(settings.CommWindowModule);
+	//gui_change_window_title(settings.CommWindowModule);
 	
 	if(strcmp(settings.CommWindowModule,mod_name)) {
 		xml_set_value("GnomeSword", "modules", "comm", mod_name);

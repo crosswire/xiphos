@@ -145,14 +145,10 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	/*
 	 * set program title to current text module name
 	 */
-	if(settings.comm_showing) {
-		settings.whichwindow = COMMENTARY_WINDOW;
-		gui_change_window_title(settings.CommWindowModule);
-	}
-	else {
-		settings.whichwindow = BOOK_WINDOW;
-		gui_change_window_title(settings.book_mod);
-	}
+
+	settings.whichwindow = COMMENTARY_WINDOW;
+	//gui_change_window_title(settings.CommWindowModule);
+	
 	
 	switch (event->button) {
 	case 1:
@@ -203,8 +199,8 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 				      gpointer user_data)
 {
 	//shift_key_presed = FALSE;
-	gtk_widget_grab_focus (widgets.html_comm);
-	settings.whichwindow = COMMENTARY_WINDOW;
+	//gtk_widget_grab_focus (widgets.html_comm);
+	//settings.whichwindow = COMMENTARY_WINDOW;
 	//gui_change_window_title(settings.CommWindowModule);
   	return FALSE;
 }
@@ -311,8 +307,7 @@ GtkWidget *gui_create_commentary_pane(void)
 
 static void on_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_display_about_module_dialog((settings.comm_showing)?
-			settings.CommWindowModule:settings.book_mod, FALSE);
+	gui_display_about_module_dialog(settings.CommWindowModule, FALSE);
 }
 
 
@@ -340,8 +335,8 @@ static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_find_dlg(widgets.html_comm, (settings.comm_showing)?
-			settings.CommWindowModule:settings.book_mod, FALSE, NULL);
+	gui_find_dlg(widgets.html_comm, settings.CommWindowModule, 
+				FALSE, NULL);
 }
 
 
@@ -354,8 +349,7 @@ static void on_item2_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void
 on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_set_module_font((settings.comm_showing)?
-			settings.CommWindowModule:settings.book_mod);
+	gui_set_module_font(settings.CommWindowModule);
 }
 
 

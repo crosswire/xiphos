@@ -230,7 +230,8 @@ module.source.files=\
 	src/backend/gs_osishtmlhref.cpp\
 	src/main/configs.cc\
 	src/main/mod_mgr.cc\
-	src/gnome2/sidebar_dialog.c
+	src/gnome2/sidebar_dialog.c\
+	src/main/navbar.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -277,7 +277,7 @@ on_enter_notify_event        (GtkWidget       *widget,
                                         gpointer         user_data)
 {
 	shift_key_presed = FALSE;
-	gtk_widget_grab_focus (widgets.html_text);
+	//gtk_widget_grab_focus (widgets.html_text);
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	gui_change_window_title(settings.MainWindowModule);
   	return FALSE;
