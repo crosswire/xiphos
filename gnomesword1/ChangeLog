@@ -1,3 +1,12 @@
+2003-11-23  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev14
+	* changed 4 clists to listviews in gnome2/search_dialog.c
+	* worked on bug 842524 - needs testing
+	* added a button to toggle between text and parallel view.
+	* added a button to toggle between book and dict/lex view.
+
+
 2003-11-20  Terry <tbiggs@users.sf.net>
 
 	* fixed bug 845752

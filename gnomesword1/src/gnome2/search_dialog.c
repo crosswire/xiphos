@@ -60,7 +60,7 @@ struct _search_dialog {
 	GtkWidget *combo_list;
 	GtkWidget *combo_entry_list;
 	GtkWidget *module_lists;
-	GtkWidget *clist_modules;
+	GtkWidget *listview_modules;
 	GtkWidget *entry_list_name;
 	GtkWidget *rb_current_module;
 	GtkWidget *label_mod_select;
@@ -73,8 +73,8 @@ struct _search_dialog {
 	GtkToggleButton *which_scope;
 	GtkWidget *combo_range;
 	GtkWidget *combo_entry_range;
-	GtkWidget *clist_range;
-	GtkWidget *clist_ranges;
+	GtkWidget *list_range_name;
+	GtkWidget *list_ranges;
 	GtkWidget *entry_range_name;
 	GtkWidget *entry_range_text;
 	GtkWidget *results_html;
@@ -180,12 +180,18 @@ static void add_to_found_list(gchar * result_text, gchar * module)
 static GList *get_current_list(void)
 {
 	GList *items = NULL;
-	gchar *text;
+	gchar *buf;
 	gint i = 0;
-
-	while (gtk_clist_get_text((GtkCList *) search.clist_modules,
-				  i++, 1, &text)) {
-		items = g_list_append(items, (gchar *) g_strdup(text));
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+	if(gtk_tree_model_get_iter_first(model, &iter)) {
+		do{
+			gtk_tree_model_get(model, &iter, 1, &buf, -1);
+			items = g_list_append(items, (gchar *) g_strdup(buf));
+			
+		}while(gtk_tree_model_iter_next(model, &iter));
 	}
 	return items;
 }
@@ -449,16 +455,26 @@ static void add_ranges(void)
 {
 	GList *items = NULL;
 	gchar *buf[2];
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
 
-	gtk_clist_clear(GTK_CLIST(search.clist_range));
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	
+	gtk_list_store_clear(list_store);
 
 	if (xml_set_section_ptr("ranges")) {
 		if (xml_get_label()) {
 			buf[0] = xml_get_label();
 			buf[1] = xml_get_list();
-			search.range_rows =
-			    gtk_clist_append(GTK_CLIST
-					     (search.clist_range), buf);
+
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 
+						0, buf[0], 
+						1, buf[1],
+						-1);
 			items = g_list_append(items, g_strdup(buf[0]));
 			g_free(buf[0]);
 			g_free(buf[1]);
@@ -468,11 +484,12 @@ static void add_ranges(void)
 			if (xml_get_label()) {
 				buf[0] = xml_get_label();
 				buf[1] = xml_get_list();
-				search.range_rows =
-				    gtk_clist_append(GTK_CLIST
-						     (search.
-						      clist_range),
-						     buf);
+
+				gtk_list_store_append(list_store, &iter);
+				gtk_list_store_set(list_store, &iter, 
+							0, buf[0], 
+							1, buf[1],
+							-1);
 				items =
 				    g_list_append(items,
 						  g_strdup(buf[0]));
@@ -503,7 +520,7 @@ static void add_ranges(void)
  *   void add_modlist(void)
  *
  * Description
- *   
+ *   add custom module lists at search dialog start and afer save
  *
  * Return value
  *   void
@@ -513,17 +530,26 @@ static void add_modlist(void)
 {
 	GList *items = NULL;
 	gchar *buf[2];
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;	
 
-	gtk_clist_clear(GTK_CLIST(search.module_lists));
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store = GTK_LIST_STORE(model);
+	
+	gtk_list_store_clear(list_store);
 
 	if (xml_set_section_ptr("modlists")) {
 		if (xml_get_label()) {
 			buf[0] = xml_get_label();
 			buf[1] = xml_get_list();
-			search.list_rows =
-			    gtk_clist_append(GTK_CLIST
-					     (search.module_lists),
-					     buf);
+
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 
+						0, buf[0], 
+						1, buf[1],
+						-1);
 			items = g_list_append(items, g_strdup(buf[0]));
 			g_free(buf[0]);
 			g_free(buf[1]);
@@ -533,11 +559,12 @@ static void add_modlist(void)
 			if (xml_get_label()) {
 				buf[0] = xml_get_label();
 				buf[1] = xml_get_list();
-				search.list_rows =
-				    gtk_clist_append(GTK_CLIST
-						     (search.
-						      module_lists),
-						     buf);
+
+				gtk_list_store_append(list_store, &iter);
+				gtk_list_store_set(list_store, &iter, 
+							0, buf[0], 
+							1, buf[1],
+							-1);
 				items =
 				    g_list_append(items,
 						  g_strdup(buf[0]));
@@ -769,6 +796,7 @@ static void on_button_begin_search(GtkButton * button,
 	check_search_global_options();
 	
 	search_mods = g_list_first(search_mods);
+	//g_warning((gchar *) search_mods->data);
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
 
@@ -1025,116 +1053,6 @@ static void report_link_clicked(GtkHTML * html, const gchar * url,
 
 /******************************************************************************
  * Name
- *   custom_range_select_row
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void custom_range_select_row(GtkCList * clist, gint row,
- *				    gint column, GdkEvent * event,
- *				    gpointer user_data)
- *
- * Description
- *   row selection in the clist_range has changed
- *   range name entry and range entry are updated
- *
- * Return value
- *   void
- */
-
-static void custom_range_select_row(GtkCList * clist, gint row,
-				    gint column, GdkEvent * event,
-				    gpointer user_data)
-{
-	gchar *text, *range;
-
-	search.custom_range_row = row;
-	gtk_clist_get_text(clist, row, 0, &text);
-	gtk_clist_get_text(clist, row, 1, &range);
-	gtk_entry_set_text(GTK_ENTRY(search.entry_range_name), text);
-	gtk_entry_set_text(GTK_ENTRY(search.entry_range_text), range);
-}
-
-
-/******************************************************************************
- * Name
- *   custom_list_select_row
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void custom_list_select_row(GtkCList * clist, gint row,
- *				    gint column, GdkEvent * event,
- *				    gpointer user_data)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void custom_list_select_row(GtkCList * clist, gint row,
-				   gint column, GdkEvent * event,
-				   gpointer user_data)
-{
-	gchar *name, *modules, *module[2];
-	GList *tmp = NULL;
-
-	search.custom_list_row = row;
-	gtk_clist_get_text(clist, row, 0, &name);
-	gtk_clist_get_text(clist, row, 1, &modules);
-	gtk_entry_set_text(GTK_ENTRY(search.entry_list_name), name);
-
-	gtk_clist_clear(GTK_CLIST(search.clist_modules));
-	tmp =
-	    get_custom_list_from_name(gtk_entry_get_text
-				      (GTK_ENTRY
-				       (search.entry_list_name)));
-
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		module[1] = (gchar *) tmp->data;
-		module[0] = get_module_description((gchar *) tmp->data);
-		gtk_clist_append(GTK_CLIST(search.clist_modules),
-				 module);
-		g_free((gchar *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	if (!GTK_TOGGLE_BUTTON(search.rb_current_module)->active)
-		add_modlist_to_label();
-}
-
-
-/******************************************************************************
- * Name
- *   modules_select_row
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   void modules_select_row(GtkCList * clist, gint row,
- *				    gint column, GdkEvent * event,
- *				    gpointer user_data)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void modules_select_row(GtkCList * clist, gint row,
-			       gint column, GdkEvent * event,
-			       gpointer user_data)
-{
-	search.modules_row = row;
-}
-
-
-/******************************************************************************
- * Name
  *   list_name_changed
  *
  * Synopsis
@@ -1155,10 +1073,23 @@ static void list_name_changed(GtkEditable * editable,
 			      gpointer user_data)
 {
 	const gchar *text;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.module_lists));
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
 
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
-	gtk_clist_set_text((GtkCList *) search.module_lists,
-			   search.custom_list_row, 0, text);
+	gtk_list_store_set(list_store, &selected,   0, text, 
+						-1);
 }
 
 
@@ -1184,10 +1115,27 @@ static void range_name_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
 	const gchar *text;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.list_range_name));
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
 
 	text = gtk_entry_get_text(GTK_ENTRY(editable));
-	gtk_clist_set_text((GtkCList *) search.clist_range,
+	gtk_list_store_set(list_store, &selected,   0, text, 
+						-1);
+/*
+	gtk_clist_set_text((GtkCList *) search.list_range_name,
 			   search.custom_range_row, 0, text);
+	*/
 }
 
 
@@ -1204,7 +1152,7 @@ static void range_name_changed(GtkEditable * editable,
  * Description
  *   text in the range text entry has changed
  *   text is sent to the backend to get the search range list
- *   then clist_ranges is updated to the range list
+ *   then list_ranges is updated to the range list
  *   and the range text in the clist_range is updated
  *
  * Return value
@@ -1218,8 +1166,27 @@ static void range_text_changed(GtkEditable * editable,
 	gchar *buf = NULL;
 	gint count;
 	gint i = 0;
-
-	gtk_clist_clear((GtkCList *) search.clist_ranges);
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeModel *model_list_ranges;
+	GtkListStore *store_list_ranges;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	
+	/*    */
+	model_list_ranges = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_ranges));
+	store_list_ranges = GTK_LIST_STORE(model_list_ranges);
+	/*    */
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.list_range_name));	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
+	gtk_list_store_clear(store_list_ranges);
+//	gtk_clist_clear((GtkCList *) search.list_ranges);
 	entry = gtk_entry_get_text(GTK_ENTRY(editable));
 	count = start_parse_verse_list(entry);
 
@@ -1227,12 +1194,16 @@ static void range_text_changed(GtkEditable * editable,
 		buf = get_next_verse_list_element(i++);
 		if (!buf)
 			break;
-		gtk_clist_append((GtkCList *) search.clist_ranges,
-				 &buf);
+		gtk_list_store_append(store_list_ranges, &iter);
+		gtk_list_store_set(store_list_ranges, &iter, 
+					0, buf, 
+					-1);
+		/*gtk_clist_append((GtkCList *) search.list_ranges,
+				 &buf);*/
 		g_free(buf);
 	}
-	gtk_clist_set_text((GtkCList *) search.clist_range,
-			   search.custom_range_row, 1, entry);
+	
+	gtk_list_store_set(list_store, &selected,   1, entry, -1);
 }
 
 
@@ -1255,19 +1226,42 @@ static void range_text_changed(GtkEditable * editable,
 static void new_modlist(GtkButton * button, gpointer user_data)
 {
 	gchar *text[2], buf[80];
+	GList *mods = NULL;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeModel *model2;
+	GtkListStore *list_store2;
+	GtkTreeIter iter;
+	GtkTreeSelection * selection;
+	GtkTreePath *path;
+	
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.module_lists));
 
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+	list_store = GTK_LIST_STORE(model);
+	
+	model2 = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store2 = GTK_LIST_STORE(model2);
+	
 	sprintf(buf, "New List%d", search.list_rows);
-	text[0] = buf;
-	text[1] = "";
 
 	search.module_count = 0;
-	gtk_clist_clear((GtkCList *) search.clist_modules);
-	search.custom_list_row = gtk_clist_append((GtkCList *) search.
-						  module_lists, text);
-	search.list_rows = search.custom_list_row;
-	gtk_entry_set_text(GTK_ENTRY(search.entry_list_name), text[0]);
-	gtk_clist_select_row((GtkCList *) search.module_lists,
-			     search.custom_list_row, 0);
+	gtk_list_store_clear(list_store);
+	
+	gtk_list_store_append(list_store2, &iter);
+	gtk_list_store_set(list_store2, &iter, 
+					0, buf, 
+					-1);
+	 path = gtk_tree_model_get_path(model2,&iter);				
+	 gtk_tree_selection_select_path(selection,
+                                             path);				
+	/*search.custom_list_row = gtk_clist_append((GtkCList *) search.
+						  module_lists, text);*/
+	//search.list_rows = search.custom_list_row;
+	gtk_entry_set_text(GTK_ENTRY(search.entry_list_name), buf);
+	 gtk_tree_path_free(path);
 }
 
 
@@ -1291,6 +1285,16 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 {
 	gint test;
 	GS_DIALOG *info;
+	GtkTreeModel *model;
+	GtkListStore *list_store;	
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
+	//GtkTreePath *path;
+	
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.module_lists));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+	list_store = GTK_LIST_STORE(model);
 
 	info = gui_new_dialog();
 	info->label_top =
@@ -1302,11 +1306,12 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 	if (test != GS_YES)
 		return;
 
-	gtk_clist_clear((GtkCList *) search.clist_modules);
-	gtk_clist_set_text((GtkCList *)
-				   search.
-				   module_lists,
-				   search.custom_list_row, 1, "");
+	gtk_list_store_clear(list_store);
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store = GTK_LIST_STORE(model);
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) 	
+		gtk_list_store_set(list_store, &selected, 1, "", -1);
 	g_free(info);
 }
 
@@ -1333,7 +1338,21 @@ static void delete_module(GtkButton * button, gpointer user_data)
 	GS_DIALOG *info;
 	GList *mods = NULL;
 	gchar *mod_list;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
 
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.listview_modules));
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
+	
 	info = gui_new_dialog();
 	info->label_top =
 	    N_("Do you really want to REMOVE\n the selected module?");
@@ -1342,19 +1361,25 @@ static void delete_module(GtkButton * button, gpointer user_data)
 
 	test = gui_gs_dialog(info);
 	if (test != GS_YES)
-		return;
-	gtk_clist_remove((GtkCList *) search.clist_modules,
-			 search.modules_row);
+		return; 
+	gtk_list_store_remove(list_store,&selected);
 
 	mods = get_current_list();
 	mod_list = get_modlist_string(mods);
-	if (mod_list) {
-		gtk_clist_set_text((GtkCList *)
-				   search.
-				   module_lists,
-				   search.custom_list_row, 1, mod_list);
-		g_free(mod_list);
-	}
+	
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.module_lists));
+	
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store = GTK_LIST_STORE(model);
+	
+	if (gtk_tree_selection_get_selected(selection, NULL, &selected)) 	
+		if (mod_list) {	
+			gtk_list_store_set(list_store, &selected, 1, mod_list, -1);
+			//g_warning(mod_list);
+			g_free(mod_list);
+		}
 	g_free(info);
 }
 
@@ -1378,17 +1403,27 @@ static void delete_module(GtkButton * button, gpointer user_data)
 static void save_modlist(GtkButton * button, gpointer user_data)
 {
 	gint i = 0;
-	gchar *text1;
-	gchar *text2;
+	gchar *text1 = NULL;
+	gchar *text2 = NULL;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
 	
-	for (i = 0; i < (search.list_rows + 1); i++) {
-
-		gtk_clist_get_text((GtkCList *) search.module_lists,
-				   i, 0, &text1);
-		gtk_clist_get_text((GtkCList *) search.module_lists,
-				   i, 1, &text2);
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store = GTK_LIST_STORE(model);
+	
+	if(!gtk_tree_model_get_iter_first(model,&iter))
+		return;
+	do {
+		 gtk_tree_model_get(model, &iter,
+                                        0, &text1,
+					1, &text2,
+					-1);		
 		xml_set_list_item("modlists", "modlist", text1, text2);
-	}
+		//g_warning(text2);
+		g_free(text1);
+		g_free(text2);
+	} while(gtk_tree_model_iter_next(model, &iter));
 	add_modlist();
 }
 
@@ -1412,17 +1447,36 @@ static void save_modlist(GtkButton * button, gpointer user_data)
 static void new_range(GtkButton * button, gpointer user_data)
 {
 	gchar *text[2];
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	GtkTreePath *path;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.list_range_name));
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
 
 	text[0] = "[New Range]";
 	text[1] = "";
 
-	search.custom_range_row = gtk_clist_append((GtkCList *) search.
-						   clist_range, text);
-	search.range_rows = search.custom_range_row;
+	gtk_list_store_append(list_store, &iter);
+	gtk_list_store_set(list_store, &iter, 
+				0, text[0], 
+				1, text[1],
+				-1);
+	
+	path = gtk_tree_model_get_path(model,&iter);				
+	gtk_tree_selection_select_path(selection,path);	
+	gtk_tree_path_free(path);
+	
 	gtk_entry_set_text(GTK_ENTRY(search.entry_range_name), text[0]);
 	gtk_entry_set_text(GTK_ENTRY(search.entry_range_text), "");
-	gtk_clist_select_row((GtkCList *) search.clist_range,
-			     search.custom_range_row, 0);
 }
 
 
@@ -1445,19 +1499,29 @@ static void new_range(GtkButton * button, gpointer user_data)
 static void save_range(GtkButton * button, gpointer user_data)
 {
 	gint i = 0;
-	gchar *text1;
-	gchar *text2;
-
-	for (i = 0; i < (search.range_rows + 1); i++) {
-
-		gtk_clist_get_text((GtkCList *) search.clist_range,
-				   i, 0, &text1);
-		gtk_clist_get_text((GtkCList *) search.clist_range,
-				   i, 1, &text2);
+	gchar *text1 = NULL;
+	gchar *text2 = NULL;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	
+	if(!gtk_tree_model_get_iter_first(model,&iter))
+		return;
+	do {
+		 gtk_tree_model_get(model, &iter,
+                                        0, &text1,
+					1, &text2,
+					-1);
+		
 		xml_set_list_item("ranges", "range", text1, text2);
-	}
+		//g_warning(text2);
+		g_free(text1);
+		g_free(text2);
+	} while(gtk_tree_model_iter_next(model, &iter));
 	add_ranges();
-
 }
 
 
@@ -1482,11 +1546,21 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	gchar *name_string = NULL;
 	gint test;
 	GS_DIALOG *info;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
 
-
-	gtk_clist_get_text(GTK_CLIST(search.clist_range),
-			   search.custom_range_row, 0, &name_string);
-
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.list_range_name));
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
+	
 	info = gui_new_dialog();
 	info->label_top =
 	    N_("Are you sure you want ot delete this range?");
@@ -1495,14 +1569,19 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	info->no = TRUE;
 
 	test = gui_gs_dialog(info);
-	if (test != GS_YES)
+	if (test != GS_YES) {
+		g_free(name_string);
+		g_free(info);		
 		return;
-
-	gtk_clist_remove((GtkCList *) search.clist_range,
-			 search.custom_range_row);
-	--search.range_rows;
+	}
+	
+	gtk_list_store_remove(list_store,&selected);
+	xml_remove_node("ranges", "range", name_string);
+	--search.list_rows;
 	save_range(NULL, NULL);
+
 	g_free(info);
+	g_free(name_string);
 }
 
 
@@ -1527,11 +1606,21 @@ static void delete_list(GtkButton * button, gpointer user_data)
 	gchar *name_string = NULL;
 	gint test;
 	GS_DIALOG *info;
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection;
+	GtkTreeIter selected;
 
-
-	gtk_clist_get_text(GTK_CLIST(search.module_lists),
-			   search.custom_list_row, 0, &name_string);
-
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	list_store = GTK_LIST_STORE(model);
+	selection = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.module_lists));
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
+	
 	info = gui_new_dialog();
 	info->label_top =
 	    N_("Are you sure you want ot delete this list?");
@@ -1540,15 +1629,19 @@ static void delete_list(GtkButton * button, gpointer user_data)
 	info->no = TRUE;
 
 	test = gui_gs_dialog(info);
-	if (test != GS_YES)
+	if (test != GS_YES) {
+		g_free(name_string);
+		g_free(info);		
 		return;
-
-	gtk_clist_remove((GtkCList *) search.module_lists,
-			 search.custom_list_row);
+	}
+	
+	gtk_list_store_remove(list_store,&selected);
+	xml_remove_node("modlists", "modlist", name_string);
 	--search.list_rows;
 	save_modlist(NULL, NULL);
 
 	g_free(info);
+	g_free(name_string);
 }
 
 
@@ -1657,18 +1750,36 @@ static void current_module_toggled(GtkToggleButton * togglebutton,
 static void mod_selection_changed(GtkTreeSelection * selection,
 				  GtkWidget * tree_widget)
 {
-	gint sbtype;
-	GtkTreeIter selected;
 	gchar *mod = NULL;
 	gchar *mod_description = NULL;
 	gchar *mod_list = NULL;
-	gint mod_type;
-	gchar *text[2];
 	GList *mods = NULL;
+	GtkListStore *store_modules_lists;
+	GtkListStore *list_store;
+	GtkTreeSelection * selection_modules_lists;
+	GtkTreeIter selected_modules_lists;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	GtkTreeModel *model_mods;
+	GtkTreeModel *model_modules_lists;
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
+	
+	model_mods = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+	list_store = GTK_LIST_STORE(model_mods);
+	
+	
+	 model_modules_lists= gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	 store_modules_lists = GTK_LIST_STORE(model_modules_lists);
+	
+	selection_modules_lists = gtk_tree_view_get_selection
+                                       (GTK_TREE_VIEW(search.module_lists));
 
 	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
+	if (!gtk_tree_selection_get_selected(selection_modules_lists, NULL, 
+						      &selected_modules_lists)) 
 		return;
 	
 	if(gtk_tree_model_iter_has_child(model, &selected)) 
@@ -1676,27 +1787,25 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 	
 	gtk_tree_model_get(model, &selected, 0, &mod, -1);
 	if (mod) {
-		mod_description = get_module_description(mod);				
-		text[0] = mod_description;
-		text[1] = mod;
-		sbtype = get_mod_type(mod);
+		mod_description = get_module_description(mod);	
 		
 		if (GTK_TOGGLE_BUTTON(search.rb_current_module)->active) {
 			search.search_mod = g_strdup(mod);
 			search.module_count = 1;
 		} else {
-			gtk_clist_append(GTK_CLIST(search.clist_modules), text);
-	
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 
+						0, mod_description, 
+						1, mod,
+						-1);	
 			mods = get_current_list();
 			mod_list = get_modlist_string(mods);
 			
 			if (mod_list) {
-				gtk_clist_set_text((GtkCList *)
-						   search.
-						   module_lists,
-						   search.
-						   custom_list_row,
-						   1, mod_list);
+				gtk_list_store_set(store_modules_lists, 
+						&selected_modules_lists,
+						1, mod_list,
+						-1);
 				g_free(mod_list);
 			}
 			++search.module_count;
@@ -1706,6 +1815,142 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 	}
 }
 
+/******************************************************************************
+ * Name
+ *   selection_modules_lists_changed
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void selection_modules_lists_changed(GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void selection_modules_lists_changed(GtkTreeSelection * selection,
+				  			gpointer data)
+{	
+	gchar *name, *modules, *module[2];
+	GList *tmp = NULL;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GtkListStore *list_store;
+	GtkTreeIter selected;	
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.module_lists));
+	gtk_tree_model_get(model, &selected, 0, &name, 1, &modules, -1);
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+	list_store = GTK_LIST_STORE(model);
+	
+	gtk_entry_set_text(GTK_ENTRY(search.entry_list_name), name);
+
+	gtk_list_store_clear(list_store);
+	tmp =
+	    get_custom_list_from_name(gtk_entry_get_text
+				      (GTK_ENTRY
+				       (search.entry_list_name)));
+
+	tmp = g_list_first(tmp);
+	while (tmp != NULL) {
+		gtk_list_store_append(list_store, &iter);
+		gtk_list_store_set(list_store, &iter, 
+					0, get_module_description((gchar *) tmp->data), 
+					1, (gchar *) tmp->data,
+					-1);
+		g_free((gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	
+	if (!GTK_TOGGLE_BUTTON(search.rb_current_module)->active)
+		add_modlist_to_label();
+	g_free(name);
+	g_free(modules);
+	
+}
+
+
+/******************************************************************************
+ * Name
+ *   selection_range_lists_changed
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void selection_range_lists_changed(GtkTreeSelection * selection,
+ *		     					 gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void selection_range_lists_changed(GtkTreeSelection * selection,
+				  			gpointer data)
+{
+	gchar *name = NULL;
+	gchar *range = NULL;
+	GtkTreeModel *model;
+	GtkTreeIter selected;	
+	
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected)) 
+		return;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_range_name));
+	gtk_tree_model_get(model, &selected, 0, &name, 1, &range, -1);
+	
+	gtk_entry_set_text(GTK_ENTRY(search.entry_range_name), name);
+	gtk_entry_set_text(GTK_ENTRY(search.entry_range_text), range);
+	g_free(name);
+	g_free(range);
+}
+
+
+/******************************************************************************
+ * Name
+ *   add_two_text_columns
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void add_two_text_columns(GtkTreeView * treeview)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void add_two_text_columns(GtkTreeView * treeview)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+
+	/* column for fixed toggles */
+	renderer = gtk_cell_renderer_text_new();
+
+	column = gtk_tree_view_column_new_with_attributes("Module",
+							  renderer,
+							  "text", 0,
+							  "text", 1,
+							  NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+
+	gtk_tree_view_append_column(treeview, column);
+}
 
 
 
@@ -1806,7 +2051,7 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *button30;
 	GtkWidget *scrolledwindow66;
 	GtkWidget *scrolledwindow_tree;
-	GtkWidget *clist_modules;
+	GtkWidget *listview_modules;
 	GtkWidget *label232;
 	GtkWidget *label233;
 	GtkWidget *label205;
@@ -1830,7 +2075,7 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *entry_range_text;
 	GtkWidget *label229;
 	GtkWidget *scrolledwindow65;
-	GtkWidget *clist_ranges;
+	GtkWidget *list_ranges;
 	GtkWidget *label226;
 	GtkWidget *label206;
 	GtkWidget *vbox70;
@@ -1855,6 +2100,11 @@ static GtkWidget *create_search_dialog(void)
 	GtkTooltips *tooltips;
 	GObject *mod_selection;
 	gchar title[256];
+	GtkListStore *model;
+	GObject *selection_modules_lists;
+	GObject *selection_range_name;	
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
 
 	sprintf(title, "%s - %s", settings.program_title, _("Search"));
 
@@ -2395,26 +2645,32 @@ static GtkWidget *create_search_dialog(void)
 				       (scrolledwindow67),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+/*****************************************************************************/
+	/* create tree model */
+	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
 
-	clist_custom_range = gtk_clist_new(2);
-	gtk_widget_show(clist_custom_range);
+	/* create tree view */
+	search.list_range_name =
+	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	
+	
+	
+	
+//	clist_custom_range = gtk_clist_new(2);
+	gtk_widget_show(search.list_range_name);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow67),
-			  clist_custom_range);
-	gtk_clist_set_column_width(GTK_CLIST(clist_custom_range), 0,
-				   194);
-	gtk_clist_set_column_width(GTK_CLIST(clist_custom_range), 1,
-				   80);
-	gtk_clist_column_titles_hide(GTK_CLIST(clist_custom_range));
-
-	label234 = gtk_label_new("");
-	gtk_widget_show(label234);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_custom_range), 0,
-				    label234);
-
-	label235 = gtk_label_new("");
-	gtk_widget_show(label235);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_custom_range), 1,
-				    label235);
+			  search.list_range_name);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(search.list_range_name), 
+					TRUE);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(search.list_range_name),
+					  FALSE);
+	add_two_text_columns(GTK_TREE_VIEW(search.list_range_name));
+	
+	selection_range_name =
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(search.list_range_name)));
+		     
+/*****************************************************************************/
 
 	frame66a = gtk_frame_new(NULL);
 	gtk_widget_show(frame66a);
@@ -2459,25 +2715,36 @@ static GtkWidget *create_search_dialog(void)
 				       (scrolledwindow65),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+/******************************************************************************/
+	/* create tree model */
+	model = gtk_list_store_new(1, G_TYPE_STRING);
 
-	clist_ranges = gtk_clist_new(1);
-	gtk_widget_show(clist_ranges);
+	/* create tree view */
+	search.list_ranges =
+	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));	
+	renderer = gtk_cell_renderer_text_new();
+	column = gtk_tree_view_column_new_with_attributes("Ranges",
+							  renderer,
+							  "text", 0,
+							  NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(search.list_ranges), column);
+	gtk_widget_show(search.list_ranges);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow65),
-			  clist_ranges);
-	gtk_clist_set_column_width(GTK_CLIST(clist_ranges), 0, 80);
-	gtk_clist_column_titles_hide(GTK_CLIST(clist_ranges));
+			  search.list_ranges);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(search.list_ranges), 
+					TRUE);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(search.list_ranges),
+					  FALSE);
 
-	label226 = gtk_label_new("");
-	gtk_widget_show(label226);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_ranges), 0,
-				    label226);
+/******************************************************************************/
 
 	label206 = gtk_label_new(_("Custom Ranges"));
 	gtk_widget_show(label206);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook8),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook8), 2),
-				   label206);
+			  	   label206);
 
 /********************************************************** page 1 */
 	frame67a = gtk_frame_new(NULL);
@@ -2569,29 +2836,30 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_set_usize(scrolledwindow68, 175, -2);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow68),
-				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 				       
 /**********************************************************************/
-	search.module_lists = gtk_clist_new(2);
+	/* create tree model */
+	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+
+	/* create tree view */
+	search.module_lists =
+	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
 	gtk_widget_show(search.module_lists);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow68),
 			  search.module_lists);
-	gtk_clist_set_column_width(GTK_CLIST(search.module_lists), 0,
-				   169);
-	gtk_clist_set_column_width(GTK_CLIST(search.module_lists), 1,
-				   80);
-	gtk_clist_column_titles_hide(GTK_CLIST(search.module_lists));
-
-	label236 = gtk_label_new("");
-	gtk_widget_show(label236);
-	gtk_clist_set_column_widget(GTK_CLIST(search.module_lists), 0,
-				    label236);
-
-	label237 = gtk_label_new("");
-	gtk_widget_show(label237);
-	gtk_clist_set_column_widget(GTK_CLIST(search.module_lists), 1,
-				    label237);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(search.module_lists), TRUE);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(search.module_lists),
+					  FALSE);
+	add_two_text_columns(GTK_TREE_VIEW(search.module_lists));
+	
+	selection_modules_lists =
+	    G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(search.module_lists)));
+	
+	    
+				    
 /**********************************************************************/
 
 	frame67 = gtk_frame_new(NULL);
@@ -2672,26 +2940,21 @@ static GtkWidget *create_search_dialog(void)
 				       
 				       
 /**********************************************************************/
-	clist_modules = gtk_clist_new(2);
-	gtk_widget_show(clist_modules);
+	/* create tree model */
+	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+
+	/* create tree view */
+	listview_modules =
+	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	gtk_widget_show(listview_modules);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow66),
-			  clist_modules);
-	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 0, 300);
-	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 1, 80);
-	gtk_clist_column_titles_hide(GTK_CLIST(clist_modules));
-
-	label232 = gtk_label_new("");
-	gtk_widget_show(label232);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 0,
-				    label232);
-
-	label233 = gtk_label_new("");
-	gtk_widget_show(label233);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 1,
-				    label233);	       
+			  listview_modules);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(listview_modules), TRUE);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(listview_modules),
+					  FALSE);
+	add_two_text_columns(GTK_TREE_VIEW(listview_modules));
+	
 /**********************************************************************/
-
-
 
 	label205 = gtk_label_new(_("Custom Lists"));
 	gtk_widget_show(label205);
@@ -2699,6 +2962,7 @@ static GtkWidget *create_search_dialog(void)
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook8), 3),
 				   label205);
+				   
 /************************************************************************/
 
 /*******   ******/
@@ -2710,7 +2974,7 @@ static GtkWidget *create_search_dialog(void)
 	search.rb_current_module = rb_one_mod;
 	search.rb_mod_list = rb_mod_list;
 	search.rb_custom_list = rb_custom_list;
-	search.clist_modules = clist_modules;
+	search.listview_modules = listview_modules;
 
 	search.combo_list = combo31;
 	search.combo_entry_list = combo_entry20;
@@ -2721,8 +2985,6 @@ static GtkWidget *create_search_dialog(void)
 	search.rb_custom_range = rb_custom_range;
 	search.combo_range = combo_custom_range;
 	search.combo_entry_range = combo_entry_custom_range;
-	search.clist_range = clist_custom_range;
-	search.clist_ranges = clist_ranges;
 	search.entry_range_name = entry_range_name;
 	search.entry_range_text = entry_range_text;
 	search.search_entry = entry17;
@@ -2776,6 +3038,13 @@ static GtkWidget *create_search_dialog(void)
 	    G_OBJECT(gtk_tree_view_get_selection(GTK_TREE_VIEW(search.treeview)));
 	/* connect signals */
 
+
+	g_signal_connect(selection_range_name, "changed",
+			 G_CALLBACK(selection_range_lists_changed),
+			 NULL);
+	g_signal_connect(selection_modules_lists, "changed",
+			 G_CALLBACK(selection_modules_lists_changed),
+			 NULL);
 	g_signal_connect(G_OBJECT(search_dialog), "destroy",
                       G_CALLBACK(on_button_close),
 			   NULL);
@@ -2820,25 +3089,9 @@ static GtkWidget *create_search_dialog(void)
 	g_signal_connect(G_OBJECT(entry_range_text), "changed",
 			   G_CALLBACK(range_text_changed), NULL);
 
-
 	g_signal_connect(G_OBJECT(search.entry_list_name),
 			   "changed",
 			   G_CALLBACK(list_name_changed), NULL);
-
-
-	g_signal_connect(G_OBJECT(search.clist_range), "select_row",
-			   G_CALLBACK(custom_range_select_row),
-			   NULL);
-
-	g_signal_connect(G_OBJECT(search.module_lists),
-			   "select_row",
-			   G_CALLBACK(custom_list_select_row),
-			   NULL);
-
-	g_signal_connect(G_OBJECT(search.clist_modules),
-			   "select_row",
-			   G_CALLBACK(modules_select_row), NULL);
-
 	g_signal_connect(G_OBJECT(search.togglebutton_show_main),
 			   "toggled",
 			   G_CALLBACK
@@ -2891,8 +3144,10 @@ static GtkWidget *create_search_dialog(void)
 void gui_do_dialog_search(void)
 {
 	if (!is_running) {
+		GtkTreeModel *model;
+		GtkListStore *list_store;
+		GtkTreeIter iter;		
 		GtkWidget *dlg;
-		gchar *buf[2], *text_cell;
 
 		/* create and show search dialog */
 		dlg = create_search_dialog();
@@ -2901,28 +3156,23 @@ void gui_do_dialog_search(void)
 		/* initiate module count to 0 */
 		search.module_count = 0;
 
-		/* add custom ranges to clist_ranges */
+		/* add custom ranges to list_ranges */
 		add_ranges();
 
 		/* add custom modlist to module_list */
 		add_modlist();
 
-		/* set search module to current module 
-		   and put in clist_modules */
+		/* set search module to current module  */	
+		//model = gtk_tree_view_get_model(GTK_TREE_VIEW(search.listview_modules));
+		//list_store = GTK_LIST_STORE(model);
+		
+		//gtk_list_store_clear(list_store);
+		
 		search.search_mod = settings.MainWindowModule;
-		buf[0] =
-		    get_module_description(settings.MainWindowModule);
-		buf[1] = settings.MainWindowModule;
 		change_mods_select_label(settings.MainWindowModule);
-		gtk_clist_append(GTK_CLIST(search.clist_modules), buf);
-
 		/* add one to module count */
 		++search.module_count;
 
-		text_cell = " ";
-		gtk_clist_append((GtkCList *) search.clist_ranges,
-				 &text_cell);
-				 
 		search.show_in_main = FALSE;
 		is_running = TRUE;
 	} else

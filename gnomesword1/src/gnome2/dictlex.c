@@ -595,9 +595,10 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dl->listview),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(dl->listview));
+	/*
 	dl->mod_selection = G_OBJECT(gtk_tree_view_get_selection
 		     (GTK_TREE_VIEW(dl->listview)));
-		     
+	*/	     
 		     
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_show(frameDictHTML);

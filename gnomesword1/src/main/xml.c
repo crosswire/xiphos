@@ -47,6 +47,10 @@ static BOOKMARK_DATA *es;
 static xmlDocPtr xml_settings_doc;
 static xmlNodePtr section_ptr;
 static xmlDocPtr bookmark_doc;
+// void xmlFreeNode                     (xmlNodePtr cur);
+// void        xmlUnlinkNode                   (xmlNodePtr cur);
+
+
 
 /******************************************************************************
  * Name
@@ -1099,4 +1103,38 @@ void xml_add_new_item_to_section(char * section, char * item_name, char * value)
 	
 	if(section_node) 		
 		xmlNewTextChild(section_node, NULL, item_name, value);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+void xml_remove_node(char *section, char *item, char *label)
+{
+	xmlNodePtr cur = NULL;
+	xmlNodePtr cur_item = NULL;
+	xmlNodePtr new = NULL;
+	if ((cur =
+	     xml_find_section((xmlChar *) "GnomeSword",
+			      (xmlChar *) section)) != NULL) {
+		if ((cur_item = xml_find_item(cur,
+					      (xmlChar *) item,
+					      (xmlChar *) label)) != NULL) {			
+			xmlUnlinkNode(cur_item);
+			xmlFreeNode(cur_item);      
+		} 	  
+	}	
+	
 }

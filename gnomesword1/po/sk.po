@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-22 10:43-0500\n"
+"POT-Creation-Date: 2003-11-23 23:55-0500\n"
 "PO-Revision-Date: 2002-10-21 19:34+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -72,7 +72,7 @@ msgid "Go to "
 msgstr "Ís» na %s"
 
 #: src/gnome2/bibletext_dialog.c:922 src/gnome2/parallel_dialog.c:534
-#: src/gnome2/toolbar_nav.c:416
+#: src/gnome2/toolbar_nav.c:472
 msgid "Romans"
 msgstr "Rimanom"
 
@@ -194,7 +194,7 @@ msgstr "Tlaèi»"
 
 #: src/gnome2/bibletext_menu.c:1252 src/gnome2/commentary_menu.c:1330
 #: src/gnome2/dictlex_dialog.c:539 src/gnome2/editor_spell.c:623
-#: src/gnome2/find_dialog.c:268 src/gnome2/search_dialog.c:1950
+#: src/gnome2/find_dialog.c:268 src/gnome2/search_dialog.c:2200
 msgid "Close"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Folder Name"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1093 src/gnome2/bookmarks_treeview.c:95
+#: src/gnome2/bookmarks_menu.c:1093 src/gnome2/bookmarks_treeview.c:96
 #, fuzzy
 msgid "Folder: "
 msgstr "Modul"
@@ -428,7 +428,7 @@ msgstr "Prida» záloŸku"
 msgid "Remove - Restore"
 msgstr ""
 
-#: src/gnome2/bookmarks_treeview.c:93
+#: src/gnome2/bookmarks_treeview.c:94
 #, fuzzy
 msgid "Enter Folder Name"
 msgstr "VloŸi»"
@@ -558,8 +558,8 @@ msgstr "UloŸi» záznam"
 msgid "Delete Entry"
 msgstr "Zmaza» záznam"
 
-#: src/gnome2/editor_menu.c:983 src/gnome2/search_dialog.c:2350
-#: src/gnome2/search_dialog.c:2505 src/gnome2/toolbar_edit.c:434
+#: src/gnome2/editor_menu.c:983 src/gnome2/search_dialog.c:2600
+#: src/gnome2/search_dialog.c:2772 src/gnome2/toolbar_edit.c:434
 msgid "New"
 msgstr "Nový"
 
@@ -642,7 +642,7 @@ msgstr "Kontrola pravopisu"
 msgid "Start"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:629 src/gnome2/search_dialog.c:2141
+#: src/gnome2/editor_spell.c:629 src/gnome2/search_dialog.c:2391
 #, fuzzy
 msgid "Options"
 msgstr "Nastavenia modulov"
@@ -695,7 +695,7 @@ msgstr "GnomeSword - UloŸi» poznámkový súbor"
 msgid "Enter Word or Phrase"
 msgstr "VloŸi»"
 
-#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2151
+#: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2401
 #: src/gnome2/search_sidebar.c:550
 msgid "Case Sensitive"
 msgstr "Rozli¹ova» veµkos» písmen"
@@ -784,8 +784,8 @@ msgstr ""
 msgid "Copy highlighted text from main window"
 msgstr "Kopírova» vyznaèenú textovú formu v hlavnom okne"
 
-#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:1859
-#: src/gnome2/search_dialog.c:1884 src/gnome2/search_sidebar.c:238
+#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:2109
+#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:238
 msgid "Search"
 msgstr "Hµada»"
 
@@ -882,8 +882,8 @@ msgstr "Komentáre"
 msgid "Dictionaries-Lexicons"
 msgstr "Slovníky-lexikóny"
 
-#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:731
-#: src/gnome2/main_window.c:743 src/gnome2/preferences_dialog.c:1818
+#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:832
+#: src/gnome2/main_window.c:847 src/gnome2/preferences_dialog.c:1818
 msgid "Books"
 msgstr "Knihy"
 
@@ -930,12 +930,17 @@ msgstr "Prehliadaè"
 msgid "_Help"
 msgstr ""
 
-#: src/gnome2/main_window.c:562
+#: src/gnome2/main_window.c:644
 #, fuzzy
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - softvér na ¹túdium biblie"
 
-#: src/gnome2/main_window.c:697 src/gnome2/main_window.c:710
+#: src/gnome2/main_window.c:738
+#, fuzzy
+msgid "Biblical Text"
+msgstr "Bibleké texty"
+
+#: src/gnome2/main_window.c:795 src/gnome2/main_window.c:811
 #: src/gnome2/preferences_dialog.c:2202 src/gnome2/setup_druid.c:936
 msgid "Dict/Lex"
 msgstr "Slovník-Lexikón"
@@ -970,10 +975,13 @@ msgstr "Interlinearny 4"
 msgid "Change parallel 5"
 msgstr "Interlinearny 5"
 
-#: src/gnome2/parallel_view.c:1327 src/gnome2/parallel_view.c:1341
+#.
+#. * parallel page
+#.
+#: src/gnome2/parallel_view.c:1305 src/gnome2/parallel_view.c:1328
 #: src/gnome2/parallel_dialog.c:225 src/gnome2/parallel_dialog.c:227
-#: src/gnome2/sidebar.c:468 src/gnome2/sidebar.c:481
-#: src/gnome2/toolbar_nav.c:383 src/gnome2/utilities.c:182
+#: src/gnome2/sidebar.c:470 src/gnome2/sidebar.c:482
+#: src/gnome2/toolbar_nav.c:439 src/gnome2/utilities.c:182
 msgid "Parallel View"
 msgstr ""
 
@@ -1348,111 +1356,111 @@ msgstr "Modul"
 msgid "finds in "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:805
+#: src/gnome2/search_dialog.c:833
 #, fuzzy
 msgid "Search Finished"
 msgstr "Nastavenie hµadania"
 
-#: src/gnome2/search_dialog.c:1297
+#: src/gnome2/search_dialog.c:1301
 msgid "Do you really want to CLEAR the module list?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1339
+#: src/gnome2/search_dialog.c:1358
 msgid ""
 "Do you really want to REMOVE\n"
 " the selected module?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1492
+#: src/gnome2/search_dialog.c:1566
 msgid "Are you sure you want ot delete this range?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1537
+#: src/gnome2/search_dialog.c:1626
 msgid "Are you sure you want ot delete this list?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1893
+#: src/gnome2/search_dialog.c:2143
 #, fuzzy
 msgid "<Module>"
 msgstr "Modul"
 
-#: src/gnome2/search_dialog.c:1911
+#: src/gnome2/search_dialog.c:2161
 msgid " for "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1933
+#: src/gnome2/search_dialog.c:2183
 msgid "Begin"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1933
+#: src/gnome2/search_dialog.c:2183
 #, fuzzy
 msgid "Begin search"
 msgstr "Zaèa» hµadanie"
 
-#: src/gnome2/search_dialog.c:1951
+#: src/gnome2/search_dialog.c:2201
 #, fuzzy
 msgid "Close search dialog"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome2/search_dialog.c:1972
+#: src/gnome2/search_dialog.c:2222
 #, fuzzy
 msgid "Scope"
 msgstr "Bez rozsahu"
 
-#: src/gnome2/search_dialog.c:1988
+#: src/gnome2/search_dialog.c:2238
 #, fuzzy
 msgid "Entire Module   "
 msgstr "Zobrazi» modul"
 
-#: src/gnome2/search_dialog.c:1994
+#: src/gnome2/search_dialog.c:2244
 msgid "Search entire module(s)"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2000
+#: src/gnome2/search_dialog.c:2250
 msgid "Current Results   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2006
+#: src/gnome2/search_dialog.c:2256
 msgid "Use the results of the last search for the search scope"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2011
+#: src/gnome2/search_dialog.c:2261
 msgid "Custom Range   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2018
+#: src/gnome2/search_dialog.c:2268
 msgid "Use a custom search range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2037 src/gnome2/search_dialog.c:2615
+#: src/gnome2/search_dialog.c:2287 src/gnome2/search_dialog.c:2883
 #, fuzzy
 msgid "Modules"
 msgstr "Modul"
 
-#: src/gnome2/search_dialog.c:2053
+#: src/gnome2/search_dialog.c:2303
 #, fuzzy
 msgid "Single Module"
 msgstr "Zobrazi» modul"
 
-#: src/gnome2/search_dialog.c:2059
+#: src/gnome2/search_dialog.c:2309
 msgid "Use a single module for the search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2066
+#: src/gnome2/search_dialog.c:2316
 #, fuzzy
 msgid "Module List"
 msgstr "Nastavenia modulov"
 
-#: src/gnome2/search_dialog.c:2073
+#: src/gnome2/search_dialog.c:2323
 msgid "Use current module list for search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2078
+#: src/gnome2/search_dialog.c:2328
 #, fuzzy
 msgid "Custom List"
 msgstr "Èíslovaný zoznam"
 
-#: src/gnome2/search_dialog.c:2086
+#: src/gnome2/search_dialog.c:2336
 msgid "Use a custom module list for the search"
 msgstr ""
 
@@ -1480,173 +1488,174 @@ msgstr ""
 #. FALSE, FALSE, 0);
 #.
 #.
-#: src/gnome2/search_dialog.c:2108 src/gnome2/search_sidebar.c:500
+#: src/gnome2/search_dialog.c:2358 src/gnome2/search_sidebar.c:500
 msgid "Search Type"
 msgstr "Typ hµadania"
 
-#: src/gnome2/search_dialog.c:2119 src/gnome2/search_sidebar.c:511
+#: src/gnome2/search_dialog.c:2369 src/gnome2/search_sidebar.c:511
 msgid "Multi Word"
 msgstr "Multi slovo"
 
-#: src/gnome2/search_dialog.c:2126 src/gnome2/search_sidebar.c:523
+#: src/gnome2/search_dialog.c:2376 src/gnome2/search_sidebar.c:523
 msgid "Regular Expression"
 msgstr "Regulárny výraz"
 
-#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:532
+#: src/gnome2/search_dialog.c:2384 src/gnome2/search_sidebar.c:532
 msgid "Exact Phrase"
 msgstr "Presná fráza"
 
-#: src/gnome2/search_dialog.c:2158
+#: src/gnome2/search_dialog.c:2408
 #, fuzzy
 msgid "Include Strongs Numbers"
 msgstr "Prepnú» Strongové èísla"
 
-#: src/gnome2/search_dialog.c:2163
+#: src/gnome2/search_dialog.c:2413
 #, fuzzy
 msgid "In modules that have Strongs Numbers"
 msgstr "Prepnú» Strongové èísla"
 
-#: src/gnome2/search_dialog.c:2167
+#: src/gnome2/search_dialog.c:2417
 #, fuzzy
 msgid "Include Morph Tags"
 msgstr "Strongové èísla a morf oznaèenia"
 
-#: src/gnome2/search_dialog.c:2172
+#: src/gnome2/search_dialog.c:2422
 msgid "In modules that have Morph Tags"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2176
+#: src/gnome2/search_dialog.c:2426
 #, fuzzy
 msgid "Include Footnotes"
 msgstr "Prenú» poznámky pod èiarou"
 
-#: src/gnome2/search_dialog.c:2181
+#: src/gnome2/search_dialog.c:2431
 msgid "In modules that have Footnotes"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2183
+#: src/gnome2/search_dialog.c:2433
 #, fuzzy
 msgid "Search Criteria"
 msgstr "Hµada» v osobných"
 
-#: src/gnome2/search_dialog.c:2208
+#: src/gnome2/search_dialog.c:2458
 #, fuzzy
 msgid "Show Context"
 msgstr "Zobrazi» poznámky pod èiarou"
 
-#: src/gnome2/search_dialog.c:2209
+#: src/gnome2/search_dialog.c:2459
 #, fuzzy
 msgid "Show In Main window"
 msgstr "Zobrazi» %s v hlavnom okne"
 
-#: src/gnome2/search_dialog.c:2226
+#: src/gnome2/search_dialog.c:2476
 #, fuzzy
 msgid "Save Results"
 msgstr "Prehµadáva» výsledky"
 
-#: src/gnome2/search_dialog.c:2228
+#: src/gnome2/search_dialog.c:2478
 #, fuzzy
 msgid "Save Search Results as Bookmarks"
 msgstr "Zobrazi» výsledky hµadania"
 
-#: src/gnome2/search_dialog.c:2246
+#: src/gnome2/search_dialog.c:2496
 #, fuzzy
 msgid "Clear"
 msgstr "Vyèis_ti»"
 
-#: src/gnome2/search_dialog.c:2247
+#: src/gnome2/search_dialog.c:2497
 msgid "clear lists for new search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2270 src/gnome2/search_sidebar.c:166
+#: src/gnome2/search_dialog.c:2520 src/gnome2/search_sidebar.c:166
 msgid "Search Results"
 msgstr "Prehµadáva» výsledky"
 
-#: src/gnome2/search_dialog.c:2286
+#: src/gnome2/search_dialog.c:2536
 msgid "Preview"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2300
+#: src/gnome2/search_dialog.c:2550
 #, fuzzy
 msgid "Found"
 msgstr "Ohranièenie"
 
-#: src/gnome2/search_dialog.c:2320
+#: src/gnome2/search_dialog.c:2570
 #, fuzzy
 msgid "Results"
 msgstr "Výsledky hµadania"
 
-#: src/gnome2/search_dialog.c:2351
+#: src/gnome2/search_dialog.c:2601
 msgid "Create new custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2362 src/gnome2/search_dialog.c:2530
-#: src/gnome2/sidebar.c:991
+#: src/gnome2/search_dialog.c:2612 src/gnome2/search_dialog.c:2797
+#: src/gnome2/sidebar.c:1042
 msgid "Save List"
 msgstr "UloŸi» zoznam"
 
-#: src/gnome2/search_dialog.c:2363
+#: src/gnome2/search_dialog.c:2613
 msgid "Save custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2380 src/gnome2/search_dialog.c:2548
-#: src/gnome2/search_dialog.c:2656 src/gnome2/toolbar_edit.c:493
+#: src/gnome2/search_dialog.c:2630 src/gnome2/search_dialog.c:2815
+#: src/gnome2/search_dialog.c:2924 src/gnome2/toolbar_edit.c:493
 msgid "Delete"
 msgstr "Zmaza»"
 
-#: src/gnome2/search_dialog.c:2381
+#: src/gnome2/search_dialog.c:2631
 msgid "Delete selected range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2429
+#: src/gnome2/search_dialog.c:2685
 msgid "Range Name"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2439
+#: src/gnome2/search_dialog.c:2695
 msgid "Range Text"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2449
+#: src/gnome2/search_dialog.c:2705
 msgid "eg. Matt-John;Rev4"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2475
+#. ****************************************************************************
+#: src/gnome2/search_dialog.c:2742
 msgid "Custom Ranges"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2506
+#: src/gnome2/search_dialog.c:2773
 msgid "Create new module list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2518 src/gnome2/search_dialog.c:2519
-#: src/gnome2/search_dialog.c:2637
+#: src/gnome2/search_dialog.c:2785 src/gnome2/search_dialog.c:2786
+#: src/gnome2/search_dialog.c:2905
 #, fuzzy
 msgid "Clear Module List"
 msgstr "Vymaza» históriu"
 
-#: src/gnome2/search_dialog.c:2531
+#: src/gnome2/search_dialog.c:2798
 msgid "Save list of modules"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2549
+#: src/gnome2/search_dialog.c:2816
 msgid "Delete selected list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2606
+#: src/gnome2/search_dialog.c:2874
 #, fuzzy
 msgid "List Name"
 msgstr "Zoznam"
 
-#: src/gnome2/search_dialog.c:2638
+#: src/gnome2/search_dialog.c:2906
 msgid "Clear all modules from list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2658
+#: src/gnome2/search_dialog.c:2926
 msgid "Remove selected module from list"
 msgstr ""
 
 #. ********************************************************************
-#: src/gnome2/search_dialog.c:2696
+#: src/gnome2/search_dialog.c:2959
 #, fuzzy
 msgid "Custom Lists"
 msgstr "Èíslovaný zoznam"
@@ -1834,56 +1843,56 @@ msgstr ""
 "            Ïakujeme vám za pouŸívanie GnomeSword.\n"
 "Po kliknutí na Ukonèi» sa uzavrie tento dialóg a spustí GnomeSword."
 
-#: src/gnome2/sidebar.c:992
+#: src/gnome2/sidebar.c:1043
 #, fuzzy
 msgid "Save the search results as bookmarks"
 msgstr "Zobrazi» výsledky hµadania"
 
-#: src/gnome2/sidebar.c:1030
+#: src/gnome2/sidebar.c:1081
 #, fuzzy
 msgid "Open in dialog"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome2/sidebar.c:1031
+#: src/gnome2/sidebar.c:1082
 #, fuzzy
 msgid "Open selected module in a dialog"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome2/sidebar.c:1036
+#: src/gnome2/sidebar.c:1087
 msgid "About"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1037
+#: src/gnome2/sidebar.c:1088
 #, fuzzy
 msgid "View information about the selected dialog"
 msgstr "Informácie o nain¹talovaných moduloch"
 
-#: src/gnome2/sidebar.c:1266
+#: src/gnome2/sidebar.c:1317
 #, fuzzy
 msgid "_Modules"
 msgstr "Modul"
 
-#: src/gnome2/sidebar.c:1274
+#: src/gnome2/sidebar.c:1325
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "ZáloŸky"
 
-#: src/gnome2/sidebar.c:1282
+#: src/gnome2/sidebar.c:1333
 #, fuzzy
 msgid "_Search"
 msgstr "Hµada»"
 
-#: src/gnome2/sidebar.c:1291
+#: src/gnome2/sidebar.c:1342
 #, fuzzy
 msgid "Search _Results"
 msgstr "Prehµadáva» výsledky"
 
-#: src/gnome2/sidebar.c:1301
+#: src/gnome2/sidebar.c:1352
 #, fuzzy
 msgid "_Viewer"
 msgstr "Prehliadaè"
 
-#: src/gnome2/sidebar.c:1311
+#: src/gnome2/sidebar.c:1362
 #, fuzzy
 msgid "Verse _List"
 msgstr "Zoznam ver¹ov"
@@ -1934,26 +1943,21 @@ msgstr "Kontrola pravopisu"
 msgid "Spell check note"
 msgstr "Kontrola pravopisu"
 
-#: src/gnome2/toolbar_nav.c:363
+#: src/gnome2/toolbar_nav.c:422
 #, fuzzy
 msgid "Dict/Book"
 msgstr "Kniha"
 
-#: src/gnome2/toolbar_nav.c:365
-#, fuzzy
-msgid "Switch between Dict/Lex and Books"
-msgstr "Zobrazi» u¹ká Lexikónov"
-
-#: src/gnome2/toolbar_nav.c:384
+#: src/gnome2/toolbar_nav.c:440
 msgid "Toggle Parallel View"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:458
+#: src/gnome2/toolbar_nav.c:514
 #, fuzzy
 msgid "button5"
 msgstr "tlaèítko3"
 
-#: src/gnome2/toolbar_nav.c:475
+#: src/gnome2/toolbar_nav.c:531
 #, fuzzy
 msgid "button6"
 msgstr "tlaèítko3"
@@ -2093,6 +2097,10 @@ msgstr "Odsadenie"
 #: src/gnome2/toolbar_style.c:1044
 msgid "Indents the paragraphs more"
 msgstr "Zväè¹í odsadenie odstavcov"
+
+#, fuzzy
+#~ msgid "Switch between Dict/Lex and Books"
+#~ msgstr "Zobrazi» u¹ká Lexikónov"
 
 #, fuzzy
 #~ msgid ""
@@ -2681,9 +2689,6 @@ msgstr "Zväè¹í odsadenie odstavcov"
 
 #~ msgid "GnomeSword-0.5.2a"
 #~ msgstr "GnomeSword-0.5.2a"
-
-#~ msgid "Biblical Texts"
-#~ msgstr "Bibleké texty"
 
 #~ msgid "Lexicons / Dictionaries"
 #~ msgstr "Lexikóny / Slovníky"
