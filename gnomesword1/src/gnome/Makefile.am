@@ -71,4 +71,6 @@ libgui_a_SOURCES =  \
     splash.c \
     splash.h \
     studypad.c \
-    studypad.h
+    studypad.h \
+    toolbar_nav.c \
+    toolbar_nav.h
