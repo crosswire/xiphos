@@ -28,11 +28,8 @@ GtkWidget *create_fileselection1(void);
 GtkWidget *create_fileselectionSave(void);
 GtkWidget *create_menu1(void);
 GtkWidget *create_mainwindow(void);
-GtkWidget *create_about2(void);
 GtkWidget *create_wdwEditBookmarks(void);
 GtkWidget *create_InfoBox(void);
-GtkWidget *create_AboutSword(void);
-GtkWidget *create_aboutmodules(void);
 GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
 	
@@ -242,10 +239,6 @@ void
 					      gpointer user_data);
 
 	void
-	 on_btnAboutSwordOK_clicked(GtkButton * button,
-				    gpointer user_data);
-
-	void
 	 on_spell1_found_word(GnomeSpell * gnomespell,
 			      gpointer arg1, gpointer user_data);
 
@@ -315,20 +308,13 @@ void
 	void
 	 on_btnInfoBoxNo_clicked(GtkButton * button, gpointer user_data);
 
-	void
-	 on_btnAboutSwordOK_clicked(GtkButton * button,
-				    gpointer user_data);
+	
 
 	void
 	 on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data);
 
-	void
-	 on_btnAboutModuleOK_clicked(GtkButton * button,
-				     gpointer user_data);
+	
 
-	void
-	 on_btnAboutModuleOK_clicked(GtkButton * button,
-				     gpointer user_data);
 	
 	void
 	 on_about_this_module1_activate(GtkMenuItem * menuitem,
