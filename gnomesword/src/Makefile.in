@@ -155,10 +155,14 @@ COMMON_SOURCE = \
     gs_abouts.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
+    gs_commentary.c \
+    gs_commentary.h \
     gs_detach_int.c \
     gs_detach_int.h \
     gs_detach_sb.c \
     gs_detach_sb.h \
+    gs_dictlex.c \
+    gs_dictlex.h \
     gs_editor.c \
     gs_editor.h \
     gs_editor_replace.c \
@@ -214,6 +218,10 @@ COMMON_SOURCE = \
     support.h \
     sw_bookmarks.cpp \
     sw_bookmarks.h \
+    sw_commentary.cpp \
+    sw_commentary.h \
+    sw_dictlex.cpp \
+    sw_dictlex.h \
     sw_display.cpp \
     sw_display.h \
     sw_gbs.cpp \
@@ -284,8 +292,9 @@ PROGRAMS = $(bin_PROGRAMS)
 
 am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	char_table.$(OBJEXT) e-splash.$(OBJEXT) gs_abouts.$(OBJEXT) \
-	gs_bookmarks.$(OBJEXT) gs_detach_int.$(OBJEXT) \
-	gs_detach_sb.$(OBJEXT) gs_editor.$(OBJEXT) \
+	gs_bookmarks.$(OBJEXT) gs_commentary.$(OBJEXT) \
+	gs_detach_int.$(OBJEXT) gs_detach_sb.$(OBJEXT) \
+	gs_dictlex.$(OBJEXT) gs_editor.$(OBJEXT) \
 	gs_editor_replace.$(OBJEXT) gs_editor_search.$(OBJEXT) \
 	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) \
 	gs_find_dlg.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
@@ -297,7 +306,8 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_shortcutbar.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
 	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
 	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT) \
-	sw_bookmarks.$(OBJEXT) sw_display.$(OBJEXT) sw_gbs.$(OBJEXT) \
+	sw_bookmarks.$(OBJEXT) sw_commentary.$(OBJEXT) \
+	sw_dictlex.$(OBJEXT) sw_display.$(OBJEXT) sw_gbs.$(OBJEXT) \
 	sw_information_dlg.$(OBJEXT) sw_module_options.$(OBJEXT) \
 	sw_properties.$(OBJEXT) sw_search.$(OBJEXT) \
 	sw_shortcutbar.$(OBJEXT) sw_sword.$(OBJEXT) \
@@ -315,8 +325,10 @@ LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/char_table.Po $(DEPDIR)/e-splash.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_abouts.Po $(DEPDIR)/gs_bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_commentary.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_int.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_detach_sb.Po $(DEPDIR)/gs_editor.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_detach_sb.Po $(DEPDIR)/gs_dictlex.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_editor.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_replace.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_editor_toolbar.Po $(DEPDIR)/gs_file.Po \
@@ -336,6 +348,7 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewtext_dlg.Po $(DEPDIR)/main.Po \
 @AMDEP_TRUE@	$(DEPDIR)/spell.Po $(DEPDIR)/spell_gui.Po \
 @AMDEP_TRUE@	$(DEPDIR)/support.Po $(DEPDIR)/sw_bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sw_commentary.Po $(DEPDIR)/sw_dictlex.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_display.Po $(DEPDIR)/sw_gbs.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_information_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_module_options.Po \
@@ -423,8 +436,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/e-splash.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_abouts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bookmarks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_commentary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_int.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_sb.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_dictlex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_replace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_editor_search.Po@am__quote@
@@ -455,6 +470,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/spell_gui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/support.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_bookmarks.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_commentary.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_dictlex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_gbs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_information_dlg.Po@am__quote@

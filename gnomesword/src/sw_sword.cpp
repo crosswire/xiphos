@@ -78,6 +78,9 @@
 #include "gs_editor.h"
 #include "sw_gbs.h"
 #include "gs_gbs.h"
+#include "sw_dictlex.h"
+#include "gs_dictlex.h"
+#include "sw_commentary.h"
 
 
 typedef map < string, string > modDescMap;
@@ -89,10 +92,8 @@ typedef map < string, string > bookAbrevMap;
 //SWDisplay *chapDisplay;		/* to display modules using GtkText a chapter at a time */
 SWDisplay 
     *comp1Display,		/* to display interlinear modules  a verse at a time */
-    *dictDisplay,			/* to display lex/dict modules  */
     *FPNDisplay,		/* to display formatted personal notes using GtkText */
     *commDisplay,		/* to display commentary modules */
-   // *bookDisplay,		/* to display gbs modules */
     *UTF8Display;		/* to display modules in utf8 */
     
 SWMgr 
@@ -188,13 +189,27 @@ extern gchar * current_filename,	/* filename for open file in study pad window  
 *mycolor, *mycolor;
 extern HISTORY historylist[];	/* sturcture for storing history items */
 
-gchar *backend_getmodDescriptionSWORD(gchar *modName) {
-	ModMap::iterator it;	//-- iteratior
-	it = mainMgr->Modules.find(modName);
-	if (it != mainMgr->Modules.end()) {
-		return (*it).second->Description();
-	}
-	return NULL;
+void backend_firstInitSWORD(void)
+{
+    mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
+    mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF)); 
+    percomMgr = new SWMgr(); 
+
+    curMod = NULL;		//-- set mods to null
+    comp1Mod = NULL;
+    curcomMod = NULL;
+    curdictMod = NULL;
+    percomMod = NULL;
+    interlinearMod0 = NULL;	//-- module for first interlinear window 
+    interlinearMod1 = NULL;			
+    interlinearMod2 = NULL;			
+    interlinearMod3 = NULL;			
+    interlinearMod4 = NULL;			
+
+    comp1Display = 0;	  
+    FPNDisplay = 0;
+    //commDisplay = 0;
+    UTF8Display = 0;
 	
 }
 /***********************************************************************************************
@@ -211,27 +226,6 @@ void initSWORD(SETTINGS *s)
  
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n","Initiating Sword\n");
-
-	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
-	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF)); 
-	percomMgr = new SWMgr(); 
-
-	curMod = NULL;		//-- set mods to null
-	comp1Mod = NULL;
-	curcomMod = NULL;
-	curdictMod = NULL;
-	percomMod = NULL;
-	interlinearMod0 = NULL;	//-- module for first interlinear window 
-	interlinearMod1 = NULL;			
-	interlinearMod2 = NULL;			
-	interlinearMod3 = NULL;			
-	interlinearMod4 = NULL;			
-
-	comp1Display = 0;	
-	dictDisplay = 0;	  
-	FPNDisplay = 0;
-	commDisplay = 0;
-	UTF8Display = 0;
 	
 	//-- setup versekeys for text and comm windows
 	vkText.Persist(1);
@@ -261,10 +255,10 @@ void initSWORD(SETTINGS *s)
 	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
 	//-- setup displays for sword modules
 	UTF8Display = new GtkHTMLChapDisp(lookup_widget(s->app, "htmlTexts"),s);
-	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"),s);
+	//commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"),s);
 	comp1Display = new InterlinearDisp(s->htmlInterlinear,s);
 	FPNDisplay = new GtkHTMLEntryDisp(htmlComments,s);
-	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"),s);
+	//dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"),s);
 	compages = 0;
 	dictpages = 0;
 
@@ -294,24 +288,26 @@ void initSWORD(SETTINGS *s)
 		
 		else if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- set commentary modules                
 			curcomMod = (*it).second;
-			commentarymods =  g_list_append(commentarymods, curcomMod->Name());
-			sbcommods = g_list_append(sbcommods, curcomMod->Description());
+			commentarymods =  g_list_append(commentarymods, (*it).second->Name());
+			sbcommods = g_list_append(sbcommods, (*it).second->Description());
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have  
-			curcomMod->Disp(commDisplay);
-			curcomMod->SetKey(vkComm);    
+			//curcomMod->Disp(commDisplay);
+			//curcomMod->SetKey(vkComm);    
 		} 
 		
 		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	//-- set dictionary modules        
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
 			curdictMod = (*it).second;
-			dictionarymods = g_list_append(dictionarymods, curdictMod->Name());
-			sbdictmods = g_list_append(sbdictmods, curdictMod->Description());
-			curdictMod->Disp(dictDisplay);	
-			if(!strcmp(curdictMod->Name(),"Thayer"))
+			dictionarymods = g_list_append(dictionarymods, (*it).second->Name());
+			sbdictmods = g_list_append(sbdictmods, (*it).second->Description());
+		    
+			//curdictMod->Disp(dictDisplay);
+		    
+			if(!strcmp((*it).second->Name(),"Thayer"))
 				s->havethayer = true;
-			if(!strcmp(curdictMod->Name(),"BDB"))
+			if(!strcmp((*it).second->Name(),"BDB"))
 				s->havebdb = true;
 		} 
 		
@@ -320,9 +316,10 @@ void initSWORD(SETTINGS *s)
 			sbbookmods = g_list_append(sbbookmods, (*it).second->Description());
 		}
 	}
-	//-- setup Generic Book Support
+	//-- setup Commentary Support, Generic Book Support and Dict/Lex Support
+	backend_setupCOMM(s);
+	backend_setupDL(s);
 	backend_setupGBS(s);
-	
 	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin();
 	     it != percomMgr->Modules.end(); it++) {
@@ -432,6 +429,7 @@ void ChangeVerseSWORD(void)
 	}
 	
 	//-- set commentary module to current verse
+	/*
 	if (settings->notebook3page == 0 && autoscroll) {
 		
 		searchresults = settings->displaySearchResults;
@@ -445,7 +443,9 @@ void ChangeVerseSWORD(void)
 				
 		settings->displaySearchResults = searchresults;
 	}
+	*/
 	
+   backend_displayinCOMM(settings->commLastPage, settings->currentverse);
 	ApplyChange = TRUE;
 }
 
@@ -702,10 +702,10 @@ void FillDictKeysSWORD(void)
 	}
 }
 
+
 //-------------------------------------------------------------------------------------------
 void shutdownSWORD(void)	//-- close down GnomeSword program
 {
-	//char *msg;
 	GtkWidget *msgbox;
 	extern gchar
 		*gSwordDir,
@@ -732,33 +732,38 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 		}
 	}
 	
+	//-- free dir and file stuff 
 	g_free(gSwordDir);
 	g_free(shortcutbarDir);
-	g_free(fnquickmarks);
 	g_free(fnconfigure);
 	g_free(swbmDir);
 	
+	//-- free glist
 	g_list_free(options);
 	g_list_free(settings->settingslist);
+	
 	shutdownverselistSBSWORD();
 	gui_shutdownGBS();
 	backend_shutdownGBS();
-
+	gui_shutdownDL();
+	backend_shutdownDL();
+	
 	//-- delete Sword managers
 	delete mainMgr;
 	delete mainMgr1;
 	delete percomMgr;
+	
 	//-- delete Sword displays
 	if (UTF8Display)
 		delete UTF8Display;
 	if (comp1Display)
 		delete comp1Display;
-	if (dictDisplay)
-		delete dictDisplay;
 	if (FPNDisplay)
 		delete FPNDisplay;
 	if (commDisplay)
 		delete commDisplay;
+	
+	//-- we are done
 	gtk_exit(0);		//-- exit
 }
 
@@ -905,13 +910,8 @@ void gotoBookmarkSWORD(gchar * modName, gchar * key)
 		
 		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {
 			if (!strcmp((*it).second->Name(), modName)) {
-				entry =
-				    lookup_widget(settings->app, "dictionarySearchText");
-				notebook =
-				    lookup_widget(settings->app, "notebook4");
-				gtk_notebook_set_page(GTK_NOTEBOOK(notebook), dictindex);
-				gtk_entry_set_text(GTK_ENTRY(entry), key);
-				return;
+				gui_setPageandKey_DL(dictindex, key);
+				return;	
 			}
 			++dictindex;
 		} 
@@ -1540,16 +1540,16 @@ backend_getBibleBooksSWORD(void)
 	VerseKey key;
 	GList *glist = NULL;
 
-	/*
-   * Load Bible books.
-   */
+    /*
+    * Load Bible books.
+    */
   
-  for (int i = 0; i <= 1; ++i) {
-		for ( int j = 0; j < key.BMAX[i]; ++j) {
-			glist = g_list_append(glist, (char*)key.books[i][j].name);
-		}
-	}	
-	return glist;
+    for (int i = 0; i <= 1; ++i) {
+	for ( int j = 0; j < key.BMAX[i]; ++j) {
+	    glist = g_list_append(glist, (char*)key.books[i][j].name);
+	}
+    }	
+    return glist;
 }
 
 /*** returns the version number of the sword libs ***/
@@ -1663,7 +1663,7 @@ void loadpreferencemodsSWORD(void)
  ******************************************************************************/
 void gs_firstrunSWORD(void)
 {
-	GtkWidget *setup;
+/*	GtkWidget *setup;
 	ModMap::iterator it;	//-- iteratior
 	SectionMap::iterator sit;	//-- iteratior
 	ConfigEntMap::iterator cit;	//-- iteratior
@@ -1701,21 +1701,22 @@ void gs_firstrunSWORD(void)
 	sprintf(gtextmods, "%d", itextmods);
 	sprintf(gcommmods, "%d", icommmods);
 	sprintf(gdictmods, "%d", idictmods);
-	/*** create setup durid ***/
+	//-- create setup durid 
+	
 	setup = create_dlgSetup(textMods,
 				commMods,
 				dictMods,
 				gtextmods,
-				gcommmods, gdictmods, pathtoswordmods);
-	/*** hold util we are done ***/
-	gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
-	gnome_dialog_run_and_close(GNOME_DIALOG(setup));
-	/*** free GLists ***/
+				gcommmods, 
+				gdictmods, 
+				pathtoswordmods);
+	
 	g_list_free(textMods);
 	g_list_free(commMods);
 	g_list_free(dictMods);
-	/*** delete Sword manager ***/
+	
 	delete mgr;
+	*/
 }
 
 /*** the changes are already made we just need to show them ***/
@@ -1839,7 +1840,7 @@ void displayDevotional(void)
 	setupforDailyDevotion(settings);
 }
 
-/*** we come here to get module type - Bible text, Commentary or Dict/Lex ***/
+/*** we come here to get module type - Bible text, Commentary, Dict/Lex or Book ***/
 gint get_mod_typeSWORD(gchar *modName)
 {
 	
@@ -1852,23 +1853,65 @@ gint get_mod_typeSWORD(gchar *modName)
 	it = mgr->Modules.find(modName);	//-- iterate through the modules until we find modName
 	if (it != mgr->Modules.end()) {	//-- if we find the module   
 	
-			if (!strcmp((*it).second->Type(), "Biblical Texts")) {				
-				return 0;
-			}
+		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
+		    /*** delete Sword manager ***/
+		    delete mgr;				
+		    return 0;
+		}
+	
+		if (!strcmp((*it).second->Type(), "Commentaries")) {
+		    /*** delete Sword manager ***/
+		    delete mgr;								
+		    return 1;				
+		}
 		
-			if (!strcmp((*it).second->Type(), "Commentaries")) {				
-				return 1;				
-			}
-			
-			if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {				
-				return 2;				
-			}
-			
-			if (!strcmp((*it).second->Type(), "Generic Books")) {				
-				return 3;				
-			}
+		if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {	
+		    /*** delete Sword manager ***/
+		    delete mgr;							
+		    return 2;				
+		}
+		
+		if (!strcmp((*it).second->Type(), "Generic Books")) {
+		    /*** delete Sword manager ***/
+		    delete mgr;								
+		    return 3;				
+		}
 	}
-	return -1;
 	/*** delete Sword manager ***/
 	delete mgr;
+	return -1;
 }
+
+GList* backend_getModListOfTypeSWORD(char *modType) {
+    ModMap::iterator it;
+    GList *mods = NULL;
+    
+    for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
+	if (!strcmp((*it).second->Type(),modType)) {	    
+	    mods = g_list_append(mods, (gchar *) (*it).second->Name());
+	}
+    }
+    return mods;    
+}
+
+gchar *backend_getmodDescriptionSWORD(gchar *modName) {
+    ModMap::iterator it;	//-- iteratior
+          
+    it = mainMgr->Modules.find(modName);
+    if (it != mainMgr->Modules.end()) {
+	return (*it).second->Description();
+    }    
+    return NULL;	
+}
+/***  returns path to sword modules must be freed by call function  ***/
+gchar *backend_getPathToModsSWORD(void) {
+    char *retval;
+    SWMgr *mgr;
+    
+    mgr = new SWMgr();
+    retval = g_strdup(mgr->prefixPath);
+    delete mgr;    
+    return retval;    
+}
+/******   end of file   ******/
+

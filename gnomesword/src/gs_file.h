@@ -33,24 +33,17 @@ extern "C" {
 #endif
 
 #include "gs_editor.h"
-
+/*
 typedef struct _listitem LISTITEM;
 struct _listitem {
 	gchar item[80];
 	gchar preitem[80];
 	gchar menu[80];
-};
+};*/
 
 //void on_ok_button2_clicked(GtkButton * button, gpointer user_data);
 void saveFile(gchar * filename);
 gint setDiretory(void);
-void loadquickmarks_programstart(GtkWidget *MainFrm);
-void loadquickmarks_afterSeparator(GtkWidget *MainFrm);
-void loadoptionarray(void);
-void clearquickmarks(void);
-void savequickmark(gchar * item);
-void saveoptions(void);
-void createFiles(void);
 GtkWidget *create_fileselection1(GSHTMLEditorControlData * ecd);
 GtkWidget *create_fileselectionSave(GSHTMLEditorControlData * ecd);
 

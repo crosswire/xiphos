@@ -1,3 +1,15 @@
+2002-04-12  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* add gs_ and sw_ dictlex.* files and moved the code
+	  for dictionaries and lexicons to them.
+	* removed quickmarks
+	* separated the gui and backend code for the setup druid.
+
+2002-04-11  Victor Porton  <porton@localhost>
+
+	* fixed bug about verses with numbers 0 and -1
+	
+
 2002-04-10  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added patch from Daniel Glassey to fix strongs, morph and 

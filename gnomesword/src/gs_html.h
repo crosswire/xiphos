@@ -55,9 +55,9 @@ extern "C" {
 				gboolean word);
 	gchar *buttonpresslookupGS_HTML(GtkWidget *html_widget);
 	void on_html_lookup_word_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
+				gchar *modDesc);
 	void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
+				gchar *modDesc);
 	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 	void gotoanchorHTML(GtkWidget * html_widget, gchar * verse);

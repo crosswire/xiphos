@@ -42,7 +42,12 @@ extern "C" {
 #define GS_DOCK_GBS "dockGBSEditor"
 #define GS_DOCK_PC "dockPCEditor"
 #define GS_DOCK_SP "dockSPEditor"
-	
+#define TEXT_MODS "Biblical Texts"
+#define COMM_MODS "Commentaries"
+#define DICT_MODS "Lexicons / Dictionaries"
+#define BOOK_MODS "Generic Books"
+    
+    
 typedef struct _settings SETTINGS;
 struct _settings {
 	GtkWidget
@@ -54,7 +59,9 @@ struct _settings {
 		*workbook, /* notebook - commentaries and editors */	
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
 		*notebookGBS, /* notebook - gbs */
-	
+		*notebookDL,  /* notebook - dict/lex */
+		*notebookCOMM,  /* notebook - dict/lex */
+    
 	/* dock/undock stuff */
 		*dockSB, /* dock for shortcut bar */
 		*vboxDock, 
@@ -161,7 +168,8 @@ struct _settings {
 						/* 0=text, 1= comm, 2=dict */
 		intCurVerse,    /* detached interlinear current verse */
 		gbsLastPage,    /* last notebook page before change */
-		iquickmarks;	/* number of items in quickmark menu */
+		dlLastPage,     /* last notebook page before change */
+		commLastPage;     /* last notebook page before change */
 						
 	gboolean   
 		usedefault, /* use default settings in gnomesword or those used for last session */

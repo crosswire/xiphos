@@ -76,6 +76,9 @@ int main(int argc, char *argv[])
 
     gnome_init("GnomeSword", VERSION, argc, argv);
     if (argc > 1) {
+	/*
+	 * these args are for broken configs or bookmarks - ie gnomesword will not start
+	 */
 	if (!strcmp(argv[1], "newconfigs")) {
 	    newconfigs = TRUE;
 	}
@@ -98,18 +101,25 @@ int main(int argc, char *argv[])
 	return FALSE;
     }
 #endif
-
+    /* 
+     * start swmgrs so they can be used by setup druid
+     */
+    backend_firstInitSWORD(); /* light-up swmgrs */
+    
+    /* 
+     * check for directories and files
+     */    
     icreatefiles = setDiretory();
     if (newconfigs) {
-	gs_firstrunSWORD();
+	gui_firstRunSETUP(); //gs_firstrunSWORD();
     }
     if (newbookmarks) {
 	createbookmarksBM(swbmDir);
     }
 
-/*icreatefiles = 1; *//* please remove me - i am for testing */
+    /*icreatefiles = 1;*/ /* please comment me - i am for testing */
     if (icreatefiles == 1 || icreatefiles == 3) {
-	gs_firstrunSWORD();
+	 gui_firstRunSETUP();  //gs_firstrunSWORD();
     }
 
     /*
@@ -118,8 +128,11 @@ int main(int argc, char *argv[])
     settings = &myset;
     loadconfig(settings);
 
+    /*
+     * If we have a new version run setup druid FIXME: do we need this?
+     */
     if (strcmp(VERSION, settings->gs_version)) {
-	gs_firstrunSWORD();
+	 gui_firstRunSETUP(); 
     }
 
     /*
@@ -135,7 +148,7 @@ int main(int argc, char *argv[])
     }
 
     mainwindow = create_mainwindow(splash, settings);
-    add_gtkhtml_widgets(mainwindow);
+    add_gtkhtml_widgets(mainwindow);/*FIXME: add these widgets to create_mainwindow() */
 
     if (settings->showsplash) {
 	e_splash_set_icon_highlight(E_SPLASH(splash), 2, TRUE);

@@ -39,10 +39,6 @@ extern "C" {
 				       gpointer user_data);
 	void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
-	void on_add_quickmark_activate(GtkMenuItem * menuitem,
-				       	gpointer user_data);
-	void on_clear_quickmarks_activate(GtkMenuItem * menuitem,
-					gpointer user_data);
 	void on_verse_style1_activate(GtkMenuItem * menuitem,
 				      	gpointer user_data);
 	void on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
