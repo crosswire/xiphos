@@ -49,40 +49,41 @@ static ListKey search_range;
 
 /******************************************************************************
  * Name
- *   
+ *    backend_set_range
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   int backend_set_range(char * list)
  *
  * Description
- *   
+ *   set search range by passing a list ie "Mat-John;James" to ParseVerseList
  *
  * Return value
- *   
+ *   int
  */
 
-char * backend_set_range(char * list)
+int backend_set_range(char * list)
 {
 	search_range = VerseKey().ParseVerseList(list, "", true);
+	return search_range.Count ();
 }
 
 
 /******************************************************************************
  * Name
- *   
+ *    backend_get_element
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   GList * backend_get_element(char * entry)
  *
  * Description
- *   
+ *   returns a list of range elements
  *
  * Return value
- *   
+ *   GList *
  */
 
 GList * backend_get_element(char * entry)
@@ -109,18 +110,18 @@ GList * backend_get_element(char * entry)
 
 /******************************************************************************
  * Name
- *   
+ *   backend_save_custom_ranges
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   void backend_save_custom_ranges(GList * ranges)
  *
  * Description
- *   
+ *   saves custom search ranges in preference.conf
  *
  * Return value
- *   
+ *   void
  */
 
 void backend_save_custom_ranges(GList * ranges)
@@ -147,23 +148,24 @@ void backend_save_custom_ranges(GList * ranges)
 
 /******************************************************************************
  * Name
- *   
+ *    backend_load_custom_ranges
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   GList * backend_load_custom_ranges(void)
  *
  * Description
- *   
+ *   get custom search ranges from preference.conf file
+ *   and returns them in a glist
  *
  * Return value
- *   
+ *   GList *
  */
 
 GList * backend_load_custom_ranges(void)
 {
-	CUSTOM_RANGE *r;
+	CUSTOM_RANGE * r;
 	GList * rv = NULL;
 	ConfigEntMap::iterator loop, end;
 	SWConfig *config = new SWConfig(settings.fnconfigure);	
@@ -184,169 +186,87 @@ GList * backend_load_custom_ranges(void)
 
 /******************************************************************************
  * Name
- *   
+ *    backend_clear_scope
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   int backend_clear_scope(void)
  *
  * Description
- *   
+ *   clear the current scope
  *
  * Return value
- *   
+ *   int
  */
 
 int backend_clear_scope(void)
 {
 	current_scope = 0;	//------------ clear scope
+	return current_scope->Error();
 }
 
 
 /******************************************************************************
  * Name
- *   
+ *    backend_clear_search_list
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   int backend_clear_search_list(void)
  *
  * Description
- *   
+ *   clear the search scope list - filled during last search
  *
  * Return value
- *   
+ *   int
  */
 
 int backend_clear_search_list(void)
 {
 	search_scope_list.ClearList();	//------------ clear scope search list
+	return search_scope_list.Count ();
 }
 
 
 /******************************************************************************
  * Name
- *   
+ *    backend_set_scope2last_search
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   int backend_set_scope2last_search(void)
  *
  * Description
- *   
+ *   set search scope to last search results
  *
  * Return value
- *   
- */
-
-int backend_clear_bounds(void)
-{
-	search_scope_bounds.ClearBounds();
-}
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "backend/search.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-int backend_set_bounds_upper(char * bound)
-{
-	search_scope_bounds.UpperBound(bound);
-}
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "backend/search.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-int backend_set_bounds_lower(char * bound)
-{
-	search_scope_bounds.LowerBound(bound);
-}
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "backend/search.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-int backend_set_scope2bounds(void)
-{
-	current_scope = &search_scope_bounds;
-}
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "backend/search.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
+ *   int (error)
  */
 
 int backend_set_scope2last_search(void)
 {
-	current_scope = &search_scope_list;//-- if we do _ move searchlist into current_scope
+	current_scope = &search_scope_list;//-- move searchlist into current_scope
+	return current_scope->Error();
 }
 
 
 /******************************************************************************
  * Name
- *   
+ *    backend_set_scope2range
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   void backend_set_scope2range(void)
  *
  * Description
- *   
+ *   set search scope to search range
  *
  * Return value
- *   
+ *   void
  */
 
 void backend_set_scope2range(void)
@@ -357,18 +277,18 @@ void backend_set_scope2range(void)
 
 /******************************************************************************
  * Name
- *   
+ *    backend_set_search_module
  *
  * Synopsis
  *   #include "backend/search.h"
  *
- *   
+ *   int backend_set_search_module(char * mod_name)
  *
  * Description
- *   
+ *   set module to mod_name return true is found
  *
  * Return value
- *   
+ *   int
  */
 
 int backend_set_search_module(char * mod_name)
@@ -549,12 +469,12 @@ GList* backend_do_sb_search(gpointer *usr_data)
  *   backend_get_search_results_text
  *
  * Synopsis
- *   #include "search_.h"
+ *   #include "backend/search.h"
  *
  *   char *backend_get_search_results_text(char * mod_name, char * key)	
  *
  * Description
- *    
+ *    returns the module text for key
  *
  * Return value
  *   char *
