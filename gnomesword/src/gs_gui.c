@@ -666,7 +666,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       "Detach",
-				       "Detach/Attach Shortcut Bar",
+				       _("Detach/Attach Shortcut Bar"),
 				       NULL, tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnSBDock);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSBDock",
@@ -681,7 +681,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       "Shortcut Bar", 
-				       "Hide/Show Shortcut Bar", NULL,
+				       _("Hide/Show Shortcut Bar"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnSB);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSB", btnSB,
@@ -705,7 +705,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, "Strongs",
-				       "Toogle Strongs Numbers", NULL,
+				       _("Toogle Strongs Numbers"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnStrongs);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnStrongs",
@@ -719,7 +719,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, "Morphological",
-				       "Toogle Morphological Tags", NULL,
+				       _("Toogle Morphological Tags"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnMorphs);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnMorphs",
@@ -733,7 +733,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash, SETTINGS *s)
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarOptions),
 				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
 				       NULL, "Footnotes",
-				       "Toogle Footnotes", NULL,
+				       _("Toogle Footnotes"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_ref(btnFootnotes);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnFootnotes",
