@@ -71,7 +71,8 @@ gchar *gui_update_nav_controls(gchar * key)
 	/* 
 	 *  remember last verse 
 	 */
-	strcpy(settings.currentverse, val_key);
+	settings.currentverse = val_key;
+	xml_set_value("GnomeSword", "key", "verse", val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries
 	 *  to new verse - settings.apply_change is set to false so we don't

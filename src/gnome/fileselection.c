@@ -131,7 +131,9 @@ static void save_ok(GtkButton * button, GSHTMLEditorControlData * ecd)
 	filesel = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	sprintf(ecd->filename, "%s", gtk_file_selection_get_filename(
 				GTK_FILE_SELECTION(filesel)));
-	strcpy(settings.studypadfilename, ecd->filename);
+	settings.studypadfilename = ecd->filename;
+	xml_set_value("GnomeSword", "studypad", "lastfile", 
+							ecd->filename);
 	gtk_widget_destroy(filesel);
 	save_file(ecd->filename, ecd);
 }

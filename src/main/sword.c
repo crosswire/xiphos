@@ -35,17 +35,10 @@
 #include "main/lists.h"
  
 #include "backend/sword.h"
-#include "backend/interlinear.h"
-#include "backend/bibletext_.h"
-#include "backend/commentary_.h"
 #include "backend/percomm_.h"
-#include "backend/gbs_.h"
-#include "backend/dictlex_.h"
-#include "backend/properties.h"
-#include "backend/shortcutbar.h"
 #include "backend/bookmarks.h"
-#include "backend/module_fonts.h"
 #include "backend/module.hh"
+#include "backend/mgr.hh"
 
 
 /******************************************************************************
@@ -67,52 +60,6 @@
 void module_name_from_description(char *mod_name, char *description)
 {
 	backend_module_name_from_description(mod_name, description);
-}
-
-
-/******************************************************************************
- * Name
- *  get_module_number
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int get_module_number(char *module_name, char *module_type)	
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int get_module_number(char *module_name, char *module_type)
-{
-	return backend_get_module_page(module_name, module_type);
-}
-
-
-/******************************************************************************
- * Name
- *  save_module_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void save_module_key(gchar * mod_name, gchar * key)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */ 
-
-void save_module_key(char * mod_name, char * key)
-{
-	backend_save_module_key(mod_name, key);
-
-	/* FIXME: we need to display change */
 }
 
 
@@ -140,51 +87,6 @@ const char *get_sword_version(void)
 
 /******************************************************************************
  * Name
- *  get_module_description
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   gchar *get_module_description(gchar * mod_name)	
- *
- * Description
- *    
- *
- * Return value
- *   gchar *
- */ 
-
-char *get_module_description(char * mod_name)
-{
-	return backend_get_module_description(mod_name);
-}
-
-/******************************************************************************
- * Name
- *  save_properties
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void save_properties(gboolean use_default)	
- *
- * Description
- *   save properties stored in SETTINGS structure
- *
- * Return value
- *   void
- */
-
-void save_properties(gboolean use_default)
-{
-	backend_save_properties(use_default);
-}
-
-
-
-
-/******************************************************************************
- * Name
  *   get_verse_list
  *
  * Synopsis
@@ -199,209 +101,12 @@ void save_properties(gboolean use_default)
  *   GList *
  */ 
 
-
+/*
 GList *get_verse_list(char* module_name, char *verse_list)
 {
 	return backend_get_verse_list(module_name, verse_list);
 }
-
-
-/******************************************************************************
- * Name
- *  get_module_font_name
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   char *get_module_font_name(char *mod_name)	
- *
- * Description
- *    
- *
- * Return value
- *   char *
- */ 
-
-char *get_module_font_name(char *mod_name)
-{
-	return backend_get_module_font_name(mod_name, settings.gSwordDir);
-}
-
-/******************************************************************************
- * Name
- *  
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   
- *
- * Description
- *    
- *
- * Return value
- *   
- */ 
-
-void get_font_info(MOD_FONT *mf)
-{
-	backend_load_font_info(mf, settings.gSwordDir);
-}
-
-
-/******************************************************************************
- * Name
- *  
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   
- *
- * Description
- *    
- *
- * Return value
- *   
- */ 
-
-void save_font_info(MOD_FONT *mf)
-{
-	backend_save_font_info(mf, settings.gSwordDir);
-}
-
-
-/******************************************************************************
- * Name
- *  get_module_font_size
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   char *get_module_font_size(char *mod_name)	
- *
- * Description
- *    
- *
- * Return value
- *  char * 
- */ 
-
-char *get_module_font_size(char *mod_name)
-{
-	return backend_get_module_font_size(mod_name, settings.gSwordDir);
-}
-
-
-/******************************************************************************
- * Name
- *  get_mod_type
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int get_mod_type(char * mod_name)
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int get_mod_type(char * mod_name)
-{
-	return backend_get_mod_type(mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  module_is_locked
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int module_is_locked(char * mod_name)
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int module_is_locked(char * mod_name)
-{
-	return backend_module_is_locked(mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  get_cipher_key
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   char *get_cipher_key(char *mod_name)
- *
- * Description
- *    
- *
- * Return value
- *   char *
- */ 
-
-char *get_cipher_key(char *mod_name)
-{
-	return backend_get_cipher_key(mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  has_cipher_tag
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int has_cipher_tag(char *mod_name)
- *
- * Description
- *    
- *
- * Return value
- *   int
- */ 
-
-int has_cipher_tag(char *mod_name)
-{
-	return backend_has_cipher_tag(mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *   get_module_text
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   char *get_module_text(char * mod_name, char * key)	
- *
- * Description
- *    
- *
- * Return value
- *   char *
- */
- 
-char *get_module_text(char * mod_name, char * key)
-{
-	backend_get_module_text(mod_name, key);	
-}
-
+*/
 
 /******************************************************************************
  * Name
@@ -425,27 +130,6 @@ char *get_search_results_text(char * mod_name, char * key)
 }
 
 
-/******************************************************************************
- * Name
- *   create_properties_from_setup
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int create_properties_from_setup(void)	
- *
- * Description
- *    
- *
- * Return value
- *   int
- */
-
-int create_properties_from_setup(void)
-{
-	return backend_create_properties_from_setup();
-}
-
 
 /******************************************************************************
  * Name
@@ -468,49 +152,6 @@ char *get_path_to_mods(void)
 	return backend_get_path_to_mods();
 }
 
-
-/******************************************************************************
- * Name
- *  get_mod_about_info
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   gchar *get_mod_about_info(char * mod_name)	
- *
- * Description
- *    
- *
- * Return value
- *   gchar *
- */ 
-
-char *get_mod_about_info(char * mod_name)
-{
-	return backend_get_mod_about_info(mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *   check_for_module
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   int check_for_module(char * mod_name)
- *
- * Description
- *    check for presents of a module by name
- *
- * Return value
- *   int
- */
- 
-int check_for_module(char * mod_name)
-{
-	return backend_check_for_module(mod_name);
-}
 
 void init_sword(void)
 {
@@ -537,26 +178,52 @@ void shutdown_sword(void)
 	backend_shutdown(TRUE);
 }
 
+
 /******************************************************************************
  * Name
- *   
+ *  
  *
  * Synopsis
- *   #include "sword.h"
+ *   #include ""
  *
- *   	
+ *    	
  *
  * Description
- *   
+ *    
  *
  * Return value
- *   void
- */
-
-char *get_striptext(char *mod_name, char *key)
-{
-	return backend_get_striptext(mod_name, key);
+ *   char * 
+ */ 
+ 
+char * get_text_from_offset(char * module_name, char * offset)
+{        
+	return backend_get_text_from_offset(module_name, offset);
 }
+
+
+/******************************************************************************
+ * Name
+ *  
+ *
+ * Synopsis
+ *   #include ""
+ *
+ *   char *	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
+ 
+int set_module(int manager, char * module_name)
+{
+	return backend_set_module(manager, module_name);
+}
+
+
+
 /** Returns error. */
 /*
 char int module_error(void) 
@@ -564,4 +231,3 @@ char int module_error(void)
 	return backend_module_error(void);
 }
 */
-	

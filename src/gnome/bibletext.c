@@ -45,6 +45,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
+#include "main/xml.h"
 
 static void on_notebook_text_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
@@ -164,7 +165,9 @@ static void text_page_changed(gint page_num, TEXT_DATA * t)
 	/*
 	 * remember new module name
 	 */
-	sprintf(settings.MainWindowModule, "%s", t->mod_name);
+	settings.MainWindowModule = t->mod_name;
+	xml_set_value("GnomeSword", "modules", "text",t->mod_name);
+	
 	/*
 	 * remember page number
 	 */
@@ -216,6 +219,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
 	 */
 	cur_t = t;
+	set_module(0, t->mod_name);
 	/*
 	 * do work that's non gui
 	 */
@@ -609,7 +613,7 @@ void gui_setup_text(GList * mods)
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_text_switch_page), text_list);
 
-	modbuf = g_strdup(settings.MainWindowModule);
+	modbuf = g_strdup(xml_get_value("modules", "text"));//settings.MainWindowModule);
 
 	set_page_text(modbuf, text_list);
 

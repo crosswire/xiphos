@@ -49,6 +49,7 @@
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/settings.h"
+#include "main/xml.h"
 
 
 
@@ -115,7 +116,7 @@ struct _preferences_check_buttons {
 	GtkWidget *use_studypad;
 	GtkWidget *use_studypad_dialog;
 	GtkWidget *use_percomm_dialog;
-	
+
 	GtkWidget *commentary_in_dialog;
 	GtkWidget *dictionary_in_dialog;
 	GtkWidget *book_in_dialog;
@@ -401,11 +402,11 @@ static void applyoptions(void)
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_gbs),
 				   settings.book_tabs);
 	gui_set_gbs_frame_label();
-	
+
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 				   settings.dict_tabs);
 	gui_set_dict_frame_label();
-	
+
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_comm),
 				   settings.comm_tabs);
 	gui_set_comm_frame_label(cur_c);
@@ -479,45 +480,77 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	we need to read all propertybox options here
 	*************************************************************/
 	gchar *buf;
+	gchar layout[80];
 	gdouble color[4];
 
 	/*** read modules ***/
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.text_module));
-	sprintf(settings.MainWindowModule, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "text", buf);
+	settings.MainWindowModule = xml_get_value("modules", "text");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_1_module));
-	sprintf(settings.Interlinear1Module, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "int1", buf);
+	settings.Interlinear1Module = xml_get_value("modules", "int1");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_2_module));
-	sprintf(settings.Interlinear2Module, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "int2", buf);
+	settings.Interlinear2Module = xml_get_value("modules", "int2");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_3_module));
-	sprintf(settings.Interlinear3Module, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "int3", buf);
+	settings.Interlinear3Module = xml_get_value("modules", "int3");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_4_module));
-	sprintf(settings.Interlinear4Module, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "int4", buf);
+	settings.Interlinear4Module = xml_get_value("modules", "int4");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.interlinear_5_module));
-	sprintf(settings.Interlinear5Module, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "int5", buf);
+	settings.Interlinear5Module = xml_get_value("modules", "int5");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.commentary_module));
-	sprintf(settings.CommWindowModule, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "comm", buf);
+	settings.CommWindowModule = xml_get_value("modules", "comm");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.dictionary_module));
-	sprintf(settings.DictWindowModule, "%s", buf);
-	buf =
-	    gtk_entry_get_text(GTK_ENTRY
-			       (entry.default_dictionary_module));
-	sprintf(settings.DefaultDict, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "dict", buf);
+	settings.DictWindowModule = xml_get_value("modules", "dict");
+
+	buf = gtk_entry_get_text(GTK_ENTRY
+				 (entry.default_dictionary_module));
+	xml_set_value("GnomeSword", "lexicons", "defaultdictionary",
+		      buf);
+	settings.DefaultDict =
+	    xml_get_value("lexicons", "defaultdictionary");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.percomm_module));
-	sprintf(settings.personalcommentsmod, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "percomm", buf);
+	settings.personalcommentsmod =
+	    xml_get_value("modules", "percomm");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.devotion_module));
-	sprintf(settings.devotionalmod, "%s", buf);
+	xml_set_value("GnomeSword", "modules", "devotional", buf);
+	settings.devotionalmod = xml_get_value("modules", "devotional");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.greek_lex__module));
-	sprintf(settings.lex_greek, "%s", buf);
+	xml_set_value("GnomeSword", "lexicons", "greek", buf);
+	settings.lex_greek = xml_get_value("lexicons", "greek");
+
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.hebrew_lex__module));
-	sprintf(settings.lex_hebrew, "%s", buf);
-	buf =
-	    gtk_entry_get_text(GTK_ENTRY
-			       (entry.greek_lex_viewer_module));
-	sprintf(settings.lex_greek_viewer, "%s", buf);
-	buf =
-	    gtk_entry_get_text(GTK_ENTRY
-			       (entry.hebrew_lex_viewer_module));
-	sprintf(settings.lex_hebrew_viewer, "%s", buf);
+	xml_set_value("GnomeSword", "lexicons", "hebrew", buf);
+	settings.lex_hebrew = xml_get_value("lexicons", "hebrew");
+
+	buf = gtk_entry_get_text(GTK_ENTRY
+				 (entry.greek_lex_viewer_module));
+	xml_set_value("GnomeSword", "lexicons", "greekviewer", buf);
+	settings.lex_greek_viewer =
+	    xml_get_value("lexicons", "greekviewer");
+
+	buf = gtk_entry_get_text(GTK_ENTRY
+				 (entry.hebrew_lex_viewer_module));
+	xml_set_value("GnomeSword", "lexicons", "hebrewviewer", buf);
+	settings.lex_hebrew_viewer =
+	    xml_get_value("lexicons", "hebrewviewer");
 
 
 	/*** read html colors ***/
@@ -526,7 +559,8 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
-	sprintf(settings.bible_text_color, "%s", buf);
+	xml_set_value("GnomeSword", "HTMLcolors", "text", buf);
+	settings.bible_text_color = xml_get_value("HTMLcolors", "text");
 	g_free(buf);
 
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
@@ -534,7 +568,9 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
-	sprintf(settings.bible_bg_color, "%s", buf);
+	xml_set_value("GnomeSword", "HTMLcolors", "background", buf);
+	settings.bible_bg_color =
+	    xml_get_value("HTMLcolors", "background");
 	g_free(buf);
 
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
@@ -542,7 +578,9 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
-	sprintf(settings.currentverse_color, "%s", buf);
+	xml_set_value("GnomeSword", "HTMLcolors", "currentverse", buf);
+	settings.currentverse_color =
+	    xml_get_value("HTMLcolors", "currentverse");
 	g_free(buf);
 
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
@@ -550,7 +588,9 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
-	sprintf(settings.bible_verse_num_color, "%s", buf);
+	xml_set_value("GnomeSword", "HTMLcolors", "versenum", buf);
+	settings.bible_verse_num_color =
+	    xml_get_value("HTMLcolors", "versenum");
 	g_free(buf);
 
 	gnome_color_picker_get_d(GNOME_COLOR_PICKER
@@ -558,101 +598,266 @@ static void get_preferences_from_dlg(GtkWidget * d)
 				 &color[0], &color[1], &color[2],
 				 &color[3]);
 	buf = gdouble_arr_to_hex(color, 0);
-	sprintf(settings.link_color, "%s", buf);
+	xml_set_value("GnomeSword", "HTMLcolors", "link", buf);
+	settings.link_color = xml_get_value("HTMLcolors", "link");
 	g_free(buf);
 
 	/*** read font sizes ***/
 	buf = gtk_entry_get_text(GTK_ENTRY(entry.verse_number_size));
-	sprintf(settings.verse_num_font_size, "%s", buf);
+	xml_set_value("GnomeSword", "fontsize", "versenum", buf);
+	settings.verse_num_font_size =
+	    xml_get_value("fontsize", "versenum");
 
 	/*** read radio buttons ***/
-	settings.usedefault =
-	    GTK_TOGGLE_BUTTON(check_button.use_defaults)->active;
+	if (GTK_TOGGLE_BUTTON(check_button.use_defaults)->active)
+		xml_set_value("GnomeSword", "misc", "usedefault", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "usedefault", "0");
+	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 
 	/*** read check buttons ***/
+	if (GTK_TOGGLE_BUTTON(check_button.show_shortcut_bar)->active)
+		xml_set_value("GnomeSword", "shortcutbar",
+			      "shortcutbar", "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar",
+			      "shortcutbar", "0");
 	settings.showshortcutbar =
-	    GTK_TOGGLE_BUTTON(check_button.show_shortcut_bar)->active;
-	settings.text_tabs =
-	    GTK_TOGGLE_BUTTON(check_button.show_bible_tabs)->active;
-	settings.comm_tabs =
-	    GTK_TOGGLE_BUTTON(check_button.show_commentary_tabs)->
-	    active;
-	settings.dict_tabs =
-	    GTK_TOGGLE_BUTTON(check_button.show_dictionary_tabs)->
-	    active;
-	settings.book_tabs =
-	    GTK_TOGGLE_BUTTON(check_button.show_book_tabs)->active;
+	    atoi(xml_get_value("shortcutbar", "shortcutbar"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_bible_tabs)->active)
+		xml_set_value("GnomeSword", "tabs", "text", "1");
+	else
+		xml_set_value("GnomeSword", "tabs", "text", "0");
+	settings.text_tabs = atoi(xml_get_value("tabs", "text"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_commentary_tabs)->
+	    active)
+		xml_set_value("GnomeSword", "tabs", "comm", "1");
+	else
+		xml_set_value("GnomeSword", "tabs", "comm", "0");
+	settings.comm_tabs = atoi(xml_get_value("tabs", "comm"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_dictionary_tabs)->
+	    active)
+		xml_set_value("GnomeSword", "tabs", "dict", "1");
+	else
+		xml_set_value("GnomeSword", "tabs", "dict", "0");
+	settings.dict_tabs = atoi(xml_get_value("tabs", "dict"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_book_tabs)->active)
+		xml_set_value("GnomeSword", "tabs", "book", "1");
+	else
+		xml_set_value("GnomeSword", "tabs", "book", "0");
+	settings.book_tabs = atoi(xml_get_value("tabs", "book"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.use_default_dictionary)->
+	    active)
+		xml_set_value("GnomeSword", "lexicons",
+			      "usedefaultdict", "1");
+	else
+		xml_set_value("GnomeSword", "lexicons",
+			      "usedefaultdict", "0");
 	settings.useDefaultDict =
-	    GTK_TOGGLE_BUTTON(check_button.use_default_dictionary)->
-	    active;
-	settings.versestyle =
-	    GTK_TOGGLE_BUTTON(check_button.use_verse_style)->active;
+	    atoi(xml_get_value("lexicons", "usedefaultdict"));
 
-	settings.showsplash =
-	    GTK_TOGGLE_BUTTON(check_button.show_splash_screen)->active;
-	    
-	settings.showtexts =
-	    GTK_TOGGLE_BUTTON(check_button.show_bible_pane)->active;
-	settings.showcomms =
-	    GTK_TOGGLE_BUTTON(check_button.show_commentary_pane)->
-	    active;
-	settings.showdicts =
-	    GTK_TOGGLE_BUTTON(check_button.show_lower_workbook)->active;
+	if (GTK_TOGGLE_BUTTON(check_button.use_verse_style)->active)
+		xml_set_value("GnomeSword", "misc", "versestyle", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "versestyle", "0");
+	settings.versestyle = atoi(xml_get_value("misc", "versestyle"));
 
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_splash_screen)->active)
+		xml_set_value("GnomeSword", "misc", "splash", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "splash", "0");
+	settings.showsplash = atoi(xml_get_value("misc", "splash"));
+
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_bible_pane)->active)
+		xml_set_value("GnomeSword", "misc", "showtexts", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showtexts", "0");
+	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_commentary_pane)->
+	    active)
+		xml_set_value("GnomeSword", "misc", "showcomms", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showcomms", "0");
+	settings.showcomms = atoi(xml_get_value("misc", "showcomms"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_lower_workbook)->active)
+		xml_set_value("GnomeSword", "misc", "showdicts", "1");
+	else
+		xml_set_value("GnomeSword", "misc", "showdicts", "0");
+	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_favorites)->active)
+		xml_set_value("GnomeSword", "shortcutbar", "favo", "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "favo", "0");
 	settings.showfavoritesgroup =
-	    GTK_TOGGLE_BUTTON(check_button.show_favorites)->active;
-	settings.showtextgroup =
-	    GTK_TOGGLE_BUTTON(check_button.show_text_group)->active;
-	settings.showcomgroup =
-	    GTK_TOGGLE_BUTTON(check_button.show_commentary_group)->
-	    active;
-	settings.showdictgroup =
-	    GTK_TOGGLE_BUTTON(check_button.show_dictionary_group)->
-	    active;
-	settings.showbookgroup =
-	    GTK_TOGGLE_BUTTON(check_button.show_book_group)->active;
-	settings.showhistorygroup =
-	    GTK_TOGGLE_BUTTON(check_button.show_history_group)->active;
-	settings.docked =
-	    GTK_TOGGLE_BUTTON(check_button.dock_shortcut_bar)->active;
-	    
-	settings.inViewer =
-	    GTK_TOGGLE_BUTTON(check_button.show_in_viewer)->active;
-	settings.inDictpane =
-	    GTK_TOGGLE_BUTTON(check_button.show_in_dictionary)->active;
-	settings.showdevotional =
-	    GTK_TOGGLE_BUTTON(check_button.show_devotion)->active;
+	    atoi(xml_get_value("shortcutbar", "favo"));
 
+	if (GTK_TOGGLE_BUTTON(check_button.show_text_group)->active)
+		xml_set_value("GnomeSword", "shortcutbar", "text", "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "text", "0");
+	settings.showtextgroup =
+	    atoi(xml_get_value("shortcutbar", "text"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_commentary_group)->
+	    active)
+		xml_set_value("GnomeSword", "shortcutbar", "comm", "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "comm", "0");
+	settings.showcomgroup =
+	    atoi(xml_get_value("shortcutbar", "comm"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_dictionary_group)->
+	    active)
+		xml_set_value("GnomeSword", "shortcutbar", "dict", "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "dict", "0");
+	settings.showdictgroup =
+	    atoi(xml_get_value("shortcutbar", "dict"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_book_group)->active)
+		xml_set_value("GnomeSword", "shortcutbar", "book", "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "book", "0");
+	settings.showbookgroup =
+	    atoi(xml_get_value("shortcutbar", "book"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_history_group)->active)
+		xml_set_value("GnomeSword", "shortcutbar", "history",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "history",
+			      "0");
+	settings.showhistorygroup =
+	    atoi(xml_get_value("shortcutbar", "history"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.dock_shortcut_bar)->active)
+		xml_set_value("GnomeSword", "shortcutbar", "docked",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "shortcutbar", "docked",
+			      "0");
+	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
+
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_in_viewer)->active)
+		xml_set_value("GnomeSword", "lexicons", "inviewer",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "lexicons", "inviewer",
+			      "0");
+	settings.inViewer = atoi(xml_get_value("lexicons", "inviewer"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_in_dictionary)->active)
+		xml_set_value("GnomeSword", "lexicons", "indictpane",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "lexicons", "indictpane",
+			      "0");
+	settings.inDictpane =
+	    atoi(xml_get_value("lexicons", "indictpane"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.show_devotion)->active)
+		xml_set_value("GnomeSword", "misc", "dailydevotional",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "misc", "dailydevotional",
+			      "0");
+	settings.showdevotional =
+	    atoi(xml_get_value("misc", "dailydevotional"));
+
+
+	if (GTK_TOGGLE_BUTTON(check_button.percomm_formatting)->active)
+		xml_set_value("GnomeSword", "misc", "formatpercom",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "misc", "formatpercom",
+			      "0");
 	settings.formatpercom =
-	    GTK_TOGGLE_BUTTON(check_button.percomm_formatting)->active;
+	    atoi(xml_get_value("misc", "formatpercom"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.use_studypad)->active)
+		xml_set_value("GnomeSword", "editor", "UseStudyPad",
+			      "1");
+	else
+		xml_set_value("GnomeSword", "editor", "UseStudyPad",
+			      "0");
 	settings.use_studypad =
-	    GTK_TOGGLE_BUTTON(check_button.use_studypad)->active;
+	    atoi(xml_get_value("editor", "UseStudyPad"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.use_studypad_dialog)->active)
+		xml_set_value("GnomeSword", "editor",
+			      "UseStudypadDialog", "1");
+	else
+		xml_set_value("GnomeSword", "editor",
+			      "UseStudypadDialog", "0");
 	settings.use_studypad_dialog =
-	    GTK_TOGGLE_BUTTON(check_button.use_studypad_dialog)->active;
+	    atoi(xml_get_value("editor", "UseStudypadDialog"));
+
+	if (GTK_TOGGLE_BUTTON(check_button.use_percomm_dialog)->active)
+		xml_set_value("GnomeSword", "editor",
+			      "UsePercommDialog", "1");
+	else
+		xml_set_value("GnomeSword", "editor",
+			      "UsePercommDialog", "0");
 	settings.use_percomm_dialog =
-	    GTK_TOGGLE_BUTTON(check_button.use_percomm_dialog)->active;
+	    atoi(xml_get_value("editor", "UsePercommDialog"));
+
 
 	/*** read layout spin buttons ***/
-	settings.gs_width =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (spin_button.app_width));
-	settings.gs_hight =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (spin_button.app_height));
-	settings.shortcutbar_width =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (spin_button.
-					      shortcut_bar_width));
-	settings.biblepane_width =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (spin_button.
-					      bible_pane_width));
-	settings.upperpane_hight =
-	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-					     (spin_button.
-					      bible_pane_height));
+	sprintf(layout, "%d",
+		gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						 (spin_button.
+						  app_width)));
+	xml_set_value("GnomeSword", "layout", "width", layout);
+	settings.gs_width = atoi(xml_get_value("layout", "width"));
 
-	save_properties(FALSE);
+
+
+	sprintf(layout, "%d",
+		gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						 (spin_button.
+						  app_height)));
+	xml_set_value("GnomeSword", "layout", "hight", layout);
+	settings.gs_hight = atoi(xml_get_value("layout", "hight"));
+
+
+	sprintf(layout, "%d",
+		gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						 (spin_button.
+						  shortcut_bar_width)));
+	xml_set_value("GnomeSword", "layout", "shortcutbar", layout);
+	settings.shortcutbar_width =
+	    atoi(xml_get_value("layout", "shortcutbar"));
+
+
+	sprintf(layout, "%d",
+		gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						 (spin_button.
+						  bible_pane_width)));
+	xml_set_value("GnomeSword", "layout", "textpane", layout);
+	settings.biblepane_width =
+	    atoi(xml_get_value("layout", "textpane"));
+
+
+	sprintf(layout, "%d",
+		gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
+						 (spin_button.
+						  bible_pane_height)));
+	xml_set_value("GnomeSword", "layout", "uperpane", layout);
+	settings.upperpane_hight =
+	    atoi(xml_get_value("layout", "uperpane"));
+
+
 	applyoptions();
 
 }
@@ -1285,11 +1490,11 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	    gtk_button_new_with_label(_("GnomeSword Defaults"));
 	gtk_widget_show(button.gnomesword_defaults);
 	gtk_box_pack_start(GTK_BOX(vbox35), button.gnomesword_defaults,
-		 	   TRUE,
-			   TRUE, 0);
+			   TRUE, TRUE, 0);
 	gtk_widget_set_sensitive(button.gnomesword_defaults, FALSE);
 	gtk_tooltips_set_tip(tooltips, button.gnomesword_defaults,
-		_("Use GnomeSword defaults for all settings on this page"),
+			     _
+			     ("Use GnomeSword defaults for all settings on this page"),
 			     NULL);
 	gtk_button_set_relief(GTK_BUTTON(button.gnomesword_defaults),
 			      GTK_RELIEF_HALF);
@@ -1336,7 +1541,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.use_defaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-		_("Yes, use defaults that I select"));
+					    _
+					    ("Yes, use defaults that I select"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (check_button.use_defaults));
@@ -1346,7 +1552,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	rbtnNoDefaults =
 	    gtk_radio_button_new_with_label(vbox36_group,
-		_("No, use settings saved on last GnomeSword run"));
+					    _
+					    ("No, use settings saved on last GnomeSword run"));
 	vbox36_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbtnNoDefaults));
 	gtk_widget_show(rbtnNoDefaults);
@@ -1416,7 +1623,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips,
 			     check_button.show_commentary_pane,
-		_("Commentaries, Personal Comments and StudyPad"),
+			     _
+			     ("Commentaries, Personal Comments and StudyPad"),
 			     NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.
@@ -1435,7 +1643,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_lower_workbook),
 				     TRUE);
-			     
+
 	frame43 = gtk_frame_new(_("Misc"));
 	gtk_widget_show(frame43);
 	gtk_box_pack_start(GTK_BOX(vbox28), frame43, FALSE, FALSE, 0);
@@ -1457,33 +1665,38 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.use_default_dictionary =
 	    gtk_check_button_new_with_label(_
-				    ("Use Default Dictionary"));
+					    ("Use Default Dictionary"));
 	gtk_widget_show(check_button.use_default_dictionary);
 	gtk_box_pack_start(GTK_BOX(vbox55),
 			   check_button.use_default_dictionary, FALSE,
 			   FALSE, 0);
 
 	check_button.show_devotion =
-	    gtk_check_button_new_with_label(_("Show Daily Devotion at start up"));
+	    gtk_check_button_new_with_label(_
+					    ("Show Daily Devotion at start up"));
 	gtk_widget_show(check_button.show_devotion);
 	gtk_box_pack_start(GTK_BOX(vbox55), check_button.show_devotion,
 			   FALSE, FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_devotion,
-		 _("Show Daily Devotion if you have a Devotion module"),
+			     _
+			     ("Show Daily Devotion if you have a Devotion module"),
 			     NULL);
 
 	check_button.show_splash_screen =
-	    gtk_check_button_new_with_label(_("Show Splash Screen at start up"));
+	    gtk_check_button_new_with_label(_
+					    ("Show Splash Screen at start up"));
 	gtk_widget_show(check_button.show_splash_screen);
-	gtk_box_pack_start(GTK_BOX(vbox55), check_button.show_splash_screen,
-			   FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox55),
+			   check_button.show_splash_screen, FALSE,
+			   FALSE, 0);
 	gtk_tooltips_set_tip(tooltips, check_button.show_splash_screen,
-		 _("Show Splash Screen at program start"),
+			     _("Show Splash Screen at program start"),
 			     NULL);
-			     
-			     
-	frame41 = gtk_frame_new(
-		_("where to View Dict/Lex When Link or Word Clicked"));
+
+
+	frame41 =
+	    gtk_frame_new(_
+			  ("where to View Dict/Lex When Link or Word Clicked"));
 	gtk_widget_show(frame41);
 	gtk_box_pack_start(GTK_BOX(vbox28), frame41, FALSE, FALSE, 0);
 
@@ -1507,7 +1720,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	gtk_box_pack_start(GTK_BOX(vbox53),
 			   check_button.show_in_dictionary, FALSE,
 			   FALSE, 0);
-			   
+
 	frame74 = gtk_frame_new(_("Editors"));
 	gtk_widget_show(frame74);
 	gtk_box_pack_start(GTK_BOX(vbox41), frame74, TRUE, TRUE, 0);
@@ -1526,7 +1739,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.use_studypad_dialog =
 	    gtk_check_button_new_with_label(_
-				    ("Open StudyPad in a Dialog"));
+					    ("Open StudyPad in a Dialog"));
 	gtk_widget_show(check_button.use_studypad_dialog);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.use_studypad_dialog, FALSE,
@@ -1534,7 +1747,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.use_percomm_dialog =
 	    gtk_check_button_new_with_label(_
-				    ("Open Personal Comments Editor in a Dialog"));
+					    ("Open Personal Comments Editor in a Dialog"));
 	gtk_widget_show(check_button.use_percomm_dialog);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.use_percomm_dialog, FALSE,
@@ -1542,7 +1755,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.percomm_formatting =
 	    gtk_check_button_new_with_label(_
-				    ("Use Formatting in Personal Comments"));
+					    ("Use Formatting in Personal Comments"));
 	gtk_widget_show(check_button.percomm_formatting);
 	gtk_box_pack_start(GTK_BOX(vbox89),
 			   check_button.percomm_formatting, FALSE,
@@ -1948,7 +2161,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.greek_lex__module = GTK_COMBO(combo26)->entry;
 	gtk_widget_show(entry.greek_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.greek_lex__module,
-	  _("Which Greek Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     _
+			     ("Which Greek Lexicon to display in Dict/Lex Window when a link or word is clicked"),
 			     NULL);
 
 	label192 = gtk_label_new(_("Hebrew Lexicon"));
@@ -1967,7 +2181,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	entry.hebrew_lex__module = GTK_COMBO(combo27)->entry;
 	gtk_widget_show(entry.hebrew_lex__module);
 	gtk_tooltips_set_tip(tooltips, entry.hebrew_lex__module,
-	  _("Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     _
+			     ("Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is clicked"),
 			     NULL);
 
 	label202 = gtk_label_new(_("Greek Lex Viewer"));
@@ -1994,7 +2209,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	    GTK_COMBO(comboGreekViewer)->entry;
 	gtk_widget_show(entry.greek_lex_viewer_module);
 	gtk_tooltips_set_tip(tooltips, entry.greek_lex_viewer_module,
-	  _("Which Greek Lecicon to display in viewer when a link or word is clicked"),
+			     _
+			     ("Which Greek Lecicon to display in viewer when a link or word is clicked"),
 			     NULL);
 
 	comboHebViewer = gtk_combo_new();
@@ -2007,7 +2223,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	    GTK_COMBO(comboHebViewer)->entry;
 	gtk_widget_show(entry.hebrew_lex_viewer_module);
 	gtk_tooltips_set_tip(tooltips, entry.hebrew_lex_viewer_module,
-	   _("Which Hebrew Lexicon to display in viewer when a link or word is clicked"),
+			     _
+			     ("Which Hebrew Lexicon to display in viewer when a link or word is clicked"),
 			     NULL);
 
 	label191 = gtk_label_new(_("Greek Lexicon"));
@@ -2175,8 +2392,8 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 				     settings.showbookgroup);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.show_history_group),
-				     settings.showhistorygroup);		     
-				     
+				     settings.showhistorygroup);
+
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (check_button.dock_shortcut_bar),
 				     settings.docked);
@@ -2398,7 +2615,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			   "changed",
 			   GTK_SIGNAL_FUNC(on_spinbutton_changed),
 			   NULL);
-			   
+
 	/*** module combos ***/
 	gtk_signal_connect(GTK_OBJECT(entry.text_module), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);

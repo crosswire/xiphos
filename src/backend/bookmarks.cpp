@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * bookmarks.cpp- functions to load and save bookmarks
+ * bookmarks.cpp- functions to load old style bookmarks
  *
  * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
@@ -69,7 +69,8 @@ typedef struct _ExportStruct ExportStruct;
  *               const gchar * section, GNode * parent)
  *
  * Description
- *   
+ *   this function is required by backend_load_bookmarks()
+ *   - this is for compatibility with GnomeSword-0.7.x -
  *
  * Return value
  *   void
@@ -116,7 +117,7 @@ static void add_section(SWConfig * config,
  * Name
  *   backend_load_bookmarks
  *
- * Synopsis
+ * Synopsisbackend_load_bookmarks(char *dir)
  *   #include "backend/bookmarks.h"
  *
  *   GNode * backend_load_bookmarks(char *dir)
@@ -124,6 +125,7 @@ static void add_section(SWConfig * config,
  * Description
  *   load bookmarks - using sword SWConfig
  *   most of this code is form sword-1.5.2 bibleCS bookmarkfrm.cpp
+ *   - this is for compatibility with GnomeSword-0.7.x -
  *
  * Return value
  *   GNode *

@@ -240,7 +240,7 @@ static void ctree_select_row(GtkCTree * ctree, GList * node,
 
 	change_book(bookname, dlg->offset);
 
-	text = display_row_gbs(dlg->mod_name, offset);
+	text = get_text_from_offset(dlg->mod_name, offset);
 	if (text) {
 		/* fill ctree node with children */
 		if ((GTK_CTREE_ROW(node)->children == NULL)

@@ -26,22 +26,40 @@
 extern "C" {
 #endif
 
-#include <swmgr.h>
-	
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+	
+#include <swmgr.h>
+#include <treekeyidx.h>
+	
 
 
 using namespace sword;
-typedef struct _sword_managers MANAGERS;
-struct  _sword_managers {
-	SWMgr * search;
+typedef struct _sword SWORD;
+struct  _sword {	
+	SWMgr *main_mgr;
+	SWMgr *search_mgr;
+	SWMgr *module_mgr;
+	SWMgr *text_mgr;
+	SWMgr *inter_mgr;
+	SWMgr *comm_mgr;
+	SWMgr *dict_mgr;
+	SWMgr *gbs_mgr;
+	SWMgr *percom_mgr;
 	SWMgr * results;
+	
+	SWModule *text_mod;
+	SWModule *comm_mod;
+	SWModule *dict_mod;
+	SWModule *gbs_mod;
+	SWModule *percom_mod;
+	
+	TreeKeyIdx *treeKey;	
 };
 
 	
-extern MANAGERS sw_mgr;
+extern SWORD sw;
 
 #ifdef __cplusplus
 }

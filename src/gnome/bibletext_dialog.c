@@ -43,6 +43,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/key.h"
+#include "main/xml.h"
 
 
 
@@ -153,7 +154,7 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 					 settings.program_title);
 	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
 
-	text = get_striptext(mod, key);
+	text = get_striptext(4, mod, key);
 	str = remove_linefeeds(text);
 	if (str) {
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar),
@@ -311,7 +312,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		mybuf = strchr(url, '=');
 		++mybuf;
 		buf = g_strdup(mybuf);
-		gui_display_verse_list(settings.MainWindowModule, buf);
+		gui_display_verse_list(xml_get_value("modules", "text"),buf);//settings.MainWindowModule, buf);
 		g_free(buf);
 
 	}

@@ -28,11 +28,9 @@
 
 #include "main/settings.h"
 #include "main/bibletext.h"
+#include "main/sword.h"
 
-#include "backend/bibletext_.h"
 #include "backend/sword.h"
-#include "backend/interlinear.h"
-#include "backend/module_options.h"
 
 
 /******************************************************************************
@@ -72,37 +70,18 @@ void set_module_unlocked(char * mod_name, char * key)
  * Return value
  *   char*
  */ 
-
+/*
 char *get_bibletext_text(char *mod_name, char *key)
 {
 	return backend_get_bibletext_text(mod_name, key);
 }
-
+*/
+/*
 char *get_bibletext_striptext(char *mod_name, char *key)
 {
 	return backend_get_bibletext_striptext(mod_name, key);
 }
-/******************************************************************************
- * Name
- *  text_get_description
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   const char* text_get_description(char * mod_name)	
- *
- * Description
- *    
- *
- * Return value
- *   const char*
- */
- 
-const char *text_get_description(char * mod_name)
-{
-	return backend_get_text_module_description(mod_name);
-}
-
+*/
 /******************************************************************************
  * Name
  *  check_for_global_option
@@ -149,7 +128,7 @@ void set_text_module_global_option(gchar * option, gboolean choice)
 	} else {
 		on_off = "Off";
 	}
-	backend_set_text_global_option(option, on_off);
+	backend_set_global_option(0, option, on_off);
 }
 
 /******************************************************************************
@@ -224,7 +203,7 @@ int load_module_options(char * modName, char * option)
 
 void set_text_global_option(gchar * option, gchar * choice)
 {
-	backend_set_text_global_option(option, choice);
+	backend_set_global_option(0, option, choice);
 }
 
 /******************************************************************************
@@ -245,7 +224,7 @@ void set_text_global_option(gchar * option, gchar * choice)
 
 char *get_interlinear_module_text(char * mod_name, char * tmpkey)
 {
-	return backend_get_interlinear_module_text(mod_name, tmpkey);
+	return backend_get_module_text(8, mod_name, tmpkey);
 }
 
 /******************************************************************************
@@ -266,7 +245,6 @@ char *get_interlinear_module_text(char * mod_name, char * tmpkey)
 
 void set_interlinear_global_option(char * option, char * yesno)
 {
-	backend_set_interlinear_global_option(option, yesno);
+	backend_set_global_option(8, option, yesno);
+	/*backend_set_interlinear_global_option(option, yesno);*/
 }
-
-
