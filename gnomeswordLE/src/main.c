@@ -41,7 +41,7 @@ main (int argc, char *argv[])
 {
 	GtkWidget 
 		*mainwindow;
-	//	*setup;
+		//*setup;
 	gboolean 		
 		newconfigs = FALSE,	
 		newbookmarks = FALSE;
@@ -61,8 +61,7 @@ main (int argc, char *argv[])
   	gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	*/
-  	mainwindow = create_mainwindow ();
- // 	add_gtkhtml_widgets(mainwindow);
+  	mainwindow = create_mainwindow();
   	setDiretory();
   	if(newconfigs)
   	{
@@ -75,10 +74,12 @@ main (int argc, char *argv[])
   	/* load settings into structure */
   	myset = readsettings(); 
   	/* set pointer to structure */
-  	settings = &myset;       
+  	settings = &myset;  
+	/* crank all the sword stuff */
   	initSWORD(mainwindow);
-  	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
-  	
+	/* kick start the interface */
+  	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods); 
+ 	/* proudly (or sheepishly as the case mybe) show the user what we have done */
   	gtk_widget_show(mainwindow);
   	/* set toggle state of buttons and menu items */
   	UpdateChecks(mainwindow);    	

@@ -73,6 +73,7 @@ SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */
+SWDisplay *VCRWPDisplay; /* to display rwp module in view comm dialog */
 
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
@@ -219,9 +220,9 @@ initSWORD(GtkWidget *mainform)
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
 	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));	
-	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
-	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
-	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
+	comp1Display = new HTMLentryDisp(lookup_widget(mainform,"textComp1"));
+	comp2Display = new HTMLentryDisp(lookup_widget(mainform,"textComp2"));
+	comp3Display = new HTMLentryDisp(lookup_widget(mainform,"textComp3"));
 	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
 	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));	
@@ -313,11 +314,16 @@ initSWORD(GtkWidget *mainform)
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++){
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
-		
+			sit = mainMgr1->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	    		if (sit !=mainMgr1->config->Sections.end()){
+	    			cit = (*sit).second.find("SourceType");
+				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat ="Plain";
+			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				comp1Mod->AddRenderFilter(gbftohtml);
 				comp1Mod->Disp(comp1Display);
-			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need plain to html filter			
 			  	comp1Mod->AddRenderFilter(plaintohtml);
 				comp1Mod->Disp(comp1Display);
 			}	
@@ -333,11 +339,16 @@ initSWORD(GtkWidget *mainform)
 	for (it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
 		comp2Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
-		
+			sit = mainMgr2->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	    		if (sit !=mainMgr2->config->Sections.end()){
+	    			cit = (*sit).second.find("SourceType");
+				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat ="Plain";
+			}				
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				comp2Mod->AddRenderFilter(gbftohtml);
 				comp2Mod->Disp(comp2Display);
-			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need plain to html filter			
 			  	comp2Mod->AddRenderFilter(plaintohtml);
 				comp2Mod->Disp(comp2Display);
 			}	
@@ -354,11 +365,16 @@ initSWORD(GtkWidget *mainform)
 	for (it = mainMgr3->Modules.begin(); it != mainMgr3->Modules.end(); it++){
 		comp3Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){
-		
+			sit = mainMgr3->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	    		if (sit !=mainMgr3->config->Sections.end()){
+	    			cit = (*sit).second.find("SourceType");
+				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat ="Plain";
+			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				comp3Mod->AddRenderFilter(gbftohtml);
 				comp3Mod->Disp(comp3Display);
-			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need plain to html filter			
 			  	comp3Mod->AddRenderFilter(plaintohtml);
 				comp3Mod->Disp(comp3Display);
 			}	
@@ -1106,14 +1122,30 @@ void setuplisteditSWORD(GtkWidget *text)
 	listMgr = new SWMgr();
 	listMod = NULL;
 	ModMap::iterator it;	/* sword manager iterator */
+	SectionMap::iterator sit; //-- iteratior	
+	ConfigEntMap::iterator cit; //-- iteratior
+	gchar *sourceformat;
 	
+	sourceformat = "Plain";
 	/* set sword display */
-	listDisplay = new GTKInterlinearDisp(text);	
+	listDisplay = new HTMLentryDisp(text);	
 	/* iterator through modules */	
 	for (it = listMgr->Modules.begin(); it != listMgr->Modules.end(); it++){
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			listMod = (*it).second;	/* set listMod  */
-			listMod->Disp(listDisplay);	/* set listeditor display for modules */
+			sit = mainMgr1->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
+	    		if (sit !=mainMgr1->config->Sections.end()){
+	    			cit = (*sit).second.find("SourceType");
+				if (cit != (*sit).second.end())	sourceformat = (char *)(*cit).second.c_str();
+				else sourceformat ="Plain";
+			}
+			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
+				listMod->AddRenderFilter(gbftohtml);
+				listMod->Disp(listDisplay);
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need plain to html filter			
+			  	listMod->AddRenderFilter(plaintohtml);
+				listMod->Disp(listDisplay);
+			}
 		}
 	}
 	it = listMgr->Modules.find(curMod->Name()); /* set listMod to curMod */
@@ -1295,7 +1327,7 @@ void startsearchSWORD(GtkWidget *searchFrm)
 
 
 /****************************************************************************************
- *setupCommSWORD - set up the sword stuff for the view dictionary dialog
+ *setupCommSWORD - set up the sword stuff for the view commentary dialog
  *returns a list of commentary modules
  ****************************************************************************************/
 GList* setupCommSWORD(GtkWidget *text)
@@ -1309,7 +1341,8 @@ GList* setupCommSWORD(GtkWidget *text)
 	VCMgr	= new SWMgr();
 	VCMod     = NULL;
 	sourceformat = "Plain";
-	VCDisplay = new  GTKEntryDisp(text);
+	VCDisplay = new  HTMLentryDisp(text);
+	VCRWPDisplay = new GTKRWPDisp(text);
 	list = NULL;
 	for(it = VCMgr->Modules.begin(); it != VCMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Commentaries")){
@@ -1321,16 +1354,18 @@ GList* setupCommSWORD(GtkWidget *text)
 				else sourceformat ="Plain";
 			}			
 			if (!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
-				VCMod->AddRenderFilter(gbftohtml);				
+				VCMod->AddRenderFilter(gbftohtml);		
+				VCMod->Disp(VCDisplay);
 			} else if(!strcmp(sourceformat,"ThML")) { //-- we need ThML to html filter
-				VCMod->AddRenderFilter(thmltohtml);		
+				VCMod->AddRenderFilter(thmltohtml);	
+				VCMod->Disp(VCDisplay);
 			} else if(!strcmp(sourceformat,"Plain")&& strcmp(VCMod->Name(),"RWP")) { //-- we need plain to html filter
 			        VCMod->AddRenderFilter(plaintohtml);
+				VCMod->Disp(VCDisplay);
 			} else if(!strcmp(VCMod->Name(),"RWP")){  //-- we need rwp to html filter 
-				//VCMod->Disp(RWPDisplay);
+				VCMod->Disp(VCRWPDisplay);
 			}
 			list = g_list_append(list,VCMod->Name());
-			VCMod->Disp(VCDisplay);
 		}
 	}
 	return list;
@@ -1340,6 +1375,8 @@ GList* setupCommSWORD(GtkWidget *text)
 void shutdownVCSWORD(void)  //-- close down view comm dialog program
 {	
 	delete VCMgr;	
+	if(VCRWPDisplay)
+		delete VCRWPDisplay;
 	if(VCDisplay)
 		delete VCDisplay;	
 }
