@@ -50,12 +50,12 @@
  *   void
  */
 
-static void dialog_destroy(GtkObject *object, gpointer data)
+static void dialog_destroy (GtkObject *object, gpointer data)
 {	
-	gui_studypad_can_close();
-	widgets.studypad_dialog = NULL;
-	settings.studypad_dialog_exist = FALSE;
 	
+	//gui_studypad_can_close();
+	widgets.studypad_dialog = NULL;
+	settings.studypad_dialog_exist = FALSE;	
 }
 
 /******************************************************************************
@@ -81,6 +81,27 @@ void gui_attach_detach_studypad(void)
 }
 
 
+
+static GtkWidget *create_dialog(void)
+{
+	GtkWidget *dialog;
+	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_object_set_data(GTK_OBJECT(dialog),"dialog",dialog);
+	gtk_widget_set_usize(dialog, 535, 280);
+	//GTK_WIDGET_SET_FLAGS(dialog, GTK_CAN_FOCUS);
+	gtk_window_set_policy(GTK_WINDOW
+			      (dialog),
+			      TRUE, TRUE, FALSE);
+	gtk_window_set_title((GtkWindow *)dialog,
+                                (const gchar*)N_("StudyPad"));
+	gtk_widget_show(dialog);
+	g_signal_connect(G_OBJECT(dialog), "destroy",
+                      G_CALLBACK(dialog_destroy),
+			   NULL);	 
+	
+	return dialog;	
+}
+
 /******************************************************************************
  * Name
  *  
@@ -99,27 +120,15 @@ void gui_attach_detach_studypad(void)
 
 gint gui_open_studypad_dialog(gchar * file_name)
 {
-	widgets.studypad_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_object_set_data(GTK_OBJECT
-			    (widgets.studypad_dialog),
-			    "widgets.studypad_dialog",
-			    widgets.studypad_dialog);
-	gtk_widget_set_usize(widgets.studypad_dialog, 535, 280);
-	GTK_WIDGET_SET_FLAGS(widgets.studypad_dialog, GTK_CAN_FOCUS);
-	gtk_window_set_policy(GTK_WINDOW
-			      (widgets.studypad_dialog),
-			      TRUE, TRUE, TRUE);
-	gtk_window_set_title((GtkWindow *)widgets.studypad_dialog,
-                                (const gchar*)N_("StudyPad"));
-	gtk_widget_show(widgets.studypad_dialog);
+	widgets.studypad_dialog = create_dialog();
 
 	widgets.html_studypad =
 	  	gui_create_studypad_control(widgets.studypad_dialog,
 							  file_name);
-	
-	
-	gtk_signal_connect(GTK_OBJECT(widgets.studypad_dialog), "destroy",
-                      G_CALLBACK(dialog_destroy),
-			   NULL);	   
+	/*g_signal_connect_object(G_OBJECT(widgets.studypad_dialog),
+                                             "destroy",
+                                             G_CALLBACK(dialog_destroy),
+                                             NULL,
+                                             0);*/
 	return TRUE;
 }

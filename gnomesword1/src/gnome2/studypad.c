@@ -68,7 +68,7 @@ GSHTMLEditorControlData *editor_cd;
  *   void
  */
 
-void gui_studypad_can_close(void)
+void gui_studypad_can_close(GSHTMLEditorControlData *ecd)
 {
 	gchar *filename = NULL;
 	gint test;
@@ -90,14 +90,14 @@ void gui_studypad_can_close(void)
 		if (test == GS_YES) {
 			if (settings.studypadfilename) {
 				filename = g_strdup(settings.studypadfilename);
-				save_file(filename, editor_cd);
+				save_file(filename, ecd);
 			} else {
-				gui_fileselection_save(editor_cd);
+				gui_fileselection_save(ecd);
 			}
 		}
 		settings.modifiedSP = FALSE;
 		g_free(info);
-		if(filename) g_free(filename);
+		//if(filename) g_free(filename);
 	}
 }
 
