@@ -33,7 +33,6 @@
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
 
-//#include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "main/lists.h"
 #include "main/sword.h"
@@ -46,8 +45,89 @@
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
 static GtkWidget *module_options_menu;
+static gboolean interlinear1;
+static gboolean interlinear2;
+static gboolean interlinear3;
+static gboolean interlinear4;
+static gboolean interlinear5;
 
 
+
+/******************************************************************************
+ * Name
+ *   have_module
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   gboolean have_module(gchar *mod_name)
+ *
+ * Description
+ *   test for module
+ *
+ * Return value
+ *   gboolean
+ */
+
+static gboolean have_module(gchar *mod_name)
+{
+	GList *tmp = NULL;
+	tmp = get_list(TEXT_LIST);
+	while(tmp != NULL) {
+		if(!strcmp(mod_name,(gchar*)tmp->data))
+			return TRUE;
+		tmp = g_list_next(tmp);
+	}
+	return FALSE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_check_interlinear_modules
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   void gui_check_interlinear_modules(void)
+ *
+ * Description
+ *   check for interlinear modules on program start
+ *   we don't want to try to display modules we don't have
+ *   it makes bad things happen
+ *
+ * Return value
+ *   void
+ */
+
+void gui_check_interlinear_modules(void)
+{
+	if(strlen(settings.Interlinear1Module) > 2)
+		interlinear1 = have_module(settings.Interlinear1Module);
+	else
+		interlinear1 = FALSE;
+	
+	if(strlen(settings.Interlinear2Module) > 2)
+		interlinear2 = have_module(settings.Interlinear2Module);
+	else
+		interlinear2 = FALSE;
+	
+	if(strlen(settings.Interlinear3Module) > 2)
+		interlinear3 = have_module(settings.Interlinear3Module);
+	else
+		interlinear3 = FALSE;
+	
+	if(strlen(settings.Interlinear4Module) > 2)
+		interlinear4 = have_module(settings.Interlinear4Module);
+	else
+		interlinear4 = FALSE;
+	
+	if(strlen(settings.Interlinear5Module) > 2)	
+		interlinear5 = have_module(settings.Interlinear5Module);
+	else
+		interlinear5 = FALSE;
+	
+}
 /******************************************************************************
  * Name
  *   gui_set_interlinear_options_at_start
@@ -172,7 +252,7 @@ static void on_changeint1mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear1Module, "%s", modName);
-	
+	interlinear1 = have_module(settings.Interlinear1Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -207,7 +287,7 @@ static void on_changeint2mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear2Module, "%s", modName);
-	
+	interlinear2 = have_module(settings.Interlinear2Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -241,7 +321,7 @@ static void on_changeint3mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear3Module, "%s", modName);
-	
+	interlinear3 = have_module(settings.Interlinear3Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -275,7 +355,7 @@ static void on_changeint4mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear4Module, "%s", modName);
-	
+	interlinear4 = have_module(settings.Interlinear4Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -309,7 +389,7 @@ static void on_changeint5mod_activate(GtkMenuItem * menuitem,
 	module_name_from_description(modName,
 					     (gchar *) user_data);
 	sprintf(settings.Interlinear5Module, "%s", modName);
-	
+	interlinear5 = have_module(settings.Interlinear5Module);
 	if (settings.dockedInt)
 		gui_update_interlinear_page();
 	else
@@ -394,23 +474,38 @@ void gui_update_interlinear_page(void)
 			mod_name = NULL;
 			switch(i) {
 				case 0:
-					mod_name = settings.Interlinear1Module;					
+					if(interlinear1)
+						mod_name = settings.Interlinear1Module;	
+					else
+						mod_name = NULL;
 				break;
 				case 1:
-					mod_name = settings.Interlinear2Module;
+					if(interlinear2)
+						mod_name = settings.Interlinear2Module;
+					else
+						mod_name = NULL;
 				break;
 				case 2:
-					mod_name = settings.Interlinear3Module;
+					if(interlinear3)
+						mod_name = settings.Interlinear3Module;
+					else
+						mod_name = NULL;
 				break;
 				case 3:
-					mod_name = settings.Interlinear4Module;
+					if(interlinear4)
+						mod_name = settings.Interlinear4Module;
+					else
+						mod_name = NULL;
 				break;
 				case 4:
-					mod_name = settings.Interlinear5Module;
+					if(interlinear5)
+						mod_name = settings.Interlinear5Module;
+					else
+						mod_name = NULL;
 				break;
 			}
 			
-			if(!*mod_name) continue;
+			if(!mod_name) continue;
 
 			++j;
 			
@@ -580,20 +675,25 @@ static void int_display(gchar *key)
 		for(j = 0; j < 5; j++) {	
 			mod_name = NULL;
 			switch(j) {
-				case 0:
-					mod_name = settings.Interlinear1Module;
+				case 0: 
+					if(interlinear1)
+						mod_name = settings.Interlinear1Module;
 				break;
 				case 1:
-					mod_name = settings.Interlinear2Module;
+					if(interlinear2)
+						mod_name = settings.Interlinear2Module;
 				break;
 				case 2:
-					mod_name = settings.Interlinear3Module;
+					if(interlinear3)
+						mod_name = settings.Interlinear3Module;
 				break;
 				case 3:
-					mod_name = settings.Interlinear4Module;
+					if(interlinear4)
+						mod_name = settings.Interlinear4Module;
 				break;
 				case 4:
-					mod_name = settings.Interlinear5Module;
+					if(interlinear5)
+						mod_name = settings.Interlinear5Module;
 				break;
 			}
 			
@@ -618,10 +718,12 @@ static void int_display(gchar *key)
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 			}
 			
-			utf8str = get_interlinear_module_text(mod_name, tmpkey);
-			if (strlen(utf8str)) {
-				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-				free(utf8str);
+			if(mod_name){
+				utf8str = get_interlinear_module_text(mod_name, tmpkey);
+				if (strlen(utf8str)) {
+					gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
+					free(utf8str);
+				}
 			}
 			
 			sprintf(buf, "%s", "</font></td>");	
