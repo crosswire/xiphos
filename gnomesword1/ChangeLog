@@ -1,3 +1,14 @@
+2003-12-24  Andy <andyp@users.sf.net>
+
+	* bumped to version 2.0.0 (yay! a real stable release!)
+	* added French manual (thanks to Dominique Corbex)
+	* updated French translation
+	* disabled out-of-date translations for GNOME2 build 
+	  (only en_GB and fr_FR are current)
+	* cleaned English manual
+	* added screenshots for English manual
+
+
 2003-12-23  Terry <tbiggs@users.sf.net>
 
 	* added new sidebar menu button
