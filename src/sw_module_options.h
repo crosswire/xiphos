@@ -34,6 +34,7 @@
 extern "C" {
 #endif
 
+
 /******************************************************************************
  * load module option - using sword SWConfig
  ******************************************************************************/
@@ -43,7 +44,17 @@ bool load_module_options(gchar *modName, gchar *option);
  * save module option - using sword SWConfig
  ******************************************************************************/
 bool save_module_options(gchar *modName, gchar *option, gchar *value);
-	
+
+/******************************************************************************
+ * load module font - using sword SWConfig
+ ******************************************************************************/
+string load_module_font(gchar *modName, gchar *font);	
+ 
+/******************************************************************************
+ * save module font - using sword SWConfig
+ ******************************************************************************/
+bool save_module_font(gchar *modName, gchar *font);
+
 #ifdef __cplusplus
 }
 #endif

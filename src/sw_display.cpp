@@ -48,6 +48,7 @@
 #include "sw_gnomesword.h"
 #include "gs_html.h"
 #include "gs_gnomesword.h"
+#include "sw_module_options.h"
 
 gchar *mycolor;
 
@@ -106,6 +107,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
+	bool use_gtkhtml_font = false;
 
 	Mgr = new SWMgr();	//-- create sword mgr
 
@@ -124,9 +126,11 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	
 	if (strcmp(swfont.c_str(), "")) {
 		use_font = (gchar *) swfont.c_str();
+		use_gtkhtml_font = false;
 	} else {
 		font = g_strdup(settings->default_font);
 		use_font = gethtmlfontnameHTML(font);
+		use_gtkhtml_font = true;
 	}
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
@@ -146,8 +150,11 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
-
-	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);
+	
+	if(use_gtkhtml_font)
+		sprintf(tmpBuf, "<font size=\"%s\">", use_font_size);
+	else
+		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -182,7 +189,8 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	gchar *utf8str, *use_font, *use_font_size, *font, *token, *bufstr;
 	gint mybuflen, utf8len;
 	const gchar **end;
-	bool newparagraph = false;
+	bool newparagraph = false,
+		use_gtkhtml_font = false;
 	string lang, swfont, swfontsize;
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
@@ -199,6 +207,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		swfontsize = ((entry = section.find("GSFont size")) != section.end())? (*entry).second : (string) "";
 		lang = ((entry = section.find("Lang")) != section.end())? (*entry).second : (string) "";
 	}
+	//swfont = load_module_font(imodule.Name(), NULL);
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (strcmp(swfontsize.c_str(), "")) {
 		use_font_size = (gchar *) swfontsize.c_str();
@@ -208,17 +217,22 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	
 	if (strcmp(swfont.c_str(), "")) {
 		use_font = (gchar *) swfont.c_str();
+		use_gtkhtml_font = false;
 	} else {
 		if (!stricmp(lang.c_str(), "") ||
 		    !stricmp(lang.c_str(), "en") ||
 		    !stricmp(lang.c_str(), "de")) {
+			use_gtkhtml_font = true;
 			font = g_strdup(settings->default_font);
 		} else if (!stricmp(lang.c_str(), "grc")) {
 			font = g_strdup(settings->greek_font);
+			use_gtkhtml_font = false;
 		} else if (!stricmp(lang.c_str(), "he")) {
 			font = g_strdup(settings->hebrew_font);
+			use_gtkhtml_font = false;
 		} else {
 			font = g_strdup(settings->unicode_font);
+			use_gtkhtml_font = false;
 		}
 		use_font = gethtmlfontnameHTML(font);
 	}
@@ -246,7 +260,10 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-		sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);
+		if(use_gtkhtml_font)
+			sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">", versecolor, use_font_size);   //face=\"%s\" use_font, 
+		else
+			sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">", use_font, versecolor, use_font_size);   //face=\"%s\" use_font, 
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -392,7 +409,8 @@ char InterlinearDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[800], *buf, *rowcolor;
 	gint i;
-	bool utf = false;
+	bool utf = false,
+		use_gtkhtml_font = false;
 	gint len;
 	gchar *utf8str, *use_font, *use_font_size, *font, *token;
 	gint utf8len;
@@ -419,18 +437,23 @@ char InterlinearDisp::Display(SWModule & imodule)
 	font = g_strdup("-adobe-helvetica-*-*");
 	if (strcmp(swfont.c_str(), "")) {
 		use_font = (gchar *) swfont.c_str();
+		use_gtkhtml_font = false;
 	} else {
 		font = "-adobe-helvetica-*-*";
 		if (!stricmp(lang.c_str(), "") ||
 		    !stricmp(lang.c_str(), "en") ||
 		    !stricmp(lang.c_str(), "de")) {
 			font = g_strdup(settings->default_font);
+			use_gtkhtml_font = true;			    
 		} else if (!stricmp(lang.c_str(), "grc")) {
 			font = g_strdup(settings->greek_font);
+			use_gtkhtml_font = false;
 		} else if (!stricmp(lang.c_str(), "he")) {
 			font = g_strdup(settings->hebrew_font);
+			use_gtkhtml_font = false;
 		} else {
 			font = g_strdup(settings->unicode_font);
+			use_gtkhtml_font = false;
 		}
 		use_font = gethtmlfontnameHTML(font);
 	}
@@ -463,7 +486,10 @@ char InterlinearDisp::Display(SWModule & imodule)
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);	//, settings->interlinear_font_size);
+	if(use_gtkhtml_font)
+		sprintf(tmpBuf, "<font size=\"%s\">", use_font_size);
+	else
+		sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);	
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
