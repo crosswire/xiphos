@@ -64,6 +64,8 @@
 #include "gs_abouts.h"
 #include "gs_editor.h"
 #include "sw_utility.h"
+#include "gs_viewtext_dlg.h"
+
 
 /***********************************************************************************************
 Sword global to this file
@@ -1607,6 +1609,15 @@ gboolean saveconfig(void)
 void addtoModList(SWModule *mod, GList *list)
 {
 	g_list_append(list,(SWModule *)mod); 
+}
+
+void getvtrefSWORD(VT_REF *vtref)
+{
+	VT_REF ref;	
+	sprintf(ref.book ,"%s", "Romans");
+	ref.chapter = 8;
+	ref.verse = 28;
+	vtref = &ref;
 }
 
 

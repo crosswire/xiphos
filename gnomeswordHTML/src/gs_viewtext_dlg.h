@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                            gs_viewtext.h
+                            gs_viewtext_dlg.h
                              -------------------
     begin                : Mon May 14 2001
     copyright            : (C) 2001 by Terry Biggs
@@ -25,9 +25,21 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+#ifndef __GS_VIEWTEXT_DLG_H__
+#define __GS_VIEWTEXT_DLG_H__
+	
+typedef struct _ref VT_REF;
+struct _ref {
+	gchar	book[80];
+	gint		chapter, 
+			verse;
+};
+
 
 	GtkWidget* create_dlgViewText (void);
-	
+#endif /* __GS_VIEWTEXT_DLG_H__ */
+
 #ifdef __cplusplus
 }
 #endif
