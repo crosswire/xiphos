@@ -459,7 +459,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		}
 
 		/* get module text and prepare to display it */
-		text_str = get_text(mod_name,tmpkey);//get_module_text(0, mod_name, tmpkey);
+		text_str = get_module_text(0, mod_name, tmpkey);
 		str = g_string_append(str, text_str);
 		/*
 		   if (settings.displaySearchResults)
