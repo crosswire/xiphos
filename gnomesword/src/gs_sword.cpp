@@ -234,7 +234,7 @@ initSWORD(GtkWidget *mainform)
 	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
-	mycolor = settings->currentverse_color; /* for GtkHTML widgets */
+	//mycolor = settings->currentverse_color; /* for GtkHTML widgets */
 	textmodule.name = NULL;
 	textmodule.type = NULL;
 	textmodule.description = NULL;
@@ -587,6 +587,33 @@ footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have 
 	}
 }
 
+/* 
+ *
+ */
+void
+gotBookmarkSWORD(gchar *modName, gchar *key)
+{
+	ModMap::iterator it;
+	
+	it = mainMgr->Modules.find(modName);
+	if(it != mainMgr->Modules.end()){ //-- if we find the module	
+		if(!strcmp((*it).second->Type(), "Biblical Texts")){
+			curMod = (*it).second;  //-- change current module to new module
+			curMod->SetKey(key);
+			curMod->Display();
+		}else if(!strcmp((*it).second->Type(), "Commentaries")){
+			curcomMod = (*it).second;  //-- change current module to new module
+			curcomMod->SetKey(key);
+			curcomMod->Display();
+		}else if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
+			curdictMod = (*it).second;  //-- change current module to new module
+			curdictMod->SetKey(key);
+			FillDictKeysSWORD();
+			curdictMod->Display();
+		}
+	}
+}
+
 //-------------------------------------------------------------------------------------------
 void
 changecurModSWORD(gchar *modName, gboolean showchange) //-- change sword module for main window
@@ -631,7 +658,7 @@ changecomp1ModSWORD(gchar *modName)  //-- change sword module for 1st interlinea
 	}
 	//strcpy(settings->Interlinear1Module, comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
-
+/*
 //-------------------------------------------------------------------------------------------
 void
 changecomp2ModSWORD(gchar *modName)  //-- change sword module for 2nd interlinear window
@@ -661,7 +688,7 @@ changecomp3ModSWORD(gchar *modName)   //-- change sword module for 3rd interline
 	}
 	strcpy(settings->Interlinear3Module, comp3Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
-
+*/
 //-------------------------------------------------------------------------------------------
 void
 setversestyleSWORD(gboolean choice)  //-- set verse style -- verses or paragraphs
@@ -1092,6 +1119,27 @@ gchar* getmodnameSWORD(gint num)
 			        break;
 	        }
 	}		
+} 
+/******************************************************************************
+ *getmodkeySWORD
+ * num
+ * returns module key
+******************************************************************************/
+gchar* getmodkeySWORD(gint num)
+{
+        if(havebible) {
+	        switch(num)
+	        {
+		        case 0: return (gchar*)curMod->KeyText();
+			        break;
+		        case 1: return (gchar*)curcomMod->KeyText();
+			        break;
+		        case 2: return (gchar*)curdictMod->KeyText();
+			        break;
+		        case 3: return (gchar*)comp1Mod->KeyText();
+			        break;
+	        }
+	}		
 }
 
 /******************************************************************************
@@ -1170,6 +1218,7 @@ GList* setupSDSWORD(GtkWidget *text)
 	SDMgr	= new SWMgr();
 	SDMod     = NULL;
 	SDDisplay = new  GtkHTMLEntryDisp(text);
+	//SDDisplay = new  GtkHTMLEntryDisp(text);
 	list = NULL;
 	for(it = SDMgr->Modules.begin(); it != SDMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
@@ -1328,6 +1377,7 @@ GList* setupCommSWORD(GtkWidget *text)
 	VCMgr	= new SWMgr();
 	VCMod     = NULL;
 	VCDisplay = new  GtkHTMLEntryDisp(text);
+	//VCDisplay = new  GtkHTMLEntryDisp(text);
 	list = NULL;
 	for(it = VCMgr->Modules.begin(); it != VCMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Commentaries")){

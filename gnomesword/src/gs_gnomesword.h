@@ -63,6 +63,12 @@ struct _gs_layout {
 		gs_hight;	
 };
 
+typedef struct _gs_lexicon GS_LEXICON;
+struct _gs_lexicon {
+	gchar 	greek[80],
+			hebrew[80];
+};
+
 typedef struct _gsnbpages GS_NB_PAGES;
 struct _gsnbpages {
 	gint	nbTextModspage, /* Bible window */

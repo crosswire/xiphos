@@ -45,6 +45,7 @@ extern GtkWidget *MainFrm;
 BM_TREE bmtree;
 BM_TREE *p_bmtree;
 extern GS_APP gs;
+extern GtkCTreeNode *personal_node;
 
 static gint books = 0;
 static gint pages = 0;
@@ -120,19 +121,6 @@ static char * mini_page_xpm[] = {
 "                "};
 
 
-static GtkWidget *book_label;
-static GtkWidget *page_label;
-static GtkWidget *sel_label;
-static GtkWidget *vis_label;
-static GtkWidget *omenu1;
-static GtkWidget *omenu2;
-static GtkWidget *omenu3;
-static GtkWidget *omenu4;
-static GtkWidget *spin1;
-static GtkWidget *spin2;
-static GtkWidget *spin3;
-static gint line_style;
-
 void after_press (GtkCTree *ctree, gpointer data)
 {
 
@@ -143,16 +131,17 @@ on_ctree_select_row(GtkCList * clist,
 		       gint row,
 		       gint column, GdkEvent * event, gpointer user_data)
 {
-	//gboolean     *is_leaf = false;
-	//gboolean     *expanded;
 	GtkCTreeNode *node;
-	gchar *text;
+	gchar *modName, *key;
 	GtkCTree *ctree;
 	
 	ctree = user_data;
 	node = gtk_ctree_node_nth(p_bmtree->ctree, row);
 	if (GTK_CTREE_ROW (node)->is_leaf){
-		gtk_ctree_get_node_info(ctree,
+		key = GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text;
+		modName = GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text;
+		
+		/*gtk_ctree_get_node_info(ctree,
 						  node,
 						  &text,
 						  NULL,
@@ -161,8 +150,9 @@ on_ctree_select_row(GtkCList * clist,
 						  NULL,
 						  NULL,
 						  NULL,
-						  NULL);	
-		changeVerseSWORD(text);
+						  NULL);*/	
+		gotBookmarkSWORD(modName,key);
+		//changeVerseSWORD(key);
 	}
 }
 
@@ -479,209 +469,23 @@ void set_background (GtkCTree *ctree, GtkCTreeNode *node, gpointer data)
   gtk_ctree_node_set_row_style (ctree, node, style);
 }
 
-void ctree_toggle_line_style (GtkWidget *widget, GtkCTree *ctree)
-{
-  gint i;
-
-  if (!GTK_WIDGET_MAPPED (widget))
-    return;
-
-  /*RADIOMENUTOGGLED ((GtkRadioMenuItem *)
-		    (((GtkOptionMenu *)omenu1)->menu_item), i);*/
- i=1; 
-  if ((ctree->line_style == GTK_CTREE_LINES_TABBED && 
-       ((GtkCTreeLineStyle) (3 - i)) != GTK_CTREE_LINES_TABBED) ||
-      (ctree->line_style != GTK_CTREE_LINES_TABBED && 
-       ((GtkCTreeLineStyle) (3 - i)) == GTK_CTREE_LINES_TABBED))
-    gtk_ctree_pre_recursive (ctree, NULL, set_background, NULL);
-  gtk_ctree_set_line_style (ctree, 3 - i);
-  line_style = 3 - i;
-}
-
-void ctree_toggle_expander_style (GtkWidget *widget, GtkCTree *ctree)
-{
- gint i;
-
-  if (!GTK_WIDGET_MAPPED (widget))
-    return;
-	i=1; 
- /* RADIOMENUTOGGLED ((GtkRadioMenuItem *)
-		    (((GtkOptionMenu *)omenu2)->menu_item), i);*/
-  
-  gtk_ctree_set_expander_style (ctree, (GtkCTreeExpanderStyle) (3 - i));
-}
-
-void ctree_toggle_justify (GtkWidget *widget, GtkCTree *ctree)
-{
-  gint i;
-i=1; 
-  if (!GTK_WIDGET_MAPPED (widget))
-    return;
 /*
-  RADIOMENUTOGGLED ((GtkRadioMenuItem *)
-		    (((GtkOptionMenu *)omenu3)->menu_item), i);*/
-
-  gtk_clist_set_column_justification (GTK_CLIST (ctree), ctree->tree_column, 
-				      (GtkJustification) (1 - i));
-}
-
-void ctree_toggle_sel_mode (GtkWidget *widget, GtkCTree *ctree)
+ *
+ */
+void
+addbookmarktotree(gchar *modName, gchar *verse)
 {
-  gint i;
-i=1; 
-  if (!GTK_WIDGET_MAPPED (widget))
-    return;
-/*
-  RADIOMENUTOGGLED ((GtkRadioMenuItem *)
-		    (((GtkOptionMenu *)omenu4)->menu_item), i);*/
-
-  gtk_clist_set_selection_mode (GTK_CLIST (ctree), (GtkSelectionMode) (3 - i));
-  after_press (ctree, NULL);
-}
-    
-void build_recursive (GtkCTree *ctree, gint cur_depth, gint depth, 
-		      gint num_books, gint num_pages, GtkCTreeNode *parent)
-{
-  gchar *text[2];
-  gchar buf1[60];
-  gchar buf2[60];
-  GtkCTreeNode *sibling;
-  gint i;
-
-  text[0] = buf1;
-  text[1] = buf2;
-  sibling = NULL;
-
-  for (i = num_pages + num_books; i > num_books; i--)
-    {
-      pages++;
-      sprintf (buf1, "Page %02d", (gint) rand() % 100);
-      sprintf (buf2, "Item %d-%d", cur_depth, i);
-      sibling = gtk_ctree_insert_node (ctree, parent, sibling, text, 5,
-				       pixmap3, mask3, NULL, NULL,
-				       TRUE, FALSE);
-
-      if (parent && ctree->line_style == GTK_CTREE_LINES_TABBED)
-	gtk_ctree_node_set_row_style (ctree, sibling,
-				      GTK_CTREE_ROW (parent)->row.style);
-    }
-
-  if (cur_depth == depth)
-    return;
-
-  for (i = num_books; i > 0; i--)
-    {
-      GtkStyle *style;
-
-      books++;
-      sprintf (buf1, "Book %02d", (gint) rand() % 100);
-      sprintf (buf2, "Item %d-%d", cur_depth, i);
-      sibling = gtk_ctree_insert_node (ctree, parent, sibling, text, 5,
-				       pixmap1, mask1, pixmap2, mask2,
-				       FALSE, FALSE);
-
-      style = gtk_style_new ();
-      switch (cur_depth % 3)
-	{
-	case 0:
-	  style->base[GTK_STATE_NORMAL].red   = 10000 * (cur_depth % 6);
-	  style->base[GTK_STATE_NORMAL].green = 0;
-	  style->base[GTK_STATE_NORMAL].blue  = 65535 - ((i * 10000) % 65535);
-	  break;
-	case 1:
-	  style->base[GTK_STATE_NORMAL].red   = 10000 * (cur_depth % 6);
-	  style->base[GTK_STATE_NORMAL].green = 65535 - ((i * 10000) % 65535);
-	  style->base[GTK_STATE_NORMAL].blue  = 0;
-	  break;
-	default:
-	  style->base[GTK_STATE_NORMAL].red   = 65535 - ((i * 10000) % 65535);
-	  style->base[GTK_STATE_NORMAL].green = 0;
-	  style->base[GTK_STATE_NORMAL].blue  = 10000 * (cur_depth % 6);
-	  break;
-	}
-      gtk_ctree_node_set_row_data_full (ctree, sibling, style,
-					(GtkDestroyNotify) gtk_style_unref);
-
-      if (ctree->line_style == GTK_CTREE_LINES_TABBED)
-	gtk_ctree_node_set_row_style (ctree, sibling, style);
-
-      build_recursive (ctree, cur_depth + 1, depth, num_books, num_pages,
-		       sibling);
-    }
+	gchar *text[2];
+	
+	text[0] = verse;
+	text[1] = modName;
+	gtk_ctree_insert_node(p_bmtree->ctree, personal_node, NULL,text, 3, pixmap3,mask3,NULL,NULL, TRUE, FALSE);
 }
 
-void rebuild_tree (GtkWidget *widget, GtkCTree *ctree)
-{
-  gchar *text [2];
-  gchar label1[] = "Root";
-  gchar label2[] = "";
-  GtkCTreeNode *parent;
-  GtkStyle *style;
-  guint b, d, p, n;
-
-  text[0] = label1;
-  text[1] = label2;
-  
-  d = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin1)); 
-  b = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin2));
-  p = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin3));
-
-  n = ((pow (b, d) - 1) / (b - 1)) * (p + 1);
-
-  if (n > 100000)
-    {
-      g_print ("%d total items? Try less\n",n);
-      return;
-    }
-
-  gtk_clist_freeze (GTK_CLIST (ctree));
-  gtk_clist_clear (GTK_CLIST (ctree));
-
-  books = 1;
-  pages = 0;
-
-  parent = gtk_ctree_insert_node (ctree, NULL, NULL, text, 5, pixmap1,
-				  mask1, pixmap2, mask2, FALSE, TRUE);
-
-  style = gtk_style_new ();
-  style->base[GTK_STATE_NORMAL].red   = 0;
-  style->base[GTK_STATE_NORMAL].green = 45000;
-  style->base[GTK_STATE_NORMAL].blue  = 55000;
-  gtk_ctree_node_set_row_data_full (ctree, parent, style,
-				    (GtkDestroyNotify) gtk_style_unref);
-
-  if (ctree->line_style == GTK_CTREE_LINES_TABBED)
-    gtk_ctree_node_set_row_style (ctree, parent, style);
-
-  build_recursive (ctree, 1, d, b, p, parent);
-  gtk_clist_thaw (GTK_CLIST (ctree));
-  after_press (ctree, NULL);
-}
-
-static void 
-ctree_click_column (GtkCTree *ctree, gint column, gpointer data)
-{
-  GtkCList *clist;
-
-  clist = GTK_CLIST (ctree);
-
-  if (column == clist->sort_column)
-    {
-      if (clist->sort_type == GTK_SORT_ASCENDING)
-	clist->sort_type = GTK_SORT_DESCENDING;
-      else
-	clist->sort_type = GTK_SORT_ASCENDING;
-    }
-  else
-    gtk_clist_set_sort_column (clist, column);
-
-  gtk_ctree_sort_recursive (ctree, NULL);
-}
 
 void
 loadtree(GtkWidget *ctree1)
-{
-	
+{	
 	GdkColor transparent = { 0 };	
 	bmtree.ctree = GTK_CTREE(ctree1);
 	bmtree.ctree_widget = ctree1;
@@ -706,20 +510,14 @@ loadtree(GtkWidget *ctree1)
       gtk_signal_connect_after (GTK_OBJECT (p_bmtree->ctree_widget), "unselect_all",
 				GTK_SIGNAL_FUNC (after_press), NULL);
       gtk_signal_connect_after (GTK_OBJECT (p_bmtree->ctree_widget), "scroll_vertical",
-				GTK_SIGNAL_FUNC (after_press), NULL);
-					
-	//GTK_CTREE_ROW (node)->is_leaf
+				GTK_SIGNAL_FUNC (after_press), NULL);					
+	
 	loadbookmarks(gs.ctree_widget);
-	/*
-	style = gtk_style_new();
-	style->base[GTK_STATE_NORMAL].red = 0;
-	style->base[GTK_STATE_NORMAL].green = 45000;
-	style->base[GTK_STATE_NORMAL].blue = 55000;
-	gtk_ctree_node_set_row_data_full(p_bmtree->ctree,parent, style,(GtkDestroyNotify) gtk_style_unref);
-	*/
+	
 	gtk_signal_connect(GTK_OBJECT(gs.ctree_widget), "select_row",
 			   			GTK_SIGNAL_FUNC(on_ctree_select_row), bmtree.ctree);
 	gtk_clist_set_row_height (GTK_CLIST(p_bmtree->ctree), 15);
 	gtk_ctree_set_spacing(p_bmtree->ctree, 3);
 	gtk_ctree_set_indent (p_bmtree->ctree, 8);
+	gtk_clist_set_reorderable (GTK_CLIST(p_bmtree->ctree), TRUE);
 }

@@ -75,8 +75,10 @@ GS_LAYOUT gslayout,
 		   *p_gslayout;
 GS_NB_PAGES *nbpages,
 			npages;
-GS_TABS	tabs,
-		*p_tabs;
+GS_TABS		tabs,
+			*p_tabs;
+GS_LEXICON 	*p_gslexicon,
+			gslexicon;
 /*****************************************************************************
 * externs
 *****************************************************************************/
@@ -98,10 +100,9 @@ extern gboolean autoSave;
 extern gint groupnum4;
 extern gint ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
 extern gchar remembersubtree[256];  /* used for bookmark menus declared in filestuff.cpp */
-#if USE_SHORTCUTBAR
 extern gchar *shortcut_types[];
-#endif /* USE_SHORTCUTBAR */
 extern gboolean addhistoryitem; /* do we need to add item to history */
+extern gchar *mycolor;
 //gboolean firstbackclick = TRUE;
 
 /******************************************************************************
@@ -120,11 +121,12 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_window_set_default_size(GTK_WINDOW(app), p_gslayout->gs_width, p_gslayout->gs_hight);
 	//g_warning("width = %d hight = %d",p_gslayout->gs_width, p_gslayout->gs_hight);
 /* setup shortcut bar */
-	setupSB(sbbiblemods, sbcommods ,sbdictmods);	
+	setupSB(sbbiblemods, sbcommods ,sbdictmods);
+	mycolor = settings->currentverse_color;
 /* set color for current verse for gtktext widgets */
-  	myGreen.red =  settings->currentverse_red;
-	myGreen.green = settings->currentverse_green;
-	myGreen.blue =  settings->currentverse_blue;		
+  	//myGreen.red =  settings->currentverse_red;
+	//myGreen.green = settings->currentverse_green;
+	//myGreen.blue =  settings->currentverse_blue;		
 /* add modules to menus -- menu.c */
 	addmodstomenus(app, 
 				settings, 
@@ -180,7 +182,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         changeVerseSWORD(settings->currentverse); /* set Text */
 /* show hide shortcut bar - set to options setting */
         if(settings->showshortcutbar){
-                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
+                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), p_gslayout->shortcutbar_width);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
@@ -287,14 +289,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         gtk_widget_show (lookup_widget(app,"btnSpell"));
         gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
 #endif /* USE_SPELL */	
-
-#ifdef USE_SHORTCUTBAR
-     /* do nothing */
-#else
-        /* create shortcut bar groups */
-        setupSidebar(app);
-        fillSBtoolbars(app,biblemods , commentarymods, dictionarymods);
-#endif /* USE_SHORTCUTBAR */
 
 /* free module lists */
         g_list_free(biblemods);
@@ -428,7 +422,7 @@ applyoptions(GtkWidget *app,
                 gtk_widget_hide(dict);
         }
         if(settings->showshortcutbar){
-               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
+               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), p_gslayout->shortcutbar_width);
         } else {
                e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }

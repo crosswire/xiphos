@@ -1,7 +1,14 @@
+2001-07-13 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* load and save bookmark ctree is working
+	* add bookmark menu item added to popup windows
+	  for Text, commentary and lex/dict. This adds bookmark
+	  to the ctree.
+
 2001-07-11 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added module descriptions as tooltips to popup menus
-	* changed from module names to module descriptions on shourtcut bar
+	* changed from module names to module descriptions in shourtcut bar
 	* added a number of settings to the preferences.conf
 
 
