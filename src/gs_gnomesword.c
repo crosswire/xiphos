@@ -162,8 +162,9 @@ initGnomeSword(GtkWidget *app,
 	/* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");		
 	/* Add options to Options Menu and get toggle item widget */
-	autosaveitem = additemtooptionmenu(app, _("_Settings/"), _("Auto Save Personal Comments"),
+	/*autosaveitem = additemtooptionmenu(app, _("_Settings/"), _("Auto Save Personal Comments"),
 				(GtkMenuCallback)on_auto_save_notes1_activate);
+	*/
 	notepage  = additemtooptionmenu(app, _("_Settings/"), _("Show Interlinear Page"),
 				(GtkMenuCallback)on_show_interlinear_page1_activate);
 	settings->versestyle_item = additemtooptionmenu(app, _("_Settings/"), _("Verse Style"),
@@ -336,7 +337,7 @@ void UpdateChecks(GtkWidget *app)
 	/* set auto save personal comments to last setting */
 	autoSave = settings->autosavepersonalcomments;
 	/* set auto save menu check item */	
-	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 	
+	//GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 	
         /* fill the dict key clist */
         if(havedict) FillDictKeysSWORD();
         /* set Text - apply changes */

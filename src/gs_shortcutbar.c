@@ -620,6 +620,7 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = FALSE;
 		biblepanesize = settings->gs_width / 2;
+		gtk_widget_hide(shortcut_bar);
 		e_paned_set_position(E_PANED
 				     (lookup_widget(s->app, "epaned")),
 				     0);
@@ -629,6 +630,7 @@ void on_btnSB_clicked(GtkButton * button, SETTINGS *s)
 	} else {
 		settings->showshortcutbar = TRUE;
 		biblepanesize = (settings->gs_width - settings->shortcutbar_width) / 2;
+		gtk_widget_show(shortcut_bar);
 		e_paned_set_position(E_PANED
 				     (lookup_widget(s->app, "epaned")),
 				     settings->shortcutbar_width);
@@ -1952,7 +1954,7 @@ void setupSB(SETTINGS * s)
 				pixmap1, mask1, pixmap2,
 				mask2, FALSE, FALSE);
 		/* load first level of books treekey */
-		load_book_tree(s->ctree_widget_books, node, (gchar *) tmp->data, "root",0);
+		//load_book_tree(s->ctree_widget_books, node, (gchar *) tmp->data, "root",0);
 		tmp = g_list_next(tmp);
 	}
 	/* end load books */
