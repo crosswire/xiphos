@@ -946,6 +946,8 @@ void gui_swap_parallel_with_main(char *intmod)
 	}
 	gui_change_module_and_key(intmod, settings.currentverse);
 	gui_update_parallel_page();
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widgets.
+						   button_parallel_view),FALSE);
 }
 
 

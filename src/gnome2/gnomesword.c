@@ -177,6 +177,34 @@ void frontend_display(void)
 	gui_change_module_and_key(settings.DictWindowModule, 
 						settings.dictkey);
 	
+	if(!settings.havebible){
+		settings.showtexts = FALSE;
+		gui_show_hide_texts(FALSE);
+		gtk_widget_set_sensitive(widgets.viewtexts_item, FALSE);
+	}
+	if(!settings.havecomm) {
+		settings.showcomms = FALSE;
+		gui_show_hide_comms(FALSE);
+		gtk_widget_set_sensitive(widgets.viewcomms_item, FALSE);
+	}
+	if((!settings.havedict)&&(!settings.havebook)) {
+		gui_show_hide_dicts(FALSE);
+		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
+		gtk_widget_set_sensitive(widgets.viewdicts_item, FALSE);		
+	}
+	if((!settings.havedict)&&(settings.havebook)) {
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
+					      (widgets.workbook_lower),
+					      1);
+		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
+	}
+	if((settings.havedict)&&(!settings.havebook)) {
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
+					      (widgets.workbook_lower),
+					      0);
+		gtk_widget_set_sensitive(widgets.button_dict_book, FALSE);
+	}
+	
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewtexts_item),
 				       settings.showtexts);
@@ -186,7 +214,7 @@ void frontend_display(void)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.viewdicts_item),
 				       settings.showdicts);
-
+	
 	/* showing the devotional must come after the the app is shown or
 	 *  it will mess up the shortcut bar display 
 	 */

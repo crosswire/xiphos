@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword 0.7.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-23 23:55-0500\n"
+"POT-Creation-Date: 2003-11-25 14:40-0500\n"
 "PO-Revision-Date: 2003-06-05 15:31+0300\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/gnome2/about_gnomesword.c:69
+#: src/gnome2/about_gnomesword.c:70
 msgid "Copyright 2003 The  GnomeSword Development team"
 msgstr ""
 
-#: src/gnome2/about_gnomesword.c:70
+#: src/gnome2/about_gnomesword.c:71
 msgid ""
 "We would like to thank Troy Griffitts and all the other folks who have given "
 "us The SWORD Project."
@@ -73,7 +73,7 @@ msgid "Go to "
 msgstr "Перейти к %s"
 
 #: src/gnome2/bibletext_dialog.c:922 src/gnome2/parallel_dialog.c:534
-#: src/gnome2/toolbar_nav.c:472
+#: src/gnome2/toolbar_nav.c:471
 msgid "Romans"
 msgstr "Римлянам"
 
@@ -203,7 +203,7 @@ msgstr "Правка"
 #. gtk_menu_ensure_uline_accel_group(GTK_MENU(pmInt));
 #: src/gnome2/bibletext_menu.c:1271 src/gnome2/commentary_menu.c:1349
 #: src/gnome2/editor_menu.c:1028 src/gnome2/main_menu.c:615
-#: src/gnome2/parallel_view.c:1199 src/gnome2/toolbar_edit.c:538
+#: src/gnome2/parallel_view.c:1201 src/gnome2/toolbar_edit.c:538
 msgid "Copy"
 msgstr "Копировать"
 
@@ -220,7 +220,7 @@ msgid "Note"
 msgstr "Сохранить заметку"
 
 #: src/gnome2/bibletext_menu.c:1301 src/gnome2/commentary_menu.c:1372
-#: src/gnome2/parallel_view.c:1213
+#: src/gnome2/parallel_view.c:1215
 msgid "Module Options"
 msgstr "Опции модуля"
 
@@ -681,7 +681,7 @@ msgid "Enter Word or Phrase"
 msgstr "Ввести стих"
 
 #: src/gnome2/find_dialog.c:226 src/gnome2/search_dialog.c:2401
-#: src/gnome2/search_sidebar.c:550
+#: src/gnome2/search_sidebar.c:531
 msgid "Case Sensitive"
 msgstr "Регистрозависимый"
 
@@ -770,7 +770,7 @@ msgid "Copy highlighted text from main window"
 msgstr "Копировать выделенный текст из главного окна"
 
 #: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:2109
-#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:238
+#: src/gnome2/search_dialog.c:2134 src/gnome2/search_sidebar.c:222
 msgid "Search"
 msgstr "Поиск"
 
@@ -826,7 +826,7 @@ msgid "Show/Hide Bible texts window"
 msgstr "Показывать тексты Библии"
 
 #: src/gnome2/main_menu.c:672 src/gnome2/preferences_dialog.c:1804
-#: src/gnome2/preferences_dialog.c:2195 src/gnome2/search_sidebar.c:468
+#: src/gnome2/preferences_dialog.c:2195 src/gnome2/search_sidebar.c:449
 #: src/gnome2/setup_druid.c:819
 msgid "Commentary"
 msgstr "Комментарии"
@@ -869,8 +869,8 @@ msgstr ""
 msgid "Dictionaries-Lexicons"
 msgstr "Словари-Лексиконы"
 
-#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:832
-#: src/gnome2/main_window.c:847 src/gnome2/preferences_dialog.c:1818
+#: src/gnome2/main_menu.c:746 src/gnome2/main_window.c:834
+#: src/gnome2/main_window.c:849 src/gnome2/preferences_dialog.c:1818
 msgid "Books"
 msgstr "Книги"
 
@@ -917,47 +917,47 @@ msgstr "Просмоторщик"
 msgid "_Help"
 msgstr ""
 
-#: src/gnome2/main_window.c:644
+#: src/gnome2/main_window.c:646
 #, fuzzy
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSWORD - программа по изучению Библии"
 
-#: src/gnome2/main_window.c:738
+#: src/gnome2/main_window.c:740
 #, fuzzy
 msgid "Biblical Text"
 msgstr "Тексты Библии"
 
-#: src/gnome2/main_window.c:795 src/gnome2/main_window.c:811
+#: src/gnome2/main_window.c:797 src/gnome2/main_window.c:813
 #: src/gnome2/preferences_dialog.c:2202 src/gnome2/setup_druid.c:936
 msgid "Dict/Lex"
 msgstr "Словари/Лексиконы"
 
-#: src/gnome2/parallel_view.c:1208
+#: src/gnome2/parallel_view.c:1210
 msgid "Detach/Attach"
 msgstr "Отсоединить/Присоединить"
 
 #. build change parallel modules submenu
-#: src/gnome2/parallel_view.c:1226
+#: src/gnome2/parallel_view.c:1228
 #, fuzzy
 msgid "Change parallel 1"
 msgstr "Изменить подстрочный 1"
 
-#: src/gnome2/parallel_view.c:1229
+#: src/gnome2/parallel_view.c:1231
 #, fuzzy
 msgid "Change parallel 2"
 msgstr "Изменить подстрочный 2"
 
-#: src/gnome2/parallel_view.c:1232
+#: src/gnome2/parallel_view.c:1234
 #, fuzzy
 msgid "Change parallel 3"
 msgstr "Изменить подстрочный 3"
 
-#: src/gnome2/parallel_view.c:1235
+#: src/gnome2/parallel_view.c:1237
 #, fuzzy
 msgid "Change parallel 4"
 msgstr "Изменить подстрочный 4"
 
-#: src/gnome2/parallel_view.c:1238
+#: src/gnome2/parallel_view.c:1240
 #, fuzzy
 msgid "Change parallel 5"
 msgstr "Изменить подстрочный 5"
@@ -965,10 +965,10 @@ msgstr "Изменить подстрочный 5"
 #.
 #. * parallel page
 #.
-#: src/gnome2/parallel_view.c:1305 src/gnome2/parallel_view.c:1328
+#: src/gnome2/parallel_view.c:1307 src/gnome2/parallel_view.c:1330
 #: src/gnome2/parallel_dialog.c:225 src/gnome2/parallel_dialog.c:227
-#: src/gnome2/sidebar.c:470 src/gnome2/sidebar.c:482
-#: src/gnome2/toolbar_nav.c:439 src/gnome2/utilities.c:182
+#: src/gnome2/sidebar.c:461 src/gnome2/sidebar.c:473
+#: src/gnome2/toolbar_nav.c:438 src/gnome2/utilities.c:182
 msgid "Parallel View"
 msgstr ""
 
@@ -1482,19 +1482,19 @@ msgstr ""
 #. FALSE, FALSE, 0);
 #.
 #.
-#: src/gnome2/search_dialog.c:2358 src/gnome2/search_sidebar.c:500
+#: src/gnome2/search_dialog.c:2358 src/gnome2/search_sidebar.c:481
 msgid "Search Type"
 msgstr "Тип поиска"
 
-#: src/gnome2/search_dialog.c:2369 src/gnome2/search_sidebar.c:511
+#: src/gnome2/search_dialog.c:2369 src/gnome2/search_sidebar.c:492
 msgid "Multi Word"
 msgstr "Многословный"
 
-#: src/gnome2/search_dialog.c:2376 src/gnome2/search_sidebar.c:523
+#: src/gnome2/search_dialog.c:2376 src/gnome2/search_sidebar.c:504
 msgid "Regular Expression"
 msgstr "Постоянные выражения"
 
-#: src/gnome2/search_dialog.c:2384 src/gnome2/search_sidebar.c:532
+#: src/gnome2/search_dialog.c:2384 src/gnome2/search_sidebar.c:513
 msgid "Exact Phrase"
 msgstr "Точная фраза"
 
@@ -1561,7 +1561,7 @@ msgstr "Очистить"
 msgid "clear lists for new search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2520 src/gnome2/search_sidebar.c:166
+#: src/gnome2/search_dialog.c:2520
 msgid "Search Results"
 msgstr "Поиск результатов"
 
@@ -1584,7 +1584,7 @@ msgid "Create new custom range"
 msgstr ""
 
 #: src/gnome2/search_dialog.c:2612 src/gnome2/search_dialog.c:2797
-#: src/gnome2/sidebar.c:1042
+#: src/gnome2/sidebar.c:1004
 msgid "Save List"
 msgstr "Сохранить список"
 
@@ -1656,69 +1656,61 @@ msgstr ""
 msgid "Custom Lists"
 msgstr "Нумерованый список"
 
-#: src/gnome2/search_sidebar.c:167
+#: src/gnome2/search_sidebar.c:165
 msgid "matches"
 msgstr ""
 
-#: src/gnome2/search_sidebar.c:168
-msgid "Occurrences of"
-msgstr ""
-
-#: src/gnome2/search_sidebar.c:169
-msgid "found in"
-msgstr ""
-
-#: src/gnome2/search_sidebar.c:438
+#: src/gnome2/search_sidebar.c:419
 msgid "Begin Search"
 msgstr "Начать поиск"
 
-#: src/gnome2/search_sidebar.c:446
+#: src/gnome2/search_sidebar.c:427
 #, fuzzy
 msgid "Search Module"
 msgstr "Контекст поиска"
 
-#: src/gnome2/search_sidebar.c:457
+#: src/gnome2/search_sidebar.c:438
 #, fuzzy
 msgid "Bible"
 msgstr "Файл"
 
-#: src/gnome2/search_sidebar.c:540
+#: src/gnome2/search_sidebar.c:521
 msgid "Search Options"
 msgstr "Опции поиска"
 
-#: src/gnome2/search_sidebar.c:557
+#: src/gnome2/search_sidebar.c:538
 msgid "Search Scope"
 msgstr "Контекст поиска"
 
-#: src/gnome2/search_sidebar.c:567
+#: src/gnome2/search_sidebar.c:548
 msgid "No Scope"
 msgstr "Без контекста"
 
-#: src/gnome2/search_sidebar.c:578
+#: src/gnome2/search_sidebar.c:559
 msgid "Use Bounds"
 msgstr "С ограничением"
 
-#: src/gnome2/search_sidebar.c:588
+#: src/gnome2/search_sidebar.c:569
 msgid "Last Search"
 msgstr "Последний поиск"
 
-#: src/gnome2/search_sidebar.c:596
+#: src/gnome2/search_sidebar.c:577
 msgid "Bounds"
 msgstr "Ограничения"
 
-#: src/gnome2/search_sidebar.c:606
+#: src/gnome2/search_sidebar.c:587
 msgid "Lower"
 msgstr "Нижнее"
 
-#: src/gnome2/search_sidebar.c:613
+#: src/gnome2/search_sidebar.c:594
 msgid "Upper "
 msgstr "Верхнее"
 
-#: src/gnome2/search_sidebar.c:626
+#: src/gnome2/search_sidebar.c:607
 msgid "Genesis"
 msgstr "Бытие"
 
-#: src/gnome2/search_sidebar.c:634
+#: src/gnome2/search_sidebar.c:615
 msgid "Revelation"
 msgstr "Откровение"
 
@@ -1840,65 +1832,60 @@ msgstr ""
 "           Щелкните Закончить для закрытия этого диалога\n"
 "           и запуска GnomeSword."
 
-#: src/gnome2/sidebar.c:1043
+#: src/gnome2/sidebar.c:1005
 #, fuzzy
 msgid "Save the search results as bookmarks"
 msgstr "Просмотр поиска результатов"
 
-#: src/gnome2/sidebar.c:1081
+#: src/gnome2/sidebar.c:1043
 #, fuzzy
 msgid "Open in dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome2/sidebar.c:1082
+#: src/gnome2/sidebar.c:1044
 #, fuzzy
 msgid "Open selected module in a dialog"
 msgstr "Открыть диалог поиска"
 
-#: src/gnome2/sidebar.c:1087
+#: src/gnome2/sidebar.c:1049
 msgid "About"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1088
+#: src/gnome2/sidebar.c:1050
 #, fuzzy
 msgid "View information about the selected dialog"
 msgstr "Информация об инсталлированных модулях"
 
-#: src/gnome2/sidebar.c:1317
+#: src/gnome2/sidebar.c:1259
 #, fuzzy
 msgid "_Modules"
 msgstr "Модуль"
 
-#: src/gnome2/sidebar.c:1325
+#: src/gnome2/sidebar.c:1267
 #, fuzzy
 msgid "_Bookmarks"
 msgstr "Закладки"
 
-#: src/gnome2/sidebar.c:1333
+#: src/gnome2/sidebar.c:1275
 #, fuzzy
 msgid "_Search"
 msgstr "Поиск"
 
-#: src/gnome2/sidebar.c:1342
-#, fuzzy
-msgid "Search _Results"
-msgstr "Поиск результатов"
-
-#: src/gnome2/sidebar.c:1352
-#, fuzzy
-msgid "_Viewer"
-msgstr "Просмоторщик"
-
-#: src/gnome2/sidebar.c:1362
+#: src/gnome2/sidebar.c:1284
 #, fuzzy
 msgid "Verse _List"
 msgstr "Список стиха"
+
+#: src/gnome2/sidebar.c:1294
+#, fuzzy
+msgid "_Viewer"
+msgstr "Просмоторщик"
 
 #: src/gnome2/studypad.c:83 src/gnome2/toolbar_edit.c:111
 msgid "has been modified. "
 msgstr ""
 
-#: src/gnome2/studypad.c:659 src/gnome2/studypad.c:671
+#: src/gnome2/studypad.c:669 src/gnome2/studypad.c:681
 msgid "Study Pad"
 msgstr "Блокнот изучения"
 
@@ -1940,20 +1927,26 @@ msgstr "Проверка орфографии"
 msgid "Spell check note"
 msgstr "Проверка орфографии"
 
-#: src/gnome2/toolbar_nav.c:422
+#: src/gnome2/toolbar_nav.c:420
 msgid "Dict/Book"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:440
+# src/gs_preferences_dlg.c
+#: src/gnome2/toolbar_nav.c:421
+#, fuzzy
+msgid "Toggle Dictionary View"
+msgstr "Показывать словари"
+
+#: src/gnome2/toolbar_nav.c:439
 msgid "Toggle Parallel View"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:514
+#: src/gnome2/toolbar_nav.c:513
 #, fuzzy
 msgid "button5"
 msgstr "кнопка8"
 
-#: src/gnome2/toolbar_nav.c:531
+#: src/gnome2/toolbar_nav.c:530
 msgid "button6"
 msgstr "кнопка6"
 
@@ -2092,6 +2085,10 @@ msgstr "Оступ"
 #: src/gnome2/toolbar_style.c:1044
 msgid "Indents the paragraphs more"
 msgstr "Больший отступ параграфов"
+
+#, fuzzy
+#~ msgid "Search _Results"
+#~ msgstr "Поиск результатов"
 
 #, fuzzy
 #~ msgid "Switch between Dict/Lex and Books"
@@ -2554,10 +2551,6 @@ msgstr "Больший отступ параграфов"
 # src/gs_preferences_dlg.c
 #~ msgid "Default Text Module"
 #~ msgstr "Текстовый модуль по умолчанию"
-
-# src/gs_preferences_dlg.c
-#~ msgid "Show Dictionaries"
-#~ msgstr "Показывать словари"
 
 #~ msgid "Print Chapter"
 #~ msgstr "Печатать главу"

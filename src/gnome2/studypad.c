@@ -122,11 +122,21 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	ssize_t count;
 	gboolean was_editable;
 	int fd;
+	GString *str;
+	
 	g_warning(filename);
 	if(!g_file_test((const gchar*)filename, G_FILE_TEST_EXISTS)) {
+		str = g_string_new(" ");
+		g_string_printf(str, "file not found: %s",filename);
 		ecd->changed = FALSE;
-		gui_new_activate(NULL,ecd);
-		//gtk_html_load_from_string(ecd->html,"file not found",15);
+		gtk_html_load_from_string(ecd->html,"file not found",15);
+		settings.studypadfilename = NULL;
+		xml_set_value("GnomeSword", "studypad", "lastfile", NULL);		
+		sprintf(ecd->filename, "%s", "");
+		ecd->filename[0] = '\0';
+		gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), 1, str->str);
+		ecd->changed = FALSE;
+		g_string_free(str,TRUE);
 		return 0;
 	}
 	
