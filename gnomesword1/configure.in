@@ -185,6 +185,7 @@ dnl ******************************
 dnl spell checking
 dnl ******************************
 AC_ARG_ENABLE(use_ispell,[--enable-use_ispell enable use_ispell],use_ispell=$enableval,use_ispell="no") 
+AC_ARG_ENABLE(use_aspell,[--enable-use_aspell enable use_aspell],use_aspell=$enableval,use_aspell="no") 
 
 PSPELL_LIBS=""
 AC_SUBST(PSPELL_LIBS)
@@ -203,8 +204,24 @@ if test "x$use_ispell" = xyes; then
       echo "found"
       have_speller="yes"
       speller="ispell"
-   fi
-else
+   fi   
+fi  
+if test "x$use_aspell" = xyes; then
+   dnl looking for aspell 
+   
+   AC_MSG_CHECKING([for aspell]) 
+   aspell_dirs="${prefix}/bin $ac_aspell_dir/bin /usr/bin /usr/local/bin /opt/bin" 
+   AC_FIND_FILE(aspell, $aspell_dirs, aspell_dir) 
+   if test -r $aspell_dir/aspell; then 
+      HAVE_ASPELL=yes 
+      AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
+      AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
+      echo "found"
+      have_speller="yes"
+      speller="aspell"
+   fi    
+fi
+if test "x$have_speller" = xno; then
    dnl looking for pspell 
    
    AC_MSG_CHECKING([for pspell]) 
@@ -219,6 +236,7 @@ else
        AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
        PSPELL_LIBS="-L$pspell_dir -lpspell -lltdl"
        AC_SUBST(PSPELL_LIBS) 
+      echo "found"
    fi
 fi
 
