@@ -115,25 +115,25 @@ static void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
 /* !! CHANGING THIS DON'T FORGET ALSO CHANGE create_pmBookmarkTree !! */
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("New _Group"),
+	 GNOME_APP_UI_ITEM, N_("New Group"),
 	 N_("Add a new root group and file"),
 	 (gpointer) on_add_new_group1_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("New _SubGroup"),
+	 GNOME_APP_UI_ITEM, N_("New SubGroup"),
 	 N_("Add new SubGroup to selected group"),
 	 (gpointer) on_new_subgroup_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("_Insert Item"),
+	 GNOME_APP_UI_ITEM, N_("Insert Item"),
 	 N_("Insert new bookmark here"),
 	 (gpointer) on_insert_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Add Item at _Root"),
+	 GNOME_APP_UI_ITEM, N_("Add Item at Root"),
 	 N_("Add new bookmark item"),
 	 (gpointer) on_add_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
