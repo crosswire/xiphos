@@ -30,7 +30,6 @@
 
 #include <gnome.h>
 
-#include "gui/url.h"
 #include "gui/html.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
@@ -41,6 +40,7 @@
 #include "gui/parallel_dialog.h"
 #include "gui/parallel_view.h"
 
+#include "main/url.h"
 #include "main/lists.h"
 #include "main/settings.h"
 #include "main/configs.h"
