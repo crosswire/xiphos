@@ -26,12 +26,9 @@
 extern "C" {
 #endif	
 
-//#include "main/lists.h"
-
 #include "backend/mgr.hh"
 #include "backend/key.hh"
 #include "backend/config.hh"
-#include "backend/module.hh"
 		
 void backend_init(void);
 void backend_shutdown(int save_properties);

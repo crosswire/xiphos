@@ -69,7 +69,7 @@ void gui_lookup_dictlex_dialog_selection
 /*	gchar *dict_key;
 	gchar *mod_name = NULL;
 
-	mod_name = module_name_from_description(dict_mod_description);
+	mod_name = main_module_name_from_description(dict_mod_description);
 	if(!mod_name) 
 		return;
 

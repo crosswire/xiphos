@@ -102,9 +102,11 @@ int main(int argc, char *argv[])
 	
 	gui_splash_step4();
 	
-	frontend_display();
+	//frontend_display();
 	
 	gui_splash_done();
+	
+	frontend_display();
 	
 	if(have_sword_url)
 		main_url_handler(argv[1], TRUE);
