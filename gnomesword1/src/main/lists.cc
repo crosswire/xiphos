@@ -37,6 +37,7 @@
 #include "backend/mgr.hh"
 #include "backend/module.hh"
 #include "backend/key.hh"
+#include "backend/sword_main.hh"
 
 
 /******************************************************************************
@@ -90,8 +91,10 @@ GList *get_list(gint type)
 
 
 
-void init_lists(void)
+void main_init_lists(void)
 {	
+	gboolean start_backend = FALSE;
+	
 	mod_lists = &mods;
 	
 	/* set glist to null */
@@ -113,12 +116,16 @@ void init_lists(void)
 	settings.havedict = FALSE;
 	settings.havebook = FALSE;
 	settings.havepercomm = FALSE;
-
-	backend_new_module_mgr();
-	mods.bible_books = backend_get_books_of_bible();
-	backend_get_global_options_list(mods.options);
-	backend_get_module_lists(mod_lists);
-	backend_delete_module_mgr();
+	
+	if(!backend) {
+		start_backend = TRUE;
+		backend = new SwordMain();
+	}
+	mods.bible_books = backend->fill_Bible_books(2);
+	backend->get_module_options(mods.options);
+	backend->init_lists(mod_lists);
+	if(start_backend)
+		delete backend;
 
 	settings.havebible = g_list_length(mods.biblemods);
 	g_print("\n%s = %d\n", _("Number of Text modules"), settings.havebible);
@@ -139,7 +146,7 @@ void init_lists(void)
 					g_list_length(mods.devotionmods));
 }
 
-void shutdown_list(void)
+void main_shutdown_list(void)
 {
 	/* free lists */
 	while (mod_lists->options != NULL) {
