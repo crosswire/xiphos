@@ -184,8 +184,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	e_paned_set_position(E_PANED(lookup_widget(app,"vpaned1")), settings->upperpane_hight);
 	/* set width of bible pane */
 	e_paned_set_position(E_PANED(lookup_widget(app,"hpaned1")), settings->biblepane_width);
-	/* load last used file into studypad */
-        if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
 	
 	/* set Bible module to open notebook page */
 	/* let's don't do this if we don't have at least one text module */	
@@ -443,24 +441,6 @@ void showIntPage(GtkWidget *app, gboolean choice)
 	settings->interlinearpage = choice;  /* remember choice for next program startup */
 }
 
-/*****************************************************************************
- * setcurrentversecolor - someone change the color setting
- *			  for the current verse
- * arg1 - red
- * arg2 - green
- * arg3 - blue
-*****************************************************************************/
-void setcurrentversecolor(gint arg1, gint arg2, gint arg3)
-{	
-        /* set color for current session */
-	myGreen.red = arg1;  /* new red setting */
-	settings->currentverse_red = arg1; /* remember setting */
-	myGreen.green = arg2;//-- new green setting
-	settings->currentverse_green= arg2; /* remember setting */
-	myGreen.blue = arg3; //-- new blue setting
-	settings->currentverse_blue = arg3; /* remember setting  */	
-	redisplayTextSWORD(); /* display change */
-}
 
 /*****************************************************************************
  * setautosave - someone clicked auto save personal  comments
