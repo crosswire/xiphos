@@ -32,7 +32,6 @@
 #include <versekey.h>
 #include <regex.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-#include <widgets/e-paned/e-hpaned.h>
 
 #include "callback.h"
 #include "GnomeSword.h"
@@ -94,7 +93,10 @@ bool buttonpressed = false;
 bool    dicttabs,
         comtabs,
         bar,
-        applycolor = false;
+        applycolor = false,
+        showtextgroup,
+        showcomgroup,
+        showdictgroup;
 
 //-------------------------------------------------------------------------------------------
 void
@@ -441,6 +443,7 @@ on_moduleText_button_press_event       (GtkWidget       *widget,
                                         gpointer         user_data)
 {							
 	gint	versenum; //-- new verse number
+	//gchar buf[80];
 	
 	isstrongs = false;
 	if(event->button == 1)//-- some one pressed mouse button one
@@ -448,11 +451,14 @@ on_moduleText_button_press_event       (GtkWidget       *widget,
 		//gtk_entry_set_text(GTK_ENTRY(lookup_widget(widget,"dictionarySearchText")), "");
 		if(!GTK_EDITABLE(widget)->has_selection) return false; //-- we do not have a selection
 		versenum = getversenumber(widget);  //-- get the new verse number
+		//sprintf(buf,"%d\n",versenum);
+		//cout << buf;
 		if(versenum > 0 ) //-- if not a number stop
 		{
 			if(isstrongs)  //-- if we have a storngs number look it up
 			{
 			
+			   lookupStrongsSWORD(versenum); 			
 			   isstrongs = false;
 			}
 			else
@@ -933,6 +939,9 @@ on_preferences1_activate               (GtkMenuItem     *menuitem,
 	comtabs = settings->showcomtabs;
 	dicttabs = settings->showdicttabs;
 	bar = settings->showshortcutbar;
+	showtextgroup = settings->showtextgroup;
+	showcomgroup = settings->showcomgroup;
+	showdictgroup = settings->showdictgroup;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1628,9 +1637,10 @@ on_btnPropertyboxOK_clicked            (GtkButton       *button,
 
 	dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));
 	if(applycolor)setcurrentversecolor(num1,num2,num3);
-	applycolor = false;	
+	applycolor = false;
+		
 	setformatoption(lookup_widget(GTK_WIDGET(button),"cbtnPNformat"));
-	applyoptions(bar, comtabs, dicttabs); 	
+	applyoptions(bar, comtabs, dicttabs, showtextgroup, showcomgroup, showdictgroup); 	
 	gtk_widget_destroy(dlg);
 }
 
@@ -1642,7 +1652,7 @@ on_btnPropertyboxApply_clicked         (GtkButton       *button,
 	if(applycolor) setcurrentversecolor(num1,num2,num3); //-- if color has changed
 	applycolor = false;
 	setformatoption(lookup_widget(GTK_WIDGET(button),"cbtnPNformat"));
-	applyoptions(bar, comtabs, dicttabs); 	
+	applyoptions(bar, comtabs, dicttabs, showtextgroup, showcomgroup, showdictgroup); 	
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2209,7 +2219,11 @@ on_textComments_key_press_event        (GtkWidget       *widget,
 	gchar *buf;
 	static gboolean needsecond = false;
 		
-	if(!settings->formatpercom) return false;   //-- do we want formatting?
+	if(!settings->formatpercom) //-- do we want formatting?
+	{
+	    noteModified = true; //-- note has been modified to get us here
+	    return false;
+	}
 	if(event->keyval == 65293 || event->keyval == 65421) //-- return key
 	{
 		noteModified = noteeditor->setNEWLINE(NEtext); //-- noteeditor.cpp
@@ -2561,10 +2575,12 @@ void
 on_com_select_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+    GtkWidget *notebook;
     gchar *modNum;
 
 	modNum = (gchar *)user_data;
-	sbchangeModSword(1, atoi(modNum));
+	notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook),atoi(modNum)); //-- set notebook page
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2572,8 +2588,61 @@ void
 on_dict_select_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
+    GtkWidget *notebook;
     gchar *modNum;
 
 	modNum = (gchar *)user_data;
-	sbchangeModSword(2, atoi(modNum));
+	notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), atoi(modNum)); //-- set notebook page
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowTextgroup_toggled           (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+    GtkWidget	*dlg,
+				*btnok,
+				*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	showtextgroup = togglebutton->active; 	
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowComGroup_toggled            (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+/*    GtkWidget	*dlg,
+				*btnok,
+				*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	showcomgroup = togglebutton->active; */
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbtnShowDictGroup_toggled           (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+/*    GtkWidget	*dlg,
+				*btnok,
+				*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	showdictgroup = togglebutton->active;*/
 }

@@ -3,9 +3,9 @@
 INCLUDES = \
 	$(GNOME_INCLUDEDIR)\
 	-I/usr/include/sword\
+	-I/usr/local/include/sword\
 	-I$(top_srcdir)/widgets/misc\
-	-I$(top_srcdir)/widgets/shotrcur-bar\
-	-I$(top_srcdir)/widgets/e-paned
+	-I$(top_srcdir)/widgets/shotrcur-bar
 
 bin_PROGRAMS = gnomesword
 
@@ -79,7 +79,6 @@ CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
 gnomesword_LDADD =  $(GNOME_LIBDIR) $(GNOMEUI_LIBS)\
 		    $(top_builddir)/widgets/shortcut-bar/libshortcut-bar.a\
-			$(top_builddir)/widgets/e-paned/libepaned.a	\
 			$(top_builddir)/widgets/e-text/libetext.a\
 			$(top_builddir)/widgets/misc/libemiscwidgets.a\
 			$(top_builddir)/e-util/libeutil.la\

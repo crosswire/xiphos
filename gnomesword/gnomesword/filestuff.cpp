@@ -509,7 +509,9 @@ createsettings(void)
 	p_settings->showcomtabs  = false;  //-- show tabs on commentary notebook
 	p_settings->showdicttabs = false;  //-- show tabs on dict/lex notebook
 	p_settings->showshortcutbar = true; //-- show the shortcut bar;
-	
+	p_settings->showtextgroup  = false;  //-- show tabs on commentary notebook
+	p_settings->showcomgroup = true;  //-- show tabs on dict/lex notebook
+	p_settings->showdictgroup = true; //-- show the shortcut bar;
 	fd = open(fnconfigure, O_WRONLY|O_CREAT,S_IREAD|S_IWRITE);  //-- create settings file (settings.cfg)
 	write(fd,(char *)&settings,sizeof(settings)); //-- save settings structrue to file
 	close(fd);	                                  //-- close the file

@@ -7,7 +7,7 @@ extern "C" {
 
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
-#include <widgets/e-paned/e-hpaned.h>
+
 
 
 GtkWidget* create_fileselection1 (void);
@@ -1269,6 +1269,21 @@ on_com_select_activate            (GtkMenuItem     *menuitem,
 void
 on_dict_select_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
+
+
+void
+on_cbtnShowTextgroup_toggled           (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+void
+on_cbtnShowComGroup_toggled            (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+void
+on_cbtnShowDictGroup_toggled           (GtkToggleButton *togglebutton,
+                                        gpointer         user_data);
+
+
 #ifdef __cplusplus
 }
 #endif
