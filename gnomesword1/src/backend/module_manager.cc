@@ -243,17 +243,23 @@ void backend_module_mgr_list_local_modules_init()
  *   int
  */
 
-int backend_uninstall_module(const char *modName)
+int backend_uninstall_module(const char *dir, const char *modName)
 {
 	SWModule *module;
-	ModMap::iterator it = mgr->Modules.find(modName);
-	if (it == mgr->Modules.end()) {
+	int retval = -1;
+	SWMgr  *tmp_mgr = new SWMgr(dir);
+	
+	ModMap::iterator it = tmp_mgr->Modules.find(modName);
+	if (it == tmp_mgr->Modules.end()) {
 		printf("Couldn't find module [%s] to remove\n",
 			modName);
 		return -1;
 	}
+	printf("\nprefixPath = %s\n",tmp_mgr->prefixPath);
 	module = it->second;
-	return installMgr->removeModule(mgr, module->Name());
+	retval = installMgr->removeModule(tmp_mgr, module->Name());
+	delete tmp_mgr;
+	return retval;
 }
 
 
@@ -508,6 +514,7 @@ void backend_init_module_mgr(const char *dir)
 		mgr = new SWMgr(dir);
 	else
 		mgr = new SWMgr();
+	printf("dir = %s\n",dir);
 	char *envhomedir = getenv("HOME");
 	SWBuf baseDir = (envhomedir) ? envhomedir : ".";
 	baseDir += "/.sword/InstallMgr";
