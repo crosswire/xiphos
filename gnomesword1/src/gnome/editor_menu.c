@@ -364,7 +364,7 @@ static void on_copy_activate(GtkMenuItem * menuitem,
 {
 	gtk_html_copy(ecd->html);
 }
-
+ 
 /******************************************************************************
  * Name
  *  on_paste_activate

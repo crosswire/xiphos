@@ -46,6 +46,14 @@ struct  _text_global_ops {
 
 typedef struct _text_data TEXT_DATA;
 struct _text_data {
+	/* dialog widgets */
+	GtkWidget *dialog;
+	GtkWidget *cbe_book;
+	GtkWidget *spb_chapter;
+	GtkWidget *spb_verse;
+	GtkWidget *freeform_lookup;
+	GtkWidget *statusbar;
+	/* widgets for text panes */
 	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
@@ -70,7 +78,7 @@ extern TEXT_DATA *cur_t;
 void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 				 gchar * dict_mod_description);
 void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);
-void gui_set_text_frame_label(void);
+void gui_set_text_frame_label(TEXT_DATA * t);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
 void gui_display_text(gchar * key);
 void gui_add_new_text_pane(TEXT_DATA * t);

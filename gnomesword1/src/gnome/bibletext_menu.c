@@ -74,6 +74,28 @@ static void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 
 /******************************************************************************
  * Name
+ *  on_shortcut_activate
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void on_shortcut_activate(GtkMenuItem * menuitem, TEXT_DATA * t)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void on_shortcut_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
+{
+	gchar * module_description;
+	module_description = get_module_description(t->mod_name);
+	gui_add_sb_item("dialog", module_description, 0);
+}
+/******************************************************************************
+ * Name
  *  
  *
  * Synopsis
@@ -90,7 +112,7 @@ static void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 
 static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	gui_close_text_dialog();
+	gui_close_text_dialog(t);
 }
 
 
@@ -235,7 +257,8 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
  * Synopsis
  *   #include "gui/bibletext.h"
  *
- *  void on_text_showtabs_activate(GtkMenuItem * menuitem, gpointer user_data)	
+ *  void on_text_showtabs_activate(GtkMenuItem * menuitem, 
+ *     					TEXT_DATA * t)	
  *
  * Description
  *   display text module notebook tabs
@@ -245,12 +268,12 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
  */
 
 static void on_text_showtabs_activate(GtkMenuItem * menuitem,
-				      gpointer user_data)
+				      TEXT_DATA * t)
 {
 	settings.text_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
 				   settings.text_tabs);
-	gui_set_text_frame_label();
+	gui_set_text_frame_label(t);
 }
 
 
@@ -962,13 +985,13 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  
+ *  on_sync_activate
  *
  * Synopsis
  *   #include "gui/bibletext_menu.h"
  *
- *  void (GtkMenuItem * menuitem, 
-						gpointer user_data)	
+ *  void on_sync_activate(GtkMenuItem * menuitem, 
+						TEXT_DATA * vt)	
  *
  * Description
  *   
@@ -977,9 +1000,9 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_sync_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_sync_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	gui_sync_bibletext_dialog();
+	gui_sync_bibletext_dialog(t);
 }
 
 /******************************************************************************
@@ -1002,6 +1025,7 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 {
 	GtkWidget *pm_text;
 	GtkAccelGroup *pm_text_accels;
+	GtkWidget *shortcut;
 	GtkWidget *separator;
 	GtkWidget *file;
 	GtkWidget *file_menu;
@@ -1040,7 +1064,25 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
 	pm_text_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));
+	    
+	if (t->is_dialog) {
+		shortcut =
+		    gtk_menu_item_new_with_label(_
+						 ("Add Dialog to Favorites Bar"));
+		gtk_widget_show(shortcut);
+		gtk_container_add(GTK_CONTAINER(pm_text),
+				  shortcut);
 
+		gtk_signal_connect(GTK_OBJECT(shortcut),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_shortcut_activate), t);
+		
+		separator = gtk_menu_item_new();
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(pm_text), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+	}
 	/*
 	 * file menu
 	 */
