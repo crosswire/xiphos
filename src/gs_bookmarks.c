@@ -28,6 +28,7 @@
 #include <gnome.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <math.h>
+#include <ctype.h>
 
 #include "gs_bookmarks.h"
 #include "sw_bookmarks.h"
@@ -493,13 +494,12 @@ static void set_background (GtkCTree *ctree, GtkCTreeNode *node, gpointer data)
 /******************************************************************************
  * pmBookmarkTree call backs
  ******************************************************************************/
-/*
- * add new sub group to selected group
- */
 static void
 stringCallback(gchar *string, gpointer data)
 {
-	gchar *text[2];
+	gchar *text[2]; 
+	gchar buf[80], buf2[80];
+	gint length, i=0, j=0;
 	
 	if((string == NULL) || (strlen(string) == 0)){
 		(gchar*)data = NULL;
@@ -510,18 +510,35 @@ stringCallback(gchar *string, gpointer data)
 				text[1] = "GROUP";
 				gtk_ctree_insert_node(p_bmtree->ctree, selected_node, NULL,text, 3, 
 								pixmap1,mask1,pixmap2,mask2, FALSE, FALSE);
-				break;
-			case 1:/*
+			break;
+			case 1:
+				sprintf(buf,"%s",string); /*** make file name ***/
 				text[0] = string;
-				text[1] = "GROUP";
+				length = strlen(buf);
+				if(length > 29) 
+					length = 29;
+				while( i < length){
+					if(isalpha(buf[i])){ 
+					buf2[j] = buf[i];
+					++j;
+					}	
+				buf2[j] ='\0';
+				++i;
+				}
+				sprintf(buf,"%s%s",buf2,".conf");			
+				text[1] = buf; 
+				g_warning(text[1]);
 				gtk_ctree_insert_node(p_bmtree->ctree, NULL, NULL,text, 3, 
-								pixmap1,mask1,pixmap2,mask2, FALSE, FALSE);*/
-				break;
+								pixmap1,mask1,pixmap2,mask2, FALSE, FALSE);
+			break;
 		}
 	}
 	
 }
 
+/*
+ * add new sub group to selected group
+ */
 void
 on_new_activate                        (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -530,17 +547,20 @@ on_new_activate                        (GtkMenuItem     *menuitem,
 	gchar *buf;
 	
 	buf = "0";
-	dialog = gnome_request_dialog(FALSE,"Enter SubGroup Name - use no commas",NULL,80,
+	dialog = gnome_request_dialog(FALSE,"Enter SubGroup Name - use no commas",NULL,79,
 					(GnomeStringCallback)stringCallback,GINT_TO_POINTER(0), GTK_WINDOW(MainFrm));	
 }
 
+/*
+ * add new root group to tree
+ */
 void
 on_add_new_group1_activate             (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	GtkWidget *dialog;
 	
-	dialog = gnome_request_dialog(FALSE,"Enter SubGroup Name - use no commas",NULL,80,
+	dialog = gnome_request_dialog(FALSE,"Enter SubGroup Name - use no commas",NULL,79,
 					(GnomeStringCallback)stringCallback,GINT_TO_POINTER(1), GTK_WINDOW(MainFrm));
 }
 
@@ -626,7 +646,7 @@ loadtree(GtkWidget *ctree1)
 	menu = create_pmBookmarkTree();
 	gnome_popup_menu_attach(menu,p_bmtree->ctree_widget,(gchar*)"1");
 	gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[0].widget),FALSE);
-	gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[1].widget),FALSE);
+	//gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[1].widget),FALSE);
 }
 
 GtkWidget*

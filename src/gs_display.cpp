@@ -376,7 +376,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		utf8str = e_utf8_from_gtk_string (gtkText, tmpBuf);
 		utf8len = g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText),utf8str , utf8len ); 
-			
+			 
 		sprintf(tmpBuf, "<font color=\"%s\" size=\"%s\">",
 					versecolor ,
 			 		gsfonts->bible_font_size);	
