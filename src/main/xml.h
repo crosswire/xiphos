@@ -32,6 +32,10 @@ xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
 					gchar * key, gchar * module);
 void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf);
+void xml_write_bookmark_doc(const xmlChar * xml_filename);
+
+void xml_free_bookmark_doc(void);
+xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file);
 char *xml_get_list_from_label(char * section, char * item, const char * label);
 int xml_set_section_ptr(char * section);
 void xml_set_list_item(char * section, char * item, char * label, 
