@@ -1432,17 +1432,20 @@ gchar *getmodnameSWORD(gint num)
 {
 	if (havebible) {
 		switch (num) {
-		case 0:
+		case MAIN_TEXT_WINDOW:
 			return curMod->Name();
 			break;
-		case 1:
+		case COMMENTARY_WINDOW:
 			return curcomMod->Name();
 			break;
-		case 2:
+		case DICTIONARY_WINDOW:
 			return curdictMod->Name();
 			break;
-		case 3:
+		case INTERLINEAR_WINDOW:
 			return comp1Mod->Name();
+			break;
+		case BOOK_WINDOW:
+			return NULL;
 			break;
 		}
 	}
@@ -1457,17 +1460,20 @@ gchar *getmodkeySWORD(gint num)
 {
 	if (havebible) {
 		switch (num) {
-		case 0:
+		case MAIN_TEXT_WINDOW:
 			return (gchar *) curMod->KeyText();
 			break;
-		case 1:
+		case COMMENTARY_WINDOW:
 			return (gchar *) curcomMod->KeyText();
 			break;
-		case 2:
+		case DICTIONARY_WINDOW:
 			return (gchar *) curdictMod->KeyText();
 			break;
-		case 3:
+		case INTERLINEAR_WINDOW:
 			return (gchar *) comp1Mod->KeyText();
+			break;
+		case BOOK_WINDOW:
+			return NULL;
 			break;
 		}
 	}
@@ -1540,11 +1546,11 @@ backend_getBibleBooksSWORD(void)
 	VerseKey key;
 	GList *glist = NULL;
 
-	/*
-   * Load Bible books.
-   */
+    /*
+    * Load Bible books.
+    */
   
-  for (int i = 0; i <= 1; ++i) {
+    for (int i = 0; i <= 1; ++i) {
 		for ( int j = 0; j < key.BMAX[i]; ++j) {
 			glist = g_list_append(glist, (char*)key.books[i][j].name);
 		}
