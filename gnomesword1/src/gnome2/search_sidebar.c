@@ -470,6 +470,10 @@ void gui_create_search_sidebar(void)
 	gtk_widget_show(scrolledwindow_search);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
 			  scrolledwindow_search);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (
+					scrolledwindow_search), GTK_SHADOW_IN);
+	gtk_container_set_border_width (GTK_CONTAINER (scrolledwindow_search), 2);
+
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow_search),
 				       GTK_POLICY_NEVER,
@@ -483,20 +487,16 @@ void gui_create_search_sidebar(void)
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_show(frame1);
 	gtk_container_add(GTK_CONTAINER(viewport_search), frame1);
-	//gtk_widget_set_usize(frame1, 162, 360);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame1), GTK_SHADOW_NONE);
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
 	gtk_container_add(GTK_CONTAINER(frame1), vbox1);
-
-	frame_search = gtk_frame_new(NULL);
-	gtk_widget_show(frame_search);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame_search, FALSE, TRUE,
-			   0);
-
+	
 	vbox5 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox5);
-	gtk_container_add(GTK_CONTAINER(frame_search), vbox5);
+	gtk_box_pack_start(GTK_BOX(vbox1), vbox5, FALSE, TRUE,
+			   0);
 
 	entrySearch = gtk_entry_new();
 	gtk_widget_show(entrySearch);
@@ -510,19 +510,16 @@ void gui_create_search_sidebar(void)
 	gtk_tooltips_set_tip(tooltips, btnSearch, _("Begin Search"),
 			     NULL);
 	gtk_button_set_relief(GTK_BUTTON(btnSearch), GTK_RELIEF_HALF);
-
-	frame6 = gtk_frame_new(NULL);
-	gtk_widget_show(frame6);
-	gtk_box_pack_start(GTK_BOX(vbox5), frame6, FALSE, TRUE, 0);
-
+	
 	progressbar_search = gtk_progress_bar_new();
 	gtk_widget_show(progressbar_search);
-	gtk_container_add(GTK_CONTAINER(frame6), progressbar_search);
+	gtk_box_pack_start(GTK_BOX(vbox5), progressbar_search, FALSE, TRUE, 0);
 
 	frame_module = gtk_frame_new(_("Search Module"));
 	gtk_widget_show(frame_module);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame_module, FALSE, FALSE,
 			   0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame_module), 2);
 
 	vbox90 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox90);
@@ -575,6 +572,7 @@ void gui_create_search_sidebar(void)
 	frame2 = gtk_frame_new(_("Search Type"));
 	gtk_widget_show(frame2);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame2, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame2), 2);
 
 	vbox2 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_show(vbox2);
@@ -614,6 +612,7 @@ void gui_create_search_sidebar(void)
 	frame3 = gtk_frame_new(_("Search Options"));
 	gtk_widget_show(frame3);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame3, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame3), 2);
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox3);
@@ -630,6 +629,7 @@ void gui_create_search_sidebar(void)
 	frame4 = gtk_frame_new(_("Search Scope"));
 	gtk_widget_show(frame4);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame4, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame4), 2);
 
 	vbox4 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_show(vbox4);
@@ -668,6 +668,7 @@ void gui_create_search_sidebar(void)
 	frame5 = gtk_frame_new(_("Bounds"));
 	gtk_widget_show(frame5);
 	gtk_box_pack_start(GTK_BOX(vbox1), frame5, FALSE, TRUE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (frame5), 2);
 	gtk_widget_hide(frame5);
 
 	table1 = gtk_table_new(2, 2, FALSE);
@@ -703,8 +704,6 @@ void gui_create_search_sidebar(void)
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_widget_set_usize(entryUpper, 114, 22);
 	gtk_entry_set_text(GTK_ENTRY(entryUpper), _("Revelation"));
-
-
 
 
 	gtk_signal_connect(GTK_OBJECT(rrbUseBounds),
