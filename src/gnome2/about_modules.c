@@ -228,6 +228,7 @@ static GtkWidget *gui_create_about_modules(void)
 	text_html = gtk_html_new();
 	gtk_widget_show(text_html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow30), text_html);
+	gtk_widget_set_sensitive(text_html,FALSE);
 
 
 	dialog_action_area28 =
