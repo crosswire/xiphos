@@ -39,6 +39,8 @@
 #include "gui/editor_spell.h"
 
 #include "main/spell.h"
+#include "main/settings.h"
+#include "main/xml.h"
 
 
 /* messages to the spell checker */
@@ -59,6 +61,9 @@ typedef struct {
 	GtkWidget *start_button;
 	GtkWidget *close_button;
 	GtkWidget *options_button;
+	GtkWidget *language_frame;
+	GtkWidget *language_combo;
+	GtkWidget *language_entry;
 	GtkWidget *word_frame;
 	GtkWidget *word_entry;
 	GtkWidget *replace_frame;
@@ -146,6 +151,17 @@ static void change_word_color(GSHTMLEditorControlData * ecd)
 static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 {
 	gboolean word_corrected = 0;
+	gchar *language = NULL;
+	gint i = 0;
+	
+	spell_language = gtk_editable_get_chars(
+					GTK_EDITABLE(spc_gui.language_entry),
+                                        0,
+                                        -1);	
+	for (i = 0; i < ecd->languages->_length; i ++) {
+		if(!strcmp(ecd->languages->_buffer [i].name, spell_language))
+			language = ecd->languages->_buffer [i].abbreviation;
+	}
 	
 	select_word(ecd);
 	do {
@@ -156,7 +172,7 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 		
 		switch (spc_message) {
 		case SPC_INSERT:			
-			add_to_personal(word);
+			add_to_personal(word,language);
 			word_corrected = 1;
 			break;
 		case SPC_ACCEPT:
@@ -171,7 +187,7 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 		case SPC_REPLACE:{			
 			const gchar *buf = gtk_entry_get_text(GTK_ENTRY
 					     (spc_gui.replace_entry));
-			store_replacement(word,buf);
+			store_replacement(word,buf,language);
 			html_engine_replace_spell_word_with(
 					ecd->html->engine,
 					buf);			
@@ -351,6 +367,9 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 static void spc_start_button_clicked_lcb(GtkButton * button, 
 					GSHTMLEditorControlData * ecd)
 {
+	gint i = 0;
+	gboolean enabled;
+	
 	gtk_widget_set_sensitive(spc_gui.start_button, 0);
 	gtk_widget_set_sensitive(spc_gui.options_button, 0);
 	gtk_widget_set_sensitive(spc_gui.close_button, 0);
@@ -359,7 +378,19 @@ static void spc_start_button_clicked_lcb(GtkButton * button,
 	gtk_widget_set_sensitive(spc_gui.replace_button, 1);
 	gtk_widget_set_sensitive(spc_gui.ignore_button, 1);
 	gtk_widget_set_sensitive(spc_gui.insert_button, 1);
-
+	
+	spell_language = gtk_editable_get_chars(
+					GTK_EDITABLE(spc_gui.language_entry),
+                                        0,
+                                        -1);
+	
+	for (i = 0; i < ecd->languages->_length; i ++) {
+		if(!strcmp(ecd->languages->_buffer [i].name, spell_language))
+			set_dictionary_language(
+				ecd->languages->_buffer [i].abbreviation);
+	}
+	
+	
 	spc_is_running = TRUE;
 	if(run_spell_checker(ecd)) {
 		spc_is_running = FALSE;
@@ -567,6 +598,33 @@ static void on_near_misses_select_row_lcb(GtkWidget * clist, gint row,
 
 /******************************************************************************
  * Name
+ *   on_cbe_freeform_lookup_changed
+ *
+ * Synopsis
+ *   #include "gui/editor_spell.h"
+ *
+ *   void on_cbe_freeform_lookup_changed(GtkEditable * editable, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static
+void on_language_entry_changed(GtkEditable * editable, gpointer user_data)
+{
+	gchar *buf = NULL;
+	
+	buf = gtk_editable_get_chars(editable,0,-1);
+	xml_set_value("GnomeSword", "editor", "spell_language", buf);
+	settings.spell_language = xml_get_value("editor", "spell_language");
+}
+
+
+/******************************************************************************
+ * Name
  *   create_spc_window
  *
  * Synopsis
@@ -583,6 +641,8 @@ static void on_near_misses_select_row_lcb(GtkWidget * clist, gint row,
 
 static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 {
+	GList *tmp = NULL;
+	
 	spc_is_running = FALSE;
 	spc_gui.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(spc_gui.window), "spc_gui.window",
@@ -618,6 +678,27 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 			  spc_gui.options_button);
 	GTK_WIDGET_SET_FLAGS(spc_gui.options_button, GTK_CAN_DEFAULT);
 
+	spc_gui.language_frame = gtk_frame_new(_("Language"));
+	gtk_widget_show(spc_gui.language_frame);
+	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.language_frame, TRUE,
+			   TRUE, 0);
+	spc_gui.language_combo = gtk_combo_new();
+	gtk_widget_show(spc_gui.language_combo);
+	gtk_container_add(GTK_CONTAINER(spc_gui.language_frame),
+			  spc_gui.language_combo);
+	
+	tmp = get_dictionary_languages(ecd);
+	
+	gtk_combo_set_popdown_strings(GTK_COMBO(spc_gui.language_combo),
+				      tmp);
+	g_list_free(tmp);
+	
+	spc_gui.language_entry = GTK_COMBO(spc_gui.language_combo)->entry;
+	gtk_widget_show(spc_gui.language_entry);
+	if(strcmp(settings.spell_language, "unknown"))
+		gtk_entry_set_text(GTK_ENTRY(spc_gui.language_entry),
+                                            settings.spell_language);
+		
 	spc_gui.word_frame = gtk_frame_new(_("Word"));
 	gtk_widget_show(spc_gui.word_frame);
 	gtk_box_pack_start(GTK_BOX(spc_gui.vbox), spc_gui.word_frame, TRUE,
@@ -711,6 +792,9 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_signal_connect(GTK_OBJECT(spc_gui.window), "delete_event",
 			   G_CALLBACK(delete_event_lcb), NULL);
 
+  	g_signal_connect ((gpointer) spc_gui.language_entry, "changed",
+                    G_CALLBACK (on_language_entry_changed),
+                    NULL);
 	gtk_signal_connect(GTK_OBJECT(spc_gui.start_button), "clicked",
 			   G_CALLBACK(spc_start_button_clicked_lcb),
 			   ecd);
@@ -758,14 +842,15 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 
 void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 {
+	if(init_spell() == -1) {
+		//gtk_widget_destroy(spc_gui.window);
+		return;
+	}
+	
 	spc_gui.window = create_spc_window(ecd);
 	gtk_widget_set_sensitive(spc_gui.options_button, 0);	
 	gtk_widget_show(spc_gui.window);
 
-	if(init_spell() == -1) {
-		gtk_widget_destroy(spc_gui.window);
-		return;
-	}
 }
 
 
