@@ -67,6 +67,7 @@ gchar *gui_update_nav_controls(gchar * key)
 
 	settings.apply_change = FALSE;
 	val_key = get_valid_key(key);
+//	g_warning("key = %s val_key = %s",key,val_key);
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
 	/* 
@@ -323,10 +324,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 	toolbarNav =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbarNav);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbarNav",
-				 toolbarNav,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarNav);
 	gtk_widget_set_usize(toolbarNav, -2, 34);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarNav),

@@ -109,6 +109,7 @@ static gboolean button_three;
 static gboolean bookmarks_changed;
 /* open bookmark in dialog  */
 static gboolean use_dialog;
+static gint selected_row;
 
 /*****************************************************************************
  * static function declrations
@@ -118,7 +119,7 @@ static void after_move(GtkCTree * ctree,
 		       GtkCTreeNode * child,
 		       GtkCTreeNode * parent,
 		       GtkCTreeNode * sibling, gpointer data);
-static void remove_selection(GtkWidget * widget, GtkCTree * ctree);
+static void remove_selection(GtkCTree * ctree);
 static void stringCallback(gchar * string, gpointer data);
 static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 				     gpointer user_data);
@@ -177,7 +178,7 @@ static void get_node_data(GNode * node)
  */
 
 static xmlNodePtr add_xml_folder_to_parent(xmlNodePtr parent,
-				BOOKMARK_DATA * es)
+					   BOOKMARK_DATA * es)
 {
 	xmlNodePtr cur_node;
 	xmlAttrPtr xml_attr;
@@ -256,10 +257,10 @@ static void add_xml_bookmark_to_parent(xmlNodePtr parent,
  *   void
  */
 
-void gui_new_xml_bookmark_file(void)
+void gui_new_xml_bookmark_file(void) 
 {
 	xmlDocPtr xml_doc;
-	xmlNodePtr xml_root;
+	xmlNodePtr xml_root; 
 	xmlNodePtr xml_node;
 	xmlNodePtr xml_folder;
 	xmlAttrPtr xml_attr;
@@ -322,58 +323,6 @@ void gui_new_xml_bookmark_file(void)
 
 /******************************************************************************
  * Name
- *   create_xml_bookmark_file
- *
- * Synopsis
- *   #include "gui/bookmarks.h"
- *
- *   xmlNodePtr create_xml_bookmark_file(gchar * filename,
- *					   gchar * caption)	
- *
- * Description
- *    
- *
- * Return value
- *   xmlNodePtr
- */
-/*
-static xmlNodePtr create_xml_bookmark_file(gchar * filename,
-					   gchar * caption)
-{
-	xmlDocPtr xml_doc;
-	xmlNodePtr xml_node;
-	xmlAttrPtr xml_attr;
-	const xmlChar *xml_filename;
-	gchar buf[256];
-
-	sprintf(buf, "%s/%s/%s", settings.gSwordDir, "bookmarks",
-		filename);
-	xml_filename = (const xmlChar *) buf;
-	xml_doc = xmlNewDoc((const xmlChar *) "1.0");
-
-	if (xml_doc == NULL) {
-		fprintf(stderr,
-			"Document not created successfully. \n");
-		return NULL;
-	}
-
-	xml_node = xmlNewNode(NULL, (const xmlChar *) "SwordBookmarks");
-	xml_attr = xmlNewProp(xml_node, "syntaxVersion",
-			      (const xmlChar *) "1.0");
-	xmlDocSetRootElement(xml_doc, xml_node);
-
-	xml_node = xmlNewChild(xml_node, NULL,
-			       (const xmlChar *) "Folder", NULL);
-	xml_attr = xmlNewProp(xml_node, "caption",
-			      (const xmlChar *) caption);
-	xmlSaveFile(xml_filename, xml_doc);
-	xmlFreeDoc(xml_doc);
-	return xml_node;
-}
-*/
-
-/******************************************************************************
- * Name
  *  parse_bookmark_tree
  *
  * Synopsis
@@ -392,7 +341,7 @@ static void parse_bookmark_tree(GNode * node, xmlNodePtr parent)
 {
 	static xmlNodePtr cur_node;
 	GNode *work;
-	
+
 	for (work = node->children; work; work = work->next) {
 		get_node_data(work);
 		if (!es->is_leaf) {
@@ -401,7 +350,7 @@ static void parse_bookmark_tree(GNode * node, xmlNodePtr parent)
 			add_xml_bookmark_to_parent(parent, es);
 		}
 		g_free(es);
-		
+
 		parse_bookmark_tree(work, cur_node);
 	}
 }
@@ -414,7 +363,7 @@ static void parse_bookmark_tree(GNode * node, xmlNodePtr parent)
  * Synopsis
  *   #include "gui/bookmarks.h"
  *
- *   void save_gnode_to_xml_bookmarks(GNode * node)	
+ *   void save_gnode_to_xml_bookmarks(GNode * node, gchar *file_buf)	
  *
  * Description
  *    
@@ -423,23 +372,18 @@ static void parse_bookmark_tree(GNode * node, xmlNodePtr parent)
  *   void
  */
 
-static void save_gnode_to_xml_bookmarks(GNode * node)
+static void save_gnode_to_xml_bookmarks(GNode * gnode, gchar * file_buf)
 {
-	gchar buf[80];
-	gchar *file_buf;
 	xmlNodePtr root_node = NULL;
 	xmlNodePtr cur_node = NULL;
 	xmlDocPtr root_doc;
 	xmlAttrPtr root_attr;
-	GNode *gnode;
 	const xmlChar *xml_filename;
 
 	if (bookmarks_changed) {
-		gnode = g_node_first_child(node);
 
-		sprintf(buf, "%s/%s", settings.gSwordDir,
-			"bookmarks/bookmarks.xml");
-		file_buf = g_strdup(buf);
+		if (!gnode)
+			return;
 		xml_filename = (const xmlChar *) file_buf;
 		root_doc = xmlNewDoc((const xmlChar *) "1.0");
 
@@ -452,12 +396,10 @@ static void save_gnode_to_xml_bookmarks(GNode * node)
 			xmlDocSetRootElement(root_doc, root_node);
 		}
 
-		if (!gnode)
-			return;
-
 		es = (BOOKMARK_DATA *) gnode->data;
-		g_warning("bookmark = %s - %s - %s",es->caption,es->key,es->module);
-				
+/*		g_warning("bookmark = %s - %s - %s", es->caption,
+			  es->key, es->module);
+*/
 		if ((!g_strcasecmp(es->module, "ROOT")) ||
 		    (!g_strcasecmp(es->module, "GROUP"))) {
 			cur_node =
@@ -481,7 +423,7 @@ static void save_gnode_to_xml_bookmarks(GNode * node)
 				}
 			}
 		}
-		g_warning("saving = %s", xml_filename);
+		g_print("\nsaving = %s\n", xml_filename);
 		xmlSaveFile(xml_filename, root_doc);
 		xmlFreeDoc(root_doc);
 		g_free(file_buf);
@@ -600,7 +542,7 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 
 	mod1 = xmlGetProp(cur, "modulename");
 	key = xmlGetProp(cur, "key");
-	caption = xmlGetProp(cur, "caption"); /* needed to load early devel release */
+	caption = xmlGetProp(cur, "caption");	/* needed to load early devel release */
 	if (caption) {
 		if (strlen(caption) > 0) {
 			data->caption = g_strdup(caption);
@@ -620,8 +562,8 @@ static void get_xml_bookmark_data(xmlNodePtr cur, BOOKMARK_DATA * data)
 		} else
 			data->caption = g_strdup(key);
 	}
-		
-	
+
+
 	data->key = g_strdup(key);
 	data->module = g_strdup(mod1);
 	data->is_leaf = TRUE;
@@ -749,7 +691,7 @@ static void parse_bookmarks(GtkCTree * ctree, const xmlChar * file,
 	cur = cur->xmlChildrenNode;
 
 	while (cur != NULL) {
-		if (!xmlStrcmp(cur->name,(const xmlChar *)"Bookmark")) {
+		if (!xmlStrcmp(cur->name, (const xmlChar *) "Bookmark")) {
 			get_xml_bookmark_data(cur, p);
 			add_node_to_ctree(ctree, root_node, p);
 			free_bookmark_data(p);
@@ -860,10 +802,10 @@ static gchar *get_module_name(void)
 	if (settings.havebible) {
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			return (gchar *) xml_get_value("modules", "text");//settings.MainWindowModule;
+			return (gchar *) xml_get_value("modules", "text");	//settings.MainWindowModule;
 			break;
 		case COMMENTARY_WINDOW:
-			return (gchar *) xml_get_value("modules", "comm");//settings.CommWindowModule;
+			return (gchar *) xml_get_value("modules", "comm");	//settings.CommWindowModule;
 			break;
 		case DICTIONARY_WINDOW:
 			return (gchar *) settings.DictWindowModule;
@@ -904,10 +846,6 @@ static void addnewgrouptoMenus(GtkWidget * pmMenu,
 		return;
 
 	item = gtk_menu_item_new_with_caption(str);
-	gtk_widget_ref(item);
-	gtk_object_set_data_full(GTK_OBJECT(pmMenu), "item",
-				 item, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC
@@ -960,14 +898,14 @@ gboolean button_press_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer user_data)
 {
 	if (event->button == 3) {
-		gint row;
+		//gint row;
 		gint column;
 		button_three = TRUE;
 		if (gtk_clist_get_selection_info
 		    (GTK_CLIST(p_bmtree->ctree), event->x, event->y,
-		     &row, &column)) {
+		     &selected_row, &column)) {
 			gtk_clist_select_row(GTK_CLIST(p_bmtree->ctree),
-					     row, 0);
+					     selected_row, 0);
 		}
 		gtk_menu_popup(GTK_MENU(pmBookmarkTree),
 			       NULL, NULL, NULL, NULL,
@@ -1058,11 +996,12 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[2])->text;
 		if (strlen(mod_name) < 3)
-			mod_name = xml_get_value("modules", "text");//settings.MainWindowModule;
+			mod_name = xml_get_value("modules", "text");
 		gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 		gtk_widget_set_sensitive(menu.new, FALSE);
 		gtk_widget_set_sensitive(menu.insert, FALSE);
 		gtk_widget_set_sensitive(menu.point, TRUE);
+		gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 		if (!button_three)
 			goto_bookmark(mod_name, key);
 	} else {
@@ -1070,6 +1009,16 @@ static void on_ctree_select_row(GtkCTree * ctree,
 		gtk_widget_set_sensitive(menu.new, TRUE);
 		gtk_widget_set_sensitive(menu.insert, TRUE);
 		gtk_widget_set_sensitive(menu.point, FALSE);
+		gtk_widget_set_sensitive(menu.rr_submenu, TRUE);
+
+		if (strcmp
+		    (GTK_CELL_PIXTEXT
+		     (GTK_CTREE_ROW(selected_node)->row.cell[0])->text,
+		     "Bookmarks"))
+			gtk_widget_set_sensitive(menu.remove, TRUE);
+		else
+			gtk_widget_set_sensitive(menu.remove, FALSE);
+
 		if (!button_three)
 			gtk_ctree_toggle_expansion(ctree,
 						   selected_node);
@@ -1157,7 +1106,7 @@ static void after_move(GtkCTree * ctree, GtkCTreeNode * child,
  *   void
  */
 
-static void remove_selection(GtkWidget * widget, GtkCTree * ctree)
+static void remove_selection(GtkCTree * ctree)
 {
 	GtkCList *clist;
 	GtkCTreeNode *node;
@@ -1168,26 +1117,10 @@ static void remove_selection(GtkWidget * widget, GtkCTree * ctree)
 
 	while (clist->selection) {
 		node = clist->selection->data;
-		/*
-		   if (GTK_CTREE_ROW(node)->is_leaf) {
-		   //do nothing
-		   } else
-		   gtk_ctree_post_recursive(ctree, node, // FIXME: do we need this
-		   (GtkCTreeFunc)
-		   count_items, NULL);
-		 */
 		gtk_ctree_remove_node(ctree, node);
 
 		if (clist->selection_mode == GTK_SELECTION_BROWSE)
 			break;
-	}
-
-	if (clist->selection_mode == GTK_SELECTION_EXTENDED
-	    && !clist->selection && clist->focus_row >= 0) {
-		node = gtk_ctree_node_nth(ctree, clist->focus_row);
-
-		if (node)
-			gtk_ctree_select(ctree, node);
 	}
 
 	gtk_clist_thaw(clist);
@@ -1526,8 +1459,12 @@ void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 
 void gui_save_old_bookmarks_to_new(GNode * gnode)
 {
+	gchar buf[256];
+
+	sprintf(buf, "%s/bookmarks/%s", settings.gSwordDir,
+		"bookmarks.xml");
 	bookmarks_changed = TRUE;
-	save_gnode_to_xml_bookmarks(gnode);
+	save_gnode_to_xml_bookmarks(gnode, g_strdup(buf));
 }
 
 
@@ -1552,6 +1489,10 @@ void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 
 	GNode *gnode;
 	GtkCTreeNode *node;
+	gchar buf[256];
+
+	sprintf(buf, "%s/bookmarks/%s", settings.gSwordDir,
+		"bookmarks.xml");
 
 	node = GTK_CTREE_NODE(g_list_nth(GTK_CLIST
 					 (bmtree.ctree)->row_list, 0));
@@ -1559,7 +1500,8 @@ void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 	gnode = gtk_ctree_export_to_gnode(bmtree.ctree, NULL,
 					  NULL, node, ctree2gnode,
 					  NULL);
-	save_gnode_to_xml_bookmarks(gnode);
+	save_gnode_to_xml_bookmarks(g_node_first_child(gnode),
+				    g_strdup(buf));
 }
 
 
@@ -1649,8 +1591,87 @@ void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_remove_folder_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
+	gchar buf[256];
+	GNode *gnode;
+	GtkCTreeNode *node;
+	BOOKMARK_DATA *bd;
+
+	node = GTK_CTREE_NODE(g_list_nth(GTK_CLIST
+					 (bmtree.ctree)->row_list,
+					 selected_row));
+
+	gnode = gtk_ctree_export_to_gnode(bmtree.ctree, NULL,
+					  NULL, node, ctree2gnode,
+					  NULL);
+	bd = (BOOKMARK_DATA *) gnode->data;
+	sprintf(buf, "%s/removed/%s.xml", settings.swbmDir,
+		bd->caption);
+	g_warning(buf);
+
+	bookmarks_changed = TRUE;
+	save_gnode_to_xml_bookmarks(gnode, g_strdup(buf));
+	remove_selection(bmtree.ctree);
+	bookmarks_changed = TRUE;
+}
 
 
+/******************************************************************************
+ * Name
+ *   restore_ok
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *   
+ *   void restore_ok(GtkButton *button, gpointer data);
+ *
+ * Description
+ *   OK button for restore fileselection was clicked.
+ *
+ * Return value
+ *   void
+ */
+
+static void restore_ok(GtkButton * button, GtkWidget * filesel)
+{
+	GtkCTreeNode *node;
+	const xmlChar *file;
+
+	node = GTK_CTREE_NODE(g_list_nth(GTK_CLIST
+					 (bmtree.ctree)->row_list,
+					 selected_row));
+
+	file =
+	    (const xmlChar *)
+	    gtk_file_selection_get_filename(GTK_FILE_SELECTION
+					    (filesel));
+
+	parse_bookmarks(bmtree.ctree, file, node);
+
+	bookmarks_changed = TRUE;
+
+	gtk_widget_destroy(filesel);
+}
+
+
+/******************************************************************************
+ * Name
+ *   restore_cancel
+ *
+ * Synopsis
+ *   #include "gui/bookmarks.h"
+ *   
+ *   void restore_cancel(GtkButton *button, gpointer data);
+ *
+ * Description
+ *   Cancel button for restore fileselection was clicked.
+ *
+ * Return value
+ *   void
+ */
+
+static void restore_cancel(GtkButton * button, GtkWidget * dlg)
+{
+	gtk_widget_destroy(dlg);
 }
 
 
@@ -1673,7 +1694,41 @@ void on_remove_folder_activate(GtkMenuItem * menuitem,
 void on_restore_folder_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
+	GtkWidget *fileselection;
+	GtkWidget *ok;
+	GtkWidget *cancel;
+	gchar buf[256];
 
+	fileselection =
+	    gtk_file_selection_new(_("Restore Bookmark Folder"));
+	gtk_container_set_border_width(GTK_CONTAINER(fileselection),
+				       10);
+	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION
+					       (fileselection));
+
+	ok = GTK_FILE_SELECTION(fileselection)->ok_button;
+	gtk_object_set_data(GTK_OBJECT(fileselection), "ok", ok);
+	gtk_widget_show(ok);
+	GTK_WIDGET_SET_FLAGS(ok, GTK_CAN_DEFAULT);
+
+	cancel = GTK_FILE_SELECTION(fileselection)->cancel_button;
+	gtk_object_set_data(GTK_OBJECT(fileselection), "cancel",
+			    cancel);
+	gtk_widget_show(cancel);
+	GTK_WIDGET_SET_FLAGS(cancel, GTK_CAN_DEFAULT);
+
+	sprintf(buf, "%s/removed/*.xml", settings.swbmDir);
+	gtk_file_selection_set_filename(GTK_FILE_SELECTION
+					(fileselection), buf);
+
+	gtk_widget_show(fileselection);
+
+	gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+			   GTK_SIGNAL_FUNC(restore_ok),
+			   (GtkWidget *) fileselection);
+	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
+			   GTK_SIGNAL_FUNC(restore_cancel),
+			   (GtkWidget *) fileselection);
 
 }
 
@@ -1717,8 +1772,7 @@ void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	test = gui_gs_dialog(yes_no_dialog);
 	if (test == GS_YES) {
-		remove_selection(p_bmtree->ctree_widget,
-				 p_bmtree->ctree);
+		remove_selection(p_bmtree->ctree);
 		bookmarks_changed = TRUE;
 		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
 	}
@@ -2243,8 +2297,8 @@ void create_bookmark_menu(void)
 				 settings.have_bibletime);
 
 	gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
-	gtk_widget_set_sensitive(menu.remove, FALSE);
-	gtk_widget_set_sensitive(menu.restore, FALSE);
+	gtk_widget_set_sensitive(menu.remove, TRUE);
+	gtk_widget_set_sensitive(menu.restore, TRUE);
 
 
 	gnome_app_install_menu_hints(GNOME_APP(widgets.app),

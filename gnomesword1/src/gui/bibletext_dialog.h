@@ -24,8 +24,9 @@
 
 #include "gui/bibletext.h"
 
+void gui_keep_bibletext_dialog_in_sync(gchar * key);
 void gui_bibletext_dialog_goto_bookmark(gchar * mod_name, gchar * key);
-void gui_sync_bibletext_dialog(TEXT_DATA * vt);
+void gui_sync_bibletext_dialog_with_main(TEXT_DATA * vt);
 void gui_on_lookup_bibletext_dialog_selection
 	(GtkMenuItem * menuitem, gchar * dict_mod_description);
 void gui_close_text_dialog(TEXT_DATA * vt);

@@ -262,6 +262,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 			myurl = g_strdup(url);
 			buf1 = g_strdup(myurl);
+/*
 			mybuf = strstr(myurl, "class=");
 			if (mybuf) {
 				gint i;
@@ -280,7 +281,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 					}
 				}
 			}
-
+*/
+			modbuf = "Robinson";
 			mybuf = NULL;
 			mybuf = strstr(buf1, "value=");
 			if (mybuf) {
@@ -288,6 +290,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				++mybuf;
 			}
 			buf1 = g_strdup(mybuf);
+			//g_warning("show %s in %s",buf1,modbuf);
 			show_in_appbar(widgets.appbar, buf1, modbuf);
 			g_free(buf1);
 			g_free(myurl);
@@ -295,6 +298,8 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		/*** thml strongs ***/
 		else if (!strncmp(url, "type=Strongs", 12)) {
+			//g_warning(url);
+			//return;
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
 			gchar newref[80];
@@ -445,12 +450,12 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		gchar *mybuf = NULL;
 
 		buf = g_strdup(url);
-		mybuf = strstr(url, "class=");
+/*		mybuf = strstr(url, "class=");
 		if (mybuf) {
 			gint i;
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			if (!strncmp(modbuf, "none", 5)) {	/* gbf */
+			if (!strncmp(modbuf, "none", 5)) {	
 				modbuf = "Packard";
 			} else {
 				for (i = 0; i < strlen(modbuf); i++) {
@@ -461,7 +466,8 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 				}
 			}
 		}
-
+*/
+		modbuf = "Robinson";
 		mybuf = NULL;
 		mybuf = strstr(buf, "value=");
 		if (mybuf) {

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-13 16:24-0400\n"
+"POT-Creation-Date: 2003-05-16 20:32-0400\n"
 "PO-Revision-Date: 2002-10-21 19:34+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -91,78 +91,78 @@ msgstr "Rimanom"
 msgid "Romans 8:28"
 msgstr "Rimanom 8:28"
 
-#: src/gnome/bibletext_menu.c:755 src/gnome/commentary_menu.c:675
+#: src/gnome/bibletext_menu.c:755 src/gnome/commentary_menu.c:677
 msgid "Red letter words"
 msgstr ""
 
-#: src/gnome/bibletext_menu.c:776 src/gnome/commentary_menu.c:693
+#: src/gnome/bibletext_menu.c:776 src/gnome/commentary_menu.c:698
 msgid "Strong's Numbers"
 msgstr "Zobrazi» Strongové èísla"
 
-#: src/gnome/bibletext_menu.c:796 src/gnome/commentary_menu.c:711
+#: src/gnome/bibletext_menu.c:796 src/gnome/commentary_menu.c:718
 msgid "Morphological Tags"
 msgstr "Morfologické znaèky"
 
-#: src/gnome/bibletext_menu.c:813 src/gnome/commentary_menu.c:728
+#: src/gnome/bibletext_menu.c:813 src/gnome/commentary_menu.c:735
 #, fuzzy
 msgid "Footnotes"
 msgstr "Prenú» poznámky pod èiarou"
 
-#: src/gnome/bibletext_menu.c:830 src/gnome/commentary_menu.c:744
+#: src/gnome/bibletext_menu.c:830 src/gnome/commentary_menu.c:752
 #, fuzzy
 msgid "Greek Accents"
 msgstr "Grécke akcenty"
 
-#: src/gnome/bibletext_menu.c:846 src/gnome/commentary_menu.c:760
+#: src/gnome/bibletext_menu.c:846 src/gnome/commentary_menu.c:768
 #, fuzzy
 msgid "Lemmas"
 msgstr "Nadpisy"
 
-#: src/gnome/bibletext_menu.c:864 src/gnome/commentary_menu.c:776
+#: src/gnome/bibletext_menu.c:864 src/gnome/commentary_menu.c:786
 #, fuzzy
 msgid "Scripture Cross-references"
 msgstr "KríŸové referencie Písma"
 
-#: src/gnome/bibletext_menu.c:883 src/gnome/commentary_menu.c:792
+#: src/gnome/bibletext_menu.c:883 src/gnome/commentary_menu.c:805
 #, fuzzy
 msgid "Hebrew Vowel Points"
 msgstr "Body hebrejských samohlások"
 
-#: src/gnome/bibletext_menu.c:902 src/gnome/commentary_menu.c:808
+#: src/gnome/bibletext_menu.c:902 src/gnome/commentary_menu.c:824
 #, fuzzy
 msgid "Hebrew Cantillation"
 msgstr "Hebrejský lexikón"
 
-#: src/gnome/bibletext_menu.c:918 src/gnome/commentary_menu.c:824
+#: src/gnome/bibletext_menu.c:918 src/gnome/commentary_menu.c:840
 #, fuzzy
 msgid "Headings"
 msgstr "Povoli» preusporiadanie"
 
-#: src/gnome/bibletext_menu.c:937 src/gnome/commentary_menu.c:843
+#: src/gnome/bibletext_menu.c:937 src/gnome/commentary_menu.c:859
 #, fuzzy
 msgid "Variants"
 msgstr "Tlaèi»"
 
-#: src/gnome/bibletext_menu.c:947 src/gnome/commentary_menu.c:851
+#: src/gnome/bibletext_menu.c:947 src/gnome/commentary_menu.c:870
 #, fuzzy
 msgid "All Readings"
 msgstr "Povoli» preusporiadanie"
 
-#: src/gnome/bibletext_menu.c:963 src/gnome/commentary_menu.c:864
+#: src/gnome/bibletext_menu.c:963 src/gnome/commentary_menu.c:887
 #, fuzzy
 msgid "Primary Readings"
 msgstr "Povoli» preusporiadanie"
 
-#: src/gnome/bibletext_menu.c:979 src/gnome/commentary_menu.c:877
+#: src/gnome/bibletext_menu.c:979 src/gnome/commentary_menu.c:904
 msgid "Secondary Readings"
 msgstr ""
 
-#: src/gnome/bibletext_menu.c:1110 src/gnome/commentary_menu.c:1142
+#: src/gnome/bibletext_menu.c:1110 src/gnome/commentary_menu.c:1203
 #: src/gnome/editor_menu.c:1057 src/gnome/toolbar_edit.c:449
 msgid "Open"
 msgstr "Otvori»"
 
-#: src/gnome/bibletext_menu.c:1111 src/gnome/commentary_menu.c:1142
+#: src/gnome/bibletext_menu.c:1111 src/gnome/commentary_menu.c:1204
 #, fuzzy
 msgid "in a dialog"
 msgstr "Otvori» dialóg vyhµadávania"
@@ -170,34 +170,34 @@ msgstr "Otvori» dialóg vyhµadávania"
 #.
 #. * file menu
 #.
-#: src/gnome/bibletext_menu.c:1123 src/gnome/commentary_menu.c:1154
+#: src/gnome/bibletext_menu.c:1123 src/gnome/commentary_menu.c:1214
 #: src/gnome/editor_menu.c:977 src/gnome/studypad.c:81
 #: src/gnome/toolbar_edit.c:108
 msgid "File"
 msgstr "Súbor"
 
-#: src/gnome/bibletext_menu.c:1133 src/gnome/commentary_menu.c:1174
+#: src/gnome/bibletext_menu.c:1133 src/gnome/commentary_menu.c:1234
 #, fuzzy
 msgid "Sync with Main Window"
 msgstr "Synchr. s hlavným oknom"
 
-#: src/gnome/bibletext_menu.c:1149 src/gnome/commentary_menu.c:1207
+#: src/gnome/bibletext_menu.c:1149 src/gnome/commentary_menu.c:1279
 #, fuzzy
 msgid "Open New Dialog"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome/bibletext_menu.c:1165 src/gnome/commentary_menu.c:1221
+#: src/gnome/bibletext_menu.c:1165 src/gnome/commentary_menu.c:1295
 #, fuzzy
 msgid "Open Module"
 msgstr "Zobrazi» modul"
 
-#: src/gnome/bibletext_menu.c:1189 src/gnome/commentary_menu.c:1239
+#: src/gnome/bibletext_menu.c:1189 src/gnome/commentary_menu.c:1316
 #: src/gnome/editor_menu.c:1083 src/gnome/html.c:955
 #: src/gnome/toolbar_edit.c:530
 msgid "Print"
 msgstr "Tlaèi»"
 
-#: src/gnome/bibletext_menu.c:1199 src/gnome/commentary_menu.c:1249
+#: src/gnome/bibletext_menu.c:1199 src/gnome/commentary_menu.c:1326
 #: src/gnome/dictlex_dialog.c:408 src/gnome/editor_spell.c:632
 #: src/gnome/find_dialog.c:268 src/gnome/search_dialog.c:2001
 msgid "Close"
@@ -206,18 +206,18 @@ msgstr ""
 #.
 #. * edit menu
 #.
-#: src/gnome/bibletext_menu.c:1211 src/gnome/commentary_menu.c:1262
+#: src/gnome/bibletext_menu.c:1211 src/gnome/commentary_menu.c:1338
 #, fuzzy
 msgid "Edit"
 msgstr "_Upravi»"
 
-#: src/gnome/bibletext_menu.c:1218 src/gnome/commentary_menu.c:1270
+#: src/gnome/bibletext_menu.c:1218 src/gnome/commentary_menu.c:1345
 #: src/gnome/editor_menu.c:1124 src/gnome/interlinear.c:1171
 #: src/gnome/main_menu.c:594 src/gnome/toolbar_edit.c:569
 msgid "Copy"
 msgstr "Kopírova»"
 
-#: src/gnome/bibletext_menu.c:1222 src/gnome/commentary_menu.c:1274
+#: src/gnome/bibletext_menu.c:1222 src/gnome/commentary_menu.c:1349
 #: src/gnome/editor_menu.c:1159 src/gnome/find_dialog.c:185
 #: src/gnome/find_dialog.c:258 src/gnome/find_dialog.c:338
 #: src/gnome/toolbar_edit.c:621
@@ -229,228 +229,230 @@ msgstr "Nájs»"
 msgid "Note"
 msgstr "Upravi» poloŸku"
 
-#.
-#. * module options menu
-#.
-#: src/gnome/bibletext_menu.c:1248 src/gnome/commentary_menu.c:1294
+#: src/gnome/bibletext_menu.c:1248 src/gnome/commentary_menu.c:1368
 #: src/gnome/interlinear.c:1184
 msgid "Module Options"
 msgstr "Nastavenia modulov"
 
-#: src/gnome/bibletext_menu.c:1256 src/gnome/commentary_menu.c:1302
+#: src/gnome/bibletext_menu.c:1256 src/gnome/commentary_menu.c:1376
 #, fuzzy
 msgid "Set Module Font"
 msgstr "Nastavenia modulov"
 
-#: src/gnome/bibletext_menu.c:1261 src/gnome/commentary_menu.c:1306
+#: src/gnome/bibletext_menu.c:1261 src/gnome/commentary_menu.c:1381
 #, fuzzy
 msgid "Set font for this module"
 msgstr "O tomto module"
 
-#: src/gnome/bibletext_menu.c:1275 src/gnome/commentary_menu.c:1320
+#: src/gnome/bibletext_menu.c:1275 src/gnome/commentary_menu.c:1396
 msgid "Lookup Selection"
 msgstr "Hµada» výber"
 
-#: src/gnome/bibletext_menu.c:1320 src/gnome/commentary_menu.c:1364
+#: src/gnome/bibletext_menu.c:1320 src/gnome/commentary_menu.c:1441
 msgid "Unlock This Module"
 msgstr "Odomknú» tento modul"
 
-#: src/gnome/bibletext_menu.c:1335 src/gnome/commentary_menu.c:1380
+#: src/gnome/bibletext_menu.c:1335 src/gnome/commentary_menu.c:1455
 #: src/gnome/preferences_dialog.c:1606
 #, fuzzy
 msgid "Show"
 msgstr "Zobrazi» u¹ká"
 
-#: src/gnome/bibletext_menu.c:1343 src/gnome/commentary_menu.c:1388
+#: src/gnome/bibletext_menu.c:1343 src/gnome/commentary_menu.c:1463
 #, fuzzy
 msgid "Tabs"
 msgstr "Zobrazi» u¹ká"
 
-#: src/gnome/bookmarks.c:1413
+#: src/gnome/bookmarks.c:1350
 msgid "Enter Folder Name - use no '|'"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1414
+#: src/gnome/bookmarks.c:1351
 msgid "Folder Name"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1415
+#: src/gnome/bookmarks.c:1352
 #, fuzzy
 msgid "Folder: "
 msgstr "Modul"
 
-#: src/gnome/bookmarks.c:1595
+#: src/gnome/bookmarks.c:1541
 #, fuzzy
 msgid "Edit Bookmark"
 msgstr "Prida» záloŸku"
 
-#: src/gnome/bookmarks.c:1713
+#: src/gnome/bookmarks.c:1707
+#, fuzzy
+msgid "Restore Bookmark Folder"
+msgstr "Otvori» súbor"
+
+#: src/gnome/bookmarks.c:1772
 msgid "Really REMOVE the selected item (and all its subitems)?"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1765
+#: src/gnome/bookmarks.c:1823
 msgid "Make the selected bookmark point to the current Module and Key?"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1879
+#: src/gnome/bookmarks.c:1937
 msgid "Add Bookmark"
 msgstr "Prida» záloŸku"
 
-#: src/gnome/bookmarks.c:1884
+#: src/gnome/bookmarks.c:1942
 #, fuzzy
 msgid "Label: "
 msgstr "Popis"
 
-#: src/gnome/bookmarks.c:1885
+#: src/gnome/bookmarks.c:1943
 #, fuzzy
 msgid "Verse: "
 msgstr "Zoznam ver¹ov"
 
-#: src/gnome/bookmarks.c:1886 src/gnome/editor_menu.c:579
+#: src/gnome/bookmarks.c:1944 src/gnome/editor_menu.c:579
 #, fuzzy
 msgid "Module: "
 msgstr "Modul"
 
-#: src/gnome/bookmarks.c:1954
+#: src/gnome/bookmarks.c:2012
 msgid "Enter Root Group Name - use no '|'"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1955
+#: src/gnome/bookmarks.c:2013
 msgid "Group Name"
 msgstr ""
 
-#: src/gnome/bookmarks.c:1956
+#: src/gnome/bookmarks.c:2014
 #, fuzzy
 msgid "Group: "
 msgstr "Hµada»: "
 
-#: src/gnome/bookmarks.c:2092
+#: src/gnome/bookmarks.c:2150
 #, fuzzy
 msgid "Remove Folder"
 msgstr "Otvori» súbor"
 
-#: src/gnome/bookmarks.c:2093
+#: src/gnome/bookmarks.c:2151
 msgid "Remove folder and save it"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2099
+#: src/gnome/bookmarks.c:2157
 #, fuzzy
 msgid "Restore Folder"
 msgstr "Otvori» súbor"
 
-#: src/gnome/bookmarks.c:2100
+#: src/gnome/bookmarks.c:2158
 msgid "Restore saved folder"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2109
+#: src/gnome/bookmarks.c:2167
 #, fuzzy
 msgid "Open in a dialog"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome/bookmarks.c:2110
+#: src/gnome/bookmarks.c:2168
 #, fuzzy
 msgid "Open this bookmark in a dialog"
 msgstr "Otvori» dialóg vyhµadávania"
 
-#: src/gnome/bookmarks.c:2115
+#: src/gnome/bookmarks.c:2173
 #, fuzzy
 msgid "New Folder"
 msgstr "Otvori» súbor"
 
-#: src/gnome/bookmarks.c:2116
+#: src/gnome/bookmarks.c:2174
 #, fuzzy
 msgid "Add new Folder to selected Folder"
 msgstr "Prida» novú podskupinu"
 
-#: src/gnome/bookmarks.c:2121
+#: src/gnome/bookmarks.c:2179
 #, fuzzy
 msgid "Insert Item"
 msgstr "_VloŸi» poloŸku"
 
-#: src/gnome/bookmarks.c:2122
+#: src/gnome/bookmarks.c:2180
 msgid "Insert new bookmark here"
 msgstr "Sem vloŸi» novú záloŸku"
 
-#: src/gnome/bookmarks.c:2127
+#: src/gnome/bookmarks.c:2185
 #, fuzzy
 msgid "Add Item at Root"
 msgstr "_Prida» novú poloŸku ako koreò"
 
-#: src/gnome/bookmarks.c:2128
+#: src/gnome/bookmarks.c:2186
 msgid "Add new bookmark item"
 msgstr "Prida» novú záloŸkovú poloŸku"
 
-#: src/gnome/bookmarks.c:2133
+#: src/gnome/bookmarks.c:2191
 #, fuzzy
 msgid "_Edit Item"
 msgstr "Upravi» poloŸku"
 
-#: src/gnome/bookmarks.c:2134
+#: src/gnome/bookmarks.c:2192
 msgid "Edit bookmark item"
 msgstr "Upravi» poloŸku záloŸky"
 
-#: src/gnome/bookmarks.c:2139
+#: src/gnome/bookmarks.c:2197
 msgid "Make _Point to New "
 msgstr ""
 
-#: src/gnome/bookmarks.c:2141
+#: src/gnome/bookmarks.c:2199
 msgid "Change the bookmark to point to the current reading point"
 msgstr ""
 
-#: src/gnome/bookmarks.c:2146
+#: src/gnome/bookmarks.c:2204
 msgid "Delete Item(s)"
 msgstr "Zmaza» poloŸku"
 
-#: src/gnome/bookmarks.c:2147
+#: src/gnome/bookmarks.c:2205
 msgid "Delete item and it's siblings"
 msgstr "Zmaza» poloŸku a jej súrodencov"
 
-#: src/gnome/bookmarks.c:2153
+#: src/gnome/bookmarks.c:2211
 msgid "Save Bookmarks"
 msgstr "UloŸi» záloŸky"
 
-#: src/gnome/bookmarks.c:2154
+#: src/gnome/bookmarks.c:2212
 msgid "Save all bookmark files"
 msgstr "UloŸí v¹etky súbory so záloŸkami"
 
-#: src/gnome/bookmarks.c:2159
+#: src/gnome/bookmarks.c:2217
 msgid "Expand All"
 msgstr "V¹etko rozbali»"
 
-#: src/gnome/bookmarks.c:2160
+#: src/gnome/bookmarks.c:2218
 msgid "Expand all Bookmarks groups"
 msgstr "Rozbali» v¹etky skupiny záloŸiek"
 
-#: src/gnome/bookmarks.c:2165
+#: src/gnome/bookmarks.c:2223
 msgid "Collapse All"
 msgstr "Zbali» v¹etko"
 
-#: src/gnome/bookmarks.c:2166
+#: src/gnome/bookmarks.c:2224
 msgid "Collapse all Bookmarks groups"
 msgstr "Zbali» v¹etky skupiny záloŸiek"
 
-#: src/gnome/bookmarks.c:2172
+#: src/gnome/bookmarks.c:2230
 msgid "Allow Reordering"
 msgstr "Povoli» preusporiadanie"
 
-#: src/gnome/bookmarks.c:2174
+#: src/gnome/bookmarks.c:2232
 #, fuzzy
 msgid "Toggle Reording - allow items to be moved from one folder to another"
 msgstr ""
 "Prepnú» preusporiadanie - povoli» poloŸkám, aby mohli by» "
 "premiestòované »ahaním"
 
-#: src/gnome/bookmarks.c:2180
+#: src/gnome/bookmarks.c:2238
 #, fuzzy
 msgid "Bibletime Bookmarks"
 msgstr "Prida» záloŸku"
 
-#: src/gnome/bookmarks.c:2181
+#: src/gnome/bookmarks.c:2239
 #, fuzzy
 msgid "Load Bibletime Bookmarks"
 msgstr "Prida» záloŸku"
 
-#: src/gnome/bookmarks.c:2186
+#: src/gnome/bookmarks.c:2244
 msgid "Remove - Restore"
 msgstr ""
 
@@ -458,31 +460,34 @@ msgstr ""
 msgid "Enter Cipher Key: "
 msgstr ""
 
-#: src/gnome/commentary_menu.c:1165
+#.
+#. * navigate menu
+#.
+#: src/gnome/commentary_menu.c:1223
 msgid "Navigate"
 msgstr ""
 
-#: src/gnome/commentary_menu.c:1176
+#: src/gnome/commentary_menu.c:1241
 #, fuzzy
 msgid "Sync with NavBar"
 msgstr "Synchronizova» komentár s textom biblie"
 
-#: src/gnome/commentary_menu.c:1185
+#: src/gnome/commentary_menu.c:1254
 #, fuzzy
 msgid "Prev Comment"
 msgstr "Vytlaèi» tento komentár"
 
-#: src/gnome/commentary_menu.c:1189
+#: src/gnome/commentary_menu.c:1258
 #, fuzzy
 msgid "Next Comment"
 msgstr "Vytlaèi» tento komentár"
 
-#: src/gnome/commentary_menu.c:1198
+#: src/gnome/commentary_menu.c:1268
 #, fuzzy
 msgid "Chapter Heading"
 msgstr "Na stred"
 
-#: src/gnome/commentary_menu.c:1202
+#: src/gnome/commentary_menu.c:1273
 #, fuzzy
 msgid "Book Heading"
 msgstr "Hlavièky"
@@ -691,12 +696,12 @@ msgid ""
 "Word"
 msgstr "Nahradi»"
 
-#: src/gnome/fileselection.c:186
+#: src/gnome/fileselection.c:187
 #, fuzzy
 msgid "Open StudyPad File"
 msgstr "GnomeSword - Otvori» poznámkový súbor"
 
-#: src/gnome/fileselection.c:236
+#: src/gnome/fileselection.c:237
 #, fuzzy
 msgid "GomeSword - Save StudyPad File"
 msgstr "GnomeSword - UloŸi» poznámkový súbor"
@@ -818,7 +823,7 @@ msgid "Change Interlinear 5"
 msgstr "Interlinearny 5"
 
 #: src/gnome/interlinear_dialog.c:221 src/gnome/interlinear_dialog.c:480
-#: src/gnome/main_window.c:796 src/gnome/main_window.c:808
+#: src/gnome/main_window.c:798 src/gnome/main_window.c:810
 msgid "Interlinear"
 msgstr "Interlineárne"
 
@@ -962,8 +967,8 @@ msgstr "Komentáre"
 msgid "Dictionaries-Lexicons"
 msgstr "Slovníky-lexikóny"
 
-#: src/gnome/main_menu.c:718 src/gnome/main_window.c:727
-#: src/gnome/main_window.c:739 src/gnome/preferences_dialog.c:1601
+#: src/gnome/main_menu.c:718 src/gnome/main_window.c:729
+#: src/gnome/main_window.c:741 src/gnome/preferences_dialog.c:1601
 msgid "Books"
 msgstr "Knihy"
 
@@ -1053,12 +1058,12 @@ msgstr "_Pomocník/O Sword moduloch/Slovníky-lexikóny/"
 msgid "_Help/About Sword Modules/Books/"
 msgstr "_Pomocník/O Sword moduloch/Knihy/"
 
-#: src/gnome/main_window.c:561
+#: src/gnome/main_window.c:563
 #, fuzzy
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - softvér na ¹túdium biblie"
 
-#: src/gnome/main_window.c:693 src/gnome/main_window.c:706
+#: src/gnome/main_window.c:695 src/gnome/main_window.c:708
 #: src/gnome/preferences_dialog.c:2067 src/gnome/setup_druid.c:1170
 #: src/gnome/shortcutbar_main.c:1393 src/gnome/shortcutbar_main.c:1575
 msgid "Dict/Lex"

@@ -46,6 +46,8 @@
 #include "gui/gbs.h"
 #include "gui/dictlex.h"
 #include "gui/search_dialog.h"
+#include "gui/commentary_dialog.h"
+#include "gui/bibletext_dialog.h"
 
 WIDGETS widgets;
 
@@ -343,6 +345,7 @@ void gui_change_verse(gchar * key)
 
 		/* change main window */
 		gui_display_text(val_key);
+		gui_keep_bibletext_dialog_in_sync(val_key);
 	}
 
 	/* 
@@ -363,8 +366,10 @@ void gui_change_verse(gchar * key)
 	/* 
 	 * set commentary module to current verse 
 	 */
-	if (settings.havecomm)
+	if (settings.havecomm) {
 		gui_display_commentary(val_key);
+		gui_keep_comm_dialog_in_sync(val_key);
+	}
 
 	free(val_key);
 }
@@ -458,7 +463,9 @@ static void on_mainwindow_size_allocate(GtkWidget * widget,
 static void on_mainwindow_destroy(GtkObject * object,
 				  gpointer user_data)
 {
-	shutdown_gnomesword();
+	shutdown_frontend();
+	/* shutdown the sword stuff */
+	shutdown_backend();
 	gtk_exit(0);
 }
 
@@ -567,10 +574,6 @@ void create_mainwindow(void)
 			      TRUE);
 
 	dock1 = GNOME_APP(widgets.app)->dock;
-	gtk_widget_ref(dock1);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "dock1",
-				 dock1,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dock1);
 
 	gui_create_main_menu(widgets.app);

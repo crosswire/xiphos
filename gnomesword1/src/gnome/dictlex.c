@@ -641,19 +641,11 @@ static void add_vbox_to_notebook(DL_DATA * dl)
 	GtkWidget *label;
 
 	dl->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(dl->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "dl->vbox", dl->vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->vbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict),
 			  dl->vbox);
 
 	label = gtk_label_new(dl->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
-				 label,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_dict),
 				   gtk_notebook_get_nth_page

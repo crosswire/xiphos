@@ -182,6 +182,7 @@ GtkWidget *gui_fileselection_open(GSHTMLEditorControlData * ecd)
 	GtkWidget *ok;
 	GtkWidget *cancel;
 
+	
 	fileselection =
 		gtk_file_selection_new(_("Open StudyPad File"));
 	gtk_object_set_data(GTK_OBJECT(fileselection), "fileselection",

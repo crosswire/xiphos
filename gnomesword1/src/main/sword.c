@@ -151,7 +151,7 @@ void init_sword(void)
  *   void
  */
 
-void shutdown_sword(void)
+void shutdown_backend(void)
 {
 	backend_shutdown(TRUE);
 }

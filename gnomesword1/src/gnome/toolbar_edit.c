@@ -37,6 +37,7 @@
 #include "gui/studypad.h"
 #include "gui/html.h"
 #include "gui/percomm.h"
+#include "gui/commentary_dialog.h"
 #include "gui/fileselection.h"
 #include "gui/editor_menu.h"
 #include "gui/find_dialog.h"
@@ -183,26 +184,29 @@ static void on_btn_delete_clicked(GtkButton * button,
 	if (ecd->personal_comments) {
 		GS_DIALOG *info;
 		gint test;
-		gchar *key;
+		//gchar *key;
 
-		key = get_percomm_key(ecd->filename);
+		//key = get_percomm_key(ecd->filename);
 		info = gui_new_dialog();
 		info->label_top = N_("Are you sure you want");
 		info->label_middle = N_("to delete the note for");
-		info->label_bottom = key;
+		info->label_bottom = ecd->key;
 		info->yes = TRUE;
 		info->no = TRUE;
 
 		test = gui_gs_dialog(info);
 		if (test == GS_YES) {
 			delete_percomm_note();
-			gui_display_percomm(key);
+			if(settings.use_percomm_dialog)
+				gui_display_commentary_in_dialog(ecd->key);
+			else
+				gui_display_percomm(ecd->key);
 		}
-		settings.percomverse = key;
+		settings.percomverse = ecd->key;
 		ecd->changed = FALSE;
 		gui_update_statusbar(ecd);
 		g_free(info);
-		g_free(key);
+		//g_free(key);
 	}
 
 }
@@ -408,10 +412,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	ecd->toolbar_edit =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(ecd->toolbar_edit);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->toolbar_edit", ecd->toolbar_edit,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->toolbar_edit);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(ecd->toolbar_edit),
 				      GTK_RELIEF_NONE);
@@ -428,11 +428,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       _("New File"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
-		gtk_widget_ref(ecd->btn_new);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "ecd->btn_new", ecd->btn_new,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(ecd->btn_new);
 		
 		gtk_signal_connect(GTK_OBJECT(ecd->btn_new), "clicked",
@@ -450,11 +445,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       _("Open File"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
-		gtk_widget_ref(ecd->btn_open);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "ecd->btn_open", ecd->btn_open,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(ecd->btn_open);
 
 		gtk_signal_connect(GTK_OBJECT(ecd->btn_open), "clicked",
@@ -471,11 +461,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       _("Save Curent File"),
 					       NULL, tmp_toolbar_icon,
 					       NULL, NULL);
-		gtk_widget_ref(ecd->btn_save);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "ecd->btn_save", ecd->btn_save,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(ecd->btn_save);
 	} else {
 		tmp_toolbar_icon =
@@ -489,11 +474,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       _("Save Note"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
-		gtk_widget_ref(ecd->btn_save);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "ecd->btn_save", ecd->btn_save,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(ecd->btn_save);
 
 		tmp_toolbar_icon =
@@ -507,12 +487,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 					       _("Delete Note"), NULL,
 					       tmp_toolbar_icon, NULL,
 					       NULL);
-		gtk_widget_ref(ecd->btn_delete);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "ecd->btn_delete",
-					 ecd->btn_delete,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(ecd->btn_delete);
 
 		gtk_signal_connect(GTK_OBJECT(ecd->btn_delete),
@@ -530,17 +504,9 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       _("Print"),
 				       _("Print window contents"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_print);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_print", ecd->btn_print,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_print);
 
 	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator",
-				 vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
 				  vseparator, NULL, NULL);
@@ -554,10 +520,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Cut"), _("Cut "), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_cut);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_cut", ecd->btn_cut,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_cut);
 
 	tmp_toolbar_icon =
@@ -568,10 +530,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Copy"), _("Copy"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_copy);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_copy", ecd->btn_copy,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_copy);
 
 	tmp_toolbar_icon =
@@ -582,10 +540,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Paste"), _("Paste"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_paste);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_paste", ecd->btn_paste,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_paste);
 
 	tmp_toolbar_icon =
@@ -596,17 +550,9 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("Undo"), _("Undo"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_undo);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_undo", ecd->btn_undo,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_undo);
 
 	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator",
-				 vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
 				  vseparator, NULL, NULL);
@@ -621,10 +567,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       _("Find"),
 				       _("Find in this note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_Find);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_Find", ecd->btn_Find,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_Find);
 
 	tmp_toolbar_icon =
@@ -636,17 +578,9 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       _("Replace"),
 				       _("Find and Replace"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_replace);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_replace", ecd->btn_replace,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_replace);
 
 	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator",
-				 vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vseparator);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
 				  vseparator, NULL, NULL);
@@ -661,10 +595,6 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				       _("Spell"),
 				       _("Spell check note"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(ecd->btn_spell);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "ecd->btn_spell", ecd->btn_spell,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->btn_spell);
 
 #ifdef USE_SPELL

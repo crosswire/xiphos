@@ -102,9 +102,11 @@ int main(int argc, char *argv[])
 
 	gui_splash_step3();
 
-	init_gnomesword();
-
+	frontend_init();
+	
 	gui_splash_step4();
+	
+	frontend_display();
 	
 	gui_splash_done();
 

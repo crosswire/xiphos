@@ -358,7 +358,7 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
 
 static void on_sync_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	//gui_sync_bibletext_dialog();
+	//gui_sync_bibletext_dialog_with_main();
 }
 
 /******************************************************************************

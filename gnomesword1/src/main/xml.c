@@ -28,6 +28,7 @@
 
 
 #include "main/xml.h"
+#include "main/settings.h"
 
 static xmlDocPtr xml_settings_doc;
 static xmlNodePtr section_ptr;
@@ -188,7 +189,8 @@ int xml_create_settings_file(char *path)
 
 
 	section_node = xmlNewChild(root_node, NULL, "studypad", NULL);
-	xmlNewTextChild(section_node, NULL, "directory", "~");
+	xmlNewTextChild(section_node, NULL, "directory",
+			settings.homedir);
 	xmlNewTextChild(section_node, NULL, "lastfile", "");
 	xmlNewTextChild(section_node, NULL, "editbar", "1");
 	xmlNewTextChild(section_node, NULL, "stylebar", "1");
