@@ -35,6 +35,7 @@
 #include "gui/gbs_display.h"
 #include "gui/gbs_menu.h"
 #include "gui/html.h"
+#include "gui/widgets.h"
 
 #include "main/gbs.h"
 #include "main/sword.h"
@@ -80,12 +81,21 @@ static gint tree_level;
 
 static void create_pixbufs (void)
 {
-	pixbufs = g_new0 (TreePixbufs, 1);
-	
-	pixbufs->pixbuf_closed = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/book_closed.png", NULL);
-	pixbufs->pixbuf_opened = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/book_open.png", NULL);
-	pixbufs->pixbuf_helpdoc = gdk_pixbuf_new_from_file (PACKAGE_PIXMAPS_DIR "/helpdoc.png", NULL);
-
+	pixbufs = g_new0(TreePixbufs, 1);
+	pixbufs->pixbuf_closed = gtk_widget_render_icon(widgets.app,
+                                             GNOME_STOCK_BOOK_BLUE, 
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
+	pixbufs->pixbuf_opened =
+		gtk_widget_render_icon(widgets.app,
+                                             GNOME_STOCK_BOOK_OPEN, 
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
+	pixbufs->pixbuf_helpdoc =
+		gtk_widget_render_icon(widgets.app,
+                                             GTK_STOCK_DND, 
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
 }
 
 /******************************************************************************
@@ -149,6 +159,11 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 	p_treeitem = &treeitem;
 	p_treeitem->module_name = gbs->mod_name;
 
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   -1);
+	
 	if (gbs_treekey_first_child(offset)) {
 		offset = gbs_get_treekey_offset();
 		sprintf(buf, "%lu", offset);
@@ -157,8 +172,8 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 		    gbs_get_treekey_local_name(offset);
 		p_treeitem->item_name = (gchar*)tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
-			p_treeitem->pixbuf_opened = pixbufs->pixbuf_opened;
-			p_treeitem->pixbuf_closed = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
 			p_treeitem->is_leaf = FALSE;
 			p_treeitem->expanded = FALSE;
 		} else {
@@ -179,8 +194,8 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 		    gbs_get_treekey_local_name(offset);
 		p_treeitem->item_name = (gchar*)tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
-			p_treeitem->pixbuf_opened = pixbufs->pixbuf_opened;
-			p_treeitem->pixbuf_closed = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
 			p_treeitem->is_leaf = FALSE;
 			p_treeitem->expanded = FALSE;
 		} else {
@@ -821,7 +836,6 @@ void gui_shutdown_gbs_dialog(void)
 {
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
-		g_warning("oops!!!!!");
 		GBS_DATA *dlg = (GBS_DATA *) dialog_list->data;
 		dialog_freed = TRUE;
 		/* 
