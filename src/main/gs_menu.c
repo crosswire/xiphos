@@ -34,8 +34,8 @@
 #include "main/settings.h"
 
 GtkWidget *module_options_menu;
-gint	greekpage,
-        hebrewpage;
+gint greekpage;
+gint hebrewpage;
 	
 /******************************************************************************
  * static function prototypes
@@ -51,7 +51,7 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 
 /*** add sword global options to menus ***/	
 void
-additemstooptionsmenu(GList *options, SETTINGS *s)
+additemstooptionsmenu(GList *options)
 {
 	GtkWidget 
 		*menuChoice,
@@ -69,7 +69,7 @@ additemstooptionsmenu(GList *options, SETTINGS *s)
 		/* add global option items to interlinear popup menu */
 		menuChoice = gtk_check_menu_item_new_with_label((gchar *)(gchar *) tmp->data);	
 		sprintf(menuName, "optionNum%d", viewNumber++);
-		gtk_object_set_data(GTK_OBJECT(s->app), menuName, menuChoice);
+		gtk_object_set_data(GTK_OBJECT(settings.app), menuName, menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 			   GTK_SIGNAL_FUNC(on_int_global_options_activate),
@@ -79,39 +79,48 @@ additemstooptionsmenu(GList *options, SETTINGS *s)
                                              1);  	      
 				
 		if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->strongsint;		
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.strongsint;		
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Footnotes")) {		
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->footnotesint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.footnotesint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->morphsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.morphsint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->hebrewpointsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.hebrewpointsint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->cantillationmarksint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.cantillationmarksint;
 		}
 		
 		if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->greekaccentsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.greekaccentsint;
 		}	
 		
 		if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->crossrefint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.crossrefint;
 		}	
 		
 		if(!strcmp((gchar *) tmp->data, "Lemmas")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->lemmasint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.lemmasint;
 		}		
 		
 		if(!strcmp((gchar *) tmp->data, "Headings")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active = s->headingsint;
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.headingsint;
 		}	
 		
 		tmp = g_list_next(tmp);
@@ -229,16 +238,15 @@ addsubtreeitem(GtkWidget * MainFrm, gchar * menulabel,
  * dictionarylist - list of dict/lex modules - from initSword 
  * percomlist - list of personal comments modules
  ******************************************************************************/
-void createpopupmenus(SETTINGS *s,
-		GList *bibleDescription,
-		GList *options) 
+void createpopupmenus(GList *bibleDescription, GList *options) 
 {
 	/* create popup menu for interlinear window */
-	s->menuInt = create_pmInt(bibleDescription, "textComp1"); 
+	settings.menuInt = create_pmInt(bibleDescription, "textComp1"); 
 	
 	/* attach popup menus */
-	gnome_popup_menu_attach(s->menuInt,s->htmlInterlinear,(gchar*)"1");
-	additemstooptionsmenu(options, s);
+	gnome_popup_menu_attach(settings.menuInt,
+			settings.htmlInterlinear, (gchar*)"1");
+	additemstooptionsmenu(options);
 }
 
 /*
@@ -251,11 +259,8 @@ void createpopupmenus(SETTINGS *s,
  * percomlist - list of personal comments modules
  *******************************************************************************
  */
-void addmodstomenus(SETTINGS *s, 
-		GList *biblelist, 
-		GList *commentarylist, 
-		GList *dictionarylist, 
-		GList *booklist) 
+void addmodstomenus(GList *biblelist, GList *commentarylist,
+		GList *dictionarylist, GList *booklist) 
 {
 	gchar	
 		aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus
@@ -268,11 +273,13 @@ void addmodstomenus(SETTINGS *s,
 	sprintf(aboutrememberlastitem,"%s", _("_Help/About Sword Modules/Bible Texts/<Separator>"));
 	sprintf(aboutrememberlastitem2,"%s", _("_Help/About Sword Modules/Commentaries/<Separator>"));
 	sprintf(aboutrememberlastitem3,"%s", _("_Help/About Sword Modules/Dictionaries-Lexicons/<Separator>"));
-//-- add textmods - Main Window menu
+
+	/* add textmods - Main Window menu */
 	tmp = biblelist;
 	while (tmp != NULL) {	
-	//-- add to menubar
-		additemtognomemenu(s->app, 
+
+	/* add to menubar */
+		additemtognomemenu(settings.app, 
 				(gchar *) tmp->data, 
 				(gchar *) tmp->data, 
 				aboutrememberlastitem , 
@@ -287,7 +294,7 @@ void addmodstomenus(SETTINGS *s,
 //-- add commmods - commentary window menu
 	tmp = commentarylist;
 	while (tmp != NULL) {
-		additemtognomemenu(s->app,(gchar *) 
+		additemtognomemenu(settings.app,(gchar *) 
 				tmp->data, 
 				(gchar *) tmp->data, 
 				aboutrememberlastitem2, 
@@ -304,7 +311,7 @@ void addmodstomenus(SETTINGS *s,
 		sprintf(mybuf,"%d",pg);
 		if(!strcmp((gchar *) tmp->data, _("StrongsHebrew"))) hebrewpage = pg;
 		if(!strcmp((gchar *) tmp->data, _("StrongsGreek"))) greekpage = pg;
-		additemtognomemenu(s->app,(gchar *) tmp->data, 
+		additemtognomemenu(settings.app,(gchar *) tmp->data, 
 				(gchar *) tmp->data, aboutrememberlastitem3,
 				(GtkMenuCallback)on_kjv1_activate );
 		sprintf(aboutrememberlastitem3,"%s%s", _("_Help/About Sword Modules/Dictionaries-Lexicons/"),
@@ -313,11 +320,13 @@ void addmodstomenus(SETTINGS *s,
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);
-	/** book modules **/
+
+	/* book modules */
 	sprintf(aboutrememberlastitem3,"%s", _("_Help/About Sword Modules/Books/<Separator>"));
 	tmp = booklist;
+
 	while (tmp != NULL) {
-		additemtognomemenu(s->app,(gchar *) tmp->data, 
+		additemtognomemenu(settings.app,(gchar *) tmp->data, 
 				(gchar *) tmp->data, aboutrememberlastitem3, 
 				(GtkMenuCallback)on_kjv1_activate );			
 		sprintf(aboutrememberlastitem3,"%s%s", _("_Help/About Sword Modules/Books/"),

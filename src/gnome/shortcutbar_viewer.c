@@ -334,7 +334,7 @@ static void on_btnSBSaveVL_clicked(GtkButton * button,
 	SETTINGS *s;
 
 	s = (SETTINGS *) user_data;
-	addverselistBM(s, sblist);	
+	addverselistBM(sblist);
 }
 
 /******************************************************************************

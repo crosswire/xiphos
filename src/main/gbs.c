@@ -144,8 +144,8 @@ void set_book_page_and_key(gint page_num, gchar * key)
  * Synopsis
  *   #include "gbs.h"
  *
- *   void add_node_children(SETTINGS *s, GtkCTreeNode *node, gchar *bookname,
-						unsigned long offset)	
+ *   void add_node_children(GtkCTreeNode *node, gchar *bookname,
+ *   				unsigned long offset)	
  *
  * Description
  *    
@@ -154,8 +154,8 @@ void set_book_page_and_key(gint page_num, gchar * key)
  *   void
  */ 
  
-void add_node_children(SETTINGS *s, GtkCTreeNode *node, gchar *bookname,
-						unsigned long offset)
+void add_node_children(GtkCTreeNode *node, gchar *bookname,
+		unsigned long offset)
 {
 	gchar buf[256], *tmpbuf;
 	GtkCTreeNode *tmp_parent_node = node;
@@ -188,7 +188,7 @@ void add_node_children(SETTINGS *s, GtkCTreeNode *node, gchar *bookname,
 			p_nodedata->is_leaf = TRUE;
 			p_nodedata->expanded = FALSE;
 		}
-		node = add_node_gbs(s, p_nodedata);
+		node = add_node_gbs(p_nodedata);
 		g_free(tmpbuf);
 	}
 
@@ -215,7 +215,7 @@ void add_node_children(SETTINGS *s, GtkCTreeNode *node, gchar *bookname,
 			p_nodedata->is_leaf = TRUE;
 			p_nodedata->expanded = FALSE;
 		}
-		node = add_node_gbs(s, p_nodedata);
+		node = add_node_gbs(p_nodedata);
 		g_free(tmpbuf);
 	}
 }
@@ -297,7 +297,7 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
  * Synopsis
  *   #include "gbs.h"
  *
- *   GtkCTreeNode *add_node_gbs(SETTINGS * s, NODEDATA * data)	
+ *   GtkCTreeNode *add_node_gbs(NODEDATA *data)	
  *
  * Description
  *    
@@ -306,11 +306,11 @@ static void set_gbs_page(gchar * book_name, GList * gbs_list)
  *   GtkCTreeNode*
  */ 
  
-GtkCTreeNode *add_node_gbs(SETTINGS * s, NODEDATA * data)
+GtkCTreeNode *add_node_gbs(NODEDATA * data)
 {
 	GtkCTreeNode *retval;
 
-	retval = gtk_ctree_insert_node(GTK_CTREE(s->ctree_widget_books),
+	retval = gtk_ctree_insert_node(GTK_CTREE(settings.ctree_widget_books),
 				       data->parent,
 				       data->sibling,
 				       data->buf,
@@ -367,7 +367,7 @@ GBS_DATA *get_gbs(GList * gbs)
  * Synopsis
  *   #include "gbs.h"
  *
- *   GList* setup_gbs(SETTINGS * s)	
+ *   GList* setup_gbs(void)	
  *
  * Description
  *    
@@ -376,7 +376,7 @@ GBS_DATA *get_gbs(GList * gbs)
  *   GList*
  */ 
  
-void setup_gbs(SETTINGS * s, GList *mods)
+void setup_gbs(GList *mods)
 {
 	GtkWidget *popupmenu;
 	gint count = 0;
@@ -387,33 +387,32 @@ void setup_gbs(SETTINGS * s, GList *mods)
 	gbs_list = NULL;
 	gbs_find_running = FALSE;
 	
-	//mods = backend_get_list_of_mods_by_type(BOOK_MODS);
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
-		bookname = (gchar *) tmp->data;
+		bookname = (gchar *)tmp->data;
 		gbs = g_new(GBS_DATA, 1);
 		gbs->bookName = bookname;
 		gbs->searchstring = NULL;
 		gbs->booknum = count;
 		gbs->find_dialog = NULL;	
 		gbs->has_key = backend_module_is_locked(gbs->bookName);
-		gui_create_gbs_pane(bookname, s, count, gbs);
+		gui_create_gbs_pane(bookname, &settings, count, gbs);
 		popupmenu = gui_create_pm_gbs(gbs);
 		gnome_popup_menu_attach(popupmenu, gbs->html, NULL);
-		backend_new_gbs_display(gbs->html, gbs->bookName, s);
+		backend_new_gbs_display(gbs->html, gbs->bookName, &settings);
 		add_book_to_ctree(gbs->ctree, gbs->bookName);
 		gbs_list = g_list_append(gbs_list, (GBS_DATA *) gbs);		
 		++count;
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(s->notebook_gbs), "switch_page",
+	gtk_signal_connect(GTK_OBJECT(settings.notebook_gbs), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook_gbs_switch_page),
 			   gbs_list);
 	
 		
-	set_gbs_page(s->BookWindowModule, gbs_list);
+	set_gbs_page(settings.BookWindowModule, gbs_list);
 	g_list_free(tmp);
 }
 

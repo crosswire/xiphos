@@ -228,8 +228,7 @@ void set_percomm_page_and_key(gint page_num, gchar * key)
  * Synopsis
  *   #include "percomm.h"
  *   
- *   static void set_page_percomm(gchar * modname, GList * percomm_list,
- *			  SETTINGS * s)	
+ *   static void set_page_percomm(gchar * modname, GList * percomm_list)
  *
  * Description
  *   change percomm module by finding page number from module name
@@ -238,8 +237,7 @@ void set_percomm_page_and_key(gint page_num, gchar * key)
  *   void
  */
 
-static void set_page_percomm(gchar * modname, GList * percomm_list,
-			     SETTINGS * s)
+static void set_page_percomm(gchar * modname, GList * percomm_list)
 {
 	gint page = 0;
 	PC_DATA *p = NULL;
@@ -253,12 +251,8 @@ static void set_page_percomm(gchar * modname, GList * percomm_list,
 		percomm_list = g_list_next(percomm_list);
 	}
 	cur_p = p;
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebook_percomm), page);
-	s->percomm_last_page = page;
-	/*
-	   gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_percomm),
-	   s->percomm_tabs);
-	 */
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_percomm), page);
+	settings.percomm_last_page = page;
 }
 
 /******************************************************************************
@@ -277,7 +271,7 @@ static void set_page_percomm(gchar * modname, GList * percomm_list,
  *   void
  */
 
-void display_percomm(gchar * key)
+void display_percomm(gchar *key)
 {
 	backend_display_percomm(settings.percomm_last_page, key);
 }
@@ -289,7 +283,7 @@ void display_percomm(gchar * key)
  * Synopsis
  *   #include "percomm.h"
  *
- *   GList *setup_percomm(SETTINGS * s)
+ *   GList *setup_percomm(GList *mods)
  *
  * Description
  *   set up gui for sword personal comments modules - 
@@ -299,7 +293,7 @@ void display_percomm(gchar * key)
  *   GList *
  */
 
-void setup_percomm(SETTINGS * s, GList *mods)
+void setup_percomm(GList *mods)
 {
 	GList *tmp = NULL;
 	gchar *mod_name;
@@ -321,26 +315,26 @@ void setup_percomm(SETTINGS * s, GList *mods)
 		p->mod_num = count;
 		p->search_string = NULL;
 		p->key = NULL;
-		p->ec = gui_percomm_control(s,p->mod_name,count);
+		p->ec = gui_percomm_control(&settings,p->mod_name,count);
 		p->html = p->ec->htmlwidget;
 		backend_new_percomm_display(p->ec->htmlwidget,
-					    p->mod_name, s);
+					    p->mod_name, &settings);
 		percomm_list =
 		    g_list_append(percomm_list, (PC_DATA *) p);
 		++count;
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(s->notebook_percomm),
+	gtk_signal_connect(GTK_OBJECT(settings.notebook_percomm),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_percomm_switch_page),
 			   percomm_list);
 
-	modbuf = g_strdup(s->personalcommentsmod);
-	keybuf = g_strdup(s->currentverse);
+	modbuf = g_strdup(settings.personalcommentsmod);
+	keybuf = g_strdup(settings.currentverse);
 
-	set_page_percomm(modbuf, percomm_list, s);
+	set_page_percomm(modbuf, percomm_list);
 
 	g_free(modbuf);
 	g_free(keybuf);
@@ -389,4 +383,3 @@ void shutdown_percomm(void)
 	g_list_free(percomm_list);
 }
 
-/******  end of file  ******/

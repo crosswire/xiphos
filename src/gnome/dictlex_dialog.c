@@ -548,7 +548,7 @@ GtkWidget *gui_create_dictlex_dialog(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	dictList = NULL;
 	
-	setup_viewdict(textSDmodule, &settings);
+	setup_viewdict(textSDmodule);
 	
 	dictList = get_list(DICT_LIST);
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbSDMods), dictList);	

@@ -43,7 +43,7 @@ struct _bmtree {
 
 void add_bookmark_to_tree(GtkCTreeNode * node,
 		   gchar * modName, gchar * verse);
-void loadtree(SETTINGS * s);
+void loadtree(void);
 GtkWidget *create_pmBookmarkTree(void);
 void
  on_new_subgroup_activate(GtkMenuItem * menuitem,
@@ -64,14 +64,13 @@ void
  on_allow_reordering_activate(GtkMenuItem * menuitem,
 			      gpointer user_data);
 void
- addverselistBM(SETTINGS * s, GList * list);
+ addverselistBM(GList *list);
 // gint loadoldbookmarks(void);
 GtkWidget *create_dlgEditBookMark(gchar * text[3],
 				  gboolean newbookmark);
 void
  create_addBookmarkMenuBM(GtkWidget * menu,
-			  GtkWidget * bookmark_menu_widget,
-			  SETTINGS *);
+			  GtkWidget * bookmark_menu_widget);
 
 
 #ifdef __cplusplus
