@@ -255,11 +255,12 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		if (settings.havebible) {
 			if(settings.browsing)
 				gui_update_tab_struct(module_name,
-					      NULL,
-					      NULL,
-					      NULL,
-					      NULL,
-					      NULL);
+						      NULL,
+						      NULL,
+						      NULL,
+						      NULL,
+						      NULL,
+						      settings.comm_showing);
 			val_key = gui_update_nav_controls(key);
 			if(!strcmp(settings.MainWindowModule,module_name))
 				gui_change_verse((gchar*)val_key);
@@ -277,30 +278,25 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		if (settings.havecomm) {
 			if(settings.browsing)
 				gui_update_tab_struct(NULL,
-					      module_name,
-					      NULL,
-					      NULL,
-					      NULL,
-					      NULL);
-			xml_set_value("GnomeSword", "modules", "comm",
-						module_name);
-			settings.CommWindowModule = xml_get_value(
-						"modules", "comm");
-			gui_set_comm_label(settings.CommWindowModule);
-			gui_change_window_title(settings.CommWindowModule);
-			//gui_set_commentary_mod_and_key(module_name, key);
-			gui_change_verse(key);
+						      module_name,
+						      NULL,
+						      NULL,
+						      NULL,
+						      NULL,
+						      TRUE);
+			gui_set_commentary_mod_and_key(module_name, key);
 		}
 		break;
 	case DICTIONARY_TYPE:
 		if (settings.havedict) {
 			if(settings.browsing)
 				gui_update_tab_struct(NULL,
-					      NULL,
-					      module_name,
-					      NULL,
-					      key,
-					      NULL);			
+						      NULL,
+						      module_name,
+						      NULL,
+						      key,
+						      NULL,
+						      settings.comm_showing);			
 			gui_set_dictlex_mod_and_key(module_name, key);
 		}
 		break;
@@ -308,13 +304,13 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		if (settings.havebook) {
 			if(settings.browsing)
 				gui_update_tab_struct(NULL,
-					      NULL,
-					      NULL,
-					      module_name,
-					      NULL,
-					      key?key:NULL);
+						      NULL,
+						      NULL,
+						      module_name,
+						      NULL,
+						      key?key:NULL,
+						      FALSE);
 			main_set_book_mod(module_name, atol(key));
-			g_warning("gui_change_module_and_key = %s",key);
 			gui_set_book_mod_and_key(module_name, key);
 			gui_change_window_title(settings.book_mod);
 		}

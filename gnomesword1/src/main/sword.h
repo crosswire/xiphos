@@ -61,7 +61,6 @@ void shutdown_backend(void);
 char *get_text_from_offset(char * module_name, unsigned long offset);
 int set_module(int manager, char * module_name);
 void main_setup_displays(void);
-void main_delete_displays(void);
 void main_display_book(void);
 void main_display_commentary(void);
 
