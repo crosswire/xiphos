@@ -179,7 +179,7 @@ void main_navbar_fill_book_combo(NAVBAR navbar)
 	i = 0;
 	if (backend->module_has_testament(navbar.module_name, 2)) {
 		while(i < key.BMAX[1]) {
-			g_message((const char *)key.books[1][i].name);
+			//g_message((const char *)key.books[1][i].name);
 			book = g_convert((const char *)key.books[1][i].name,
 				     -1,
 				     UTF_8,

@@ -28,8 +28,15 @@
 #include <gtkhtml/htmlcolorset.h>
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
+#include <gtkhtml/htmlimage.h>
 
 #include "editor/toolbar_edit.h"
+#include "editor/properties.h"
+#include "editor/editor_menu.h"
+#include "editor/link.h"
+#include "editor/rule.h"
+#include "editor/search.h"
+#include "editor/table.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 #include "gui/dialog.h"
@@ -38,8 +45,6 @@
 #include "gui/html.h"
 #include "gui/commentary_dialog.h"
 #include "gui/fileselection.h"
-#include "editor/editor_menu.h"
-#include "editor/search.h"
 //#include "gui/find_dialog.h"
 
 #include "main/settings.h"
@@ -48,6 +53,122 @@
 static void on_btn_save_clicked(GtkButton * button,
 				GSHTMLEditorControlData * ecd);
 
+static void
+insert_image (GtkButton * button, GSHTMLEditorControlData *cd)
+{
+	GtkWidget *filesel;
+	HTMLObject *img;
+
+//#ifdef USE_GTKFILECHOOSER
+	filesel = gtk_file_chooser_dialog_new (_("Insert image"),
+					       NULL,
+					       GTK_FILE_CHOOSER_ACTION_OPEN,
+					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					       GTK_STOCK_OPEN, GTK_RESPONSE_OK,
+					       NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (filesel), GTK_RESPONSE_OK);
+/*#else
+	filesel = gtk_file_selection_new (_("Insert image"));
+#endif*/
+	if (filesel) {
+		if (gtk_dialog_run (GTK_DIALOG (filesel)) == GTK_RESPONSE_OK) {
+			const char *filename;
+			char *url = NULL;
+
+//#ifdef USE_GTKFILECHOOSER
+			filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filesel));
+/*#else
+			filename = gtk_file_selection_get_filename (GTK_FILE_SELECTION (filesel));
+#endif*/
+			if (filename)
+				url = g_strconcat ("file://", filename, NULL);
+			img = html_image_new (html_engine_get_image_factory (cd->html->engine), url,
+					      NULL, NULL, 0, 0, 0, 0, 0, NULL, HTML_VALIGN_NONE, FALSE);
+			html_engine_paste_object (cd->html->engine, img, 1);
+			g_free (url);
+		}
+		gtk_widget_destroy (filesel);
+	}
+}
+
+static void
+insert_link_cb (GtkButton * button, GSHTMLEditorControlData *cd)
+{
+	if (cd->properties_dialog)
+		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
+
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-link-24.png");
+
+	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
+						   GTK_HTML_EDIT_PROPERTY_LINK, _("Link"),
+						   link_insert,
+						   link_close_cb);
+
+	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
+	gtk_html_edit_properties_dialog_set_page (cd->properties_dialog, GTK_HTML_EDIT_PROPERTY_LINK);
+}
+
+static void
+insert_rule (GtkButton * button, GSHTMLEditorControlData *cd)
+{
+	if (cd->properties_dialog)
+		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
+
+	html_engine_insert_rule (cd->html->engine, 0, 100, 2, FALSE, HTML_HALIGN_LEFT);
+
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-rule-24.png");
+
+	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
+						   GTK_HTML_EDIT_PROPERTY_RULE, _("Rule"),
+						   rule_properties,
+						   rule_close_cb);
+
+	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
+}
+
+static void
+insert_table (GSHTMLEditorControlData *cd)
+{
+	if (cd->properties_dialog)
+		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
+
+	html_engine_insert_table_1_1 (cd->html->engine);
+	if (html_engine_get_table (cd->html->engine)) {
+		html_engine_table_set_cols (cd->html->engine, 3);
+		html_engine_table_set_rows (cd->html->engine, 3);
+	}
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-table-24.png");
+
+	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
+						   GTK_HTML_EDIT_PROPERTY_TABLE, _("Table"),
+						   table_properties,
+						   table_close_cb);
+
+	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
+}
+
+static void
+insert_table_cb (GtkButton * button, GSHTMLEditorControlData *cd)
+{
+	insert_table (cd);
+}
+/*
+static void
+insert_template_cb (BonoboUIComponent *uic, GSHTMLEditorControlData *cd, const char *cname)
+{
+	if (cd->properties_dialog)
+		gtk_html_edit_properties_dialog_close (cd->properties_dialog);
+
+	cd->properties_dialog = gtk_html_edit_properties_dialog_new (cd, _("Insert"), PACKAGE_PIXMAPS_DIR "/insert-object-24.png");
+
+	gtk_html_edit_properties_dialog_add_entry (cd->properties_dialog,
+						   GTK_HTML_EDIT_PROPERTY_TABLE, _("Template"),
+						   template_insert,
+						   template_close_cb);
+
+	gtk_html_edit_properties_dialog_show (cd->properties_dialog);
+}
+*/
 /******************************************************************************
  * Name
  *  new_clicked
@@ -610,6 +731,57 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 				  vseparator, NULL, NULL);
 	gtk_widget_set_usize(vseparator, 5, 7);
 
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-image-24.png");
+	
+	//gtk_widget_show(tmp_toolbar_icon);
+	ecd->btn_insert_image =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert image"),
+				       _("Insert image at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_image);
+	
+	
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-link-24.png");
+	ecd->btn_insert_link =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert link"),
+				       _("Insert link at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_link);
+	
+	
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-rule-24.png");
+	ecd->btn_insert_rule =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert rule"),
+				       _("Insert rule at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_rule);
+
+	
+	
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-table-24.png");
+	ecd->btn_insert_table =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert table"),
+				       _("Insert table at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_table);
+
+
+	vseparator = gtk_vseparator_new();
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
+				  vseparator, NULL, NULL);
+	gtk_widget_set_usize(vseparator, 5, 7);
+	
+	
+	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_SPELL_CHECK, 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
@@ -626,7 +798,22 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 #else
 	gtk_widget_set_sensitive(ecd->btn_spell, 0);
 #endif
+/*	
+	GtkWidget *btn_insert_image;
+	GtkWidget *btn_insert_link;
+	GtkWidget *btn_insert_rule;
+	GtkWidget *btn_insert_table;
+*/ 
 
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_image), "clicked",
+			   G_CALLBACK(insert_image), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_link), "clicked",
+			   G_CALLBACK(insert_link_cb), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_rule), "clicked",
+			   G_CALLBACK(insert_rule), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_table), "clicked",
+			   G_CALLBACK(insert_table_cb), ecd);
+			   
 	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
 			   G_CALLBACK(on_btn_save_clicked), ecd);
 
@@ -653,7 +840,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 
 	return ecd->toolbar_edit;
 }
-//spell_check_dialog (cd, TRUE);
+
 
 /******************************************************************************
  * Name
@@ -863,6 +1050,57 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
 				  vseparator, NULL, NULL);
 	gtk_widget_set_usize(vseparator, 5, 7);
+	
+
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-image-24.png");
+	
+	//gtk_widget_show(tmp_toolbar_icon);
+	ecd->btn_insert_image =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert image"),
+				       _("Insert image at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_image);
+	
+	
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-link-24.png");
+	ecd->btn_insert_link =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert link"),
+				       _("Insert link at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_link);
+	
+	
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-rule-24.png");
+	ecd->btn_insert_rule =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert rule"),
+				       _("Insert rule at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_rule);
+
+	
+	
+	tmp_toolbar_icon = gtk_image_new_from_file(GTKHTML_DATA_DIR"/icons/insert-table-24.png");
+	ecd->btn_insert_table =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Insert table"),
+				       _("Insert table at cursor"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(ecd->btn_insert_table);
+
+
+	vseparator = gtk_vseparator_new();
+	gtk_widget_show(vseparator);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(ecd->toolbar_edit),
+				  vseparator, NULL, NULL);
+	gtk_widget_set_usize(vseparator, 5, 7);
+	
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
 			GTK_STOCK_SPELL_CHECK, 
@@ -884,6 +1122,15 @@ static GtkWidget *create_note_toolbar_edit(GSHTMLEditorControlData * ecd)
 	g_signal_connect(GTK_OBJECT(ecd->btn_save), "clicked",
 			   G_CALLBACK(on_btn_save_clicked), ecd);
 
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_image), "clicked",
+			   G_CALLBACK(insert_image), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_link), "clicked",
+			   G_CALLBACK(insert_link_cb), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_rule), "clicked",
+			   G_CALLBACK(insert_rule), ecd);
+	g_signal_connect(GTK_OBJECT(ecd->btn_insert_table), "clicked",
+			   G_CALLBACK(insert_table_cb), ecd);
+			   
 	g_signal_connect(GTK_OBJECT(ecd->btn_print), "clicked",
 			   G_CALLBACK(on_btn_print_clicked), ecd);
 	g_signal_connect(GTK_OBJECT(ecd->btn_cut), "clicked",
