@@ -41,9 +41,22 @@ extern "C" {
                         *ckbPerCom, 
                         *ckbGBS, 
                         *rbPhraseSearch;
-		gchar *modname;
+		gchar 
+			*module_name,
+			*upper_bond,
+			*lower_bond,
+			*search_string;
+		
+		int 
+			search_type,
+			search_params,
+			found_count;
+		
+		gboolean 
+			use_bonds,
+			use_lastsearch_for_bonds;
         };
-
+	void fill_search_results_clist(GList *glist, SEARCH_OPT *so, SETTINGS *s);
         void setupforDailyDevotion ( SETTINGS * s );
         void showSBVerseList ( SETTINGS * s );
         void showSBGroup ( SETTINGS * s, gint groupnum );
