@@ -655,9 +655,6 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_widget_set_usize(shortcut_bar, 150, 250);
 	gtk_widget_show(shortcut_bar);
 	gtk_box_pack_start(GTK_BOX(hbox22), shortcut_bar, TRUE, TRUE, 0);
-/*
-	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
-					 icon_callback1, NULL);*/
 
 	notebook7 = gtk_notebook_new();
 	gtk_widget_ref(notebook7);
@@ -2034,6 +2031,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected1),
 			   NULL);
 #ifdef USE_OLD_GAL			   
+	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
+					 icon_callback1, NULL);
+
 	for (i = 0; i < NUM_SHORTCUT_TYPES1; i++) {
 		pathname = gnome_pixmap_file(icon_filenames[i]);
 		if (pathname)

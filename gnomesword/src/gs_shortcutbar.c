@@ -1388,10 +1388,10 @@ setupSB(SETTINGS *s)
 		else
 			icon_pixbufs[i] = NULL;
 	}
+	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
+					 icon_callback, NULL);
 /***********************************************************/	
 #endif /* USE_OLD_GAL */
-/*	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
-					 icon_callback, NULL);*/
 	tmplang = NULL;
 	tmp = NULL;
 	if (s->showfavoritesgroup) {
