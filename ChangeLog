@@ -1,6 +1,8 @@
 2003-12-14  Terry <tbiggs@users.sf.net>
 
 	* added support for preverse headings
+	* updated fr_FR.po from Dominique Corbex <dominique.corbex@wanadoo.fr>
+	* applied patch from Dominique Corbex 
 
 
 2003-12-13  Terry <tbiggs@users.sf.net>
