@@ -26,12 +26,12 @@
 extern "C" {
 #endif
 
-#include "settings.h"
-
+#include "main/settings.h"
 
 typedef struct _gbsdata GBS_DATA;
-/* gnome */
-#include "gbs_find.h"
+
+#include "gui/gbs_find.h"
+
 struct _gbsdata {
 	GtkWidget *html;
 	GtkWidget *frame;
@@ -71,4 +71,6 @@ GtkCTreeNode *add_node_gbs(SETTINGS * s, NODEDATA * data);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __GBS_H_ */
+
+#endif
+

@@ -25,7 +25,7 @@
  */
 
 #ifdef HAVE_CONFIG_H
-#  include "config.h"
+#include "config.h"
 #endif
 
 #ifdef WITH_SPC
@@ -38,11 +38,11 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
-#include "debug.h"
-#include "_editor.h"
-#include "spell.h"
-#include "spell_gui.h"
-#include "support.h"
+#include "main/debug.h"
+#include "gui/_editor.h"
+#include "main/spell.h"
+#include "main/spell_gui.h"
+#include "main/support.h"
 
 extern GtkWidget *text_widget;
 extern GtkWidget *html_widget;

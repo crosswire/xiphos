@@ -25,22 +25,18 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "_percomm.h"
-#include "_editor.h"
-#include "module_options.h"
-#include "info_box.h"
+#include "gui/_percomm.h"
+#include "gui/_editor.h"
+#include "backend/module_options.h"
+#include "gui/info_box.h"
 
+#include "main/percomm.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/support.h"
 
-/* main */
-#include "percomm.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "support.h"
-
-/* backend */
-#include "percomm_.h"
-#include "sword.h"
+#include "backend/percomm_.h"
+#include "backend/sword.h"
 
 /******************************************************************************
  * globals to this file only 

@@ -36,33 +36,27 @@ extern "C" {
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 	
-	void on_url(GtkHTML * html, const gchar * url, gpointer data);
-	void on_link_clicked(GtkHTML * html, 
-				const gchar * url,
-				gpointer data);
-	void beginHTML(GtkWidget * html, gboolean utf8);
-	void endHTML(GtkWidget * html);
-	void displayHTML(GtkWidget * html, 
-				const gchar * txt, 
-				gint lentxt);
-	void copyGS_HTML(GtkWidget *html_widget);
-	void on_copyhtml_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
-	gchar *get_word_or_selection(GtkWidget *html_widget, 
-				gboolean word);
-	gchar *buttonpresslookupGS_HTML(GtkWidget *html_widget);
-	void on_html_lookup_word_activate(GtkMenuItem * menuitem,
-				gchar *modDesc);
-	void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
-				gchar *modDesc);
-	void on_html_goto_reference_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
-	void gotoanchorHTML(GtkWidget * html_widget, gchar * verse);
-	gchar *gethtmlfontnameHTML(gchar * xfontname);
-	void html_print(GtkWidget * htmlwidget);
-	void set_html_edit(GtkWidget * htmlwidget);
+void on_url(GtkHTML * html, const gchar * url, gpointer data);
+void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data);
+void beginHTML(GtkWidget * html, gboolean utf8);
+void endHTML(GtkWidget * html);
+void displayHTML(GtkWidget * html, const gchar * txt, gint lentxt);
+void copyGS_HTML(GtkWidget *html_widget);
+void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data);
+gchar *get_word_or_selection(GtkWidget *html_widget, gboolean word);
+gchar *buttonpresslookupGS_HTML(GtkWidget *html_widget);
+void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar *modDesc);
+void on_html_lookup_selection_activate(GtkMenuItem * menuitem, gchar *modDesc);
+void on_html_goto_reference_activate(GtkMenuItem * menuitem,
+		gpointer user_data);
+void gotoanchorHTML(GtkWidget * html_widget, gchar * verse);
+gchar *gethtmlfontnameHTML(gchar * xfontname);
+void html_print(GtkWidget * htmlwidget);
+void set_html_edit(GtkWidget * htmlwidget);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_HTML_H_ */
+
+#endif
+

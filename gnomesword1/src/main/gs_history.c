@@ -25,16 +25,14 @@
 
 #include <gnome.h>
 
-/* main */
-#include "gs_gnomesword.h"
-#include "sword.h"
-#include "gs_history.h"
-#include "gs_menu.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "backend/sword.h"
+#include "main/gs_history.h"
+#include "main/gs_menu.h"
+#include "main/support.h"
+#include "main/settings.h"
 
-/* frontend */
-#include "main_menu.h"
+#include "gui/main_menu.h"
 
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-shortcut-bar.h>

@@ -22,8 +22,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
-
 #ifndef __SPELL_H_
 #define __SPELL_H_
 
@@ -32,8 +30,7 @@ extern "C" {
 #endif
 
 #include <glib.h>
-#include "_editor.h"
-
+#include "gui/_editor.h"
 
 gboolean run_spell_checker(GSHTMLEditorControlData * ecd);
 void load_text_from_spell(GtkWidget * text,
@@ -57,28 +54,28 @@ enum {
 };
 
 typedef struct {
-  GtkWidget *window;
-  GtkWidget *vbox;
-  GtkWidget *scrollwindow;
-  GtkWidget *text;	
-  GtkWidget *hbuttonbox_top;
-  GtkWidget *start_button;
-  GtkWidget *close_button;
-  GtkWidget *options_button;
-  GtkWidget *word_frame;
-  GtkWidget *word_entry;
-  GtkWidget *replace_frame;
-  GtkWidget *replace_entry;
-  GtkWidget *progress_frame;
-  GtkWidget *progress_bar;
-  GtkWidget *button_table;
-  GtkWidget *accept_button;
-  GtkWidget *insert_button;
-  GtkWidget *ignore_button;
-  GtkWidget *replace_button;
-  GtkWidget *near_misses_clist;
-  GtkWidget *near_misses_scrolled_window;
-  gint      status_bar_count;
+	GtkWidget *window;
+	GtkWidget *vbox;
+	GtkWidget *scrollwindow;
+	GtkWidget *text;	
+	GtkWidget *hbuttonbox_top;
+	GtkWidget *start_button;
+	GtkWidget *close_button;
+	GtkWidget *options_button;
+	GtkWidget *word_frame;
+	GtkWidget *word_entry;
+	GtkWidget *replace_frame;
+	GtkWidget *replace_entry;
+	GtkWidget *progress_frame;
+	GtkWidget *progress_bar;
+	GtkWidget *button_table;
+	GtkWidget *accept_button;
+	GtkWidget *insert_button;
+	GtkWidget *ignore_button;
+	GtkWidget *replace_button;
+	GtkWidget *near_misses_clist;
+	GtkWidget *near_misses_scrolled_window;
+	gint status_bar_count;
 } Tspc_gui;
 
 extern Tspc_gui spc_gui;
@@ -87,7 +84,5 @@ extern Tspc_gui spc_gui;
 }
 #endif
 
-#endif							/* __SPC_H_ */
-
-
+#endif
 

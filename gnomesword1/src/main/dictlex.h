@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 
 typedef struct _DLFindDialog DLFindDialog;
 struct _DLFindDialog {

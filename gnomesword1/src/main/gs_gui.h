@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "settings.h"
+
+#include "main/settings.h"
 
 void create_mainwindow(void);
 
@@ -33,5 +34,5 @@ void create_mainwindow(void);
 }
 #endif
 
-#endif /*__GS_GUI_H_  */
+#endif
 

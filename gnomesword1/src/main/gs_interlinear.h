@@ -19,7 +19,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifndef __GS_INTERLINEAR_H_
 #define __GS_INTERLINEAR_H_
 
@@ -32,13 +31,12 @@ extern "C" {
 void update_interlinear_page(SETTINGS * s);
 void update_interlinear_page_detached(SETTINGS * s);
 void swap_interlinear_with_main(char *intmod, SETTINGS * s);
-void set_interlinear_module_global_options(gchar * option,
-					   gboolean choice,
-					   SETTINGS *s);
-
-
+void set_interlinear_module_global_options(gchar * option, gboolean choice,
+		SETTINGS *s);
 
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_INTERLINEAR_H_ */
+
+#endif
+

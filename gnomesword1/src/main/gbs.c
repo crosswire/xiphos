@@ -32,22 +32,19 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-/* frontend */
-#include "_gbs.h"
-#include "cipher_key_dialog.h"
-#include "shortcutbar_main.h"
+#include "gui/_gbs.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/shortcutbar_main.h"
 
-/* main */
-#include "settings.h"
-#include "gs_bookmarks.h"
-#include "gs_gnomesword.h"
-#include "gbs.h"
-#include "gs_html.h"
+#include "main/settings.h"
+#include "main/gs_bookmarks.h"
+#include "main/gs_gnomesword.h"
+#include "main/gbs.h"
+#include "main/gs_html.h"
 
-/* backend */
-#include "sword.h"
-#include "shortcutbar.h"
-#include "gbs_.h"
+#include "backend/sword.h"
+#include "backend/shortcutbar.h"
+#include "backend/gbs_.h"
 
 /******************************************************************************
  *  externs  

@@ -7,8 +7,7 @@ INCLUDES =  \
     $(SWORD_CPPFLAGS) \
     $(GTKHTML_CFLAGS) \
     -I/usr/include/gnome-1.0/ \
-    -I$(top_builddir)/src/backend/ \
-    -I$(top_builddir)/src/gnome/
+    -I$(top_builddir)/src
 
 bin_PROGRAMS = gnomesword
 

@@ -19,4 +19,6 @@ struct _gs_find_dialog {
 #ifdef __cplusplus
 }
 #endif
-#endif /* _FIND_DLG_DEFS_H_ */
+
+#endif
+
