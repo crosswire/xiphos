@@ -136,6 +136,7 @@ static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	gui_find_dlg(t->html, t->mod_name, FALSE, NULL);
 }
+
 /******************************************************************************
  * Name
  *  on_same_lookup_selection_activate				       
@@ -151,7 +152,7 @@ static void on_find_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
  *
  * Return value
  *   void
- */ 
+ */
 
 static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 					      TEXT_DATA * t)
@@ -189,13 +190,12 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_view_mod_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	
+
 	gchar module_name[16];
-	
+
 	memset(module_name, 0, 16);
 	module_name_from_description(module_name, (gchar *) user_data);
-	gui_change_module_and_key(module_name, 
-				settings.currentverse);
+	gui_change_module_and_key(module_name, settings.currentverse);
 }
 
 
@@ -213,16 +213,17 @@ static void on_view_mod_activate(GtkMenuItem * menuitem,
  *
  * Return value
  *   void
- */ 
+ */
 
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if(settings.use_percomm_dialog)
+	if (settings.use_percomm_dialog)
 		gui_open_commentary_editor((gchar *) user_data);
 	else {
-		gtk_notebook_set_page(GTK_NOTEBOOK(
-			widgets.workbook_lower),settings.percomm_page);
-		gui_set_percomm_page((gchar *) user_data);		
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.workbook_lower),
+				      settings.percomm_page);
+		gui_set_percomm_page((gchar *) user_data);
 	}
 }
 
@@ -347,12 +348,10 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
  */
 
 static void global_option_red_words(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				    TEXT_DATA * t)
 {
 	t->tgs->words_in_red = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -373,13 +372,10 @@ static void global_option_red_words(GtkMenuItem * menuitem,
  *   void
  */
 
-static void global_option_strongs(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+static void global_option_strongs(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	t->tgs->strongs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -400,13 +396,10 @@ static void global_option_strongs(GtkMenuItem * menuitem,
  *   void
  */
 
-static void global_option_morph(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+static void global_option_morph(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	t->tgs->morphs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -428,12 +421,10 @@ static void global_option_morph(GtkMenuItem * menuitem,
  */
 
 static void global_option_footnotes(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				    TEXT_DATA * t)
 {
 	t->tgs->footnotes = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 /******************************************************************************
@@ -454,12 +445,10 @@ static void global_option_footnotes(GtkMenuItem * menuitem,
  */
 
 static void global_option_greekaccents(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				       TEXT_DATA * t)
 {
 	t->tgs->greekaccents = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -480,13 +469,10 @@ static void global_option_greekaccents(GtkMenuItem * menuitem,
  *   void
  */
 
-static void global_option_lemmas(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+static void global_option_lemmas(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
 	t->tgs->lemmas = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -508,12 +494,10 @@ static void global_option_lemmas(GtkMenuItem * menuitem,
  */
 
 static void global_option_scripturerefs(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+					TEXT_DATA * t)
 {
 	t->tgs->scripturerefs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -535,12 +519,10 @@ static void global_option_scripturerefs(GtkMenuItem * menuitem,
  */
 
 static void global_option_hebrewpoints(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				       TEXT_DATA * t)
 {
 	t->tgs->hebrewpoints = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -562,12 +544,10 @@ static void global_option_hebrewpoints(GtkMenuItem * menuitem,
  */
 
 static void global_option_hebrewcant(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				     TEXT_DATA * t)
 {
 	t->tgs->hebrewcant = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -589,12 +569,10 @@ static void global_option_hebrewcant(GtkMenuItem * menuitem,
  */
 
 static void global_option_headings(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				   TEXT_DATA * t)
 {
 	t->tgs->headings = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	chapter_display(t->html, t->mod_name,
-		     t->tgs, t->key,
-		     TRUE);
+	chapter_display(t->html, t->mod_name, t->tgs, t->key, TRUE);
 }
 
 
@@ -617,13 +595,12 @@ static void global_option_headings(GtkMenuItem * menuitem,
  */
 
 static void global_option_variants_all(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+				       TEXT_DATA * t)
 {
 	t->tgs->variants_all = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	if(t->tgs->variants_all)
+	if (t->tgs->variants_all)
 		chapter_display(t->html, t->mod_name,
-		     	t->tgs, t->key,
-		    	TRUE);
+				t->tgs, t->key, TRUE);
 }
 
 
@@ -645,13 +622,13 @@ static void global_option_variants_all(GtkMenuItem * menuitem,
  */
 
 static void global_option_variants_primary(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+					   TEXT_DATA * t)
 {
-	t->tgs->variants_primary = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	if(t->tgs->variants_primary)
+	t->tgs->variants_primary =
+	    GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if (t->tgs->variants_primary)
 		chapter_display(t->html, t->mod_name,
-		     	t->tgs, t->key,
-		     	TRUE);
+				t->tgs, t->key, TRUE);
 }
 
 
@@ -673,13 +650,13 @@ static void global_option_variants_primary(GtkMenuItem * menuitem,
  */
 
 static void global_option_variants_scondary(GtkMenuItem * menuitem,
-				      TEXT_DATA * t)
+					    TEXT_DATA * t)
 {
-	t->tgs->variants_secondary = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	if(t->tgs->variants_secondary)
+	t->tgs->variants_secondary =
+	    GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if (t->tgs->variants_secondary)
 		chapter_display(t->html, t->mod_name,
-			     t->tgs, t->key,
-			     TRUE);
+				t->tgs, t->key, TRUE);
 }
 
 
@@ -701,231 +678,257 @@ static void global_option_variants_scondary(GtkMenuItem * menuitem,
 
 static void add_global_option_items(TEXT_DATA * t)
 {
-	GtkWidget * item;
-	GtkWidget * menu;
-	GSList *group = NULL;	
-	
-	if(check_for_global_option(t->mod_name, "GBFRedLetterWords")) {
-		t->tgs->words_in_red = 
-			load_module_options(t->mod_name, "Red letter words");
-		
+	GtkWidget *item;
+	GtkWidget *menu;
+	GSList *group = NULL;
+
+	if (check_for_global_option(t->mod_name, "GBFRedLetterWords")) {
+		t->tgs->words_in_red =
+		    load_module_options(t->mod_name,
+					"Red letter words");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Red letter words"));
+		    gtk_check_menu_item_new_with_label(
+					_("Red letter words"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
-		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->words_in_red;
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
+		GTK_CHECK_MENU_ITEM(item)->active =
+		    t->tgs->words_in_red;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_red_words),
-				   t);
+				   (global_option_red_words), t);
 	}
-	
-	if((check_for_global_option(t->mod_name, "GBFStrongs")) ||
-		(check_for_global_option(t->mod_name, "ThMLStrongs")) ||
-		(check_for_global_option(t->mod_name, "OSISStrongs"))) {
-		t->tgs->strongs = 
-			load_module_options(t->mod_name, "Strong's Numbers");
-		
+
+	if ((check_for_global_option(t->mod_name, "GBFStrongs")) ||
+	    (check_for_global_option(t->mod_name, "ThMLStrongs")) ||
+	    (check_for_global_option(t->mod_name, "OSISStrongs"))) {
+		t->tgs->strongs =
+		    load_module_options(t->mod_name,
+					"Strong's Numbers");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Strong's Numbers"));
+		    gtk_check_menu_item_new_with_label(
+		    			_("Strong's Numbers"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
 		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->strongs;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_strongs),
-				   t);
+				   (global_option_strongs), t);
 	}
-	
-	if((check_for_global_option(t->mod_name, "GBFMorph")) ||
-		(check_for_global_option(t->mod_name, "ThMLMorph")) ||
-		(check_for_global_option(t->mod_name, "OSISSMorph"))) {
-		t->tgs->morphs = 
-			load_module_options(t->mod_name, "Morphological Tags");
-		
+
+	if ((check_for_global_option(t->mod_name, "GBFMorph")) ||
+	    (check_for_global_option(t->mod_name, "ThMLMorph")) ||
+	    (check_for_global_option(t->mod_name, "OSISSMorph"))) {
+		t->tgs->morphs =
+		    load_module_options(t->mod_name,
+					"Morphological Tags");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Morphological Tags"));
+		    gtk_check_menu_item_new_with_label(
+		    			_("Morphological Tags"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
 		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->morphs;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_morph),
-				   t);
+				   (global_option_morph), t);
 	}
-	
-	if((check_for_global_option(t->mod_name, "GBFFootnotes")) ||
-		(check_for_global_option(t->mod_name, "ThMLFootnotes"))) {
-		t->tgs->footnotes = 
-			load_module_options(t->mod_name, "Footnotes");
-		
+
+	if ((check_for_global_option(t->mod_name, "GBFFootnotes")) ||
+	    (check_for_global_option(t->mod_name, "ThMLFootnotes"))) {
+		t->tgs->footnotes =
+		    load_module_options(t->mod_name, "Footnotes");
+
 		item =
 		    gtk_check_menu_item_new_with_label(_("Footnotes"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
 		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->footnotes;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_footnotes),
-				   t);
+				   (global_option_footnotes), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "UTF8GreekAccents")) {
-		t->tgs->greekaccents = 
-			load_module_options(t->mod_name, "Greek Accents");
-		
+
+	if (check_for_global_option(t->mod_name, "UTF8GreekAccents")) {
+		t->tgs->greekaccents =
+		    load_module_options(t->mod_name, "Greek Accents");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Greek Accents"));
+		    gtk_check_menu_item_new_with_label(
+					_("Greek Accents"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
-		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->greekaccents;
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
+		GTK_CHECK_MENU_ITEM(item)->active =
+		    t->tgs->greekaccents;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_greekaccents),
-				   t);
+				   (global_option_greekaccents), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "ThMLLemma")) {
-		t->tgs->lemmas = 
-			load_module_options(t->mod_name, "Lemmas");
-		
-		item =
-		    gtk_check_menu_item_new_with_label(_("Lemmas"));
+
+	if (check_for_global_option(t->mod_name, "ThMLLemma")) {
+		t->tgs->lemmas =
+		    load_module_options(t->mod_name, "Lemmas");
+
+		item = gtk_check_menu_item_new_with_label(_("Lemmas"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
 		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->lemmas;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_lemmas),
-				   t);
+				   (global_option_lemmas), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "ThMLScripref")) {
-		t->tgs->scripturerefs = 
-			load_module_options(t->mod_name, "Scripture Cross-references");
-		
+
+	if (check_for_global_option(t->mod_name, "ThMLScripref")) {
+		t->tgs->scripturerefs =
+		    load_module_options(t->mod_name,
+					"Scripture Cross-references");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Scripture Cross-references"));
+		    gtk_check_menu_item_new_with_label(
+				_("Scripture Cross-references"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
-		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->scripturerefs;
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
+		GTK_CHECK_MENU_ITEM(item)->active =
+		    t->tgs->scripturerefs;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_scripturerefs),
-				   t);
+				   (global_option_scripturerefs), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "UTF8HebrewPoints")) {
-		t->tgs->hebrewpoints = 
-			load_module_options(t->mod_name, "Hebrew Vowel Points");
-		
+
+	if (check_for_global_option(t->mod_name, "UTF8HebrewPoints")) {
+		t->tgs->hebrewpoints =
+		    load_module_options(t->mod_name,
+					"Hebrew Vowel Points");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Hebrew Vowel Points"));
+		    gtk_check_menu_item_new_with_label(
+					_("Hebrew Vowel Points"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
-		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->hebrewpoints;
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
+		GTK_CHECK_MENU_ITEM(item)->active =
+		    t->tgs->hebrewpoints;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_hebrewpoints),
-				   t);
+				   (global_option_hebrewpoints), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "UTF8Cantillation")) {
-		t->tgs->hebrewcant = 
-			load_module_options(t->mod_name, "Hebrew Cantillation");
-		
+
+	if (check_for_global_option(t->mod_name, "UTF8Cantillation")) {
+		t->tgs->hebrewcant =
+		    load_module_options(t->mod_name,
+					"Hebrew Cantillation");
+
 		item =
-		    gtk_check_menu_item_new_with_label(_("Hebrew Cantillation"));
+		    gtk_check_menu_item_new_with_label(
+					_("Hebrew Cantillation"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
 		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->hebrewcant;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_hebrewcant),
-				   t);
+				   (global_option_hebrewcant), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "ThMLHeadings")) {
-		t->tgs->headings = 
-			load_module_options(t->mod_name, "Headings");
-		
+
+	if (check_for_global_option(t->mod_name, "ThMLHeadings")) {
+		t->tgs->headings =
+		    load_module_options(t->mod_name, "Headings");
+
 		item =
 		    gtk_check_menu_item_new_with_label(_("Headings"));
 		gtk_widget_show(item);
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
-			
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
+
 		GTK_CHECK_MENU_ITEM(item)->active = t->tgs->headings;
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_headings),
-				   t);
+				   (global_option_headings), t);
 	}
-	
-	if(check_for_global_option(t->mod_name, "ThMLVariants")) {
-		t->tgs->variants_all = 
-			load_module_options(t->mod_name, "All Readings");
-		t->tgs->variants_primary = 
-			load_module_options(t->mod_name, "Primary Reading");
-		t->tgs->variants_secondary = 
-			load_module_options(t->mod_name, "Secondary Reading");
-		item =
-		    gtk_menu_item_new_with_label(_("Variants"));
-		gtk_container_add(GTK_CONTAINER(t->module_options_menu), item);
+
+	if (check_for_global_option(t->mod_name, "ThMLVariants")) {
+		t->tgs->variants_all =
+		    load_module_options(t->mod_name, "All Readings");
+		t->tgs->variants_primary =
+		    load_module_options(t->mod_name, "Primary Reading");
+		t->tgs->variants_secondary =
+		    load_module_options(t->mod_name,
+					"Secondary Reading");
+		item = gtk_menu_item_new_with_label(_("Variants"));
+		gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+				  item);
 		gtk_widget_show(item);
-		
+
 		menu = gtk_menu_new();
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(item),
-				  menu);
-		
-		item = gtk_radio_menu_item_new_with_label (group, _("All Readings"));
-  		group = gtk_radio_menu_item_group (GTK_RADIO_MENU_ITEM (item));
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), menu);
+
+		item =
+		    gtk_radio_menu_item_new_with_label(group,
+					_("All Readings"));
+		group =
+		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
+					      (item));
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
-		if(t->tgs->variants_all)		   
-			gtk_check_menu_item_set_active (
-				GTK_CHECK_MENU_ITEM (item), 
-					t->tgs->variants_all); 
+		if (t->tgs->variants_all)
+			gtk_check_menu_item_set_active
+			    (GTK_CHECK_MENU_ITEM(item),
+			     t->tgs->variants_all);
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_variants_all),
-				   t);
-				   
-		item = gtk_radio_menu_item_new_with_label (group, _("Primary Readings"));
-  		group = gtk_radio_menu_item_group (GTK_RADIO_MENU_ITEM (item));
+				   (global_option_variants_all), t);
+
+		item =
+		    gtk_radio_menu_item_new_with_label(group,
+					_("Primary Readings"));
+		group =
+		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
+					      (item));
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
-		if(t->tgs->variants_primary)		   
-			gtk_check_menu_item_set_active (
-				GTK_CHECK_MENU_ITEM (item), 
-					t->tgs->variants_primary);  
+		if (t->tgs->variants_primary)
+			gtk_check_menu_item_set_active
+			    (GTK_CHECK_MENU_ITEM(item),
+			     t->tgs->variants_primary);
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
-				   (global_option_variants_primary),
-				   t);
-		
-		item = gtk_radio_menu_item_new_with_label (group, _("Secondary Readings"));
-  		group = gtk_radio_menu_item_group (GTK_RADIO_MENU_ITEM (item));
+				   (global_option_variants_primary), t);
+
+		item =
+		    gtk_radio_menu_item_new_with_label(group,
+				_("Secondary Readings"));
+		group =
+		    gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM
+					      (item));
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER(menu), item);
 		gtk_signal_connect(GTK_OBJECT(item), "toggled",
 				   GTK_SIGNAL_FUNC
 				   (global_option_variants_scondary),
-				   t);	
-		if(t->tgs->variants_secondary)		   
-			gtk_check_menu_item_set_active (
-				GTK_CHECK_MENU_ITEM (item), 
-					t->tgs->variants_secondary);   
+				   t);
+		if (t->tgs->variants_secondary)
+			gtk_check_menu_item_set_active
+			    (GTK_CHECK_MENU_ITEM(item),
+			     t->tgs->variants_secondary);
 	}
-	
+
 }
 
 
@@ -946,13 +949,13 @@ static void add_global_option_items(TEXT_DATA * t)
  *   void
  */
 
-static void on_new_dialog_activate(GtkMenuItem * menuitem, 
-						gpointer user_data)
+static void on_new_dialog_activate(GtkMenuItem * menuitem,
+				   gpointer user_data)
 {
 	gchar module_name[16];
-	
+
 	memset(module_name, 0, 16);
-	module_name_from_description(module_name, (gchar *) user_data);	
+	module_name_from_description(module_name, (gchar *) user_data);
 	gui_open_bibletext_dialog(module_name);
 }
 
@@ -974,11 +977,11 @@ static void on_new_dialog_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void on_sync_activate(GtkMenuItem * menuitem, 
-						gpointer user_data)
+static void on_sync_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_sync_bibletext_dialog();
 }
+
 /******************************************************************************
  * Name
  *  gui_create_pm_text
@@ -1028,88 +1031,95 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gchar buf[256];
 	GtkTooltips *tooltips;
 
-	sprintf(buf,"%s %s %s", _("Open"),t->mod_name, _("in a dialog"));
-	
+	sprintf(buf, "%s %s %s", _("Open"), t->mod_name,
+		_("in a dialog"));
+
 	tooltips = gtk_tooltips_new();
 
 	pm_text = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pm_text), "pm_text", pm_text);
 	pm_text_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pm_text));
-	
+
 	/*
 	 * file menu
 	 */
-	file =
-	    gtk_menu_item_new_with_label(_("File"));
+	file = gtk_menu_item_new_with_label(_("File"));
 	gtk_widget_show(file);
 	gtk_container_add(GTK_CONTAINER(pm_text), file);
 
 	file_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file),
-				  file_menu);	
-				  
-	if (t->is_dialog) {	
-		sync_with_main = gtk_menu_item_new_with_label(_("Sync with Main Window"));
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file), file_menu);
+
+	if (t->is_dialog) {
+		sync_with_main =
+		    gtk_menu_item_new_with_label(_
+						 ("Sync with Main Window"));
 		gtk_widget_show(sync_with_main);
-		gtk_container_add(GTK_CONTAINER(file_menu), sync_with_main);
-		
+		gtk_container_add(GTK_CONTAINER(file_menu),
+				  sync_with_main);
+
 		gtk_signal_connect(GTK_OBJECT(sync_with_main),
 				   "activate",
 				   GTK_SIGNAL_FUNC
 				   (on_sync_activate), t);
-		
-		separator = gtk_menu_item_new();
-		gtk_widget_show(separator);
-		gtk_container_add(GTK_CONTAINER(file_menu), separator);
-		gtk_widget_set_sensitive(separator, FALSE);	
-		
-		view_text = gtk_menu_item_new_with_label(_("Open New Dialog"));
-		gtk_widget_show(view_text);
-		gtk_container_add(GTK_CONTAINER(file_menu), view_text);
-	
-		view_text_menu = gtk_menu_new();
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
-					  view_text_menu);
-		view_text_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_text_menu));
-		gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_text_menu,
-				(GtkMenuCallback) on_new_dialog_activate);
-		
-	}
-	else {	
-		view_text = gtk_menu_item_new_with_label(_("Open Module"));
-		gtk_widget_show(view_text);
-		gtk_container_add(GTK_CONTAINER(file_menu), view_text);
-	
-		view_text_menu = gtk_menu_new();
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
-					  view_text_menu);
-		view_text_menu_accels =
-		    gtk_menu_ensure_uline_accel_group(GTK_MENU(view_text_menu));
-		gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_text_menu,
-				(GtkMenuCallback) on_view_mod_activate);
-		
-		view_new = gtk_menu_item_new_with_label(buf);
-		gtk_widget_show(view_new);
-		gtk_container_add(GTK_CONTAINER(file_menu), view_new);	
-	
-		gtk_signal_connect(GTK_OBJECT(view_new), "activate",
-			   GTK_SIGNAL_FUNC(on_view_new_activate), 
-				t);
 
-	}
-	 
-	print = gtk_menu_item_new_with_label(_("Print"));
-	gtk_widget_show(print);
-	gtk_container_add(GTK_CONTAINER(file_menu), print);
-	
-	if (t->is_dialog) {	     
 		separator = gtk_menu_item_new();
 		gtk_widget_show(separator);
 		gtk_container_add(GTK_CONTAINER(file_menu), separator);
 		gtk_widget_set_sensitive(separator, FALSE);
-		
+
+		view_text =
+		    gtk_menu_item_new_with_label(_("Open New Dialog"));
+		gtk_widget_show(view_text);
+		gtk_container_add(GTK_CONTAINER(file_menu), view_text);
+
+		view_text_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
+					  view_text_menu);
+		view_text_menu_accels =
+		    gtk_menu_ensure_uline_accel_group(GTK_MENU
+						      (view_text_menu));
+		gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_text_menu,
+					(GtkMenuCallback)
+					on_new_dialog_activate);
+
+	} else {
+		view_text =
+		    gtk_menu_item_new_with_label(_("Open Module"));
+		gtk_widget_show(view_text);
+		gtk_container_add(GTK_CONTAINER(file_menu), view_text);
+
+		view_text_menu = gtk_menu_new();
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(view_text),
+					  view_text_menu);
+		view_text_menu_accels =
+		    gtk_menu_ensure_uline_accel_group(GTK_MENU
+						      (view_text_menu));
+		gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_text_menu,
+					(GtkMenuCallback)
+					on_view_mod_activate);
+
+		view_new = gtk_menu_item_new_with_label(buf);
+		gtk_widget_show(view_new);
+		gtk_container_add(GTK_CONTAINER(file_menu), view_new);
+
+		gtk_signal_connect(GTK_OBJECT(view_new), "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_view_new_activate), t);
+
+	}
+
+	print = gtk_menu_item_new_with_label(_("Print"));
+	gtk_widget_show(print);
+	gtk_container_add(GTK_CONTAINER(file_menu), print);
+
+	if (t->is_dialog) {
+		separator = gtk_menu_item_new();
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(file_menu), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+
 		close = gtk_menu_item_new_with_label(_("Close"));
 		gtk_widget_show(close);
 		gtk_container_add(GTK_CONTAINER(file_menu), close);
@@ -1118,19 +1128,17 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   GTK_SIGNAL_FUNC
 				   (on_close_activate), t);
 	}
-	
+
 	/*
 	 * edit menu
 	 */
-	edit =
-	    gtk_menu_item_new_with_label(_("Edit"));
+	edit = gtk_menu_item_new_with_label(_("Edit"));
 	gtk_widget_show(edit);
 	gtk_container_add(GTK_CONTAINER(pm_text), edit);
 
 	edit_menu = gtk_menu_new();
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit),
-				  edit_menu);
-	
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit), edit_menu);
+
 	copy = gtk_menu_item_new_with_label(_("Copy"));
 	gtk_widget_show(copy);
 	gtk_container_add(GTK_CONTAINER(edit_menu), copy);
@@ -1138,12 +1146,11 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	find = gtk_menu_item_new_with_label(_("Find"));
 	gtk_widget_show(find);
 	gtk_container_add(GTK_CONTAINER(edit_menu), find);
-	
+
 
 
 	if (settings.havepercomm && (!t->is_dialog)) {
-		edit_note =
-		    gtk_menu_item_new_with_label(_("Note"));
+		edit_note = gtk_menu_item_new_with_label(_("Note"));
 		gtk_widget_show(edit_note);
 		gtk_container_add(GTK_CONTAINER(edit_menu), edit_note);
 
@@ -1154,34 +1161,37 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 		    gtk_menu_ensure_uline_accel_group(GTK_MENU
 						      (edit_note_menu));
 		gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_note_menu,
-				(GtkMenuCallback) edit_percomm);
-		
+					(GtkMenuCallback) edit_percomm);
+
 	}
 
 	/*
 	 * module options menu
 	 */
-	module_options = gtk_menu_item_new_with_label(_("Module Options"));
+	module_options =
+	    gtk_menu_item_new_with_label(_("Module Options"));
 	gtk_widget_show(module_options);
 	gtk_container_add(GTK_CONTAINER(pm_text), module_options);
-	
+
 	t->module_options_menu = gtk_menu_new();
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(module_options),
 				  t->module_options_menu);
 
 	set_font = gtk_menu_item_new_with_label(_("Set Module Font"));
 	gtk_widget_show(set_font);
-	gtk_container_add(GTK_CONTAINER(t->module_options_menu), set_font);
+	gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+			  set_font);
 	gtk_tooltips_set_tip(tooltips, set_font,
 			     _("Set font for this module"), NULL);
-			     
+
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(t->module_options_menu), separator);
+	gtk_container_add(GTK_CONTAINER(t->module_options_menu),
+			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-	
+
 	add_global_option_items(t);
-	
+
 	/*
 	 * lookup menu
 	 */
@@ -1202,19 +1212,24 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_widget_show(usecurrent);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
-			     
+
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
-	gtk_container_add(GTK_CONTAINER(lookup_selection_menu), separator);
+	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
+			  separator);
 	gtk_widget_set_sensitive(separator, FALSE);
-	
-	if(t->is_dialog)
-		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
-				(GtkMenuCallback) gui_on_lookup_bibletext_dialog_selection);
+
+	if (t->is_dialog)
+		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
+			lookup_selection_menu,
+			(GtkMenuCallback)
+			gui_on_lookup_bibletext_dialog_selection);
 	else
-		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
-				(GtkMenuCallback) gui_lookup_bibletext_selection);
-	
+		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
+			lookup_selection_menu,
+			(GtkMenuCallback)
+			gui_lookup_bibletext_selection);
+
 	/*
 	 * if module has cipher key include this item
 	 */
@@ -1236,29 +1251,28 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				   GTK_SIGNAL_FUNC
 				   (gui_unlock_bibletext), t);
 	}
-	
-	    
+
 	/*
 	 * show menu
 	 */
-	if(!t->is_dialog) {
-		show =
-		    gtk_menu_item_new_with_label(_("Show"));
+	if (!t->is_dialog) {
+		show = gtk_menu_item_new_with_label(_("Show"));
 		gtk_widget_show(show);
 		gtk_container_add(GTK_CONTAINER(pm_text), show);
-	
+
 		show_menu = gtk_menu_new();
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(show),
 					  show_menu);
 		t->showtabs =
 		    gtk_check_menu_item_new_with_label(_("Tabs"));
 		gtk_widget_show(t->showtabs);
-		gtk_container_add(GTK_CONTAINER(show_menu), t->showtabs);
+		gtk_container_add(GTK_CONTAINER(show_menu),
+				  t->showtabs);
 		gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
-			   GTK_SIGNAL_FUNC
-			   (on_text_showtabs_activate), NULL);
+				   GTK_SIGNAL_FUNC
+				   (on_text_showtabs_activate), NULL);
 	}
-	
+
 	/*
 	 * for using the current dictionary for lookup 
 	 */

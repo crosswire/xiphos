@@ -32,11 +32,6 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-#ifdef USE_SPELL
-//#include "main/spell.h"
-//#include "main/spell_gui.h"
-#endif
-
 #include "gui/gnomesword.h"
 #include "gui/studypad.h"
 #include "gui/editor.h"
@@ -525,10 +520,6 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	specd->editbar = settings.show_edit_bar_sp;
 
 	vboxSP = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vboxSP);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxSP",
-				 vboxSP,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxSP);
 	gtk_container_add(GTK_CONTAINER(container), vboxSP);
 	
@@ -538,35 +529,20 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 			   specd);
 
 	hboxstyle = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hboxstyle);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hboxstyle",
-				 hboxstyle,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hboxstyle);
 	gtk_box_pack_start(GTK_BOX(vboxSP), hboxstyle, TRUE, TRUE, 0);
 
 	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox", vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
 	gtk_box_pack_start(GTK_BOX(hboxstyle), vbox, TRUE, TRUE, 0);
 
 	htmlwidget = gtk_html_new();
 
 	frame34 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame34);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34",
-				 frame34,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame34);
 	gtk_box_pack_end(GTK_BOX(vbox), frame34, TRUE, TRUE, 0);
 
 	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow17);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "scrolledwindow17", scrolledwindow17,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow17);
 	gtk_container_add(GTK_CONTAINER(frame34), scrolledwindow17);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -576,10 +552,6 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 
 	specd->htmlwidget = htmlwidget;
 	specd->html = GTK_HTML(specd->htmlwidget);
-	gtk_widget_ref(specd->htmlwidget);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "specd->htmlwidget", specd->htmlwidget,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  specd->htmlwidget);
@@ -588,10 +560,6 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 
 
 	specd->statusbar = gtk_statusbar_new();
-	gtk_widget_ref(specd->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "specd->statusbar", specd->statusbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->statusbar);
 	gtk_box_pack_start(GTK_BOX(vboxSP), specd->statusbar, FALSE,
 			   TRUE, 0);
@@ -629,6 +597,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 		gtk_widget_show(widgets.toolbar_studypad);
 	else
 		gtk_widget_hide(widgets.toolbar_studypad);
+	
 	gtk_box_pack_start(GTK_BOX(vbox), widgets.toolbar_studypad,
 			   FALSE, FALSE, 0);
 

@@ -139,9 +139,6 @@ GtkWidget* gui_create_shortcutbar_dialog(void)
 			settings.gs_hight);
 
 	vbox_dock = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox_dock);
-	gtk_object_set_data_full(GTK_OBJECT (dlgDock), "vbox_dock",
-		  vbox_dock, (GtkDestroyNotify)gtk_widget_unref);
 	gtk_widget_show(vbox_dock);
 	gtk_container_add(GTK_CONTAINER(dlgDock), vbox_dock);
 

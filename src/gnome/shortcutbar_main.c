@@ -1411,18 +1411,9 @@ void gui_setup_shortcut_bar(void)
 
 	/*** add bookmark group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
-	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "scrolledwindow1", scrolledwindow1,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(scrolledwindow1);
 
 	ctree = gtk_ctree_new(3, 0);
-	gtk_widget_ref(ctree);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "ctree",
-				 ctree, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(ctree);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), ctree);
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 0, 280);
@@ -1432,10 +1423,6 @@ void gui_setup_shortcut_bar(void)
 	widgets.ctree_widget = ctree;
 
 	button = gtk_button_new_with_label(_("Bookmarks"));
-	gtk_widget_ref(button);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "button",
-				 button, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(button);
 	groupnum5 =
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
@@ -1444,27 +1431,13 @@ void gui_setup_shortcut_bar(void)
 	gui_load_bookmark_tree();
 
 	scrolledwindow2 = e_vscrolled_bar_new(NULL);
-	gtk_widget_ref(scrolledwindow2);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "scrolledwindow2", scrolledwindow2,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(scrolledwindow2);
 
 	vpSearch = gtk_viewport_new(NULL, NULL);
-	gtk_widget_ref(vpSearch);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vpSearch",
-				 vpSearch, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(vpSearch);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2), vpSearch);
 
 	searchbutton = gtk_button_new_with_label(_("Search"));
-	gtk_widget_ref(searchbutton);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "searchbutton", searchbutton,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(searchbutton);
 
 	gui_create_shortcutbar_search(vpSearch);
@@ -1477,25 +1450,13 @@ void gui_setup_shortcut_bar(void)
 	/*********************************************************************/
 
 	vboxVL = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vboxVL);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxVL",
-				 vboxVL, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(vboxVL);
 
 	vpVL = gtk_viewport_new(NULL, NULL);
-	gtk_widget_ref(vpVL);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vpVL", vpVL,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(vpVL);
 	gtk_container_add(GTK_CONTAINER(vpVL), vboxVL);
 
 	VLbutton = gtk_button_new_with_label(_("Verse List"));
-	gtk_widget_ref(VLbutton);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "VLbutton",
-				 VLbutton, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(VLbutton);
 
 	/*** create viewer group and add to shortcut bar ****/
@@ -1814,10 +1775,6 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 	if (group_num != groupnum0) {
 		item =
 		    gtk_menu_item_new_with_label(_("Add All Modules"));
-		gtk_widget_ref(item);
-		gtk_object_set_data_full(GTK_OBJECT(menu), "item",
-					 item, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER
 				  (shortcut_menu_widget), item);
@@ -1847,10 +1804,6 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 	while (glist != NULL) {
 		item =
 		    gtk_menu_item_new_with_label((gchar *) glist->data);
-		gtk_widget_ref(item);
-		gtk_object_set_data_full(GTK_OBJECT(menu), "item",
-					 item, (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(item);
 		gtk_container_add(GTK_CONTAINER
 				  (shortcut_menu_widget), item);
