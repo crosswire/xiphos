@@ -92,57 +92,7 @@ static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 	return NULL;
 }
 #endif				/* USE_SHORTCUTBAR */
-/*
-static GnomeUIInfo menu1_uiinfo[] = {
-	GNOMEUIINFO_MENU_COPY_ITEM(on_copy3_activate, "moduleText"),
-	{
-	 GNOME_APP_UI_ITEM, "Lookup Selection",
-	 NULL,
-	 on_lookup_selection_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "About this module",
-	 NULL,
-	 on_about_this_module1_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
 
-GtkWidget *create_menu1(void)
-{
-	GtkWidget *menu1;
-
-	menu1 = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(menu1), "menu1", menu1);
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
-			    NULL, FALSE, 0);
-
-	gtk_widget_ref(menu1_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(menu1), "copy1",
-				 menu1_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menu1_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(menu1), "lookup_selection1",
-				 menu1_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menu1_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(menu1), "about_this_module1",
-				 menu1_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menu1_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(menu1), "separator2",
-				 menu1_uiinfo[3].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	return menu1;
-}
-*/
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
@@ -461,9 +411,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *frame2;
 	GtkWidget *vbox4;
 	GtkWidget *scrolledwindow15;
-#ifdef USE_GTKHTML
-
-#else /* !USE_GTKHTML */
+#ifndef USE_GTKHTML
 	GtkWidget *frame17;
 	GtkWidget *scrolledwindow16;
 	GtkWidget *frame18;	
@@ -1952,11 +1900,7 @@ GtkWidget *create_mainwindow(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-#ifdef USE_GTKHTML
-
-
-#else				/* !USE_GTKHTML */
-
+#ifndef USE_GTKHTML
 	frame17 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame17);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame17",
@@ -1977,9 +1921,6 @@ GtkWidget *create_mainwindow(void)
 				       (scrolledwindow16),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-
-
-
 	frame18 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame18);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame18",
@@ -2607,7 +2548,7 @@ GtkWidget *create_mainwindow(void)
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
 			   NULL);
 //-------------------------------------------------------------------------------------------
-#else
+#else /*  !USE_SHORTCUTBAR*/
 	gtk_signal_connect(GTK_OBJECT(btsText), "clicked",
 			   GTK_SIGNAL_FUNC(on_btsText_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btsComms), "clicked",

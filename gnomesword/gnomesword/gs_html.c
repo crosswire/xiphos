@@ -19,10 +19,7 @@
 #  include <config.h>
 #endif
 
-
-
 #include <gnome.h>
-
 
 #ifdef USE_GTKHTML
 #include <gtkhtml/gtkhtml.h>
@@ -88,6 +85,9 @@ on_url (GtkHTML *html, const gchar *url, gpointer data)
 				++url;
 			}
 			++url;
+			sprintf(buf,"%s",url);	
+		} else if(*url == '*') {
+			++url;
 			sprintf(buf,"%s",url);		
 		} else 
 			sprintf(buf,"Go to Reference  %s",url);
@@ -125,11 +125,21 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 static void
 on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
+	gchar *buf;
+	
 	if (*url == '#') {
 		++url;		/* remove # */
 		lookupStrongsSWORD(atoi(url));
-	} else {
-		gchar *buf;
+	} else  if(*url == '*')   {
+		++url;
+		while(*url != ']') {			
+			++url;
+		} 
+		++url;
+		buf = g_strdup(url);
+		changeVerseSWORD(buf);
+		g_free(buf);
+	}  else {		
 		buf = g_strdup(url);
 		changeVerseSWORD(buf);
 		g_free(buf);
@@ -275,7 +285,12 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
 	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);			   
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+			   
+	gtk_signal_connect (GTK_OBJECT (htmlDict), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
+	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);				   
 
 #else	/* !USE_GTKHTML */
 	GtkWidget *textComp2;
