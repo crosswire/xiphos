@@ -1,6 +1,13 @@
 2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
 
-	*release 0.4.0
+	*release 0.3.9pre1
+	*GtkHTML-0.8.0 is not required to build gnomesword
+	*but gnomesword can be built with GtkHTML
+	*gs_rwphtml.cpp works now.
+	
+
+2001-02-20 Terry Biggs <tbiggs@users.sourceforge.net>
+	
 	*GtkHTML-0.8.0 is now required to build gnomesword
 	*GtkHTML is to display Bible texts and commentaries
 	
