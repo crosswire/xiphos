@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-24 15:47-0500\n"
+"POT-Creation-Date: 2003-12-30 12:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgid "Go to "
 msgstr ""
 
 #: src/gnome2/bibletext_dialog.c:931 src/gnome2/parallel_dialog.c:535
-#: src/gnome2/toolbar_nav.c:475
+#: src/gnome2/toolbar_nav.c:488
 msgid "Romans"
 msgstr ""
 
@@ -148,8 +148,8 @@ msgstr ""
 #: src/gnome2/bibletext_menu.c:1202 src/gnome2/commentary_menu.c:1260
 #: src/gnome2/dictlex_menu.c:490 src/gnome2/editor_menu.c:103
 #: src/gnome2/editor_menu.c:178 src/gnome2/editor_menu.c:986
-#: src/gnome2/gbs_menu.c:525 src/gnome2/studypad.c:92
-#: src/gnome2/toolbar_edit.c:112
+#: src/gnome2/gbs_menu.c:525 src/gnome2/studypad.c:72
+#: src/gnome2/studypad.c:135 src/gnome2/toolbar_edit.c:112
 msgid "File"
 msgstr ""
 
@@ -418,8 +418,8 @@ msgstr ""
 msgid "Note for"
 msgstr ""
 
-#: src/gnome2/commentary_dialog.c:93 src/gnome2/studypad.c:96
-#: src/gnome2/toolbar_edit.c:116
+#: src/gnome2/commentary_dialog.c:93 src/gnome2/studypad.c:76
+#: src/gnome2/studypad.c:139 src/gnome2/toolbar_edit.c:116
 msgid "has been modified. Do you wish to save it?"
 msgstr ""
 
@@ -557,8 +557,7 @@ msgid "Undo"
 msgstr ""
 
 #: src/gnome2/editor_menu.c:1115 src/gnome2/editor_replace.c:224
-#: src/gnome2/editor_replace.c:405 src/gnome2/editor_spell.c:790
-#: src/gnome2/toolbar_edit.c:593
+#: src/gnome2/editor_replace.c:405 src/gnome2/toolbar_edit.c:593
 msgid "Replace"
 msgstr ""
 
@@ -594,44 +593,56 @@ msgstr ""
 msgid "Match Case"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:709
+#: src/gnome2/editor_spell.c:722
 msgid "Spell Checker"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:734
-msgid "Language"
+#: src/gnome2/editor_spell.c:748
+msgid "Dictionary"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:769
-msgid "Word"
+#: src/gnome2/editor_spell.c:783
+msgid "Word found"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:841
+#: src/gnome2/editor_spell.c:804
+msgid "Replace with"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:867
+msgid "Replace misspelled word with suggested word"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:881
+msgid "Replace word"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:895
+msgid "Leave word as is"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:909
+msgid "Skip Word"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:922
+msgid "Accept word for this session but do not add to dictionary"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:937
+msgid "Accept word"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:951
+msgid "Insert word into Personal Dictionary"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:965
+msgid "Insert word"
+msgstr ""
+
+#: src/gnome2/editor_spell.c:976
 msgid "Progress"
-msgstr ""
-
-#: src/gnome2/editor_spell.c:856
-msgid ""
-"Accept word\n"
-"in this section"
-msgstr ""
-
-#: src/gnome2/editor_spell.c:861
-msgid ""
-"Insert in Personal\n"
-"Dictionary"
-msgstr ""
-
-#: src/gnome2/editor_spell.c:866
-msgid ""
-"Ignore\n"
-"Word"
-msgstr ""
-
-#: src/gnome2/editor_spell.c:871
-msgid ""
-"Replace\n"
-"Word"
 msgstr ""
 
 #: src/gnome2/fileselection.c:215
@@ -928,11 +939,11 @@ msgid "_File"
 msgstr ""
 
 #: src/gnome2/main_menu.c:800
-msgid "H_istory"
+msgid "_View"
 msgstr ""
 
 #: src/gnome2/main_menu.c:806
-msgid "_View"
+msgid "Hi_story"
 msgstr ""
 
 #: src/gnome2/main_menu.c:812
@@ -957,7 +968,7 @@ msgstr ""
 #: src/gnome2/parallel_dialog.c:226 src/gnome2/parallel_dialog.c:228
 #: src/gnome2/parallel_view.c:1383 src/gnome2/parallel_view.c:1408
 #: src/gnome2/sidebar.c:785 src/gnome2/sidebar.c:800
-#: src/gnome2/toolbar_nav.c:442 src/gnome2/utilities.c:182
+#: src/gnome2/toolbar_nav.c:446 src/gnome2/utilities.c:182
 msgid "Parallel View"
 msgstr ""
 
@@ -1775,8 +1786,8 @@ msgstr ""
 msgid "_Viewer"
 msgstr ""
 
-#: src/gnome2/studypad.c:737 src/gnome2/studypad.c:749
-#: src/gnome2/studypad_dialog.c:95
+#: src/gnome2/studypad.c:784 src/gnome2/studypad.c:796
+#: src/gnome2/studypad_dialog.c:93
 msgid "StudyPad"
 msgstr ""
 
@@ -1816,16 +1827,45 @@ msgstr ""
 msgid "Check spelling in this note"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:424
+#: src/gnome2/toolbar_nav.c:428
 msgid "Dictionary/Book"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:425
+#: src/gnome2/toolbar_nav.c:429
 msgid "Toggle Dictionary View"
 msgstr ""
 
-#: src/gnome2/toolbar_nav.c:443
+#: src/gnome2/toolbar_nav.c:447
 msgid "Toggle Parallel View"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:486
+msgid "Change book of the Bible"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:501
+msgid "Change chapter"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:514
+msgid "Change verse"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:526
+msgid ""
+"Enter desired verse in 'book 1:1' format and hit return or click Goto button"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:545
+msgid "Go to verse"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:555
+msgid "Move backwards through history"
+msgstr ""
+
+#: src/gnome2/toolbar_nav.c:575
+msgid "Move foward through history"
 msgstr ""
 
 #: src/gnome2/toolbar_style.c:43

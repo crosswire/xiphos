@@ -644,10 +644,14 @@ static void on_link_activate(GtkMenuItem * menuitem,
 {
 	gint test;
 	GS_DIALOG *info;
+	GString *str;
+	
+	str = g_string_new(NULL);
+	g_string_printf(str,"<span weight=\"bold\">%s</span>",_("Add reference Link"));
 
 	info = gui_new_dialog();
 	//info->stock_icon = GTK_STOCK_ADD;
-	info->label_top = N_("<b>Add reference Link</b>");
+	info->label_top = str->str;
 	info->text1 = g_strdup("");
 	info->label1 = N_("Reference: ");
 	info->text2 = g_strdup("");
@@ -677,6 +681,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	g_free(info->text1);
 	g_free(info->text2);
 	g_free(info);
+	g_string_free(str,TRUE);
 }
 
 /******************************************************************************
