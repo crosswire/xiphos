@@ -59,6 +59,7 @@ SWDisplay *comp1Display; //--- to display modules using GtkText a verse at a tim
 SWDisplay *comp2Display; //--- to display modules using GtkText a verse at a time
 SWDisplay *comp3Display; //--- to display modules using GtkText a verse at a time
 SWDisplay *comDisplay; //--- to display modules using GtkText a verse at a time
+SWDisplay *percomDisplay; //--- to display personal comment modules using GtkText a verse at a time
 SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *BTFcomDisplay; //--- to display modules using GtkText a verse at a time
 SWDisplay *BTFsearchDisplay; //--- to display modules using GtkText a verse at a time
@@ -73,6 +74,7 @@ SWModule *comp1Mod; //-- module for first interlinear window
 SWModule *comp2Mod; //-- module for second interlinear window	
 SWModule *comp3Mod;	 //-- module for third interlinear window
 SWModule *curcomMod; //-- module for commentary  window	
+SWModule *percomMod; //-- module for personal commentary  window	
 SWModule *curdictMod; //-- module for dict window
 SWModule *searchMod; //-- module for searching and search window
 
@@ -97,11 +99,12 @@ gint curVerse =28;	//-- keep up with current verse
 
 
 gboolean file_changed = false;	//-- set to true if text is study pad has changed - and file is not saved
-gchar options[11][80],	//-- array to store a number of setting - read in form file when program starts - saved to file at normal shut down
+gchar options[16][80],	//-- array to store a number of setting - read in form file when program starts - saved to file at normal shut down
 		 bmarks[50][80];	//-- array to store bookmarks - read in form file when program starts - saved to file after edit
 GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
-				*footnotes,	//-- widget to access toggle menu - for footnotes
-				*notepage;	//-- widget to access toggle menu - for interlinear notebook page
+						*footnotes,	//-- widget to access toggle menu - for footnotes
+						*notepage,	//-- widget to access toggle menu - for interlinear notebook page
+						*autosaveitem; //-- widget to access toggle menu - for personal comments auto save
 			
 extern gint ibookmarks;	//-- number of items in bookmark menu
 extern GdkColor myGreen; //-- current verse color
@@ -119,12 +122,14 @@ initSword(GtkWidget *mainform,  //-- app's main form
 				GtkWidget *menu2,  //-- 1st inetrlinear window's popup menu
 				GtkWidget *menu3,  //-- 2nd inetrlinear window's popup menu
 				GtkWidget *menu4,  //-- 3rd inetrlinear window's popup menu
-				GtkWidget *menu5) //-- bookmark button popup menu
+				GtkWidget *menu5) //-- edit note wintow popup menu
 {
 	ModMap::iterator it; //-- iteratior
 	SectionMap::iterator sit; //-- iteratior
 	ConfigEntMap::iterator eit; //-- iteratior
-	int pg=0; //-- notebook page number - for creating notebook pages
+	int pg=0, //-- notebook page number - for creating notebook pages
+			pg1=0, //-- notebook page number - for creating notebook pages
+	    pg2=0; //-- notebook page numger
 	GtkWidget  *empty_notebook_page, //-- used to create new pages
 					*notebook, //-- to access notebooks for adding pages
 					*menuChoice, //-- gtk menu item
@@ -132,7 +137,6 @@ initSword(GtkWidget *mainform,  //-- app's main form
 					*menuChoice1, //-- gtk menu item
 					*label, //-- labels for adding notebook pages
 					*menu; //-- ??
-	int 			pg2=0; //-- notebook page numger
 				//iBibletext=0; //--
 	char          menuName[64], //--  for menu item label
 					menuName1[64], //--  for menu item label
@@ -168,13 +172,13 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	dictDisplay   	   = 0;// set in create
 	BTFcomDisplay = 0; // set in create
 	BTFsearchDisplay =0; // set in create
-
+  percomDisplay   	  = 0;// set in create
 
 //	gtk_rc_parse( "gsword.rc" );
 
-  myGreen.red = 0x0000; //-- set color for current verse
-	myGreen.green = 0xbbbb;
-	myGreen.blue = 0x0000;
+  myGreen.red = strtol(options[11], NULL, 0); //-- set color for current verse
+	myGreen.green = strtol(options[12], NULL, 0);
+	myGreen.blue =  strtol(options[13], NULL, 0);
 	
 	MainFrm = lookup_widget(mainform,"mainwindow"); //-- save mainform for use latter
 
@@ -182,8 +186,9 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	GTKEntryDisp::__initialize();
 	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
 	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
-	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textComments"));
-	BTFcomDisplay = new  GTKInterlinearDisp(lookup_widget(mainform,"textComments"));
+	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
+	percomDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textComments"));
+	BTFcomDisplay = new  GTKInterlinearDisp(lookup_widget(mainform,"textCommentaries"));
 	comp1Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp1"));
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
@@ -194,6 +199,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComp2")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComp3")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textDict")) , TRUE );
+	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textCommentaries")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(mainform,"text3")) , TRUE );
   //------------------------------------------------------------------ store text widgets for spell checker
@@ -204,7 +210,7 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) 
 	{
 
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) 
+		if (!strcmp((*it).second->Type(), "Biblical Texts"))
 		{
 			curMod = (*it).second;
 			 //------------------------------------------------------------------ add to menubar
@@ -220,17 +226,33 @@ initSword(GtkWidget *mainform,  //-- app's main form
 		{
 			//------------------------------------------------------------------ set commentary modules and add to notebook
 			if (!strcmp((*it).second->Type(), "Commentaries"))
-			{
-				curcomMod = (*it).second;
-				notebook = lookup_widget(mainform,"notebook1");
-				empty_notebook_page = gtk_vbox_new (FALSE, 0);
+			{ 	
+				if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles")
+				{
+				 	percomMod = (*it).second;
+				 	percomMod->Disp(percomDisplay);	
+				 	additemtopopupmenu(MainFrm, menu5, percomMod->Name(), (GtkMenuCallback)on_change_module_activate);
+				 	if(!strcmp(percomMod->Name(),"-+*Terry*+-"))
+				 	{
+  					
+					} 								
+				} 				
+				else
+				{
+					curcomMod = (*it).second;
+					notebook = lookup_widget(mainform,"notebook1");
+					empty_notebook_page = gtk_vbox_new (FALSE, 0);
   				gtk_widget_show (empty_notebook_page);
   				gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
-				label = gtk_label_new (curcomMod->Name());
+					label = gtk_label_new (curcomMod->Name());
 			    gtk_widget_show (label);
-				gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg++), label);
-				if(strcmp(curcomMod->Name(),"Family")) curcomMod->Disp(comDisplay);
-				else curcomMod->Disp(BTFcomDisplay);
+					gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg1++), label);
+				
+					if(!strcmp(curcomMod->Name(),"Family"))
+						curcomMod->Disp(BTFcomDisplay);
+					else
+						curcomMod->Disp(comDisplay);
+				}
 			}	
 			//------------------------------------------------------------------ set dictionary modules and add to notebook
 			if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries"))
@@ -328,8 +350,15 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                       GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                       NULL);
-	
-
+	//---------------------------------------------------------------- set personal commets notebook label and display module
+	if(percomMod)
+	{
+		notebook = lookup_widget(mainform,"notebook3");
+		label = gtk_label_new (percomMod->Name());
+		gtk_widget_show (label);
+		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label);
+		percomMod->Display();
+	}
 	//--------------------------------------------- use module in options list to set main window text module
 	it = mainMgr->Modules.find(options[1]); 
 	if (it != mainMgr->Modules.end()) 
@@ -358,15 +387,17 @@ initSword(GtkWidget *mainform,  //-- app's main form
 	}
 
 	//-------------------------------------------------------- Add options to Options Menu and get toggle item widget
+	autosaveitem = additemtooptionmenu(MainFrm, "_Settings/", "Auto Save Personal Comments", (GtkMenuCallback)on_auto_save_notes1_activate);
 	notepage  = additemtooptionmenu(MainFrm, "_Settings/", "Show Interlinear Page", (GtkMenuCallback)on_show_interlinear_page1_activate);
 	versestyle = additemtooptionmenu(MainFrm, "_Settings/", "Verse Style", (GtkMenuCallback)on_verse_style1_activate);
 	footnotes   = additemtooptionmenu(MainFrm, "_Settings/", "Show Footnotes", (GtkMenuCallback)on_footnotes1_activate);
-
+ 	
 	//-------------------------------------------------------------- attach popup menus
 	gnome_popup_menu_attach(menu1,lookup_widget(mainform,"moduleText"),"1");
 	gnome_popup_menu_attach(menu2,lookup_widget(mainform,"textComp1"),"1");
 	gnome_popup_menu_attach(menu3,lookup_widget(mainform,"textComp2"),"1");
 	gnome_popup_menu_attach(menu4,lookup_widget(mainform,"textComp3"),"1");
+	gnome_popup_menu_attach(menu5,lookup_widget(mainform,"textComments"),"1");	
 
 	loadbookmarks(MainFrm); //--------------------------------- add bookmarks to menubar
   changeVerse(options[9]); //-------------------------------------------------- set Text
@@ -467,13 +498,19 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 		}
 		else
 		{
-			if(curcomMod)
-			{	
-				curcomMod->SetKey(keyText.c_str());
-				curcomMod->Display();
-				noteModified = false; //-- we just loaded comment so it is not modified		
-			}
-		}	
+		 	if(percomMod)
+		 	{
+		 	  percomMod->SetKey(keyText.c_str());
+				percomMod->Display();
+				noteModified = false; //-- we just loaded comment so it is not modified	
+		 	}
+		}
+		if(curcomMod)
+		{	
+			curcomMod->SetKey(keyText.c_str());
+			curcomMod->Display();
+			//noteModified = false; //-- we just loaded comment so it is not modified		
+		}  		
 	ApplyChange = TRUE;	
 }
 
@@ -557,6 +594,16 @@ UpdateChecks(GtkWidget *mainform) //-- update chech menu items and toggle button
 	{
 		GTK_CHECK_MENU_ITEM (notepage)->active = FALSE; //-- keep toggle interlinear page off
 		gtk_widget_hide(lookup_widget(mainform,"vbox3"));		
+	}	
+	if(options[14][0] == 'T')	//---------------------------- set interlinear page to last setting
+	{
+		GTK_CHECK_MENU_ITEM (autosaveitem)->active = TRUE; //-- keep toggle interlinear page on
+		autoSave = true;
+	}
+	if(options[14][0] == 'F')
+	{
+		GTK_CHECK_MENU_ITEM (autosaveitem)->active = FALSE; //-- keep toggle interlinear page off
+		autoSave = false;	
 	}
 	if(options[6][0] == 'T')	//--------------------------- set Strong's numbers to last setting
 	{	
@@ -990,17 +1037,12 @@ verseSWORD(void)  //-- someone clicked the verse spin button
 void
 btnlookupSWORD(void)  //-- add current verse to history menu
 {
-/*	gchar    *bookname,
-				ref[255];
-	gint       iVerse,
-				iChap;
+	gchar *buf; //-- pointer to entry string
 
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook")));
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")));
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse")));
-	sprintf(ref,"%s %d:%d",bookname, iChap,iVerse );
-	changeVerse(ref);	 */
-	addHistoryItem();
+	ApplyChange = FALSE;	//-- do not want to start loop with book combo box
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
+	changeVerse(buf);	//-- change verse to entry text
+	addHistoryItem(); //-- verse to history menu
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1025,7 +1067,8 @@ changcurcomModSWORD(gchar *modName)  //-- someone changed commentary notebook pa
 	ModMap::iterator it;
 	GtkWidget *toolbar; //-- pointer to edit note toolbar
 
-	toolbar = lookup_widget(MainFrm,"handlebox16"); //-- get toolbar  	
+//	toolbar = lookup_widget(MainFrm,"handlebox16"); //-- get toolbar  	
+//  if(noteModified) savenoteSWORD(noteModified);  //-- if personal comments changed save changes
 
 	it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
 	if (it != mainMgr->Modules.end()) 
@@ -1035,7 +1078,7 @@ changcurcomModSWORD(gchar *modName)  //-- someone changed commentary notebook pa
 		curcomMod->Display(); //-- show the change
 	}	
 	//-- do we need to show edit toolbar for notes
-	if ((*mainMgr->config->Sections[curcomMod->Name()].find("ModDrv")).second == "RawFiles") //-- check for personal comments
+/*	if ((*mainMgr->config->Sections[curcomMod->Name()].find("ModDrv")).second == "RawFiles") //-- check for personal comments
 	{                                                                                        //-- by finding ModDrv=RawFiles
 		gtk_widget_show (toolbar); //-- if personal comments show edit toolbar
 		if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) //-- test for edit mode
@@ -1051,7 +1094,8 @@ changcurcomModSWORD(gchar *modName)  //-- someone changed commentary notebook pa
 	{
 		gtk_widget_hide(toolbar); //-- if not personal comments hide edit toolbar
 		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes")); //-- hide comments statusbar we are not using a personal module
-	}  	
+	}
+	*/ 	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1062,7 +1106,7 @@ editnoteSWORD(bool editbuttonactive) //-- someone clicked the note edit button
 	{
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), TRUE); //-- set text widget to editable	
 		gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
-		noteModified = FALSE;	
+		noteModified = FALSE;	 //-- we just turned edit mode on no changes yet
 	}
 	else
 	{
@@ -1070,7 +1114,7 @@ editnoteSWORD(bool editbuttonactive) //-- someone clicked the note edit button
 		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
 		//if(noteModified) ;
 	}
-	curcomMod->Display();
+	percomMod->Display();
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1084,15 +1128,8 @@ savenoteSWORD(bool noteModified) //-- save personal comments
 		GtkWidget *text; //-- pointer to commentary text widget
 		
 		text = lookup_widget(MainFrm,"textComments"); //-- get text widget
-		
-		//-- we need to remove the [module name][book 1:1] from the text
-		/*
-		buf = strrchr(gtk_editable_get_chars((GtkEditable *)text,0,-1),']'); //-- return first ']' - we don't want it or anything before it - this removes the name of the text module
-		buf = strrchr(gtk_editable_get_chars((GtkEditable *)text,0,-1),']'); //-- return second ']' - we don't want it or anything before it - this removes the verse reference
-		buf = strchr(buf,' '); //-- remove the leading space if we don't it will grow
-		*/
 		buf = gtk_editable_get_chars((GtkEditable *)text,0,-1); //-- get comments from text widget
-		*curcomMod << (const char *)buf; //-- save note!
+		*percomMod << (const char *)buf; //-- save note!
 		noteModified = false; //-- we just saved the note so it has not been modified
 	} 	
 }
@@ -1105,13 +1142,13 @@ deletenoteSWORD(void)  //-- delete personal comment
 		gchar *buf;
 		
 		//-- first we clear the note window
-		gtk_text_set_point(GTK_TEXT(lookup_widget(MainFrm,"textComments")), 0);
-		gtk_text_forward_delete(GTK_TEXT(lookup_widget(MainFrm,"textComments")),
+		gtk_text_set_point(GTK_TEXT(lookup_widget(MainFrm,"textComments")), 0); //-- start clearing at beginning of text widget
+		gtk_text_forward_delete(GTK_TEXT(lookup_widget(MainFrm,"textComments")), //-- delete from beginning to end
 							 gtk_text_get_length(GTK_TEXT(lookup_widget(MainFrm,"textComments"))));
 							
 		//-- then we delete the note	
-		curcomMod->Delete();        //-- delete note
-		curcomMod->Display();        //-- show change
+		percomMod->Delete();        //-- delete note
+		percomMod->Display();        //-- show change
 }
 
 //-------------------------------------------------------------------------------------------
@@ -1150,27 +1187,64 @@ dictSearchTextChangedSWORD(char* mytext)   //-- dict lookup text changed
 
 //-------------------------------------------------------------------------------------------
 void
-setsensitive(bool editbtnactive)
-{	/*
- 	GtkWidget	*save,
- 						*cut,
- 						*spell;
- 	save = lookup_widget(MainFrm,"btnSaveNote");
- 	cut = lookup_widget(MainFrm,"btnDeleteNote");
- 	spell = lookup_widget(MainFrm,"btnSpellNotes");
- 	if(editbtnactive)
- 	{
- 		gtk_widget_set_sensitive (save, TRUE);
- 		gtk_widget_set_sensitive (cut, TRUE);
- 		gtk_widget_set_sensitive (spell, TRUE); 	
- 	}
- 	else
- 	{
- 		gtk_widget_set_sensitive(save, FALSE);
- 		gtk_widget_set_sensitive(cut, FALSE);
- 		gtk_widget_set_sensitive(spell, FALSE);
-  }
-*/
+changepercomModSWORD(gchar* modName)   //-- change personal comments module
+{	
+	GtkWidget *notebook, //-- pointer to a notebook widget
+						*label;    //-- pointer to a label widget
+	ModMap::iterator it; //-- module iterator
+	
+  if(noteModified) savenoteSWORD(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
+	it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
+	if (it != mainMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
+	{
+		percomMod = (*it).second;  //-- set curcomMod to modName
+		percomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
+		percomMod->Display(); //-- show the change
+	}	
+	//-- let's change the notebook label to match our percomMod (current personal comments module)
+  notebook = lookup_widget(MainFrm,"notebook3");  //-- get the notebook our page is in]
+	label = gtk_label_new (percomMod->Name());   //-- create new label with mod name as the text
+	gtk_widget_show (label);   //-- make is visible
+	gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), 1), label); //-- put label on personal comments page
+}
+
+//-------------------------------------------------------------------------------------------
+void
+setcurrentversecolor(gint arg1, gint arg2, gint arg3)    //-- someone change the color setting for the current verse
+{
+ 	gchar buf[10]; //-- temp storage for args
+ 	
+  //-- set color for current session
+	myGreen.red = arg1;  //-- new red setting
+	myGreen.green = arg2;//-- new green setting
+	myGreen.blue = arg3; //-- new blue setting
+	
+	//-- save setting for next session
+	sprintf(buf,"0x%x",myGreen.red);    //-- convert hex integer to string
+	sprintf(options[11],"%s",buf);    //-- add string to options array
+	sprintf(buf,"0x%x",myGreen.green);  //-- convert hex integer to string
+	sprintf(options[12],"%s",buf);    //-- add string to options array
+	sprintf(buf,"0x%x",myGreen.blue);   //-- convert hex integer to string
+	sprintf(options[13],"%s",buf);    //-- add string to options array
+	
+	//saveoptions(); //-- save change to file
+	curMod->Display(); //-- display change
+}
+
+//-------------------------------------------------------------------------------------------
+void
+setautosave(gboolean choice)    //-- someone clicked auto save personal  comments
+{
+	if(choice) //-- if choice was to autosave
+	{
+		autoSave = true;
+		strcpy(options[14], "TRUE");
+	}
+	else      //-- if choice was not to autosave
+	{
+		autoSave = false;
+		strcpy(options[14], "FALSE");
+	}
 }
 
 
