@@ -147,8 +147,8 @@ void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
 	if(d) {
-		gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
-				      page_num);
+		gtk_notebook_set_page(GTK_NOTEBOOK(
+				widgets.notebook_dict), page_num);
 		gtk_entry_set_text(GTK_ENTRY(d->entry), key);
 	}
 }
@@ -289,40 +289,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	dict_last_page = page_num;
 	widgets.html_dict = d->html;
 }
-/******************************************************************************
- * Name
- *   list_selection_changed
- *
- * Synopsis
- *   #include "gui/dictlex.h"
- *
- *   void list_selection_changed(GtkTreeSelection * selection,
- *		      GtkWidget * tree_widget)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
 
-static void list_selection_changed(GtkTreeSelection * selection,
-				   DL_DATA * d)
-{
-	GtkTreeIter selected;
-	gchar *buf = NULL;
-	GtkTreeModel *model ;
-	
-
-	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
-		return;
-
-	gtk_tree_model_get(model, &selected, 0, &buf, -1);
-	if (buf) {
-		gtk_entry_set_text(GTK_ENTRY(d->entry), buf);
-		g_free(buf);
-	}
-}
 
 /******************************************************************************
  * Name
@@ -480,10 +447,23 @@ static gint html_button_pressed(GtkWidget * html,
 static gint list_button_released(GtkWidget * html,
 				GdkEventButton * event, DL_DATA * d)
 {
+	GtkTreeSelection* selection;
+	GtkTreeIter selected;
+	gchar *buf = NULL;
+	GtkTreeModel *model ;
+	
+	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(d->listview));
+                        
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+		return;
+	
 	switch (event->button) {
 	case 1:
-		list_selection_changed((GtkTreeSelection*)d->mod_selection, d);
-	 	
+		gtk_tree_model_get(model, &selected, 0, &buf, -1);
+		if (buf) {
+			gtk_entry_set_text(GTK_ENTRY(d->entry), buf);
+			g_free(buf);
+		}	 	
 		break;
 	case 2:
 	case 3:
@@ -595,10 +575,6 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dl->listview),
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(dl->listview));
-	/*
-	dl->mod_selection = G_OBJECT(gtk_tree_view_get_selection
-		     (GTK_TREE_VIEW(dl->listview)));
-	*/	     
 		     
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_show(frameDictHTML);
@@ -727,7 +703,6 @@ gint gui_setup_dictlex(GList * mods)
 	GList *tmp = NULL;
 	gchar *modname;
 	gchar *modbuf;
-//      gchar *keybuf;
 	DL_DATA *dl;
 	gint count = 0;
 
@@ -740,7 +715,7 @@ gint gui_setup_dictlex(GList * mods)
 		dl = g_new0(DL_DATA, 1);
 		dl->frame = NULL;
 		dl->mod_num = count;
-		dl->mod_name = modname;	//g_strdup(modname);
+		dl->mod_name = modname;	
 		dl->search_string = NULL;
 		dl->key = NULL;
 		dl->cipher_key = NULL;
@@ -770,9 +745,15 @@ gint gui_setup_dictlex(GList * mods)
 			   (on_notebook_dictlex_switch_page), dl_list);
 
 	modbuf = g_strdup(settings.DictWindowModule);
-
-	set_page_dictlex(modbuf, dl_list);
-
+	if(modbuf) {
+		if(check_for_module(modbuf))
+			set_page_dictlex(modbuf, dl_list);
+		else if(check_for_module(dl->mod_name))
+			set_page_dictlex(dl->mod_name, dl_list);
+	}
+	else 
+		if(check_for_module(dl->mod_name))
+			set_page_dictlex(dl->mod_name, dl_list);
 	g_free(modbuf);
 	g_list_free(tmp);
 	number_of_dictionaries = count;

@@ -107,7 +107,6 @@ GList *get_list(gint type)
 
 void init_lists(void)
 {
-	guint number_mods = 0;
 	char *buf = NULL;
 	NAME_TYPE *nt, innt;
 
@@ -215,33 +214,23 @@ void init_lists(void)
 
 	backend_delete_module_mgr();
 
-	if (mods.biblemods != NULL)
-		settings.havebible = TRUE;
-	number_mods = g_list_length(mods.biblemods);
-	g_print("\nNumber of Text modules = %d\n", number_mods);
+	settings.havebible = g_list_length(mods.biblemods);
+	g_print("\nNumber of Text modules = %d\n", settings.havebible);
+	
+	settings.havecomm = g_list_length(mods.commentarymods);
+	g_print("Number of Commentary modules = %d\n", settings.havecomm);
 
-	if (mods.commentarymods != NULL)
-		settings.havecomm = TRUE;
-	number_mods = g_list_length(mods.commentarymods);
-	g_print("Number of Commentary modules = %d\n", number_mods);
+	settings.havedict = g_list_length(mods.dictionarymods);
+	g_print("Number of Dict/lex modules = %d\n", settings.havedict);
 
-	if (mods.dictionarymods != NULL)
-		settings.havedict = TRUE;
-	number_mods = g_list_length(mods.dictionarymods);
-	g_print("Number of Dict/lex modules = %d\n", number_mods);
+	settings.havebook = g_list_length(mods.bookmods);
+	g_print("Number of Book modules = %d\n", settings.havebook);
 
-	if (mods.bookmods != NULL)
-		settings.havebook = TRUE;
-	number_mods = g_list_length(mods.bookmods);
-	g_print("Number of Book modules = %d\n", number_mods);
+	settings.havepercomm = g_list_length(mods.percommods);
+	g_print("Number of Percomm modules = %d\n", settings.havepercomm);
 
-	if (mods.percommods != NULL)
-		settings.havepercomm = TRUE;
-	number_mods = g_list_length(mods.percommods);
-	g_print("Number of Percomm modules = %d\n", number_mods);
-
-	number_mods = g_list_length(mods.devotionmods);
-	g_print("Number of Devotion modules = %d\n\n", number_mods);
+	g_print("Number of Devotion modules = %d\n\n", 
+					g_list_length(mods.devotionmods));
 }
 
 void shutdown_list(void)

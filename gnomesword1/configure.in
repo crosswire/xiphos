@@ -1,6 +1,6 @@
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev14)
+AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev15)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
@@ -68,12 +68,12 @@ if test x$enable_debug = xyes; then
 fi
 
 
-AC_ARG_ENABLE(spell_check,[--enable-spell_check enable spell_check],spell_check=$enableval,spell_check="no") 
+dnl AC_ARG_ENABLE(spell_check,[--enable-spell_check enable spell_check],spell_check=$enableval,spell_check="no") 
 
 PSPELL_LIBS=""
 AC_SUBST(PSPELL_LIBS)
 
-if test "x$spell_check" = xyes; then
+dnl if test "x$spell_check" = xyes; then
   AC_MSG_CHECKING([for pspell]) 
   pspell_dirs="${prefix}/bin $ac_pspell_dir/bin /usr/bin /usr/local/bin /opt/bin" 
   AC_FIND_FILE(pspell-compat-config, $pspell_dirs, pspell_dir) 
@@ -100,7 +100,7 @@ if test "x$spell_check" = xyes; then
       echo "found pspell-config"
     fi
   fi
-fi
+dnl fi
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
 if test "x${prefix}" = "xNONE"; then

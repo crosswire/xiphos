@@ -349,6 +349,8 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		if (settings.havedict) {
 			page_num =
 			    get_module_number(module_name, DICT_MODS);
+			if(page_num == -1)
+				page_num == 0;
 			gui_set_dictionary_page_and_key(page_num, key);
 		}
 		break;

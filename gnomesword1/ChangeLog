@@ -1,3 +1,12 @@
+2003-11-25  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev15
+	* configure enables spellchecking if it finds pspell.
+	* studypad chrash on open is fixed again.
+	* if there are no modules of a type the pane for that type will
+	  be hidden.
+
+
 2003-11-24  Terry <tbiggs@users.sf.net>
 
 	* removed gnome2/shortcutbar.h it was no longer needed
