@@ -1,11 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                                     gs_gui_cb.c
-                             -------------------
-Mon May 8 2000
-copyright (C) 2000 by Terry Biggs
-tbiggs@users.sourceforge.net
- ***************************************************************************/
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_gui_cb.c
+    * -------------------
+    * Mon May 8 2000
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+ */
 
 /*   
  *  This program is free software; you can redistribute it and/or modify

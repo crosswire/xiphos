@@ -33,7 +33,7 @@
 #include <unistd.h>
 #include <unixstr.h>
 #endif
- 
+
 #include <gnome.h>
 #include <swmodule.h>
 #include <swmgr.h>
@@ -65,7 +65,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
 	SWMgr *Mgr;
-  	
+
 	Mgr = new SWMgr();	//-- create sword mgr
 	font = "Roman";
 	buf = (char *) imodule.Description();
@@ -106,7 +106,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 		g_string_free(strbuf, TRUE);
 	}
 	endHTML(GTK_WIDGET(gtkText));
-	delete Mgr; 
+	delete Mgr;
 	return 0;
 }
 
@@ -126,23 +126,34 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	ConfigEntMap::iterator entry;
 
 	Mgr = new SWMgr();	//-- create sword mgr
-	
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
-		ConfigEntMap &section = (*sit).second;
-		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
-		swfontsize = ((entry = section.find("Font size")) != section.end()) ? (*entry).second : (string) "";
-		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
-	} 
+
+	if ((sit =
+	     Mgr->config->Sections.find(imodule.Name())) !=
+	    Mgr->config->Sections.end()) {
+		ConfigEntMap & section = (*sit).second;
+		swfont =
+		    ((entry =
+		      section.find("Font")) !=
+		     section.end())? (*entry).second : (string) "";
+		swfontsize =
+		    ((entry =
+		      section.find("Font size")) !=
+		     section.end())? (*entry).second : (string) "";
+		lang =
+		    ((entry =
+		      section.find("Lang")) !=
+		     section.end())? (*entry).second : (string) "";
+	}
 	font = g_strdup("-adobe-helvetica-*-*");
-	if(strcmp(swfontsize.c_str(),"")){
-		use_font_size = (gchar*)swfontsize.c_str();
-	}else{ 
+	if (strcmp(swfontsize.c_str(), "")) {
+		use_font_size = (gchar *) swfontsize.c_str();
+	} else {
 		use_font_size = settings->bible_font_size;
 	}
-	if(strcmp(swfont.c_str(),"")){
-		use_font = (gchar*)swfont.c_str();
-	}else{
-		font = g_strdup(settings->default_font);	
+	if (strcmp(swfont.c_str(), "")) {
+		use_font = (gchar *) swfont.c_str();
+	} else {
+		font = g_strdup(settings->default_font);
 		use_font = gethtmlfontnameHTML(font);
 	}
 	(const char *) imodule;	/* snap to entry */
@@ -205,35 +216,46 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
 	//c = 182;  
- 	Mgr = new SWMgr();	//-- create sword mgr
+	Mgr = new SWMgr();	//-- create sword mgr
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(settings->app, "nbText")), 1);
-	
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
-		ConfigEntMap &section = (*sit).second;
-		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
-		swfontsize = ((entry = section.find("Font size")) != section.end()) ? (*entry).second : (string) "";
-		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
-	} 
+
+	if ((sit =
+	     Mgr->config->Sections.find(imodule.Name())) !=
+	    Mgr->config->Sections.end()) {
+		ConfigEntMap & section = (*sit).second;
+		swfont =
+		    ((entry =
+		      section.find("Font")) !=
+		     section.end())? (*entry).second : (string) "";
+		swfontsize =
+		    ((entry =
+		      section.find("Font size")) !=
+		     section.end())? (*entry).second : (string) "";
+		lang =
+		    ((entry =
+		      section.find("Lang")) !=
+		     section.end())? (*entry).second : (string) "";
+	}
 	font = g_strdup("-adobe-helvetica-*-*");
-	if(strcmp(swfontsize.c_str(),"")){
-		use_font_size = (gchar*)swfontsize.c_str();
-	}else{ 
+	if (strcmp(swfontsize.c_str(), "")) {
+		use_font_size = (gchar *) swfontsize.c_str();
+	} else {
 		use_font_size = settings->bible_font_size;
 	}
-	if(strcmp(swfont.c_str(),"")){
-		use_font = (gchar*)swfont.c_str();
-	}else{
-		if (!stricmp(lang.c_str(), "") || 
-				!stricmp(lang.c_str(), "en") || 
-					!stricmp(lang.c_str(), "de" )) {
-			font = g_strdup(settings->default_font);		
-		}else if (!stricmp(lang.c_str(), "grc")) {
-			font = g_strdup(settings->greek_font);		
-		}else if (!stricmp(lang.c_str(), "he")) {
-			font = g_strdup(settings->hebrew_font);		
-		}else{
-			font = g_strdup(settings->unicode_font);		
+	if (strcmp(swfont.c_str(), "")) {
+		use_font = (gchar *) swfont.c_str();
+	} else {
+		if (!stricmp(lang.c_str(), "") ||
+		    !stricmp(lang.c_str(), "en") ||
+		    !stricmp(lang.c_str(), "de")) {
+			font = g_strdup(settings->default_font);
+		} else if (!stricmp(lang.c_str(), "grc")) {
+			font = g_strdup(settings->greek_font);
+		} else if (!stricmp(lang.c_str(), "he")) {
+			font = g_strdup(settings->hebrew_font);
+		} else {
+			font = g_strdup(settings->unicode_font);
 		}
 		use_font = gethtmlfontnameHTML(font);
 	}
@@ -264,7 +286,8 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-		sprintf(tmpBuf, "<font face=\"%s\" color=\"%s\" size=\"%s\">",
+		sprintf(tmpBuf,
+			"<font face=\"%s\" color=\"%s\" size=\"%s\">",
 			use_font, versecolor, use_font_size);
 		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
@@ -273,9 +296,9 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 		displayHTML(GTK_WIDGET(gtkText), (const char *) imodule,
 			    strlen((const char *) imodule));
 		if (settings->versestyle) {
-			if(strstr((const char *) imodule, "<BR>") == NULL){
+			if (strstr((const char *) imodule, "<BR>") == NULL) {
 				sprintf(tmpBuf, " %s", "</font><br>");
-			}else{
+			} else {
 				sprintf(tmpBuf, " %s", "</font>");
 			}
 		} else
@@ -314,57 +337,67 @@ char InterlinearDisp::Display(SWModule & imodule)
 	SWMgr *Mgr;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
-	static gint row=1;
-	
+	static gint row = 1;
+
 	Mgr = new SWMgr();	//-- create sword mgr
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(settings->app, "nbText")), 1);
-	
-	if ((sit = Mgr->config->Sections.find(imodule.Name())) != Mgr->config->Sections.end()) {
-		ConfigEntMap &section = (*sit).second;
-		swfont = ((entry = section.find("Font")) != section.end()) ? (*entry).second : (string) "";
-		swfontsize = ((entry = section.find("Font size")) != section.end()) ? (*entry).second : (string) "";
-		lang = ((entry = section.find("Lang")) != section.end()) ? (*entry).second : (string) "";
-	} 
-	if(strcmp(swfontsize.c_str(),"")){
-		use_font_size = (gchar*)swfontsize.c_str();
-	}else{ 
+
+	if ((sit =
+	     Mgr->config->Sections.find(imodule.Name())) !=
+	    Mgr->config->Sections.end()) {
+		ConfigEntMap & section = (*sit).second;
+		swfont =
+		    ((entry =
+		      section.find("Font")) !=
+		     section.end())? (*entry).second : (string) "";
+		swfontsize =
+		    ((entry =
+		      section.find("Font size")) !=
+		     section.end())? (*entry).second : (string) "";
+		lang =
+		    ((entry =
+		      section.find("Lang")) !=
+		     section.end())? (*entry).second : (string) "";
+	}
+	if (strcmp(swfontsize.c_str(), "")) {
+		use_font_size = (gchar *) swfontsize.c_str();
+	} else {
 		use_font_size = settings->interlinear_font_size;
 	}
 	font = g_strdup("-adobe-helvetica-*-*");
-	if(strcmp(swfont.c_str(),"")){
-		use_font = (gchar*)swfont.c_str();
-	}else{
+	if (strcmp(swfont.c_str(), "")) {
+		use_font = (gchar *) swfont.c_str();
+	} else {
 		font = "-adobe-helvetica-*-*";
-		if (!stricmp(lang.c_str(), "") || 
-				!stricmp(lang.c_str(), "en") || 
-					!stricmp(lang.c_str(), "de" )) {
-			font = g_strdup(settings->default_font);		
-		}else if (!stricmp(lang.c_str(), "grc")) {
-		font = g_strdup(settings->greek_font);		
-		}else if (!stricmp(lang.c_str(), "he")) {
-		font = g_strdup(settings->hebrew_font);		
-		}else{
-		font = g_strdup(settings->unicode_font);		
+		if (!stricmp(lang.c_str(), "") ||
+		    !stricmp(lang.c_str(), "en") ||
+		    !stricmp(lang.c_str(), "de")) {
+			font = g_strdup(settings->default_font);
+		} else if (!stricmp(lang.c_str(), "grc")) {
+			font = g_strdup(settings->greek_font);
+		} else if (!stricmp(lang.c_str(), "he")) {
+			font = g_strdup(settings->hebrew_font);
+		} else {
+			font = g_strdup(settings->unicode_font);
 		}
 		use_font = gethtmlfontnameHTML(font);
 	}
-	if(row == 6) 
+	if (row == 6)
 		row = 1;
-	if(row == 1|| row == 3||row==5)
+	if (row == 1 || row == 3 || row == 5)
 		rowcolor = "#F1F1F1";
 	else
 		rowcolor = settings->bible_bg_color;
 	(const char *) imodule;
-	if(row == 1){
-	sprintf(tmpBuf,
-		"<i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i>",
-		settings->bible_verse_num_color,
-		settings->verse_num_font_size,
-		imodule.KeyText());
-	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
-	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
-	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);	
+	if (row == 1) {
+		sprintf(tmpBuf,
+			"<i><FONT COLOR=\"%s\" SIZE=\"%s\">[%s]</font></i>",
+			settings->bible_verse_num_color,
+			settings->verse_num_font_size, imodule.KeyText());
+		utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
+		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
+		displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	}
 	++row;
 	sprintf(tmpBuf,
@@ -374,14 +407,12 @@ char InterlinearDisp::Display(SWModule & imodule)
 		imodule.Description(),
 		settings->bible_verse_num_color,
 		settings->verse_num_font_size,
-		imodule.Name(), 
-		settings->bible_verse_num_color);
+		imodule.Name(), settings->bible_verse_num_color);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 
-	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">",
-		use_font, use_font_size); //, settings->interlinear_font_size);
+	sprintf(tmpBuf, "<font face=\"%s\" size=\"%s\">", use_font, use_font_size);	//, settings->interlinear_font_size);
 	utf8str = e_utf8_from_gtk_string(gtkText, tmpBuf);
 	utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
@@ -556,31 +587,23 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	/* let's find out if we have a comment or dict module */
 	it = mainMgr->Modules.find(imodule.Name());
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* else just the keytext */
-	if (
-	    ((*mainMgr->
-	      config->Sections[imodule.Name()].find("ModDrv")).second ==
-	     "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
+	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	/* check for personal comments by finding ModDrv=RawFiles */
 	    (GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)) {	/* check for edit mode */
 		GtkWidget *statusbar;	/* pointer to comments statusbar */
 		gint context_id2;	/* statusbar context_id ??? */
 		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	/* add module name and verse to edit note statusbar */
 		/* setup statusbar for personal comments */
 		statusbar = lookup_widget(MainFrm, "sbNotes");	/*        get stutusbar */
-		context_id2 =
-		    gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),
-						 "GnomeSword");	/* get context id */
+		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");	/* get context id */
 		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	/* ready status */
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);	/* show modName and verse ref in statusbar */
-		gtk_text_insert(GTK_TEXT(gtkText), sword_font,
-				&gtkText->style->black, NULL, " ", -1);	/* change font color to black for editing */
+		gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, " ", -1);	/* change font color to black for editing */
 		gtk_text_set_point(GTK_TEXT(gtkText), 0);
 		gtk_text_forward_delete(GTK_TEXT(gtkText),
-					gtk_text_get_length(
-							    (GTK_TEXT
+					gtk_text_get_length((GTK_TEXT
 							     (gtkText))));
 	} else {		/* not useing personal comment module in edit mode */
-		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL,
-				tmpBuf, -1);	/* show modName and verse ref in text widget */
+		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);	/* show modName and verse ref in text widget */
 	}
 	/* show module text for current key */
 	gtk_text_insert(GTK_TEXT(gtkText), sword_font,
@@ -590,55 +613,5 @@ char GTKPerComDisp::Display(SWModule & imodule)
 	gtk_text_thaw(GTK_TEXT(gtkText));
 	return 0;
 }
-
-/* ----------------------------------------------------------------------------------------- */
-void 
-AboutModsDisplay(GtkWidget * text, gchar * aboutinfo)
-{				/* to display Sword module about information */
-	gchar *textBuf;		/* text buffer to play with */
-	gint i,			/* counter */
-	    j,			/* counter */
-	    len;		/* length of string aboutinfo */
-	bool printnow = false;	/* tells us when to put our text to the screen */
-
-	i = j = 0;		/* set to 0  */
-	gtk_text_set_point(GTK_TEXT(text), 0);	/* set position to begining of text widget */
-	gtk_text_forward_delete(GTK_TEXT(text),
-				gtk_text_get_length((GTK_TEXT(text))));	/* clear text widget */
-	len = strlen(aboutinfo);	/* set len to length of aboutinfo */
-	textBuf = new char[len + 1];
-	textBuf[0] = '\0';	/* empty text buffer */
-	while (i < len) {	/* loop through string aboutinfo */
-		if (aboutinfo[i] == '\\' && aboutinfo[i + 1] == 'p'
-		    && aboutinfo[i + 2] == 'a') {	/* if we find \par replace with /n */
-			if (aboutinfo[i + 4] == 'd')
-				i = i + 4;	/* fix our counter to jump over \pard */
-			else
-				i = i + 3;	/* fix our counter to jump over \par */
-			aboutinfo[i] = '\n';	/* add the \n (new line) */
-			printnow = true;	/* we want to show this much now */
-		}
-		if (aboutinfo[i] == '\\' && aboutinfo[i + 1] == 'q'
-		    && aboutinfo[i + 2] == 'c') {	/* replace \qc with nothing */
-
-			i = i + 3;	/* fix counter to jump over \qc */
-		}
-		textBuf[j] = aboutinfo[i];	/* move aboutinfo to textBuf one char at a time */
-		++i;		/* add one to i */
-		++j;		/* add one to j */
-		textBuf[j] = '\0';	/* terminate our string with \0 (null) */
-		if (printnow) {	/* if true we print to text widget  */
-			printnow = false;	/* set to false now */
-			gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL,
-					textBuf, -1);	/* put string to text widget */
-			textBuf[0] = '\0';	/* set string to null */
-			j = 0;	/* set j to 0 */
-		}
-	}
-	gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	/* incase there is no \par at end of info */
-	delete[]textBuf;
-	textBuf = NULL;
-}
-
 
 

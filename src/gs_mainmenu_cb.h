@@ -33,51 +33,35 @@ extern "C" {
 	void on_help_contents_activate(GtkMenuItem * menuitem,
 				       gpointer user_data);
 	void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
-					 gpointer user_data);
+					gpointer user_data);
 	void on_add_quickmark_activate(GtkMenuItem * menuitem,
-				       gpointer user_data);
+				       	gpointer user_data);
 	void on_edit_quickmarks_activate(GtkMenuItem * menuitem,
-					 gpointer user_data);
+					gpointer user_data);
 	void on_verse_style1_activate(GtkMenuItem * menuitem,
-				      gpointer user_data);
+				      	gpointer user_data);
 	void on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
-						gpointer user_data);
-	void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-	void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-	void on_edit_bookmarks1_activate(GtkMenuItem * menuitem,
-					 gpointer user_data);
+					gpointer user_data);
+	void on_exit1_activate(GtkMenuItem * menuitem, 
+					gpointer user_data);
 	void on_clear1_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
-	void on_main_module1_activate(GtkMenuItem * menuitem,
-				      gpointer user_data);
-	void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data);
+					gpointer user_data);
 	void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
-					   gpointer user_data);
-	void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data);
+					gpointer user_data);
 	void on_strongs_numbers1_activate(GtkMenuItem * menuitem,
-					  gpointer user_data);
+					gpointer user_data);
 	void on_footnotes1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data);
-	void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data);
-	void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data);
-	void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data);
+				    	gpointer user_data);
 	void on_preferences1_activate(GtkMenuItem * menuitem,
-				      gpointer user_data);
+				      	gpointer user_data);
 	void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
-						  gpointer user_data);
+					gpointer user_data);
 	void on_auto_save_notes1_activate(GtkMenuItem * menuitem,
-					  gpointer user_data);
-	void on_change_module_activate(GtkMenuItem * menuitem,
-				       gpointer user_data);
+					gpointer user_data);
 	void on_search1_activate(GtkMenuItem * menuitem,
-				 gpointer user_data);
-	void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
-	void on_com_select_activate(GtkMenuItem * menuitem,
-				    gpointer user_data);
-	void on_dict_select_activate(GtkMenuItem * menuitem,
-				     gpointer user_data);
+				 	gpointer user_data);
 	void on_morphs_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
+					gpointer user_data);
 
 #ifdef __cplusplus
 }
