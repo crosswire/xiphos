@@ -43,6 +43,7 @@
 #include "interface.h"
 #include "filestuff.h"
 #include "menustuff.h"
+#include "dialogs.h"
 
 /*
  *
@@ -123,6 +124,7 @@ gboolean autoSave = true; //-- we want to auto save changes to personal comments
 //gboolean personalCom = true; //-- let us know if curcomMod is a personal comment mod
 extern gchar remembersubtree[256];
 gint historyitems = 0;
+gint answer;
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- app's main form
@@ -672,7 +674,7 @@ ShutItDown(void)  //------------- close down GnomeSword program
 {
   char *msg;
   GtkWidget *msgbox;
-  int answer;
+
 
   sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
 	writesettings(myset); //-- save setting (myset structure) to use when we start back up
@@ -680,11 +682,11 @@ ShutItDown(void)  //------------- close down GnomeSword program
 	{
 		
 		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
-		msgbox = gnome_message_box_new(msg,
+		msgbox = create_InfoBox(); /*gnome_message_box_new(msg,
 						GNOME_MESSAGE_BOX_QUESTION,
 						GNOME_STOCK_BUTTON_YES,
 						GNOME_STOCK_BUTTON_NO,						
-						NULL);
+						NULL); */
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
 		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
 		g_free (msg);
@@ -740,7 +742,8 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 					 	*comToggle,     //-- do we want to search current commentary - check box
 					 	*bounds,        //-- do we want to use bounds for our search - check box
 					 	*lastsearch,    //-- use verses from last search for bounds of this search
-					 	*textWindow;    //-- text widget to display verses
+					 	*textWindow,    //-- text widget to display verses
+					 	*percomToggle;  //-- do we want to search personal commentary - check box
 	string 		srchText;       //-- string to search for - from entryText
 	gchar     *entryText,//-- pointer to text in searchText entry
 			      scount[5];  //-- string from gint count for label
@@ -755,17 +758,20 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 	caseSensitive = lookup_widget(searchFrm,"caseSensitive");//-- pointer to check box
 	bounds = lookup_widget(searchFrm,"rbUseBounds"); //-- pointer to check box
 	lastsearch = lookup_widget(searchFrm,"rbLastSearch"); //-- pointer to radio button
-	comToggle = lookup_widget(searchFrm,"ckbCom"); //-- pointer to check box	
+	comToggle = lookup_widget(searchFrm,"ckbCom"); //-- pointer to check box
+	percomToggle = lookup_widget(searchFrm,"cbpercom"); //-- pointer to check box	
 	textWindow= lookup_widget(searchFrm,"txtSearch");	//-- pointer to text widget
 	
 	
 	gtk_text_set_point(GTK_TEXT(textWindow), 0); //-- clear text window
 	gtk_text_forward_delete (GTK_TEXT (textWindow), gtk_text_get_length((GTK_TEXT(textWindow))));
 
-	if(!GTK_TOGGLE_BUTTON(comToggle)->active)//-- search Bible text or commentary
-		searchMod = curMod; //-- set search module
-	else
-		searchMod = curcomMod;
+	if(GTK_TOGGLE_BUTTON(comToggle)->active)//-- if true search commentary
+		searchMod = curcomMod; //-- set search module to current commentary module
+	else if(GTK_TOGGLE_BUTTON(percomToggle)->active) //-- if true search personal commentary
+		searchMod = percomMod; //-- set search module to personal commentary module
+	else                    //-- if neither commertary nor personal check box checked
+	  searchMod = curMod;  //-- set search module to current text module
 	
 	if(GTK_TOGGLE_BUTTON(bounds)->active) //---------- check to see if we want to set bounds for search
 	{
@@ -818,11 +824,12 @@ searchSWORD(GtkWidget *searchFrm)  //-- search Bible text or commentaries
 void
 resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone clicked the results list
 {                                                             //-- from our search and sent us here
-	GtkWidget	*resultList, //-- pointer to resultlist
-					 *textWindow,  //-- pointer to search dlg textwindow
-					 *comToggle;   //-- pointer to search commentary check box
- 	gchar 		  *text;     //-- pointer to resultlist key text
-				//	 tmpBuf[255];  //--
+	GtkWidget	*resultList,  //-- pointer to resultlist
+					 *textWindow,   //-- pointer to search dlg textwindow
+					 *comToggle,    //-- pointer to search commentary check box
+					 *percomToggle, //-- pointer to search personal check box
+					 *contextToggle;//-- pointer to context check box
+ 	gchar 	 *text;     //-- pointer to resultlist key text
 	SWModule *searchMod;  //-- pointer to search module
 	ModMap::iterator it;	//-- manager iterator
 	
@@ -830,23 +837,33 @@ resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone click
 	resultList = lookup_widget(searchFrm,"resultList"); //-- set pointer to resultList
 	textWindow = lookup_widget(searchFrm,"txtSearch");  //-- set pointer to text window
 	comToggle = lookup_widget(searchFrm,"ckbCom");      //-- set pointer to commentary check box
+	percomToggle = lookup_widget(searchFrm,"cbpercom");      //-- set pointer to personal check box
+	contextToggle = lookup_widget(searchFrm,"cbContext");      //-- set pointer to context check box
 	
   gtk_clist_get_text(GTK_CLIST(resultList), row, column, &text); //-- get key text from resultlist
 
-  if(!GTK_TOGGLE_BUTTON(comToggle)->active) //-- check state of commentary check box
+  if(GTK_TOGGLE_BUTTON(comToggle)->active) //-- check state of commentary check box
 	{
-		it = searchMgr->Modules.find(curMod->Name());  //-- if not checked use curMod for display	
+		it = searchMgr->Modules.find(curcomMod->Name());  //-- if checked (true) use curMod for display	
 		if (it != searchMgr->Modules.end()) 
 		{
 			searchMod = (*it).second;  //-- set search module to same as curMod
 		}			
 	}
+	if(GTK_TOGGLE_BUTTON(percomToggle)->active) //-- check state of personal check box
+	{
+		it = searchMgr->Modules.find(percomMod->Name());  //-- if checked (true) use percomMod for display	
+		if (it != searchMgr->Modules.end())
+		{
+			searchMod = (*it).second;  //-- set search module to same as percomMod
+		}			
+	}
 	else
 	{
-		it = searchMgr->Modules.find(curcomMod->Name()); //-- if checked use curcomMod for display
+		it = searchMgr->Modules.find(curMod->Name()); //-- nothing checked so we use curMod for display
 		if (it != searchMgr->Modules.end()) 
 		{
-			searchMod = (*it).second; //-- set search module to same as curcomMod
+			searchMod = (*it).second; //-- set search module to curMod
 		}			
 	}		
 	
@@ -855,8 +872,26 @@ resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone click
 		searchMod->SetKey(text); //-- set module to verse key text
 		searchMod->Display();    //-- show verse or commentary
 	}
+	if(GTK_TOGGLE_BUTTON(contextToggle)->active) //-- check state of context check box
+	{
+		curMod->SetKey(text);  //-- set module to verse key text
+		curMod->Display();    //-- show verse or commentary
+	}
 }
 
+//-------------------------------------------------------------------------------------------
+void
+savelistinfo(GtkWidget *list) //-- get info we need to save search results list
+{
+	GtkWidget 	*label;
+	gchar 			*text;
+	gint				howmany;
+	
+	label = lookup_widget(list,"lbSearchHits");
+	text = (char *)GTK_LABEL(label)->label;
+	howmany = atoi(text);
+	savelist(list,howmany);	
+}
 //-------------------------------------------------------------------------------------------
 void
 setupSearchDlg(GtkWidget *searchDlg) //-- init search dialog
@@ -1340,48 +1375,47 @@ openpropertiesbox(void)    //-- someone clicked properties
 	red = settings->currentverse_red;  //-- get color from settings structure
 	green = settings->currentverse_green;
 	blue =settings->currentverse_blue;
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); //-- set color of current verse color picker button
-	//-- show propertybox
-	gtk_widget_show(Propertybox);
+	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); //-- set color of current verse color picker button	
+	gtk_widget_show(Propertybox); //-- show propertybox
 }
 
 //-------------------------------------------------------------------------------------------
 void
-changepagenotebook(GtkNotebook *notebook,gint page_num)
+changepagenotebook(GtkNotebook *notebook,gint page_num) //-- someone changed the page in the main notebook
 {
-   settings->notebook3page = page_num;
+   settings->notebook3page = page_num; //-- store the page number so we can open to it the next time we start
 }
 
 //-------------------------------------------------------------------------------------------
 void
-showmoduleinfoSWORD(char *modName)
+showmoduleinfoSWORD(char *modName) //--  show module about information in an about dialog
 {
-	GtkWidget *aboutbox,
- 						*text,
-    				*label;
-	char 			*buf,
- 						*bufabout;
+	GtkWidget *aboutbox,  //-- pointer to about dialog
+ 						*text,       //-- pointer to text widget of dialog
+    				*label;     //-- pointer to label in dialog
+	char 			*buf,       //-- pointer to text buffer for label (mod name)
+ 						*bufabout;  //-- pointer to text buffer for text widget (mod about)
   ModMap::iterator it; //-- module iterator
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator cit;
+	SectionMap::iterator sit; //--
+	ConfigEntMap::iterator cit; //--
 	
-	it = mainMgr->Modules.find(modName); //-- find commentary module (modName from page label)
+	it = mainMgr->Modules.find(modName); //-- find module (modName)
 	if (it != mainMgr->Modules.end()) //-- if we don't run out of mods before we find the one we are looking for
 	{
-	    buf = (char *)(*it).second->Description();
+	    buf = (char *)(*it).second->Description();  //-- get discription of module
 	    sit = mainMgr->config->Sections.find((*it).second->Name());
 	    if (sit !=mainMgr->config->Sections.end())
 	    {
 	    	cit = (*sit).second.find("About");
 					if (cit != (*sit).second.end()) 				
-						bufabout = (*cit).second.c_str();
+						bufabout = (*cit).second.c_str(); //-- get module about information
 	    }
 	}
-	aboutbox = create_dialog1();
-	text = lookup_widget(aboutbox,"textModAbout");
-	label = lookup_widget(aboutbox,"lbModName");
-	gtk_label_set_text( GTK_LABEL(label),buf);
-	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE );
-	AboutModsDisplay(text, bufabout) ;
-	gtk_widget_show(aboutbox);
+	aboutbox = create_aboutmodules(); //-- create about dialog
+	text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
+	label = lookup_widget(aboutbox,"lbModName");    //-- get label
+	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
+	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to true for text widget
+	AboutModsDisplay(text, bufabout) ; //-- sent about info and text widget to display function (display.cpp)
+	gtk_widget_show(aboutbox); //-- show the about dialog
 }

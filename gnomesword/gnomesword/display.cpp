@@ -39,6 +39,7 @@
 #include "display.h"
 #include "support.h"
 #include "GnomeSword.h"
+#include "dialogs.h"
 
 GdkColor GTKEntryDisp::colourBlue;
 GdkColor GTKEntryDisp::colourGreen;

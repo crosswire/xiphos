@@ -38,6 +38,7 @@
 #include "interface.h"
 #include "filestuff.h"
 #include "display.h"
+#include "dialogs.h"
 
 #ifdef  USE_GNOMEPRINT
 #include "printstuff.h"
@@ -63,6 +64,7 @@ extern bool noteModified;
 extern bool waitonmessage;
 //extern gboolean saveChanges;
 extern gboolean autoSave; //-- auto save personal comments when verse changes -- declared in GnomeSword.cpp
+extern gint answer;    //-- do we save file on exit
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -1483,7 +1485,12 @@ void
 on_btnSearchSaveList_clicked           (GtkButton       *button,
                                         gpointer         user_data)
 {
+    GtkWidget *list, //-- pointer to resultList
+    					*savedlg;//-- pointer to save file dialog
 
+
+    list = lookup_widget(GTK_WIDGET(button),"resultList"); //-- set list to resultlist in search dialog
+    savelistinfo(list); //-- send list widget to savelistinfo function in GnomeSword.cpp
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1554,7 +1561,7 @@ on_btnVerseListPaste_clicked           (GtkButton       *button,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_cbContext_toggled                   (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
@@ -1562,7 +1569,7 @@ on_cbContext_toggled                   (GtkToggleButton *togglebutton,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_verselist_select_row                (GtkCList        *clist,
                                         gint             row,
@@ -1573,7 +1580,7 @@ on_verselist_select_row                (GtkCList        *clist,
 
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_notebook3_switch_page               (GtkNotebook     *notebook,
                                         GtkNotebookPage *page,
@@ -1588,25 +1595,23 @@ on_notebook3_switch_page               (GtkNotebook     *notebook,
   firsttime = false; //-- remember we were here
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnInfoBoxYes_clicked               (GtkButton       *button,
                                         gpointer         user_data)
 {
-    file_changed = false;
+    answer = 0;
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnInfoBoxNo_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
-
+    answer = 1;
 }
 
-
-
-
+//----------------------------------------------------------------------------------------------
 void
 on_kjv1_activate                       (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -1614,7 +1619,7 @@ on_kjv1_activate                       (GtkMenuItem     *menuitem,
     showmoduleinfoSWORD((char*)user_data);
 }
 
-
+//----------------------------------------------------------------------------------------------
 void
 on_btnAboutModuleOK_clicked            (GtkButton       *button,
                                         gpointer         user_data)
@@ -1625,3 +1630,110 @@ on_btnAboutModuleOK_clicked            (GtkButton       *button,
 	gtk_widget_destroy(dlg);
 }
 
+//----------------------------------------------------------------------------------------------
+void
+on_tree1_select_child                  (GtkTree         *tree,
+                                        GtkWidget       *widget,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_tree1_selection_changed             (GtkTree         *tree,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_tree1_unselect_child                (GtkTree         *tree,
+                                        GtkWidget       *widget,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEAddItem_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEDelete_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEsave_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEup_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEdown_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEleft_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEright_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEok_clicked                    (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEapply_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnBMEcancel_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------

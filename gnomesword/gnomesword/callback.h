@@ -788,3 +788,61 @@ on_kjv1_activate                       (GtkMenuItem     *menuitem,
 void
 on_btnAboutModuleOK_clicked            (GtkButton       *button,
                                         gpointer         user_data);
+
+void
+on_btnAboutModuleOK_clicked            (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_tree1_select_child                  (GtkTree         *tree,
+                                        GtkWidget       *widget,
+                                        gpointer         user_data);
+
+void
+on_tree1_selection_changed             (GtkTree         *tree,
+                                        gpointer         user_data);
+
+void
+on_tree1_unselect_child                (GtkTree         *tree,
+                                        GtkWidget       *widget,
+                                        gpointer         user_data);
+
+void
+on_btnBMEAddItem_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEDelete_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEsave_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEup_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEdown_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEleft_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEright_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEok_clicked                    (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEapply_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_btnBMEcancel_clicked                (GtkButton       *button,
+                                        gpointer         user_data);
