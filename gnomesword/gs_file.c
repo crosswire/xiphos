@@ -1,5 +1,6 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                          filestuff.cpp  -  description
+                          gs_file.c  -  description
                              -------------------
     begin                : Mon May 8 2000
     copyright            : (C) 2000 by Terry Biggs
@@ -31,28 +32,37 @@
 
 #include "gs_gnomesword.h"
 #include "support.h"
-#include "filestuff.h"
+#include "gs_file.h"
 #include "menustuff.h"
 #include "gs_sword.h"
 #include "gs_listeditor.h"
 
 #define BUFFER_SIZE 8192	/* input buffer size */
 
-//extern SETTINGS *settings;
+/*****************************************************************************
+ *globals
+*****************************************************************************/
+char 	*homedir,		/* store $home directory */
+	*gSwordDir,		/* store GnomeSword directory */
+	*fnbookmarks,		/* store filename for bookmark file */
+	*fnbookmarksnew,
+	*fnconfigure;		/* store filename for configure file - options */
+FILE 	*configfile,		/*  file pointer to configuration file - options */
+	*flbookmarks;
+gint 	ibookmarks;		/* number of bookmark menu items */
+gchar 	remembersubtree[256],	/* we need to use this when add to bookmarks */
+ 	rememberlastitem[255];	/* we need to use this when add to bookmarks */
+
+/*****************************************************************************
+ *externals
+*****************************************************************************/
 extern GtkWidget *MainFrm;	/* main window (form) widget */
 extern gchar *current_filename;	/* file loaded into study pad */
-extern gchar bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file after edit */
-extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved */
-char *homedir,			/* store $home directory */
-*gSwordDir,			/* store GnomeSword directory */
-*fnbookmarks,			/* store filename for bookmark file */
-*fnbookmarksnew, *fnconfigure;	/* store filename for configure file - options */
-FILE *configfile,		/*  file pointer to configuration file - options */
-*flbookmarks;
+extern gchar bmarks[50][80];	/* array to store bookmarks - read in form file
+				when program starts - saved to file after edit */
+extern gboolean file_changed;	/* set to TRUE if text is study pad has changed
+					- and file is not saved */
 
-gint ibookmarks;		/* number of bookmark menu items */
-gchar remembersubtree[256],	/* we need to use this when add to bookmarks */
- rememberlastitem[255];		/* we need to use this when add to bookmarks */
 
 /*****************************************************************************
  * check for GnomeSword dir
@@ -61,58 +71,63 @@ gchar remembersubtree[256],	/* we need to use this when add to bookmarks */
  *****************************************************************************/
 void setDiretory(void)
 {
-	if ((homedir = getenv("HOME")) == NULL) {	/* get home dir */
-		g_error("$HOME is not set!");	/* if not found in env exit */
+	/* get home dir */
+	if ((homedir = getenv("HOME")) == NULL) { 		
+		g_error("$HOME is not set!");	
+		/* if not found in env exit */
 		exit(0);
 	}
-	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	/* set gSwordDir to $home + .GnomeSword */
+	/* set gSwordDir to $home + .GnomeSword */
+	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
+	/* set fnbookmarks to gSwordDir + bookmarks.txt */
 	fnbookmarks =
-	    g_new(char, strlen(gSwordDir) + strlen("bookmarks.txt") + 2);	/* set fnbookmarks to gSwordDir + bookmarks.txt */
+	    g_new(char, strlen(gSwordDir) + strlen("bookmarks.txt") + 2);	
 	sprintf(fnbookmarks, "%s/%s", gSwordDir, "bookmarks.txt");
-
+        /* set fnbookmarks to gSwordDir + bookmarks.txt */
 	fnbookmarksnew =
-	    g_new(char, strlen(gSwordDir) + strlen("bookmarksnew.gs") + 2);	/* set fnbookmarks to gSwordDir + bookmarks.txt */
+	    g_new(char, strlen(gSwordDir) + strlen("bookmarksnew.gs") + 2);	
 	sprintf(fnbookmarksnew, "%s/%s", gSwordDir, "bookmarksnew.gs");
-
+        /* set fnconfigure to gSwordDir + gsword.cfg */
 	fnconfigure =
-	    g_new(char, strlen(gSwordDir) + strlen("settings3.cfg") + 2);	/* set fnconfigure to gSwordDir + gsword.cfg */
+	    g_new(char, strlen(gSwordDir) + strlen("settings3.cfg") + 2);	
 	sprintf(fnconfigure, "%s/%s", gSwordDir, "settings3.cfg");
 	if (access(gSwordDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
 		if ((mkdir(gSwordDir, S_IRWXU)) == 0) {
 			createFiles();
 		} else {
-			printf(".GnomeSword does not exist");	/* if we can not create gSwordDir exit */
+			printf(".GnomeSword does not exist");	
+			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
 		}
 	}
 }
 
-//-------------------------------------------------------------------------------------------
+/*****************************************************************************
+ * load bookmarks program start
+ *****************************************************************************/
 void loadbookmarks_programstart(void)
 {
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
 	int flbookmarksnew;
-	gchar subtreelabel[255], firstsubtree[255];
-	gint ifirsttime = 1;
+	gchar subtreelabel[255];
 	gint i = 0;
-	gchar tmpbuf[255];
 	long filesize;
-
 	struct stat stat_p;
 
 	stat(fnbookmarksnew, &stat_p);
 	filesize = stat_p.st_size;
 	ibookmarks = (filesize / (sizeof(mylist)));
 	p_mylist = &mylist;
-
-	if ((flbookmarksnew = open(fnbookmarksnew, O_RDONLY)) == -1) {	/* try to open file */
-		createFiles();	/* create bookmark file if we cannot open the file */
+        /* try to open file */
+	if ((flbookmarksnew = open(fnbookmarksnew, O_RDONLY)) == -1) {	
+	        /* create bookmark file if we cannot open the file */
+		createFiles();	
 	}
 	flbookmarksnew = open(fnbookmarksnew, O_RDONLY);
 	while (i < ibookmarks) {
-		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));
+		read(flbookmarksnew, (char *) &mylist, sizeof(mylist));		
 		if (p_mylist->type == 1) {  /* if type is 1 it is a subtree (submenu) */
 
 			if (p_mylist->level == 0) {
@@ -137,7 +152,9 @@ void loadbookmarks_programstart(void)
 	close(flbookmarksnew);
 }
 
-//-------------------------------------------------------------------------------------------
+/*****************************************************************************
+ * load bookmarks after menu separator
+ *****************************************************************************/
 void loadbookmarks_afterSeparator(void)
 {
 	LISTITEM mylist;
@@ -162,8 +179,12 @@ void loadbookmarks_afterSeparator(void)
 	close(flbookmarksnew);
 }
 
+/*****************************************************************************
+ * save a bookmark that has been added to the bookmark menu
+ * by the add bookmark item
+ *****************************************************************************/
 void savebookmark(gchar * item)
-{				/* save a bookmark that has been added to the bookmark menu by the add bookmark item */
+{				
 	LISTITEM mylist;	/* structure for bookmark item */
 	LISTITEM *p_mylist;	/* pointer to structure */
 	int flbookmarksnew;	/* bookmark file handle */
@@ -180,10 +201,11 @@ void savebookmark(gchar * item)
 	close(flbookmarksnew);	/* close the file we are done for now */
 }
 
-//--------------------------------------------------------------------------------------------
-/* create bookmark file nessary for GomeSword if it does not exist */
+/*****************************************************************************
+ * create bookmark file nessary for GomeSword if it does not exist
+ *****************************************************************************/
 void createFiles(void)
-{ 
+{
 	LISTITEM mylist;
 	LISTITEM *p_mylist;
 	int flbookmarksnew;
@@ -259,8 +281,9 @@ void createFiles(void)
 	ibookmarks = 8;
 }
 
-//-------------------------------------------------------------------------------------------
-/* save studypad file */
+/*****************************************************************************
+ * save studypad file
+ *****************************************************************************/
 void saveFile(gchar * filename)
 {				
 	gchar *data, charbuf[255];
@@ -281,18 +304,15 @@ void saveFile(gchar * filename)
 	    gtk_editable_get_chars(GTK_EDITABLE
 				   (lookup_widget(MainFrm, "text3")), 0,
 				   -1);
-
 	fp = fopen(filename, "w");
 	if (fp == NULL) {
 		g_free(data);
 		return;
 	}
-
 	len = strlen(data);
 	bytes_written = fwrite(data, sizeof(gchar), len, fp);
 	fclose(fp);
 	g_free(data);
-
 	gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);
 	if (len != bytes_written) {
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2,
@@ -300,13 +320,13 @@ void saveFile(gchar * filename)
 		return;
 	}
 	sprintf(charbuf, "%s - saved.", current_filename);
-
 	gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, charbuf);
 	file_changed = FALSE;
 }
 
-//-------------------------------------------------------------------------------------------
-/* load file into studypad */
+/*****************************************************************************
+ * load file into studypad
+ *****************************************************************************/
 void loadFile(GtkWidget * filesel)
 {				
 	GtkWidget *statusbar, *text;
@@ -346,9 +366,7 @@ void loadFile(GtkWidget * filesel)
 		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
 			break;
 	}
-
 	/* If there is an error while loading, we reset everything to a good state. */
-
 	if (ferror(fp)) {
 		fclose(fp);
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
@@ -365,8 +383,9 @@ void loadFile(GtkWidget * filesel)
 			   current_filename);
 }
 
-//-------------------------------------------------------------------------------------------
-/* load file into studypad during program startup */
+/*****************************************************************************
+ * load file into studypad during program startup
+ *****************************************************************************/
 void loadStudyPadFile(gchar * filename)
 {				
 	GtkWidget *statusbar, *text;
@@ -401,9 +420,7 @@ void loadStudyPadFile(gchar * filename)
 		if (bytes_read != BUFFER_SIZE && (feof(fp) || ferror(fp)))
 			break;
 	}
-
 	/* If there is an error while loading, we reset everything to a good state */
-
 	if (ferror(fp)) {
 		fclose(fp);
 		gtk_editable_delete_text(GTK_EDITABLE(text), 0, -1);
@@ -420,8 +437,9 @@ void loadStudyPadFile(gchar * filename)
 			   current_filename);
 }
 
-//----------------------------------------------------------------------------------------------
-/* save our settings */
+/*****************************************************************************
+ * save our program settings
+ *****************************************************************************/
 void writesettings(SETTINGS settings)
 {
 	int fd;	/* file handle */
@@ -433,7 +451,7 @@ void writesettings(SETTINGS settings)
 
 
 /**********************************************************************************************
- * read settings.cfg into settings structure 
+ * read settings.cfg into settings structure
  *
  **********************************************************************************************/
 SETTINGS readsettings(void)
@@ -463,8 +481,8 @@ SETTINGS readsettings(void)
 
 
 
-/************************************************************************************************** 
- *create settings structure and settings.cfg file 
+/**************************************************************************************************
+ *create settings structure and settings.cfg file
  *
  **************************************************************************************************/
 SETTINGS createsettings(void)
@@ -485,26 +503,26 @@ SETTINGS createsettings(void)
 	p_settings->currentverse_red = 0x0000;	/* set current verse color to green */
 	p_settings->currentverse_green = 0x7777;
 	p_settings->currentverse_blue = 0x0000;
-	p_settings->strongs = false;	/* set strongs numbers to off */
-	p_settings->footnotes = false;	/* set footnotes to off */
-	p_settings->versestyle = true;	/* set versestyle to on */
-	p_settings->interlinearpage = true;	/* set show interlinear page to on */
-	p_settings->autosavepersonalcomments = true;	/* set autosave personal comments to on */
-	p_settings->formatpercom = false;	/* set personal comments formatting to off */
+	p_settings->strongs = FALSE;	/* set strongs numbers to off */
+	p_settings->footnotes = FALSE;	/* set footnotes to off */
+	p_settings->versestyle = TRUE;	/* set versestyle to on */
+	p_settings->interlinearpage = TRUE;	/* set show interlinear page to on */
+	p_settings->autosavepersonalcomments = TRUE;	/* set autosave personal comments to on */
+	p_settings->formatpercom = FALSE;	/* set personal comments formatting to off */
 	p_settings->notebook3page = 0;	/* notebook 3 page number */
 	p_settings->notebook1page = 0;	/* commentaries notebook */
 	p_settings->notebook2page = 0;	/* dict and lex notebook  */
 	p_settings->shortcutbarsize = 120; /*width of shortcutbar */
-	p_settings->showcomtabs = false;	/* show tabs on commentary notebook */
-	p_settings->showdicttabs = false;	/* show tabs on dict/lex notebook */
-	p_settings->showshortcutbar = true;	/* show the shortcut bar */
-	p_settings->showtextgroup = false;	/* show text group */
-	p_settings->showcomgroup = true;	/* show com group */
-	p_settings->showdictgroup = true;	/* show dict/lex group */
-	p_settings->showbookmarksgroup = false;	/* show bookmark group */
-	p_settings->showhistorygroup = true;	/* show history group */
+	p_settings->showcomtabs = FALSE;	/* show tabs on commentary notebook */
+	p_settings->showdicttabs = FALSE;	/* show tabs on dict/lex notebook */
+	p_settings->showshortcutbar = TRUE;	/* show the shortcut bar */
+	p_settings->showtextgroup = FALSE;	/* show text group */
+	p_settings->showcomgroup = TRUE;	/* show com group */
+	p_settings->showdictgroup = TRUE;	/* show dict/lex group */
+	p_settings->showbookmarksgroup = FALSE;	/* show bookmark group */
+	p_settings->showhistorygroup = TRUE;	/* show history group */
 	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* create settings file (settings.cfg) */
-	write(fd, (char *) &settings, sizeof(settings));	/* save settings structrue to file */
+	write(fd, (char *) &settings, sizeof(settings));	/* save settings strucTRUE to file */
 	close(fd);		/* close the file */
 	return (settings);	/* return settings structure to readsettings(void) */
 }

@@ -33,7 +33,7 @@
 #include "interface.h"
 #include "support.h"
 #include "gs_listeditor.h"
-#include "filestuff.h"
+#include "gs_file.h"
 #include "menustuff.h"
 
 
@@ -46,11 +46,11 @@ struct _listrow {
 	gint type;
 	gint level;
 };
+LISTITEM mylistitem;
+LISTITEM *p_mylistitem;
 LISTITEM listitem;		/* structure for ListEditor items
 				 (verse lists and bookmarks) */
 gint listrow;			/* current row in ListEditor clist widget */
-LISTITEM mylistitem;
-LISTITEM *p_mylistitem;
 gchar *remfirstsub;
 gchar *title;
 gboolean newsave = TRUE;
@@ -67,7 +67,7 @@ extern gchar remembersubtree[256];	/* used for bookmark menus declared in filest
 extern GtkWidget *listeditor;		/* pointer to ListEditor */
 
 /*****************************************************************************
- *internal - visable to this file only
+ *internal functions - visable to this file only
 *****************************************************************************/
 static void setbuttonson(GtkWidget * listeditor, gboolean choice);
 static void loadbookmarksnew(GtkWidget * list);
@@ -222,14 +222,15 @@ void on_btnLEsave_clicked(GtkButton * button, gpointer user_data)
 }
 
 
-
-
-
-
 /*****************************************************************************
+ *****************************************************************************
  *listeditor functions
+ *****************************************************************************
 *****************************************************************************/
 
+/******************************************************************************
+ * set ok and apply button sensitivity
+ *****************************************************************************/
 void setbuttonson(GtkWidget * listeditor, gboolean choice) 
 {
 	GtkWidget *ok, *apply;
@@ -240,8 +241,10 @@ void setbuttonson(GtkWidget * listeditor, gboolean choice)
 	gtk_widget_set_sensitive(apply, choice);
 }
 
-
-void editbookmarksSave(GtkWidget * editdlg) /* save bookmarks after edit */
+/******************************************************************************
+ * save bookmarks after edit
+ *****************************************************************************/
+void editbookmarksSave(GtkWidget * editdlg)
 {
 	GtkWidget *list;
 	gint i;
@@ -267,7 +270,9 @@ void editbookmarksSave(GtkWidget * editdlg) /* save bookmarks after edit */
 
 }
 
-
+/******************************************************************************
+ * getitem
+ *****************************************************************************/
 void getitem(gchar * buf[6])
 {
 	static gchar subs[6][80],
@@ -344,10 +349,10 @@ void getitem(gchar * buf[6])
 	oldlevel = level;
 }
 
-
-void
-/* load bookmarks file into listeditor */
-loadbookmarksnew(GtkWidget * list)
+/******************************************************************************
+ * load bookmarks file into listeditor
+ *****************************************************************************/
+void loadbookmarksnew(GtkWidget * list)
 {
 	int flbookmarksnew;	/* file handle */
 	gint i = 0, j;		/* counter */
@@ -387,7 +392,9 @@ loadbookmarksnew(GtkWidget * list)
 	close(flbookmarksnew);
 }
 
-//-------------------------------------------------------------------------------------------
+/******************************************************************************
+ * add subitme to list
+ *****************************************************************************/
 void addsubitme(GtkWidget * list, gint row)
 {
 	gchar *buf[6];
@@ -406,14 +413,18 @@ void addsubitme(GtkWidget * list, gint row)
 	for(j=0;j<6;j++) g_free(buf[j]);
 }
 
-
+/******************************************************************************
+ * delete an item from the list
+ *****************************************************************************/
 void deleteitem(GtkWidget * list)
 {
 	gtk_clist_remove(GTK_CLIST(list), currentrow);	/* remove current row */
 	setbuttonson(list, TRUE);
 }
 
-
+/******************************************************************************
+ * add a verse reference to the list
+ *****************************************************************************/
 void addverse(GtkWidget * list, gint row, gchar * item)
 {
 	gchar *buf[6], *tmpbuf;
@@ -452,28 +463,30 @@ void addverse(GtkWidget * list, gint row, gchar * item)
 }
 
 
-
-GtkWidget *createListEditor(void)	/* init ListEditor */
+/******************************************************************************
+ *create and init ListEditor
+ *****************************************************************************/ 
+GtkWidget *createListEditor(void)
 {
-	GtkWidget *ListEditor, *text;
-
-	
+	GtkWidget *ListEditor, *text;	
 
 	title = "GnomeSword - Bookmark Editor";
 	p_mylistitem = &mylistitem;
 	ListEditor = create_listeditor();
-	text = lookup_widget(ListEditor, "text7");	
-	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE);	/* set text window to word wrap */
-	
-	/* setlistmodule */
+	text = lookup_widget(ListEditor, "text7");
+	/* set text window to word wrap */	
+	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE);	
+	/* init listmodule */
 	setuplisteditSWORD(text);
 	gtk_signal_connect(GTK_OBJECT(ListEditor), "destroy",
 			   GTK_SIGNAL_FUNC(on_listeditor_destroy), NULL);
 	return (ListEditor);
 }
 
-
-void editbookmarks(GtkWidget * editdlg) /* load bookmarks into an editor dialog */
+/******************************************************************************
+ *load bookmarks into an editor dialog
+ *****************************************************************************/ 
+void editbookmarks(GtkWidget * editdlg) 
 {
 	GtkWidget *list;
 
@@ -481,7 +494,9 @@ void editbookmarks(GtkWidget * editdlg) /* load bookmarks into an editor dialog 
 	loadbookmarksnew(list);
 }
 
-
+/******************************************************************************
+ *up date bookmark menu with our changes
+ *****************************************************************************/ 
 void applychanges(GtkWidget * widget)
 {
 	GtkWidget *listeditor, *list;
@@ -490,20 +505,25 @@ void applychanges(GtkWidget * widget)
 
 	listeditor = lookup_widget(widget, "listeditor");
 	list = lookup_widget(listeditor, "clLElist");
-	editbookmarksSave(listeditor);	/* save to file so we don't forget -- local */
+	/* save to file so we don't forget -- local */
+	editbookmarksSave(listeditor);	
         getrow(list, 0, buf);
 	getitem(buf);
 	sprintf(tmpbuf, "%s%s", "_Bookmarks/",
 		buf[0]);
-	removemenuitems(MainFrm, tmpbuf, ibookmarks);	/* remove old bookmarks form menu -- menustuff.cpp */
-	/* sprintf(tmpbuf,"%s%s", "_Bookmarks/",remembersubtree); */
-	addseparator(MainFrm, "_Bookmarks/Edit Bookmarks");	/* add Separator it was deleted with old menus */
-	loadbookmarks_programstart();	/* let's show what we did -- filestuff.cpp */
+	/* remove old bookmarks form menu -- menustuff.cpp */	
+	removemenuitems(MainFrm, tmpbuf, ibookmarks);
+	/* add Separator it was deleted with old menus */
+	addseparator(MainFrm, "_Bookmarks/Edit Bookmarks");
+	/* let's show what we did -- filestuff.cpp */	
+	loadbookmarks_programstart();	
 	loadbookmarksnew(list);
 	setbuttonson(listeditor, FALSE);
 }
 
-
+/******************************************************************************
+ *up date clist with info from form
+ *****************************************************************************/ 
 void applylistchanges(GtkWidget * widget, gint row)
 {
 	GtkWidget *editor, *entry, *list;
@@ -529,34 +549,36 @@ void applylistchanges(GtkWidget * widget, gint row)
 	gtk_clist_insert(GTK_CLIST(list), row, buf);	/* insert item in new position */
 	gtk_clist_set_shift(GTK_CLIST(list), row, 0, 0, (level * 10));	/* set indent */
 	gtk_clist_select_row(GTK_CLIST(list), row, 0);	/* seletct row (same item) */
+	/* free buf */
 	for(j=0;j<3;j++) g_free(buf[j]);
 }
 
-
+/******************************************************************************
+ *for getting info from selected row and displaying in form
+ *****************************************************************************/ 
 void selectrow(GtkWidget * list, gint row, gint column)
 {
 	GtkWidget *editor, *entry;
 	gchar *buf; 
 	currentrow = row;
 	editor = gtk_widget_get_toplevel(list);	/* set pointer to editor dialog */
-	entry = lookup_widget(editor, "entryListItem");	/* get item entry */
-
-	gtk_clist_get_text(GTK_CLIST(list), row, 0, &buf);	/* get item from list */
 	
+	entry = lookup_widget(editor, "entryListItem");	/* get item entry */
+	gtk_clist_get_text(GTK_CLIST(list), row, 0, &buf);	/* get item from list */	
 	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */
 
 	entry = lookup_widget(editor, "entryType");	/* get item entry */
-	gtk_clist_get_text(GTK_CLIST(list), row, 1, &buf);	/* get item from list */
-	
+	gtk_clist_get_text(GTK_CLIST(list), row, 1, &buf);	/* get item from list */	
 	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */
 
 	entry = lookup_widget(editor, "entryLevel");	/* get item entry */
-	gtk_clist_get_text(GTK_CLIST(list), row, 2, &buf);	/* get item from list */
-	
+	gtk_clist_get_text(GTK_CLIST(list), row, 2, &buf);	/* get item from list */	
 	gtk_entry_set_text(GTK_ENTRY(entry), buf);	/* put item into ListItem entry */     	
 }
 
-/* for finding sub items up */
+/******************************************************************************
+ *for finding sub items above
+ *****************************************************************************/ 
 gint findpresubitem(GtkWidget * list, gint row, gint ilevel)
 {
 	gint i, level;
@@ -572,7 +594,9 @@ gint findpresubitem(GtkWidget * list, gint row, gint ilevel)
 	return (0);
 }
 
-/* for finding sub items up */
+/******************************************************************************
+ *for finding sub items below 
+ *****************************************************************************/
 gint findnextsubitem(GtkWidget * list, gint row, gint ilevel)
 {
 	gint i, level, howmany;
@@ -590,7 +614,10 @@ gint findnextsubitem(GtkWidget * list, gint row, gint ilevel)
 	return (0);
 }
 
-/* for moving list items up and down - and adding and removing tabs(changing level of item) */
+/****************************************************************************** 
+ *for moving list items up and down  
+ *and adding and removing tabs(changing level of item) 
+ *****************************************************************************/
 void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 {
 	GtkWidget *editor,	/* pointer to list editor */
@@ -608,18 +635,22 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 		nexttype=0,
 		newrow=0;	/* for counting */
 	LISTROW *items;
-	
-	editor = gtk_widget_get_toplevel(widget);	/* set pointer to editor dialog */
+	/* set pointer to editor dialog */
+	editor = gtk_widget_get_toplevel(widget);	
 	list = lookup_widget(widget, "clLElist");
-	getrow(list, listrow, buf);	/*-- read items from list so we can move them or show changes */
-	ilevel = atoi(buf[2]);	/* we need to know level so we can add tabs   (increment and deincrement level) */
+	/*-- read items from list so we can move them or show changes */
+	getrow(list, listrow, buf);	
+	/* we need to know level so we can add tabs
+		(increment and deincrement level) */
+	ilevel = atoi(buf[2]);	
 	itype = atoi(buf[1]);
 	if (listrow > 0) {
 		getrow(list, listrow - 1, prebuf);
 		prelevel = atoi(prebuf[2]);
 		pretype = atoi(prebuf[1]);
 	}
-	if (listrow < GTK_CLIST(list)->rows){	/* make sure there is a row for us to access	 */
+	/* make sure there is a row for us to access */
+	if (listrow < GTK_CLIST(list)->rows){	
 		getrow(list, listrow + 1, nextbuf);
 		nextlevel = atoi(nextbuf[2]);
 		nexttype = atoi(nextbuf[1]);
@@ -753,7 +784,9 @@ void movelistitem(GtkWidget * widget, gint direction, gint listrow)
 	gtk_clist_select_row(GTK_CLIST(list), listrow, 0);	/* seletct row (same item) */
 }
 
-
+/****************************************************************************** 
+ * gets info from one row all columns
+******************************************************************************/
 void getrow(GtkWidget * list, gint listrow, gchar * buf[6])
 {
 	gchar *tmpbuf;
@@ -772,14 +805,18 @@ void getrow(GtkWidget * list, gint listrow, gchar * buf[6])
 	buf[5] = g_strdup(tmpbuf);
 }
 
-
+/****************************************************************************** 
+ * gets info from one column of one row
+******************************************************************************/
 void getcolumn(GtkWidget * list, gint row, gint column, gchar * buf)
 {
 	/*-- read item from list */
 	gtk_clist_get_text(GTK_CLIST(list), row, column, &buf);	/* get item from list */         
 }
 
-
+/****************************************************************************** 
+ * returns the number of rows (bookmarks)
+******************************************************************************/
 gint findhowmany(GtkWidget * clist, gint row)
 {
 	gchar *buf[6];
@@ -799,7 +836,6 @@ gint findhowmany(GtkWidget * clist, gint row)
 	}
 	return i;
 }
-
 
 /****************************************************************************** 
  *This removes an item and its children from the clist, 
@@ -852,8 +888,9 @@ insert_items(GtkWidget * clist, LISTROW * items, gint howmany, gint row)
 	}
 }
 
-
-/* This adds the item to the clist at the given position. */
+/******************************************************************************
+ * This adds the item to the clist at the given position.
+******************************************************************************/
 static void insert_item(GtkCList * clist, LISTROW * item, gint row)
 {
 	gchar *buf[6], tmpbuf[80];

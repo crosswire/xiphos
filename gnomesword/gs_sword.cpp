@@ -50,7 +50,7 @@
 #include "gs_sword.h"
 #include "support.h"
 #include "interface.h"
-#include "filestuff.h"
+#include "gs_file.h"
 #include "menustuff.h"
 #include "gs_listeditor.h"
 #include "noteeditor.h"
