@@ -143,7 +143,11 @@ module.include.files=\
 	src/main/configs.h\
 	src/backend/tree.hh\
 	src/main/xml.h\
-	src/gui/gbs_display.h
+	src/gui/gbs_display.h\
+	src/gui/sidebar.h\
+	src/gui/parallel_dialog.h\
+	src/gui/parallel_view.h\
+	src/gui/widgets.h
 
 module.source.name=.
 module.source.type=
@@ -182,8 +186,6 @@ module.source.files=\
 	src/gnome/fileselection.c\
 	src/gnome/find_dialog.c\
 	src/gnome/gui.c\
-	src/gnome/interlinear.c\
-	src/gnome/interlinear_dialog.c\
 	src/gnome/main_menu.c\
 	src/gnome/main_window.c\
 	src/gnome/preferences_dialog.c\
@@ -257,8 +259,6 @@ module.source.files=\
 	src/gnome2/fileselection.c\
 	src/gnome2/find_dialog.c\
 	src/gnome2/gui.c\
-	src/gnome2/interlinear.c\
-	src/gnome2/interlinear_dialog.c\
 	src/gnome2/main_menu.c\
 	src/gnome2/main_window.c\
 	src/gnome2/preferences_dialog.c\
@@ -274,7 +274,12 @@ module.source.files=\
 	src/gnome2/toolbar_edit.c\
 	src/gnome2/toolbar_nav.c\
 	src/gnome2/toolbar_style.c\
-	src/gnome2/utilities.c
+	src/gnome2/utilities.c\
+	src/gnome2/sidebar.c\
+	src/gnome/parallel_dialog.c\
+	src/gnome/parallel_view.c\
+	src/gnome2/parallel_dialog.c\
+	src/gnome2/parallel_view.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

@@ -36,11 +36,11 @@ struct _settings {
 		*CommWindowModule,	/* module to open at program startup  */
 		*DictWindowModule,	/* module to open at program startup  */
 		*BookWindowModule,	/* module to open at program startup  */
-	        *Interlinear1Module,	/* module to open at program startup  */
-	        *Interlinear2Module,	/* module to open at program startup  */
-	        *Interlinear3Module, /* module to open at program startup  */
-	        *Interlinear4Module,	/* module to open at program startup  */
-	        *Interlinear5Module, /* module to open at program startup  */
+	        *parallel1Module,	/* module to open at program startup  */
+	        *parallel2Module,	/* module to open at program startup  */
+	        *parallel3Module, /* module to open at program startup  */
+	        *parallel4Module,	/* module to open at program startup  */
+	        *parallel5Module, /* module to open at program startup  */
 	        *personalcommentsmod,/* module to open at program startup  */
 		sb_search_mod[80], 	/* module to use for shortcut bar search */
 	        *devotionalmod, 	/* module to use for devotional */
@@ -52,7 +52,7 @@ struct _settings {
 	        *currentverse,	/* verse to use at program startup */
 		comm_key[80],	/* verse to use at program startup */
 		*book_key,
-	        *cvInterlinear,	/* current verse for detached interlinear */
+	        *cvparallel,	/* current verse for detached parallel */
 		*percomverse, /* current verse for personal comments */
 	        *dictkey,		/* dictionary key to use at program startup - the one we shut down with */
 	        *studypadfilename,   /* name of file in studypad when we closed */
@@ -81,30 +81,30 @@ struct _settings {
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
-		intCurVerse,    /* detached interlinear current verse */
+		intCurVerse,    /* detached parallel current verse */
 		book_last_page,    /* last notebook page before change */
 		dict_last_page,     /* last notebook page before change */
 		comm_last_page,     /* last notebook page before change */
 		text_last_page,     /* last notebook page before change */
 		percomm_last_page,  /* last notebook page before change */
-		interlinear_page,   /* interlinear workbook page number */
+		parallel_page,   /* parallel workbook page number */
 		studypad_page,   /* studypad workbook page number */
 		percomm_page;   /* percomm editor workbook page number */
 						
 	int   
 		usedefault, /* use default settings in gnomesword or those used for last session */
 		strongs,	//-- toogle button and check menu state
-		strongsint, //-- check menu state interlinear mods
-		headingsint, //-- check menu state interlinear mods	
-		crossrefint, //-- check menu state interlinear mods	
-		lemmasint, //-- check menu state interlinear mods		
-		morphsint, //-- check menu state interlinear mods
-		hebrewpointsint, //-- check menu state interlinear mods
-		cantillationmarksint, //-- check menu state interlinear mods
-	        footnotesint, //-- check menu state interlinear mods
-		greekaccentsint, //-- check menu state interlinear mods
+		strongsint, //-- check menu state parallel mods
+		headingsint, //-- check menu state parallel mods	
+		crossrefint, //-- check menu state parallel mods	
+		lemmasint, //-- check menu state parallel mods		
+		morphsint, //-- check menu state parallel mods
+		hebrewpointsint, //-- check menu state parallel mods
+		cantillationmarksint, //-- check menu state parallel mods
+	        footnotesint, //-- check menu state parallel mods
+		greekaccentsint, //-- check menu state parallel mods
 	        versestyle, /* use verse style if true of paragraph style if not */
-	        interlinearpage, /* display interlinear page */
+	        parallelpage, /* display parallel page */
 	        autosavepersonalcomments, /* auto save personal notes */
 	        formatpercom, /* use html to format personal notes */
 	        showshortcutbar, /* display shortcut bar if true */
@@ -138,7 +138,7 @@ struct _settings {
 		
 		/** if items are docked **/
 		docked, /* true when shortcut bar is docked */
-		dockedInt, /* true when interlinear page is docked */
+		dockedInt, /* true when parallel page is docked */
 		
 		/**  find dialogs info  **/
 		finddialog, /* if finddialog open (showing) */

@@ -294,7 +294,7 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 {
 	gint count, i;
 	const gchar *key;
-	gchar *new_key, *text;
+	gchar *new_key, *text = NULL;
 	static gboolean firsttime = TRUE;
 
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
@@ -303,9 +303,10 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 	xml_set_value("GnomeSword", "key", "dictionary", d->key);
 	
 	text = get_dictlex_text(d->mod_name, d->key);
-	//g_warning("d->mod_name = %s d->key = %s", d->mod_name, d->key);
-	entry_display(d->html, d->mod_name, text, d->key, TRUE);
-	free(text);
+	if(text) {
+		entry_display(d->html, d->mod_name, text, d->key, TRUE);
+		free(text);
+	}
 
 	if (firsttime)
 		count = 7;
@@ -316,8 +317,6 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 
 	if (count) {
 		gtk_clist_clear(GTK_CLIST(d->clist));
-		//set_dictlex_module(d->mod_name);
-		//set_dictlex_key(key);
 		new_key = get_dictlex_key(2, d->mod_name, -1);
 
 		for (i = 0; i < (count / 2); i++) {

@@ -448,11 +448,11 @@ void load_settings_structure(void)
 	settings.CommWindowModule = xml_get_value("modules", "comm");
 	settings.DictWindowModule = xml_get_value("modules", "dict");
 	settings.BookWindowModule = xml_get_value("modules", "book");
-	settings.Interlinear1Module = xml_get_value("modules", "int1");
-	settings.Interlinear2Module = xml_get_value("modules", "int2");
-	settings.Interlinear3Module = xml_get_value("modules", "int3");
-	settings.Interlinear4Module = xml_get_value("modules", "int4");
-	settings.Interlinear5Module = xml_get_value("modules", "int5");
+	settings.parallel1Module = xml_get_value("modules", "int1");
+	settings.parallel2Module = xml_get_value("modules", "int2");
+	settings.parallel3Module = xml_get_value("modules", "int3");
+	settings.parallel4Module = xml_get_value("modules", "int4");
+	settings.parallel5Module = xml_get_value("modules", "int5");
 	settings.personalcommentsmod =
 	    xml_get_value("modules", "percomm");
 	settings.devotionalmod = xml_get_value("modules", "devotional");
@@ -503,18 +503,29 @@ void load_settings_structure(void)
 	settings.found_color = xml_get_value("HTMLcolors", "found");
 
 
-	settings.strongsint =
-	    atoi(xml_get_value("interlinear", "strongs"));
-	settings.morphsint =
-	    atoi(xml_get_value("interlinear", "morphs"));
-	settings.hebrewpointsint =
-	    atoi(xml_get_value("interlinear", "points"));
-	settings.cantillationmarksint =
-	    atoi(xml_get_value("interlinear", "cantillation"));
-	settings.footnotesint =
-	    atoi(xml_get_value("interlinear", "footnotes"));
-	settings.interlinearpage =
-	    atoi(xml_get_value("interlinear", "interlinear"));
+	buf = xml_get_value("parallel", "strongs");
+	if(buf)
+		settings.strongsint =atoi(buf);
+	
+	buf = xml_get_value("parallel", "morphs");
+	if(buf)
+		settings.morphsint = atoi(buf);
+	
+	buf = xml_get_value("parallel", "points");
+	if(buf)
+		settings.hebrewpointsint = atoi(buf);
+	
+	buf = xml_get_value("parallel", "cantillation");
+	if(buf)
+		settings.cantillationmarksint = atoi(buf);
+	
+	buf = xml_get_value("parallel", "footnotes");
+	if(buf)
+		settings.footnotesint = atoi(buf);	
+	
+	buf = xml_get_value("parallel", "parallel");
+	if(buf)
+	settings.parallelpage = atoi(buf);
 
 
 	settings.showtexts = atoi(xml_get_value("misc", "showtexts"));
@@ -538,10 +549,11 @@ void load_settings_structure(void)
 	settings.studypadfilename =
 	    xml_get_value("studypad", "lastfile");
 	settings.studypaddir = xml_get_value("studypad", "directory");
+	
 	buf = xml_get_value("studypad", "stylebar");
 	if(buf)
 		settings.show_style_bar_sp =  atoi(buf);
-	   // atoi(xml_get_value("studypad", "stylebar"));
+	
 	buf = xml_get_value("studypad", "editbar");
 	if(buf)
 		settings.show_edit_bar_sp =  atoi(buf);
@@ -550,62 +562,60 @@ void load_settings_structure(void)
 	buf = xml_get_value("shortcutbar", "shortcutbar");
 	if(buf)
 		settings.showshortcutbar = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "shortcutbar"));
+	
 	buf = xml_get_value("shortcutbar", "favo");
 	if(buf)
 		settings.showfavoritesgroup = atoi(buf);
-	   // atoi(xml_get_value("shortcutbar", "favo"));
+	
 	buf = xml_get_value("shortcutbar", "bible");
 	if(buf)
 		settings.showtextgroup = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "bible"));
+	
 	buf = xml_get_value("shortcutbar", "comm");
 	if(buf)
 		settings.showcomgroup = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "comm"));
+	
 	buf = xml_get_value("shortcutbar", "dict");
 	if(buf)
 		settings.showdictgroup = atoi(buf);
-	   // atoi(xml_get_value("shortcutbar", "dict"));
+	
 	buf = xml_get_value("shortcutbar", "book");
 	if(buf)
 		settings.showbookgroup = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "book"));
+	
 	buf = xml_get_value("shortcutbar", "bookmark");
 	if(buf)
 		settings.showbookmarksgroup = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "bookmark"));
+	
 	buf = xml_get_value("shortcutbar", "history");
 	if(buf)
 		settings.showhistorygroup = atoi(buf);
-	    //atoi(xml_get_value("shortcutbar", "history"));
+	
 	buf = xml_get_value("shortcutbar", "docked");
 	if(buf)
 		settings.docked =  atoi(buf);
-	//atoi(xml_get_value("shortcutbar", "docked"));
-
-
+	
+	
 	buf = xml_get_value("tabs", "bible");
 	if(buf)
 		settings.text_tabs =  atoi(buf);
-	//atoi(xml_get_value("tabs", "bible"));
+	
 	buf = xml_get_value("tabs", "comm");
 	if(buf)
 		settings.comm_tabs =  atoi(buf);
-	//atoi(xml_get_value("tabs", "comm"));
+	
 	buf = xml_get_value("tabs", "dict");
 	if(buf)
 		settings.dict_tabs =  atoi(buf);
-	//atoi(xml_get_value("tabs", "dict"));
+	
 	buf = xml_get_value("tabs", "book");
 	if(buf)
 		settings.book_tabs =  atoi(buf);
-	//atoi(xml_get_value("tabs", "book"));
+	
 	buf = xml_get_value("tabs", "percomm");
 	if(buf)
 		settings.percomm_tabs =  atoi(buf);
-	//atoi(xml_get_value("tabs", "percomm"));
-	//settings.base_font = "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-iso10646-1"
+	
 
 	/*
 	   settings. = xml_get_value("", "");

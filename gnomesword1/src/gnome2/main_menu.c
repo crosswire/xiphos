@@ -219,7 +219,7 @@ void on_preferences1_activate(GtkMenuItem * menuitem,
 
 void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	EShortcutBar *bar1;
+/*	EShortcutBar *bar1;
 
 	bar1 = E_SHORTCUT_BAR(widgets.shortcutbar);
 	if (!settings.showshortcutbar) {
@@ -228,6 +228,10 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 					  settings.searchbargroup,
 					  TRUE);
+*/
+	if (!settings.showshortcutbar) 
+		gui_shortcutbar_showhide();
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 2);
 }
 
 /******************************************************************************
@@ -683,7 +687,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lower Workbook"),
 	 N_
-	 ("Show/Hide Lower Workbook - Dictionaries, Books and Interlinear"),
+	 ("Show/Hide Lower Workbook - Dictionaries, Books and parallel"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},

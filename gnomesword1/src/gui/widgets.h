@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * widgets.h - 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,12 +43,13 @@ struct  _app_widgets {
 		*notebook_comm,  /* notebook - commentaries */
 		*notebook_text,  /* notebook - texts */
 		*notebook_percomm,  /* notebook - personal comments */
+		*notebook_sidebar,  /* notebook - sidebar */
 		*vbox_percomm,  /* vbox for personal comments notebook */
 		*vbox_text,  /* vbox for  */
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
-		*frame_interlinear, /* frame for interlinear html  */ 
+		*frame_parallel, /* frame for interlinear html  */ 
 	
 	/* editor_dialog */
 		*studypad_dialog,
@@ -59,7 +60,7 @@ struct  _app_widgets {
 	
 	/* html widgets */	
 		*html_search_report,  /* html widget for serch report shortcut bar */
-		*html_interlinear, /* interlinear html widget */
+		*html_parallel, /* parallel html widget */
 		*html_text, /* texts html widget */
 		*html_comm, /* html commentary widget */
 		*html_percomm, /* html personal commentary widget */

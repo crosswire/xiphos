@@ -28,7 +28,7 @@ extern "C" {
 
 	
 #define MAIN_TEXT_WINDOW 0 
-#define INTERLINEAR_WINDOW 1
+#define parallel_WINDOW 1
 #define COMMENTARY_WINDOW 2
 #define DICTIONARY_WINDOW 3
 #define BOOK_WINDOW 4

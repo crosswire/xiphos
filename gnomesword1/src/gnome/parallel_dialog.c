@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * interlinear_dialog.c - dialog for detached interlinear
+ * parallel_dialog.c - dialog for detached parallel
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -25,8 +25,8 @@
 
 #include <gnome.h>
 
-#include "gui/interlinear_dialog.h"
-#include "gui/interlinear.h"
+#include "gui/parallel_dialog.h"
+#include "gui/parallel_view.h"
 #include "gui/gnomesword.h"
 #include "gui/widgets.h"
 
@@ -37,7 +37,7 @@
 /******************************************************************************
  * static
  */
-static GtkWidget *Interlinear_UnDock_Dialog;
+static GtkWidget *parallel_UnDock_Dialog;
 static GtkWidget *vboxInt;
 static GtkWidget *entrycbIntBook;
 static GtkWidget *sbIntChapter;
@@ -48,12 +48,12 @@ static gboolean ApplyChangeBook;
 
 /******************************************************************************
  * Name
- *   change_verse_interlinear
+ *   change_verse_parallel
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
- *   gchar *change_verse_interlinear(void)
+ *   gchar *change_verse_parallel(void)
  *
  * Description
  *   
@@ -65,11 +65,10 @@ static gboolean ApplyChangeBook;
  *   gchar *
  */
 
-static gchar *change_verse_interlinear(void)
+static gchar *change_verse_parallel(void)
 {
 	gchar *retval;
-	const gchar *bookname;
-	gchar buf[256];
+	gchar *bookname, buf[256];
 	gint chapter, verse;
 	const char *newbook;
 
@@ -100,12 +99,12 @@ static gchar *change_verse_interlinear(void)
 
 /******************************************************************************
  * Name
- *   update_controls_interlinear
+ *   update_controls_parallel
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
- *   gchar *update_controls_interlinear(gchar * ref)
+ *   gchar *update_controls_parallel(gchar * ref)
  *
  * Description
  *   
@@ -117,14 +116,13 @@ static gchar *change_verse_interlinear(void)
  *   gchar*
  */
 
-static gchar *update_controls_interlinear(const gchar * ref)
+static gchar *update_controls_parallel(gchar * ref)
 {
-	const gchar *bookname;
-	gchar buf[256];
+	gchar *bookname, buf[256];
 	gint chapter, verse;
 	const char *newbook;
 
-	newbook = get_book_from_key(ref); 
+	newbook = get_book_from_key(ref);
 	chapter = get_chapter_from_key(ref);
 	verse = get_verse_from_key(ref);
 
@@ -142,12 +140,12 @@ static gchar *update_controls_interlinear(const gchar * ref)
 
 /******************************************************************************
  * Name
- *   undock_interlinear_page
+ *   undock_parallel_page
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
- *   void undock_interlinear_page(void)
+ *   void undock_parallel_page(void)
  *
  * Description
  *   
@@ -159,18 +157,18 @@ static gchar *update_controls_interlinear(const gchar * ref)
  *   void
  */
 
-void gui_undock_interlinear_page(void)
+void gui_undock_parallel_page(void)
 {
 	ApplyChangeBook = FALSE;
-	Interlinear_UnDock_Dialog = gui_create_interlinear_dialog();
-	gtk_widget_reparent(widgets.frame_interlinear, vboxInt);
+	parallel_UnDock_Dialog = gui_create_parallel_dialog();
+	gtk_widget_reparent(widgets.frame_parallel, vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(widgets.workbook_lower),
-				 settings.interlinear_page);
-	settings.cvInterlinear =
-	    update_controls_interlinear(settings.currentverse);
-	gtk_widget_show(Interlinear_UnDock_Dialog);
-	gui_update_interlinear_page_detached();
-	g_free(settings.cvInterlinear);
+				 settings.parallel_page);
+	settings.cvparallel =
+	    update_controls_parallel(settings.currentverse);
+	gtk_widget_show(parallel_UnDock_Dialog);
+	gui_update_parallel_page_detached();
+	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
 }
 
@@ -179,7 +177,7 @@ void gui_undock_interlinear_page(void)
  *   on_btnDockInt_clicked
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   void on_btnDockInt_clicked(GtkButton * button, gpointer user_data)
  *
@@ -195,17 +193,17 @@ void gui_undock_interlinear_page(void)
 
 void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
 {
-	gtk_widget_destroy(Interlinear_UnDock_Dialog);
+	gtk_widget_destroy(parallel_UnDock_Dialog);
 }
 
 /******************************************************************************
  * Name
- *   on_dlgInterlinear_destroy
+ *   on_dlgparallel_destroy
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
- *   void on_dlgInterlinear_destroy(GtkObject *object, gpointer user_data)
+ *   void on_dlgparallel_destroy(GtkObject *object, gpointer user_data)
  *
  * Description
  *   
@@ -217,13 +215,13 @@ void gui_btnDockInt_clicked(GtkButton * button, gpointer user_data)
  *   void
  */
 
-static void on_dlgInterlinear_destroy(GtkObject * object,
+static void on_dlgparallel_destroy(GtkObject * object,
 				      gpointer user_data)
 {
 	GtkWidget *tab_label, *menu_label, *vbox;
-	tab_label = gtk_label_new(_("Interlinear"));
+	tab_label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(tab_label);
-	menu_label = gtk_label_new(_("Interlinear Page"));
+	menu_label = gtk_label_new(_("Parallel View"));
 	gtk_widget_show(menu_label);
 
 	vbox = gtk_vbox_new(FALSE, 0);
@@ -231,12 +229,12 @@ static void on_dlgInterlinear_destroy(GtkObject * object,
 	gtk_notebook_insert_page_menu(GTK_NOTEBOOK
 				      (widgets.workbook_lower), vbox,
 				      tab_label, menu_label, 
-					settings.interlinear_page);
-	gtk_widget_reparent(widgets.frame_interlinear, vbox);
+					settings.parallel_page);
+	gtk_widget_reparent(widgets.frame_parallel, vbox);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.workbook_lower), 
-					settings.interlinear_page);
+					settings.parallel_page);
 	settings.dockedInt = TRUE;
-	gui_update_interlinear_page();
+	gui_update_parallel_page();
 }
 
 /******************************************************************************
@@ -244,7 +242,7 @@ static void on_dlgInterlinear_destroy(GtkObject * object,
  *   on_buttonIntSync_clicked
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   void on_buttonIntSync_clicked(GtkButton * button, gpointer user_data)
  *
@@ -262,10 +260,10 @@ static void on_buttonIntSync_clicked(GtkButton * button,
 				     gpointer user_data)
 {
 	ApplyChangeBook = FALSE;
-	settings.cvInterlinear =
-	    update_controls_interlinear(settings.currentverse);
-	gui_update_interlinear_page_detached();
-	g_free(settings.cvInterlinear);
+	settings.cvparallel =
+	    update_controls_parallel(settings.currentverse);
+	gui_update_parallel_page_detached();
+	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
 }
 
@@ -274,7 +272,7 @@ static void on_buttonIntSync_clicked(GtkButton * button,
  *   on_entrycbIntBook_changed
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   void on_entrycbIntBook_changed(GtkEditable *editable, gpointer user_data)
  *
@@ -292,8 +290,7 @@ static void on_entrycbIntBook_changed(GtkEditable * editable,
 				      gpointer user_data)
 {
 	if (ApplyChangeBook) {
-		const gchar *bookname;
-		char buf[256];
+		gchar *bookname, buf[256];
 		bookname = gtk_entry_get_text(GTK_ENTRY(editable));
 		sprintf(buf, "%s %d:%d", bookname, 1, 1);
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
@@ -301,8 +298,8 @@ static void on_entrycbIntBook_changed(GtkEditable * editable,
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse),
 					  1);
 		gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
-		settings.cvInterlinear = buf;
-		gui_update_interlinear_page_detached();
+		settings.cvparallel = buf;
+		gui_update_parallel_page_detached();
 	}
 }
 
@@ -311,7 +308,7 @@ static void on_entrycbIntBook_changed(GtkEditable * editable,
  *   on_sbIntChapter_button_release_event
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   gboolean on_sbIntChapter_button_release_event(GtkWidget *widget,
  *   			GdkEventButton *event, gpointer user_data)
@@ -333,8 +330,8 @@ static gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
 {
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
-	settings.cvInterlinear = change_verse_interlinear();
-	gui_update_interlinear_page_detached();
+	settings.cvparallel = change_verse_parallel();
+	gui_update_parallel_page_detached();
 	ApplyChangeBook = TRUE;
 	return TRUE;
 }
@@ -344,7 +341,7 @@ static gboolean on_sbIntChapter_button_release_event(GtkWidget * widget,
  *   on_sbIntVerse_button_release_event
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   gboolean on_sbIntVerse_button_release_event(GtkWidget *widget,
  *			GdkEventButton *event, gpointer user_data)
@@ -364,8 +361,8 @@ static gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
 						   gpointer user_data)
 {
 	ApplyChangeBook = FALSE;
-	settings.cvInterlinear = change_verse_interlinear();
-	gui_update_interlinear_page_detached();
+	settings.cvparallel = change_verse_parallel();
+	gui_update_parallel_page_detached();
 	ApplyChangeBook = TRUE;
 	return TRUE;
 }
@@ -375,7 +372,7 @@ static gboolean on_sbIntVerse_button_release_event(GtkWidget * widget,
  *   on_entryIntLookup_key_press_event
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   gboolean on_entryIntLookup_key_press_event(GtkWidget *widget,
  *                                      GdkEventKey *event, gpointer user_data)
@@ -393,14 +390,14 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 						  GdkEventKey * event,
 						  gpointer user_data)
 {
-	const gchar *buf;
+	gchar *buf;
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));
 	if (event->keyval == 65293 || event->keyval == 65421) {
-		settings.cvInterlinear =
-		    update_controls_interlinear(buf); 
-		gui_update_interlinear_page_detached();
-		g_free(settings.cvInterlinear);
+		settings.cvparallel =
+		    update_controls_parallel(buf);
+		gui_update_parallel_page_detached();
+		g_free(settings.cvparallel);
 		ApplyChangeBook = TRUE;
 		return TRUE;
 	}
@@ -413,7 +410,7 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
  *   on_btnIntGotoVerse_clicked
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
  *   void on_btnIntGotoVerse_clicked(GtkButton *button, gpointer user_data)
  *
@@ -430,26 +427,26 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 static void on_btnIntGotoVerse_clicked(GtkButton * button,
 				       gpointer user_data)
 {
-	const gchar *buf;		//-- pointer to entry string
+	gchar *buf;		//-- pointer to entry string
 	//-- pointer to entry string
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
 
-	settings.cvInterlinear = update_controls_interlinear(buf);
+	settings.cvparallel = update_controls_parallel(buf);
 
-	gui_update_interlinear_page_detached();	//-- change verse to entry text 
-	g_free(settings.cvInterlinear);
+	gui_update_parallel_page_detached();	//-- change verse to entry text 
+	g_free(settings.cvparallel);
 	ApplyChangeBook = TRUE;
 }
 
 /******************************************************************************
  * Name
- *   create_interlinear_dialog
+ *   create_parallel_dialog
  *
  * Synopsis
- *   #include "interlinear_dialog.h"
+ *   #include "parallel_dialog.h"
  *   
- *   GtkWidget *create_interlinear_dialog(void)
+ *   GtkWidget *create_parallel_dialog(void)
  *
  * Description
  *   
@@ -461,9 +458,9 @@ static void on_btnIntGotoVerse_clicked(GtkButton * button,
  *   GtkWidget *
  */
 
-GtkWidget *gui_create_interlinear_dialog(void)
+GtkWidget *gui_create_parallel_dialog(void)
 {
-	GtkWidget *dialog_interlinear;
+	GtkWidget *dialog_parallel;
 	GtkWidget *dialog_vbox25;
 	GtkWidget *toolbar29;
 	GtkWidget *tmp_toolbar_icon;
@@ -477,20 +474,20 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	GtkWidget *btnDockInt;
 	gchar title[256];
 	
-	sprintf(title,"%s - %s", settings.program_title, _("Interlinear"));
+	sprintf(title,"%s - %s", settings.program_title, _("Parallel"));
 
-	dialog_interlinear = gtk_dialog_new();
-	gtk_object_set_data(GTK_OBJECT(dialog_interlinear),
-			    "dialog_interlinear", dialog_interlinear);
-	gtk_window_set_title(GTK_WINDOW(dialog_interlinear),
+	dialog_parallel = gtk_dialog_new();
+	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
+			    "dialog_parallel", dialog_parallel);
+	gtk_window_set_title(GTK_WINDOW(dialog_parallel),
 			     title);
-	gtk_window_set_default_size(GTK_WINDOW(dialog_interlinear), 657,
+	gtk_window_set_default_size(GTK_WINDOW(dialog_parallel), 657,
 				    361);
-	gtk_window_set_policy(GTK_WINDOW(dialog_interlinear), TRUE,
+	gtk_window_set_policy(GTK_WINDOW(dialog_parallel), TRUE,
 			      TRUE, FALSE);
 
-	dialog_vbox25 = GTK_DIALOG(dialog_interlinear)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_interlinear),
+	dialog_vbox25 = GTK_DIALOG(dialog_parallel)->vbox;
+	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
 			    "dialog_vbox25", dialog_vbox25);
 	gtk_widget_show(dialog_vbox25);
 
@@ -500,18 +497,17 @@ GtkWidget *gui_create_interlinear_dialog(void)
 			   0);
 
 	toolbar29 =
-	    gtk_toolbar_new();
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar29), GTK_TOOLBAR_ICONS);
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar29),
-				      GTK_RELIEF_NONE);*/
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar29),
+				      GTK_RELIEF_NONE);
 
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-refresh", 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar29)));
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(dialog_parallel,
+				      GNOME_STOCK_PIXMAP_REFRESH);
 	buttonIntSync =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -556,10 +552,10 @@ GtkWidget *gui_create_interlinear_dialog(void)
 				  entryIntLookup, NULL, NULL);
 	gtk_widget_set_usize(entryIntLookup, 190, -2);
 	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), _("Romans 8:28"));
-	
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-jump-to", 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbar29)));
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(dialog_parallel,
+				      GNOME_STOCK_PIXMAP_JUMP_TO);
 	btnIntGotoVerse =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar29),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
@@ -571,8 +567,8 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	gtk_widget_show(btnIntGotoVerse);
 
 	dialog_action_area25 =
-	    GTK_DIALOG(dialog_interlinear)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_interlinear),
+	    GTK_DIALOG(dialog_parallel)->action_area;
+	gtk_object_set_data(GTK_OBJECT(dialog_parallel),
 			    "dialog_action_area25",
 			    dialog_action_area25);
 	gtk_widget_show(dialog_action_area25);
@@ -586,42 +582,41 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox4),
 				  GTK_BUTTONBOX_END);
 
-	btnDockInt = gtk_button_new_from_stock ("gtk-close");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);*/
+	btnDockInt = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
 	gtk_widget_show(btnDockInt);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
 	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
 
 
-	gtk_signal_connect(GTK_OBJECT(dialog_interlinear), "destroy",
-			   G_CALLBACK(on_dlgInterlinear_destroy),
+	gtk_signal_connect(GTK_OBJECT(dialog_parallel), "destroy",
+			   GTK_SIGNAL_FUNC(on_dlgparallel_destroy),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(buttonIntSync), "clicked",
-			   G_CALLBACK(on_buttonIntSync_clicked),
+			   GTK_SIGNAL_FUNC(on_buttonIntSync_clicked),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(entrycbIntBook), "changed",
-			   G_CALLBACK(on_entrycbIntBook_changed),
+			   GTK_SIGNAL_FUNC(on_entrycbIntBook_changed),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(sbIntChapter),
 			   "button_release_event",
-			   G_CALLBACK
+			   GTK_SIGNAL_FUNC
 			   (on_sbIntChapter_button_release_event),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(sbIntVerse),
 			   "button_release_event",
-			   G_CALLBACK
+			   GTK_SIGNAL_FUNC
 			   (on_sbIntVerse_button_release_event), NULL);
 	gtk_signal_connect(GTK_OBJECT(entryIntLookup),
 			   "key_press_event",
-			   G_CALLBACK
+			   GTK_SIGNAL_FUNC
 			   (on_entryIntLookup_key_press_event), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnIntGotoVerse), "clicked",
-			   G_CALLBACK(on_btnIntGotoVerse_clicked),
+			   GTK_SIGNAL_FUNC(on_btnIntGotoVerse_clicked),
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(btnDockInt), "clicked",
-			   G_CALLBACK(gui_btnDockInt_clicked),
+			   GTK_SIGNAL_FUNC(gui_btnDockInt_clicked),
 			   NULL);
-	return dialog_interlinear;
+	return dialog_parallel;
 }
 
 /******   end of file   ******/
