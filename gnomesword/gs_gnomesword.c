@@ -22,6 +22,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -50,7 +51,7 @@ extern GList 	*biblemods,
 		*dictionarymods,
 		*percommods;
 extern gchar *mydictmod;		
-extern GtkWidget *versestyle,	/* widget to access toggle menu - for versestyle */
+GtkWidget	*versestyle,	/* widget to access toggle menu - for versestyle */
 		*footnotes,	/* widget to access toggle menu - for footnotes */
   		*strongsnum,/* widget to access toggle menu - for strongs numbers */
 	    	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
@@ -63,7 +64,7 @@ extern gboolean havecomm; /* let us know if we have at least one commentary modu
 extern gboolean usepersonalcomments; /* do we setup for personal comments - default is FALSE */
 extern gboolean bVerseStyle;
 extern gboolean autoSave;
-extern gint historyitems;
+gint historyitems = 0;
 extern gint groupnum4;
 extern gint ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
 gboolean isstrongs = FALSE; /* main window selection is not storngs number */
