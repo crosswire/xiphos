@@ -83,16 +83,6 @@ void clearhistory(GtkWidget * app, GtkWidget * shortcut_bar)
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
-/*
-	if (settings.showhistorygroup) {
-		for (i = historyitems - 1; i >= 0; i--) {
-			e_shortcut_model_remove_item(E_SHORTCUT_BAR
-						     (shortcut_bar)->
-						     model, groupnum4,
-						     i);
-		}
-	}
-*/
 	historyitems = 0;
 	currenthistoryitem = 0;
 	firstbackclick = TRUE;
@@ -116,8 +106,7 @@ void clearhistory(GtkWidget * app, GtkWidget * shortcut_bar)
  *   void
  */
 
-void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar,
-		    gchar * ref)
+void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar, gchar * ref)
 {
 	gint i;
 
@@ -140,14 +129,14 @@ void addHistoryItem(GtkWidget * app, GtkWidget * shortcut_bar,
 					  (widgets.notebook_comm));
 	sprintf(historylist[historyitems].verseref, "%s", ref);
 	sprintf(historylist[historyitems].textmod, "%s",
-		xml_get_value("modules", "bible"));//settings.MainWindowModule);
+		xml_get_value("modules", "bible"));
 	sprintf(historylist[historyitems].commod, "%s",
-		xml_get_value("modules", "comm"));//settings.CommWindowModule);
+		xml_get_value("modules", "comm"));
 
 	++historyitems;
 	currenthistoryitem = historyitems;
 	/* set sensitivity of history buttons */
-	if (currenthistoryitem > 0)
+	if (currenthistoryitem > 1)
 		gtk_widget_set_sensitive(nav_bar.button_back, TRUE);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
 	updatehistorymenu(app);
@@ -185,11 +174,6 @@ void changeverseHistory(gint historynum)
 	/* change commentary mod */
 	gui_change_module_and_key(historylist[historynum].commod,
 				  historylist[historynum].verseref);
-	if (firstbackclick) {
-		--currenthistoryitem;
-		--currenthistoryitem;
-		firstbackclick = FALSE;
-	}
 }
 
 
@@ -228,7 +212,8 @@ void historynav(GtkWidget * app, gint direction)
 		if (currenthistoryitem > 0) {
 			--currenthistoryitem;
 			if (firstbackclick)
-				settings.addhistoryitem = TRUE;
+				--currenthistoryitem;
+			
 			changeverseHistory(currenthistoryitem);
 			firstbackclick = FALSE;
 		}
@@ -240,6 +225,8 @@ void historynav(GtkWidget * app, gint direction)
 			gtk_widget_set_sensitive(nav_bar.button_forward,
 						 TRUE);
 	}
+	settings.addhistoryitem = TRUE;
+	
 }
 
 
@@ -263,56 +250,24 @@ void updatehistorymenu(GtkWidget * app)
 {
 	gint i;
 	gchar buf[80];
-
+	GnomeUIInfo *menuitem;
+	
 	gui_remove_menu_items(_("_History/<Separator>"),
 			      historyitems + 1);
 	gui_add_separator2menu(app, _("_History/C_lear"));
-	for (i = 0; i < historyitems; i++) {
-		sprintf(buf, "%d", historylist[i].itemnum);
-		gui_add_item2gnome_menu(app, historylist[i].verseref,
-					buf, _("_History/<Separator>"),
-					(GtkMenuCallback)
-					on_mnuHistoryitem1_activate);
-	}
-}
-
-
-/******************************************************************************
- * Name
- *  updatehistoryshortcutbar
- *
- * Synopsis
- *   #include "gui/history.h"
- *
- *   void updatehistoryshortcutbar(GtkWidget * app, GtkWidget * shortcut_bar)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-void updatehistoryshortcutbar(GtkWidget * app, GtkWidget * shortcut_bar)
-{
-/*	gint i;
-	GdkPixbuf *icon_pixbuf = NULL;
-	GError **error;
 	
-	icon_pixbuf = gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-					       "/book-un.png",
-						error);
-
-	for (i = historyitems - 2; i >= 0; i--) {
-		e_shortcut_model_remove_item(E_SHORTCUT_BAR
-					     (shortcut_bar)->model,
-					     groupnum4, i);
-	}
 	for (i = 0; i < historyitems; i++) {
-		e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->
-					  model, groupnum4, -1,
-					  historylist[i].verseref,
-					  historylist[i].verseref,
-					  icon_pixbuf);
-	}*/
+		menuitem = g_new(GnomeUIInfo, 2);
+		menuitem->type = GNOME_APP_UI_ITEM;
+		menuitem->moreinfo = (gpointer) on_mnuHistoryitem1_activate;
+		menuitem->user_data = GINT_TO_POINTER(historylist[i].itemnum);
+		menuitem->label = historylist[i].verseref;
+		menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
+		menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
+		menuitem->accelerator_key = 0;
+		menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
+		gnome_app_insert_menus_with_data(GNOME_APP(app), 
+						_("_History/<Separator>"),
+						menuitem, NULL);
+	}
 }

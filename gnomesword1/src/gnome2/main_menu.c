@@ -126,7 +126,7 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	changeverseHistory(atoi((gchar *) user_data));
+	changeverseHistory(GPOINTER_TO_INT(user_data));
 }
 
 /******************************************************************************

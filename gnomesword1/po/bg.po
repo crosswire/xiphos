@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword-1.0-0.9.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-03 22:40-0500\n"
+"POT-Creation-Date: 2003-12-04 12:01-0500\n"
 "PO-Revision-Date: 2002-08-25 14:50 +0200\n"
 "Last-Translator: Andrew Ivanov <gnome@mail.orbitel.bg>\n"
 "Language-Team:Gnomesword Project \n"
@@ -578,8 +578,8 @@ msgstr "запиши бележка"
 msgid "Delete Entry"
 msgstr "изтрий бележка"
 
-#: src/gnome2/editor_menu.c:1054 src/gnome2/search_dialog.c:2674
-#: src/gnome2/search_dialog.c:2851 src/gnome2/toolbar_edit.c:443
+#: src/gnome2/editor_menu.c:1054 src/gnome2/search_dialog.c:2724
+#: src/gnome2/search_dialog.c:2887 src/gnome2/toolbar_edit.c:443
 msgid "New"
 msgstr "нов"
 
@@ -672,7 +672,7 @@ msgstr "проверка на правописа"
 msgid "Start"
 msgstr ""
 
-#: src/gnome2/editor_spell.c:675 src/gnome2/search_dialog.c:2460
+#: src/gnome2/editor_spell.c:675
 #, fuzzy
 msgid "Options"
 msgstr "опции"
@@ -729,8 +729,8 @@ msgstr "в тетрадката не е съхранен!"
 msgid "Enter Word or Phrase"
 msgstr "въведете дума или фраза"
 
-#: src/gnome2/find_dialog.c:232 src/gnome2/search_dialog.c:2470
-#: src/gnome2/search_sidebar.c:551
+#: src/gnome2/find_dialog.c:232 src/gnome2/search_dialog.c:2490
+#: src/gnome2/search_sidebar.c:578
 msgid "Case Sensitive"
 msgstr "чувствителност главни/малки букви"
 
@@ -801,12 +801,12 @@ msgstr ""
 msgid "You need to restart GnomeSword to view it"
 msgstr "Искате ли GnomeSword да се стартира с"
 
-#: src/gnome2/history.c:80 src/gnome2/history.c:270 src/gnome2/history.c:276
+#: src/gnome2/history.c:80 src/gnome2/history.c:267 src/gnome2/history.c:273
 #, fuzzy
 msgid "_History/<Separator>"
 msgstr "История/<Separator>"
 
-#: src/gnome2/history.c:82 src/gnome2/history.c:272
+#: src/gnome2/history.c:82 src/gnome2/history.c:269
 #, fuzzy
 msgid "_History/C_lear"
 msgstr "История/забрави"
@@ -829,8 +829,8 @@ msgstr ""
 msgid "Copy highlighted text from main window"
 msgstr "Копира маркирания в главния прозорец текст"
 
-#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:2209
-#: src/gnome2/search_sidebar.c:222
+#: src/gnome2/main_menu.c:622 src/gnome2/search_dialog.c:230
+#: src/gnome2/search_dialog.c:623 src/gnome2/search_sidebar.c:222
 msgid "Search"
 msgstr "Търсене"
 
@@ -839,7 +839,7 @@ msgstr "Търсене"
 msgid "Shortcut Bar Search"
 msgstr "инструментална лента"
 
-#: src/gnome2/main_menu.c:628 src/gnome2/search_dialog.c:2189
+#: src/gnome2/main_menu.c:628 src/gnome2/search_dialog.c:2193
 #, fuzzy
 msgid "Advanced Search"
 msgstr "Forward Search"
@@ -888,7 +888,7 @@ msgid "Show/Hide Bible texts window"
 msgstr "прозорец за Библията"
 
 #: src/gnome2/main_menu.c:672 src/gnome2/preferences_dialog.c:1743
-#: src/gnome2/preferences_dialog.c:2134 src/gnome2/search_sidebar.c:469
+#: src/gnome2/preferences_dialog.c:2134 src/gnome2/search_sidebar.c:478
 #: src/gnome2/setup_druid.c:752
 msgid "Commentary"
 msgstr "коментар"
@@ -1412,313 +1412,292 @@ msgstr "Модул"
 msgid "finds in "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:845
+#: src/gnome2/search_dialog.c:855
 #, fuzzy
 msgid "Search Finished"
 msgstr "опции"
 
-#: src/gnome2/search_dialog.c:1324
+#: src/gnome2/search_dialog.c:1334
 #, fuzzy
 msgid "Clear List?"
 msgstr "Забрави историята"
 
-#: src/gnome2/search_dialog.c:1325
+#: src/gnome2/search_dialog.c:1335
 msgid "Do you really want to clear the module list?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1395
+#: src/gnome2/search_dialog.c:1405
 #, fuzzy
 msgid "Remove Module?"
 msgstr "Файл"
 
-#: src/gnome2/search_dialog.c:1396
+#: src/gnome2/search_dialog.c:1406
 msgid "Do you really want to remove the selected module?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1616
+#: src/gnome2/search_dialog.c:1626
 #, fuzzy
 msgid "Delete Range?"
 msgstr "изтрий бележка"
 
-#: src/gnome2/search_dialog.c:1617
+#: src/gnome2/search_dialog.c:1627
 msgid "Are you sure you want ot delete this range?"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:1685
+#: src/gnome2/search_dialog.c:1695
 #, fuzzy
 msgid "Delete list?"
 msgstr "изтрий бележка"
 
-#: src/gnome2/search_dialog.c:1686
+#: src/gnome2/search_dialog.c:1696
 msgid "Are you sure you want to delete:"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2219
+#: src/gnome2/search_dialog.c:2224
 #, fuzzy
 msgid "<Module>"
 msgstr "Модул"
 
-#: src/gnome2/search_dialog.c:2231
+#: src/gnome2/search_dialog.c:2237
 msgid " for "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2244 src/gnome2/search_sidebar.c:422
+#: src/gnome2/search_dialog.c:2250 src/gnome2/search_sidebar.c:422
 msgid "Click to begin the search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2289
-#, fuzzy
-msgid "Scope"
-msgstr "никакви"
+#: src/gnome2/search_dialog.c:2285
+msgid "<b>Scope</b>"
+msgstr ""
 
-#: src/gnome2/search_dialog.c:2305
+#: src/gnome2/search_dialog.c:2301
 #, fuzzy
 msgid "Entire Module   "
 msgstr "Покажи модул"
 
-#: src/gnome2/search_dialog.c:2311
+#: src/gnome2/search_dialog.c:2307
 msgid "Search entire module(s)"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2317
+#: src/gnome2/search_dialog.c:2313
 msgid "Current Results   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2324
+#: src/gnome2/search_dialog.c:2320
 msgid "Use the results of the last search for the search scope"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2329
+#: src/gnome2/search_dialog.c:2325
 msgid "Custom Range   "
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2336
+#: src/gnome2/search_dialog.c:2332
 msgid "Use a custom search range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2355 src/gnome2/search_dialog.c:2966
+#: src/gnome2/search_dialog.c:2361 src/gnome2/search_dialog.c:2989
 #, fuzzy
-msgid "Modules"
+msgid "<b>Modules</b>"
 msgstr "Модул"
 
-#: src/gnome2/search_dialog.c:2372
+#: src/gnome2/search_dialog.c:2376
 #, fuzzy
 msgid "Single Module"
 msgstr "Покажи модул"
 
-#: src/gnome2/search_dialog.c:2378
+#: src/gnome2/search_dialog.c:2382
 msgid "Use a single module for the search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2385
+#: src/gnome2/search_dialog.c:2389
 #, fuzzy
 msgid "Module List"
 msgstr "Опции на модула"
 
-#: src/gnome2/search_dialog.c:2392
+#: src/gnome2/search_dialog.c:2396
 msgid "Use current module list for search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2397
+#: src/gnome2/search_dialog.c:2401
 msgid "Custom List"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2405
+#: src/gnome2/search_dialog.c:2409
 msgid "Use a custom module list for the search"
 msgstr ""
 
-#.
-#. radiobutton_search_dict =
-#. gtk_radio_button_new_with_label(vbox90_group,
-#. _("Dictionary"));
-#. vbox90_group =
-#. gtk_radio_button_group(GTK_RADIO_BUTTON
-#. (radiobutton_search_dict));
-#. gtk_widget_show(radiobutton_search_dict);
-#. gtk_widget_set_usize(radiobutton_search_dict, -2, 20);
-#. gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_dict,
-#. FALSE, FALSE, 0);
-#.
-#. radiobutton_search_book =
-#. gtk_radio_button_new_with_label(vbox90_group,
-#. _("General Book"));
-#. vbox90_group =
-#. gtk_radio_button_group(GTK_RADIO_BUTTON
-#. (radiobutton_search_book));
-#. gtk_widget_show(radiobutton_search_book);
-#. gtk_widget_set_usize(radiobutton_search_book, -2, 20);
-#. gtk_box_pack_start(GTK_BOX(vbox90), radiobutton_search_book,
-#. FALSE, FALSE, 0);
-#.
-#.
-#: src/gnome2/search_dialog.c:2427 src/gnome2/search_sidebar.c:501
-msgid "Search Type"
+#: src/gnome2/search_dialog.c:2439 src/gnome2/search_sidebar.c:518
+#, fuzzy
+msgid "<b>Search Type</b>"
 msgstr "Тип търсене"
 
-#: src/gnome2/search_dialog.c:2438 src/gnome2/search_sidebar.c:512
+#: src/gnome2/search_dialog.c:2450 src/gnome2/search_sidebar.c:530
 msgid "Multi Word"
 msgstr "всички думи"
 
-#: src/gnome2/search_dialog.c:2445 src/gnome2/search_sidebar.c:524
+#: src/gnome2/search_dialog.c:2457 src/gnome2/search_sidebar.c:542
 #, fuzzy
 msgid "Regular Expression"
 msgstr "Regular Expresion"
 
-#: src/gnome2/search_dialog.c:2453 src/gnome2/search_sidebar.c:533
+#: src/gnome2/search_dialog.c:2465 src/gnome2/search_sidebar.c:551
 msgid "Exact Phrase"
 msgstr "точна фраза"
 
-#: src/gnome2/search_dialog.c:2477
+#: src/gnome2/search_dialog.c:2480
+#, fuzzy
+msgid "<b>Options</b>"
+msgstr "опции"
+
+#: src/gnome2/search_dialog.c:2497
 #, fuzzy
 msgid "Include Strongs Numbers"
 msgstr "Превключи режима на номерацията на Стронг"
 
-#: src/gnome2/search_dialog.c:2482
+#: src/gnome2/search_dialog.c:2502
 #, fuzzy
 msgid "In modules that have Strongs Numbers"
 msgstr "Превключи режима на номерацията на Стронг"
 
-#: src/gnome2/search_dialog.c:2486
+#: src/gnome2/search_dialog.c:2506
 #, fuzzy
 msgid "Include Morph Tags"
 msgstr "Номерация на Стронг и морфология"
 
-#: src/gnome2/search_dialog.c:2491
+#: src/gnome2/search_dialog.c:2511
 msgid "In modules that have Morph Tags"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2495
+#: src/gnome2/search_dialog.c:2515
 #, fuzzy
 msgid "Include Footnotes"
 msgstr "Промени режима на бележките под линия"
 
-#: src/gnome2/search_dialog.c:2500
+#: src/gnome2/search_dialog.c:2520
 msgid "In modules that have Footnotes"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2502
+#: src/gnome2/search_dialog.c:2522
 #, fuzzy
 msgid "Search Criteria"
 msgstr "Търси лични"
 
-#: src/gnome2/search_dialog.c:2528
+#: src/gnome2/search_dialog.c:2548
 msgid "Show Context"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2529
+#: src/gnome2/search_dialog.c:2549
 #, fuzzy
 msgid "Show In Main window"
 msgstr "покажи %s в главния прозорец"
 
-#: src/gnome2/search_dialog.c:2547
+#: src/gnome2/search_dialog.c:2567
 #, fuzzy
 msgid "Save Results"
 msgstr "Резултати от търсенето"
 
-#: src/gnome2/search_dialog.c:2549
+#: src/gnome2/search_dialog.c:2569
 #, fuzzy
 msgid "Save Search Results as Bookmarks"
 msgstr "покажи резултата от търсенето"
 
-#: src/gnome2/search_dialog.c:2568
+#: src/gnome2/search_dialog.c:2588
 #, fuzzy
 msgid "Clear"
 msgstr "изчисти"
 
-#: src/gnome2/search_dialog.c:2569
+#: src/gnome2/search_dialog.c:2589
 msgid "clear lists for new search"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2592
-msgid "Search Results"
+#: src/gnome2/search_dialog.c:2614
+#, fuzzy
+msgid "<b>Search Results</b>"
 msgstr "Резултати от търсенето"
 
-#: src/gnome2/search_dialog.c:2608
-msgid "Preview"
+#: src/gnome2/search_dialog.c:2643
+msgid "<b>Preview</b>"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2622
-#, fuzzy
-msgid "Found"
-msgstr "Граници"
+#: src/gnome2/search_dialog.c:2671
+msgid "<b>Found</b>"
+msgstr ""
 
-#: src/gnome2/search_dialog.c:2642
+#: src/gnome2/search_dialog.c:2698
 #, fuzzy
 msgid "Results"
 msgstr "Резултати от търсенето"
 
-#: src/gnome2/search_dialog.c:2675
+#: src/gnome2/search_dialog.c:2725
 msgid "Create new custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2687 src/gnome2/search_dialog.c:2878
+#: src/gnome2/search_dialog.c:2737 src/gnome2/search_dialog.c:2914
 #: src/gnome2/sidebar.c:1004
 msgid "Save List"
 msgstr "запази списъка"
 
-#: src/gnome2/search_dialog.c:2688
+#: src/gnome2/search_dialog.c:2738
 msgid "Save custom range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2706 src/gnome2/search_dialog.c:2897
-#: src/gnome2/search_dialog.c:3009 src/gnome2/toolbar_edit.c:502
+#: src/gnome2/search_dialog.c:2756 src/gnome2/search_dialog.c:2933
+#: src/gnome2/search_dialog.c:3033 src/gnome2/toolbar_edit.c:502
 #, fuzzy
 msgid "Delete"
 msgstr "изтрий бележка"
 
-#: src/gnome2/search_dialog.c:2707
+#: src/gnome2/search_dialog.c:2757
 msgid "Delete selected range"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2762
-msgid "Range Name"
+#: src/gnome2/search_dialog.c:2801
+msgid "<b>Range Name</b>"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2772
-msgid "Range Text"
+#: src/gnome2/search_dialog.c:2813
+msgid "<b>Range Text</b>"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2782
+#: src/gnome2/search_dialog.c:2824
 msgid "eg. Matt-John;Rev4"
 msgstr ""
 
-#. ****************************************************************************
-#: src/gnome2/search_dialog.c:2820
+#: src/gnome2/search_dialog.c:2860
 msgid "Custom Ranges"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2852
+#: src/gnome2/search_dialog.c:2888
 msgid "Create new module list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2865 src/gnome2/search_dialog.c:2866
-#: src/gnome2/search_dialog.c:2989
+#: src/gnome2/search_dialog.c:2901 src/gnome2/search_dialog.c:2902
+#: src/gnome2/search_dialog.c:3013
 #, fuzzy
 msgid "Clear Module List"
 msgstr "Забрави историята"
 
-#: src/gnome2/search_dialog.c:2879
+#: src/gnome2/search_dialog.c:2915
 msgid "Save list of modules"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2898
+#: src/gnome2/search_dialog.c:2934
 msgid "Delete selected list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2957
-msgid "List Name"
+#: src/gnome2/search_dialog.c:2979
+msgid "<b>List Name</b>"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:2990
+#: src/gnome2/search_dialog.c:3014
 msgid "Clear all modules from list"
 msgstr ""
 
-#: src/gnome2/search_dialog.c:3011
+#: src/gnome2/search_dialog.c:3035
 msgid "Remove selected module from list"
 msgstr ""
 
-#. ********************************************************************
-#: src/gnome2/search_dialog.c:3045
+#: src/gnome2/search_dialog.c:3064
 msgid "Custom Lists"
 msgstr ""
 
@@ -1726,56 +1705,59 @@ msgstr ""
 msgid "matches"
 msgstr ""
 
-#: src/gnome2/search_sidebar.c:447
+#: src/gnome2/search_sidebar.c:456
 #, fuzzy
-msgid "Search Module"
+msgid "<b>Search Module</b>"
 msgstr "Граници на търсенето"
 
-#: src/gnome2/search_sidebar.c:458
+#: src/gnome2/search_sidebar.c:467
 #, fuzzy
 msgid "Bible"
 msgstr "Файл"
 
-#: src/gnome2/search_sidebar.c:541
-msgid "Search Options"
+#: src/gnome2/search_sidebar.c:567
+#, fuzzy
+msgid "<b>Search Options</b>"
 msgstr "опции"
 
-#: src/gnome2/search_sidebar.c:558
+#: src/gnome2/search_sidebar.c:593
 #, fuzzy
-msgid "Search Scope"
+msgid "<b>Search Scope</b>"
 msgstr "Граници на търсенето"
 
-#: src/gnome2/search_sidebar.c:568
+#: src/gnome2/search_sidebar.c:604
 #, fuzzy
 msgid "No Scope"
 msgstr "никакви"
 
-#: src/gnome2/search_sidebar.c:579
+#: src/gnome2/search_sidebar.c:615
 #, fuzzy
 msgid "Use Bounds"
 msgstr "задай граници"
 
-#: src/gnome2/search_sidebar.c:589
+#: src/gnome2/search_sidebar.c:625
 msgid "Last Search"
 msgstr "последното търсене"
 
-#: src/gnome2/search_sidebar.c:597
-msgid "Bounds"
+#: src/gnome2/search_sidebar.c:642
+#, fuzzy
+msgid "<b>Bounds</b>"
 msgstr "Граници"
 
-#: src/gnome2/search_sidebar.c:607
+#: src/gnome2/search_sidebar.c:654
 msgid "Lower"
 msgstr "долнa"
 
-#: src/gnome2/search_sidebar.c:614
-msgid "Upper "
+#: src/gnome2/search_sidebar.c:661
+#, fuzzy
+msgid "Upper"
 msgstr "горнa"
 
-#: src/gnome2/search_sidebar.c:627
+#: src/gnome2/search_sidebar.c:674
 msgid "Genesis"
 msgstr "Битие"
 
-#: src/gnome2/search_sidebar.c:635
+#: src/gnome2/search_sidebar.c:682
 msgid "Revelation"
 msgstr "Откровение"
 
@@ -2164,6 +2146,18 @@ msgstr ""
 #: src/gnome2/toolbar_style.c:1044
 msgid "Indents the paragraphs more"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Scope"
+#~ msgstr "никакви"
+
+#, fuzzy
+#~ msgid "Modules"
+#~ msgstr "Модул"
+
+#, fuzzy
+#~ msgid "Found"
+#~ msgstr "Граници"
 
 #, fuzzy
 #~ msgid " Replace "
