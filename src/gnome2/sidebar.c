@@ -1422,8 +1422,8 @@ static GnomeUIInfo menu_uiinfo[] = {
 	 N_("_Bookmarks"), NULL,
 	 (gpointer) on_bookmarks_activate,
 	 NULL,
-	 NULL, GNOME_APP_PIXMAP_STOCK,
-	 "epiphany-bookmarks", 0,
+	 NULL, GNOME_APP_PIXMAP_FILENAME,
+	 PACKAGE_PIXMAPS_DIR"/epiphany-bookmarks.png", 0,
 	 (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM,

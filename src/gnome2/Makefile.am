@@ -11,24 +11,8 @@ INCLUDES =  \
 
 bin_PROGRAMS = gnomesword2
 
-if GNOME_SPELL
-  SPELL_IDL = Spell.idl
-
-  IDL_GENERATED = 		\
-	Spell.h			\
-	Spell-common.c		\
-	Spell-skels.c		\
-	Spell-stubs.c
-
-$(IDL_GENERATED): $(SPELL_IDL)
-	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(top_builddir)/src/gnome2/Spell.idl
-else
-  IDL_GENERATED =
-  SPELL_IDL =
-endif
 
 gnomesword2_SOURCES =  \
-    $(IDL_GENERATED)\
     about_gnomesword.c \
     about_modules.c \
     about_sword.c \
@@ -95,8 +79,4 @@ gnomesword2_LDADD = \
     $(top_builddir)/src/backend/libbackend.a
 
 EXTRA_DIST = \
-    $(SPELL_IDL) \
-    $(top_builddir)/src/gui/*.h 
-    
-CLEANFILES = \
-    $(IDL_GENERATED)
+    $(top_builddir)/src/gui/*.h

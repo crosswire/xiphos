@@ -30,7 +30,7 @@
 #include <string.h>
 #include <bonobo.h>
 
-#include "Spell.h"
+#include "main/Spell.h"
 #include "gui/editor.h"
 #include "main/spell.h"
 

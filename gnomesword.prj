@@ -264,7 +264,10 @@ module.pixmap.files=\
 	gs2-48x48.png\
 	splash.png\
 	sword.png\
-	sword3.png
+	sword3.png\
+	epiphany-bookmark-page.png\
+	epiphany-secure.png\
+	epiphany-unsecure.png
 
 module.data.name=.
 module.data.type=
