@@ -43,7 +43,6 @@
 #include "gui/widgets.h"
 #include "gui/html.h"
 
-#include "main/shortcutbar.h"
 #include "main/sword.h"
 #include "main/gbs.h"
 #include "main/settings.h"

@@ -43,7 +43,6 @@
 
 #include "main/settings.h"
 #include "main/search.h"
-//#include "main/shortcutbar.h"
 #include "main/xml.h"
 
 #include "backend/sword.h"
@@ -64,7 +63,9 @@ SETTINGS settings;
 /******************************************************************************
  * static
  */
+#ifndef USE_GNOME2
 static void old_2_new_shortcut_file(char * old_file, char * new_file);
+#endif
 static int init_old(void);
 static int init_bookmarks(int new_bookmarks, int have_old);
 
@@ -262,7 +263,8 @@ int init_old(void)
 	old_gbs = g_new(char, strlen(old_sb) +
 			strlen("Books.conf") + 3);
 	sprintf(old_gbs, "%s/%s", old_sb, "Books.conf");
-/*
+	
+#ifndef USE_GNOME2
 	if (access(settings.shortcutbarDir, F_OK) == -1) {
 		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) == 0) {
 			if (access(old_fav, F_OK) == 0)
@@ -286,7 +288,7 @@ int init_old(void)
 		printf("can't create shortcutbar dir");
 		return 0;
 	}
-*/
+#endif
 	return 1;
 }
 
@@ -423,19 +425,17 @@ int init_bookmarks(int new_bookmarks, int have_old)
  */
 
 
+#ifndef USE_GNOME2
 void old_2_new_shortcut_file(gchar * old_file, gchar * new_file)
 {
-#ifdef USE_GNOME2
-	/* do nothing */
-#else
 	gchar group_name[256], icon_size[10];
 	GList *glist = NULL;
 
 	glist = load_sb_group(old_file, group_name, icon_size);
 	save_sb_group(glist, new_file, group_name, icon_size);
 	g_list_free(glist);
-#endif
 }
+#endif
 
 
 /******************************************************************************
