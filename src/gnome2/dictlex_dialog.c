@@ -376,9 +376,8 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 {
 	GtkWidget *hpaned7;
 	GtkWidget *vbox;
-	GtkWidget *vbox56;;
+	GtkWidget *vbox56;
 	GtkWidget *hbox_toolbar;
-	//GtkWidget *toolbarDLKey;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *btnSyncDL;
 	GtkWidget *label205;
@@ -421,18 +420,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_widget_show(hbox_toolbar);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox_toolbar, FALSE, TRUE,
 			   0);
-/*
-	toolbarDLKey =
-	    gtk_toolbar_new();
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbarDLKey), GTK_TOOLBAR_ICONS);
-	gtk_widget_show(toolbarDLKey);
-	gtk_box_pack_start(GTK_BOX(vbox56), toolbarDLKey, FALSE, TRUE,
-			   0);
-*/
-/*	tmp_toolbar_icon = gtk_image_new_from_stock(GTK_STOCK_REFRESH,
-						    gtk_toolbar_get_icon_size
-						    (GTK_TOOLBAR
-						     (toolbarDLKey)));*/
+			   
 	btnSyncDL = gtk_button_new();
 	gtk_widget_show(btnSyncDL);
 	gtk_box_pack_start(GTK_BOX(hbox_toolbar), btnSyncDL, FALSE,
