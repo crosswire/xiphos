@@ -260,7 +260,7 @@ static void on_mainwindow_size_allocate(GtkWidget * widget,
  * Synopsis
  *   #include "gs_gui.h"
  *
- *   void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
+ *   void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
  *
  * Description
  *    shutdown gnomesword 
@@ -269,7 +269,7 @@ static void on_mainwindow_size_allocate(GtkWidget * widget,
  *   void
  */ 
 
-static void on_mainwindow_destroy(GtkObject * object, SETTINGS * s)
+static void on_mainwindow_destroy(GtkObject *object, gpointer user_data)
 {
 	gnomesword_shutdown();
 	gtk_exit(0);
@@ -912,8 +912,7 @@ void create_mainwindow(void)
 			&transparent, mini_page_xpm);
 
 	gtk_signal_connect(GTK_OBJECT(settings.app), "destroy",
-			GTK_SIGNAL_FUNC(on_mainwindow_destroy), 
-			(gpointer)&settings);
+			GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
 	gtk_signal_connect(GTK_OBJECT(settings.app), "size_allocate",
 			GTK_SIGNAL_FUNC(on_mainwindow_size_allocate), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSBDock), "clicked",

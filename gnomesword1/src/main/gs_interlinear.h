@@ -28,11 +28,10 @@ extern "C" {
 
 #include "settings.h"
 
-void update_interlinear_page(SETTINGS * s);
-void update_interlinear_page_detached(SETTINGS * s);
-void swap_interlinear_with_main(char *intmod, SETTINGS * s);
-void set_interlinear_module_global_options(gchar * option, gboolean choice,
-		SETTINGS *s);
+void update_interlinear_page(void);
+void update_interlinear_page_detached(void);
+void swap_interlinear_with_main(char *intmod);
+void set_interlinear_module_global_options(gchar * option, gboolean choice);
 
 #ifdef __cplusplus
 }

@@ -155,8 +155,7 @@ void set_commentary_page_and_key(gint page_num, gchar *key)
  * Synopsis
  *   #include "commentary.h"
  *
- *   void set_commentary_page(gchar * modname, GList * comm_list,
- *							SETTINGS * s)	
+ *   void set_commentary_page(gchar * modname, GList * comm_list)	
  *
  * Description
  *    change commentary page without changing key
@@ -165,8 +164,7 @@ void set_commentary_page_and_key(gint page_num, gchar *key)
  *   void
  */
  
-static void set_commentary_page(gchar * modname, GList * comm_list,
-							SETTINGS * s)
+static void set_commentary_page(gchar * modname, GList * comm_list)
 {
 	gint page = 0;
 	COMM_DATA *c = NULL;
@@ -180,10 +178,10 @@ static void set_commentary_page(gchar * modname, GList * comm_list,
 		comm_list = g_list_next(comm_list);
 	}
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(s->notebook_comm), page);
-	s->comm_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebook_comm),
-				   s->comm_tabs);
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebook_comm), page);
+	settings.comm_last_page = page;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebook_comm),
+			settings.comm_tabs);
 }
 
 /******************************************************************************
@@ -217,7 +215,7 @@ void display_commentary(gchar * key)
  * Synopsis
  *   #include "commentary.h"
  *
- *   GList* setup_commentary(SETTINGS * s)	
+ *   GList* setup_commentary(void)	
  *
  * Description
  *    setup gui commentary support and return list on commentary names
@@ -226,7 +224,7 @@ void display_commentary(gchar * key)
  *   void
  */
  
-void setup_commentary(SETTINGS * s, GList *mods)
+void setup_commentary(GList *mods)
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
@@ -252,24 +250,24 @@ void setup_commentary(SETTINGS * s, GList *mods)
 		c->key[0] = '\0';
 		c->find_dialog = NULL;		
 		c->has_key = backend_module_is_locked(c->modName);
-		gui_create_commentary_pane(s, c, count);
+		gui_create_commentary_pane(&settings, c, count);
 		popupmenu = gui_create_pm(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);
-		backend_new_display_commentary(c->html, c->modName, s);
+		backend_new_display_commentary(c->html, c->modName, &settings);
 		comm_list = g_list_append(comm_list, (COMM_DATA *) c);
 		++count;
 		tmp = g_list_next(tmp);
 	}
 
-	gtk_signal_connect(GTK_OBJECT(s->notebook_comm),
+	gtk_signal_connect(GTK_OBJECT(settings.notebook_comm),
 			   "switch_page",
 			   GTK_SIGNAL_FUNC
 			   (on_notebook_comm_switch_page), comm_list);
 
-	modbuf = g_strdup(s->CommWindowModule);
-	keybuf = g_strdup(s->currentverse);
+	modbuf = g_strdup(settings.CommWindowModule);
+	keybuf = g_strdup(settings.currentverse);
 
-	set_commentary_page(modbuf, comm_list, s);
+	set_commentary_page(modbuf, comm_list);
 
 	g_free(modbuf);
 	g_free(keybuf);

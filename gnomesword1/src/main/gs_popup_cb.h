@@ -36,7 +36,7 @@ extern "C" {
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 
-	void on_undockInt_activate(GtkMenuItem * menuitem,  SETTINGS *s);
+	void on_undockInt_activate(GtkMenuItem * menuitem);
 	/*** toogle global options in interlinear window ***/
 	void on_print_item_activate(GtkMenuItem * menuitem, gchar * html);
 	void on_int_global_options_activate(GtkMenuItem * menuitem, 

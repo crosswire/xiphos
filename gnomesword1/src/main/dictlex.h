@@ -53,7 +53,7 @@ struct _dldata {
 };
 void display_dictionary_page_and_key(gint page_num, gchar * key);
 GList *fill_dictlex_keys(int mod_num, int count);
-void setup_dictlex(SETTINGS * s, GList *mods);
+void setup_dictlex(GList *mods);
 void shutdown_dictlex(void);
 void set_dictionary_page_and_key(gint page_num,
 				     gchar * key);
@@ -65,7 +65,7 @@ void search_text_changed_viewdict(gchar * key);
 void shutdown_viewdict(void);
 void load_module_viewdict(gchar * module_name);
 void goto_key_viewdict(gchar * key);
-void setup_viewdict(GtkWidget * text, SETTINGS *s);
+void setup_viewdict(GtkWidget * text);
 
 #ifdef __cplusplus
 }
