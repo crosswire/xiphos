@@ -75,9 +75,13 @@ extern bool bVerseStyle;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
-/* --------------------------------------------------------------------------------------------- */
+
+/***************************************************************************** 
+ * ComEntryDisp - for displaying commentary modules in a GtkHTML widget
+ * the mods need to be filtered to html first
+ *****************************************************************************/
 char
- ComEntryDisp::Display(SWModule & imodule)
+ComEntryDisp::Display(SWModule & imodule)
 {
 	gchar tmpBuf[255], *font;
 	SectionMap::iterator sit;
@@ -96,7 +100,7 @@ char
 			      (lookup_widget(MainFrm, "nbCom")), 0);
 	(const char *) imodule;	/* snap to entry */
 	strbuf = g_string_new( "<B><FONT COLOR=\"#000FCF\">" );
-	sprintf(tmpBuf,"[%s][%s] </b>",imodule.Name(), imodule.KeyText());
+	sprintf(tmpBuf,"[%s] </b>",imodule.KeyText());
 	strbuf = g_string_append( strbuf,tmpBuf);	
 	/* show verse ref in text widget  */
 	/* show module text for current key */
@@ -121,11 +125,63 @@ char
 		g_string_free( strbuf,TRUE);
 	}
 	endHTML(GTK_WIDGET(gtkText));
-	
-
 }
 
-/* ----------------------------------------------------------------------------------------- */
+/***************************************************************************** 
+ * GtkHTMLEntryDisp - for displaying interlinear text modules in a GtkHTML 
+ * widget the mods need to be filtered to html first
+ *****************************************************************************/
+char
+GtkHTMLEntryDisp::Display(SWModule & imodule)
+{
+	gchar tmpBuf[255], *font;
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator eit;
+        GString *strbuf;
+
+	font = "Roman";
+	if ((sit = mainMgr1->config->Sections.find(imodule.Name())) !=
+	    mainMgr1->config->Sections.end()) {
+		if ((eit = (*sit).second.find("Font")) !=
+		    (*sit).second.end()) {
+			font = (char *) (*eit).second.c_str();
+		}
+	} 	
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbCom")), 0);
+	(const char *) imodule;	/* snap to entry */
+	beginHTML(GTK_WIDGET(gtkText));
+	strbuf = g_string_new( "" );
+	/* show verse ref in text widget  */
+	g_string_sprintf(strbuf,"<B><FONT COLOR=\"#000FCF\">[%s][%s] </b>",
+			imodule.Name(),imodule.KeyText());	
+	displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len );
+	g_string_free( strbuf,TRUE);
+	/* show module text for current key */
+	if(!strcmp(font,"Symbol")) { /* greek symbol font */
+		strbuf = g_string_new( "<FONT FACE=\"symbol\">" );
+	     	strbuf = g_string_append( strbuf,(const char *) imodule);
+             	strbuf = g_string_append( strbuf,"</font>");
+	     	displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);				
+              	g_string_free( strbuf,TRUE);
+	} else if (!strcmp(font,"Greek")) {/* greek -wingreek */
+	      	strbuf = g_string_new( "<FONT FACE=\"greek\">" );
+	     	strbuf = g_string_append( strbuf,(const char *) imodule);
+             	strbuf = g_string_append( strbuf,"</font>");
+	     	displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);				
+              	g_string_free( strbuf,TRUE);
+	} else { /*  */
+		strbuf = g_string_new( (const char *) imodule );
+		displayHTML(GTK_WIDGET(gtkText),strbuf->str,strbuf->len);
+		g_string_free( strbuf,TRUE);
+	}
+	endHTML(GTK_WIDGET(gtkText));
+}
+
+/***************************************************************************** 
+ *  GTKhtmlChapDisp- for displaying text modules in a GtkHTML widget
+ * the mods need to be filtered to html first
+ *****************************************************************************/
 char GTKhtmlChapDisp::Display(SWModule & imodule)
 {
 	char tmpBuf[500],
@@ -196,7 +252,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 			g_string_free( strbuf,TRUE);			
 		} else {
 		        if(!strcmp(font,"Symbol")){
-			        strbuf = g_string_new("<FONT FACE=\"symbol\">");
+			        strbuf = g_string_new("<FONT COLOR=\"#000000\" FONT FACE=\"symbol\">");
 			        strbuf = g_string_append( strbuf, (const char *) imodule );
 			        if (bVerseStyle) strbuf = g_string_append( strbuf,"</font><br>" );
 			        else  g_string_append( strbuf,"</font>" );			        	
@@ -244,7 +300,7 @@ char GTKEntryDisp::Display(SWModule & imodule)
 	    gdk_font_load
 	    ("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
 
-	/*gtk_notebook_set_page(GTK_NOTEBOOK
+	 /*gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbCom")), 1); */
 
 	gtk_text_set_point(GTK_TEXT(gtkText), 0);
@@ -595,6 +651,9 @@ char HTMLentryDisp::Display(SWModule & imodule)
 	ConfigEntMap::iterator eit;
 
 	font = "Roman";
+	
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbCom")), 1); 
 
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
@@ -820,7 +879,10 @@ char HTMLChapDisp::Display(SWModule & imodule)
 	ModMap::iterator it;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
-
+	
+	gtk_notebook_set_page(GTK_NOTEBOOK
+			      (lookup_widget(MainFrm, "nbText")), 0);
+			      
 	font = "Roman";
 
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
