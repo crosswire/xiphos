@@ -36,13 +36,15 @@
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
+#include <markupfiltmgr.h>
+
 #include "sw_viewtext_dlg.h"
 #include "sw_gnomesword.h"
 #include "sw_display.h"
 #include "sw_utility.h"
 
-SWDisplay *VTDisplay;	/* to display modules in view comm dialog */
-SWMgr *VTMgr;	/* sword mgr for view comm dialog */
+SWDisplay *VTDisplay;	/* to display modules in view text dialog */
+SWMgr *VTMgr;	/* sword mgr for view text dialog */
 SWModule *VTMod;   /* module for view text dialog */
 gint numinst = 0;
 
@@ -53,7 +55,7 @@ gint numinst = 0;
  ****************************************************************************************/
 GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 {
-	GList *list;
+	GList *glist;
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	GList *cbBook_items;
@@ -62,24 +64,20 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 	/* fill book combo box */
 	cbBook_items = getBibleBooks();
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
-	VTMgr	= new SWMgr();
+	VTMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	VTMod     = NULL;
 	VTDisplay = new  GTKutf8ChapDisp(text);
 	//VTDisplay = new  GTKhtmlChapDisp(text);
-	list = NULL;
+	glist = NULL;
 	for(it = VTMgr->Modules.begin(); it != VTMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			VTMod = (*it).second;
-			sit = VTMgr->config->Sections.find((*it).second->Name()); //-- add render filters			
-			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(VTMod, section);
-			//havebible = TRUE;		
-			list = g_list_append(list,VTMod->Name());
+			glist = g_list_append(glist,VTMod->Name());
 			VTMod->Disp(VTDisplay);
 		}
 	}
 	g_list_free(cbBook_items);
-	return list;
+	return glist;
 }
 
 
