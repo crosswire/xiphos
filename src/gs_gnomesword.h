@@ -67,6 +67,7 @@ struct _settings {
 	        Interlinear4Module[80],
 	        Interlinear5Module[80], 
 	        personalcommentsmod[80], 
+	        devotionalmod[80],
 		lex_greek[80],
 		lex_hebrew[80],
 	        currentverse[80],	/* verse to use at program startup */
@@ -135,6 +136,7 @@ struct _settings {
 	        showbookmarksgroup,
 	        showhistorygroup,
 		showsplash,
+		showdevotional,
 		text_tabs, /* show module tabs in text window if true  */
 		comm_tabs, /* show module tabs in commentary window if true  */
 		dict_tabs, /* show module tabs in text dict/lex if true  */

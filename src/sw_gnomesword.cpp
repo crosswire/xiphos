@@ -48,6 +48,7 @@
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <time.h>
 #include <gal/widgets/e-unicode.h>
 
 #include "gs_gnomesword.h"
@@ -67,6 +68,7 @@
 #include "gs_info_box.h"
 #include "gs_setup.h"
 #include "gs_shortcutbar.h"
+#include "sw_shortcutbar.h"
 #include "sw_utility.h"
 #include "sw_properties.h"
 #include "sw_bookmarks.h"
@@ -272,6 +274,7 @@ void initSWORD(GtkWidget * mainform)
 			sit = mainMgr->config->Sections.find((*it).second->Name());
 			ConfigEntMap & section = (*sit).second;
 			addrenderfiltersSWORD(curdictMod, section);
+			
 			curdictMod->Disp(dictDisplay);
 		}
 	}
@@ -1296,12 +1299,16 @@ void loadpreferencemodsSWORD(void)
 {
 	GtkWidget *dlg;
 	ModMap::iterator it;	//-- iteratior
+	SectionMap::iterator sit;
+	ConfigEntMap::iterator entry;	
 	SWMgr *Mgr;
 	GList *textMods = NULL;
 	GList *commMods = NULL;
 	GList *dictMods = NULL;
 	GList *percomMods = NULL;
-
+	GList *devotionMods = NULL;
+	string feature;
+	gint devotionals = 0;
 	Mgr = new SWMgr();	//-- create sword mgr
 	for (it = Mgr->Modules.begin(); it != Mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
@@ -1314,10 +1321,21 @@ void loadpreferencemodsSWORD(void)
 		}
 		if (!strcmp
 		    ((*it).second->Type(), "Lexicons / Dictionaries")) {
+			sit = Mgr->config->Sections.find((*it).second->Name());
+			ConfigEntMap & section = (*sit).second;
+			feature = ((entry = section.find("Feature")) != section.end()) ? (*entry).second : (string) "";
 			dictMods =
 			    g_list_append(dictMods, (*it).second->Name());
+			if (!stricmp(feature.c_str(), "DailyDevotion")) {
+				devotionMods = g_list_append(devotionMods,(*it).second->Name());
+				++devotionals;
+			}
 		}
 	}
+		
+	if(!devotionals)
+		settings->showdevotional = FALSE;
+	
 	//-- set up percom editor module
 	for (it = Mgr->Modules.begin(); it != Mgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), "Commentaries")) {	//-- if type is 
@@ -1332,13 +1350,14 @@ void loadpreferencemodsSWORD(void)
 	}
 	/* create preferences dialog */
 	dlg = create_dlgSettings(settings,
-				 textMods, commMods, dictMods, percomMods);
+				 textMods, commMods, dictMods, percomMods, devotionMods);
 	gtk_widget_show(dlg);	/* show preferences dialog */
 
 	g_list_free(textMods);	//-- free GLists
 	g_list_free(commMods);
 	g_list_free(dictMods);
 	g_list_free(percomMods);
+	g_list_free(devotionMods);
 	delete Mgr;		//-- delete Sword manager         
 }
 
@@ -1504,5 +1523,29 @@ gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo)
 	return retval;
 }
 
+/*** display daily devotional ***/
+void displayDevotional(void)
+{
+	gchar buf[80];
+	time_t curtime;
+	struct tm *loctime;
+	
+	if(settings->showdevotional) {
+		/* Get the current time. */
+		curtime = time (NULL);
 
+		/* Convert it to local time representation. */
+		loctime = localtime (&curtime);
+
+		/* Print out the date and time in the standard format. */
+		fputs (asctime (loctime), stdout);
+
+		/* Print it out in a nice format. */
+		strftime (buf, 80, "%m.%d", loctime);
+		//g_warning("date = %s",buf);
+	
+		displaydictlexSBSW(settings->devotionalmod, buf, settings);
+		setupforDailyDevotion(settings);
+	}
+}
 

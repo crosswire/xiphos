@@ -31,7 +31,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+	/*** display daily devotion in shortcut bar viewer ***/
+	void on_daily_devotion1_activate(GtkMenuItem *menuitem,
+                                        gpointer user_data);
+	
 	void on_help_contents_activate(GtkMenuItem * menuitem,
 				       gpointer user_data);
 	void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
