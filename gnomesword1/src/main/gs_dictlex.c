@@ -49,8 +49,7 @@ GList *dl_list;
 //gboolean show_tabs_dl;
 
 /******  start code  ******/
-
-void gui_setPageandKey_DL(gint page_num, gchar * key)
+void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
 {
 	DL_DATA *d;
 
@@ -204,7 +203,7 @@ void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	
 	if(!isrunningSD) {
 		dlg = create_dlgViewDict(s->app);
-		modName = getdictmodSWORD();
+		modName = s->DictWindowModule;
 		/* set frame label to current Module name  */
 		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  				
 		//initSD(modName);

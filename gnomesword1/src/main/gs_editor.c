@@ -258,7 +258,7 @@ void savenoteEDITOR(GtkWidget * html_widget)
 	     GINT_TO_POINTER(0))) {
 		g_warning("file not writen");
 	} else {
-		savenoteSWORD(gstr->str);
+		backend_save_personal_comment(gstr->str);
 		g_print("file writen");
 	}
 	g_string_free(gstr, 1);
@@ -672,7 +672,7 @@ static void
 on_deletenote_activate(GtkMenuItem * menuitem,
 		       GSHTMLEditorControlData * ecd)
 {
-	deletenoteSWORD();
+	backend_delete_personal_comment();
 	ecd->changed = FALSE;
 	updatestatusbar(ecd);
 }

@@ -70,7 +70,7 @@ struct _nodedata {
 	gboolean is_leaf;
 	gboolean expanded;
 };
-
+void gui_set_book_page_and_key(gint page_num, gchar * key);
 void gui_setupGBS(SETTINGS *s);
 void gui_shutdownGBS(void);
 GtkWidget *createGBS_Pane(gchar *modName, SETTINGS *s,gint count, GBS_DATA *p_gbs);
