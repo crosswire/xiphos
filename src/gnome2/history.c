@@ -71,9 +71,9 @@ void gui_clear_history(GtkWidget * app, GtkWidget * shortcut_bar)
 {
 	gint i;
 
-	gui_remove_menu_items(_("_History/<Separator>"),
+	gui_remove_menu_items(_("H_istory/<Separator>"),
 			      history_items + 1);
-	gui_add_separator2menu(app, _("_History/C_lear"));
+	gui_add_separator2menu(app, _("H_istory/C_lear"));
 	/* set sensitivity of history buttons */
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
@@ -106,9 +106,9 @@ static void update_history_menu(GtkWidget * app)
 	gchar buf[80];
 	GnomeUIInfo *menuitem;
 	
-	gui_remove_menu_items(_("_History/<Separator>"),
+	gui_remove_menu_items(_("H_istory/<Separator>"),
 			      history_items + 1);
-	gui_add_separator2menu(app, _("_History/C_lear"));
+	gui_add_separator2menu(app, _("H_istory/C_lear"));
 	
 	for (i = 0; i < history_items; i++) {
 		menuitem = g_new(GnomeUIInfo, 2);
@@ -121,7 +121,7 @@ static void update_history_menu(GtkWidget * app)
 		menuitem->accelerator_key = 0;
 		menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
 		gnome_app_insert_menus_with_data(GNOME_APP(app), 
-						_("_History/<Separator>"),
+						_("H_istory/<Separator>"),
 						menuitem, NULL);
 	}
 }
