@@ -23,19 +23,23 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
+#ifndef __SW_UTILITY_H__
+#define __SW_UTILITY_H__
+
 #include <swmodule.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 	
-#ifndef __SW_UTILITY_H__
-#define __SW_UTILITY_H__
-
+SWModule *getModulefrmName(gchar *modName);
 void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section);
-
-#endif	
+void savepersonalcommentsSWORD(SWModule *module, const gchar *data);
+void deletepersonalcommentsSWORD(SWModule *module);	
+	
 #ifdef __cplusplus
 }
 #endif
+
+#endif	/* __SW_UTILITY_H__ */
 	

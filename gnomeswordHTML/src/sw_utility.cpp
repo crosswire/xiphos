@@ -54,6 +54,25 @@ extern SWFilter *rwptohtml;
 extern SWFilter *wgreektosil;
 
 
+
+/********************************************************************************************** 
+ * get module from module name 
+ * modName - module name             
+ * returns - module
+ *********************************************************************************************/
+SWModule *getModulefrmName(gchar *modName)
+{
+	/*
+	ModMap::iterator it; //-- iterator to go through modules and find modName
+	
+	it = mainMgr->Modules.find(modName); //-- find module to use for search
+	if (it != mainMgr->Modules.end()){ //-- if we dont reach the end of our modules	
+		SWModule *mod = (*it).second;  //-- temp module to work with
+		return mod;
+	}*/
+	return NULL;
+	
+}
 /********************************************************************************************** 
  * addrenderfilters - 
  *           code taken form BibleTime 0.31    
@@ -69,17 +88,6 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
 	
-	// Temporary: To support old module types
-//	if (sourceformat.empty())	{
-//		if ((RawGBF*)(module))
-//			sourceformat = "GBF";
-//	}
-	/*
-	if(!stricmp(module->Name(),"N27U4")) {
-		module->AddRenderFilter(wgreektosil);  
-		g_warning("N27U4");
-		noDriver = false; 
-	}*/
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
 		module->AddRenderFilter(gbftohtml);  
 		noDriver = false; 
@@ -112,4 +120,28 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 		}
 	}
 }
+
+
+/******************************************************************************
+ * save personal comments
+ * module - the module to save comments in
+ *data - user comments to save
+*******************************************************************************/
+void savepersonalcommentsSWORD(SWModule *module, const gchar *data)
+{
+	*module << data; //-- save note!
+	module->Display(); 
+}
+
+/******************************************************************************
+ * delete personal comments
+ * module - the module to save comments in
+*******************************************************************************/
+void deletepersonalcommentsSWORD(SWModule *module)
+{	
+	module->deleteEntry();        //-- delete note
+	module->Display();        //-- show change	
+}
+
+
 

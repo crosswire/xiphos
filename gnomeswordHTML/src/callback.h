@@ -257,7 +257,10 @@ void on_dictbutton_clicked                     (GtkButton       *button,
                                         gpointer         user_data);
 void on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
                                         gpointer         user_data);
-
+void
+on_btnInfoOK_clicked                   (GtkButton       *button,
+                                        gpointer         user_data);
+					
 #ifdef __cplusplus
 }
 #endif

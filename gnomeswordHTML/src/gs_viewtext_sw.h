@@ -1,9 +1,10 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
-                            interface.h
+                            gs_viewtext_sw.h
                              -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by Terry Biggs
-    email                : tbiggs@infinet.com
+    begin                : Tue June 12 2001
+    copyright            : (C) 2001 by Terry Biggs
+    email                : tbiggs@users.sf.net
  ***************************************************************************/
 
 /*
@@ -21,16 +22,35 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+ #ifndef __gs_viewtext_sw_H__
+#define __gs_viewtext_sw_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-GtkWidget*
-create_dlgInformation (void);
 
 
+#include <gnome.h>
+	
+	
+GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook);
+void VTshutdownSWORD(void);
+void VTgotoverseSWORD(gchar *newkey);
+void VTloadmodSWORD(gchar *modName);
+gchar* VTgetmodDescriptionSWORD(void);
+void VTchangeverseSWORD(gchar * verse);
+gchar *VTgetbookSWORD(void);
+gint VTgetchapterSWORD(void);
+gint VTgetverseSWORD(void);	
+void VTstrongsSWORD(gboolean choice);	
+void VTfootnotesSWORD(gboolean choice) ;
+	
+	
 #ifdef __cplusplus
 }
 #endif
+	
+#endif /* __gs_viewtext_sw_H__ */	
 
