@@ -27,18 +27,18 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "main/gs_gnomesword.h"
-#include "main/gs_interlinear.h"
+#include "gui/interlinear.h"
 
-#include "backend/sword.h"
-#include "backend/interlinear.h"
+#include "main/gs_gnomesword.h"
+#include "main/bibletext.h"
+
 
 extern gboolean havebible;
 
-GtkHTMLStreamStatus status1;
-GtkHTMLStream *htmlstream;
+static GtkHTMLStreamStatus status1;
+static GtkHTMLStream *htmlstream;
 
-void update_interlinear_page()
+void gui_update_interlinear_page()
 {
 	gchar tmpBuf[256], *rowcolor, *font_size;
 	gchar *utf8str,*mod_name, *font_name = NULL;
@@ -121,7 +121,7 @@ void update_interlinear_page()
 				"<tr bgcolor=\"%s\"><td><B><A HREF=\"[%s]%s\"><FONT COLOR=\"%s\" SIZE=\"%s\"> [%s]</font></a></b>",
 				rowcolor,
 				mod_name,
-				backend_get_module_description(mod_name),
+				get_module_description(mod_name),
 				settings.bible_verse_num_color,
 				settings.verse_num_font_size,
 				mod_name);
@@ -142,10 +142,10 @@ void update_interlinear_page()
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 			}
 				
-			utf8str = backend_get_interlinear_module_text(mod_name, settings.currentverse);
+			utf8str = get_interlinear_module_text(mod_name, settings.currentverse);
 			if (strlen(utf8str)) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-				g_free(utf8str);
+				free(utf8str);
 			}
 			
 			sprintf(tmpBuf,
@@ -202,19 +202,19 @@ static void int_display(gchar *key)
 	
 	GtkHTML *html = GTK_HTML(settings.htmlInterlinear);
 	
-	tmpkey = backend_get_valid_key(key);
+	tmpkey = get_valid_key(key);
 	
 	bgColor = "#f1f1f1";
-	cur_verse = backend_get_verse_from_key(tmpkey);
+	cur_verse = get_verse_from_key(tmpkey);
 	settings.intCurVerse = cur_verse;
-	cur_chapter = backend_get_chapter_from_key(tmpkey);
-	cur_book = backend_get_book_from_key(tmpkey);
+	cur_chapter = get_chapter_from_key(tmpkey);
+	cur_book = get_book_from_key(tmpkey);
 	
 	for (i = 1; ; i++) {	
 		sprintf(tmpbuf,"%s %d:%d",cur_book,cur_chapter,i);
 		free(tmpkey);
-		tmpkey = backend_get_valid_key(tmpbuf);
-		if(cur_chapter != backend_get_chapter_from_key(tmpkey))
+		tmpkey = get_valid_key(tmpbuf);
+		if(cur_chapter != get_chapter_from_key(tmpkey))
 			break;
 		sprintf(buf,"%s","<tr valign=\"top\">");		
 		utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
@@ -279,10 +279,10 @@ static void int_display(gchar *key)
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 			}
 			
-			utf8str = backend_get_interlinear_module_text(mod_name, tmpkey);
+			utf8str = get_interlinear_module_text(mod_name, tmpkey);
 			if (strlen(utf8str)) {
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, strlen(utf8str));
-				g_free(utf8str);
+				free(utf8str);
 			}
 			
 			sprintf(buf, "%s", "</font></td>");	
@@ -303,7 +303,7 @@ static void int_display(gchar *key)
 	free(tmpkey);
 }
 
-void update_interlinear_page_detached(void)
+void gui_update_interlinear_page_detached(void)
 {
 	gchar * utf8str, buf[500];
 	gint utf8len;
@@ -421,7 +421,7 @@ void update_interlinear_page_detached(void)
  * swaps interlinear mod with mod in main text window
  * intmod - interlinear mod name
  ******************************************************************************/
-void swap_interlinear_with_main(char * intmod)
+void gui_swap_interlinear_with_main(char * intmod)
 {
 	char *modname;
 
@@ -442,10 +442,10 @@ void swap_interlinear_with_main(char * intmod)
 		sprintf(settings.Interlinear1Module, "%s", modname);
 	}
 	change_module_and_key(intmod, settings.currentverse);
-	update_interlinear_page();
+	gui_update_interlinear_page();
 }
 
-void set_interlinear_module_global_options(gchar *option, gboolean choice)
+void gui_set_interlinear_module_global_options(gchar *option, gboolean choice)
 {
 	gchar *on_off;
 
@@ -479,14 +479,14 @@ void set_interlinear_module_global_options(gchar *option, gboolean choice)
 		settings.greekaccentsint = choice;
 	}
 	
-	backend_set_interlinear_global_option(option, on_off);
+	set_interlinear_global_option(option, on_off);
 
 	/* display change */
 	if (settings.dockedInt)	{
-		update_interlinear_page();
+		gui_update_interlinear_page();
 	}
 	else {
-		update_interlinear_page_detached();
+		gui_update_interlinear_page_detached();
 	}
 }
 
