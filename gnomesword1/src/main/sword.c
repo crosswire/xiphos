@@ -668,3 +668,16 @@ char *get_striptext(char *mod_name, char *key)
 {
 	return backend_get_striptext(mod_name, key);
 }
+
+/** Returns the number of chapters for the given book. */
+const unsigned int chapter_count(char *key) 
+{
+	return backend_chapter_count(key);
+}
+
+/** Returns the number of verses  for the given chapter. */
+const unsigned int verse_count(char *key) 
+{
+	return backend_verse_count(key);
+}
+	
