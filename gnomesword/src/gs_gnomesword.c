@@ -108,10 +108,13 @@ extern gint
  * initGnomeSword - sets up the interface
  *****************************************************************************/
 void
-initGnomeSword(GtkWidget *app, SETTINGS *settings,
-		GList *biblemods, GList *commentarymods ,
-		GList *dictionarymods, GList *percommods,
-		GtkWidget *splash)
+initGnomeSword(GtkWidget *app, 
+			SETTINGS *settings,
+			GList *biblemods, 
+			GList *commentarymods ,
+			GList *dictionarymods, 
+			GList *percommods,
+			GtkWidget *splash)
 {
 	GtkWidget 
 		*notebook;
@@ -147,16 +150,16 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				percommods,
 				options);
 	additemstooptionsmenu(options,settings);			
-	/* add pages to commentary and  dictionary notebooks */
+	/* add pages module notebooks */
 	biblepage = addnotebookpages(lookup_widget(app,"nbTextMods"), biblemods, settings->MainWindowModule);
 	commpage = addnotebookpages(lookup_widget(app,"notebook1"), commentarymods, settings->CommWindowModule);
-	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);	
+	dictpage = addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods, settings->DictWindowModule);
+	
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);	
 	/*  set text windows to word warp */
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	/* set main notebook page */
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
-			settings->notebook3page );
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")), settings->notebook3page );
 	/* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");		
 	/* Add options to Options Menu and get toggle item widget */
@@ -168,7 +171,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				(GtkMenuCallback)on_verse_style1_activate);
 	/* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
-        loadquickmarks_programstart(); /* add bookmarks to menubar */
+        loadquickmarks_programstart(); /* add quickmarks to menubar */
         changeVerseSWORD(settings->currentverse); /* set Text */
 	/* show hide shortcut bar - set to options setting */
         if(settings->showshortcutbar){
@@ -257,7 +260,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 				gtk_main_iteration ();
 	}
 	
-	g_print("%s\n", "done\n");
+	g_print("done\n");
 }
 
 /**********************************************************************************************
@@ -267,7 +270,7 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
  *********************************************************************************************/
 gint
 addnotebookpages(GtkWidget *notebook, 
-			GList *list, 
+			GList *modlist, 
 			gchar *modName)
 {
 	GList 
@@ -281,7 +284,7 @@ addnotebookpages(GtkWidget *notebook,
 	GtkLabel 
 		*mylabel;
 	
-	tmp = list;
+	tmp = modlist;
 	while (tmp != NULL) {
 		empty_notebook_page = gtk_vbox_new (FALSE, 0);
 		gtk_widget_show (empty_notebook_page);
