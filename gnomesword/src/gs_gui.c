@@ -39,7 +39,8 @@
 
 
 #include "gs_gui.h"
-#include "callback.h"
+#include "gs_mainmenu_cb.h"
+#include "gs_gui_cb.h"
 #include "gs_studypad.h"
 #include "gs_gnomesword.h"
 #include "support.h"

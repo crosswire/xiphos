@@ -22,7 +22,8 @@
 #include "gs_gnomesword.h"
 #include "sw_gnomesword.h"
 #include "gs_history.h"
-#include "callback.h"
+#include "gs_gui_cb.h"
+#include "gs_mainmenu_cb.h"
 #include "gs_menu.h"
 #include "support.h"
 

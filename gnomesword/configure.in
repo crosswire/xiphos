@@ -11,6 +11,8 @@ GNOME_INIT
 AC_ISC_POSIX
 AC_PROG_CC
 AC_HEADER_STDC
+AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h getopt.h math.h time.h sys/types.h fcntl.h netdb.h netinet/in.h sys/socket.h arpa/inet.h dirent.h sys/select.h sys/time.h sys/ipc.h)
+
 
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
@@ -40,8 +42,6 @@ dnl **************************
 
 dnl don't define WITH_SPC if you want to build without spell-checker
 AC_DEFINE(WITH_SPC, 1, [Define if you want to use spell checking])
-
-#AC_DEFINE(DEBUG, 1, [Define if you want to use debug])
 
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
@@ -123,7 +123,7 @@ dnl looking for aspell
    HAVE_ASPELL=yes 
    have_speller="yes"
    AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell])
-   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
+#   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
    echo "found"
   else
    AC_MSG_CHECKING([for ispell]) 
@@ -133,11 +133,13 @@ dnl looking for aspell
     HAVE_ISPELL=yes 
     have_speller="yes"
     AC_DEFINE(USE_ISPELL, 1, [Define if you want to use ispell])
-    AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
+#    AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
     echo "found"
    fi
   fi
-
+if test $have_speller="yes"; then
+   AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
+fi
 
 
 dnl ******************************
