@@ -38,11 +38,12 @@
 
 #include "gui/gnomesword.h"
 #include "gui/studypad.h"
-#include "gui/editor.h"
-#include "gui/toolbar_style.h"
-#include "gui/toolbar_edit.h"
-#include "gui/editor_menu.h"
-#include "gui/editor_spell.h"
+#include "editor/editor.h"
+#include "editor/spell.h"
+#include "editor/toolbar_style.h"
+#include "editor/toolbar_edit.h"
+#include "editor/editor_menu.h"
+#include "editor/editor_spell.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
 #include "gui/fileselection.h"
@@ -54,6 +55,8 @@
 #define BUFFER_SIZE 4096
 
 GSHTMLEditorControlData *editor_cd;
+
+static GtkHTMLEditorAPI *editor_api;
 
 gboolean
 on_studypad_delete                        (GtkWidget       *widget,
@@ -615,6 +618,45 @@ static gboolean on_html_enter_notify_event(GtkWidget * widget,
 	return TRUE;
 }
 
+static gboolean
+editor_api_command (GtkHTML *html, GtkHTMLCommandType com_type, gpointer data)
+{
+/*	GtkHTMLControlData *cd = (GtkHTMLControlData *) data;
+	gboolean rv = TRUE;
+
+	switch (com_type) {
+	case GTK_HTML_COMMAND_POPUP_MENU:
+		popup_show_at_cursor (cd);
+		break;
+	case GTK_HTML_COMMAND_PROPERTIES_DIALOG:
+		property_dialog_show (cd);
+		break;
+	case GTK_HTML_COMMAND_TEXT_COLOR_APPLY:
+		toolbar_apply_color (cd);
+		break;
+	default:
+		rv = FALSE;
+	}
+
+	return rv;*/
+}
+
+
+static void
+new_editor_api ()
+{
+	editor_api = g_new (GtkHTMLEditorAPI, 1);
+
+	editor_api->check_word         = spell_check_word;
+	editor_api->suggestion_request = spell_suggestion_request;
+	editor_api->add_to_personal    = spell_add_to_personal;
+	editor_api->add_to_session     = spell_add_to_session;
+	editor_api->set_language       = spell_set_language;
+	editor_api->command            = editor_api_command;
+	//editor_api->event              = editor_api_event;
+	//editor_api->create_input_line  = editor_api_create_input_line;
+}
+
 /******************************************************************************
  * Name
  *  gui_create_studypad_control
@@ -645,6 +687,9 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	GSHTMLEditorControlData *specd =
 	    gs_html_editor_control_data_new();
 
+#ifdef DEBUG
+	g_message("gui_create_studypad_control");
+#endif	
 
 	specd->studypad = TRUE;
 	specd->stylebar = settings.show_style_bar_sp;
@@ -666,7 +711,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_widget_show(vbox);
 	gtk_box_pack_start(GTK_BOX(hboxstyle), vbox, TRUE, TRUE, 0);
 
-	htmlwidget = gtk_html_new();
+	//htmlwidget = gtk_html_new();
 
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_show(frame34);
@@ -682,8 +727,8 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow17,
                                              settings.shadow_type);
 
-	specd->htmlwidget = htmlwidget;
-	specd->html = GTK_HTML(specd->htmlwidget);
+	//specd->htmlwidget = htmlwidget;
+	//specd->html = GTK_HTML(specd->htmlwidget);
 	gtk_widget_show(specd->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  specd->htmlwidget);
@@ -740,10 +785,15 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 		
 	editor_cd = specd;	
 	
+	new_editor_api ();
+	gtk_html_set_editor_api (GTK_HTML (specd->html), editor_api, specd);
+	//GNOME_Spell_Dictionary
+	specd->dict = spell_new_dictionary ();
+	spell_set_language (specd->html, settings.spell_language, specd);
 	gtk_html_set_editable(specd->html,TRUE);
-	
+	gtk_html_set_inline_spelling (specd->html, TRUE);
 	//gui_new_editor_api(specd);
-	return htmlwidget;
+	return specd->htmlwidget;
 }
 
 

@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "gui/editor.h"
+#include "editor/editor.h"
 
 void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd);
 

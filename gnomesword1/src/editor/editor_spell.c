@@ -33,16 +33,11 @@
 #include <gtkhtml/htmlengine-edit-cursor.h>
 #include <gtkhtml/htmlengine-search.h>
 #include <gtkhtml/htmlselection.h>
-/*
-#ifdef USE_GTKHTML30
-#include <gal/widgets/e-unicode.h>
-#endif
-*/
 
-#include "gui/editor.h"
-#include "gui/editor_spell.h"
+#include "editor/editor.h"
+#include "editor/editor_spell.h"
+#include "editor/spell.h"
 
-#include "main/spell.h"
 #include "main/settings.h"
 #include "main/xml.h"
 
@@ -84,7 +79,7 @@ typedef struct {
 	gint status_bar_count;
 } Tspc_gui;
 
-
+char *spell_language;
 
 static Tspc_gui spc_gui;
 static gboolean spc_is_running;
@@ -169,7 +164,7 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 			language = ecd->languages->_buffer [i].abbreviation;
 	}
 #endif	
-	select_word(ecd);
+/*	select_word(ecd);
 	do {
 		spc_message = SPC_NONE;
 		
@@ -178,12 +173,12 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 		
 		switch (spc_message) {
 		case SPC_INSERT:			
-			add_to_personal(word,language);
+//			add_to_personal(word,language);
 			word_corrected = 1;
 			break;
-		case SPC_ACCEPT:
-			add_to_session(word);
-			change_word_color(ecd);;
+		case SPC_ACCEPT: 
+			//add_to_session(word);
+			//change_word_color(ecd);;
 			word_corrected = 1;
 			break;
 		case SPC_IGNORE:
@@ -204,10 +199,10 @@ static void correct_word(const gchar * word, GSHTMLEditorControlData * ecd)
 		}
 		case SPC_CLOSE:
 			change_word_color(ecd);
-			word_corrected = 1;	/* to exit the while loop */
+			word_corrected = 1;	//* to exit the while loop 
 			break;
 		}
-	} while (!word_corrected);
+	} while (!word_corrected);*/
 };
 
 
@@ -234,7 +229,8 @@ static void fill_near_misses_list(const gchar * word)
 	GtkTreeModel *model;
 	GtkListStore *list_store;
 	GtkTreeIter iter;
-	GList * tmp = get_suggest_list(word);
+	GList * tmp = NULL;
+//	GList * tmp = get_suggest_list(word);
 	
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(spc_gui.near_misses_list));
 	list_store = GTK_LIST_STORE(model);
@@ -333,7 +329,9 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 				if (strlen(utf8str) > 2) {
 					word_count++;
 					spc_message = SPC_NONE;
-					have = check_word_spell(utf8str);
+					have = spell_check_word(ecd->html,
+								utf8str,
+								ecd);
 					if (have == 0){
 						fill_near_misses_list(utf8str);
 						correct_word(utf8str, ecd);
@@ -412,8 +410,9 @@ static void spc_start_button_clicked_lcb(GtkButton * button,
 	
 	for (i = 0; i < ecd->languages->_length; i ++) {
 		if(!strcmp(ecd->languages->_buffer [i].name, spell_language))
-			set_dictionary_language(
-				ecd->languages->_buffer [i].abbreviation);
+			spell_set_language(ecd->html,
+				ecd->languages->_buffer [i].abbreviation,
+				ecd);
 	}
 #endif	
 	
@@ -448,7 +447,7 @@ static void spc_close_button_clicked_lcb(GtkButton * button,
 	spc_message = SPC_CLOSE;
 	if (!spc_is_running){
 		gtk_widget_destroy(spc_gui.window);		
-		kill_spell();
+//		kill_spell();
 	}
 }
 
@@ -763,7 +762,7 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 	gtk_widget_show(spc_gui.language_combo);
 	gtk_container_add(GTK_CONTAINER(spc_gui.language_frame),
 			  spc_gui.language_combo);
-	tmp = get_dictionary_languages(ecd);
+//	tmp = get_dictionary_languages(ecd);
 	
 	gtk_combo_set_popdown_strings(GTK_COMBO(spc_gui.language_combo),
 				      tmp);
@@ -1035,12 +1034,13 @@ static GtkWidget *create_spc_window(GSHTMLEditorControlData *ecd)
 
 void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData *ecd)
 {
-	if(init_spell() == -1) {
+	/*if(init_spell() == -1) {
 		return;
-	}	
-	spc_gui.window = create_spc_window(ecd);	
+	}*/
+	spell_check_dialog(ecd,TRUE);	
+	/*spc_gui.window = create_spc_window(ecd);	
 	gtk_widget_show(spc_gui.window);
-	spc_start_button_clicked_lcb(NULL, ecd);
+	spc_start_button_clicked_lcb(NULL, ecd);*/
 }
 
 

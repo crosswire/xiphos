@@ -29,11 +29,11 @@ extern "C" {
 #include <gnome.h>
 #ifdef USE_GNOME_SPELL	
 #include <bonobo.h>
-#include "main/Spell.h"
+#include "editor/Spell.h"
 #endif
 
 typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
-#include "gui/editor_replace.h"
+#include "editor/editor_replace.h"
 
 typedef GtkWidget ** (*DialogCtor)(GtkHTML *html);
 
@@ -51,6 +51,10 @@ struct _GSHTMLEditorControlData {
 	GList *properties_types;
 	GSList *paragraph_group;
 
+	BonoboUIComponent *uic;
+
+//	GtkHTMLEditPropertiesDialog   *properties_dialog;
+//	GList                         *properties_types;
 	/* search & replace dialogs */
 	GtkHTMLReplaceDialog *replace_dialog;
 
@@ -131,8 +135,7 @@ struct _GSHTMLEditorControlData {
 	gboolean gbs; /** gen book support **/
 	gboolean studypad; 
 	gchar filename[256];
-	gchar *key;
-#ifdef USE_GNOME_SPELL	
+	gchar *key;	
 	CORBA_sequence_GNOME_Spell_Language *languages;
 	GNOME_Spell_Dictionary  dict;
 	BonoboObject           *persist_stream;
@@ -142,8 +145,6 @@ struct _GSHTMLEditorControlData {
 	gboolean has_spell_control;
 	gboolean has_spell_control_set;
 	gboolean spell_check_next;
-	
-#endif
 	gboolean                block_language_changes;
 	gchar                  *language;
 //	EditorEngine           *editor_bonobo_engine;

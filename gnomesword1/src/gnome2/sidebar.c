@@ -32,7 +32,7 @@
 #endif
 */
 #include "gui/sidebar.h"
-#include "gui/editor.h"
+#include "editor/editor.h"
 #include "gui/bookmarks_treeview.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"

@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * editor_menu.h - popup menu for html editor
+ * editor_replace.h - find and replace dialog for editors
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,18 +18,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-
-#ifndef __EDITOR_MENU_H_
-#define __EDITOR_MENU_H_
+ 
+#ifndef _EDITOR_REPLACE_H_
+#define _EDITOR_REPLACE_H_
 
 #include <gnome.h>
-#include "gui/editor.h"
+#include <gtkhtml/gtkhtml.h>
 
-void gui_new_activate(GtkMenuItem * menuitem, 
-				GSHTMLEditorControlData * ecd);
-void on_save_activate(GtkMenuItem * menuitem, 
-				GSHTMLEditorControlData * ecd);
-GtkWidget *gui_create_editor_popup(GSHTMLEditorControlData * ecd);
+typedef struct _GtkHTMLReplaceAskDialog GtkHTMLReplaceAskDialog;
+typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
+
+#include "editor/editor.h"
+
+GtkHTMLReplaceDialog * gs_editor_replace_dialog_new(GtkHTML *html);
+void gs_editor_replace_dialog_destroy(GtkHTMLReplaceDialog *d);
+void replace(GSHTMLEditorControlData *ecd);
 
 #endif
-
