@@ -133,6 +133,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 		*font;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
+	ConfigEntMap::iterator cit; //-- iteratior
 	GString *strbuf;
 	VerseKey *key = (VerseKey *) (SWKey *) imodule;
 	int curVerse = key->Verse();
@@ -140,7 +141,9 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	int curBook = key->Book();
 	int curPos = 0;
 	gint len;
-	
+	gchar *sourceformat;
+	bool gbf = false;
+	char *Buf;
 	
 	font = "Roman";
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
@@ -149,13 +152,14 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 		    (*sit).second.end()) {
 			font = (char *) (*eit).second.c_str();
 		}
+		cit = (*sit).second.find("SourceType");
+		if(cit != (*sit).second.end()) sourceformat = (char *)(*cit).second.c_str();
+		if(!strcmp(sourceformat, "GBF")) gbf = true;		
 	}
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbText")), 1);
-			      	
-	//colour = gdouble_arr_to_hex(, gint websafe)		
 	beginHTML(GTK_WIDGET(gtkText));
-	strbuf = g_string_new( "<HTML><BODY>" );
+	strbuf = g_string_new( "<HTML><BODY><body text=\"#151515\" link=\"#898989\">" );
 	displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);	
 	g_string_free( strbuf,TRUE);
 	
@@ -163,7 +167,7 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				imodule++) {
 		/* verse number */
 		strbuf = g_string_new( "" );
-		g_string_sprintf(strbuf,"<A HREF=\"%s\" NAME=\"%d\"><B>%d</B></A> ",
+		g_string_sprintf(strbuf,"<A HREF=\"%s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
 				imodule.KeyText(), key->Verse(), key->Verse());
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
 		g_string_free( strbuf,TRUE);				
@@ -176,7 +180,17 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 				g_string_sprintf(strbuf, "<FONT COLOR=\"%s\">",
 			        	mycolor);
 			}
-			strbuf = g_string_append( strbuf,(const char *) imodule);
+			if(gbf) {
+				len = strlen((const char *) imodule);
+				len = len *5;
+				Buf = new char[len];
+				strcpy(Buf,(const char *) imodule);
+				gbftohtml(Buf, len);
+				strbuf = g_string_append( strbuf,Buf);
+				delete[]Buf;
+				Buf = NULL;
+				
+			} else 	strbuf = g_string_append( strbuf,(const char *) imodule);
 			strbuf = g_string_append( strbuf,"</font><br>" );			
 			displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
 			g_string_free( strbuf,TRUE);			
@@ -187,8 +201,17 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 			        if (bVerseStyle) strbuf = g_string_append( strbuf,"</font><br>" );
 			        else  g_string_append( strbuf,"</font>" );			        	
 			} else {
-		                strbuf = g_string_new( (const char *) imodule );
-		                if (bVerseStyle) strbuf = strbuf = g_string_append( strbuf,"<br>" ); 		
+				if(gbf) {
+					len = strlen((const char *) imodule);
+					len = len *5;
+					Buf = new char[len];
+					strcpy(Buf,(const char *) imodule);
+					gbftohtml(Buf, len);
+					strbuf = g_string_new(Buf);
+					delete[]Buf;
+					Buf = NULL;					
+				} else strbuf = g_string_new( (const char *) imodule );
+		                if (bVerseStyle) strbuf = g_string_append( strbuf,"<br>" ); 		
 		        }  						
 			displayHTML(GTK_WIDGET(gtkText), strbuf->str,strbuf->len);
 			g_string_free( strbuf,TRUE);
@@ -1426,6 +1449,522 @@ char HTMLChapDisp::Display(SWModule & imodule)
 	key->Book(curBook);
 	key->Chapter(curChapter);
 	key->Verse(curVerse);
+}
+
+/********************************************************** 
+* most of the code in this function is from the 
+* Sword gbfhtml.cpp file
+***********************************************************/
+gchar *GTKEntryDisp::gbftohtml(gchar * text, gint maxlen)
+{
+	gchar 	*str,
+		*to, 
+		*from, 
+		token[2048];
+	gint	len;
+	gint 	tokpos = 0;
+	bool 	intoken 	= false;
+	bool 	hasFootnotePreTag = false;
+	bool 	isRightJustified = false;
+	bool 	isCentered = false;	
+	static bool 	newParagraph = false;
+	
+	len = strlen(text) + 1;	
+	if (len < maxlen) {
+		memmove(&text[maxlen - len], text, len);
+		from = &text[maxlen - len];
+	}
+	else from = text;
+	for (to = text; *from; from++)
+	{
+		if(newParagraph){
+			 *to++ = '.';
+			 newParagraph = false;
+		}
+		if (*from == '\n') {
+			*from = ' ';
+		}			
+		if (*from == '<') {
+			intoken = true;
+			tokpos = 0;
+			memset(token, 0, 2048);
+			continue;
+		}
+		if (*from == '>')
+		{
+			intoken = false;
+			// process desired tokens
+			switch (*token) {
+				case 'W':	// Strongs
+					switch(token[1])
+					{
+						case 'G':               // Greek
+						case 'H':               // Hebrew
+							
+							*to++ = ' '; 													
+							*to++ = '<';
+							*to++ = 'A';
+							*to++ = ' ';
+							*to++ = 'H';
+							*to++ = 'R';
+							*to++ = 'E';
+							*to++ = 'F';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = '#';
+							for (unsigned int i = 2; i < strlen(token); i++)
+								*to++ = token[i];
+							*to++ = '\"';
+							*to++ = '>';
+							*to++ = '<';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = ' ';
+							*to++ = 'S';
+							*to++ = 'I';
+							*to++ = 'Z';
+							*to++ = 'E';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = '-';
+							*to++ = '1';
+							*to++ = '\"';
+							*to++ = '>';
+							 for (unsigned int i = 2; i < strlen(token); i++)
+								*to++ = token[i];
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = '>';	
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'A';
+							*to++ = '>';
+							*to++ = ' ';
+							// cout << to << '\n';
+							continue;
+
+						case 'T':               // Tense
+							*to++ = ' '; 													
+							*to++ = '<';
+							*to++ = 'A';
+							*to++ = ' ';
+							*to++ = 'H';
+							*to++ = 'R';
+							*to++ = 'E';
+							*to++ = 'F';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = '#';
+							for (unsigned int i = 3; i < strlen(token); i++)
+								*to++ = token[i];
+							*to++ = '\"';
+							*to++ = '>';
+							*to++ = ' ';
+							*to++ = '<';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = ' ';
+							*to++ = 'S';
+							*to++ = 'I';
+							*to++ = 'Z';
+							*to++ = 'E';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = '-';
+							*to++ = '1';
+							*to++ = '\"';
+							*to++ = '>';
+							*to++ = '<';
+							*to++ = 'I';
+							*to++ = '>';
+							for (unsigned int i = 3; i < strlen(token); i++)
+								*to++ = token[i];					
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'I';
+							*to++ = '>';
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = '>';
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'A';
+							*to++ = '>';
+							*to++ = ' ';
+							continue;
+					}
+					break;
+				case 'R':
+					switch(token[1])
+					{
+					  case 'B':								//word(s) explained in footnote
+							*to++ = '<';
+							*to++ = 'I';					
+							*to++ = '>';						
+							hasFootnotePreTag = true; //we have the RB tag
+							continue;
+						case 'F':               // footnote begin
+							if (hasFootnotePreTag) {
+								*to++ = '<';
+								*to++ = '/';
+								*to++ = 'I';
+								*to++ = '>';						
+								*to++ = ' ';
+							}
+	 						*to++ = '<';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = ' ';
+							*to++ = 'C';
+							*to++ = 'O';
+							*to++ = 'L';
+							*to++ = 'O';
+							*to++ = 'R';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = '#';
+							*to++ = '8';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '\"';
+							*to++ = '>';
+							
+							*to++ = ' ';
+							*to++ = '<';
+							*to++ = 'S';
+							*to++ = 'M';
+							*to++ = 'A';
+							*to++ = 'L';
+							*to++ = 'L';
+							*to++ = '>';
+							*to++ = '(';
+													
+							continue;
+						case 'f':               // footnote end
+							*to++ = ')';
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'S';
+							*to++ = 'M';
+							*to++ = 'A';
+							*to++ = 'L';
+							*to++ = 'L';
+							*to++ = '>';
+							*to++ = ' ';
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = '>';
+							hasFootnotePreTag = false;
+							continue;
+					}
+					break;
+				
+				case 'F':			// font tags
+					switch(token[1])
+					{
+						case 'I':		// italic start
+							*to++ = '<';
+							*to++ = 'I';
+							*to++ = '>';
+							continue;
+						case 'i':		// italic end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'I';
+							*to++ = '>';
+							continue;
+						case 'B':		// bold start
+							*to++ = '<';
+							*to++ = 'B';
+							*to++ = '>';
+							continue;
+						case 'b':		// bold end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'B';
+							*to++ = '>';
+							continue;
+						case 'R':		// words of Jesus begin
+							*to++ = '<';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = ' ';
+							*to++ = 'C';
+							*to++ = 'O';
+							*to++ = 'L';
+							*to++ = 'O';
+							*to++ = 'R';
+							*to++ = '=';
+							*to++ = '#';
+							*to++ = 'F';
+							*to++ = 'F';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '0';
+							*to++ = '>';
+							continue;
+						case 'r':		// words of Jesus end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'F';
+							*to++ = 'O';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = '>';
+							continue;
+						case 'U':		// Underline start
+							*to++ = '<';
+							*to++ = 'U';
+							*to++ = '>';
+							continue;
+							case 'u':		// Underline end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'U';
+							*to++ = '>';
+							continue;
+						case 'O':		// Old Testament quote begin
+							*to++ = '<';
+							*to++ = 'C';
+							*to++ = 'I';
+							*to++ = 'T';
+							*to++ = 'E';
+							*to++ = '>';
+							continue;
+						case 'o':		// Old Testament quote end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'C';
+							*to++ = 'I';
+							*to++ = 'T';
+							*to++ = 'E';
+							*to++ = '>';
+							continue;
+						case 'S':		// Superscript begin
+							*to++ = '<';
+							*to++ = 'S';
+							*to++ = 'U';
+							*to++ = 'P';
+							*to++ = '>';
+							continue;
+						case 's':		// Superscript end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'S';
+							*to++ = 'U';
+							*to++ = 'P';
+							*to++ = '>';
+							continue;
+						case 'V':		// Subscript begin
+							*to++ = '<';
+							*to++ = 'S';
+							*to++ = 'U';
+	  						*to++ = 'B';
+							*to++ = '>';
+							continue;
+						case 'v':		// Subscript end
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'S';
+							*to++ = 'U';
+							*to++ = 'B';
+							*to++ = '>';
+							continue;
+					}
+					break;
+				case 'C':			// special character tags
+					switch(token[1])
+					{
+						case 'A':               // ASCII value
+							*to++ = (char)atoi(&token[2]);
+							continue;
+						case 'G':
+							//*to++ = ' ';
+							continue;
+						case 'L':               // line break
+						        if (!bVerseStyle) {
+								*to++ = '<';
+								*to++ = 'B';
+								*to++ = 'R';
+								*to++ = '>';
+								*to++ = ' ';
+							}
+							continue;
+						case 'M':               // new paragraph
+						        if (!bVerseStyle) {
+								*to++ = '<';
+								*to++ = 'B';
+								*to++ = 'R';
+								*to++ = '>';
+								*to++ = '<';
+								*to++ = 'B';
+								*to++ = 'R';
+								*to++ = '>';
+								*to++ = ' ';
+							} else {
+								newParagraph = true;
+							}
+							continue;
+						case 'T':
+							//*to++ = ' ';
+							continue;
+					}
+					break;
+				case 'J':	//Justification
+					switch(token[1]) 
+					{
+						case 'R':	//right
+							*to++ = '<';
+							*to++ = 'D';
+							*to++ = 'I';
+							*to++ = 'V';
+							*to++ = ' ';
+							*to++ = 'A';
+							*to++ = 'L';
+							*to++ = 'I';
+							*to++ = 'G';
+							*to++ = 'N';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = 'R';
+							*to++ = 'I';
+							*to++ = 'G';
+							*to++ = 'H';
+							*to++ = 'T';
+							*to++ = '\"';
+							*to++ = '>';
+							isRightJustified = true;
+							continue;
+	
+						case 'C':	//center
+							*to++ = '<';
+							*to++ = 'D';
+							*to++ = 'I';
+							*to++ = 'V';
+							*to++ = ' ';
+							*to++ = 'A';
+							*to++ = 'L';
+							*to++ = 'I';
+							*to++ = 'G';
+							*to++ = 'N';
+							*to++ = '=';
+							*to++ = '\"';
+							*to++ = 'C';
+							*to++ = 'E';
+							*to++ = 'N';
+							*to++ = 'T';
+							*to++ = 'E';
+							*to++ = 'R';
+							*to++ = '\"';
+							*to++ = '>';
+							isCentered = true;
+							continue;
+	
+						case 'L': //left, reset right and center
+							if (isCentered) {
+								*to++ = '<';
+								*to++ = '/';
+								*to++ = 'C';
+								*to++ = 'E';
+								*to++ = 'N';
+								*to++ = 'T';
+								*to++ = 'E';
+								*to++ = 'R';
+								*to++ = '>';
+								isCentered = false;
+							}
+							if (isRightJustified) {
+								*to++ = '<';
+								*to++ = '/';
+								*to++ = 'D';
+								*to++ = 'I';
+								*to++ = 'V';
+								*to++ = '>';
+								isRightJustified = false;
+							}
+							continue;
+					}
+					break;
+				case 'T':			// title formatting
+					switch(token[1])
+					{
+						case 'T':               // Book title begin
+							*to++ = '<';
+							*to++ = 'B';
+							*to++ = 'I';
+							*to++ = 'G';
+							*to++ = '>';
+							continue;
+						case 't':
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'B';
+							*to++ = 'I';
+							*to++ = 'G';
+							*to++ = '>';
+							continue;
+					}
+					break;
+	
+				case 'P': // special formatting
+					switch(token[1])
+					{
+						case 'P': // Poetry begin
+							*to++ = '<';
+							*to++ = 'C';
+							*to++ = 'I';
+							*to++ = 'T';
+							*to++ = 'E';
+							*to++ = '>';
+							continue;
+						case 'p':
+							*to++ = '<';
+							*to++ = '/';
+							*to++ = 'C';
+							*to++ = 'I';
+							*to++ = 'T';
+							*to++ = 'E';
+							*to++ = '>';
+							continue;
+					}
+					break;
+			}
+			continue;
+		}
+		if (intoken) {
+		 	if (tokpos < 2047) {
+		 		token[tokpos] = *from;
+		 		tokpos++;
+		 	}
+		 }
+		else *to++ = *from;
+	}
+	*to = 0;
+	return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
