@@ -120,7 +120,7 @@ GList *backend_load_sb_group(char * filename, char * group_name,
 	    sbInfo["Shortcut Info"]["Group Name"].c_str());
     sprintf(use_largeicons, "%s",
 	    sbInfo["Shortcut Info"]["Large Icon"].c_str());
-    sbInfo.Save();
+    
 
     sbconf = new SWConfig(conffile);
     if ((sit = sbconf->Sections.find("ROOT")) != sbconf->Sections.end()) {
@@ -158,10 +158,10 @@ void backend_save_sb_group(char * filename, char * group_name, int group_num,
     emap = sbconf->Sections["ROOT"];
 
     number_of_items =
-	gs_shortcut_model_get_num_items(settings.shortcut_bar, group_num);
+	get_num_shortcut_items(settings.shortcut_bar, group_num);
 
     for (j = 0; j < number_of_items; j++) {
-	gs_shortcut_model_get_item_info(settings.shortcut_bar,
+	get_shortcut_item_info(settings.shortcut_bar,
 					group_num,
 					j, &item_url, &item_name);
 	sprintf(buf, "branch%d", j);

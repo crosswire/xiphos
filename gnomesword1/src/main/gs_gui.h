@@ -31,9 +31,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "gs_gnomesword.h"
+#include "settings.h"
 
-	void create_mainwindow(SETTINGS *s);
+void on_btnSB_clicked(GtkButton * button, SETTINGS * s);
+void create_mainwindow(SETTINGS *s);
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 
 /*
  * GnomeSword Bible Study Tool
- * create_shortcutbar_viewer.h - create viewer group gui
+ * shortcutbar_viewer.h - create viewer group gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif	
-	
+
+#include "settings.h"
 
 typedef struct _shortcutbar_viewer SB_VIEWER;
 struct _shortcutbar_viewer {
@@ -38,7 +39,12 @@ struct _shortcutbar_viewer {
 		*html_viewer_widget;
 };
 
-
+void set_sb_for_daily_devotion(SETTINGS * s);
+void showSBVerseList(SETTINGS * s);
+gboolean gui_display_dictlex_in_viewer(char *modName,
+				   char *key, SETTINGS * s);
+void gui_display_verse_list(gchar * module_name, gchar * verse_list,
+				SETTINGS * s);
 GtkWidget * gui_create_shortcutbar_viewer(GtkWidget * vp, SETTINGS * s);
 
 #ifdef __cplusplus
