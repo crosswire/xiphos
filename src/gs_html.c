@@ -535,6 +535,7 @@ gchar *lookupGS_HTML(GtkWidget *html_widget, gboolean word)
 	html = GTK_HTML(html_widget);
 	if(word)
 		gtk_html_select_word(html);
+	
 	if(html_engine_is_selection_active(html->engine)){
 		key = html_engine_get_selection_string(html->engine);
 		key = g_strdelimit(key,".,\"<>;:",' ');
