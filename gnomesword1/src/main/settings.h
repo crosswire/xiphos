@@ -30,61 +30,6 @@ extern "C" {
 
 typedef struct _settings SETTINGS;
 struct _settings {
-	GtkWidget
-		*app,  /* main form */
-		*appbar, /* gnome status/progress bar */
-		*epaned, /* shortcut bar and main panle */
-		*shortcut_bar,  /* the shortcut bar widget */
-		*ctree_widget, /* bookmarks tree */
-		*ctree_widget_books, /* books tree */
-		*workbook_upper, /* notebook - commentaries and editors */	
-		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
-		*notebook_gbs, /* notebook - gbs */
-		*notebookDL,  /* notebook - dict/lex */
-		*notebook_comm,  /* notebook - commentaries */
-		*notebook_text,  /* notebook - texts */
-		*notebook_percomm,  /* notebook - personal comments */
-		*verse_list_notebook,  
-	
-	/* nav control widgets */
-		*cbeBook,
-		*spbChapter,
-		*spbVerse,
-		*cbeFreeformLookup,
-    
-	/* dock/undock stuff */
-		*dockSB, /* dock for shortcut bar */
-		*vboxDock, 
-		*frameInt, /* frame for interlinear html  */ 
-	
-	/* toolbars */
-		*hbox_toolbar,
-		*toolbarOptions,
-		*toolbarBooks,
-		*toolbarComments,
-		*toolbarStudypad,
-	
-	/* html widgets */
-		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
-		*srhtml,  /* html widget for serch results list in shortcut bar */	
-		*htmlRP,  /* html widget for serch report shortcut bar */
-		*htmlInterlinear, /* interlinear html widget */
-		*html_text, /* texts html widget */
-		*html_comm, /* html commentary widget */
-		*html_percomm, /* html personal commentary widget */
-		*html_dict, /* html dictionary widget */
-		*html_book, /* gbs html widget */
-		*html_studypad, /* studypad html widget */
-	
-	/* popup menu widgets */
-		*menuInt,
-		
-	/* popup menu item widgets */
-		*versestyle_item,	/* widget to access toggle menu - for versestyle */
-		*unlocktextmod_item, /* unlock module menu item */
-		*unlockcommmod_item, /* unlock module menu item */
-		*unlockdictmod_item; /* unlock module menu item */
-		
 	gchar	
 		gs_version[16], /* GnomeSWORD version */
 		MainWindowModule[80],	/* module to open at program startup  */

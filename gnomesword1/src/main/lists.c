@@ -50,9 +50,9 @@ struct _module_lists {
 	*bible_books,
 	*options;	
 };
-
 static MOD_LISTS *mod_lists;
 static MOD_LISTS mods;
+
 
 GList * get_list(gint type)
 {

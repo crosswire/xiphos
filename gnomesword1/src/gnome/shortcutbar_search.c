@@ -31,6 +31,7 @@
 #include "gui/shortcutbar_search.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
+#include "gui/gnomesword.h"
 
 #include "main/shortcutbar.h"
 #include "main/sword.h"
@@ -94,22 +95,22 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so)
 	g_list_free(tmp);
 	sprintf(settings.groupName,"%s","Search Results");
 	sprintf(buf,"%d matches",i);
-	gnome_appbar_set_status (GNOME_APPBAR (settings.appbar), buf);
+	gnome_appbar_set_status (GNOME_APPBAR (widgets.appbar), buf);
 	gtk_notebook_set_page(GTK_NOTEBOOK(sv->notebook), 1);
 	showSBVerseList();
 	
 	/* report results */
-	gui_begin_html(settings.htmlRP, TRUE);
+	gui_begin_html(widgets.html_search_report, TRUE);
 	sprintf(buf,HTML_START 
 	    "<body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
 				i, settings.found_color,settings.searchText,
 				settings.bible_verse_num_color,so->module_name);	
-	utf8str = e_utf8_from_gtk_string(settings.htmlRP, buf);
-	gui_display_html(settings.htmlRP, utf8str, strlen(utf8str));
-	gui_end_html(settings.htmlRP);	
+	utf8str = e_utf8_from_gtk_string(widgets.html_search_report, buf);
+	gui_display_html(widgets.html_search_report, utf8str, strlen(utf8str));
+	gui_end_html(widgets.html_search_report);	
 	
 	/* cleanup appbar progress */
-	gnome_appbar_set_progress ((GnomeAppBar *)settings.appbar, 0);
+	gnome_appbar_set_progress ((GnomeAppBar *)widgets.appbar, 0);
 	/* display first item in list by selection row 0 */
 	gtk_clist_select_row(GTK_CLIST(sv->clist), 0, 0);	
 }
@@ -282,7 +283,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	frame1 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame1);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame1",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame1",
 				 frame1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame1);
@@ -291,7 +292,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox1);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox1",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox1",
 				 vbox1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox1);
@@ -299,7 +300,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	frame7 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame7);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame7",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame7",
 				 frame7, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame7);
@@ -307,7 +308,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	vbox5 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox5);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox5",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox5",
 				 vbox5, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox5);
@@ -315,7 +316,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	entrySearch = gtk_entry_new();
 	gtk_widget_ref(entrySearch);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "entrySearch",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "entrySearch",
 				 entrySearch, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(entrySearch);
@@ -324,7 +325,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	btnSearch = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
 	gtk_widget_ref(btnSearch);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnSearch",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnSearch",
 				 btnSearch, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(btnSearch);
@@ -335,7 +336,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	frame2 = gtk_frame_new(_("Search Type"));
 	gtk_widget_ref(frame2);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame2",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame2",
 				 frame2, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame2);
@@ -343,7 +344,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	vbox2 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_ref(vbox2);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox2",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox2",
 				 vbox2, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox2);
@@ -355,7 +356,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	vbox2_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbMultiword));
 	gtk_widget_ref(rbMultiword);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "rbMultiword",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "rbMultiword",
 				 rbMultiword, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(rbMultiword);
@@ -371,7 +372,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	vbox2_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbRegExp));
 	gtk_widget_ref(rbRegExp);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "rbRegExp",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "rbRegExp",
 				 rbRegExp, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(rbRegExp);
@@ -385,7 +386,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
 				   (rbPhraseSearch));
 	gtk_widget_ref(rbPhraseSearch);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "rbPhraseSearch",
 				 rbPhraseSearch,
 				 (GtkDestroyNotify)
@@ -397,7 +398,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	frame3 = gtk_frame_new(_("Search Options"));
 	gtk_widget_ref(frame3);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame3",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame3",
 				 frame3, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame3);
@@ -405,7 +406,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	vbox3 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox3);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox3",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox3",
 				 vbox3, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox3);
@@ -414,7 +415,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	ckbCaseSensitive =
 	    gtk_check_button_new_with_label(_("Case Sensitive"));
 	gtk_widget_ref(ckbCaseSensitive);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "ckbCaseSensitive", ckbCaseSensitive,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -426,7 +427,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	p_so->ckbCommentary =
 	    gtk_check_button_new_with_label(_("Search Commentary"));
 	gtk_widget_ref(p_so->ckbCommentary);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "p_so->ckbCommentary",
 				 p_so->ckbCommentary, (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -438,7 +439,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	p_so->ckbPerCom =
 	    gtk_check_button_new_with_label(_("Search Personal"));
 	gtk_widget_ref(p_so->ckbPerCom);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "p_so->ckbPerCom", p_so->ckbPerCom,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -450,7 +451,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	p_so->ckbGBS =
 	    gtk_check_button_new_with_label(_("Search Book"));
 	gtk_widget_ref(p_so->ckbGBS);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "p_so->ckbGBS", p_so->ckbGBS,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -463,7 +464,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	frame4 = gtk_frame_new(_("Search Scope"));
 	gtk_widget_ref(frame4);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame4",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame4",
 				 frame4, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame4);
@@ -471,7 +472,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	vbox4 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_ref(vbox4);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox4",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox4",
 				 vbox4, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(vbox4);
@@ -482,7 +483,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	vbox4_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbNoScope));
 	gtk_widget_ref(rbNoScope);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "rbNoScope",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "rbNoScope",
 				 rbNoScope, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(rbNoScope);
@@ -497,7 +498,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	vbox4_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rrbUseBounds));
 	gtk_widget_ref(rrbUseBounds);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "rrbUseBounds", rrbUseBounds,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -512,7 +513,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 	vbox4_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbLastSearch));
 	gtk_widget_ref(rbLastSearch);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "rbLastSearch", rbLastSearch,
 				 (GtkDestroyNotify)
 				 gtk_widget_unref);
@@ -523,7 +524,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	frame5 = gtk_frame_new(_("Bounds"));
 	gtk_widget_ref(frame5);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "frame5",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame5",
 				 frame5, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(frame5);
@@ -531,7 +532,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	table1 = gtk_table_new(2, 2, FALSE);
 	gtk_widget_ref(table1);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "table1",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "table1",
 				 table1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(table1);
@@ -539,7 +540,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	label1 = gtk_label_new(_("Lower"));
 	gtk_widget_ref(label1);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label1",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label1",
 				 label1, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label1);
@@ -550,7 +551,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	label2 = gtk_label_new(_("Upper "));
 	gtk_widget_ref(label2);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label2",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label2",
 				 label2, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(label2);
@@ -561,7 +562,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	entryLower = gtk_entry_new();
 	gtk_widget_ref(entryLower);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "entryLower",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "entryLower",
 				 entryLower, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(entryLower);
@@ -573,7 +574,7 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	entryUpper = gtk_entry_new();
 	gtk_widget_ref(entryUpper);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "entryUpper",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "entryUpper",
 				 entryUpper, (GtkDestroyNotify)
 				 gtk_widget_unref);
 	gtk_widget_show(entryUpper);
@@ -585,6 +586,6 @@ void gui_create_shortcutbar_search(GtkWidget * vp)
 
 	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), NULL);
-	gtk_object_set_data(GTK_OBJECT(settings.app), "tooltips", tooltips);
+	gtk_object_set_data(GTK_OBJECT(widgets.app), "tooltips", tooltips);
 }
 

@@ -29,12 +29,17 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/history.h"
 #include "gui/main_window.h"
+#include "gui/gnomesword.h"
 
 //#include "main/gs_gnomesword.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
+static GtkWidget * cbe_book;
+static GtkWidget * spb_chapter;
+static GtkWidget * spb_verse;
+static GtkWidget * cbe_freeform_lookup;
 
 
 /******************************************************************************
@@ -68,17 +73,17 @@ gchar *gui_update_nav_controls(gchar * key)
 	strcpy(settings.currentverse, val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries
-	 *  to new verse - settings.apply_change is set to false so we don't
+	 *  to new verse - widgets.apply_change is set to false so we don't
 	 *  start a loop
 	 */
-	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook),
+	gtk_entry_set_text(GTK_ENTRY(cbe_book),
 			   get_book_from_key(val_key));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (settings.spbChapter), cur_chapter);
+				  (spb_chapter), cur_chapter);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (settings.spbVerse), cur_verse);
+				  (spb_verse), cur_verse);
 	gtk_entry_set_text(GTK_ENTRY
-			   (settings.cbeFreeformLookup), val_key);
+			   (cbe_freeform_lookup), val_key);
 	settings.apply_change = TRUE;
 	return val_key;
 }
@@ -107,7 +112,7 @@ static void on_cbeBook_changed(GtkEditable * editable,
 	if (settings.apply_change) {
 		gchar buf[256];
 		gchar *bookname =
-		    gtk_entry_get_text(GTK_ENTRY(settings.cbeBook));
+		    gtk_entry_get_text(GTK_ENTRY(cbe_book));
 		sprintf(buf, "%s 1:1", bookname);
 		gui_change_verse(buf);
 	}
@@ -139,15 +144,13 @@ static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
 		gint chapter, verse;
 
 		bookname =
-		    gtk_entry_get_text(GTK_ENTRY(settings.cbeBook));
+		    gtk_entry_get_text(GTK_ENTRY(cbe_book));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings.
-						      spbChapter));
+						     (spb_chapter));
 		verse =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings.
-						      spbVerse));
+						     (spb_verse));
 		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
 		gui_change_verse(buf);
 		return TRUE;
@@ -180,15 +183,13 @@ static gboolean on_spbVerse_button_release_event(GtkWidget * widget,
 		gint chapter, verse;
 
 		bookname =
-		    gtk_entry_get_text(GTK_ENTRY(settings.cbeBook));
+		    gtk_entry_get_text(GTK_ENTRY(cbe_book));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings.
-						      spbChapter));
+						     (spb_chapter));
 		verse =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (settings.
-						      spbVerse));
+						     (spb_verse));
 		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
 		gui_change_verse(buf);
 		return TRUE;
@@ -216,7 +217,7 @@ static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 {
 	gchar *buf;
 
-	buf = gtk_entry_get_text(GTK_ENTRY(settings.cbeFreeformLookup));
+	buf = gtk_entry_get_text(GTK_ENTRY(cbe_freeform_lookup));
 	gui_change_verse(buf);	//-- change verse to entry text 
 }
 
@@ -269,7 +270,7 @@ static gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 
 static void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
-	historynav(settings.app, 0);
+	historynav(widgets.app, 0);
 }
 
 /******************************************************************************
@@ -290,7 +291,7 @@ static void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 
 static void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
-	historynav(settings.app, 1);
+	historynav(widgets.app, 1);
 }
 
 /******************************************************************************
@@ -324,7 +325,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 
 	handleboxNavBar = gtk_handle_box_new();
 	gtk_widget_ref(handleboxNavBar);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "handleboxNavBar", handleboxNavBar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(handleboxNavBar);
@@ -333,7 +334,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbarNav);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbarNav",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbarNav",
 				 toolbarNav,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarNav);
@@ -344,7 +345,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 
 	cbBook = gtk_combo_new();
 	gtk_widget_ref(cbBook);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "cbBook",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "cbBook",
 				 cbBook,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbBook);
@@ -357,56 +358,56 @@ GtkWidget *gui_create_nav_toolbar(void)
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook),
 				      get_list(BOOKS_LIST));
 
-	settings.cbeBook = GTK_COMBO(cbBook)->entry;
-	gtk_widget_ref(settings.cbeBook);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
-				 "settings.cbeBook", settings.cbeBook,
+	cbe_book = GTK_COMBO(cbBook)->entry;
+	gtk_widget_ref(cbe_book);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "cbe_book", cbe_book,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings.cbeBook);
-	gtk_entry_set_text(GTK_ENTRY(settings.cbeBook), _("Romans"));
+	gtk_widget_show(cbe_book);
+	gtk_entry_set_text(GTK_ENTRY(cbe_book), _("Romans"));
 
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
-	settings.spbChapter =
+	spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_ref(settings.spbChapter);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
-				 "settings.spbChapter",
-				 settings.spbChapter,
+	gtk_widget_ref(spb_chapter);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "spb_chapter",
+				 spb_chapter,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings.spbChapter);
+	gtk_widget_show(spb_chapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
-				  settings.spbChapter, NULL, NULL);
+				  spb_chapter, NULL, NULL);
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON
-				    (settings.spbChapter), TRUE);
+				    (spb_chapter), TRUE);
 
 	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
-	settings.spbVerse =
+	spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_ref(settings.spbVerse);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
-				 "settings.spbVerse", settings.spbVerse,
+	gtk_widget_ref(spb_verse);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "spb_verse", spb_verse,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings.spbVerse);
+	gtk_widget_show(spb_verse);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
-				  settings.spbVerse, NULL, NULL);
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(settings.spbVerse),
+				  spb_verse, NULL, NULL);
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(spb_verse),
 				    TRUE);
 
-	settings.cbeFreeformLookup = gtk_entry_new();
-	gtk_widget_ref(settings.cbeFreeformLookup);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
-				 "settings.cbeFreeformLookup",
-				 settings.cbeFreeformLookup,
+	cbe_freeform_lookup = gtk_entry_new();
+	gtk_widget_ref(cbe_freeform_lookup);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "cbe_freeform_lookup",
+				 cbe_freeform_lookup,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(settings.cbeFreeformLookup);
+	gtk_widget_show(cbe_freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
-				  settings.cbeFreeformLookup, NULL,
+				  cbe_freeform_lookup, NULL,
 				  NULL);
-	gtk_entry_set_text(GTK_ENTRY(settings.cbeFreeformLookup),
+	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup),
 			   _("Romans 8:28"));
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_JUMP_TO);
 	btnLookup =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
@@ -416,13 +417,13 @@ GtkWidget *gui_create_nav_toolbar(void)
 		NULL, tmp_toolbar_icon, NULL,
 		NULL);
 	gtk_widget_ref(btnLookup);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnLookup",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnLookup",
 				 btnLookup,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnLookup);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_BACK);
 	btnBack =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
@@ -433,14 +434,14 @@ GtkWidget *gui_create_nav_toolbar(void)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(btnBack);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnBack",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnBack",
 				 btnBack,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnBack);
 	gtk_widget_set_sensitive(btnBack, FALSE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_FORWARD);
 	btnFoward =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarNav),
@@ -451,23 +452,23 @@ GtkWidget *gui_create_nav_toolbar(void)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(btnFoward);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnFoward",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnFoward",
 				 btnFoward,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnFoward);
 	gtk_widget_set_sensitive(btnFoward, FALSE);
 
-	gtk_signal_connect(GTK_OBJECT(settings.cbeBook), "changed",
+	gtk_signal_connect(GTK_OBJECT(cbe_book), "changed",
 			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(settings.spbChapter),
+	gtk_signal_connect(GTK_OBJECT(spb_chapter),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
 			   (on_spbChapter_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(settings.spbVerse),
+	gtk_signal_connect(GTK_OBJECT(spb_verse),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC
 			   (on_spbVerse_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(settings.cbeFreeformLookup),
+	gtk_signal_connect(GTK_OBJECT(cbe_freeform_lookup),
 			   "key_press_event",
 			   GTK_SIGNAL_FUNC
 			   (on_cbeFreeformLookup_key_press_event),

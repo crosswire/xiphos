@@ -47,6 +47,7 @@
 #include "backend/bookmarks.h"
 
 
+
 /******************************************************************************
  * Name
  *  search_percent_update

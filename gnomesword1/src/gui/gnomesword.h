@@ -36,6 +36,46 @@ extern "C" {
 #define STUDYPAD_WINDOW 6
     
  
+typedef struct _app_widgets WIDGETS;
+struct  _app_widgets {
+	GtkWidget
+		*app,  /* main form */
+		*appbar, /* gnome status/progress bar */
+		*epaned, /* shortcut bar and main panle */
+		*shortcutbar,  /* the shortcut bar widget */
+		*ctree_widget, /* bookmarks tree */
+		*ctree_widget_books, /* books tree */
+		*workbook_upper, /* notebook - commentaries and editors */	
+		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear page */
+		*notebook_gbs, /* notebook - gbs */
+		*notebook_dict,  /* notebook - dict/lex */
+		*notebook_comm,  /* notebook - commentaries */
+		*notebook_text,  /* notebook - texts */
+		*notebook_percomm,  /* notebook - personal comments */
+	    
+	/* dock/undock stuff */
+		*dock_sb, /* dock for shortcut bar */
+		*frame_interlinear, /* frame for interlinear html  */ 
+	
+	/* toolbars */
+		*hbox_toolbar,
+		*toolbar_comments,
+		*toolbar_studypad,
+	
+	/* html widgets */	
+		*html_search_report,  /* html widget for serch report shortcut bar */
+		*html_interlinear, /* interlinear html widget */
+		*html_text, /* texts html widget */
+		*html_comm, /* html commentary widget */
+		*html_percomm, /* html personal commentary widget */
+		*html_dict, /* html dictionary widget */
+		*html_book, /* gbs html widget */
+		*html_studypad, /* studypad html widget */
+		
+	/* popup menu item widgets */
+		*versestyle_item;	/* widget to access toggle menu - for versestyle */
+};
+extern WIDGETS widgets;		
 /*** function prototypes ***/
 
 void init_gnomesword(void);
