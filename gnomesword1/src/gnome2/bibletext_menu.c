@@ -144,7 +144,7 @@ static void on_close_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 
 static void on_print_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	gui_html_print(t->html);
+	gui_html_print(t->html, FALSE);
 }
 
 

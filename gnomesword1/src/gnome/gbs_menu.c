@@ -110,7 +110,7 @@ static void on_close_activate(GtkMenuItem * menuitem, GBS_DATA * dlg)
 
 static void on_print_activate(GtkMenuItem * menuitem, GBS_DATA * t)
 {
-	gui_html_print(t->html);
+	gui_html_print(t->html, FALSE);
 }
 
 
