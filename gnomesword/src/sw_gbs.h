@@ -50,6 +50,7 @@ typedef struct _gbsdata GBS_DATA;
 struct _gbsdata {
 	GtkWidget *html;
 	GtkWidget *ctree;
+	GtkWidget *showtabs;
 	gchar *bookName;
 	gchar *bookDescription;
 	gchar *searchstring;
