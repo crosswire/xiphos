@@ -77,6 +77,7 @@ main (int argc, char *argv[])
 	/* load settings into structure */
 	loadconfig(); /* new */
   	initSWORD(mainwindow);
+	
   	initGnomeSword(mainwindow,settings,biblemods,commentarymods,dictionarymods,percommods);
   	
   	gtk_widget_show(mainwindow);

@@ -45,6 +45,8 @@
 #include "gs_html.h"
 #include "support.h"
 #include "gs_popup_cb.h"
+#include "gs_sword.h"
+
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
@@ -66,7 +68,7 @@ GtkWidget *htmlDict;
 GtkWidget *htmlComments;
 GtkWidget *statusbarNE;
 GtkWidget *textComments;
-GList *cbBook_items = NULL;
+GList *cbBook_items=NULL;
 
 
 gint openWidth = 800;
@@ -727,8 +729,8 @@ GtkWidget *create_mainwindow(void)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar20), cbBook, NULL,
 				  NULL);
 	gtk_widget_set_usize(cbBook, 154, -2);
-	
-/*	cbBook_items = g_list_append(cbBook_items, "Genesis");
+/*	
+	cbBook_items = g_list_append(cbBook_items, "Genesis");
 	cbBook_items = g_list_append(cbBook_items, "Exodus");
 	cbBook_items = g_list_append(cbBook_items, "Leviticus");
 	cbBook_items = g_list_append(cbBook_items, "Numbers");
@@ -795,8 +797,10 @@ GtkWidget *create_mainwindow(void)
 	cbBook_items = g_list_append(cbBook_items, "Jude");
 	cbBook_items = g_list_append(cbBook_items, "Revelation");
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
-	g_list_free(cbBook_items);
-*/
+	g_list_free(cbBook_items); */
+	cbBook_items = getBibleBooks();
+	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
+
 	cbeBook = GTK_COMBO(cbBook)->entry;
 	gtk_widget_ref(cbeBook);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "cbeBook",

@@ -28,9 +28,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+	
+#ifndef __SW_UTILITY_H__
+#define __SW_UTILITY_H__
 
 void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section);
-	
+
+#endif	
 #ifdef __cplusplus
 }
 #endif
