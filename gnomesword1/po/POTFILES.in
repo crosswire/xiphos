@@ -1,4 +1,11 @@
-# Source files
+# application files
+gnomesword2.desktop.in
+# backend source files
+#src/backend/module.cc
+#src/backend/sword.cpp
+# shared source files
+src/main/lists.c
+# GNOME2 Source files
 src/gnome2/about_gnomesword.c
 src/gnome2/about_modules.c
 src/gnome2/about_sword.c
@@ -35,6 +42,7 @@ src/gnome2/history.c
 src/gnome2/html.c
 src/gnome2/main_menu.c
 src/gnome2/main_window.c
+src/gnome2/mod_mgr.c
 src/gnome2/parallel_dialog.c
 src/gnome2/parallel_view.c
 src/gnome2/percomm.c
@@ -45,6 +53,7 @@ src/gnome2/search_sidebar.c
 src/gnome2/setup_druid.c
 src/gnome2/sidebar_dialog.c
 src/gnome2/sidebar.c
+src/gnome2/spell_gnome_spell.c
 src/gnome2/splash.c
 src/gnome2/studypad.c
 src/gnome2/studypad_dialog.c
