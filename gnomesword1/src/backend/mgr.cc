@@ -315,6 +315,9 @@ void backend_set_global_option(int manager, char * option, char * yesno)
 		case COMM_MGR:
 			sw.comm_mgr->setGlobalOption(option, yesno);
 		break;
+		case GBS_MGR:			
+			sw.gbs_mgr->setGlobalOption(option, yesno);
+		break;
 		case MAIN_MGR:			
 			sw.main_mgr->setGlobalOption(option, yesno);
 		break;
