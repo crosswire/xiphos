@@ -28,5 +28,5 @@ libmain_a_SOURCES =  \
     spell_pspell.c \
     spell.h \
     sword.cc sword.h\
-    url.c url.h\
+    url.cc url.h\
     xml.c xml.h

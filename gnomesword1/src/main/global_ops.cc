@@ -62,7 +62,7 @@ static void set_global_option(int manager, char * option, gboolean choice)
 	
 	switch(manager) {
 		case TEXT_MGR:
-			sw.text_mgr->setGlobalOption(option, on_off);
+			mgr->setGlobalOption(option, on_off);
 		break;
 		case COMM_MGR:
 		case GBS_MGR:			

@@ -470,7 +470,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 	} else {
 		in_url = TRUE;	/* we need this for html_button_released */
 		//g_print("url = %s\n",url);
-		if(gui_url_handler(url, FALSE))
+		if(main_url_handler(url, FALSE))
 			return;
 		
 		if (*url == 'I') {
@@ -518,7 +518,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar tmpbuf[255];
 	gint i = 0;
 	
-	if(gui_url_handler(url, TRUE))
+	if(main_url_handler(url, TRUE))
 		return;
 	
 	if (*url == '@') {
