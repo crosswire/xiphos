@@ -34,6 +34,7 @@
 #include "gs_viewtext_sw.h"
 #include "gs_viewtext_dlg.h"
 #include "gs_sword.h"
+#include "gs_gnomesword.h"
 #include "gs_html.h"
 #include "gs_information_dlg.h"
 #include "support.h"
@@ -41,7 +42,7 @@
 /****************************************************************************************
  *globals
  ****************************************************************************************/
-gboolean isrunningVT = FALSE;	/* is the view commentary dialog runing */
+gboolean isrunningVT = FALSE;	/* is the view text dialog runing */
 GtkWidget *text;
 GList *textList;
 GtkWidget *dlgViewText;
@@ -58,7 +59,7 @@ extern gchar current_verse[];
 //extern GList *cbBook_items;
 
 extern gboolean gsI_isrunning;
-
+extern GS_LEXICON *p_gslexicon;
 /****************************************************************************************
  * update the book, chapter and verse contorls
  ****************************************************************************************/
@@ -101,7 +102,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if(*url == 'T') ++url;
 		if(*url == 'G' ) {
 			++url;
-			modName = g_strdup("StrongsGreek");
+			modName = g_strdup(p_gslexicon->greek);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
 			g_warning(modName);
@@ -110,7 +111,7 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}   		
 		if(*url == 'H') {
 			++url;
-			modName =  g_strdup("StrongsHebrew");
+			modName =  g_strdup(p_gslexicon->hebrew);
 			buf = g_strdup(url);
 			loadmodandkey(modName, buf);
 			g_warning(modName);
