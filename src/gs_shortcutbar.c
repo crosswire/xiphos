@@ -740,7 +740,7 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-				      _("Biblical Texts"));
+				      "Biblical Texts"); /* this string is used internally */
 
 		menuitem = gtk_menu_item_new_with_label(_("Add Commentary"));
 		gtk_widget_show(menuitem);
@@ -755,7 +755,8 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-				      _("Commentaries"));
+				      "Commentaries"); /* this string is used internally */
+
 
 		menuitem = gtk_menu_item_new_with_label(_("Add Dictionary"));
 		gtk_widget_show(menuitem);
@@ -770,7 +771,8 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-				      _("Lexicons / Dictionaries"));
+				      "Lexicons / Dictionaries"); /* this string is used internally */
+
 		
 		menuitem = gtk_menu_item_new_with_label(_("Add Book"));
 		gtk_widget_show(menuitem);
@@ -785,7 +787,8 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem),
 					  menu_item_menu);
 		create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-				      _("Generic Book"));		      
+				      "Generic Books");	 /* this string is used internally */
+	      
 	} 
 	
 	else {
@@ -804,16 +807,20 @@ show_standard_popup(EShortcutBar * shortcut_bar,
 	/*** add bookmark items ***/
 		if (group_num == groupnum1)
 			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-					      _("Biblical Texts"));
+					      "Biblical Texts"); /* this string is used internally */
+
 		if (group_num == groupnum2)
 			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-					      _("Commentaries"));
+					      "Commentaries"); /* this string is used internally */
+
 		if (group_num == groupnum3)
 			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-					      _("Lexicons / Dictionaries"));
+					      "Lexicons / Dictionaries"); /* this string is used internally */
+
 		if (group_num == groupnum8)
 			create_modlistmenu_sb(group_num, menuitem, menu_item_menu,
-					      _("Generic Book"));
+					      "Generic Books"); /* this string is used internally */
+
 	}
 	/* Save the group num so we can get it in the callbacks. */
 	gtk_object_set_data(GTK_OBJECT(menu), "group_num",
