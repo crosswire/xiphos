@@ -24,7 +24,7 @@
 
 #include <gnome.h>
 #include "main/settings.h"
-#include "main/_editor.h"
+#include "gui/_editor.h"
 
 gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename);
 gint save_file(gchar * filename, GSHTMLEditorControlData * ecd);
