@@ -65,7 +65,7 @@ GtkWidget *notepage,		/* widget to access toggle menu - for interlinear notebook
 
 gboolean file_changed = FALSE,	/* set to true if text is study pad has changed - and file is not saved  */
  changemain = TRUE,		/* change verse of Bible text window */
-   ApplyChange = TRUE;
+ ApplyChange = TRUE;
 gchar *current_filename = NULL;	/* filename for open file in study pad window */
 
 gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window */
@@ -73,18 +73,10 @@ gchar current_verse[80] = N_("Romans 8:28");	/* current verse showing in main wi
 gint dictpages, compages, textpages, bookpages;
 
 SETTINGS *settings;
-GList *sblist, /* for saving search results to bookmarks  */
-    *biblemods,
+GList *sblist,			/* for saving search results to bookmarks  */
+*biblemods,
     *commentarymods,
-    *dictionarymods,
-    *bookmods,
-    *percommods,
-    *sbfavoritesmods,
-    *sbbiblemods, 
-    *sbdictmods, 
-    *sbcommods, 
-    *sbbookmods, 
-    *options;			
+    *dictionarymods, *bookmods, *percommods, *sbbiblemods, *options;
 /*****************************************************************************
 * externs
 *****************************************************************************/
@@ -101,17 +93,14 @@ extern HISTORY historylist[];	/* sturcture for storing history items */
 extern gint historyitems;
 extern GtkWidget *shortcut_bar;
 
+static
+gchar *update_nav_controls(gchar * key);
+
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
-void
-initGnomeSword(SETTINGS * s)
+void initGnomeSword(SETTINGS * s)
 {
-	GtkWidget *notebook;
-
-	gint biblepage;
-
-
 	g_print("%s\n", "Initiating GnomeSWORD\n");
 	/*
 	   set glist to null 
@@ -120,28 +109,14 @@ initGnomeSword(SETTINGS * s)
 	commentarymods = NULL;
 	dictionarymods = NULL;
 	percommods = NULL;
-	sbfavoritesmods = NULL;
 	sbbiblemods = NULL;
-	sbcommods = NULL;
-	sbdictmods = NULL;
 	bookmods = NULL;
-	sbbookmods = NULL;
-	
+
 	/*
 	   fill module lists
 	 */
-	biblemods = backend_get_list_of_mods_by_type(TEXT_MODS);
 	sbbiblemods = backend_get_mod_description_list_SWORD(TEXT_MODS);
-	
-	commentarymods = backend_get_list_of_mods_by_type(COMM_MODS);
-	sbcommods = backend_get_mod_description_list_SWORD(COMM_MODS);
-	
-	dictionarymods = backend_get_list_of_mods_by_type(DICT_MODS);	
-	sbdictmods = backend_get_mod_description_list_SWORD(DICT_MODS);
-	
-	bookmods = backend_get_list_of_mods_by_type(BOOK_MODS);
-	sbbookmods = backend_get_mod_description_list_SWORD(BOOK_MODS);
-	
+
 	percommods = backend_get_list_of_percom_modules();
 	if (percommods) {
 		/*
@@ -154,48 +129,46 @@ initGnomeSword(SETTINGS * s)
 		backend_change_percom_module(s->personalcommentsmod);
 	}
 	/*
-	   setup Bible text gui 
-	 */
-	gui_setup_text(s);
-	/*
 	   setup shortcut bar 
 	 */
 	setupSB(s);
 	/*
+	   create popup menus -- gs_menu.c 
+	 */
+	createpopupmenus(s, sbbiblemods, options);
+	additemstooptionsmenu(options, s);
+	/*
+	   setup Bible text gui 
+	 */
+	biblemods = gui_setup_text(s);
+
+	/*
 	   setup commentary gui support 
 	 */
-	gui_setupCOMM(s);
+	commentarymods = gui_setup_comm(s);
 	/*
 	   setup general book gui support 
 	 */
-	gui_setupGBS(s);
+	bookmods = gui_setup_gbs(s);
 	/*
 	   setup Dict/Lex gui support 
 	 */
-	gui_setupDL(s);
+	dictionarymods = gui_setup_dict(s);
+
 	s->settingslist = NULL;
 	s->displaySearchResults = FALSE;
 	/*
-	   add modules to menus -- gs_menu.c 
+	   add modules to about modules menus -- gs_menu.c 
 	 */
 	addmodstomenus(s,
 		       biblemods,
-		       commentarymods, dictionarymods, bookmods,
-		       percommods);
+		       commentarymods, dictionarymods, bookmods);
 	/*
 	   create popup menus -- gs_menu.c 
 	 */
-	createpopupmenus(s, sbbiblemods, sbcommods, sbdictmods,
-			 options);
-	additemstooptionsmenu(options, s);
-	/*
-	   add pages to module notebooks 
-	 */
-	 /*
-	biblepage =
-	    addnotebookpages(lookup_widget(s->app, "nbTextMods"),
-			     biblemods, s->MainWindowModule);
-	*/
+	createpopupmenus(s, sbbiblemods, options);
+	//additemstooptionsmenu(options, s);    
+
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(s->app, "nbPerCom")), 0);
 	/*
@@ -214,33 +187,6 @@ initGnomeSword(SETTINGS * s)
 				_("Verse Style"), (GtkMenuCallback)
 				on_verse_style1_activate);
 
-	/*
-	   set Bible module to open notebook page 
-	 */
-	/*
-	   let's don't do this if we don't have at least one text module 
-	 */
-	 /*
-	if (havebible) {
-		if (biblepage == 0)
-			backend_change_text_module(s->MainWindowModule,
-						   TRUE);
-		
-		notebook = lookup_widget(s->app, "nbTextMods");
-		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
-				   GTK_SIGNAL_FUNC
-				   (on_nbTextMods_switch_page), NULL);
-		
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),
-				      biblepage);
-		if (settings->text_tabs)
-			gtk_widget_show(notebook);
-		else
-			gtk_widget_hide(notebook);
-	}*/
-
-	//if (usepersonalcomments) {
-		
 
 	/*
 	   free module lists 
@@ -250,10 +196,7 @@ initGnomeSword(SETTINGS * s)
 	g_list_free(dictionarymods);
 	g_list_free(percommods);
 	g_list_free(sbbiblemods);
-	g_list_free(sbcommods);
-	g_list_free(sbdictmods);
 	g_list_free(bookmods);
-	g_list_free(sbbookmods);
 	/* 
 	   options list freed on exit 
 	 */
@@ -458,7 +401,7 @@ void UpdateChecks(SETTINGS * s)
 	}
 	gtk_widget_show(s->app); /** display the whole thing **/
 
-	
+
 	addhistoryitem = FALSE;
 	change_verse(s->currentverse);
 }
@@ -844,12 +787,33 @@ gchar *get_module_name(SETTINGS * s)
 	return NULL;
 }
 
-void gui_set_text_mod_page(gint page)
+static
+gchar *update_nav_controls(gchar * key)
 {
-	GtkWidget *notebook = lookup_widget(settings->app,
-					    "nbTextMods");
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page);
-	backend_text_module_change_verse(settings->currentverse);
+	char *val_key;
+	gint cur_chapter = 8, cur_verse = 28;
+
+	ApplyChange = FALSE;
+	val_key = backend_get_valid_key(key);
+	cur_chapter = backend_get_chapter_from_key(val_key);
+	cur_verse = backend_get_verse_from_key(val_key);
+	/* 
+	   remember last verse 
+	 */
+	sprintf(settings->currentverse, "%s", val_key);
+	/* 
+	   set book, chapter,verse and freeform lookup entries to new verse 
+	 */
+	gtk_entry_set_text(GTK_ENTRY(settings->cbeBook),
+			   backend_get_book_from_key(val_key));
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (settings->spbChapter), cur_chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (settings->spbVerse), cur_verse);
+	gtk_entry_set_text(GTK_ENTRY
+			   (settings->cbeFreeformLookup), val_key);
+	ApplyChange = TRUE;
+	return val_key;
 }
 
 void change_module_and_key(gchar * module_name, gchar * key)
@@ -857,13 +821,17 @@ void change_module_and_key(gchar * module_name, gchar * key)
 	gint mod_type;
 	gint page_num;
 	GtkWidget *notebook;
+	gchar *val_key = NULL;
 
 	mod_type = backend_get_mod_type(module_name);
 
 	switch (mod_type) {
 	case TEXT_TYPE:
-		page_num = backend_get_module_page(module_name, TEXT_MODS);
-		gui_set_text_page_and_key(page_num, key);
+		page_num =
+		    backend_get_module_page(module_name, TEXT_MODS);
+		val_key = update_nav_controls(key);
+		gui_set_text_page_and_key(page_num, val_key);
+		g_free(val_key);
 		break;
 	case COMMENTARY_TYPE:
 		page_num =
@@ -883,138 +851,19 @@ void change_module_and_key(gchar * module_name, gchar * key)
 	}
 }
 
-void set_module_global_options(gchar * option, gint window,
-			       gboolean choice, gboolean showchange)
-{
-	gchar *on_off;
-
-	if (choice) {
-		on_off = "On";
-	} else {
-		on_off = "Off";
-	}
-
-	
-
-	switch (window) {
-	case MAIN_TEXT_WINDOW:
-		backend_save_module_options(settings->MainWindowModule,
-					    option, on_off);
-
-		if (!strcmp(option, "Strong's Numbers")) {
-			GTK_CHECK_MENU_ITEM(settings->strongsnum)->
-			    active = choice;
-			/* set strongs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "btnStrongs")),
-						     choice);
-		}
-
-		if (!strcmp(option, "Footnotes")) {
-			GTK_CHECK_MENU_ITEM(settings->footnotes)->
-			    active = choice;
-			/* set footnotes toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "btnFootnotes")),
-						     choice);
-		}
-
-		if (!strcmp(option, "Morphological Tags")) {
-			GTK_CHECK_MENU_ITEM(settings->morphs)->active =
-			    choice;
-			/* set morphs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-						     (lookup_widget
-						      (settings->app,
-						       "btnMorphs")),
-						     choice);
-		}
-
-		if (!strcmp(option, "Hebrew Vowel Points")) {
-			GTK_CHECK_MENU_ITEM(settings->hebrewpoints)->
-			    active = choice;
-			//settings->hebrewpoints = choice;
-		}
-
-		if (!strcmp(option, "Hebrew Cantillation")) {
-			GTK_CHECK_MENU_ITEM(settings->
-					    cantillationmarks)->active =
-			    choice;
-			//settings->cantillationmarks = choice;
-		}
-
-		if (!strcmp(option, "Greek Accents")) {
-			GTK_CHECK_MENU_ITEM(settings->greekaccents)->
-			    active = choice;
-			//settings->greekaccents = choice;
-		}
-
-		if (havebible && showchange) {	/* display change */
-			backend_text_module_change_verse(settings->
-							 currentverse);
-		}
-		backend_set_text_global_option(option, on_off);
-		break;
-
-	case INTERLINEAR_WINDOW:
-
-		if (!strcmp(option, "Strong's Numbers")) {
-			settings->strongsint = choice;
-		}
-
-		if (!strcmp(option, "Footnotes")) {
-			settings->footnotesint = choice;
-		}
-
-		if (!strcmp(option, "Morphological Tags")) {
-			settings->morphsint = choice;
-		}
-
-		if (!strcmp(option, "Hebrew Vowel Points")) {
-			settings->hebrewpointsint = choice;
-		}
-
-		if (!strcmp(option, "Hebrew Cantillation")) {
-			settings->cantillationmarksint = choice;
-		}
-
-		if (!strcmp(option, "Greek Accents")) {
-			settings->greekaccentsint = choice;
-		}
-		
-		backend_set_interlinear_global_option(option, on_off);
-		/* 
-		   display change 
-		 */
-		if (settings->dockedInt && havebible)	
-			update_interlinear_page(settings);
-		else
-			update_interlinear_page_detached(settings);
-
-		break;
-	}
-
-}
-
 void change_verse(gchar * key)
 {
 	gchar *val_key;
-	gint cur_chapter = 8,	
-	 cur_verse = 28;	
-	gchar s1[255];
 
-	val_key = backend_get_valid_key(key);
+	val_key = update_nav_controls(key);
 	sprintf(current_verse, "%s", val_key);
-	g_warning(val_key);
+
 	ApplyChange = FALSE;
-	/* 
-	   change main window 
-	 */
+	
 	if (havebible) {
+		/*
+		   add item to history
+		 */
 		if (addhistoryitem) {
 			if (strcmp
 			    (settings->currentverse,
@@ -1025,52 +874,51 @@ void change_verse(gchar * key)
 					       settings->currentverse);
 		}
 		addhistoryitem = TRUE;
-		/* remember last verse */
-		sprintf(settings->currentverse, "%s", val_key);
-		cur_chapter = backend_get_chapter_from_key(val_key);
-		cur_verse = backend_get_verse_from_key(val_key);
-		sprintf(s1, "%s", val_key);
-		/* set book, chapter,verse and freeform lookup entries to new verse */
-		gtk_entry_set_text(GTK_ENTRY(lookup_widget
-					     (settings->app,
-					      "cbeBook")),
-				   backend_get_book_from_key(val_key));
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON
-					  (lookup_widget
-					   (settings->app,
-					    "spbChapter")),
-					  cur_chapter);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON
-					  (lookup_widget
-					   (settings->app,
-					    "spbVerse")), cur_verse);
-		gtk_entry_set_text(GTK_ENTRY
-				   (lookup_widget
-				    (settings->app,
-				     "cbeFreeformLookup")), val_key);
+		/* 
+		   change main window 
+		 */
 		gui_display_text(val_key);
 	}
-	changemain = TRUE;
 
-	/* change interlinear verses */
+	/* 
+	   change interlinear verses 
+	 */
 	if (settings->dockedInt)
 		update_interlinear_page(settings);
 
-	/* change personal notes editor   if not in edit mode */
-	
-	/* set commentary module to current verse */
+	/* 
+	   change personal notes editor   if not in edit mode 
+	 */
+	if (settings->notefollow) {	                  
+		if (!settings->editnote)
+			backend_change_verse_percom(val_key);
+	}
+	/* 
+	   set commentary module to current verse 
+	 */
 	gui_displayCOMM(settings->currentverse);
+	
 	g_free(val_key);
 	ApplyChange = TRUE;
 }
 
-void save_module_key(gchar *mod_name, gchar * key)
-{		
+void save_module_key(gchar * mod_name, gchar * key)
+{
 	backend_save_module_key(mod_name, key);
-	
+
 	/*
 	   FIXME: we need to display change
 	 */
 
 }
+/******************************************************************************
+* set verse style -- verses or paragraphs
+*******************************************************************************/
+void set_verse_style(gboolean choice)
+{
+	settings->versestyle = choice;	//-- remember our choice for the next program startup
+	if (havebible)
+		gui_display_text(settings->currentverse);	//-- show the change
+}
+
 /*****   end of file   ******/

@@ -70,14 +70,13 @@ extern "C" {
 
 	void createpopupmenus(SETTINGS * s,
 			      GList * bilbeDescription,
-			      GList * comDescription,
-			      GList * dictDescription, GList * options);
+			      GList * options);
 
 	void addmodstomenus(SETTINGS * s,
 			    GList * biblelist,
 			    GList * commentarylist,
 			    GList * dictionarylist,
-			    GList * booklist, GList * percomlist);
+			    GList * booklist);
 	GtkWidget *create_shortcutbarMenu(gint barnum);
 
 

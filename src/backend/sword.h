@@ -42,13 +42,10 @@ extern "C" {
 
 	void backend_first_init(void);
 	void backend_init_sword(SETTINGS * s);
-	void backend_text_module_change_verse(char *key);
+	void backend_change_verse_percom(char *key);
 	void backend_module_name_from_description(gchar * mod_name,
 						  gchar * mod_desc);
 	void backend_shutdown(SETTINGS * s);
-	void backend_change_text_module(gchar * modName,
-					gboolean showchange);
-	void backend_set_verse_style(gboolean choice);
 	void backend_set_locale(char *locale);
 	char *backend_get_valid_key(char *key);
 	char *backend_get_book_from_key(char *key);

@@ -38,6 +38,7 @@
 
 extern SETTINGS *settings;
 extern gboolean isrunningVT;  
+extern GList *options;
 
 GList *text_list;
 static gboolean display_change = TRUE;
@@ -46,6 +47,75 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * cl);
 static TEXT_DATA *cur_t;
+
+void set_text_module_global_options(gchar * option,
+			       gboolean choice)
+{
+	gchar *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}
+
+	backend_save_module_options(settings->MainWindowModule,
+				    option, on_off);
+
+	if (!strcmp(option, "Strong's Numbers")) {
+		GTK_CHECK_MENU_ITEM(settings->strongsnum)->
+		    active = choice;
+		/* set strongs toogle button */
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (lookup_widget
+					      (settings->app,
+					       "btnStrongs")),
+					     choice);
+	}
+
+	if (!strcmp(option, "Footnotes")) {
+		GTK_CHECK_MENU_ITEM(settings->footnotes)->
+		    active = choice;
+		/* set footnotes toogle button */
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (lookup_widget
+					      (settings->app,
+					       "btnFootnotes")),
+					     choice);
+	}
+
+	if (!strcmp(option, "Morphological Tags")) {
+		GTK_CHECK_MENU_ITEM(settings->morphs)->active =
+		    choice;
+		/* set morphs toogle button */
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+					     (lookup_widget
+					      (settings->app,
+					       "btnMorphs")),
+					     choice);
+	}
+
+	if (!strcmp(option, "Hebrew Vowel Points")) {
+		GTK_CHECK_MENU_ITEM(settings->hebrewpoints)->
+		    active = choice;
+	}
+
+	if (!strcmp(option, "Hebrew Cantillation")) {
+		GTK_CHECK_MENU_ITEM(settings->
+				    cantillationmarks)->active =
+		    choice;
+	}
+
+	if (!strcmp(option, "Greek Accents")) {
+		GTK_CHECK_MENU_ITEM(settings->greekaccents)->
+		    active = choice;
+	}
+
+	backend_set_text_global_option(option, on_off);
+	gui_display_text(settings->currentverse);
+}
+
+
 static
 TEXT_DATA *get_text(GList * tl)
 {
@@ -86,7 +156,10 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
 				 gint page_num, GList * tl)
 {
+	GList *tmp = NULL;
 	TEXT_DATA *t;
+	gchar title[200];
+	gboolean value;
 	
 	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
 
@@ -101,7 +174,26 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 			backend_display_text(page_num,
 				settings->currentverse);
 	}
-	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings->comm_tabs;
+	/*** set global options here ***/
+	tmp = options;
+	while (tmp != NULL) {
+		value =
+		    backend_load_module_options(t->mod_name, (gchar *) tmp->data);
+		set_text_module_global_options((gchar*)tmp->data,
+					  value);
+		//g_warning("%s = %d",(gchar*)tmp->data,value); 
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	
+	sprintf(title, "GnomeSWORD - %s", t->mod_description);
+	gtk_window_set_title(GTK_WINDOW(settings->app), title);
+	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings->text_tabs;
+	
+	if (settings->text_tabs)
+		gtk_frame_set_label(GTK_FRAME(t->frame), NULL);	//-- set frame label
+	else
+		gtk_frame_set_label(GTK_FRAME(t->frame), t->mod_name);
 }
 
 
@@ -513,7 +605,6 @@ void create_text_pane(SETTINGS *s, TEXT_DATA *t, gint count)
   GtkWidget *vbox;
   GtkWidget *toolbar31;
   GtkWidget *button7;
-  GtkWidget *frame44;
   GtkWidget *scrolledwindow58;
   GtkWidget *label;
 
@@ -543,19 +634,19 @@ void create_text_pane(SETTINGS *s, TEXT_DATA *t, gint count)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (button7);
 
-  frame44 = gtk_frame_new (NULL);
-  gtk_widget_ref (frame44);
-  gtk_object_set_data_full (GTK_OBJECT (s->app), "frame44", frame44,
+  t->frame = gtk_frame_new (NULL);
+  gtk_widget_ref (t->frame);
+  gtk_object_set_data_full (GTK_OBJECT (s->app), "t->frame", t->frame,
                             (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (frame44);
-  gtk_box_pack_start (GTK_BOX (vbox), frame44, TRUE, TRUE, 0);
+  gtk_widget_show (t->frame);
+  gtk_box_pack_start (GTK_BOX (vbox), t->frame, TRUE, TRUE, 0);
 
   scrolledwindow58 = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_ref (scrolledwindow58);
   gtk_object_set_data_full (GTK_OBJECT (s->app), "scrolledwindow58", scrolledwindow58,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (scrolledwindow58);
-  gtk_container_add (GTK_CONTAINER (frame44), scrolledwindow58);
+  gtk_container_add (GTK_CONTAINER (t->frame), scrolledwindow58);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow58), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
 /*  gtk_signal_connect (GTK_OBJECT (button7), "clicked",
@@ -607,7 +698,7 @@ void gui_display_text(gchar * key)
 		backend_display_text(settings->text_last_page, key);
 }
 
-void gui_setup_text(SETTINGS * s)
+GList* gui_setup_text(SETTINGS * s)
 {
 	GtkWidget *popupmenu;
 	GList *tmp = NULL;
@@ -656,7 +747,8 @@ void gui_setup_text(SETTINGS * s)
 	g_free(modbuf);
 	g_free(keybuf);
 	g_list_free(tmp);
-	g_list_free(mods);
+	//g_list_free(mods);
+	return mods;
 }
 
 void gui_shutdown_text(void)
