@@ -1,3 +1,0 @@
-
-SUBDIRS = misc\
-          shortcut-bar

@@ -636,7 +636,8 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 	gchar tmpBuf[256];
 	GdkFont *sword_font, *greek_font, *foreign_font;
 	gchar *myname;
-	bool greek, greek_on, findclose, italics_on = FALSE, scriptureref=FALSE;
+	bool greek, greek_on, findclose, italics_on = FALSE, scriptureref=FALSE,
+		fontsize=FALSE;
 	gchar *verseBuf, *buf, *myverse, *font, *sourceType, tag[256];
 	int i, j, len, taglen;
 	SectionMap::iterator sit;
@@ -725,19 +726,20 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 			(myverse[i+4] == 'p')  && (myverse[i+5] == ';')) {
 			i = i+6;		
 		}
+		//g_warning("%c",myverse[i]);
 		if (myverse[i] == '<') {
 			tag[0] = '\0';
 			taglen = gettags(myverse, tag, i);	/* get html tags */
 			i = i + taglen;	/* remove tags (we do not want to see them) */
 			/* italic */
-			if (!strcmp(tag, "<I>")) {
+			if (!strcmp(tag, "<I>") || !strcmp(tag, "<TR><TD><FONT SIZE=+1><I>")) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</I>")) {
+			} else if (!strncmp(tag, "</I>",4)) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						italic_font,
 						&gtkText->style->black,
@@ -775,6 +777,12 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 				j = 0;
 				verseBuf[0] = '\0';
 				scriptureref = FALSE;
+			} else if (!strncmp(tag, "<TD ALIGN=RIGHT><FONT SIZE=",26)) {
+				fontsize = TRUE;
+			} else if (!strncmp(tag, "<TR><TD><FONT SIZE=",18)) {
+				fontsize = TRUE;
+			} else if (!strncmp(tag, "<FONT SIZE=",10)) {
+				fontsize = TRUE;							
 			} else if (!strcmp(tag, "<FONT FACE=\"SYMBOL\">")) {	/*  greek */
 				foreign_font = greek_font;
 				gtk_text_insert(GTK_TEXT(gtkText),
@@ -783,13 +791,25 @@ char  HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
+				fontsize = FALSE;
 			} else if (!strcmp(tag, "</FONT>")) {
-				gtk_text_insert(GTK_TEXT(gtkText),
+				if(!fontsize) {
+					gtk_text_insert(GTK_TEXT(gtkText),
 						foreign_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
-				j = 0;
-				verseBuf[0] = '\0';
+					verseBuf[0] = '\0'; 				
+				        //fontsize = TRUE;	
+					
+				}  /*else {
+				        gtk_text_insert(GTK_TEXT(gtkText),
+						roman_font,
+						&gtkText->style->black,
+						NULL, verseBuf, -1); 				
+				}  */
+				//j = 0;
+				//verseBuf[0] = '\0'; 				
+				fontsize = TRUE;
 			} else if (!strcmp(tag, "<B>")) {	/*  bold */
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
@@ -1447,6 +1467,7 @@ gint GTKEntryDisp::gettags(gchar * text, gchar * tag, gint pos)
 			tag[j] = text[i];
 		}
 		++j;
+		//g_warning("tag length = %d",j);
 		tag[j] = '\0';
 		if (text[i] == '>' && text[i + 1] != '<') {
 			return j;

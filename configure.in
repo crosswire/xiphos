@@ -180,11 +180,11 @@ dnl Gnome App Lib checking
 dnl ******************************
 have_gal="no"
 if test "x$shortcutbar" = xyes || test "x$all" = xyes; then
- AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.4)
+ AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.4.99.7)
  if gnome-config --libs gal > /dev/null 2>&1; then 
     vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-    if test "$vers" -ge 40000; then
+    if test "$vers" -ge 49907; then
         AC_MSG_RESULT(found)
         GNOME_APP_LIBS=`gnome-config --libs gal`
         GNOME_APP_CFLAGS=`gnome-config --cflags gal`
@@ -192,7 +192,7 @@ if test "x$shortcutbar" = xyes || test "x$all" = xyes; then
         AC_SUBST(GNOME_APP_CFLAGS)
         have_gal="yes"
     else
-        AC_MSG_RESULT(Did not find GNOME Application libs 0.4 )
+        AC_MSG_RESULT(Did not find GNOME Application libs 0.4.99.7 )
     fi
  else
     AC_MSG_RESULT(Did not find GnomeAppLib (GAL) installed)
@@ -245,9 +245,6 @@ AC_OUTPUT([
 Makefile
 macros/Makefile
 gnomesword/Makefile
-widgets/Makefile
-widgets/misc/Makefile
-widgets/shortcut-bar/Makefile
 ])
 
 
