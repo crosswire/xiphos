@@ -20,6 +20,7 @@ extern "C" {
 #endif
 
 #include <gnome.h>
+void on_unlock_key_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_italicNE_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_referenceNE_activate(GtkMenuItem * menuitem, gpointer user_data);
