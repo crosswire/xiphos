@@ -1,3 +1,15 @@
+2002-09-07  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* updated to use sword-1.5.5
+	* bumped to 0.7.6
+
+
+2002-09-07  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added patch from Tim Silversides <silversides@btinternet.com>
+	  that toggles show/hide texts, comms and dicts.
+	  
+
 2002-07-05  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added updated sk.po file from	Zdenko Podobný

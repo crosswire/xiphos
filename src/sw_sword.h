@@ -35,47 +35,53 @@ extern "C" {
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
-	gchar *backend_getmodDescriptionSWORD(gchar *modName); 
-	void initSWORD(SETTINGS *s);
+	gchar *backend_getmodDescriptionSWORD(gchar * modName);
+	void initSWORD(SETTINGS * s);
 	void modNameFromDesc(gchar * modName, gchar * modDesc);
-	void updateIntDlg(SETTINGS *s);
+	void updateIntDlg(SETTINGS * s);
 	void updateinterlinearpage(void);
 	void shutdownSWORD(void);
 	void FillDictKeysSWORD(void);
 	void changeVerseSWORD(gchar * ref);
 	void ChangeVerseSWORD(void);
 	void changeVerseComSWORD(void);
-	void resultsListSWORD(GtkWidget * searchFrm, gint row, gint column);
-	void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean showchange);
+	void resultsListSWORD(GtkWidget * searchFrm, gint row,
+			      gint column);
+	void globaloptionsSWORD(gchar * option, gint window,
+				gboolean choice, gboolean showchange);
 	void changecurModSWORD(gchar * modName, gboolean showchange);
 	void navcurcomModSWORD(gint direction);
 	void changecomp1ModSWORD(gchar * modName);
 	void changecomp2ModSWORD(gchar * modName);
 	void changecomp3ModSWORD(gchar * modName);
+	void showhidetextsSWORD(gboolean choice);
+	void showhidecommsSWORD(gboolean choice);
+	void showhidedictsSWORD(gboolean choice);
+	void setbiblecommlayoutSWORD();
 	void setversestyleSWORD(gboolean choice);
-  void backend_set_locale(char *locale);
+	void backend_set_locale(char *locale);
 	/*** change Bible book ***/
 	void bookSWORD(void);
-	gchar *intchangeverseSWORD(GtkWidget *book, 
-			GtkWidget *chapter, 
-			GtkWidget *verse, 
-			GtkWidget *entry);
-	gchar *intsyncSWORD(GtkWidget *book, 
-			GtkWidget *chapter, 
-			GtkWidget *verse, 
-			GtkWidget *entry,
-			gchar *key);	
+	gchar *intchangeverseSWORD(GtkWidget * book,
+				   GtkWidget * chapter,
+				   GtkWidget * verse,
+				   GtkWidget * entry);
+	gchar *intsyncSWORD(GtkWidget * book,
+			    GtkWidget * chapter,
+			    GtkWidget * verse,
+			    GtkWidget * entry, gchar * key);
 	void verseSWORD(void);
 	void btnlookupSWORD(void);
 	void freeformlookupSWORD(GdkEventKey * event);
 	void changcurcomModSWORD(gchar * modName, gboolean showchange);
-	void savenoteSWORD(gchar *buf);
+	void savenoteSWORD(gchar * buf);
 	void deletenoteSWORD(void);
 	void changcurdictModSWORD(gchar * modName, gchar * keyText);
 	void dictSearchTextChangedSWORD(gchar * mytext);
 	void dictchangekeySWORD(gint direction);
 	void showmoduleinfoSWORD(char *modName, gboolean isGBS);
-	void setglobalopsSWORD(gint window, gchar * option, gchar * yesno);
+	void setglobalopsSWORD(gint window, gchar * option,
+			       gchar * yesno);
 	void changepercomModSWORD(gchar * modName);
 	void redisplayTextSWORD(void);
 	gchar *getmodnameSWORD(gint num);
@@ -90,17 +96,18 @@ extern "C" {
 	void swapmodsSWORD(gchar * intmod);
 	void loadpreferencemodsSWORD(void);
 	void gs_firstrunSWORD(void);
-	void applyfontcolorandsizeSWORD(void);	
+	void applyfontcolorandsizeSWORD(void);
 	/*** write individual module key to <module>.conf ***/
-	void savekeySWORD(gint modwindow, gchar * key);	
+	void savekeySWORD(gint modwindow, gchar * key);
 	/*** write individual module font information to <module>.conf ***/
-	gboolean savefontinfoSWORD(gchar *modName, gchar *modtag, gchar * fontinfo);
+	gboolean savefontinfoSWORD(gchar * modName, gchar * modtag,
+				   gchar * fontinfo);
 	/*** display daily devotional ***/
 	void displayDevotional(void);
 	/******************************************************************************
 	 * get module type - Bible text, Commentary or Dict/Lex
 	 ******************************************************************************/
-	gint get_mod_typeSWORD(gchar *modName);
+	gint get_mod_typeSWORD(gchar * modName);
 
 #ifdef __cplusplus
 }

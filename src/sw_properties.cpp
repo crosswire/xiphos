@@ -47,6 +47,7 @@
 #include "support.h"
 
 
+using namespace sword;
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
@@ -230,7 +231,13 @@ gboolean loadconfig(SETTINGS *s)
 	    atoi(settingsInfo["User Options"]["InDictPane"].c_str());
 	s->useDefaultDict =
 	    atoi(settingsInfo["User Options"]["UseDefaultDict"].c_str());
-
+	
+       s->showtexts =
+           atoi(settingsInfo["User Options"]["showtexts"].c_str());
+       s->showcomms =
+           atoi(settingsInfo["User Options"]["showcomms"].c_str());
+       s->showdicts =
+           atoi(settingsInfo["User Options"]["showdicts"].c_str());
 
 	return true;
 }
@@ -387,6 +394,10 @@ gboolean saveconfig(SETTINGS *s, gboolean shutdown)
 	        settingsInfo["User Options"]["InViewer"] = isON(s->inViewer);
 		settingsInfo["User Options"]["InDictPane"] = isON(s->inDictpane);
 	        settingsInfo["User Options"]["UseDefaultDict"] = isON(s->useDefaultDict);
+               settingsInfo["User Options"]["showtexts"] = isON(s->showtexts);
+               settingsInfo["User Options"]["showcomms"] = isON(s->showcomms);
+               settingsInfo["User Options"]["showdicts"] = isON(s->showdicts);
+		
 	}
 	settingsInfo.Save();
 	return true;
@@ -480,6 +491,11 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
 	settingsInfo["User Options"]["UseDefaultDict"] = "0";
+       settingsInfo["User Options"]["showtexts"] = "1";
+       settingsInfo["User Options"]["showcomms"] = "1";
+       settingsInfo["User Options"]["showdicts"] = "1";
+	
+	
 	settingsInfo.Save();
 	return true;
 }
@@ -565,6 +581,9 @@ gboolean createconfig(void)
 	settingsInfo["User Options"]["InViewer"] = "1";
 	settingsInfo["User Options"]["InDictPane"] = "1";
 	settingsInfo["User Options"]["UseDefaultDict"] = "0";
+       settingsInfo["User Options"]["showtexts"] = "1";
+       settingsInfo["User Options"]["showcomms"] = "1";
+       settingsInfo["User Options"]["showdicts"] = "1";
 	
 	settingsInfo.Save();
 	return true;
