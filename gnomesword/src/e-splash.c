@@ -344,7 +344,7 @@ e_splash_new (void)
 	ESplash *new;
 	GdkPixbuf *splash_image_pixbuf;
 	splash_image_pixbuf =
-    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/splash.png");
+	gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/splash.png");
 	g_return_val_if_fail (splash_image_pixbuf != NULL, NULL);
 
 	new = gtk_type_new (e_splash_get_type ());
