@@ -4,20 +4,17 @@ INCLUDES =  \
 
 noinst_LIBRARIES = libmain.a  
 
+SPELL_IDL = Spell.idl
 
-
-SPELL_IDLS = Spell.idl
-SPELL_IDL_GENERATED_H =		\
-	Spell.h
-SPELL_IDL_GENERATED_C = 	\
+IDL_GENERATED = 		\
+	Spell.h			\
 	Spell-common.c		\
 	Spell-skels.c		\
 	Spell-stubs.c
-	
-SPELL_IDL_GENERATED = \
-    $(SPELL_IDL_GENERATED_C)\
-    $(SPELL_IDL_GENERATED_H)
 
+
+$(IDL_GENERATED): $(SPELL_IDL)
+	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(srcdir)/Spell.idl
 
 libmain_a_SOURCES =  \
     $(SPELL_IDL_GENERATED)\

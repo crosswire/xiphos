@@ -58,6 +58,7 @@ struct _settings {
 		groupName[50], /* shortcut bar group name (viewer, verse list) */
 		searchText[256], /* search string used by sidebar search */
 		findText[256],   /* string used by find dialog */
+		*spell_language,
 		
 	/* fonts, font colors and font sizes */
 	        *bible_text_color, /* color for text */
