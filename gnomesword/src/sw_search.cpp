@@ -353,8 +353,7 @@ changesearchresultsSW_SEARCH(SETTINGS *s, SEARCH_OPT *so, gchar *url)
 		}
 			
 		else if(GTK_TOGGLE_BUTTON(so->ckbGBS)->active) {
-			curbookMod->SetKey(url);
-			curbookMod->Display();
+			//curbookMod->SetKey(url);
 		}
 			
 		else
