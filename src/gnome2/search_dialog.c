@@ -1663,6 +1663,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow_report),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_report,
+                                             settings.shadow_type);
 
 	vbox65 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox65);
@@ -1694,6 +1696,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow_preview),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_preview,
+                                             settings.shadow_type);
 
 	vbox65 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox65);
@@ -1724,6 +1728,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow_results),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow_results,
+                                             settings.shadow_type);
 
 	appbar_search =
 	    gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
@@ -1808,6 +1814,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow67),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow67,
+                                             settings.shadow_type);
 				       
 	/* create tree model */
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
@@ -1878,6 +1886,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow65),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow65,
+                                             settings.shadow_type);
 				       
 	/* create tree model */
 	model = gtk_list_store_new(1, G_TYPE_STRING);
@@ -1993,6 +2003,8 @@ GtkWidget *gui_create_search_dialog(void)
 				       (scrolledwindow68),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow68,
+                                             settings.shadow_type);
 				       
 	/* create tree model */
 	model = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
