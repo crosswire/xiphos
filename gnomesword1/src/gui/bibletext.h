@@ -37,10 +37,12 @@ struct  _text_global_ops {
 	GtkWidget *t_btn_points;
 	GtkWidget *t_btn_cant;
 	GtkWidget *t_btn_headings;
+	GtkWidget *t_btn_redwords;
 	GtkWidget *t_btn_primary;
 	GtkWidget *t_btn_secondary;
 	GtkWidget *t_btn_all;
 	gboolean
+	    words_in_red,
 	    strongs,
 	    morphs,
 	    gbffootnotes,
@@ -83,7 +85,7 @@ struct _text_data {
 	TEXT_GLOBALS *tgs;
 	Text_Find_Dialog *find_dialog;
 };
-
+extern TEXT_DATA *cur_t;
 void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);
 void gui_get_module_global_options(TEXT_DATA * t);
 void gui_set_text_frame_label(void);

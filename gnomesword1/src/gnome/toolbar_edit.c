@@ -294,8 +294,12 @@ static void on_btn_copy_clicked(GtkButton * button,
 
 static void on_btn_paste_clicked(GtkButton * button,
 				 GSHTMLEditorControlData * ecd)
-{
+{	
+#ifdef USE_GTKHTML1
+	gtk_html_paste(ecd->html,FALSE);
+#else
 	gtk_html_paste(ecd->html);
+#endif
 	ecd->changed = TRUE;
 	gui_update_statusbar(ecd);
 }
