@@ -32,9 +32,10 @@ extern "C" {
 #endif
 
 #include <glib.h>
+#include "gs_html_editor.h"
 
 
-gboolean run_spell_checker(void);
+gboolean run_spell_checker(GSHTMLEditorControlData * ecd);
 
 void ispell_terminate(void);
 
