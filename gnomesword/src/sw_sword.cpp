@@ -332,11 +332,11 @@ void initSWORD(SETTINGS *s)
 			interlinearMod3 = (*it).second;
 			interlinearMod4 = (*it).second;
 			comp1Mod->Disp(comp1Display);
-			interlinearMod0->Disp(comp1Display);
-			interlinearMod1->Disp(comp1Display);
-			interlinearMod2->Disp(comp1Display);
-			interlinearMod3->Disp(comp1Display);
-			interlinearMod4->Disp(comp1Display);
+			if(interlinearMod0) interlinearMod0->Disp(comp1Display);
+			if(interlinearMod1) interlinearMod1->Disp(comp1Display);
+			if(interlinearMod2) interlinearMod2->Disp(comp1Display);
+			if(interlinearMod3) interlinearMod3->Disp(comp1Display);
+			if(interlinearMod4) interlinearMod4->Disp(comp1Display);
 		}
 	} 
 	
@@ -607,16 +607,16 @@ void updateinterlinearpage(void)
 			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 		}
 		
-		interlinearMod0->SetKey(current_verse);
-		interlinearMod1->SetKey(current_verse);
-		interlinearMod2->SetKey(current_verse);
-		interlinearMod3->SetKey(current_verse);
-		interlinearMod4->SetKey(current_verse);
-		interlinearMod0->Display();
-		interlinearMod1->Display();
-		interlinearMod2->Display();
-		interlinearMod3->Display();
-		interlinearMod4->Display();
+		if(interlinearMod0) interlinearMod0->SetKey(current_verse);
+		if(interlinearMod1) interlinearMod1->SetKey(current_verse);
+		if(interlinearMod2) interlinearMod2->SetKey(current_verse);
+		if(interlinearMod3) interlinearMod3->SetKey(current_verse);
+		if(interlinearMod4) interlinearMod4->SetKey(current_verse);
+		if(interlinearMod0) interlinearMod0->Display();
+		if(interlinearMod1) interlinearMod1->Display();
+		if(interlinearMod2) interlinearMod2->Display();
+		if(interlinearMod3) interlinearMod3->Display();
+		if(interlinearMod4) interlinearMod4->Display();
 		sprintf(tmpBuf, "</table></body></html>");
 		utf8str = e_utf8_from_gtk_string(settings->htmlInterlinear, tmpBuf);
 		utf8len = strlen(utf8str);	//g_utf8_strlen (utf8str , -1) ;	
