@@ -77,9 +77,9 @@ getcolumn											(GtkWidget *list,
 															gint row,
 															gint column,
 															gchar *buf);
-
+/*
 GtkWidget*
 create_ListEditor   					(void);
-
+*/
 #endif /* __LISTEDITOR_H__ */
 

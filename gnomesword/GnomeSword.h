@@ -199,4 +199,8 @@ showmoduleinfoSWORD			(char *modName);
 void
 showinfoSWORD						(GtkWidget *text,
 												GtkLabel *label);
+												
+void
+newSP										(GtkWidget *text);
+
 #endif /* __GNOMESWORD_H__ */
