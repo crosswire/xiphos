@@ -18,29 +18,29 @@ gnomesworddocdir = $(prefix)/@NO_PREFIX_PACKAGE_DOC_DIR@
 install-data-local:
 	@$(NORMAL_INSTALL)
 	if test -d $(srcdir)/pixmaps; then \
-          $(mkinstalldirs) $(datadir)/pixmaps/${PACKAGE}; \
+          $(mkinstalldirs) $(DESTDIR)$(datadir)/pixmaps/${PACKAGE}; \
           for pixmap in $(srcdir)/pixmaps/*; do \
             if test -f $$pixmap; then \
-              $(INSTALL_DATA) $$pixmap $(datadir)/pixmaps/${PACKAGE}; \
+              $(INSTALL_DATA) $$pixmap $(DESTDIR)$(datadir)/pixmaps/${PACKAGE}; \
             fi \
           done \
 	fi
 
-	$(mkinstalldirs) $(datadir)/applications
-	$(INSTALL_DATA) ${PACKAGE}.desktop $(datadir)/applications
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/applications
+	$(INSTALL_DATA) ${PACKAGE}.desktop $(DESTDIR)$(datadir)/applications
 
 uninstall-local:
 	@$(NORMAL_UNINSTALL)
-	rm -f -r $(datadir)/pixmaps/${PACKAGE}
-	rm -f $(datadir)/applications/${PACKAGE}.desktop
-	rm -f -r $(datadir)/gnome/help/${PACKAGE}
+	rm -f -r $(DESTDIR)$(datadir)/pixmaps/${PACKAGE}
+	rm -f $(DESTDIR)$(datadir)/applications/${PACKAGE}.desktop
+	rm -f -r $(DESTDIR)$(datadir)/gnome/help/${PACKAGE}
 
 dist-hook:
 	if test -d pixmaps; then \
-          mkdir $(distdir)/pixmaps; \
+          mkdir $(DESTDIR)$(distdir)/pixmaps; \
           for pixmap in pixmaps/*; do \
             if test -f $$pixmap; then \
-              cp -p $$pixmap $(distdir)/pixmaps; \
+              cp -p $$pixmap $(DESTDIR)$(distdir)/pixmaps; \
             fi \
           done \
         fi
