@@ -41,6 +41,8 @@
 #include "gs_html.h"
 #include "support.h"
 #include "gs_sword.h"
+#include "gs_editor.h"
+
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
@@ -50,8 +52,11 @@ GtkWidget *htmlTexts;
 GtkWidget *htmlDict;
 GtkWidget *textDict;
 GtkWidget *htmlComments;
+GtkWidget *noteEditor;
+GtkWidget *statusbarNE;
 
 static gboolean was_editable;
+
 GString *gstr;
 extern GtkWidget *MainFrm;
 extern GtkWidget *textDict;
@@ -116,7 +121,7 @@ void savenoteHTML(GtkWidget *app)
 *****************************************************************************/
 void boldHTML(GtkWidget *widget, GtkWidget *html_widget)    
 {
-	if(!block_font_style_change) {
+/*	if(!block_font_style_change) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 			gtk_html_set_font_style (GTK_HTML (html_widget),
 						 GTK_HTML_FONT_STYLE_MAX,
@@ -124,7 +129,53 @@ void boldHTML(GtkWidget *widget, GtkWidget *html_widget)
 		else
 			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_BOLD, 0);
 		noteModified = TRUE;
+	}*/
+}
+
+/*****************************************************************************
+ * linkHTML - 
+ * 
+*****************************************************************************/
+void linkHTML(GtkWidget *html_widget)    
+{
+	GtkHTML *html;
+	gchar *url;
+	gchar *target = "";
+	
+	html = GTK_HTML(html_widget);
+	url = NULL;
+	url = html->engine->clipboard
+	    ? html_object_get_selection_string(html->engine->clipboard)
+	    : html_engine_get_selection_string(html->engine);	
+	if (*url)
+		html_engine_insert_link (html->engine, url, target);
+	else
+		html_engine_insert_link (html->engine, NULL, NULL);
+	noteModified = TRUE;
+}
+
+/*****************************************************************************
+ * symbolHTML - 
+ * 
+*****************************************************************************/
+void symbolHTML(GtkWidget *html_widget)    
+{
+	GtkHTML *html;
+	gchar *buf;
+	gchar tagit[256];
+	
+	html = GTK_HTML(html_widget);
+	buf = NULL;
+	buf = html->engine->clipboard
+	    ? html_object_get_selection_string(html->engine->clipboard)
+	    : html_engine_get_selection_string(html->engine);	
+	sprintf(tagit,"<B> </B><FONT FACE=\"symbol\">%s</FONT> ", buf);
+	/*
+	if (*tagit) {
+		html_engine_insert_object(html->engine, HTML_OBJECT(tagit), strlen(tagit)); 
+		noteModified = TRUE;
 	}
+	*/
 }
 
 /*****************************************************************************
@@ -133,7 +184,7 @@ void boldHTML(GtkWidget *widget, GtkWidget *html_widget)
 *****************************************************************************/
 void italicHTML(GtkWidget *widget, GtkWidget *html_widget)    
 {
-	if(!block_font_style_change) {
+/*	if(!block_font_style_change) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 			gtk_html_set_font_style (GTK_HTML (html_widget),
 					GTK_HTML_FONT_STYLE_MAX,
@@ -142,7 +193,7 @@ void italicHTML(GtkWidget *widget, GtkWidget *html_widget)
 			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_ITALIC, 0);
 		noteModified = TRUE;
 	}
-	
+*/	
 }
 
 /*****************************************************************************
@@ -151,7 +202,7 @@ void italicHTML(GtkWidget *widget, GtkWidget *html_widget)
 *****************************************************************************/
 void underlineHTML(GtkWidget *widget, GtkWidget *html_widget)    
 {
-	if(!block_font_style_change) {
+/*	if(!block_font_style_change) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 			gtk_html_set_font_style (GTK_HTML (html_widget),
 					GTK_HTML_FONT_STYLE_MAX,
@@ -159,7 +210,7 @@ void underlineHTML(GtkWidget *widget, GtkWidget *html_widget)
 		else
 			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_UNDERLINE, 0);
 		noteModified = TRUE;	
-	}
+	} */
 }
 
 /*****************************************************************************
@@ -168,7 +219,7 @@ void underlineHTML(GtkWidget *widget, GtkWidget *html_widget)
 *****************************************************************************/
 void strikeoutHTML(GtkWidget *widget, GtkWidget *html_widget)    
 {
-	if(!block_font_style_change) {
+/*	if(!block_font_style_change) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 			gtk_html_set_font_style (GTK_HTML (html_widget),
 					GTK_HTML_FONT_STYLE_MAX,
@@ -176,7 +227,7 @@ void strikeoutHTML(GtkWidget *widget, GtkWidget *html_widget)
 		else
 			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_STRIKEOUT, 0);
 		noteModified = TRUE;	
-	}
+	} */
 }
 
 /***************************************************************************************************
@@ -305,6 +356,18 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gs_clipboard = g_string_new(buf);
 	//g_print(gs_clipboard->str);
 }
+/***************************************************************************************************
+ * pasteHTML - 
+ *
+ ***************************************************************************************************/
+void pasteHTML(GtkWidget *html_widget)
+{
+	GtkHTML *html;	
+
+	html = GTK_HTML(html_widget);
+	gtk_html_paste(html);
+	//g_print(gs_clipboard->str);
+}
 
 /***************************************************************************************************
  *lookup selection in current dict/lex module
@@ -352,7 +415,8 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 void add_gtkhtml_widgets(GtkWidget * app)
 {
 	GtkWidget *textComp1;
-
+	EDITOR ed;
+	
 	htmlTexts = gtk_html_new();
 	gtk_widget_ref(htmlTexts);
 	gtk_object_set_data_full(GTK_OBJECT(app),
@@ -372,18 +436,14 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlCom")),
 			  htmlCommentaries);
 	gtk_html_load_empty(GTK_HTML(htmlCommentaries));	
+	 
+	ed.vbox = lookup_widget(app,"vbox8"); 
+	ed.htmlwidget = gtk_html_new();
+	ed.statusbar = gtk_statusbar_new();
+	 
+	htmlComments = create_editor(app, ed);	  
+	statusbarNE = ed.statusbar;
 	
-	htmlComments = gtk_html_new();
-	gtk_widget_ref(htmlComments);
-	gtk_object_set_data_full(GTK_OBJECT(app), "htmlComments",
-				 htmlComments,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlComments);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "swHtmlPerCom")),
-			  htmlComments);
-	gtk_html_load_empty(GTK_HTML(htmlComments));		  
-			  
 	textComp1 = gtk_html_new();
 	gtk_widget_ref(textComp1);
 	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
@@ -414,11 +474,11 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
 
-	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
+	gtk_signal_connect(GTK_OBJECT(ed.htmlwidget), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (htmlComments), "on_url",
+	gtk_signal_connect (GTK_OBJECT (ed.htmlwidget), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
-	gtk_signal_connect(GTK_OBJECT(htmlComments), "key_press_event",
+	gtk_signal_connect(GTK_OBJECT(ed.htmlwidget), "key_press_event",
 			   GTK_SIGNAL_FUNC(on_htmlComments_key_press_event), NULL);		   
 
 	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",

@@ -49,6 +49,7 @@
 #include <gtkhtml/htmltext.h>
 #include <gtkhtml/htmltextslave.h>
 
+#include <htmlengine-edit-selection-updater.h>
 #include <gtkhtml/gtkhtml-embedded.h>
 #include <gtkhtml/gtkhtml-properties.h>
 
@@ -62,6 +63,14 @@
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
+#include "control-data.h"
+#include "popup.h"
+#include "properties.h"
+#include "text.h"
+#include "paragraph.h"
+#include "link.h"
+#include "body.h"
+
 #include "callback.h"
 #include "gs_gnomesword.h"
 #include "gs_sword.h"
@@ -73,7 +82,9 @@
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
 #include "gs_html.h"
-#include "gs_toolbarEditor.h"
+#include "toolbar.h"
+
+//#include "gs_toolbarEditor.h"
 //#include "noteeditor.h"
 //#include "searchstuff.h"
 #include "printstuff.h"
@@ -117,6 +128,7 @@ extern gint answer;		/* do we save file on exit */
 extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gnomsword.c) */
 //extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 extern GtkWidget *htmlCommentaries;
+extern GtkWidget *htmlComments;
 extern gchar *mycolor;
 extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 
@@ -499,18 +511,9 @@ on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	static gboolean firsttime = TRUE;
 	gboolean choice;
 	
-	choice = GTK_TOGGLE_BUTTON(togglebutton)->active;	
-	if(choice) {
-		if(firsttime) {
-			editortoolbar = HTMLtoolbar_create(MainFrm, "htmlComments");
-			firsttime = FALSE;
-		}
-		gtk_widget_show(lookup_widget(MainFrm,"vbox32"));
-	} else {
-		gtk_widget_hide(lookup_widget(MainFrm,"vbox32"));	
-	}
-	editnoteSWORD(choice);
-	gtk_html_set_editable (GTK_HTML(lookup_widget(GTK_WIDGET(togglebutton),"htmlComments")), choice );
+	choice = GTK_TOGGLE_BUTTON(togglebutton)->active;
+	editnoteSWORD(choice); 
+	gtk_html_set_editable (GTK_HTML(htmlComments), choice );
 }
 
 //----------------------------------------------------------------------------------------------

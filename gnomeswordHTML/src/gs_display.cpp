@@ -23,15 +23,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-/*********************************************************************
-**********************************************************************
-**  this code was taken from the Sword Cheatah program 	    **
-**  and modified to handle some of the GBF stuff. Also added**
-**  suport for the x symbol font when using greek modules.    **
-**  2000/07/10 - added some support for the RWP module    **
-**  2001-02-25 added support for html                              ** 
-**********************************************************************
-*********************************************************************/
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -70,9 +61,11 @@ extern SWModule *comp1Mod;
 extern gchar *current_verse;
 extern INTERLINEAR interlinearMods;
 extern gchar *mycolor;
+extern GtkWidget *statusbarNE;
 
 /***************************************************************************** 
- * ComEntryDisp - for displaying commentary modules in a GtkHTML widget
+ * ComEntryDisp - for displaying personal commentary modules in a 
+ * GtkHTML widget
  * the mods need to be filtered to html first
  * imodule - the Sword module to display
  *****************************************************************************/
@@ -92,37 +85,33 @@ char ComEntryDisp::Display(SWModule & imodule)
 			font = (char *) (*eit).second.c_str();
 		}
 	}
-/*	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbCom")), 0); */
 	(const char *) imodule;	/* snap to entry */
 	/* check for personal comments by finding ModDrv=RawFiles */
 	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	
 	    		(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)) {	/* check for edit mode */
-		GtkWidget *statusbar;	/* pointer to comments statusbar */
+		//GtkWidget *statusbar;	/* pointer to comments statusbar */
 		gint context_id2;	/* statusbar context_id ??? */
 		/* add module name and verse to edit note statusbar */		
 		sprintf(tmpBuf, "[%s] ", imodule.KeyText());
 		/* setup statusbar for personal comments */
-		/*        get stutusbar */		
-		statusbar = lookup_widget(MainFrm, "sbNotes");
 		/* get context id */		
-		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");
+		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbarNE), "GnomeSword");
 		/* ready status */
-		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	
-		/* show modName and verse ref in statusbar */		
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);
+		gtk_statusbar_pop(GTK_STATUSBAR(statusbarNE), context_id2);	
+		/* show verse ref in statusbar */		
+		gtk_statusbar_push(GTK_STATUSBAR(statusbarNE), context_id2, tmpBuf); 
 		beginHTML(GTK_WIDGET(gtkText));	
 	} else {
 		strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
 		sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
 			imodule.Name(), buf, imodule.Name(), imodule.KeyText());
 		strbuf = g_string_append(strbuf, tmpBuf);
-		/* show verse ref in text widget  */
-		/* show module text for current key */
+		/* show verse ref in gtkhtml widget  */
 		beginHTML(GTK_WIDGET(gtkText));
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 	}
+	/* show module text for current key */
 	if (!stricmp(font, "Symbol")) {
 		strbuf = g_string_new("<FONT FACE=\"symbol\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);
@@ -146,8 +135,9 @@ char ComEntryDisp::Display(SWModule & imodule)
 
 
 /***************************************************************************** 
- * GtkHTMLEntryDisp - for displaying dict/lex modules in a GtkHTML 
- * widget the mods need to be filtered to html first
+ * GtkHTMLEntryDisp - for displaying comm and dict/lex modules in a 
+ * GtkHTML widget - the mods need to be filtered to html first
+ * imodule - the Sword module to display
  *****************************************************************************/
 char GtkHTMLEntryDisp::Display(SWModule & imodule)
 {
@@ -165,8 +155,6 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 			font = (char *) (*eit).second.c_str();
 		}
 	}
-/*	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (lookup_widget(MainFrm, "nbCom")), 0);  */
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText));
 	strbuf = g_string_new("");
@@ -220,7 +208,6 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	char tmpBuf[500], *buf, *font, *mybuf;
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
-	//ConfigEntMap::iterator cit;	//-- iteratior
 	GString *strbuf;
 	VerseKey *key = (VerseKey *) (SWKey *) imodule;
 	int curVerse = key->Verse();
@@ -228,15 +215,12 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	int curBook = key->Book();
 	int curPos = 0;
 	gint len;
-	gchar *sourceformat;
-	bool gbf = false;
 	char *Buf, c;
 	bool newparagraph = false;
 	gint mybuflen;
 
 	c = 182;
 	font = "Roman";
-	sourceformat = "plain";
 
 	if ((sit = mainMgr->config->Sections.find(imodule.Name())) !=
 	    mainMgr->config->Sections.end()) {
@@ -244,11 +228,6 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 		    (*sit).second.end()) {
 			font = (char *) (*eit).second.c_str();
 		}
-		eit = (*sit).second.find("SourceType");
-		if (eit != (*sit).second.end())
-			sourceformat = (char *) (*eit).second.c_str();
-		if (!stricmp(sourceformat, "GBF"))
-			gbf = true;
 	}
 	beginHTML(GTK_WIDGET(gtkText));
 	strbuf =
@@ -337,8 +316,8 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 					newparagraph = false;
 				} else
 					g_string_sprintf(strbuf, "<FONT COLOR=\"#000000\" >");
-				strbuf = g_string_append(strbuf, (const char *)imodule);
 			}
+			strbuf = g_string_append(strbuf, (const char *)imodule);
 			if (bVerseStyle) {
 				if (strstr(strbuf->str, "<BR>") == NULL
 					    && strstr(strbuf->str, "<P>") == NULL)
@@ -421,19 +400,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 		strbuf = g_string_new("<FONT COLOR=\"#000000\" >");
 	}
 	/* body */
-	/*
-	if (gbf) {
-		len = strlen((const char *) imodule);
-		len = len * 5;
-		Buf = new char[len];
-		strcpy(Buf,
-	       (const char *) imodule);
-		gbftohtml(Buf, len);
-		strbuf = g_string_append(strbuf, Buf);
-		delete[]Buf;
-		Buf = NULL;		
-	} else  */
-		strbuf = g_string_append(strbuf, (const char *) imodule);
+	strbuf = g_string_append(strbuf, (const char *) imodule);
 	/* closing */
 	if (!stricmp(font, "Symbol")) {
 		strbuf = g_string_append(strbuf, "</font><BR><HR>");
@@ -455,258 +422,3 @@ char InterlinearDisp::Display(SWModule & imodule)
 	return 0;
 }
 
-
-/********************************************************** 
-* most of the code in this function is from the 
-* Sword gbfhtml.cpp file
-***********************************************************/
-gchar *GtkHTMLEntryDisp::gbftohtml(gchar * text, gint maxlen)
-{
-	gchar *str, *to, *from, token[2048];
-	gint len;
-	gint tokpos = 0;
-	bool intoken = false;
-	bool hasFootnotePreTag = false;
-	bool isRightJustified = false;
-	bool isCentered = false;
-	static bool newParagraph = false;
-
-	len = strlen(text) + 1;
-	if (len < maxlen) {
-		memmove(&text[maxlen - len], text, len);
-		from = &text[maxlen - len];
-	} else
-		from = text;
-	for (to = text; *from; from++) {
-		if (newParagraph) {
-			*to++ = 182;
-			newParagraph = false;
-		}
-		if (*from == '\n') {
-			*from = ' ';
-		}
-		if (*from == '<') {
-			intoken = true;
-			tokpos = 0;
-			memset(token, 0, 2048);
-			continue;
-		}
-		if (*from == '>') {
-			intoken = false;
-			// process desired tokens
-			switch (*token) {
-			case 'W':	// Strongs
-				switch (token[1]) {
-				case 'G':	// Greek
-				case 'H':	// Hebrew
-					strcpy(to, " <A HREF=\"#");
-					to += strlen(to);
-					for (unsigned int i = 2;
-					     i < strlen(token); i++)
-						*to++ = token[i];
-					strcpy(to,
-					       " \"><FONT SIZE=\"-1\">");
-					to += strlen(to);
-					for (unsigned int i = 2;
-					     i < strlen(token); i++)
-						*to++ = token[i];
-					strcpy(to, "</FONT></A> ");
-					to += strlen(to);
-					continue;
-
-				case 'T':	// Tense
-					strcpy(to, " <A HREF=\"#");
-					to += strlen(to);
-					for (unsigned int i = 3;
-					     i < strlen(token); i++)
-						*to++ = token[i];
-					strcpy(to,
-					       "\"> <FONT SIZE=\"-1\"><I>");
-					to += strlen(to);
-					for (unsigned int i = 3;
-					     i < strlen(token); i++)
-						*to++ = token[i];
-					strcpy(to, "</I></FONT></A> ");
-					to += strlen(to);
-					continue;
-				}
-				break;
-			case 'R':
-				switch (token[1]) {
-				case 'B':	//word(s) explained in footnote
-					strcpy(to, "<I>");
-					to += strlen(to);
-					hasFootnotePreTag = true;	//we have the RB tag
-					continue;
-				case 'F':	// footnote begin
-					if (hasFootnotePreTag) {
-						strcpy(to, "</I>");
-						to += strlen(to);
-					}
-					strcpy(to,
-					       "<FONT COLOR=\"800000\"><SMALL>(");
-					to += strlen(to);
-					continue;
-				case 'f':	// footnote end
-					strcpy(to, ")</SMALL></FONT>");
-					to += strlen(to);
-					hasFootnotePreTag = false;
-					continue;
-				}
-				break;
-			case 'F':	// font tags
-				switch (token[1]) {
-				case 'I':	// italic start
-					strcpy(to, "<I>");
-					to += strlen(to);
-					continue;
-				case 'i':	// italic end
-					strcpy(to, "</I>");
-					to += strlen(to);
-					continue;
-				case 'B':	// bold start
-					strcpy(to, "<B>");
-					to += strlen(to);
-					continue;
-				case 'b':	// bold end
-					strcpy(to, "</B>");
-					to += strlen(to);
-					continue;
-				case 'R':	// words of Jesus begin
-					strcpy(to,
-					       "<FONT COLOR=\"FF0000\">");
-					to += strlen(to);
-					continue;
-				case 'r':	// words of Jesus end
-					strcpy(to, "</FONT>");
-					to += strlen(to);
-					continue;
-				case 'U':	// Underline start
-					strcpy(to, "<U>");
-					to += strlen(to);
-					continue;
-				case 'u':	// Underline end
-					strcpy(to, "</U>");
-					to += strlen(to);
-					continue;
-				case 'O':	// Old Testament quote begin
-					strcpy(to, "<CITE>");
-					to += strlen(to);
-					continue;
-				case 'o':	// Old Testament quote end
-					strcpy(to, "</CITE>");
-					to += strlen(to);
-					continue;
-				case 'S':	// Superscript begin
-					strcpy(to, "<SUP>");
-					to += strlen(to);
-					continue;
-				case 's':	// Superscript end
-					strcpy(to, "</SUP>");
-					to += strlen(to);
-					continue;
-				case 'V':	// Subscript begin
-					strcpy(to, "<SUB>");
-					to += strlen(to);
-					continue;
-				case 'v':	// Subscript end
-					strcpy(to, "</SUB>");
-					to += strlen(to);
-					continue;
-				}
-				break;
-			case 'C':	// special character 
-				switch (token[1]) {
-				case 'A':	// ASCII value
-					*to++ = (char) atoi(&token[2]);
-					continue;
-				case 'G':
-					//*to++ = ' ';
-					continue;
-				case 'L':	// line break
-					if (!bVerseStyle) {
-						strcpy(to, "<BR>");
-						to += strlen(to);
-					}
-					continue;
-				case 'M':	// new paragraph
-					if (bVerseStyle) {
-						newParagraph = TRUE;
-					} else {
-						strcpy(to, "<P>");
-						to += strlen(to);
-					}
-					continue;
-				case 'T':
-					//*to++ = ' ';
-					continue;
-				}
-				break;
-			case 'J':	//Justification
-				switch (token[1]) {
-				case 'R':	//right
-					strcpy(to,
-					       "<DIV ALIGN=\"RIGHT\">");
-					to += strlen(to);
-					isRightJustified = true;
-					continue;
-				case 'C':	//center
-					strcpy(to,
-					       "<DIV ALIGN=\"CENTER\">");
-					to += strlen(to);
-					isCentered = true;
-					continue;
-
-				case 'L':	//left, reset right and center
-					if (isCentered) {
-						strcpy(to, "</CENTER>");
-						to += strlen(to);
-						isCentered = false;
-					}
-					if (isRightJustified) {
-						strcpy(to, "</DIV>");
-						to += strlen(to);
-						isRightJustified = false;
-					}
-					continue;
-				}
-				break;
-			case 'T':	// title formatting
-				switch (token[1]) {
-				case 'T':	// Book title begin
-					strcpy(to, "<BIG>");
-					to += strlen(to);
-					continue;
-				case 't':
-					strcpy(to, "</BIG>");
-					to += strlen(to);
-					continue;
-				}
-				break;
-
-			case 'P':	// special formatting
-				switch (token[1]) {
-				case 'P':	// Poetry begin
-					strcpy(to, "<CITE>");
-					to += strlen(to);
-					continue;
-				case 'p':
-					strcpy(to, "</CITE>");
-					to += strlen(to);
-					continue;
-				}
-				break;
-			}
-			continue;
-		}
-		if (intoken) {
-			if (tokpos < 2047) {
-				token[tokpos] = *from;
-				tokpos++;
-			}
-		} else
-			*to++ = *from;
-	}
-	*to = 0;
-	return 0;
-}
