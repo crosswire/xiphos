@@ -65,8 +65,22 @@ struct _GSHTMLEditorControlData {
 	guint releaseId;
 
 	/* toolbars */
-	GtkWidget *toolbar_commands, *toolbar_style;
-
+	GtkWidget 
+		*toolbar_commands, 
+		*toolbar_style;
+	/* toolbars buttons*/
+	GtkWidget 
+		*tt_button,
+		*bold_button,
+		*italic_button,
+		*underline_button,
+		*strikeout_button,
+		*left_align_button,
+		*center_button,
+		*right_align_button,
+		*unindent_button,
+		*indent_button;
+	
 	GtkWidget *bold;
 	GtkWidget *italic;
 	GtkWidget *underline;
@@ -76,8 +90,8 @@ struct _GSHTMLEditorControlData {
 	GtkWidget *center;
 	GtkWidget *right_align;
 
-	GtkWidget *indent_button;
-	GtkWidget *unindent_button;
+	//GtkWidget *indent;
+	//GtkWidget *unindent;
 
 	GtkWidget *font_size_menu;
 	GtkWidget *pm;
