@@ -1,10 +1,12 @@
-/***************************************************************************
-                            		gs_gui.h
-                             -------------------
-    begin                : Wed June 27 2001
-    copyright          : (C) 2001 by Terry Biggs
-    email                : tbiggs@users.sf.net
- ***************************************************************************/
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_gui.h
+    * -------------------
+    * Wed June 27 2001
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+  */
 
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -22,13 +24,18 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef __GS_GUI_H_
+#define __GS_GUI_H_ 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-GtkWidget *create_mainwindow(GtkWidget *splash);
+	GtkWidget *create_mainwindow(GtkWidget * splash);
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif /*__GS_GUI_H_  */
 

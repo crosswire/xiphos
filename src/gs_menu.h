@@ -1,10 +1,12 @@
-/***************************************************************************
-                          gs_menu.h  -  description
-                             -------------------
-    begin                : Mon May 8 2000
-    copyright            : (C) 2000 by  Terry Biggs
-    email                : tbiggs@infinet.com
- ***************************************************************************/
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_menu.h
+    * -------------------
+    * Mon May 8 2000
+    * copyright (C) 2000 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+  */
 
  /*
     *  This program is free software; you can redistribute it and/or modify
@@ -21,64 +23,66 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-  
+
+#ifndef __GS_MENU_H_
+#define __GS_MENU_H_ 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "sw_gnomesword.h"
 
-void
-additemtognomemenu(GtkWidget * MainFrm,
-		   gchar * itemname,
-		   gchar * itemdata,
-		   gchar * submenuname, GtkMenuCallback mycallback);
+	void
+	 additemtognomemenu(GtkWidget * MainFrm,
+			    gchar * itemname,
+			    gchar * itemdata,
+			    gchar * submenuname,
+			    GtkMenuCallback mycallback);
 
-void
-additemtopopupmenu(GtkWidget * MainFrm,
-		   GtkWidget * menu,
-		   gchar * itemname, GtkMenuCallback mycallback);
+	void
+	 additemtopopupmenu(GtkWidget * MainFrm,
+			    GtkWidget * menu,
+			    gchar * itemname, GtkMenuCallback mycallback);
 
-void addseparator(GtkWidget * MainFrm, gchar * subtreelabel);
+	void addseparator(GtkWidget * MainFrm, gchar * subtreelabel);
 
-void
-addsubtreeitem(GtkWidget * MainFrm,
-	       gchar * menulabel, gchar * subtreelabel);
+	void
+	 addsubtreeitem(GtkWidget * MainFrm,
+			gchar * menulabel, gchar * subtreelabel);
 
-void
-additemtosubtree(GtkWidget * MainFrm,
-		 gchar * subtreelabel, gchar * itemlabel);
+	void
+	 additemtosubtree(GtkWidget * MainFrm,
+			  gchar * subtreelabel, gchar * itemlabel);
 
-GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
-			       gchar * subtreelabel,
-			       gchar * itemlabel,
-			       GtkMenuCallback mycallback);
+	GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
+				       gchar * subtreelabel,
+				       gchar * itemlabel,
+				       GtkMenuCallback mycallback);
 
-void
-removemenuitems(GtkWidget * MainFrm,
-		gchar * startitem, gint numberofitems);
-		
-void createpopupmenus(GtkWidget *app, 
-				SETTINGS *settings,
-				GList *bilbeDescription,
-				GList *comDescription,
-				GList *dictDescription,
-				GList *percomlist);
-		
-void addmodstomenus(GtkWidget *app, 
-				SETTINGS *settings,
-				GList *biblelist, 
-				GList *bilbeDescription,
-				GList *commentarylist, 
-				GList *comDescription,
-				GList *dictionarylist,
-				GList *dictDescription,
-				GList *percomlist);		
-GtkWidget*
-create_shortcutbarMenu(gint barnum);
+	void
+	 removemenuitems(GtkWidget * MainFrm,
+			 gchar * startitem, gint numberofitems);
 
-		
+	void createpopupmenus(GtkWidget * app,
+			      SETTINGS * settings,
+			      GList * bilbeDescription,
+			      GList * comDescription,
+			      GList * dictDescription, GList * percomlist);
+
+	void addmodstomenus(GtkWidget * app,
+			    SETTINGS * settings,
+			    GList * biblelist,
+			    GList * bilbeDescription,
+			    GList * commentarylist,
+			    GList * comDescription,
+			    GList * dictionarylist,
+			    GList * dictDescription, GList * percomlist);
+	GtkWidget *create_shortcutbarMenu(gint barnum);
+
+
 #ifdef __cplusplus
 }
 #endif
 
+#endif /*__GS_MENU_H_  */

@@ -1,11 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/***************************************************************************
-                            		gs_gui.c
-                             -------------------
-  				Wed June 27 2001
-    			copyright (C) 2001 by Terry Biggs
-   			   tbiggs@users.sourceforge.net
- ***************************************************************************/
+ /*
+    * GnomeSword Bible Study Tool
+    * gs_gui.c
+    * -------------------
+    * Wed June 27 2001
+    * copyright (C) 2001 by Terry Biggs
+    * tbiggs@users.sourceforge.net
+ */
 
 /*
  *  This program is free software; you can redistribute it and/or modify
@@ -47,6 +48,7 @@
 #include "gs_shortcutbar.h"
 #include "sw_gnomesword.h"
 #include "e-splash.h"
+#include "gs_html.h"
 
 
 #ifdef USE_SPELL
@@ -73,7 +75,7 @@ static GnomeUIInfo edit1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, "Copy",
 	 "Copy high lighted text form main window",
-	 on_copy3_activate, "moduleText", NULL,
+	 on_copyhtml_activate, "htmlTexts", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
@@ -272,7 +274,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *btnDeleteNote;
 	GtkWidget *btnSpellNotes;
 	GtkWidget *label85;
-	GtkWidget *vbox3;
+	GtkWidget *vboxInt;
 	GtkWidget *frame2;
 	GtkWidget *vbox4;
 	GtkWidget *scrolledwindow15;
@@ -1229,12 +1231,12 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 							     (notebook3),
 							     1), label85);
 
-	vbox3 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox3);
-	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vbox3", vbox3,
+	vboxInt = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vboxInt);
+	gtk_object_set_data_full(GTK_OBJECT(settings->app), "vboxInt", vboxInt,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox3);
-	gtk_container_add(GTK_CONTAINER(notebook3), vbox3);
+	gtk_widget_show(vboxInt);
+	gtk_container_add(GTK_CONTAINER(notebook3), vboxInt);
 
 	frame2 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame2);
@@ -1242,7 +1244,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 				 frame2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame2);
-	gtk_box_pack_start(GTK_BOX(vbox3), frame2, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vboxInt), frame2, TRUE, TRUE, 0);
 	//gtk_widget_set_usize(frame2, -2, 67);
 
 	vbox4 = gtk_vbox_new(FALSE, 0);

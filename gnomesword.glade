@@ -7867,6 +7867,32 @@ Click Finish to close this dialog and run GnomeSword.</text>
   </widget>
 
   <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>expand_all1</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_expand_all1_activate</handler>
+      <last_modification_time>Thu, 23 Aug 2001 14:15:39 GMT</last_modification_time>
+    </signal>
+    <label>Expand All</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_BOTTOM</stock_icon>
+  </widget>
+
+  <widget>
+    <class>GtkPixmapMenuItem</class>
+    <name>collapse_all1</name>
+    <signal>
+      <name>activate</name>
+      <handler>on_collapse_all1_activate</handler>
+      <last_modification_time>Thu, 23 Aug 2001 14:15:39 GMT</last_modification_time>
+    </signal>
+    <label>Collapse All</label>
+    <right_justify>False</right_justify>
+    <stock_icon>GNOME_STOCK_MENU_TOP</stock_icon>
+  </widget>
+
+  <widget>
     <class>GtkCheckMenuItem</class>
     <name>allow_reordering</name>
     <tooltip>Toggle Reording - allow items to be moved by draging</tooltip>

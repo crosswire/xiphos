@@ -55,12 +55,16 @@ extern gboolean
 extern GtkWidget 
 	*listeditor;		/* pointer to ListEditor */
 	
+/******************************************************************************
+
+******************************************************************************/
+
 /**********************************************************************************
  * main menu call backs
  * popup menu call backs are located in gs_popup_cb.c
  **********************************************************************************/
 /******************************************************************************
- *on_help_contents_activate - user chose an history item
+ *on_help_contents_activate - user chose help item
 ******************************************************************************/
 void
 on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -84,7 +88,7 @@ on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	changeverseHistory(atoi((gchar *)user_data));
 }
 
-//----------------------------------------------------------------------------------------------
+/*** toogle strongs numvbers in main text window ***/
 void
 on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -96,61 +100,52 @@ on_strongs_numbers1_activate(GtkMenuItem * menuitem, gpointer user_data)
 				     GTK_CHECK_MENU_ITEM(menuitem)->active);	/* set strongs toogle button */
 }
 
-//----------------------------------------------------------------------------------------------
+/*** toogle morph tags in main text window ***/
 void
 on_morphs_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	morphsSWORD(0, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+	morphsSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
-//----------------------------------------------------------------------------------------------
+/*** display - The SWORD Project - about information ***/
 void
 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
-	GtkWidget *dlg, *text1, *text2, *label, *version_label;
+	GtkWidget *dlg, *text1, *version_label;
+	gfloat ver;
+	gchar version[40];
 	
 	dlg = create_AboutSword();
 	text1 = lookup_widget(dlg, "txtAboutSword");
-	text2 = lookup_widget(dlg, "text6");
-	label = lookup_widget(dlg, "label96");
 	version_label = lookup_widget(dlg, "version_label");
-	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
-	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
-	showinfoSWORD(text2, GTK_LABEL(label), GTK_LABEL(version_label));
+	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);	
+	/* get sword version */
+	ver = getSwordVerionSWORD();	
+	sprintf(version,"Sword-%.2f",ver);
+	gtk_label_set_text(GTK_LABEL(version_label),version);
 	gtk_widget_show(dlg);
 }
 
-
-//----------------------------------------------------------------------------------------------
+/*** toogle footnotes in main text window ***/
 void on_footnotes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	footnotesSWORD(0, GTK_CHECK_MENU_ITEM(menuitem)->active);	
+	footnotesSWORD(MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
-
-//----------------------------------------------------------------------------------------------
-void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *text;
-	text = lookup_widget(settings->app, (gchar *) user_data);	
-	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
-}
-
-//----------------------------------------------------------------------------------------------
+/*** open preferences dialog ***/
 void on_preferences1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	loadpreferencemodsSWORD();
 }
 
-
-//----------------------------------------------------------------------------------------------
+/*** add current verse to quickmarks menu ***/
 void on_add_quickmark_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	addQuickmark(settings->app);
 }
 
-//----------------------------------------------------------------------------------------------
+/*** open guickmark editor dialog ***/
 void
 on_edit_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -161,7 +156,8 @@ on_edit_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
 	}
 	gtk_widget_show(listeditor);
 }
-//----------------------------------------------------------------------------------------------
+
+/*** display search group in shortcut bar ***/
 void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	SETTINGS *s;
@@ -175,7 +171,8 @@ void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 						 s->searchbargroup,
 						 TRUE);
 }
-//----------------------------------------------------------------------------------------------
+
+/*** toogle autosave of personal notes ***/
 void
 on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -183,71 +180,41 @@ on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 
-//----------------------------------------------------------------------------------------------
+/*** toogle between verse and paragraph style ***/
 void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		setversestyleSWORD(TRUE);
-	else
-		setversestyleSWORD(FALSE);
+	setversestyleSWORD(GTK_CHECK_MENU_ITEM(menuitem)->active); 
 }
 
-//----------------------------------------------------------------------------------------------
+/*** toogle display of interlinear page ***/
 void
 on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-
-	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		showIntPage(settings->app, TRUE);
-	else
-		showIntPage(settings->app, FALSE);
+	showIntPage(settings->app, GTK_CHECK_MENU_ITEM(menuitem)->active);
 }
 
-//----------------------------------------------------------------------------------------------
+/*** do a nice orderly shut down and exit gnomesword ***/
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	shutdownSWORD();
 }
 
-//----------------------------------------------------------------------------------------------
+/*** remove all items from history list ***/
 void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu
 			gpointer user_data)
 {
 	clearhistory(settings->app,GTK_WIDGET(settings->shortcut_bar));
 }
 
-//----------------------------------------------------------------------------------------------
+/*** display gnomesword about dialog ***/
 void
 on_about_gnomesword1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *AboutBox;
 
-	AboutBox = create_about2();
+	AboutBox = create_about();
 	gtk_widget_show(AboutBox);
-}
-
-//----------------------------------------------------------------------------------------------
-void on_com_select_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *notebook;
-	gint modNum;
-
-	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(settings->app, "notebook1");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
-}
-
-//----------------------------------------------------------------------------------------------
-void on_dict_select_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	GtkWidget *notebook;
-	gint modNum;
-
-	modNum = GPOINTER_TO_INT(user_data);
-	notebook = lookup_widget(settings->app, "notebook4");	//-- get notebook
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), modNum);	//-- set notebook page
 }
 
 

@@ -144,7 +144,9 @@ module.source.files=\
 	gs_mainmenu_cb.c\
 	gs_mainmenu_cb.h\
 	gs_gui_cb.c\
-	gs_gui_cb.h
+	gs_gui_cb.h\
+	gs_information_sw.cpp\
+	gs_information_sw.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
