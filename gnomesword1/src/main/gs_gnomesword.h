@@ -66,6 +66,7 @@ struct _settings {
 		*notebookGBS, /* notebook - gbs */
 		*notebookDL,  /* notebook - dict/lex */
 		*notebookCOMM,  /* notebook - dict/lex */
+		*notebook_text,  /* notebook - dict/lex */
 		*verse_list_notebook,  
     
 	/* dock/undock stuff */
@@ -177,7 +178,8 @@ struct _settings {
 		intCurVerse,    /* detached interlinear current verse */
 		gbsLastPage,    /* last notebook page before change */
 		dlLastPage,     /* last notebook page before change */
-		commLastPage;     /* last notebook page before change */
+		commLastPage,     /* last notebook page before change */
+		text_last_page;     /* last notebook page before change */
 						
 	gboolean   
 		usedefault, /* use default settings in gnomesword or those used for last session */
@@ -294,7 +296,6 @@ void change_module_and_key(gchar *module_name, gchar *key);
 void set_module_global_options(gchar * option, gint window, 
 		gboolean choice, gboolean showchange);
 void change_verse(gchar *key);
-
 #ifdef __cplusplus
 }
 #endif

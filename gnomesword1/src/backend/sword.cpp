@@ -1,30 +1,24 @@
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-  /*
-     * GnomeSword Bible Study Tool
-     * sw_gnomesword.cpp
-     * -------------------
-     * Mon May 8 2000
-     * copyright (C) 2000 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * sword.cpp support for sword modules
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -81,6 +75,8 @@
 #include "gs_dictlex.h"
 #include "commentary.h"
 #include "gs_commentary.h"
+#include "bibletext.h"
+#include "gs_bibletext.h"
 #include "search.h"
 #include "interlinear.h"
 #include "gs_interlinear.h"
@@ -92,28 +88,15 @@ typedef map < string, string > bookAbrevMap;
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
-SWDisplay *FPNDisplay,		/* to display formatted personal notes using GtkText */
-    *UTF8Display;		/* to display modules in utf8 */
+SWDisplay *FPNDisplay;		/* to display formatted personal notes using GtkText */
 
 SWMgr * percomMgr,		/* sword mgr for percomMod - personal comments editor */
-    *listMgr,			/* sword mgr for ListEditor */
-    *mainMgr1,			/* sword mgr for comp1Mod - interlinear modules */
-    *mainMgr;			/* sword mgr for curMod - curcomMod - curdictMod */
+    *mainMgr;			/* sword mgr for curMod */
 
 VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
  vkText, vkComm;
-SWModule * curMod,		/* module for main text window */
-    *comp1Mod,			/* module for first interlinear window */
-    *interlinearMod0,		/* module for first interlinear window */
-    *interlinearMod1,		/* module for first interlinear window */
-    *interlinearMod2,		/* module for first interlinear window */
-    *interlinearMod3,		/* module for first interlinear window */
-    *interlinearMod4,		/* module for first interlinear window */
-    *curcomMod,			/* module for commentary  window */
-    //  *curbookMod,                      /* module for gen book  window */
-    *percomMod,			/* module for personal commentary  window */
-    *curdictMod,		/* module for dict window */
-    *listMod;			/* module for ListEditor */
+SWModule *curMod,		/* module for main text window */
+*percomMod;			/* module for personal commentary  window */
 
 modDescMap descriptionMap;
 bookAbrevMap abrevationMap;
@@ -126,71 +109,81 @@ GtkWidget *NEtext,		/* note edit widget */
 *MainFrm;			/* main form widget  */
 
 gboolean noteModified = false,	/* set to true is personal note has changed */
-    usepersonalcomments = false,	/* do we setup for personal comments - default is false  */
-    autoSave = true,		/* we want to auto save changes to personal comments */
-    havebible = false,		/* let us know if we have at least one bibletext module */
-    havedict = false,		/* let us know if we have at least one lex-dict module */
-    havecomm = false;		/* let us know if we have at least one commentary module */
+ usepersonalcomments = false,	/* do we setup for personal comments - default is false  */
+ autoSave = true,		/* we want to auto save changes to personal comments */
+ havebible = false,		/* let us know if we have at least one bibletext module */
+ havedict = false,		/* let us know if we have at least one lex-dict module */
+ havecomm = false;		/* let us know if we have at least one commentary module */
 
 gchar com_key[80] = "Rom 8:28",	/* current commentary key */
-    *textmod, *commod, *dictmod;
+*textmod, *commod, *dictmod;
 
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
-extern GList
-    *options;
+extern GList * options;
 
-extern gint 
-   dictpages,	/* number of dictionaries */
-   compages,	/* number of commentaries */
-   textpages,	/* number of Bible text */
-   bookpages;
- 
-extern SETTINGS 
-    *settings, myset;
-extern GtkWidget
-    *htmlComments;    
-extern gchar 
-    current_verse[80];	/* current verse showing in main window, interlinear window - commentary window */    
+extern gint dictpages,		/* number of dictionaries */
+ compages,			/* number of commentaries */
+ textpages,			/* number of Bible text */
+ bookpages;
+
+extern SETTINGS *settings;
+extern GtkWidget *htmlComments;
+extern gchar current_verse[80];	/* current verse showing in main window, interlinear window - commentary window */
 
 
+/******************************************************************************
+ * Name
+ *   backend_first_init
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void backend_first_init(void)	
+ *
+ * Description
+ *   create swmgrs 
+ *
+ * Return value
+ *   void
+ */
 void backend_first_init(void)
 {
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgrs
-	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	percomMgr = new SWMgr();
-	
-	char locale_name[40];
-	sprintf(locale_name,"%s",(char *)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
-	cout << locale_name << "\n";
-	if(strlen(locale_name) > 2) {
-		char buf[40];
-		strncpy(buf,locale_name,2);
-		buf[2] = '\0';
-		LocaleMgr::systemLocaleMgr.setDefaultLocaleName(buf);
-	}
-	
+	/*
+	   char locale_name[40];
+	   sprintf(locale_name,"%s",(char *)LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
+	   cout << locale_name << "\n";
+	   if(strlen(locale_name) > 2) {
+	   char buf[40];
+	   strncpy(buf,locale_name,2);
+	   buf[2] = '\0';
+	   LocaleMgr::systemLocaleMgr.setDefaultLocaleName(buf);
+	   }
+	 */
 	curMod = NULL;		//-- set mods to null
-	comp1Mod = NULL;
-	curcomMod = NULL;
-	curdictMod = NULL;
 	percomMod = NULL;
-	interlinearMod0 = NULL;	//-- module for first interlinear window 
-	interlinearMod1 = NULL;
-	interlinearMod2 = NULL;
-	interlinearMod3 = NULL;
-	interlinearMod4 = NULL;
 
 	FPNDisplay = 0;
-	UTF8Display = 0;
-
 }
 
-/***********************************************************************************************
- *initSwrod to setup all the Sword stuff
- *mainform - sent here by main.cpp
- ***********************************************************************************************/
+/******************************************************************************
+ * Name
+ *  backend_init_sword 
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void backend_init_sword(SETTINGS * s)	
+ *
+ * Description
+ *   setup the Sword stuff
+ *
+ * Return value
+ *   void
+ */
 void backend_init_sword(SETTINGS * s)
 {
 	ModMap::iterator it;	//-- iteratior
@@ -217,9 +210,8 @@ void backend_init_sword(SETTINGS * s)
 
 	MainFrm = s->app;	//-- save mainform for use latter
 	NEtext = lookup_widget(s->app, "textComments");	//-- get note edit widget
+
 	//-- setup displays for sword modules
-	UTF8Display =
-	    new GtkHTMLChapDisp(lookup_widget(s->app, "htmlTexts"), s);
 	FPNDisplay = new GtkHTMLEntryDisp(htmlComments, s);
 	compages = 0;
 	dictpages = 0;
@@ -243,70 +235,58 @@ void backend_init_sword(SETTINGS * s)
 			       ((char *) (*it).second->Description())] =
 		    string((char *) (*it).second->Name());
 
+		if (backend_module_is_locked((*it).second->Name()))
+			g_warning("%s is locked", (*it).second->Name());
+
 		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
 			curMod = (*it).second;
 			havebible = TRUE;
 			++textpages;
-			
-			curMod->Disp(UTF8Display);
-			curMod->SetKey(vkText);
 		}
 
-		else if (!strcmp((*it).second->Type(), "Commentaries")) {               
-			curcomMod = (*it).second;
-			
+		else if (!strcmp((*it).second->Type(), "Commentaries")) {
 			havecomm = TRUE;	//-- we have at least one commentay module
 			++compages;	//-- how many pages do we have 
 		}
 
-		else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")) {        
+		else if (!strcmp
+			 ((*it).second->Type(),
+			  "Lexicons / Dictionaries")) {
 			havedict = TRUE;	//-- we have at least one lex / dict module
 			++dictpages;	//-- how many pages do we have
-			curdictMod = (*it).second;
-			
+
 		}
 
 		else if (!strcmp((*it).second->Type(), "Generic Books")) {
 			++bookpages;
 		}
 	}
-	
-	g_print("\nNumber of Text modules = %d\n",textpages);
-	g_print("Number of Commentary modules = %d\n",compages);
-	g_print("Number of Dict/Lex modules = %d\n",dictpages);
-	g_print("Number of Book modules = %d\n\n",bookpages);
-	
+
+	g_print("\nNumber of Text modules = %d\n", textpages);
+	g_print("Number of Commentary modules = %d\n", compages);
+	g_print("Number of Dict/Lex modules = %d\n", dictpages);
+	g_print("Number of Book modules = %d\n\n", bookpages);
+
 	//-- setup Commentary Support, Generic Book Support and Dict/Lex Support
+	backend_setup_text(s);
 	backend_setupCOMM(s);
 	backend_setupDL(s);
 	backend_setupGBS(s);
 	backend_setup_interlinear(s);
-	
+
 	//-- set up percom editor module
 	for (it = percomMgr->Modules.begin();
 	     it != percomMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Commentaries")) {	
+		if (!strcmp((*it).second->Type(), "Commentaries")) {
 			//-- if driver is RawFiles                     
-			if ((*percomMgr->config->Sections[(*it).second->Name()].
+			if ((*percomMgr->config->
+			     Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
 				percomMod = (*it).second;
-				percomMod->Disp(FPNDisplay);				
+				percomMod->Disp(FPNDisplay);
 				usepersonalcomments = TRUE;	//-- used by verseChange function (sw_gnomesword.cpp)
-				percomMod->SetKey(s->currentverse);				
-			}	
-		}
-	}
-
-	//-- interlinear        
-	for (it = mainMgr1->Modules.begin();
-	     it != mainMgr1->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), "Biblical Texts")) {
-			interlinearMod0 = (*it).second;
-			interlinearMod1 = (*it).second;
-			interlinearMod2 = (*it).second;
-			interlinearMod3 = (*it).second;
-			interlinearMod4 = (*it).second;
-			comp1Mod = (*it).second;
+				percomMod->SetKey(s->currentverse);
+			}
 		}
 	}
 
@@ -320,44 +300,80 @@ void backend_init_sword(SETTINGS * s)
 	}
 }
 
+
+/******************************************************************************
+ * Name
+ *   backend_text_module_change_verse
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void backend_text_module_change_verse(gchar * key)	
+ *
+ * Description
+ *   change verse for text mod and percom mod
+ *
+ * Return value
+ *   void
+ */
 void backend_text_module_change_verse(gchar * key)
 {
 	vkText = key;
-	//--------------------------------------------------- change main window                        
-	if (havebible) {
-		if (curMod) {
-			curMod->SetKey(vkText);
-			curMod->Display();
-		}
-	}
-
-	//------------------------------- change personal notes editor   if not in edit mode
-	//if (settings->notebook3page == 1) {
-		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
-			if (!settings->editnote) {
-				if (usepersonalcomments && percomMod) {
-					percomMod->SetKey(key);	//-- set personal module to current verse
-					percomMod->Display();	//-- show change
-					noteModified = false;	//-- we just loaded comment so it is not modified                                       
-				}
+	gui_display_text(key);
+	if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
+		if (!settings->editnote) {
+			if (usepersonalcomments && percomMod) {
+				percomMod->SetKey(key);	//-- set personal module to current verse
+				percomMod->Display();	//-- show change
+				noteModified = false;	//-- we just loaded comment so it is not modified                                       
 			}
 		}
-	//}
+	}
 }
 
-
-void backend_module_name_from_description(gchar * mod_name, gchar * mod_desc)
+/******************************************************************************
+ * Name
+ *   backend_module_name_from_description
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void backend_module_name_from_description(gchar * mod_name, gchar * mod_desc)	
+ *
+ * Description
+ *   get mod name from mod description
+ *
+ * Return value
+ *   void
+ */
+void backend_module_name_from_description(gchar * mod_name,
+					  gchar * mod_desc)
 {
 	strcpy(mod_name, descriptionMap[mod_desc].c_str());
 }
 
-//-------------------------------------------------------------------------------------------
-void backend_shutdown(SETTINGS * s)	//-- close down GnomeSword program
+/******************************************************************************
+ * Name
+ *   backend_shutdown
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void backend_shutdown(SETTINGS * s)	
+ *
+ * Description
+ *   close down sword 
+ *
+ * Return value
+ *   void
+ */
+void backend_shutdown(SETTINGS * s)
 {
 	savebookmarks(s->ctree_widget);
 	backend_save_properties(s, true);
 
 	backend_shut_down_verselist();
+	backend_shutdown_text();
 	backend_shutdownGBS();
 	backend_shutdownDL();
 	backend_shutdownCOMM();
@@ -367,24 +383,32 @@ void backend_shutdown(SETTINGS * s)	//-- close down GnomeSword program
 
 	//-- delete Sword managers
 	delete mainMgr;
-	delete mainMgr1;
 	delete percomMgr;
 
 	//-- delete Sword displays
-	if (UTF8Display)
-		delete UTF8Display;
 	if (FPNDisplay)
 		delete FPNDisplay;
 	g_print("\nwe are done with Sword\n");
 }
 
 /******************************************************************************
-* change text module for main window
-* someone clicked 
-*******************************************************************************/
+ * Name
+ *  backend_change_text_module 
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   void backend_change_text_module(gchar * modName, gboolean showchange)	
+ *
+ * Description
+ *    change text module for main window
+ *
+ * Return value
+ *   void
+ */
 void backend_change_text_module(gchar * modName, gboolean showchange)
 {
-	ModMap::iterator it;	//-- or clicked the mainwindow popup menu and the callback sent us here
+	ModMap::iterator it;
 	GtkWidget *frame;
 	gchar title[200];
 	SectionMap::iterator sit;
@@ -417,11 +441,13 @@ void backend_change_text_module(gchar * modName, gboolean showchange)
 				while (tmp != NULL) {
 					value =
 					    backend_load_module_options((*it).second->Name(), (gchar *) tmp->data);
-					set_module_global_options((gchar *)
-							   tmp->data,
-							   MAIN_TEXT_WINDOW,
-							   value,
-							   FALSE);
+					set_module_global_options((gchar
+								   *)
+								  tmp->
+								  data,
+								  MAIN_TEXT_WINDOW,
+								  value,
+								  FALSE);
 					//g_warning("%s = %d",(gchar*)tmp->data,value); 
 					tmp = g_list_next(tmp);
 				}
@@ -460,7 +486,7 @@ char *backend_get_valid_key(char *key)
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return 	g_strdup((char *) vkey.getText());
+	return g_strdup((char *) vkey.getText());
 }
 
 char *backend_get_book_from_key(char *key)
@@ -468,8 +494,8 @@ char *backend_get_book_from_key(char *key)
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return 	(char *) vkey.books[vkey.Testament() - 1][vkey.Book() -
-						       1].name;
+	return (char *) vkey.books[vkey.Testament() - 1][vkey.Book() -
+							 1].name;
 }
 
 int backend_get_chapter_from_key(char *key)
@@ -477,7 +503,7 @@ int backend_get_chapter_from_key(char *key)
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return vkey.Chapter();	
+	return vkey.Chapter();
 }
 
 int backend_get_verse_from_key(char *key)
@@ -485,8 +511,9 @@ int backend_get_verse_from_key(char *key)
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
-	return vkey.Verse();	
+	return vkey.Verse();
 }
+
 //-------------------------------------------------------------------------------------------
 void backend_save_personal_comment(gchar * buf)	//-- save personal comments
 {
@@ -499,9 +526,9 @@ void backend_save_personal_comment(gchar * buf)	//-- save personal comments
 //-------------------------------------------------------------------------------------------
 void backend_delete_personal_comment(void)	//-- delete personal comment
 {
-	GtkWidget * label1, *label2, *label3, *msgbox;
+	GtkWidget *label1, *label2, *label3, *msgbox;
 	gint answer = -1;
-	
+
 	msgbox = create_InfoBox();
 	label1 = lookup_widget(msgbox, "lbInfoBox1");
 	label2 = lookup_widget(msgbox, "lbInfoBox2");
@@ -536,7 +563,7 @@ void backend_change_percom_module(gchar * modName)	//-- change personal comments
 		return;		//backend_save_personal_comment(noteModified);  //-- if personal comments changed save changes before we change modules and lose our changes
 	it = percomMgr->Modules.find(modName);	//-- find commentary module (modName from page label)
 	if (it != percomMgr->Modules.end()) {	//-- if we don't run out of mods before we find the one we are looking for 
-		percomMod = (*it).second;	//-- set curcomMod to modName
+		percomMod = (*it).second;	//-- set Mod to modName
 		strcpy(settings->personalcommentsmod,
 		       percomMod->Name());
 		if (havebible)
@@ -557,14 +584,17 @@ void backend_change_percom_module(gchar * modName)	//-- change personal comments
  * option - option to set
  * yesno - yes or no
 ******************************************************************************/
-void backend_set_global_option(gint window, gchar * option, gchar * yesno)
+void backend_set_global_option(gint window, gchar * option,
+			       gchar * yesno)
 {
 	/* turn option on or off */
 	switch (window) {
-	case MAIN_TEXT_WINDOW:/*** Bible text window ***/
+	case MAIN_TEXT_WINDOW:
+			      /*** Bible text window ***/
 		mainMgr->setGlobalOption(option, yesno);
 		break;
-	case INTERLINEAR_WINDOW:/*** interlinear window ***/
+	case INTERLINEAR_WINDOW:
+				/*** interlinear window ***/
 		backend_set_interlinear_global_option(option, yesno);
 		break;
 	}
@@ -619,7 +649,7 @@ const char *backend_get_sword_verion(void)
 }
 
 /*** the changes are already made we just need to show them ***/
-void backend_display_new_font_color_and_size(SETTINGS *s)
+void backend_display_new_font_color_and_size(SETTINGS * s)
 {
 	curMod->Display();
 	gui_displayCOMM(s->currentverse);
@@ -628,29 +658,16 @@ void backend_display_new_font_color_and_size(SETTINGS *s)
 }
 
 /*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
-void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s)
+void backend_save_module_key(char *mod_name, char *key)
 {
 	SectionMap::iterator section;
 	ConfigEntMap::iterator entry;
 	DIR *dir;
-	gchar buf[256], conffile[256], *modName;
+	gchar buf[256], conffile[256];
 	struct dirent *ent;
-
-	switch (modwindow) {
-	case MAIN_TEXT_WINDOW:
-		modName = s->MainWindowModule;
-		break;
-	case COMMENTARY_WINDOW:
-		modName = s->CommWindowModule;
-		break;
-	case DICTIONARY_WINDOW:
-		modName = s->DictWindowModule;
-		break;
-	}
 
 	sprintf(buf, "%s", mainMgr->configPath);
 	dir = opendir(buf);
-	//char *modFile;
 	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);
 		while ((ent = readdir(dir))) {
@@ -661,7 +678,7 @@ void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s)
 				SWConfig *myConfig =
 				    new SWConfig(conffile);
 				section =
-				    myConfig->Sections.find(modName);
+				    myConfig->Sections.find(mod_name);
 				if (section != myConfig->Sections.end()) {
 					entry =
 					    section->second.
@@ -677,20 +694,6 @@ void backend_save_module_key(gint modwindow, gchar * key, SETTINGS *s)
 		}
 	}
 	closedir(dir);
-
-	//-- display module with new cipher key         
-	switch (modwindow) {
-	case MAIN_TEXT_WINDOW:
-		mainMgr1->setCipherKey(modName, key);	/* show change on interlinear page */
-	case COMMENTARY_WINDOW:
-		mainMgr->setCipherKey(modName, key);
-		//backend_text_module_change_verse(key);
-		break;
-	case DICTIONARY_WINDOW:
-		mainMgr->setCipherKey(modName, key);
-		curdictMod->Display();
-		break;
-	}
 }
 
 /*** display daily devotional ***/
@@ -738,8 +741,7 @@ int backend_get_mod_type(gchar * mod_name)
 			return COMMENTARY_TYPE;
 		}
 
-		if (!strcmp
-		    ((*it).second->Type(), DICT_MODS)) {
+		if (!strcmp((*it).second->Type(), DICT_MODS)) {
 		    /*** delete Sword manager ***/
 			delete mgr;
 			return DICTIONARY_TYPE;
@@ -766,8 +768,8 @@ GList *backend_get_list_of_mods_by_type(char *mod_type)
 		if (!strcmp((*it).second->Type(), mod_type)) {
 			mods =
 			    g_list_append(mods,
-					  (gchar *) (*it).second->
-					  Name());
+				  (gchar *) (*it).second->
+				  Name());
 		}
 	}
 	return mods;
@@ -777,20 +779,25 @@ GList *backend_get_list_of_devotion_modules(void)
 {
 	ModMap::iterator it;
 	SectionMap::iterator sit;
-	ConfigEntMap::iterator entry;	
-	
+	ConfigEntMap::iterator entry;
+
 	string feature;
 	GList *mods = NULL;
 	for (it = mainMgr->Modules.begin();
 	     it != mainMgr->Modules.end(); it++) {
 		if (!strcmp((*it).second->Type(), DICT_MODS)) {
-			sit = mainMgr->config->Sections.find((*it).second->Name());
+			sit =
+			    mainMgr->config->Sections.find((*it).
+							   second->
+							   Name());
 			ConfigEntMap & section = (*sit).second;
 			feature = ((entry = section.find("Feature")) !=
-			     section.end())? (*entry).
+				   section.end())? (*entry).
 			    second : (string) "";
-			if(!stricmp(feature.c_str(), "DailyDevotion")) {
-				mods = g_list_append(mods, (*it).second->Name());
+			if (!stricmp(feature.c_str(), "DailyDevotion")) {
+				mods =
+				    g_list_append(mods,
+						  (*it).second->Name());
 			}
 		}
 	}
@@ -801,13 +808,17 @@ GList *backend_get_list_of_percom_modules(void)
 {
 	ModMap::iterator it;
 	GList *mods = NULL;
-	for (it = mainMgr->Modules.begin();it != mainMgr->Modules.end(); it++) {
-		if (!strcmp((*it).second->Type(), COMM_MODS)) {	
+	for (it = mainMgr->Modules.begin();
+	     it != mainMgr->Modules.end(); it++) {
+		if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			//-- if driver is RawFiles                     
-			if ((*percomMgr->config->Sections[(*it).second->Name()].
+			if ((*percomMgr->config->
+			     Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
-				mods = g_list_append(mods, (*it).second->Name());
-			}	
+				mods =
+				    g_list_append(mods,
+						  (*it).second->Name());
+			}
 		}
 	}
 	return mods;
@@ -871,19 +882,20 @@ gchar *backend_get_mod_aboutSWORD(gchar * modname)
 			getConfigEntry("About"));
 }
 
-int backend_get_module_page(char * module_name, char * module_type)
-{	
+int backend_get_module_page(char *module_name, char *module_type)
+{
 	ModMap::iterator it;
 	gint module_index = 0;
 
-	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
-		     
+	for (it = mainMgr->Modules.begin();
+	     it != mainMgr->Modules.end(); it++) {
+
 		if (!strcmp((*it).second->Type(), module_type)) {
-			
+
 			if (!strcmp((*it).second->Name(), module_name)) {
 				return module_index;
 			}
-			++module_index;		
+			++module_index;
 		}
 	}
 	return -1;
@@ -891,8 +903,105 @@ int backend_get_module_page(char * module_name, char * module_type)
 
 char *backend_get_module_font_name(char *mod_name)
 {
-	SWModule *mod = mainMgr1->Modules[mod_name];
-	char *buf = (gchar*)mod->getConfigEntry("Font");
-	return buf;	
+	SWModule *mod = mainMgr->Modules[mod_name];
+	char *buf = (gchar *) mod->getConfigEntry("Font");
+	return buf;
+}
+
+gboolean backend_module_is_locked(char *mod_name)
+{
+	SectionMap::iterator section;
+	ConfigEntMap::iterator entry;
+	DIR *dir;
+	gchar buf[256], conffile[256];
+	struct dirent *ent;
+	bool retval = false;
+
+	sprintf(buf, "%s", mainMgr->configPath);
+	dir = opendir(buf);
+	if (dir) {		//-- find and update .conf file
+		rewinddir(dir);
+		while ((ent = readdir(dir))) {
+			if ((strcmp(ent->d_name, "."))
+			    && (strcmp(ent->d_name, ".."))) {
+				sprintf(conffile, "%s/%s", buf,
+					ent->d_name);
+				SWConfig *myConfig =
+				    new SWConfig(conffile);
+				section =
+				    myConfig->Sections.find(mod_name);
+				if (section != myConfig->Sections.end()) {
+					entry =
+					    section->second.
+					    find("CipherKey");
+					if (entry !=
+					    section->second.end()) {
+						if (strlen
+						    (entry->second.
+						     c_str()) ==
+						    CIPHER_KEY_LEN)
+							retval = false;
+						else
+							retval = true;
+						delete myConfig;
+						closedir(dir);
+						return retval;
+					}
+				}
+				delete myConfig;
+			}
+		}
+	}
+	closedir(dir);
+	return false;
+}
+
+char *backend_get_cipher_key(char *mod_name)
+{
+	SectionMap::iterator section;
+	ConfigEntMap::iterator entry;
+	DIR *dir;
+	gchar buf[256], conffile[256];
+	struct dirent *ent;
+	char *retval = NULL;
+
+	sprintf(buf, "%s", mainMgr->configPath);
+	dir = opendir(buf);
+	if (dir) {		//-- find and update .conf file
+		rewinddir(dir);
+		while ((ent = readdir(dir))) {
+			if ((strcmp(ent->d_name, "."))
+			    && (strcmp(ent->d_name, ".."))) {
+				sprintf(conffile, "%s/%s", buf,
+					ent->d_name);
+				SWConfig *myConfig =
+				    new SWConfig(conffile);
+				section =
+				    myConfig->Sections.find(mod_name);
+				if (section != myConfig->Sections.end()) {
+					entry =
+					    section->second.
+					    find("CipherKey");
+					if (entry !=
+					    section->second.end()) {
+						if (strlen
+						    (entry->second.
+						     c_str()) ==
+						    CIPHER_KEY_LEN)
+							retval = (char*)entry->second.
+						     c_str();
+						else
+							retval = NULL;
+						delete myConfig;
+						closedir(dir);
+						return retval;
+					}
+				}
+				delete myConfig;
+			}
+		}
+	}
+	closedir(dir);
+	return NULL;	
 }
 /******   end of file   ******/

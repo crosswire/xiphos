@@ -18,6 +18,8 @@ CXXFLAGS =  \
     $(SWORD_CPPFLAGS)
     
 libbackend_a_SOURCES =  \
+    bibletext.cpp \
+    bibletext.h \
     bookmarks.cpp \
     bookmarks.h \
     commentary.cpp \

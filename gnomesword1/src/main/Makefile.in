@@ -151,6 +151,8 @@ INCLUDES = \
 bin_PROGRAMS = gnomesword
 
 COMMON_SOURCE = \
+    gs_bibletext.c \
+    gs_bibletext.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
     gs_commentary.c \
@@ -205,8 +207,6 @@ COMMON_SOURCE = \
     gs_setup.h \
     gs_shortcutbar.c \
     gs_shortcutbar.h \
-    gs_unlockkey_dlg.c \
-    gs_unlockkey_dlg.h \
     gs_viewcomm_dlg.c \
     gs_viewcomm_dlg.h \
     gs_viewdict_dlg.c \
@@ -262,9 +262,10 @@ bin_PROGRAMS = gnomesword$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
 am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
-	char_table.$(OBJEXT) gs_bookmarks.$(OBJEXT) \
-	gs_commentary.$(OBJEXT) gs_detach_int.$(OBJEXT) \
-	gs_detach_sb.$(OBJEXT) gs_dictlex.$(OBJEXT) gs_editor.$(OBJEXT) \
+	char_table.$(OBJEXT) gs_bibletext.$(OBJEXT) \
+	gs_bookmarks.$(OBJEXT) gs_commentary.$(OBJEXT) \
+	gs_detach_int.$(OBJEXT) gs_detach_sb.$(OBJEXT) \
+	gs_dictlex.$(OBJEXT) gs_editor.$(OBJEXT) \
 	gs_editor_replace.$(OBJEXT) gs_editor_search.$(OBJEXT) \
 	gs_editor_toolbar.$(OBJEXT) gs_file.$(OBJEXT) \
 	gs_find_dlg.$(OBJEXT) gs_gbs.$(OBJEXT) gs_getinfo_dlg.$(OBJEXT) \
@@ -274,9 +275,8 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_mainmenu_cb.$(OBJEXT) gs_menu.$(OBJEXT) \
 	gs_popup_cb.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
 	gs_setup.$(OBJEXT) gs_shortcutbar.$(OBJEXT) \
-	gs_unlockkey_dlg.$(OBJEXT) gs_viewcomm_dlg.$(OBJEXT) \
-	gs_viewdict_dlg.$(OBJEXT) gs_viewtext_dlg.$(OBJEXT) \
-	main.$(OBJEXT) support.$(OBJEXT)
+	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
+	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT)
 gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
 gnomesword_DEPENDENCIES = $(top_builddir)/src/backend/libbackend.a \
 	$(top_builddir)/src/gnome/libgui.a
@@ -289,7 +289,7 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/char_table.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gs_bibletext.Po $(DEPDIR)/gs_bookmarks.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_commentary.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_int.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_detach_sb.Po $(DEPDIR)/gs_dictlex.Po \
@@ -308,7 +308,6 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/gs_popup_cb.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_preferences_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_setup.Po $(DEPDIR)/gs_shortcutbar.Po \
-@AMDEP_TRUE@	$(DEPDIR)/gs_unlockkey_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewcomm_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewdict_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gs_viewtext_dlg.Po $(DEPDIR)/main.Po \
@@ -381,6 +380,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/char_table.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bibletext.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_bookmarks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_commentary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_detach_int.Po@am__quote@
@@ -408,7 +408,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_preferences_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_setup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_shortcutbar.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_unlockkey_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewcomm_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewdict_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/gs_viewtext_dlg.Po@am__quote@

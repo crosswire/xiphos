@@ -35,33 +35,35 @@ extern "C" {
 
 #include "gs_gnomesword.h"
 
-typedef struct _DLFindDialog  DLFindDialog;
-struct _DLFindDialog {
-	GnomeDialog *dialog;
-	GtkWidget   *htmlwidget;
-	GtkWidget   *entry;
-	GtkWidget   *backward;
-	GtkWidget   *case_sensitive;
-	gboolean     regular;
-};
+	typedef struct _DLFindDialog DLFindDialog;
+	struct _DLFindDialog {
+		GnomeDialog *dialog;
+		GtkWidget *htmlwidget;
+		GtkWidget *entry;
+		GtkWidget *backward;
+		GtkWidget *case_sensitive;
+		gboolean regular;
+	};
 
-typedef struct _dldata DL_DATA;
-struct _dldata {
-	GtkWidget *html;
-	GtkWidget *clist;
-	GtkWidget *entry;
-	GtkWidget *showtabs;
-	gchar *modName;
-	gchar *modDescription;
-	gchar *searchstring;
-	DLFindDialog *find_dialog;
-};	
+	typedef struct _dldata DL_DATA;
+	struct _dldata {
+		GtkWidget *html;
+		GtkWidget *clist;
+		GtkWidget *entry;
+		GtkWidget *showtabs;
+		gchar *modName;
+		gchar *modDescription;
+		gchar *searchstring;
+		gboolean has_key;
+		DLFindDialog *find_dialog;
+	};
 
 
-void gui_setupDL(SETTINGS *s);
-void gui_shutdownDL(void);
-void gui_set_dictionary_page_and_key(gint page_num, gchar *key);
+	void gui_setupDL(SETTINGS * s);
+	void gui_shutdownDL(void);
+	void gui_set_dictionary_page_and_key(gint page_num,
+					     gchar * key);
 #ifdef __cplusplus
 }
 #endif
-#endif	/* __GS_DICTLEX_H_ */
+#endif				/* __GS_DICTLEX_H_ */
