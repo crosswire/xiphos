@@ -157,7 +157,7 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
 						gpointer user_data)
 {	
-	backend_display_devotional(settings);
+	display_devotional(settings);
 }
 
 /******************************************************************************
