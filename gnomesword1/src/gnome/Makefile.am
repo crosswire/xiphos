@@ -8,7 +8,7 @@ INCLUDES =  \
 
 EXTRA_DIST =  \
 	$(top_builddir)/src/gui/*.h \
-	shortcutbar.h
+	shortcutbar.h 
 
 bin_PROGRAMS = gnomesword-1.0
 
