@@ -60,7 +60,8 @@ extern GtkWidget *appbar1;
 extern gboolean noteModified;
 extern gboolean block_font_style_change;
 typedef struct _GtkHTMLEditTextProperties GtkHTMLEditTextProperties;
-
+	
+/*
 #define STYLES 4
 static GtkHTMLFontStyle styles [STYLES] = {
 	GTK_HTML_FONT_STYLE_BOLD,
@@ -68,6 +69,7 @@ static GtkHTMLFontStyle styles [STYLES] = {
 	GTK_HTML_FONT_STYLE_UNDERLINE,
 	GTK_HTML_FONT_STYLE_STRIKEOUT,
 };
+*/
 
 static gboolean
 save_receiver  (const HTMLEngine *engine,
@@ -114,8 +116,6 @@ void savenoteHTML(GtkWidget *app)
 *****************************************************************************/
 void boldHTML(GtkWidget *widget, GtkWidget *html_widget)    
 {
-	/*gtk_html_set_font_style(GTK_HTML(html_widget),GTK_HTML_FONT_STYLE_BOLD , 
-			GTK_HTML_FONT_STYLE_BOLD);	*/
 	if(!block_font_style_change) {
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
 			gtk_html_set_font_style (GTK_HTML (html_widget),
@@ -186,9 +186,7 @@ static gboolean
 on_htmlComments_key_press_event(GtkWidget * widget,
 				GdkEventKey * event, gpointer user_data)
 {
-//	gchar *buf;
-	//static gboolean needsecond = FALSE;
-	g_warning("key_press_event");
+//	g_warning("key_press_event");
 	noteModified = TRUE;	//-- noteeditor.cpp
 	return TRUE;
 }

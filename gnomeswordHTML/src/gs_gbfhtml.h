@@ -1,10 +1,10 @@
 /***************************************************************************
-                          thmlhtml.h  -  description
+                          gbfhtml.h  -  description
                              -------------------
-    begin                : 1999-10-28
+    begin                : Tue Jun 15 15:34:26 CEST 1999
 
-    copyright            : 1999 by Chris Little
-    email                : chrislit@chiasma.org
+    copyright            : (C) 1999 by Torsten Uhlmann
+    email                : TUhlmann@gmx.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -16,16 +16,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef GS_THMLHTML_H
-#define GS_THMLHTML_H
+/* $Header$ */
+/* $Revision$ */
+
+#ifndef GS_GBFHTML_H
+#define GS_GBFHTML_H
 
 #include <swfilter.h>
 
-class GS_ThMLHTML : public SWFilter {
+#include <defs.h>
+
+  /** This filter converts GBF Text into HTML
+  */
+class SWDLLEXPORT GS_GBFHTML:public SWFilter
+{
 public:
-	GS_ThMLHTML();
-	virtual char ProcessText(char *text, int maxlen = -1);
+  GS_GBFHTML ();
+  virtual char ProcessText (char *text, int maxlen, const SWKey * key);
 };
 
 #endif
-

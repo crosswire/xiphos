@@ -192,42 +192,6 @@ gboolean on_cbeFreeformLookup_drag_drop(GtkWidget * widget,
 					   gint x,
 					   gint y,
 					   guint time, gpointer user_data);
-void on_moduleText_drag_begin(GtkWidget * widget,
-				  GdkDragContext * drag_context,
-				  gpointer user_data);
-void on_textCommentaries_drag_begin(GtkWidget * widget,
-					GdkDragContext * drag_context,
-					gpointer user_data);
-void on_textDict_drag_begin(GtkWidget * widget,
-				GdkDragContext * drag_context,
-				gpointer user_data);
-void on_textComments_drag_begin(GtkWidget * widget,
-				    GdkDragContext * drag_context,
-				    gpointer user_data);
-void on_textComments_drag_data_get(GtkWidget * widget,
-				       GdkDragContext * drag_context,
-				       GtkSelectionData * data,
-				       guint info,
-				       guint time, gpointer user_data);
-void on_textComments_drag_data_received(GtkWidget * widget,
-					    GdkDragContext * drag_context,
-					    gint x,
-					    gint y,
-					    GtkSelectionData * data,
-					    guint info,
-					    guint time,
-					    gpointer user_data);
-gboolean on_textComments_drag_drop(GtkWidget * widget,
-				      GdkDragContext * drag_context,
-				      gint x,
-				      gint y,
-				      guint time, gpointer user_data);
-gboolean on_textComments_key_press_event(GtkWidget * widget,
-					    GdkEventKey * event,
-					    gpointer user_data);
-gboolean on_moduleText_enter_notify_event(GtkWidget * widget,
-					     GdkEventCrossing * event,
-					     gpointer user_data);
 void on_btnBack_clicked(GtkButton * button, gpointer user_data);
 void on_btnFoward_clicked(GtkButton * button, gpointer user_data);
 void on_btnComPrev_clicked(GtkButton * button, gpointer user_data);
