@@ -1004,7 +1004,7 @@ static GnomeUIInfo results_menu_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("Save List"),
 	 N_("Save the search results as bookmarks"),
 	 (gpointer) on_save_list_as_bookmarks_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-numbered-list",
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_TEXT_NUMBERED_LIST,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
@@ -1049,7 +1049,7 @@ static GnomeUIInfo menu_modules_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("About"),
 	 N_("View information about the selected dialog"),
 	 (gpointer) on_about2_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
@@ -1226,7 +1226,7 @@ static void create_search_results_page(GtkWidget * notebook)
 				       (scrolledwindow1),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(scrolledwindow1, -2, 75);
+	gtk_widget_set_size_request(scrolledwindow1, -1, 75);
 
 	vl_html = gtk_html_new();
 	gtk_widget_show(vl_html);
@@ -1260,7 +1260,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_modules_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK,
-	 "gnome-stock-book-red", 0,
+	 GNOME_STOCK_BOOK_RED, 0,
 	 (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM,
@@ -1276,7 +1276,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_search_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK,
-	 "gtk-find",
+	 GTK_STOCK_FIND,
 	 0,
 	 (GdkModifierType) 0, NULL},
 	{
@@ -1286,7 +1286,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (gpointer) on_search_results_activate, NULL,
 	 NULL,
 	 GNOME_APP_PIXMAP_STOCK,
-	 "gnome-stock-text-bulleted-list",
+	 GNOME_STOCK_TEXT_BULLETED_LIST,
 	 0,
 	 (GdkModifierType) 0, NULL},
 	{
@@ -1295,7 +1295,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 NULL,
 	 (gpointer) on_viewer_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK,
-	 "gtk-justify-left",
+	 GTK_STOCK_JUSTIFY_LEFT,
 	 0,
 	 (GdkModifierType)
 	 0,
