@@ -28,6 +28,11 @@
 #include <gal/e-paned/e-vpaned.h>
 #include <gal/shortcut-bar/e-shortcut-bar.h>
 
+/* frontend */
+#include "main_menu.h"
+#include "preferences_dialog.h"
+
+/* main */
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_html.h"
@@ -36,11 +41,8 @@
 #include "gs_menu.h"
 #include "about_gnomesword.h"
 #include "about_sword.h"
-#include "gs_preferences_dlg.h"
 #include "gs_history.h"
 
-/* gnome */
-#include "main_menu.h"
 
 GtkWidget *htmlTexts;
 
@@ -177,7 +179,7 @@ void on_daily_devotion1_activate(GtkMenuItem *menuitem,
  
 void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	setup_preferences_dlg(&settings);
+	gui_setup_preferences_dialog(&settings);
 }
 
 /******************************************************************************
