@@ -19,9 +19,10 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gnome.h> 
 
 #include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlengine.h>
 #include <gtkhtml/htmlobject.h>
 #include <gtkhtml/htmlengine-edit-clueflowstyle.h>
 #include <gtkhtml/htmlengine-edit-cut-and-paste.h>
@@ -47,21 +48,20 @@
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;
 
-GtkWidget *htmlCommentaries;
-GtkWidget *htmlTexts;
-GtkWidget *htmlDict;
-GtkWidget *textDict;
-GtkWidget *htmlComments;
-GtkWidget *textComments;
-GtkWidget *noteEditor;
-GtkWidget *statusbarNE;
+//extern GtkWidget *htmlCommentaries;
+extern GtkWidget *htmlTexts;
+extern GtkWidget *htmlDict;
+extern GtkWidget *htmlComments;
+//extern GtkWidget *textComments;
+//extern GtkWidget *textComp1;
+//GtkWidget *noteEditor;
+
 
 static gboolean was_editable;
 
 //GString *gstr;
 extern GtkWidget *MainFrm;
-extern GtkWidget *textDict;
-GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
+extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern GtkWidget *appbar1;
 extern gboolean noteModified;
 extern gboolean block_font_style_change;
@@ -236,8 +236,7 @@ void strikeoutHTML(GtkWidget *widget, GtkWidget *html_widget)
 /***************************************************************************************************
  *
  ***************************************************************************************************/
-static gboolean
-on_htmlComments_key_press_event(GtkWidget * widget,
+gboolean on_htmlComments_key_press_event(GtkWidget * widget,
 				GdkEventKey * event, gpointer user_data)
 {
 //	g_warning("key_press_event");
@@ -306,8 +305,7 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 /***************************************************************************************************
  *link in text window clicked
  ***************************************************************************************************/
-static void
-on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
+void on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, tmpbuf[255];
 	gint i = 0;
@@ -346,19 +344,19 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *widget;
-//	gchar *buf;
+	gchar *buf;
 	GtkHTML *html;
 
 	widget = lookup_widget(MainFrm, (gchar *) user_data);	
 	html = GTK_HTML(widget);
 	gtk_html_copy (html);
-	/*
+	
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	
 	g_string_free(gs_clipboard,TRUE);
-	gs_clipboard = g_string_new(buf); */
+	gs_clipboard = g_string_new(buf); 
 	//g_print(gs_clipboard->str);
 }
 /***************************************************************************************************
@@ -380,7 +378,7 @@ void pasteHTML(GtkWidget *html_widget)
 void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-/*	GtkWidget *widget;
+	GtkWidget *widget;
 	gchar *buf;
 	GtkHTML *html;
 
@@ -391,7 +389,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	if (buf)
-		dictSearchTextChangedSWORD(buf); */
+		dictSearchTextChangedSWORD(buf); 
 }
 
 /***************************************************************************************************
@@ -400,7 +398,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
-/*	GtkWidget *widget;
+	GtkWidget *widget;
 	gchar *buf;
 	GtkHTML *html;
 
@@ -411,99 +409,11 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	if (buf)
-		changeVerseSWORD(buf); */
+		changeVerseSWORD(buf); 
 }
 
 /***************************************************************************************************
- *add_gtkhtml_widgets -- add the gthhtml widgets
- ***************************************************************************************************/
-void add_gtkhtml_widgets(GtkWidget * app)
-{
-	GtkWidget *textComp1;
-	EDITOR ed;
-	
-	htmlTexts = gtk_html_new();
-	gtk_widget_ref(htmlTexts);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "htmlTexts", htmlTexts,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlTexts);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlBible")),
-			  htmlTexts);
-	gtk_html_load_empty(GTK_HTML(htmlTexts));
-
-	htmlCommentaries = gtk_html_new();
-	gtk_widget_ref(htmlCommentaries);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "htmlCommentaries", htmlCommentaries,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlCommentaries);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlCom")),
-			  htmlCommentaries);
-	gtk_html_load_empty(GTK_HTML(htmlCommentaries));	
-	 
-	ed.vbox = lookup_widget(app,"vbox8"); 
-	ed.htmlwidget = gtk_html_new();
-	ed.text = gtk_text_new(NULL, NULL);
-	ed.statusbar = gtk_statusbar_new();
-	ed.notebook = gtk_notebook_new();
-	ed.note_editor = TRUE;
-	
-	htmlComments = create_editor(app, ed);	  
-	statusbarNE = ed.statusbar;
-	textComments = ed.text;
-	
-	textComp1 = gtk_html_new();
-	gtk_widget_ref(textComp1);
-	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
-				 textComp1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(textComp1);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "scrolledwindow15")),
-			  textComp1);
-	gtk_html_load_empty(GTK_HTML(textComp1));		  
-			  
-	htmlDict = gtk_html_new();
-	gtk_widget_ref(htmlDict);	
-	gtk_object_set_data_full(GTK_OBJECT(app), "htmlDict",
-				 htmlDict,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(htmlDict);
-	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "scrolledwindow8")), htmlDict);
-	gtk_html_load_empty(GTK_HTML(htmlDict));
-
-	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
-	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
-
-	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
-
-	gtk_signal_connect(GTK_OBJECT(ed.htmlwidget), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (ed.htmlwidget), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
-	gtk_signal_connect(GTK_OBJECT(ed.htmlwidget), "key_press_event",
-			   GTK_SIGNAL_FUNC(on_htmlComments_key_press_event), NULL);		   
-
-	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
-	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
-			   
-	gtk_signal_connect (GTK_OBJECT (htmlDict), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
-	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
-
-}
-
-/***************************************************************************************************
- *beginHTML
+ *beginHTML - start loading html widget
  ***************************************************************************************************/
 void beginHTML(GtkWidget *html_widget)
 {
@@ -517,7 +427,7 @@ void beginHTML(GtkWidget *html_widget)
 }
 
 /***************************************************************************************************
- *endHTML
+ *endHTML - stop loading html widget
  ***************************************************************************************************/
 void endHTML(GtkWidget * html_widget)
 {
@@ -531,7 +441,7 @@ void endHTML(GtkWidget * html_widget)
 }
 
 /***************************************************************************************************
- *displayHTML
+ *displayHTML - load data in html widget
  ***************************************************************************************************/
 void displayHTML(GtkWidget * html, gchar * txt, gint lentxt)
 {
@@ -543,9 +453,9 @@ void displayHTML(GtkWidget * html, gchar * txt, gint lentxt)
 /***************************************************************************************************
  *gotoanchorHTML
  ***************************************************************************************************/
-void gotoanchorHTML(gchar * verse)
+void gotoanchorHTML(gchar * verse, GtkWidget *html_widget)
 {
-	gtk_html_jump_to_anchor(GTK_HTML(htmlTexts), verse);
+	gtk_html_jump_to_anchor(GTK_HTML(html_widget), verse);
 }
 
 /***************************************************************************************************

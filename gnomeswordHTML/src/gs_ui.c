@@ -42,24 +42,33 @@
 #include "gs_studypad.h"
 #include "gs_editor.h"
 #include "gs_ui.h"
+#include "gs_html.h"
 #include "support.h"
 #include "gs_popup_cb.h"
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/e-paned/e-vpaned.h>
 
-#ifdef USE_SPELL
+#ifdef USE_SPELL		/* USE_SPELL */
 #include "spell.h"
 #include "spell_gui.h"
 #endif				/* USE_SPELL */
+
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 GtkWidget *shortcut_bar, *appbar1;
 GtkWidget *htmltext3;
 GtkWidget *text3;
 GtkWidget *statusbar2;
+GtkWidget *htmlCommentaries;
+GtkWidget *htmlTexts;
+GtkWidget *textComp1;
+GtkWidget *htmlDict;
+GtkWidget *htmlComments;
+GtkWidget *statusbarNE;
+GtkWidget *textComments;
+GList *cbBook_items = NULL;
 
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
-//GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 gint openWidth = 800;
 gint openHight = 600;
 
@@ -76,7 +85,7 @@ gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 };
 
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
-GtkWidget *main_label;
+//GtkWidget *main_label;
 EShortcutModel *shortcut_model;
 static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 				const gchar * url, gpointer data);
@@ -328,7 +337,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 
 GtkWidget *create_mainwindow(void)
 {
-	EDITOR ed;
+	EDITOR ed_sp, ed_pc;
 	GtkWidget *mainwindow;
 	GtkWidget *dock1;
 	GtkWidget *toolbar20;
@@ -337,7 +346,6 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *btnStrongs;
 	GtkWidget *btnSB;
 	GtkWidget *cbBook;
-	GList *cbBook_items = NULL;
 	GtkWidget *cbeBook;
 	GtkObject *spbChapter_adj;
 	GtkWidget *spbChapter;
@@ -372,15 +380,6 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *vbox2;
 	GtkWidget *hbox11;
 	GtkWidget *vbox8;
-	/*
-	GtkWidget *handlebox16;
-	GtkWidget *tbNotes;
-	GtkWidget *tbtnFollow;
-	GtkWidget *btnEditNote;
-	GtkWidget *btnSaveNote;
-	GtkWidget *btnDeleteNote;
-	GtkWidget *btnSpellNotes;
-	*/
 	GtkWidget *label85;
 	GtkWidget *vbox3;
 	GtkWidget *frame2;
@@ -390,22 +389,6 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *label12;
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
-/*	GtkWidget *handlebox10;
-	GtkWidget *toolbar5;
-	GtkWidget *btnSPnew;
-	GtkWidget *btnOpenFile;
-	GtkWidget *btnSaveFile;
-	GtkWidget *btnSaveFileAs;
-	GtkWidget *vseparator9;
-	GtkWidget *btnPrint;
-	GtkWidget *vseparator10;
-	GtkWidget *btnCut;
-	GtkWidget *btnCopy;
-	GtkWidget *btnPaste;
-	GtkWidget *vseparator11;
-	GtkWidget *btnSpell;
-*/
-	//GtkWidget *scrolledwindow17;
 	GtkWidget *label41;
 	GtkWidget *hbox8;
 	GtkWidget *frame10;
@@ -413,7 +396,6 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *vbox1;
 	GtkWidget *notebook4;
 	GtkWidget *scrolledwindow8;
-//	GtkWidget *textDict;
 	GtkWidget *vbox14;
 	GtkWidget *hbox19;
 	GtkWidget *toolbar25;
@@ -424,9 +406,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *label58;
 	GtkWidget *hbox25;
 	gint i;
-	gchar *pathname;
-	
-	
+	gchar *pathname;	
 	
 	mainwindow =
 	    gnome_app_new("gnomesword",
@@ -747,7 +727,8 @@ GtkWidget *create_mainwindow(void)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar20), cbBook, NULL,
 				  NULL);
 	gtk_widget_set_usize(cbBook, 154, -2);
-	cbBook_items = g_list_append(cbBook_items, "Genesis");
+	
+/*	cbBook_items = g_list_append(cbBook_items, "Genesis");
 	cbBook_items = g_list_append(cbBook_items, "Exodus");
 	cbBook_items = g_list_append(cbBook_items, "Leviticus");
 	cbBook_items = g_list_append(cbBook_items, "Numbers");
@@ -815,7 +796,7 @@ GtkWidget *create_mainwindow(void)
 	cbBook_items = g_list_append(cbBook_items, "Revelation");
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
 	g_list_free(cbBook_items);
-
+*/
 	cbeBook = GTK_COMBO(cbBook)->entry;
 	gtk_widget_ref(cbeBook);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "cbeBook",
@@ -927,7 +908,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnExit);
 
-//---------------------------------------------------------------------------------------------------
+//----------------------------------------------
 	hbox25 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox25);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hbox25", hbox25,
@@ -942,7 +923,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(epaned);
 	gtk_box_pack_start(GTK_BOX(hbox25), epaned, TRUE, TRUE, 0);
 	e_paned_set_position(E_PANED(epaned), 120);
-
+	
 	shortcut_model = e_shortcut_model_new();
 
 	shortcut_bar = e_shortcut_bar_new();
@@ -962,7 +943,6 @@ GtkWidget *create_mainwindow(void)
 
 	mainPanel = gtk_vbox_new(FALSE, 0);
 	e_paned_pack2(E_PANED(epaned), mainPanel, TRUE, TRUE);
-	//gtk_box_pack_start(GTK_BOX(hbox25), mainPanel, TRUE, TRUE, 0);
 	gtk_widget_show(mainPanel);
 	
 	
@@ -970,9 +950,8 @@ GtkWidget *create_mainwindow(void)
   gtk_widget_ref (vbox32);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "vbox32", vbox32,
                             (GtkDestroyNotify) gtk_widget_unref);
-  //gtk_widget_show (vbox32);
   gtk_box_pack_start (GTK_BOX (mainPanel), vbox32, FALSE, FALSE, 0);
-//-----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------
 	vpaned1 = e_vpaned_new();
 	gtk_widget_ref(vpaned1);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vpaned1",
@@ -981,7 +960,6 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vpaned1);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vpaned1, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vpaned1), 1);
-	//e_paned_set_position(E_PANED(vpaned1), 236);
 	e_paned_set_position (E_PANED(vpaned1), 325);
 	
 	hbox2 = gtk_hbox_new(FALSE, 0);
@@ -998,7 +976,6 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpaned1);
 	gtk_box_pack_end(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
-
 
 	frame9 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame9);
@@ -1029,7 +1006,16 @@ GtkWidget *create_mainwindow(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);	
 				       
-	/* htmlTexts goes here */
+	/*                           htmlTexts goes here                              */	
+	htmlTexts = gtk_html_new();
+	gtk_widget_ref(htmlTexts);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
+				 "htmlTexts", htmlTexts,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlTexts);
+	gtk_container_add(GTK_CONTAINER(swHtmlBible),
+			  htmlTexts);
+	gtk_html_load_empty(GTK_HTML(htmlTexts));
 
 	notebook3 = gtk_notebook_new();
 	gtk_widget_ref(notebook3);
@@ -1087,7 +1073,16 @@ GtkWidget *create_mainwindow(void)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	/* htmlCommentaries goes here */
+	/***                htmlCommentaries goes here                  ***/	
+	htmlCommentaries = gtk_html_new();
+	gtk_widget_ref(htmlCommentaries);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
+				 "htmlCommentaries", htmlCommentaries,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlCommentaries);
+	gtk_container_add(GTK_CONTAINER(swHtmlCom),
+			  htmlCommentaries);
+	gtk_html_load_empty(GTK_HTML(htmlCommentaries));		 
 
 	handlebox17 = gtk_handle_box_new();
 	gtk_widget_ref(handlebox17);
@@ -1164,100 +1159,17 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vbox8);
 	gtk_box_pack_start(GTK_BOX(hbox11), vbox8, TRUE, TRUE, 0);
 
-/*
-	handlebox16 = gtk_handle_box_new();
-	gtk_widget_ref(handlebox16);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "handlebox16",
-				 handlebox16,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(handlebox16);
-	gtk_box_pack_start(GTK_BOX(hbox11), handlebox16, FALSE, FALSE, 0);
-	gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(handlebox16),
-				       GTK_SHADOW_NONE);
-	gtk_handle_box_set_handle_position(GTK_HANDLE_BOX(handlebox16),
-					   GTK_POS_TOP);
-	tbNotes =
-	    gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(tbNotes);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "tbNotes",
-				 tbNotes,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(tbNotes);
-	gtk_container_add(GTK_CONTAINER(handlebox16), tbNotes);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(tbNotes),
-				      GTK_RELIEF_NONE);
+	ed_pc.vbox = lookup_widget(mainwindow,"vbox8"); 
+	ed_pc.htmlwidget = gtk_html_new();
+	ed_pc.text = gtk_text_new(NULL, NULL);
+	ed_pc.statusbar = gtk_statusbar_new();
+	ed_pc.notebook = gtk_notebook_new();
+	ed_pc.note_editor = TRUE;
+	
+	htmlComments = create_editor(mainwindow, ed_pc);	  
+	statusbarNE = ed_pc.statusbar;
+	textComments = ed_pc.text;		
 
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	tbtnFollow =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, "togglebutton1",
-				       "Follow Main Text Window", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(tbtnFollow);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "tbtnFollow",
-				 tbtnFollow,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(tbtnFollow);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(tbtnFollow), TRUE);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_PROPERTIES);
-	btnEditNote =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, "Edit", "Edit note", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnEditNote);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnEditNote",
-				 btnEditNote,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnEditNote);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow, GNOME_STOCK_PIXMAP_ADD);
-	btnSaveNote =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Save", "Save note", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSaveNote);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnSaveNote",
-				 btnSaveNote,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSaveNote);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_REMOVE);
-	btnDeleteNote =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Delete", "Delete note", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnDeleteNote);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnDeleteNote",
-				 btnDeleteNote,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnDeleteNote);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_SPELLCHECK);
-	btnSpellNotes =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(tbNotes),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "button1", "Start Spell Check",
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSpellNotes);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnSpellNotes",
-				 btnSpellNotes,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSpellNotes);
-*/
 	label85 = gtk_label_new("Comments Editor");
 	gtk_widget_ref(label85);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "label85",
@@ -1290,9 +1202,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox4);
 	gtk_container_add(GTK_CONTAINER(frame2), vbox4);
-
-
-
+	
 	scrolledwindow15 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow15);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
@@ -1305,7 +1215,17 @@ GtkWidget *create_mainwindow(void)
 				       (scrolledwindow15),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-				       
+	
+	textComp1 = gtk_html_new();
+	gtk_widget_ref(textComp1);
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "textComp1",
+				 textComp1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(textComp1);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow15),
+			  textComp1);
+	gtk_html_load_empty(GTK_HTML(textComp1));	
+	
 	label12 = gtk_label_new("Interlinear");
 	gtk_widget_ref(label12);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "label12",
@@ -1331,217 +1251,19 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox6);
 	gtk_container_add(GTK_CONTAINER(frame12), vbox6);
-/*
-	handlebox10 = gtk_handle_box_new();
-	gtk_widget_ref(handlebox10);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "handlebox10",
-				 handlebox10,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(handlebox10);
-	gtk_box_pack_start(GTK_BOX(vbox6), handlebox10, FALSE, TRUE, 0);
-	gtk_handle_box_set_shadow_type(GTK_HANDLE_BOX(handlebox10),
-				       GTK_SHADOW_NONE);
-	gtk_handle_box_set_snap_edge(GTK_HANDLE_BOX(handlebox10),
-				     GTK_POS_LEFT);
+/*************************************************************
+studypad editor
+*************************************************************/
+	ed_sp.vbox = vbox6;
+	ed_sp.htmlwidget = gtk_html_new();
+	ed_sp.text = gtk_text_new(NULL, NULL);
+	ed_sp.notebook = gtk_notebook_new();
+	ed_sp.statusbar = gtk_statusbar_new();
+	ed_sp.note_editor = FALSE;
+	htmltext3 = create_editor(mainwindow, ed_sp);	  
+	statusbar2 = ed_sp.statusbar;
+	text3 = ed_sp.text;
 
-	toolbar5 =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar5);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "toolbar5",
-				 toolbar5,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar5);
-	gtk_container_add(GTK_CONTAINER(handlebox10), toolbar5);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar5),
-				      GTK_RELIEF_NONE);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow, GNOME_STOCK_PIXMAP_NEW);
-	btnSPnew =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "button1", "Start new document",
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSPnew);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnSPnew",
-				 btnSPnew,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSPnew);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow, GNOME_STOCK_PIXMAP_OPEN);
-	btnOpenFile =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Open", "Open File", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnOpenFile);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnOpenFile",
-				 btnOpenFile,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnOpenFile);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow, GNOME_STOCK_PIXMAP_SAVE);
-	btnSaveFile =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Save", "Save", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSaveFile);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnSaveFile",
-				 btnSaveFile,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSaveFile);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_SAVE_AS);
-	btnSaveFileAs =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Save As", "Save as", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSaveFileAs);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnSaveFileAs",
-				 btnSaveFileAs,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnSaveFileAs);
-
-	vseparator9 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator9);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vseparator9",
-				 vseparator9,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator9);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar5), vseparator9, NULL,
-				  NULL);
-	gtk_widget_set_usize(vseparator9, 7, 17);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_PRINT);
-	btnPrint =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Print", "Print ", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnPrint);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnPrint",
-				 btnPrint,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	vseparator10 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator10);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vseparator10",
-				 vseparator10,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator10);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar5), vseparator10,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator10, 7, 17);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow, GNOME_STOCK_PIXMAP_CUT);
-	btnCut =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Cut", "Cut to clipboard", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnCut);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnCut", btnCut,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnCut);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow, GNOME_STOCK_PIXMAP_COPY);
-	btnCopy =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Copy", "Copy to clipboard", NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnCopy);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnCopy",
-				 btnCopy,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnCopy);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_PASTE);
-	btnPaste =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "Paste", "Paste from clipborad",
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnPaste);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnPaste",
-				 btnPaste,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnPaste);
-
-	vseparator11 = gtk_vseparator_new();
-	gtk_widget_ref(vseparator11);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vseparator11",
-				 vseparator11,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator11);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar5), vseparator11,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator11, -2, 17);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(mainwindow,
-				      GNOME_STOCK_PIXMAP_SPELLCHECK);
-	btnSpell =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar5),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       "button8", "Start Spell Check",
-				       NULL, tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(btnSpell);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "btnSpell",
-				 btnSpell,
-				 (GtkDestroyNotify) gtk_widget_unref);
-*/
-	ed.vbox = vbox6;
-	ed.htmlwidget = gtk_html_new();
-	ed.text = gtk_text_new(NULL, NULL);
-	ed.notebook = gtk_notebook_new();
-	ed.statusbar = gtk_statusbar_new();
-	ed.note_editor = FALSE;
-	htmltext3 = create_editor(mainwindow, ed);	  
-	statusbar2 = ed.statusbar;
-	text3 = ed.text;
-/*
-	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow17);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
-				 "scrolledwindow17", scrolledwindow17,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow17);
-	gtk_box_pack_start(GTK_BOX(vbox6), scrolledwindow17, TRUE, TRUE,
-			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow17),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	text3 = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(text3);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "text3", text3,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(text3);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow17), text3);
-	gtk_text_set_editable(GTK_TEXT(text3), TRUE);
-
-	statusbar2 = gtk_statusbar_new();
-	gtk_widget_ref(statusbar2);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "statusbar2",
-				 statusbar2,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(statusbar2);
-	gtk_box_pack_start(GTK_BOX(vbox6), statusbar2, FALSE, TRUE, 0);
-*/
 	label41 = gtk_label_new("Study Pad");
 	gtk_widget_ref(label41);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "label41",
@@ -1614,11 +1336,19 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow8);
 	gtk_container_add(GTK_CONTAINER(framedict), scrolledwindow8);
-	//gtk_box_pack_start(GTK_BOX(vbox1), scrolledwindow8, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow8), GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-				       
+	
+	htmlDict = gtk_html_new();
+	gtk_widget_ref(htmlDict);	
+	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "htmlDict",
+				 htmlDict,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(htmlDict);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow8), htmlDict);
+	gtk_html_load_empty(GTK_HTML(htmlDict));
+	
 	vbox14 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox14);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vbox14", vbox14,
@@ -1702,7 +1432,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label58);
 	gtk_clist_set_column_widget(GTK_CLIST(list1), 0, label58);
-
+ 
 	appbar1 = gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER);
 	gtk_widget_ref(appbar1);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "appbar1",
@@ -1710,6 +1440,33 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(appbar1);
 	gnome_app_set_statusbar(GNOME_APP(mainwindow), appbar1);
+
+	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
+	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);			   
+ 
+	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);			   
+
+	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);		   
+	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+			   
+	gtk_signal_connect (GTK_OBJECT (htmlDict), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);		   
+	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+
+	gtk_signal_connect(GTK_OBJECT(ed_pc.htmlwidget), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+	gtk_signal_connect (GTK_OBJECT (ed_pc.htmlwidget), "on_url",
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)mainwindow);
+	gtk_signal_connect(GTK_OBJECT(ed_pc.htmlwidget), "key_press_event",
+			   GTK_SIGNAL_FUNC(on_htmlComments_key_press_event), NULL);	  
 
 	gtk_signal_connect(GTK_OBJECT(mainwindow), "destroy",
 			   GTK_SIGNAL_FUNC(on_mainwindow_destroy), NULL);
@@ -1751,16 +1508,6 @@ GtkWidget *create_mainwindow(void)
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComNext_clicked), NULL); 
-/*	gtk_signal_connect(GTK_OBJECT(tbtnFollow), "toggled",
-			   GTK_SIGNAL_FUNC(on_tbtnFollow_toggled), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnEditNote), "toggled",
-			   GTK_SIGNAL_FUNC(on_btnEditNote_toggled), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnSaveNote), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSaveNote_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnDeleteNote), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnDeleteNote_clicked),
-			   NULL);
-*/
 #ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(btnSpellNotes), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),
@@ -1776,25 +1523,6 @@ GtkWidget *create_mainwindow(void)
 			   GTK_SIGNAL_FUNC(on_btnComPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnComNext), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnComNext_clicked), NULL);
-/*
-	gtk_signal_connect(GTK_OBJECT(btnSPnew), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSPnew_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnOpenFile), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnOpenFile_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnSaveFile), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSaveFile_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnSaveFileAs), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSaveFileAs_clicked),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(btnPrint), "clicked",
-			   GTK_SIGNAL_FUNC(print_preview_cb), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnCut), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnCut_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnCopy), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnCopy_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnPaste), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnPaste_clicked), NULL);
-*/
 #ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(btnSpell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb),
@@ -1826,7 +1554,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(epaned), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_epaned_button_release_event),
 			   NULL);
-/* ------------------------------------------------------------------------- */
+/* ----------------------------------------------------- */
 	gtk_widget_pop_visual();
 	gtk_widget_pop_colormap();
 
@@ -1842,7 +1570,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
 			   NULL);
-/* ------------------------------------------------------------------------ */
+/* ---------------------------------------------------- */
 	gtk_widget_grab_focus(mainwindow);
 	return mainwindow;
 }

@@ -364,9 +364,7 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindowHTML),
 				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	
+				       GTK_POLICY_AUTOMATIC);	
 	
 	gtk_widget_show(ed->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowHTML), ed->htmlwidget);
@@ -436,7 +434,6 @@ GtkWidget *create_editor(GtkWidget *app1 ,EDITOR ed_widgets)
 							     (ed->notebook),
 							     1), label2);
 
-	//ed->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(ed->statusbar);
 	gtk_object_set_data_full(GTK_OBJECT(app1), "ed->statusbar",
 				 ed->statusbar,

@@ -24,15 +24,15 @@
 #include <config.h>
 #endif
 
-#include "gtkhtml.h"
-#include "htmlcursor.h"
-#include "htmlengine.h"
-#include "htmllinktext.h"
-#include "htmlengine-edit-cut-and-paste.h"
-#include "htmlimage.h"
-#include "htmlselection.h"
-#include "htmltable.h"
-#include "htmltablecell.h"
+#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlcursor.h>
+#include <gtkhtml/htmlengine.h>
+#include <gtkhtml/htmllinktext.h>
+#include <gtkhtml/htmlengine-edit-cut-and-paste.h>
+#include <gtkhtml/htmlimage.h>
+#include <gtkhtml/htmlselection.h>
+#include <gtkhtml/htmltable.h>
+#include <gtkhtml/htmltablecell.h>
 
 #include "body.h"
 //#include "cell.h"
@@ -294,7 +294,7 @@ prepare_properties_and_menu (GtkHTMLControlData *cd, guint *items)
 			ADD_PROP (TABLE);
 			ADD_ITEM (_("Table..."), prop_dialog, GTK_HTML_EDIT_PROPERTY_TABLE);
 		default:
-		}
+	}
 		if (obj->parent && obj->parent->parent && HTML_IS_TABLE_CELL (obj->parent->parent)) {
 			ADD_SEP;
 			ADD_PROP (CELL);

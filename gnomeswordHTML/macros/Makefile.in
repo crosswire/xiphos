@@ -122,7 +122,7 @@ CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
 DATA =  $(gnome_aclocal_DATA)
 
-DIST_COMMON =  Makefile.am Makefile.in
+DIST_COMMON =  ChangeLog Makefile.am Makefile.in
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)

@@ -222,6 +222,7 @@ text_properties (GtkHTMLControlData *cd, gpointer *set_data)
 					     &html_colorset_get_color (data->cd->html->engine->settings->color_set,
 								       HTMLTextColor)->color,
 					     color_group_fetch ("text", data->cd));
+		
         gtk_signal_connect (GTK_OBJECT (data->color_combo), "changed", GTK_SIGNAL_FUNC (color_changed), data);
 
 	vbox = gtk_vbox_new (FALSE, 0);
