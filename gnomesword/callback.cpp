@@ -636,9 +636,7 @@ void on_copy3_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;
 	text = lookup_widget(MainFrm, (gchar *) user_data);
-	/* g_warning((gchar *) user_data);
-	if(!strcmp((gchar *) user_data,"htmlCommentaries")) gtk_html_copy(GTK_HTML(htmlCommentaries));
-	else */
+	
 	gtk_editable_copy_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
 }
 

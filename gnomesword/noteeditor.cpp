@@ -118,3 +118,4 @@ NoteEditor::setNEWLINE(GtkWidget *text) //-- insert new line
 	gtk_text_insert(GTK_TEXT(text), NULL, &text->style->black, NULL, "<br>", -1); 	
 	return true;	
 }
+

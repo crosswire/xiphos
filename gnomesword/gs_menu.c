@@ -1190,3 +1190,4 @@ static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods)
 
 	return pmEditnote;
 }
+

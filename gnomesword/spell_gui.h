@@ -41,3 +41,4 @@ GtkWidget* create_spc_window (void);
 
 #endif							/* __SPC_H_ */
 
+

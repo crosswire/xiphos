@@ -42,3 +42,4 @@ void gotoanchorHTML(gchar *verse);
 }
 #endif
 
+

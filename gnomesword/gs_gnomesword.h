@@ -122,3 +122,4 @@ gchar *gdouble_arr_to_hex(gdouble *color,
 #ifdef __cplusplus
 }
 #endif
+

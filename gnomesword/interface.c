@@ -3370,3 +3370,4 @@ GtkWidget *create_dlgSettings(void)
 
 	return dlgSettings;
 }
+
