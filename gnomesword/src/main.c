@@ -37,7 +37,7 @@
 #include <gconf/gconf.h>
 #endif /* GTKHTML_HAVE_GCONF */
 
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_gnomesword.h"
 #include "gs_file.h"
 #include "gs_html.h"

@@ -43,7 +43,7 @@
 #include <treekeyidx.h>
 #include <rawgenbook.h>
 
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "sw_display.h"
 #include "gs_editor.h"
 #include "sw_gbs.h"
@@ -66,6 +66,25 @@ SWModule *curbookMod;
 SWMgr *swmgrBook;
 SWDisplay *bookDisplay; /* to display gbs modules */	
 
+/******************************************************************************
+ * check to see if mod is writable
+ ******************************************************************************/
+ /*
+bool isWritableSW_GBS(gchar *modName)
+{
+	gchar buf[255];
+	bool retval = false;
+		
+	sprintf(buf, "%s/modops.conf", gSwordDir);
+	SWConfig module_iswritable(buf);
+	module_iswritable.Load();	
+	retval = module_iswritable[modName]["IsWritable"];
+	
+	return retval;	
+}
+*/
+
+/***    ***/
 static bool changeBookMod(GSHTMLEditorControlData *ecd, gchar *newbook)
 {
 	ModMap::iterator it;	//-- module iterator		     
@@ -126,8 +145,10 @@ void addchildSW_GBS(SETTINGS *s, gchar *name)
 				     cell[1])->text;	
 	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
 				     cell[2])->text;
-	
-	if(strcmp(lastbook,bookname)){	
+				     
+	/** if we have changed to a different book **/
+	if(strcmp(lastbook,bookname)){
+		/**  change curbookMod to match  **/	
 		if(changeBookMod(gbsecd, bookname))
 			lastbook = bookname;
 		else return;
@@ -183,7 +204,9 @@ void addSiblingSW_GBS(SETTINGS *s, gchar *name)
 	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
 				     cell[2])->text;
 				     
+	/** if we have changed to a different book **/			     
 	if(strcmp(lastbook,bookname)){
+		/**  change curbookMod to match  **/
 		if(changeBookMod(gbsecd, bookname))
 			lastbook = bookname;
 		else return;
@@ -342,6 +365,57 @@ void addnewbookSW_GBS(SETTINGS *s, gchar *bookName, gchar *fileName)
 	delete book;
 }
 
+void changeNodeNameSW_GBS(SETTINGS *s, gchar *name)
+{
+	gchar *bookname, *offset;
+	static gchar *lastbook = "oldbook";
+	gchar tmpbuf[256];	
+	NODEDATA nodedata,
+		*p_nodedata;
+	
+	name = g_strchomp(name); //-- remove trailing spaces
+	p_nodedata = &nodedata;	
+		
+	bookname = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
+				     cell[1])->text;	
+	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
+				     cell[2])->text;
+				     
+	/** if we have changed to a different book **/
+	if(strcmp(lastbook,bookname)){	
+		/**  change curbookMod to match  **/
+		if(changeBookMod(gbsecd, bookname))
+			lastbook = bookname;
+		else return;
+	}	
+	
+	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
+	treeKey->setOffset(strtoul(offset,NULL,0));	
+	treeKey->setLocalName(name);
+	treeKey->save();
+	
+	p_nodedata->parent = current_node;
+	p_nodedata->sibling = NULL;	
+	p_nodedata->buf[0] = name;
+	p_nodedata->buf[1] = bookname;
+	p_nodedata->buf[2] = offset;
+	if(treeKey->hasChildren()){
+		p_nodedata->pixmap1 = pixmap1;
+		p_nodedata->mask1 = mask1;
+		p_nodedata->pixmap2 = pixmap2;
+		p_nodedata->mask2 = mask2;
+		p_nodedata->is_leaf = FALSE;
+		p_nodedata->expanded = FALSE;
+	} else {
+		p_nodedata->pixmap1 = pixmap3;
+		p_nodedata->mask1 = mask3;
+		p_nodedata->pixmap2 = NULL;
+		p_nodedata->mask2 = NULL;
+		p_nodedata->is_leaf = TRUE;
+		p_nodedata->expanded = FALSE;
+	}	
+	setnodeinfoGS_GBS(s, p_nodedata);	
+}
 /***  does nothing yet ****fixme****  ***/
 gint deleteNodeSW_GBS(SETTINGS *s)
 {
@@ -353,7 +427,9 @@ gint deleteNodeSW_GBS(SETTINGS *s)
 	offset = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(current_node)->row.
 				     cell[2])->text;
 				     
+	/** if we have changed to a different book **/			     
 	if(strcmp(lastbook,bookname)){
+		/**  change curbookMod to match  **/
 		if(changeBookMod(gbsecd, bookname))
 			lastbook = bookname;
 		else return 0;
@@ -361,6 +437,9 @@ gint deleteNodeSW_GBS(SETTINGS *s)
 	
 	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
 	treeKey->setOffset(strtoul(offset,NULL,0));
+	//curbookMod->deleteEntry();
+	//treeKey->remove();
+	//treeKey->save();
 	return 0;
 }
 
@@ -396,6 +475,7 @@ on_ctreeBooks_select_row(GtkCList * clist,
 				     
 	/** if we have changed to a different book **/			     
 	if(strcmp(lastbook,bookname)){
+		/**  change curbookMod to match  **/
 		if(changeBookMod(gbsecd, bookname))
 			lastbook = bookname;
 		else 

@@ -34,7 +34,7 @@
 #include <gtkhtml/gtkhtml.h>
 #include "gs_undock_int.h"
 #include "gs_gnomesword.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 
 GtkWidget *Interlinear_UnDock_Dialog;
 GtkWidget *vboxInt;

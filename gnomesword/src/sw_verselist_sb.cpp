@@ -38,7 +38,7 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "gs_gnomesword.h"
-#include "sw_gnomesword.h"
+#include "sw_sword.h"
 #include "gs_html.h"
 #include "sw_display.h"
 #include "gs_shortcutbar.h"

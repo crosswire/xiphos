@@ -25,7 +25,11 @@
     *  along with this program; if not, write to the Free Software
     *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
-
+  
+/* 
+ * dialog used to display information (strongs etc) from view(text, comm, dict) dialogs
+ *
+ */
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -33,7 +37,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include "gs_information_dlg.h"
-#include "gs_information_sw.h"
+#include "sw_information_dlg.h"
 
 gboolean gsI_isrunning = FALSE;
 

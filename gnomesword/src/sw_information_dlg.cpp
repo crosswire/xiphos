@@ -38,7 +38,7 @@
 #include <versekey.h>
 
 #include "gs_gnomesword.h"
-#include "gs_information_sw.h"
+#include "sw_information_dlg.h"
 #include "sw_utility.h"
 #include "sw_display.h"
 
