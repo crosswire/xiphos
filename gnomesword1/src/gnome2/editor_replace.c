@@ -379,10 +379,10 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 	dialog->dialog = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
 			    "dialog->dialog", dialog->dialog);
-	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Replace"));
-	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
-	gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
-			      FALSE);
+	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Find and Replace"));
+ 	 gtk_container_set_border_width (GTK_CONTAINER (dialog->dialog), 6);
+  	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+  	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
 
 	dialog->html = html;
 	dialog->ask_dialog = NULL;
@@ -392,33 +392,37 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 			    dialog_vbox30);
 	gtk_widget_show(dialog_vbox30);
 
-	vbox87 = gtk_vbox_new(FALSE, 0);
+	vbox87 = gtk_vbox_new(FALSE, 12);
 	gtk_widget_show(vbox87);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox30), vbox87, TRUE, TRUE,
 			   0);
 	gtk_container_set_border_width(GTK_CONTAINER(vbox87), 5);
 
-	hbox86 = gtk_hbox_new(FALSE, 0);
+	hbox86 = gtk_hbox_new(FALSE, 4);
 	gtk_widget_show(hbox86);
 	gtk_box_pack_start(GTK_BOX(vbox87), hbox86, FALSE, TRUE, 0);
 
-	label254 = gtk_label_new(_(" Replace "));
+	label254 = gtk_label_new(_("Replace"));
 	gtk_widget_show(label254);
 	gtk_box_pack_start(GTK_BOX(hbox86), label254, FALSE, FALSE, 0);
+	gtk_widget_set_size_request (label254, 70, -1);
+	gtk_misc_set_alignment (GTK_MISC (label254), 0, 0.5);
 
 	dialog->entry_find = gtk_entry_new();
 	gtk_widget_show(dialog->entry_find);
 	gtk_box_pack_start(GTK_BOX(hbox86), dialog->entry_find, TRUE,
 			   TRUE, 0);
 
-	hbox87 = gtk_hbox_new(FALSE, 0);
+	hbox87 = gtk_hbox_new(FALSE, 4);
 	gtk_widget_show(hbox87);
 	gtk_box_pack_start(GTK_BOX(vbox87), hbox87, FALSE, TRUE, 0);
 
-	label255 = gtk_label_new(_("       with "));
+	label255 = gtk_label_new(_("with"));
 	gtk_widget_show(label255);
-	gtk_box_pack_start(GTK_BOX(hbox87), label255, FALSE, FALSE, 0);
-	gtk_label_set_justify(GTK_LABEL(label255), GTK_JUSTIFY_RIGHT);
+	gtk_box_pack_start(GTK_BOX(hbox87), label255, FALSE, TRUE, 0);
+	gtk_label_set_justify(GTK_LABEL(label255), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment (GTK_MISC (label255), 0, 0.5);
+	gtk_widget_set_size_request (label255, 70, -1);
 
 	dialog->entry_replace = gtk_entry_new();
 	gtk_widget_show(dialog->entry_replace);
@@ -454,16 +458,15 @@ GtkHTMLReplaceDialog *gs_editor_replace_dialog_new(GtkHTML * html)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area30), hbuttonbox9,
 			   TRUE, TRUE, 0);
 
-	button_replace = gtk_button_new_with_label(_("Replace"));
-	gtk_widget_show(button_replace);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_replace);
-	GTK_WIDGET_SET_FLAGS(button_replace, GTK_CAN_DEFAULT);
-
-	button_cancel = gtk_button_new_from_stock ("gtk-cancel");
-	/*gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);*/
+	button_cancel = gtk_button_new_from_stock ("gtk-close");
 	gtk_widget_show(button_cancel);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_cancel);
 	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
+
+	button_replace = gtk_button_new_from_stock ("gtk-find-and-replace");
+	gtk_widget_show(button_replace);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox9), button_replace);
+	GTK_WIDGET_SET_FLAGS(button_replace, GTK_CAN_DEFAULT);
 
 	gtk_signal_connect(GTK_OBJECT(button_replace), "clicked",
 			   G_CALLBACK(button_replace_cb), dialog);
@@ -515,13 +518,13 @@ void gs_editor_replace_dialog_destroy(GtkHTMLReplaceDialog * d)
 static void run_replace_dialog(GtkHTML * html, const gchar * title)
 {
 	if (dialog) {
-		gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
+		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		dialog->html = html;
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
 		gdk_window_raise(GTK_WIDGET(dialog->dialog)->window);
 	} else {
 		gs_editor_replace_dialog_new(html);
-		gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
+		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
 	}
 }
