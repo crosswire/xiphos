@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 12:25-0500\n"
+"POT-Creation-Date: 2004-01-22 21:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,27 +24,27 @@ msgstr ""
 msgid "Study the Bible"
 msgstr ""
 
-#: src/main/lists.c:232
+#: src/main/lists.c:235
 msgid "Number of Text modules"
 msgstr ""
 
-#: src/main/lists.c:235
+#: src/main/lists.c:238
 msgid "Number of Commentary modules"
 msgstr ""
 
-#: src/main/lists.c:238
+#: src/main/lists.c:241
 msgid "Number of Dict/lex modules"
 msgstr ""
 
-#: src/main/lists.c:241
+#: src/main/lists.c:244
 msgid "Number of Book modules"
 msgstr ""
 
-#: src/main/lists.c:244
+#: src/main/lists.c:247
 msgid "Number of Percomm modules"
 msgstr ""
 
-#: src/main/lists.c:246
+#: src/main/lists.c:249
 msgid "Number of Devotion modules"
 msgstr ""
 
@@ -114,7 +114,7 @@ msgstr ""
 
 #: src/gnome2/bibletext_menu.c:543 src/gnome2/commentary_menu.c:660
 #: src/gnome2/dictlex_menu.c:473 src/gnome2/gbs_menu.c:511
-#: src/gnome2/sidebar.c:1094
+#: src/gnome2/sidebar.c:1127
 msgid "About"
 msgstr ""
 
@@ -163,7 +163,7 @@ msgstr ""
 #.
 #. * edit menu
 #.
-#: src/gnome2/bibletext_menu.c:658 src/gnome2/bookmarks_menu.c:535
+#: src/gnome2/bibletext_menu.c:658 src/gnome2/bookmarks_menu.c:558
 #: src/gnome2/commentary_menu.c:800 src/gnome2/dictlex_menu.c:583
 #: src/gnome2/gbs_menu.c:605
 msgid "Edit"
@@ -173,7 +173,7 @@ msgstr ""
 #. gtk_menu_ensure_uline_accel_group(GTK_MENU(pmInt));
 #: src/gnome2/bibletext_menu.c:665 src/gnome2/commentary_menu.c:807
 #: src/gnome2/dictlex_menu.c:590 src/gnome2/editor_menu.c:1092
-#: src/gnome2/gbs_menu.c:612 src/gnome2/main_menu.c:495
+#: src/gnome2/gbs_menu.c:612 src/gnome2/main_menu.c:496
 #: src/gnome2/parallel_view.c:1277 src/gnome2/toolbar_edit.c:546
 msgid "Copy"
 msgstr ""
@@ -233,154 +233,154 @@ msgid "Tabs"
 msgstr ""
 
 #. info->stock_icon = GTK_STOCK_OPEN;
-#: src/gnome2/bookmarks_menu.c:544 src/gnome2/bookmarks_menu.c:796
-#: src/gnome2/bookmarks_menu.c:971 src/gnome2/bookmarks_menu.c:1064
+#: src/gnome2/bookmarks_menu.c:572 src/gnome2/bookmarks_menu.c:838
+#: src/gnome2/bookmarks_menu.c:1013 src/gnome2/bookmarks_menu.c:1111
 #: src/gnome2/bookmarks_treeview.c:97
 msgid "Bookmark"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:547
+#: src/gnome2/bookmarks_menu.c:575
 msgid "Folder name: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:551
+#: src/gnome2/bookmarks_menu.c:578
 msgid "Bookmark name: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:554 src/gnome2/bookmarks_menu.c:979
+#: src/gnome2/bookmarks_menu.c:581 src/gnome2/bookmarks_menu.c:1021
 msgid "Verse: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:555 src/gnome2/bookmarks_menu.c:980
+#: src/gnome2/bookmarks_menu.c:582 src/gnome2/bookmarks_menu.c:1022
 #: src/gnome2/editor_menu.c:658
 msgid "Module: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:724
+#: src/gnome2/bookmarks_menu.c:766
 msgid "Restore Bookmark Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:800
+#: src/gnome2/bookmarks_menu.c:842
 msgid "Remove the selected folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:802
+#: src/gnome2/bookmarks_menu.c:844
 msgid "(and all its contents)?"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:807
+#: src/gnome2/bookmarks_menu.c:849
 msgid "Remove the selected bookmark"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:972
+#: src/gnome2/bookmarks_menu.c:1014
 msgid "Add"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:978
+#: src/gnome2/bookmarks_menu.c:1020
 msgid "Label: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1066 src/gnome2/bookmarks_treeview.c:98
+#: src/gnome2/bookmarks_menu.c:1113 src/gnome2/bookmarks_treeview.c:98
 msgid "Enter Folder Name"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1068
+#: src/gnome2/bookmarks_menu.c:1115
 msgid "Folder Name"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1069 src/gnome2/bookmarks_treeview.c:100
+#: src/gnome2/bookmarks_menu.c:1116 src/gnome2/bookmarks_treeview.c:100
 msgid "Folder: "
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1115
+#: src/gnome2/bookmarks_menu.c:1164
 msgid "Remove Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1116
+#: src/gnome2/bookmarks_menu.c:1165
 msgid "Remove folder and save it"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1122
+#: src/gnome2/bookmarks_menu.c:1171
 msgid "Restore Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1123
+#: src/gnome2/bookmarks_menu.c:1172
 msgid "Restore saved folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1132
+#: src/gnome2/bookmarks_menu.c:1181
 msgid "Open in a dialog"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1133
+#: src/gnome2/bookmarks_menu.c:1182
 msgid "Open this bookmark in a dialog"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1138
+#: src/gnome2/bookmarks_menu.c:1187
 msgid "New Folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1139
+#: src/gnome2/bookmarks_menu.c:1188
 msgid "Add new folder to selected folder"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1144
+#: src/gnome2/bookmarks_menu.c:1193
 msgid "Insert Bookmark"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1145
+#: src/gnome2/bookmarks_menu.c:1194
 msgid "Insert new bookmark here"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1150
+#: src/gnome2/bookmarks_menu.c:1199
 msgid "_Edit Item"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1151
+#: src/gnome2/bookmarks_menu.c:1200
 msgid "Edit bookmark item"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1156
+#: src/gnome2/bookmarks_menu.c:1205
 msgid "Delete Item"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1157
+#: src/gnome2/bookmarks_menu.c:1206
 msgid "Delete item"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1163
+#: src/gnome2/bookmarks_menu.c:1212
 msgid "Expand All"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1164
+#: src/gnome2/bookmarks_menu.c:1213
 msgid "Expand all Bookmarks groups"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1169
+#: src/gnome2/bookmarks_menu.c:1218
 msgid "Collapse All"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1170
+#: src/gnome2/bookmarks_menu.c:1219
 msgid "Collapse all Bookmarks groups"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1176
+#: src/gnome2/bookmarks_menu.c:1225
 msgid "Allow Reordering"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1178
+#: src/gnome2/bookmarks_menu.c:1227
 msgid "Allow items to be moved from one folder to another"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1184
+#: src/gnome2/bookmarks_menu.c:1233
 msgid "Import Bibletime Bookmarks"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1185
+#: src/gnome2/bookmarks_menu.c:1234
 msgid "Load Bookmarks from Bibletime"
 msgstr ""
 
-#: src/gnome2/bookmarks_menu.c:1190
+#: src/gnome2/bookmarks_menu.c:1239
 msgid "Remove - Restore"
 msgstr ""
 
@@ -497,7 +497,7 @@ msgstr ""
 msgid "Delete Entry"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:1041 src/gnome2/mod_mgr.c:987
+#: src/gnome2/editor_menu.c:1041 src/gnome2/mod_mgr.c:999
 #: src/gnome2/search_dialog.c:2722 src/gnome2/search_dialog.c:2893
 #: src/gnome2/toolbar_edit.c:442
 msgid "New"
@@ -516,7 +516,7 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: src/gnome2/editor_menu.c:1073 src/gnome2/main_menu.c:633
+#: src/gnome2/editor_menu.c:1073 src/gnome2/main_menu.c:634
 msgid "_Edit"
 msgstr ""
 
@@ -805,136 +805,136 @@ msgstr ""
 msgid "Failed to print the document"
 msgstr ""
 
-#: src/gnome2/main_menu.c:483
+#: src/gnome2/main_menu.c:484
 msgid "Open StudyPad"
 msgstr ""
 
-#: src/gnome2/main_menu.c:484
+#: src/gnome2/main_menu.c:485
 msgid "Open the StudyPad editor"
 msgstr ""
 
-#: src/gnome2/main_menu.c:496
+#: src/gnome2/main_menu.c:497
 msgid "Copy highlighted text from main window"
 msgstr ""
 
-#: src/gnome2/main_menu.c:502 src/gnome2/search_dialog.c:228
+#: src/gnome2/main_menu.c:503 src/gnome2/search_dialog.c:228
 #: src/gnome2/search_dialog.c:621 src/gnome2/search_sidebar.c:192
 #: src/gnome2/sidebar.c:122
 msgid "Search"
 msgstr ""
 
-#: src/gnome2/main_menu.c:503
+#: src/gnome2/main_menu.c:504
 msgid "Search using the shortcut bar"
 msgstr ""
 
-#: src/gnome2/main_menu.c:508 src/gnome2/search_dialog.c:2198
+#: src/gnome2/main_menu.c:509 src/gnome2/search_dialog.c:2198
 msgid "Advanced Search"
 msgstr ""
 
-#: src/gnome2/main_menu.c:509
+#: src/gnome2/main_menu.c:510
 msgid "Advanced search using the search dialog"
 msgstr ""
 
-#: src/gnome2/main_menu.c:517 src/gnome2/mod_mgr.c:1338
-#: src/gnome2/mod_mgr.c:1394
+#: src/gnome2/main_menu.c:518 src/gnome2/mod_mgr.c:1480
+#: src/gnome2/mod_mgr.c:1536
 msgid "Module Manager"
 msgstr ""
 
-#: src/gnome2/main_menu.c:518
+#: src/gnome2/main_menu.c:519
 msgid "Use module manager to install and remove Sword modules"
 msgstr ""
 
-#: src/gnome2/main_menu.c:527
+#: src/gnome2/main_menu.c:528
 msgid "C_lear"
 msgstr ""
 
-#: src/gnome2/main_menu.c:528
+#: src/gnome2/main_menu.c:529
 msgid "Clear history list"
 msgstr ""
 
-#: src/gnome2/main_menu.c:538
+#: src/gnome2/main_menu.c:539
 msgid "Daily Devotion"
 msgstr ""
 
-#: src/gnome2/main_menu.c:539
+#: src/gnome2/main_menu.c:540
 msgid "Show the Daily Devotion for today"
 msgstr ""
 
-#: src/gnome2/main_menu.c:554 src/gnome2/preferences_dialog.c:1559
+#: src/gnome2/main_menu.c:555 src/gnome2/preferences_dialog.c:1559
 msgid "Bible Texts"
 msgstr ""
 
-#: src/gnome2/main_menu.c:555
+#: src/gnome2/main_menu.c:556
 msgid "Show or hide Bible texts window"
 msgstr ""
 
-#: src/gnome2/main_menu.c:560 src/gnome2/preferences_dialog.c:1515
+#: src/gnome2/main_menu.c:561 src/gnome2/preferences_dialog.c:1515
 #: src/gnome2/preferences_dialog.c:1875 src/gnome2/search_sidebar.c:396
 #: src/gnome2/setup_druid.c:806
 msgid "Commentary"
 msgstr ""
 
-#: src/gnome2/main_menu.c:561
+#: src/gnome2/main_menu.c:562
 msgid "Show or hide commentaries"
 msgstr ""
 
-#: src/gnome2/main_menu.c:566
+#: src/gnome2/main_menu.c:567
 msgid "Lower Workbook"
 msgstr ""
 
-#: src/gnome2/main_menu.c:568
+#: src/gnome2/main_menu.c:569
 msgid "Show or hide lower workbook - dictionaries and other books"
 msgstr ""
 
-#: src/gnome2/main_menu.c:574
+#: src/gnome2/main_menu.c:575
 msgid "Verse Style"
 msgstr ""
 
-#: src/gnome2/main_menu.c:581
+#: src/gnome2/main_menu.c:582
 msgid "Attach/Detach Sidebar"
 msgstr ""
 
-#: src/gnome2/main_menu.c:587
+#: src/gnome2/main_menu.c:588
 msgid "Show/Hide Sidebar"
 msgstr ""
 
-#: src/gnome2/main_menu.c:597
+#: src/gnome2/main_menu.c:598
 msgid "Contents"
 msgstr ""
 
-#: src/gnome2/main_menu.c:598
+#: src/gnome2/main_menu.c:599
 msgid "Open the GnomeSword manual"
 msgstr ""
 
-#: src/gnome2/main_menu.c:611
+#: src/gnome2/main_menu.c:612
 msgid "About the SWORD Project ..."
 msgstr ""
 
-#: src/gnome2/main_menu.c:612
+#: src/gnome2/main_menu.c:613
 msgid "More information about the SWORD Project"
 msgstr ""
 
-#: src/gnome2/main_menu.c:617
+#: src/gnome2/main_menu.c:618
 msgid "About GnomeSword ..."
 msgstr ""
 
-#: src/gnome2/main_menu.c:618
+#: src/gnome2/main_menu.c:619
 msgid "About this application"
 msgstr ""
 
-#: src/gnome2/main_menu.c:627
+#: src/gnome2/main_menu.c:628
 msgid "_File"
 msgstr ""
 
-#: src/gnome2/main_menu.c:639
+#: src/gnome2/main_menu.c:640
 msgid "_View"
 msgstr ""
 
-#: src/gnome2/main_menu.c:645
+#: src/gnome2/main_menu.c:646
 msgid "Hi_story"
 msgstr ""
 
-#: src/gnome2/main_menu.c:651
+#: src/gnome2/main_menu.c:652
 msgid "_Help"
 msgstr ""
 
@@ -955,159 +955,195 @@ msgstr ""
 msgid "Books"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:200
+#: src/gnome2/mod_mgr.c:204
 msgid "Install the following modules:"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:205
+#: src/gnome2/mod_mgr.c:209
 msgid "Remove the following modules:"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:232
+#: src/gnome2/mod_mgr.c:237
 msgid "Installing: "
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:236
+#: src/gnome2/mod_mgr.c:242
 msgid "Removing: "
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:278
+#: src/gnome2/mod_mgr.c:286
 msgid "Install failed"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:280
+#: src/gnome2/mod_mgr.c:288
 msgid "Remove failed"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:282 src/gnome2/mod_mgr.c:717
+#: src/gnome2/mod_mgr.c:290 src/gnome2/mod_mgr.c:731
 msgid "Finished"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:428 src/gnome2/mod_mgr.c:498 src/gnome2/utilities.c:71
+#: src/gnome2/mod_mgr.c:441 src/gnome2/mod_mgr.c:509 src/gnome2/utilities.c:71
 #: src/gnome2/utilities.c:121
 msgid "Unknown"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:593 src/gnome2/utilities.c:173
+#: src/gnome2/mod_mgr.c:606 src/gnome2/utilities.c:173
 msgid "Biblical Texts"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:597 src/gnome2/preferences_dialog.c:1571
+#: src/gnome2/mod_mgr.c:610 src/gnome2/preferences_dialog.c:1571
 #: src/gnome2/utilities.c:201
 msgid "Commentaries"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:602 src/gnome2/utilities.c:222
+#: src/gnome2/mod_mgr.c:615 src/gnome2/utilities.c:222
 msgid "Dictionaries"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:607 src/gnome2/utilities.c:244
+#: src/gnome2/mod_mgr.c:620 src/gnome2/utilities.c:244
 msgid "General Books"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:694
+#: src/gnome2/mod_mgr.c:707
 msgid "Refreshing remote"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:712
+#: src/gnome2/mod_mgr.c:726
 msgid "Remote not found"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:748
+#: src/gnome2/mod_mgr.c:761
 msgid "Restart GnomeSword?"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:749
+#: src/gnome2/mod_mgr.c:762
 msgid "The modules are out of sync!"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:897
+#: src/gnome2/mod_mgr.c:908
 msgid "Module Name"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:973
+#: src/gnome2/mod_mgr.c:985
 msgid "Old"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1022 src/gnome2/mod_mgr.c:1537
+#: src/gnome2/mod_mgr.c:1034 src/gnome2/mod_mgr.c:1680
 msgid "Configure"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1204
+#: src/gnome2/mod_mgr.c:1261
 msgid "Please Refresh"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1206
+#: src/gnome2/mod_mgr.c:1263
 msgid "Your module list is not up to date!"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1381
+#: src/gnome2/mod_mgr.c:1355
+msgid "Enter a remote source"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1356
+msgid "Caption:"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1357
+msgid "Type:"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1358
+msgid "URL:"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1359
+msgid "Directory:"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1523
 msgid "SWORD"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1402 src/gnome2/mod_mgr.c:1523
+#: src/gnome2/mod_mgr.c:1544 src/gnome2/mod_mgr.c:1666
 msgid "WARNING:"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1403
+#: src/gnome2/mod_mgr.c:1546
 msgid "If you live in a persecuted country use with care."
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1412
+#: src/gnome2/mod_mgr.c:1554
 msgid "Cover"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1428
+#: src/gnome2/mod_mgr.c:1570
 msgid "Install Source"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1447
+#: src/gnome2/mod_mgr.c:1589
 msgid "Local"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1452
+#: src/gnome2/mod_mgr.c:1594
 msgid "Local Source"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1467
+#: src/gnome2/mod_mgr.c:1610
 msgid "Remote"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1481
+#: src/gnome2/mod_mgr.c:1624
 msgid "Install Destination"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1524
+#: src/gnome2/mod_mgr.c:1668
 msgid ""
 "If you live in a persecuted country and do not wish to risk detection you "
 "should NOT use  the remote installation feature! "
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1576
+#: src/gnome2/mod_mgr.c:1719
 msgid "Install Modules"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1612
+#: src/gnome2/mod_mgr.c:1755
 msgid "Remove Modules"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1637
+#: src/gnome2/mod_mgr.c:1768
+msgid "<b>Add and Remove Sources</b>"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1826
+msgid "Current Remote Sources"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1851
+msgid "Add/Remove"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1876
+msgid "Sources"
+msgstr ""
+
+#: src/gnome2/mod_mgr.c:1901
 msgid "Refresh remote sources"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1645
+#: src/gnome2/mod_mgr.c:1909
 msgid "Upgrade or install selected modules"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1661
+#: src/gnome2/mod_mgr.c:1925
 msgid "Install"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1672
+#: src/gnome2/mod_mgr.c:1936
 msgid "Remove selected module(s)"
 msgstr ""
 
-#: src/gnome2/mod_mgr.c:1687
+#: src/gnome2/mod_mgr.c:1951
 msgid "Remove"
 msgstr ""
 
@@ -1513,7 +1549,7 @@ msgid "Use a custom range for the scope of the search"
 msgstr ""
 
 #: src/gnome2/search_dialog.c:2352 src/gnome2/search_dialog.c:2999
-#: src/gnome2/sidebar.c:116 src/gnome2/sidebar.c:1508
+#: src/gnome2/sidebar.c:116 src/gnome2/sidebar.c:1535
 msgid "Modules"
 msgstr ""
 
@@ -1630,7 +1666,7 @@ msgid "Create new custom range"
 msgstr ""
 
 #: src/gnome2/search_dialog.c:2735 src/gnome2/search_dialog.c:2920
-#: src/gnome2/sidebar.c:1049
+#: src/gnome2/sidebar.c:1082
 msgid "Save List"
 msgstr ""
 
@@ -1899,39 +1935,39 @@ msgstr ""
 msgid "Viewer"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1050
+#: src/gnome2/sidebar.c:1083
 msgid "Save the search results as bookmarks"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1088
+#: src/gnome2/sidebar.c:1121
 msgid "Open in dialog"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1089
+#: src/gnome2/sidebar.c:1122
 msgid "Open selected module in a dialog"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1095
+#: src/gnome2/sidebar.c:1128
 msgid "View information about the selected dialog"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1343
+#: src/gnome2/sidebar.c:1385
 msgid "_Modules"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1351
+#: src/gnome2/sidebar.c:1393
 msgid "_Bookmarks"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1359
+#: src/gnome2/sidebar.c:1401
 msgid "_Search"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1368
+#: src/gnome2/sidebar.c:1410
 msgid "Verse _List"
 msgstr ""
 
-#: src/gnome2/sidebar.c:1378
+#: src/gnome2/sidebar.c:1420
 msgid "_Viewer"
 msgstr ""
 
