@@ -153,8 +153,8 @@ void on_notebook_gbs_switch_page(GtkNotebook * notebook,
 	
 	sprintf(settings.BookWindowModule, "%s", g->bookName);
 
-	if (settings.finddialog) {
-		gnome_dialog_close(g_old->find_dialog->dialog);
+	if (g_old->find_dialog) {
+		close_dialog(NULL, g_old->find_dialog);
 		searchGS_FIND_DLG(g, FALSE, settings.findText);
 	}
 	GTK_CHECK_MENU_ITEM(g->showtabs)->active = settings.book_tabs;

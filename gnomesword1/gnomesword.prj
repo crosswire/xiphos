@@ -83,6 +83,7 @@ module.include.files=\
 	src/gnome/about_sword.h\
 	src/gnome/_bibletext.h\
 	src/gnome/_commentary.h\
+	src/gnome/commentary_find_dialog.h\
 	src/gnome/_dictlex.h\
 	src/gnome/_editor.h\
 	src/gnome/_gbs.h\
@@ -159,6 +160,7 @@ module.source.files=\
 	src/gnome/about_sword.c\
 	src/gnome/_bibletext.c\
 	src/gnome/_commentary.c\
+	src/gnome/commentary_find_dialog.c\
 	src/gnome/_dictlex.c\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\

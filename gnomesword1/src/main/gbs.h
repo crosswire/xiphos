@@ -38,6 +38,7 @@ struct _GSFindDialog {
 	gboolean regular;
 };
 
+
 typedef struct _gbsdata GBS_DATA;
 struct _gbsdata {
 	GtkWidget *html;

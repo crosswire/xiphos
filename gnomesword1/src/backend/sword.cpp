@@ -71,7 +71,6 @@
 #include "dictlex_.h"
 #include "dictlex.h"
 #include "commentary_.h"
-#include "commentary.h"
 #include "bibletext.h"
 #include "bibletext_.h"
 #include "percomm_.h"
@@ -437,7 +436,7 @@ const char *backend_get_sword_version(void)
 void backend_display_new_font_color_and_size(SETTINGS * s)
 {
 	curMod->Display();
-	display_commentary(s->currentverse);
+	backend_display_commentary(s->comm_last_page, s->currentverse);
 	backend_display_dictlex(s->dict_last_page, s->dictkey);
 	update_interlinear_page(&settings);
 }
