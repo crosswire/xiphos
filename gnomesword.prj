@@ -130,12 +130,12 @@ module.include.files=\
 	src/gui/toolbar_style.h\
 	src/gui/utilities.h\
 	src/main/bibletext.h\
-	src/main/bookmarks.h\
 	src/main/commentary.h\
 	src/main/dictlex.h\
 	src/main/gbs.h\
 	src/main/percomm.h\
 	src/main/lists.h\
+	src/main/search.h\
 	src/main/settings.h\
 	src/main/shortcutbar.h\
 	src/main/spell.h\
@@ -212,13 +212,13 @@ module.source.files=\
 	src/gnome/toolbar_style.c\
 	src/gnome/utilities.c\
 	src/main/bibletext.c\
-	src/main/bookmarks.c\
 	src/main/commentary.c\
 	src/main/dictlex.c\
 	src/main/gbs.c\
 	src/main/lists.c\
 	src/main/main.c\
 	src/main/percomm.c\
+	src/main/search.c\
 	src/main/settings.c\
 	src/main/shortcutbar.c\
 	src/main/spell_ispell.c\
