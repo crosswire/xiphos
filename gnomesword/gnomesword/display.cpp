@@ -1,3 +1,4 @@
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /***************************************************************************
                           display.cpp  -  description
                              -------------------
@@ -5,7 +6,7 @@
     copyright            : (C) 2000 by Terry Biggs
     email                : tbiggs@infinet.com
  ***************************************************************************/
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+
 /*
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,11 +25,11 @@
 
 /*********************************************************************
 **********************************************************************
-**  this code was taken from the Sword Cheatah program      **
-**  and modfied to handle some of the GBF stuff. Also added **
-**  suport for the x symbol font when using greek modules.    **
-**  2000/07/10 - added some support for the RWP module    **
-**  added some support for html                                         ** 
+**  this code was taken from the Sword Cheatah program      	    **
+**  and modfied to handle some of the GBF stuff. Also added  	    **
+**  suport for the x symbol font when using greek modules.    	    **
+**  2000/07/10 - added some support for the RWP module    	    **
+**  added some support for html                                     ** 
 **********************************************************************
 *********************************************************************/
 

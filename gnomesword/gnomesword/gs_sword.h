@@ -37,7 +37,7 @@ extern "C" {
 
 void initSword(GtkWidget *mainform);
 
-void ShutItDown(void);
+void shutdownSWORD(void);
 
 void FillDictKeys(void);
 void changeVerse(gchar * ref);

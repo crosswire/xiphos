@@ -33,6 +33,7 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <gbfhtml.h>
+#include <thmlhtml.h>
 #include <plainhtml.h>
 #include <regex.h>
 #include <stdio.h>
@@ -54,114 +55,91 @@
 #include "listeditor.h"
 #include "noteeditor.h"
 
-//------------------------------------------------- sword global to this file
+/***********************************************************************************************
+Sword global to this file
+***********************************************************************************************/ 
 SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
-SWDisplay *entryDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *comp1Display; //--- to display modules using GtkText a verse at a time
-SWDisplay *comp2Display; //--- to display modules using GtkText a verse at a time
-SWDisplay *comp3Display; //--- to display modules using GtkText a verse at a time
-SWDisplay *comDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *percomDisplay; //--- to display personal comment modules using GtkText a verse at a time
-SWDisplay *dictDisplay; //--- to display modules using GtkText a verse at a time
-SWDisplay *RWPDisplay; //--- to display Robertsons Word Pictures in the New Testament using GtkText
-SWDisplay *FPNDisplay; //--- to display formatted personal notes using GtkText
-SWDisplay *HTMLDisplay; //--- to display formatted html
-SWDisplay *HTMLchapDisplay; //--- to display formatted html
+SWDisplay *entryDisplay; /* to display modules using GtkText a verse at a time */
+SWDisplay *comp1Display; /* to display modules using GtkText a verse at a time */
+SWDisplay *comp2Display; /* to display modules using GtkText a verse at a time */
+SWDisplay *comp3Display; /* to display modules using GtkText a verse at a time */
+SWDisplay *comDisplay; /* to display modules using GtkText a verse at a time */
+SWDisplay *percomDisplay; /* to display personal comment modules using GtkText a verse at a time */
+SWDisplay *dictDisplay; /* to display modules using GtkText a verse at a time */
+SWDisplay *RWPDisplay; /* to display Robertsons Word Pictures in the New Testament using GtkText */
+SWDisplay *FPNDisplay; /* to display formatted personal notes using GtkText */
+SWDisplay *HTMLDisplay; /* to display formatted html */
+SWDisplay *HTMLchapDisplay; /* to display formatted html */
 
-SWMgr *mainMgr; //-- sword mgr for curMod - curcomMod - curdictMod
-SWMgr *mainMgr1; //-- sword mgr for comp1Mod - first interlinear module
-SWMgr *mainMgr2; //-- sword mgr for comp2Mod - second interlinear module 
-SWMgr *mainMgr3; //-- sword mgr for comp3Mod - third interlinear module
-SWMgr *percomMgr; //-- sword mgr for percomMod - personal comments editor
+SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
+SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
+SWMgr *mainMgr2; /* sword mgr for comp2Mod - second interlinear module */ 
+SWMgr *mainMgr3; /* sword mgr for comp3Mod - third interlinear module */
+SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
 
-VerseKey vsKey; //-- ??
-SWModule *curMod; //-- module for main text window
-SWModule *comp1Mod; //-- module for first interlinear window
-SWModule *comp2Mod; //-- module for second interlinear window	
-SWModule *comp3Mod;	 //-- module for third interlinear window
-SWModule *curcomMod; //-- module for commentary  window	
-SWModule *percomMod; //-- module for personal commentary  window	
-SWModule *curdictMod; //-- module for dict window
+VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
 
+SWModule *curMod; /* module for main text window */
+SWModule *comp1Mod; /* module for first interlinear window */
+SWModule *comp2Mod; /* module for second interlinear window */	
+SWModule *comp3Mod; /* module for third interlinear window */
+SWModule *curcomMod; /* module for commentary  window */	
+SWModule *percomMod; /* module for personal commentary  window */	
+SWModule *curdictMod; /* module for dict window */
 
-
-SWFilter *gbftoplain;
 SWFilter *gbftohtml;
 SWFilter *plaintohtml;
+SWFilter *thmltohtml;
 
-//---------------------------------------------------------------- GnomeSword global to this file
-	
+/***********************************************************************************************
+GnomeSword global to this file 
+***********************************************************************************************/ 	
 GList 	*biblemods,
 	*commentarymods,
 	*dictionarymods,
 	*percommods;
-		
-extern SETTINGS *settings;
-extern SETTINGS myset;	
-extern GtkWidget	*MainFrm,	//-- main form widget 					
-			*shortcut_bar;
-GtkWidget           	*NEtext,  //-- note edit widget
-			*bookmark_mnu; //-- popup menu for bookmarks	
-							
-//extern EShortcutModel *shortcut_model;
-extern gchar *shortcut_types[];
-
-
-extern gchar *current_filename;	//-- filename for open file in study pad window 
-extern gchar current_verse[80];	//-- current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window
-gboolean ApplyChange = true;	//-- should we make changes when cbBook is changed
-gboolean bVerseStyle = true;	//-- should we show verses of paragraphs in main text window
-
-VerseKey swKey = "Romans 8:28";	//-- ?? 
-gint curChapter = 8;	//-- keep up with current chapter
-gint curVerse =28;	//-- keep up with current verse
-
-
-extern gboolean file_changed;	//-- set to true if text is study pad has changed - and file is not saved
-
-GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
-		*footnotes,	//-- widget to access toggle menu - for footnotes
-  		*strongsnum,//-- widget to access toggle menu - for strongs numbers
-	    	*notepage,	//-- widget to access toggle menu - for interlinear notebook page
-	    	*autosaveitem; //-- widget to access toggle menu - for personal comments auto save
-			
-
-extern GdkColor myGreen; //-- current verse color
-GtkWidget* studypad;  //-- studypad text widget
-GtkWidget* notes;    //-- notes text widget
-gboolean noteModified = false; //-- set to true is personal note has changed
-gboolean waitonmessage = true; //-- wait for user input
-gboolean usepersonalcomments = false; //-- do we setup for personal comments - default is false
-                                  //-- will change to true if we find any personal modules      
-//gboolean saveChanges = true; //-- save changes to personal comments
-gboolean autoSave = true; //-- we want to auto save changes to personal comments
-//gboolean personalCom = true; //-- let us know if curcomMod is a personal comment mod
-gboolean havedict = false; //-- let us know if we have at least one lex-dict module
-gboolean havecomm = false; //-- let us know if we have at least one commentary module
-gboolean autoscroll = true; //-- commentary module auto scroll when true -- in sync with main text window
-
-extern gboolean changemain; //-- change verse of Bible text window
-extern gchar rememberlastitem[255]; //-- used for bookmark menus declared in filestuff.cpp
-
-extern NoteEditor *noteeditor;
-gint historyitems = 0;
-gint answer;
-extern gint dictpages,
-	 compages;
-gchar com_key[80] ="Rom 8:28"; //-- current commentary key
-extern GnomeUIInfo pmDict_uiinfo[5];
-extern GnomeUIInfo pmComments_uiinfo[7];
-extern GnomeUIInfo view_module1_menu_uiinfo[2];
-extern GtkWidget *pmComments;
+GtkWidget *NEtext;  /* note edit widget */
+gboolean ApplyChange = true;	/* should we make changes when cbBook is changed */
+gboolean bVerseStyle = true;	/* should we show verses or paragraphs in main text window */
+gint curChapter = 8;	/* keep up with current chapter */
+gint curVerse =28;	/* keep up with current verse */
+gboolean noteModified = false; /* set to true is personal note has changed */
+gboolean usepersonalcomments = false; /* do we setup for personal comments - default is false
+                                         will change to true if we find any personal modules  */
+gboolean autoSave = true; /* we want to auto save changes to personal comments */
+gboolean havedict = false; /* let us know if we have at least one lex-dict module */
+gboolean havecomm = false; /* let us know if we have at least one commentary module */
+gboolean autoscroll = true; /* commentary module auto scroll when true -- in sync with main text window */
+gint answer; /* do we want to save studybad file on shutdown */
+gchar com_key[80] ="Rom 8:28"; /* current commentary key */
 gint    groupnum1 = 0,
         groupnum2 = 0,
         groupnum3 = 0,
         groupnum4 = 0,
         greekpage = 0,
         hebrewpage = 0;
+        
+/***********************************************************************************************
+ externals
+***********************************************************************************************/        
+extern gboolean changemain; /* change verse of Bible text window */
+extern NoteEditor *noteeditor; /* we need this to set up sword display */        
+extern gint 	dictpages, /* number of dictionaries */
+	 	compages;  /* number of commentaries */        
+extern gboolean file_changed;	/* set to true if text is study pad has changed - and file is not saved */        
+extern SETTINGS *settings;
+extern SETTINGS myset;	        
+extern GtkWidget	*MainFrm,	/* main form widget  */					
+			*shortcut_bar;
+extern gchar *shortcut_types[];
+extern gchar *current_filename;	/* filename for open file in study pad window  */
+extern gchar current_verse[80];	/* current verse showing in main window - 1st - 2nd - 3rd 
+				   interlinear window - commentary window */
+
 
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff 
+ *mainform - sent here by main.cpp
  ***********************************************************************************************/
 void
 initSword(GtkWidget *mainform)
@@ -175,9 +153,9 @@ initSword(GtkWidget *mainform)
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
   	
-  	gbftoplain	= new GBFPlain(); //-- renderfilter
   	gbftohtml	= new GBFHTML(); //-- sword renderfilter gbf to html
   	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
+  	thmltohtml	= new ThMLHTML(); /* sword renderfilter thml to html */
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -285,7 +263,10 @@ initSword(GtkWidget *mainform)
 				curcomMod->AddRenderFilter(gbftohtml);
 				curcomMod->Disp(HTMLDisplay);
 			}
-			else if(!strcmp(sourceformat,"ThML")) curcomMod->Disp(HTMLDisplay);
+			else if(!strcmp(sourceformat,"ThML")) {
+				curcomMod->AddRenderFilter(thmltohtml);
+				curcomMod->Disp(HTMLDisplay);				
+			}
 			else if(!strcmp(curcomMod->Name(),"RWP")) curcomMod->Disp(RWPDisplay);
 			else if((*mainMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){  /* if driver is RawFiles - personal notes*/
 				 if(settings->formatpercom) curcomMod->Disp(HTMLDisplay); 
@@ -480,7 +461,7 @@ FillDictKeys(void)  //-- fill clist with dictionary keys -
 
 //-------------------------------------------------------------------------------------------
 void 
-ShutItDown(void)  //-- close down GnomeSword program
+shutdownSWORD(void)  //-- close down GnomeSword program
 {
         char *msg;
         GtkWidget *msgbox;
@@ -505,8 +486,8 @@ ShutItDown(void)  //-- close down GnomeSword program
 	delete mainMgr1;
 	delete mainMgr2;
 	delete mainMgr3;	
-        if (gbftoplain != 0)  //-- delete Sword render filters
-		delete gbftoplain;
+        if (thmltohtml != 0)
+		delete thmltohtml;
 	if (gbftohtml != 0)
 		delete gbftohtml;
 	if (plaintohtml != 0)
@@ -537,8 +518,7 @@ ShutItDown(void)  //-- close down GnomeSword program
 		delete HTMLchapDisplay;	
 	if(noteeditor)
 		delete noteeditor;	
-	gtk_exit(0);           //-- exit
-	
+	gtk_exit(0);           //-- exit	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -566,12 +546,6 @@ footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have 
 	settings->footnotes = choice;   //-- store choice in settings
 	curMod->Display(); //-- we need to show change
 }
-
-//-------------------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------
 void
@@ -647,9 +621,6 @@ setversestyleSWORD(gboolean choice)  //-- set verse style -- verses or paragraph
 	settings->versestyle = choice; //-- remember our choice for the next program startup
  	curMod->Display(); //-- show the change
 }
-
-//-------------------------------------------------------------------------------------------
-
 
 //-------------------------------------------------------------------------------------------
 void
@@ -866,20 +837,6 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 }
 
 //-------------------------------------------------------------------------------------------
-
-
-//-------------------------------------------------------------------------------------------
-
-
-//-------------------------------------------------------------------------------------------
-
-
-//-------------------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------------------
 void
 showmoduleinfoSWORD(char *modName) //--  show module information in an about dialog
 {
@@ -938,14 +895,6 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
 }
 
-//-------------------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------------------
-
-
-//-------------------------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------------------------
 void
@@ -971,29 +920,30 @@ lookupStrongsSWORD(gint theNumber) /* theNumber - strongs number was double clic
         }
 }
 
-/*
+/******************************************************************************
  * setglobalopsSWORD
  * option - option to set
  * yesno - yes or no
-*/
+******************************************************************************/
 void setglobalopsSWORD(gchar *option, gchar *yesno)
 {
-	mainMgr->setGlobalOption(option, yesno);	/* turn option on or off */	
+	/* turn option on or off */
+	mainMgr->setGlobalOption(option, yesno);	
 }
 
-/*
+/******************************************************************************
  *redisplayTextSWORD - display Bible text in main window
-*/
+******************************************************************************/
 void redisplayTextSWORD(void)
 {
 	curMod->Display();	
 }
 
-/*
+/******************************************************************************
  *getmodnameSWORD
  * num
  * returns module name
-*/
+******************************************************************************/
 gchar* getmodnameSWORD(gint num)
 {
 	switch(num)

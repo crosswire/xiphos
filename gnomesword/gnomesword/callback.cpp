@@ -180,7 +180,7 @@ void on_copy_verse1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
 {
-	ShutItDown();
+	shutdownSWORD();
 }
 
 //----------------------------------------------------------------------------------------------
@@ -406,7 +406,7 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 //----------------------------------------------------------------------------------------------
 void on_btnExit_clicked(GtkButton * button, gpointer user_data)
 {
-	ShutItDown();
+	shutdownSWORD();
 }
 
 //----------------------------------------------------------------------------------------------
@@ -766,7 +766,7 @@ void on_btnSearchOK_clicked(GtkButton * button, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	ShutItDown();
+	shutdownSWORD();
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2361,12 +2361,11 @@ on_epaned_button_release_event(GtkWidget       *widget,
         gint panesize;
         
         panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
-        if(panesize > 0 )
+        if(panesize > 15 )
         {
-        	settings->shortcutbarsize = panesize;
-        	return true;
+        	settings->shortcutbarsize = panesize;        	
         }
-        return false;
+        return TRUE;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2374,9 +2373,9 @@ void
 on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-    	GtkWidget	*dlg,
-				*btnok,
-				*btnapply;
+    	GtkWidget *dlg,
+		  *btnok,
+		  *btnapply;
 							
 	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
 	btnok = lookup_widget(dlg,"btnPropertyboxOK");
