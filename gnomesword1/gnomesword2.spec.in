@@ -1,0 +1,121 @@
+%define name gnomesword2
+%define version	@VERSION@
+%define release 1
+%define debug_package %{nil}
+
+Summary:	GNOME-based Bible research tool
+Name:		%{name}
+Prefix:		/usr
+Version:	%{version}
+Release:	%{release}
+License:	GPL
+URL:		http://gnomesword.sourceforge.net/
+Group:		Applications/Productivity
+Source:		http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+BuildRoot:	%{_tmppath}/%{name}-root
+Requires:	sword >= 1.5.6
+BuildRequires:	sword-devel >= 1.5.6
+BuildRequires:	gnome-libs-devel >= 1.4
+BuildRequires:	gal-devel >= 0.22
+BuildRequires:	gtkhtml2-devel >= 2.2
+BuildRequires:	gnome-spell
+BuildRequires:	aspell-devel
+
+%description
+Bible Study Software for the Linux community. Lookup and search Bible texts and
+commentaries. GnomeSword uses modules and libraries from the Sword Project. 
+Display multiple translations in the interlinear window. Search for passages in 
+any translation by word, phrase, or regular expression. Install this package
+if you want to browse the Bible translations and reference works distributed
+by Crosswire Bible Society through the Sword Project.
+
+%prep
+%setup -q -n %{name}-%{version}
+
+%build
+export PACKAGE_DOC_DIR=$RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
+./configure --prefix=%{prefix} --sysconfdir=/etc
+make
+
+%install
+export PACKAGE_DOC_DIR=$RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
+make DESTDIR=$RPM_BUILD_ROOT install
+./configure --prefix=$RPM_BUILD_ROOT%{prefix} --sysconfdir=$RPM_BUILD_ROOT/etc
+make DESTDIR=$RPM_BUILD_ROOT%{prefix} install-data-local
+
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
+mv $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}/* $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}-%{version}
+rmdir $RPM_BUILD_ROOT%{prefix}/share/doc/%{name}
+cd $RPM_BUILD_ROOT%{prefix}
+
+%clean
+case "$RPM_BUILD_ROOT" in
+/var/*) rm -rf $RPM_BUILD_ROOT;;
+esac
+
+%files
+%defattr(-,root,root)
+%{prefix}/bin/gnomesword2
+%{prefix}/share/gnome/help/*
+%{prefix}/share/locale/*
+%{prefix}/share/pixmaps/*
+%doc ABOUT-NLS AUTHORS COPYING INSTALL NEWS README TODO
+%{prefix}/share/applications/%{name}.desktop
+
+%changelog
+* Fri Dec 05 2003 Andy Piper <andy.piper@freeuk.com>
+- Added to GnomeSword CVS
+* Thu Nov 27 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Fixed loose ends in the config
+* Tue Nov 25 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 2.0-0.9dev15
+- Changed bits to follow new name convention
+* Sat Nov 15 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 2.0-0.9dev11
+- Build and tested on Fedora Core 1
+* Tue Oct 28 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 2.0-0.9dev9
+* Sat Oct 25 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 2.0-0.9dev8
+* Fri Aug 29 2003  Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 1.0-0.9dev5
+- Build against Sword 1.5.6rc1
+- Build and tested on Red Hat Linux 9
+* Mon Mar 25 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 0.7.9
+- Build against Sword 1.5.5
+- Build and tested on Red Hat Linux 8.0
+* Sat Mar 15 2003 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 0.7.8
+- Build against Sword 1.5.5
+- Build and tested on Red Hat Linux 8.0
+* Fri Dec 20 2002 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 0.7.7
+- Build against Sword 1.5.5
+- Build and tested on Red Hat Linux 8.0
+* Sat Dec 14 2002 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 0.7.6
+- Build against Sword 1.5.5
+- Build and tested on Red Hat Linux 8.0
+* Sat Sep 28 2002 Hugo van der Kooij <hugo@vanderkooij.org>
+- Build against Sword 1.5.4
+* Mon Sep 02 2002 Hugo van der Kooij <hugo@vanderkooij.org>
+- Fixed the docs with small patch
+* Tue Aug 21 2002 Hugo van der Kooij <hugo@vanderkooij.org>
+- Version 0.7.5
+- Install in the regular tree (not /usr/local)
+- Needs fix on documentation directory (usr/doc should be /usr/share/doc)
+* Thu Dec 13 2001 Stuart Gathman <stuart@bmsi.com>
+- version 0.5.2c
+- move applnk to /usr/share/gnome
+* Mon Dec 25 2000 Stuart Gathman <stuart@bmsi.com>
+- version 0.3.7a
+* Thu Nov 30 2000 Stuart Gathman <stuart@bmsi.com>
+- version 0.3.2
+* Fri Nov 17 2000 Stuart Gathman <stuart@bmsi.com>
+- add applnk entry
+* Wed Nov 08 2000 Stuart Gathman <stuart@bmsi.com>
+- build against sword-1.5.1a
+- SWModule::Delete renamed to SWModule::deleteEntry
+* Fri Oct 28 2000 Stuart Gathman <stuart@bmsi.com>
+- initial release
