@@ -244,10 +244,10 @@ module.source.files=\
 	src/main/display.cc\
 	src/main/sword.cc\
 	src/main/global_ops.cc\
-	src/main/url.c\
 	src/backend/sword_main.cc\
 	src/main/lists.cc\
-	src/main/sidebar.c
+	src/main/sidebar.c\
+	src/main/url.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
