@@ -31,7 +31,8 @@ extern "C" {
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 	
 void entry_display(GtkWidget * html_widget, gchar * mod_name, 
- 				        gchar * text, gchar * key);
+ 				        gchar * text, gchar * key, 
+					gboolean show_key);
 void chapter_display(GtkWidget * html_widget, gchar * module_name, 
 				  TEXT_GLOBALS * tgs, gchar * key);
 	

@@ -1,3 +1,9 @@
+2002-07-04  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* renamed gui/_percomm.h to gui/percomm.h
+	* renamed gnome/_percomm.c to gnome/percomm.c
+
+
 2002-07-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* gbs panes are now

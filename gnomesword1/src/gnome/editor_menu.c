@@ -49,7 +49,7 @@
 #include "gui/editor_menu.h"
 #include "gui/editor_replace.h"
 #include "gui/editor_search.h"
-#include "gui/_percomm.h"
+#include "gui/percomm.h"
 #include "gui/link_dialog.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
@@ -59,6 +59,7 @@
 #include "main/gs_gnomesword.h"
 #include "main/gs_html.h"
 #include "main/settings.h"
+#include "main/support.h"
 
 /****************************************************************************** 
  * editor popup menu and call backs 
@@ -190,10 +191,10 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 				     GSHTMLEditorControlData * ecd)
 {
 	if (ecd->personal_comments) {		
-		editor_save_note(ecd->htmlwidget,ecd->filename);
+		gui_save_note(ecd);
+		ecd->changed = FALSE;
+		update_statusbar(ecd);
 	}
-	ecd->changed = FALSE;
-	update_statusbar(ecd);
 }
 
 /******************************************************************************
@@ -216,9 +217,35 @@ static void on_savenote_activate(GtkMenuItem * menuitem,
 static void on_deletenote_activate(GtkMenuItem * menuitem,
 				       GSHTMLEditorControlData * ecd)
 {
-	delete_percomm_note(ecd->filename);
-	ecd->changed = FALSE;
-	update_statusbar(ecd);
+	GtkWidget *label1, *label2, *label3, *msgbox;
+	gint answer = -1;
+	gchar *key;
+	
+	if(ecd->personal_comments) {
+		key = get_percomm_key();
+		
+		msgbox = gui_create_info_box();
+		label1 = lookup_widget(msgbox, "lbInfoBox1");
+		label2 = lookup_widget(msgbox, "lbInfoBox2");
+		label3 = lookup_widget(msgbox, "lbInfoBox3");
+		gtk_label_set_text(GTK_LABEL(label1), _("Are you sure you want"));
+		gtk_label_set_text(GTK_LABEL(label2), _("to delete the note for"));
+		gtk_label_set_text(GTK_LABEL(label3),key);
+	
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		switch (answer) {
+		case 0:
+			delete_percomm_note();
+			break;
+		default:
+			break;
+		}
+		settings.percomverse = key;
+		ecd->changed = FALSE;
+		update_statusbar(ecd);
+		free(key);
+	}
 }
 
 

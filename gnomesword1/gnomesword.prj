@@ -89,7 +89,7 @@ module.include.files=\
 	src/gui/_display_info.h\
 	src/gui/_editor.h\
 	src/gui/gbs.h\
-	src/gui/_percomm.h\
+	src/gui/percomm.h\
 	src/gui/gbs_find.h\
 	src/gui/gtkhtml_display.h\
 	src/gui/cipher_key_dialog.h\
@@ -168,7 +168,7 @@ module.source.files=\
 	src/gnome/_display_info.c\
 	src/gnome/_editor.c\
 	src/gnome/gbs.c\
-	src/gnome/_percomm.c\
+	src/gnome/percomm.c\
 	src/gnome/gbs_find.c\
 	src/gnome/gtkhtml_display.c\
 	src/gnome/cipher_key_dialog.c\
