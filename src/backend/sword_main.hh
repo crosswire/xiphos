@@ -67,7 +67,7 @@ public:
 	BackEnd();
 	~BackEnd();
 	void init_SWORD(int gsType);
-	char *set_sword_locale(void);
+	char *set_sword_locale(const char *sys_locale);
 	void init_lists(MOD_LISTS * mods);
 	void init_language_map(void);
 	const char *get_sword_version(void);
