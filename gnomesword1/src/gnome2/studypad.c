@@ -89,7 +89,7 @@ void gui_studypad_can_close(void)
 		test = gui_gs_dialog(info);
 		if (test == GS_YES) {
 			if (settings.studypadfilename) {
-				g_strdup(settings.studypadfilename);
+				filename = g_strdup(settings.studypadfilename);
 				save_file(filename, editor_cd);
 			} else {
 				gui_fileselection_save(editor_cd);
@@ -97,6 +97,7 @@ void gui_studypad_can_close(void)
 		}
 		settings.modifiedSP = FALSE;
 		g_free(info);
+		if(filename) g_free(filename);
 	}
 }
 

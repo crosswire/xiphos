@@ -139,10 +139,12 @@ void frontend_init(void)
 	/*
 	 *  parallel stuff 
 	 */
-	gui_check_parallel_modules();
-	gui_set_parallel_options_at_start();
-	gui_create_parallel_page();
-	gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
+	if (settings.havebible) {
+		gui_check_parallel_modules();
+		gui_set_parallel_options_at_start();
+		gui_create_parallel_page();
+		gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
+	}
 
 	gui_set_sidebar_porgram_start();
 }
