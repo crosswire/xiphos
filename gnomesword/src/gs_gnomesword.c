@@ -141,12 +141,13 @@ initGnomeSword(SETTINGS * s,
 			       TRUE);
 	/* store text widgets for spell checker */
 	notes = lookup_widget(s->app, "textComments");
-
+/*
 	s->versestyle_item =
 	    additemtooptionmenu(s->app, _("_Settings/"),
 				_("Verse Style"),
 				(GtkMenuCallback)
 				on_verse_style1_activate);
+				*/
 	/* set dictionary key */
 	gtk_entry_set_text(GTK_ENTRY
 			   (lookup_widget
