@@ -56,7 +56,8 @@ extern SETTINGS
 	*settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
 extern GtkWidget 
 	*NEtext,
-	*htmlComments;
+	*htmlComments,
+	*htmlCommentaries;
 extern GString 
 	*gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern gboolean 
@@ -128,7 +129,7 @@ void on_print_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	page_num = 1;
 	font = gnome_font_new_closest ("Helvetica", GNOME_FONT_BOOK, FALSE, 12);
-	gtk_html_print_with_header_footer (GTK_HTML(htmlComments), print_context, .0, .03, NULL, print_footer, NULL);
+	gtk_html_print_with_header_footer (GTK_HTML(htmlCommentaries), print_context, .0, .03, NULL, print_footer, NULL);
 	if (font) gtk_object_unref (GTK_OBJECT (font));
 
 	preview = GTK_WIDGET (gnome_print_master_preview_new (print_master, "HTML Print Preview"));

@@ -77,18 +77,24 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 {
 	string sourceformat;
 	string moduleDriver;
+	string modDirection;
 	gchar *retval;
 	ConfigEntMap::iterator entry;
 	bool noDriver = true;	
 	
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
+	modDirection = ((entry = section.find("Direction")) != section.end()) ? (*entry).second : (string) "";
 	
 	if(!module->isUnicode()) { 
 		g_warning("%s module is not utf8",module->Name());
 		module->Encoding(ENC_UTF8);
 	}
-	
+	/*
+	if (!stricmp(modDirection.c_str(), "RtoL")) {
+		module->Direction(DIRECTION_RTL);
+	}
+	*/
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
 		module->AddRenderFilter(gbftohtml);//Markup(FMT_HTMLHREF);
 		noDriver = false; 

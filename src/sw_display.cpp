@@ -139,7 +139,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	displayHTML(GTK_WIDGET(gtkText), utf8str, utf8len);
 	/* show verse ref in text widget  */
 	sprintf(tmpBuf,
-		"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\"><B>[%s]</B></A></font>[%s] ",
+		"<A HREF=\"[%s] %s\"><FONT COLOR=\"%s\">[%s]</A></font>[%s] ",
 		imodule.Name(), imodule.Description(),
 		settings->bible_verse_num_color, imodule.Name(),
 		imodule.KeyText());
