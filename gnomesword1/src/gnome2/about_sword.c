@@ -121,7 +121,7 @@ GtkWidget *gui_create_about_sword(void)
 	gtk_box_pack_start(GTK_BOX(dialog_vbox27), vbox21, TRUE, TRUE,
 			   0);
 
-	pixmap1 = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+	pixmap1 = gtk_image_new_from_file(PACKAGE_PIXMAPS_DIR
 					     "/sword3.png");
 	gtk_widget_show(pixmap1);
 	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 4);

@@ -36,8 +36,6 @@
 
 #include "main/settings.h"
 
-#include "./pixmaps/tt.xpm"
-
 static struct {
 	GtkHTMLParagraphStyle style;
 	const gchar *description;
@@ -1029,8 +1027,8 @@ static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 
 	{GNOME_APP_UI_TOGGLEITEM, N_("Typewriter"),
 	 N_("Toggle typewriter font style"),
-	 editor_toolbar_tt_cb, NULL, NULL, GNOME_APP_PIXMAP_DATA,
-	 tt_xpm},
+	 editor_toolbar_tt_cb, NULL, NULL, GNOME_APP_PIXMAP_FILENAME,
+	 PACKAGE_PIXMAPS_DIR "/tt.png"},
 	{GNOME_APP_UI_TOGGLEITEM, N_("Bold"), N_("Makes the text bold"),
 	 editor_toolbar_bold_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK,
 	 GTK_STOCK_BOLD},
