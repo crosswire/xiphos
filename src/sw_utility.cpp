@@ -87,7 +87,7 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 	modDirection = ((entry = section.find("Direction")) != section.end()) ? (*entry).second : (string) "";
 	
 	if(!module->isUnicode()) { 
-		g_warning("%s module is not utf8",module->Name());
+//		g_warning("%s module is not utf8",module->Name());
 		module->Encoding(ENC_UTF8);
 	}
 	/*

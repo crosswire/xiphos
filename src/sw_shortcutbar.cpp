@@ -44,6 +44,7 @@
 #include <sys/stat.h>
 #include <dirent.h> 
 #include <string.h>
+#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
 #include "sw_shortcutbar.h"
@@ -140,7 +141,7 @@ GList *loadshortcutbarSW(gchar *filename, gchar *group_name, gchar *use_largeico
 	
 
 void
-saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_icons)
+saveshortcutbarSW(gchar *filename, gchar *group_name, gint group_num, gchar *large_icons)
 {	
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
@@ -148,8 +149,12 @@ saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_
 	ConfigEntMap emap;
 	gchar 
 		buf[500],
-		conffile[256];
-	gint j=0;
+		conffile[256],
+		*item_url,
+		*item_name;
+	gint 
+		j=0,
+		number_of_items;
 	
 	sprintf(conffile,"%s/%s", shortcutbarDir, filename);
 	unlink(conffile);
@@ -161,14 +166,22 @@ saveshortcutbarSW(gchar *filename, gchar *group_name, GList *list, gchar *large_
 	
 	sbconf = new SWConfig(conffile);
 	emap = sbconf->Sections["ROOT"];
-	while (list != NULL) { 
-		sprintf(buf, "branch%d", j++);
-		emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, (gchar *) list->data));	
-		list = g_list_next(list);	
-	}
+	number_of_items = e_shortcut_model_get_num_items(E_SHORTCUT_BAR(settings->shortcut_bar)->model, group_num);
+	
+	for (j = 0; j < number_of_items; j++) {
+		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+					       (settings->shortcut_bar)->model,
+					       group_num,
+					       j, &item_url, &item_name,
+					       NULL);
+		sprintf(buf, "branch%d", j);
+		emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, (gchar *) item_name));	
+		g_warning("saving list item: %s",(gchar*)item_name);
+	}	
+	
 	sbconf->Sections["ROOT"] = emap;
 	sbconf->Save();
-	delete sbconf;  	
+	delete sbconf;  
 }
 
 GList *getModlistSW(gchar *modtype)
@@ -182,12 +195,6 @@ GList *getModlistSW(gchar *modtype)
 	list = NULL;
 	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), modtype)){
-			buf = g_strdup((gchar*)(*it).second->Description());
-			list = g_list_append(list,buf);	
-		}else if (!strcmp((*it).second->Type(),modtype )){ 
-			buf = g_strdup((gchar*)(*it).second->Description());
-			list = g_list_append(list,buf);	
-		}else if (!strcmp((*it).second->Type(),modtype )){ 
 			buf = g_strdup((gchar*)(*it).second->Description());
 			list = g_list_append(list,buf);	
 		}
@@ -214,7 +221,7 @@ displaydictlexSBSW(gchar *modName, gchar *key, SETTINGS *s)
 	sprintf(s->groupName,"%s","Viewer");
 	changegroupnameSB(s, s->groupName, groupnum7);
 	if(!strcmp(modName,viewersbMod->Name())){
-		g_warning("in viewer key = %s",key);
+//		g_warning("in viewer key = %s",key);
 		viewersbMod->SetKey(key); //-- set key to the first one in the list
 		viewersbMod->Display(); 
 	}else{
@@ -222,7 +229,7 @@ displaydictlexSBSW(gchar *modName, gchar *key, SETTINGS *s)
 		it = viewersbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
 		if (it != viewersbMgr->Modules.end()){ //-- if we find the module	
 			viewersbMod = (*it).second;  //-- change module to new module
-			g_warning("in viewer key = %s mod = %s",key,viewersbMod->Name());
+//			g_warning("in viewer key = %s mod = %s",key,viewersbMod->Name());
 			viewersbMod->SetKey(key); //-- set key to the first one in the list
 			viewersbMod->Display(); 
 		}
