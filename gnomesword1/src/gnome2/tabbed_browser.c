@@ -52,14 +52,13 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-static void on_notebook_main_switch_page(GtkNotebook * notebook,
-					GtkNotebookPage * page,
-					gint page_num, GList **tl);
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 					const gchar *label_text);
 void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
 void set_current_tab (PASSAGE_TAB_INFO *pt);
 
+
+GList *passage_list;
 
 /******************************************************************************
  * externs
@@ -71,10 +70,25 @@ PASSAGE_TAB_INFO *cur_passage_tab;
 /******************************************************************************
  * globals to this file only 
  */
-static GList *passage_list;
 static gboolean page_change = FALSE;
 static gint removed_page;
 static const gchar *default_tab_filename = ".last_session_tabs";
+
+static int yes_no2true_false(const gchar * yes_no)
+{
+	if (yes_no && !strcmp(yes_no, "yes"))
+		return TRUE;
+	else
+		return FALSE;
+}
+
+static gchar *true_false2yes_no(int true_false)
+{
+	if (true_false)
+		return "yes";
+	else
+		return "no";
+}
 
 
 /******************************************************************************
@@ -215,6 +229,7 @@ void gui_save_tabs(const gchar *filename)
 	tmp = g_list_first(passage_list);
 	while (tmp != NULL) {
 		pt = (PASSAGE_TAB_INFO*) tmp->data;
+		
 		cur_node = xmlNewChild(section_node,
 				NULL, (const xmlChar *) "tab", NULL);
 		xmlNewProp(cur_node,"text_mod",
@@ -230,7 +245,9 @@ void gui_save_tabs(const gchar *filename)
 		xmlNewProp(cur_node, "dictlex_key", 
 				(const xmlChar *)pt->dictlex_key);		
 		xmlNewProp(cur_node, "book_offset", 
-				(const xmlChar *)pt->book_offset);
+				(const xmlChar *)pt->book_offset);		
+		xmlNewProp(cur_node, "comm_showing", 
+				(const xmlChar *)true_false2yes_no(pt->comm_showing));
 		tmp = g_list_next(tmp);
 	}
 	xmlSaveFormatFile(xml_filename, xml_doc,1);
@@ -330,8 +347,10 @@ void gui_load_tabs(const gchar *filename)
 							xmlFree(val);
 							val = (gchar*)xmlGetProp(tmp_node, "book_offset");
 							pt->book_offset = g_strdup(val);
-							xmlFree(val);
-					
+							xmlFree(val);					
+							val = (gchar*)xmlGetProp(tmp_node, "comm_showing");
+							pt->comm_showing = yes_no2true_false(val);
+							xmlFree(val);							
 							passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 							notebook_main_add_page(pt);
 						}
@@ -467,12 +486,12 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
 
 /******************************************************************************
  * Name
- *  on_notebook_main_switch_page
+ *  gui_notebook_main_switch_page
  *
  * Synopsis
  *   #include "tabbed_browser.h"
  *
- *   void on_notebook_main_switch_page(GtkNotebook * notebook,
+ *   void gui_notebook_main_switch_page(GtkNotebook * notebook,
  *				  GtkNotebookPage * page,
  *				  gint page_num, GList * tl)	
  *
@@ -482,7 +501,7 @@ static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf, const gchar *label_tex
  * Return value
  *   void
  */
-static void on_notebook_main_switch_page(GtkNotebook * notebook,
+void gui_notebook_main_switch_page(GtkNotebook * notebook,
 					 GtkNotebookPage * page,
 					 gint page_num, GList **tl)
 { 
@@ -889,7 +908,7 @@ void gui_notebook_main_setup(void)
 	g_signal_connect(GTK_OBJECT(widgets.notebook_main),
 			   "switch_page",
 			   G_CALLBACK
-			   (on_notebook_main_switch_page), &passage_list);
+			   (gui_notebook_main_switch_page), &passage_list);
 	g_signal_connect(GTK_OBJECT(widgets.button_new_tab), "clicked",
 			   G_CALLBACK(on_notebook_main_new_tab_clicked), NULL);
 		

@@ -66,7 +66,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	gchar *buf;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error;
+	GError *error = NULL;
 	gboolean valid;
 
 	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
@@ -76,16 +76,23 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	while (valid) {
 		/* Walk through the list, reading each row */
 		gchar *str_data;
-		buf =
-		    g_convert(language, -1, UTF_8, OLD_CODESET, &bytes_read,
-			      &bytes_written, error);
-		
-		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
-		if(!buf){
+		buf = g_convert(language, 
+				-1, 
+				UTF_8, 
+				OLD_CODESET, 
+				&bytes_read,
+			 	&bytes_written, 
+				&error);
+		if(buf == NULL) {
+			g_print ("error: %s\n", error->message);
+			g_error_free (error);
 			return;
 		}
+		
+		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
 		if(!g_utf8_collate(g_utf8_casefold(buf,-1),
 				      g_utf8_casefold(str_data,-1))) {
+		/*if(!strcmp(buf,str_data)) {*/
 			g_free(str_data);
 			g_free(buf);
 			return;
@@ -94,13 +101,19 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 		g_free(buf);
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
-	buf =
-	    g_convert(language, -1, UTF_8, OLD_CODESET, &bytes_read,
-		      &bytes_written, error);
-	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
-			      &iter);
-	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, 0,
-			   (gchar *) buf, -1);
+	buf = g_convert(language, 
+			-1, 
+			UTF_8, 
+			OLD_CODESET, 
+			&bytes_read,
+		  	&bytes_written, 
+			&error);
+	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter, &iter);
+	gtk_tree_store_set(GTK_TREE_STORE(model), 
+			&child_iter, 
+			0,
+			(gchar *) buf, 
+			-1);
 	g_free(buf);
 }
 
@@ -554,64 +567,5 @@ void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
 	}	
 }
 
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-GList *gui_fill_count_list(int count)
-{
-	GList *glist = NULL;
-	gint start;
-	gchar buf[32];
-	
-	for(start = 1; start <= count ; start++) {
-		sprintf(buf, "%d", start);
-		glist = g_list_append(glist,
-				 (gchar *) g_strdup(buf));
-	}
-	return glist;
-}			
-
-
-/******************************************************************************
- * Name
- *   
- *
- * Synopsis
- *   #include "gui/utilities.h
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   
- */
-
-void gui_free_count_list(GList *glist)
-{
-	glist = g_list_first(glist);
-	while (glist != NULL) {
-		gchar *buf = (gchar *) glist->data;
-		g_free(buf);
-		glist = g_list_next(glist);
-	}
-	g_list_free(glist);
-}
 
 /******   end of file   ******/
