@@ -94,6 +94,7 @@ struct _settings {
 	        showcomtabs,
 	        showdicttabs,
 	        showshortcutbar,
+		showfavoritesgroup,
 	        showtextgroup,
 	        showcomgroup,
 	        showdictgroup,
