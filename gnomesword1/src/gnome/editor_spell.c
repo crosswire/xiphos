@@ -23,7 +23,7 @@
 #  include "config.h"
 #endif
 
-#ifdef USE_PSPELL
+#ifdef USE_SPELL
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -319,8 +319,8 @@ static gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 			}
 			
 		}
-					current = html_cursor_get_position(ecd->html->engine->cursor); 
-					update_progress_bar(end, current);
+		current = html_cursor_get_position(ecd->html->engine->cursor); 
+		update_progress_bar(end, current);
 	}
 	gtk_widget_set_sensitive(spc_gui.accept_button, 0);
 	gtk_widget_set_sensitive(spc_gui.replace_button, 0);

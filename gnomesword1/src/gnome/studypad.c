@@ -995,7 +995,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(specd->btn_spell);
 	
-#ifdef USE_PSPELL	
+#ifdef USE_SPELL	
 	gtk_widget_set_sensitive(specd->btn_spell, 1);
 #else
 	gtk_widget_set_sensitive(specd->btn_spell, 0);
@@ -1088,7 +1088,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget *notebook)
 	gtk_signal_connect(GTK_OBJECT(specd->btn_replace), "clicked",
 			   GTK_SIGNAL_FUNC(on_btn_replace_clicked),
 			   specd);
-#ifdef USE_PSPELL
+#ifdef USE_SPELL
 	gtk_signal_connect(GTK_OBJECT(specd->btn_spell), "clicked",
 			   GTK_SIGNAL_FUNC(spell_check_cb), specd);
 #endif
