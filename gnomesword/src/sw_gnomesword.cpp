@@ -44,14 +44,11 @@
 #include <sys/stat.h>
 #include <gal/widgets/e-unicode.h>
 
-//#include "gbfhtmlhref.h"
-//#include "thmlhtmlhref.h"
 #include "sw_latin1utf8.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
-//#include "display.h"
 #include "sw_display.h"
-#include "callback.h"
+#include "gs_gui_cb.h"
 #include "sw_gnomesword.h"
 #include "support.h"
 #include "gs_preferences_dlg.h"
@@ -59,7 +56,6 @@
 #include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "gs_html.h"
-//#include "gs_search.h"
 #include "gs_abouts.h"
 #include "gs_info_box.h"
 #include "gs_setup.h"
