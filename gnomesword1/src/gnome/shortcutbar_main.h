@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * shortcutbar.h - create and maintain the main shortcut bar
+ * shortcutbar_main.h - create and maintain the main shortcut bar
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GS_SHORTCUTBAR_H_
-#define __GS_SHORTCUTBAR_H_
+#ifndef __SHORTCUTBAR_MAIN_H_
+#define __SHORTCUTBAR_MAIN_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,29 +28,6 @@ extern "C" {
 
 #include "settings.h"
 
-typedef struct _search_opt SEARCH_OPT;
-struct _search_opt {
-	GtkWidget
-	    * ckbCommentary,
-	    *ckbPerCom, 
-	    *ckbGBS, 
-	    *rbPhraseSearch;
-
-	gchar
-	    * module_name,
-	    *upper_bond, 
-	    *lower_bond, 
-	    *search_string;
-
-	gint
-	    search_type, 
-	    search_params, 
-	    found_count;
-
-	 gboolean 
-	    use_bonds, 
-	    use_lastsearch_for_bonds;
-};
 
 void showSBGroup(SETTINGS * s, gint groupnum);
 void changegroupnameSB(SETTINGS * s,
@@ -63,4 +40,4 @@ void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_SHORTCUTBAR_H_ */
+#endif	/* __SHORTCUTBAR_MAIN_H_ */

@@ -37,6 +37,7 @@
 #include "_gbs.h"
 #include "cipher_key_dialog.h"
 #include "gbs_find.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
 
 /* main */
@@ -45,7 +46,6 @@
 #include "gbs.h"
 #include "gs_bookmarks.h"
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
 #include "gs_html.h"
 
 /******************************************************************************

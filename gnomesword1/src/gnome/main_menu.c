@@ -31,12 +31,12 @@
 /* frontend */
 #include "main_menu.h"
 #include "preferences_dialog.h"
+#include "shortcutbar_main.h"
 
 /* main */
 #include "gs_gnomesword.h"
 #include "support.h"
 #include "gs_html.h"
-#include "gs_shortcutbar.h"
 #include "bibletext.h"
 #include "gs_menu.h"
 #include "gs_gui.h"

@@ -29,11 +29,11 @@
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
 #include "commentary_find.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
 
 /* main */
 #include "commentary.h"
-#include "gs_shortcutbar.h"
 #include "gs_html.h"
 #include "gs_viewcomm_dlg.h"
 #include "settings.h"

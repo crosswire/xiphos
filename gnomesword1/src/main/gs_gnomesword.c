@@ -34,6 +34,7 @@
 /* frontend */
 #include "main_menu.h"
 #include "about_modules.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_dialog.h"
 #include "studypad.h"
 #include "info_box.h"
@@ -54,7 +55,6 @@
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_gui.h"
-#include "gs_shortcutbar.h"
  
 /* backend */
 #include "search_.h"

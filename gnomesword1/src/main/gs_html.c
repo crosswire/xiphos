@@ -60,12 +60,12 @@
 /* frontend */
 #include "_editor.h"
 #include "shortcutbar_viewer.h"
+#include "shortcutbar_main.h"
 
 /* main */ 
 #include "gs_html.h"
 #include "support.h"
 #include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
 #include "gs_interlinear.h"
 #include "settings.h"
 

@@ -31,12 +31,12 @@
 #include "gs_gui.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
-#include "gs_shortcutbar.h"
 #include "settings.h"
 #include "support.h"
 
 /* frontend */
 #include "main_menu.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_dialog.h"
 #include "studypad.h"
 #include "toolbar_nav.h"
