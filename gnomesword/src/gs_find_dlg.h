@@ -34,12 +34,13 @@ extern "C" {
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-
-#include "sw_gbs.h"
+	
+#include "gs_gbs.h"
 	
 typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
 
 #define FIND_DIALOG(name,title) find_dialog ((GnomeDialog ***)&g-> name ## _dialog, g->html, (DialogCtor) gs_ ## name ## _dialog_new, title)
+
 
 
 GSFindDialog * gs_find_dialog_new(GtkWidget *htmlwidget);

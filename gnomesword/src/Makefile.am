@@ -33,6 +33,8 @@ COMMON_SOURCE =  \
     gs_file.h \
     gs_find_dlg.c \
     gs_find_dlg.h \
+    gs_gbs.c \
+    gs_gbs.h \
     gs_getinfo_dlg.c \
     gs_getinfo_dlg.h \
     gs_gnomesword.c \
