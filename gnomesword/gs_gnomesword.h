@@ -27,7 +27,10 @@ extern "C" {
 #endif
 
 #include "gs_sword.h"
-
+	
+#if USE_SHORTCUTBAR	
+#include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#endif /* USE_SHORTCUTBAR */
 
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -66,6 +69,14 @@ struct _settings {
 	        	//------- 28
 };
 
+typedef struct _history HISTORY;
+struct _history {
+        gint itemnum;
+        gchar verseref[80];
+        gchar textmod[80];
+        gchar commod[80];
+};
+
 void initGnomeSword(GtkWidget *app, 
 		SETTINGS *settings, 
 		GList *biblemods, 
@@ -83,8 +94,12 @@ void applyoptions(GtkWidget *app,
 	     	gboolean showcomgroup, 
 	     	gboolean showdictgroup, 
 	     	gboolean showhistorygroup);
+
+#if USE_SHORTCUTBAR
 gint add_sb_group(EShortcutBar * shortcut_bar, 
-		gchar * group_name);		
+		gchar * group_name);
+#endif /* USE_SHORTCUTBAR */
+
 gint getversenumber(GtkWidget * text);
 gint getdictnumber(GtkWidget * text);
 void sbchangeModSword(GtkWidget *app, 
@@ -99,16 +114,25 @@ void clearhistory(GtkWidget *app,
 		GtkWidget *shortcut_bar);
 void editbookmarksLoad(GtkWidget * editdlg);
 void addBookmark(GtkWidget *app);
-
+void updatehistorymenu(GtkWidget *app);
+void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar);
+void updatehistorysidebar(GtkWidget *app);
 void addHistoryItem(GtkWidget *app, 
 		GtkWidget *shortcut_bar, 
 		gchar *ref);
+void historynav(GtkWidget *app, gint direction);
+void changeverseHistory(gint historynum);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);
 void setcurrentversecolor(gint arg1, 
 		gint arg2, 
 		gint arg3);
 void setautosave(gboolean choice);
+void fillSBtoolbars(GtkWidget *app,
+		GList *biblelist,
+		GList *commentarylist,
+		GList *dictionarylist);
+void setupSidebar(GtkWidget *app);
 
 #ifdef __cplusplus
 }

@@ -25,13 +25,14 @@
 #include "callback.h"
 #include "support.h"
 #include "gs_gnomesword.h"
+
+#if USE_GNOMEPRINT
 #include "printstuff.h"
+#endif /* USE_GNOMEPRINT */
+
 #include "gs_file.h"
 #include "gs_studypad.h"
 
-#ifdef USE_ASPELL
-#include "spellcheck.h"
-#endif /* USE_ASPELL */
 
 /******************************************************************************
  * externals
@@ -53,7 +54,8 @@ void on_btnSPnew_clicked(GtkButton * button, gpointer user_data)
 	GtkWidget *text;
 
 	text = lookup_widget(GTK_WIDGET(button), "text3");
-	newSP(text);	/* send text widget to gs_gnomesword.c to start new file */
+	/* send text widget to gs_gnomesword.c to start new file */
+	newSP(text);
 }
 
 /******************************************************************************
@@ -61,7 +63,10 @@ void on_btnSPnew_clicked(GtkButton * button, gpointer user_data)
 ******************************************************************************/
 void on_btnPrint_clicked(GtkButton * button, gpointer user_data)
 {
-	file_print(GTK_WIDGET(button), current_filename, 1); /* pass studypad text widget to print */
+#if USE_GNOMEPRINT
+	/* pass studypad text widget to print */
+	file_print(GTK_WIDGET(button), current_filename, 1);
+#endif /* USE_GNOMEPRINT */
 }
 
 /******************************************************************************
@@ -72,7 +77,7 @@ void on_btnOpenFile_clicked(GtkButton * button, gpointer user_data)
 	GtkWidget *openFile;
 	gchar buf[255];
 
-	sprintf(buf,"%s/BibleStudy/*.pad",homedir);
+	sprintf(buf,"%s/*.pad",homedir);
 	openFile = create_fileselection1();
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
 					buf);
@@ -87,7 +92,7 @@ void on_btnSaveFile_clicked(GtkButton * button, gpointer user_data)
 	GtkWidget *savemyFile, *ok_button2;
 	gchar buf[255];
 
-	sprintf(buf,"%s/BibleStudy/.pad",homedir);	
+	sprintf(buf,"%s/.pad",homedir);	
 	if (current_filename) {
 		saveFile(current_filename);
 		return;
@@ -112,7 +117,7 @@ void on_btnSaveFileAs_clicked(GtkButton * button, gpointer user_data)
 	GtkWidget *savemyFile, *ok_button2;
         gchar buf[255];
 
-	sprintf(buf,"%s/BibleStudy/.pad",homedir);
+	sprintf(buf,"%s/.pad",homedir);
 	savemyFile = create_fileselectionSave();
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(savemyFile),
 					buf);
@@ -170,19 +175,6 @@ void on_text3_changed(GtkEditable * editable, gpointer user_data)
 	}
 	file_changed = TRUE;
 }
-
-/******************************************************************************
- *
-******************************************************************************/
-void on_btnSpell_clicked(GtkButton * button, gpointer user_data)
-{
-#ifdef USE_ASPELL
-	GtkWidget *speller;
-
-	speller = spellcheck(0);
-#endif	/* USE_ASPELL */
-}
-
 
 /******************************************************************************
  * StudyPad functions

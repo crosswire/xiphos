@@ -21,8 +21,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
- 
+ */ 
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -38,35 +37,25 @@
 #include "gs_file.h"
 #include "menustuff.h"
 #include "gs_listeditor.h"
-//#include "searchstuff.h"
 
+#if USE_SHORTCUTBAR
+#include <gal/e-paned/e-hpaned.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-#include  <widgets/e-paned/e-paned.h>
-#include  <widgets/e-paned/e-hpaned.h>
-#include  <widgets/e-paned/e-vpaned.h>
+#endif /* USE_SHORTCUTBAR */
 
-
-extern GList 	*biblemods,
-		*commentarymods,
-		*dictionarymods,
-		*percommods;
-extern gchar *mydictmod;		
+/*****************************************************************************
+* globals
+*****************************************************************************/	
 GtkWidget	*versestyle,	/* widget to access toggle menu - for versestyle */
 		*footnotes,	/* widget to access toggle menu - for footnotes */
   		*strongsnum,/* widget to access toggle menu - for strongs numbers */
 	    	*notepage,	/* widget to access toggle menu - for interlinear notebook page */
 	    	*autosaveitem, /* widget to access toggle menu - for personal comments auto save */
 		*studypad,  /* studypad text widget */
-		*notes;    /* notes text widget */					
-extern GdkColor myGreen; /* current verse color */
-extern gboolean havedict; /* let us know if we have at least one lex-dict module */
-extern gboolean havecomm; /* let us know if we have at least one commentary module */
-extern gboolean usepersonalcomments; /* do we setup for personal comments - default is FALSE */
-extern gboolean bVerseStyle;
-extern gboolean autoSave;
+		*notes;    /* notes text widget */
 gint historyitems = 0;
-extern gint groupnum4;
-extern gint ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
+gint currenthistoryitem = 0;
+
 gboolean isstrongs = FALSE; /* main window selection is not storngs number */
 gchar *current_filename= NULL;	/* filename for open file in study pad window */
 gboolean file_changed = FALSE;	/* set to true if text is study pad has changed - and file is not saved  */
@@ -75,31 +64,55 @@ gboolean changemain = TRUE; /* change verse of Bible text window */
 gint dictpages,
 	 compages;
 SETTINGS *settings;
-gchar 	 bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file after edit */
-extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
+HISTORY historylist[25];
+gchar 	 bmarks[50][80];	/* array to store bookmarks - read in form file when program starts - saved to file on edit */
+
+gboolean addhistoryitem = FALSE; /* do we need to add item to history */
+gboolean firstbackclick = TRUE;
+
+/*****************************************************************************
+* externs
+*****************************************************************************/
+extern GList 	*biblemods,
+		*commentarymods,
+		*dictionarymods,
+		*percommods;
+extern gchar *mydictmod;						
+extern GdkColor myGreen; /* current verse color */
+extern gboolean havedict; /* let us know if we have at least one lex-dict module */
+extern gboolean havecomm; /* let us know if we have at least one commentary module */
+extern gboolean usepersonalcomments; /* do we setup for personal comments - default is FALSE */
+extern gboolean bVerseStyle;
+extern gboolean autoSave;
+extern gint groupnum4;
+extern gint ibookmarks;	/* number of items in bookmark menu  -- declared in filestuff.cpp */
+extern gchar remembersubtree[256];  /* used for bookmark menus declared in filestuff.cpp */
+#if USE_SHORTCUTBAR
 extern gchar *shortcut_types[];
+#endif /* USE_SHORTCUTBAR */
+
 
 /******************************************************************************
  * initGnomeSword - sets up the interface
  *****************************************************************************/
 void
-initGnomeSword(GtkWidget *app, SETTINGS *settings, 
-		GList *biblemods, GList *commentarymods , 
+initGnomeSword(GtkWidget *app, SETTINGS *settings,
+		GList *biblemods, GList *commentarymods ,
 		GList *dictionarymods, GList *percommods)
 {
 	GtkLabel *label1;
 	GtkWidget *notebook;
 	
 /* set color for current verse */
-  	myGreen.red =  settings->currentverse_red; 
+  	myGreen.red =  settings->currentverse_red;
 	myGreen.green = settings->currentverse_green;
 	myGreen.blue =  settings->currentverse_blue;		
 /* add modules to menus -- menu.c */
-	addmodstomenus(app, settings, biblemods, 
+	addmodstomenus(app, settings, biblemods,
 			commentarymods, dictionarymods,
 			percommods);
 /* create popup menus -- menu.c */
-	createpopupmenus(app, settings, biblemods, 
+	createpopupmenus(app, settings, biblemods,
 			commentarymods, dictionarymods,
 			percommods);
 /* add pages to commentary and  dictionary notebooks */			
@@ -116,31 +129,39 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 /* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
-			settings->notebook3page );        
+			settings->notebook3page );
 /* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
 /* Add options to Options Menu and get toggle item widget */
-	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments", 
-				(GtkMenuCallback)on_auto_save_notes1_activate); 
-	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page", 
+	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments",
+				(GtkMenuCallback)on_auto_save_notes1_activate);
+	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page",
 				(GtkMenuCallback)on_show_interlinear_page1_activate);
-	versestyle = additemtooptionmenu(app, "_Settings/", "Verse Style", 
+	versestyle = additemtooptionmenu(app, "_Settings/", "Verse Style",
 				(GtkMenuCallback)on_verse_style1_activate);
-	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes", 
+	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes",
 				(GtkMenuCallback)on_footnotes1_activate);
- 	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers", 
+ 	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers",
  				(GtkMenuCallback)on_strongs_numbers1_activate); 		
 /* set dictionary key */
-        gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);        
+        gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);
         loadbookmarks_programstart(); /* add bookmarks to menubar */
-        changeVerse(settings->currentverse); /* set Text */
+        changeVerseSWORD(settings->currentverse); /* set Text */
 /* show hide shortcut bar - set to options setting */
+#if USE_SHORTCUTBAR
         if(settings->showshortcutbar){
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
         }else{
                 e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
         }
+#else
+        if(settings->showshortcutbar){
+                gtk_paned_set_position(GTK_PANED(lookup_widget(app,"hpaned2")), 106);
+        }else{
+               gtk_paned_set_position(GTK_PANED(lookup_widget(app,"hpaned2")), 0);
+        }
+#endif /* USE_SHORTCUTBAR */
 /* load last used file into studypad */
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
 
@@ -148,15 +169,15 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	/* let's don't do this if we don't have at least one dictionary / lexicon */	
 	if(havedict){ 			
 		/* set page to 0 (first page in notebook) */
-		gint pagenum = 0; 
+		gint pagenum = 0;
 		/* if save page is less than actual number of pages use saved page number else 0 */
-		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page; 
+		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page;
 		/* get notebook */
-		notebook = lookup_widget(app,"notebook4"); 
+		notebook = lookup_widget(app,"notebook4");
 		/* set notebook page */
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
 		/* get the label from the notebook page (module name) */	
-		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook), 
+		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
 		changcurdictModSWORD(label1->label, settings->dictkey, pagenum);	
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
@@ -164,22 +185,25 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
                       NULL);
                 if(settings->showdicttabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
-         /* hide dictionary section of window if we do not have at least one dict/lex */       
-	}else gtk_widget_hide(lookup_widget(app,"hbox8")); 
+         /* hide dictionary section of window if we do not have at least one dict/lex */
+	}else gtk_widget_hide(lookup_widget(app,"hbox8"));
 	
 /* set com module to open notebook page */	
-	if(havecomm){ /* let's don't do this if we don't have at least one commentary */
+	if(havecomm){ /* let's don't do this if we don't have at least one commentary */  	
 		gint pagenum = 0;
 		
-		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
-		notebook = lookup_widget(app,"notebook1");	
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
-		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
-						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		changcurcomModSWORD(label1->label, pagenum);
+		//g_warning("pages = %d : compgs = %d",settings->notebook1page,compages);
+		notebook = lookup_widget(app,"notebook1");
 		gtk_signal_connect (GTK_OBJECT (notebook), "switch_page",
                                         GTK_SIGNAL_FUNC (on_notebook1_switch_page),
                                         NULL);
+		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
+			
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );
+		/*label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
+						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
+		changcurcomModSWORD(label1->label, pagenum);   */
+		
                 if(settings->showcomtabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
         }else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(app,"notebook3")) , 0);	
@@ -196,36 +220,47 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	changecomp3ModSWORD(settings->Interlinear3Module);
 	
 /* hide buttons - only show them if their options are enabled */
-	//gtk_widget_hide(lookup_widget(app,"btnPrint"));
+	gtk_widget_hide(lookup_widget(app,"btnPrint"));
 	gtk_widget_hide(lookup_widget(app,"btnSpell"));
 	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
-
-
-        //gtk_widget_show(lookup_widget(app,"btnPrint"));
-
+	
+/* do not show print button if printing not enabled */
+#ifdef USE_GNOMEPRINT
+        gtk_widget_show(lookup_widget(app,"btnPrint"));
+#endif /* USE_GNOMEPRINT */
+	
 /* do not show spell buttons if spellcheck not enabled */
-#ifdef USE_ASPELL
+#ifdef USE_SPELL
         gtk_widget_show (lookup_widget(app,"btnSpell"));
         gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
-#endif /* USE_ASPELL */	
+#endif /* USE_SPELL */	
+
+#ifdef USE_SHORTCUTBAR
+     /* do nothing */
+#else
+        /* create shortcut bar groups */
+        setupSidebar(app);
+        fillSBtoolbars(app,biblemods , commentarymods, dictionarymods);
+#endif /* USE_SHORTCUTBAR */
+
 /* free module lists */
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
 	g_list_free(percommods);	
-}  
+}
 
-/********************************************************************************************** 
+/**********************************************************************************************
  * addnotebookpages - add pages to commentary and dictionary notebooks
  * notebook - notebook to add the pages to
- * list - list of modules
- *********************************************************************************************/ 
-void 
+ * list - list of modules - add one page per module
+ *********************************************************************************************/
+void
 addnotebookpages(GtkWidget *notebook, GList *list)
 {
 	GList *tmp;
 	gint pg = 0;
-	GtkWidget 
+	GtkWidget
 		*empty_notebook_page, /* used to create new pages */
 		*label;
 		
@@ -236,20 +271,20 @@ addnotebookpages(GtkWidget *notebook, GList *list)
 		gtk_container_add (GTK_CONTAINER (notebook), empty_notebook_page);
 		label = gtk_label_new ((gchar *) tmp->data);
 		gtk_widget_show (label);
-		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook), 
-			gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg++), label); 
+		gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook),
+			gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), pg++), label);
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);	
-} 
-  
+}
+
 
 /*****************************************************************************
- * UpdateChecks(GtkWidget *mainform) update chech menu items 
+ * UpdateChecks(GtkWidget *mainform) update chech menu items
  * and toggle buttons - called on start up
  *****************************************************************************/
 void UpdateChecks(GtkWidget *app)
-{      
+{
 	if(settings->versestyle)	/* set verse style to last setting used */
 		bVerseStyle = TRUE; /* keep VerseStyle in sync with menu */
 	else
@@ -271,29 +306,31 @@ void UpdateChecks(GtkWidget *app)
 	/* set interlinear page menu check item */		
 	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 	
 	/* set auto save personal comments to last setting */
-	autoSave = settings->autosavepersonalcomments; 
+	autoSave = settings->autosavepersonalcomments;
 	/* set auto save menu check item */	
 	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 	
 	/* set Strong's numbers to last setting */
 	if(settings->strongs)	
 		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD("Strong's Numbers","On");  /* " */ 
+		setglobalopsSWORD("Strong's Numbers","On");  /* " */
 	else
 		/* keep strongs numbers in sync with menu */
-		setglobalopsSWORD("Strong's Numbers","Off"); /* ' */ 
+		setglobalopsSWORD("Strong's Numbers","Off"); /* ' */
 	/* set strongs toogle button */
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
 	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;	
         /* fill the dict key clist */
-        if(havedict) FillDictKeys();  
+        if(havedict) FillDictKeysSWORD();
         /* set Text - apply changes */
-        changeVerse(settings->currentverse);  
+        addhistoryitem = FALSE;
+        changeVerseSWORD(settings->currentverse);
+        //addHistoryItem(app, lookup_widget(app, "shortcut_bar"), settings->currentverse);
 }
 
 void
-applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs, 
+applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
 		gboolean showdicttabs, gboolean showtextgroup,
-                gboolean showcomgroup, gboolean showdictgroup, 
+                gboolean showcomgroup, gboolean showdictgroup,
                 gboolean showhistorygroup)
 {
          GtkWidget    *dict,
@@ -311,11 +348,6 @@ applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
         settings->showdictgroup = showdictgroup;
         settings->showhistorygroup = showhistorygroup;
 
-        if(settings->showshortcutbar){
-               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
-        } else {
-               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1); 
-        }
         if(settings->showcomtabs) {
                 gtk_widget_show(comm);
         } else {
@@ -326,6 +358,15 @@ applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
         } else {
                 gtk_widget_hide(dict);
         }
+#if USE_SHORTCUTBAR
+        if(settings->showshortcutbar){
+               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), settings->shortcutbarsize);
+        } else {
+               e_paned_set_position (E_PANED(lookup_widget(app,"epaned")), 1);
+        }
+#else
+        setupSidebar(app);
+#endif /* USE_SHORTCUTBAR */
 }
 
 /******************************************************************************
@@ -333,6 +374,7 @@ applyoptions(GtkWidget *app,gboolean showshortcut, gboolean showcomtabs,
  * shortcut_bar - shortcut bar to add group to
  * group_name - name of the group to be added
  *****************************************************************************/
+#if USE_SHORTCUTBAR
 gint
 add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
 {
@@ -342,6 +384,151 @@ add_sb_group(EShortcutBar *shortcut_bar,gchar *group_name)
         e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
         return group_num;
 }
+#else
+
+
+/******************************************************************************
+ * fillSBtoolbars(
+ * GtkWidget *app,
+ * GList *biblelist,
+ * GList *commentarylist,
+ * GList *dictionarylist)
+*******************************************************************************/
+void fillSBtoolbars(GtkWidget *app, GList *biblelist, GList *commentarylist, GList *dictionarylist)
+{
+	GtkWidget *button,
+		  *tmp_toolbar_icon;
+	GList *tmp = NULL;
+	gint  page = 0;
+	
+	tmp = biblelist;	
+	while (tmp != NULL) {	
+		tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_BOOK_OPEN);
+ 		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar27")),
+                                		GTK_TOOLBAR_CHILD_BUTTON,
+                                		NULL,
+                                		(gchar *) tmp->data,
+                               			(gchar *) tmp->data, NULL,
+                                		tmp_toolbar_icon, NULL, NULL);
+  		gtk_widget_ref (button);
+  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
+                            		(GtkDestroyNotify) gtk_widget_unref);
+  		gtk_widget_show (button);
+  		gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      		GTK_SIGNAL_FUNC (on_textbutton_clicked),
+                     	 	(gchar *)tmp->data);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	tmp = commentarylist;
+	while (tmp != NULL) {
+		tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_BOOK_BLUE);
+ 		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar28")),
+                                		GTK_TOOLBAR_CHILD_BUTTON,
+                                		NULL,
+                                		(gchar *) tmp->data,
+                               			(gchar *) tmp->data, NULL,
+                                		tmp_toolbar_icon, NULL, NULL);
+  		gtk_widget_ref (button);
+  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
+                            		(GtkDestroyNotify) gtk_widget_unref);
+  		gtk_widget_show (button);
+  		gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      				GTK_SIGNAL_FUNC (on_combutton_clicked),
+                     	 			GINT_TO_POINTER(page++));
+               tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+	page = 0;	
+	tmp = dictionarylist;
+	while (tmp != NULL) {	
+		tmp_toolbar_icon = gnome_stock_pixmap_widget (app, GNOME_STOCK_PIXMAP_BOOK_RED);
+ 		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar29")),
+                                		GTK_TOOLBAR_CHILD_BUTTON,
+                                		NULL,
+                                		(gchar *) tmp->data,
+                               			(gchar *) tmp->data, NULL,
+                                		tmp_toolbar_icon, NULL, NULL);
+  		gtk_widget_ref (button);
+  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
+                            		(GtkDestroyNotify) gtk_widget_unref);
+  		gtk_widget_show (button);
+  		gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      				GTK_SIGNAL_FUNC (on_dictbutton_clicked),
+                     	 			GINT_TO_POINTER(page++));
+                tmp = g_list_next(tmp);     	 			
+	}	
+        g_list_free(tmp);             	 	
+}
+
+/*
+ * setupSidebar(void)
+*/
+void setupSidebar(GtkWidget *app)
+{
+
+	if(!settings->showtextgroup){
+		gtk_widget_hide(lookup_widget(app,"btsText"));
+		gtk_widget_hide(lookup_widget(app,"scrolledwindow31")); 	
+	}else{
+		gtk_widget_show(lookup_widget(app,"btsText"));
+		gtk_widget_show(lookup_widget(app,"scrolledwindow31"));
+	}	
+	if(!settings->showcomgroup){
+		gtk_widget_hide(lookup_widget(app,"btsComms"));
+		gtk_widget_hide(lookup_widget(app,"btsComms2"));
+		gtk_widget_hide(lookup_widget(app,"scrolledwindow32"));		
+	}else{			 	
+		gtk_widget_show(lookup_widget(app,"btsComms2"));
+		gtk_widget_show(lookup_widget(app,"scrolledwindow32"));	
+		if(!settings->showtextgroup){
+			 gtk_widget_show(lookup_widget(app,"btsComms"));
+			 gtk_widget_hide(lookup_widget(app,"btsComms2"));
+		}
+	}
+	if(!settings->showdictgroup){
+		gtk_widget_hide(lookup_widget(app,"btsDicts"));
+		gtk_widget_hide(lookup_widget(app,"btsDicts2"));
+		gtk_widget_hide(lookup_widget(app,"scrolledwindow33"));	 	
+	}else{		
+		gtk_widget_show(lookup_widget(app,"btsDicts2"));
+		gtk_widget_show(lookup_widget(app,"scrolledwindow33"));
+		if(!settings->showtextgroup && !settings->showcomgroup){
+			gtk_widget_show(lookup_widget(app,"btsDicts"));
+			gtk_widget_hide(lookup_widget(app,"btsDicts2"));
+		}
+	}
+	if(!settings->showbookmarksgroup){
+		gtk_widget_hide(lookup_widget(app,"btsBookmarks"));
+		gtk_widget_hide(lookup_widget(app,"btsBookmarks2"));
+		gtk_widget_hide(lookup_widget(app,"scrolledwindow34"));	 	
+	}else{
+		gtk_widget_show(lookup_widget(app,"btsBookmarks2"));
+		gtk_widget_show(lookup_widget(app,"scrolledwindow34"));
+		if(!settings->showtextgroup && !settings->showcomgroup
+				&& !settings->showdictgroup){
+			gtk_widget_show(lookup_widget(app,"btsBookmarks"));
+			gtk_widget_hide(lookup_widget(app,"btsBookmarks2"));
+		}
+	}
+	if(!settings->showhistorygroup){
+		gtk_widget_hide(lookup_widget(app,"btsHistory"));
+		gtk_widget_hide(lookup_widget(app,"btsHistory2"));
+		gtk_widget_hide(lookup_widget(app,"scrolledwindow35"));	 	
+	}else{
+		gtk_widget_show(lookup_widget(app,"btsHistory2"));
+		gtk_widget_show(lookup_widget(app,"scrolledwindow35"));
+		if(!settings->showtextgroup && !settings->showcomgroup
+				&& !settings->showdictgroup
+				&& !settings->showbookmarksgroup){
+			gtk_widget_show(lookup_widget(app,"btsHistory"));
+			gtk_widget_hide(lookup_widget(app,"btsHistory2"));
+		}
+	}
+	
+}
+#endif /* USE_SHORTCUTBAR */
+
 
 /*****************************************************************************		
  * return verse number form verse in main Bible window
@@ -360,7 +547,7 @@ gint getversenumber(GtkWidget *text)
 	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); /* get char at current position (index) */
 	 if(!isdigit(cbuf)) return 0; /* if cbuf is not a number stop - do no more */
 	 endindex = index;  /* set endindex to index */
-	 while(isdigit(cbuf)){ /* loop until cbuf is not a number */	 
+	 while(isdigit(cbuf)){ /* loop until cbuf is not a number */	
 	 	cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); /* get next char */
 	 	if(cbuf == ')' || cbuf == '>') isstrongs = TRUE;
 	 	++endindex;   /* increment endindex */
@@ -368,7 +555,7 @@ gint getversenumber(GtkWidget *text)
 	 --endindex; /* our last char was not a number so back up one */
 	 startindex = index; /* set startindex to index */
 	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); /* get char at index - we know it is a number */
-	 while(isdigit(cbuf)){  /* loop backward util cbuf is not a number */	 
+	 while(isdigit(cbuf)){  /* loop backward util cbuf is not a number */	
 	        cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); /* get previous char */
 	 	if(cbuf == '(' || cbuf == '<') isstrongs = TRUE;
 	 	--startindex; /* decrement startindex  */ 	 		
@@ -422,14 +609,15 @@ gint getdictnumber (GtkWidget *text)
 void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, gint item_num)
 {
         GtkWidget       *notebook;
+#if USE_SHORTCUTBAR
         gchar		*type[1],
-        		*ref[1];
-
+			*ref[1];
 	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
 						  group_num,
 						  item_num,
 						  type,
-						  ref); 	
+						  ref);
+					  	
 	if(!strcmp(type[0],"bible:")) {
 		changecurModSWORD(ref[0]);
 	}
@@ -446,8 +634,23 @@ void sbchangeModSword(GtkWidget *app, GtkWidget *shortcut_bar, gint group_num, g
   		}
 	}
 	if(!strcmp(type[0],"history:")) {
-		changeVerse(ref[0]);
+		changeVerseSWORD(ref[0]);
+	}						
+#else
+	if(group_num == 1) {
+		if(havecomm) { //-- let's don't do this if we don't have at least one commentary	           			            	
+			notebook = lookup_widget(app,"notebook1"); //-- get notebook
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
+    		}
+    	}
+	if(group_num == 2) {
+		if(havedict) { //-- let's don't do this if we don't have at least one dictionary / lexicon	           			            	
+			notebook = lookup_widget(app,"notebook4"); //-- get notebook
+		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
+  		}
 	}
+#endif /* USE_SHORTCUTBAR */	
+
 }
 
 /*****************************************************************************
@@ -467,17 +670,17 @@ void setformatoption(GtkWidget *button)
  *notebook - notebook widget - main notebook
  *page_num - notebook page number
 *****************************************************************************/
-void changepagenotebook(GtkNotebook *notebook,gint page_num) 
+void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
         settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
-        if(page_num < 3) changeVerse(current_verse); /* if we changed to page 0, 1 or 2 */
+        if(page_num < 3) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
 /******************************************************************************
  *openpropertiesbox - someone clicked properties
 ******************************************************************************/
-void openpropertiesbox(void)    
+void openpropertiesbox(void)
 {
 	GtkWidget   *Propertybox, 	/* pointer to propertybox dialog */
                 *cpcurrentverse, 	   /* pointer to current verse color picker */
@@ -526,20 +729,59 @@ void openpropertiesbox(void)
  *app
  *shortcut_bar
 *****************************************************************************/
-void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)    
+void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
 {
+#if USE_SHORTCUTBAR
         gint i;
+#else
+        GtkWidget *toolbar30,
+		  *button;
+#endif /* USE_SHORTCUTBAR */
 
         removemenuitems(app, "_History/<Separator>", historyitems+1);
         addseparator(app, "_History/C_lear");
+        /* set sensitivity of history buttons */
+        gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), FALSE);
+	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
+	
         if(settings->showhistorygroup){
+#if USE_SHORTCUTBAR
         	for(i = historyitems-1; i >= 0; i--) {
         		e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 						  groupnum4,
 						  i);
 		}
+#else
+        	gtk_widget_destroy(lookup_widget(app,"toolbar30"));
+
+        	toolbar30 = gtk_toolbar_new (GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_TEXT);
+  		gtk_widget_ref (toolbar30);
+  		gtk_object_set_data_full (GTK_OBJECT (app), "toolbar30", toolbar30,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  		gtk_widget_show (toolbar30);
+  		gtk_container_add (GTK_CONTAINER (lookup_widget(app,"viewport4")), toolbar30);
+  		gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar30), GTK_RELIEF_NONE);
+  	
+  		button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar30")),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Clear History",
+                                "Clear History",
+                                NULL,
+                                NULL, NULL, NULL);
+  		gtk_widget_ref (button);
+  		gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
+                            	(GtkDestroyNotify) gtk_widget_unref);
+  		gtk_widget_show (button);
+		gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      		GTK_SIGNAL_FUNC (on_btnClearHistory_clicked),
+                     	 	NULL);
+
+#endif /* USE_SHORTCUTBAR */
         }
         historyitems = 0;
+        currenthistoryitem = 0;
+        firstbackclick = TRUE;
 }
 
 /*****************************************************************************
@@ -594,16 +836,178 @@ void addBookmark(GtkWidget *app)
 *****************************************************************************/
 void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)  
 {
+        gint i;
+
 	/* add item to history menu */
-	additemtognomemenu(app, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); 
-	++historyitems;
+	if(historyitems >= 24) {
+	        for(i=0;i<24;i++) { 	
+	                historylist[i] = historylist[i+1];
+	        }
+	        historyitems = 24;
+	}
+	historylist[historyitems].itemnum = historyitems;	
+	sprintf(historylist[historyitems].verseref,"%s",ref);
+	sprintf(historylist[historyitems].textmod,"%s",(gchar *)gettextmodSWORD);
+	sprintf(historylist[historyitems].commod,"%s",(gchar *)getcommodSWORD);
+	
+	++historyitems;	
+	currenthistoryitem = historyitems;
+        /* set sensitivity of history buttons */
+	if(currenthistoryitem > 0) gtk_widget_set_sensitive(lookup_widget(app,"btnBack"), TRUE);
+	gtk_widget_set_sensitive(lookup_widget(app,"btnFoward"), FALSE);
+	updatehistorymenu(app);
+	firstbackclick = TRUE;
 	if(settings->showhistorygroup){
-		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      groupnum4, -1,
-						      shortcut_types[3],
-						      ref);
+#if USE_SHORTCUTBAR
+                updatehistoryshortcutbar(app, shortcut_bar);
+#else     					
+		updatehistorysidebar(app);
+#endif /* USE_SHORTCUTBAR */						
 	}
 }
+
+/*
+ *
+ */
+void changeverseHistory(gint historynum)
+{
+        currenthistoryitem = historynum;
+        if(firstbackclick){
+                 addhistoryitem = TRUE;
+                 firstbackclick = FALSE;
+        } else   addhistoryitem = FALSE;
+        changeVerseSWORD(historylist[historynum].verseref);
+}
+/*
+ *
+ */
+void historynav(GtkWidget *app, gint direction)
+{
+        addhistoryitem = FALSE;
+        if(direction){
+                if(currenthistoryitem < historyitems-1){
+                        ++currenthistoryitem;
+                        changeVerseSWORD(historylist[currenthistoryitem].verseref);
+
+                }
+                /* set sensitivity of history buttons */
+	        if(currenthistoryitem >= historyitems-1) gtk_widget_set_sensitive(
+	                                lookup_widget(app,"btnFoward"), FALSE);
+	        if(currenthistoryitem >= 0) gtk_widget_set_sensitive(
+	                                lookup_widget(app,"btnBack"), TRUE);
+
+        } else {
+
+                if(currenthistoryitem > 0){
+                        --currenthistoryitem;
+                        if(firstbackclick) addhistoryitem = TRUE;
+                        changeVerseSWORD(historylist[currenthistoryitem].verseref);
+                        firstbackclick = FALSE;
+                }
+                /* set sensitivity of history buttons */
+	        if(currenthistoryitem < 1) gtk_widget_set_sensitive(
+	                                lookup_widget(app,"btnBack"), FALSE);
+	        if(currenthistoryitem < historyitems) gtk_widget_set_sensitive(
+	                                lookup_widget(app,"btnFoward"), TRUE);
+
+        }
+        //currenthistoryitem
+}
+
+/*
+ *
+ */
+void updatehistorymenu(GtkWidget *app)
+{
+        gint i;
+        gchar buf[80];
+
+        removemenuitems(app, "_History/<Separator>", historyitems+1);
+        addseparator(app, "_History/C_lear");
+
+        for(i=0;i<historyitems;i++) {
+                sprintf(buf,"%d",historylist[i].itemnum);
+                additemtognomemenu(app, historylist[i].verseref, buf, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate);
+        }
+
+}
+
+#if USE_SHORTCUTBAR
+/*
+ *
+ */
+void updatehistoryshortcutbar(GtkWidget *app, GtkWidget *shortcut_bar)
+{
+        gint i;
+
+        for(i = historyitems-2; i >= 0; i--) {
+
+               // g_warning("i = %d\n",i);
+                e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+                                                groupnum4,
+						i);
+        }
+        for(i=0;i<historyitems;i++) {
+                e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
+						groupnum4, -1,
+						shortcut_types[3],
+						historylist[i].verseref);
+        }
+}
+
+#else
+/*
+ *
+ */
+void updatehistorysidebar(GtkWidget *app)
+{
+        GtkWidget *button,
+                *toolbar30;
+        gint i;
+
+        gtk_widget_destroy(lookup_widget(app,"toolbar30"));
+
+        toolbar30 = gtk_toolbar_new (GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_TEXT);
+        gtk_widget_ref (toolbar30);
+        gtk_object_set_data_full (GTK_OBJECT (app), "toolbar30", toolbar30,
+                            (GtkDestroyNotify) gtk_widget_unref);
+        gtk_widget_show (toolbar30);
+        gtk_container_add (GTK_CONTAINER (lookup_widget(app,"viewport4")), toolbar30);
+        gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar30), GTK_RELIEF_NONE);
+  	
+        button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar30")),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                "Clear History",
+                                "Clear History",
+                                NULL,
+                                NULL, NULL, NULL);
+        gtk_widget_ref (button);
+        gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
+                            	(GtkDestroyNotify) gtk_widget_unref);
+        gtk_widget_show (button);
+        gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      		GTK_SIGNAL_FUNC (on_btnClearHistory_clicked),
+                     	 	NULL);
+                     	 	
+        for(i=0;i<historyitems;i++) {
+                button = gtk_toolbar_append_element (GTK_TOOLBAR (lookup_widget(app,"toolbar30")),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                historylist[i].verseref,
+                                historylist[i].verseref, NULL,
+                                NULL, NULL, NULL);
+  	        gtk_widget_ref (button);
+  	        gtk_object_set_data_full (GTK_OBJECT (app), "button", button,
+                            	(GtkDestroyNotify) gtk_widget_unref);
+  	        gtk_widget_show (button);
+	        gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      		GTK_SIGNAL_FUNC (on_historybutton_clicked),
+                     	 	GINT_TO_POINTER(historylist[i].itemnum));
+         }	
+
+}
+#endif /* USE_SHORTCUTBAR */	
 
 /*****************************************************************************
  * showIntPage - do we want to see interlinear page?
@@ -654,3 +1058,4 @@ void setautosave(gboolean choice)
 	}
 	settings->autosavepersonalcomments = choice; /* remember our choice for next startup */
 }
+
