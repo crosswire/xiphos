@@ -25,6 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include <glib-1.2/glib.h>
 	
 void create_bookmarks(gchar * dir);
 void save_bookmarks(GNode * bookmark_tree);

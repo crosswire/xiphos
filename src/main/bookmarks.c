@@ -24,8 +24,6 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
-
 #include "main/bookmarks.h"
 #include "main/settings.h"
 #include "backend/bookmarks.h"
