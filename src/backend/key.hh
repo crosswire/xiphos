@@ -25,7 +25,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include <gnome.h>
 
 int backend_clear_scope(void);	
 int backend_clear_search_list(void);	

@@ -50,6 +50,7 @@
 #include "main/settings.h"
 #include "main/configs.h"
 #include "main/module.h"
+#include "main/module_dialogs.h"
 #include "main/sword.h"
 #include "main/xml.h"
 
@@ -205,7 +206,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	}
 	if(!strcmp(work_buf[2],"verse")) {
 		if(clicked) {
-		g_warning(work_buf[3]);
+		//g_warning(work_buf[3]);
 			settings.cvparallel = 
 				gui_update_controls_parallel(work_buf[3]);
 			gui_update_parallel_page_detached();
@@ -420,6 +421,114 @@ static gint reference_uri(const gchar * url, gboolean clicked)
 	return 1;
 }
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/utilities.h"
+ *
+ *   gint (const gchar * url)
+ *
+ * Description
+ *   handle a sword uri in the form 'sword://KJV/1John5:8'
+ *                                   'sword://MHC/Genesis1:1'
+ *                                   'sword:///Romans8:28'
+ *   and display in the appropriate pane
+ *
+ * Return value
+ *   gint
+ */
+
+static gint bookmark_uri(const gchar * url, gboolean use_dialog)
+{
+	gchar *buf = NULL;
+	gchar *module = NULL;
+	const gchar *key = NULL;
+	gchar *tmpkey = NULL;
+	gint mod_type;
+	gint verse_count;
+	gboolean change_verse = FALSE;
+	gchar **work_buf = NULL;
+	
+	
+	work_buf = g_strsplit (url,"/",4);
+	if(!work_buf[2] && !work_buf[KEY]) {
+		alert_url_not_found(url);
+		g_strfreev(work_buf);
+		return 0;
+	}
+	if(!work_buf[3]) {
+		tmpkey = work_buf[MODULE];		
+	} else
+		tmpkey = work_buf[KEY];
+	
+	verse_count = backend->is_Bible_key(tmpkey, settings.currentverse);
+	if(!work_buf[3] && !verse_count){
+		alert_url_not_found(url);
+		g_strfreev(work_buf);
+		return 0;
+	}
+	if(backend->is_module(work_buf[MODULE])) {
+		mod_type = backend->module_type(work_buf[MODULE]);
+		switch(mod_type) {
+			case TEXT_TYPE:	
+				if(use_dialog)
+					main_bibletext_dialog_goto_bookmark(
+								(gchar*)url);
+				else {
+					key = gui_update_nav_controls(tmpkey);
+					main_display_bible(work_buf[MODULE], key);
+					main_display_commentary(
+							settings.CommWindowModule, key);
+					main_keep_bibletext_dialog_in_sync((gchar*)key);
+					if(key) g_free((gchar*)key);
+				}
+			break;
+			case COMMENTARY_TYPE:				
+				key = gui_update_nav_controls(tmpkey);
+				main_display_bible(
+						settings.MainWindowModule, key);
+				main_display_commentary(work_buf[MODULE], key);
+				if(key) g_free((gchar*)key);	
+			break;
+			case DICTIONARY_TYPE:
+				main_display_dictionary(work_buf[MODULE],
+							tmpkey);
+			break;
+			case BOOK_TYPE:
+				main_display_book(work_buf[MODULE], tmpkey); 
+			break;
+		}
+	} 
+	g_strfreev(work_buf);
+	
+	/*
+	 * change parallel verses
+	 */
+	/*if (settings.dockedInt) {
+		gui_update_parallel_page();
+	}
+	*/
+	/* 
+	 * add item to history 
+	 */
+	/*if (settings.addhistoryitem) {
+		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
+			//g_warning("currentverse = %s",settings.currentverse);
+			gui_add_history_Item(widgets.app,
+				       GTK_WIDGET
+				       (widgets.shortcutbar),
+				       settings.currentverse);
+	}
+	settings.addhistoryitem = TRUE;
+	*/
+	return 1;
+	
+}
+
+
 /******************************************************************************
  * Name
  *   sword_uri
@@ -480,6 +589,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 				main_display_bible(work_buf[MODULE], key);
 				main_display_commentary(
 						settings.CommWindowModule, key);
+				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				if(key) g_free((gchar*)key);
 			break;
 			case COMMENTARY_TYPE:				
@@ -503,6 +613,7 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 			/* display in current Bible and Commentary */
 			main_display_bible(settings.MainWindowModule, key);
 			main_display_commentary(settings.CommWindowModule, key);
+			main_keep_bibletext_dialog_in_sync((gchar*)key);
 			if(key) g_free((gchar*)key);
 		} else {
 			alert_url_not_found(url);
@@ -555,6 +666,8 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	//g_warning(url);
 	if(strstr(url,"sword://"))
 		return sword_uri(url,clicked);
+	if(strstr(url,"bookmark://"))
+		return bookmark_uri(url,clicked);
 	if(strstr(url,"book://"))
 		return sword_uri(url,clicked);
 	if(strstr(url,"chapter://"))
@@ -575,5 +688,35 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		alert_url_not_found(url);*/
 	return 0;
 }
+
+
+/******************************************************************************
+ * Name
+ *   main_get_mod_type_from_url
+ *
+ * Synopsis
+ *   #include "gui/utilities.h"
+ *
+ *   gint main_get_mod_type_from_url(const gchar * url)
+ *
+ * Description
+ *  
+ *
+ * Return value
+ *   gint
+ */
+ 
+gint main_get_mod_type_from_url(const gchar * url)
+{
+	gchar **work_buf = NULL;
+	gint retval = -1;
+		
+	work_buf = g_strsplit (url,"/",4);
+	if(!work_buf[MODULE])
+		return retval;
+	retval = backend->module_type(work_buf[MODULE]);	
+	g_strfreev(work_buf);
+	return retval;	
+}	
 
 /******   end of file   ******/

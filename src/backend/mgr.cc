@@ -40,6 +40,7 @@
 #include "backend/sword_main.hh"
 
 #include "main/search.h"
+#include "main/sword.h"
 
 //using std::string;
 //using std::map;

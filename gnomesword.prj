@@ -1,4 +1,4 @@
-# Anjuta Version 1.2.1 
+# Anjuta Version 1.1.98 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.2.1
+anjuta.version=1.1.98
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 2.0.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr --enable-debug --enable-sword_cvs
+project.configure.options=--prefix=/usr --enable-debug
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -58,6 +58,7 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
+preferences.autoformat.style=Style of Kangleipak
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -76,7 +77,6 @@ module.include.files=\
 	src/gui/about_sword.h\
 	src/gui/bibletext.h\
 	src/gui/bibletext_dialog.h\
-	src/gui/bibletext_menu.h\
 	src/gui/bookmarks.h\
 	src/gui/bookmarks_menu.h\
 	src/gui/bookmarks_treeview.h\
@@ -167,7 +167,6 @@ module.source.files=\
 	src/backend/sword.cpp\
 	src/backend/tree.cc\
 	src/main/bibletext.c\
-	src/main/commentary.c\
 	src/main/dictlex.c\
 	src/main/gbs.c\
 	src/main/main.c\
@@ -186,7 +185,6 @@ module.source.files=\
 	src/gnome2/about_sword.c\
 	src/gnome2/bibletext.c\
 	src/gnome2/bibletext_dialog.c\
-	src/gnome2/bibletext_menu.c\
 	src/gnome2/commentary.c\
 	src/gnome2/commentary_dialog.c\
 	src/gnome2/commentary_menu.c\
@@ -249,7 +247,8 @@ module.source.files=\
 	src/main/lists.cc\
 	src/main/url.cc\
 	src/main/sidebar.cc\
-	src/main/module_dialogs.cc
+	src/main/module_dialogs.cc\
+	src/main/commentary.cc
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
