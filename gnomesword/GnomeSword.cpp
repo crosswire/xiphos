@@ -153,9 +153,14 @@ gint    groupnum1 = 0,
         groupnum4 = 0,
         greekpage = 0,
         hebrewpage = 0;
-//gint    sbsize = 120;
 
-//----------------------------------------------------------------------------------------------
+
+/***********************************************************************************************
+initSwrod has grown into a monster - it needs to be at least two functions
+initSwrod to setup all the Sword stuff 
+and 
+initGnomeSword to setup the interface
+***********************************************************************************************/
 void
 initSword(GtkWidget *mainform,  //-- apps main form
 	//GtkWidget *menu1,  //-- main text window's popup menu
@@ -204,9 +209,9 @@ initSword(GtkWidget *mainform,  //-- apps main form
 		j, //-- counter
 		itemp = 0;
 		
-	GList   *biblemods = NULL,
-	        *commentarymods = NULL,
-	        *dictionarymods = NULL;
+	GList 	*biblemods = NULL,
+		*commentarymods = NULL,
+		*dictionarymods = NULL;
 					
    	gchar *sourceformat;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
@@ -214,8 +219,8 @@ initSword(GtkWidget *mainform,  //-- apps main form
   	myset = readsettings();  //-- load settings into structure
   	settings = &myset;       //-- set pointer to structure
   	gbftoplain	= new GBFPlain(); //-- renderfilter
-  	gbftohtml		= new GBFHTML(); //-- sword renderfilter gbf to html
-  	plaintohtml   = new PLAINHTML(); //-- sword renderfilter plain to html
+  	gbftohtml	= new GBFHTML(); //-- sword renderfilter gbf to html
+  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -631,6 +636,20 @@ initSword(GtkWidget *mainform,  //-- apps main form
         gtk_widget_show (lookup_widget(MainFrm,"btnSpellNotes"));
 #endif /* USE_ASPELL */
 }
+
+
+/*
+ * initGnomeSword - sets up the interface
+*/
+/*
+void
+initGnomeSword(GList *biblemods, 
+		GList *commentarymods, 
+		GList *dictionarymods)
+{
+		
+}  
+*/
 
 /********************************************************************************************** 
  * changeVerse - this function changes all currently used sword Bible and commentary modules 
