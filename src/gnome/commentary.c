@@ -34,9 +34,9 @@
 #include "gui/commentary_find.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
+#include "gui/html.h"
 
 #include "main/commentary.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
@@ -243,7 +243,7 @@ static void on_notebook_comm_switch_page(GtkNotebook * notebook,
 
 static void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	copyGS_HTML(c->html);
+	gui_copy_html(c->html);
 }
 
 /******************************************************************************
@@ -291,7 +291,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 
 	memset(dict_mod, 0, 16);
 	module_name_from_description(dict_mod, dict_mod_description);
-	dict_key = get_word_or_selection(cur_c->html, FALSE);
+	dict_key = gui_get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
 		gui_display_dictlex_in_viewer(dict_mod, dict_key);
 		g_free(dict_key);
@@ -318,7 +318,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 							COMM_DATA * c)
 {
-	gchar *key = get_word_or_selection(c->html, FALSE);
+	gchar *key = gui_get_word_or_selection(c->html, FALSE);
 	if (key) {
 		gui_display_dictlex_in_viewer(settings.DictWindowModule, 
 						key);
@@ -422,7 +422,7 @@ static void on_comm_showtoolbar_activate(GtkMenuItem * menuitem,
 
 static void on_view_new_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 {
-	gui_open_commentary_dialog(c->modnum);
+	gui_open_commentary_dialog(c->mod_name);
 }
 
 /******************************************************************************
@@ -807,7 +807,7 @@ static void on_btn_forward_clicked(GtkButton * button, COMM_DATA * c)
 
 static void on_btn_print_clicked(GtkButton * button, COMM_DATA * c)
 {
-	html_print(c->html);
+	gui_html_print(c->html);
 }
 
 /******************************************************************************
@@ -882,7 +882,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
-			key = buttonpresslookupGS_HTML(c->html);
+			key = gui_button_press_lookup(c->html);
 			if (key) {
 				gchar *dict = NULL;
 				if (settings.useDefaultDict)
@@ -1117,9 +1117,9 @@ static void create_commentary_pane(COMM_DATA *c)
 
 
 	gtk_signal_connect(GTK_OBJECT(c->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(c->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), 
+			   GTK_SIGNAL_FUNC(gui_url), 
 			   (gpointer) settings.app);
 	gtk_signal_connect(GTK_OBJECT(c->html), "button_release_event",
 			   GTK_SIGNAL_FUNC(on_button_release_event), 

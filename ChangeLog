@@ -1,3 +1,15 @@
+2002-07-18  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* renamed main/gs_html.* to gui/html.h and gnome/html.c
+
+
+2002-07-17  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* changed gnome/bibletext_dialog.c, gnome/commentary_dialog.c 
+	  and gnome/dictlex_dialog.c to open unlimited dialogs (well, 
+	  limited by system resorces)
+
+
 2002-07-16  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed main/support.*

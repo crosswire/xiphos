@@ -51,6 +51,7 @@
 #include "gui/history.h"
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
+#include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -60,7 +61,6 @@
 #include "main/percomm.h"
 #include "main/dictlex.h"
 #include "main/settings.h"
-#include "main/gs_html.h"
 #include "main/gs_menu.h"
  
 #include "backend/search_.h"
@@ -116,14 +116,9 @@ void init_gnomesword(void)
 	 */
 	if (havebible) {
 		gui_setup_text(get_list(TEXT_LIST));
-	}
-	/*
-	 *  setup Bible text dialog gui 
-	 */
-	if (havebible) {
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
-
+	
 	/*
 	 *  setup commentary gui support 
 	 */
@@ -131,6 +126,7 @@ void init_gnomesword(void)
 		gui_setup_commentary(get_list(COMM_LIST));	
 		gui_setup_commentary_dialog(get_list(COMM_LIST));
 	}
+	
 	/*
 	 *  setup personal comments gui support 
 	 */
@@ -597,15 +593,15 @@ void display_about_module_dialog(gchar * modname, gboolean isGBS)
 		}
 
 		about_module_display(to, bufabout);	/* send about info to display function */
-		beginHTML(text, FALSE);
-		displayHTML(text, "<html><body>",
+		gui_begin_html(text, FALSE);
+		gui_display_html(text, "<html><body>",
 			    strlen("<html><body>"));
-		displayHTML(text, discription, strlen(discription));
+		gui_display_html(text, discription, strlen(discription));
 		if (to)
-			displayHTML(text, to, strlen(to));
-		displayHTML(text, "</body></html>",
+			gui_display_html(text, to, strlen(to));
+		gui_display_html(text, "</body></html>",
 			    strlen("</body></html>"));
-		endHTML(text);
+		gui_end_html(text);
 	}
 
 	else
@@ -699,7 +695,7 @@ void module_name_from_description(gchar *mod_name, gchar *description)
 
 
 
-int get_module_page(char *module_name, char *module_type)
+int get_module_number(char *module_name, char *module_type)
 {
 	return backend_get_module_page(module_name, module_type);
 }

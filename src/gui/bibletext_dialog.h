@@ -34,6 +34,7 @@ struct _viewtext {
 	GtkWidget *spb_verse;
 	GtkWidget *html;
 	GtkWidget *btn_print;
+	GtkWidget *statusbar;
 	gchar *mod_name;
 	gchar key[80];
 	gint dialog_number;
@@ -41,7 +42,7 @@ struct _viewtext {
 	TEXT_DATA *t;
 };	
 
-void gui_open_bibletext_dialog(gint mod_num);
+void gui_open_bibletext_dialog(gchar * mod_name);
 void gui_setup_bibletext_dialog(GList *mods);
 void gui_shutdown_bibletext_dialog(void);
 

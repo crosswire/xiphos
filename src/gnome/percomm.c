@@ -38,9 +38,9 @@
 #include "gui/editor_menu.h"
 #include "gui/info_box.h"
 #include "gui/utilities.h"
+#include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/commentary.h"
@@ -546,7 +546,7 @@ static void on_btn_delete_clicked(GtkButton * button,
 static void on_btn_print_clicked(GtkButton * button, 
 					GSHTMLEditorControlData * ecd)
 {
-	html_print(ecd->htmlwidget);
+	gui_html_print(ecd->htmlwidget);
 }
 
 /******************************************************************************
@@ -993,10 +993,10 @@ void create_percomm_pane(PC_DATA *p)
 			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 			   p->ec);
 	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "link_clicked", 
-			GTK_SIGNAL_FUNC(on_link_clicked),	/* gs_html.c */
+			GTK_SIGNAL_FUNC(gui_link_clicked),	/* gs_html.c */
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "on_url", 
-			GTK_SIGNAL_FUNC(on_url),	/* gs_html.c */
+			GTK_SIGNAL_FUNC(gui_url),	/* gs_html.c */
 			   NULL);
 
 	gtk_signal_connect(GTK_OBJECT(p->ec->btn_save), "clicked",

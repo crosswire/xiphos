@@ -28,10 +28,10 @@
 
 #include "gui/gtkhtml_display.h"
 #include "gui/dictlex_dialog.h"
+#include "gui/html.h"
 
 #include "main/dictlex.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
@@ -41,6 +41,7 @@
  */
 static GList * dialog_list;
 static DL_DIALOG *cur_dlg;
+static gboolean dialog_freed;
 
 /******************************************************************************
  * Name
@@ -100,6 +101,82 @@ static void on_entry_lookup_changed(GtkEditable * editable,
 	firsttime = FALSE;
 }
 
+
+/******************************************************************************
+ * Name
+ *  dialog_set_focus 
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
+                                        DL_DIALOG * dlg)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_set_focus(GtkWindow * window, GtkWidget * widget,
+                                        DL_DIALOG * dlg)
+{
+	cur_dlg = dlg;
+	g_warning("current module = %s",cur_dlg->d->mod_name);
+}
+
+
+/******************************************************************************
+ * Name
+ *   free_on_destroy
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void free_on_destroy(DL_DIALOG * dlg)
+ *
+ * Description
+ *   removes dialog from dialog_list when dialog is destroyed other than
+ *   program shut down
+ *
+ * Return value
+ *   void
+ */
+
+static void free_on_destroy(DL_DIALOG * dlg)
+{	
+	g_free(dlg->d);
+	dialog_list = g_list_remove(dialog_list, (DL_DIALOG *) dlg);
+		g_warning("shuting down %s dialog",dlg->d->mod_name);
+	g_free(dlg);
+}
+
+
+/******************************************************************************
+ * Name
+ *   dialog_destroy
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void dialog_destroy(GtkObject *object, DL_DIALOG * dlg)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_destroy(GtkObject *object, DL_DIALOG * dlg)
+{
+	if(!dialog_freed)
+		free_on_destroy(dlg);
+	dialog_freed = FALSE;
+}
+
+
 /******************************************************************************
  * Name
  *   on_btn_close_clicked
@@ -118,9 +195,76 @@ static void on_entry_lookup_changed(GtkEditable * editable,
 
 static void on_btn_close_clicked(GtkButton *button, DL_DIALOG *dlg)
 {
-	gtk_widget_destroy(dlg->dialog);
-	dlg->dialog = NULL;
+	if(dlg->dialog) {
+		dialog_freed = FALSE;
+		gtk_widget_destroy(dlg->dialog);
+	}
 }
+
+
+/******************************************************************************
+ * Name
+ *   dialog_url
+ *
+ * Synopsis
+ *   #include "dictlex_dialog.h"
+ *
+ *   void dialog_url(GtkHTML * html, const gchar * url, DL_DATA * d)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_url(GtkHTML * html, const gchar * url, DL_DIALOG *dlg)
+{
+	//gchar buf[255];
+	//gint context_id2;
+	
+	cur_dlg = dlg;
+	/*
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(vt->statusbar), context_id2);
+
+	
+	if (url == NULL) {		
+		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
+			   "");
+	}
+	
+	else {		
+		if (*url == '@') {
+			++url;
+			sprintf(buf, _("Show %s in main window"), url);
+		}
+		
+		else if (*url == '[') {
+			++url;
+			while (*url != ']') {
+				++url;
+			}
+			++url;
+			sprintf(buf, "%s", url);
+		}
+		
+		else if (*url == '*') {
+			++url;
+			sprintf(buf, "%s", url);
+		}
+		
+		else
+			sprintf(buf, _("Go to %s"), url);
+
+		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
+			   buf);
+	}
+	*/
+}
+
 
 /******************************************************************************
  * Name
@@ -150,7 +294,6 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
 	GtkWidget *label;
-	GtkWidget *hbuttonbox1;
 	GtkWidget *btn_close;
 	
 	gchar title[256];
@@ -190,7 +333,7 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpaned7);
 	gtk_container_add(GTK_CONTAINER(dlg->d->frame), hpaned7);
-	gtk_paned_set_position(GTK_PANED(hpaned7), 190);
+	gtk_paned_set_position(GTK_PANED(hpaned7), 215);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox56);
@@ -240,6 +383,20 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 	gtk_widget_show(dlg->d->entry);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarDLKey), dlg->d->entry,
 				  NULL, NULL);
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(dlg->dialog,
+				      GNOME_STOCK_PIXMAP_EXIT);
+	btn_close =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Close"), _("Close Dialog"),
+				       NULL, tmp_toolbar_icon, NULL,
+				       NULL);
+	gtk_widget_ref(btn_close);
+	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog),
+				 "btn_close", btn_close,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(btn_close);
 
 	dlg->d->clist = gtk_clist_new(1);
 	gtk_widget_ref(dlg->d->clist);
@@ -297,42 +454,25 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
 	gtk_object_set_data_full(GTK_OBJECT(dlg->dialog), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
-	
-	hbuttonbox1 = gtk_hbutton_box_new ();
-	gtk_widget_ref (hbuttonbox1);
-	gtk_object_set_data_full (GTK_OBJECT(dlg->dialog), 
-			"hbuttonbox1", hbuttonbox1,
-			(GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (hbuttonbox1);
-	gtk_box_pack_end (GTK_BOX (vbox), hbuttonbox1, FALSE, TRUE, 0);
-	gtk_button_box_set_layout (GTK_BUTTON_BOX (hbuttonbox1), GTK_BUTTONBOX_END);
-	
-	btn_close = gnome_stock_button (GNOME_STOCK_BUTTON_CLOSE);
-	gtk_widget_ref (btn_close);
-	gtk_object_set_data_full (GTK_OBJECT (dlg->dialog),
-			"btn_close", btn_close,
-			(GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show (btn_close);
-	gtk_container_add (GTK_CONTAINER (hbuttonbox1), btn_close);
-	GTK_WIDGET_SET_FLAGS (btn_close, GTK_CAN_DEFAULT);
-	gtk_button_set_relief (GTK_BUTTON (btn_close), GTK_RELIEF_NONE);
-
+		
+	gtk_signal_connect (GTK_OBJECT (dlg->dialog), "set_focus",
+                      GTK_SIGNAL_FUNC (dialog_set_focus),
+                      dlg);
+	gtk_signal_connect (GTK_OBJECT (dlg->dialog), "destroy",
+                      GTK_SIGNAL_FUNC (dialog_destroy),
+                      dlg);
 	gtk_signal_connect (GTK_OBJECT (btn_close), "clicked",
                       GTK_SIGNAL_FUNC (on_btn_close_clicked),
                       dlg);
-/*
-	gtk_signal_connect(GTK_OBJECT(dlg->d->html),
-			"button_press_event",
-			GTK_SIGNAL_FUNC(html_button_pressed), 
-			dlg);
+		      
+			/*
 	gtk_signal_connect(GTK_OBJECT(dlg->d->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
+			   */
+			   
 	gtk_signal_connect(GTK_OBJECT(dlg->d->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) settings.app);
-	gtk_signal_connect(GTK_OBJECT(dlg->d->clist), "select_row",
-			   GTK_SIGNAL_FUNC(on_clistDictLex_select_row),
+			   GTK_SIGNAL_FUNC(dialog_url), 
 			   dlg);
-*/
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dlg->d);
 	gtk_signal_connect(GTK_OBJECT(dlg->d->entry), "changed",
@@ -360,22 +500,21 @@ static void create_dictlex_dialog(DL_DIALOG *dlg)
  *   void
  */
 
-void gui_open_dictlex_dialog(gint mod_num)
+void gui_open_dictlex_dialog(gchar * mod_name)
 {		
 	DL_DIALOG *dlg;
 	
-	dlg = (DL_DIALOG *) g_list_nth_data(dialog_list, mod_num);	
-	
-//	g_warning(dlg->d->mod_name);
-	if(dlg->dialog == NULL){
-		create_dictlex_dialog(dlg);
-		gtk_widget_show(dlg->dialog);
-		on_btnSyncDL_clicked(NULL, dlg->d);
-	}
-	else {
-		gtk_widget_show(dlg->dialog);
-		gdk_window_raise(GTK_WIDGET(dlg->dialog)->window);
-	}
+	dlg = g_new(DL_DIALOG, 1);
+	dlg->d = g_new(DL_DATA, 1);
+	dlg->d->find_dialog = NULL;
+	dlg->d->mod_num = get_module_number(mod_name, DICT_MODS);
+	dlg->d->search_string = NULL;
+	dlg->dialog = NULL;
+	dlg->d->mod_name = mod_name;
+	dialog_list = g_list_append(dialog_list, (DL_DIALOG*) dlg);
+	create_dictlex_dialog(dlg);
+	gtk_widget_show(dlg->dialog);
+	on_btnSyncDL_clicked(NULL, dlg->d);	
 }
 
 /******************************************************************************
@@ -395,28 +534,9 @@ void gui_open_dictlex_dialog(gint mod_num)
  */
 
 void gui_setup_dictlex_dialog(GList *mods)
-{
-	DL_DIALOG *dlg;
-	GList *tmp = NULL;
-	gint count = 0;
-	
+{	
 	dialog_list = NULL;
-	
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		dlg = g_new(DL_DIALOG, 1);
-		dlg->d = g_new(DL_DATA, 1);
-		dlg->d->find_dialog = NULL;
-		dlg->d->mod_num = count;
-		dlg->d->search_string = NULL;
-		dlg->dialog = NULL;
-		dlg->d->mod_name = (gchar *) tmp->data;
-		//gui_get_module_global_options(vt->t);
-		++count;
-		dialog_list = g_list_append(dialog_list, (DL_DIALOG*) dlg);
-		tmp = g_list_next(tmp);
-	}
+	dialog_freed = FALSE;
 }
 
 /******************************************************************************
@@ -440,6 +560,9 @@ void gui_shutdown_dictlex_dialog(void)
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
 		DL_DIALOG *dlg = (DL_DIALOG *) dialog_list->data;
+		dialog_freed = TRUE;
+	
+		g_warning("shuting down %s dialog",dlg->d->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
@@ -456,7 +579,8 @@ void gui_shutdown_dictlex_dialog(void)
 		g_free(dlg->d);
 		g_free((DL_DIALOG *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
-	} g_list_free(dialog_list);
+	} 
+	g_list_free(dialog_list);
 }
 
 

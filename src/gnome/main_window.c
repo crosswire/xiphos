@@ -28,7 +28,6 @@
 #include <gal/e-paned/e-vpaned.h>
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 
 #include "gui/main_window.h"
@@ -38,6 +37,7 @@
 #include "gui/studypad.h"
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
+#include "gui/html.h"
 
 static char *book_open_xpm[] = {
 	"16 16 4 1",
@@ -944,9 +944,9 @@ void create_mainwindow(void)
 			(gchar *) "hpaned1");
 
 	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear), "on_url",
-			GTK_SIGNAL_FUNC(on_url), (gpointer)settings.app);
+			GTK_SIGNAL_FUNC(gui_url), (gpointer)settings.app);
 	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear),
-			"link_clicked", GTK_SIGNAL_FUNC(on_link_clicked),
+			"link_clicked", GTK_SIGNAL_FUNC(gui_link_clicked),
 			NULL);
 	gtk_signal_connect(GTK_OBJECT(settings.htmlInterlinear),
 			"button_release_event",

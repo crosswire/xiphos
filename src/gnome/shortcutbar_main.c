@@ -37,10 +37,10 @@
 #include "gui/_editor.h"
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
+#include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/gbs.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
 

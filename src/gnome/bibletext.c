@@ -31,9 +31,9 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/cipher_key_dialog.h"
+#include "gui/html.h"
 
 #include "main/bibletext.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/gs_gnomesword.h"
@@ -274,7 +274,7 @@ static void on_notebook_text_switch_page(GtkNotebook * notebook,
 
 static void on_copy_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {
-	copyGS_HTML(t->html);
+	gui_copy_html(t->html);
 }
 
 /******************************************************************************
@@ -322,7 +322,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 	memset(mod_name, 0, 16);
 	module_name_from_description(mod_name, dict_mod_description);
 	
-	dict_key = get_word_or_selection(cur_t->html, FALSE);
+	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(mod_name, dict_key);
@@ -352,7 +352,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 				       TEXT_DATA * t)
 {
-	gchar *dict_key = get_word_or_selection(t->html, FALSE);
+	gchar *dict_key = gui_get_word_or_selection(t->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(settings.DictWindowModule,
@@ -460,7 +460,7 @@ static void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
 
 static void on_view_new_activate(GtkMenuItem * menuitem, TEXT_DATA * t)
 {	
-	gui_open_bibletext_dialog(t->mod_num);
+	gui_open_bibletext_dialog(t->mod_name);
 }
 
 /******************************************************************************
@@ -783,7 +783,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
-			key = buttonpresslookupGS_HTML(t->html);
+			key = gui_button_press_lookup(t->html);
 			if (key) {
 				gchar *dict = NULL;
 				if (settings.useDefaultDict)
@@ -1371,9 +1371,9 @@ static void create_text_pane(TEXT_DATA * t)
 
 
 	gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
+			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) settings.app);
+			   GTK_SIGNAL_FUNC(gui_url), (gpointer) settings.app);
 	gtk_signal_connect(GTK_OBJECT(t->html),
 			   "button_release_event",
 			   GTK_SIGNAL_FUNC

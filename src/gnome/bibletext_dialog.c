@@ -32,29 +32,52 @@
 #include "gui/display_info.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
+#include "gui/html.h"
 
 #include "main/bibletext.h"
 #include "main/gs_gnomesword.h"
-#include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
 
-/******************************************************************************
- * globals
- */
-gchar vt_current_verse[80];
 
 /******************************************************************************
  * static - global to this file only
  */
 static GList * dialog_list;
 static VIEW_TEXT * cur_vt;
+static gboolean dialog_freed;
 
 /******************************************************************************
  * externs
  *****************************************************************************/
 extern gboolean gsI_isrunning; /* information dialog */
 
+
+
+/******************************************************************************
+ * Name
+ *   display
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)	
+ *
+ * Description
+ *   calls chapter_display to display module text
+ *
+ * Return value
+ *   void
+ */
+
+static void display(VIEW_TEXT * vt, gchar * key, gboolean show_key)
+{
+	chapter_display(vt->t->html, 
+			vt->t->mod_name, 
+			vt->t->tgs, 
+			key, 
+			show_key);
+}
 
 
 /******************************************************************************
@@ -78,7 +101,7 @@ static void update_controls(VIEW_TEXT * vt)
 	const gchar *buf;
 	cur_vt = vt;
 	
-	buf = get_book_from_key(vt->key); //get_book_viewtext(vt->mod_name);
+	buf = get_book_from_key(vt->key);
 	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book), buf);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(vt->spb_chapter),
 				  get_chapter_from_key(vt->key));
@@ -104,7 +127,7 @@ static void update_controls(VIEW_TEXT * vt)
  */
 
 static void link_clicked(GtkHTML * html, const gchar * url, 
-							VIEW_TEXT * vt)
+						VIEW_TEXT * vt)
 {
 	gchar *buf, *modName;
 	gchar newref[80];
@@ -154,13 +177,9 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 
 	else if (*url == '*') {
 		++url;
-		while (*url != ']') {
-			++url;
-		}
-		++url;
+		g_warning(url);
 		buf = g_strdup(url);
-		chapter_display(vt->t->html, vt->t->mod_name, 
-				vt->t->tgs, buf, TRUE);
+		display(vt, buf, TRUE);
 		update_controls(vt);
 		g_free(buf);
 	}
@@ -304,8 +323,7 @@ static void btn_goto_verse_clicked(GtkButton * button,
 	sprintf(buf, "%s %d:%d", bookname, iChap, iVerse);
 	val_key = get_valid_key(buf);
 	//g_warning(buf);
-	chapter_display(vt->t->html, vt->t->mod_name, 
-			vt->t->tgs, val_key, TRUE);
+	display(vt, val_key, TRUE);
 	strcpy(vt->key,val_key);
 	update_controls(vt);
 	g_free(val_key);
@@ -329,9 +347,9 @@ static void btn_goto_verse_clicked(GtkButton * button,
  */
 
 static void module_new_activate(GtkMenuItem * menuitem, 
-						gpointer user_data)
+					    gpointer user_data)
 {	
-	gui_open_bibletext_dialog(GPOINTER_TO_INT(user_data));
+	gui_open_bibletext_dialog((gchar *)user_data);
 }
 
 /******************************************************************************
@@ -353,11 +371,63 @@ static void module_new_activate(GtkMenuItem * menuitem,
 static void btn_sync_clicked(GtkButton * button, VIEW_TEXT * vt)
 {
 	cur_vt = vt;
-	chapter_display(vt->t->html, vt->t->mod_name, 
-			vt->t->tgs, settings.currentverse, TRUE);	
+	display(vt, settings.currentverse, TRUE);	
 	strcpy(vt->key,settings.currentverse);
 	update_controls(vt);
 }
+
+
+/******************************************************************************
+ * Name
+ *   free_on_destroy
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void free_on_destroy(VIEW_TEXT * vt)
+ *
+ * Description
+ *   removes dialog from dialog_list when dialog is destroyed other than
+ *   program shut down
+ *
+ * Return value
+ *   void
+ */
+
+static void free_on_destroy(VIEW_TEXT * vt)
+{	
+	g_free(vt->t->tgs);
+	g_free(vt->t);
+	dialog_list = g_list_remove(dialog_list, (VIEW_TEXT *) vt);
+		g_warning("shuting down %s dialog",vt->t->mod_name);
+	g_free(vt);
+}
+
+
+/******************************************************************************
+ * Name
+ *   dialog_destroy
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void dialog_destroy(GtkObject *object, DL_DIALOG * dlg)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_destroy(GtkObject *object, VIEW_TEXT * vt)
+{	
+	
+	if(!dialog_freed)
+		free_on_destroy(vt);
+	dialog_freed = FALSE;
+}
+
 
 /******************************************************************************
  * Name
@@ -378,8 +448,10 @@ static void btn_sync_clicked(GtkButton * button, VIEW_TEXT * vt)
 
 static void btn_close_clicked(GtkButton * button, VIEW_TEXT * vt)
 {
-	gtk_widget_destroy(vt->dialog);
-	vt->dialog = NULL;
+	if(vt->dialog) {
+		dialog_freed = FALSE;
+		gtk_widget_destroy(vt->dialog);
+	}
 }
 
 /******************************************************************************
@@ -412,16 +484,15 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 
 		/* add module name items to menu */
 		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *) (gchar
-								  *)
-						       tmp->data);
+		    gtk_check_menu_item_new_with_label((gchar *) 
+				(gchar *)tmp->data);
 		sprintf(menuName, "ModuleNum%d", view_number);
 		gtk_object_set_data(GTK_OBJECT(settings.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
 		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
 				   GTK_SIGNAL_FUNC(module_new_activate),
-				   GINT_TO_POINTER(view_number));
+				   (gchar *)tmp->data);
 		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
 				      GTK_WIDGET(menuChoice), view_number);
 		++view_number;
@@ -431,36 +502,253 @@ static void add_items_to_module_menu(GtkWidget * shellmenu)
 }
 
 static gboolean on_dialog_motion_notify_event(GtkWidget *widget,
-                      GdkEventMotion  *event, VIEW_TEXT * vt)
+                        GdkEventMotion  *event, VIEW_TEXT * vt)
 {
 	cur_vt = vt;
-	//set_options_on_dialog_change(vt);
 	return TRUE;
 }
+
+
 /******************************************************************************
  * Name
- *  on_t_btn_toggled
+ *  morphs_toggled
  *
  * Synopsis
- *   #include "_bibletext.h"
+ *   #include "bibletext_dialog.h"
  *
- *  void on_t_btn_toggled(GtkToggleButton *togglebutton, gchar *option)	
+ *  void morphs_toggled(GtkToggleButton *togglebutton, gchar *option)	
  *
  * Description
- *   called when global option toggle button is press
+ *   called when Morphological Tags button is press
  *
  * Return value
  *   void
  */
 
-static void on_t_btn_toggled(GtkToggleButton * togglebutton,
-			     gchar * option)
+static void morphs_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
 {
-	set_text_module_global_option(option,
+	cur_vt = vt;
+	set_text_module_global_option("Morphological Tags",
 				togglebutton->active);
-	chapter_display(cur_vt->t->html, cur_vt->t->mod_name , 
-			cur_vt->t->tgs, cur_vt->key, TRUE);
+	display(vt, vt->key, TRUE);
 }
+
+
+/******************************************************************************
+ * Name
+ *  strongs_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void strongs_toggled(GtkToggleButton *togglebutton, VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Strong's Numbers button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void strongs_toggled(GtkToggleButton * togglebutton, 
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Strong's Numbers",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *   footnotes_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void footnotes_toggled(GtkToggleButton *togglebutton, 
+ *						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Footnotes button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void footnotes_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Footnotes",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *  greek_accents_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void greek_accents_toggled(GtkToggleButton *togglebutton, 
+ *						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Greek Accents button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void greek_accents_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Greek Accents",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *  lemmas_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void lemmas_toggled(GtkToggleButton *togglebutton, 
+ *					VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Lemmas button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void lemmas_toggled(GtkToggleButton * togglebutton, 
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Lemmas",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *  cross_references_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void cross_references_toggled(GtkToggleButton *togglebutton, 
+						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Scripture cross references button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void cross_references_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Scripture Cross-references",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *  vowel_points_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void vowel_points_toggled(GtkToggleButton *togglebutton, 
+ *						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Hebrew Vowel Points button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void vowel_points_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Hebrew Vowel Points",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *  cantillation_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void cantillation_toggled(GtkToggleButton *togglebutton, 
+ *						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Hebrew Cantillation button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void cantillation_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Hebrew Cantillation",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
+
+/******************************************************************************
+ * Name
+ *  headings_toggled
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *  void headings_toggled(GtkToggleButton *togglebutton, 
+ *						VIEW_TEXT * vt)	
+ *
+ * Description
+ *   called when Headings button is press
+ *
+ * Return value
+ *   void
+ */
+
+static void headings_toggled(GtkToggleButton * togglebutton,
+						VIEW_TEXT * vt)
+{
+	cur_vt = vt;
+	set_text_module_global_option("Headings",
+				togglebutton->active);
+	display(vt, vt->key, TRUE);
+}
+
 
 /******************************************************************************
  * Name
@@ -515,7 +803,7 @@ static void on_secondary_reading_activate(GtkMenuItem * menuitem,
  *   on_all_readings_activate
  *
  * Synopsis
- *   #include "_bibletext.h"
+ *   #include "bibletext_dialog.h"
  *
  *   void on_all_readings_activate(GtkMenuItem * menuitem,
  *						gpointer user_data)	
@@ -532,6 +820,447 @@ static void on_all_readings_activate(GtkMenuItem * menuitem,
 {
 	/*set_text_variant_global_option("Textual Variants",
 				       "All Readings");*/
+}
+
+/******************************************************************************
+ * Name
+ *   dialog_url
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void dialog_url(GtkHTML * html, const gchar * url, VIEW_TEXT * vt)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void dialog_url(GtkHTML * html, const gchar * url, 
+						VIEW_TEXT * vt)
+{
+	gchar buf[255];
+	gint context_id2;
+	
+	
+	cur_vt = vt;
+	
+	context_id2 =
+	    gtk_statusbar_get_context_id(GTK_STATUSBAR(vt->statusbar),
+					 "GnomeSword");
+	gtk_statusbar_pop(GTK_STATUSBAR(vt->statusbar), context_id2);
+
+	/***  moved out of url - clear appbar  ***/
+	if (url == NULL) {		
+		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
+			   "");
+		//in_url = FALSE;
+	}
+	/***  we are in an url  ***/
+	else {
+		//in_url = TRUE;	/* we need this for html_button_released */
+		/***  swap interlinear and main text mods link ***/
+		if (*url == '@') {
+			++url;
+			sprintf(buf, _("Show %s in main window"), url);
+		}
+		/***  module name link  ***/
+		else if (*url == '[') {
+			++url;
+			while (*url != ']') {
+				++url;
+			}
+			++url;
+			sprintf(buf, "%s", url);
+		}
+		/***  verse number link  ***/
+		else if (*url == '*') {
+			++url;
+			sprintf(buf, "%s", url);
+		}
+		/***  any other link  ***/
+		else
+			sprintf(buf, _("Go to %s"), url);
+
+		gtk_statusbar_push(GTK_STATUSBAR(vt->statusbar), context_id2,
+			   buf);
+	}
+}
+
+
+static GnomeUIInfo primary_reading_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Primary Reading"),
+	 NULL,
+	 (gpointer) on_primary_reading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Secondary Reading"),
+	 NULL,
+	 (gpointer) on_secondary_reading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("All Readings"),
+	 NULL,
+	 (gpointer) on_all_readings_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo textual_variants_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_RADIOITEMS, NULL, NULL, primary_reading_uiinfo,
+	 NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, 0,
+	 (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo variant_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Textual Variants"),
+	 NULL,
+	 textual_variants_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+
+/******************************************************************************
+ * Name
+ *   add_global_option_buttons 
+ *
+ * Synopsis
+ *   #include "bibletext_dialog.h"
+ *
+ *   void add_global_option_buttons(GtkWidget * toolbar, 
+ *				gchar * mod_name, 
+ *				TEXT_GLOBALS * tgs, 
+ *				GtkMenuCallback callback)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void add_global_option_buttons(GtkWidget * toolbar, 
+				gchar * mod_name, VIEW_TEXT * vt)
+{	
+	gint active = 0;	
+	GtkWidget *variant_menu;
+	
+	if (vt->t->tgs->gbfstrongs || vt->t->tgs->thmlstrongs) {
+		vt->t->tgs->t_btn_strongs =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("S"),
+					       _
+					       ("Toggle Strongs Numbers"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_strongs);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_strongs",
+					 vt->t->tgs->t_btn_strongs,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_strongs);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_strongs, 24, 24);
+		
+		active = load_module_options(mod_name, "Strong's Numbers");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_strongs),
+                                        active);
+		
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_strongs),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(strongs_toggled),
+				   vt);
+	}
+	if (vt->t->tgs->gbfmorphs || vt->t->tgs->thmlmorphs) {
+		vt->t->tgs->t_btn_morphs =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("M"),
+					       _("Toggle Morph Tags"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_morphs);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_morphs",
+					 vt->t->tgs->t_btn_morphs,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_morphs);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_morphs, 24, 24);
+		
+		active = load_module_options(mod_name, "Morphological Tags");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_morphs),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_morphs),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(morphs_toggled),
+				   vt);
+	}
+	if (vt->t->tgs->gbffootnotes || vt->t->tgs->thmlfootnotes) {
+		vt->t->tgs->t_btn_footnotes =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("F"),
+					       _("Toggle Footnotes"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_footnotes);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_footnotes",
+					 vt->t->tgs->t_btn_footnotes,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_footnotes);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_footnotes, 24, 24);
+		
+		active = load_module_options(mod_name, "Footnotes");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_footnotes),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_footnotes),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(footnotes_toggled),
+				   vt);
+	}
+	if (vt->t->tgs->greekaccents) {
+		vt->t->tgs->t_btn_accents =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("A"),
+					       _
+					       ("Toggle Greek Accents"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_accents);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_accents",
+					 vt->t->tgs->t_btn_accents,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_accents);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_accents, 24, 24);
+		
+		active = load_module_options(mod_name, "Greek Accents");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_accents),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_accents),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(greek_accents_toggled),
+				   vt);
+
+	}
+	if (vt->t->tgs->lemmas) {
+		vt->t->tgs->t_btn_lemmas =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("L"),
+					       _("Toggle Lemmas"), NULL,
+					       NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_lemmas);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_lemmas",
+					 vt->t->tgs->t_btn_lemmas,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_lemmas);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_lemmas, 24, 24);
+		
+		active = load_module_options(mod_name, "Lemmas");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_lemmas),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_lemmas),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(lemmas_toggled),
+				   vt);
+
+	}
+	if (vt->t->tgs->scripturerefs) {
+		vt->t->tgs->t_btn_scripturerefs =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("R"),
+					       _
+					       ("Toggle Scripture References"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_scripturerefs);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_scripturerefs",
+					 vt->t->tgs->t_btn_scripturerefs,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_scripturerefs);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_scripturerefs, 24, 24);
+		
+		active = load_module_options(mod_name, "Scripture Cross-references");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_scripturerefs),
+                                        active);
+
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_scripturerefs),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(cross_references_toggled),
+				   vt);
+
+	}
+	if (vt->t->tgs->hebrewpoints) {
+		vt->t->tgs->t_btn_points =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("P"),
+					       _
+					       ("Toggle Hebrew Vowel Points"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_points);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_points",
+					 vt->t->tgs->t_btn_points,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_points);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_points, 24, 24);
+		
+		active = load_module_options(mod_name, "Hebrew Vowel Points");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_points),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_points),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(vowel_points_toggled),
+				   vt);
+
+	}
+	if (vt->t->tgs->hebrewcant) {
+		vt->t->tgs->t_btn_cant =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("C"),
+					       _
+					       ("Toggle Hebrew Cantillation"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_cant);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_cant", vt->t->tgs->t_btn_cant,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_cant);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_cant, 24, 24);
+		
+		active = load_module_options(mod_name, "Hebrew Cantillation");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_cant),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_cant), "toggled",
+				   GTK_SIGNAL_FUNC(cantillation_toggled),
+				   vt);
+
+	}
+	if (vt->t->tgs->headings) {
+		vt->t->tgs->t_btn_headings =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+					       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+					       NULL, _("H"),
+					       _("Toggle Headings"),
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_ref(vt->t->tgs->t_btn_headings);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "vt->t->tgs->t_btn_headings",
+					 vt->t->tgs->t_btn_headings,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(vt->t->tgs->t_btn_headings);
+		gtk_widget_set_usize(vt->t->tgs->t_btn_headings, 24, 24);
+		
+		active = load_module_options(mod_name, "Headings");
+		
+		gtk_toggle_button_set_active(
+				GTK_TOGGLE_BUTTON(vt->t->tgs->t_btn_headings),
+                                        active);
+
+		gtk_signal_connect(GTK_OBJECT(vt->t->tgs->t_btn_headings),
+				   "toggled",
+				   GTK_SIGNAL_FUNC(headings_toggled),
+				   vt);
+	}
+	if (vt->t->tgs->variants) {
+		variant_menu = gtk_menu_bar_new();
+		gtk_widget_ref(variant_menu);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "variant_menu", variant_menu,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(variant_menu);
+		gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar),
+					  variant_menu, NULL, NULL);
+		gnome_app_fill_menu(GTK_MENU_SHELL(variant_menu),
+				    variant_menu_uiinfo, NULL, FALSE,
+				    0);
+
+		gtk_widget_ref(variant_menu_uiinfo[0].widget);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "textual_variants",
+					 variant_menu_uiinfo[0].widget,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+
+		gtk_widget_ref(primary_reading_uiinfo[0].widget);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "primary_reading",
+					 primary_reading_uiinfo[0].
+					 widget, (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (primary_reading_uiinfo
+						[0].widget), TRUE);
+
+		vt->t->tgs->t_btn_primary = primary_reading_uiinfo[0].widget;
+		
+
+		gtk_widget_ref(primary_reading_uiinfo[1].widget);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "secondary_reading",
+					 primary_reading_uiinfo[1].
+					 widget, (GtkDestroyNotify)
+					 gtk_widget_unref);
+
+		vt->t->tgs->t_btn_secondary = primary_reading_uiinfo[1].widget;
+
+		gtk_widget_ref(primary_reading_uiinfo[2].widget);
+		gtk_object_set_data_full(GTK_OBJECT(settings.app),
+					 "all_readings",
+					 primary_reading_uiinfo[2].
+					 widget, (GtkDestroyNotify)
+					 gtk_widget_unref);
+
+		vt->t->tgs->t_btn_all = primary_reading_uiinfo[2].widget;
+	}
+
 }
 
 /******************************************************************************
@@ -553,7 +1282,6 @@ static void on_all_readings_activate(GtkMenuItem * menuitem,
 static void create_bibletext_dialog(VIEW_TEXT * vt)
 {
 
-	GtkWidget *dialog_vbox14;
 	GtkWidget *vbox33;
 	GtkWidget *toolbar;
 	GtkWidget *tmp_toolbar_icon;
@@ -569,31 +1297,44 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	GtkWidget *btnGotoVerse;
 	GtkWidget *frame21;
 	GtkWidget *swVText;
-	GtkWidget *dialog_action_area14;
 	gchar title[256];
 	
 	sprintf(title,"%s - %s",vt->t->mod_name, _("GnomeSword"));
-
+/*
 	vt->dialog = gnome_dialog_new(title, NULL);
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "vt->dialog",
 			    vt->dialog);
 	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 370, 412);
 	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
 			      FALSE);
+*/			      
+	vt->dialog = gtk_window_new (GTK_WINDOW_DIALOG);
+	    
+	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dlg->dialog",
+			    vt->dialog);
+	gtk_window_set_title (GTK_WINDOW (vt->dialog), title);
+	gtk_window_set_default_size(GTK_WINDOW(vt->dialog), 335, 400);
+	gtk_window_set_policy(GTK_WINDOW(vt->dialog), TRUE, TRUE,
+			      FALSE);
+	/*
 	
 	dialog_vbox14 = GNOME_DIALOG(vt->dialog)->vbox;
 	gtk_object_set_data(GTK_OBJECT(vt->dialog), "dialog_vbox14",
 			    dialog_vbox14);
 	gtk_widget_show(dialog_vbox14);
-
+*/
 	vbox33 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox33);
 	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vbox33",
 				 vbox33,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox33);
+	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
+	
+	/*
 	gtk_box_pack_start(GTK_BOX(dialog_vbox14), vbox33, TRUE, TRUE,
 			   0);
+	*/
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -635,9 +1376,8 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	
 
 	/* add global option buttons to toolbar */			 
-	gui_add_global_option_buttons(toolbar, vt->t->mod_name, 
-				vt->t->tgs, 
-				(GtkMenuCallback)on_t_btn_toggled);	
+	add_global_option_buttons(toolbar, vt->t->mod_name, 
+				vt);	
 	
 
 
@@ -684,6 +1424,31 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	add_items_to_module_menu(module_new_menu);
 
 
+	vseparator16 = gtk_vseparator_new();
+	gtk_widget_ref(vseparator16);
+	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
+				 "vseparator16", vseparator16,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vseparator16);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator16,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator16, 7, 13);
+	
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(vt->dialog,
+				      GNOME_STOCK_PIXMAP_EXIT);
+	vt->btn_close =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Close"), _("Close Dialog"),
+				       NULL, tmp_toolbar_icon, NULL,
+				       NULL);
+	gtk_widget_ref(vt->btn_close);
+	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
+				 "vt->btn_close", vt->btn_close,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vt->btn_close);
 
 	toolbar30 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -783,6 +1548,16 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_container_add(GTK_CONTAINER(swVText), vt->t->html);
 	gtk_html_load_empty(GTK_HTML(vt->t->html));
 	
+	vt->statusbar = gtk_statusbar_new ();
+	gtk_widget_ref (vt->statusbar);
+	gtk_object_set_data_full (GTK_OBJECT (vt->dialog), "vt->statusbar", vt->statusbar,
+			    (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (vt->statusbar);
+	gtk_box_pack_start (GTK_BOX (vbox33), vt->statusbar, FALSE, FALSE, 0);
+	
+	
+	
+/*	
 	dialog_action_area14 = GNOME_DIALOG(vt->dialog)->action_area;
 	gtk_object_set_data(GTK_OBJECT(vt->dialog),
 			    "dialog_action_area14",
@@ -804,11 +1579,21 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->btn_close);
 	GTK_WIDGET_SET_FLAGS(vt->btn_close, GTK_CAN_DEFAULT);
+*/
+	
+	gtk_signal_connect (GTK_OBJECT (vt->dialog), "destroy",
+                      GTK_SIGNAL_FUNC (dialog_destroy),
+			   vt);
 
-
+	gtk_signal_connect (GTK_OBJECT (vt->t->html), "motion_notify_event",
+			   GTK_SIGNAL_FUNC (on_dialog_motion_notify_event),
+			   vt);
 	gtk_signal_connect (GTK_OBJECT (vt->dialog), "motion_notify_event",
 			   GTK_SIGNAL_FUNC (on_dialog_motion_notify_event),
 			   vt);
+	gtk_signal_connect(GTK_OBJECT(vt->t->html), "on_url",
+			   GTK_SIGNAL_FUNC(dialog_url), 
+			   (gpointer) vt);
 	gtk_signal_connect(GTK_OBJECT(vt->t->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(link_clicked), 
 			   vt);
@@ -821,14 +1606,15 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 	gtk_signal_connect(GTK_OBJECT(btnGotoVerse), "clicked",
 			   GTK_SIGNAL_FUNC(btn_goto_verse_clicked),
 			   vt);
+			   
 	gtk_signal_connect(GTK_OBJECT(vt->btn_close), "clicked",
 			   GTK_SIGNAL_FUNC(btn_close_clicked),
 			   vt);	
+			   
 	
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), get_list(BOOKS_LIST));
-	chapter_display(vt->t->html, vt->t->mod_name,
-			vt->t->tgs, settings.currentverse, TRUE);
-	sprintf(vt_current_verse, "%s", settings.currentverse);
+	strcpy(vt->key, settings.currentverse);
+	display(vt, settings.currentverse, TRUE);	
 	update_controls(vt);
 }
 
@@ -848,21 +1634,23 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
  *   void
  */
 
-void gui_open_bibletext_dialog(gint mod_num)
+void gui_open_bibletext_dialog(gchar * mod_name)
 {		
 	VIEW_TEXT * vt;
 	
-	vt = (VIEW_TEXT *) g_list_nth_data(dialog_list, mod_num);	
-	cur_vt = vt;
-//	g_warning(vt->t->mod_name);
-	if(vt->dialog == NULL){
-		create_bibletext_dialog(vt);
-		gtk_widget_show(vt->dialog);
-	}
-	else {
-		gtk_widget_show(vt->dialog);
-		gdk_window_raise(GTK_WIDGET(vt->dialog)->window);
-	}
+	vt = g_new(VIEW_TEXT, 1);
+	vt->t = g_new(TEXT_DATA, 1);
+	vt->t->tgs = g_new(TEXT_GLOBALS, 1);
+	vt->t->find_dialog = NULL;
+	vt->t->mod_num = get_module_number(mod_name, TEXT_MODS);
+	vt->t->search_string = NULL;
+	vt->dialog = NULL;
+	vt->t->mod_name = mod_name;
+	gui_get_module_global_options(vt->t);
+	create_bibletext_dialog(vt);
+	gtk_widget_show(vt->dialog);
+	dialog_list = g_list_append(dialog_list, (VIEW_TEXT *) vt);
+	btn_sync_clicked(NULL, vt);
 }
 
 /******************************************************************************
@@ -883,28 +1671,8 @@ void gui_open_bibletext_dialog(gint mod_num)
 
 void gui_setup_bibletext_dialog(GList *mods)
 {
-	VIEW_TEXT * vt;
-	GList *tmp = NULL;
-	gint count = 0;
-	
 	dialog_list = NULL;
-	
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		vt = g_new(VIEW_TEXT, 1);
-		vt->t = g_new(TEXT_DATA, 1);
-		vt->t->tgs = g_new(TEXT_GLOBALS, 1);
-		vt->t->find_dialog = NULL;
-		vt->t->mod_num = count;
-		vt->t->search_string = NULL;
-		vt->dialog = NULL;
-		vt->t->mod_name = (gchar *) tmp->data;
-		gui_get_module_global_options(vt->t);
-		++count;
-		dialog_list = g_list_append(dialog_list, (VIEW_TEXT *) vt);
-		tmp = g_list_next(tmp);
-	}
+	dialog_freed = FALSE;
 }
 
 /******************************************************************************
@@ -928,6 +1696,8 @@ void gui_shutdown_bibletext_dialog(void)
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
 		VIEW_TEXT *vt = (VIEW_TEXT *) dialog_list->data;
+		dialog_freed = TRUE;
+		g_warning("shuting down %s dialog",vt->t->mod_name);
 		/* 
 		 *  destroy any dialogs created 
 		 */
@@ -945,7 +1715,8 @@ void gui_shutdown_bibletext_dialog(void)
 		g_free(vt->t);
 		g_free((VIEW_TEXT *) dialog_list->data);
 		dialog_list = g_list_next(dialog_list);
-	} g_list_free(dialog_list);
+	} 
+	g_list_free(dialog_list);
 }
 
 /******   end of file   ******/
