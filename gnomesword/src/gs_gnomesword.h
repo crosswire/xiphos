@@ -112,6 +112,7 @@ struct _settings {
 	        Interlinear5Module[80], 	/* module to open at program startup  */
 	        personalcommentsmod[80], 	/* module to open at program startup  */
 	        devotionalmod[80], /* module to use for devotional */
+	        DefaultDict[80], /* module to use for devotional */
 		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
 		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/	        
 		lex_greek_viewer[80], /* module to use for greek lexicon - strongs or thayers - in viewer */
@@ -199,6 +200,7 @@ struct _settings {
 		havebdb, /* for hebrew morph tags */
 		inViewer, /* display dict/lex in viewer when word or link clicked */
 		inDictpane, /* display dict/lex in Dict/Lex pane when word or link clicked */
+		useDefaultDict,
 		
 		/** if items are docked **/
 		docked, /* true when shortcut bar is docked */

@@ -411,11 +411,18 @@ html_button_released(GtkWidget * html, GdkEventButton * event,
 	case 1:if(!in_url) {
 			key = buttonpresslookupGS_HTML(html);
 			if(key) {
+				gchar *dict;
+				if(settings->useDefaultDict)
+					dict = g_strdup(settings->DefaultDict);
+				else
+					dict = g_strdup(settings->DictWindowModule);
 				if(settings->inViewer)
-					displaydictlexSBSW(settings->DictWindowModule, key, settings);
+					displaydictlexSBSW(dict, key, settings);
 				if(settings->inDictpane)
-					gotoBookmarkSWORD(settings->DictWindowModule, key);
+					gotoBookmarkSWORD(dict, key);
 				g_free(key);
+				if(dict) 
+					g_free(dict);
 			}
 			return TRUE;
 		}
