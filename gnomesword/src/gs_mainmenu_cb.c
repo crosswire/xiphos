@@ -97,7 +97,7 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
 	GtkWidget *dlg, *text1, *version_label;
-	gfloat ver;
+	const char *ver;
 	gchar version[40];
 	
 	dlg = create_AboutSword();
@@ -106,7 +106,7 @@ on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);	
 	/* get sword version */
 	ver = getSwordVerionSWORD();	
-	sprintf(version,"Sword-%.2f",ver);
+	sprintf(version,"Sword-%s",ver);
 	gtk_label_set_text(GTK_LABEL(version_label),version);
 	gtk_widget_show(dlg);
 }
