@@ -175,6 +175,7 @@ static void remove_install_modules(GList * modules, gboolean install)
 {
 	GList *tmp = NULL;
 	gchar *buf;
+	const gchar *new_dest;
 	gint test;
 	gint failed = 1;
 	GS_DIALOG *yes_no_dialog;
@@ -236,22 +237,19 @@ static void remove_install_modules(GList * modules, gboolean install)
 			g_string_printf(mods, "%s: %s", _("Removing: "), buf);
 			gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progressbar1),
 					  	mods->str);
-			g_print("uninstalling %s\n", buf);
-			/*if (!mod_mgr_uninstall(destination, buf)) {
-				mod_mgr_shut_down();
-				g_warning("destination = %s",
-					  destination);
+			g_print("uninstalling %s from %s\n", buf,destination);
+			if (mod_mgr_uninstall(destination, buf) == -1) {
+				//mod_mgr_shut_down();
 				if (destination) {
-					g_warning("dest");
-					mod_mgr_init(NULL);
+					new_dest = NULL;
 				} else {
-					g_warning("no dest");
-					mod_mgr_init(gtk_label_get_text
-						     (GTK_LABEL
-						      (label_home)));
-				}*/
-				failed = mod_mgr_uninstall(destination, buf);
-			//}
+					new_dest = gtk_label_get_text
+						     (GTK_LABEL(label_home));
+					g_warning(new_dest);
+				}
+				g_print("uninstalling %s from %s\n", buf,new_dest);
+				failed = mod_mgr_uninstall(new_dest, buf);
+			}
 
 			while (gtk_events_pending()) {
 				gtk_main_iteration();
