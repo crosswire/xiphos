@@ -109,10 +109,7 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 	case 2:
 		break;
 	case 3:
-		if(settings.comm_showing)
-			gui_create_pm_commentary(); //gui_popup_pm_comm(event);
-		else
-			gui_popup_menu_gbs();
+		gui_create_pm_commentary(); //gui_popup_pm_comm(event);
 		break;
 	}
 	return FALSE;
@@ -207,13 +204,8 @@ static gboolean on_enter_notify_event(GtkWidget * widget,
 {
 	//shift_key_presed = FALSE;
 	gtk_widget_grab_focus (widgets.html_comm);
-	if(settings.comm_showing) {
-		settings.whichwindow = COMMENTARY_WINDOW;
-		gui_change_window_title(settings.CommWindowModule);
-	} else {
-		settings.whichwindow = BOOK_WINDOW;
-		gui_change_window_title(settings.book_mod);
-	}
+	settings.whichwindow = COMMENTARY_WINDOW;
+	//gui_change_window_title(settings.CommWindowModule);
   	return FALSE;
 }
 
@@ -376,20 +368,13 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
-	dict_key = gtk_editable_get_chars((GtkEditable *)widgets.entry_dict,0,-1);	
+	gtk_widget_activate(widgets.entry_dict);	
 #else
 	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
+	gtk_widget_activate(widgets.entry_dict);
+	g_free(dict_key);
 #endif
-	if (dict_key) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(settings.
-						      DictWindowModule,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(settings.DictWindowModule,
-						  dict_key);
-		g_free(dict_key);
-	}
 }
 
 
@@ -468,16 +453,16 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
-	dict_key = gtk_editable_get_chars((GtkEditable *)widgets.entry_dict,0,-1);
+	dict_key = 
+		g_strdup(gtk_editable_get_chars(
+			(GtkEditable *)widgets.entry_dict,0,-1));
 #else	
 	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+	gtk_entry_set_text(GTK_ENTRY(widgets.entry_dict), dict_key);
+	g_free(dict_key);
 #endif
 	if (dict_key && mod_name) {
-		if (settings.inViewer)
-			main_sidebar_display_dictlex(mod_name,
-						      dict_key);
-		if (settings.inDictpane)
-			main_display_dictionary(mod_name, dict_key);
+		main_display_dictionary(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}
@@ -803,26 +788,21 @@ void gui_create_pm_commentary(void)
 	gtk_widget_hide(menu1_uiinfo[8].widget);
 
 
-	if(settings.comm_showing) {
-		view_menu = gtk_menu_new();
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
-					  view_menu);
-		
-		gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_menu,
-					(GCallback) on_view_mod_activate);
-		
-		edit_per_menu = gtk_menu_new();
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
-					  edit_per_menu);
-					  
-		gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_per_menu,
-					(GCallback) edit_percomm);
-	} else {
-		gtk_widget_hide(file3_menu_uiinfo[0].widget);
-		gtk_widget_hide(file3_menu_uiinfo[1].widget);
-		gtk_widget_hide(edit3_menu_uiinfo[2].widget);
-		//gtk_widget_hide();
-	}
+	
+	view_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+				  view_menu);
+	
+	gui_add_mods_2_gtk_menu(COMM_DESC_LIST, view_menu,
+				(GCallback) on_view_mod_activate);
+	
+	edit_per_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
+				  edit_per_menu);
+				  
+	gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_per_menu,
+				(GCallback) edit_percomm);
+	
 				
 								
 	
@@ -838,7 +818,9 @@ void gui_create_pm_commentary(void)
 
 	g_signal_connect(GTK_OBJECT(usecurrent),
 			   "activate",
-			   G_CALLBACK(on_use_current_dictionary_activate), NULL);
+			   G_CALLBACK(on_use_current_dictionary_activate), 
+			   NULL);
+			   
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
