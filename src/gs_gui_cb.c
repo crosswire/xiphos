@@ -236,11 +236,11 @@ on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {	
 	gtk_html_set_editable(GTK_HTML(htmlComments), GTK_TOGGLE_BUTTON(togglebutton)->active);
 	if(GTK_TOGGLE_BUTTON(togglebutton)->active){
-		gtk_widget_show(toolbarComments);
+		gtk_widget_show(settings->toolbarComments);
 	}
 	
 	else {
-		gtk_widget_hide(toolbarComments);
+		gtk_widget_hide(settings->toolbarComments);
 	}
 }
 
@@ -341,26 +341,27 @@ on_notebook3_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)
 {
+	GnomeDockItem* item;
 	static gboolean firsttime = TRUE;	//-- dont do anything if this is the first time here, but remember we were here - set firsttime to FALSE
 	if (!firsttime) {
 		changepagenotebook(notebook, page_num);	//-- send to changepagenotebook() function in GnomeSword.cpp
 	}
 	firsttime = FALSE;	//-- remember we were here
 	
-	gtk_widget_hide(toolbarComments);
-	gtk_widget_hide(toolbarBooks);
-	gtk_widget_hide(toolbarStudypad);
+	gtk_widget_hide(settings->toolbarBooks);
+	gtk_widget_hide(settings->toolbarComments);
+	gtk_widget_hide(settings->toolbarStudypad);
 	
 	if(page_num == 2 && settings->editnote) {
-		gtk_widget_show(toolbarComments);
+		gtk_widget_show(settings->toolbarComments);
 	}
 	
 	else if(page_num == 1 && settings->editgbs) {
-		gtk_widget_show(toolbarBooks);
+		gtk_widget_show(settings->toolbarBooks);
 	}
 	
 	else if(page_num == 4) {
-		gtk_widget_show(toolbarStudypad);	
+		gtk_widget_show(settings->toolbarStudypad);	
 	}		
 }
 
@@ -489,19 +490,17 @@ on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
                                gpointer         user_data)
 {
-        if(settings->docked) {
-		gint panesize;
-		panesize = e_paned_get_position(E_PANED(lookup_widget(settings->app,(gchar *)user_data)));
-	
-		if(panesize > 15 )
-		{	if(!strcmp((gchar *)user_data,"epaned"))
-				settings->shortcutbar_width = panesize; 
-			if(!strcmp((gchar *)user_data,"vpaned1"))
-				settings->upperpane_hight = panesize; 
-			if(!strcmp((gchar *)user_data,"hpaned1"))
-				settings->biblepane_width = panesize; 
-		}
-	}
+	gint panesize;
+	panesize = e_paned_get_position(E_PANED(lookup_widget(settings->app,(gchar *)user_data)));
+	        
+	if(panesize > 15 ) {
+		if(!strcmp((gchar *)user_data,"epaned"))
+			settings->shortcutbar_width = panesize; 
+		if(!strcmp((gchar *)user_data,"vpaned1"))
+			settings->upperpane_hight = panesize; 
+		if(!strcmp((gchar *)user_data,"hpaned1"))
+			settings->biblepane_width = panesize; 
+	}	
         return TRUE;
 }
 

@@ -40,6 +40,10 @@ extern "C" {
 #define COMMENTARY_WINDOW 2
 #define DICTIONARY_WINDOW 3
 #define BOOK_WINDOW 4
+#define GS_DOCK_OPTIONS "dockOptions"
+#define GS_DOCK_GBS "dockGBSEditor"
+#define GS_DOCK_PC "dockPCEditor"
+#define GS_DOCK_SP "dockSPEditor"
 	
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -52,6 +56,12 @@ struct _settings {
 		*hboxToolbar, /* for editor toolbars ??? */
 		*dockSB, /* dock for shortcut bar */
 		*vboxDock, 
+	
+	/* toolbars */
+		*toolbarOptions,
+		*toolbarBooks,
+		*toolbarComments,
+		*toolbarStudypad,
 	
 	/* html widgets */
 		*vlsbhtml,  /* html widget for verselist list in shortcut bar */	
@@ -163,10 +173,14 @@ struct _settings {
 		dict_tabs, /* show module tabs in text dict/lex if true  */
 		displaySearchResults, /* are we displaying search results in chap display */
 		showinmain, /* when verse list item clicked show in main form if true */
-		editnote, /* true when percom html widget is in edit mode */
-		editgbs, /* true when percom html widget is in edit mode */
 		notefollow, /* notes follow Bible text when true */
 		docked, /* true when shortcut bar is docked */
+		
+		/** editors **/
+		editnote, /* true when percom html widget is in edit mode */
+		editgbs, /* true when percom html widget is in edit mode */
+		modifiedGBS, /* book entry modified */
+		modifiedPC, /* personal note modified */
 		modifiedSP; /* studypad file have been modified */
 		
 	GList 
