@@ -30,7 +30,7 @@
 #include <unixstr.h>
 #endif
 
-#include <glib-1.2/glib.h>
+
 #include <swmgr.h>
 #include <markupfiltmgr.h>
 #include <swmodule.h>

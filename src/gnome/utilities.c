@@ -32,9 +32,48 @@
 
 #include "gui/utilities.h"
 #include "gui/gnomesword.h"
+
 #include "main/lists.h"
 #include "main/settings.h"
+#include "main/configs.h"
 
+
+/******************************************************************************
+ * Name
+ *  get_font
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   MOD_FONT * get_font(gchar *mod_name)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+MOD_FONT *get_font(gchar * mod_name)
+{
+	MOD_FONT *mf;
+
+	mf = g_new(MOD_FONT, 1);
+	mf->mod_name = mod_name;
+	//g_warning(mf->mod_name);
+	mf->old_font = NULL;
+	mf->old_gdk_font = NULL;
+	mf->old_font_size = NULL;
+	mf->new_font = NULL;
+	mf->new_gdk_font = NULL;
+	mf->new_font_size = NULL;
+	mf->no_font = 0;
+	get_font_info(mf);
+	if (strlen(mf->old_font) < 2)
+		mf->old_font = "none";
+	//g_warning("mf->old_font = %s",mf->old_font);
+	return mf;
+}
 
 /******************************************************************************
  * Name

@@ -309,6 +309,11 @@ static void set_module_font_activate(GtkMenuItem * menuitem,
 				     COMM_DATA * c)
 {
 	gui_set_module_font(c->mod_name);
+	
+	if(c->dialog)
+		gui_display_commentary_in_dialog(c->key);
+	else
+		gui_display_commentary(c->key);
 }
 
 

@@ -27,8 +27,13 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/e-paned/e-hpaned.h>
 
+#ifdef USE_GTKEMBEDMOZ
+#include <gtkmozembed.h>
+#endif
+
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs_dialog.h"
+#include "gui/gbs_display.h"
 #include "gui/gbs_menu.h"
 #include "gui/html.h"
 
@@ -223,10 +228,12 @@ static void add_node_children(GBS_DATA * dlg, GtkCTreeNode * node,
 static void ctree_select_row(GtkCTree * ctree, GList * node,
 			     gint column, GBS_DATA * dlg)
 {
-	gchar *bookname, *nodename, *offset, *key, *text = NULL;
+	gchar *bookname, *nodename, *offset;
 	GtkCTreeNode *treeNode;
+	GtkCTreeRow *treerow;
 
 	treeNode = GTK_CTREE_NODE(node);
+	treerow = GTK_CTREE_ROW(treeNode); 
 
 	nodename = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
 				    cell[0])->text;
@@ -236,12 +243,9 @@ static void ctree_select_row(GtkCTree * ctree, GList * node,
 				  cell[2])->text;
 	dlg->offset = strtoul(offset, NULL, 0);
 
-	/* g_warning("bookname = %s mod_name = %s",bookname,dlg->mod_name); */
-
 	change_book(bookname, dlg->offset);
-
-	text = get_text_from_offset(dlg->mod_name, offset);
-	if (text) {
+	
+	if (treerow->level >= 1) {		
 		/* fill ctree node with children */
 		if ((GTK_CTREE_ROW(node)->children == NULL)
 		    && (!GTK_CTREE_ROW(node)->is_leaf)) {
@@ -250,13 +254,7 @@ static void ctree_select_row(GtkCTree * ctree, GList * node,
 			gtk_ctree_expand(GTK_CTREE(dlg->ctree),
 					 treeNode);
 		}
-		key = get_book_key(dlg->mod_name);
-
-		entry_display(dlg->html, dlg->mod_name,
-			      text, key, TRUE);
-		if (key)
-			free(key);
-		free(text);
+		gbs_display(dlg,offset,treerow->level,treerow->is_leaf);
 	}
 
 }
@@ -527,6 +525,40 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_widget_show(label243);
 	gtk_clist_set_column_widget(GTK_CLIST(dlg->ctree), 2, label243);
 
+
+#ifdef USE_GTKEMBEDMOZ
+	if (!dlg->is_rtol) {
+
+		scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
+		gtk_widget_show(scrolledwindow_html);
+		e_paned_pack2(E_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+					       (scrolledwindow_html),
+					       GTK_POLICY_NEVER,
+					       GTK_POLICY_AUTOMATIC);
+		dlg->html = gtk_html_new();
+		gtk_widget_show(dlg->html);
+		gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
+				  dlg->html);
+		gtk_html_load_empty(GTK_HTML(dlg->html));
+		gtk_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+				   GTK_SIGNAL_FUNC(dialog_url),
+				   (GBS_DATA *) dlg);
+		gtk_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
+				   GTK_SIGNAL_FUNC(link_clicked),
+				   (GBS_DATA *) dlg);
+		gtk_signal_connect(GTK_OBJECT(dlg->html),
+				   "button_press_event",
+				   GTK_SIGNAL_FUNC(button_press),
+				   (GBS_DATA *) dlg);
+	}
+	else {
+		dlg->html = gtk_moz_embed_new();
+		gtk_widget_show(dlg->html);
+		e_paned_pack2(E_PANED(hpaned), dlg->html, TRUE, TRUE);
+		gtk_widget_realize(dlg->html);	
+	}
+#else	   
 	scrolledwindow_html = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_html);
 	e_paned_pack2(E_PANED(hpaned), scrolledwindow_html, TRUE, TRUE);
@@ -535,23 +567,11 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	dlg->statusbar = gtk_statusbar_new();
-	gtk_widget_show(dlg->statusbar);
-	gtk_box_pack_start(GTK_BOX(vbox_dialog), dlg->statusbar, FALSE,
-			   FALSE, 0);
-
 	dlg->html = gtk_html_new();
 	gtk_widget_show(dlg->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
-
-	gtk_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
-			   GTK_SIGNAL_FUNC(dialog_destroy),
-			   (GBS_DATA *) dlg);
-	gtk_signal_connect(GTK_OBJECT(dlg->ctree), "tree_select_row",
-			   GTK_SIGNAL_FUNC(ctree_select_row),
-			   (GBS_DATA *) dlg);
 	gtk_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			   GTK_SIGNAL_FUNC(dialog_url),
 			   (GBS_DATA *) dlg);
@@ -561,6 +581,20 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_signal_connect(GTK_OBJECT(dlg->html),
 			   "button_press_event",
 			   GTK_SIGNAL_FUNC(button_press),
+			   (GBS_DATA *) dlg);
+			   
+#endif	
+
+	dlg->statusbar = gtk_statusbar_new();
+	gtk_widget_show(dlg->statusbar);
+	gtk_box_pack_start(GTK_BOX(vbox_dialog), dlg->statusbar, FALSE,
+			   FALSE, 0);
+			   
+	gtk_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
+			   GTK_SIGNAL_FUNC(dialog_destroy),
+			   (GBS_DATA *) dlg);
+	gtk_signal_connect(GTK_OBJECT(dlg->ctree), "tree_select_row",
+			   GTK_SIGNAL_FUNC(ctree_select_row),
 			   (GBS_DATA *) dlg);
 }
 
@@ -638,6 +672,7 @@ void gui_open_gbs_dialog(gchar * mod_name)
 	dlg->dialog = NULL;
 	dlg->is_dialog = TRUE;
 	dlg->mod_name = g_strdup(mod_name);
+	dlg->is_rtol = is_module_rtl(dlg->mod_name);
 	create_gbs_dialog(dlg);
 	if (has_cipher_tag(dlg->mod_name)) {
 		dlg->is_locked = module_is_locked(dlg->mod_name);
@@ -646,8 +681,11 @@ void gui_open_gbs_dialog(gchar * mod_name)
 		dlg->is_locked = 0;
 		dlg->cipher_old = NULL;
 	}
-	popupmenu = gui_create_pm_gbs(dlg);
-	gnome_popup_menu_attach(popupmenu, dlg->html, NULL);
+	dlg->display_level = get_display_level(dlg->mod_name);
+	if(!dlg->is_rtol) {
+		popupmenu = gui_create_pm_gbs(dlg);
+		gnome_popup_menu_attach(popupmenu, dlg->html, NULL);
+	}
 	gtk_widget_show(dlg->dialog);
 	cur_dlg = dlg;
 	dialog_list = g_list_append(dialog_list, (GBS_DATA *) dlg);
@@ -698,6 +736,7 @@ void gui_shutdown_gbs_dialog(void)
 {
 	dialog_list = g_list_first(dialog_list);
 	while (dialog_list != NULL) {
+		g_warning("oops!!!!!");
 		GBS_DATA *dlg = (GBS_DATA *) dialog_list->data;
 		dialog_freed = TRUE;
 		/* 

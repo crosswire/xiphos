@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * utilities.h - support functions
+ * gui/gbs_display.h - support for displaying General Book Format modules
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,26 +19,23 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef _GBS_DISPALY_H_
+#define _GBS_DISPALY_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
-#include <gnome.h>
-#include "main/configs.h"
 
-MOD_FONT *get_font(gchar * mod_name);
-gchar * remove_linefeeds(gchar * buf);	
-void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname,
-     gchar * itemdata, gchar * submenuname, GtkMenuCallback mycallback);
-void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel);
-void gui_add_mods_to_menus(GList * modlist, gchar * menu,
-					GtkMenuCallback callback);
-void gui_remove_menu_items(gchar *startitem, gint numberofitems);
-void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
-				GtkMenuCallback callback);
-GList *gui_fill_count_list(int count);
-void gui_free_count_list(GList *glist);
+#include "gui/gbs.h"
+	
+#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf-8'></head>"
+
+void gbs_display(GBS_DATA * gbs, gchar * anchor, gint level,
+					gboolean is_leaf);
+
 	
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* _GBS_DISPALY_H_ */

@@ -25,7 +25,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
+int get_display_level(char * module_name);	
 int is_module_rtl(char * mod_name);
 int get_module_number(char *module_name, char *module_type);
 int get_mod_type(char * mod_name);

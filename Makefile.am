@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = m4  doc macros po src
+SUBDIRS = m4 doc po src
 
 
 BUILT_SOURCES = ${PACKAGE}.desktop

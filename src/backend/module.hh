@@ -32,7 +32,7 @@ struct _name_type {
 	int type;
 };
 
-
+int backend_get_display_level(char * module_name);
 int backend_is_module_rtl(char * mod_name);
 void backend_module_name_from_description(char * mod_name, 
 						char * mod_desc);

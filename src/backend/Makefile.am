@@ -1,5 +1,6 @@
 INCLUDES = \
-	-I$(top_builddir)/src
+    $(PACKAGE_CFLAGS) \
+    -I$(top_builddir)/src
 
 noinst_LIBRARIES = libbackend.a
 
@@ -7,7 +8,7 @@ EXTRA_DIST =  \
     sword_defs.h
 
 CXXFLAGS =  \
-    $(SWORD_CPPFLAGS)
+    $(SWORD_INCLUDES)
 
 libbackend_a_SOURCES =  \
     config.cc config.hh \

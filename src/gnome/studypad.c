@@ -41,9 +41,10 @@
 #include "gui/editor_spell.h"
 #include "gui/html.h"
 #include "gui/dialog.h"
-
 #include "gui/fileselection.h"
+
 #include "main/settings.h"
+#include "main/xml.h"
 
 #define BUFFER_SIZE 4096
 

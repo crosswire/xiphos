@@ -26,6 +26,10 @@
 #include <gnome.h>
 #include <gal/e-paned/e-hpaned.h>
 
+#ifdef USE_GTKEMBEDMOZ
+#include <gtkmozembed.h>
+#endif
+
 #include "gui/gtkhtml_display.h"
 #include "gui/dictlex.h"
 #include "gui/dictlex_menu.h"
@@ -44,19 +48,22 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
+#include "main/xml.h"
 
 /******************************************************************************
  * externs
  */
 extern gboolean dict_display_change;
-extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
+extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
 
 
 /******************************************************************************
  * global to this file only 
  */
 static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
-		GtkNotebookPage * page,	gint page_num, GList * dl_list);
+					    GtkNotebookPage * page,
+					    gint page_num,
+					    GList * dl_list);
 static GList *dl_list;
 static DL_DATA *cur_d;
 
@@ -80,7 +87,7 @@ static DL_DATA *cur_d;
  */
 
 void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
-					 gchar * dict_mod_description)
+				  gchar * dict_mod_description)
 {
 	gchar *dict_key, mod_name[16];
 
@@ -175,20 +182,20 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 		++page;
 		dl_list = g_list_next(dl_list);
 	}
-	if(page)		
-		gtk_notebook_set_page(GTK_NOTEBOOK(
-				  widgets.notebook_dict), page);
+	if (page)
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.notebook_dict), page);
 	else
-		on_notebook_dictlex_switch_page(GTK_NOTEBOOK(
-				  widgets.notebook_dict),
-				  NULL,
-				  page, 
-				  dl_list);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict), page);
+		on_notebook_dictlex_switch_page(GTK_NOTEBOOK
+						(widgets.notebook_dict),
+						NULL, page, dl_list);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
+			      page);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 
 	settings.dict_last_page = page;
 }
+
 /******************************************************************************
  * Name
  *  gui_set_dict_frame_label
@@ -210,12 +217,13 @@ void gui_set_dict_frame_label()
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module namecur_
-	 */	
+	 */
 	if (settings.dict_tabs)
 		gtk_frame_set_label(GTK_FRAME(cur_d->frame), NULL);
 	else
-		gtk_frame_set_label(GTK_FRAME(cur_d->frame), cur_d->mod_name);
-	
+		gtk_frame_set_label(GTK_FRAME(cur_d->frame),
+				    cur_d->mod_name);
+
 }
 
 /******************************************************************************
@@ -236,32 +244,33 @@ void gui_set_dict_frame_label()
  */
 
 void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
-		GtkNotebookPage * page,	gint page_num, GList * dl_list)
+				     GtkNotebookPage * page,
+				     gint page_num, GList * dl_list)
 {
-	DL_DATA *d; //, *d_old;
+	DL_DATA *d;		//, *d_old;
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	
-	if(!d->frame)
+
+	if (!d->frame)
 		gui_add_new_dict_pane(d);
-	
+
 	//-- change tab label to current book name
 	cur_d = d;
 	gui_change_window_title(d->mod_name);
 	/*
 	 * set search module to current dict/lex module 
 	 */
-//	strcpy(settings.sb_search_mod, d->mod_name);
+//      strcpy(settings.sb_search_mod, d->mod_name);
 	/*
 	 * set search frame label to current dict/lex module 
 	 */
 	gui_set_search_label();
-	
+
 	gui_set_dict_frame_label();
-	
+
 	settings.DictWindowModule = d->mod_name;
-	xml_set_value("GnomeSword", "modules", "dict",d->mod_name);
-	
+	xml_set_value("GnomeSword", "modules", "dict", d->mod_name);
+
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
 	widgets.html_dict = d->html;
@@ -284,49 +293,47 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
  *   void
  */
 
-void on_entryDictLookup_changed(GtkEditable * editable,
-						       DL_DATA * d)
+void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 {
 	gint count, i;
 	gchar *key, *new_key, *text;
 	static gboolean firsttime = TRUE;
-	
+
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
-	settings.dictkey = key;		
+	settings.dictkey = key;
 	xml_set_value("GnomeSword", "key", "dictionary", key);
+	d->key = g_strdup(key);
 	
-	text = get_dictlex_text(d->mod_name, key);	
-	entry_display(d->html, d->mod_name,
-		   text, key, TRUE);
+	text = get_dictlex_text(d->mod_name, key);
+	entry_display(d->html, d->mod_name, text, key, TRUE);
 	free(text);
-		
+
 	if (firsttime)
 		count = 7;
 	else
 		count =
 		    GTK_CLIST(d->clist)->clist_window_height /
 		    GTK_CLIST(d->clist)->row_height;
-	
+
 	if (count) {
 		gtk_clist_clear(GTK_CLIST(d->clist));
 		//set_dictlex_module(d->mod_name);
 		//set_dictlex_key(key);
 		new_key = get_dictlex_key(2, d->mod_name, -1);
-		
+
 		for (i = 0; i < (count / 2); i++) {
 			free(new_key);
 			new_key = get_dictlex_key(2, d->mod_name, 0);
 		}
-		
+
 		for (i = 0; i < count; i++) {
-			free(new_key);			
+			free(new_key);
 			new_key = get_dictlex_key(2, d->mod_name, 1);
-			gtk_clist_append(GTK_CLIST(d->clist),
-						 &new_key);
+			gtk_clist_append(GTK_CLIST(d->clist), &new_key);
 		}
-		free(new_key);		
+		free(new_key);
 	}
-	
+
 	firsttime = FALSE;
 }
 
@@ -348,7 +355,8 @@ void on_entryDictLookup_changed(GtkEditable * editable,
  */
 
 void on_clistDictLex_select_row(GtkCList * clist, gint row,
-			   gint column, GdkEvent * event, DL_DATA * d)
+				gint column, GdkEvent * event,
+				DL_DATA * d)
 {
 	gchar *text;
 
@@ -394,23 +402,15 @@ void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
  *
  * Return value
  *   gint
- */ 
+ */
 
-static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
-					DL_DATA * dl)
-{	
+static gint html_button_pressed(GtkWidget * html,
+				GdkEventButton * event, DL_DATA * dl)
+{
 	settings.whichwindow = DICTIONARY_WINDOW;
-	
-	gui_change_window_title(dl->mod_name);
-	/*
-	 * set search module to current dict/lex module 
-	 */
-//	strcpy(settings.sb_search_mod, dl->mod_name);
-	/*
-	 * set search frame label to current dict/lex module 
-	 */
-//	gui_set_search_label(dl->mod_name);	
-	
+
+	gui_change_window_title(dl->mod_name); 
+
 	switch (event->button) {
 	case 1:
 		return TRUE;
@@ -423,7 +423,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		break;
 	case 3:
 		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
-					     "button_press_event");*/
+		   "button_press_event"); */
 		return TRUE;
 		break;
 	default:
@@ -449,7 +449,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  *   void
  */
 
-static void create_dictlex_pane(DL_DATA *dl)
+static void create_dictlex_pane(DL_DATA * dl)
 {
 
 	GtkWidget *hpaned7;
@@ -468,8 +468,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 	hpaned7 = e_hpaned_new();
 	gtk_widget_show(hpaned7);
 	gtk_container_add(GTK_CONTAINER(dl->frame), hpaned7);
-	e_paned_set_position(E_PANED(hpaned7),
-				     190);
+	e_paned_set_position(E_PANED(hpaned7), 190);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox56);
@@ -517,6 +516,48 @@ static void create_dictlex_pane(DL_DATA *dl)
 	gtk_widget_show(frameDictHTML);
 	e_paned_pack2(E_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
+/*
+#ifdef USE_GTKEMBEDMOZ
+	if (!dl->is_rtol) {
+		scrolledwindowDictHTML =
+		    gtk_scrolled_window_new(NULL, NULL);
+		gtk_widget_show(scrolledwindowDictHTML);
+		gtk_container_add(GTK_CONTAINER(frameDictHTML),
+				  scrolledwindowDictHTML);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+					       (scrolledwindowDictHTML),
+					       GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_AUTOMATIC);
+		dl->html = gtk_html_new();
+		gtk_widget_show(dl->html);
+		gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
+				  dl->html);
+		gtk_html_load_empty(GTK_HTML(dl->html));
+
+		gtk_signal_connect(GTK_OBJECT(dl->html),
+				   "button_press_event",
+				   GTK_SIGNAL_FUNC(html_button_pressed),
+				   dl);
+		gtk_signal_connect(GTK_OBJECT(dl->html),
+				   "url_requested",
+				   GTK_SIGNAL_FUNC(url_requested),
+				   NULL);
+		gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
+				   GTK_SIGNAL_FUNC(gui_url),
+				   (gpointer) widgets.app);
+		gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
+				   GTK_SIGNAL_FUNC(gui_link_clicked),
+				   NULL);
+	} else {
+		gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.0.1");
+		dl->html = gtk_moz_embed_new();
+		gtk_widget_show(dl->html);
+		gtk_container_add(GTK_CONTAINER(frameDictHTML),
+				  dl->html);
+		gtk_widget_realize(dl->html);
+	}
+*/
+//#else
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
@@ -525,8 +566,6 @@ static void create_dictlex_pane(DL_DATA *dl)
 				       (scrolledwindowDictHTML),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
-
 	dl->html = gtk_html_new();
 	gtk_widget_show(dl->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
@@ -534,19 +573,20 @@ static void create_dictlex_pane(DL_DATA *dl)
 	gtk_html_load_empty(GTK_HTML(dl->html));
 
 	gtk_signal_connect(GTK_OBJECT(dl->html),
-			"button_press_event",
-			GTK_SIGNAL_FUNC(html_button_pressed), 
-			dl);
+			   "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->html),
-			"url_requested",
-			GTK_SIGNAL_FUNC(url_requested), 
-			NULL);
-	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);
+			   "url_requested",
+			   GTK_SIGNAL_FUNC(url_requested), NULL);
+	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
+			   GTK_SIGNAL_FUNC(gui_url),
+			   (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
-			   GTK_SIGNAL_FUNC(gui_url), (gpointer) widgets.app);
+//#endif
+
+	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
+			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
 			   GTK_SIGNAL_FUNC(on_entryDictLookup_changed),
 			   dl);
@@ -554,6 +594,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 			   GTK_SIGNAL_FUNC(on_clistDictLex_select_row),
 			   dl);
 }
+
 /******************************************************************************
  * Name
  *  gui_add_new_dict_pane
@@ -570,12 +611,12 @@ static void create_dictlex_pane(DL_DATA *dl)
  *   void
  */
 
-void gui_add_new_dict_pane(DL_DATA *dl)
-{	
+void gui_add_new_dict_pane(DL_DATA * dl)
+{
 	GtkWidget *popup;
-	
+
 	create_dictlex_pane(dl);
-	popup = gui_create_pm_dict(dl);  //create_dictlex_pm(dl);
+	popup = gui_create_pm_dict(dl);	//create_dictlex_pm(dl);
 	gnome_popup_menu_attach(popup, dl->html, NULL);
 }
 
@@ -595,34 +636,38 @@ void gui_add_new_dict_pane(DL_DATA *dl)
  *   void
  */
 
-static void add_vbox_to_notebook(DL_DATA *dl)
-{	
+static void add_vbox_to_notebook(DL_DATA * dl)
+{
 	GtkWidget *label;
-	
+
 	dl->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(dl->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
-			"dl->vbox", dl->vbox,
-			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "dl->vbox", dl->vbox,
+				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->vbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict), dl->vbox);	
-	
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict),
+			  dl->vbox);
+
 	label = gtk_label_new(dl->mod_name);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label", label,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
+				 label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_dict),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(widgets.notebook_dict), dl->mod_num),
-				   label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_dict),
+				   (GTK_NOTEBOOK(widgets.notebook_dict),
+				    dl->mod_num), label);
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
+					 (widgets.notebook_dict),
 					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK(widgets.notebook_dict),
+					 (GTK_NOTEBOOK
+					  (widgets.notebook_dict),
 					  dl->mod_num),
 					 (gchar *) dl->mod_name);
 
-	
+
 }
 
 /******************************************************************************
@@ -641,7 +686,7 @@ static void add_vbox_to_notebook(DL_DATA *dl)
  *  void
  */
 
-void gui_setup_dictlex(GList *mods)
+void gui_setup_dictlex(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modname;
@@ -675,6 +720,7 @@ void gui_setup_dictlex(GList *mods)
 			dl->is_locked = 0;
 			dl->cipher_old = NULL;
 		}
+		dl->is_rtol = is_module_rtl(dl->mod_name);
 		add_vbox_to_notebook(dl);
 		dl_list = g_list_append(dl_list, (DL_DATA *) dl);
 		++count;
@@ -682,9 +728,10 @@ void gui_setup_dictlex(GList *mods)
 	}
 
 
-	gtk_signal_connect(GTK_OBJECT(widgets.notebook_dict), "switch_page",
-			   GTK_SIGNAL_FUNC(on_notebook_dictlex_switch_page),
-			   dl_list);
+	gtk_signal_connect(GTK_OBJECT(widgets.notebook_dict),
+			   "switch_page",
+			   GTK_SIGNAL_FUNC
+			   (on_notebook_dictlex_switch_page), dl_list);
 
 	modbuf = g_strdup(settings.DictWindowModule);
 	keybuf = g_strdup(settings.dictkey);
@@ -717,7 +764,8 @@ void gui_shutdown_dictlex(void)
 {
 	dl_list = g_list_first(dl_list);
 	while (dl_list != NULL) {
-		DL_DATA *d = (DL_DATA *) dl_list->data;		
+		DL_DATA *d = (DL_DATA *) dl_list->data;
+		if(d->key) g_free(d->key);
 		g_free(d);
 		dl_list = g_list_next(dl_list);
 	}

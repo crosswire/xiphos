@@ -27,10 +27,15 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
+#ifdef USE_GTKEMBEDMOZ
+#include <gtkmozembed.h>
+#endif
+
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/bibletext_menu.h"
 #include "gui/display_info.h"
+#include "gui/font_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
 #include "gui/html.h"
@@ -183,8 +188,19 @@ static void show_in_statusbar(GtkWidget * statusbar, gchar * key,
 
 static void display(TEXT_DATA * vt, gchar * key, gboolean show_key)
 {
-	chapter_display(vt->html,
+#ifdef USE_GTKEMBEDMOZ
+	if (!vt->is_rtol)
+		chapter_display(vt->html,
 			vt->mod_name, vt->tgs, key, show_key);
+	else
+		chapter_display_mozilla(vt->html,
+					vt->mod_name,
+					vt->tgs, key, show_key);
+
+#else
+	chapter_display(vt->html,
+			vt->mod_name, vt->tgs, key, show_key);	
+#endif
 }
 
 
@@ -916,6 +932,57 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 
 
 
+#ifdef USE_GTKEMBEDMOZ
+
+/******************************************************************************
+ * Name
+ *  set_module_font_activate
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void set_module_font_activate(GtkMenuItem * menuitem,
+				     TEXT_DATA * t)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void set_module_font(GtkButton * button, TEXT_DATA * t)
+{
+	gui_set_module_font(t->mod_name);
+	display(t, t->key, TRUE);
+		
+}
+
+static void on_togglebutton_points_toggled(GtkToggleButton *
+					   togglebutton,
+					   TEXT_DATA * t)
+{
+	t->tgs->hebrewpoints = togglebutton->active;
+	save_module_options(t->mod_name, "Hebrew Vowel Points", 
+				    t->tgs->hebrewpoints);
+	display(t, t->key, TRUE);
+}
+
+
+static void on_togglebutton_cant_toggled(GtkToggleButton * togglebutton,
+					 TEXT_DATA * t)
+{
+	t->tgs->hebrewcant = togglebutton->active;
+	save_module_options(t->mod_name, "Hebrew Cantillation", 
+				    t->tgs->hebrewcant);
+	display(t, t->key, TRUE);
+	/*chapter_display_mozilla(t->html, t->mod_name,
+				t->tgs, settings.currentverse, TRUE);*/
+}
+
+
+#endif
+
 /******************************************************************************
  * Name
  *   create_bibletext_dialog
@@ -926,7 +993,7 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
  *   void create_bibletext_dialog(TEXT_DATA * vt)	
  *
  * Description
- *   viewtext gui
+ *   create a text dialog
  *
  * Return value
  *   void 
@@ -939,6 +1006,13 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	GtkWidget *toolbar_nav;
 	GtkWidget *frame21;
 	GtkWidget *swVText; 
+#ifdef USE_GTKEMBEDMOZ
+	GtkWidget *toolbar_moz;
+	GtkWidget *button_set_font;
+	GtkWidget *togglebutton_points;
+	GtkWidget *togglebutton_cant;
+#endif
+
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_DIALOG);
 
@@ -962,6 +1036,93 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_nav),
 				      GTK_RELIEF_NONE);
 
+
+#ifdef USE_GTKEMBEDMOZ
+	if (!vt->is_rtol) {
+		frame21 = gtk_frame_new(NULL);
+		gtk_widget_show(frame21);
+		gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
+		gtk_widget_set_usize(frame21, -2, 400);
+	
+		swVText = gtk_scrolled_window_new(NULL, NULL);
+		gtk_widget_show(swVText);
+		gtk_container_add(GTK_CONTAINER(frame21), swVText);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
+					       GTK_POLICY_NEVER,
+					       GTK_POLICY_ALWAYS);
+	
+		vt->html = gtk_html_new();
+		gtk_widget_show(vt->html);
+		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
+		gtk_html_load_empty(GTK_HTML(vt->html));
+		gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
+				   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);			   
+		gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
+				   GTK_SIGNAL_FUNC(link_clicked), vt);
+	}
+	else {
+		toolbar_moz =
+		    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+				    GTK_TOOLBAR_TEXT);
+		gtk_widget_show(toolbar_moz);
+		gtk_box_pack_start(GTK_BOX(vbox33), toolbar_moz, FALSE,
+				   FALSE, 0);
+		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar_moz),
+					      GTK_RELIEF_NONE);
+
+		button_set_font =
+		    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar_moz),
+					       GTK_TOOLBAR_CHILD_BUTTON,
+					       NULL, _("Font"), NULL,
+					       NULL, NULL, NULL, NULL);
+		gtk_widget_show(button_set_font);
+
+		gtk_signal_connect (GTK_OBJECT (button_set_font), "clicked",
+                      GTK_SIGNAL_FUNC (set_module_font),
+                      		(TEXT_DATA *) vt);
+		
+		
+		if (check_for_global_option
+		    (vt->mod_name, "UTF8HebrewPoints")) {
+			togglebutton_points =
+			    gtk_toolbar_append_element(GTK_TOOLBAR
+						       (toolbar_moz),
+						       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+						       NULL,
+						       _
+						       ("Vowel Points"),
+						       NULL, NULL, NULL,
+						       NULL, NULL);
+			gtk_widget_show(togglebutton_points);
+			
+			gtk_signal_connect (GTK_OBJECT (togglebutton_points), "toggled",
+                      		GTK_SIGNAL_FUNC (on_togglebutton_points_toggled),
+                      			(TEXT_DATA *) vt);
+		}
+
+		if (check_for_global_option
+		    (vt->mod_name, "UTF8Cantillation")) {
+			togglebutton_cant =
+			    gtk_toolbar_append_element(GTK_TOOLBAR
+						       (toolbar_moz),
+						       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+						       NULL,
+						       _("Cantilation"),
+						       NULL, NULL, NULL,
+						       NULL, NULL);
+			gtk_widget_show(togglebutton_cant);
+			
+  			gtk_signal_connect (GTK_OBJECT (togglebutton_cant), "toggled",
+                      		GTK_SIGNAL_FUNC (on_togglebutton_cant_toggled),
+                      			(TEXT_DATA *) vt);
+		}
+		vt->html = gtk_moz_embed_new();
+		gtk_widget_show(vt->html);
+		gtk_box_pack_start(GTK_BOX(vbox33), vt->html, TRUE,
+				   TRUE, 0);
+		gtk_widget_realize(vt->html);
+	}
+#else
 	frame21 = gtk_frame_new(NULL);
 	gtk_widget_show(frame21);
 	gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
@@ -978,7 +1139,11 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_widget_show(vt->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->html);
 	gtk_html_load_empty(GTK_HTML(vt->html));
-
+	gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
+			   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);			   
+	gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
+			   GTK_SIGNAL_FUNC(link_clicked), vt);
+#endif
 	vt->statusbar = gtk_statusbar_new();
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
@@ -997,10 +1162,6 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 			   "motion_notify_event",
 			   GTK_SIGNAL_FUNC
 			   (on_dialog_motion_notify_event), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
-			   GTK_SIGNAL_FUNC(dialog_url), (gpointer) vt);			   
-	gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
-			   GTK_SIGNAL_FUNC(link_clicked), vt);
 }
 
 
@@ -1069,6 +1230,7 @@ void gui_open_bibletext_dialog(gchar * mod_name)
 	vt->dialog = NULL;
 	vt->is_dialog = TRUE;
 	vt->mod_name = g_strdup(mod_name);
+	vt->is_rtol = is_module_rtl(vt->mod_name);
 	create_bibletext_dialog(vt);
 	if (has_cipher_tag(vt->mod_name)) {
 		vt->is_locked = module_is_locked(vt->mod_name);

@@ -37,6 +37,11 @@
 #include "backend/sword.h"
 
 
+
+int gbs_treekey_get_parent(unsigned long offset)
+{
+	return backend_get_parent(offset);
+}
 /******************************************************************************
  * Name
  *  module_name_from_description
@@ -168,7 +173,7 @@ void shutdown_sword(void)
  *   char * 
  */ 
  
-char * get_text_from_offset(char * module_name, char * offset)
+char * get_text_from_offset(char * module_name, unsigned long offset)
 {        
 	return backend_get_text_from_offset(module_name, offset);
 }
