@@ -61,7 +61,10 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 						gchar * verse_list);	
 gboolean gui_verselist_button_release_event(GtkWidget * widget,
 						 GdkEventButton * event,
-						 gpointer user_data);	
+						 gpointer user_data);
+gboolean vpaned_srch_rslt_button_release_event(GtkWidget * widget,
+					       GdkEventButton * event,
+					       gpointer user_data);
 
 #ifdef __cplusplus
 }
