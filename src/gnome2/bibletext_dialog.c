@@ -671,7 +671,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      TEXT_DATA * vt)
 {
 	cur_vt = vt;
-	return TRUE;
+	return FALSE;
 }
 
 /******************************************************************************
@@ -697,7 +697,6 @@ static void dialog_url(GtkHTML * html, const gchar * url,
 	gchar *url_buf = NULL;
 	gint context_id2;
 
-	
 	cur_vt = vt;
 	if(url) url_buf = g_strdup(url);
 	context_id2 =
@@ -1332,7 +1331,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 		gtk_widget_show(vt->html);
 		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
 		gtk_html_load_empty(GTK_HTML(vt->html));
-		gtk_signal_connect(GTK_OBJECT(vt->html), "on_url",
+		g_signal_connect(G_OBJECT(vt->html), "on_url",
 				   G_CALLBACK(dialog_url), (gpointer) vt);			   
 		gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);

@@ -262,7 +262,7 @@ static gboolean on_dialog_motion_notify_event(GtkWidget * widget,
 					      COMM_DATA * vc)
 {
 	cur_vc = vc;
-	return TRUE;
+	return FALSE;
 }
 
 
