@@ -65,7 +65,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
 	},
 	{
 		N_("Perforated Paper"),
-		PACKAGE_PIXMAPS_DIR "/paper.png",
+		GTKHTML_DATA_DIR"/icons/paper.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0x3380, 0x6680},
@@ -73,7 +73,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
 	},
 	{
 		N_("Blue Ink"),
-		PACKAGE_PIXMAPS_DIR "/texture.png",
+		GTKHTML_DATA_DIR"/icons/texture.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0x1fff, 0x1fff, 0x8fff},
 		{0, 0, 0, 0xffff},
@@ -81,7 +81,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
 	},
 	{
 		N_("Paper"),
-		PACKAGE_PIXMAPS_DIR "/rect.png",
+		GTKHTML_DATA_DIR"/icons/rect.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0xffff},
@@ -89,7 +89,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Ribbon"),
-		PACKAGE_PIXMAPS_DIR "/ribbon.jpg",
+		GTKHTML_DATA_DIR"/icons/ribbon.jpg",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0x9900, 0x3300, 0x6600},
@@ -97,7 +97,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Midnight"),
-		PACKAGE_PIXMAPS_DIR "/midnight-stars.jpg",
+		GTKHTML_DATA_DIR"/icons/midnight-stars.jpg",
 		{0, 0, 0, 0},
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0xffff, 0x9900, 0},
@@ -105,7 +105,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Confidential"),
-		PACKAGE_PIXMAPS_DIR "/confidential-stamp.jpg",
+		GTKHTML_DATA_DIR"/icons/confidential-stamp.jpg",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0xffff},
@@ -113,7 +113,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Draft"),
-		PACKAGE_PIXMAPS_DIR "/draft-stamp.jpg",
+		GTKHTML_DATA_DIR"/icons/draft-stamp.jpg",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0},
 		{0, 0, 0, 0xffff},
@@ -121,7 +121,7 @@ static BodyTemplate body_templates [TEMPLATES] = {
   	},
 	{
 		N_("Graph paper"),
-		PACKAGE_PIXMAPS_DIR "/draft-paper.png",
+		GTKHTML_DATA_DIR"/icons/draft-paper.png",
 		{0, 0xffff, 0xffff, 0xffff},
 		{0, 0, 0, 0x8000},
 		{0, 0xe300, 0x2100, 0x2300},

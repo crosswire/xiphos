@@ -48,7 +48,7 @@
 #include "gui/parallel_view.h"
 #include "gui/main_window.h"
 #include "gui/studypad.h"
-#include "gui/studypad_dialog.h"
+#include "gui/studypad.h"
 #include "gui/toolbar_nav.h"
 
 #include "main/url.hh"
@@ -177,7 +177,7 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 				 window);
 	} else {
 		settings.studypad_dialog_exist =
-			  gui_open_studypad_dialog((gchar*)filename);
+			  gui_open_studypad((gchar*)filename);
 	}
 	return 1;
 }
@@ -804,7 +804,6 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	 */
 	if (settings.addhistoryitem) {
 		if (strcmp(settings.currentverse, history_list[history_items - 1].verseref))
-			//g_warning("currentverse = %s",settings.currentverse);
 			gui_add_history_Item(widgets.app,
 				       GTK_WIDGET
 				       (widgets.shortcutbar),
@@ -845,6 +844,17 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 	gchar *buf = NULL;
 	URL* m_url;
 	
+	if(strstr(url,"sword://"))
+		return sword_uri(url,clicked);
+	if(strstr(url,"book://"))
+		return sword_uri(url,clicked);
+	if(strstr(url,"chapter://"))
+		return sword_uri(url,clicked);
+	
+#ifdef DEBUG
+	g_warning("main_url_handler()");
+	g_warning("url = %s",url);
+#endif	
 	if(strstr(url,"passagestudy.jsp") || strstr(url,"gnomesword.url")) {/* passagestudy.jsp?action=showStrongs&type= */
 		m_url = new URL((const char*)url);	
 		action = g_strdup(m_url->getParameterValue("action"));
@@ -854,14 +864,13 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		strongs = g_strdup((gchar*)m_url->getParameterValue("lemma"));
 
 #ifdef DEBUG
-		g_warning("main_url_handler()");
-		g_warning("url = %s",url);
 		g_warning("action = %s",action);
 		g_warning("type = %s",type);  
 		g_warning("value = %s",value);
 		g_warning("strongs = %s",strongs);  
 		g_warning("morph = %s",morph);
 #endif	
+		
 		
 		if(strlen(strongs) >= 1 && strlen(morph) >= 1 ) {
 			show_strongs_morph(type,strongs,morph,clicked);
@@ -920,14 +929,9 @@ gint main_url_handler(const gchar * url, gboolean clicked)
 		if(value) g_free(value);
 		if(strongs) g_free(strongs);
 		if(morph) g_free(morph);
+		delete m_url;
 		return 1;
 	}
-	if(strstr(url,"sword://"))
-		return sword_uri(url,clicked);
-	if(strstr(url,"book://"))
-		return sword_uri(url,clicked);
-	if(strstr(url,"chapter://"))
-		return sword_uri(url,clicked);
 	return 0;
 }
 

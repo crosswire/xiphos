@@ -54,7 +54,6 @@ gnomesword2_SOURCES =  \
     sidebar_dialog.c \
     splash.c \
     studypad.c \
-    studypad_dialog.c \
     toolbar_nav.c \
     tabbed_browser.c \
     utilities.c

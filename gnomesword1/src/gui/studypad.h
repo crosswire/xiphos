@@ -35,8 +35,6 @@ gint save_file_program_end(GtkWidget *htmlwidget, gchar *filename);
 gint save_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint load_file(gchar *filename, GSHTMLEditorControlData *ecd);
 gint gui_open_studypad(gchar * file_name);
-GtkWidget *gui_create_studypad_control(GtkWidget * container,
-				gchar * filename);
 
 #ifdef __cplusplus
 }

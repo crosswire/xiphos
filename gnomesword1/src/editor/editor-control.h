@@ -35,7 +35,7 @@ enum {
 	PERCOM
 };
 
-GSHTMLEditorControlData *editor_new_editor (GtkWidget * container, int type, char * filename);
+GSHTMLEditorControlData *editor_new(GtkWidget * container, int type, char * filename);
 
 #ifdef __cplusplus
 }
