@@ -45,7 +45,6 @@
 #include "main/settings.h"
 #include "main/sword.h"
 #include "main/xml.h"
-#include "backend/module_manager.hh"
 
 #define GTK_RESPONSE_INSTALL 303
 #define GTK_RESPONSE_REMOVE 302
@@ -99,12 +98,14 @@ static GdkPixbuf* INSTALLED;
 static GdkPixbuf* LOCKED;
 static GdkPixbuf* BLANK;
 
+
+
 /******************************************************************************
  * Name
  *   create_pixbufs
  *
  * Synopsis
- *   #include "gui/bookmarks_treeview.h"
+ *   #include "gui/mod_mgr.h"
  *
  *   void create_pixbufs(void)
  *
@@ -118,7 +119,7 @@ static GdkPixbuf* BLANK;
 static void create_pixbufs(void)
 {
 	INSTALLED = gtk_widget_render_icon(widgets.app,
-                                             GTK_STOCK_APPLY, //"gnome-stock-apply",
+                                             GTK_STOCK_APPLY,
                                              GTK_ICON_SIZE_MENU,
                                              NULL);
 	LOCKED = gtk_widget_render_icon(widgets.app,
@@ -130,6 +131,23 @@ static void create_pixbufs(void)
                                              GTK_ICON_SIZE_MENU,
                                              NULL);
 }
+
+
+/******************************************************************************
+ * Name
+ *   mod_mgr_check_for_file
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   gboolean mod_mgr_check_for_file(const gchar * filename)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */
 
 static gboolean mod_mgr_check_for_file(const gchar * filename)
 {
@@ -406,8 +424,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 	GdkPixbuf *locked;
 	GString *str = g_string_new(NULL);
 
-	if ((!g_ascii_isalnum(info->language[0]))
-	    || (info->language == NULL))
+	if ((!g_ascii_isalnum(info->language[0])) || (info->language == NULL))
 		info->language = N_("Unknown");
 
 	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
@@ -416,7 +433,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 		gchar *str_data;
 
 		gtk_tree_model_get(model, &iter_iter, COLUMN_NAME,
-				   &str_data, -1);
+				&str_data, -1);
 		if (!strcmp(info->language, str_data)) {
 			if (info->installed)
 				installed = INSTALLED;//g_string_printf(str, "*%s", info->name);
@@ -443,6 +460,7 @@ static void add_module_to_language_folder(GtkTreeModel * model,
 			g_free(str_data);
 			return;
 		}
+		g_free(str_data);
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
 }
@@ -490,6 +508,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 			g_free(str_data);
 			return;
 		}
+		g_free(str_data);
 		valid = gtk_tree_model_iter_next(model, &iter_iter);
 	}
 	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
@@ -500,6 +519,7 @@ static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
 	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter,
 			   COLUMN_VISIBLE, FALSE, COLUMN_NAME,
 			   (gchar *) buf, -1);
+	g_free(buf);
 
 }
 
@@ -535,19 +555,18 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 	GList *tmp = NULL;
 	GList *tmp2 = NULL;
 	MOD_MGR *info;
-	//GString *str = g_string_new(NULL);
+	
 	mod_mgr_shut_down();
-
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
-
 	mod_mgr_init(destination);
 
 	if (install) {
 		if (GTK_TOGGLE_BUTTON(radiobutton_source)->active) {
 			source =
-			    gtk_entry_get_text(GTK_ENTRY(combo_entry1));
+			    gtk_entry_get_text(GTK_ENTRY(
+				gnome_entry_gtk_entry((GnomeEntry*)combo_entry1)));
 			local = TRUE;
 		} else {
 			source =
@@ -639,7 +658,6 @@ static void load_module_tree(GtkTreeView * treeview, gboolean install)
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
-	//g_string_free(str,TRUE);
 }
 
 
@@ -665,7 +683,6 @@ static void response_refresh(void)
 	GThread *gthread = NULL;
 	GError *error = NULL;
 	gint failed = 1;
-	
 	switch (current_page) {
 	case 1:
 		pbar = GTK_PROGRESS_BAR(progressbar_refresh);
@@ -957,8 +974,8 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 						     renderer, "text",
 						     COLUMN_OLD_VERSION,
 						     NULL);
-	gtk_tree_view_column_set_sort_column_id(column,
-						COLUMN_OLD_VERSION);
+	/*gtk_tree_view_column_set_sort_column_id(column,
+						COLUMN_OLD_VERSION);*/
 	gtk_tree_view_append_column(treeview, column);
 
 	if (remove)
@@ -971,8 +988,8 @@ static void add_columns(GtkTreeView * treeview, gboolean remove)
 						     renderer, "text",
 						     COLUMN_NEW_VERSION,
 						     NULL);
-	gtk_tree_view_column_set_sort_column_id(column,
-						COLUMN_NEW_VERSION);
+	/*gtk_tree_view_column_set_sort_column_id(column,
+						COLUMN_NEW_VERSION);*/
 	gtk_tree_view_append_column(treeview, column);
 }
 
@@ -1076,6 +1093,24 @@ static GtkTreeModel *create_model(void)
 }
 
 
+/******************************************************************************
+ * Name
+ *   button_press_event
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   gboolean button_press_event(GtkWidget * widget,
+ *				   GdkEventButton * event,
+ *				   gpointer data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
 static gboolean button_press_event(GtkWidget * widget,
 				   GdkEventButton * event,
 				   gpointer data)
@@ -1126,6 +1161,24 @@ static gboolean button_press_event(GtkWidget * widget,
 }
 
 
+/******************************************************************************
+ * Name
+ *   on_notebook1_switch_page
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_notebook1_switch_page(GtkNotebook * notebook,
+ *				     GtkNotebookPage * page,
+ *				     guint page_num, gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 static void on_notebook1_switch_page(GtkNotebook * notebook,
 				     GtkNotebookPage * page,
 				     guint page_num, gpointer user_data)
@@ -1155,7 +1208,7 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 			yes_no_dialog->ok = TRUE;
 
 			test = gui_alert_dialog(yes_no_dialog);
-			if (test != GS_OK) {
+			if (test == GS_OK) {
 
 			}
 		}
@@ -1188,6 +1241,23 @@ static void on_notebook1_switch_page(GtkNotebook * notebook,
 
 }
 
+
+/******************************************************************************
+ * Name
+ *   on_radiobutton2_toggled
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
+ *			     gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void on_radiobutton2_toggled(GtkToggleButton * togglebutton,
 			     gpointer user_data)
@@ -1380,9 +1450,9 @@ GtkWidget *create_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox4), fileentry1, TRUE, TRUE, 0);
 	gnome_file_entry_set_directory_entry(GNOME_FILE_ENTRY
 					     (fileentry1), TRUE);
-
+	//GNOME_FILE_COMBO(combo1);
 	combo_entry1 =
-	    gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(fileentry1));
+	    gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(fileentry1));
 	gtk_widget_show(combo_entry1);
 
 	hbox2 = gtk_hbox_new(FALSE, 6);
@@ -1684,14 +1754,26 @@ void gui_open_mod_mgr(void)
 	}
 
 	create_pixbufs();
-	gtk_entry_set_text(GTK_ENTRY(combo_entry1),
-			   get_config_value("Sources", "Local"));
+	/*gtk_entry_set_text(GTK_ENTRY(combo_entry1),
+			   get_config_value("Sources", "Local"));*/
 
 	tmp = mod_mgr_list_remote_sources();
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		combo1_items =
 		    g_list_append(combo1_items, (gchar *) mms->caption);
+		tmp = g_list_next(tmp);
+	}
+	tmp = mod_mgr_list_local_sources();
+		mms = (MOD_MGR_SOURCE *) tmp->data;
+	gnome_file_entry_set_filename((GnomeFileEntry*)fileentry1,
+					 mms->directory);
+	while(tmp) {
+		mms = (MOD_MGR_SOURCE *) tmp->data;
+		gnome_entry_append_history((GnomeEntry*)combo_entry1,
+					   TRUE,
+					   mms->directory);
+		g_free(mms);
 		tmp = g_list_next(tmp);
 	}
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), combo1_items);
@@ -1703,8 +1785,24 @@ void gui_open_mod_mgr(void)
 	g_string_free(str, TRUE);
 }
 
-void gui_update_install_status(glong total, glong done,
-			       const gchar * message)
+
+/******************************************************************************
+ * Name
+ *   gui_update_install_status
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *  void gui_update_install_status(glong total, glong done, const gchar * message) 
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_update_install_status(glong total, glong done, const gchar * message)
 {
 	GtkProgressBar *pbar;
 	switch (current_page) {
@@ -1723,6 +1821,23 @@ void gui_update_install_status(glong total, glong done,
 		gtk_main_iteration();
 	}
 }
+
+
+/******************************************************************************
+ * Name
+ *   gui_update_install_progressbar
+ *
+ * Synopsis
+ *   #include "gui/mod_mgr.h"
+ *
+ *   void gui_update_install_progressbar(gdouble fraction)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void gui_update_install_progressbar(gdouble fraction)
 {
