@@ -221,8 +221,12 @@ gboolean backend_load_properties(SETTINGS * s)
 		 c_str());
 	s->text_tabs =
 	    atoi(settingsInfo["User Options"]["BibleTabs"].c_str());
+	s->text_tool =
+	    atoi(settingsInfo["User Options"]["BibleToolbar"].c_str());
 	s->comm_tabs =
 	    atoi(settingsInfo["User Options"]["CommTabs"].c_str());
+	s->comm_tool =
+	    atoi(settingsInfo["User Options"]["CommToolbar"].c_str());
 	s->dict_tabs =
 	    atoi(settingsInfo["User Options"]["DictTabs"].c_str());
 	s->book_tabs =
@@ -412,8 +416,12 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
 		    isON(s->notefollow);
 		settingsInfo["User Options"]["BibleTabs"] =
 		    isON(s->text_tabs);
+		settingsInfo["User Options"]["BibleToolbar"] =
+		    isON(s->text_tool);
 		settingsInfo["User Options"]["CommTabs"] =
 		    isON(s->comm_tabs);
+		settingsInfo["User Options"]["CommToolbar"] =
+		    isON(s->comm_tool);
 		settingsInfo["User Options"]["DictTabs"] =
 		    isON(s->dict_tabs);
 		settingsInfo["User Options"]["BookTabs"] = isON(s->book_tabs);
@@ -434,22 +442,22 @@ gboolean backend_save_properties(SETTINGS * s, gboolean shutdown)
  * and information from the setup dialog
  *****************************************************************************/
 
-gboolean backend_create_properties_from_setup(GtkWidget * setup)
+gboolean backend_create_properties_from_setup(void)
 {
 	gchar buf[80], buf2[255];
 
 	sprintf(buf2, "%s/preferences.conf", settings.gSwordDir);
 	SWConfig settingsInfo(buf2);
 	settingsInfo["GnomeSword"]["Version"] = VERSION;
-	settingsInfo["Modules"]["MainWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry1")));	/* get mod name */
-	settingsInfo["Modules"]["CommWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry12")));	/* get mod name */
-	settingsInfo["Modules"]["DictWindow"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry13")));	/* get mod name */
-	settingsInfo["Modules"]["Interlinear1"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry2")));	/* get mod name */
-	settingsInfo["Modules"]["Interlinear2"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry3")));	/* get mod name */
-	settingsInfo["Modules"]["Interlinear3"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry4")));	/* get mod name */
-	settingsInfo["Modules"]["Interlinear4"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry10")));	/* get mod name */
-	settingsInfo["Modules"]["Interlinear5"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry11")));	/* get mod name */
-	settingsInfo["Modules"]["PerComments"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "combo_entry14")));	/* get mod name */
+	settingsInfo["Modules"]["MainWindow"] = settings.MainWindowModule;
+	settingsInfo["Modules"]["CommWindow"] = settings.CommWindowModule;
+	settingsInfo["Modules"]["DictWindow"] = settings.DictWindowModule;
+	settingsInfo["Modules"]["Interlinear1"] = settings.Interlinear1Module;
+	settingsInfo["Modules"]["Interlinear2"] = settings.Interlinear2Module;
+	settingsInfo["Modules"]["Interlinear3"] = settings.Interlinear3Module;
+	settingsInfo["Modules"]["Interlinear4"] = settings.Interlinear4Module;
+	settingsInfo["Modules"]["Interlinear5"] = settings.Interlinear5Module;
+	settingsInfo["Modules"]["PerComments"] = settings.personalcommentsmod;
 	//settingsInfo["Modules"]["Devotional"] = gtk_entry_get_text(GTK_ENTRY(lookup_widget(setup, "comboDevotional")));       /* get mod name */
 
 	settingsInfo["LEXICONS"]["Greek"] = "StrongsGreek";
@@ -486,27 +494,15 @@ gboolean backend_create_properties_from_setup(GtkWidget * setup)
 	settingsInfo["LAYOUT"]["AppHight"] = "550";
 	settingsInfo["LAYOUT"]["ShortcutbarDocked"] = "1";
 
-	settingsInfo["User Options"]["UseDefault"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "radiobutton1"))->active);
-	settingsInfo["User Options"]["BibleTabs"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "checkbutton4"))->active);
-	settingsInfo["User Options"]["CommTabs"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "checkbutton5"))->active);
-	settingsInfo["User Options"]["DictTabs"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "checkbutton6"))->active);
-	settingsInfo["User Options"]["versestyle"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "checkbutton2"))->active);
-	settingsInfo["User Options"]["autosavepersonalcomments"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "checkbutton1"))->active);
-	settingsInfo["User Options"]["interlinearpage"] =
-	    isON(GTK_TOGGLE_BUTTON
-		 (lookup_widget(setup, "checkbutton3"))->active);
+	settingsInfo["User Options"]["UseDefault"] = isON(settings.usedefault);
+	settingsInfo["User Options"]["BibleTabs"] = isON(settings.text_tabs);
+	settingsInfo["User Options"]["CommTabs"] = isON(settings.comm_tabs);
+	settingsInfo["User Options"]["DictTabs"] = isON(settings.dict_tabs);
+	settingsInfo["User Options"]["versestyle"] = isON(settings.versestyle);
+	settingsInfo["User Options"]["autosavepersonalcomments"] = 
+		isON(settings.autosavepersonalcomments);
+	settingsInfo["User Options"]["interlinearpage"] = 
+		isON(settings.interlinearpage);
 	settingsInfo["User Options"]["strongs"] = "0";
 	settingsInfo["User Options"]["footnotes"] = "0";
 	settingsInfo["User Options"]["formatpercom"] = "0";

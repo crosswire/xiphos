@@ -328,10 +328,9 @@ void display_percomm(gchar * key)
  *   GList *
  */
 
-GList *setup_percomm(SETTINGS * s)
+void setup_percomm(SETTINGS * s, GList *mods)
 {
 	GList *tmp = NULL;
-	GList *mods = NULL;
 	gchar *mod_name;
 	gchar *modbuf;
 	gchar *keybuf;
@@ -340,7 +339,7 @@ GList *setup_percomm(SETTINGS * s)
 
 	percomm_list = NULL;
 
-	mods = backend_get_list_of_percom_modules();
+	//mods = backend_get_list_of_percom_modules();
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {

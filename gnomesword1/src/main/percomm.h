@@ -58,7 +58,7 @@ void delete_percomm_note(void);
 void percomm_page_changed(gint page_num, PC_DATA * p);
 void set_percomm_page_and_key(gint page_num, gchar * key);
 void display_percomm(gchar * key);
-GList *setup_percomm(SETTINGS * s);
+void setup_percomm(SETTINGS * s, GList *mods);
 void shutdown_percomm(void);
 
 #ifdef __cplusplus

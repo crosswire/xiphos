@@ -40,9 +40,9 @@
  * Text or Commentary dialog
  */
 
-static SWDisplay *display;	/* to display modules in view dialog */
-static SWMgr *mgr;		/* sword mgr for view comm dialog */
-static SWModule *mod;		/* module for view text dialog */
+static SWDisplay *display;	
+static SWMgr *mgr;	
+static SWModule *mod;	
 
 /******************************************************************************
  * backend_dispaly_info_load_modudle - load a module into the 

@@ -118,6 +118,14 @@ void on_notebook_text_switch_page(GtkNotebook * notebook,
 	sprintf(title, "GnomeSWORD - %s", text_get_description(t->mod_num));
 	gtk_window_set_title(GTK_WINDOW(settings.app), title);
 	/*
+	 *  hide/show toolbar 
+	 */
+	if(settings.text_tool)
+		gtk_widget_show(t->frame_toolbar);
+	else
+		gtk_widget_hide(t->frame_toolbar);
+	GTK_CHECK_MENU_ITEM(t->showtoolbar)->active = settings.text_tool;
+	/*
 	 *  keep showtabs menu item current 
 	 */
 	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
@@ -287,6 +295,33 @@ static void on_text_showtabs_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *   on_text_showtoolbar_activate
+ *
+ * Synopsis
+ *   #include "_bibletext.h"
+ *
+ *   void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
+ *						TEXT_DATA * t)
+ *
+ * Description
+ *   display/hide text toolbar
+ *
+ * Return value
+ *   void
+ */
+
+static void on_text_showtoolbar_activate(GtkMenuItem * menuitem,
+						TEXT_DATA * t)
+{
+	settings.text_tool = GTK_CHECK_MENU_ITEM(menuitem)->active;
+	if(settings.text_tool)
+		gtk_widget_show(t->frame_toolbar);
+	else
+		gtk_widget_hide(t->frame_toolbar);
+}
+
+/******************************************************************************
+ * Name
  *  on_view_new_activate
  *
  * Synopsis
@@ -412,6 +447,15 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 				 gtk_widget_unref);
 	gtk_widget_show(t->showtabs);
 	gtk_container_add(GTK_CONTAINER(pm_text), t->showtabs);
+
+	t->showtoolbar =
+	    gtk_check_menu_item_new_with_label(_("Show Toolbar"));
+	gtk_widget_ref(t->showtoolbar);
+	gtk_object_set_data_full(GTK_OBJECT(pm_text), "t->showtoolbar",
+				 t->showtoolbar, (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(t->showtoolbar);
+	gtk_container_add(GTK_CONTAINER(pm_text), t->showtoolbar);
 
 	separator = gtk_menu_item_new();
 	gtk_widget_ref(separator);
@@ -592,6 +636,10 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t)
 	gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_text_showtabs_activate), &settings);
+	
+	gtk_signal_connect(GTK_OBJECT(t->showtoolbar), "activate",
+			   GTK_SIGNAL_FUNC
+			   (on_text_showtoolbar_activate), t);
 	gtk_signal_connect(GTK_OBJECT(view_new), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_view_new_activate), &settings);
@@ -761,7 +809,6 @@ static GnomeUIInfo variant_menu_uiinfo[] = {
 void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
 {
 	GtkWidget *vbox;
-	GtkWidget *frame;
 	GtkWidget *toolbar;
 	GtkWidget *scrolledwindow;
 	GtkWidget *label;
@@ -782,12 +829,12 @@ void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
 
-	frame = gtk_frame_new(NULL);
-	gtk_widget_ref(frame);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame", frame,
+	t->frame_toolbar = gtk_frame_new(NULL);
+	gtk_widget_ref(t->frame_toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "t->frame_toolbar", t->frame_toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame);
-	gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, TRUE, 0);
+	//gtk_widget_show(t->frame_toolbar);
+	gtk_box_pack_start(GTK_BOX(vbox), t->frame_toolbar, FALSE, TRUE, 0);
 
 	toolbar =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
@@ -797,7 +844,7 @@ void gui_create_text_pane(SETTINGS * s, TEXT_DATA * t)
 				 toolbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar);
-	gtk_container_add(GTK_CONTAINER(frame), toolbar);
+	gtk_container_add(GTK_CONTAINER(t->frame_toolbar), toolbar);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
 				      GTK_RELIEF_NONE);
 

@@ -63,7 +63,7 @@ GBS_DATA *get_gbs(GList * gbs);
 void add_node_children(SETTINGS *s, GtkCTreeNode *node, gchar *bookname,
 						unsigned long offset);
 void set_book_page_and_key(gint page_num, gchar * key);
-GList* setup_gbs(SETTINGS * s);
+void setup_gbs(SETTINGS * s, GList *mods);
 void shutdown_gbs(void);
 GtkCTreeNode *add_node_gbs(SETTINGS * s, NODEDATA * data);
 

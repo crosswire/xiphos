@@ -44,6 +44,7 @@ typedef struct _backend_comm BE_COMM;
 struct _backend_comm {
 	SWModule *mod;
 	SWDisplay *dlDisp;
+	VerseKey vkey;
 	int num;
 };
 
@@ -74,23 +75,19 @@ void backend_display_book_heading(gint modnum)
 	char key[256];
 	BE_COMM *c = (BE_COMM *) g_list_nth_data(be_comm_list, modnum);
 
-	VerseKey vkey,nkey;
+	VerseKey vkey;
 	vkey = settings.currentverse; //c->mod->KeyText();
-	const char *book = vkey.books[vkey.Testament() - 1][vkey.Book() -
-							 1].name;
+	const char *book = 
+		vkey.books[vkey.Testament() - 1][vkey.Book() - 1].name;
 		
 	sprintf(key,"%s 0:0",book);
-	nkey.Persist(1);
-	nkey.AutoNormalize(1);
-	nkey = settings.currentverse;
-	c->mod->SetKey(nkey);
 	
-	nkey.AutoNormalize(0);
-	nkey = key;
-	c->mod->SetKey(nkey);
+	c->vkey.AutoNormalize(0);
+	c->vkey = key;
+	c->mod->SetKey(c->vkey);
 	c->mod->Error();	
 	c->mod->Display();
-	nkey.Persist(0);
+	c->vkey.AutoNormalize(1);
 }
 
 
@@ -117,22 +114,18 @@ void backend_display_chap_heading(gint modnum)
 
 	VerseKey vkey,nkey;
 	vkey = settings.currentverse; //c->mod->KeyText();
-	const char *book = vkey.books[vkey.Testament() - 1][vkey.Book() -
-							 1].name;
+	const char *book = 
+		vkey.books[vkey.Testament() - 1][vkey.Book() - 1].name;
 	int chap = vkey.Chapter();
 	
 	sprintf(key,"%s %d:0",book,chap);
-	nkey.Persist(1);
-	nkey.AutoNormalize(1);
-	nkey = settings.currentverse;
-	c->mod->SetKey(nkey);
 	
-	nkey.AutoNormalize(0);
-	nkey = key;
-	c->mod->SetKey(nkey);
+	c->vkey.AutoNormalize(0);
+	c->vkey = key;
+	c->mod->SetKey(c->vkey);
 	c->mod->Error();	
 	c->mod->Display();
-	nkey.Persist(0);
+	c->vkey.AutoNormalize(1);
 }
 
 
@@ -279,6 +272,9 @@ void backend_setup_commentary(SETTINGS * s)
 			BE_COMM *c = new BE_COMM;
 			c->mod = (*it).second;
 			c->num = count;
+			c->vkey.Persist(1);
+			c->vkey = s->currentverse;
+			c->mod->SetKey(c->vkey);
 			be_comm_list =
 			    g_list_append(be_comm_list, (BE_COMM *) c);
 			++count;
@@ -343,10 +339,9 @@ void backend_shutdown_commentary(void)
 
 void backend_display_commentary(int modnum, gchar * key)
 {
-	BE_COMM *co;
-	co = (BE_COMM *) g_list_nth_data(be_comm_list, modnum);
-
-	co->mod->SetKey(key);
+	BE_COMM *co = (BE_COMM *) g_list_nth_data(be_comm_list, modnum);
+	co->vkey = key;
+	co->mod->SetKey(co->vkey);
 	co->mod->Display();
 }
 

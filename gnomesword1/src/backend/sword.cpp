@@ -58,7 +58,6 @@
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "gs_info_box.h"
-#include "gs_setup.h"
 #include "gs_shortcutbar.h"
 #include "shortcutbar.h"
 #include "properties.h"
@@ -67,7 +66,6 @@
 #include "module_options.h"
 #include "gs_editor.h"
 #include "gbs_.h"
-//#include "gbs.h"
 #include "dictlex_.h"
 #include "dictlex.h"
 #include "commentary_.h"
@@ -97,6 +95,9 @@ static modDescMap descriptionMap;
 
 bookAbrevMap abrevationMap;
 
+MOD_LISTS *mod_lists;
+MOD_LISTS mods;
+
 gboolean 
  autoSave = true,	/* we want to auto save changes to personal comments */
  havebible = false,	/* do we have at least one bibletext module */
@@ -121,7 +122,7 @@ gboolean
  * Return value
  *   void
  */
-void backend_first_init(void)
+void backend_first_init(SETTINGS * s)
 {
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgr
 	/*
@@ -135,6 +136,8 @@ void backend_first_init(void)
 	   LocaleMgr::systemLocaleMgr.setDefaultLocaleName(buf);
 	   }
 	 */
+	s->book_items = NULL;
+	s->book_items = backend_get_books();
 	curMod = NULL;		//-- set mods to null
 }
 
@@ -171,12 +174,21 @@ void backend_init_sword(SETTINGS * s)
 	s->displaySearchResults = false;
 	s->havethayer = false;
 	s->havebdb = false;
+	
+	mod_lists = &mods;
+	/* set glist to null */
+	mod_lists->biblemods = NULL;
+	mod_lists->commentarymods = NULL;
+	mod_lists->dictionarymods = NULL;
+	mod_lists->percommods = NULL;
+	mod_lists->bookmods = NULL;
+	mod_lists->options = NULL;
+	mod_lists->text_descriptions = NULL;
+	mod_lists->comm_descriptions = NULL;
+	mod_lists->dict_descriptions = NULL;
+	mod_lists->book_descriptions = NULL;
 
-	if (s->showsplash) {
-		while (gtk_events_pending())
-			gtk_main_iteration();
-	}
-
+		
 	g_print("Sword locale is %s\n",
 		LocaleMgr::systemLocaleMgr.getDefaultLocaleName());
 
@@ -190,6 +202,11 @@ void backend_init_sword(SETTINGS * s)
 
 		if (!strcmp((*it).second->Type(), TEXT_MODS)) {
 			curMod = (*it).second;
+			mod_lists->biblemods = g_list_append(mod_lists->biblemods,
+					(char*)(*it).second->Name());
+			mod_lists->text_descriptions
+				= g_list_append(mod_lists->text_descriptions,
+					(char*)(*it).second->Description());
 			havebible = TRUE;
 			++textpages;
 		}
@@ -197,25 +214,45 @@ void backend_init_sword(SETTINGS * s)
 		else if (!strcmp((*it).second->Type(), COMM_MODS)) {
 			if ((*mainMgr->config->Sections[(*it).second->Name()].
 			     find("ModDrv")).second == "RawFiles") {
+				mod_lists->percommods = 
+				     g_list_append(mod_lists->percommods,
+					(char*)(*it).second->Name());
 				havepercomm = TRUE;
 				++percommpages;
 			}
+			mod_lists->commentarymods = g_list_append(mod_lists->commentarymods,
+					(char*)(*it).second->Name());
+			mod_lists->comm_descriptions
+				= g_list_append(mod_lists->comm_descriptions,
+					(char*)(*it).second->Description());
 			havecomm = TRUE;//-- we have at least one commentay module
 			++compages;	
 		}
 
 		else if (!strcmp
 			 ((*it).second->Type(), DICT_MODS)) {
+			mod_lists->dictionarymods = g_list_append(mod_lists->dictionarymods,
+					(char*)(*it).second->Name());
+			mod_lists->dict_descriptions
+				= g_list_append(mod_lists->dict_descriptions,
+					(char*)(*it).second->Description());
 			havedict = TRUE;//-- we have at least one lex / dict module
 			++dictpages;	
 
 		}
 
 		else if (!strcmp((*it).second->Type(), BOOK_MODS)) {
+			mod_lists->bookmods = g_list_append(mod_lists->bookmods,
+					(char*)(*it).second->Name());
+			mod_lists->book_descriptions
+				= g_list_append(mod_lists->book_descriptions,
+					(char*)(*it).second->Description());
 			++bookpages;
 			havebook = TRUE;
 		}
 	}
+	
+	mod_lists->options = backend_get_global_options_list();
 	/*
 	 * report what was found
 	 */

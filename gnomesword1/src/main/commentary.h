@@ -34,6 +34,8 @@ typedef struct _commdata COMM_DATA;
 #include "commentary_find_dialog.h"
 struct _commdata {
 	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *frame_toolbar;
 	GtkWidget *btnCOMMSync;
 	GtkWidget *btnCOMMBack;
 	GtkWidget *btnCOMMForward;
@@ -41,6 +43,7 @@ struct _commdata {
 	GtkWidget *btn_book_heading;
 	GtkWidget *btn_chap_heading;
 	GtkWidget *showtabs;
+	GtkWidget *showtoolbar;
 	gchar *modName;
 	gchar *searchstring;
 	gchar key[80];
@@ -54,7 +57,7 @@ void display_chap_heading(int mod_num);
 const char* navigate_commentary(gint modnum, gint direction);
 void set_commentary_page_and_key(gint page_num,
 				     gchar * key);
-GList* setup_commentary(SETTINGS * s);
+void setup_commentary(SETTINGS * s, GList *mods);
 void shutdown_commentary(void);
 void display_commentary(gchar * key);
 
