@@ -26,8 +26,8 @@
 extern "C" {
 #endif
 
-#include <gnome.h>
-
+#include <glib-1.2/glib.h>
+	
 /*** these defs need to be seen by gui and backend ***/
 	
 /* module types */
@@ -51,25 +51,25 @@ void search_percent_update(char percent, void *userData);
 int get_mod_type(char * mod_name);
 char *get_module_font_name(char *mod_name);
 char *get_module_font_size(char *mod_name);
-void module_name_from_description(gchar *mod_name, gchar *description);
-void save_module_key(gchar * mod_name, gchar * key);
+void module_name_from_description(char *mod_name, char *description);
+void save_module_key(char * mod_name, char * key);
 const char *get_sword_version(void);
-gchar *get_module_description(gchar * mod_name);
+char *get_module_description(char * mod_name);
 const char *get_book_from_key(char *key);
 int get_chapter_from_key(char *key);
 int get_verse_from_key(char *key);
 void save_properties(gboolean use_default);
 GList *do_search(gpointer *usr_data);
-GList *get_verse_list(gchar* module_name, gchar *verse_list);
+GList *get_verse_list(char* module_name, char *verse_list);
 int module_is_locked(char * mod_name);
 char *get_valid_key(char *key);
 int get_module_number(char *module_name, char *module_type);
 char *get_module_text(char * mod_name, char * key);
 char *get_search_results_text(char * mod_name, char * key);
 int create_properties_from_setup(void);
-gchar *get_path_to_mods(void);
+char *get_path_to_mods(void);
 GList *get_list_of_mods_by_type(char *mod_type);
-gchar *get_mod_about_info(char * mod_name);
+char *get_mod_about_info(char * mod_name);
 int check_for_module(char * mod_name);
 void shutdown_sword(void);
 

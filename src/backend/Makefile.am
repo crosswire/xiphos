@@ -11,6 +11,8 @@ INCLUDES =  \
 
 noinst_LIBRARIES = libbackend.a
 
+EXTRA_DIST =  \
+    sword_defs.h
 
 CXXFLAGS =  \
     $(GTK_CFLAGS) \
