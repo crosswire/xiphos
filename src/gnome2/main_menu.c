@@ -690,6 +690,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 NULL, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
 	{
 	 GNOME_APP_UI_ITEM, N_("Attach/Detach Shortcut Bar"),
 	 NULL,

@@ -854,7 +854,6 @@ void gui_add_new_gbs_pane(GBS_DATA * g)
 {
 	GtkWidget *popupmenu;
 
-	create_pixbufs();
 	create_gbs_pane(g);
 
 	popupmenu = gui_create_pm_gbs(g);
@@ -929,6 +928,8 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 	gbs_list = NULL;
 	gbs_find_running = FALSE;
 
+	create_pixbufs();
+	
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -992,6 +993,14 @@ void gui_setup_gbs(GList * mods, gint starting_page)
 
 void gui_shutdown_gbs(void)
 {
+	
+	if(pixbufs->pixbuf_closed)
+		g_object_unref(pixbufs->pixbuf_closed);	
+	if(pixbufs->pixbuf_opened)
+		g_object_unref(pixbufs->pixbuf_opened);	
+	if(pixbufs->pixbuf_helpdoc)
+		g_object_unref(pixbufs->pixbuf_helpdoc);
+	
 	gbs_list = g_list_first(gbs_list);
 	while (gbs_list != NULL) {
 		g_free((GBS_DATA *) gbs_list->data);
