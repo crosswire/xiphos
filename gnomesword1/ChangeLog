@@ -1,3 +1,8 @@
+2003-11-19  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev13
+	* worked on bugs 842319, 842668 and 842688
+
 2003-11-18  Andy Piper <andyp@users.sf.net>
 
 	* removed redundant icon

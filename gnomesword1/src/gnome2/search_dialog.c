@@ -720,6 +720,12 @@ static void on_button_begin_search(GtkButton * button,
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream2;
 
+	search_string =
+	    gtk_entry_get_text(GTK_ENTRY(search.search_entry));
+	
+	if(strlen(search_string) < 1)
+		return;
+	
 	str = g_string_new("");
 	
 	html = GTK_HTML(search.report_html);
@@ -748,8 +754,6 @@ static void on_button_begin_search(GtkButton * button,
 	search_params = GTK_TOGGLE_BUTTON
 	    (search.cb_case_sensitive)->active ? 0 : REG_ICASE;
 
-	search_string =
-	    gtk_entry_get_text(GTK_ENTRY(search.search_entry));
 
 	if (GTK_TOGGLE_BUTTON(search.rb_custom_list)->active) {
 		const gchar *name;

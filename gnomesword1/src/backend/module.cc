@@ -196,11 +196,8 @@ char * backend_module_name_from_description(char *mod_desc)
 	for (it = sw.main_mgr->Modules.begin(); it != sw.main_mgr->Modules.end(); it++) {
 		if(!strcmp((*it).second->Description(),mod_desc))
 			return strdup((*it).second->Name());
-		
 	}
 	return NULL;
-	//strcpy(mod_name, descriptionMap[mod_desc].c_str());
-	
 }
 
 
