@@ -37,6 +37,9 @@ void gui_update_shortcut_bar(SETTINGS * s);
 void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
 			   GtkWidget * shortcut_menu_widget,
 			   gint mod_type);
+
+void gui_shortcutbar_showhide(void);
+
 #ifdef __cplusplus
 }
 #endif

@@ -103,9 +103,10 @@ gboolean
  * Return value
  *   void
  */
-void backend_first_init(SETTINGS * s)
+void backend_first_init(void)
 {
-	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	//-- create sword mgr
+	// create sword mgr
+	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	init_lists();
 }
 
@@ -116,7 +117,7 @@ void backend_first_init(SETTINGS * s)
  * Synopsis
  *   #include "sword.h"
  *
- *   void backend_init_sword(SETTINGS * s)	
+ *   void backend_init_sword(void)
  *
  * Description
  *   setup the Sword stuff
@@ -124,7 +125,8 @@ void backend_first_init(SETTINGS * s)
  * Return value
  *   void
  */
-void backend_init_sword(SETTINGS * s)
+ 
+void backend_init_sword(void)
 {
 	ModMap::iterator it;
 	
@@ -139,9 +141,9 @@ void backend_init_sword(SETTINGS * s)
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("%s\n", "Initiating Sword\n");
 
-	s->displaySearchResults = false;
-	s->havethayer = false;
-	s->havebdb = false;
+	settings.displaySearchResults = false;
+	settings.havethayer = false;
+	settings.havebdb = false;
 	
 
 		
@@ -198,17 +200,17 @@ void backend_init_sword(SETTINGS * s)
 	 * Generic Book and Dict/Lex Support
 	 */	
 	if(havebible)
-		backend_setup_text(s);
+		backend_setup_text(&settings);
 	if(havecomm)
-		backend_setup_commentary(s);
+		backend_setup_commentary(&settings);
 	if(havepercomm)
-		backend_setup_percomm(s);
+		backend_setup_percomm(&settings);
 	if(havedict)
-		backend_setup_dictlex(s);
+		backend_setup_dictlex(&settings);
 	if(havebook)
-		backend_setup_books(s);
+		backend_setup_books(&settings);
 	if(havebible)
-		backend_setup_interlinear(s);
+		backend_setup_interlinear(&settings);
 }
 
 GList * backend_get_global_options_list(void)
@@ -252,7 +254,7 @@ void backend_module_name_from_description(gchar * mod_name,
  * Synopsis
  *   #include "sword.h"
  *
- *   void backend_shutdown(SETTINGS * s)	
+ *   void backend_shutdown(void)	
  *
  * Description
  *   close down sword 
@@ -260,10 +262,11 @@ void backend_module_name_from_description(gchar * mod_name,
  * Return value
  *   void
  */
-void backend_shutdown(SETTINGS * s)
+
+void backend_shutdown(void)
 {
-	savebookmarks(s->ctree_widget);
-	backend_save_properties(s, true);
+	savebookmarks(settings.ctree_widget);
+	backend_save_properties(true);
 
 	backend_shutdown_text();
 	backend_shutdown_commentary();

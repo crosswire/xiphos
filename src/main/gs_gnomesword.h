@@ -81,8 +81,8 @@ struct _search_opt {
 };
 /*** function prototypes ***/
 
-void init_gnomesword(SETTINGS *settings);
-void gnomesword_shutdown(SETTINGS * s);
+void init_gnomesword(void);
+void gnomesword_shutdown(void);
 void UpdateChecks(SETTINGS *);
 void setformatoption(GtkWidget * button);
 void changepagenotebook(GtkNotebook * notebook, 
