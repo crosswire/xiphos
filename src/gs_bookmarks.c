@@ -121,41 +121,75 @@ static char * mini_page_xpm[] = {
 "                "};
 
 
-void after_press (GtkCTree *ctree, gpointer data)
+static GnomeUIInfo pmBookmarkTree_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_NEW_ITEM (N_("_New SubGroup"), N_("Add new SubGroup to selected gourp"), on_new_activate, NULL),
+  {
+    GNOME_APP_UI_ITEM, N_("Add New Group"),
+    N_("Add a new root group and file"),
+    (gpointer) on_add_new_group1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, N_("Save Bookmarks"),
+    N_("Save all bookmark files"),
+    (gpointer) on_save_bookmarks1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, N_("Delete Item(s)"),
+    N_("Delete item and it's siblings"),
+    (gpointer) on_delete_item_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+    0, (GdkModifierType) 0, NULL
+  },
+  {
+    GNOME_APP_UI_TOGGLEITEM, N_("Allow Reordering"),
+    N_("Toggle Reording - allow items to be moved by draging"),
+    (gpointer) on_allow_reordering_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, (GdkModifierType) 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+
+
+
+/******************************************************************************
+ * local functions
+ ******************************************************************************/
+
+static void after_press (GtkCTree *ctree, gpointer data)
 {
 
 	
 }
-void
+static GtkCTreeNode *selected_node;
+static void
 on_ctree_select_row(GtkCList * clist,
 		       gint row,
 		       gint column, GdkEvent * event, gpointer user_data)
 {
-	GtkCTreeNode *node;
+	//GtkCTreeNode *node;
 	gchar *modName, *key;
 	GtkCTree *ctree;
 	
 	ctree = user_data;
-	node = gtk_ctree_node_nth(p_bmtree->ctree, row);
-	if (GTK_CTREE_ROW (node)->is_leaf){
-		key = GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[0])->text;
-		modName = GTK_CELL_PIXTEXT (GTK_CTREE_ROW (node)->row.cell[1])->text;
-		
-		/*gtk_ctree_get_node_info(ctree,
-						  node,
-						  &text,
-						  NULL,
-						  NULL,
-						  NULL,
-						  NULL,
-						  NULL,
-						  NULL,
-						  NULL);*/	
+	selected_node = gtk_ctree_node_nth(p_bmtree->ctree, row);
+	if (GTK_CTREE_ROW (selected_node)->is_leaf){ /* if node is leaf we need to change mod and key */
+		key = GTK_CELL_PIXTEXT (GTK_CTREE_ROW (selected_node)->row.cell[0])->text;
+		modName = GTK_CELL_PIXTEXT (GTK_CTREE_ROW (selected_node)->row.cell[1])->text;	
+		gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[0].widget),FALSE);
 		gotBookmarkSWORD(modName,key);
-		//changeVerseSWORD(key);
+	}else{
+		gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[0].widget),TRUE);		
 	}
 }
 
+static
 void after_move (GtkCTree *ctree, GtkCTreeNode *child, GtkCTreeNode *parent, 
 		 GtkCTreeNode *sibling, gpointer data)
 {
@@ -176,7 +210,7 @@ void after_move (GtkCTree *ctree, GtkCTreeNode *child, GtkCTreeNode *parent,
 	   (parent) ? target1 : "nil", (sibling) ? target2 : "nil");
 }
 
-void count_items (GtkCTree *ctree, GtkCTreeNode *list)
+static void count_items (GtkCTree *ctree, GtkCTreeNode *list)
 {
   if (GTK_CTREE_ROW (list)->is_leaf)
     pages--;
@@ -184,25 +218,19 @@ void count_items (GtkCTree *ctree, GtkCTreeNode *list)
     books--;
 }
 
-void expand_all (GtkWidget *widget, GtkCTree *ctree)
+static void expand_all (GtkWidget *widget, GtkCTree *ctree)
 {
   gtk_ctree_expand_recursive (ctree, NULL);
   after_press (ctree, NULL);
 }
 
-void collapse_all (GtkWidget *widget, GtkCTree *ctree)
+static void collapse_all (GtkWidget *widget, GtkCTree *ctree)
 {
   gtk_ctree_collapse_recursive (ctree, NULL);
   after_press (ctree, NULL);
 }
 
-void select_all (GtkWidget *widget, GtkCTree *ctree)
-{
-  gtk_ctree_select_recursive (ctree, NULL);
-  after_press (ctree, NULL);
-}
-
-void change_style (GtkWidget *widget, GtkCTree *ctree)
+static void change_style (GtkWidget *widget, GtkCTree *ctree)
 {
   static GtkStyle *style1 = NULL;
   static GtkStyle *style2 = NULL;
@@ -248,12 +276,6 @@ void change_style (GtkWidget *widget, GtkCTree *ctree)
   if (GTK_CTREE_ROW (node)->children)
     gtk_ctree_node_set_row_style (ctree, GTK_CTREE_ROW (node)->children,
 				  style2);
-}
-
-void unselect_all (GtkWidget *widget, GtkCTree *ctree)
-{
-  gtk_ctree_unselect_recursive (ctree, NULL);
-  after_press (ctree, NULL);
 }
 
 void remove_selection (GtkWidget *widget, GtkCTree *ctree)
@@ -302,7 +324,7 @@ struct _ExportStruct {
 
 typedef struct _ExportStruct ExportStruct;
 
-gboolean
+static gboolean
 gnode2ctree (GtkCTree   *ctree,
 	     guint       depth,
 	     GNode        *gnode,
@@ -343,7 +365,7 @@ gnode2ctree (GtkCTree   *ctree,
   return TRUE;
 }
 
-gboolean
+static gboolean
 ctree2gnode (GtkCTree   *ctree,
 	     guint       depth,
 	     GNode        *gnode,
@@ -363,7 +385,7 @@ ctree2gnode (GtkCTree   *ctree,
   return TRUE;
 }
 
-void export_ctree (GtkWidget *widget, GtkCTree *ctree)
+static void export_ctree (GtkWidget *widget, GtkCTree *ctree)
 {
   char *title[] = { "Tree" , "Info" };
   static GtkWidget *export_window = NULL;
@@ -436,22 +458,22 @@ void export_ctree (GtkWidget *widget, GtkCTree *ctree)
     }
 }
 
-void change_indent (GtkWidget *widget, GtkCTree *ctree)
+static void change_indent (GtkWidget *widget, GtkCTree *ctree)
 {
   gtk_ctree_set_indent (ctree, GTK_ADJUSTMENT (widget)->value);
 }
 
-void change_spacing (GtkWidget *widget, GtkCTree *ctree)
+static void change_spacing (GtkWidget *widget, GtkCTree *ctree)
 {
   gtk_ctree_set_spacing (ctree, GTK_ADJUSTMENT (widget)->value);
 }
 
-void change_row_height (GtkWidget *widget, GtkCList *clist)
+static void change_row_height (GtkWidget *widget, GtkCList *clist)
 {
   gtk_clist_set_row_height (clist, GTK_ADJUSTMENT (widget)->value);
 }
 
-void set_background (GtkCTree *ctree, GtkCTreeNode *node, gpointer data)
+static void set_background (GtkCTree *ctree, GtkCTreeNode *node, gpointer data)
 {
   GtkStyle *style = NULL;
   
@@ -468,6 +490,87 @@ void set_background (GtkCTree *ctree, GtkCTreeNode *node, gpointer data)
 
   gtk_ctree_node_set_row_style (ctree, node, style);
 }
+/******************************************************************************
+ * pmBookmarkTree call backs
+ ******************************************************************************/
+/*
+ * add new sub group to selected group
+ */
+static void
+stringCallback(gchar *string, gpointer data)
+{
+	gchar *text[2];
+	
+	if((string == NULL) || (strlen(string) == 0)){
+		(gchar*)data = NULL;
+	}else{
+		switch(GPOINTER_TO_INT(data)){
+			case 0:
+				text[0] = string;
+				text[1] = "GROUP";
+				gtk_ctree_insert_node(p_bmtree->ctree, selected_node, NULL,text, 3, 
+								pixmap1,mask1,pixmap2,mask2, FALSE, FALSE);
+				break;
+			case 1:/*
+				text[0] = string;
+				text[1] = "GROUP";
+				gtk_ctree_insert_node(p_bmtree->ctree, NULL, NULL,text, 3, 
+								pixmap1,mask1,pixmap2,mask2, FALSE, FALSE);*/
+				break;
+		}
+	}
+	
+}
+
+void
+on_new_activate                        (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget *dialog;
+	gchar *buf;
+	
+	buf = "0";
+	dialog = gnome_request_dialog(FALSE,"Enter SubGroup Name - use no commas",NULL,80,
+					(GnomeStringCallback)stringCallback,GINT_TO_POINTER(0), GTK_WINDOW(MainFrm));	
+}
+
+void
+on_add_new_group1_activate             (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	GtkWidget *dialog;
+	
+	dialog = gnome_request_dialog(FALSE,"Enter SubGroup Name - use no commas",NULL,80,
+					(GnomeStringCallback)stringCallback,GINT_TO_POINTER(1), GTK_WINDOW(MainFrm));
+}
+
+
+void
+on_save_bookmarks1_activate            (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+
+}
+
+
+void
+on_delete_item_activate                (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	remove_selection (p_bmtree->ctree_widget, p_bmtree->ctree);
+}
+
+
+void
+on_allow_reordering_activate           (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	gtk_clist_set_reorderable (GTK_CLIST(p_bmtree->ctree), GTK_CHECK_MENU_ITEM(menuitem)->active);
+}
+
+/******************************************************************************
+ *
+ ******************************************************************************/
 
 /*
  *
@@ -486,6 +589,7 @@ addbookmarktotree(gchar *modName, gchar *verse)
 void
 loadtree(GtkWidget *ctree1)
 {	
+	GtkWidget *menu;
 	GdkColor transparent = { 0 };	
 	bmtree.ctree = GTK_CTREE(ctree1);
 	bmtree.ctree_widget = ctree1;
@@ -519,5 +623,48 @@ loadtree(GtkWidget *ctree1)
 	gtk_clist_set_row_height (GTK_CLIST(p_bmtree->ctree), 15);
 	gtk_ctree_set_spacing(p_bmtree->ctree, 3);
 	gtk_ctree_set_indent (p_bmtree->ctree, 8);
-	gtk_clist_set_reorderable (GTK_CLIST(p_bmtree->ctree), TRUE);
+	menu = create_pmBookmarkTree();
+	gnome_popup_menu_attach(menu,p_bmtree->ctree_widget,(gchar*)"1");
+	gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[0].widget),FALSE);
+	gtk_widget_set_sensitive(GTK_WIDGET(pmBookmarkTree_uiinfo[1].widget),FALSE);
 }
+
+GtkWidget*
+create_pmBookmarkTree (void)
+{
+  GtkWidget *pmBookmarkTree;
+
+  pmBookmarkTree = gtk_menu_new ();
+  gtk_object_set_data (GTK_OBJECT (pmBookmarkTree), "pmBookmarkTree", pmBookmarkTree);
+  gnome_app_fill_menu (GTK_MENU_SHELL (pmBookmarkTree), pmBookmarkTree_uiinfo,
+                       NULL, FALSE, 0);
+
+  gtk_widget_ref (pmBookmarkTree_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmBookmarkTree), "new",
+                            pmBookmarkTree_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmBookmarkTree_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmBookmarkTree), "add_new_group1",
+                            pmBookmarkTree_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmBookmarkTree_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmBookmarkTree), "save_bookmarks1",
+                            pmBookmarkTree_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmBookmarkTree_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmBookmarkTree), "delete_item",
+                            pmBookmarkTree_uiinfo[3].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmBookmarkTree_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmBookmarkTree), "allow_reordering",
+                            pmBookmarkTree_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  return pmBookmarkTree;
+}
+
+

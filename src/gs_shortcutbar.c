@@ -46,11 +46,11 @@ gint groupnum1 = 0,
         groupnum4 = 0,
 	groupnum5 = 0;
 
-void
+static void
 on_button_clicked                      (GtkButton       *button,
                                         gpointer         user_data)
 {
- 	g_warning("ok!");
+ 	//g_warning("ok!");
 }
 
 
