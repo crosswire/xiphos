@@ -2361,7 +2361,11 @@ on_epaned_button_release_event(GtkWidget       *widget,
                                GdkEventButton  *event,
                                gpointer         user_data)
 {
+        //gchar buf[80];
+        
         settings->shortcutbarsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
+        //sprintf(buf,"%d\n",settings->shortcutbarsize);
+        //cout << buf;
         if(settings->shortcutbarsize) return true;
         return false;
 }
