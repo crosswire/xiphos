@@ -31,6 +31,8 @@
 #include "main/settings.h"
 #include "main/search.h"
 
+#include "backend/properties.h"
+
 /* input buffer size */
 #define BUFFER_SIZE 8192
 
@@ -53,7 +55,8 @@ gint settings_init(void)
 	gchar *gsbmDir;
 	gchar bmFile[300];
 	gchar genbookdir[300];
-
+	gchar *old_prefs;
+	
 	/* Get home dir */
 	if ((settings.homedir = getenv("HOME")) == NULL) {
 		g_error("$HOME is not set!");
@@ -61,10 +64,14 @@ gint settings_init(void)
 		exit(0);
 	}
 	
+
+	
 	/* set gSwordDir to $home + .GnomeSword */
 	settings.gSwordDir = g_new(char, strlen(settings.homedir) +
 			strlen(".GnomeSword") + 2);
 	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, ".GnomeSword");
+		
+	
 
 	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
 	gsbmDir = g_new(char, strlen(settings.homedir) +
@@ -78,6 +85,8 @@ gint settings_init(void)
 	sprintf(settings.shortcutbarDir, "%s/%s", settings.gSwordDir,
 			"shortcutbar");
 
+
+
 	/* if shortcutbar dir does not exist create it */
 	if (access(settings.shortcutbarDir, F_OK) == -1) {
 		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) != 0) {
@@ -85,21 +94,30 @@ gint settings_init(void)
 		}
 	}
 
-
 	/* set fnconfigure to gSwordDir and preferences.conf */
 	settings.fnconfigure = g_new(char, strlen(settings.gSwordDir) +
-			strlen("preferences.conf") + 2);
+			strlen("preferences-1.0.conf") + 2);
 	sprintf(settings.fnconfigure, "%s/%s", settings.gSwordDir,
+			"preferences-1.0.conf");
+
+
+	/* set fnconfigure to gSwordDir and preferences.conf */
+	old_prefs = g_new(char, strlen(settings.gSwordDir) +
+			strlen("preferences.conf") + 2);
+	sprintf(old_prefs, "%s/%s", settings.gSwordDir,
 			"preferences.conf");
 
 	/* if gSwordDir does not exist create it */
-	if (access(settings.gSwordDir, F_OK) == -1) {
-		if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
-			printf(".GnomeSword does not exist");
-			/* if we can not create gSwordDir exit */
-			exit(1);
+	if (access(settings.fnconfigure, F_OK) == -1) {
+		/* must be first run */	
+		g_print("\nFirst Run: need to create settings!\n");
+		if (access(old_prefs, F_OK) == 0) {			
+			g_print("\nFirst Run: have old settings will load them\n");
+			backend_load_properties(old_prefs);
+			backend_save_properties(TRUE);
 		}
 	}
+
 
 	if (access(settings.fnconfigure, F_OK) == -1) {
 		retval = 1;
