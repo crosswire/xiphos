@@ -450,22 +450,22 @@ void main_init_backend(void)
 {	
 	char *sword_locale = NULL;
 	char *sys_locale = NULL;
-	char *buf = (char*)LocaleMgr::getSystemLocaleMgr()->getDefaultLocaleName();
+	const char *lang = getenv("LANG");
 	SWMgr mgr;
 	
 	backend = new BackEnd();
 	backend->init_SWORD(0);
-	sword_locale = backend->set_sword_locale();
+	sword_locale = backend->set_sword_locale(lang);
 #ifdef DEBUG	
 	g_print("%s sword-%s\n", _("Starting"), backend->get_sword_version());
 	g_print("%s\n", _("Initiating SWORD"));
 	g_print("%s: %s\n",_("path to sword"),mgr.prefixPath);
-	g_print("%s %s\n", _("System locale is"),buf);	
+	g_print("%s %s\n", _("System locale is"),lang);	
 	g_print("%s %s\n", _("SWORD locale is"), sword_locale);	
 	g_print("OLD_CODESET = %s\n\n", OLD_CODESET);
 	g_print("%s\n", _("Checking for SWORD Modules"));
 #endif
-	sys_locale = strdup(buf);
+	sys_locale = strdup(lang);
 	settings.spell_language = strdup(sys_locale);	
 	main_init_lists();
 	free((char*)sword_locale);
