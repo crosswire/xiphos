@@ -1381,7 +1381,8 @@ static void menu_deactivate_callback (GtkWidget *widget, gpointer user_data)
 
 static GnomeUIInfo menu_uiinfo[] = {
 	{
-	 GNOME_APP_UI_ITEM, N_("_Modules"),
+	 GNOME_APP_UI_ITEM, 
+	 N_("_Modules"),
 	 NULL,
 	 (gpointer) on_modules_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK,
@@ -1507,24 +1508,9 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_paned_pack1(GTK_PANED(paned), vbox1, FALSE, TRUE);
 	widgets.shortcutbar = vbox1;
 
-	
-	/*gtk_option_menu_new();
-	gtk_widget_show(sidebar.optionmenu1);
-	gtk_box_pack_start(GTK_BOX(vbox1), sidebar.optionmenu1, FALSE,
-			   TRUE, 0);
-
-	menu1 = gtk_menu_new();
-	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu_uiinfo,
-			    NULL, FALSE, 0);
-
-	gtk_option_menu_set_menu(GTK_OPTION_MENU(sidebar.optionmenu1),
-				 menu1);
-*/
 	frame = gtk_frame_new (NULL);
 	gtk_widget_show (frame);
 	gtk_box_pack_start (GTK_BOX (vbox1), frame, FALSE, FALSE, 0);
-	
-	//gtk_frame_set_shadow_type(GTK_FRAME(frame),GTK_SHADOW_NONE);
 	
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_widget_show (hbox);
@@ -1593,8 +1579,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GTK_WIDGET_UNSET_FLAGS(widgets.notebook_sidebar, GTK_CAN_FOCUS);
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
 				   (widgets.notebook_sidebar), FALSE);
-	/*gtk_notebook_set_scrollable(GTK_NOTEBOOK
-				    (widgets.notebook_sidebar), TRUE);*/
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.notebook_sidebar), FALSE);
 
@@ -1645,12 +1629,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	create_search_results_page(widgets.notebook_sidebar);
 	create_viewer_page(widgets.notebook_sidebar);
-/*
-	vbox_viewer = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox_viewer);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_sidebar),
-			  vbox_viewer);
-*/
+	
 	gui_load_module_tree(sidebar.module_list, TRUE);
 		     
 	g_signal_connect((gpointer) sidebar.module_list,

@@ -30,7 +30,7 @@ extern "C" {
 void xml_new_bookmark_file(void);	
 xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption);	
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
-					gchar * key, gchar * module);
+			gchar * key, gchar * module, gchar * mod_desc);
 void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf);
 void xml_write_bookmark_doc(const xmlChar * xml_filename);
 
