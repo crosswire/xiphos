@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-05 20:16-0500\n"
+"POT-Creation-Date: 2005-03-07 13:40-0500\n"
 "PO-Revision-Date: 2003-12-9 12:21:00+0200\n"
 "Last-Translator: Andy Piper <andyp@users.sf.net>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -2222,6 +2222,10 @@ msgstr ""
 
 #: src/gnome2/sidebar.c:1655
 msgid "Verse List"
+msgstr ""
+
+#: src/gnome2/splash.c:360
+msgid "Powered by the SWORD Project"
 msgstr ""
 
 #: src/gnome2/splash.c:538

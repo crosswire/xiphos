@@ -30,7 +30,6 @@
 #include "gui/about_sword.h"
 #include "gui/gnomesword.h"
 #include "gui/hints.h"
-#include "gui/history.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
@@ -45,6 +44,7 @@
 #include "main/lists.h"
 #include "main/sword.h"
 #include "main/search_dialog.h"
+#include "main/tab_history.h"
 
 
 
@@ -120,7 +120,7 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
 void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gui_change_verse_history(GPOINTER_TO_INT(user_data));
+	main_change_verse_tab_history(GPOINTER_TO_INT(user_data));
 }
 
 /******************************************************************************
@@ -299,7 +299,7 @@ void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gui_clear_history(widgets.app, GTK_WIDGET(widgets.shortcutbar));
+	main_clear_tab_history();//gui_clear_history(widgets.app);
 }
 
 /******************************************************************************

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GnomeSword 2 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-05 20:16-0500\n"
+"POT-Creation-Date: 2005-03-07 13:40-0500\n"
 "PO-Revision-Date: Don, 06 Mai 2004 21:09:01 +0200\n"
 "Last-Translator: Johannes Tanzler <johannes.tanzler@aon.at>\n"
 "Language-Team: GnomeSword Translation Team\n"
@@ -2333,6 +2333,11 @@ msgstr "_Lesezeichen"
 #, fuzzy
 msgid "Verse List"
 msgstr "_Versliste"
+
+#: src/gnome2/splash.c:360
+#, fuzzy
+msgid "Powered by the SWORD Project"
+msgstr "Info zum SWORD-Projekt"
 
 #: src/gnome2/splash.c:538
 msgid "Loading settings"

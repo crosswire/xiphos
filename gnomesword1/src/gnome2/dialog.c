@@ -461,7 +461,7 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 			    gs_dialog);
 	gtk_window_set_title(GTK_WINDOW(gs_dialog),
 			     info->title ? info->title : " ");
-	gtk_window_set_policy(GTK_WINDOW(gs_dialog), TRUE, TRUE, FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(gs_dialog), TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(gs_dialog), 12);
 
 	if (info->no)

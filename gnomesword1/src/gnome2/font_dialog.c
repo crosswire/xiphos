@@ -293,8 +293,7 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	GTK_WINDOW(dialog_mod_font)->type = GTK_WINDOW_TOPLEVEL;
 	gtk_window_set_default_size(GTK_WINDOW(dialog_mod_font), 301,
 				    164);
-	gtk_window_set_policy(GTK_WINDOW(dialog_mod_font), TRUE, TRUE,
-			      TRUE);
+	gtk_window_set_resizable(GTK_WINDOW(dialog_mod_font), TRUE);
 
 	dialog_vbox21 = GTK_DIALOG(dialog_mod_font)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dialog_mod_font),

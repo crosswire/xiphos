@@ -584,13 +584,13 @@ static void sync_with_main(DIALOG_DATA * c)
 static void sync_toggled(GtkToggleButton * button, DIALOG_DATA * c)
 {
 	if (button->active) {
-		sync_with_main(cur_c);
-		cur_c->sync = TRUE;
+		sync_with_main(c);
+		c->sync = TRUE;
 	} else
-		cur_c->sync = FALSE;
+		c->sync = FALSE;
 }
 
-void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
+static void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -617,7 +617,7 @@ void on_comboboxentry4_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 }
 
 
-void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
+static void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -659,7 +659,7 @@ void on_comboboxentry5_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 }
 
 
-void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
+static void on_comboboxentry6_changed(GtkComboBox * combobox, DIALOG_DATA * c)
 {
 	gchar *url = NULL;
 	gchar *book = NULL;
@@ -888,7 +888,7 @@ void gui_create_commentary_dialog(DIALOG_DATA * c, gboolean do_edit)
 	gtk_window_set_title(GTK_WINDOW(c->dialog),
 			     main_get_module_description(c->mod_name));
 	//gtk_window_set_default_size(GTK_WINDOW(c->dialog), 462, 280);
-	gtk_window_set_policy(GTK_WINDOW(c->dialog), TRUE, TRUE, FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(c->dialog), TRUE);
 	if (do_edit)
 		gtk_widget_set_size_request(c->dialog, 590, 380);
 	else
