@@ -171,7 +171,7 @@ static void applyoptions(SETTINGS * s)
 	if (updatehtml)
 		display_new_font_color_and_size(s);
 	if (updateSB)
-		update_shortcut_bar(s);
+		gui_update_shortcut_bar(s);
 	updatehtml = FALSE;
 	updateSB = FALSE;
 }

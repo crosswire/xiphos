@@ -25,10 +25,11 @@
 
 #include <gnome.h>
 
-/* gnome */
+/* frontend */
 #include "_commentary.h"
 #include "cipher_key_dialog.h"
 #include "commentary_find.h"
+#include "shortcutbar_viewer.h"
 
 /* main */
 #include "commentary.h"
@@ -203,14 +204,14 @@ static void on_find_activate(GtkMenuItem * menuitem, COMM_DATA * c)
 static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 					gchar * dict_mod_description)
 {
-	gchar *dict_key, *dict_mod;
+	gchar *dict_key, dict_mod[16];
 
-	dict_mod = get_module_name_from_description(dict_mod_description);
+	memset(dict_mod, 0, 16);
+	module_name_from_description(dict_mod, dict_mod_description);
 	dict_key = get_word_or_selection(cur_c->html, FALSE);
 	if (dict_key) {
-		display_dictlex_in_viewer(dict_mod, dict_key, &settings);
+		gui_display_dictlex_in_viewer(dict_mod, dict_key, &settings);
 		g_free(dict_key);
-		g_free(dict_mod);
 	}
 }
 
@@ -236,7 +237,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = get_word_or_selection(c->html, FALSE);
 	if (key) {
-		display_dictlex_in_viewer(settings.DictWindowModule, 
+		gui_display_dictlex_in_viewer(settings.DictWindowModule, 
 						key,
 						&settings);
 		g_free(key);
@@ -812,7 +813,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 				else
 					dict = g_strdup(settings.DictWindowModule);
 				if (settings.inViewer)
-					display_dictlex_in_viewer(dict, key,
+					gui_display_dictlex_in_viewer(dict, key,
 							   &settings);
 				if (settings.inDictpane)
 					change_module_and_key(dict, key);
