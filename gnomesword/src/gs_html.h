@@ -40,6 +40,7 @@ extern "C" {
 					     gpointer user_data);
 	void gotoanchorHTML(GtkWidget *html_widget, gchar * verse);
 	void sethtmltoeditHTML(gboolean choice);
+	gchar *gethtmlfontnameHTML(gchar *xfontname);
 
 #ifdef __cplusplus
 }
