@@ -48,10 +48,28 @@
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/dictlex.h"
+#include "main/module.h"
 
 SIDEBAR sidebar;
 static GtkWidget *vl_html;
 static GtkWidget *menu1;
+static gchar *s_module_name;
+
+/******************************************************************************
+ * Name
+ *   gui_display_devotional_in_sidebar
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void gui_display_devotional_in_sidebar(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void gui_display_devotional_in_sidebar(void)
 {
@@ -73,13 +91,29 @@ void gui_display_devotional_in_sidebar(void)
 	 * Print it out in a nice format. 
 	 */
 	strftime(buf, 80, "%m.%d", loctime);
-	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
-					4);
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (widgets.notebook_sidebar), 4);	
+	gtk_option_menu_set_history(GTK_OPTION_MENU
+				    (sidebar.optionmenu1), 4);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+			      4);
 	gui_display_dictlex_in_sidebar(settings.devotionalmod, buf);
 }
 
+
+/******************************************************************************
+ * Name
+ *   gui_set_sidebar_porgram_start
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void gui_set_sidebar_porgram_start(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void gui_set_sidebar_porgram_start(void)
 {
@@ -89,7 +123,7 @@ void gui_set_sidebar_porgram_start(void)
 	if (settings.showshortcutbar) {
 		gtk_widget_show(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
-				     settings.shortcutbar_width);
+				       settings.shortcutbar_width);
 	}
 
 	else if (!settings.showshortcutbar && settings.showdevotional) {
@@ -99,23 +133,39 @@ void gui_set_sidebar_porgram_start(void)
 
 	else {
 		gtk_widget_hide(widgets.shortcutbar);
-		gtk_paned_set_position(GTK_PANED(widgets.epaned),
-				     1);
+		gtk_paned_set_position(GTK_PANED(widgets.epaned), 1);
 	}
 
 	/* set hight of bible and commentary pane */
 	gtk_paned_set_position(GTK_PANED(widgets.vpaned),
-			     settings.upperpane_hight);
+			       settings.upperpane_hight);
 
 	/* set width of bible pane */
 	gtk_paned_set_position(GTK_PANED(widgets.hpaned),
-			     settings.biblepane_width);
+			       settings.biblepane_width);
 
 	if (!settings.docked) {
 		settings.docked = TRUE;
 		//gui_attach_detach_shortcutbar();
 	}
 }
+
+
+/******************************************************************************
+ * Name
+ *  gui_sidebar_showhide 
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void gui_sidebar_showhide(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void gui_sidebar_showhide(void)
 {
@@ -130,17 +180,17 @@ void gui_sidebar_showhide(void)
 		gtk_widget_hide(widgets.shortcutbar);
 		gtk_paned_set_position(GTK_PANED(widgets.epaned), 0);
 		gtk_paned_set_position(GTK_PANED
-				     (widgets.hpaned),
-				     settings.biblepane_width);
+				       (widgets.hpaned),
+				       settings.biblepane_width);
 	} else {
 		settings.showshortcutbar = TRUE;
 		settings.biblepane_width =
-		    (settings.gs_width - settings.shortcutbar_width) / 2;
+		    (settings.gs_width -
+		     settings.shortcutbar_width) / 2;
 		gtk_paned_set_position(GTK_PANED(widgets.epaned),
-				     settings.shortcutbar_width);
-		gtk_paned_set_position(GTK_PANED
-				     (widgets.hpaned),
-				     settings.biblepane_width);
+				       settings.shortcutbar_width);
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
+				       settings.biblepane_width);
 		gtk_widget_show(widgets.shortcutbar);
 	}
 }
@@ -161,18 +211,18 @@ void gui_sidebar_showhide(void)
  *   gboolean
  */
 
-gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key) 
+gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
 {
-	if (settings.showshortcutbar) {	
+	if (settings.showshortcutbar) {
 		gchar *text;
-		gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
-						4);
+		gtk_option_menu_set_history(GTK_OPTION_MENU
+					    (sidebar.optionmenu1), 4);
 		gtk_notebook_set_page(GTK_NOTEBOOK
 				      (widgets.notebook_sidebar), 4);
 		text = get_dictlex_text(mod_name, key);
-		if(text) {
-			entry_display(sidebar.html_viewer_widget, mod_name,
-				   text, key, TRUE);
+		if (text) {
+			entry_display(sidebar.html_viewer_widget,
+				      mod_name, text, key, TRUE);
 			free(text);
 			return TRUE;
 		}
@@ -203,7 +253,7 @@ static void verse_list_link_clicked(GtkHTML * html, const gchar * url,
 	int type;
 	gchar *text = NULL;
 
-	type = get_mod_type(sidebar.mod_name);
+	type = get_mod_type(s_module_name);
 	switch (type) {
 	case TEXT_TYPE:
 		chapter_display(sidebar.htmlshow, sidebar.mod_name,
@@ -211,12 +261,13 @@ static void verse_list_link_clicked(GtkHTML * html, const gchar * url,
 		break;
 	case COMMENTARY_TYPE:
 	case DICTIONARY_TYPE:
-		text = get_module_text(4, sidebar.mod_name, (gchar *) url);
+		text = get_module_text(4, s_module_name, (gchar *) url);
 		if (text) {
-			entry_display(sidebar.htmlshow, sidebar.mod_name,
+			entry_display(sidebar.htmlshow, s_module_name,
 				      text, (gchar *) url, TRUE);
 			free(text);
 		}
+
 		break;
 	default:
 		break;
@@ -256,7 +307,11 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gint count = 0;
 	GString *str;
 
+	g_warning("verse=%s mod=%s ref=%s", key, module_name,
+		  verse_list);
+
 	str = g_string_new("");
+	s_module_name = g_strdup(module_name);
 	strcpy(sidebar.mod_name, module_name);
 	if (verse_list[0] == 'S' && verse_list[1] == 'e'
 	    && verse_list[2] == 'e') {
@@ -321,16 +376,18 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gui_end_html(vl_html);
 
 	//gui_show_sb_verseList();
-	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
-					5);
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (widgets.notebook_sidebar), 5);
+	gtk_option_menu_set_history(GTK_OPTION_MENU
+				    (sidebar.optionmenu1), 5);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+			      5);
 	if (first_key) {
 		verse_list_link_clicked(NULL,
-					(const gchar *) first_key, NULL);
+					(const gchar *) first_key,
+					NULL);
 		g_free(first_key);
 	}
 	g_string_free(str, TRUE);
+	//g_free(s_module_name);
 }
 
 /******************************************************************************
@@ -389,6 +446,104 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 
 /******************************************************************************
  * Name
+ *   add_module_to_language_folder
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void add_module_to_language_folder(GtkTreeModel * model,
+ *		      GtkTreeIter iter, gchar * language, gchar * module_name)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void add_module_to_language_folder(GtkTreeModel * model,
+					  GtkTreeIter iter,
+					  gchar * language,
+					  gchar * module_name)
+{
+	GtkTreeIter iter_iter;
+	GtkTreeIter parent;
+	GtkTreeIter child_iter;
+	gboolean valid;
+
+	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
+		language = "Unknown";
+
+	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
+	while (valid) {
+		/* Walk through the list, reading each row */
+		gchar *str_data;
+
+		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
+		if (!strcmp(language, str_data)) {
+			gtk_tree_store_append(GTK_TREE_STORE(model),
+					      &child_iter, &iter_iter);
+			gtk_tree_store_set(GTK_TREE_STORE(model),
+					   &child_iter, 0,
+					   (gchar *) module_name, -1);
+			g_free(str_data);
+			return;
+		}
+		valid = gtk_tree_model_iter_next(model, &iter_iter);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   add_language_folder
+ *
+ * Synopsis
+ *   #include "gui/sidebar.h"
+ *
+ *   void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
+ *			 gchar * language)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void add_language_folder(GtkTreeModel * model, GtkTreeIter iter,
+				gchar * language)
+{
+	GtkTreeIter iter_iter;
+	GtkTreeIter parent;
+	GtkTreeIter child_iter;
+	gboolean valid;
+
+	if ((!g_ascii_isalnum(language[0])) || (language == NULL))
+		language = "Unknown";
+
+	valid = gtk_tree_model_iter_children(model, &iter_iter, &iter);
+	while (valid) {
+		/* Walk through the list, reading each row */
+		gchar *str_data;
+
+		gtk_tree_model_get(model, &iter_iter, 0, &str_data, -1);
+		if (!strcmp(language, str_data)) {
+			g_free(str_data);
+			return;
+		}
+		valid = gtk_tree_model_iter_next(model, &iter_iter);
+	}
+	gtk_tree_store_append(GTK_TREE_STORE(model), &child_iter,
+			      &iter);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &child_iter, 0,
+			   (gchar *) language, -1);
+
+}
+
+
+/******************************************************************************
+ * Name
  *   load_module_tree
  *
  * Synopsis
@@ -418,51 +573,92 @@ static void load_module_tree(GtkWidget * tree)
 
 	need_column = TRUE;
 	store = gtk_tree_store_new(1, G_TYPE_STRING);
+
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, "Biblical Texts", -1);
 
-	//gtk_list_store_clear(store);
+	/*  add language folders Biblical Texts folder */
 	tmp = get_list(TEXT_LIST);
 	while (tmp != NULL) {
-		gtk_tree_store_append(store, &child_iter, &iter);
-		gtk_tree_store_set(store, &child_iter,
-				   0, (gchar *) tmp->data, -1);
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
-
 	}
+
+	/*  add modules to Biblical Texts language folders */
+	tmp = get_list(TEXT_LIST);
+	while (tmp != NULL) {
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+	/*  add language folders Commentaries folder */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, "Commentaries", -1);
 
 	tmp = get_list(COMM_LIST);
 	while (tmp != NULL) {
-		gtk_tree_store_append(store, &child_iter, &iter);
-		gtk_tree_store_set(store, &child_iter,
-				   0, (gchar *) tmp->data, -1);
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
 	}
+
+	/*  add modules to Commentaries language folders */
+	tmp = get_list(COMM_LIST);
+	while (tmp != NULL) {
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+	/*  add language folders Dictionaries folder */
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, "Dict/Lex", -1);
 
 	tmp = get_list(DICT_LIST);
 	while (tmp != NULL) {
-		gtk_tree_store_append(store, &child_iter, &iter);
-		gtk_tree_store_set(store, &child_iter,
-				   0, (gchar *) tmp->data, -1);
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
 
 	}
+
+	/*  add modules to Dict/Lex language folders */
+	tmp = get_list(DICT_LIST);
+	while (tmp != NULL) {
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
+
+
 	gtk_tree_store_append(store, &iter, NULL);
 	gtk_tree_store_set(store, &iter, 0, "General Books", -1);
 
+	/*  add language folders Books folder */
 	tmp = get_list(GBS_LIST);
 	while (tmp != NULL) {
-		gtk_tree_store_append(store, &child_iter, &iter);
-		gtk_tree_store_set(store, &child_iter,
-				   0, (gchar *) tmp->data, -1);
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_language_folder(GTK_TREE_MODEL(store), iter, buf);
 		tmp = g_list_next(tmp);
-
 	}
 
+	/*  add modules to Books language folders */
+	tmp = get_list(GBS_LIST);
+	while (tmp != NULL) {
+		gchar *buf = get_module_language((gchar *) tmp->data);
+		add_module_to_language_folder(GTK_TREE_MODEL(store),
+					      iter, buf,
+					      (gchar *) tmp->data);
+		tmp = g_list_next(tmp);
+	}
 
 	gtk_tree_view_set_model(GTK_TREE_VIEW(tree),
 				GTK_TREE_MODEL(store));
@@ -598,9 +794,8 @@ static void on_viewer_activate(GtkMenuItem * menuitem,
  * Return value
  *   void
  */
-static
-void on_search_results_activate(GtkMenuItem * menuitem,
-				gpointer user_data)
+static void on_search_results_activate(GtkMenuItem * menuitem,
+				       gpointer user_data)
 {
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
@@ -753,7 +948,8 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	sidebar.clist = gtk_clist_new(1);
 	gtk_widget_show(sidebar.clist);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow3), sidebar.clist);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow3),
+			  sidebar.clist);
 	gtk_clist_set_column_width(GTK_CLIST(sidebar.clist), 0, 100);
 	gtk_clist_column_titles_hide(GTK_CLIST(sidebar.clist));
 
@@ -844,7 +1040,8 @@ static void create_verse_list_page(GtkWidget * notebook)
 
 	sidebar.htmlshow = gtk_html_new();
 	gtk_widget_show(sidebar.htmlshow);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow2), sidebar.htmlshow);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow2),
+			  sidebar.htmlshow);
 
 	gtk_signal_connect(GTK_OBJECT(vl_html), "link_clicked",
 			   G_CALLBACK(verse_list_link_clicked), NULL);
@@ -856,38 +1053,53 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 GNOME_APP_UI_ITEM, N_("_Modules"),
 	 NULL,
 	 (gpointer) on_modules_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-book-red",
-	 0, (GdkModifierType) 0, NULL},
+	 GNOME_APP_PIXMAP_STOCK,
+	 "gnome-stock-book-red", 0,
+	 (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("_Bookmarks"),
+	 GNOME_APP_UI_ITEM,
+	 N_("_Bookmarks"), NULL,
+	 (gpointer) on_bookmarks_activate,
 	 NULL,
-	 (gpointer) on_bookmarks_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-book-open",
-	 0, (GdkModifierType) 0, NULL},
+	 NULL, GNOME_APP_PIXMAP_STOCK,
+	 "gnome-stock-book-open", 0,
+	 (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("_Search"),
+	 GNOME_APP_UI_ITEM,
+	 N_("_Search"),
 	 NULL,
 	 (gpointer) on_search_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
-	 0, (GdkModifierType) 0, NULL},
+	 GNOME_APP_PIXMAP_STOCK,
+	 "gtk-find",
+	 0,
+	 (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Search _Results"),
+	 GNOME_APP_UI_ITEM,
+	 N_("Search _Results"),
 	 NULL,
-	 (gpointer) on_search_results_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
-	 0, (GdkModifierType) 0, NULL},
+	 (gpointer) on_search_results_activate, NULL,
+	 NULL,
+	 GNOME_APP_PIXMAP_STOCK,
+	 "gtk-find",
+	 0,
+	 (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("_Viewer"),
+	 GNOME_APP_UI_ITEM,
+	 N_("_Viewer"),
 	 NULL,
 	 (gpointer) on_viewer_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gtk-justify-left",
-	 0, (GdkModifierType) 0, NULL},
+	 GNOME_APP_PIXMAP_STOCK,
+	 "gtk-justify-left",
+	 0,
+	 (GdkModifierType)
+	 0,
+	 NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Verse _List"),
-	 NULL,
-	 (gpointer) on_verse_list_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-text-bulleted-list",
-	 0, (GdkModifierType) 0, NULL},
+	 GNOME_APP_UI_ITEM, N_("Verse _List"), NULL,
+	 (gpointer) on_verse_list_activate,
+	 NULL, NULL, GNOME_APP_PIXMAP_STOCK,
+	 "gnome-stock-text-bulleted-list", 0,
+	 (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -938,14 +1150,15 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	sidebar.optionmenu1 = gtk_option_menu_new();
 	gtk_widget_show(sidebar.optionmenu1);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar2), sidebar.optionmenu1,
-				  NULL, NULL);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar2),
+				  sidebar.optionmenu1, NULL, NULL);
 
 	menu1 = gtk_menu_new();
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
 			    NULL, FALSE, 0);
 
-	gtk_option_menu_set_menu(GTK_OPTION_MENU(sidebar.optionmenu1), menu1);
+	gtk_option_menu_set_menu(GTK_OPTION_MENU(sidebar.optionmenu1),
+				 menu1);
 
 	widgets.notebook_sidebar = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_sidebar);

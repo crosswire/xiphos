@@ -960,10 +960,10 @@ void gui_open_commentary_dialog(gchar * mod_name)
 	COMM_DATA *vc;
 	GtkWidget *popupmenu;
 
-	vc = g_new(COMM_DATA, 1);
+	vc = g_new0(COMM_DATA, 1);
 
-	vc = g_new(COMM_DATA, 1);
-	vc->cgs = g_new(COMM_GLOBALS, 1);
+	vc = g_new0(COMM_DATA, 1);
+	vc->cgs = g_new0(COMM_GLOBALS, 1);
 	vc->ec = NULL;
 	vc->dialog = NULL;
 	vc->mod_name = g_strdup(mod_name);
@@ -1025,8 +1025,8 @@ void gui_open_commentary_editor(gchar * mod_name)
 		tmp = g_list_next(tmp);
 	}
 
-	vc = g_new(COMM_DATA, 1);
-	vc->cgs = g_new(COMM_GLOBALS, 1);
+	vc = g_new0(COMM_DATA, 1);
+	vc->cgs = g_new0(COMM_GLOBALS, 1);
 	vc->ec = gs_html_editor_control_data_new();
 	vc->dialog = NULL;
 	vc->is_dialog = TRUE;
@@ -1080,7 +1080,7 @@ void gui_setup_commentary_dialog(GList * mods)
 	dialog_list = NULL;
 	dialog_freed = FALSE;
 	settings.percomm_dialog_exist = FALSE;
-	cur_vc = g_new(COMM_DATA, 1);
+	cur_vc = g_new0(COMM_DATA, 1);
 }
 
 

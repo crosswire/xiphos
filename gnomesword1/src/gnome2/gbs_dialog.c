@@ -666,7 +666,7 @@ void gui_open_gbs_dialog(gchar * mod_name)
 	GBS_DATA *dlg;
 	GtkWidget *popupmenu;
 
-	dlg = g_new(GBS_DATA, 1);
+	dlg = g_new0(GBS_DATA, 1);
 	dlg->search_string = NULL;
 	dlg->dialog = NULL;
 	dlg->is_dialog = TRUE;
