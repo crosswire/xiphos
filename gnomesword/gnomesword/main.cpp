@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -32,7 +34,6 @@ int
 main (int argc, char *argv[])
 {
   GtkWidget *mainwindow;
-  GtkWidget *menu1;
   GtkWidget *menu2;
   GtkWidget *menu3;
   GtkWidget *menu4;
@@ -59,13 +60,7 @@ main (int argc, char *argv[])
   gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
 	*/
-  /*
-   * The following code was added by Glade to create one of each component
-   * (except popup menus), just so that you see something after building
-   * the project. Delete any components that you don't want shown initially.
-   */
 
-  //menu1 = create_menu1();
   menu2 = create_menuInt1();
   menu3 = create_menuInt2();
   menu4 = create_menuInt3();

@@ -1,5 +1,10 @@
 2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
 
+        *note editor no longer adds spaces to beginning of note
+        *open and save dialog for studypad look in home dir
+
+2000-09-21  Terry Biggs <tbiggs@users.sourceforge.net>
+
         * added module lists to submenu of Bible window popup menu
 
 2000-09-20  Terry Biggs <tbiggs@users.sourceforge.net>

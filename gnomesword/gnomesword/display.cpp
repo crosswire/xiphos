@@ -142,7 +142,10 @@ char GTKPerComDisp::Display(SWModule & imodule)
 		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	//-- ready status
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);	//-- show modName and verse ref in statusbar
 		gtk_text_insert(GTK_TEXT(gtkText), sword_font,
-				&gtkText->style->black, NULL, " ", -1);
+				&gtkText->style->black, NULL, " ", -1);//-- change font color to black for editing
+		gtk_text_set_point(GTK_TEXT(gtkText), 0);
+	        gtk_text_forward_delete(GTK_TEXT(gtkText),
+				gtk_text_get_length((GTK_TEXT(gtkText))));
 	} else {			/* not useing personal comment module in edit mode */	
 		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL,
 				tmpBuf, -1);	//-- show modName and verse ref in text widget
