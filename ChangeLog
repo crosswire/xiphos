@@ -1,5 +1,10 @@
 2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
 
+	* bumped to 0.7.3
+	* work on German and Spanish translations
+
+2002-05-03  Terry Biggs <tbiggs@users.sourceforge.net>
+
 	* fixed crash when reference is change and no 
 	  commentary modules are present thanks to 
 	  Jp Robinson for finding this bug
