@@ -47,4 +47,4 @@ void changeverseHistory(gint historynum);
 #ifdef __cplusplus
 }
 #endif
-		
+

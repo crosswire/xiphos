@@ -1246,3 +1246,4 @@ void SDdictSearchTextChangedSWORD(char* newkey)
 	}
 }
 
+

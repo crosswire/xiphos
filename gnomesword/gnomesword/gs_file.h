@@ -47,3 +47,4 @@ void savelist(gchar * filename, GtkWidget * list);
 #ifdef __cplusplus
 }
 #endif
+
