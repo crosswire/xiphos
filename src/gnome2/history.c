@@ -117,7 +117,7 @@ static void update_history_menu(GtkWidget * app)
 		menuitem->user_data = GINT_TO_POINTER(history_list[i].itemnum);
 		menuitem->label = history_list[i].verseref;
 		menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
-		menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
+		menuitem->pixmap_info = GNOME_STOCK_BOOK_OPEN;
 		menuitem->accelerator_key = 0;
 		menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
 		gnome_app_insert_menus_with_data(GNOME_APP(app), 
