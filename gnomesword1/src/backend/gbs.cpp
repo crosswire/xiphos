@@ -58,7 +58,15 @@ SWMgr *swmgrBook;
 GList *be_gbs_list;
 
 /***  start code  ***/
-
+char *backend_get_book_key(int book_num)
+{
+	BE_GBS *g;
+        g = (BE_GBS *) g_list_nth_data(be_gbs_list, book_num);
+	if(g->mod->KeyText())
+		return	g_strdup(g->mod->KeyText());
+	else
+		return NULL;
+}
 static TreeKeyIdx *backend_get_tree_key(char *bookname)
 {
         GList *tmp = NULL;
@@ -190,7 +198,7 @@ gboolean backend_displayRowGBS(gint booknum, gchar * offset)
                 treenode.setOffset(strtoul(offset, NULL, 0));
                 sprintf(settings->BookWindowModule, "%s",
                         (gchar *) g->mod->Name());
-
+		sprintf(settings->book_key,"%s",treenode.getText());
                 /** if not root node then display **/
                 if (treenode.getOffset() > 0) {
                         g->mod->SetKey(treenode);

@@ -104,7 +104,7 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	}
 	historylist[historyitems].itemnum = historyitems;	
 	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
-	                        GTK_NOTEBOOK(settings->notebookCOMM));		
+	                        GTK_NOTEBOOK(settings->notebook_comm));		
 	sprintf(historylist[historyitems].verseref,"%s",ref); 
 	sprintf(historylist[historyitems].textmod,"%s",settings->MainWindowModule);	
 	sprintf(historylist[historyitems].commod,"%s", settings->CommWindowModule);

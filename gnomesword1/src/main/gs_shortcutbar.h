@@ -32,11 +32,37 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <gtkhtml/gtkhtml.h>
+
 #include "gs_gnomesword.h"
 
-	gboolean display_dictlex_in_viewer(char * modName, 
-				char * key, SETTINGS * s);
+	typedef struct _search_opt SEARCH_OPT;
+	struct _search_opt {
+		GtkWidget
+		    * ckbCommentary,
+		    *ckbPerCom, 
+		    *ckbGBS, 
+		    *rbPhraseSearch;
+
+		gchar
+		    * module_name,
+		    *upper_bond, 
+		    *lower_bond, 
+		    *search_string;
+
+		gint
+		    search_type, 
+		    search_params, 
+		    found_count;
+
+		 gboolean 
+		    use_bonds, 
+		    use_lastsearch_for_bonds;
+	};
+
+
+	void search_module(SETTINGS * s, SEARCH_OPT * so);
+	gboolean display_dictlex_in_viewer(char *modName,
+					   char *key, SETTINGS * s);
 	void display_verse_list(gchar * module_name, gchar * verse_list,
 				SETTINGS * s);
 	void search_results_select_row(GtkCList * clist, gint row,
@@ -44,7 +70,7 @@ extern "C" {
 				       SETTINGS * s);
 	void save_verse_list_clicked(SETTINGS * s);
 	void vl_link_clicked(const gchar * url, SETTINGS * s);
-	void srlink_clicked(GtkHTML * html, const gchar * url,
+	void srlink_clicked(GtkWidget *html_widget, const gchar * url,
 			    SETTINGS * s);
 	void change_viewer_page(GtkWidget * notebook, gint page);
 	void fill_search_results_clist(GList * glist, SEARCH_OPT * so,

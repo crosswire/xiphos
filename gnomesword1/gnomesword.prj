@@ -65,7 +65,8 @@ module.include.files=\
 	src/backend/viewcomm.h\
 	src/backend/verselist.h\
 	src/backend/sword.h\
-	src/backend/search.h\
+	src/backend/search_.h\
+	src/backend/percomm_.h\
 	src/backend/properties.h\
 	src/backend/module_options.h\
 	src/backend/gbs.h\
@@ -81,9 +82,12 @@ module.include.files=\
 	src/gnome/about_modules.h\
 	src/gnome/about_sword.h\
 	src/gnome/_bibletext.h\
+	src/gnome/_editor.h\
 	src/gnome/create_shortcutbar_search.h\
 	src/gnome/create_shortcutbar_viewer.h\
 	src/gnome/cipher_key_dialog.h\
+	src/gnome/editor_menu.h\
+	src/gnome/link_dialog.h\
 	src/gnome/splash.h\
 	src/main/char_table.h\
 	src/main/bibletext.h\
@@ -117,6 +121,7 @@ module.include.files=\
 	src/main/gs_viewcomm_dlg.h\
 	src/main/gs_viewdict_dlg.h\
 	src/main/gs_viewtext_dlg.h\
+	src/main/percomm.h\
 	src/main/spell.h\
 	src/main/spell_gui.h\
 	src/main/support.h
@@ -130,7 +135,8 @@ module.source.files=\
 	src/backend/viewcomm.cpp\
 	src/backend/verselist.cpp\
 	src/backend/sword.cpp\
-	src/backend/search.cpp\
+	src/backend/search_.cpp\
+	src/backend/percomm_.cpp\
 	src/backend/properties.cpp\
 	src/backend/module_options.cpp\
 	src/backend/gbs.cpp\
@@ -145,10 +151,13 @@ module.source.files=\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
-	src/gnome/_bibletext.cpp\
+	src/gnome/_bibletext.c\
+	src/gnome/_editor.c\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
 	src/gnome/cipher_key_dialog.c\
+	src/gnome/editor_menu.c\
+	src/gnome/link_dialog.c\
 	src/gnome/splash.c\
 	src/main/char_table.c\
 	src/main/bibletext.c\
@@ -183,6 +192,7 @@ module.source.files=\
 	src/main/gs_viewdict_dlg.c\
 	src/main/gs_viewtext_dlg.c\
 	src/main/main.c\
+	src/main/percomm.c\
 	src/main/spell.c\
 	src/main/spell_gui.c\
 	src/main/support.c

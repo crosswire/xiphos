@@ -426,6 +426,8 @@ static GtkWidget *create_DictLexPane(SETTINGS * s, GList * mods,
 	gtk_widget_show(toolbarDLKey);
 	gtk_box_pack_start(GTK_BOX(vbox56), toolbarDLKey, FALSE, TRUE,
 			   0);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarDLKey),
+				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(s->app,
@@ -519,7 +521,6 @@ static GtkWidget *create_DictLexPane(SETTINGS * s, GList * mods,
 					 (GTK_NOTEBOOK(s->notebookDL),
 					  count),
 					 (gchar *) dl->modName);
-
 
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);

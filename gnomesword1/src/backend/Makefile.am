@@ -36,10 +36,12 @@ libbackend_a_SOURCES =  \
     interlinear.h \
     module_options.cpp \
     module_options.h \
+    percomm_.cpp \
+    percomm_.h \
     properties.cpp \
     properties.h \
-    search.cpp \
-    search.h \
+    search_.cpp \
+    search_.h \
     shortcutbar.cpp \
     shortcutbar.h \
     sword.cpp \

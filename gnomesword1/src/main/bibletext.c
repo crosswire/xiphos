@@ -35,15 +35,15 @@
 #include "module_options.h"
 
 /*
-   frontend
+ * frontend
  */
 #include "_bibletext.h" 
 /*
-   main
+ * main
  */
 #include "bibletext.h"
 /*
-   backend
+ * backend
  */
 #include "bibletext_.h"
 
@@ -79,28 +79,29 @@ gboolean display_change = TRUE;
  * Return value
  *   void
  */
+ 
 void text_page_changed(gint page_num, TEXT_DATA *t)
 {
 	/*
-	   remember new module name
+	 * remember new module name
 	 */
 	sprintf(settings->MainWindowModule, "%s", t->mod_name);
 	/*
-	   point TEXT_DATA *cur_t to t - cur_t is global to this file
+	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
 	 */
 	cur_t = t;
 	/*
-	   remember page number
+	 * remember page number
 	 */
 	settings->text_last_page = page_num;
 	/*
-	   display new module with current verse
+	 * display new module with current verse
 	 */
 	if (display_change) {
 		set_text_page_and_key(page_num,settings->currentverse);
 	}
 	/*
-	   set global options for current module 
+	 * set global options for current module 
 	 */
 	set_options_on_page_change(t);		
 }
@@ -120,6 +121,7 @@ void text_page_changed(gint page_num, TEXT_DATA *t)
  * Return value
  *   void
  */
+
 static void get_module_global_options(TEXT_DATA * t)
 {
 	t->gbfstrongs =
@@ -168,6 +170,7 @@ static void get_module_global_options(TEXT_DATA * t)
  * Return value
  *   void
  */
+
 void set_text_module_global_option(gchar * option, gboolean choice)
 {
 	gchar *on_off;
@@ -199,6 +202,7 @@ void set_text_module_global_option(gchar * option, gboolean choice)
  * Return value
  *   void
  */
+
 void set_text_variant_global_option(gchar * option, gchar * choice)
 {
 	backend_set_text_global_option(option, choice);
@@ -220,6 +224,7 @@ void set_text_variant_global_option(gchar * option, gchar * choice)
  * Return value
  *   void
  */
+
 void set_options_on_page_change(TEXT_DATA * t)
 {
 	if (t->gbfstrongs || t->thmlstrongs)
@@ -284,11 +289,12 @@ void set_options_on_page_change(TEXT_DATA * t)
  * Return value
  *   void
  */
+
 void set_text_page_and_key(gint page_num, gchar * key) 
 {
 	/*
-	   we don't want backend_dispaly_text to be
-	   called by on_notebook_text_switch_page
+	 * we don't want backend_dispaly_text to be
+	 * called by on_notebook_text_switch_page
 	 */
 	display_change = FALSE;
 	if (settings->text_last_page != page_num) {
@@ -322,6 +328,7 @@ void set_text_page_and_key(gint page_num, gchar * key)
  * Return value
  *   void
  */
+
 static void set_page_text(gchar * modname, GList * text_list,
 			  SETTINGS * s) 
 {
@@ -358,6 +365,7 @@ static void set_page_text(gchar * modname, GList * text_list,
  * Return value
  *   void
  */
+
 void display_text(gchar * key) 
 {
 	if (!cur_t->is_locked)
@@ -379,6 +387,7 @@ void display_text(gchar * key)
  * Return value
  *   GList *
  */
+
 GList *setup_text(SETTINGS * s) 
 {
 	GtkWidget *popupmenu;
@@ -447,18 +456,19 @@ GList *setup_text(SETTINGS * s)
  * Return value
  *   void
  */
+
 void shutdown_text(void) 
 {
 	text_list = g_list_first(text_list);
 	while (text_list != NULL) {
 		TEXT_DATA *t = (TEXT_DATA *) text_list->data;
 		/* 
-		   free any search dialogs created 
+		 * free any search dialogs created 
 		 */
 		if (t->find_dialog)
 			 g_free(t->find_dialog);
 		/* 
-		   free each TEXT_DATA item created 
+		 * free each TEXT_DATA item created 
 		 */
 		 g_free((TEXT_DATA *) text_list->data);
 		 text_list = g_list_next(text_list);

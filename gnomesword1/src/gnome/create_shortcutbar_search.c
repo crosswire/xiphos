@@ -29,6 +29,7 @@
 #include <gal/e-paned/e-hpaned.h>
 
 #include "gs_gnomesword.h"
+#include "gs_shortcutbar.h"
 #include "create_shortcutbar_search.h"
 
 extern SEARCH_OPT so, *p_so;

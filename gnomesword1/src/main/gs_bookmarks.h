@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */ 
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
  /*
     * GnomeSword Bible Study Tool
@@ -8,8 +8,8 @@
     * copyright (C) 2001 by tbiggs
     * tbiggs@users.sourceforge.net
     *
- */
- 
+  */
+
  /*
     *  This program is free software; you can redistribute it and/or modify
     *  it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "sword.h"
+//#include "sword.h"
 #include "gs_gnomesword.h"
 
 	typedef struct _bmtree BM_TREE;
@@ -40,40 +40,38 @@ extern "C" {
 		GtkWidget *ctree_widget;
 		GtkCTree *ctree;
 	};
-
-	void
-	 addbookmarktotree(GtkCTreeNode *node, 
-				gchar * modName, 
-				gchar * verse);
-	void
-	 loadtree(SETTINGS * s);
+	
+	void add_bookmark_to_tree(GtkCTreeNode * node,
+			   gchar * modName, gchar * verse);
+	void loadtree(SETTINGS * s);
 	GtkWidget *create_pmBookmarkTree(void);
 	void
-	 on_new_subgroup_activate(GtkMenuItem * menuitem, gpointer user_data);
+	 on_new_subgroup_activate(GtkMenuItem * menuitem,
+				  gpointer user_data);
 	void
 	 on_add_new_group1_activate(GtkMenuItem * menuitem,
-				    	gpointer user_data);
+				    gpointer user_data);
 	void
 	 on_save_bookmarks1_activate(GtkMenuItem * menuitem,
-				     	gpointer user_data);
+				     gpointer user_data);
 	void
-	 on_edit_item_activate(GtkMenuItem * menuitem, 
-					gpointer user_data);
+	 on_edit_item_activate(GtkMenuItem * menuitem,
+			       gpointer user_data);
 	void
 	 on_delete_item_activate(GtkMenuItem * menuitem,
-				 	gpointer user_data);
+				 gpointer user_data);
 	void
 	 on_allow_reordering_activate(GtkMenuItem * menuitem,
-				      	gpointer user_data);
+				      gpointer user_data);
 	void
 	 addverselistBM(SETTINGS * s, GList * list);
 	// gint loadoldbookmarks(void);
 	GtkWidget *create_dlgEditBookMark(gchar * text[3],
-					gboolean newbookmark);
+					  gboolean newbookmark);
 	void
 	 create_addBookmarkMenuBM(GtkWidget * menu,
-				  	GtkWidget * bookmark_menu_widget,
-				  	SETTINGS *);
+				  GtkWidget * bookmark_menu_widget,
+				  SETTINGS *);
 
 
 #ifdef __cplusplus

@@ -36,7 +36,7 @@
 #include <gtkhtml/htmlengine-edit-fontstyle.h>
 #include <gtkhtml/htmlsettings.h>
 
-//#include "/pixmaps/tt.xpm"
+#include "./pixmaps/tt.xpm"
 
 
 #define EDITOR_TOOLBAR_PATH "/HTMLEditor"
@@ -504,8 +504,8 @@ static GnomeUIInfo editor_toolbar_alignment_group[] = {
 
 static GnomeUIInfo editor_toolbar_style_uiinfo[] = {
 
-	/*{ GNOME_APP_UI_TOGGLEITEM, N_("Typewriter"), N_("Toggle typewriter font style"),
-	  editor_toolbar_tt_cb, NULL, NULL, GNOME_APP_PIXMAP_DATA, tt_xpm },*/
+	{ GNOME_APP_UI_TOGGLEITEM, N_("Typewriter"), N_("Toggle typewriter font style"),
+	  editor_toolbar_tt_cb, NULL, NULL, GNOME_APP_PIXMAP_DATA, tt_xpm },
 	{ GNOME_APP_UI_TOGGLEITEM, N_("Bold"), N_("Makes the text bold"),
 	  editor_toolbar_bold_cb, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_TEXT_BOLD },
 	{ GNOME_APP_UI_TOGGLEITEM, N_("Italic"), N_("Makes the text italic"),
@@ -548,20 +548,17 @@ html_destroy_cb (GtkObject *object,
 static GtkWidget *
 create_style_toolbar (GSHTMLEditorControlData *cd)
 {
-	GtkWidget *handleboxEditorBar;
-
-	handleboxEditorBar = gtk_handle_box_new ();
-	//frame = gtk_frame_new (NULL);
-	//gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	cd->handlebox_toolbar = gtk_handle_box_new ();
 
 	cd->toolbar_style = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
 
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(cd->toolbar_style),
 				      GTK_RELIEF_NONE);
 	
-	gtk_container_add (GTK_CONTAINER (handleboxEditorBar), cd->toolbar_style);
+	gtk_container_add (GTK_CONTAINER (cd->handlebox_toolbar), cd->toolbar_style);
 
-	gtk_widget_show_all(cd->toolbar_style);
+	//gtk_widget_show_all(cd->toolbar_style);
+	gtk_widget_show_all(cd->handlebox_toolbar);
 
 	cd->paragraph_option = setup_paragraph_style_option_menu (cd->html),
 	gtk_toolbar_prepend_widget (GTK_TOOLBAR (cd->toolbar_style),
@@ -604,7 +601,9 @@ create_style_toolbar (GSHTMLEditorControlData *cd)
 	gtk_signal_connect (GTK_OBJECT (cd->html), "current_paragraph_alignment_changed",
 			    GTK_SIGNAL_FUNC (paragraph_alignment_changed_cb), cd);
 
-	return handleboxEditorBar;
+	gtk_box_pack_start(GTK_BOX(settings->hbox_toolbar), cd->handlebox_toolbar, TRUE,
+			   TRUE, 0);
+	return cd->handlebox_toolbar;
 }
 
 static void
