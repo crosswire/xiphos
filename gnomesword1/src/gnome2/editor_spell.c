@@ -33,7 +33,9 @@
 #include <gtkhtml/htmlengine-edit-cursor.h>
 #include <gtkhtml/htmlengine-search.h>
 #include <gtkhtml/htmlselection.h>
+#ifdef USE_GTKHTML30
 #include <gal/widgets/e-unicode.h>
+#endif
  
 #include "gui/editor.h"
 #include "gui/editor_spell.h"
