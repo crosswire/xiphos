@@ -2,6 +2,17 @@
 Please see INSTALL file before you start.
 ==================================================================
 ******************************************************************
+GnomeSword requires Gome and the Sword libs to run
+******************************************************************
+##################################################################
+you can do some formatting of your personal notes
+text inclosed in {} will be bold and will start a new paragraph
+text inclosed in \\ will use the symbol font (greek) 
+text inclosed in #| will be red (for Bible references)
+when in edit mode you will see the format marks in the editor
+you can turn formatting on or off in the preferences dialog
+##################################################################
+******************************************************************
 you can start gnomesword with command line options
 1. gnomesword newconfigs - this will create a new configuration file
 with default settings - if gnomesword will not start this might help

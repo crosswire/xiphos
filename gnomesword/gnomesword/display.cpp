@@ -24,10 +24,10 @@
 
 /********************************************************************\
 **********************************************************************
-**  this code was taken from the Sword Cheatah program							**
-**  and modfied to handle some of the GBF stuff. Also added	 				**
-**  suport for the x symbol font when using greek modules.     			**
-**                             																			**                                                    	 **
+**  this code was taken from the Sword Cheatah program				**
+**  and modfied to handle some of the GBF stuff. Also added			**
+**  suport for the x symbol font when using greek modules.  		**
+**  2000/07/10 - added some support for the RWP module				** 
 **********************************************************************
 \********************************************************************/
 
@@ -45,17 +45,17 @@ GdkColor GTKEntryDisp::colourGreen;
 GdkColor GTKEntryDisp::colourRed;
 GdkColor myGreen;
 GdkColor BGcolor;	
-GdkFont 	*roman_font,
-				 	*italic_font,
-				 	*versenum_font,
-				 	*bold_font;
+GdkFont  *roman_font,
+ 	*italic_font,
+ 	*versenum_font,
+ 	*bold_font;
 				 	
-gchar			*font_mainwindow ="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
-					*font_italic_mainwindow = "-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1",
-					*font_interlinear="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
-					*font_italic_interlinear="-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1",
-					*font_currentverse="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
-					*font_italic_currentverse="-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1";
+gchar	*font_mainwindow ="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
+	*font_italic_mainwindow = "-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1",
+	*font_interlinear="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
+	*font_italic_interlinear="-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1",
+	*font_currentverse="-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
+	*font_italic_currentverse="-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1";
 				 	
 extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
@@ -341,127 +341,202 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 }
 
 //-----------------------------------------------------------------------------------------------
-char                                   //-- this will handle  Robertson's Word Pictures in the New Testament RWP format?????????
+char                                   //-- this will handle  Robertson's Word Pictures in the New Testament (RWP) format?????????
 GTKRWPDisp::Display(SWModule &imodule)
 {
-	char 		tmpBuf[800];
-	GdkFont 	*sword_font,
+	GdkFont	 *sword_font, //-- pointers to fonts
 				*greek_font;
-	gchar   	*myname;
-	bool		findclose,
-				italics_on=FALSE,
+	//gchar   	*myname; 
+	bool		italics_on=FALSE, //-- boolean switches
 				greek_on=false,
 				bold_on=false,
-				first_time=true;
-	char		verseBuf[800],
+				first_time=true,
+				first_letter=true;
+	char		verseBuf[800], //-- work strings
+				tmpBuf[800],
 				buf[800];
-	char		*myverse,
-				*font;
-	int		 i,j,len;	
+	char		*myverse, //-- pointers to strings
+				*font; 
+	int		 i,j,len; //-- integer vars	
 
 
 	/* Load a italic font */
- 	italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
+	italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
 	/* Load a bold font */
- 	bold_font = gdk_font_load ("-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1");
+	bold_font = gdk_font_load ("-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1");
 	/* Load a roman font */
- 	roman_font = gdk_font_load(font_interlinear);
+	roman_font = gdk_font_load(font_interlinear);
 	/* Load a verse number font */
- 	versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-  /* Load a greek font */
+	versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
+	/* Load a greek font */
 	greek_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-  	
-	findclose = FALSE;
-	gtk_text_set_point(GTK_TEXT(gtkText), 0);
-	gtk_text_forward_delete (GTK_TEXT (gtkText), gtk_text_get_length((GTK_TEXT(gtkText))));
-	int curPos = 0;
+	//-- prepare text widget 
+	gtk_text_set_point(GTK_TEXT(gtkText), 0); //-- set position to begining of text
+	gtk_text_forward_delete (GTK_TEXT (gtkText), gtk_text_get_length((GTK_TEXT(gtkText)))); //-- clear to end of text
+	gtk_text_freeze (GTK_TEXT(gtkText)); //-- to pervent flicker and movement
+	
 	(const char *)imodule;	// snap to entry
-	gtk_text_freeze (GTK_TEXT(gtkText));
-	//sprintf(tmpBuf, "[%s] ",imodule.KeyText());
-	//gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);
-	
-		i=j=0;
-		verseBuf[0]='\0';
-		myverse = g_strdup((const char *)imodule);
-		len = strlen(myverse);
-		while(i<len)
+
+	i=j=0; //-- set counters to 0 - i is counter for myverse[] - j is counter for verseBuf
+	verseBuf[0]='\0'; //-- set buf to null
+	myverse = g_strdup((const char *)imodule); //-- get string from sword module
+	len = strlen(myverse); //-- get length of string
+	while(i<len) //-- loop until we reach the end of the text string
+	{
+		if(myverse[i] == 32  || myverse[i] == '\\') first_letter = true; //-- we need to know if we have a space or a backslash -- first letter of a word follows
+		if(myverse[i] == '{' ) //-- remove the open curly bracket ({)
+		{				
+			++i; //-- increment i to revome the {
+			if(first_time) //-- this is the first line to go to the text widget - we don't want any line feed here
+			{
+				sprintf(tmpBuf,"%s",verseBuf);
+				first_time = false;
+			}
+			else //-- else add two line feeds to seperate sections of text
+			{
+				sprintf(tmpBuf,"%s\n\n",verseBuf);		
+			}
+			gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, tmpBuf, -1); //-- print what is in the buffer  so we can bold the what follows (text between {})
+			j=0; //-- set verseBuf counter to 0
+			verseBuf[0]='\0'; //-- empty verseBuf 
+			bold_on =  true; 		
+    	}
+		if(myverse[i] == '}') //-- remove the close curly bracket (}) and print bold text
 		{
-			if(myverse[i] == '{' )
-   		{				
-				++i;
-				if(first_time)
-				{
-					sprintf(tmpBuf,"%s",verseBuf);
-					first_time = false;
-				}
-				else
-				{
-					sprintf(tmpBuf,"%s\n\n",verseBuf);		
-				}
-				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, tmpBuf, -1);
-				j=0;
-				verseBuf[0]='\0';
-				bold_on =  true;    		
-    		}
-			if(myverse[i] == '}')
-   		{
-				++i;
-				gtk_text_insert(GTK_TEXT(gtkText), bold_font, &gtkText->style->black, NULL, verseBuf, -1);
-				j=0;
-				verseBuf[0]='\0';
-				bold_on = false;
-    		}			
-			if(myverse[i] == '\\')
-   		 {				
-				if(!greek_on)
-				{
-					++i;
-					gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-					j=0;
-					verseBuf[0]='\0';
-					greek_on = TRUE;
-				}
-    		}
-			if(myverse[i] == '\\')
-   		 {
-				if(greek_on)
-				{
-					++i;
-					gtk_text_insert(GTK_TEXT(gtkText), greek_font, &gtkText->style->black, NULL, verseBuf, -1);
-					j=0;
-					verseBuf[0]='\0';
-    				greek_on = FALSE;
+			++i;//-- increment i to revome the }
+			gtk_text_insert(GTK_TEXT(gtkText), bold_font, &gtkText->style->black, NULL, verseBuf, -1); //-- print what is in the buffer 
+			j=0; //-- set verseBuf counter to 0
+			verseBuf[0]='\0'; //-- empty verseBuf 
+			bold_on = false;  //-- turn bold font off
+		}			
+		if(myverse[i ] == '\\') //-- remove first backslash and turn greek font on
+		{				
+			if(!greek_on) //-- we don't want to be here is greek is already on
+			{
+				++i; //-- increment i to remove the backslash
+				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1); //-- print what is in the buffer so we can use greek font
+				j=0; //-- set verseBuf counter to 0
+				verseBuf[0]='\0'; //-- empty verseBuf 
+				greek_on = TRUE;
+			}
+		}
+		if(myverse[i] == '\\') //-- remove secound backslash and turn greek font off
+		{
+			if(greek_on) //-- only go here is greek is on
+			{
+				++i; //-- increment i to remove the backslash
+				gtk_text_insert(GTK_TEXT(gtkText), greek_font, &gtkText->style->black, NULL, verseBuf, -1);
+				j=0; //-- set verseBuf counter to 0;
+				verseBuf[0]='\0'; //-- empty verseBuf 
+    				greek_on = FALSE; //-- turn greet font off
     			}
-    		}			
-    		if(myverse[i] == '#')
-   		 {			
-					++i;
-					gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
-					j=0;
-					verseBuf[0]='\0';
+		}
+		if(greek_on) //-- if greek is on let's try to replace characters that don't print right with the symbol font with some that will
+		{
+    		//gchar buftext[80];    			
+    		//sprintf(buftext,"%3.3d\n",myverse[i]);
+    		//cout << buftext;    			
+    		if(myverse[i] == 't' && myverse[i+1] == 'h') //-- replace th with q (theta)
+    		{										
+    			++i;
+    			myverse[i] = 'q';
     		}
-			if(myverse[i] == '|')
-   		 {
-			
-					++i;
-					gtk_text_insert(GTK_TEXT(gtkText),roman_font, &colourRed, NULL, verseBuf, -1);
-					j=0;
-					verseBuf[0]='\0';
-    			
+    		if(myverse[i] == 's')	 //-- end of word s with V
+    		{						 //-- sigma with end of word sigma
+    			if(myverse[i+1] == ' ' || myverse[i+1] == ')' || myverse[i+1] == '\\')
+    			myverse[i] = 'V';     				
     		}
-			verseBuf[j] = myverse[i];
-	    	++i;    		
-	    	verseBuf[j+1] = '\0';
-	    	++j;
-		}	
-		if(greek_on) sword_font = italic_font;
-		else if(bold_on) sword_font = bold_font;
-		else sword_font = roman_font;
-		gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);		
-		verseBuf[0]='\0';
-	
-	/**************************************************************************************************************************************/
-	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
+				if(myverse[i] == 'c' && myverse[i+1] == 'h') //-- ch with c (chi)
+    		{										
+    			++i;
+    			myverse[i] = 'c';
+    		}
+				if(myverse[i] == 'p' && myverse[i+1] == 'h') //-- ph with f (phi)
+    		{											
+    			++i;
+    			myverse[i] = 'f';
+    		}
+    		if(myverse[i] == 39) //-- skip ' (39)  - i don't know what this is
+    		{
+    			++i;
+    		}
+    		if(myverse[i] == -120) //-- replace nonprintable with h (eta)
+    		{
+    			if(myverse[i+1] == 'i') ++i;
+    			myverse[i] = 'h';
+    		}
+    		if(myverse[i] == -125) //-- replace nonprintable with a (alpha)
+    		{
+    			if(myverse[i+1] == 'i') ++i;
+    			myverse[i] = 'a';
+    		}
+    		if(myverse[i] == -109) //-- replace nonprintable with w (omega)
+    		{
+    			if(myverse[i+1] == 'i') ++i;
+    			myverse[i] = 'w';
+    		}    		
+    		if(first_letter) //-- if first letter of greek word -- if a vowel we must remove the h which i guess to a rough breathing we can not show this with the symbol font so we remove it
+    		{
+    			if(myverse[i] == 'h' && myverse[i+1] == 'o')
+    			{
+    				++i;
+    				first_letter = false;
+    			}
+    			if(myverse[i] == 'h' && myverse[i+1] == 'a')
+    			{
+    				++i;
+    				first_letter = false;
+    			}
+    			if(myverse[i] == 'h' && myverse[i+1] == 'w')
+    			{
+    				++i;
+    				first_letter = false;
+    			}
+    			if(myverse[i] == 'h' && myverse[i+1] == 'u')
+    			{
+    				++i;
+    				first_letter = false;
+    			}
+    			if(myverse[i] == 'h' && myverse[i+1] == -120)
+    			{
+    				++i;
+    				myverse[i] = 'h';
+    				first_letter = false;
+    			}
+    			if(myverse[i] == 'h' && myverse[i+1] == 'i')
+    			{
+    				++i;
+    				first_letter = false;
+    			}    			    				   				
+    		}
+    	}     					
+		if(myverse[i] == '#') //-- remove # and start reference and red fond
+		{			
+			++i; //-- remove #
+			gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1); //-- print current buffer and start new for reference
+			j=0;
+			verseBuf[0]='\0';
+    	}
+		if(myverse[i] == '|') //-- remove | and end reference and red fond
+		{			
+			++i; //-- remove #
+			gtk_text_insert(GTK_TEXT(gtkText),roman_font, &colourRed, NULL, verseBuf, -1); //-- show ref
+			j=0;
+			verseBuf[0]='\0';
+		}
+		verseBuf[j] = myverse[i]; //-- move current char form myverse to verseBuf
+    	++i;    		
+    	verseBuf[j+1] = '\0'; //-- put null at end of verseBuf
+    	++j;
+	}
+	//-- let's print what ever is left	
+	if(greek_on) sword_font = greek_font;
+	else if(bold_on) sword_font = bold_font;
+	else sword_font = roman_font;
+	gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);		
+	verseBuf[0]='\0';
+	//-- finish with the text widget
+	gtk_text_set_point(GTK_TEXT(gtkText), 0);
 	gtk_text_thaw(GTK_TEXT(gtkText));
 }
 
@@ -770,145 +845,3 @@ AboutModsDisplay(GtkWidget* text, gchar *aboutinfo) //-- to display Sword module
 		gtk_text_insert(GTK_TEXT(text), NULL, NULL, NULL, textBuf, -1);	//-- incase there is no \par at end of info	
 		textBuf[0]='\0';
 }
-
-
-/*
-//-------------------------------------------------------------------------------------------
-void
-GBFTextVerse(char* key, GtkWidget* textWindow, SWModule *module)
-{
-
-	char tmpBuf[255];
-	GdkFont *sword_font;
-	gchar    *myname;
-	bool 	greek,
-			findclose;
-	char verseBuf[800];
-	char 	*myverse,
-			*font;
-	int i,j,len;	
-	GdkFont *roman_font,
-		*italic_font,
-		*versenum_font;
-	ModMap::iterator it;
-	SectionMap::iterator sit;
-	ConfigEntMap::iterator eit;		
-
-	font = "roman";
-	
-	// Load a italic font \\
-        italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
-	// Load a roman font \\
-        roman_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1");
-	// Load a verse number font \\
-        versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
-    // Load a greek font \\
-	sword_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
-
-	//--------------------------------------------------------- check for greek module that uses symbol font
-	greek = FALSE;	
-
-	it = searchMgr->Modules.find(module->Name());
-	if (it != searchMgr->Modules.end())
-	{
-		if ((sit = searchMgr->config->Sections.find((*it).second->Name())) != searchMgr->config->Sections.end())
-		{
-			if ((eit = (*sit).second.find("Font")) != (*sit).second.end())
-			{
-				font = (char *)(*eit).second.c_str();
-			}
-		}
-	}
-	if(!strcmp(font,"Symbol")) greek=TRUE;
-
-	findclose = FALSE;
-	gtk_text_set_point(GTK_TEXT(textWindow), 0);
-	gtk_text_forward_delete (GTK_TEXT (textWindow), gtk_text_get_length((GTK_TEXT(textWindow))));
-	int curPos = 0;
-	(const char *)module;	// snap to entry
-	module->SetKey(key);
-	gtk_text_freeze (GTK_TEXT(textWindow));
-	sprintf(tmpBuf, "[%s][ %s] ", module->Name(),module->KeyText());
-	gtk_text_insert(GTK_TEXT(textWindow), NULL, NULL, NULL, tmpBuf, -1);
-	
-	if(greek)
-		gtk_text_insert(GTK_TEXT(textWindow),sword_font , &textWindow->style->black, NULL, (const char *)*module, -1);
-	else
-	{
-		i=j=0;
-		verseBuf[0]='\0';
-		strcpy(myverse,(const char *)*module);
-		len = strlen(myverse);
-		while(i<len)
-		{
-			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='I')
-    		{				
-				i=i+4;
-				gtk_text_insert(GTK_TEXT(textWindow),roman_font , &textWindow->style->black, NULL, verseBuf, -1);
-				j=0;
-				verseBuf[0]='\0';
-    			//myverse[i] = '[';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='F' && myverse[i+2]=='i')
-    		{
-				i=i+4;
-				gtk_text_insert(GTK_TEXT(textWindow), italic_font, &textWindow->style->black, NULL, verseBuf, -1);
-				j=0;
-				verseBuf[0]='\0';
-    			//myverse[i] = ']';
-    		}
-			
-			if(myverse[i] == '<' && myverse[i+1] =='C')
-    		{				
-    			while(myverse[i] != '>')
-    			{
-    				++i;
-	    		}
-				++i;
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='R' && myverse[i+2]=='F')
-    		{				
-				i=i+3;
-    			myverse[i] = '{';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='R' && myverse[i+2]=='f')
-    		{				
-				i=i+3;
-    			myverse[i] = '}';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='G')
-    		{				
-				i=i+2;
-    			myverse[i] = '<';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='H')
-    		{				
-				i=i+2;
-    			myverse[i] = '<';
-    		}
-			if(myverse[i] == '<' && myverse[i+1] =='W' && myverse[i+2]=='T')
-    		{				
-				i=i+3;
-    			myverse[i] = '(';
-				findclose = TRUE;			
-    		}
-			if(findclose)
-			{
-				if(myverse[i] == '>')
-				{
-					myverse[i] = ')';
-					findclose=FALSE;
-				}
-			}
-			verseBuf[j] = myverse[i];
-	    	++i;    		
-	    	verseBuf[j+1] = '\0';
-	    	++j;
-		}
-		gtk_text_insert(GTK_TEXT(textWindow), roman_font, &textWindow->style->black, NULL, verseBuf, -1);		
-		verseBuf[0]='\0';
-	}
-	gtk_text_set_point(GTK_TEXT(textWindow), curPos);
-	gtk_text_thaw(GTK_TEXT(textWindow));		
-}
-*/
