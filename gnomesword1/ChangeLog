@@ -1,3 +1,8 @@
+2003-12-19  Terry <tbiggs@users.sf.net>
+
+	* fixed to build with -DGTK_DISABLE_DEPRECATED
+
+
 2003-12-18  Terry <tbiggs@users.sf.net>
 
 	* clicking on verse (link) in preview pane (sidebar or search_dialog) 
