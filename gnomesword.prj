@@ -76,7 +76,7 @@ module.include.files=\
 	src/backend/dictlex_.h\
 	src/backend/commentary_.h\
 	src/backend/bookmarks.h\
-	src/backend/display_info.h\
+	src/backend/display_info_.h\
 	src/backend/shortcutbar.h\
 	src/gnome/about_gnomesword.h\
 	src/gnome/about_modules.h\
@@ -86,6 +86,7 @@ module.include.files=\
 	src/gnome/_commentary.h\
 	src/gnome/commentary_find.h\
 	src/gnome/_dictlex.h\
+	src/gnome/_display_info.h\
 	src/gnome/_editor.h\
 	src/gnome/_gbs.h\
 	src/gnome/_percomm.h\
@@ -113,6 +114,7 @@ module.include.files=\
 	src/main/gs_bookmarks.h\
 	src/main/commentary.h\
 	src/main/dictlex.h\
+	src/main/display_info.h\
 	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_interlinear.h\
@@ -121,7 +123,6 @@ module.include.files=\
 	src/main/gs_history.h\
 	src/main/gs_html.h\
 	src/main/gs_info_box.h\
-	src/main/gs_information_dlg.h\
 	src/main/gs_mainmenu_cb.h\
 	src/main/gs_menu.h\
 	src/main/gs_popup_cb.h\
@@ -157,7 +158,7 @@ module.source.files=\
 	src/backend/dictlex_.cpp\
 	src/backend/commentary_.cpp\
 	src/backend/bookmarks.cpp\
-	src/backend/display_info.cpp\
+	src/backend/display_info_.cpp\
 	src/backend/shortcutbar.cpp\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
@@ -167,6 +168,7 @@ module.source.files=\
 	src/gnome/_commentary.c\
 	src/gnome/commentary_find.c\
 	src/gnome/_dictlex.c\
+	src/gnome/_display_info.h\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\
 	src/gnome/_percomm.c\
@@ -195,6 +197,7 @@ module.source.files=\
 	src/main/gs_bookmarks.c\
 	src/main/commentary.c\
 	src/main/dictlex.c\
+	src/main/display_info.c\
 	src/main/gbs.c\
 	src/main/gs_interlinear.c\
 	src/main/gs_gnomesword.c\

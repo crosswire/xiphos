@@ -29,13 +29,14 @@
 
 /* frontend */
 #include "_bibletext_view.h"
+#include "_display_info.h"
 
 /* main */ 
+#include "display_info.h"
 #include "bibletext_view.h"
 #include "gs_gnomesword.h"
 #include "gs_shortcutbar.h"
 #include "gs_html.h"
-#include "gs_information_dlg.h"
 #include "support.h"
 #include "settings.h"
 #include "lists.h"
@@ -784,7 +785,7 @@ GtkWidget *gui_create_viewtext_dialog(void)
 	
 	gtk_entry_set_text(GTK_ENTRY(cbeModule), settings.MainWindowModule);
 	
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), settings.book_items);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), get_list(BOOKS_LIST));
 	goto_verse_viewtext(settings.currentverse);
 	sprintf(vt_current_verse, "%s", settings.currentverse);
 	update_controls();
