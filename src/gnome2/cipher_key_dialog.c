@@ -67,7 +67,7 @@ gchar * gui_add_cipher_key(gchar *mod_name, gchar *cipher_old)
 	/*** open dialog to get name for root node ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
-		set_module_unlocked(mod_name, info->text1);
+		main_set_module_unlocked(mod_name, info->text1);
 		save_module_key(mod_name, info->text1);
 		retval = g_strdup(info->text1);
 	}

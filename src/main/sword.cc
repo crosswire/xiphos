@@ -56,9 +56,7 @@ extern "C" {
  
 #include "main/parallel_view.h"
 #include "backend/sword.h"
-#include "backend/sword_defs.h"
 #include "backend/sword_main.hh"
-#include "backend/mgr.hh"
 
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
@@ -70,6 +68,29 @@ extern GtkWidget *cbe_freeform_lookup;
 
 gboolean style_display = TRUE;
 
+
+
+/******************************************************************************
+ * Name
+ *  set_module_unlocked
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *   
+ *   void set_module_unlocked(char *mod_name, char *key)	
+ *
+ * Description
+ *   unlocks locked module - 
+ *
+ * Return value
+ *   void
+ */
+
+void main_set_module_unlocked(char * mod_name, char * key)
+{
+	SWMgr *mgr = backend->get_display_mgr();
+	mgr->setCipherKey(mod_name, key);	
+}
 
 /******************************************************************************
  * Name
@@ -907,8 +928,8 @@ void main_change_verse(const char * bible, const char * commentary,
 
 void main_setup_displays(void)
 {
-	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm,backend);
-	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
+//	sw.entryDisplay = new GTKEntryDisp(widgets.html_comm,backend);
+//	sw.dictDisplay = new GTKEntryDisp(widgets.html_dict,backend);
 }
 
 void main_setup_new_displays(void)
