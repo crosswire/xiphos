@@ -1748,7 +1748,7 @@ gchar *getmodnameSWORD(gint num)
 			return comp1Mod->Name();
 			break;
 		case BOOK_WINDOW:
-			return NULL;
+			return settings->BookWindowModule;
 			break;
 		}
 	}
@@ -2126,13 +2126,19 @@ void savekeySWORD(gint modwindow, gchar * key)
 	}
 }
 
-/*** write individual module information to <module>.conf ***/
-gboolean savefontinfoSWORD(gchar * modName, gchar * modtag,
-			   gchar * info)
+
+gchar * get_font_name(gchar * mod_name)
+{	
+	//return load_module_font(mod_name);
+}
+
+	/*** write individual module information to <module>.conf ***/
+gboolean savefontinfoSWORD(gchar * mod_name, gchar * font_name)
 {
-	ModMap::iterator it;
-	SectionMap::iterator section;
-	ConfigEntMap::iterator entry;
+	//ModMap::iterator it;
+	//SectionMap::iterator section;
+	//ConfigEntMap::iterator entry;
+	/*
 	DIR *dir;
 	gchar buf[256], conffile[256], *path;
 	struct dirent *ent;
@@ -2156,6 +2162,8 @@ gboolean savefontinfoSWORD(gchar * modName, gchar * modtag,
 	}
 	closedir(dir);
 	return retval;
+	*/
+	//save_module_options(mod_name, "Font", font_name);
 }
 
 /*** display daily devotional ***/

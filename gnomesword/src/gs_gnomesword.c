@@ -218,7 +218,9 @@ initGnomeSword(SETTINGS * s,
 		/* change personal comments module */
 		changepercomModSWORD(s->personalcommentsmod);
 	}
-
+	
+	
+	
 	/* free module lists */
 	g_list_free(biblemods);
 	g_list_free(commentarymods);
