@@ -20,6 +20,10 @@
  *
  * Author: Ettore Perazzoli
  */
+ 
+/*
+ * added to gnomesword 2001-07-25 by terry
+ */
 
 #ifndef _E_SPLASH_H_
 #define _E_SPLASH_H_

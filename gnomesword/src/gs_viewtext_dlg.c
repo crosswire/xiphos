@@ -91,9 +91,8 @@ static
 void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf,*modName;
-	
+	static GtkWidget *dlg;
 	if (*url == '#') {
-		static GtkWidget *dlg;
 		
 		if(!gsI_isrunning){
 		 	dlg = create_dlgInformation();
@@ -117,10 +116,19 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			g_warning(modName);
 			g_free(buf);
 			g_free(modName);
-		}
+		} 
 		 gtk_widget_show(dlg);
 		//lookupStrongsSWORD(atoi(url));
-	} else  if(*url == '*')   {
+	} else if (*url == 'M') {
+		if(!gsI_isrunning){
+		 	dlg = create_dlgInformation();
+		 }
+		++url;		/* remove M */
+		buf = g_strdup(url); 
+		loadmodandkey("Packard", buf);
+		g_free(buf);
+		 gtk_widget_show(dlg); 
+	}else  if(*url == '*'){
 		++url;
 		while(*url != ']') {
 			++url;

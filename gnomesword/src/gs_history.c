@@ -116,11 +116,13 @@ void changeverseHistory(gint historynum)
         currenthistoryitem = historynum;
         if(firstbackclick){
                  addhistoryitem = TRUE;                 
-        } else   addhistoryitem = FALSE;
-        //g_warning("change mod = %s\n",historylist[historynum].textmod);
-        changecurModSWORD(historylist[historynum].textmod,FALSE);
-        changcurcomModSWORD(historylist[historynum].commod, FALSE);
-        changeVerseSWORD(historylist[historynum].verseref);
+        } else { 
+		addhistoryitem = FALSE;
+	}
+	/* change text mod */
+	gotoBookmarkSWORD(historylist[historynum].textmod, historylist[historynum].verseref);
+	/* change commentary mod */
+	gotoBookmarkSWORD(historylist[historynum].commod, historylist[historynum].verseref);
 	if(firstbackclick){
                 --currenthistoryitem;
 		--currenthistoryitem;

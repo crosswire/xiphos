@@ -1,6 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
 SUBDIRS = 	macros \
+            help \
 	    src
 
 EXTRA_DIST = gnomesword.glade Gnomesword.prj

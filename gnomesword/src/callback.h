@@ -25,6 +25,9 @@ GtkWidget *create_menu1(void);
 GtkWidget *create_wdwEditBookmarks(void);
 GtkWidget *create_dlgSettings(void);
 GtkWidget *create_dialog1(void);
+
+void
+on_help_contents_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_nbTextMods_switch_page(GtkNotebook * notebook,	
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data);
