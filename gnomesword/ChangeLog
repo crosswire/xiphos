@@ -1,27 +1,31 @@
-2000-07-03  - new bookmark editor
-						- added command line options to set options and bookmark files to defalt settings
+2000-07-10	- bug fixes
+		- button to create new file in studypad added
+		- follow button added to notes editor
+		
+2000-07-03  	- new bookmark editor
+		- added command line options to set options and bookmark files to defalt settings
 												
-2000-06-15  - changed from options array to settings structure - stored in binary file
-						- added module About Dialog to show module information
-						- word wrap added to printing - using printing code from gedit-0.7.9
+2000-06-15  	- changed from options array to settings structure - stored in binary file
+		- added module About Dialog to show module information
+		- word wrap added to printing - using printing code from gedit-0.7.9
 						
-2000-06-09  - added printing using gnome-print-0.20. You can print the text in
-						studypad. Print needs more work - later.
-						- added scroll buttons to dictionary-lexicon key entry.
+2000-06-09  	- added printing using gnome-print-0.20. You can print the text in
+		studypad. Print needs more work - later.
+		- added scroll buttons to dictionary-lexicon key entry.
 
-2000-06-06  - cleaned up bookmarks menu - edit bookmarks now applies changes when
-						you click ok.
-						- clear history works
-						- personal comments page moved - if you have more than one personal module
-						you can switch using popup menu on comments page.
-						- spellchecking works for personal comments now.
+2000-06-06  	- cleaned up bookmarks menu - edit bookmarks now applies changes when
+		you click ok.
+		- clear history works
+		- personal comments page moved - if you have more than one personal module
+		you can switch using popup menu on comments page.
+		- spellchecking works for personal comments now.
 
-2000-06-05  you can set the color for the current verse
+2000-06-05  	you can set the color for the current verse
 
-2000-06-02  fixed some bugs in the personal comments editor
+2000-06-02  	fixed some bugs in the personal comments editor
 
-2000-05-17  -added spellchecking - not perfect but seems to work
-						ok in studypad.
+2000-05-17  	-added spellchecking - not perfect but seems to work
+		ok in studypad.
 						
 
 

@@ -1,3 +1,19 @@
+/***************************************************************************
+                          printstuff.c  -  description
+                             -------------------
+    begin                : Mon Jul 10 2000
+    copyright            : (C) 2000 by Terry Biggs
+    email                : tbiggs@infinet.com
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 /*
 * this code is taken form gedit-0.7.9
 * I only changed a few things to make it work with gnomesword
@@ -110,7 +126,7 @@ static  void print_end_job (GnomePrintContext *pc);
 static  void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
 static  void print_pji_destroy (PrintJobInfo *pji);
 static  void print_set_pji ( PrintJobInfo * pji, gchar *doc);
-static  void file_print_preview_cb (GtkWidget *widget, gpointer data);
+//static  void file_print_preview_cb (GtkWidget *widget, gpointer data);
 
 /**
  * file_print:
@@ -195,7 +211,7 @@ file_print(GtkWidget *widget, gchar *current_filename, gint file_printpreview)
 	}
 
 	if (pji->preview)
-	{   /*
+	{
 		GnomePrintMasterPreview *preview;
 		gchar *title;
 
@@ -205,7 +221,7 @@ file_print(GtkWidget *widget, gchar *current_filename, gint file_printpreview)
 		g_free (title);
 		gtk_signal_connect (GTK_OBJECT(preview), "destroy",
 				    GTK_SIGNAL_FUNC(preview_destroy_cb), pji);
-		gtk_widget_show(GTK_WIDGET(preview)); */
+		gtk_widget_show(GTK_WIDGET(preview));
 	}
 	else
 	{
@@ -236,12 +252,13 @@ file_print(GtkWidget *widget, gchar *current_filename, gint file_printpreview)
  * with the 3rd argument = FALSE;
  *
  **/
+ /*
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
 {
 	file_print(NULL, NULL, FALSE);
 }
-
+ */
 
 /**
  * print_document:

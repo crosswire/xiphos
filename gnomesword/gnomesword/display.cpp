@@ -98,7 +98,7 @@ GTKEntryDisp::Display(SWModule &imodule)
 		gtk_statusbar_push (GTK_STATUSBAR (statusbar), context_id2, tmpBuf); //-- show modName and verse ref in statusbar
 		gtk_text_insert(GTK_TEXT(gtkText),sword_font , &gtkText->style->black, NULL, " ", -1);		
 	}
-	else //-- not useing personal comment module in edit mode
+	else //-- not using personal comment module in edit mode
 	{	
 		gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);	//-- show modName and verse ref in text widget
 	}
@@ -335,6 +335,131 @@ GTKInterlinearDisp::Display(SWModule &imodule)
 		gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);		
 		verseBuf[0]='\0';
 	}
+	/**************************************************************************************************************************************/
+	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
+	gtk_text_thaw(GTK_TEXT(gtkText));
+}
+
+//-----------------------------------------------------------------------------------------------
+char                                   //-- this will handle  Robertson's Word Pictures in the New Testament RWP format?????????
+GTKRWPDisp::Display(SWModule &imodule)
+{
+	char 		tmpBuf[800];
+	GdkFont 	*sword_font,
+				*greek_font;
+	gchar   	*myname;
+	bool		findclose,
+				italics_on=FALSE,
+				greek_on=false,
+				bold_on=false,
+				first_time=true;
+	char		verseBuf[800],
+				buf[800];
+	char		*myverse,
+				*font;
+	int		 i,j,len;	
+
+
+	/* Load a italic font */
+ 	italic_font = gdk_font_load ("-adobe-helvetica-medium-o-normal-*-*-120-*-*-p-*-iso8859-1");
+	/* Load a bold font */
+ 	bold_font = gdk_font_load ("-adobe-helvetica-bold-r-normal-*-*-120-*-*-p-*-iso8859-1");
+	/* Load a roman font */
+ 	roman_font = gdk_font_load(font_interlinear);
+	/* Load a verse number font */
+ 	versenum_font = gdk_font_load("-adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1");
+  /* Load a greek font */
+	greek_font = gdk_font_load ("-adobe-symbol-medium-r-normal-*-*-140-*-*-p-*-adobe-fontspecific");
+  	
+	findclose = FALSE;
+	gtk_text_set_point(GTK_TEXT(gtkText), 0);
+	gtk_text_forward_delete (GTK_TEXT (gtkText), gtk_text_get_length((GTK_TEXT(gtkText))));
+	int curPos = 0;
+	(const char *)imodule;	// snap to entry
+	gtk_text_freeze (GTK_TEXT(gtkText));
+	//sprintf(tmpBuf, "[%s] ",imodule.KeyText());
+	//gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf, -1);
+	
+		i=j=0;
+		verseBuf[0]='\0';
+		myverse = g_strdup((const char *)imodule);
+		len = strlen(myverse);
+		while(i<len)
+		{
+			if(myverse[i] == '{' )
+   		{				
+				++i;
+				if(first_time)
+				{
+					sprintf(tmpBuf,"%s",verseBuf);
+					first_time = false;
+				}
+				else
+				{
+					sprintf(tmpBuf,"%s\n\n",verseBuf);		
+				}
+				gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, tmpBuf, -1);
+				j=0;
+				verseBuf[0]='\0';
+				bold_on =  true;    		
+    		}
+			if(myverse[i] == '}')
+   		{
+				++i;
+				gtk_text_insert(GTK_TEXT(gtkText), bold_font, &gtkText->style->black, NULL, verseBuf, -1);
+				j=0;
+				verseBuf[0]='\0';
+				bold_on = false;
+    		}			
+			if(myverse[i] == '\\')
+   		 {				
+				if(!greek_on)
+				{
+					++i;
+					gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+					j=0;
+					verseBuf[0]='\0';
+					greek_on = TRUE;
+				}
+    		}
+			if(myverse[i] == '\\')
+   		 {
+				if(greek_on)
+				{
+					++i;
+					gtk_text_insert(GTK_TEXT(gtkText), greek_font, &gtkText->style->black, NULL, verseBuf, -1);
+					j=0;
+					verseBuf[0]='\0';
+    				greek_on = FALSE;
+    			}
+    		}			
+    		if(myverse[i] == '#')
+   		 {			
+					++i;
+					gtk_text_insert(GTK_TEXT(gtkText),roman_font , &gtkText->style->black, NULL, verseBuf, -1);
+					j=0;
+					verseBuf[0]='\0';
+    		}
+			if(myverse[i] == '|')
+   		 {
+			
+					++i;
+					gtk_text_insert(GTK_TEXT(gtkText),roman_font, &colourRed, NULL, verseBuf, -1);
+					j=0;
+					verseBuf[0]='\0';
+    			
+    		}
+			verseBuf[j] = myverse[i];
+	    	++i;    		
+	    	verseBuf[j+1] = '\0';
+	    	++j;
+		}	
+		if(greek_on) sword_font = italic_font;
+		else if(bold_on) sword_font = bold_font;
+		else sword_font = roman_font;
+		gtk_text_insert(GTK_TEXT(gtkText), sword_font, &gtkText->style->black, NULL, verseBuf, -1);		
+		verseBuf[0]='\0';
+	
 	/**************************************************************************************************************************************/
 	gtk_text_set_point(GTK_TEXT(gtkText), curPos);
 	gtk_text_thaw(GTK_TEXT(gtkText));

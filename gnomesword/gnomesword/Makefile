@@ -81,7 +81,7 @@ ORBIT_LIBS = -L/usr/lib -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lglib -lnsl
 PACKAGE = gnomesword
 PACKAGE_PIXMAPS_DIR = /usr/share/pixmaps/gnomesword
 PTHREAD_LIB = -lpthread
-VERSION = 0.1.8d
+VERSION = 0.1.8f
 XPM_LIBS = -lXpm
 ZVT_LIBS = -rdynamic -lzvt -lutil -lSM -lICE -lgtk -lgdk -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm
 cflags_set = yes
@@ -93,8 +93,8 @@ INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword
 bin_PROGRAMS = gnomesword
 
 #gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
-#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	printstuff.cpp printstuff.h
-gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.cpp printstuff.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	printstuff.c printstuff.h
+gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.c printstuff.h
 #gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h
 
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g

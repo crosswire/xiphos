@@ -22,6 +22,7 @@ GtkWidget* create_AboutSword (void);
 GtkWidget* create_aboutmodules (void);
 GtkWidget* create_dlgSettings (void);
 GtkWidget* create_dialog1 (void);
+GtkWidget* create_listeditor (void);
 
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -927,7 +928,7 @@ on_btnLEright_clicked                  (GtkButton       *button,
                                         gpointer         user_data);
 
 void
-on_btnGotoVerse_clicked                (GtkButton       *button,
+on_btnLEgotoverse_clicked                (GtkButton       *button,
                                         gpointer         user_data);
 
 void
