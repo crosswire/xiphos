@@ -215,6 +215,7 @@ const char *backend_get_next_result_key(void)
 	
 	while(!results.Error()) {
 		retval = results.getText();
+		g_warning(retval);
 		results++;
 		return retval;
 	}

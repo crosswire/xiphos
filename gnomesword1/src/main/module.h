@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 	
-
+int is_module_rtl(char * mod_name);
 int get_module_number(char *module_name, char *module_type);
 int get_mod_type(char * mod_name);
 int do_module_search(char * module_name ,char *search_string, 
@@ -46,4 +46,3 @@ char *get_striptext(int manager, char *module_name, char *key);
 #endif
 
 #endif
-

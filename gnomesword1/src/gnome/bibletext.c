@@ -574,6 +574,7 @@ void gui_setup_text(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modbuf;
+	gchar *direction;
 	TEXT_DATA *t;
 	gint count = 0;
 
@@ -600,7 +601,7 @@ void gui_setup_text(GList * mods)
 			t->is_locked = 0;
 			t->cipher_old = NULL;
 		}
-
+		t->is_rtol = is_module_rtl(t->mod_name);
 		t->frame = NULL;
 		add_vbox_to_notebook(t);
 		text_list = g_list_append(text_list, (TEXT_DATA *) t);

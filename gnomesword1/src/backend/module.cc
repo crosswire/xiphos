@@ -75,6 +75,39 @@ extern ListKey search_scope_list;
 extern SWKey *current_scope;
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   int
+ */
+
+int backend_is_module_rtl(char * mod_name)
+{
+	int retval = 0;
+	char *direction = NULL;
+	
+	SWModule *module = sw.main_mgr->Modules[mod_name];
+	if(module)
+		direction = (char*)module->getConfigEntry("Direction");
+	if(direction)
+		if(!strcmp(direction,"RtoL"))
+			retval = 1;
+		
+	return retval;
+		
+}
+
+
 
 /******************************************************************************
  * Name
