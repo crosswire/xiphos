@@ -259,7 +259,6 @@ int init_spell(void)
 
 	CORBA_exception_init (&ev);
 	spell_language = NULL;
-//	GNOME_Spell_Dictionary_getLanguages (en, &ev);
 	return 1;
 }
 

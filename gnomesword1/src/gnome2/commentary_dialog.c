@@ -368,7 +368,7 @@ static gboolean html_key_press_event(GtkWidget * widget,
 				      COMM_DATA * vc)
 {
 	vc->ec->changed = TRUE;
-	g_warning("html_key_press_event");
+	//g_warning("html_key_press_event");
 	gui_update_statusbar(vc->ec);
 	return FALSE;
 	
