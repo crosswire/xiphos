@@ -124,6 +124,7 @@ static void paragraph_style_menu_item_activated_cb(GtkWidget * widget,
 	/* g_warning ("Setting paragraph style to %d.", style); */
 
 	gtk_html_set_paragraph_style(html, style);
+	
 }
 
 /******************************************************************************
