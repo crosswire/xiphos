@@ -1,13 +1,13 @@
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword-1.0, 0.9.dev11)
+AM_INIT_AUTOMAKE(gnomesword2, 0.9.dev12)
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_MAKE_SET
 
-AC_ARG_ENABLE(gnome2,[--enable-gnome2 build for gnome2],gnome2=$enableval,gnome2="no") 
+AC_ARG_ENABLE(gnome2,[--enable-gnome1 build for gnome1],gnome1=$enableval,gnome1="no") 
 
-if test "x$gnome2" = xyes; then
+if test "x$gnome1" = xno; then
 	AC_DEFINE(USE_GNOME2, 1, [Define if you want to use Gnome2])
 	DIRS="backend main gnome2"
 	AC_SUBST(DIRS)
@@ -39,7 +39,7 @@ AC_PROG_CXX
 AC_LANG_CPLUSPLUS
 
 
-GETTEXT_PACKAGE=gnomesword-1.0
+GETTEXT_PACKAGE=gnomesword-2.0
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTTEXT_PACKAGE", [Package name for gettext])
 
@@ -95,7 +95,7 @@ if test "x$spell_check" = xyes; then
       speller="pspell"
       AC_DEFINE(USE_PSPELL, 1, [Define if you want to use pspell])
       AC_DEFINE(USE_SPELL, 1, [Define if you want to spell checking])
-      PSPELL_LIBS="-L$pspell_dir -lpspell -laspell -lltdl"
+      PSPELL_LIBS="-L$pspell_dir -laspell -lltdl"
       AC_SUBST(PSPELL_LIBS) 
       echo "found pspell-config"
     fi
@@ -127,7 +127,7 @@ packagedocdir=doc/${PACKAGE}
 dnl Set PACKAGE DIRs in config.h.
 packagepixmapsdir=share/pixmaps/${PACKAGE}
 packagehelpdir=share/gnome/help/${PACKAGE}
-packagemenudir=share/gnome/apps
+packagemenudir=share/applications
 
 dnl Subst PACKAGE_DATA_DIR.
 NO_PREFIX_PACKAGE_DATA_DIR="${packagedatadir}"
@@ -177,14 +177,14 @@ src/backend/Makefile
 src/gnome/Makefile
 src/gnome2/Makefile
 src/main/Makefile
-gnomesword-1.0.desktop
+gnomesword2.desktop
 ])
 
 echo
 echo "Summary of GnomeSword configuration:"
 echo
 
-if test "x$gnome2" = xyes; then
+if test "x$gnome1" = xno; then
 	echo "Building for Gnome:              2.x"  
 else
          echo "Building for Gnome:              1.4.x"
