@@ -159,7 +159,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		}
 		++url;
 		buf = g_strdup(url);
-		changeVerseSWORD(buf);
+		change_verse(buf);
 		g_free(buf);
 
 	}
@@ -167,7 +167,7 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	else if (*url == 'I') {
 		++url;
 		buf = g_strdup(url);
-		changeVerseSWORD(buf);
+		change_verse(buf);
 		g_free(buf);
 	}
 	/***  module name  ***/
@@ -568,7 +568,7 @@ void on_html_lookup_word_activate(GtkMenuItem * menuitem, gchar * modDesc)
 	if (strcmp(modDesc, "current")) {
 				    /***  if menu choice was not 'use current dict' ***/
 		memset(modName, 0, 16);
-		modNameFromDesc(modName, modDesc);
+		backend_module_name_from_description(modName, modDesc);
 	}
 
 	else {
@@ -599,7 +599,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	if (strcmp(modDesc, "current")) {
 				    /***  if menu choice was not 'use current dict' ***/
 		memset(modName, 0, 16);
-		modNameFromDesc(modName, modDesc);
+		backend_module_name_from_description(modName, modDesc);
 	}
 
 	else {

@@ -283,7 +283,7 @@ void on_lookup_word_activate(GtkMenuItem * menuitem,
 
     g = getgbs(gbs_list);
     memset(modName, 0, 16);
-    modNameFromDesc(modName, modDescription);
+    backend_module_name_from_description(modName, modDescription);
     key = lookupGS_HTML(g->html, TRUE);
     if (key) {
 	display_dictlex_in_viewer(modName, key, settings);
@@ -301,7 +301,7 @@ void on_lookup_selection_activate(GtkMenuItem * menuitem,
 
     g = getgbs(gbs_list);
     memset(modName, 0, 16);
-    modNameFromDesc(modName, modDescription);
+    backend_module_name_from_description(modName, modDescription);
     key = lookupGS_HTML(g->html, FALSE);
     if (key) {
 	display_dictlex_in_viewer(modName, key, settings);

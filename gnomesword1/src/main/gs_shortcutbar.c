@@ -207,7 +207,7 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 		}
 
 		else
-			changeVerseSWORD(key);
+			change_verse(key);
 	}
 }
 
@@ -433,7 +433,7 @@ static void on_about_item_activate(GtkMenuItem * menuitem,
 				       group_num, item_num, &item_url,
 				       &item_name, NULL);
 	memset(modname, 0, 16);
-	modNameFromDesc(modname, item_name);
+	backend_module_name_from_description(modname, item_name);
 	display_about_module_dialog(modname, FALSE);
 	g_free(item_url);
 	g_free(item_name);
@@ -537,7 +537,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 	while (glist != NULL) {
 		memset(modName, 0, 16);
-		modNameFromDesc(modName, (gchar *) glist->data);
+		backend_module_name_from_description(modName, (gchar *) glist->data);
 		sbtype = 0;
 		sbtype = backend_sb_type_from_modname(modName);
 		if (sbtype < 0)
@@ -598,7 +598,7 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 	group_num =
 	    e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
 	memset(modName, 0, 16);
-	modNameFromDesc(modName, (gchar *) user_data);
+	backend_module_name_from_description(modName, (gchar *) user_data);
 	sbtype = 0;
 	sbtype = backend_sb_type_from_modname(modName);
 	if (sbtype < 0)
@@ -1048,7 +1048,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 						       &type, &ref,
 						       &icon_pixbuf);
 			memset(modName, 0, 16);
-			modNameFromDesc(modName, ref);
+			backend_module_name_from_description(modName, ref);
 
 			if (group_num == groupnum0) {
 				gint sbtype;
@@ -1104,7 +1104,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			}
 
 			if (group_num == groupnum4) {
-				changeVerseSWORD(ref);
+				change_verse(ref);
 			}
 
 			if (group_num == groupnum8) {
@@ -1184,7 +1184,7 @@ void vl_link_clicked(const gchar * url, SETTINGS * s)
 {
 	backend_verselist_change_verse(s, (gchar *) url);
 	if(s->showinmain)
-		changeVerseSWORD((gchar *) url);	
+		change_verse((gchar *) url);	
 }
 void setupSB(SETTINGS * s)
 {
@@ -1217,7 +1217,7 @@ void setupSB(SETTINGS * s)
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
 			memset(modName, 0, 16);
-			modNameFromDesc(modName, (gchar *) tmp->data);
+			backend_module_name_from_description(modName, (gchar *) tmp->data);
 			sbtype = 0;
 			sbtype = backend_sb_type_from_modname(modName);
 			if (sbtype < 0)
@@ -1541,7 +1541,7 @@ void update_shortcut_bar(SETTINGS * s)
 						     E_ICON_BAR_LARGE_ICONS);
 		while (tmp != NULL) {
 			memset(modName, 0, 16);
-			modNameFromDesc(modName, (gchar *) tmp->data);
+			backend_module_name_from_description(modName, (gchar *) tmp->data);
 			sbtype = 0;
 			sbtype = backend_sb_type_from_modname(modName);
 			if (sbtype < 0)

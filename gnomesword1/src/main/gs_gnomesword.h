@@ -295,6 +295,10 @@ void search_module(SETTINGS *s, SEARCH_OPT *so);
 gchar *get_module_key(SETTINGS *s);
 gchar *get_module_name(SETTINGS *s);
 void change_module_and_key(gchar *module_name, gchar *key);
+void set_module_global_options(gchar * option, gint window, 
+		gboolean choice, gboolean showchange);
+void change_verse(gchar *key);
+void update_interlinear_page(SETTINGS * s);
 
 #ifdef __cplusplus
 }

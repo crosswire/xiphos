@@ -58,7 +58,7 @@ project.config.extra.modules.after=
 
 module.include.name=.
 module.include.type=
-module.include.expanded=1
+module.include.expanded=0
 module.include.files=\
 	src/backend/viewtext.h\
 	src/backend/viewdict.h\
