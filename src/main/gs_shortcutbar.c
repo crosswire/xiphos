@@ -1004,7 +1004,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 //      if(item_num == -1) {
 //              if(group_num == groupnum2) /* change work space notebook to commentary page */
-//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook),0);
+//                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_upper),0);
 //              if(group_num == groupnum3) /* change Dictionayr - Books notebook to Dict page */
 //                      gtk_notebook_set_page(GTK_NOTEBOOK(settings.workbook_lower),0);
 //              if(group_num == groupnum8) /* change Dictionayr - Books notebook to Dict page */
@@ -1058,7 +1058,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 							  settings.currentverse);
 					gtk_notebook_set_page
 					    (GTK_NOTEBOOK
-					     (settings.workbook), 0);
+					     (settings.workbook_upper), 0);
 				}
 			}
 

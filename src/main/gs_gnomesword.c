@@ -177,6 +177,7 @@ void gnomesword_shutdown(SETTINGS * s)
 	GtkWidget *msgbox;
 	gint answer = 0;
 
+	
 	/* if study pad file has changed since last save */
 	if (s->modifiedSP) {
 		msgbox = create_InfoBox();
@@ -195,6 +196,9 @@ void gnomesword_shutdown(SETTINGS * s)
 			break;
 		}
 	}
+	
+	/* shutdown the sword stuff */
+	backend_shutdown(s);
 	
 	shutdown_list();
 	g_list_free(s->settingslist);

@@ -28,7 +28,6 @@
 #include "gs_gnomesword.h"
 #include "sword.h"
 #include "gs_history.h"
-#include "gs_gui_cb.h"
 #include "gs_menu.h"
 #include "support.h"
 #include "settings.h"
