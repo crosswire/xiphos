@@ -38,6 +38,7 @@
 #define HINT_COLOR "#ffffbf"
 HINT hint;
 
+
 /******************************************************************************
  * Name
  *    
@@ -107,6 +108,8 @@ static void create_hint_window(void)
 	gtk_window_set_default_size(GTK_WINDOW(hint.hint_window), 191, 83);
 	gtk_window_set_resizable(GTK_WINDOW(hint.hint_window),FALSE);
 	gtk_window_set_decorated(GTK_WINDOW(hint.hint_window), FALSE);
+	gtk_window_set_skip_taskbar_hint (GTK_WINDOW(hint.hint_window),TRUE);
+	gtk_window_set_skip_pager_hint (GTK_WINDOW(hint.hint_window),TRUE); 
 	gtk_widget_show(hint.hint_window);
 
 	frame = gtk_frame_new(NULL);
@@ -169,7 +172,7 @@ void gui_display_in_hint_window(gchar * note)
 			return;
 		
 		gtk_window_set_modal(GTK_WINDOW(hint.hint_window), TRUE);
-		str = g_string_new("");
+		str = g_string_new(NULL);
 		html = GTK_HTML(hint.html_widget);
 		htmlstream =
 		    gtk_html_begin_content(html, "text/html; charset=utf-8");
@@ -185,8 +188,7 @@ void gui_display_in_hint_window(gchar * note)
 			gtk_main_iteration();
 		}
 		
-		/*gtk_window_set_position(GTK_WINDOW(hint.hint_window),
-				GTK_WIN_POS_MOUSE);*/
+		
 		gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
 		if(x < settings.app_x){
 			gtk_window_set_position(GTK_WINDOW(hint.hint_window),
@@ -207,6 +209,7 @@ void gui_display_in_hint_window(gchar * note)
 		g_string_free(str, TRUE);
 		gtk_window_set_modal(GTK_WINDOW(hint.hint_window), FALSE);
 	}
+	
 }
 
 
