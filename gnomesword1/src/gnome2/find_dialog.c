@@ -180,10 +180,14 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	GtkWidget *hbox66;
 	GtkWidget *dialog_action_area29;
 	GtkWidget *hbuttonbox8;
-	gchar title[80];
-	
-	sprintf(title,"%s - %s", settings.program_title, _("Find"));
-	
+	GtkWidget *alignment;
+	GtkWidget *hbox5;
+	GtkWidget *image;
+	GtkWidget *label12;
+	//gchar title[80];
+
+	//sprintf(title, "%s - %s", settings.program_title, _("Find"));
+
 	dialog = g_new(FIND_DIALOG, 1);	/* must be freed */
 	dialog->regular = FALSE;
 	dialog->htmlwidget = htmlwidget;
@@ -192,18 +196,20 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	dialog->dialog = gtk_dialog_new();
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog),
 			    "dialog->dialog", dialog->dialog);
-	gtk_window_set_title(GTK_WINDOW(dialog->dialog),
-			     title);
+	gtk_window_set_title(GTK_WINDOW(dialog->dialog), _("Find"));
 	GTK_WINDOW(dialog->dialog)->type = GTK_WINDOW_TOPLEVEL;
-	gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
-			      FALSE);
+	/*gtk_window_set_policy(GTK_WINDOW(dialog->dialog), TRUE, TRUE,
+			      FALSE);*/
+  	gtk_container_set_border_width (GTK_CONTAINER (dialog->dialog), 6);
+  	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+  	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
 
 	dialog_vbox29 = GTK_DIALOG(dialog->dialog)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dialog->dialog), "dialog_vbox29",
 			    dialog_vbox29);
 	gtk_widget_show(dialog_vbox29);
 
-	vbox45 = gtk_vbox_new(FALSE, 0);
+	vbox45 = gtk_vbox_new(FALSE, 12);
 	gtk_widget_show(vbox45);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox29), vbox45, TRUE, TRUE,
 			   0);
@@ -255,20 +261,40 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_box_pack_start(GTK_BOX(dialog_action_area29), hbuttonbox8,
 			   TRUE, TRUE, 0);
 
-	dialog->find = gtk_button_new_with_label(_("Find"));
+	dialog->close = gtk_button_new_from_stock("gtk-close");	//gtk_button_new_with_label(_("Close"));
+	gtk_widget_show(dialog->close);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
+	//GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
+
+	dialog->next = gtk_button_new();
+	gtk_widget_show(dialog->next);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
+	//GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
+
+	alignment = gtk_alignment_new(0.5, 0.5, 0, 0);
+	gtk_widget_show(alignment);
+	gtk_container_add(GTK_CONTAINER(dialog->next), alignment);
+
+	hbox5 = gtk_hbox_new(FALSE, 2);
+	gtk_widget_show(hbox5);
+	gtk_container_add(GTK_CONTAINER(alignment), hbox5);
+
+	image =
+	    gtk_image_new_from_stock("gtk-find", GTK_ICON_SIZE_BUTTON);
+	gtk_widget_show(image);
+	gtk_box_pack_start(GTK_BOX(hbox5), image, FALSE, FALSE, 0);
+
+	label12 = gtk_label_new_with_mnemonic(_("Find Next"));
+	gtk_widget_show(label12);
+	gtk_box_pack_start(GTK_BOX(hbox5), label12, FALSE, FALSE, 0);
+	gtk_label_set_justify(GTK_LABEL(label12), GTK_JUSTIFY_LEFT);
+
+	dialog->find = gtk_button_new_from_stock("gtk-find");	//gtk_button_new_with_label(_("Find"));
 	gtk_widget_show(dialog->find);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
 	GTK_WIDGET_SET_FLAGS(dialog->find, GTK_CAN_DEFAULT);
 
-	dialog->next = gtk_button_new_with_label(_("Find Next"));
-	gtk_widget_show(dialog->next);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
-	GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
 
-	dialog->close = gtk_button_new_with_label(_("Close"));
-	gtk_widget_show(dialog->close);
-	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
-	GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);
 
 
 	gtk_signal_connect(GTK_OBJECT(dialog->dialog), "destroy",
@@ -301,13 +327,13 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 static void find_dialog(GtkWidget * htmlwidget, const gchar * title)
 {
 	if (dialog) {
-		gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
+		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		dialog->htmlwidget = htmlwidget;
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
 		gdk_window_raise(GTK_WIDGET(dialog->dialog)->window);
 	} else {
 		create_find_dialog(htmlwidget);
-		gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
+		//gtk_window_set_title(GTK_WINDOW(dialog->dialog), title);
 		gtk_widget_show(GTK_WIDGET(dialog->dialog));
 	}
 }

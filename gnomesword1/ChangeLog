@@ -6,7 +6,6 @@
 	  to the HIG it's called by gui_gs_dialog().
 	
 
-
 2003-12-02  Terry <tbiggs@users.sf.net>
 
 	* work in dialog.c 
