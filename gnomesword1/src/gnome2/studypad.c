@@ -67,49 +67,6 @@
 
 static GtkHTMLEditorAPI *editor_api;
 
-gboolean
-on_studypad_delete                        (GtkWidget       *widget,
-                                        GdkEvent        *event,
-                                        GSHTMLEditorControlData *ecd)
-{
-	gchar *filename = NULL;
-	gchar *buf = NULL;
-	gint test;
-	GS_DIALOG *info;
-	GString *str;
-	
-	if (settings.modifiedSP) {
-		str = g_string_new("");
-		info = gui_new_dialog();
-		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
-		if (settings.studypadfilename)
-			buf = settings.studypadfilename;
-		else
-			buf = N_("File");
-		g_string_printf(str,
-			"<span weight=\"bold\">%s</span>\n\n%s",
-			buf,
-			_("has been modified. Do you wish to save it?"));
-		info->label_top = str->str;
-		info->yes = TRUE;
-		info->no = TRUE;
-
-		test = gui_alert_dialog(info);
-		if (test == GS_YES) {
-			if (settings.studypadfilename) {
-				filename = g_strdup(settings.studypadfilename);
-				save_file(filename, ecd);
-			} else {
-				gui_fileselection_save(ecd,TRUE);
-			}
-		}
-		settings.modifiedSP = FALSE;
-		g_free(info);
-		g_string_free(str,TRUE);
-	}
-	return FALSE;
-}
-	
 
 /******************************************************************************
  * Name
@@ -135,6 +92,7 @@ void gui_studypad_can_close(void)
 	GS_DIALOG *info;
 	GString *str;
 	
+	g_message("gui_studypad_can_close");
 	if (settings.modifiedSP) {
 		str = g_string_new("");
 		info = gui_new_dialog();

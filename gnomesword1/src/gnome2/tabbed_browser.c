@@ -29,7 +29,6 @@
 
 
 #include "gui/gnomesword.h"
-//#include "gui/gtkhtml_display.h"
 #include "gui/tabbed_browser.h"
 #include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
@@ -52,7 +51,7 @@
 #include "main/sword.h"
 #include "main/tab_history.h"
 #include "main/xml.h"
-
+	
 static GtkWidget* tab_widget_new(PASSAGE_TAB_INFO *tbinf,
 					const gchar *label_text);
 void notebook_main_add_page(PASSAGE_TAB_INFO *tbinf);
@@ -378,7 +377,7 @@ void gui_load_tabs(const gchar *filename)
 			pt->history_items = 0;	
 			pt->current_history_item = 0;
 			pt->first_back_click = TRUE;
-			main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
+//			main_add_tab_history_item((PASSAGE_TAB_INFO*)pt);
 			passage_list = g_list_append(passage_list, (PASSAGE_TAB_INFO*)pt);
 			notebook_main_add_page(pt);
 		}
