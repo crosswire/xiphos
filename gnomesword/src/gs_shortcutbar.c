@@ -35,6 +35,7 @@
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
 #include  <gal/shortcut-bar/e-vscrolled-bar.h>
+#include <gal/widgets/e-unicode.h>
 
 #include  "gs_shortcutbar.h"
 #include  "gs_gnomesword.h"
@@ -1962,7 +1963,7 @@ void setupSB(SETTINGS * s)
 	if (s->showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 _("Dict/Lex"));
+				 e_utf8_from_locale_string(_("Dict/Lex")));
 		filename = "Dictionaries.conf";
 		tmp = loadshortcutbarSW(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
@@ -2255,7 +2256,7 @@ void update_shortcut_bar(SETTINGS * s)
 	if (s->showdictgroup) {
 		groupnum3 =
 		    add_sb_group((EShortcutBar *) shortcut_bar,
-				 _("Dict/Lex"));
+				 e_utf8_from_locale_string(_("Dict/Lex")));
 		filename = "Dictionaries.conf";
 		tmp = loadshortcutbarSW(filename, group_name, icon_size);
 		large_icons = atoi(icon_size);
