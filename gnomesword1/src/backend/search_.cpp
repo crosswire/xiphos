@@ -34,20 +34,21 @@
 
 #include "backend/display.h"
 #include "backend/sword.h"
-#include "main/gs_gnomesword.h"
 #include "backend/search_.h"
+#include "backend/sword_defs.h"
+
 #include "main/settings.h"
+#include "main/gs_gnomesword.h"
 
 /******************************************************************************
  * static
- *****************************************************************************/
+ */
 static SWDisplay 
 	*display;	/* to display modules in searchresults */
 	
-static SWMgr 
-	*mgr; 
 static SWModule 
 	*mod;   /* module for searchresults */
+
 
 /******************************************************************************
  * Name
@@ -72,7 +73,6 @@ GList* backend_do_search(gpointer *usr_data)
         SWKey	*currentScope; //----------- use to set scope of search	
 	SWModule *searchMod,
 			*tmpMod;
-	SWMgr *searchMgr;
 	ModMap::iterator 
 		it;
 			
@@ -94,13 +94,12 @@ GList* backend_do_search(gpointer *usr_data)
 	search_opts = (SEARCH_OPT *)usr_data;	
 	tmpbuf = g_string_new("");	
 	list = NULL;	
-	searchMgr = new SWMgr();	//-- create sword mgr
 	
 	searchMod = NULL;
 	
 	if(search_opts->module_name) {
-		  it = searchMgr->Modules.find (search_opts->module_name);
-		  if (it != searchMgr->Modules.end ()) {
+		  it = sw_mgr.search->Modules.find (search_opts->module_name);
+		  if (it != sw_mgr.search->Modules.end ()) {
 			    searchMod = (*it).second;
 			    tmpMod = (*it).second;
 		  } else return list;
@@ -161,13 +160,13 @@ GList* backend_do_search(gpointer *usr_data)
 	
 	if(count){
 		ModMap::iterator it; 	
-		it = mgr->Modules.find(searchMod->Name());
-		if (it != mgr->Modules.end()){ //-- if we find the module	
+		it = sw_mgr.results->Modules.find(searchMod->Name());
+		if (it != sw_mgr.results->Modules.end()){ //-- if we find the module	
 			mod = (*it).second;  //-- change module to new module
 		}
 	}
 			
-	delete searchMgr;
+	
 	g_string_free(tmpbuf,TRUE);
 	return list;
 }
@@ -193,11 +192,11 @@ void backend_setup_search_results_display(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	mgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
+		
 	mod     = NULL;
 	display = new  GtkHTMLEntryDisp(html_widget);
 	
-	for(it = mgr->Modules.begin(); it != mgr->Modules.end(); it++){
+	for(it = sw_mgr.results->Modules.begin(); it != sw_mgr.results->Modules.end(); it++){
 		mod = (*it).second;
 			mod->Disp(display);
 	}
@@ -220,7 +219,7 @@ void backend_setup_search_results_display(GtkWidget *html_widget)
  */
 void backend_shutdown_search_results_display(void) 
 {	
-	delete mgr;	
+		
 	if(display)
 		delete display;	
 }

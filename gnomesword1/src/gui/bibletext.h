@@ -68,6 +68,7 @@ struct _text_find_dialog {
 
 typedef struct _text_data TEXT_DATA;
 struct _text_data {
+	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *frame_toolbar;
@@ -86,6 +87,7 @@ void gui_get_module_global_options(TEXT_DATA * t);
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
 void gui_display_text(gchar * key);
+void gui_add_new_text_pane(TEXT_DATA * t);
 void gui_add_global_option_buttons(GtkWidget * toolbar, 
 				      gchar * mod_name, 
 				      TEXT_GLOBALS * tgs, 

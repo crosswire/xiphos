@@ -35,6 +35,7 @@
 
 #include "backend/bibletext_.h"
 #include "backend/sword.h"
+#include "backend/sword_defs.h"
 
 
 /******************************************************************************
@@ -158,6 +159,9 @@ void backend_set_text_global_option(char * option, char * yesno)
 	 * turn option on or off 
 	 */
 	mgr->setGlobalOption(option, yesno);
+	
+	sw_mgr.search->setGlobalOption(option, yesno);
+	sw_mgr.results->setGlobalOption(option, yesno);
 }
 
 /******************************************************************************

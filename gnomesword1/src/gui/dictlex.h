@@ -34,6 +34,7 @@ struct _DLFindDialog {
 
 typedef struct _dldata DL_DATA;
 struct _dldata {
+	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
 	GtkWidget *clist;
@@ -48,6 +49,7 @@ struct _dldata {
 
 void gui_display_dictlex(gchar * key);
 void gui_set_dictionary_page_and_key(gint page_num, gchar * key);
+void gui_add_new_dict_pane(DL_DATA *dl);
 void gui_setup_dictlex(GList *mods);
 void gui_shutdown_dictlex(void);
 void on_entryDictLookup_changed(GtkEditable * editable,
