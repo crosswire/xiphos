@@ -1,14 +1,11 @@
 dnl Process this file with autoconf to produce a configure script.
  
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.5.1a)
+AM_INIT_AUTOMAKE(gnomesword, 0.5.2)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
 AM_ACLOCAL_INCLUDE(macros)
-
-AC_ENABLE_SHARED(no)
-AC_ENABLE_STATIC(yes)
  
 GNOME_INIT
 AC_ISC_POSIX
@@ -116,11 +113,6 @@ AC_SUBST(SWORD_LIBS)
  
 AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
 
-AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking],spellchecking=$enableval,spellchecking="no") 
-AC_ARG_ENABLE(printing,[--enable-printing		enable printing],printing=$enableval,printing="no")
-AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
-AC_ARG_ENABLE(all,[--enable-all		enable all]all,all=$enableval,all="no")
-
 have_speller="no"
 dnl looking for aspell 
 
@@ -156,14 +148,13 @@ have_pixbuf="no"
  if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
     AC_MSG_RESULT(found)
         PIXBUF_LIBS=`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`
-        PIXBUF_CFLAGS=`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf`
+        PIXBUF_CFLAGS=`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf `
         AC_SUBST(PIXBUF_LIBS)
         AC_SUBST(PIXBUF_CFLAGS)
     have_pixbuf="yes"
  else
     AC_MSG_RESULT(Did not find gdkpixbuf installed)
  fi
-
 
 dnl ******************************
 dnl GnomePrint checking
@@ -179,13 +170,12 @@ have_gnomeprint="no"
         GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
         AC_SUBST(GNOME_PRINT_LIBS)
         AC_SUBST(GNOME_PRINT_CFLAGS)
-        AC_DEFINE(USE_GNOMEPRINT, 1, [Define if you want to use printing w/gnome-print])
         have_gnomeprint="yes"
     else
-        AC_MSG_RESULT(You need at least GNOME print 0.20 for this version of gnomesword)
+        AC_MSG_ERROR(You need at least GNOME print 0.20 for this version of gnomesword)
     fi
  else
-    AC_MSG_RESULT(Did not find GnomePrint installed)
+    AC_MSG_ERROR(Did not find GnomePrint installed)
  fi
 
 dnl ******************************
@@ -232,7 +222,7 @@ AC_MSG_CHECKING(for GtkHTML)
 if $gtkhtml_ok; then
 	AC_MSG_RESULT($vers found)
 else
-	AC_MSG_ERROR(GtkHTML 0.8.x is required to build gnomesword)
+	AC_MSG_ERROR(GtkHTML 0.9.x is required to build gnomesword)
 fi
 
 GTKHTML_CFLAGS="`gnome-config --cflags gtkhtml`"
@@ -255,19 +245,8 @@ if test "x$GCC" = "xyes"; then
   fi
 fi
 
-if test "x$spellchecking" = xyes || test "x$all" = xyes; then
-	AC_DEFINE(USE_SPELL, 1, [Define if you want to use spell checking])
-fi
-
-AC_DEFINE(USE_SHORTCUTBAR, 1, [Define if you want to use the shortcutbar])
-
 AM_CONDITIONAL(SHORTCUTBAR,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xno)
 AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes && test "x$have_speller" = xyes)
-AM_CONDITIONAL(SPELLING,test "x$have_speller" = xyes && test "x$have_gnomeprint" = xno && test "x$have_gal" = xno)
-AM_CONDITIONAL(PRINTING,test "x$have_gnomeprint" = xyes && test "x$have_pixbuf" = xyes && test "x$have_speller" = xno && test "x$have_gal" = xno)
-AM_CONDITIONAL(SPELLING_PRINTING,test "x$have_gnomeprint" = xyes && test "x$have_pixbuf" = xyes && test "x$have_speller" = xyes && test "x$have_gal" = xno)
-AM_CONDITIONAL(NO_OPS,test "x$have_gnomeprint" = xno && test "x$have_speller" = xno && test "x$have_gal" = xno)
-
 
 AC_OUTPUT([
 Makefile
@@ -275,7 +254,6 @@ help/Makefile
 macros/Makefile
 src/Makefile
 ])
-
 
 echo
 echo "Summary of GnomeSword configuration:"
@@ -285,16 +263,4 @@ if test "x$have_speller" = xyes; then
         echo "Spellchecking:                enabled"
 else
         echo "Spellchecking:                disabled"
-fi
-
-if test "x$have_gnomeprint" = xyes; then
-        echo "Printing:                         enabled"
-else
-	echo "Printing:                         disabled"
-fi
-
-if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes; then
-        echo "GnomeSword will be built with the Evolution shortcut bar"
-else
-        echo "GnomeSword will be built without the Evolution shortcut bar"
 fi

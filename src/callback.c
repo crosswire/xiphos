@@ -199,11 +199,16 @@ on_edit_quickmarks_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_search1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if (firstsearch) {
-		searchDlg = createSearchDlgSWORD();
-		firstsearch = FALSE;
-	}
-	gtk_widget_show(searchDlg);
+	SETTINGS *s;
+	EShortcutBar *bar1;
+		
+	s = settings;
+	bar1 = E_SHORTCUT_BAR(s->shortcut_bar);
+	e_paned_set_position (E_PANED(lookup_widget(s->app,"epaned")), s->shortcutbar_width);
+	s->showshortcutbar = TRUE;		
+	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
+						 s->searchbargroup,
+						 TRUE);
 }
 //----------------------------------------------------------------------------------------------
 void
@@ -297,7 +302,6 @@ void on_mainwindow_destroy(GtkObject * object, gpointer user_data)
 	shutdownSWORD();
 }
 
-
 //----------------------------------------------------------------------------------------------
 void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 {
@@ -310,13 +314,8 @@ void on_btnSearch_clicked(GtkButton * button, gpointer user_data)
 	s->showshortcutbar = TRUE;		
 	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
 						 s->searchbargroup,
-						 TRUE);		
-	/*if (firstsearch) {
-		searchDlg = createSearchDlgSWORD();
-	}
-	gtk_widget_show(searchDlg);*/
+						 TRUE);
 }
-
 
 //----------------------------------------------------------------------------------------------
 void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
@@ -716,6 +715,5 @@ on_epaned_button_release_event(GtkWidget       *widget,
 void on_listeditor_destroy(GtkObject * object, gpointer user_data)
 {
 	firstLE = TRUE;
-	destroyListEditorSWORD();
 }
 
