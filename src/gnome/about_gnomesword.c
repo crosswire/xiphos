@@ -1,7 +1,7 @@
 
  /*
     GnomeSword Bible Study Tool
-    *  gs_abouts.c - About dialogs for GnomeSword
+    *  about_gnomesword.c - About dialogs for GnomeSword
     *
     *  Copyright (C) 2000,2001,2002 GnomeSword Developer Team
     *
