@@ -1,3 +1,8 @@
+2002-07-22  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* moved main/find_dlg_defs.h to gui/find_dlg_defs.h
+	
+
 2002-07-18  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed main/gs_html.* to gui/html.h and gnome/html.c

@@ -38,6 +38,7 @@
 #include "gui/history.h"
 #include "gui/html.h"
 #include "gui/utilities.h"
+#include "gui/about_modules.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
@@ -68,7 +69,7 @@ GtkWidget *htmlTexts;
  
 void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	display_about_module_dialog((char *) user_data, FALSE);
+	gui_display_about_module_dialog((char *) user_data, FALSE);
 }
 
 
@@ -525,7 +526,7 @@ static GnomeUIInfo settings1_menu_uiinfo[] = {
 	{
 	    GNOME_APP_UI_TOGGLEITEM, N_("Verse Style"),
 	    NULL,
-	    (gpointer) on_verse_style1_activate, NULL, NULL,
+	    NULL, NULL, NULL,
 	    GNOME_APP_PIXMAP_NONE, NULL,
 	    0, (GdkModifierType) 0, NULL
 	},
@@ -745,7 +746,8 @@ void gui_create_main_menu(GtkWidget *app)
 			    view1_menu_uiinfo[4].widget,
 			    (GtkDestroyNotify) gtk_widget_unref);
 	
-	gui_add_mods_to_menus(get_list(DICT_LIST), _("_View/New Dictionary Dialog/"),
+	gui_add_mods_to_menus(get_list(DICT_LIST),
+			_("_View/New Dictionary Dialog/"),
 			  (GtkMenuCallback)on_dictlex_item_activate);
 	
 	
@@ -767,7 +769,11 @@ void gui_create_main_menu(GtkWidget *app)
 	gtk_object_set_data_full (GTK_OBJECT(app), "verse_style",
                             settings1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
+	
 	settings.versestyle_item = settings1_menu_uiinfo[0].widget;
+			    
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
+			settings.versestyle_item), settings.versestyle);
 
 	gtk_widget_ref(settings1_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "preferences1",
@@ -804,48 +810,70 @@ void gui_create_main_menu(GtkWidget *app)
 				 about_sword_modules1_menu_uiinfo
 				 [0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+				 
+	
+	gui_add_mods_to_menus(get_list(TEXT_LIST), 
+			_("_Help/About Sword Modules/Bible Texts/"),
+			(GtkMenuCallback)gui_about_activate);
+/*
 	gtk_widget_ref(bible_texts1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "separator15",
 				 bible_texts1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+*/
 	gtk_widget_ref(about_sword_modules1_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "commentaries1",
 				 about_sword_modules1_menu_uiinfo[1].
 				 widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+				 
+	gui_add_mods_to_menus(get_list(COMM_LIST), 
+			_("_Help/About Sword Modules/Commentaries/"),
+			(GtkMenuCallback)gui_about_activate);
+/*
 	gtk_widget_ref(commentaries1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "separator16",
 				 commentaries1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+*/
 	gtk_widget_ref(about_sword_modules1_menu_uiinfo[2].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "dictionaries_lexicons1",
 				 about_sword_modules1_menu_uiinfo
 				 [2].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+		
+	gui_add_mods_to_menus(get_list(DICT_LIST), 
+			_("_Help/About Sword Modules/Dictionaries-Lexicons/"),
+			(GtkMenuCallback)gui_about_activate);			 
+/*
 	gtk_widget_ref(dictionaries_lexicons1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "separator17",
 				 dictionaries_lexicons1_menu_uiinfo
 				 [0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+*/
 	gtk_widget_ref(about_sword_modules1_menu_uiinfo[3].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app),
 				 "books",
 				 about_sword_modules1_menu_uiinfo[3].
 				 widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+	
+	gui_add_mods_to_menus(get_list(GBS_LIST), 
+			_("_Help/About Sword Modules/Books/"),
+			(GtkMenuCallback)gui_about_activate);			 
+/*
 	gtk_widget_ref(books_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "separator17",
 				 books_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);	
+				 
+*/	
+	gtk_signal_connect(GTK_OBJECT(settings.versestyle_item), "toggled",
+			GTK_SIGNAL_FUNC(on_verse_style1_activate),
+			NULL);
 }
 
 /******************************************************************************

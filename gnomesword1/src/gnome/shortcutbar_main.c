@@ -38,6 +38,7 @@
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
+#include "gui/about_modules.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/gbs.h"
@@ -329,7 +330,7 @@ static void on_about_item_activate(GtkMenuItem * menuitem,
 				       &item_name, NULL);	
 	memset(modname, 0, 16);
 	module_name_from_description(modname, item_name);
-	display_about_module_dialog(modname, FALSE);
+	gui_display_about_module_dialog(modname, FALSE);
 	if(modname) g_free(modname);
 	g_free(item_url);
 	g_free(item_name);
@@ -1091,6 +1092,58 @@ static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 /******************************************************************************
  * Name
+ *    gui_get_num_shortcut_items
+ *
+ * Synopsis
+ *   #include "gnomesword.h"
+ *
+ *   gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
+						gint group_num)	
+ *
+ * Description
+ *   returns the number of shortcut items in the current group
+ *
+ * Return value
+ *   gint
+ */
+
+gint gui_get_num_shortcut_items(GtkWidget * shortcutbar_widget,
+						gint group_num)
+{
+	return e_shortcut_model_get_num_items(E_SHORTCUT_BAR
+					      (shortcutbar_widget)->
+					      model, group_num);
+
+}
+
+/******************************************************************************
+ * Name
+ *    gui_get_shortcut_item_info
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   void gui_get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
+ *    gint group_num, gint item_num, gchar **item_url, gchar **item_name)	
+ *
+ * Description
+ *   get shortcut item information
+ *
+ * Return value
+ *   void
+ */
+
+void gui_get_shortcut_item_info(GtkWidget *shortcutbar_widget, 
+     gint group_num, gint item_num, gchar **item_url, gchar **item_name)
+{
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+				(shortcutbar_widget)->model,
+				group_num,
+				item_num,
+				item_url, item_name, NULL);
+}
+/******************************************************************************
+ * Name
  *    gui_setup_shortcut_bar
  *
  * Synopsis
@@ -1788,5 +1841,58 @@ void gui_shortcutbar_showhide(void)
 				     (gui_lookup_widget(settings.app, "hpaned1")),
 				     settings.biblepane_width);
 		gtk_widget_show(settings.shortcut_bar);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_set_shortcutbar_porgram_start 
+ *
+ * Synopsis
+ *   #include "shortcutbar_main.h"
+ *
+ *   void gui_set_shortcutbar_porgram_start(void)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_set_shortcutbar_porgram_start(void)
+{
+	/*
+	 *  show hide shortcut bar - set to options setting 
+	 */
+	if (settings.showshortcutbar) {
+		gtk_widget_show(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(settings.epaned),
+				     settings.shortcutbar_width);
+	}
+
+	else if (!settings.showshortcutbar && settings.showdevotional) {
+		gtk_widget_show(settings.shortcut_bar);
+		gui_shortcutbar_showhide();
+	}
+
+	else {
+		gtk_widget_hide(settings.shortcut_bar);
+		e_paned_set_position(E_PANED(settings.epaned),
+				     1);
+	}
+
+	/* set hight of bible and commentary pane */
+	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "vpaned1")),
+			     settings.upperpane_hight);
+
+	/* set width of bible pane */
+	e_paned_set_position(E_PANED(gui_lookup_widget(settings.app, "hpaned1")),
+			     settings.biblepane_width);
+
+	if (!settings.docked) {
+		settings.docked = TRUE;
+		gui_attach_detach_shortcutbar();
 	}
 }

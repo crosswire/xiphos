@@ -23,16 +23,9 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 
-#include "gui/percomm.h"
-#include "gui/_editor.h"
-#include "backend/module_options.h"
-#include "gui/info_box.h"
-#include "gui/html.h"
-
+#include <glib-1.2/glib.h>
 #include "main/percomm.h"
-#include "main/gs_gnomesword.h"
 
 #include "backend/percomm_.h"
 #include "backend/sword.h"
@@ -139,7 +132,7 @@ void change_percomm_module(char * mod_name)
  *   void
  */ 
 
-void save_percomm_note(gchar *note)
+void save_percomm_note(char *note)
 {
 	backend_save_personal_comment(note);
 }

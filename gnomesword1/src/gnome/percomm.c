@@ -203,6 +203,10 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	p_last = (PC_DATA *) g_list_nth_data(pcl, 
 				settings.percomm_last_page);
 	p = (PC_DATA *) g_list_nth_data(pcl, page_num);
+	/*
+	 * point PC_DATA *cur_p to p - PC_DATA is global
+	 */
+	cur_p = p;
 	
 	change_percomm_module(p->mod_name);
 	strcpy(p->ec->key,settings.currentverse);
@@ -215,10 +219,6 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	 * remember new module name
 	 */
 	strcpy(settings.personalcommentsmod, p->mod_name);
-	/*
-	 * point PC_DATA *cur_p to p - PC_DATA is global
-	 */
-	cur_p = p;
 	/*
 	 * remember page number
 	 */
@@ -712,7 +712,7 @@ static void on_btn_replace_clicked(GtkButton * button,
  *   GSHTMLEditorControlData *
  */
 
-void create_percomm_pane(PC_DATA *p)
+static void create_percomm_pane(PC_DATA *p)
 {
 	GtkWidget *vboxPC;
 	GtkWidget *frame34;

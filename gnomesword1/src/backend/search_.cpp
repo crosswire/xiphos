@@ -127,7 +127,7 @@ GList* backend_do_search(gpointer *usr_data)
 				searchType,
 				searchParams,
 				currentScope, 0,
-				&percent_update,
+				&search_percent_update,
 				(void*)&progressunits);
 				!searchResults.Error ();
 				searchResults++) {		

@@ -46,8 +46,7 @@ struct _settings_druid {
 	GtkWidget *checkbutton6;
 };
 
-GtkWidget *gui_create_setup_druid(GList *biblemods, GList *commmods, 
-						GList *dictmods);
+void gui_first_run(void);
 
 #ifdef __cplusplus
 }

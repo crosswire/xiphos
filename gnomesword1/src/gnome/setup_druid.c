@@ -26,8 +26,10 @@
 #include <gnome.h>
 
 #include "gui/setup_druid.h"
+
 #include "main/gs_gnomesword.h"
-#include "main/setup.h"
+#include "main/lists.h"
+#include "main/settings.h"
 
 /* FIXME: this is broken - causes a segfault after finish button is pressed */
 
@@ -40,6 +42,59 @@ SETTINGS_DRUID widgets;
  * globals to this file only 
  */
 static GtkWidget *druid_dialog;
+
+
+
+/******************************************************************************
+ * Name
+ *  save_frist_run_settings
+ *
+ * Synopsis
+ *   #include "setup_druid.h"
+ *
+ *   void save_frist_run_settings(SETTINGS_DRUID widgets)	
+ *
+ * Description
+ *   gets settings from druid widgets and stores them in 
+ *   the settings struct then calls create_properties_from_setup
+ *   to save them
+ *
+ * Return value
+ *   void
+ */ 
+
+static void save_frist_run_settings(SETTINGS_DRUID widgets)
+{
+	strcpy(settings.MainWindowModule,
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry1)));
+	strcpy(settings.DictWindowModule, 
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry13)));
+	strcpy(settings.CommWindowModule, 
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry12)));
+	strcpy(settings.Interlinear1Module, 
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry2)));
+	strcpy(settings.Interlinear2Module, 
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry3)));
+	strcpy(settings.Interlinear3Module, 
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry4)));
+	strcpy(settings.Interlinear4Module,
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry10)));
+	strcpy(settings.Interlinear5Module, 
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry11)));
+	strcpy(settings.personalcommentsmod,
+		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry14)));
+	
+	settings.usedefault = GTK_TOGGLE_BUTTON(widgets.radiobutton1)->active;
+	settings.text_tabs = GTK_TOGGLE_BUTTON(widgets.checkbutton4)->active;
+	settings.comm_tabs = GTK_TOGGLE_BUTTON(widgets.checkbutton5)->active;
+	settings.dict_tabs = GTK_TOGGLE_BUTTON(widgets.checkbutton6)->active;
+	settings.versestyle = GTK_TOGGLE_BUTTON(widgets.checkbutton2)->active;
+	settings.autosavepersonalcomments = GTK_TOGGLE_BUTTON(widgets.checkbutton1)->active;
+	settings.interlinearpage = GTK_TOGGLE_BUTTON(widgets.checkbutton3)->active;	
+	
+	create_properties_from_setup();
+}
+
 
 /******************************************************************************
  * Name
@@ -105,7 +160,7 @@ static void on_cancel_clicked(GnomeDialog * gnomedialog, gint arg1,
  *   GtkWidget *
  */
  
-GtkWidget *gui_create_setup_druid(GList *biblemods, 
+static GtkWidget *gui_create_setup_druid(GList *biblemods, 
 				GList *commmods, GList *dictmods)
 {
 	
@@ -964,12 +1019,49 @@ GtkWidget *gui_create_setup_druid(GList *biblemods,
 			   GTK_SIGNAL_FUNC(on_cancel_clicked), NULL);
 
 
-	g_list_free(biblemods);
-	g_list_free(commmods);
-	g_list_free(dictmods);
 	g_free(pathtomods);
 
 	return druid_dialog;
+}
+
+/******************************************************************************
+ * Name
+ *  first_run
+ *
+ * Synopsis
+ *   #include "setup.h"
+ *
+ *   void first_run(void)
+ *
+ * Description
+ *    loads module list and calls 
+ *    gui_create_setup_druid(biblemods, commmods, dictmods)
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_first_run(void)
+{
+	GtkWidget *dlg;
+	GList *biblemods = NULL;
+	GList *commmods = NULL;
+	GList *dictmods = NULL;
+	
+	biblemods = get_list_of_mods_by_type(TEXT_MODS);
+	commmods = get_list_of_mods_by_type(COMM_MODS);
+	dictmods = get_list_of_mods_by_type(DICT_MODS);
+	
+	dlg = gui_create_setup_druid(biblemods, commmods, dictmods);
+
+	/*
+	 * hold util we are done 
+	 */
+	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
+	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
+	g_list_free(biblemods);
+	g_list_free(commmods);
+	g_list_free(dictmods);
 }
 
 /******  end of file   ******/

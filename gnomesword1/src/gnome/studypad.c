@@ -51,8 +51,47 @@
 
 #define BUFFER_SIZE 4096
 
-//static GtkWidget *frame_studypad;
 
+
+
+/******************************************************************************
+ * Name
+ *   gui_studypad_can_close
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void gui_studypad_can_close(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_studypad_can_close(void)
+{
+	if (settings.modifiedSP) {
+		GtkWidget *msgbox;
+		gint answer = 0;
+		
+		msgbox = gui_create_info_box();
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer =
+		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+	
+		switch (answer) {
+		case 0:
+			if (settings.studypadfilename)
+				save_file_program_end(settings.html_studypad,
+						      settings.studypadfilename);
+			break;
+		default:
+			break;
+		}
+	}
+}
 /******************************************************************************
  * Name
  *   load_file

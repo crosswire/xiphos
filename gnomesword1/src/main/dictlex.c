@@ -23,21 +23,15 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
+#include <glib-1.2/glib.h>
 
 
 #include "backend/sword.h"
 #include "backend/dictlex_.h"
 
-#include "gui/dictlex_dialog.h"
-#include "gui/dictlex.h"
-#include "gui/cipher_key_dialog.h"
-#include "gui/html.h"
-
-#include "main/settings.h"
 #include "main/dictlex.h"
 #include "main/gs_gnomesword.h"
+
 
 /******************************************************************************
  * Name

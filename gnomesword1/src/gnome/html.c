@@ -41,6 +41,7 @@
 #include "gui/shortcutbar_main.h"
 #include "gui/interlinear.h"
 #include "gui/utilities.h"
+#include "gui/about_modules.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
@@ -160,7 +161,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			tmpbuf[i + 1] = '\0';
 			++url;
 		}
-		display_about_module_dialog(tmpbuf, FALSE);
+		gui_display_about_module_dialog(tmpbuf, FALSE);
 
 	}
 	/*** thml verse reference ***/
