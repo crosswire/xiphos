@@ -1,3 +1,14 @@
+2000-10-12  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	*removed reference to unknown includes
+	#include  <widgets/e-paned/e-hpaned.h/>
+	#include  <widgets/e-paned/e-vpaned.h/>
+	in GnomeSword.cpp, callback.cpp and interface.c
+	changed to 
+	#include  <widgets/e-paned/e-hpaned.h>
+	#include  <widgets/e-paned/e-vpaned.h>
+
+
 2000-10-05  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*release 0.2.5
