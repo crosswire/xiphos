@@ -26,7 +26,7 @@
 #include "support.h"
 #include "gs_gnomesword.h"
 #include "printstuff.h"
-#include "filestuff.h"
+#include "gs_file.h"
 #include "gs_studypad.h"
 
 #ifdef USE_ASPELL
