@@ -2,7 +2,7 @@
 
 	* release 0.4.0
 	* added addrenderfilterSWORD function
-	* gnomesword requires GtkHTML-0.8.0 or newer
+	* gnomesword requires GtkHTML-0.8.0 or later
 
 
 2001-03-28 Terry Biggs <tbiggs@users.sourceforge.net>
