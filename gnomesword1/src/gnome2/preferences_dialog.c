@@ -1673,28 +1673,28 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 
 	check_button.show_bible_tabs =
 	    gtk_check_button_new_with_label(_("Bible texts"));
-	gtk_widget_show(check_button.show_bible_tabs);
+//	gtk_widget_show(check_button.show_bible_tabs);
 	gtk_box_pack_start(GTK_BOX(vbox54),
 			   check_button.show_bible_tabs, FALSE, FALSE,
 			   0);
 
 	check_button.show_commentary_tabs =
 	    gtk_check_button_new_with_label(_("Commentary"));
-	gtk_widget_show(check_button.show_commentary_tabs);
+//	gtk_widget_show(check_button.show_commentary_tabs);
 	gtk_box_pack_start(GTK_BOX(vbox54),
 			   check_button.show_commentary_tabs, FALSE,
 			   FALSE, 0);
 
 	check_button.show_dictionary_tabs =
 	    gtk_check_button_new_with_label(_("Dictionary/Lexicon"));
-	gtk_widget_show(check_button.show_dictionary_tabs);
+//	gtk_widget_show(check_button.show_dictionary_tabs);
 	gtk_box_pack_start(GTK_BOX(vbox54),
 			   check_button.show_dictionary_tabs, FALSE,
 			   FALSE, 0);
 
 	check_button.show_book_tabs =
 	    gtk_check_button_new_with_label(_("Books"));
-	gtk_widget_show(check_button.show_book_tabs);
+//	gtk_widget_show(check_button.show_book_tabs);
 	gtk_box_pack_start(GTK_BOX(vbox54), check_button.show_book_tabs,
 			   FALSE, FALSE, 0);
 
