@@ -29,8 +29,8 @@ extern "C" {
 #endif
 
 #include <gnome.h>
-
-GtkWidget *gui_create_about_modules(void);
+	
+void gui_display_about_module_dialog(gchar * modname, gboolean isGBS);
 
 #ifdef __cplusplus
 }

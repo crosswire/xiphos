@@ -23,10 +23,9 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 
 #include "main/commentary.h"
-#include "main/settings.h"
 #include "main/gs_gnomesword.h"
 
 #include "backend/sword.h"

@@ -50,7 +50,7 @@ GList *backend_get_list_of_percom_modules(void);
 GList *backend_get_mod_description_list_SWORD(char *mod_type);
 char *backend_get_module_description(char * modName);
 char *backend_get_path_to_mods(void);
-char *backend_get_mod_aboutSWORD(char * modname);
+char *backend_get_mod_about_info(char * modname);
 int backend_get_module_page(char *module_name, char *module_type);
 char *backend_get_module_font_name(char *mod_name);
 char *backend_get_module_font_size(char *mod_name);

@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
+#include <glib-1.2/glib.h>
 
 
 #include "main/settings.h"
@@ -32,7 +32,6 @@
 
 #include "backend/bibletext_.h"
 #include "backend/sword.h"
-#include "backend/shortcutbar.h"
 #include "backend/interlinear.h"
 #include "backend/module_options.h"
 

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * display_info.f - 
+ * find_dlg_defs.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,20 +19,26 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __DISPLAY_INFO_H__
-#define __DISPLAY_INFO_H__
+#ifndef _FIND_DLG_DEFS_H_
+#define _FIND_DLG_DEFS_H_
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif	
 
-void loadmodandkey(gchar *modName, gchar *newkey);
-void display_info_setup(GtkWidget * text);
-void dispaly_info_shutdown(void);
+struct _gs_find_dialog {
+	GnomeDialog *dialog;
+	GtkWidget *htmlwidget;
+	GtkWidget *entry;
+	GtkWidget *backward;
+	GtkWidget *case_sensitive;
+	gboolean regular;
+};	
+	
 	
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __DISPLAY_INFO_H__ */
+#endif
 

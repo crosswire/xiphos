@@ -363,10 +363,31 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 	return TRUE;
 }
 
-void on_mainwindow_set_focus(GtkWindow * window, GtkWidget * widget,
+static void on_mainwindow_set_focus(GtkWindow * window, GtkWidget * widget,
 						gpointer user_data)
 {
 	//g_warning("focus set to main window");
+}
+
+
+void gui_search_appbar_update(char percent, void *userData)
+{
+	char maxHashes = *((char *) userData);
+	float num;
+	char buf[80];
+	static char printed = 0;
+
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	while ((((float) percent) / 100) * maxHashes > printed) {
+		sprintf(buf, "%f", (((float) percent) / 100));
+		num = (float) percent / 100;
+		gnome_appbar_set_progress((GnomeAppBar *) settings.appbar, num);
+		printed++;
+	}
+	while (gtk_events_pending())
+		gtk_main_iteration();
+	printed = 0;
 }
 
 /******************************************************************************
@@ -958,3 +979,24 @@ void create_mainwindow(void)
 			settings.gs_hight);
 }
 
+
+/******************************************************************************
+ * Name
+ *   gui_show_main_window
+ *
+ * Synopsis
+ *   #include "main_window.h"
+ *
+ *   void gui_show_main_window(void)
+ *
+ * Description
+ *    display the app after all is created
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_show_main_window(void)
+{
+	gtk_widget_show(settings.app);
+}

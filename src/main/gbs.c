@@ -27,9 +27,7 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
-
-#include "gui/gbs.h"
+#include <glib-1.2/glib.h>
 
 #include "main/gbs.h"
 
