@@ -53,7 +53,7 @@ public:
 	SWBuf swbuf;
 };
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 class GTKMozEntryDisp : public  SWDisplay{
 protected:
 	GtkWidget *gtkText;

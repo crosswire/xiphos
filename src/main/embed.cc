@@ -24,7 +24,7 @@
 
 #include <gnome.h>
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #include <gtkmozembed_internal.h>
 #include <nsIDOMMouseEvent.h>
@@ -49,8 +49,8 @@
 #include <nsIDOMHTMLElement.h>  
 #include <nsIDOMHTMLTextAreaElement.h>  
 #include <nsIDOMNamedNodeMap.h>
-#include <webbrowserpersist/nsIWebBrowserPersist.h>
-#include <necko/nsNetUtil.h>
+#include <nsIWebBrowserPersist.h>
+#include <nsNetUtil.h>
 #include <nsIWebBrowserFind.h>
 #include <nsIDOMNSDocument.h>
 #include <nsIDOMNSEvent.h>
@@ -59,8 +59,8 @@
 #include <nsISelection.h>
 #include <nsIDOMRange.h>
 #include <nsIWebBrowserFind.h>
-#include <necko/nsNetUtil.h>
-#include <uconv/nsICharsetConverterManager.h>
+#include <nsNetUtil.h>
+#include <nsICharsetConverterManager.h>
 #include <nsIDOMWindow.h>
 #include <nsISelection.h>
 #include <nsISHistory.h>
@@ -71,7 +71,7 @@
 //#include <nsIPresContext.h>
 #include <nsIEventStateManager.h>
 #include <nsIClipboardCommands.h>
-#include <htmlparser/nsIParserNode.h>
+#include <nsIParserNode.h>
 //#include "nsIWebBrowserPrint.h"
 
 #endif
@@ -97,7 +97,7 @@ extern "C" {
 extern gboolean shift_key_presed;
 
 
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 /*
 nsresult GaleonWrapper::Print (nsIPrintSettings *options, PRBool preview, GtkWindow *parent)
 {

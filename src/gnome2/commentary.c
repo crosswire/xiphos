@@ -31,7 +31,7 @@
 #include <gal/widgets/e-unicode.h>
 #endif
 */
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 #include <gtkmozembed.h>
 #endif
 
@@ -244,7 +244,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_label_set_justify (GTK_LABEL (widgets.label_comm), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment (GTK_MISC (widgets.label_comm), 0, 0.5);
 */
-#ifdef USE_MOZILLA	
+#ifdef USE_GTKMOZEMBED	
 	eventbox1 = gtk_event_box_new ();
 	gtk_widget_show (eventbox1);
 	gtk_box_pack_start(GTK_BOX(box_comm),
@@ -331,7 +331,7 @@ static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
 #else
 	gui_copy_html(widgets.html_comm);
@@ -364,7 +364,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
 	gchar *dict_key =NULL;
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
@@ -449,7 +449,7 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 	gchar *mod_name = NULL;
 		
 	mod_name = main_module_name_from_description(dict_mod_description);
-#ifdef USE_MOZILLA
+#ifdef USE_GTKMOZEMBED
 	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
 	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
 	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);

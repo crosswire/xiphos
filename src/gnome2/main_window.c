@@ -744,8 +744,11 @@ void create_mainwindow(void)
 
 	gtk_widget_grab_focus(nav_bar.lookup_entry);
 
-	gtk_widget_set_size_request(widgets.app, settings.gs_width,
-			     settings.gs_hight);
+	gtk_window_set_default_size((GtkWindow *)widgets.app,
+                                             settings.gs_width,
+                                             settings.gs_hight);
+	/*gtk_widget_set_size_request(widgets.app, settings.gs_width,
+			     settings.gs_hight);*/
 }
 
 
