@@ -29,6 +29,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+#include "gs_gnomesword.h"
 #include "support.h"
 #include "filestuff.h"
 #include "menustuff.h"
@@ -500,6 +501,7 @@ SETTINGS createsettings(void)
 	p_settings->showtextgroup = false;	/* show text group */
 	p_settings->showcomgroup = true;	/* show com group */
 	p_settings->showdictgroup = true;	/* show dict/lex group */
+	p_settings->showbookmarksgroup = false;	/* show bookmark group */
 	p_settings->showhistorygroup = true;	/* show history group */
 	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* create settings file (settings.cfg) */
 	write(fd, (char *) &settings, sizeof(settings));	/* save settings structrue to file */
