@@ -65,7 +65,7 @@ gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 	"gnomesword/GnomeSword.png",
-	"gnome-word.png",
+	"gnomesword/sword.xpm",
 	"gnomesword/GnomeSword.png",
 	"gnome-folder.png"
 };
@@ -1383,7 +1383,7 @@ GtkWidget *create_mainwindow(void)
 
 #endif /* USE_SHORTCUTBAR */
 
-	frame9 = gtk_frame_new("KJV");
+	frame9 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame9);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame9", frame9,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -2195,7 +2195,7 @@ GtkWidget *create_mainwindow(void)
 
 	gtk_widget_set_usize(hbox8, -2, 115);
 
-	frame10 = gtk_frame_new("Dictionaries - Lexicons");
+	frame10 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame10);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame10",
 				 frame10,
