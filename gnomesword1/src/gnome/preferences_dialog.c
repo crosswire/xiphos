@@ -1287,10 +1287,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	    gtk_adjustment_new(settings.gs_hight, 480, 10000, 1, 10,
 			       10);
 	sbtnSBWidth_adj =
-	    gtk_adjustment_new(settings.shortcutbar_width, 0, 300, 1,
+	    gtk_adjustment_new(settings.shortcutbar_width, 0, 1000, 1,
 			       10, 10);
 	sbtnTextWidth_adj =
-	    gtk_adjustment_new(settings.biblepane_width, 0, 500, 1, 10,
+	    gtk_adjustment_new(settings.biblepane_width, 0, 10000, 1, 10,
 			       10);
 	sbtnUpPaneHight_adj =
 	    gtk_adjustment_new(settings.upperpane_hight, 0, 10000, 1,

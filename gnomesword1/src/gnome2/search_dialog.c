@@ -304,6 +304,27 @@ static void button_clean(GtkButton * button, gpointer user_data)
 
 }
 
+/******************************************************************************
+ * Name
+ *   button_save
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   void button_save(GtkButton * button, 
+ *						gpointer user_data)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void button_save(GtkButton * button, gpointer user_data)
+{
+	g_printf("FIXME: please");
+}
 
 /******************************************************************************
  * Name
@@ -2836,6 +2857,9 @@ static GtkWidget *create_search_dialog(void)
 	g_signal_connect(G_OBJECT(button_clear_results), "clicked",
 			   G_CALLBACK(button_clean), NULL);
 
+
+	g_signal_connect(G_OBJECT(button_save_results), "clicked",
+			   G_CALLBACK(button_save), NULL);
 
 	gtk_object_set_data(GTK_OBJECT(search.dialog), "tooltips",
 			    tooltips);

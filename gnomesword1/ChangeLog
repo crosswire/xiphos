@@ -1,3 +1,12 @@
+2003-11-13  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev11
+	* removed shortcut bar from preferences dialog - gnome2
+	* removed shortcut bar page from preferences dialog - gnome2
+	* fixed text pane max width bug 
+	* fixed save search results list to bookmarks for sidebar search - gnome2	
+
+
 2003-10-27  Terry <tbiggs@users.sf.net>
 
 	* bumped gnome2 port to 0.9.dev9
