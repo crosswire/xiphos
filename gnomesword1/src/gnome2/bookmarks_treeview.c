@@ -774,14 +774,15 @@ static GtkTreeModel *create_model(void)
 	return GTK_TREE_MODEL(model);	
 }
 
+
 /******************************************************************************
  * Name
- *   button_press_event
+ *   button_release_event
  *
  * Synopsis
  *   #include "gui/bookmarks_treeview.h"
  *
- *   gboolean button_press_event(GtkWidget * widget,
+ *   gboolean button_release_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer user_data)
  *
  * Description
@@ -792,7 +793,7 @@ static GtkTreeModel *create_model(void)
  *   void
  */
 
-static gboolean button_press_event(GtkWidget * widget,
+static gboolean button_release_event(GtkWidget * widget,
 			    GdkEventButton * event, gpointer data)
 {
 	GtkTreeSelection* selection = NULL;
@@ -819,12 +820,14 @@ static gboolean button_press_event(GtkWidget * widget,
 				   -1);
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 					     &selected) && key != NULL) {			
+			gtk_widget_set_sensitive(menu.in_tab, TRUE);			
 			gtk_widget_set_sensitive(menu.in_dialog, TRUE);
 			gtk_widget_set_sensitive(menu.new, FALSE);
 			gtk_widget_set_sensitive(menu.insert, FALSE);
 			gtk_widget_set_sensitive(menu.rr_submenu, FALSE);
 		}
 		else {
+			gtk_widget_set_sensitive(menu.in_tab, FALSE);
 			gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 			gtk_widget_set_sensitive(menu.new, TRUE);
 			gtk_widget_set_sensitive(menu.insert, TRUE);
@@ -853,6 +856,7 @@ static gboolean button_press_event(GtkWidget * widget,
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
 			if(GTK_CHECK_MENU_ITEM(menu.reorder)->active) {			
+				gtk_widget_set_sensitive(menu.in_tab, FALSE);		
 				gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 				gtk_widget_set_sensitive(menu.new, FALSE);
 				gtk_widget_set_sensitive(menu.insert, FALSE);
@@ -871,8 +875,7 @@ static gboolean button_press_event(GtkWidget * widget,
 			}
 			break;
 		
-	}	
-	
+	}
 	if (is_selected) {
 		if(!gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
 				     &selected) && key != NULL) {
@@ -932,9 +935,13 @@ GtkWidget *gui_create_bookmark_tree(void)
 			   -1);
 
 	load_xml_bookmarks(GTK_TREE_VIEW(tree),&iter);
-	g_signal_connect(G_OBJECT(tree),
+	/*g_signal_connect(G_OBJECT(tree),
+				 "row-collapsed", 
+				G_CALLBACK(expand_release_cursor_row),
+				 NULL);*/
+	g_signal_connect_after(G_OBJECT(tree),
 				 "button_release_event",
-				G_CALLBACK(button_press_event),
+				G_CALLBACK(button_release_event),
 				 NULL);
 	use_dialog = FALSE;
 	bookmark_tree = GTK_TREE_VIEW(tree); 

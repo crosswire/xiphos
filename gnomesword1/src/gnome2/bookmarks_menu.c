@@ -1058,7 +1058,42 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 	g_string_free(str,TRUE);
 }
 
+/******************************************************************************
+ * Name
+ *   on_open_in_tab_activate
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
+ *
+ * Description
+ *
+ *
+ * Return value
+ *   void
+ */
 
+void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkTreeSelection* selection;
+	GtkTreeIter selected;
+	GtkTreeIter iter;
+	gchar *caption = NULL;
+	gchar *key = NULL;
+	gchar *module = NULL;
+	
+	
+	selection = gtk_tree_view_get_selection(bookmark_tree);
+	if (!gtk_tree_selection_get_selected(selection,NULL,&selected))
+		return;
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
+				   3, &key, -1);	
+	gui_open_passage_in_new_tab(key);
+	g_free(caption);
+	g_free(key);
+	g_free(module);
+}
 
 
 /******************************************************************************
@@ -1094,6 +1129,12 @@ static GnomeUIInfo rr_menu_uiinfo[] = {
 };
 
 static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Open in a new tab"),
+	 N_("Open this bookmark in a dialog"),
+	 (gpointer) on_open_in_tab_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_FILENAME, PACKAGE_PIXMAPS_DIR "/new_tab_button.png",
+	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Open in a dialog"),
 	 N_("Open this bookmark in a dialog"),
@@ -1187,22 +1228,24 @@ void gui_create_bookmark_menu(void)
 	gnome_app_fill_menu(GTK_MENU_SHELL(menu.menu),
 			    pmBookmarkTree_uiinfo, NULL, FALSE, 0);
 
-	menu.in_dialog = pmBookmarkTree_uiinfo[0].widget;
-	menu.new = pmBookmarkTree_uiinfo[1].widget;
-	menu.insert = pmBookmarkTree_uiinfo[2].widget;
-	menu.edit = pmBookmarkTree_uiinfo[3].widget;
-	menu.delete = pmBookmarkTree_uiinfo[4].widget;
+	menu.in_tab = pmBookmarkTree_uiinfo[0].widget;
+	menu.in_dialog = pmBookmarkTree_uiinfo[1].widget;
+	menu.new = pmBookmarkTree_uiinfo[2].widget;
+	menu.insert = pmBookmarkTree_uiinfo[3].widget;
+	menu.edit = pmBookmarkTree_uiinfo[4].widget;
+	menu.delete = pmBookmarkTree_uiinfo[5].widget;
 	
 	
 	
-	menu.reorder = pmBookmarkTree_uiinfo[9].widget;
+	menu.reorder = pmBookmarkTree_uiinfo[10].widget;
 
-	menu.bibletime = pmBookmarkTree_uiinfo[11].widget;
-	menu.rr_submenu = pmBookmarkTree_uiinfo[12].widget;
+	menu.bibletime = pmBookmarkTree_uiinfo[12].widget;
+	menu.rr_submenu = pmBookmarkTree_uiinfo[13].widget;
 
 	menu.remove = rr_menu_uiinfo[0].widget;
 	menu.restore = rr_menu_uiinfo[2].widget;
 
+	gtk_widget_set_sensitive(menu.in_tab, FALSE);
 	gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 	gtk_widget_set_sensitive(menu.new, FALSE);
 	gtk_widget_set_sensitive(menu.insert, FALSE);

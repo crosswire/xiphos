@@ -1038,7 +1038,7 @@ gboolean vpaned_srch_rslt_button_release_event(GtkWidget * widget,
  *   void
  */
 
-void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
+static void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
 					gpointer user_data)
 {
 	gui_verselist_to_bookmarks(list_of_verses);
@@ -1061,7 +1061,7 @@ void on_save_list_as_bookmarks_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gint module_type;
 
@@ -1102,7 +1102,7 @@ void on_open_in_dialog_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_open_module_in_new_tab(buf_module);
 }
@@ -1124,7 +1124,7 @@ void on_open_in_tab_activate(GtkMenuItem * menuitem, gpointer user_data)
  *   void
  */
 
-void on_about2_activate(GtkMenuItem * menuitem, gpointer user_data)
+static void on_about2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_display_about_module_dialog(buf_module, FALSE);
 	g_free(buf_module);
@@ -1610,7 +1610,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *shortcut_box;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
-	GObject *mod_selection;
+	//GObject *mod_selection;
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox1);
@@ -1741,7 +1741,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	
 	gui_load_module_tree(sidebar.module_list, TRUE);
 		     
-	g_signal_connect((gpointer) sidebar.module_list,
+	g_signal_connect_after((gpointer) sidebar.module_list,
 			 "button_release_event",
 			 G_CALLBACK(on_modules_list_button_release),
 			 NULL);
