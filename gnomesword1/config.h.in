@@ -130,5 +130,8 @@
 /* Define if you want to spell checking */
 #undef USE_SPELL
 
+/* Define if you want to use cvs sword */
+#undef USE_SWORD_CVS
+
 /* Version number of package */
 #undef VERSION
