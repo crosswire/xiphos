@@ -35,6 +35,7 @@
 #include <swconfig.h>
 #include <swmodule.h>
 #include <versekey.h>
+#include <markupfiltmgr.h>
 
 #include "sw_viewcomm_dlg.h"
 #include "sw_gnomesword.h"
@@ -63,7 +64,7 @@ GList* setupCommSWORD(GtkWidget *text)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	VCMgr	= new SWMgr();
+	VCMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	VCMod     = NULL;
 	VCDisplay = new  GtkHTMLEntryDisp(text);
 	//VCDisplay = new  GtkHTMLEntryDisp(text);
@@ -71,9 +72,6 @@ GList* setupCommSWORD(GtkWidget *text)
 	for(it = VCMgr->Modules.begin(); it != VCMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Commentaries")){
 			VCMod = (*it).second;
-			sit = VCMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-			ConfigEntMap &section = (*sit).second;
-			addrenderfiltersSWORD(VCMod, section);
 			list = g_list_append(list,VCMod->Name());
 			VCMod->Disp(VCDisplay);
 		}

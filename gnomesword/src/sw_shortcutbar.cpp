@@ -247,9 +247,6 @@ void setupviewerSBSW(GtkWidget *html_widget)
 	
 	for(it = viewersbMgr->Modules.begin(); it != viewersbMgr->Modules.end(); it++){
 		viewersbMod = (*it).second;
-		sit = viewersbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-		ConfigEntMap &section = (*sit).second;
-		addrenderfiltersSWORD(viewersbMod, section);
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			viewersbMod->Disp(viewersbDisplay);
 		}

@@ -156,9 +156,6 @@ void setupVerseListSBSWORD(GtkWidget *html_widget)
 	
 	for(it = verselistsbMgr->Modules.begin(); it != verselistsbMgr->Modules.end(); it++){
 		verselistsbMod = (*it).second;
-		sit = verselistsbMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters			
-		ConfigEntMap &section = (*sit).second;
-		//addrenderfiltersSWORD(verselistsbMod, section);
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			verselistsbMod->Disp(verselisttextsbDisplay);			
 		}else{

@@ -68,9 +68,9 @@ char ComEntryDisp::Display(SWModule & imodule)
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator eit;
 	GString *strbuf;
-	SWMgr *Mgr;
+	//SWMgr *Mgr;
 
-	Mgr = new SWMgr();	//-- create sword mgr
+	//Mgr = new SWMgr();	//-- create sword mgr
 	font = "Roman";
 	buf = (char *) imodule.Description();
 		
@@ -89,7 +89,7 @@ char ComEntryDisp::Display(SWModule & imodule)
 	g_string_free(strbuf, TRUE);
 	
 	endHTML(GTK_WIDGET(gtkText));
-	delete Mgr;
+	//delete Mgr;
 	return 0;
 }
 
@@ -601,11 +601,9 @@ gchar *font_mainwindow =
 
 extern SWMgr *mainMgr;
 extern SWMgr *mainMgr1;
-//extern bool bVerseStyle;
 extern GtkWidget *MainFrm;	/* pointer to app -- declared in GnomeSword.cpp */
 extern SWModule *comp1Mod;
 extern gchar *current_verse;
-//extern INTERLINEAR interlinearMods;
 extern SETTINGS *settings;
 
 /* --------------------------------------------------------------------------------------------- */
