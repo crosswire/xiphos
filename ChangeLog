@@ -1,5 +1,6 @@
 2003-12-10  Terry <tbiggs@users.sf.net>
 
+	* bumped to 0.9.dev19
 	* added get_sword_locale() to backend/sword.cpp to help with the
 	  books of the bible problem.
 	* added de_DE.po and fr_FR.po to gettext happy
