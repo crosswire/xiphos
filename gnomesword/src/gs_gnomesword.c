@@ -157,7 +157,7 @@ initGnomeSword(SETTINGS *s,
 	/*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(s->app,"textComments")) , TRUE );
 	/* set main notebook page */
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app,"notebook3")), s->notebook3page );
+	//gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(s->app,"notebook3")), s->notebook3page );
 	/* store text widgets for spell checker */
 	notes =  lookup_widget(s->app,"textComments");		
 	/* Add options to Options Menu and get toggle item widget */
@@ -380,7 +380,7 @@ void changepagenotebook(GtkNotebook *notebook,gint page_num)
 {
         settings->notebook3page = page_num; /* store the page number so we can open to it the next time we start */
         changemain = FALSE; /* we don't want to cause the Bible text window to scrool */
-        if(page_num == 4) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
+        //if(page_num == 4) changeVerseSWORD(current_verse); /* if we changed to page 0, 1 or 2 */
 }
 
 

@@ -56,7 +56,7 @@ project.config.extra.modules.after=
 
 module.include.name=src
 module.include.type=
-module.include.expanded=0
+module.include.expanded=1
 module.include.files=\
 	char_table.h\
 	gs_html.h\
@@ -103,7 +103,6 @@ module.source.files=\
 	spell.c\
 	spell_gui.c\
 	support.c\
-	main.c\
 	gs_abouts.c\
 	gs_popup_cb.c\
 	sw_utility.cpp\
@@ -140,7 +139,9 @@ module.source.files=\
 	sw_sword.cpp\
 	gs_detach_int.c\
 	gs_editor_search.c\
-	gs_editor_search.h
+	gs_editor_search.h\
+	sw_gbs_2.cpp\
+	sw_gbs_2.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

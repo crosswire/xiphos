@@ -53,7 +53,7 @@ main ()
   tmp_version = my_strdup("$min_gperf_version");
   if (sscanf(tmp_version, "%d.%d", &major, &minor) != 2) {
     printf ("%s, bad version string\n", "$min_gperf_version");
-    exit (1);
+    return 1;
   }
 
   if (($gperf_major_version > major) ||

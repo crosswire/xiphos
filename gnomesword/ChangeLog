@@ -1,3 +1,11 @@
+2002-03-06 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added notebook to lower pane area (lex/dict).
+	* added Dict/Lex, GBS and Interlinear page to notebook
+	* removed gs_gbs.* - all gbs code is in sw_gbs.*
+	* removed editor functions from gbs - will add back later.
+
+
 2002-03-01 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added gs_editor_search.* (from GtkHTML editor)
