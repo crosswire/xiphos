@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.1.6)
+AM_INIT_AUTOMAKE(gnomesword, 0.1.7)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -12,6 +12,7 @@ AC_ISC_POSIX
 
 AC_HEADER_STDC
 
+
 GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
@@ -21,17 +22,35 @@ AC_SUBST(PACKAGE_PIXMAPS_DIR)
 
 AC_PROG_CXX
 AC_LANG_CPLUSPLUS
-LIBS="$LIBS -L/usr/lib -lsword -lz"
+AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking w/aspell],spellchecking=$enableval,spellchecking="no")
+
+LIBS="$LIBS -L/usr/local/lib -L/usr/lib -lsword -lz"
+
 dnl Only use -Wall if we have gcc
 if test "x$GCC" = "xyes"; then
   if test -z "`echo "$CFLAGS" | grep "\-Wall" 2> /dev/null`" ; then
     CFLAGS="$CFLAGS -Wall"
   fi
 fi
-
+if test "x$spellchecking" = xyes; then
+	LIBS="$LIBS -laspell"
+fi
+if test "x$spellchecking" = xyes; then
+	AC_DEFINE(USE_ASPELL, 1, [Define if you want to use aspell spell checking])
+fi
+AM_CONDITIONAL(SPELLING,test x$spellchecking = xyes) 
 AC_OUTPUT([
 Makefile
 macros/Makefile
 gnomesword/Makefile
 ])
 
+
+echo
+echo "Summary of GnomeSword configuration:"
+echo
+if test "x$spellchecking" = xyes; then
+        echo "Spellchecking with Aspell:                    enabled"
+else
+        echo "Spellchecking with Aspell:                    disabled"
+fi

@@ -25,3 +25,6 @@
 /* Version number of package */
 #undef VERSION
 
+/* Define if you want to use aspell spell checking */
+#undef USE_ASPELL
+

@@ -1,11 +1,11 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/main.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/callback.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/display.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/display.h,/home/terry/Projects/kde/gnomesword/gnomesword/callback.h,/home/terry/Projects/kde/gnomesword/gnomesword/GnomeSword.h,/home/terry/Projects/kde/gnomesword/gnomesword/filestuff.h,/home/terry/Projects/kde/gnomesword/gnomesword/interface.h,/home/terry/Projects/kde/gnomesword/gnomesword/menustuff.h,/home/terry/Projects/kde/gnomesword/gnomesword/support.h,/home/terry/Projects/kde/gnomesword/gnomesword/GnomeSword.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/filestuff.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/interface.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/menustuff.cpp,/home/terry/Projects/kde/gnomesword/gnomesword/support.cpp,/home/terry/Projects/kde/gnomesword/AUTHORS,/home/terry/Projects/kde/gnomesword/COPYING,/home/terry/Projects/kde/gnomesword/ChangeLog,/home/terry/Projects/kde/gnomesword/INSTALL,/home/terry/Projects/kde/gnomesword/README,/home/terry/Projects/kde/gnomesword/gnomesword.lsm,/home/terry/Projects/kde/gnomesword/gnomesword.kdevprj,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/Projects2/gnomesword/gnomesword/callback.cpp,/home/tb/Projects2/gnomesword/gnomesword/interface.cpp,/home/tb/Projects2/gnomesword/gnomesword/display.cpp,/home/tb/Projects2/gnomesword/gnomesword/filestuff.cpp,
 show_outputview=true
 show_treeview=true
-header_file=/home/terry/Projects/kde/gnomesword/gnomesword.kdevprj
-cpp_file=/home/terry/Projects/kde/gnomesword/gnomesword/support.cpp
-browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/funcref.htm#string
+header_file=Untitled.h
+cpp_file=/home/tb/Projects2/gnomesword/gnomesword/display.cpp
+browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/funcref.htm#NONANSIUNIX
 [COPYING]
 install_location=
 dist=true
@@ -35,11 +35,21 @@ install_location=
 dist=true
 install=false
 type=HEADER
+[gnomesword/spellcheck.h]
+install_location=
+dist=true
+install=false
+type=HEADER
 [gnomesword/support.cpp]
 install_location=
 dist=true
 install=false
 type=SOURCE
+[gnomesword/DICTClient.h]
+install_location=
+dist=true
+install=false
+type=HEADER
 [LFV Groups]
 Dialogs=*.kdevdlg,
 GNU=AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,NEWS,
@@ -68,6 +78,11 @@ install_location=
 dist=true
 install=false
 type=DATA
+[gnomesword/spellcheck.cpp]
+install_location=
+dist=true
+install=false
+type=SOURCE
 [gnomesword/callback.cpp]
 install_location=
 dist=true
@@ -101,6 +116,11 @@ install_location=
 dist=true
 install=false
 type=HEADER
+[gnomesword/DICTClient.cpp]
+install_location=
+dist=true
+install=false
+type=SOURCE
 [General]
 make_options=-j1
 makefiles=Makefile.am,gnomesword/Makefile.am,gnomesword/docs/Makefile.am,gnomesword/docs/en/Makefile.am,po/Makefile.am,
@@ -131,7 +151,7 @@ type=DATA
 sub_dirs=
 type=normal
 [gnomesword/Makefile.am]
-files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.cpp,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.cpp,gnomesword/support.h,
+files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.cpp,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.cpp,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,
 sub_dirs=
 type=prog_main
 [gnomesword.lsm]
