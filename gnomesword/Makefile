@@ -57,6 +57,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+CC = gcc
 CXX = c++
 GNOMEGNORBA_LIBS = -rdynamic -lgnorba -lORBitCosNaming -lORBit -lIIOP -lORBitutil -lnsl -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
 GNOMEUI_LIBS = -rdynamic -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl
@@ -91,10 +92,10 @@ INCLUDES =  	$(GNOME_INCLUDEDIR) 	-I/usr/include/sword
 
 bin_PROGRAMS = gnomesword
 
-#gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	dialogs.cpp dialogs.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
-#gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	dialogs.cpp dialogs.h	listeditor.cpp listeditor.h	printstuff.cpp printstuff.h
-gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	dialogs.cpp dialogs.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.cpp printstuff.h
-#gnomesword_SOURCES = 	main.cpp	support.cpp support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.cpp interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	dialogs.cpp dialogs.h	listeditor.cpp listeditor.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	printstuff.cpp printstuff.h
+gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h	spellcheck.cpp spellcheck.h	DICTClient.cpp DICTClient.h	printstuff.cpp printstuff.h
+#gnomesword_SOURCES = 	main.cpp	support.c support.h 	display.cpp display.h	GnomeSword.cpp GnomeSword.h 	callback.cpp callback.h	interface.c interface.h	filestuff.cpp filestuff.h	menustuff.cpp menustuff.h	listeditor.cpp listeditor.h
 
 CXXFLAGS = $(GTK_CFLAGS)  -I/usr/include/sword -g
 
@@ -111,17 +112,16 @@ LDFLAGS =
 LIBS =  -L/usr/local/lib -L/usr/lib -lsword -lz -laspell -lgnomeprint -rdynamic -L/usr/lib -L/usr/X11R6/lib -lgnomeui -lart_lgpl -lgdk_imlib -lSM -lICE -lgtk -lgdk -lgmodule -lXi -lXext -lX11 -lgnome -lgnomesupport -lesd -laudiofile -lm -ldb1 -lglib -ldl -L/usr/lib -lxml -lz
 #gnomesword_OBJECTS =  main.o support.o display.o \
 #GnomeSword.o callback.o interface.o filestuff.o \
-#menustuff.o dialogs.o listeditor.o printstuff.o
+#menustuff.o listeditor.o printstuff.o
 #gnomesword_OBJECTS =  main.o support.o display.o \
 #GnomeSword.o callback.o interface.o filestuff.o \
-#menustuff.o dialogs.o listeditor.o
+#menustuff.o listeditor.o
 #gnomesword_OBJECTS =  main.o support.o display.o \
 #GnomeSword.o callback.o interface.o filestuff.o \
-#menustuff.o dialogs.o listeditor.o spellcheck.o \
-#DICTClient.o
+#menustuff.o listeditor.o spellcheck.o DICTClient.o
 gnomesword_OBJECTS =  main.o support.o display.o \
 GnomeSword.o callback.o interface.o filestuff.o \
-menustuff.o dialogs.o listeditor.o spellcheck.o \
+menustuff.o listeditor.o spellcheck.o \
 DICTClient.o printstuff.o
 gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
@@ -140,9 +140,9 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 TAR = gtar
 GZIP_ENV = --best
 DEP_FILES =  .deps/DICTClient.P .deps/GnomeSword.P .deps/callback.P \
-.deps/dialogs.P .deps/display.P .deps/filestuff.P .deps/interface.P \
-.deps/listeditor.P .deps/main.P .deps/menustuff.P .deps/printstuff.P \
-.deps/spellcheck.P .deps/support.P
+.deps/display.P .deps/filestuff.P .deps/interface.P .deps/listeditor.P \
+.deps/main.P .deps/menustuff.P .deps/printstuff.P .deps/spellcheck.P \
+.deps/support.P
 SOURCES = $(gnomesword_SOURCES)
 OBJECTS = $(gnomesword_OBJECTS)
 

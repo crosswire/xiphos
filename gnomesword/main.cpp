@@ -28,7 +28,6 @@
 #include "callback.h"
 #include "interface.h"
 #include "filestuff.h"
-#include "dialogs.h"
 
 int
 main (int argc, char *argv[])
@@ -38,16 +37,15 @@ main (int argc, char *argv[])
   GtkWidget *menu2;
   GtkWidget *menu3;
   GtkWidget *menu4;
-  GtkWidget *menu5;
+  GtkWidget *menu5,
+  					*setup;
   bool 			newconfigs = false;
   bool			newbookmarks = false;
   gchar 		*buf,
   					tmpbuf[80];
 
-  sprintf(tmpbuf,"%d",argc);
-  cout << tmpbuf;
-  if(argc > 1)
-  buf = g_strdup(argv[1]);
+
+  if(argc > 1) buf = g_strdup(argv[1]);
 	
   gnome_init ("GnomeSword", VERSION, argc, argv);
   if(!strcmp(buf,"newconfigs")) newconfigs = true;
@@ -57,6 +55,11 @@ main (int argc, char *argv[])
   	newconfigs = true;
   	newbookmarks = true;
   }
+  /*
+  setup = create_dialog1();
+  gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
+		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
+	*/
   /*
    * The following code was added by Glade to create one of each component
    * (except popup menus), just so that you see something after building
@@ -80,7 +83,7 @@ main (int argc, char *argv[])
   	createFiles();
   }
   initSword(mainwindow,menu1,menu2,menu3,menu4,menu5);
-  gtk_widget_show (mainwindow);
+  gtk_widget_show(mainwindow);
   UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items
   gtk_main ();
   return 0;

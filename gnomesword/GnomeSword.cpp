@@ -22,7 +22,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -43,16 +42,7 @@
 #include "interface.h"
 #include "filestuff.h"
 #include "menustuff.h"
-#include "dialogs.h"
 #include "listeditor.h"
-
-/*
- *
- *  -- add to interface.cpp after glade builds code --
- *  -- must be insereted following creation of appbar --
- * gnome_app_install_menu_hints(GNOME_APP(mainwindow), menubar1_uiinfo);
- *
- */
 
 
 //------------------------------------------------- sword global to this file
@@ -184,7 +174,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	searchMgr				= new SWMgr();
   percomMgr				= new SWMgr();
 	
-	curMod           = NULL; //-- set mods to null
+	curMod        = NULL; //-- set mods to null
 	comp1Mod      = NULL;
 	comp2Mod      = NULL;
 	comp3Mod      = NULL;
@@ -194,16 +184,16 @@ initSword(GtkWidget *mainform,  //-- apps main form
 	percomMod     = NULL;
 
 	
-	chapDisplay    = 0;// set in create
+	chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
 	comp1Display    = 0;// set in create
 	comp2Display    = 0;// set in create
 	comp3Display    = 0;// set in create
-	comDisplay   	  = 0;// set in create
-	dictDisplay   	   = 0;// set in create
-	GBFcomDisplay = 0; // set in create
+	comDisplay      = 0;// set in create
+	dictDisplay     = 0;// set in create
+	GBFcomDisplay   = 0; // set in create
 	GBFsearchDisplay =0; // set in create
-  percomDisplay   	  = 0;// set in create
+    percomDisplay    = 0;// set in create
 
 
 //	gtk_rc_parse( "gsword.rc" );
@@ -370,27 +360,28 @@ initSword(GtkWidget *mainform,  //-- apps main form
 
 	//----------------------------------------------------------------------------- set dict module to open notebook page
 	GtkLabel *label1;
-	if(havedict)
+	if(havedict) //-- let's don't do this if we don't have at least one dictionary / lexicon
 	{		
-		gint pagenum = 0;
-		
-		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page;
-		notebook = lookup_widget(mainform,"notebook4");
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum );	
-		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook),
+		gint pagenum = 0; //-- set page to 0 (first page in notebook)
+	
+		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page; //-- if save page is less than actual number of pages use saved page number else 0
+		notebook = lookup_widget(mainform,"notebook4"); //-- get notebook
+		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); //-- set notebook page	
+		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook), //-- get the label from the notebook page (module name)
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
-		it = mainMgr->Modules.find((char *)label1->label); 	
+		it = mainMgr->Modules.find((char *)label1->label); //-- fint the module using text from label	
 		if (it != mainMgr->Modules.end()) 
 		{
-			curdictMod = (*it).second;
-			curdictMod->SetKey("GRACE");
-			curdictMod->Display();	
-			FillDictKeys(curdictMod->Name()); 	
+			curdictMod = (*it).second; //-- set dictionary module
+			curdictMod->SetKey(settings->dictkey); //-- set key to the key saved in settings
+			curdictMod->Display(); //-- show what we have done	
+			FillDictKeys(curdictMod->Name()); //-- fill dictionary key clist widget	
 		}
 	}
-	else gtk_widget_hide(lookup_widget(MainFrm,"hbox8"));
+	else gtk_widget_hide(lookup_widget(MainFrm,"hbox8")); //-- hide dictionary section of window if we do not have at least one dictionary / lexicon 
+	
 	//---------------------------------------------------------------------------- set com module to open notebook page	
-	if(havecomm)
+	if(havecomm) //-- let's don't do this if we don't have at least one commentary
 	{
 		gint pagenum = 0;
 		
@@ -409,7 +400,7 @@ initSword(GtkWidget *mainform,  //-- apps main form
                       NULL);
     }
     else gtk_notebook_remove_page( GTK_NOTEBOOK(lookup_widget(MainFrm,"notebook3")) , 0);
-                                    // gtk_widget_hide(lookup_widget(MainFrm,"notebook1"));
+    
 	//---------------------------------------------------------------- set main notebook page
 	notebook = lookup_widget(mainform,"notebook3");	
 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook),settings->notebook3page );
@@ -555,18 +546,21 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 			comp3Mod->Display();
 		}
 		//---------------------------------------------------------------- change commentary
-		if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && (!autoSave))
+		if(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"tbtnFollow"))->active) //-- if personal notes follow button is active (on)
 		{
-		  //-- do nothing
-		}
-		else
-		{
-		 	if(usepersonalcomments && percomMod)
-		 	{
-		 	  percomMod->SetKey(keyText.c_str()); //-- set personal module to current verse
-				percomMod->Display();            //-- show change
-				noteModified = false; //-- we just loaded comment so it is not modified	
-		 	}
+			if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && (!autoSave))
+			{
+				//-- do nothing
+			}
+			else
+			{
+				if(usepersonalcomments && percomMod)
+				{
+					percomMod->SetKey(keyText.c_str()); //-- set personal module to current verse
+					percomMod->Display();            //-- show change
+					noteModified = false; //-- we just loaded comment so it is not modified	
+				}
+			}
 		}
 		if(curcomMod)
 		{	
@@ -614,12 +608,9 @@ FillDictKeys(char *ModName)  //-- fill clist with dictionary keys -
 				if (saveKey == mod->Key()) //-- if we are back to starting place set index
 				index = j-1; 
 			}
-		}
-		gtk_clist_moveto( GTK_CLIST(list),  //-- move in list to index
-                            index,
-                            0,
-                            0.5,
-                            0.0 );
+		}		
+		gtk_clist_moveto( GTK_CLIST(list), index, 0, 0.5, 0.0 ); //-- move in list to index
+        gtk_clist_select_row(GTK_CLIST(list),index, 0); //-- seletct row 
 		mod->SetKey(saveKey);
 	}
 }
@@ -674,7 +665,7 @@ ShutItDown(void)  //------------- close down GnomeSword program
 
   sprintf(settings->studypadfilename,"%s",current_filename); //-- store studypad filename
 	writesettings(myset); //-- save setting (myset structure) to use when we start back up
-	if(file_changed)
+	if(file_changed) //-- if stufy pad file has changed since last save
 	{
 		
 		msg = g_strdup_printf(_("``%s'' has been modified.  Do you wish to save it?"), current_filename);
@@ -688,10 +679,10 @@ ShutItDown(void)  //------------- close down GnomeSword program
 		g_free (msg);
 		switch (answer)
 		{
-		case 0:			
+			case 0:			
 					saveFile(current_filename);
 					break;
-		default:
+			default:
 					break;
 		}
 	}   	
@@ -870,8 +861,8 @@ resultsListSWORD(GtkWidget *searchFrm, gint row, gint column) //-- someone click
 	}
 	if(GTK_TOGGLE_BUTTON(contextToggle)->active) //-- check state of context check box
 	{
-		curMod->SetKey(text);  //-- set module to verse key text
-		curMod->Display();    //-- show verse or commentary
+		changeVerse(text);	//curMod->SetKey(text);  //-- set module to verse key text
+	//	curMod->Display();    //-- show verse or commentary
 	}
 }
 

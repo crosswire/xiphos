@@ -9,14 +9,13 @@ bin_PROGRAMS = gnomesword
 if SPELLING
 gnomesword_SOURCES = \
 	main.cpp\
-	support.cpp support.h \
+	support.c support.h \
 	display.cpp display.h\
 	GnomeSword.cpp GnomeSword.h \
 	callback.cpp callback.h\
-	interface.cpp interface.h\
+	interface.c interface.h\
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
-	dialogs.cpp dialogs.h\
 	listeditor.cpp listeditor.h\
 	spellcheck.cpp spellcheck.h\
 	DICTClient.cpp DICTClient.h
@@ -25,14 +24,13 @@ endif
 if PRINTING
 gnomesword_SOURCES = \
 	main.cpp\
-	support.cpp support.h \
+	support.c support.h \
 	display.cpp display.h\
 	GnomeSword.cpp GnomeSword.h \
 	callback.cpp callback.h\
-	interface.cpp interface.h\
+	interface.c interface.h\
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
-	dialogs.cpp dialogs.h\
 	listeditor.cpp listeditor.h\
 	printstuff.cpp printstuff.h
 endif
@@ -40,14 +38,13 @@ endif
 if SPELLING_PRINTING
 gnomesword_SOURCES = \
 	main.cpp\
-	support.cpp support.h \
+	support.c support.h \
 	display.cpp display.h\
 	GnomeSword.cpp GnomeSword.h \
 	callback.cpp callback.h\
-	interface.cpp interface.h\
+	interface.c interface.h\
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
-	dialogs.cpp dialogs.h\
 	listeditor.cpp listeditor.h\
 	spellcheck.cpp spellcheck.h\
 	DICTClient.cpp DICTClient.h\
@@ -57,14 +54,13 @@ endif
 if NO_OPS
 gnomesword_SOURCES = \
 	main.cpp\
-	support.cpp support.h \
+	support.c support.h \
 	display.cpp display.h\
 	GnomeSword.cpp GnomeSword.h \
 	callback.cpp callback.h\
-	interface.cpp interface.h\
+	interface.c interface.h\
 	filestuff.cpp filestuff.h\
 	menustuff.cpp menustuff.h\
-	dialogs.cpp dialogs.h\
 	listeditor.cpp listeditor.h
 endif
 
