@@ -48,9 +48,13 @@
 #include "gs_detach_sb.h"
 #include "gs_html.h"
 #include "gs_editor.h"
+#include "create_shortcutbar_search.h"
+
+#define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
+GtkWidget *nbVL;
 EShortcutModel *shortcut_model;
 SEARCH_OPT so, *p_so;
 
@@ -63,10 +67,18 @@ extern GList *bookmods;
 extern GList *sbbookmods;
 
 
-GList *sblist;			/* for saving search results to bookmarks  */
-gint groupnum0 = -1, groupnum1 = -1, groupnum2 = -1, groupnum3 = -1, groupnum4 = -1, groupnum5 = -1, groupnum6 = -1, groupnum7 = -1, groupnum8 = -1;	/* GBS books tree group */
+extern GList *sblist;			/* for saving search results to bookmarks  */
+gint 
+	groupnum0 = -1, 
+	groupnum1 = -1, 
+	groupnum2 = -1, 
+	groupnum3 = -1, 
+	groupnum4 = -1, 
+	groupnum5 = -1, 
+	groupnum6 = -1, 
+	groupnum7 = -1, 
+	groupnum8 = -1;	/* GBS books tree group */
 
-static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
 static void on_srlink_clicked(GtkHTML * html,
 			      const gchar * url, SETTINGS * s);
@@ -76,7 +88,6 @@ static void on_tbtnSBViewMain_toggled(GtkToggleButton * togglebutton,
 				      gpointer user_data);
 static void on_btnSBSaveVL_clicked(GtkButton * button,
 				   gpointer user_data);
-static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s);
 static void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 					  GdkEvent * event,
 					  gint group_num,
@@ -119,20 +130,61 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 
 	if (show) {
 		if (GTK_TOGGLE_BUTTON(p_so->ckbCommentary)->active) {
-			gotoBookmarkSWORD(p_so->modname, key);
+			gotoBookmarkSWORD(p_so->module_name, key);
 		}
 
 		else if (GTK_TOGGLE_BUTTON(p_so->ckbPerCom)->active) {
-			gotoBookmarkSWORD(p_so->modname, key);
+			gotoBookmarkSWORD(p_so->module_name, key);
 		}
 
 		else if (GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {
-			gotoBookmarkSWORD(p_so->modname, key);
+			gotoBookmarkSWORD(p_so->module_name, key);
 		}
 
 		else
 			changeVerseSWORD(key);
 	}
+}
+
+void fill_search_results_clist(GList *glist, SEARCH_OPT *so, SETTINGS *s)
+{
+	GList *tmp = NULL;
+	gchar *utf8str, buf[256];
+	gint i = 0;
+	
+	tmp = glist;
+	
+	while (tmp != NULL) {	
+		gchar *buf1 = (gchar*)tmp->data;
+		gchar *token = strtok(buf1, "|");
+		buf1 = token;
+		token = strtok(NULL, "|");
+		buf1 = token;
+		gtk_clist_insert(GTK_CLIST(clistSearchResults), i, &buf1);
+		++i;
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+	sprintf(s->groupName,"%s","Search Results");
+	sprintf(buf,"%d matches",i);
+	gnome_appbar_set_status (GNOME_APPBAR (s->appbar), buf);
+	gtk_notebook_set_page(GTK_NOTEBOOK(nbVL), 1);
+	showSBVerseList(s);
+	
+	/* report results */
+	beginHTML(s->htmlRP, TRUE);
+	sprintf(buf,HTML_START 
+	    "<body><center>%d Occurrences of <br><font color=\"%s\"><b>\"%s\"</b></font><br>found in <font color=\"%s\"><b>[%s]</b></font></center></body</html>", 
+				i, s->found_color,s->searchText,
+				s->bible_verse_num_color,so->module_name);	
+	utf8str = e_utf8_from_gtk_string(s->htmlRP, buf);
+	displayHTML(s->htmlRP, utf8str, strlen(utf8str));
+	endHTML(s->htmlRP);	
+	
+	/* cleanup appbar progress */
+	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
+	/* display first item in list by selection row 0 */
+	gtk_clist_select_row(GTK_CLIST(clistSearchResults), 0, 0);	
 }
 
 void
@@ -1013,10 +1065,6 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 }
 
-static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
-{
-	sblist = searchSWORD(s, p_so);
-}
 
 /*** save verse list as bookmarks ***/
 static void on_btnSBSaveVL_clicked(GtkButton * button,
@@ -1171,7 +1219,6 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	GtkWidget *btnViewVL;
 	GtkWidget *btnViewSR;
 	GtkWidget *btnViewer;
-	GtkWidget *nbVL;
 	GtkWidget *vbox2;
 	GtkWidget *frame1;
 	GtkWidget *scrolledwindow1;
@@ -1618,351 +1665,6 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 }
 
 
-/******************************************************************************
-* 
-*******************************************************************************/
-static void setupSearchBar(GtkWidget * vp, SETTINGS * s)
-{
-	GtkWidget *frame1;
-	GtkWidget *vbox1;
-	GtkWidget *frame7;
-	GtkWidget *vbox5;
-	GtkWidget *entrySearch;
-	GtkWidget *btnSearch;
-	GtkWidget *frame2;
-	GtkWidget *vbox2;
-	GSList *vbox2_group = NULL;
-	GtkWidget *rbMultiword;
-	GtkWidget *rbRegExp;
-	GtkWidget *frame3;
-	GtkWidget *vbox3;
-	GtkWidget *ckbCaseSensitive;
-	GtkWidget *frame4;
-	GtkWidget *vbox4;
-	GSList *vbox4_group = NULL;
-	GtkWidget *rbNoScope;
-	GtkWidget *rrbUseBounds;
-	GtkWidget *rbLastSearch;
-	GtkWidget *frame5;
-	GtkWidget *table1;
-	GtkWidget *label1;
-	GtkWidget *label2;
-	GtkWidget *entryLower;
-	GtkWidget *entryUpper;
-	GtkTooltips *tooltips;
-
-	p_so = &so;
-
-	tooltips = gtk_tooltips_new();
-
-	frame1 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame1",
-				 frame1, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(frame1);
-	gtk_container_add(GTK_CONTAINER(vp), frame1);
-	//gtk_widget_set_usize(frame1, 162, 360);
-
-	vbox1 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox1",
-				 vbox1, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vbox1);
-	gtk_container_add(GTK_CONTAINER(frame1), vbox1);
-
-	frame7 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame7);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame7",
-				 frame7, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(frame7);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame7, FALSE, TRUE, 0);
-
-	vbox5 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox5);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox5",
-				 vbox5, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vbox5);
-	gtk_container_add(GTK_CONTAINER(frame7), vbox5);
-
-	entrySearch = gtk_entry_new();
-	gtk_widget_ref(entrySearch);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "entrySearch",
-				 entrySearch, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(entrySearch);
-	gtk_box_pack_start(GTK_BOX(vbox5), entrySearch, TRUE, TRUE, 0);
-	gtk_widget_set_usize(entrySearch, 130, -2);
-
-	btnSearch = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	gtk_widget_ref(btnSearch);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "btnSearch",
-				 btnSearch, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(btnSearch);
-	gtk_box_pack_start(GTK_BOX(vbox5), btnSearch, TRUE, FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, btnSearch, _("Begin Search"),
-			     NULL);
-	gtk_button_set_relief(GTK_BUTTON(btnSearch), GTK_RELIEF_HALF);
-
-	frame2 = gtk_frame_new(_("Search Type"));
-	gtk_widget_ref(frame2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame2",
-				 frame2, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(frame2);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame2, FALSE, TRUE, 0);
-
-	vbox2 = gtk_vbox_new(TRUE, 0);
-	gtk_widget_ref(vbox2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox2",
-				 vbox2, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vbox2);
-	gtk_container_add(GTK_CONTAINER(frame2), vbox2);
-
-	rbMultiword =
-	    gtk_radio_button_new_with_label(vbox2_group,
-					    _("Multi Word"));
-	vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbMultiword));
-	gtk_widget_ref(rbMultiword);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "rbMultiword",
-				 rbMultiword, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(rbMultiword);
-	gtk_box_pack_start(GTK_BOX(vbox2), rbMultiword, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(rbMultiword, -2, 20);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (rbMultiword), TRUE);
-
-	rbRegExp =
-	    gtk_radio_button_new_with_label(vbox2_group,
-					    _("Regular Expression"));
-	vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbRegExp));
-	gtk_widget_ref(rbRegExp);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "rbRegExp",
-				 rbRegExp, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(rbRegExp);
-	gtk_box_pack_start(GTK_BOX(vbox2), rbRegExp, FALSE, FALSE, 0);
-	gtk_widget_set_usize(rbRegExp, -2, 20);
-
-	p_so->rbPhraseSearch =
-	    gtk_radio_button_new_with_label(vbox2_group,
-					    _("Exact Phrase"));
-	vbox2_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON
-				   (p_so->rbPhraseSearch));
-	gtk_widget_ref(p_so->rbPhraseSearch);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "p_so->rbPhraseSearch",
-				 p_so->rbPhraseSearch,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(p_so->rbPhraseSearch);
-	gtk_box_pack_start(GTK_BOX(vbox2), p_so->rbPhraseSearch,
-			   FALSE, FALSE, 0);
-	gtk_widget_set_usize(p_so->rbPhraseSearch, -2, 20);
-
-	frame3 = gtk_frame_new(_("Search Options"));
-	gtk_widget_ref(frame3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame3",
-				 frame3, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(frame3);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame3, FALSE, TRUE, 0);
-
-	vbox3 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox3);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox3",
-				 vbox3, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vbox3);
-	gtk_container_add(GTK_CONTAINER(frame3), vbox3);
-
-	ckbCaseSensitive =
-	    gtk_check_button_new_with_label(_("Case Sensitive"));
-	gtk_widget_ref(ckbCaseSensitive);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "ckbCaseSensitive", ckbCaseSensitive,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(ckbCaseSensitive);
-	gtk_box_pack_start(GTK_BOX(vbox3), ckbCaseSensitive, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(ckbCaseSensitive, -2, 20);
-
-	p_so->ckbCommentary =
-	    gtk_check_button_new_with_label(_("Search Commentary"));
-	gtk_widget_ref(p_so->ckbCommentary);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "p_so->ckbCommentary",
-				 p_so->ckbCommentary, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(p_so->ckbCommentary);
-	gtk_box_pack_start(GTK_BOX(vbox3), p_so->ckbCommentary,
-			   FALSE, FALSE, 0);
-	gtk_widget_set_usize(p_so->ckbCommentary, -2, 20);
-
-	p_so->ckbPerCom =
-	    gtk_check_button_new_with_label(_("Search Personal"));
-	gtk_widget_ref(p_so->ckbPerCom);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "p_so->ckbPerCom", p_so->ckbPerCom,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(p_so->ckbPerCom);
-	gtk_box_pack_start(GTK_BOX(vbox3), p_so->ckbPerCom, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(p_so->ckbPerCom, -2, 20);
-
-	p_so->ckbGBS =
-	    gtk_check_button_new_with_label(_("Search Book"));
-	gtk_widget_ref(p_so->ckbGBS);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "p_so->ckbGBS", p_so->ckbGBS,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(p_so->ckbGBS);
-	gtk_tooltips_set_tip(tooltips, p_so->ckbGBS,
-			     _("Search Current Book"), NULL);
-	gtk_box_pack_start(GTK_BOX(vbox3), p_so->ckbGBS, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(p_so->ckbGBS, -2, 20);
-
-	frame4 = gtk_frame_new(_("Search Scope"));
-	gtk_widget_ref(frame4);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame4",
-				 frame4, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(frame4);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame4, FALSE, TRUE, 0);
-
-	vbox4 = gtk_vbox_new(TRUE, 0);
-	gtk_widget_ref(vbox4);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox4",
-				 vbox4, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(vbox4);
-	gtk_container_add(GTK_CONTAINER(frame4), vbox4);
-
-	rbNoScope =
-	    gtk_radio_button_new_with_label(vbox4_group, _("No Scope"));
-	vbox4_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbNoScope));
-	gtk_widget_ref(rbNoScope);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "rbNoScope",
-				 rbNoScope, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(rbNoScope);
-	gtk_box_pack_start(GTK_BOX(vbox4), rbNoScope, FALSE, FALSE, 0);
-	gtk_widget_set_usize(rbNoScope, -2, 20);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rbNoScope),
-				     TRUE);
-
-	rrbUseBounds =
-	    gtk_radio_button_new_with_label(vbox4_group,
-					    _("Use Bounds"));
-	vbox4_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rrbUseBounds));
-	gtk_widget_ref(rrbUseBounds);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "rrbUseBounds", rrbUseBounds,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(rrbUseBounds);
-	gtk_box_pack_start(GTK_BOX(vbox4), rrbUseBounds, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(rrbUseBounds, -2, 20);
-
-	rbLastSearch =
-	    gtk_radio_button_new_with_label(vbox4_group,
-					    _("Last Search"));
-	vbox4_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(rbLastSearch));
-	gtk_widget_ref(rbLastSearch);
-	gtk_object_set_data_full(GTK_OBJECT(s->app),
-				 "rbLastSearch", rbLastSearch,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(rbLastSearch);
-	gtk_box_pack_start(GTK_BOX(vbox4), rbLastSearch, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(rbLastSearch, -2, 20);
-
-	frame5 = gtk_frame_new(_("Bounds"));
-	gtk_widget_ref(frame5);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame5",
-				 frame5, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(frame5);
-	gtk_box_pack_start(GTK_BOX(vbox1), frame5, TRUE, TRUE, 0);
-
-	table1 = gtk_table_new(2, 2, FALSE);
-	gtk_widget_ref(table1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "table1",
-				 table1, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(table1);
-	gtk_container_add(GTK_CONTAINER(frame5), table1);
-
-	label1 = gtk_label_new(_("Lower"));
-	gtk_widget_ref(label1);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label1",
-				 label1, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(label1);
-	gtk_table_attach(GTK_TABLE(table1), label1, 0, 1, 0, 1,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label1), 0, 0.5);
-
-	label2 = gtk_label_new(_("Upper "));
-	gtk_widget_ref(label2);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "label2",
-				 label2, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(label2);
-	gtk_table_attach(GTK_TABLE(table1), label2, 0, 1, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label2), 0, 0.5);
-
-	entryLower = gtk_entry_new();
-	gtk_widget_ref(entryLower);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "entryLower",
-				 entryLower, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(entryLower);
-	gtk_table_attach(GTK_TABLE(table1), entryLower, 1, 2, 0, 1,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_widget_set_usize(entryLower, 114, 22);
-	gtk_entry_set_text(GTK_ENTRY(entryLower), _("Genesis"));
-
-	entryUpper = gtk_entry_new();
-	gtk_widget_ref(entryUpper);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "entryUpper",
-				 entryUpper, (GtkDestroyNotify)
-				 gtk_widget_unref);
-	gtk_widget_show(entryUpper);
-	gtk_table_attach(GTK_TABLE(table1), entryUpper, 1, 2, 1, 2,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_widget_set_usize(entryUpper, 114, 22);
-	gtk_entry_set_text(GTK_ENTRY(entryUpper), _("Revelation"));
-
-	gtk_signal_connect(GTK_OBJECT(btnSearch), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnSearch_clicked), s);
-	gtk_object_set_data(GTK_OBJECT(s->app), "tooltips", tooltips);
-}
-
 void setupSB(SETTINGS * s)
 {
 	GList *tmp;
@@ -2207,7 +1909,7 @@ void setupSB(SETTINGS * s)
 				 gtk_widget_unref);
 	gtk_widget_show(searchbutton);
 
-	setupSearchBar(vpSearch, settings);
+	gui_create_shortcutbar_search(vpSearch, settings);
 
 	groupnum6 =
 	    e_group_bar_add_group(E_GROUP_BAR(shortcut_bar),
