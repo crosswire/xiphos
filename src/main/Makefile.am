@@ -3,29 +3,12 @@ INCLUDES =  \
     $(SWORD_INCLUDES) \
     $(GNOME_CFLAGS) \
     $(GTKHTML_CFLAGS) \
-    $(MOZILLA_CFLAGS) 
-    
+    $(MOZILLA_CFLAGS)
 
-noinst_LIBRARIES = libmain.a  
 
-if GNOME_SPELL
-  SPELL_IDL = Spell.idl
-
-  IDL_GENERATED = 		\
-	Spell.h			\
-	Spell-common.c		\
-	Spell-skels.c		\
-	Spell-stubs.c
-
-$(IDL_GENERATED): $(SPELL_IDL)
-	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(top_builddir)/src/main/Spell.idl
-else
-  IDL_GENERATED =
-  SPELL_IDL =
-endif
+noinst_LIBRARIES = libmain.a
 
 libmain_a_SOURCES =  \
-    $(IDL_GENERATED)\
     configs.cc configs.h \
     display.cc display.hh \
     embed.cc embed.h \
@@ -40,15 +23,6 @@ libmain_a_SOURCES =  \
     search_sidebar.cc search_sidebar.h \
     settings.c settings.h \
     sidebar.cc sidebar.h\
-    spell_pspell.c \
-    spell.h \
     sword.cc sword.h\
     url.cc url.hh\
     xml.c xml.h
-
-EXTRA_DIST = \
-    $(SPELL_IDL)
-    
-
-CLEANFILES = \
-    $(IDL_GENERATED)

@@ -115,8 +115,6 @@ int main(int argc, char *argv[])
 	gui_splash_done();
 //#endif	
 	
-	frontend_display();
-	
 	if(have_sword_url)
 		main_url_handler(argv[1], TRUE);
 

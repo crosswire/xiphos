@@ -1,8 +1,8 @@
 /*
  * GnomeSword Bible Study Tool
- * editor_replace.h - find and replace dialog for editors
- *
- * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
+ * toolbar_style.h - style toolbar for editors
+ *               
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,20 +18,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
-#ifndef _EDITOR_REPLACE_H_
-#define _EDITOR_REPLACE_H_
 
-#include <gnome.h>
-#include <gtkhtml/gtkhtml.h>
+#ifndef _TOOLBAR_STYLE_H
+#define _TOOLBAR_STYLE_H
 
-typedef struct _GtkHTMLReplaceAskDialog GtkHTMLReplaceAskDialog;
-typedef struct _GtkHTMLReplaceDialog GtkHTMLReplaceDialog;
+#include "editor/editor.h"
 
-#include "gui/editor.h"
-
-GtkHTMLReplaceDialog * gs_editor_replace_dialog_new(GtkHTML *html);
-void gs_editor_replace_dialog_destroy(GtkHTMLReplaceDialog *d);
-void replace(GSHTMLEditorControlData *ecd);
+GtkWidget *gui_toolbar_style(GSHTMLEditorControlData *ecd);
+//void toolbar_update_format(GSHTMLEditorControlData *ecd);
 
 #endif
