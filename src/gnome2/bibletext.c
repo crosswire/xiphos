@@ -24,6 +24,9 @@
 #endif
 
 #include <gnome.h>
+#include <gtkhtml/gtkhtml.h>
+#include <gtkhtml/htmlengine.h>
+
 
 
 #include "gui/gnomesword.h"
@@ -310,6 +313,8 @@ static gboolean on_button_release_event(GtkWidget * widget,
 {
 	extern gboolean in_url;
 	gchar *key;
+	const gchar *url;
+	gchar *buf = NULL;
 
 	settings.whichwindow = MAIN_TEXT_WINDOW;
 	/*
@@ -344,6 +349,18 @@ static gboolean on_button_release_event(GtkWidget * widget,
 		}
 		break;
 	case 2:
+		if (!in_url) 
+			break;
+		url = html_engine_get_link_at (GTK_HTML(t->html)->engine,
+					 event->x,
+					 event->y);
+		g_warning(url);
+		if (*url == '*') {
+			++url;
+			buf = g_strdup(url);
+			gui_open_verse_in_new_tab(buf);
+			g_free(buf);
+		}
 		break;
 	case 3:
 		break;
