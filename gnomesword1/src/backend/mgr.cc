@@ -303,8 +303,7 @@ char *backend_get_path_to_mods(void)
  *   void
  */
 
-void backend_set_global_option(int manager, char * option, 
-							char * yesno)
+void backend_set_global_option(int manager, char * option, char * yesno)
 {
 	/* 
 	 * turn option on or off INTER_MGR
