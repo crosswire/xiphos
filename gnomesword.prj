@@ -58,7 +58,6 @@ preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
-preferences.autoformat.style=Custom style
 preferences.indent.opening=0
 preferences.autoformat.disable=0
 preferences.indent.automatic=1
@@ -239,7 +238,6 @@ module.pixmap.files=\
 	pixmaps/book-gold.png\
 	pixmaps/book-green.png\
 	pixmaps/book-un.png\
-	pixmaps/gnome-fontsel.xpm\
 	pixmaps/splash.png\
 	pixmaps/sword.xpm\
 	pixmaps/sword3.xpm\
