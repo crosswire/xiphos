@@ -68,7 +68,8 @@ static gboolean ApplyChangeBook;
 static gchar *change_verse_interlinear(void)
 {
 	gchar *retval;
-	gchar *bookname, buf[256];
+	const gchar *bookname;
+	gchar buf[256];
 	gint chapter, verse;
 	const char *newbook;
 
@@ -116,13 +117,14 @@ static gchar *change_verse_interlinear(void)
  *   gchar*
  */
 
-static gchar *update_controls_interlinear(gchar * ref)
+static gchar *update_controls_interlinear(const gchar * ref)
 {
-	gchar *bookname, buf[256];
+	const gchar *bookname;
+	gchar buf[256];
 	gint chapter, verse;
 	const char *newbook;
 
-	newbook = get_book_from_key(ref);
+	newbook = get_book_from_key(ref); 
 	chapter = get_chapter_from_key(ref);
 	verse = get_verse_from_key(ref);
 
@@ -290,7 +292,8 @@ static void on_entrycbIntBook_changed(GtkEditable * editable,
 				      gpointer user_data)
 {
 	if (ApplyChangeBook) {
-		gchar *bookname, buf[256];
+		const gchar *bookname;
+		char buf[256];
 		bookname = gtk_entry_get_text(GTK_ENTRY(editable));
 		sprintf(buf, "%s %d:%d", bookname, 1, 1);
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
@@ -390,12 +393,12 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 						  GdkEventKey * event,
 						  gpointer user_data)
 {
-	gchar *buf;
+	const gchar *buf;
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));
 	if (event->keyval == 65293 || event->keyval == 65421) {
 		settings.cvInterlinear =
-		    update_controls_interlinear(buf);
+		    update_controls_interlinear(buf); 
 		gui_update_interlinear_page_detached();
 		g_free(settings.cvInterlinear);
 		ApplyChangeBook = TRUE;
@@ -427,7 +430,7 @@ static gboolean on_entryIntLookup_key_press_event(GtkWidget * widget,
 static void on_btnIntGotoVerse_clicked(GtkButton * button,
 				       gpointer user_data)
 {
-	gchar *buf;		//-- pointer to entry string
+	const gchar *buf;		//-- pointer to entry string
 	//-- pointer to entry string
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text

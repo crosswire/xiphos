@@ -220,7 +220,7 @@ char * backend_module_name_from_description(char *mod_desc)
  *   int
  */
 
-int backend_do_module_search(char *module_name, char *search_string,
+int backend_do_module_search(char *module_name, const char *search_string,
 			     int search_type, int search_params)
 {
 	char progressunits = 70;

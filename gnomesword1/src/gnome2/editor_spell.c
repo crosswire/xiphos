@@ -170,7 +170,7 @@ static void correct_word(const gchar * word,
 			word_corrected = 1;
 			break;
 		case SPC_REPLACE:{			
-			gchar *buf = gtk_entry_get_text(GTK_ENTRY
+			const gchar *buf = gtk_entry_get_text(GTK_ENTRY
 					     (spc_gui.replace_entry));
 			store_replacement(word,buf);
 			html_engine_replace_spell_word_with(

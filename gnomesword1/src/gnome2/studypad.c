@@ -341,9 +341,8 @@ static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
 			     GSHTMLEditorControlData * ecd)
 {
 	ecd->changed = TRUE;
-	//file_changed = TRUE;
 	gui_update_statusbar(ecd);
-	return 1;
+	return FALSE;
 }
 
 /******************************************************************************
@@ -560,7 +559,7 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_widget_show(specd->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  specd->htmlwidget);
-	gtk_html_load_empty(specd->html);
+//	gtk_html_load_empty(specd->html);
 
 
 	specd->statusbar = gtk_statusbar_new();
@@ -571,29 +570,26 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	specd->vbox = vboxSP;
 	specd->pm = gui_create_editor_popup(specd);
 	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
-
+/*
 	gtk_signal_connect(GTK_OBJECT(specd->html), "submit",
 			   G_CALLBACK(on_submit), specd);
 	gtk_signal_connect(GTK_OBJECT
 			   (specd->htmlwidget),
 			   "load_done",
 			   G_CALLBACK(html_load_done), specd);
-	gtk_signal_connect(GTK_OBJECT
-			   (specd->htmlwidget),
-			   "key_press_event",
-			   G_CALLBACK(html_key_pressed), specd);
-	gtk_signal_connect(GTK_OBJECT
-			   (specd->htmlwidget),
-			   "button_press_event",
-			   G_CALLBACK(html_button_pressed), specd);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget),
-			   "enter_notify_event",
-			   G_CALLBACK(on_html_enter_notify_event),
+*/			   
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget),"key_press_event",
+			   G_CALLBACK(html_key_pressed), 
 			   specd);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "link_clicked", G_CALLBACK(gui_link_clicked),	/* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "link_clicked", 
+			G_CALLBACK(gui_link_clicked),	/* gs_html.c */
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", G_CALLBACK(gui_url),	/* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", 
+			G_CALLBACK(gui_url),	/* gs_html.c */
 			   NULL);
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget),"button_press_event",
+			   G_CALLBACK(html_button_pressed), 
+			   specd);
 
 	/* create toolbars */
 	widgets.toolbar_studypad = gui_toolbar_style(specd);

@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 	
-char *xml_get_list_from_label(char * section, char * item, char * label);
+char *xml_get_list_from_label(char * section, char * item, const char * label);
 int xml_set_section_ptr(char * section);
 void xml_set_list_item(char * section, char * item, char * label, 
 				char * value);

@@ -154,7 +154,7 @@ int is_module_rtl(char * mod_name)
  *   int
  */
 
-int do_module_search(char * module_name ,char * search_string, 
+int do_module_search(char * module_name ,const char * search_string, 
 		int search_type, int search_params, int dialog)
 {
 	search_dialog = dialog;
