@@ -159,8 +159,8 @@ libbackend_a_SOURCES = \
     bibletext_.h \
     bookmarks.cpp \
     bookmarks.h \
-    commentary.cpp \
-    commentary.h \
+    commentary_.cpp \
+    commentary_.h \
     dictlex.cpp \
     dictlex.h \
     display.cpp \
@@ -201,7 +201,7 @@ LIBRARIES = $(noinst_LIBRARIES)
 libbackend_a_AR = $(AR) cru
 libbackend_a_LIBADD =
 am_libbackend_a_OBJECTS = bibletext_.$(OBJEXT) bookmarks.$(OBJEXT) \
-	commentary.$(OBJEXT) dictlex.$(OBJEXT) display.$(OBJEXT) \
+	commentary_.$(OBJEXT) dictlex.$(OBJEXT) display.$(OBJEXT) \
 	display_info.$(OBJEXT) gbs.$(OBJEXT) interlinear.$(OBJEXT) \
 	module_options.$(OBJEXT) percomm_.$(OBJEXT) \
 	properties.$(OBJEXT) search_.$(OBJEXT) shortcutbar.$(OBJEXT) \
@@ -216,7 +216,7 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bibletext_.Po $(DEPDIR)/bookmarks.Po \
-@AMDEP_TRUE@	$(DEPDIR)/commentary.Po $(DEPDIR)/dictlex.Po \
+@AMDEP_TRUE@	$(DEPDIR)/commentary_.Po $(DEPDIR)/dictlex.Po \
 @AMDEP_TRUE@	$(DEPDIR)/display.Po $(DEPDIR)/display_info.Po \
 @AMDEP_TRUE@	$(DEPDIR)/gbs.Po $(DEPDIR)/interlinear.Po \
 @AMDEP_TRUE@	$(DEPDIR)/module_options.Po $(DEPDIR)/percomm_.Po \
@@ -282,7 +282,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bibletext_.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bookmarks.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/commentary.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/commentary_.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/dictlex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/display_info.Po@am__quote@

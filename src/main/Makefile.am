@@ -17,8 +17,8 @@ COMMON_SOURCE =  \
     bibletext.h \
     gs_bookmarks.c \
     gs_bookmarks.h \
-    gs_commentary.c \
-    gs_commentary.h \
+    commentary.c \
+    commentary.h \
     gs_detach_int.c \
     gs_detach_int.h \
     gs_detach_sb.c \
