@@ -661,7 +661,7 @@ void create_mainwindow(void)
 	gtk_widget_set_size_request(widgets.notebook_main, -1, 25);
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK(widgets.notebook_main),
                                              TRUE);
-
+	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_main));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_main), FALSE);
 	/* main passage tabbed notebook end */
 	
