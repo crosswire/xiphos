@@ -8,7 +8,7 @@
   <source_directory>save</source_directory>
   <pixmaps_directory>pixmaps</pixmaps_directory>
   <language>C</language>
-  <gnome_support>False</gnome_support>
+  <gnome_support>True</gnome_support>
   <gettext_support>False</gettext_support>
   <output_main_file>False</output_main_file>
   <output_support_files>False</output_support_files>
@@ -996,6 +996,11 @@ Revelation
 	    <widget>
 	      <class>GtkHPaned</class>
 	      <name>hpaned1</name>
+	      <signal>
+		<name>button_release_event</name>
+		<handler>on_hpaned1_button_release_event</handler>
+		<last_modification_time>Thu, 28 Sep 2000 16:08:08 GMT</last_modification_time>
+	      </signal>
 	      <handle_size>10</handle_size>
 	      <gutter_size>10</gutter_size>
 	      <child>

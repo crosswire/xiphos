@@ -156,6 +156,8 @@ void setformatoption(GtkWidget * button);
 
 gint getversenumber(GtkWidget * text);
 
+gint getdictnumber(GtkWidget * text);
+
 void sbchangeModSword(gint group_num, gint item_num);
 
 void

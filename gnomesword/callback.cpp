@@ -32,6 +32,9 @@
 #include <versekey.h>
 #include <regex.h>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
+#include  <widgets/e-paned/e-paned.h>
+#include  <widgets/e-paned/e-hpaned.h/>
+#include  <widgets/e-paned/e-vpaned.h/>
 
 #include "callback.h"
 #include "GnomeSword.h"
@@ -92,7 +95,7 @@ bool buttonpressed = false;
 bool dicttabs,
     comtabs,
     bar, applycolor = false, showtextgroup, showcomgroup, showdictgroup;
-
+extern gint sbsize;
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, gpointer user_data)
@@ -433,6 +436,31 @@ on_moduleText_button_press_event(GtkWidget * widget,
 }
 
 //----------------------------------------------------------------------------------------------
+gboolean
+on_textDict_button_press_event (GtkWidget *widget,
+                                 GdkEventButton * event,
+                                 gpointer user_data)
+{
+        gint versenum;          //-- new verse number
+        //gchar buf[80];
+
+        isstrongs = false;
+        if (event->button == 1){  //-- some one pressed mouse button one
+                if (!GTK_EDITABLE(widget)->has_selection)
+                        return false;   //-- we do not have a selection
+                versenum = getdictnumber(widget);      //-- get the new verse number
+                if (versenum > 0){      //-- if not a number stop
+                        if (isstrongs){ //-- if we have a storngs number look it up
+                                lookupStrongsSWORD(versenum);
+                                isstrongs = false;
+                        }
+                }
+        }
+        return true;
+}
+
+
+//----------------------------------------------------------------------------------------------
 void /* commentary notebook page changed */
 on_notebook1_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
@@ -442,8 +470,8 @@ on_notebook1_switch_page(GtkNotebook * notebook,
 	static bool firsttime = true;
 	if (!firsttime) {
 		label = (GtkLabel *) page->tab_label;	//-- get label
-		changcurcomModSWORD((char *) label->label, page_num);	//-- pass label text and page number to function to do the work - GnomeSword.cpp
-	}
+		changcurcomModSWORD((char *) label->label, page_num);	//-- pass label text and page number 
+	}								//-- to function to do the work - GnomeSword.cpp
 	firsttime = false;
 }
 
@@ -2234,10 +2262,10 @@ void on_btnSB_clicked(GtkButton * button, gpointer user_data)
 {
 	if (settings->showshortcutbar) {
 		settings->showshortcutbar = false;
-		gtk_widget_hide(GTK_WIDGET(shortcut_bar));
+		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 0);
 	} else {
 		settings->showshortcutbar = true;
-		gtk_widget_show(GTK_WIDGET(shortcut_bar));
+		e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), sbsize);
 	}
 }
 
@@ -2319,4 +2347,16 @@ on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 	gtk_widget_set_sensitive (btnok, true);
 	gtk_widget_set_sensitive (btnapply, true);
 	showdictgroup = togglebutton->active;*/
+}
+
+//----------------------------------------------------------------------------------------------
+
+gboolean
+on_epaned_button_release_event(GtkWidget       *widget,
+                               GdkEventButton  *event,
+                               gpointer         user_data)
+{
+        sbsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
+        if(sbsize) return TRUE; 
+        return FALSE;
 }
