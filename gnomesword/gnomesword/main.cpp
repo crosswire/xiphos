@@ -57,6 +57,7 @@ main (int argc, char *argv[])
 
   setDiretory();
   loadbookmarkarray();
+  //createFiles();
   initSword(mainwindow,menu1,menu2,menu3,menu4,menu5);
   gtk_widget_show (mainwindow);
   UpdateChecks(mainwindow); //-- set toggle state of buttons and menu items

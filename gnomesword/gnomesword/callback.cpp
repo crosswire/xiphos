@@ -39,6 +39,7 @@
 #include "filestuff.h"
 #include "display.h"
 #include "dialogs.h"
+#include "listeditor.h"
 
 #ifdef  USE_GNOMEPRINT
 #include "printstuff.h"
@@ -48,23 +49,31 @@
 #include "spellcheck.h"
 #endif /* USE_ASPELL */
 
-
-bool firstsearch = TRUE;
-GtkWidget *searchDlg;
-extern bool ApplyChange;
-extern bool file_changed;
-extern gchar *current_filename;
-extern GtkWidget *MainFrm;
-extern GtkWidget *bookmark_mnu;
-extern gchar	*font_mainwindow,
-							*font_interlinear,
-							*font_currentverse;
+LISTITEM listitem; //-- structure for ListEditor items (verse lists and bookmarks)
+gint 	listrow;   //-- current row in ListEditor clist widget
+bool firstsearch = TRUE;  //-- search dialog is not running when true
+bool firstLE = true; //-- ListEditor in not running when true
+GtkWidget *searchDlg; //-- pointer to search dialog
+GtkWidget *listeditor; //-- pointer to ListEditor
+extern bool ApplyChange;  //-- to keep form looping when book combobox is changed - do we still need this ???
+extern bool file_changed; //-- ???
+extern gchar *current_filename; //-- file in studypad
+extern GtkWidget *MainFrm;      //-- GnomeSword widget (gnome app)(declared and set in GnomeSword.cpp)
+extern GtkWidget *bookmark_mnu; //-- ???
+extern gchar	*font_mainwindow, //--
+							*font_interlinear, //--
+							*font_currentverse;//--
 extern GdkColor myGreen;  //-- current verse color for main text window - declared in display.cpp
-extern bool noteModified;
-extern bool waitonmessage;
+extern bool noteModified; //-- personal comments window changed
+//extern bool waitonmessage;
 //extern gboolean saveChanges;
 extern gboolean autoSave; //-- auto save personal comments when verse changes -- declared in GnomeSword.cpp
 extern gint answer;    //-- do we save file on exit
+extern SWModule *curMod; //-- module for main text window (GnomeSword.cpp)
+extern SWModule *comp1Mod; //-- module for first interlinear window (GnomeSword.cpp)
+extern SWModule *comp2Mod; //-- module for second interlinear window (GnomeSword.cpp)	
+extern SWModule *comp3Mod;	 //-- module for third interlinear window (GnomeSword.cpp)
+extern gint ibookmarks;    //-- number of bookmark menu items
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -111,11 +120,25 @@ on_ok_button2_clicked                  (GtkButton       *button,
 }
 
 //----------------------------------------------------------------------------------------------
-void
+void                                    //-- save verse list fileselection dialog ok button clicked
+on_ok_button4_clicked                  (GtkButton       *button,
+                                        gpointer         user_data) //-- user data is the list widget
+{
+  GtkWidget *filesel; //-- pointer to fileselection dialog
+  gchar filename[255]; //-- string to store filename from fileselection dialog
+
+  filesel = gtk_widget_get_toplevel (GTK_WIDGET (button)); //-- get fileselection dialog
+  sprintf(filename,"%s", gtk_file_selection_get_filename (GTK_FILE_SELECTION (filesel)));//-- get filename
+  gtk_widget_destroy(filesel); //-- destroy fileselection dialog
+  savelist(filename,(GtkWidget *)user_data); //-- send filename and list widget to savelist function (filestuff.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void                                     //-- fileselection dialog cancel button clicked
 on_cancel_button2_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
-	gtk_widget_destroy(gtk_widget_get_toplevel (GTK_WIDGET (button)));
+	gtk_widget_destroy(gtk_widget_get_toplevel(GTK_WIDGET (button))); //--destroy fileselection dialog
 }
 
 //----------------------------------------------------------------------------------------------
@@ -209,6 +232,15 @@ on_mainwindow_destroy                  (GtkObject       *object,
 
 //----------------------------------------------------------------------------------------------
 void
+on_listeditor_destroy                  (GtkObject       *object,
+                                        gpointer         user_data)
+{
+ 	firstLE=true;
+ 	destroyListEditor();
+}
+
+//----------------------------------------------------------------------------------------------
+void
 on_dlgSearch_destroy                  (GtkObject       *object,
                                         gpointer         user_data)
 {
@@ -256,11 +288,13 @@ void
 on_edit_bookmarks1_activate            (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	GtkWidget *BMEditor;
-	
-	BMEditor = create_wdwEditBookmarks();
-	editbookmarksLoad(BMEditor);
-	gtk_widget_show(BMEditor);
+	if(firstLE)
+	{	
+		listeditor = createListEditor();	
+		editbookmarks(listeditor);
+		firstLE = false;
+	}
+	gtk_widget_show(listeditor);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -666,7 +700,8 @@ void
 on_btnSaveFile_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
-	GtkWidget *savemyFile;
+	GtkWidget *savemyFile,
+						*ok_button2;
 	if(current_filename)
 	{
 		saveFile(current_filename);	
@@ -677,6 +712,10 @@ on_btnSaveFile_clicked                 (GtkButton       *button,
 		savemyFile = create_fileselectionSave();
 		gtk_file_selection_set_filename( GTK_FILE_SELECTION(savemyFile),
                                              "/home/tb/BibleStudy");
+  	ok_button2 = lookup_widget(savemyFile,"ok_button2");
+  	gtk_signal_connect (GTK_OBJECT (ok_button2), "clicked",
+                      GTK_SIGNAL_FUNC (on_ok_button2_clicked),
+                      NULL);
 		gtk_widget_show (savemyFile);
 	}
 }
@@ -686,11 +725,16 @@ void
 on_btnSaveFileAs_clicked               (GtkButton       *button,
                                         gpointer         user_data)
 {
-	GtkWidget *savemyFile;
+	GtkWidget *savemyFile,
+						*ok_button2;
 
 	savemyFile = create_fileselectionSave();
 	gtk_file_selection_set_filename( GTK_FILE_SELECTION(savemyFile),
                                             "/home/tb/BibleStudy/" );
+	ok_button2 = lookup_widget(savemyFile,"ok_button2");
+	gtk_signal_connect (GTK_OBJECT (ok_button2), "clicked",
+                      GTK_SIGNAL_FUNC (on_ok_button2_clicked),
+                      NULL);
 	gtk_widget_show (savemyFile);
 }
 
@@ -1318,13 +1362,16 @@ on_about_the_sword_project1_activate   (GtkMenuItem     *menuitem,
 {
 	GtkWidget *dlg,
 						*text1,
-						*text2;
+						*text2,
+						*label;
 	
  	dlg = create_AboutSword();
  	text1 = lookup_widget(dlg,"txtAboutSword");
  	text2 = lookup_widget(dlg,"text6");
+ 	label = lookup_widget(dlg,"label96");
  	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);
  	gtk_text_set_word_wrap(GTK_TEXT(text2), TRUE);
+ 	showinfoSWORD(text2,GTK_LABEL(label));
  	gtk_widget_show(dlg);
 }
 
@@ -1485,12 +1532,18 @@ void
 on_btnSearchSaveList_clicked           (GtkButton       *button,
                                         gpointer         user_data)
 {
-    GtkWidget *list, //-- pointer to resultList
-    					*savedlg;//-- pointer to save file dialog
-
-
-    list = lookup_widget(GTK_WIDGET(button),"resultList"); //-- set list to resultlist in search dialog
-    savelistinfo(list); //-- send list widget to savelistinfo function in GnomeSword.cpp
+    GtkWidget   	*list, //-- pointer to resultList
+    					*savedlg,//-- pointer to save file dialog
+    					*ok_button2; //-- pointer to fileselection ok button
+  list = lookup_widget(GTK_WIDGET(button),"resultList"); //-- set list to resultlist in search dialog
+	savedlg = create_fileselectionSave();
+	gtk_file_selection_set_filename( GTK_FILE_SELECTION(savedlg),
+                                            "/home/tb/BibleStudy/" );
+	ok_button2 = lookup_widget(savedlg,"ok_button2");
+	gtk_signal_connect (GTK_OBJECT (ok_button2), "clicked",
+                      GTK_SIGNAL_FUNC (on_ok_button4_clicked),
+                      list);
+	gtk_widget_show (savedlg);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1530,9 +1583,7 @@ void
 on_verse_list1_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 { 	
-	GtkWidget *dlg;
-	dlg = create_dlgVerseList();
-	gtk_widget_show(dlg);
+	
 }
 
 
@@ -1541,7 +1592,10 @@ void
 on_btnVerseListSave_clicked            (GtkButton       *button,
                                         gpointer         user_data)
 {
+  GtkWidget *dlg;
 
+  dlg = gtk_widget_get_toplevel (GTK_WIDGET (button));
+  editbookmarksSave(dlg);
 }
 
 
@@ -1737,3 +1791,237 @@ on_btnBMEcancel_clicked                (GtkButton       *button,
 }
 
 //----------------------------------------------------------------------------------------------
+void
+on_about_this_module1_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	showmoduleinfoSWORD(curMod->Name());
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_about_this_module2_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	showmoduleinfoSWORD(comp1Mod->Name());
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_about_this_module3_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	showmoduleinfoSWORD(comp2Mod->Name());
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_about_this_module4_activate         (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	showmoduleinfoSWORD(comp3Mod->Name());
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnPropertyboxOK_clicked            (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnPropertyboxApply_clicked         (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnPropertyboxCancel_clicked        (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_clLElist_select_row                 (GtkCList        *clist,
+                                        gint             row,
+                                        gint             column,
+                                        GdkEvent        *event,
+                                        gpointer         user_data)
+{ 	
+	listrow = row;
+	selectrow(GTK_WIDGET(clist),listrow,column);	
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEup_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	movelistitem(GTK_WIDGET(button), 0, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEdown_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	movelistitem(GTK_WIDGET(button), 1, listrow); //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEleft_clicked                   (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	movelistitem(GTK_WIDGET(button), 2, listrow); //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEright_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	movelistitem(GTK_WIDGET(button), 3, listrow);  //-- send to movelistitem function for processing (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnGotoVerse_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget	*entry;
+	gchar *buf;
+	entry = lookup_widget(GTK_WIDGET(button),"entryVerseLookup");
+  buf = gtk_entry_get_text(GTK_ENTRY(entry));
+  changeLEverse(buf);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_cbLEBook_changed                    (GtkEditable     *editable,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_spLEChapter_changed                 (GtkEditable     *editable,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_spLEVerse_changed                   (GtkEditable     *editable,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEAddVerse_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	GtkWidget	*list,
+						*entry;
+	gchar 		*item;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clLElist");
+  entry = lookup_widget(GTK_WIDGET(button),"entryVerseLookup");
+  item = gtk_entry_get_text(GTK_ENTRY(entry));
+  addverse(list, listrow, item); //-- function to add item to list (listeditor.cpp)
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEAddItem_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+  GtkWidget	*list;
+	
+	list = lookup_widget(GTK_WIDGET(button),"clLElist");
+	addsubitme(list, listrow);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEDelete_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEClose_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEmakesub_clicked                (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEok_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEapply_clicked                  (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEcancel_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+ 	gtk_widget_hide(listeditor);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_entryPreitem_changed                (GtkEditable     *editable,
+                                        gpointer         user_data)
+{
+
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEapplylistchanges_clicked       (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   applylistchanges(GTK_WIDGET(button), listrow);
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_btnLEcancelistchanges_clicked       (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+}
+
+//==============================================================================================
