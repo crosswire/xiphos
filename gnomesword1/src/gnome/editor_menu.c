@@ -46,7 +46,6 @@
 #include "gui/editor_search.h"
 #include "gui/editor_spell.h"
 #include "gui/percomm.h"
-#include "gui/link_dialog.h"
 #include "gui/fileselection.h"
 #include "gui/studypad.h"
 #include "gui/html.h"
@@ -481,11 +480,42 @@ static void on_replace_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
+ *  set_link_to_module
+ *
+ * Synopsis
+ *   #include "editor_menu.h"
+ *
+ *   void set_link_to_module(gchar * linkref, gchar * linkmod,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    set link to module and key
+ *
+ * Return value
+ *   void
+ */ 
+ 
+static void set_link_to_module(gchar * linkref, gchar * linkmod,
+					GSHTMLEditorControlData * ecd)
+{
+	gchar buf[256], *target = "";
+	HTMLEngine *e = ecd->html->engine;
+
+	if (strlen(linkmod))
+		sprintf(buf, "version=%s passage=%s", linkmod, linkref);
+	else
+		sprintf(buf, "passage=%s", linkref);
+	html_engine_selection_push(e);
+	html_engine_insert_link(e, buf, target);
+	html_engine_selection_pop(e);
+}
+
+/******************************************************************************
+ * Name
  *  on_link_activate
  *
  * Synopsis
  *   #include "editor_menu.h"
- *   #include "link_dialog.h"
  *
  *   void on_link_activate(GtkMenuItem * menuitem, 
  *					GSHTMLEditorControlData * ecd)	
@@ -500,10 +530,38 @@ static void on_replace_activate(GtkMenuItem * menuitem,
 static void on_link_activate(GtkMenuItem * menuitem, 
 					GSHTMLEditorControlData * ecd)
 {
-	GtkWidget *dlg;
-
-	dlg = create_link_dialog(ecd);
-	gtk_widget_show(dlg);
+	gint test;	
+	GS_DIALOG *info;
+	
+	info = gui_new_dialog();
+	info->label_top = N_("Add Reference Link");
+	info->text1 = g_strdup("");
+	info->label1 = N_("Reference: ");
+	info->text2 = g_strdup("");
+	info->label2 = N_("Module: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	/*
+	 * get selected text  
+	 */
+	if (html_engine_is_selection_active(ecd->html->engine)) {
+		gchar *buf;
+		buf = html_engine_get_selection_string(ecd->html->engine);
+		info->text1 = g_strdup(buf);
+	}
+	info->text2 = g_strdup(settings.MainWindowModule);
+	/*** open dialog to get name for list ***/
+	test = gui_gs_dialog(info);
+	if (test == GS_OK) {			
+		if (strlen(info->text1) > 0) {
+			set_link_to_module(info->text1, info->text2, ecd);
+			ecd->changed = TRUE;
+			update_statusbar(ecd);
+		}
+	}
+	g_free(info->text1);
+	g_free(info->text2);
+	g_free(info);
 }
 
 /******************************************************************************

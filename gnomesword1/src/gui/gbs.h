@@ -24,9 +24,6 @@
 
 
 typedef struct _gbsdata GBS_DATA;
-
-#include "gui/gbs_find.h"
-
 struct _gbsdata {
 	GtkWidget *vbox;
 	GtkWidget *html;
@@ -38,7 +35,6 @@ struct _gbsdata {
 	gint mod_num;
 	unsigned long offset;
 	gboolean has_key;
-	GBF_FIND_DIALOG *find_dialog;
 };
 
 typedef struct _nodedata NODEDATA;

@@ -6,16 +6,16 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=1
-1=29
-2=97
-3=519
-4=113
-5=1432
-6=47
-7=1133
-8=37
-9=28
+0=35
+1=686
+2=1557
+3=564
+4=8650
+5=299
+6=41
+7=34
+8=56
+9=35
 10=35
 11=1
 12=610
@@ -46,35 +46,34 @@ ShowLocals=true
 17=
 
 [filelist]
-0=/home/terry/gnomesword/gnomesword1/src/gnome/editor_toolbar.c
-1=/home/terry/gnomesword/gnomesword1/src/gnome/dialog.c
-2=/home/terry/gnomesword/gnomesword1/src/gnome/studypad.c
-3=/home/terry/gnomesword/gnomesword1/src/gnome/percomm.c
-4=/home/terry/gnomesword/gnomesword1/src/gnome/editor_menu.c
-5=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
-6=/home/terry/gnomesword/gnomesword1/src/gui/dialog.h
-7=/home/terry/gnomesword/gnomesword1/src/gnome/setup_druid.c
-8=/home/terry/gnomesword/gnomesword1/src/gnome/fileselection.c
+0=/home/terry/gnomesword/gnomesword1/src/main/settings.h
+1=/home/terry/gnomesword/gnomesword1/src/gnome/html.c
+2=/home/terry/gnomesword/gnomesword1/src/gnome/search_dialog.c
+3=/home/terry/gnomesword/gnomesword1/src/gnome/editor_menu.c
+4=/home/terry/gnomesword/gnomesword1/save/interface.c
+5=/home/terry/gnomesword/gnomesword1/src/gnome/editor_replace.c
+6=/home/terry/gnomesword/gnomesword1/src/gnome/dialog.c
+7=/home/terry/gnomesword/gnomesword1/src/gui/dialog.h
+8=/home/terry/gnomesword/gnomesword1/src/main/lists.c
 
 [replace_text]
-0=frame_comm
-1=gui_unlock_commentary
-2=is_locked
-3=gui_unlock_key
-4=add_modlist_to_label
-5=oldbmfiles
-6=frame_search
-7=settings.frame_search
+0=cbtnShowGBSTabs
+1=widgets.combo_entry_int1
+2=widgets.combo_entry_text
+3=frame_comm
+4=gui_unlock_commentary
+5=is_locked
+6=gui_unlock_key
 
 [find_text]
-0=cd
-1=frame_text
-2=toolbar
-3=frame70
-4=label_top
-5=gtk_dialog_cauldron
-6=gui_unlock_commentary
-7=on_unlock_key_activate
+0=gtk_adjustment_new
+1=notebook7
+2=dlg
+3=label191
+4=comboDefaultDict
+5=cbtnShowBooktabs
+6=frame30
+7=button_cancel
 
 [executer args]
 0=newconfigs

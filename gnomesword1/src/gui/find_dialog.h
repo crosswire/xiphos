@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gbs_find_dialog.h - 
+ * find_dialog.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,19 +19,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _GBS_FIND_DIALOG_H_
-#define _GBS_FIND_DIALOG_H_
+#ifndef _FIND_DIALOG_H_
+#define _FIND_DIALOG_H_
 
 #include <gnome.h>
 
-#include "gui/find_dlg_defs.h"
+void gui_find_dlg(GtkWidget *htmlwidget, gchar *mod_name, 
+				gboolean regular, gchar *text);
 
-typedef struct _gs_find_dialog GBF_FIND_DIALOG;
-
-#include "gui/gbs.h"
-
-void gbs_find_close_dialog(GtkWidget *but, GBF_FIND_DIALOG *d);
-void search_gbs_find_dlg(GBS_DATA *c, gboolean regular, gchar *text);
-			
 #endif
 
