@@ -31,6 +31,8 @@
 #include <libxml/parser.h>
 
 
+//#include "gui/bookmarks_treeview.h"
+
 #include "main/xml.h"
 #include "main/module.h"
 #include "main/settings.h"
@@ -99,19 +101,23 @@ void xml_new_bookmark_file(void)
 	xml_add_bookmark_to_parent(xml_folder, 
 					"Acts 16:31",
 					"Acts 16:31",
+					NULL,
 					NULL);
 	xml_add_bookmark_to_parent(xml_folder, 
 					"Eph 2:8",
 					"Eph 2:8",
+					NULL,
 					NULL);
 	xml_add_bookmark_to_parent(xml_folder, 
 					"Romans 1:16",
 					"Romans 1:16",
+					NULL,
 					NULL);
 	xml_folder = xml_add_folder_to_parent(xml_root, "What is the Gospel?");
 	xml_add_bookmark_to_parent(xml_folder, 
 					"1 Cor 15:1-4",
 					"1 Cor 15:1",
+					NULL,
 					NULL);
 
 	xmlSaveFile(xml_filename, xml_doc);
@@ -166,16 +172,16 @@ xmlNodePtr xml_add_folder_to_parent(xmlNodePtr parent, gchar * caption)
  */
 
 void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption, 
-					gchar * key, gchar * module)
+			gchar * key, gchar * module, gchar * mod_desc)
 {
 	xmlNodePtr xml_node;
 	xmlAttrPtr xml_attr;
-	gchar *mod_desc = NULL;
+	//gchar *mod_desc = NULL;
 
-	if (module) {
+	/*if (module) {
 		if (strlen(module) > 2)
 			mod_desc = get_module_description(module);
-	} 
+	} */
 
 	if (mod_desc == NULL)
 		mod_desc = " ";
@@ -194,6 +200,9 @@ void xml_add_bookmark_to_parent(xmlNodePtr parent, gchar * caption,
 	xml_attr =
 	    xmlNewProp(xml_node, "description",
 		       (const xmlChar *) caption);
+	/*xml_attr =
+	    xmlNewProp(xml_node, "caption",
+		       (const xmlChar *) caption);*/
 }
 
 /******************************************************************************
@@ -238,14 +247,19 @@ static void parse_gnode_tree(GNode * node, xmlNodePtr parent)
 {
 	static xmlNodePtr cur_node;
 	GNode *work;
+	gchar *mod_desc = NULL;
 
 	for (work = node->children; work; work = work->next) {
 		get_node_data(work);
 		if (!es->is_leaf) {
 			cur_node = xml_add_folder_to_parent(parent, es->caption);
 		} else {
+			if (es->module) {
+				if (strlen(es->module) > 2)
+					mod_desc = get_module_description(es->module);
+			}
 			xml_add_bookmark_to_parent(parent, es->caption,
-						es->key, es->module);
+						es->key, es->module, mod_desc);
 		}
 		g_free(es);
 		parse_gnode_tree(work, cur_node);
@@ -276,6 +290,7 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 	xmlDocPtr root_doc;
 	xmlAttrPtr root_attr;
 	const xmlChar *xml_filename;
+	gchar *mod_desc = NULL;
 	
 	if (!gnode)
 		return;
@@ -299,10 +314,15 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 		    xml_add_folder_to_parent(root_node, es->caption);
 		parse_gnode_tree(gnode, cur_node);
 	} else {
+		if (es->module) {
+			if (strlen(es->module) > 2)
+				mod_desc = get_module_description(es->module);
+		}
 		xml_add_bookmark_to_parent(root_node, 
 						es->caption,
 						es->key,
-						es->module);
+						es->module,
+						mod_desc);
 	}
 
 	while ((gnode = g_node_next_sibling(gnode)) != NULL) {
@@ -313,11 +333,16 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 						     es->caption);
 			parse_gnode_tree(gnode, cur_node);
 		} else {
+			if (es->module) {
+				if (strlen(es->module) > 2)
+					mod_desc = get_module_description(es->module);
+			}
 			if (root_doc != NULL) {
 				xml_add_bookmark_to_parent
 				    (root_node, es->caption,
 						es->key,
-						es->module);
+						es->module,
+						mod_desc);
 			}
 		}
 	}

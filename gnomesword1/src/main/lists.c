@@ -111,11 +111,11 @@ GList *get_list(gint type)
 void init_lists(void)
 {
 	const gchar *buf = NULL;
-	gchar *book;
+	gchar *book = NULL;
 	NAME_TYPE *nt, innt;
 	gsize bytes_read;
 	gsize bytes_written;
-	GError **error;
+	GError *error;
 	
 	mod_lists = &mods;
 	/* set glist to null */
@@ -147,8 +147,11 @@ void init_lists(void)
 				     OLD_CODESET,
 				     &bytes_read,
 				     &bytes_written,
-				     error);
-		
+				     &error);
+		if(book == NULL) {
+			g_print ("error: %s\n", error->message);
+			g_error_free (error);
+		}
 		mods.bible_books = g_list_append(mods.bible_books,(char *)book);
 	}
 

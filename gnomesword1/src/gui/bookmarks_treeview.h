@@ -32,6 +32,8 @@ enum {
 	COL_CAPTION,
 	COL_KEY,
 	COL_MODULE,
+	COL_MODULE_DESC,
+	COL_DESCRIPTION,
 	N_COLUMNS
 };
 
@@ -43,9 +45,12 @@ typedef struct {
 } TreePixbufs;
 
 struct _bookmark_data {
+	xmlNodePtr parent;
 	gchar *caption;
 	gchar *key;
 	gchar *module;
+	gchar *module_desc;
+	gchar *description;
 	gboolean is_leaf;
 	GdkPixbuf *opened;
 	GdkPixbuf *closed;
