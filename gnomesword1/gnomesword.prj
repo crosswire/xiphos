@@ -126,8 +126,10 @@ module.include.files=\
 	src/main/percomm.h\
 	src/main/lists.h\
 	src/main/settings.h\
+	src/main/shortcutbar.h\
 	src/main/spell.h\
-	src/main/spell_gui.h
+	src/main/spell_gui.h\
+	src/main/sword.h
 
 module.source.name=.
 module.source.type=
@@ -199,8 +201,10 @@ module.source.files=\
 	src/main/main.c\
 	src/main/percomm.c\
 	src/main/settings.c\
+	src/main/shortcutbar.c\
 	src/main/spell.c\
-	src/main/spell_gui.c
+	src/main/spell_gui.c\
+	src/main/sword.c
 
 module.pixmap.name=.
 module.pixmap.type=

@@ -39,7 +39,12 @@
 #include "gui/shortcutbar_dialog.h"
 #include "gui/preferences_dialog.h"
 #include "gui/utilities.h"
+#include "gui/gbs.h"
+#include "gui/commentary.h"
+#include "gui/dictlex.h"
+#include "gui/interlinear.h"
 
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 #include "main/lists.h"
 #include "main/settings.h"
@@ -170,8 +175,12 @@ static void applyoptions(void)
 	GTK_CHECK_MENU_ITEM(settings.versestyle_item)->active =
 		settings.versestyle;
 
-	if (updatehtml) {
-		display_new_font_color_and_size();
+	if (updatehtml) {	
+		gui_display_text(settings.currentverse);
+		gui_display_commentary(settings.currentverse);
+		gui_display_dictlex(settings.dictkey);
+		gui_update_interlinear_page();
+		//display_new_font_color_and_size();
 	}
 	
 	if (updateSB) {

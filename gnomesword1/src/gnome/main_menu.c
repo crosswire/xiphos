@@ -40,6 +40,7 @@
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
 
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "gui/about_gnomesword.h"
@@ -252,7 +253,13 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
-	set_verse_style(GTK_CHECK_MENU_ITEM(menuitem)->active); 
+	/* remember our choice for the next program startup */
+	settings.versestyle = GTK_CHECK_MENU_ITEM(menuitem)->active;
+
+	if (settings.havebible) {
+		/* show the change */
+		gui_display_text(settings.currentverse);
+	}
 }
 
 /******************************************************************************

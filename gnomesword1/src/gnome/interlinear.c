@@ -35,6 +35,7 @@
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "main/lists.h"
+#include "main/sword.h"
 
 
 

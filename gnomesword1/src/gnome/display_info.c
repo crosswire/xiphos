@@ -29,6 +29,7 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/display_info.h"
 
+#include "main/sword.h"
 #include "main/gs_gnomesword.h"
 
 gboolean gsI_isrunning = FALSE;
