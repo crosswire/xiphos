@@ -1,5 +1,25 @@
-add printing    - Bible verses
-		- StudyPad <done>
-		- Notes
-Help file
-add scroll buttons for dictionary keys <done>
+TODO:
+	*Update graphics
+	*SWORD module installer
+	*Revamp spell checker dialog
+	*Improve application menus
+	*Search dialog improvements
+	*Reorder / enhance Unlock Module menu item	
+	*First time wizard module check/downloader
+	*Enhance link to Strong's numbers
+	*Support SWORD URI's
+	*Minor enhancements for advanced search
+	*Tabs for different passages
+	*Verse list behaviour 2.0.0
+	*Scroll to new chapter
+	*Implement GConf
+	*Add icons to context menus
+	*Work on Preferences dialog
+	*Change all popup menus to GNOME from GTK+
+	*Finish Manual 
+
+for more information on feature requests, go to :
+https://sourceforge.net/tracker/?group_id=5528&atid=355528
+
+for more bug information, go to:
+https://sourceforge.net/tracker/?atid=105528&group_id=5528&func=browse
