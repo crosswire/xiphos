@@ -71,6 +71,7 @@ gchar *tmpcolor;
 /******************************************************************************
  * externals
 ******************************************************************************/
+extern gchar current_verse[80];	
 extern SETTINGS *settings;	/* pointer to settings structure - (declared in gs_gnomesword.c) */
 extern gboolean ApplyChange;	/* to keep form looping when book combobox is changed */
 extern GtkWidget *MainFrm;	/* GnomeSword widget (gnome app)(declared and set in gs_sword.cpp) */
@@ -88,6 +89,7 @@ extern gboolean isstrongs;	/* main window selection is not storngs number (gs_gn
 extern gboolean isrunningSD;    /* is the view dictionary dialog runing */
 extern GtkWidget *htmlCommentaries;
 extern gchar *mycolor;
+extern GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 /******************************************************************************
 *******************************************************************************
  *callbacks fileselection dialogs
@@ -105,7 +107,6 @@ void on_ok_button1_clicked(GtkButton * button, gpointer user_data)
 	loadFile(filesel);
 	gtk_widget_destroy(filesel);
 }
-
 
 //----------------------------------------------
 void on_cancel_button1_clicked(GtkButton * button, gpointer user_data)
@@ -762,7 +763,14 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkWidget *text;
 
 	text = lookup_widget(MainFrm, "textComments");
+#ifdef USE_GTKHTML
+
+	gtk_text_insert(GTK_TEXT(text), NULL, //&gtkText->style->black
+			NULL, NULL,
+			gs_clipboard->str, -1);
+#else /* !USE_GTKHTML */
 	gtk_editable_paste_clipboard(GTK_EDITABLE(GTK_TEXT(text)));
+#endif /* USE_GTKHTML */
 }
 
 
@@ -1827,4 +1835,38 @@ void on_view_in_new_window_activate(GtkMenuItem * menuitem,
 	gdk_window_set_cursor(MainFrm->window,cursor);
 }		
 		
-		
+void on_changeint1mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	sprintf(settings->Interlinear1Module,"%s",(gchar *)user_data);
+	changeVerseSWORD(current_verse);
+}		
+void on_changeint2mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	sprintf(settings->Interlinear2Module,"%s",(gchar *)user_data);
+	changeVerseSWORD(current_verse);	
+
+}
+void on_changeint3mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	sprintf(settings->Interlinear3Module,"%s",(gchar *)user_data);
+	changeVerseSWORD(current_verse);
+
+}
+void on_changeint4mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	sprintf(settings->Interlinear4Module,"%s",(gchar *)user_data);
+	changeVerseSWORD(current_verse);
+
+}
+void on_changeint5mod_activate(GtkMenuItem * menuitem,
+		gpointer user_data)
+{
+	sprintf(settings->Interlinear5Module,"%s",(gchar *)user_data);
+	changeVerseSWORD(current_verse);
+
+}
+

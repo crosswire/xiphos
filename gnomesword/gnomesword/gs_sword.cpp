@@ -34,7 +34,8 @@
 #include <gbfplain.h>
 #include <plainhtml.h>
 #include <gbfhtml.h>
-
+#include <rwphtml.h>
+#include <thmlhtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -57,6 +58,7 @@
 #include "gs_menu.h"
 #include "gs_listeditor.h"
 #include "noteeditor.h"
+#include "gs_html.h"
 
 /***********************************************************************************************
 Sword global to this file
@@ -76,6 +78,7 @@ SWDisplay *listDisplay;	/* to display modules in list editor */
 SWDisplay *SDDisplay;	/* to display modules in view dict dialog */
 SWDisplay *RWPDisplay;	/* to display rwp module in gtktext window */
 
+
 SWMgr *mainMgr; /* sword mgr for curMod - curcomMod - curdictMod */
 SWMgr *mainMgr1; /* sword mgr for comp1Mod - first interlinear module */
 SWMgr *mainMgr2; /* sword mgr for comp2Mod - second interlinear module */
@@ -83,6 +86,7 @@ SWMgr *mainMgr3; /* sword mgr for comp3Mod - third interlinear module */
 SWMgr *percomMgr; /* sword mgr for percomMod - personal comments editor */
 SWMgr *listMgr;	/* sword mgr for ListEditor */
 SWMgr *SDMgr;	/* sword mgr for view dict dialog */
+
 
 VerseKey swKey = "Romans 8:28";	/* temp storage for verse keys */
 
@@ -101,7 +105,7 @@ SWFilter *plaintohtml;
 SWFilter *thmltohtml;
 SWFilter *rwphtml;
 /***********************************************************************************************
-GnomeSword global to this file
+GnomeSword globals
 ***********************************************************************************************/ 	
 GList 	*biblemods,
 	*commentarymods,
@@ -133,7 +137,7 @@ gchar *textmod,
         *commod,
         *dictmod;
 GtkWidget *MainFrm; /* main form widget  */
-
+INTERLINEAR interlinearMods;
 /***********************************************************************************************
  externals
 ***********************************************************************************************/
@@ -155,6 +159,7 @@ extern gint historyitems;      /* number of history items */
 extern HISTORY historylist[];  /* sturcture for storing history items */
 extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
+extern GString *gs_clipboard;
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
  *mainform - sent here by main.cpp
@@ -167,14 +172,19 @@ initSWORD(GtkWidget *mainform)
 	ConfigEntMap::iterator cit; //-- iteratior
 	int   	i, //-- counter
 		j; //-- counter					
-   	gchar *sourceformat;
+   	gchar 	*sourceformat,
+		*font;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
+	
+	sprintf(interlinearMods.ver1,"%s","KJV");
+	sprintf(interlinearMods.ver2,"%s","NIV");
+	sprintf(interlinearMods.ver3,"%s","NASB");
   	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
         rwphtml		= new GS_RWPHTML();
-        gbftohtml	= new GBFHTML();
+        gbftohtml		= new GBFHTML();
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -182,14 +192,13 @@ initSWORD(GtkWidget *mainform)
 	mainMgr3        = new SWMgr();	
   	percomMgr	= new SWMgr();
 	
-	curMod        = NULL; //-- set mods to null
+	curMod		= NULL; //-- set mods to null
 	comp1Mod      = NULL;
 	comp2Mod      = NULL;
 	comp3Mod      = NULL;
 	curcomMod     = NULL;
-	curdictMod    = NULL; 	
+	curdictMod      = NULL; 	
 	percomMod     = NULL;
-
 	
 	chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
@@ -223,21 +232,20 @@ initSWORD(GtkWidget *mainform)
 	if(settings->showhistorygroup){
 		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	
 	}
-#endif /* USE_SHORTCUTBAR */		
+#endif /* USE_SHORTCUTBAR */
         //-- setup displays for sword modules
     	noteeditor = new NoteEditor();
 	GTKEntryDisp::__initialize();
-	chapDisplay = new GTKChapDisp(lookup_widget(mainform,"moduleText"));
-	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));
+	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
+	
 	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 #ifdef USE_GTKHTML
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
-	comp1Display = new GtkHTMLEntryDisp(lookup_widget(mainform,"textComp1"));
-	comp2Display = new GtkHTMLEntryDisp(lookup_widget(mainform,"textComp2"));
-	comp3Display = new GtkHTMLEntryDisp(lookup_widget(mainform,"textComp3"));
+	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
 	FPNDisplay = new ComEntryDisp(lookup_widget(mainform,"htmlComments"));
+	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 #else /* !USE_GTKHTML */
 	HTMLchapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
 	HTMLDisplay = new HTMLentryDisp(lookup_widget(mainform,"textCommentaries"));	
@@ -245,7 +253,8 @@ initSWORD(GtkWidget *mainform)
 	comp2Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp2"));
 	comp3Display = new GTKInterlinearDisp(lookup_widget(mainform,"textComp3"));
 	FPNDisplay = new HTMLentryDisp(lookup_widget(mainform,"textComments"));
-	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries")); 
+	RWPDisplay = new GTKRWPDisp(lookup_widget(mainform,"textCommentaries"));
+	dictDisplay = new GTKEntryDisp(lookup_widget(mainform,"textDict"));	
 #endif /* USE_GTKHTML */
 	compages = 0;
 	dictpages = 0;
@@ -254,8 +263,13 @@ initSWORD(GtkWidget *mainform)
 			curMod = (*it).second;
 			havebible = TRUE;
 			biblemods = g_list_append(biblemods,curMod->Name());
+			font = "roman";
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
 	        	if(sit !=mainMgr->config->Sections.end()){
+				if ((cit = (*sit).second.find("Font")) !=
+		    		(*sit).second.end()) {
+					font = (char *) (*cit).second.c_str();
+				}				
 	    	    		cit = (*sit).second.find("SourceType");
 				if(cit != (*sit).second.end()) sourceformat = (char *)(*cit).second.c_str();
 				else sourceformat = "Plain";
@@ -263,12 +277,15 @@ initSWORD(GtkWidget *mainform)
 			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter
 #if 	USE_GTKHTML
-
+				//curMod->AddRenderFilter(gbftohtml);
+				/* the gbftohtml fileter for html widgets is built in to gomesword  */
 #else 	/* !USE_GTKHTML */	
 				curMod->AddRenderFilter(gbftohtml);
 #endif /* USE_GTKHTML */				
 				curMod->Disp(HTMLchapDisplay);
-			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			}else if(!strcmp(sourceformat, "Plain") && !strcmp(font, "Greek")){ //-- 
+				curMod->Disp(chapDisplay);				
+			}else if(!strcmp(sourceformat, "Plain") && strcmp(font, "Greek")){ //-- we need gbf to html filter			
 			  	curMod->AddRenderFilter(plaintohtml);
 				curMod->Disp(HTMLchapDisplay);
 			} /*else			
@@ -330,7 +347,8 @@ initSWORD(GtkWidget *mainform)
 			havedict = TRUE; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
-			dictionarymods = g_list_append(dictionarymods,curdictMod->Name());			
+			dictionarymods = g_list_append(dictionarymods,curdictMod->Name());
+			curdictMod->AddRenderFilter(plaintohtml);
 			curdictMod->Disp(dictDisplay);
 #if USE_SHORTCUTBAR			
 			if(settings->showdictgroup){			
@@ -356,9 +374,10 @@ initSWORD(GtkWidget *mainform)
 				 gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
 			} 	                                                 //-- have at least one personl module
 	  	}
-	}	
-	//-- interlinear 1
+	}
 	
+	//-- interlinear 1
+#ifdef USE_GTKHTML	
 	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++){	
 		comp1Mod = (*it).second;
 		if (!strcmp((*it).second->Type(), "Biblical Texts")){
@@ -367,7 +386,6 @@ initSWORD(GtkWidget *mainform)
 	    	    		cit = (*sit).second.find("SourceType");
 				if(cit != (*sit).second.end()) sourceformat = (char *)(*cit).second.c_str();
 				else sourceformat = "Plain";
-				//g_warning(sourceformat);
 			}
 			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
 				comp1Mod->AddRenderFilter(gbftohtml);
@@ -378,6 +396,21 @@ initSWORD(GtkWidget *mainform)
 			}
 		}
 	}
+#else  /* USE_GTKHTML */
+	//-- interlinear 1
+	for (it = mainMgr1->Modules.begin(); it != mainMgr1->Modules.end(); it++){
+		comp1Mod = (*it).second;
+		if (!strcmp((*it).second->Type(), "Biblical Texts")){						
+		
+			if(!strcmp(sourceformat, "GBF")){ //-- we need gbf to html filter			
+				comp1Mod->AddRenderFilter(gbftohtml);
+				comp1Mod->Disp(comp1Display);
+			}else if(!strcmp(sourceformat, "Plain")){ //-- we need gbf to html filter			
+			  	comp1Mod->AddRenderFilter(plaintohtml);
+				comp1Mod->Disp(comp1Display);
+			}	
+		}
+	}	
 	//-- interlinear 2	
 	for (it = mainMgr2->Modules.begin(); it != mainMgr2->Modules.end(); it++){
 		comp2Mod = (*it).second;
@@ -405,7 +438,8 @@ initSWORD(GtkWidget *mainform)
 				comp3Mod->Disp(comp3Display);
 			}	
 		}
-	}	
+	}
+#endif /* USE_GTKHTML */
 }
 
 
@@ -418,7 +452,8 @@ void
 changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commentary text together
 {
 	int l;
-
+	GList *mods;
+	
 	if((GTK_TOGGLE_BUTTON(lookup_widget(MainFrm,"btnEditNote"))->active) && noteModified){ //-- save any changes to personal notes		
 		if(autoSave){                          //-- if we are in edit mode
 			savenoteSWORD(noteModified); 	//-- save if text in note window has changed			
@@ -461,7 +496,15 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->notebook3page == 2){
-		//interlinearDisplay(mods);
+#ifdef USE_GTKHTML	
+		beginHTML(lookup_widget(MainFrm,"textComp1"));		
+		changecomp1ModSWORD(settings->Interlinear1Module);
+		changecomp1ModSWORD(settings->Interlinear2Module);
+		changecomp1ModSWORD(settings->Interlinear3Module);
+		changecomp1ModSWORD(settings->Interlinear4Module);
+		changecomp1ModSWORD(settings->Interlinear5Module);
+		endHTML(lookup_widget(MainFrm,"textComp1"));
+#else /* USE_GTKHTML */
 		if(comp1Mod){
 			comp1Mod->SetKey(current_verse);   //-- interlinear1
 			comp1Mod->Display();
@@ -474,6 +517,7 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			comp3Mod->SetKey(current_verse);  //-- interlinear3
 			comp3Mod->Display();
 		}
+#endif /* USE_GTKHTML */		
 	}
 	//---------------------------------------------------------------- change personal notes editor
 	if(settings->notebook3page == 1){ 		
@@ -576,12 +620,12 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 				break;
 		}
 	}   	
-	
+	g_string_free(gs_clipboard,TRUE);
 	delete mainMgr;   //-- delete Sword managers
 	delete mainMgr1;
 	delete mainMgr2;
 	delete mainMgr3;
-
+	
         if (thmltohtml != 0)
 		delete thmltohtml;
 	if (gbftohtml != 0)
@@ -673,10 +717,11 @@ changecomp1ModSWORD(gchar *modName)  //-- change sword module for 1st interlinea
 	it = mainMgr1->Modules.find(modName);  //-- iterate through the modules until we find modName - modName was passed by the callback
 	if (it != mainMgr1->Modules.end()){     //-- if we find the module	
 		comp1Mod = (*it).second;    //-- change current module to new module
+		//g_warning(current_verse);
 		comp1Mod->SetKey(current_verse);  //-- set key to current verse
 		comp1Mod->Display();              //-- show it to the world
 	}
-	strcpy(settings->Interlinear1Module, comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
+	//strcpy(settings->Interlinear1Module, comp1Mod->Name()); //-- remember where we are so we can open here next time we startup
 }
 
 //-------------------------------------------------------------------------------------------
@@ -728,8 +773,8 @@ chapterSWORD(void)  //-- someone clicked the chapter spin button
 {
 	gint       iChap;
         gchar      *buf;
-        
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- set iChap to value in spin button
+        //-- set iChap to value in spin button
+	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); 
 	swKey.Chapter(iChap); //-- let sword set chapter for us - sword knows when to go to next or previous book - so we don't have to keep up
 	buf = g_strdup(swKey); 
 	changeVerseSWORD(buf);	  //-- change all our modules to new chapter
@@ -948,7 +993,7 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 		percomMod = (*it).second;  //-- set curcomMod to modName
 		strcpy(settings->personalcommentsmod, percomMod->Name());
 		if(havebible) percomMod->SetKey(curMod->KeyText()); //-- go to text (verse)
-		percomMod->Display(); //-- show the change 	
+		//percomMod->Display(); //-- show the change 	
 		//-- let's change the notebook label to match our percomMod (current personal comments module)
   	        notebook = lookup_widget(MainFrm,"notebook3");  //-- get the notebook our page is in]
 		label = gtk_label_new (percomMod->Name());   //-- create new label with mod name as the text
@@ -1017,6 +1062,48 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
 }
 
+/************************************************************************************************************************* 
+ * 
+ *************************************************************************************************************************/
+gchar *showfirstlineStrongsSWORD(gint theNumber)
+{
+ 	ModMap::iterator it;
+ 	SWModule *strongsMod;
+ 	gchar *returnVal;
+ 	gchar    *workingVal, wbuf[1024];
+ 	gint i,j,len;
+        gchar           buf[40]; //-- char string to put our strongs number in
+        char            a;        //-- char to store testament (old - 001 or new - 002)
+
+        if(havedict) {  /* let's don't do this if we don't have at least one dictionary / lexicon */   
+        	
+        	sprintf(buf,"%d",theNumber); 	       
+        	VerseKey *key = (VerseKey *)(SWKey *)(*curMod); //-- get a versekey form the current text module
+                                                    //-- so we can find which testament we are using
+        	a = key->Testament();  //-- find out if we are in old or new testament        
+        	if(a == 001) {     //-- if old testament use hebrew lex
+			it = mainMgr->Modules.find("StrongsHebrew");  //-- find module we want to use
+			if (it != mainMgr->Modules.end()){	
+				strongsMod = (*it).second;  //-- set curdictMod to new choice
+				strongsMod->SetKey(buf);   //-- set key to text from lookup entry				
+				workingVal = g_strdup((const char*)*strongsMod);
+			}
+		}else{ 
+			it = mainMgr->Modules.find("StrongsGreek");  //-- find module we want to use
+			if (it != mainMgr->Modules.end()){	
+				strongsMod = (*it).second;  //-- set curdictMod to new choice
+				strongsMod->SetKey(buf);   //-- set key to text from lookup entry
+				workingVal = g_strdup((const char*)*strongsMod);
+			}
+		}
+		for(i=0; i< strlen(workingVal); i++) {
+				
+		}
+        }
+        g_warning(returnVal);
+        
+	return returnVal;
+} 
 
 //---------------------------------------------------------------------------------------------
 void
@@ -1144,10 +1231,10 @@ void destroyListEditorSWORD(void)	//-- destroy ListEditor
 		delete listDisplay;
 }
 
-/*
+/****************************************************************************************
  *setupSDSWORD - set up the sword stuff for the view dictionary dialog
  *returns a list of dict modules
- */
+ ****************************************************************************************/
 GList* setupSDSWORD(GtkWidget *text)
 {
 	GList *list;
@@ -1155,17 +1242,21 @@ GList* setupSDSWORD(GtkWidget *text)
 	
 	SDMgr	= new SWMgr();
 	SDMod     = NULL;
+#ifdef USE_GTKHTML
+	SDDisplay = new  GtkHTMLEntryDisp(text);
+#else /* !USE_GTKHTML */
 	SDDisplay = new  GTKEntryDisp(text);
+#endif /* USE_GTKHTML */
 	list = NULL;
 	for(it = SDMgr->Modules.begin(); it != SDMgr->Modules.end(); it++){
 		if(!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){
 			SDMod = (*it).second;
-			list = g_list_append(list,SDMod->Name());			
+			list = g_list_append(list,SDMod->Name());
+			SDMod->AddRenderFilter(plaintohtml);			
 			SDMod->Disp(SDDisplay);
 		}
 	}
 	return list;
-	
 }
 
 /* 
@@ -1252,5 +1343,4 @@ void SDdictSearchTextChangedSWORD(char* newkey)
 		}
 	}
 }
-
 

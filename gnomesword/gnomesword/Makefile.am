@@ -29,7 +29,7 @@ COMMON_SOURCE =  \
     interface.h \
     gs_listeditor.c \
     gs_listeditor.h \
-    main.cpp \
+    main.c \
     gs_menu.c \
     gs_menu.h \
     noteeditor.cpp \
