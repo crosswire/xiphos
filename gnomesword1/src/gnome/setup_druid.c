@@ -28,11 +28,10 @@
 #include "gui/setup_druid.h"
 
 #include "main/sword.h"
-//#include "main/gs_gnomesword.h"
 #include "main/lists.h"
 #include "main/settings.h"
 
-/* FIXME: this is broken - causes a segfault after finish button is pressed */
+
 
 /******************************************************************************
  * globals
@@ -43,7 +42,7 @@ SETTINGS_DRUID widgets;
  * globals to this file only 
  */
 static GtkWidget *druid_dialog;
-
+static GtkWidget *combo_entry_gbs;
 
 
 /******************************************************************************
@@ -84,6 +83,8 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry11)));
 	strcpy(settings.personalcommentsmod,
 		gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry14)));
+	strcpy(settings.BookWindowModule,
+		gtk_entry_get_text(GTK_ENTRY(combo_entry_gbs)));
 	
 	settings.usedefault = GTK_TOGGLE_BUTTON(widgets.radiobutton1)->active;
 	settings.text_tabs = GTK_TOGGLE_BUTTON(widgets.checkbutton4)->active;
@@ -230,6 +231,8 @@ static GtkWidget *gui_create_setup_druid(GList *biblemods,
 	GtkWidget *combo10;
 	GtkWidget *combo11;
 	GtkWidget *combo12;
+	GtkWidget *label240;
+	GtkWidget *combo_gbs;
 	GtkWidget *combo13;
 	GtkWidget *combo14;
 	GtkWidget *label139;
@@ -846,6 +849,32 @@ static GtkWidget *gui_create_setup_druid(GList *biblemods,
 			 (GtkAttachOptions) (GTK_SHRINK), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label105), 1.2666e-07,
 			       7.45058e-09);
+
+  label240 = gtk_label_new (_("Generic Book"));
+  gtk_widget_ref (label240);
+  gtk_object_set_data_full (GTK_OBJECT (druid_dialog), "label240", label240,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label240);
+  gtk_table_attach (GTK_TABLE (table7), label240, 0, 1, 10, 11,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (label240), 0, 0.5);
+
+  combo_gbs = gtk_combo_new ();
+  gtk_widget_ref (combo_gbs);
+  gtk_object_set_data_full (GTK_OBJECT (druid_dialog), "combo_gbs", combo_gbs,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (combo_gbs);
+  gtk_table_attach (GTK_TABLE (table7), combo_gbs, 1, 2, 10, 11,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_gbs), get_list(GBS_LIST));
+
+  combo_entry_gbs = GTK_COMBO (combo_gbs)->entry;
+  gtk_widget_ref (combo_entry_gbs);
+  gtk_object_set_data_full (GTK_OBJECT (druid_dialog), "combo_entry_gbs", combo_entry_gbs,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (combo_entry_gbs);
 
 	vbox34 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox34);
