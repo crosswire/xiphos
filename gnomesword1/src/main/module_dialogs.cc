@@ -460,6 +460,10 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
 
 void main_dialog_save_note(gpointer data)
 {
+	gchar *buf = NULL;                                       
+	gsize bytes_read;
+	gsize bytes_written;
+	GError **error = NULL;
 	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*) data;
 	BackEnd *be = (BackEnd*)e->be;
 	
@@ -475,8 +479,17 @@ void main_dialog_save_note(gpointer data)
 		 GINT_TO_POINTER(0)) ){
 		g_warning("file not writen");
 	} else {
+		/*buf = g_convert(note_str->str,
+                             -1,
+                             OLD_CODESET,
+                             UTF_8,
+                             &bytes_read,
+                             &bytes_written,
+                             error);*/
+		//g_message(note_str->str);
 		be->save_entry(note_str->str);	
 		g_print("\nnote saved\n");
+		g_free(buf);
 	}
 	g_string_free(note_str, 0);
 	gtk_html_set_editable(e->html, TRUE);

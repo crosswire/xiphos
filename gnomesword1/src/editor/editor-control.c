@@ -439,6 +439,9 @@ GSHTMLEditorControlData *new_control(GtkWidget * container, int type,
 //      gnome_popup_menu_attach(cd->pm, cd->htmlwidget, NULL);
 
 
+	g_signal_connect(G_OBJECT(cd->htmlwidget), "url_requested",
+			 G_CALLBACK(url_requested), cd);
+
 	g_signal_connect(G_OBJECT(cd->htmlwidget), "key_press_event",
 			 G_CALLBACK(html_key_pressed), cd);
 	g_signal_connect(G_OBJECT(cd->htmlwidget), "link_clicked",

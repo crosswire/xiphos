@@ -1287,6 +1287,7 @@ static gboolean button_press_event(GtkWidget * widget,
 static void load_source_treeviews(void)
 {
 	GList *tmp = NULL;
+	GList *tmp2 = NULL;
 	GList *combo1_items = NULL;
 	GtkTreeIter iter;
 	MOD_MGR_SOURCE *mms;
@@ -1298,6 +1299,7 @@ static void load_source_treeviews(void)
 	/* remote */
 	gtk_list_store_clear(GTK_LIST_STORE(remote_model));
 	tmp = mod_mgr_list_remote_sources();
+	tmp2 = g_list_first(tmp);
 	while (tmp) {
 		mms = (MOD_MGR_SOURCE *) tmp->data;
 		gtk_list_store_append(GTK_LIST_STORE(remote_model),
@@ -1314,8 +1316,19 @@ static void load_source_treeviews(void)
 	}
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), combo1_items);
 	g_list_free(combo1_items);
+	while (tmp2) {
+		mms = (MOD_MGR_SOURCE *) tmp2->data;
+		g_free((gchar*)mms->type);
+		g_free((gchar*)mms->caption);
+		g_free((gchar*)mms->source);
+		g_free((gchar*)mms->directory);
+		g_free(mms);
+		tmp2 = g_list_next(tmp2); 
+	}
 	g_list_free(tmp);
 	tmp = NULL;
+	g_list_free(tmp2);
+	tmp2 = NULL;
 
 	/* local */
 	gtk_list_store_clear(GTK_LIST_STORE(local_model));

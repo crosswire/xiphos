@@ -1,3 +1,11 @@
+2005-03-01  terry <tbiggs@users.sf.net>
+
+	* added four buttons to editor 
+	  Insert image
+	  Insert link
+	  Insert rule
+	  Insert table
+
 2005-02-24  terry <tbiggs@users.sf.net>
 
 	* added a bookmark dialog for adding bookmarks.
