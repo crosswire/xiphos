@@ -21,14 +21,19 @@
  
 #ifndef _SPELL_H_
 #define _SPELL_H_
+ 
+extern char *spell_language;
 
 void check_for_error(void);
-void store_replacement(const gchar * word, const gchar * new_word);
+void store_replacement(const gchar * word, const gchar * new_word, 
+						char * language);
 int add_to_session(const gchar * word);
-int add_to_personal(const gchar * word);
+int add_to_personal(const gchar * word, char * language);
 GList * get_suggest_list(const gchar * word);
 int check_word_spell(const char * word);
 int init_spell(void);
 int kill_spell(void);
+GList *get_dictionary_languages(gpointer data);
+void set_dictionary_language(char * language);
 
 #endif
