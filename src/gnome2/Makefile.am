@@ -1,5 +1,6 @@
 INCLUDES =  \
     $(GNOME_CFLAGS) \
+    $(GTKHTML_CFLAGS) \
     $(MOZILLA_CFLAGS) \
     -I$(top_srcdir)/src \
     -DPREFIX=\""$(prefix)"\" \
@@ -69,6 +70,7 @@ gnomesword2_SOURCES =  \
     
 gnomesword2_LDADD = \
     $(GNOME_LIBS) \
+    $(GTKHTML_LIBS) \
     $(MOZILLA_LIBS) \
     $(SPELL_LIBS) \
     $(GNOME_SPELL_LIBS)\

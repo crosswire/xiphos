@@ -2,6 +2,7 @@ INCLUDES =  \
     -I$(top_srcdir)/src \
     $(SWORD_INCLUDES) \
     $(GNOME_CFLAGS) \
+    $(GTKHTML_CFLAGS) \
     $(MOZILLA_CFLAGS) 
     
 
