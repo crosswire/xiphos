@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS =   doc macros intl po src
+SUBDIRS =   doc macros po src
 
 EXTRA_DIST = gnomesword1.desktop \
              src/gui/*.h
