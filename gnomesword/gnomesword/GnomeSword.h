@@ -48,7 +48,8 @@ struct _settings
 						footnotes,
 						versestyle,
 						interlinearpage,
-						autosavepersonalcomments;
+						autosavepersonalcomments,
+						formatpercom;
 };
 
 typedef struct _listitem LISTITEM;
@@ -202,5 +203,8 @@ showinfoSWORD						(GtkWidget *text,
 												
 void
 newSP										(GtkWidget *text);
+
+void
+setformatoption					(GtkWidget *button);
 
 #endif /* __GNOMESWORD_H__ */

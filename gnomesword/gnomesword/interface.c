@@ -2721,6 +2721,9 @@ create_dlgSettings (void)
   GtkWidget *label103;
   GtkWidget *cpfgCurrentverse;
   GtkWidget *label98;
+  GtkWidget *hbox24;
+  GtkWidget *cbtnPNformat;
+  GtkWidget *label122;
   GtkWidget *dialog_action_area9;
   GtkWidget *btnPropertyboxOK;
   GtkWidget *btnPropertyboxApply;
@@ -2785,6 +2788,27 @@ create_dlgSettings (void)
   gtk_widget_show (label98);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 0), label98);
 
+  hbox24 = gtk_hbox_new (FALSE, 0);
+  gtk_widget_ref (hbox24);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "hbox24", hbox24,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (hbox24);
+  gtk_container_add (GTK_CONTAINER (notebook7), hbox24);
+
+  cbtnPNformat = gtk_check_button_new_with_label ("Use Formatting");
+  gtk_widget_ref (cbtnPNformat);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnPNformat", cbtnPNformat,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (cbtnPNformat);
+  gtk_box_pack_start (GTK_BOX (hbox24), cbtnPNformat, FALSE, FALSE, 0);
+
+  label122 = gtk_label_new ("Personal Notes");
+  gtk_widget_ref (label122);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label122", label122,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label122);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 1), label122);
+
   dialog_action_area9 = GNOME_DIALOG (dlgSettings)->action_area;
   gtk_object_set_data (GTK_OBJECT (dlgSettings), "dialog_action_area9", dialog_action_area9);
   gtk_widget_show (dialog_action_area9);
@@ -2819,6 +2843,9 @@ create_dlgSettings (void)
 
   gtk_signal_connect (GTK_OBJECT (cpfgCurrentverse), "color_set",
                       GTK_SIGNAL_FUNC (on_cpfgCurrentverse_color_set),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (cbtnPNformat), "toggled",
+                      GTK_SIGNAL_FUNC (on_cbtnPNformat_toggled),
                       NULL);
   gtk_signal_connect (GTK_OBJECT (btnPropertyboxOK), "clicked",
                       GTK_SIGNAL_FUNC (on_btnPropertyboxOK_clicked),
