@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * main_window.h - main window gui 
+ * gs_dialog.h - 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,25 +19,49 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MAIN_WINDOW_H_
-#define __MAIN_WINDOW_H_
+#ifndef _GS_DIALOG_
+#define _GS_DIALOG_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "main/settings.h"
-
-void gui_show_hide_texts(gboolean choice);
-void gui_show_hide_comms(gboolean choice);
-void gui_show_hide_dicts(gboolean choice);
-void gui_set_bible_comm_layout(void);	
-void gui_change_window_title(gchar * module_name);
-void gui_change_module_and_key(gchar *module_name, gchar *key);
-void gui_change_verse(gchar *key);	
-void gui_search_appbar_update(char percent, void *userData);
-void create_mainwindow(void);
-void gui_show_main_window(void);
+#define GS_YES 0
+#define GS_NO 1
+#define GS_OK 2
+#define GS_CANCEL 3
+	
+typedef struct _gs_dialog GS_DIALOG;
+struct _gs_dialog {
+	
+	GtkWidget *dialog;
+	
+	gchar *text1;
+	gchar *text2;
+	gchar *text3;
+	gchar *text4;
+	gchar *text5;
+	gchar *text6;
+	
+	gchar *label_top;
+	gchar *label1;
+	gchar *label2;
+	gchar *label3;
+	gchar *label4;
+	gchar *label5;
+	gchar *label6;
+	gchar *label_bottom;
+	
+	gboolean ok;
+	gboolean cancel;
+	gboolean yes;
+	gboolean no;
+	gboolean apply;
+};
+	
+//GtkWidget * gs_dialog_build(GS_DIALOG * info);
+GS_DIALOG *gui_new_dialog(void);
+gint gui_gs_dialog(GS_DIALOG * info);
 
 #ifdef __cplusplus
 }

@@ -36,6 +36,7 @@
 #include "gui/bookmarks.h"
 #include "gui/utilities.h"
 #include "gui/main_window.h"
+#include "gui/dialog.h"
 
 #include "main/bookmarks.h"
 #include "main/settings.h"
@@ -977,38 +978,42 @@ void gui_save_bookmarks(GtkMenuItem * menuitem, gpointer user_data)
 void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkCList *clist;
-	GtkWidget *dlg;
 	GtkCTreeNode *node;
-	gchar *text[3];
-
-	applychangestobookmark = FALSE;
+	gint test;
+	GS_DIALOG *info;
+	
 	clist = GTK_CLIST(p_bmtree->ctree);
 	gtk_clist_freeze(clist);
 
 	node = clist->selection->data;
-	text[0] =
-	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text;
-	text[1] =
-	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[1])->text;
-	text[2] =
-	    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[2])->text;
-
-	dlg = create_edit_bookmark_dialog(text, FALSE);
-	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
-	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
-	if (applychangestobookmark) {
+	
+	info = gui_new_dialog();
+	info->label_top = N_("Edit Bookmark");
+	
+	info->text1 = g_strdup(GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text);
+	info->text2 = g_strdup(GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[1])->text);
+	info->text3 = g_strdup(GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[2])->text);
+	info->label1 = "Label: ";
+	info->label2 = "Verse: ";
+	info->label3 = "Module: ";
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	
+	test = gui_gs_dialog(info);
+	if (test == GS_OK){
 		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
-				 cell[0])->text = g_strdup(text[0]);
+				 cell[0])->text =  g_strdup(info->text1);
 		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
-				 cell[1])->text = g_strdup(text[1]);
+				 cell[1])->text = g_strdup(info->text2);
 		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.
-				 cell[2])->text = g_strdup(text[2]);
-		g_free(text[0]); /*** we used g_strdup() in  on_btnBMok_clicked() ***/
-		g_free(text[1]);
-		g_free(text[2]);
-		applychangestobookmark = FALSE;
+				 cell[2])->text = g_strdup(info->text3);
 	}
+	
 	gtk_clist_thaw(clist);
+	g_free(info->text1); /* we used g_strdup() */
+	g_free(info->text2);
+	g_free(info->text3);
+	g_free(info);
 	after_press(p_bmtree->ctree, NULL);
 }
 
@@ -1031,15 +1036,29 @@ void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	GtkWidget *yes_no_dialog;
-	yes_no_dialog =
-	    gnome_message_box_new
-	    ("Really REMOVE the selected item (and all its subitems)?",
-	     GNOME_MESSAGE_BOX_WARNING, GNOME_STOCK_BUTTON_YES,
-	     GNOME_STOCK_BUTTON_NO, NULL);
-	if (!gnome_dialog_run(GNOME_DIALOG(yes_no_dialog)))
-		remove_selection(p_bmtree->ctree_widget,
+	gint test;
+	GS_DIALOG *yes_no_dialog;
+	GtkCList *clist;
+	gchar *name_string;
+	GtkCTreeNode *node;
+	
+	clist = GTK_CLIST(p_bmtree->ctree);
+	node = clist->selection->data;	
+	name_string = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text;
+	
+	yes_no_dialog = gui_new_dialog();
+	yes_no_dialog->label_top = 
+		N_("Really REMOVE the selected item (and all its subitems)?");
+	yes_no_dialog->label_bottom = name_string;
+	yes_no_dialog->yes = TRUE;
+	yes_no_dialog->no = TRUE;
+
+	test = gui_gs_dialog(yes_no_dialog);
+	if (test != GS_YES)
+		return;
+	remove_selection(p_bmtree->ctree_widget,
 				 p_bmtree->ctree);
+	g_free(yes_no_dialog);
 }
 
 
@@ -1063,10 +1082,14 @@ void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_point_to_here_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	GtkWidget *yes_no_dialog;
+	GS_DIALOG *yes_no_dialog;
+	gint test;
 	gchar *modName, *key;
 	GtkCellPixText *cell1, *cell2;
-
+	GtkCList *clist;
+	gchar *name_string;
+	GtkCTreeNode *node;
+	/*
 	yes_no_dialog =
 	    gnome_message_box_new
 	    ("Make the selected bookmark point to the current reading point?",
@@ -1074,7 +1097,22 @@ static void on_point_to_here_activate(GtkMenuItem * menuitem,
 	     GNOME_STOCK_BUTTON_NO, NULL);
 	if (gnome_dialog_run(GNOME_DIALOG(yes_no_dialog)))
 		return;
+	*/
+	
+	clist = GTK_CLIST(p_bmtree->ctree);
+	node = clist->selection->data;	
+	name_string = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text;
+	
+	yes_no_dialog = gui_new_dialog();
+	yes_no_dialog->label_top = 
+		N_("Make the selected bookmark point to the current Module and Key?");
+	yes_no_dialog->label_bottom = name_string;
+	yes_no_dialog->yes = TRUE;
+	yes_no_dialog->no = TRUE;
 
+	test = gui_gs_dialog(yes_no_dialog);
+	if (test != GS_YES)
+		return;
 	modName = get_module_name();
 	key = get_module_key();
 
@@ -1086,6 +1124,9 @@ static void on_point_to_here_activate(GtkMenuItem * menuitem,
 	g_free(cell2->text);
 	cell1->text = g_strdup(key);
 	cell2->text = g_strdup(modName);
+	g_free(yes_no_dialog);
+	
+	
 }
 
 
@@ -1135,18 +1176,32 @@ void on_allow_reordering_activate(GtkMenuItem * menuitem,
 void gui_add_bookmark_to_tree(GtkCTreeNode * node, gchar * modName,
 			  gchar * verse)
 {
-	GtkWidget *dlg;
+	gint test;
+	GS_DIALOG *info;
 	gchar *text[3], buf[256];
 	sprintf(buf, "%s, %s", verse, modName);
-	text[0] = buf;
-	text[1] = verse;
-	text[2] = modName;
-	applychangestobookmark = FALSE;
-	dlg = create_edit_bookmark_dialog(text, TRUE);
-	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
-	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
-	if (applychangestobookmark) {
+	
+	info = gui_new_dialog();
+	info->label_top = N_("Add Bookmark");
+	
+	info->text1 = g_strdup(buf);
+	info->text2 = g_strdup(verse);
+	info->text3 = g_strdup(modName);
+	info->label1 = "Label: ";
+	info->label2 = "Verse: ";
+	info->label3 = "Module: ";
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	
+	test = gui_gs_dialog(info);
+	if (test == GS_OK){	
 		GtkCTreeNode *newnode;
+		text[0] = info->text1;
+		//g_warning(text[0]);
+		text[1] = info->text2;
+		//g_warning(text[1]);
+		text[2] = info->text3;
+		//g_warning(text[2]);
 		newnode = gtk_ctree_insert_node(p_bmtree->ctree,
 						node,
 						NULL,
@@ -1156,14 +1211,14 @@ void gui_add_bookmark_to_tree(GtkCTreeNode * node, gchar * modName,
 						mask3,
 						NULL,
 						NULL, TRUE, FALSE);
-		g_free(text[0]); /*** we used g_strdup() in  on_btnBMok_clicked() ***/
-		g_free(text[1]);
-		g_free(text[2]);
 		gtk_ctree_select(p_bmtree->ctree, newnode);
 		if (node)
 			gtk_ctree_expand(p_bmtree->ctree, node);
-		applychangestobookmark = FALSE;
 	}
+	g_free(info->text1); /* we used g_strdup() */
+	g_free(info->text2);
+	g_free(info->text3);
+	g_free(info);
 }
 
 
@@ -1185,45 +1240,49 @@ void gui_add_bookmark_to_tree(GtkCTreeNode * node, gchar * modName,
 
 void gui_verselist_to_bookmarks(GList * list)
 {
-	char
-	*token, *text[3], *t;
+	char *token, *text[3], *t, *buf;
 	GtkCTreeNode *node;
 	GtkCTree *ctree;
-	GtkWidget *dialog;
 	GList *tmp;
+	gint test;
+	GS_DIALOG *info;
 
 	node = NULL;
 	tmp = list;
 	t = "|";
 	ctree = GTK_CTREE(widgets.ctree_widget);
+	
+	info = gui_new_dialog();
+	info->label_top = N_("Enter Root Group Name - use no \'|\'");
+	
+	info->text1 = g_strdup("Group Name");
+	info->label1 = "Group: ";
+	info->ok = TRUE;
+	info->cancel = TRUE;
 	/*** open dialog to get name for root node ***/
-	dialog =
-	    gnome_request_dialog(FALSE,
-				 "Enter Root Group Name - use no \'|\'",
-				 NULL, 79,
-				 (GnomeStringCallback) stringCallback,
-				 GINT_TO_POINTER(1),
-				 GTK_WINDOW(widgets.app));
-	/*** wait here until dialog is closed ***/
-	gnome_dialog_set_default(GNOME_DIALOG(dialog), 2);
-	gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
-	while (tmp != NULL) {
-		token = strtok((gchar *) tmp->data, t);
-		text[0] = token;
-		token = strtok(NULL, t);
-		text[1] = token;
-		token = strtok(NULL, t);
-		text[2] = token;
-		node = gtk_ctree_insert_node(ctree,
-					     newrootnode,
-					     node,
-					     text,
-					     3,
-					     pixmap3,
-					     mask3,
-					     NULL, NULL, TRUE, FALSE);
-		tmp = g_list_next(tmp);
+	test = gui_gs_dialog(info);
+	if (test == GS_OK){
+		buf = g_strdelimit(info->text1, t, ' ');
+		stringCallback(buf, GINT_TO_POINTER(1));
+		while (tmp != NULL) {
+			token = strtok((gchar *) tmp->data, t);
+			text[0] = token;
+			token = strtok(NULL, t);
+			text[1] = token;
+			token = strtok(NULL, t);
+			text[2] = token;
+			node = gtk_ctree_insert_node(ctree,
+						     newrootnode,
+						     node,
+						     text,
+						     3,
+						     pixmap3,
+						     mask3,
+						     NULL, NULL, TRUE, FALSE);
+			tmp = g_list_next(tmp);
+		}
 	}
+	g_free(info->text1);	
 	g_list_free(tmp);
 	g_list_free(list);
 }
