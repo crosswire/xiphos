@@ -88,7 +88,7 @@ on_mainwindow_size_allocate(GtkWidget *widget,
 {
 	settings->gs_width = allocation->width;
 	settings->gs_hight = allocation->height;
-	g_warning("gs hight = %d\ngs width = %d", settings->gs_hight,settings->gs_width);
+//	g_warning("gs hight = %d\ngs width = %d", settings->gs_hight,settings->gs_width);
 }
 
 //----------------------------------------------------------------------------------------------

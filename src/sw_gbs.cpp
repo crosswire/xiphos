@@ -95,6 +95,7 @@ on_ctreeBooks_select_row(GtkCList * clist,
 		GTK_CELL_PIXTEXT(GTK_CTREE_ROW(treeNode)->row.
 				     cell[2])->text;
 				     
+	/** if we have change to a different book **/			     
 	if(strcmp(lastbook,bookname)){	
 		ModMap::iterator it;	//-- module iterator		     
 		it = mainMgr->Modules.find(bookname);	//-- find module (modName)
@@ -105,10 +106,13 @@ on_ctreeBooks_select_row(GtkCList * clist,
 	TreeKeyIdx *treeKey =  getTreeKey(curbookMod);
 	TreeKeyIdx treenode = *treeKey;
 	treenode.setOffset(strtoul(offset,NULL,0));
-		
-	curbookMod->SetKey(treenode);
-	curbookMod->KeyText(); //snap to entry	
-	curbookMod->Display();
+	
+	/** if not root node display **/
+	if(treenode.getOffset() > 0) {	
+		curbookMod->SetKey(treenode);
+		curbookMod->KeyText(); //snap to entry	
+		curbookMod->Display();
+	}
 	
 	/** fill ctree node with children **/
 	if((GTK_CTREE_ROW(treeNode)->children == NULL)&&(!GTK_CTREE_ROW(treeNode)->is_leaf)){
@@ -167,7 +171,7 @@ static void addNodeChildren(GtkWidget *ctree,
 		if(treeKey.hasChildren())
 			node = gtk_ctree_insert_node(GTK_CTREE(ctree),
 								tmp_parent_node,
-								NULL,
+								NULL, /** must be null to keep correct tree order **/
 								text, 
 								3, 
 								pixmap1,
@@ -179,7 +183,7 @@ static void addNodeChildren(GtkWidget *ctree,
 		else
 			node = gtk_ctree_insert_node(GTK_CTREE(ctree),
 								tmp_parent_node,
-								NULL,
+								NULL, /** must be null to keep correct tree order **/
 								text, 
 								3, 
 								pixmap3,
@@ -195,11 +199,11 @@ static void addNodeChildren(GtkWidget *ctree,
 void load_book_tree(GtkWidget *ctree, 
 				GtkCTreeNode *node, 
 				gchar *bookName, 
-				gchar *treekey,
+				gchar *gtreekey,
 				unsigned long offset)
 {
 	ModMap::iterator it;	//-- module iterator
-	
+		 
 	it = mainMgr->Modules.find(bookName);	//-- find module (modName)
 	curbookMod = (*it).second;
 			
@@ -207,7 +211,8 @@ void load_book_tree(GtkWidget *ctree,
 	
 	if (treeKey) {
 		TreeKeyIdx root = *treeKey;	
-		if(!strcmp(treekey, "root")) 
+		//if(!strcmp(gtreekey, "root")) 
+		if(offset == 0)
 			root.root();
 		else 
 			root.setOffset(offset);		

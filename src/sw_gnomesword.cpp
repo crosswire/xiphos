@@ -282,7 +282,7 @@ void initSWORD(GtkWidget * mainform)
 			curdictMod->Disp(dictDisplay);
 		} else if (!strcmp((*it).second->Type(), "Generic Book")) {	//-- set dictionary modules   
 			curbookMod = (*it).second;
-			g_warning(curbookMod->Name());
+//			g_warning(curbookMod->Name());
 			bookmods = g_list_append(bookmods, curbookMod->Name());
 			sbbookmods = g_list_append(sbbookmods, curbookMod->Description());
 			curbookMod->Disp(bookDisplay);
@@ -332,14 +332,7 @@ void ChangeVerseSWORD(void)
 {
 	int l;
 	GList * mods;
-	gchar * currRef;
-	
-	//-- save any changes to personal notes
-	if ((settings->editnote) && noteModified) {
-		if (autoSave) {	//-- if we are in edit mode
-			//savenoteSWORD(noteModified);	//-- save if text in note window has changed                    
-		}
-	}
+	//gchar * currRef;
 	
 	strcpy(current_verse, vkText);
 	ApplyChange = false;
@@ -371,7 +364,6 @@ void ChangeVerseSWORD(void)
 			gtk_entry_set_text(GTK_ENTRY(lookup_widget(settings->app, "cbeFreeformLookup")), 
 						vkText);
 			curMod->Display();
-			//g_free(currRef);
 		}
 	}
 	changemain = TRUE;
@@ -379,10 +371,10 @@ void ChangeVerseSWORD(void)
 	//--------------------------------------------------------------- change interlinear verses
 	updateinterlinearpage();
 	
-	//--------------------------------------------------------------- change personal notes editor	
+	//--------------------------------------------------------------- change personal notes editor	 if not in edit mode
 	if (settings->notebook3page == 2) {
 		if (settings->notefollow) {	//-- if personal notes follow button is active (on)                   
-			if (settings->editnote && (!autoSave)) {
+			if (settings->editnote) {
 				//-- do nothing
 			} else {
 				if (usepersonalcomments && percomMod) {
