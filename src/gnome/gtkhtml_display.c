@@ -509,6 +509,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 				utf8str = str->str;			
 			}
 		}
+		
 		else {
 			str = g_string_append (str,text_str);
 			utf8str = str->str;
@@ -561,6 +562,132 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	if (use_font)
 		free(use_font);
 	g_free(tmpkey);
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/gtkhtml_display.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_module_is_locked_display(GtkWidget * html_widget, 
+				gchar * mod_name, gchar * cipher_key)
+{	
+	GtkHTML *html = GTK_HTML(html_widget);
+	GtkHTMLStreamStatus status1 = 0;
+	GtkHTMLStream *htmlstream;
+	gchar	buf[500],
+		*utf8str;
+	gint utf8len;
+	
+	
+	htmlstream =
+	    gtk_html_begin_content(html, "text/html; charset=utf-8");
+	
+	sprintf(buf,"%s",
+		HTML_START"<body><br>");
+	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+	utf8len = strlen(utf8str);     
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+			       utf8len);
+	}
+	
+	if(!cipher_key){
+		sprintf(buf,"%s %s %s %s %s",
+			_("The"),
+			"<b>",
+			mod_name,
+			"</b>",
+			_("module is locked."));
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+		utf8len = strlen(utf8str);     
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);
+		}
+	}
+	
+	else {
+		sprintf(buf,"%s %s %s %s %s",
+			_("The"),
+			"<b>",
+			mod_name,
+			"</b>",
+			_("module has been unlocked."));
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+		utf8len = strlen(utf8str);     
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);
+		}
+	}
+	
+	
+	
+	
+	if(!cipher_key){
+		sprintf(buf,"%s %s %s%s%s %s %s %s",
+			"<br><br>",
+			_("If you have the cipher key you can"),
+			"<a href=\"U",
+			mod_name,		
+			"\">",
+			_("click here"),
+			" </a>",
+			_("to unlock the module"));
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+		utf8len = strlen(utf8str); 
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+			       utf8len);
+		}  
+	
+		sprintf(buf,"%s%s",
+			"<br><br>",
+			_("You will have to restart GnomeSWORD after you unlock it."));
+		
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+		utf8len = strlen(utf8str);     
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);
+		}
+	}
+	
+	else {
+		sprintf(buf,"%s%s" ,
+			"<br><br>",
+			_("You need to restart GnomeSWORD to view it"));
+		utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
+		utf8len = strlen(utf8str);     
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);
+		}
+	}
+		
+
+	strcpy(buf, "</body></html>");
+	utf8str = e_utf8_from_gtk_string(html_widget, buf);
+	utf8len = strlen(utf8str);
+	if (utf8len) {
+		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+			       utf8len);
+	}
+
+	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	
 }
 
 /******   end of file   ******/

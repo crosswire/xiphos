@@ -1514,47 +1514,47 @@ static void save_modlist(GtkButton * button, gpointer user_data)
 
 static void save_modlist_as(GtkButton * button, gpointer user_data)
 {
-	gchar *name_string = NULL;
-	gchar *test;
+	gint test;
 	CUSTOM_MODLIST *m;
-	/*g_warning(gtk_dialog_cauldron ("Save List", 0,
-	   "( (Enter List Name:) | %Eod ) / ( %Bqrxfp || %Bqxfp )", 
-	   &search_string, "Ok", "Cancel")); */
+	
+	GS_DIALOG *info;
 
-	test = gtk_dialog_cauldron("Save List", 0,
-				   "( (Enter List Name:) | %Eod ) / ( %Bqrxfp || %Bqxfp )",
-				   &name_string, "Ok", "Cancel");
-
-
-	if ((!strcmp("Ok", test)) ||
-	    (!strcmp("GTK_CAULDRON_ENTER", test))) {
-		if (strlen(name_string) > 0) {
+	
+	info = gui_new_dialog();
+	info->label_top = N_("Save List");
+	info->text1 = g_strdup("");
+	info->label1 = N_("Enter List Name: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	/*** open dialog to get name for list ***/
+	test = gui_gs_dialog(info);
+	if (test == GS_OK) {	
+		if (strlen(info->text1) > 0) {
 			GList *mods = NULL;
 			gchar *text[2], *mods_string;
 			mods = get_current_list();
 			mods_string = get_modlist_string(mods);
-			text[0] = name_string;
+			text[0] = info->text1;
 			text[1] = mods_string;
-
+			
 			search.custom_list_row =
 			    gtk_clist_append((GtkCList *) search.
 					     module_lists, text);
 			search.list_rows = search.custom_list_row;
 			m = g_new(CUSTOM_MODLIST, 1);
-			m->label = g_strdup(name_string);
+			m->label = g_strdup(info->text1);
 			m->modules = g_strdup(mods_string);
 			search.modlists =
 			    g_list_append(search.modlists,
 					  (CUSTOM_MODLIST *) m);
-			//save_modlist(NULL, NULL);
 			save_custom_modlist(search.modlists);
 			gtk_clist_select_row((GtkCList *)
 					     search.module_lists,
 					     search.custom_list_row, 0);
-			//g_warning(name_string);
 		}
 	}
-
+	g_free(info->text1);
+	g_free(info);
 }
 
 

@@ -206,11 +206,7 @@ void backend_set_text_global_option(char * option, char * yesno)
 
 void backend_set_module_unlocked(char * mod_name, char * key)
 {	/* this does not work */
-	//g_warning("module is %s\nkey = %s",mod_name,key);
-	//int rslts = mgr->setCipherKey(mod_name, key);
-	delete mgr;
-	mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
-	//g_warning("rslts = %d",rslts);
+	int rslts = mgr->setCipherKey(mod_name, key);
 }
 
 /******************************************************************************
