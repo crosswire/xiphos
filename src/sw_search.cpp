@@ -63,6 +63,7 @@ extern SWModule *curMod, *curcomMod, *percomMod;
 extern gboolean firstsearch;
 extern SETTINGS *settings;
 extern GtkWidget *clistSearchResults;
+
 /***********************************************************************************************
  static
 ***********************************************************************************************/
@@ -71,11 +72,11 @@ static char printed = 0;
 static SWDisplay 
 	*searchresultssbDisplay;	/* to display modules in searchresults */
 	//*searchresultstextsbDisplay;
-static SWMgr 
-	*searchresultssbMgr; 
 static SWModule 
 	*searchresultssbMod;   /* module for searchresults */
 
+SWMgr *searchMgr;
+SWMgr *searchresultssbMgr; 
 //-------------------------------------------------------------------------------------------
 GList*   /* search Bible text, commentaries of generic books*/
 searchSWORD (SETTINGS *s, SEARCH_OPT *so)	
@@ -86,7 +87,6 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
         SWKey	*currentScope; //----------- use to set scope of search	
 	SWModule *searchMod,
 			*tmpMod;
-	SWMgr *searchMgr;
 	ModMap::iterator 
 		it;
 	GtkWidget       
@@ -119,8 +119,7 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 		*tmpbuf;
 		
 	tmpbuf = g_string_new("");	
-	list = NULL;	
-	searchMgr = new SWMgr();	//-- create sword mgr
+	list = NULL;
 	
 	searchMod = NULL;
 	searchText = lookup_widget (s->app, "entrySearch");	//-- pointer to text entry
@@ -254,7 +253,6 @@ searchSWORD (SETTINGS *s, SEARCH_OPT *so)
 	endHTML(s->htmlRP);			
 	/* cleanup appbar progress */
 	gnome_appbar_set_progress ((GnomeAppBar *)s->appbar, 0);
-	delete searchMgr;
 	g_string_free(tmpbuf,TRUE);
 	return list;
 }
@@ -287,7 +285,7 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 	ModMap::iterator it; //-- iteratior	
 	SectionMap::iterator sit; //-- iteratior
 	
-	searchresultssbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
+	//searchresultssbMgr	= new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));	
 	searchresultssbMod     = NULL;
 	searchresultssbDisplay = new  GtkHTMLEntryDisp(html_widget,settings);
 	//searchresultstextsbDisplay = new  GTKutf8ChapDisp(html_widget);
@@ -305,7 +303,7 @@ void setupsearchresultsSBSW(GtkWidget *html_widget)
 /*** close down searchresults ***/
 void shutdownsearchresultsSBSW(void) 
 {	
-	delete searchresultssbMgr;	
+		
 	if(searchresultssbDisplay)
 		delete searchresultssbDisplay;	
 	/*

@@ -98,6 +98,8 @@ SWMgr
     *listMgr,		/* sword mgr for ListEditor */
     *mainMgr1,			/* sword mgr for comp1Mod - interlinear modules */
     *mainMgr;		/* sword mgr for curMod - curcomMod - curdictMod */
+extern SWMgr *searchMgr;
+extern SWMgr *searchresultssbMgr; 
 
 VerseKey swKey = "Romans 8:28",	/* temp storage for verse keys */
     vkText,
@@ -212,8 +214,11 @@ void initSWORD(SETTINGS *s)
 
 	mainMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
 	mainMgr1 = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF)); 
+	searchMgr = new SWMgr();  //-- create sword mgrs
+	searchresultssbMgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));  //-- create sword mgrs
+	
 	percomMgr = new SWMgr(); 
-
+	
 	curMod = NULL;		//-- set mods to null
 	comp1Mod = NULL;
 	curcomMod = NULL;
@@ -754,6 +759,8 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	delete mainMgr;
 	delete mainMgr1;
 	delete percomMgr;
+	delete searchMgr;
+	delete searchresultssbMgr;
 	//-- delete Sword displays
 	if (UTF8Display)
 		delete UTF8Display;
@@ -860,6 +867,8 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean sh
 		
 		break;
 	}
+	searchMgr->setGlobalOption(option, on_off);
+	searchresultssbMgr->setGlobalOption(option, on_off);	
 }
 
 /* 
@@ -1420,6 +1429,8 @@ void setglobalopsSWORD(gint window, gchar * option, gchar * yesno)
 		mainMgr1->setGlobalOption(option, yesno);
 		break;
 	}
+	searchMgr->setGlobalOption(option, yesno);
+	searchresultssbMgr->setGlobalOption(option, yesno);	
 }
 
 /******************************************************************************
