@@ -22,7 +22,25 @@
 #ifndef __BIBLETEXT_DIALOG_H__
 #define __BIBLETEXT_DIALOG_H__
 
-GtkWidget *gui_create_bibletext_dialog(void);
+typedef struct _viewtext VIEW_TEXT;
+struct _viewtext {
+	GtkWidget *dialog;
+	GtkWidget *btn_sync;
+	GtkWidget *btn_close;
+	GtkWidget *cbe_book;
+	GtkWidget *spb_chapter;
+	GtkWidget *spb_verse;
+	GtkWidget *html;
+	GtkWidget *btn_print;
+	gchar *mod_name;
+	gchar key[80];
+	gint dialog_number;
+	gboolean has_key;
+};	
+
+void gui_open_bibletext_dialog(gint mod_num);
+void gui_setup_bibletext_dialog(GList *mods);
+void gui_shutdown_bibletext_dialog(void);
 
 #endif
 

@@ -6,12 +6,12 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=171
-1=29
-2=1696
-3=210
-4=58
-5=112
+0=221
+1=168
+2=35
+3=254
+4=37
+5=311
 6=333
 7=1168
 8=28
@@ -29,7 +29,7 @@ ShowLocals=true
 0=
 1=
 2=
-3=
+3=990,
 4=
 5=
 6=
@@ -45,38 +45,33 @@ ShowLocals=true
 16=
 17=
 
-[breakpoints]
-0=4,,1,84,0,,bibletext_.cpp,170,10,0,backend_check_for_global_option,,1024964020,
-
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/backend/bibletext_.cpp
-1=/home/terry/Projects/gnomesword1/src/backend/bibletext_.h
-2=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
-3=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
-4=/home/terry/Projects/gnomesword1/src/main/main.c
-5=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
-6=/home/terry/Projects/gnomesword1/src/main/bibletext.c
-7=/usr/include/g++-3/stl_tree.h
+0=/home/terry/Projects/gnomesword1/src/main/gs_gnomesword.c
+1=/home/terry/Projects/gnomesword1/src/backend/bibletext_view_.cpp
+2=/home/terry/Projects/gnomesword1/src/backend/bibletext_view_.h
+3=/home/terry/Projects/gnomesword1/src/gnome/bibletext_dialog.c
+4=/home/terry/Projects/gnomesword1/src/gui/bibletext_dialog.h
+5=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
 
 [replace_text]
-0=settings.
-1=bibletext.h
-2=bibletext_dialog.h
-3=shortcutbar_viewer.h
-4=_percomm
-5=pcecd
-6=vboxPC
-7=workbook_upper_switch_page
+0=vt->spb_verse
+1=vt->spb_chapter
+2=vt->cbe_book
+3=vt->btn_close
+4=vt->btn_sync
+5=vt->btn_new
+6=vt->cbe_module
+7=vt->combo_module
 
 [find_text]
-0=modname
-1=check_for_global_option
-2=disp
-3=s->
-4=settings
-5=comm_display_change
-6=display_commentary
-7=isrunningVC
+0=get_book_viewtext
+1=vt_current_verse
+2=update_controls
+3=gsI_isrunning
+4=on_modops_activate
+5=on_btnGotoVerse_clicked
+6=on_linkVT_clicked
+7=goto_verse_viewtext
 
 [executer args]
 0=newconfigs

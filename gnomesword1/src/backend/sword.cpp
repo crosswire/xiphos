@@ -59,6 +59,7 @@
 #include "backend/percomm_.h"
 #include "backend/search_.h"
 #include "backend/interlinear.h"
+#include "backend/bibletext_view_.h"
 
 typedef map < string, string > modDescMap;
 typedef map < string, string > bookAbrevMap;
@@ -197,8 +198,10 @@ void backend_init_sword(void)
 	 * setup Commentary, Personal Comments
 	 * Generic Book and Dict/Lex Support
 	 */
-	if(havebible)
+	if(havebible){
 		backend_setup_bibletext();
+		backend_setup_viewtext();
+	}
 	if(havecomm)
 		backend_setup_commentary();
 	if(havepercomm)
@@ -267,6 +270,7 @@ void backend_shutdown(void)
 	backend_save_properties(true);
 	
 	backend_shutdown_bibletext();
+	backend_shutdown_viewtext();
 	backend_shutdown_commentary();
 	backend_shutdown_percomm();
 	backend_shutdown_dictlex();
