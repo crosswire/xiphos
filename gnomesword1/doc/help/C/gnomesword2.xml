@@ -379,7 +379,7 @@
 				<warning>
 					<para>
 						Please ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information
-						will be presented.
+						will be displayed.
 					</para>
 				</warning>
 			</sect3>
@@ -475,14 +475,14 @@
 				<itemizedlist>
 					 <listitem>
 						<para>
-							right-click in the	<interface> Bible Translation Display Area</interface>.In the popup menu choose
+							right-click in the	<interface> Bible Text Pane</interface>.In the popup menu choose
 							<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open current in a dialog Module
 							</guimenuitem></menuchoice>.
 						</para>
 					</listitem>
 					<listitem>
 						<para>
-							 under the <guibutton>Modules</guibutton> option in the <interface>Side Pane</interface>,choose <menuchoice>
+							 Under the <guibutton>Modules</guibutton> option in the <interface>Side Pane</interface>,choose <menuchoice>
 							<guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem></menuchoice>
 							.Then right-click on your specific translation and choose the <guimenuitem>Open in dialog</guimenuitem>
 							option.
@@ -490,14 +490,105 @@
 					</listitem>
 				</itemizedlist>
 			</sect3>
+			<sect3 id="gnomesword-bible-about">
+				<title>Finding Out About The Current Translation</title>
+				<para>
+					To find out about the Bible translation currently being displayed simply:
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							right-click in the	<interface> Bible Text Pane</interface>.In the popup menu choose
+							<guimenuitem>About </guimenuitem> module name.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
 
+			<sect3 id="gnomesword-bible-options">
+				<title>Module Options</title>
+				<para>
+					Most Bible translations have additional option which the user can enable or disable. These include:
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							Words Of Christ In Red
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Strong Numbers
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Morphological Tags
+						</para>
+					</listitem>
+					<listitem>	
+						<para>
+							Footnotes
+						</para>
+					</listitem>
+					<listitem>	
+						<para>
+							Scripture Cross-Reference
+						</para>
+					</listitem>
+					<listitem>	
+						<para>
+							Headings
+						</para>
+					</listitem>
+				</itemizedlist>
+				<note>
+					<para>
+						Translations in other Languages such as Greek or Hebrew have specific options which deal only with the specific language.
+					</para>
+				</note>
+				<para>
+					In order to access these options simply:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							right-click in the <interface>Bible Text Pane</interface>.In the popup menu choose <guibutton>Module
+							Options</guibutton> and select the specific option.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			<sect3 id="gnomesword-bible-dictionary">
+				<title>Specific Word Meanings</title>
+				<para>
+					In order to check the meaning of a specific word,simply click on the desired word you wish to lookup. The word should then highlight itself and the
+					explanation should be displayed, if available, in the <interface>Dictionary Pane</interface>. 
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-bible-find">
+				<title>Finding A Specific Word</title>
+				<para>
+					To find a specific word within a passage, simply:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							right-click in the <interface>Bible Text Pane</interface>.In the popup menu, choose <guibutton>Edit</guibutton>-&gt;							<guibutton>Find</guibutton>. A separate dialog will appear,which will allow single or multi word searches. Simply fill out 
+							dialog and click the <guibutton>Find</guibutton> button.
+						</para>	
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			
+			
 		 </sect2>
 
    <!--  The Commentary Pane -->
 		<sect2 id="gnomesword-commentaries">
    		 	<title>The Commentary Pane</title>
   			<figure>
-   				<title>The CommentaryPane</title>
+   				<title>The Commentary Pane</title>
    				<screenshot>
        					<mediaobject>
 						<imageobject>
@@ -523,6 +614,7 @@
 				</para>
 			</note>
 		</sect2>
+		
 		
    </sect1>
 
