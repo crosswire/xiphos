@@ -53,6 +53,7 @@ class ComEntryDisp:public GtkHTMLEntryDisp { public:
 class GTKutf8ChapDisp:public GtkHTMLEntryDisp { public:
 	GTKutf8ChapDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
+	void marksearchwords( GString *str );
 };
 
 //----------------------------------------------------------------------------------------------
@@ -60,12 +61,6 @@ class InterlinearDisp:public GtkHTMLEntryDisp { public:
 	InterlinearDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
 	} virtual char Display(SWModule & imodule);
 };
-//----------------------------------------------------------------------------------------------
-class SearchResultsDisp:public GtkHTMLEntryDisp { public:
-	SearchResultsDisp(GtkWidget * gtkText):GtkHTMLEntryDisp(gtkText) {
-	} virtual char Display(SWModule & imodule);
-};
-
 
 //----------------------------------------------------------------------------------------------
 void AboutModsDisplayHTML(char *to, char *text);

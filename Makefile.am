@@ -1,11 +1,17 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS =   macros \
+SUBDIRS =   intl \
+            macros \
             po \
             help \
 	    src
 
-EXTRA_DIST = gnomesword.glade Gnomesword.prj
+EXTRA_DIST = gnomesword.glade \
+        Gnomesword.prj \
+        gnomesword.desktop\
+	xml-i18n-extract.in \
+	xml-i18n-merge.in \
+	xml-i18n-update.in
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
 gnomesworddoc_DATA = \
@@ -16,6 +22,8 @@ gnomesworddoc_DATA = \
 	    INSTALL\
 	    NEWS\
 	    TODO
+
+
 
 install-data-local:
 	@$(NORMAL_INSTALL)
@@ -29,14 +37,14 @@ install-data-local:
 	fi
 
 	$(mkinstalldirs) $(DESTDIR)@PACKAGE_MENU_DIR@/Applications; \
-        if test -f Gnomesword.desktop; then \
-        $(INSTALL_DATA) Gnomesword.desktop $(DESTDIR)@PACKAGE_MENU_DIR@/Applications; \
+        if test -f gnomesword.desktop; then \
+        $(INSTALL_DATA) gnomesword.desktop $(DESTDIR)@PACKAGE_MENU_DIR@/Applications; \
         fi 
 
 uninstall-local:
 	@$(NORMAL_UNINSTALL)
 	rm -f -r $(DESTDIR)@PACKAGE_PIXMAPS_DIR@
-	rm -f $(DESTDIR)@PACKAGE_MENU_DIR@/Applications/Gnomesword.desktop
+	rm -f $(DESTDIR)@PACKAGE_MENU_DIR@/Applications/gnomesword.desktop
 	rm -f -r $(DESTDIR)@PACKAGE_HELP_DIR@
 
 dist-hook:

@@ -193,6 +193,7 @@ void initSWORD(GtkWidget * mainform)
 	sbbiblemods = NULL;
 	sbcommods = NULL;
 	sbdictmods = NULL;
+	settings->displaySearchResults = false;
 	
 	MainFrm = lookup_widget(mainform, "settings->app");	//-- save mainform for use latter
 	NEtext = lookup_widget(mainform, "textComments");	//-- get note edit widget
@@ -213,8 +214,10 @@ void initSWORD(GtkWidget * mainform)
 		while (gtk_events_pending())
 			gtk_main_iteration();
 	}
-	g_print("%s\n", "Loading SWORD Moudules\n");
-	g_print("%s\n", "gnomesword-%s\n", VERSION);
+	
+	g_print("%s\n", "Loading SWORD Moudules");
+	g_print("gnomesword-%s\n", VERSION);
+	
 	for (it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++) {
 		descriptionMap[string ((char *) (*it).second->Description())] =
 		    string((char *) (*it).second->Name());
