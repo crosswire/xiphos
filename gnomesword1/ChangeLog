@@ -1,3 +1,11 @@
+2002-05-21  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* moved create percomm control code from gnome/_editor.c
+	  to gnome/_percomm.c
+	* moved create studypad control code from gnome/_editor.c
+	  to gnome/studypad.c
+
+
 2002-05-17  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* removed main/gs_gui_cb.*

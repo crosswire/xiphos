@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * editor.c - studypad gui
+ * studypad.c - studypad gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -37,19 +37,20 @@
 #include "spell_gui.h"
 #endif
 
-/* gnome */
+/* frontend */
 #include "studypad.h"
 #include "_editor.h"
 #include "editor_toolbar.h"
 #include "editor_menu.h"
 #include "link_dialog.h"
+#include "info_box.h"
 
 /* main */
 #include "gs_gnomesword.h"
+#include "gs_html.h"
 #include "fileselection.h"
 #include "support.h"
 #include "settings.h"
-
 
 #define BUFFER_SIZE 4096
 
@@ -243,12 +244,464 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 
 /******************************************************************************
  * Name
- *  studypad_control
+ *  release
  *
  * Synopsis
  *   #include "studypad.h"
  *
- *   GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)	
+ *   gint release(GtkWidget * widget, GdkEventButton * event,
+ *					GSHTMLEditorControlData * cd)	
+ *
+ * Description
+ *    ?????
+ *
+ * Return value
+ *   gint
+ */
+ 
+static gint release(GtkWidget * widget, GdkEventButton * event,
+					GSHTMLEditorControlData * cd)
+{
+
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *  html_key_pressed
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *   a key has been pressed - ecd->changed to true 
+ *
+ * Return value
+ *   gint
+ */
+ 
+static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
+					GSHTMLEditorControlData * ecd)
+{
+	ecd->changed = TRUE;
+	//file_changed = TRUE;
+	update_statusbar(ecd);
+	return 1;
+}
+
+/******************************************************************************
+ * Name
+ *  html_load_done
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void html_load_done(GtkWidget * html,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *   ???? 
+ *
+ * Return value
+ *   void
+ */
+ 
+static void html_load_done(GtkWidget * html,
+					GSHTMLEditorControlData * ecd)
+{
+	update_statusbar(ecd);
+}
+
+/******************************************************************************
+ * Name
+ *  on_submit
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_submit(GtkHTML * html, const gchar * method,
+ *		      const gchar * url, const gchar * encoding,
+ *		      GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    ?????
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_submit(GtkHTML * html, const gchar * method,
+		      const gchar * url, const gchar * encoding,
+		      GSHTMLEditorControlData * ecd)
+{
+	/*
+	   GList *l;
+
+	   l = NULL;
+
+	   l=html->engine->form->elements;
+	   while (l != NULL) {  
+	   g_warning((gchar *) l->data);
+	   l = g_list_next(l);
+	   }
+	   g_list_free(l);
+	 */
+	g_warning(method);
+	g_warning(url);
+	g_warning(encoding);
+
+}
+
+/******************************************************************************
+ * Name
+ *  html_button_pressed
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    mouse button pressed in editor 
+ *
+ * Return value
+ *   gint
+ */ 
+
+static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
+					GSHTMLEditorControlData * ecd)
+{	
+	if (ecd->personal_comments) 
+		settings.whichwindow = PERCOMM_WINDOW;
+	if (ecd->studypad) 
+		settings.whichwindow = STUDYPAD_WINDOW;
+	switch (event->button) {
+	case 1:
+		if (event->type == GDK_2BUTTON_PRESS && ecd->obj
+		    && event->state & GDK_CONTROL_MASK) {
+			ecd->releaseId =
+			    gtk_signal_connect(GTK_OBJECT(html),
+					       "button_release_event",
+					       GTK_SIGNAL_FUNC(release),
+					       ecd);
+
+		}
+
+		else
+			return TRUE;
+		break;
+	case 2:
+		/* 
+		 * pass this for pasting 
+		 */
+		return TRUE;
+	case 3:
+		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
+					     "button_press_event");
+		break;
+	default:
+	}
+
+	return FALSE;
+}
+
+/******************************************************************************
+ * Name
+ *  on_html_enter_notify_event
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   gboolean on_html_enter_notify_event(GtkWidget * widget,
+ *			   GdkEventCrossing * event,
+ *			   GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    mouse moved into editor - sets studypad html widget to edit mode
+ *
+ * Return value
+ *   gboolean
+ */
+ 
+static gboolean on_html_enter_notify_event(GtkWidget * widget,
+			   GdkEventCrossing * event,
+			   GSHTMLEditorControlData * ecd)
+{
+	if (!ecd->personal_comments && !ecd->gbs)
+		if (!gtk_html_get_editable(ecd->html))
+			gtk_html_set_editable(ecd->html, TRUE);
+	return TRUE;
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_save_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_save_clicked(GtkButton * button,
+					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    save contents of editor
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_btn_save_clicked(GtkButton * button,
+					GSHTMLEditorControlData * ecd)
+{
+	GtkWidget *savemyFile;
+	gchar buf[255];
+	
+	if (ecd->filename) {
+		save_file(ecd->filename, ecd);
+		return;
+	} else {
+		sprintf(buf, "%s/.pad", settings.homedir);
+		savemyFile = gui_fileselection_save(ecd);
+		gtk_file_selection_set_filename(GTK_FILE_SELECTION
+						(savemyFile), buf);
+		gtk_widget_show(savemyFile);
+	}
+		
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_open_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_open_clicked(GtkButton * button,
+					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    open file dialog 
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_btn_open_clicked(GtkButton * button,
+					GSHTMLEditorControlData * ecd)
+{
+	GtkWidget *openFile;
+	gchar *msg, buf[255];
+	GtkWidget *msgbox;
+	gint answer = 0;
+	/* 
+	 * if study pad file has changed let's ask about saving it 
+	 */
+	if (ecd->changed) {
+		msg =
+		    g_strdup_printf(_
+				    ("``%s'' has been modified.  Do you wish to save it?"),
+				    ecd->filename);
+		msgbox = gui_create_info_box();
+		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
+		answer =
+		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		g_free(msg);
+		switch (answer) {
+		case 0:
+			save_file(ecd->filename, ecd);
+			break;
+		default:
+			break;
+		}
+	}
+	sprintf(buf, "%s/*.pad", settings.homedir);
+	openFile = gui_fileselection_open(ecd);
+	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
+					buf);
+	gtk_widget_show(openFile);
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_print_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_print_clicked(GtkButton * button, 
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    print the editor text
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_btn_print_clicked(GtkButton * button, 
+					GSHTMLEditorControlData * ecd)
+{
+	html_print(ecd->htmlwidget);
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_cut_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_cut_clicked(GtkButton * button, 
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    cut selected text to clipboard
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_btn_cut_clicked(GtkButton * button, 
+					GSHTMLEditorControlData * ecd)
+{
+	gtk_html_cut(ecd->html);
+	ecd->changed = TRUE;
+	update_statusbar(ecd);
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_copy_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_copy_clicked(GtkButton * button, 
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    copy selected text to clipboard
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_btn_copy_clicked(GtkButton * button, 
+					GSHTMLEditorControlData * ecd)
+{
+	gtk_html_copy(ecd->html);
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_paste_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_paste_clicked(GtkButton * button, 
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    paste contents of clipboard into editor
+ *
+ * Return value
+ *   
+ */
+ 
+static void on_btn_paste_clicked(GtkButton * button, 
+					GSHTMLEditorControlData * ecd)
+{
+	gtk_html_paste(ecd->html);
+	ecd->changed = TRUE;
+	update_statusbar(ecd);
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_undo_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_undo_clicked(GtkButton * button, 
+ *					GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    undo changes in the editor
+ *
+ * Return value
+ *   void
+ */ 
+
+static void on_btn_undo_clicked(GtkButton * button, 
+					GSHTMLEditorControlData * ecd)
+{
+	gtk_html_undo(ecd->html);
+	ecd->changed = TRUE;
+	update_statusbar(ecd);
+}
+
+/******************************************************************************
+ * Name
+ *  on_btn_Find_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_Find_clicked(GtkButton *button, 
+ *					GSHTMLEditorControlData *ecd)	
+ *
+ * Description
+ *    open find dialog
+ *
+ * Return value
+ *   void
+ */ 
+
+static void on_btn_Find_clicked(GtkButton * button, 
+					GSHTMLEditorControlData * ecd)
+{
+	search(ecd, FALSE, NULL);
+}
+
+
+/******************************************************************************
+ * Name
+ *  on_btn_replace_clicked
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   void on_btn_replace_clicked(GtkButton * button,
+		       GSHTMLEditorControlData * ecd)	
+ *
+ * Description
+ *    open find and replace dialog
+ *
+ * Return value
+ *   void
+ */
+ 
+static void on_btn_replace_clicked(GtkButton * button,
+		       GSHTMLEditorControlData * ecd)
+{
+	replace(ecd);
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_create_studypad_control
+ *
+ * Synopsis
+ *   #include "studypad.h"
+ *
+ *   GtkWidget *gui_create_studypad_control(GtkWidget * notebook, SETTINGS * s)	
  *
  * Description
  *    create studypad control
@@ -257,14 +710,22 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
  *   GtkWidget *
  */ 
 
-GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
+GtkWidget *gui_create_studypad_control(GtkWidget * notebook, SETTINGS * s)
 {
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
 	GtkWidget *vboxSP;
-	GtkWidget *htmlwidget;
+	GtkWidget *htmlwidget;	
+	GtkWidget *frame34;
+	GtkWidget *scrolledwindow17;
+	GtkWidget *toolbar;
+	GtkWidget *tmp_toolbar_icon;
+	GtkWidget *vseparator19;
+	GtkWidget *vseparator20;
+	GtkWidget *vseparator21;
 	GSHTMLEditorControlData *specd =
 		gs_html_editor_control_data_new(s);
+	
 	
 	specd->studypad = TRUE;
 
@@ -291,7 +752,288 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 	gtk_box_pack_start(GTK_BOX(vbox6), vboxSP, TRUE, TRUE, 0);
 
 	htmlwidget = gtk_html_new();
-	gui_create_html_editor(htmlwidget, vboxSP, s, specd);
+	
+	specd->frame_toolbar = gtk_frame_new(NULL);
+	gtk_widget_ref(specd->frame_toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "specd->frame_toolbar",
+				 specd->frame_toolbar,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	if (specd->studypad)
+		gtk_widget_show(specd->frame_toolbar);
+	gtk_box_pack_start(GTK_BOX(vboxSP), specd->frame_toolbar, FALSE,
+			   TRUE, 0);
+
+	toolbar =
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
+	gtk_widget_ref(toolbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "toolbar", toolbar,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(toolbar);
+	gtk_container_add(GTK_CONTAINER(specd->frame_toolbar), toolbar);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
+				      GTK_RELIEF_NONE);
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_OPEN);
+	specd->btn_open =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Open"), _("Open File"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_open);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_open",
+				 specd->btn_open,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_open);
+
+	gtk_signal_connect(GTK_OBJECT(specd->btn_open), "clicked",
+		   GTK_SIGNAL_FUNC(on_btn_open_clicked),
+		   specd);		
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_SAVE);
+	specd->btn_save =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Save"), _("Save Note"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_save);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_save",
+				 specd->btn_save,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_save);
+	
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_PRINT);
+	specd->btn_print =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Print"), _("Print Note"),
+				       NULL, tmp_toolbar_icon, NULL,
+				       NULL);
+	gtk_widget_ref(specd->btn_print);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_print",
+				 specd->btn_print,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_print);
+
+	vseparator19 = gtk_vseparator_new();
+	gtk_widget_ref(vseparator19);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator19",
+				 vseparator19,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vseparator19);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator19,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator19, 5, 7);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_CUT);
+	specd->btn_cut =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Cut"), _("Cut "), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_cut);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_cut",
+				 specd->btn_cut,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_cut);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_COPY);
+	specd->btn_copy =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Copy"), _("Copy"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_copy);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_copy",
+				 specd->btn_copy,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_copy);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_PASTE);
+	specd->btn_paste =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Paste"), _("Paste"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_paste);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_paste",
+				 specd->btn_paste,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_paste);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app, GNOME_STOCK_PIXMAP_UNDO);
+	specd->btn_undo =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Undo"), _("Undo"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_undo);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_undo",
+				 specd->btn_undo,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_undo);
+
+	vseparator20 = gtk_vseparator_new();
+	gtk_widget_ref(vseparator20);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator20",
+				 vseparator20,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vseparator20);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator20,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator20, 5, 7);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app,
+				      GNOME_STOCK_PIXMAP_SEARCH);
+	specd->btn_Find =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Find"),
+				       _("Find in this note"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_Find);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_Find",
+				 specd->btn_Find,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_Find);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app,
+				      GNOME_STOCK_PIXMAP_SRCHRPL);
+	specd->btn_replace =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Replace"),
+				       _("Find and Replace"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_replace);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "specd->btn_replace", specd->btn_replace,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_replace);
+
+	vseparator21 = gtk_vseparator_new();
+	gtk_widget_ref(vseparator21);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "vseparator21",
+				 vseparator21,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vseparator21);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator21,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator21, 5, 7);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(s->app,
+				      GNOME_STOCK_PIXMAP_SPELLCHECK);
+	specd->btn_spell =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Spell"),
+				       _("Spell check note"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_ref(specd->btn_spell);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->btn_spell",
+				 specd->btn_spell,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->btn_spell);
+
+	frame34 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame34);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame34", frame34,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(frame34);
+	gtk_box_pack_start(GTK_BOX(vboxSP), frame34, TRUE, TRUE, 0);
+
+	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow17);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "scrolledwindow17", scrolledwindow17,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow17);
+	gtk_container_add(GTK_CONTAINER(frame34), scrolledwindow17);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow17),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+
+	specd->htmlwidget = htmlwidget;
+	specd->html = GTK_HTML(specd->htmlwidget);
+	gtk_widget_ref(specd->htmlwidget);
+	gtk_object_set_data_full(GTK_OBJECT(s->app),
+				 "specd->htmlwidget", specd->htmlwidget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->htmlwidget);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
+			  specd->htmlwidget);
+	gtk_html_load_empty(specd->html);
+
+	specd->statusbar = gtk_statusbar_new();
+	gtk_widget_ref(specd->statusbar);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->statusbar",
+				 specd->statusbar,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(specd->statusbar);
+	gtk_box_pack_start(GTK_BOX(vboxSP), specd->statusbar, FALSE, TRUE,
+			   0);
+			   
+	specd->vbox = vboxSP;
+	specd->pm = gui_create_editor_popup(specd);
+	gnome_popup_menu_attach(specd->pm, specd->htmlwidget, NULL);
+	
+	gtk_signal_connect(GTK_OBJECT(specd->html), "submit",
+			   GTK_SIGNAL_FUNC(on_submit), specd);
+	gtk_signal_connect(GTK_OBJECT
+			   (specd->htmlwidget),
+			   "load_done",
+			   GTK_SIGNAL_FUNC(html_load_done), specd);
+	gtk_signal_connect(GTK_OBJECT
+			   (specd->htmlwidget),
+			   "key_press_event",
+			   GTK_SIGNAL_FUNC(html_key_pressed), specd);
+	gtk_signal_connect(GTK_OBJECT
+			   (specd->htmlwidget),
+			   "button_press_event",
+			   GTK_SIGNAL_FUNC(html_button_pressed), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget),
+			   "enter_notify_event",
+			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
+			   specd);
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "link_clicked", GTK_SIGNAL_FUNC(on_link_clicked),	/* gs_html.c */
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", GTK_SIGNAL_FUNC(on_url),	/* gs_html.c */
+			   NULL);
+
+	gtk_signal_connect(GTK_OBJECT(specd->btn_save), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_save_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_print), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_print_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_cut), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_cut_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_copy), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_copy_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_paste), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_paste_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_undo), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_undo_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_Find), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_Find_clicked), specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_replace), "clicked",
+			   GTK_SIGNAL_FUNC(on_btn_replace_clicked),
+			   specd);
+	gtk_signal_connect(GTK_OBJECT(specd->btn_spell), "clicked",
+			   GTK_SIGNAL_FUNC(spell_check_cb), specd);
+
+	
+	
 
 	s->toolbarStudypad = toolbar_style(specd);
 	gtk_widget_hide(s->toolbarStudypad);

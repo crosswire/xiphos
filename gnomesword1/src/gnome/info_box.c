@@ -1,30 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_info_box.c
-    * -------------------
-    * Sat June 30 2001
-    * copyright (C) 2001 by tbiggs
-    * tbiggs@users.sourceforge.net
-    *
+/*
+ * GnomeSword Bible Study Tool
+ * info_box.c - information dialog - (ie do you want to save studypad file)
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
- 
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -37,8 +30,28 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "gs_info_box.h"
+/* frontend */
+#include "info_box.h"
+
+/* main */
 #include "support.h"
+
+
+/******************************************************************************
+ * Name
+ *   gui_create_info_box
+ *
+ * Synopsis
+ *   #include "info_box.h"
+ *
+ *   GtkWidget *gui_create_info_box(void)
+ *
+ * Description
+ *    create information dialog - (ie do you want to save studypad file)
+ *
+ * Return value
+ *   GtkWidget *
+ */
 
 GtkWidget *gui_create_info_box(void)
 {
@@ -70,13 +83,15 @@ GtkWidget *gui_create_info_box(void)
 	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "hbox20", hbox20,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox20);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox6), hbox20, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox6), hbox20, TRUE, TRUE,
+			   0);
 
 	pixmap2 =
-		gnome_pixmap_new_from_file(
-			PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm");
+	    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
+				       "/GnomeSword.xpm");
 	gtk_widget_ref(pixmap2);
-	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "pixmap2", pixmap2,
+	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "pixmap2",
+				 pixmap2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pixmap2);
 	gtk_box_pack_start(GTK_BOX(hbox20), pixmap2, TRUE, TRUE, 0);
@@ -94,7 +109,8 @@ GtkWidget *gui_create_info_box(void)
 				 lbInfoBox1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(lbInfoBox1);
-	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox1, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox1, FALSE, FALSE,
+			   0);
 
 	lbInfoBox2 = gtk_label_new(_("in StudyPad is not saved!"));
 	gtk_widget_ref(lbInfoBox2);
@@ -102,7 +118,8 @@ GtkWidget *gui_create_info_box(void)
 				 lbInfoBox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(lbInfoBox2);
-	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox2, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox2, FALSE, FALSE,
+			   0);
 
 	lbInfoBox3 = gtk_label_new(_("Shall I save it?"));
 	gtk_widget_ref(lbInfoBox3);
@@ -110,7 +127,8 @@ GtkWidget *gui_create_info_box(void)
 				 lbInfoBox3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(lbInfoBox3);
-	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox3, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox3, FALSE, FALSE,
+			   0);
 
 	dialog_action_area6 = GNOME_DIALOG(InfoBox)->action_area;
 	gtk_object_set_data(GTK_OBJECT(InfoBox), "dialog_action_area6",
@@ -118,11 +136,13 @@ GtkWidget *gui_create_info_box(void)
 	gtk_widget_show(dialog_action_area6);
 	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area6),
 				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area6), 8);
+	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area6),
+				   8);
 
 	gnome_dialog_append_button(GNOME_DIALOG(InfoBox),
 				   GNOME_STOCK_BUTTON_YES);
-	btnInfoBoxYes = g_list_last(GNOME_DIALOG(InfoBox)->buttons)->data;
+	btnInfoBoxYes =
+	    g_list_last(GNOME_DIALOG(InfoBox)->buttons)->data;
 	gtk_widget_ref(btnInfoBoxYes);
 	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "btnInfoBoxYes",
 				 btnInfoBoxYes,
@@ -132,19 +152,14 @@ GtkWidget *gui_create_info_box(void)
 
 	gnome_dialog_append_button(GNOME_DIALOG(InfoBox),
 				   GNOME_STOCK_BUTTON_NO);
-	btnInfoBoxNo = g_list_last(GNOME_DIALOG(InfoBox)->buttons)->data;
+	btnInfoBoxNo =
+	    g_list_last(GNOME_DIALOG(InfoBox)->buttons)->data;
 	gtk_widget_ref(btnInfoBoxNo);
 	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "btnInfoBoxNo",
 				 btnInfoBoxNo,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnInfoBoxNo);
 	GTK_WIDGET_SET_FLAGS(btnInfoBoxNo, GTK_CAN_DEFAULT);
-/*
-	gtk_signal_connect(GTK_OBJECT(btnInfoBoxYes), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnInfoBoxYes_clicked),
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(btnInfoBoxNo), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnInfoBoxNo_clicked), NULL);
-*/
+	
 	return InfoBox;
 }
