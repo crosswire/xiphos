@@ -95,7 +95,7 @@ void gui_set_dictionary_page_and_key(gint page_num, gchar * key)
 	DL_DATA *d;
 
 	d = (DL_DATA *) g_list_nth_data(dl_list, page_num);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL),
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
 			      page_num);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), key);
 
@@ -131,7 +131,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 		dl_list = g_list_next(dl_list);
 	}
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict), page);
 	gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
 
 	settings.dict_last_page = page;
@@ -200,7 +200,7 @@ static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	sprintf(settings.DictWindowModule, "%s", d->mod_name);
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
-	settings.html_dict = d->html;
+	widgets.html_dict = d->html;
 }
 
 /******************************************************************************
@@ -356,7 +356,7 @@ static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint page;
 
 	page = GPOINTER_TO_INT(user_data);
-	gtk_notebook_set_page(GTK_NOTEBOOK(settings.notebookDL), page);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict), page);
 }
 
 /******************************************************************************
@@ -378,7 +378,7 @@ static void on_view_activate(GtkMenuItem * menuitem, gpointer user_data)
 static void on_showtabs_activate(GtkMenuItem *menuitem, gpointer user_data)
 {
 	settings.dict_tabs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(settings.notebookDL),
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_dict),
 			settings.dict_tabs);
 }
 
@@ -679,7 +679,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	dl->frame = gtk_frame_new(NULL);
 	gtk_widget_ref(dl->frame);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "dl->frame",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "dl->frame",
 				 dl->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->frame);
@@ -687,7 +687,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	hpaned7 = gtk_hpaned_new();
 	gtk_widget_ref(hpaned7);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "hpaned7",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "hpaned7",
 				 hpaned7,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpaned7);
@@ -696,7 +696,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox56);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "vbox56",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox56",
 				 vbox56,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox56);
@@ -707,7 +707,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbarDLKey);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "toolbarDLKey",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbarDLKey",
 				 toolbarDLKey,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarDLKey);
@@ -717,7 +717,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(settings.app,
+	    gnome_stock_pixmap_widget(widgets.app,
 				      GNOME_STOCK_PIXMAP_REFRESH);
 	btnSyncDL =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
@@ -726,7 +726,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
 	gtk_widget_ref(btnSyncDL);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "btnSyncDL",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnSyncDL",
 				 btnSyncDL,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnSyncDL);
@@ -736,7 +736,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	dl->entry = gtk_entry_new();
 	gtk_widget_ref(dl->entry);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "dl->entry",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "dl->entry",
 				 dl->entry,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->entry);
@@ -745,7 +745,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	dl->clist = gtk_clist_new(1);
 	gtk_widget_ref(dl->clist);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "dl->clist",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "dl->clist",
 				 dl->clist,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->clist);
@@ -755,7 +755,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	label205 = gtk_label_new(_("label205"));
 	gtk_widget_ref(label205);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label205",
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label205",
 				 label205,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label205);
@@ -763,7 +763,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_ref(frameDictHTML);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "frameDictHTML", frameDictHTML,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frameDictHTML);
@@ -771,7 +771,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindowDictHTML);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "scrolledwindowDictHTML",
 				 scrolledwindowDictHTML,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -786,7 +786,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 
 	dl->html = gtk_html_new();
 	gtk_widget_ref(dl->html);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app),
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
 				 "dl->html", dl->html,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->html);
@@ -803,7 +803,7 @@ static void create_dictlex_pane(DL_DATA *dl)
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
-			   GTK_SIGNAL_FUNC(gui_url), (gpointer) settings.app);
+			   GTK_SIGNAL_FUNC(gui_url), (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
 			   GTK_SIGNAL_FUNC(on_entryDictLookup_changed),
 			   dl);
@@ -858,24 +858,24 @@ static void add_vbox_to_notebook(DL_DATA *dl)
 	
 	dl->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(dl->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), 
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
 			"dl->vbox", dl->vbox,
 			(GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dl->vbox);
-	gtk_container_add(GTK_CONTAINER(settings.notebookDL), dl->vbox);	
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_dict), dl->vbox);	
 	
 	label = gtk_label_new(dl->mod_name);
 	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(settings.app), "label", label,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label", label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(settings.notebookDL),
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_dict),
 				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(settings.notebookDL), dl->mod_num),
+				   (GTK_NOTEBOOK(widgets.notebook_dict), dl->mod_num),
 				   label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(settings.notebookDL),
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_dict),
 					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK(settings.notebookDL),
+					 (GTK_NOTEBOOK(widgets.notebook_dict),
 					  dl->mod_num),
 					 (gchar *) dl->mod_name);
 
@@ -927,7 +927,7 @@ void gui_setup_dictlex(GList *mods)
 	}
 
 
-	gtk_signal_connect(GTK_OBJECT(settings.notebookDL), "switch_page",
+	gtk_signal_connect(GTK_OBJECT(widgets.notebook_dict), "switch_page",
 			   GTK_SIGNAL_FUNC(on_notebook_dictlex_switch_page),
 			   dl_list);
 

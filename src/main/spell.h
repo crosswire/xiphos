@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * lists.h glists of module names and descriptions, bible books etc.
+ * spell.h - spell checking using pspell
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -18,37 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef _SPELL_H_
+#define _SPELL_H_
 
-#ifndef _LISTS_H
-#define _LISTS_H
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-       
-/* list types */
-#define TEXT_LIST 0 
-#define TEXT_DESC_LIST 1 
-#define COMM_LIST 2
-#define COMM_DESC_LIST 3
-#define DICT_LIST 4
-#define DICT_DESC_LIST 5
-#define GBS_LIST 6
-#define GBS_DESC_LIST 7
-#define BOOKS_LIST 8
-#define OPTIONS_LIST 9
-#define PERCOMM_LIST 10
-#define DEVOTION_LIST 11
-
-
-GList * get_list(gint type);
-void init_lists(void);
-void shutdown_list(void);
-
-#ifdef __cplusplus
-}
-#endif
+void check_for_error(void);
+void store_replacement(const gchar * word, const gchar * new_word);
+int add_to_session(const gchar * word);
+int add_to_personal(const gchar * word);
+GList * get_suggest_list(const gchar * word);
+int check_word_spell(const char * word);
+int init_spell(void);
+int kill_spell(void);
 
 #endif
-

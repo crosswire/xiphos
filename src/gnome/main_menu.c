@@ -227,7 +227,7 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	EShortcutBar *bar1;
 		
-	bar1 = E_SHORTCUT_BAR(settings.shortcut_bar);
+	bar1 = E_SHORTCUT_BAR(widgets.shortcutbar);
 	if(!settings.showshortcutbar){
 		gui_shortcutbar_showhide();
 	}
@@ -283,7 +283,7 @@ void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)
 
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gtk_widget_destroy(settings.app); 
+	gtk_widget_destroy(widgets.app); 
 }
 
 /******************************************************************************
@@ -306,7 +306,7 @@ void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
  
 void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	clearhistory(settings.app, GTK_WIDGET(settings.shortcut_bar));
+	clearhistory(widgets.app, GTK_WIDGET(widgets.shortcutbar));
 }
 
 /******************************************************************************
@@ -778,10 +778,10 @@ void gui_create_main_menu(GtkWidget *app)
                             settings1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 	
-	settings.versestyle_item = settings1_menu_uiinfo[0].widget;
+	widgets.versestyle_item = settings1_menu_uiinfo[0].widget;
 			    
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (
-			settings.versestyle_item), settings.versestyle);
+			widgets.versestyle_item), settings.versestyle);
 
 	gtk_widget_ref(settings1_menu_uiinfo[1].widget);
 	gtk_object_set_data_full(GTK_OBJECT(app), "preferences1",
@@ -879,7 +879,7 @@ void gui_create_main_menu(GtkWidget *app)
 				 (GtkDestroyNotify) gtk_widget_unref);	
 				 
 */	
-	gtk_signal_connect(GTK_OBJECT(settings.versestyle_item), "toggled",
+	gtk_signal_connect(GTK_OBJECT(widgets.versestyle_item), "toggled",
 			GTK_SIGNAL_FUNC(on_verse_style1_activate),
 			NULL);
 }

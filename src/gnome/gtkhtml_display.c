@@ -28,9 +28,9 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "gui/gtkhtml_display.h"
+#include "gui/gnomesword.h"
 
 #include "main/sword.h"
-//#include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
 #include "main/settings.h"
 
@@ -434,7 +434,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	sprintf(buf,
 		HTML_START"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color, settings.link_color);
-	utf8str = e_utf8_from_gtk_string(settings.htmlInterlinear, buf);
+	utf8str = e_utf8_from_gtk_string(widgets.html_interlinear, buf);
 	utf8len = strlen(utf8str);     
 	if (utf8len) {
 		gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
