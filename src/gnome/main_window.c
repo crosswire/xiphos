@@ -283,7 +283,7 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 	gchar *val_key = NULL;
 
 	mod_type = get_mod_type(module_name);
-
+	
 	switch (mod_type) {
 	case TEXT_TYPE:
 		if (settings.havebible) {

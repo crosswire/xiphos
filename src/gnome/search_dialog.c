@@ -1738,48 +1738,6 @@ static void delete_list(GtkButton * button, gpointer user_data)
 
 /******************************************************************************
  * Name
- *  html_button_pressed
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
- *					gpointer *data)	
- *
- * Description
- *     
- *
- * Return value
- *   gint
- */
-
-static gint button_release_event(GtkWidget * html,
-				 GdkEventButton * event, gpointer data)
-{
-
-	switch (event->button) {
-	case 1:
-		return TRUE;
-		break;
-	case 2:
-		/* 
-		 * pass this for pasting 
-		 */
-		return TRUE;
-		break;
-	case 3:
-		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
-					     "button_press_event");
-		return TRUE;
-		break;
-	}
-
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
  *   scope_toggled
  *
  * Synopsis

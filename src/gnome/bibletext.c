@@ -65,6 +65,43 @@ TEXT_DATA *cur_t;
 static gboolean display_change = TRUE;
 
 
+
+/******************************************************************************
+ * Name
+ *  gui_lookup_bibletext_selection
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ * void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
+					 gchar * dict_mod_description)
+ *
+ * Description
+ *   lookup seledtion in a dict/lex module
+ *
+ * Return value
+ *   void
+ */
+
+void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
+					 gchar * dict_mod_description)
+{
+	gchar *dict_key, mod_name[16];
+
+	memset(mod_name, 0, 16);
+	module_name_from_description(mod_name, dict_mod_description);
+
+	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
+	if (dict_key) {
+		if (settings.inViewer)
+			gui_display_dictlex_in_viewer(mod_name,
+						      dict_key);
+		if (settings.inDictpane)
+			gui_change_module_and_key(mod_name, dict_key);
+		g_free(dict_key);
+	}
+}
+
 /******************************************************************************
  * Name
  *  set_page_text
@@ -421,6 +458,7 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 		chapter_display(cur_t->html, cur_t->mod_name,
 				cur_t->tgs, key, TRUE);
 	display_change = TRUE;
+	cur_t->key = settings.currentverse;
 }
 
 /******************************************************************************
@@ -451,6 +489,7 @@ void gui_display_text(gchar * key)
 					     cur_t->cipher_key);
 
 	}
+	cur_t->key = settings.currentverse;
 }
 
 /******************************************************************************
@@ -548,7 +587,6 @@ static void add_vbox_to_notebook(TEXT_DATA * t)
 
 void gui_setup_text(GList * mods)
 {
-
 	GList *tmp = NULL;
 	gchar *modbuf;
 	TEXT_DATA *t;
@@ -560,13 +598,11 @@ void gui_setup_text(GList * mods)
 	while (tmp != NULL) {
 		t = g_new(TEXT_DATA, 1);
 		t->tgs = g_new(TEXT_GLOBALS, 1);
-		t->tgs = g_new(TEXT_GLOBALS, 1);
 		t->mod_name = (gchar *) tmp->data;
 		t->mod_num = count;
 		t->search_string = NULL;
 		t->key = NULL;
 		t->cipher_key = NULL;
-		t->find_dialog = NULL;
 		t->is_dialog = FALSE;
 		if (has_cipher_tag(t->mod_name)) {
 			t->is_locked = module_is_locked(t->mod_name);
@@ -620,11 +656,6 @@ void gui_shutdown_text(void)
 	text_list = g_list_first(text_list);
 	while (text_list != NULL) {
 		TEXT_DATA *t = (TEXT_DATA *) text_list->data;
-		/* 
-		 * free any search dialogs created 
-		 */
-		if (t->find_dialog)
-			g_free(t->find_dialog);
 		/* 
 		 * free any cipher keys 
 		 */
