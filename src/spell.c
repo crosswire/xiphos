@@ -63,6 +63,7 @@
 #include "debug.h"
 #include "char_table.h"
 #include "support.h"
+#include "gs_html_editor.h"
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -90,6 +91,7 @@
 #endif
 
 GtkWidget *text_widget;
+GtkWidget *html_widget;
 extern GtkWidget *myspell_app;
 /* Spellchecker status */
 enum {
@@ -557,7 +559,7 @@ GdkColor misspelled_color;
 static inline void select_word(Tword * word)
 {	
 	
-	
+	//find_word_EDITOR(html_widget, word->text);
 	
 	DEBUG_MSG("\nword begins = \"%d\" \n", word->begin);
 	DEBUG_MSG("word ends = \"%d\" \n", word->end);
@@ -568,7 +570,9 @@ static inline void select_word(Tword * word)
 
 	gtk_text_insert(GTK_TEXT(text_widget), 0, &misspelled_color, 0,
 				word->text, -1);
-	gtk_text_thaw(GTK_TEXT(text_widget));			
+	gtk_text_thaw(GTK_TEXT(text_widget));		
+	
+	
 	/* gtk_editable_select_region(GTK_EDITABLE(text_widget)), word->begin, word->end); */
 }
 
@@ -600,11 +604,12 @@ static void change_word_color(Tword * word)
 				 &(word->begin));
 }
 
-static void correct_word(Tword * word)
+static void correct_word(Tword * word, GSHTMLEditorControlData * ecd)
 /* ask the user how to correct a word, and do it */
 {
 	gboolean word_corrected = 0;
 	select_word(word);
+	find_word_EDITOR(word->text, ecd);
 	
 	do {
 		spc_message = SPC_NONE;
@@ -644,7 +649,7 @@ static void correct_word(Tword * word)
 	DEBUG_MSG("Word corrected\n");
 };
 
-static void check_word(Tword * word)
+static void check_word(Tword * word, GSHTMLEditorControlData * ecd)
 {
 	isp_result *result;
 	gchar *converted_string;
@@ -678,7 +683,7 @@ static void check_word(Tword * word)
 				   word->text);
 		gtk_entry_set_text(GTK_ENTRY(spc_gui.replace_entry),
 				   word->text);
-		correct_word(word);
+		correct_word(word,ecd);
 		DEBUG_MSG("spc_message = %i\n", spc_message);
 	};			/* end switch */
 
@@ -735,7 +740,7 @@ void ispell_terminate()
 }
 
 /* Perform an ispell session */
-gboolean run_spell_checker(void)
+gboolean run_spell_checker(GSHTMLEditorControlData * ecd)
 {
 	Tword *word;
 	unsigned int word_count = 0;
@@ -780,7 +785,7 @@ gboolean run_spell_checker(void)
 		if (!is_empty_word(word)) {
 			word_count++;
 			spc_message = SPC_NONE;
-			check_word(word);
+			check_word(word,ecd);
 			free_word(word);
 			update_progress_bar();
 			if (spc_message == SPC_CLOSE) {
@@ -797,6 +802,8 @@ gboolean run_spell_checker(void)
 	DEBUG_MSG("Removing status \n");
 	//statusbar_remove(GINT_TO_POINTER(spc_gui.status_bar_count));
 	DEBUG_MSG("Destroying window\n");
+	load_text_from_spell_EDITOR(spc_gui.text, 
+					ecd);
 	gtk_widget_destroy(spc_gui.window);
 
 	return (spc_message != SPC_CLOSE);

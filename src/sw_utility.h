@@ -40,6 +40,8 @@ extern "C" {
 				SWMgr * Mgr,
 				char *modName);
 	string get_module_lang_UTILITY(gchar *modName);
+	
+	
 #ifdef __cplusplus
 }
 #endif

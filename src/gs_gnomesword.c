@@ -251,14 +251,6 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 		changepercomModSWORD(settings->personalcommentsmod);	
 	}
 	
-	/* hide buttons - only show them if their options are enabled */
-	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
-	
-	/* do not show spell buttons if spellcheck not enabled */
-#ifdef USE_SPELL
-        gtk_widget_show (lookup_widget(app,"btnSpellNotes"));
-#endif /* USE_SPELL */	
-
 	/* free module lists */
         g_list_free(biblemods);
         g_list_free(commentarymods);
