@@ -222,7 +222,7 @@ void gui_load_module_tree(GtkWidget * tree, gboolean is_sidebar)
 
 	/*  add language folders Dictionaries folder */
 	gtk_tree_store_append(store, &iter, NULL);
-	gtk_tree_store_set(store, &iter, 0, "Dict/Lex", -1);
+	gtk_tree_store_set(store, &iter, 0, "Dictionaries", -1);
 
 	tmp = get_list(DICT_LIST);
 	while (tmp != NULL) {
