@@ -66,7 +66,6 @@ struct _GSHTMLEditorControlData {
 		*toolbar_commands, 
 		*toolbar_edit, 
 		*toolbar_style;
-	GtkWidget *frame_toolbar;
 	/* menu items */
 	 GtkWidget
 	    *editnote,

@@ -378,12 +378,11 @@ void gui_change_verse(gchar * key)
 
 	/* 
 	 * change personal notes editor   if not in edit mode 
-	 */
-	if (settings.notefollow) {	                  
-		if (!settings.editnote)
-			if (settings.havepercomm)
-				gui_display_percomm(val_key);
-	}
+	 */                  
+	if (!settings.editnote)
+		if (settings.havepercomm)
+			gui_display_percomm(val_key);
+	
 	/* 
 	 * set commentary module to current verse 
 	 */

@@ -62,7 +62,7 @@ char *backend_get_percomm_text(char * key)
 {
 	if (mod){
 		mod->SetKey(key);
-		return strdup((char *) mod->RenderText());		
+		return strdup((char *) mod->getRawEntry()); //RawText());		
 	}
 	return NULL;
 }
