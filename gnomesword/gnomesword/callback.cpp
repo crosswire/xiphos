@@ -2325,7 +2325,7 @@ void
 on_cbtnShowComGroup_toggled(GtkToggleButton * togglebutton,
 			    gpointer user_data)
 {
-/*    GtkWidget	*dlg,
+    GtkWidget	*dlg,
 				*btnok,
 				*btnapply;
 							
@@ -2334,7 +2334,7 @@ on_cbtnShowComGroup_toggled(GtkToggleButton * togglebutton,
 	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
 	gtk_widget_set_sensitive (btnok, true);
 	gtk_widget_set_sensitive (btnapply, true);
-	showcomgroup = togglebutton->active; */
+	showcomgroup = togglebutton->active; 
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2342,7 +2342,7 @@ void
 on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 			     gpointer user_data)
 {
-/*    GtkWidget	*dlg,
+    GtkWidget	*dlg,
 				*btnok,
 				*btnapply;
 							
@@ -2351,7 +2351,7 @@ on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
 	gtk_widget_set_sensitive (btnok, true);
 	gtk_widget_set_sensitive (btnapply, true);
-	showdictgroup = togglebutton->active;*/
+	showdictgroup = togglebutton->active;
 }
 
 //----------------------------------------------------------------------------------------------
