@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnomesword2-2.1.dev1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-23 10:42-0500\n"
+"POT-Creation-Date: 2005-03-05 20:16-0500\n"
 "PO-Revision-Date: 2004-01-20 15:31+0200\n"
 "Last-Translator: Pavlo Bohmat <bohm@ukr.net>\n"
 "Language-Team: Ukrainian <linux@linux.org.ua>\n"
@@ -56,59 +56,59 @@ msgstr "вірш"
 msgid "chapter"
 msgstr "розділ"
 
-#: src/main/sidebar.cc:548 src/main/sidebar.cc:819 src/main/sidebar.cc:820
-#: src/main/sidebar.cc:821 src/gnome2/parallel_dialog.c:133
+#: src/main/sidebar.cc:576 src/main/sidebar.cc:847 src/main/sidebar.cc:848
+#: src/main/sidebar.cc:849 src/gnome2/parallel_dialog.c:133
 #: src/gnome2/parallel_dialog.c:135 src/gnome2/parallel_view.c:435
 #: src/gnome2/sidebar.c:687 src/gnome2/sidebar.c:696
 #: src/gnome2/utilities.c:207
 msgid "Parallel View"
 msgstr "Паралельний перегляд"
 
-#: src/main/sidebar.cc:553 src/main/sidebar.cc:827 src/main/sidebar.cc:828
-#: src/main/sidebar.cc:829 src/gnome2/main_window.c:600
+#: src/main/sidebar.cc:581 src/main/sidebar.cc:855 src/main/sidebar.cc:856
+#: src/main/sidebar.cc:857 src/gnome2/main_window.c:608
 msgid "Standard View"
 msgstr "Стандартний перегляд"
 
-#: src/main/sidebar.cc:558 src/main/sidebar.cc:856 src/main/sidebar.cc:858
-#: src/gnome2/mod_mgr.c:645 src/gnome2/preferences_dialog.c:1744
+#: src/main/sidebar.cc:586 src/main/sidebar.cc:884 src/main/sidebar.cc:886
+#: src/gnome2/mod_mgr.c:645 src/gnome2/preferences_dialog.c:1745
 #: src/gnome2/utilities.c:229
 msgid "Commentaries"
 msgstr "Коментарі"
 
-#: src/main/sidebar.cc:570 src/main/sidebar.cc:913 src/main/sidebar.cc:915
+#: src/main/sidebar.cc:598 src/main/sidebar.cc:941 src/main/sidebar.cc:943
 #: src/gnome2/mod_mgr.c:655 src/gnome2/utilities.c:272
 msgid "General Books"
 msgstr "Загальні книги"
 
-#: src/main/sidebar.cc:695 src/main/sidebar.cc:747 src/gnome2/mod_mgr.c:448
+#: src/main/sidebar.cc:723 src/main/sidebar.cc:775 src/gnome2/mod_mgr.c:448
 #: src/gnome2/mod_mgr.c:517 src/gnome2/utilities.c:73
 #: src/gnome2/utilities.c:149
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: src/main/sidebar.cc:811 src/main/sidebar.cc:813 src/gnome2/mod_mgr.c:641
+#: src/main/sidebar.cc:839 src/main/sidebar.cc:841 src/gnome2/mod_mgr.c:641
 #: src/gnome2/utilities.c:201
 msgid "Biblical Texts"
 msgstr "Біблійні тексти"
 
-#: src/main/sidebar.cc:884 src/main/sidebar.cc:886 src/gnome2/mod_mgr.c:650
+#: src/main/sidebar.cc:912 src/main/sidebar.cc:914 src/gnome2/mod_mgr.c:650
 #: src/gnome2/utilities.c:250
 msgid "Dictionaries"
 msgstr "Словники"
 
 #: src/editor/editor-control.c:341 src/editor/editor_menu.c:107
 #: src/editor/editor_menu.c:182 src/editor/editor_menu.c:688
-#: src/editor/toolbar_edit.c:112 src/gnome2/bibletext.c:1011
-#: src/gnome2/bibletext_dialog.c:1855 src/gnome2/commentary.c:717
-#: src/gnome2/commentary_dialog.c:1730 src/gnome2/dictlex.c:896
-#: src/gnome2/gbs.c:804 src/gnome2/note_editor.c:1127 src/gnome2/studypad.c:95
-#: src/gnome2/studypad.c:158
+#: src/editor/toolbar_edit.c:233 src/gnome2/bibletext.c:1030
+#: src/gnome2/bibletext_dialog.c:1855 src/gnome2/commentary.c:740
+#: src/gnome2/commentary_dialog.c:1730 src/gnome2/dictlex.c:918
+#: src/gnome2/gbs.c:839 src/gnome2/note_editor.c:1148 src/gnome2/studypad.c:88
+#: src/gnome2/studypad.c:145
 msgid "File"
 msgstr "Файл"
 
-#: src/editor/editor-control.c:346 src/editor/toolbar_edit.c:116
-#: src/gnome2/commentary_dialog.c:122 src/gnome2/studypad.c:99
-#: src/gnome2/studypad.c:162
+#: src/editor/editor-control.c:346 src/editor/toolbar_edit.c:237
+#: src/gnome2/commentary_dialog.c:122 src/gnome2/studypad.c:92
+#: src/gnome2/studypad.c:149
 msgid "has been modified. Do you wish to save it?"
 msgstr "було змінено. Бажаєте це зберегти?"
 
@@ -129,89 +129,86 @@ msgstr "Шукати далі"
 msgid "Reference: "
 msgstr "Посилання: "
 
-#: src/editor/editor_menu.c:541 src/gnome2/bookmarks_menu.c:469
-#: src/gnome2/bookmarks_menu.c:908
+#: src/editor/editor_menu.c:541 src/gnome2/bookmarks_menu.c:468
+#: src/gnome2/bookmarks_menu.c:907
 msgid "Module: "
 msgstr "Модуль: "
 
-#: src/editor/editor_menu.c:695 src/editor/toolbar_edit.c:451
-#: src/editor/toolbar_edit.c:702 src/gnome2/mod_mgr.c:1033
-#: src/gnome2/note_editor.c:1152 src/gnome2/search_dialog.c:1818
-#: src/gnome2/search_dialog.c:1993
+#: src/editor/editor_menu.c:695 src/editor/toolbar_edit.c:585
+#: src/gnome2/mod_mgr.c:1033 src/gnome2/note_editor.c:1173
+#: src/gnome2/search_dialog.c:1818 src/gnome2/search_dialog.c:1993
 msgid "New"
 msgstr "Новий"
 
-#: src/editor/editor_menu.c:699 src/editor/toolbar_edit.c:468
-#: src/editor/toolbar_edit.c:720 src/gnome2/note_editor.c:1156
+#: src/editor/editor_menu.c:699 src/editor/toolbar_edit.c:613
+#: src/gnome2/note_editor.c:1177
 msgid "Open"
 msgstr "Відкрити"
 
-#: src/editor/editor_menu.c:703 src/editor/toolbar_edit.c:484
-#: src/editor/toolbar_edit.c:497 src/editor/toolbar_edit.c:737
-#: src/editor/toolbar_edit.c:750 src/gnome2/note_editor.c:1160
+#: src/editor/editor_menu.c:703 src/editor/toolbar_edit.c:641
+#: src/editor/toolbar_edit.c:655 src/gnome2/note_editor.c:1181
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/editor/editor_menu.c:708 src/gnome2/note_editor.c:1165
+#: src/editor/editor_menu.c:708 src/gnome2/note_editor.c:1186
 msgid "Save As ..."
 msgstr "Зберегти як..."
 
-#: src/editor/editor_menu.c:713 src/gnome2/note_editor.c:1170
+#: src/editor/editor_menu.c:713 src/gnome2/note_editor.c:1191
 msgid "Export"
 msgstr "Експортувати"
 
-#: src/editor/editor_menu.c:719 src/editor/toolbar_edit.c:528
-#: src/editor/toolbar_edit.c:782 src/gnome2/html.c:554
-#: src/gnome2/note_editor.c:1176
+#: src/editor/editor_menu.c:719 src/editor/toolbar_edit.c:688
+#: src/gnome2/html.c:554 src/gnome2/note_editor.c:1197
 msgid "Print"
 msgstr "Друкувати"
 
 #: src/editor/editor_menu.c:727 src/gnome2/main_menu.c:637
-#: src/gnome2/note_editor.c:1184
+#: src/gnome2/note_editor.c:1205
 msgid "_Edit"
 msgstr "_Правити"
 
-#: src/editor/editor_menu.c:735 src/editor/toolbar_edit.c:545
-#: src/editor/toolbar_edit.c:799 src/gnome2/note_editor.c:1192
+#: src/editor/editor_menu.c:735 src/editor/toolbar_edit.c:726
+#: src/gnome2/note_editor.c:1213
 msgid "Cut"
 msgstr "Вирізати"
 
-#: src/editor/editor_menu.c:739 src/editor/toolbar_edit.c:555
-#: src/editor/toolbar_edit.c:809 src/gnome2/main_menu.c:499
-#: src/gnome2/note_editor.c:1196 src/gnome2/parallel_view.c:260
+#: src/editor/editor_menu.c:739 src/editor/toolbar_edit.c:748
+#: src/gnome2/main_menu.c:499 src/gnome2/note_editor.c:1217
+#: src/gnome2/parallel_view.c:260
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/editor/editor_menu.c:743 src/editor/toolbar_edit.c:565
-#: src/editor/toolbar_edit.c:819 src/gnome2/note_editor.c:1200
+#: src/editor/editor_menu.c:743 src/editor/toolbar_edit.c:758
+#: src/gnome2/note_editor.c:1221
 msgid "Paste"
 msgstr "Вставити"
 
-#: src/editor/editor_menu.c:747 src/gnome2/note_editor.c:1204
+#: src/editor/editor_menu.c:747 src/gnome2/note_editor.c:1225
 msgid "Spell Check"
 msgstr "Перевірити орфографію"
 
-#: src/editor/editor_menu.c:758 src/editor/toolbar_edit.c:575
-#: src/editor/toolbar_edit.c:829 src/gnome2/note_editor.c:1215
+#: src/editor/editor_menu.c:758 src/editor/toolbar_edit.c:768
+#: src/gnome2/note_editor.c:1236
 msgid "Undo"
 msgstr "Відмінити"
 
 #. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
 #: src/editor/editor_menu.c:762 src/editor/search.c:108
-#: src/editor/search.c:167 src/editor/toolbar_edit.c:591
-#: src/editor/toolbar_edit.c:845 src/gnome2/find_dialog.c:205
-#: src/gnome2/find_dialog.c:370 src/gnome2/note_editor.c:1219
+#: src/editor/search.c:167 src/editor/toolbar_edit.c:784
+#: src/gnome2/find_dialog.c:205 src/gnome2/find_dialog.c:370
+#: src/gnome2/note_editor.c:1240
 msgid "Find"
 msgstr "Знайти"
 
 #. we use CANCEL response for close, because we want Esc to close the dialog - see gtkdialog.c
 #: src/editor/editor_menu.c:767 src/editor/replace.c:163
-#: src/editor/replace.c:226 src/editor/toolbar_edit.c:602
-#: src/editor/toolbar_edit.c:856 src/gnome2/note_editor.c:1224
+#: src/editor/replace.c:226 src/editor/toolbar_edit.c:795
+#: src/gnome2/note_editor.c:1245
 msgid "Replace"
 msgstr "Замінити"
 
-#: src/editor/editor_menu.c:771 src/gnome2/note_editor.c:1228
+#: src/editor/editor_menu.c:771 src/gnome2/note_editor.c:1249
 msgid "Link..."
 msgstr "Ланка..."
 
@@ -264,71 +261,122 @@ msgstr "Зворотній пошук"
 msgid "_Regular Expression"
 msgstr "Звичайний вислів"
 
-#: src/editor/spell.c:312
+#: src/editor/spell.c:314
 msgid "No misspelled word found"
 msgstr ""
 
-#: src/editor/spell.c:320
+#: src/editor/spell.c:322
 #, fuzzy
 msgid "Spell checker"
 msgstr "Модуль перевірки орфографії"
 
-#: src/editor/spell.c:413
+#: src/editor/spell.c:416
 #, fuzzy
 msgid "Current _Languages"
 msgstr "Поточні локальні джерела"
 
-#: src/editor/toolbar_edit.c:208 src/gnome2/note_editor.c:648
+#. #ifdef USE_GTKFILECHOOSER
+#: src/editor/toolbar_edit.c:61 src/editor/toolbar_edit.c:812
+#, fuzzy
+msgid "Insert image"
+msgstr "Вставити закладку"
+
+#: src/editor/toolbar_edit.c:119 src/editor/toolbar_edit.c:140
+#, fuzzy
+msgid "Insert"
+msgstr "Вставити слово"
+
+#: src/editor/toolbar_edit.c:122
+#, fuzzy
+msgid "Rule"
+msgstr "Модуль"
+
+#: src/editor/toolbar_edit.c:143
+#, fuzzy
+msgid "Table"
+msgstr "Біблія"
+
+#: src/editor/toolbar_edit.c:329 src/gnome2/note_editor.c:669
 msgid "Delete Note?"
 msgstr "Видалити нотатку?"
 
-#: src/editor/toolbar_edit.c:209 src/gnome2/note_editor.c:649
+#: src/editor/toolbar_edit.c:330 src/gnome2/note_editor.c:670
 msgid "Are you sure you want to delete the note for\n"
 msgstr "Ви впевнені, що бажаєте видалити нотатку для\n"
 
-#: src/editor/toolbar_edit.c:452 src/editor/toolbar_edit.c:703
+#: src/editor/toolbar_edit.c:586
 msgid "Create a new file"
 msgstr "Створити новий файл"
 
-#: src/editor/toolbar_edit.c:469 src/editor/toolbar_edit.c:721
+#: src/editor/toolbar_edit.c:614
 msgid "Open a file"
 msgstr "Відкрити файл"
 
-#: src/editor/toolbar_edit.c:485 src/editor/toolbar_edit.c:738
+#: src/editor/toolbar_edit.c:642
 msgid "Save the current file"
 msgstr "Зберегти поточний файл"
 
-#: src/editor/toolbar_edit.c:498 src/editor/toolbar_edit.c:751
+#: src/editor/toolbar_edit.c:656
 msgid "Save note"
 msgstr "Зберегти нотатку"
 
-#: src/editor/toolbar_edit.c:510 src/editor/toolbar_edit.c:763
-#: src/gnome2/search_dialog.c:1850 src/gnome2/search_dialog.c:2039
-#: src/gnome2/search_dialog.c:2148
+#: src/editor/toolbar_edit.c:668 src/gnome2/search_dialog.c:1850
+#: src/gnome2/search_dialog.c:2039 src/gnome2/search_dialog.c:2148
 msgid "Delete"
 msgstr "Видалити"
 
-#: src/editor/toolbar_edit.c:511 src/editor/toolbar_edit.c:764
+#: src/editor/toolbar_edit.c:669
 msgid "Delete note"
 msgstr "Видалити нотатку"
 
-#: src/editor/toolbar_edit.c:529 src/editor/toolbar_edit.c:783
+#: src/editor/toolbar_edit.c:689
 msgid "Print window contents"
 msgstr "Друк вмісту вікна"
 
-#: src/editor/toolbar_edit.c:592 src/editor/toolbar_edit.c:846
+#: src/editor/toolbar_edit.c:785
 msgid "Find in this note"
 msgstr "Знайти в цій нотатці"
 
-#: src/editor/toolbar_edit.c:603 src/editor/toolbar_edit.c:857
+#: src/editor/toolbar_edit.c:796
 msgid "Find and Replace"
 msgstr "Знайти і замітити"
 
-#: src/editor/toolbar_edit.c:619 src/editor/toolbar_edit.c:873
+#: src/editor/toolbar_edit.c:813
+msgid "Insert image at cursor"
+msgstr ""
+
+#: src/editor/toolbar_edit.c:822
+#, fuzzy
+msgid "Insert link"
+msgstr "Вставити слово"
+
+#: src/editor/toolbar_edit.c:823
+msgid "Insert link at cursor"
+msgstr ""
+
+#: src/editor/toolbar_edit.c:832
+#, fuzzy
+msgid "Insert rule"
+msgstr "Вставити слово"
+
+#: src/editor/toolbar_edit.c:833
+msgid "Insert rule at cursor"
+msgstr ""
+
+#: src/editor/toolbar_edit.c:843
+#, fuzzy
+msgid "Insert table"
+msgstr "Встановити"
+
+#: src/editor/toolbar_edit.c:844
+msgid "Insert table at cursor"
+msgstr ""
+
+#: src/editor/toolbar_edit.c:863
 msgid "Spell"
 msgstr "Орфографія"
 
-#: src/editor/toolbar_edit.c:620 src/editor/toolbar_edit.c:874
+#: src/editor/toolbar_edit.c:864
 msgid "Check spelling in this note"
 msgstr "Перевірка орфографії в цій нотатці"
 
@@ -515,163 +563,173 @@ msgstr "Модулі можна завантажити з проекту SWORD."
 msgid "The SWORD Project"
 msgstr "Проект SWORD"
 
-#: src/gnome2/bibletext.c:818 src/gnome2/bibletext_dialog.c:1648
-#: src/gnome2/commentary.c:524 src/gnome2/commentary_dialog.c:1523
-#: src/gnome2/dictlex.c:718 src/gnome2/gbs.c:611
+#: src/gnome2/bibletext.c:830 src/gnome2/bibletext_dialog.c:1648
+#: src/gnome2/commentary.c:540 src/gnome2/commentary_dialog.c:1523
+#: src/gnome2/dictlex.c:733 src/gnome2/gbs.c:639
 msgid "item1"
 msgstr "пункт 1"
 
-#: src/gnome2/bibletext.c:828 src/gnome2/bibletext_dialog.c:1658
-#: src/gnome2/commentary.c:534 src/gnome2/commentary_dialog.c:1533
-#: src/gnome2/dictlex.c:728 src/gnome2/gbs.c:621
+#: src/gnome2/bibletext.c:840 src/gnome2/bibletext_dialog.c:1658
+#: src/gnome2/commentary.c:550 src/gnome2/commentary_dialog.c:1533
+#: src/gnome2/dictlex.c:743 src/gnome2/gbs.c:649
 msgid "Open Module"
 msgstr "Відкрити модуль"
 
-#: src/gnome2/bibletext.c:840 src/gnome2/bibletext_dialog.c:1684
-#: src/gnome2/commentary.c:546 src/gnome2/commentary_dialog.c:1559
-#: src/gnome2/gbs.c:633
+#: src/gnome2/bibletext.c:852 src/gnome2/bibletext_dialog.c:1684
+#: src/gnome2/commentary.c:562 src/gnome2/commentary_dialog.c:1559
+#: src/gnome2/gbs.c:661
 msgid "item2"
 msgstr "пункт 2"
 
-#: src/gnome2/bibletext.c:852 src/gnome2/bibletext_dialog.c:1696
-#: src/gnome2/commentary.c:558 src/gnome2/commentary_dialog.c:1571
-#: src/gnome2/gbs.c:645
+#: src/gnome2/bibletext.c:864 src/gnome2/bibletext_dialog.c:1696
+#: src/gnome2/commentary.c:574 src/gnome2/commentary_dialog.c:1571
+#: src/gnome2/gbs.c:673
 msgid "Note"
 msgstr "Нотатка"
 
-#: src/gnome2/bibletext.c:862 src/gnome2/bibletext_dialog.c:1706
-#: src/gnome2/commentary.c:568 src/gnome2/commentary_dialog.c:1581
-#: src/gnome2/dictlex.c:747 src/gnome2/gbs.c:655
+#: src/gnome2/bibletext.c:874 src/gnome2/bibletext_dialog.c:1706
+#: src/gnome2/commentary.c:584 src/gnome2/commentary_dialog.c:1581
+#: src/gnome2/dictlex.c:762 src/gnome2/gbs.c:683
 msgid "All Readings"
 msgstr "Усі читання"
 
-#: src/gnome2/bibletext.c:868 src/gnome2/bibletext_dialog.c:1712
-#: src/gnome2/commentary.c:574 src/gnome2/commentary_dialog.c:1587
-#: src/gnome2/dictlex.c:753 src/gnome2/gbs.c:661
+#: src/gnome2/bibletext.c:880 src/gnome2/bibletext_dialog.c:1712
+#: src/gnome2/commentary.c:590 src/gnome2/commentary_dialog.c:1587
+#: src/gnome2/dictlex.c:768 src/gnome2/gbs.c:689
 msgid "Primary Reading"
 msgstr "Першечергове читання"
 
-#: src/gnome2/bibletext.c:874 src/gnome2/bibletext_dialog.c:1718
-#: src/gnome2/commentary.c:580 src/gnome2/commentary_dialog.c:1593
-#: src/gnome2/dictlex.c:759 src/gnome2/gbs.c:667
+#: src/gnome2/bibletext.c:886 src/gnome2/bibletext_dialog.c:1718
+#: src/gnome2/commentary.c:596 src/gnome2/commentary_dialog.c:1593
+#: src/gnome2/dictlex.c:774 src/gnome2/gbs.c:695
 msgid "Secondary Reading"
 msgstr "Другорядне читання"
 
-#: src/gnome2/bibletext.c:892 src/gnome2/bibletext_dialog.c:1736
-#: src/gnome2/commentary.c:598 src/gnome2/commentary_dialog.c:1611
-#: src/gnome2/dictlex.c:777 src/gnome2/font_dialog.c:292 src/gnome2/gbs.c:685
+#: src/gnome2/bibletext.c:904 src/gnome2/bibletext_dialog.c:1736
+#: src/gnome2/commentary.c:614 src/gnome2/commentary_dialog.c:1611
+#: src/gnome2/dictlex.c:792 src/gnome2/font_dialog.c:292 src/gnome2/gbs.c:713
 msgid "Set Module Font"
 msgstr "Встановити шрифт модуля"
 
-#: src/gnome2/bibletext.c:899 src/gnome2/bibletext_dialog.c:1743
-#: src/gnome2/commentary.c:605 src/gnome2/commentary_dialog.c:1618
-#: src/gnome2/dictlex.c:784 src/gnome2/gbs.c:692
+#: src/gnome2/bibletext.c:911 src/gnome2/bibletext_dialog.c:1743
+#: src/gnome2/commentary.c:621 src/gnome2/commentary_dialog.c:1618
+#: src/gnome2/dictlex.c:799 src/gnome2/gbs.c:720
 msgid "Words of Christ in Red"
 msgstr "Виділяти Христові слова червоним"
 
-#: src/gnome2/bibletext.c:908 src/gnome2/bibletext_dialog.c:1752
-#: src/gnome2/commentary.c:614 src/gnome2/commentary_dialog.c:1627
-#: src/gnome2/dictlex.c:793 src/gnome2/gbs.c:701
+#: src/gnome2/bibletext.c:920 src/gnome2/bibletext_dialog.c:1752
+#: src/gnome2/commentary.c:630 src/gnome2/commentary_dialog.c:1627
+#: src/gnome2/dictlex.c:808 src/gnome2/gbs.c:729
 msgid "Strong's Numbers"
 msgstr "Номери Стронгу"
 
-#: src/gnome2/bibletext.c:919 src/gnome2/bibletext_dialog.c:1763
-#: src/gnome2/commentary.c:625 src/gnome2/commentary_dialog.c:1638
-#: src/gnome2/dictlex.c:804 src/gnome2/gbs.c:712
+#: src/gnome2/bibletext.c:931 src/gnome2/bibletext_dialog.c:1763
+#: src/gnome2/commentary.c:641 src/gnome2/commentary_dialog.c:1638
+#: src/gnome2/dictlex.c:819 src/gnome2/gbs.c:740
 msgid "Morphological Tags"
 msgstr "Морфологічні теги"
 
-#: src/gnome2/bibletext.c:927 src/gnome2/bibletext_dialog.c:1771
-#: src/gnome2/commentary.c:633 src/gnome2/commentary_dialog.c:1646
-#: src/gnome2/dictlex.c:812 src/gnome2/gbs.c:720
+#: src/gnome2/bibletext.c:939 src/gnome2/bibletext_dialog.c:1771
+#: src/gnome2/commentary.c:649 src/gnome2/commentary_dialog.c:1646
+#: src/gnome2/dictlex.c:827 src/gnome2/gbs.c:748
 msgid "Footnotes"
 msgstr "Виноски"
 
-#: src/gnome2/bibletext.c:935 src/gnome2/bibletext_dialog.c:1779
-#: src/gnome2/commentary.c:641 src/gnome2/commentary_dialog.c:1654
-#: src/gnome2/dictlex.c:820 src/gnome2/gbs.c:728
+#: src/gnome2/bibletext.c:947 src/gnome2/bibletext_dialog.c:1779
+#: src/gnome2/commentary.c:657 src/gnome2/commentary_dialog.c:1654
+#: src/gnome2/dictlex.c:835 src/gnome2/gbs.c:756
 msgid "Greek Accents"
 msgstr "Грецькі наголоси"
 
-#: src/gnome2/bibletext.c:943 src/gnome2/bibletext_dialog.c:1787
-#: src/gnome2/commentary.c:649 src/gnome2/commentary_dialog.c:1662
-#: src/gnome2/dictlex.c:828 src/gnome2/gbs.c:736
+#: src/gnome2/bibletext.c:955 src/gnome2/bibletext_dialog.c:1787
+#: src/gnome2/commentary.c:665 src/gnome2/commentary_dialog.c:1662
+#: src/gnome2/dictlex.c:843 src/gnome2/gbs.c:764
 msgid "Lemmas"
 msgstr "Анотації"
 
-#: src/gnome2/bibletext.c:951 src/gnome2/bibletext_dialog.c:1795
-#: src/gnome2/commentary.c:657 src/gnome2/commentary_dialog.c:1670
-#: src/gnome2/dictlex.c:836 src/gnome2/gbs.c:744
+#: src/gnome2/bibletext.c:963 src/gnome2/bibletext_dialog.c:1795
+#: src/gnome2/commentary.c:673 src/gnome2/commentary_dialog.c:1670
+#: src/gnome2/dictlex.c:851 src/gnome2/gbs.c:772
 msgid "Scripture Cross-references"
 msgstr "Перехресні посилання з Св. Письма"
 
-#: src/gnome2/bibletext.c:959 src/gnome2/bibletext_dialog.c:1803
-#: src/gnome2/commentary.c:665 src/gnome2/commentary_dialog.c:1678
-#: src/gnome2/dictlex.c:844 src/gnome2/gbs.c:752
+#: src/gnome2/bibletext.c:971 src/gnome2/bibletext_dialog.c:1803
+#: src/gnome2/commentary.c:681 src/gnome2/commentary_dialog.c:1678
+#: src/gnome2/dictlex.c:859 src/gnome2/gbs.c:780
 msgid "Hebrew Vowel Points"
 msgstr "Риски голосних івриту"
 
-#: src/gnome2/bibletext.c:967 src/gnome2/bibletext_dialog.c:1811
-#: src/gnome2/commentary.c:673 src/gnome2/commentary_dialog.c:1686
-#: src/gnome2/dictlex.c:852 src/gnome2/gbs.c:760
+#: src/gnome2/bibletext.c:979 src/gnome2/bibletext_dialog.c:1811
+#: src/gnome2/commentary.c:689 src/gnome2/commentary_dialog.c:1686
+#: src/gnome2/dictlex.c:867 src/gnome2/gbs.c:788
 msgid "Hebrew Cantillation"
 msgstr "Кантиляції івриту"
 
-#: src/gnome2/bibletext.c:975 src/gnome2/bibletext_dialog.c:1819
-#: src/gnome2/commentary.c:681 src/gnome2/commentary_dialog.c:1694
-#: src/gnome2/dictlex.c:860 src/gnome2/gbs.c:768
+#: src/gnome2/bibletext.c:987 src/gnome2/bibletext_dialog.c:1819
+#: src/gnome2/commentary.c:697 src/gnome2/commentary_dialog.c:1694
+#: src/gnome2/dictlex.c:875 src/gnome2/gbs.c:796
 msgid "Headings"
 msgstr "Заголовки"
 
-#: src/gnome2/bibletext.c:983 src/gnome2/bibletext_dialog.c:1827
-#: src/gnome2/commentary.c:689 src/gnome2/commentary_dialog.c:1702
-#: src/gnome2/dictlex.c:868 src/gnome2/gbs.c:776
+#: src/gnome2/bibletext.c:995 src/gnome2/bibletext_dialog.c:1827
+#: src/gnome2/commentary.c:705 src/gnome2/commentary_dialog.c:1702
+#: src/gnome2/dictlex.c:883 src/gnome2/gbs.c:804
 msgid "Variants"
 msgstr "Варіанти"
 
-#: src/gnome2/bibletext.c:993 src/gnome2/bibletext.c:1107
+#: src/gnome2/bibletext.c:1005 src/gnome2/bibletext.c:1127
 #: src/gnome2/bibletext_dialog.c:1837 src/gnome2/bibletext_dialog.c:1946
-#: src/gnome2/commentary.c:699 src/gnome2/commentary.c:813
+#: src/gnome2/commentary.c:715 src/gnome2/commentary.c:836
 #: src/gnome2/commentary_dialog.c:1712 src/gnome2/commentary_dialog.c:1818
-#: src/gnome2/dictlex.c:878 src/gnome2/dictlex.c:982 src/gnome2/gbs.c:786
-#: src/gnome2/gbs.c:893
+#: src/gnome2/dictlex.c:893 src/gnome2/dictlex.c:1004 src/gnome2/gbs.c:814
+#: src/gnome2/gbs.c:928
 msgid "Use Current Dictionary"
 msgstr "Використовувати поточний словник"
 
-#: src/gnome2/bibletext.c:1004 src/gnome2/bibletext_dialog.c:1848
-#: src/gnome2/commentary.c:710 src/gnome2/commentary_dialog.c:1723
-#: src/gnome2/dictlex.c:889 src/gnome2/gbs.c:797 src/gnome2/sidebar.c:1012
+#: src/gnome2/bibletext.c:1016 src/gnome2/bibletext_dialog.c:1848
+#: src/gnome2/commentary.c:726 src/gnome2/commentary_dialog.c:1723
+#: src/gnome2/dictlex.c:904 src/gnome2/gbs.c:825 src/gnome2/sidebar.c:1012
 msgid "About"
 msgstr "Про модуль"
 
-#: src/gnome2/bibletext.c:1017 src/gnome2/bibletext_dialog.c:1861
-#: src/gnome2/bookmarks_menu.c:445 src/gnome2/commentary.c:723
-#: src/gnome2/commentary_dialog.c:1736 src/gnome2/dictlex.c:902
-#: src/gnome2/gbs.c:810
+#. info->stock_icon = GTK_STOCK_OPEN;
+#: src/gnome2/bibletext.c:1023 src/gnome2/bookmarks_menu.c:458
+#: src/gnome2/bookmarks_menu.c:724 src/gnome2/bookmarks_menu.c:898
+#: src/gnome2/bookmarks_menu.c:996 src/gnome2/bookmarks_treeview.c:101
+#: src/gnome2/bookmarks_treeview.c:1051 src/gnome2/commentary.c:733
+#: src/gnome2/dictlex.c:911 src/gnome2/gbs.c:832 src/gnome2/mod_mgr.c:1722
+#: src/gnome2/mod_mgr.c:1861
+msgid "Bookmark"
+msgstr "Закладки"
+
+#: src/gnome2/bibletext.c:1036 src/gnome2/bibletext_dialog.c:1861
+#: src/gnome2/bookmarks_menu.c:444 src/gnome2/commentary.c:746
+#: src/gnome2/commentary_dialog.c:1736 src/gnome2/dictlex.c:924
+#: src/gnome2/gbs.c:845
 msgid "Edit"
 msgstr "Правка"
 
-#: src/gnome2/bibletext.c:1023 src/gnome2/bibletext_dialog.c:1867
-#: src/gnome2/commentary.c:729 src/gnome2/commentary_dialog.c:1742
-#: src/gnome2/dictlex.c:908 src/gnome2/gbs.c:816
+#: src/gnome2/bibletext.c:1042 src/gnome2/bibletext_dialog.c:1867
+#: src/gnome2/commentary.c:752 src/gnome2/commentary_dialog.c:1742
+#: src/gnome2/dictlex.c:930 src/gnome2/gbs.c:851
 msgid "_Module Options"
 msgstr "_Опції модуля"
 
-#: src/gnome2/bibletext.c:1029 src/gnome2/bibletext_dialog.c:1873
-#: src/gnome2/commentary.c:735 src/gnome2/commentary_dialog.c:1748
-#: src/gnome2/dictlex.c:914 src/gnome2/gbs.c:822
+#: src/gnome2/bibletext.c:1048 src/gnome2/bibletext_dialog.c:1873
+#: src/gnome2/commentary.c:758 src/gnome2/commentary_dialog.c:1748
+#: src/gnome2/dictlex.c:936 src/gnome2/gbs.c:857
 msgid "Lookup Selection"
 msgstr "Передевитися вибране"
 
-#: src/gnome2/bibletext.c:1035 src/gnome2/bibletext_dialog.c:1879
-#: src/gnome2/commentary.c:741 src/gnome2/commentary_dialog.c:1754
-#: src/gnome2/dictlex.c:920 src/gnome2/gbs.c:828
+#: src/gnome2/bibletext.c:1054 src/gnome2/bibletext_dialog.c:1879
+#: src/gnome2/commentary.c:764 src/gnome2/commentary_dialog.c:1754
+#: src/gnome2/dictlex.c:942 src/gnome2/gbs.c:863
 msgid "Unlock This Module"
 msgstr "Разблокувати цей модуль"
 
-#: src/gnome2/bibletext.c:1042 src/gnome2/commentary.c:748
-#: src/gnome2/dictlex.c:927 src/gnome2/gbs.c:835
-#: src/gnome2/preferences_dialog.c:1656
+#: src/gnome2/bibletext.c:1061 src/gnome2/commentary.c:771
+#: src/gnome2/dictlex.c:949 src/gnome2/gbs.c:870
+#: src/gnome2/preferences_dialog.c:1657
 msgid "Show Tabs"
 msgstr "Показувати вкладки"
 
@@ -695,157 +753,181 @@ msgstr "Синхронізувати з головним вікном"
 msgid "Stay in sync"
 msgstr "Залишатися в режимі синхронізації"
 
-#. info->stock_icon = GTK_STOCK_OPEN;
-#: src/gnome2/bookmarks_menu.c:459 src/gnome2/bookmarks_menu.c:725
-#: src/gnome2/bookmarks_menu.c:899 src/gnome2/bookmarks_menu.c:997
-#: src/gnome2/bookmarks_treeview.c:100 src/gnome2/mod_mgr.c:1709
-#: src/gnome2/mod_mgr.c:1848
-msgid "Bookmark"
-msgstr "Закладки"
-
-#: src/gnome2/bookmarks_menu.c:462
+#: src/gnome2/bookmarks_menu.c:461
 msgid "Folder name: "
 msgstr "Ім'я теки: "
 
-#: src/gnome2/bookmarks_menu.c:465
+#: src/gnome2/bookmarks_menu.c:464
 msgid "Bookmark name: "
 msgstr "Ім'я закладки: "
 
-#: src/gnome2/bookmarks_menu.c:468 src/gnome2/bookmarks_menu.c:907
+#: src/gnome2/bookmarks_menu.c:467 src/gnome2/bookmarks_menu.c:906
 msgid "Verse: "
 msgstr "Вірш: "
 
-#: src/gnome2/bookmarks_menu.c:653
+#: src/gnome2/bookmarks_menu.c:652
 msgid "Restore Bookmark Folder"
 msgstr "Відновити теку закладок"
 
-#: src/gnome2/bookmarks_menu.c:729
+#: src/gnome2/bookmarks_menu.c:728
 msgid "Remove the selected folder"
 msgstr "Видалити виділену теку"
 
-#: src/gnome2/bookmarks_menu.c:731
+#: src/gnome2/bookmarks_menu.c:730
 msgid "(and all its contents)?"
 msgstr "(і весь її вміст)?"
 
-#: src/gnome2/bookmarks_menu.c:736
+#: src/gnome2/bookmarks_menu.c:735
 msgid "Remove the selected bookmark"
 msgstr "Видалити виділену закладку"
 
-#: src/gnome2/bookmarks_menu.c:900
+#: src/gnome2/bookmarks_menu.c:899
 msgid "Add"
 msgstr "Додати"
 
-#: src/gnome2/bookmarks_menu.c:906
+#: src/gnome2/bookmarks_menu.c:905
 msgid "Label: "
 msgstr "Мітка: "
 
-#: src/gnome2/bookmarks_menu.c:999 src/gnome2/bookmarks_treeview.c:101
+#: src/gnome2/bookmarks_menu.c:998 src/gnome2/bookmarks_treeview.c:102
+#: src/gnome2/bookmarks_treeview.c:1053
 msgid "Enter Folder Name"
 msgstr "Введіть ім'я теки"
 
-#: src/gnome2/bookmarks_menu.c:1001
+#: src/gnome2/bookmarks_menu.c:1000 src/gnome2/bookmarks_treeview.c:1055
 msgid "Folder Name"
 msgstr "Ім'я теки"
 
-#: src/gnome2/bookmarks_menu.c:1002 src/gnome2/bookmarks_treeview.c:103
+#: src/gnome2/bookmarks_menu.c:1001 src/gnome2/bookmarks_treeview.c:104
+#: src/gnome2/bookmarks_treeview.c:1056
 msgid "Folder: "
 msgstr "Тека: "
 
-#: src/gnome2/bookmarks_menu.c:1092
+#: src/gnome2/bookmarks_menu.c:1091
 msgid "Remove Folder"
 msgstr "Видалити теку"
 
-#: src/gnome2/bookmarks_menu.c:1093
+#: src/gnome2/bookmarks_menu.c:1092
 msgid "Remove folder and save it"
 msgstr "Видалити теку і зберегти"
 
-#: src/gnome2/bookmarks_menu.c:1099
+#: src/gnome2/bookmarks_menu.c:1098
 msgid "Restore Folder"
 msgstr "Відновити теку"
 
-#: src/gnome2/bookmarks_menu.c:1100
+#: src/gnome2/bookmarks_menu.c:1099
 msgid "Restore saved folder"
 msgstr "Відновити збережену теку"
 
-#: src/gnome2/bookmarks_menu.c:1109 src/gnome2/sidebar.c:999
+#: src/gnome2/bookmarks_menu.c:1108 src/gnome2/sidebar.c:999
 msgid "Open in a new tab"
 msgstr "Відкрити у новій вкладці"
 
-#: src/gnome2/bookmarks_menu.c:1110 src/gnome2/bookmarks_menu.c:1116
+#: src/gnome2/bookmarks_menu.c:1109 src/gnome2/bookmarks_menu.c:1115
 msgid "Open this bookmark in a dialog"
 msgstr "Відкрити цю закладку у діалозі"
 
-#: src/gnome2/bookmarks_menu.c:1115
+#: src/gnome2/bookmarks_menu.c:1114
 msgid "Open in a dialog"
 msgstr "Відкрити у діалозі"
 
-#: src/gnome2/bookmarks_menu.c:1121
+#: src/gnome2/bookmarks_menu.c:1120
 msgid "New Folder"
 msgstr "Нова тека"
 
-#: src/gnome2/bookmarks_menu.c:1122
+#: src/gnome2/bookmarks_menu.c:1121
 msgid "Add new folder to selected folder"
 msgstr "Додати нову теку у вибрану теку"
 
-#: src/gnome2/bookmarks_menu.c:1127
+#: src/gnome2/bookmarks_menu.c:1126
 msgid "Insert Bookmark"
 msgstr "Вставити закладку"
 
-#: src/gnome2/bookmarks_menu.c:1128
+#: src/gnome2/bookmarks_menu.c:1127
 msgid "Insert new bookmark here"
 msgstr "Вставити тут нову закладку"
 
-#: src/gnome2/bookmarks_menu.c:1133
+#: src/gnome2/bookmarks_menu.c:1132
 msgid "_Edit Item"
 msgstr "_Правити пункт"
 
-#: src/gnome2/bookmarks_menu.c:1134
+#: src/gnome2/bookmarks_menu.c:1133
 msgid "Edit bookmark item"
 msgstr "Правити пункт закладки"
 
-#: src/gnome2/bookmarks_menu.c:1139
+#: src/gnome2/bookmarks_menu.c:1138
 msgid "Delete Item"
 msgstr "Видалити пункт"
 
-#: src/gnome2/bookmarks_menu.c:1140
+#: src/gnome2/bookmarks_menu.c:1139
 msgid "Delete item"
 msgstr "Видалити пункт"
 
-#: src/gnome2/bookmarks_menu.c:1146
+#: src/gnome2/bookmarks_menu.c:1145
 msgid "Expand All"
 msgstr "Розгорнути все"
 
-#: src/gnome2/bookmarks_menu.c:1147
+#: src/gnome2/bookmarks_menu.c:1146
 msgid "Expand all Bookmarks groups"
 msgstr "Розгорнути усі групи закладок"
 
-#: src/gnome2/bookmarks_menu.c:1152
+#: src/gnome2/bookmarks_menu.c:1151
 msgid "Collapse All"
 msgstr "Згорнути все"
 
-#: src/gnome2/bookmarks_menu.c:1153
+#: src/gnome2/bookmarks_menu.c:1152
 msgid "Collapse all Bookmarks groups"
 msgstr "Згорнути усі групи закладок"
 
-#: src/gnome2/bookmarks_menu.c:1159
+#: src/gnome2/bookmarks_menu.c:1158
 msgid "Allow Reordering"
 msgstr "Дозволити перевпорядкування"
 
-#: src/gnome2/bookmarks_menu.c:1161
+#: src/gnome2/bookmarks_menu.c:1160
 msgid "Allow items to be moved from one folder to another"
 msgstr "Дозволити перенесення елементів з однієї теки в іншу"
 
-#: src/gnome2/bookmarks_menu.c:1167
+#: src/gnome2/bookmarks_menu.c:1166
 msgid "Import Bibletime Bookmarks"
 msgstr "Імпорт закладок Bibletime"
 
-#: src/gnome2/bookmarks_menu.c:1168
+#: src/gnome2/bookmarks_menu.c:1167
 msgid "Load Bookmarks from Bibletime"
 msgstr "Завантажити закладки з Bibletime"
 
-#: src/gnome2/bookmarks_menu.c:1173
+#: src/gnome2/bookmarks_menu.c:1172
 msgid "Remove - Restore"
 msgstr "Видалити - Відновити"
+
+#: src/gnome2/bookmarks_treeview.c:1139
+#, fuzzy
+msgid "Add Bookmark"
+msgstr "Закладки"
+
+#: src/gnome2/bookmarks_treeview.c:1159
+#, fuzzy
+msgid "Label:"
+msgstr "Мітка: "
+
+#: src/gnome2/bookmarks_treeview.c:1164
+#, fuzzy
+msgid "Verse:"
+msgstr "Вірш: "
+
+#: src/gnome2/bookmarks_treeview.c:1169
+#, fuzzy
+msgid "Module:"
+msgstr "Модуль: "
+
+#: src/gnome2/bookmarks_treeview.c:1229
+#, fuzzy
+msgid "Create new folder"
+msgstr "Створити новий файл"
+
+#: src/gnome2/bookmarks_treeview.c:1245
+#, fuzzy
+msgid "New ..."
+msgstr "Новий"
 
 #: src/gnome2/cipher_key_dialog.c:59
 msgid "Cipher Key?"
@@ -909,36 +991,36 @@ msgstr "Модуль"
 msgid "Current font: "
 msgstr "Поточний шрифт: "
 
-#: src/gnome2/font_dialog.c:360 src/gnome2/preferences_dialog.c:1558
+#: src/gnome2/font_dialog.c:360 src/gnome2/preferences_dialog.c:1559
 msgid "+5"
 msgstr "+5"
 
-#: src/gnome2/font_dialog.c:362 src/gnome2/preferences_dialog.c:1556
+#: src/gnome2/font_dialog.c:362 src/gnome2/preferences_dialog.c:1557
 msgid "+4"
 msgstr "+4"
 
-#: src/gnome2/font_dialog.c:364 src/gnome2/preferences_dialog.c:1554
+#: src/gnome2/font_dialog.c:364 src/gnome2/preferences_dialog.c:1555
 msgid "+3"
 msgstr "+3"
 
-#: src/gnome2/font_dialog.c:366 src/gnome2/preferences_dialog.c:1552
+#: src/gnome2/font_dialog.c:366 src/gnome2/preferences_dialog.c:1553
 msgid "+2"
 msgstr "+2"
 
-#: src/gnome2/font_dialog.c:368 src/gnome2/preferences_dialog.c:1550
+#: src/gnome2/font_dialog.c:368 src/gnome2/preferences_dialog.c:1551
 msgid "+1"
 msgstr "+1"
 
 #: src/gnome2/font_dialog.c:370 src/gnome2/font_dialog.c:383
-#: src/gnome2/preferences_dialog.c:1548 src/gnome2/preferences_dialog.c:1569
+#: src/gnome2/preferences_dialog.c:1549 src/gnome2/preferences_dialog.c:1570
 msgid "+0"
 msgstr "+0"
 
-#: src/gnome2/font_dialog.c:372 src/gnome2/preferences_dialog.c:1546
+#: src/gnome2/font_dialog.c:372 src/gnome2/preferences_dialog.c:1547
 msgid "-1"
 msgstr "-1"
 
-#: src/gnome2/font_dialog.c:374 src/gnome2/preferences_dialog.c:1544
+#: src/gnome2/font_dialog.c:374 src/gnome2/preferences_dialog.c:1545
 msgid "-2"
 msgstr "-2"
 
@@ -964,7 +1046,7 @@ msgstr "Перейти до %s"
 msgid "Initiating GnomeSword"
 msgstr "Ініціалізація GnomeSword"
 
-#: src/gnome2/gnomesword.c:150
+#: src/gnome2/gnomesword.c:150 src/gnome2/splash.c:590
 msgid "Displaying GnomeSword"
 msgstr "Відображення GnomeSword"
 
@@ -1037,8 +1119,8 @@ msgstr "Розширений пошук"
 msgid "Advanced search using the search dialog"
 msgstr "Розширений пошук з використанням діалогу пошука"
 
-#: src/gnome2/main_menu.c:521 src/gnome2/mod_mgr.c:1958
-#: src/gnome2/mod_mgr.c:2017
+#: src/gnome2/main_menu.c:521 src/gnome2/mod_mgr.c:1971
+#: src/gnome2/mod_mgr.c:2030
 msgid "Module Manager"
 msgstr "Менеджер модулів: "
 
@@ -1063,7 +1145,7 @@ msgstr "Щоденне молитовне читання"
 msgid "Show the Daily Devotion for today"
 msgstr "Показати щоденне молитовне читання на сьогодні"
 
-#: src/gnome2/main_menu.c:558 src/gnome2/preferences_dialog.c:1732
+#: src/gnome2/main_menu.c:558 src/gnome2/preferences_dialog.c:1733
 msgid "Bible Texts"
 msgstr "Тексти Біблії"
 
@@ -1071,8 +1153,8 @@ msgstr "Тексти Біблії"
 msgid "Show or hide Bible texts window"
 msgstr "Показати чи сховати вікно текстів Біблії"
 
-#: src/gnome2/main_menu.c:564 src/gnome2/preferences_dialog.c:1687
-#: src/gnome2/preferences_dialog.c:2034 src/gnome2/search_sidebar.c:215
+#: src/gnome2/main_menu.c:564 src/gnome2/preferences_dialog.c:1688
+#: src/gnome2/preferences_dialog.c:2035 src/gnome2/search_sidebar.c:215
 #: src/gnome2/setup_druid.c:807
 msgid "Commentary"
 msgstr "Коментар"
@@ -1081,12 +1163,15 @@ msgstr "Коментар"
 msgid "Show or hide commentaries"
 msgstr "Показати чи сховати коментарі"
 
-#: src/gnome2/main_menu.c:570
-msgid "Lower Workbook"
-msgstr "Нижня робоча частина"
+#: src/gnome2/main_menu.c:570 src/gnome2/preferences_dialog.c:1695
+#: src/gnome2/preferences_dialog.c:1760 src/gnome2/preferences_dialog.c:1766
+#: src/gnome2/setup_druid.c:929
+msgid "Dictionary/Lexicon"
+msgstr "Словник/Лексикон"
 
 #: src/gnome2/main_menu.c:572
-msgid "Show or hide lower workbook - dictionaries and other books"
+#, fuzzy
+msgid "Show or hide - dictionaries and lexicons"
 msgstr "Показати чи зховати нижню робочу частину - словники та інші книги"
 
 #: src/gnome2/main_menu.c:578
@@ -1141,20 +1226,20 @@ msgstr "І_сторія"
 msgid "_Help"
 msgstr "_Довідка"
 
-#: src/gnome2/main_window.c:475
+#: src/gnome2/main_window.c:483
 msgid "GnomeSword - Bible Study Software"
 msgstr "GnomeSword - програма з вивчення Біблії"
 
-#: src/gnome2/main_window.c:530
+#: src/gnome2/main_window.c:538
 msgid "Open a new tab"
 msgstr "Відкрити нову вкладку"
 
-#: src/gnome2/main_window.c:666
+#: src/gnome2/main_window.c:674
 #, fuzzy
 msgid "Commentary View"
 msgstr "Коментарі"
 
-#: src/gnome2/main_window.c:683
+#: src/gnome2/main_window.c:691
 msgid "Book View"
 msgstr ""
 
@@ -1210,7 +1295,7 @@ msgstr "Назва модуля"
 msgid "Old"
 msgstr "Старий"
 
-#: src/gnome2/mod_mgr.c:1068 src/gnome2/mod_mgr.c:2162
+#: src/gnome2/mod_mgr.c:1068 src/gnome2/mod_mgr.c:2175
 msgid "Configure"
 msgstr "Налаштування"
 
@@ -1230,81 +1315,81 @@ msgstr "Джерело"
 msgid "Directory"
 msgstr "Каталог"
 
-#: src/gnome2/mod_mgr.c:1389
+#: src/gnome2/mod_mgr.c:1402
 msgid "Please Refresh"
 msgstr "Будь-ласка, поновіть"
 
-#: src/gnome2/mod_mgr.c:1391
+#: src/gnome2/mod_mgr.c:1404
 msgid "Your module list is not up to date!"
 msgstr "Ваш список модулів застарілий"
 
-#: src/gnome2/mod_mgr.c:1605
+#: src/gnome2/mod_mgr.c:1618
 msgid "Select Local Source"
 msgstr "Виберіть локальне джерело"
 
-#: src/gnome2/mod_mgr.c:1712 src/gnome2/mod_mgr.c:1851
+#: src/gnome2/mod_mgr.c:1725 src/gnome2/mod_mgr.c:1864
 msgid "Remove the selected source"
 msgstr "Видаліть локальне джерело"
 
-#: src/gnome2/mod_mgr.c:1761
+#: src/gnome2/mod_mgr.c:1774
 msgid "Enter a remote source"
 msgstr "Введіть віддалене джерело"
 
-#: src/gnome2/mod_mgr.c:1765
+#: src/gnome2/mod_mgr.c:1778
 msgid "Caption:"
 msgstr "Назва:"
 
-#: src/gnome2/mod_mgr.c:1766
+#: src/gnome2/mod_mgr.c:1779
 msgid "Type:"
 msgstr "Тип:"
 
-#: src/gnome2/mod_mgr.c:1767
+#: src/gnome2/mod_mgr.c:1780
 msgid "URL:"
 msgstr "URL:"
 
-#: src/gnome2/mod_mgr.c:1768
+#: src/gnome2/mod_mgr.c:1781
 msgid "Directory:"
 msgstr "Каталог SWORD'у:"
 
-#: src/gnome2/mod_mgr.c:2004
+#: src/gnome2/mod_mgr.c:2017
 msgid "SWORD"
 msgstr "SWORD"
 
-#: src/gnome2/mod_mgr.c:2025 src/gnome2/mod_mgr.c:2148
+#: src/gnome2/mod_mgr.c:2038 src/gnome2/mod_mgr.c:2161
 msgid "WARNING:"
 msgstr "ПОПЕРЕДЖЕННЯ:"
 
-#: src/gnome2/mod_mgr.c:2027
+#: src/gnome2/mod_mgr.c:2040
 msgid "If you live in a persecuted country use with care."
 msgstr ""
 "Якщо ви живете в країні, де переслідують за переконання, використовуйте "
 "обережно."
 
-#: src/gnome2/mod_mgr.c:2035
+#: src/gnome2/mod_mgr.c:2048
 msgid "Cover"
 msgstr "Нижній"
 
-#: src/gnome2/mod_mgr.c:2051
+#: src/gnome2/mod_mgr.c:2064
 msgid "Install Source"
 msgstr "Встановити джерело"
 
-#: src/gnome2/mod_mgr.c:2070
+#: src/gnome2/mod_mgr.c:2083
 msgid "Local"
 msgstr "Локальні"
 
-#: src/gnome2/mod_mgr.c:2075
+#: src/gnome2/mod_mgr.c:2088
 msgid "Local Source"
 msgstr "Локальне джерело"
 
-#: src/gnome2/mod_mgr.c:2092
+#: src/gnome2/mod_mgr.c:2105
 msgid "Remote"
 msgstr "Віддалене"
 
-#: src/gnome2/mod_mgr.c:2106
+#: src/gnome2/mod_mgr.c:2119
 msgid "Install Destination"
 msgstr "Встановити вказане"
 
-#: src/gnome2/mod_mgr.c:2150
+#: src/gnome2/mod_mgr.c:2163
 msgid ""
 "If you live in a persecuted country and do not wish to risk detection you "
 "should NOT use  the remote installation feature! "
@@ -1313,63 +1398,63 @@ msgstr ""
 "щоби вас викрили, ви НЕ повинні користуватися функцією дистанційного "
 "встановлення! "
 
-#: src/gnome2/mod_mgr.c:2204
+#: src/gnome2/mod_mgr.c:2217
 msgid "Install Modules"
 msgstr "Встановити модулі"
 
-#: src/gnome2/mod_mgr.c:2243
+#: src/gnome2/mod_mgr.c:2256
 msgid "Remove Modules"
 msgstr "Видалити модулі"
 
-#: src/gnome2/mod_mgr.c:2256
+#: src/gnome2/mod_mgr.c:2269
 msgid "<b>Add and Remove Sources</b>"
 msgstr "<b>Додати та видалити джерела</b>"
 
-#: src/gnome2/mod_mgr.c:2272
+#: src/gnome2/mod_mgr.c:2285
 msgid "Current local sources"
 msgstr "Поточні локальні джерела"
 
-#: src/gnome2/mod_mgr.c:2328
+#: src/gnome2/mod_mgr.c:2341
 msgid "Current Remote Sources"
 msgstr "Поточні віддалені джерела"
 
-#: src/gnome2/mod_mgr.c:2374
+#: src/gnome2/mod_mgr.c:2387
 msgid "Sources"
 msgstr "Джерела"
 
-#: src/gnome2/mod_mgr.c:2399
+#: src/gnome2/mod_mgr.c:2412
 msgid "Refresh remote sources"
 msgstr "Поновити віддалені джерела"
 
-#: src/gnome2/mod_mgr.c:2407
+#: src/gnome2/mod_mgr.c:2420
 msgid "Upgrade or install selected modules"
 msgstr "Поновити чи встановити вибрані модулі"
 
-#: src/gnome2/mod_mgr.c:2423
+#: src/gnome2/mod_mgr.c:2436
 msgid "Install"
 msgstr "Встановити"
 
-#: src/gnome2/mod_mgr.c:2434
+#: src/gnome2/mod_mgr.c:2447
 msgid "Remove selected module(s)"
 msgstr "Видалити виділені модулі"
 
-#: src/gnome2/mod_mgr.c:2449
+#: src/gnome2/mod_mgr.c:2462
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/gnome2/note_editor.c:1135
+#: src/gnome2/note_editor.c:1156
 msgid "Save Note"
 msgstr "Зберегти нотатку"
 
-#: src/gnome2/note_editor.c:1140
+#: src/gnome2/note_editor.c:1161
 msgid "Export Note"
 msgstr "Експорт нотатки"
 
-#: src/gnome2/note_editor.c:1145
+#: src/gnome2/note_editor.c:1166
 msgid "Delete Note"
 msgstr "Видалити нотатку"
 
-#: src/gnome2/parallel_dialog.c:388 src/gnome2/preferences_dialog.c:1014
+#: src/gnome2/parallel_dialog.c:388 src/gnome2/preferences_dialog.c:1015
 msgid "Parallel"
 msgstr "Паралельний"
 
@@ -1430,81 +1515,81 @@ msgstr "Об'єкт pixbuf"
 msgid "The pixbuf to render."
 msgstr "Pixbuf для рендеренгу."
 
-#: src/gnome2/preferences_dialog.c:905 src/gnome2/preferences_dialog.c:1180
+#: src/gnome2/preferences_dialog.c:906 src/gnome2/preferences_dialog.c:1181
 msgid "Preferences"
 msgstr "Параметри"
 
-#: src/gnome2/preferences_dialog.c:984
+#: src/gnome2/preferences_dialog.c:985
 msgid "Fonts"
 msgstr "Шрифти"
 
-#: src/gnome2/preferences_dialog.c:987
+#: src/gnome2/preferences_dialog.c:988
 msgid "Color"
 msgstr "Колір"
 
-#: src/gnome2/preferences_dialog.c:990 src/gnome2/preferences_dialog.c:1004
-#: src/gnome2/preferences_dialog.c:1017
+#: src/gnome2/preferences_dialog.c:991 src/gnome2/preferences_dialog.c:1005
+#: src/gnome2/preferences_dialog.c:1018
 msgid "Misc"
 msgstr "Різне"
 
-#: src/gnome2/preferences_dialog.c:994 src/gnome2/preferences_dialog.c:1791
+#: src/gnome2/preferences_dialog.c:995 src/gnome2/preferences_dialog.c:1792
 msgid "General"
 msgstr "Загальне"
 
-#: src/gnome2/preferences_dialog.c:997
+#: src/gnome2/preferences_dialog.c:998
 msgid "Tabs and Panes"
 msgstr "Вкладки та панелі"
 
-#: src/gnome2/preferences_dialog.c:1008 src/gnome2/search_dialog.c:1421
+#: src/gnome2/preferences_dialog.c:1009 src/gnome2/search_dialog.c:1421
 #: src/gnome2/search_dialog.c:2101 src/gnome2/sidebar.c:1666
 msgid "Modules"
 msgstr "Модулі"
 
-#: src/gnome2/preferences_dialog.c:1011
+#: src/gnome2/preferences_dialog.c:1012
 msgid "Main"
 msgstr "Основний"
 
-#: src/gnome2/preferences_dialog.c:1332
+#: src/gnome2/preferences_dialog.c:1333
 msgid "Font Colors"
 msgstr "Колір шрифтів"
 
-#: src/gnome2/preferences_dialog.c:1357
+#: src/gnome2/preferences_dialog.c:1358
 msgid "Background"
 msgstr "Фон"
 
-#: src/gnome2/preferences_dialog.c:1370
+#: src/gnome2/preferences_dialog.c:1371
 msgid "Pick the background color"
 msgstr "Вибрати колір фону"
 
-#: src/gnome2/preferences_dialog.c:1377
+#: src/gnome2/preferences_dialog.c:1378
 msgid "Bible text"
 msgstr "Текст Біблії"
 
-#: src/gnome2/preferences_dialog.c:1390
+#: src/gnome2/preferences_dialog.c:1391
 msgid "Pick the Bible text color"
 msgstr "Вибрати колір тексту Біблії"
 
-#: src/gnome2/preferences_dialog.c:1397
+#: src/gnome2/preferences_dialog.c:1398
 msgid "Current Verse text"
 msgstr "Текст поточного вірша"
 
-#: src/gnome2/preferences_dialog.c:1410
+#: src/gnome2/preferences_dialog.c:1411
 msgid "Pick the current Verse color"
 msgstr "Вибрати колір поточного вірша"
 
-#: src/gnome2/preferences_dialog.c:1428
+#: src/gnome2/preferences_dialog.c:1429
 msgid "Verse numbers"
 msgstr "Номера віршів"
 
-#: src/gnome2/preferences_dialog.c:1446
+#: src/gnome2/preferences_dialog.c:1447
 msgid "Links"
 msgstr "Ланки"
 
-#: src/gnome2/preferences_dialog.c:1473
+#: src/gnome2/preferences_dialog.c:1474
 msgid "Strong's Numbers & Morphological Tags"
 msgstr "Номери Стронгу і морфологічні теги"
 
-#: src/gnome2/preferences_dialog.c:1478
+#: src/gnome2/preferences_dialog.c:1479
 msgid "GnomeSword Defaults"
 msgstr "Типові параметри GnomeSword"
 
@@ -1517,168 +1602,157 @@ msgstr "Типові параметри GnomeSword"
 #. NULL);
 #. gtk_button_set_relief(GTK_BUTTON(button.gnomesword_defaults),
 #. GTK_RELIEF_HALF);
-#: src/gnome2/preferences_dialog.c:1489
+#: src/gnome2/preferences_dialog.c:1490
 msgid "Bible Text Window"
 msgstr "Вікно тексту Біблії"
 
-#: src/gnome2/preferences_dialog.c:1507
+#: src/gnome2/preferences_dialog.c:1508
 msgid "Font Miscellaneous"
 msgstr "Інші шрифти"
 
-#: src/gnome2/preferences_dialog.c:1530
+#: src/gnome2/preferences_dialog.c:1531
 msgid "Verse number font size"
 msgstr "Розмір шрифта номеру вірша"
 
-#: src/gnome2/preferences_dialog.c:1567
+#: src/gnome2/preferences_dialog.c:1568
 msgid "Zero is the base font size. Increase or decrease the size."
 msgstr "Нуль є базовим розміром шрифта. Збільшити чи зменшити розмір."
 
-#: src/gnome2/preferences_dialog.c:1611
+#: src/gnome2/preferences_dialog.c:1612
 msgid "Use Defaults When Starting GnomeSword"
 msgstr "Під час запуску використовувати типові параметри"
 
-#: src/gnome2/preferences_dialog.c:1628
+#: src/gnome2/preferences_dialog.c:1629
 msgid "Yes, use defaults"
 msgstr "Так, використовувати типові"
 
-#: src/gnome2/preferences_dialog.c:1639
+#: src/gnome2/preferences_dialog.c:1640
 msgid "No, use settings saved the last time I used GnomeSword"
 msgstr ""
 "Ні, використовувати налаштування, збережені під час останнього використання"
 
-#: src/gnome2/preferences_dialog.c:1673
+#: src/gnome2/preferences_dialog.c:1674
 msgid "Use tabbed browsing"
 msgstr "Використовувати відображення вкладок"
 
-#: src/gnome2/preferences_dialog.c:1680
+#: src/gnome2/preferences_dialog.c:1681
 msgid "Bible texts"
 msgstr "Тексти Біблії"
 
-#: src/gnome2/preferences_dialog.c:1694 src/gnome2/setup_druid.c:929
-msgid "Dictionary/Lexicon"
-msgstr "Словник/Лексикон"
-
-#: src/gnome2/preferences_dialog.c:1701
+#: src/gnome2/preferences_dialog.c:1702
 msgid "Books"
 msgstr "Книги"
 
-#: src/gnome2/preferences_dialog.c:1715
+#: src/gnome2/preferences_dialog.c:1716
 msgid "Show"
 msgstr "Показати"
 
-#: src/gnome2/preferences_dialog.c:1738
+#: src/gnome2/preferences_dialog.c:1739
 msgid "Display Bible text window"
 msgstr "Показати вікно тексту Біблії"
 
-#: src/gnome2/preferences_dialog.c:1752
-msgid "Commentaries, Personal Comments and StudyPad"
-msgstr "Коментарі, персональні коментарі та конспект"
+#: src/gnome2/preferences_dialog.c:1753
+#, fuzzy
+msgid "Display Commentary window"
+msgstr "Показати вікно тексту Біблії"
 
-#: src/gnome2/preferences_dialog.c:1759
-msgid "Lower workbook"
-msgstr "Нижню робочу частину"
-
-#: src/gnome2/preferences_dialog.c:1765
-msgid "Dictionary/Lexicon and generic books"
-msgstr "Словник/Лексикон і типові книги"
-
-#: src/gnome2/preferences_dialog.c:1810 src/gnome2/setup_druid.c:614
+#: src/gnome2/preferences_dialog.c:1811 src/gnome2/setup_druid.c:614
 msgid "Use Verse style"
 msgstr "Використовувати стиль вірша"
 
-#: src/gnome2/preferences_dialog.c:1823
+#: src/gnome2/preferences_dialog.c:1824
 msgid "Use default Dictionary"
 msgstr "Використовувати типовий словник"
 
-#: src/gnome2/preferences_dialog.c:1831
+#: src/gnome2/preferences_dialog.c:1832
 msgid "Show Daily Devotion at start up"
 msgstr "При старті показувати щоденні читання"
 
-#: src/gnome2/preferences_dialog.c:1837
+#: src/gnome2/preferences_dialog.c:1838
 msgid "Show Daily Devotion if you have a Devotion module"
 msgstr "Показувати щоденні читання, якщо у вас є такий модуль"
 
-#: src/gnome2/preferences_dialog.c:1842
+#: src/gnome2/preferences_dialog.c:1843
 msgid "Show splash screen at start up"
 msgstr "Показувати заставку при старті"
 
-#: src/gnome2/preferences_dialog.c:1849
+#: src/gnome2/preferences_dialog.c:1850
 msgid "Show the splash screen when GnomeSword starts"
 msgstr "Показувати заставку при старті GnomeSword'а"
 
-#: src/gnome2/preferences_dialog.c:1862
+#: src/gnome2/preferences_dialog.c:1863
 msgid "Show Dictionary / Lexicon"
 msgstr "Показувати словник/лексикон"
 
-#: src/gnome2/preferences_dialog.c:1881
+#: src/gnome2/preferences_dialog.c:1882
 msgid "In Sidebar viewer"
 msgstr "У переглядачі контекстного меню"
 
-#: src/gnome2/preferences_dialog.c:1891
+#: src/gnome2/preferences_dialog.c:1892
 msgid "In Dictionary/Lexicon window"
 msgstr "У вікні словника/лексикона"
 
-#: src/gnome2/preferences_dialog.c:1965 src/gnome2/preferences_dialog.c:1982
+#: src/gnome2/preferences_dialog.c:1966 src/gnome2/preferences_dialog.c:1983
 msgid "StudyPad default directory"
 msgstr "Каталог конспекту по замовчуванню"
 
-#: src/gnome2/preferences_dialog.c:2004
+#: src/gnome2/preferences_dialog.c:2005
 msgid "<b>Main Window Modules</b>"
 msgstr "<b>Модулі головного вікна</b>"
 
-#: src/gnome2/preferences_dialog.c:2015
+#: src/gnome2/preferences_dialog.c:2016
 msgid "Biblical Text"
 msgstr "Біблійний текст"
 
-#: src/gnome2/preferences_dialog.c:2053
+#: src/gnome2/preferences_dialog.c:2054
 msgid "Dictionary"
 msgstr "Словник"
 
-#: src/gnome2/preferences_dialog.c:2072
+#: src/gnome2/preferences_dialog.c:2073
 msgid "Default Dictionary"
 msgstr "Словник по замовчуванню"
 
-#: src/gnome2/preferences_dialog.c:2094
+#: src/gnome2/preferences_dialog.c:2095
 msgid "Personal Notes"
 msgstr "Особисті нотатки"
 
-#: src/gnome2/preferences_dialog.c:2119
+#: src/gnome2/preferences_dialog.c:2120
 msgid "<b>Parallel View</b>"
 msgstr "<b>Паралельний перегляд</b>"
 
-#: src/gnome2/preferences_dialog.c:2130 src/gnome2/setup_druid.c:882
+#: src/gnome2/preferences_dialog.c:2131 src/gnome2/setup_druid.c:882
 msgid "Parallel 1"
 msgstr "Паралельний 1"
 
-#: src/gnome2/preferences_dialog.c:2149 src/gnome2/setup_druid.c:873
+#: src/gnome2/preferences_dialog.c:2150 src/gnome2/setup_druid.c:873
 msgid "Parallel 2"
 msgstr "Паралельний 2"
 
-#: src/gnome2/preferences_dialog.c:2168 src/gnome2/setup_druid.c:864
+#: src/gnome2/preferences_dialog.c:2169 src/gnome2/setup_druid.c:864
 msgid "Parallel 3"
 msgstr "Паралельний 3"
 
-#: src/gnome2/preferences_dialog.c:2187 src/gnome2/setup_druid.c:857
+#: src/gnome2/preferences_dialog.c:2188 src/gnome2/setup_druid.c:857
 msgid "Parallel 4"
 msgstr "Паралельний 4"
 
-#: src/gnome2/preferences_dialog.c:2207 src/gnome2/setup_druid.c:850
+#: src/gnome2/preferences_dialog.c:2208 src/gnome2/setup_druid.c:850
 msgid "Parallel 5"
 msgstr "Паралельний 5"
 
-#: src/gnome2/preferences_dialog.c:2235
+#: src/gnome2/preferences_dialog.c:2236
 msgid "<b>Miscellaneous Modules</b>"
 msgstr "<b>Інші модулі</b>"
 
-#: src/gnome2/preferences_dialog.c:2246 src/gnome2/setup_druid.c:997
+#: src/gnome2/preferences_dialog.c:2247 src/gnome2/setup_druid.c:997
 msgid "Daily Devotional"
 msgstr "Щоденні читання"
 
-#: src/gnome2/preferences_dialog.c:2266 src/gnome2/setup_druid.c:972
+#: src/gnome2/preferences_dialog.c:2267 src/gnome2/setup_druid.c:972
 msgid "Hebrew Lexicon"
 msgstr "Лексикон івриту"
 
-#: src/gnome2/preferences_dialog.c:2282 src/gnome2/preferences_dialog.c:2329
+#: src/gnome2/preferences_dialog.c:2283 src/gnome2/preferences_dialog.c:2330
 msgid ""
 "Which Greek Lexicon to display in Dictionary/Lexicon window when a link or "
 "word is clicked"
@@ -1686,26 +1760,26 @@ msgstr ""
 "Котрий грецький лексикон відображати у вікні Словник/Лексикон при клацанні "
 "на ланці чи слові"
 
-#: src/gnome2/preferences_dialog.c:2289
+#: src/gnome2/preferences_dialog.c:2290
 msgid "Hebrew Lexicon Viewer"
 msgstr "Переглядач лексикону іврита"
 
-#: src/gnome2/preferences_dialog.c:2307
+#: src/gnome2/preferences_dialog.c:2308
 msgid ""
 "Which Hebrew Lexicon to display in viewer when a link or word is clicked"
 msgstr ""
 "Який лексикон івриту відображати у переглядачі при клацанні на ланці або "
 "слові"
 
-#: src/gnome2/preferences_dialog.c:2314 src/gnome2/setup_druid.c:948
+#: src/gnome2/preferences_dialog.c:2315 src/gnome2/setup_druid.c:948
 msgid "Greek Lexicon"
 msgstr "Грецький лексикон"
 
-#: src/gnome2/preferences_dialog.c:2337
+#: src/gnome2/preferences_dialog.c:2338
 msgid "Greek Lexicon Viewer"
 msgstr "Переглядач грецького лексикона"
 
-#: src/gnome2/preferences_dialog.c:2355
+#: src/gnome2/preferences_dialog.c:2356
 msgid "Which Greek Lexicon to display in viewer when a link or word is clicked"
 msgstr ""
 "Який грецький лексикон відображати у переглядачі при клацанні на ланці або "
@@ -2207,36 +2281,61 @@ msgstr "Закладки"
 msgid "Verse List"
 msgstr "Список віршів"
 
-#: src/gnome2/studypad_dialog.c:96
+#: src/gnome2/splash.c:538
+msgid "Loading settings"
+msgstr ""
+
+#: src/gnome2/splash.c:556
+msgid "Building Interface"
+msgstr ""
+
+#: src/gnome2/splash.c:573
+#, fuzzy
+msgid "Starting Sword"
+msgstr "Ініціалізація GnomeSword"
+
+#: src/gnome2/studypad.c:483
 msgid "StudyPad"
 msgstr "Конспект"
 
-#: src/gnome2/toolbar_nav.c:354
+#: src/gnome2/toolbar_nav.c:390
 msgid "Move backwards through history"
 msgstr "Перейти назад в історії"
 
-#: src/gnome2/toolbar_nav.c:376
+#: src/gnome2/toolbar_nav.c:412
 msgid "Move foward through history"
 msgstr "Перейти вперед в історії"
 
-#: src/gnome2/toolbar_nav.c:403
+#: src/gnome2/toolbar_nav.c:439
 msgid "Select a Book of the Bible"
 msgstr "Виберіть книгу Біблії"
 
-#: src/gnome2/toolbar_nav.c:434
+#: src/gnome2/toolbar_nav.c:470
 msgid "Change Chapter"
 msgstr "Змінити розділ"
 
-#: src/gnome2/toolbar_nav.c:468
+#: src/gnome2/toolbar_nav.c:504
 msgid "Change Verse"
 msgstr "Змінити вірш"
 
-#: src/gnome2/toolbar_nav.c:503
+#: src/gnome2/toolbar_nav.c:539
 #, fuzzy
 msgid "Enter a Verse reference in Book 1:1 format and press Return"
 msgstr ""
 "Введіть посилання на вірш в форматі Книга 1:1 і натисніть Enter або кнопку "
 "Перейти до вірша"
+
+#~ msgid "Lower Workbook"
+#~ msgstr "Нижня робоча частина"
+
+#~ msgid "Commentaries, Personal Comments and StudyPad"
+#~ msgstr "Коментарі, персональні коментарі та конспект"
+
+#~ msgid "Lower workbook"
+#~ msgstr "Нижню робочу частину"
+
+#~ msgid "Dictionary/Lexicon and generic books"
+#~ msgstr "Словник/Лексикон і типові книги"
 
 #~ msgid "Toggle sync with main window"
 #~ msgstr "Відключити синхронізацію з головним вікном"
@@ -2273,9 +2372,6 @@ msgstr ""
 
 #~ msgid "Insert word into Personal Dictionary"
 #~ msgstr "Вставити слово у персональний словник"
-
-#~ msgid "Insert word"
-#~ msgstr "Вставити слово"
 
 #~ msgid "Progress"
 #~ msgstr "Поступ"
