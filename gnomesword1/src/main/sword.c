@@ -34,7 +34,7 @@
 #include "main/settings.h"
 #include "main/lists.h"
  
-#include "backend/search_.h"
+#include "backend/search.h"
 #include "backend/sword.h"
 #include "backend/interlinear.h"
 #include "backend/bibletext_.h"
@@ -45,29 +45,6 @@
 #include "backend/properties.h"
 #include "backend/shortcutbar.h"
 #include "backend/bookmarks.h"
-
-
-
-/******************************************************************************
- * Name
- *  search_percent_update
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   void search_percent_update(char percent, void *userData)	
- *
- * Description
- *    updates the progress bar during search
- *
- * Return value
- *   void
- */ 
-
-void search_percent_update(char percent, void *userData)
-{
-	gui_search_appbar_update(percent, userData);
-}
 
 
 /******************************************************************************
@@ -270,26 +247,6 @@ void save_properties(gboolean use_default)
 }
 
 
-/******************************************************************************
- * Name
- *  do_search
- *
- * Synopsis
- *   #include "sword.h"
- *
- *   GList *do_search(gpointer *usr_data)	
- *
- * Description
- *    
- *
- * Return value
- *  GList * 
- */ 
-
-GList *do_search(gpointer *usr_data)
-{
-	return backend_do_search(usr_data);
-}
 
 
 /******************************************************************************
@@ -601,4 +558,25 @@ void init_sword(void)
 void shutdown_sword(void)
 {
 	backend_shutdown();
+}
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+char *get_striptext(char *mod_name, char *key)
+{
+	return backend_get_striptext(mod_name, key);
 }

@@ -58,7 +58,7 @@
 #include "backend/commentary_.h"
 #include "backend/bibletext_.h"
 #include "backend/percomm_.h"
-#include "backend/search_.h"
+//#include "backend/search.h"
 #include "backend/interlinear.h"
 
 typedef map < string, string > modDescMap;
@@ -280,7 +280,7 @@ GList *backend_get_books(void)
 	GList *glist = NULL;
 
 	/*
-	   * Load Bible books.
+	 * Load Bible books.
 	 */
 
 	for (int i = 0; i <= 1; ++i) {
@@ -311,7 +311,7 @@ void backend_save_module_key(char *mod_name, char *key)
 	char buf[256], conffile[256];
 	struct dirent *ent;
 
-	sprintf(buf, "%s", mainMgr->configPath);
+	strcpy(buf, mainMgr->configPath);
 	dir = opendir(buf);
 	if (dir) {		//-- find and update .conf file
 		rewinddir(dir);
@@ -698,4 +698,31 @@ int backend_check_for_module(char * mod_name)
 		return 1;
 	}
 	return 0;
+}
+
+
+/******************************************************************************
+ * Name
+ *   backend_get_striptext
+ *
+ * Synopsis
+ *   #include "sword.h"
+ *
+ *   char *backend_get_striptext(char *mod_name, char *key)	
+ *
+ * Description
+ *   return formated text for a verse
+ *
+ * Return value
+ *   char *
+ */
+
+char *backend_get_striptext(char *mod_name, char *key)
+{
+	SWModule *mod = mainMgr->Modules[mod_name];
+	if (mod)
+		mod->SetKey(key);
+	else
+		return NULL;
+	return strdup((char *) mod->StripText());
 }

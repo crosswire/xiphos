@@ -25,7 +25,7 @@ extern "C" {
 	
 #include <gnome.h>
 
-	
+gchar * remove_linefeeds(gchar * buf);	
 GtkWidget *gui_lookup_widget(GtkWidget * widget,
 				  const gchar * widget_name);
 

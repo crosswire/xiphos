@@ -31,8 +31,7 @@
 
 #include "main/spell.h"
 
-PspellManager * spell_checker;
-
+static PspellManager * spell_checker;
 
 /******************************************************************************
  * Name
@@ -234,9 +233,9 @@ int init_spell(void)
 	g_print("spelling \"%s\"\n",pspell_config_retrieve(config, "spelling"));
 	g_print("module \"%s\"\n",pspell_config_retrieve(config, "module"));
 	g_print("path \"%s\"\n",pspell_config_retrieve(config, "master"));
+	delete_pspell_config(config);
 	
 	return 1;
-	
 }
 
 
@@ -260,7 +259,7 @@ int kill_spell(void)
 {	
 	pspell_manager_save_all_word_lists(spell_checker); 
 	pspell_manager_clear_session(spell_checker);
-	delete_pspell_manager(spell_checker);
+	//delete_pspell_manager(spell_checker);
 	return 1;
 }
 

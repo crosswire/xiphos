@@ -51,6 +51,7 @@ libgui_a_SOURCES =  \
     main_menu.c \
     percomm.c \
     preferences_dialog.c \
+    search_dialog.c \
     setup_druid.c \
     shortcutbar_dialog.c \
     shortcutbar_main.c \

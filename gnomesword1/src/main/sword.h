@@ -47,7 +47,6 @@ extern "C" {
 
 /*** function prototypes ***/
 
-void search_percent_update(char percent, void *userData);
 int get_mod_type(char * mod_name);
 char *get_module_font_name(char *mod_name);
 char *get_module_font_size(char *mod_name);
@@ -59,7 +58,6 @@ const char *get_book_from_key(char *key);
 int get_chapter_from_key(char *key);
 int get_verse_from_key(char *key);
 void save_properties(gboolean use_default);
-GList *do_search(gpointer *usr_data);
 GList *get_verse_list(char* module_name, char *verse_list);
 int module_is_locked(char * mod_name);
 char *get_valid_key(char *key);
@@ -73,7 +71,7 @@ char *get_mod_about_info(char * mod_name);
 int check_for_module(char * mod_name);
 void init_sword(void);
 void shutdown_sword(void);
-
+char *get_striptext(char *mod_name, char *key);
 #ifdef __cplusplus
 }
 #endif

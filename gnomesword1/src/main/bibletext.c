@@ -57,6 +57,10 @@ char *get_bibletext_text(char *mod_name, char *key)
 	return backend_get_bibletext_text(mod_name, key);
 }
 
+char *get_bibletext_striptext(char *mod_name, char *key)
+{
+	return backend_get_bibletext_striptext(mod_name, key);
+}
 /******************************************************************************
  * Name
  *  text_get_description
