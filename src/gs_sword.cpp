@@ -73,7 +73,7 @@ typedef map<string, string> modDescMap;
 /***********************************************************************************************
  * Sword globals 
 ***********************************************************************************************/
-//SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
+SWDisplay *chapDisplay; /* to display modules using GtkText a chapter at a time */
 SWDisplay 
 	*entryDisplay, /* to display modules using GtkText a verse at a time */
 	*comp1Display, /* to display modules using GtkText a verse at a time */
@@ -196,10 +196,11 @@ initSWORD(GtkWidget *mainform)
 	SectionMap::iterator 
 		sit; //-- iteratior
 	ConfigEntMap::iterator 
-		cit; //-- iteratior
+		eit; //-- iteratior
 	int   	
 		i, //-- counter
 		j; //-- counter	
+	gchar *font;
 	
   	g_print("Initiating Sword\n"); 
 	
@@ -219,7 +220,7 @@ initSWORD(GtkWidget *mainform)
 	curdictMod      = NULL; 	
 	percomMod     = NULL;
 	
-	//chapDisplay     = 0;// set in create
+	chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
 	comp1Display  = 0;// set in create
 	comp2Display  = 0;// set in create
@@ -248,7 +249,7 @@ initSWORD(GtkWidget *mainform)
 	NEtext =  lookup_widget(mainform,"textComments"); //-- get note edit widget
         //-- setup displays for sword modules
 	GTKEntryDisp::__initialize(); //-- this is for gtktext
-	//chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
+	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));
 	percomDisplay = new  GTKPerComDisp(lookup_widget(mainform,"textComments"));
 	UTF8Display = new GTKutf8ChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
@@ -263,9 +264,9 @@ initSWORD(GtkWidget *mainform)
 				gtk_main_iteration ();
 	}
 	g_print("Loading SWORD Moudules\n"); 
-	
+	font = "roman";
 	for(it = mainMgr->Modules.begin(); it != mainMgr->Modules.end(); it++){		
-		descriptionMap[string((char *)(*it).second->Description())] = string((char *)(*it).second->Name());
+		descriptionMap[string((char *)(*it).second->Description())] = string((char *)(*it).second->Name());		
 		if(!strcmp((*it).second->Type(), "Biblical Texts")){
 			curMod = (*it).second;
 			sit = mainMgr->config->Sections.find((*it).second->Name()); 
@@ -274,7 +275,7 @@ initSWORD(GtkWidget *mainform)
 			++textpages;
 			biblemods = g_list_append(biblemods,curMod->Name());
 			sbbiblemods = g_list_append(sbbiblemods,curMod->Description());
-			langlisttext = g_list_append(langlisttext, addrenderfiltersSWORD(curMod, section));			
+			langlisttext = g_list_append(langlisttext, addrenderfiltersSWORD(curMod, section));	
 			curMod->Disp(UTF8Display);
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules		
 			curcomMod = (*it).second;
@@ -368,13 +369,14 @@ changeVerseSWORD(gchar *ref) //-- change main text, interlinear texts and commen
 			currRef = g_strdup(curMod->KeyText());
 			curMod->SetKey(ref);
 			//-- this ugly bit of code is to keep us form going to Gen 1:1 if key is not a real verse
-			if(!stricmp(curMod->KeyText(),"Genesis 1:1")) 
+			if(!stricmp(curMod->KeyText(),"Genesis 1:1")){
 				if(!stricmp(ref,"Gen 1:1") || !stricmp(ref,"Genesis 1:1") || !stricmp(ref,"Gene 1:1")){	
 				}else{
 					ref=currRef;
 					curMod->SetKey(ref);
 					strcpy(current_verse,ref);
-				}			
+				}	
+			}
 			swKey = curMod->KeyText();			
 			if(addhistoryitem){
 			        if(strcmp(settings->currentverse,historylist[historyitems-1].verseref))
@@ -565,8 +567,8 @@ shutdownSWORD(void)  //-- close down GnomeSword program
 	if (lattoutf8 != 0)
 		delete lattoutf8;
 	//-- delete Sword displays
-	/*if (chapDisplay)    
-		delete chapDisplay;*/
+	if (chapDisplay)    
+		delete chapDisplay;
 	if (entryDisplay)
 		delete entryDisplay;	
 	if(comp1Display)
