@@ -1,3 +1,9 @@
+2002-03-26 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* removed sw_utility.* it was no longer used
+	* reworked saveshortcutbarSW() in sw_shortcutbar.cpp to remove
+	  annoying unbalanced bracket warning during make
+
 2002-03-26 Victor Porton <porton@narod.ru>
 
 	* fixed crash if an interlinear module is NULL

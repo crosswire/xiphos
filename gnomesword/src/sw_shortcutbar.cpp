@@ -44,11 +44,10 @@
 #include <sys/stat.h>
 #include <dirent.h> 
 #include <string.h>
-#include  <gal/shortcut-bar/e-shortcut-bar.h>
+//#include  <gal/shortcut-bar/e-shortcut-bar.h>
 
 #include "gs_gnomesword.h"
 #include "sw_shortcutbar.h"
-#include "sw_utility.h"
 #include "sw_display.h"
 #include "gs_shortcutbar.h"
 #include "support.h"
@@ -178,14 +177,20 @@ saveshortcutbarSW(gchar *filename, gchar *group_name, gint group_num, gchar *lar
 	
 	sbconf = new SWConfig(conffile);
 	emap = sbconf->Sections["ROOT"];
-	number_of_items = e_shortcut_model_get_num_items(E_SHORTCUT_BAR(settings->shortcut_bar)->model, group_num);
+	
+	number_of_items = gs_shortcut_model_get_num_items(settings->shortcut_bar, 
+						group_num);	
+	//e_shortcut_model_get_num_items(E_SHORTCUT_BAR(settings->shortcut_bar)->model, group_num);
 	
 	for (j = 0; j < number_of_items; j++) {
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+		gs_shortcut_model_get_item_info(settings->shortcut_bar,
+						group_num,
+						j, &item_url, &item_name);
+		/*e_shortcut_model_get_item_info(E_SHORTCUT_BAR
 					       (settings->shortcut_bar)->model,
 					       group_num,
 					       j, &item_url, &item_name,
-					       NULL);
+					       NULL);*/
 		sprintf(buf, "branch%d", j);
 		emap.erase(buf); emap.insert(ConfigEntMap::value_type(buf, (gchar *) item_name));	
 		g_print("saving list item: %s\n",(gchar*)item_name);

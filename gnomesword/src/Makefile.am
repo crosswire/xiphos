@@ -53,10 +53,10 @@ COMMON_SOURCE =  \
     gs_mainmenu_cb.h\
     gs_menu.c \
     gs_menu.h \
-    gs_preferences_dlg.c \
-    gs_preferences_dlg.h \
     gs_popup_cb.c \
     gs_popup_cb.h \
+    gs_preferences_dlg.c \
+    gs_preferences_dlg.h \
     gs_setup.c \
     gs_setup.h \
     gs_shortcutbar.c \
@@ -90,8 +90,6 @@ COMMON_SOURCE =  \
     sw_shortcutbar.h \
     sw_sword.cpp \
     sw_sword.h \
-    sw_utility.cpp\
-    sw_utility.h \
     sw_verselist_sb.cpp \
     sw_verselist_sb.h\
     sw_viewcomm_dlg.cpp \

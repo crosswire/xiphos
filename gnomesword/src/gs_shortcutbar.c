@@ -312,7 +312,9 @@ static void on_about_item_activate(GtkMenuItem * menuitem, gpointer data)
 				       (shortcut_bar)->model,
 				       group_num,
 				       item_num,
-				       &item_url, &item_name, NULL);
+					&item_url, 
+					&item_name, 
+					NULL);
 	memset(modName, 0, 16);
 	modNameFromDesc(modName, item_name);
 	showmoduleinfoSWORD(modName,FALSE);
@@ -2375,3 +2377,30 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 	}
 	g_list_free(glist);
 }
+
+void gs_shortcut_model_get_item_info(GtkWidget *shortcutbar_widget,
+					gint group_num,
+					gint item_num,
+					gchar **item_url,
+					gchar **item_name)
+{
+	e_shortcut_model_get_item_info(E_SHORTCUT_BAR
+					       (shortcutbar_widget)->model,
+					       group_num,
+					       item_num, 
+						item_url, 
+						item_name,
+					       NULL);
+
+	
+}
+
+gint gs_shortcut_model_get_num_items(GtkWidget *shortcutbar_widget, 
+						gint group_num)
+{
+	return e_shortcut_model_get_num_items(E_SHORTCUT_BAR
+			(shortcutbar_widget)->model, group_num);
+	
+}	
+
+/******   end of file   ******/

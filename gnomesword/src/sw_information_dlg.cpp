@@ -39,7 +39,6 @@
 
 #include "gs_gnomesword.h"
 #include "sw_information_dlg.h"
-#include "sw_utility.h"
 #include "sw_display.h"
 
 SWDisplay *VIDDisplay;  /* to display modules in view comm dialog */
