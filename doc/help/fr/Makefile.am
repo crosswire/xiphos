@@ -4,7 +4,7 @@ entities = \
 	search.xml	 start.xml	studypad.xml 
 figdir = figures
 docname = gnomesword-manual
-lang = C
-omffile = gnomesword-manual-C.omf
+lang = fr
+omffile = gnomesword-manual-fr.omf
 include $(top_srcdir)/xmldocs.make
 dist-hook: app-dist-hook
