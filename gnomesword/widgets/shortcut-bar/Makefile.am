@@ -1,4 +1,4 @@
-
+if SHORTCUTBAR
 noinst_LIBRARIES = libshortcut-bar.a
 
 INCLUDES = 					\
@@ -21,5 +21,5 @@ libshortcut_bar_a_SOURCES = 	\
 	e-shortcut-model.h	\
 	e-vscrolled-bar.c	\
 	e-vscrolled-bar.h
-
+endif
 
