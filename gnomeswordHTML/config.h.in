@@ -1,0 +1,60 @@
+/* config.h.in.  Generated automatically from configure.in by autoheader.  */
+
+/* Define if you need to in order for stat and other things to work.  */
+#undef _POSIX_SOURCE
+
+/* Define to the type of arg1 for select(). */
+#undef SELECT_TYPE_ARG1
+
+/* Define to the type of args 2, 3 and 4 for select(). */
+#undef SELECT_TYPE_ARG234
+
+/* Define to the type of arg5 for select(). */
+#undef SELECT_TYPE_ARG5
+
+/* Define if you have the ANSI C header files.  */
+#undef STDC_HEADERS
+
+/* Define if you can safely include both <sys/time.h> and <time.h>.  */
+#undef TIME_WITH_SYS_TIME
+
+#undef ENABLE_NLS
+#undef HAVE_CATGETS
+#undef HAVE_GETTEXT
+#undef HAVE_LC_MESSAGES
+#undef HAVE_STPCPY
+#undef HAVE_LIBSM
+#undef PACKAGE_LOCALE_DIR
+#undef PACKAGE_DATA_DIR
+#undef PACKAGE_SOURCE_DIR
+
+/* Define if you have the <X11/SM/SMlib.h> header file.  */
+#undef HAVE_X11_SM_SMLIB_H
+
+/* Name of package */
+#undef PACKAGE
+
+/* Version number of package */
+#undef VERSION
+
+/* Define if you want to use spell checking */
+#undef WITH_SPC
+
+/* Define if you want to use aspell */
+#undef USE_ASPELL
+
+/* Define if you want to use ispell */
+#undef USE_ISPELL
+
+/* Define if you want to use printing w/gnome-print */
+#undef USE_GNOMEPRINT
+
+/* Define if you want to use the GtkHTML */
+#undef USE_GTKHTML
+
+/* Define if you want to use spell checking */
+#undef USE_SPELL
+
+/* Define if you want to use the shortcutbar */
+#undef USE_SHORTCUTBAR
+
