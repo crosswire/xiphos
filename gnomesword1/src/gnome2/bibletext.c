@@ -53,26 +53,220 @@
 #include "main/sword.h"
 #include "main/xml.h"
 
-static void on_notebook_text_switch_page(GtkNotebook * notebook,
-					 GtkNotebookPage * page,
-					 gint page_num, GList * tl);
+static void create_menu(GdkEventButton * event);
+//widgets.notebook_text
+
 /******************************************************************************
- * externs
+ * Name
+ *  update_text_global_ops
+ *
+ * Synopsis
+ *   #include "gui/bibletext.h"
+ *
+ *   void update_text_global_ops(gchar * option, gboolean choice)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
  */
 
-extern gboolean gsI_isrunning;
+void gui_update_text_global_ops(gchar * option, gboolean choice)
+{
+	/*g_warning("gui_update_text_global_ops");
+	save_module_options(settings.MainWindowModule, option, choice);
+	gui_display_text(settings.currentverse);*/
+}
 
-
-TEXT_DATA *cur_t;
-
-GtkTextBuffer *text_buffer;
 /******************************************************************************
- * globals to this file only 
+ * Name
+ *  global_option_red_words
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   void on_global_option(GtkMenuItem * menuitem,
+				      GBS_DATA * g)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
  */
-static GList *text_list;
-static gboolean display_change = TRUE;
-static gint text_last_page;
 
+static void on_global_option(GtkMenuItem * menuitem, gpointer data)
+{
+	save_module_options(settings.MainWindowModule, (gchar *) data,
+			    GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gui_display_text(settings.currentverse);
+}
+
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "gui/.h"
+ *
+ *   
+ *
+ * Description
+ *   add global module options to popup menus
+ *
+ * Return value
+ *   void
+ */
+
+void gui_popup_pm_text(gchar * mod_name, GdkEventButton * event)
+{
+	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
+	create_menu(event);	//create_pm_text(ops,event);
+	g_free(ops);
+
+}
+
+
+
+
+void gui_set_text_mod_and_key(gchar * mod_name, gchar * val_key)
+{
+/*	if(cur_t_new->mod_name)
+		g_free(cur_t_new->mod_name);			
+		cur_t_new->mod_name = g_strdup(settings.MainWindowModule);			
+			gui_display_text(val_key);			
+			break;	
+		}
+		tmp = g_list_next(tmp);
+	}*/
+	gui_display_text(val_key);
+
+}
+
+
+void gui_display_text(const gchar * val_key)
+{
+	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
+/*
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
+				1);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text),
+				0);*/
+	chapter_display(widgets.html_text,
+			settings.MainWindowModule,
+			ops, (gchar *) val_key, TRUE);
+	g_free(ops);
+}
+
+
+
+/**
+ **
+ **
+ **
+ **
+ **
+ **
+ **/
+
+void on_about_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_display_about_module_dialog(settings.MainWindowModule, FALSE);
+}
+
+
+void on_item1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_html_print(widgets.html_text, FALSE);
+}
+
+
+void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_copy_html(widgets.html_text);
+}
+
+
+void on_find1_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_find_dlg(widgets.html_text, settings.MainWindowModule, FALSE, NULL);
+}
+
+
+void on_item2_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+void
+on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	gui_set_module_font(settings.MainWindowModule);
+	gui_display_text(settings.currentverse);
+}
+
+
+void
+on_use_current_dictionary_activate(GtkMenuItem * menuitem,
+				   gpointer user_data)
+{
+	gchar *dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
+	if (dict_key) {
+		if (settings.inViewer)
+			gui_display_dictlex_in_sidebar(settings.
+						      DictWindowModule,
+						      dict_key);
+		if (settings.inDictpane)
+			gui_change_module_and_key(settings.
+						  DictWindowModule,
+						  dict_key);
+		g_free(dict_key);
+	}
+}
+
+
+void
+on_unlock_module_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+void
+on_all_readings_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+void
+on_primary_reading_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+
+}
+
+
+void
+on_secondary_reading_activate(GtkMenuItem * menuitem,
+			      gpointer user_data)
+{
+
+}
 
 
 /******************************************************************************
@@ -98,10 +292,10 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
 	
-	if(!cur_t->html) return;
+	//if(!cur_t->html) return;
 	
 	mod_name = module_name_from_description(dict_mod_description);
-	dict_key = gui_get_word_or_selection(cur_t->html, FALSE);
+	dict_key = gui_get_word_or_selection(widgets.html_text, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(mod_name,
@@ -115,571 +309,12 @@ void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  set_page_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void set_page_text(gchar * modname, GList * text_list)	
- *
- * Description
- *   change text module by finding page number from module name
- *
- * Return value
- *   void
- */
-
-static void set_page_text(gchar * modname, GList * text_list)
-{
-	gint page = 0;
-	TEXT_DATA *t = NULL;
-
-	text_list = g_list_first(text_list);
-	if(modname) {
-		while (text_list != NULL) {
-			t = (TEXT_DATA *) text_list->data;
-			if (!strcmp(t->mod_name, modname))
-				break;
-			++page;
-			text_list = g_list_next(text_list);
-		}
-	}
-	else {
-		t = (TEXT_DATA *) text_list->data;
-		page = 0;
-	}
-	
-	if (page)
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_text), page);
-	else
-		on_notebook_text_switch_page(GTK_NOTEBOOK
-					     (widgets.notebook_text),
-					     NULL, page, text_list);
-	text_last_page = page;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),
-				   settings.text_tabs);
-}
-
-/******************************************************************************
- * Name
- *  gui_set_text_mod_and_key
- *
- * Synopsis
- *   #include "bibletext.h"
- *   
- *   void gui_set_text_mod_and_key(gchar *mod, gchar *key)	
- *
- * Description
- *   sets the text module and key.  Primarily added for use in tabbed browsing
- *
- * Return value
- *   void
- */
-void gui_set_text_mod_and_key(gchar *mod, gchar *key)
-{
-	set_page_text(mod, text_list);
-	gui_display_text(key);
-}
-
-/******************************************************************************
- * Name
- *  text_page_changed
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void text_page_changed(gint page_num, TEXT_DATA *t)	
- *
- * Description
- *    take care of non gui stuff on notebook page change
- *
- * Return value
- *   void
- */
-
-static void text_page_changed(gint page_num, TEXT_DATA * t)
-{
-	/*
-	 * remember new module name
-	 */
-	settings.MainWindowModule = t->mod_name;
-	xml_set_value("GnomeSword", "modules", "bible", t->mod_name);
-
-	/*
-	 * remember page number
-	 */
-	text_last_page = page_num;
-	/*
-	 * display new module with current verse
-	 */
-	if (display_change) {
-		gui_set_text_page_and_key(page_num,
-					  settings.currentverse);
-	}
-}
-
-
-/******************************************************************************
- * Name
- *  on_notebook_text_switch_page
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *   void on_notebook_text_switch_page(GtkNotebook * notebook,
- *				  GtkNotebookPage * page,
- *				  gint page_num, GList * tl)	
- *
- * Description
- *   sets gui to new sword module
- *
- * Return value
- *   void
- */
-
-static void on_notebook_text_switch_page(GtkNotebook * notebook,
-					 GtkNotebookPage * page,
-					 gint page_num, GList * tl)
-{
-	TEXT_DATA *t;
-	
-	if(page_num == settings.parallel_page)
-		return;
-	/*
-	 * get data structure for new module 
-	 */
-	t = (TEXT_DATA *) g_list_nth_data(tl, page_num);
-	/*
-	 * create pane if it does not already exist
-	 */
-	if (!t->frame) {
-		gui_add_new_text_pane(t);
-	}
-	/*
-	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
-	 */
-	cur_t = t;
-	set_module(0, t->mod_name);
-	/*
-	 * do work that's non gui
-	 */
-	text_page_changed(page_num, t);
-	/*
-	 * set program title current text module name 
-	 */
-	gui_change_window_title(t->mod_name);
-	/*
-	 * set search label to current text module 
-	 */
-//	gui_set_search_label();
-	/*
-	 *  keep showtabs menu item current 
-	 */
-	if(!t->is_rtol)
-	GTK_CHECK_MENU_ITEM(t->showtabs)->active = settings.text_tabs;
-
-	gui_set_text_frame_label(t);
-	if(!t->is_rtol)
-		widgets.html_text = t->html;
-/*
-	if(!t->is_rtol)
-		gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_text));
-	else
-		gtk_notebook_popup_disable(GTK_NOTEBOOK(widgets.notebook_text));
-*/
-}
-
-/******************************************************************************
- * Name
- *  on_button_release_event
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *  gboolean on_button_release_event(GtkWidget * widget,
-			    GdkEventButton * event, TEXT_DATA * t)	
- *
- * Description
- *   called when mouse button is clicked in html widget
- *
- * Return value
- *   gboolean
- */
-
-static gboolean on_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					TEXT_DATA * t)
-{
-	extern gboolean in_url;
-	gchar *key;
-	const gchar *url;
-	gchar *buf = NULL;
-
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name 
-	 */
-	gui_change_window_title(t->mod_name);
-
-	switch (event->button) {
-	case 1:
-		if (!in_url) {
-			key = gui_button_press_lookup(t->html);
-			if (key) {
-				gchar *dict = NULL;
-				if (settings.useDefaultDict)
-					dict =
-					    g_strdup(settings.
-						     DefaultDict);
-				else
-					dict =
-					    g_strdup(settings.
-						     DictWindowModule);
-				if (settings.inViewer)
-					gui_display_dictlex_in_sidebar
-					    (dict, key);
-				if (settings.inDictpane)
-					gui_change_module_and_key(dict,
-								  key);
-				g_free(key);
-				if (dict)
-					g_free(dict);
-			}
-		}
-		break;
-	case 2:
-		if (!in_url) 
-			break;
-		url = html_engine_get_link_at (GTK_HTML(t->html)->engine,
-					 event->x,
-					 event->y);
-		if (*url == '*') {
-			++url;
-			buf = g_strdup(url);
-			gui_open_verse_in_new_tab(buf);
-			g_free(buf);
-		}
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-
-static gboolean textview_button_release_event(GtkWidget * widget,
-					GdkEventButton * event,
-					TEXT_DATA * t)
-{
-	extern gboolean in_url;
-	gchar *key;
-
-	settings.whichwindow = MAIN_TEXT_WINDOW;
-	/*
-	 * set program title to current text module name 
-	 */
-	gui_change_window_title(t->mod_name);
-
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
-	return FALSE;
-}
-
-
-
-static gint tag_event_handler (GtkTextTag *tag, GtkWidget *widget,
-	GdkEvent *event, const GtkTextIter *iter, gpointer user_data)
-{
-	gint char_index;
-	
-	char_index = gtk_text_iter_get_offset (iter);
-	//printf ("offset = %d", char_index);
-  switch (event->type)
-    {
-    case GDK_MOTION_NOTIFY:
-      printf ("Motion event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_BUTTON_PRESS:
-      printf ("Button press at char %d tag `%s'\n",
-             char_index, tag->name);
-	    switch(event->button.button){
-		    case 1:
-			//return do_something_with_tag(tag, iter, user_data);
-		        break;
-		    case 2:
-		    case 3:
-		        break;
-	    
-	}
-	
-    	return TRUE;	
-      break;
-        
-    case GDK_2BUTTON_PRESS:
-      printf ("Double click at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_3BUTTON_PRESS:
-      printf ("Triple click at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_BUTTON_RELEASE:
-      printf ("Button release at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-        
-    case GDK_KEY_PRESS:
-    case GDK_KEY_RELEASE:
-      printf ("Key event at char %d tag `%s'\n",
-              char_index, tag->name);
-    	return TRUE;
-      break;
-      
-    case GDK_ENTER_NOTIFY:
-      printf ("enter event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-	    
-    case GDK_LEAVE_NOTIFY:
-      printf ("leave event at char %d tag `%s'\n",
-             char_index, tag->name);
-    	return TRUE;
-      break;
-	    
-    case GDK_PROPERTY_NOTIFY:
-    case GDK_SELECTION_CLEAR:
-    case GDK_SELECTION_REQUEST:
-    case GDK_SELECTION_NOTIFY:
-    case GDK_PROXIMITY_IN:
-    case GDK_PROXIMITY_OUT:
-    case GDK_DRAG_ENTER:
-    case GDK_DRAG_LEAVE:
-    case GDK_DRAG_MOTION:
-    case GDK_DRAG_STATUS:
-    case GDK_DROP_START:
-    case GDK_DROP_FINISHED:
-    	return FALSE;
-    default:
-    	return FALSE;
-      break;
-    }    
-    return FALSE;
-}
-
-static void setup_tag (GtkTextTag *tag, gpointer user_data)
-{
-	g_signal_connect (G_OBJECT (tag),
-		    "event",
-		    G_CALLBACK (tag_event_handler),
-		    user_data);
-}
-
-static void create_text_tags(GtkTextBuffer * buffer, gchar * rtl_font)
-{
-	GtkTextTag *tag;
-	GdkColor color;
-	GdkColor color2;
-	GdkColor color_red;
-	GdkColor colorLink;
-	PangoFontDescription *font_desc;
-	
-		
-		
-	/* verse number tag verse style*/
-	tag = gtk_text_buffer_create_tag (buffer, "verseNumber", NULL);
-	setup_tag (tag, buffer);  
-	color.red = color.green = 0;
-	color.blue = 0xffff;
-		"scale", PANGO_SCALE_XX_SMALL,
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);	
-		
-	/* current verse color tag */	
-	tag = gtk_text_buffer_create_tag (buffer, "fg_currentverse", NULL);
-	color.blue = 0;
-	color.green = 0xbbbb;
-	color.red = 0;
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-		
-	/*  verse color tag */	
-	tag = gtk_text_buffer_create_tag (buffer, "fg_verse", NULL);
-	color.blue = 0;
-	color.green = 0;
-	color.red = 0;
-	g_object_set (G_OBJECT (tag),
-                "foreground_gdk", &color,
-                NULL);
-		
-	/* right to left tag */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
-        g_object_set (G_OBJECT (tag),
-		//"font", rtl_font,
-                "wrap_mode", GTK_WRAP_WORD,
-                "direction", GTK_TEXT_DIR_RTL,
-                "indent", 0,
-                "left_margin", 0,
-                "right_margin", 0,
-                NULL);	
-		
-	/* right to left font */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
-        g_object_set (G_OBJECT (tag),
-		"font", rtl_font,
-                NULL);	
-		
-	/* large tag */
-	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
-        g_object_set (G_OBJECT (tag),
-		"scale", PANGO_SCALE_XX_LARGE,
-                NULL);			
-}
-	
-
-/******************************************************************************
- * Name
- *  create_pane
- *
- * Synopsis
- *   #include "bibletext.h"
- *   void create_pane(TEXT_DATA * t)
- *  	
- *
- * Description
- *   create a text pane(window) for each text module
- *
- * Return value
- *   void
- */
-
-static void create_pane(TEXT_DATA * t)
-{
-	GtkWidget *vbox;
-	GtkWidget *frame_text;
-	GtkWidget *scrolledwindow;
-	gchar *gdk_font = NULL;
-	gchar file[250];
-
-	
-	
-	t->frame = gtk_frame_new(NULL);
-	gtk_widget_show(t->frame);
-	gtk_box_pack_start(GTK_BOX(t->vbox), t->frame, TRUE,
-			   TRUE, 0); 
-	gtk_frame_set_shadow_type(GTK_FRAME(t->frame),GTK_SHADOW_NONE);
-
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox);
-	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
-
-	frame_text = gtk_frame_new(NULL);
-	gtk_widget_show(frame_text);
-	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE,
-			   TRUE, 0);
-
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(frame_text),
-			  scrolledwindow);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-
-	if (!t->is_rtol) {
-		t->html = gtk_html_new();
-		gtk_widget_show(t->html);
-		gtk_container_add(GTK_CONTAINER(scrolledwindow),
-				  t->html);
-		gtk_html_load_empty(GTK_HTML(t->html));
-		g_signal_connect(GTK_OBJECT(t->html), "link_clicked",
-				   G_CALLBACK(gui_link_clicked),
-				   (TEXT_DATA *) t);
-		g_signal_connect(GTK_OBJECT(t->html), "on_url",
-				   G_CALLBACK(gui_url),
-				   GINT_TO_POINTER(TEXT_TYPE));
-		g_signal_connect(GTK_OBJECT(t->html),
-				   "button_release_event",
-				   G_CALLBACK
-				   (on_button_release_event),
-				   (TEXT_DATA *) t);
-	}
-
-	else {  /* use gtktextview for right to left text */
-		sprintf(file, "%s/fonts.conf", settings.gSwordDir);
-		t->text = gtk_text_view_new ();
-		gtk_widget_show (t->text);
-		gtk_container_add (GTK_CONTAINER (scrolledwindow), t->text);
-		gtk_text_view_set_editable (GTK_TEXT_VIEW (t->text), FALSE);
-		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (t->text));
-		gdk_font = get_conf_file_item(file, t->mod_name, "GdkFont");
-		//g_warning("font = %s",gdk_font);
-		create_text_tags(text_buffer,gdk_font);
-		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (t->text), GTK_WRAP_WORD);
-		
-		g_signal_connect(GTK_OBJECT(t->text),
-				   "button_release_event",
-				   G_CALLBACK
-				   (textview_button_release_event),
-				   (TEXT_DATA *) t);
-		if(gdk_font) g_free(gdk_font);
-	}
-}
-
-/******************************************************************************
- * Name
- *  gui_set_text_frame_label
- *
- * Synopsis
- *   #include "_bibletext.h"
- *
- *   void gui_set_text_frame_label(TEXT_DATA * t)	
- *
- * Description
- *   sets text frame label to module name or null
- *
- * Return value
- *   void
- */
-
-void gui_set_text_frame_label(TEXT_DATA * t)
-{
-	/*
-	 * set frame label to NULL if tabs are showing
-	 * else set frame label to module name
-	 */
-	if (settings.text_tabs || settings.browsing)
-		gtk_frame_set_label(GTK_FRAME(t->frame), NULL);
-	else
-		gtk_frame_set_label(GTK_FRAME(t->frame), t->mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  gui_update_text_global_ops
+ *  
  *
  * Synopsis
  *   #include "gui/bibletext.h"
  *
- *   void gui_update_text_global_ops(gchar * option, gboolean choice)	
+ *   void (GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
  *   
@@ -688,296 +323,459 @@ void gui_set_text_frame_label(TEXT_DATA * t)
  *   void
  */
 
-void gui_update_text_global_ops(gchar * option, gboolean choice)
+static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
-	save_module_options(cur_t->mod_name, option, 
-				    choice);
-	if(!cur_t->is_rtol) 
-		chapter_display(cur_t->html, 
-			cur_t->mod_name,
-			cur_t->ops, cur_t->key, TRUE);
-	else
-		chapter_display_textview(cur_t->text, 
-			cur_t->mod_name,
-			cur_t->ops, cur_t->key, TRUE);
+	if (settings.use_percomm_dialog)
+		gui_open_commentary_editor((gchar *) user_data);
+	else {
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.workbook_lower),
+				      settings.percomm_page);
+		gui_set_percomm_page((gchar *) user_data);
+	}
 }
-
 
 /******************************************************************************
  * Name
- *  gui_set_text_page_and_key
+ *  on_view_mod_activate
  *
  * Synopsis
- *   #include "bibletext.h"
+ *   #include "gui/bibletext.h"
  *
- *  void gui_set_text_page_and_key(gint page_num, gchar * key)	
+ *   void on_view_mod_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
  * Description
- *   change text module notebook page and display new key (reference)
+ *   show a different text module by changing the notebook page
  *
  * Return value
  *   void
  */
 
-void gui_set_text_page_and_key(gint page_num, gchar * key)
+static void on_view_mod_activate(GtkMenuItem * menuitem,
+				 gpointer user_data)
 {
-	page_num;
-	
-	/*
-	 * we don't want backend_dispaly_text to be
-	 * called by on_notebook_text_switch_page
-	 */
-	display_change = FALSE;
-	if (text_last_page != page_num) {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_text),
-				      page_num);
+
+	gchar *module_name = NULL;
+
+	module_name = module_name_from_description((gchar *) user_data);
+	if(module_name) {
+		gui_change_module_and_key(module_name, settings.currentverse);
+		g_free(module_name);
 	}
-	
-	if(settings.parallel_page == gtk_notebook_get_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_text))) {
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_text),
-				      page_num);					      
-	}
-	
-	if (!cur_t->is_locked) {
-		if (!cur_t->is_rtol)
-			chapter_display(cur_t->html,
-					cur_t->mod_name,
-					cur_t->ops, key, TRUE);
-		else
-			chapter_display_textview(cur_t->text,
-						cur_t->mod_name,
-						cur_t->ops, key, TRUE);
-	}
-	display_change = TRUE;
-	cur_t->key = settings.currentverse;
 }
 
-/******************************************************************************
- * Name
- *  gui_display_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *   void gui_display_text(gchar * key)
- *  	
- *
- * Description
- *   call chapter_display and pass html wigdet, module name and key
- *
- * Return value
- *   void
- */
 
-void gui_display_text(gchar * key)
+static GnomeUIInfo view_text_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("item1"),
+	 NULL,
+	 (gpointer) on_item1_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-book-green",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo file3_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Open Module"),
+	 NULL,
+	 view_text_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_PRINT_ITEM(on_print1_activate, NULL),
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo note_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("item2"),
+	 NULL,
+	 (gpointer) on_item2_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo edit3_menu_uiinfo[] = {
+	GNOMEUIINFO_MENU_COPY_ITEM(on_copy2_activate, NULL),
+	GNOMEUIINFO_MENU_FIND_ITEM(on_find1_activate, NULL),
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Note"),
+	 NULL,
+	 note_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo all_readings_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("All Readings"),
+	 NULL,
+	 (gpointer) on_all_readings_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Primary Reading"),
+	 NULL,
+	 (gpointer) on_primary_reading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Secondary Reading"),
+	 NULL,
+	 (gpointer) on_secondary_reading_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo variants_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_RADIOITEMS, NULL, NULL, all_readings_uiinfo,
+	 NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, 0,
+	 (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo module_options_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Set Module Font"),
+	 NULL,
+	 (gpointer) on_set_module_font_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-select-font",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Words of Christ in Red"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Words of Christ in Red",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM,
+	 N_("Strong's Numbers"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Strong's Numbers",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE,
+	 NULL,
+	 0,
+	 (GdkModifierType) 0,
+	 NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Morphological Tags"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Morphological Tags",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Footnotes"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Footnotes",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Greek Accents"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Greek Accents",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Lemmas"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Lemmas",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Scripture Cross-references"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Scripture Cross-references",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Vowel Points"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Hebrew Vowel Points",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Hebrew Cantillation"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Hebrew Cantillation",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Headings"),
+	 NULL,
+	 (gpointer) on_global_option,
+	 (gpointer) "Headings",	/* not seen by user */
+	 NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Variants"),
+	 NULL,
+	 variants_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo lookup_selection_menu_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("Use Current Dictionary"),
+	 NULL,
+	 (gpointer) on_use_current_dictionary_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+static GnomeUIInfo menu1_uiinfo[] = {
+	{
+	 GNOME_APP_UI_ITEM, N_("About"),
+	 NULL,
+	 (gpointer) on_about_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-about",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_SUBTREE, N_("File"),
+	 NULL,
+	 file3_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-open",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Edit"),
+	 NULL,
+	 edit3_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-dnd",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("_Module Options"),
+	 NULL,
+	 module_options_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-ok",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_SUBTREE, N_("Lookup Selection"),
+	 NULL,
+	 lookup_selection_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gtk-find",
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Unlock This Module"),
+	 NULL,
+	 (gpointer) on_unlock_module_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, "gnome-stock-authentication",
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_SEPARATOR,
+	{
+	 GNOME_APP_UI_TOGGLEITEM, N_("Show Tabs"),
+	 NULL,
+	 (gpointer) on_show_tabs_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
+	GNOMEUIINFO_END
+};
+
+static void create_menu(GdkEventButton * event)
 {
-	if (!cur_t->is_locked)
-		if (!cur_t->is_rtol)
-			chapter_display(cur_t->html,
-					cur_t->mod_name,
-					cur_t->ops, key, TRUE);
-		else {
-			/* right to left text */
-			chapter_display_textview(cur_t->text,
-				cur_t->mod_name,
-				cur_t->ops, key, TRUE);
-		}
+	GtkWidget *menu1;
+	GtkWidget *lookup_selection_menu;
+	GtkWidget *usecurrent;
+	GtkWidget *view_menu;
+	GtkWidget *separator;
+	GtkWidget *edit_per_menu;
+	GnomeUIInfo *menuitem;
+	gchar *mod_name = settings.MainWindowModule;
+	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
+	menu1 = gtk_menu_new();
+	gnome_app_fill_menu(GTK_MENU_SHELL(menu1), menu1_uiinfo,
+			    NULL, FALSE, 0);
+	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+				       (all_readings_uiinfo[0].widget),
+				       TRUE);
+	gtk_widget_hide(module_options_menu_uiinfo[2].widget);	//"words_in_red"         
+	gtk_widget_hide(module_options_menu_uiinfo[3].widget);	//"strongs_numbers"      
+	gtk_widget_hide(module_options_menu_uiinfo[4].widget);	//"/morph_tags"  
+	gtk_widget_hide(module_options_menu_uiinfo[5].widget);	//"footnotes"    
+	gtk_widget_hide(module_options_menu_uiinfo[6].widget);	// "greek_accents"       
+	gtk_widget_hide(module_options_menu_uiinfo[7].widget);	//"lemmas"       
+	gtk_widget_hide(module_options_menu_uiinfo[8].widget);	//"cross_references"    
+	gtk_widget_hide(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points" 
+	gtk_widget_hide(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation"        
+	gtk_widget_hide(module_options_menu_uiinfo[11].widget);	//"headings"    
+	gtk_widget_hide(module_options_menu_uiinfo[12].widget);	//"variants"   
+	gtk_widget_hide(menu1_uiinfo[6].widget);	//"unlock_module"
+
+
+
+	view_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(file3_menu_uiinfo[0].widget),
+				  view_menu);
+	
+	gui_add_mods_2_gtk_menu(TEXT_DESC_LIST, view_menu,
+				(GCallback) on_view_mod_activate);
+	
+	edit_per_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(edit3_menu_uiinfo[2].widget),
+				  edit_per_menu);
+				  
+	gui_add_mods_2_gtk_menu(PERCOMM_LIST, edit_per_menu,
+				(GCallback) edit_percomm);
+				
+								
+	
+	lookup_selection_menu = gtk_menu_new();
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu1_uiinfo[5].widget),
+				  lookup_selection_menu);
+	
+	usecurrent =
+	    gtk_menu_item_new_with_label(_("Use Current Dictionary"));
+	gtk_widget_show(usecurrent);
+	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
+			  usecurrent);
+
+	separator = gtk_menu_item_new();
+	gtk_widget_show(separator);
+	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
+			  separator);
+	gtk_widget_set_sensitive(separator, FALSE);
+	
+	gui_add_mods_2_gtk_menu(DICT_DESC_LIST, lookup_selection_menu,
+				(GCallback)gui_lookup_bibletext_selection);
+	
 			
-	else if (cur_t->cipher_key) {
-		gui_module_is_locked_display(cur_t->html,
-					     cur_t->mod_name,
-					     cur_t->cipher_key);
-
+			
+				
+	if ((check_for_global_option(settings.MainWindowModule,
+				     "GBFRedLetterWords")) ||
+	    (check_for_global_option(settings.MainWindowModule,
+				     "OSISRedLetterWords"))) {
+		gtk_widget_show(module_options_menu_uiinfo[2].widget);	//"words_in_red");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[2].
+				    widget)->active = ops->words_in_red;
 	}
-	cur_t->key = settings.currentverse;
-}
+	if ((check_for_global_option
+	     (settings.MainWindowModule, "GBFStrongs"))
+	    ||
+	    (check_for_global_option
+	     (settings.MainWindowModule, "ThMLStrongs"))
+	    ||
+	    (check_for_global_option
+	     (settings.MainWindowModule, "OSISStrongs"))) {
+		gtk_widget_show(module_options_menu_uiinfo[3].widget);	//"strongs_numbers");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[3].
+				    widget)->active = ops->strongs;
+	}
+	if ((check_for_global_option(mod_name, "GBFMorph")) ||
+	    (check_for_global_option(mod_name, "ThMLMorph")) ||
+	    (check_for_global_option(mod_name, "OSISMorph"))) {
+		gtk_widget_show(module_options_menu_uiinfo[4].widget);	//"/morph_tags");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[4].
+				    widget)->active = ops->morphs;
+	}
+	if ((check_for_global_option(mod_name, "GBFFootnotes")) ||
+	    (check_for_global_option(mod_name, "ThMLFootnotes")) ||
+	    (check_for_global_option(mod_name, "OSISFootnotes"))) {
+		gtk_widget_show(module_options_menu_uiinfo[5].widget);	//"footnotes");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[5].
+				    widget)->active = ops->footnotes;
+	}
+	if (check_for_global_option(mod_name, "UTF8GreekAccents")) {
+		gtk_widget_show(module_options_menu_uiinfo[6].widget);	// "greek_accents");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[6].
+				    widget)->active = ops->greekaccents;
+	}
+	if (check_for_global_option(mod_name, "ThMLLemma")) {
+		gtk_widget_show(module_options_menu_uiinfo[7].widget);	//"lemmas");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[7].
+				    widget)->active = ops->lemmas;
+	}
+	if (check_for_global_option(mod_name, "ThMLScripref") ||
+	    (check_for_global_option(mod_name, "OSISScripref"))) {
+		gtk_widget_show(module_options_menu_uiinfo[8].widget);	//"cross_references");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[8].
+				    widget)->active = ops->scripturerefs;
+	}
+	if (check_for_global_option(mod_name, "UTF8HebrewPoints")) {
+		gtk_widget_show(module_options_menu_uiinfo[9].widget);	//"hebrew_vowel_points");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[9].
+				    widget)->active = ops->hebrewpoints;
+	}
+	if (check_for_global_option(mod_name, "UTF8Cantillation")) {
+		gtk_widget_show(module_options_menu_uiinfo[10].widget);	//"hebrew_cantillation");
+		GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[10].
+				    widget)->active = ops->hebrewcant;
+	}
+	if (check_for_global_option(mod_name, "ThMLHeadings") ||
+	    (check_for_global_option(mod_name, "OSISHeadings"))) {
+		gtk_widget_show(module_options_menu_uiinfo[11].widget);	//"headings");
+		 GTK_CHECK_MENU_ITEM(module_options_menu_uiinfo[11].
+				    widget)->active = ops->headings;   
+	}
+	if (check_for_global_option(mod_name, "ThMLVariants")) {
+		gtk_widget_show(module_options_menu_uiinfo[12].widget);	//"variants");
 
-/******************************************************************************
- * Name
- *  gui_add_new_pane
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void gui_add_new_pane(TEXT_DATA * t)
- *
- * Description
- *   creates a text pane when user selects a new text module
- *
- * Return value
- *   void
- */
+		gtk_widget_show(all_readings_uiinfo[0].widget);	//"all_readings");
 
-void gui_add_new_text_pane(TEXT_DATA * t)
-{
-	GtkWidget *popupmenu;
+		gtk_widget_show(all_readings_uiinfo[1].widget);	//"primary_reading");
 
-	create_pane(t);
-	if (t->is_locked)
-		gui_module_is_locked_display(t->html, t->mod_name,t->cipher_key);
+		gtk_widget_show(all_readings_uiinfo[2].widget);	//"secondary_reading");
 		
-	popupmenu = gui_create_pm_text(t);
-	if (!t->is_rtol) 
-		gnome_popup_menu_attach(popupmenu, t->html, NULL);
-	else
-		gnome_popup_menu_attach(popupmenu, t->text, NULL);
-}
-
-/******************************************************************************
- * Name
- *  add_vbox_to_notebook
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void add_vbox_to_notebook(TEXT_DATA * t)
- *
- * Description
- *   adds a vbox and label to the text notebook for each text module
- *
- * Return value
- *   void
- */
-
-static void add_vbox_to_notebook(TEXT_DATA * t)
-{
-	GtkWidget *label;
-
-	t->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(t->vbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_text),
-			  t->vbox);
-
-
-	label = gtk_label_new(t->mod_name);
-	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_text),
-				   gtk_notebook_get_nth_page
-				   (GTK_NOTEBOOK(widgets.notebook_text),
-				    t->mod_num), label);
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
-					 (widgets.notebook_text),
-					 gtk_notebook_get_nth_page
-					 (GTK_NOTEBOOK
-					  (widgets.notebook_text),
-					  t->mod_num),
-					 (gchar *) t->mod_name);
-}
-
-
-/******************************************************************************
- * Name
- *  gui_setup_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void gui_setup_text(GList *mods)
- *
- * Description
- *   set up gui for sword text modules - return list of text module names
- *
- * Return value
- *   void
- */
-
-void gui_setup_text(GList * mods)
-{
-	GList *tmp = NULL;
-	gchar *modbuf;
-	TEXT_DATA *t;
-	gint count = 0;
-	
-	settings.parallel_page = g_list_length(mods);
-	text_list = NULL;
-	tmp = mods;
-	tmp = g_list_first(tmp);
-	while (tmp != NULL) {
-		t = g_new0(TEXT_DATA, 1);
-		t->ops = gui_new_globals();
-		//set_new_globals(t->ops);
-		t->mod_name = (gchar *) tmp->data;
-		t->mod_num = count;
-		t->search_string = NULL;
-		t->key = NULL;
-		t->cipher_key = NULL;
-		t->is_dialog = FALSE;
-		t->html = NULL;
-		t->is_rtol = is_module_rtl(t->mod_name);
-		if (has_cipher_tag(t->mod_name)) {
-			t->is_locked = module_is_locked(t->mod_name);
-			t->cipher_old = get_cipher_key(t->mod_name);
-		} else {
-			t->is_locked = 0;
-			t->cipher_old = NULL;
-		}
-		t->frame = NULL;
-		add_vbox_to_notebook(t);
-		text_list = g_list_append(text_list, (TEXT_DATA *) t);
-		++count;
-		tmp = g_list_next(tmp);
 	}
 
-	cur_t = t;
-	g_signal_connect(GTK_OBJECT(widgets.notebook_text),
-			   "switch_page",
-			   G_CALLBACK
-			   (on_notebook_text_switch_page), text_list);
-
-	modbuf = g_strdup(xml_get_value("modules", "bible"));
-	if(modbuf) {
-		if(check_for_module(modbuf))
-			set_page_text(modbuf, text_list);
-		else if(check_for_module(t->mod_name))
-			set_page_text(t->mod_name, text_list);
-	}
-	else 
-		if(check_for_module(t->mod_name))
-			set_page_text(t->mod_name, text_list);
-
-	g_free(modbuf);
-	g_list_free(tmp);
+	/* Store pointers to all widgets, for use by lookup_widget(). */
+	/* GLADE_HOOKUP_OBJECT_NO_REF (menu1, menu1, "menu1");
+	 * menu1_uiinfo[0].widget, "about");
+	 * menu1_uiinfo[1].widget, "separator4");
+	 * menu1_uiinfo[2].widget, "file3");
+	 * file3_menu_uiinfo[0].widget, "view_text");
+	 * view_text_menu_uiinfo[0].widget, "item1");
+	 * file3_menu_uiinfo[1].widget, "separator8");
+	 * file3_menu_uiinfo[2].widget, "print1");
+	 * menu1_uiinfo[3].widget, "edit3");
+	 * edit3_menu_uiinfo[0].widget, "copy2");
+	 * edit3_menu_uiinfo[1].widget, "find1");
+	 * edit3_menu_uiinfo[2].widget, "note");
+	 * note_menu_uiinfo[0].widget, "item2");
+	 * menu1_uiinfo[4].widget, "module_options");
+	 * module_options_menu_uiinfo[0].widget, "set_module_font");
+	 * module_options_menu_uiinfo[1].widget, "separator5");
+	 * menu1_uiinfo[5].widget, "lookup_selection");
+	 * lookup_selection_menu_uiinfo[0].widget, "use_current_dictionary");
+	 * lookup_selection_menu_uiinfo[1].widget, "separator6");
+	 * menu1_uiinfo[7].widget, "separator7");
+	 * menu1_uiinfo[8].widget, "show_tabs");
+	 */
+	gnome_popup_menu_do_popup_modal(menu1, NULL,
+					NULL, event, NULL,
+					widgets.html_text);
+	gtk_widget_destroy(menu1);
+	g_free(ops);
 }
 
-/******************************************************************************
- * Name
- *  gui_shutdown_text
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *  void gui_shutdown_text(void)	
- *
- * Description
- *   shut down text module support clean mem
- *
- * Return value
- *   void
- */
 
-void gui_shutdown_text(void)
-{
-	text_list = g_list_first(text_list);
-	while (text_list != NULL) {
-		TEXT_DATA *t = (TEXT_DATA *) text_list->data;
-		/* 
-		 * free any cipher keys 
-		 */
-		if (t->cipher_key)
-			g_free(t->cipher_key);
-		if (t->cipher_old)
-			g_free(t->cipher_old);
-		/* 
-		 * free global options 
-		 */
-		g_free(t->ops);
-		/* 
-		 * free each TEXT_DATA item created 
-		 */
-		g_free((TEXT_DATA *) text_list->data);
-		text_list = g_list_next(text_list);
-	}
-	g_list_free(text_list);
-}
+
+/* end of file */

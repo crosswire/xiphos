@@ -241,7 +241,7 @@ void on_verse_style1_activate(GtkMenuItem * menuitem,
 
 	if (settings.havebible) {
 		/* show the change */
-		gui_display_text(settings.currentverse);
+//		gui_display_text(settings.currentverse);
 	}
 }
 

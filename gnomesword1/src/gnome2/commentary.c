@@ -613,7 +613,7 @@ void gui_setup_commentary(GList * mods)
 	while (tmp != NULL) {
 		modname = (gchar *) tmp->data;
 		c = g_new0(COMM_DATA, 1);
-		c->ops = gui_new_globals();
+		c->ops = gui_new_globals(modname);
 		set_new_globals(c->ops);
 		c->frame = NULL;
 		c->ec = NULL;

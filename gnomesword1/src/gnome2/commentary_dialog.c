@@ -1086,7 +1086,7 @@ void gui_open_commentary_dialog(gchar * mod_name)
 	vc = g_new0(COMM_DATA, 1);
 
 	vc = g_new0(COMM_DATA, 1);
-	vc->ops = gui_new_globals();
+	vc->ops = gui_new_globals(mod_name);
 	set_new_globals(vc->ops);
 	vc->ec = NULL;
 	vc->dialog = NULL;
@@ -1150,7 +1150,7 @@ void gui_open_commentary_editor(gchar * mod_name)
 	}
 
 	vc = g_new0(COMM_DATA, 1);
-	vc->ops = gui_new_globals();
+	vc->ops = gui_new_globals(mod_name);
 	set_new_globals(vc->ops);
 	vc->ec = gs_html_editor_control_data_new();
 	vc->dialog = NULL;

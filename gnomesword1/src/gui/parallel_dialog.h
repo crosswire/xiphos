@@ -26,6 +26,7 @@
 extern "C" {
 #endif
 
+gchar *gui_update_controls_parallel(const gchar * ref);
 void gui_undock_parallel_page(void);
 void gui_btnDockInt_clicked(GtkButton *button, gpointer user_data);
 GtkWidget *gui_create_parallel_dialog(void);
