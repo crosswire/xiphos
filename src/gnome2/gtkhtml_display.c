@@ -279,12 +279,12 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 
 /******************************************************************************
  * Name
- *   chapter_display
+ *   chapter_display_html
  *
  * Synopsis
  *   #include "gui/gtkhtml_display.h"
  *
- *   void chapter_display(GtkWidget * html_widget, gchar * module_name, 
+ *   void chapter_display_html(GtkWidget * html_widget, gchar * module_name, 
  *					      		 gchar *key)
  *
  * Description
@@ -647,19 +647,19 @@ static void chapter_display_textview(GtkWidget * textview, gchar * mod_name,
  *   void
  */
 
-void chapter_display(GtkWidget * widget, gchar * mod_name,
+void chapter_display(GtkWidget * text_widget, gchar * mod_name,
 		     GLOBAL_OPS * ops, gchar * key,
 		     gboolean use_globals)
 {
 	if(is_module_rtl(mod_name)) {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text),
 				1);
-		chapter_display_textview(widgets.textview, mod_name,
+		chapter_display_textview(text_widget, mod_name,
 		     			ops, key, use_globals);
 	} else {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text),
 				0);
-		chapter_display_html(widgets.html_text, mod_name,
+		chapter_display_html(text_widget, mod_name,
 			     ops, key, use_globals);
 	}
 }

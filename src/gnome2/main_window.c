@@ -659,7 +659,7 @@ static gboolean on_text_button_release_event(GtkWidget * widget,
 					 event->y);
 		if(strstr(url,"sword://")) {
 			gchar **work_buf = g_strsplit (url,"/",4);			
-			gui_open_verse_in_new_tab(work_buf[3]);
+			gui_open_passage_in_new_tab(work_buf[3]);
 			g_strfreev(work_buf);
 		}
 		break;
