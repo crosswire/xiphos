@@ -1419,18 +1419,19 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	
 	/* add icons to sidebar listview */
 	icon_pixbuf = NULL;
-	icon_pixbuf =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/gnome-fontsel.xpm", &error);
-	if (!icon_pixbuf) {
+/*	icon_pixbuf = gtk_widget_render_icon(widgets.app,
+                                             "gtk-select-font", //GNOME_STOCK_BOOK_BLUE, 
+                                             GTK_ICON_SIZE_DIALOG,
+                                             NULL);*/
+	/*if (!icon_pixbuf) {
 		fprintf(stderr, "pixmap file error: %s\n",
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}
+	}*/
 	add_row("Font Colors", icon_pixbuf, store, 0);
 
-	icon_pixbuf = NULL;
+/*	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 				     "/gs2-48x48.png", &error);
@@ -1439,10 +1440,10 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}
+	}*/
 	add_row("Misc Settings", icon_pixbuf, store, 1);
 
-	icon_pixbuf = NULL;
+/*	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
 				     "/gs2-48x48.png", &error);
@@ -1451,9 +1452,9 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}
+	}*/
 	add_row("Layout", icon_pixbuf, store, 2);
-
+/*
 	icon_pixbuf = NULL;
 	icon_pixbuf =
 	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR "/sword3.png",
@@ -1463,7 +1464,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			error->message);
 		g_error_free(error);
 		error = NULL;
-	}
+	}*/
 	add_row("Sword Modules", icon_pixbuf, store, 3);
 /***************************************************** end sidebar */
 
