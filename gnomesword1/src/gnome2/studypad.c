@@ -337,7 +337,7 @@ static gint release(GtkWidget * widget, GdkEventButton * event,
  *   gint
  */
 
-static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
+static gint html_key_pressed(GtkWidget * html, GdkEventKey * event,
 			     GSHTMLEditorControlData * ecd)
 {
 	ecd->changed = TRUE;

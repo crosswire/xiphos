@@ -1,3 +1,8 @@
+2003-10-21  Terry <tbiggs@users.sf.net>
+
+	* bumped gnome2 port to 0.9.dev8
+
+
 2003-10-17  Terry <tbiggs@users.sf.net>
 
 	* changed bookmarks ctree to treeview

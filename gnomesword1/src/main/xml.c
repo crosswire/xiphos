@@ -46,7 +46,7 @@ typedef struct _bookmark_data BOOKMARK_DATA;
 static BOOKMARK_DATA *es;
 static xmlDocPtr xml_settings_doc;
 static xmlNodePtr section_ptr;
-
+static xmlDocPtr bookmark_doc;
 
 /******************************************************************************
  * Name
@@ -321,6 +321,95 @@ void xml_save_gnode_to_bookmarks(GNode * gnode, gchar * file_buf)
 	xmlSaveFile(xml_filename, root_doc);
 	xmlFreeDoc(root_doc);
 	g_free(file_buf);
+}
+
+/******************************************************************************
+ * Name
+ *   xml_write_bookmark_doc
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_write_bookmark_doc(const xmlChar * xml_filename)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void xml_write_bookmark_doc(const xmlChar * xml_filename)
+{	
+	g_print("\nsaving = %s\n", xml_filename);
+	xmlSaveFormatFile(xml_filename, bookmark_doc,1);
+}
+
+/******************************************************************************
+ * Name
+ *   xml_load_bookmark_file
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   void xml_load_bookmark_file(char * bookmark_file)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void xml_free_bookmark_doc(void)
+{
+	xmlFreeDoc(bookmark_doc);
+}
+
+
+/******************************************************************************
+ * Name
+ *   xml_load_bookmark_file
+ *
+ * Synopsis
+ *   #include "main/xml.h"
+ *
+ *   xmlNodePtr xml_load_bookmark_file(char * bookmark_file)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   xmlNodePtr
+ */
+
+xmlNodePtr xml_load_bookmark_file(const xmlChar * bookmark_file) 
+{
+	
+	xmlNodePtr cur = NULL;
+
+	bookmark_doc = xmlParseFile(bookmark_file);
+
+	if (bookmark_doc == NULL) {
+		fprintf(stderr, "Document not parsed successfully. \n");
+		return;
+	}
+
+	cur = xmlDocGetRootElement(bookmark_doc);
+	if (cur == NULL) {
+		fprintf(stderr, "empty document \n");
+		return;
+	}
+
+	if (xmlStrcmp(cur->name, (const xmlChar *) "SwordBookmarks")) {
+		fprintf(stderr,
+			"wrong type, root node != SwordBookmarks\n");
+		xmlFreeDoc(bookmark_doc);
+		return;
+	}
+
+	cur = cur->xmlChildrenNode;
+	return cur;
 }
 
 

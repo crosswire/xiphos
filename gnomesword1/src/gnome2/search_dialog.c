@@ -2546,7 +2546,8 @@ static GtkWidget *create_search_dialog(void)
 				       (scrolledwindow68),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
-
+				       
+/**********************************************************************/
 	search.module_lists = gtk_clist_new(2);
 	gtk_widget_show(search.module_lists);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow68),
@@ -2566,6 +2567,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(label237);
 	gtk_clist_set_column_widget(GTK_CLIST(search.module_lists), 1,
 				    label237);
+/**********************************************************************/
 
 	frame67 = gtk_frame_new(NULL);
 	gtk_widget_show(frame67);
