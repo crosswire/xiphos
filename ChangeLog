@@ -1,5 +1,6 @@
 2000-12-06 Terry Biggs <tbiggs@users.sourceforge.net> 
 
+	* release 0.3.7	
 	* shortcut bar bug fixed	
 	panesize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
         if(panesize > 0 )
