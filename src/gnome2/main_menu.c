@@ -465,13 +465,8 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 			settings.studypad_dialog_exist =
 			    gui_open_studypad_dialog(settings.
 						     studypadfilename);
-		} else {
-			gtk_notebook_set_current_page(GTK_NOTEBOOK
-					      (widgets.workbook_lower),
-					      settings.studypad_page);
-		}
+		} 
 	}
-
 }
 
 

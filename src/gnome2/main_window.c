@@ -133,9 +133,9 @@ void gui_show_hide_dicts(gboolean choice)
 {
 	settings.showdicts = choice;
 	if (choice == FALSE) {
-		gtk_widget_hide(widgets.workbook_lower);
+		gtk_widget_hide(widgets.box_dict);
 	} else {
-		gtk_widget_show(widgets.workbook_lower);
+		gtk_widget_show(widgets.box_dict);
 	}
 	gui_set_bible_comm_layout();
 }
@@ -287,6 +287,8 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 			settings.CommWindowModule = xml_get_value(
 						"modules", "comm");
 			gui_set_comm_label(settings.CommWindowModule);
+			gui_change_window_title(settings.CommWindowModule);
+			//gui_set_commentary_mod_and_key(module_name, key);
 			gui_change_verse(key);
 		}
 		break;
@@ -311,17 +313,10 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 					      module_name,
 					      NULL,
 					      key?key:NULL);
-			page_num =
-			    get_module_number(module_name, BOOK_MODS);
-			if (key)
-				gui_set_book_page_and_key(page_num,
-							  key);
-			else {
-				gtk_notebook_set_current_page(GTK_NOTEBOOK
-						      (widgets.
-						       notebook_gbs),
-						      page_num);
-			}
+			main_set_book_mod(module_name, atol(key));
+			g_warning("gui_change_module_and_key = %s",key);
+			gui_set_book_mod_and_key(module_name, key);
+			gui_change_window_title(settings.book_mod);
 		}
 		break;
 	}
@@ -385,7 +380,7 @@ void gui_change_verse(const gchar * key)
 	/*
 	 * set commentary module to current verse
 	 */
-	if (settings.havecomm) {
+	if (settings.havecomm && settings.comm_showing) {
 		gui_display_commentary(val_key);
 		gui_keep_comm_dialog_in_sync(val_key);
 	}
@@ -722,7 +717,7 @@ void create_mainwindow(void)
 
 
 	/*
-	 * commentary notebook
+	 * commentary and book pane
 	 */
 	widgets.box_comm = gui_create_commentary_pane();
 	gtk_paned_pack2(GTK_PANED(widgets.hpaned),
@@ -731,7 +726,7 @@ void create_mainwindow(void)
 	/*
 	 * lower_workbook
 	 */
-	widgets.workbook_lower = gtk_notebook_new();
+/*	widgets.workbook_lower = gtk_notebook_new();
 	gtk_widget_show(widgets.workbook_lower);
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.workbook_lower), FALSE);
@@ -740,13 +735,15 @@ void create_mainwindow(void)
 
 	gtk_paned_pack2(GTK_PANED(widgets.vpaned),
 			widgets.workbook_lower, TRUE, TRUE);
-
+*/
 	/*
 	 * dict/lex
          */
 	widgets.box_dict = gui_create_dictionary_pane();        
-        gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
-			  widgets.box_dict);
+        /*gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
+			  widgets.box_dict);*/
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned),
+			widgets.box_dict, TRUE, TRUE);
 	/*
 	 * end  dict/lex
 	 */
@@ -755,7 +752,7 @@ void create_mainwindow(void)
 	 * gbs notebook
 	 */
 
-	widgets.notebook_gbs = gtk_notebook_new();
+/*	widgets.notebook_gbs = gtk_notebook_new();
 	gtk_widget_show(widgets.notebook_gbs);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),
 			  widgets.notebook_gbs);
@@ -767,6 +764,7 @@ void create_mainwindow(void)
 	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_gbs));
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.notebook_gbs), FALSE);
+*/	
 	/*
 	 * end gbs
 	 */

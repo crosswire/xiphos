@@ -23,17 +23,14 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#ifdef USE_GNOME2
+#include <gnome.h>
 #include <glib-2.0/glib.h>
-#else
-#include <glib-1.2/glib.h>
-#endif
 
 #include "main/gbs.h"
+#include "main/settings.h"
+#include "main/xml.h"
+
+#include "gui/widgets.h"
 
 #include "backend/sword.h"
 //#include "backend/tree.hh"
@@ -202,10 +199,29 @@ char *get_book_key(char * book_name)
  *   void
  */ 
  
-void change_book(char * mod_name, unsigned long offset)
+void main_set_book_mod(char * mod_name, unsigned long offset)
 {
+	gchar * buf;
+	
+	xml_set_value("GnomeSword", "modules", "book", mod_name);
+	settings.book_mod = xml_get_value( "modules", "book");
+	
+	buf = g_strdup_printf("%lu", offset);
+	g_warning("main_set_book_mod = %s",buf);
+	xml_set_value("GnomeSword", "keys", "offset", buf);
+	settings.book_offset = atol(xml_get_value( "keys", "offset"));
+	g_free(buf);
+	
+	backend_set_module(3, mod_name);
 	backend_set_treekey(mod_name, offset);
 }
 
 
-
+void main_display_gbs(char * mod_name, unsigned long offset)
+{
+	entry_display(widgets.html_comm, mod_name,
+			get_text_from_offset(mod_name, offset), 
+			backend_get_key_from_offset (offset), 
+			FALSE);
+	
+}

@@ -223,12 +223,13 @@ static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
 	if (settings.use_percomm_dialog)
 		gui_open_commentary_editor((gchar *) user_data);
-	else {
+/*	else {
 		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.workbook_lower),
 				      settings.percomm_page);
 		gui_set_percomm_page((gchar *) user_data);
 	}
+*/
 }
 
 

@@ -200,50 +200,23 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 
 void gui_popup_pm_comm(gchar * mod_name, GdkEventButton * event)
 {
-	GLOBAL_OPS *ops = gui_new_globals(settings.MainWindowModule);
-	create_menu(event);	//create_pm_text(ops,event);
-	g_free(ops);
+	create_menu(event);
 }
-
-
-
 
 
 void gui_set_commentary_mod_and_key(gchar * mod_name, gchar * key)
 {	
-	gchar *text_str = NULL;
-	gchar *strkey;
-	//GLOBAL_OPS *ops = gui_new_globals(settings.CommWindowModule);
-/*
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
-				1);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_text),*/
-	
-	strkey = get_valid_key(key);
-	
-	text_str = get_commentary_text(settings.CommWindowModule, strkey);
-	entry_display(widgets.html_comm, 
-			settings.CommWindowModule, 
-			text_str, 
-			strkey, 
-			TRUE);
-	//g_free(ops);
+
 }
 
 
 void gui_display_commentary(gchar * key)
 {
-	//GLOBAL_OPS *ops = gui_new_globals(settings.CommWindowModule);
-	gchar *strkey = get_valid_key(key);	
-	gchar *text_str = get_commentary_text(settings.CommWindowModule, strkey);
+	gchar *strkey = get_valid_key(key);
 	
-	entry_display(widgets.html_comm, 
-			settings.CommWindowModule, 
-			text_str, 
-			strkey, 
-			TRUE);
-	
-	//g_free(ops);
+	settings.comm_showing = TRUE;	
+	set_commentary_key(settings.CommWindowModule, strkey);
+	main_display_commentary();
 }
 
 
@@ -273,7 +246,8 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 	case 2:
 		break;
 	case 3:
-		gui_popup_pm_comm(settings.CommWindowModule, event);
+		if(settings.comm_showing)
+			gui_popup_pm_comm(settings.CommWindowModule, event);
 		break;
 	}
 	return FALSE;
@@ -305,13 +279,19 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	gchar *key;
 	const gchar *url;
 	gchar *buf = NULL;
-
-	settings.whichwindow = COMMENTARY_WINDOW;
+	
 	/*
 	 * set program title to current text module name
 	 */
-	gui_change_window_title(settings.CommWindowModule);
-
+	if(settings.comm_showing) {
+		settings.whichwindow = COMMENTARY_WINDOW;
+		gui_change_window_title(settings.CommWindowModule);
+	}
+	else {
+		settings.whichwindow = BOOK_WINDOW;
+		gui_change_window_title(settings.book_mod);
+	}
+	
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -355,8 +335,6 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
-
-
 
 
 /******************************************************************************
@@ -423,6 +401,9 @@ GtkWidget *gui_create_commentary_pane(void)
 				   G_CALLBACK
 				   (on_comm_button_release_event),
 				   NULL);
+	g_signal_connect(GTK_OBJECT(widgets.html_comm),
+			   "url_requested",
+			   G_CALLBACK(url_requested), NULL);
 	return box_comm;
 }
 
