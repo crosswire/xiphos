@@ -35,8 +35,6 @@
 
 #include "gui/bibletext.h"
 #include "gui/gnomesword.h"
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_dialog.h"
 #include "gui/preferences_dialog.h"
 #include "gui/utilities.h"
 #include "gui/gbs.h"
@@ -428,10 +426,10 @@ static void applyoptions(void)
 		//display_new_font_color_and_size();
 	}
 
-	if (updateSB) {
+/*	if (updateSB) {
 		gui_update_shortcut_bar();
 	}
-
+*/
 	gui_set_bible_comm_layout();
 	updatehtml = FALSE;
 	updateSB = FALSE;
@@ -455,7 +453,7 @@ static void applyoptions(void)
 
 static void on_dock_clicked(GtkButton * button, gpointer user_data)
 {
-	gui_attach_detach_shortcutbar();
+//	gui_attach_detach_shortcutbar();
 }
 
 /******************************************************************************

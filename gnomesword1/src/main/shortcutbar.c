@@ -177,13 +177,13 @@ void save_sb_iconsize(gchar * file_name, char *icons)
  *   void
  */
 
-void get_shortcut_item_info(gint group_num, gint item_num,
+/*void get_shortcut_item_info(gint group_num, gint item_num,
 			    gchar ** item_url, gchar ** item_name)
 {
 	gui_get_shortcut_item_info(group_num, item_num,
 				   item_url, item_name);
 
-}
+}*/
 
 
 /******************************************************************************
@@ -202,8 +202,8 @@ void get_shortcut_item_info(gint group_num, gint item_num,
  *   gint
  */
 
-gint get_num_shortcut_items(gint group_num)
+/*gint get_num_shortcut_items(gint group_num)
 {
 	return gui_get_num_shortcut_items(group_num);
 
-}
+}*/

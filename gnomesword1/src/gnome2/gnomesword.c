@@ -31,8 +31,6 @@
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/about_modules.h"
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
 #include "gui/gbs.h"
 #include "gui/gbs_dialog.h"
 #include "gui/bibletext.h"
@@ -143,7 +141,7 @@ void frontend_init(void)
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 	
-	gui_set_shortcutbar_porgram_start();
+	gui_set_sidebar_porgram_start();
 }
 
 
@@ -193,7 +191,7 @@ void frontend_display(void)
 	 * FIXME: maybe we need to move the devotional ? 
 	 */
 	if (settings.showdevotional) {
-		gui_display_devotional();
+		gui_display_devotional_in_sidebar();
 	}
 
 	g_print("done\n");

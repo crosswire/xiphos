@@ -29,8 +29,7 @@
 #include "gui/main_window.h"
 #include "gui/main_menu.h"
 #include "gui/preferences_dialog.h"
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
@@ -39,7 +38,6 @@
 #include "gui/html.h"
 #include "gui/utilities.h"
 #include "gui/about_modules.h"
-#include "gui/shortcutbar_dialog.h"
 #include "gui/gnomesword.h"
 #include "gui/search_dialog.h"
 #include "gui/studypad_dialog.h"
@@ -176,7 +174,7 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 void on_daily_devotion1_activate(GtkMenuItem * menuitem,
 				 gpointer user_data)
 {
-	gui_display_devotional();
+	gui_display_devotional_in_sidebar();
 }
 
 /******************************************************************************
@@ -219,19 +217,10 @@ void on_preferences1_activate(GtkMenuItem * menuitem,
 
 void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-/*	EShortcutBar *bar1;
-
-	bar1 = E_SHORTCUT_BAR(widgets.shortcutbar);
-	if (!settings.showshortcutbar) {
-		gui_shortcutbar_showhide();
-	}
-	e_group_bar_set_current_group_num(E_GROUP_BAR(bar1),
-					  settings.searchbargroup,
-					  TRUE);
-*/
 	if (!settings.showshortcutbar) 
-		gui_shortcutbar_showhide();
+		gui_sidebar_showhide();
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar), 2);
+	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),2);
 }
 
 /******************************************************************************
@@ -701,13 +690,13 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("Detach/Attach Shortcut Bar"),
 	 NULL,
-	 gui_attach_detach_shortcutbar, NULL, NULL,
+	 NULL, NULL, NULL, /*gui_attach_detach_shortcutbar*/
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Hide/Show Shortcut Bar"),
 	 NULL,
-	 gui_shortcutbar_showhide, NULL, NULL,
+	 gui_sidebar_showhide, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END

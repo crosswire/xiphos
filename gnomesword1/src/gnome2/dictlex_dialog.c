@@ -31,7 +31,7 @@
 #include "gui/dictlex_menu.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 
 #include "main/dictlex.h"
 #include "main/sword.h"
@@ -74,7 +74,7 @@ void gui_lookup_dictlex_dialog_selection
 	dict_key = gui_get_word_or_selection(cur_dlg->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name,
+			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);

@@ -36,8 +36,7 @@
 #include "gui/bibletext_menu.h"
 #include "gui/display_info.h"
 #include "gui/font_dialog.h"
-#include "gui/shortcutbar_main.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/gnomesword.h"
@@ -98,7 +97,7 @@ void gui_on_lookup_bibletext_dialog_selection
 	dict_key = gui_get_word_or_selection(cur_vt->html, FALSE);
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name,
+			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
@@ -330,7 +329,7 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 		mybuf = strchr(url, '=');
 		++mybuf;
 		buf = g_strdup(mybuf);
-		gui_display_verse_list(vt->key, xml_get_value("modules", "bible"),buf);//settings.MainWindowModule, buf);
+		gui_display_verse_list_in_sidebar(vt->key, xml_get_value("modules", "bible"),buf);//settings.MainWindowModule, buf);
 		g_free(buf);
 
 	}
@@ -1064,7 +1063,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 					    g_strdup(settings.
 						     DictWindowModule);
 				if (settings.inViewer)
-					gui_display_dictlex_in_viewer
+					gui_display_dictlex_in_sidebar
 					    (dict, key);
 				if (settings.inDictpane)
 					gui_change_module_and_key(dict,

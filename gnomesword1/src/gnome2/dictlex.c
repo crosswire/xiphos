@@ -35,7 +35,7 @@
 #include "gui/html.h"
 #include "gui/main_window.h"
 #include "gui/shortcutbar_search.h"
-#include "gui/shortcutbar_viewer.h"
+#include "gui/sidebar.h"
 #include "gui/find_dialog.h"
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
@@ -93,7 +93,7 @@ void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 	dict_key = gui_get_word_or_selection(cur_d->html, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
-			gui_display_dictlex_in_viewer(mod_name,
+			gui_display_dictlex_in_sidebar(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
