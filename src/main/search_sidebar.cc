@@ -251,6 +251,10 @@ void main_do_sidebar_search(gpointer user_data)
 	    (ss.rbRegExp)->active ? 0 :
 	    GTK_TOGGLE_BUTTON(ss.rbPhraseSearch)->active ? -1 : -2;
 
+	if(settings.searchType == -2)
+			settings.searchType = backendSearch->check_for_optimal_search(search_module);
+
+		
 	search_params =
 	    GTK_TOGGLE_BUTTON(ss.ckbCaseSensitive)->active ? 0 : REG_ICASE;
 
