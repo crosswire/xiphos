@@ -1386,6 +1386,8 @@ void gui_create_parallel_page(guint page_num)
 	 */
 	widgets.frame_parallel = gtk_frame_new(_("Parallel View"));
 	gtk_widget_show(widgets.frame_parallel);
+	gtk_frame_set_shadow_type(GTK_FRAME(widgets.frame_parallel),GTK_SHADOW_NONE);
+	
 	
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_parallel_text),
 			  widgets.frame_parallel);
