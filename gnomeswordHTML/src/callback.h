@@ -14,6 +14,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
+#ifndef __CALLBACK_H_
+#define __CALLBACK_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -169,7 +173,7 @@ void on_btnPropertyboxApply_clicked(GtkButton * button,
 					gpointer user_data);
 void on_btnPropertyboxCancel_clicked(GtkButton * button,
 					 gpointer user_data);
-//==============================================================================================
+//=====================================
 void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_btnLEdelete_clicked(GtkButton * button, gpointer user_data);
 void on_btnLEok_clicked(GtkButton * button, gpointer user_data);
@@ -263,4 +267,7 @@ void on_cbtnShowBookmarksGroup_toggled           (GtkToggleButton *togglebutton,
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* __CALLBACK_H_ */
+
 

@@ -111,7 +111,7 @@ cxxflags_set = @cxxflags_set@
 SUBDIRS = gssword           gsdialogs
 
 
-INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     -I$(top_srcdir)/html     -I$(top_srcdir)/src/gsdialogs     -I$(top_srcdir)/src/gssword     -I /usr/include/gtkhtml
+INCLUDES =      $(GNOME_INCLUDEDIR)     $(EXTRA_GNOME_CFLAGS)     $(EXTRA_PRINT_CFLAGS)     $(EXTRA_APP_CFLAGS)     $(PIXBUF_CFLAGS)     $(SWORD_CPPFLAGS)     -I$(top_srcdir)/src/gsdialogs     -I$(top_srcdir)/src/gssword     -I /usr/include/gtkhtml
 
 
 bin_PROGRAMS = gnomesword
@@ -125,7 +125,7 @@ SPELLING_SOURCE =      debug.h     spell.c     spell.h     spell_gui.c     spell
 EXTRA_DIST =      $(SPELLING_SOURCE) 
 
 
-gnomesword_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)     $(top_builddir)/html/libhtmleditor.a     $(top_builddir)/src/gsdialogs/libgsdialogs.a     $(top_builddir)/src/gssword/libgssword.a
+gnomesword_LDADD =      $(GNOME_LIBDIR)     $(GNOMEUI_LIBS)     $(EXTRA_GNOME_LIBS)     $(SWORD_LIBS)     $(GNOME_PRINT_LIBS)     $(PIXBUF_LIBS)     $(GNOME_APP_LIBS)     $(top_builddir)/src/gsdialogs/libgsdialogs.a     $(top_builddir)/src/gssword/libgssword.a
 
 @SPELLING_TRUE@gnomesword_SOURCES =     $(SPELLING_SOURCE)     $(COMMON_SOURCE)
 @SPELLING_FALSE@gnomesword_SOURCES =     $(COMMON_SOURCE)
@@ -152,8 +152,7 @@ LIBS = @LIBS@
 @SPELLING_TRUE@callback.o gs_file.o interface.o main.o gs_menu.o \
 @SPELLING_TRUE@gs_shortcutbar.o gs_popup_cb.o gs_search.o \
 @SPELLING_TRUE@gs_search_cb.o support.o gs_html.o printstuff.o
-gnomesword_DEPENDENCIES =  $(top_builddir)/html/libhtmleditor.a \
-$(top_builddir)/src/gsdialogs/libgsdialogs.a \
+gnomesword_DEPENDENCIES =  $(top_builddir)/src/gsdialogs/libgsdialogs.a \
 $(top_builddir)/src/gssword/libgssword.a
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)

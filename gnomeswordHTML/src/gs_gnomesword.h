@@ -22,6 +22,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+
+#ifndef __GNOMESWORD_H_
+#define __GNOMESWORD_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -154,4 +158,6 @@ gchar *gdouble_arr_to_hex(gdouble *color,
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* __GNOMESWORD_H_ */
 
