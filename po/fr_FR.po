@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-01 12:00-0500\n"
-"PO-Revision-Date: 2005-01-23 20:29+0100\n"
+"PO-Revision-Date: 2005-02-01 22:19+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,7 +67,7 @@ msgstr "Le nombre de modules de commentaires personnels :"
 
 #: src/main/lists.cc:145
 msgid "Number of Devotion modules"
-msgstr "Le nombre de modules de cultes quotidiens :"
+msgstr "Le nombre de modules de lectures quotidiennes :"
 
 #: src/main/sidebar.cc:357
 msgid "verse"
@@ -891,7 +891,7 @@ msgstr "Ouvre le bloc-notes d'étude"
 
 #: src/gnome2/main_menu.c:500
 msgid "Copy highlighted text from main window"
-msgstr "Copie le texte en surbrillance depuis la fenêtre principale"
+msgstr "Copie le texte mis en surbrillance dans la fenêtre principale"
 
 #: src/gnome2/main_menu.c:506 src/gnome2/sidebar.c:214
 msgid "Search"
@@ -930,11 +930,11 @@ msgstr "Efface l'historique des versets consultés"
 
 #: src/gnome2/main_menu.c:542
 msgid "Daily Devotion"
-msgstr "Culte quotidien"
+msgstr "Lecture quotidienne"
 
 #: src/gnome2/main_menu.c:543
 msgid "Show the Daily Devotion for today"
-msgstr "Affiche le culte quotidien d'aujourd'hui"
+msgstr "Affiche la lecture quotidienne de ce jour"
 
 #: src/gnome2/main_menu.c:558 src/gnome2/preferences_dialog.c:1732
 msgid "Bible Texts"
@@ -1645,12 +1645,12 @@ msgstr "Utiliser le dictionnaire par défaut"
 
 #: src/gnome2/preferences_dialog.c:1831
 msgid "Show Daily Devotion at start up"
-msgstr "Afficher le culte quotidien au démarrage"
+msgstr "Afficher la lecture quotidienne au démarrage"
 
 #: src/gnome2/preferences_dialog.c:1837
 msgid "Show Daily Devotion if you have a Devotion module"
 msgstr ""
-"Affiche le culte quotidien si un module de cultes quotidiens est installé"
+"Affiche la lecture du jour si un module de lectures quotidiennes est installé"
 
 #: src/gnome2/preferences_dialog.c:1842
 msgid "Show splash screen at start up"
@@ -1726,7 +1726,7 @@ msgstr "<b>Modules divers</b>"
 
 #: src/gnome2/preferences_dialog.c:2246 src/gnome2/setup_druid.c:997
 msgid "Daily Devotional"
-msgstr "Culte quotidien"
+msgstr "Lecture quotidienne"
 
 #: src/gnome2/preferences_dialog.c:2266 src/gnome2/setup_druid.c:972
 msgid "Hebrew Lexicon"
