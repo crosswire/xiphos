@@ -139,7 +139,9 @@ module.source.files=\
 	sw_module_options.cpp\
 	sw_module_options.h\
 	gs_html_editor.c\
-	gs_html_editor.h
+	gs_html_editor.h\
+	gs_editor_replace.c\
+	gs_editor_replace.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
