@@ -171,19 +171,6 @@ LIBS = @LIBS@
 @SHORTCUTBAR_TRUE@gs_information_sw.o gs_shortcutbar.o sw_utility.o \
 @SHORTCUTBAR_TRUE@sw_properties.o sw_bookmarks.o sw_gbfhtml.o \
 @SHORTCUTBAR_TRUE@sw_thmlhtml.o sw_latin1utf8.o
-@SHORTCUTBAR_SPELL_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o \
-@SHORTCUTBAR_SPELL_TRUE@char_table.o printstuff.o gs_gui.o gs_abouts.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_info_box.o gs_viewcomm.o gs_viewdict.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_studypad.o gs_bookmarks.o gs_gnomesword.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_history.o callback.o display.o gs_display.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_file.o gs_sword.o interface.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_viewtext_dlg.o gs_viewtext_sw.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_information_dlg.o gs_information_sw.o \
-@SHORTCUTBAR_SPELL_TRUE@gs_shortcutbar.o sw_utility.o sw_properties.o \
-@SHORTCUTBAR_SPELL_TRUE@sw_bookmarks.o sw_gbfhtml.o sw_thmlhtml.o \
-@SHORTCUTBAR_SPELL_TRUE@sw_latin1utf8.o
 @PRINTING_TRUE@gnomesword_OBJECTS =  printstuff.o gs_gui.o gs_abouts.o \
 @PRINTING_TRUE@gs_info_box.o gs_viewcomm.o gs_viewdict.o gs_studypad.o \
 @PRINTING_TRUE@gs_bookmarks.o gs_gnomesword.o gs_history.o callback.o \
@@ -227,12 +214,25 @@ LIBS = @LIBS@
 @SPELLING_PRINTING_TRUE@gs_shortcutbar.o sw_utility.o sw_properties.o \
 @SPELLING_PRINTING_TRUE@sw_bookmarks.o sw_gbfhtml.o sw_thmlhtml.o \
 @SPELLING_PRINTING_TRUE@sw_latin1utf8.o
+@SHORTCUTBAR_SPELL_TRUE@gnomesword_OBJECTS =  spell.o spell_gui.o \
+@SHORTCUTBAR_SPELL_TRUE@char_table.o printstuff.o gs_gui.o gs_abouts.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_info_box.o gs_viewcomm.o gs_viewdict.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_studypad.o gs_bookmarks.o gs_gnomesword.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_history.o callback.o display.o gs_display.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_file.o gs_sword.o interface.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_listeditor.o main.o gs_menu.o gs_popup_cb.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_search.o gs_search_cb.o support.o gs_html.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_viewtext_dlg.o gs_viewtext_sw.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_information_dlg.o gs_information_sw.o \
+@SHORTCUTBAR_SPELL_TRUE@gs_shortcutbar.o sw_utility.o sw_properties.o \
+@SHORTCUTBAR_SPELL_TRUE@sw_bookmarks.o sw_gbfhtml.o sw_thmlhtml.o \
+@SHORTCUTBAR_SPELL_TRUE@sw_latin1utf8.o
 @SHORTCUTBAR_TRUE@gnomesword_DEPENDENCIES = 
-@SHORTCUTBAR_SPELL_TRUE@gnomesword_DEPENDENCIES = 
 @PRINTING_TRUE@gnomesword_DEPENDENCIES = 
 @NO_OPS_TRUE@gnomesword_DEPENDENCIES = 
 @SPELLING_TRUE@gnomesword_DEPENDENCIES = 
 @SPELLING_PRINTING_TRUE@gnomesword_DEPENDENCIES = 
+@SHORTCUTBAR_SPELL_TRUE@gnomesword_DEPENDENCIES = 
 gnomesword_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)

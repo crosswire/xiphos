@@ -63,9 +63,20 @@ struct _gs_layout {
 		gs_hight;	
 };
 
+typedef struct _gsnbpages GS_NB_PAGES;
+struct _gsnbpages {
+	gint	nbTextModspage, /* Bible window */
+		notebook1page, /* commentary window  */
+		notebook2page, /* dict/lex window  */
+		notebook3page; /* main notebook */	
+};
 
-
-
+typedef struct _gstabs GS_TABS;
+struct _gstabs {
+	gboolean 	textwindow, /* show module tabs in text window if true  */
+				commwindow, /* show module tabs in commentary window if true  */
+				dictwindow; /* show module tabs in text dict/lex if true  */
+};
  
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -132,10 +143,11 @@ void initGnomeSword(GtkWidget *app,
 		GList *dictionarymods, 
 		GList *percommods);
 void addnotebookpages(GtkWidget *notebook, 
-		GList *list);
+		GList *list); 
 void UpdateChecks(GtkWidget * mainform);
 void applyoptions(GtkWidget *app,
 		gboolean showshortcut,
+		gboolean showtexttabs,
 	     	gboolean showcomtabs,
 	     	gboolean showdicttabs,
 	     	gboolean showtextgroup, 

@@ -52,9 +52,7 @@ void on_lookup_selection4_activate(GtkMenuItem * menuitem,
 				       gpointer user_data);
 void on_goto_reference3_activate(GtkMenuItem * menuitem,
 				     gpointer user_data);
-void on_show_tabs1_activate(GtkMenuItem * menuitem,
-				gpointer user_data);
-void on_show_tabs2_activate(GtkMenuItem * menuitem,
+void on_show_tabs_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void on_view_in_new_window_activate(GtkMenuItem * menuitem,
 					gpointer user_data);  

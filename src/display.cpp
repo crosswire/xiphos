@@ -58,7 +58,7 @@ GdkColor GTKEntryDisp::colourCur;
 GdkColor myGreen;
 GdkColor BGcolor;
 GdkFont *roman_font, *italic_font, *versenum_font, *bold_font;
-gchar *mycolor;
+
 
 gchar *font_mainwindow =
     "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1",
