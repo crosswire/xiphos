@@ -2,6 +2,7 @@
 
 	* enabled printing using gnome-print.
 	* fixed gnome2/history.c
+	* removed book_closed.png, book_open.png and helpdoc.png
 
 
 2003-12-05  Terry <tbiggs@users.sf.net>
