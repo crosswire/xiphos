@@ -70,6 +70,9 @@ struct  _app_widgets {
 		*html_book, /* gbs html widget */
 		*html_studypad, /* studypad html widget */
 		
+	/* textview widget */
+		*textview,
+		
 	/* popup menu submenu widgets */	
 		*add_bookmark_submenu,
 		
