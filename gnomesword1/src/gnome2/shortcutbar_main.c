@@ -1322,7 +1322,7 @@ void gui_setup_shortcut_bar(void)
 	GtkWidget
 	    * button,
 	    *searchbutton,
-	    *ctree,
+	    *treeview,
 	    *scrolledwindow1,
 	    *scrolledwindow2,
 	    *vpSearch, *vboxVL, *vpVL, *html, *VLbutton;
@@ -1426,14 +1426,15 @@ void gui_setup_shortcut_bar(void)
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
 	gtk_widget_show(scrolledwindow1);
 
-	ctree = gtk_ctree_new(3, 0);
-	gtk_widget_show(ctree);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow1), ctree);
-	gtk_clist_set_column_width(GTK_CLIST(ctree), 0, 280);
-	gtk_clist_set_column_width(GTK_CLIST(ctree), 1, 80);
-	gtk_clist_set_column_width(GTK_CLIST(ctree), 2, 80);
+	//widgets.bookmark_tree = gtk_tree_view_new ();
+	widgets.bookmark_tree = gtk_ctree_new(3, 0);
+	gtk_widget_show(widgets.bookmark_tree);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow1), widgets.bookmark_tree);
+	gtk_clist_set_column_width(GTK_CLIST(widgets.bookmark_tree), 0, 280);
+	gtk_clist_set_column_width(GTK_CLIST(widgets.bookmark_tree), 1, 80);
+	gtk_clist_set_column_width(GTK_CLIST(widgets.bookmark_tree), 2, 80);
 
-	widgets.ctree_widget = ctree;
+	
 
 	button = gtk_button_new_with_label(_("Bookmarks"));
 	gtk_widget_show(button);

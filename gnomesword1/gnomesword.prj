@@ -222,7 +222,59 @@ module.source.files=\
 	src/main/configs.c\
 	src/backend/tree.cc\
 	src/main/xml.c\
-	src/gnome/gbs_display.c
+	src/gnome/gbs_display.c\
+	src/gnome2/gbs_display.c\
+	src/gnome2/about_gnomesword.c\
+	src/gnome2/about_modules.c\
+	src/gnome2/about_sword.c\
+	src/gnome2/bibletext.c\
+	src/gnome2/bibletext_dialog.c\
+	src/gnome2/bibletext_menu.c\
+	src/gnome2/bookmarks.c\
+	src/gnome2/commentary.c\
+	src/gnome2/commentary_dialog.c\
+	src/gnome2/commentary_menu.c\
+	src/gnome2/dialog.c\
+	src/gnome2/dictlex.c\
+	src/gnome2/dictlex_dialog.c\
+	src/gnome2/dictlex_menu.c\
+	src/gnome2/display_info.c\
+	src/gnome2/font_dialog.c\
+	src/gnome2/gbs.c\
+	src/gnome2/gbs_dialog.c\
+	src/gnome2/gbs_menu.c\
+	src/gnome2/gnomesword.c\
+	src/gnome2/gtkhtml_display.c\
+	src/gnome2/hints.c\
+	src/gnome2/history.c\
+	src/gnome2/html.c\
+	src/gnome2/percomm.c\
+	src/gnome2/cipher_key_dialog.c\
+	src/gnome2/editor.c\
+	src/gnome2/editor_menu.c\
+	src/gnome2/editor_replace.c\
+	src/gnome2/editor_spell.c\
+	src/gnome2/fileselection.c\
+	src/gnome2/find_dialog.c\
+	src/gnome2/gui.c\
+	src/gnome2/interlinear.c\
+	src/gnome2/interlinear_dialog.c\
+	src/gnome2/main_menu.c\
+	src/gnome2/main_window.c\
+	src/gnome2/preferences_dialog.c\
+	src/gnome2/search_dialog.c\
+	src/gnome2/setup_druid.c\
+	src/gnome2/shortcutbar_dialog.c\
+	src/gnome2/shortcutbar_main.c\
+	src/gnome2/shortcutbar_search.c\
+	src/gnome2/shortcutbar_viewer.c\
+	src/gnome2/studypad.c\
+	src/gnome2/studypad_dialog.c\
+	src/gnome2/splash.c\
+	src/gnome2/toolbar_edit.c\
+	src/gnome2/toolbar_nav.c\
+	src/gnome2/toolbar_style.c\
+	src/gnome2/utilities.c\
 
 module.pixmap.name=.
 module.pixmap.type=

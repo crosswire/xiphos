@@ -503,7 +503,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (check_for_module(newmod)) {
 			modbuf = newmod;
 		} else {
-			modbuf = xml_get_value("modules", "text");	//settings.MainWindowModule;
+			modbuf = xml_get_value("modules", "bible");	//settings.MainWindowModule;
 		}
 		buf = g_strdup(newref);
 		sprintf(settings.groupName, "%s", "Verse List");

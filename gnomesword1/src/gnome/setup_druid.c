@@ -92,7 +92,7 @@ static GtkWidget *dialog_setup;
 static void save_frist_run_settings(SETTINGS_DRUID widgets)
 {
 
-	xml_set_value("GnomeSword", "modules", "text",
+	xml_set_value("GnomeSword", "modules", "bible",
 		      gtk_entry_get_text(GTK_ENTRY
 					 (widgets.combo_entry_text)));
 
@@ -167,9 +167,9 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 	settings.text_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active;
 	if (GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active)
-		xml_set_value("GnomeSword", "tabs", "text", "1");
+		xml_set_value("GnomeSword", "tabs", "bible", "1");
 	else
-		xml_set_value("GnomeSword", "tabs", "text", "0");
+		xml_set_value("GnomeSword", "tabs", "bible", "0");
 
 	settings.comm_tabs =
 	    GTK_TOGGLE_BUTTON(widgets.checkbutton_comm_tabs)->active;

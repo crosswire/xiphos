@@ -449,7 +449,7 @@ char *backend_get_module_font_size(char *mod_name, char * dir)
  *   
  */
  
-char *backend_get_conf_item(char * file, char * mod_name, char * item)
+char *backend_get_conf_item(const char * file, const char * mod_name, const char * item)
 {	
 	char *buf = NULL;
 	SWConfig conf_file(file);
@@ -480,8 +480,8 @@ char *backend_get_conf_item(char * file, char * mod_name, char * item)
  *   void
  */
  
-void backend_save_conf_item(char * file, char * mod_name, char * item,
-				char * value)
+void backend_save_conf_item(const char * file, const char * mod_name, const char * item,
+				const char * value)
 {
 	SWConfig conf_file(file);
 
