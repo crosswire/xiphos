@@ -218,8 +218,6 @@ struct _settings {
 		*settingslist; /* glist for saveing verse lists - freed in shutdownSWORD() gs_sword.cpp*/
 };
 
-
-
 /*** function prototypes ***/
 
 void initGnomeSword(SETTINGS *settings, 
