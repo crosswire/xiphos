@@ -22,12 +22,34 @@
 #ifndef ___COMMENTARY_H_
 #define ___COMMENTARY_H_
 
-#include "main/commentary.h"
+typedef struct _commdata COMM_DATA;
 
-void on_notebook_comm_switch_page(GtkNotebook *notebook,
-		GtkNotebookPage *page, gint page_num, GList *cl);
-GtkWidget *gui_create_pm(COMM_DATA * c);
-void gui_create_commentary_pane(COMM_DATA *c, gint count);
+#include "gui/commentary_find.h"
 
+struct _commdata {
+	GtkWidget *html;
+	GtkWidget *frame;
+	GtkWidget *frame_toolbar;
+	GtkWidget *btnCOMMSync;
+	GtkWidget *btnCOMMBack;
+	GtkWidget *btnCOMMForward;
+	GtkWidget *btnCOMMPrint;
+	GtkWidget *btn_book_heading;
+	GtkWidget *btn_chap_heading;
+	GtkWidget *showtabs;
+	GtkWidget *showtoolbar;
+	gchar *modName;
+	gchar *searchstring;
+	gchar key[80];
+	gint modnum;
+	gboolean has_key;
+	COMMFindDialog *find_dialog;
+};	
+
+void gui_set_commentary_page_and_key(gint page_num,
+				     gchar * key);
+void gui_display_commentary(gchar * key);
+void gui_setup_commentary(GList *mods);
+void gui_shutdown_commentary(void);
 #endif
 

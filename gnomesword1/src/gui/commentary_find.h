@@ -28,7 +28,7 @@
 
 typedef struct _gs_find_dialog COMMFindDialog;
 
-#include "main/commentary.h"	
+#include "gui/_commentary.h"	
 
 void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d);
 void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text);
