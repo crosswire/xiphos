@@ -1,9 +1,9 @@
 
 [Desktop Entry]
-Name=Bible Study Tool
-Comment=Bible Study Tool for the Gnome Desktop
+_Name=GnomeSword2 Bible Guide
+_Comment=Study the Bible
 Exec=@gnomesword_exec@
-Icon=@PACKAGE_PIXMAPS_DIR@/GnomeSword.png
+Icon=@PACKAGE_PIXMAPS_DIR@/gs2-48x48.png
 Terminal=false
 MultipleArgs=false
 Type=Application
