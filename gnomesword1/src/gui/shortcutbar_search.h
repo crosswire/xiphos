@@ -26,6 +26,7 @@
 extern "C" {
 #endif	
 	
+void gui_search_update(char percent, void *userData);	
 void gui_set_search_label(gchar * mod_name);	
 void gui_create_shortcutbar_search(GtkWidget *vp);
 

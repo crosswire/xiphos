@@ -27,6 +27,7 @@
 
 #include "gui/main_window.h"
 #include "gui/search_dialog.h"
+#include "gui/shortcutbar_search.h"
 
 #include "main/search.h"
  
@@ -153,7 +154,7 @@ GList * load_custom_ranges(void)
 
 void search_percent_update(char percent, void *userData)
 {
-	gui_search_appbar_update(percent, userData);
+	gui_search_update(percent, userData);
 }
 
 

@@ -494,10 +494,6 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	gtk_widget_show(dialog_vbox25);
 
 	vboxInt = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vboxInt);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "vboxInt", vboxInt,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxInt);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox25), vboxInt, TRUE, TRUE,
 			   0);
@@ -505,10 +501,6 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	toolbar29 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar29);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "toolbar29", toolbar29,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbar29);
 	gtk_box_pack_start(GTK_BOX(vboxInt), toolbar29, FALSE, FALSE,
 			   0);
@@ -523,17 +515,9 @@ GtkWidget *gui_create_interlinear_dialog(void)
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
 				       _("button6"), NULL, NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(buttonIntSync);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "buttonIntSync", buttonIntSync,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(buttonIntSync);
 
 	cbIntBook = gtk_combo_new();
-	gtk_widget_ref(cbIntBook);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "cbIntBook", cbIntBook,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbIntBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), cbIntBook,
 				  NULL, NULL);
@@ -544,20 +528,12 @@ GtkWidget *gui_create_interlinear_dialog(void)
 				      get_list(BOOKS_LIST));
 
 	entrycbIntBook = GTK_COMBO(cbIntBook)->entry;
-	gtk_widget_ref(entrycbIntBook);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "entrycbIntBook", entrycbIntBook,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entrycbIntBook);
 	gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), _("Romans"));
 
 	sbIntChapter_adj = gtk_adjustment_new(8, 0, 151, 1, 10, 10);
 	sbIntChapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(sbIntChapter_adj), 1, 0);
-	gtk_widget_ref(sbIntChapter);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "sbIntChapter", sbIntChapter,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(sbIntChapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), sbIntChapter,
 				  NULL, NULL);
@@ -567,20 +543,12 @@ GtkWidget *gui_create_interlinear_dialog(void)
 	sbIntVerse_adj = gtk_adjustment_new(28, 0, 180, 1, 10, 10);
 	sbIntVerse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(sbIntVerse_adj), 1, 0);
-	gtk_widget_ref(sbIntVerse);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "sbIntVerse", sbIntVerse,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(sbIntVerse);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29), sbIntVerse,
 				  NULL, NULL);
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(sbIntVerse), TRUE);
 
 	entryIntLookup = gtk_entry_new();
-	gtk_widget_ref(entryIntLookup);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "entryIntLookup", entryIntLookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entryIntLookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar29),
 				  entryIntLookup, NULL, NULL);
@@ -598,10 +566,6 @@ GtkWidget *gui_create_interlinear_dialog(void)
 				       ("Go to verse in free form lookup and add verse to history"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(btnIntGotoVerse);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "btnIntGotoVerse", btnIntGotoVerse,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnIntGotoVerse);
 
 	dialog_action_area25 =
@@ -614,10 +578,6 @@ GtkWidget *gui_create_interlinear_dialog(void)
 				       (dialog_action_area25), 10);
 
 	hbuttonbox4 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox4);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "hbuttonbox4", hbuttonbox4,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox4);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area25), hbuttonbox4,
 			   TRUE, TRUE, 0);
@@ -625,10 +585,6 @@ GtkWidget *gui_create_interlinear_dialog(void)
 				  GTK_BUTTONBOX_END);
 
 	btnDockInt = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
-	gtk_widget_ref(btnDockInt);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_interlinear),
-				 "btnDockInt", btnDockInt,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnDockInt);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox4), btnDockInt);
 	GTK_WIDGET_SET_FLAGS(btnDockInt, GTK_CAN_DEFAULT);
