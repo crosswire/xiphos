@@ -37,7 +37,8 @@ GtkWidget *create_dlgSettings(SETTINGS *s,
 				GList *biblelist,
 				GList *commlist,
 				GList *dictlist,
-				GList *percomlist);
+				GList *percomlist,
+				GList *devotionlist);
 
 #ifdef __cplusplus
 }
