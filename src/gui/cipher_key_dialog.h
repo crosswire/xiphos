@@ -25,11 +25,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "gs_gnomesword.h"
-	GtkWidget *gui_create_cipher_key_dialog(gchar *mod_name);
+
+#include "main/gs_gnomesword.h"
+
+GtkWidget *gui_create_cipher_key_dialog(gchar *mod_name);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif				/* __CIPHER_KEY_DIALOG_H__ */
+#endif
+

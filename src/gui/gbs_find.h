@@ -24,13 +24,14 @@
 
 #include <gnome.h>
 
-/* main */
-#include "find_dlg_defs.h"
+#include "main/find_dlg_defs.h"
+
 typedef struct _gs_find_dialog GBF_FIND_DIALOG;
-/* main */
-#include "gbs.h"	
+
+#include "main/gbs.h"
 
 void gbs_find_close_dialog(GtkWidget *but, GBF_FIND_DIALOG *d);
 void search_gbs_find_dlg(GBS_DATA *c, gboolean regular, gchar *text);
 			
-#endif /* _GBS_FIND_DIALOG_H_ */
+#endif
+

@@ -26,11 +26,8 @@
 extern "C" {
 #endif
 
-#include "gs_gnomesword.h"
-/*
- * main
- */
-#include "bibletext.h"
+#include "main/gs_gnomesword.h"
+#include "main/bibletext.h"
 	
 void gui_set_text_frame_label(void);
 void on_notebook_text_switch_page(GtkNotebook * notebook,
@@ -42,4 +39,6 @@ GtkWidget *gui_create_pm_text(TEXT_DATA * t);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* ___BIBLETEXT_H_ */
+
+#endif
+
