@@ -35,7 +35,7 @@ struct  _app_widgets {
 		*vpaned, /* shortcut bar and main panle */
 		*hpaned, /* shortcut bar and main panle */
 		*shortcutbar,  /* the shortcut bar widget */
-		*ctree_widget, /* bookmarks tree */
+		*bookmark_tree, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear */
 		*notebook_gbs, /* notebook - gbs */

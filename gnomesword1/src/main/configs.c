@@ -228,7 +228,7 @@ char *get_module_font_name(char *mod_name)
  *   
  */ 
 
-char *get_conf_file_item(char * file, char * mod_name, char * item)
+char *get_conf_file_item(const char * file, const char * mod_name, const char * item)
 {
 	return backend_get_conf_item(file, mod_name, item);
 }
@@ -251,8 +251,8 @@ char *get_conf_file_item(char * file, char * mod_name, char * item)
  *   void
  */ 
 
-void save_conf_file_item(char * file, char * mod_name, char * item,
-			char * value)
+void save_conf_file_item(const char * file, const char * mod_name, const char * item,
+			const char * value)
 {
 	backend_save_conf_item(file, mod_name, item, value);
 }

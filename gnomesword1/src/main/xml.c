@@ -566,7 +566,7 @@ static xmlNodePtr xml_find_prop(char *type_doc, char *section,
  *   char *
  */
 
-char *xml_get_value(char *section, char *item)
+char *xml_get_value(char *section, const char *item)
 {
 	xmlNodePtr cur = NULL;
 	xmlChar *results = NULL;
@@ -600,8 +600,8 @@ char *xml_get_value(char *section, char *item)
  *   void
  */
 
-void xml_set_value(char *type_doc, char *section, char *item,
-		   char *value)
+void xml_set_value(char *type_doc, char *section, const char *item,
+		   const char *value)
 {
 	xmlNodePtr cur = NULL;
 	if ((cur =

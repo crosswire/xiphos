@@ -28,13 +28,13 @@ extern "C" {
 #include <glib-1.2/glib.h>
 typedef struct _mod_font MOD_FONT;
 struct  _mod_font {
-	char *mod_name;
-	char *old_font;
-	char *old_gdk_font;
-	char *new_font;
-	char *new_gdk_font;
-	char *old_font_size;
-	char *new_font_size;
+	const char *mod_name;
+	const char *old_font;
+	const char *old_gdk_font;
+	const char *new_font;
+	const char *new_gdk_font;
+	const char *old_font_size;
+	const char *new_font_size;
 	int no_font;
 };
 
@@ -49,9 +49,9 @@ int set_config_to_get_labels(char * section);
 const char *get_next_config_label(void);
 	
 char *get_module_font_name(char *mod_name);
-char *get_conf_file_item(char * file, char * mod_name, char * item);
-void save_conf_file_item(char * file, char * mod_name, char * item,
-			char * value);
+char *get_conf_file_item(const char * file, const char * mod_name, const char * item);
+void save_conf_file_item(const char * file, const char * mod_name, const char * item,
+			const char * value);
 char *get_module_font_size(char *mod_name);
 #ifdef __cplusplus
 }

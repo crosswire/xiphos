@@ -42,9 +42,9 @@ void backend_save_module_key(char *mod_name, char *key);
 	
 char *backend_get_module_font_name(char *mod_name, char * dir);
 char *backend_get_module_font_size(char *mod_name, char * dir);
-char *backend_get_conf_item(char * file, char * mod_name, char * item);
-void backend_save_conf_item(char * file, char * mod_name, char * item,
-				char * value);
+char *backend_get_conf_item(const char * file, const char * mod_name, const char * item);
+void backend_save_conf_item(const char * file, const char * mod_name, const char * item,
+				const char * value);
 
 
 int backend_load_module_options(char * modName, char * option, 
