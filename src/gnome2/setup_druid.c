@@ -218,7 +218,7 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 	else
 		xml_set_value("GnomeSword", "misc", "showdicts", "0");
 
-
+	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
 	/*
 	   settings.autosavepersonalcomments =
 	   GTK_TOGGLE_BUTTON(widgets.checkbutton1)->active;
@@ -254,7 +254,6 @@ static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
 			      gpointer user_data)
 {
 	save_frist_run_settings(widgets);
-	//gnome_dialog_close(GNOME_DIALOG(druid_dialog));
 
 	gtk_widget_destroy(dialog_setup);
 }
@@ -279,8 +278,8 @@ static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
 static void on_cancel_clicked(GnomeDialog * gnomedialog, gint arg1,
 			      gpointer user_data)
 {
-	//gnome_dialog_close(GNOME_DIALOG(druid_dialog));
-
+	
+	xml_set_value("GnomeSword", "misc", "setup_canceled", "1");
 	gtk_widget_destroy(dialog_setup);
 
 }

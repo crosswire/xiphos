@@ -631,15 +631,7 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	settings.usedefault = atoi(xml_get_value("misc", "usedefault"));
 
 	/*** read check buttons ***/
-	/*if (GTK_TOGGLE_BUTTON(check_button.show_shortcut_bar)->active)
-	   xml_set_value("GnomeSword", "shortcutbar",
-	   "shortcutbar", "1");
-	   else
-	   xml_set_value("GnomeSword", "shortcutbar",
-	   "shortcutbar", "0");
-	   settings.showshortcutbar =
-	   atoi(xml_get_value("shortcutbar", "shortcutbar")); */
-
+	
 	if (GTK_TOGGLE_BUTTON(check_button.show_bible_tabs)->active)
 		xml_set_value("GnomeSword", "tabs", "bible", "1");
 	else
@@ -708,62 +700,8 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	else
 		xml_set_value("GnomeSword", "misc", "showdicts", "0");
 	settings.showdicts = atoi(xml_get_value("misc", "showdicts"));
-/*
-	if (GTK_TOGGLE_BUTTON(check_button.show_favorites)->active)
-		xml_set_value("GnomeSword", "shortcutbar", "favo", "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "favo", "0");
-	settings.showfavoritesgroup =
-	    atoi(xml_get_value("shortcutbar", "favo"));
 
-	if (GTK_TOGGLE_BUTTON(check_button.show_text_group)->active)
-		xml_set_value("GnomeSword", "shortcutbar", "bible", "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "bible", "0");
-	settings.showtextgroup =
-	    atoi(xml_get_value("shortcutbar", "bible"));
-
-	if (GTK_TOGGLE_BUTTON(check_button.show_commentary_group)->
-	    active)
-		xml_set_value("GnomeSword", "shortcutbar", "comm", "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "comm", "0");
-	settings.showcomgroup =
-	    atoi(xml_get_value("shortcutbar", "comm"));
-
-	if (GTK_TOGGLE_BUTTON(check_button.show_dictionary_group)->
-	    active)
-		xml_set_value("GnomeSword", "shortcutbar", "dict", "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "dict", "0");
-	settings.showdictgroup =
-	    atoi(xml_get_value("shortcutbar", "dict"));
-
-	if (GTK_TOGGLE_BUTTON(check_button.show_book_group)->active)
-		xml_set_value("GnomeSword", "shortcutbar", "book", "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "book", "0");
-	settings.showbookgroup =
-	    atoi(xml_get_value("shortcutbar", "book"));
-
-	if (GTK_TOGGLE_BUTTON(check_button.show_history_group)->active)
-		xml_set_value("GnomeSword", "shortcutbar", "history",
-			      "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "history",
-			      "0");
-	settings.showhistorygroup =
-	    atoi(xml_get_value("shortcutbar", "history"));
-
-	if (GTK_TOGGLE_BUTTON(check_button.dock_shortcut_bar)->active)
-		xml_set_value("GnomeSword", "shortcutbar", "docked",
-			      "1");
-	else
-		xml_set_value("GnomeSword", "shortcutbar", "docked",
-			      "0");
-	settings.docked = atoi(xml_get_value("shortcutbar", "docked"));
-
-*/
+	
 	if (GTK_TOGGLE_BUTTON(check_button.show_in_viewer)->active)
 		xml_set_value("GnomeSword", "lexicons", "inviewer",
 			      "1");
@@ -872,7 +810,8 @@ static void get_preferences_from_dlg(GtkWidget * d)
 	settings.upperpane_hight =
 	    atoi(xml_get_value("layout", "uperpane"));
 
-
+	xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
+	
 	applyoptions();
 
 }
