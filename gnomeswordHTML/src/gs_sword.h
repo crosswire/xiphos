@@ -31,7 +31,6 @@ extern "C" {
 
 #include <gnome.h>
 
-
 void initSWORD(GtkWidget *mainform);
 void shutdownSWORD(void);
 void FillDictKeysSWORD(void);
@@ -98,6 +97,7 @@ GList* setupVTSWORD(GtkWidget *text);
 void gotoverseVTSWORD(gchar *newkey);
 void loadVTmodSWORD(gchar *modName);
 gchar* getVTmodDescriptionSWORD(void);
+
 
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus

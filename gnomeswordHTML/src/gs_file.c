@@ -560,6 +560,9 @@ SETTINGS createsettings(void)
 	strcpy(p_settings->dictkey, "GRACE");	/* dictionary key to use at program startup - the one we shut down with */
 	strcpy(p_settings->studypadfilename, "");	/* name of file in open in study when we closed or last file in studypad */
 	strcpy(p_settings->currentverse_color, "#2A9C83");  /* current verse color */
+	strcpy(p_settings->bible_font_size, "+1");	/* font size */
+	strcpy(p_settings->commentary_font_size, "+1");	/* font size */
+	strcpy(p_settings->dictionary_font_size, "+1");  /* font size*/	
 	p_settings->currentverse_red = 0x0000;	/* set current verse color to green */
 	p_settings->currentverse_green = 0x7777;
 	p_settings->currentverse_blue = 0x0000;

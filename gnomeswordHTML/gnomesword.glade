@@ -5937,10 +5937,10 @@ List item (roman)
 	<class>GtkToolbar</class>
 	<name>toolbar29</name>
 	<orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
-	<type>GTK_TOOLBAR_TEXT</type>
-	<space_size>5</space_size>
+	<type>GTK_TOOLBAR_ICONS</type>
+	<space_size>3</space_size>
 	<space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	<relief>GTK_RELIEF_NORMAL</relief>
+	<relief>GTK_RELIEF_NONE</relief>
 	<tooltips>True</tooltips>
 	<child>
 	  <padding>0</padding>
@@ -5985,18 +5985,60 @@ List item (roman)
 	    <last_modification_time>Mon, 14 May 2001 21:28:28 GMT</last_modification_time>
 	  </signal>
 	  <label>Add</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_ADD</stock_pixmap>
 	</widget>
 
 	<widget>
 	  <class>GtkButton</class>
 	  <child_name>Toolbar:button</child_name>
 	  <name>btnSync</name>
+	  <tooltip>Sync with main window</tooltip>
 	  <signal>
 	    <name>clicked</name>
 	    <handler>on_btnSync_clicked</handler>
 	    <last_modification_time>Tue, 22 May 2001 16:50:36 GMT</last_modification_time>
 	  </signal>
 	  <label>Sync</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_REFRESH</stock_pixmap>
+	</widget>
+
+	<widget>
+	  <class>GtkVSeparator</class>
+	  <name>vseparator16</name>
+	  <width>7</width>
+	  <height>13</height>
+	</widget>
+
+	<widget>
+	  <class>GtkToggleButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>tbtVTStrongs</name>
+	  <tooltip>Toggle Strongs Numbers</tooltip>
+	  <signal>
+	    <name>toggled</name>
+	    <handler>on_tbtVTStrongs_toggled</handler>
+	    <last_modification_time>Fri, 01 Jun 2001 17:48:36 GMT</last_modification_time>
+	  </signal>
+	  <label>Strongs</label>
+	  <icon>strongs2.xpm</icon>
+	  <active>False</active>
+	</widget>
+
+	<widget>
+	  <class>GtkToggleButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>tbtnVTFootnotes</name>
+	  <width>30</width>
+	  <height>30</height>
+	  <tooltip>Toggle Footnotes</tooltip>
+	  <signal>
+	    <name>toggled</name>
+	    <handler>on_tbtnVTFootnotes_toggled</handler>
+	    <last_modification_time>Fri, 01 Jun 2001 17:49:51 GMT</last_modification_time>
+	  </signal>
+	  <label>Footnotes</label>
+	  <icon>footnote3.xpm</icon>
+	  <active>False</active>
 	</widget>
       </widget>
 
@@ -6007,7 +6049,7 @@ List item (roman)
 	<type>GTK_TOOLBAR_ICONS</type>
 	<space_size>5</space_size>
 	<space_style>GTK_TOOLBAR_SPACE_EMPTY</space_style>
-	<relief>GTK_RELIEF_NORMAL</relief>
+	<relief>GTK_RELIEF_NONE</relief>
 	<tooltips>True</tooltips>
 	<child>
 	  <padding>0</padding>

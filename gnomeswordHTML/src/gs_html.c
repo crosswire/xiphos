@@ -141,7 +141,7 @@ void boldHTML(GtkWidget *widget, GtkWidget *html_widget)
 *****************************************************************************/
 void linkHTML(GtkWidget *html_widget)    
 {
-	GtkHTML *html;
+/*	GtkHTML *html;
 	gchar *url;
 	gchar *target = "";
 	
@@ -154,7 +154,7 @@ void linkHTML(GtkWidget *html_widget)
 		html_engine_insert_link (html->engine, url, target);
 	else
 		html_engine_insert_link (html->engine, NULL, NULL);
-	noteModified = TRUE;
+	noteModified = TRUE; */
 }
 
 /*****************************************************************************
@@ -163,7 +163,7 @@ void linkHTML(GtkWidget *html_widget)
 *****************************************************************************/
 void symbolHTML(GtkWidget *html_widget)    
 {
-	GtkHTML *html;
+/*	GtkHTML *html;
 	gchar *buf;
 	gchar tagit[256];
 	
@@ -172,7 +172,7 @@ void symbolHTML(GtkWidget *html_widget)
 	buf = html->engine->clipboard
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);	
-	sprintf(tagit,"<B> </B><FONT FACE=\"symbol\">%s</FONT> ", buf);
+	sprintf(tagit,"<B> </B><FONT FACE=\"symbol\">%s</FONT> ", buf); */
 	/*
 	if (*tagit) {
 		html_engine_insert_object(html->engine, HTML_OBJECT(tagit), strlen(tagit)); 
@@ -380,7 +380,7 @@ void pasteHTML(GtkWidget *html_widget)
 void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	GtkWidget *widget;
+/*	GtkWidget *widget;
 	gchar *buf;
 	GtkHTML *html;
 
@@ -391,7 +391,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	if (buf)
-		dictSearchTextChangedSWORD(buf);
+		dictSearchTextChangedSWORD(buf); */
 }
 
 /***************************************************************************************************
@@ -400,7 +400,7 @@ void on_html_lookup_selection_activate(GtkMenuItem * menuitem,
 void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
-	GtkWidget *widget;
+/*	GtkWidget *widget;
 	gchar *buf;
 	GtkHTML *html;
 
@@ -411,7 +411,7 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
 	    ? html_object_get_selection_string(html->engine->clipboard)
 	    : html_engine_get_selection_string(html->engine);
 	if (buf)
-		changeVerseSWORD(buf);
+		changeVerseSWORD(buf); */
 }
 
 /***************************************************************************************************
