@@ -64,7 +64,7 @@ void gui_shutdown_dictlex(void);
 void on_entryDictLookup_changed(GtkEditable * editable,
 						       DL_DATA * d);
 void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d);
-void on_clistDictLex_select_row(GtkCList * clist, gint row,
+void on_clistDictLex_select_row(GtkWidget * clist, gint row,
 			   gint column, GdkEvent * event, DL_DATA * d);
 
 #endif

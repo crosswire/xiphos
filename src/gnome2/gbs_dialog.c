@@ -73,7 +73,7 @@ enum {
 static GList *dialog_list;
 static GBS_DATA *cur_dlg;
 static gboolean dialog_freed;
-static GtkCTreeNode *rootnode;
+//static GtkCTreeNode *rootnode;
 static GtkTreeModel *model;
 static TreePixbufs *pixbufs;
 static gint tree_level;	
@@ -626,13 +626,13 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 		gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
 				  dlg->html);
 		gtk_html_load_empty(GTK_HTML(dlg->html));
-		gtk_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+		g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 				   G_CALLBACK(dialog_url),
 				   (GBS_DATA *) dlg);
-		gtk_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
+		g_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
 				   G_CALLBACK(link_clicked),
 				   (GBS_DATA *) dlg);
-		gtk_signal_connect(GTK_OBJECT(dlg->html),
+		g_signal_connect(GTK_OBJECT(dlg->html),
 				   "button_press_event",
 				   G_CALLBACK(button_press),
 				   (GBS_DATA *) dlg);
@@ -657,13 +657,13 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow_html),
 			  dlg->html);
 	gtk_html_load_empty(GTK_HTML(dlg->html));
-	gtk_signal_connect(GTK_OBJECT(dlg->html), "on_url",
+	g_signal_connect(GTK_OBJECT(dlg->html), "on_url",
 			   G_CALLBACK(dialog_url),
 			   (GBS_DATA *) dlg);
-	gtk_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
+	g_signal_connect(GTK_OBJECT(dlg->html), "link_clicked",
 			   G_CALLBACK(link_clicked),
 			   (GBS_DATA *) dlg);
-	gtk_signal_connect(GTK_OBJECT(dlg->html),
+	g_signal_connect(GTK_OBJECT(dlg->html),
 			   "button_press_event",
 			   G_CALLBACK(button_press),
 			   (GBS_DATA *) dlg);
@@ -677,7 +677,7 @@ static void create_gbs_dialog(GBS_DATA * dlg)
 	gtk_box_pack_start(GTK_BOX(vbox_dialog), dlg->statusbar, FALSE,
 			   FALSE, 0);
 			   
-	gtk_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
+	g_signal_connect(GTK_OBJECT(dlg->dialog), "destroy",
 			   G_CALLBACK(dialog_destroy),
 			   (GBS_DATA *) dlg);
 }

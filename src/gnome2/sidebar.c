@@ -200,7 +200,7 @@ void gui_display_devotional_in_sidebar(void)
 	strftime(buf, 80, "%m.%d", loctime);
 	gtk_option_menu_set_history(GTK_OPTION_MENU
 				    (sidebar.optionmenu1), 4);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      4);
 	gui_display_dictlex_in_sidebar(settings.devotionalmod, buf);
 }
@@ -324,7 +324,7 @@ gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
 		gchar *text;
 		gtk_option_menu_set_history(GTK_OPTION_MENU
 					    (sidebar.optionmenu1), 4);
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_sidebar), 4);
 		text = get_dictlex_text(mod_name, key);
 		if (text) {
@@ -482,9 +482,8 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gui_verselist_button_release_event(NULL,NULL,NULL);
 	gtk_option_menu_set_history(GTK_OPTION_MENU
 				    (sidebar.optionmenu1), 3);
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
-
 	//g_string_free(str, TRUE);
 }
 
@@ -579,7 +578,7 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 			gui_open_dictlex_dialog(mod);
 			break;
 		}
-		gtk_notebook_set_page
+		gtk_notebook_set_current_page
 		    (GTK_NOTEBOOK(widgets.workbook_lower), 0);
 		gui_change_module_and_key(mod, settings.dictkey);
 		break;
@@ -588,7 +587,7 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 			gui_open_gbs_dialog(mod);
 			break;
 		}
-		gtk_notebook_set_page
+		gtk_notebook_set_current_page
 		    	(GTK_NOTEBOOK(widgets.workbook_lower), 1);
 		gui_change_module_and_key(mod, NULL);
 		break;
@@ -616,7 +615,7 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 static void on_modules_activate(GtkMenuItem * menuitem,
 				gpointer user_data)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      0);
 }
 
@@ -639,7 +638,7 @@ static void on_modules_activate(GtkMenuItem * menuitem,
 static void on_bookmarks_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      1);
 }
 
@@ -663,7 +662,7 @@ static void on_bookmarks_activate(GtkMenuItem * menuitem,
 static void on_search_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      2);
 }
 
@@ -687,7 +686,7 @@ static void on_search_activate(GtkMenuItem * menuitem,
 static void on_viewer_activate(GtkMenuItem * menuitem,
 			       gpointer user_data)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      4);
 }
 
@@ -710,7 +709,7 @@ static void on_viewer_activate(GtkMenuItem * menuitem,
 static void on_search_results_activate(GtkMenuItem * menuitem,
 				       gpointer user_data)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
 			      3);
 
 }
@@ -756,14 +755,14 @@ static void create_viewer_page(GtkWidget * notebook)
 			  sidebar.html_viewer_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_viewer_widget));
 /*
-	gtk_signal_connect(GTK_OBJECT(sidebar.btn_save), "clicked",
+	g_signal_connect(GTK_OBJECT(sidebar.btn_save), "clicked",
 			   G_CALLBACK(on_btnSBSaveVL_clicked), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(sidebar.tbtn_view_main), "toggled",
+	g_signal_connect(GTK_OBJECT(sidebar.tbtn_view_main), "toggled",
 			   G_CALLBACK
 			   (on_tbtnSBViewMain_toggled), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(sidebar.html_widget), "on_url",
+	g_signal_connect(GTK_OBJECT(sidebar.html_widget), "on_url",
 			   G_CALLBACK(gui_url), widgets.app);
 	*/
 }
@@ -1247,7 +1246,7 @@ static void create_search_results_page(GtkWidget * notebook)
 			  sidebar.html_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
 
-	gtk_signal_connect(GTK_OBJECT(sidebar.html_widget), 
+	g_signal_connect(GTK_OBJECT(sidebar.html_widget), 
 			 "link_clicked",
 			 G_CALLBACK(link_clicked),
 			 NULL);

@@ -168,9 +168,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			gtk_widget_destroy(hint.hint_window);
 			hint.in_popup = FALSE;
 		}
-	}
-	/***  we are in an url  ***/
-	else {
+	} else {/***  we are in an url  ***/
 		in_url = TRUE;	/* we need this for html_button_released */
 		/***  swap parallel and main text mods link ***/
 		if (*url == '@') {
@@ -220,13 +218,10 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			}
 			++url;
 			sprintf(buf, "%s", url);
-		}
-		/***  verse number link  ***/
-		else if (*url == '*') {
+		} else if (*url == '*') {/***  verse number link  ***/
 			++url;
 			sprintf(buf, "%s", url);
-		} /***  gbf strongs  ***/
-		else if (*url == '#') {
+		} else if (*url == '#') {/***  gbf strongs  ***/
 			++url;	/* remove # */
 			if (*url == 'T') {
 				++url;	/* remove T */
@@ -277,9 +272,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 					} else
 						return;
 
-				}
-
-				else {
+				} else {
 					show_in_appbar(widgets.appbar,
 						       buf1,
 						       settings.
@@ -300,13 +293,9 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 							       "BDB");
 						g_free(buf1);
 						return;
-					}
-
-					else
+					} else
 						return;
-				}
-
-				else {
+				} else {
 					show_in_appbar(widgets.appbar,
 						       buf1,
 						       settings.
@@ -315,9 +304,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 					return;
 				}
 			}
-		}
-		/***  thml morph tag  ***/
-		else if (!strncmp(url, "type=morph", 10)) {
+		} else if (!strncmp(url, "type=morph", 10)) {/***  thml morph tag  ***/
 			gchar *modbuf = NULL;
 			gchar *mybuf = NULL;
 			gchar *myurl = NULL;
@@ -380,9 +367,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			g_free(myurl);
 			g_free(oldnew);
 			return;
-		}
-		/*** thml strongs ***/
-		else if (!strncmp(url, "type=Strongs", 12)) {
+		} else if (!strncmp(url, "type=Strongs", 12)) {/*** thml strongs ***/
 			//g_warning(url);
 			//return;
 			gchar *modbuf = NULL;
@@ -429,9 +414,47 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			show_in_appbar(widgets.appbar, buf1, modbuf);
 			g_free(buf1);
 			return;
-		}
-
-		else if (*url == 'U') {
+		} else if (!strncmp(url, "version=", 7) || !strncmp(url, "passage=", 7)) {
+			gchar *mybuf = NULL;
+			gchar *modbuf = NULL;
+			gchar *ref = NULL;
+			gchar *mod_name = NULL;
+			gchar *e_utf8;
+			gchar newmod[80], newref[80];
+			mybuf = strstr(url, "version=");
+			if (mybuf) {
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+				i = 0;
+				while (mybuf[i] != ' ') {
+					newmod[i] = mybuf[i];
+					newmod[i + 1] = '\0';
+					++i;
+				}
+			}
+			mybuf = NULL;
+			mybuf = strstr(url, "passage=");
+			i = 0;
+			if (mybuf) {
+				mybuf = strchr(mybuf, '=');
+				++mybuf;
+				while (i < strlen(mybuf)) {
+					newref[i] = mybuf[i];
+					newref[i + 1] = '\0';
+					++i;
+				}
+			}
+			if (check_for_module(newmod)) 
+				modbuf = newmod;
+			
+			ref = g_strdup(newref);
+			if(get_mod_type(modbuf) == TEXT_TYPE) {
+				e_utf8 = e_utf8_from_locale_string((const char *)ref);
+				gui_display_in_hint_window(e_utf8);
+			}
+			g_free(ref);
+			return;	
+		} else if (*url == 'U') {
 			++url;
 			sprintf(buf, "%s %s", _("Unlock "), url);
 		}

@@ -1132,7 +1132,7 @@ static void add_items_to_options_menu(void)
 		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
 				    menuChoice);
 		gtk_widget_show(menuChoice);
-		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
+		g_signal_connect(GTK_OBJECT(menuChoice), "activate",
 				   G_CALLBACK
 				   (on_int_global_options_activate),
 				   (gchar *) tmp->data);
@@ -1233,7 +1233,7 @@ static void load_menu_formmod_list(GtkWidget * pmInt, GList * mods,
 		item =
 		    gtk_menu_item_new_with_label((gchar *) tmp->data);
 		gtk_widget_show(item);
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
+		g_signal_connect(GTK_OBJECT(item), "activate",
 				   G_CALLBACK(mycallback),
 				   g_strdup((gchar *) tmp->data));
 
@@ -1321,10 +1321,10 @@ static GtkWidget *create_parallel_popup(GList * mods)
 			       (GCallback)
 			       on_changeint5mod_activate);
 
-	gtk_signal_connect(GTK_OBJECT(copy7), "activate",
+	g_signal_connect(GTK_OBJECT(copy7), "activate",
 			   G_CALLBACK(gui_copyhtml_activate),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(undockInt), "activate",
+	g_signal_connect(GTK_OBJECT(undockInt), "activate",
 			   G_CALLBACK(on_undockInt_activate),
 			   &settings);
 
@@ -1418,14 +1418,14 @@ void gui_create_parallel_page(guint page_num)
 				    1),
 				   label);
 	
-	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "on_url", G_CALLBACK(gui_url),
 			   (gpointer) widgets.app);
-	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 			   /*
-	gtk_signal_connect(GTK_OBJECT(widgets.html_parallel),
+	g_signal_connect(GTK_OBJECT(widgets.html_parallel),
 			   "button_release_event",
 			   G_CALLBACK(button_release_event), NULL);
 			   */

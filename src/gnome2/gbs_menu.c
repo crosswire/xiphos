@@ -313,7 +313,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, GBS_DATA * t)
 
 static void on_view_current_dict_activate(GtkMenuItem * menuitem, GBS_DATA * t)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK
+	gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.workbook_lower), 0);
 }
 
@@ -567,10 +567,10 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		gtk_widget_show(view_new);
 		gtk_container_add(GTK_CONTAINER(file_menu), view_new);
 
-		gtk_signal_connect(GTK_OBJECT(current_dict), "activate",
+		g_signal_connect(GTK_OBJECT(current_dict), "activate",
 				   G_CALLBACK
 				   (on_view_current_dict_activate), t);
-		gtk_signal_connect(GTK_OBJECT(view_new), "activate",
+		g_signal_connect(GTK_OBJECT(view_new), "activate",
 				   G_CALLBACK
 				   (on_view_new_activate), t);
 
@@ -589,7 +589,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		close = gtk_menu_item_new_with_label(_("Close"));
 		gtk_widget_show(close);
 		gtk_container_add(GTK_CONTAINER(file_menu), close);
-		gtk_signal_connect(GTK_OBJECT(close),
+		g_signal_connect(GTK_OBJECT(close),
 				   "activate",
 				   G_CALLBACK
 				   (on_close_activate), t);
@@ -691,7 +691,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		gtk_container_add(GTK_CONTAINER(pm_text),
 				  add_module_key);
 
-		gtk_signal_connect(GTK_OBJECT(add_module_key),
+		g_signal_connect(GTK_OBJECT(add_module_key),
 				   "activate",
 				   G_CALLBACK
 				   (gui_unlock_gbs), t);
@@ -714,7 +714,7 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		gtk_widget_show(t->showtabs);
 		gtk_container_add(GTK_CONTAINER(show_menu),
 				  t->showtabs);
-		gtk_signal_connect(GTK_OBJECT(t->showtabs), "activate",
+		g_signal_connect(GTK_OBJECT(t->showtabs), "activate",
 				   G_CALLBACK
 				   (on_showtabs_activate), 
 				   NULL);
@@ -723,21 +723,21 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 	/*
 	 * for using the current dictionary for lookup 
 	 */
-	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
+	g_signal_connect(GTK_OBJECT(usecurrent), "activate",
 			   G_CALLBACK
 			   (on_same_lookup_selection_activate), t);
-	gtk_signal_connect(GTK_OBJECT(about_module), "activate",
+	g_signal_connect(GTK_OBJECT(about_module), "activate",
 			   G_CALLBACK
 			   (on_about_module_activate), t);
 
-	gtk_signal_connect(GTK_OBJECT(copy), "activate",
+	g_signal_connect(GTK_OBJECT(copy), "activate",
 			   G_CALLBACK(on_copy_activate), t);
-	gtk_signal_connect(GTK_OBJECT(print), "activate",
+	g_signal_connect(GTK_OBJECT(print), "activate",
 			   G_CALLBACK(on_print_activate), t);
-	gtk_signal_connect(GTK_OBJECT(find), "activate",
+	g_signal_connect(GTK_OBJECT(find), "activate",
 			   G_CALLBACK(on_find_activate), t);
 
-	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
+	g_signal_connect(GTK_OBJECT(set_font), "activate",
 			   G_CALLBACK(set_module_font_activate),
 			   t);
 

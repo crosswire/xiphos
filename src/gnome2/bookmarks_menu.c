@@ -739,10 +739,10 @@ static void on_restore_folder_activate(GtkMenuItem * menuitem,
 
 	gtk_widget_show(fileselection);
 
-	gtk_signal_connect(GTK_OBJECT(ok), "clicked",
+	g_signal_connect(GTK_OBJECT(ok), "clicked",
 			   GTK_SIGNAL_FUNC(restore_ok),
 			   (GtkWidget *) fileselection);
-	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
+	g_signal_connect(GTK_OBJECT(cancel), "clicked",
 			   GTK_SIGNAL_FUNC(restore_cancel),
 			   (GtkWidget *) fileselection);
 
