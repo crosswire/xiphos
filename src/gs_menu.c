@@ -40,7 +40,6 @@
 #include "support.h"
 #include "gs_bookmarks.h"
 
-GtkWidget *menuInt;
 GtkWidget *module_options_menu;
 
 /*
@@ -292,30 +291,27 @@ void createpopupmenus(SETTINGS *s,
 		GList *bibleDescription,
 		GList *comDescription,
 		GList *dictDescription,
-		GList *bookDescription,
-		GList *percomlist,
 		GList *options) 
 {
-	GtkWidget 
-		*menuDict,
-		*menuBible,
-		*menuhtmlcom;	
-	
-	menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
-	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
-	menuBible = create_pmBible(bibleDescription, dictDescription);	
+	s->menuBible = create_pmBible(bibleDescription, dictDescription);	
 	/* create popup menu for commentaries window */
-	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);			
-	/* attach popup menus and ajust checkmarks*/
-	gnome_popup_menu_attach(menuInt,s->htmlInterlinear,(gchar*)"1");
-	gnome_popup_menu_attach(menuBible,lookup_widget(s->app,"htmlTexts"),(gchar*)"1");
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = s->comm_tabs;
-	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(s->app,"htmlCommentaries"),(gchar*)"1");
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuhtmlcom,"show_tabs1"))->active = s->comm_tabs;
-	gnome_popup_menu_attach(menuDict,lookup_widget(s->app,"htmlDict"),(gchar*)"1");	
-	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = s->dict_tabs;
-
+	s->menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);
+	/* create popup menu for dict/lex window */
+	s->menuDict = create_pmDict(dictDescription);
+	/* create popup menu for interlinear window */
+	s->menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
+	
+	/* attach popup menus */
+	gnome_popup_menu_attach(s->menuInt,s->htmlInterlinear,(gchar*)"1");
+	gnome_popup_menu_attach(s->menuBible,lookup_widget(s->app,"htmlTexts"),(gchar*)"1");
+	gnome_popup_menu_attach(s->menuhtmlcom,lookup_widget(s->app,"htmlCommentaries"),(gchar*)"1");
+	gnome_popup_menu_attach(s->menuDict,lookup_widget(s->app,"htmlDict"),(gchar*)"1");
+	
+	/* ajust checkmarks */
+	GTK_CHECK_MENU_ITEM (lookup_widget(s->menuDict,"show_tabs1"))->active = s->dict_tabs;
+	GTK_CHECK_MENU_ITEM (lookup_widget(s->menuBible,"show_tabs"))->active = s->comm_tabs;
+	GTK_CHECK_MENU_ITEM (lookup_widget(s->menuhtmlcom,"show_tabs1"))->active = s->comm_tabs;
 }
 
 /*
@@ -1061,8 +1057,9 @@ static GtkWidget* create_pmBible(GList *bibleDescription,
   	gtk_object_set_data_full (GTK_OBJECT (pmBible), "add_bookmark_menu", add_bookmark_menu,
                             (GtkDestroyNotify) gtk_widget_unref);
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (add_bookmark), add_bookmark_menu);
+	
 	/*** add bookmark items ***/
-	create_addBookmarkMenuBM(pmBible, add_bookmark_menu,settings);
+	create_addBookmarkMenuBM(pmBible, add_bookmark_menu, settings);
 	
 	show_tabs = gtk_check_menu_item_new_with_label("Show Tabs");
 	gtk_widget_ref(show_tabs);

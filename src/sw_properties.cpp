@@ -112,6 +112,7 @@ gboolean loadconfig(SETTINGS *s)
 	sprintf(settings->greek_font,"%s", settingsInfo["Fonts"]["Greek"].c_str());
 	sprintf(settings->hebrew_font,"%s",settingsInfo["Fonts"]["Hebrew"].c_str());
 	sprintf(settings->unicode_font,"%s", settingsInfo["Fonts"]["Unicode"].c_str());	
+	sprintf(settings->interlinear_font,"%s", settingsInfo["Fonts"]["Interlinear"].c_str());
 	
 	/* modules to use on startup */
 	sprintf(settings->MainWindowModule, "%s",
@@ -297,7 +298,8 @@ gboolean saveconfig(gboolean shutdown)
 		    settings->hebrew_font;   
 		 settingsInfo["Fonts"]["Unicode"] =
 		    settings->unicode_font;   
-		    
+		 settingsInfo["Fonts"]["Interlinear"] = settings->interlinear_font;
+		 
 		/* layout */    
 		sprintf(buf, "%d", settings->shortcutbar_width);
 		settingsInfo["LAYOUT"]["Shortcutbar"] = buf;
@@ -409,7 +411,7 @@ gboolean createfromsetupconfig(GtkWidget * setup)
 	settingsInfo["Fonts"]["Greek"] =	"-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
 	settingsInfo["Fonts"]["Hebrew"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
 	settingsInfo["Fonts"]["Unicode"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
-	
+	settingsInfo["Fonts"]["Interlinear"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
 	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
 	settingsInfo["LAYOUT"]["UperPane"] = "296";
 	settingsInfo["LAYOUT"]["BiblePane"] = "262";
@@ -496,7 +498,8 @@ gboolean createconfig(void)
 	settingsInfo["Fonts"]["Default"] =  "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";   
 	settingsInfo["Fonts"]["Greek"] =	"-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
 	settingsInfo["Fonts"]["Hebrew"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
-	settingsInfo["Fonts"]["Unicode"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1"; 
+	settingsInfo["Fonts"]["Unicode"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";
+	settingsInfo["Fonts"]["Interlinear"] = "-adobe-helvetica-medium-o-normal-*-12-*-*-*-p-*-iso8859-1";	 
 	
 	settingsInfo["LAYOUT"]["Shortcutbar"] = "120";
 	settingsInfo["LAYOUT"]["UperPane"] = "296";

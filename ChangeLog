@@ -1,3 +1,14 @@
+2002-03-14 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* adding a new bookmark group now adds a menu item to
+	  the add bookmark menus.
+	* fixed the detached interlinear not changing modules bug
+	* setup druid now shows correct gnomesword version number
+	* notebook tab menus now display last item correctly.
+	* added find dialog that can be used outside of html editor
+	* added files gs_find_dlg.c and gs_find_dlg.h
+
+
 2002-03-11 Jan Paul Schmidt <japas.@users.sourceforge.net>
 
 	* added German translation
