@@ -42,7 +42,7 @@
 SWDisplay *VTDisplay;	/* to display modules in view comm dialog */
 SWMgr *VTMgr;	/* sword mgr for view comm dialog */
 SWModule *VTMod;   /* module for view text dialog */
-
+gint numinst = 0;
 
 
 /****************************************************************************************
@@ -56,6 +56,7 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 	SectionMap::iterator sit; //-- iteratior
 	GList *cbBook_items;
 
+	++numinst;
 	/* fill book combo box */
 	cbBook_items = getBibleBooks();
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbBook), cbBook_items);
@@ -81,7 +82,7 @@ GList* VTsetupSWORD(GtkWidget *text, GtkWidget *cbBook)
 
 //-------------------------------------------------------------------------------------------
 void VTshutdownSWORD(void)  //-- close down viewtext dialog program
-{	
+{		
 	delete VTMgr;	
 	if(VTDisplay)
 		delete VTDisplay;	

@@ -37,6 +37,7 @@
 #include <gtkhtml/htmlcolorset.h>
 #include <gtkhtml/htmlselection.h>
 #include <gtkhtml/htmlcursor.h>
+#include <gal/widgets/e-unicode.h>
 
 #include "gs_html.h"
 #include "support.h"
@@ -336,7 +337,7 @@ void beginHTML(GtkWidget *html_widget, gboolean isutf8)
 	/*if (was_editable)
 		gtk_html_set_editable (html, FALSE);*/
 	if(isutf8){
-		htmlstream = gtk_html_begin_content (html, "text/html; charset=utf-8");
+		htmlstream = gtk_html_begin_content (html, "text/html; charset=utf-8");		
 	}else{
 		htmlstream = gtk_html_begin(html);
 	}
