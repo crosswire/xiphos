@@ -1,4 +1,4 @@
-# Anjuta Version 1.0.2 
+# Anjuta Version 1.1.1 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.0.2
+anjuta.version=1.1.1
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -33,6 +33,7 @@ project.version=0.9.0
 project.author=The GnomeSword Team
 project.source.target=src/gnome/gnomesword-1.0
 project.has.gettext=1
+project.gui.command=
 project.programming.language=C
 project.excluded.modules=intl
 
@@ -49,22 +50,25 @@ project.menu.need.terminal=0
 
 project.configure.options=--prefix=/home/terry --enable-static-sword
 anjuta.program.arguments=
+preferences.build.option.jobs=0
+preferences.build.option.silent=0
+preferences.build.option.autosave=1
+preferences.anjuta.make.options=-k
+preferences.make=make
+preferences.build.option.keep.going=1
+preferences.build.option.warn.undef=0
+preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
+preferences.autoformat.style=Custom style
+preferences.indent.opening=0
+preferences.autoformat.disable=0
 preferences.indent.automatic=1
 preferences.use.tabs=1
-preferences.indent.opening=0
-preferences.indent.closing=0
-preferences.tabsize=8
 preferences.indent.size=8
-preferences.autoformat.style=Custom style
-preferences.autoformat.custom.style= -i8 -kr -l72 -lc72 
-preferences.autoformat.disable=0
-preferences.debugger.command=gdb
-preferences.ui.designer=glade '$(project.name).glade'
-preferences.help.browser=devhelp -s '$(current.file.selection)'
+preferences.tabsize=8
+preferences.indent.closing=0
 
 module.include.name=.
 module.include.type=
-module.include.expanded=0
 module.include.files=\
 	src/backend/sword.h\
 	src/backend/sword_defs.h\
@@ -99,6 +103,7 @@ module.include.files=\
 	src/gui/find_dialog.h\
 	src/gui/gnomesword.h\
 	src/gui/gui.h\
+	src/gui/hints.h\
 	src/gui/history.h\
 	src/gui/html.h\
 	src/gui/interlinear.h\
@@ -142,7 +147,6 @@ module.include.files=\
 
 module.source.name=.
 module.source.type=
-module.source.expanded=1
 module.source.files=\
 	src/backend/sword.cpp\
 	src/gnome/about_gnomesword.c\
@@ -166,6 +170,7 @@ module.source.files=\
 	src/gnome/gbs_menu.c\
 	src/gnome/gnomesword.c\
 	src/gnome/gtkhtml_display.c\
+	src/gnome/hints.c\
 	src/gnome/history.c\
 	src/gnome/html.c\
 	src/gnome/percomm.c\
@@ -222,7 +227,6 @@ module.source.files=\
 
 module.pixmap.name=.
 module.pixmap.type=
-module.pixmap.expanded=1
 module.pixmap.files=\
 	pixmaps/tt.xpm\
 	pixmaps/GnomeSword.png\
@@ -240,17 +244,14 @@ module.pixmap.files=\
 
 module.data.name=.
 module.data.type=
-module.data.expanded=0
 module.data.files=
 
 module.help.name=.
 module.help.type=
-module.help.expanded=0
 module.help.files=
 
 module.doc.name=.
 module.doc.type=
-module.doc.expanded=1
 module.doc.files=\
 	AUTHORS\
 	COPYING\
@@ -269,7 +270,6 @@ module.doc.files=\
 	doc/help/search_dialog.html\
 	doc/help/template.html
 
-module.po.expanded=1
 module.po.files=\
 	bg.po\
 	de.po\
@@ -287,11 +287,12 @@ compiler.options.libraries=
 compiler.options.libraries.selected=
 compiler.options.defines=\
 	HAVE_CONFIG_H
+compiler.options.defines.selected=
 compiler.options.warning.buttons=0 0 1 1 0 1 0 0 0 0 0 0 0 1 0 0 
 compiler.options.optimize.buttons=1 0 0 0 
 compiler.options.other.buttons=1 0 
 compiler.options.other.c.flags=
 compiler.options.other.l.flags=
 compiler.options.other.l.libs=
-project.source.paths=
 
+project.src.paths=

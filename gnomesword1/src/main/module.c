@@ -24,7 +24,12 @@
 #endif
 
 
+
+#include <glib-1.2/glib.h>
+#include <string.h>
+
 #include "main/module.h"
+#include "main/xml.h"
 
 #include "backend/module.hh"
 #include "backend/key.hh"
@@ -33,6 +38,62 @@ extern int search_dialog;
 
 
 
+/******************************************************************************
+ * Name
+ *   get_footnote_body
+ *
+ * Synopsis
+ *   #include "main/module.h"
+ *
+ *   char *get_footnote_body(char *note)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char*
+ */
+
+char *get_footnote_body(char *note)
+{
+	gchar *buf = NULL;
+	gchar *token;
+	gchar *book;
+	gchar *chapter;
+	gchar *verse;
+	gchar *type;
+	gchar *note_number;
+	gchar *key;
+	
+	token = strtok(note, ".");
+	book = g_strdup(token);
+	token = strtok(NULL, ".");
+	chapter = g_strdup(token);
+	token = strtok(NULL, ".");
+	verse = g_strdup(token);
+	token = strtok(NULL, ".");
+	type = g_strdup(token);
+	token = strtok(NULL, ".");
+	note_number = strdup(token);
+	
+	key = g_strdup_printf("%s %s:%s",book,chapter,verse);
+		
+	buf = backend_get_footnote_body(
+		xml_get_value("modules", "text"), 
+		key, note_number);
+		
+	g_free(book);
+	g_free(chapter);
+	g_free(verse);
+	g_free(type);
+	g_free(key);
+	g_free(note_number);
+	if(buf) 
+		return buf;
+	else
+		return NULL;
+	
+}
 
 /******************************************************************************
  * Name
