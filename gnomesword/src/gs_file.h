@@ -37,7 +37,7 @@ void loadbookmarks_programstart(void);
 void loadbookmarks_afterSeparator(void);
 void loadoptionarray(void);
 void savebookmark(gchar * item);
-void savebookmarks(void);
+//void savebookmarks(void);
 void saveoptions(void);
 void createFiles(void);
 void writesettings(SETTINGS settings);

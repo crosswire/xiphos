@@ -21,6 +21,8 @@ COMMON_SOURCE =  \
     gs_viewdict.h \
     gs_studypad.c \
     gs_studypad.h \
+    gs_bookmarks.c \
+    gs_bookmarks.h \
     gs_gnomesword.c \
     gs_gnomesword.h \
     gs_history.c \
@@ -66,10 +68,14 @@ COMMON_SOURCE =  \
     sw_utility.h \
     sw_properties.cpp \
     sw_properties.h \
+    sw_bookmarks.cpp \
+    sw_bookmarks.h \
     sw_gbfhtml.cpp \
     sw_gbfhtml.h \
     sw_thmlhtml.cpp \
-    sw_thmlhtml.h
+    sw_thmlhtml.h\
+    sw_latin1utf8.cpp \
+    sw_latin1utf8.h
 
 SPELLING_SOURCE =  \
     debug.h \

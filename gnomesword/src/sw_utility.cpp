@@ -46,6 +46,7 @@ extern SWFilter *gbftohtml;
 extern SWFilter *plaintohtml;
 extern SWFilter *thmltohtml;
 extern SWFilter *rwptohtml;
+extern SWFilter *lattoutf8;
 
 /********************************************************************************************** 
  * addrenderfilters - 
@@ -56,21 +57,19 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 {
 	string sourceformat;
 	string moduleDriver;
+	string encoding;
 	ConfigEntMap::iterator entry;
 	bool noDriver = true;
-
+ 	bool isGBF = false;
 	sourceformat = ((entry = section.find("SourceType")) != section.end()) ? (*entry).second : (string) "";
 	moduleDriver = ((entry = section.find("ModDrv")) != section.end()) ? (*entry).second : (string) "";
-	
-	// Temporary: To support old module types
-//	if (sourceformat.empty())	{
-//		if ((RawGBF*)(module))
-//			sourceformat = "GBF";
-//	}
+	encoding = ((entry = section.find("Encoding")) != section.end()) ? (*entry).second : (string) "";
+
 	
 	if (!stricmp(sourceformat.c_str(), "GBF")) {
 		module->AddRenderFilter(gbftohtml);
 		noDriver = false; 
+		isGBF = true;
 	}
 
 	if (!stricmp(sourceformat.c_str(), "PLAIN")) {
@@ -97,6 +96,10 @@ void addrenderfiltersSWORD(SWModule *module, ConfigEntMap &section)
 			module->AddRenderFilter(plaintohtml);
 			noDriver = false;
 		}
+	}
+	
+	if(stricmp(encoding.c_str(), "UTF-8")){ // &&( !isGBF)) {
+		module->AddRenderFilter(lattoutf8);
 	}
 }
 

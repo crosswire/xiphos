@@ -52,6 +52,20 @@ struct _gsfonts {
 			dictionary_font_size[4],
 			interlinear_font_size[4];
 };
+
+
+typedef struct _gs_layout GS_LAYOUT;
+struct _gs_layout {
+	gint	shortcutbar_width,
+		upperpane_hight,
+		biblepane_width,
+		gs_width,
+		gs_hight;	
+};
+
+
+
+
  
 typedef struct _settings SETTINGS;
 struct _settings {
@@ -89,15 +103,15 @@ struct _settings {
 	           showhistorygroup;
 };
 
-typedef struct _gs_app GNOMESWORD;
+typedef struct _gs_app GS_APP;
 struct _gs_app {
 	GtkWidget  *app,
 			*Bible,
 			*Commentary,
 			*Dicttionary,
 			*Interlinear,
-			*Percom;
-			
+			*Percom,
+			*ctree_widget;		
 	
 };
 typedef struct _interlinear INTERLINEAR;

@@ -44,6 +44,7 @@
 *****************************************************************************/
 char 	*homedir,		/* store $home directory */
 	*gSwordDir,		/* store GnomeSword directory */
+	*swbmDir,		/* bookmarks directory */
 	*fnbookmarks,		/* store filename for bookmark file */
 	*fnbookmarksnew,
 	*fnconfigure;		/* store filename for configure file - options */
@@ -139,7 +140,10 @@ void setDiretory(void)
 	/* set gSwordDir to $home + .GnomeSword */
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
-	/* set fnbookmarks to gSwordDir + bookmarks.txt */
+	/* set bookmarks dir to swbmDir + .sword/bookmarks */
+	swbmDir = g_new(char, strlen(homedir) + strlen(".sword/bookmarks") + 2);
+	sprintf(swbmDir, "%s/%s",homedir,".sword/bookmarks/");
+	/*old bookmarks */
 	fnbookmarks =
 	    g_new(char, strlen(gSwordDir) + strlen("bookmarks.txt") + 2);	
 	sprintf(fnbookmarks, "%s/%s", gSwordDir, "bookmarks.txt");
@@ -158,6 +162,13 @@ void setDiretory(void)
 			printf(".GnomeSword does not exist");	
 			/* if we can not create gSwordDir exit */
 			gtk_exit(1);
+		}
+	}
+	if (access(swbmDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
+		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
+			//createbookmarks();
+		} else {
+			printf("can't create bookmarks dir and files");
 		}
 	}
 }
