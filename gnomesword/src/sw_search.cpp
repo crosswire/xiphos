@@ -37,7 +37,7 @@
 #include <versekey.h>
 #include <plainhtml.h>
 #include <gbfhtml.h>
-#include <rwphtml.h>
+//#include <rwphtml.h>
 #include <regex.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -337,4 +337,3 @@ changesearchresultsSW_SEARCH(SETTINGS *s, SEARCH_OPT *so, gchar *url)
 			changeVerseSWORD(url);	
 	}
 }
-

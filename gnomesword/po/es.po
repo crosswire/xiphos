@@ -5,9 +5,6 @@
 msgid "Add Bookmark"
 msgstr "Añadir Marca de Libro"
 
-msgid "Copy"
-msgstr "Copiar"
-
 msgid "Goto Reference"
 msgstr "Ir a Referencia"
 
@@ -136,10 +133,6 @@ msgstr "Diccionario Predeterminado"
 # src/gs_gui.c
 msgid "Detach/Attach Shortcut Bar"
 msgstr "Desprender/Fijar la Barra de Atajos"
-
-# src/gs_menu.c
-msgid "Dict/Lex"
-msgstr "Diccionarios/Léxica"
 
 # src/gs_preferences_dlg.c
 msgid "Dock Shortcut Bar"
@@ -641,17 +634,8 @@ msgid "Show %s in main window"
 msgstr "Mostrar %s en la ventana principal"
 
 # src/gs_html_editor.c
-# src/gs_html_editor.c
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr "``%s'' ha sido modificado. ¿Desea guardarlo?"
-
-# src/gs_html_editor.c
 msgid "File"
 msgstr "Archivo"
-
-# src/gs_html.c
-msgid "Show %s in main window"
-msgstr "Mostrar %s en la ventana principal"
 
 # src/gs_html.c
 msgid "Go to Strongs %s"
@@ -929,18 +913,6 @@ msgstr "No, utilizar las propiedades guardadas en la sesión anterior de GnomeSwo
 # src/gs_preferences_dlg.c
 msgid "Show Shortcut bar"
 msgstr "Mostrar la Barra de Atajos"
-
-# src/gs_preferences_dlg.c
-msgid "Show Bible Texts notebook tabs"
-msgstr "Mostrar las lenguetas de los Textos Bíblicos"
-
-# src/gs_preferences_dlg.c
-msgid "Show Commentary notebook tabs"
-msgstr "Mostrar las lenguetas de los Comentarios"
-
-# src/gs_preferences_dlg.c
-msgid "Show Dict/Lex notebook tabs"
-msgstr "Mostrar las lenguetas de los Diccionarios/Léxica"
 
 # src/gs_preferences_dlg.c
 msgid "No, use settings saved on last GnomeSword run"

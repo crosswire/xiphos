@@ -1,3 +1,17 @@
+2003-09-05 Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.7.10
+	* added Russian translation - thanks to Pavlo Bohmat
+	* requires sword-1.5.6
+	
+
+2003-09-05  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (SUBDIRS): Add m4.
+	(ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add config.rpath.
+	* configure.in (AC_OUTPUT): Add m4/Makefile.
+
 2003-03-25  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.7.9

@@ -6,9 +6,6 @@
 msgid "Add Bookmark"
 msgstr "Lesezeichen hinzufügen"
 
-msgid "Copy"
-msgstr "Kopieren"
-
 msgid "Goto Reference"
 msgstr "Gehe zu Referenz"
 
@@ -137,10 +134,6 @@ msgstr "Wörterbuchvorgabe"
 # src/gs_gui.c
 msgid "Detach/Attach Shortcut Bar"
 msgstr "Schnellzugriffsleiste abtrennen"
-
-# src/gs_menu.c
-msgid "Dict/Lex"
-msgstr "Wörterbücher/Lexika"
 
 # src/gs_preferences_dlg.c
 msgid "Dock Shortcut Bar"
@@ -658,21 +651,12 @@ msgid "File"
 msgstr "Datei"
 
 # src/gs_html.c
-msgid "Show %s in main window"
-msgstr "Zeige %s im Hauptfenster"
-
-# src/gs_html.c
 msgid "Go to Strongs %s"
 msgstr ""
 
 # src/gs_html.c
 msgid "Go to %s"
 msgstr "Gehe zu %s"
-
-# src/gs_html_editor.c
-# src/gs_html_editor.c
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr ",,%s'' wurde verändert. Möchten Sie es speichern?"
 
 # src/gs_html_editor.c
 msgid "-untitled-"
@@ -939,16 +923,8 @@ msgid "Show Shortcut bar"
 msgstr "Zeige Schnellzugriffsleiste"
 
 # src/gs_preferences_dlg.c
-msgid "Show Bible Texts notebook tabs"
-msgstr "Zeige Bibeltexte als Reiter"
-
-# src/gs_preferences_dlg.c
 msgid "Show Commentary notebook tabs"
 msgstr "Zeige Kommentare als Reiter"
-
-# src/gs_preferences_dlg.c
-msgid "Show Dict/Lex notebook tabs"
-msgstr "Zeige Wörterbücher/Lexika als Reiter"
 
 # src/gs_preferences_dlg.c
 msgid "No, use settings saved on last GnomeSword run"
@@ -957,10 +933,6 @@ msgstr "Nein, benutze Vorgaben von letzter GnomeSword Sitzung"
 # src/gs_preferences_dlg.c
 msgid "Show Bible Texts notebook tabs"
 msgstr "Zeige Bibeltexte als Register"
-
-# src/gs_preferences_dlg.c
-msgid "Show Commentary notebook tabs"
-msgstr "Zeige Kommentare als Reiter"
 
 # src/gs_preferences_dlg.c
 msgid "Show Dict/Lex notebook tabs"
