@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-01 12:00-0500\n"
-"PO-Revision-Date: 2005-02-01 22:19+0100\n"
+"PO-Revision-Date: 2005-02-02 11:04+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Le nombre de modules de textes bibliques :"
 
 #: src/main/lists.cc:134
 msgid "Number of Commentary modules"
-msgstr "Le nombre de modules de commentaires :"
+msgstr "Le nombre de modules de commentaire :"
 
 #: src/main/lists.cc:137
 msgid "Number of Dict/lex modules"
@@ -934,7 +934,7 @@ msgstr "Lecture quotidienne"
 
 #: src/gnome2/main_menu.c:543
 msgid "Show the Daily Devotion for today"
-msgstr "Affiche la lecture quotidienne de ce jour"
+msgstr "Affiche la lecture quotidienne du jour"
 
 #: src/gnome2/main_menu.c:558 src/gnome2/preferences_dialog.c:1732
 msgid "Bible Texts"
@@ -948,7 +948,7 @@ msgstr "Affiche/cache le volet des textes bibliques"
 #: src/gnome2/preferences_dialog.c:2034 src/gnome2/search_sidebar.c:215
 #: src/gnome2/setup_druid.c:807
 msgid "Commentary"
-msgstr "Commentaires"
+msgstr "Commentaire"
 
 #: src/gnome2/main_menu.c:565
 msgid "Show or hide commentaries"
@@ -1685,7 +1685,7 @@ msgstr "<b>Modules principaux</b>"
 
 #: src/gnome2/preferences_dialog.c:2015
 msgid "Biblical Text"
-msgstr "Textes bibliques"
+msgstr "Texte biblique"
 
 # src/gs_preferences_dlg.c
 #: src/gnome2/preferences_dialog.c:2072
@@ -2128,7 +2128,7 @@ msgstr "Le nombre de modules de textes bibliques :"
 
 #: src/gnome2/setup_druid.c:523
 msgid "Number of Commentary modules:"
-msgstr "Le nombre de modules de commentaires :"
+msgstr "Le nombre de modules de commentaire :"
 
 #: src/gnome2/setup_druid.c:532
 msgid "Number of Dictionary/Lexicon modules:"
