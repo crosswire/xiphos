@@ -19,25 +19,36 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __SHORTCUTBAR_MAIN_H_
-#define __SHORTCUTBAR_MAIN_H_
+#ifndef __SHORTCUTBAR_STRUCT_H_
+#define __SHORTCUTBAR_STRUCT_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <glib-1.2/glib.h>
+#include <gnome.h>
 	
-void showSBGroup(gint groupnum);
-void changegroupnameSB(gchar * groupName, gint groupNum);
-gint gui_get_num_shortcut_items(gint group_num);
-void gui_get_shortcut_item_info(gint group_num, gint item_num, 
-			gchar **item_url, gchar **item_name);	
-void gui_setup_shortcut_bar(void);
-void gui_update_shortcut_bar(void);
-void gui_shortcutbar_showhide(void);
-void gui_set_shortcutbar_porgram_start(void);
-	
+typedef struct _search_opt SEARCH_OPT;
+struct _search_opt {
+	GtkWidget
+	    *rbPhraseSearch;
+
+	gchar
+	    *module_name,
+	    *upper_bond, 
+	    *lower_bond, 
+	    *search_string;
+
+	gint
+	    search_type, 
+	    search_params, 
+	    found_count;
+
+	 gboolean 
+	    use_bonds, 
+	    use_lastsearch_for_bonds;
+};
+
 #ifdef __cplusplus
 }
 #endif
