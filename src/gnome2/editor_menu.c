@@ -646,8 +646,8 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
-	info->stock_icon = "gtk-add";
-	info->label_top = N_("Add reference Link");
+	//info->stock_icon = "gtk-add";
+	info->label_top = N_("<b>Add reference Link</b>");
 	info->text1 = g_strdup("");
 	info->label1 = N_("Reference: ");
 	info->text2 = g_strdup("");
