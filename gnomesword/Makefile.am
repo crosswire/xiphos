@@ -21,24 +21,24 @@ gnomesworddoc_DATA = \
 install-data-local:
 	@$(NORMAL_INSTALL)
 	if test -d $(srcdir)/pixmaps; then \
-          $(mkinstalldirs) $(DESTDIR)@PACKAGE_PIXMAPS_DIR@; \
+          $(mkinstalldirs) $(datadir)/pixmaps/${PACKAGE}; \
           for pixmap in $(srcdir)/pixmaps/*; do \
             if test -f $$pixmap; then \
-              $(INSTALL_DATA) $$pixmap $(DESTDIR)@PACKAGE_PIXMAPS_DIR@; \
+              $(INSTALL_DATA) $$pixmap $(datadir)/pixmaps/${PACKAGE}; \
             fi \
           done \
 	fi
 
-	$(mkinstalldirs) $(DESTDIR)@PACKAGE_MENU_DIR@/Applications; \
+	$(mkinstalldirs) $(datadir)/gnome/apps/Applications; \
         if test -f gnomesword.desktop; then \
-        $(INSTALL_DATA) gnomesword.desktop $(DESTDIR)@PACKAGE_MENU_DIR@/Applications; \
+        $(INSTALL_DATA) gnomesword.desktop $(datadir)/gnome/apps/Applications; \
         fi 
 
 uninstall-local:
 	@$(NORMAL_UNINSTALL)
-	rm -f -r $(DESTDIR)@PACKAGE_PIXMAPS_DIR@
-	rm -f $(DESTDIR)@PACKAGE_MENU_DIR@/Applications/gnomesword.desktop
-	rm -f -r $(DESTDIR)@PACKAGE_HELP_DIR@
+	rm -f -r $(datadir)/pixmaps/${PACKAGE}
+	rm -f $(datadir)/gnome/apps/Applications/gnomesword.desktop
+	rm -f -r $(datadir)/gnome/help/${PACKAGE}
 
 dist-hook:
 	if test -d pixmaps; then \

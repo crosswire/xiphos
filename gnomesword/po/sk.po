@@ -5,6 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-03-22 16:39+0100\n"
+"POT-Creation-Date: 2002-03-23 15:09-0500\n"
 "POT-Creation-Date: 2002-03-28 11:25-0500\n"
 "PO-Revision-Date: 2001-11-02 22:51GMT+0100\n"
 "Last-Translator: Zdenko Podobný <zdpo@mailbox.sk>\n"
@@ -275,7 +277,8 @@ msgid "Undo"
 msgstr ""
 
 #: src/gs_editor.c:1100 src/gs_editor_search.c:86 src/gs_editor_search.c:129
-#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/sw_gbs.cpp:382
+#: src/gs_find_dlg.c:96 src/gs_find_dlg.c:142 src/gs_find_dlg.c:144
+#: src/sw_gbs.cpp:382
 msgid "Find"
 msgstr ""
 
@@ -339,7 +342,7 @@ msgstr ""
 msgid "backward"
 msgstr ""
 
-#: src/gs_editor_search.c:129
+#: src/gs_editor_search.c:129 src/gs_find_dlg.c:144
 #, fuzzy
 msgid "Find Regular Expression"
 msgstr "Regulárny výraz"
@@ -503,6 +506,7 @@ msgstr "_Nastavenia/"
 msgid "Verse Style"
 msgstr "©týl ver¹a"
 
+#: src/gs_gnomesword.c:414
 #. -- remove old bookmarks from menu -- gs_menu.c
 #: src/gs_gnomesword.c:411
 msgid "_Quickmarks/<Separator>"
@@ -572,6 +576,7 @@ msgid "Information about Bible texts"
 msgstr "Informácie o biblických textoch"
 
 #: src/gs_gui.c:251 src/gs_gui.c:1156 src/gs_gui.c:1165
+#: src/gs_shortcutbar.c:1947
 #: src/gs_shortcutbar.c:1953 src/gs_shortcutbar.c:2248
 msgid "Commentaries"
 msgstr "Komentáre"
@@ -580,8 +585,6 @@ msgstr "Komentáre"
 msgid "Dictionaries-Lexicons"
 msgstr "Slovníky-lexikóny"
 
-#. s->htmlBook = gbs_control(s->workbook_lower, s);	
-#. gtk_box_pack_start(GTK_BOX(hboxToolbar), s->toolbarBooks, TRUE,TRUE, 0);
 #: src/gs_gui.c:263 src/gs_gui.c:1542 src/gs_gui.c:1555
 msgid "Books"
 msgstr ""
@@ -711,6 +714,7 @@ msgid "Study Pad"
 msgstr "©tudijný blok"
 
 #: src/gs_gui.c:1513 src/gs_gui.c:1524 src/gs_preferences_dlg.c:1661
+#: src/gs_setup.c:562 src/gs_shortcutbar.c:1972
 #: src/gs_setup.c:562 src/gs_shortcutbar.c:1978 src/gs_shortcutbar.c:2273
 msgid "Dict/Lex"
 msgstr "Slovník-Lexikón"
@@ -891,6 +895,7 @@ msgstr ""
 msgid "View Module"
 msgstr "Modul"
 
+#: src/gs_menu.c:1000 src/gs_menu.c:1029
 #. view_module3_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module3_menu));
 #: src/gs_menu.c:983 src/gs_menu.c:1012
 #, fuzzy
@@ -1522,10 +1527,12 @@ msgstr ""
 msgid "Revelation"
 msgstr ""
 
+#: src/gs_shortcutbar.c:1862
 #: src/gs_shortcutbar.c:1868 src/gs_shortcutbar.c:2164
 msgid "Favorites"
 msgstr ""
 
+#: src/gs_shortcutbar.c:1922
 #: src/gs_shortcutbar.c:1928 src/gs_shortcutbar.c:2223
 msgid "Bible Text"
 msgstr ""
