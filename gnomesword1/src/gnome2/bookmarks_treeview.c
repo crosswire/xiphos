@@ -117,7 +117,7 @@ void gui_verselist_to_bookmarks(GList * verses)
 			   COL_KEY, NULL,
 			   COL_MODULE, NULL,
 			   -1);
-		set_results_position((char) 1);	// TOP 
+//		set_results_position((char) 1);	// TOP 
 		str = g_string_new(" ");
 		while (verses) {
 			list_item = (RESULTS*) verses->data;
@@ -213,32 +213,6 @@ static void goto_bookmark(gchar * mod_name, gchar * key)
 		}
 	} else  {
 		main_url_handler(url, TRUE);
-/*		switch (module_type) {
-			case -1:
-				break;
-			case TEXT_TYPE:
-				val_key = gui_update_nav_controls(key);
-				url = g_strdup_printf("sword://%s/%s",
-						mod_name,val_key);
-				main_url_handler(url, TRUE);
-				g_free(val_key);
-				g_free(url);
-				break;
-			case COMMENTARY_TYPE:
-				val_key = gui_update_nav_controls(key);
-				url = g_strdup_printf("sword://%s/%s",
-						mod_name,val_key);
-				main_url_handler(url, TRUE);
-				g_free(val_key);
-				break;
-			case DICTIONARY_TYPE:				
-			case BOOK_TYPE:
-				url = g_strdup_printf("sword://%s/%s",mod_name,key);
-				main_url_handler(url, TRUE);
-				g_free(url);
-				break;
-		}
-*/
 	}
 	g_free(url);
 }

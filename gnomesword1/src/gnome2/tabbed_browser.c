@@ -328,7 +328,7 @@ static void on_notebook_main_switch_page(GtkNotebook * notebook,
 	
 	//sets the text mod and key
 	main_display_bible(pt->text_mod, pt->text_commentary_key);
-	gui_update_nav_controls(pt->text_commentary_key);
+	main_update_nav_controls(pt->text_commentary_key);
 	
 	//sets the commentary mod and key
 	if(pt->comm_showing)

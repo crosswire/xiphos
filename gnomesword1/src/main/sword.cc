@@ -63,7 +63,63 @@ extern "C" {
 	
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
+extern GtkWidget *cbe_book;
+extern GtkWidget *spb_chapter;
+extern GtkWidget *spb_verse;
+extern GtkWidget *cbe_freeform_lookup;
+
 gboolean style_display = TRUE;
+
+
+/******************************************************************************
+ * Name
+ *   main_update_nav_controls
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   gchar *main_update_nav_controls(const gchar * key)	
+ *
+ * Description
+ *   updates the nav toolbar controls 
+ *
+ * Return value
+ *   gchar *
+ */
+
+gchar *main_update_nav_controls(const gchar * key)
+{
+	char *val_key;
+	gint cur_chapter = 8, cur_verse = 28;
+
+	settings.apply_change = FALSE;
+	val_key = backend->get_valid_key(key);
+	//g_warning(key);
+	//g_warning("key = %s val_key = %s",key,val_key);
+	cur_chapter = backend->key_get_chapter(val_key);
+	cur_verse = backend->key_get_verse(val_key);
+	/* 
+	 *  remember last verse 
+	 */
+	xml_set_value("GnomeSword", "keys", "verse", val_key);
+	settings.currentverse = xml_get_value("keys", "verse");
+	/* 
+	 *  set book, chapter,verse and freeform lookup entries
+	 *  to new verse - settings.apply_change is set to false so we don't
+	 *  start a loop
+	 */
+	gtk_entry_set_text(GTK_ENTRY(cbe_book),
+			   backend->key_get_book(val_key));
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (spb_chapter), cur_chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON
+				  (spb_verse), cur_verse);
+	gtk_entry_set_text(GTK_ENTRY(cbe_freeform_lookup), val_key);
+	if(settings.browsing)
+		gui_set_tab_label(val_key);
+	settings.apply_change = TRUE;
+	return val_key;
+}
 
 
 /******************************************************************************

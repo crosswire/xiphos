@@ -267,8 +267,8 @@ int BackEnd::is_Bible_key(const char * list, char * current_key) {
 	VerseKey key;
 	
 	key.setText(current_key);
-	ListKey verses = key.ParseVerseList(list, key);
-	return verses.Count();
+	ListKey vs = key.ParseVerseList(list, key);
+	return vs.Count();
 }
 
 
@@ -324,6 +324,12 @@ int BackEnd::key_get_chapter(const char *key) {
 	return vkey.Chapter();
 }
 
+int BackEnd::key_get_verse(const char *key) {
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	return vkey.Verse();
+}
 
 const unsigned int BackEnd::key_chapter_count(const char *key) {
 	VerseKey vkey;
@@ -628,6 +634,44 @@ void BackEnd::setup_displays(void) {
 	
 }
 
+GList *BackEnd::parse_verse_list(const char * list, char * current_key) {
+	GList *retlist = NULL;
+	VerseKey key;
+	ListKey vs;
+	
+	key.setText(current_key);
+	vs = key.ParseVerseList(list, key);
+	if(!vs.Count())
+		return retlist;
+	while(!vs.Error()) {
+		retlist = g_list_append(retlist, (char*)vs.getText());
+		vs++;
+	}
+	return retlist;
+}
+
+GList *BackEnd::parse_range_list(const char * list) {
+	GList *retlist = NULL;
+	char *buf = NULL;
+	VerseKey key;
+	int count = 0;
+	
+	verses.ClearList();
+	verses = key.ParseVerseList(list, key, true);
+	
+	while(!verses.Error()) {	
+		VerseKey *element = SWDYNAMIC_CAST(VerseKey, 
+					verses.GetElement(count));
+		if (element) {
+			buf = g_strdup_printf("%s - %s",(const char *)element->LowerBound(),
+				(const char *)element->UpperBound());
+			retlist = g_list_append(retlist,(char*)buf);
+		}
+		verses++;
+		count++;
+	}
+	return retlist;
+}
 
 void BackEnd::set_listkey_position(char pos) {
 	results.setPosition((char)pos);

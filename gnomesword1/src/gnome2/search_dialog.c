@@ -516,9 +516,6 @@ static void range_name_changed(GtkEditable * editable,
  *
  * Description
  *   text in the range text entry has changed
- *   text is sent to the backend to get the search range list
- *   then list_ranges is updated to the range list
- *   and the range text in the clist_range is updated
  *
  * Return value
  *   void
@@ -527,48 +524,7 @@ static void range_name_changed(GtkEditable * editable,
 static void range_text_changed(GtkEditable * editable,
 			       gpointer user_data)
 {
-	const gchar *entry;
-	gchar *buf = NULL;
-	gint count;
-	gint i = 0;
-	GtkTreeModel *model;
-	GtkListStore *list_store;
-	GtkTreeModel *model_list_ranges;
-	GtkListStore *store_list_ranges;
-	GtkTreeSelection *selection;
-	GtkTreeIter selected;
-	GtkTreeIter iter;
-
-	/*    */
-	model_list_ranges =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW(search.list_ranges));
-	store_list_ranges = GTK_LIST_STORE(model_list_ranges);
-	/*    */
-	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (search.list_range_name));
-	list_store = GTK_LIST_STORE(model);
-	selection = gtk_tree_view_get_selection
-	    (GTK_TREE_VIEW(search.list_range_name));
-	if (!gtk_tree_selection_get_selected
-	    (selection, NULL, &selected))
-		return;
-
-	gtk_list_store_clear(store_list_ranges);
-	entry = gtk_entry_get_text(GTK_ENTRY(editable));
-	count = start_parse_range_list(entry);
-
-	while (count--) {
-		buf = get_next_verse_list_element(i++);
-		if (!buf)
-			break;
-		gtk_list_store_append(store_list_ranges, &iter);
-		gtk_list_store_set(store_list_ranges, &iter,
-				   0, buf, -1);
-		g_free(buf);
-	}
-
-	gtk_list_store_set(list_store, &selected, 1, entry, -1);
+	main_range_text_changed(editable);
 }
 
 
