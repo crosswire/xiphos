@@ -1,6 +1,6 @@
 INCLUDES = \
     $(GNOME_CFLAGS) \
-    $(SWORD_INCLUDES) \
+    $(SWORD_CFLAGS) \
     -I$(top_srcdir)/src
 
 noinst_LIBRARIES = libbackend.a

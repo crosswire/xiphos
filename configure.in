@@ -19,7 +19,12 @@ AC_SUBST(GNOME_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 dnl AC_ENABLE_STATIC(yes)
 
-AC_CHECK_SWORD(1.5.8, [NO])
+PKG_CHECK_MODULES(SWORD, sword >= 1.5.8, , exit)
+AC_SUBST(SWORD_LIBS)
+AC_SUBST(SWORD_CFLAGS)
+
+dnl AC_CHECK_SWORD(1.5.8, [NO])
+
 
 dnl Checks select argument types
 AC_FUNC_SELECT_ARGTYPES
@@ -259,9 +264,11 @@ if test "x$debug" = xyes; then
   else  
     echo "Dynamic link to Sword:          enabled"
   fi
-  echo "Sword libs              $LIB_SWORD"
-  echo "CFLAGS:   $CFLAGS"
-  echo "CPPFLAGS: @CPPFLAGS"
+dnl   echo "Sword libs              $LIB_SWORD"
+  echo "SWORD_LIBS:   $SWORD_LIBS"
+  echo "SWORD_CFLAGS: $SWORD_CFLAGS"
+  echo "CFLAGS: $CFLAGS"
+  echo "CPPFLAGS: $CPPFLAGS"
   echo "CXXFLAGS: $CXXFLAGS"GNOME_CFLAGS
   echo "GNOME_CFLAGS: $GNOME_CFLAGS"
   echo "install directory:     ${prefix}/bin"
