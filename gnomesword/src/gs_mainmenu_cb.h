@@ -52,6 +52,8 @@ extern "C" {
 					gpointer user_data);
 	void on_strongs_numbers1_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
+	void on_hebrew_points_activate(GtkMenuItem * menuitem, 
+					gpointer user_data);
 	void on_footnotes1_activate(GtkMenuItem * menuitem,
 				    	gpointer user_data);
 	void on_preferences1_activate(GtkMenuItem * menuitem,

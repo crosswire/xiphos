@@ -86,7 +86,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 		if (*url == '@') {
 			++url;
 			//str = showfirstlineStrongsSWORD(atoi(url));
-			sprintf(buf, "Show %s in main window", url);
+			sprintf(buf, _("Show %s in main window"), url);
 		} else if (*url == '#') {
 			++url;
 			if (*url == 'T')
@@ -110,7 +110,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 				g_free(tmpbuf);
 			}
 			//str = showfirstlineStrongsSWORD(atoi(url));
-			sprintf(buf, "Go to Strongs %s", url);
+			sprintf(buf, _("Go to Strongs %s"), url);
 		} else if (*url == 'M') {
 			gchar *tmpbuf;
 			++url;
@@ -129,7 +129,7 @@ void on_url(GtkHTML * html, const gchar * url, gpointer data)
 			++url;
 			sprintf(buf, "%s", url);
 		} else
-			sprintf(buf, "Go to %s", url);
+			sprintf(buf, _("Go to %s"), url);
 		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
 					buf);
 	}

@@ -55,7 +55,7 @@ GtkWidget *create_InfoBox(void)
 	GtkWidget *btnInfoBoxYes;
 	GtkWidget *btnInfoBoxNo;
 
-	InfoBox = gnome_dialog_new("GnomeSword - InfoBox", NULL);
+	InfoBox = gnome_dialog_new(_("GnomeSword - InfoBox"), NULL);
 	gtk_object_set_data(GTK_OBJECT(InfoBox), "InfoBox", InfoBox);
 	gtk_widget_set_usize(InfoBox, 216, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(InfoBox), 4);
@@ -96,7 +96,7 @@ GtkWidget *create_InfoBox(void)
 	gtk_widget_show(lbInfoBox1);
 	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox1, FALSE, FALSE, 0);
 
-	lbInfoBox2 = gtk_label_new("in StudyPad is not saved!");
+	lbInfoBox2 = gtk_label_new(_("in StudyPad is not saved!"));
 	gtk_widget_ref(lbInfoBox2);
 	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "lbInfoBox2",
 				 lbInfoBox2,
@@ -104,7 +104,7 @@ GtkWidget *create_InfoBox(void)
 	gtk_widget_show(lbInfoBox2);
 	gtk_box_pack_start(GTK_BOX(vbox24), lbInfoBox2, FALSE, FALSE, 0);
 
-	lbInfoBox3 = gtk_label_new("Shall I save it?");
+	lbInfoBox3 = gtk_label_new(_("Shall I save it?"));
 	gtk_widget_ref(lbInfoBox3);
 	gtk_object_set_data_full(GTK_OBJECT(InfoBox), "lbInfoBox3",
 				 lbInfoBox3,
