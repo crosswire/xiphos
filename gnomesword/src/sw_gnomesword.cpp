@@ -73,6 +73,7 @@
 #include "sw_properties.h"
 #include "sw_bookmarks.h"
 #include "sw_verselist_sb.h"
+#include "sw_module_options.h"
 
 
 typedef map < string, string > modDescMap;
@@ -559,6 +560,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 			break;
 		}
 	}
+	g_list_free(options);
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
 	g_string_free(gs_clipboard, TRUE);	
@@ -589,57 +591,60 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
  * window - the window to effect - text or interlinear
  * choice - true = on, false = off
  ******************************************************************************/
-void globaloptionsSWORD(gchar *option, gint window, gboolean choice)
+void globaloptionsSWORD(gchar *option, gint window, gboolean choice, gboolean showchange)
 {
-	switch (window) {
-	case 0:		// main text window     
-		if (choice) {
-			mainMgr->setGlobalOption(option, "On");
+	gchar *on_off;
+	if (choice) {
+			on_off = "On";
 		} else {
-			mainMgr->setGlobalOption(option, "Off");
+			on_off = "Off";
 		}
+	switch (window) {
+	case 0:		// main text window 
+		mainMgr->setGlobalOption(option, on_off);		
+		save_module_options(curMod->Name(), option, on_off);
 		
 		if(!strcmp(option, "Strong's Numbers")) {		
-			settings->strongs = choice;				
+			GTK_CHECK_MENU_ITEM(settings->strongsnum)->active = choice;			
 			/* set strongs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), settings->strongs);	
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnStrongs")), choice);	
 		}
 		
 		if(!strcmp(option,"Footnotes" )) {
-			settings->footnotes = choice;		
+			GTK_CHECK_MENU_ITEM(settings->footnotes)->active = choice;		
 			/* set footnotes toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), settings->footnotes);	
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnFootnotes")), choice);	
 		}
 		
 		if(!strcmp(option, "Morphological Tags")) {
-			settings->morphs = choice;	
+			GTK_CHECK_MENU_ITEM(settings->morphs)->active = choice;	
 			/* set morphs toogle button */
-			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), settings->morphs);	
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(settings->app,"btnMorphs")), choice);	
 		}	
 		
 		if(!strcmp(option, "Hebrew Vowel Points")) {
-			settings->hebrewpoints = choice;
+			GTK_CHECK_MENU_ITEM(settings->hebrewpoints)->active = choice;
+			//settings->hebrewpoints = choice;
 		}
 		
 		if(!strcmp(option, "Hebrew Cantillation")) {
-			settings->cantillationmarks = choice;
+			GTK_CHECK_MENU_ITEM(settings->cantillationmarks)->active = choice;
+			//settings->cantillationmarks = choice;
 		}
 		
 		if(!strcmp(option, "Greek Accents")) {
-			settings->greekaccents = choice;
+			GTK_CHECK_MENU_ITEM(settings->greekaccents)->active = choice;
+			//settings->greekaccents = choice;
 		}
 		
-		if (havebible) {
+		if (havebible && showchange) {
 			curMod->Display();
 		}
 		
 		break;
 	case 1:		// interlinear window   
-		if (choice) {
-			mainMgr1->setGlobalOption(option, "On");
-		} else {
-			mainMgr1->setGlobalOption(option, "Off");
-		}
+		mainMgr1->setGlobalOption(option, on_off);
+		
 		
 		if(!strcmp(option, "Strong's Numbers")) {		
 			settings->strongsint = choice;	
@@ -678,7 +683,7 @@ void globaloptionsSWORD(gchar *option, gint window, gboolean choice)
  *
  * searchs for module by modName - increments bibleindex, commindex or dictindex
  * until module is found then sets the text, comm or dict notebook page to index. 
- * key is new verse or dict/lex key
+ * key is new verse key or dict/lex key
  */
 void gotoBookmarkSWORD(gchar * modName, gchar * key)
 {
@@ -741,7 +746,10 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 	gchar title[200];
 	SectionMap::iterator sit;
 	ConfigEntMap::iterator entry;
-
+	GList *tmp;
+	bool value;
+	
+	tmp = NULL;
 	if (havebible) {
 		it = mainMgr->Modules.find(modName);	//-- iterate through the modules until we find modName
 		if (it != mainMgr->Modules.end()) {	//-- if we find the module   
@@ -754,6 +762,15 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 				}else{
 					gtk_widget_set_sensitive(settings->unlocktextmod_item, FALSE);
 				}
+				/*** set global options here ***/
+				tmp = options;
+				while(tmp != NULL) {
+					value = load_module_options((*it).second->Name(), (gchar*)tmp->data);					
+					globaloptionsSWORD((gchar*)tmp->data, MAIN_TEXT_WINDOW, value, FALSE);
+					//g_warning("%s = %d",(gchar*)tmp->data,value);	
+					tmp = g_list_next(tmp);
+				}
+				g_list_free(tmp);
 			} 
 			if (showchange) {
 				curMod->SetKey(current_verse);	//-- set key to current verse
@@ -779,11 +796,22 @@ void changecurModSWORD(gchar * modName, gboolean showchange)
 void changecomp1ModSWORD(gchar * modName)
 {
 	ModMap::iterator it;
-
+	//GList *tmp = NULL;
+	//bool value = false;
+	
+	//tmp =  NULL;
 	it = mainMgr1->Modules.find(modName);	//-- iterate through the modules until we find modName - modName was passed by the callback
 	if (it != mainMgr1->Modules.end()) {	//-- if we find the module      
 		comp1Mod = (*it).second;	//-- change current module to new module
 		comp1Mod->SetKey(current_verse);	//-- set key to current verse
+		//tmp = options;
+		/*while(tmp != NULL) {
+			value = load_module_options((*it).second->Name(), (gchar*)tmp->data);					
+			globaloptionsSWORD((gchar*)tmp->data, INTERLINEAR_WINDOW, value, FALSE);
+			//g_warning("%s = %d",(gchar*)tmp->data,value);	
+			tmp = g_list_next(tmp);
+		}*/
+		//g_list_free(tmp);
 		comp1Mod->Display();	//-- show it to the world
 	}
 }
