@@ -30,6 +30,8 @@
 
 #include "main/mod_mgr.h"
 
+
+#include "gui/mod_mgr.h"
 #include "backend/module_manager.hh"
 
 
