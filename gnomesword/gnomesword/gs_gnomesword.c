@@ -113,16 +113,22 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 /* set main notebook page */
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),settings->notebook3page );        
+	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
+			settings->notebook3page );        
 /* store text widgets for spell checker */
 	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
 /* Add options to Options Menu and get toggle item widget */
-	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments", (GtkMenuCallback)on_auto_save_notes1_activate); 
-	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page", (GtkMenuCallback)on_show_interlinear_page1_activate);
-	versestyle = additemtooptionmenu(app, "_Settings/", "Verse Style", (GtkMenuCallback)on_verse_style1_activate);
-	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes", (GtkMenuCallback)on_footnotes1_activate);
- 	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers", (GtkMenuCallback)on_strongs_numbers1_activate); 		
+	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments", 
+				(GtkMenuCallback)on_auto_save_notes1_activate); 
+	notepage  = additemtooptionmenu(app, "_Settings/", "Show Interlinear Page", 
+				(GtkMenuCallback)on_show_interlinear_page1_activate);
+	versestyle = additemtooptionmenu(app, "_Settings/", "Verse Style", 
+				(GtkMenuCallback)on_verse_style1_activate);
+	footnotes   = additemtooptionmenu(app, "_Settings/", "Show Footnotes", 
+				(GtkMenuCallback)on_footnotes1_activate);
+ 	strongsnum   = additemtooptionmenu(app, "_Settings/", "Show Strongs Numbers", 
+ 				(GtkMenuCallback)on_strongs_numbers1_activate); 		
 /* set dictionary key */
         gtk_entry_set_text(GTK_ENTRY(lookup_widget(app,"dictionarySearchText")),settings->dictkey);        
         loadbookmarks_programstart(); /* add bookmarks to menubar */
@@ -137,15 +143,17 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); 	
 
 /* set dict module to open notebook page */
-	
-	if(havedict){ /* let's don't do this if we don't have at least one dictionary / lexicon */			
-		gint pagenum = 0; /* set page to 0 (first page in notebook) */
+	/* let's don't do this if we don't have at least one dictionary / lexicon */	
+	if(havedict){ 			
+		/* set page to 0 (first page in notebook) */
+		gint pagenum = 0; 
 		/* if save page is less than actual number of pages use saved page number else 0 */
 		if(settings->notebook2page < dictpages) pagenum = settings->notebook2page; 
-		notebook = lookup_widget(app,"notebook4"); //-- get notebook
+		/* get notebook */
+		notebook = lookup_widget(app,"notebook4"); 
 		/* set notebook page */
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),pagenum ); 	
-		/* get the label from the notebook page (module name)	 */	
+		/* get the label from the notebook page (module name) */	
 		label1 = (GtkLabel *)gtk_notebook_get_tab_label (GTK_NOTEBOOK(notebook), 
 						gtk_notebook_get_nth_page (GTK_NOTEBOOK(notebook),pagenum));
 		changcurdictModSWORD(label1->label, settings->dictkey, pagenum);	
@@ -154,10 +162,11 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
                       NULL);
                 if(settings->showdicttabs) gtk_widget_show(notebook);
                 else gtk_widget_hide(notebook);
-	}else gtk_widget_hide(lookup_widget(app,"hbox8")); /* hide dictionary section of window if we do not have at least one dict/lex */
+         /* hide dictionary section of window if we do not have at least one dict/lex */       
+	}else gtk_widget_hide(lookup_widget(app,"hbox8")); 
 	
 /* set com module to open notebook page */	
-	if(havecomm){ /* let's don't do this if we don't have at least one commentary	 */
+	if(havecomm){ /* let's don't do this if we don't have at least one commentary */
 		gint pagenum = 0;
 		
 		if(settings->notebook1page < compages) pagenum = settings->notebook1page;
@@ -252,27 +261,31 @@ void UpdateChecks(GtkWidget *app)
 		setglobalopsSWORD("Footnotes","Off" );	/* keep footnotes in sync with menu */			
 	GTK_CHECK_MENU_ITEM (footnotes)->active = settings->footnotes;
 	
-	
-	if(settings->interlinearpage)	/* set interlinear page to last setting */
+	/* set interlinear page to last setting */
+	if(settings->interlinearpage)
 		gtk_widget_show(lookup_widget(app,"vbox3"));	
 	else
-		gtk_widget_hide(lookup_widget(app,"vbox3"));		
-	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; /* set interlinear page menu check item */
-	
-	
-	autoSave = settings->autosavepersonalcomments; /* set auto save personal comments to last setting */	
-	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; /* set auto save menu check item */
-	
-	
-	if(settings->strongs)	/* set Strong's numbers to last setting */
-		setglobalopsSWORD("Strong's Numbers","On");  /* " */ /* keep strongs numbers in sync with menu */
+		gtk_widget_hide(lookup_widget(app,"vbox3"));	
+	/* set interlinear page menu check item */		
+	GTK_CHECK_MENU_ITEM (notepage)->active = settings->interlinearpage; 	
+	/* set auto save personal comments to last setting */
+	autoSave = settings->autosavepersonalcomments; 
+	/* set auto save menu check item */	
+	GTK_CHECK_MENU_ITEM (autosaveitem)->active = settings->autosavepersonalcomments; 	
+	/* set Strong's numbers to last setting */
+	if(settings->strongs)	
+		/* keep strongs numbers in sync with menu */
+		setglobalopsSWORD("Strong's Numbers","On");  /* " */ 
 	else
-		setglobalopsSWORD("Strong's Numbers","Off"); /* ' */ /* keep strongs numbers in sync with menu */
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);	/* set strongs toogle button */
-	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;
-	
-        /*if(havedict) FillDictKeys(mydictmod);*/  /* fill the dict key clist */
-        changeVerse(settings->currentverse);  /* set Text - apply changes */
+		/* keep strongs numbers in sync with menu */
+		setglobalopsSWORD("Strong's Numbers","Off"); /* ' */ 
+	/* set strongs toogle button */
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(lookup_widget(app,"btnStrongs")), settings->strongs);
+	GTK_CHECK_MENU_ITEM (strongsnum)->active = settings->strongs;	
+        /* fill the dict key clist */
+        if(havedict) FillDictKeys();  
+        /* set Text - apply changes */
+        changeVerse(settings->currentverse);  
 }
 
 void
@@ -595,7 +608,6 @@ void addBookmark(GtkWidget *app)
 *****************************************************************************/
 void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)  
 {
-	GnomeUIInfo *historyitem;  /* pointer to gnome menu item structure */
 	/* add item to history menu */
 	additemtognomemenu(app, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); 
 	++historyitems;
@@ -625,10 +637,11 @@ void showIntPage(GtkWidget *app, gboolean choice)
 }
 
 /*****************************************************************************
- * setcurrentversecolor - someone change the color setting for the current verse
- * arg1
- * arg2
- * arg3
+ * setcurrentversecolor - someone change the color setting
+ *			  for the current verse
+ * arg1 - red
+ * arg2 - green
+ * arg3 - blue
 *****************************************************************************/
 void setcurrentversecolor(gint arg1, gint arg2, gint arg3)
 {
@@ -641,7 +654,7 @@ void setcurrentversecolor(gint arg1, gint arg2, gint arg3)
 	settings->currentverse_green= arg2; /* remember setting */
 	myGreen.blue = arg3; //-- new blue setting
 	settings->currentverse_blue = arg3; /* remember setting  */	
-	//curMod->Display(); /* display change */
+	redisplayTextSWORD(); /* display change */
 }
 
 /*****************************************************************************
