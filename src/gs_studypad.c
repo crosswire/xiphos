@@ -189,11 +189,11 @@ void on_text3_changed(GtkEditable * editable, gpointer user_data)
 
 	statusbar = lookup_widget(GTK_WIDGET(editable), "statusbar2");
 	if (current_filename) {
-		sprintf(charbuf, "%s - modified.", current_filename);
+		sprintf(charbuf, _("%s - modified."), current_filename);
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), 1, charbuf);
 	} else {
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar), 1,
-				   "modified");
+				   _("modified"));
 	}
 	file_changed = TRUE;
 }
@@ -230,7 +230,7 @@ void newSP(GtkWidget *text)
         gtk_text_set_point(GTK_TEXT(text), 0);
 	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
 	statusbar = lookup_widget((text),"statusbar2");
-	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
+	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, _("-untitled-"));
 	file_changed = FALSE;	
 }
 

@@ -74,6 +74,15 @@ extern "C" {
 	gchar *getcommodSWORD(void);
 	gchar *getcommodDescriptionSWORD(void);
 	GList *getBibleBooks(void);
+	
+/*******************************************************************************
+ * toggle hebrew points on and off
+ * window - the window to effect - text or interlinear
+ * choice - true = on, false = off
+ ******************************************************************************/
+	void hebrewpointsSWORD(gint window, gboolean choice);
+	
+	
 	void morphsSWORD(gint window, gboolean choice);
 	void gotoBookmarkSWORD(gchar * modName, gchar * key);
 	gchar *getmodkeySWORD(gint num);
