@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * editor_toolbar.h - style toolbar for editors
+ * toolbar_style.h - style toolbar for editors
  *               
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,12 +19,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _EDITOR_TOOLBAR_H
-#define _EDITOR_TOOLBAR_H
+#ifndef _TOOLBAR_STYLE_H
+#define _TOOLBAR_STYLE_H
 
 #include "gui/_editor.h"
 
-GtkWidget *toolbar_style(GSHTMLEditorControlData *ecd);
+GtkWidget *gui_toolbar_style(GSHTMLEditorControlData *ecd);
 void toolbar_update_format(GSHTMLEditorControlData *ecd);
 
 #endif

@@ -955,7 +955,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkWidget *frame25;
 	GtkWidget *vbox37;
 	GtkWidget *cbtnPNformat;
-	GtkWidget *checkbutton8;
 	GtkWidget *label123;
 	GtkWidget *scrolledwindow54;
 	GtkWidget *viewport7;
@@ -1670,19 +1669,7 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 			     _("Use HTML tags to format notes"), NULL);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cbtnPNformat),
 				     TRUE);
-
-	checkbutton8 = gtk_check_button_new_with_label(_("Auto Save"));
-	gtk_widget_ref(checkbutton8);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs),
-				 "checkbutton8", checkbutton8,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(checkbutton8);
-	gtk_box_pack_start(GTK_BOX(vbox37), checkbutton8, FALSE, FALSE,
-			   0);
-	gtk_widget_set_usize(checkbutton8, 202, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbutton8),
-				     TRUE);
-
+				     
 	label123 = gtk_label_new(_("Interface"));
 	gtk_widget_ref(label123);
 	gtk_object_set_data_full(GTK_OBJECT(dialog_prefs), "label123",

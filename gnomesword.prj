@@ -61,7 +61,7 @@ preferences.autoformat.disable=0
 
 module.include.name=.
 module.include.type=
-module.include.expanded=0
+module.include.expanded=1
 module.include.files=\
 	src/backend/sword.h\
 	src/backend/search.h\
@@ -101,7 +101,6 @@ module.include.files=\
 	src/gui/editor_replace.h\
 	src/gui/editor_search.h\
 	src/gui/editor_spell.h\
-	src/gui/editor_toolbar.h\
 	src/gui/fileselection.h\
 	src/gui/find_dialog.h\
 	src/gui/gnomesword.h\
@@ -120,7 +119,9 @@ module.include.files=\
 	src/gui/shortcutbar_search.h\
 	src/gui/shortcutbar_viewer.h\
 	src/gui/studypad.h\
+	src/gui/toolbar_edit.h\
 	src/gui/toolbar_nav.h\
+	src/gui/toolbar_style.h\
 	src/gui/utilities.h\
 	src/main/bibletext.h\
 	src/main/commentary.h\
@@ -178,7 +179,6 @@ module.source.files=\
 	src/gnome/editor_replace.c\
 	src/gnome/editor_search.c\
 	src/gnome/editor_spell.c\
-	src/gnome/editor_toolbar.c\
 	src/gnome/fileselection.c\
 	src/gnome/find_dialog.c\
 	src/gnome/gui.c\
@@ -196,7 +196,9 @@ module.source.files=\
 	src/gnome/shortcutbar_viewer.c\
 	src/gnome/studypad.c\
 	src/gnome/splash.c\
+	src/gnome/toolbar_edit.c\
 	src/gnome/toolbar_nav.c\
+	src/gnome/toolbar_style.c\
 	src/gnome/utilities.c\
 	src/main/bibletext.c\
 	src/main/commentary.c\

@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * _percom.c - personal comments gui
+ * percom.c - personal comments gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -30,7 +30,8 @@
 #include "gui/gtkhtml_display.h"
 #include "gui/percomm.h"
 #include "gui/_editor.h"
-#include "gui/editor_toolbar.h"
+#include "gui/toolbar_style.h"
+#include "gui/toolbar_edit.h"
 #include "gui/editor_menu.h"
 #include "gui/editor_spell.h"
 #include "gui/utilities.h"
@@ -40,7 +41,7 @@
 #include "main/percomm.h"
 #include "main/settings.h"
 #include "main/commentary.h"
- 
+
 /******************************************************************************
  * global to this file only
  */
@@ -66,10 +67,11 @@ static GString *gstr;
  *
  * Return value
  *   gboolean
- */ 
+ */
 
 static gboolean save_note_receiver(const HTMLEngine * engine,
-		   const char *data, unsigned int len, void *user_data)
+				   const char *data, unsigned int len,
+				   void *user_data)
 {
 	static gboolean startgrabing = FALSE;
 	if (!strncmp(data, "</BODY>", 7))
@@ -99,7 +101,7 @@ static gboolean save_note_receiver(const HTMLEngine * engine,
  * Return value
  *   void
  */
- 
+
 void gui_save_note(GSHTMLEditorControlData * e)
 {
 	gtk_html_set_editable(e->html, FALSE);
@@ -132,17 +134,17 @@ void gui_save_note(GSHTMLEditorControlData * e)
  *   void
  */
 
-static void set_percomm_frame_label(GtkWidget * frame, gchar *mod_name)
+static void set_percomm_frame_label(GtkWidget * frame, gchar * mod_name)
 {
 	/*
 	 * set frame label to NULL if tabs are showing
 	 * else set frame label to module name
-	 */	
+	 */
 	if (settings.percomm_tabs)
 		gtk_frame_set_label(GTK_FRAME(frame), NULL);
 	else
 		gtk_frame_set_label(GTK_FRAME(frame), mod_name);
-	
+
 }
 
 /******************************************************************************
@@ -159,13 +161,14 @@ static void set_percomm_frame_label(GtkWidget * frame, gchar *mod_name)
  *
  * Return value
  *   void
- */ 
- 
+ */
+
 void gui_percomm_tabs(gboolean choice)
 {
 	settings.percomm_tabs = choice;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_percomm),
-				   settings.percomm_tabs);	
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK
+				   (widgets.notebook_percomm),
+				   settings.percomm_tabs);
 	//set_percomm_frame_label(cur_p->ec->frame, cur_p->mod_name);
 }
 
@@ -187,30 +190,32 @@ void gui_percomm_tabs(gboolean choice)
  * Return value
  *   void
  */
- 
+
 static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
-		GtkNotebookPage * page, gint page_num, GList * pcl)
+					    GtkNotebookPage * page,
+					    gint page_num, GList * pcl)
 {
 	PC_DATA *p, *p_last;
 	gchar *text_str = NULL;
 	/*
 	 * get data structure for new module 
 	 */
-	p_last = (PC_DATA *) g_list_nth_data(pcl, 
-				settings.percomm_last_page);
+	p_last = (PC_DATA *) g_list_nth_data(pcl,
+					     settings.
+					     percomm_last_page);
 	p = (PC_DATA *) g_list_nth_data(pcl, page_num);
 	/*
 	 * point PC_DATA *cur_p to p - PC_DATA is global
 	 */
 	cur_p = p;
-	
+
 	change_percomm_module(p->mod_name);
-	strcpy(p->ec->key,settings.currentverse);
+	strcpy(p->ec->key, settings.currentverse);
 	set_percomm_key(p->ec->key);
-	
-	if(!p->ec->htmlwidget)
+
+	if (!p->ec->htmlwidget)
 		gui_add_new_percomm_pane(p);
-	
+
 	/*
 	 * remember new module name
 	 */
@@ -222,28 +227,30 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	/*
 	 * display new module with current verse
 	 */
-	if(percomm_display_change) {
+	if (percomm_display_change) {
 		text_str = get_percomm_text(p->ec->key);
-		if(text_str) {
-			entry_display(p->ec->htmlwidget, p->mod_name, 
-				text_str, p->ec->key, FALSE);
+		if (text_str) {
+			entry_display(p->ec->htmlwidget, p->mod_name,
+				      text_str, p->ec->key, FALSE);
 			free(text_str);
 		}
 	}
 	/*
 	 * set edit mode
 	 *//*
-	if(GTK_CHECK_MENU_ITEM(p_last->ec->editnote)->active) {
-		gtk_widget_hide(p_last->ec->frame_toolbar);
-		gtk_widget_hide(p_last->ec->handlebox_toolbar);
-	}*/
-	if(GTK_CHECK_MENU_ITEM(p->ec->editnote)->active){
-		gtk_widget_show(p->ec->frame_toolbar);
+	   if(GTK_CHECK_MENU_ITEM(p_last->ec->editnote)->active) {
+	   gtk_widget_hide(p_last->ec->frame_toolbar);
+	   gtk_widget_hide(p_last->ec->handlebox_toolbar);
+	   } */
+	if (GTK_CHECK_MENU_ITEM(p->ec->editnote)->active) {
+		gtk_widget_show(p->ec->toolbar_edit);
+		gtk_widget_show(p->ec->toolbar_style);
 	}
-	
+
 	widgets.html_percomm = p->ec->htmlwidget;
-	
-	GTK_CHECK_MENU_ITEM(p->ec->show_tabs)->active = settings.percomm_tabs;
+
+	GTK_CHECK_MENU_ITEM(p->ec->show_tabs)->active =
+	    settings.percomm_tabs;
 	gui_percomm_tabs(settings.percomm_tabs);
 	update_statusbar(p->ec);
 }
@@ -264,9 +271,9 @@ static void on_notebook_percomm_switch_page(GtkNotebook * notebook,
  * Return value
  *   gint
  */
- 
+
 static gint release(GtkWidget * widget, GdkEventButton * event,
-					GSHTMLEditorControlData * cd)
+		    GSHTMLEditorControlData * cd)
 {
 
 	return FALSE;
@@ -288,9 +295,9 @@ static gint release(GtkWidget * widget, GdkEventButton * event,
  * Return value
  *   gint
  */
- 
+
 static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
-					GSHTMLEditorControlData * ecd)
+			     GSHTMLEditorControlData * ecd)
 {
 	ecd->changed = TRUE;
 	//file_changed = TRUE;
@@ -314,9 +321,9 @@ static gint html_key_pressed(GtkWidget * html, GdkEventButton * event,
  * Return value
  *   void
  */
- 
+
 static void html_load_done(GtkWidget * html,
-					GSHTMLEditorControlData * ecd)
+			   GSHTMLEditorControlData * ecd)
 {
 	update_statusbar(ecd);
 }
@@ -338,7 +345,7 @@ static void html_load_done(GtkWidget * html,
  * Return value
  *   void
  */
- 
+
 static void on_submit(GtkHTML * html, const gchar * method,
 		      const gchar * url, const gchar * encoding,
 		      GSHTMLEditorControlData * ecd)
@@ -376,14 +383,15 @@ static void on_submit(GtkHTML * html, const gchar * method,
  *
  * Return value
  *   gint
- */ 
+ */
 
-static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
-					GSHTMLEditorControlData * ecd)
-{	
-	if (ecd->personal_comments) 
+static gint html_button_pressed(GtkWidget * html,
+				GdkEventButton * event,
+				GSHTMLEditorControlData * ecd)
+{
+	if (ecd->personal_comments)
 		settings.whichwindow = PERCOMM_WINDOW;
-	if (ecd->studypad) 
+	if (ecd->studypad)
 		settings.whichwindow = STUDYPAD_WINDOW;
 	switch (event->button) {
 	case 1:
@@ -433,259 +441,17 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  * Return value
  *   gboolean
  */
- 
+
 static gboolean on_html_enter_notify_event(GtkWidget * widget,
-			   GdkEventCrossing * event,
-			   GSHTMLEditorControlData * ecd)
+					   GdkEventCrossing * event,
+					   GSHTMLEditorControlData *
+					   ecd)
 {
 	if (!ecd->personal_comments && !ecd->gbs)
 		if (!gtk_html_get_editable(ecd->html))
 			gtk_html_set_editable(ecd->html, TRUE);
 	return TRUE;
 }
-
-/******************************************************************************
- * Name
- *  on_btn_save_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_save_clicked(GtkButton * button,
-					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    save contents of editor
- *
- * Return value
- *   void
- */
- 
-static void on_btn_save_clicked(GtkButton * button,
-					PC_DATA *p)
-{
-	if(p->ec->personal_comments) {
-		gui_save_note(p->ec);
-		p->ec->changed = FALSE;
-		update_statusbar(p->ec);
-	}
-}
-
-/******************************************************************************
- * Name
- *  on_btn_delete_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_delete_clicked(GtkButton * button,
-					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    delete personal commnet
- *
- * Return value
- *   void
- */
- 
-static void on_btn_delete_clicked(GtkButton * button,
-					PC_DATA *p)
-{
-	if(p->ec->personal_comments) {
-		GS_DIALOG *info;
-		gint test;
-		gchar *key;
-		
-		key = get_percomm_key();		
-		info = gui_new_dialog();
-		info->label_top = N_("Are you sure you want");
-		info->label_middle = N_("to delete the note for");
-		info->label_bottom = key;
-		info->yes = TRUE;
-		info->no = TRUE;
-		
-		test = gui_gs_dialog(info);
-		if (test == GS_YES) {	
-			delete_percomm_note();
-			gui_display_percomm(key);
-		}
-		settings.percomverse = key;
-		p->ec->changed = FALSE;
-		update_statusbar(p->ec);
-		g_free(info);
-		g_free(key);
-	}
-	
-}
-
-/******************************************************************************
- * Name
- *  on_btn_print_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_print_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    print the editor text
- *
- * Return value
- *   void
- */
- 
-static void on_btn_print_clicked(GtkButton * button, 
-					GSHTMLEditorControlData * ecd)
-{
-	gui_html_print(ecd->htmlwidget);
-}
-
-/******************************************************************************
- * Name
- *  on_btn_cut_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_cut_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    cut selected text to clipboard
- *
- * Return value
- *   void
- */
- 
-static void on_btn_cut_clicked(GtkButton * button, 
-					GSHTMLEditorControlData * ecd)
-{
-	gtk_html_cut(ecd->html);
-	ecd->changed = TRUE;
-	update_statusbar(ecd);
-}
-
-/******************************************************************************
- * Name
- *  on_btn_copy_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_copy_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    copy selected text to clipboard
- *
- * Return value
- *   void
- */
- 
-static void on_btn_copy_clicked(GtkButton * button, 
-					GSHTMLEditorControlData * ecd)
-{
-	gtk_html_copy(ecd->html);
-}
-
-/******************************************************************************
- * Name
- *  on_btn_paste_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_paste_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    paste contents of clipboard into editor
- *
- * Return value
- *   
- */
- 
-static void on_btn_paste_clicked(GtkButton * button, 
-					GSHTMLEditorControlData * ecd)
-{
-	gtk_html_paste(ecd->html);
-	ecd->changed = TRUE;
-	update_statusbar(ecd);
-}
-
-/******************************************************************************
- * Name
- *  on_btn_undo_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_undo_clicked(GtkButton * button, 
- *					GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    undo changes in the editor
- *
- * Return value
- *   void
- */ 
-
-static void on_btn_undo_clicked(GtkButton * button, 
-					GSHTMLEditorControlData * ecd)
-{
-	gtk_html_undo(ecd->html);
-	ecd->changed = TRUE;
-	update_statusbar(ecd);
-}
-
-/******************************************************************************
- * Name
- *  on_btn_Find_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_Find_clicked(GtkButton *button, 
- *					GSHTMLEditorControlData *ecd)	
- *
- * Description
- *    open find dialog
- *
- * Return value
- *   void
- */ 
-
-static void on_btn_Find_clicked(GtkButton * button, 
-					GSHTMLEditorControlData * ecd)
-{
-	search(ecd, FALSE, NULL);
-}
-
-
-/******************************************************************************
- * Name
- *  on_btn_replace_clicked
- *
- * Synopsis
- *   #include "_percomm.h"
- *
- *   void on_btn_replace_clicked(GtkButton * button,
-		       GSHTMLEditorControlData * ecd)	
- *
- * Description
- *    open find and replace dialog
- *
- * Return value
- *   void
- */
- 
-static void on_btn_replace_clicked(GtkButton * button,
-		       GSHTMLEditorControlData * ecd)
-{
-	replace(ecd);
-}
-
 
 /******************************************************************************
  * Name
@@ -704,234 +470,40 @@ static void on_btn_replace_clicked(GtkButton * button,
  *   GSHTMLEditorControlData *
  */
 
-static void create_percomm_pane(PC_DATA *p)
+static void create_percomm_pane(PC_DATA * p)
 {
 	GtkWidget *vboxPC;
+	GtkWidget *vbox;
 	GtkWidget *frame34;
 	GtkWidget *scrolledwindow17;
 	GtkWidget *toolbar;
-	GtkWidget *tmp_toolbar_icon;
-	GtkWidget *vseparator;	
-	
+
 	p->ec->personal_comments = TRUE;
-	/*
-	p->ec->frame = gtk_frame_new(NULL);
-	gtk_widget_ref(p->ec->frame);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->frame",
-				 p->ec->frame,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->frame);
-	gtk_box_pack_start(GTK_BOX(p->vbox), p->ec->frame, TRUE, TRUE, 0);
-	*/
+
 	vboxPC = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxPC);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxPC", vboxPC,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxPC",
+				 vboxPC,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxPC);
 	gtk_box_pack_start(GTK_BOX(p->vbox), vboxPC, TRUE, TRUE, 0);
-	//gtk_container_add(GTK_CONTAINER(p->ec->frame), vboxPC);
 
-		
-	
-	p->ec->frame_toolbar = gtk_frame_new(NULL);
-	gtk_widget_ref(p->ec->frame_toolbar);
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "p->ec->frame_toolbar",
-				 p->ec->frame_toolbar,
+				 "vbox", vbox,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_box_pack_start(GTK_BOX(vboxPC), p->ec->frame_toolbar, FALSE,
-			   TRUE, 0);
-	toolbar =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_ICONS);
-	gtk_widget_ref(toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "toolbar", toolbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(toolbar);
-	gtk_container_add(GTK_CONTAINER(p->ec->frame_toolbar), toolbar);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar),
-				      GTK_RELIEF_NONE);
-		
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_SAVE);
-	p->ec->btn_save =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Save"), _("Save Note"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_save);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_save",
-				 p->ec->btn_save,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_save);
-	
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_TRASH);
-	p->ec->btn_delete =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Delete"), _("Delete Note"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(p->ec->btn_delete);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_delete",
-				 p->ec->btn_delete,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_delete);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_PRINT);
-	p->ec->btn_print =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Print"), _("Print Note"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_ref(p->ec->btn_print);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_print",
-				 p->ec->btn_print,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_print);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator",
-				 vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_CUT);
-	p->ec->btn_cut =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Cut"), _("Cut "), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_cut);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_cut",
-				 p->ec->btn_cut,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_cut);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_COPY);
-	p->ec->btn_copy =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Copy"), _("Copy"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_copy);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_copy",
-				 p->ec->btn_copy,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_copy);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_PASTE);
-	p->ec->btn_paste =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Paste"), _("Paste"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_paste);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_paste",
-				 p->ec->btn_paste,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_paste);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app, GNOME_STOCK_PIXMAP_UNDO);
-	p->ec->btn_undo =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Undo"), _("Undo"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_undo);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_undo",
-				 p->ec->btn_undo,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_undo);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator",
-				 vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GNOME_STOCK_PIXMAP_SEARCH);
-	p->ec->btn_Find =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Find"),
-				       _("Find in this note"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_Find);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_Find",
-				 p->ec->btn_Find,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_Find);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GNOME_STOCK_PIXMAP_SRCHRPL);
-	p->ec->btn_replace =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Replace"),
-				       _("Find and Replace"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_replace);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "p->ec->btn_replace", p->ec->btn_replace,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_replace);
-
-	vseparator = gtk_vseparator_new();
-	gtk_widget_ref(vseparator);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vseparator",
-				 vseparator,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vseparator);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar), vseparator,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator, 5, 7);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GNOME_STOCK_PIXMAP_SPELLCHECK);
-	p->ec->btn_spell =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Spell"),
-				       _("Spell check note"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(p->ec->btn_spell);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->btn_spell",
-				 p->ec->btn_spell,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(p->ec->btn_spell);
-	
-#ifdef USE_SPELL	
-	gtk_widget_set_sensitive(p->ec->btn_spell, 1);
-#else
-	gtk_widget_set_sensitive(p->ec->btn_spell, 0);
-#endif
+	gtk_widget_show(vbox);
+	gtk_box_pack_start(GTK_BOX(vboxPC), vbox, TRUE, TRUE,
+			   0);
 
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34", frame34,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34",
+				 frame34,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame34);
-	gtk_box_pack_start(GTK_BOX(vboxPC), frame34, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(vbox), frame34, TRUE, TRUE, 0);
 
 	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow17);
@@ -958,20 +530,20 @@ static void create_percomm_pane(PC_DATA *p)
 
 	p->ec->statusbar = gtk_statusbar_new();
 	gtk_widget_ref(p->ec->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "p->ec->statusbar",
-				 p->ec->statusbar,
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "p->ec->statusbar", p->ec->statusbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->ec->statusbar);
-	gtk_box_pack_start(GTK_BOX(vboxPC), p->ec->statusbar, FALSE, TRUE,
-			   0);
-			   
+	gtk_box_pack_start(GTK_BOX(vboxPC), p->ec->statusbar, FALSE,
+			   TRUE, 0);
+
 	p->ec->vbox = vboxPC;
-	
+
 	p->ec->pm = gui_create_editor_popup(p->ec);
 	gnome_popup_menu_attach(p->ec->pm, p->ec->htmlwidget, NULL);
-	
+
 	p->html = p->ec->htmlwidget;
-	
+
 	gtk_signal_connect(GTK_OBJECT(p->ec->html), "submit",
 			   GTK_SIGNAL_FUNC(on_submit), p->ec);
 	gtk_signal_connect(GTK_OBJECT
@@ -990,42 +562,23 @@ static void create_percomm_pane(PC_DATA *p)
 			   "enter_notify_event",
 			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 			   p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "link_clicked", 
-			GTK_SIGNAL_FUNC(gui_link_clicked),	/* gs_html.c */
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "on_url", 
-			GTK_SIGNAL_FUNC(gui_url),	/* gs_html.c */
-			   NULL);
+	/* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget),
+			   "link_clicked",
+			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
+	/* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(p->ec->htmlwidget), "on_url",
+			   GTK_SIGNAL_FUNC(gui_url), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_save), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_save_clicked), p);
-	
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_delete), "clicked",
-		   GTK_SIGNAL_FUNC(on_btn_delete_clicked),
-		   p);
-		   		   
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_print), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_print_clicked), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_cut), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_cut_clicked), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_copy), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_copy_clicked), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_paste), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_paste_clicked), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_undo), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_undo_clicked), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_Find), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_Find_clicked), p->ec);
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_replace), "clicked",
-			   GTK_SIGNAL_FUNC(on_btn_replace_clicked),
-			   p->ec);
-#ifdef USE_SPELL			   
-	gtk_signal_connect(GTK_OBJECT(p->ec->btn_spell), "clicked",
-			   GTK_SIGNAL_FUNC(spell_check_cb), p->ec);
-#endif	/*
-	widgets.toolbar_comments = toolbar_style(p->ec);
-	gtk_widget_hide(p->ec->handlebox_toolbar);
-	*/
+	widgets.toolbar_comments = gui_toolbar_style(p->ec);
+	gtk_box_pack_start(GTK_BOX(vbox),
+			   widgets.toolbar_comments, FALSE, FALSE, 0);
+	gtk_widget_hide(widgets.toolbar_comments);
+	toolbar = gui_toolbar_edit(p->ec);
+	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE,
+			   FALSE, 0);
+	gtk_widget_hide(toolbar);
+
 }
 
 /******************************************************************************
@@ -1044,14 +597,15 @@ static void create_percomm_pane(PC_DATA *p)
  *   void
  */
 
-void gui_display_percomm(gchar *key)
-{	
+void gui_display_percomm(gchar * key)
+{
 	gchar *text_str = NULL;
 	settings.percomverse = key;
 	strcpy(cur_p->ec->key, key);
 	text_str = get_percomm_text(key);
-	if(text_str) {
-		entry_display(cur_p->html, cur_p->mod_name, text_str, key, FALSE);
+	if (text_str) {
+		entry_display(cur_p->html, cur_p->mod_name, text_str,
+			      key, FALSE);
 		free(text_str);
 	}
 	update_statusbar(cur_p->ec);
@@ -1088,11 +642,11 @@ void gui_set_percomm_page_and_key(gint page_num, gchar * key)
 				      (widgets.notebook_percomm),
 				      page_num);
 	}
-	
+
 	text_str = get_percomm_text(key);
-	if(text_str) {
-		entry_display(cur_p->html, cur_p->mod_name, text_str, 
-							key, FALSE);
+	if (text_str) {
+		entry_display(cur_p->html, cur_p->mod_name, text_str,
+			      key, FALSE);
 		free(text_str);
 	}
 	update_statusbar(cur_p->ec);
@@ -1129,12 +683,13 @@ static void set_page_percomm(gchar * modname, GList * percomm_list)
 		percomm_list = g_list_next(percomm_list);
 	}
 	cur_p = p;
-	if(page == 0)
-		on_notebook_percomm_switch_page(
-			(GtkNotebook *)widgets.notebook_percomm,
-			NULL, page, percomm_list);
+	if (page == 0)
+		on_notebook_percomm_switch_page((GtkNotebook *) widgets.
+						notebook_percomm, NULL,
+						page, percomm_list);
 	else
-		gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_percomm), page);
+		gtk_notebook_set_page(GTK_NOTEBOOK
+				      (widgets.notebook_percomm), page);
 	settings.percomm_last_page = page;
 }
 
@@ -1154,8 +709,8 @@ static void set_page_percomm(gchar * modname, GList * percomm_list)
  *   void
  */
 
-void gui_add_new_percomm_pane(PC_DATA *p)
-{	
+void gui_add_new_percomm_pane(PC_DATA * p)
+{
 	create_percomm_pane(p);
 }
 
@@ -1175,33 +730,38 @@ void gui_add_new_percomm_pane(PC_DATA *p)
  *   void
  */
 
-static void add_vbox_to_notebook(PC_DATA *p)
-{	
+static void add_vbox_to_notebook(PC_DATA * p)
+{
 	GtkWidget *label;
-	
+
 	p->vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(p->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
-			"p->vbox", p->vbox,
-			(GtkDestroyNotify) gtk_widget_unref);
+	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
+				 "p->vbox", p->vbox,
+				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->vbox);
-	gtk_container_add(GTK_CONTAINER(widgets.notebook_percomm), p->vbox);
-	
+	gtk_container_add(GTK_CONTAINER(widgets.notebook_percomm),
+			  p->vbox);
+
 	label = gtk_label_new(p->mod_name);
 	gtk_widget_ref(label);
 	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
 				 label,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
-	gtk_notebook_set_tab_label(GTK_NOTEBOOK(widgets.notebook_percomm),
-				gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(widgets.notebook_percomm),
-							p->mod_num), label);	
-							     
-	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(widgets.notebook_percomm),
-                                gtk_notebook_get_nth_page(GTK_NOTEBOOK
-							(widgets.notebook_percomm),
-							p->mod_num), p->mod_name);	
+	gtk_notebook_set_tab_label(GTK_NOTEBOOK
+				   (widgets.notebook_percomm),
+				   gtk_notebook_get_nth_page
+				   (GTK_NOTEBOOK
+				    (widgets.notebook_percomm),
+				    p->mod_num), label);
+
+	gtk_notebook_set_menu_label_text(GTK_NOTEBOOK
+					 (widgets.notebook_percomm),
+					 gtk_notebook_get_nth_page
+					 (GTK_NOTEBOOK
+					  (widgets.notebook_percomm),
+					  p->mod_num), p->mod_name);
 }
 
 /******************************************************************************
@@ -1221,7 +781,7 @@ static void add_vbox_to_notebook(PC_DATA *p)
  *   GList *
  */
 
-void gui_setup_percomm(GList *mods)
+void gui_setup_percomm(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modbuf;
@@ -1230,7 +790,7 @@ void gui_setup_percomm(GList *mods)
 
 	percomm_list = NULL;
 	percomm_display_change = TRUE;
-	
+
 	tmp = mods;
 	tmp = g_list_first(tmp);
 	while (tmp != NULL) {
@@ -1241,7 +801,9 @@ void gui_setup_percomm(GList *mods)
 		p->ec = gs_html_editor_control_data_new();
 		strcpy(p->ec->key, settings.currentverse);
 		p->ec->htmlwidget = NULL;
-		strcpy(p->ec->filename,p->mod_name);
+		p->ec->stylebar = settings.show_style_bar;
+		p->ec->editbar = settings.show_edit_bar;
+		strcpy(p->ec->filename, p->mod_name);
 		add_vbox_to_notebook(p);
 		percomm_list =
 		    g_list_append(percomm_list, (PC_DATA *) p);
@@ -1286,11 +848,11 @@ void gui_shutdown_percomm(void)
 		PC_DATA *p = (PC_DATA *) percomm_list->data;
 		/* 
 		 * free any search dialogs created 
-		 */		
+		 */
 		if (p->ec->search_dialog)
-			g_free(p->ec->search_dialog);		
+			g_free(p->ec->search_dialog);
 		if (p->ec->replace_dialog)
-			g_free(p->ec->replace_dialog);		
+			g_free(p->ec->replace_dialog);
 		/* 
 		 * free editor controls 
 		 */
