@@ -661,16 +661,23 @@ static void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1,
 
 static void create_pixbufs(void)
 {
+	GtkWidget *image;
+	
 	pixbufs = g_new0(TreePixbufs, 1);
-	pixbufs->pixbuf_closed =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/book_closed.png", NULL);
+	pixbufs->pixbuf_closed = gtk_widget_render_icon(widgets.app,
+                                             GNOME_STOCK_BOOK_BLUE, 
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
 	pixbufs->pixbuf_opened =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR
-				     "/book_open.png", NULL);
+		gtk_widget_render_icon(widgets.app,
+                                             GNOME_STOCK_BOOK_OPEN, 
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
 	pixbufs->pixbuf_helpdoc =
-	    gdk_pixbuf_new_from_file(PACKAGE_PIXMAPS_DIR 
-				     "/helpdoc.png", NULL);
+		gtk_widget_render_icon(widgets.app,
+                                             "epiphany-bookmark-page",
+                                             GTK_ICON_SIZE_MENU,
+                                             NULL);
 }
 
 /******************************************************************************
@@ -799,9 +806,7 @@ static gboolean button_press_event(GtkWidget * widget,
 				gtk_widget_set_sensitive(menu.in_dialog, FALSE);
 				gtk_widget_set_sensitive(menu.new, FALSE);
 				gtk_widget_set_sensitive(menu.insert, FALSE);
-				gtk_widget_set_sensitive(menu.add, FALSE);
 				gtk_widget_set_sensitive(menu.edit, FALSE);
-				gtk_widget_set_sensitive(menu.point, FALSE);
 				gtk_widget_set_sensitive(menu.delete, FALSE);
 				gtk_widget_set_sensitive(menu.bibletime, FALSE);			
 				gtk_widget_set_sensitive(menu.rr_submenu,FALSE);
