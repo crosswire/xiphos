@@ -142,19 +142,18 @@ void gui_studypad_can_close(void)
 
 gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 {
-	GtkHTMLStream *stream;
-	char buffer[BUFFER_SIZE];
-	ssize_t count;
 	gboolean was_editable;
-	int fd;
 	GString *str;
+	gchar *contents = NULL;
+	gsize length;
+	GError **error = NULL;
 	
-//	g_warning(filename);
+	
 	if(!g_file_test((const gchar*)filename, G_FILE_TEST_EXISTS)) {
 		str = g_string_new(" ");
 		g_string_printf(str, "file not found: %s",filename);
 		ecd->changed = FALSE;
-		gtk_html_load_from_string(ecd->html,"file not found",15);
+		gtk_html_load_from_string(ecd->html, str->str, str->len);
 		settings.studypadfilename = NULL;
 		xml_set_value("GnomeSword", "studypad", "lastfile", NULL);		
 		sprintf(ecd->filename, "%s", "");
@@ -164,52 +163,36 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 		g_string_free(str,TRUE);
 		return 0;
 	}
-	gui_studypad_can_close();
-	//settings.studypadfilename = filename;
+	
+	gui_studypad_can_close();	
 	xml_set_value("GnomeSword", "studypad", "lastfile", filename);
 	settings.studypadfilename = xml_get_value("studypad", "lastfile");
 	
-	ecd->changed = FALSE;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return -1;
-
-	was_editable = gtk_html_get_editable(ecd->html);
-	if (was_editable)
-		gtk_html_set_editable(ecd->html, FALSE);
-
-	stream = gtk_html_begin(ecd->html);
-	if (stream == NULL) {
-		close(fd);
+	if(g_file_get_contents(filename,&contents, &length, error)) {
+		was_editable = gtk_html_get_editable(ecd->html);
 		if (was_editable)
-			gtk_html_set_editable(ecd->html, TRUE);
-		return -1;
-	}
-
-	while (1) {
-		count = read(fd, buffer, BUFFER_SIZE);
-		if (count > 0)
-			gtk_html_write(ecd->html, stream, buffer,
-				       count);
-		else
-			break;
-	}
-
-	close(fd);
-
-	if (count == 0) {
-		gtk_html_end(ecd->html, stream, GTK_HTML_STREAM_OK);
-		if (was_editable)
-			gtk_html_set_editable(ecd->html, TRUE);
+			gtk_html_set_editable(ecd->html, FALSE);
+		
+		gtk_html_load_from_string(ecd->html, contents, length);
+		
+		gtk_html_set_editable(ecd->html, was_editable);
 		gui_update_statusbar(ecd);
-		return 0;
+		g_free(contents);
+		return 1;
 	} else {
-		gtk_html_end(ecd->html, stream, GTK_HTML_STREAM_ERROR);
-		if (was_editable)
-			gtk_html_set_editable(ecd->html, TRUE);
-		return -1;
+		str = g_string_new(" ");
+		g_string_printf(str, "%s %s", filename, _("not loaded"));
+		ecd->changed = FALSE;
+		gtk_html_load_from_string(ecd->html, str->str, str->len);
+		settings.studypadfilename = NULL;
+		xml_set_value("GnomeSword", "studypad", "lastfile", NULL);		
+		sprintf(ecd->filename, "%s", "");
+		ecd->filename[0] = '\0';
+		gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), 1, str->str);
+		ecd->changed = FALSE;
+		g_string_free(str,TRUE);
+		return 0;
 	}
-
 }
 
 /******************************************************************************

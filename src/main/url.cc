@@ -245,10 +245,10 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 	}
 	if(!strcmp(type,"verse")) {
 		if(clicked) {
-		//g_warning(work_buf[3]);
 			settings.cvparallel = 
 				main_parallel_update_controls(value);
 			main_update_parallel_page_detached();
+			gui_set_parallel_navbar((char*)value);
 		} 
 	}
 	return 1;
@@ -899,7 +899,10 @@ const gchar *main_url_encode(const gchar * pram)
 {
 	SWBuf retval;
 	retval = URL::encode(pram);
-	//g_warning(retval.c_str());
+/*#ifdef DEBUG 
+	g_warning(pram);
+	g_warning(retval.c_str());
+#endif*/
 	if(retval.length())
 		return g_strdup(retval.c_str());
 	else

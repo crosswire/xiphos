@@ -152,7 +152,8 @@ module.include.files=\
 	src/editor/toolbar_style.h\
 	src/editor/popup.h\
 	src/editor/dialog.h\
-	src/main/tab_history.h
+	src/main/tab_history.h\
+	src/gui/parallel_dialog.h
 
 module.source.name=.
 module.source.type=

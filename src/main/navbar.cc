@@ -62,7 +62,10 @@ void main_navbar_set(NAVBAR navbar, const char * key)
 		return;
 	
 	navbar.key = backend->get_valid_key(key);
-	
+	if(!navbar.is_dialog) {
+		
+		
+	}
 	GtkTreeModel* chapter_store = gtk_combo_box_get_model(
 			GTK_COMBO_BOX(navbar.comboboxentry_chapter));
 	GtkTreeModel* verse_store = gtk_combo_box_get_model(
