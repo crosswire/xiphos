@@ -120,6 +120,6 @@ gint gui_open_studypad_dialog(gchar * file_name)
 	
 	gtk_signal_connect(GTK_OBJECT(widgets.studypad_dialog), "destroy",
                       G_CALLBACK(dialog_destroy),
-			   NULL);
+			   NULL);	   
 	return TRUE;
 }

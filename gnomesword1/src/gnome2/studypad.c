@@ -49,7 +49,7 @@
 
 #define BUFFER_SIZE 4096
 
-static GSHTMLEditorControlData *editor_cd;
+GSHTMLEditorControlData *editor_cd;
 
 
 /******************************************************************************
@@ -438,7 +438,7 @@ static gint html_button_pressed(GtkWidget * html,
 		if (event->type == GDK_2BUTTON_PRESS && ecd->obj
 		    && event->state & GDK_CONTROL_MASK) {
 			ecd->releaseId =
-			    gtk_signal_connect(GTK_OBJECT(html),
+			    g_signal_connect(G_OBJECT(html),
 					       "button_release_event",
 					       G_CALLBACK(release),
 					       ecd);
@@ -559,8 +559,6 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_widget_show(specd->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  specd->htmlwidget);
-//	gtk_html_load_empty(specd->html);
-
 
 	specd->statusbar = gtk_statusbar_new();
 	gtk_widget_show(specd->statusbar);
@@ -578,16 +576,16 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 			   "load_done",
 			   G_CALLBACK(html_load_done), specd);
 */			   
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget),"key_press_event",
+	g_signal_connect(G_OBJECT(specd->htmlwidget),"key_press_event",
 			   G_CALLBACK(html_key_pressed), 
 			   specd);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "link_clicked", 
-			G_CALLBACK(gui_link_clicked),	/* gs_html.c */
+	g_signal_connect(G_OBJECT(specd->htmlwidget), "link_clicked", 
+			G_CALLBACK(gui_link_clicked),	
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget), "on_url", 
-			G_CALLBACK(gui_url),	/* gs_html.c */
+	g_signal_connect(G_OBJECT(specd->htmlwidget), "on_url", 
+			G_CALLBACK(gui_url),	
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(specd->htmlwidget),"button_press_event",
+	g_signal_connect(G_OBJECT(specd->htmlwidget),"button_press_event",
 			   G_CALLBACK(html_button_pressed), 
 			   specd);
 
@@ -609,12 +607,15 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, FALSE, 0);
 
 	/* load last file */
-	if (filename) {
+	if (filename) 
 		load_file(filename, specd);
-	}
-	editor_cd = specd;
+	else 
+		gtk_html_load_from_string(specd->html,"  ",2);
+		
+	editor_cd = specd;	
 	
 	gtk_html_set_editable(specd->html,TRUE);
+	
 	return htmlwidget;
 }
 
@@ -658,6 +659,6 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 					(notebook),
 					gtk_notebook_get_nth_page
 					(GTK_NOTEBOOK(notebook),
-					page_num), _("Study Pad"));
+					page_num), _("Study Pad"));	
 	return TRUE;
 }
