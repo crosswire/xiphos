@@ -26,10 +26,11 @@
 #include "gs_gnomesword.h"
 #include "gs_menu.h"
 #include "support.h"
-#include "callback.h"
+//#include "callback.h"
 #include "interface.h"
 #include "gs_file.h"
 #include "gs_html.h"
+#include "gs_gui.h"
 
 extern SETTINGS *settings;
 SETTINGS myset;	

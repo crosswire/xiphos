@@ -179,11 +179,10 @@ initSWORD(GtkWidget *mainform)
 	//ConfigEntMap section;
 	int   	i, //-- counter
 		j; //-- counter					
-   	gchar 	*sourceformat,
-		*font;
+   	gchar 	*sourceformat;
 	GnomeUIInfo *menuitem; //--  gnome menuitem
   	GtkWidget *menu_items;
-
+	string encoding;
   	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
   	thmltohtml	= new SW_ThMLHTML(); /* sword renderfilter thml to html */	
@@ -250,8 +249,9 @@ initSWORD(GtkWidget *mainform)
 			ConfigEntMap &section = (*sit).second;
 			havebible = TRUE;
 			biblemods = g_list_append(biblemods,curMod->Name());
-			font = "roman";
-			if(!strcmp(curMod->Name(), "LXX")) {
+			encoding = ((cit = section.find("Encoding")) != section.end()) ? (*cit).second : (string) "";
+			if(!stricmp(encoding.c_str(), "UTF-8")) {
+				addrenderfiltersSWORD(curMod, section);
 				curMod->Disp(UTF8Display);
 			}else{
 				addrenderfiltersSWORD(curMod, section);
