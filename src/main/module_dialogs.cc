@@ -345,7 +345,7 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 
 void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)
 {
-	gint count = 7, i;
+	gint count = 10, i;
 	gchar *new_key, *text = NULL;
 	gchar *key = NULL;
 	static gboolean firsttime = TRUE;
