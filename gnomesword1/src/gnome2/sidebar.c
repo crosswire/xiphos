@@ -1458,6 +1458,8 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	GtkWidget *close_button;
 	GtkWidget *image;
 	GtkWidget *shortcut_box;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
 	GObject *mod_selection;
 
 	vbox1 = gtk_vbox_new(FALSE, 0);
@@ -1575,6 +1577,14 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW
 					  (sidebar.module_list), FALSE);
 
+	renderer = gtk_cell_renderer_text_new();
+	column = gtk_tree_view_column_new_with_attributes("Found",
+							     renderer,
+							     "text", 0,
+							     NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(sidebar.module_list),
+					    column);
 
 	scrolledwindow_bm = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_bm);

@@ -40,7 +40,10 @@
  
 #include "backend/sword.h"
 
-
+void delete_module_mgr(void)
+{
+	backend_delete_module_mgr();
+}
 char *get_text(const char * module_name, const char *key)
 {
 	return backend_get_text(module_name, key);
