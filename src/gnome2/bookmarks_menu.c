@@ -474,28 +474,34 @@ static void on_point_to_here_activate(GtkMenuItem * menuitem,
 static void bibletime_bookmarks_activate(GtkMenuItem * menuitem,
 				  gpointer user_data)
 {
-/*	GString *str;
+	GtkTreeIter iter;
+	GtkTreeIter parent;
+	GString *str;
 	const xmlChar *file;
 	gchar *text[3];
-	GtkCTreeNode *node;
 
+	if(!gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model),&parent))
+		return;
+	
 	str = g_string_new(settings.swbmDir);
 	g_string_sprintf(str, "%s/%s", settings.homedir,
 			 ".kde/share/apps/bibletime/bookmarks.xml");
-	text[0] = "BibleTime";
-	text[1] = str->str;
-	text[2] = "ROOT";
-	node =
-	    gtk_ctree_insert_node(bmtree.ctree, NULL, NULL,
-				  text, 3, pixmap1, mask1,
-				  pixmap2, mask2, FALSE, FALSE);
+	
 	file = (const xmlChar *) str->str;
-	parse_bookmarks(bmtree.ctree, file, node);
+	
+	gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
+			      &parent);
+	gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, "BibleTime", 
+			   COL_KEY, NULL,
+			   COL_MODULE, NULL,
+			   -1);	
+	parse_bookmarks(bookmark_tree, file, &iter);
 	g_string_free(str, TRUE);
-	*/
-
+	
 }
-
 
 
 /******************************************************************************
