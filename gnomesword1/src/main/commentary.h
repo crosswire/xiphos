@@ -47,7 +47,6 @@ struct _commdata {
 	GtkWidget *btnCOMMPrint;
 	GtkWidget *showtabs;
 	gchar *modName;
-	gchar *modDescription;
 	gchar *searchstring;
 	gchar key[80];
 	gint modnum;

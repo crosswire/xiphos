@@ -60,6 +60,28 @@ static GList *text_list;
 TEXT_DATA *cur_t;
 gboolean display_change = TRUE;
 
+/******************************************************************************
+ * Name
+ *  text_get_description
+ *
+ * Synopsis
+ *   #include "bibletext.h"
+ *
+ *   const char* text_get_description(int mod_num)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   const char*
+ */
+ 
+const char* text_get_description(int mod_num)
+{
+	return backend_get_text_module_description(mod_num);
+}
+
+
 
 /******************************************************************************
  * Name
@@ -405,8 +427,6 @@ GList *setup_text(SETTINGS * s)
 		modname = (gchar *) tmp->data;
 		t = g_new(TEXT_DATA, 1);
 		t->mod_name = modname;
-		t->mod_description =
-		    backend_get_module_description(modname);
 		t->mod_num = count;
 		t->search_string = NULL;
 		t->key = NULL;

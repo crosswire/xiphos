@@ -56,7 +56,7 @@ struct _text_data {
 	GtkWidget *t_btn_secondary;
 	GtkWidget *t_btn_all;
 	gchar *mod_name;
-	gchar *mod_description;
+	//gchar *mod_description;
 	gchar *search_string;
 	gchar *key;
 	gint mod_num;
@@ -78,6 +78,7 @@ struct _text_data {
 	Text_Find_Dialog *find_dialog;
 };
 
+const char* text_get_description(int mod_num);
 void text_page_changed(gint page_num, TEXT_DATA *t);
 void set_text_page_and_key(gint page_num, gchar * key);
 void set_text_module_global_option(gchar * option,
