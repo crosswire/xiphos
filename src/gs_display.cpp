@@ -128,7 +128,7 @@ char GtkHTMLEntryDisp::Display(SWModule & imodule)
 	token=strtok(font,"-");
 	use_font = token;
 	use_font = strtok(NULL,"-");
-	g_warning("use_font = %s",use_font);
+	//g_warning("use_font = %s",use_font);
 	
 	(const char *) imodule;	/* snap to entry */
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
@@ -412,7 +412,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	font = "-adobe-helvetica-*-*";
 	if (!stricmp(lang.c_str(), "") || 
 				!stricmp(lang.c_str(), "en") || 
-					!stricmp(lang.c_str(), "en" )) {
+					!stricmp(lang.c_str(), "de" )) {
 		font = g_strdup(settings->default_font);		
 	}else if (!stricmp(lang.c_str(), "grc")) {
 		font = g_strdup(settings->greek_font);		
@@ -425,7 +425,7 @@ char GTKutf8ChapDisp::Display(SWModule & imodule)
 	token=strtok(font,"-");
 	use_font = token;
 	use_font = strtok(NULL,"-");
-	g_warning("use_font = %s",use_font);
+	//g_warning("use_font = %s",use_font);
 	beginHTML(GTK_WIDGET(gtkText), TRUE);
 
 	sprintf(tmpBuf,
@@ -530,7 +530,7 @@ char InterlinearDisp::Display(SWModule & imodule)
 	token=strtok(font,"-");
 	use_font = token;
 	use_font = strtok(NULL,"-");
-	g_warning("use_font = %s",use_font);
+	//g_warning("use_font = %s",use_font);
 	
 
 	//buf = (char *) imodule.Description(); 
