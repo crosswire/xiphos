@@ -107,6 +107,7 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 					gpointer user_data);
 static void on_insert_bookmark_activate(GtkMenuItem * menuitem, 
 					gpointer user_data);
+static void on_point_to_here_activate(GtkMenuItem * menuitem, gpointer user_data);
 static void on_expand_activate(GtkMenuItem * menuitem, gpointer user_data);
 static void on_collapse_activate(GtkMenuItem * menuitem, gpointer user_data);
 
@@ -132,22 +133,28 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("_Add Item at Root"),
+	 GNOME_APP_UI_ITEM, N_("Add Item at _Root"),
 	 N_("Add new bookmark item"),
 	 (gpointer) on_add_bookmark_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Edit Item"),
+	 GNOME_APP_UI_ITEM, N_("_Edit Item"),
 	 N_("Edit bookmark item"),
 	 (gpointer) on_edit_item_activate, NULL, NULL,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+	 0, (GdkModifierType) 0, NULL},
+	{
+	 GNOME_APP_UI_ITEM, N_("Make _Pointing to Here"),
+	 N_("Change the bookmark so that it will point to the current reading point"),
+	 (gpointer) on_point_to_here_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, N_("Delete Item(s)"),
 	 N_("Delete item and it's siblings"),
 	 (gpointer) on_delete_item_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TRASH,
 	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
 	{
@@ -229,8 +236,8 @@ on_ctree_select_row(GtkCList * clist,
 	ctree = user_data;
 	selected_node = gtk_ctree_node_nth(p_bmtree->ctree, row);
 
-	new_widget         = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "new");
-	insert_item_widget = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "insert_item");
+	new_widget           = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "new");
+	insert_item_widget   = gtk_object_get_data(GTK_OBJECT(pmBookmarkTree), "insert_item");
 
 	if (GTK_CTREE_ROW(selected_node)->is_leaf) {	/* if node is leaf we need to change mod and key */
 
@@ -568,7 +575,7 @@ void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	clist = GTK_CLIST(p_bmtree->ctree);
 	gtk_clist_freeze(clist);
 
-	node = clist->selection->data;
+	node = clist->selection->data; 
 	text[0] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[0])->text;
 	text[1] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[1])->text;
 	text[2] = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(node)->row.cell[2])->text;
@@ -597,9 +604,42 @@ void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
  */
 void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	remove_selection(p_bmtree->ctree_widget, p_bmtree->ctree);
+	GtkWidget *yes_no_dialog;
+	yes_no_dialog = gnome_message_box_new (
+	    "Really REMOVE the selected item (and all its subitems)?",
+	    GNOME_MESSAGE_BOX_WARNING,
+	    GNOME_STOCK_BUTTON_YES,
+	    GNOME_STOCK_BUTTON_NO,
+	    NULL);
+	if( !gnome_dialog_run (GNOME_DIALOG (yes_no_dialog)) )
+		remove_selection(p_bmtree->ctree_widget, p_bmtree->ctree);
 }
 
+static
+void on_point_to_here_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GtkWidget *yes_no_dialog;
+	gchar *modName, *key;
+	GtkCellPixText *cell1, *cell2;
+
+	yes_no_dialog = gnome_message_box_new (
+	    "Make the selected bookmark pointing to the current reading point?",
+	    GNOME_MESSAGE_BOX_WARNING,
+	    GNOME_STOCK_BUTTON_YES,
+	    GNOME_STOCK_BUTTON_NO,
+	    NULL);
+	if( gnome_dialog_run (GNOME_DIALOG (yes_no_dialog)) ) return;
+	
+	modName = getmodnameSWORD(settings->whichwindow);
+	key     = getmodkeySWORD (settings->whichwindow);
+
+	cell1 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[1]);
+	cell2 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[2]);
+	g_free(cell1->text);
+	g_free(cell2->text);
+	cell1->text = g_strdup(key);
+	cell2->text = g_strdup(modName);
+}
 
 /*
  * allow reordering of bookmarks
@@ -781,6 +821,11 @@ GtkWidget *create_pmBookmarkTree(void)
 
 	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "edit_item",
+				 pmBookmarkTree_uiinfo[i++].widget,
+				 (GtkDestroyNotify) gtk_widget_unref);
+
+	gtk_widget_ref(pmBookmarkTree_uiinfo[i].widget);
+	gtk_object_set_data_full(GTK_OBJECT(pmBookmarkTree), "point_to_here",
 				 pmBookmarkTree_uiinfo[i++].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 

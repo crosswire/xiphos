@@ -90,7 +90,7 @@ getVerseListSBSWORD(gchar *modName, gchar *vlist, SETTINGS *s)
 	}
 	tmpVerseList = DefaultVSKey.ParseVerseList((char *)vlist, DefaultVSKey);
 	beginHTML(s->vlsbhtml, TRUE);
-	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
+	sprintf(buf,HTML_START "<body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
 			s->bible_bg_color, 
 			s->bible_text_color,
 			s->link_color,
