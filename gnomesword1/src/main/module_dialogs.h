@@ -76,9 +76,6 @@ struct _dialog_data {
 	
 	GLOBAL_OPS *ops;
 };
-//extern DIALOG_DATA *cur_t;
-//extern DIALOG_DATA *cur_c;	
-
 
 void main_dialogs_add_children_to_tree(GtkTreeModel * model, GtkTreeIter iter,
 	  unsigned long offset, gboolean is_dialog, DIALOG_DATA * d);
@@ -94,7 +91,6 @@ void main_dialog_delete_note(DIALOG_DATA * d);
 void main_dialog_update_controls(DIALOG_DATA * vt);
 void main_bible_dialog_display(DIALOG_DATA * t);
 void main_bible_dialog_passage_changed(DIALOG_DATA * t, gchar * passage);
-void main_sync_bibletext_dialog_with_main(DIALOG_DATA * vt);
 void main_keep_bibletext_dialog_in_sync(gchar * key);
 void main_dialogs_setup(void);
 void main_dialogs_shutdown(void);

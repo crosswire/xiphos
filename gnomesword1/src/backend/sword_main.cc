@@ -232,7 +232,6 @@ GList *BackEnd::get_module_options(void) {
 	StringList optionslist = main_mgr->getGlobalOptions();	
 	for (StringList::iterator it = optionslist.begin(); 
 				  it != optionslist.end(); it++) {
-		printf("%s\n",(char *) (*it).c_str());
 		options = g_list_append(options, strdup((char *) (*it).c_str()));
 	}
 	return options;

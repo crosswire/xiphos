@@ -221,7 +221,6 @@ void main_load_g_ops_parallel(GtkWidget *menu)
 {
 	GList *tmp = NULL;	
 	GtkWidget * item;
-	g_warning("main_load_g_ops_parallel");
 
 	tmp = backend->get_module_options();
 	while(tmp) {
@@ -340,34 +339,6 @@ void main_check_parallel_modules(void)
 }
 
 
-/******************************************************************************
- * Name
- *   on_undockInt_activate
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void on_undockInt_activate(GtkMenuItem *menuitem)
- *
- * Description
- *   undock/dock parallel page
- *
- * Return value
- *   void
- */
-
-/*static void on_undockInt_activate(GtkMenuItem * menuitem)
-{
-	if (settings.dockedInt) {
-		settings.dockedInt = FALSE;
-		gui_undock_parallel_page();
-
-	} else {
-		settings.dockedInt = TRUE;
-		gui_btnDockInt_clicked(NULL, NULL);
-	}
-}
-*/
 /******************************************************************************
  * Name
  *   gui_change_int1_mod
@@ -1009,103 +980,6 @@ void main_swap_parallel_with_main(char *intmod)
 }
 
 
-
-/******************************************************************************
- * Name
- *   add_items_to_options_menu
- *
- * Synopsis
- *   #include "gui/parallel.h
- *
- *   void add_items_to_options_menu(void)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-/*static void add_items_to_options_menu(void)
-{
-	GtkWidget * menuChoice, *shellmenu;
-	gchar menuName[64];
-	int viewNumber = 0;
-	GList *tmp;
-
-	tmp = NULL;
-
-	tmp = g_list_first(get_list(OPTIONS_LIST));	//* this is the only place this
-					 //  list is used *
-	while (tmp != NULL) {
-		shellmenu = module_options_menu;
-
-		//* add global option items to parallel popup menu *
-		menuChoice =
-		    gtk_check_menu_item_new_with_label((gchar *) tmp->
-						       data);
-		sprintf(menuName, "optionNum%d", viewNumber++);
-		gtk_object_set_data(GTK_OBJECT(widgets.app), menuName,
-				    menuChoice);
-		gtk_widget_show(menuChoice);
-		g_signal_connect(GTK_OBJECT(menuChoice), "activate",
-				   G_CALLBACK
-				   (on_int_global_options_activate),
-				   (gchar *) tmp->data);
-		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
-				      GTK_WIDGET(menuChoice), 1);
-
-		if (!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.strongsint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Footnotes")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.footnotesint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Morphological Tags")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.morphsint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.hebrewpointsint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.cantillationmarksint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Greek Accents")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.greekaccentsint;
-		}
-
-		if (!strcmp
-		    ((gchar *) tmp->data,
-		     "Scripture Cross-references")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.crossrefint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Lemmas")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.lemmasint;
-		}
-
-		if (!strcmp((gchar *) tmp->data, "Headings")) {
-			GTK_CHECK_MENU_ITEM(menuChoice)->active =
-			    settings.headingsint;
-		}
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-}
-*/
 
 /******************************************************************************
  * Name
