@@ -30,8 +30,7 @@ extern "C" {
 #include "main/lists.h"
 	
 	
-void backend_first_init(void);
-void backend_init_sword(void);
+void backend_init(void);
 GList * backend_get_global_options_list(void);
 void backend_module_name_from_description(char * mod_name, char * mod_desc);
 void backend_shutdown(void);
