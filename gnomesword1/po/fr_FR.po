@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: GnomeSword 2 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-01 12:00-0500\n"
-"PO-Revision-Date: 2005-02-02 11:04+0100\n"
+"PO-Revision-Date: 2005-02-06 21:06+0100\n"
 "Last-Translator: Dominique Corbex <domcox@sourceforge.net>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -610,7 +610,7 @@ msgstr "Imprimer..."
 #: src/gnome2/editor_menu.c:726 src/gnome2/main_menu.c:637
 #: src/gnome2/note_editor.c:1397
 msgid "_Edit"
-msgstr "_Editer"
+msgstr "_Éditer"
 
 #: src/gnome2/editor_menu.c:734 src/gnome2/note_editor.c:1405
 #: src/gnome2/note_toolbar_edit.c:537 src/gnome2/toolbar_edit.c:534
