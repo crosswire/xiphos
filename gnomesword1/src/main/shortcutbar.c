@@ -76,7 +76,7 @@ GList *load_sb_group(gchar * filename, gchar * group_name,
 void save_sb_group(gchar * file_name, gchar * group_name,
 		   gint group_num, char *large_icons)
 {
-	gchar buf[256], *item_url, *item_name;
+	gchar *item_url, *item_name;
 	gint j, number_of_items = 0;
 	GList *group_list = NULL;
 

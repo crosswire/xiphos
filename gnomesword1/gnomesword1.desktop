@@ -1,9 +1,9 @@
 
 [Desktop Entry]
-Name=Gnomesword
+Name=Gnomesword1
 Comment=Bible Study Tool
-Exec=gnomesword
-Icon=/usr/share/pixmaps/gnomesword/GnomeSword.png
+Exec=gnomesword1
+Icon=/usr/share/pixmaps/gnomesword1/GnomeSword.png
 Terminal=false
 MultipleArgs=false
 Type=Application
