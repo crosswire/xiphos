@@ -80,6 +80,7 @@ gboolean loadconfig(void)
 	sprintf(mfonts.commentary_font_size, "%s", settingsInfo["FontSize"]["CommentaryWindow"].c_str()); 
     	sprintf(mfonts.dictionary_font_size, "%s", settingsInfo["FontSize"]["DictionaryWindow"].c_str()); 
 	sprintf(mfonts.interlinear_font_size, "%s", settingsInfo["FontSize"]["InterlinearWindow"].c_str()); 
+	sprintf(mfonts.verselist_font_size, "%s", settingsInfo["FontSize"]["VerseListWindow"].c_str()); 
 	
     	sprintf(settings->MainWindowModule, "%s",settingsInfo["Modules"]["MainWindow"].c_str());
     	sprintf(settings->Interlinear1Module, "%s",settingsInfo["Modules"]["Interlinear1"].c_str());
@@ -162,7 +163,7 @@ gboolean saveconfig(void)
 	settingsInfo["User Options"]["CommTabs"]=buf;
 	sprintf(buf, "%d",p_tabs->dictwindow);
 	settingsInfo["User Options"]["DictTabs"]=buf;
-	
+	 
 	settingsInfo["Keys"]["verse"] = settings->currentverse; 
 	settingsInfo["Keys"]["dictionarykey"] = settings->dictkey; 
 	
@@ -172,6 +173,7 @@ gboolean saveconfig(void)
 	settingsInfo["FontSize"]["CommentaryWindow"] = gsfonts->commentary_font_size; 
     	settingsInfo["FontSize"]["DictionaryWindow"] = gsfonts->dictionary_font_size; 
 	settingsInfo["FontSize"]["InterlinearWindow"] = gsfonts->interlinear_font_size;
+	settingsInfo["FontSize"]["VerseListWindow"] = gsfonts->verselist_font_size;
 	
 	sprintf(buf,"%d",gslayout.shortcutbar_width);	
 	settingsInfo["LAYOUT"]["Shortcutbar"] = buf ;
