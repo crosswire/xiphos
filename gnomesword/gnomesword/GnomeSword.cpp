@@ -38,7 +38,9 @@
 #include <sys/stat.h>
 
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
-
+#include  <widgets/e-paned/e-paned.h>
+#include  <widgets/e-paned/e-hpaned.h/>
+#include  <widgets/e-paned/e-vpaned.h/>
 
 #include "display.h"
 #include "callback.h"
@@ -149,6 +151,7 @@ gint    groupnum1 = 0,
         groupnum3 = 0,
         greekpage = 0,
         hebrewpage = 0;
+gint    sbsize = 120;
 //----------------------------------------------------------------------------------------------
 void
 initSword(GtkWidget *mainform,  //-- apps main form
@@ -599,9 +602,9 @@ initSword(GtkWidget *mainform,  //-- apps main form
         changeVerse(settings->currentverse); //---------------------------------------------- set Text
         //----------------------- show hide shortcut bar - set to options setting
         if(settings->showshortcutbar){
-                gtk_widget_show(GTK_WIDGET(shortcut_bar));
+                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), sbsize);
         }else{
-                gtk_widget_hide(GTK_WIDGET(shortcut_bar));
+                e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1);
         }
 
         if(settings->studypadfilename != NULL) loadStudyPadFile(settings->studypadfilename); //-- load last used file into studypad
@@ -625,7 +628,12 @@ initSword(GtkWidget *mainform,  //-- apps main form
 #endif /* USE_ASPELL */
 }
 
-//-------------------------------------------------------------------------------------------
+/* ------------------------------------------------------------------------------------------- */
+/* 
+ * changeVerse - this function changes all currently used sword Bible and commentary modules 
+ *               to (ref)
+ * gchar *ref - pointer to new module key (verse)
+ */
 void 
 changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary text together
 {
@@ -644,7 +652,7 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 	if(curMod){  //--------------------------------------------------- change main window		
 		curMod->SetKey(ref); //keyText.c_str());
 		curMod->Display();
-		gtk_label_set(GTK_LABEL(lookup_widget(MainFrm,"lbText")),curMod->KeyText( )); //------- set text label to current verse
+		//gtk_label_set(GTK_LABEL(lookup_widget(MainFrm,"lbText")),curMod->KeyText( )); //------- set text label to current verse
 		swKey = curMod->KeyText();
 		strcpy(settings->currentverse, curMod->KeyText()); //----------------------- remember last verse
 		char s1[255],s2[255];
@@ -1460,6 +1468,41 @@ getversenumber(GtkWidget *text)
 	 return atoi(buf); //-- send it back as an integer
 }
 
+
+//---------------------------------------------------------------------------------------------
+gint getdictnumber (GtkWidget *text)
+{
+        gchar   *buf, //-- buffer for storing the verse number
+                cbuf; //-- char for checking for numbers (isdigit)
+                //tmpbuf[256];
+        gint    startindex, //-- first digit in verse number
+                endindex,   //-- last digit in verse number
+                index;      //-- current position in text widget
+
+         index = gtk_editable_get_position(GTK_EDITABLE(text)); //-- get current position for a starting point
+         cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); //-- get char at current position (index)
+         if(!isdigit(cbuf)) return 0; //-- if cbuf is not a number stop - do no more
+         endindex = index;  //-- set endindex to index
+         while(isdigit(cbuf)){ //-- loop until cbuf is not a number
+                cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); //-- get next char
+                ++endindex;   //-- increment endindex
+         }
+         --endindex; //-- our last char was not a number so back up one
+         startindex = index; //-- set startindex to index
+         cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get char at index - we know it is a number
+         while(isdigit(cbuf)){  //-- loop backward util cbuf is not a number
+                cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get previous char
+                --startindex; //-- decrement startindex
+         }
+         ++startindex; //-- last char (cbuf) was not a number
+         ++startindex; //-- last char (cbuf) was not a number
+         buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
+	 if(endindex-startindex > 1) isstrongs = true;
+         return atoi(buf); //-- send it back as an integer
+}
+
+
+
 //---------------------------------------------------------------------------------------------
 void
 sbchangeModSword(gint group_num, gint item_num)
@@ -1510,9 +1553,9 @@ applyoptions(bool showshortcut, bool showcomtabs, bool showdicttabs, bool showte
         settings->showdictgroup = showdictgroup;
 
         if(settings->showshortcutbar){
-                gtk_widget_show(shortcut_bar);
+               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), sbsize);
         } else {
-                gtk_widget_hide(shortcut_bar);
+               e_paned_set_position (E_PANED(lookup_widget(MainFrm,"epaned")), 1); 
         }
         if(settings->showcomtabs) {
                 gtk_widget_show(comm);

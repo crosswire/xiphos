@@ -40,6 +40,9 @@
 #include "interface.h"
 #include "support.h"
 
+#include  <widgets/e-paned/e-paned.h>
+#include  <widgets/e-paned/e-hpaned.h/>
+#include  <widgets/e-paned/e-vpaned.h/>
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
@@ -60,39 +63,6 @@ EShortcutModel *shortcut_model;
 
 static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 				const gchar * url, gpointer data);
-
-
-
-//static void add_test_groups (EShortcutBar *shortcut_bar);
-/*static void add_test_group (EShortcutBar *shortcut_bar, gint i,
-			    gchar *group_name); */
-// static gint get_random_int (gint max);
-
-/*static void show_standard_popup (EShortcutBar *shortcut_bar,
-				 GdkEvent *event,
-				 gint group_num); */
-/*static void show_context_popup (EShortcutBar *shortcut_bar,
-				GdkEvent *event,
-				gint group_num,
-				gint item_num);  */
-/*
-static void set_large_icons (GtkWidget *menuitem,
-			     EShortcutBar *shortcut_bar);
-static void set_small_icons (GtkWidget *menuitem,
-			     EShortcutBar *shortcut_bar);
-static void remove_group (GtkWidget *menuitem,
-			  EShortcutBar *shortcut_bar);
-
-static void rename_item (GtkWidget *menuitem,
-			 EShortcutBar *shortcut_bar);
-static void remove_item (GtkWidget *menuitem,
-			 EShortcutBar *shortcut_bar);
-*/
-/*
-static void on_set_group_button_clicked (GtkWidget *button,
-					 EShortcutBar *shortcut_bar);
-static void on_set_group_button_no_animation_clicked (GtkWidget *button,
-						      EShortcutBar *shortcut_bar); */
 static void on_item_added(EShortcutModel * shortcut_model,
 			  gint group_num, gint item_num);
 static void on_item_removed(EShortcutModel * shortcut_model,
@@ -101,9 +71,7 @@ static void on_group_added(EShortcutModel * shortcut_model,
 			   gint group_num);
 static void on_group_removed(EShortcutModel * shortcut_model,
 			     gint group_num);
-
-
-
+			     
 static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 				const gchar * url, gpointer data)
 {
@@ -119,293 +87,6 @@ static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 
 	return NULL;
 }
-
-/*
-static void
-add_test_groups (EShortcutBar *shortcut_bar)
-{
-	add_test_group (shortcut_bar, 1, "Bible Text");
-	add_test_group (shortcut_bar, 2, "Commentaries");
-	add_test_group (shortcut_bar, 3, "Dict/Lex");
-//	add_test_group (shortcut_bar, 5, "Incredibly Long Shortcuts");
-}
-*/
-/*
-static void
-add_test_group (EShortcutBar *shortcut_bar, gint i, gchar *group_name)
-{
-	gint group_num;
-	
-	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1,
-						group_name); 	
-    e_shortcut_bar_set_view_type (shortcut_bar, group_num,
-					      E_ICON_BAR_SMALL_ICONS);
-}
-*/
-/*
-static void
-show_standard_popup (EShortcutBar *shortcut_bar,
-		     GdkEvent *event,
-		     gint group_num)
-{
-	GtkWidget *menu, *menuitem;
-
-	//-- We don't have any commands if there aren't any groups yet.
-	if (group_num == -1)
-		return;
-
-	menu = gtk_menu_new ();
-
-	menuitem = gtk_menu_item_new_with_label ("Large Icons");
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-			    GTK_SIGNAL_FUNC (set_large_icons), shortcut_bar);
-
-	menuitem = gtk_menu_item_new_with_label ("Small Icons");
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-			    GTK_SIGNAL_FUNC (set_small_icons), shortcut_bar);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Add New Group");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Remove Group");
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-			    GTK_SIGNAL_FUNC (remove_group), shortcut_bar);
-
-	menuitem = gtk_menu_item_new_with_label ("Rename Group");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Add Shortcut...");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Hide Shortcut Bar");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	//-- Save the group num so we can get it in the callbacks.
-	gtk_object_set_data (GTK_OBJECT (menu), "group_num",
-			     GINT_TO_POINTER (group_num));
-
-	//-- FIXME: Destroy menu when finished with it somehow?
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
-			event->button.button, event->button.time);
-}
-*/
-/*
-static void
-set_large_icons (GtkWidget *menuitem,
-		 EShortcutBar *shortcut_bar)
-{
-	GtkWidget *menu;
-	gint group_num;
-
-	menu = menuitem->parent;
-	g_return_if_fail (GTK_IS_MENU (menu));
-
-	group_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							  "group_num"));
-
-	e_shortcut_bar_set_view_type (shortcut_bar, group_num,
-				      E_ICON_BAR_LARGE_ICONS);
-}
-*/
-/*
-static void
-set_small_icons (GtkWidget *menuitem,
-		 EShortcutBar *shortcut_bar)
-{
-	GtkWidget *menu;
-	gint group_num;
-
-	menu = menuitem->parent;
-	g_return_if_fail (GTK_IS_MENU (menu));
-
-	group_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							  "group_num"));
-
-	e_shortcut_bar_set_view_type (shortcut_bar, group_num,
-				      E_ICON_BAR_SMALL_ICONS);
-}
-*/
-/*
-static void
-remove_group (GtkWidget *menuitem,
-	      EShortcutBar *shortcut_bar)
-{
-	GtkWidget *menu;
-	gint group_num;
-
-	menu = menuitem->parent;
-	g_return_if_fail (GTK_IS_MENU (menu));
-
-	group_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							  "group_num"));
-	
-	e_shortcut_model_remove_group (shortcut_bar->model, group_num);
-}
-*/
-/*
-static void
-show_context_popup (EShortcutBar *shortcut_bar,
-		    GdkEvent *event,
-		    gint group_num,
-		    gint item_num)
-{
-	GtkWidget *menu, *menuitem, *label, *pixmap;
-
-	menu = gtk_menu_new ();
-
-	menuitem = gtk_pixmap_menu_item_new ();
-	label = gtk_label_new ("Open Folder");
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-	gtk_widget_show (label);
-	gtk_container_add (GTK_CONTAINER (menuitem), label);
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-	pixmap = gnome_stock_pixmap_widget (menu, GNOME_STOCK_MENU_OPEN);
-	if (pixmap) {
-		gtk_widget_show(pixmap);
-		gtk_pixmap_menu_item_set_pixmap (GTK_PIXMAP_MENU_ITEM (menuitem), pixmap);
-	}
-
-	menuitem = gtk_menu_item_new_with_label ("Open in New Window");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Advanced Find");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Remove from Shortcut Bar");
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-			    GTK_SIGNAL_FUNC (remove_item), shortcut_bar);
-
-	menuitem = gtk_menu_item_new_with_label ("Rename Shortcut");
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-	gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-			    GTK_SIGNAL_FUNC (rename_item), shortcut_bar);
-
-	menuitem = gtk_menu_item_new ();
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-	menuitem = gtk_menu_item_new_with_label ("Properties");
-	gtk_widget_set_sensitive (menuitem, FALSE);
-	gtk_widget_show (menuitem);
-	gtk_menu_append (GTK_MENU (menu), menuitem);
-
-
-	//-- Save the group & item nums so we can get them in the callbacks.
-	gtk_object_set_data (GTK_OBJECT (menu), "group_num",
-			     GINT_TO_POINTER (group_num));
-	gtk_object_set_data (GTK_OBJECT (menu), "item_num",
-			     GINT_TO_POINTER (item_num));
-
-	//-- FIXME: Destroy menu when finished with it somehow?
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
-			event->button.button, event->button.time);
-}
-*/
-/*
-static void
-rename_item (GtkWidget *menuitem,
-	     EShortcutBar *shortcut_bar)
-{
-	GtkWidget *menu;
-	gint group_num, item_num;
-
-	menu = menuitem->parent;
-	g_return_if_fail (GTK_IS_MENU (menu));
-
-	group_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							  "group_num"));
-	item_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							 "item_num"));
-	
-	e_shortcut_bar_start_editing_item (shortcut_bar, group_num, item_num);
-}
-*/
-/*
-static void
-remove_item (GtkWidget *menuitem,
-	     EShortcutBar *shortcut_bar)
-{
-	GtkWidget *menu;
-	gint group_num, item_num;
-
-	menu = menuitem->parent;
-	g_return_if_fail (GTK_IS_MENU (menu));
-
-	group_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							  "group_num"));
-	item_num = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (menu),
-							 "item_num"));
-	
-	e_shortcut_model_remove_item (shortcut_bar->model, group_num,
-				      item_num);
-}
-*/
-/*
-static void
-on_set_group_button_clicked (GtkWidget *button,
-			     EShortcutBar *shortcut_bar)
-{
-	g_print ("In on_set_group_button_clicked\n");
-
-	e_group_bar_set_current_group_num (E_GROUP_BAR (shortcut_bar),
-					   2, TRUE);
-}
-
-
-static void
-on_set_group_button_no_animation_clicked (GtkWidget *button,
-					  EShortcutBar *shortcut_bar)
-{
-	g_print ("In on_set_group_button_no_animation_clicked\n");
-
-	e_group_bar_set_current_group_num (E_GROUP_BAR (shortcut_bar),
-					   4, FALSE);
-}
-*/
 
 static void
 on_item_added(EShortcutModel * shortcut_model,
@@ -789,6 +470,7 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *btnFoward;
 	GtkWidget *vseparator13;
 	GtkWidget *btnExit;
+	GtkWidget *epaned;
 	GtkWidget *mainPanel;
 	GtkWidget *vpaned1;
 	GtkWidget *hbox2;
@@ -804,7 +486,6 @@ GtkWidget *create_mainwindow(void)
 	GtkWidget *notebook1;
 	GtkWidget *hbox18;
 	GtkWidget *framecom;
-        //  GtkWidget *vbox23;
 	GtkWidget *scrolledwindow28;
 	GtkWidget *textCommentaries;
 	GtkWidget *handlebox17;
@@ -1361,7 +1042,15 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox25);
 	gnome_app_set_contents(GNOME_APP(mainwindow), hbox25);
-
+	
+        epaned = e_hpaned_new ();
+        gtk_widget_ref (epaned);
+        gtk_object_set_data_full (GTK_OBJECT (mainwindow), "epaned", epaned,
+                            (GtkDestroyNotify) gtk_widget_unref);
+        gtk_widget_show (epaned);
+        gtk_box_pack_start (GTK_BOX (hbox25), epaned, TRUE, TRUE, 0);
+        e_paned_set_position (E_PANED(epaned), 120);
+  
 	shortcut_model = e_shortcut_model_new();
 
 	shortcut_bar = e_shortcut_bar_new();
@@ -1370,7 +1059,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_set_usize(shortcut_bar, 150, 250);
 	gtk_widget_show(shortcut_bar);
 
-	gtk_box_pack_start(GTK_BOX(hbox25), shortcut_bar, TRUE, TRUE, 0);
+        e_paned_pack1(E_PANED (epaned), shortcut_bar, FALSE, TRUE);
 
 	e_shortcut_bar_set_icon_callback(E_SHORTCUT_BAR(shortcut_bar),
 					 icon_callback, NULL);
@@ -1388,10 +1077,11 @@ GtkWidget *create_mainwindow(void)
 	gtk_container_set_border_width(GTK_CONTAINER(shortcut_bar), 4);
 #endif
 	mainPanel = gtk_vbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(hbox25), mainPanel, TRUE, TRUE, 0);
+	e_paned_pack2(E_PANED (epaned), mainPanel, TRUE, TRUE);
+	//gtk_box_pack_start(GTK_BOX(hbox25), mainPanel, TRUE, TRUE, 0);
 	gtk_widget_show(mainPanel);
 //-----------------------------------------------------------------------------------------------------
-	vpaned1 = gtk_vpaned_new();
+	vpaned1 = e_vpaned_new();
 	gtk_widget_ref(vpaned1);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vpaned1",
 				 vpaned1,
@@ -1399,31 +1089,29 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(vpaned1);
 	gtk_box_pack_start(GTK_BOX(mainPanel), vpaned1, TRUE, TRUE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(vpaned1), 1);
-	gtk_paned_set_gutter_size(GTK_PANED(vpaned1), 10);
-	gtk_paned_set_position(GTK_PANED(vpaned1), 236);
+	e_paned_set_position(E_PANED(vpaned1), 236);
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox2);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hbox2", hbox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox2);
-	gtk_paned_pack1(GTK_PANED(vpaned1), hbox2, TRUE, TRUE);
+	e_paned_pack1(E_PANED(vpaned1), hbox2, TRUE, TRUE);
 
-	hpaned1 = gtk_hpaned_new();
+	hpaned1 = e_hpaned_new();
 	gtk_widget_ref(hpaned1);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hpaned1",
 				 hpaned1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hpaned1);
 	gtk_box_pack_end(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
-	gtk_paned_set_gutter_size(GTK_PANED(hpaned1), 10);
 
 	frame9 = gtk_frame_new("KJV");
 	gtk_widget_ref(frame9);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame9", frame9,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame9);
-	gtk_paned_pack1(GTK_PANED(hpaned1), frame9, FALSE, TRUE);
+	e_paned_pack1(E_PANED(hpaned1), frame9, FALSE, TRUE);
 	gtk_widget_set_usize(frame9, 325, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(frame9), 2);
 
@@ -1455,7 +1143,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(moduleText);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow18), moduleText);
-
+/*
 	frame19 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame19);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "frame19",
@@ -1471,14 +1159,14 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(lbText);
 	gtk_container_add(GTK_CONTAINER(frame19), lbText);
 	gtk_misc_set_padding(GTK_MISC(lbText), 1, 1);
-
+*/
 	notebook3 = gtk_notebook_new();
 	gtk_widget_ref(notebook3);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "notebook3",
 				 notebook3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(notebook3);
-	gtk_paned_pack2(GTK_PANED(hpaned1), notebook3, TRUE, TRUE);
+	e_paned_pack2(E_PANED(hpaned1), notebook3, TRUE, TRUE);
 	gtk_container_set_border_width(GTK_CONTAINER(notebook3), 2);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK(notebook3), TRUE);
 
@@ -1513,17 +1201,8 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(framecom);
 	gtk_box_pack_start(GTK_BOX(hbox18), framecom, TRUE, TRUE, 0);
-	//gtk_paned_pack1 (GTK_PANED (hpaned1), frame9, FALSE, TRUE);
-	//gtk_widget_set_usize (frame9, 325, -2);
 	gtk_container_set_border_width(GTK_CONTAINER(framecom), 2);
-/*
-  vbox23 = gtk_vbox_new (FALSE, 0);
-  gtk_widget_ref (vbox23);
-  gtk_object_set_data_full (GTK_OBJECT (mainwindow), "vbox23", vbox23,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (vbox23);
-  gtk_box_pack_start (GTK_BOX (hbox18), vbox23, TRUE, TRUE, 0);
-*/
+
 	scrolledwindow28 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow28);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
@@ -2096,7 +1775,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "hbox8", hbox8,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox8);
-	gtk_paned_pack2(GTK_PANED(vpaned1), hbox8, TRUE, TRUE);
+	e_paned_pack2(E_PANED(vpaned1), hbox8, TRUE, TRUE);
 	gtk_widget_set_usize(hbox8, -2, 115);
 
 	frame10 = gtk_frame_new("Dictionaries - Lexicons");
@@ -2374,6 +2053,9 @@ GtkWidget *create_mainwindow(void)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(textDict), "drag_begin",
 			   GTK_SIGNAL_FUNC(on_textDict_drag_begin), NULL);
+	gtk_signal_connect (GTK_OBJECT (textDict), "button_press_event",
+                           GTK_SIGNAL_FUNC (on_textDict_button_press_event),
+                           NULL);			
 	gtk_signal_connect(GTK_OBJECT(btnKeyPrev), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnKeyPrev_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(dictionarySearchText), "changed",
@@ -2391,6 +2073,9 @@ GtkWidget *create_mainwindow(void)
 	gtk_signal_connect(GTK_OBJECT(list1), "button_press_event",
 			   GTK_SIGNAL_FUNC(on_list1_button_press_event),
 			   NULL);
+	  gtk_signal_connect (GTK_OBJECT (epaned), "button_release_event",
+                      GTK_SIGNAL_FUNC (on_epaned_button_release_event),
+                      NULL);
 
 //-------------------------------------------------------------------------------------------
 	gtk_widget_pop_visual();
