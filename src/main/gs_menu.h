@@ -31,56 +31,53 @@
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 
-	/*** add sword global options to menus ***/
-	void additemstooptionsmenu(GList * options, SETTINGS * s);
+/*** add sword global options to menus ***/
+void additemstooptionsmenu(GList * options, SETTINGS * s);
 
-	void
-	 additemtognomemenu(GtkWidget * MainFrm,
-			    gchar * itemname,
-			    gchar * itemdata,
-			    gchar * submenuname,
-			    GtkMenuCallback mycallback);
+void additemtognomemenu(GtkWidget * MainFrm,
+		    gchar * itemname,
+		    gchar * itemdata,
+		    gchar * submenuname,
+		    GtkMenuCallback mycallback);
 
-	void
-	 additemtopopupmenu(GtkWidget * MainFrm,
-			    GtkWidget * menu,
-			    gchar * itemname,
-			    GtkMenuCallback mycallback);
+void additemtopopupmenu(GtkWidget * MainFrm,
+		    GtkWidget * menu,
+		    gchar * itemname,
+		    GtkMenuCallback mycallback);
 
-	void addseparator(GtkWidget * MainFrm, gchar * subtreelabel);
+void addseparator(GtkWidget * MainFrm, gchar * subtreelabel);
 
-	void
-	 addsubtreeitem(GtkWidget * MainFrm,
-			gchar * menulabel, gchar * subtreelabel);
+void addsubtreeitem(GtkWidget * MainFrm,
+		gchar * menulabel, gchar * subtreelabel);
 
-	void
-	 additemtosubtree(GtkWidget * MainFrm,
-			  gchar * subtreelabel, gchar * itemlabel);
+void additemtosubtree(GtkWidget * MainFrm,
+		  gchar * subtreelabel, gchar * itemlabel);
 
-	GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
-				       gchar * subtreelabel,
-				       gchar * itemlabel,
-				       GtkMenuCallback mycallback);
+GtkWidget *additemtooptionmenu(GtkWidget * MainFrm,
+			       gchar * subtreelabel,
+			       gchar * itemlabel,
+			       GtkMenuCallback mycallback);
 
-	void
-	 removemenuitems(GtkWidget * MainFrm,
-			 gchar * startitem, gint numberofitems);
+void removemenuitems(GtkWidget * MainFrm,
+		 gchar * startitem, gint numberofitems);
 
-	void createpopupmenus(SETTINGS * s,
-			      GList * bilbeDescription,
-			      GList * options);
+void createpopupmenus(SETTINGS * s,
+		      GList * bilbeDescription,
+		      GList * options);
 
-	void addmodstomenus(SETTINGS * s,
-			    GList * biblelist,
-			    GList * commentarylist,
-			    GList * dictionarylist,
-			    GList * booklist);
-	GtkWidget *create_shortcutbarMenu(gint barnum);
+void addmodstomenus(SETTINGS * s,
+		    GList * biblelist,
+		    GList * commentarylist,
+		    GList * dictionarylist,
+		    GList * booklist);
 
+GtkWidget *create_shortcutbarMenu(gint barnum);
 
 #ifdef __cplusplus
 }
 #endif
-#endif /*__GS_MENU_H_  */
+
+#endif
+

@@ -31,7 +31,7 @@ extern "C" {
 
 #include <glib.h>
 #include <gtk/gtkwidget.h>
-#include "_editor.h"
+#include "gui/_editor.h"
 
 void spell_check_cb(GtkWidget * w, GSHTMLEditorControlData * ecd);
 GtkWidget* create_spc_window (GSHTMLEditorControlData *ecd);
@@ -40,6 +40,5 @@ GtkWidget* create_spc_window (GSHTMLEditorControlData *ecd);
 }
 #endif
 
-#endif							/* __SPC_H_ */
-
+#endif
 

@@ -57,22 +57,19 @@
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
 
-/* frontend */
-#include "_editor.h"
-#include "shortcutbar_viewer.h"
-#include "shortcutbar_main.h"
+#include "gui/_editor.h"
+#include "gui/shortcutbar_viewer.h"
+#include "gui/shortcutbar_main.h"
 
-/* main */ 
-#include "gs_html.h"
-#include "support.h"
-#include "gs_gnomesword.h"
-#include "gs_interlinear.h"
-#include "settings.h"
+#include "main/gs_html.h"
+#include "main/support.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_interlinear.h"
+#include "main/settings.h"
 
-/* backend */
-#include "verselist.h"
-#include "shortcutbar.h"
-#include "sword.h"
+#include "backend/verselist.h"
+#include "backend/shortcutbar.h"
+#include "backend/sword.h"
 
 GtkHTMLStream *htmlstream;
 GtkHTMLStreamStatus status1;

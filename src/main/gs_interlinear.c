@@ -19,22 +19,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
+#include "main/gs_gnomesword.h"
+#include "main/gs_interlinear.h"
 
-#include "gs_gnomesword.h"
-#include "gs_interlinear.h"
-
-
-#include "sword.h"
-#include "interlinear.h"
+#include "backend/sword.h"
+#include "backend/interlinear.h"
 
 extern gboolean havebible;
 

@@ -25,10 +25,10 @@
 
 #include <gnome.h>
 
-#include "sword.h"
-#include "setup.h"
-#include "properties.h"
-#include "gs_gnomesword.h"
+#include "backend/sword.h"
+#include "main/setup.h"
+#include "backend/properties.h"
+#include "main/gs_gnomesword.h"
 
 /******************************************************************************
  * Name
