@@ -209,10 +209,9 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 					(druidpagestart1),
 					_
 					("This guide will take you through the initial setup of GnomeSword"));
-	gnome_druid_page_start_set_logo(GNOME_DRUID_PAGE_START
-					(druidpagestart1),
-					create_image
-					("gnomesword/GnomeSword.xpm"));
+  gnome_druid_page_start_set_logo(GNOME_DRUID_PAGE_START
+    (druidpagestart1),
+    gdk_imlib_load_image(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm"));
 
 	druidpagestandard3 =
 	    gnome_druid_page_standard_new_with_vals("", NULL);
@@ -235,10 +234,9 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
 					    gs_gnomesword);
-	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
-					   (druidpagestandard3),
-					   create_image
-					   ("gnomesword/GnomeSword.xpm"));
+  gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
+    (druidpagestandard3),
+    gdk_imlib_load_image(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm"));
 
 	druid_vbox3 = GNOME_DRUID_PAGE_STANDARD(druidpagestandard3)->vbox;
 	gtk_widget_ref(druid_vbox3);
@@ -382,10 +380,9 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 					    (druidpagestandard1),
 					    _
 					    ("Do you want GnomeSword to open with"));
-	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
-					   (druidpagestandard1),
-					   create_image
-					   ("gnomesword/GnomeSword.xpm"));
+  gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
+    (druidpagestandard1),
+    gdk_imlib_load_image(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm"));
 
 	druid_vbox1 = GNOME_DRUID_PAGE_STANDARD(druidpagestandard1)->vbox;
 	gtk_widget_ref(druid_vbox1);
@@ -451,10 +448,9 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 					    (druidpagestandard2),
 					    _
 					    ("Settings to use on first program run"));
-	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
-					   (druidpagestandard2),
-					   create_image
-					   ("gnomesword/GnomeSword.xpm"));
+  gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
+    (druidpagestandard2),
+    gdk_imlib_load_image(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm"));
 
 	druid_vbox2 = GNOME_DRUID_PAGE_STANDARD(druidpagestandard2)->vbox;
 	gtk_widget_ref(druid_vbox2);
@@ -861,10 +857,9 @@ GtkWidget *create_dlgSetup(GList * biblemods,
 	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 _("            Thank-you for using GnomeSword.\nClick Finish to close this dialog and run GnomeSword."));
-	gnome_druid_page_finish_set_logo(GNOME_DRUID_PAGE_FINISH
-					 (druidpagefinish1),
-					 create_image
-					 ("gnomesword/GnomeSword.png"));
+  gnome_druid_page_finish_set_logo(GNOME_DRUID_PAGE_FINISH
+    (druidpagefinish1),
+    gdk_imlib_load_image(PACKAGE_PIXMAPS_DIR "/GnomeSword.xpm"));
 
 	dialog_action_area10 = GNOME_DIALOG(dlgSetup)->action_area;
 	gtk_object_set_data(GTK_OBJECT(dlgSetup), "dialog_action_area10",
