@@ -33,24 +33,22 @@
 #include <fcntl.h>
 
 #ifdef USE_SPELL
-#include "spell.h"
-#include "spell_gui.h"
+#include "main/spell.h"
+#include "main/spell_gui.h"
 #endif
 
-/* frontend */
-#include "studypad.h"
-#include "_editor.h"
-#include "editor_toolbar.h"
-#include "editor_menu.h"
-#include "link_dialog.h"
-#include "info_box.h"
+#include "gui/studypad.h"
+#include "gui/_editor.h"
+#include "gui/editor_toolbar.h"
+#include "gui/editor_menu.h"
+#include "gui/link_dialog.h"
+#include "gui/info_box.h"
 
-/* main */
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "fileselection.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "gui/fileselection.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 #define BUFFER_SIZE 4096
 

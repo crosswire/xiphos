@@ -27,14 +27,12 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/e-paned/e-hpaned.h>
 
-/* frontend */
-#include "shortcutbar_main.h"
-#include "shortcutbar_dialog.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_dialog.h"
 
-/* main */ 
-#include "gs_gnomesword.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "main/support.h"
+#include "main/settings.h"
 
 /******************************************************************************
  * Name

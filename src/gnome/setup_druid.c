@@ -25,9 +25,9 @@
 
 #include <gnome.h>
 
-#include "setup_druid.h"
-#include "gs_gnomesword.h"
-#include "setup.h"
+#include "gui/setup_druid.h"
+#include "main/gs_gnomesword.h"
+#include "main/setup.h"
 
 /* FIXME: this is broken - causes a segfault after finish button is pressed */
 

@@ -30,22 +30,19 @@
 #include <gal/shortcut-bar/e-vscrolled-bar.h>
 #include <gal/widgets/e-unicode.h>
 
-/* frontend */
-#include "shortcutbar_main.h"
-#include "shortcutbar_dialog.h"
-#include "shortcutbar_search.h"
-#include "shortcutbar_viewer.h"
-#include "_editor.h"
+#include "gui/shortcutbar_main.h"
+#include "gui/shortcutbar_dialog.h"
+#include "gui/shortcutbar_search.h"
+#include "gui/shortcutbar_viewer.h"
+#include "gui/_editor.h"
 
-/* main */ 
-#include "gs_gnomesword.h"
-#include "support.h"
-#include "gs_bookmarks.h"
-#include "gbs.h"
-#include "gs_html.h"
-#include "settings.h"
-#include "lists.h"
-
+#include "main/gs_gnomesword.h"
+#include "main/support.h"
+#include "main/gs_bookmarks.h"
+#include "main/gbs.h"
+#include "main/gs_html.h"
+#include "main/settings.h"
+#include "main/lists.h"
 
 extern SB_VIEWER sb_v, *sv ;
 

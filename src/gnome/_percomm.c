@@ -27,22 +27,20 @@
 #include <gtkhtml/gtkhtml.h>
 
 #ifdef USE_SPELL
-#include "spell.h"
-#include "spell_gui.h"
+#include "main/spell.h"
+#include "main/spell_gui.h"
 #endif
 
-/* frontend */
-#include "_percomm.h"
-#include "_editor.h"
-#include "editor_toolbar.h"
-#include "editor_menu.h"
+#include "gui/_percomm.h"
+#include "gui/_editor.h"
+#include "gui/editor_toolbar.h"
+#include "gui/editor_menu.h"
 
-/* main */
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "percomm.h"
-#include "settings.h"
-#include "support.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
+#include "main/percomm.h"
+#include "main/settings.h"
+#include "main/support.h"
 
 /******************************************************************************
  * externs

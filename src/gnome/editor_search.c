@@ -29,10 +29,8 @@
 #include <gtkhtml/htmlengine-search.h>
 #include <gal/widgets/e-unicode.h>
 
-/* frontend */
-#include "editor_search.h"
-#include "_editor.h"
-
+#include "gui/editor_search.h"
+#include "gui/_editor.h"
 
 struct _GSHTMLSearchDialog {
 	GnomeDialog *dialog;

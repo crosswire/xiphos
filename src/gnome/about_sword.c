@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
-#include "about_sword.h"
+#include "gui/about_sword.h"
 
 /******************************************************************************
  * privat
