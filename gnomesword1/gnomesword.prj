@@ -125,7 +125,6 @@ module.include.files=\
 	src/main/spell.h\
 	src/main/sword.h\
 	src/main/module.h\
-	src/backend/module.hh\
 	src/backend/key.hh\
 	src/backend/mgr.hh\
 	src/main/key.h\
@@ -152,7 +151,6 @@ module.include.files=\
 	src/gui/note_toolbar_style.h\
 	src/main/mod_search.h\
 	src/gui/search_sidebar.h\
-	src/backend/module_search.hh\
 	src/main/search_dialog.h\
 	src/main/search_sidebar.h\
 	src/gui/splash.h
@@ -163,7 +161,6 @@ module.source.files=\
 	src/backend/config.cc\
 	src/backend/key.cc\
 	src/backend/mgr.cc\
-	src/backend/module.cc\
 	src/backend/sword.cpp\
 	src/main/bibletext.c\
 	src/main/dictlex.c\
@@ -244,7 +241,6 @@ module.source.files=\
 	src/gnome2/note_editor.c\
 	src/gnome2/note_toolbar_edit.c\
 	src/gnome2/note_toolbar_style.c\
-	src/backend/module_search.cc\
 	src/main/search_dialog.cc\
 	src/main/search_sidebar.cc
 

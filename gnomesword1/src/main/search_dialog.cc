@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * mod_search.c - glue  (: very sticky :)
+ * search_dialog.cc - glue  (: very sticky :)
  *
  * Copyright (C) 2004 GnomeSword Developer Team
  *
@@ -45,7 +45,6 @@ extern "C" {
 #include "gui/html.h"
 #include "gui/dialog.h"
 
-#include "backend/module_search.hh"
 #include "backend/sword_main.hh"
 
 #define SEARCHING N_("Searching the ")
@@ -53,7 +52,7 @@ extern "C" {
 #define FINDS N_("found in ")		
 #define HTML_START "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
 
-static ModuleSearch *backendSearch;
+static BackEnd *backendSearch;
 
 static gboolean is_running = FALSE;
 
@@ -1111,7 +1110,7 @@ void main_open_search_dialog(void)
 		GtkTreeIter iter;
 		GtkWidget *dlg;
 		
-		backendSearch = new ModuleSearch();
+		backendSearch = new BackEnd();
 
 		/* create and show search dialog */
 		dlg = gui_create_search_dialog();

@@ -37,7 +37,6 @@ extern "C" {
 
 #include <string.h>
 
-//#include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
