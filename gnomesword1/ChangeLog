@@ -1,3 +1,10 @@
+2002-08-27  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* renamed gnomesword.desktop to gnomesword1.desktop
+	* changed executable name to gnomesword1
+	* gnomesword1 can be installed without affecting gnomesword
+	
+
 2002-08-23  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* changed settings to use .gnomesword-1.0 directory
