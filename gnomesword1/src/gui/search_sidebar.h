@@ -26,8 +26,7 @@
 extern "C" {
 #endif	
 	
-void gui_search_update_sidebar(char percent, void *userData);	
-void gui_set_search_label_sidebar(void);	
+void gui_search_update_sidebar(char percent, void *userData);
 void gui_create_search_sidebar(void);
 
 #ifdef __cplusplus

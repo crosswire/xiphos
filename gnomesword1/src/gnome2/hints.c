@@ -101,9 +101,7 @@ static void create_hint_window(void)
 	GtkWidget *scrolledwindow72;
 
 	hint.hint_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-/*	gtk_object_set_data(GTK_OBJECT(hint_window), "hint_window",
-			    hint_window);*/
-	gtk_window_set_title(GTK_WINDOW(hint.hint_window), "window1");
+	gtk_window_set_title(GTK_WINDOW(hint.hint_window), " ");
 	gtk_window_set_position(GTK_WINDOW(hint.hint_window),
 				GTK_WIN_POS_MOUSE);
 	gtk_window_set_default_size(GTK_WINDOW(hint.hint_window), 191, 83);
@@ -127,10 +125,8 @@ static void create_hint_window(void)
 	gtk_html_load_empty(GTK_HTML(hint.html_widget));
 	gtk_widget_show(hint.html_widget);
 	gtk_widget_set_size_request(hint.html_widget, 191, 83);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow72),
-			  hint.html_widget);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow72), hint.html_widget);
 	hint.in_popup = TRUE;
-	//return hint.hint_window;
 }
 
 
@@ -168,7 +164,6 @@ void gui_display_in_hint_window(gchar * note)
 	hint.hint_window = NULL;
 	
 	if (!hint.in_popup) {
-		//hint.hint_window = 
 		create_hint_window();
 		if(!hint.hint_window)
 			return;
@@ -190,13 +185,21 @@ void gui_display_in_hint_window(gchar * note)
 			gtk_main_iteration();
 		}
 		
+		/*gtk_window_set_position(GTK_WINDOW(hint.hint_window),
+				GTK_WIN_POS_MOUSE);*/
 		gtk_window_get_position(GTK_WINDOW(hint.hint_window), &x, &y);
-		if(x < settings.app_x)
+		if(x < settings.app_x){
+			gtk_window_set_position(GTK_WINDOW(hint.hint_window),
+					GTK_WIN_POS_MOUSE);
 			gtk_window_get_position(GTK_WINDOW(hint.hint_window), 
-						&x, &y);
-		if(y < settings.app_y)
+					&x, &y);
+		}
+		if(y < settings.app_y){
+			gtk_window_set_position(GTK_WINDOW(hint.hint_window),
+					GTK_WIN_POS_MOUSE);
 			gtk_window_get_position(GTK_WINDOW(hint.hint_window), 
-						&x, &y);
+					&x, &y);
+		}
 		x += 10;
 		y += 10;
 		
@@ -251,8 +254,5 @@ void gui_destroy_hint_window(void)
 
 void gui_open_hint_viewer(void)
 {
-	gtk_option_menu_set_history(GTK_OPTION_MENU
-				    (sidebar.optionmenu1), 4);
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
-			      4);
+	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_sidebar),4);
 }
