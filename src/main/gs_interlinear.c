@@ -174,6 +174,7 @@ void update_interlinear_page(SETTINGS * s)
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		gtk_html_set_editable(html, was_editable);
 	}
+	gtk_frame_set_label(GTK_FRAME(s->frameInt), s->currentverse);
 }
 
 static void int_display(SETTINGS *s, gchar * key)

@@ -54,6 +54,8 @@
 
 #define BUFFER_SIZE 4096
 
+//static GtkWidget *frame_studypad;
+
 /******************************************************************************
  * Name
  *   load_file
@@ -73,12 +75,19 @@
 gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 {
 	GtkHTMLStream *stream;
-	char buffer[BUFFER_SIZE];
+	char buffer[BUFFER_SIZE], *base_name = NULL;
 	ssize_t count;
 	gboolean was_editable;
 	int fd;
-
+	
 	sprintf(settings.studypadfilename, "%s", filename);
+	
+	base_name = g_basename(filename);
+	if(base_name)
+		gtk_frame_set_label(GTK_FRAME(ecd->frame), base_name);
+	else
+		gtk_frame_set_label(GTK_FRAME(ecd->frame), NULL);
+	
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -219,6 +228,8 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 {
 	int retval = -1;
 	int fd;
+	gchar *base_name;
+	
 	if (filename) {
 		sprintf(settings.studypadfilename, "%s", filename);
 
@@ -235,6 +246,8 @@ gint save_file(gchar * filename, GSHTMLEditorControlData * ecd)
 			retval = 0;
 			ecd->changed = FALSE;
 			update_statusbar(ecd);
+			base_name = g_basename(filename);
+			gtk_frame_set_label(GTK_FRAME(ecd->frame), base_name);
 		}
 
 		close(fd);
@@ -460,7 +473,7 @@ static void on_btn_save_clicked(GtkButton * button,
 	GtkWidget *savemyFile;
 	gchar buf[255];
 	
-	if (ecd->filename) {
+	if(strlen(ecd->filename) > 1)  {
 		save_file(ecd->filename, ecd);
 		return;
 	} else {
@@ -712,7 +725,6 @@ static void on_btn_replace_clicked(GtkButton * button,
 
 GtkWidget *gui_create_studypad_control(GtkWidget * notebook, SETTINGS * s)
 {
-	GtkWidget *frame12;
 	GtkWidget *vbox6;
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;	
@@ -729,20 +741,20 @@ GtkWidget *gui_create_studypad_control(GtkWidget * notebook, SETTINGS * s)
 	
 	specd->studypad = TRUE;
 
-	frame12 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame12);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
-				 frame12,
+	specd->frame = gtk_frame_new(NULL);
+	gtk_widget_ref(specd->frame);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "specd->frame",
+				 specd->frame,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(frame12);
-	gtk_container_add(GTK_CONTAINER(notebook), frame12);
+	gtk_widget_show(specd->frame);
+	gtk_container_add(GTK_CONTAINER(notebook), specd->frame);
 
 	vbox6 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox6);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "vbox6", vbox6,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox6);
-	gtk_container_add(GTK_CONTAINER(frame12), vbox6);
+	gtk_container_add(GTK_CONTAINER(specd->frame), vbox6);
 
 	vboxSP = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vboxSP);
