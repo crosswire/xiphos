@@ -775,6 +775,7 @@ void create_mainwindow(void)
 	/*
 	 * parallel page 
 	 */
+	
 	widgets.frame_parallel = gtk_frame_new(NULL);
 	gtk_widget_show(widgets.frame_parallel);
 	gtk_container_add(GTK_CONTAINER(widgets.workbook_lower),

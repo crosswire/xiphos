@@ -153,58 +153,12 @@ module.include.files=\
 module.source.name=.
 module.source.type=
 module.source.files=\
+	src/backend/config.cc\
+	src/backend/key.cc\
+	src/backend/mgr.cc\
+	src/backend/module.cc\
 	src/backend/sword.cpp\
-	src/gnome/about_gnomesword.c\
-	src/gnome/about_modules.c\
-	src/gnome/about_sword.c\
-	src/gnome/bibletext.c\
-	src/gnome/bibletext_dialog.c\
-	src/gnome/bibletext_menu.c\
-	src/gnome/bookmarks.c\
-	src/gnome/bookmarks_menu.c\
-	src/gnome/bookmarks_treeview.c\
-	src/gnome/commentary.c\
-	src/gnome/commentary_dialog.c\
-	src/gnome/commentary_menu.c\
-	src/gnome/dialog.c\
-	src/gnome/dictlex.c\
-	src/gnome/dictlex_dialog.c\
-	src/gnome/dictlex_menu.c\
-	src/gnome/display_info.c\
-	src/gnome/font_dialog.c\
-	src/gnome/gbs.c\
-	src/gnome/gbs_dialog.c\
-	src/gnome/gbs_menu.c\
-	src/gnome/gnomesword.c\
-	src/gnome/gtkhtml_display.c\
-	src/gnome/hints.c\
-	src/gnome/history.c\
-	src/gnome/html.c\
-	src/gnome/percomm.c\
-	src/gnome/cipher_key_dialog.c\
-	src/gnome/editor.c\
-	src/gnome/editor_menu.c\
-	src/gnome/editor_replace.c\
-	src/gnome/editor_spell.c\
-	src/gnome/fileselection.c\
-	src/gnome/find_dialog.c\
-	src/gnome/gui.c\
-	src/gnome/main_menu.c\
-	src/gnome/main_window.c\
-	src/gnome/preferences_dialog.c\
-	src/gnome/search_dialog.c\
-	src/gnome/setup_druid.c\
-	src/gnome/shortcutbar_dialog.c\
-	src/gnome/shortcutbar_main.c\
-	src/gnome/shortcutbar_search.c\
-	src/gnome/shortcutbar_viewer.c\
-	src/gnome/studypad.c\
-	src/gnome/studypad_dialog.c\
-	src/gnome/splash.c\
-	src/gnome/toolbar_edit.c\
-	src/gnome/toolbar_nav.c\
-	src/gnome/toolbar_style.c\
-	src/gnome/utilities.c\
+	src/backend/tree.cc\
 	src/main/bibletext.c\
 	src/main/commentary.c\
 	src/main/dictlex.c\
@@ -218,16 +172,10 @@ module.source.files=\
 	src/main/spell_ispell.c\
 	src/main/spell_pspell.c\
 	src/main/sword.c\
-	src/backend/module.cc\
 	src/main/module.c\
-	src/backend/key.cc\
-	src/backend/mgr.cc\
 	src/main/key.c\
-	src/backend/config.cc\
 	src/main/configs.c\
-	src/backend/tree.cc\
 	src/main/xml.c\
-	src/gnome/gbs_display.c\
 	src/gnome2/gbs_display.c\
 	src/gnome2/about_gnomesword.c\
 	src/gnome2/about_modules.c\
@@ -274,8 +222,6 @@ module.source.files=\
 	src/gnome2/toolbar_style.c\
 	src/gnome2/utilities.c\
 	src/gnome2/sidebar.c\
-	src/gnome/parallel_dialog.c\
-	src/gnome/parallel_view.c\
 	src/gnome2/parallel_dialog.c\
 	src/gnome2/parallel_view.c\
 	src/gnome2/search_sidebar.c\
