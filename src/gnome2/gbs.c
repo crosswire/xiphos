@@ -24,7 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gal/e-paned/e-hpaned.h>
 
 #ifdef USE_GTKEMBEDMOZ
 #include <gtkmozembed.h>
@@ -529,14 +528,14 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 	gtk_widget_show(p_gbs->frame);
 	gtk_container_add(GTK_CONTAINER(p_gbs->vbox), p_gbs->frame);
 	
-	hpanedGBS = e_hpaned_new();
+	hpanedGBS = gtk_hpaned_new();
 	gtk_widget_show(hpanedGBS);
 	gtk_container_add(GTK_CONTAINER(p_gbs->frame), hpanedGBS);	
-	e_paned_set_position(E_PANED(hpanedGBS),190);
+	gtk_paned_set_position(GTK_PANED(hpanedGBS),190);
 
 	scrolledwindowCTREE_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowCTREE_GBS);
-	e_paned_pack1(E_PANED(hpanedGBS), scrolledwindowCTREE_GBS, TRUE,
+	gtk_paned_pack1(GTK_PANED(hpanedGBS), scrolledwindowCTREE_GBS, TRUE,
 						TRUE);
 	
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -568,7 +567,7 @@ static void create_gbs_pane(GBS_DATA *p_gbs)
 
 	frameGBS = gtk_frame_new(NULL);
 	gtk_widget_show(frameGBS);
-	e_paned_pack2(E_PANED(hpanedGBS), frameGBS, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(hpanedGBS), frameGBS, TRUE, TRUE);
 
 
 

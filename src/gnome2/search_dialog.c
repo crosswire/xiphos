@@ -246,8 +246,8 @@ void gui_search_dialog_appbar_update(char percent, void *userData)
 	while ((((float) percent) / 100) * maxHashes > printed) {
 		sprintf(buf, "%f", (((float) percent) / 100));
 		num = (float) percent / 100;
-		/*gnome_appbar_set_progress((GnomeAppBar *) search.
-					  progressbar, num);*/
+		gnome_appbar_set_progress_percentage((GnomeAppBar *) search.
+					  progressbar, num);
 		printed++;
 	}
 	while (gtk_events_pending())

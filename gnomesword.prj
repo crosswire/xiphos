@@ -274,7 +274,7 @@ module.source.files=\
 	src/gnome2/toolbar_edit.c\
 	src/gnome2/toolbar_nav.c\
 	src/gnome2/toolbar_style.c\
-	src/gnome2/utilities.cmodule.pixmap.name=.
+	src/gnome2/utilities.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

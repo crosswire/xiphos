@@ -560,7 +560,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-search", 
+			"gtk-find", 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_Find =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -571,7 +571,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_show(ecd->btn_Find);
 	
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-srchrpl", 
+			"gtk-find-and-replace", 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_replace =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),
@@ -588,7 +588,7 @@ static GtkWidget *create_toolbar_edit(GSHTMLEditorControlData * ecd)
 	gtk_widget_set_usize(vseparator, 5, 7);
 
 	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-spellcheck", 
+			"gtk-spell-check", 
 			gtk_toolbar_get_icon_size (GTK_TOOLBAR (ecd->toolbar_edit)));
 	ecd->btn_spell =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(ecd->toolbar_edit),

@@ -24,8 +24,6 @@
 #endif
 
 #include <gnome.h>
-#include <gal/e-paned/e-hpaned.h>
-#include <gal/e-paned/e-vpaned.h>
 #include "main/sword.h"
 #include "main/settings.h"
 
@@ -177,36 +175,36 @@ void gui_set_bible_comm_layout(void)
 {
 	if ((settings.showtexts == FALSE)
 	    && (settings.showcomms == FALSE)) {
-		e_paned_set_position(E_PANED(widgets.vpaned), 0);
+		gtk_paned_set_position(GTK_PANED(widgets.vpaned), 0);
 	} else if (settings.showdicts == FALSE) {
-		e_paned_set_position(E_PANED
+		gtk_paned_set_position(GTK_PANED
 				     (widgets.vpaned),
 				     settings.gs_hight);
 	} else {
-		e_paned_set_position(E_PANED
+		gtk_paned_set_position(GTK_PANED
 				     (widgets.vpaned),
 				     settings.upperpane_hight);
 	}
 
 	if ((settings.showtexts == FALSE)
 	    && (settings.showcomms == TRUE)) {
-		e_paned_set_position(E_PANED(widgets.hpaned), 0);
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned), 0);
 	} else if (settings.showtexts == FALSE) {
-		e_paned_set_position(E_PANED(widgets.hpaned),
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else if ((settings.showtexts == TRUE)
 		   && (settings.showcomms == FALSE)) {
-		e_paned_set_position(E_PANED(widgets.hpaned),
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else if ((settings.showtexts == TRUE)
 		   && (settings.showcomms == TRUE)) {
-		e_paned_set_position(E_PANED(widgets.hpaned),
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				     settings.biblepane_width);
 	} else if (settings.showtexts == TRUE) {
-		e_paned_set_position(E_PANED(widgets.hpaned),
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				     settings.gs_width);
 	} else {
-		e_paned_set_position(E_PANED(widgets.hpaned),
+		gtk_paned_set_position(GTK_PANED(widgets.hpaned),
 				     settings.biblepane_width);
 	}
 }
@@ -493,7 +491,7 @@ static gboolean epaned_button_release_event(GtkWidget * widget,
 {
 	gint panesize;
 
-	panesize = e_paned_get_position(E_PANED(widget));
+	panesize = gtk_paned_get_position(GTK_PANED(widget));
 
 	if (panesize > 15) {
 		if (!strcmp((gchar *) user_data, "epaned"))
@@ -587,7 +585,7 @@ void create_mainwindow(void)
 	gtk_widget_show(hbox25);
 	gtk_box_pack_start(GTK_BOX(vbox_gs), hbox25, TRUE, TRUE, 0);
 
-	widgets.epaned = e_hpaned_new();
+	widgets.epaned = gtk_hpaned_new();
 	gtk_widget_show(widgets.epaned);
 	gtk_box_pack_start(GTK_BOX(hbox25), widgets.epaned, TRUE, TRUE,
 			   0);
@@ -597,7 +595,7 @@ void create_mainwindow(void)
 	 */
 
 	mainPanel = gtk_vbox_new(FALSE, 0);
-	e_paned_pack2(E_PANED(widgets.epaned), mainPanel, TRUE, TRUE);
+	gtk_paned_pack2(GTK_PANED(widgets.epaned), mainPanel, TRUE, TRUE);
 	gtk_widget_show(mainPanel);
 
 	vboxMain = gtk_vbox_new(FALSE, 0);
@@ -617,7 +615,7 @@ void create_mainwindow(void)
 	 */
 
 
-	widgets.vpaned = e_vpaned_new();
+	widgets.vpaned = gtk_vpaned_new();
 	gtk_widget_show(widgets.vpaned);
 	gtk_box_pack_end(GTK_BOX(vboxMain), widgets.vpaned, TRUE, TRUE,
 			 0);
@@ -627,9 +625,9 @@ void create_mainwindow(void)
 
 	hbox2 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox2);
-	e_paned_pack1(E_PANED(widgets.vpaned), hbox2, TRUE, TRUE);
+	gtk_paned_pack1(GTK_PANED(widgets.vpaned), hbox2, TRUE, TRUE);
 
-	widgets.hpaned = e_hpaned_new();
+	widgets.hpaned = gtk_hpaned_new();
 	gtk_widget_show(widgets.hpaned);
 	gtk_box_pack_start(GTK_BOX(hbox2), widgets.hpaned, TRUE, TRUE,
 			   0);
@@ -637,7 +635,7 @@ void create_mainwindow(void)
 
 	widgets.vbox_text = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(widgets.vbox_text);
-	e_paned_pack1(E_PANED(widgets.hpaned), widgets.vbox_text, FALSE,
+	gtk_paned_pack1(GTK_PANED(widgets.hpaned), widgets.vbox_text, FALSE,
 		      TRUE);
 
 	/*
@@ -664,7 +662,7 @@ void create_mainwindow(void)
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.notebook_comm), FALSE);
 
-	e_paned_pack2(E_PANED(widgets.hpaned), widgets.notebook_comm,
+	gtk_paned_pack2(GTK_PANED(widgets.hpaned), widgets.notebook_comm,
 		      TRUE, TRUE);
 
 	/*
@@ -676,7 +674,7 @@ void create_mainwindow(void)
 	gtk_notebook_set_show_border(GTK_NOTEBOOK
 				     (widgets.workbook_lower), FALSE);
 
-	e_paned_pack2(E_PANED(widgets.vpaned), widgets.workbook_lower,
+	gtk_paned_pack2(GTK_PANED(widgets.vpaned), widgets.workbook_lower,
 		      TRUE, TRUE);
 
 	/*
