@@ -43,7 +43,8 @@ struct _module_lists {
 	*commentarymods,
 	*dictionarymods, 
 	*bookmods, 
-	*percommods, 
+	*percommods,
+	*devotionmods, 
 	*text_descriptions, 
 	*dict_descriptions,
 	*comm_descriptions,
@@ -91,6 +92,9 @@ GList * get_list(gint type)
 		case OPTIONS_LIST:
 			return mod_lists->options;
 		break;
+		case DEVOTION_LIST:
+			return mod_lists->devotionmods;
+		break;
 	}
 	return NULL;
 }
@@ -103,7 +107,8 @@ void init_lists(void)
 	mods.commentarymods = NULL;
 	mods.dictionarymods = NULL;
 	mods.percommods = NULL;
-	mods.bookmods = NULL;
+	mods.bookmods = NULL;	
+	mods.devotionmods = NULL;
 	mods.options = NULL;
 	mods.text_descriptions = NULL;
 	mods.comm_descriptions = NULL;
@@ -118,6 +123,7 @@ void init_lists(void)
 	mods.dictionarymods = backend_get_list_of_mods_by_type(DICT_MODS);
 	mods.bookmods = backend_get_list_of_mods_by_type(BOOK_MODS);
 	mods.percommods = backend_get_list_of_percom_modules();
+	mods.devotionmods = backend_get_list_of_devotion_modules();
 	mods.text_descriptions = backend_get_mod_description_list_SWORD(TEXT_MODS);
 	mods.comm_descriptions = backend_get_mod_description_list_SWORD(COMM_MODS);
 	mods.dict_descriptions = backend_get_mod_description_list_SWORD(DICT_MODS);

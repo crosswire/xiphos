@@ -68,6 +68,8 @@ libgui_a_SOURCES =  \
     link_dialog.h \
     main_menu.c \
     main_menu.h \
+    preferences_dialog.c \
+    preferences_dialog.h \
     setup_druid.c \
     setup_druid.h \
     shortcutbar_dialog.c \

@@ -1,29 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_preferences_dlg.c
-    * -------------------
-    * Fri July 27 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-  */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU Library General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * preferences_dialog.c - get user preferences
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -43,30 +37,47 @@
 /* frontend */
 #include "_bibletext.h"
 #include "shortcutbar_dialog.h"
+#include "preferences_dialog.h"
 
 /* main */ 
 #include "support.h"
 #include "gs_shortcutbar.h"
-#include "gs_preferences_dlg.h"
 #include "gs_gnomesword.h"
+#include "lists.h"
 
-/* backend */
-#include "sword.h"
-#include "properties.h"
-
-GtkWidget *notebook7;
+ 
+/*****************************************************************************
+ * externs
+ */
 extern gchar *tmpcolor;
-static gboolean updatehtml, updateSB, updatelayout;
-
-static EShortcutModel *shortcut_model;
 
 /******************************************************************************
- * add_sb_group - add group to shourtcut bar
- * shortcut_bar - shortcut bar to add group to
- * group_name - name of the group to be added
- *****************************************************************************/
+ * static - visible to this file only
+ */
+static gboolean updatehtml, updateSB, updatelayout;
+static EShortcutModel *shortcut_model;
+static GtkWidget *notebook7;
+
+
+/******************************************************************************
+ * Name
+ *   add_sb_group2
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   gint add_sb_group2(EShortcutBar * shortcut_bar,
+					gchar * group_name)	
+ *
+ * Description
+ *   add group to perferences dialog shourtcut bar
+ *
+ * Return value
+ *   gint
+ */
+ 
 static gint add_sb_group2(EShortcutBar * shortcut_bar,
-			  gchar * group_name)
+					gchar * group_name)
 {
 	gint group_num;
 
@@ -78,17 +89,44 @@ static gint add_sb_group2(EShortcutBar * shortcut_bar,
 	return group_num;
 }
 
-/*****************************************************************************
- *      for any shortcut bar item clicked
- *****************************************************************************/
-static void
-on_shortcut_bar_item_selected1(EShortcutBar * shortcut_bar,
-			       GdkEvent * event,
-			       gint group_num, gint item_num)
+/******************************************************************************
+ * Name
+ *   on_shortcut_bar_item_selected1
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_shortcut_bar_item_selected1(EShortcutBar * shortcut_bar,
+			GdkEvent * event, gint group_num, gint item_num)	
+ *
+ * Description
+ *   display notebook page for item clicked
+ *
+ * Return value
+ *   void
+ */
+
+static void on_shortcut_bar_item_selected1(EShortcutBar * shortcut_bar,
+			GdkEvent * event, gint group_num, gint item_num)
 {
-	gtk_notebook_set_page(GTK_NOTEBOOK(notebook7), item_num);	/* set notebook page */
+	gtk_notebook_set_page(GTK_NOTEBOOK(notebook7), item_num);
 }
 
+/******************************************************************************
+ * Name
+ *   applyoptions
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void applyoptions(SETTINGS * s)	
+ *
+ * Description
+ *   apply changes
+ *
+ * Return value
+ *   void
+ */
 
 static void applyoptions(SETTINGS * s)
 {
@@ -137,11 +175,43 @@ static void applyoptions(SETTINGS * s)
 	updatehtml = FALSE;
 	updateSB = FALSE;
 }
-static void on_dock_clicked(GtkButton * button,
-					SETTINGS * s)
+
+/******************************************************************************
+ * Name
+ *   on_dock_clicked
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_dock_clicked(GtkButton * button, SETTINGS * s)	
+ *
+ * Description
+ *   attach or detach shortcut bar
+ *
+ * Return value
+ *   void
+ */
+
+static void on_dock_clicked(GtkButton * button, SETTINGS * s)
 {
 	gui_attach_detach_shortcutbar(s);
 }
+
+/******************************************************************************
+ * Name
+ *   get_preferences_from_dlg
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)	
+ *
+ * Description
+ *   read all preferences dialog options
+ *
+ * Return value
+ *   void
+ */
 
 static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 {
@@ -343,11 +413,27 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 					     (lookup_widget
 					      (d, "sbtnUpPaneHight")));
 
-	backend_save_properties(s, FALSE);
+	save_properties(FALSE);
 	applyoptions(s);
 
 }
 
+/******************************************************************************
+ * Name
+ *   on_btnPropertyboxOK_clicked
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_btnPropertyboxOK_clicked(GtkButton * button,
+ *					gpointer user_data)	
+ *
+ * Description
+ *   apply user's changes and close dialog
+ *
+ * Return value
+ *   void
+ */
 
 static void on_btnPropertyboxOK_clicked(GtkButton * button,
 					gpointer user_data)
@@ -361,6 +447,22 @@ static void on_btnPropertyboxOK_clicked(GtkButton * button,
 	gtk_widget_destroy(dlg);
 }
 
+/******************************************************************************
+ * Name
+ *   on_btnPropertyboxApply_clicked
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_btnPropertyboxApply_clicked(GtkButton * button,
+ *					   gpointer user_data)	
+ *
+ * Description
+ *   apply user's changes
+ *
+ * Return value
+ *   void
+ */
 
 static void on_btnPropertyboxApply_clicked(GtkButton * button,
 					   gpointer user_data)
@@ -373,8 +475,25 @@ static void on_btnPropertyboxApply_clicked(GtkButton * button,
 	get_preferences_from_dlg(dlg, s);
 }
 
-static void
-on_btnPropertyboxCancel_clicked(GtkButton * button, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_btnPropertyboxCancel_clicked
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_btnPropertyboxCancel_clicked(GtkButton * button,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   cancel button clicked - close dialog and do nothing else
+ *
+ * Return value
+ *   void
+ */
+
+static void on_btnPropertyboxCancel_clicked(GtkButton * button,
+						gpointer user_data)
 {
 	GtkWidget *dlg;
 
@@ -382,6 +501,21 @@ on_btnPropertyboxCancel_clicked(GtkButton * button, gpointer user_data)
 	gtk_widget_destroy(dlg);
 }
 
+/******************************************************************************
+ * Name
+ *   set_buttons_sensitive
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void set_buttons_sensitive(GtkWidget * widget)	
+ *
+ * Description
+ *   set ok and apply buttons to sensitive
+ *
+ * Return value
+ *   void
+ */
 
 static void set_buttons_sensitive(GtkWidget * widget)
 {
@@ -394,15 +528,53 @@ static void set_buttons_sensitive(GtkWidget * widget)
 	gtk_widget_set_sensitive(btnapply, TRUE);
 }
 
-static void
-on_colorpicker_color_set(GnomeColorPicker * gnomecolorpicker,
-			 guint arg1,
-			 guint arg2,
-			 guint arg3, guint arg4, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_colorpicker_color_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_colorpicker_color_set(
+ *				GnomeColorPicker * gnomecolorpicker,
+ *				guint arg1, guint arg2,	guint arg3, 
+ *				guint arg4, gpointer user_data)	
+ *
+ * Description
+ *   a color picker has changed
+ *   set ok - apply button sensitive
+ *   set update html to true
+ *
+ * Return value
+ *   void
+ */
+
+static void on_colorpicker_color_set(
+				GnomeColorPicker * gnomecolorpicker,
+				guint arg1, guint arg2,	guint arg3, 
+				guint arg4, gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(gnomecolorpicker));
 	updatehtml = TRUE;
 }
+
+/******************************************************************************
+ * Name
+ *   on_Entry_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_Entry_changed(GtkEditable * editable, gpointer user_data)	
+ *
+ * Description
+ *   a combo entry has changed
+ *   set ok - apply button sensitive
+ *   set update html to true
+ *
+ * Return value
+ *  void 
+ */
 
 static void on_Entry_changed(GtkEditable * editable, gpointer user_data)
 {
@@ -410,9 +582,26 @@ static void on_Entry_changed(GtkEditable * editable, gpointer user_data)
 	updatehtml = TRUE;
 }
 
+/******************************************************************************
+ * Name
+ *   on_button_toggled
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_button_toggled(GtkToggleButton * togglebutton,
+ *						gpointer user_data)	
+ *
+ * Description
+ *   a toggle button has changed
+ *   set ok - apply button sensitive
+ *
+ * Return value
+ *   void
+ */
 
-static void
-on_button_toggled(GtkToggleButton * togglebutton, gpointer user_data)
+static void on_button_toggled(GtkToggleButton * togglebutton,
+						gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(togglebutton));
 	switch (GPOINTER_TO_INT(user_data)) {
@@ -428,30 +617,84 @@ on_button_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 	}
 }
 
+/******************************************************************************
+ * Name
+ *   on_spinbutton_changed
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_spinbutton_changed(GtkEditable * editable,
+					gpointer user_data)	
+ *
+ * Description
+ *   one of the spin button has changed
+ *   set ok - apply button sensitive
+ *   set updatelayout to true
+ *
+ * Return value
+ *   void
+ */
 
-static void
-on_spinbutton_changed(GtkEditable * editable, gpointer user_data)
+static void on_spinbutton_changed(GtkEditable * editable,
+					gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(editable));
 	updatelayout = TRUE;
 }
 
-static void
-on_font_set(GnomeFontPicker * gnomefontpicker,
-	    gchar * arg1, gpointer user_data)
+/******************************************************************************
+ * Name
+ *   on_font_set
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void on_font_set(GnomeFontPicker * gnomefontpicker,
+ *				gchar * arg1, gpointer user_data)	
+ *
+ * Description
+ *   user has chosen new font - set ok - apply button sensitive
+ *   set updatehtml to true
+ *
+ * Return value
+ *   void
+ */
+
+static void on_font_set(GnomeFontPicker * gnomefontpicker,
+				gchar * arg1, gpointer user_data)
 {
 	set_buttons_sensitive(GTK_WIDGET(gnomefontpicker));
 	updatehtml = TRUE;
 }
 
+/******************************************************************************
+ * Name
+ *   setcolorpickersColor
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void setcolorpickersColor(SETTINGS * s,
+ *				GtkWidget * gcpTextBG,
+ *				GtkWidget * gcpText,
+ *				GtkWidget * gcpCurrentverse,
+ *				GtkWidget * gcpTextVerseNums,
+ *				GtkWidget * gcpTextLinks)	
+ *
+ * Description
+ *   set dialog color picker to current settings
+ *
+ * Return value
+ *   void
+ */
 
-static void
-setcolorpickersColor(SETTINGS * s,
-		     GtkWidget * gcpTextBG,
-		     GtkWidget * gcpText,
-		     GtkWidget * gcpCurrentverse,
-		     GtkWidget * gcpTextVerseNums,
-		     GtkWidget * gcpTextLinks)
+static void setcolorpickersColor(SETTINGS * s,
+				GtkWidget * gcpTextBG,
+				GtkWidget * gcpText,
+				GtkWidget * gcpCurrentverse,
+				GtkWidget * gcpTextVerseNums,
+				GtkWidget * gcpTextLinks)
 {
 	gdouble *color;
 	gushort a = 000000;
@@ -493,9 +736,28 @@ setcolorpickersColor(SETTINGS * s,
 
 }
 
+/******************************************************************************
+ * Name
+ *   gui_create_preferences_dialog
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   	GtkWidget *gui_create_preferences_dialog(SETTINGS * s,
+ *					 GList * biblelist,
+ *					 GList * commlist,
+ *					 GList * dictlist,
+ *					 GList * percomlist,
+ *					 GList * devotionlist)
+ *
+ * Description
+ *   create preferences dialog and set to current values
+ *
+ * Return value
+ *   GtkWidget *
+ */
 
-/***  ***/
-GtkWidget *gui_create_preferences_dialog(SETTINGS * s,
+static GtkWidget *gui_create_preferences_dialog(SETTINGS * s,
 					 GList * biblelist,
 					 GList * commlist,
 					 GList * dictlist,
@@ -2617,7 +2879,24 @@ GtkWidget *gui_create_preferences_dialog(SETTINGS * s,
 	return dlgSettings;
 }
 
-void setup_preferences_dlg(SETTINGS * s)
+/******************************************************************************
+ * Name
+ *   gui_setup_preferences_dialog
+ *
+ * Synopsis
+ *   #include "preferences_dialog.h"
+ *
+ *   void gui_setup_preferences_dialog(SETTINGS * s)	
+ *
+ * Description
+ *   get module list and setup preferences dialog call 
+ *   gui_create_preferences_dialog() to create dialog
+ *
+ * Return value
+ *   void
+ */
+
+void gui_setup_preferences_dialog(SETTINGS * s)
 {
 	GtkWidget *dlg;
 	GList *text_modules = NULL;
@@ -2627,12 +2906,12 @@ void setup_preferences_dlg(SETTINGS * s)
 	GList *percom_modules = NULL;
 	GList *devotion_modules = NULL;
 
-	text_modules = backend_get_list_of_mods_by_type(TEXT_MODS);
-	comm_modules = backend_get_list_of_mods_by_type(COMM_MODS);
-	dict_modules = backend_get_list_of_mods_by_type(DICT_MODS);
-	book_modules = backend_get_list_of_mods_by_type(BOOK_MODS);
-	devotion_modules = backend_get_list_of_devotion_modules();
-	percom_modules = backend_get_list_of_percom_modules();
+	text_modules = get_list(TEXT_LIST);
+	comm_modules = get_list(COMM_LIST);
+	dict_modules = get_list(DICT_LIST);
+	book_modules = get_list(GBS_LIST);
+	devotion_modules = get_list(DEVOTION_LIST);
+	percom_modules = get_list(PERCOMM_LIST);
 
 	/* create preferences dialog */
 	dlg = gui_create_preferences_dialog(s,

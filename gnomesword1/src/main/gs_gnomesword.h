@@ -86,6 +86,7 @@ gchar *get_module_description(gchar * mod_name);
 const char *get_book_from_key(char *key);
 int get_chapter_from_key(char *key);
 int get_verse_from_key(char *key);
+void save_properties(gboolean use_default);
 
 #ifdef __cplusplus
 }
