@@ -28,32 +28,20 @@ extern "C" {
 
 typedef struct _text_global_ops TEXT_GLOBALS;
 struct  _text_global_ops {
-	GtkWidget *t_btn_strongs;
-	GtkWidget *t_btn_morphs;
-	GtkWidget *t_btn_footnotes;
-	GtkWidget *t_btn_accents;
-	GtkWidget *t_btn_lemmas;
-	GtkWidget *t_btn_scripturerefs;
-	GtkWidget *t_btn_points;
-	GtkWidget *t_btn_cant;
-	GtkWidget *t_btn_headings;
-	GtkWidget *t_btn_redwords;
-	GtkWidget *t_btn_primary;
-	GtkWidget *t_btn_secondary;
-	GtkWidget *t_btn_all;
 	gboolean
 	    words_in_red,
 	    strongs,
 	    morphs,
-	    gbffootnotes,
-	    thmlfootnotes,
+	    footnotes,
 	    greekaccents,
 	    lemmas,
 	    scripturerefs,
 	    hebrewpoints, 
 	    hebrewcant, 
 	    headings, 
-	    variants;
+	    variants_all, 
+	    variants_primary, 
+	    variants_secondary;
 };
 
 typedef struct _text_find_dialog Text_Find_Dialog;
@@ -74,26 +62,29 @@ struct _text_data {
 	GtkWidget *frame_toolbar;
 	GtkWidget *showtabs;
 	GtkWidget *showtoolbar;
+	GtkWidget *module_options_menu;
+	
 	gchar *mod_name;
 	gchar *search_string;
 	gchar *key;
 	gchar *cipher_key;
 	gchar *cipher_old;
+	
 	gint mod_num;
+	
 	gboolean is_locked;
-	gboolean strip_words_in_red;
+	gboolean is_dialog;
+	
 	TEXT_GLOBALS *tgs;
 	Text_Find_Dialog *find_dialog;
 };
 extern TEXT_DATA *cur_t;
+
 void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);
-void gui_get_module_global_options(TEXT_DATA * t);
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);
 void gui_display_text(gchar * key);
 void gui_add_new_text_pane(TEXT_DATA * t);
-void gui_add_global_option_buttons(GtkWidget * toolbar, 
-	gchar * mod_name, TEXT_GLOBALS * tgs, GtkMenuCallback callback);
 void gui_setup_text(GList *mods);
 void gui_shutdown_text(void);
 	
