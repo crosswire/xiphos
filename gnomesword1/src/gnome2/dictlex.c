@@ -25,6 +25,10 @@
 
 #include <gnome.h>
 
+#ifdef USE_MOZILLA
+#include <gtkmozembed.h>
+#endif
+
 #include "gui/dictlex.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
@@ -38,6 +42,7 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 
+#include "main/embed.h"
 #include "main/sword.h"
 #include "main/settings.h"
 #include "main/lists.h"
@@ -55,7 +60,6 @@ extern gboolean isrunningSD;	/* is the view dictionary dialog runing */
 /******************************************************************************
  * static
  */
-static void create_menu(GdkEventButton * event);
 
 
 
@@ -88,26 +92,6 @@ void on_entryDictLookup_changed(GtkEditable * editable, gpointer data)
 	main_dictionary_entery_changed(settings.DictWindowModule);
 }
 
-/******************************************************************************
- * Name
- *    
- *
- * Synopsis
- *   #include "gui/dictlex.h"
- *
- *   
- *
- * Description
- *   add global module options to popup menus
- *
- * Return value
- *   void
- */
-
-static void popup_pm_dict(gchar * mod_name, GdkEventButton * event)
-{
-	create_menu(event);
-}
 
 
 /******************************************************************************
@@ -201,7 +185,7 @@ static gint html_button_pressed(GtkWidget * html,
 		 */
 		break;
 	case 3:
-		popup_pm_dict(settings.DictWindowModule, event);
+		gui_create_pm_dictionary();
 		break;
 		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
 		   "button_press_event"); */
@@ -290,6 +274,19 @@ static void add_columns(GtkTreeView * treeview)
 				   NULL, NULL, &settings.cell_height);
 }
 
+
+static gboolean on_enter_notify_event(GtkWidget * widget,
+				      GdkEventCrossing * event,
+				      gpointer user_data)
+{
+	//shift_key_presed = FALSE;
+	gtk_widget_grab_focus (widgets.html_dict);
+	settings.whichwindow = DICTIONARY_WINDOW;
+	gui_change_window_title(settings.DictWindowModule);
+  	return FALSE;
+}
+
+
 GtkWidget *gui_create_dictionary_pane(void)
 {
 	GtkWidget *box_dict;
@@ -301,6 +298,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 	GtkWidget *label205;
 	GtkWidget *scrolledwindow;
 	GtkListStore *model;
+	GtkWidget *eventbox;	
 
 	box_dict = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_dict);
@@ -351,6 +349,22 @@ GtkWidget *gui_create_dictionary_pane(void)
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(widgets.listview_dict));
 
+
+
+#ifdef USE_MOZILLA	
+	eventbox = gtk_event_box_new ();
+	gtk_widget_show (eventbox);
+	gtk_paned_pack2(GTK_PANED(hpaned), eventbox, TRUE, TRUE);
+	widgets.html_dict = embed_new(DICTIONARY_TYPE);
+	gtk_widget_show(widgets.html_dict);
+	gtk_container_add(GTK_CONTAINER(eventbox),
+			 widgets.html_dict);
+	
+	g_signal_connect ((gpointer) eventbox, "enter_notify_event",
+		    G_CALLBACK (on_enter_notify_event),
+		    NULL);
+
+#else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_paned_pack2(GTK_PANED(hpaned), scrolledwindow, TRUE, TRUE);
@@ -378,6 +392,7 @@ GtkWidget *gui_create_dictionary_pane(void)
 			 GINT_TO_POINTER(DICTIONARY_TYPE));
 	g_signal_connect(GTK_OBJECT(widgets.html_dict), "link_clicked",
 			 G_CALLBACK(gui_link_clicked), NULL);
+#endif
 	g_signal_connect(GTK_OBJECT(widgets.entry_dict), "changed",
 			 G_CALLBACK(on_entryDictLookup_changed), NULL);
 	g_signal_connect(G_OBJECT(widgets.listview_dict),
@@ -487,7 +502,11 @@ static void on_print1_activate(GtkMenuItem * menuitem,
 static void on_copy2_activate(GtkMenuItem * menuitem,
 			      gpointer user_data)
 {
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
+#else
 	gui_copy_html(widgets.html_dict);
+#endif
 }
 
 
@@ -518,8 +537,14 @@ static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar *dict_key =
-	    gui_get_word_or_selection(widgets.html_comm, FALSE);
+	gchar *dict_key = NULL;
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_dict));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);	
+#else
+	dict_key =
+	    gui_get_word_or_selection(widgets.html_dict, FALSE);
 	if (dict_key) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(settings.
@@ -531,6 +556,7 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 						dict_key);
 		g_free(dict_key);
 	}
+#endif
 }
 
 
@@ -815,7 +841,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static void create_menu(GdkEventButton * event)
+void gui_create_pm_dictionary(void)
 {
 	GtkWidget *menu1;
 	GtkWidget *lookup_selection_menu;
@@ -952,10 +978,13 @@ static void create_menu(GdkEventButton * event)
 	if (main_has_cipher_tag(mod_name))
 		gtk_widget_show(menu1_uiinfo[6].widget);
 
-	gnome_popup_menu_do_popup_modal(menu1, NULL,
+	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+	
+	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
 					widgets.html_text);
-	gtk_widget_destroy(menu1);
+	gtk_widget_destroy(menu1);*/
 	g_free(ops);
 }
 

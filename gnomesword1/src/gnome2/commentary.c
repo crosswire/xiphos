@@ -28,6 +28,10 @@
 #include <gtkhtml/htmlengine.h>
 #include <gal/widgets/e-unicode.h>
 
+#ifdef USE_MOZILLA
+#include <gtkmozembed.h>
+#endif
+
 #include "gui/commentary.h"
 #include "gui/gnomesword.h"
 #include "gui/cipher_key_dialog.h"
@@ -38,6 +42,7 @@
 #include "gui/font_dialog.h"
 #include "gui/widgets.h"
 
+#include "main/embed.h"
 #include "main/settings.h"
 #include "main/lists.h"
 #include "main/sword.h"
@@ -47,7 +52,7 @@
 
 
 
-static void create_menu(GdkEventButton * event);
+//static void create_menu(GdkEventButton * event);
 
 /******************************************************************************
  * Name
@@ -72,28 +77,6 @@ static void on_global_option(GtkMenuItem * menuitem, gpointer data)
 	main_save_module_options(settings.MainWindowModule, (gchar *) data,
 			    GTK_CHECK_MENU_ITEM(menuitem)->active);
 	main_display_commentary(settings.CommWindowModule,settings.comm_key);
-}
-
-
-/******************************************************************************
- * Name
- *    
- *
- * Synopsis
- *   #include "gui/.h"
- *
- *   
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void popup_pm_comm(GdkEventButton * event)
-{
-	create_menu(event);
 }
 
 
@@ -124,9 +107,9 @@ static gboolean on_comm_button_press_event(GtkWidget * widget,
 		break;
 	case 3:
 		if(settings.comm_showing)
-			create_menu(event); //gui_popup_pm_comm(event);
+			gui_create_pm_commentary(); //gui_popup_pm_comm(event);
 		else
-			gui_popup_menu_gbs(event);
+			gui_popup_menu_gbs();
 		break;
 	}
 	return FALSE;
@@ -190,8 +173,6 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 					    (dict, key);
 				if (settings.inDictpane)
 					main_display_dictionary(dict, key);
-					/*gui_change_module_and_key(dict,
-								  key);*/
 				g_free(key);
 				if (dict)
 					g_free(dict);
@@ -217,6 +198,22 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 }
 
 
+static gboolean on_enter_notify_event(GtkWidget * widget,
+				      GdkEventCrossing * event,
+				      gpointer user_data)
+{
+	//shift_key_presed = FALSE;
+	gtk_widget_grab_focus (widgets.html_comm);
+	if(settings.comm_showing) {
+		settings.whichwindow = COMMENTARY_WINDOW;
+		gui_change_window_title(settings.CommWindowModule);
+	} else {
+		settings.whichwindow = BOOK_WINDOW;
+		gui_change_window_title(settings.book_mod);
+	}
+  	return FALSE;
+}
+
 /******************************************************************************
  * Name
  *   gui_create_commentary_pane
@@ -236,7 +233,8 @@ static gboolean on_comm_button_release_event(GtkWidget * widget,
 GtkWidget *gui_create_commentary_pane(void)
 {
 	GtkWidget *box_comm;
-	GtkWidget *scrolledwindow;	
+	GtkWidget *scrolledwindow;
+	GtkWidget *eventbox1;	
 	
 	box_comm = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(box_comm);
@@ -249,7 +247,22 @@ GtkWidget *gui_create_commentary_pane(void)
 	gtk_label_set_justify (GTK_LABEL (widgets.label_comm), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment (GTK_MISC (widgets.label_comm), 0, 0.5);
 
+#ifdef USE_MOZILLA	
+	eventbox1 = gtk_event_box_new ();
+	gtk_widget_show (eventbox1);
+	gtk_box_pack_start(GTK_BOX(box_comm),
+			   eventbox1, TRUE,
+			   TRUE, 0);
+	widgets.html_comm = embed_new(COMMENTARY_TYPE);
+	gtk_widget_show(widgets.html_comm);
+	gtk_container_add(GTK_CONTAINER(eventbox1),
+			 widgets.html_comm);
+	
+	g_signal_connect ((gpointer) eventbox1, "enter_notify_event",
+		    G_CALLBACK (on_enter_notify_event),
+		    NULL);
 
+#else
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow);
 	gtk_box_pack_start(GTK_BOX(box_comm),
@@ -286,6 +299,7 @@ GtkWidget *gui_create_commentary_pane(void)
 	g_signal_connect(GTK_OBJECT(widgets.html_comm),
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
+#endif
 	return box_comm;
 }
 
@@ -321,7 +335,11 @@ static void on_print1_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 static void on_copy2_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
+#else
 	gui_copy_html(widgets.html_comm);
+#endif
 }
 
 
@@ -343,7 +361,6 @@ on_set_module_font_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	gui_set_module_font((settings.comm_showing)?
 			settings.CommWindowModule:settings.book_mod);
-	//gui_display_text(settings.currentverse);
 }
 
 
@@ -351,7 +368,15 @@ static void
 on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 				   gpointer user_data)
 {
-	gchar *dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+	gchar *dict_key =NULL;
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	dict_key = gtk_editable_get_chars((GtkEditable *)widgets.entry_dict,0,-1);	
+#else
+	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+#endif
 	if (dict_key) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(settings.
@@ -360,9 +385,6 @@ on_use_current_dictionary_activate(GtkMenuItem * menuitem,
 		if (settings.inDictpane)
 			main_display_dictionary(settings.DictWindowModule,
 						  dict_key);
-			/*gui_change_module_and_key(settings.
-						  DictWindowModule,
-						  dict_key);*/
 		g_free(dict_key);
 	}
 }
@@ -437,18 +459,22 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 {
 	gchar *dict_key = NULL;
 	gchar *mod_name = NULL;
-	
-	//if(!cur_t->html) return;
-	
+		
 	mod_name = main_module_name_from_description(dict_mod_description);
+#ifdef USE_MOZILLA
+	embed_copy_selection(GTK_MOZ_EMBED(widgets.html_comm));
+	gtk_editable_select_region((GtkEditable *)widgets.entry_dict,0,-1);
+	gtk_editable_paste_clipboard((GtkEditable *)widgets.entry_dict);
+	dict_key = gtk_editable_get_chars((GtkEditable *)widgets.entry_dict,0,-1);
+#else	
 	dict_key = gui_get_word_or_selection(widgets.html_comm, FALSE);
+#endif
 	if (dict_key && mod_name) {
 		if (settings.inViewer)
 			main_sidebar_display_dictlex(mod_name,
 						      dict_key);
 		if (settings.inDictpane)
 			main_display_dictionary(mod_name, dict_key);
-			//gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
 		g_free(mod_name);
 	}
@@ -740,7 +766,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_END
 };
 
-static void create_menu(GdkEventButton * event)
+void gui_create_pm_commentary(void)
 {
 	GtkWidget *menu1;
 	GtkWidget *lookup_selection_menu;
@@ -807,6 +833,9 @@ static void create_menu(GdkEventButton * event)
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
 			  usecurrent);
 
+	g_signal_connect(GTK_OBJECT(usecurrent),
+			   "activate",
+			   G_CALLBACK(on_use_current_dictionary_activate), NULL);
 	separator = gtk_menu_item_new();
 	gtk_widget_show(separator);
 	gtk_container_add(GTK_CONTAINER(lookup_selection_menu),
@@ -919,10 +948,12 @@ static void create_menu(GdkEventButton * event)
 	 * menu1_uiinfo[7].widget, "separator7");
 	 * menu1_uiinfo[8].widget, "show_tabs");
 	 */
-	gnome_popup_menu_do_popup_modal(menu1, NULL,
+	gtk_menu_popup((GtkMenu*)menu1, NULL, NULL, NULL, NULL, 2,
+		     			gtk_get_current_event_time());
+	/*gnome_popup_menu_do_popup_modal(menu1, NULL,
 					NULL, event, NULL,
-					widgets.html_text);
-	gtk_widget_destroy(menu1);
+					widgets.html_text);*/
+	//gtk_widget_destroy(menu1);
 	g_free(ops);
 }
 

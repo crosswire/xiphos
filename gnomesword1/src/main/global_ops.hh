@@ -49,6 +49,7 @@ struct  _global_ops {
 
 int main_save_module_options(char * mod_name, char * option, int choice);
 void main_set_global_options(GLOBAL_OPS * ops);
+void main_set_strongs_morphs_off(GLOBAL_OPS * ops);
 GLOBAL_OPS *main_new_globals(gchar * mod_name);
 void main_dialog_set_global_options(DIALOG_DATA * t);
 

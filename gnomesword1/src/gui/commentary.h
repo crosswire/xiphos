@@ -23,5 +23,6 @@
 #define ___COMMENTARY_H_
 
 GtkWidget *gui_create_commentary_pane(void);
+void gui_create_pm_commentary(void);
 
 #endif

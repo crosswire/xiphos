@@ -65,6 +65,7 @@ struct _settings {
 	        *link_color,  /* color for strongs, morph tags */	
 		*bible_verse_num_color, /* verse number color */
 		*found_color, /* color to use for search word in results display */
+		*font_color, /*  */
 		*verse_num_font_size;		
 		
 	int 

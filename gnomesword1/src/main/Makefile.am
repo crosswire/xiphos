@@ -1,7 +1,8 @@
 INCLUDES =  \
     -I$(top_srcdir)/src \
     $(SWORD_INCLUDES) \
-    $(GNOME_CFLAGS) 
+    $(GNOME_CFLAGS) \
+    $(MOZILLA_CFLAGS) 
     
 
 noinst_LIBRARIES = libmain.a  
@@ -26,6 +27,7 @@ libmain_a_SOURCES =  \
     $(IDL_GENERATED)\
     configs.c configs.h \
     display.cc display.hh \
+    embed.cc embed.h \
     global_ops.cc global_ops.hh \
     lists.cc lists.h \
     main.c \

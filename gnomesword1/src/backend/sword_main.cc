@@ -18,9 +18,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <swmgr.h>
+
+#ifdef USE_MOZILLA
+#include "backend/gs_markupfiltmgr.h"
+#else
 #include <markupfiltmgr.h>
+#endif
 
 #include <gnome.h>
 #include <versekey.h>
@@ -45,8 +53,13 @@ BackEnd *backend = NULL;
 //static gchar *f_message = "backend/sword_main.cc line #%d \"%s\" = %s";
  
 BackEnd::BackEnd() {
+#ifdef USE_MOZILLA
+	main_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+	display_mgr = new SWMgr(new GS_MarkupFilterMgr(FMT_HTMLHREF));
+#else
 	main_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
 	display_mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));
+#endif
 	display_mod = NULL;
 	
 	tree_key = NULL;
@@ -88,7 +101,7 @@ BackEnd::~BackEnd() {
 void BackEnd::init_SWORD(int gsType) {
 	ModMap::iterator it;
 	if(gsType == 0) {
-		main_setup_new_displays();
+		main_setup_displays();
 		
 		for (it = display_mgr->Modules.begin();
 					it != display_mgr->Modules.end(); it++) {

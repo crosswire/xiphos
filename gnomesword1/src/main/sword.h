@@ -47,11 +47,8 @@ extern "C" {
 extern char *OLD_CODESET;
 /*** end defs ***/
 
-
 /*** function prototypes ***/
 
-//void set_global_option(int manager, char * option, gboolean choice);
-//void delete_module_mgr(void);
 void main_set_module_unlocked(char * mod_name, char * key);
 gchar *main_update_nav_controls(const gchar * key);
 char *main_get_active_pane_key(void);
@@ -61,7 +58,6 @@ char *get_path_to_mods(void);
 void init_sword(void);
 void shutdown_backend(void);
 int main_is_mod_rtol(const char * module_name);
-//int set_module(int manager, char * module_name);
 char *main_module_name_from_description(char *description);
 char *main_get_crossref(char * mod_name, char * key, 
 						char * note_number);
@@ -73,16 +69,16 @@ void main_locked_module_display(GtkWidget * html_widget,
 void main_entry_display(GtkWidget * html_widget, gchar * mod_name,
 		   gchar * text, gchar * key, gboolean show_key);
 void main_information_viewer(gchar * mod_name, gchar * text, gchar * key,
-		             gchar * action ,gchar * type);
+		             gchar * action ,gchar * type ,gchar * morph_text,
+			     gchar * morph);
 void main_clear_viewer(void);
-void main_setup_displays(void);
 void main_display_book(const char * mod_name, char * key);
 void main_display_commentary(const char * mod_name, const char * key);
 void main_display_dictionary(char * mod_name, char * key);
 void main_display_bible(const char * mod_name, const char * key);
 void main_change_verse(const char * bible, const char * commentary, 
 						const char * key);
-void main_setup_new_displays(void);
+void main_setup_displays(void);
 void main_dictionary_entery_changed(char * mod_name);
 const char *main_get_module_language(const char *module_name);
 int main_check_for_global_option(char * mod_name, char * option);
