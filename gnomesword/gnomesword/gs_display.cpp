@@ -236,10 +236,17 @@ char GTKhtmlChapDisp::Display(SWModule & imodule)
 	      && !imodule.Error()); imodule++) {
 		/* verse number */
 		strbuf = g_string_new("");
-		g_string_sprintf(strbuf,
+		if (key->Verse() == curVerse) {      
+			g_string_sprintf(strbuf,
 				 "&nbsp;&nbsp;<A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
-				 imodule.Name(), imodule.KeyText(), key->Verse(),
+				 imodule.Description(), imodule.KeyText(), key->Verse(), 
 				 key->Verse());
+		} else {
+			g_string_sprintf(strbuf,
+				 "&nbsp;&nbsp;<A HREF=\"*[%s] %s\" NAME=\"%d\"><FONT COLOR=\"#000FCF\"><B>%d</B></font></A> ",
+				 imodule.Description(), imodule.KeyText(), key->Verse(),
+				 key->Verse());
+		}
 		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
 		g_string_free(strbuf, TRUE);
 		if (key->Verse() == curVerse) {

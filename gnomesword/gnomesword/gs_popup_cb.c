@@ -328,12 +328,6 @@ on_about_this_module3_activate(GtkMenuItem * menuitem, gpointer user_data)
 
 
 //----------------------------------------------------------------------------------------------
-void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)
-{
-	changepercomModSWORD((gchar *) user_data);
-}
-
-//----------------------------------------------------------------------------------------------
 void
 on_about_this_module4_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
@@ -447,6 +441,12 @@ void on_view_in_new_window_activate(GtkMenuItem * menuitem,
 	gtk_widget_show(MainFrm);
 	cursor = gdk_cursor_new(GDK_TOP_LEFT_ARROW);
 	gdk_window_set_cursor(MainFrm->window,cursor);
+}
+
+//----------------------------------------------------------------------------------------------
+void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	changepercomModSWORD((gchar *) user_data);
 }		
 
 /*******************************************************************************

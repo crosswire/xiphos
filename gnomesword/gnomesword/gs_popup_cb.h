@@ -65,7 +65,9 @@ void on_show_tabs1_activate(GtkMenuItem * menuitem,
 void on_show_tabs2_activate(GtkMenuItem * menuitem,
 				gpointer user_data);
 void on_view_in_new_window_activate(GtkMenuItem * menuitem,
-					gpointer user_data);             
+					gpointer user_data);     
+void on_change_module_activate(GtkMenuItem * menuitem, 
+		gpointer user_data);
 void on_changeint1mod_activate(GtkMenuItem * menuitem,
 		gpointer user_data);
 void on_changeint2mod_activate(GtkMenuItem * menuitem,
