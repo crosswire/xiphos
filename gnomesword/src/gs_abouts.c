@@ -61,7 +61,7 @@ void on_btnAboutModuleOK_clicked(GtkButton * button, gpointer user_data)
 void on_btnAboutSwordOK_clicked(GtkButton * button, gpointer user_data)
 {
 	GtkWidget *dlg;
-
+	
 	dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
 	gtk_widget_destroy(dlg);
 }
@@ -94,7 +94,9 @@ GtkWidget *create_AboutSword(void)
 	GtkWidget *dialog_vbox7;
 	GtkWidget *vbox21;
 	GtkWidget *pixmap1;
+	GtkWidget *version_label;
 	GtkWidget *scrolledwindow26;
+	GtkWidget *scrolledwindow27;
 	GtkWidget *txtAboutSword;
 	GtkWidget *label95;
 	GtkWidget *href1;
@@ -129,6 +131,17 @@ GtkWidget *create_AboutSword(void)
 	gtk_widget_show(pixmap1);
 	gtk_box_pack_start(GTK_BOX(vbox21), pixmap1, FALSE, FALSE, 0);
 	gtk_misc_set_padding(GTK_MISC(pixmap1), 4, 4);
+
+	version_label = gtk_label_new("Sword-");
+	gtk_widget_ref(version_label);
+	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "version_label",
+				 version_label,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(version_label);
+	gtk_box_pack_start(GTK_BOX(vbox21), version_label, FALSE, FALSE, 0);
+	//gtk_widget_set_usize(, -2, 24);
+
+
 
 	scrolledwindow26 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow26);
@@ -182,12 +195,26 @@ GtkWidget *create_AboutSword(void)
 	gtk_box_pack_start(GTK_BOX(vbox21), label96, FALSE, FALSE, 0);
 	gtk_widget_set_usize(label96, -2, 19);
 
+	scrolledwindow27 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow27);
+	gtk_object_set_data_full(GTK_OBJECT(AboutSword),
+				 "scrolledwindow27", scrolledwindow27,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow27);
+	gtk_box_pack_start(GTK_BOX(vbox21), scrolledwindow27, TRUE, TRUE,
+			   0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow27),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+				       
 	text6 = gtk_text_new(NULL, NULL);
 	gtk_widget_ref(text6);
 	gtk_object_set_data_full(GTK_OBJECT(AboutSword), "text6", text6,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(text6);
-	gtk_box_pack_start(GTK_BOX(vbox21), text6, TRUE, TRUE, 0);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow27), text6);
+	//gtk_box_pack_start(GTK_BOX(scrolledwindow27), text6, TRUE, TRUE, 0);
 
 	dialog_action_area7 = GNOME_DIALOG(AboutSword)->action_area;
 	gtk_object_set_data(GTK_OBJECT(AboutSword), "dialog_action_area7",

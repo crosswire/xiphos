@@ -57,18 +57,16 @@ void verseSWORD(void);
 void btnlookupSWORD(void);
 void freeformlookupSWORD(GdkEventKey * event);
 void changcurcomModSWORD(gchar * modName, 
-		gint page_num,
 		gboolean showchange);
 void editnoteSWORD(gboolean editbuttonactive);
 void savenoteSWORD(gboolean noteisModified);
 void deletenoteSWORD(void);
 void changcurdictModSWORD(gchar * modName, 
-		gchar* keyText, 
-		gint page_num);
+		gchar* keyText);
 void dictSearchTextChangedSWORD(gchar * mytext);
 void dictchangekeySWORD(gint direction);
 void showmoduleinfoSWORD(char *modName);
-void showinfoSWORD(GtkWidget * text, GtkLabel * label);
+void showinfoSWORD(GtkWidget * text, GtkLabel * label, GtkLabel * version_label);
 void lookupStrongsSWORD(gint theNumber);
 void setglobalopsSWORD(gchar *option, gchar *yesno);
 void changepercomModSWORD(gchar * modName);
@@ -99,10 +97,10 @@ gchar* getVCmodDescriptionSWORD(void);
 gchar* getSDmodDescriptionSWORD(void);
 GList *getBibleBooks(void);
 void morphsSWORD(gboolean choice) ;
-void gotBookmarkSWORD(gchar *modName, gchar *key);
+void gotoBookmarkSWORD(gchar *modName, gchar *key);
 gchar* getmodkeySWORD(gint num);
 gboolean getVerseListSWORD(gchar *vlist);
-
+gfloat getSwordVerionSWORD(void);
 #endif	/* __GNOMESWORD_H__ */
 #ifdef __cplusplus
 }
