@@ -675,6 +675,8 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 				       (scrolledwindow17),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow17,
+                                             settings.shadow_type);
 
 	specd->htmlwidget = htmlwidget;
 	specd->html = GTK_HTML(specd->htmlwidget);

@@ -1940,6 +1940,8 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow2),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow2,
+                                             settings.shadow_type);
 
 	model = create_model_to_first();
 	treeview1 = gtk_tree_view_new_with_model(model);
@@ -2139,6 +2141,8 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow1),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow1,
+                                             settings.shadow_type);
 
 	model = create_model();
 
@@ -2178,6 +2182,8 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow3),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow3,
+                                             settings.shadow_type);
 	model = create_model();
 
 	treeview2 = gtk_tree_view_new_with_model(model);
@@ -2233,6 +2239,9 @@ GtkWidget *create_dialog(void)
   gtk_box_pack_start (GTK_BOX (vbox14), scrolledwindow6, TRUE, TRUE, 0);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow6), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow6,
+                                             settings.shadow_type);
+					     
   model = create_remote_source_treeview_model();
   treeview_local = gtk_tree_view_new_with_model(model);
   gtk_widget_show (treeview_local);
@@ -2280,6 +2289,8 @@ GtkWidget *create_dialog(void)
 				       (scrolledwindow5),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow5,
+                                             settings.shadow_type);
 				       
 	model = create_remote_source_treeview_model();
 	treeview_remote = gtk_tree_view_new_with_model(model);

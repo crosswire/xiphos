@@ -262,6 +262,8 @@ GtkWidget *gui_create_commentary_pane(void)
 				       (scrolledwindow),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type((GtkScrolledWindow *)scrolledwindow,
+                                             settings.shadow_type);
 
 	widgets.html_comm = gtk_html_new();
 	gtk_widget_show(widgets.html_comm);

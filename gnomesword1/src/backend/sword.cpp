@@ -163,7 +163,7 @@ void backend_init(void)
 	char *sword_locale = NULL;
 	char *sys_locale = NULL;
 	const char *sword_version = get_sword_version();
-	//ModMap::iterator it; 
+	
 #ifdef DEBUG	
 	g_print("gnomesword-%s\n", VERSION);
 	g_print("sword-%s\n", sword_version);
@@ -207,18 +207,10 @@ void backend_init(void)
 
 void backend_shutdown(int save_properties)
 {
-//	backend_shutdown_treekey();
-	//main_delete_displays();
-/*	if(sw.entryDisplay)
-		delete sw.entryDisplay;
-	if(sw.dictDisplay)
-		delete sw.dictDisplay;*/
-	/* delete Sword managers */
-//	backend_delete_managers();
 	delete backend;
-//#ifdef DEBUG	
+#ifdef DEBUG	
 	g_print("%s\n", _("SWORD is shutdown"));
-//#endif
+#endif
 }
 
 
