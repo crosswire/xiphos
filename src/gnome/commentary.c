@@ -149,6 +149,7 @@ static void set_commentary_page(gchar * modname, GList * comm_list)
 		c = (COMM_DATA *) comm_list->data;
 		page = 0;
 	}
+	cur_c = c;
 	
 	if (page)
 		gtk_notebook_set_page(GTK_NOTEBOOK
