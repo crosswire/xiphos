@@ -1762,11 +1762,11 @@ static void scope_toggled(GtkToggleButton * togglebutton,
 static void mod_list_toggled(GtkToggleButton * togglebutton,
 			     gpointer user_data)
 {
-	if (GTK_TOGGLE_BUTTON(search.rb_current_module)->active)
-		gtk_label_set_text(GTK_LABEL(search.label_mod_select),
-				   search.search_mod);
-	else
+	if(togglebutton->active) {
+		
+		
 		add_modlist_to_label();
+	}
 }
 
 
@@ -1792,14 +1792,15 @@ static void mod_list_toggled(GtkToggleButton * togglebutton,
 static void current_module_toggled(GtkToggleButton * togglebutton,
 				   gpointer user_data)
 {
-	if (togglebutton->active)
+	if (togglebutton->active) {
+		change_mods_select_label(search.search_mod);
 		gtk_widget_set_sensitive(search.rb_last, TRUE);
+	}
 	else {
 		gtk_widget_set_sensitive(search.rb_last, FALSE);
 		gtk_toggle_button_set_active(search.which_scope, TRUE);
 	}
 }
-
 
 
 /******************************************************************************
@@ -1837,6 +1838,10 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 	GtkTreeModel *model =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW(tree_widget));
 
+
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return;
+	
 	model_mods =
 	    gtk_tree_view_get_model(GTK_TREE_VIEW
 				    (search.listview_modules));
@@ -1849,14 +1854,6 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 
 	selection_modules_lists = gtk_tree_view_get_selection
 	    (GTK_TREE_VIEW(search.module_lists));
-
-	if (!gtk_tree_selection_get_selected
-	    (selection, NULL, &selected))
-		return;
-
-	if (!gtk_tree_selection_get_selected
-	    (selection_modules_lists, NULL, &selected_modules_lists))
-		return;
 
 	if (gtk_tree_model_iter_has_child(model, &selected))
 		return;
@@ -1877,6 +1874,10 @@ static void mod_selection_changed(GtkTreeSelection * selection,
 			mod_list = get_modlist_string(mods);
 
 			if (mod_list) {
+				gtk_tree_selection_get_selected
+	   			       (selection_modules_lists, NULL, 
+					          &selected_modules_lists);
+				
 				gtk_list_store_set(store_modules_lists,
 						   &selected_modules_lists,
 						   1, mod_list, -1);
