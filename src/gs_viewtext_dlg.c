@@ -287,6 +287,7 @@ GtkWidget *create_dlgViewText(void)
 	gtk_object_set_data(GTK_OBJECT(dlgViewText), "dlgViewText",
 			    dlgViewText);
 	gtk_window_set_default_size(GTK_WINDOW(dlgViewText), 300, 412);
+	gtk_window_set_policy(GTK_WINDOW(dlgViewText), TRUE, TRUE, FALSE);
 
 	dialog_vbox14 = GNOME_DIALOG(dlgViewText)->vbox;
 	gtk_object_set_data(GTK_OBJECT(dlgViewText), "dialog_vbox14",
