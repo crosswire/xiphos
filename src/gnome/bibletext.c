@@ -25,7 +25,7 @@
 
 #include <gnome.h>
 
-#include "gui/_bibletext.h"
+#include "gui/bibletext.h"
 #include "gui/bibletext_dialog.h"
 #include "gui/shortcutbar_main.h"
 #include "gui/shortcutbar_viewer.h"
@@ -35,7 +35,6 @@
 #include "main/gs_html.h"
 #include "main/settings.h"
 #include "main/lists.h"
-
 
 
 /******************************************************************************
