@@ -145,7 +145,7 @@ static GnomeUIInfo pmBookmarkTree_uiinfo[] = {
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Make _Pointing to Here"),
+	 GNOME_APP_UI_ITEM, N_("Make _Point to Here"),
 	 N_("Change the bookmark so that it will point to the current reading point"),
 	 (gpointer) on_point_to_here_activate, NULL, NULL,
 	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
@@ -623,7 +623,7 @@ void on_point_to_here_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GtkCellPixText *cell1, *cell2;
 
 	yes_no_dialog = gnome_message_box_new (
-	    "Make the selected bookmark pointing to the current reading point?",
+	    "Make the selected bookmark point to the current reading point?",
 	    GNOME_MESSAGE_BOX_WARNING,
 	    GNOME_STOCK_BUTTON_YES,
 	    GNOME_STOCK_BUTTON_NO,
