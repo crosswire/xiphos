@@ -44,8 +44,8 @@ libgui_a_SOURCES =  \
     commentary_find.h \
     create_shortcutbar_search.c \
     create_shortcutbar_search.h \
-    create_shortcutbar_viewer.c \
-    create_shortcutbar_viewer.h \
+    shortcutbar_viewer.c \
+    shortcutbar_viewer.h \
     editor_menu.c \
     editor_menu.h \
     editor_replace.c \

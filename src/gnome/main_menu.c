@@ -39,6 +39,7 @@
 #include "gs_shortcutbar.h"
 #include "bibletext.h"
 #include "gs_menu.h"
+#include "gs_gui.h"
 #include "about_gnomesword.h"
 #include "about_sword.h"
 #include "gs_history.h"

@@ -37,6 +37,7 @@
 #include "_gbs.h"
 #include "cipher_key_dialog.h"
 #include "gbs_find.h"
+#include "shortcutbar_viewer.h"
 
 /* main */
 #include "settings.h"
@@ -290,13 +291,14 @@ static void on_find_activate(GtkMenuItem * menuitem, GBS_DATA * gbs)
 static void on_lookup_word_activate(GtkMenuItem * menuitem,
 					gchar * modDescription)
 {
-	gchar *mod_name;
+	gchar mod_name[16];
 	gchar *key;
 	
-	mod_name = get_module_name_from_description(modDescription);
+	memset(mod_name, 0, 16);
+	module_name_from_description(mod_name, modDescription);
 	key = get_word_or_selection(cur_g->html, TRUE);
 	if (key && mod_name) {
-		display_dictlex_in_viewer(mod_name, key, &settings);
+		gui_display_dictlex_in_viewer(mod_name, key, &settings);
 		g_free(key);
 		g_free(mod_name);
 	}
@@ -322,13 +324,14 @@ static void on_lookup_word_activate(GtkMenuItem * menuitem,
 static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 					gchar * modDescription)
 {
-	gchar *mod_name;
+	gchar mod_name[16];
 	gchar *key;
-
-	mod_name = get_module_name_from_description(modDescription);	
+	
+	memset(mod_name, 0, 16);
+	module_name_from_description(mod_name, modDescription);	
 	key = get_word_or_selection(cur_g->html, FALSE);
 	if (key && mod_name) {
-		display_dictlex_in_viewer(mod_name, key, &settings);
+		gui_display_dictlex_in_viewer(mod_name, key, &settings);
 		g_free(key);
 		g_free(mod_name);
 	}
@@ -356,7 +359,7 @@ static void on_same_lookup_word_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = get_word_or_selection(g->html, TRUE);
 	if (key) {
-		display_dictlex_in_viewer(settings.DictWindowModule,
+		gui_display_dictlex_in_viewer(settings.DictWindowModule,
 					  key, &settings);
 		g_free(key);
 	}
@@ -384,7 +387,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 {
 	gchar *key = get_word_or_selection(g->html, FALSE);
 	if (key) {
-		display_dictlex_in_viewer(settings.DictWindowModule,
+		gui_display_dictlex_in_viewer(settings.DictWindowModule,
 					  key, &settings);
 		g_free(key);
 	}
@@ -446,7 +449,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 		if (!in_url) {
 			key = buttonpresslookupGS_HTML(g->html);
 			if (key) {
-				display_dictlex_in_viewer(settings.DictWindowModule,
+				gui_display_dictlex_in_viewer(settings.DictWindowModule,
 							  key,
 							  &settings);
 				g_free(key);

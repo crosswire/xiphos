@@ -30,6 +30,7 @@
 /* frontend */
 #include "_bibletext_view.h"
 #include "_display_info.h"
+#include "shortcutbar_viewer.h"
 
 /* main */ 
 #include "display_info.h"
@@ -172,7 +173,7 @@ static void on_linkVT_clicked(GtkHTML * html, const gchar * url,
 		buf = g_strdup(mybuf);
 		settings.whichwindow = 0;
 		modbuf = get_module_name(&settings);
-		display_verse_list(modbuf, buf, &settings);
+		gui_display_verse_list(modbuf, buf, &settings);
 		g_free(buf);
 
 	}
