@@ -519,17 +519,14 @@ int backend_get_verse_from_key(const char *key)
  *   char*
  */
 
-char *backend_get_next_book_of_bible(void)
+const char *backend_get_next_book_of_bible(void)
 {
 	static VerseKey key;
 	static int i = 0, j = 0;
-	char *retval = NULL;
 	
 	while(i < 2) {
 		while(j < key.BMAX[i]) {
-			retval = (char *) key.books[i][j].name;
-			j++;
-			return retval;
+			return (const char *)key.books[i][j++].name;
 		}
 		j = 0;
 		i++;
@@ -538,5 +535,4 @@ char *backend_get_next_book_of_bible(void)
 	i = 0;
 	j = 0;
 	return NULL;
-	
 }
