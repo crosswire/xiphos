@@ -58,24 +58,13 @@ char *get_footnote_body(char *note)
 {
 	gchar *buf = NULL;
 	gchar *token;
-	gchar *book;
-	gchar *chapter;
-	gchar *verse;
 	gchar *type;
 	gchar *note_number;
 	gchar *key;
 	
 	token = strtok(note, ".");
 	if(token)
-		book = g_strdup(token);
-	else return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		chapter = g_strdup(token);
-	else return NULL;
-	token = strtok(NULL, ".");
-	if(token)
-		verse = g_strdup(token);
+		key = g_strdup(token);
 	else return NULL;
 	token = strtok(NULL, ".");
 	if(token)
@@ -86,15 +75,12 @@ char *get_footnote_body(char *note)
 		note_number = strdup(token);
 	else return NULL;
 	
-	key = g_strdup_printf("%s %s:%s",book,chapter,verse);
+	//key = g_strdup_printf("%s %s:%s",book,chapter,verse);
 		
 	buf = backend_get_footnote_body(
 		xml_get_value("modules", "text"), 
 		key, note_number);
 		
-	g_free(book);
-	g_free(chapter);
-	g_free(verse);
 	g_free(type);
 	g_free(key);
 	g_free(note_number);

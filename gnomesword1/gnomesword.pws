@@ -6,12 +6,12 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=320
-1=789
-2=257
-3=87
-4=107
-5=31
+0=83
+1=171
+2=536
+3=41
+4=33
+5=257
 6=34
 7=29
 8=171
@@ -51,15 +51,13 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/html.c
-1=/home/terry/Projects/gnomesword1/src/gnome/bibletext_menu.c
-2=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
-3=/home/terry/Projects/gnomesword1/src/main/module.c
-4=/home/terry/Projects/gnomesword1/src/gnome/hints.c
-5=/home/terry/Projects/gnomesword1/src/gui/hints.h
+0=/home/terry/Projects/gnomesword1/src/main/module.c
+1=/home/terry/Projects/gnomesword1/src/gnome/hints.c
+2=/home/terry/Projects/gnomesword1/src/gnome/html.c
+3=/home/terry/Projects/gnomesword1/src/gui/hints.h
+4=/home/terry/Projects/gnomesword1/src/main/module.h
+5=/home/terry/Projects/gnomesword1/src/gnome/gtkhtml_display.c
 6=/home/terry/Projects/gnomesword1/src/backend/sword.cpp
-7=/home/terry/Projects/gnomesword1/src/main/module.h
-8=/home/terry/Projects/gnomesword1/src/main/settings.h
 
 [Project Tree]
 0=0
@@ -84,14 +82,14 @@ filter.dir.ignore.hidden=0
 7=cur_vpc
 
 [find_text]
-0=check
-1=popup_window
-2=g_warning
-3=audiofile
-4=GS_CHECK_LIB
-5=on_button_release_event
-6=editor_toolbar_left_align_cb
-7=vseparator
+0=gui_show_footnote
+1=check
+2=popup_window
+3=g_warning
+4=audiofile
+5=GS_CHECK_LIB
+6=on_button_release_event
+7=editor_toolbar_left_align_cb
 
 [executer args]
 0=newconfigs
