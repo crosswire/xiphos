@@ -351,7 +351,7 @@ int init_bookmarks(int new_bookmarks, int have_old)
 	}	
 	
 	if (new_bookmarks) {
-		gui_new_xml_bookmark_file();
+		xml_new_bookmark_file();
 	} else if (load_old) {
 		if (have_old) {
 			backend_init_main_mgr();
@@ -380,7 +380,7 @@ int init_bookmarks(int new_bookmarks, int have_old)
 			    backend_load_bookmarks(settings.swbmDir);
 			gui_save_old_bookmarks_to_new(bookmark_tree);
 		} else
-			gui_new_xml_bookmark_file();
+			xml_new_bookmark_file();
 
 		backend_delete_main_mgr();
 		settings.load_xml_bookmarks = TRUE;

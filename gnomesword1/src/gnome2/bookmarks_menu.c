@@ -59,99 +59,6 @@ static gboolean bookmarks_changed;
 
 /******************************************************************************
  * Name
- *  add_xml_folder_to_parent
- *
- * Synopsis
- *   #include "gui/bookmarks.h"
- *
- *   	xmlNodePtr add_xml_folder_to_parent(xmlNodePtr parent, 
- *						BOOKMARK_DATA * es)
- *
- * Description
- *    
- *
- * Return value
- *   xmlNodePtr
- */
-
-static xmlNodePtr add_xml_folder_to_parent(xmlNodePtr parent, GtkTreeIter *iter)
-{ 
-	xmlNodePtr cur_node;
-	xmlAttrPtr xml_attr;
-	gchar *caption = NULL;
-
-	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-			   2, &caption, -1);
-	cur_node = xmlNewChild(parent,
-			       NULL, (const xmlChar *) "Folder", NULL);
-	xml_attr = xmlNewProp(cur_node,
-			      "caption", (const xmlChar *) caption);
-	g_free(caption);
-	return cur_node;
-}
-
-
-/******************************************************************************
- * Name
- *  add_xml_bookmark_to_parent
- *
- * Synopsis
- *   #include "gui/bookmarks.h"
- *
- *   void add_xml_bookmark_to_parent(xmlNodePtr parent, 
- *						BOOKMARK_DATA * es)	
- *
- * Description
- *    
- *
- * Return value
- *   void
- */
-
-static void add_xml_bookmark_to_parent(xmlNodePtr parent, GtkTreeIter *iter)
-{
-	xmlNodePtr xml_node;
-	xmlAttrPtr xml_attr;
-	gchar *mod_desc = NULL;
-	gchar *caption = NULL;
-	gchar *key = NULL;
-	gchar *module = NULL;
-	
-
-	gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
-			   2, &caption, 3, &key, 4, &module, -1);
-	if (module) {
-		if (strlen(module) > 2)
-			mod_desc = get_module_description(module);
-
-	} 
-
-	if (mod_desc == NULL)
-		mod_desc = " ";
-
-	xml_node = xmlNewChild(parent,
-			       NULL,
-			       (const xmlChar *) "Bookmark", NULL);
-	xml_attr = xmlNewProp(xml_node,
-			      "modulename",
-			      (const xmlChar *) module);
-	xml_attr =
-	    xmlNewProp(xml_node, "key", (const xmlChar *) key);
-	xml_attr =
-	    xmlNewProp(xml_node, "moduledescription",
-		       (const xmlChar *) mod_desc);
-	xml_attr =
-	    xmlNewProp(xml_node, "description",
-		       (const xmlChar *) caption);
-	
-	g_free(caption);
-	g_free(key);
-	g_free(module);	
-}
-
-
-/******************************************************************************
- * Name
  *  parse_treeview
  *
  * Synopsis
@@ -170,20 +77,32 @@ static void parse_treeview(xmlNodePtr parent, GtkTreeIter * tree_parent)
 {
 	static xmlNodePtr cur_node;
 	GtkTreeIter child;
+	gchar *caption = NULL;
+	gchar *key = NULL;
+	gchar *module = NULL;
 	
 	gtk_tree_model_iter_children(GTK_TREE_MODEL(model), &child,
                                              tree_parent);
 	
 	do {
-		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
-                                             &child)) {
-				cur_node = add_xml_folder_to_parent(parent, 
-						     	&child);
-				parse_treeview(cur_node, &child);
+		gtk_tree_model_get(GTK_TREE_MODEL(model), &child,
+			   2, &caption, 3, &key, 4, &module, -1);
+		if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), 
+							&child)) {
+			cur_node = xml_add_folder_to_parent(parent, 
+							caption);
+			parse_treeview(cur_node, &child);
 						     
 		}
 		else 
-			add_xml_bookmark_to_parent(parent, &child);
+			xml_add_bookmark_to_parent(parent, 
+						caption,
+						key,
+						module);
+		
+		g_free(caption);
+		g_free(key);
+		g_free(module);	
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model), &child));
 }
 
@@ -210,6 +129,9 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * file_buf)
 	xmlDocPtr root_doc;
 	xmlAttrPtr root_attr;
 	const xmlChar *xml_filename;
+	gchar *caption = NULL;
+	gchar *key = NULL;
+	gchar *module = NULL;
 	
 	if (!bookmarks_changed) 
 		return;
@@ -227,15 +149,20 @@ static void save_treeview_to_xml_bookmarks(GtkTreeIter * iter, gchar * file_buf)
 	}
 	
 	do {
-		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),
-				     iter)) {
-			cur_node = add_xml_folder_to_parent(root_node, 
-						iter);
+		gtk_tree_model_get(GTK_TREE_MODEL(model), iter,
+			   2, &caption, 3, &key, 4, &module, -1);
+		if( gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model),iter)) {
+			cur_node = xml_add_folder_to_parent(root_node, caption);
 			parse_treeview(cur_node, iter);
-					     
 		}
 		else 		
-			add_xml_bookmark_to_parent(root_node, iter);
+			xml_add_bookmark_to_parent(root_node,  
+						caption,
+						key,
+						module);
+		g_free(caption);
+		g_free(key);
+		g_free(module);	
 	} while(gtk_tree_model_iter_next(GTK_TREE_MODEL(model),iter));
 	
 	g_print("\nsaving = %s\n", xml_filename);
