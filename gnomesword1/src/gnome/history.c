@@ -31,7 +31,6 @@
 #include "gui/utilities.h"
 
 #include "main/gs_gnomesword.h"
-#include "main/gs_menu.h"
 #include "main/settings.h"
 
 #include <gal/e-paned/e-hpaned.h>
@@ -55,8 +54,8 @@ void clearhistory(GtkWidget *app, GtkWidget *shortcut_bar)
 {
         gint i;
 
-        removemenuitems(app, _("_History/<Separator>"), historyitems+1);
-        addseparator(app, _("_History/C_lear"));
+        gui_remove_menu_items(_("_History/<Separator>"), historyitems+1);
+        gui_add_separator2menu(app, _("_History/C_lear"));
         /* set sensitivity of history buttons */
         gtk_widget_set_sensitive(gui_lookup_widget(app,"btnBack"), FALSE);
 	gtk_widget_set_sensitive(gui_lookup_widget(app,"btnFoward"), FALSE);
@@ -174,11 +173,11 @@ void updatehistorymenu(GtkWidget *app)
         gint i;
         gchar buf[80];
 
-        removemenuitems(app, _("_History/<Separator>"), historyitems+1);
-        addseparator(app, _("_History/C_lear"));
+        gui_remove_menu_items(_("_History/<Separator>"), historyitems+1);
+        gui_add_separator2menu(app, _("_History/C_lear"));
         for(i=0;i<historyitems;i++) {
                 sprintf(buf,"%d",historylist[i].itemnum);
-                additemtognomemenu(app, historylist[i].verseref, buf, _("_History/<Separator>"),
+                gui_add_item2gnome_menu(app, historylist[i].verseref, buf, _("_History/<Separator>"),
 					(GtkMenuCallback) on_mnuHistoryitem1_activate);
         }
 }

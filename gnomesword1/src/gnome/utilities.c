@@ -31,6 +31,8 @@
 #include <gnome.h>
 
 #include "gui/utilities.h"
+#include "main/gs_popup_cb.h"
+#include "main/settings.h"
 
 
 /******************************************************************************
@@ -76,5 +78,143 @@ GtkWidget *gui_lookup_widget(GtkWidget * widget,
 		g_warning("Widget not found: %s", widget_name);
 	return found_widget;
 }
+
+
+/******************************************************************************
+ * Name
+ *   gui_add_item2gnome_menu
+ *
+ * Synopsis
+ *   #include "gui/utilities.h
+ *
+ *   void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
+ *	gchar * itemdata, gchar * menuname, GtkMenuCallback mycallback)
+ *
+ * Description
+ *   adds an item to the main menu bar
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
+	gchar * itemdata, gchar * menuname, GtkMenuCallback mycallback)
+{
+	GnomeUIInfo *menuitem;
+
+	menuitem = g_new(GnomeUIInfo, 2);
+	menuitem->type = GNOME_APP_UI_ITEM;
+	menuitem->moreinfo = (gpointer) mycallback;
+	menuitem->user_data = g_strdup(itemdata);
+	menuitem->label = itemname;
+	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
+	menuitem->pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
+	menuitem->accelerator_key = 0;
+	menuitem[1].type = GNOME_APP_UI_ENDOFINFO;
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), menuname,
+					 menuitem, NULL);
+}
+
+
+/******************************************************************************
+ * Name
+ *   gui_add_separator2menu
+ *
+ * Synopsis
+ *   #include "gui/utilities.h
+ *
+ *   void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
+ *
+ * Description
+ *   add separator line to menu
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
+{
+	GnomeUIInfo *bookmarkitem;
+	bookmarkitem = g_new(GnomeUIInfo, 2);
+	bookmarkitem->type = GNOME_APP_UI_SEPARATOR;
+	bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
+	bookmarkitem->accelerator_key = 0;
+	bookmarkitem[1].type = GNOME_APP_UI_ENDOFINFO;
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm), subtreelabel,
+					 bookmarkitem, NULL);
+	//g_free(bookmarkitem); 
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/utilities.h
+ *
+ *   void add_mods_to_menus(GList * modlist, gchar * menu,
+ *				GtkMenuCallback callback) 
+ *
+ * Description
+ *   add a list of modules to a menu
+ *
+ * Return value
+ *   void
+ */
+
+void gui_add_mods_to_menus(GList * modlist, gchar * menu,
+				GtkMenuCallback callback) 
+{	
+	gchar	
+		view_remember_last_item[80];
+	gint	i = 0;
+	GList 	*tmp = NULL;
+
+	sprintf(view_remember_last_item,"%s", menu);
+	
+	
+	tmp = modlist;
+	while (tmp != NULL) {	
+		gui_add_item2gnome_menu(settings.app, 
+			(gchar *) tmp->data, 
+			(gchar *) tmp->data,
+			view_remember_last_item, 
+			callback);
+		/* remember last item - so next item will be placed below it */
+		sprintf(view_remember_last_item,"%s%s", 
+				menu, 
+				(gchar *) tmp->data);	
+		++i;
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);
+}			
+
+
+/******************************************************************************
+ * Name
+ *   gui_remove_menu_items
+ *
+ * Synopsis
+ *   #include "gui/utilities.h
+ *
+ *   void gui_remove_menu_items(gchar * startitem, gint numberofitems)
+ *
+ * Description
+ *   remove a number(numberofitems) of items form a menu or submenu(startitem)
+ *
+ * Return value
+ *   void
+ */
+
+void gui_remove_menu_items(gchar * startitem, gint numberofitems)
+{				
+	gnome_app_remove_menus(GNOME_APP(settings.app), startitem,
+			       numberofitems);
+}
+
+
+
 
 /******   end of file   ******/

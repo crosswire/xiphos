@@ -25,23 +25,8 @@
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-#include <gtkhtml/htmlobject.h>
-#include <gtkhtml/htmlengine-edit-clueflowstyle.h>
-#include <gtkhtml/htmlengine-edit-cut-and-paste.h>
-#include <gtkhtml/htmlengine-edit-fontstyle.h>
-#include <gtkhtml/htmlengine-edit-rule.h>
-#include <gtkhtml/htmlengine-edit-movement.h>
-#include <gtkhtml/htmlengine-edit-cursor.h>
-#include <gtkhtml/htmlengine-edit-text.h>
-#include <gtkhtml/htmlengine-edit.h>
 #include <gtkhtml/htmlengine-print.h>
-#include <gtkhtml/htmlengine-save.h>
-#include <gtkhtml/htmlsettings.h>
-#include <gtkhtml/htmlcolorset.h>
 #include <gtkhtml/htmlselection.h>
-#include <gtkhtml/htmlcursor.h>
-#include <gtkhtml/htmlcolor.h>
-#include <gtkhtml/gtkhtml-search.h>
 #include <gal/widgets/e-unicode.h>
 #include <libgnomeprint/gnome-printer.h>
 #include <libgnomeprint/gnome-print.h>

@@ -28,9 +28,12 @@
 #include <gal/widgets/e-unicode.h>
 
 #include "gui/interlinear.h"
+#include "gui/html.h"
 
 #include "main/gs_gnomesword.h"
 #include "main/bibletext.h"
+#include "main/gs_popup_cb.h"
+#include "main/lists.h"
 
 
 extern gboolean havebible;
@@ -38,6 +41,7 @@ extern gboolean havebible;
 static GtkHTMLStreamStatus status1;
 static GtkHTMLStream *htmlstream;
 
+static GtkWidget *module_options_menu;
 void gui_update_interlinear_page()
 {
 	gchar tmpBuf[256], *rowcolor, *font_size;
@@ -490,3 +494,256 @@ void gui_set_interlinear_module_global_options(gchar *option, gboolean choice)
 	}
 }
 
+static void add_items_to_options_menu(void)
+{
+	GtkWidget 
+		*menuChoice,
+		*shellmenu;
+	gchar menuName[64];
+	int viewNumber = 0;
+	GList *tmp;
+	
+	tmp = NULL;
+
+	tmp = get_list(OPTIONS_LIST);
+	while (tmp != NULL) {
+		shellmenu =  module_options_menu;		
+			
+		/* add global option items to interlinear popup menu */
+		menuChoice = gtk_check_menu_item_new_with_label((gchar *)(gchar *) tmp->data);	
+		sprintf(menuName, "optionNum%d", viewNumber++);
+		gtk_object_set_data(GTK_OBJECT(settings.app), menuName, menuChoice);
+		gtk_widget_show(menuChoice);
+		gtk_signal_connect(GTK_OBJECT(menuChoice), "activate",
+			   GTK_SIGNAL_FUNC(on_int_global_options_activate),
+			  (gchar *)(gchar *) tmp->data);  
+		gtk_menu_shell_insert(GTK_MENU_SHELL(shellmenu),
+                                             GTK_WIDGET(menuChoice),
+                                             1);  	      
+				
+		if(!strcmp((gchar *) tmp->data, "Strong's Numbers")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.strongsint;		
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Footnotes")) {		
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.footnotesint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Morphological Tags")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.morphsint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Hebrew Vowel Points")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.hebrewpointsint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Hebrew Cantillation")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.cantillationmarksint;
+		}
+		
+		if(!strcmp((gchar *) tmp->data, "Greek Accents")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.greekaccentsint;
+		}	
+		
+		if(!strcmp((gchar *) tmp->data, "Scripture Cross-references")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.crossrefint;
+		}	
+		
+		if(!strcmp((gchar *) tmp->data, "Lemmas")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.lemmasint;
+		}		
+		
+		if(!strcmp((gchar *) tmp->data, "Headings")) {
+			GTK_CHECK_MENU_ITEM(menuChoice)->active =
+				settings.headingsint;
+		}	
+		
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp);
+}
+
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   
+ *
+ * Description
+ *   create popup menu for interlinear window
+ *
+ * Return value
+ *   
+ */
+
+static void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,  
+			gchar *label, GtkMenuCallback mycallback)
+{
+	GList *tmp;
+	GtkWidget *item;
+	GtkWidget *view_module;
+	GtkWidget *view_module_menu;
+	GtkAccelGroup *view_module_menu_accels;	
+	
+	view_module = gtk_menu_item_new_with_label (label);
+  	gtk_widget_ref (view_module);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module", view_module,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (view_module);
+  	gtk_container_add (GTK_CONTAINER (pmInt), view_module);
+
+  	view_module_menu = gtk_menu_new ();
+  	gtk_widget_ref (view_module_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "view_module_menu", view_module_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_module), view_module_menu);
+  	view_module_menu_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (view_module_menu));
+	tmp = mods;
+	while (tmp != NULL) {
+		item = gtk_menu_item_new_with_label((gchar *) tmp->data);
+		gtk_widget_ref(item);
+		gtk_object_set_data_full(GTK_OBJECT(pmInt), "item",
+					 item,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(item);		
+		gtk_signal_connect(GTK_OBJECT(item), "activate",
+				   GTK_SIGNAL_FUNC(mycallback),
+				   g_strdup((gchar *)tmp->data ));
+
+		gtk_container_add(GTK_CONTAINER(view_module_menu), item);
+		tmp = g_list_next(tmp);
+	}
+	g_list_free(tmp); 
+} 
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   
+ *
+ * Description
+ *   create popup menu for interlinear window
+ *
+ * Return value
+ *   
+ */
+
+GtkWidget * create_interlinear_popup(GList * mods)
+{
+	GtkWidget *pmInt;
+	GtkAccelGroup *pmInt_accels;
+	GtkWidget *copy7;
+	GtkWidget *undockInt;
+	GtkWidget *module_options;
+	GtkWidget *separator2;
+	GtkTooltips *tooltips;
+
+	tooltips = gtk_tooltips_new();
+	pmInt = gtk_menu_new ();
+	gtk_object_set_data (GTK_OBJECT (pmInt), "pmInt", pmInt);
+	pmInt_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmInt));
+
+	copy7 = gtk_menu_item_new_with_label (_("Copy"));
+	gtk_widget_ref (copy7);
+	gtk_object_set_data_full (GTK_OBJECT (pmInt), "copy7", copy7,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (copy7);
+	gtk_container_add (GTK_CONTAINER (pmInt), copy7);
+
+	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+	
+	undockInt = gtk_menu_item_new_with_label (_("Detach/Attach"));
+	gtk_widget_ref (undockInt);
+	gtk_object_set_data_full (GTK_OBJECT (pmInt), "undockInt",undockInt ,
+                            (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show (undockInt);
+	gtk_container_add (GTK_CONTAINER (pmInt), undockInt);
+	
+	module_options = gtk_menu_item_new_with_label (_("Module Options"));
+	gtk_widget_ref(module_options);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "module_options", module_options,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (module_options);
+  	gtk_container_add (GTK_CONTAINER(pmInt), module_options);
+	
+	module_options_menu = gtk_menu_new ();
+  	gtk_widget_ref(module_options_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "module_options_menu",module_options_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (module_options), module_options_menu);
+	
+  	separator2 = gtk_menu_item_new ();
+  	gtk_widget_ref (separator2);
+  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (separator2);
+  	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
+  	gtk_widget_set_sensitive (separator2, FALSE);
+  	/* build change interlinear modules submenu */
+	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 1"), (GtkMenuCallback)on_changeint1mod_activate );  	
+	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 2"), (GtkMenuCallback)on_changeint2mod_activate );	
+	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 3"), (GtkMenuCallback)on_changeint3mod_activate );  	
+	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 4"), (GtkMenuCallback)on_changeint4mod_activate );
+	load_menu_formmod_list(pmInt, mods, _("Change Interlinear 5"), (GtkMenuCallback)on_changeint5mod_activate );
+
+  	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
+                      	GTK_SIGNAL_FUNC (gui_copyhtml_activate),
+                      	NULL);
+	gtk_signal_connect (GTK_OBJECT (undockInt), "activate",
+                      	GTK_SIGNAL_FUNC (on_undockInt_activate), 
+                      	&settings);
+			
+  return pmInt;
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/interlinear.h
+ *
+ *   
+ *
+ * Description
+ *   create popup menu for interlinear window
+ *
+ * Return value
+ *   
+ */
+
+void gui_create_interlinear_popup(GList *bible_description) 
+{
+	/* create popup menu for interlinear window */
+	settings.menuInt = create_interlinear_popup(bible_description);	
+	/* attach popup menus */
+	gnome_popup_menu_attach(settings.menuInt,
+			settings.htmlInterlinear, (gchar*)"1");
+	add_items_to_options_menu();
+}
