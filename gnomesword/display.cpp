@@ -91,14 +91,8 @@ char
 	int curPos = 0;
 	(const char *) imodule;	// snap to entry
 	gtk_text_freeze(GTK_TEXT(gtkText));
-
 	//-- let's find out if we have a comment or dict module 
 	it = mainMgr->Modules.find(imodule.Name());
-	/*if (strcmp((*it).second->Type(), "Commentaries"))
-		//-- if not commentaries add module name to text widget
-		sprintf(tmpBuf, "[%s][ %s] ", imodule.Name(),
-			imodule.KeyText());
-	else*/		
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());
 	//-- show verse ref in text widget          
 	gtk_text_insert(GTK_TEXT(gtkText), NULL, &colourBlue, NULL, tmpBuf,
@@ -132,9 +126,6 @@ char GTKPerComDisp::Display(SWModule & imodule)
 
 	//-- let's find out if we have a comment or dict module 
 	it = mainMgr->Modules.find(imodule.Name());
-	/*if (strcmp((*it).second->Type(), "Commentaries"))
-		sprintf(tmpBuf, "[%s] ", imodule.KeyText());	//-- if not commentaries add module name to text widget
-	else*/
 	sprintf(tmpBuf, "[%s] ", imodule.KeyText());	//-- else just the keytext
 	if (
 	    ((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).
@@ -718,15 +709,14 @@ HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</i>")) {
+			} else if (!strcmp(tag, "</I>")) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						italic_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			}	//-------------------------------------------------------------------------- underline ????
-			else if (!strcmp(tag, "<U>")) {
+			} else if (!strcmp(tag, "<U>")) { //--------------- underline ????
 				i = i + 3;
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
@@ -734,7 +724,7 @@ HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</u>")) {
+			} else if (!strcmp(tag, "</U>")) {
 				i = i + 4;
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
@@ -742,22 +732,20 @@ HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			}	//-------------------------------------------------------------------------- reference
-			else if (!strncmp(tag, "<a href", 6)) {
+			} else if (!strncmp(tag, "<A HREF", 6)) { //---------------- reference
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</a>")) {
+			} else if (!strcmp(tag, "</A>")) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font, &colourRed,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			}	//-------------------------------------------------------------------------- greek
-			else if (!strcmp(tag, "<FONT FACE=\"symbol\">")) {
+			} else if (!strcmp(tag, "<FONT FACE=\"SYMBOL\">")) { //------- greek
 				foreign_font = greek_font;
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
@@ -765,31 +753,28 @@ HTMLentryDisp::Display(SWModule & imodule)
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</font>")) {	//--   "<FONT FACE=\"symbol\">"                         
+			} else if (!strcmp(tag, "</FONT>")) {	
 				gtk_text_insert(GTK_TEXT(gtkText),
 						foreign_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			}	//----------------------------------------------------------------------- bold
-			else if (!strcmp(tag, "<B>")) {
+			} else if (!strcmp(tag, "<B>")) {  //------------------------ bold
 				gtk_text_insert(GTK_TEXT(gtkText),
 						roman_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			} else if (!strcmp(tag, "</b>")) {
+			} else if (!strcmp(tag, "</B>")) {
 				gtk_text_insert(GTK_TEXT(gtkText),
 						bold_font,
 						&gtkText->style->black,
 						NULL, verseBuf, -1);
 				j = 0;
 				verseBuf[0] = '\0';
-			}	//----------------------------------------------------------------------- new line
-			else if (!strcmp(tag, "<br>")
-				 || !strcmp(tag, "<br><B>")) {
+			} else if (!strcmp(tag, "<BR>") || !strcmp(tag, "<BR><B>")) {  //-- new line
 				--i;
 				myverse[i] = '\n';
 			}
@@ -1394,9 +1379,9 @@ HTMLChapDisp::Display(SWModule & imodule)
 							j = 0;
 							verseBuf[0] = '\0';
 						} else
-						    if (!strcmp(tag, "<BR>")) {	//-- new line                    
+						    if (!strcmp(tag, "<BR>")) {	/*** new line ***/
 							if ((!bVerseStyle) || poetry_on) {
-							        //-- we only need new line if we are using paragraph style
+							        /*** we only need new line if we are using paragraph style ***/
 								verseBuf[j] = '\n';	
 								++j;
 							}
@@ -1431,7 +1416,7 @@ HTMLChapDisp::Display(SWModule & imodule)
 			verseBuf = NULL;
 			g_free(myverse);
 		}
-		//---------------------------------------------------------------------------- toggle paragraph style 
+		/*** toggle paragraph style ***/
 		if (bVerseStyle && (!poetry_on))
 			gtk_text_insert(GTK_TEXT(gtkText), roman_font,
 					&gtkText->style->black, NULL, "\n",
@@ -1459,7 +1444,7 @@ gint GTKEntryDisp::gettags(gchar * text, gchar * tag, gint pos)
 	len = strlen(text);
 	tag[0] = '\0';
 	for (i = pos; i < len; i++) {
-		tag[j] = text[i];
+		tag[j] = toupper(text[i]);
 		++j;
 		tag[j] = '\0';
 		if (text[i] == '>' && text[i + 1] != '<') {

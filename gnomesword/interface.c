@@ -4739,13 +4739,12 @@ GtkWidget *create_pmComments(void)
 	gtk_widget_ref(pmComments_uiinfo[6].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmComments), "view_module1",
 				 pmComments_uiinfo[6].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
+				 (GtkDestroyNotify) gtk_widget_unref);       
+        
 	gtk_widget_ref(view_module1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(pmComments), "separator22",
 				 view_module1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
 	return pmComments;
 }
 

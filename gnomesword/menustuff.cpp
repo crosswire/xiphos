@@ -40,13 +40,15 @@ additemtognomemenu(GtkWidget *MainFrm, gchar *itemname, gchar *itemdata, gchar *
 	menuitem = g_new(GnomeUIInfo,2); 
 	menuitem->type = GNOME_APP_UI_ITEM;
 	menuitem->moreinfo=(gpointer)mycallback;
-	menuitem->user_data = g_strdup(itemdata);
+        menuitem->user_data = g_strdup(itemdata);  /*g_strdup(*/
 	menuitem->label = itemname;
 	menuitem->pixmap_type = GNOME_APP_PIXMAP_STOCK;
 	menuitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;
 	menuitem->accelerator_key = 0;
 	menuitem[1].type=GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),menuname,menuitem,NULL);  
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),menuname,menuitem,NULL); 
+	//g_free(menuitem->user_data); 
+	//g_free(menuitem);
 }
 
 //----------------------------------------------------------------------------------
@@ -77,7 +79,8 @@ addseparator(GtkWidget *MainFrm, gchar *subtreelabel)
 	bookmarkitem->pixmap_type = GNOME_APP_PIXMAP_NONE;
 	bookmarkitem->accelerator_key = 0;
 	bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),subtreelabel,bookmarkitem,NULL);	
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),subtreelabel,bookmarkitem,NULL);
+	//g_free(bookmarkitem);	
 }
 //-------------------------------------------------------------------------------------------
 void
@@ -99,6 +102,7 @@ addsubtreeitem(GtkWidget *MainFrm, gchar *menulabel, gchar *subtreelabel)
 	bookmarkitem->accelerator_key = 0;
 	bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO;
 	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),menulabel,bookmarkitem,NULL);	
+        //g_free(bookmarkitem);		
 }
 
 //-------------------------------------------------------------------------------------------
@@ -116,7 +120,9 @@ additemtosubtree(GtkWidget *MainFrm, gchar *subtreelabel, gchar *itemlabel )
 	bookmarkitem->pixmap_info =GNOME_STOCK_MENU_BOOK_OPEN;
 	bookmarkitem->accelerator_key = 0;
 	bookmarkitem[1].type=GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),subtreelabel,bookmarkitem,NULL);	
+	gnome_app_insert_menus_with_data(GNOME_APP(MainFrm),subtreelabel,bookmarkitem,NULL);
+//	g_free(bookmarkitem->user_data);
+//	g_free(bookmarkitem);	
 }
 
 //-------------------------------------------------------------------------------------------
