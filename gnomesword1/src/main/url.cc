@@ -170,6 +170,9 @@ static void show_in_appbar(GtkWidget * appbar, gchar * key, gchar * mod)
 						gboolean clicked)
 {
 	if(clicked) {
+#ifdef DEBUG 
+		g_print("module = %s\n",module);
+#endif
 		gui_display_about_module_dialog((gchar*)module, FALSE);		
 	} else {
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
@@ -607,48 +610,41 @@ static gint show_bookmark(const gchar * module, const gchar * key,
 	gint verse_count;
 	gboolean change_verse = FALSE;
 	
+	/*
 	verse_count = backend->is_Bible_key(key, settings.currentverse);
 	if(!verse_count){
 		alert_url_not_found(key);
 		return 0;
 	}
-	
+	*/
 	if(backend->is_module(module)) {
 		if(!strcmp(type,"newTab")) {
 			main_open_bookmark_in_new_tab((gchar*)module, 
 					(gchar*)key);
 			return 1;
 		}
-		
+		if(!strcmp(type,"newDialog"))  {
+			main_dialog_goto_bookmark((gchar*)module,
+						(gchar*)key);
+			return 1;
+		}		
 		mod_type = backend->module_type((gchar*)module);
 		switch(mod_type) {
 			case TEXT_TYPE:	
-				if(!strcmp(type,"newDialog")) {
-					main_dialog_goto_bookmark(
-						(gchar*)module,
-						(gchar*)key);					
-				} else {
-					tmpkey = main_update_nav_controls(key);
-					main_display_bible(module, tmpkey);
-					main_display_commentary(
-							settings.CommWindowModule, tmpkey);
-					main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
-					if(tmpkey) g_free((gchar*)tmpkey);
-				}
+				tmpkey = main_update_nav_controls(key);
+				main_display_bible(module, tmpkey);
+				main_display_commentary(
+						settings.CommWindowModule, tmpkey);
+				main_keep_bibletext_dialog_in_sync((gchar*)tmpkey);
+				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
 			case COMMENTARY_TYPE:
-			case PERCOM_TYPE:
-				if(!strcmp(type,"newDialog")) {
-					main_dialog_goto_bookmark(
-						(gchar*)module,
-						(gchar*)key);
-				} else {				
-					tmpkey = main_update_nav_controls(key);
-					main_display_bible(
-							settings.MainWindowModule, tmpkey);
-					main_display_commentary(module, tmpkey);
-					if(tmpkey) g_free((gchar*)tmpkey);	
-				}
+			case PERCOM_TYPE:								
+				tmpkey = main_update_nav_controls(key);
+				main_display_bible(
+						settings.MainWindowModule, tmpkey);
+				main_display_commentary(module, tmpkey);
+				if(tmpkey) g_free((gchar*)tmpkey);
 			break;
 			case DICTIONARY_TYPE:
 				main_display_dictionary((gchar*)module,
@@ -730,20 +726,14 @@ static gint sword_uri(const gchar * url, gboolean clicked)
 	if(backend->is_module(work_buf[MODULE])) {
 		mod_type = backend->module_type(work_buf[MODULE]);
 		switch(mod_type) {
-			case TEXT_TYPE:	
+			case TEXT_TYPE:
+			case COMMENTARY_TYPE:	
 				key = main_update_nav_controls(tmpkey);
 				main_display_commentary(
 						settings.CommWindowModule, key);
 				main_display_bible(work_buf[MODULE], key);
 				main_keep_bibletext_dialog_in_sync((gchar*)key);
 				if(key) g_free((gchar*)key);
-			break;
-			case COMMENTARY_TYPE:				
-				key = main_update_nav_controls(tmpkey);
-				main_display_bible(
-						settings.MainWindowModule, key);
-				main_display_commentary(work_buf[MODULE], key);
-				if(key) g_free((gchar*)key);	
 			break;
 			case DICTIONARY_TYPE:
 				main_display_dictionary(work_buf[MODULE],

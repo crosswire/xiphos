@@ -92,7 +92,7 @@ char *main_get_striptext(char *module_name, char *key);
 char *main_get_rendered_text(char *module_name, char *key);
 int main_get_mod_type(char * mod_name);
 char *main_get_module_description(char * module_name);
-
+char *main_get_treekey_local_name(unsigned long offset);
 
 #ifdef __cplusplus
 }
