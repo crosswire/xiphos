@@ -428,7 +428,7 @@ void gui_create_dictlex_dialog(DIALOG_DATA * dlg)
 	gtk_button_set_relief(GTK_BUTTON(btnSyncDL), GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
-	    gtk_image_new_from_stock("gtk-new", GTK_ICON_SIZE_BUTTON);
+	    gtk_image_new_from_stock("gtk-refresh", GTK_ICON_SIZE_BUTTON);
 	gtk_widget_show(tmp_toolbar_icon);
 	gtk_container_add(GTK_CONTAINER(btnSyncDL), tmp_toolbar_icon);
 /*

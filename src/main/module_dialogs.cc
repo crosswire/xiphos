@@ -676,13 +676,19 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 	while (tmp != NULL) {
 		t = (DIALOG_DATA *) tmp->data;
 		if(!strcmp(t->mod_name, module)) {
-			BackEnd* be = (BackEnd*)t->backend;
-			if(t->key)
-				g_free(t->key);
-			t->key = g_strdup(key);
-			main_navbar_set(t->navbar, key);
-			//main_dialog_update_controls(t);
-			be->set_key(t->key);
+			BackEnd* be = (BackEnd*)t->backend;			
+			if(t->mod_type == BOOK_TYPE) {
+				t->offset = atoi(key);			
+				be->set_treekey(t->offset);
+			} else {
+				if(t->key)
+					g_free(t->key);
+				t->key = g_strdup(key);
+				be->set_key(t->key);
+			}
+			if(t->mod_type == TEXT_TYPE || 
+					t->mod_type == COMMENTARY_TYPE)
+				main_navbar_set(t->navbar, key);
 			be->display_mod->Display();
 			gdk_window_raise(t->dialog->window);
 			return;
@@ -691,11 +697,16 @@ void main_dialog_goto_bookmark(const gchar * module, const gchar * key)
 	}
 	
 	t = main_dialogs_open((gchar*)module,key);
-	BackEnd* be = (BackEnd*)t->backend;
-	if(t->key)
-		g_free(t->key);
-	t->key = g_strdup(key);
-	be->set_key(t->key);
+	BackEnd* be = (BackEnd*)t->backend;	
+	if(t->mod_type == BOOK_TYPE) {	
+		t->offset = atoi(key);		
+		be->set_treekey(t->offset);
+	} else {
+		if(t->key)
+			g_free(t->key);
+		t->key = g_strdup(key);
+		be->set_key(t->key);
+	}
 	be->display_mod->Display();
 }
 
@@ -1249,6 +1260,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	
 	switch(type) {
 		case TEXT_TYPE:
+			t->mod_type = TEXT_TYPE;
 			gui_create_bibletext_dialog(t);
 			if(t->is_rtol)
 				be->dialogRTOLDisplay 
@@ -1265,6 +1277,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			dlg_bible = t;
 		break;
 		case COMMENTARY_TYPE:
+			t->mod_type = COMMENTARY_TYPE;
 			gui_create_commentary_dialog(t, FALSE);
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
 			be->init_SWORD(1);
@@ -1278,6 +1291,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			main_navbar_fill_book_combo(t->navbar);
 		break;
 		case PERCOM_TYPE:
+			t->mod_type = PERCOM_TYPE;
 			gui_create_note_editor(t);
 			ec = (GSHTMLEditorControlData *) t->editor;
 			ec->key = g_strdup(settings.currentverse);
@@ -1299,27 +1313,33 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 			main_navbar_fill_book_combo(t->navbar);
 		break;
 		case DICTIONARY_TYPE:
+			t->mod_type = DICTIONARY_TYPE;
 			gui_create_dictlex_dialog(t);
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
 			be->init_SWORD(1);
-			t->key = g_strdup(settings.dictkey);
+			t->key = g_strdup(key);
 		break;
 		case BOOK_TYPE:
+			t->mod_type = BOOK_TYPE;
 			gui_create_gbs_dialog(t);
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
 			be->init_SWORD(1);
-			t->key = g_strdup(settings.book_key);
-			if(settings.book_offset)
-				t->offset = settings.book_offset;
-			else
-				t->offset = 0;
+			t->key = NULL; 
+			t->offset = atoi(key);
 		break;
 	}
 		
 	gtk_widget_show(t->dialog);
 	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
 	be->set_module(t->mod_name);
-	be->set_key(t->key);
+	
+	if(type == BOOK_TYPE) {
+		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
+			     TRUE, t);
+		be->set_treekey(t->offset);
+		g_message("offset = %d",t->offset);
+	} else
+		be->set_key(t->key);
 	
 	if (be->get_config_entry(t->mod_name, "CipherKey")) {
 		t->cipher_old = be->get_config_entry(t->mod_name, "CipherKey");
@@ -1327,10 +1347,7 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	} else {
 		t->is_locked = 0;
 		t->cipher_old = NULL;
-	}
-	
-	if(type == BOOK_TYPE)
-		be->set_treekey(t->offset);
+	}	
 	
 	be->display_mod->Display();
 	bible_apply_change = TRUE;
@@ -1340,9 +1357,6 @@ DIALOG_DATA *main_dialogs_open(const gchar * mod_name ,  const gchar * key)
 	}
 	if(type == DICTIONARY_TYPE)
 		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
-	if(type == BOOK_TYPE)
-		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
-			     TRUE, t);
 	return t;
 }
 

@@ -339,6 +339,7 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 	GtkTooltips *tooltips = gtk_tooltips_new();
 
 	navbar_main.is_dialog = FALSE;
+	navbar_main.testaments = -1;
 	navbar_main.key = g_strdup(settings.currentverse);
 	navbar_main.module_name = g_strdup(settings.MainWindowModule);
 	

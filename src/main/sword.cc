@@ -307,6 +307,29 @@ char *main_get_crossref(char * mod_name, char * key, char * note_number)
 }
 
 
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "main/.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char*
+ */
+
+char *main_get_treekey_local_name(unsigned long offset)
+{
+	return backend->treekey_get_local_name(offset);
+}
+
+
 /******************************************************************************
  * Name
  *   
@@ -1003,10 +1026,7 @@ void main_display_book(const char * mod_name, char * key)
 	if(!settings.book_mod)
 		settings.book_mod = (char*)mod_name;
 	
-	//settings.comm_showing = FALSE;
 	settings.whichwindow = BOOK_WINDOW;
-//	gtk_label_set_text (GTK_LABEL(widgets.label_comm),mod_name);
-	//gui_change_window_title(settings.book_mod);
 	
 	xml_set_value("GnomeSword", "keys", "offset", key);
 	settings.book_offset = atol(xml_get_value( "keys", "offset"));
@@ -1118,18 +1138,26 @@ void main_display_bible(const char * mod_name, const char * key)
 	file = g_strdup_printf("%s/modops.conf", settings.gSwordDir);
 	if(!settings.MainWindowModule)
 		settings.MainWindowModule = (char*)mod_name;
-	if(strcmp(settings.MainWindowModule, mod_name)) {
-		xml_set_value("GnomeSword", "modules", "bible",
-					mod_name);
-		settings.MainWindowModule = xml_get_value(
-					"modules", "bible");
-	}
 	
 	if(strcmp(settings.currentverse, key)) {
 		xml_set_value("GnomeSword", "keys", "verse",
 					key);
 		settings.currentverse = xml_get_value(
 					"keys", "verse");
+	}
+	
+	if(strcmp(settings.MainWindowModule, mod_name)) {
+		xml_set_value("GnomeSword", "modules", "bible",
+					mod_name);
+		settings.MainWindowModule = xml_get_value(
+					"modules", "bible");
+		if(navbar_main.module_name) 
+			g_free(navbar_main.module_name);
+		navbar_main.module_name = g_strdup(settings.MainWindowModule);
+		if(navbar_main.key) 
+			g_free(navbar_main.key);
+		navbar_main.key = g_strdup(settings.currentverse);
+		main_navbar_fill_book_combo(navbar_main);
 	}
 	
 	settings.whichwindow = MAIN_TEXT_WINDOW;

@@ -65,7 +65,8 @@ void gui_verselist_to_bookmarks(GList * verses);
 GtkWidget *gui_create_bookmark_tree(void);
 void gui_parse_bookmarks(GtkTreeView *tree, const xmlChar * file,
 			    GtkTreeIter *parent);
-
+GtkWidget* gui_create_dialog_add_bookmark(gchar * label,
+				gchar * module_name, gchar * key);
 #ifdef __cplusplus
 }
 #endif

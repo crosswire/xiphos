@@ -664,6 +664,42 @@ int BackEnd::module_has_testament(const char * module_name,  int testament) {
 }
 
 
+int BackEnd::module_get_testaments(const char * module_name) {
+	ModMap::iterator it;
+	//SWModule *module;
+	int ot = 0;
+	int nt = 0;
+	
+	it = main_mgr->Modules.find(module_name);
+	if (it != main_mgr->Modules.end()) {
+		SWModule *module = (*it).second;
+		module->setSkipConsecutiveLinks(true);
+			*module = sword::TOP; //position to first entry
+			sword::VerseKey key( module->KeyText() );
+			if (key.Testament() == 1) { // OT && NT
+				ot = 1;
+			} else if (key.Testament() == 2) { //no OT
+				ot = 0;
+			}
+	
+			*module = sword::BOTTOM;
+			key = module->KeyText();
+			if (key.Testament() == 1) { // only OT, no NT
+				nt = 0;
+			} else if (key.Testament() == 2) { //has NT
+				nt = 1;
+			}
+	         module->setSkipConsecutiveLinks(false);
+	}
+	if(ot && nt)
+		return 2;
+	else if(!ot && nt)
+		return 1;
+	else if(ot && !nt)
+		return 0;
+		
+}
+
 char *BackEnd::get_entry_attribute(const char *level1, const char *level2, const char *level3) {
 	UTF8HTML u2html;
 	display_mod->RenderText();                 	
