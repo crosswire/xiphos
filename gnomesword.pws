@@ -6,10 +6,10 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=256
-1=1115
-2=76
-3=451
+0=5
+1=712
+2=59
+3=27
 4=69
 5=55
 6=289
@@ -51,14 +51,10 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/bibletext.c
-1=/home/terry/Projects/gnomesword1/src/gnome/bibletext_menu.c
-2=/home/terry/Projects/gnomesword1/src/gnome/gnomesword.c
-3=/home/terry/Projects/gnomesword1/src/gnome/shortcutbar_search.c
-4=/home/terry/Projects/gnomesword1/src/gnome/studypad.c
-5=/home/terry/Projects/gnomesword1/src/gnome/studypad_dialog.c
-6=/home/terry/Projects/gnomesword1/src/main/xml.c
-7=/home/terry/Projects/gnomesword1/src/main/xml.h
+0=/home/terry/Projects/gnomesword1/src/gnome/html.c
+1=/home/terry/Projects/gnomesword1/src/gnome/main_menu.c
+2=/home/terry/Projects/gnomesword1/src/main/xml.c
+3=/home/terry/Projects/gnomesword1/src/main/xml.h
 
 [replace_text]
 0=toolbar_nav
@@ -71,14 +67,14 @@ filter.dir.ignore.hidden=0
 7=VIEW_PERCOMM
 
 [find_text]
-0=on_shortcut_activate
-1=Add Dialog to Favorites Bar
-2=frame
-3=USE_GTKE
-4=dea
-5=mozilla_mouse_click
-6=moz_win
-7=nbTextMods
+0=File
+1=on_shortcut_activate
+2=Add Dialog to Favorites Bar
+3=frame
+4=USE_GTKE
+5=dea
+6=mozilla_mouse_click
+7=moz_win
 
 [executer args]
 0=newconfigs

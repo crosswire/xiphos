@@ -754,40 +754,35 @@ static GnomeUIInfo help1_menu_uiinfo[] = {
 
 static GnomeUIInfo menubar1_uiinfo[] = {
 	{
-	    GNOME_APP_UI_SUBTREE, N_("_File"),
-	    NULL,
-	    file1_menu_uiinfo, NULL, NULL,
-	    GNOME_APP_PIXMAP_NONE, NULL,
-	    0, (GdkModifierType) 0, NULL
-	},
+	 GNOME_APP_UI_SUBTREE, N_("_File"),
+	 NULL,
+	 file1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	{
-	    GNOME_APP_UI_SUBTREE, N_("_Edit"),
-	    NULL,
-	    edit1_menu_uiinfo, NULL, NULL,
-	    GNOME_APP_PIXMAP_NONE, NULL,
-	    0, (GdkModifierType) 0, NULL
-	},
+	 GNOME_APP_UI_SUBTREE, N_("_Edit"),
+	 NULL,
+	 edit1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	{
-		GNOME_APP_UI_SUBTREE, N_("H_istory"),
-		NULL,
-		history1_menu_uiinfo, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL,
-		0, 0, NULL
-	},
+	 GNOME_APP_UI_SUBTREE, N_("H_istory"),
+	 NULL,
+	 history1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, 0, NULL},
 	{
-	    GNOME_APP_UI_SUBTREE, N_("_View"),
-	    NULL,
-	    view1_menu_uiinfo, NULL, NULL,
-	    GNOME_APP_PIXMAP_NONE, NULL,
-	    0, (GdkModifierType) 0, NULL
-	},
+	 GNOME_APP_UI_SUBTREE, N_("_View"),
+	 NULL,
+	 view1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	{
-	    GNOME_APP_UI_SUBTREE, N_("_Help"),
-	    NULL,
-	    help1_menu_uiinfo, NULL, NULL,
-	    GNOME_APP_PIXMAP_NONE, NULL,
-	    0, (GdkModifierType) 0, NULL
-	},
+	 GNOME_APP_UI_SUBTREE, N_("_Help"),
+	 NULL,
+	 help1_menu_uiinfo, NULL, NULL,
+	 GNOME_APP_PIXMAP_NONE, NULL,
+	 0, (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -809,24 +804,24 @@ static GnomeUIInfo menubar1_uiinfo[] = {
  */
 
 void gui_create_main_menu(GtkWidget * app)
-{	
- 	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
+{
+	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
 
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
 			      _("_File/Open Bibletext Dialog/"),
 			      (GtkMenuCallback)
 			      on_bibletext_item_activate);
-	
+
 	gui_add_mods_to_menus(get_list(COMM_LIST),
 			      _("_File/Open Commentary Dialog/"),
 			      (GtkMenuCallback)
 			      on_commentary_item_activate);
-	
+
 	gui_add_mods_to_menus(get_list(DICT_LIST),
 			      _("_File/Open Dictionary Dialog/"),
 			      (GtkMenuCallback)
 			      on_dictlex_item_activate);
-	
+
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_File/Open Book Dialog/"),
 			      (GtkMenuCallback) on_book_item_activate);
@@ -837,22 +832,25 @@ void gui_create_main_menu(GtkWidget * app)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
-				       
+
 	gtk_menu_item_right_justify(GTK_MENU_ITEM
 				    (menubar1_uiinfo[4].widget));
-				    
+
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
-			_("_Help/About Sword Modules/Bible Texts/"),
-			(GtkMenuCallback) gui_about_activate);
-			      
-	gui_add_mods_to_menus(get_list(COMM_LIST),
-		_("_Help/About Sword Modules/Commentaries/"),
-			(GtkMenuCallback) gui_about_activate);
-			      
-	gui_add_mods_to_menus(get_list(DICT_LIST),
-			_("_Help/About Sword Modules/Dictionaries-Lexicons/"),
+			      _
+			      ("_Help/About Sword Modules/Bible Texts/"),
 			      (GtkMenuCallback) gui_about_activate);
-			      
+
+	gui_add_mods_to_menus(get_list(COMM_LIST),
+			      _
+			      ("_Help/About Sword Modules/Commentaries/"),
+			      (GtkMenuCallback) gui_about_activate);
+
+	gui_add_mods_to_menus(get_list(DICT_LIST),
+			      _
+			      ("_Help/About Sword Modules/Dictionaries-Lexicons/"),
+			      (GtkMenuCallback) gui_about_activate);
+
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_Help/About Sword Modules/Books/"),
 			      (GtkMenuCallback) gui_about_activate);
