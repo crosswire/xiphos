@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
  
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.7.1)
+AM_INIT_AUTOMAKE(gnomesword, 0.7.2)
 AM_CONFIG_HEADER(config.h)
 
 dnl 
@@ -74,7 +74,7 @@ AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h ge
 
 
 dnl Languages which your application supports
-ALL_LINGUAS="de sk"
+ALL_LINGUAS="de es sk"
 AM_GNOME_GETTEXT
 
 dnl Set PACKAGE_*_DIR in config.h.
@@ -96,9 +96,9 @@ GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
 GS_CHECK_LIB(gdk-pixbuf with GNOME canvas support, gnomecanvaspixbuf, 0.11.0)
-GS_CHECK_LIB(GAL, gal, 0.8.0.0)
-GS_CHECK_LIB(GtkHTML, gtkhtml, 0.9.2.0)
-GS_CHECK_LIB(GnomePrint, print, 0.24.0.0)
+GS_CHECK_LIB(GAL, gal, 0.18.0.0)
+GS_CHECK_LIB(GtkHTML, gtkhtml, 0.16.0)
+GS_CHECK_LIB(GnomePrint, print, 0.29.0.0)
 
 dnl **************************
 dnl  For the spell checker
