@@ -44,6 +44,7 @@ GtkWidget *textSDmodule;
 GtkWidget *cbSDMods;
 GtkWidget *ceSDMods;
 GtkWidget *frameShowDict;
+GtkWidget *hpaned2;
 GList *dictList;
 GtkWidget *dlgViewDict;
 gboolean isrunningSD = FALSE;	/* is the view dictionary dialog runing */
@@ -57,7 +58,22 @@ extern SETTINGS *settings;
 /****************************************************************************************
  *callbacks
  ****************************************************************************************/
- 
+
+/*
+ *
+ */ 
+static void
+on_btnLoadKeys_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	gchar *buf;
+	
+	buf = gtk_entry_get_text(GTK_ENTRY(ceSDMods));
+	loadSDkeysSWORD(clKeys);
+	gtk_paned_set_position(GTK_PANED(hpaned2), 120);
+	
+}
+
 /*
  *
  */
@@ -93,6 +109,7 @@ void on_ceSDMods_changed(GtkEditable * editable, gpointer user_data)
 
 	if (!firsttime) {
 		buf = gtk_entry_get_text(GTK_ENTRY(editable));
+		gtk_paned_set_position(GTK_PANED(hpaned2), 0);
 		loadSDmodSWORD(clKeys, buf);
 		gtk_frame_set_label(GTK_FRAME(frameShowDict), buf);	/* set frame label to current Module name  */
 		buf = gtk_entry_get_text(GTK_ENTRY(GTK_WIDGET(user_data)));
@@ -160,9 +177,8 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
 	GtkWidget *btnVDSync;
 	GtkWidget *label126;
 	GtkWidget *entrySDLookup;
-	GtkWidget *button6;
+	GtkWidget *btnLoadKeys;
 	GtkWidget *hbox26;
-	GtkWidget *hpaned2;
 	GtkWidget *scrolledwindow37;
 	GtkWidget *label125;
 	GtkWidget *frame20;
@@ -253,20 +269,18 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
 				  NULL, NULL);
 	gtk_widget_set_usize(entrySDLookup, 119, -2);
 
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(dlgViewDict,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	button6 =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar27),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("button6"), NULL, NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_ref(button6);
-	gtk_object_set_data_full(GTK_OBJECT(dlgViewDict), "button6",
-				 button6,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(button6);
-
+	tmp_toolbar_icon = gnome_stock_pixmap_widget (dlgViewDict, GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST);
+  	btnLoadKeys = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar27),
+                                GTK_TOOLBAR_CHILD_BUTTON,
+                                NULL,
+                                _("button6"),
+                                _("Load all keys for this module"), NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  	gtk_widget_ref (btnLoadKeys);
+  	gtk_object_set_data_full (GTK_OBJECT (dlgViewDict), "btnLoadKeys", btnLoadKeys,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_widget_show (btnLoadKeys);
+ 
 	frameShowDict = gtk_frame_new("");
 	gtk_widget_ref(frameShowDict);
 	gtk_object_set_data_full(GTK_OBJECT(dlgViewDict), "frameShowDict",
@@ -290,7 +304,7 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
 	gtk_widget_show(hpaned2);
 	gtk_box_pack_start(GTK_BOX(hbox26), hpaned2, TRUE, TRUE, 0);
 	gtk_paned_set_handle_size(GTK_PANED(hpaned2), 6);
-	gtk_paned_set_position(GTK_PANED(hpaned2), 151);
+	gtk_paned_set_position(GTK_PANED(hpaned2), 0);
 
 	scrolledwindow37 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_ref(scrolledwindow37);
@@ -382,7 +396,13 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
 			   NULL);
 	gtk_signal_connect(GTK_OBJECT(entrySDLookup), "key_release_event",
 			   GTK_SIGNAL_FUNC
-			   (on_entrySDLookup_key_release_event), NULL);
+			   (on_entrySDLookup_key_release_event), 
+			   NULL);
+	gtk_signal_connect (GTK_OBJECT (btnLoadKeys), "clicked",
+                      GTK_SIGNAL_FUNC (on_btnLoadKeys_clicked),
+                      NULL);		   
+	
+	
 	gtk_signal_connect(GTK_OBJECT(clKeys), "select_row",
 			   GTK_SIGNAL_FUNC(on_clKeys_select_row), NULL);
 	gtk_signal_connect(GTK_OBJECT(btnClose), "clicked",
@@ -395,7 +415,7 @@ GtkWidget *create_dlgViewDict(GtkWidget *app)
 	dictList = setupSDSWORD(textSDmodule);
 	gtk_combo_set_popdown_strings(GTK_COMBO(cbSDMods), dictList);
 	g_list_free(dictList);
-	initSD(getdictmodSWORD());
+	//initSD(getdictmodSWORD());
 	gtk_entry_set_text(GTK_ENTRY(ceSDMods), getdictmodSWORD());
 	gtk_entry_set_text(GTK_ENTRY(entrySDLookup), settings->dictkey);	
 	//g_warning(settings->dictkey);
