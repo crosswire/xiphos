@@ -80,6 +80,8 @@ module.include.files=\
 	src/gui/bibletext_dialog.h\
 	src/gui/bibletext_menu.h\
 	src/gui/bookmarks.h\
+	src/gui/bookmarks_menu.h\
+	src/gui/bookmarks_treeview.h\
 	src/gui/commentary.h\
 	src/gui/commentary_dialog.h\
 	src/gui/commentary_menu.h\
@@ -158,6 +160,8 @@ module.source.files=\
 	src/gnome/bibletext_dialog.c\
 	src/gnome/bibletext_menu.c\
 	src/gnome/bookmarks.c\
+	src/gnome/bookmarks_menu.c\
+	src/gnome/bookmarks_treeview.c\
 	src/gnome/commentary.c\
 	src/gnome/commentary_dialog.c\
 	src/gnome/commentary_menu.c\
@@ -274,7 +278,8 @@ module.source.files=\
 	src/gnome/parallel_view.c\
 	src/gnome2/parallel_dialog.c\
 	src/gnome2/parallel_view.c\
-	src/gnome2/search_sidebar.c
+	src/gnome2/search_sidebar.c\
+	src/gnome2/bookmarks_treeview.c
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

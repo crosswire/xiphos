@@ -54,24 +54,27 @@ HINT hint;
  *   gboolean
  */
 
-void gui_display_hint_in_viewer(gchar * text) 
+void gui_display_hint_in_viewer(gchar * text)
 {
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream;
 	GString *str;
-	
+
 	str = g_string_new("");
-	if (hint.use_hints) {	
-		
+	if (hint.use_hints) {
+
 		sprintf(settings.groupName, "%s", "Viewer");
-		
+
 		html = GTK_HTML(sidebar.html_viewer_widget);
 		htmlstream =
-		    gtk_html_begin_content(html, "text/html; charset=utf-8");
-		g_string_sprintf(str, "<body bgcolor=\"yellow\">%s</body>",
+		    gtk_html_begin_content(html,
+					   "text/html; charset=utf-8");
+		g_string_sprintf(str,
+				 "<body bgcolor=\"yellow\">%s</body>",
 				 text);
-		gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
+		gtk_html_write(GTK_HTML(html), htmlstream, str->str,
+			       str->len);
 		gtk_html_end(GTK_HTML(html), htmlstream, status1);
 		g_string_free(str, TRUE);
 	}
@@ -109,8 +112,8 @@ static GtkWidget *create_hint_window(void)
 	gtk_window_set_default_size(GTK_WINDOW(hint_window), 191, 83);
 	gtk_window_set_policy(GTK_WINDOW(hint_window), TRUE, TRUE,
 			      FALSE);
-	gtk_widget_show(hint_window); 
-	
+	gtk_widget_show(hint_window);
+
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_container_add(GTK_CONTAINER(hint_window), frame);
@@ -157,7 +160,7 @@ void gui_display_in_hint_window(gchar * note)
 	GString *str;
 	gint x;
 	gint y;
-	
+
 	str = g_string_new("");
 	if (!hint.in_popup) {
 		hint.hint_window = create_hint_window();
@@ -171,19 +174,17 @@ void gui_display_in_hint_window(gchar * note)
 			 note);
 	gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-	
+
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
 	}
-	gdk_window_get_position	 (hint.hint_window->window,
-					  &x,
-					  &y);
-	g_warning("x = %d y = %d",x,y);
+	gdk_window_get_position(hint.hint_window->window, &x, &y);
+/*	g_warning("x = %d y = %d",x,y);*/
 	x += 100;
 	y += 50;
 	/*gtk_window_reposition((GtkWindow *)hint.hint_window,
-						x,
-						y);*/
+	   x,
+	   y); */
 	g_string_free(str, TRUE);
 }
 
@@ -206,7 +207,7 @@ void gui_display_in_hint_window(gchar * note)
 
 void gui_destroy_hint_window(void)
 {
-	if(hint.in_popup) {
+	if (hint.in_popup) {
 		gtk_widget_destroy(hint.hint_window);
 		hint.in_popup = FALSE;
 	}
@@ -230,10 +231,10 @@ void gui_destroy_hint_window(void)
 
 void gui_open_hint_viewer(void)
 {
-	gtk_option_menu_set_history (GTK_OPTION_MENU(sidebar.optionmenu1),
-					4);
-	gtk_notebook_set_page(GTK_NOTEBOOK
-			      (widgets.notebook_sidebar), 4);
+	gtk_option_menu_set_history(GTK_OPTION_MENU
+				    (sidebar.optionmenu1), 4);
+	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
+			      4);
 /*	gtk_notebook_set_page(GTK_NOTEBOOK(
 			sv->notebook), 2);
 	sprintf(settings.groupName, "%s", "Viewer");

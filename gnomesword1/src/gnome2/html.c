@@ -74,30 +74,32 @@ gboolean in_url;
  *   void
  */
 
-void url_requested (GtkHTML *html, const gchar *url, 
-					GtkHTMLStream *handle)
+void url_requested(GtkHTML * html, const gchar * url,
+		   GtkHTMLStream * handle)
 {
 	GtkHTMLStreamStatus status;
 	gint fd;
 
-	if (!strncmp (url, "file:", 5))
+	if (!strncmp(url, "file:", 5))
 		url += 5;
 
-	fd = open (url, O_RDONLY);
+	fd = open(url, O_RDONLY);
 	status = GTK_HTML_STREAM_OK;
 	if (fd != -1) {
 		ssize_t size;
-		void *buf = alloca (1 << 7);
-		while ((size = read (fd, buf, 1 << 7))) {
+		void *buf = alloca(1 << 7);
+		while ((size = read(fd, buf, 1 << 7))) {
 			if (size == -1) {
 				status = GTK_HTML_STREAM_ERROR;
 				break;
 			} else
-				gtk_html_write (html, handle, (const gchar *) buf, size);
+				gtk_html_write(html, handle,
+					       (const gchar *) buf,
+					       size);
 		}
 	} else
 		status = GTK_HTML_STREAM_ERROR;
-	gtk_html_end (html, handle, status);
+	gtk_html_end(html, handle, status);
 }
 
 /******************************************************************************
@@ -158,7 +160,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		gnome_appbar_set_status(GNOME_APPBAR(widgets.appbar),
 					"");
 		in_url = FALSE;
-		if(hint.in_popup) {
+		if (hint.in_popup) {
 			gtk_widget_destroy(hint.hint_window);
 			hint.in_popup = FALSE;
 		}
@@ -174,22 +176,25 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 		/***  osis footnote  ***/
 		else if (!strncmp(url, "noteID=", 7)) {
 			//g_warning(url);
-			buf1 = strchr(url,'=');
+			buf1 = strchr(url, '=');
 			++buf1;
 			tmpbuf = get_footnote_body(buf1);
-			if(tmpbuf == NULL)
-				return;	
+			if (tmpbuf == NULL)
+				return;
 			else {
-				gnome_appbar_set_status(GNOME_APPBAR(
-					widgets.appbar),tmpbuf);
-				if(hint.use_hints) {
+				gnome_appbar_set_status(GNOME_APPBAR
+							(widgets.
+							 appbar),
+							tmpbuf);
+				if (hint.use_hints) {
 					//gui_display_hint_in_viewer(tmpbuf);
-					gui_display_in_hint_window(tmpbuf);
+					gui_display_in_hint_window
+					    (tmpbuf);
 				}
-				
-				g_free(tmpbuf);				
-				return;				
-			}					
+
+				g_free(tmpbuf);
+				return;
+			}
 		}
 		/***  module name link  ***/
 		else if (*url == '[') {
@@ -301,7 +306,7 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			gchar *mybuf = NULL;
 			gchar *myurl = NULL;
 			gchar *oldnew = NULL;
-			
+
 			oldnew = g_strdup(url);
 			myurl = g_strdup(url);
 			buf1 = g_strdup(myurl);
@@ -310,20 +315,23 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 			if (mybuf) {
 				modbuf = strchr(mybuf, '=');
 				++modbuf;
-				if(modbuf[0] == 'x' && modbuf[1] == '-')
+				if (modbuf[0] == 'x'
+				    && modbuf[1] == '-')
 					modbuf += 2;
-				if (!strncmp(modbuf, "Robinson", 7)) {	
+				if (!strncmp(modbuf, "Robinson", 7)) {
 					modbuf = "Robinson";
-				} 
-				else if(!strncmp(modbuf, "StrongsMorph", 11)) {
+				} else
+				    if (!strncmp
+					(modbuf, "StrongsMorph", 11)) {
 					is_strongsmorph = TRUE;
-					if(strstr(oldnew,"value=TH"))
-						modbuf = settings.lex_hebrew;
+					if (strstr(oldnew, "value=TH"))
+						modbuf =
+						    settings.lex_hebrew;
 					else
-						modbuf = settings.lex_greek;
+						modbuf =
+						    settings.lex_greek;
 				}
-			}
-			else 
+			} else
 				modbuf = "Robinson";
 
 			mybuf = NULL;
@@ -332,17 +340,21 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 				mybuf = strchr(mybuf, '=');
 				++mybuf;
 			}
-			if(is_strongsmorph) {				
+			if (is_strongsmorph) {
 				++mybuf;
 				++mybuf;
-			} 
+			}
 			buf1 = g_strdup(mybuf);
-			g_warning("show %s in %s",buf1,modbuf);
+			/*g_warning("show %s in %s",buf1,modbuf); */
 			mybuf = NULL;
-			if(hint.use_hints) {
-				mybuf = get_module_text(get_mod_type(modbuf), modbuf, buf1);
-				if(mybuf) {
-					gui_display_in_hint_window(mybuf);
+			if (hint.use_hints) {
+				mybuf =
+				    get_module_text(get_mod_type
+						    (modbuf), modbuf,
+						    buf1);
+				if (mybuf) {
+					gui_display_in_hint_window
+					    (mybuf);
 					//gui_display_hint_in_viewer(mybuf);
 					g_free(mybuf);
 				}
@@ -386,11 +398,15 @@ void gui_url(GtkHTML * html, const gchar * url, gpointer data)
 
 			buf1 = g_strdup(newref);
 			mybuf = NULL;
-			if(hint.use_hints) {
-				mybuf = get_module_text(get_mod_type(modbuf), modbuf, buf1);
-				if(mybuf) {
+			if (hint.use_hints) {
+				mybuf =
+				    get_module_text(get_mod_type
+						    (modbuf), modbuf,
+						    buf1);
+				if (mybuf) {
 					//gui_display_hint_in_viewer(mybuf);
-					gui_display_in_hint_window(mybuf);
+					gui_display_in_hint_window
+					    (mybuf);
 					g_free(mybuf);
 				}
 			}
@@ -510,8 +526,11 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			   so we don't need to get a verse list */
 			gui_display_dictlex_in_sidebar(mod_name, buf);
 		} else {
-			g_warning("verse=%s\nmod=%s\nref=%s",settings.currentverse,mod_name,buf);
-			gui_display_verse_list_in_sidebar(settings.currentverse, mod_name, buf);
+			/*g_warning("verse=%s\nmod=%s\nref=%s",settings.currentverse,mod_name,buf); */
+			gui_display_verse_list_in_sidebar(settings.
+							  currentverse,
+							  mod_name,
+							  buf);
 		}
 		g_free(buf);
 		g_free(mod_name);
@@ -528,20 +547,18 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		if (mybuf) {
 			modbuf = strchr(mybuf, '=');
 			++modbuf;
-			if(modbuf[0] == 'x' && modbuf[1] == '-')
+			if (modbuf[0] == 'x' && modbuf[1] == '-')
 				modbuf += 2;
-			if (!strncmp(modbuf, "Robinson", 7)) {	
+			if (!strncmp(modbuf, "Robinson", 7)) {
 				modbuf = "Robinson";
-			} 
-			else if(!strncmp(modbuf, "StrongsMorph", 11)) {
+			} else if (!strncmp(modbuf, "StrongsMorph", 11)) {
 				is_strongsmorph = TRUE;
-				if(strstr(oldnew,"value=TH"))
+				if (strstr(oldnew, "value=TH"))
 					modbuf = settings.lex_hebrew;
 				else
 					modbuf = settings.lex_greek;
 			}
-		}
-		else
+		} else
 			modbuf = "Robinson";
 		mybuf = NULL;
 		mybuf = strstr(buf, "value=");
@@ -549,10 +566,10 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			mybuf = strchr(mybuf, '=');
 			++mybuf;
 		}
-		if(is_strongsmorph) {				
+		if (is_strongsmorph) {
 			++mybuf;
 			++mybuf;
-		} 
+		}
 		buf = g_strdup(mybuf);
 		if (settings.inDictpane)
 			gui_change_module_and_key(modbuf, buf);
@@ -601,7 +618,7 @@ void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gui_change_module_and_key(modbuf, buf);
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(modbuf_viewer,
-						      buf);
+						       buf);
 		g_free(buf);
 	}
 	/***  gbf strongs  ***/
@@ -877,12 +894,12 @@ gchar *gui_button_press_lookup(GtkWidget * html_widget)
 			key = g_strdelimit(key, ".,\"<>;:?", ' ');
 			key = g_strstrip(key);
 			len = strlen(key);
-			g_warning("len = %d",len);
-			if (key[len-1] == 's' || key[len-1] == 'd') 
-				key[len-1] = '\0';
-			if (key[len-1] == 'h' && key[len-2] == 't' 
-				&& key[len-3] == 'e') 
-					key[len-3] = '\0';
+			/* g_warning("len = %d",len); */
+			if (key[len - 1] == 's' || key[len - 1] == 'd')
+				key[len - 1] = '\0';
+			if (key[len - 1] == 'h' && key[len - 2] == 't'
+			    && key[len - 3] == 'e')
+				key[len - 3] = '\0';
 			return g_strdup(key);	/* must be freed by calling function */
 		}
 
@@ -1000,19 +1017,19 @@ static void print_footer(GtkHTML * html, GnomePrintContext * context,
 	//gchar *text = g_strdup_printf("- %d -", page_num);
 	/*gdouble tw = gnome_font_get_width_string(font, "text");
 
-	if (font) {
-		gnome_print_newpath(context);
-		gnome_print_setrgbcolor(context, .0, .0, .0);
-		gnome_print_moveto(context, x + (width - tw) / 2,
-				   y - (height +
-					gnome_font_get_ascender(font)) /
-				   2);
-		gnome_print_setfont(context, font);
-		gnome_print_show(context, text);
-	}
+	   if (font) {
+	   gnome_print_newpath(context);
+	   gnome_print_setrgbcolor(context, .0, .0, .0);
+	   gnome_print_moveto(context, x + (width - tw) / 2,
+	   y - (height +
+	   gnome_font_get_ascender(font)) /
+	   2);
+	   gnome_print_setfont(context, font);
+	   gnome_print_show(context, text);
+	   }
 
-	g_free(text);
-	page_num++;*/
+	   g_free(text);
+	   page_num++; */
 }
 
 
