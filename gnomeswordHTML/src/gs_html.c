@@ -51,11 +51,147 @@ GtkWidget *htmlDict;
 GtkWidget *textDict;
 GtkWidget *htmlComments;
 
-
+static gboolean was_editable;
+GString *gstr;
 extern GtkWidget *MainFrm;
 extern GtkWidget *textDict;
 GString *gs_clipboard; /* declared in gs_gnomesword.c, freed in gs_sword.cpp */
 extern GtkWidget *appbar1;
+extern gboolean noteModified;
+extern gboolean block_font_style_change;
+typedef struct _GtkHTMLEditTextProperties GtkHTMLEditTextProperties;
+
+#define STYLES 4
+static GtkHTMLFontStyle styles [STYLES] = {
+	GTK_HTML_FONT_STYLE_BOLD,
+	GTK_HTML_FONT_STYLE_ITALIC,
+	GTK_HTML_FONT_STYLE_UNDERLINE,
+	GTK_HTML_FONT_STYLE_STRIKEOUT,
+};
+
+static gboolean
+save_receiver  (const HTMLEngine *engine,
+		const char *data,
+		unsigned int len,
+		void *user_data)
+{
+	static gboolean startgrabing = FALSE;
+		
+	if(!strncmp(data,"</BODY>",7)) startgrabing = FALSE;
+	if(startgrabing)
+		gstr = g_string_append(gstr,data);
+	if(!strcmp(data,"<BODY>")) startgrabing = TRUE;
+	
+	return TRUE;
+}
+
+/*****************************************************************************
+ * savenoteGS - someone clicked save personal  comments
+ * choice
+*****************************************************************************/
+void savenoteHTML(GtkWidget *app)    
+{
+	GtkWidget *html_widget;
+	GtkHTML *html;
+	
+	html_widget = lookup_widget(app,"htmlComments");
+	html = GTK_HTML(html_widget);
+	gtk_html_set_editable(html,FALSE); 
+	gstr = g_string_new("");
+	if (!gtk_html_save(html, (GtkHTMLSaveReceiverFn)save_receiver, GINT_TO_POINTER (0)))
+		g_warning("file not writen");		
+	else
+		g_warning("file writen");
+	g_warning(gstr->str);
+	savenoteSWORD(gstr->str);
+	g_string_free(gstr,1);
+	gtk_html_set_editable(html,TRUE); 		
+}
+
+/*****************************************************************************
+ * boldHTML - 
+ * 
+*****************************************************************************/
+void boldHTML(GtkWidget *widget, GtkWidget *html_widget)    
+{
+	/*gtk_html_set_font_style(GTK_HTML(html_widget),GTK_HTML_FONT_STYLE_BOLD , 
+			GTK_HTML_FONT_STYLE_BOLD);	*/
+	if(!block_font_style_change) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+			gtk_html_set_font_style (GTK_HTML (html_widget),
+						 GTK_HTML_FONT_STYLE_MAX,
+						 GTK_HTML_FONT_STYLE_BOLD);
+		else
+			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_BOLD, 0);
+		noteModified = TRUE;
+	}
+}
+
+/*****************************************************************************
+ * italicHTML - 
+ * 
+*****************************************************************************/
+void italicHTML(GtkWidget *widget, GtkWidget *html_widget)    
+{
+	if(!block_font_style_change) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+			gtk_html_set_font_style (GTK_HTML (html_widget),
+					GTK_HTML_FONT_STYLE_MAX,
+					GTK_HTML_FONT_STYLE_ITALIC);
+		else
+			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_ITALIC, 0);
+		noteModified = TRUE;
+	}
+	
+}
+
+/*****************************************************************************
+ * underlineHTML - 
+ * 
+*****************************************************************************/
+void underlineHTML(GtkWidget *widget, GtkWidget *html_widget)    
+{
+	if(!block_font_style_change) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+			gtk_html_set_font_style (GTK_HTML (html_widget),
+					GTK_HTML_FONT_STYLE_MAX,
+					GTK_HTML_FONT_STYLE_UNDERLINE);
+		else
+			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_UNDERLINE, 0);
+		noteModified = TRUE;	
+	}
+}
+
+/*****************************************************************************
+ * strikeoutHTML - 
+ * 
+*****************************************************************************/
+void strikeoutHTML(GtkWidget *widget, GtkWidget *html_widget)    
+{
+	if(!block_font_style_change) {
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+			gtk_html_set_font_style (GTK_HTML (html_widget),
+					GTK_HTML_FONT_STYLE_MAX,
+					GTK_HTML_FONT_STYLE_STRIKEOUT);
+		else
+			gtk_html_set_font_style (GTK_HTML (html_widget), ~GTK_HTML_FONT_STYLE_STRIKEOUT, 0);
+		noteModified = TRUE;	
+	}
+}
+
+/***************************************************************************************************
+ *
+ ***************************************************************************************************/
+static gboolean
+on_htmlComments_key_press_event(GtkWidget * widget,
+				GdkEventKey * event, gpointer user_data)
+{
+//	gchar *buf;
+	//static gboolean needsecond = FALSE;
+	g_warning("key_press_event");
+	noteModified = TRUE;	//-- noteeditor.cpp
+	return TRUE;
+}
 
 /***************************************************************************************************
  *on_url taken form gtkhtml project
@@ -237,8 +373,8 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_widget_show(htmlCommentaries);
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "swHtmlCom")),
 			  htmlCommentaries);
-
-
+	gtk_html_load_empty(GTK_HTML(htmlCommentaries));	
+	
 	htmlComments = gtk_html_new();
 	gtk_widget_ref(htmlComments);
 	gtk_object_set_data_full(GTK_OBJECT(app), "htmlComments",
@@ -248,7 +384,8 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER
 			  (lookup_widget(app, "swHtmlPerCom")),
 			  htmlComments);
-
+	gtk_html_load_empty(GTK_HTML(htmlComments));		  
+			  
 	textComp1 = gtk_html_new();
 	gtk_widget_ref(textComp1);
 	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
@@ -258,6 +395,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_container_add(GTK_CONTAINER
 			  (lookup_widget(app, "scrolledwindow15")),
 			  textComp1);
+	gtk_html_load_empty(GTK_HTML(textComp1));		  
 			  
 	htmlDict = gtk_html_new();
 	gtk_widget_ref(htmlDict);	
@@ -266,7 +404,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(htmlDict);
 	gtk_container_add(GTK_CONTAINER(lookup_widget(app, "scrolledwindow8")), htmlDict);
-
+	gtk_html_load_empty(GTK_HTML(htmlDict));
 
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link2_clicked), NULL);			   
@@ -281,7 +419,9 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect (GTK_OBJECT (htmlComments), "on_url",
-			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
+			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
+	gtk_signal_connect(GTK_OBJECT(htmlComments), "key_press_event",
+			   GTK_SIGNAL_FUNC(on_htmlComments_key_press_event), NULL);		   
 
 	gtk_signal_connect (GTK_OBJECT (textComp1), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
@@ -292,22 +432,35 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);		   
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
+
 }
 
 /***************************************************************************************************
  *beginHTML
  ***************************************************************************************************/
-void beginHTML(GtkWidget * html)
+void beginHTML(GtkWidget *html_widget)
 {
-	htmlstream = gtk_html_begin(GTK_HTML(html));
+	GtkHTML *html;
+	
+	html = GTK_HTML(html_widget);
+	was_editable = gtk_html_get_editable (html);
+	if (was_editable)
+		gtk_html_set_editable (html, FALSE);
+	htmlstream = gtk_html_begin(html);
 }
 
 /***************************************************************************************************
  *endHTML
  ***************************************************************************************************/
-void endHTML(GtkWidget * html)
+void endHTML(GtkWidget * html_widget)
 {
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
+	GtkHTML *html;
+	
+	html = GTK_HTML(html_widget);	
+	
+	gtk_html_end(html, htmlstream, status1);
+	if (was_editable)
+		gtk_html_set_editable (html, TRUE);
 }
 
 /***************************************************************************************************

@@ -7,10 +7,10 @@
  ***************************************************************************/
 
 /***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *                                                                                                                                 *
+ *   This program is free software; you can redistribute it and/or modify       *
+ *   it under the terms of the GNU General Public License as published by       *
+ *   the Free Software Foundation; either version 2 of the License, or               *
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
@@ -21,6 +21,12 @@ extern "C" {
 	
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
+	
+	void savenoteHTML(GtkWidget *app);
+	void boldHTML(GtkWidget *widget, GtkWidget *html_widget);
+	void italicHTML(GtkWidget *widget, GtkWidget *html_widget);
+	void underlineHTML(GtkWidget *widget, GtkWidget *html_widget);
+	void strikeoutHTML(GtkWidget *widget, GtkWidget *html_widget);
 	
 	void on_url(GtkHTML * html, const gchar * url, gpointer data);
 	void on_link_clicked(GtkHTML * html, const gchar * url,

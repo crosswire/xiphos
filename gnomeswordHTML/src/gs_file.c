@@ -703,4 +703,3 @@ GtkWidget *create_fileselectionSave(void)
 	return fileselectionSave;
 }
 
-

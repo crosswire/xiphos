@@ -53,7 +53,9 @@ COMMON_SOURCE =  \
     gs_thmlhtml.cpp \
     gs_thmlhtml.h \
     sw_utility.cpp\
-    sw_utility.h
+    sw_utility.h \
+    gs_toolbarEditor.c \
+    gs_toolbarEditor.h
 
 SPELLING_SOURCE =  \
     debug.h \

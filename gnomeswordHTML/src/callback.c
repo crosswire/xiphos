@@ -30,6 +30,33 @@
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
 
+#include <gtkhtml/htmlobject.h>
+#include <gtkhtml/htmlengine.h>
+#include <gtkhtml/htmlengine-edit-clueflowstyle.h>
+#include <gtkhtml/htmlengine-edit-cut-and-paste.h>
+#include <gtkhtml/htmlengine-edit-fontstyle.h>
+#include <gtkhtml/htmlengine-edit-rule.h>
+#include <gtkhtml/htmlengine-edit-movement.h>
+#include <gtkhtml/htmlengine-edit-cursor.h>
+#include <gtkhtml/htmlengine-edit-text.h>
+#include <gtkhtml/htmlengine-edit.h>
+#include <gtkhtml/htmlengine-print.h>
+#include <gtkhtml/htmlengine-save.h>
+#include <gtkhtml/htmlsettings.h>
+#include <gtkhtml/htmlcolorset.h>
+#include <gtkhtml/htmlselection.h>
+#include <gtkhtml/htmlcursor.h>
+#include <gtkhtml/htmltext.h>
+#include <gtkhtml/htmltextslave.h>
+
+#include <gtkhtml/gtkhtml-embedded.h>
+#include <gtkhtml/gtkhtml-properties.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+
 #if USE_SHORTCUTBAR
 #include  <gal/shortcut-bar/e-shortcut-bar.h>
 #include <gal/e-paned/e-hpaned.h>
@@ -45,7 +72,8 @@
 #include "gs_file.h"
 #include "gs_listeditor.h"
 #include "gs_abouts.h"
-
+#include "gs_html.h"
+#include "gs_toolbarEditor.h"
 //#include "noteeditor.h"
 //#include "searchstuff.h"
 #include "printstuff.h"
@@ -54,20 +82,23 @@
 /******************************************************************************
  * globals
 ******************************************************************************/
-gboolean firstsearch = TRUE;	/* search dialog is not running when TRUE */
-gboolean firstLE = TRUE;	/* ListEditor in not running when TRUE */
-GtkWidget *searchDlg;		/* pointer to search dialog */
-guint num1, num2, num3;
-gboolean dicttabs,
-	comtabs,
-	bar,
-	applycolor = FALSE,
-	showtextgroup,
-	showcomgroup,
-	showdictgroup,
-	showhistorygroup;
-GtkWidget *listeditor;		/* pointer to ListEditor */
-gchar *tmpcolor;
+gboolean 	firstsearch = TRUE;	/* search dialog is not running when TRUE */
+gboolean 	firstLE = TRUE;	/* ListEditor in not running when TRUE */
+GtkWidget 	*searchDlg;		/* pointer to search dialog */
+guint 		num1, 
+			num2, 
+			num3;
+gboolean 	dicttabs,
+			comtabs,
+			bar,
+			applycolor = FALSE,
+			showtextgroup,
+			showcomgroup,
+			showdictgroup,
+			showhistorygroup;
+GtkWidget 	*listeditor,		/* pointer to ListEditor */
+			*editortoolbar;
+gchar 		*tmpcolor;
 /******************************************************************************
  * externals
 ******************************************************************************/
@@ -465,16 +496,27 @@ on_textComments_button_release_event(GtkWidget * widget,
 void
 on_btnEditNote_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active);
+	static gboolean firsttime = TRUE;
+	gboolean choice;
+	
+	choice = GTK_TOGGLE_BUTTON(togglebutton)->active;	
+	if(choice) {
+		if(firsttime) {
+			editortoolbar = HTMLtoolbar_create(MainFrm, "htmlComments");
+			firsttime = FALSE;
+		}
+		gtk_widget_show(lookup_widget(MainFrm,"vbox32"));
+	} else {
+		gtk_widget_hide(lookup_widget(MainFrm,"vbox32"));	
+	}
+	editnoteSWORD(choice);
+	gtk_html_set_editable (GTK_HTML(lookup_widget(GTK_WIDGET(togglebutton),"htmlComments")), choice );
 }
 
 //----------------------------------------------------------------------------------------------
 void on_btnSaveNote_clicked(GtkButton * button, gpointer user_data)
 {
-	if (GTK_TOGGLE_BUTTON
-	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {
-		savenoteSWORD(TRUE);
-	}
+	savenoteHTML(MainFrm);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -816,55 +858,7 @@ on_textComments_drag_drop(GtkWidget * widget,
 }
 
 //----------------------------------------------------------------------------------------------
-gboolean
-on_textComments_key_press_event(GtkWidget * widget,
-				GdkEventKey * event, gpointer user_data)
-{
-//	gchar *buf;
-	static gboolean needsecond = FALSE;
 
-	if (!settings->formatpercom){	/* do we want formatting?	*/
-		noteModified = TRUE;	/* note has been modified to get us here */
-		return FALSE;
-	}
-	if (event->keyval == 65293 || event->keyval == 65421) {	/* return key */
-		gtk_text_set_point(GTK_TEXT(NEtext), gtk_editable_get_position(GTK_EDITABLE(NEtext)));
-		gtk_text_insert(GTK_TEXT(NEtext), NULL, &NEtext->style->black, NULL, "<br>", -1); 		
-		noteModified = TRUE;	//-- noteeditor.cpp
-		return TRUE;
-	}
-	if (GTK_EDITABLE(NEtext)->has_selection){	//-- do we have a selection?	
-		if (event->keyval == 65507){	//-- ctrl key pressed		
-			needsecond = TRUE;
-			return FALSE;
-		}
-	}
-
-	noteModified = TRUE;
-	if (needsecond) {
-		switch (event->keyval) {
-		case 98:	//-- bold
-			//noteModified = noteeditor->setBOLD(NEtext);	//-- noteeditor.cpp
-			break;
-		case 105:	//-- italics
-			//noteModified = noteeditor->setITALIC(NEtext);	//-- noteeditor.cpp
-			break;
-		case 114:	//-- reference
-			//noteModified = noteeditor->setREFERENCE(NEtext);	//-- noteeditor.cpp
-			break;
-		case 108:	//-- underline -- broken using l not u - u removes line
-			//noteModified = noteeditor->setUNDERLINE(NEtext);	//-- noteeditor.cpp
-			break;
-		case 103:	//-- greek font
-			//noteModified = noteeditor->setGREEK(NEtext);	//-- noteeditor.cpp
-			break;
-		default:
-			break;
-		}
-		needsecond = FALSE;
-	}
-	return TRUE;
-}
 
 //----------------------------------------------------------------------------------------------
 gboolean

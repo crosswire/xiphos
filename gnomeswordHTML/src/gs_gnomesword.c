@@ -123,15 +123,15 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	addnotebookpages(lookup_widget(app,"notebook4"), dictionarymods);	
 /*  set text windows to word warp */
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"moduleText")) , TRUE );
-	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
+//	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"nbPerCom")),0);
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textCommentaries")) , TRUE );
-	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
+//	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"textComments")) , TRUE );
 	gtk_text_set_word_wrap(GTK_TEXT (lookup_widget(app,"text3")) , TRUE );
 /* set main notebook page */
 	gtk_notebook_set_page(GTK_NOTEBOOK(lookup_widget(app,"notebook3")),
 			settings->notebook3page );
 /* store text widgets for spell checker */
-	notes =  lookup_widget(app,"textComments");
+//	notes =  lookup_widget(app,"textComments");
 	studypad = lookup_widget(app,"text3");				
 /* Add options to Options Menu and get toggle item widget */
 	autosaveitem = additemtooptionmenu(app, "_Settings/", "Auto Save Personal Comments",
@@ -819,6 +819,7 @@ void setautosave(gboolean choice)
 	}
 	settings->autosavepersonalcomments = choice; /* remember our choice for next startup */
 }
+
 
 /*****************************************************************************
  * gdouble_arr_to_hex  -- this code is from bluefish-0.6

@@ -87,15 +87,34 @@ char ComEntryDisp::Display(SWModule & imodule)
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(MainFrm, "nbCom")), 0);
 	(const char *) imodule;	/* snap to entry */
-	strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
-	sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
-		imodule.Name(), buf, imodule.Name(), imodule.KeyText());
-	strbuf = g_string_append(strbuf, tmpBuf);
-	/* show verse ref in text widget  */
-	/* show module text for current key */
-	beginHTML(GTK_WIDGET(gtkText));
-	displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
-	g_string_free(strbuf, TRUE);
+	/* check for personal comments by finding ModDrv=RawFiles */
+	if (((*mainMgr->config->Sections[imodule.Name()].find("ModDrv")).second == "RawFiles") &&	
+	    		(GTK_TOGGLE_BUTTON(lookup_widget(MainFrm, "btnEditNote"))->active)) {	/* check for edit mode */
+		GtkWidget *statusbar;	/* pointer to comments statusbar */
+		gint context_id2;	/* statusbar context_id ??? */
+		/* add module name and verse to edit note statusbar */		
+		sprintf(tmpBuf, "[%s] ", imodule.KeyText());
+		/* setup statusbar for personal comments */
+		/*        get stutusbar */		
+		statusbar = lookup_widget(MainFrm, "sbNotes");
+		/* get context id */		
+		context_id2 = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "GnomeSword");
+		/* ready status */
+		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id2);	
+		/* show modName and verse ref in statusbar */		
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id2, tmpBuf);
+		beginHTML(GTK_WIDGET(gtkText));	
+	} else {
+		strbuf = g_string_new("<B><FONT COLOR=\"#000FCF\">");
+		sprintf(tmpBuf, "<A HREF=\"[%s]%s\"> [%s]</a>[%s] </b>",
+			imodule.Name(), buf, imodule.Name(), imodule.KeyText());
+		strbuf = g_string_append(strbuf, tmpBuf);
+		/* show verse ref in text widget  */
+		/* show module text for current key */
+		beginHTML(GTK_WIDGET(gtkText));
+		displayHTML(GTK_WIDGET(gtkText), strbuf->str, strbuf->len);
+		g_string_free(strbuf, TRUE);
+	}
 	if (!strcmp(font, "Symbol")) {
 		strbuf = g_string_new("<FONT FACE=\"symbol\">");
 		strbuf = g_string_append(strbuf, (const char *) imodule);

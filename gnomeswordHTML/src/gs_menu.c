@@ -51,7 +51,7 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 		gchar *labelGtkWidget, 
 		GtkMenuCallback mycallback);
 /******************************************************************************/
-
+extern GtkWidget *htmlComments;
 
 extern gint	greekpage,
         	hebrewpage;
@@ -187,7 +187,7 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 		
 	/* attach popup menus */
 	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");	
-	gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");	
+	gnome_popup_menu_attach(menu5,lookup_widget(app,"htmlComments"),(gchar*)"1");	
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->showdicttabs;
 	gnome_popup_menu_attach(menuCom,lookup_widget(app,"textCommentaries"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuCom,"show_tabs1"))->active = settings->showcomtabs;
@@ -1069,7 +1069,7 @@ static GnomeUIInfo pmEditnote_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, "Bold",
 	 "Make selected text bold",
-	 on_boldNE_activate, NULL, NULL,
+	 on_boldNE_activate, "htmlComments", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{

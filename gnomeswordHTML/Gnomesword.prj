@@ -109,7 +109,9 @@ module.source.files=\
 	printstuff.h\
 	interface.h\
 	sw_utility.cpp\
-	sw_utility.h
+	sw_utility.h\
+	gs_toolbarEditor.c\
+	gs_toolbarEditor.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

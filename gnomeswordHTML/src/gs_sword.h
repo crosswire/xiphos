@@ -54,7 +54,7 @@ void changcurcomModSWORD(gchar * modName,
 		gint page_num,
 		gboolean showchange);
 void editnoteSWORD(gboolean editbuttonactive);
-void savenoteSWORD(gboolean noteisModified);
+void savenoteSWORD(const gchar *data);
 void deletenoteSWORD(void);
 void changcurdictModSWORD(gchar * modName, 
 		gchar* keyText, 
