@@ -72,7 +72,7 @@ gchar *gui_update_nav_controls(gchar * key)
 	strcpy(settings.currentverse, val_key);
 	/* 
 	 *  set book, chapter,verse and freeform lookup entries
-	 *  to new verse - widgets.apply_change is set to false so we don't
+	 *  to new verse - settings.apply_change is set to false so we don't
 	 *  start a loop
 	 */
 	gtk_entry_set_text(GTK_ENTRY(cbe_book),
@@ -140,17 +140,14 @@ static gboolean on_spbChapter_button_release_event(GtkWidget * widget,
 	if (settings.apply_change) {
 		gchar *bookname;
 		gchar buf[256];
-		gint chapter, verse;
+		gint chapter;
 
 		bookname =
 		    gtk_entry_get_text(GTK_ENTRY(cbe_book));
 		chapter =
 		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
 						     (spb_chapter));
-		verse =
-		    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
-						     (spb_verse));
-		sprintf(buf, "%s %d:%d", bookname, chapter, verse);
+		sprintf(buf, "%s %d:1", bookname, chapter);
 		gui_change_verse(buf);
 		return TRUE;
 	}
@@ -311,8 +308,6 @@ static void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 
 GtkWidget *gui_create_nav_toolbar(void)
 {
-
-	//GtkWidget *handleboxNavBar;
 	GtkWidget *toolbarNav;
 	GtkWidget *tmp_toolbar_icon;
 	GtkWidget *cbBook;
@@ -321,14 +316,7 @@ GtkWidget *gui_create_nav_toolbar(void)
 	GtkWidget *btnLookup;
 	GtkWidget *btnBack;
 	GtkWidget *btnFoward;
-/*
-	handleboxNavBar = gtk_handle_box_new();
-	gtk_widget_ref(handleboxNavBar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "handleboxNavBar", handleboxNavBar,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(handleboxNavBar);
-*/
+
 	toolbarNav =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
@@ -337,7 +325,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 				 toolbarNav,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(toolbarNav);
-	//gtk_container_add(GTK_CONTAINER(handleboxNavBar), toolbarNav);
 	gtk_widget_set_usize(toolbarNav, -2, 34);
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarNav),
 				      GTK_RELIEF_NONE);
@@ -479,5 +466,5 @@ GtkWidget *gui_create_nav_toolbar(void)
 	gtk_signal_connect(GTK_OBJECT(btnFoward), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnFoward_clicked), NULL);
 
-	return toolbarNav; //handleboxNavBar;
+	return toolbarNav;
 }
