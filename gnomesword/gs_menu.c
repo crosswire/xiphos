@@ -859,7 +859,7 @@ static GtkWidget *create_pmDict(GList * mods)
 	return pmDict;
 }
 
-//-------------------------------------------------------------------------------------------
+//----------------------------------------------------
 static GtkWidget* create_pmBible(GList *mods)
 {
 	GtkWidget *pmBible;
@@ -954,10 +954,10 @@ static GtkWidget* create_pmBible(GList *mods)
 #else /* !USE_GTKHTML */
 gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copy3_activate),
-                      	(gchar *)"moduleTexts");                      	
+                      	(gchar *)"moduleText");                      	
              gtk_signal_connect (GTK_OBJECT (lookup_selection), "activate",
                       	GTK_SIGNAL_FUNC (on_lookup_selection_activate),
-                      	(gchar *)"moduleTexts");                 	
+                      	(gchar *)"moduleText");                 	
 #endif /* USE_GTKHTML */                      	
  
   	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
