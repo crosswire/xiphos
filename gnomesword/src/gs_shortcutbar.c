@@ -65,8 +65,10 @@ gint groupnum0 = -1,
 
 static void setupSearchBar(GtkWidget * vp, SETTINGS * s);
 static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s);
+/*
 static void on_search_results_link_clicked(GtkHTML * html, const gchar * url,
 			       gpointer data);
+			       */
 static void on_link_clicked(GtkHTML * html, const gchar * url,
 			    gpointer data);
 //static void on_btnSBShowCV_clicked(GtkButton * button, gpointer user_data);
@@ -96,6 +98,9 @@ static void on_clistSearchResults_select_row(GtkCList *clist,
                                         gint             column,
                                         GdkEvent        *event,
                                         gpointer         user_data);
+static void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data);
+static void remove_all_items(gint group_num);
+
 
 void
 on_clistSearchResults_select_row       (GtkCList        *clist,
@@ -154,67 +159,51 @@ void changegroupnameSB(SETTINGS * s, gchar * groupName, gint groupNum)
 
 static void savegroup(EShortcutBar * shortcut_bar, gint group_num)
 {
-	gchar *group_name, *item_url, *item_name;
-	gint number_of_items, j;
-	GList *list;
-
-	list = NULL;
-	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR
-						     (shortcut_bar)->model,
-						     group_num);
-	number_of_items = e_shortcut_model_get_num_items(E_SHORTCUT_BAR
-							 (shortcut_bar)->
-							 model, group_num);
-	for (j = 0; j < number_of_items; j++) {
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       j, &item_url, &item_name,
-					       NULL);
-	}
+	gchar *group_name;
+	
+	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR(shortcut_bar)->model, group_num);
+	
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Favorites.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Favorites.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum1) {
-		if (e_shortcut_bar_get_view_type
-		    (E_SHORTCUT_BAR(shortcut_bar),
-		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
+		if (e_shortcut_bar_get_view_type(E_SHORTCUT_BAR(shortcut_bar), groupnum1) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("BibleText.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("BibleText.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum2) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Commentaries.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Commentaries.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum3) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Dictionaries.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Dictionaries.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
-	g_list_free(list);
-	g_free(item_url);
-	g_free(item_name);
 }
 
 static void
@@ -271,11 +260,21 @@ static void on_about_item_activate(GtkMenuItem * menuitem, gpointer data)
 	g_free(item_name);
 }
 
+static void remove_all_items(gint group_num)
+{
+	gint items,i;
+	
+	items =  e_shortcut_model_get_num_items(shortcut_model,
+							 group_num);
+	for (i = items-1; i > -1; i--) {
+		e_shortcut_model_remove_item(shortcut_model, group_num, i);
+	}	
+}
+
 static void on_remove_item_activate(GtkMenuItem * menuitem, gpointer data)
 {
-	gint group_num, item_num, number_of_items, j;
-	GList *list;
-	gchar *group_name, *item_url, *item_name;
+	gint group_num, item_num;
+	gchar *group_name;
 	EShortcutBar *bar1;
 
 
@@ -284,75 +283,119 @@ static void on_remove_item_activate(GtkMenuItem * menuitem, gpointer data)
 	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
 
 	e_shortcut_model_remove_item(shortcut_model, group_num, item_num);
-	list = NULL;
 	group_name = e_shortcut_model_get_group_name(shortcut_model,
 						     group_num);
-	number_of_items = e_shortcut_model_get_num_items(shortcut_model,
-							 group_num);
-	for (j = 0; j < number_of_items; j++) {
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       j, &item_url, &item_name,
-					       NULL);
-		list = g_list_append(list, item_name);
-	}
 	
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Favorites.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Favorites.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum1) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("BibleText.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("BibleText.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum2) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Commentaries.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Commentaries.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum3) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Dictionaries.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Dictionaries.conf", group_name,
-					  list, "0");
-	}
-	
-	if(number_of_items > 0) {
-		g_list_free(list);
-		g_free(item_url);
-		g_free(item_name);
-	}
+					  group_num, "0");
+	}	
 }
 
+void
+on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
+{
+	GList 
+		*list;
+	gint 
+		number_of_items = 0,
+		group_num, 
+		sbtype;	
+	EShortcutBar *bar1;
+	gchar 
+		*group_name, 
+		modName[16], 
+		*pathname;
+	GdkPixbuf 
+		*icon_pixbuf = NULL;
+	
+	list = NULL;
+	list = getModlistSW((gchar*)user_data);
+	
+	bar1 = E_SHORTCUT_BAR(shortcut_bar);
+	group_num = e_group_bar_get_current_group_num(E_GROUP_BAR(bar1));
+	group_name = "";
+	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR(shortcut_bar)->model, group_num);	
+	remove_all_items(group_num);
+	
+	while (list != NULL) {
+		memset(modName, 0, 16);
+		modNameFromDesc(modName, (gchar*)list->data);
+		sbtype = 0;
+		sbtype = sbtypefromModNameSBSW(modName);
+		if (sbtype < 0)
+			sbtype = 0;
+
+		switch (sbtype) {
+		case 0:
+			pathname = gnome_pixmap_file("gnomesword/book-un.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			break;
+		case 1:
+			pathname = gnome_pixmap_file("gnomesword/book-bl.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			break;
+		case 2:
+			pathname = gnome_pixmap_file("gnomesword/book-green.png");
+			icon_pixbuf = gdk_pixbuf_new_from_file(pathname);
+			break;
+		}
+		
+		e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
+				  group_num, -1, "not null",
+				  (gchar *) list->data, icon_pixbuf);
+		++number_of_items;
+		list = g_list_next(list);
+	}
+	savegroup(E_SHORTCUT_BAR(shortcut_bar), group_num);	
+	g_list_free(list);
+	
+}
 
 static void
 on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	gchar *group_name, *item_url, *item_name;
-	gint group_num, number_of_items, j, sbtype;
-	GList *list;
+	gchar *group_name;
+	gint group_num, sbtype;
 	EShortcutBar *bar1;
 	gchar modName[16], *pathname;
 	GdkPixbuf *icon_pixbuf = NULL;
@@ -384,66 +427,55 @@ on_add_shortcut_activate(GtkMenuItem * menuitem, gpointer user_data)
 	e_shortcut_model_add_item(E_SHORTCUT_BAR(shortcut_bar)->model,
 				  group_num, -1, "not null",
 				  (gchar *) user_data, icon_pixbuf);
-	list = NULL;
+	
 	group_name = "";
 	group_name = e_shortcut_model_get_group_name(E_SHORTCUT_BAR
 						     (shortcut_bar)->model,
 						     group_num);
-	number_of_items = e_shortcut_model_get_num_items(E_SHORTCUT_BAR
-							 (shortcut_bar)->
-							 model, group_num);
-	for (j = 0; j < number_of_items; j++) {
-		e_shortcut_model_get_item_info(E_SHORTCUT_BAR
-					       (shortcut_bar)->model,
-					       group_num,
-					       j, &item_url, &item_name,
-					       NULL);
-		list = g_list_append(list, item_name);
-	}
+	
 	if (group_num == groupnum0) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum0) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Favorites.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Favorites.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum1) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum1) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("BibleText.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("BibleText.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum2) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum2) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Commentaries.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Commentaries.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
+	
 	if (group_num == groupnum3) {
 		if (e_shortcut_bar_get_view_type
 		    (E_SHORTCUT_BAR(shortcut_bar),
 		     groupnum3) == E_ICON_BAR_LARGE_ICONS)
 			saveshortcutbarSW("Dictionaries.conf", group_name,
-					  list, "1");
+					  group_num, "1");
 		else
 			saveshortcutbarSW("Dictionaries.conf", group_name,
-					  list, "0");
+					  group_num, "0");
 	}
-	g_list_free(list);
-	g_free(item_url);
-	g_free(item_name);
-
 }
 
 static void
@@ -460,6 +492,7 @@ on_item_removed(EShortcutModel * shortcut_model,
 
 	g_print("In on_item_removed Group:%i Item:%i\n", group_num,
 		item_num);
+	
 }
 
 /******************************************************************************
@@ -830,6 +863,7 @@ on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	changeVerseListSBSWORD(s, (gchar *) url);
 }
 
+/*
 static void
 on_search_results_link_clicked(GtkHTML * html, const gchar * url,
 			       gpointer data)
@@ -842,6 +876,7 @@ on_search_results_link_clicked(GtkHTML * html, const gchar * url,
 	s->displaySearchResults = FALSE;
 	
 }
+*/
 
 static void
 on_nbVL_switch_page                    (GtkNotebook     *notebook,
@@ -1154,7 +1189,7 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 	gtk_widget_set_usize(scrolledwindow3, -2, 85);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow3), GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_ALWAYS);
+				      GTK_POLICY_AUTOMATIC);
 				       
 	clistSearchResults = gtk_clist_new (2);
 	gtk_widget_ref (clistSearchResults);
@@ -1256,9 +1291,9 @@ static GtkWidget *setupVerseListBar(GtkWidget * vboxVL, SETTINGS * s)
 
 	gtk_signal_connect(GTK_OBJECT(s->vlsbhtml), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), s);
-	gtk_signal_connect(GTK_OBJECT(s->srhtml), "link_clicked",
+	/*gtk_signal_connect(GTK_OBJECT(s->srhtml), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_search_results_link_clicked),
-			   s);
+			   s);*/
 	gtk_signal_connect(GTK_OBJECT(btnSBSaveVL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSBSaveVL_clicked), s);
 	gtk_signal_connect(GTK_OBJECT(tbtnSBViewMain), "toggled",
@@ -2012,6 +2047,20 @@ create_modlistmenu_sb(GtkWidget * menu,
 	GtkWidget *item;
 	GList *list;
 
+	item = gtk_menu_item_new_with_label(_("Add All Modules"));
+	gtk_widget_ref(item);
+	gtk_object_set_data_full(GTK_OBJECT(menu), "item",
+				 item, (GtkDestroyNotify)
+				 gtk_widget_unref);
+	gtk_widget_show(item);
+	gtk_container_add(GTK_CONTAINER(shortcut_menu_widget),
+			  item);
+	
+	gtk_signal_connect(GTK_OBJECT(item), "activate",
+			   GTK_SIGNAL_FUNC
+			   (on_add_all_activate),
+			   (gchar*)modtype);
+	
 	list = NULL;
 	list = getModlistSW(modtype);
 	while (list != NULL) {

@@ -422,7 +422,7 @@ static void stringCallback(gchar * string, gpointer data)
 			sprintf(buf, "%s%s", buf2, ".conf");
 			text[1] = buf;
 			text[2] = "ROOT";
-			g_warning(text[1]);
+//			g_warning(text[1]);
 			newrootnode =
 			    gtk_ctree_insert_node(p_bmtree->ctree, NULL,
 						  NULL, text, 3, pixmap1,
@@ -703,7 +703,7 @@ void addverselistBM(SETTINGS * s, GList * list)
 	gnome_dialog_set_default(GNOME_DIALOG(dialog), 2);
 	gnome_dialog_run_and_close(GNOME_DIALOG(dialog));
 	while (tmp != NULL) {
-		g_warning((gchar *) tmp->data);
+//		g_warning((gchar *) tmp->data);
 		token = strtok((gchar *) tmp->data, t);
 		text[0] = token;
 		token = strtok(NULL, t);

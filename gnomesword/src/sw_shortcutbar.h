@@ -43,7 +43,7 @@ extern "C" {
 				gchar * use_largeicons);
 	void saveshortcutbarSW(gchar * filename, 
 				gchar * group_name,
-			       	GList * list, gchar * large_icons);
+			       	gint group_num, gchar * large_icons);
 	GList *getModlistSW(gchar * modtype);
 	gboolean displaydictlexSBSW(gchar * modName,
 				gchar * vlist, 
