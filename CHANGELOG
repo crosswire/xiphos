@@ -1,0 +1,10 @@
+CHANGELOG for gnomesword
+========================
+
+Version 0.3pre1 -- Thu, Mar 01, 2001 12:12:12 PM
+------------------------------------------------
+added html widgets using GtkHTML 
+
+
+
+$Id$
