@@ -1,3 +1,10 @@
+2004-03-03  Terry <tbiggs@users.sf.net>
+
+	* renamed gui/mod_global_ops.h and gnome2/mod_global_ops.c to
+	  main/global_ops.cc and main/global_ops.hh
+	* renamed main/commentary.c to main/commentary.cc
+	
+
 2004-03-02  Terry <tbiggs@users.sf.net>
 
 	* added main/display.cc and main/display.hh

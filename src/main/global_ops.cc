@@ -34,6 +34,7 @@
 
 #include "backend/sword.h"
 #include "backend/sword_defs.h"
+#include "backend/sword_main.hh"
 #include "backend/mgr.hh"
 
 static int of2tf(const gchar * on_off)
@@ -54,22 +55,18 @@ static gchar *tf2of(int true_false)
 
 static void set_global_option(int manager, char * option, gboolean choice)
 {
+	SWMgr *mgr = backend->get_display_mgr();
 	char *on_off;
 
-	if (choice) {
-		on_off = "On";
-	} else {
-		on_off = "Off";
-	}
+	on_off = tf2of(choice);
+	
 	switch(manager) {
 		case TEXT_MGR:
 			sw.text_mgr->setGlobalOption(option, on_off);
 		break;
 		case COMM_MGR:
-			sw.display_mgr->setGlobalOption(option, on_off);
-		break;
 		case GBS_MGR:			
-			sw.display_mgr->setGlobalOption(option, on_off);
+			mgr->setGlobalOption(option, on_off);
 		break;
 		case MAIN_MGR:			
 			sw.main_mgr->setGlobalOption(option, on_off);
@@ -82,7 +79,6 @@ static void set_global_option(int manager, char * option, gboolean choice)
 		break;
 	}	
 	sw.results->setGlobalOption(option, on_off);
-	//backend_set_global_option(manager, option, on_off);
 }
 
 
