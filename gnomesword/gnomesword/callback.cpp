@@ -47,10 +47,8 @@
 #include "listeditor.h"
 #include "noteeditor.h"
 #include "searchstuff.h"
-
-#ifdef  USE_GNOMEPRINT
 #include "printstuff.h"
-#endif				/* USE_GNOMEPRINT */
+
 
 #ifdef USE_ASPELL
 #include "spellcheck.h"
@@ -246,7 +244,7 @@ on_btnStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_add_bookmark1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	addBookmark();
+	addBookmark(MainFrm);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -335,9 +333,9 @@ on_show_interlinear_page1_activate(GtkMenuItem * menuitem,
 {
 
 	if (GTK_CHECK_MENU_ITEM(menuitem)->active)
-		showIntPage(true);
+		showIntPage(MainFrm, true);
 	else
-		showIntPage(false);
+		showIntPage(MainFrm, false);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -606,9 +604,7 @@ void on_btnSaveFileAs_clicked(GtkButton * button, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_btnPrint_clicked(GtkButton * button, gpointer user_data)
 {
-#ifdef  USE_GNOMEPRINT
-	file_print(GTK_WIDGET(button), current_filename, 1);	//-- pass studypad text widget to print
-#endif				/*USE_GNOMEPRINT */
+	file_print(GTK_WIDGET(button), current_filename, 1);	/* pass studypad text widget to print */
 }
 
 //----------------------------------------------------------------------------------------------
@@ -777,7 +773,7 @@ void on_exit1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void on_clear1_activate(GtkMenuItem * menuitem,	//-- clear history menu
 			gpointer user_data)
 {
-	clearhistory();
+	clearhistory(MainFrm,GTK_WIDGET(shortcut_bar));
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2282,7 +2278,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			      GdkEvent * event,
 			      gint group_num, gint item_num)
 {
-	sbchangeModSword(group_num, item_num);
+	sbchangeModSword(MainFrm, GTK_WIDGET(shortcut_bar), group_num, item_num);
 }
 
 //----------------------------------------------------------------------------------------------
