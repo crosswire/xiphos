@@ -73,7 +73,8 @@
 
 void frontend_init(void)
 {
-	gint number_of_pages = 0;
+	//gint number_of_pages = 0;
+	guint number_of_pages = 0; 
 	g_print("%s\n", "Initiating GnomeSword\n");
 	
 	hint.in_popup = FALSE;
@@ -88,13 +89,6 @@ void frontend_init(void)
 	 */
 	//gui_setup_shortcut_bar();
 	gui_create_sidebar(widgets.epaned);
-
-	/*
-	 *  parallel stuff 
-	 */
-	gui_check_parallel_modules();
-	gui_set_parallel_options_at_start();
-	gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
 
 	/*
 	 *  setup commentary gui support 
@@ -142,6 +136,14 @@ void frontend_init(void)
 		gui_setup_bibletext_dialog(get_list(TEXT_LIST));
 	}
 	
+	/*
+	 *  parallel stuff 
+	 */
+	gui_check_parallel_modules();
+	gui_set_parallel_options_at_start();
+	gui_create_parallel_page();
+	gui_create_parallel_popup(get_list(TEXT_DESC_LIST));
+
 	gui_set_sidebar_porgram_start();
 }
 

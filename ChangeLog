@@ -1,3 +1,16 @@
+2003-11-20  Terry <tbiggs@users.sf.net>
+
+	* fixed bug 845752
+	* ui clean up
+		* moved parallel view to bibletexts pane
+		* removed File->Open Dialogs form main menu
+		  (dialogs may be opened by right clicking in module
+		  list and chosing <Open in dialog>
+		* Removed Help->About Modules from main menus
+		  (about dialogs may be opened by right clicking in module
+		  list and chosing <About>
+
+
 2003-11-19  Terry <tbiggs@users.sf.net>
 
 	* bumped to 0.9.dev13
