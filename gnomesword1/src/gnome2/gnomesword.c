@@ -169,6 +169,9 @@ void frontend_init(void)
 
 void frontend_display(void)
 {
+	gint test;
+	GS_DIALOG *info;
+	
 	g_print("%s\n", "Displaying GnomeSword\n");
 	gui_show_main_window();
 
@@ -227,6 +230,26 @@ void frontend_display(void)
 		gui_display_devotional_in_sidebar();
 	}
  	gtk_window_move(GTK_WINDOW(widgets.app),settings.app_x,settings.app_y);
+	if(settings.setup_canceled) {
+		info = gui_new_dialog();
+		info->title = N_("Question?");
+		if (settings.studypadfilename)
+			info->label_top = settings.studypadfilename;
+		else
+			info->label_top = N_("The Setup Druid");
+		info->label_middle = N_("was canceled. Do you wish");
+		info->label_bottom = N_("to set preferences now?");
+		info->yes = TRUE;
+		info->no = TRUE;
+
+		test = gui_gs_dialog(info);
+		if (test == GS_YES) {
+			gui_setup_preferences_dialog();
+		}		
+		g_free(info);
+		settings.setup_canceled = FALSE;
+		xml_set_value("GnomeSword", "misc", "setup_canceled", "0");
+	}
 	g_print("done\n");
 }
 

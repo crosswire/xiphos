@@ -879,7 +879,6 @@ void gui_setup_text(GList * mods)
 	else 
 		if(check_for_module(t->mod_name))
 			set_page_text(t->mod_name, text_list);
-	//set_page_text(modbuf, text_list);
 
 	g_free(modbuf);
 	g_list_free(tmp);

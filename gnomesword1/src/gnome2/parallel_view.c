@@ -76,31 +76,31 @@ static gboolean parallel5;
 
 void gui_check_parallel_modules(void)
 {
-	if (strlen(settings.parallel1Module) > 1)
+	if(settings.parallel1Module) 
 		parallel1 =
 		    check_for_module(settings.parallel1Module);
 	else
 		parallel1 = FALSE;
 
-	if (strlen(settings.parallel2Module) > 1)
+	if (settings.parallel2Module)
 		parallel2 =
 		    check_for_module(settings.parallel2Module);
 	else
 		parallel2 = FALSE;
 
-	if (strlen(settings.parallel3Module) > 1)
+	if (settings.parallel3Module)
 		parallel3 =
 		    check_for_module(settings.parallel3Module);
 	else
 		parallel3 = FALSE;
 
-	if (strlen(settings.parallel4Module) > 1)
+	if (settings.parallel4Module)
 		parallel4 =
 		    check_for_module(settings.parallel4Module);
 	else
 		parallel4 = FALSE;
 
-	if (strlen(settings.parallel5Module) > 1)
+	if (settings.parallel5Module)
 		parallel5 =
 		    check_for_module(settings.parallel5Module);
 	else
