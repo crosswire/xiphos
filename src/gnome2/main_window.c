@@ -42,7 +42,7 @@
 #include "gui/history.h"
 #include "gui/bibletext.h"
 #include "gui/parallel_view.h"
-#include "gui/percomm.h"
+//#include "gui/percomm.h"
 #include "gui/commentary.h"
 #include "gui/gbs.h"
 #include "gui/dictlex.h"

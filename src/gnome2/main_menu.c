@@ -472,11 +472,8 @@ static void open_studypad(GtkMenuItem * menuitem, gpointer user_data)
 		gdk_window_raise(GTK_WIDGET(widgets.studypad_dialog)->
 				 window);
 	} else {
-		if (settings.use_studypad_dialog) {
-			settings.studypad_dialog_exist =
-			    gui_open_studypad_dialog(settings.
-						     studypadfilename);
-		} 
+		settings.studypad_dialog_exist =
+			  gui_open_studypad_dialog(settings.studypadfilename);
 	}
 }
 

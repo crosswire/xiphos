@@ -44,6 +44,9 @@ src/gnome2/html.c
 src/gnome2/main_menu.c
 src/gnome2/main_window.c
 src/gnome2/mod_mgr.c
+src/gnome2/note_editor.c
+src/gnome2/note_toolbar_edit.c
+src/gnome2/note_toolbar_style.c
 src/gnome2/parallel_dialog.c
 src/gnome2/parallel_view.c
 src/gnome2/percomm.c

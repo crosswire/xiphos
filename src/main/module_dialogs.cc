@@ -44,6 +44,7 @@ extern "C" {
 #include "gui/gbs_dialog.h"
 #include "gui/display_info.h"
 #include "gui/editor.h"
+#include "gui/note_editor.h"
 #include "gui/font_dialog.h"
 #include "gui/sidebar.h"
 #include "gui/hints.h"
@@ -328,6 +329,22 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 }
 
 
+/******************************************************************************
+ * Name
+ *   main_dialogs_dictionary_entery_changed
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
 void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)
 {
 	gint count = 7, i;
@@ -389,15 +406,104 @@ void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d)
 } 
 
 
-void main_dialog_save_note(const gchar * note)
+/******************************************************************************
+ * Name
+ *   save_note_receiver
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	gboolean save_note_receiver(const HTMLEngine * engine,
+ *		   const char *data, unsigned int len, void *user_data)
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */
+
+static GString *note_str;
+static gboolean save_note_receiver(const HTMLEngine * engine,
+				   const char *data, unsigned int len,
+				   void *user_data)
 {
-	ModuleDialogs *be;
+	static gboolean startgrabing = FALSE;
+	if (!strncmp(data, "</BODY>", 7))
+		startgrabing = FALSE;
+	if (startgrabing) {
+		note_str = g_string_append(note_str, data);
+		//g_warning(gstr->str);
+	}
+	if (strstr(data, "<BODY") != NULL)
+		startgrabing = TRUE;
+
+	return TRUE;
+}
+
+
+/******************************************************************************
+ * Name
+ *   main_dialog_save_note
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void main_dialog_save_note(DIALOG_DATA * d)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialog_save_note(DIALOG_DATA * d)
+{
+	ModuleDialogs *be = (ModuleDialogs*)d->backend;
+	GSHTMLEditorControlData *e = (GSHTMLEditorControlData*)d->editor;
 	
-	if(!dlg_percom)
+	if(!be)
 		return;	
 	
-	be = (ModuleDialogs*)dlg_percom->backend;
-	be->save_entry(note);	
+	gtk_html_set_editable(e->html, FALSE);
+	note_str = g_string_new("");
+	
+	if (!gtk_html_export (e->html, "text/html",
+		 (GtkHTMLSaveReceiverFn) save_note_receiver,
+		 GINT_TO_POINTER(0)) ){
+		g_warning("file not writen");
+	} else {
+		be->save_entry(note_str->str);	
+		g_print("\nnote saved\n");
+	}
+	g_string_free(note_str, 0);
+	gtk_html_set_editable(e->html, TRUE);
+}
+
+/******************************************************************************
+ * Name
+ *   main_dialog_delete_note
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   void main_dialog_delete_note(DIALOG_DATA * d)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void main_dialog_delete_note(DIALOG_DATA * d)
+{
+	ModuleDialogs *be = (ModuleDialogs*)d->backend;
+	
+	if(!be)
+		return;	
+	be->delete_entry();	
 }
 
 
@@ -417,14 +523,14 @@ void main_dialog_save_note(const gchar * note)
  *   void
  */
 
-void main_dialog_update_controls(DIALOG_DATA * vt)
+void main_dialog_update_controls(DIALOG_DATA * t)
 {
 	gchar *val_key;
 	gint cur_chapter, cur_verse;
 
-	dlg_bible = vt;
+	dlg_bible = t;
 	bible_apply_change = FALSE;
-	val_key = get_valid_key(vt->key);
+	val_key = get_valid_key(t->key);
 	cur_chapter = get_chapter_from_key(val_key);
 	cur_verse = get_verse_from_key(val_key);
 	/* 
@@ -432,13 +538,13 @@ void main_dialog_update_controls(DIALOG_DATA * vt)
 	 *  to new verse - settings.bible_apply_change is set to false so we don't
 	 *  start a loop
 	 */
-	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book),
+	gtk_entry_set_text(GTK_ENTRY(t->cbe_book),
 			   get_book_from_key(val_key));
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (vt->spb_chapter), cur_chapter);
+				  (t->spb_chapter), cur_chapter);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON
-				  (vt->spb_verse), cur_verse);
-	gtk_entry_set_text(GTK_ENTRY(vt->freeform_lookup), val_key);
+				  (t->spb_verse), cur_verse);
+	gtk_entry_set_text(GTK_ENTRY(t->freeform_lookup), val_key);
 	g_free(val_key);
 
 	bible_apply_change = TRUE;
@@ -667,13 +773,14 @@ void main_sync_bibletext_dialog_with_main(DIALOG_DATA * t)
 void main_keep_bibletext_dialog_in_sync(gchar * key)
 {
 	GList *tmp = NULL;
+	gchar * url;
 	tmp = g_list_first(list_dialogs);
 	while (tmp != NULL) {
 		DIALOG_DATA * t = (DIALOG_DATA*) tmp->data;
 		if(t->sync) {
-			ModuleDialogs *be = (ModuleDialogs*)t->backend;
-			be->set_module_key(t->mod_name, key);
-			be->mod->Display();	
+			url = g_strdup_printf("sword://%s/%s",t->mod_name, key);
+			main_dialogs_url_handler(t, url, TRUE);
+			g_free(url);	
 		}
 		tmp = g_list_next(tmp);
 	}
@@ -712,9 +819,10 @@ void main_dialogs_shutdown(void)
 		/* 
 		 * free each DIALOG_DATA item created 
 		 */
-		if((GSHTMLEditorControlData*)t->editor)
+		if((GSHTMLEditorControlData*)t->editor) 
 			gui_html_editor_control_data_destroy(NULL, 
 					(GSHTMLEditorControlData*)t->editor);
+		
 		if((ModuleDialogs*)t->backend) {
 			ModuleDialogs* be = (ModuleDialogs*)t->backend;
 			delete be;
@@ -727,6 +835,22 @@ void main_dialogs_shutdown(void)
 	}
 	g_list_free(list_dialogs);
 }
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include ".h"
+ *
+ *   	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
 
 void main_dialog_set_global_opt(gboolean choice)
 {
@@ -970,9 +1094,8 @@ static gint sword_uri(DIALOG_DATA * t, const gchar * url, gboolean clicked)
 		g_free(t->mod_name);
 	t->mod_name = g_strdup(module);
 	
-	main_dialog_set_global_options(t);
-	
 	be->set_module_key(t->mod_name, t->key);
+	main_dialog_set_global_options(t);
 	be->mod->Display();		
 	main_dialog_update_controls(t);
 	
@@ -1081,9 +1204,7 @@ void main_dialogs_open(gchar * mod_name)
 	if (has_cipher_tag(t->mod_name)) {
 		t->is_locked = module_is_locked(t->mod_name);
 		t->cipher_old = get_cipher_key(t->mod_name);
-	}
-
-	else {
+	} else {
 		t->is_locked = 0;
 		t->cipher_old = NULL;
 	}
@@ -1092,7 +1213,7 @@ void main_dialogs_open(gchar * mod_name)
 		case TEXT_TYPE:
 			gui_create_bibletext_dialog(t);
 			be->chapDisplay = new DialogChapDisp(t->html, be); 
-			be->init_SWORD(t->mod_name);
+			be->init_SWORD();			
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
 			dlg_bible = t;
@@ -1100,7 +1221,7 @@ void main_dialogs_open(gchar * mod_name)
 		case COMMENTARY_TYPE:
 			gui_create_commentary_dialog(t, FALSE);
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
-			be->init_SWORD(t->mod_name);
+			be->init_SWORD();
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
 		break;
@@ -1111,11 +1232,13 @@ void main_dialogs_open(gchar * mod_name)
 			ec->stylebar = TRUE;
 			ec->editbar = TRUE;
 			ec->personal_comments = TRUE;
+			ec->key = g_strdup(settings.currentverse);
 			strcpy(ec->filename, t->mod_name);
 			t->is_percomm = TRUE;
-			gui_create_commentary_dialog(t, TRUE);
+			gui_create_note_editor(t);
+			//gui_create_commentary_dialog(t, TRUE);
 			be->entryDisplay = new DialogEntryDisp(ec->htmlwidget, be); 
-			be->init_SWORD(t->mod_name);
+			be->init_SWORD();
 			t->key = g_strdup(settings.currentverse);
 			main_dialog_update_controls(t);
 			settings.percomm_dialog_exist = TRUE;
@@ -1124,13 +1247,13 @@ void main_dialogs_open(gchar * mod_name)
 		case DICTIONARY_TYPE:
 			gui_create_dictlex_dialog(t);
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
-			be->init_SWORD(t->mod_name);
+			be->init_SWORD();
 			t->key = g_strdup(settings.dictkey);
 		break;
 		case BOOK_TYPE:
 			gui_create_gbs_dialog(t);
 			be->entryDisplay = new DialogEntryDisp(t->html, be); 
-			be->init_SWORD(t->mod_name);
+			be->init_SWORD();
 			t->key = g_strdup(settings.book_key);
 			if(settings.book_offset)
 				t->offset = settings.book_offset;
@@ -1141,16 +1264,17 @@ void main_dialogs_open(gchar * mod_name)
 		
 	gtk_widget_show(t->dialog);
 	list_dialogs = g_list_append(list_dialogs, (DIALOG_DATA *) t);
+	be->set_module(t->mod_name);
 	be->set_key(t->key);
 	if(type == BOOK_TYPE)
 		be->set_treekey(t->offset);
 	be->mod->Display();
 	bible_apply_change = TRUE;
+	
 	if(type == PERCOM_TYPE)
 		gtk_html_set_editable(ec->html, TRUE);
 	if(type == DICTIONARY_TYPE)
-		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);
-	
+		gtk_entry_set_text(GTK_ENTRY(t->entry),t->key);	
 	if(type == BOOK_TYPE)
 		main_dialogs_add_book_to_tree(t->tree, t->mod_name, 
 			     TRUE, t);

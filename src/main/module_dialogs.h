@@ -88,7 +88,9 @@ void main_dialogs_tree_selection_changed(GtkTreeModel * model,
 	   GtkTreeSelection * selection, gboolean is_dialog, DIALOG_DATA * g);
 
 void main_dialogs_dictionary_entery_changed(DIALOG_DATA * d);
-void main_dialog_save_note(const gchar * note);
+void main_dialog_save_note(DIALOG_DATA * d);
+void main_dialog_delete_note(DIALOG_DATA * d);
+
 void main_dialog_update_controls(DIALOG_DATA * vt);
 void main_bible_dialog_display(DIALOG_DATA * t);
 void main_bible_dialog_passage_changed(DIALOG_DATA * t, gchar * passage);

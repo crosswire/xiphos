@@ -41,7 +41,7 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex.h"
 #include "gui/dictlex_dialog.h"
-#include "gui/percomm.h"
+//#include "gui/percomm.h"
 #include "gui/bookmarks.h"
 #include "gui/studypad.h"
 #include "gui/parallel_view.h"
