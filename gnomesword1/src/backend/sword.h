@@ -27,7 +27,6 @@ extern "C" {
 #endif	
 
 #include "backend/mgr.hh"
-#include "backend/key.hh"
 #include "backend/config.hh"
 		
 void backend_init(void);

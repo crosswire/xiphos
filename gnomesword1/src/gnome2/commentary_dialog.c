@@ -44,7 +44,6 @@
 #include "main/sword.h"
 #include "main/lists.h"
 #include "main/settings.h"
-#include "main/key.h"
 
 
 static void create_menu(DIALOG_DATA * t ,GdkEventButton * event);

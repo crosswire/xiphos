@@ -334,7 +334,11 @@ char *main_get_search_results_text(char * mod_name, char * key)
 
 char *get_path_to_mods(void)
 {
-	return backend_get_path_to_mods();
+	SWMgr *mgr = backend->get_main_mgr();
+	char *path = mgr->prefixPath;
+	if(path)
+		return g_strdup(path);
+	return NULL;
 }
 
 
