@@ -49,12 +49,11 @@
  *   void
  */
 
-static void dialog_destroy (GtkObject *object, gpointer data)
+static gboolean dialog_destroy (GtkObject *object, gpointer data)
 {	
-	
-	//gui_studypad_can_close();
 	widgets.studypad_dialog = NULL;
 	settings.studypad_dialog_exist = FALSE;	
+	return TRUE;
 }
 
 /******************************************************************************
@@ -86,7 +85,6 @@ static GtkWidget *create_dialog(void)
 	GtkWidget *dialog;
 	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(dialog),"dialog",dialog);
-	/*gtk_widget_set_size_request(dialog, 535, 280); */
 	gtk_widget_set_size_request(dialog, 590, 300);
 	gtk_window_set_policy(GTK_WINDOW
 			      (dialog),
@@ -94,6 +92,7 @@ static GtkWidget *create_dialog(void)
 	gtk_window_set_title((GtkWindow *)dialog,
                                 (const gchar*)N_("StudyPad"));
 	gtk_widget_show(dialog);
+	
 	g_signal_connect(G_OBJECT(dialog), "destroy",
                       G_CALLBACK(dialog_destroy),
 			   NULL);	 
@@ -124,10 +123,5 @@ gint gui_open_studypad_dialog(gchar * file_name)
 	widgets.html_studypad =
 	  	gui_create_studypad_control(widgets.studypad_dialog,
 							  file_name);
-	/*g_signal_connect_object(G_OBJECT(widgets.studypad_dialog),
-                                             "destroy",
-                                             G_CALLBACK(dialog_destroy),
-                                             NULL,
-                                             0);*/
 	return TRUE;
 }
