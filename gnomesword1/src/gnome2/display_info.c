@@ -33,6 +33,8 @@
 #include "main/settings.h"
 
 gboolean gsI_isrunning = FALSE;
+GtkWidget *dialog_display_info;
+
 
 static GtkWidget *html_widget;
 
@@ -126,41 +128,55 @@ static void button_close_clicked(GtkButton * button, gpointer user_data)
 
 GtkWidget *gui_create_display_informtion_dialog(void)
 {
-	GtkWidget *dialog_display_information;
+	
 	GtkWidget *dialog_vbox23;
+	GtkWidget *hbox;
 	GtkWidget *frame71;
 	GtkWidget *scrolledwindow70;
 	GtkWidget *dialog_action_area23;
 	GtkWidget *hbuttonbox2;
 	GtkWidget *button_close;
+	GtkWidget *image;
 
-	dialog_display_information = gtk_dialog_new();
-	gtk_object_set_data(GTK_OBJECT(dialog_display_information),
-			    "dialog_display_information",
-			    dialog_display_information);
-	gtk_window_set_title(GTK_WINDOW(dialog_display_information),
-			     settings.program_title);
-	GTK_WINDOW(dialog_display_information)->type =
+	dialog_display_info = gtk_dialog_new();
+	gtk_container_set_border_width(GTK_CONTAINER(dialog_display_info),
+				       6);
+	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
+			    "dialog_display_info",
+			    dialog_display_info);
+	gtk_window_set_title(GTK_WINDOW(dialog_display_info),
+			     " ");
+	GTK_WINDOW(dialog_display_info)->type =
 	    GTK_WINDOW_TOPLEVEL;
 	gtk_window_set_default_size(GTK_WINDOW
-				    (dialog_display_information), 308,
-				    267);
-	gtk_window_set_policy(GTK_WINDOW(dialog_display_information),
+				    (dialog_display_info), 350,
+				    200);
+	gtk_window_set_policy(GTK_WINDOW(dialog_display_info),
 			      TRUE, TRUE, FALSE);
+	gtk_dialog_set_has_separator(GTK_DIALOG(dialog_display_info), FALSE);
 
-	dialog_vbox23 = GTK_DIALOG(dialog_display_information)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dialog_display_information),
+	dialog_vbox23 = GTK_DIALOG(dialog_display_info)->vbox;
+	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
 			    "dialog_vbox23", dialog_vbox23);
 	gtk_widget_show(dialog_vbox23);
 
-	frame71 = gtk_frame_new(NULL);
-	gtk_widget_show(frame71);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox23), frame71, TRUE, TRUE,
-			   0);
 
+	hbox = gtk_hbox_new(FALSE, 12);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox23), hbox, TRUE, TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);
+	
+	image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
+					     GTK_ICON_SIZE_DIALOG);
+	gtk_widget_show(image);
+	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, TRUE,
+			   0);
+	gtk_misc_set_alignment(GTK_MISC(image), 0.5, 0);
+	
 	scrolledwindow70 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow70);
-	gtk_container_add(GTK_CONTAINER(frame71), scrolledwindow70);
+	gtk_box_pack_start(GTK_BOX(hbox), scrolledwindow70, TRUE, TRUE,
+			   0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
 				       (scrolledwindow70),
 				       GTK_POLICY_NEVER,
@@ -172,8 +188,8 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 
 
 	dialog_action_area23 =
-	    GTK_DIALOG(dialog_display_information)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dialog_display_information),
+	    GTK_DIALOG(dialog_display_info)->action_area;
+	gtk_object_set_data(GTK_OBJECT(dialog_display_info),
 			    "dialog_action_area23",
 			    dialog_action_area23);
 	gtk_widget_show(dialog_action_area23);
@@ -196,12 +212,12 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_signal_connect(GTK_OBJECT(button_close), "clicked",
 			   G_CALLBACK(button_close_clicked), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(dialog_display_information),
+	gtk_signal_connect(GTK_OBJECT(dialog_display_info),
 			   "destroy",
 			   G_CALLBACK(on_dlgInformation_destroy),
 			   NULL);
 
 
 	gsI_isrunning = TRUE;
-	return dialog_display_information;
+	return dialog_display_info;
 }
