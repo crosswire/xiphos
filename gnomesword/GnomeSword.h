@@ -121,5 +121,10 @@ void
 addHistoryItem					(void);
 
 void
-setsensitive						(bool editbtnactive);
+changepercomModSWORD		(gchar* modName);
 
+void
+setcurrentversecolor		(gint arg1, gint arg2, gint arg3);
+
+void
+setautosave							(gboolean choice);

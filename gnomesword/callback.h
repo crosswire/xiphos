@@ -659,3 +659,26 @@ save_changes_handler         					(int reply, gpointer data);
 void
 on_auto_save_notes1_activate			(GtkMenuItem     *menuitem,
                                         gpointer         user_data);
+void
+on_btnBack_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_cut1_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_copy4_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_paste1_activate                     (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_change_module_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+void
+on_fbMainwindowbold_font_set           (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data);
