@@ -49,7 +49,6 @@
 #include "main/settings.h"
 #include "main/sidebar.h"
 #include "main/sword.h"
-#include "main/key.h"
 #include "main/xml.h"
 #include "main/module_dialogs.h"
 

@@ -88,33 +88,6 @@ char *get_bibletext_striptext(char *mod_name, char *key)
 */
 
 
-/******************************************************************************
- * Name
- *  set_text_module_global_options
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *  void set_text_module_global_options(gchar * option, gboolean choice)	
- *
- * Description
- *   set sword global option 
- *
- * Return value
- *   void
- */
-
-void set_text_module_global_option(gchar * option, gboolean choice)
-{
-	char *on_off;
-
-	if (choice) {
-		on_off = "On";
-	} else {
-		on_off = "Off";
-	}
-	backend_set_global_option(0, option, on_off);
-}
 
 /******************************************************************************
  * Name
@@ -168,47 +141,3 @@ int load_module_options(char * modName, char * option)
 	return backend_load_module_options(modName, option, 
 				settings.gSwordDir, "modops.conf");
 }
-
-
-/******************************************************************************
- * Name
- *   set_text_global_option
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void set_text_global_option(gchar * option, gchar * choice)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-void set_text_global_option(gchar * option, gchar * choice)
-{
-	backend_set_global_option(0, option, choice);
-}
-
-/******************************************************************************
- * Name
- *  set_parallel_global_option
- *
- * Synopsis
- *   #include "bibletext.h"
- *
- *   void set_parallel_global_option(char * option, char * yesno)	
- *
- * Description
- *    
- *
- * Return value
- *   char*
- */ 
-
-/*void set_parallel_global_option(char * option, char * yesno)
-{
-	backend_set_global_option(8, option, yesno);
-}
-*/
