@@ -60,7 +60,7 @@ struct _dldata {
 
 void gui_setupDL(SETTINGS *s);
 void gui_shutdownDL(void);
-void gui_setPageandKey_DL(gint page_num, gchar *key);
+void gui_set_dictionary_page_and_key(gint page_num, gchar *key);
 #ifdef __cplusplus
 }
 #endif

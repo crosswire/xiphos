@@ -72,9 +72,6 @@ extern "C" {
 	gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 						      GdkEventKey * event,
 						      gpointer user_data);
-	void on_notebook1_switch_page(GtkNotebook * notebook,
-				      GtkNotebookPage * page,
-				      gint page_num, gpointer user_data);
 	void on_textComments_changed(GtkEditable * editable,
 				     gpointer user_data);
 	gboolean on_textComments_button_release_event(GtkWidget * widget,

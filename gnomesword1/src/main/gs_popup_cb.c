@@ -161,7 +161,8 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	display_about_module_dialog(getmodnameSWORD(2),FALSE);
+	
+	//display_about_module_dialog(getmodnameSWORD(2),FALSE);
 }
 
 
@@ -265,10 +266,14 @@ void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_about_this_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if(!strcmp((gchar *)user_data,"Bible")) display_about_module_dialog(getmodnameSWORD(0),FALSE);
-	else if (!strcmp((gchar *)user_data,"commentary")) display_about_module_dialog(getmodnameSWORD(1),FALSE);
-	else if (!strcmp((gchar *)user_data,"dictionary")) display_about_module_dialog(getmodnameSWORD(2),FALSE);	
+	if(!strcmp((gchar *)user_data,"Bible")) 
+		settings->whichwindow = MAIN_TEXT_WINDOW;
+	else if (!strcmp((gchar *)user_data,"commentary")) 
+		settings->whichwindow = COMMENTARY_WINDOW;
+	else if (!strcmp((gchar *)user_data,"dictionary")) 
+		settings->whichwindow = DICTIONARY_WINDOW;
 	
+	display_about_module_dialog(get_module_name(settings),FALSE);	
 }
 
 /*******************************************************************************
@@ -309,7 +314,7 @@ void on_show_tabs_activate(GtkMenuItem * menuitem, gpointer user_data)
  *******************************************************************************/
 void on_change_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	changepercomModSWORD((gchar *) user_data);
+	backend_change_percom_module((gchar *) user_data);
 }		
 
 /*******************************************************************************

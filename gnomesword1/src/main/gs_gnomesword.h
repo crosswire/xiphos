@@ -39,6 +39,12 @@ extern "C" {
 #define DICTIONARY_WINDOW 3
 #define BOOK_WINDOW 4
     
+/* module types */
+#define TEXT_TYPE 0 
+#define COMMENTARY_TYPE 1
+#define DICTIONARY_TYPE 2
+#define BOOK_TYPE 3
+	
 /* these strings are not seen by users */    
 #define GS_DOCK_OPTIONS "dockOptions"
 #define GS_DOCK_GBS "dockGBSEditor"
@@ -125,6 +131,8 @@ struct _settings {
 		lex_greek_viewer[80], /* module to use for greek lexicon - strongs or thayers - in viewer */
 		lex_hebrew_viewer[80], /* module to use for hebrew lexicon - strongs or BDB - in viewer */
 	        currentverse[80],	/* verse to use at program startup */
+		comm_key[80],	/* verse to use at program startup */
+		book_key[80],
 	        *cvInterlinear,	/* current verse for detached interlinear */
 		*percomverse, /* current verse for personal comments */
 	        dictkey[80],		/* dictionary key to use at program startup - the one we shut down with */
@@ -284,6 +292,9 @@ gchar *gdouble_arr_to_hex(gdouble *color,
 gdouble *hex_to_gdouble_arr(gchar *color);
 void display_about_module_dialog(gchar *modname, gboolean isGBS);
 void search_module(SETTINGS *s, SEARCH_OPT *so);
+gchar *get_module_key(SETTINGS *s);
+gchar *get_module_name(SETTINGS *s);
+void change_module_and_key(gchar *module_name, gchar *key);
 
 #ifdef __cplusplus
 }

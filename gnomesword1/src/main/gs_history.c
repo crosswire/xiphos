@@ -106,8 +106,8 @@ void addHistoryItem(GtkWidget *app, GtkWidget *shortcut_bar, gchar *ref)
 	historylist[historyitems].compagenum = gtk_notebook_get_current_page(
 	                        GTK_NOTEBOOK(settings->notebookCOMM));		
 	sprintf(historylist[historyitems].verseref,"%s",ref); 
-	sprintf(historylist[historyitems].textmod,"%s",gettextmodSWORD());	
-	sprintf(historylist[historyitems].commod,"%s", getcommodSWORD());
+	sprintf(historylist[historyitems].textmod,"%s",settings->MainWindowModule);	
+	sprintf(historylist[historyitems].commod,"%s", settings->CommWindowModule);
 	
 	++historyitems;	
 	currenthistoryitem = historyitems;
@@ -133,9 +133,9 @@ void changeverseHistory(gint historynum)
 		addhistoryitem = FALSE;
 	}
 	/* change text mod */
-	gotoBookmarkSWORD(historylist[historynum].textmod, historylist[historynum].verseref);
+	change_module_and_key(historylist[historynum].textmod, historylist[historynum].verseref);
 	/* change commentary mod */
-	gotoBookmarkSWORD(historylist[historynum].commod, historylist[historynum].verseref);
+	change_module_and_key(historylist[historynum].commod, historylist[historynum].verseref);
 	if(firstbackclick){
                 --currenthistoryitem;
 		--currenthistoryitem;

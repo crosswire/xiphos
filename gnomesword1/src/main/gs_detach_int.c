@@ -43,17 +43,61 @@ GtkWidget *sbIntVerse;
 GtkWidget *entryIntLookup;
 gboolean ApplyChangeBook;
 
+static gchar *change_verse(void)
+{	
+	gchar *retval;
+	gchar *bookname, *newbook, buf[256];
+	gint chapter, verse;
+
+	bookname = 
+	    gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
+	chapter =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(sbIntChapter));
+	verse =
+	    gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(sbIntVerse));
+
+	sprintf(buf, "%s %d:%d", bookname, chapter, verse);
+	
+	newbook = backend_get_book_from_key(buf);
+	chapter = backend_get_chapter_from_key(buf);
+	verse = backend_get_verse_from_key(buf);
+	
+	if (strcmp(bookname, newbook))
+		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter), chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
+	sprintf(buf,"%s %d:%d",newbook,chapter,verse);
+	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
+	retval = buf;
+	return retval;	
+}
+static gchar *update_controls_interlinear(gchar * ref)
+{
+	gchar *bookname, *newbook, buf[256];
+	gint chapter, verse;
+				
+	newbook = backend_get_book_from_key(ref);
+	chapter = backend_get_chapter_from_key(ref);
+	verse = backend_get_verse_from_key(ref);
+	
+	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
+	if(strcmp(bookname, newbook))
+		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter), chapter);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
+	sprintf(buf,"%s %d:%d",newbook,chapter,verse);
+	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
+	
+	return g_strdup(buf);
+}
+
 void undock_interlinear_page(SETTINGS * s)
 {
 	ApplyChangeBook = FALSE;
 	Interlinear_UnDock_Dialog = create_dlgInterlinear(s);
 	gtk_widget_reparent(s->frameInt, vboxInt);
 	gtk_notebook_remove_page(GTK_NOTEBOOK(s->workbook_lower), 2);
-	s->cvInterlinear = intsyncSWORD(entrycbIntBook, 
-					sbIntChapter, 
-					sbIntVerse, 
-					entryIntLookup,
-					s->currentverse);
+	s->cvInterlinear = update_controls_interlinear(s->currentverse);
 	updateIntDlg(s);
 	gtk_widget_show(Interlinear_UnDock_Dialog);
 	g_free(s->cvInterlinear);
@@ -90,16 +134,11 @@ static void on_dlgInterlinear_destroy(GtkObject * object, SETTINGS * s)
 
 static void on_buttonIntSync_clicked(GtkButton * button, SETTINGS * s)
 {
-	ApplyChangeBook = FALSE;
-	s->cvInterlinear = intsyncSWORD(entrycbIntBook, 
-					sbIntChapter, 
-					sbIntVerse, 
-					entryIntLookup,
-					s->currentverse);
+	ApplyChangeBook = FALSE;	
+	s->cvInterlinear = update_controls_interlinear(s->currentverse);
 	updateIntDlg(s);
 	g_free(s->cvInterlinear);
 	ApplyChangeBook = TRUE;
-	
 }
 
 static void
@@ -125,10 +164,7 @@ on_sbIntChapter_button_release_event(GtkWidget * widget,
 {		
 	ApplyChangeBook = FALSE;
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), 1);
-	s->cvInterlinear = intchangeverseSWORD(entrycbIntBook, 
-					sbIntChapter, 
-					sbIntVerse, 
-					entryIntLookup);
+	s->cvInterlinear = change_verse();
 	updateIntDlg(s);
 	ApplyChangeBook = TRUE;
 	return TRUE;
@@ -140,10 +176,7 @@ on_sbIntVerse_button_release_event(GtkWidget * widget,
 				 SETTINGS * s)
 {	
 	ApplyChangeBook = FALSE;
-	s->cvInterlinear = intchangeverseSWORD(entrycbIntBook, 
-					sbIntChapter, 
-					sbIntVerse, 
-					entryIntLookup);
+	s->cvInterlinear = change_verse();
 	updateIntDlg(s);
 	ApplyChangeBook = TRUE;
 	return TRUE;
@@ -160,11 +193,7 @@ on_entryIntLookup_key_press_event      (GtkWidget       *widget,
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
 	if (event->keyval == 65293 || event->keyval == 65421) {	//-- if user hit return key continue
-		s->cvInterlinear = intsyncSWORD(entrycbIntBook, 
-					sbIntChapter, 
-					sbIntVerse, 
-					entryIntLookup,
-					buf);
+		s->cvInterlinear = update_controls_interlinear(buf);
 		updateIntDlg(s);;	//-- change verse to entry text 
 		g_free(s->cvInterlinear);
 		ApplyChangeBook = TRUE;
@@ -182,11 +211,9 @@ on_btnIntGotoVerse_clicked             (GtkButton       *button,
 		//-- pointer to entry string
 	ApplyChangeBook = FALSE;
 	buf = gtk_entry_get_text(GTK_ENTRY(entryIntLookup));	//-- set pointer to entry text
-	s->cvInterlinear = intsyncSWORD(entrycbIntBook, 
-					sbIntChapter, 
-					sbIntVerse, 
-					entryIntLookup,
-					buf);
+	
+	s->cvInterlinear = update_controls_interlinear(buf);
+	
 	updateIntDlg(s);;	//-- change verse to entry text 
 	g_free(s->cvInterlinear);
 	ApplyChangeBook = TRUE;
