@@ -1,3 +1,9 @@
+2002-05-07  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* split gs_gbs.* into main/gbs.* and gnome/_gbs.*
+	* renamed backend/gbs.* to gbs_.*
+
+
 2002-05-06  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* split gs_dictlex.* into main/dictlex.* and gnome/_dictlex.*

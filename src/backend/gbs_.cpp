@@ -36,12 +36,13 @@
 #include <treekeyidx.h>
 #include <rawgenbook.h>
 
-#include "gs_gnomesword.h"
+/* main */
+#include "settings.h"
+
+/* backend */
 #include "sword.h"
 #include "display.h"
-#include "gbs.h"
-#include "gbs.h"
-#include "settings.h"
+#include "gbs_.h"
 
 typedef struct _backend_gbs BE_GBS;
 struct _backend_gbs {
@@ -51,11 +52,32 @@ struct _backend_gbs {
         int num;
 };
 
-/***  globals  ***/
-SWMgr *swmgrBook;
-GList *be_gbs_list;
 
-/***  start code  ***/
+/******************************************************************************
+ * global to this file only
+ */
+
+static SWMgr *mgr;
+static GList *be_gbs_list;
+
+
+
+/******************************************************************************
+ * Name
+ *  backend_get_book_key
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   char *backend_get_book_key(int book_num)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
+ 
 char *backend_get_book_key(int book_num)
 {
 	BE_GBS *g;
@@ -65,6 +87,23 @@ char *backend_get_book_key(int book_num)
 	else
 		return NULL;
 }
+
+/******************************************************************************
+ * Name
+ *  backend_get_tree_key
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   TreeKeyIdx *backend_get_tree_key(char *bookname)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   TreeKeyIdx *
+ */ 
+ 
 static TreeKeyIdx *backend_get_tree_key(char *bookname)
 {
         GList *tmp = NULL;
@@ -83,6 +122,22 @@ static TreeKeyIdx *backend_get_tree_key(char *bookname)
         return 0;
 }
 
+/******************************************************************************
+ * Name
+ *  
+ *backend_getModule
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   SWModule *backend_getModule(char *bookname)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   SWModule *
+ */ 
+ 
 static SWModule *backend_getModule(char *bookname)
 {
         GList *tmp = NULL;
@@ -101,6 +156,23 @@ static SWModule *backend_getModule(char *bookname)
         return 0;
 }
 
+/******************************************************************************
+ * Name
+ *  backend_treekey_next_sibling
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   gboolean backend_treekey_next_sibling(gchar * bookname,
+ *                                      unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */ 
+ 
 gboolean backend_treekey_next_sibling(gchar * bookname,
                                       unsigned long offset)
 {
@@ -112,7 +184,24 @@ gboolean backend_treekey_next_sibling(gchar * bookname,
         return 0;
 }
 
-gboolean backend_treekeyHasChildrenGBS(gchar * bookname,
+/******************************************************************************
+ * Name
+ *  backend_gbs_treekey_has_children
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   gboolean backend_gbs_treekey_has_children(gchar * bookname,
+  *                                      unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */ 
+ 
+gboolean backend_gbs_treekey_has_children(gchar * bookname,
                                        unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -123,7 +212,24 @@ gboolean backend_treekeyHasChildrenGBS(gchar * bookname,
         return false;
 }
 
-char *backend_treekeyGetLocalNameGBS(gchar * bookname,
+/******************************************************************************
+ * Name
+ *  backend_gbs_get_treekey_local_name
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   char *backend_gbs_get_treekey_local_name(gchar * bookname,
+ *                                    unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   char *
+ */ 
+ 
+char *backend_gbs_get_treekey_local_name(gchar * bookname,
                                      unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -135,7 +241,23 @@ char *backend_treekeyGetLocalNameGBS(gchar * bookname,
         return NULL;
 }
 
-unsigned long backend_treekeyGetOffsetGBS(gchar * bookname)
+/******************************************************************************
+ * Name
+ *  backend_gbs_get_treekey_offset
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   unsigned long backend_gbs_get_treekey_offset(gchar * bookname)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   unsigned long
+ */ 
+ 
+unsigned long backend_gbs_get_treekey_offset(gchar * bookname)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
         if (treeKey) {
@@ -144,7 +266,24 @@ unsigned long backend_treekeyGetOffsetGBS(gchar * bookname)
         return 0;
 }
 
-gboolean backend_treekeyFirstChildGBS(char *bookname,
+/******************************************************************************
+ * Name
+ *  backend_gbs_treekey_first_child
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   gboolean backend_gbs_treekey_first_child(char *bookname,
+  *                                     unsigned long offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */ 
+ 
+gboolean backend_gbs_treekey_first_child(char *bookname,
                                       unsigned long offset)
 {
         TreeKeyIdx *treeKey = backend_get_tree_key(bookname);
@@ -155,8 +294,25 @@ gboolean backend_treekeyFirstChildGBS(char *bookname,
         return false;
 }
 
-void backend_newDisplayGBS(GtkWidget * html, char *bookname,
-                           SETTINGS * s)
+/******************************************************************************
+ * Name
+ *  backend_new_gbs_display
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   void backend_new_gbs_display(GtkWidget * html, char *bookname,
+ *						SETTINGS * s)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void backend_new_gbs_display(GtkWidget * html, char *bookname,
+						SETTINGS * s)
 {
         GList *tmp = NULL;
         BE_GBS *g;
@@ -173,7 +329,23 @@ void backend_newDisplayGBS(GtkWidget * html, char *bookname,
         g_list_free(tmp);
 }
 
-void backend_display_book(gint booknum, gchar * key)
+/******************************************************************************
+ * Name
+ *  backend_display_gbs
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   void backend_display_gbs(gint booknum, gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
+void backend_display_gbs(gint booknum, gchar * key)
 {
         ModMap::iterator it;
         BE_GBS *g;
@@ -185,11 +357,25 @@ void backend_display_book(gint booknum, gchar * key)
 		g->mod->Display();
 	      
 }
-gboolean backend_displayRowGBS(gint booknum, gchar * offset)
+/******************************************************************************
+ * Name
+ *  backend_display_row_gbs
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   gboolean backend_display_row_gbs(gint booknum, gchar * offset)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   gboolean
+ */ 
+ 
+gboolean backend_display_row_gbs(gint booknum, gchar * offset)
 {
-        ModMap::iterator it;
-        BE_GBS *g;
-        g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
+        BE_GBS *g = (BE_GBS *) g_list_nth_data(be_gbs_list, booknum);
         TreeKeyIdx *treeKey = backend_get_tree_key(g->mod->Name());
         if (treeKey) {
                 TreeKeyIdx treenode = *treeKey;
@@ -208,15 +394,31 @@ gboolean backend_displayRowGBS(gint booknum, gchar * offset)
         return false;
 }
 
+/******************************************************************************
+ * Name
+ *  backend_setup_books
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   void backend_setup_books(SETTINGS * s)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
 void backend_setup_books(SETTINGS * s)
 {
         ModMap::iterator it;    //-- iteratior
         gint count = 0;
 
-        swmgrBook = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));       //-- create sword mgrs
+        mgr = new SWMgr(new MarkupFilterMgr(FMT_HTMLHREF));       //-- create sword mgrs
         be_gbs_list = NULL;
-        for (it = swmgrBook->Modules.begin();
-             it != swmgrBook->Modules.end(); it++) {
+        for (it = mgr->Modules.begin();
+             it != mgr->Modules.end(); it++) {
                 if (!strcmp((*it).second->Type(), "Generic Books")) {
                         BE_GBS *be_gbs = new BE_GBS;
                         be_gbs->mod = (*it).second;
@@ -231,9 +433,25 @@ void backend_setup_books(SETTINGS * s)
         }
 }
 
+/******************************************************************************
+ * Name
+ *  backend_shutdown_books
+ *
+ * Synopsis
+ *   #include "gbs_.h"
+ *
+ *   void backend_shutdown_books(void)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+ 
 void backend_shutdown_books(void)
 {
-        delete swmgrBook;
+        delete mgr;
 
         /***  free backend stuff  ***/
         be_gbs_list = g_list_first(be_gbs_list);
@@ -249,17 +467,4 @@ void backend_shutdown_books(void)
         g_list_free(be_gbs_list);
 }
 
-/*void displayinGBS(gchar *key) {
-	GBS_DATA *g;
-	ModMap::iterator it;	
-	
-	g = getgbs(gbs_data);
-	it = swmgrBook->Modules.find(g->bookName);
-	if (it != swmgrBook->Modules.end()) {
-		(*it).second->SetKey(key);
-		(*it).second->KeyText(); //snap to entry
-		(*it).second->Display();
-	}
-}
-*/
 /******   end of file   ******/
