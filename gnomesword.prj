@@ -101,9 +101,11 @@ module.include.files=\
 	src/gnome/fileselection.h\
 	src/gnome/gui.h\
 	src/gnome/interlinear_dialog.h\
+	src/gnome/info_box.h\
 	src/gnome/link_dialog.h\
 	src/gnome/main_menu.h\
 	src/gnome/link_dialog.h\
+	src/gnome/preferences_dialog.h\
 	src/gnome/setup_druid.h\
 	src/gnome/shortcutbar_dialog.h\
 	src/gnome/studypad.h\
@@ -122,11 +124,9 @@ module.include.files=\
 	src/main/gs_gui.h\
 	src/main/gs_history.h\
 	src/main/gs_html.h\
-	src/main/gs_info_box.h\
 	src/main/gs_mainmenu_cb.h\
 	src/main/gs_menu.h\
 	src/main/gs_popup_cb.h\
-	src/main/gs_preferences_dlg.h\
 	src/main/setup.h\
 	src/main/gs_shortcutbar.h\
 	src/main/gs_viewcomm_dlg.h\
@@ -185,7 +185,9 @@ module.source.files=\
 	src/gnome/link_dialog.c\
 	src/gnome/gui.c\
 	src/gnome/interlinear_dialog.c\
+	src/gnome/info_box.c\
 	src/gnome/main_menu.c\
+	src/gnome/preferences_dialog.c\
 	src/gnome/setup_druid.c\
 	src/gnome/shortcutbar_dialog.c\
 	src/gnome/studypad.c\
@@ -204,10 +206,8 @@ module.source.files=\
 	src/main/gs_gui.c\
 	src/main/gs_history.c\
 	src/main/gs_html.c\
-	src/main/gs_info_box.c\
 	src/main/gs_menu.c\
 	src/main/gs_popup_cb.c\
-	src/main/gs_preferences_dlg.c\
 	src/main/setup.c\
 	src/main/gs_shortcutbar.c\
 	src/main/gs_viewcomm_dlg.c\
