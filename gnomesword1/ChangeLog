@@ -1,3 +1,15 @@
+2003-10-17  Terry <tbiggs@users.sf.net>
+
+	* changed bookmarks ctree to treeview
+
+
+2003-10-06  Terry <tbiggs@users.sf.net>
+
+	* bumped gnomesword-2.0 to 0.9.dev7	
+	* added book_closed.png, book_open.png and helpdoc.png from Devhelp-0.7
+	  for gnome2/gbs.c treeview.
+
+
 2003-09-27  Terry <tbiggs@users.sf.net>
 
 	* changed ctree to treeview in gnome2/gbs.c and gnome2/gbs_dialog.c

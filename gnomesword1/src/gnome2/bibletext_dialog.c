@@ -1204,7 +1204,7 @@ static void setup_tag (GtkTextTag *tag, gpointer user_data)
 		    user_data);
 }
 
-static void create_text_tags(GtkTextBuffer *buffer)
+static void create_text_tags(GtkTextBuffer *buffer, gchar * rtl_font)
 {
 	GtkTextTag *tag;
 	GdkColor color;
@@ -1244,21 +1244,24 @@ static void create_text_tags(GtkTextBuffer *buffer)
                 NULL);
 		
 	/* right to left tag */
-	tag = gtk_text_buffer_create_tag (buffer, "rtl_quote", NULL);
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_text", NULL);
         g_object_set (G_OBJECT (tag),
-		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
-		//"scale", PANGO_SCALE_XX_LARGE,
                 "wrap_mode", GTK_WRAP_WORD,
                 "direction", GTK_TEXT_DIR_RTL,
                 "indent", 0,
                 "left_margin", 0,
                 "right_margin", 0,
+                NULL);		
+		
+	/* right to left font */
+	tag = gtk_text_buffer_create_tag (buffer, "rtl_font", NULL);
+        g_object_set (G_OBJECT (tag),
+		"font", rtl_font,
                 NULL);	
 		
 	/* large tag */
 	tag = gtk_text_buffer_create_tag (buffer, "large", NULL);
         g_object_set (G_OBJECT (tag),
-		//"font", "-misc-ezra sil-medium-r-normal--14-135-75-75-p-64-iso10646-1",
 		"scale", PANGO_SCALE_XX_LARGE,
                 NULL);			
 }
@@ -1286,6 +1289,8 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	GtkWidget *vbox33;
 	GtkWidget *frame21;
 	GtkWidget *swVText; 
+	gchar *gdk_font = NULL;
+	gchar file[250];
 
 
 	vt->dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -1320,8 +1325,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_ALWAYS);
 				      
-	if (!vt->is_rtol) {
-	
+	if (!vt->is_rtol) {	
 		vt->html = gtk_html_new();
 		gtk_widget_show(vt->html);
 		gtk_container_add(GTK_CONTAINER(swVText), vt->html);
@@ -1330,15 +1334,26 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 				   G_CALLBACK(dialog_url), (gpointer) vt);			   
 		gtk_signal_connect(GTK_OBJECT(vt->html), "link_clicked",
 				   G_CALLBACK(link_clicked), vt);
+		gtk_signal_connect(GTK_OBJECT(vt->html),
+				   "motion_notify_event",
+				   G_CALLBACK
+				   (on_dialog_motion_notify_event), vt);
+		gtk_signal_connect(GTK_OBJECT(vt->html),
+				   "button_release_event",
+				   G_CALLBACK
+				   (on_button_release_event),
+				   (TEXT_DATA *) vt);
 	}
 	else { 
 		/* use gtktextview for right to left text */
+		sprintf(file, "%s/fonts.conf", settings.gSwordDir);
 		vt->text = gtk_text_view_new ();
 		gtk_widget_show (vt->text);
 		gtk_container_add (GTK_CONTAINER (swVText), vt->text);
 		gtk_text_view_set_editable (GTK_TEXT_VIEW (vt->text), FALSE);
 		text_buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW (vt->text));
-		create_text_tags(text_buffer);
+		gdk_font = get_conf_file_item(file, vt->mod_name, "GdkFont");
+		create_text_tags(text_buffer, gdk_font);
 		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (vt->text), GTK_WRAP_WORD);
 		/*
 		gtk_signal_connect(GTK_OBJECT(t->text),
@@ -1346,6 +1361,7 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 				   G_CALLBACK
 				   (textview_button_release_event),
 				   (TEXT_DATA *) t);*/
+		if(gdk_font) g_free(gdk_font);
 
 	}
 	
@@ -1354,20 +1370,9 @@ static void create_bibletext_dialog(TEXT_DATA * vt)
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
 			   0);
 
-
-
 	gtk_signal_connect(GTK_OBJECT(vt->dialog),
 			   "destroy",
 			   G_CALLBACK(dialog_destroy), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->html),
-			   "motion_notify_event",
-			   G_CALLBACK
-			   (on_dialog_motion_notify_event), vt);
-	gtk_signal_connect(GTK_OBJECT(vt->html),
-			   "button_release_event",
-			   G_CALLBACK
-			   (on_button_release_event),
-			   (TEXT_DATA *) vt);
 			   
 			   
 	gtk_signal_connect(GTK_OBJECT(vt->dialog),

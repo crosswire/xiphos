@@ -120,7 +120,7 @@ static void on_cbeBook_changed(GtkEditable * editable,
 		bookname = gtk_editable_get_chars(editable, 0, -1);
 		if (*bookname) {
 			sprintf(buf, "%s 1:1", bookname);
-			g_warning(bookname);
+			/* g_warning(bookname); */
 			gui_change_verse(buf);
 		}
 	}

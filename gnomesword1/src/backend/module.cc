@@ -1207,7 +1207,7 @@ char *backend_get_key_from_module(int manager, char *module_name)
 	}
 	if (mod) {
 		(const char *)*mod;
-		printf("mod->KeyText = %s\n",mod->KeyText());
+//		printf("mod->KeyText = %s\n",mod->KeyText());
 		return strdup(mod->KeyText());
 	}
 	return NULL;
