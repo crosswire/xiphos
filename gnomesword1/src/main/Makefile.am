@@ -24,8 +24,6 @@ COMMON_SOURCE =  \
     gbs.c \
     gs_gnomesword.c \
     gs_gnomesword.h \
-    gs_menu.c \
-    gs_menu.h \
     gs_popup_cb.c \
     gs_popup_cb.h \
     setup.c \

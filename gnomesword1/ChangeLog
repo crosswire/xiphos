@@ -1,6 +1,7 @@
 2002-07-18  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* renamed main/gs_html.* to gui/html.h and gnome/html.c
+	* removed main/gs_menu.*
 
 
 2002-07-17  Terry Biggs <tbiggs@users.sourceforge.net>
