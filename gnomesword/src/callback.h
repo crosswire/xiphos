@@ -63,12 +63,6 @@ gboolean on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 						 GdkEventKey * event,
 						 gpointer user_data);
 void on_btnExit_clicked(GtkButton * button, gpointer user_data);
-gboolean on_moduleText_button_press_event(GtkWidget * widget,
-					     GdkEventButton * event,
-					     gpointer user_data);
-gboolean on_textDict_button_press_event(GtkWidget      *widget,
-					GdkEventButton *event,
-                                        gpointer        user_data);
 void on_notebook1_switch_page(GtkNotebook * notebook,
 				  GtkNotebookPage * page,
 				  gint page_num, gpointer user_data);

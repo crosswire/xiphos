@@ -118,7 +118,6 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			g_free(modName);
 		} 
 		 gtk_widget_show(dlg);
-		//lookupStrongsSWORD(atoi(url));
 	} else if (*url == 'M') {
 		if(!gsI_isrunning){
 		 	dlg = create_dlgInformation();
