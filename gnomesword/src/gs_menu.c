@@ -53,10 +53,6 @@ static GtkWidget *create_pmCommentsHtml(GList *comDescription,
 static GtkWidget *create_pmDict(GList *modsdesc);
 static GtkWidget* create_pmBible(GList * bibleDescription,
 				GList *dictDescription);
-				/*
-static GtkWidget *create_pmEditnote(GtkWidget *app, 
-		GList *mods);
-		*/
 static void loadmenuformmodlist(GtkWidget *pmInt, 
 		GList *mods, 
 		gchar *labelGtkWidget, 
@@ -318,14 +314,12 @@ void createpopupmenus(GtkWidget *app,
 				GList *percomlist,
 				GList *options) 
 {
-	GtkWidget 		
-		//*menu5,
+	GtkWidget 
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	
 	
 	menuInt = create_pmInt(bibleDescription, options, "textComp1"); 
-	//menu5 = create_pmEditnote(app, percomlist);
 	menuDict = create_pmDict(dictDescription);
 	/* create popup menu for Bible window */
 	menuBible = create_pmBible(bibleDescription, dictDescription);	
@@ -333,10 +327,6 @@ void createpopupmenus(GtkWidget *app,
 	menuhtmlcom = create_pmCommentsHtml(comDescription, dictDescription);			
 	/* attach popup menus and ajust checkmarks*/
 	gnome_popup_menu_attach(menuInt,lookup_widget(app,"textComp1"),(gchar*)"1");
-	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_strongs"))->active = settings->strongsint;
-	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_morphs"))->active = settings->morphsint;
-	//GTK_CHECK_MENU_ITEM (lookup_widget(menuInt,"show_footnotes"))->active = settings->footnotesint;	
-	//gnome_popup_menu_attach(menu5,lookup_widget(app,"textComments"),(gchar*)"1");
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuBible,"show_tabs"))->active = settings->comm_tabs;
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
@@ -1320,163 +1310,4 @@ void loadmenuformmodlist(GtkWidget *pmInt, GList *mods,  gchar *label, GtkMenuCa
 	}
 	g_list_free(tmp); 
 } 
-
-/*
-static void
-on_cut1_activate                       (GtkMenuItem     *menuitem,
-                                        gpointer data)
-{
-		
-}
-static void
-on_paste1_activate                       (GtkMenuItem     *menuitem,
-                                        gpointer data)
-{
-		
-}
-
-static GnomeUIInfo edit2_menu_uiinfo[] = {
-	GNOMEUIINFO_MENU_CUT_ITEM(on_cut1_activate, NULL),
-	GNOMEUIINFO_MENU_COPY_ITEM(on_copy4_activate, NULL),
-	GNOMEUIINFO_MENU_PASTE_ITEM(on_paste1_activate, NULL),
-	GNOMEUIINFO_END
-};
-
-static GnomeUIInfo pmEditnote_uiinfo[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_EDIT_TREE(edit2_menu_uiinfo),
-	{
-	 GNOME_APP_UI_ITEM, "Bold",
-	 "Make selected text bold",
-	 on_boldNE_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "Italic",
-	 "Make selected text Italic",
-	 on_italicNE_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "Reference",
-	 "Make selected text a reference",
-	 on_referenceNE_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "Underline",
-	 "Underline selected text",
-	 on_underlineNE_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "Greek",
-	 "Use greek font",
-	 on_greekNE_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_SEPARATOR,
-	{
-	 GNOME_APP_UI_ITEM, "Goto Reference",
-	 "Go to selected reference",
-	 on_goto_reference_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_ITEM, "Lookup Selection",
-	 NULL,
-	 on_lookup_selection4_activate, NULL, NULL,
-	 GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-static GtkWidget *create_pmEditnote(GtkWidget *app, GList *mods)
-{
-	GtkWidget *pmEditnote;
-	GList *tmp;
-	
-	pmEditnote = gtk_menu_new();
-	gtk_object_set_data(GTK_OBJECT(pmEditnote), "pmEditnote",
-			    pmEditnote);
-	gnome_app_fill_menu(GTK_MENU_SHELL(pmEditnote), pmEditnote_uiinfo,
-			    NULL, FALSE, 0);
-
-	gtk_widget_ref(pmEditnote_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "separator19",
-				 pmEditnote_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "edit2",
-				 pmEditnote_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit2_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "cut1",
-				 edit2_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit2_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "copy4",
-				 edit2_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit2_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "paste1",
-				 edit2_menu_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "boldNE",
-				 pmEditnote_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "italicNE",
-				 pmEditnote_uiinfo[3].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "referenceNE",
-				 pmEditnote_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[5].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "underlineNE",
-				 pmEditnote_uiinfo[5].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[6].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "greekNE",
-				 pmEditnote_uiinfo[6].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[7].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "separator18",
-				 pmEditnote_uiinfo[7].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[8].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote), "goto_reference",
-				 pmEditnote_uiinfo[8].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(pmEditnote_uiinfo[9].widget);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditnote),
-				 "lookup_selection4",
-				 pmEditnote_uiinfo[9].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	tmp = mods;	
-	while (tmp != NULL) { 
-		additemtopopupmenu(app, pmEditnote,(gchar *) tmp->data , 
-			(GtkMenuCallback)on_change_module_activate); 
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-
-	return pmEditnote;
-}
-
-*/
 
