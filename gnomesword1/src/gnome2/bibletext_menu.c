@@ -54,36 +54,6 @@
 
 /******************************************************************************
  * Name
- *  
- *
- * Synopsis
- *   #include "gui/bibletext_menu.h"
- *
- *   	
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void display_text(TEXT_DATA * t)
-{	
-	if(!t->is_rtol) 
-		chapter_display(t->html, 
-			t->mod_name,
-			t->ops, t->key, TRUE);
-/*	else
-		chapter_display_textview(t->text, 
-			t->mod_name,
-			t->ops, t->key, TRUE);*/
-
-
-}
-
-/******************************************************************************
- * Name
  *  on_copy_activate
  *
  * Synopsis

@@ -33,7 +33,7 @@ extern "C" {
 void entry_display(GtkWidget * html_widget, gchar * mod_name, 
  				        gchar * text, gchar * key, 
 					gboolean show_key);
-void chapter_display(GtkWidget * html_widget, gchar * module_name, 
+void chapter_display(GtkWidget * text_widget, gchar * module_name, 
 		GLOBAL_OPS * tgs, gchar * key, gboolean use_globals);
 /*void chapter_display_icu(GtkWidget * html_widget, gchar * mod_name,
 		GLOBAL_OPS * tgs, gchar * key, gboolean use_globals);*/
