@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * gs_interlinear.h - support for displaying multiple modules
+ * interlinear.h - support for displaying multiple modules
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -19,19 +19,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GS_INTERLINEAR_H_
-#define __GS_INTERLINEAR_H_
+#ifndef ___INTERLINEAR_H_
+#define ___INTERLINEAR_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 
-void update_interlinear_page(void);
-void update_interlinear_page_detached(void);
-void swap_interlinear_with_main(char *intmod);
-void set_interlinear_module_global_options(gchar * option, gboolean choice);
+void gui_update_interlinear_page(void);
+void gui_update_interlinear_page_detached(void);
+void gui_swap_interlinear_with_main(char *intmod);
+void gui_set_interlinear_module_global_options(gchar * option, gboolean choice);
 
 #ifdef __cplusplus
 }
