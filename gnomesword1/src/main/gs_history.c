@@ -26,7 +26,6 @@
 #include <gnome.h>
 
 #include "main/gs_gnomesword.h"
-#include "backend/sword.h"
 #include "main/gs_history.h"
 #include "main/gs_menu.h"
 #include "main/support.h"
