@@ -83,10 +83,10 @@ extern SETTINGS *settings;
  ***************************************************************************************************/
 void on_url(GtkHTML * html, const gchar * url, gpointer data)
 {
-	GnomeApp *app;
+	//GnomeApp *app;
 	gchar buf[255];	
 	
-	app = GNOME_APP(data);
+	//app = GNOME_APP(data);
 	if (url == NULL)
 		gnome_appbar_set_status(GNOME_APPBAR(settings->appbar),
 					"");
@@ -589,11 +589,11 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   "button_press_event",
 			   GTK_SIGNAL_FUNC(html_button_pressed),
 			   GINT_TO_POINTER(1));
-
+/*
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "on_url",
-			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);/*
+			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
 			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
 
@@ -683,12 +683,7 @@ gchar *gethtmlfontnameHTML(gchar *xfontname)
 	return retval;
 }
 
-/*** set html default font ***/
-void set_gtkhtml_default_font_HTML(GtkWidget *html_widget, gchar *xfontname)
-{
-	
-}
-
+/***  printing using gtk_html_print_with_header_footer()  ***/
 static gint page_num;
 static GnomeFont *font;
 static void

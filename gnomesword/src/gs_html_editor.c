@@ -528,6 +528,12 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			   "enter_notify_event",
 			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 			   necd);
+	gtk_signal_connect(GTK_OBJECT(necd->htmlwidget), "link_clicked",
+			   GTK_SIGNAL_FUNC(on_link_clicked), /* gs_html.c */
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(necd->htmlwidget), "on_url",
+			   GTK_SIGNAL_FUNC(on_url),  /* gs_html.c */
+			   NULL);
 			   
 	if(necd->personal_comments){
 		toolbarComments = toolbar_style(necd);
@@ -1136,7 +1142,7 @@ GtkWidget *create_dlgSearch(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entry12);
 	gtk_box_pack_start(GTK_BOX(vbox45), entry12, FALSE, FALSE, 0);
-	gtk_widget_set_usize(entry12, 291, -2);
+//	gtk_widget_set_usize(entry12, 291, -2);
 	
 	hbox66 = gtk_hbox_new(FALSE, 0);
 	gtk_widget_ref(hbox66);
