@@ -77,7 +77,6 @@ extern "C" {
     void changcurdictModSWORD(gchar * modName, gchar * keyText);
     void dictSearchTextChangedSWORD(gchar * mytext);
     void dictchangekeySWORD(gint direction);
-    void showmoduleinfoSWORD(char *modName, gboolean isGBS);
     void setglobalopsSWORD(gint window, gchar * option, gchar * yesno);
     void changepercomModSWORD(gchar * modName);
     void redisplayTextSWORD(void);
@@ -109,8 +108,9 @@ extern "C" {
     GList *backend_getModListOfTypeSWORD(char *modType);
     /* returns a glist of module descriptions */
     GList* backend_get_mod_description_list_SWORD(char *modType);
-    gchar *backend_getmodDescriptionSWORD(gchar * modName);
+    gchar *backend_get_module_description(gchar * modName);
     gchar *backend_getPathToModsSWORD(void);
+    gchar *backend_get_mod_aboutSWORD(gchar *modname);
     
 #ifdef __cplusplus
 }

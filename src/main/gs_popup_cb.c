@@ -161,7 +161,7 @@ on_goto_reference2_activate(GtkMenuItem * menuitem, gpointer user_data)
 void
 on_about_this_module5_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD(getmodnameSWORD(2),FALSE);
+	display_about_module_dialog(getmodnameSWORD(2),FALSE);
 }
 
 
@@ -258,16 +258,16 @@ void on_paste1_activate(GtkMenuItem * menuitem, gpointer user_data)
 //----------------------------------------------------------------------------------------------
 void on_kjv1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	showmoduleinfoSWORD((char *) user_data,FALSE);
+	display_about_module_dialog((char *) user_data,FALSE);
 }
 
 //----------------------------------------------------------------------------------------------
 void
 on_about_this_module_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	if(!strcmp((gchar *)user_data,"Bible")) showmoduleinfoSWORD(getmodnameSWORD(0),FALSE);
-	else if (!strcmp((gchar *)user_data,"commentary")) showmoduleinfoSWORD(getmodnameSWORD(1),FALSE);
-	else if (!strcmp((gchar *)user_data,"dictionary")) showmoduleinfoSWORD(getmodnameSWORD(2),FALSE);	
+	if(!strcmp((gchar *)user_data,"Bible")) display_about_module_dialog(getmodnameSWORD(0),FALSE);
+	else if (!strcmp((gchar *)user_data,"commentary")) display_about_module_dialog(getmodnameSWORD(1),FALSE);
+	else if (!strcmp((gchar *)user_data,"dictionary")) display_about_module_dialog(getmodnameSWORD(2),FALSE);	
 	
 }
 

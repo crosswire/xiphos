@@ -46,6 +46,7 @@
 #include "support.h"
 #include "gs_file.h"
 #include "about_gnomesword.h"
+#include "about_sword.h"
 
 /******************************************************************************
  * externals
@@ -99,14 +100,12 @@ void
 on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
 				     gpointer user_data)
 {
-	GtkWidget *dlg, *text1, *version_label;
+	GtkWidget *dlg, *version_label;
 	const char *ver;
 	gchar version[40];
 	
 	dlg = gui_create_about_sword();
-	text1 = lookup_widget(dlg, "txtAboutSword");
 	version_label = lookup_widget(dlg, "version_label");
-	gtk_text_set_word_wrap(GTK_TEXT(text1), TRUE);	
 	/* get sword version */
 	ver = getSwordVerionSWORD();	
 	sprintf(version,"Sword-%s",ver);
