@@ -537,6 +537,10 @@ static void create_dictlex_pane(DL_DATA *dl)
 			"button_press_event",
 			GTK_SIGNAL_FUNC(html_button_pressed), 
 			dl);
+	gtk_signal_connect(GTK_OBJECT(dl->html),
+			"url_requested",
+			GTK_SIGNAL_FUNC(url_requested), 
+			NULL);
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",

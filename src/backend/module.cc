@@ -353,7 +353,6 @@ int backend_is_personal_comment_module(char * module_name)
 	SWModule *module = sw.main_mgr->Modules[module_name];
 	if(!module)
 		return FALSE;
-	
 	if (!strcmp((char*)module->getConfigEntry("ModDrv"),
 							"RawFiles")) {
 		     return TRUE;

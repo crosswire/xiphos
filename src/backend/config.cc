@@ -65,7 +65,7 @@ struct _ExportStruct {
 
 typedef struct _ExportStruct ExportStruct;
 
-
+ 
 static SWConfig *config;
 static ConfigEntMap::iterator loop, end;
 

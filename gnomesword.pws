@@ -6,11 +6,11 @@ RunInTerminal=true
 ShowLocals=true
 
 [filenumbers]
-0=5
-1=712
-2=59
-3=27
-4=69
+0=4
+1=63
+2=712
+3=59
+4=27
 5=55
 6=289
 7=27
@@ -51,10 +51,11 @@ filter.file.ignore.hidden=0
 filter.dir.ignore.hidden=0
 
 [filelist]
-0=/home/terry/Projects/gnomesword1/src/gnome/html.c
-1=/home/terry/Projects/gnomesword1/src/gnome/main_menu.c
-2=/home/terry/Projects/gnomesword1/src/main/xml.c
-3=/home/terry/Projects/gnomesword1/src/main/xml.h
+0=/home/terry/Projects/gnomesword1/ChangeLog
+1=/home/terry/Projects/gnomesword1/src/gnome/html.c
+2=/home/terry/Projects/gnomesword1/src/gnome/main_menu.c
+3=/home/terry/Projects/gnomesword1/src/main/xml.c
+4=/home/terry/Projects/gnomesword1/src/main/xml.h
 
 [replace_text]
 0=toolbar_nav

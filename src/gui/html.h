@@ -28,7 +28,9 @@ extern "C" {
 
 #include <gnome.h>
 #include <gtkhtml/gtkhtml.h>
-	
+
+void
+url_requested (GtkHTML *html, const gchar *url, GtkHTMLStream *handle);	
 void gui_url(GtkHTML * html, const gchar * url, gpointer data);
 void gui_link_clicked(GtkHTML * html, const gchar * url, gpointer data);
 void gui_begin_html(GtkWidget * html, gboolean utf8);
@@ -45,4 +47,3 @@ void gui_html_print(GtkWidget * htmlwidget);
 #endif
 
 #endif
-
