@@ -149,7 +149,6 @@ e-util/Makefile
 widgets/Makefile
 widgets/e-text/Makefile
 widgets/e-paned/Makefile
-widgets/e-table/Makefile
 widgets/misc/Makefile
 widgets/shortcut-bar/Makefile
 ])
