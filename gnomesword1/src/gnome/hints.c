@@ -27,12 +27,55 @@
 #include <gtkhtml/gtkhtml.h>
 
 #include "gui/hints.h"
+#include "gui/shortcutbar_viewer.h"
+#include "gui/gnomesword.h"
 
 #include "main/module.h"
 #include "main/xml.h"
+#include "main/settings.h"
 
 
 HINT hint;
+
+/******************************************************************************
+ * Name
+ *    
+ *
+ * Synopsis
+ *   #include "gui/hints.h"
+ *
+ *    
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   gboolean
+ */
+
+void gui_display_hint_in_viewer(gchar * text) 
+{
+	GtkHTMLStreamStatus status1 = 0;
+	GtkHTML *html;
+	GtkHTMLStream *htmlstream;
+	GString *str;
+	
+	str = g_string_new("");
+	if (hint.use_hints) {	
+		
+		sprintf(settings.groupName, "%s", "Viewer");
+		
+		html = GTK_HTML(sv->html_viewer_widget);
+		htmlstream =
+		    gtk_html_begin_content(html, "text/html; charset=utf-8");
+		g_string_sprintf(str, "<body bgcolor=\"yellow\">%s</body>",
+				 text);
+		gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
+		gtk_html_end(GTK_HTML(html), htmlstream, status1);
+		g_string_free(str, TRUE);
+	}
+}
+
 
 /******************************************************************************
  * Name
@@ -62,10 +105,11 @@ static GtkWidget *create_hint_window(void)
 	gtk_window_set_title(GTK_WINDOW(hint_window), "window1");
 	gtk_window_set_position(GTK_WINDOW(hint_window),
 				GTK_WIN_POS_MOUSE);
-	gtk_window_set_default_size(GTK_WINDOW(hint_window), 171, 63);
+	gtk_window_set_default_size(GTK_WINDOW(hint_window), 191, 83);
 	gtk_window_set_policy(GTK_WINDOW(hint_window), TRUE, TRUE,
 			      FALSE);
-
+	gtk_widget_show(hint_window); 
+	
 	frame = gtk_frame_new(NULL);
 	gtk_widget_show(frame);
 	gtk_container_add(GTK_CONTAINER(hint_window), frame);
@@ -104,16 +148,19 @@ static GtkWidget *create_hint_window(void)
  *   void
  */
 
-void gui_display_footnote_in_hint(gchar * note)
+void gui_display_in_hint_window(gchar * note)
 {
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTML *html;
 	GtkHTMLStream *htmlstream;
 	GString *str;
-
+	gint x;
+	gint y;
+	
 	str = g_string_new("");
 	if (!hint.in_popup) {
 		hint.hint_window = create_hint_window();
+		gtk_widget_realize(hint.hint_window);
 	}
 
 	html = GTK_HTML(hint.html_widget);
@@ -123,20 +170,32 @@ void gui_display_footnote_in_hint(gchar * note)
 			 note);
 	gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
 	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-
-	gtk_widget_show(hint.hint_window);
+	
+	while (gtk_events_pending()) {
+		gtk_main_iteration();
+	}
+	gdk_window_get_position	 (hint.hint_window->window,
+					  &x,
+					  &y);
+	g_warning("x = %d y = %d",x,y);
+	x += 100;
+	y += 50;
+	gtk_window_reposition((GtkWindow *)hint.hint_window,
+						x,
+						y);
+	
 	g_string_free(str, TRUE);
 }
 
 
 /******************************************************************************
  * Name
- *   gui_show_footnote
+ *   gui_destroy_hint_window
  *
  * Synopsis
  *   #include "gui/hints.h"
  *
- *   void gui_show_footnote(gchar *note)
+ *   void gui_destroy_hint_window(void) 
  *
  * Description
  *   
@@ -144,28 +203,35 @@ void gui_display_footnote_in_hint(gchar * note)
  * Return value
  *   void
  */
-/*
-void gui_display_text_in_hint(gchar * key, gchar * module_name)
+
+void gui_destroy_hint_window(void)
 {
-	GtkHTMLStreamStatus status1 = 0;
-	GtkHTML *html;
-	GtkHTMLStream *htmlstream;
-	GString *str;
-
-	str = g_string_new("");
-	if (!hint.in_popup) {
-		hint.hint_window = create_hint_window();
+	if(hint.in_popup) {
+		gtk_widget_destroy(hint.hint_window);
+		hint.in_popup = FALSE;
 	}
-
-	html = GTK_HTML(hint.html_widget);
-	htmlstream =
-	    gtk_html_begin_content(html, "text/html; charset=utf-8");
-	g_string_sprintf(str, "<body bgcolor=\"yellow\">%s</body>",
-			 note);
-	gtk_html_write(GTK_HTML(html), htmlstream, str->str, str->len);
-	gtk_html_end(GTK_HTML(html), htmlstream, status1);
-
-	gtk_widget_show(hint.hint_window);
-	g_string_free(str, TRUE);
 }
-*/
+
+/******************************************************************************
+ * Name
+ *   gui_open_hint_viewer
+ *
+ * Synopsis
+ *   #include "gui/hints.h"
+ *
+ *    void gui_open_hint_viewer(void)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+void gui_open_hint_viewer(void)
+{
+	gtk_notebook_set_page(GTK_NOTEBOOK(
+			sv->notebook), 2);
+	sprintf(settings.groupName, "%s", "Viewer");
+	gui_show_sb_verseList();
+}

@@ -257,10 +257,10 @@ static void add_xml_bookmark_to_parent(xmlNodePtr parent,
  *   void
  */
 
-void gui_new_xml_bookmark_file(void) 
+void gui_new_xml_bookmark_file(void)
 {
 	xmlDocPtr xml_doc;
-	xmlNodePtr xml_root; 
+	xmlNodePtr xml_root;
 	xmlNodePtr xml_node;
 	xmlNodePtr xml_folder;
 	xmlAttrPtr xml_attr;
@@ -802,10 +802,12 @@ static gchar *get_module_name(void)
 	if (settings.havebible) {
 		switch (settings.whichwindow) {
 		case MAIN_TEXT_WINDOW:
-			return (gchar *) xml_get_value("modules", "text");	//settings.MainWindowModule;
+			return (gchar *) xml_get_value("modules",
+						       "text");
 			break;
 		case COMMENTARY_WINDOW:
-			return (gchar *) xml_get_value("modules", "comm");	//settings.CommWindowModule;
+			return (gchar *) xml_get_value("modules",
+						       "comm");
 			break;
 		case DICTIONARY_WINDOW:
 			return (gchar *) settings.DictWindowModule;
@@ -1640,8 +1642,7 @@ static void restore_ok(GtkButton * button, GtkWidget * filesel)
 					 (bmtree.ctree)->row_list,
 					 selected_row));
 
-	file =
-	    (const xmlChar *)
+	file = (const xmlChar *)
 	    gtk_file_selection_get_filename(GTK_FILE_SELECTION
 					    (filesel));
 
@@ -1878,7 +1879,7 @@ void on_allow_reordering_activate(GtkMenuItem * menuitem,
  *				  gpointer user_data)
  *
  * Description
- *   allow reordering of bookmarks
+ *   
  *
  * Return value
  *   void

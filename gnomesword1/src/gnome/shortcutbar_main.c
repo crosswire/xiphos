@@ -670,7 +670,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	gint group_num, sbtype;
 	EShortcutBar *bar1;
 	gchar *group_name;
-	gchar *mod_name;
+	gchar *mod_name = NULL;
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	glist = NULL;

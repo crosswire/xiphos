@@ -1,4 +1,4 @@
-# Anjuta Version 1.1.1 
+# Anjuta Version 1.1.97 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
@@ -23,7 +23,7 @@ Bible Study and Research Tool for Linux
 
 props.file.type=project
 
-anjuta.version=1.1.1
+anjuta.version=1.1.97
 anjuta.compatibility.level=1
 
 project.name=gnomesword
@@ -48,7 +48,7 @@ project.menu.comment=gnomesword Version 0.9.0
 project.menu.icon=/home/terry/Projects/gnomesword1/pixmaps/GnomeSword.png
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/home/terry --enable-static-sword
+project.configure.options=--prefix=/home/terry
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
@@ -192,7 +192,6 @@ module.source.files=\
 	src/gnome/shortcutbar_dialog.c\
 	src/gnome/shortcutbar_main.c\
 	src/gnome/shortcutbar_search.c\
-	src/gnome/shortcutbar_spell.c\
 	src/gnome/shortcutbar_viewer.c\
 	src/gnome/studypad.c\
 	src/gnome/studypad_dialog.c\

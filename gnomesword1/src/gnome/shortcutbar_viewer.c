@@ -123,12 +123,12 @@ void gui_display_devotional(void)
 
 /******************************************************************************
  * Name
- *   showSBVerseList 
+ *   gui_show_sb_verseList 
  *
  * Synopsis
  *   #include "shortcutbar_viewer.h"
  *
- *   void showSBVerseList(void)
+ *   void gui_show_sb_verseList(void)
  *
  * Description
  *   set shortcut bar to display verse list group
@@ -137,7 +137,7 @@ void gui_display_devotional(void)
  *   void
  */
 
-void showSBVerseList(void)
+void gui_show_sb_verseList(void)
 {
 	showSBGroup(groupnum7);
 	changegroupnameSB(settings.groupName, groupnum7);
@@ -166,7 +166,7 @@ gboolean gui_display_dictlex_in_viewer(char *mod_name, char *key)
 		gtk_notebook_set_page(GTK_NOTEBOOK(
 			verse_list_notebook), 2);
 		sprintf(settings.groupName, "%s", "Viewer");
-		showSBVerseList();
+		gui_show_sb_verseList();
 		text = get_dictlex_text(mod_name, key);
 		if(text) {
 			entry_display(sv->html_viewer_widget, mod_name,
@@ -177,6 +177,7 @@ gboolean gui_display_dictlex_in_viewer(char *mod_name, char *key)
 	}
 	return FALSE;
 }
+
 
 /******************************************************************************
  * Name
@@ -323,7 +324,7 @@ void gui_display_verse_list(gchar * key, gchar * module_name,
 	gui_display_html(vl_html, utf8str, strlen(utf8str));
 	gui_end_html(vl_html);
 	
-	showSBVerseList();
+	gui_show_sb_verseList();
 	gtk_notebook_set_page(GTK_NOTEBOOK
 				(verse_list_notebook), 0);
 	if(first_key) {

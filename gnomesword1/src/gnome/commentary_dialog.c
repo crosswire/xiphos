@@ -892,7 +892,10 @@ void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 		}		
 		tmp = g_list_next(tmp);
 	}
-	gui_open_commentary_dialog(mod_name);
+	if(is_personal_comment(mod_name))
+		gui_open_commentary_editor(mod_name);
+	else
+		gui_open_commentary_dialog(mod_name);
 	strcpy(cur_vc->key, key);
 	display(cur_vc, cur_vc->key);
 	update_controls(cur_vc);
