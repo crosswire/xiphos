@@ -14,10 +14,10 @@ IDL_GENERATED = 		\
 
 
 $(IDL_GENERATED): $(SPELL_IDL)
-	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(srcdir)/Spell.idl
+	$(ORBIT_IDL) $(BONOBO_IDL_INCLUDES) $(top_builddir)/src/main/Spell.idl
 
 libmain_a_SOURCES =  \
-    $(SPELL_IDL_GENERATED)\
+    $(IDL_GENERATED)\
     bibletext.c bibletext.h \
     commentary.c commentary.h \
     configs.c configs.h \
