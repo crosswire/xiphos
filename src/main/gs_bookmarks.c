@@ -253,7 +253,7 @@ on_ctree_select_row(GtkCList * clist,
 				     cell[2])->text;
 		gtk_widget_set_sensitive(new_widget,         FALSE);
 		gtk_widget_set_sensitive(insert_item_widget, FALSE);
-		gotoBookmarkSWORD(modName, key);
+		change_module_and_key(modName, key);
 	} else {
 		gtk_widget_set_sensitive(new_widget,         TRUE);
 		gtk_widget_set_sensitive(insert_item_widget, TRUE);
@@ -499,8 +499,8 @@ on_add_bookmark_activate(GtkMenuItem * menuitem,
 	gchar *modName, *key;
 	
 	node = (GtkCTreeNode *)user_data;
-	modName = getmodnameSWORD(settings->whichwindow);
-	key = getmodkeySWORD(settings->whichwindow);
+	modName = get_module_name(settings);
+	key = get_module_key(settings);
 	addbookmarktotree(node, modName, key);
 }
 
@@ -630,8 +630,8 @@ void on_point_to_here_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    NULL);
 	if( gnome_dialog_run (GNOME_DIALOG (yes_no_dialog)) ) return;
 	
-	modName = getmodnameSWORD(settings->whichwindow);
-	key     = getmodkeySWORD (settings->whichwindow);
+	modName = get_module_name(settings);
+	key     = get_module_key(settings);
 
 	cell1 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[1]);
 	cell2 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[2]);

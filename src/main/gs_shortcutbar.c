@@ -195,15 +195,15 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 
 	if (show) {
 		if (GTK_TOGGLE_BUTTON(p_so->ckbCommentary)->active) {
-			gotoBookmarkSWORD(p_so->module_name, key);
+			change_module_and_key(p_so->module_name, key);
 		}
 
 		else if (GTK_TOGGLE_BUTTON(p_so->ckbPerCom)->active) {
-			gotoBookmarkSWORD(p_so->module_name, key);
+			change_module_and_key(p_so->module_name, key);
 		}
 
 		else if (GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {
-			gotoBookmarkSWORD(p_so->module_name, key);
+			change_module_and_key(p_so->module_name, key);
 		}
 
 		else
@@ -1054,7 +1054,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 				gint sbtype;
 				sbtype = backend_sb_type_from_modname(modName);
 				if (sbtype == 0 || sbtype == 1)
-					gotoBookmarkSWORD(modName,
+					change_module_and_key(modName,
 							  settings->
 							  currentverse);
 				else if (sbtype == 3) {
@@ -1062,19 +1062,19 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 					    (GTK_NOTEBOOK
 					     (settings->
 					      workbook_lower), 1);
-					gotoBookmarkSWORD(modName,
+					change_module_and_key(modName,
 							  NULL);
 				}
 
 				else
-					gotoBookmarkSWORD(modName,
+					change_module_and_key(modName,
 							  settings->
 							  dictkey);
 			}
 
 			if (group_num == groupnum1) {
 				if (havebible) {
-					gotoBookmarkSWORD(modName,
+					change_module_and_key(modName,
 							  settings->
 							  currentverse);
 				}
@@ -1082,7 +1082,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 			if (group_num == groupnum2) {
 				if (havecomm) {
-					gotoBookmarkSWORD(modName,
+					change_module_and_key(modName,
 							  settings->
 							  currentverse);
 					gtk_notebook_set_page
@@ -1093,7 +1093,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 
 			if (group_num == groupnum3) {
 				if (havedict) {
-					gotoBookmarkSWORD(modName,
+					change_module_and_key(modName,
 							  settings->
 							  dictkey);
 					gtk_notebook_set_page
@@ -1108,7 +1108,7 @@ on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
 			}
 
 			if (group_num == groupnum8) {
-				gotoBookmarkSWORD(modName, NULL);
+				change_module_and_key(modName, NULL);
 				gtk_notebook_set_page(GTK_NOTEBOOK
 						      (settings->
 						       workbook_lower),
@@ -1170,7 +1170,7 @@ srlink_clicked(GtkHTML * html, const gchar * url, SETTINGS * s)
 			modbuf = s->MainWindowModule;
 		}
 		buf = g_strdup(newref);
-		gotoBookmarkSWORD(modbuf, buf);
+		change_module_and_key(modbuf, buf);
 		g_free(buf);
 	}
 }

@@ -41,12 +41,25 @@
 #include "commentary.h"
 #include "shortcutbar.h"
 #include "gs_viewcomm_dlg.h"
-//#include <gtkhtml/gtkhtml.h>
 
 extern SETTINGS *settings;
 extern gboolean isrunningVC;  
 
 GList *comm_list;
+static gboolean display_change = TRUE;
+
+static void on_notebookCOMM_switch_page(GtkNotebook * notebook,
+				 GtkNotebookPage * page,
+				 gint page_num, GList * cl);
+				 
+				 
+void gui_set_commentary_page_and_key(gint page_num, gchar *key)
+{
+	display_change = FALSE;
+	gtk_notebook_set_page(GTK_NOTEBOOK(settings->notebookCOMM), page_num);
+	backend_displayinCOMM(page_num,key);
+	display_change = TRUE;
+}
 
 static
 COMM_DATA *getCOMM(GList * cl)
@@ -71,23 +84,20 @@ COMM_DATA *getCOMM(GList * cl)
 static
 void on_notebookCOMM_switch_page(GtkNotebook * notebook,
 				 GtkNotebookPage * page,
-				 gint page_num, GList * comm_list)
+				 gint page_num, GList * cl)
 {
-	COMM_DATA *c, *c_old;
-	// c_old = (COMM_DATA *) g_list_nth_data(comm_list, settings->gbsLastPage);
-	c = (COMM_DATA *) g_list_nth_data(comm_list, page_num);
+	COMM_DATA *c;
+	
+	c = (COMM_DATA *) g_list_nth_data(cl, page_num);
 
 	sprintf(settings->CommWindowModule, "%s", c->modName);
-/*
-    if (settings->finddialog) {
-	gnome_dialog_close(g_old->find_dialog->dialog);
-	searchGS_FIND_DLG(g, FALSE, settings->findText);
-    }
-    */
+
 	settings->commLastPage = page_num;
-	if ((c->key == NULL) && (settings->currentverse != NULL))
-		backend_displayinCOMM(c->modnum,
-				      settings->currentverse);
+	if(display_change) {
+		if ((c->key == NULL) && (settings->currentverse != NULL))
+			backend_displayinCOMM(c->modnum,
+					      settings->currentverse);
+	}
 	GTK_CHECK_MENU_ITEM(c->showtabs)->active = settings->comm_tabs;
 }
 
@@ -111,7 +121,9 @@ static void setPageCOMM(gchar * modname, GList * comm_list,
 	s->commLastPage = page;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(s->notebookCOMM),
 				   s->comm_tabs);
-}/****  popup menu call backs  ****/
+}
+
+/****  popup menu call backs  ****/
 
 static
 void on_copy_activate(GtkMenuItem * menuitem, COMM_DATA * c)
@@ -427,6 +439,9 @@ on_button_release_event(GtkWidget * widget,
 {
 	extern gboolean in_url;
 	gchar *key;
+	
+	settings->whichwindow = COMMENTARY_WINDOW;
+	
 	switch (event->button) {
 	case 1:
 		if (!in_url) {
@@ -443,7 +458,7 @@ on_button_release_event(GtkWidget * widget,
 					display_dictlex_in_viewer(dict, key,
 							   settings);
 				if (settings->inDictpane)
-					gotoBookmarkSWORD(dict, key);
+					change_module_and_key(dict, key);
 				g_free(key);
 				if (dict)
 					g_free(dict);
