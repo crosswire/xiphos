@@ -1,7 +1,6 @@
-
 /*
  * GnomeSword Bible Study Tool
- * create_shortcutbar_search.c - create search group gui
+ * shortcutbar_search.c - create search group gui
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -29,11 +28,16 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gal/widgets/e-unicode.h>
 
-#include "gs_gnomesword.h"
-#include "gs_shortcutbar.h"
-#include "gs_html.h"
-#include "create_shortcutbar_search.h"
+
+/* frontend */
+#include "shortcutbar_main.h"
+#include "shortcutbar_search.h"
 #include "shortcutbar_viewer.h"
+
+/* main */ 
+#include "gs_gnomesword.h"
+#include "gs_html.h"
+
 
 #define HTML_START "<html><head><meta http-equiv='content-type' content='text/html; charset=utf8'></head>"
 
@@ -57,21 +61,23 @@ static 	GtkWidget *ckbCaseSensitive;
 
 /******************************************************************************
  * Name
- *    
+ *    fill_search_results_clist
  *
  * Synopsis
- *   #include "create_shortcutbar_search.h"
+ *   #include "shortcutbar_search.h"
  *
- *   	
+ *   void fill_search_results_clist(GList *glist, SEARCH_OPT *so, 
+ *							SETTINGS *s)	
  *
  * Description
- *   
+ *   display a list of keys found during search
  *
  * Return value
- *   
+ *   void
  */
 
-static void fill_search_results_clist(GList *glist, SEARCH_OPT *so, SETTINGS *s)
+static void fill_search_results_clist(GList *glist, SEARCH_OPT *so, 
+							SETTINGS *s)
 {
 	GList *tmp = NULL;
 	gchar *utf8str, buf[256];
@@ -114,15 +120,15 @@ static void fill_search_results_clist(GList *glist, SEARCH_OPT *so, SETTINGS *s)
 
 /******************************************************************************
  * Name
- *    
+ *   search_module 
  *
  * Synopsis
- *   #include ".h"
+ *   #include "shortcutbar_search.h"
  *
- *   	
+ *   void search_module(SETTINGS * s, SEARCH_OPT * so)	
  *
  * Description
- *   
+ *   begin search and display results
  *
  * Return value
  *   
@@ -136,6 +142,22 @@ static void search_module(SETTINGS * s, SEARCH_OPT * so)
 	sblist = do_search((gpointer*)so);
 	fill_search_results_clist(sblist, so, s);
 }
+
+/******************************************************************************
+ * Name
+ *    on_btnSearch_clicked
+ *
+ * Synopsis
+ *   #include "shortcutbar_search.h"
+ *
+ *   void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)	
+ *
+ * Description
+ *   prepare to begin search
+ *
+ * Return value
+ *   void
+ */
 
 static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 {	
@@ -183,8 +205,21 @@ static void on_btnSearch_clicked(GtkButton * button, SETTINGS * s)
 }
 
 /******************************************************************************
-* 
-*******************************************************************************/
+ * Name
+ *   gui_create_shortcutbar_search 
+ *
+ * Synopsis
+ *   #include "shortcutbar_search.h"
+ *
+ *   void gui_create_shortcutbar_search(GtkWidget * vp, SETTINGS * s)	
+ *
+ * Description
+ *   create search group of shortcut bar
+ *
+ * Return value
+ *   void
+ */
+
 void gui_create_shortcutbar_search(GtkWidget * vp, SETTINGS * s)
 {
 	GtkWidget *frame1;

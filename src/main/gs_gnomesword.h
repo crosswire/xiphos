@@ -56,6 +56,29 @@ extern "C" {
 
 #define CIPHER_KEY_LEN 16
  
+typedef struct _search_opt SEARCH_OPT;
+struct _search_opt {
+	GtkWidget
+	    * ckbCommentary,
+	    *ckbPerCom, 
+	    *ckbGBS, 
+	    *rbPhraseSearch;
+
+	gchar
+	    * module_name,
+	    *upper_bond, 
+	    *lower_bond, 
+	    *search_string;
+
+	gint
+	    search_type, 
+	    search_params, 
+	    found_count;
+
+	 gboolean 
+	    use_bonds, 
+	    use_lastsearch_for_bonds;
+};
 /*** function prototypes ***/
 
 void init_gnomesword(SETTINGS *settings);

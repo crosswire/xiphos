@@ -36,12 +36,12 @@
 
 /* frontend */
 #include "_bibletext.h"
+#include "shortcutbar_main.h"
 #include "shortcutbar_dialog.h"
 #include "preferences_dialog.h"
 
 /* main */ 
 #include "support.h"
-#include "gs_shortcutbar.h"
 #include "gs_gnomesword.h"
 #include "lists.h"
 
