@@ -32,7 +32,7 @@
 #include "backend/viewdict.h"
 
 #include "gui/dictlex_dialog.h"
-#include "gui/_dictlex.h"
+#include "gui/dictlex.h"
 #include "gui/cipher_key_dialog.h"
 
 #include "main/settings.h"
