@@ -44,7 +44,7 @@ extern "C" {
 	void backend_save_sb_group(char * filename, 
 				char * group_name,
 			       	int group_num, char * large_icons);
-	GList *backend_get_sb_mod_list(char * modtype);
+	//GList *backend_get_sb_mod_list(char * modtype);
 	void backend_display_sb_dictlex(char * modName,
 				char * vlist);
 	void backend_setup_viewer(GtkWidget * html_widget);

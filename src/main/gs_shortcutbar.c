@@ -523,7 +523,7 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GdkPixbuf *icon_pixbuf = NULL;
 
 	glist = NULL;
-	glist = backend_get_sb_mod_list((gchar *) user_data);
+	glist = backend_get_mod_description_list_SWORD((gchar *) user_data);
 
 	bar1 = E_SHORTCUT_BAR(shortcut_bar);
 	group_num =
@@ -574,14 +574,15 @@ void on_add_all_activate(GtkMenuItem * menuitem, gpointer user_data)
 		++number_of_items;
 		glist = g_list_next(glist);
 	}
+	g_list_free(glist);
 	savegroup(E_SHORTCUT_BAR(shortcut_bar), group_num);
 	/****  we used g_strdup to fill the list so we need to g_free each item  ****/
-	glist = g_list_first(glist);
+	/*glist = g_list_first(glist);
 	while (glist != NULL) {
 		g_free((gchar *) glist->data);
 		glist = g_list_next(glist);
 	}
-	g_list_free(glist);
+	g_list_free(glist);*/
 
 }
 
@@ -1723,7 +1724,7 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 	}
 
 	glist = NULL;
-	glist = backend_get_sb_mod_list(modtype);
+	glist = backend_get_mod_description_list_SWORD(modtype);	//backend_get_sb_mod_list(modtype);
 	while (glist != NULL) {
 		item =
 		    gtk_menu_item_new_with_label((gchar *) glist->data);
@@ -1740,13 +1741,14 @@ create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 				   (gchar *) glist->data);
 		glist = g_list_next(glist);
 	}
+	g_list_free(glist);
 	/****  we used g_strdup to fill the list so we need to g_free each item  ****/
-	glist = g_list_first(glist);
+	/*glist = g_list_first(glist);
 	while (glist != NULL) {
 		g_free((gchar *) glist->data);
 		glist = g_list_next(glist);
 	}
-	g_list_free(glist);
+	g_list_free(glist);*/
 }
 
 void gs_shortcut_model_get_item_info(GtkWidget * shortcutbar_widget,

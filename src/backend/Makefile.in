@@ -155,6 +155,8 @@ CXXFLAGS = \
 
 
 libbackend_a_SOURCES = \
+    bibletext.cpp \
+    bibletext.h \
     bookmarks.cpp \
     bookmarks.h \
     commentary.cpp \
@@ -196,12 +198,12 @@ LIBRARIES = $(noinst_LIBRARIES)
 
 libbackend_a_AR = $(AR) cru
 libbackend_a_LIBADD =
-am_libbackend_a_OBJECTS = bookmarks.$(OBJEXT) commentary.$(OBJEXT) \
-	dictlex.$(OBJEXT) display.$(OBJEXT) display_info.$(OBJEXT) \
-	gbs.$(OBJEXT) interlinear.$(OBJEXT) module_options.$(OBJEXT) \
-	properties.$(OBJEXT) search.$(OBJEXT) shortcutbar.$(OBJEXT) \
-	sword.$(OBJEXT) verselist.$(OBJEXT) viewcomm.$(OBJEXT) \
-	viewdict.$(OBJEXT) viewtext.$(OBJEXT)
+am_libbackend_a_OBJECTS = bibletext.$(OBJEXT) bookmarks.$(OBJEXT) \
+	commentary.$(OBJEXT) dictlex.$(OBJEXT) display.$(OBJEXT) \
+	display_info.$(OBJEXT) gbs.$(OBJEXT) interlinear.$(OBJEXT) \
+	module_options.$(OBJEXT) properties.$(OBJEXT) search.$(OBJEXT) \
+	shortcutbar.$(OBJEXT) sword.$(OBJEXT) verselist.$(OBJEXT) \
+	viewcomm.$(OBJEXT) viewdict.$(OBJEXT) viewtext.$(OBJEXT)
 libbackend_a_OBJECTS = $(am_libbackend_a_OBJECTS)
 
 DEFS = @DEFS@
@@ -210,10 +212,10 @@ CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
-@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bookmarks.Po $(DEPDIR)/commentary.Po \
-@AMDEP_TRUE@	$(DEPDIR)/dictlex.Po $(DEPDIR)/display.Po \
-@AMDEP_TRUE@	$(DEPDIR)/display_info.Po $(DEPDIR)/gbs.Po \
-@AMDEP_TRUE@	$(DEPDIR)/interlinear.Po \
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/bibletext.Po $(DEPDIR)/bookmarks.Po \
+@AMDEP_TRUE@	$(DEPDIR)/commentary.Po $(DEPDIR)/dictlex.Po \
+@AMDEP_TRUE@	$(DEPDIR)/display.Po $(DEPDIR)/display_info.Po \
+@AMDEP_TRUE@	$(DEPDIR)/gbs.Po $(DEPDIR)/interlinear.Po \
 @AMDEP_TRUE@	$(DEPDIR)/module_options.Po $(DEPDIR)/properties.Po \
 @AMDEP_TRUE@	$(DEPDIR)/search.Po $(DEPDIR)/shortcutbar.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sword.Po $(DEPDIR)/verselist.Po \
@@ -275,6 +277,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bibletext.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/bookmarks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/commentary.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/dictlex.Po@am__quote@

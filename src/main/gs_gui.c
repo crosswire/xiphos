@@ -894,18 +894,21 @@ void create_mainwindow(SETTINGS *s)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox32);
 	e_paned_pack1(E_PANED(hpaned1), vbox32, FALSE, TRUE);
-
-	nbTextMods = gtk_notebook_new();
-	gtk_widget_ref(nbTextMods);
-	gtk_object_set_data_full(GTK_OBJECT(s->app), "nbTextMods",
-				 nbTextMods,
+	
+	/**********************************************************************
+	 * text notebook
+	 */
+	s->notebook_text = gtk_notebook_new();
+	gtk_widget_ref(s->notebook_text);
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->notebook_text",
+				 s->notebook_text,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(nbTextMods);
-	gtk_box_pack_start(GTK_BOX(vbox32), nbTextMods, FALSE, TRUE, 0);
-	gtk_widget_set_usize(nbTextMods, -2, 31);
-	gtk_notebook_set_scrollable(GTK_NOTEBOOK(nbTextMods), TRUE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(nbTextMods));
-
+	gtk_widget_show(s->notebook_text);
+	gtk_box_pack_start(GTK_BOX(vbox32), s->notebook_text, TRUE, TRUE, 0);
+	//gtk_widget_set_usize(nbTextMods, -2, 31);
+	gtk_notebook_set_scrollable(GTK_NOTEBOOK(s->notebook_text), TRUE);
+	gtk_notebook_popup_enable(GTK_NOTEBOOK(s->notebook_text));
+/*
 	frame9 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame9);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame9",
@@ -935,7 +938,7 @@ void create_mainwindow(SETTINGS *s)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swHtmlBible),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-
+*/
 	/***  htmlTexts goes here  ***/
 
 	notebook3 = gtk_notebook_new();
@@ -1336,7 +1339,7 @@ void create_mainwindow(SETTINGS *s)
 	
 	gtk_widget_grab_focus(s->app);
 
-	add_gtkhtml_widgets(s->app);
+//	add_gtkhtml_widgets(s->app);
 
 	gtk_widget_set_usize(s->app, s->gs_width, settings->gs_hight);
 }

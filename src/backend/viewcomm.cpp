@@ -120,7 +120,7 @@ void backend_load_module_viewcomm(char *modName)
 
 	it = mgr->Modules.find(modName);	//-- find module we want to use
 	if (it != mgr->Modules.end()) {
-		mod = (*it).second;	//-- set curdictMod to new choice
+		mod = (*it).second;	//-- set mod to new choice
 		mod->SetKey("");
 		mod->Display();	//-- display new dict
 	}

@@ -50,6 +50,7 @@
 #include "gs_html.h"
 #include "gs_menu.h"
 #include "gs_shortcutbar.h"
+#include "gs_bibletext.h"
 #include "about_modules.h"
 #include "search.h"
 #include "interlinear.h"
@@ -153,6 +154,10 @@ initGnomeSword(SETTINGS * s)
 		backend_change_percom_module(s->personalcommentsmod);
 	}
 	/*
+	   setup Bible text gui 
+	 */
+	gui_setup_text(s);
+	/*
 	   setup shortcut bar 
 	 */
 	setupSB(s);
@@ -186,10 +191,11 @@ initGnomeSword(SETTINGS * s)
 	/*
 	   add pages to module notebooks 
 	 */
+	 /*
 	biblepage =
 	    addnotebookpages(lookup_widget(s->app, "nbTextMods"),
 			     biblemods, s->MainWindowModule);
-
+	*/
 	gtk_notebook_set_page(GTK_NOTEBOOK
 			      (lookup_widget(s->app, "nbPerCom")), 0);
 	/*
@@ -214,27 +220,24 @@ initGnomeSword(SETTINGS * s)
 	/*
 	   let's don't do this if we don't have at least one text module 
 	 */
+	 /*
 	if (havebible) {
 		if (biblepage == 0)
 			backend_change_text_module(s->MainWindowModule,
 						   TRUE);
-		/*
-		   get notebook 
-		 */
+		
 		notebook = lookup_widget(s->app, "nbTextMods");
 		gtk_signal_connect(GTK_OBJECT(notebook), "switch_page",
 				   GTK_SIGNAL_FUNC
 				   (on_nbTextMods_switch_page), NULL);
-		/*
-		   set notebook page 
-		 */
+		
 		gtk_notebook_set_page(GTK_NOTEBOOK(notebook),
 				      biblepage);
 		if (settings->text_tabs)
 			gtk_widget_show(notebook);
 		else
 			gtk_widget_hide(notebook);
-	}
+	}*/
 
 	//if (usepersonalcomments) {
 		
@@ -303,6 +306,7 @@ void gnomesword_shutdown(SETTINGS * s)
 	//-- free glist
 	g_list_free(options);
 	g_list_free(s->settingslist);
+	gui_shutdown_text();
 	gui_shutdownGBS();
 	gui_shutdownDL();
 	gui_shutdownCOMM();
@@ -858,11 +862,8 @@ void change_module_and_key(gchar * module_name, gchar * key)
 
 	switch (mod_type) {
 	case TEXT_TYPE:
-		page_num =
-		    backend_get_module_page(module_name, TEXT_MODS);
-		notebook = lookup_widget(settings->app, "nbTextMods");
-		gtk_notebook_set_page(GTK_NOTEBOOK(notebook), page_num);
-		change_verse(key);
+		page_num = backend_get_module_page(module_name, TEXT_MODS);
+		gui_set_text_page_and_key(page_num, key);
 		break;
 	case COMMENTARY_TYPE:
 		page_num =
@@ -893,7 +894,7 @@ void set_module_global_options(gchar * option, gint window,
 		on_off = "Off";
 	}
 
-	backend_set_global_option(window, option, on_off);
+	
 
 	switch (window) {
 	case MAIN_TEXT_WINDOW:
@@ -956,7 +957,7 @@ void set_module_global_options(gchar * option, gint window,
 			backend_text_module_change_verse(settings->
 							 currentverse);
 		}
-
+		backend_set_text_global_option(option, on_off);
 		break;
 
 	case INTERLINEAR_WINDOW:
@@ -984,8 +985,12 @@ void set_module_global_options(gchar * option, gint window,
 		if (!strcmp(option, "Greek Accents")) {
 			settings->greekaccentsint = choice;
 		}
-
-		if (settings->dockedInt && havebible)	/* display change */
+		
+		backend_set_interlinear_global_option(option, on_off);
+		/* 
+		   display change 
+		 */
+		if (settings->dockedInt && havebible)	
 			update_interlinear_page(settings);
 		else
 			update_interlinear_page_detached(settings);
@@ -998,16 +1003,18 @@ void set_module_global_options(gchar * option, gint window,
 void change_verse(gchar * key)
 {
 	gchar *val_key;
-	gint cur_chapter = 8,	/* keep up with current chapter */
-	 cur_verse = 28;	/* keep up with current verse */
+	gint cur_chapter = 8,	
+	 cur_verse = 28;	
 	gchar s1[255];
 
 	val_key = backend_get_valid_key(key);
 	sprintf(current_verse, "%s", val_key);
 	g_warning(val_key);
 	ApplyChange = FALSE;
-	/* change main window */
-	if (havebible) { //changemain && 
+	/* 
+	   change main window 
+	 */
+	if (havebible) {
 		if (addhistoryitem) {
 			if (strcmp
 			    (settings->currentverse,
@@ -1041,7 +1048,7 @@ void change_verse(gchar * key)
 				   (lookup_widget
 				    (settings->app,
 				     "cbeFreeformLookup")), val_key);
-		backend_text_module_change_verse(val_key);
+		gui_display_text(val_key);
 	}
 	changemain = TRUE;
 
@@ -1057,4 +1064,13 @@ void change_verse(gchar * key)
 	ApplyChange = TRUE;
 }
 
+void save_module_key(gchar *mod_name, gchar * key)
+{		
+	backend_save_module_key(mod_name, key);
+	
+	/*
+	   FIXME: we need to display change
+	 */
+
+}
 /*****   end of file   ******/
