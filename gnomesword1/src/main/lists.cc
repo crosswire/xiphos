@@ -76,9 +76,6 @@ GList *get_list(gint type)
 	case PERCOMM_LIST:
 		return mod_lists->percommods;
 		break;
-	case BOOKS_LIST:
-		return mod_lists->bible_books;
-		break;
 	case OPTIONS_LIST:
 		return mod_lists->options;
 		break;
@@ -109,7 +106,6 @@ void main_init_lists(void)
 	mods.comm_descriptions = NULL;
 	mods.dict_descriptions = NULL;
 	mods.book_descriptions = NULL;
-	mods.bible_books = NULL;
 
 	settings.havebible = FALSE;
 	settings.havecomm = FALSE;
@@ -118,7 +114,6 @@ void main_init_lists(void)
 	settings.havepercomm = FALSE;
 	
 	if(backend) {
-		mods.bible_books = backend->fill_Bible_books(2);
 		mods.options = backend->get_module_options();
 	} else {
 		start_backend = TRUE;
@@ -226,11 +221,4 @@ void main_shutdown_list(void)
 		    g_list_next(mod_lists->devotionmods);
 	}
 	g_list_free(mod_lists->devotionmods);
-
-	while (mod_lists->bible_books != NULL) {
-		g_free((char *) mod_lists->bible_books->data);
-		mod_lists->bible_books =
-		    g_list_next(mod_lists->bible_books);
-	}
-	g_list_free(mod_lists->bible_books);
 }

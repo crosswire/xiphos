@@ -29,7 +29,9 @@ extern "C" {
 void gui_undock_parallel_page(void);
 void gui_btnDockInt_clicked(GtkButton *button, gpointer user_data);
 GtkWidget *gui_create_parallel_dialog(void);
-
+void gui_set_parallel_navbar(const char * key);
+void gui_keep_parallel_dialog_in_sync(void);
+	
 #ifdef __cplusplus
 }
 #endif

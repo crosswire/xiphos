@@ -71,7 +71,7 @@ public:
 	void init_language_map(void);
 	void setup_displays(void);
 
-	GList *fill_Bible_books(int testament);
+	//GList *fill_Bible_books(int testament);
 	GList *get_module_options(void);
 	int has_global_option(char *mod_name, char *option);
 	void set_cipher_key(char * mod_name, char * key);

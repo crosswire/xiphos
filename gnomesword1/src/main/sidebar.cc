@@ -469,8 +469,7 @@ static void add_books_to_bible(GtkTreeModel * model, GtkTreeIter iter,
 	
 	gtk_tree_store_set(GTK_TREE_STORE(model), &iter,
 			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened, -1);
-	if (backend->module_has_testament(mod_name, 1)) {		
-		//tmp = get_list(BOOKS_LIST);
+	if (backend->module_has_testament(mod_name, 1)) {
 		while(j < key.BMAX[0]) {
 			buf = g_convert((const char *)key.books[0][j].name,
 				     -1,

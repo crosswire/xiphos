@@ -96,8 +96,6 @@ void frontend_init(void)
 	 * get and load books of the Bible 
 	 */
 	main_navbar_fill_book_combo(navbar_main);
-	/*gtk_combo_set_popdown_strings(GTK_COMBO(widgets.cb_books),
-				      get_list(BOOKS_LIST));*/
 	/*
 	 *  setup sidebar
 	 */
