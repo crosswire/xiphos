@@ -44,6 +44,9 @@
 #include "backend/shortcutbar.h"
 
 
+using namespace sword;
+
+
 /******************************************************************************
  * Name
  *   backend_save_sb_iconsize

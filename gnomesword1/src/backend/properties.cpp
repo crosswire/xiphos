@@ -31,6 +31,8 @@
 
 #include "main/settings.h"
 
+using namespace sword;
+
 static char *isON(bool value)
 {
 	if (value)

@@ -30,6 +30,8 @@
 
 #include <gnome.h>
 
+using namespace sword;
+
 #include "backend/bibletext_.h"
 #include "backend/sword_defs.h"
 
