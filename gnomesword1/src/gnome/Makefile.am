@@ -67,5 +67,6 @@ gnomesword_1_0_SOURCES =  \
     
 gnomesword_1_0_LDADD = \
     $(GNOME_LIBS)\
+    $(PSPELL_LIBS) \
     $(top_builddir)/src/main/libmain.a \
     $(top_builddir)/src/backend/libbackend.a
