@@ -1,0 +1,41 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:572: checking for a BSD compatible install
+configure:625: checking whether build environment is sane
+configure:682: checking whether make sets ${MAKE}
+configure:728: checking for working aclocal
+configure:741: checking for working autoconf
+configure:754: checking for working automake
+configure:767: checking for working autoheader
+configure:780: checking for working makeinfo
+configure:868: checking for gnome-config
+configure:905: checking if /usr/bin/gnome-config works
+configure:913: checking for orbit-config
+configure:949: checking for orbit-idl
+configure:983: checking for working ORBit environment
+configure:1019: checking for gnorba libraries
+configure:1123: checking for gcc
+configure:1236: checking whether the C compiler (gcc  ) works
+configure:1252: gcc -o conftest    conftest.c  1>&5
+configure:1278: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:1283: checking whether we are using GNU C
+configure:1311: checking whether gcc accepts -g
+configure:1343: checking for POSIXized ISC
+configure:1365: checking how to run the C preprocessor
+configure:1445: checking for ANSI C header files
+configure:1560: checking what warning flags to pass to the C compiler
+configure:1592: checking what language compliance flags to pass to the C compiler
+configure:1617: checking for pthread_create in -lpthread
+configure:1841: checking for gtk-config
+configure:1876: checking for GTK - version >= 1.2.0
+configure:1977: gcc -o conftest -g -O2 -Wall -Wunused -Wmissing-prototypes -Wmissing-declarations  -I/usr/lib/glib/include -I/usr/X11R6/include   conftest.c -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic -lgmodule -lglib -ldl -lXi -lXext -lX11 -lm  1>&5
+configure:2080: checking for SmcSaveYourselfDone in -lSM
+configure:2128: checking for X11/SM/SMlib.h
+configure:2176: checking for XpmFreeXpmImage in -lXpm
+configure:2231: checking for c++
+configure:2263: checking whether the C++ compiler (c++  ) works
+configure:2279: c++ -o conftest   -I/usr/lib/glib/include -I/usr/X11R6/include  conftest.C  1>&5
+configure:2305: checking whether the C++ compiler (c++  ) is a cross-compiler
+configure:2310: checking whether we are using GNU C++
+configure:2338: checking whether c++ accepts -g
