@@ -66,8 +66,8 @@ AC_HAVE_HEADERS(stdlib.h unistd.h string.h errno.h stdio.h sys/stat.h ctype.h ge
 
 
 dnl Languages which your application supports
-dnl ALL_LINGUAS="en"
-dnl AM_GNOME_GETTEXT
+ALL_LINGUAS="en de sk"
+AM_GNOME_GETTEXT
 
 dnl Initialize xml-i18n-tools
 dnl AM_PROG_XML_I18N_TOOLS
@@ -260,6 +260,7 @@ AM_CONDITIONAL(SHORTCUTBAR_SPELL,test "x$have_speller" = xyes)
 
 AC_OUTPUT([
 Makefile
+intl/Makefile
 po/Makefile.in
 help/Makefile
 macros/Makefile
