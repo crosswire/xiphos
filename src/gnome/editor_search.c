@@ -32,6 +32,8 @@
 #include "gui/editor_search.h"
 #include "gui/editor.h"
 
+#define RUN_DIALOG(name,title) run_dialog ((GnomeDialog ***)&ecd-> name ## _dialog, ecd->html, (DialogCtor) gs_editor_ ## name ## _dialog_new, title)
+
 struct _GSHTMLSearchDialog {
 	GnomeDialog *dialog;
 	GtkHTML     *html;
@@ -227,7 +229,7 @@ void gs_editor_search_dialog_destroy (GSHTMLSearchDialog *d)
 void search (GSHTMLEditorControlData *ecd, 
 				gboolean regular, gchar *text)
 {
-	RUN_DIALOG (search, regular ? _("Find Regular Expression") :  _("Find"));
+	RUN_DIALOG(search, regular ? _("Find Regular Expression") :  _("Find"));
 	
 	if (ecd->search_dialog)
 		ecd->search_dialog->regular = regular;

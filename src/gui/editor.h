@@ -30,8 +30,6 @@ typedef struct _GSHTMLEditorControlData GSHTMLEditorControlData;
 
 typedef GnomeDialog ** (*DialogCtor)(GtkHTML *html);
 
-#define RUN_DIALOG(name,title) run_dialog ((GnomeDialog ***)&ecd-> name ## _dialog, ecd->html, (DialogCtor) gs_editor_ ## name ## _dialog_new, title)
-
 struct _GSHTMLEditorControlData {
 	GtkHTML *html;
 	GtkWidget *htmlwidget;

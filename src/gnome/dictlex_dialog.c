@@ -502,6 +502,7 @@ void gui_dictionary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 			dlg->key = key;
 			gtk_entry_set_text(GTK_ENTRY(dlg->entry),
 								key);
+			gdk_window_raise(dlg->dialog->window);
 			return;
 		}		
 		tmp = g_list_next(tmp);

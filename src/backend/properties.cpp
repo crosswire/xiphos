@@ -186,19 +186,6 @@ int backend_load_properties(char *path)
 	    atoi(settingsInfo["User Options"]["showbookmarksgroup"].
 		 c_str());
 		 
-	settings.bibletext_in_dialog =
-	    atoi(settingsInfo["Show Bookmarks"]["Bibletext Dialog"].
-		 c_str());
-	settings.commentary_in_dialog =
-	    atoi(settingsInfo["Show Bookmarks"]["Commentary Dialog"].
-		 c_str());
-	settings.dictionary_in_dialog =
-	    atoi(settingsInfo["Show Bookmarks"]["Dictionary Dialog"].
-		 c_str());
-	settings.book_in_dialog =
-	    atoi(settingsInfo["Show Bookmarks"]["General Book Dialog"].
-		 c_str());
-		 
 	settings.interlinearpage =
 	    atoi(settingsInfo["User Options"]["interlinearpage"].
 		 c_str());
@@ -438,16 +425,6 @@ int backend_save_properties(int shutdown)
 		    isON(settings.showcomms);
 		settingsInfo["User Options"]["showdicts"] =
 		    isON(settings.showdicts);
-		    
-		 
-		settingsInfo["Show Bookmarks"]["Bibletext Dialog"] = 
-			isON(settings.bibletext_in_dialog);
-		settingsInfo["Show Bookmarks"]["Commentary Dialog"] = 
-			isON(settings.commentary_in_dialog);		 
-		settingsInfo["Show Bookmarks"]["Dictionary Dialog"] = 
-			isON(settings.dictionary_in_dialog);		 
-		settingsInfo["Show Bookmarks"]["General Book Dialog"] = 
-			isON(settings.book_in_dialog);
 		 
 		/* editor options */
 		settingsInfo["Editor Options"]["Use StudyPad"] =
@@ -640,11 +617,6 @@ int backend_create_properties(void)
 	settingsInfo["User Options"]["showtexts"] = "1";
 	settingsInfo["User Options"]["showcomms"] = "1";
 	settingsInfo["User Options"]["showdicts"] = "1";
-	
-	settingsInfo["Show Bookmarks"]["Bibletext Dialog"] = "0";
-	settingsInfo["Show Bookmarks"]["Commentary Dialog"] = "0";		 
-	settingsInfo["Show Bookmarks"]["Dictionary Dialog"] = "0";		 
-	settingsInfo["Show Bookmarks"]["General Book Dialog"] = "0";
 		
 	settingsInfo["Editor Options"]["Use StudyPad"] = "1";
 	settingsInfo["Editor Options"]["showeditbar studypad"] = "1";

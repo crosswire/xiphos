@@ -826,6 +826,7 @@ void gui_commentary_dialog_goto_bookmark(gchar * mod_name, gchar * key)
 			strcpy(vc->key, key);
 			display(vc, vc->key);
 			update_controls(vc);
+			gdk_window_raise(vc->dialog->window);
 			return;
 		}		
 		tmp = g_list_next(tmp);
