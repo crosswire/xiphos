@@ -146,8 +146,8 @@ gint setDiretory(void)
 	/* set gSwordDir to $home + .GnomeSword */
 	gSwordDir = g_new(char, strlen(homedir) + strlen(".GnomeSword") + 2);	
 	sprintf(gSwordDir, "%s/%s", homedir, ".GnomeSword");
-	/* set bookmarks dir to swbmDir + .sword/bookmarks */
-	sprintf(swDir, "%s/%s",homedir,".sword/bookmarks/");
+	
+	sprintf(swDir, "%s/%s",homedir,".sword/bookmarks/");/* for compatability */
 	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
 	gsbmDir = g_new(char, strlen(homedir) + strlen(".GnomeSword/bookmarks") + 2);
 	sprintf(gsbmDir, "%s/%s",homedir,".GnomeSword/bookmarks/");
