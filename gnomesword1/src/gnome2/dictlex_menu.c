@@ -488,7 +488,8 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 		    gtk_menu_item_new_with_label(_("View Current Book"));
 		gtk_widget_show(current_book);
 		gtk_container_add(GTK_CONTAINER(file_menu), current_book);
-		
+		if(!settings.havebook)
+			gtk_widget_set_sensitive(current_book, FALSE);
 		view_text =
 		    gtk_menu_item_new_with_label(_("Open Module"));
 		gtk_widget_show(view_text);
