@@ -40,6 +40,22 @@
 extern gboolean ApplyChange;
 
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 {
 	if (ApplyChange) {
@@ -50,6 +66,22 @@ static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 		change_verse(buf);
 	}
 }
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
 
 static gboolean
 on_spbChapter_button_release_event(GtkWidget * widget,
@@ -78,6 +110,22 @@ on_spbChapter_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 static gboolean
 on_spbVerse_button_release_event(GtkWidget * widget,
 				 GdkEventButton * event,
@@ -104,6 +152,22 @@ on_spbVerse_button_release_event(GtkWidget * widget,
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 {
 	gchar *buf;
@@ -111,6 +175,22 @@ static void on_btnLookup_clicked(GtkButton * button, gpointer user_data)
 	buf = gtk_entry_get_text(GTK_ENTRY(settings.cbeFreeformLookup));
 	change_verse(buf);	//-- change verse to entry text 
 }
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
 
 static gboolean
 on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
@@ -128,16 +208,63 @@ on_cbeFreeformLookup_key_press_event(GtkWidget * widget,
 	return FALSE;
 }
 
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   
+ */ 
+
 static void on_btnBack_clicked(GtkButton * button, gpointer user_data)
 {
 	historynav(settings.app, 0);
 }
+
+/******************************************************************************
+ * Name
+ *   on_btnFoward_clicked
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   void on_btnFoward_clicked(GtkButton * button, gpointer user_data)	
+ *
+ * Description
+ *   go forward through history list 
+ *
+ * Return value
+ *   void
+ */ 
 
 static void on_btnFoward_clicked(GtkButton * button, gpointer user_data)
 {
 	historynav(settings.app, 1);
 }
 
+/******************************************************************************
+ * Name
+ *   gui_create_nav_toolbar
+ *
+ * Synopsis
+ *   #include "toolbar_nav.h"
+ *
+ *   GtkWidget *gui_create_nav_toolbar(void)	
+ *
+ * Description
+ *    create the Bible text navigation toolbar and return it
+ *
+ * Return value
+ *   GtkWidget *
+ */ 
 
 GtkWidget *gui_create_nav_toolbar(void)
 {
