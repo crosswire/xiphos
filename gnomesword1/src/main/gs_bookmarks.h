@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-#include "settings.h"
+#include "main/settings.h"
 
 typedef struct _bmtree BM_TREE;
 struct _bmtree {
@@ -77,4 +77,6 @@ void
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_BOOKMARKS_H_ */
+
+#endif
+

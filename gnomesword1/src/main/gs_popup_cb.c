@@ -32,24 +32,21 @@
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
 
-/* frontend */
-#include "interlinear_dialog.h"
-#include "cipher_key_dialog.h"
-#include "_editor.h"
-#include "commentary_dialog.h"
-#include "dictlex_dialog.h"
+#include "gui/interlinear_dialog.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/_editor.h"
+#include "gui/commentary_dialog.h"
+#include "gui/dictlex_dialog.h"
 
-/* main */ 
-#include "gs_popup_cb.h"
-#include "gs_html.h"
-#include "gs_gnomesword.h"
-#include "gs_bookmarks.h"
-#include "gs_interlinear.h"
-#include "support.h"
-#include "settings.h"
+#include "main/gs_popup_cb.h"
+#include "main/gs_html.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_bookmarks.h"
+#include "main/gs_interlinear.h"
+#include "main/support.h"
+#include "main/settings.h"
 
-/* backend */
-#include "sword.h"
+#include "backend/sword.h"
 
 /* is commentary window set to scroll with text window */
 gboolean autoscroll;

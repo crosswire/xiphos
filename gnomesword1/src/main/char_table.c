@@ -22,9 +22,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#include "char_table.h"
-#include "string.h"
-#include "debug.h"
+#include <string.h>
+#include "main/char_table.h"
+#include "main/debug.h"
 
 
 Tchar_entity ascii_charset[] = {

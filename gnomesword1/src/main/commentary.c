@@ -25,23 +25,20 @@
 
 #include <gnome.h>
 
-/* frontend */
-#include "_commentary.h"
-#include "commentary_dialog.h"
-#include "cipher_key_dialog.h"
-#include "shortcutbar_main.h"
+#include "gui/_commentary.h"
+#include "gui/commentary_dialog.h"
+#include "gui/cipher_key_dialog.h"
+#include "gui/shortcutbar_main.h"
 
-/* main */
-#include "commentary.h"
-#include "settings.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
-#include "shortcutbar.h"
+#include "main/commentary.h"
+#include "main/settings.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
 
-/* backend */
-#include "sword.h"
-#include "commentary_.h"
-#include "viewcomm.h"
+#include "backend/shortcutbar.h"
+#include "backend/sword.h"
+#include "backend/commentary_.h"
+#include "backend/viewcomm.h"
 
 /******************************************************************************
  * externs

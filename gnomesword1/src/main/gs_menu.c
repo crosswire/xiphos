@@ -24,14 +24,14 @@
 #endif
 
 #include <gnome.h>
-#include "gs_gnomesword.h"
-#include "gs_menu.h"
-#include "sword.h"
-#include "gs_popup_cb.h"
-#include "gs_html.h"
-#include "support.h"
-#include "gs_bookmarks.h"
-#include "settings.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_menu.h"
+#include "backend/sword.h"
+#include "main/gs_popup_cb.h"
+#include "main/gs_html.h"
+#include "main/support.h"
+#include "main/gs_bookmarks.h"
+#include "main/settings.h"
 
 GtkWidget *module_options_menu;
 gint	greekpage,

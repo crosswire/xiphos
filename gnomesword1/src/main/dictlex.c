@@ -27,21 +27,18 @@
 #include <gtkhtml/gtkhtml.h>
 
 
-/* backend */
-#include "sword.h"
-#include "dictlex_.h"
-#include "viewdict.h"
-#include "dictlex_dialog.h"
+#include "backend/sword.h"
+#include "backend/dictlex_.h"
+#include "backend/viewdict.h"
 
-/* gnome */
-#include "_dictlex.h"
-#include "cipher_key_dialog.h"
+#include "gui/dictlex_dialog.h"
+#include "gui/_dictlex.h"
+#include "gui/cipher_key_dialog.h"
 
-/* main */
-#include "settings.h"
-#include "dictlex.h"
-#include "gs_gnomesword.h"
-#include "gs_html.h"
+#include "main/settings.h"
+#include "main/dictlex.h"
+#include "main/gs_gnomesword.h"
+#include "main/gs_html.h"
 
 /******************************************************************************
  * externs

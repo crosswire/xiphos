@@ -60,5 +60,5 @@ void changeverseHistory(gint historynum);
 }
 #endif
 
-#endif /* __GS_HISTORY_H_ */
+#endif
 

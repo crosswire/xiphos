@@ -27,11 +27,12 @@ extern "C" {
 #endif
 	
 /* main */
-#include "settings.h"	
+#include "main/settings.h"	
 
 typedef struct _commdata COMM_DATA;
-/* gnome */
-#include "commentary_find.h"
+
+#include "gui/commentary_find.h"
+
 struct _commdata {
 	GtkWidget *html;
 	GtkWidget *frame;
@@ -69,5 +70,6 @@ void setup_viewcomm(GtkWidget * text);
 #ifdef __cplusplus
 }
 #endif
-#endif				/* __GS_COMMENTARY_H_ */
-/******  end of file  ******/
+
+#endif
+
