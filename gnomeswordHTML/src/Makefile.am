@@ -4,7 +4,10 @@ INCLUDES =  \
     $(EXTRA_PRINT_CFLAGS) \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
-    $(SWORD_CPPFLAGS)
+    $(SWORD_CPPFLAGS) \
+    -I$(top_srcdir)/html \
+        -I /usr/include/gtkhtml 
+    
     
 bin_PROGRAMS = gnomesword
 
@@ -50,8 +53,6 @@ COMMON_SOURCE =  \
     gs_html.h \
     sw_utility.cpp\
     sw_utility.h \
-    gs_toolbarEditor.c \
-    gs_toolbarEditor.h\
     printstuff.c \
     printstuff.h \
     gs_gbfhtml.cpp \
@@ -76,7 +77,8 @@ gnomesword_LDADD = \
     $(SWORD_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS)\
-    $(GNOME_APP_LIBS)
+    $(GNOME_APP_LIBS)\
+    $(top_builddir)/html/libhtmleditor.a
     
 if SPELLING
 gnomesword_SOURCES = \

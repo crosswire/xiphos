@@ -62,6 +62,7 @@
 #include "gs_html.h"
 #include "gs_search.h"
 #include "gs_abouts.h"
+#include "gs_editor.h"
 #include "sw_utility.h"
 
 /***********************************************************************************************
@@ -161,6 +162,9 @@ extern gboolean addhistoryitem; /* do we need to add item to history */
 extern gchar *mycolor;
 extern GString *gs_clipboard;
 extern gboolean firstsearch;
+extern GtkWidget *htmlComments;
+//extern EDITOR *ed1;
+
 
 /***********************************************************************************************
  *initSwrod to setup all the Sword stuff
@@ -194,7 +198,7 @@ initSWORD(GtkWidget *mainform)
 	curcomMod     = NULL;
 	curdictMod      = NULL; 	
 	percomMod     = NULL;
-	
+	 
 	chapDisplay     = 0;// set in create
 	entryDisplay    = 0;// set in create
 	comp1Display    = 0;// set in create
@@ -235,12 +239,12 @@ initSWORD(GtkWidget *mainform)
 	GTKEntryDisp::__initialize();
 //	chapDisplay = new HTMLChapDisp(lookup_widget(mainform,"moduleText"));	
 //	comDisplay = new  GTKEntryDisp(lookup_widget(mainform,"textCommentaries"));
-	percomDisplay = new  ComEntryDisp(lookup_widget(mainform,"htmlComments"));
+	percomDisplay = new  ComEntryDisp(htmlComments);
 
 	HTMLchapDisplay = new GTKhtmlChapDisp(lookup_widget(mainform,"htmlTexts"));
 	HTMLDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlCommentaries"));
 	comp1Display = new InterlinearDisp(lookup_widget(mainform,"textComp1"));
-	FPNDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlComments"));
+	FPNDisplay = new GtkHTMLEntryDisp(htmlComments);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(mainform,"htmlDict"));
 	compages = 0;
 	dictpages = 0;
@@ -731,13 +735,13 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
 {
  	if(editbuttonactive){
 		percomMod->Disp(percomDisplay);
-		gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
+		//gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
         } else {	
 		if(settings->formatpercom) {
 			percomMod->Disp(FPNDisplay);
 		}
-		gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
+		//gtk_widget_hide(lookup_widget(MainFrm,"sbNotes"));//-- hide comments status bar
 	}
 	percomMod->Display(); 	
 }

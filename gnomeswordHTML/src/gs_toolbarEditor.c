@@ -76,7 +76,8 @@ static void
 on_btnStrikeout_toggled                (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-
+	strikeoutHTML(GTK_WIDGET(togglebutton) , 
+			lookup_widget( GTK_WIDGET(togglebutton),(gchar *) user_data));
 }
 
 
@@ -418,6 +419,16 @@ setup_font_size_option_menu (GtkHTML*html)
 	return option_menu;
 }
 
+static GnomeUIInfo editor_toolbar_alignment_group[] = {
+	GNOMEUIINFO_ITEM_STOCK (N_("Left align"), N_("Left justifies the paragraphs"),
+				on_btnAlignLeft_toggled, GNOME_STOCK_PIXMAP_ALIGN_LEFT),
+	GNOMEUIINFO_ITEM_STOCK (N_("Center"), N_("Centers justifies the paragraphs"),
+				on_btnAlignCenter_toggled, GNOME_STOCK_PIXMAP_ALIGN_CENTER),
+	GNOMEUIINFO_ITEM_STOCK (N_("Right align"), N_("Right justifies the paragraphs"),
+				on_btnAlignRight_toggled, GNOME_STOCK_PIXMAP_ALIGN_RIGHT),
+	GNOMEUIINFO_END
+};
+
 
 GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
 {
@@ -501,6 +512,11 @@ GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
   gtk_widget_show (vseparator14);
   gtk_toolbar_append_widget (GTK_TOOLBAR (tbHTMLEdit), vseparator14, NULL, NULL);
   gtk_widget_set_usize (vseparator14, 9, 14);
+
+	btnAlignLeft = editor_toolbar_alignment_group[0].widget;
+	btnAlignCenter = editor_toolbar_alignment_group[1].widget;
+	btnAlignRight = editor_toolbar_alignment_group[2].widget;
+/*
   tmp_toolbar_icon = gnome_stock_pixmap_widget (mainwindow, GNOME_STOCK_PIXMAP_ALIGN_LEFT);
   btnAlignLeft = gtk_toolbar_append_element (GTK_TOOLBAR (tbHTMLEdit),
                                 GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
@@ -536,7 +552,7 @@ GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "btnAlignRight", btnAlignRight,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (btnAlignRight);
-
+*/
   vseparator15 = gtk_vseparator_new ();
   gtk_widget_ref (vseparator15);
   gtk_object_set_data_full (GTK_OBJECT (mainwindow), "vseparator15", vseparator15,
@@ -585,6 +601,7 @@ GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
   gtk_signal_connect (GTK_OBJECT (btnStrikeout), "toggled",
                       GTK_SIGNAL_FUNC (on_btnStrikeout_toggled),
                       html);
+		      /*
   gtk_signal_connect (GTK_OBJECT (btnAlignLeft), "toggled",
                       GTK_SIGNAL_FUNC (on_btnAlignLeft_toggled),
                       html);
@@ -594,6 +611,7 @@ GtkWidget *HTMLtoolbar_create(GtkWidget *mainwindow, gchar *html)
   gtk_signal_connect (GTK_OBJECT (btnAlignRight), "toggled",
                       GTK_SIGNAL_FUNC (on_btnAlignRight_toggled),
                       html);
+		      */
   gtk_signal_connect (GTK_OBJECT (btnIndent), "clicked",
                       GTK_SIGNAL_FUNC (on_btnIndent_clicked),
                       html);

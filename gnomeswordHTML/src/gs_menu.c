@@ -173,8 +173,8 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 		*menuBible,
 		*menuhtmlcom;	
 	
-	menu2 = create_pmInt(biblelist, "textComp1");
-	menu5 = create_pmEditnote(app, percomlist);
+	menu2 = create_pmInt(biblelist, "textComp1"); 
+	//menu5 = create_pmEditnote(app, percomlist);
 	/* create pop menu for commentaries */
 	menuhtmlcom = create_pmCommentsHtml(commentarylist);	
 	/* create popup menu for dict/lex window */
@@ -184,7 +184,7 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 		
 	/* attach popup menus */
 	gnome_popup_menu_attach(menu2,lookup_widget(app,"textComp1"),(gchar*)"1");	
-	gnome_popup_menu_attach(menu5,lookup_widget(app,"htmlComments"),(gchar*)"1");	
+	//gnome_popup_menu_attach(menu5,lookup_widget(app,"htmlComments"),(gchar*)"1");	
 	GTK_CHECK_MENU_ITEM (lookup_widget(menuDict,"show_tabs1"))->active = settings->showdicttabs;
 	gnome_popup_menu_attach(menuBible,lookup_widget(app,"htmlTexts"),(gchar*)"1");
 	gnome_popup_menu_attach(menuhtmlcom,lookup_widget(app,"htmlCommentaries"),(gchar*)"1");
@@ -918,25 +918,25 @@ static GnomeUIInfo pmEditnote_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, "Italic",
 	 "Make selected text Italic",
-	 on_italicNE_activate, NULL, NULL,
+	 on_italicNE_activate, "htmlComments", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, "Reference",
 	 "Make selected text a reference",
-	 on_referenceNE_activate, NULL, NULL,
+	 on_referenceNE_activate, "htmlComments", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, "Underline",
 	 "Underline selected text",
-	 on_underlineNE_activate, NULL, NULL,
+	 on_underlineNE_activate, "htmlComments", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM, "Greek",
 	 "Use greek font",
-	 on_greekNE_activate, NULL, NULL,
+	 on_greekNE_activate, "htmlComments", NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, 0, NULL},
 	GNOMEUIINFO_SEPARATOR,
