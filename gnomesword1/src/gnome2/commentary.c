@@ -487,6 +487,7 @@ void gui_lookup_comm_selection(GtkMenuItem * menuitem,
 static void edit_percomm(GtkMenuItem * menuitem, gpointer user_data)
 {
 //	gui_open_commentary_editor((gchar *) user_data);
+	main_dialogs_open((gchar *)user_data, (gchar *)settings.currentverse);
 }
 
 /******************************************************************************
