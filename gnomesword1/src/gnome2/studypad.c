@@ -51,6 +51,12 @@
 
 GSHTMLEditorControlData *editor_cd;
 
+void screen_changed(GtkWidget *widget, GdkScreen *arg1, gpointer user_data)
+{
+	g_warning("screen_changed");
+	
+}
+	
 
 /******************************************************************************
  * Name
@@ -650,7 +656,12 @@ GtkWidget *gui_create_studypad_control(GtkWidget * container,
 			   (specd->htmlwidget),
 			   "load_done",
 			   G_CALLBACK(html_load_done), specd);
-*/			   
+*/			  
+
+	gtk_signal_connect(GTK_OBJECT
+			   (specd->htmlwidget),
+			   "screen-changed",
+			   G_CALLBACK(screen_changed), specd);
 	g_signal_connect(G_OBJECT(specd->htmlwidget),"key_press_event",
 			   G_CALLBACK(html_key_pressed), 
 			   specd);
