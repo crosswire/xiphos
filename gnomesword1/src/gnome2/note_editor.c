@@ -1158,21 +1158,19 @@ static void on_replace_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-static void set_link_to_module(gchar * linkref, gchar * linkmod,
-			       DIALOG_DATA * d)
+static void set_link_to_module(gchar * linktext, gchar * linkref, 
+			       gchar * linkmod, DIALOG_DATA * d)
 {
-
-#ifdef USE_GTKHTML30
 	GSHTMLEditorControlData * ecd = (GSHTMLEditorControlData *) d->editor;
 	const gchar *url;
 	const gchar *text;
 	gchar *target;
 	gchar *url_copy;
 	gchar buf[256];
-	HTMLEngine *e;
-	HTMLObject *new_link;
+//	HTMLEngine *e;
+	gchar *new_link = NULL;
 
-	e = ecd->html->engine;
+//	e = ecd->html->engine;
 	
 	if (strlen(linkmod))
 		sprintf(buf, "sword://%s/%s", linkmod, linkref);
@@ -1186,19 +1184,11 @@ static void set_link_to_module(gchar * linkref, gchar * linkmod,
 		url_copy =
 		    target ? g_strndup(url,
 				       target - url) : g_strdup(url);
-		new_link =
-		    html_link_text_new(text,
-				       GTK_HTML_FONT_STYLE_DEFAULT,
-				       html_colorset_get_color(e->
-							settings->
-							color_set,
-							HTMLLinkColor),
-				       url_copy, target);
-		html_engine_paste_object(e, new_link,
-					 g_utf8_strlen(text, -1));
+		new_link = g_strdup_printf("<a href=\"%s\">%s</a>",url_copy,linktext);
+		gtk_html_insert_html(ecd->html,new_link);
 		g_free(url_copy);
+		g_free(new_link);
 	}
-#endif
 }
 
 /******************************************************************************
@@ -1234,9 +1224,11 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	//info->stock_icon = GTK_STOCK_ADD;
 	info->label_top = str->str;
 	info->text1 = g_strdup("");
-	info->label1 = N_("Reference: ");
+	info->label1 = N_("Link text: ");
 	info->text2 = g_strdup("");
-	info->label2 = N_("Module: ");
+	info->label2 = N_("Reference: ");
+	info->text3 = g_strdup("");
+	info->label3 = N_("Module: ");
 	info->ok = TRUE;
 	info->cancel = TRUE;
 	/*
@@ -1247,13 +1239,16 @@ static void on_link_activate(GtkMenuItem * menuitem,
 		buf =
 		    html_engine_get_selection_string(ecd->html->engine);
 		info->text1 = g_strdup(buf);
+		info->text2 = g_strdup(buf);
 	}
-	info->text2 = g_strdup(xml_get_value("modules", "bible"));//settings.MainWindowModule);
+	info->text3 = g_strdup(xml_get_value("modules", "bible"));//settings.MainWindowModule);
 	/*** open dialog to get name for list ***/
 	test = gui_gs_dialog(info);
 	if (test == GS_OK) {
 		if (strlen(info->text1) > 0) {
-			set_link_to_module(info->text1, info->text2,
+			set_link_to_module(info->text1, 
+					info->text2, 
+					info->text3,
 					   d);
 			ecd->changed = TRUE;
 			gui_update_statusbar(ecd);
@@ -1261,6 +1256,7 @@ static void on_link_activate(GtkMenuItem * menuitem,
 	}
 	g_free(info->text1);
 	g_free(info->text2);
+	g_free(info->text3);
 	g_free(info);
 	g_string_free(str,TRUE);
 }
