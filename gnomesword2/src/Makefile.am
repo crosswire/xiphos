@@ -1,0 +1,2 @@
+
+SUBDIRS = backend gnome main 
