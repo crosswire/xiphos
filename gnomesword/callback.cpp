@@ -43,7 +43,7 @@
 #include "spellcheck.h"
 #endif /* USE_ASPELL */
 
-bool noteModified = FALSE;
+
 bool firstsearch = TRUE;
 GtkWidget *searchDlg;
 extern bool ApplyChange;
@@ -54,7 +54,10 @@ extern gchar	*font_mainwindow,
 							*font_interlinear,
 							*font_currentverse;
 extern GdkColor myGreen;  //-- current verse color for main text window - declared in display.cpp
-
+extern bool noteModified;
+extern bool waitonmessage;
+//extern gboolean saveChanges;
+extern gboolean autoSave; //-- auto save personal comments when verse changes -- declared in GnomeSword.cpp
 //-------------------------------------------------------------------------------------------
 void
 on_mnuHistoryitem1_activate            (GtkMenuItem     *menuitem,
@@ -526,26 +529,16 @@ on_moduleText_button_press_event       (GtkWidget       *widget,
 }
 
 //----------------------------------------------------------------------------------------------
-void
+void                  //-- commentary notebook page changed
 on_notebook1_switch_page               (GtkNotebook     *notebook,
                                         GtkNotebookPage *page,
                                         gint             page_num,
                                         gpointer         user_data)
 {
-	GtkLabel *label;
-	GtkWidget *toolbar;
+	GtkLabel *label; //-- pointer to page label
 
-	toolbar = lookup_widget(GTK_WIDGET(notebook),"handlebox16");
-	label = (GtkLabel *)page->tab_label;
-	if(page_num == 0)
-	{
-		gtk_widget_show (toolbar);
-	}
-	else
-	{
-		gtk_widget_hide(toolbar);
-	}
-	changcurcomModSWORD((char *)label->label);
+	label = (GtkLabel *)page->tab_label; //-- get label
+	changcurcomModSWORD((char *)label->label); //-- pass label text to function to do the work - GnomeSword.cpp
 }
 
 //----------------------------------------------------------------------------------------------
@@ -571,16 +564,19 @@ void
 on_btnEditNote_toggled                 (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
-	if(GTK_TOGGLE_BUTTON(togglebutton)->active)
+	editnoteSWORD(GTK_TOGGLE_BUTTON(togglebutton)->active);
+/*	if(
 	{
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(GTK_WIDGET(togglebutton),"textComments")), TRUE);	
 		noteModified = FALSE;
+		
 	}
 	else
 	{
 		gtk_text_set_editable (GTK_TEXT (lookup_widget(GTK_WIDGET(togglebutton),"textComments")), FALSE);
 		//if(noteModified) ;
 	}
+*/
 	//setsensitive(togglebutton->active);
 }
 
@@ -591,9 +587,10 @@ on_btnSaveNote_clicked                 (GtkButton       *button,
 {	
 	if(GTK_TOGGLE_BUTTON(lookup_widget(GTK_WIDGET(button),"btnEditNote"))->active)
 	{
+		//saveChanges = true; //-- we know we want to save the changes - that's how we got here
 		savenoteSWORD(noteModified);
 	}	
-	noteModified = FALSE;
+	//noteModified = false;
 }
 
 //----------------------------------------------------------------------------------------------
@@ -1339,3 +1336,29 @@ on_btnSpellNotes_clicked               (GtkButton       *button,
 }
 
 
+//----------------------------------------------------------------------------------------------
+void
+on_fpMainwindowitalic_font_set         (GnomeFontPicker *gnomefontpicker,
+                                        GString        arg1,
+                                        gpointer         user_data)
+{
+
+}
+//----------------------------------------------------------------------------------------------
+void
+save_changes_handler         (int reply, gpointer data)
+{
+  /*if(reply == 0) saveChanges = true;
+  else saveChanges = false;
+  waitonmessage = false;
+*/
+}
+
+//----------------------------------------------------------------------------------------------
+void
+on_auto_save_notes1_activate			(GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	if(GTK_CHECK_MENU_ITEM(menuitem)->active) autoSave = true;
+	else autoSave = false;
+}
