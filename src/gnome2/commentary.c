@@ -348,21 +348,15 @@ static void create_commentary_pane(COMM_DATA * c)
 	c->frame = gtk_frame_new(NULL);
 	gtk_widget_show(c->frame);
 	gtk_container_add(GTK_CONTAINER(c->vbox), c->frame);
+	gtk_frame_set_shadow_type(GTK_FRAME(c->frame),GTK_SHADOW_NONE);
 
 	vbox57 = gtk_vbox_new(FALSE, 0);;
 	gtk_widget_show(vbox57);
 	gtk_container_add(GTK_CONTAINER(c->frame), vbox57);
-/*
-	c->frame_toolbar = gtk_frame_new(NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (c->frame_toolbar), GTK_SHADOW_NONE);
-	gtk_box_pack_start(GTK_BOX(vbox57), 
-				c->frame_toolbar, FALSE, TRUE, 0);
-*/
+	
 	frame_comm = gtk_frame_new(NULL);
 	gtk_widget_show(frame_comm);
 	gtk_box_pack_start(GTK_BOX(vbox57), frame_comm, TRUE, TRUE, 0);
-
-
 
 	scrolledwindowCOMMhtml = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowCOMMhtml);
