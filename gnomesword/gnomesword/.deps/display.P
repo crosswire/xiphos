@@ -210,9 +210,7 @@ display.o: display.cpp /usr/include/gnome.h \
  /usr/include/gdk-pixbuf/gdk-pixbuf.h \
  /usr/include/gdk-pixbuf/gdk-pixbuf-features.h \
  ../widgets/shortcut-bar/../../e-util/e-canvas.h \
- ../widgets/shortcut-bar/e-shortcut-model.h \
- ../widgets/e-paned/e-hpaned.h ../widgets/e-paned/e-paned.h \
- GnomeSword.h
+ ../widgets/shortcut-bar/e-shortcut-model.h GnomeSword.h
 display.cpp :
 /usr/include/gnome.h :
 /usr/lib/gnome-libs/include/gnomesupport.h :
@@ -533,6 +531,4 @@ interface.h :
 /usr/include/gdk-pixbuf/gdk-pixbuf-features.h :
 ../widgets/shortcut-bar/../../e-util/e-canvas.h :
 ../widgets/shortcut-bar/e-shortcut-model.h :
-../widgets/e-paned/e-hpaned.h :
-../widgets/e-paned/e-paned.h :
 GnomeSword.h :

@@ -271,10 +271,13 @@ GtkWidget*
 SearchWindow::create()
 {
 
+
+
   dlgSearch = gnome_dialog_new ("GnomeSword - Search", NULL);
   gtk_object_set_data (GTK_OBJECT (dlgSearch), "dlgSearch", dlgSearch);
   gtk_container_set_border_width (GTK_CONTAINER (dlgSearch), 4);
   GTK_WINDOW (dlgSearch)->type = GTK_WINDOW_DIALOG;
+  gtk_window_set_policy (GTK_WINDOW (dlgSearch), TRUE, TRUE, TRUE);
 
   dialog_vbox1 = GNOME_DIALOG (dlgSearch)->vbox;
   gtk_object_set_data (GTK_OBJECT (dlgSearch), "dialog_vbox1", dialog_vbox1);
@@ -301,14 +304,14 @@ SearchWindow::create()
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "hbox4", hbox4,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (hbox4);
-  gtk_box_pack_start (GTK_BOX (searchPanel), hbox4, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (searchPanel), hbox4, FALSE, TRUE, 0);
 
   toolbar24 = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
   gtk_widget_ref (toolbar24);
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "toolbar24", toolbar24,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (toolbar24);
-  gtk_box_pack_start (GTK_BOX (hbox4), toolbar24, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox4), toolbar24, FALSE, TRUE, 0);
   gtk_widget_set_usize (toolbar24, -2, 27);
   gtk_toolbar_set_button_relief (GTK_TOOLBAR (toolbar24), GTK_RELIEF_NONE);
 
@@ -431,7 +434,7 @@ SearchWindow::create()
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "frame20", frame20,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (frame20);
-  gtk_box_pack_start (GTK_BOX (searchPanel), frame20, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (searchPanel), frame20, FALSE, TRUE, 0);
 
   hbox17 = gtk_hbox_new (FALSE, 0);
   gtk_widget_ref (hbox17);
@@ -470,7 +473,7 @@ SearchWindow::create()
   gtk_object_set_data_full (GTK_OBJECT (dlgSearch), "table6", table6,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (table6);
-  gtk_box_pack_start (GTK_BOX (searchPanel), table6, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (searchPanel), table6, FALSE, TRUE, 0);
 
   label82 = gtk_label_new ("Lower bounds");
   gtk_widget_ref (label82);
@@ -516,7 +519,6 @@ SearchWindow::create()
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (scrolledwindow2);
   gtk_box_pack_start (GTK_BOX (searchPanel), scrolledwindow2, TRUE, TRUE, 0);
-  gtk_widget_set_usize (scrolledwindow2, -2, 185);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow2), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
   resultList = gtk_clist_new (1);
@@ -525,7 +527,7 @@ SearchWindow::create()
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (resultList);
   gtk_container_add (GTK_CONTAINER (scrolledwindow2), resultList);
-  gtk_widget_set_usize (resultList, -2, 185);
+  gtk_widget_set_usize (resultList, -2, 87);
   gtk_clist_set_column_width (GTK_CLIST (resultList), 0, 80);
   gtk_clist_column_titles_hide (GTK_CLIST (resultList));
 
@@ -542,7 +544,7 @@ SearchWindow::create()
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (scrolledwindow20);
   gtk_box_pack_start (GTK_BOX (searchPanel), scrolledwindow20, FALSE, TRUE, 0);
-  gtk_widget_set_usize (scrolledwindow20, -2, 87);
+  gtk_widget_set_usize (scrolledwindow20, -2, 72);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow20), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
   txtSearch = gtk_text_new (NULL, NULL);

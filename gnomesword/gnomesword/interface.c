@@ -22,8 +22,6 @@
 
 #include  <widgets/shortcut-bar/e-shortcut-bar.h>
 
-#include <widgets/e-paned/e-hpaned.h>
-
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 
 #define NUM_SHORTCUT_TYPES 3
@@ -33,7 +31,7 @@ gchar *shortcut_types[NUM_SHORTCUT_TYPES] =
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] =
 {
-	"GnomeSword.png", "GnomeSword.png", "GnomeSword.png"
+	"gnomesword/GnomeSword.png", "gnome-word.png", "gnomesword/GnomeSword.png"
 };
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
 
@@ -49,9 +47,9 @@ static GdkPixbuf *icon_callback  (EShortcutBar *shortcut_bar,
 
 
 
-static void add_test_groups (EShortcutBar *shortcut_bar);
-static void add_test_group (EShortcutBar *shortcut_bar, gint i,
-			    gchar *group_name);
+//static void add_test_groups (EShortcutBar *shortcut_bar);
+/*static void add_test_group (EShortcutBar *shortcut_bar, gint i,
+			    gchar *group_name); */
 // static gint get_random_int (gint max);
 
 /*static void show_standard_popup (EShortcutBar *shortcut_bar,
@@ -109,7 +107,7 @@ icon_callback (EShortcutBar *shortcut_bar,
 
 	return NULL;
 }
-
+/*
 static void
 add_test_groups (EShortcutBar *shortcut_bar)
 {
@@ -118,23 +116,19 @@ add_test_groups (EShortcutBar *shortcut_bar)
 	add_test_group (shortcut_bar, 3, "Dict/Lex");
 //	add_test_group (shortcut_bar, 5, "Incredibly Long Shortcuts");
 }
-
-
+*/
+/*
 static void
 add_test_group (EShortcutBar *shortcut_bar, gint i, gchar *group_name)
 {
-	gint group_num;    //, item_num;
-	//gchar buffer[128];
-	//gint shortcut_type;
-
-	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1,
-						group_name);
-
+	gint group_num;
 	
-		e_shortcut_bar_set_view_type (shortcut_bar, group_num,
+	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1,
+						group_name); 	
+    e_shortcut_bar_set_view_type (shortcut_bar, group_num,
 					      E_ICON_BAR_SMALL_ICONS);
-
 }
+*/
 /*
 static void
 show_standard_popup (EShortcutBar *shortcut_bar,
@@ -2282,7 +2276,7 @@ create_mainwindow (void)
 			icon_pixbufs[i] = NULL;
 	}
 
-	add_test_groups (E_SHORTCUT_BAR (shortcut_bar));
+	//add_test_groups (E_SHORTCUT_BAR (shortcut_bar));
 
 	gtk_signal_connect (GTK_OBJECT (shortcut_bar), "item_selected",
 			    GTK_SIGNAL_FUNC (on_shortcut_bar_item_selected),
@@ -2771,10 +2765,14 @@ create_dlgSettings (void)
   GtkWidget *cbtnShowCOMtabs;
   GtkWidget *cbtnShowDLtabs;
   GtkWidget *label123;
+  GtkWidget *vbox29;
+  GtkWidget *cbtnShowTextgroup;
+//  GtkWidget *cbtnShowComGroup;
+//  GtkWidget *cbtnShowDictGroup;
+  GtkWidget *label124;
   GtkWidget *hbox24;
   GtkWidget *cbtnPNformat;
   GtkWidget *label122;
-  GtkWidget *pixmap6;
   GtkWidget *dialog_action_area9;
   GtkWidget *btnPropertyboxOK;
   GtkWidget *btnPropertyboxApply;
@@ -2801,7 +2799,6 @@ create_dlgSettings (void)
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (pixmap5);
   gtk_box_pack_start (GTK_BOX (hbox22), pixmap5, TRUE, TRUE, 0);
-  gtk_misc_set_padding (GTK_MISC (pixmap5), 5, 0);
 
   notebook7 = gtk_notebook_new ();
   gtk_widget_ref (notebook7);
@@ -2875,6 +2872,41 @@ create_dlgSettings (void)
   gtk_widget_show (label123);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 1), label123);
 
+  vbox29 = gtk_vbox_new (FALSE, 0);
+  gtk_widget_ref (vbox29);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "vbox29", vbox29,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (vbox29);
+  gtk_container_add (GTK_CONTAINER (notebook7), vbox29);
+
+  cbtnShowTextgroup = gtk_check_button_new_with_label ("Show Bible Text Group in Shortcut Bar");
+  gtk_widget_ref (cbtnShowTextgroup);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowTextgroup", cbtnShowTextgroup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (cbtnShowTextgroup);
+  gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowTextgroup, FALSE, FALSE, 0);
+/*
+  cbtnShowComGroup = gtk_check_button_new_with_label ("Show Commentary Group in Shortcut Bar");
+  gtk_widget_ref (cbtnShowComGroup);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowComGroup", cbtnShowComGroup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (cbtnShowComGroup);
+  gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowComGroup, FALSE, FALSE, 0);
+
+  cbtnShowDictGroup = gtk_check_button_new_with_label ("Show Dict/Lex Group in Shortcut bar");
+  gtk_widget_ref (cbtnShowDictGroup);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "cbtnShowDictGroup", cbtnShowDictGroup,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (cbtnShowDictGroup);
+  gtk_box_pack_start (GTK_BOX (vbox29), cbtnShowDictGroup, FALSE, FALSE, 0);
+*/
+  label124 = gtk_label_new ("Shortcut Bar");
+  gtk_widget_ref (label124);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label124", label124,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label124);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 2), label124);
+
   hbox24 = gtk_hbox_new (FALSE, 0);
   gtk_widget_ref (hbox24);
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "hbox24", hbox24,
@@ -2894,15 +2926,7 @@ create_dlgSettings (void)
   gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label122", label122,
                             (GtkDestroyNotify) gtk_widget_unref);
   gtk_widget_show (label122);
-  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 2), label122);
-
-  pixmap6 = create_pixmap (dlgSettings, "gnomesword/sword.xpm", FALSE);
-  gtk_widget_ref (pixmap6);
-  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "pixmap6", pixmap6,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  gtk_widget_show (pixmap6);
-  gtk_box_pack_start (GTK_BOX (hbox22), pixmap6, TRUE, TRUE, 0);
-  gtk_misc_set_padding (GTK_MISC (pixmap6), 9, 0);
+  gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook7), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook7), 3), label122);
 
   dialog_action_area9 = GNOME_DIALOG (dlgSettings)->action_area;
   gtk_object_set_data (GTK_OBJECT (dlgSettings), "dialog_action_area9", dialog_action_area9);
@@ -2948,6 +2972,15 @@ create_dlgSettings (void)
   gtk_signal_connect (GTK_OBJECT (cbtnShowDLtabs), "toggled",
                       GTK_SIGNAL_FUNC (on_cbtnShowDLtabs_toggled),
                       NULL);
+  gtk_signal_connect (GTK_OBJECT (cbtnShowTextgroup), "toggled",
+                      GTK_SIGNAL_FUNC (on_cbtnShowTextgroup_toggled),
+                      NULL); /*
+  gtk_signal_connect (GTK_OBJECT (cbtnShowComGroup), "toggled",
+                      GTK_SIGNAL_FUNC (on_cbtnShowComGroup_toggled),
+                      NULL);
+  gtk_signal_connect (GTK_OBJECT (cbtnShowDictGroup), "toggled",
+                      GTK_SIGNAL_FUNC (on_cbtnShowDictGroup_toggled),
+                      NULL);*/
   gtk_signal_connect (GTK_OBJECT (cbtnPNformat), "toggled",
                       GTK_SIGNAL_FUNC (on_cbtnPNformat_toggled),
                       NULL);
@@ -4132,7 +4165,7 @@ create_pmEditnote (void)
 
   return pmEditnote;
 }
-
+/*
 GnomeUIInfo pmComments_uiinfo[] =
 {
   GNOMEUIINFO_MENU_COPY_ITEM (on_copy3_activate, "textCommentaries"),
@@ -4213,6 +4246,115 @@ create_pmComments (void)
   gtk_widget_ref (pmComments_uiinfo[5].widget);
   gtk_object_set_data_full (GTK_OBJECT (pmComments), "show_tabs1",
                             pmComments_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  return pmComments;
+}*/
+
+
+GnomeUIInfo view_module1_menu_uiinfo[] =
+{
+  GNOMEUIINFO_SEPARATOR,
+  GNOMEUIINFO_END
+};
+
+GnomeUIInfo pmComments_uiinfo[] =
+{
+  GNOMEUIINFO_MENU_COPY_ITEM (on_copy3_activate, "textCommentaries"),
+  {
+    GNOME_APP_UI_ITEM, "Goto Reference",
+    "Go to the selected reference",
+    on_goto_reference2_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "Lookup Selection",
+    "Lookup selection in current Dict/Lex",
+    on_lookup_selection2_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_ITEM, "About this module",
+    "Show information about this moduel",
+    on_about_this_module6_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_TOGGLEITEM, "Auto Scroll",
+    NULL,
+    on_auto_scroll1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_TOGGLEITEM, "Show Tabs",
+    "Show notebook tabs",
+    on_show_tabs1_activate, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  {
+    GNOME_APP_UI_SUBTREE, "View Module",
+    NULL,
+    view_module1_menu_uiinfo, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL,
+    0, 0, NULL
+  },
+  GNOMEUIINFO_END
+};
+
+GtkWidget*
+create_pmComments (void)
+{
+  GtkWidget *pmComments;
+
+  pmComments = gtk_menu_new ();
+  gtk_object_set_data (GTK_OBJECT (pmComments), "pmComments", pmComments);
+  gnome_app_fill_menu (GTK_MENU_SHELL (pmComments), pmComments_uiinfo,
+                       NULL, FALSE, 0);
+
+  gtk_widget_ref (pmComments_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "copy6",
+                            pmComments_uiinfo[0].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmComments_uiinfo[1].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "goto_reference",
+                            pmComments_uiinfo[1].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmComments_uiinfo[2].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "lookup_selection2",
+                            pmComments_uiinfo[2].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmComments_uiinfo[3].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "about_this_module6",
+                            pmComments_uiinfo[3].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmComments_uiinfo[4].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "auto_scroll1",
+                            pmComments_uiinfo[4].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (pmComments_uiinfo[4].widget), TRUE);
+
+  gtk_widget_ref (pmComments_uiinfo[5].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "show_tabs1",
+                            pmComments_uiinfo[5].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (pmComments_uiinfo[6].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "view_module1",
+                            pmComments_uiinfo[6].widget,
+                            (GtkDestroyNotify) gtk_widget_unref);
+
+  gtk_widget_ref (view_module1_menu_uiinfo[0].widget);
+  gtk_object_set_data_full (GTK_OBJECT (pmComments), "separator22",
+                            view_module1_menu_uiinfo[0].widget,
                             (GtkDestroyNotify) gtk_widget_unref);
 
   return pmComments;
