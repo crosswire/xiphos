@@ -1297,6 +1297,7 @@ static void clear_modules(GtkButton * button, gpointer user_data)
 	list_store = GTK_LIST_STORE(model);
 
 	info = gui_new_dialog();
+	info->title = N_("Clear List?");
 	info->label_top =
 	    N_("Do you really want to CLEAR the module list?");
 	info->yes = TRUE;
@@ -1354,6 +1355,7 @@ static void delete_module(GtkButton * button, gpointer user_data)
 	
 	
 	info = gui_new_dialog();
+	info->title = N_("Remove Module?");
 	info->label_top =
 	    N_("Do you really want to REMOVE\n the selected module?");
 	info->yes = TRUE;
@@ -1562,6 +1564,7 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 	
 	info = gui_new_dialog();
+	info->title = N_("Delete Range?");
 	info->label_top =
 	    N_("Are you sure you want ot delete this range?");
 	info->label_bottom = name_string;
@@ -1622,6 +1625,7 @@ static void delete_list(GtkButton * button, gpointer user_data)
 	gtk_tree_model_get(model, &selected, 0, &name_string, -1);
 	
 	info = gui_new_dialog();
+	info->title = N_("Delete List?");
 	info->label_top =
 	    N_("Are you sure you want ot delete this list?");
 	info->label_bottom = name_string;
@@ -2099,21 +2103,18 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *label207;
 	GtkTooltips *tooltips;
 	GObject *mod_selection;
-	gchar title[256];
 	GtkListStore *model;
 	GObject *selection_modules_lists;
 	GObject *selection_range_name;	
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 
-	sprintf(title, "%s - %s", settings.program_title, _("Search"));
-
 	tooltips = gtk_tooltips_new();
 
 	search_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_object_set_data(GTK_OBJECT(search_dialog), "search_dialog",
 			    search_dialog);
-	gtk_window_set_title(GTK_WINDOW(search_dialog), title);
+	gtk_window_set_title(GTK_WINDOW(search_dialog), _("Advanced Search"));
 	gtk_window_set_default_size(GTK_WINDOW(search_dialog), 598, 400);
 	gtk_window_set_policy(GTK_WINDOW(search_dialog), TRUE, TRUE, FALSE);
 
