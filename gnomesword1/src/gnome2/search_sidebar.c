@@ -232,11 +232,15 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 {
 	GString *str;
 	gint search_params, finds;
-	const gchar *search_string;
+	const gchar *search_string = NULL;
 	gchar *search_module;	
 	gchar search_label[80];
 	gchar *buf = N_("Search");
 	
+	search_string = gtk_entry_get_text(GTK_ENTRY(entrySearch));
+	
+	if(strlen(search_string) < 1) 
+		return;
 	
 	if (GTK_TOGGLE_BUTTON(radiobutton_search_text)->active) {
 		sprintf(search_label, "%s %s", buf,
@@ -271,7 +275,6 @@ static void on_search_botton_clicked(GtkButton * button, gpointer user_data)
 	if (GTK_TOGGLE_BUTTON(rbLastSearch)->active)
 		set_scope2last_search();
 
-	search_string = gtk_entry_get_text(GTK_ENTRY(entrySearch));
 	sprintf(settings.searchText, "%s", search_string);
 
 	settings.searchType = GTK_TOGGLE_BUTTON
@@ -630,6 +633,7 @@ void gui_create_search_sidebar(void)
 	gtk_widget_set_usize(entryUpper, 114, 22);
 	gtk_entry_set_text(GTK_ENTRY(entryUpper), _("Revelation"));
 
+	
 
 	gtk_signal_connect(GTK_OBJECT(rrbUseBounds),
 			   "toggled",
