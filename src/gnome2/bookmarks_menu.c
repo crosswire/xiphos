@@ -597,21 +597,27 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 		return;	
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected,
 				   2, &caption, 3, &key, 4, &module, -1);
-
-	if(key != NULL) 
-		is_leaf = TRUE;
-	else
-		is_leaf = FALSE;		
 	
 	info = gui_new_dialog();
-	info->title = N_("Edit?");
-	info->label_top = N_("Edit Bookmark");	
+	info->title = N_("Bookmark");
+	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
+		info->stock_icon = "gtk-open";
+		info->label_top = N_("Edit folder name");
+		info->label1 = "Folder name: ";
+		is_leaf = FALSE;		
+	}
+	else {
+		info->stock_icon = "gnome-stock-book-open";
+		info->label_top = N_("Edit bookmark");
+		info->label1 = "Bookmark name: ";
+		info->text2 = g_strdup(key);
+		info->text3 = g_strdup(module);
+		info->label2 = "Verse: ";
+		info->label3 = "Module: ";
+		is_leaf = TRUE;		
+	}
+		
 	info->text1 = g_strdup(caption);
-	info->text2 = g_strdup(key);
-	info->text3 = g_strdup(module);
-	info->label1 = "Label: ";
-	info->label2 = "Verse: ";
-	info->label3 = "Module: ";
 	info->ok = TRUE;
 	info->cancel = TRUE;
 
@@ -643,8 +649,8 @@ static void on_edit_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 		g_free(data);
 	}
 	g_free(info->text1);	// we used g_strdup() 
-	g_free(info->text2);
-	g_free(info->text3);
+	if(info->text2) g_free(info->text2);
+	if(info->text3) g_free(info->text3);
 	g_free(info);
 	g_free(caption);
 	g_free(key);
@@ -844,11 +850,19 @@ static void on_delete_item_activate(GtkMenuItem * menuitem, gpointer user_data)
 	name_string = caption;
 
 	yes_no_dialog = gui_new_dialog();
-	yes_no_dialog->title = N_("Remove Item(s)?");
-	yes_no_dialog->label_top =
-	    N_
-	    ("Really REMOVE the selected item (and all its subitems)?");
-	yes_no_dialog->label_bottom = name_string;
+	yes_no_dialog->stock_icon = "gtk-delete";
+	yes_no_dialog->title = N_("Bookmark");	
+	if(gtk_tree_model_iter_has_child(GTK_TREE_MODEL(model), &selected)) {
+		yes_no_dialog->label_top = 
+					N_("Really REMOVE the selected folder");
+		yes_no_dialog->label_middle = name_string;
+		yes_no_dialog->label_bottom = N_("(and all its contents)?");
+	}
+	else {
+		yes_no_dialog->label_top = 
+				N_("Really REMOVE the selected bookmark");
+		yes_no_dialog->label_middle = name_string;
+	}
 	yes_no_dialog->yes = TRUE;
 	yes_no_dialog->no = TRUE;
 
@@ -1004,7 +1018,8 @@ static void on_add_bookmark_activate(GtkMenuItem * menuitem,
 		key = get_module_key();		
 		data = g_new(BOOKMARK_DATA,1);
 		info = gui_new_dialog();
-		info->title = N_("Bookmark?");
+		//info->title = N_("Bookmark");
+		info->stock_icon = "gtk-add";
 		info->label_top = N_("Add Bookmark");
 		sprintf(buf, "%s, %s", key, mod_name);
 	
@@ -1089,36 +1104,39 @@ static void on_new_folder_activate(GtkMenuItem * menuitem, gpointer user_data)
 	GS_DIALOG *info;
 	BOOKMARK_DATA * data;
 	
-	if (gtk_tree_selection_get_selected(current_selection, NULL, &selected)) {		
-		t = "|";
-		info = gui_new_dialog();
-		info->title = N_("Folder Name?");
-		info->label_top = N_("Enter Folder Name - use no \'|\'");
-		info->text1 = g_strdup(_("Folder Name"));
-		info->label1 = N_("Folder: ");
-		info->ok = TRUE;
-		info->cancel = TRUE;
-		
-		data = g_new(BOOKMARK_DATA,1);
-		/*** open dialog to get name for new folder ***/
-		test = gui_gs_dialog(info);
-		if (test == GS_OK) {	
-			buf = g_strdelimit(info->text1, t, ' ');
-			data->caption = g_strdup(buf);
-			data->key = NULL; 
-			data->module = NULL; 
-			data->is_leaf = FALSE;
-			data->opened = pixbufs->pixbuf_opened;
-			data->closed = pixbufs->pixbuf_closed;			
-			add_item_to_tree(&iter,&selected, data);
-			bookmarks_changed = TRUE;
-			save_bookmarks(NULL, NULL);
-		}
-		if(data->caption) g_free(data->caption);
-		g_free(data);
-		g_free(info->text1);
-		g_free(info);
+	if(!gtk_tree_selection_get_selected(current_selection, NULL, &selected)) 
+		return;
+	
+	t = "|";
+	info = gui_new_dialog();
+	info->stock_icon = "gtk-open";
+	info->title = N_("Bookmark");
+	info->label_top = N_("Enter Folder Name");
+	info->label_middle = N_("(use no \'|\')");
+	info->text1 = g_strdup(_("Folder Name"));
+	info->label1 = N_("Folder: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	
+	data = g_new(BOOKMARK_DATA,1);
+	/*** open dialog to get name for new folder ***/
+	test = gui_gs_dialog(info);
+	if (test == GS_OK) {	
+		buf = g_strdelimit(info->text1, t, ' ');
+		data->caption = g_strdup(buf);
+		data->key = NULL; 
+		data->module = NULL; 
+		data->is_leaf = FALSE;
+		data->opened = pixbufs->pixbuf_opened;
+		data->closed = pixbufs->pixbuf_closed;			
+		add_item_to_tree(&iter,&selected, data);
+		bookmarks_changed = TRUE;
+		save_bookmarks(NULL, NULL);
 	}
+	if(data->caption) g_free(data->caption);
+	g_free(data);
+	g_free(info->text1);
+	g_free(info);
 }
 
 
