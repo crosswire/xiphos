@@ -148,11 +148,11 @@ static void save_frist_run_settings(SETTINGS_DRUID widgets)
 					 (widgets.
 					  combo_entry_devotion)));
 
-	xml_set_value("GnomeSword", "modules", "greek",
+	xml_set_value("GnomeSword", "lexicons", "greek",
 		      gtk_entry_get_text(GTK_ENTRY
 					 (widgets.entry_greek_lex)));
 
-	xml_set_value("GnomeSword", "modules", "hebrew",
+	xml_set_value("GnomeSword", "lexicons", "hebrew",
 		      gtk_entry_get_text(GTK_ENTRY
 					 (widgets.entry_hebrew_lex)));
 
