@@ -354,7 +354,6 @@ static gboolean on_button_release_event(GtkWidget * widget,
 		url = html_engine_get_link_at (GTK_HTML(t->html)->engine,
 					 event->x,
 					 event->y);
-		g_warning(url);
 		if (*url == '*') {
 			++url;
 			buf = g_strdup(url);
