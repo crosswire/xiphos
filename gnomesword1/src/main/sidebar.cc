@@ -1011,8 +1011,8 @@ gboolean main_sidebar_display_dictlex(char *mod_name, char *key)
 		gchar *text;
 		/*gtk_option_menu_set_history(GTK_OPTION_MENU
 					    (sidebar.optionmenu1), 4);*/
-		gtk_notebook_set_current_page(GTK_NOTEBOOK
-				      (widgets.notebook_sidebar), 4);
+		/*gtk_notebook_set_current_page(GTK_NOTEBOOK
+				      (widgets.notebook_sidebar), 4);*/
 		text = backend->get_render_text(mod_name, key);
 		if (text) {
 			main_entry_display(sidebar.html_viewer_widget,
