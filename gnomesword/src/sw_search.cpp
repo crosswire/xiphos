@@ -52,7 +52,6 @@
 #include "gs_editor.h"
 #include "sw_sword.h"
 #include "support.h"
-#include "sw_utility.h"
 #include "sw_verselist_sb.h"
 #include "sw_gbs.h"
 

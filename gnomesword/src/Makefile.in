@@ -194,10 +194,10 @@ COMMON_SOURCE = \
     gs_mainmenu_cb.h\
     gs_menu.c \
     gs_menu.h \
-    gs_preferences_dlg.c \
-    gs_preferences_dlg.h \
     gs_popup_cb.c \
     gs_popup_cb.h \
+    gs_preferences_dlg.c \
+    gs_preferences_dlg.h \
     gs_setup.c \
     gs_setup.h \
     gs_shortcutbar.c \
@@ -231,8 +231,6 @@ COMMON_SOURCE = \
     sw_shortcutbar.h \
     sw_sword.cpp \
     sw_sword.h \
-    sw_utility.cpp\
-    sw_utility.h \
     sw_verselist_sb.cpp \
     sw_verselist_sb.h\
     sw_viewcomm_dlg.cpp \
@@ -295,8 +293,8 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	gs_gnomesword.$(OBJEXT) gs_gui.$(OBJEXT) gs_gui_cb.$(OBJEXT) \
 	gs_history.$(OBJEXT) gs_html.$(OBJEXT) gs_info_box.$(OBJEXT) \
 	gs_information_dlg.$(OBJEXT) gs_mainmenu_cb.$(OBJEXT) \
-	gs_menu.$(OBJEXT) gs_preferences_dlg.$(OBJEXT) \
-	gs_popup_cb.$(OBJEXT) gs_setup.$(OBJEXT) \
+	gs_menu.$(OBJEXT) gs_popup_cb.$(OBJEXT) \
+	gs_preferences_dlg.$(OBJEXT) gs_setup.$(OBJEXT) \
 	gs_shortcutbar.$(OBJEXT) gs_unlockkey_dlg.$(OBJEXT) \
 	gs_viewcomm_dlg.$(OBJEXT) gs_viewdict_dlg.$(OBJEXT) \
 	gs_viewtext_dlg.$(OBJEXT) main.$(OBJEXT) support.$(OBJEXT) \
@@ -304,9 +302,8 @@ am_gnomesword_OBJECTS = spell.$(OBJEXT) spell_gui.$(OBJEXT) \
 	sw_information_dlg.$(OBJEXT) sw_module_options.$(OBJEXT) \
 	sw_properties.$(OBJEXT) sw_search.$(OBJEXT) \
 	sw_shortcutbar.$(OBJEXT) sw_sword.$(OBJEXT) \
-	sw_utility.$(OBJEXT) sw_verselist_sb.$(OBJEXT) \
-	sw_viewcomm_dlg.$(OBJEXT) sw_viewdict_dlg.$(OBJEXT) \
-	sw_viewtext_dlg.$(OBJEXT)
+	sw_verselist_sb.$(OBJEXT) sw_viewcomm_dlg.$(OBJEXT) \
+	sw_viewdict_dlg.$(OBJEXT) sw_viewtext_dlg.$(OBJEXT)
 gnomesword_OBJECTS = $(am_gnomesword_OBJECTS)
 gnomesword_DEPENDENCIES =
 gnomesword_LDFLAGS =
@@ -345,7 +342,6 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/sw_module_options.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_properties.Po $(DEPDIR)/sw_search.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_shortcutbar.Po $(DEPDIR)/sw_sword.Po \
-@AMDEP_TRUE@	$(DEPDIR)/sw_utility.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_verselist_sb.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_viewcomm_dlg.Po \
 @AMDEP_TRUE@	$(DEPDIR)/sw_viewdict_dlg.Po \
@@ -467,7 +463,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_search.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_shortcutbar.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_sword.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_utility.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_verselist_sb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_viewcomm_dlg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sw_viewdict_dlg.Po@am__quote@

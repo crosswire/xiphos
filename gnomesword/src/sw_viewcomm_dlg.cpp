@@ -40,7 +40,6 @@
 #include "sw_viewcomm_dlg.h"
 #include "sw_sword.h"
 #include "sw_display.h"
-#include "sw_utility.h"
 
 extern SETTINGS *settings;
 SWDisplay *VCDisplay;	/* to display modules in view comm dialog */

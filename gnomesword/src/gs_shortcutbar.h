@@ -58,7 +58,13 @@ struct  _search_opt{
 	void create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 				GtkWidget * shortcut_menu_widget,
 				gchar * modtype);
-
+	void gs_shortcut_model_get_item_info(GtkWidget *shortcutbar_widget,
+					gint group_num,
+					gint item_num,
+					gchar **item_url,
+					gchar **item_name);
+	gint gs_shortcut_model_get_num_items(GtkWidget *shortcutbar_widget, 
+					gint group_num);
 #ifdef __cplusplus
 }
 #endif

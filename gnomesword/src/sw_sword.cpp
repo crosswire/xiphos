@@ -70,7 +70,6 @@
 #include "gs_setup.h"
 #include "gs_shortcutbar.h"
 #include "sw_shortcutbar.h"
-#include "sw_utility.h"
 #include "sw_properties.h"
 #include "sw_bookmarks.h"
 #include "sw_verselist_sb.h"
@@ -252,7 +251,7 @@ void initSWORD(SETTINGS *s)
 	UTF8Display = new GtkHTMLChapDisp(lookup_widget(s->app, "htmlTexts"),s);
 	commDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlCommentaries"),s);
 	comp1Display = new InterlinearDisp(s->htmlInterlinear,s);
-	FPNDisplay = new EntryDisp(htmlComments,s);
+	FPNDisplay = new GtkHTMLEntryDisp(htmlComments,s);
 	dictDisplay = new GtkHTMLEntryDisp(lookup_widget(s->app, "htmlDict"),s);
 	compages = 0;
 	dictpages = 0;
@@ -1430,11 +1429,7 @@ gchar *getmodkeySWORD(gint num)
 
 }
 
-/******************************************************************************
- *navcurcomModSWORD
- * 
- * 
-******************************************************************************/
+/*** navigate the current commentary module ***/
 void navcurcomModSWORD(gint direction)	//-- navigate the current commentary module
 {
 	switch (direction) {
@@ -1450,34 +1445,26 @@ void navcurcomModSWORD(gint direction)	//-- navigate the current commentary modu
 }
 
 
-/******************************************************************************
- * returns the name of the current commentary module
- ******************************************************************************/
+/*** returns the name of the current commentary module ***/
 gchar *getcommodSWORD(void)
 {
 	return curcomMod->Name();
 }
 
-/****************************************************************************** 
- * returns the name of the current dict/lex module
- ******************************************************************************/
+/*** returns the name of the current dict/lex module ***/
 gchar *getdictmodSWORD(void)
 {
 	return curdictMod->Name();
 }
 
-/******************************************************************************
- * returns the name of the current Bible text module
- ******************************************************************************/
+/*** returns the name of the current Bible text module ***/
 gchar *gettextmodSWORD(void)
 {
 	return curMod->Name();
 }
 
 
-/******************************************************************************
- * returns the description of the current commentary module
- ******************************************************************************/
+/*** returns the description of the current commentary module ***/
 gchar *getcommodDescriptionSWORD(void)
 {
 	return (char *) curcomMod->Description();;
@@ -1505,9 +1492,7 @@ GList *getBibleBooksSWORD(void)
 	return glist;
 }
 
-/******************************************************************************
- * returns the version number of the sword libs
- ******************************************************************************/
+/*** returns the version number of the sword libs ***/
 const char *getSwordVerionSWORD(void)
 {
 	SWVersion retval;
@@ -1544,9 +1529,7 @@ void swapmodsSWORD(gchar * intmod)
 	updateinterlinearpage();
 }
 
-/******************************************************************************
- * we come here first to get module list to pass to the preferences dialog
- ******************************************************************************/
+/*** we come here first to get module list to pass to the preferences dialog ***/
 void loadpreferencemodsSWORD(void)
 {
 	GtkWidget *dlg;
@@ -1675,9 +1658,7 @@ void gs_firstrunSWORD(void)
 	delete mgr;
 }
 
-/******************************************************************************
- * the changes are already made we just need to show them
- ******************************************************************************/
+/*** the changes are already made we just need to show them ***/
 void applyfontcolorandsizeSWORD(void)
 {
 	curMod->Display();
@@ -1795,9 +1776,7 @@ void displayDevotional(void)
 	setupforDailyDevotion(settings);
 }
 
-/******************************************************************************
- * we come here to get module type - Bible text, Commentary or Dict/Lex
- ******************************************************************************/
+/*** we come here to get module type - Bible text, Commentary or Dict/Lex ***/
 gint get_mod_typeSWORD(gchar *modName)
 {
 	
