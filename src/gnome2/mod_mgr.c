@@ -789,10 +789,10 @@ static void response_refresh(void)
 
 static void response_close(void)
 {
-	gint test;
-	GS_DIALOG *yes_no_dialog;
+	//gint test;
+	//GS_DIALOG *yes_no_dialog;
 	GString *str = g_string_new(NULL);
-	if (have_changes) {
+	/*if (have_changes) {
 		yes_no_dialog = gui_new_dialog();
 		yes_no_dialog->stock_icon = GTK_STOCK_DIALOG_QUESTION;
 		g_string_printf(str,
@@ -812,7 +812,7 @@ static void response_close(void)
 			gnome_execute_shell(NULL, "gnomesword2");
 			gtk_widget_destroy(widgets.app);
 		}
-	}
+	}*/
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 	g_string_printf(str, "%s/dirlist", settings.homedir);
 	if (mod_mgr_check_for_file(str->str))
@@ -851,7 +851,6 @@ static void on_dialog_response(GtkDialog * dialog, gint response_id,
 		while (gtk_events_pending()) {
 			gtk_main_iteration();
 		}
-		
 		break;
 	case GTK_RESPONSE_REFRESH:
 		response_refresh();
@@ -1899,6 +1898,10 @@ static gboolean on_destroy(GtkWidget * widget, GdkEvent * event, gpointer data)
 	mod_mgr_shut_down();
 	while (gtk_events_pending()) {
 		gtk_main_iteration();
+	} 
+	if(have_changes) {
+		main_update_module_lists();
+		main_load_module_tree(sidebar.module_list);
 	}
 	return FALSE;
 }
