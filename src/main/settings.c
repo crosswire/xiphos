@@ -70,7 +70,14 @@ gint settings_init(void)
 	settings.gSwordDir = g_new(char, strlen(settings.homedir) +
 			strlen(".GnomeSword") + 2);
 	sprintf(settings.gSwordDir, "%s/%s", settings.homedir, ".GnomeSword");
-		
+	
+	if (access(settings.gSwordDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
+		if ((mkdir(settings.gSwordDir, S_IRWXU)) != 0) {
+			printf("can not create .GnomeSword ");	
+			/* if we can not create gSwordDir exit */
+			gtk_exit(1);
+		}
+	}	
 	
 
 	/* set bookmarks dir to homedir + .GnomeSword/bookmarks */
@@ -78,6 +85,9 @@ gint settings_init(void)
 			strlen(".GnomeSword/bookmarks") + 2);
 	sprintf(gsbmDir, "%s/%s", settings.homedir,
 			".GnomeSword/bookmarks/");
+	
+	
+	
 
 	/* shortcutbar dir */
 	settings.shortcutbarDir = g_new(char, strlen(settings.gSwordDir) +
