@@ -23,6 +23,7 @@
   */
 
 #include <gnome.h>
+#include "gs_gnomesword.h"
 #include "menustuff.h"
 #include "interface.h"
 #include "callback.h"
