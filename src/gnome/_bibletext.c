@@ -27,7 +27,7 @@
 
 /* frontend */
 #include "_bibletext.h"
-#include "_bibletext_view.h"
+#include "bibletext_dialog.h"
 #include "shortcutbar_main.h"
 #include "shortcutbar_viewer.h"
 
@@ -35,7 +35,6 @@
 #include "cipher_key_dialog.h"
 #include "bibletext.h"
 #include "gs_html.h"
-#include "bibletext_view.h"
 #include "settings.h"
 #include "lists.h"
 
@@ -345,7 +344,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	gdk_window_set_cursor(s->app->window, cursor);
 
 	if (!isrunningVT) {
-		dlg = gui_create_viewtext_dialog();
+		dlg = gui_create_bibletext_dialog();
 		isrunningVT = TRUE;
 	}
 	gtk_widget_show(dlg);
