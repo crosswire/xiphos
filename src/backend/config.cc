@@ -23,6 +23,13 @@
 #include <config.h>
 #endif
 
+#ifndef __GNUC__
+#include <io.h>
+#else
+#include <unistd.h>
+#include <unixstr.h>
+#endif
+
 #include <glib-1.2/glib.h>
 #include <swmgr.h>
 #include <markupfiltmgr.h>
@@ -49,10 +56,20 @@ using std::list;
 using namespace sword;
 
 
+struct _ExportStruct {
+  char *label;
+  char *key;
+  char *module;
+  int is_leaf;
+};
+
+typedef struct _ExportStruct ExportStruct;
+
+
 static SWConfig *config;
 static ConfigEntMap::iterator loop, end;
 
-
+list < string > bmfiles;
 
 extern SWMgr *main_mgr;
 
@@ -290,21 +307,20 @@ const char *backend_get_next_config_value(void)
 
 /******************************************************************************
  * Name
- *   
+ *   backend_save_module_key
  *
  * Synopsis
  *   #include "backend/config.hh"
  *
- *   
+ *   void backend_save_module_key(char *mod_name, char *key)
  *
  * Description
- *   
+ *   most of this code is from an example in swmgr.h sword-1.5.2
  *
  * Return value
- *   
+ *   void
  */
  
-/*** most of this code is from an example in swmgr.h sword-1.5.2 ***/
 void backend_save_module_key(char *mod_name, char *key)
 {
 	SectionMap::iterator section;
@@ -545,4 +561,202 @@ int backend_save_module_options(char * modName, char * option,
 
 	module_options.Save();
 	return true;
+}
+
+
+/******************************************************************************
+ * Name
+ *   add_section
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   void add_section(SWConfig * config,
+ *               const gchar * section, GNode * parent)
+ *
+ * Description
+ *   this function is required by backend_load_bookmarks()
+ *   - this is for compatibility with GnomeSword-0.7.x -
+ *
+ * Return value
+ *   void
+ */
+
+static void add_section(SWConfig * config,
+                const char * section, GNode * parent)
+{
+        SectionMap::iterator sit;
+        ConfigEntMap::iterator eit;
+        char * t;
+	
+        t = "|";
+        if ((sit = config->Sections.find(section)) != config->Sections.end()) {
+                for (eit = (*sit).second.begin(); eit != (*sit).second.end(); eit++) {
+			
+			ExportStruct * es = g_new (ExportStruct, 1);
+                        char *token;
+			token =
+                            strtok((char *) (*eit).second.c_str(), t);
+                        es->label = strdup(token);
+                        token = strtok(NULL, t);
+                        es->key = strdup(token);
+                        token = strtok(NULL, t);
+                        es->module = strdup(token);
+			     
+                        if (!strcmp(es->key, "GROUP")) {
+                                es->is_leaf = false;				
+			}
+                        else {
+                                es->is_leaf = true;
+			}
+			
+			GNode *node = NULL; 
+			node = g_node_append_data(parent, (ExportStruct *)es);	
+                        add_section(config, (*eit).first.c_str(),
+                                   node);
+                }
+        }
+}
+
+
+/******************************************************************************
+ * Name
+ *   backend_load_bookmarks
+ *
+ * Synopsis
+ *   #include "backend/config.hh"
+ *
+ *   GNode * backend_load_bookmarks(char *dir)
+ *
+ * Description
+ *   load bookmarks - using sword SWConfig
+ *   most of this code is form sword-1.5.2 bibleCS bookmarkfrm.cpp
+ *   - this is for compatibility with GnomeSword-0.7.x -
+ *
+ * Return value
+ *   GNode *
+ */
+
+GNode * backend_load_bookmarks(char *dir)
+{
+	SWConfig *bookmarkInfo;
+        SectionMap::iterator sit;
+        ConfigEntMap::iterator eit;
+        char *t, conffile[500];
+        DIR *directory;
+        struct dirent *ent;
+        int i;
+	int parent = 0;
+	int node = 0;
+	GNode * root_node = NULL;
+	
+	
+	/* set up root node */
+	ExportStruct * es = g_new (ExportStruct, 1);
+	es->label = strdup("Bookmarks");
+	es->key = strdup("root");
+	es->module = strdup("root");
+	es->is_leaf = false;	    
+	root_node = g_node_new((ExportStruct *)es);	
+        //root_node = g_node_insert(root_node,-1,root_node);
+	
+        t = "|";
+        sprintf(conffile, "%s/personal.conf", dir);
+        if (access(conffile, F_OK) == -1)
+                return NULL;
+        bookmarkInfo = new SWConfig(conffile);
+        if ((sit =
+             bookmarkInfo->Sections.find("ROOT")) !=
+            bookmarkInfo->Sections.end()) {
+                if ((eit =
+                     (*sit).second.begin()) != (*sit).second.end()) {
+			ExportStruct * es = g_new (ExportStruct, 1);
+                        char *token;
+                        token =
+                            strtok((char *) (*eit).second.c_str(), t);
+                        es->label = strdup(token);
+                        token = strtok(NULL, t);
+                        es->key = strdup(token);
+                        token = strtok(NULL, t);
+                        es->module = strdup(token);
+			es->is_leaf = false;  		
+			GNode * gnode = NULL;	
+                        gnode = g_node_append_data(root_node, (ExportStruct *)es);
+                        *bmfiles.insert(bmfiles.begin(), conffile);
+                        add_section(bookmarkInfo,
+                                   (*eit).first.c_str(), gnode);
+			     
+                }
+        }
+        delete bookmarkInfo;
+
+        if (directory = opendir(dir)) {
+                rewinddir(directory);
+                while ((ent = readdir(directory))) {
+                        if ((strcmp(ent->d_name, "root.conf"))
+                            && (strcmp(ent->d_name, "personal.conf"))
+                            && (strcmp(ent->d_name, "."))
+                            && (strcmp(ent->d_name, ".."))) {
+                                sprintf(conffile, "%s/%s", dir,
+                                        ent->d_name);
+                                bookmarkInfo = new SWConfig(conffile);
+                                if ((sit =
+                                     bookmarkInfo->Sections.
+                                     find("ROOT")) !=
+                                    bookmarkInfo->Sections.end()) {
+                                        if ((eit = (*sit).second.begin()) != 
+							(*sit).second.end()) {  
+                                                ExportStruct * es = g_new (ExportStruct, 1);
+						char *token;
+						token =
+						    strtok((char *) (*eit).second.c_str(), t);
+						es->label = strdup(token);
+						token = strtok(NULL, t);
+						es->key = strdup(token);
+						token = strtok(NULL, t);
+						es->module = strdup(token);
+						es->is_leaf = false;
+						GNode *node = NULL; 
+						node = g_node_append_data(root_node, (ExportStruct *)es);	
+						*bmfiles.insert(bmfiles.begin(), conffile);
+						add_section(bookmarkInfo,
+							   (*eit).first.c_str(), node);
+						
+					}
+				}
+                                delete bookmarkInfo;
+                        }
+                }
+                closedir(directory);
+        }
+	
+        sprintf(conffile, "%s/root.conf", dir);
+        if (access(conffile, F_OK) == -1)
+                return root_node;
+        bookmarkInfo = new SWConfig(conffile);
+        if ((sit =
+             bookmarkInfo->Sections.find("ROOT")) !=
+            bookmarkInfo->Sections.end()) {
+                for (eit = (*sit).second.begin();
+                     eit != (*sit).second.end(); eit++) {  
+                        ExportStruct * es = g_new (ExportStruct, 1);
+			char *token;
+			token =
+			    strtok((char *) (*eit).second.c_str(), t);
+			es->label = strdup(token);
+			token = strtok(NULL, t);
+			es->key = strdup(token);
+			token = strtok(NULL, t);
+			es->module = strdup(token);
+			es->is_leaf = true;
+			GNode *node = NULL; 
+			node = g_node_append_data(root_node, (ExportStruct *)es);	
+			*bmfiles.insert(bmfiles.begin(), conffile);
+			add_section(bookmarkInfo,
+				   (*eit).first.c_str(), node); 
+                }
+        }
+        delete bookmarkInfo;        
+	
+	return root_node;
 }

@@ -56,6 +56,7 @@ using namespace sword;
  * globals
  */
 SWORD sw;
+
 /******************************************************************************
  * static  global to this file only 
  */

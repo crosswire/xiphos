@@ -33,7 +33,6 @@ gnomesword_1_0_SOURCES =  \
     editor.c \
     editor_menu.c \
     editor_replace.c \
-    editor_search.c \
     editor_spell.c \
     fileselection.c \
     find_dialog.c \
@@ -78,4 +77,4 @@ gnomesword_1_0_LDADD = \
     $(SWORD_LIBS) \
     $(PSPELL_LIBS) \
     $(top_builddir)/src/main/libmain.a \
-    $(top_builddir)/src/backend/libbackend.a 
+    $(top_builddir)/src/backend/libbackend.a

@@ -1,7 +1,15 @@
+2003-04-05  Terry <tbiggs@users.sf.net>
+
+	* removed gui/editor_search.h and gnome/editor_search.c
+	  they are no longer needed (editors use gnome/find_dialog.c)
+	  
+
 2003-04-01  Terry <tbiggs@users.sf.net>
 
 	* settings now saved in settings.xml using gnome-xml
-	* removed backend/prevences.*
+	* removed backend/preferences.*
+	* removed backend/bookmarks.*
+	* removed backend/percomm_.*
 	
 
 2003-03-27  Terry <tbiggs@users.sf.net>

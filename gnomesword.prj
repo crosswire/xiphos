@@ -67,8 +67,6 @@ module.include.type=
 module.include.expanded=1
 module.include.files=\
 	src/backend/sword.h\
-	src/backend/percomm_.h\
-	src/backend/bookmarks.h\
 	src/backend/sword_defs.h\
 	src/gnome/shortcutbar.h\
 	src/gui/about_gnomesword.h\
@@ -96,7 +94,6 @@ module.include.files=\
 	src/gui/editor.h\
 	src/gui/editor_menu.h\
 	src/gui/editor_replace.h\
-	src/gui/editor_search.h\
 	src/gui/editor_spell.h\
 	src/gui/fileselection.h\
 	src/gui/find_dialog.h\
@@ -147,8 +144,6 @@ module.source.type=
 module.source.expanded=1
 module.source.files=\
 	src/backend/sword.cpp\
-	src/backend/percomm_.cpp\
-	src/backend/bookmarks.cpp\
 	src/gnome/about_gnomesword.c\
 	src/gnome/about_modules.c\
 	src/gnome/about_sword.c\
@@ -177,7 +172,6 @@ module.source.files=\
 	src/gnome/editor.c\
 	src/gnome/editor_menu.c\
 	src/gnome/editor_replace.c\
-	src/gnome/editor_search.c\
 	src/gnome/editor_spell.c\
 	src/gnome/fileselection.c\
 	src/gnome/find_dialog.c\

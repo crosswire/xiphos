@@ -1118,3 +1118,103 @@ int backend_set_module(int manager, char * module_name)
 	}	
 	return 0;
 }
+
+
+/******************************************************************************
+ * Name
+ *   backend_set_percomm_key
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   void backend_set_percomm_key(char * key)	
+ *
+ * Description
+ *   set commentary key
+ *
+ * Return value
+ *   void
+ */
+
+void backend_set_percomm_key(char * key)
+{
+	if (sw.percom_mod){
+		sw.percom_mod->SetKey(key);
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  backend_save_personal_comment
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   void backend_save_personal_comment(int mod_num, char * buf)
+ *
+ * Description
+ *   save buf to the current personal commentary at current key 
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_save_personal_comment(char * note)
+{	
+	
+	
+	if(note) {
+		sw.percom_mod->setEntry((const char *) note);
+		g_warning("mod = %s\nkey = %s\nnote = %s",sw.percom_mod->Name(),
+					sw.percom_mod->KeyText(),note);
+	}
+}
+
+/******************************************************************************
+ * Name
+ *  backend_delete_personal_comment
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   void backend_delete_personal_comment(void)
+ *
+ * Description
+ *    delete the data at the currnet key in current personal commentary
+ *
+ * Return value
+ *   void
+ */
+ 
+void backend_delete_personal_comment(void)
+{
+	sw.percom_mod->deleteEntry();
+	g_print("\nkey %s of module %s has been deleted\n",
+			sw.percom_mod->KeyText(),sw.percom_mod->Name());
+}
+
+/******************************************************************************
+ * Name
+ *   backend_get_percomm_text
+ *
+ * Synopsis
+ *   #include "backend/module.hh"
+ *
+ *   char *backend_get_percomm_text(char *key)	
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   char *
+ */
+
+char *backend_get_percomm_text(char * key)
+{
+	if (sw.percom_mod){
+		sw.percom_mod->SetKey(key);
+		return strdup((char *) sw.percom_mod->getRawEntry());		
+	}
+	return NULL;
+}

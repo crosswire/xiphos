@@ -2264,7 +2264,7 @@ void create_bookmark_menu(void)
  *
  * Description
  *   
- *   creats an add bookmark menu list of root nodes
+ *   creates an add bookmark menu list of root nodes
  *   so user can chose where to add bookmark
  *   called from 
  *
