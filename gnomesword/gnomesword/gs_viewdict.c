@@ -311,3 +311,4 @@ create_dlgShowDict (void)
   isrunningSD = TRUE;
   return dlgShowDict;
 }
+

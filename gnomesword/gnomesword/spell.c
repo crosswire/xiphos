@@ -810,3 +810,4 @@ gboolean run_spell_checker(void)
 
 	return (spc_message != SPC_CLOSE);
 }				/* end run_spell_checker */
+

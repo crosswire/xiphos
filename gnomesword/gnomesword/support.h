@@ -55,3 +55,4 @@ GtkWidget *lookup_widget(GtkWidget * widget,
 #ifdef __cplusplus
 }
 #endif
+

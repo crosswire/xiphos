@@ -40,3 +40,4 @@ void newSP(GtkWidget * text);
 #ifdef __cplusplus
 }
 #endif
+

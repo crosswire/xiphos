@@ -570,3 +570,4 @@ void savelist(gchar * filename, GtkWidget * list)
 	fputs("-end-", fp);	/* mark end -  */
 	fclose(fp);		/* close file (filename) */
 }
+

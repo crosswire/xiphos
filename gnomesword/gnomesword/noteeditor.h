@@ -27,3 +27,4 @@ class NoteEditor
         bool setGREEK(GtkWidget *text);
         bool setNEWLINE(GtkWidget *text); 		
 };
+
