@@ -99,6 +99,7 @@ struct _settings {
 		MainWindowModule[80],	/* module to open at program startup  */
 		CommWindowModule[80],	/* module to open at program startup  */
 		DictWindowModule[80],	/* module to open at program startup  */
+		BookWindowModule[80],	/* module to open at program startup  */
 	        Interlinear1Module[80],	/* module to open at program startup  */
 	        Interlinear2Module[80],	/* module to open at program startup  */
 	        Interlinear3Module[80], 	/* module to open at program startup  */

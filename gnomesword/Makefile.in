@@ -138,18 +138,11 @@ cxxflags_set = @cxxflags_set@
 install_sh = @install_sh@
 l = @l@
 
-SUBDIRS = macros \
-            help \
-	    po \
-	    src 
-
+SUBDIRS = help macros po src
 
 EXTRA_DIST = gnomesword.glade \
         Gnomesword.prj \
-        gnomesword.desktop\
-	xml-i18n-extract.in \
-	xml-i18n-merge.in \
-	xml-i18n-update.in
+        gnomesword.desktop
 
 
 gnomesworddocdir = $(prefix)/doc/gnomesword
