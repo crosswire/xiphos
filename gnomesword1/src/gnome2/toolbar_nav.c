@@ -24,6 +24,7 @@
 #endif
 
 #include <gnome.h>
+#include <gal-2.0/gal/widgets/e-unicode.h>
 
 #include "gui/toolbar_nav.h"
 #include "gui/shortcutbar_main.h"
@@ -117,7 +118,8 @@ static void on_cbeBook_changed(GtkEditable * editable,
 	gchar buf[256];
 	gchar *bookname = NULL;
 	if (settings.apply_change) {
-		bookname = gtk_editable_get_chars(editable, 0, -1);
+		bookname = e_utf8_gtk_editable_get_text(editable);//gtk_editable_get_chars(editable, 0, -1);
+		//g_warning(bookname);
 		if (*bookname) {
 			sprintf(buf, "%s 1:1", bookname);
 			/* g_warning(bookname); */
@@ -258,10 +260,10 @@ static void on_togglebutton_parallel_view_toggled(GtkToggleButton *
 						  gpointer user_data)
 {
 	if(togglebutton->active) 
-		gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
 						      1);
 	else
-		gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
+		gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_parallel_text),
 						      0);
 }
 
@@ -630,26 +632,26 @@ GtkWidget *gui_create_nav_toolbar(GtkWidget * app)
 			 G_CALLBACK
 			 (on_togglebutton_parallel_view_toggled), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(cbe_book), "changed",
+	g_signal_connect(GTK_OBJECT(cbe_book), "changed",
 			   G_CALLBACK(on_cbeBook_changed), NULL);
-	gtk_signal_connect(GTK_OBJECT(spb_chapter),
+	g_signal_connect(GTK_OBJECT(spb_chapter),
 			   "button_release_event",
 			   G_CALLBACK
 			   (on_spbChapter_button_release_event), NULL);
-	gtk_signal_connect(GTK_OBJECT(spb_verse),
+	g_signal_connect(GTK_OBJECT(spb_verse),
 			   "button_release_event",
 			   G_CALLBACK(on_spbVerse_button_release_event),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(cbe_freeform_lookup),
+	g_signal_connect(GTK_OBJECT(cbe_freeform_lookup),
 			   "key_press_event",
 			   G_CALLBACK
 			   (on_cbeFreeformLookup_key_press_event),
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(btnLookup), "clicked",
+	g_signal_connect(GTK_OBJECT(btnLookup), "clicked",
 			   G_CALLBACK(on_btnLookup_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(nav_bar.button_back), "clicked",
+	g_signal_connect(GTK_OBJECT(nav_bar.button_back), "clicked",
 			   G_CALLBACK(on_button_back_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(nav_bar.button_forward),
+	g_signal_connect(GTK_OBJECT(nav_bar.button_forward),
 			   "clicked",
 			   G_CALLBACK(on_button_forward_clicked), NULL);
 

@@ -146,7 +146,7 @@ static void set_page_text(gchar * modname, GList * text_list)
 	}
 	
 	if (page)
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_text), page);
 	else
 		on_notebook_text_switch_page(GTK_NOTEBOOK
@@ -571,13 +571,13 @@ static void create_pane(TEXT_DATA * t)
 		gtk_container_add(GTK_CONTAINER(scrolledwindow),
 				  t->html);
 		gtk_html_load_empty(GTK_HTML(t->html));
-		gtk_signal_connect(GTK_OBJECT(t->html), "link_clicked",
+		g_signal_connect(GTK_OBJECT(t->html), "link_clicked",
 				   G_CALLBACK(gui_link_clicked),
 				   (TEXT_DATA *) t);
-		gtk_signal_connect(GTK_OBJECT(t->html), "on_url",
+		g_signal_connect(GTK_OBJECT(t->html), "on_url",
 				   G_CALLBACK(gui_url),
 				   (TEXT_DATA *) t);
-		gtk_signal_connect(GTK_OBJECT(t->html),
+		g_signal_connect(GTK_OBJECT(t->html),
 				   "button_release_event",
 				   G_CALLBACK
 				   (on_button_release_event),
@@ -596,7 +596,7 @@ static void create_pane(TEXT_DATA * t)
 		create_text_tags(text_buffer,gdk_font);
 		gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW (t->text), GTK_WRAP_WORD);
 		
-		gtk_signal_connect(GTK_OBJECT(t->text),
+		g_signal_connect(GTK_OBJECT(t->text),
 				   "button_release_event",
 				   G_CALLBACK
 				   (textview_button_release_event),
@@ -658,14 +658,14 @@ void gui_set_text_page_and_key(gint page_num, gchar * key)
 	page_num;
 	display_change = FALSE;
 	if (text_last_page != page_num) {
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_text),
 				      page_num);
 	}
 	
 	if(settings.parallel_page == gtk_notebook_get_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_text))) {
-		gtk_notebook_set_page(GTK_NOTEBOOK
+		gtk_notebook_set_current_page(GTK_NOTEBOOK
 				      (widgets.notebook_text),
 				      page_num);					      
 	}
@@ -864,7 +864,7 @@ void gui_setup_text(GList * mods)
 	}
 
 	cur_t = t;
-	gtk_signal_connect(GTK_OBJECT(widgets.notebook_text),
+	g_signal_connect(GTK_OBJECT(widgets.notebook_text),
 			   "switch_page",
 			   G_CALLBACK
 			   (on_notebook_text_switch_page), text_list);
