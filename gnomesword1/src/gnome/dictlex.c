@@ -89,10 +89,10 @@ static DL_DATA *cur_d;
 void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 				  gchar * dict_mod_description)
 {
-	gchar *dict_key, mod_name[16];
+	gchar *dict_key;
+	gchar *mod_name = NULL;
 
-	memset(mod_name, 0, 16);
-	module_name_from_description(mod_name, dict_mod_description);
+	mod_name = module_name_from_description(dict_mod_description);
 
 	dict_key = gui_get_word_or_selection(cur_d->html, FALSE);
 	if (dict_key) {
@@ -103,6 +103,7 @@ void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
 	}
+	if(mod_name) g_free(mod_name);
 }
 
 /******************************************************************************

@@ -38,7 +38,7 @@
 #include <versekey.h>
 #include <regex.h>
 #include <pthread.h>
-#include <string.h>
+#include <string>
 #include <dirent.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -50,10 +50,11 @@
 #include "main/sword.h"
 #include "main/search.h"
 
-using std::string;
-using std::map;
-using std::list;
+//using std::string;
+//using std::map;
+//using std::list;
 using namespace sword;
+using namespace std;
 
 
 struct _ExportStruct {
@@ -69,7 +70,7 @@ typedef struct _ExportStruct ExportStruct;
 static SWConfig *config;
 static ConfigEntMap::iterator loop, end;
 
-list < string > bmfiles;
+//list < String *> bmfiles;
 
 extern SWMgr *main_mgr;
 
@@ -682,7 +683,7 @@ GNode * backend_load_bookmarks(char *dir)
 			es->is_leaf = false;  		
 			GNode * gnode = NULL;	
                         gnode = g_node_append_data(root_node, (ExportStruct *)es);
-                        *bmfiles.insert(bmfiles.begin(), conffile);
+//                        *bmfiles.insert(bmfiles.begin(), conffile);
                         add_section(bookmarkInfo,
                                    (*eit).first.c_str(), gnode);
 			     
@@ -718,7 +719,7 @@ GNode * backend_load_bookmarks(char *dir)
 						es->is_leaf = false;
 						GNode *node = NULL; 
 						node = g_node_append_data(root_node, (ExportStruct *)es);	
-						*bmfiles.insert(bmfiles.begin(), conffile);
+//						*bmfiles.insert(bmfiles.begin(), conffile);
 						add_section(bookmarkInfo,
 							   (*eit).first.c_str(), node);
 						
@@ -751,7 +752,7 @@ GNode * backend_load_bookmarks(char *dir)
 			es->is_leaf = true;
 			GNode *node = NULL; 
 			node = g_node_append_data(root_node, (ExportStruct *)es);	
-			*bmfiles.insert(bmfiles.begin(), conffile);
+//			*bmfiles.insert(bmfiles.begin(), conffile);
 			add_section(bookmarkInfo,
 				   (*eit).first.c_str(), node); 
                 }

@@ -51,7 +51,7 @@ extern "C" {
 /*** function prototypes ***/
 
 int gbs_treekey_get_parent(unsigned long offset);
-void module_name_from_description(char *mod_name, char *description);
+char *module_name_from_description(char *description);
 const char *get_sword_version(void);
 char *get_search_results_text(char * mod_name, char * key);
 char *get_path_to_mods(void);
