@@ -18,8 +18,8 @@ COMMON_SOURCE = \
         callback.h \
         display.cpp \
         display.h \
-        filestuff.cpp \
-        filestuff.h \
+        gs_file.c \
+        gs_file.h \
         gs_sword.cpp \
         gs_sword.h \
         interface.c \
