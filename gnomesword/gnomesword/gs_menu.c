@@ -32,6 +32,7 @@
 #include "interface.h"
 #include "callback.h"
 #include "gs_sword.h"
+#include "gs_popup_cb.h"
 #ifdef USE_GTKHTML
 #include "gs_html.h"
 #endif /* USE_GTKHTML */
@@ -983,35 +984,19 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
 	GtkWidget *about_this_module1;
 	GtkWidget *separator2;
 #ifdef USE_GTKHTML
-	GtkWidget *view_module;
+	/*GtkWidget *view_module;
 	GtkWidget *view_module_menu;
 	GtkAccelGroup *view_module_menu_accels;	
-	/*
-	GtkWidget *view_module3;
-	GtkWidget *view_module3_menu;
-	GtkAccelGroup *view_module3_menu_accels;	
-	GtkWidget *view_module3;
-	GtkWidget *view_module3_menu;
-	GtkAccelGroup *view_module3_menu_accels;	
-	GtkWidget *view_module3;
-	GtkWidget *view_module3_menu;
-	GtkAccelGroup *view_module3_menu_accels;	
-	GtkWidget *view_module3;
-	GtkWidget *view_module3_menu;
-	GtkAccelGroup *view_module3_menu_accels;
 	*/
-
-
-
-
 #else /* !USE_GTKHTML */	
 	GtkWidget *view_module3;
 	GtkWidget *view_module3_menu;
 	GtkAccelGroup *view_module3_menu_accels;
-#endif /* USE_GTKHTML */
 	GtkWidget *item3;
 	GList *tmp;
 	gint i = 0;
+#endif /* USE_GTKHTML */
+
 
 	pmInt = gtk_menu_new ();
 	gtk_object_set_data (GTK_OBJECT (pmInt), "pmInt", pmInt);

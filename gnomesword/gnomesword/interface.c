@@ -92,77 +92,7 @@ static GdkPixbuf *icon_callback(EShortcutBar * shortcut_bar,
 	return NULL;
 }
 #endif				/* USE_SHORTCUTBAR */
-
-GtkWidget *create_fileselection1(void)
-{
-	GtkWidget *fileselection1;
-	GtkWidget *ok_button1;
-	GtkWidget *cancel_button1;
-
-	fileselection1 =
-	    gtk_file_selection_new("GtkSword - Open Note File");
-	gtk_object_set_data(GTK_OBJECT(fileselection1), "fileselection1",
-			    fileselection1);
-	gtk_container_set_border_width(GTK_CONTAINER(fileselection1), 10);
-	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION
-					       (fileselection1));
-
-	ok_button1 = GTK_FILE_SELECTION(fileselection1)->ok_button;
-	gtk_object_set_data(GTK_OBJECT(fileselection1), "ok_button1",
-			    ok_button1);
-	gtk_widget_show(ok_button1);
-	GTK_WIDGET_SET_FLAGS(ok_button1, GTK_CAN_DEFAULT);
-
-	cancel_button1 = GTK_FILE_SELECTION(fileselection1)->cancel_button;
-	gtk_object_set_data(GTK_OBJECT(fileselection1), "cancel_button1",
-			    cancel_button1);
-	gtk_widget_show(cancel_button1);
-	GTK_WIDGET_SET_FLAGS(cancel_button1, GTK_CAN_DEFAULT);
-
-	gtk_signal_connect(GTK_OBJECT(ok_button1), "clicked",
-			   GTK_SIGNAL_FUNC(on_ok_button1_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(cancel_button1), "clicked",
-			   GTK_SIGNAL_FUNC(on_cancel_button1_clicked),
-			   NULL);
-
-	return fileselection1;
-}
-
-GtkWidget *create_fileselectionSave(void)
-{
-	GtkWidget *fileselectionSave;
-	GtkWidget *ok_button2;
-	GtkWidget *cancel_button2;
-
-	fileselectionSave =
-	    gtk_file_selection_new("GtkSword - Save Note File");
-	gtk_object_set_data(GTK_OBJECT(fileselectionSave),
-			    "fileselectionSave", fileselectionSave);
-	gtk_container_set_border_width(GTK_CONTAINER(fileselectionSave),
-				       10);
-
-	ok_button2 = GTK_FILE_SELECTION(fileselectionSave)->ok_button;
-	gtk_object_set_data(GTK_OBJECT(fileselectionSave), "ok_button2",
-			    ok_button2);
-	gtk_widget_show(ok_button2);
-	GTK_WIDGET_SET_FLAGS(ok_button2, GTK_CAN_DEFAULT);
-
-	cancel_button2 =
-	    GTK_FILE_SELECTION(fileselectionSave)->cancel_button;
-	gtk_object_set_data(GTK_OBJECT(fileselectionSave),
-			    "cancel_button2", cancel_button2);
-	gtk_widget_show(cancel_button2);
-	GTK_WIDGET_SET_FLAGS(cancel_button2, GTK_CAN_DEFAULT);
-
-	gtk_signal_connect(GTK_OBJECT(ok_button2), "clicked",
-			   GTK_SIGNAL_FUNC(on_ok_button2_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(cancel_button2), "clicked",
-			   GTK_SIGNAL_FUNC(on_cancel_button2_clicked),
-			   NULL);
-
-	return fileselectionSave;
-}
-
+/*
 static GnomeUIInfo menu1_uiinfo[] = {
 	GNOMEUIINFO_MENU_COPY_ITEM(on_copy3_activate, "moduleText"),
 	{
@@ -212,7 +142,7 @@ GtkWidget *create_menu1(void)
 
 	return menu1;
 }
-
+*/
 static GnomeUIInfo file1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_EXIT_ITEM(on_exit1_activate, NULL),
@@ -1066,7 +996,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(hbox25);
 	gnome_app_set_contents(GNOME_APP(mainwindow), hbox25);
 
-#if USE_SHORTCUTBAR
+#ifdef USE_SHORTCUTBAR
 	epaned = e_hpaned_new();
 	gtk_widget_ref(epaned);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "epaned", epaned,
@@ -1122,7 +1052,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_widget_show(hpaned1);
 	gtk_box_pack_end(GTK_BOX(hbox2), hpaned1, TRUE, TRUE, 0);
 
-#else
+#else /* !USE_SHORTCUTBAR */
 	mainPanel = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(mainPanel);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "mainPanel",
@@ -1503,7 +1433,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_paned_set_gutter_size(GTK_PANED(hpaned1), 10);
 	gtk_paned_set_position(GTK_PANED(hpaned1), 300);
 
-#endif				/* USE_SHORTCUTBAR */
+#endif /* USE_SHORTCUTBAR */
 
 	frame9 = gtk_frame_new("KJV");
 	gtk_widget_ref(frame9);
@@ -1511,7 +1441,7 @@ GtkWidget *create_mainwindow(void)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame9);
 
-#if USE_SHORTCUTBAR
+#ifdef USE_SHORTCUTBAR
 	e_paned_pack1(E_PANED(hpaned1), frame9, FALSE, TRUE);
 #else
 	gtk_paned_pack1(GTK_PANED(hpaned1), frame9, FALSE, TRUE);
@@ -1589,45 +1519,13 @@ GtkWidget *create_mainwindow(void)
 							     (nbText), 1),
 				   label);
 
-
-/*
-	vbox19 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox19);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "vbox19", vbox19,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox19);
-	gtk_container_add(GTK_CONTAINER(frame9), vbox19);
-
-	scrolledwindow18 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow18);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
-				 "scrolledwindow18", scrolledwindow18,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scrolledwindow18);
-	gtk_box_pack_start(GTK_BOX(vbox19), scrolledwindow18, TRUE, TRUE,
-			   0);
-	gtk_container_set_border_width(GTK_CONTAINER(scrolledwindow18), 2);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow18),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	moduleText = gtk_text_new(NULL, NULL);
-	gtk_widget_ref(moduleText);
-	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "moduleText",
-				 moduleText,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(moduleText);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow18), moduleText);
-*/
-
 	notebook3 = gtk_notebook_new();
 	gtk_widget_ref(notebook3);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "notebook3",
 				 notebook3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(notebook3);
-#if USE_SHORTCUTBAR
+#ifdef USE_SHORTCUTBAR
 	e_paned_pack2(E_PANED(hpaned1), notebook3, TRUE, TRUE);
 #else
 	gtk_paned_pack2(GTK_PANED(hpaned1), notebook3, TRUE, TRUE);
