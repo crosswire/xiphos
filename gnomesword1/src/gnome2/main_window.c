@@ -1043,9 +1043,9 @@ void create_mainwindow(void)
 				 widgets.notebook_text, label41);
 	gtk_notebook_set_scrollable(GTK_NOTEBOOK
 				    (widgets.notebook_text), TRUE);
-	gtk_notebook_popup_enable(GTK_NOTEBOOK(widgets.notebook_text));
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
-	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_text),FALSE);
+	gtk_notebook_set_show_border(GTK_NOTEBOOK(widgets.notebook_text),FALSE); 
+	gtk_notebook_popup_disable(GTK_NOTEBOOK(widgets.notebook_text));
 				     
 	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
