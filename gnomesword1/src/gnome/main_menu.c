@@ -322,7 +322,7 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_bibletext_item_activate(GtkMenuItem * menuitem, 
+static void on_bibletext_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
 	gui_open_bibletext_dialog(GPOINTER_TO_INT(user_data));
@@ -344,7 +344,7 @@ void on_bibletext_item_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_commentary_item_activate(GtkMenuItem * menuitem, 
+static void on_commentary_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
 	gui_open_commentary_dialog(GPOINTER_TO_INT(user_data));
@@ -365,7 +365,7 @@ void on_commentary_item_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_dictlex_item_activate(GtkMenuItem * menuitem, 
+static void on_dictlex_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
 	gui_open_dictlex_dialog(GPOINTER_TO_INT(user_data));
@@ -387,7 +387,7 @@ void on_dictlex_item_activate(GtkMenuItem * menuitem,
  *   void
  */
 
-void on_book_item_activate(GtkMenuItem * menuitem, 
+static void on_book_item_activate(GtkMenuItem * menuitem, 
 						gpointer user_data)
 {
 	

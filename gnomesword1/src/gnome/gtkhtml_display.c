@@ -378,11 +378,15 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	    *bgColor,
 	    *textColor,
 	    buf[500],
-	    *tmpkey, tmpbuf[256], *use_font_size, *text_str;
+	    *tmpkey, 
+	    tmpbuf[256],
+	    *use_font, *use_font_size, *text_str;
 	gchar 	*paragraphMark;	
 
 	gboolean was_editable = FALSE;
 	gboolean newparagraph = FALSE;
+	gboolean use_gtkhtml_font = FALSE;
+	
 	GString * str;
 	gint utf8len, cur_verse, cur_chapter, i = 1;
 	const char *cur_book;
@@ -402,6 +406,18 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	cur_book = get_book_from_key(tmpkey);
 	
 	str = g_string_new("");
+	
+	use_font = get_module_font_name(mod_name);
+	if (use_font)
+		use_gtkhtml_font = FALSE;	
+	else
+		use_gtkhtml_font = TRUE;
+
+	use_font_size = get_module_font_size(mod_name);
+
+	if (!use_font_size) {
+		use_font_size = strdup(settings.bible_font_size);
+	}
 	
 	htmlstream =
 	    gtk_html_begin_content(html, "text/html; charset=utf-8");
@@ -435,25 +451,38 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			textColor = settings.bible_text_color;
 			
 					
-		use_font_size = settings.bible_font_size; 
+		 
 						
 		sprintf(buf,			
 			"&nbsp; <A HREF=\"I%s\" NAME=\"%d\">"
-			"<font color=\"%s\">%d</font></A>"
-			"<font size=\"%s\" color=\"%s\"> ", 
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ", 
 			tmpkey,
-			i,				 
-			settings.bible_verse_num_color, 
-			i,
-			use_font_size,
-			textColor);	
+			i,	
+			settings.bible_font_size,			 
+			settings.bible_verse_num_color,
+			i);	
 		
 		utf8str = e_utf8_from_gtk_string(html_widget, buf);
 		utf8len = strlen(utf8str);
 		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
+				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 		}
-						
+			
+		if (use_gtkhtml_font){
+			sprintf(tmpbuf, "<font size=\"%s\" color=\"%s\">", use_font_size, textColor);
+		}
+		else {
+			sprintf(tmpbuf, "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				use_font, use_font_size, textColor);		
+		}
+	
+		utf8str = e_utf8_from_gtk_string(html_widget, tmpbuf);
+		utf8len = strlen(utf8str);
+		if (utf8len) {
+			gtk_html_write(GTK_HTML(html), htmlstream, utf8str,
+				       utf8len);
+		}
+		
 		if(newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
 			sprintf(tmpbuf,  "%s ", paragraphMark);
@@ -506,14 +535,6 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 				gtk_html_write(html, htmlstream, utf8str, utf8len);
 			}	
 		}
-		
-		sprintf(buf, "%s", "</font>");	
-		utf8str = e_utf8_from_gtk_string(html_widget, buf);
-		utf8len = strlen(utf8str);		
-		if (utf8len) {
-			gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
-		}
-		
 	}
 	
 	
@@ -532,6 +553,10 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	sprintf(buf, "%d", cur_verse);
 	gtk_html_jump_to_anchor(html, buf);
 
+	if (use_font_size)
+		free(use_font_size);
+	if (use_font)
+		free(use_font);
 	g_free(tmpkey);
 }
 

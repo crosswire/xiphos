@@ -27,29 +27,10 @@ extern "C" {
 #endif
 
 #include "main/settings.h"
-#include "gui/_editor.h"
 
-typedef struct _percomm_data PC_DATA;
-struct _percomm_data {
-	GtkWidget *html;
-	//GtkWidget *frame;
-	//GtkWidget *showtabs;
-	gchar *mod_name;
-	gchar *mod_description;
-	gchar *search_string;
-	gchar *key;
-	gint mod_num;
-	gboolean is_locked;
-	GSHTMLEditorControlData *ec;
-};
-
-void editor_save_note(GtkWidget * html_widget);
-void save_percomm_note(gchar *note);
-void delete_percomm_note(void);
-void set_percomm_page_and_key(gint page_num, gchar * key);
-void display_percomm(gchar * key);
-void setup_percomm(GList *mods);
-void shutdown_percomm(void);
+void editor_save_note(GtkWidget * html_widget, char * mod_name);
+void save_percomm_note(gchar *note, char * mod_name);
+void delete_percomm_note(char * mod_name);
 
 #ifdef __cplusplus
 }

@@ -28,16 +28,15 @@ extern "C" {
 
 #include "main/settings.h"
 
-void display_gbs(int page_num, char * key);
-int treekey_next_sibling(char * mod_name, unsigned long offset);
-int gbs_treekey_has_children(char * mod_name, 
-					unsigned long offset);
-char * gbs_get_treekey_local_name(char * mod_name, unsigned long offset);
-unsigned long gbs_get_treekey_offset(char *mod_name);
-int gbs_treekey_first_child(char * bookname, unsigned long offset);
-char *get_book_key(int book_num);
-gboolean display_row_gbs(gint book_num, gchar *offset);
-void new_gbs_display(GtkWidget * html, char * mod_name);
+char * display_gbs(char * book_name, char * key);
+int treekey_next_sibling(unsigned long offset);
+int gbs_treekey_has_children(unsigned long offset);
+char * gbs_get_treekey_local_name(unsigned long offset);
+unsigned long gbs_get_treekey_offset(void);
+int gbs_treekey_first_child(unsigned long offset);
+char *get_book_key(char * book_name);
+char * display_row_gbs(char * book_name, char *offset);
+void change_book(char * mod_name, unsigned long offset);
 #ifdef __cplusplus
 }
 #endif
