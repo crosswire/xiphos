@@ -39,7 +39,7 @@
 
 #include "callback.h"
 #include "gs_gnomesword.h"
-#include "GnomeSword.h"
+#include "gs_sword.h"
 #include "support.h"
 #include "interface.h"
 #include "filestuff.h"
