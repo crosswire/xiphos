@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-12-04 20:02-0500\n"
+"POT-Creation-Date: 2001-12-06 13:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1155,7 +1155,7 @@ msgstr ""
 msgid "-untitled-"
 msgstr ""
 
-#: src/gs_unlockkey_dlg.c:83 src/gs_viewtext_dlg.c:288
+#: src/gs_unlockkey_dlg.c:83 src/gs_viewtext_dlg.c:373
 msgid "GnomeSword"
 msgstr ""
 
@@ -1167,11 +1167,11 @@ msgstr ""
 msgid "GnomeSword - View Commentary"
 msgstr ""
 
-#: src/gs_viewcomm_dlg.c:189 src/gs_viewtext_dlg.c:472
+#: src/gs_viewcomm_dlg.c:189 src/gs_viewtext_dlg.c:547
 msgid "button7"
 msgstr ""
 
-#: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:354
+#: src/gs_viewcomm_dlg.c:190 src/gs_viewtext_dlg.c:439
 msgid "Sync with main window"
 msgstr ""
 
@@ -1199,7 +1199,7 @@ msgstr ""
 msgid "GnomeSwrod - View Dictionary"
 msgstr ""
 
-#: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:353
+#: src/gs_viewdict_dlg.c:228 src/gs_viewtext_dlg.c:438
 msgid "Sync"
 msgstr ""
 
@@ -1223,34 +1223,14 @@ msgstr ""
 msgid "label125"
 msgstr ""
 
-#: src/gs_viewtext_dlg.c:339
+#: src/gs_viewtext_dlg.c:424
 msgid "Add"
 msgstr ""
 
-#: src/gs_viewtext_dlg.c:377
-msgid "Strongs"
+#: src/gs_viewtext_dlg.c:466
+msgid "Module Options"
 msgstr ""
 
-#: src/gs_viewtext_dlg.c:378
-msgid "Toggle Strongs Numbers"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:391
-msgid "Footnotes"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:392
-msgid "Toggle Footnotes"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:405
-msgid "togglebutton1"
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:406
-msgid "toggle Morf "
-msgstr ""
-
-#: src/gs_viewtext_dlg.c:472
+#: src/gs_viewtext_dlg.c:547
 msgid "Go to verse"
 msgstr ""

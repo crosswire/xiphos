@@ -231,7 +231,7 @@ void initSWORD(GtkWidget * mainform)
 	compages = 0;
 	dictpages = 0;
 
-	initRenderFiltersUTIL();
+//	initRenderFiltersUTIL();
 	
 	if (settings->showsplash) {
 		while (gtk_events_pending())
@@ -548,7 +548,7 @@ void shutdownSWORD(void)	//-- close down GnomeSword program
 	g_list_free(settings->settingslist);
 	shutdownverselistSBSWORD();
 	g_string_free(gs_clipboard, TRUE);	
-	deleteRenderfilters();
+//	deleteRenderfilters();
 	//-- delete Sword managers
 	delete mainMgr;
 	delete mainMgr1;

@@ -45,7 +45,7 @@ extern "C" {
 				SETTINGS * s);
 	void setupSB(SETTINGS * s);
 	void update_shortcut_bar(SETTINGS * s);
-	void create_modlistmenu_sb(GtkWidget * menu,
+	void create_modlistmenu_sb(gint group_num, GtkWidget * menu,
 				GtkWidget * shortcut_menu_widget,
 				gchar * modtype);
 
