@@ -86,7 +86,7 @@ void AddSection(GtkCTree *ctree, SWConfig *config, const gchar *section, GtkCTre
 			token=strtok(NULL,t);
 			text[2] = token;
 			is_leaf = false;
-			node = gtk_ctree_insert_node(ctree,parent,node,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
+			node = gtk_ctree_insert_node(ctree,parent,NULL,text, 3, pixmap1,mask1,pixmap2, mask2, is_leaf, FALSE);
 			gtk_ctree_node_set_row_data_full(ctree,node, style,(GtkDestroyNotify) gtk_style_unref);
 			AddSection(ctree,config,(*eit).first.c_str(),node);
 		}
@@ -255,19 +255,19 @@ createbookmarksBM(gchar *dir)
 
 	sprintf(buf, "%s/personal.conf", dir);
 	SWConfig bmInfo(buf);
+	/** seperators are '|' the pipe char **/
+	bmInfo["ROOT"]["branch0"] = "Personal|personal.conf|ROOT";
 	
-	bmInfo["ROOT"]["branch0"] = "Personal,personal.conf,ROOT";
+	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?]|GROUP| ";
+	bmInfo["branch0"]["branch5"]="[What is the Gospel?]|GROUP| ";
+	bmInfo["branch0"]["branch7"]="Romans 8:28 KJV|Romans 8:28|KJV";
+	bmInfo["branch0"]["branch8"]="Rev 1:5 KJV|Rev 1:5|KJV";
 	
-	bmInfo["branch0"]["branch1"] = "[What must I do to be saved?],GROUP, ";
-	bmInfo["branch0"]["branch5"]="[What is the Gospel?],GROUP, ";
-	bmInfo["branch0"]["branch7"]="Romans 8:28 KJV,Romans 8:28,KJV";
-	bmInfo["branch0"]["branch8"]="Rev 1:5 KJV,Rev 1:5,KJV";
+	bmInfo["branch1"]["branch2"]="Romans 1:16 KJV|Romans 1:16|KJV";
+	bmInfo["branch1"]["branch3"]="Eph 2:8 KJV|Eph 2:8|KJV";
+	bmInfo["branch1"]["branch4"]="Acts 16:31 KJV|Acts 16:31|KJV";
 	
-	bmInfo["branch1"]["branch2"]="Romans 1:16 KJV,Romans 1:16,KJV";
-	bmInfo["branch1"]["branch3"]="Eph 2:8 KJV,Eph 2:8,KJV";
-	bmInfo["branch1"]["branch4"]="Acts 16:31 KJV,Acts 16:31,KJV";
-	
-	bmInfo["branch5"]["branch6"]="1 Cor 15:1 KJV,1 Cor 15:1,KJV";
+	bmInfo["branch5"]["branch6"]="1 Cor 15:1 KJV|1 Cor 15:1|KJV";
 	
 	bmInfo.Save(); 	
 }

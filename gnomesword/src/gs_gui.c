@@ -303,7 +303,7 @@ GtkWidget *create_mainwindow(GtkWidget * splash)
 	GtkWidget *frame2;
 	GtkWidget *vbox4;
 	GtkWidget *scrolledwindow15;
-  GtkWidget *notebookBooksDicts;
+//  GtkWidget *notebookBooksDicts;
 	GtkWidget *framedict;
 	GtkWidget *label12;
 	GtkWidget *label41;
