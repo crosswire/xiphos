@@ -3228,7 +3228,7 @@ Revelation
 	<show_border>True</show_border>
 	<tab_pos>GTK_POS_TOP</tab_pos>
 	<scrollable>False</scrollable>
-	<tab_hborder>2</tab_hborder>
+	<tab_hborder>9</tab_hborder>
 	<tab_vborder>2</tab_vborder>
 	<popup_enable>False</popup_enable>
 	<child>
@@ -4971,7 +4971,7 @@ Revelation
 	    <widget>
 	      <class>GtkTable</class>
 	      <name>table9</name>
-	      <rows>14</rows>
+	      <rows>15</rows>
 	      <columns>2</columns>
 	      <homogeneous>False</homogeneous>
 	      <row_spacing>0</row_spacing>
@@ -5852,6 +5852,69 @@ Revelation
 		    <handler>on_combo-entryHebViewer_changed</handler>
 		    <last_modification_time>Sat, 30 Mar 2002 18:07:06 GMT</last_modification_time>
 		  </signal>
+		  <editable>True</editable>
+		  <text_visible>True</text_visible>
+		  <text_max_length>0</text_max_length>
+		  <text></text>
+		</widget>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label204</name>
+		<label>Default Text Mod</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>14</top_attach>
+		  <bottom_attach>15</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkCombo</class>
+		<name>combo_default_text</name>
+		<value_in_list>False</value_in_list>
+		<ok_if_empty>True</ok_if_empty>
+		<case_sensitive>False</case_sensitive>
+		<use_arrows>True</use_arrows>
+		<use_arrows_always>False</use_arrows_always>
+		<items></items>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>14</top_attach>
+		  <bottom_attach>15</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+
+		<widget>
+		  <class>GtkEntry</class>
+		  <child_name>GtkCombo:entry</child_name>
+		  <name>entry_default_text</name>
+		  <tooltip>Text Module to use for lookup if none is specified</tooltip>
+		  <can_focus>True</can_focus>
 		  <editable>True</editable>
 		  <text_visible>True</text_visible>
 		  <text_max_length>0</text_max_length>

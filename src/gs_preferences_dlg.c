@@ -184,6 +184,8 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	sprintf(s->lex_greek_viewer, "%s", buf);
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "combo_entryHebViewer")));
 	sprintf(s->lex_hebrew_viewer, "%s", buf);
+	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(d, "entry_default_text")));
+	sprintf(s->default_text, "%s", buf);
 	/*** read font pickers ***/
 	font =
 	    gnome_font_picker_get_font_name(GNOME_FONT_PICKER
@@ -632,6 +634,9 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   GtkWidget *comboHebViewer;
   GtkWidget *combo_entryHebViewer;
   GtkWidget *label204;
+  GtkWidget *combo_default_text;
+  GtkWidget *entry_default_text;
+  //GtkWidget *label204;
   GtkWidget *comboDefaultDict;
   GtkWidget *entryDefaultDict;
   GtkWidget *label155;
@@ -1869,6 +1874,33 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
   gtk_tooltips_set_tip (tooltips, entryDefaultDict, _("Dictionary to use when words are selected by left clicking"), NULL);
 
 
+  label204 = gtk_label_new (_("Default Text Module"));
+  gtk_widget_ref (label204);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "label204", label204,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (label204);
+  gtk_table_attach (GTK_TABLE (table9), label204, 0, 1, 15, 16,
+                    (GtkAttachOptions) (GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (label204), 0, 0.5);
+
+  combo_default_text = gtk_combo_new ();
+  gtk_widget_ref (combo_default_text);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "combo_default_text", combo_default_text,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (combo_default_text);
+  gtk_table_attach (GTK_TABLE (table9), combo_default_text, 1, 2, 15, 16,
+                    (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+                    (GtkAttachOptions) (0), 0, 0);
+
+  entry_default_text = GTK_COMBO (combo_default_text)->entry;
+  gtk_widget_ref (entry_default_text);
+  gtk_object_set_data_full (GTK_OBJECT (dlgSettings), "entry_default_text", entry_default_text,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (entry_default_text);
+  gtk_tooltips_set_tip (tooltips, entry_default_text, _("Text Module to use for lookup if none is specified"), NULL);
+
+ 
 
 
   label155 = gtk_label_new (_("Sword Modules"));
@@ -1950,6 +1982,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo25), percomlist);
 	gtk_combo_set_popdown_strings(GTK_COMBO(comboDevotion),
 				      devotionlist);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_default_text), biblelist);
 
 	gtk_entry_set_text(GTK_ENTRY(cmbEentryVNSize),
 			   s->verse_num_font_size);
@@ -2038,6 +2071,7 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_entry_set_text(GTK_ENTRY(entry13), s->lex_greek);
 	gtk_entry_set_text(GTK_ENTRY(entry14), s->lex_hebrew);
 	gtk_entry_set_text(GTK_ENTRY(entryDevotion), s->devotionalmod);
+	gtk_entry_set_text(GTK_ENTRY(entry_default_text), s->default_text);
 
 	/********************************************************************* end settings */
 	/*** font pickers ***/
@@ -2174,6 +2208,8 @@ GtkWidget *create_dlgSettings(SETTINGS * s,
 	gtk_signal_connect(GTK_OBJECT(combo_entryGreekViewer), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	gtk_signal_connect(GTK_OBJECT(entryDevotion), "changed",
+			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
+	gtk_signal_connect(GTK_OBJECT(entry_default_text), "changed",
 			   GTK_SIGNAL_FUNC(on_Entry_changed), NULL);
 	/*** OK - Apply - Cancel ***/
 	gtk_signal_connect(GTK_OBJECT(btnPropertyboxOK), "clicked",

@@ -113,7 +113,8 @@ struct _settings {
 	        Interlinear5Module[80], 	/* module to open at program startup  */
 	        personalcommentsmod[80], 	/* module to open at program startup  */
 	        devotionalmod[80], /* module to use for devotional */
-	        DefaultDict[80], /* module to use for devotional */
+	        DefaultDict[80], /* module to use for dict lookup */
+	        default_text[80], /* module to use for text lookup */
 		lex_greek[80], /* module to use for greek lexicon - strongs or thayers*/
 		lex_hebrew[80], /* module to use for hebrew lexicon - strongs or BDB*/	        
 		lex_greek_viewer[80], /* module to use for greek lexicon - strongs or thayers - in viewer */
