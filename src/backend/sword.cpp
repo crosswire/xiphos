@@ -245,10 +245,42 @@ const char *backend_get_book_from_key(char *key)
 
 int backend_get_chapter_from_key(char *key)
 {
+	unsigned char chapters;
 	VerseKey vkey;
 	vkey.AutoNormalize(1);
 	vkey = key;
 	return vkey.Chapter();
+}
+
+/** Returns the number of chapters for the given book. */
+const unsigned int backend_chapter_count(char *key) 
+{
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	
+	char testament = vkey.Testament() ;
+	char book = vkey.Book();
+	return (vkey.books[testament-1][book-1].chapmax);
+}
+
+/** Returns the number of verses  for the given chapter. */
+const unsigned int backend_verse_count(char *key) 
+{
+	VerseKey vkey;
+	vkey.AutoNormalize(1);
+	vkey = key;
+	
+	char testament = vkey.Testament() ;
+	char book = vkey.Book();
+	int chapter = vkey.Chapter();
+	
+	return (vkey.books[testament-1][book-1].versemax[chapter-1]);
+	/*}
+	else if (book>=1 && (book - staticKey.BMAX[0]) <= (unsigned int)staticKey.BMAX[1] && hasTestament(NewTestament)) {	//is the book in the new testament?
+		if (chapter <= chapterCount(book) )	//does the chapter exist?
+			result = staticKey.books[1][book-1-staticKey.BMAX[0]].versemax[chapter-1];
+	}*/
 }
 
 int backend_get_verse_from_key(char *key)

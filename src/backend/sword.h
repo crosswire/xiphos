@@ -57,6 +57,9 @@ char *backend_get_cipher_key(char *mod_name);
 char *backend_get_module_text(char * mod_name, char * key);	
 int backend_check_for_module(char * mod_name);
 char *backend_get_striptext(char *mod_name, char *key);
+const unsigned int backend_chapter_count(char *key);
+const unsigned int backend_verse_count(char *key);
+
 #ifdef __cplusplus
 }
 #endif
