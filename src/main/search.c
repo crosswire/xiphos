@@ -57,8 +57,14 @@ void search_percent_update(char percent, void *userData)
 {
 	if(search_dialog)
 		gui_search_dialog_appbar_update(percent, userData);
-	else
+	else {
+#ifdef USE_GNOME2
 		gui_search_update_sidebar(percent, userData);
+#else
+		gui_search_update(percent, userData);
+#endif
+
+	}
 }
 
 
