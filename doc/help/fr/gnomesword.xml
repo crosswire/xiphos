@@ -1,0 +1,771 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY app "Gnomesword">
+<!ENTITY appversion "2.0 v0.9">
+<!ENTITY manrevision "2.0 v0.9">
+<!ENTITY gnomesword "the GnomeSword Team">
+]>
+<!--
+      (Do not remove this comment block.)
+  Template Maintained by the GNOME Documentation Project:
+	  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 12, 2002
+-->
+<!--
+      (Do not remove this comment block.)
+  Version: 0.0.1
+  Last modified: March 23, 2002
+  Maintainers:
+               Laszlo Kovacs  <laszlo.kovacs@sun.com>
+               Dan Mueth      <muet@alumni.uchicago.edu>
+  Translators:
+               (translators put your name and email here)
+               Dominique Corbex	<dominique.corbex@wanadoo.fr>
+	-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="fr">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+
+  <articleinfo>
+	<title>Manuel Gnomesword</title>
+	<copyright>
+        <year>2003</year>
+        <holder>&gnomesword;</holder>
+        </copyright>
+
+
+
+  <copyright>
+   <year>2003</year>
+   <holder>Dominique Corbex (Traducion française)</holder>
+  </copyright>
+
+
+
+<!-- An address can be added to the publisher information.  If a role is
+     not specified, the publisher/author is the same for all versions of the
+     document.  -->
+<!-- not sure whether this should be set to &gnomesword as the GDP hasn't actually
+     written this manual -->
+	 <publisher>
+      	 	<publishername>&gnomesword;</publishername>
+    	 </publisher>
+
+   
+   <!-- This file  contains link to license for the documentation (GNU FDL), and
+        other legal stuff such as "NO WARRANTY" statement. Please do not change
+        any of this. -->
+
+    	 <authorgroup>
+      	 	<author>
+        		<firstname>Pierre</firstname>
+			<surname>Benz</surname>
+		        <affiliation>
+		        	<address>  </address>
+	  	        </affiliation>
+      	        </author>
+      	 	<author>
+        		<firstname>Terry</firstname>
+			<surname>Biggs</surname>
+		        <affiliation>
+		        	<address>  </address>
+	  	        </affiliation>
+      	        </author>
+      	 	<author>
+        		<firstname>Andy</firstname>
+			<surname>Piper</surname>
+		        <affiliation>
+		        	<address>  </address>
+	  	        </affiliation>
+      	        </author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default. -->
+       <othercredit role="translator">
+        <firstname>Dominique</firstname>
+        <surname>Corbex</surname>
+        <affiliation>
+          <address>  </address>
+        </affiliation>
+        <contrib>French translation</contrib>
+      </othercredit>
+
+    	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+-->
+<!-- than the current revision. -->
+<!-- The revision numbering system for GNOME manuals is as follows: -->
+<!-- * the revision number consists of two components -->
+<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+<!-- to V3.0, and so on. -->
+
+    	 <revhistory>
+        	 <revision>
+     		   <revnumber>Manuel GnomeSword2 V2.0 v0.9</revnumber>
+     		   <date>30th Nov 2003</date>
+       		   <revdescription>
+        		  <para role="author">&gnomesword;</para>
+       	       		  <para role="publisher">&gnomesword;</para>
+     		   </revdescription>
+   	        </revision>
+	 </revhistory>
+
+<!-- Translators may also add here feedback address for translations -->
+  </articleinfo>
+
+ <!-- ============= Document Body ============================= -->
+ <!-- ============= Introduction ============================== -->
+  <sect1 id="gnomesword-intro">
+  	<title>Introduction</title>
+  	<para>
+	<!--	<application>&app;</application> is a Bible study and research tool based upon the "SWORD Project" libraries
+     		and the GNOME Desktop libraries. <application>&app;</application> aims to provide a simple and clean user interface
+		whilst providing a powerful tool allowing a personalized Bible study environment. -->
+		<application>&app;</application> est un outil de recherche et d'étude de la Bible basé sur les bibliothèques du 'SWORD Project' et de l'environnement de bureau GNOME. Le but de <application>&app;</application> est de mettre à disposition de l'utilisateur un outil d'étude de la Bible puissant et personnalisable tout en bénéficiant d'une interface utilisateur simple et claire.
+	</para>
+
+ <!-- Where important notices are kept regarding Gnomesword ' -->
+  	<sect2 id="gnomesword-notice">
+  		<title>Note</title>
+   		<warning>
+   			<para>
+			<!--	<application>&app;</application> is currently in development, so this manual may not
+   	  			reflect the program as you see it. If it does not, please file a
+		   		bug at the <ulink type="http" url="http://sourceforge.net/projects/gnomesword">
+				project website</ulink>, or email <email>gnomesword-developers@lists.sourceforge.net</email>. -->
+				<application>&app;</application> est en cours de développement, il se peut donc que des dfférences apparaissent par rapport au contenu de ce manuel. Si cela est le cas, envoyez un rapport de bogue au <ulink type="http" url="http://sourceforge.net/projects/gnomesword"> site web du projet</ulink>, ou un email à	<email>gnomesword-developers@lists.sourceforge.net</email>
+			</para>
+  		</warning>
+  	</sect2>
+  </sect1>
+
+ <!-- =============Getting Started ============================= -->
+  <sect1 id="gnomesword-getting-started">
+  	<title>Démarrage</title>
+
+<!--To Start Gnomesword  -->
+  		 <sect2 id="gnomesword-to-start">
+  	  	 	<title>Démarrer &app;</title>
+			<para>
+			<!--	You can start <application>&app;</application> in the following ways. -->
+				Vous pouvez démarrer <application>&app;</application> en utilisant l'une des méthodes suivantes : <!--' -->
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>
+					<guimenu>Menu Applications</guimenu>
+			 		</term>
+ 					<listitem>
+						<para>
+						<!--	Choose <menuchoice><guisubmenu>Accessories</guisubmenu><guimenuitem>
+							Gnomesword2 Bible Study Guide</guimenuitem> -->
+							Sélectionnez <menuchoice><guisubmenu>Accessoires</guisubmenu><guimenuitem>
+							Gnomesword</guimenuitem>
+							</menuchoice>.
+			                        </para>
+    					</listitem>
+    				</varlistentry>
+    				<varlistentry>
+    				<term>Ligne de commande</term>
+    				<listitem>
+    					<para>
+					<!--	Type <command>gnomesword2</command>, then press <keycap>Return</keycap>. -->
+						Entrez <command>gnomesword2</command>, puis appuyez sur <keycap>Return</keycap>.
+					</para>
+    				</listitem>
+    				</varlistentry>
+  		  	</variablelist>
+   		 </sect2>
+
+<!-- First Start -->
+		 <sect2 id="gnomesword-first-start">
+			<title>Premier démarrage de &app;</title>
+			<para>
+			<!--	When you start <application>&app;</application> for the first time, a simple
+				<interface>Setup Assistant</interface> appears. This will enable you to configure your choice of 
+				<application>SWORD Project</application> modules. It also enables you to set basic user interface options. -->
+				La première fois que vous démarrez <application>&app;</application>, un <interface>assistant</interface> vous permet de configurer votre choix de textes parmi les modules du <application>SWORD Project</application>. Il vous permet aussi de définir les options de base de l'interface utilisateur.
+			</para>
+		 </sect2>
+
+   		 <sect2 id="gnomesword-when-you-start">
+		 	<title>Après avoir démarré &app;</title>
+			<para>
+			<!--	When you start <application>&app;</application>, the following interface is displayed: -->
+				Quand vus démarrez <application>&app;</application>, l'écran suivant est affiché : <!-- ' -->
+			</para>
+			<figure id="gnomesword-start-interface">
+			   <title>Interface de &app;</title>
+			 	  <screenshot>
+			      	 	 <mediaobject>
+			 			 <imageobject>
+					         	<imagedata fileref="figures/gnomesword_interface" format="PNG"/>
+						 </imageobject>
+						 <textobject>
+        					 	<phrase>&app; window</phrase>
+						 </textobject>
+				         </mediaobject>
+				  </screenshot>
+			</figure>
+			<para>
+			<!--	The <application>&app;</application> interface contains the following elements: -->
+				L'interface de <application>&app;</application> est constituée des éléments suivants : <!--'-->
+			</para>
+			<variablelist>
+			  	<varlistentry>
+					<term>Barre de menu</term>
+					<listitem>
+						<para>
+					<!--	The menus on the menubar contain several commands which extend the use of <application>&app;
+						</application>.
+						These include the StudyPad and advanced search functions.The menus also allow you to customize
+						your use of 
+						<application>&app;</application>. -->
+						Les menus donnent accès au bloc notes d'étude et aux fonctions de recherche avancée. Les menus permettent aussi de personnaliser l'utilisation de <application>&app;</application>.
+			        		</para>
+					</listitem>
+		 		</varlistentry>
+	                        <varlistentry>
+					<term>Barre d'outils</term>
+					<listitem>
+						<para>
+					<!--	 The <interface>toolbar</interface> contains buttons that let you quickly navigate through the Bible. -->
+						La <interface>barre d'outils</interface> permet de naviguer facilement parmi les versets de la Bible.
+						</para>
+				</listitem>
+		 	</varlistentry>
+                        <varlistentry>
+				<term>Barre de raccourcis</term>
+				<listitem>
+					<para>
+					<!--	The <interface>Side pane</interface> provides access to several features. 
+						It contains your bookmarks and the list of installed books. It can also be 
+						used to perform simple searches. -->
+						La <interface>barre de raccourcis</interface> vous offre différentes possibilités. Elle contient la liste des modules de textes installés, la liste de vos signets, elle peut aussi être utilisée pour réaliser des recherches simples. <!-- ' -->
+					</para>
+				</listitem>
+		  	 </varlistentry>
+		  	 <varlistentry>
+				<term>Zone d'affichage des textes bibliques</term>
+	                        <listitem>
+					 <para>
+					<!--	The <interface>Bible Text pane</interface> displays the Bible text which is currently being viewed. -->
+						La <interface>zone d'affichage des textes bibliques</interface> présente le texte de la version de la Bible choisie.<!-- ' -->
+					 </para>
+			        </listitem>
+		  	 </varlistentry>
+		  	 <varlistentry>
+			 	<term>Zone d'affichage des commentaires</term>
+			 	<listitem>
+					<para>
+					<!--	The <interface>Commentary pane</interface> displays commentaries on the current Bible Text being used. -->
+						La <interface>zone d'affichage des commentaires</interface> affiche le commentaire relatif au texte biblique présenté.
+					</para>
+			 	</listitem>
+		         </varlistentry>
+			 <varlistentry>
+			 	<term>Zone d'affichage des dictionnaires et ouvrages</term>
+			 	<listitem>
+					<para>
+					<!--	The <interface>Dictionary/Book Pane</interface> displays dictionary information
+						on selected words in the <interface>Bible Text Pane</interface>. -->
+						La <interface>Zone d'affichage des dictionnaires et livres d'étude</interface> affiche l'entrée du dictionnaire relative au mot selectionné ou affcihe le contneu du livre d'étude choisi.
+					 </para>
+			 	</listitem>
+		         </varlistentry>
+		         </variablelist>
+		         <para>
+			<!--	When you right-click in the different interface sections, the interface displays a popup menu.  -->
+				Quand vous effectuez un click du bouton droit sur les différentes zones, <application>&app;</application>
+				vous affiche un menu de commande.
+			 </para>
+		 </sect2>
+  </sect1>
+
+ <!-- ============= The Gnomesword UI ============================= -->
+												 
+  <sect1 id="gnomesword-interface">
+ 	<title>L'interface</title><!--'-->
+
+ <!-- The Toolbar -->
+
+  	         <sect2 id="gnomesword-toolbar">
+   		 	<title>La barre d'outils </title>
+
+ 			<figure>
+    				<title>La barre d'outils </title>
+     				<screenshot>
+      					<mediaobject>
+						<imageobject>
+	      						<imagedata fileref="figures/gnomesword_interface_toolbar" format="PNG"/>
+						</imageobject>
+						<textobject>
+					        	<phrase>The Toolbar </phrase>
+						</textobject>
+				       </mediaobject>
+			        </screenshot>
+			</figure>
+				<para>
+				<!--	The <interface>Toolbar</interface> consists of the following functions: -->
+					La <interface>barre d'outils</interface> dispose des fonctions suivantes :<!--'-->
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+						<!--	Dictionary View Toggle	-->
+							Bouton d"affichage de la zone dictionnaire
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						<!--	Parallel View Toggle	-->
+							Bouton d'affichage de textes bibliques en mode parallèle
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						<!--	Bible Book Selector	-->
+							Sélecteur d'un livre de la Bible
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						<!--	Bible Chapter Selector	-->
+							Sélecteur d'un chapitre de la Bible
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						<!--	Bible Verse Selector	-->
+							Sélecteur d'un verset de la Bible
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						<!--	Bible Passage Summary	-->
+							Zone de saisie d'un passage de la Bible
+						</para>
+					</listitem>
+					<listitem>
+						<para>					
+						<!--	History Forward/Backward Selector	-->
+							Boutons de déplacement avant/arrière dans l'historique des versets consultés<!--'--> 
+						</para>
+					</listitem>
+				</itemizedlist>
+			<sect3 id="gnomesword-toolbar-dictionary">
+				<title>Bouton d'affichage de la zone dictionnaire</title>
+				<para>
+				<!--	Allows quick switching between dictionary and book modules currently installed.	-->
+					Permet de basculer l'affichage entre le dictionnaire et le livre d'étude choisi.
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-parallel">
+				<title>Bouton d'affichage de textes bibliques en mode parallèle</title>
+				<para>
+				<!--	Allows quick switching between single translation and multiple translation displays.	-->
+					Permet de basculer l'affichage entre la vue simple d'un texte biblique unque et la vue combinée de plusieurs versions de bibles en parallèle.
+				</para>		
+			</sect3>
+			<sect3 id="gnomesword-toolbar-book">
+				<title>Sélecteur d'un livre de la bible</title>
+				<para>		
+				<!--	Allows quick selecting of biblical book to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>.Changes take immediate effect.	-->
+					Permet de sélectionner rapidement un livre de la bible dont le premier verset sera affiché dans la <interface>zone d'affichage des textes bibliques</interface> et dans la <interface>zone d'affichage des commentaires</interface>. Les changements prennent effet immédiatement.
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-chapter">
+				<title>Selecteur d'un chapitre de la bible</title>
+				<para>
+				<!--	Allows quick selecting of biblical chapter of current book to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>.Changes take immediate effect.	-->
+					Permet de selectionner rapidement un chapitre du livre de la Bible présenté dans la 	<interface>zone	d'affichage des textes bibliques</interface> et dans la <interface>zone d'affichage des commentaires</interface>. Les changements prennent effet immédiatement.	<!--'-->
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-verse">
+				<title>Sélecteur d'un verset de la bible</title><!--'-->
+				<para>
+				<!--	Allows quick selecting of biblical verse of current chapter to be displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>.Changes take immediate effect. -->
+					Permet de selectionner rapidement un verset du chapitre de la Bible présenté dans la 		<interface>zone d'affichage des textes bibliques</interface> et dans la <interface>zone d'affichage des commentaires</interface>. Les changements prennent effet immédiatement.	<!--'-->
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-toolbar-summary">
+				<title>Zone de saisie d'un passage de la bible</title><!--'-->
+				<para>
+				<!--	Allows manual editing of passages which are displayed in the <interface>Bible Text Pane</interface> and 
+					<interface>Commentary Pane</interface>. Changes only take effect once button on the right is clicked. -->
+					Permet la saisie manuelle d'un passage qui sera présenté dans la <interface>zone d'affichage des textes bibliques</interface> et dans la <interface>zone d'affichage des commentaires</interface>. Les changements ne prennent effet	que lorsque le bouton situé à drote de la zone de saisie est activé.<!--'-->
+				</para>
+				<warning>
+					<para>
+					<!--	Please ensure that edited book,chapter and verse naming is correct, otherwise the wrong or no information
+						will be presented. -->
+						Vérifiez que la saisie des valeurs du livre, chapitre et verset est correcte, sinon le verset ne changera pas ou vous obtiendrez un passage erroné.
+					</para>
+				</warning>
+			</sect3>
+			<sect3 id="gnomeword-toolbar-history">
+				<title>Boutons de déplacement avant/arrière dans l'historique des versets</title><!--'-->
+				<para>
+				<!--	Allows quick and easy switching between current and previous passage selections. -->
+					Permettent de naviguer dans l'historique des passage consultés.
+				</para>
+			</sect3>
+
+		 </sect2>
+
+  <!--  The Shortcutbar  -->
+
+		 <sect2 id="gnomesword-sidepane">
+   		 	<title>La barre de raccourcis</title>
+
+  			<figure>
+				<title>La barre de raccourcis</title>
+   			  	<screenshot>
+			        	<mediaobject>
+						<imageobject>
+         						<imagedata fileref="figures/gnomesword_interface_shortcutbar" format="PNG"/>
+						 </imageobject>
+	 					 <textobject>
+					        	 <phrase>The Side Pane</phrase>
+						 </textobject>
+					</mediaobject>
+     				</screenshot>
+   			 </figure>
+
+   			 <para>
+     			 <!--	On the left hand side of <application>GnomeSword2</application> there is the shortcut bar. Here the
+     				user can quickly and easily switch between the different Bible texts,
+     				commentaries,dictionaries and general books. Also, you can select and
+     				edit your bookmarks,view search results, view verse lists and view your
+     				daily devotional book by simply clicking on the <guibutton>module</guibutton>
+     				icon and select your selection. -->
+     				La barre de raccourcis est présente sur la partie gauche de <application>&app;</application>. C'est ici que l'utilisateur peut facilement changer de version de texte biblique, de commentaire, de dictionnaire et de livre d'étude. Il peut aussi gérer ses signets, voir les résultars de sa recherche de versets, les listes de versets et afficher le culte journalier en cliquant sur le bouton <guibutton>Modules</guibutton> puis en sélectionnant les options désirées.
+   			</para>
+   		</sect2>
+
+   <!--  The Bible Text -->
+
+   		 <sect2 id="gnomesword-bible">
+   		 	<title>La zone d'affichage des textes bibliques</title>
+  			<figure>
+   				<title>La zone des textes bibliques</title>
+   				<screenshot>
+       					<mediaobject>
+						<imageobject>
+          						<imagedata fileref="figures/gnomesword_interface_bible" format="PNG"/>
+	 					</imageobject>
+						<textobject>
+         						<phrase>The Bible Text Pane</phrase>
+	 					</textobject>
+				        </mediaobject>
+			        </screenshot>
+			</figure>
+		        <para>
+			<!--	Positioned to the right of the Shortcut bar is the Bible text dialog.Here All your different translations
+			        will be displayed for full viewing.When starting <application>GnomeSword2</application> either your default 
+				Bible translation or the translation last used will be displayed. -->
+				La zone d'affichage des textes bibliques se présente à droite de la barre de raccourcis. Les différentes versions de la Bible seront affichées dans cette zone.
+			</para>
+
+			<sect3 id="gnomesword-bible-open">
+				<title>Ouvrir une version spécifique de la Bible</title>
+				<para>‍
+				<!--	In order to change the current Bible translation to another of your choice simply: -->
+					Pour changer de version de texte biblique, suivez au choix les instructions suivantes :
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+						<!--	right-click in the	<interface> Bible Text Pane </interface>.In the popup menu choose
+							<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open Module</guimenuitem></menuchoice>
+							and select your specific translation that you want to view. -->
+							Cliquez avec le bouton droit dans la <interface>zone d'affichage des textes bibliques</interface>. Dans le menu qui se présente, choisissez <menuchoice><guimenuitem>Fichier</guimenuitem><guimenuitem>Ouvrir le module</guimenuitem></menuchoice> et sélectionnez la version que vous désirez.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+						<!--	 under the <guibutton>Modules</guibutton> option in the <interface>Side Pane</interface>,choose 							<menuchoice><guimenuitem>Biblical Texts</guimenuitem><guimenuitem>language choice</guimenuitem>
+							</menuchoice>and select your specific translation.-->
+							Avec l'option <guibutton>Modules</guibutton> dans la <interface>barre d'outils</interface>,
+							choisissez <menuchoice><guimenuitem>Textes bibliques</guimenuitem><guimenuitem>le langage de votre choix</guimenuitem></menuchoice> et selectionnez la version que vous désirez.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+
+			<sect3 id="gnomesword-bible-open-seperate">
+				<title>Ouvrir séparément une version de la bible</title>
+				<para>
+				<!--	In order to view a Bible translation separate from the <application>GnomeSword2</application> interface,simply: -->
+					Pour afficher une version de la bible dans une fenêtre séparée de <application>&app;</application>, suivez au choix les instructions suivantes :
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+						<!--	right-click in the	<interface> Bible Translation Display Area</interface>.In the popup menu choose
+							<menuchoice><guimenuitem>File</guimenuitem><guimenuitem>Open current in a dialog Module
+							</guimenuitem></menuchoice>. -->
+							Cliquez avec le bouton droit dans la <interface>zone d'affichage des textes bibliques</interface>. Dans le menu qui se présente, choisissez <menuchoice><guimenuitem>Fichier</guimenuitem>			<guimenuitem>Ouvrir le module dans une fenêtre </guimenuitem></menuchoice>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Avec l'option <guibutton>Modules</guibutton> dans la <interface>barre d'outils</interface>, choisissez <menuchoice><guimenuitem>Textes bibliques</guimenuitem><guimenuitem>le langage de votre choix</guimenuitem></menuchoice> puis cliquez avec le bouton droit sur la version désirée et choisissez <menuchoice><guimenuitem>Ouvrir dans une fenêtre </guimenuitem></menuchoice>.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			<sect3 id="gnomesword-bible-about">
+			<!--	<title>Finding Out About The Current Translation</title> -->
+				<title>Notes à propos de la version de la Bible</title>
+				<para>
+					Pour afficher les notes d'information à propos de la version en cours de la Bible, suivez les instructions suivantes:
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							Cliquez du bouton droit dns la <interface>zone d'affichage des textes bibliques</interface>. Dans le menu qui se présente, choisissez <guimenuitem>À propos de</guimenuitem>.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			<sect3 id="gnomesword-bible-options">
+				<title>Options du module</title>
+				<para>
+					De nombreuses versions de la Bible comportent des options supplémentaires que l'utilisateur peut valider ou non. Ces options sont les suivantes :
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							Mots de Christ en rouge
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Nombres de Strong
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Étiquettes morphologiques
+						</para>
+					</listitem>
+					<listitem>	
+						<para>
+							Notes de bas de page
+						</para>
+					</listitem>
+					<listitem>	
+						<para>
+							Références croisées de l'Écriture
+						</para>
+					</listitem>
+					<listitem>	
+						<para>
+							Entêtes de chapitres
+						</para>
+					</listitem>
+				</itemizedlist>
+				<note>
+					<para>
+						Les versions en grec ou hébreu possèdent des options spécifiques qui ne s'appliquent qu'à ces langages.
+					</para>
+				</note>
+				<para>
+					Pour accèder à ces options :
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							Cliquez du bouton droit dans la <interface>zone d'affichage des textes bibliques</interface>. Dans le menu qui se présente, choisissez <guimenuitem>Options du module</guimenuitem> 
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			<sect3 id="gnomesword-bible-dictionary">
+				<title>Définition d'un mot</title>
+				<para>
+					Pour afficher la définition d'un mot, cliquez simplement sur le mot souhaité dans le texte, il est mis en surbrillance et sa définition est affichée dans ldictionnaire
+				</para>
+			</sect3>
+			<sect3 id="gnomesword-bible-find">
+				<title>Rechercher un mot</title>
+				<para>
+					Pour rechercher un mot à l'intérieur d'un passage, suivez les instructions suivantes :
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							Cliquez du bouton droit dans la <interface>zone d'affichage des textes bibliques</interface>. Dans le menu qui se présente, choisissez <guimenuitem>Éditer</guimenuitem>-&gt;<guibutton>Rechercher</guibutton>. Saisissez le texte à rechercher dans la boite de dialogue qui apparait.
+						</para>	
+					</listitem>
+				</itemizedlist>
+			</sect3>
+
+		 </sect2>
+
+   <!--  The Commentary Pane -->
+		<sect2 id="gnomesword-commentaries">
+   		 	<title>La zone d'affichage des commentaires</title>
+  			<figure>
+   				<title>La zone commentaires</title>
+   				<screenshot>
+       					<mediaobject>
+						<imageobject>
+          						<imagedata fileref="figures/gnomesword_interface_commentarypane" format="PNG"/>
+	 					</imageobject>
+						<textobject>
+         						<phrase>The Commentary Pane</phrase>
+	 					</textobject>
+				        </mediaobject>
+			        </screenshot>
+			</figure>
+			<para>
+			<!--	The <interface>Commentary Pane</interface> is where the commentary modules are displayed.This provides easy
+				reading,reference and  access to different commentaries currently installed. The passage viewed by the 
+				<interface>Commentary Pane</interface> is directly controlled by the current passage viewed in the <interface>Bible
+				Text Pane</interface>,so in order to change to a different passage commentary, simply select the desired passage
+				on the <interface>Toolbar</interface>. -->
+				La <interface>zone d'affichage des commentaires</interface> affiche les commentaire relatifs à un verset de la Bible. Elle permet la lecture et l'accès aux différents modules de commentaires installés.<!--'-->
+			</para>
+			<note>
+				<para>
+				<!--	By changing to passage settings on the <interface>Toolbar</interface>,the contents in the 
+					<interface>Bible Text Pane</interface> and the <interface>Commentary Pane</interface> will be changed. 	 -->
+					Le changement de passage dans la <interface>barre d'outils</interface> entraîne le changement de verset dans la <interface>zone d'affichage des textes bibliques</interface> et le changement du commentaire correspondant dans la <interface>zone d'affichage des commentaires</interface>. <!--'-->
+				</para>
+			</note>
+
+			<sect3 id="gnomesword-commentary-about">
+				<title>Notes à propos du module commentaire</title>
+				<para>
+					Pour afficher les notes d'information à propos du module commentaires en cours, suiverz les instructions suivantes :
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							Cliquez du bouton droit dans la <interface>zone d'affichage des commentaires</interface>. Dans le menu qui se présente, choisissez <guimenuitem>À propos de</guimenuitem>.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</sect3>
+			<sect3 id="gnomesword-commentary-headings">
+				<title>En-têtes des commentaires.</title>	
+				<para>
+					  De nombreux commentaires comprennent des en-têtes d'introduction au livre ou au chapitre du passage en cours. Pour les afficher, suivez les instructions suivantes :  
+				</para>
+				<itemizedlist>
+					 <listitem>
+						<para>
+							Cliquez du bouton droit dans la <interface>zone d'affichage des commentaires</interface>. Dans le menu qui se présente, choisissez <guimenuitem>En-tête de chapitre</guimenuitem>.
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					Répétez les opérations suivantes et choisissez <guimenuitem>En-tête de livre</guimenuitem> à la place de <guimenuitem>En-tête de chapitre</guimenuitem> si vous désirez afficher l'en-tête du livre.
+				</para>
+			</sect3>
+		</sect2>		
+   </sect1>
+
+<!--   =============The Search Dialogs========================= -->
+   <sect1 id="gnomesword-search">
+<!--	<title>Using The Search Functions</title> -->
+	<title>Utiliser les fonctions de recherche</title>
+	<para>
+	.
+	</para>
+  </sect1>
+
+ <!-- ============= The Studypad ============================= -->
+   <sect1 id="gnomesword-studypad">
+<!--  	<title>Using The Studypad</title> -->
+	<title>Utiliser le bloc-notes d'étude</title> <!--'-->
+	<para>
+	<!--	The Studypad can be open by simply choosing <guibutton>File-&gt;Open Studypad</guibutton> -->
+		Le bloc-notes d'étude s'ouvre en utilisant le menu <guibutton>Fichier-&gt;Ouvrir le bloc-notes d'étude</guibutton><!--'-->
+	</para>
+	<para>
+	<!--	This is what the Studypad typically looks like: -->
+		Apparence du bloc-notes d'étude :<!--'-->
+	</para>
+	<figure>
+		<title>Le bloc-notes d'étude</title><!--'-->
+		<screenshot>
+	 	       <mediaobject>
+		      		<imageobject>
+				        <imagedata fileref="figures/gnomesword_studypad" format="PNG"/>
+				</imageobject>
+			 	<textobject>
+		     			<phrase>The Studypad</phrase>
+				</textobject>
+		       </mediaobject>
+		 </screenshot>
+	   </figure>
+
+  </sect1>
+
+ <!-- ============= Preferences Dialog ============================= -->
+
+  <sect1 id="gnomesword-preferences">
+<!--  	<title>Using The Preferences</title> -->
+	<title>Préférences</title>
+	<figure>
+	<!--	 <title>Configuring Fonts and Colors</title> -->
+		<title>Configurer les polices et couleurs</title>
+	         <screenshot>
+	         	<mediaobject>
+	         		<imageobject>
+		     	           <imagedata fileref="figures/gnomesword_preferences_font_colors" format="PNG"/>
+				</imageobject>
+		        	<textobject>
+			        	<phrase>Configuring Fonts and Colors</phrase>
+				</textobject>
+		        </mediaobject>
+		 </screenshot>
+	</figure>
+
+   	<figure>
+        <!--	<title>Configuring General Settings</title> -->
+        	<title>Configurer les options générales</title>
+     		<screenshot>
+		       <mediaobject>
+		       		<imageobject>
+			 	       <imagedata fileref="figures/gnomesword_preferences_misc_settings" format="PNG"/>
+			        </imageobject>
+		         	<textobject>
+		     	 	       <phrase>Configuring General Settings</phrase>
+			        </textobject>
+		       </mediaobject>
+		 </screenshot>
+	</figure>
+
+	<figure>
+	<!--	<title>Configuring SWORD Modules</title> -->
+		<title>Configurer les modules de SWORD</title>
+	        <screenshot>
+	 	       <mediaobject>
+		       		<imageobject>
+				        <imagedata fileref="figures/gnomesword_preferences_sword_config" format="PNG"/>
+				 </imageobject>
+			        <textobject>
+		                	<phrase>Configuring SWORD Modules</phrase>
+	 			</textobject>
+		 	</mediaobject>
+        	 </screenshot>
+        </figure>
+ </sect1>
+
+</article>
