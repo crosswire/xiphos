@@ -47,7 +47,7 @@
 #include "gui/cipher_key_dialog.h"
 #include "gui/dialog.h"
 #include "gui/bibletext.h"
-#include "gui/commentary.h"
+#include "gui/commentary_menu.h"
 
 #include "main/sword.h"
 #include "main/settings.h"

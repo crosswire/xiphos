@@ -44,24 +44,12 @@ struct  _text_global_ops {
 	    variants_secondary;
 };
 
-typedef struct _text_find_dialog Text_Find_Dialog;
-struct _text_find_dialog {
-	GnomeDialog *dialog;
-	GtkWidget *htmlwidget;
-	GtkWidget *entry;
-	GtkWidget *backward;
-	GtkWidget *case_sensitive;
-	gboolean regular;
-};
-
 typedef struct _text_data TEXT_DATA;
 struct _text_data {
 	GtkWidget *vbox;
 	GtkWidget *html;
 	GtkWidget *frame;
-	GtkWidget *frame_toolbar;
 	GtkWidget *showtabs;
-	GtkWidget *showtoolbar;
 	GtkWidget *module_options_menu;
 	
 	gchar *mod_name;
@@ -76,10 +64,11 @@ struct _text_data {
 	gboolean is_dialog;
 	
 	TEXT_GLOBALS *tgs;
-	Text_Find_Dialog *find_dialog;
 };
 extern TEXT_DATA *cur_t;
 
+void gui_lookup_bibletext_selection(GtkMenuItem * menuitem,
+				 gchar * dict_mod_description);
 void gui_unlock_bibletext(GtkMenuItem * menuitem, TEXT_DATA * t);
 void gui_set_text_frame_label(void);
 void gui_set_text_page_and_key(gint page_num, gchar * key);

@@ -973,8 +973,6 @@ static GtkWidget *gui_create_preferences_dialog(GList * biblelist,
 	GtkWidget *checkbutton_use_studypad_dialog;
 	GtkWidget *checkbutton_use_percomm_dialog;
 	GtkWidget *cbtnInDictPane;
-	GtkWidget *frame25;
-	GtkWidget *vbox37;
 	GtkWidget *cbtnPNformat;
 	GtkWidget *label123;
 	GtkWidget *scrolledwindow54;
