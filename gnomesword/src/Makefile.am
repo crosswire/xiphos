@@ -5,7 +5,7 @@ INCLUDES =  \
     $(EXTRA_APP_CFLAGS) \
     $(PIXBUF_CFLAGS) \
     $(SWORD_CPPFLAGS) \
-    $(GTKHTML_CFLAGS) \
+    $(PACKAGE_CFLAGS) \
     -I/usr/include/gnome-1.0/
 
 bin_PROGRAMS = gnomesword
@@ -123,7 +123,7 @@ gnomesword_LDADD = \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
     $(SWORD_LIBS) \
-    $(GTKHTML_LIBS)\
+    $(PACKAGE_LIBS)\
     $(GNOME_APP_LIBS)\
     $(GNOME_PRINT_LIBS) \
     $(PIXBUF_LIBS)

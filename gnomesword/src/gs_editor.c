@@ -1,29 +1,29 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
   /*
-     * GnomeSword Bible Study Tool
-     * gs_editor.c
-     * -------------------
-     * Mon Dec 10 2001
-     * copyright (C) 2001 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
+   * GnomeSword Bible Study Tool
+   * gs_editor.c
+   * -------------------
+   * Mon Dec 10 2001
+   * copyright (C) 2001 by Terry Biggs
+   * tbiggs@users.sourceforge.net
+   *
    */
 
  /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  *  This program is free software; you can redistribute it and/or modify
+  *  it under the terms of the GNU General Public License as published by
+  *  the Free Software Foundation; either version 2 of the License, or
+  *  (at your option) any later version.
+  *
+  *  This program is distributed in the hope that it will be useful,
+  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  *  GNU Library General Public License for more details.
+  *
+  *  You should have received a copy of the GNU General Public License
+  *  along with this program; if not, write to the Free Software
+  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   */
 
 #ifdef HAVE_CONFIG_H
@@ -46,6 +46,14 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+#ifdef USE_GTKHTML1
+#include <gtkhtml/htmlenums.h>
+#include <gtkhtml/htmlsettings.h>
+#include <gtkhtml/htmlcolor.h>
+#include <gtkhtml/htmlcolorset.h>
+#include <gtkhtml/htmllinktext.h>
+#endif		
+
 #ifdef USE_SPELL
 #include "spell.h"
 #include "spell_gui.h"
@@ -65,7 +73,7 @@ GSHTMLEditorControlData *gbsecd;
 
 extern SETTINGS *settings;
 extern char *homedir;
-extern gchar * current_filename;	/* filename for open file in study pad window  */
+extern gchar *current_filename;	/* filename for open file in study pad window  */
 extern GtkWidget *htmlComments;
 extern GtkWidget *toolbarComments;
 extern GtkWidget *toolbarBooks;
@@ -77,7 +85,8 @@ static GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd);
 
 GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
 {
-	GSHTMLEditorControlData *necd = g_new0(GSHTMLEditorControlData, 1);
+	GSHTMLEditorControlData *necd =
+	    g_new0(GSHTMLEditorControlData, 1);
 
 	necd->paragraph_option = NULL;
 	necd->properties_types = NULL;
@@ -89,7 +98,7 @@ GSHTMLEditorControlData *gs_html_editor_control_data_new(SETTINGS * s)
 	sprintf(necd->filename, "%s", s->studypadfilename);
 	return necd;
 }
- 
+
 
 void gs_html_editor_control_data_destroy(GSHTMLEditorControlData * ecd)
 {
@@ -120,27 +129,27 @@ static void updatestatusbar(GSHTMLEditorControlData * ecd)
 
 	if (ecd->personal_comments)
 		buf2 = settings->percomverse;
-			
+
 	else
 		buf2 = ecd->filename;
 
-	if (ecd->changed){
+	if (ecd->changed) {
 		sprintf(buf, "%s - modified", buf2);
-		if(!ecd->personal_comments && !ecd->gbs)
+		if (!ecd->personal_comments && !ecd->gbs)
 			settings->modifiedSP = TRUE;
-		if(ecd->personal_comments)
+		if (ecd->personal_comments)
 			settings->modifiedPC = TRUE;
-		if(ecd->gbs)
+		if (ecd->gbs)
 			settings->modifiedGBS = TRUE;
 	} else {
 		sprintf(buf, "%s", buf2);
-		if(!ecd->personal_comments && !ecd->gbs)
+		if (!ecd->personal_comments && !ecd->gbs)
 			settings->modifiedSP = FALSE;
-		if(ecd->personal_comments)
+		if (ecd->personal_comments)
 			settings->modifiedPC = FALSE;
-		if(ecd->gbs)
+		if (ecd->gbs)
 			settings->modifiedGBS = FALSE;
-	} 
+	}
 
 	gtk_statusbar_push(GTK_STATUSBAR(ecd->statusbar), context_id2,
 			   buf);
@@ -159,7 +168,7 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	int fd;
 
 	current_filename = filename;
-	sprintf(settings->studypadfilename,"%s",filename);	
+	sprintf(settings->studypadfilename, "%s", filename);
 	//g_warning("filename = %s\n",current_filename);
 	ecd->changed = FALSE;
 	fd = open(filename, O_RDONLY);
@@ -181,7 +190,8 @@ gint load_file(gchar * filename, GSHTMLEditorControlData * ecd)
 	while (1) {
 		count = read(fd, buffer, BUFFER_SIZE);
 		if (count > 0)
-			gtk_html_write(ecd->html, stream, buffer, count);
+			gtk_html_write(ecd->html, stream, buffer,
+				       count);
 		else
 			break;
 	}
@@ -286,7 +296,7 @@ void savebookEDITOR(GtkWidget * html_widget)
 }
 
 
-gint save_file_program_end(GtkWidget *htmlwidget, gchar * filename)
+gint save_file_program_end(GtkWidget * htmlwidget, gchar * filename)
 {
 	int retval = -1;
 	int fd;
@@ -297,7 +307,8 @@ gint save_file_program_end(GtkWidget *htmlwidget, gchar * filename)
 			return -1;
 
 		if (!gtk_html_save
-		    (GTK_HTML(htmlwidget), (GtkHTMLSaveReceiverFn) save_receiver,
+		    (GTK_HTML(htmlwidget),
+		     (GtkHTMLSaveReceiverFn) save_receiver,
 		     GINT_TO_POINTER(fd)))
 			retval = -1;
 		else {
@@ -353,7 +364,8 @@ void load_text_from_spell_EDITOR(GtkWidget * text,
 	GtkHTMLStreamStatus status1 = 0;
 	gboolean was_editable;
 
-	buf = gtk_editable_get_chars(GTK_EDITABLE(GTK_TEXT(text)), 0, -1);
+	buf =
+	    gtk_editable_get_chars(GTK_EDITABLE(GTK_TEXT(text)), 0, -1);
 
 	was_editable = gtk_html_get_editable(ecd->html);
 	utf8str = e_utf8_from_gtk_string(ecd->htmlwidget, buf);
@@ -390,7 +402,8 @@ gboolean load_text_for_spell_EDITOR(GtkWidget * text,
 }
 #endif				/* USE_SPELL */
 
-void on_editor_destroy(GtkObject * object, GSHTMLEditorControlData * ecd)
+void on_editor_destroy(GtkObject * object,
+		       GSHTMLEditorControlData * ecd)
 {
 	gs_html_editor_control_data_destroy(ecd);
 }
@@ -420,29 +433,32 @@ html_key_pressed(GtkWidget * html, GdkEventButton * event,
 	return 1;
 }
 
-static void html_load_done(GtkWidget * html, GSHTMLEditorControlData * ecd)
+static void html_load_done(GtkWidget * html,
+			   GSHTMLEditorControlData * ecd)
 {
 	updatestatusbar(ecd);
 }
 
-static void on_submit(GtkHTML * html, const gchar *method, const gchar *url, const gchar *encoding, GSHTMLEditorControlData * ecd)
-{	
+static void on_submit(GtkHTML * html, const gchar * method,
+		      const gchar * url, const gchar * encoding,
+		      GSHTMLEditorControlData * ecd)
+{
 	/*
-	GList *l;
-	
-	l = NULL;
-	
-	l=html->engine->form->elements;
-	while (l != NULL) {	
-		g_warning((gchar *) l->data);
-		l = g_list_next(l);
-	}
-	g_list_free(l);
-	*/
+	   GList *l;
+
+	   l = NULL;
+
+	   l=html->engine->form->elements;
+	   while (l != NULL) {  
+	   g_warning((gchar *) l->data);
+	   l = g_list_next(l);
+	   }
+	   g_list_free(l);
+	 */
 	g_warning(method);
 	g_warning(url);
 	g_warning(encoding);
-	
+
 }
 
 /******************************************************************************
@@ -492,13 +508,11 @@ on_html_enter_notify_event(GtkWidget * widget,
 }
 
 /*** create editor ui ***/
-GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox, 
+GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			 SETTINGS * s, GSHTMLEditorControlData * necd)
 {
-	GtkWidget 
-		* frame34, 
-		*scrolledwindow17;
-	
+	GtkWidget * frame34, *scrolledwindow17;
+
 	frame34 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame34);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame34", frame34,
@@ -535,16 +549,16 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 				 necd->statusbar,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(necd->statusbar);
-	gtk_box_pack_start(GTK_BOX(vbox), necd->statusbar, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), necd->statusbar, FALSE, TRUE,
+			   0);
 
-	 
-	 
+
+
 	necd->vbox = vbox;
 	necd->pm = create_pmEditor(necd);
 	gnome_popup_menu_attach(necd->pm, necd->htmlwidget, NULL);
 	gtk_signal_connect(GTK_OBJECT(necd->html), "submit",
-			   GTK_SIGNAL_FUNC(on_submit), 
-			   necd);
+			   GTK_SIGNAL_FUNC(on_submit), necd);
 	gtk_signal_connect(GTK_OBJECT
 			   (necd->htmlwidget),
 			   "load_done",
@@ -561,30 +575,28 @@ GtkWidget *create_editor(GtkWidget * htmlwidget, GtkWidget * vbox,
 			   "enter_notify_event",
 			   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 			   necd);
-	gtk_signal_connect(GTK_OBJECT(necd->htmlwidget), "link_clicked",
-			   GTK_SIGNAL_FUNC(on_link_clicked), /* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(necd->htmlwidget), "link_clicked", GTK_SIGNAL_FUNC(on_link_clicked),	/* gs_html.c */
 			   NULL);
-	gtk_signal_connect(GTK_OBJECT(necd->htmlwidget), "on_url",
-			   GTK_SIGNAL_FUNC(on_url),  /* gs_html.c */
+	gtk_signal_connect(GTK_OBJECT(necd->htmlwidget), "on_url", GTK_SIGNAL_FUNC(on_url),	/* gs_html.c */
 			   NULL);
-			   
-	if(necd->personal_comments){
+
+	if (necd->personal_comments) {
 		s->toolbarComments = toolbar_style(necd);
 		gtk_widget_hide(s->toolbarComments);
 	}
-			   
-	else if(necd->gbs){
+
+	else if (necd->gbs) {
 		s->toolbarBooks = toolbar_style(necd);
 		gtk_widget_hide(s->toolbarBooks);
 	}
-	
+
 	else {
 		s->toolbarStudypad = toolbar_style(necd);
 		gtk_widget_hide(s->toolbarStudypad);
-		if(settings->studypadfilename)
-			load_file(settings->studypadfilename,necd);
+		if (settings->studypadfilename)
+			load_file(settings->studypadfilename, necd);
 	}
-		
+
 	return necd->htmlwidget;
 }
 
@@ -605,7 +617,8 @@ on_new_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 				    ecd->filename);
 		msgbox = create_InfoBox();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		answer =
+		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
 		g_free(msg);
 		switch (answer) {
 		case 0:
@@ -639,7 +652,8 @@ static void on_open_activate(GtkMenuItem * menuitem,
 				    ecd->filename);
 		msgbox = create_InfoBox();
 		gnome_dialog_set_default(GNOME_DIALOG(msgbox), 2);
-		answer = gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
+		answer =
+		    gnome_dialog_run_and_close(GNOME_DIALOG(msgbox));
 		g_free(msg);
 		switch (answer) {
 		case 0:
@@ -651,14 +665,16 @@ static void on_open_activate(GtkMenuItem * menuitem,
 	}
 	sprintf(buf, "%s/*.pad", homedir);
 	openFile = create_fileselection1(ecd);
-	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile), buf);
+	gtk_file_selection_set_filename(GTK_FILE_SELECTION(openFile),
+					buf);
 	gtk_widget_show(openFile);
 }
 
 static void
-on_savenote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
+on_savenote_activate(GtkMenuItem * menuitem,
+		     GSHTMLEditorControlData * ecd)
 {
-	if(ecd->personal_comments)
+	if (ecd->personal_comments)
 		savenoteEDITOR(ecd->htmlwidget);
 	else
 		savebookEDITOR(ecd->htmlwidget);
@@ -677,7 +693,7 @@ on_deletenote_activate(GtkMenuItem * menuitem,
 
 
 void on_save_activate(GtkMenuItem * menuitem,
-			     GSHTMLEditorControlData * ecd)
+		      GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *savemyFile;
 	gchar buf[255];
@@ -711,8 +727,8 @@ static void on_save_as_activate(GtkMenuItem * menuitem,
 
 static void
 on_print_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{	
-	html_print(ecd->htmlwidget); /* gs_html.c */
+{
+	html_print(ecd->htmlwidget);	/* gs_html.c */
 }
 
 
@@ -735,7 +751,11 @@ on_copy_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 static void
 on_paste_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 {
+#ifdef USE_GTKHTML1
+	gtk_html_paste(ecd->html, FALSE);
+#else
 	gtk_html_paste(ecd->html);
+#endif
 	ecd->changed = TRUE;
 	updatestatusbar(ecd);
 }
@@ -765,7 +785,8 @@ on_find_again_activate(GtkMenuItem * menuitem,
 
 
 static void
-on_replace_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
+on_replace_activate(GtkMenuItem * menuitem,
+		    GSHTMLEditorControlData * ecd)
 {
 	replace(ecd);
 }
@@ -780,38 +801,43 @@ on_link_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
 }
 
 static void
-on_autoscroll_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{	
+on_autoscroll_activate(GtkMenuItem * menuitem,
+		       GSHTMLEditorControlData * ecd)
+{
 	settings->notefollow = GTK_CHECK_MENU_ITEM(menuitem)->active;
 }
 
 static void
-on_editnote_activate(GtkMenuItem * menuitem, GSHTMLEditorControlData * ecd)
-{	
-	if(ecd->personal_comments) {
-		settings->editnote = GTK_CHECK_MENU_ITEM(menuitem)->active;
-		
-		if(GTK_CHECK_MENU_ITEM(menuitem)->active){		
+on_editnote_activate(GtkMenuItem * menuitem,
+		     GSHTMLEditorControlData * ecd)
+{
+	if (ecd->personal_comments) {
+		settings->editnote =
+		    GTK_CHECK_MENU_ITEM(menuitem)->active;
+
+		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
 			gtk_widget_show(settings->toolbarComments);
 		}
-	
+
 		else {
 			gtk_widget_hide(settings->toolbarComments);
 		}
 	}
-	
-	if(ecd->gbs) {
-		settings->editgbs = GTK_CHECK_MENU_ITEM(menuitem)->active;
-		
-		if(GTK_CHECK_MENU_ITEM(menuitem)->active){		
+
+	if (ecd->gbs) {
+		settings->editgbs =
+		    GTK_CHECK_MENU_ITEM(menuitem)->active;
+
+		if (GTK_CHECK_MENU_ITEM(menuitem)->active) {
 			gtk_widget_show(settings->toolbarBooks);
 		}
-	
+
 		else {
 			gtk_widget_hide(settings->toolbarBooks);
 		}
 	}
-	gtk_html_set_editable(GTK_HTML(ecd->html), GTK_CHECK_MENU_ITEM(menuitem)->active);
+	gtk_html_set_editable(GTK_HTML(ecd->html),
+			      GTK_CHECK_MENU_ITEM(menuitem)->active);
 
 }
 
@@ -850,83 +876,96 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	//GtkWidget *link;
 	GtkAccelGroup *accel_group;
 
-	accel_group = gtk_accel_group_new ();
+	accel_group = gtk_accel_group_new();
 
 	ecd->editnote = NULL;
-	
+
 	pmEditor = gtk_menu_new();
 	gtk_object_set_data(GTK_OBJECT(pmEditor), "pmEditor", pmEditor);
 	pmEditor_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(pmEditor));
-	    
+
 	if (ecd->personal_comments) {
-		autoscroll = gtk_check_menu_item_new_with_label("Auto Scroll");
+		autoscroll =
+		    gtk_check_menu_item_new_with_label("Auto Scroll");
 		gtk_widget_ref(autoscroll);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "autoscroll",
-				 autoscroll,
-				 (GtkDestroyNotify) gtk_widget_unref);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "autoscroll", autoscroll,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
 		gtk_widget_show(autoscroll);
 		gtk_container_add(GTK_CONTAINER(pmEditor), autoscroll);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(autoscroll),
-				       TRUE);
-				       
-		ecd->editnote = gtk_check_menu_item_new_with_label("Edit Note");
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (autoscroll), TRUE);
+
+		ecd->editnote =
+		    gtk_check_menu_item_new_with_label("Edit Note");
 		gtk_widget_ref(ecd->editnote);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->editnote",
-				 ecd->editnote,
-				 (GtkDestroyNotify) gtk_widget_unref);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "ecd->editnote", ecd->editnote,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
 		gtk_widget_show(ecd->editnote);
-		gtk_container_add(GTK_CONTAINER(pmEditor), ecd->editnote);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ecd->editnote),
-				       FALSE);	
-				       
-		separator = gtk_menu_item_new ();
-		gtk_widget_ref (separator);
-		gtk_object_set_data_full (GTK_OBJECT (pmEditor), "separator", separator,
-                            (GtkDestroyNotify) gtk_widget_unref);
-		gtk_widget_show (separator);
-		gtk_container_add (GTK_CONTAINER (pmEditor), separator);
-		gtk_widget_set_sensitive (separator, FALSE);		    
+		gtk_container_add(GTK_CONTAINER(pmEditor),
+				  ecd->editnote);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (ecd->editnote), FALSE);
+
+		separator = gtk_menu_item_new();
+		gtk_widget_ref(separator);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "separator", separator,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
 	}
-	    
+
 	if (ecd->gbs) {
-				       
-		ecd->editnote = gtk_check_menu_item_new_with_label("Edit");
+
+		ecd->editnote =
+		    gtk_check_menu_item_new_with_label("Edit");
 		gtk_widget_ref(ecd->editnote);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->editnote",
-				 ecd->editnote,
-				 (GtkDestroyNotify) gtk_widget_unref);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "ecd->editnote", ecd->editnote,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
 		gtk_widget_show(ecd->editnote);
-		gtk_container_add(GTK_CONTAINER(pmEditor), ecd->editnote);
-		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ecd->editnote),
-				       FALSE);	
+		gtk_container_add(GTK_CONTAINER(pmEditor),
+				  ecd->editnote);
+		gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
+					       (ecd->editnote), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(ecd->editnote),
-				 FALSE);
-				       
-		separator = gtk_menu_item_new ();
-		gtk_widget_ref (separator);
-		gtk_object_set_data_full (GTK_OBJECT (pmEditor), "separator", separator,
-                            (GtkDestroyNotify) gtk_widget_unref);
-		gtk_widget_show (separator);
-		gtk_container_add (GTK_CONTAINER (pmEditor), separator);
-		gtk_widget_set_sensitive (separator, FALSE);		    
+					 FALSE);
+
+		separator = gtk_menu_item_new();
+		gtk_widget_ref(separator);
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "separator", separator,
+					 (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(separator);
+		gtk_container_add(GTK_CONTAINER(pmEditor), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
 	}
-				  			       
+
 	ecd->file = gtk_menu_item_new_with_label("");
-	tmp_key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(ecd->file)->child),
-					_("File"));
-	gtk_widget_add_accelerator(ecd->file, "activate_item", pmEditor_accels,
-				   tmp_key, 0, 0);
+	tmp_key =
+	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(ecd->file)->child),
+				  _("File"));
+	gtk_widget_add_accelerator(ecd->file, "activate_item",
+				   pmEditor_accels, tmp_key, 0, 0);
 	gtk_widget_ref(ecd->file);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->file", ecd->file,
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->file",
+				 ecd->file,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->file);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->file);
-	
-	if (ecd->gbs)		
-		gtk_widget_set_sensitive(GTK_WIDGET(ecd->file),
-				 FALSE);
-	
+
+	if (ecd->gbs)
+		gtk_widget_set_sensitive(GTK_WIDGET(ecd->file), FALSE);
+
 	file_menu = gtk_menu_new();
 	gtk_widget_ref(file_menu);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "file_menu",
@@ -937,10 +976,11 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(file_menu));
 
 	if (ecd->personal_comments) {
-		save_note = gtk_menu_item_new_with_label(_("Save Note"));
+		save_note =
+		    gtk_menu_item_new_with_label(_("Save Note"));
 		gtk_widget_ref(save_note);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "save_note",
-					 save_note,
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "save_note", save_note,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(save_note);
@@ -954,24 +994,25 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(delete_note);
-		gtk_container_add(GTK_CONTAINER(file_menu), delete_note);
+		gtk_container_add(GTK_CONTAINER(file_menu),
+				  delete_note);
 	}
-	
+
 	else if (ecd->gbs) {
 
 		open = gtk_menu_item_new_with_label(_("Open File"));
 		gtk_widget_ref(open);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "open",
-					 open,
-					 (GtkDestroyNotify)
+					 open, (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(open);
 		gtk_container_add(GTK_CONTAINER(file_menu), open);
 
-		save_note = gtk_menu_item_new_with_label(_("Save Entry"));
+		save_note =
+		    gtk_menu_item_new_with_label(_("Save Entry"));
 		gtk_widget_ref(save_note);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "save_note",
-					 save_note,
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor),
+					 "save_note", save_note,
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(save_note);
@@ -985,14 +1026,15 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 					 (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(delete_note);
-		gtk_container_add(GTK_CONTAINER(file_menu), delete_note);
+		gtk_container_add(GTK_CONTAINER(file_menu),
+				  delete_note);
 	}
 
 	else {
 		new = gtk_menu_item_new_with_label(_("New"));
 		gtk_widget_ref(new);
-		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "new", new,
-					 (GtkDestroyNotify)
+		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "new",
+					 new, (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(new);
 		gtk_container_add(GTK_CONTAINER(file_menu), new);
@@ -1000,8 +1042,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 		open = gtk_menu_item_new_with_label(_("Open"));
 		gtk_widget_ref(open);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "open",
-					 open,
-					 (GtkDestroyNotify)
+					 open, (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(open);
 		gtk_container_add(GTK_CONTAINER(file_menu), open);
@@ -1009,8 +1050,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 		save = gtk_menu_item_new_with_label(_("Save"));
 		gtk_widget_ref(save);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "save",
-					 save,
-					 (GtkDestroyNotify)
+					 save, (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(save);
 		gtk_container_add(GTK_CONTAINER(file_menu), save);
@@ -1019,8 +1059,7 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 		saveas = gtk_menu_item_new_with_label(_("Save AS"));
 		gtk_widget_ref(saveas);
 		gtk_object_set_data_full(GTK_OBJECT(pmEditor), "saveas",
-					 saveas,
-					 (GtkDestroyNotify)
+					 saveas, (GtkDestroyNotify)
 					 gtk_widget_unref);
 		gtk_widget_show(saveas);
 		gtk_container_add(GTK_CONTAINER(file_menu), saveas);
@@ -1035,26 +1074,28 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 
 
 	ecd->edit2 = gtk_menu_item_new_with_label("");
-	tmp_key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(ecd->edit2)->child),
-					_("_Edit"));
-	gtk_widget_add_accelerator(ecd->edit2, "activate_item", pmEditor_accels,
-				   tmp_key, 0, 0);
+	tmp_key =
+	    gtk_label_parse_uline(GTK_LABEL(GTK_BIN(ecd->edit2)->child),
+				  _("_Edit"));
+	gtk_widget_add_accelerator(ecd->edit2, "activate_item",
+				   pmEditor_accels, tmp_key, 0, 0);
 	gtk_widget_ref(ecd->edit2);
-	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->edit2", ecd->edit2,
+	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "ecd->edit2",
+				 ecd->edit2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->edit2);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->edit2);
-	
-	if (ecd->gbs)		
-		gtk_widget_set_sensitive(GTK_WIDGET(ecd->edit2),
-				 FALSE);
-	
+
+	if (ecd->gbs)
+		gtk_widget_set_sensitive(GTK_WIDGET(ecd->edit2), FALSE);
+
 	edit2_menu = gtk_menu_new();
 	gtk_widget_ref(edit2_menu);
 	gtk_object_set_data_full(GTK_OBJECT(pmEditor), "edit2_menu",
 				 edit2_menu,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ecd->edit2), edit2_menu);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(ecd->edit2),
+				  edit2_menu);
 	edit2_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU(edit2_menu));
 
@@ -1109,10 +1150,10 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(find_again);
 	gtk_container_add(GTK_CONTAINER(edit2_menu), find_again);
-	gtk_widget_add_accelerator (find_again, "activate", accel_group,
-                              GDK_n, GDK_CONTROL_MASK,
-                              GTK_ACCEL_VISIBLE);
-	
+	gtk_widget_add_accelerator(find_again, "activate", accel_group,
+				   GDK_n, GDK_CONTROL_MASK,
+				   GTK_ACCEL_VISIBLE);
+
 
 	replace = gtk_menu_item_new_with_label(_("Replace"));
 	gtk_widget_ref(replace);
@@ -1129,44 +1170,48 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ecd->link);
 	gtk_container_add(GTK_CONTAINER(pmEditor), ecd->link);
-	
-	if (ecd->gbs)		
-		gtk_widget_set_sensitive(GTK_WIDGET(ecd->link),
-				 FALSE);
-	
+
+	if (ecd->gbs)
+		gtk_widget_set_sensitive(GTK_WIDGET(ecd->link), FALSE);
+
 	if (ecd->personal_comments) {
 		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
-				   GTK_SIGNAL_FUNC(on_savenote_activate),
-				   ecd);
+				   GTK_SIGNAL_FUNC
+				   (on_savenote_activate), ecd);
 		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
-				   GTK_SIGNAL_FUNC(on_deletenote_activate),
-				   ecd);
+				   GTK_SIGNAL_FUNC
+				   (on_deletenote_activate), ecd);
 		gtk_signal_connect(GTK_OBJECT(autoscroll), "activate",
-			   GTK_SIGNAL_FUNC(on_autoscroll_activate), 
-				   ecd);
-		gtk_signal_connect(GTK_OBJECT(ecd->editnote), "activate",
-			   GTK_SIGNAL_FUNC(on_editnote_activate), 
-				   ecd);
+				   GTK_SIGNAL_FUNC
+				   (on_autoscroll_activate), ecd);
+		gtk_signal_connect(GTK_OBJECT(ecd->editnote),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_editnote_activate), ecd);
 	} else if (ecd->gbs) {
 		gtk_signal_connect(GTK_OBJECT(save_note), "activate",
-				   GTK_SIGNAL_FUNC(on_savenote_activate),
-				   ecd);
+				   GTK_SIGNAL_FUNC
+				   (on_savenote_activate), ecd);
 		gtk_signal_connect(GTK_OBJECT(delete_note), "activate",
-				   GTK_SIGNAL_FUNC(on_deletenote_activate),
-				   ecd);
-		gtk_signal_connect(GTK_OBJECT(ecd->editnote), "activate",
-			   GTK_SIGNAL_FUNC(on_editnote_activate), 
-				   ecd);
+				   GTK_SIGNAL_FUNC
+				   (on_deletenote_activate), ecd);
+		gtk_signal_connect(GTK_OBJECT(ecd->editnote),
+				   "activate",
+				   GTK_SIGNAL_FUNC
+				   (on_editnote_activate), ecd);
 		gtk_signal_connect(GTK_OBJECT(open), "activate",
-				   GTK_SIGNAL_FUNC(on_open_activate), 
-				  ecd);
+				   GTK_SIGNAL_FUNC(on_open_activate),
+				   ecd);
 	} else {
 		gtk_signal_connect(GTK_OBJECT(new), "activate",
-				   GTK_SIGNAL_FUNC(on_new_activate), ecd);
+				   GTK_SIGNAL_FUNC(on_new_activate),
+				   ecd);
 		gtk_signal_connect(GTK_OBJECT(open), "activate",
-				   GTK_SIGNAL_FUNC(on_open_activate), ecd);
+				   GTK_SIGNAL_FUNC(on_open_activate),
+				   ecd);
 		gtk_signal_connect(GTK_OBJECT(save), "activate",
-				   GTK_SIGNAL_FUNC(on_save_activate), ecd);
+				   GTK_SIGNAL_FUNC(on_save_activate),
+				   ecd);
 		gtk_signal_connect(GTK_OBJECT(saveas), "activate",
 				   GTK_SIGNAL_FUNC(on_save_as_activate),
 				   ecd);
@@ -1188,13 +1233,14 @@ GtkWidget *create_pmEditor(GSHTMLEditorControlData * ecd)
 	gtk_signal_connect(GTK_OBJECT(find), "activate",
 			   GTK_SIGNAL_FUNC(on_find_activate), ecd);
 	gtk_signal_connect(GTK_OBJECT(find_again), "activate",
-			   GTK_SIGNAL_FUNC(on_find_again_activate), ecd);
+			   GTK_SIGNAL_FUNC(on_find_again_activate),
+			   ecd);
 	gtk_signal_connect(GTK_OBJECT(replace), "activate",
 			   GTK_SIGNAL_FUNC(on_replace_activate), ecd);
-	
+
 	gtk_signal_connect(GTK_OBJECT(ecd->link), "activate",
 			   GTK_SIGNAL_FUNC(on_link_activate), ecd);
-	gtk_menu_set_accel_group (GTK_MENU (pmEditor), accel_group);		  
+	gtk_menu_set_accel_group(GTK_MENU(pmEditor), accel_group);
 	return pmEditor;
 }
 
@@ -1206,15 +1252,40 @@ set_link_to_module(gchar * linkref, gchar * linkmod,
 		   GSHTMLEditorControlData * ecd)
 {
 	gchar buf[256], *target = "";
-	HTMLEngine *e = ecd->html->engine;
-
+	
+	HTMLEngine *e = ecd->html->engine;	
 	if (strlen(linkmod))
 		sprintf(buf, "version=%s passage=%s", linkmod, linkref);
 	else
 		sprintf(buf, "passage=%s", linkref);
+	
+#ifdef USE_GTKHTML1
+	const gchar *url;
+	const gchar *text;
+	url = buf;
+	text = linkref;
+	if (url && text && *url && *text) {
+		HTMLObject *new_link;
+		gchar *url_copy;
+		target = strchr(url, '#');
+		url_copy =
+		    target ? g_strndup(url,
+				       target - url) : g_strdup(url);
+		new_link =
+		    html_link_text_new(text,
+				       GTK_HTML_FONT_STYLE_DEFAULT,
+				       html_colorset_get_color(e->settings->color_set,
+							       HTMLLinkColor),
+				       url_copy, target);
+		html_engine_paste_object(e, new_link,
+					 g_utf8_strlen(text, -1));
+		g_free(url_copy);
+	}
+#else
 	html_engine_selection_push(e);
 	html_engine_insert_link(e, buf, target);
 	html_engine_selection_pop(e);
+#endif
 }
 
 static void
@@ -1226,13 +1297,13 @@ on_btnLinkOK_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 	linkreference =
 	    gtk_editable_get_chars(GTK_EDITABLE
 				   (lookup_widget
-				    (GTK_WIDGET(button), "entryLinkRef")),
-				   0, -1);
+				    (GTK_WIDGET(button),
+				     "entryLinkRef")), 0, -1);
 	linkmodule =
 	    gtk_editable_get_chars(GTK_EDITABLE
 				   (lookup_widget
-				    (GTK_WIDGET(button), "entryLinkMod")),
-				   0, -1);
+				    (GTK_WIDGET(button),
+				     "entryLinkMod")), 0, -1);
 	set_link_to_module(linkreference, linkmodule, ecd);
 
 	gtk_widget_destroy(dlg);
@@ -1244,9 +1315,10 @@ static void
 on_cancel_clicked(GtkButton * button, GSHTMLEditorControlData * ecd)
 {
 	GtkWidget *dlg = gtk_widget_get_toplevel(GTK_WIDGET(button));
-	
+
 	gtk_widget_destroy(dlg);
 }
+
 /*** create dialog for setting up links in text ***/
 GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 {
@@ -1279,11 +1351,13 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "vbox46", vbox46,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox46);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox17), vbox46, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox17), vbox46, TRUE, TRUE,
+			   0);
 
 	label182 = gtk_label_new(_("Reference"));
 	gtk_widget_ref(label182);
-	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "label182", label182,
+	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "label182",
+				 label182,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label182);
 	gtk_box_pack_start(GTK_BOX(vbox46), label182, FALSE, FALSE, 0);
@@ -1294,7 +1368,8 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 				 entryLinkRef,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entryLinkRef);
-	gtk_box_pack_start(GTK_BOX(vbox46), entryLinkRef, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox46), entryLinkRef, FALSE, FALSE,
+			   0);
 	gtk_tooltips_set_tip(tooltips, entryLinkRef,
 			     _
 			     ("Bible Reference or Module key to display when link is clicked"),
@@ -1307,7 +1382,8 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 
 	label183 = gtk_label_new(_("Module"));
 	gtk_widget_ref(label183);
-	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "label183", label183,
+	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "label183",
+				 label183,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label183);
 	gtk_box_pack_start(GTK_BOX(vbox46), label183, FALSE, FALSE, 0);
@@ -1318,7 +1394,8 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 				 entryLinkMod,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(entryLinkMod);
-	gtk_box_pack_start(GTK_BOX(vbox46), entryLinkMod, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox46), entryLinkMod, FALSE, FALSE,
+			   0);
 	gtk_tooltips_set_tip(tooltips, entryLinkMod,
 			     _
 			     ("Name of module to show when link is clicked"),
@@ -1336,7 +1413,8 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 	gnome_dialog_append_button(GNOME_DIALOG(dlgLink),
 				   GNOME_STOCK_BUTTON_OK);
 	btnLinkOK =
-	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgLink)->buttons)->data);
+	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgLink)->buttons)->
+		       data);
 	gtk_widget_ref(btnLinkOK);
 	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "btnLinkOK",
 				 btnLinkOK,
@@ -1347,7 +1425,8 @@ GtkWidget *create_dlgLink(GSHTMLEditorControlData * ecd)
 	gnome_dialog_append_button(GNOME_DIALOG(dlgLink),
 				   GNOME_STOCK_BUTTON_CANCEL);
 	btnLinkCancel =
-	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgLink)->buttons)->data);
+	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgLink)->buttons)->
+		       data);
 	gtk_widget_ref(btnLinkCancel);
 	gtk_object_set_data_full(GTK_OBJECT(dlgLink), "btnLinkCancel",
 				 btnLinkCancel,
@@ -1372,14 +1451,14 @@ GtkWidget *studypad_control(GtkWidget * notebook, SETTINGS * s)
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
 	//GSHTMLEditorControlData *specd =
-	   // gs_html_editor_control_data_new(s);
+	// gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
-	
+
 	specd = gs_html_editor_control_data_new(s);
 	specd->personal_comments = FALSE;
 	specd->gbs = FALSE;
-	
+
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
@@ -1444,7 +1523,7 @@ GtkWidget *percom_control(GtkWidget * vbox, SETTINGS * s)
 	gtk_box_pack_start(GTK_BOX(vbox6), vboxPC, TRUE, TRUE, 0);
 
 	htmlComments = gtk_html_new();
-	
+
 	create_editor(htmlComments, vboxPC, s, pcecd);
 	return htmlComments;
 }
@@ -1456,14 +1535,14 @@ GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 	GtkWidget *frame12;
 	GtkWidget *vbox6;
 	//GSHTMLEditorControlData *gbsecd =
-	   // gs_html_editor_control_data_new(s);
+	// gs_html_editor_control_data_new(s);
 	GtkWidget *vboxSP;
 	GtkWidget *htmlwidget;
-	
+
 	gbsecd = gs_html_editor_control_data_new(s);
 	gbsecd->gbs = TRUE;
 	gbsecd->personal_comments = FALSE;
-	
+
 	frame12 = gtk_frame_new(NULL);
 	gtk_widget_ref(frame12);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "frame12",
@@ -1493,23 +1572,22 @@ GtkWidget *gbs_control(GtkWidget * notebook, SETTINGS * s)
 }
 
 void
-run_dialog (GnomeDialog ***dialog, GtkHTML *html, DialogCtor ctor, const gchar *title)
+run_dialog(GnomeDialog *** dialog, GtkHTML * html, DialogCtor ctor,
+	   const gchar * title)
 {
 	if (*dialog) {
-		gtk_window_set_title (GTK_WINDOW (**dialog), title);
-		gtk_widget_show (GTK_WIDGET (**dialog));
-		gdk_window_raise (GTK_WIDGET (**dialog)->window);
+		gtk_window_set_title(GTK_WINDOW(**dialog), title);
+		gtk_widget_show(GTK_WIDGET(**dialog));
+		gdk_window_raise(GTK_WIDGET(**dialog)->window);
 	} else {
-		*dialog = ctor (html);
-		gtk_window_set_title (GTK_WINDOW (**dialog), title);
-		gtk_widget_show (GTK_WIDGET (**dialog));
+		*dialog = ctor(html);
+		gtk_window_set_title(GTK_WINDOW(**dialog), title);
+		gtk_widget_show(GTK_WIDGET(**dialog));
 	}
 }
 
 
-void searchgbsGS_EDITOR(gchar *searchstring)
+void searchgbsGS_EDITOR(gchar * searchstring)
 {
 	search(gbsecd, FALSE, searchstring);
 }
-
-
