@@ -158,7 +158,9 @@ libgui_a_SOURCES = \
     about_modules.c \
     about_modules.h \
     about_sword.c \
-    about_sword.h
+    about_sword.h \
+    splash.c \
+    splash.h
 
 subdir = src/gnome
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -169,7 +171,7 @@ LIBRARIES = $(noinst_LIBRARIES)
 libgui_a_AR = $(AR) cru
 libgui_a_LIBADD =
 am_libgui_a_OBJECTS = about_gnomesword.$(OBJEXT) about_modules.$(OBJEXT) \
-	about_sword.$(OBJEXT)
+	about_sword.$(OBJEXT) splash.$(OBJEXT)
 libgui_a_OBJECTS = $(am_libgui_a_OBJECTS)
 
 DEFS = @DEFS@
@@ -179,7 +181,8 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/about_gnomesword.Po \
-@AMDEP_TRUE@	$(DEPDIR)/about_modules.Po $(DEPDIR)/about_sword.Po
+@AMDEP_TRUE@	$(DEPDIR)/about_modules.Po $(DEPDIR)/about_sword.Po \
+@AMDEP_TRUE@	$(DEPDIR)/splash.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -231,6 +234,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_gnomesword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_modules.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/about_sword.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/splash.Po@am__quote@
 
 distclean-depend:
 	-rm -rf $(DEPDIR)
