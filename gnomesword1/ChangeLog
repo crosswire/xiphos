@@ -1,3 +1,15 @@
+2003-12-02  Terry <tbiggs@users.sf.net>
+
+	* work in dialog.c 
+	   * rearanged buttons 
+	   * stock icon can be added
+	   * if title string is not passed to gui_gs_dialog(GS_DIALOG * info)
+	     you get no title instead of default title.
+	   * top label is formatted bold.
+	   * changed code to use gtk_dialog "response" signal when 
+	     button are clicked instead of button "clicked" signal
+	     
+
 2003-12-01  Terry <tbiggs@users.sf.net>
 
 	* fixed bug #852017 (?) - gs will run if setup_druid is canceled

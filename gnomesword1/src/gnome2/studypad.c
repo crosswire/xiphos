@@ -76,7 +76,8 @@ void gui_studypad_can_close(GSHTMLEditorControlData *ecd)
 	
 	if (settings.modifiedSP) {
 		info = gui_new_dialog();
-		info->title = N_("Save File?");
+		info->stock_icon = "gtk-save";
+		info->title = N_("Studypad");
 		if (settings.studypadfilename)
 			info->label_top = settings.studypadfilename;
 		else
