@@ -34,9 +34,11 @@ extern "C" {
 #endif
 
 #include <gnome.h>
+#include "gs_gnomesword.h"
 
-	void initSWORD(GtkWidget * mainform);
+	void initSWORD(SETTINGS *s);
 	void modNameFromDesc(gchar * modName, gchar * modDesc);
+	void updateIntDlg(void);
 	void updateinterlinearpage(void);
 	void shutdownSWORD(void);
 	void FillDictKeysSWORD(void);

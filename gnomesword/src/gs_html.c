@@ -320,13 +320,12 @@ void on_link_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		gotoBookmarkSWORD("Packard", buf);
 		g_free(buf);
 	}
-
 }
 
 /***************************************************************************************************
  *link in text window clicked
  ***************************************************************************************************/
-static void
+void
 on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 {
 	gchar *buf, *modbuf, tmpbuf[255];
@@ -350,12 +349,14 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 			gotoBookmarkSWORD(settings->lex_hebrew, buf);
 			g_free(buf);
 		}
+		
 	} else if (*url == 'M') {
 		++url;		/* remove M */
 		buf = g_strdup(url);
 		//displaydictlexSBSWORD("Packard", buf, settings);
 		gotoBookmarkSWORD("Packard", buf);
 		g_free(buf);
+		
 	} else if (*url == '*') {
 		++url;
 		while (*url != ']') {
@@ -365,6 +366,13 @@ on_link2_clicked(GtkHTML * html, const gchar * url, gpointer data)
 		buf = g_strdup(url);
 		changeVerseSWORD(buf);
 		g_free(buf);
+		
+	} else if (*url == 'I') {
+		++url;
+		buf = g_strdup(url);
+		changeVerseSWORD(buf);
+		g_free(buf);
+		
 	} else if (*url == '[') {
 		++url;
 		while (*url != ']') {
@@ -440,8 +448,12 @@ void on_copyhtml_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *widget;
 	GtkHTML *html;
-
-	widget = lookup_widget(settings->app, (gchar *) user_data);
+	
+	if(!strcmp((gchar*)user_data,"textComp1"))
+		widget = settings->htmlInterlinear;
+	else
+		widget = lookup_widget(settings->app, (gchar *) user_data);
+	
 	html = GTK_HTML(widget);
 	gtk_html_copy(html);
 }
@@ -529,8 +541,6 @@ void on_html_goto_reference_activate(GtkMenuItem * menuitem,
  ***************************************************************************************************/
 void add_gtkhtml_widgets(GtkWidget * app)
 {
-	GtkWidget *textComp1;
-
 	htmlTexts = gtk_html_new();
 	gtk_widget_ref(htmlTexts);
 	gtk_object_set_data_full(GTK_OBJECT(app),
@@ -552,16 +562,23 @@ void add_gtkhtml_widgets(GtkWidget * app)
 
 	usehtml = htmlTexts;
 
-	textComp1 = gtk_html_new();
-	gtk_widget_ref(textComp1);
-	gtk_object_set_data_full(GTK_OBJECT(app), "textComp1",
-				 textComp1,
+	
+/*	
+	settings->htmlInterlinear = gtk_html_new();
+	gtk_widget_ref(settings->htmlInterlinear);
+	gtk_object_set_data_full(GTK_OBJECT(app), "settings->htmlInterlinear",
+				 settings->htmlInterlinear,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(textComp1);
-	gtk_container_add(GTK_CONTAINER
-			  (lookup_widget(app, "scrolledwindow15")),
-			  textComp1);
-
+	gtk_widget_show(settings->htmlInterlinear);
+	
+		gtk_container_add(GTK_CONTAINER
+			  (settings->swIntDocked),
+			  settings->htmlInterlinear);
+	if(settings->dockedInt)
+		gtk_container_add(GTK_CONTAINER
+			  (settings->swIntDocked),
+			  settings->htmlInterlinear);
+*/			
 	htmlDict = gtk_html_new();
 	gtk_widget_ref(htmlDict);
 	gtk_object_set_data_full(GTK_OBJECT(app), "htmlDict",
@@ -596,14 +613,14 @@ void add_gtkhtml_widgets(GtkWidget * app)
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "button_press_event",
 			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);*/
-
-	gtk_signal_connect(GTK_OBJECT(textComp1), "on_url",
+/*
+	gtk_signal_connect(GTK_OBJECT(settings->htmlInterlinear), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
-	gtk_signal_connect(GTK_OBJECT(textComp1), "link_clicked",
+	gtk_signal_connect(GTK_OBJECT(settings->htmlInterlinear), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
-	gtk_signal_connect(GTK_OBJECT(textComp1), "button_press_event",
+	gtk_signal_connect(GTK_OBJECT(settings->htmlInterlinear), "button_press_event",
 			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
-
+*/
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "on_url",
 			   GTK_SIGNAL_FUNC(on_url), (gpointer) app);
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",

@@ -44,7 +44,7 @@
 #include "sw_verselist_sb.h"
 #include "sw_shortcutbar.h"
 #include "sw_gbs.h"
-#include "gs_dock_dlg.h"
+#include "gs_undock_sb.h"
 
 GtkWidget *clistSearchResults;
 GtkWidget *shortcut_bar;
@@ -132,7 +132,7 @@ GdkBitmap *mask3;
 
 extern gchar *shortcut_types[];
 extern SETTINGS *settings;
-extern GtkWidget *MainFrm;
+//extern GtkWidget *MainFrm;
 extern gboolean havedict;	/* let us know if we have at least one lex-dict module */
 extern gboolean havecomm;	/* let us know if we have at least one commentary module */
 extern gboolean havebible;	/* let us know if we have at least one Bible text module */
@@ -1973,14 +1973,14 @@ void setupSB(SETTINGS * s)
 	/*** add books group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "scrolledwindow1",
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow1",
 				 scrolledwindow1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow1);
 	
 	s->ctree_widget_books = gtk_ctree_new(3, 0);
 	gtk_widget_ref(s->ctree_widget_books);
-	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "s->ctree_widget_books", s->ctree_widget_books,
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "s->ctree_widget_books", s->ctree_widget_books,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(s->ctree_widget_books);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), s->ctree_widget_books);
@@ -1998,7 +1998,7 @@ void setupSB(SETTINGS * s)
 					  scrolledwindow1, buttonBooks, -1);	
 					  
 	
-	/* load book after bookmarks so pixmap are created */
+	
 	tmp = bookmods;
 	while (tmp != NULL) {
 		buf[0] = (gchar *) tmp->data;
@@ -2030,14 +2030,14 @@ void setupSB(SETTINGS * s)
 	/*** add bookmark group to shortcut bar ***/
 	scrolledwindow1 = e_vscrolled_bar_new(NULL);
 	gtk_widget_ref(scrolledwindow1);
-	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "scrolledwindow1",
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "scrolledwindow1",
 				 scrolledwindow1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow1);
 	
 	ctree = gtk_ctree_new(3, 0);
 	gtk_widget_ref(ctree);
-	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "ctree", ctree,
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "ctree", ctree,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(ctree);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow1), ctree);
@@ -2045,7 +2045,9 @@ void setupSB(SETTINGS * s)
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 1, 80);
 	gtk_clist_set_column_width(GTK_CLIST(ctree), 2, 80);
 	
-	s->ctree_widget = lookup_widget(s->app, "ctree");
+	//s->ctree_widget = lookup_widget(s->app, "ctree");
+	s->ctree_widget =  ctree;
+	
 	button = gtk_button_new_with_label(_("Bookmarks"));
 	gtk_widget_ref(button);
 	gtk_object_set_data_full(GTK_OBJECT(s->app), "button",
@@ -2075,7 +2077,7 @@ void setupSB(SETTINGS * s)
 
 	searchbutton = gtk_button_new_with_label(_("Search"));
 	gtk_widget_ref(searchbutton);
-	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "searchbutton",
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "searchbutton",
 				 searchbutton,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(searchbutton);
@@ -2105,7 +2107,7 @@ void setupSB(SETTINGS * s)
 
 	VLbutton = gtk_button_new_with_label(_("Verse List"));
 	gtk_widget_ref(VLbutton);
-	gtk_object_set_data_full(GTK_OBJECT(MainFrm), "VLbutton", VLbutton,
+	gtk_object_set_data_full(GTK_OBJECT(s->app), "VLbutton", VLbutton,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(VLbutton);
 
