@@ -527,7 +527,8 @@ GtkWidget *gui_create_pm_gbs(GBS_DATA * t)
 		    gtk_menu_item_new_with_label(_("View Current Dict/Lex"));
 		gtk_widget_show(current_dict);
 		gtk_container_add(GTK_CONTAINER(file_menu), current_dict);
-
+		if(!settings.havedict)
+			gtk_widget_set_sensitive(current_dict, FALSE);
 		view_text =
 		    gtk_menu_item_new_with_label(_("Open Module"));
 		gtk_widget_show(view_text);
