@@ -1,3 +1,22 @@
+2003-12-30  Terry <tbiggs@users.sf.net>
+
+	* fixed bug #866548
+	* added space to navigation toolbar by adding empty labels
+	
+
+2003-12-26  Terry <tbiggs@users.sf.net>
+
+	* added tooltips to all items on the navigation 
+	  toolbar in toolbar_nav.c
+	
+
+2003-12-25  Terry <tbiggs@users.sf.net>
+
+	* moved Spell.idl and spell_gnome_spell.c form /main to /gnome2
+	* made some changes in spell dialog - spell check starts when the dialog 
+	  opens - removed the spell check button (start buttton)
+
+
 2003-12-24  Andy <andyp@users.sf.net>
 
 	* bumped to version 2.0.0 (yay! a real stable release!)
