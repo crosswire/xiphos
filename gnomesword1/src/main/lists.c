@@ -108,10 +108,12 @@ GList *get_list(gint type)
 
 void init_lists(void)
 {
-	const char *buf = NULL;
+	const gchar *buf = NULL;
+	gchar *book;
 	NAME_TYPE *nt, innt;
 	gsize bytes_read;
 	gsize bytes_written;
+	GError **error;
 	
 	mod_lists = &mods;
 	/* set glist to null */
@@ -137,9 +139,15 @@ void init_lists(void)
 	backend_new_module_mgr();
 
 	while ((buf = backend_get_next_book_of_bible()) != NULL) {
-		//gchar *e_utf8;
-		//e_utf8 = e_utf8_from_locale_string((const char *)buf);
-		mods.bible_books = g_list_append(mods.bible_books,(char *)buf);
+		book = g_convert(buf,
+				     -1,
+				     UTF_8,
+				     OLD_CODESET,
+				     &bytes_read,
+				     &bytes_written,
+				     error);
+		
+		mods.bible_books = g_list_append(mods.bible_books,(char *)book);
 	}
 
 	backend_set_global_option_iterator();
@@ -315,5 +323,10 @@ void shutdown_list(void)
 	}
 	g_list_free(mod_lists->devotionmods);
 
+	while (mod_lists->bible_books != NULL) {
+		g_free((char *) mod_lists->bible_books->data);
+		mod_lists->bible_books =
+		    g_list_next(mod_lists->bible_books);
+	}
 	g_list_free(mod_lists->bible_books);
 }

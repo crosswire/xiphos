@@ -733,14 +733,9 @@ static void int_display(gchar * key)
 	    *textColor,
 	    buf[500], *tmpkey, tmpbuf[256], *mod_name, *use_font_size;
 	GString *str;
-
 	gboolean evenRow = FALSE;
-
-
 	gint utf8len, cur_verse, cur_chapter, i = 1, j;
-
-	const char *cur_book;
-
+	char *cur_book;
 	GtkHTML *html = GTK_HTML(widgets.html_parallel);
 
 	str = g_string_new("");
@@ -860,7 +855,8 @@ static void int_display(gchar * key)
 				       str->str, str->len);
 		}
 	}
-	free(tmpkey);
+	g_free(tmpkey);
+	g_free(cur_book);
 }
 
 
