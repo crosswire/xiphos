@@ -22,11 +22,10 @@
 #ifndef ___COMMENTARY_H_
 #define ___COMMENTARY_H_
 
-
-#include "settings.h"
 /*
  * main
  */
+#include "settings.h"
 #include "commentary.h"
 
 void on_notebook_comm_switch_page(GtkNotebook * notebook,

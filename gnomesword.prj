@@ -87,6 +87,7 @@ module.include.files=\
 	src/gnome/_dictlex.h\
 	src/gnome/_editor.h\
 	src/gnome/_gbs.h\
+	src/gnome/gbs_find_dialog.h\
 	src/gnome/create_shortcutbar_search.h\
 	src/gnome/create_shortcutbar_viewer.h\
 	src/gnome/cipher_key_dialog.h\
@@ -107,7 +108,7 @@ module.include.files=\
 	src/main/gs_editor_replace.h\
 	src/main/gs_editor_search.h\
 	src/main/gs_editor_toolbar.h\
-	src/main/gs_find_dlg.h\
+	src/main/find_dlg_defs.h\
 	src/main/gbs.h\
 	src/main/gs_interlinear.h\
 	src/main/gs_getinfo_dlg.h\
@@ -164,6 +165,7 @@ module.source.files=\
 	src/gnome/_dictlex.c\
 	src/gnome/_editor.c\
 	src/gnome/_gbs.c\
+	src/gnome/gbs_find_dialog.c\
 	src/gnome/create_shortcutbar_search.c\
 	src/gnome/create_shortcutbar_viewer.c\
 	src/gnome/cipher_key_dialog.c\
@@ -184,7 +186,6 @@ module.source.files=\
 	src/main/gs_editor_replace.c\
 	src/main/gs_editor_search.c\
 	src/main/gs_editor_toolbar.c\
-	src/main/gs_find_dlg.c\
 	src/main/gbs.c\
 	src/main/gs_interlinear.c\
 	src/main/gs_getinfo_dlg.c\

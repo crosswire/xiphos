@@ -1,6 +1,6 @@
 /*
  * GnomeSword Bible Study Tool
- * commentary_find_dialog.c 
+ * gbs_find_dialog.c 
  *
  * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
@@ -31,7 +31,7 @@
 #include <gal/widgets/e-unicode.h>
 
 /* gnome */
-#include "commentary_find_dialog.h"
+#include "gbs_find_dialog.h"
 
 /* main */
 #include "settings.h"
@@ -39,12 +39,12 @@
 
 
 typedef GnomeDialog ** (*DialogCtor)(GtkWidget *htmlwidget);
-#define FIND_DIALOG(name,title) comm_find_dialog ((GnomeDialog ***)&c-> name ## _dialog, c->html, (DialogCtor) comm_ ## name ## _dialog_new, title)
+#define FIND_DIALOG(name,title) find_dialog ((GnomeDialog ***)&c-> name ## _dialog, c->html, (DialogCtor) gbs_ ## name ## _dialog_new, title)
 
-gboolean comm_find_running;
+gboolean gbs_find_running;
 
-static void comm_find_dialog(GnomeDialog ***dialog, GtkWidget *html, 
-				DialogCtor ctor, const gchar *title);
+static void
+find_dialog(GnomeDialog ***dialog, GtkWidget *html, DialogCtor ctor, const gchar *title);
 
 
 /******************************************************************************
@@ -52,7 +52,7 @@ static void comm_find_dialog(GnomeDialog ***dialog, GtkWidget *html,
  *  next_button_cb
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
  *   void next_button_cb(GtkWidget *but,  GtkWidget *htmlwidget)	
  *
@@ -74,12 +74,12 @@ static void next_button_cb(GtkWidget *but,  GtkWidget *htmlwidget)
 
 /******************************************************************************
  * Name
- *   search_cb
+ *  search_cb
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
- *   void search_cb(GtkWidget *but, COMMFindDialog *d)	
+ *   	void search_cb(GtkWidget *but, GBF_FIND_DIALOG *d)
  *
  * Description
  *    
@@ -88,7 +88,7 @@ static void next_button_cb(GtkWidget *but,  GtkWidget *htmlwidget)
  *   void
  */ 
 
-static void search_cb(GtkWidget *but, COMMFindDialog *d)
+static void search_cb(GtkWidget *but, GBF_FIND_DIALOG *d)
 {
 	char *text;
 	GtkHTML *html;
@@ -104,12 +104,12 @@ static void search_cb(GtkWidget *but, COMMFindDialog *d)
 
 /******************************************************************************
  * Name
- *   comm_find_close_dialog
+ *  gbs_find_close_dialog
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
- *   void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d)	
+ *   	void gbs_find_close_dialog(GtkWidget *but, GBF_FIND_DIALOG *d)
  *
  * Description
  *    
@@ -118,20 +118,20 @@ static void search_cb(GtkWidget *but, COMMFindDialog *d)
  *   void
  */ 
 
-void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d)
+void gbs_find_close_dialog(GtkWidget *but, GBF_FIND_DIALOG *d)
 {
-	comm_find_running = FALSE;
+	gbs_find_running = FALSE;
 	gnome_dialog_close(d->dialog);
 }
 
 /******************************************************************************
  * Name
- *   entry_activate
+ *  entry_activate
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
- *   void entry_activate (GtkWidget *entry, COMMFindDialog *d)	
+ *   	void entry_activate (GtkWidget *entry, GBF_FIND_DIALOG *d)
  *
  * Description
  *    
@@ -140,30 +140,30 @@ void comm_find_close_dialog(GtkWidget *but, COMMFindDialog *d)
  *   void
  */ 
 
-static void entry_activate (GtkWidget *entry, COMMFindDialog *d)
+static void entry_activate (GtkWidget *entry, GBF_FIND_DIALOG *d)
 {
 	search_cb (NULL, d);
 }
 
 /******************************************************************************
  * Name
- *   comm_find_dialog_new
+ *  gbs_find_dialog_new
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
- *   COMMFindDialog *comm_find_dialog_new(GtkWidget *htmlwidget)	
+ *   	GBF_FIND_DIALOG *gbs_find_dialog_new(GtkWidget *htmlwidget)
  *
  * Description
  *    
  *
  * Return value
- *   void
+ *   GBF_FIND_DIALOG *
  */ 
 
-static COMMFindDialog *comm_find_dialog_new(GtkWidget *htmlwidget)
+static GBF_FIND_DIALOG *gbs_find_dialog_new(GtkWidget *htmlwidget)
 {
-	COMMFindDialog *dialog = g_new (COMMFindDialog, 1); /* must be freed by calling module */
+	GBF_FIND_DIALOG *dialog = g_new (GBF_FIND_DIALOG, 1); /* must be freed by calling module */
 	GtkWidget *hbox;
 	
 	dialog->dialog         = GNOME_DIALOG (gnome_dialog_new (NULL, _("Find"), _("Find Next"), GNOME_STOCK_BUTTON_CANCEL, NULL));
@@ -185,7 +185,7 @@ static COMMFindDialog *comm_find_dialog_new(GtkWidget *htmlwidget)
 
 	gnome_dialog_button_connect (dialog->dialog, 0, search_cb, dialog);
 	gnome_dialog_button_connect (dialog->dialog, 1, next_button_cb, dialog->htmlwidget);
-	gnome_dialog_button_connect (dialog->dialog, 2, comm_find_close_dialog, dialog);
+	gnome_dialog_button_connect (dialog->dialog, 2, gbs_find_close_dialog, dialog);
 	gnome_dialog_close_hides (dialog->dialog, TRUE);	
 	gnome_dialog_set_close (dialog->dialog, FALSE);
 
@@ -200,12 +200,12 @@ static COMMFindDialog *comm_find_dialog_new(GtkWidget *htmlwidget)
 
 /******************************************************************************
  * Name
- *   search_comm_find_dlg
+ *  search_gbs_find_dlg
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
- *   void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text)	
+ *   void search_gbs_find_dlg(GBS_DATA *c, gboolean regular, gchar *text)	
  *
  * Description
  *    
@@ -214,13 +214,13 @@ static COMMFindDialog *comm_find_dialog_new(GtkWidget *htmlwidget)
  *   void
  */ 
 
-void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text)
+void search_gbs_find_dlg(GBS_DATA *c, gboolean regular, gchar *text)
 {
 	gchar buf[256];
 	
-	sprintf(buf,"%s in %s", _("Find"), c->modName);
+	sprintf(buf,"%s in %s", _("Find"), c->bookName);
 	
-	FIND_DIALOG(find, buf);
+	FIND_DIALOG(find, buf);//regular ? _("Find Regular Expression") :  _("Find"));
 	
 	if (c->find_dialog)
 		c->find_dialog->regular = regular;
@@ -230,20 +230,20 @@ void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text)
 			gtk_entry_set_text(GTK_ENTRY(c->find_dialog->entry),text);
 		
 		gtk_widget_grab_focus(c->find_dialog->entry);
-		comm_find_running = TRUE;
-		//gdk_window_raise(GTK_WIDGET(g->find_dialog->dialog)->window);		
+		gbs_find_running = TRUE;	
 	}
 }
 
 /******************************************************************************
  * Name
- *  comm_find_dialog
+ *  find_dialog
  *
  * Synopsis
- *   #include "commentary_find_dialog.h"
+ *   #include "gbs_find_dialog.h"
  *
- *   void comm_find_dialog(GnomeDialog ***dialog, GtkWidget *html, 
- *				DialogCtor ctor, const gchar *title)
+ *   void find_dialog(GnomeDialog ***dialog, GtkWidget *html, 
+ *						DialogCtor ctor,
+ *						const gchar *title)
  *
  * Description
  *    
@@ -252,8 +252,9 @@ void search_comm_find_dlg(COMM_DATA *c, gboolean regular, gchar *text)
  *   void
  */ 
 
-void comm_find_dialog(GnomeDialog ***dialog, GtkWidget *html, 
-				DialogCtor ctor, const gchar *title)
+void find_dialog(GnomeDialog ***dialog, GtkWidget *html, 
+						DialogCtor ctor,
+						const gchar *title)
 {
 	if (*dialog) {
 		gtk_window_set_title (GTK_WINDOW (**dialog), title);
