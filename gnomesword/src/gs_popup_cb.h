@@ -21,7 +21,6 @@ extern "C" {
 
 #include <gnome.h>
 	
-void on_add_bookmark_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_boldNE_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_italicNE_activate(GtkMenuItem * menuitem, gpointer user_data);
 void on_referenceNE_activate(GtkMenuItem * menuitem, gpointer user_data);

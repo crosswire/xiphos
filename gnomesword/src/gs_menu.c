@@ -34,6 +34,7 @@
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "support.h"
+#include "gs_bookmarks.h"
 
 /******************************************************************************
  * function prototypes only visible to this file
@@ -62,6 +63,7 @@ static void loadmenuformmodlist(GtkWidget *pmInt,
 
 extern gint	greekpage,
         	hebrewpage;
+extern SETTINGS *settings;
 //extern GS_TABS	*p_tabs;
 		
 /******************************************************************************
@@ -608,6 +610,7 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 	GtkWidget *usecurrent2;
 	GtkWidget *separator3;	
 	GtkWidget *add_bookmark;
+	GtkWidget *add_bookmark_menu;
 	GtkWidget *about_this_module6;
 	GtkWidget *auto_scroll1;
 	GtkWidget *show_tabs1;
@@ -707,7 +710,15 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 	gtk_container_add(GTK_CONTAINER(pmCommentsHtml), add_bookmark);
 	gtk_tooltips_set_tip(tooltips, add_bookmark, "Add current verse and module to Presonal Bookmarks",
 			     NULL);
-			     
+	
+	add_bookmark_menu = gtk_menu_new ();
+  	gtk_widget_ref (add_bookmark_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmCommentsHtml), "add_bookmark_menu", add_bookmark_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (add_bookmark), add_bookmark_menu);
+	/*** add bookmark items ***/
+	create_addBookmarkMenuBM(pmCommentsHtml, add_bookmark_menu,settings);		
+	
 	about_this_module6 =
 	    gtk_menu_item_new_with_label("About this module");
 	gtk_widget_ref(about_this_module6);
@@ -843,8 +854,8 @@ static GtkWidget *create_pmCommentsHtml(GList * mods,
 				   GTK_SIGNAL_FUNC
 				   (on_html_lookup_selection_activate),
 				   GINT_TO_POINTER(1001));	
-	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
-			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), (gchar *)"1");
+/*	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
+			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), (gchar *)"1");*/
 	gtk_signal_connect(GTK_OBJECT(copy6), "activate",
 			   GTK_SIGNAL_FUNC(on_copyhtml_activate),
 			   (gchar *) "htmlCommentaries");
@@ -876,6 +887,7 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 	GtkWidget *lookup_word1;
 	GtkWidget *about_this_module5;
 	GtkWidget *add_bookmark;
+	GtkWidget *add_bookmark_menu;
 	GtkWidget *show_tabs1;
 	GtkWidget *view_in_new_window;
 	GtkWidget *separator23;
@@ -923,8 +935,16 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 	gtk_widget_show(add_bookmark);
 	gtk_container_add(GTK_CONTAINER(pmDict), add_bookmark);
 	gtk_tooltips_set_tip(tooltips, add_bookmark, "Add dict/lex key and module to Presonal Bookmarks",
-			     NULL);
-			     
+			     NULL);	
+	
+	add_bookmark_menu = gtk_menu_new ();
+  	gtk_widget_ref (add_bookmark_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmDict), "add_bookmark_menu", add_bookmark_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (add_bookmark), add_bookmark_menu);
+	/*** add bookmark items ***/
+	create_addBookmarkMenuBM(pmDict, add_bookmark_menu,settings);	
+	
 	about_this_module5 =
 	    gtk_menu_item_new_with_label("About this module");
 	gtk_widget_ref(about_this_module5);
@@ -1014,9 +1034,9 @@ static GtkWidget *create_pmDict(GList * mods, GList *modsdesc)
 	gtk_signal_connect(GTK_OBJECT(lookup_word1), "activate",
 			   GTK_SIGNAL_FUNC(on_html_lookup_selection_activate),
 			   (gchar *)"htmlDict");                      	          	
-	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
+/*	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
 			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), 
-				(gchar *)"2");
+				(gchar *)"2");*/
 	gtk_signal_connect(GTK_OBJECT(about_this_module5), "activate",
 			   GTK_SIGNAL_FUNC(on_about_this_module_activate),
 			   "dictionary");
@@ -1050,6 +1070,7 @@ static GtkWidget* create_pmBible(GList *textmods,
 	GtkWidget *separator3;
 	GtkWidget *about_this_module1;
 	GtkWidget *add_bookmark;
+	GtkWidget *add_bookmark_menu;
 	GtkWidget *separator2;
 	GtkWidget *view_module3;
 	GtkWidget *view_module3_menu;
@@ -1131,6 +1152,7 @@ static GtkWidget* create_pmBible(GList *textmods,
   	gtk_container_add (GTK_CONTAINER (lookup_selection_menu), separator3);
   	gtk_widget_set_sensitive (separator3, FALSE);	
 	
+	/*** add bookmark menu ***/
 	add_bookmark = gtk_menu_item_new_with_label("Add Bookmark");
 	gtk_widget_ref(add_bookmark);
 	gtk_object_set_data_full(GTK_OBJECT(pmBible), "add_bookmark",
@@ -1140,7 +1162,15 @@ static GtkWidget* create_pmBible(GList *textmods,
 	gtk_container_add(GTK_CONTAINER(pmBible), add_bookmark);
 	gtk_tooltips_set_tip(tooltips, add_bookmark, "Add current verse to Presonal Bookmarks",
 			     NULL);
-			     
+	
+	add_bookmark_menu = gtk_menu_new ();
+  	gtk_widget_ref (add_bookmark_menu);
+  	gtk_object_set_data_full (GTK_OBJECT (pmBible), "add_bookmark_menu", add_bookmark_menu,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  	gtk_menu_item_set_submenu (GTK_MENU_ITEM (add_bookmark), add_bookmark_menu);
+	/*** add bookmark items ***/
+	create_addBookmarkMenuBM(pmBible, add_bookmark_menu,settings);
+	
 	show_tabs = gtk_check_menu_item_new_with_label("Show Tabs");
 	gtk_widget_ref(show_tabs);
 	gtk_object_set_data_full(GTK_OBJECT(pmBible), "show_tabs",
@@ -1263,8 +1293,8 @@ static GtkWidget* create_pmBible(GList *textmods,
 				   GTK_SIGNAL_FUNC
 				   (on_html_lookup_selection_activate),
 				   GINT_TO_POINTER(1001));
-	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
-			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), (gchar *)"0");
+/*	gtk_signal_connect(GTK_OBJECT(add_bookmark), "activate",
+			   GTK_SIGNAL_FUNC(on_add_bookmark_activate), (gchar *)"0");*/
 	gtk_signal_connect(GTK_OBJECT(show_tabs), "activate",
 			   GTK_SIGNAL_FUNC(on_show_tabs_activate), (gchar *)"nbTextMods");
 	

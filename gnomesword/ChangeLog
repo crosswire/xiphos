@@ -1,3 +1,17 @@
+2001-08-04 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* add bookmark menu now allows you to chose where to
+	  add bookmark
+
+
+2001-08-03 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added verse list to shortcut bar 
+	* added files sw_verselist_sb.cpp and sw_verselist_sb.h
+	* removed files gs_verselist_dlg.c gs_verselist_dlg.h 
+				sw_verselist_dlg.cpp sw_verselist_dlg.h
+
+
 2001-08-02 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* added search to shortcut bar

@@ -252,6 +252,7 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		    gpointer *data)
 {
 	usehtml = html;
+	settings->whichwindow = GPOINTER_TO_INT(data);
 	switch (event->button) {
 	case 1:
 		break;
@@ -259,6 +260,7 @@ html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		break;
 	case 3:
 		//gtk_html_select_word(GTK_HTML(html));
+		
 		break;
 	}
 	return 0;
@@ -428,14 +430,14 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect (GTK_OBJECT (htmlTexts), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);
 	gtk_signal_connect(GTK_OBJECT(htmlTexts), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
+			   GTK_SIGNAL_FUNC(html_button_pressed), GINT_TO_POINTER(0));
 
 	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
 	gtk_signal_connect (GTK_OBJECT (htmlCommentaries), "on_url",
 			    GTK_SIGNAL_FUNC (on_url), (gpointer)app);			   
 	gtk_signal_connect(GTK_OBJECT(htmlCommentaries), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);
+			   GTK_SIGNAL_FUNC(html_button_pressed), GINT_TO_POINTER(1));
 			   
 	gtk_signal_connect(GTK_OBJECT(htmlComments), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);
@@ -456,7 +458,7 @@ void add_gtkhtml_widgets(GtkWidget * app)
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "link_clicked",
 			   GTK_SIGNAL_FUNC(on_link_clicked), NULL);	
 	gtk_signal_connect(GTK_OBJECT(htmlDict), "button_press_event",
-			   GTK_SIGNAL_FUNC(html_button_pressed), NULL);		   
+			   GTK_SIGNAL_FUNC(html_button_pressed), GINT_TO_POINTER(2));		   
 			   		   
 }
 

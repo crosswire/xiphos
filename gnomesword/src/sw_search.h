@@ -23,7 +23,7 @@ extern "C" {
 #include <gnome.h>
 #include "gs_gnomesword.h"
 
-void    /* search Bible text or commentaries */
+GList*    /* search Bible text or commentaries */
 searchSWORD (GtkWidget *widget, SETTINGS *s);
 
 
