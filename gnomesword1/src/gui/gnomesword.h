@@ -45,21 +45,21 @@ struct  _app_widgets {
 		*shortcutbar,  /* the shortcut bar widget */
 		*ctree_widget, /* bookmarks tree */
 		*ctree_widget_books, /* books tree */
-		*workbook_upper, /* notebook - commentaries and editors */	
+		//*workbook_upper, /* notebook - commentaries and editors */	
 		*workbook_lower, /* notebook - dict/lex, gbs, and interlinear */
 		*notebook_gbs, /* notebook - gbs */
 		*notebook_dict,  /* notebook - dict/lex */
 		*notebook_comm,  /* notebook - commentaries */
 		*notebook_text,  /* notebook - texts */
 		*notebook_percomm,  /* notebook - personal comments */
+		*vbox_percomm,  /* vbox for personal comments notebook */
 	    
 	/* dock/undock stuff */
 		*dock_sb, /* dock for shortcut bar */
 		*frame_interlinear, /* frame for interlinear html  */ 
 	
-	/* editor_dialogs */
+	/* editor_dialog */
 		*studypad_dialog,
-		*percomm_dialog,
 	
 	/* toolbars */
 		*hbox_toolbar,

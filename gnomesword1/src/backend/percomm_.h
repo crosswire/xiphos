@@ -34,7 +34,8 @@ void backend_save_personal_comment(char * note);
 void backend_delete_personal_comment(void);
 void backend_setup_percomm(void);
 void backend_shutdown_percomm(void);
-	
+int backend_is_personal_comment(char * mod_name);
+
 #ifdef __cplusplus
 }
 #endif
