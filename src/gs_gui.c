@@ -147,7 +147,7 @@ static GnomeUIInfo history1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
 };
-
+/*
 static GnomeUIInfo main_window1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -172,7 +172,7 @@ static GnomeUIInfo interlinear4_window1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
 };
-
+ 
 static GnomeUIInfo interlinear5_window1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
@@ -187,60 +187,7 @@ static GnomeUIInfo dict_lex_window1_menu_uiinfo[] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_END
 };
-
-static GnomeUIInfo view1_menu_uiinfo[] = {
-	{
-	 GNOME_APP_UI_SUBTREE, "Main Window",
-	 "Select text module for main window",
-	 main_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, "Interlinear1 Window",
-	 "Select text module for 1st Interlinear window",
-	 interlinear1_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, "Interlinear2 Window",
-	 "Select text module for 2nd Interlinear window",
-	 interlinear2_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, "Interlinear3 Window",
-	 "Select text module for 3rd Interlinear window",
-	 interlinear3_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, "Interlinear4 Window",
-	 "Select text module for 4th Interlinear window",
-	 interlinear4_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, "Interlinear5 Window",
-	 "Select text module for 5th Interlinear window",
-	 interlinear5_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{		
-	 GNOME_APP_UI_SUBTREE, "Commentary Window",
-	 "Seledect commentary module",
-	 commentary_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	{
-	 GNOME_APP_UI_SUBTREE, "Dict-Lex Window",
-	 "Select Dict-Lex module",
-	 dict_lex_window1_menu_uiinfo, NULL, NULL,
-	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_END
-};
-
-
+*/
 static GnomeUIInfo settings1_menu_uiinfo[] = {
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(on_preferences1_activate, NULL),
 	GNOMEUIINFO_END
@@ -314,14 +261,15 @@ static GnomeUIInfo menubar1_uiinfo[] = {
 	 NULL,
 	 bookmarks1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
+	 0, 0, NULL
+	},
 	{
 	 GNOME_APP_UI_SUBTREE, "_History",
 	 NULL,
 	 history1_menu_uiinfo, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
-	 0, 0, NULL},
-	GNOMEUIINFO_MENU_VIEW_TREE(view1_menu_uiinfo),
+	 0, 0, NULL
+	},
 	GNOMEUIINFO_MENU_SETTINGS_TREE(settings1_menu_uiinfo),
 	GNOMEUIINFO_MENU_HELP_TREE(help1_menu_uiinfo),
 	GNOMEUIINFO_END
@@ -526,7 +474,7 @@ GtkWidget *create_mainwindow(void)
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "separator5",
 				 history1_menu_uiinfo[1].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+/*
 	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "view1",
 				 menubar1_uiinfo[4].widget,
@@ -623,12 +571,12 @@ GtkWidget *create_mainwindow(void)
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "separator21",
 				 dict_lex_window1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
+*/
 
 
-
-	gtk_widget_ref(menubar1_uiinfo[5].widget);
+	gtk_widget_ref(menubar1_uiinfo[4].widget);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "settings1",
-				 menubar1_uiinfo[5].widget,
+				 menubar1_uiinfo[4].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
 	gtk_widget_ref(settings1_menu_uiinfo[0].widget);
@@ -636,11 +584,13 @@ GtkWidget *create_mainwindow(void)
 				 settings1_menu_uiinfo[0].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 
-	gtk_widget_ref(menubar1_uiinfo[6].widget);
+	gtk_widget_ref(menubar1_uiinfo[5].widget);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow), "help1",
-				 menubar1_uiinfo[6].widget,
+				 menubar1_uiinfo[5].widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
-
+	gtk_menu_item_right_justify (GTK_MENU_ITEM
+				     (menubar1_uiinfo[5].widget));
+				     
 	gtk_widget_ref(help1_menu_uiinfo[0].widget);
 	gtk_object_set_data_full(GTK_OBJECT(mainwindow),
 				 "about_the_sword_project1",

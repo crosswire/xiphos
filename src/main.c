@@ -32,7 +32,7 @@
 #include "gs_html.h"
 #include "gs_gui.h"
 #include "sw_properties.h"
-//#include "gs_setup.h"
+#include "gs_setup.h"
 
 extern SETTINGS *settings;
 SETTINGS myset;	
@@ -44,11 +44,12 @@ int
 main (int argc, char *argv[])
 {
 	GtkWidget 
-		*mainwindow,
-		*setup;
+		*mainwindow;
 	gboolean 		
 		newconfigs = FALSE,	
 		newbookmarks = FALSE;
+	gint 
+		icreatefiles=0;
 	
 	gnome_init("GnomeSword", VERSION, argc, argv);		
 	if(argc > 1) {			
@@ -59,25 +60,22 @@ main (int argc, char *argv[])
   			newconfigs = TRUE;
   			newbookmarks = TRUE;
 		}
-	}		
-  	/*
-  	setup = create_dlgSetup ();
-  	gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
-		gnome_dialog_run_and_close(GNOME_DIALOG(setup));
-	*/
+	}
   	mainwindow = create_mainwindow ();
   	add_gtkhtml_widgets(mainwindow);
-  	setDiretory();
+  	icreatefiles = setDiretory(); 
   	if(newconfigs)
   	{
-  		createsettings();
+  		gs_firstrunSWORD();
   	}
   	if(newbookmarks)
   	{
   		createFiles();
   	}
-  	/* load settings into structure */
-  	//myset = readsettings(); 
+	//icreatefiles = 1;/* please remove me - i am for testing */
+	if(icreatefiles == 1){		
+		gs_firstrunSWORD();
+	}
   	/* set pointer to structure */
   	settings = &myset; 
 	loadconfig(); /* new */      

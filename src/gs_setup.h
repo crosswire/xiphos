@@ -28,7 +28,9 @@ extern "C" {
 #endif
 
 GtkWidget*
-create_dlgSetup (void);	
+create_dlgSetup (GList *biblemods, 
+			GList *commmods, 
+			GList *dictmods);	
 	
 		
 #ifdef __cplusplus

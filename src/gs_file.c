@@ -131,8 +131,9 @@ on_cancel_button2_clicked(GtkButton * button, gpointer user_data)
  * if not found - create it and
  * the files needed to run program
  *****************************************************************************/
-void setDiretory(void)
+gint setDiretory(void)
 {
+	gint retval = 0;
 	/* get home dir */
 	if ((homedir = getenv("HOME")) == NULL) { 		
 		g_error("$HOME is not set!");	
@@ -171,15 +172,18 @@ void setDiretory(void)
 		setup = create_dlgSetup();
   		gnome_dialog_set_default(GNOME_DIALOG(setup), 2);
 		gnome_dialog_run_and_close(GNOME_DIALOG(setup));*/
-		createconfig();
+		++retval;
+		//createconfig();
 	}
 	if (access(swbmDir, F_OK) == -1) {	/* if gSwordDir does not exist create it */
 		if ((mkdir(swbmDir, S_IRWXU)) == 0) {
 			//createbookmarks();
+			++retval;
 		} else {
 			printf("can't create bookmarks dir and files");
 		}
 	}
+	return retval;
 }
 
 /*****************************************************************************
@@ -526,87 +530,6 @@ void writesettings(SETTINGS settings)
 	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* open file (settings.cfg) */
 	write(fd, (char *) &settings, sizeof(settings));	/* save structure to disk */
 	close(fd);		/* close file */
-}
-
-
-/**********************************************************************************************
- * read settings.cfg into settings structure
- *
- **********************************************************************************************/
-SETTINGS readsettings(void)
-{
-	int fd;			/* file handle */
-	SETTINGS settings;	/* settings structure */
-	long filesize;
-	struct stat stat_p;
-
-	stat(fnconfigure, &stat_p);
-	filesize = stat_p.st_size;
-
-	if (filesize != sizeof(settings)) {	/* if file is not the same size as the structure */
-		settings = createsettings();	/* we will create new file */
-		return (settings);	/* return settings structure to initSword() in GnomeSword.cpp  */
-	}
-
-	if ((fd = open(fnconfigure, O_RDONLY)) == -1) {	/* try to open file */
-		settings = createsettings();	/* if we cannot open file we will create new one */
-	} else {
-		read(fd, (char *) &settings, sizeof(settings));	/* read file into structure */
-	}
-	close(fd);		/* close file */
-
-	return (settings);	/* return settings structure to initSword() in GnomeSword.cpp  */
-}
-
-
-
-/**************************************************************************************************
- *create settings structure and settings.cfg file
- *
- **************************************************************************************************/
-SETTINGS createsettings(void)
-{
-	SETTINGS settings;	/* gnomesword settings structure */
-	SETTINGS *p_settings;	/* pointer to settings structure */
-	int fd;			/* handle for settings file */
-
-	p_settings = &settings;	/* set p_settings to point to settings structure - we have to do this set the values of the structure */
-	strcpy(p_settings->MainWindowModule, "KJV");	/* set main window module */
-	strcpy(p_settings->Interlinear1Module, "BBE");	/* set first interlinear window module */
-	strcpy(p_settings->Interlinear2Module, "WEB");	/* set second interlinear window module */
-	strcpy(p_settings->Interlinear3Module, "Byz");	/* set third interlinear window module */
-	strcpy(p_settings->Interlinear4Module, "NIV");	/* set second interlinear window module */
-	strcpy(p_settings->Interlinear5Module, "NASB");	/* set third interlinear window module */	
-	strcpy(p_settings->personalcommentsmod, "-+*Personal*+-");	/* personal comments module */
-	strcpy(p_settings->currentverse, "Romans 8:28");	/* set openning verse */
-	strcpy(p_settings->dictkey, "GRACE");	/* dictionary key to use at program startup - the one we shut down with */
-	strcpy(p_settings->studypadfilename, "");	/* name of file in open in study when we closed or last file in studypad */
-	strcpy(p_settings->currentverse_color, "#2A9C83");  /* current verse color */
-	p_settings->currentverse_red = 0x0000;	/* set current verse color to green */
-	p_settings->currentverse_green = 0x7777;
-	p_settings->currentverse_blue = 0x0000;
-	p_settings->strongs = FALSE;	/* set strongs numbers to off */
-	p_settings->footnotes = FALSE;	/* set footnotes to off */
-	p_settings->versestyle = TRUE;	/* set versestyle to on */
-	p_settings->interlinearpage = TRUE;	/* set show interlinear page to on */
-	p_settings->autosavepersonalcomments = TRUE;	/* set autosave personal comments to on */
-	p_settings->formatpercom = FALSE;	/* set personal comments formatting to off */
-	p_settings->notebook3page = 0;	/* notebook 3 page number */
-	p_settings->notebook1page = 0;	/* commentaries notebook */
-	p_settings->notebook2page = 0;	/* dict and lex notebook  */
-	p_settings->shortcutbarsize = 120; /*width of shortcutbar */
-	p_settings->showcomtabs = FALSE;	/* show tabs on commentary notebook */
-	p_settings->showdicttabs = FALSE;	/* show tabs on dict/lex notebook */
-	p_settings->showshortcutbar = TRUE;	/* show the shortcut bar */
-	p_settings->showtextgroup = FALSE;	/* show text group */
-	p_settings->showcomgroup = TRUE;	/* show com group */
-	p_settings->showdictgroup = TRUE;	/* show dict/lex group */
-	p_settings->showbookmarksgroup = FALSE;	/* show bookmark group */
-	p_settings->showhistorygroup = TRUE;	/* show history group */
-	fd = open(fnconfigure, O_WRONLY | O_CREAT, S_IREAD | S_IWRITE);	/* create settings file (settings.cfg) */
-	write(fd, (char *) &settings, sizeof(settings));	/* save settings strucTRUE to file */
-	close(fd);		/* close the file */
-	return (settings);	/* return settings structure to readsettings(void) */
 }
 
 
