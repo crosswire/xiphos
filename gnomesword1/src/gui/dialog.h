@@ -36,6 +36,8 @@ struct _gs_dialog {
 	
 	GtkWidget *dialog;
 	
+	gchar *stock_icon;
+	
 	gchar *title;
 	
 	gchar *text1;
