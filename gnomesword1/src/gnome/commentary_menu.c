@@ -1403,24 +1403,20 @@ GtkWidget *gui_create_pm_comm(COMM_DATA * c)
 			   (on_chapter_heading_activate), c);
 	gtk_signal_connect(GTK_OBJECT(book_heading), "activate",
 			   GTK_SIGNAL_FUNC
-			   (on_book_heading_activate), c);
-	
+			   (on_book_heading_activate), c);	
 	/*
 	 * for using the current dictionary for lookup 
 	 */
 	gtk_signal_connect(GTK_OBJECT(usecurrent), "activate",
 			   GTK_SIGNAL_FUNC
 			   (on_same_lookup_selection_activate), c);
-
+			   
 	gtk_signal_connect(GTK_OBJECT(copy), "activate",
 			   GTK_SIGNAL_FUNC(on_copy_activate), c);
 	gtk_signal_connect(GTK_OBJECT(print), "activate",
 			   GTK_SIGNAL_FUNC(on_print_activate), c);
 	gtk_signal_connect(GTK_OBJECT(find), "activate",
 			   GTK_SIGNAL_FUNC(on_find_activate), c);
-
-
-
 	gtk_signal_connect(GTK_OBJECT(set_font), "activate",
 			   GTK_SIGNAL_FUNC(set_module_font_activate),
 			   c);

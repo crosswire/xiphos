@@ -674,19 +674,11 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 				      GTK_RELIEF_NONE);
 
 	frame19 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame19);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog), "frame19",
-				 frame19,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame19);
 	gtk_box_pack_start(GTK_BOX(vbox30), frame19, TRUE, TRUE, 0);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame19), GTK_SHADOW_IN);
 
 	scrolledwindow38 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow38);
-	gtk_object_set_data_full(GTK_OBJECT(vc->dialog),
-				 "scrolledwindow38", scrolledwindow38,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow38);
 	gtk_container_add(GTK_CONTAINER(frame19), scrolledwindow38);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -698,12 +690,6 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 	if (do_edit) {
 		vc->ec->htmlwidget = gtk_html_new();
 		vc->ec->html = GTK_HTML(vc->ec->htmlwidget);
-		gtk_widget_ref(vc->ec->htmlwidget);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "vc->ec->htmlwidget",
-					 vc->ec->htmlwidget,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(vc->ec->htmlwidget);
 		gtk_container_add(GTK_CONTAINER(scrolledwindow38),
 				  vc->ec->htmlwidget);
@@ -716,12 +702,6 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 					NULL);
 
 		vc->ec->statusbar = gtk_statusbar_new();
-		gtk_widget_ref(vc->ec->statusbar);
-		gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-					 "vc->ec->statusbar",
-					 vc->ec->statusbar,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(vc->ec->statusbar);
 		gtk_box_pack_start(GTK_BOX(vbox30), vc->ec->statusbar,
 				   FALSE, TRUE, 0);
@@ -745,12 +725,12 @@ static void create_commentary_dialog(VIEW_COMM * vc, gboolean do_edit)
 		   GTK_SIGNAL_FUNC(on_html_enter_notify_event),
 		   vc->ec);
 		 */
-		/* gs_html.c */
+		/* html.c */
 		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "link_clicked",
 				   GTK_SIGNAL_FUNC(gui_link_clicked),
 				   NULL);
-		/* gs_html.c */
+		/* html.c */
 		gtk_signal_connect(GTK_OBJECT(vc->ec->htmlwidget),
 				   "on_url", GTK_SIGNAL_FUNC(gui_url),
 				   NULL);

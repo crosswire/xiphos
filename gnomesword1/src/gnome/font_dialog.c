@@ -258,90 +258,49 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	gtk_widget_show(dialog_vbox21);
 
 	frame44 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame44);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font), "frame44",
-				 frame44,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame44);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox21), frame44, TRUE, TRUE,
 			   0);
 	gtk_widget_set_usize(frame44, -2, 53);
 
 	vbox56 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox56);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font), "vbox56",
-				 vbox56,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox56);
 	gtk_container_add(GTK_CONTAINER(frame44), vbox56);
 
 	hbox67 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox67);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font), "hbox67",
-				 hbox67,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox67);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox67, TRUE, TRUE, 0);
 
 	pixmap6 =
 	    gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 				       "/gnome-fontsel.xpm");
-	gtk_widget_ref(pixmap6);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font), "pixmap6",
-				 pixmap6,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pixmap6);
 	gtk_box_pack_start(GTK_BOX(hbox67), pixmap6, TRUE, TRUE, 0);
 
 	vbox57 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox57);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font), "vbox57",
-				 vbox57,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox57);
 	gtk_box_pack_start(GTK_BOX(hbox67), vbox57, TRUE, TRUE, 0);
 
 	label206 = gtk_label_new(_("Change font for"));
-	gtk_widget_ref(label206);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "label206", label206,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label206);
 	gtk_box_pack_start(GTK_BOX(vbox57), label206, FALSE, FALSE, 0);
 
 	label_mod = gtk_label_new(_("Module"));
-	gtk_widget_ref(label_mod);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "label_mod", label_mod,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label_mod);
 	gtk_box_pack_start(GTK_BOX(vbox57), label_mod, FALSE, FALSE, 0);
 
 	label_current_font = gtk_label_new(_("Current font: "));
-	gtk_widget_ref(label_current_font);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "label_current_font",
-				 label_current_font,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label_current_font);
 	gtk_box_pack_start(GTK_BOX(vbox57), label_current_font, FALSE,
 			   FALSE, 0);
 
 
 	hbox_picker = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox_picker);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "hbox_picker", hbox_picker,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox_picker);
 	gtk_box_pack_start(GTK_BOX(vbox56), hbox_picker, FALSE, FALSE,
 			   0);
 
 	fontpicker = gnome_font_picker_new();
-	gtk_widget_ref(fontpicker);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "fontpicker", fontpicker,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(fontpicker);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), fontpicker, FALSE,
 			   FALSE, 0);
@@ -355,10 +314,6 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 						   14);
 
 	combo_size = gtk_combo_new();
-	gtk_widget_ref(combo_size);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "combo_size", combo_size,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(combo_size);
 	gtk_box_pack_start(GTK_BOX(hbox_picker), combo_size, TRUE, TRUE,
 			   0);
@@ -385,21 +340,12 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 	g_list_free(combo_size_items);
 
 	combo_entry_size = GTK_COMBO(combo_size)->entry;
-	gtk_widget_ref(combo_entry_size);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "combo_entry_size", combo_entry_size,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(combo_entry_size);
 	gtk_entry_set_text(GTK_ENTRY(combo_entry_size), _("+1"));
 
 	checkbutton_no_font =
-	    gtk_check_button_new_with_label(_
-					    ("Do not set a font for this module - use default font"));
-	gtk_widget_ref(checkbutton_no_font);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "checkbutton_no_font",
-				 checkbutton_no_font,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	    gtk_check_button_new_with_label(
+			_("Do not set a font for this module - use default font"));
 	gtk_widget_show(checkbutton_no_font);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
 				     (checkbutton_no_font),
@@ -416,10 +362,6 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 				       (dialog_action_area21), 10);
 
 	hbuttonbox1 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox1);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "hbuttonbox1", hbuttonbox1,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox1);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area21), hbuttonbox1,
 			   TRUE, TRUE, 0);
@@ -427,20 +369,12 @@ static GtkWidget *create_dialog_mod_font(MOD_FONT * mf)
 				  GTK_BUTTONBOX_EDGE);
 
 	button_ok = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	gtk_widget_ref(button_ok);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "button_ok", button_ok,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_ok);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_ok);
 	gtk_widget_set_sensitive(button_ok, FALSE);
 	GTK_WIDGET_SET_FLAGS(button_ok, GTK_CAN_DEFAULT);
 
 	button_cancel = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	gtk_widget_ref(button_cancel);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_mod_font),
-				 "button_cancel", button_cancel,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_cancel);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox1), button_cancel);
 	GTK_WIDGET_SET_FLAGS(button_cancel, GTK_CAN_DEFAULT);
@@ -469,7 +403,6 @@ void gui_set_module_font(gchar * mod_name)
 
 	mf = g_new(MOD_FONT, 1);
 	mf->mod_name = mod_name;
-//	g_warning(mf->mod_name);
 	mf->old_font = NULL;
 	mf->old_gdk_font = NULL;
 	mf->old_font_size = NULL;
@@ -495,7 +428,6 @@ void gui_set_module_font(gchar * mod_name)
 	gtk_label_set_text(GTK_LABEL(label_mod), mf->mod_name);
 	gtk_label_set_text(GTK_LABEL(label_current_font), buf);
 	if(mf->old_gdk_font[0] == '-'){
-		//g_warning("old_gdk_font = %s",mf->old_gdk_font);
 		gnome_font_picker_set_font_name ((GnomeFontPicker *)fontpicker,
                                              mf->old_gdk_font);
 	}

@@ -453,35 +453,19 @@ static void create_percomm_pane(PC_DATA * p)
 	p->ec->personal_comments = TRUE;
 	
 	vboxPC = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vboxPC);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vboxPC",
-				 vboxPC,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vboxPC);
 	gtk_box_pack_start(GTK_BOX(p->vbox), vboxPC, TRUE, TRUE, 0);
 
 	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vbox", vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
 	gtk_box_pack_start(GTK_BOX(vboxPC), vbox, TRUE, TRUE,
 			   0);
 
 	frame34 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame34);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "frame34",
-				 frame34,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame34);
 	gtk_box_pack_end(GTK_BOX(vbox), frame34, TRUE, TRUE, 0);
 
 	scrolledwindow17 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow17);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "scrolledwindow17", scrolledwindow17,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow17);
 	gtk_container_add(GTK_CONTAINER(frame34), scrolledwindow17);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -491,20 +475,12 @@ static void create_percomm_pane(PC_DATA * p)
 
 	p->ec->htmlwidget = gtk_html_new();
 	p->ec->html = GTK_HTML(p->ec->htmlwidget);
-	gtk_widget_ref(p->ec->htmlwidget);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "p->ec->htmlwidget", p->ec->htmlwidget,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->ec->htmlwidget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow17),
 			  p->ec->htmlwidget);
 	gtk_html_load_empty(p->ec->html);
 
 	p->ec->statusbar = gtk_statusbar_new();
-	gtk_widget_ref(p->ec->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "p->ec->statusbar", p->ec->statusbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->ec->statusbar);
 	gtk_box_pack_start(GTK_BOX(vboxPC), p->ec->statusbar, FALSE,
 			   TRUE, 0);
@@ -707,19 +683,11 @@ static void add_vbox_to_notebook(PC_DATA * p)
 	GtkWidget *label;
 
 	p->vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(p->vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "p->vbox", p->vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(p->vbox);
 	gtk_container_add(GTK_CONTAINER(widgets.notebook_percomm),
 			  p->vbox);
 
 	label = gtk_label_new(p->mod_name);
-	gtk_widget_ref(label);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "label",
-				 label,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK
 				   (widgets.notebook_percomm),

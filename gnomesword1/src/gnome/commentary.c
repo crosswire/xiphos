@@ -354,40 +354,22 @@ static void create_commentary_pane(COMM_DATA * c)
 	gtk_widget_show(c->frame);
 	gtk_container_add(GTK_CONTAINER(c->vbox), c->frame);
 
-	vbox57 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox57);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox57",
-				 vbox57, (GtkDestroyNotify)
-				 gtk_widget_unref);
+	vbox57 = gtk_vbox_new(FALSE, 0);;
 	gtk_widget_show(vbox57);
 	gtk_container_add(GTK_CONTAINER(c->frame), vbox57);
 /*
 	c->frame_toolbar = gtk_frame_new(NULL);
-	gtk_widget_ref(c->frame_toolbar);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), 
-				"c->frame_toolbar", c->frame_toolbar,
-				(GtkDestroyNotify) gtk_widget_unref);
 	gtk_frame_set_shadow_type (GTK_FRAME (c->frame_toolbar), GTK_SHADOW_NONE);
 	gtk_box_pack_start(GTK_BOX(vbox57), 
 				c->frame_toolbar, FALSE, TRUE, 0);
 */
 	frame_comm = gtk_frame_new(NULL);
-	gtk_widget_ref(frame_comm);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "frame_comm", frame_comm,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame_comm);
 	gtk_box_pack_start(GTK_BOX(vbox57), frame_comm, TRUE, TRUE, 0);
 
 
 
 	scrolledwindowCOMMhtml = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindowCOMMhtml);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "scrolledwindowCOMMhtml",
-				 scrolledwindowCOMMhtml,
-				 (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(scrolledwindowCOMMhtml);
 	gtk_container_add(GTK_CONTAINER(frame_comm),
 			  scrolledwindowCOMMhtml);
@@ -399,10 +381,6 @@ static void create_commentary_pane(COMM_DATA * c)
 
 
 	c->html = gtk_html_new();
-	gtk_widget_ref(c->html);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "c->html", c->html, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(c->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindowCOMMhtml),
 			  c->html);

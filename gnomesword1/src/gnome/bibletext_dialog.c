@@ -858,10 +858,6 @@ static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
 				      GTK_RELIEF_NONE);
 
 	cbBook = gtk_combo_new();
-	gtk_widget_ref(cbBook);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "cbBook",
-				 cbBook,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav), cbBook,
 				  NULL, NULL);
@@ -873,10 +869,6 @@ static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
 				      get_list(BOOKS_LIST));
 
 	vt->cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_ref(vt->cbe_book);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vt->cbe_book", vt->cbe_book,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_set_usize(vt->cbe_book, 100, -2);
 	gtk_widget_show(vt->cbe_book);
 	gtk_entry_set_text(GTK_ENTRY(vt->cbe_book), _("Romans"));
@@ -884,11 +876,6 @@ static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
 	vt->spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_ref(vt->spb_chapter);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vt->spb_chapter",
-				 vt->spb_chapter,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->spb_chapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
 				  vt->spb_chapter, NULL, NULL);
@@ -898,22 +885,13 @@ static GtkWidget *create_nav_toolbar(VIEW_TEXT * vt)
 	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
 	vt->spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_ref(vt->spb_verse);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vt->spb_verse", vt->spb_verse,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->spb_verse);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
 				  vt->spb_verse, NULL, NULL);
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(vt->spb_verse),
 				    TRUE);
 
-	vt->freeform_lookup = gtk_entry_new();
-	gtk_widget_ref(vt->freeform_lookup);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "vt->freeform_lookup",
-				 vt->freeform_lookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	vt->freeform_lookup = gtk_entry_new();;
 	gtk_widget_show(vt->freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar_nav),
 				  vt->freeform_lookup, NULL, NULL);
@@ -974,10 +952,6 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 			      FALSE);
 
 	vbox33 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox33);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vbox33",
-				 vbox33,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox33);
 	gtk_container_add(GTK_CONTAINER(vt->dialog), vbox33);
 
@@ -990,19 +964,11 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				      GTK_RELIEF_NONE);
 
 	frame21 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame21);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "frame21",
-				 frame21,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame21);
 	gtk_box_pack_start(GTK_BOX(vbox33), frame21, TRUE, TRUE, 0);
 	gtk_widget_set_usize(frame21, -2, 400);
 
 	swVText = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(swVText);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "swVText",
-				 swVText,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(swVText);
 	gtk_container_add(GTK_CONTAINER(frame21), swVText);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(swVText),
@@ -1010,19 +976,11 @@ static void create_bibletext_dialog(VIEW_TEXT * vt)
 				       GTK_POLICY_ALWAYS);
 
 	vt->t->html = gtk_html_new();
-	gtk_widget_ref(vt->t->html);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog), "vt->t->html",
-				 vt->t->html,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->t->html);
 	gtk_container_add(GTK_CONTAINER(swVText), vt->t->html);
 	gtk_html_load_empty(GTK_HTML(vt->t->html));
 
 	vt->statusbar = gtk_statusbar_new();
-	gtk_widget_ref(vt->statusbar);
-	gtk_object_set_data_full(GTK_OBJECT(vt->dialog),
-				 "vt->statusbar", vt->statusbar,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vt->statusbar);
 	gtk_box_pack_start(GTK_BOX(vbox33), vt->statusbar, FALSE, FALSE,
 			   0);

@@ -154,19 +154,11 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 	gtk_widget_show(dialog_vbox23);
 
 	frame71 = gtk_frame_new(NULL);
-	gtk_widget_ref(frame71);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
-				 "frame71", frame71,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame71);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox23), frame71, TRUE, TRUE,
 			   0);
 
 	scrolledwindow70 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow70);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
-				 "scrolledwindow70", scrolledwindow70,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow70);
 	gtk_container_add(GTK_CONTAINER(frame71), scrolledwindow70);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -175,10 +167,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				       GTK_POLICY_AUTOMATIC);
 
 	html_widget = gtk_html_new();
-	gtk_widget_ref(html_widget);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
-				 "html_widget", html_widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(html_widget);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
 
@@ -193,10 +181,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				       (dialog_action_area23), 10);
 
 	hbuttonbox2 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox2);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
-				 "hbuttonbox2", hbuttonbox2,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox2);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area23), hbuttonbox2,
 			   TRUE, TRUE, 0);
@@ -204,10 +188,6 @@ GtkWidget *gui_create_display_informtion_dialog(void)
 				  GTK_BUTTONBOX_END);
 
 	button_close = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
-	gtk_widget_ref(button_close);
-	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
-				 "button_close", button_close,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(button_close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
 	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);

@@ -61,7 +61,7 @@ GtkWidget *htmlTexts;
  *  gui_about_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
@@ -83,7 +83,7 @@ void gui_about_activate(GtkMenuItem * menuitem, gpointer user_data)
  *  on_help_contents_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_help_contents_activate(GtkMenuItem * menuitem, 
  *						gpointer user_data)	
@@ -112,7 +112,7 @@ void on_help_contents_activate(GtkMenuItem * menuitem,
  *  on_mnuHistoryitem1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem, 
  *						gpointer user_data)	
@@ -135,7 +135,7 @@ void on_mnuHistoryitem1_activate(GtkMenuItem * menuitem,
  *  on_about_the_sword_project1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
  *						gpointer user_data)	
@@ -161,7 +161,7 @@ void on_about_the_sword_project1_activate(GtkMenuItem * menuitem,
  *  on_daily_devotion1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_daily_devotion1_activate(GtkMenuItem *menuitem, 
  *						gpointer user_data)	
@@ -184,7 +184,7 @@ void on_daily_devotion1_activate(GtkMenuItem * menuitem,
  *  on_preferences1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_preferences1_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
@@ -206,7 +206,7 @@ void on_preferences1_activate(GtkMenuItem * menuitem,
  *  on_search_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
@@ -235,7 +235,7 @@ void on_search_activate(GtkMenuItem * menuitem, gpointer user_data)
  *  on_verse_style1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_verse_style1_activate(GtkMenuItem *menuitem, gpointer user_data)	
  *
@@ -263,7 +263,7 @@ void on_verse_style1_activate(GtkMenuItem * menuitem,
  *  on_exit_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)	
  *
@@ -286,7 +286,7 @@ void on_exit_activate(GtkMenuItem * menuitem, gpointer user_data)
  *  on_clear1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_clear1_activate(GtkMenuItem * menuitem,
  *						gpointer user_data)	
@@ -309,7 +309,7 @@ void on_clear1_activate(GtkMenuItem * menuitem, gpointer user_data)
  *  on_about_gnomesword1_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void on_about_gnomesword1_activate(GtkMenuItem * menuitem, 
  *						gpointer user_data)	
@@ -335,7 +335,7 @@ void on_about_gnomesword1_activate(GtkMenuItem * menuitem,
  *  
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   v	
  *
@@ -357,7 +357,7 @@ static void on_bibletext_item_activate(GtkMenuItem * menuitem,
  *  
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   v	
  *
@@ -376,12 +376,13 @@ static void on_commentary_item_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  
+ *   on_dictlex_item_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
- *   v	
+ *   void on_dictlex_item_activate(GtkMenuItem * menuitem,
+				     gpointer user_data)
  *
  * Description
  *    
@@ -398,12 +399,13 @@ static void on_dictlex_item_activate(GtkMenuItem * menuitem,
 
 /******************************************************************************
  * Name
- *  
+ *   on_book_item_activate
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
- *   v	
+ *   void on_book_item_activate(GtkMenuItem * menuitem,
+				  gpointer user_data)	
  *
  * Description
  *    
@@ -659,13 +661,13 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Detach/Attach Shortcut Bar"),
+	 GNOME_APP_UI_ITEM, N_("Detach/Attach Shortcut Bar"),
 	 NULL,
 	 gui_attach_detach_shortcutbar, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_TOGGLEITEM, N_("Hide/Show Shortcut Bar"),
+	 GNOME_APP_UI_ITEM, N_("Hide/Show Shortcut Bar"),
 	 NULL,
 	 gui_shortcutbar_showhide, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
@@ -770,7 +772,7 @@ static GnomeUIInfo menubar1_uiinfo[] = {
  *   gui_create_main_menu
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void gui_create_main_menu(GtkWidget *app)	
  *
@@ -785,128 +787,24 @@ void gui_create_main_menu(GtkWidget * app)
 {	
  	gnome_app_create_menus(GNOME_APP(app), menubar1_uiinfo);
 
-	gtk_widget_ref(menubar1_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "file1",
-				 menubar1_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(file1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator4",
-				 file1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(file1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "new_bibletext_dialog1",
-				 file1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
-
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
 			      _("_File/Open Bibletext Dialog/"),
 			      (GtkMenuCallback)
 			      on_bibletext_item_activate);
-
-
-
-	gtk_widget_ref(file1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "new_commentary_dialog1",
-				 file1_menu_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
+	
 	gui_add_mods_to_menus(get_list(COMM_LIST),
 			      _("_File/Open Commentary Dialog/"),
 			      (GtkMenuCallback)
 			      on_commentary_item_activate);
-
-
-	gtk_widget_ref(file1_menu_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "new_dict_lex_dialog1",
-				 file1_menu_uiinfo[3].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
+	
 	gui_add_mods_to_menus(get_list(DICT_LIST),
 			      _("_File/Open Dictionary Dialog/"),
 			      (GtkMenuCallback)
 			      on_dictlex_item_activate);
-
-
-	gtk_widget_ref(file1_menu_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "new_book_dialog1",
-				 file1_menu_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
+	
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_File/Open Book Dialog/"),
 			      (GtkMenuCallback) on_book_item_activate);
-
-
-	gtk_widget_ref(file1_menu_uiinfo[5].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "exit1",
-				 file1_menu_uiinfo[5].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "edit1",
-				 menubar1_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "copy1",
-				 edit1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator3",
-				 edit1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(edit1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "search1",
-				 edit1_menu_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "quickmarks",
-				 menubar1_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "history1",
-				 menubar1_uiinfo[3].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(history1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "clear1",
-				 history1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(history1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator5",
-				 history1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(menubar1_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "view1",
-				 menubar1_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(view1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "daily_devotion1",
-				 view1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
-	gtk_widget_ref(view1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "separator28",
-				 view1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
 	widgets.viewtexts_item = view1_menu_uiinfo[2].widget;
 	widgets.viewcomms_item = view1_menu_uiinfo[3].widget;
 	widgets.viewdicts_item = view1_menu_uiinfo[4].widget;
@@ -914,74 +812,22 @@ void gui_create_main_menu(GtkWidget * app)
 	gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM
 				       (widgets.versestyle_item),
 				       settings.versestyle);
-
-	gtk_widget_ref(menubar1_uiinfo[4].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "help1",
-				 menubar1_uiinfo[4].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
+				       
 	gtk_menu_item_right_justify(GTK_MENU_ITEM
 				    (menubar1_uiinfo[4].widget));
-
-	gtk_widget_ref(help1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "about_the_sword_project1",
-				 help1_menu_uiinfo[0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(help1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "about_gnomesword1",
-				 help1_menu_uiinfo[1].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(help1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "about_sword_modules1",
-				 help1_menu_uiinfo[2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[0].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app), "bible_texts1",
-				 about_sword_modules1_menu_uiinfo
-				 [0].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
-
+				    
 	gui_add_mods_to_menus(get_list(TEXT_LIST),
-			      _
-			      ("_Help/About Sword Modules/Bible Texts/"),
-			      (GtkMenuCallback) gui_about_activate);
+			_("_Help/About Sword Modules/Bible Texts/"),
+			(GtkMenuCallback) gui_about_activate);
 			      
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[1].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "commentaries1",
-				 about_sword_modules1_menu_uiinfo[1].
-				 widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
 	gui_add_mods_to_menus(get_list(COMM_LIST),
-			      _
-			      ("_Help/About Sword Modules/Commentaries/"),
-			      (GtkMenuCallback) gui_about_activate);
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[2].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "dictionaries_lexicons1",
-				 about_sword_modules1_menu_uiinfo
-				 [2].widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
+		_("_Help/About Sword Modules/Commentaries/"),
+			(GtkMenuCallback) gui_about_activate);
+			      
 	gui_add_mods_to_menus(get_list(DICT_LIST),
-			      _
-			      ("_Help/About Sword Modules/Dictionaries-Lexicons/"),
+			_("_Help/About Sword Modules/Dictionaries-Lexicons/"),
 			      (GtkMenuCallback) gui_about_activate);
 			      
-	gtk_widget_ref(about_sword_modules1_menu_uiinfo[3].widget);
-	gtk_object_set_data_full(GTK_OBJECT(app),
-				 "books",
-				 about_sword_modules1_menu_uiinfo[3].
-				 widget,
-				 (GtkDestroyNotify) gtk_widget_unref);
-
 	gui_add_mods_to_menus(get_list(GBS_LIST),
 			      _("_Help/About Sword Modules/Books/"),
 			      (GtkMenuCallback) gui_about_activate);
@@ -990,7 +836,6 @@ void gui_create_main_menu(GtkWidget * app)
 			   "toggled",
 			   GTK_SIGNAL_FUNC(on_verse_style1_activate),
 			   NULL);
-			   
 }
 
 /******************************************************************************
@@ -998,7 +843,7 @@ void gui_create_main_menu(GtkWidget * app)
  *  gui_install_menu_hints
  *
  * Synopsis
- *   #include "main_menu.h"
+ *   #include "gui/main_menu.h"
  *
  *   void gui_install_menu_hints(GtkWidget *app)	
  *
@@ -1011,5 +856,5 @@ void gui_create_main_menu(GtkWidget * app)
 
 void gui_install_menu_hints(GtkWidget * app)
 {
-	//gnome_app_install_menu_hints(GNOME_APP(app), menubar1_uiinfo);
+	gnome_app_install_menu_hints(GNOME_APP(app), menubar1_uiinfo);
 }
