@@ -45,6 +45,7 @@
 #include "main/sword.h"
 #include "main/commentary.h"
 #include "main/bibletext.h"
+#include "main/xml.h"
 
 #define SEARCHING N_("Searching the ")
 #define SMODULE N_(" Module")
@@ -86,6 +87,9 @@ struct _search_dialog {
 	GtkWidget *cb_case_sensitive;
 	GtkWidget *ctree;
 	GtkWidget *progressbar;
+	GtkWidget *cb_include_strongs;
+	GtkWidget *cb_include_morphs;
+	GtkWidget *cb_include_footnotes;
 	GSList *_201_group;
 
 	EShortcutModel *shortcut_model;
@@ -105,13 +109,10 @@ struct _search_dialog {
 	gint custom_list_row;
 	gint range_rows;
 	gint list_rows;
+	
+	gboolean show_in_main;
 
 	gchar *search_mod;
-
-	GList *rangelist;
-	GList *modlists;
-
-
 };
 
 
@@ -159,6 +160,7 @@ static void add_to_found_list(gchar * result_text, gchar * module)
 		gui_display_html(search.results_html, utf8str, utf8len);
 	}
 }
+
 /******************************************************************************
  * Name
  *   get_current_list
@@ -211,7 +213,6 @@ static void add_modlist_to_label(void)
 
 	mods = get_current_list();
 	mod_list = get_modlist_string(mods);
-//	g_warning(mod_list);
 	gtk_label_set_text(GTK_LABEL(search.label_search_module),
 			   mod_list);
 	g_free(mod_list);
@@ -306,39 +307,6 @@ static void button_clean(GtkButton * button, gpointer user_data)
 
 /******************************************************************************
  * Name
- *   get_custom_range_from_name
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   gchar *get_custom_range_from_name(gchar * name)
- *
- * Description
- *   used by setup_search() - returns the search range (scope)
- *
- * Return value
- *   gchar *
- */
-
-static gchar *get_custom_range_from_name(gchar * name)
-{
-	gchar *buf;
-	
-	open_config_file(settings.fnconfigure);
-	buf = (gchar*)get_config_value("Custom Ranges", name);	
-	close_config_file();
-	
-	g_warning(buf);
-	if(buf)
-		return buf;
-	else
-		return NULL;
-
-}
-
-
-/******************************************************************************
- * Name
  *   get_custom_list_from_name
  *
  * Synopsis
@@ -353,44 +321,28 @@ static gchar *get_custom_range_from_name(gchar * name)
  *   gchar *
  */
 
-static GList *get_custom_list_from_name(gchar * name)
+static GList *get_custom_list_from_name(gchar * label)
 {
-	GList *tmp = NULL;
 	GList *items = NULL;
-	gchar *buf, *mod_list = NULL;
-	CUSTOM_LIST *r;
+	gchar *mod_list = NULL;
 	gchar *t;
 	gchar *token;
 
 	search.module_count = 0;
 	t = ",";
-	tmp = search.modlists;
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		//g_warning("mod list = %s",r->value);
-		buf = r->label;
-		mod_list = g_strdup(r->value);
-		if (!strcmp(buf, name)) {
-			token = strtok(mod_list, t);
-			++search.module_count;
-			while (token != NULL) {
-				//g_warning("token = %s",token);
-				++search.module_count;
-				items = g_list_append(items, (gchar *)
-						      g_strdup(token));
-				token = strtok(NULL, t);
-			}
-			if (mod_list)
-				g_free(mod_list);
-			return items;
-		}
-		if (mod_list)
-			g_free(mod_list);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	return items;
 
+	mod_list =
+	    (gchar *) xml_get_list_from_label("modlists", "modlist",
+					      label);
+	token = strtok(mod_list, t);
+	++search.module_count;
+	while (token != NULL) {
+		++search.module_count;
+		items = g_list_append(items, (gchar *)
+				      g_strdup(token));
+		token = strtok(NULL, t);
+	}
+	return items;
 }
 
 
@@ -455,6 +407,7 @@ gchar *get_modlist_string(GList * mods)
 	return rv;
 }
 
+
 /******************************************************************************
  * Name
  *   add_ranges
@@ -473,33 +426,50 @@ gchar *get_modlist_string(GList * mods)
 
 static void add_ranges(void)
 {
-	GList *tmp = NULL;
 	GList *items = NULL;
 	gchar *buf[2];
-	CUSTOM_LIST *r;
 
 	gtk_clist_clear(GTK_CLIST(search.clist_range));
-	tmp = search.rangelist;
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		//g_warning("on load %s = %s", r->label, r->value);
-		buf[0] = r->label;
-		buf[1] = r->value;
 
-		items = g_list_append(items, (gchar *) r->label);
-		search.range_rows =
-		    gtk_clist_append(GTK_CLIST(search.clist_range),
-				     buf);
-		tmp = g_list_next(tmp);
+	if (xml_set_section_ptr("ranges")) {
+		if (xml_get_label()) {
+			buf[0] = xml_get_label();
+			buf[1] = xml_get_list();
+			search.range_rows =
+			    gtk_clist_append(GTK_CLIST
+					     (search.clist_range), buf);
+			items = g_list_append(items, g_strdup(buf[0]));
+			g_free(buf[0]);
+			g_free(buf[1]);
+		}
+
+		while (xml_next_item()) {
+			if (xml_get_label()) {
+				buf[0] = xml_get_label();
+				buf[1] = xml_get_list();
+				search.range_rows =
+				    gtk_clist_append(GTK_CLIST
+						     (search.
+						      clist_range),
+						     buf);
+				items =
+				    g_list_append(items,
+						  g_strdup(buf[0]));
+				g_free(buf[0]);
+				g_free(buf[1]);
+			}
+		}
 	}
-	g_list_free(tmp);
 
 	if (items != NULL)
 		gtk_combo_set_popdown_strings(GTK_COMBO
 					      (search.combo_range),
 					      items);
+	while (items != NULL) {
+		g_free((gchar *) items->data);
+		items = g_list_next(items);
+	}
 	g_list_free(items);
-
 }
 
 /******************************************************************************
@@ -520,33 +490,52 @@ static void add_ranges(void)
 
 static void add_modlist(void)
 {
-	GList *tmp = NULL;
 	GList *items = NULL;
 	gchar *buf[2];
-	CUSTOM_LIST *r;
 
 	gtk_clist_clear(GTK_CLIST(search.module_lists));
-	tmp = search.modlists;
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		//g_warning("on load %s = %s", r->label, r->value);
-		buf[0] = r->label;
-		buf[1] = r->value;
 
-		items = g_list_append(items, (gchar *) r->label);
-		search.list_rows =
-		    gtk_clist_append(GTK_CLIST(search.module_lists),
-				     buf);
-		tmp = g_list_next(tmp);
+	if (xml_set_section_ptr("modlists")) {
+		if (xml_get_label()) {
+			buf[0] = xml_get_label();
+			buf[1] = xml_get_list();
+			search.list_rows =
+			    gtk_clist_append(GTK_CLIST
+					     (search.module_lists),
+					     buf);
+			items = g_list_append(items, g_strdup(buf[0]));
+			g_free(buf[0]);
+			g_free(buf[1]);
+		}
+
+		while (xml_next_item()) {
+			if (xml_get_label()) {
+				buf[0] = xml_get_label();
+				buf[1] = xml_get_list();
+				search.list_rows =
+				    gtk_clist_append(GTK_CLIST
+						     (search.
+						      module_lists),
+						     buf);
+				items =
+				    g_list_append(items,
+						  g_strdup(buf[0]));
+				g_free(buf[0]);
+				g_free(buf[1]);
+			}
+		}
 	}
-	g_list_free(tmp);
 
 	if (items != NULL)
 		gtk_combo_set_popdown_strings(GTK_COMBO
 					      (search.combo_list),
 					      items);
-	g_list_free(items);
 
+	while (items != NULL) {
+		g_free((gchar *) items->data);
+		items = g_list_next(items);
+	}
+	g_list_free(items);
 }
 
 /******************************************************************************
@@ -609,11 +598,11 @@ static void fill_group(gchar * folder, GList * mod_lists)
 	extern GdkBitmap *mask3;
 
 	text[0] = folder;
-	
+
 	pixmap_opened = pixmap1;
 	mask_opened = mask1;
 	pixmap_closed = pixmap2;
-	mask_closed = mask2;	
+	mask_closed = mask2;
 
 	node = gtk_ctree_insert_node(GTK_CTREE(search.ctree),
 				     NULL,
@@ -623,9 +612,7 @@ static void fill_group(gchar * folder, GList * mod_lists)
 				     pixmap_opened,
 				     mask_opened,
 				     pixmap_closed,
-				     mask_closed, 
-				     FALSE, 
-				     FALSE);
+				     mask_closed, FALSE, FALSE);
 	pixmap_closed = NULL;
 	mask_closed = NULL;
 	pixmap_opened = pixmap3;
@@ -633,19 +620,17 @@ static void fill_group(gchar * folder, GList * mod_lists)
 	tmp = mod_lists;
 	while (tmp != NULL) {
 		text[0] = (gchar *) tmp->data;
-		
+
 		gtk_ctree_insert_node(GTK_CTREE(search.ctree),
-				     node,
-				     NULL,
-				     text,
-				     3,
-				     pixmap_opened,
-				     mask_opened,
-				     pixmap_closed,
-				     mask_closed, 
-				     TRUE, 
-				     FALSE);
-		
+				      node,
+				      NULL,
+				      text,
+				      3,
+				      pixmap_opened,
+				      mask_opened,
+				      pixmap_closed,
+				      mask_closed, TRUE, FALSE);
+
 		tmp = g_list_next(tmp);
 	}
 	g_list_free(tmp);
@@ -670,20 +655,30 @@ static void fill_group(gchar * folder, GList * mod_lists)
 
 static void set_up_search(void)
 {
-	gchar *name;
+	gchar *label;
+	gchar *range = NULL;
 
 	gui_begin_html(search.results_html, TRUE);
 	clear_scope();
 	if (GTK_TOGGLE_BUTTON(search.rb_custom_range)->active) {
 		clear_search_list();
-		name =
+		label =
 		    gtk_entry_get_text(GTK_ENTRY
 				       (search.combo_entry_range));
-		set_range(get_custom_range_from_name(name));
-		set_scope2range();
-	} else if (GTK_TOGGLE_BUTTON(search.rb_last)->active) {
+		range =
+		    (gchar *) xml_get_list_from_label("ranges", "range",
+						      label);
+		if (range) {
+			set_range(range);
+			set_scope2range();
+		}
+	}
+
+	else if (GTK_TOGGLE_BUTTON(search.rb_last)->active) {
 		set_scope2last_search();
-	} else {
+	}
+
+	else {
 		clear_search_list();
 	}
 }
@@ -708,35 +703,37 @@ static void set_up_search(void)
 
 static void on_button_close(GtkButton * button, gpointer user_data)
 {
-	CUSTOM_LIST *r;
-	GList *tmp = NULL;
-
 	is_running = FALSE;
-
-	tmp = g_list_first(search.rangelist);
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		g_free(r->label);
-		g_free(r->value);
-		g_free((CUSTOM_LIST *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	g_list_free(search.rangelist);
-
-	tmp = g_list_first(search.modlists);
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		g_free(r->label);
-		g_free(r->value);
-		g_free((CUSTOM_LIST *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	g_list_free(search.modlists);
-
-
 	gtk_widget_destroy(search.dialog);
+}
+
+
+/******************************************************************************
+ * Name
+ *   
+ *
+ * Synopsis
+ *   #include "gui/search_dialog.h"
+ *
+ *   
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void check_search_global_options(void)
+{
+	set_search_global_option("Strong's Numbers", 
+		GTK_TOGGLE_BUTTON(search.cb_include_strongs)->active);
+	
+	set_search_global_option("Morphological Tags", 
+		GTK_TOGGLE_BUTTON(search.cb_include_morphs)->active);
+	
+	set_search_global_option("Footnotes", 
+		GTK_TOGGLE_BUTTON(search.cb_include_footnotes)->active);
 }
 
 
@@ -789,7 +786,7 @@ static void on_button_begin_search(GtkButton * button,
 
 	set_up_search();
 
-	gtk_notebook_set_page(GTK_NOTEBOOK(search.notebook), 3);
+	gtk_notebook_set_page(GTK_NOTEBOOK(search.notebook), 1);
 
 	search_type = GTK_TOGGLE_BUTTON
 	    (search.rb_regexp)->active ? 0 :
@@ -813,7 +810,9 @@ static void on_button_begin_search(GtkButton * button,
 		search_mods = get_current_list();
 	} else
 		search_mods = get_current_search_mod();
-
+	
+	check_search_global_options();
+	
 	search_mods = g_list_first(search_mods);
 	while (search_mods != NULL) {
 		module = (gchar *) search_mods->data;
@@ -821,15 +820,16 @@ static void on_button_begin_search(GtkButton * button,
 		sprintf(buf, "%s %s %s", SEARCHING, module, SMODULE);
 		gnome_appbar_set_status(GNOME_APPBAR
 					(search.progressbar), buf);
-		
-		finds = do_module_search(module,search_string, 
-			search_type, search_params, TRUE);
-		
-		while((key_buf = get_next_result_key()) != NULL) {
-			add_to_found_list((gchar*)key_buf, 
-							(gchar*)module);
+
+		finds = do_module_search(module, search_string,
+					 search_type, search_params,
+					 TRUE);
+
+		while ((key_buf = get_next_result_key()) != NULL) {
+			add_to_found_list((gchar *) key_buf,
+					  (gchar *) module);
 		}
-		
+
 		sprintf(buf, "%d %s <A HREF=\"%s\">%s</A><br>",
 			finds, FINDS, module, module);
 		utf8str =
@@ -875,7 +875,7 @@ static void on_button_begin_search(GtkButton * button,
 static void on_togglebutton_show_main(GtkToggleButton * togglebutton,
 				      gpointer user_data)
 {
-
+	search.show_in_main = togglebutton->active;
 }
 
 
@@ -1028,10 +1028,16 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 			gui_change_module_and_key(modbuf, buf);
 
 		}
+		
 		text = get_module_text(5, modbuf, buf);
 		entry_display(search.preview_html, modbuf,
 			      text, buf, TRUE);
+		
+		if(search.show_in_main)
+			gui_change_module_and_key(modbuf, buf);
+		
 		settings.displaySearchResults = FALSE;
+		
 		if (text)
 			free(text);
 		g_free(buf);
@@ -1261,12 +1267,12 @@ static void range_text_changed(GtkEditable * editable,
 	gint i = 0;
 
 	gtk_clist_clear((GtkCList *) search.clist_ranges);
-	entry = gtk_entry_get_text(GTK_ENTRY(editable));	
-	count = start_parse_verse_list(entry);	
-	
+	entry = gtk_entry_get_text(GTK_ENTRY(editable));
+	count = start_parse_verse_list(entry);
+
 	while (count--) {
 		buf = get_next_verse_list_element(i++);
-		if(!buf)
+		if (!buf)
 			break;
 		gtk_clist_append((GtkCList *) search.clist_ranges,
 				 &buf);
@@ -1329,20 +1335,25 @@ static void new_modlist(GtkButton * button, gpointer user_data)
  */
 
 static void clear_modules(GtkButton * button, gpointer user_data)
-{	
+{
 	gint test;
 	GS_DIALOG *info;
 
 	info = gui_new_dialog();
-	info->label_top = N_("Do you really want to CLEAR the module list?");
+	info->label_top =
+	    N_("Do you really want to CLEAR the module list?");
 	info->yes = TRUE;
 	info->no = TRUE;
 
 	test = gui_gs_dialog(info);
 	if (test != GS_YES)
 		return;
-	
+
 	gtk_clist_clear((GtkCList *) search.clist_modules);
+	gtk_clist_set_text((GtkCList *)
+				   search.
+				   module_lists,
+				   search.custom_list_row, 1, "");
 	g_free(info);
 }
 
@@ -1364,12 +1375,15 @@ static void clear_modules(GtkButton * button, gpointer user_data)
  */
 
 static void delete_module(GtkButton * button, gpointer user_data)
-{	
+{
 	gint test;
 	GS_DIALOG *info;
+	GList *mods = NULL;
+	gchar *mod_list;
 
 	info = gui_new_dialog();
-	info->label_top = N_("Do you really want to REMOVE the selected item?");
+	info->label_top =
+	    N_("Do you really want to REMOVE\n the selected module?");
 	info->yes = TRUE;
 	info->no = TRUE;
 
@@ -1377,8 +1391,17 @@ static void delete_module(GtkButton * button, gpointer user_data)
 	if (test != GS_YES)
 		return;
 	gtk_clist_remove((GtkCList *) search.clist_modules,
-				 search.modules_row);
-	
+			 search.modules_row);
+
+	mods = get_current_list();
+	mod_list = get_modlist_string(mods);
+	if (mod_list) {
+		gtk_clist_set_text((GtkCList *)
+				   search.
+				   module_lists,
+				   search.custom_list_row, 1, mod_list);
+		g_free(mod_list);
+	}
 	g_free(info);
 }
 
@@ -1401,28 +1424,9 @@ static void delete_module(GtkButton * button, gpointer user_data)
 
 static void save_modlist(GtkButton * button, gpointer user_data)
 {
-	GList *tmp = NULL;
 	gint i = 0;
 	gchar *text1;
 	gchar *text2;
-	CUSTOM_LIST *r;
-
-	tmp = g_list_first(search.modlists);
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		//g_warning("on save1 %s = %s", r->label, r->value);
-		g_free(r->label);
-		g_free(r->value);
-		g_free((CUSTOM_LIST *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	g_list_free(search.modlists);
-	search.modlists = NULL;
-
-
-	open_config_file(settings.fnconfigure);
-	erase_config_section("Custom Module Lists");
 	
 	for (i = 0; i < (search.list_rows + 1); i++) {
 
@@ -1430,81 +1434,9 @@ static void save_modlist(GtkButton * button, gpointer user_data)
 				   i, 0, &text1);
 		gtk_clist_get_text((GtkCList *) search.module_lists,
 				   i, 1, &text2);
-		add_to_config_file("Custom Module Lists", 
-			text1, text2);
-
-		r = g_new(CUSTOM_LIST, 1);
-		r->label = g_strdup(text1);
-		r->value = g_strdup(text2);
-		search.modlists =
-		    g_list_append(search.modlists,
-				  (CUSTOM_LIST *) r);
+		xml_set_list_item("modlists", "modlist", text1, text2);
 	}
-	//save_custom_modlist(search.modlists);
-	close_config_file();
 	add_modlist();
-}
-
-
-/******************************************************************************
- * Name
- *   save_modlist_as
- *
- * Synopsis
- *   #include "gui/search_dialog.h"
- *
- *   
- *
- * Description
- *   saves the current module list as...
- *
- * Return value
- *   void
- */
-
-static void save_modlist_as(GtkButton * button, gpointer user_data)
-{
-	gint test;
-	CUSTOM_LIST *m;
-	
-	GS_DIALOG *info;
-
-	
-	info = gui_new_dialog();
-	info->label_top = N_("Save List");
-	info->text1 = g_strdup("");
-	info->label1 = N_("Enter List Name: ");
-	info->ok = TRUE;
-	info->cancel = TRUE;
-	/*** open dialog to get name for list ***/
-	test = gui_gs_dialog(info);
-	if (test == GS_OK) {	
-		if (strlen(info->text1) > 0) {
-			GList *mods = NULL;
-			gchar *text[2], *mods_string;
-			mods = get_current_list();
-			mods_string = get_modlist_string(mods);
-			text[0] = info->text1;
-			text[1] = mods_string;
-			
-			search.custom_list_row =
-			    gtk_clist_append((GtkCList *) search.
-					     module_lists, text);
-			search.list_rows = search.custom_list_row;
-			m = g_new(CUSTOM_LIST, 1);
-			m->label = g_strdup(info->text1);
-			m->value = g_strdup(mods_string);
-			search.modlists =
-			    g_list_append(search.modlists,
-					  (CUSTOM_LIST *) m);
-//			save_custom_modlist(search.modlists);
-			gtk_clist_select_row((GtkCList *)
-					     search.module_lists,
-					     search.custom_list_row, 0);
-		}
-	}
-	g_free(info->text1);
-	g_free(info);
 }
 
 
@@ -1559,44 +1491,18 @@ static void new_range(GtkButton * button, gpointer user_data)
 
 static void save_range(GtkButton * button, gpointer user_data)
 {
-	GList *tmp = NULL;
 	gint i = 0;
 	gchar *text1;
 	gchar *text2;
-	CUSTOM_LIST *r;
 
-	tmp = g_list_first(search.rangelist);
-	while (tmp != NULL) {
-		r = (CUSTOM_LIST *) tmp->data;
-		//g_warning("on save1 %s = %s", r->label, r->value);
-		g_free(r->label);
-		g_free(r->value);
-		g_free((CUSTOM_LIST *) tmp->data);
-		tmp = g_list_next(tmp);
-	}
-	g_list_free(tmp);
-	g_list_free(search.rangelist);
-	search.rangelist = NULL;
-
-	open_config_file(settings.fnconfigure);
-	erase_config_section("Custom Ranges");
-	
 	for (i = 0; i < (search.range_rows + 1); i++) {
 
 		gtk_clist_get_text((GtkCList *) search.clist_range,
 				   i, 0, &text1);
 		gtk_clist_get_text((GtkCList *) search.clist_range,
 				   i, 1, &text2);
-		add_to_config_file("Custom Ranges", 
-			text1, text2);
-		r = g_new(CUSTOM_LIST, 1);
-		r->label = g_strdup(text1);
-		r->value = g_strdup(text2);
-		search.rangelist =
-		    g_list_append(search.rangelist, (CUSTOM_LIST *) r);
+		xml_set_list_item("ranges", "range", text1, text2);
 	}
-	//save_custom_ranges(search.rangelist);
-	close_config_file();
 	add_ranges();
 
 }
@@ -1629,7 +1535,8 @@ static void delete_range(GtkButton * button, gpointer user_data)
 			   search.custom_range_row, 0, &name_string);
 
 	info = gui_new_dialog();
-	info->label_top = N_("Are you sure you want ot delete this range?");
+	info->label_top =
+	    N_("Are you sure you want ot delete this range?");
 	info->label_bottom = name_string;
 	info->yes = TRUE;
 	info->no = TRUE;
@@ -1637,12 +1544,12 @@ static void delete_range(GtkButton * button, gpointer user_data)
 	test = gui_gs_dialog(info);
 	if (test != GS_YES)
 		return;
-	
+
 	gtk_clist_remove((GtkCList *) search.clist_range,
-				 search.custom_range_row);
+			 search.custom_range_row);
 	--search.range_rows;
 	save_range(NULL, NULL);
-	g_free(info);	
+	g_free(info);
 }
 
 
@@ -1673,7 +1580,8 @@ static void delete_list(GtkButton * button, gpointer user_data)
 			   search.custom_list_row, 0, &name_string);
 
 	info = gui_new_dialog();
-	info->label_top = N_("Are you sure you want ot delete this list?");
+	info->label_top =
+	    N_("Are you sure you want ot delete this list?");
 	info->label_bottom = name_string;
 	info->yes = TRUE;
 	info->no = TRUE;
@@ -1793,7 +1701,8 @@ static void current_module_toggled(GtkToggleButton * togglebutton,
  */
 
 static void on_ctree_select_row(GtkCTree * ctree,
-		    GList * node, gint column, gpointer user_data)
+				GList * node, gint column,
+				gpointer user_data)
 {
 	gchar *mod_desc = NULL;
 	gchar *mod_list = NULL;
@@ -1801,42 +1710,37 @@ static void on_ctree_select_row(GtkCTree * ctree,
 	gchar *text[2];
 	GtkCTreeNode *selected_node;
 	GList *mods = NULL;
-	
+
 	selected_node = (GtkCTreeNode *) node;
 	/* if node is leaf we need to add mod to list */
 	if (GTK_CTREE_ROW(selected_node)->is_leaf) {
 		mod_desc =
 		    GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.
 				     cell[0])->text;
-	}
-	else {		
-		gtk_ctree_toggle_expansion(ctree,selected_node);
+	} else {
+		gtk_ctree_toggle_expansion(ctree, selected_node);
 		return;
 	}
-	
-	if(mod_desc) {
+
+	if (mod_desc) {
 		memset(mod_name, 0, 16);
 		module_name_from_description(mod_name, mod_desc);
 	}
-	if(mod_name) {
+	if (mod_name) {
 		text[0] = mod_desc;
 		text[1] = mod_name;
-	}
-	else
+	} else
 		return;
-	
-	if (GTK_TOGGLE_BUTTON
-	    (search.rb_current_module)->active) {
+
+	if (GTK_TOGGLE_BUTTON(search.rb_current_module)->active) {
 		search.search_mod = g_strdup(mod_name);
 		search.module_count = 1;
 	} else {
-		gtk_clist_append(GTK_CLIST
-				 (search.clist_modules),
-				 text);
+		gtk_clist_append(GTK_CLIST(search.clist_modules), text);
 
 		mods = get_current_list();
 		mod_list = get_modlist_string(mods);
-		//g_warning("mod string = %s", mod_list);
+		
 		if (mod_list) {
 			gtk_clist_set_text((GtkCList *)
 					   search.
@@ -1852,25 +1756,6 @@ static void on_ctree_select_row(GtkCTree * ctree,
 }
 
 
-static GList *load_custom_list(gchar *section)
-{
-	GList *glist = NULL;
-	const gchar *buf;	
-	CUSTOM_LIST *r;
-	
-	open_config_file(settings.fnconfigure);
-	
-	if(set_config_to_get_labels(section)) {
-		while((buf = get_next_config_label()) != NULL) {
-			r = g_new(CUSTOM_LIST,1);
-			r->label = g_strdup((gchar*)buf);
-			r->value = g_strdup((gchar*)get_config_value(section,r->label));
-			glist = g_list_append(glist,(CUSTOM_LIST*)r);
-		}
-	}
-	close_config_file();
-	return glist;
-}
 
 /******************************************************************************
  * Name
@@ -1890,8 +1775,6 @@ static GList *load_custom_list(gchar *section)
 
 static GtkWidget *create_search_dialog(void)
 {
-
-
 	GtkWidget *search_dialog;
 	GtkWidget *hbox_search;
 	GtkWidget *hpaned8;
@@ -1944,9 +1827,6 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *frame57;
 	GtkWidget *vbox64;
 	GtkWidget *cb_case_sensitive;
-	GtkWidget *cb_include_strongs;
-	GtkWidget *cb_include_morphs;
-	GtkWidget *cb_include_footnotes;
 	GtkWidget *label204;
 	GtkWidget *frame67a;
 	GtkWidget *vbox73;
@@ -1954,14 +1834,12 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *button_modlist_new;
 	GtkWidget *button_clear_list;
 	GtkWidget *button_save_mods;
-	GtkWidget *button_save_mods_as;
 	GtkWidget *vseparator27;
 	GtkWidget *button_delete_list;
 	GtkWidget *hbox72;
 	GtkWidget *hbox75;
 	GtkWidget *hbox82;
 	GtkWidget *scrolledwindow68;
-	GtkWidget *clist_mod_lists;
 	GtkWidget *label236;
 	GtkWidget *label237;
 	GtkWidget *frame67;
@@ -2022,23 +1900,21 @@ static GtkWidget *create_search_dialog(void)
 	GtkWidget *scrolledwindow_results;
 	GtkWidget *appbar_search;
 	GtkWidget *label207;
-	GtkWidget *label257;
 	GtkTooltips *tooltips;
 	gchar title[256];
-	
-	sprintf(title,"%s - %s", settings.program_title, _("Search"));
+
+	sprintf(title, "%s - %s", settings.program_title, _("Search"));
 
 	tooltips = gtk_tooltips_new();
 
 	search_dialog = gtk_window_new(GTK_WINDOW_DIALOG);
 	gtk_object_set_data(GTK_OBJECT(search_dialog), "search_dialog",
 			    search_dialog);
-	gtk_window_set_title(GTK_WINDOW(search_dialog),
-			     title);
+	gtk_window_set_title(GTK_WINDOW(search_dialog), title);
 	gtk_window_set_default_size(GTK_WINDOW(search_dialog), 598,
 				    337);
-  	gtk_window_set_policy(GTK_WINDOW (search_dialog), TRUE, TRUE, 
-								FALSE);
+	gtk_window_set_policy(GTK_WINDOW(search_dialog), TRUE, TRUE,
+			      FALSE);
 
 	hbox_search = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox_search);
@@ -2327,31 +2203,31 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox64), cb_case_sensitive, FALSE,
 			   FALSE, 0);
 
-	cb_include_strongs =
+	search.cb_include_strongs =
 	    gtk_check_button_new_with_label(_
 					    ("Include Strongs Numbers"));
-	gtk_widget_show(cb_include_strongs);
-	gtk_box_pack_start(GTK_BOX(vbox64), cb_include_strongs, FALSE,
+	gtk_widget_show(search.cb_include_strongs);
+	gtk_box_pack_start(GTK_BOX(vbox64), search.cb_include_strongs, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, cb_include_strongs,
+	gtk_tooltips_set_tip(tooltips, search.cb_include_strongs,
 			     _("In modules that have Strongs Numbers"),
 			     NULL);
 
-	cb_include_morphs =
+	search.cb_include_morphs =
 	    gtk_check_button_new_with_label(_("Include Morph Tags"));
-	gtk_widget_show(cb_include_morphs);
-	gtk_box_pack_start(GTK_BOX(vbox64), cb_include_morphs, FALSE,
+	gtk_widget_show(search.cb_include_morphs);
+	gtk_box_pack_start(GTK_BOX(vbox64), search.cb_include_morphs, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, cb_include_morphs,
+	gtk_tooltips_set_tip(tooltips, search.cb_include_morphs,
 			     _("In modules that have Morph Tags"),
 			     NULL);
 
-	cb_include_footnotes =
+	search.cb_include_footnotes =
 	    gtk_check_button_new_with_label(_("Include Footnotes"));
-	gtk_widget_show(cb_include_footnotes);
-	gtk_box_pack_start(GTK_BOX(vbox64), cb_include_footnotes, FALSE,
+	gtk_widget_show(search.cb_include_footnotes);
+	gtk_box_pack_start(GTK_BOX(vbox64), search.cb_include_footnotes, FALSE,
 			   FALSE, 0);
-	gtk_tooltips_set_tip(tooltips, cb_include_footnotes,
+	gtk_tooltips_set_tip(tooltips, search.cb_include_footnotes,
 			     _("In modules that have Footnotes"), NULL);
 
 	label204 = gtk_label_new(_("Search Criteria"));
@@ -2361,224 +2237,142 @@ static GtkWidget *create_search_dialog(void)
 				   (GTK_NOTEBOOK(notebook8), 0),
 				   label204);
 
-	frame67a = gtk_frame_new(NULL);
-	gtk_widget_show(frame67a);
-	gtk_container_add(GTK_CONTAINER(notebook8), frame67a);
 
-	vbox73 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox73);
-	gtk_container_add(GTK_CONTAINER(frame67a), vbox73);
+/*****************************************************page 3 */
+	vbox70 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox70);
+	gtk_container_add(GTK_CONTAINER(notebook8), vbox70);
 
-	toolbar36 =
+	toolbar35 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_show(toolbar36);
-	gtk_box_pack_start(GTK_BOX(vbox73), toolbar36, FALSE, FALSE, 0);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar36),
+	gtk_widget_show(toolbar35);
+	gtk_box_pack_start(GTK_BOX(vbox70), toolbar35, FALSE, FALSE, 0);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar35),
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_NEW);
-	button_modlist_new =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("New"),
-				       _("Create new module list"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_show(button_modlist_new);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_CLEAR);
-	button_clear_list =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Clear Module List"),
-				       _("Clear Module List"), NULL,
+				      GNOME_STOCK_PIXMAP_JUMP_TO);
+	togglebutton_show_main =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
+				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+				       NULL, _("Show Context"),
+				       _("Show In Main window"), NULL,
 				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(button_clear_list);
+	gtk_widget_show(togglebutton_show_main);
 
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_SAVE);
-	button_save_mods =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Save List"),
-				       _("Save list of modules"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(button_save_mods);
+	vseparator22 = gtk_vseparator_new();
+	gtk_widget_show(vseparator22);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar35), vseparator22,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator22, 6, 7);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(search_dialog,
 				      GNOME_STOCK_PIXMAP_SAVE_AS);
-	button_save_mods_as =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
+	button_save_results =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Save As"),
+				       _("Save Results"),
 				       _
-				       ("Save current list of modules as..."),
+				       ("Save Search Results as Bookmarks"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_show(button_save_mods_as);
+	gtk_widget_show(button_save_results);
+	gtk_widget_set_sensitive(button_save_results, FALSE);
 
-	vseparator27 = gtk_vseparator_new();
-	gtk_widget_show(vseparator27);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar36), vseparator27,
+	vseparator23 = gtk_vseparator_new();
+	gtk_widget_show(vseparator23);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar35), vseparator23,
 				  NULL, NULL);
-	gtk_widget_set_usize(vseparator27, 6, 7);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_CUT);
-	button_delete_list =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Delete"),
-				       _("Delete selected list"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(button_delete_list);
-
-	hbox72 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hbox72);
-	gtk_box_pack_start(GTK_BOX(vbox73), hbox72, TRUE, TRUE, 0);
-
-	hbox75 = gtk_hbox_new(FALSE, 0);;
-	gtk_widget_show(hbox75);
-	gtk_box_pack_start(GTK_BOX(hbox72), hbox75, TRUE, TRUE, 0);
-
-	hbox82 = gtk_hbox_new(TRUE, 0);
-	gtk_widget_show(hbox82);
-	gtk_box_pack_start(GTK_BOX(hbox75), hbox82, TRUE, TRUE, 0);
-
-	scrolledwindow68 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow68);
-	gtk_box_pack_start(GTK_BOX(hbox82), scrolledwindow68, TRUE,
-			   TRUE, 0);
-	gtk_widget_set_usize(scrolledwindow68, 175, -2);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow68),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
-
-	clist_mod_lists = gtk_clist_new(2);
-	gtk_widget_show(clist_mod_lists);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow68),
-			  clist_mod_lists);
-	gtk_clist_set_column_width(GTK_CLIST(clist_mod_lists), 0, 169);
-	gtk_clist_set_column_width(GTK_CLIST(clist_mod_lists), 1, 80);
-	gtk_clist_column_titles_hide(GTK_CLIST(clist_mod_lists));
-
-	label236 = gtk_label_new("");
-	gtk_widget_show(label236);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_mod_lists), 0,
-				    label236);
-
-	label237 = gtk_label_new("");
-	gtk_widget_show(label237);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_mod_lists), 1,
-				    label237);
-
-	frame67 = gtk_frame_new(NULL);
-	gtk_widget_show(frame67);
-	gtk_box_pack_start(GTK_BOX(hbox82), frame67, FALSE, TRUE, 0);
-
-	vbox80 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox80);
-	gtk_container_add(GTK_CONTAINER(frame67), vbox80);
-
-	frame69 = gtk_frame_new(_("List Name"));
-	gtk_widget_show(frame69);
-	gtk_box_pack_start(GTK_BOX(vbox80), frame69, FALSE, TRUE, 0);
-
-	entry_modlist_name = gtk_entry_new();
-	gtk_widget_show(entry_modlist_name);
-	gtk_container_add(GTK_CONTAINER(frame69), entry_modlist_name);
-
-	frame68 = gtk_frame_new(_("Modules"));
-	gtk_widget_show(frame68);
-	gtk_box_pack_start(GTK_BOX(vbox80), frame68, TRUE, TRUE, 0);
-
-	vbox81 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox81);
-	gtk_container_add(GTK_CONTAINER(frame68), vbox81);
-
-	toolbar39 =
-	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
-			    GTK_TOOLBAR_ICONS);
-	gtk_widget_show(toolbar39);
-	gtk_box_pack_start(GTK_BOX(vbox81), toolbar39, FALSE, FALSE, 0);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar39),
-				      GTK_RELIEF_NONE);
+	gtk_widget_set_usize(vseparator23, 6, 7);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(search_dialog,
 				      GNOME_STOCK_PIXMAP_CLEAR);
-	button28 =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar39),
+	button_clear_results =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Clear Module List"),
-				       _("Clear all modules from list"),
+				       _("Clear"),
+				       _("clear lists for new search"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_show(button28);
+	gtk_widget_show(button_clear_results);
 
-	vseparator33 = gtk_vseparator_new();
-	gtk_widget_show(vseparator33);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar39), vseparator33,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator33, 6, 7);
+	hbox68 = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox68);
+	gtk_box_pack_start(GTK_BOX(vbox70), hbox68, TRUE, TRUE, 0);
 
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_CUT);
-	button30 =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar39),
-				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Delete"),
-				       _
-				       ("Remove selected module from list"),
-				       NULL, tmp_toolbar_icon, NULL,
-				       NULL);
-	gtk_widget_show(button30);
+	hpaned7 = gtk_hpaned_new();
+	gtk_widget_show(hpaned7);
+	gtk_box_pack_start(GTK_BOX(hbox68), hpaned7, TRUE, TRUE, 0);
+	gtk_paned_set_position(GTK_PANED(hpaned7), 187);
 
-	scrolledwindow66 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow66);
-	gtk_box_pack_start(GTK_BOX(vbox81), scrolledwindow66, TRUE,
-			   TRUE, 0);
-	gtk_widget_set_usize(scrolledwindow66, 240, -2);
+	vpaned3 = gtk_vpaned_new();
+	gtk_widget_show(vpaned3);
+	gtk_paned_pack1(GTK_PANED(hpaned7), vpaned3, FALSE, TRUE);
+	gtk_paned_set_position(GTK_PANED(vpaned3), 88);
+
+	vbox65 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox65);
+	gtk_paned_pack1(GTK_PANED(vpaned3), vbox65, FALSE, TRUE);
+
+	frame_report = gtk_frame_new(_("Search Results"));
+	gtk_widget_show(frame_report);
+	gtk_box_pack_start(GTK_BOX(vbox65), frame_report, TRUE, TRUE,
+			   0);
+	gtk_widget_set_usize(frame_report, 212, -2);
+
+	scrolledwindow_report = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow_report);
+	gtk_container_add(GTK_CONTAINER(frame_report),
+			  scrolledwindow_report);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow66),
+				       (scrolledwindow_report),
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+
+	frame_preview = gtk_frame_new(_("Preview"));
+	gtk_widget_show(frame_preview);
+	gtk_paned_pack2(GTK_PANED(vpaned3), frame_preview, TRUE, TRUE);
+
+	scrolledwindow_preview = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow_preview);
+	gtk_container_add(GTK_CONTAINER(frame_preview),
+			  scrolledwindow_preview);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow_preview),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	clist_modules = gtk_clist_new(2);
-	gtk_widget_show(clist_modules);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow66),
-			  clist_modules);
-	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 0, 300);
-	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 1, 80);
-	gtk_clist_column_titles_hide(GTK_CLIST(clist_modules));
+	frame_results = gtk_frame_new(_("Found"));
+	gtk_widget_show(frame_results);
+	gtk_paned_pack2(GTK_PANED(hpaned7), frame_results, TRUE, TRUE);
 
-	label232 = gtk_label_new("");
-	gtk_widget_show(label232);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 0,
-				    label232);
+	scrolledwindow_results = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow_results);
+	gtk_container_add(GTK_CONTAINER(frame_results),
+			  scrolledwindow_results);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow_results),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
 
-	label233 = gtk_label_new("");
-	gtk_widget_show(label233);
-	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 1,
-				    label233);
+	appbar_search =
+	    gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
+	gtk_widget_show(appbar_search);
+	gtk_box_pack_start(GTK_BOX(vbox70), appbar_search, FALSE, FALSE,
+			   0);
 
-	label205 = gtk_label_new(_("Custom Lists"));
-	gtk_widget_show(label205);
+	label207 = gtk_label_new(_("Results"));
+	gtk_widget_show(label207);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook8),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook8), 1),
-				   label205);
+				   label207);
 
+/************************************************************* page 2 */
 	frame_custom_ranges = gtk_frame_new(NULL);
 	gtk_widget_show(frame_custom_ranges);
 	gtk_container_add(GTK_CONTAINER(notebook8),
@@ -2732,150 +2526,224 @@ static GtkWidget *create_search_dialog(void)
 				   (GTK_NOTEBOOK(notebook8), 2),
 				   label206);
 
-	vbox70 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox70);
-	gtk_container_add(GTK_CONTAINER(notebook8), vbox70);
+/********************************************************** page 1 */
+	frame67a = gtk_frame_new(NULL);
+	gtk_widget_show(frame67a);
+	gtk_container_add(GTK_CONTAINER(notebook8), frame67a);
 
-	toolbar35 =
+	vbox73 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox73);
+	gtk_container_add(GTK_CONTAINER(frame67a), vbox73);
+
+	toolbar36 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 			    GTK_TOOLBAR_ICONS);
-	gtk_widget_show(toolbar35);
-	gtk_box_pack_start(GTK_BOX(vbox70), toolbar35, FALSE, FALSE, 0);
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar35),
+	gtk_widget_show(toolbar36);
+	gtk_box_pack_start(GTK_BOX(vbox73), toolbar36, FALSE, FALSE, 0);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar36),
 				      GTK_RELIEF_NONE);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_JUMP_TO);
-	togglebutton_show_main =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
-				       GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-				       NULL, _("Show Context"),
-				       _("Show In Main window"), NULL,
-				       tmp_toolbar_icon, NULL, NULL);
-	gtk_widget_show(togglebutton_show_main);
-
-	vseparator22 = gtk_vseparator_new();
-	gtk_widget_show(vseparator22);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar35), vseparator22,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator22, 6, 7);
-
-	tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(search_dialog,
-				      GNOME_STOCK_PIXMAP_SAVE_AS);
-	button_save_results =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
+				      GNOME_STOCK_PIXMAP_NEW);
+	button_modlist_new =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Save Results"),
-				       _
-				       ("Save Search Results as Bookmarks"),
+				       _("New"),
+				       _("Create new module list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_show(button_save_results);
-	gtk_widget_set_sensitive(button_save_results, FALSE);
-
-	vseparator23 = gtk_vseparator_new();
-	gtk_widget_show(vseparator23);
-	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar35), vseparator23,
-				  NULL, NULL);
-	gtk_widget_set_usize(vseparator23, 6, 7);
+	gtk_widget_show(button_modlist_new);
 
 	tmp_toolbar_icon =
 	    gnome_stock_pixmap_widget(search_dialog,
 				      GNOME_STOCK_PIXMAP_CLEAR);
-	button_clear_results =
-	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar35),
+	button_clear_list =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
 				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
-				       _("Clear"),
-				       _("clear lists for new search"),
+				       _("Clear Module List"),
+				       _("Clear Module List"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(button_clear_list);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(search_dialog,
+				      GNOME_STOCK_PIXMAP_SAVE);
+	button_save_mods =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Save List"),
+				       _("Save list of modules"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(button_save_mods);
+
+	vseparator27 = gtk_vseparator_new();
+	gtk_widget_show(vseparator27);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar36), vseparator27,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator27, 6, 7);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(search_dialog,
+				      GNOME_STOCK_PIXMAP_CUT);
+	button_delete_list =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar36),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Delete"),
+				       _("Delete selected list"), NULL,
+				       tmp_toolbar_icon, NULL, NULL);
+	gtk_widget_show(button_delete_list);
+
+	hbox72 = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox72);
+	gtk_box_pack_start(GTK_BOX(vbox73), hbox72, TRUE, TRUE, 0);
+
+	hbox75 = gtk_hbox_new(FALSE, 0);;
+	gtk_widget_show(hbox75);
+	gtk_box_pack_start(GTK_BOX(hbox72), hbox75, TRUE, TRUE, 0);
+
+	hbox82 = gtk_hbox_new(TRUE, 0);
+	gtk_widget_show(hbox82);
+	gtk_box_pack_start(GTK_BOX(hbox75), hbox82, TRUE, TRUE, 0);
+
+	scrolledwindow68 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow68);
+	gtk_box_pack_start(GTK_BOX(hbox82), scrolledwindow68, TRUE,
+			   TRUE, 0);
+	gtk_widget_set_usize(scrolledwindow68, 175, -2);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow68),
+				       GTK_POLICY_NEVER,
+				       GTK_POLICY_AUTOMATIC);
+
+	search.module_lists = gtk_clist_new(2);
+	gtk_widget_show(search.module_lists);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow68),
+			  search.module_lists);
+	gtk_clist_set_column_width(GTK_CLIST(search.module_lists), 0,
+				   169);
+	gtk_clist_set_column_width(GTK_CLIST(search.module_lists), 1,
+				   80);
+	gtk_clist_column_titles_hide(GTK_CLIST(search.module_lists));
+
+	label236 = gtk_label_new("");
+	gtk_widget_show(label236);
+	gtk_clist_set_column_widget(GTK_CLIST(search.module_lists), 0,
+				    label236);
+
+	label237 = gtk_label_new("");
+	gtk_widget_show(label237);
+	gtk_clist_set_column_widget(GTK_CLIST(search.module_lists), 1,
+				    label237);
+
+	frame67 = gtk_frame_new(NULL);
+	gtk_widget_show(frame67);
+	gtk_box_pack_start(GTK_BOX(hbox82), frame67, FALSE, TRUE, 0);
+
+	vbox80 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox80);
+	gtk_container_add(GTK_CONTAINER(frame67), vbox80);
+
+	frame69 = gtk_frame_new(_("List Name"));
+	gtk_widget_show(frame69);
+	gtk_box_pack_start(GTK_BOX(vbox80), frame69, FALSE, TRUE, 0);
+
+	entry_modlist_name = gtk_entry_new();
+	gtk_widget_show(entry_modlist_name);
+	gtk_container_add(GTK_CONTAINER(frame69), entry_modlist_name);
+
+	frame68 = gtk_frame_new(_("Modules"));
+	gtk_widget_show(frame68);
+	gtk_box_pack_start(GTK_BOX(vbox80), frame68, TRUE, TRUE, 0);
+
+	vbox81 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(vbox81);
+	gtk_container_add(GTK_CONTAINER(frame68), vbox81);
+
+	toolbar39 =
+	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+			    GTK_TOOLBAR_ICONS);
+	gtk_widget_show(toolbar39);
+	gtk_box_pack_start(GTK_BOX(vbox81), toolbar39, FALSE, FALSE, 0);
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar39),
+				      GTK_RELIEF_NONE);
+
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(search_dialog,
+				      GNOME_STOCK_PIXMAP_CLEAR);
+	button28 =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar39),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Clear Module List"),
+				       _("Clear all modules from list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_show(button_clear_results);
+	gtk_widget_show(button28);
 
-	hbox68 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(hbox68);
-	gtk_box_pack_start(GTK_BOX(vbox70), hbox68, TRUE, TRUE, 0);
+	vseparator33 = gtk_vseparator_new();
+	gtk_widget_show(vseparator33);
+	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbar39), vseparator33,
+				  NULL, NULL);
+	gtk_widget_set_usize(vseparator33, 6, 7);
 
-	hpaned7 = gtk_hpaned_new();
-	gtk_widget_show(hpaned7);
-	gtk_box_pack_start(GTK_BOX(hbox68), hpaned7, TRUE, TRUE, 0);
-	gtk_paned_set_position(GTK_PANED(hpaned7), 187);
+	tmp_toolbar_icon =
+	    gnome_stock_pixmap_widget(search_dialog,
+				      GNOME_STOCK_PIXMAP_CUT);
+	button30 =
+	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar39),
+				       GTK_TOOLBAR_CHILD_BUTTON, NULL,
+				       _("Delete"),
+				       _
+				       ("Remove selected module from list"),
+				       NULL, tmp_toolbar_icon, NULL,
+				       NULL);
+	gtk_widget_show(button30);
 
-	vpaned3 = gtk_vpaned_new();
-	gtk_widget_show(vpaned3);
-	gtk_paned_pack1(GTK_PANED(hpaned7), vpaned3, FALSE, TRUE);
-	gtk_paned_set_position(GTK_PANED(vpaned3), 88);
-
-	vbox65 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbox65);
-	gtk_paned_pack1(GTK_PANED(vpaned3), vbox65, FALSE, TRUE);
-
-	frame_report = gtk_frame_new(_("Search Results"));
-	gtk_widget_show(frame_report);
-	gtk_box_pack_start(GTK_BOX(vbox65), frame_report, TRUE, TRUE,
-			   0);
-	gtk_widget_set_usize(frame_report, 212, -2);
-
-	scrolledwindow_report = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_report);
-	gtk_container_add(GTK_CONTAINER(frame_report),
-			  scrolledwindow_report);
+	scrolledwindow66 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_show(scrolledwindow66);
+	gtk_box_pack_start(GTK_BOX(vbox81), scrolledwindow66, TRUE,
+			   TRUE, 0);
+	gtk_widget_set_usize(scrolledwindow66, 240, -2);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_report),
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-
-	frame_preview = gtk_frame_new(_("Preview"));
-	gtk_widget_show(frame_preview);
-	gtk_paned_pack2(GTK_PANED(vpaned3), frame_preview, TRUE, TRUE);
-
-	scrolledwindow_preview = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_preview);
-	gtk_container_add(GTK_CONTAINER(frame_preview),
-			  scrolledwindow_preview);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_preview),
+				       (scrolledwindow66),
 				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
-	frame_results = gtk_frame_new(_("Found"));
-	gtk_widget_show(frame_results);
-	gtk_paned_pack2(GTK_PANED(hpaned7), frame_results, TRUE, TRUE);
+	clist_modules = gtk_clist_new(2);
+	gtk_widget_show(clist_modules);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow66),
+			  clist_modules);
+	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 0, 300);
+	gtk_clist_set_column_width(GTK_CLIST(clist_modules), 1, 80);
+	gtk_clist_column_titles_hide(GTK_CLIST(clist_modules));
 
-	scrolledwindow_results = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow_results);
-	gtk_container_add(GTK_CONTAINER(frame_results),
-			  scrolledwindow_results);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow_results),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_AUTOMATIC);
+	label232 = gtk_label_new("");
+	gtk_widget_show(label232);
+	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 0,
+				    label232);
 
-	appbar_search =
-	    gnome_appbar_new(TRUE, TRUE, GNOME_PREFERENCES_NEVER);
-	gtk_widget_show(appbar_search);
-	gtk_box_pack_start(GTK_BOX(vbox70), appbar_search, FALSE, FALSE,
-			   0);
+	label233 = gtk_label_new("");
+	gtk_widget_show(label233);
+	gtk_clist_set_column_widget(GTK_CLIST(clist_modules), 1,
+				    label233);
 
-	label207 = gtk_label_new(_("Results"));
-	gtk_widget_show(label207);
+	label205 = gtk_label_new(_("Custom Lists"));
+	gtk_widget_show(label205);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK(notebook8),
 				   gtk_notebook_get_nth_page
 				   (GTK_NOTEBOOK(notebook8), 3),
-				   label207);
-
-
+				   label205);
+/************************************************************************/
 
 /*******   ******/
 	search.dialog = search_dialog;
+
 	search.label_search_module = label_search_module;
 	search.notebook = notebook8;
 	search.togglebutton_show_main = togglebutton_show_main;
 	search.rb_current_module = rb_one_mod;
 	search.rb_mod_list = rb_mod_list;
 	search.rb_custom_list = rb_custom_list;
-	search.module_lists = clist_mod_lists;
 	search.clist_modules = clist_modules;
 
 	search.combo_list = combo31;
@@ -2898,25 +2766,21 @@ static GtkWidget *create_search_dialog(void)
 	search.cb_case_sensitive = cb_case_sensitive;
 	search.progressbar = appbar_search;
 	search.label_mod_select = label_search_module;
-	
+
 	scrolledwindow_ctree = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindow_ctree);
 	gtk_scrolled_window_set_policy((GtkScrolledWindow *)
-					scrolledwindow_ctree,
-                                        GTK_POLICY_AUTOMATIC,
-                                        GTK_POLICY_AUTOMATIC);
+				       scrolledwindow_ctree,
+				       GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
 	search.ctree = gtk_ctree_new(1, 0);
 	gtk_widget_show(search.ctree);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow_ctree), search.ctree);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow_ctree),
+			  search.ctree);
 	gtk_clist_set_column_width(GTK_CLIST(search.ctree), 0, 280);
 	gtk_paned_pack1(GTK_PANED(hpaned8), scrolledwindow_ctree, TRUE,
 			TRUE);
-  	gtk_clist_column_titles_show (GTK_CLIST (search.ctree));
-	
-	label257 = gtk_label_new (_("Modules"));
-	gtk_widget_show (label257);
-	gtk_clist_set_column_widget (GTK_CLIST (search.ctree), 0, label257);
-	
+
 	search.which_scope = GTK_TOGGLE_BUTTON(search.rb_no_scope);
 
 	/* add html widgets */
@@ -2942,11 +2806,8 @@ static GtkWidget *create_search_dialog(void)
 
 	/* connect signals */
 
- 	gtk_signal_connect (GTK_OBJECT (search.ctree), "tree_select_row",
-                      GTK_SIGNAL_FUNC (on_ctree_select_row),
-                      NULL);
-	gtk_signal_connect(GTK_OBJECT(button_save_mods_as), "clicked",
-			   GTK_SIGNAL_FUNC(save_modlist_as), NULL);
+	gtk_signal_connect(GTK_OBJECT(search.ctree), "tree_select_row",
+			   GTK_SIGNAL_FUNC(on_ctree_select_row), NULL);
 	gtk_signal_connect(GTK_OBJECT(search.rb_current_module),
 			   "toggled",
 			   GTK_SIGNAL_FUNC(current_module_toggled),
@@ -3062,14 +2923,13 @@ void gui_do_dialog_search(void)
 		/* initiate module count to 0 */
 		search.module_count = 0;
 
-		/* load custom ranges in glist and add to clist_ranges */
-		search.rangelist = load_custom_list("Custom Ranges");
+		/* add custom ranges to clist_ranges */
 		add_ranges();
-		/* load custom modlist in glist and add to module_list */
-		search.modlists = load_custom_list("Custom Module Lists");
+
+		/* add custom modlist to module_list */
 		add_modlist();
 
-		/* add bibletext folder to module ctree and fill it */		
+		/* add bibletext folder to module ctree and fill it */
 		fill_group("Bibletext", get_list(TEXT_DESC_LIST));
 
 		/* add commentary folder to module ctree and fill it */
@@ -3080,7 +2940,7 @@ void gui_do_dialog_search(void)
 
 		/* add book folder to module ctree and fill it */
 		fill_group("General Books", get_list(GBS_DESC_LIST));
-		
+
 		/* set search module to current module 
 		   and put in clist_modules */
 		search.search_mod = settings.MainWindowModule;
@@ -3096,12 +2956,10 @@ void gui_do_dialog_search(void)
 		text_cell = " ";
 		gtk_clist_append((GtkCList *) search.clist_ranges,
 				 &text_cell);
-
+				 
+		search.show_in_main = FALSE;
 		is_running = TRUE;
 	} else
 		gdk_window_raise(GTK_WIDGET(search.dialog)->window);
 
 }
-
-
-

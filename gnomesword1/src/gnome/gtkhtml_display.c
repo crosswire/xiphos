@@ -27,6 +27,10 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
+#ifdef USE_GTKEMBEDMOZ
+#include <gtkmozembed.h>
+#endif
+
 #include "gui/gtkhtml_display.h"
 #include "gui/gnomesword.h"
 
@@ -350,9 +354,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 		utf8str = str->str;
 	} else {
 		str = g_string_new(text);
-		utfvoid chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		     TEXT_GLOBALS * tgs, gchar * key,
-		     gboolean use_globals)8str = str->str;
+		utf8str = str->str;
 	}
 	utf8len = strlen(utf8str);
 	if (utf8len) {
@@ -377,6 +379,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
 	g_string_free(str, TRUE);
 }
 
+
 /******************************************************************************
  * Name
  *   chapter_display
@@ -390,9 +393,7 @@ void entry_display(GtkWidget * html_widget, gchar * mod_name,
  * Description
  *   display Sword Bible texts a chapter at a time
  *
- * Return valuevoid chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		     TEXT_GLOBALS * tgs, gchar * key,
-		     gboolean use_globals)
+ * Return value
  *   void
  */ 
 
@@ -400,12 +401,11 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 		     TEXT_GLOBALS * tgs, gchar * key,
 		     gboolean use_globals)
 {
-	gchar
-	    * utf8str,
-	    *bgColor,
-	    *textColor,
-	    buf[500],
-	    *tmpkey, tmpbuf[256], *use_font, *use_font_size;
+	gchar * utf8str;
+	gchar *bgColor;
+	gchar *textColor;
+	gchar buf[500];
+	gchar *tmpkey, tmpbuf[256], *use_font, *use_font_size;
 	gchar *text_str = NULL;
 	gchar *paragraphMark;
 	gint count;
@@ -420,7 +420,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 	GtkHTML *html = GTK_HTML(html_widget);
 	GtkHTMLStreamStatus status1 = 0;
 	GtkHTMLStream *htmlstream;
-
+	
 	was_editable = gtk_html_get_editable(html);
 	tmpkey = get_valid_key(key);
 
@@ -465,7 +465,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 
 	sprintf(buf,
 		HTML_START
-		"<body dir=\"rtl\" bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		"<body bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
 		settings.bible_bg_color, settings.bible_text_color,
 		settings.link_color);
 	
@@ -538,157 +538,7 @@ void chapter_display(GtkWidget * html_widget, gchar * mod_name,
 			if (strstr(text_str, "<!P>") == NULL)
 				sprintf(tmpbuf, " %s", "</font>");
 			else
-		
-char GTKChapDisp::Display(SWModule &imodule) {
-	gchar tmpbuf[255];
-	gchar *body;
-	gchar *utf8str;
-	gchar *bgColor;/*
-	 * set global options for current module 
-	 */
-	if (use_globals)
-		set_global_options(tgs);
-	gchar *direction;
-	gchar *textColor;
-	gchar buf[500];
-	gchar *tmpkey;
-	gchar *use_font; 
-	gchar *use_font_size; 
-	const gchar *text_str;
-	gchar *paragraphMark;
-	gint count;
-	gboolean was_editable = FALSE;
-	gboolean newparagraph = FALSE;
-	gboolean use_gtkhtml_font = FALSE;
-	bool r2l = FALSE;
-	GString *str;
-	gint utf8len, cur_verse, cur_chapter, i = 1;
-
-	
-	tmpkey = get_valid_key(key);
-	paragraphMark = "&para;";
-
-	
-	use_font_size = g_strdup("+1");
-	
-	bgColor = "#f1f1f1";
-	cur_verse = get_verse_from_key(tmpkey);
-	cur_chapter = get_chapter_from_key(tmpkey);
-	cur_book = get_book_from_key(tmpkey);
-
-	
-
-	mf = get_font(mod_name);
-
-	use_font = g_strdup(mf->old_font);
-	//g_warning("use_font = %s",use_font);
-	if (use_font) {
-		if (!strncmp(use_font, "none", 4))
-			use_gtkhtml_font = TRUE;
-		else
-			use_gtkhtml_font = FALSE;
-
-	} else {
-		use_gtkhtml_font = TRUE;
-
-	}
-
-	if ((mf->old_font_size[0] == '-')
-	    || (mf->old_font_size[0] == '+'))
-		use_font_size = g_strdup(mf->old_font_size);
-	else
-		use_font_size = g_strdup("+1");
-	/*
-	 * set global options for current module 
-	 */
-	if (use_globals)
-		set_global_options(tgs);
-	
-	str = g_string_new(""); 
-	
-	
-	gtk_moz_embed_open_stream((GtkMozEmbed *)gtkText, "file:///gtk-embedding.html", "text/html");
-	
-	
-	
-	g_string_sprintf(str,"%s %s",HTML_START,body);
-		
-	
-	count  = verse_count(tmpkey);
-	for (i = 1 ;i <= count; i++) {	
-		
-		
-		
-		if (key->Verse() == curVerse)
-			textColor = "#339766";
-		else
-			textColor = "#000000";
-
-		sprintf(buf,
-			"&nbsp; <A HREF=\"*%s %d:%d\" NAME=\"%d\">"
-			"<font color=\"#000DCF\">%d</font></A> ",
-			cur_book,
-			key->Chapter(),
-			key->Verse(),
-			key->Verse(),
-			key->Verse());
-		str = g_string_append(str, buf);
-
-		if (newparagraph) {
-			newparagraph = FALSE;
-			sprintf(buf,"%s",
-				paragraphMark);
-			str = g_string_append(str, buf);			
-		}
-		if(r2l) {
-			sprintf(buf,
-				"<font size=\"%s\" face=\"ezra sil\" color=\"%s\">",
-				use_font_size, textColor);
-		}
-		else {
-			sprintf(buf,
-				"<font size=\"%s\" color=\"%s\">",
-				use_font_size, textColor);
-		}
-		str = g_string_append(str, buf);
-		
-		text_str = (const char*)imodule;
-		str = g_string_append(str,(const char*)imodule);
-	
-		if ((strstr(text_str, "<BR>") == NULL)
-		    && (strstr(text_str, "<!P>") == NULL)) {
-			sprintf(tmpbuf, " %s", "</font><br>");
-		} else {
-			sprintf(tmpbuf, " %s", "</font>");
-		}
-		if (strstr(text_str, "<!P>") == NULL) {
-			newparagraph = FALSE;
-		} else {
-			newparagraph = TRUE;
-		}
-			
-		g_string_append(str, tmpbuf);		
-	}
-	
-	sprintf(buf, "%s", "</body></html>");
-	g_string_append(str, buf);
-	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-	utf8len = strlen(utf8str);
-	if (utf8len) {
-		gtk_moz_embed_append_data((GtkMozEmbed *)gtkText,
-			utf8str,utf8len);
-	}
-	sprintf(buf, "#%d", curVerse);
-	//gtk_moz_embed_load_url((GtkMozEmbed *)gtkText, buf);
-	gtk_moz_embed_close_stream((GtkMozEmbed *)gtkText);
-	
-	g_string_free(str, TRUE);
-	key->Verse(1);
-	key->Chapter(1);
-	key->Book(curBook);
-	key->Chapter(curChapter);
-	key->Verse(curVerse);
-}		sprintf(tmpbuf, " %s", "</font><p>");
+				sprintf(tmpbuf, " %s", "</font><p>");
 		}
 		free(text_str);
 		str = g_string_append(str,tmpbuf);
@@ -718,141 +568,196 @@ char GTKChapDisp::Display(SWModule &imodule) {
 }
 
 
+/******************************************************************************
+ * Name
+ *   chapter_display_mozilla
+ *
+ * Synopsis
+ *   #include "gui/gtkhtml_display.h"
+ *
+ *   void chapter_display_mozilla(GtkWidget * html_widget, 
+ *		gchar * module_name, TEXT_GLOBALS * tgs, gchar *key)
+ *
+ * Description
+ *   display Sword Bible texts a chapter at a time
+ *
+ * Return value
+ *   void
+ */ 
 
+#ifdef USE_GTKEMBEDMOZ
 void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		     TEXT_GLOBALS * tgs, gchar * key,
-		     gboolean use_globals)
+		TEXT_GLOBALS * tgs, gchar * key, gboolean use_globals)
 {
-	gchar tmpbuf[255];
-	gchar *body;
-	gchar *utf8str;
-	gchar *bgColor;
-	gchar *direction;
-	gchar *textColor;
-	gchar buf[500];
-	gchar *tmpkey;
-	gchar *use_font; 
-	gchar *use_font_size; 
-	const gchar *text_str;
+	gchar
+	    * utf8str,
+	    *bgColor,
+	    *textColor,
+	    buf[500],
+	    *tmpkey, tmpbuf[256], *use_font, *use_font_size;
+	gchar *text_str = NULL;
 	gchar *paragraphMark;
-	gint count;void chapter_display_mozilla(GtkWidget * html_widget, gchar * mod_name,
-		     TEXT_GLOBALS * tgs, gchar * key,
-		     gboolean use_globals)
-	gboolean was_editable = FALSE;
+	gchar *body;
+	gint count;
 	gboolean newparagraph = FALSE;
 	gboolean use_gtkhtml_font = FALSE;
-	bool r2l = FALSE;
 	GString *str;
 	gint utf8len, cur_verse, cur_chapter, i = 1;
+	const char *cur_book;
+	gboolean r2l = FALSE;
+	MOD_FONT *mf;
+
+	gtk_moz_embed_open_stream((GtkMozEmbed *)html_widget, 
+			"file:///gtk-embedding.html", "text/html");
+		
+	if(is_module_rtl(mod_name))
+		r2l = TRUE;
+	
+	
+	tmpkey = get_valid_key(key);
 
 	paragraphMark = "&para;";
 
 	bgColor = "#f1f1f1";
-	use_font_size = g_strdup("+1");
+	cur_verse = get_verse_from_key(tmpkey);
+	cur_chapter = get_chapter_from_key(tmpkey);
+	cur_book = get_book_from_key(tmpkey);
+
 	
-	str = g_string_new(""); 
-	
-	gtk_moz_embed_open_stream((GtkMozEmbed *)gtkText, "file:///gtk-embedding.html", "text/html");
-	
-	direction = (char*)imodule.getConfigEntry("Direction");
-	
-	if(direction) {
-		if(!strcmp(direction,"RtoL")) {
-			r2l = true;
-			
-		}
+
+	mf = get_font(mod_name);
+
+	use_font = g_strdup(mf->old_font);
+	//g_warning("use_font = %s",use_font);
+	if (use_font) {
+		if (!strncmp(use_font, "none", 4))
+			use_gtkhtml_font = TRUE;
+		else
+			use_gtkhtml_font = FALSE;
+
+	} else {
+		use_gtkhtml_font = TRUE;
+
 	}
+
+	if ((mf->old_font_size[0] == '-')
+	    || (mf->old_font_size[0] == '+'))
+		use_font_size = g_strdup(mf->old_font_size);
+	else
+		use_font_size = g_strdup("+1");
+
 	
-	const char *cur_book;
-	VerseKey *key = (VerseKey *)(SWKey *)imodule;
-	int curVerse = key->Verse();
-	int curChapter = key->Chapter();
-	int curBook = key->Book();
-	int curPos = 0;
-	cur_book = key->books[key->Testament() - 1][key->Book() - 1].name;
-	
+	if (use_globals)
+		set_global_options(tgs);
+
 	if(r2l) {
-		body = "<body dir=\"rtl\">";
+		body = "body dir=\"rtl\"";
 	}
 	else {
-		body = "<body>";
+		body = "body";
 		
 	}
-	g_string_sprintf(str,"%s %s",HTML_START,body);
+	sprintf(buf,
+		HTML_START
+		"<%s bgcolor=\"%s\" text=\"%s\" link=\"%s\">",
+		body,
+		settings.bible_bg_color, 
+		settings.bible_text_color,
+		settings.link_color);
 	
-	for (key->Verse(1); (key->Book() == curBook && key->Chapter() == curChapter && !imodule.Error()); imodule++) {
-		sprintf(tmpbuf, "%s %d:%d", cur_book, key->Chapter(), key->Verse());
-		//g_warning(tmpbuf);
-		if (key->Verse() == curVerse)
-			textColor = "#339766";
+	str = g_string_new(buf);
+	tmpkey = get_valid_key(key);
+	count  = verse_count(tmpkey);
+	for (i = 1 ;i <= count; i++) {
+		sprintf(tmpbuf, "%s %d:%d", cur_book, cur_chapter, i);
+		g_free(tmpkey);
+		tmpkey = get_valid_key(tmpbuf);
+
+		if (i == cur_verse)
+			textColor = settings.currentverse_color;
 		else
-			textColor = "#000000";
+			textColor = settings.bible_text_color;
 
 		sprintf(buf,
-			"&nbsp; <A HREF=\"*%s %d:%d\" NAME=\"%d\">"
-			"<font color=\"#000DCF\">%d</font></A> ",
-			cur_book,
-			key->Chapter(),
-			key->Verse(),
-			key->Verse(),
-			key->Verse());
-		str = g_string_append(str, buf);
-
-		if (newparagraph) {
-			newparagraph = FALSE;
-			sprintf(buf,"%s",
-				paragraphMark);
-			str = g_string_append(str, buf);			
-		}
-		if(r2l) {
-			sprintf(buf,
-				"<font size=\"%s\" face=\"ezra sil\" color=\"%s\">",
-				use_font_size, textColor);
-		}
-		else {
-			sprintf(buf,
+			"&nbsp; <A HREF=\"*%s\" NAME=\"%d\">"
+			"<font size=\"%s\" color=\"%s\">%d</font></A> ",
+			tmpkey,
+			i,
+			settings.verse_num_font_size,
+			settings.bible_verse_num_color, i);
+		
+		str = g_string_append(str,buf);
+		
+		if (use_gtkhtml_font) {
+			sprintf(tmpbuf,
 				"<font size=\"%s\" color=\"%s\">",
 				use_font_size, textColor);
+		} else {
+			sprintf(tmpbuf,
+			  "<font face=\"%s\" size=\"%s\" color=\"%s\">",
+				use_font, use_font_size, textColor);
 		}
-		str = g_string_append(str, buf);
 		
-		text_str = (const char*)imodule;
-		str = g_string_append(str,(const char*)imodule);
-	
-		if ((strstr(text_str, "<BR>") == NULL)
-		    && (strstr(text_str, "<!P>") == NULL)) {
-			sprintf(tmpbuf, " %s", "</font><br>");
-		} else {
-			sprintf(tmpbuf, " %s", "</font>");
-		}
-		if (strstr(text_str, "<!P>") == NULL) {
+		
+		str = g_string_append(str,tmpbuf);
+		
+		
+		if (newparagraph && settings.versestyle) {
 			newparagraph = FALSE;
-		} else {
-			newparagraph = TRUE;
+			strcpy(tmpbuf, paragraphMark);
+			str = g_string_append(str,tmpbuf);
 		}
-			
-		g_string_append(str, tmpbuf);		
+
+		
+		text_str = get_module_text(0, mod_name, tmpkey);
+		
+		str = g_string_append(str, text_str);
+
+		if (settings.versestyle) {
+			if ((strstr(text_str, "<BR>") == NULL)
+			    && (strstr(text_str, "<!P>") == NULL)) {
+				sprintf(tmpbuf, " %s", "</font><br>");
+			} else {
+				sprintf(tmpbuf, " %s", "</font>");
+			}
+			if (strstr(text_str, "<!P>") == NULL) {
+				newparagraph = FALSE;
+			} else {
+				newparagraph = TRUE;
+			}
+		}
+
+		else {
+			if (strstr(text_str, "<!P>") == NULL)
+				sprintf(tmpbuf, " %s", "</font>");
+			else
+				sprintf(tmpbuf, " %s", "</font><p>");
+		}
+		free(text_str);
+		str = g_string_append(str,tmpbuf);
+	}
+
+	sprintf(buf, "%s", "</body></html>");
+	str = g_string_append(str,buf);
+	//utf8str = e_utf8_from_gtk_string(html_widget, str->str);
+	//utf8len = strlen(utf8str);
+	if (str->len) {
+		gtk_moz_embed_append_data((GtkMozEmbed *)html_widget,
+			str->str,str->len);		
 	}
 	
-	sprintf(buf, "%s", "</body></html>");
-	g_string_append(str, buf);
-	utf8str = e_utf8_from_gtk_string(gtkText, str->str);
-	utf8len = strlen(utf8str);
-	if (utf8len) {
-		gtk_moz_embed_append_data((GtkMozEmbed *)gtkText,
-			utf8str,utf8len);
-	}
-	sprintf(buf, "#%d", curVerse);
-	//gtk_moz_embed_load_url((GtkMozEmbed *)gtkText, buf);
-	gtk_moz_embed_close_stream((GtkMozEmbed *)gtkText);
+	gtk_moz_embed_close_stream((GtkMozEmbed *)html_widget);
 	
 	g_string_free(str, TRUE);
-	key->Verse(1);
-	key->Chapter(1);
-	key->Book(curBook);
-	key->Chapter(curChapter);
-	key->Verse(curVerse);
+	if (use_font_size)
+		g_free(use_font_size);
+	if (use_font)
+		g_free(use_font);
+	g_free(mf);
+	g_free(tmpkey);
 }
+#endif
+
 
 /******************************************************************************
  * Name

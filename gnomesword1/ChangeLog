@@ -1,7 +1,25 @@
+2003-04-29  Terry <tbiggs@users.sf.net>
+
+	* bumped to 0.9.dev4
+	* added requirements
+	    pkgconfig-0.12.0 or later
+	    GtkHTML-1.1 or later
+	    gal-0.24 or later
+	    gnome-print-0.35 or later
+	    gdk-pixbuf-0.18 or later
+	* added chapter_display_mozilla() that uses gtkembedmoz()
+	  to display Hebrew right to left. Just a workaround until
+	  the port to Gnome2. 
+
+2003-04-25  Terry <tbiggs@users.sf.net>
+
+	* added module selection (Bible or Commentary) 
+	  to shortcut bar search
+
+
 2003-04-07  Terry <tbiggs@users.sf.net>
 
-	* module opions are now saved
-	
+	* module opions are now saved (agin)	
 
 
 2003-04-05  Terry <tbiggs@users.sf.net>
