@@ -6,7 +6,7 @@
 	  and main/percomm.*
 	* replaced hint dialog with Information Viewer (moved the viewer 
 	  from the sidebar notebook to it's own location at bottom of sidebar
-	  but alway visible)
+	  but always visible)
 	
 
 2004-08-12  terry <terry470@users.sf.net>
