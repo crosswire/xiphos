@@ -55,6 +55,7 @@ static GtkWidget *vl_html;
 static GtkWidget *menu1;
 static gchar *s_module_name;
 static gint button_mod_list;
+static gint button_vl_html;
 static gchar *buf_module;
 
 /******************************************************************************
@@ -341,10 +342,18 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 	gint i = 0;
 	gint count = 0;
 	GString *str;
+	GtkTreeModel *model;
+	GtkListStore *list_store;	
+	GtkTreeSelection *selection;
+	GtkTreePath *path;
+	GtkTreeIter iter;
 
-/*	g_warning("verse=%s mod=%s ref=%s", key, module_name,
-		  verse_list);*/
-
+	strcpy(settings.sb_search_mod,module_name);
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+	list_store = GTK_LIST_STORE(model);
+	gtk_list_store_clear(list_store);
+	
 	str = g_string_new("");
 	s_module_name = g_strdup(module_name);
 	strcpy(sidebar.mod_name, module_name);
@@ -367,7 +376,7 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 			verse_list[i] = ';';
 	}
 	i = 0;
-	//tmp = get_verse_list(module_name, verse_list);
+	
 	count = start_parse_verse_list(verse_list);
 	while (count--) {
 		next_verse = get_next_verse_list_element(i++);
@@ -376,28 +385,11 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 		tmp = g_list_append(tmp, (gchar *) next_verse);
 		//g_free(next_verse);
 	}
-
-	i = 0;
-	gui_begin_html(vl_html, TRUE);
-	g_string_printf(str,
-			"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
-			settings.bible_bg_color,
-			settings.bible_text_color, settings.link_color,
-			settings.bible_verse_num_color, module_name);
-	gui_display_html(vl_html, str->str, str->len);
-
 	while (tmp != NULL) {
-		if (oddkey) {
-			colorkey = settings.link_color;
-			oddkey = FALSE;
-		} else {
-			colorkey = settings.bible_text_color;
-			oddkey = TRUE;
-		}
-		g_string_printf(str,
-				"<a href=\"%s\"><font color=\"%s\"size=\"%s\">%s</font></a><br>",
-				(const char *) tmp->data, colorkey,
-				"+0", (const char *) tmp->data);
+		gtk_list_store_append(list_store, &iter);
+		gtk_list_store_set(list_store, &iter, 0,
+					   (const char *) tmp->data, -1);
+		
 		if (i == 0)
 			first_key = g_strdup((const char *) tmp->data);
 		++i;
@@ -405,24 +397,23 @@ void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
 		gui_display_html(vl_html, str->str, str->len);
 		tmp = g_list_next(tmp);
 	}
-	g_list_free(tmp);
-	g_string_printf(str, "%s", "</table></body</html>");
-	gui_display_html(vl_html, str->str, str->len);
-	gui_end_html(vl_html);
+	
+	selection = gtk_tree_view_get_selection
+                                          (GTK_TREE_VIEW(sidebar.results_list));
+	if(!gtk_tree_model_get_iter_first(model,&iter))
+		return;
+	path = gtk_tree_model_get_path(model,&iter);				
+	gtk_tree_selection_select_path(selection,
+                                             path);
 
-	//gui_show_sb_verseList();
+	gtk_tree_path_free(path);
+	
+	gui_verselist_button_release_event(NULL,NULL,NULL);
 	gtk_option_menu_set_history(GTK_OPTION_MENU
-				    (sidebar.optionmenu1), 5);
+				    (sidebar.optionmenu1), 3);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
-			      5);
-	if (first_key) {
-		verse_list_link_clicked(NULL,
-					(const gchar *) first_key,
-					NULL);
-		g_free(first_key);
-	}
+			      3);
 	g_string_free(str, TRUE);
-	//g_free(s_module_name);
 }
 
 /******************************************************************************
@@ -653,28 +644,6 @@ static void on_search_results_activate(GtkMenuItem * menuitem,
 }
 
 
-/******************************************************************************
- * Name
- *   on_verse_list_activate
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
- *   void on_verse_list_activate(GtkMenuItem *menuitem, gpointer user_data)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void on_verse_list_activate(GtkMenuItem * menuitem,
-				   gpointer user_data)
-{
-	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_sidebar),
-			      5);
-}
 
 /******************************************************************************
  * Name
@@ -827,11 +796,7 @@ static gboolean on_modules_list_button_press_event(GtkWidget * widget,
 		button_mod_list = 2;
 		break;
 	case 3:
-		button_mod_list = 3;	/*
-					   gtk_menu_popup(GTK_MENU(sidebar.menu_modules),
-					   NULL, NULL, NULL, NULL,
-					   event->button, event->time); */
-		//return TRUE;
+		button_mod_list = 3;	
 		break;
 	default:
 		break;
@@ -842,12 +807,12 @@ static gboolean on_modules_list_button_press_event(GtkWidget * widget,
 
 /******************************************************************************
  * Name
- *   on_treeview_button_release_event
+ *   gui_verselist_button_release_event
  *
  * Synopsis
  *   #include "gui/sidebar.h"
  *
- *   gboolean on_treeview_button_release_event(GtkWidget *widget,
+ *   gboolean gui_verselist_button_release_event(GtkWidget *widget,
  *                          GdkEventButton  *event, gpointer user_data)
  *
  * Description
@@ -857,7 +822,7 @@ static gboolean on_modules_list_button_press_event(GtkWidget * widget,
  *   gboolean
  */
 
-static gboolean on_treeview_button_release_event(GtkWidget * widget,
+gboolean gui_verselist_button_release_event(GtkWidget * widget,
 						 GdkEventButton * event,
 						 gpointer user_data)
 {
@@ -869,13 +834,10 @@ static gboolean on_treeview_button_release_event(GtkWidget * widget,
 
 
 	selection =
-	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.
-					results_list);
+	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.results_list);
 	model =
-	    gtk_tree_view_get_model(GTK_TREE_VIEW
-				    (sidebar.results_list));
-	if (!gtk_tree_selection_get_selected
-	    (selection, NULL, &selected))
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
 		return FALSE;
 
 	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key,
@@ -883,20 +845,20 @@ static gboolean on_treeview_button_release_event(GtkWidget * widget,
 	if (!key)
 		return FALSE;
 
-
-	switch (event->button) {
-	case 1:
-		break;
-	case 2:
-		gui_change_module_and_key(settings.sb_search_mod, key);
-		break;
-	case 3:
-
-		break;
-	default:
-		break;
+	if(event) {
+		switch (event->button) {
+		case 1:
+			break;
+		case 2:
+			gui_change_module_and_key(settings.sb_search_mod, key);
+			break;
+		case 3:
+	
+			break;
+		default:
+			break;
+		}
 	}
-
 	text = get_search_results_text(settings.sb_search_mod, key);
 	if (text) {
 		settings.displaySearchResults = TRUE;
@@ -1151,26 +1113,6 @@ static void create_search_results_page(GtkWidget * notebook)
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(notebook), vbox);
-
-	frame = gtk_frame_new(NULL);
-	gtk_widget_show(frame);
-	gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, TRUE, 0);
-
-	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_show(scrolledwindow);
-	gtk_container_add(GTK_CONTAINER(frame), scrolledwindow);
-	gtk_widget_set_usize(scrolledwindow, -2, 65);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-				       (scrolledwindow),
-				       GTK_POLICY_NEVER,
-				       GTK_POLICY_NEVER);
-
-	widgets.html_search_report = gtk_html_new();
-	gtk_widget_show(widgets.html_search_report);
-	gtk_container_add(GTK_CONTAINER(scrolledwindow),
-			  widgets.html_search_report);
-	gtk_html_load_empty(GTK_HTML(widgets.html_search_report));
-
 	vpaned_srch_rslt = gtk_vpaned_new();
 	gtk_widget_show(vpaned_srch_rslt);
 	gtk_box_pack_start(GTK_BOX(vbox), vpaned_srch_rslt, TRUE,
@@ -1235,7 +1177,7 @@ static void create_search_results_page(GtkWidget * notebook)
 
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "button_release_event",
-			 G_CALLBACK(on_treeview_button_release_event),
+			 G_CALLBACK(gui_verselist_button_release_event),
 			 NULL);
 	g_signal_connect((gpointer) sidebar.results_list,
 			 "button_press_event",
@@ -1261,7 +1203,7 @@ static void create_search_results_page(GtkWidget * notebook)
  *   void
  */
 
-static void create_verse_list_page(GtkWidget * notebook)
+/*static void create_verse_list_page(GtkWidget * notebook)
 {
 	GtkWidget *vbox;
 	GtkWidget *frame1;
@@ -1307,11 +1249,11 @@ static void create_verse_list_page(GtkWidget * notebook)
 	gtk_container_add(GTK_CONTAINER(scrolledwindow2),
 			  sidebar.htmlshow);
 
-	gtk_signal_connect(GTK_OBJECT(vl_html), "link_clicked",
+	g_signal_connect(G_OBJECT(vl_html), "link_clicked",
 			   G_CALLBACK(verse_list_link_clicked), NULL);
 
 }
-
+*/
 static GnomeUIInfo menu1_uiinfo[] = {
 	{
 	 GNOME_APP_UI_ITEM, N_("_Modules"),
@@ -1339,7 +1281,7 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_ITEM,
-	 N_("Search _Results"),
+	 N_("Verse _List"),
 	 NULL,
 	 (gpointer) on_search_results_activate, NULL,
 	 NULL,
@@ -1358,12 +1300,6 @@ static GnomeUIInfo menu1_uiinfo[] = {
 	 (GdkModifierType)
 	 0,
 	 NULL},
-	{
-	 GNOME_APP_UI_ITEM, N_("Verse _List"), NULL,
-	 (gpointer) on_verse_list_activate,
-	 NULL, NULL, GNOME_APP_PIXMAP_STOCK,
-	 "gnome-stock-text-bulleted-list", 0,
-	 (GdkModifierType) 0, NULL},
 	GNOMEUIINFO_END
 };
 
@@ -1464,7 +1400,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 
 	create_search_results_page(widgets.notebook_sidebar);
 	create_viewer_page(widgets.notebook_sidebar);
-	create_verse_list_page(widgets.notebook_sidebar);
 
 	vbox_viewer = gtk_vbox_new(FALSE, 0);
 	gtk_widget_show(vbox_viewer);
@@ -1475,12 +1410,7 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 	mod_selection =
 	    G_OBJECT(gtk_tree_view_get_selection
 		     (GTK_TREE_VIEW(sidebar.module_list)));
-
-/*
-	g_signal_connect((gpointer) sidebar.module_list,
-			 "button_release_event",
-			 G_CALLBACK(on_modules_list_button_release_event),
-			 NULL);*/
+		     
 	g_signal_connect((gpointer) sidebar.module_list,
 			 "button_press_event",
 			 G_CALLBACK(on_modules_list_button_press_event),
@@ -1490,7 +1420,6 @@ GtkWidget *gui_create_sidebar(GtkWidget * paned)
 			 G_CALLBACK(mod_selection_changed),
 			 sidebar.module_list);
 
-//      gui_load_bookmark_tree();
 	sidebar.menu_modules = create_menu_modules();
 
 	return vbox1;
