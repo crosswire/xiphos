@@ -1017,7 +1017,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 		url = html_engine_get_link_at (GTK_HTML(data)->engine,
 					 event->x,
 					 event->y);
-		if(strstr(url,"sword://")) {
+		if(url && strstr(url,"sword://")) {
 			gchar **work_buf = g_strsplit (url,"/",4);			
 			gui_open_passage_in_new_tab(work_buf[KEY]);
 			g_strfreev(work_buf);
@@ -1028,6 +1028,59 @@ static gboolean on_button_release_event(GtkWidget * widget,
 	}
 	return FALSE;
 }
+
+
+static void tree_selection_changed_cb (GtkTreeSelection *selection, gpointer data)
+{
+	gui_verselist_button_release_event(NULL,
+					   NULL,
+					   NULL);
+}
+static gboolean tree_key_press_cb(GtkWidget *widget, GdkEventKey *event,
+                                            gpointer user_data)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter selected;
+	gchar *key = NULL;
+	gchar *url = NULL;
+
+
+	selection =
+	    gtk_tree_view_get_selection((GtkTreeView *) sidebar.results_list);
+	model =
+	    gtk_tree_view_get_model(GTK_TREE_VIEW(sidebar.results_list));
+	if (!gtk_tree_selection_get_selected(selection, NULL, &selected))
+		return FALSE;
+
+	gtk_tree_model_get(GTK_TREE_MODEL(model), &selected, 0, &key,
+			   -1);
+	if (!key)
+		return FALSE;
+	url = g_strdup_printf("sword://%s/%s",settings.sb_search_mod,key);
+
+	g_warning("%d",event->keyval);
+	if(event) {
+		switch (event->keyval) {
+		case 65293: 
+		case 65421: 
+			main_url_handler(url,TRUE);
+			break;
+		case 32:
+			gui_open_passage_in_new_tab(key);
+			break;
+		/*case :
+	
+			break;*/
+		default:
+			break;
+		}
+	}
+	free(key);
+	return FALSE;	
+	
+}
+
 
 /******************************************************************************
  * Name
@@ -1056,7 +1109,7 @@ static void create_search_results_page(GtkWidget * notebook)
 	GtkWidget *frame4;
 	GtkWidget *scrolledwindow4;
 	GtkListStore *model;
-	GObject *selection;
+	GtkTreeSelection *selection;
 	GtkWidget *menu = create_results_menu();
 
 	vbox = gtk_vbox_new(FALSE, 0);
@@ -1100,8 +1153,8 @@ static void create_search_results_page(GtkWidget * notebook)
 					  FALSE);
 	add_columns(GTK_TREE_VIEW(sidebar.results_list));
 
-	selection = G_OBJECT(gtk_tree_view_get_selection
-			     (GTK_TREE_VIEW(sidebar.results_list)));
+	selection = gtk_tree_view_get_selection
+			     (GTK_TREE_VIEW(sidebar.results_list));
 
 	frame4 = gtk_frame_new(NULL);
 	gtk_widget_show(frame4);
@@ -1127,6 +1180,14 @@ static void create_search_results_page(GtkWidget * notebook)
 			  sidebar.html_widget);
 	gtk_html_load_empty(GTK_HTML(sidebar.html_widget));
 
+	g_signal_connect((gpointer)sidebar.results_list, 
+			 "key_press_event",
+			 G_CALLBACK(tree_key_press_cb),
+			 NULL);
+	g_signal_connect((gpointer)selection, 
+			 "changed",
+			 G_CALLBACK(tree_selection_changed_cb),
+			 NULL);
 	g_signal_connect(GTK_OBJECT(sidebar.html_widget), 
 			 "link_clicked",
 			 G_CALLBACK(link_clicked),
