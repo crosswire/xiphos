@@ -44,6 +44,7 @@
 #include "gui/commentary_dialog.h"
 #include "gui/dictlex_dialog.h"
 #include "gui/gbs_dialog.h"
+#include "gui/sidebar.h"
 #include "gui/widgets.h"
 
 #include "main/settings.h"
@@ -57,7 +58,79 @@ gboolean button_one;
 gboolean use_dialog;
 GtkTreeSelection *current_selection;
 GtkTreeView *bookmark_tree;
+static gboolean save_reorderable;
+static void add_item_to_tree(GtkTreeIter *iter,GtkTreeIter *parent, BOOKMARK_DATA * data);
 
+
+/******************************************************************************
+ * Name
+ *   gui_verselist_to_bookmarks
+ *
+ * Synopsis
+ *   #include "gui/bookmarks_treeview.h"
+ *
+ *   void gui_verselist_to_bookmarks(GList * list)
+ *
+ * Description
+ *   add results of search to tree as a root node with children
+ *
+ * Return value
+ *   void
+ */
+
+void gui_verselist_to_bookmarks(gchar * module_name)
+{
+	gint test;
+	const gchar *key_buf = NULL;
+	gchar *tmpbuf;
+	GString *str;
+	GtkTreeIter parent;
+	GtkTreeIter iter;
+	GS_DIALOG *info;
+	
+	gtk_tree_model_get_iter_first(GTK_TREE_MODEL(model), &iter);
+	info = gui_new_dialog();
+	info->label_top = N_("Enter Folder Name");
+	info->text1 = g_strdup(settings.searchText);
+	info->label1 = N_("Folder: ");
+	info->ok = TRUE;
+	info->cancel = TRUE;
+	/*** open dialog to get name for root node ***/
+	test = gui_gs_dialog(info);
+	if (test == GS_OK) {
+		gtk_tree_store_append(GTK_TREE_STORE(model), &parent,
+			      &iter);	
+		gtk_tree_store_set(GTK_TREE_STORE(model), &parent, 
+			   COL_OPEN_PIXBUF, pixbufs->pixbuf_opened,
+			   COL_CLOSED_PIXBUF, pixbufs->pixbuf_closed,
+			   COL_CAPTION, info->text1, 
+			   COL_KEY, NULL,
+			   COL_MODULE, NULL,
+			   -1);
+		set_results_position((char) 1);	/* TOP */
+		str = g_string_new(" ");
+		while ((key_buf = get_next_result_key()) != NULL) {
+			tmpbuf = (gchar *) key_buf;
+			g_string_sprintf(str, "%s, %s", tmpbuf,
+					 module_name);			
+			gtk_tree_store_append(GTK_TREE_STORE(model), &iter,
+				      &parent);		
+			gtk_tree_store_set(GTK_TREE_STORE(model), &iter, 
+				   COL_OPEN_PIXBUF, pixbufs->pixbuf_helpdoc,
+				   COL_CLOSED_PIXBUF, NULL,
+				   COL_CAPTION, str->str, 
+				   COL_KEY, tmpbuf,
+				   COL_MODULE, module_name,
+				   -1);
+		}
+		g_string_free(str, TRUE);
+		bookmarks_changed = TRUE;
+		gtk_widget_set_sensitive(menu.save, bookmarks_changed);
+	}
+	g_free(info->text1);
+	g_free(info);
+	gtk_widget_set_sensitive(sidebar.menu_item_save_search,FALSE);
+}
 /******************************************************************************
  * Name
  *   gui_save_old_bookmarks_to_new
@@ -675,28 +748,44 @@ static GtkTreeModel *create_model(void)
  */
 
 static gboolean button_press_event(GtkWidget * widget,
-			    GdkEventButton * event, gpointer user_data)
+			    GdkEventButton * event, gpointer data)
 {
-	
+	button_one = FALSE;
 	switch(event->button) {
 		case 1:
 			button_one = TRUE;
 			break;
 		case 2:
-			button_one = FALSE;
 			break;
 		case 3:
-			button_one = FALSE;
 			gtk_menu_popup(GTK_MENU(menu.menu),
 			       NULL, NULL, NULL, NULL,
 			       event->button, event->time);
-		
+			if(GTK_CHECK_MENU_ITEM(menu.reorder)->active) {			
+				gtk_widget_set_sensitive(menu.in_dialog, FALSE);
+				gtk_widget_set_sensitive(menu.new, FALSE);
+				gtk_widget_set_sensitive(menu.insert, FALSE);
+				gtk_widget_set_sensitive(menu.add, FALSE);
+				gtk_widget_set_sensitive(menu.edit, FALSE);
+				gtk_widget_set_sensitive(menu.point, FALSE);
+				gtk_widget_set_sensitive(menu.delete, FALSE);
+				gtk_widget_set_sensitive(menu.save, FALSE);
+				gtk_widget_set_sensitive(menu.bibletime, FALSE);			
+				gtk_widget_set_sensitive(menu.rr_submenu,FALSE);
+				gtk_widget_set_sensitive(menu.remove, FALSE);
+				gtk_widget_set_sensitive(menu.restore, FALSE);
+				return TRUE;
+			}
+			else {
+				gtk_widget_set_sensitive(menu.bibletime,
+						       settings.have_bibletime);	
+				
+			}
 			break;
 		
 	}
 	return FALSE;
 }
-
 
 /******************************************************************************
  * Name
