@@ -199,8 +199,7 @@ initSword(GtkWidget *mainform)
 		itemNum2 = 0,//-- for numbering shortbar items
 		itemNum3 = 0,//-- for numbering shortbar items
 		i, //-- counter
-		j, //-- counter
-		itemp = 0;
+		j; //-- counter
 		
 	GList 	*biblemods = NULL,
 		*commentarymods = NULL,
@@ -280,23 +279,16 @@ initSword(GtkWidget *mainform)
 	
         //--------------------------------------------------------------- create shortcut bar groups
 	if(settings->showtextgroup){
-	    	add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
-	    	groupnum1 = itemp;
-	    	++itemp;
+	    	groupnum1 = add_sb_group((EShortcutBar *)shortcut_bar, "Bible Text");
 	}
 	if(settings->showcomgroup){
-	    	add_sb_group((EShortcutBar *)shortcut_bar, "Commentaries");
-	    	groupnum2 = itemp;
-	    	++itemp;
+	    	groupnum2 = add_sb_group((EShortcutBar *)shortcut_bar, "Commentaries");
 	}
 	if(settings->showdictgroup){
-		add_sb_group((EShortcutBar *)shortcut_bar, "Dict/Lex");
-	    	groupnum3 = itemp;
-	    	++itemp;
+		groupnum3 = add_sb_group((EShortcutBar *)shortcut_bar, "Dict/Lex");   
 	}
 	if(settings->showhistorygroup){
-		add_sb_group((EShortcutBar *)shortcut_bar, "History");
-	    	groupnum4 = itemp;
+		groupnum4 = add_sb_group((EShortcutBar *)shortcut_bar, "History");	    
 	}
 		
         //--------------------------------------------------------- store text widgets for spell checker
@@ -418,7 +410,7 @@ initSword(GtkWidget *mainform)
 						pg2++), label);
 			sprintf(rememberlastitemDict,"%s%s","_View/Dict-Lex Window/",curdictMod->Name());
 			curdictMod->Disp(dictDisplay);
-			if(settings->showcomgroup){			
+			if(settings->showdictgroup){			
 			        e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
 						      groupnum3, -1,
 						      shortcut_types[2],
@@ -601,10 +593,12 @@ initSword(GtkWidget *mainform)
 	gtk_widget_hide(lookup_widget(MainFrm,"btnPrint"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpell"));
 	gtk_widget_hide(lookup_widget(MainFrm,"btnSpellNotes"));
-//-- free list we used to build menus
+//-- create popup menus -- menu.c
 	createpopupmenus(MainFrm, settings, biblemods, 
 			commentarymods, dictionarymods,
 			percommods);
+			
+//-- free list we used to build menus			
         g_list_free(biblemods);
         g_list_free(commentarymods);
         g_list_free(dictionarymods);
@@ -1339,8 +1333,8 @@ openpropertiesbox(void)    //-- someone clicked properties
 	dicttabsbutton  = lookup_widget(Propertybox,"cbtnShowDLtabs");
 	cpcurrentverse = lookup_widget(Propertybox,"cpfgCurrentverse"); //-- set cpcurrentverse to point to color picker
         textgroupbutton = lookup_widget(Propertybox,"cbtnShowTextgroup");
-	//comgroupbutton  = lookup_widget(Propertybox,"cbtnShowComGroup");
-	//dictgroupbutton = lookup_widget(Propertybox,"cbtnShowDictGroup");
+	comgroupbutton  = lookup_widget(Propertybox,"cbtnShowComGroup");
+	dictgroupbutton = lookup_widget(Propertybox,"cbtnShowDictGroup");
 
         a = 000000;
         //-- setup current verse color picker
@@ -1353,8 +1347,8 @@ openpropertiesbox(void)    //-- someone clicked properties
 	GTK_TOGGLE_BUTTON(comtabsbutton)->active = settings->showcomtabs;
 	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = settings->showdicttabs;
 	GTK_TOGGLE_BUTTON(textgroupbutton)->active = settings->showtextgroup;
-	/*GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
-	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;*/
+	GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
+	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;
 		
 	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; //-- set Personal note format check button	
 	gtk_widget_show(Propertybox); //-- show propertybox
@@ -1593,13 +1587,14 @@ applyoptions(gboolean showshortcut, gboolean showcomtabs, gboolean showdicttabs,
 }
 
 //---------------------------------------------------------------------------------------------
-void
+gint
 add_sb_group (EShortcutBar *shortcut_bar,gchar *group_name)
 {
 	gint group_num;
 	
 	group_num = e_shortcut_model_add_group (shortcut_bar->model, -1, group_name); 	
         e_shortcut_bar_set_view_type (shortcut_bar, group_num, E_ICON_BAR_SMALL_ICONS);
+        return group_num;
 }
 
 //---------------------------------------------------------------------------------------------

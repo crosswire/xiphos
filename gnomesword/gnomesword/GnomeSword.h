@@ -168,7 +168,7 @@ applyoptions(gboolean showshortcut,
 	     gboolean showcomgroup, 
 	     gboolean showdictgroup);
 
-void add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
+gint add_sb_group(EShortcutBar * shortcut_bar, gchar * group_name);
 
 void lookupStrongsSWORD(gint theNumber);
 
