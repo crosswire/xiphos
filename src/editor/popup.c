@@ -62,6 +62,7 @@
 #include "gtkhtml/gtkhtmldebug.h"
 #endif
 
+#include "gui/bookmarks_treeview.h"
 static void
 undo (GtkWidget *mi, GSHTMLEditorControlData *cd)
 {
