@@ -33,6 +33,7 @@
 
 #include "backend/properties.h"
 #include "backend/bookmarks.h"
+#include "backend/shortcutbar.h"
 
 /* input buffer size */
 #define BUFFER_SIZE 8192
@@ -54,8 +55,6 @@ SETTINGS settings;
 gint settings_init(void)
 {
 	gint retval = 0;
-	/* Bookmarks directory for gnomesword-0.7.0 and up */
-	gchar *gsbmDir;
 	gchar bmFile[300];
 	gchar genbookdir[300];
 	gchar *old_prefs = NULL;
@@ -147,13 +146,13 @@ gint settings_init(void)
 				strlen("Books.conf") + 3);
 		sprintf(old_gbs, "%s/%s", old_sb,
 				"Books.conf");
-	}
+	} 
 
 	/* if .gnomesword-1.0/bookmarks does not exist create it */
 	if (access(settings.swbmDir, F_OK) == -1) {
 		if ((mkdir(settings.swbmDir, S_IRWXU)) == 0) {
 			GNode * bookmark_tree;
-			bookmark_tree = backend_load_bookmarks(old_bm);
+			bookmark_tree = backend_load_old_bookmarks(old_bm);
 			backend_save_bookmarks(bookmark_tree, settings.swbmDir);
 		}
 		else
@@ -170,7 +169,7 @@ gint settings_init(void)
 	if (access(settings.shortcutbarDir, F_OK) == -1) {
 		if ((mkdir(settings.shortcutbarDir, S_IRWXU)) == 0) {			
 			if(have_old){
-				gchar * group_name[256], icon_size[10];
+				gchar group_name[256], icon_size[10];
 				if (access(old_fav, F_OK) == 0) {
 					
 					GList * glist = backend_load_sb_group(old_fav, group_name,
