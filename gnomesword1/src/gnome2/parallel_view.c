@@ -1130,7 +1130,7 @@ static void add_items_to_options_menu(void)
  *   #include "gui/parallel.h
  *
  *   void load_menu_formmod_list(GtkWidget *pmInt, GList *mods,
- *			gchar *label, GtkMenuCallback mycallback)
+ *			gchar *label, GCallback mycallback)
  *
  * Description
  *
@@ -1141,7 +1141,7 @@ static void add_items_to_options_menu(void)
 
 static void load_menu_formmod_list(GtkWidget * pmInt, GList * mods,
 				   gchar * label,
-				   GtkMenuCallback mycallback)
+				   GCallback mycallback)
 {
 	GList *tmp;
 	GtkWidget *item;
@@ -1237,19 +1237,19 @@ static GtkWidget *create_parallel_popup(GList * mods)
 	gtk_widget_set_sensitive(separator2, FALSE);
 	/* build change parallel modules submenu */
 	load_menu_formmod_list(pmInt, mods, _("Change parallel 1"),
-			       (GtkMenuCallback)
+			       (GCallback)
 			       on_changeint1mod_activate);
 	load_menu_formmod_list(pmInt, mods, _("Change parallel 2"),
-			       (GtkMenuCallback)
+			       (GCallback)
 			       on_changeint2mod_activate);
 	load_menu_formmod_list(pmInt, mods, _("Change parallel 3"),
-			       (GtkMenuCallback)
+			       (GCallback)
 			       on_changeint3mod_activate);
 	load_menu_formmod_list(pmInt, mods, _("Change parallel 4"),
-			       (GtkMenuCallback)
+			       (GCallback)
 			       on_changeint4mod_activate);
 	load_menu_formmod_list(pmInt, mods, _("Change parallel 5"),
-			       (GtkMenuCallback)
+			       (GCallback)
 			       on_changeint5mod_activate);
 
 	gtk_signal_connect(GTK_OBJECT(copy7), "activate",

@@ -1,11 +1,11 @@
 INCLUDES =  \
     $(GNOME_CFLAGS) \
-    -I$(top_builddir)/src \
+    -I$(top_srcdir)/src \
     -DPREFIX=\""$(prefix)"\" \
     -DSYSCONFDIR=\""$(sysconfdir)"\" \
     -DDATADIR=\""$(datadir)"\" \
     -DLIBDIR=\""$(libdir)"\" \
-    -DGNOME_DISABLE_DEPRECATED
+    -DGNOME_DISABLE_DEPRECATED 
 
 EXTRA_DIST =  \
 	$(top_builddir)/src/gui/*.h 

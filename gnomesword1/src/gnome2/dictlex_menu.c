@@ -522,7 +522,7 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 					  view_text_menu);
 					  
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_text_menu,
-					(GtkMenuCallback)
+					(GCallback)
 					on_new_dialog_activate);
 	} else {
 		current_book =
@@ -541,7 +541,7 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 					  view_text_menu);
 		
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST, view_text_menu,
-					(GtkMenuCallback)
+					(GCallback)
 					on_view_mod_activate);
 
 		view_new = gtk_menu_item_new_with_label(buf);
@@ -647,12 +647,12 @@ GtkWidget *gui_create_pm_dict(DL_DATA * t)
 	if (t->is_dialog)
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
 			lookup_selection_menu,
-			(GtkMenuCallback)
+			(GCallback)
 			gui_lookup_dictlex_dialog_selection);
 	else
 		gui_add_mods_2_gtk_menu(DICT_DESC_LIST,
 			lookup_selection_menu,
-			(GtkMenuCallback)
+			(GCallback)
 			gui_lookup_dictlex_selection);
 
 	/*

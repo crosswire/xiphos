@@ -392,7 +392,7 @@ gchar * remove_linefeeds(gchar * buf)
  *   #include "gui/utilities.h
  *
  *   void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
- *	gchar * itemdata, gchar * menuname, GtkMenuCallback mycallback)
+ *	gchar * itemdata, gchar * menuname, GCallback mycallback)
  *
  * Description
  *   adds an item to the main menu bar
@@ -402,7 +402,7 @@ gchar * remove_linefeeds(gchar * buf)
  */
 
 void gui_add_item2gnome_menu(GtkWidget * MainFrm, gchar * itemname, 
-	gchar * itemdata, gchar * menuname, GtkMenuCallback mycallback)
+	gchar * itemdata, gchar * menuname, GCallback mycallback)
 {
 	GnomeUIInfo *menuitem;
 
@@ -458,7 +458,7 @@ void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
  *   #include "gui/utilities.h
  *
  *   void add_mods_to_menus(GList * modlist, gchar * menu,
- *				GtkMenuCallback callback) 
+ *				GCallback callback) 
  *
  * Description
  *   add a list of modules to a menu
@@ -468,7 +468,7 @@ void gui_add_separator2menu(GtkWidget * MainFrm, gchar * subtreelabel)
  */
 
 void gui_add_mods_to_menus(GList * modlist, gchar * menu,
-				GtkMenuCallback callback) 
+				GCallback callback) 
 {	
 	gchar	
 		view_remember_last_item[80];
@@ -526,7 +526,7 @@ void gui_remove_menu_items(gchar * startitem, gint numberofitems)
  *   #include "gui/utilities.h"
  *
  *   void add_mods_2_gtk_menu(gchar * mod_type, GtkMenu * menu,
-				GtkMenuCallback callback)
+				GCallback callback)
  *
  * Description
  *   
@@ -536,7 +536,7 @@ void gui_remove_menu_items(gchar * startitem, gint numberofitems)
  */
 
 void gui_add_mods_2_gtk_menu(gint mod_type, GtkWidget * menu,
-				GtkMenuCallback callback)
+				GCallback callback)
 {
 	GList 	*tmp = NULL;
 	GtkWidget * item;
