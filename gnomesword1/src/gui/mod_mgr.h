@@ -22,8 +22,17 @@
 #ifndef __GUI_MOD_MGR_H__
 #define __GUI_MOD_MGR_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include "main/mod_mgr.h"
+
 void gui_update_install_status(glong total, glong done, const gchar *message);
 void gui_update_install_progressbar(gdouble fraction);
 void gui_open_mod_mgr(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
