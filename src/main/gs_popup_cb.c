@@ -36,13 +36,13 @@
 #include "interlinear_dialog.h"
 #include "cipher_key_dialog.h"
 #include "_editor.h"
+#include "commentary_dialog.h"
+#include "dictlex_dialog.h"
 
 /* main */ 
 #include "gs_popup_cb.h"
 #include "gs_html.h"
 #include "gs_gnomesword.h"
-#include "gs_viewdict_dlg.h"
-#include "gs_viewcomm_dlg.h"
 #include "gs_bookmarks.h"
 #include "gs_interlinear.h"
 #include "support.h"

@@ -36,9 +36,9 @@
 #include "about_modules.h"
 #include "shortcutbar_main.h"
 #include "shortcutbar_dialog.h"
+#include "shortcutbar_viewer.h"
 #include "studypad.h"
 #include "info_box.h"
-#include "shortcutbar_viewer.h"
 
 /* main */ 
 #include "gs_gnomesword.h"

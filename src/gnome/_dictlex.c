@@ -25,17 +25,17 @@
 
 #include <gnome.h>
 
-/* gnome */
+/* frontend */
 #include "_dictlex.h"
 #include "cipher_key_dialog.h"
 #include "shortcutbar_main.h"
+#include "dictlex_dialog.h"
 
 /* main */
 #include "settings.h"
 #include "lists.h"
 #include "dictlex.h"
 #include "gs_html.h"
-#include "gs_viewdict_dlg.h"
 
 
 /******************************************************************************
@@ -326,7 +326,7 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	gdk_window_set_cursor(s->app->window,cursor);
 	
 	if(!isrunningSD) {
-		dlg = create_dlgViewDict(s->app);
+		dlg = gui_create_dictlex_dialog(s->app);
 		modName = s->DictWindowModule;
 		/* set frame label to current Module name  */
 		gtk_frame_set_label(GTK_FRAME(frameShowDict),modName);  				
@@ -563,6 +563,7 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 {	
 	settings.whichwindow = DICTIONARY_WINDOW;
 	
+	
 	switch (event->button) {
 	case 1:
 		return TRUE;
@@ -574,8 +575,8 @@ static gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
 		return TRUE;
 		break;
 	case 3:
-		gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
-					     "button_press_event");
+		/*gtk_signal_emit_stop_by_name(GTK_OBJECT(html),
+					     "button_press_event");*/
 		return TRUE;
 		break;
 	default:

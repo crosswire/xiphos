@@ -40,9 +40,13 @@ libgui_a_SOURCES =  \
     about_sword.h \
     cipher_key_dialog.c \
     cipher_key_dialog.h \
+    commentary_dialog.c \
+    commentary_dialog.h \
     commentary_find.c \
     commentary_find.h \
     editor_menu.c \
+    dictlex_dialog.c \
+    dictlex_dialog.h \
     editor_menu.h \
     editor_replace.c \
     editor_replace.h \
