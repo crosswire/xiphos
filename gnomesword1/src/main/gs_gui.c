@@ -1,28 +1,22 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
- /*
-    * GnomeSword Bible Study Tool
-    * gs_gui.c
-    * -------------------
-    * Wed June 27 2001
-    * copyright (C) 2001 by Terry Biggs
-    * tbiggs@users.sourceforge.net
-  */
-
 /*
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * GnomeSword Bible Study Tool
+ * gs_gui.c - SHORT DESCRIPTION
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -41,13 +35,12 @@
 #include "gs_html.h"
 #include "gs_shortcutbar.h"
 #include "sword.h"
-
+#include "settings.h"
 
 /*
  * gnome
  */
 #include "main_menu.h"
-
 
 
 static char *book_open_xpm[] = {
@@ -129,8 +122,6 @@ GdkPixmap *pixmap3;
 GdkBitmap *mask1;
 GdkBitmap *mask2;
 GdkBitmap *mask3;
-
-
 
 static void on_btnSBDock_clicked(GtkButton * button, SETTINGS * s)
 {
@@ -819,5 +810,5 @@ void create_mainwindow(SETTINGS *s)
 	
 	gtk_widget_grab_focus(s->app);
 
-	gtk_widget_set_usize(s->app, s->gs_width, settings->gs_hight);
+	gtk_widget_set_usize(s->app, s->gs_width, settings.gs_hight);
 }

@@ -33,8 +33,6 @@ COMMON_SOURCE =  \
     gs_editor_search.h \
     gs_editor_toolbar.c \
     gs_editor_toolbar.h \
-    gs_file.c \
-    gs_file.h \
     gs_find_dlg.c \
     gs_find_dlg.h \
     gs_gbs.c \
@@ -77,7 +75,9 @@ COMMON_SOURCE =  \
     percomm.c \
     percomm.h \
     support.c \
-    support.h 
+    support.h \
+    settings.c \
+    settings.h
 
 SPELLING_SOURCE =  \
     debug.h \

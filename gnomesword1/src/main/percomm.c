@@ -154,7 +154,7 @@ void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	 * get data structure for new module 
 	 */
 	p_last = (PC_DATA *) g_list_nth_data(pcl, 
-				settings->percomm_last_page);
+				settings.percomm_last_page);
 	p = (PC_DATA *) g_list_nth_data(pcl, page_num);
 	/*
 	 * do work that's non gui
@@ -163,7 +163,7 @@ void on_notebook_percomm_switch_page(GtkNotebook * notebook,
 	/*
 	 * keep showtabs menu item current 
 	 */
-	//GTK_CHECK_MENU_ITEM(p->showtabs)->active = settings->percomm_tabs;
+	//GTK_CHECK_MENU_ITEM(p->showtabs)->active = settings.percomm_tabs;
 
 	/*
 	 * set edit mode
@@ -200,7 +200,7 @@ void percomm_page_changed(gint page_num, PC_DATA * p)
 	/*
 	 * remember new module name
 	 */
-	strcpy(settings->personalcommentsmod, p->mod_name);
+	strcpy(settings.personalcommentsmod, p->mod_name);
 	/*
 	 * point TEXT_DATA *cur_t to t - cur_t is global to this file
 	 */
@@ -208,13 +208,13 @@ void percomm_page_changed(gint page_num, PC_DATA * p)
 	/*
 	 * remember page number
 	 */
-	settings->percomm_last_page = page_num;
+	settings.percomm_last_page = page_num;
 	/*
 	 * display new module with current verse
 	 */
 	if (display_change) {
 		set_percomm_page_and_key(page_num,
-					 settings->currentverse);
+					 settings.currentverse);
 	}
 }
 
@@ -241,9 +241,9 @@ void set_percomm_page_and_key(gint page_num, gchar * key)
 	 * called by on_notebook_percomm_switch_page
 	 */
 	display_change = FALSE;
-	if (settings->text_last_page != page_num) {
+	if (settings.text_last_page != page_num) {
 		gtk_notebook_set_page(GTK_NOTEBOOK
-				      (settings->notebook_percomm),
+				      (settings.notebook_percomm),
 				      page_num);
 	}
 	backend_display_percomm(page_num, key);
@@ -308,7 +308,7 @@ static void set_page_percomm(gchar * modname, GList * percomm_list,
 
 void display_percomm(gchar * key)
 {
-	backend_display_percomm(settings->percomm_last_page, key);
+	backend_display_percomm(settings.percomm_last_page, key);
 }
 
 /******************************************************************************

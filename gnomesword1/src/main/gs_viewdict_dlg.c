@@ -1,33 +1,26 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_viewdict_dlg.c
-     * -------------------
-     * Fri Jan 05 2001
-     * copyright (C) 2001 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_viewdict_dlg.c - SHORT DESCRIPTION
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
-#  include <config.h>
+#include <config.h>
 #endif
 
 #include <gnome.h>
@@ -38,10 +31,12 @@
 #include "sword.h"
 #include "gs_gnomesword.h"
 #include "gs_html.h"
+#include "settings.h"
 
-/****************************************************************************************
- *globals
- ****************************************************************************************/
+/******************************************************************************
+ * globals
+ *****************************************************************************/
+
 GtkWidget *clKeys;
 GtkWidget *textSDmodule;
 GtkWidget *cbSDMods;
@@ -52,15 +47,14 @@ GList *dictList;
 GtkWidget *dlgViewDict;
 gboolean isrunningSD = FALSE;	/* is the view dictionary dialog runing */
 
-/****************************************************************************************
- *externs
- ****************************************************************************************/
+/******************************************************************************
+ * externs
+ *****************************************************************************/
 extern GtkWidget *MainFrm;
-extern SETTINGS *settings;
 
-/****************************************************************************************
- *callbacks
- ****************************************************************************************/
+/******************************************************************************
+ * callbacks
+ *****************************************************************************/
 
 /*
  *
@@ -99,7 +93,7 @@ void on_btnClose_clicked(GtkButton * button, gpointer user_data)
  */
 void on_btnVDSync_clicked(GtkButton * button, gpointer user_data)
 {
-	backend_search_text_changed_viewdict(settings->dictkey);
+	backend_search_text_changed_viewdict(settings.dictkey);
 }
 
 /*
@@ -423,7 +417,7 @@ GtkWidget *create_dlgViewDict(GtkWidget * app)
 	dictList = NULL;
 	listitem = NULL;
 	
-	backend_setup_viewdict(textSDmodule,settings);
+	backend_setup_viewdict(textSDmodule, &settings);
 	listitem = backend_get_first_module_viewdict();
 	if(listitem) {
 		dictList = g_list_append(dictList, (gchar*)listitem);
@@ -442,10 +436,10 @@ GtkWidget *create_dlgViewDict(GtkWidget * app)
 	g_list_free(dictList);
 	
 	gtk_entry_set_text(GTK_ENTRY(ceSDMods),
-			   settings->DictWindowModule);
-	gtk_entry_set_text(GTK_ENTRY(entrySDLookup), settings->dictkey);
+			   settings.DictWindowModule);
+	gtk_entry_set_text(GTK_ENTRY(entrySDLookup), settings.dictkey);
 	
-	backend_search_text_changed_viewdict(settings->dictkey);
+	backend_search_text_changed_viewdict(settings.dictkey);
 	isrunningSD = TRUE;
 	return dlgViewDict;
 }
