@@ -5,11 +5,11 @@ dist=true
 install=false
 type=SOURCE
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/main.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/callback.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/gs_gnomesword.c,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/gs_gnomesword.h,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/gs_file.c,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/display.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/gs_sword.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/gs_studypad.c,
+openfiles=Untitled.h,Untitled.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/main.cpp,/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/display.cpp,
 show_outputview=true
 show_treeview=true
-header_file=/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/gs_gnomesword.h
-cpp_file=/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/callback.cpp
+header_file=Untitled.h
+cpp_file=/home/tbiggs/gnomesword/modules/gnomesword/gnomesword/display.cpp
 browser_file=file:/home/tbiggs/share/doc/HTML/default/kdevelop/welcome/index.html
 [gnomesword/interface.c]
 install_location=
