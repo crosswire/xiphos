@@ -25,10 +25,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "settings.h"
 
-void gui_attach_detach_shortcutbar(SETTINGS * s);
-GtkWidget* gui_create_shortcutbar_dialog (SETTINGS *s);
+void gui_attach_detach_shortcutbar(void);
+GtkWidget* gui_create_shortcutbar_dialog(void);
 
 #ifdef __cplusplus
 }

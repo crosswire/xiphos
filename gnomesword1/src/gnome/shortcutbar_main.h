@@ -26,21 +26,16 @@
 extern "C" {
 #endif
 
-#include "settings.h"
-
-
-void showSBGroup(SETTINGS * s, gint groupnum);
-void changegroupnameSB(SETTINGS * s,
-		       gchar * groupName, gint groupNum);
-void gui_setup_shortcut_bar(SETTINGS * s);
-void gui_update_shortcut_bar(SETTINGS * s);
-void gui_create_mod_list_menu(gint group_num, GtkWidget * menu,
-			   GtkWidget * shortcut_menu_widget,
-			   gint mod_type);
-
+void showSBGroup(gint groupnum);
+void changegroupnameSB(gchar * groupName, gint groupNum);
+void gui_setup_shortcut_bar(void);
+void gui_update_shortcut_bar(void);
+void gui_create_mod_list_menu(gint group_num, GtkWidget *menu,
+		GtkWidget *shortcut_menu_widget, gint mod_type);
 void gui_shortcutbar_showhide(void);
 
 #ifdef __cplusplus
 }
 #endif
 #endif	/* __SHORTCUTBAR_MAIN_H_ */
+

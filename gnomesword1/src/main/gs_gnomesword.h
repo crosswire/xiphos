@@ -26,8 +26,6 @@
 extern "C" {
 #endif
 
-#include "settings.h"
-
 #define MAIN_TEXT_WINDOW 0 
 #define INTERLINEAR_WINDOW 1
 #define COMMENTARY_WINDOW 2
@@ -83,10 +81,7 @@ struct _search_opt {
 
 void init_gnomesword(void);
 void gnomesword_shutdown(void);
-void UpdateChecks(SETTINGS *);
-void setformatoption(GtkWidget * button);
-void changepagenotebook(GtkNotebook * notebook, 
-		gint page_num);
+void UpdateChecks(void);
 void setautosave(gboolean choice);
 void percent_update(char percent, void *userData);
 void set_appbar_progress(gint unit);
@@ -95,8 +90,8 @@ gchar *gdouble_arr_to_hex(gdouble *color,
 		gint websafe);
 gdouble *hex_to_gdouble_arr(gchar *color);
 void display_about_module_dialog(gchar *modname, gboolean isGBS);
-gchar *get_module_key(SETTINGS *s);
-gchar *get_module_name(SETTINGS *s);
+gchar *get_module_key(void);
+gchar *get_module_name(void);
 //gchar *get_module_name_from_description(gchar *description);
 void module_name_from_description(gchar *mod_name, gchar *description);
 void change_module_and_key(gchar *module_name, gchar *key);
@@ -104,8 +99,8 @@ void change_verse(gchar *key);
 void set_verse_style(gboolean choice);
 void save_module_key(gchar * mod_name, gchar * key);
 const char *get_sword_version(void);
-void display_devotional(SETTINGS * s);
-void display_new_font_color_and_size(SETTINGS * s);
+void display_devotional(void);
+void display_new_font_color_and_size(void);
 gchar *get_module_description(gchar * mod_name);
 const char *get_book_from_key(char *key);
 int get_chapter_from_key(char *key);

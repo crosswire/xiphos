@@ -34,6 +34,7 @@ extern "C" {
 
 #include <gnome.h>
 #include "gs_gnomesword.h"
+#include "settings.h"
 
 	void on_undockInt_activate(GtkMenuItem * menuitem,  SETTINGS *s);
 	/*** toogle global options in interlinear window ***/

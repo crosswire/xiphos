@@ -489,8 +489,8 @@ on_add_bookmark_activate(GtkMenuItem * menuitem,
 		node = (GtkCTreeNode *)user_data;
 	else
 		node = NULL;
-	mod_name = get_module_name(&settings);
-	key = get_module_key(&settings);
+	mod_name = get_module_name();
+	key = get_module_key();
 	add_bookmark_to_tree(node, mod_name, key);
 }
 
@@ -620,8 +620,8 @@ void on_point_to_here_activate(GtkMenuItem * menuitem, gpointer user_data)
 	    NULL);
 	if( gnome_dialog_run (GNOME_DIALOG (yes_no_dialog)) ) return;
 	
-	modName = get_module_name(&settings);
-	key     = get_module_key(&settings);
+	modName = get_module_name();
+	key     = get_module_key();
 
 	cell1 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[1]);
 	cell2 = GTK_CELL_PIXTEXT(GTK_CTREE_ROW(selected_node)->row.cell[2]);

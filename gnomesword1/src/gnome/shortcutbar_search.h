@@ -25,7 +25,7 @@
 extern "C" {
 #endif	
 	
-void gui_create_shortcutbar_search(GtkWidget * vp, SETTINGS * s);
+void gui_create_shortcutbar_search(GtkWidget * vp);
 
 #ifdef __cplusplus
 }
