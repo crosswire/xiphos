@@ -25,10 +25,6 @@
 
 #include <gnome.h>
 
-#ifdef USE_GTKEMBEDMOZ
-#include <gtkmozembed.h>
-#endif
-
 
 #include "gui/gtkhtml_display.h"
 #include "gui/gbs.h"
@@ -233,15 +229,12 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 		tmpbuf = gbs_get_treekey_local_name(offset);
 		p_treeitem->item_name = (gchar *) tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
-			p_treeitem->pixbuf_opened =
-				pixbufs->pixbuf_closed;
-			p_treeitem->pixbuf_closed =
-			    pixbufs->pixbuf_opened;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
 			p_treeitem->is_leaf = FALSE;
 			p_treeitem->expanded = FALSE;
 		} else {
-			p_treeitem->pixbuf_opened =
-			    pixbufs->pixbuf_helpdoc;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_helpdoc;
 			p_treeitem->pixbuf_closed = NULL;
 			p_treeitem->is_leaf = TRUE;
 			p_treeitem->expanded = FALSE;
@@ -257,15 +250,12 @@ static void add_children_to_tree(GBS_DATA * gbs, GtkTreeIter iter,
 		tmpbuf = gbs_get_treekey_local_name(offset);
 		p_treeitem->item_name = (gchar *) tmpbuf;
 		if (gbs_treekey_has_children(offset)) {
-			p_treeitem->pixbuf_opened =
-			    pixbufs->pixbuf_closed;
-			p_treeitem->pixbuf_closed =
-			    pixbufs->pixbuf_opened;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_closed;
+			p_treeitem->pixbuf_closed = pixbufs->pixbuf_opened;
 			p_treeitem->is_leaf = FALSE;
 			p_treeitem->expanded = FALSE;
 		} else {
-			p_treeitem->pixbuf_opened =
-			    pixbufs->pixbuf_helpdoc;
+			p_treeitem->pixbuf_opened = pixbufs->pixbuf_helpdoc;
 			p_treeitem->pixbuf_closed = NULL;
 			p_treeitem->is_leaf = TRUE;
 			p_treeitem->expanded = FALSE;
@@ -301,19 +291,8 @@ void gui_set_book_page_and_key(gint page_num, gchar * key)
 	text = display_gbs(cur_g->mod_name, key);
 
 	if (text) {
-#ifdef USE_GTKEMBEDMOZ
-		if (!cur_g->is_rtol)
-			entry_display(cur_g->html, cur_g->mod_name,
-				      text, key, TRUE);
-		else
-			entry_display_mozilla(cur_g->html,
-					      cur_g->mod_name, text,
-					      key, TRUE);
-
-#else
 		entry_display(cur_g->html, cur_g->mod_name,
 			      text, key, TRUE);
-#endif
 		free(text);
 	}
 }
@@ -676,50 +655,6 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 	gtk_paned_pack2(GTK_PANED(hpanedGBS), frameGBS, TRUE, TRUE);
 
 
-
-#ifdef USE_GTKEMBEDMOZ
-	if (!p_gbs->is_rtol) {
-		scrolledwindowHTML_GBS =
-		    gtk_scrolled_window_new(NULL, NULL);
-		gtk_widget_show(scrolledwindowHTML_GBS);
-		gtk_container_add(GTK_CONTAINER(frameGBS),
-				  scrolledwindowHTML_GBS);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-					       (scrolledwindowHTML_GBS),
-					       GTK_POLICY_AUTOMATIC,
-					       GTK_POLICY_AUTOMATIC);
-
-		p_gbs->html = gtk_html_new();
-		gtk_widget_show(p_gbs->html);
-		gtk_container_add(GTK_CONTAINER(scrolledwindowHTML_GBS),
-				  p_gbs->html);
-		gtk_html_load_empty(GTK_HTML(p_gbs->html));
-		g_signal_connect(GTK_OBJECT(p_gbs->html),
-				   "link_clicked",
-				   G_CALLBACK(gui_link_clicked), NULL);
-		g_signal_connect(GTK_OBJECT(p_gbs->html), "on_url",
-				   G_CALLBACK(gui_url),
-				   GINT_TO_POINTER(BOOK_TYPE));
-		g_signal_connect(GTK_OBJECT(p_gbs->html),
-				   "button_release_event",
-				   G_CALLBACK(on_button_release_event),
-				   p_gbs);
-	} else {
-		//gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.0.1");
-		p_gbs->html = gtk_moz_embed_new();
-		gtk_widget_show(p_gbs->html);
-		gtk_container_add(GTK_CONTAINER(frameGBS), p_gbs->html);
-		gtk_widget_realize(p_gbs->html);
-/*
-		g_signal_connect(GTK_OBJECT(p_gbs->html),
-				   "dom_mouse_click",
-				   G_CALLBACK(mozilla_mouse_click),
-				   NULL);
-*/
-	}
-
-
-#else
 	scrolledwindowHTML_GBS = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowHTML_GBS);
 	gtk_container_add(GTK_CONTAINER(frameGBS),
@@ -741,7 +676,9 @@ static void create_gbs_pane(GBS_DATA * p_gbs)
 	g_signal_connect(GTK_OBJECT(p_gbs->html),
 			   "button_release_event",
 			   G_CALLBACK(on_button_release_event), p_gbs);
-#endif
+	g_signal_connect(GTK_OBJECT(p_gbs->html),
+			   "url_requested",
+			   G_CALLBACK(url_requested), NULL);
 
 	g_signal_connect(selection, "changed",
 			 G_CALLBACK(tree_selection_changed), p_gbs);
