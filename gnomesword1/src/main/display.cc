@@ -171,7 +171,7 @@ char GTKChapDisp::Display(SWModule &imodule)
 		}
 		str = g_string_append(str, (const char *)imodule);
 		buf = g_strdup_printf("%s",(const char *)imodule);
-		
+		//g_warning((const char *)imodule.RenderText());
 		if (settings.versestyle) {
 			if ((strstr(buf, "<BR>") == NULL) &&
 			    (strstr(buf, "<br />") == NULL) &&
