@@ -108,6 +108,7 @@ callback.o: callback.cpp ../config.h /usr/include/gnome.h \
  /usr/include/libgnomeui/gnome-app-util.h \
  /usr/include/libgnomeui/gnome-canvas.h \
  /usr/include/libart_lgpl/art_misc.h \
+ /usr/include/libart_lgpl/art_config.h \
  /usr/include/libart_lgpl/art_rect.h \
  /usr/include/libart_lgpl/art_svp.h \
  /usr/include/libart_lgpl/art_point.h \
@@ -204,7 +205,8 @@ callback.o: callback.cpp ../config.h /usr/include/gnome.h \
  /usr/include/sword/swconfig.h /usr/include/sword/swlog.h \
  /usr/include/sword/versekey.h /usr/include/sword/swmacs.h \
  /usr/include/regex.h callback.h GnomeSword.h support.h interface.h \
- filestuff.h display.h listeditor.h printstuff.h spellcheck.h
+ filestuff.h display.h listeditor.h noteeditor.h searchstuff.h \
+ printstuff.h spellcheck.h
 callback.cpp :
 ../config.h :
 /usr/include/gnome.h :
@@ -393,6 +395,7 @@ callback.cpp :
 /usr/include/libgnomeui/gnome-app-util.h :
 /usr/include/libgnomeui/gnome-canvas.h :
 /usr/include/libart_lgpl/art_misc.h :
+/usr/include/libart_lgpl/art_config.h :
 /usr/include/libart_lgpl/art_rect.h :
 /usr/include/libart_lgpl/art_svp.h :
 /usr/include/libart_lgpl/art_point.h :
@@ -523,5 +526,7 @@ interface.h :
 filestuff.h :
 display.h :
 listeditor.h :
+noteeditor.h :
+searchstuff.h :
 printstuff.h :
 spellcheck.h :
