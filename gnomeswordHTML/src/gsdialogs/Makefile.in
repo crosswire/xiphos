@@ -113,7 +113,7 @@ noinst_LIBRARIES = libgsdialogs.a
 INCLUDES =      $(GNOME_INCLUDEDIR)         $(SWORD_CPPFLAGS) 	-I$(top_srcdir) 	-I$(top_srcdir)/html 	-I$(top_srcdir)/src     	-I$(top_srcdir)/src/gssword         -I$(top_srcdir)/src/gsdialogs         -I /usr/include/gtkhtml 	$(EXTRA_GNOME_CFLAGS)
 
 
-libgsdialogs_a_SOURCES =         gs_abouts.c        gs_abouts.h        gs_listeditor.c        gs_listeditor.h        gs_information_sw.c        gs_viewcomm_dlg.h        gs_viewtext_dlg.c        gs_viewtext_sw.h        gs_information_sw.h        gs_viewdict_dlg.c        gs_viewtext_dlg.h        gs_viewcomm_dlg.c        gs_viewdict_dlg.h        gs_viewtext_sw.cpp
+libgsdialogs_a_SOURCES =         gs_abouts.c        gs_abouts.h        gs_listeditor.c        gs_listeditor.h        gs_information_dlg.c        gs_viewcomm_dlg.h        gs_viewtext_dlg.c        gs_viewtext_sw.h        gs_information_dlg.h        gs_viewdict_dlg.c        gs_viewtext_dlg.h        gs_viewcomm_dlg.c        gs_viewdict_dlg.h        gs_viewtext_sw.cpp
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
@@ -127,7 +127,7 @@ LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
 libgsdialogs_a_LIBADD = 
 libgsdialogs_a_OBJECTS =  gs_abouts.o gs_listeditor.o \
-gs_information_sw.o gs_viewtext_dlg.o gs_viewdict_dlg.o \
+gs_information_dlg.o gs_viewtext_dlg.o gs_viewdict_dlg.o \
 gs_viewcomm_dlg.o gs_viewtext_sw.o
 AR = ar
 CXXFLAGS = @CXXFLAGS@
@@ -147,7 +147,7 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = gtar
 GZIP_ENV = --best
-DEP_FILES =  .deps/gs_abouts.P .deps/gs_information_sw.P \
+DEP_FILES =  .deps/gs_abouts.P .deps/gs_information_dlg.P \
 .deps/gs_listeditor.P .deps/gs_viewcomm_dlg.P .deps/gs_viewdict_dlg.P \
 .deps/gs_viewtext_dlg.P .deps/gs_viewtext_sw.P
 SOURCES = $(libgsdialogs_a_SOURCES)

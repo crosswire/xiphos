@@ -163,30 +163,14 @@ gint VTgetverseSWORD(void)
 	return VTKey.Verse();
 }
 
-void VTstrongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
+/******************************************************************************
+ * set global options   (strongs, morph tags, footnotes)
+ ******************************************************************************/
+void VTsetGlobalOptionsSWORD(gchar *option, gchar *onoff)
 {
-	if(choice){ //-- if choice is TRUE - we want strongs numbers	
-		VTMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 	
-		VTMgr->setGlobalOption("Morphological Tags","On");  //-- turn strongs on
-	}else{   //-- we don't want strongs numbers	
-		VTMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
-		VTMgr->setGlobalOption("Morphological Tags","Off");  //-- turn strongs on
-	}
-	//settings->strongs = choice;   //-- store choice in settings
+	VTMgr->setGlobalOption(option, onoff);
 	VTMod->Display(); //-- we need to show change
 }
 
-/******************************************************************************
- * toogle gbf footnotes for modules that have them
- ******************************************************************************/
-void VTfootnotesSWORD(gboolean choice) 
-{
-	if(choice){ //-- we want footnotes	
-		VTMgr->setGlobalOption("Footnotes","On"); //-- turn footnotes on
-	}else{ //-- we don't want footnotes	
-		VTMgr->setGlobalOption("Footnotes","Off");	//-- turn footnotes off
-	}
-	//settings->footnotes = choice;   //-- store choice in settings
-	VTMod->Display(); //-- we need to show change
-}
+
 

@@ -35,6 +35,7 @@
 #include "gs_viewtext_dlg.h"
 #include "gs_sword.h"
 #include "gs_html.h"
+#include "gs_information_dlg.h"
 #include "support.h"
 
 /****************************************************************************************
@@ -83,8 +84,11 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	gchar *buf;
 	
 	if (*url == '#') {
+		GtkWidget *dlg;
 		++url;		/* remove # */
 		if(*url == 'G' || *url == 'H') ++url;  		/* remove G and H until we decide what to do with them */
+		 //dlg = create_dlgInformation();
+		  //gtk_widget_show(dlg);
 		//lookupStrongsSWORD(atoi(url));
 	} else  if(*url == '*')   {
 		++url;
@@ -104,21 +108,52 @@ void on_linkVT_clicked(GtkHTML * html, const gchar * url, gpointer data)
 	}
 }
 
-
+/*****************************************************************************
+ * toggle  Strong's Numbers
+ *****************************************************************************/
 static void
 on_tbtVTStrongs_toggled(GtkToggleButton * togglebutton, gpointer user_data)
 {
-	VTstrongsSWORD(togglebutton->active);
+	if(togglebutton->active){ /* we want strongs numbers  */
+		/* turn strongs on  */
+		VTsetGlobalOptionsSWORD("Strong's Numbers","On");
+	}else{   /* we don't want strongs numbers */
+	              /* turn strongs off   */
+		VTsetGlobalOptionsSWORD("Strong's Numbers","Off");	
+	}
 }
 
-
+/*****************************************************************************
+ *  toggle Footnotes
+ *****************************************************************************/
 static void
 on_tbtnVTFootnotes_toggled(GtkToggleButton * togglebutton,
 			   gpointer user_data)
 {
-	VTfootnotesSWORD(togglebutton->active); 
+	if(togglebutton->active){  /* we want footnotes */
+		/* turn footnotes on  */
+		VTsetGlobalOptionsSWORD("Footnotes","On");
+	}else{  /* we don't want footnotes  */
+	              /* turn footnotes off */
+		VTsetGlobalOptionsSWORD("Footnotes","Off");	
+	}
 }
 
+/*****************************************************************************
+ *  toggle Morphological Tags
+ *****************************************************************************/
+static void
+on_tbtnVTMorf_toggled                  (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+	if(togglebutton->active){ //-- if choice is TRUE - we want morphs
+		//-- turn morphs on
+		VTsetGlobalOptionsSWORD("Morphological Tags","On");
+	}else{   //-- we don't want morphs	
+	              //-- turn morphs off
+		VTsetGlobalOptionsSWORD("Morphological Tags","Off");
+	}
+}
 
 static void on_cbeBook_changed(GtkEditable * editable, gpointer user_data)
 {
@@ -200,6 +235,7 @@ GtkWidget *create_dlgViewText(void)
 	GtkWidget *vseparator16;
 	GtkWidget *tbtVTStrongs;
 	GtkWidget *tbtnVTFootnotes;
+	GtkWidget *tbtnVTMorf;
 	GtkWidget *toolbar30;
 	GtkWidget *combo11;
 	GtkObject *spbVTChapter_adj;
@@ -322,6 +358,18 @@ GtkWidget *create_dlgViewText(void)
 	gtk_widget_show(tbtnVTFootnotes);
 	gtk_widget_set_usize(tbtnVTFootnotes, 30, 30);
 
+     tmp_toolbar_icon = gnome_stock_pixmap_widget (dlgViewText, GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY);
+	tbtnVTMorf = gtk_toolbar_append_element (GTK_TOOLBAR (toolbar29),
+                                GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
+                                NULL,
+                                _("togglebutton1"),
+                                _("toggle Morf "), NULL,
+                                tmp_toolbar_icon, NULL, NULL);
+  gtk_widget_ref (tbtnVTMorf);
+  gtk_object_set_data_full (GTK_OBJECT (dlgViewText), "tbtnVTMorf", tbtnVTMorf,
+                            (GtkDestroyNotify) gtk_widget_unref);
+  gtk_widget_show (tbtnVTMorf);
+	
 	toolbar30 =
 	    gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
 	gtk_widget_ref(toolbar30);
@@ -456,6 +504,9 @@ GtkWidget *create_dlgViewText(void)
 	gtk_signal_connect(GTK_OBJECT(tbtnVTFootnotes), "toggled",
 			   GTK_SIGNAL_FUNC(on_tbtnVTFootnotes_toggled),
 			   NULL);
+  	gtk_signal_connect (GTK_OBJECT (tbtnVTMorf), "toggled",
+                      GTK_SIGNAL_FUNC (on_tbtnVTMorf_toggled),
+                      NULL);
 	gtk_signal_connect(GTK_OBJECT(cbeBook), "changed",
 			   GTK_SIGNAL_FUNC(on_cbeBook_changed), NULL);
 			   
