@@ -1,10 +1,11 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
- /*
+
+  /*
     * GnomeSword Bible Study Tool
     *gs_information_dlg .c
     * -------------------
     * Tue June 12 2001
-    * copyright (C) 2001 by tbiggs
+    * copyright (C) 2001 by Terry Biggs
     * tbiggs@users.sourceforge.net
     *
  */
