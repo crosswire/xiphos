@@ -47,13 +47,15 @@
 
 //GdkColor   bgColor = {0, 0xdfff, 0xdfff, 0xffff};
 
-#define NUM_SHORTCUT_TYPES 3
+#define NUM_SHORTCUT_TYPES 4
 gchar *shortcut_types[NUM_SHORTCUT_TYPES] = {
-	"bible:", "commentary:", "dict/lex:"
+	"bible:", "commentary:", "dict/lex:",
+	"history:"
 };
 gchar *icon_filenames[NUM_SHORTCUT_TYPES] = {
 	"gnomesword/GnomeSword.png", "gnome-word.png",
-	    "gnomesword/GnomeSword.png"
+	    "gnomesword/GnomeSword.png",
+	    "gnome-folder.png"
 };
 GdkPixbuf *icon_pixbufs[NUM_SHORTCUT_TYPES];
 
@@ -2090,15 +2092,10 @@ GtkWidget *create_mainwindow(void)
 		else
 			icon_pixbufs[i] = NULL;
 	}
-
-	//add_test_groups (E_SHORTCUT_BAR (shortcut_bar));
-
 	gtk_signal_connect(GTK_OBJECT(shortcut_bar), "item_selected",
 			   GTK_SIGNAL_FUNC(on_shortcut_bar_item_selected),
 			   NULL);
-
 //-------------------------------------------------------------------------------------------
-
 	gtk_widget_grab_focus(mainwindow);
 	return mainwindow;
 }
