@@ -55,35 +55,6 @@ static gboolean interlinear5;
 
 /******************************************************************************
  * Name
- *   have_module
- *
- * Synopsis
- *   #include "gui/interlinear.h
- *
- *   gboolean have_module(gchar *mod_name)
- *
- * Description
- *   test for module
- *
- * Return value
- *   gboolean
- */
-
-static gboolean have_module(gchar *mod_name)
-{
-	GList *tmp = NULL;
-	tmp = get_list(TEXT_LIST);
-	while(tmp != NULL) {
-		if(!strcmp(mod_name,(gchar*)tmp->data))
-			return TRUE;
-		tmp = g_list_next(tmp);
-	}
-	return FALSE;
-}
-
-
-/******************************************************************************
- * Name
  *   gui_check_interlinear_modules
  *
  * Synopsis
@@ -1187,44 +1158,26 @@ static GtkWidget * create_interlinear_popup(GList * mods)
 	pmInt_accels = gtk_menu_ensure_uline_accel_group (GTK_MENU (pmInt));
 
 	copy7 = gtk_menu_item_new_with_label (_("Copy"));
-	gtk_widget_ref (copy7);
-	gtk_object_set_data_full (GTK_OBJECT (pmInt), "copy7", copy7,
-                            (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (copy7);
 	gtk_container_add (GTK_CONTAINER (pmInt), copy7);
 
 	separator2 = gtk_menu_item_new ();
-  	gtk_widget_ref (separator2);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
-                            (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (separator2);
   	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);
 	
 	undockInt = gtk_menu_item_new_with_label (_("Detach/Attach"));
-	gtk_widget_ref (undockInt);
-	gtk_object_set_data_full (GTK_OBJECT (pmInt), "undockInt",undockInt ,
-                            (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (undockInt);
 	gtk_container_add (GTK_CONTAINER (pmInt), undockInt);
 	
 	module_options = gtk_menu_item_new_with_label (_("Module Options"));
-	gtk_widget_ref(module_options);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "module_options", module_options,
-                            (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (module_options);
   	gtk_container_add (GTK_CONTAINER(pmInt), module_options);
 	
 	module_options_menu = gtk_menu_new ();
-  	gtk_widget_ref(module_options_menu);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "module_options_menu",module_options_menu,
-                            (GtkDestroyNotify) gtk_widget_unref);
   	gtk_menu_item_set_submenu (GTK_MENU_ITEM (module_options), module_options_menu);
 	
   	separator2 = gtk_menu_item_new ();
-  	gtk_widget_ref (separator2);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "separator2", separator2,
-                            (GtkDestroyNotify) gtk_widget_unref);
   	gtk_widget_show (separator2);
   	gtk_container_add (GTK_CONTAINER (pmInt), separator2);
   	gtk_widget_set_sensitive (separator2, FALSE);

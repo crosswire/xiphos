@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * find_dialog.c 
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -204,57 +204,32 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 	gtk_widget_show(dialog_vbox29);
 
 	vbox45 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox45);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "vbox45",
-				 vbox45,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox45);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox29), vbox45, TRUE, TRUE,
 			   0);
 
 	label180 = gtk_label_new(_("Enter Word or Phrase"));
-	gtk_widget_ref(label180);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "label180",
-				 label180,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label180);
 	gtk_box_pack_start(GTK_BOX(vbox45), label180, FALSE, FALSE, 0);
 
 	dialog->entry = gtk_entry_new();
-	gtk_widget_ref(dialog->entry);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->entry", dialog->entry,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->entry);
 	gtk_box_pack_start(GTK_BOX(vbox45), dialog->entry, FALSE, FALSE,
 			   0);
 	gtk_widget_set_usize(dialog->entry, 291, -2);
 
 	hbox66 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox66);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog), "hbox66",
-				 hbox66,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox66);
 	gtk_box_pack_start(GTK_BOX(vbox45), hbox66, TRUE, TRUE, 0);
 
 	dialog->case_sensitive =
 	    gtk_check_button_new_with_label(_("Case Sensitive"));
-	gtk_widget_ref(dialog->case_sensitive);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->case_sensitive",
-				 dialog->case_sensitive,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->case_sensitive);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->case_sensitive,
 			   FALSE, FALSE, 0);
 
 	dialog->backward =
 	    gtk_check_button_new_with_label(_("Backward Search"));
-	gtk_widget_ref(dialog->backward);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->backward", dialog->backward,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->backward);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->backward, FALSE,
 			   FALSE, 0);
@@ -263,10 +238,6 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 
 	dialog->regex =
 	    gtk_check_button_new_with_label(_("Regular Expresion"));
-	gtk_widget_ref(dialog->regex);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->regex", dialog->regex,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->regex);
 	gtk_box_pack_start(GTK_BOX(hbox66), dialog->regex, FALSE, FALSE,
 			   0);
@@ -280,37 +251,21 @@ static void create_find_dialog(GtkWidget * htmlwidget)
 				       (dialog_action_area29), 10);
 
 	hbuttonbox8 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox8);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "hbuttonbox8", hbuttonbox8,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox8);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area29), hbuttonbox8,
 			   TRUE, TRUE, 0);
 
 	dialog->find = gtk_button_new_with_label(_("Find"));
-	gtk_widget_ref(dialog->find);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->find", dialog->find,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->find);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->find);
 	GTK_WIDGET_SET_FLAGS(dialog->find, GTK_CAN_DEFAULT);
 
 	dialog->next = gtk_button_new_with_label(_("Find Next"));
-	gtk_widget_ref(dialog->next);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->next", dialog->next,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->next);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->next);
 	GTK_WIDGET_SET_FLAGS(dialog->next, GTK_CAN_DEFAULT);
 
 	dialog->close = gtk_button_new_with_label(_("Close"));
-	gtk_widget_ref(dialog->close);
-	gtk_object_set_data_full(GTK_OBJECT(dialog->dialog),
-				 "dialog->close", dialog->close,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(dialog->close);
 	gtk_container_add(GTK_CONTAINER(hbuttonbox8), dialog->close);
 	GTK_WIDGET_SET_FLAGS(dialog->close, GTK_CAN_DEFAULT);

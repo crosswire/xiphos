@@ -811,7 +811,7 @@ void create_mainwindow(void)
 	 * end Interlinear page 
 	 */
 
-	widgets.appbar = gnome_appbar_new(TRUE, TRUE,
+	widgets.appbar = gnome_appbar_new(FALSE, TRUE,
 					  GNOME_PREFERENCES_NEVER);
 	gtk_widget_show(widgets.appbar);
 	gnome_app_set_statusbar(GNOME_APP(widgets.app), widgets.appbar);

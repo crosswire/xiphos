@@ -2,7 +2,7 @@
  * GnomeSword Bible Study Tool
  * toolbar_nav.c - Bible text navigation toolbar
  *
- * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ * Copyright (C) 2000,2001,2002,2003 GnomeSword Developer Team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -329,10 +329,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 				      GTK_RELIEF_NONE);
 
 	cbBook = gtk_combo_new();
-	gtk_widget_ref(cbBook);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "cbBook",
-				 cbBook,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbBook);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav), cbBook, NULL,
 				  NULL);
@@ -344,21 +340,12 @@ GtkWidget *gui_create_nav_toolbar(void)
 				      get_list(BOOKS_LIST));
 
 	cbe_book = GTK_COMBO(cbBook)->entry;
-	gtk_widget_ref(cbe_book);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "cbe_book", cbe_book,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbe_book);
 	gtk_entry_set_text(GTK_ENTRY(cbe_book), _("Romans"));
 
 	spbChapter_adj = gtk_adjustment_new(8, -1, 151, 1, 10, 10);
 	spb_chapter =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbChapter_adj), 1, 0);
-	gtk_widget_ref(spb_chapter);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "spb_chapter",
-				 spb_chapter,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(spb_chapter);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
 				  spb_chapter, NULL, NULL);
@@ -368,10 +355,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 	spbVerse_adj = gtk_adjustment_new(28, -1, 180, 1, 10, 10);
 	spb_verse =
 	    gtk_spin_button_new(GTK_ADJUSTMENT(spbVerse_adj), 1, 0);
-	gtk_widget_ref(spb_verse);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "spb_verse", spb_verse,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(spb_verse);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
 				  spb_verse, NULL, NULL);
@@ -379,11 +362,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 				    TRUE);
 
 	cbe_freeform_lookup = gtk_entry_new();
-	gtk_widget_ref(cbe_freeform_lookup);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "cbe_freeform_lookup",
-				 cbe_freeform_lookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(cbe_freeform_lookup);
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarNav),
 				  cbe_freeform_lookup, NULL,
@@ -401,10 +379,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 		_("Go to verse in free form lookup and add verse to history"),
 		NULL, tmp_toolbar_icon, NULL,
 		NULL);
-	gtk_widget_ref(btnLookup);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "btnLookup",
-				 btnLookup,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(btnLookup);
 
 	tmp_toolbar_icon =
@@ -418,10 +392,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 				       ("Go backward through history list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(nav_bar.button_back);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "nav_bar.button_back",
-				 nav_bar.button_back,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(nav_bar.button_back);
 	gtk_widget_set_sensitive(nav_bar.button_back, FALSE);
 
@@ -436,10 +406,6 @@ GtkWidget *gui_create_nav_toolbar(void)
 				       ("Go foward through history list"),
 				       NULL, tmp_toolbar_icon, NULL,
 				       NULL);
-	gtk_widget_ref(nav_bar.button_forward);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "nav_bar.button_forward",
-				 nav_bar.button_forward,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(nav_bar.button_forward);
 	gtk_widget_set_sensitive(nav_bar.button_forward, FALSE);
 

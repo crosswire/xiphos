@@ -265,47 +265,26 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	gtk_widget_show(dialog_vbox21);
 
 	vbox83 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox83);
-	gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "vbox83",
-				 vbox83,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox83);
 	gtk_box_pack_start(GTK_BOX(dialog_vbox21), vbox83, TRUE, TRUE,
 			   0);
 
 
 	hbox83 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox83);
-	gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "hbox83",
-				 hbox83,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbox83);
 	gtk_box_pack_start(GTK_BOX(vbox83), hbox83, TRUE, TRUE, 0);
 
 	pixmap = gnome_pixmap_new_from_file(PACKAGE_PIXMAPS_DIR
 					    "/GnomeSword.xpm");
-	gtk_widget_ref(pixmap);
-	gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "pixmap",
-				 pixmap,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(pixmap);
 	gtk_box_pack_start(GTK_BOX(hbox83), pixmap, TRUE, TRUE, 0);
 
 	vbox84 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox84);
-	gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "vbox84",
-				 vbox84,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox84);
 	gtk_box_pack_start(GTK_BOX(hbox83), vbox84, TRUE, TRUE, 0);
 
 	if (info->label_top) {
 		label_top = gtk_label_new(info->label_top);
-		gtk_widget_ref(label_top);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label_top", label_top,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label_top);
 		gtk_box_pack_start(GTK_BOX(vbox84), label_top, TRUE,
 				   TRUE, 0);
@@ -313,31 +292,17 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	if (info->label_middle) {
 		label_middle = gtk_label_new(info->label_middle);
-		gtk_widget_ref(label_middle);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label_middle", label_middle,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label_middle);
 		gtk_box_pack_start(GTK_BOX(vbox84), label_middle, TRUE,
 				   TRUE, 0);
 	}
 
-	table14 = gtk_table_new(6, 2, FALSE);
-	gtk_widget_ref(table14);
-	gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "table14",
-				 table14,
-				 (GtkDestroyNotify) gtk_widget_unref);
+	table14 = gtk_table_new(6, 2, FALSE);;
 	gtk_widget_show(table14);
 	gtk_box_pack_start(GTK_BOX(vbox84), table14, TRUE, TRUE, 0);
 
 	if (info->label1) {
 		label1 = gtk_label_new(info->label1);
-		gtk_widget_ref(label1);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label1", label1,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label1);
 		gtk_table_attach(GTK_TABLE(table14), label1, 0, 1, 0, 1,
 				 (GtkAttachOptions) (GTK_FILL),
@@ -345,11 +310,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(label1), 0, 0.5);
 
 		entry1 = gtk_entry_new();
-		gtk_widget_ref(entry1);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "entry1", entry1,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(entry1);
 		gtk_table_attach(GTK_TABLE(table14), entry1, 1, 2, 0, 1,
 				 (GtkAttachOptions) (GTK_EXPAND |
@@ -361,11 +321,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	if (info->label2) {
 		label2 = gtk_label_new(info->label2);
-		gtk_widget_ref(label2);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label2", label2,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label2);
 		gtk_table_attach(GTK_TABLE(table14), label2, 0, 1, 1, 2,
 				 (GtkAttachOptions) (GTK_FILL),
@@ -373,11 +328,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(label2), 0, 0.5);
 
 		entry2 = gtk_entry_new();
-		gtk_widget_ref(entry2);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "entry2", entry2,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(entry2);
 		gtk_table_attach(GTK_TABLE(table14), entry2, 1, 2, 1, 2,
 				 (GtkAttachOptions) (GTK_EXPAND |
@@ -389,11 +339,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	if (info->label3) {
 		label3 = gtk_label_new(info->label3);
-		gtk_widget_ref(label3);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label3", label3,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label3);
 		gtk_table_attach(GTK_TABLE(table14), label3, 0, 1, 2, 3,
 				 (GtkAttachOptions) (GTK_FILL),
@@ -402,11 +347,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 
 		entry3 = gtk_entry_new();
-		gtk_widget_ref(entry3);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "entry3", entry3,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(entry3);
 		gtk_table_attach(GTK_TABLE(table14), entry3, 1, 2, 2, 3,
 				 (GtkAttachOptions) (GTK_EXPAND |
@@ -418,11 +358,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	if (info->label4) {
 		label4 = gtk_label_new(info->label4);
-		gtk_widget_ref(label4);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label4", label4,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label4);
 		gtk_table_attach(GTK_TABLE(table14), label4, 0, 1, 3, 4,
 				 (GtkAttachOptions) (GTK_FILL),
@@ -430,11 +365,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 		gtk_misc_set_alignment(GTK_MISC(label4), 0, 0.5);
 
 		entry4 = gtk_entry_new();
-		gtk_widget_ref(entry4);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "entry4", entry4,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(entry4);
 		gtk_table_attach(GTK_TABLE(table14), entry4, 1, 2, 3, 4,
 				 (GtkAttachOptions) (GTK_EXPAND |
@@ -489,11 +419,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	 */
 	if (info->label_bottom) {
 		label_bottom = gtk_label_new(info->label_bottom);
-		gtk_widget_ref(label_bottom);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "label_bottom", label_bottom,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(label_bottom);
 		gtk_box_pack_start(GTK_BOX(vbox84), label_bottom, TRUE,
 				   TRUE, 0);
@@ -510,21 +435,12 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 				       (dialog_action_area21), 10);
 
 	hbuttonbox1 = gtk_hbutton_box_new();
-	gtk_widget_ref(hbuttonbox1);
-	gtk_object_set_data_full(GTK_OBJECT(gs_dialog), "hbuttonbox1",
-				 hbuttonbox1,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(hbuttonbox1);
 	gtk_box_pack_start(GTK_BOX(dialog_action_area21), hbuttonbox1,
 			   TRUE, TRUE, 0);
 
 	if (info->ok) {
 		button_ok = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-		gtk_widget_ref(button_ok);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "button_ok", button_ok,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(button_ok);
 		gtk_container_add(GTK_CONTAINER(hbuttonbox1),
 				  button_ok);
@@ -539,11 +455,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 	if (info->cancel) {
 		button_cancel =
 		    gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-		gtk_widget_ref(button_cancel);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "button_cancel", button_cancel,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(button_cancel);
 		gtk_container_add(GTK_CONTAINER(hbuttonbox1),
 				  button_cancel);
@@ -558,11 +469,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	if (info->yes) {
 		button_yes = gnome_stock_button(GNOME_STOCK_BUTTON_YES);
-		gtk_widget_ref(button_yes);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "button_yes", button_yes,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(button_yes);
 		gtk_container_add(GTK_CONTAINER(hbuttonbox1),
 				  button_yes);
@@ -577,11 +483,6 @@ static GtkWidget *gs_dialog_build(GS_DIALOG * info)
 
 	if (info->no) {
 		button_no = gnome_stock_button(GNOME_STOCK_BUTTON_NO);
-		gtk_widget_ref(button_no);
-		gtk_object_set_data_full(GTK_OBJECT(gs_dialog),
-					 "button_no", button_no,
-					 (GtkDestroyNotify)
-					 gtk_widget_unref);
 		gtk_widget_show(button_no);
 		gtk_container_add(GTK_CONTAINER(hbuttonbox1),
 				  button_no);

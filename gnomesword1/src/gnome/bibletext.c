@@ -340,34 +340,19 @@ static void create_pane(TEXT_DATA * t)
 	GtkWidget *scrolledwindow;
 	
 	t->frame = gtk_frame_new(NULL);
-	gtk_widget_ref(t->frame);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "t->frame",
-				 t->frame,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(t->frame);
 	gtk_container_add(GTK_CONTAINER(t->vbox), t->frame);
 
 	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app), "vbox", vbox,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox);
 	gtk_container_add(GTK_CONTAINER(t->frame), vbox);
 
 	frame_text = gtk_frame_new(NULL);
-	gtk_widget_ref(frame_text);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "frame_text", frame_text,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(frame_text);
 	gtk_box_pack_start(GTK_BOX(vbox), frame_text, TRUE, TRUE, 0);
 
 	
 	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scrolledwindow);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "scrolledwindow", scrolledwindow,
-				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(scrolledwindow);
 	gtk_container_add(GTK_CONTAINER(frame_text), scrolledwindow);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
@@ -376,10 +361,6 @@ static void create_pane(TEXT_DATA * t)
 				       GTK_POLICY_AUTOMATIC);
 
 	t->html = gtk_html_new();
-	gtk_widget_ref(t->html);
-	gtk_object_set_data_full(GTK_OBJECT(widgets.app),
-				 "t->html", t->html, (GtkDestroyNotify)
-				 gtk_widget_unref);
 	gtk_widget_show(t->html);
 	gtk_container_add(GTK_CONTAINER(scrolledwindow), t->html);
 	gtk_html_load_empty(GTK_HTML(t->html));
