@@ -166,25 +166,7 @@ gchar *main_parallel_change_verse(void)
 
 gchar *main_parallel_update_controls(const gchar * ref)
 {
-	const gchar *bookname;
-	gchar buf[256];
-	gint chapter, verse;
-	char *newbook;
-
-	newbook = backend_p->key_get_book(ref); 
-	chapter = backend_p->key_get_chapter(ref);
-	verse = backend_p->key_get_verse(ref);
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(entrycbIntBook));
-	if (strcmp(bookname, newbook))
-		gtk_entry_set_text(GTK_ENTRY(entrycbIntBook), newbook);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntChapter),
-				  chapter);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(sbIntVerse), verse);
-	sprintf(buf, "%s %d:%d", newbook, chapter, verse);
-	gtk_entry_set_text(GTK_ENTRY(entryIntLookup), buf);
-	g_free(newbook);
-	return g_strdup(buf);
+	return backend->get_valid_key(ref);
 }
 
 
@@ -540,6 +522,8 @@ void main_update_parallel_page(void)
 	gchar *buf;
 	gchar *file = NULL;
 
+	settings.cvparallel = settings.currentverse;
+	
 	if (settings.havebible) {
 		/* setup gtkhtml widget */
 		GtkHTML *html = GTK_HTML(widgets.html_parallel);
@@ -878,7 +862,9 @@ static void int_display(gchar * key)
 				main_url_encode(tmpkey),
 				i,
 				settings.bible_verse_num_color,
-				i, use_font_size, textColor);
+				i, 
+				use_font_size, 
+				textColor);
 			if (str->len) {
 				gtk_html_write(GTK_HTML(html),
 					       htmlstream, str->str,

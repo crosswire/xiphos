@@ -204,7 +204,7 @@ void BackEnd::init_lists(MOD_LISTS * mods) {
 		}			
 	}
 }
-
+/*
 GList *BackEnd::fill_Bible_books(int testament) {
 	VerseKey key; 
 	GList *retlist = NULL;
@@ -225,13 +225,12 @@ GList *BackEnd::fill_Bible_books(int testament) {
 	
 	while(i < x) {
 		while(j < key.BMAX[i]) { 
-			book = g_convert((const char *)key.books[i][j].name,
-				     -1,
-				     UTF_8,
-				     OLD_CODESET,
-				     &bytes_read,
-				     &bytes_written,
-				     &error);
+			book = g_locale_to_utf8((const char *)key.books[i][j].name,
+                                             -1,
+                                             NULL,
+                                             &bytes_written,
+                                             &error);
+			
 			if(book == NULL) {
 				g_print ("error: %s\n", error->message);
 				g_error_free (error);
@@ -247,7 +246,7 @@ GList *BackEnd::fill_Bible_books(int testament) {
 	}
 	return retlist;
 }
-
+*/
 GList *BackEnd::get_module_options(void) {
 	GList *options = NULL;
 	StringList optionslist = main_mgr->getGlobalOptions();	
