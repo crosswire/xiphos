@@ -27,9 +27,6 @@
 #include <gtkhtml/gtkhtml.h>
 #include <gal/widgets/e-unicode.h>
 
-#ifdef USE_GTKEMBEDMOZ
-#include <gtkmozembed.h>
-#endif
 
 #include "gui/gtkhtml_display.h"
 #include "gui/bibletext_dialog.h"
@@ -974,57 +971,6 @@ static GtkWidget *create_nav_toolbar(TEXT_DATA * vt)
 }
 
 
-
-#ifdef USE_GTKEMBEDMOZ
-
-/******************************************************************************
- * Name
- *  set_module_font_activate
- *
- * Synopsis
- *   #include "gui/bibletext.h"
- *
- *   void set_module_font_activate(GtkMenuItem * menuitem,
-				     TEXT_DATA * t)
- *
- * Description
- *   
- *
- * Return value
- *   void
- */
-
-static void set_module_font(GtkButton * button, TEXT_DATA * t)
-{
-	gui_set_module_font(t->mod_name);
-	display(t, t->key, TRUE);
-		
-}
-
-static void on_togglebutton_points_toggled(GtkToggleButton *
-					   togglebutton,
-					   TEXT_DATA * t)
-{
-	t->tgs->hebrewpoints = togglebutton->active;
-	save_module_options(t->mod_name, "Hebrew Vowel Points", 
-				    t->tgs->hebrewpoints);
-	display(t, t->key, TRUE);
-}
-
-
-static void on_togglebutton_cant_toggled(GtkToggleButton * togglebutton,
-					 TEXT_DATA * t)
-{
-	t->tgs->hebrewcant = togglebutton->active;
-	save_module_options(t->mod_name, "Hebrew Cantillation", 
-				    t->tgs->hebrewcant);
-	display(t, t->key, TRUE);
-	/*chapter_display_mozilla(t->html, t->mod_name,
-				t->tgs, settings.currentverse, TRUE);*/
-}
-
-
-#endif
 
 
 /******************************************************************************

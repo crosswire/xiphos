@@ -202,7 +202,7 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 						NULL, page, dl_list);
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(widgets.notebook_dict),
 			      page);
-	g_print("dictkey = %s\n", settings.dictkey);
+	//g_print("dictkey = %s\n", settings.dictkey);
 
 	if (d)
 		gtk_entry_set_text(GTK_ENTRY(d->entry),
@@ -331,6 +331,7 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 	xml_set_value("GnomeSword", "key", "dictionary", d->key);
 	if (text) {
 		entry_display(d->html, d->mod_name, text, d->key, TRUE);
+		//g_printf("dict: %s\n",text);
 		free(text);
 	}
 	

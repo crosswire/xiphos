@@ -32,10 +32,11 @@ struct _name_type {
 	int type;
 };
 
-
+const char *backend_get_language_map(const char *language);
 char *backend_get_preverse_header(char * module_name, char * key, int pvHeading);
 const char *backend_get_footnote_type(char *module_name, char *key, char *note);
 char *backend_get_crossref(char *module_name, char *key, char *note);
+const char *backend_get_module_version(char *module_name);
 
 char *backend_get_footnote_body(char *module_name, 
 					char *key, char *note);
