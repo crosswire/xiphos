@@ -253,14 +253,6 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 	switch (mod_type) {
 	case TEXT_TYPE:
 		if (settings.havebible) {
-			if(settings.browsing)
-				gui_update_tab_struct(module_name,
-						      NULL,
-						      NULL,
-						      NULL,
-						      NULL,
-						      NULL,
-						      settings.comm_showing);
 			val_key = gui_update_nav_controls(key);
 			main_display_bible(module_name, val_key);
 			main_display_commentary(settings.CommWindowModule, val_key);
@@ -269,44 +261,17 @@ void gui_change_module_and_key(gchar * module_name, gchar * key)
 		break;
 	case COMMENTARY_TYPE:
 		if (settings.havecomm) {
-			if(settings.browsing)
-				gui_update_tab_struct(NULL,
-						      module_name,
-						      NULL,
-						      NULL,
-						      NULL,
-						      NULL,
-						      TRUE);
 			main_display_commentary(module_name, key);
 		}
 		break;
 	case DICTIONARY_TYPE:
 		if (settings.havedict) {
-			if(settings.browsing)
-				gui_update_tab_struct(NULL,
-						      NULL,
-						      module_name,
-						      NULL,
-						      key,
-						      NULL,
-						      settings.comm_showing);			
-			//gui_set_dictlex_mod_and_key(module_name, key);
 			main_display_dictionary(module_name, key);
 		}
 		break;
 	case BOOK_TYPE:
 		if (settings.havebook) {
-			if(settings.browsing)
-				gui_update_tab_struct(NULL,
-						      NULL,
-						      NULL,
-						      module_name,
-						      NULL,
-						      key?key:NULL,
-						      FALSE);
-			main_set_book_mod(module_name, atol(key));
-			gui_set_book_mod_and_key(module_name, key);
-			gui_change_window_title(settings.book_mod);
+			main_display_book(module_name, key);
 		}
 		break;
 	}
@@ -371,7 +336,7 @@ void gui_change_verse(const gchar * key)
 	 * set commentary module to current verse
 	 */
 	if (settings.havecomm && settings.comm_showing) {
-		gui_display_commentary(val_key);
+		main_display_commentary(settings.CommWindowModule, val_key);
 		gui_keep_comm_dialog_in_sync(val_key);
 	}
 

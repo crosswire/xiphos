@@ -462,54 +462,6 @@ gboolean gui_display_dictlex_in_sidebar(char *mod_name, char *key)
  * Synopsis
  *   #include "gui/sidebar.h"
  *
- *   void verse_list_link_clicked(GtkHTML * html, const gchar * url,
- *				    SB_VIEWER * sv)
- *
- * Description
- *
- *
- * Return value
- *   void
- */
-
-static void verse_list_link_clicked(GtkHTML * html, const gchar * url,
-				    gpointer data)
-{
-	int type;
-	gchar *text = NULL;
-
-	type = get_mod_type(s_module_name);
-	switch (type) {
-	case TEXT_TYPE:
-		chapter_display(sidebar.htmlshow, sidebar.mod_name,
-				NULL, (gchar *) url, FALSE);
-		break;
-	case COMMENTARY_TYPE:
-	case DICTIONARY_TYPE:
-		text = get_module_text(4, s_module_name, (gchar *) url);
-		if (text) {
-			entry_display(sidebar.htmlshow, s_module_name,
-				      text, (gchar *) url, TRUE);
-			free(text);
-		}
-
-		break;
-	default:
-		break;
-	}
-
-	if (settings.showinmain)
-		gui_change_verse((gchar *) url);
-}
-
-
-/******************************************************************************
- * Name
- *
- *
- * Synopsis
- *   #include "gui/sidebar.h"
- *
  *   void gui_display_verse_list_in_sidebar(gchar * key, gchar * module_name,
  *				       gchar * verse_list)
  *

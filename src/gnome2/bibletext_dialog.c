@@ -318,12 +318,12 @@ static void link_clicked(GtkHTML * html, const gchar * url,
 //              g_warning(url);
 		buf = g_strdup(url);
 		strcpy(vt->key, buf);
-		if(vt->sync)
-			gui_change_verse(vt->key);
-		else {
+//		if(vt->sync)
+//			gui_change_verse(vt->key);
+//		else {
 			display(vt, buf, TRUE);
 			update_controls(vt);
-		}
+//		}
 		g_free(buf);
 	}
 
