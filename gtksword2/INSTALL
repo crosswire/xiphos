@@ -1,0 +1,10 @@
+
+First, be sure to read INSTALL in the root of the project
+directory for instructions on how to make sure the API
+libraries are installed and configured properly.
+
+Then do a:
+
+./configure
+make
+
