@@ -1,3 +1,10 @@
+2001-10-22 Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* made dependant on sword cvs to get ready for 
+	  sword-1.5.3
+	* removed all local render filters (now using sword's)
+
+
 2001-10-19 Terry Biggs <tbiggs@users.sourceforge.net>
 
 	*  fixed to build using gtkhtml-0.15.99-snap.ximian.200110181519

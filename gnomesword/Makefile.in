@@ -105,16 +105,12 @@ RANLIB = @RANLIB@
 SWORD_CPPFLAGS = @SWORD_CPPFLAGS@
 SWORD_LIBS = @SWORD_LIBS@
 VERSION = @VERSION@
-XML_I18N_EXTRACT = @XML_I18N_EXTRACT@
-XML_I18N_MERGE = @XML_I18N_MERGE@
-XML_I18N_TOOLS_PERL = @XML_I18N_TOOLS_PERL@
-XML_I18N_UPDATE = @XML_I18N_UPDATE@
 XPM_LIBS = @XPM_LIBS@
 ZVT_LIBS = @ZVT_LIBS@
 cflags_set = @cflags_set@
 cxxflags_set = @cxxflags_set@
 
-SUBDIRS = macros             po             help 	    src
+SUBDIRS = macros             help 	    src
 
 
 EXTRA_DIST = gnomesword.glade         Gnomesword.prj         gnomesword.desktop 	xml-i18n-extract.in 	xml-i18n-merge.in 	xml-i18n-update.in
