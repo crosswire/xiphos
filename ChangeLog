@@ -1,3 +1,19 @@
+2003-12-07  Andy <andyp@users.sf.net>
+
+	* weekend hackathon :-)
+	* replaced all string references to stock icons with the macro 
+	  equivalents wherever possible
+	* changed GNOME_STOCK_PIXMAP_* and GNOME_STOCK_MENU_* pixmaps 
+	  references to the modern equivalents - these are now deprecated
+	* gtk_widget_set_usize is now deprecated. Replaced with correct 
+	  gtk_widget_set_size_request and fixed -2 -> -1 references
+	* comprehensive review of strings: fixed typos, updated, added, 
+	  changed around - should be ready for the translators now
+	* started to update the preferences dialog. Removed the layout section
+	  as this is now done with the session. Removed frames and replaced 
+	  with bold headings. Layouts and indents still need updating.
+	
+
 2003-12-07  Terry <tbiggs@users.sf.net>
 
 	* added about module item to contex menus in gbs_menu.c, dictlex_menu.c,

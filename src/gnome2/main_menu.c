@@ -658,7 +658,7 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 /*
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Main Window Hints"),
-	 N_("Show/Hide Hints in text windows"),
+	 N_("Show or hide Hints in text windows"),
 	 (gpointer) view_hints, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
@@ -666,20 +666,20 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 */
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Bible Texts"),
-	 N_("Show/Hide Bible texts window"),
+	 N_("Show or hide Bible texts window"),
 	 (gpointer) view_bible_texts, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Commentary"),
-	 N_("Show/Hide commentaries"),
+	 N_("Show or hide commentaries"),
 	 (gpointer) view_upper_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
 	 GNOME_APP_UI_TOGGLEITEM, N_("Lower Workbook"),
 	 N_
-	 ("Show/Hide lower workbook - dictionaries and other books"),
+	 ("Show or hide lower workbook - dictionaries and other books"),
 	 (gpointer) view_lower_workbook, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
@@ -691,13 +691,13 @@ static GnomeUIInfo view1_menu_uiinfo[] = {
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Detach/Attach Shortcut Bar"),
+	 GNOME_APP_UI_ITEM, N_("Attach/Detach Shortcut Bar"),
 	 NULL,
 	 gui_attach_detach_sidebar, NULL, NULL, 
 	 GNOME_APP_PIXMAP_NONE, NULL,
 	 0, (GdkModifierType) 0, NULL},
 	{
-	 GNOME_APP_UI_ITEM, N_("Hide/Show Shortcut Bar"),
+	 GNOME_APP_UI_ITEM, N_("Show/Hide Shortcut Bar"),
 	 NULL,
 	 gui_sidebar_showhide, NULL, NULL,
 	 GNOME_APP_PIXMAP_NONE, NULL,
