@@ -1,30 +1,23 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-
-  /*
-     * GnomeSword Bible Study Tool
-     * gs_commentary.c (commentary support)
-     * -------------------
-     * Fri Apr 12 11:48:29 2002
-     * copyright (C) 2002 by Terry Biggs
-     * tbiggs@users.sourceforge.net
-     *
-   */
-
- /*
-    *  This program is free software; you can redistribute it and/or modify
-    *  it under the terms of the GNU General Public License as published by
-    *  the Free Software Foundation; either version 2 of the License, or
-    *  (at your option) any later version.
-    *
-    *  This program is distributed in the hope that it will be useful,
-    *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    *  GNU Library General Public License for more details.
-    *
-    *  You should have received a copy of the GNU General Public License
-    *  along with this program; if not, write to the Free Software
-    *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-  */
+/*
+ * GnomeSword Bible Study Tool
+ * gs_commentary.c - support for commentary modules
+ *
+ * Copyright (C) 2000,2001,2002 GnomeSword Developer Team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
@@ -41,6 +34,7 @@
 #include "commentary.h"
 #include "shortcutbar.h"
 #include "gs_viewcomm_dlg.h"
+#include "cipher_key_dialog.h"
 
 extern SETTINGS *settings;
 extern gboolean isrunningVC;  
@@ -204,6 +198,14 @@ static void on_view_new_activate(GtkMenuItem * menuitem, SETTINGS * s)
 	gdk_window_set_cursor(s->app->window,cursor);
 
 }
+
+static void on_unlock_key_activate(GtkMenuItem * menuitem, COMM_DATA * c)
+{
+	GtkWidget *dlg;
+	
+	dlg = gui_create_unlock_key_dialog(c->modName);
+	gtk_widget_show(dlg);
+}
 static
 GtkWidget *create_pmCOMM(COMM_DATA * c)
 {
@@ -350,7 +352,31 @@ GtkWidget *create_pmCOMM(COMM_DATA * c)
 	view_commentary_menu_accels =
 	    gtk_menu_ensure_uline_accel_group(GTK_MENU
 					      (view_commentary_menu));
-
+	/*
+	   if module has cipher key include this item
+	 */
+	if(c->has_key) {
+		GtkWidget *add_module_key;
+		separator = gtk_menu_item_new();
+		gtk_widget_ref(separator);
+		gtk_object_set_data_full(GTK_OBJECT(pmCOMM), "separator",
+					 separator, (GtkDestroyNotify)
+					 gtk_widget_unref);
+		gtk_widget_show(separator);	
+		gtk_container_add(GTK_CONTAINER(pmCOMM), separator);
+		gtk_widget_set_sensitive(separator, FALSE);
+			
+		add_module_key = gtk_menu_item_new_with_label (_("Unlock This Module"));
+		gtk_widget_ref (add_module_key);
+		gtk_object_set_data_full (GTK_OBJECT (pmCOMM), "add_module_key",add_module_key ,
+				    (GtkDestroyNotify) gtk_widget_unref);
+		gtk_widget_show (add_module_key);
+		gtk_container_add (GTK_CONTAINER (pmCOMM), add_module_key);
+			
+		gtk_signal_connect (GTK_OBJECT (add_module_key), "activate",
+                      	GTK_SIGNAL_FUNC (on_unlock_key_activate),
+                      	c);
+	}
 	tmp = backend_get_mod_description_list_SWORD(DICT_MODS);
 	while (tmp != NULL) {
 		item4 =
@@ -697,7 +723,8 @@ void gui_setupCOMM(SETTINGS * s)
 		c->modnum = count;
 		c->searchstring = NULL;
 		c->key = NULL;
-		c->find_dialog = NULL;
+		c->find_dialog = NULL;		
+		c->has_key = backend_module_is_locked(c->modName);
 		createPaneCOMM(s, c, count);
 		popupmenu = create_pmCOMM(c);
 		gnome_popup_menu_attach(popupmenu, c->html, NULL);

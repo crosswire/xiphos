@@ -372,7 +372,6 @@ char GtkHTMLChapDisp::Display(SWModule & imodule)
 				gtk_html_write(GTK_HTML(html), htmlstream, utf8str, utf8len);
 			}	
 		} 
-		
 		if((s->displaySearchResults) && (key->Verse() == curVerse)){			
 			g_string_free(str,TRUE);
 			str = g_string_new((const char *) imodule);

@@ -143,7 +143,7 @@ void backend_load_module_viewtext(char * module_name)
 	it = mgr->Modules.find(module_name);	//-- find module we want to use
 	if (it != mgr->Modules.end()) {
 
-		mod = (*it).second;	//-- set curdictMod to new choice
+		mod = (*it).second;	//-- set mod to new choice
 		mod->SetKey("");
 		mod->Display();	//-- display new dict
 	}
