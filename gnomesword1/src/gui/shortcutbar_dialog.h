@@ -27,7 +27,6 @@ extern "C" {
 #endif
 
 void gui_attach_detach_shortcutbar(void);
-GtkWidget* gui_create_shortcutbar_dialog(void);
 
 #ifdef __cplusplus
 }

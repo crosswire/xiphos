@@ -1,6 +1,19 @@
+2002-07-23  Terry Biggs <tbiggs@users.sourceforge.net>
+
+	* added main/shortcutbar.c and main/shortcutbar.h
+	* moved shortcutbar functions from main/gs_gnomesword.c
+	  to main/shortcutbar.c
+
+
+
 2002-07-22  Terry Biggs <tbiggs@users.sourceforge.net>
 
 	* moved main/find_dlg_defs.h to gui/find_dlg_defs.h
+	* moved change_verse(gchar * key) from gs_gnomesword.c
+	  to gnome/main_window.c gui_change_verse(gchar * key).
+	* moved change_module_and_key(gchar * module_name, gchar * key) 
+	  from gs_gnomesword.c to gnome/main_window.c 
+	  gui_change_module_and_key(gchar * module_name, gchar * key).
 	
 
 2002-07-18  Terry Biggs <tbiggs@users.sourceforge.net>

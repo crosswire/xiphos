@@ -33,7 +33,9 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/bookmarks.h"
 #include "gui/html.h"
+#include "gui/main_window.h"
 
+#include "main/shortcutbar.h"
 #include "main/gs_gnomesword.h"
 #include "main/settings.h"
 #include "main/dictlex.h"
@@ -167,7 +169,7 @@ static void verse_list_link_clicked(GtkHTML *html, const gchar *url,
 	}
 	
 	if(settings.showinmain)
-		change_verse((gchar *) url);	
+		gui_change_verse((gchar *) url);	
 }
 
 /******************************************************************************
@@ -300,19 +302,19 @@ static void show_search_results_in_main(gboolean show, gchar *key)
 
 	if (show) {
 		if (GTK_TOGGLE_BUTTON(p_so->ckbCommentary)->active) {
-			change_module_and_key(p_so->module_name, key);
+			gui_change_module_and_key(p_so->module_name, key);
 		}
 
 		else if (GTK_TOGGLE_BUTTON(p_so->ckbPerCom)->active) {
-			change_module_and_key(p_so->module_name, key);
+			gui_change_module_and_key(p_so->module_name, key);
 		}
 
 		else if (GTK_TOGGLE_BUTTON(p_so->ckbGBS)->active) {
-			change_module_and_key(p_so->module_name, key);
+			gui_change_module_and_key(p_so->module_name, key);
 		}
 
 		else
-			change_verse(key);
+			gui_change_verse(key);
 	}
 }
 

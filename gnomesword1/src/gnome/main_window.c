@@ -38,6 +38,13 @@
 #include "gui/toolbar_nav.h"
 #include "gui/utilities.h"
 #include "gui/html.h"
+#include "gui/history.h"
+#include "gui/bibletext.h"
+#include "gui/interlinear.h"
+#include "gui/percomm.h"
+#include "gui/commentary.h"
+#include "gui/gbs.h"
+#include "gui/dictlex.h"
 
 static char *book_open_xpm[] = {
 	"16 16 4 1",
@@ -119,6 +126,146 @@ GdkPixmap *pixmap3;
 GdkBitmap *mask1;
 GdkBitmap *mask2;
 GdkBitmap *mask3;
+
+extern HISTORY historylist[];	/* sturcture for storing history items */
+extern gint historyitems;
+
+
+
+/******************************************************************************
+ * Name
+ *  gui_change_module_and_key
+ *
+ * Synopsis
+ *   #include "main_window.h"
+ *
+ *   void gui_change_module_and_key(gchar * module_name, gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_change_module_and_key(gchar * module_name, gchar * key)
+{
+	gint mod_type;
+	gint page_num;
+	gchar *val_key = NULL;
+
+	mod_type = get_mod_type(module_name);
+
+	switch (mod_type) {
+	case TEXT_TYPE:
+		if(settings.havebible) {
+			page_num =
+			    get_module_number(module_name, 
+							TEXT_MODS);
+			val_key = gui_update_nav_controls(key);
+			gui_set_text_page_and_key(page_num, val_key);
+			free(val_key);
+		}
+		break;
+	case COMMENTARY_TYPE:
+		if(settings.havecomm) {
+			page_num =
+			    get_module_number(module_name, 
+							COMM_MODS);
+			gui_set_commentary_page_and_key(page_num, key);
+		}
+		break;
+	case DICTIONARY_TYPE:
+		if(settings.havedict) {
+			page_num =
+			    get_module_number(module_name, 
+							DICT_MODS);
+			gui_set_dictionary_page_and_key(page_num, key);
+		}
+		break;
+	case BOOK_TYPE:
+		if(settings.havebook) {
+			page_num =
+			    get_module_number(module_name, 
+							BOOK_MODS);
+			if(key)
+				gui_set_book_page_and_key(page_num, key);
+			else {
+				gtk_notebook_set_page(GTK_NOTEBOOK(
+					settings.notebook_gbs),
+					page_num);
+			}
+		}
+		break;
+	}
+}
+
+
+/******************************************************************************
+ * Name
+ *  gui_change_verse
+ *
+ * Synopsis
+ *   #include "main_window.h"
+ *
+ *   void gui_change_verse(gchar * key)	
+ *
+ * Description
+ *    
+ *
+ * Return value
+ *   void
+ */ 
+
+void gui_change_verse(gchar * key)
+{
+	gchar *val_key;
+
+	val_key = gui_update_nav_controls(key);
+
+	settings.apply_change = FALSE;
+	
+	if(settings.havebible) {
+		/* add item to history */
+		if (settings.addhistoryitem) {
+			if (strcmp
+			    (settings.currentverse,
+			     historylist[historyitems - 1].verseref))
+				addHistoryItem(settings.app,
+					       GTK_WIDGET
+					       (settings.shortcut_bar),
+					       settings.currentverse);
+		}
+		settings.addhistoryitem = TRUE;
+
+		/* change main window */
+		gui_display_text(val_key);
+	}
+
+	/* 
+	 * change interlinear verses 
+	 */
+	if (settings.dockedInt) {
+		gui_update_interlinear_page();
+	}
+
+	/* 
+	 * change personal notes editor   if not in edit mode 
+	 */
+	if (settings.notefollow) {	                  
+		if (!settings.editnote)
+			if (settings.havepercomm)
+				gui_display_percomm(val_key);
+	}
+	/* 
+	 * set commentary module to current verse 
+	 */
+	if (settings.havecomm)
+		gui_display_commentary(val_key);
+	
+	free(val_key);
+	settings.apply_change = TRUE;
+}
 
 
 /******************************************************************************
@@ -297,8 +444,7 @@ static void workbook_upper_switch_page(GtkNotebook * notebook,
 			 GtkNotebookPage * page,
 			 gint page_num, gpointer user_data)
 {
-	static gboolean firsttime = TRUE;	
-	extern gboolean havepercomm;
+	static gboolean firsttime = TRUE;
 	
 	if (!firsttime) {
 		/*
@@ -309,7 +455,7 @@ static void workbook_upper_switch_page(GtkNotebook * notebook,
 	}
 	firsttime = FALSE;	
 	
-	if(havepercomm)
+	if(settings.havepercomm)
 		gtk_widget_hide(settings.toolbarComments);
 	gtk_widget_hide(settings.toolbarStudypad);
 

@@ -32,6 +32,8 @@
 #include "gui/shortcutbar_viewer.h"
 #include "gui/cipher_key_dialog.h"
 #include "gui/html.h"
+#include "gui/main_menu.h"
+#include "gui/main_window.h"
 
 #include "main/bibletext.h"
 #include "main/settings.h"
@@ -327,7 +329,7 @@ static void on_lookup_selection_activate(GtkMenuItem * menuitem,
 		if (settings.inViewer)
 			gui_display_dictlex_in_viewer(mod_name, dict_key);
 		if (settings.inDictpane)
-			change_module_and_key(mod_name, dict_key);
+			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
 	}
 }
@@ -358,7 +360,7 @@ static void on_same_lookup_selection_activate(GtkMenuItem * menuitem,
 			gui_display_dictlex_in_viewer(settings.DictWindowModule,
 						  dict_key);
 		if (settings.inDictpane)
-			change_module_and_key(settings.DictWindowModule,
+			gui_change_module_and_key(settings.DictWindowModule,
 					      dict_key);
 		g_free(dict_key);
 	}
@@ -794,7 +796,7 @@ static gboolean on_button_release_event(GtkWidget * widget,
 					gui_display_dictlex_in_viewer(dict,
 								  key);
 				if (settings.inDictpane)
-					change_module_and_key(dict,
+					gui_change_module_and_key(dict,
 							      key);
 				g_free(key);
 				if (dict)
