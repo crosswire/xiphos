@@ -62,7 +62,6 @@ module.source.files=\
 	callback.h\
 	char_table.c\
 	char_table.h\
-	display.cpp\
 	gs_file.c\
 	gs_gnomesword.c\
 	gs_history.c\
@@ -80,20 +79,15 @@ module.source.files=\
 	support.c\
 	main.c\
 	callback.c\
-	gs_search.cpp\
-	gs_search_cb.h\
-	gs_search_cb.cpp\
 	gs_abouts.c\
 	gs_abouts.h\
 	gs_file.h\
 	gs_popup_cb.c\
 	gs_popup_cb.h\
-	display.h\
 	gs_studypad.h\
 	gs_gnomesword.h\
 	gs_listeditor.h\
 	gs_menu.h\
-	gs_search.h\
 	gs_history.h\
 	printstuff.h\
 	sw_utility.cpp\
@@ -144,7 +138,11 @@ module.source.files=\
 	thmlhtmlhref.cpp\
 	thmlhtmlhref.h\
 	gbfhtmlhref.cpp\
-	gbfhtmlhref.h
+	gbfhtmlhref.h\
+	sw_display.cpp\
+	sw_display.h\
+	gs_unlockkey_dlg.c\
+	gs_unlockkey_dlg.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=

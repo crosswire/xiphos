@@ -255,14 +255,9 @@ initGnomeSword(GtkWidget *app, SETTINGS *settings,
 	}
 	
 	/* hide buttons - only show them if their options are enabled */
-	gtk_widget_hide(lookup_widget(app,"btnPrint"));
 	gtk_widget_hide(lookup_widget(app,"btnSpell"));
 	gtk_widget_hide(lookup_widget(app,"btnSpellNotes"));
-	
-	/* do not show print button if printing not enabled */
-#ifdef USE_GNOMEPRINT
         gtk_widget_show(lookup_widget(app,"btnPrint"));
-#endif /* USE_GNOMEPRINT */
 	
 	/* do not show spell buttons if spellcheck not enabled */
 #ifdef USE_SPELL

@@ -49,10 +49,6 @@ COMMON_SOURCE =  \
     gs_menu.h \
     gs_popup_cb.c \
     gs_popup_cb.h \
-    gs_search.cpp \
-    gs_search.h \
-    gs_search_cb.cpp \
-    gs_search_cb.h \
     support.c \
     support.h \
     gs_html.c \
@@ -114,7 +110,8 @@ COMMON_LDADD = \
     $(GNOMEUI_LIBS) \
     $(EXTRA_GNOME_LIBS) \
     $(SWORD_LIBS) \
-    $(GTKHTML_LIBS)
+    $(GTKHTML_LIBS)\
+    $(GNOME_APP_LIBS)
     
 PRINT_LDADD = \
     $(GNOME_PRINT_LIBS) \
@@ -144,44 +141,6 @@ gnomesword_LDADD =  \
     $(COMMON_LDADD) \
     $(PRINT_LDADD) \
     $(SHORTCUTBAR_LDADD)
-endif
-		
-if SPELLING_PRINTING
-gnomesword_SOURCES = \
-    $(SPELLING_SOURCE) \
-    $(PRINT_SOURCE) \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD)
-endif
-
-if SPELLING
-gnomesword_SOURCES = \
-    $(SPELLING_SOURCE) \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD)
-endif
-
-if PRINTING
-gnomesword_SOURCES = \
-    $(PRINT_SOURCE) \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD) \
-    $(PRINT_LDADD)	
-endif
-
-if NO_OPS
-gnomesword_SOURCES = \
-    $(COMMON_SOURCE)
-
-gnomesword_LDADD =  \
-    $(COMMON_LDADD)	
 endif
 
 CXXFLAGS =  \
