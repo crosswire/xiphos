@@ -33,8 +33,8 @@
 #include <versekey.h>
 #include <gbfplain.h>
 #include <plainhtml.h>
-#include <gbfhtml.h>
-//#include <rwphtml.h>
+//#include <gbfhtml.h>
+#include <rwphtml.h>
 //#include <thmlhtml.h>
 #include <regex.h>
 #include <stdio.h>
@@ -45,8 +45,8 @@
 #include <gal/e-paned/e-hpaned.h>
 #endif /* USE_SHORTCUTBAR */
 
-#include "gs_rwphtml.h"
-#include "gs_thmlhtml.h"
+#include "sw_gbfhtml.h"
+#include "sw_thmlhtml.h"
 #include "gs_gnomesword.h"
 #include "gs_history.h"
 #include "display.h"
@@ -187,9 +187,9 @@ initSWORD(GtkWidget *mainform)
 
   	
  	plaintohtml   	= new PLAINHTML(); //-- sword renderfilter plain to html
-  	thmltohtml	= new GS_ThMLHTML(); /* sword renderfilter thml to html */	
-        rwptohtml	= new GS_RWPHTML();
-        gbftohtml		= new GBFHTML();
+  	thmltohtml	= new SW_ThMLHTML(); /* sword renderfilter thml to html */	
+        rwptohtml	= new RWPHTML();
+        gbftohtml		= new SW_GBFHTML();
 
 	mainMgr         = new SWMgr();	//-- create sword mgrs
 	mainMgr1        = new SWMgr();
@@ -1360,3 +1360,21 @@ void navVCModSWORD(gint direction)  //-- navigate the current commentary module
         VCMod->Display();
 }
 
+
+GList *getBibleBooks(void)
+{	
+  	VerseKey DefaultVSKey;
+	GList *list = NULL;
+	GString *s1;
+		/*** load Bible books ***/
+	DefaultVSKey = TOP;	
+	while (!DefaultVSKey.Error()) {
+		s1 = g_string_new((const char *)DefaultVSKey);
+		s1 = g_string_truncate(s1, (s1->len - 4));
+		list = g_list_append(list, s1->str);
+		//g_warning(s1->str);
+		DefaultVSKey.Book(DefaultVSKey.Book() + 1);
+		g_string_free(s1,FALSE);
+	}
+	return list;	
+}
