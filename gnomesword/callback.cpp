@@ -715,7 +715,7 @@ on_btnSaveFile_clicked                 (GtkButton       *button,
 	{	
 		savemyFile = create_fileselectionSave();
 		gtk_file_selection_set_filename( GTK_FILE_SELECTION(savemyFile),
-                                             "/home/tb/BibleStudy");
+                                             "/home/tb/BibleStudy/*.pad");
   	ok_button2 = lookup_widget(savemyFile,"ok_button2");
   	gtk_signal_connect (GTK_OBJECT (ok_button2), "clicked",
                       GTK_SIGNAL_FUNC (on_ok_button2_clicked),
@@ -734,7 +734,7 @@ on_btnSaveFileAs_clicked               (GtkButton       *button,
 
 	savemyFile = create_fileselectionSave();
 	gtk_file_selection_set_filename( GTK_FILE_SELECTION(savemyFile),
-                                            "/home/tb/BibleStudy/" );
+                                            "/home/tb/BibleStudy/*.pad" );
 	ok_button2 = lookup_widget(savemyFile,"ok_button2");
 	gtk_signal_connect (GTK_OBJECT (ok_button2), "clicked",
                       GTK_SIGNAL_FUNC (on_ok_button2_clicked),
@@ -1908,7 +1908,7 @@ on_btnLEright_clicked                  (GtkButton       *button,
 
 //----------------------------------------------------------------------------------------------
 void
-on_btnGotoVerse_clicked                (GtkButton       *button,
+on_btnLEgotoverse_clicked                (GtkButton       *button,
                                         gpointer         user_data)
 {
 	GtkWidget	*entry;
@@ -2223,6 +2223,9 @@ void
 on_btnSPnew_clicked                    (GtkButton       *button,
                                         gpointer         user_data)
 {
+   GtkWidget *text;
 
+   text = lookup_widget(GTK_WIDGET(button),"text3");
+   newSP(text);  //-- send text widget to GnomeSword.cpp to start new file
 }
 

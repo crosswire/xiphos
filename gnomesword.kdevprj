@@ -1,11 +1,16 @@
 # KDE Config File
 [Workspace_1]
-openfiles=Untitled.h,Untitled.cpp,/home/tb/Projects2/gnomesword/gnomesword/main.cpp,/home/tb/Projects2/gnomesword/gnomesword/GnomeSword.cpp,/home/tb/Projects2/gnomesword/gnomesword/callback.cpp,/home/tb/Projects2/gnomesword/gnomesword/display.cpp,/home/tb/Projects2/gnomesword/gnomesword/filestuff.cpp,/home/tb/Projects2/gnomesword/gnomesword/menustuff.cpp,/home/tb/Projects2/gnomesword/gnomesword/spellcheck.cpp,/home/tb/Projects2/gnomesword/gnomesword/DICTClient.cpp,/home/tb/Projects2/gnomesword/gnomesword/printstuff.cpp,/home/tb/Projects2/gnomesword/gnomesword/listeditor.cpp,/home/tb/Projects2/gnomesword/gnomesword/interface.c,/home/tb/Projects2/gnomesword/gnomesword/support.c,
+openfiles=Untitled.h,Untitled.cpp,/home/tb/projects/gnomesword/gnomesword/main.cpp,/home/tb/projects/gnomesword/gnomesword/printstuff.c,
 show_outputview=true
 show_treeview=true
 header_file=Untitled.h
-cpp_file=/home/tb/Projects2/gnomesword/gnomesword/support.c
+cpp_file=/home/tb/projects/gnomesword/gnomesword/printstuff.c
 browser_file=file:/usr/doc/kde/HTML/default/kdevelop/reference/C/FUNCTIONS/open.html
+[gnomesword/printstuff.c]
+install_location=
+dist=true
+install=false
+type=SOURCE
 [gnomesword/interface.c]
 install_location=
 dist=true
@@ -50,11 +55,6 @@ install_location=
 dist=true
 install=false
 type=HEADER
-[gnomesword/printstuff.cpp]
-install_location=
-dist=true
-install=false
-type=SOURCE
 [gnomesword/DICTClient.h]
 install_location=
 dist=true
@@ -167,7 +167,7 @@ type=DATA
 sub_dirs=
 type=normal
 [gnomesword/Makefile.am]
-files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,gnomesword/printstuff.h,gnomesword/printstuff.cpp,gnomesword/listeditor.h,gnomesword/listeditor.cpp,gnomesword/interface.c,gnomesword/support.c,
+files=gnomesword/GnomeSword.cpp,gnomesword/GnomeSword.h,gnomesword/callback.cpp,gnomesword/callback.h,gnomesword/display.cpp,gnomesword/display.h,gnomesword/filestuff.cpp,gnomesword/filestuff.h,gnomesword/interface.h,gnomesword/main.cpp,gnomesword/menustuff.cpp,gnomesword/menustuff.h,gnomesword/support.h,gnomesword/spellcheck.h,gnomesword/spellcheck.cpp,gnomesword/DICTClient.cpp,gnomesword/DICTClient.h,gnomesword/printstuff.h,gnomesword/listeditor.h,gnomesword/listeditor.cpp,gnomesword/interface.c,gnomesword/support.c,gnomesword/printstuff.c,
 sub_dirs=
 type=prog_main
 [gnomesword.lsm]
