@@ -1,6 +1,6 @@
 
 [Desktop Entry]
-Name=@GNAME@
+Name=GnomeSword Bible Study Tool
 Comment=Bible Study Tool for the Gnome Desktop
 Exec=@gnomesword_exec@
 Icon=@PACKAGE_PIXMAPS_DIR@/GnomeSword.png

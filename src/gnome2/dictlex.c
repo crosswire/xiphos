@@ -62,7 +62,8 @@ static void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 					    GList * dl_list);
 static GList *dl_list;
 static DL_DATA *cur_d;
-
+static gint number_of_dictionaries;
+static gint cell_height;
 
 
 
@@ -94,12 +95,13 @@ void gui_lookup_dictlex_selection(GtkMenuItem * menuitem,
 	if (dict_key) {
 		if (settings.inViewer)
 			gui_display_dictlex_in_sidebar(mod_name,
-						      dict_key);
+						       dict_key);
 		if (settings.inDictpane)
 			gui_change_module_and_key(mod_name, dict_key);
 		g_free(dict_key);
 	}
-	if(mod_name) g_free(mod_name);
+	if (mod_name)
+		g_free(mod_name);
 }
 
 /******************************************************************************
@@ -188,10 +190,11 @@ static void set_page_dictlex(gchar * modname, GList * dl_list)
 						NULL, page, dl_list);
 	gtk_notebook_set_page(GTK_NOTEBOOK(widgets.notebook_dict),
 			      page);
-	g_print("dictkey = %s\n",settings.dictkey);
+	g_print("dictkey = %s\n", settings.dictkey);
 
 	if (d)
-		gtk_entry_set_text(GTK_ENTRY(d->entry), settings.dictkey);
+		gtk_entry_set_text(GTK_ENTRY(d->entry),
+				   settings.dictkey);
 
 	settings.dict_last_page = page;
 }
@@ -254,6 +257,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	if (!d->frame)
 		gui_add_new_dict_pane(d);
 
+
 	//-- change tab label to current book name
 	cur_d = d;
 	gui_change_window_title(d->mod_name);
@@ -264,7 +268,7 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	/*
 	 * set search frame label to current dict/lex module 
 	 */
-//	gui_set_search_label();
+//      gui_set_search_label();
 
 	gui_set_dict_frame_label();
 
@@ -274,6 +278,40 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 	GTK_CHECK_MENU_ITEM(d->showtabs)->active = settings.dict_tabs;
 	settings.dict_last_page = page_num;
 	widgets.html_dict = d->html;
+}
+/******************************************************************************
+ * Name
+ *   list_selection_changed
+ *
+ * Synopsis
+ *   #include "gui/dictlex.h"
+ *
+ *   void list_selection_changed(GtkTreeSelection * selection,
+ *		      GtkWidget * tree_widget)
+ *
+ * Description
+ *   
+ *
+ * Return value
+ *   void
+ */
+
+static void list_selection_changed(GtkTreeSelection * selection,
+				   DL_DATA * d)
+{
+	GtkTreeIter selected;
+	gchar *buf = NULL;
+	GtkTreeModel *model ;
+	
+
+	if (!gtk_tree_selection_get_selected(selection, &model, &selected))
+		return;
+
+	gtk_tree_model_get(model, &selected, 0, &buf, -1);
+	if (buf) {
+		gtk_entry_set_text(GTK_ENTRY(d->entry), buf);
+		g_free(buf);
+	}
 }
 
 /******************************************************************************
@@ -295,31 +333,38 @@ void on_notebook_dictlex_switch_page(GtkNotebook * notebook,
 
 void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 {
-	gint count, i;
+	gint count = 7, i;
 	const gchar *key;
 	gchar *new_key, *text = NULL;
 	static gboolean firsttime = TRUE;
-
+	GtkTreeModel *model;
+	GtkListStore *list_store;
+	GtkTreeIter iter;
+	gint height;
+	
 	key = gtk_entry_get_text(GTK_ENTRY(d->entry));
 	d->key = g_strdup(key);
 	settings.dictkey = d->key;
 	xml_set_value("GnomeSword", "key", "dictionary", d->key);
-	
+
 	text = get_dictlex_text(d->mod_name, d->key);
-	if(text) {
+	if (text) {
 		entry_display(d->html, d->mod_name, text, d->key, TRUE);
 		free(text);
 	}
-
-	if (firsttime)
-		count = 7;
-	else
-		count =
-		    GTK_CLIST(d->clist)->clist_window_height /
-		    GTK_CLIST(d->clist)->row_height;
+	
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(d->listview));
+	list_store = GTK_LIST_STORE(model);
+	
+	if (!firsttime) {
+		gdk_drawable_get_size ((GdkDrawable *)d->listview->window,
+                                             NULL,
+                                             &height);
+		count = height / cell_height;
+	}	 
 
 	if (count) {
-		gtk_clist_clear(GTK_CLIST(d->clist));
+		gtk_list_store_clear(list_store);
 		new_key = get_dictlex_key(2, d->mod_name, -1);
 
 		for (i = 0; i < (count / 2); i++) {
@@ -330,51 +375,22 @@ void on_entryDictLookup_changed(GtkEditable * editable, DL_DATA * d)
 		for (i = 0; i < count; i++) {
 			free(new_key);
 			new_key = get_dictlex_key(2, d->mod_name, 1);
-			gtk_clist_append(GTK_CLIST(d->clist), &new_key);
+			gtk_list_store_append(list_store, &iter);
+			gtk_list_store_set(list_store, &iter, 0,
+					   new_key, -1);
 		}
 		free(new_key);
 	}
-
 	firsttime = FALSE;
 }
 
-/******************************************************************************
- * Name
- *   on_clistDictLex_select_row
- *
- * Synopsis
- *   #include "_dictlex.h"
- *
- *   void on_clistDictLex_select_row(GtkCList * clist, gint row,
- *			   gint column, GdkEvent * event, DL_DATA * d)
- *
- * Description
- *    display selected key
- *
- * Return value
- *   void
- */
-
-void on_clistDictLex_select_row(GtkCList * clist, gint row,
-				gint column, GdkEvent * event,
-				DL_DATA * d)
-{
-	gchar *text = NULL;
-	gchar *get_text = NULL;
-
-	gtk_clist_get_text(GTK_CLIST(GTK_WIDGET(clist)), row, column,
-			   &get_text);
-	text = g_strdup(get_text);
-	gtk_entry_set_text(GTK_ENTRY(d->entry), text);
-	g_free(text);
-}
 
 /******************************************************************************
  * Name
  *  on_btnSyncDL_clicked
  *
  * Synopsis
- *   #include "_dictlex.h"
+ *   #include "gui/dictlex.h"
  *
  *   void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)	
  *
@@ -395,7 +411,7 @@ void on_btnSyncDL_clicked(GtkButton * button, DL_DATA * d)
  *  html_button_pressed
  *
  * Synopsis
- *   #include "_dictlex.h"
+ *   #include "gui/dictlex.h"
  *
  *   gint html_button_pressed(GtkWidget * html, GdkEventButton * event,
  *					GSHTMLEditorControlData * d)	
@@ -412,11 +428,11 @@ static gint html_button_pressed(GtkWidget * html,
 {
 	settings.whichwindow = DICTIONARY_WINDOW;
 
-	gui_change_window_title(dl->mod_name); 
+	gui_change_window_title(dl->mod_name);
 
 	switch (event->button) {
 	case 1:
-		
+
 		break;
 	case 2:
 		/* 
@@ -436,15 +452,76 @@ static gint html_button_pressed(GtkWidget * html,
 
 /******************************************************************************
  * Name
+ *  list_button_released
+ *
+ * Synopsis
+ *   #include "gui/dictlex.h"
+ *
+ *   gint list_button_released(GtkWidget * html, GdkEventButton * event,
+ *					GSHTMLEditorControlData * d)	
+ *
+ * Description
+ *    mouse button released in key list
+ *
+ * Return value
+ *   gint
+ */
+
+static gint list_button_released(GtkWidget * html,
+				GdkEventButton * event, DL_DATA * d)
+{
+	switch (event->button) {
+	case 1:
+		list_selection_changed((GtkTreeSelection*)d->mod_selection, d);
+	 	
+		break;
+	case 2:
+	case 3:
+	default:
+		break;
+	}
+	
+	return FALSE;
+}
+
+
+static void add_columns(GtkTreeView * treeview)
+{
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+
+	/* column for fixed toggles */
+	renderer = gtk_cell_renderer_text_new();
+
+	column = gtk_tree_view_column_new_with_attributes("Keys",
+							  renderer,
+							  "text", 0,
+							  NULL);
+	gtk_tree_view_column_set_sort_column_id(column, 0);
+
+	gtk_tree_view_append_column(treeview, column);
+	/* get cell (row) height */
+	gtk_cell_renderer_get_size(renderer,
+                                   GTK_WIDGET(treeview),
+                                    NULL,
+                                    NULL,
+                                    NULL,
+                                    NULL,
+                                    &cell_height);
+}
+
+/******************************************************************************
+ * Name
  *  gui_create_dictlex_pane
  *
  * Synopsis
- *   #include "_dictlex.h"
+ *   #include "dictlex.h"
  *
  *   GtkWidget *gui_create_dictlex_pane(DL_DATA *dl, gint count)	
  *
  * Description
- *    create a pane for displaying a dictionary of lexicom
+ *    create a pane for displaying a dictionary or lexicom
  *
  * Return value
  *   void
@@ -461,7 +538,8 @@ static void create_dictlex_pane(DL_DATA * dl)
 	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
-
+	GtkListStore *model;
+	
 	dl->frame = gtk_frame_new(NULL);
 	gtk_widget_show(dl->frame);
 	gtk_container_add(GTK_CONTAINER(dl->vbox), dl->frame);
@@ -475,32 +553,26 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_widget_show(vbox56);
 	gtk_paned_pack1(GTK_PANED(hpaned7), vbox56, TRUE, TRUE);
 
-	toolbarDLKey =
-	    gtk_toolbar_new();
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbarDLKey), GTK_TOOLBAR_ICONS);
+	toolbarDLKey = gtk_toolbar_new();
+	gtk_toolbar_set_style(GTK_TOOLBAR(toolbarDLKey),
+			      GTK_TOOLBAR_ICONS);
 	gtk_widget_show(toolbarDLKey);
 	gtk_box_pack_start(GTK_BOX(vbox56), toolbarDLKey, FALSE, TRUE,
 			   0);
-/*	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbarDLKey),
-				      GTK_RELIEF_NONE);*/
 
-	/*tmp_toolbar_icon =
-	    gnome_stock_pixmap_widget(widgets.app,
-				      GTK_STOCK_REFRESH);*/
-	tmp_toolbar_icon = gtk_image_new_from_stock (
-			"gtk-refresh", 
-			gtk_toolbar_get_icon_size (GTK_TOOLBAR (toolbarDLKey)));
-	
+	tmp_toolbar_icon = gtk_image_new_from_stock("gtk-refresh",
+						    gtk_toolbar_get_icon_size
+						    (GTK_TOOLBAR
+						     (toolbarDLKey)));
+
 	btnSyncDL =
 	    gtk_toolbar_append_element(GTK_TOOLBAR(toolbarDLKey),
-				       GTK_TOOLBAR_CHILD_BUTTON, 
+				       GTK_TOOLBAR_CHILD_BUTTON,
 				       NULL,
-				       _("Sync"), 
+				       _("Sync"),
 				       _("Load current key"),
-				       NULL, 
-				       tmp_toolbar_icon, 
 				       NULL,
-				       NULL);
+				       tmp_toolbar_icon, NULL, NULL);
 	gtk_widget_show(btnSyncDL);
 
 
@@ -511,16 +583,25 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarDLKey), dl->entry,
 				  NULL, NULL);
 
-	dl->clist = gtk_clist_new(1);
-	gtk_widget_show(dl->clist);
-	gtk_box_pack_start(GTK_BOX(vbox56), dl->clist, TRUE, TRUE, 0);
-	gtk_clist_set_column_width(GTK_CLIST(dl->clist), 0, 80);
-	gtk_clist_column_titles_hide(GTK_CLIST(dl->clist));
+	/* create tree model */
+	model = gtk_list_store_new(1, G_TYPE_STRING);
 
-	label205 = gtk_label_new("");
-	gtk_widget_show(label205);
-	gtk_clist_set_column_widget(GTK_CLIST(dl->clist), 0, label205);
-
+	/* create tree view */
+	dl->listview =
+	    gtk_tree_view_new_with_model(GTK_TREE_MODEL(model));
+	gtk_widget_show(dl->listview);
+	gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(dl->listview), TRUE);
+	gtk_box_pack_start(GTK_BOX(vbox56), dl->listview, TRUE, TRUE,
+			   0);
+	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(dl->listview),
+					  FALSE);
+	add_columns(GTK_TREE_VIEW(dl->listview));
+	/* gtk_tree_view_set_search_column (GTK_TREE_VIEW (dl->listview),
+	   COLUMN_DESCRIPTION); */
+	dl->mod_selection = G_OBJECT(gtk_tree_view_get_selection
+		     (GTK_TREE_VIEW(dl->listview)));
+		     
+		     
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_show(frameDictHTML);
 	gtk_paned_pack2(GTK_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
@@ -546,8 +627,7 @@ static void create_dictlex_pane(DL_DATA * dl)
 			   "url_requested",
 			   G_CALLBACK(url_requested), NULL);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
-			   G_CALLBACK(gui_url),
-			   (gpointer) widgets.app);
+			   G_CALLBACK(gui_url), (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   G_CALLBACK(gui_link_clicked), NULL);
 
@@ -555,11 +635,10 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   G_CALLBACK(on_btnSyncDL_clicked), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
-			   G_CALLBACK(on_entryDictLookup_changed),
-			   dl);
-	gtk_signal_connect(GTK_OBJECT(dl->clist), "select_row",
-			   G_CALLBACK(on_clistDictLex_select_row),
-			   dl);
+			   G_CALLBACK(on_entryDictLookup_changed), dl);
+	g_signal_connect(G_OBJECT(dl->listview),
+			   "button_release_event",
+			   G_CALLBACK(list_button_released), dl);
 }
 
 /******************************************************************************
@@ -645,12 +724,12 @@ static void add_vbox_to_notebook(DL_DATA * dl)
  *  void
  */
 
-void gui_setup_dictlex(GList * mods)
+gint gui_setup_dictlex(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modname;
 	gchar *modbuf;
-//	gchar *keybuf;
+//      gchar *keybuf;
 	DL_DATA *dl;
 	gint count = 0;
 
@@ -663,7 +742,7 @@ void gui_setup_dictlex(GList * mods)
 		dl = g_new0(DL_DATA, 1);
 		dl->frame = NULL;
 		dl->mod_num = count;
-		dl->mod_name = modname; //g_strdup(modname);
+		dl->mod_name = modname;	//g_strdup(modname);
 		dl->search_string = NULL;
 		dl->key = NULL;
 		dl->cipher_key = NULL;
@@ -701,6 +780,8 @@ void gui_setup_dictlex(GList * mods)
 	//g_free(keybuf);
 	g_list_free(tmp);
 	//settings.dict_last_page = 0;
+	number_of_dictionaries = count;
+	return count;
 }
 
 /******************************************************************************
@@ -724,7 +805,8 @@ void gui_shutdown_dictlex(void)
 	dl_list = g_list_first(dl_list);
 	while (dl_list != NULL) {
 		DL_DATA *d = (DL_DATA *) dl_list->data;
-		if(d->key) g_free(d->key);
+		if (d->key)
+			g_free(d->key);
 		//if(d->mod_name) g_free(d->mod_name);
 		g_free(d);
 		dl_list = g_list_next(dl_list);

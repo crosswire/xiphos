@@ -436,12 +436,14 @@ static gint html_button_pressed(GtkWidget * html,
 	return FALSE;
 }
 
+
+
 /******************************************************************************
  * Name
  *  gui_create_dictlex_pane
  *
  * Synopsis
- *   #include "_dictlex.h"
+ *   #include "dictlex.h"
  *
  *   GtkWidget *gui_create_dictlex_pane(DL_DATA *dl, gint count)	
  *
@@ -463,7 +465,8 @@ static void create_dictlex_pane(DL_DATA * dl)
 	GtkWidget *label205;
 	GtkWidget *frameDictHTML;
 	GtkWidget *scrolledwindowDictHTML;
-
+	
+	
 	dl->frame = gtk_frame_new(NULL);
 	gtk_widget_show(dl->frame);
 	gtk_container_add(GTK_CONTAINER(dl->vbox), dl->frame);
@@ -505,6 +508,8 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_toolbar_append_widget(GTK_TOOLBAR(toolbarDLKey), dl->entry,
 				  NULL, NULL);
 
+
+
 	dl->clist = gtk_clist_new(1);
 	gtk_widget_show(dl->clist);
 	gtk_box_pack_start(GTK_BOX(vbox56), dl->clist, TRUE, TRUE, 0);
@@ -515,52 +520,13 @@ static void create_dictlex_pane(DL_DATA * dl)
 	gtk_widget_show(label205);
 	gtk_clist_set_column_widget(GTK_CLIST(dl->clist), 0, label205);
 
+
+
 	frameDictHTML = gtk_frame_new(NULL);
 	gtk_widget_show(frameDictHTML);
 	e_paned_pack2(E_PANED(hpaned7), frameDictHTML, TRUE, TRUE);
 
-/*
-#ifdef USE_GTKEMBEDMOZ
-	if (!dl->is_rtol) {
-		scrolledwindowDictHTML =
-		    gtk_scrolled_window_new(NULL, NULL);
-		gtk_widget_show(scrolledwindowDictHTML);
-		gtk_container_add(GTK_CONTAINER(frameDictHTML),
-				  scrolledwindowDictHTML);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
-					       (scrolledwindowDictHTML),
-					       GTK_POLICY_AUTOMATIC,
-					       GTK_POLICY_AUTOMATIC);
-		dl->html = gtk_html_new();
-		gtk_widget_show(dl->html);
-		gtk_container_add(GTK_CONTAINER(scrolledwindowDictHTML),
-				  dl->html);
-		gtk_html_load_empty(GTK_HTML(dl->html));
 
-		gtk_signal_connect(GTK_OBJECT(dl->html),
-				   "button_press_event",
-				   GTK_SIGNAL_FUNC(html_button_pressed),
-				   dl);
-		gtk_signal_connect(GTK_OBJECT(dl->html),
-				   "url_requested",
-				   GTK_SIGNAL_FUNC(url_requested),
-				   NULL);
-		gtk_signal_connect(GTK_OBJECT(dl->html), "on_url",
-				   GTK_SIGNAL_FUNC(gui_url),
-				   (gpointer) widgets.app);
-		gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
-				   GTK_SIGNAL_FUNC(gui_link_clicked),
-				   NULL);
-	} else {
-		gtk_moz_embed_set_comp_path("usr/lib/mozilla-1.0.1");
-		dl->html = gtk_moz_embed_new();
-		gtk_widget_show(dl->html);
-		gtk_container_add(GTK_CONTAINER(frameDictHTML),
-				  dl->html);
-		gtk_widget_realize(dl->html);
-	}
-*/
-//#else
 	scrolledwindowDictHTML = gtk_scrolled_window_new(NULL, NULL);
 	gtk_widget_show(scrolledwindowDictHTML);
 	gtk_container_add(GTK_CONTAINER(frameDictHTML),
@@ -586,13 +552,13 @@ static void create_dictlex_pane(DL_DATA * dl)
 			   (gpointer) widgets.app);
 	gtk_signal_connect(GTK_OBJECT(dl->html), "link_clicked",
 			   GTK_SIGNAL_FUNC(gui_link_clicked), NULL);
-//#endif
 
 	gtk_signal_connect(GTK_OBJECT(btnSyncDL), "clicked",
 			   GTK_SIGNAL_FUNC(on_btnSyncDL_clicked), dl);
 	gtk_signal_connect(GTK_OBJECT(dl->entry), "changed",
 			   GTK_SIGNAL_FUNC(on_entryDictLookup_changed),
 			   dl);
+	
 	gtk_signal_connect(GTK_OBJECT(dl->clist), "select_row",
 			   GTK_SIGNAL_FUNC(on_clistDictLex_select_row),
 			   dl);
@@ -681,7 +647,7 @@ static void add_vbox_to_notebook(DL_DATA * dl)
  *  void
  */
 
-void gui_setup_dictlex(GList * mods)
+gint gui_setup_dictlex(GList * mods)
 {
 	GList *tmp = NULL;
 	gchar *modname;
