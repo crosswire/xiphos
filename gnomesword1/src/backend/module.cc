@@ -746,7 +746,7 @@ int backend_module_is_locked(char *mod_name)
 	    getConfigEntry("CipherKey");
 	if (tmpbuf != NULL) {
 		if (strlen(tmpbuf)) {
-			/* the key is the right length so we assume it is right */
+			
 			return false;
 		} else
 			return true;
