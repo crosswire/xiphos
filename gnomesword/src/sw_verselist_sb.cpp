@@ -40,7 +40,40 @@ static SWMgr
 	*verselistsbMgr; 
 static SWModule 
 	*verselistsbMod;   /* module for verselist dialog */
-
+/*
+ * 
+ * 
+ */
+gboolean
+displaydictlexSBSWORD(gchar *modName, gchar *key, SETTINGS *s)
+{
+	//gboolean retval = FALSE;
+	gchar 
+		buf[256], 
+		*utf8str,
+		tmpbuf[256];	
+	
+	beginHTML(s->vlsbhtml, TRUE);
+	sprintf(buf,"<html><body bgcolor=\"%s\" text=\"%s\" link=\"%s\"><font color=\"%s\"><b>[%s]</b><br></font>",
+			s->bible_bg_color, 
+			s->bible_text_color,
+			s->link_color,
+			s->bible_verse_num_color,
+			modName);
+	utf8str = e_utf8_from_gtk_string(s->vlsbhtml, buf);
+	displayHTML(s->vlsbhtml, utf8str, strlen(utf8str));	
+	
+	//showSBVerseList(s);
+	ModMap::iterator it; 	
+	it = verselistsbMgr->Modules.find(modName); //-- iterate through the modules until we find modName - modName was passed by the callback
+	if (it != verselistsbMgr->Modules.end()){ //-- if we find the module	
+		verselistsbMod = (*it).second;  //-- change module to new module
+		//g_warning("in verselist key = %s",key);
+		verselistsbMod->SetKey(key); //-- set key to the first one in the list
+		verselistsbMod->Display(); 
+	}
+	return TRUE;	
+}
 
 /*
  * parse vlist for verses and

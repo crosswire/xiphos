@@ -187,7 +187,7 @@ static void get_preferences_from_dlg(GtkWidget * d, SETTINGS * s)
 	we need to read all propertybox options here
 	*************************************************************/
 	gchar *buf, *font;
-	gchar *token, *text;
+//	gchar *token, *text;
 	gdouble color[4];
 
 	/*** read modules ***/
