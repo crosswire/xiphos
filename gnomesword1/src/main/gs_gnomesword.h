@@ -68,6 +68,12 @@ struct _settings {
 		*notebookCOMM,  /* notebook - dict/lex */
 		*notebook_text,  /* notebook - dict/lex */
 		*verse_list_notebook,  
+	
+	/* nav control widgets */
+		*cbeBook,
+		*spbChapter,
+		*spbVerse,
+		*cbeFreeformLookup,
     
 	/* dock/undock stuff */
 		*dockSB, /* dock for shortcut bar */
@@ -174,7 +180,6 @@ struct _settings {
 		searchbargroup,      //-- number of search group in shortcut bar
 		searchType,
 		whichwindow,      	/* which of the main form html windows is active */
-						/* 0=text, 1= comm, 2=dict */
 		intCurVerse,    /* detached interlinear current verse */
 		gbsLastPage,    /* last notebook page before change */
 		dlLastPage,     /* last notebook page before change */
@@ -277,7 +282,7 @@ void addQuickmark(GtkWidget *app);
 void showIntPage(GtkWidget *app, 
 		gboolean choice);
 void setautosave(gboolean choice);
-void percent_update(char percent, void *userData) ;
+void percent_update(char percent, void *userData);
 void set_appbar_progress(gint unit);
 void fillSBtoolbars(GtkWidget *app,
 		GList *biblelist,
@@ -293,9 +298,9 @@ void search_module(SETTINGS *s, SEARCH_OPT *so);
 gchar *get_module_key(SETTINGS *s);
 gchar *get_module_name(SETTINGS *s);
 void change_module_and_key(gchar *module_name, gchar *key);
-void set_module_global_options(gchar * option, gint window, 
-		gboolean choice, gboolean showchange);
 void change_verse(gchar *key);
+void set_verse_style(gboolean choice);
+
 #ifdef __cplusplus
 }
 #endif

@@ -438,4 +438,49 @@ void swap_interlinear_with_main(char * intmod, SETTINGS *s)
 	change_module_and_key(intmod, s->currentverse);
 	update_interlinear_page(s);
 }
+void set_interlinear_module_global_options(gchar * option,
+			       gboolean choice,
+				SETTINGS *s)
+{
+	gchar *on_off;
+
+	if (choice) {
+		on_off = "On";
+	} else {
+		on_off = "Off";
+	}	
+
+	if (!strcmp(option, "Strong's Numbers")) {
+		s->strongsint = choice;
+	}
+
+	if (!strcmp(option, "Footnotes")) {
+		s->footnotesint = choice;
+	}
+
+	if (!strcmp(option, "Morphological Tags")) {
+		s->morphsint = choice;
+	}
+
+	if (!strcmp(option, "Hebrew Vowel Points")) {
+		s->hebrewpointsint = choice;
+	}
+
+	if (!strcmp(option, "Hebrew Cantillation")) {
+		s->cantillationmarksint = choice;
+	}
+
+	if (!strcmp(option, "Greek Accents")) {
+		s->greekaccentsint = choice;
+	}
+	
+	backend_set_interlinear_global_option(option, on_off);
+	/* 
+	   display change 
+	 */
+	if (s->dockedInt)	
+		update_interlinear_page(s);
+	else
+		update_interlinear_page_detached(s);
+}
 /*****   end of file   ******/

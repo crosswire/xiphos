@@ -38,6 +38,7 @@
 
 #include "gs_mainmenu_cb.h"
 #include "gs_gnomesword.h"
+#include "gs_bibletext.h"
 #include "gs_menu.h"
 #include "sword.h"
 #include "gs_viewdict_dlg.h"
@@ -127,7 +128,7 @@ on_daily_devotion1_activate            (GtkMenuItem     *menuitem,
 /*** toogle global options in main text window ***/
 void on_global_options_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	set_module_global_options((gchar *)user_data, MAIN_TEXT_WINDOW, GTK_CHECK_MENU_ITEM(menuitem)->active,TRUE);	
+	set_text_module_global_options((gchar *)user_data, GTK_CHECK_MENU_ITEM(menuitem)->active);	
 }
 
 
@@ -167,7 +168,7 @@ on_auto_save_notes1_activate(GtkMenuItem * menuitem, gpointer user_data)
 /*** toogle between verse and paragraph style ***/
 void on_verse_style1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
-	backend_set_verse_style(GTK_CHECK_MENU_ITEM(menuitem)->active); 
+	set_verse_style(GTK_CHECK_MENU_ITEM(menuitem)->active); 
 }
 
 

@@ -269,8 +269,6 @@ addsubtreeitem(GtkWidget * MainFrm, gchar * menulabel,
  ******************************************************************************/
 void createpopupmenus(SETTINGS *s,
 		GList *bibleDescription,
-		GList *comDescription,
-		GList *dictDescription,
 		GList *options) 
 {
 	/* create popup menu for Bible window */
@@ -300,8 +298,7 @@ void addmodstomenus(SETTINGS *s,
 		GList *biblelist, 
 		GList *commentarylist, 
 		GList *dictionarylist, 
-		GList *booklist, 
-		GList *percomlist) 
+		GList *booklist) 
 {
 	gchar	
 		aboutrememberlastitem[80], //--  use to store last menu item so we can add the next item under it - gnome menus

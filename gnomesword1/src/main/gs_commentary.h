@@ -56,7 +56,7 @@ extern "C" {
 	};
 	void gui_set_commentary_page_and_key(gint page_num,
 					     gchar * key);
-	void gui_setupCOMM(SETTINGS * s);
+	GList* gui_setup_comm(SETTINGS * s);
 	void gui_shutdownCOMM(void);
 	void gui_displayCOMM(gchar * key);
 
