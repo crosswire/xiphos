@@ -234,39 +234,6 @@ void on_mainText_activate(GtkMenuItem * menuitem, gpointer user_data)
 }
 
 //----------------------------------------------------------------------------------------------
-void
-on_1st_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp1ModSWORD(modName);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_2nd_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp2ModSWORD(modName);
-}
-
-//----------------------------------------------------------------------------------------------
-void
-on_3rd_interlinear_window1_activate(GtkMenuItem * menuitem,
-				    gpointer user_data)
-{
-	gchar *modName;
-
-	modName = (gchar *) user_data;
-	changecomp3ModSWORD(modName);
-}
-
-//----------------------------------------------------------------------------------------------
 void on_cut1_activate(GtkMenuItem * menuitem, gpointer user_data)
 {
 	GtkWidget *text;

@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gnomesword, 0.4.0)
+AM_INIT_AUTOMAKE(gnomesword, 0.4.1)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -105,7 +105,7 @@ if test $HAVE_SWORD_LIB = no; then
  AC_MSG_ERROR(SWORD library not found.Try to use configure with --with-sworddir=/your/sword/prefix) 
 fi 
  
-SWORD_CPPFLAGS="-I$sword_incdir" 
+SWORD_CPPFLAGS="'-I$sword_incdir' -g" 
 SWORD_LIBS="-L$sword_libdir -lsword -lz" 
  
 AC_SUBST(SWORD_CPPFLAGS) 
@@ -113,11 +113,11 @@ AC_SUBST(SWORD_LIBS)
  
 AC_MSG_RESULT([$SWORD_LIB_TYPE $sword_libdir]) 
 
-AC_ARG_ENABLE(gtkhtml,[--enable-gtkhtml		 enable gtkhtml],gtkhtml=$enableval,gtkhtml="no") 
 AC_ARG_ENABLE(spellchecking,[--enable-spellchecking		enable spellchecking],spellchecking=$enableval,spellchecking="no") 
 AC_ARG_ENABLE(printing,[--enable-printing		enable printing],printing=$enableval,printing="no")
 AC_ARG_ENABLE(shortcutbar,[--enable-shortcutbar		enable shortcutbar]shortcutbar,=$enableval,shortcutbar="no")
 AC_ARG_ENABLE(all,[--enable-all		enable all]all,all=$enableval,all="no")
+
 have_speller="no"
 dnl looking for aspell 
 if test "x$spelchecking" = xyes || test "x$all" = xyes; then
@@ -212,8 +212,7 @@ dnl ******************************
 dnl GtkHTML checking
 dnl ******************************
 gtkhtml_ok="false"
-if test "x$gtkhtml" = xyes || test "x$all" = xyes; then
-  AC_MSG_CHECKING(for GtkHTML)
+AC_MSG_CHECKING(for GtkHTML)
   if gnome-config --libs gtkhtml > /dev/null 2>&1; then
 	vers=`gnome-config --modversion gtkhtml`
 	case $vers
@@ -224,12 +223,11 @@ if test "x$gtkhtml" = xyes || test "x$all" = xyes; then
   else
 	gtkhtml_ok=false
   fi
-fi
 
 if $gtkhtml_ok; then
 	AC_MSG_RESULT($vers found)
 else
-	AC_MSG_RESULT(GtkHTML 0.8.0 is required to build gnomesword with GtkHtml support)
+	AC_MSG_ERROR(GtkHTML 0.8.x is required to build gnomesword)
 fi
 
 if $gtkhtml_ok; then
@@ -289,11 +287,6 @@ else
 	echo "Printing:                         disabled"
 fi
 
-if $gtkhtml_ok; then
-       echo "GnomeSword will be built with GtkHTML"
-else
-        echo "GnomeSword will be built without GtkHTML"
-fi
 if test "x$have_gal" = xyes && test "x$have_pixbuf" = xyes && test "x$have_gnomeprint" = xyes; then
         echo "GnomeSword will be built with the Evolution shortcut bar"
 else

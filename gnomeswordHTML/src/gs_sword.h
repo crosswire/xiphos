@@ -45,8 +45,6 @@ void footnotesSWORD(gboolean choice);
 void changecurModSWORD(gchar *modName, gboolean showchange);
 void navcurcomModSWORD(gint direction);
 void changecomp1ModSWORD(gchar * modName);
-void changecomp2ModSWORD(gchar * modName);
-void changecomp3ModSWORD(gchar * modName);
 void setversestyleSWORD(gboolean choice);
 void chapterSWORD(void);
 void verseSWORD(void);

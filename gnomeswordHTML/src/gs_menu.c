@@ -39,9 +39,7 @@
 /******************************************************************************
  * function prototypes only visible to this file
  ******************************************************************************/
-static GtkWidget* create_pmInt(GList *mods, gchar *intWindow, 
-			GtkMenuCallback cbchangemod, 
-			GtkMenuCallback mycallback);
+static GtkWidget* create_pmInt(GList *mods, gchar *intWindow);
 static GtkWidget *create_pmComments2(GList * mods);
 static GtkWidget *create_pmCommentsHtml(GList * mods);
 static GtkWidget *create_pmDict(GList * mods);
@@ -171,23 +169,13 @@ void createpopupmenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 {
 	GtkWidget 
 		*menu2, 
-		*menu3, 
-		*menu4, 
 		*menu5,
 		*menuCom,
 		*menuDict,
 		*menuBible,
 		*menuhtmlcom;	
 	
-	menu2 = create_pmInt(biblelist, "textComp1",
-				(GtkMenuCallback)on_1st_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module2_activate);
-	menu3 =create_pmInt(biblelist, "textComp2",
-				(GtkMenuCallback)on_2nd_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module3_activate); 
-	menu4 =create_pmInt(biblelist, "textComp3",
-				(GtkMenuCallback)on_3rd_interlinear_window1_activate,
-				(GtkMenuCallback)on_about_this_module4_activate); 
+	menu2 = create_pmInt(biblelist, "textComp1");
 	menu5 = create_pmEditnote(app, percomlist);
 	/* create pop menu for commentaries */
 	menuCom = create_pmComments2(commentarylist);
@@ -297,7 +285,7 @@ void addmodstomenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	while (tmp != NULL) {
 		//-- add to menubar
 		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_1st_interlinear_window1_activate);
+					 (GtkMenuCallback)on_changeint1mod_activate );
 		//-- remember last item - so next item will be place below it       	
 		sprintf(rememberlastitem,"%s%s","_View/Interlinear1 Window/", (gchar *) tmp->data);		
 		tmp = g_list_next(tmp);	
@@ -310,7 +298,7 @@ void addmodstomenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	while (tmp != NULL) {
 		//-- add to menubar
 		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_2nd_interlinear_window1_activate);
+					 (GtkMenuCallback)on_changeint2mod_activate);
 		//-- remember last item - so next item will be place below it       	
 		sprintf(rememberlastitem,"%s%s","_View/Interlinear2 Window/", (gchar *) tmp->data);		
 		tmp = g_list_next(tmp);	
@@ -322,9 +310,33 @@ void addmodstomenus(GtkWidget *app, SETTINGS *settings, GList *biblelist,
 	while (tmp != NULL) {
 		//-- add to menubar
 		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
-					 (GtkMenuCallback)on_3rd_interlinear_window1_activate);
+					 (GtkMenuCallback)on_changeint3mod_activate);
 		//-- remember last item - so next item will be place below it       	
 		sprintf(rememberlastitem,"%s%s","_View/Interlinear3 Window/", (gchar *) tmp->data);		
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);	
+//-- add interlin4mods - interliniar4 window menu	
+	sprintf(rememberlastitem,"%s","_View/Interlinear4 Window/");
+	tmp = biblelist;
+	while (tmp != NULL) {
+		//-- add to menubar
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
+					 (GtkMenuCallback)on_changeint4mod_activate);
+		//-- remember last item - so next item will be place below it       	
+		sprintf(rememberlastitem,"%s%s","_View/Interlinear4 Window/", (gchar *) tmp->data);		
+		tmp = g_list_next(tmp);	
+	}
+	g_list_free(tmp);	
+//-- add interlin5mods - interliniar5 window menu	
+	sprintf(rememberlastitem,"%s","_View/Interlinear5 Window/");
+	tmp = biblelist;
+	while (tmp != NULL) {
+		//-- add to menubar
+		additemtognomemenu(app, (gchar *) tmp->data, (gchar *) tmp->data,rememberlastitem ,
+					 (GtkMenuCallback)on_changeint5mod_activate);
+		//-- remember last item - so next item will be place below it       	
+		sprintf(rememberlastitem,"%s%s","_View/Interlinear5 Window/", (gchar *) tmp->data);		
 		tmp = g_list_next(tmp);	
 	}
 	g_list_free(tmp);				
@@ -950,13 +962,11 @@ static GtkWidget* create_pmBible(GList *mods)
  * GtkMenuCallback mycallback - callback for copy text
  ******************************************************************************/
 static GtkWidget*
-create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod, 
-		GtkMenuCallback mycallback)
+create_pmInt(GList *mods, gchar *intWindow)
 {
 	GtkWidget *pmInt;
 	GtkAccelGroup *pmInt_accels;
 	GtkWidget *copy7;
-	GtkWidget *about_this_module1;
 	GtkWidget *separator2;
 
 
@@ -970,13 +980,6 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
                             (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show (copy7);
 	gtk_container_add (GTK_CONTAINER (pmInt), copy7);
-
-  	about_this_module1 = gtk_menu_item_new_with_label ("About this module");
-  	gtk_widget_ref (about_this_module1);
-  	gtk_object_set_data_full (GTK_OBJECT (pmInt), "about_this_module1", about_this_module1,
-                            (GtkDestroyNotify) gtk_widget_unref);
-  	gtk_widget_show (about_this_module1);
-  	gtk_container_add (GTK_CONTAINER (pmInt), about_this_module1);
 
   	separator2 = gtk_menu_item_new ();
   	gtk_widget_ref (separator2);
@@ -995,9 +998,6 @@ create_pmInt(GList *mods, gchar *intWindow, GtkMenuCallback cbchangemod,
   	gtk_signal_connect (GTK_OBJECT (copy7), "activate",
                       	GTK_SIGNAL_FUNC (on_copyhtml_activate),
                       	(gchar *)intWindow);
-  	gtk_signal_connect (GTK_OBJECT (about_this_module1), "activate",
-                      	GTK_SIGNAL_FUNC (mycallback),
-                      	NULL);
   return pmInt;
 }
 
