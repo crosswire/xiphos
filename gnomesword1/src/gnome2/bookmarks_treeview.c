@@ -610,7 +610,7 @@ static void row_deleted(GtkTreeModel * treemodel, GtkTreePath * arg1,
 
 static void create_pixbufs(void)
 {
-	GtkWidget *image;
+	//GtkWidget *image;
 	
 	pixbufs = g_new0(TreePixbufs, 1);
 	pixbufs->pixbuf_closed = gtk_widget_render_icon(widgets.app,

@@ -117,6 +117,7 @@ static GList *module_mgr_list_modules(SWMgr * mgr)
 			mod_info->installed =
 			    backend_check_for_module(mod_info->name);
 			mod_info->description = module->Description();
+			mod_info->locked = (module->getConfigEntry("CipherKey")) ? 1 : 0;
 			list =
 			    g_list_append(list, (MOD_MGR *) mod_info);
 		}
@@ -131,51 +132,48 @@ int backend_uninstall_module(const char *modName)
 	if (it == mgr->Modules.end()) {
 		printf("Couldn't find module [%s] to remove\n",
 			modName);
-		return 0;
+		return -1;
 	}
 	module = it->second;
-	installMgr->removeModule(mgr, module->Name());
-	return 1;
+	return installMgr->removeModule(mgr, module->Name());
 }
 
 
-void backend_remote_install_module(const char *sourceName, const char *modName)
+int backend_remote_install_module(const char *sourceName, const char *modName)
 {
 	InstallSourceMap::iterator source =
 	    installMgr->sources.find(sourceName);
 	if (source == installMgr->sources.end()) {
-		fprintf(stderr, "Couldn't find remote source [%s]\n",
+		printf("Couldn't find remote source [%s]\n",
 			sourceName);
-		backend_shut_down_module_mgr();
+		return -1;
 	}
 	InstallSource *is = source->second;
 	SWMgr *rmgr = is->getMgr();
 	SWModule *module;
 	ModMap::iterator it = rmgr->Modules.find(modName);
 	if (it == rmgr->Modules.end()) {
-		fprintf(stderr,
-			"Remote source [%s] does not make available module [%s]\n",
+		printf("Remote source [%s] does not make available module [%s]\n",
 			sourceName, modName);
-		backend_shut_down_module_mgr();
+		return -1;
 	}
 	module = it->second;
-	installMgr->installModule(mgr, 0, module->Name(), is);
+	return installMgr->installModule(mgr, 0, module->Name(), is);
 }
 
 
-void backend_local_install_module(const char *dir, const char *mod_name)
+int backend_local_install_module(const char *dir, const char *mod_name)
 {
 	SWMgr lmgr(dir);
 	SWModule *module;
 	ModMap::iterator it = lmgr.Modules.find(mod_name);
 	if (it == lmgr.Modules.end()) {
-		fprintf(stderr,
-			"Module [%s] not available at path [%s]\n",
+		printf("Module [%s] not available at path [%s]\n",
 			mod_name, dir);
-		backend_shut_down_module_mgr();
+		return -1;
 	}
 	module = it->second;
-	installMgr->installModule(mgr, dir, module->Name());
+	return installMgr->installModule(mgr, dir, module->Name());
 }
 
 
@@ -216,16 +214,17 @@ GList *backend_module_mgr_list_local_modules(const char *dir)
 	return module_mgr_list_modules(&mgr);
 }
 
-void backend_module_mgr_refresh_remote_source(const char *sourceName)
+int backend_module_mgr_refresh_remote_source(const char *sourceName)
 {
 	InstallSourceMap::iterator source =
 	    installMgr->sources.find(sourceName);
 	if (source == installMgr->sources.end()) {
-		fprintf(stderr, "Couldn't find remote source [%s]\n",
+		printf("Couldn't find remote source [%s]\n",
 			sourceName);
-		backend_shut_down_module_mgr();
+		return 1;
 	}
 	installMgr->refreshRemoteSource(source->second);
+	return 0;
 }
 
 void backend_init_module_mgr_config(void)
