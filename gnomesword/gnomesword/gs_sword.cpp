@@ -107,8 +107,8 @@ GtkWidget           	*NEtext,  //-- note edit widget
 extern gchar *shortcut_types[];
 
 
-gchar *current_filename= NULL;	//-- filename for open file in study pad window 
-gchar current_verse[80]="Romans 8:28";	//-- current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window
+extern gchar *current_filename;	//-- filename for open file in study pad window 
+extern gchar current_verse[80];	//-- current verse showing in main window - 1st - 2nd - 3rd interlinear window - commentary window
 gboolean ApplyChange = true;	//-- should we make changes when cbBook is changed
 gboolean bVerseStyle = true;	//-- should we show verses of paragraphs in main text window
 
@@ -117,16 +117,15 @@ gint curChapter = 8;	//-- keep up with current chapter
 gint curVerse =28;	//-- keep up with current verse
 
 
-gboolean file_changed = false;	//-- set to true if text is study pad has changed - and file is not saved
-gchar //options[16][80],	//-- array to store a number of setting - read in form file when program starts - saved to file at normal shut down
-		 bmarks[50][80];	//-- array to store bookmarks - read in form file when program starts - saved to file after edit
+extern gboolean file_changed;	//-- set to true if text is study pad has changed - and file is not saved
+
 GtkWidget 	*versestyle,	//-- widget to access toggle menu - for versestyle
 		*footnotes,	//-- widget to access toggle menu - for footnotes
   		*strongsnum,//-- widget to access toggle menu - for strongs numbers
 	    	*notepage,	//-- widget to access toggle menu - for interlinear notebook page
 	    	*autosaveitem; //-- widget to access toggle menu - for personal comments auto save
 			
-extern gint ibookmarks;	//-- number of items in bookmark menu  -- declared in filestuff.cpp
+
 extern GdkColor myGreen; //-- current verse color
 GtkWidget* studypad;  //-- studypad text widget
 GtkWidget* notes;    //-- notes text widget
@@ -140,10 +139,10 @@ gboolean autoSave = true; //-- we want to auto save changes to personal comments
 gboolean havedict = false; //-- let us know if we have at least one lex-dict module
 gboolean havecomm = false; //-- let us know if we have at least one commentary module
 gboolean autoscroll = true; //-- commentary module auto scroll when true -- in sync with main text window
-gboolean isstrongs = false; //-- main window selection is not storngs number
-gboolean changemain = true; //-- change verse of Bible text window
+
+extern gboolean changemain; //-- change verse of Bible text window
 extern gchar rememberlastitem[255]; //-- used for bookmark menus declared in filestuff.cpp
-extern gchar remembersubtree[256];  //-- used for bookmark menus declared in filestuff.cpp
+
 extern NoteEditor *noteeditor;
 gint historyitems = 0;
 gint answer;
@@ -272,7 +271,7 @@ initSword(GtkWidget *mainform)
 		}else if (!strcmp((*it).second->Type(), "Commentaries")){    //-- set commentary modules and add to notebook		
 			curcomMod = (*it).second;
 			commentarymods = g_list_append(commentarymods,curcomMod->Name());
-			havecomm = true; //-- we have at least one commentay module
+			havecomm = TRUE; //-- we have at least one commentay module
 			++compages; //-- how many pages do we have
 			curcomMod = (*it).second;					
 			sit = mainMgr->config->Sections.find((*it).second->Name()); //-- check to see if we need render filters
@@ -300,7 +299,7 @@ initSword(GtkWidget *mainform)
 						      curcomMod->Name());
 			}
 		}else if (!strcmp((*it).second->Type(), "Lexicons / Dictionaries")){ //-- set dictionary modules and add to notebook	
-			havedict = true; //-- we have at least one lex / dict module
+			havedict = TRUE; //-- we have at least one lex / dict module
 			++dictpages; //-- how many pages do we have
 			curdictMod = (*it).second;
 			dictionarymods = g_list_append(dictionarymods,curdictMod->Name());			
@@ -320,10 +319,10 @@ initSword(GtkWidget *mainform)
 		 	 //-- if driver is RawFiles			
 			if((*percomMgr->config->Sections[(*it).second->Name()].find("ModDrv")).second == "RawFiles"){ 
 				 percomMod = (*it).second;
-				 if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if true use formatted display
+				 if(settings->formatpercom) percomMod->Disp(FPNDisplay);  //-- if TRUE use formatted display
 				 else percomMod->Disp(percomDisplay);                     //-- else standard display
 				 percommods = g_list_append(percommods,percomMod->Name());
-				 usepersonalcomments = true; //-- used by verseChange function (GnomeSword.cpp)
+				 usepersonalcomments = TRUE; //-- used by verseChange function (GnomeSword.cpp)
 				 percomMod->SetKey(settings->currentverse);
 				 gtk_widget_show(lookup_widget(MainFrm,"vbox2")); //-- show personal comments page because we
 			} 	                                                 //-- have at least one personl module
@@ -374,7 +373,7 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 	ApplyChange = false;
 	if(changemain) {
 		if(curMod){  //--------------------------------------------------- change main window
-			if(strcmp(settings->currentverse,ref)) addHistoryItem(ref); //-- verse to history menu		
+			if(strcmp(settings->currentverse,ref)) addHistoryItem(MainFrm, GTK_WIDGET(shortcut_bar), ref); //-- verse to history menu		
 			curMod->SetKey(ref); //keyText.c_str());
 			curMod->Display();
 			//gtk_label_set(GTK_LABEL(lookup_widget(MainFrm,"lbText")),curMod->KeyText( )); //------- set text label to current verse
@@ -397,7 +396,7 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 			gtk_entry_set_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")),swKey);
 		}
 	}
-	changemain = true;
+	changemain = TRUE;
 	//--------------------------------------------------------------- change interlinear verses
 	if(settings->notebook3page == 2){
 		if(comp1Mod){
@@ -434,7 +433,7 @@ changeVerse(gchar *ref) //-- change main text, interlinear texts and commentary 
 			strcpy(com_key,ref);
 		}
 	}			
-	ApplyChange = true;	
+	ApplyChange = TRUE;	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -546,7 +545,7 @@ ShutItDown(void)  //-- close down GnomeSword program
 void
 strongsSWORD(gboolean choice) //-- toogle strongs numbers for modules that have strongs
 {
-	if(choice){ //-- if choice is true - we want strongs numbers	
+	if(choice){ //-- if choice is TRUE - we want strongs numbers	
 		mainMgr->setGlobalOption("Strong's Numbers","On");  //-- turn strongs on 		
 	}else{   //-- we don't want strongs numbers	
 		mainMgr->setGlobalOption("Strong's Numbers","Off");	//-- turn strongs off	
@@ -569,73 +568,10 @@ footnotesSWORD(gboolean choice) //-- toogle gbf footnotes for modules that have 
 }
 
 //-------------------------------------------------------------------------------------------
-void
-addBookmark(void)  //-- someone clicked add bookmark to get us here
-{
-	gchar    *bookname;      //-- pointer to the Bible book we want to mark
-	gint     iVerse,         //-- verse we want to mark
-		 iChap;          //-- chapter we want to mark
-	gchar	 buf[255];
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook"))); //-- get book name
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter"))); //-- get chapter
-	sprintf(buf,"%s %d:%d\0",bookname, iChap,iVerse ); //-- put book chapter and verse into bookmarks array
-	 ++ibookmarks;  //-- increment number of bookmark item + 1	
-	savebookmark(buf);  /* save to file so we don't forget -- function in filestuff.cpp */
-	removemenuitems(MainFrm, "_Bookmarks/<Separator>", ibookmarks); //-- remove old bookmarks form menu -- menustuff.cpp	
-        sprintf(buf,"%s%s", "_Bookmarks/",remembersubtree);
-        addseparator(MainFrm, buf);
-        //loadbookmarkarray(); //-- load edited bookmarks  -- filestuff.cpp
-        loadbookmarks_afterSeparator(); //-- let's show what we did -- GnomeSword.cpp
-}
 
 //-------------------------------------------------------------------------------------------
-void
-editbookmarksLoad(GtkWidget *editdlg) //-- load bookmarks into an editor dialog
-{
-	GtkWidget *text;  //-- pointer to text widget for editing
-	gchar buf[255];   //-- temp storage of each bookmark
-	gint i=0;         //-- counter
-
-	text = lookup_widget(editdlg,"text4");  //-- set text widger pointer
- 	gtk_text_freeze (GTK_TEXT (text));    //-- freeze text until all bookmarks are loaded
-  	gtk_editable_delete_text (GTK_EDITABLE (text), 0, -1);  //-- clear text widget
-	while(i < ibookmarks){  //-- loop through bookmarks - ibookmarks the number of bookmarks we have	 	
-		sprintf(buf,"%s\n",bmarks[i]); //-- copy bookmark string from array to buf and add newline
-		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); //-- put buf into text wigdet
-		++i;	//-- increment our counter     	
-	}
-	sprintf(buf,"%s\n","-end-");  //-- last item to add to text widget '-end-' is used to signal last item
-	gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,buf , -1); //-- add to text widget
-	gtk_text_thaw (GTK_TEXT (text)); //-- thaw text widget so we can work
-}
 
 //-------------------------------------------------------------------------------------------
-void
-addHistoryItem(gchar *ref)  //-- add an item to the history menu
-{
-	GnomeUIInfo *historyitem;  //-- pointer to gnome menu item structure
-/*	gchar   *bookname,        //-- pointer to name of book of Bible to add to history
-		ref[255];            //-- string to store Bible ref
-	gint    iVerse,         //-- varible to store verse number
-		iChap;               //-- varible to store chapter number
-
-	bookname = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeBook"))); //-- set bookname to book
-	                                                                            //-- showing in book combo box
-	iVerse = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbVerse"))); //-- get verse number from verse spin button
-	iChap = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(lookup_widget(MainFrm,"spbChapter")));//-- get chapter number from chapter spin button
-	sprintf(ref,"%s %d:%d",bookname, iChap,iVerse ); //-- store book, chapter and verse in ref string
-*/
-	additemtognomemenu(MainFrm, ref, ref, "_History/<Separator>",(GtkMenuCallback) on_mnuHistoryitem1_activate); //-- add item to history menu
-	++historyitems;
-	if(settings->showhistorygroup){
-		e_shortcut_model_add_item (E_SHORTCUT_BAR(shortcut_bar)->model,
-						      groupnum4, -1,
-						      shortcut_types[3],
-						      ref);
-	}
-}
 
 //-------------------------------------------------------------------------------------------
 void
@@ -704,7 +640,7 @@ void
 setversestyleSWORD(gboolean choice)  //-- set verse style -- verses or paragraphs
 {
 	if(choice){
-		bVerseStyle = true;  //-- tells chapter display we want verses
+		bVerseStyle = TRUE;  //-- tells chapter display we want verses
 	} else {
 		bVerseStyle = false;     //-- tells chapter display we want paragraphs
 	}
@@ -713,19 +649,6 @@ setversestyleSWORD(gboolean choice)  //-- set verse style -- verses or paragraph
 }
 
 //-------------------------------------------------------------------------------------------
-void
-showIntPage(gboolean choice)  //-- do we want to see interlinear page?
-{
-	GtkWidget *intpage; //-- pointer to interlinear notebook page
-
-	intpage= lookup_widget(MainFrm,"vbox3"); //-- set pointer to page
-	if(choice){
-		gtk_widget_show(intpage);		//-- show page
-	} else {
-		gtk_widget_hide(intpage);		//-- hide page
-	}
-	settings->interlinearpage = choice;  //-- remember choice for next program startup
-}
 
 
 //-------------------------------------------------------------------------------------------
@@ -765,7 +688,7 @@ btnlookupSWORD(void)  //-- add current verse to history menu
 	ApplyChange = false;	//-- do not want to start loop with book combo box
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
 	changeVerse(buf);	//-- change verse to entry text	
-	//addHistoryItem();
+	
 }
 
 //-------------------------------------------------------------------------------------------
@@ -778,7 +701,7 @@ freeformlookupSWORD(GdkEventKey  *event) //-- change to verse in freeformlookup 
 	buf = gtk_entry_get_text(GTK_ENTRY(lookup_widget(MainFrm,"cbeFreeformLookup")));	//-- set pointer to entry text
 	if(event->keyval == 65293 || event->keyval == 65421){  //-- if user hit return key continue	
 		changeVerse(buf);	//-- change verse to entry text
-		//addHistoryItem(); //-- add verse to history menu
+		
 	}	
 }
 
@@ -823,7 +746,7 @@ editnoteSWORD(gboolean editbuttonactive) //-- someone clicked the note edit butt
 {
  	if(editbuttonactive){	
 		percomMod->Disp(percomDisplay);
-		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), true); //-- set text widget to editable	
+		gtk_text_set_editable (GTK_TEXT (lookup_widget(MainFrm,"textComments")), TRUE); //-- set text widget to editable	
 		gtk_widget_show(lookup_widget(MainFrm,"sbNotes")); //-- show comments status bar
 		noteModified = false;	 //-- we just turned edit mode on no changes yet
         } else {	
@@ -943,115 +866,18 @@ changepercomModSWORD(gchar* modName)   //-- change personal comments module
 }
 
 //-------------------------------------------------------------------------------------------
-void
-setcurrentversecolor(gint arg1, gint arg2, gint arg3)    //-- someone change the color setting for the current verse
-{
- 	gchar buf[10]; //-- temp storage for args
- 	
-        //-- set color for current session
-	myGreen.red = arg1;  //-- new red setting
-	settings->currentverse_red = arg1; //-- remember setting
-	myGreen.green = arg2;//-- new green setting
-	settings->currentverse_green= arg2; //-- remember setting
-	myGreen.blue = arg3; //-- new blue setting
-	settings->currentverse_blue = arg3; //-- remember setting 	
-	curMod->Display(); //-- display change
-}
+
 
 //-------------------------------------------------------------------------------------------
-void
-setautosave(gboolean choice)    //-- someone clicked auto save personal  comments
-{
-	if(choice){ //-- if choice was to autosave	
-		autoSave = true;
-	} else {     //-- if choice was not to autosave	
-		autoSave = false;
-	}
-	settings->autosavepersonalcomments = choice; //-- remember our choice for next startup
-}
+
 
 //-------------------------------------------------------------------------------------------
-void
-clearhistory(void)    //-- someone clicked clear history
-{
-        gint i;
 
-        removemenuitems(MainFrm, "_History/<Separator>", historyitems+1);
-        addseparator(MainFrm, "_History/C_lear");
-        if(settings->showhistorygroup){
-        	for(i = historyitems-1; i >= 0; i--) {
-        		e_shortcut_model_remove_item(E_SHORTCUT_BAR(shortcut_bar)->model,
-						  groupnum4,
-						  i);
-		}
-        }
-        historyitems = 0;
-}
 
 //-------------------------------------------------------------------------------------------
-void
-printfile(void)    //-- someone clicked print in studypad
-{
-        if(current_filename != NULL){
-  	        gchar buf[255];  	
-        	sprintf(buf,"lpr %s",current_filename);
-        }
-}
 
 //-------------------------------------------------------------------------------------------
-void
-openpropertiesbox(void)    //-- someone clicked properties
-{
-	GtkWidget   *Propertybox,  //-- pointer to propertybox dialog
-                *cpcurrentverse,  //-- pointer to current verse color picker
-                *comtabsbutton,  //-- show commentary notebook tabs toggle button
-                *dicttabsbutton, //-- show dict/lex notebook tabs toggle button
-                *shortcutbarbutton, //-- show shortcut bar toggle button
-                *textgroupbutton,   //-- show text group toggle button
-                *comgroupbutton,    //-- show commentary group toggle button
-                *dictgroupbutton,   //-- show dict/lex group toggle button
-                *historygroupbutton;
-
-	gushort red,       //-- vars for setting color
-		green,
-		blue,
-		a;
-	
-	Propertybox = create_dlgSettings(); //-- create propertybox dialog
-	shortcutbarbutton = lookup_widget(Propertybox,"cbtnShowSCB");
-	comtabsbutton = lookup_widget(Propertybox,"cbtnShowCOMtabs");
-	dicttabsbutton  = lookup_widget(Propertybox,"cbtnShowDLtabs");
-	cpcurrentverse = lookup_widget(Propertybox,"cpfgCurrentverse"); //-- set cpcurrentverse to point to color picker
-        textgroupbutton = lookup_widget(Propertybox,"cbtnShowTextgroup");
-	comgroupbutton  = lookup_widget(Propertybox,"cbtnShowComGroup");
-	dictgroupbutton = lookup_widget(Propertybox,"cbtnShowDictGroup");
-	historygroupbutton = lookup_widget(Propertybox,"cbtnShowHistoryGroup");
-        a = 000000;
-        //-- setup current verse color picker
-	red = settings->currentverse_red;  //-- get color from settings structure
-	green = settings->currentverse_green;
-	blue =settings->currentverse_blue;
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER(cpcurrentverse),red ,green , blue, a); //-- set color of current verse color picker button
-	//-- set toggle buttons to settings structur
-	GTK_TOGGLE_BUTTON(shortcutbarbutton)->active = settings->showshortcutbar;
-	GTK_TOGGLE_BUTTON(comtabsbutton)->active = settings->showcomtabs;
-	GTK_TOGGLE_BUTTON(dicttabsbutton)->active = settings->showdicttabs;
-	GTK_TOGGLE_BUTTON(textgroupbutton)->active = settings->showtextgroup;
-	GTK_TOGGLE_BUTTON(comgroupbutton)->active = settings->showcomgroup;
-	GTK_TOGGLE_BUTTON(dictgroupbutton)->active = settings->showdictgroup;
-	GTK_TOGGLE_BUTTON(historygroupbutton)->active = settings->showhistorygroup;	
-	GTK_TOGGLE_BUTTON(GTK_BUTTON(lookup_widget(Propertybox,"cbtnPNformat")))->active = settings->formatpercom; //-- set Personal note format check button	
-	gtk_widget_show(Propertybox); //-- show propertybox
-}
-
 //-------------------------------------------------------------------------------------------
-void
-changepagenotebook(GtkNotebook *notebook,gint page_num) //-- someone changed the page in the main notebook
-{
-        settings->notebook3page = page_num; //-- store the page number so we can open to it the next time we start
-        changemain = false;
-        changeVerse(current_verse);
-}
 
 //-------------------------------------------------------------------------------------------
 void
@@ -1081,10 +907,11 @@ showmoduleinfoSWORD(char *modName) //--  show module information in an about dia
 	text = lookup_widget(aboutbox,"textModAbout"); //-- get text widget
 	label = lookup_widget(aboutbox,"lbModName");    //-- get label
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
-	gtk_text_set_word_wrap(GTK_TEXT (text) , true ); //-- set word wrap to true for text widget
+	gtk_text_set_word_wrap(GTK_TEXT (text) , TRUE ); //-- set word wrap to TRUE for text widget
 	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
 	gtk_widget_show(aboutbox); //-- show the about dialog   	
 }
+
 
 //-------------------------------------------------------------------------------------------
 void
@@ -1107,138 +934,18 @@ showinfoSWORD(GtkWidget *text, GtkLabel *label) //--  show text module about inf
 	        }
 	}	
 	gtk_label_set_text( GTK_LABEL(label),buf);  //-- set label to module discription
-	gtk_text_set_word_wrap(GTK_TEXT(text), true ); //-- set word wrap to true for text widget
+	gtk_text_set_word_wrap(GTK_TEXT(text), TRUE ); //-- set word wrap to TRUE for text widget
 	AboutModsDisplay(text, bufabout) ; //-- send about info and text widget to display function (display.cpp)
 }
 
 //-------------------------------------------------------------------------------------------
-void
-newSP(GtkWidget *text) //--  start new file in studypad
-{
-        GtkWidget *statusbar;
-
-        current_filename = NULL;
-        gtk_text_set_point(GTK_TEXT(text), 0);
-	gtk_text_forward_delete (GTK_TEXT (text), gtk_text_get_length((GTK_TEXT(text))));
-	statusbar = lookup_widget((text),"statusbar2");
-	gtk_statusbar_push (GTK_STATUSBAR (statusbar), 1, "-untitled-");
-	file_changed = false;	
-}
 
 //-------------------------------------------------------------------------------------------
-void
-setformatoption(GtkWidget *button)
-{
-   settings->formatpercom = GTK_TOGGLE_BUTTON(GTK_BUTTON(button))->active;
-   /*if(settings->formatpercom){
-   		//percomMod->Disp(FPNDisplay);   		
-   }*/
-}
+
 
 //-------------------------------------------------------------------------------------------
-/*		return verse number form verse in main Bible window
-			starting index must be in the verse number
-			else we return 0			
-*/
-gint
-getversenumber(GtkWidget *text)
-{
-	gchar   *buf, //-- buffer for storing the verse number
-	        cbuf; //-- char for checking for numbers (isdigit)
-	gint	startindex, //-- first digit in verse number
-	        endindex,   //-- last digit in verse number
-	        index;      //-- current position in text widget
-						
-	 index = gtk_editable_get_position(GTK_EDITABLE(text));	//-- get current position for a starting point
-	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); //-- get char at current position (index)
-	 if(!isdigit(cbuf)) return 0; //-- if cbuf is not a number stop - do no more
-	 endindex = index;  //-- set endindex to index
-	 while(isdigit(cbuf)){ //-- loop until cbuf is not a number	 
-	 	cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); //-- get next char
-	 	if(cbuf == ')' || cbuf == '>') isstrongs = true;
-	 	++endindex;   //-- increment endindex
-	 } 	
-	 --endindex; //-- our last char was not a number so back up one
-	 startindex = index; //-- set startindex to index
-	 cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get char at index - we know it is a number
-	 while(isdigit(cbuf)){  //-- loop backward util cbuf is not a number	 
-	        cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get previous char
-	 	if(cbuf == '(' || cbuf == '<') isstrongs = true;
-	 	--startindex; //-- decrement startindex  	 		
-	 }	
-	 ++startindex; //-- last char (cbuf) was not a number
-	 ++startindex; //-- last char (cbuf) was not a number
-	 buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
-	 return atoi(buf); //-- send it back as an integer
-}
-
 
 //---------------------------------------------------------------------------------------------
-gint getdictnumber (GtkWidget *text)
-{
-        gchar   *buf, //-- buffer for storing the verse number
-                cbuf; //-- char for checking for numbers (isdigit)
-        gint    startindex, //-- first digit in verse number
-                endindex,   //-- last digit in verse number
-                index;      //-- current position in text widget
-
-         index = gtk_editable_get_position(GTK_EDITABLE(text)); //-- get current position for a starting point
-         cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), index); //-- get char at current position (index)
-         if(!isdigit(cbuf)) return 0; //-- if cbuf is not a number stop - do no more
-         endindex = index;  //-- set endindex to index
-         while(isdigit(cbuf)){ //-- loop until cbuf is not a number
-                cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), endindex); //-- get next char
-                ++endindex;   //-- increment endindex
-         }
-         --endindex; //-- our last char was not a number so back up one
-         startindex = index; //-- set startindex to index
-         cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get char at index - we know it is a number
-         while(isdigit(cbuf)){  //-- loop backward util cbuf is not a number
-                cbuf = GTK_TEXT_INDEX(GTK_TEXT(text), startindex); //-- get previous char
-                --startindex; //-- decrement startindex
-         }
-         ++startindex; //-- last char (cbuf) was not a number
-         ++startindex; //-- last char (cbuf) was not a number
-         buf = gtk_editable_get_chars(GTK_EDITABLE(text), startindex, endindex); //-- get verse number
-	 if(endindex-startindex > 1) isstrongs = true;
-         return atoi(buf); //-- send it back as an integer
-}
-
-
-
-//---------------------------------------------------------------------------------------------
-void
-sbchangeModSword(gint group_num, gint item_num)
-{
-        GtkWidget       *notebook;
-        gint            num = 0;
-        gchar		*type[1],
-        		*ref[1];
-
-	e_shortcut_model_get_item_info(E_SHORTCUT_BAR(shortcut_bar)->model,
-						  group_num,
-						  item_num,
-						  type,
-						  ref); 	
-	if(!strcmp(type[0],"bible:")) {
-		changecurModSWORD(ref[0]);
-	}
-	if(!strcmp(type[0],"commentary:")) {
-		if(havecomm) { /* let's don't do this if we don't have at least one commentary */	           			            	
-			notebook = lookup_widget(MainFrm,"notebook1"); //-- get notebook
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-    		}
-    	}
-	if(!strcmp(type[0],"dict/lex:")) {
-		if(havedict) { /* let's don't do this if we don't have at least one dictionary / lexicon */	           			            	
-			notebook = lookup_widget(MainFrm,"notebook4"); //-- get notebook
-		 	gtk_notebook_set_page(GTK_NOTEBOOK(notebook), item_num); //-- set notebook page
-  		}
-	}
-	if(!strcmp(type[0],"history:")) {
-		changeVerse(ref[0]);
-	}
-}
 
 //---------------------------------------------------------------------------------------------
 void

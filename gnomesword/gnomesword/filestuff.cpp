@@ -54,11 +54,11 @@ gint ibookmarks;		/* number of bookmark menu items */
 gchar remembersubtree[256],	/* we need to use this when add to bookmarks */
  rememberlastitem[255];		/* we need to use this when add to bookmarks */
 
-/*-----------------------------------------------------
-check for GnomeSword dir
-if not found - create it and
-the files needed to run program
------------------------------------------------------*/
+/*****************************************************************************
+ * check for GnomeSword dir
+ * if not found - create it and
+ * the files needed to run program
+ *****************************************************************************/
 void setDiretory(void)
 {
 	if ((homedir = getenv("HOME")) == NULL) {	/* get home dir */
