@@ -148,7 +148,7 @@ gchar *VTgetbookSWORD(void)
 	}
 	strncpy(s2,s1,l);
 	s2[l] = '\0';
-	return s2;
+	return g_strdup(s2);
 }
 
 gint VTgetchapterSWORD(void)

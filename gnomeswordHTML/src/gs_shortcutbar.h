@@ -35,6 +35,11 @@ void setupSB(GList *text, GList *commentary, GList *dictionary);
 gint add_sb_group(EShortcutBar * shortcut_bar,
 		gchar * group_name);
 
+void on_shortcut_bar_item_selected(EShortcutBar * shortcut_bar,
+				       GdkEvent * event,
+				       gint group_num, gint item_num);
+
+				
 #ifdef __cplusplus
 }
 #endif
