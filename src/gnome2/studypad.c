@@ -79,7 +79,7 @@ void gui_studypad_can_close(GSHTMLEditorControlData *ecd)
 	if (settings.modifiedSP) {
 		str = g_string_new("");
 		info = gui_new_dialog();
-		info->stock_icon = "gtk-dialog-warning";
+		info->stock_icon = GTK_STOCK_DIALOG_WARNING;
 		if (settings.studypadfilename)
 			buf = settings.studypadfilename;
 		else
@@ -723,7 +723,7 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 			gui_create_studypad_control(notebook,file_name);
 
 
-	label = gtk_label_new(_("Study Pad"));
+	label = gtk_label_new(_("StudyPad"));
 	gtk_widget_show(label);
 	gtk_notebook_set_tab_label(GTK_NOTEBOOK
 					(notebook),
@@ -735,6 +735,6 @@ gint gui_open_studypad(GtkWidget * notebook, gchar * file_name,
 					(notebook),
 					gtk_notebook_get_nth_page
 					(GTK_NOTEBOOK(notebook),
-					page_num), _("Study Pad"));	
+					page_num), _("StudyPad"));	
 	return TRUE;
 }

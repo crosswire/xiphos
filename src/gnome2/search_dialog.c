@@ -2272,7 +2272,7 @@ static GtkWidget *create_search_dialog(void)
 	
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Scope</b>"));
+                                     _("<span weight=\"bold\">Scope</span>"));
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame_scope),label_frame);
 
@@ -2306,8 +2306,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_widget_show(rb_last);
 	gtk_box_pack_start(GTK_BOX(hbox77), rb_last, TRUE, TRUE, 0);
 	gtk_tooltips_set_tip(tooltips, rb_last,
-			     _
-			     ("Use the results of the last search as the scope of the search"),
+			     _("Use the results of the last search as the scope of the search"),
 			     NULL);
 
 	rb_custom_range =
@@ -2348,7 +2347,7 @@ static GtkWidget *create_search_dialog(void)
 	
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Modules</b>"));
+                                     _("<span weight=\"bold\">Modules</span>"));
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame_modlists),label_frame);
 
@@ -2426,7 +2425,7 @@ static GtkWidget *create_search_dialog(void)
 	
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Search Type</b>"));
+                                     _("<span weight=\"bold\">Search Type</span>"));
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame49),label_frame);
 
@@ -2467,7 +2466,7 @@ static GtkWidget *create_search_dialog(void)
 	
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Options</b>"));
+                                     _("<span weight=\"bold\">Options</span>"));
 	gtk_widget_show(label_frame);
 	gtk_frame_set_label_widget(GTK_FRAME(frame57),label_frame);
 
@@ -2601,7 +2600,7 @@ static GtkWidget *create_search_dialog(void)
 
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Search Results</b>"));
+                                     _("<span weight=\"bold\">Search Results</span>"));
 	gtk_box_pack_start(GTK_BOX(vbox65), label_frame, FALSE, TRUE, 0);
 	gtk_widget_show(label_frame);
 	gtk_label_set_justify(GTK_LABEL(label_frame),
@@ -2630,7 +2629,7 @@ static GtkWidget *create_search_dialog(void)
 
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Preview</b>"));
+                                     _("<span weight=\"bold\">Preview</span>"));
 	gtk_box_pack_start(GTK_BOX(vbox65), label_frame, FALSE, TRUE, 0);
 	gtk_widget_show(label_frame);
 	gtk_label_set_justify(GTK_LABEL(label_frame),
@@ -2658,7 +2657,7 @@ static GtkWidget *create_search_dialog(void)
 
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>Found</b>"));
+                                     _("<span weight=\"bold\">Found</span>"));
 	gtk_box_pack_start(GTK_BOX(vbox65), label_frame, FALSE, TRUE, 0);
 	gtk_widget_show(label_frame);
 	gtk_label_set_justify(GTK_LABEL(label_frame),
@@ -2788,7 +2787,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(hbox76), vbox76, TRUE, TRUE, 0);
 
 	label227 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label227), _("<b>Range Name</b>"));
+	gtk_label_set_markup(GTK_LABEL(label227), _("<span weight=\"bold\">Range Name</span>"));
 	gtk_widget_show(label227);
 	gtk_box_pack_start(GTK_BOX(vbox76), label227, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(label227, -1, 26);
@@ -2800,7 +2799,7 @@ static GtkWidget *create_search_dialog(void)
 			   FALSE, 0);
 
 	label228 = gtk_label_new(NULL);
-	gtk_label_set_markup(GTK_LABEL(label228), _("<b>Range Text</b>"));
+	gtk_label_set_markup(GTK_LABEL(label228), _("<span weight=\"bold\">Range Text</span>"));
 	gtk_widget_show(label228);
 	gtk_box_pack_start(GTK_BOX(vbox76), label228, FALSE, FALSE, 0);
 	gtk_widget_set_size_request(label228, -1, 26);
@@ -2966,7 +2965,7 @@ static GtkWidget *create_search_dialog(void)
 	
 	label_frame = gtk_label_new(NULL); 
 	gtk_label_set_markup(GTK_LABEL(label_frame),
-                                     _("<b>List Name</b>"));
+                                     _("<span weight=\"bold\">List Name</span>"));
 	gtk_widget_show(label_frame);
 	gtk_misc_set_alignment (GTK_MISC (label_frame), 0.01, 0.5);
 	gtk_box_pack_start(GTK_BOX(vbox80), label_frame, FALSE, TRUE, 0);
@@ -2976,7 +2975,7 @@ static GtkWidget *create_search_dialog(void)
 	gtk_box_pack_start(GTK_BOX(vbox80), entry_modlist_name, FALSE, TRUE, 0);
 	
 	label_frame = gtk_label_new(NULL); 
-	gtk_label_set_markup(GTK_LABEL(label_frame), _("<b>Modules</b>"));
+	gtk_label_set_markup(GTK_LABEL(label_frame), _("<span weight=\"bold\">Modules</span>"));
 	gtk_widget_show(label_frame);
 	gtk_misc_set_alignment (GTK_MISC (label_frame), 0.01, 0.5);
 	gtk_box_pack_start(GTK_BOX(vbox80), label_frame, FALSE, TRUE, 0);
