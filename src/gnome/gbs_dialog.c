@@ -1256,7 +1256,7 @@ void gui_open_gbs_dialog(gchar * mod_name)
 
 	dlg = g_new(GBS_DIALOG, 1);
 	dlg->g = g_new(GBS_DATA, 1);
-	dlg->g->find_dialog = NULL;
+	//dlg->g->find_dialog = NULL;
 	//dlg->g->mod_num = get_module_number(mod_name, GBS_MODS);
 	dlg->g->search_string = NULL;
 	dlg->dialog = NULL;
@@ -1323,8 +1323,8 @@ void gui_shutdown_gbs_dialog(void)
 		/* 
 		 * free any search dialogs created 
 		 */
-		if (dlg->g->find_dialog)
-			g_free(dlg->g->find_dialog);
+		//if (dlg->g->find_dialog)
+			//g_free(dlg->g->find_dialog);
 		/* 
 		 * free each TEXT_DATA item created 
 		 */

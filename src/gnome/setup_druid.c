@@ -41,9 +41,7 @@ SETTINGS_DRUID widgets;
 /******************************************************************************
  * globals to this file only 
  */
-static GtkWidget *druid_dialog;
-static GtkWidget *combo_entry_gbs;
-
+static GtkWidget *dialog_setup;
 
 /******************************************************************************
  * Name
@@ -66,44 +64,75 @@ static GtkWidget *combo_entry_gbs;
 static void save_frist_run_settings(SETTINGS_DRUID widgets)
 {
 	strcpy(settings.MainWindowModule,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry1)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_text)));
 	strcpy(settings.DictWindowModule,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry13)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_dict)));
 	strcpy(settings.CommWindowModule,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry12)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_comm)));
 	strcpy(settings.Interlinear1Module,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry2)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int1)));
 	strcpy(settings.Interlinear2Module,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry3)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int2)));
 	strcpy(settings.Interlinear3Module,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry4)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int3)));
 	strcpy(settings.Interlinear4Module,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry10)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int4)));
 	strcpy(settings.Interlinear5Module,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry11)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_int5)));
 	strcpy(settings.personalcommentsmod,
-	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry14)));
+	       gtk_entry_get_text(GTK_ENTRY
+				  (widgets.combo_entry_personal)));
 	strcpy(settings.BookWindowModule,
-	       gtk_entry_get_text(GTK_ENTRY(combo_entry_gbs)));
+	       gtk_entry_get_text(GTK_ENTRY(widgets.combo_entry_gbs)));
+	strcpy(settings.personalcommentsmod,
+	       gtk_entry_get_text(GTK_ENTRY
+				  (widgets.combo_entry_personal)));
+	strcpy(settings.devotionalmod,
+	       gtk_entry_get_text(GTK_ENTRY
+				  (widgets.combo_entry_devotion)));
+	strcpy(settings.lex_greek,
+	       gtk_entry_get_text(GTK_ENTRY(widgets.entry_greek_lex)));
+	strcpy(settings.lex_hebrew,
+	       gtk_entry_get_text(GTK_ENTRY(widgets.entry_hebrew_lex)));
+
 
 	settings.usedefault =
-	    GTK_TOGGLE_BUTTON(widgets.radiobutton1)->active;
+	    GTK_TOGGLE_BUTTON(widgets.radiobutton_use_default)->active;
 	settings.text_tabs =
-	    GTK_TOGGLE_BUTTON(widgets.checkbutton4)->active;
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_tabs)->active;
 	settings.comm_tabs =
-	    GTK_TOGGLE_BUTTON(widgets.checkbutton5)->active;
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_comm_tabs)->active;
 	settings.dict_tabs =
-	    GTK_TOGGLE_BUTTON(widgets.checkbutton6)->active;
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_dict_tabs)->active;
 	settings.versestyle =
-	    GTK_TOGGLE_BUTTON(widgets.checkbutton2)->active;
-	settings.autosavepersonalcomments =
-	    GTK_TOGGLE_BUTTON(widgets.checkbutton1)->active;
-	settings.interlinearpage =
-	    GTK_TOGGLE_BUTTON(widgets.checkbutton3)->active;
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_verse_style)->active;
+
+
+	settings.showtexts =
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_text_window)->active;
+	settings.showcomms =
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_upper_workbook)->
+	    active;
+	settings.showdicts =
+	    GTK_TOGGLE_BUTTON(widgets.checkbutton_lower_workbook)->
+	    active;
+
+
+	/*
+	   settings.autosavepersonalcomments =
+	   GTK_TOGGLE_BUTTON(widgets.checkbutton1)->active;
+	   settings.interlinearpage =
+	   GTK_TOGGLE_BUTTON(widgets.checkbutton3)->active;
+	 */
 
 	create_properties_from_setup();
 }
 
+
+static void dialog_destroy(GtkObject * object, gpointer user_data)
+{
+	gtk_main_quit();
+}
 
 /******************************************************************************
  * Name
@@ -126,7 +155,9 @@ static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
 			      gpointer user_data)
 {
 	save_frist_run_settings(widgets);
-	gnome_dialog_close(GNOME_DIALOG(druid_dialog));
+	//gnome_dialog_close(GNOME_DIALOG(druid_dialog));
+
+	gtk_widget_destroy(dialog_setup);
 }
 
 /******************************************************************************
@@ -149,7 +180,10 @@ static void on_finish_clicked(GnomeDialog * gnomedialog, gint arg1,
 static void on_cancel_clicked(GnomeDialog * gnomedialog, gint arg1,
 			      gpointer user_data)
 {
-	gnome_dialog_close(GNOME_DIALOG(druid_dialog));
+	//gnome_dialog_close(GNOME_DIALOG(druid_dialog));
+
+	gtk_widget_destroy(dialog_setup);
+
 }
 
 /******************************************************************************
@@ -171,14 +205,11 @@ static void on_cancel_clicked(GnomeDialog * gnomedialog, gint arg1,
 
 static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					 GList * commmods,
-					 GList * dictmods)
+					 GList * dictmods,
+					 GList * percommods,
+					 GList * gbsmods,
+					 GList * devotionmods)
 {
-
-	gchar gtextmods[40];
-	gchar gcommmods[40];
-	gchar gdictmods[40];
-	gchar *pathtomods;
-	GtkWidget *dialog_vbox10;
 	GtkWidget *druid1;
 	GtkWidget *druidpagestart1;
 	GdkColor druidpagestart1_bg_color = { 0, 6168, 6168, 28527 };
@@ -218,40 +249,48 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	GtkWidget *druid_vbox1;
 	GtkWidget *vbox26;
 	GSList *vbox26_group = NULL;
-	GtkWidget *radiobutton2;
+	GtkWidget *radiobutton_last_run;
+	GtkWidget *hseparator1;
+	GtkWidget *vbox34;
+	GtkWidget *hbox27;
+	GtkWidget *hbox28;
+	GtkWidget *hbox29;
+	GtkWidget *hbox84;
 	GtkWidget *druidpagestandard2;
 	GdkColor druidpagestandard2_bg_color =
-	    { 0, 44186, 24978, 13159 };
+	    { 0, 44204, 24929, 13107 };
 	GdkColor druidpagestandard2_logo_bg_color =
-	    { 0, 43193, 25239, 12874 };
+	    { 0, 43176, 25186, 12850 };
 	GdkColor druidpagestandard2_title_color =
 	    { 0, 65535, 65535, 65535 };
 	GtkWidget *druid_vbox2;
 	GtkWidget *table7;
 	GtkWidget *label104;
-	GtkWidget *combo1;
-	GtkWidget *combo2;
-	GtkWidget *combo3;
-	GtkWidget *combo4;
+	GtkWidget *combo_text;
+	GtkWidget *combo_int1;
+	GtkWidget *combo_int2;
+	GtkWidget *combo_int3;
 	GtkWidget *label140;
-	GtkWidget *label141;
-	GtkWidget *label142;
-	GtkWidget *combo10;
-	GtkWidget *combo11;
-	GtkWidget *combo12;
-	GtkWidget *label240;
-	GtkWidget *combo_gbs;
-	GtkWidget *combo13;
-	GtkWidget *combo14;
+	GtkWidget *combo_int4;
+	GtkWidget *combo_int5;
+	GtkWidget *combo_comm;
 	GtkWidget *label139;
 	GtkWidget *label138;
 	GtkWidget *label107;
 	GtkWidget *label106;
 	GtkWidget *label105;
-	GtkWidget *vbox34;
-	GtkWidget *hbox27;
-	GtkWidget *hbox28;
-	GtkWidget *hbox29;
+	GtkWidget *label240;
+	GtkWidget *combo_gbs;
+	GtkWidget *label142;
+	GtkWidget *combo_personal;
+	GtkWidget *label141;
+	GtkWidget *combo_dict;
+	GtkWidget *label250;
+	GtkWidget *combo_greek_lex;
+	GtkWidget *label251;
+	GtkWidget *combo_hebrew_lex;
+	GtkWidget *label252;
+	GtkWidget *combo_devotion;
 	GtkWidget *label111;
 	GtkWidget *druidpagefinish1;
 	GdkColor druidpagefinish1_bg_color = { 0, 6425, 6425, 28784 };
@@ -261,13 +300,20 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	    { 0, 6425, 3855, 27242 };
 	GdkColor druidpagefinish1_title_color =
 	    { 0, 65535, 65535, 65535 };
-	GtkWidget *dialog_action_area10;
+	GtkTooltips *tooltips;
+
+
 	gchar *homedir, version[40];
 	const char *ver;
 	gchar gs_version[80];
 	gchar gs_gnomesword[80];
+	gchar gtextmods[40];
+	gchar gcommmods[40];
+	gchar gdictmods[40];
+	gchar *pathtomods;
 
 
+	tooltips = gtk_tooltips_new();
 	sprintf(gtextmods, "%d", g_list_length(biblemods));
 	sprintf(gcommmods, "%d", g_list_length(commmods));
 	sprintf(gdictmods, "%d", g_list_length(dictmods));
@@ -278,32 +324,25 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 		VERSION);
 	sprintf(gs_gnomesword, "%s-%s", _("GnomeSword"), VERSION);
 
-	druid_dialog = gnome_dialog_new(_("GnomeSword - Setup"), NULL);
-	gtk_object_set_data(GTK_OBJECT(druid_dialog), "druid_dialog",
-			    druid_dialog);
-	gtk_container_set_border_width(GTK_CONTAINER(druid_dialog), 2);
-	gtk_window_set_policy(GTK_WINDOW(druid_dialog), FALSE, FALSE,
-			      FALSE);
-	//gnome_dialog_set_close (GNOME_DIALOG(druid_dialog), FALSE);
 
 
-	dialog_vbox10 = GNOME_DIALOG(druid_dialog)->vbox;
-	gtk_object_set_data(GTK_OBJECT(druid_dialog), "dialog_vbox10",
-			    dialog_vbox10);
-	gtk_widget_show(dialog_vbox10);
+	dialog_setup = gtk_window_new(GTK_WINDOW_DIALOG);
+	gtk_object_set_data(GTK_OBJECT(dialog_setup), "dialog_setup",
+			    dialog_setup);
+	gtk_window_set_title(GTK_WINDOW(dialog_setup), _("Setup"));
+	gtk_window_set_modal(GTK_WINDOW(dialog_setup), TRUE);
 
 	druid1 = gnome_druid_new();
 	gtk_widget_ref(druid1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "druid1",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "druid1",
 				 druid1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(druid1);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox10), druid1, TRUE, TRUE,
-			   0);
+	gtk_container_add(GTK_CONTAINER(dialog_setup), druid1);
 
 	druidpagestart1 = gnome_druid_page_start_new();
 	gtk_widget_ref(druidpagestart1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druidpagestart1", druidpagestart1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(druidpagestart1);
@@ -315,20 +354,21 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 					    (druidpagestart1),
 					    &druidpagestart1_bg_color);
 	gnome_druid_page_start_set_textbox_color(GNOME_DRUID_PAGE_START
-				 (druidpagestart1),
-				 &druidpagestart1_textbox_color);
+						 (druidpagestart1),
+						 &druidpagestart1_textbox_color);
 	gnome_druid_page_start_set_logo_bg_color(GNOME_DRUID_PAGE_START
-				 (druidpagestart1),
-				 &druidpagestart1_logo_bg_color);
+						 (druidpagestart1),
+						 &druidpagestart1_logo_bg_color);
 	gnome_druid_page_start_set_title_color(GNOME_DRUID_PAGE_START
-				 (druidpagestart1),
-				 &druidpagestart1_title_color);
+					       (druidpagestart1),
+					       &druidpagestart1_title_color);
 	gnome_druid_page_start_set_title(GNOME_DRUID_PAGE_START
-					 (druidpagestart1), gs_version);
+					 (druidpagestart1),
+					 _("Welcome To GnomeSword"));
 	gnome_druid_page_start_set_text(GNOME_DRUID_PAGE_START
-				(druidpagestart1),
-				_
-				("This guide will take you through the initial setup of GnomeSword"));
+					(druidpagestart1),
+					_
+					("This guide will take you through the initial setup of GnomeSword"));
 	gnome_druid_page_start_set_logo(GNOME_DRUID_PAGE_START
 					(druidpagestart1),
 					gdk_imlib_load_image
@@ -338,7 +378,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	druidpagestandard3 =
 	    gnome_druid_page_standard_new_with_vals("", NULL);
 	gtk_widget_ref(druidpagestandard3);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druidpagestandard3",
 				 druidpagestandard3,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -346,8 +386,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gnome_druid_append_page(GNOME_DRUID(druid1),
 				GNOME_DRUID_PAGE(druidpagestandard3));
 	gnome_druid_page_standard_set_bg_color(GNOME_DRUID_PAGE_STANDARD
-				(druidpagestandard3),
-				&druidpagestandard3_bg_color);
+					       (druidpagestandard3),
+					       &druidpagestandard3_bg_color);
 	gnome_druid_page_standard_set_logo_bg_color
 	    (GNOME_DRUID_PAGE_STANDARD(druidpagestandard3),
 	     &druidpagestandard3_logo_bg_color);
@@ -356,7 +396,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	     &druidpagestandard3_title_color);
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard3),
-					    gs_gnomesword);
+					    _("GnomeSword"));
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard3),
 					   gdk_imlib_load_image
@@ -366,14 +406,14 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	druid_vbox3 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard3)->vbox;
 	gtk_widget_ref(druid_vbox3);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druid_vbox3", druid_vbox3,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(druid_vbox3);
 
 	vbox27 = gtk_vbox_new(TRUE, 0);
 	gtk_widget_ref(vbox27);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "vbox27",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "vbox27",
 				 vbox27,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox27);
@@ -381,42 +421,48 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label112 = gtk_label_new(_("Your Home Directory:"));
 	gtk_widget_ref(label112);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label112",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label112",
 				 label112,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label112);
 	gtk_box_pack_start(GTK_BOX(vbox27), label112, FALSE, FALSE, 0);
+
+	/* 
+	 * get home directory 
+	 */
 
 	if ((homedir = getenv("HOME")) == NULL) {
 		g_error("$HOME is not set!");
 	}
 
 
-	label113 = gtk_label_new(_(homedir));
+	label113 = gtk_label_new(homedir);
 	gtk_widget_ref(label113);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label113",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label113",
 				 label113,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label113);
 	gtk_box_pack_start(GTK_BOX(vbox27), label113, FALSE, FALSE, 0);
 
-	label143 = gtk_label_new(_("SWORD version"));
-	gtk_widget_ref(label143);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label143",
-				 label143,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label143);
-	gtk_box_pack_start(GTK_BOX(vbox27), label143, FALSE, FALSE, 0);
 
 	/* 
 	 * get sword version 
 	 */
 	ver = get_sword_version();
-	sprintf(version, "Sword-%s", ver);
+	sprintf(version, "%s-%s", _("Sword"), ver);
 
-	label144 = gtk_label_new(_(version));
+
+	label143 = gtk_label_new(_("SWORD version"));
+	gtk_widget_ref(label143);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label143",
+				 label143,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label143);
+	gtk_box_pack_start(GTK_BOX(vbox27), label143, FALSE, FALSE, 0);
+
+	label144 = gtk_label_new(version);
 	gtk_widget_ref(label144);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label144",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label144",
 				 label144,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label144);
@@ -424,15 +470,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label114 = gtk_label_new(_("Sword Directory:"));
 	gtk_widget_ref(label114);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label114",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label114",
 				 label114,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label114);
 	gtk_box_pack_start(GTK_BOX(vbox27), label114, FALSE, FALSE, 0);
 
-	label115 = gtk_label_new(_(pathtomods));
+	label115 = gtk_label_new(pathtomods);
 	gtk_widget_ref(label115);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label115",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label115",
 				 label115,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label115);
@@ -440,15 +486,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label116 = gtk_label_new(_("Number of Bible Text Modules:"));
 	gtk_widget_ref(label116);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label116",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label116",
 				 label116,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label116);
 	gtk_box_pack_start(GTK_BOX(vbox27), label116, FALSE, FALSE, 0);
 
-	label117 = gtk_label_new(_(gtextmods));
+	label117 = gtk_label_new(gtextmods);
 	gtk_widget_ref(label117);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label117",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label117",
 				 label117,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label117);
@@ -456,15 +502,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label118 = gtk_label_new(_("Number of Commentary Modules:"));
 	gtk_widget_ref(label118);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label118",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label118",
 				 label118,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label118);
 	gtk_box_pack_start(GTK_BOX(vbox27), label118, FALSE, FALSE, 0);
 
-	label119 = gtk_label_new(_(gcommmods));
+	label119 = gtk_label_new(gcommmods);
 	gtk_widget_ref(label119);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label119",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label119",
 				 label119,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label119);
@@ -473,15 +519,15 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	label120 =
 	    gtk_label_new(_("Number of Lexicon / Dictionary Modules"));
 	gtk_widget_ref(label120);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label120",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label120",
 				 label120,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label120);
 	gtk_box_pack_start(GTK_BOX(vbox27), label120, FALSE, FALSE, 0);
 
-	label121 = gtk_label_new(_(gdictmods));
+	label121 = gtk_label_new(gdictmods);
 	gtk_widget_ref(label121);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label121",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label121",
 				 label121,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label121);
@@ -490,7 +536,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	druidpagestandard1 =
 	    gnome_druid_page_standard_new_with_vals("", NULL);
 	gtk_widget_ref(druidpagestandard1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druidpagestandard1",
 				 druidpagestandard1,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -519,55 +565,222 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	druid_vbox1 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard1)->vbox;
 	gtk_widget_ref(druid_vbox1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druid_vbox1", druid_vbox1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(druid_vbox1);
 
 	vbox26 = gtk_vbox_new(FALSE, 0);
 	gtk_widget_ref(vbox26);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "vbox26",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "vbox26",
 				 vbox26,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(vbox26);
 	gtk_box_pack_start(GTK_BOX(druid_vbox1), vbox26, TRUE, TRUE, 0);
 
-	widgets.radiobutton1 =
+	widgets.radiobutton_use_default =
 	    gtk_radio_button_new_with_label(vbox26_group,
 					    _
 					    ("Settings you choose as default"));
 	vbox26_group =
 	    gtk_radio_button_group(GTK_RADIO_BUTTON
-				   (widgets.radiobutton1));
-	gtk_widget_ref(widgets.radiobutton1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.radiobutton1",
-				 widgets.radiobutton1,
+				   (widgets.radiobutton_use_default));
+	gtk_widget_ref(widgets.radiobutton_use_default);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.radiobutton_use_default",
+				 widgets.radiobutton_use_default,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.radiobutton1);
-	gtk_box_pack_start(GTK_BOX(vbox26), widgets.radiobutton1, FALSE,
+	gtk_widget_show(widgets.radiobutton_use_default);
+	gtk_box_pack_start(GTK_BOX(vbox26),
+			   widgets.radiobutton_use_default, FALSE,
 			   FALSE, 0);
 
-	radiobutton2 =
+	radiobutton_last_run =
 	    gtk_radio_button_new_with_label(vbox26_group,
 					    _
 					    ("Settings used the last time GnomeSword ran"));
 	vbox26_group =
-	    gtk_radio_button_group(GTK_RADIO_BUTTON(radiobutton2));
-	gtk_widget_ref(radiobutton2);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "radiobutton2", radiobutton2,
+	    gtk_radio_button_group(GTK_RADIO_BUTTON
+				   (radiobutton_last_run));
+	gtk_widget_ref(radiobutton_last_run);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "radiobutton_last_run",
+				 radiobutton_last_run,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(radiobutton2);
-	gtk_box_pack_start(GTK_BOX(vbox26), radiobutton2, FALSE, FALSE,
+	gtk_widget_show(radiobutton_last_run);
+	gtk_box_pack_start(GTK_BOX(vbox26), radiobutton_last_run, FALSE,
+			   FALSE, 0);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (radiobutton_last_run), TRUE);
+
+	hseparator1 = gtk_hseparator_new();
+	gtk_widget_ref(hseparator1);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "hseparator1", hseparator1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hseparator1);
+	gtk_box_pack_start(GTK_BOX(vbox26), hseparator1, FALSE, TRUE,
 			   0);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(radiobutton2),
+
+	vbox34 = gtk_vbox_new(FALSE, 0);
+	gtk_widget_ref(vbox34);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "vbox34",
+				 vbox34,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(vbox34);
+	gtk_box_pack_start(GTK_BOX(vbox26), vbox34, FALSE, TRUE, 0);
+
+	hbox27 = gtk_hbox_new(TRUE, 0);
+	gtk_widget_ref(hbox27);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "hbox27",
+				 hbox27,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hbox27);
+	gtk_box_pack_start(GTK_BOX(vbox34), hbox27, TRUE, TRUE, 0);
+
+	widgets.checkbutton_verse_style =
+	    gtk_check_button_new_with_label(_("Use Verse Style"));
+	gtk_widget_ref(widgets.checkbutton_verse_style);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_verse_style",
+				 widgets.checkbutton_verse_style,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_verse_style);
+	gtk_box_pack_start(GTK_BOX(hbox27),
+			   widgets.checkbutton_verse_style, FALSE, TRUE,
+			   0);
+	gtk_widget_set_usize(widgets.checkbutton_verse_style, 202, -2);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.checkbutton_verse_style),
 				     TRUE);
+
+	widgets.checkbutton_text_tabs =
+	    gtk_check_button_new_with_label(_("Show Bible Tabs"));
+	gtk_widget_ref(widgets.checkbutton_text_tabs);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_text_tabs",
+				 widgets.checkbutton_text_tabs,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_text_tabs);
+	gtk_box_pack_start(GTK_BOX(hbox27),
+			   widgets.checkbutton_text_tabs, FALSE, TRUE,
+			   0);
+	gtk_widget_set_usize(widgets.checkbutton_text_tabs, 162, -2);
+
+	widgets.checkbutton_text_window =
+	    gtk_check_button_new_with_label(_("Show Bible Window"));
+	gtk_widget_ref(widgets.checkbutton_text_window);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_text_window",
+				 widgets.checkbutton_text_window,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_text_window);
+	gtk_box_pack_start(GTK_BOX(hbox27),
+			   widgets.checkbutton_text_window, FALSE, TRUE,
+			   0);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.checkbutton_text_window),
+				     TRUE);
+
+	hbox28 = gtk_hbox_new(TRUE, 0);
+	gtk_widget_ref(hbox28);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "hbox28",
+				 hbox28,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hbox28);
+	gtk_box_pack_start(GTK_BOX(vbox34), hbox28, TRUE, TRUE, 0);
+
+	widgets.checkbutton_comm_tabs =
+	    gtk_check_button_new_with_label(_("Show Commentary Tabs"));
+	gtk_widget_ref(widgets.checkbutton_comm_tabs);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_comm_tabs",
+				 widgets.checkbutton_comm_tabs,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_comm_tabs);
+	gtk_box_pack_start(GTK_BOX(hbox28),
+			   widgets.checkbutton_comm_tabs, FALSE, TRUE,
+			   0);
+	gtk_widget_set_usize(widgets.checkbutton_comm_tabs, 162, -2);
+
+	widgets.checkbutton_upper_workbook =
+	    gtk_check_button_new_with_label(_("Show Upper Workbook"));
+	gtk_widget_ref(widgets.checkbutton_upper_workbook);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_upper_workbook",
+				 widgets.checkbutton_upper_workbook,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_upper_workbook);
+	gtk_box_pack_start(GTK_BOX(hbox28),
+			   widgets.checkbutton_upper_workbook, FALSE,
+			   TRUE, 0);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.
+				      checkbutton_upper_workbook),
+				     TRUE);
+
+	hbox29 = gtk_hbox_new(TRUE, 0);
+	gtk_widget_ref(hbox29);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "hbox29",
+				 hbox29,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hbox29);
+	gtk_box_pack_start(GTK_BOX(vbox34), hbox29, TRUE, TRUE, 0);
+
+	widgets.checkbutton_dict_tabs =
+	    gtk_check_button_new_with_label(_("Show Dict/Lex Tabs"));
+	gtk_widget_ref(widgets.checkbutton_dict_tabs);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_dict_tabs",
+				 widgets.checkbutton_dict_tabs,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_dict_tabs);
+	gtk_box_pack_start(GTK_BOX(hbox29),
+			   widgets.checkbutton_dict_tabs, FALSE, TRUE,
+			   0);
+	gtk_widget_set_usize(widgets.checkbutton_dict_tabs, 162, -2);
+
+	widgets.checkbutton_lower_workbook =
+	    gtk_check_button_new_with_label(_("Show Lower Workbook"));
+	gtk_widget_ref(widgets.checkbutton_lower_workbook);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_lower_workbook",
+				 widgets.checkbutton_lower_workbook,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_lower_workbook);
+	gtk_box_pack_start(GTK_BOX(hbox29),
+			   widgets.checkbutton_lower_workbook, FALSE,
+			   TRUE, 0);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
+				     (widgets.
+				      checkbutton_lower_workbook),
+				     TRUE);
+
+	hbox84 = gtk_hbox_new(TRUE, 0);
+	gtk_widget_ref(hbox84);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "hbox84",
+				 hbox84,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(hbox84);
+	gtk_box_pack_start(GTK_BOX(vbox34), hbox84, TRUE, TRUE, 0);
+
+	widgets.checkbutton_book_tabs =
+	    gtk_check_button_new_with_label(_("Show Book Tabs"));
+	gtk_widget_ref(widgets.checkbutton_book_tabs);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.checkbutton_book_tabs",
+				 widgets.checkbutton_book_tabs,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.checkbutton_book_tabs);
+	gtk_box_pack_start(GTK_BOX(hbox84),
+			   widgets.checkbutton_book_tabs, FALSE, TRUE,
+			   0);
+	gtk_widget_set_usize(widgets.checkbutton_book_tabs, 162, -2);
 
 	druidpagestandard2 =
 	    gnome_druid_page_standard_new_with_vals("", NULL);
 	gtk_widget_ref(druidpagestandard2);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druidpagestandard2",
 				 druidpagestandard2,
 				 (GtkDestroyNotify) gtk_widget_unref);
@@ -586,7 +799,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	gnome_druid_page_standard_set_title(GNOME_DRUID_PAGE_STANDARD
 					    (druidpagestandard2),
 					    _
-					    ("Settings to use on first program run"));
+					    ("Choose default Sword modules"));
 	gnome_druid_page_standard_set_logo(GNOME_DRUID_PAGE_STANDARD
 					   (druidpagestandard2),
 					   gdk_imlib_load_image
@@ -596,108 +809,114 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 	druid_vbox2 =
 	    GNOME_DRUID_PAGE_STANDARD(druidpagestandard2)->vbox;
 	gtk_widget_ref(druid_vbox2);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druid_vbox2", druid_vbox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(druid_vbox2);
 
-	table7 = gtk_table_new(12, 2, FALSE);
+	table7 = gtk_table_new(15, 2, FALSE);
 	gtk_widget_ref(table7);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "table7",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "table7",
 				 table7,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(table7);
 	gtk_box_pack_start(GTK_BOX(druid_vbox2), table7, TRUE, TRUE, 0);
 
-	label104 = gtk_label_new(_("Main Text Module"));
+	label104 = gtk_label_new(_("Text Module       "));
 	gtk_widget_ref(label104);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label104",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label104",
 				 label104,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label104);
 	gtk_table_attach(GTK_TABLE(table7), label104, 0, 1, 0, 1,
-			 (GtkAttachOptions) (0), (GtkAttachOptions) (0),
-			 0, 0);
+			 (GtkAttachOptions) (0),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_label_set_justify(GTK_LABEL(label104), GTK_JUSTIFY_LEFT);
 
-	combo1 = gtk_combo_new();
-	gtk_widget_ref(combo1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo1",
-				 combo1,
+	combo_text = gtk_combo_new();
+	gtk_widget_ref(combo_text);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_text",
+				 combo_text,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo1);
-	gtk_table_attach(GTK_TABLE(table7), combo1, 1, 2, 0, 1,
+	gtk_widget_show(combo_text);
+	gtk_table_attach(GTK_TABLE(table7), combo_text, 1, 2, 0, 1,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo1), biblemods);
 
-	widgets.combo_entry1 = GTK_COMBO(combo1)->entry;
-	gtk_widget_ref(widgets.combo_entry1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry1",
-				 widgets.combo_entry1,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry1);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_text), biblemods);
 
-	combo2 = gtk_combo_new();
-	gtk_widget_ref(combo2);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo2",
-				 combo2,
+
+	widgets.combo_entry_text = GTK_COMBO(combo_text)->entry;
+	gtk_widget_ref(widgets.combo_entry_text);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_text",
+				 widgets.combo_entry_text,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo2);
-	gtk_table_attach(GTK_TABLE(table7), combo2, 1, 2, 1, 2,
+	gtk_widget_show(widgets.combo_entry_text);
+
+	combo_int1 = gtk_combo_new();
+	gtk_widget_ref(combo_int1);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_int1",
+				 combo_int1,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_int1);
+	gtk_table_attach(GTK_TABLE(table7), combo_int1, 1, 2, 1, 2,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo2), biblemods);
 
-	widgets.combo_entry2 = GTK_COMBO(combo2)->entry;
-	gtk_widget_ref(widgets.combo_entry2);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry2",
-				 widgets.combo_entry2,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry2);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int1), biblemods);
 
-	combo3 = gtk_combo_new();
-	gtk_widget_ref(combo3);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo3",
-				 combo3,
+	widgets.combo_entry_int1 = GTK_COMBO(combo_int1)->entry;
+	gtk_widget_ref(widgets.combo_entry_int1);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_int1",
+				 widgets.combo_entry_int1,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo3);
-	gtk_table_attach(GTK_TABLE(table7), combo3, 1, 2, 2, 3,
+	gtk_widget_show(widgets.combo_entry_int1);
+
+	combo_int2 = gtk_combo_new();
+	gtk_widget_ref(combo_int2);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_int2",
+				 combo_int2,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_int2);
+	gtk_table_attach(GTK_TABLE(table7), combo_int2, 1, 2, 2, 3,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo3), biblemods);
 
-	widgets.combo_entry3 = GTK_COMBO(combo3)->entry;
-	gtk_widget_ref(widgets.combo_entry3);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry3",
-				 widgets.combo_entry3,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry3);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int2), biblemods);
 
-	combo4 = gtk_combo_new();
-	gtk_widget_ref(combo4);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo4",
-				 combo4,
+	widgets.combo_entry_int2 = GTK_COMBO(combo_int2)->entry;
+	gtk_widget_ref(widgets.combo_entry_int2);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_int2",
+				 widgets.combo_entry_int2,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo4);
-	gtk_table_attach(GTK_TABLE(table7), combo4, 1, 2, 3, 4,
+	gtk_widget_show(widgets.combo_entry_int2);
+
+	combo_int3 = gtk_combo_new();
+	gtk_widget_ref(combo_int3);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_int3",
+				 combo_int3,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_int3);
+	gtk_table_attach(GTK_TABLE(table7), combo_int3, 1, 2, 3, 4,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo4), biblemods);
 
-	widgets.combo_entry4 = GTK_COMBO(combo4)->entry;
-	gtk_widget_ref(widgets.combo_entry4);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry4",
-				 widgets.combo_entry4,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int3), biblemods);
+
+	widgets.combo_entry_int3 = GTK_COMBO(combo_int3)->entry;
+	gtk_widget_ref(widgets.combo_entry_int3);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_int3",
+				 widgets.combo_entry_int3,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry4);
+	gtk_widget_show(widgets.combo_entry_int3);
 
 	label140 = gtk_label_new(_("Commentary"));
 	gtk_widget_ref(label140);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label140",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label140",
 				 label140,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label140);
@@ -706,121 +925,69 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label140), 0, 0.5);
 
-	label141 = gtk_label_new(_("Dict/Lex"));
-	gtk_widget_ref(label141);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label141",
-				 label141,
+	combo_int4 = gtk_combo_new();
+	gtk_widget_ref(combo_int4);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_int4",
+				 combo_int4,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label141);
-	gtk_table_attach(GTK_TABLE(table7), label141, 0, 1, 7, 8,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label141), 0, 0.5);
-
-	label142 = gtk_label_new(_("Personal"));
-	gtk_widget_ref(label142);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label142",
-				 label142,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(label142);
-	gtk_table_attach(GTK_TABLE(table7), label142, 0, 1, 8, 9,
-			 (GtkAttachOptions) (GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label142), 0, 0.5);
-
-	combo10 = gtk_combo_new();
-	gtk_widget_ref(combo10);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo10",
-				 combo10,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo10);
-	gtk_table_attach(GTK_TABLE(table7), combo10, 1, 2, 4, 5,
+	gtk_widget_show(combo_int4);
+	gtk_table_attach(GTK_TABLE(table7), combo_int4, 1, 2, 4, 5,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo10), biblemods);
-	widgets.combo_entry10 = GTK_COMBO(combo10)->entry;
-	gtk_widget_ref(widgets.combo_entry10);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry10",
-				 widgets.combo_entry10,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry10);
 
-	combo11 = gtk_combo_new();
-	gtk_widget_ref(combo11);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo11",
-				 combo11,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int4), biblemods);
+
+	widgets.combo_entry_int4 = GTK_COMBO(combo_int4)->entry;
+	gtk_widget_ref(widgets.combo_entry_int4);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_int4",
+				 widgets.combo_entry_int4,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo11);
-	gtk_table_attach(GTK_TABLE(table7), combo11, 1, 2, 5, 6,
+	gtk_widget_show(widgets.combo_entry_int4);
+
+	combo_int5 = gtk_combo_new();
+	gtk_widget_ref(combo_int5);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_int5",
+				 combo_int5,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_int5);
+	gtk_table_attach(GTK_TABLE(table7), combo_int5, 1, 2, 5, 6,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo11), biblemods);
-	widgets.combo_entry11 = GTK_COMBO(combo11)->entry;
-	gtk_widget_ref(widgets.combo_entry11);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry11",
-				 widgets.combo_entry11,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry11);
 
-	combo12 = gtk_combo_new();
-	gtk_widget_ref(combo12);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo12",
-				 combo12,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_int5), biblemods);
+
+	widgets.combo_entry_int5 = GTK_COMBO(combo_int5)->entry;
+	gtk_widget_ref(widgets.combo_entry_int5);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_int5",
+				 widgets.combo_entry_int5,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo12);
-	gtk_table_attach(GTK_TABLE(table7), combo12, 1, 2, 6, 7,
+	gtk_widget_show(widgets.combo_entry_int5);
+
+	combo_comm = gtk_combo_new();
+	gtk_widget_ref(combo_comm);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_comm",
+				 combo_comm,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_comm);
+	gtk_table_attach(GTK_TABLE(table7), combo_comm, 1, 2, 6, 7,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo12), commmods);
-	widgets.combo_entry12 = GTK_COMBO(combo12)->entry;
-	gtk_widget_ref(widgets.combo_entry12);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry12",
-				 widgets.combo_entry12,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry12);
 
-	combo13 = gtk_combo_new();
-	gtk_widget_ref(combo13);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo13",
-				 combo13,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo13);
-	gtk_table_attach(GTK_TABLE(table7), combo13, 1, 2, 7, 8,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo13), dictmods);
-	widgets.combo_entry13 = GTK_COMBO(combo13)->entry;
-	gtk_widget_ref(widgets.combo_entry13);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry13",
-				 widgets.combo_entry13,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry13);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_comm), commmods);
 
-	combo14 = gtk_combo_new();
-	gtk_widget_ref(combo14);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo14",
-				 combo14,
+	widgets.combo_entry_comm = GTK_COMBO(combo_comm)->entry;
+	gtk_widget_ref(widgets.combo_entry_comm);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_comm",
+				 widgets.combo_entry_comm,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo14);
-	gtk_table_attach(GTK_TABLE(table7), combo14, 1, 2, 8, 9,
-			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
-			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo14), commmods);
-	widgets.combo_entry14 = GTK_COMBO(combo14)->entry;
-	gtk_widget_ref(widgets.combo_entry14);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.combo_entry14",
-				 widgets.combo_entry14,
-				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.combo_entry14);
+	gtk_widget_show(widgets.combo_entry_comm);
 
 	label139 = gtk_label_new(_("Interlinear 5"));
 	gtk_widget_ref(label139);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label139",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label139",
 				 label139,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label139);
@@ -831,7 +998,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label138 = gtk_label_new(_("Interlinear 4"));
 	gtk_widget_ref(label138);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label138",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label138",
 				 label138,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label138);
@@ -842,7 +1009,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label107 = gtk_label_new(_("Interlinear 3"));
 	gtk_widget_ref(label107);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label107",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label107",
 				 label107,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label107);
@@ -855,7 +1022,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label106 = gtk_label_new(_("Interlinear 2"));
 	gtk_widget_ref(label106);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label106",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label106",
 				 label106,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label106);
@@ -868,7 +1035,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label105 = gtk_label_new(_("Interlinear 1"));
 	gtk_widget_ref(label105);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label105",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label105",
 				 label105,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label105);
@@ -880,157 +1047,208 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	label240 = gtk_label_new(_("Generic Book"));
 	gtk_widget_ref(label240);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label240",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label240",
 				 label240,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label240);
-	gtk_table_attach(GTK_TABLE(table7), label240, 0, 1, 10, 11,
+	gtk_table_attach(GTK_TABLE(table7), label240, 0, 1, 8, 9,
 			 (GtkAttachOptions) (GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
 	gtk_misc_set_alignment(GTK_MISC(label240), 0, 0.5);
 
 	combo_gbs = gtk_combo_new();
 	gtk_widget_ref(combo_gbs);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "combo_gbs",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_gbs",
 				 combo_gbs,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(combo_gbs);
-	gtk_table_attach(GTK_TABLE(table7), combo_gbs, 1, 2, 10, 11,
+	gtk_table_attach(GTK_TABLE(table7), combo_gbs, 1, 2, 8, 9,
 			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
 			 (GtkAttachOptions) (0), 0, 0);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo_gbs),
-				      get_list(GBS_LIST));
 
-	combo_entry_gbs = GTK_COMBO(combo_gbs)->entry;
-	gtk_widget_ref(combo_entry_gbs);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "combo_entry_gbs", combo_entry_gbs,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_gbs), gbsmods);
+
+	widgets.combo_entry_gbs = GTK_COMBO(combo_gbs)->entry;
+	gtk_widget_ref(widgets.combo_entry_gbs);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_gbs",
+				 widgets.combo_entry_gbs,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(combo_entry_gbs);
+	gtk_widget_show(widgets.combo_entry_gbs);
 
-	vbox34 = gtk_vbox_new(FALSE, 0);
-	gtk_widget_ref(vbox34);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "vbox34",
-				 vbox34,
+	label142 = gtk_label_new(_("Personal"));
+	gtk_widget_ref(label142);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label142",
+				 label142,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(vbox34);
-	gtk_box_pack_start(GTK_BOX(druid_vbox2), vbox34, TRUE, TRUE, 0);
+	gtk_widget_show(label142);
+	gtk_table_attach(GTK_TABLE(table7), label142, 0, 1, 7, 8,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label142), 0, 0.5);
 
-	hbox27 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox27);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "hbox27",
-				 hbox27,
+	combo_personal = gtk_combo_new();
+	gtk_widget_ref(combo_personal);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "combo_personal", combo_personal,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(hbox27);
-	gtk_box_pack_start(GTK_BOX(vbox34), hbox27, TRUE, TRUE, 0);
+	gtk_widget_show(combo_personal);
+	gtk_table_attach(GTK_TABLE(table7), combo_personal, 1, 2, 7, 8,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
 
-	widgets.checkbutton2 =
-	    gtk_check_button_new_with_label(_("Use Verse Style"));
-	gtk_widget_ref(widgets.checkbutton2);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.checkbutton2",
-				 widgets.checkbutton2,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_personal),
+				      percommods);
+
+	widgets.combo_entry_personal = GTK_COMBO(combo_personal)->entry;
+	gtk_widget_ref(widgets.combo_entry_personal);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_personal",
+				 widgets.combo_entry_personal,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.checkbutton2);
-	gtk_box_pack_start(GTK_BOX(hbox27), widgets.checkbutton2, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(widgets.checkbutton2, 202, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (widgets.checkbutton2), TRUE);
+	gtk_widget_show(widgets.combo_entry_personal);
 
-	widgets.checkbutton4 =
-	    gtk_check_button_new_with_label(_("Show Bible Tabs"));
-	gtk_widget_ref(widgets.checkbutton4);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.checkbutton4",
-				 widgets.checkbutton4,
+	label141 = gtk_label_new(_("Dict/Lex"));
+	gtk_widget_ref(label141);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label141",
+				 label141,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.checkbutton4);
-	gtk_box_pack_start(GTK_BOX(hbox27), widgets.checkbutton4, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(widgets.checkbutton4, 162, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (widgets.checkbutton4), TRUE);
+	gtk_widget_show(label141);
+	gtk_table_attach(GTK_TABLE(table7), label141, 0, 1, 9, 10,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label141), 0, 0.5);
 
-	hbox28 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox28);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "hbox28",
-				 hbox28,
+	combo_dict = gtk_combo_new();
+	gtk_widget_ref(combo_dict);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "combo_dict",
+				 combo_dict,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(hbox28);
-	gtk_box_pack_start(GTK_BOX(vbox34), hbox28, TRUE, TRUE, 0);
+	gtk_widget_show(combo_dict);
+	gtk_table_attach(GTK_TABLE(table7), combo_dict, 1, 2, 9, 10,
+			 (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
 
-	widgets.checkbutton1 =
-	    gtk_check_button_new_with_label(_
-					    ("Auto Save Personal comments "));
-	gtk_widget_ref(widgets.checkbutton1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.checkbutton1",
-				 widgets.checkbutton1,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_dict), dictmods);
+
+	widgets.combo_entry_dict = GTK_COMBO(combo_dict)->entry;
+	gtk_widget_ref(widgets.combo_entry_dict);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_dict",
+				 widgets.combo_entry_dict,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.checkbutton1);
-	gtk_box_pack_start(GTK_BOX(hbox28), widgets.checkbutton1, FALSE,
-			   TRUE, 0);
-	gtk_widget_set_usize(widgets.checkbutton1, 202, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (widgets.checkbutton1), TRUE);
+	gtk_widget_show(widgets.combo_entry_dict);
 
-	widgets.checkbutton5 =
-	    gtk_check_button_new_with_label(_("Show Commentary Tabs"));
-	gtk_widget_ref(widgets.checkbutton5);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.checkbutton5",
-				 widgets.checkbutton5,
+	label250 = gtk_label_new(_("Greek Lexicon"));
+	gtk_widget_ref(label250);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label250",
+				 label250,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.checkbutton5);
-	gtk_box_pack_start(GTK_BOX(hbox28), widgets.checkbutton5, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(widgets.checkbutton5, 162, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (widgets.checkbutton5), TRUE);
+	gtk_widget_show(label250);
+	gtk_table_attach(GTK_TABLE(table7), label250, 0, 1, 10, 11,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label250), 0, 0.5);
 
-	hbox29 = gtk_hbox_new(FALSE, 0);
-	gtk_widget_ref(hbox29);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "hbox29",
-				 hbox29,
+	combo_greek_lex = gtk_combo_new();
+	gtk_widget_ref(combo_greek_lex);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "combo_greek_lex", combo_greek_lex,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(hbox29);
-	gtk_box_pack_start(GTK_BOX(vbox34), hbox29, TRUE, TRUE, 0);
+	gtk_widget_show(combo_greek_lex);
+	gtk_table_attach(GTK_TABLE(table7), combo_greek_lex, 1, 2, 10,
+			 11, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
 
-	widgets.checkbutton3 =
-	    gtk_check_button_new_with_label(_("Show Interlinear Page"));
-	gtk_widget_ref(widgets.checkbutton3);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.checkbutton3",
-				 widgets.checkbutton3,
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_greek_lex),
+				      dictmods);
+
+	widgets.entry_greek_lex = GTK_COMBO(combo_greek_lex)->entry;
+	gtk_widget_ref(widgets.entry_greek_lex);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.entry_greek_lex",
+				 widgets.entry_greek_lex,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.checkbutton3);
-	gtk_box_pack_start(GTK_BOX(hbox29), widgets.checkbutton3, FALSE,
-			   TRUE, 0);
-	gtk_widget_set_usize(widgets.checkbutton3, 202, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (widgets.checkbutton3), TRUE);
+	gtk_widget_show(widgets.entry_greek_lex);
+	gtk_tooltips_set_tip(tooltips, widgets.entry_greek_lex,
+			     _
+			     ("Which Greek Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     NULL);
 
-	widgets.checkbutton6 =
-	    gtk_check_button_new_with_label(_("Show Dict/Lex Tabs"));
-	gtk_widget_ref(widgets.checkbutton6);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
-				 "widgets.checkbutton6",
-				 widgets.checkbutton6,
+	label251 = gtk_label_new(_("Hebrew Lexicon"));
+	gtk_widget_ref(label251);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label251",
+				 label251,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(widgets.checkbutton6);
-	gtk_box_pack_start(GTK_BOX(hbox29), widgets.checkbutton6, FALSE,
-			   FALSE, 0);
-	gtk_widget_set_usize(widgets.checkbutton6, 162, -2);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON
-				     (widgets.checkbutton6), TRUE);
+	gtk_widget_show(label251);
+	gtk_table_attach(GTK_TABLE(table7), label251, 0, 1, 11, 12,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label251), 0, 0.5);
 
+	combo_hebrew_lex = gtk_combo_new();
+	gtk_widget_ref(combo_hebrew_lex);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "combo_hebrew_lex", combo_hebrew_lex,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_hebrew_lex);
+	gtk_table_attach(GTK_TABLE(table7), combo_hebrew_lex, 1, 2, 11,
+			 12, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_hebrew_lex),
+				      dictmods);
+
+
+	widgets.entry_hebrew_lex = GTK_COMBO(combo_hebrew_lex)->entry;
+	gtk_widget_ref(widgets.entry_hebrew_lex);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.entry_hebrew_lex",
+				 widgets.entry_hebrew_lex,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.entry_hebrew_lex);
+	gtk_tooltips_set_tip(tooltips, widgets.entry_hebrew_lex,
+			     _
+			     ("Which Hebrew Lexicon to display in Dict/Lex Window when a link or word is clicked"),
+			     NULL);
+
+	label252 = gtk_label_new(_("Daily Devotional"));
+	gtk_widget_ref(label252);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label252",
+				 label252,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(label252);
+	gtk_table_attach(GTK_TABLE(table7), label252, 0, 1, 12, 13,
+			 (GtkAttachOptions) (GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label252), 0, 0.5);
+
+	combo_devotion = gtk_combo_new();
+	gtk_widget_ref(combo_devotion);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "combo_devotion", combo_devotion,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(combo_devotion);
+	gtk_table_attach(GTK_TABLE(table7), combo_devotion, 1, 2, 12,
+			 13, (GtkAttachOptions) (GTK_EXPAND | GTK_FILL),
+			 (GtkAttachOptions) (0), 0, 0);
+
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo_devotion),
+				      devotionmods);
+
+	widgets.combo_entry_devotion = GTK_COMBO(combo_devotion)->entry;
+	gtk_widget_ref(widgets.combo_entry_devotion);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
+				 "widgets.combo_entry_devotion",
+				 widgets.combo_entry_devotion,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(widgets.combo_entry_devotion);
 
 	label111 =
 	    gtk_label_new(_
 			  ("These setting will be the default settings if you chose to use default settings. "));
 	gtk_widget_ref(label111);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog), "label111",
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup), "label111",
 				 label111,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(label111);
@@ -1041,7 +1259,7 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 	druidpagefinish1 = gnome_druid_page_finish_new();
 	gtk_widget_ref(druidpagefinish1);
-	gtk_object_set_data_full(GTK_OBJECT(druid_dialog),
+	gtk_object_set_data_full(GTK_OBJECT(dialog_setup),
 				 "druidpagefinish1", druidpagefinish1,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(druidpagefinish1);
@@ -1061,28 +1279,23 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 						&druidpagefinish1_title_color);
 	gnome_druid_page_finish_set_title(GNOME_DRUID_PAGE_FINISH
 					  (druidpagefinish1),
-					  gs_gnomesword);
+					  _("GnomeSword"));
 	gnome_druid_page_finish_set_text(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 _
-					 ("            Thank-you for using GnomeSword.\nClick Finish to close this dialog and run GnomeSword."));
+					 ("            Thank-you for using GnomeSword. \nClick Finish to close this dialog and run GnomeSword."));
 	gnome_druid_page_finish_set_logo(GNOME_DRUID_PAGE_FINISH
 					 (druidpagefinish1),
 					 gdk_imlib_load_image
 					 (PACKAGE_PIXMAPS_DIR
 					  "/GnomeSword.xpm"));
 
-	dialog_action_area10 = GNOME_DIALOG(druid_dialog)->action_area;
-	gtk_object_set_data(GTK_OBJECT(druid_dialog),
-			    "dialog_action_area10",
-			    dialog_action_area10);
-	gtk_widget_show(dialog_action_area10);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area10),
-				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area10),
-				   8);
+	gtk_object_set_data(GTK_OBJECT(dialog_setup), "tooltips",
+			    tooltips);
 
 
+	gtk_signal_connect(GTK_OBJECT(dialog_setup), "destroy",
+			   GTK_SIGNAL_FUNC(dialog_destroy), NULL);
 	gtk_signal_connect(GTK_OBJECT
 			   (GNOME_DRUID_PAGE(druidpagefinish1)),
 			   "finish", GTK_SIGNAL_FUNC(on_finish_clicked),
@@ -1092,8 +1305,8 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
 
 
 	g_free(pathtomods);
+	return dialog_setup;
 
-	return druid_dialog;
 }
 
 /******************************************************************************
@@ -1107,7 +1320,10 @@ static GtkWidget *gui_create_setup_druid(GList * biblemods,
  *
  * Description
  *    loads module list and calls 
- *    gui_create_setup_druid(biblemods, commmods, dictmods)
+ *    gui_create_setup_druid(biblemods, commmods, dictmods, 
+ *				     percommmods, 
+ *				     gbsmods,
+ *				     devotionmods)
  *
  * Return value
  *   void
@@ -1119,21 +1335,30 @@ gint gui_first_run(void)
 	GList *biblemods = NULL;
 	GList *commmods = NULL;
 	GList *dictmods = NULL;
+	GList *percommmods = NULL;
+	GList *gbsmods = NULL;
+	GList *devotionmods = NULL;
 
-	biblemods = get_list_of_mods_by_type(TEXT_MODS);
-	commmods = get_list_of_mods_by_type(COMM_MODS);
-	dictmods = get_list_of_mods_by_type(DICT_MODS);
+	biblemods = get_list(TEXT_LIST);
+	commmods = get_list(COMM_LIST);
+	dictmods = get_list(DICT_LIST);
+	percommmods = get_list(PERCOMM_LIST);
+	gbsmods = get_list(GBS_LIST);
+	devotionmods = get_list(DEVOTION_LIST);
 
-	dlg = gui_create_setup_druid(biblemods, commmods, dictmods);
+	dlg = gui_create_setup_druid(biblemods,
+				     commmods,
+				     dictmods, 
+				     percommmods, 
+				     gbsmods,
+				     devotionmods);
 
 	/*
 	 * hold util we are done 
-	 */
-	gnome_dialog_set_default(GNOME_DIALOG(dlg), 2);
-	gnome_dialog_run_and_close(GNOME_DIALOG(dlg));
-	g_list_free(biblemods);
-	g_list_free(commmods);
-	g_list_free(dictmods);
+	 */	
+	gtk_widget_show(dlg);
+	gtk_main();
+	
 	return 1;
 }
 

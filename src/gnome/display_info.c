@@ -30,7 +30,6 @@
 #include "gui/display_info.h"
 
 #include "main/sword.h"
-//#include "main/gs_gnomesword.h"
 
 gboolean gsI_isrunning = FALSE;
 
@@ -51,16 +50,15 @@ static GtkWidget *html_widget;
  *
  * Return value
  *   void
- */ 
- 
+ */
+
 void gui_display_mod_and_key(gchar * mod_name, gchar * key)
 {
 	gchar *text = NULL;
-	
+
 	text = get_module_text(mod_name, key);
-	if(text) {
-		entry_display(html_widget, mod_name,
-		   text, key, TRUE);
+	if (text) {
+		entry_display(html_widget, mod_name, text, key, TRUE);
 		free(text);
 	}
 }
@@ -80,10 +78,10 @@ void gui_display_mod_and_key(gchar * mod_name, gchar * key)
  *
  * Return value
  *   void
- */ 
+ */
 
-static void on_dlgInformation_destroy(GtkObject * object, 
-						gpointer user_data)
+static void on_dlgInformation_destroy(GtkObject * object,
+				      gpointer user_data)
 {
 	gsI_isrunning = FALSE;
 }
@@ -102,9 +100,9 @@ static void on_dlgInformation_destroy(GtkObject * object,
  *
  * Return value
  *   void
- */ 
+ */
 
-static void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
+static void button_close_clicked(GtkButton * button, gpointer user_data)
 {
 	gtk_widget_hide(gtk_widget_get_toplevel(GTK_WIDGET(button)));
 }
@@ -123,75 +121,105 @@ static void on_btnInfoOK_clicked(GtkButton * button, gpointer user_data)
  *
  * Return value
  *   GtkWidget *
- */ 
+ */
 
 GtkWidget *gui_create_display_informtion_dialog(void)
 {
-	GtkWidget *dlgInformation;
-	GtkWidget *dialog_vbox15;
-	GtkWidget *scwnInfo;
-	GtkWidget *dialog_action_area15;
-	GtkWidget *btnInfoOK;
+	GtkWidget *dialog_display_information;
+	GtkWidget *dialog_vbox23;
+	GtkWidget *frame71;
+	GtkWidget *scrolledwindow70;
+	GtkWidget *dialog_action_area23;
+	GtkWidget *hbuttonbox2;
+	GtkWidget *button_close;
 
-	dlgInformation = gnome_dialog_new(NULL, NULL);
-	gtk_object_set_data(GTK_OBJECT(dlgInformation), "dlgInformation",
-			    dlgInformation);
-	GTK_WINDOW(dlgInformation)->type = GTK_WINDOW_DIALOG;
-	gtk_window_set_default_size(GTK_WINDOW(dlgInformation), 308, 267);
-	gtk_window_set_policy(GTK_WINDOW(dlgInformation), FALSE, TRUE,
-			      TRUE);
+	dialog_display_information = gtk_dialog_new();
+	gtk_object_set_data(GTK_OBJECT(dialog_display_information),
+			    "dialog_display_information",
+			    dialog_display_information);
+	gtk_window_set_title(GTK_WINDOW(dialog_display_information),
+			     _("GnomeSWORD"));
+	GTK_WINDOW(dialog_display_information)->type =
+	    GTK_WINDOW_DIALOG;
+	gtk_window_set_default_size(GTK_WINDOW
+				    (dialog_display_information), 308,
+				    267);
+	gtk_window_set_policy(GTK_WINDOW(dialog_display_information),
+			      TRUE, TRUE, FALSE);
 
-	dialog_vbox15 = GNOME_DIALOG(dlgInformation)->vbox;
-	gtk_object_set_data(GTK_OBJECT(dlgInformation), "dialog_vbox15",
-			    dialog_vbox15);
-	gtk_widget_show(dialog_vbox15);
+	dialog_vbox23 = GTK_DIALOG(dialog_display_information)->vbox;
+	gtk_object_set_data(GTK_OBJECT(dialog_display_information),
+			    "dialog_vbox23", dialog_vbox23);
+	gtk_widget_show(dialog_vbox23);
 
-	scwnInfo = gtk_scrolled_window_new(NULL, NULL);
-	gtk_widget_ref(scwnInfo);
-	gtk_object_set_data_full(GTK_OBJECT(dlgInformation), "scwnInfo",
-				 scwnInfo,
+	frame71 = gtk_frame_new(NULL);
+	gtk_widget_ref(frame71);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
+				 "frame71", frame71,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(scwnInfo);
-	gtk_box_pack_start(GTK_BOX(dialog_vbox15), scwnInfo, TRUE, TRUE,
+	gtk_widget_show(frame71);
+	gtk_box_pack_start(GTK_BOX(dialog_vbox23), frame71, TRUE, TRUE,
 			   0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scwnInfo),
-				       GTK_POLICY_AUTOMATIC,
+
+	scrolledwindow70 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_widget_ref(scrolledwindow70);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
+				 "scrolledwindow70", scrolledwindow70,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(scrolledwindow70);
+	gtk_container_add(GTK_CONTAINER(frame71), scrolledwindow70);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW
+				       (scrolledwindow70),
+				       GTK_POLICY_NEVER,
 				       GTK_POLICY_AUTOMATIC);
 
 	html_widget = gtk_html_new();
 	gtk_widget_ref(html_widget);
-	gtk_object_set_data_full(GTK_OBJECT(dlgInformation), "html_widget", html_widget,
+	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
+				 "html_widget", html_widget,
 				 (GtkDestroyNotify) gtk_widget_unref);
 	gtk_widget_show(html_widget);
-	gtk_container_add(GTK_CONTAINER(scwnInfo), html_widget);
+	gtk_container_add(GTK_CONTAINER(scrolledwindow70), html_widget);
 
-	dialog_action_area15 = GNOME_DIALOG(dlgInformation)->action_area;
-	gtk_object_set_data(GTK_OBJECT(dlgInformation),
-			    "dialog_action_area15", dialog_action_area15);
-	gtk_widget_show(dialog_action_area15);
-	gtk_button_box_set_layout(GTK_BUTTON_BOX(dialog_action_area15),
-				  GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing(GTK_BUTTON_BOX(dialog_action_area15),
-				   8);
 
-	gnome_dialog_append_button(GNOME_DIALOG(dlgInformation),
-				   GNOME_STOCK_BUTTON_OK);
-	btnInfoOK =
-	    GTK_WIDGET(g_list_last(GNOME_DIALOG(dlgInformation)->buttons)->
-		       data);
-	gtk_widget_ref(btnInfoOK);
-	gtk_object_set_data_full(GTK_OBJECT(dlgInformation), "btnInfoOK",
-				 btnInfoOK,
+	dialog_action_area23 =
+	    GTK_DIALOG(dialog_display_information)->action_area;
+	gtk_object_set_data(GTK_OBJECT(dialog_display_information),
+			    "dialog_action_area23",
+			    dialog_action_area23);
+	gtk_widget_show(dialog_action_area23);
+	gtk_container_set_border_width(GTK_CONTAINER
+				       (dialog_action_area23), 10);
+
+	hbuttonbox2 = gtk_hbutton_box_new();
+	gtk_widget_ref(hbuttonbox2);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
+				 "hbuttonbox2", hbuttonbox2,
 				 (GtkDestroyNotify) gtk_widget_unref);
-	gtk_widget_show(btnInfoOK);
-	GTK_WIDGET_SET_FLAGS(btnInfoOK, GTK_CAN_DEFAULT);
+	gtk_widget_show(hbuttonbox2);
+	gtk_box_pack_start(GTK_BOX(dialog_action_area23), hbuttonbox2,
+			   TRUE, TRUE, 0);
+	gtk_button_box_set_layout(GTK_BUTTON_BOX(hbuttonbox2),
+				  GTK_BUTTONBOX_END);
 
-	gtk_signal_connect(GTK_OBJECT(dlgInformation), "destroy",
-			   GTK_SIGNAL_FUNC(on_dlgInformation_destroy), NULL);
-	gtk_signal_connect(GTK_OBJECT(btnInfoOK), "clicked",
-			   GTK_SIGNAL_FUNC(on_btnInfoOK_clicked), NULL);
+	button_close = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
+	gtk_widget_ref(button_close);
+	gtk_object_set_data_full(GTK_OBJECT(dialog_display_information),
+				 "button_close", button_close,
+				 (GtkDestroyNotify) gtk_widget_unref);
+	gtk_widget_show(button_close);
+	gtk_container_add(GTK_CONTAINER(hbuttonbox2), button_close);
+	GTK_WIDGET_SET_FLAGS(button_close, GTK_CAN_DEFAULT);
+
+	gtk_signal_connect(GTK_OBJECT(button_close), "clicked",
+			   GTK_SIGNAL_FUNC(button_close_clicked), NULL);
+
+	gtk_signal_connect(GTK_OBJECT(dialog_display_information),
+			   "destroy",
+			   GTK_SIGNAL_FUNC(on_dlgInformation_destroy),
+			   NULL);
+
+
 	gsI_isrunning = TRUE;
-        
-        
-	return dlgInformation;
+	return dialog_display_information;
 }
