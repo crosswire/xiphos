@@ -98,7 +98,8 @@ gboolean 	dicttabs,
 	applycolor = false,
 	showtextgroup,
 	showcomgroup,
-	showdictgroup;
+	showdictgroup,
+	showhistorygroup;
 
 //-------------------------------------------------------------------------------------------
 void
@@ -508,7 +509,7 @@ void on_btnSaveNote_clicked(GtkButton * button, gpointer user_data)
 {
 	if (GTK_TOGGLE_BUTTON
 	    (lookup_widget(GTK_WIDGET(button), "btnEditNote"))->active) {
-		//saveChanges = true; //-- we know we want to save the changes - that's how we got here
+		//saveChanges = true; //-- we know we want to save the changes - thats how we got here
 		savenoteSWORD(noteModified);
 	}
 }
@@ -1467,7 +1468,7 @@ void on_btnPropertyboxOK_clicked(GtkButton * button, gpointer user_data)
 
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
 	applyoptions(bar, comtabs, dicttabs, showtextgroup, showcomgroup,
-		     showdictgroup);
+		     showdictgroup, showhistorygroup);
 	gtk_widget_destroy(dlg);
 }
 
@@ -1479,7 +1480,7 @@ void on_btnPropertyboxApply_clicked(GtkButton * button, gpointer user_data)
 	applycolor = false;
 	setformatoption(lookup_widget(GTK_WIDGET(button), "cbtnPNformat"));
 	applyoptions(bar, comtabs, dicttabs, showtextgroup, showcomgroup,
-		     showdictgroup);
+		     showdictgroup, showhistorygroup);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -2342,7 +2343,7 @@ void
 on_cbtnShowDictGroup_toggled(GtkToggleButton * togglebutton,
 			     gpointer user_data)
 {
-    GtkWidget	*dlg,
+    	GtkWidget	*dlg,
 				*btnok,
 				*btnapply;
 							
@@ -2363,4 +2364,20 @@ on_epaned_button_release_event(GtkWidget       *widget,
         settings->shortcutbarsize = e_paned_get_position(E_PANED(lookup_widget(MainFrm,"epaned")));
         if(settings->shortcutbarsize) return true;
         return false;
+}
+
+void
+on_cbtnShowHistoryGroup_toggled        (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+    	GtkWidget	*dlg,
+				*btnok,
+				*btnapply;
+							
+	dlg = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+	btnok = lookup_widget(dlg,"btnPropertyboxOK");
+	btnapply = lookup_widget(dlg,"btnPropertyboxApply");
+	gtk_widget_set_sensitive (btnok, true);
+	gtk_widget_set_sensitive (btnapply, true);
+	showhistorygroup = togglebutton->active;
 }
